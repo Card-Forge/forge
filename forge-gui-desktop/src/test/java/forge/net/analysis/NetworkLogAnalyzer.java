@@ -90,6 +90,23 @@ public class NetworkLogAnalyzer {
     private static final Pattern CHECKSUM_MISMATCH_PATTERN = Pattern.compile(
             "CHECKSUM MISMATCH|checksum mismatch|desync", Pattern.CASE_INSENSITIVE);
 
+    // Patterns for checksum mismatch breakdown extraction
+    private static final Pattern MISMATCH_LINE_PATTERN = Pattern.compile(
+            "CHECKSUM MISMATCH!\\s+Server=([-\\d]+),\\s+Client=([-\\d]+)\\s+at\\s+seq=(\\d+)");
+
+    private static final Pattern SERVER_BREAKDOWN_PATTERN = Pattern.compile(
+            "Server breakdown:\\s+(.+)");
+
+    private static final Pattern CLIENT_BREAKDOWN_PATTERN = Pattern.compile(
+            "Client breakdown:\\s+(.+)");
+
+    // Breakdown hash checkpoint extraction
+    private static final Pattern BREAKDOWN_BASE_PATTERN = Pattern.compile("base=([-\\d]+)");
+    private static final Pattern BREAKDOWN_PZONES_PATTERN = Pattern.compile("p(\\d+)zones=([-\\d]+)");
+    private static final Pattern BREAKDOWN_AFTER_CARDS_PATTERN = Pattern.compile("afterCards=([-\\d]+)");
+    private static final Pattern BREAKDOWN_AFTER_COMBAT_PATTERN = Pattern.compile("afterCombat=([-\\d]+)");
+    private static final Pattern BREAKDOWN_FINAL_PATTERN = Pattern.compile("\\bfinal=([-\\d]+)");
+
     private static final Pattern ERROR_PATTERN = Pattern.compile(
             "\\[ERROR\\]|\\bERROR\\b:|Exception|exception", Pattern.CASE_INSENSITIVE);
 
@@ -244,6 +261,128 @@ public class NetworkLogAnalyzer {
         }
     }
 
+    /**
+     * Immutable record containing parsed details of a checksum mismatch,
+     * including server and client breakdowns for comparison.
+     */
+    public record ChecksumMismatchDetail(
+        int seqNumber,
+        String serverChecksum,
+        String clientChecksum,
+        String serverBreakdown,
+        String clientBreakdown,
+        List<PlayerState> serverPlayerStates,
+        List<PlayerState> clientPlayerStates
+    ) {
+        /**
+         * Parse hash checkpoints from a breakdown string.
+         * Returns a map of checkpoint name to hash value.
+         */
+        private static Map<String, String> parseCheckpoints(String breakdown) {
+            Map<String, String> checkpoints = new java.util.LinkedHashMap<>();
+            if (breakdown == null) return checkpoints;
+
+            Matcher m = BREAKDOWN_BASE_PATTERN.matcher(breakdown);
+            if (m.find()) checkpoints.put("base", m.group(1));
+
+            m = BREAKDOWN_PZONES_PATTERN.matcher(breakdown);
+            while (m.find()) {
+                checkpoints.put("p" + m.group(1) + "zones", m.group(2));
+            }
+
+            m = BREAKDOWN_AFTER_CARDS_PATTERN.matcher(breakdown);
+            if (m.find()) checkpoints.put("afterCards", m.group(1));
+
+            m = BREAKDOWN_AFTER_COMBAT_PATTERN.matcher(breakdown);
+            if (m.find()) checkpoints.put("afterCombat", m.group(1));
+
+            m = BREAKDOWN_FINAL_PATTERN.matcher(breakdown);
+            if (m.find()) checkpoints.put("final", m.group(1));
+
+            return checkpoints;
+        }
+
+        /**
+         * Generate a markdown-formatted comparison of server vs client state.
+         */
+        public String toMarkdown() {
+            StringBuilder sb = new StringBuilder();
+
+            sb.append(String.format("**Desync at seq=%d** (Server checksum: `%s`, Client checksum: `%s`)\n\n",
+                    seqNumber, serverChecksum, clientChecksum));
+
+            // Player state comparison
+            if (!serverPlayerStates.isEmpty() || !clientPlayerStates.isEmpty()) {
+                sb.append("Player state comparison:\n\n");
+                sb.append("| Player | Life (S/C) | Hand (S/C) | GY (S/C) | BF (S/C) |\n");
+                sb.append("|--------|------------|------------|----------|----------|\n");
+
+                // Match by player ID
+                Map<Integer, PlayerState> serverByID = new java.util.LinkedHashMap<>();
+                for (PlayerState ps : serverPlayerStates) serverByID.put(ps.playerId(), ps);
+                Map<Integer, PlayerState> clientByID = new java.util.LinkedHashMap<>();
+                for (PlayerState ps : clientPlayerStates) clientByID.put(ps.playerId(), ps);
+
+                java.util.Set<Integer> allIDs = new java.util.LinkedHashSet<>();
+                allIDs.addAll(serverByID.keySet());
+                allIDs.addAll(clientByID.keySet());
+
+                for (int id : allIDs) {
+                    PlayerState s = serverByID.get(id);
+                    PlayerState c = clientByID.get(id);
+                    String name = s != null ? s.playerName() : (c != null ? c.playerName() : "?");
+                    sb.append(String.format("| %s | %s/%s | %s/%s | %s/%s | %s/%s |\n",
+                            name,
+                            s != null ? s.life() : "?", c != null ? c.life() : "?",
+                            s != null ? s.handSize() : "?", c != null ? c.handSize() : "?",
+                            s != null ? s.graveyardSize() : "?", c != null ? c.graveyardSize() : "?",
+                            s != null ? s.battlefieldSize() : "?", c != null ? c.battlefieldSize() : "?"));
+                }
+                sb.append("\n");
+            }
+
+            // Hash checkpoint comparison
+            if (serverBreakdown != null && clientBreakdown != null) {
+                Map<String, String> serverHash = parseCheckpoints(serverBreakdown);
+                Map<String, String> clientHash = parseCheckpoints(clientBreakdown);
+
+                if (!serverHash.isEmpty()) {
+                    sb.append("Breakdown hash comparison:\n\n");
+                    sb.append("| Checkpoint | Server | Client | Match |\n");
+                    sb.append("|------------|--------|--------|-------|\n");
+
+                    java.util.Set<String> allKeys = new java.util.LinkedHashSet<>();
+                    allKeys.addAll(serverHash.keySet());
+                    allKeys.addAll(clientHash.keySet());
+
+                    for (String key : allKeys) {
+                        String sv = serverHash.getOrDefault(key, "?");
+                        String cv = clientHash.getOrDefault(key, "?");
+                        boolean match = sv.equals(cv);
+                        sb.append(String.format("| %s | %s | %s | %s |\n",
+                                key, sv, cv, match ? "Y" : "**N**"));
+                    }
+                    sb.append("\n");
+                }
+
+                // Full breakdowns in collapsible details
+                sb.append("<details><summary>Full breakdowns</summary>\n\n");
+                sb.append("```\n");
+                sb.append("Server: ").append(serverBreakdown).append("\n");
+                sb.append("Client: ").append(clientBreakdown).append("\n");
+                sb.append("```\n");
+                sb.append("</details>\n");
+            } else if (serverBreakdown != null || clientBreakdown != null) {
+                sb.append("```\n");
+                if (serverBreakdown != null) sb.append("Server: ").append(serverBreakdown).append("\n");
+                if (clientBreakdown != null) sb.append("Client: ").append(clientBreakdown).append("\n");
+                sb.append("```\n");
+            }
+
+            return sb.toString();
+        }
+    }
+
     // ==================== Log Analysis Methods ====================
 
     /**
@@ -266,6 +405,11 @@ public class NetworkLogAnalyzer {
             } catch (NumberFormatException e) {
                 // Invalid game index in filename, leave as default
             }
+        }
+
+        // Detect Commander format from filename (e.g., "-cmdr" suffix)
+        if (logFile.getName().contains("-cmdr")) {
+            metrics.setGameFormat("Commander");
         }
 
         int maxTurn = 0;
@@ -434,6 +578,12 @@ public class NetworkLogAnalyzer {
                     continue;
                 }
 
+                // Detect Commander format from log content (fallback for filename detection)
+                if (line.contains("Applied Commander variant")) {
+                    metrics.setGameFormat("Commander");
+                    continue;
+                }
+
                 // Deck names - try multiple patterns to handle different log formats
                 // First try "deck=[name], ready=" format (handles deck names with commas)
                 Matcher deckEqualsMatcher = DECK_EQUALS_PATTERN.matcher(line);
@@ -501,6 +651,11 @@ public class NetworkLogAnalyzer {
             if (!metrics.getErrors().isEmpty() || metrics.hasChecksumMismatch()) {
                 Map<String, ErrorContext> contexts = extractErrorContexts(logFile);
                 metrics.setErrorContexts(contexts);
+            }
+
+            // Extract checksum mismatch breakdown details
+            if (metrics.hasChecksumMismatch()) {
+                metrics.setChecksumMismatchDetails(extractChecksumMismatchDetails(logFile));
             }
 
         } catch (IOException e) {
@@ -588,8 +743,9 @@ public class NetworkLogAnalyzer {
     public List<GameLogMetrics> analyzeComprehensiveTestLogs(File logDirectory) {
         // Match patterns for:
         // - Subdirectory layout: network-debug-game0-4p-test.log, network-debug-batch0-game0-4p-test.log
+        // - Commander variant: network-debug-batch0-game5-2p-cmdr-test.log
         // - Legacy flat layout: network-debug-run20260128-064643-batch0-game0-4p-test.log
-        return analyzeDirectory(logDirectory, "network-debug-.*(?:batch\\d+-)?game\\d+-\\d+p-test\\.log");
+        return analyzeDirectory(logDirectory, "network-debug-.*(?:batch\\d+-)?game\\d+-\\d+p(?:-cmdr)?-test\\.log");
     }
 
     /**
@@ -867,5 +1023,125 @@ public class NetworkLogAnalyzer {
         }
 
         return states;
+    }
+
+    /**
+     * Extract detailed checksum mismatch information from a log file.
+     * Parses server and client breakdown strings, player states, and seq numbers.
+     *
+     * @param logFile The log file to analyze
+     * @return List of ChecksumMismatchDetail records, or empty list if no mismatches found
+     */
+    public List<ChecksumMismatchDetail> extractChecksumMismatchDetails(File logFile) {
+        List<ChecksumMismatchDetail> details = new ArrayList<>();
+        if (logFile == null || !logFile.exists()) {
+            return details;
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(logFile))) {
+            List<String> allLines = new ArrayList<>();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                allLines.add(line);
+            }
+
+            // Find mismatch lines and extract details from surrounding context.
+            // In multiplayer games, multiple clients may report the same seq mismatch —
+            // deduplicate by keeping the entry with the most detail (both breakdowns preferred).
+            Map<Integer, ChecksumMismatchDetail> detailsBySeq = new java.util.LinkedHashMap<>();
+
+            for (int i = 0; i < allLines.size(); i++) {
+                Matcher mismatchMatcher = MISMATCH_LINE_PATTERN.matcher(allLines.get(i));
+                if (!mismatchMatcher.find()) continue;
+
+                String serverChecksum = mismatchMatcher.group(1);
+                String clientChecksum = mismatchMatcher.group(2);
+                int seqNumber;
+                try {
+                    seqNumber = Integer.parseInt(mismatchMatcher.group(3));
+                } catch (NumberFormatException e) {
+                    continue;
+                }
+
+                // Search backward for server breakdown and server player states
+                String serverBreakdown = null;
+                List<PlayerState> serverPlayerStates = new ArrayList<>();
+                boolean inServerSection = false;
+                for (int j = i - 1; j >= Math.max(0, i - 40); j--) {
+                    String prev = allLines.get(j);
+                    Matcher sbm = SERVER_BREAKDOWN_PATTERN.matcher(prev);
+                    if (sbm.find()) {
+                        serverBreakdown = sbm.group(1);
+                        inServerSection = true;
+                        continue;
+                    }
+                    if (inServerSection) {
+                        Matcher psm = PLAYER_STATE_PATTERN.matcher(prev);
+                        if (psm.find()) {
+                            try {
+                                serverPlayerStates.add(0, new PlayerState(
+                                        Integer.parseInt(psm.group(1)),
+                                        psm.group(2).trim(),
+                                        Integer.parseInt(psm.group(3)),
+                                        Integer.parseInt(psm.group(4)),
+                                        Integer.parseInt(psm.group(5)),
+                                        Integer.parseInt(psm.group(6))));
+                            } catch (NumberFormatException e) {
+                                // skip
+                            }
+                            continue;
+                        }
+                        if (prev.contains("Checksum details (server")) {
+                            break; // Found the start of server section, stop
+                        }
+                    }
+                }
+
+                // Search forward for client breakdown and client player states.
+                // Stop if we hit another CHECKSUM MISMATCH (a different client's detection).
+                String clientBreakdown = null;
+                List<PlayerState> clientPlayerStates = new ArrayList<>();
+                for (int j = i + 1; j < Math.min(allLines.size(), i + 20); j++) {
+                    String next = allLines.get(j);
+                    // Stop at another mismatch detection (different client)
+                    if (j > i + 1 && MISMATCH_LINE_PATTERN.matcher(next).find()) break;
+                    Matcher cbm = CLIENT_BREAKDOWN_PATTERN.matcher(next);
+                    if (cbm.find()) {
+                        clientBreakdown = cbm.group(1);
+                        break; // Client breakdown is the last line in the section
+                    }
+                    Matcher psm = PLAYER_STATE_PATTERN.matcher(next);
+                    if (psm.find()) {
+                        try {
+                            clientPlayerStates.add(new PlayerState(
+                                    Integer.parseInt(psm.group(1)),
+                                    psm.group(2).trim(),
+                                    Integer.parseInt(psm.group(3)),
+                                    Integer.parseInt(psm.group(4)),
+                                    Integer.parseInt(psm.group(5)),
+                                    Integer.parseInt(psm.group(6))));
+                        } catch (NumberFormatException e) {
+                            // skip
+                        }
+                    }
+                }
+
+                ChecksumMismatchDetail newDetail = new ChecksumMismatchDetail(
+                        seqNumber, serverChecksum, clientChecksum,
+                        serverBreakdown, clientBreakdown,
+                        serverPlayerStates, clientPlayerStates);
+
+                // Keep the entry with the most data for this seq number
+                ChecksumMismatchDetail existing = detailsBySeq.get(seqNumber);
+                if (existing == null || (newDetail.clientBreakdown() != null && existing.clientBreakdown() == null)) {
+                    detailsBySeq.put(seqNumber, newDetail);
+                }
+            }
+            details.addAll(detailsBySeq.values());
+        } catch (IOException e) {
+            // Return whatever details we've collected
+        }
+
+        return details;
     }
 }

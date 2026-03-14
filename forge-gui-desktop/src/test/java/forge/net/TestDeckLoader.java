@@ -2,6 +2,7 @@ package forge.net;
 
 import forge.card.CardDb;
 import forge.deck.Deck;
+import forge.deck.DeckSection;
 import forge.deck.io.DeckSerializer;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
@@ -25,6 +26,9 @@ public class TestDeckLoader {
 
     /** Minimum cards required for a valid constructed deck */
     private static final int MIN_DECK_SIZE = 60;
+
+    /** Minimum cards required for a valid commander deck (99 + commander) */
+    private static final int MIN_COMMANDER_DECK_SIZE = 99;
 
     /** Maximum retry attempts when retryOnInvalidDeck is enabled */
     private static final int MAX_RETRIES = 10;
@@ -174,5 +178,104 @@ public class TestDeckLoader {
             deck.getMain().add(land);
         }
         return deck;
+    }
+
+    // ==================== Commander Precon Loading ====================
+
+    /**
+     * Load a commander precon deck by name.
+     * @param name Deck name without .dck extension
+     * @return Deck loaded from commander precon directory
+     */
+    public static Deck loadCommanderPrecon(String name) {
+        File deckFile = new File(ForgeConstants.COMMANDER_PRECON_DIR, name + ".dck");
+        if (!deckFile.exists()) {
+            throw new IllegalArgumentException("Commander precon deck not found: " + name +
+                " at " + deckFile.getAbsolutePath());
+        }
+        Deck deck = DeckSerializer.fromFile(deckFile);
+        if (deck == null) {
+            throw new IllegalStateException("Failed to parse commander deck file: " + deckFile.getAbsolutePath());
+        }
+        return deck;
+    }
+
+    /**
+     * List all available commander precon deck names.
+     * @return List of deck names (without .dck extension)
+     */
+    public static List<String> listAvailableCommanderPrecons() {
+        File preconDir = new File(ForgeConstants.COMMANDER_PRECON_DIR);
+        if (!preconDir.exists() || !preconDir.isDirectory()) {
+            System.err.println("[TestDeckLoader] Commander precon directory not found: " + preconDir.getAbsolutePath());
+            return Collections.emptyList();
+        }
+
+        File[] files = preconDir.listFiles((d, n) -> n.endsWith(".dck"));
+        if (files == null || files.length == 0) {
+            System.err.println("[TestDeckLoader] No .dck files found in: " + preconDir.getAbsolutePath());
+            return Collections.emptyList();
+        }
+
+        return Arrays.stream(files)
+            .map(f -> f.getName().replace(".dck", ""))
+            .sorted()
+            .collect(Collectors.toList());
+    }
+
+    /**
+     * Get a random commander precon deck.
+     * Retries if a deck fails validation (missing Commander section or too few cards).
+     *
+     * @return Random commander precon deck
+     */
+    public static Deck getRandomCommanderPrecon() {
+        List<String> precons = listAvailableCommanderPrecons();
+        if (precons.isEmpty()) {
+            throw new IllegalStateException("No commander precon decks found in " +
+                ForgeConstants.COMMANDER_PRECON_DIR);
+        }
+
+        List<String> shuffled = new java.util.ArrayList<>(precons);
+        Collections.shuffle(shuffled, random);
+
+        int attempts = Math.min(MAX_RETRIES, shuffled.size());
+
+        for (int i = 0; i < attempts; i++) {
+            String deckName = shuffled.get(i);
+            Deck deck = loadCommanderPrecon(deckName);
+
+            if (isValidCommanderDeck(deck)) {
+                System.out.println("[TestDeckLoader] Selected random commander precon: " + deckName);
+                return deck;
+            }
+
+            int cardCount = deck.getMain() != null ? deck.getMain().countAll() : 0;
+            boolean hasCommander = deck.has(DeckSection.Commander);
+            System.out.println("[TestDeckLoader] Commander deck '" + deckName +
+                "' invalid (cards=" + cardCount + ", hasCommander=" + hasCommander +
+                "), trying another...");
+        }
+
+        // If we exhausted retries, return the last deck anyway with a warning
+        String lastName = shuffled.get(0);
+        System.err.println("[TestDeckLoader] WARNING: Could not find valid commander deck after " +
+            attempts + " attempts, returning '" + lastName + "' anyway");
+        return loadCommanderPrecon(lastName);
+    }
+
+    /**
+     * Check if a deck is a valid commander deck.
+     * Requires at least 99 cards in main and a Commander section.
+     *
+     * @param deck Deck to validate
+     * @return true if deck meets commander requirements
+     */
+    public static boolean isValidCommanderDeck(Deck deck) {
+        if (deck == null || deck.getMain() == null) {
+            return false;
+        }
+        return deck.getMain().countAll() >= MIN_COMMANDER_DECK_SIZE
+            && deck.has(DeckSection.Commander);
     }
 }

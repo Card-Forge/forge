@@ -3,6 +3,7 @@ package forge.net;
 import forge.deck.Deck;
 import forge.game.Game;
 import forge.game.GameOutcome;
+import forge.game.GameType;
 import forge.game.Match;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.match.GameLobby.GameLobbyData;
@@ -72,6 +73,7 @@ public class UnifiedNetworkHarness implements IHasNetLog {
     private long gameTimeoutMs = DEFAULT_GAME_TIMEOUT_MS;
     private int specifiedPort = -1; // -1 means auto-allocate
     private boolean useAiForRemotePlayers = true;
+    private boolean commander = false;
     private List<Deck> decks = null; // null means use random precons
 
     // Runtime state
@@ -141,6 +143,15 @@ public class UnifiedNetworkHarness implements IHasNetLog {
     }
 
     /**
+     * Enable Commander format for this game.
+     * Uses commander precon decks and applies Commander variant to the lobby.
+     */
+    public UnifiedNetworkHarness commander(boolean enable) {
+        this.commander = enable;
+        return this;
+    }
+
+    /**
      * Set specific decks for players.
      * If not set, random precon decks are used.
      */
@@ -190,7 +201,8 @@ public class UnifiedNetworkHarness implements IHasNetLog {
         GameResult result = new GameResult();
         result.playerCount = playerCount;
         result.remoteClientCount = 0;
-        result.description = playerCount + "-player local AI";
+        result.description = playerCount + "-player local AI" + (commander ? " Commander" : "");
+        result.gameFormat = commander ? "Commander" : "Constructed";
         long startTime = System.currentTimeMillis();
 
         try {
@@ -212,6 +224,12 @@ public class UnifiedNetworkHarness implements IHasNetLog {
             // Add slots for multiplayer
             for (int i = 2; i < playerCount; i++) {
                 lobby.addSlot();
+            }
+
+            // Apply Commander variant if enabled
+            if (commander) {
+                lobby.applyVariant(GameType.Commander);
+                netLog.info("Applied Commander variant");
             }
 
             // 3. Configure all slots as AI with decks
@@ -276,7 +294,8 @@ public class UnifiedNetworkHarness implements IHasNetLog {
         GameResult result = new GameResult();
         result.playerCount = playerCount;
         result.remoteClientCount = remoteClientCount;
-        result.description = playerCount + "-player network";
+        result.description = playerCount + "-player network" + (commander ? " Commander" : "");
+        result.gameFormat = commander ? "Commander" : "Constructed";
         long startTime = System.currentTimeMillis();
 
         AtomicInteger successfulConnections = new AtomicInteger(0);
@@ -304,6 +323,12 @@ public class UnifiedNetworkHarness implements IHasNetLog {
             // Add slots for multiplayer
             for (int i = 2; i < playerCount; i++) {
                 lobby.addSlot();
+            }
+
+            // Apply Commander variant if enabled
+            if (commander) {
+                lobby.applyVariant(GameType.Commander);
+                netLog.info("Applied Commander variant");
             }
 
             // 3. Configure player slots
@@ -507,7 +532,8 @@ public class UnifiedNetworkHarness implements IHasNetLog {
         }
         List<Deck> result = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            result.add(TestDeckLoader.getRandomPrecon());
+            result.add(commander ? TestDeckLoader.getRandomCommanderPrecon()
+                                 : TestDeckLoader.getRandomPrecon());
         }
         return result;
     }
@@ -752,6 +778,7 @@ public class UnifiedNetworkHarness implements IHasNetLog {
         public int remoteClientCount;
         public int port;
         public String description;
+        public String gameFormat = "Constructed";
 
         // Game outcome
         public boolean success;
@@ -796,15 +823,15 @@ public class UnifiedNetworkHarness implements IHasNetLog {
         public String toSummary() {
             if (remoteClientCount > 0) {
                 return String.format(
-                        "GameResult[%s, success=%s, started=%s, completed=%s, players=%d, remoteClients=%d, " +
+                        "GameResult[%s, format=%s, success=%s, started=%s, completed=%s, players=%d, remoteClients=%d, " +
                                 "turns=%d, winner=%s, deltas=%d, bytes=%d, error=%s]",
-                        description, success, gameStarted, gameCompleted, playerCount, remoteClientCount,
+                        description, gameFormat, success, gameStarted, gameCompleted, playerCount, remoteClientCount,
                         turnCount, winner, deltaPacketsReceived, totalDeltaBytes, errorMessage);
             } else {
                 return String.format(
-                        "GameResult[%s, success=%s, completed=%s, turns=%d, winner=%s, duration=%.1fs, " +
+                        "GameResult[%s, format=%s, success=%s, completed=%s, turns=%d, winner=%s, duration=%.1fs, " +
                                 "bytes=%d, error=%s]",
-                        description, success, gameCompleted, turnCount, winner,
+                        description, gameFormat, success, gameCompleted, turnCount, winner,
                         gameDurationMs / 1000.0, totalBytesSent, errorMessage);
             }
         }

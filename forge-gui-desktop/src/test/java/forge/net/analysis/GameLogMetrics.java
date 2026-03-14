@@ -31,6 +31,7 @@ public class GameLogMetrics {
     private String logFileName;
     private int gameIndex = -1;
     private int playerCount = 2;
+    private String gameFormat = "Constructed";
 
     // Game completion status
     private boolean gameCompleted;
@@ -67,6 +68,7 @@ public class GameLogMetrics {
     private Map<String, Integer> errorCounts = new HashMap<>();
     private int sendErrors;
     private boolean hasChecksumMismatch;
+    private List<NetworkLogAnalyzer.ChecksumMismatchDetail> checksumMismatchDetails = new ArrayList<>();
     private Map<String, NetworkLogAnalyzer.ErrorContext> errorContexts = new LinkedHashMap<>();
 
 
@@ -127,6 +129,14 @@ public class GameLogMetrics {
 
     public void setPlayerCount(int playerCount) {
         this.playerCount = playerCount;
+    }
+
+    public String getGameFormat() {
+        return gameFormat;
+    }
+
+    public void setGameFormat(String gameFormat) {
+        this.gameFormat = gameFormat;
     }
 
     public boolean isGameCompleted() {
@@ -280,6 +290,14 @@ public class GameLogMetrics {
 
     public void setHasChecksumMismatch(boolean hasChecksumMismatch) {
         this.hasChecksumMismatch = hasChecksumMismatch;
+    }
+
+    public List<NetworkLogAnalyzer.ChecksumMismatchDetail> getChecksumMismatchDetails() {
+        return checksumMismatchDetails;
+    }
+
+    public void setChecksumMismatchDetails(List<NetworkLogAnalyzer.ChecksumMismatchDetail> details) {
+        this.checksumMismatchDetails = details;
     }
 
     /** Get error contexts keyed by normalized error pattern. */

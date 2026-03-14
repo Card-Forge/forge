@@ -44,6 +44,7 @@ public class AnalysisResult {
     private Set<String> uniqueDeckNames;
 
     private Map<Integer, PlayerCountStats> statsByPlayerCount;
+    private Map<String, FormatStats> statsByFormat;
 
     // Enhanced error and failure pattern analysis
     private Map<GameLogMetrics.FailureMode, Integer> failureModeCounts;
@@ -120,6 +121,14 @@ public class AnalysisResult {
             if (!filtered.isEmpty()) {
                 statsByPlayerCount.put(playerCount, new PlayerCountStats(playerCount, filtered));
             }
+        }
+
+        // Aggregate by format
+        statsByFormat = new HashMap<>();
+        Map<String, List<GameLogMetrics>> byFormat = allMetrics.stream()
+                .collect(Collectors.groupingBy(GameLogMetrics::getGameFormat));
+        for (Map.Entry<String, List<GameLogMetrics>> entry : byFormat.entrySet()) {
+            statsByFormat.put(entry.getKey(), new FormatStats(entry.getKey(), entry.getValue()));
         }
 
         // Enhanced analysis: failure modes
@@ -479,6 +488,29 @@ public class AnalysisResult {
             }
         }
 
+        // Results by Format (only show if there are multiple formats)
+        if (isBatchTestData() && statsByFormat.size() > 1) {
+            sb.append("### Results by Format\n\n");
+            if (hasDeltaSyncData()) {
+                sb.append("| Format | Games | Success Rate | Avg Turns | Avg Savings |\n");
+                sb.append("|--------|-------|--------------|-----------|-------------|\n");
+            } else {
+                sb.append("| Format | Games | Success Rate | Avg Turns |\n");
+                sb.append("|--------|-------|--------------|----------|\n");
+            }
+            for (FormatStats stats : statsByFormat.values()) {
+                if (hasDeltaSyncData()) {
+                    sb.append(String.format("| %s | %d | %.1f%% | %.1f | %.1f%% |\n",
+                            stats.format, stats.gameCount, stats.successRate,
+                            stats.averageTurns, stats.averageBandwidthSavings));
+                } else {
+                    sb.append(String.format("| %s | %d | %.1f%% | %.1f |\n",
+                            stats.format, stats.gameCount, stats.successRate, stats.averageTurns));
+                }
+            }
+            sb.append("\n");
+        }
+
         // Winner distribution
         if (!winnerFrequency.isEmpty()) {
             sb.append("### Winner Distribution\n\n");
@@ -509,6 +541,23 @@ public class AnalysisResult {
                     sb.append(String.format("- `%s`\n", file));
                 }
                 sb.append("\n");
+            }
+        }
+
+        // Checksum Mismatch Details (server vs client breakdown comparison)
+        if (gamesWithChecksumMismatches > 0) {
+            boolean hasAnyDetails = allMetrics.stream()
+                    .anyMatch(m -> !m.getChecksumMismatchDetails().isEmpty());
+            if (hasAnyDetails) {
+                sb.append("### Checksum Mismatch Details\n\n");
+                for (GameLogMetrics m : allMetrics) {
+                    if (m.getChecksumMismatchDetails().isEmpty()) continue;
+                    sb.append(String.format("#### `%s`\n\n", m.getLogFileName()));
+                    for (NetworkLogAnalyzer.ChecksumMismatchDetail detail : m.getChecksumMismatchDetails()) {
+                        sb.append(detail.toMarkdown());
+                        sb.append("\n");
+                    }
+                }
             }
         }
 
@@ -638,18 +687,35 @@ public class AnalysisResult {
                     .sorted(Comparator.comparingInt(GameLogMetrics::getGameIndex))
                     .collect(Collectors.toList());
 
-            sb.append("| # | Log File | Status | Players | Turns | Winner |\n");
-            sb.append("|---|----------|--------|---------|-------|--------|\n");
+            boolean hasMultipleFormats = statsByFormat.size() > 1;
+            if (hasMultipleFormats) {
+                sb.append("| # | Log File | Status | Format | Players | Turns | Winner |\n");
+                sb.append("|---|----------|--------|--------|---------|-------|--------|\n");
+            } else {
+                sb.append("| # | Log File | Status | Players | Turns | Winner |\n");
+                sb.append("|---|----------|--------|---------|-------|--------|\n");
+            }
             for (GameLogMetrics m : sortedMetrics) {
                 String status = m.isSuccessful() ? "OK" : (m.hasChecksumMismatch() ? "DESYNC" : "FAIL");
                 String winner = m.getWinner() != null ? m.getWinner() : "-";
-                sb.append(String.format("| %d | `%s` | %s | %d | %d | %s |\n",
-                        m.getGameIndex(),
-                        m.getLogFileName(),
-                        status,
-                        m.getPlayerCount(),
-                        m.getTurnCount(),
-                        winner));
+                if (hasMultipleFormats) {
+                    sb.append(String.format("| %d | `%s` | %s | %s | %d | %d | %s |\n",
+                            m.getGameIndex(),
+                            m.getLogFileName(),
+                            status,
+                            m.getGameFormat(),
+                            m.getPlayerCount(),
+                            m.getTurnCount(),
+                            winner));
+                } else {
+                    sb.append(String.format("| %d | `%s` | %s | %d | %d | %s |\n",
+                            m.getGameIndex(),
+                            m.getLogFileName(),
+                            status,
+                            m.getPlayerCount(),
+                            m.getTurnCount(),
+                            winner));
+                }
             }
         }
 
@@ -742,6 +808,40 @@ public class AnalysisResult {
                         return m.getLogFileName() + " (" + reason + ")";
                     })
                     .collect(Collectors.toList());
+        }
+    }
+
+    /**
+     * Statistics for a specific game format (Constructed, Commander, etc.).
+     */
+    public static class FormatStats {
+        public final String format;
+        public final int gameCount;
+        public final int successCount;
+        public final double successRate;
+        public final double averageTurns;
+        public final double averageBandwidthSavings;
+        public final long totalDeltaBytes;
+        public final long totalFullStateBytes;
+
+        public FormatStats(String format, List<GameLogMetrics> metrics) {
+            this.format = format;
+            this.gameCount = metrics.size();
+            this.successCount = (int) metrics.stream().filter(GameLogMetrics::isSuccessful).count();
+            this.successRate = gameCount > 0 ? 100.0 * successCount / gameCount : 0.0;
+
+            this.averageTurns = metrics.stream()
+                    .filter(GameLogMetrics::isGameCompleted)
+                    .mapToInt(GameLogMetrics::getTurnCount)
+                    .average()
+                    .orElse(0.0);
+
+            this.totalDeltaBytes = metrics.stream().mapToLong(GameLogMetrics::getTotalDeltaBytes).sum();
+            this.totalFullStateBytes = metrics.stream().mapToLong(GameLogMetrics::getTotalFullStateBytes).sum();
+
+            this.averageBandwidthSavings = totalFullStateBytes > 0
+                    ? 100.0 * (1.0 - (double) totalDeltaBytes / totalFullStateBytes)
+                    : 0.0;
         }
     }
 }

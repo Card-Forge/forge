@@ -85,21 +85,33 @@ public class MultiProcessGameExecutor implements IHasNetLog {
      * @return Aggregated results from all games
      */
     public ExecutionResult runGamesWithPlayerCounts(int[] playerCounts) {
-        // Generate batch ID for correlating all logs from this run
-        String batchId = NetworkLogConfig.generateBatchId();
-        return runGamesWithPlayerCounts(playerCounts, 0, batchId);
+        return runGamesWithPlayerCounts(playerCounts, new boolean[playerCounts.length]);
     }
 
     /**
-     * Run multiple games with specified player counts and batch info.
+     * Run multiple games with specified player counts and commander flags.
+     *
+     * @param playerCounts Array of player counts for each game (2, 3, or 4)
+     * @param commanderFlags Array of booleans indicating Commander format per game
+     * @return Aggregated results from all games
+     */
+    public ExecutionResult runGamesWithPlayerCounts(int[] playerCounts, boolean[] commanderFlags) {
+        // Generate batch ID for correlating all logs from this run
+        String batchId = NetworkLogConfig.generateBatchId();
+        return runGamesWithPlayerCounts(playerCounts, commanderFlags, 0, batchId);
+    }
+
+    /**
+     * Run multiple games with specified player counts, commander flags, and batch info.
      * Used by runGamesInBatches to maintain unique game indices across batches.
      *
      * @param playerCounts Array of player counts for each game (2, 3, or 4)
+     * @param commanderFlags Array of booleans indicating Commander format per game
      * @param batchNumber Batch number (0-based) for unique log filenames
      * @param batchId Batch ID for correlating logs from the same test run
      * @return Aggregated results from all games
      */
-    public ExecutionResult runGamesWithPlayerCounts(int[] playerCounts, int batchNumber, String batchId) {
+    public ExecutionResult runGamesWithPlayerCounts(int[] playerCounts, boolean[] commanderFlags, int batchNumber, String batchId) {
         int gameCount = playerCounts.length;
 
         netLog.info("Starting {} games in PARALLEL (batch: {}, batchNum={})",
@@ -119,7 +131,8 @@ public class MultiProcessGameExecutor implements IHasNetLog {
             for (int i = 0; i < gameCount; i++) {
                 int port = basePort + i;
                 int playerCount = playerCounts[i];
-                ProcessInfo info = startGameProcess(javaBin, classpath, port, i, playerCount, batchId, batchNumber);
+                boolean commander = commanderFlags != null && i < commanderFlags.length && commanderFlags[i];
+                ProcessInfo info = startGameProcess(javaBin, classpath, port, i, playerCount, batchId, batchNumber, commander);
                 processes.add(info);
 
                 // Start monitoring immediately to prevent output buffer deadlock
@@ -237,14 +250,22 @@ public class MultiProcessGameExecutor implements IHasNetLog {
     }
 
     /**
+     * Run games in sequential batches (all Constructed format).
+     */
+    public ExecutionResult runGamesInBatches(int[] playerCounts, int batchSize) {
+        return runGamesInBatches(playerCounts, new boolean[playerCounts.length], batchSize);
+    }
+
+    /**
      * Run games in sequential batches to avoid overwhelming the system.
      * Useful for running 100+ games with limited parallelism.
      *
      * @param playerCounts Array of player counts for each game
+     * @param commanderFlags Array of booleans indicating Commander format per game
      * @param batchSize Maximum number of parallel processes per batch
      * @return Aggregated results from all games
      */
-    public ExecutionResult runGamesInBatches(int[] playerCounts, int batchSize) {
+    public ExecutionResult runGamesInBatches(int[] playerCounts, boolean[] commanderFlags, int batchSize) {
         int totalGames = playerCounts.length;
         int totalBatches = (totalGames + batchSize - 1) / batchSize;
 
@@ -261,9 +282,13 @@ public class MultiProcessGameExecutor implements IHasNetLog {
             int batchEnd = Math.min(batchStart + batchSize, totalGames);
             int batchLength = batchEnd - batchStart;
 
-            // Extract player counts for this batch
+            // Extract player counts and commander flags for this batch
             int[] batchPlayerCounts = new int[batchLength];
+            boolean[] batchCommanderFlags = new boolean[batchLength];
             System.arraycopy(playerCounts, batchStart, batchPlayerCounts, 0, batchLength);
+            if (commanderFlags != null) {
+                System.arraycopy(commanderFlags, batchStart, batchCommanderFlags, 0, batchLength);
+            }
 
             netLog.info("Starting batch {} (games {}-{} of {})",
                     batchNumber, batchStart, batchEnd - 1, totalGames);
@@ -274,7 +299,7 @@ public class MultiProcessGameExecutor implements IHasNetLog {
             batchExecutor.withRunnerClass(this.runnerClass);
 
             // Pass batch number and shared batch ID for unique log filenames
-            ExecutionResult batchResult = batchExecutor.runGamesWithPlayerCounts(batchPlayerCounts, batchNumber, batchId);
+            ExecutionResult batchResult = batchExecutor.runGamesWithPlayerCounts(batchPlayerCounts, batchCommanderFlags, batchNumber, batchId);
 
             // Merge batch results into aggregated result
             for (Map.Entry<Integer, UnifiedNetworkHarness.GameResult> entry : batchResult.getResults().entrySet()) {
@@ -303,7 +328,8 @@ public class MultiProcessGameExecutor implements IHasNetLog {
         return aggregatedResult;
     }
 
-    private ProcessInfo startGameProcess(String javaBin, String classpath, int port, int gameIndex, int playerCount, String batchId, int batchNumber)
+    private ProcessInfo startGameProcess(String javaBin, String classpath, int port, int gameIndex, int playerCount,
+                                          String batchId, int batchNumber, boolean commander)
             throws Exception {
         List<String> command = new ArrayList<>();
         command.add(javaBin);
@@ -322,6 +348,7 @@ public class MultiProcessGameExecutor implements IHasNetLog {
         command.add(String.valueOf(playerCount));
         command.add(batchId);
         command.add(String.valueOf(batchNumber));
+        command.add(String.valueOf(commander));
 
         ProcessBuilder pb = new ProcessBuilder(command);
 
@@ -334,7 +361,7 @@ public class MultiProcessGameExecutor implements IHasNetLog {
 
     private void parseResult(String resultLine, ExecutionResult result) {
         try {
-            // Format for ComprehensiveGameRunner: gameIndex|success|playerCount|deltas|turns|bytes|winner|decks
+            // Format: gameIndex|success|playerCount|deltas|turns|bytes|winner|decks|format
             String[] parts = resultLine.split("\\|");
             if (parts.length >= 7) {
                 int gameIndex = Integer.parseInt(parts[0]);
@@ -355,6 +382,11 @@ public class MultiProcessGameExecutor implements IHasNetLog {
                             gameResult.deckNames.add(deck.trim());
                         }
                     }
+                }
+
+                // Parse game format if present (part 8)
+                if (parts.length >= 9 && !parts[8].isEmpty()) {
+                    gameResult.gameFormat = parts[8];
                 }
 
                 result.addResult(gameIndex, gameResult);
@@ -533,6 +565,35 @@ public class MultiProcessGameExecutor implements IHasNetLog {
                     .orElse(0.0);
         }
 
+        // Format aggregation methods
+
+        /**
+         * Get count of Commander format games.
+         */
+        public int getCommanderGameCount() {
+            return (int) results.values().stream()
+                    .filter(r -> "Commander".equals(r.gameFormat))
+                    .count();
+        }
+
+        /**
+         * Get success count of Commander format games.
+         */
+        public int getCommanderSuccessCount() {
+            return (int) results.values().stream()
+                    .filter(r -> "Commander".equals(r.gameFormat) && r.success)
+                    .count();
+        }
+
+        /**
+         * Get success rate of Commander format games.
+         */
+        public double getCommanderSuccessRate() {
+            long total = getCommanderGameCount();
+            if (total == 0) return 0.0;
+            return (double) getCommanderSuccessCount() / total;
+        }
+
         public String toSummary() {
             return String.format(
                     "MultiProcess[games=%d, success=%d, failed=%d, errors=%d, timeouts=%d, " +
@@ -584,6 +645,20 @@ public class MultiProcessGameExecutor implements IHasNetLog {
             }
             sb.append("\n");
 
+            // Breakdown by format
+            int commanderCount = getCommanderGameCount();
+            if (commanderCount > 0) {
+                int constructedCount = totalGames - commanderCount - getErrorCount() - getTimeoutCount();
+                sb.append("Breakdown by Format:\n");
+                sb.append("-".repeat(40)).append("\n");
+                sb.append(String.format("  Constructed: %d games, %d success\n",
+                        constructedCount > 0 ? constructedCount : totalGames - commanderCount,
+                        getSuccessCount() - getCommanderSuccessCount()));
+                sb.append(String.format("  Commander:   %d games, %d success (%.0f%%)\n",
+                        commanderCount, getCommanderSuccessCount(), getCommanderSuccessRate() * 100));
+                sb.append("\n");
+            }
+
             sb.append("Individual Game Results:\n");
             sb.append("-".repeat(40)).append("\n");
 
@@ -596,8 +671,9 @@ public class MultiProcessGameExecutor implements IHasNetLog {
                 } else if (results.containsKey(i)) {
                     UnifiedNetworkHarness.GameResult r = results.get(i);
                     sb.append(r.success ? "SUCCESS" : "FAILED");
-                    sb.append(String.format(" - %dp, deltas=%d, turns=%d, winner=%s\n",
-                            r.playerCount, r.deltaPacketsReceived, r.turnCount, r.winner));
+                    String fmtTag = "Commander".equals(r.gameFormat) ? " [Cmdr]" : "";
+                    sb.append(String.format(" - %dp%s, deltas=%d, turns=%d, winner=%s\n",
+                            r.playerCount, fmtTag, r.deltaPacketsReceived, r.turnCount, r.winner));
                 } else {
                     sb.append("NO RESULT\n");
                 }

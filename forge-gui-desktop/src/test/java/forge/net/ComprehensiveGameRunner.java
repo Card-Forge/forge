@@ -9,13 +9,15 @@ import forge.gamemodes.net.NetworkLogConfig;
  *
  * Designed to be invoked as a separate JVM process for parallel execution.
  *
- * Usage: java -cp <classpath> forge.net.ComprehensiveGameRunner <port> <gameIndex> <playerCount> [batchId]
+ * Usage: java -cp <classpath> forge.net.ComprehensiveGameRunner <port> <gameIndex> <playerCount> [batchId] [batchNumber] [commander]
  *
  * Arguments:
  *   port        - Network port for the game server
  *   gameIndex   - Index of this game (for identification in logs)
  *   playerCount - Number of players (2, 3, or 4)
  *   batchId     - Optional batch ID for correlating logs from the same test run
+ *   batchNumber - Optional batch number for unique log filenames
+ *   commander   - Optional "true"/"false" for Commander format (default false)
  *
  * Exit codes:
  *   0 = Success (game completed with winner and delta packets)
@@ -23,7 +25,7 @@ import forge.gamemodes.net.NetworkLogConfig;
  *   2 = Error (exception during execution)
  *
  * Output format (for parent process parsing):
- *   RESULT:gameIndex|success|playerCount|deltas|turns|bytes|winner|deck1,deck2,...
+ *   RESULT:gameIndex|success|playerCount|deltas|turns|bytes|winner|deck1,deck2,...|format
  */
 public class ComprehensiveGameRunner implements IHasNetLog {
 
@@ -38,6 +40,7 @@ public class ComprehensiveGameRunner implements IHasNetLog {
         int playerCount;
         String batchId = null;
         int batchNumber = 0;
+        boolean commander = false;
         try {
             port = Integer.parseInt(args[0]);
             gameIndex = Integer.parseInt(args[1]);
@@ -47,6 +50,9 @@ public class ComprehensiveGameRunner implements IHasNetLog {
             }
             if (args.length >= 5) {
                 batchNumber = Integer.parseInt(args[4]);
+            }
+            if (args.length >= 6) {
+                commander = Boolean.parseBoolean(args[5]);
             }
         } catch (NumberFormatException e) {
             System.err.println("Invalid arguments: port, gameIndex, playerCount, and batchNumber must be integers");
@@ -60,7 +66,7 @@ public class ComprehensiveGameRunner implements IHasNetLog {
             return;
         }
 
-        System.exit(runGame(port, gameIndex, playerCount, batchId, batchNumber));
+        System.exit(runGame(port, gameIndex, playerCount, batchId, batchNumber, commander));
     }
 
     /**
@@ -71,9 +77,10 @@ public class ComprehensiveGameRunner implements IHasNetLog {
      * @param playerCount Number of players (2, 3, or 4)
      * @param batchId Optional batch ID for correlating logs from the same test run
      * @param batchNumber Batch number for unique log filenames across batches
+     * @param commander Whether to use Commander format
      * @return Exit code: 0=success, 1=failure, 2=error
      */
-    public static int runGame(int port, int gameIndex, int playerCount, String batchId, int batchNumber) {
+    public static int runGame(int port, int gameIndex, int playerCount, String batchId, int batchNumber, boolean commander) {
         try {
             // Initialize FModel FIRST - required before NetworkLogConfig is accessed
             // because the logger's static initialization chain requires GuiBase.getInterface()
@@ -83,16 +90,24 @@ public class ComprehensiveGameRunner implements IHasNetLog {
             if (batchId != null) {
                 NetworkLogConfig.setBatchId(batchId);
             }
+            String formatSuffix = commander ? "-cmdr" : "";
             // Include batch number in log filename to prevent overwrites across batches
-            NetworkLogConfig.setInstanceSuffix("batch" + batchNumber + "-game" + gameIndex + "-" + playerCount + "p");
+            NetworkLogConfig.setInstanceSuffix("batch" + batchNumber + "-game" + gameIndex + "-" + playerCount + "p" + formatSuffix);
 
-            netLog.info("Starting game {} with {} players on port {}",
-                    gameIndex, playerCount, port);
+            String formatLabel = commander ? "Commander" : "Constructed";
+            netLog.info("Starting game {} with {} players on port {} ({})",
+                    gameIndex, playerCount, port, formatLabel);
 
-            UnifiedNetworkHarness.GameResult result = runGame(port, playerCount);
+            UnifiedNetworkHarness.GameResult result = new UnifiedNetworkHarness()
+                    .playerCount(playerCount)
+                    .remoteClients(playerCount - 1)  // All but host are remote
+                    .commander(commander)
+                    .port(port)
+                    .gameTimeout(300000)  // 5 minute timeout
+                    .execute();
 
-            netLog.info("Game {} result: success={}, turns={}, winner={}",
-                    gameIndex, result.success, result.turnCount, result.winner);
+            netLog.info("Game {} result: success={}, turns={}, winner={}, format={}",
+                    gameIndex, result.success, result.turnCount, result.winner, result.gameFormat);
 
             System.out.println("RESULT:" + formatResult(gameIndex, playerCount, result));
             NetworkLogConfig.closeThreadLogger();
@@ -106,18 +121,9 @@ public class ComprehensiveGameRunner implements IHasNetLog {
         }
     }
 
-    private static UnifiedNetworkHarness.GameResult runGame(int port, int playerCount) {
-        return new UnifiedNetworkHarness()
-                .playerCount(playerCount)
-                .remoteClients(playerCount - 1)  // All but host are remote
-                .port(port)
-                .gameTimeout(300000)  // 5 minute timeout
-                .execute();
-    }
-
     private static String formatResult(int gameIndex, int playerCount, UnifiedNetworkHarness.GameResult result) {
         String decksStr = result.deckNames.isEmpty() ? "" : String.join(",", result.deckNames);
-        return String.format("%d|%s|%d|%d|%d|%d|%s|%s",
+        return String.format("%d|%s|%d|%d|%d|%d|%s|%s|%s",
                 gameIndex,
                 result.success,
                 playerCount,
@@ -125,6 +131,7 @@ public class ComprehensiveGameRunner implements IHasNetLog {
                 result.turnCount,
                 result.totalDeltaBytes,
                 result.winner != null ? result.winner : "null",
-                decksStr);
+                decksStr,
+                result.gameFormat);
     }
 }

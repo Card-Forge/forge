@@ -6,6 +6,7 @@ import forge.gamemodes.net.NetworkLogConfig;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Orchestrates comprehensive delta sync testing with multiple player counts.
@@ -27,6 +28,9 @@ public class ComprehensiveTestExecutor implements IHasNetLog {
     private int twoPlayerGames = 50;
     private int threePlayerGames = 30;
     private int fourPlayerGames = 20;
+
+    // Format distribution
+    private int commanderPercentage = 30; // 30% of games use Commander format
 
     // Execution settings
     private int parallelBatchSize = 10; // Run 10 games at a time
@@ -54,6 +58,18 @@ public class ComprehensiveTestExecutor implements IHasNetLog {
      */
     public ComprehensiveTestExecutor fourPlayerGames(int count) {
         this.fourPlayerGames = count;
+        return this;
+    }
+
+    /**
+     * Set the percentage of games that use Commander format (0-100).
+     * Default is 20 (20% of games).
+     */
+    public ComprehensiveTestExecutor commanderPercentage(int percentage) {
+        if (percentage < 0 || percentage > 100) {
+            throw new IllegalArgumentException("Commander percentage must be 0-100, got: " + percentage);
+        }
+        this.commanderPercentage = percentage;
         return this;
     }
 
@@ -100,25 +116,33 @@ public class ComprehensiveTestExecutor implements IHasNetLog {
         netLog.info("Starting comprehensive test: {} total games ({})", totalGames, mode);
         netLog.info("Distribution: {} x 2-player, {} x 3-player, {} x 4-player",
                 twoPlayerGames, threePlayerGames, fourPlayerGames);
+        netLog.info("Commander percentage: {}%", commanderPercentage);
         netLog.info("Batch size: {}, Timeout: {}ms", parallelBatchSize, gameTimeoutMs);
 
         long startTime = System.currentTimeMillis();
 
-        // Build player count array with shuffled distribution
+        // Build player count and commander flag arrays with shuffled distribution
         int[] playerCounts = buildShuffledPlayerCounts();
+        boolean[] commanderFlags = buildCommanderFlags(totalGames);
+
+        int commanderCount = 0;
+        for (boolean f : commanderFlags) {
+            if (f) commanderCount++;
+        }
+        netLog.info("Commander games: {}/{}", commanderCount, totalGames);
 
         MultiProcessGameExecutor.ExecutionResult result;
 
         if (sequential) {
             // Run games sequentially in same JVM
-            result = executeSequentially(playerCounts);
+            result = executeSequentially(playerCounts, commanderFlags);
         } else {
             // Create executor with ComprehensiveGameRunner for parallel execution
             MultiProcessGameExecutor executor = new MultiProcessGameExecutor(gameTimeoutMs)
                     .withRunnerClass("forge.net.ComprehensiveGameRunner");
 
             // Run all games in batches
-            result = executor.runGamesInBatches(playerCounts, parallelBatchSize);
+            result = executor.runGamesInBatches(playerCounts, commanderFlags, parallelBatchSize);
         }
 
         long duration = System.currentTimeMillis() - startTime;
@@ -132,7 +156,7 @@ public class ComprehensiveTestExecutor implements IHasNetLog {
      * Execute games sequentially in the same JVM.
      * Useful for debugging as all games run in same process.
      */
-    private MultiProcessGameExecutor.ExecutionResult executeSequentially(int[] playerCounts) {
+    private MultiProcessGameExecutor.ExecutionResult executeSequentially(int[] playerCounts, boolean[] commanderFlags) {
         ensureFModelInitialized();
 
         netLog.info("Starting {} sequential games", playerCounts.length);
@@ -142,7 +166,8 @@ public class ComprehensiveTestExecutor implements IHasNetLog {
 
         for (int i = 0; i < playerCounts.length; i++) {
             int players = playerCounts[i];
-            UnifiedNetworkHarness.GameResult gameResult = runSingleGame(i, port++, players);
+            boolean commander = commanderFlags != null && i < commanderFlags.length && commanderFlags[i];
+            UnifiedNetworkHarness.GameResult gameResult = runSingleGame(i, port++, players, commander);
 
             if (gameResult.errorMessage != null && !gameResult.success) {
                 result.addError(i, gameResult.errorMessage);
@@ -151,8 +176,9 @@ public class ComprehensiveTestExecutor implements IHasNetLog {
             }
 
             String status = gameResult.success ? "SUCCESS" : "FAILED";
-            netLog.info("Game {} ({}p): {} (deltas={}, turns={}, winner={})",
-                    i, players, status,
+            String formatLabel = commander ? " [Cmdr]" : "";
+            netLog.info("Game {} ({}p{}): {} (deltas={}, turns={}, winner={})",
+                    i, players, formatLabel, status,
                     gameResult.deltaPacketsReceived,
                     gameResult.turnCount,
                     gameResult.winner);
@@ -165,17 +191,20 @@ public class ComprehensiveTestExecutor implements IHasNetLog {
     /**
      * Run a single game with isolated logging using UnifiedNetworkHarness.
      */
-    private UnifiedNetworkHarness.GameResult runSingleGame(int gameIndex, int port, int playerCount) {
+    private UnifiedNetworkHarness.GameResult runSingleGame(int gameIndex, int port, int playerCount, boolean commander) {
+        String formatSuffix = commander ? "-cmdr" : "";
         // Set instance-specific log suffix so this game writes to its own log file
-        NetworkLogConfig.setInstanceSuffix("game" + gameIndex + "-" + playerCount + "p");
+        NetworkLogConfig.setInstanceSuffix("game" + gameIndex + "-" + playerCount + "p" + formatSuffix);
 
         try {
-            netLog.info("Starting game {} ({} players) on port {}", gameIndex, playerCount, port);
+            String formatLabel = commander ? "Commander" : "Constructed";
+            netLog.info("Starting game {} ({} players, {}) on port {}", gameIndex, playerCount, formatLabel, port);
 
             // Use UnifiedNetworkHarness for all player counts
             return new UnifiedNetworkHarness()
                     .playerCount(playerCount)
                     .remoteClients(playerCount - 1)  // All but host are remote
+                    .commander(commander)
                     .port(port)
                     .gameTimeout(gameTimeoutMs)
                     .execute();
@@ -219,6 +248,36 @@ public class ComprehensiveTestExecutor implements IHasNetLog {
     }
 
     /**
+     * Build an array of commander flags for the given number of games.
+     * Exactly (totalGames * commanderPercentage / 100) games are flagged as Commander,
+     * distributed randomly across the array.
+     */
+    private boolean[] buildCommanderFlags(int totalGames) {
+        boolean[] flags = new boolean[totalGames];
+        if (commanderPercentage <= 0 || totalGames == 0) {
+            return flags;
+        }
+
+        int commanderCount = Math.max(1, totalGames * commanderPercentage / 100);
+        if (commanderPercentage >= 100) {
+            commanderCount = totalGames;
+        }
+
+        // Pick exactly commanderCount indices to flag as commander
+        List<Integer> indices = new ArrayList<>(totalGames);
+        for (int i = 0; i < totalGames; i++) {
+            indices.add(i);
+        }
+        Collections.shuffle(indices, new Random());
+
+        for (int i = 0; i < commanderCount; i++) {
+            flags[indices.get(i)] = true;
+        }
+
+        return flags;
+    }
+
+    /**
      * Generate a summary report of the test configuration.
      */
     public String getConfigurationSummary() {
@@ -230,6 +289,7 @@ public class ComprehensiveTestExecutor implements IHasNetLog {
                 "    - 2-player: %d (%.0f%%)\n" +
                 "    - 3-player: %d (%.0f%%)\n" +
                 "    - 4-player: %d (%.0f%%)\n" +
+                "  Commander: %d%% of games\n" +
                 "  Execution Mode: %s\n" +
                 "  Batch Size: %d\n" +
                 "  Game Timeout: %d ms",
@@ -237,6 +297,7 @@ public class ComprehensiveTestExecutor implements IHasNetLog {
                 twoPlayerGames, total > 0 ? (100.0 * twoPlayerGames / total) : 0,
                 threePlayerGames, total > 0 ? (100.0 * threePlayerGames / total) : 0,
                 fourPlayerGames, total > 0 ? (100.0 * fourPlayerGames / total) : 0,
+                commanderPercentage,
                 sequential ? "Sequential (same JVM)" : "Parallel (multi-process)",
                 parallelBatchSize,
                 gameTimeoutMs
@@ -266,6 +327,7 @@ public class ComprehensiveTestExecutor implements IHasNetLog {
      *   -Dtest.2pGames=50
      *   -Dtest.3pGames=30
      *   -Dtest.4pGames=20
+     *   -Dtest.commanderPct=20
      *   -Dtest.batchSize=10
      *   -Dtest.timeoutMs=300000
      */
@@ -314,6 +376,15 @@ public class ComprehensiveTestExecutor implements IHasNetLog {
                 executor.gameTimeout(Long.parseLong(timeout));
             } catch (NumberFormatException e) {
                 System.err.println("Invalid test.timeoutMs value: " + timeout + ", using default");
+            }
+        }
+
+        String cmdrPct = System.getProperty("test.commanderPct");
+        if (cmdrPct != null) {
+            try {
+                executor.commanderPercentage(Integer.parseInt(cmdrPct));
+            } catch (NumberFormatException e) {
+                System.err.println("Invalid test.commanderPct value: " + cmdrPct + ", using default");
             }
         }
 
