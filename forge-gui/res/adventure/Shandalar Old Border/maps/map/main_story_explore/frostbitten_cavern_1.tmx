@@ -88,26 +88,55 @@
   </object>
   <object id="12" template="../../../../../../common/maps/obj/treasure.tx" x="64" y="64">
    <properties>
-    <property name="reward">[{
-  "type": "randomCard",
-  "count": 2,
-  "colors": [ "colorID" ]
-},{
-  "type": "randomCard",
-  "count": 1,
-  "probability": 0.5,
-  "rarity": [ "rare" ],
-  "colors": [ "colorID" ]
-},{
-  "type": "randomCard",
-  "count": 3,
-  "addMaxCount": 2
-},
-{
-   "type": "item",
-   "count": 1,
-   "itemName": "Landscape Sketchbook - Coldsnap"
-}]</property>
+    <property name="reward">[
+  {
+    "type": "item",
+    "count": 1,
+    "itemName": "Landscape Sketchbook - Coldsnap"
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.005,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.03,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.175,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.45,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.84,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.51,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property>
    </properties>
   </object>
   <object id="13" template="../../../../../../common/maps/obj/gold.tx" x="96" y="304" />

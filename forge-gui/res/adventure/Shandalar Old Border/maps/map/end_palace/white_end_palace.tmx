@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="85">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx" />
@@ -130,9 +130,9 @@
 ]</property>
     <property name="enemy" value="Hazduhr the Abbot" />
     <property name="pursueRange" type="int" value="30" />
-    <property name="threatRange" type="int" value="30" />
+    <property name="threatRange" type="int" value="100" />
    <property name="effect">{"startBattleWithCard": ["Hazduhr the Abbot|HML", "Serra's Hymn|USG", "Serra Inquisitors|HML", "Beloved Chaplain|ODY"]}</property>
-    </properties>
+    <property name="speedModifier" type="float" value="20" /></properties>
   </object>
   <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="671.667" y="411.333">
    <properties>
@@ -145,9 +145,9 @@
    }
 ]</property>
     <property name="enemy" value="Selenia, Dark Angel" />
-    <property name="threatRange" type="int" value="30" />
+    <property name="threatRange" type="int" value="100" />
    <property name="effect">{"startBattleWithCard": ["Salt Flats|TMP", "Selenia, Dark Angel|TMP", "Sword of the Chosen|STH", "Haunted Angel|APC"]}</property>
-    </properties>
+    <property name="speedModifier" type="float" value="20" /></properties>
   </object>
   <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="365.5" y="229.667">
    <properties>
@@ -175,9 +175,9 @@
    }
 ]</property>
     <property name="enemy" value="Archangel Radiant" />
-    <property name="threatRange" type="int" value="30" />
+    <property name="threatRange" type="int" value="100" />
    <property name="effect">{"startBattleWithCard": ["Serra Aviary|HML", "Knighthood|ULG", "Serra Paladin|HML", "Serra Zealot|USG"]}</property>
-    </properties>
+    <property name="speedModifier" type="float" value="20" /></properties>
   </object>
   <object id="72" template="../../../../../../common/maps/obj/enemy.tx" x="84" y="405.667">
    <properties>
@@ -190,9 +190,9 @@
    }
 ]</property>
     <property name="enemy" value="Reya Dawnbringer" />
-    <property name="threatRange" type="int" value="40" />
+    <property name="threatRange" type="int" value="100" />
    <property name="effect">{"startBattleWithCard": ["Reya Dawnbringer|INV", "Worry Beads|MMQ", "Angelic Renewal|WTH"]}</property>
-    </properties>
+    <property name="speedModifier" type="float" value="20" /></properties>
   </object>
   <object id="73" template="../../../../../../common/maps/obj/enemy.tx" x="187.167" y="500.333">
    <properties>

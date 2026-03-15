@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="72">
  <editorsettings>
-  <export target="wastetown..tmx" format="tmx"/>
+  <export target="wastetown..tmx" format="tmx" />
  </editorsettings>
  <properties>
  </properties>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJztkzEOwDAIA7N27iP7o/yo/+qQLaor28BSMdwSiRyYZB5jzKZpfst1LvYzpi7LjWB6zXKpvVQ7nYz3WsfnOpUMszJmPOjtuG52Z+juyMzRt1rlZeucP4T8zHzVOX/53HmVf/NW52bM7hn1lOF1so94lVwrvGo2TR53ZyrzAH9WER8=
@@ -24,7 +24,7 @@
  </layer>
  <layer id="3" name="Foreground" width="30" height="30">
   <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
+   <property name="spriteLayer" type="bool" value="true" />
   </properties>
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUjALqgJ0CDAw7BDBpZIBNfqcAdvNGwSgYBaNgFIyCUTD0QB0/hG7gp6+9MtD2hNxou4IkAAD01grd
@@ -39,13 +39,13 @@
   <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="182.772" y="284.992" width="64" height="64">
    <properties>
     <property name="effect">{"startBattleWithCard": ["Karona, False God|SCG", "Plains|PGRU", "Island|PGRU", "Swamp|PGRU", "Mountain|PGRU", "Forest|PGRU", "Temple of the False God|SCG", "Sterling Grove|INV", "Cloud Cover|PLS", "Fires of Yavimaya|INV", "Reckless Assault|INV", "Unfulfilled Desires|MIR", "Howling Mine|LEA"]}</property>
-    <property name="enemy" value="Karona"/>
-    <property name="threatRange" type="int" value="50"/>
-   </properties>
+    <property name="enemy" value="Karona" />
+    <property name="threatRange" type="int" value="100" />
+   <property name="speedModifier" type="float" value="20" /></properties>
   </object>
   <object id="51" template="../../../../../../common/maps/obj/entry_up.tx" x="209" y="480">
    <properties>
-    <property name="teleport" value=""/>
+    <property name="teleport" value="" />
    </properties>
   </object>
  </objectgroup>

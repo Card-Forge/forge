@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="101">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx" />
@@ -52,7 +52,56 @@
     <property name="teleport" value="" />
    </properties>
   </object>
-  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="231.921" y="168.487" />
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="231.921" y="168.487"><properties><property name="reward">[
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Gauntlet of Might|LEA"
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.02,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.1,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.38,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.72,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.54,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.24,
+    "count": 2,
+    "addMaxCount": 2
+  }
+]</property></properties></object>
   <object id="55" template="../../../../../../common/maps/obj/enemy.tx" x="460.22" y="539.626">
    <properties>
     <property name="enemy" value="Crag Hydra of Shandalar" />
@@ -93,8 +142,8 @@
 ]</property>
     <property name="effect">{"startBattleWithCard": ["Mox Ruby|LEA", "Nalathni Dragon|DRC94", "Dragon Engine|3ED"]}</property>
     <property name="enemy" value="The Dragon Lord" />
-    <property name="threatRange" type="int" value="50" />
-   </properties>
+    <property name="threatRange" type="int" value="100" />
+   <property name="speedModifier" type="float" value="20" /></properties>
   </object>
   <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="237.575" y="398.439">
    <properties>
