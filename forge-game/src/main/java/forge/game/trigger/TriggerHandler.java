@@ -39,7 +39,6 @@ import forge.game.zone.ZoneType;
 import forge.util.FileSection;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
-import org.apache.commons.lang3.Strings;
 
 public class TriggerHandler {
     private final Set<TriggerType> suppressedModes = Collections.synchronizedSet(EnumSet.noneOf(TriggerType.class));
