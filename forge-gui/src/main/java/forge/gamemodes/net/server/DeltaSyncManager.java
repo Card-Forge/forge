@@ -193,22 +193,17 @@ public class DeltaSyncManager implements IHasNetLog {
             // Sent via newObjects so the client can clear stale properties on the
             // existing object before applying the new state.
 
-            CardView oldCardView = null;
             Iterator<TrackableObject> it = registeredObjects.iterator();
             while (it.hasNext()) {
                 TrackableObject old = it.next();
                 if (DeltaPacket.typeTagFor(old) == objType && old.getId() == obj.getId()) {
-                    if (old instanceof CardView) {
-                        oldCardView = (CardView) old;
-                    }
                     old.unregisterConsumer(consumerId);
                     it.remove();
+                    if (old instanceof CardView oldCard) {
+                        unregisterOldCardStateViews(oldCard);
+                    }
                     break;
                 }
-            }
-            // Clean up old CardStateViews AFTER iterator loop to avoid CME
-            if (oldCardView != null) {
-                unregisterOldCardStateViews(oldCardView);
             }
             obj.registerConsumer(consumerId);
             registeredObjects.add(obj);
@@ -469,6 +464,16 @@ public class DeltaSyncManager implements IHasNetLog {
             List<Integer> ids = new ArrayList<>(coll.size());
             for (TrackableObject obj : coll) ids.add(obj == null ? -1 : obj.getId());
             return ids;
+        }
+
+        // Defensive copy mutable collections at the serialization boundary.
+        // Views use in-place mutation + flagAsChanged(), so the live reference
+        // could be mutated by the game thread while Netty serializes the packet.
+        if (value instanceof Map) {
+            return new HashMap<>((Map<?, ?>) value);
+        }
+        if (value instanceof List) {
+            return new ArrayList<>((List<?>) value);
         }
 
         return value;

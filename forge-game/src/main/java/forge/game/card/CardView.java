@@ -341,10 +341,8 @@ public class CardView extends GameEntityView {
         return true;
     }
     void updateCounters(Card c) {
-        // Defensive copy: Card.getCounters() returns a mutable reference to the internal map.
-        // Without a copy, TrackableObject.set() cannot detect changes via equals() since the
-        // old and new values are the same mutated map instance — causing lost dirty flags.
-        set(TrackableProperty.Counters, new HashMap<>(c.getCounters()));
+        set(TrackableProperty.Counters, c.getCounters());
+        flagAsChanged(TrackableProperty.Counters);
         updateLethalDamage(c);
         CardStateView state = getCurrentState();
         state.updatePower(c);
@@ -624,16 +622,16 @@ public class CardView extends GameEntityView {
 
     public List<String> getDraftAction() { return get(TrackableProperty.DraftAction); }
     void updateDraftAction(Card c) {
-        List<String> actions = c.getDraftActions();
-        set(TrackableProperty.DraftAction, actions != null ? new ArrayList<>(actions) : null);
+        set(TrackableProperty.DraftAction, c.getDraftActions());
+        flagAsChanged(TrackableProperty.DraftAction);
     }
 
     public List<String> getNamedCard() {
         return get(TrackableProperty.NamedCard);
     }
     void updateNamedCard(Card c) {
-        List<String> names = c.getNamedCards();
-        set(TrackableProperty.NamedCard, names != null ? new ArrayList<>(names) : null);
+        set(TrackableProperty.NamedCard, c.getNamedCards());
+        flagAsChanged(TrackableProperty.NamedCard);
     }
     public boolean getMayPlayPlayers(PlayerView pv) {
         TrackableCollection<PlayerView> col = get(TrackableProperty.MayPlayPlayers);
