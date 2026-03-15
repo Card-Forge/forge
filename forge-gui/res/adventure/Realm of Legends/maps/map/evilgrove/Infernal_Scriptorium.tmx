@@ -77,7 +77,7 @@
                   {&quot;type&quot;: &quot;shards&quot;, &quot;count&quot;: 100},
                   {&quot;type&quot;: &quot;item&quot;, &quot;count&quot;: 1, &quot;itemName&quot;: &quot;Scroll of Griselbrand&quot;},
                   {&quot;type&quot;: &quot;item&quot;, &quot;count&quot;: 1, &quot;itemName&quot;: &quot;Amulet of Agony&quot;},
-                  {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Demonic Tutor&quot;, &quot;editions&quot;: [&quot;VMA&quot;],
+                  {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Demonic Tutor&quot;, &quot;editions&quot;: [&quot;VMA&quot;]},
                   {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Griselbrand&quot;,&quot;sourceDeck&quot;: &quot;decks/rewards/Select_SLs.dck&quot;},
                   {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Kothophed, Soul Hoarder&quot;,&quot;sourceDeck&quot;: &quot;decks/rewards/Select_SLs.dck&quot;},
                   {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Demonlord Belzenlok&quot;,&quot;sourceDeck&quot;: &quot;decks/rewards/Select_SLs.dck&quot;},
