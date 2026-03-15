@@ -36004,7 +36004,7 @@
   },
   {
     "name": "Gorilla Chief",
-    "sprite": "sprites/enemy/beast/elephant.atlas",
+    "sprite": "sprites/enemy/beast/gorilla.atlas",
     "deck": [
       "decks/miniboss/shandalar97_gorilla_chief.dck"
     ],
