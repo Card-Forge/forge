@@ -1,6 +1,7 @@
 package forge.game.card;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import forge.ImageKeys;
@@ -340,7 +341,10 @@ public class CardView extends GameEntityView {
         return true;
     }
     void updateCounters(Card c) {
-        set(TrackableProperty.Counters, c.getCounters());
+        // Defensive copy: Card.getCounters() returns a mutable reference to the internal map.
+        // Without a copy, TrackableObject.set() cannot detect changes via equals() since the
+        // old and new values are the same mutated map instance — causing lost dirty flags.
+        set(TrackableProperty.Counters, new HashMap<>(c.getCounters()));
         updateLethalDamage(c);
         CardStateView state = getCurrentState();
         state.updatePower(c);
@@ -424,7 +428,7 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.NotedTypes);
     }
     void updateNotedTypes(Card c) {
-        set(TrackableProperty.NotedTypes, c.getNotedTypes());
+        set(TrackableProperty.NotedTypes, Lists.newArrayList(c.getNotedTypes()));
     }
 
     public String getChosenNumber() {
@@ -448,7 +452,7 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.ChosenColors);
     }
     void updateChosenColors(Card c) {
-        set(TrackableProperty.ChosenColors, c.getChosenColors());
+        set(TrackableProperty.ChosenColors, Lists.newArrayList(c.getChosenColors()));
     }
     public boolean hasPaperFoil() {
         return get(TrackableProperty.PaperFoil);
@@ -620,14 +624,16 @@ public class CardView extends GameEntityView {
 
     public List<String> getDraftAction() { return get(TrackableProperty.DraftAction); }
     void updateDraftAction(Card c) {
-        set(TrackableProperty.DraftAction, c.getDraftActions());
+        List<String> actions = c.getDraftActions();
+        set(TrackableProperty.DraftAction, actions != null ? new ArrayList<>(actions) : null);
     }
 
     public List<String> getNamedCard() {
         return get(TrackableProperty.NamedCard);
     }
     void updateNamedCard(Card c) {
-        set(TrackableProperty.NamedCard, c.getNamedCards());
+        List<String> names = c.getNamedCards();
+        set(TrackableProperty.NamedCard, names != null ? new ArrayList<>(names) : null);
     }
     public boolean getMayPlayPlayers(PlayerView pv) {
         TrackableCollection<PlayerView> col = get(TrackableProperty.MayPlayPlayers);
@@ -995,7 +1001,7 @@ public class CardView extends GameEntityView {
     }
     public String getBackSideName() { return get(TrackableProperty.BackSideName); }
 
-    CardStateView createAlternateState(final CardStateName state0) {
+    public CardStateView createAlternateState(final CardStateName state0) {
         return new CardStateView(getId(), state0, tracker);
     }
 

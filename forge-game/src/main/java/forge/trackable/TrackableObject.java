@@ -5,7 +5,7 @@ import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import forge.game.IIdentifiable;
 
@@ -16,14 +16,16 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
     private final int id;
     protected transient Tracker tracker;
     private final Map<TrackableProperty, Object> props;
-    private final Set<TrackableProperty> changedProps;
+    private int version;
+    // Per-consumer dirty tracking. Lazy-init: null until first registerConsumer.
+    // In offline games (no consumers), set() does no tracking work at all.
+    private transient Map<Integer, EnumSet<TrackableProperty>> consumers;
     private boolean copyingProps;
 
     protected TrackableObject(final int id0, final Tracker tracker) {
         id = id0;
         this.tracker = tracker;
         props = new EnumMap<>(TrackableProperty.class);
-        changedProps = EnumSet.noneOf(TrackableProperty.class);
     }
 
     public final int getId() {
@@ -64,7 +66,7 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
         return value;
     }
 
-    protected final <T> void set(final TrackableProperty key, final T value) {
+    public final <T> void set(final TrackableProperty key, final T value) {
         if (tracker != null && tracker.isFrozen()) { //if trackable objects currently frozen, queue up delayed prop change
             boolean respectsFreeze = false;
             if (key.getFreezeMode() == TrackableProperty.FreezeMode.RespectsFreeze) {
@@ -79,13 +81,30 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
         }
         if (value == null || value.equals(key.getDefaultValue())) {
             if (props.remove(key) != null) {
-                changedProps.add(key);
+                // TODO: A property changing A->B->A between consumer reads would still be marked dirty.
+                // A checksum or version-per-property approach could skip this, but A->B->A is uncommon
+                // in typical Magic game flow. Revisit if profiling shows excessive no-op deltas.
+                markDirtyForConsumers(key);
                 key.updateObjLookup(tracker, value);
             }
         }
         else if (!value.equals(props.put(key, value))) {
-            changedProps.add(key);
+            markDirtyForConsumers(key);
             key.updateObjLookup(tracker, value);
+        }
+    }
+
+    /**
+     * Mark a property as dirty for all registered consumers and increment version.
+     */
+    private void markDirtyForConsumers(final TrackableProperty key) {
+        version++;
+        if (consumers != null) {
+            for (EnumSet<TrackableProperty> dirtySet : consumers.values()) {
+                synchronized (dirtySet) {
+                    dirtySet.add(key);
+                }
+            }
         }
     }
 
@@ -96,38 +115,91 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
     }
 
     /**
-     * Copy all change properties of another Trackable object to this object.
+     * Copy all properties of another TrackableObject to this object.
+     * Used in network full-state scenarios where all properties should be synced.
      */
     public final void copyChangedProps(final TrackableObject from) {
         if (copyingProps) { return; } //prevent infinite loop from circular reference
         copyingProps = true;
-        for (final TrackableProperty prop : from.changedProps) {
+        for (final TrackableProperty prop : from.props.keySet()) {
             prop.copyChangedProps(from, this);
         }
         copyingProps = false;
     }
 
-    //use when updating collection type properties with using set
+    //use when updating collection type properties without using set
     protected final void flagAsChanged(final TrackableProperty key) {
-        changedProps.add(key);
+        markDirtyForConsumers(key);
         key.updateObjLookup(tracker, props.get(key));
     }
 
-    public final void serialize(final TrackableSerializer ts) {
-        ts.write(changedProps.size());
-        for (TrackableProperty key : changedProps) {
-            ts.write(TrackableProperty.serialize(key));
-            key.serialize(ts, props.get(key));
-        }
-        changedProps.clear();
+    /**
+     * Get the monotonic version counter. Incremented on every actual property change.
+     */
+    public int getVersion() {
+        return version;
     }
 
-    public final void deserialize(final TrackableDeserializer td) {
-        int count = td.readInt();
-        for (int i = 0; i < count; i++) {
-            TrackableProperty key = TrackableProperty.deserialize(td.readInt());
-            set(key, key.deserialize(td, props.get(key)));
+    /**
+     * Register a consumer for per-consumer dirty tracking.
+     * Creates an EnumSet for this consumer; lazy-inits the consumer map.
+     */
+    public void registerConsumer(int consumerId) {
+        if (consumers == null) {
+            consumers = new ConcurrentHashMap<>();
         }
-        changedProps.clear();
+        consumers.putIfAbsent(consumerId, EnumSet.noneOf(TrackableProperty.class));
     }
+
+    /**
+     * Unregister a consumer. Removes its dirty set.
+     * Nulls the map if empty to avoid overhead in offline games.
+     */
+    public void unregisterConsumer(int consumerId) {
+        if (consumers != null) {
+            consumers.remove(consumerId);
+            if (consumers.isEmpty()) {
+                consumers = null;
+            }
+        }
+    }
+
+    /**
+     * Get and clear dirty properties for a specific consumer.
+     * Returns a snapshot copy; the consumer's dirty set is cleared.
+     */
+    public EnumSet<TrackableProperty> getAndClearDirtyProps(int consumerId) {
+        if (consumers == null) {
+            return EnumSet.noneOf(TrackableProperty.class);
+        }
+        EnumSet<TrackableProperty> dirtySet = consumers.get(consumerId);
+        if (dirtySet == null) {
+            return EnumSet.noneOf(TrackableProperty.class);
+        }
+        synchronized (dirtySet) {
+            if (dirtySet.isEmpty()) {
+                return EnumSet.noneOf(TrackableProperty.class);
+            }
+            EnumSet<TrackableProperty> copy = EnumSet.copyOf(dirtySet);
+            dirtySet.clear();
+            return copy;
+        }
+    }
+
+    /**
+     * Quick check if a consumer has pending changes.
+     */
+    public boolean hasConsumerChanges(int consumerId) {
+        if (consumers == null) {
+            return false;
+        }
+        EnumSet<TrackableProperty> dirtySet = consumers.get(consumerId);
+        if (dirtySet == null) {
+            return false;
+        }
+        synchronized (dirtySet) {
+            return !dirtySet.isEmpty();
+        }
+    }
+
 }

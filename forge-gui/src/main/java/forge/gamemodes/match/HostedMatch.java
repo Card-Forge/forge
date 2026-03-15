@@ -18,6 +18,8 @@ import forge.game.event.IGameEventVisitor;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.player.RegisteredPlayer;
+import forge.gamemodes.net.NetworkGameEventListener;
+import forge.gamemodes.net.server.FServerManager;
 import forge.gamemodes.quest.QuestController;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -186,6 +188,12 @@ public class HostedMatch {
         // so it doesn't need a direct event bus subscription here.
         // (It still subscribes to the Match bus for UiEvent sounds like blocker assignment.)
 
+        // Subscribe network game event listener for network play
+        // This logs game actions to NetworkLogConfig for debugging network games
+        if (FServerManager.getInstance().isHosting()) {
+            game.subscribeToEvents(new NetworkGameEventListener());
+        }
+
         final FCollectionView<Player> players = game.getPlayers();
         final String[] avatarIndices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
         final String[] sleeveIndices = FModel.getPreferences().getPref(FPref.UI_SLEEVES).split(",");
@@ -223,7 +231,7 @@ public class HostedMatch {
                 gui.setGameView(gameView);
                 gui.setOriginalGameController(p.getView(), humanController);
 
-                if (gui instanceof forge.gamemodes.net.server.NetGuiGame ngg) {
+                if (gui instanceof forge.gamemodes.net.server.RemoteClientGuiGame ngg) {
                     forge.gui.control.GameEventForwarder forwarder = new forge.gui.control.GameEventForwarder(gui);
                     ngg.setForwarder(forwarder);
                     game.subscribeToEvents(forwarder);
@@ -327,6 +335,9 @@ public class HostedMatch {
     public Game getGame() {
         return game;
     }
+    public Match getMatch() {
+        return match;
+    }
     public GameView getGameView() {
         return game == null ? null : game.getView();
     }
@@ -338,7 +349,7 @@ public class HostedMatch {
         game = null;
 
         for (final PlayerControllerHuman humanController : humanControllers) {
-            if (humanController.getGui() instanceof forge.gamemodes.net.server.NetGuiGame ngg) {
+            if (humanController.getGui() instanceof forge.gamemodes.net.server.RemoteClientGuiGame ngg) {
                 ngg.shutdownForwarder();
             }
             humanController.getGui().setGameSpeed(PlaybackSpeed.NORMAL);
@@ -413,8 +424,7 @@ public class HostedMatch {
 
             Runnable switchGameView = () -> {
                 for (final Player p : event.subgame().getPlayers()) {
-                    if (p.getController() instanceof PlayerControllerHuman) {
-                        final PlayerControllerHuman humanController = (PlayerControllerHuman) p.getController();
+                    if (p.getController() instanceof PlayerControllerHuman humanController) {
                         final IGuiGame gui = guis.get(p.getRegisteredPlayer());
                         humanController.setGui(gui);
                         gui.setGameView(null);
@@ -446,8 +456,7 @@ public class HostedMatch {
             final GameView gameView = event.maingame().getView();
             Runnable switchGameView = () -> {
                 for (final Player p : event.maingame().getPlayers()) {
-                    if (p.getController() instanceof PlayerControllerHuman) {
-                        final PlayerControllerHuman humanController = (PlayerControllerHuman) p.getController();
+                    if (p.getController() instanceof PlayerControllerHuman humanController) {
                         final IGuiGame gui = guis.get(p.getRegisteredPlayer());
                         gui.setGameView(null);
                         gui.setGameView(gameView);

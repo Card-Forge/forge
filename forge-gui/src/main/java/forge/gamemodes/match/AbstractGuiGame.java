@@ -9,6 +9,7 @@ import forge.game.event.GameEvent;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.player.PlayerView;
+import forge.gamemodes.net.DeltaPacket;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.control.FControlGameEventHandler;
@@ -131,7 +132,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public final IGameController getGameController() {
         return getGameController(getCurrentPlayer());
     }
-
     public final IGameController getGameController(final PlayerView player) {
         if (player == null) {
             return spectator;
@@ -239,10 +239,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             } catch (NullPointerException e) {
                 return true; // return true so it will work as normal
             }
-        } else {
-            if (getGameController().mayLookAtAllCards()) {
-                return true;
-            }
+        } else if (getGameController().mayLookAtAllCards()) {
+            return true;
         }
         return c.canBeShownToAny(getLocalPlayers());
     }
@@ -330,7 +328,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public boolean isGamePaused() {
         return gamePause;
     }
-
     public void setGamePause(boolean pause) {
         gamePause = pause;
     }
@@ -473,7 +470,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                     synchronized (awaitNextInputTimer) {
                         if (awaitNextInputTask != null) {
                             updatePromptForAwait(getCurrentPlayer());
-                            if (GuiBase.isNetworkplay(AbstractGuiGame.this)) {
+                            if (GuiBase.isNetPlay(AbstractGuiGame.this)) {
                                 showWaitingTimer(getCurrentPlayer(), findWaitingForPlayerName(getCurrentPlayer()));
                             }
                             awaitNextInputTask = null;
@@ -665,8 +662,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     // End of Triggers preliminary choice
-
-    // Start of Choice code
 
     /**
      * Convenience for getChoices(message, 0, 1, choices).
@@ -924,7 +919,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         localEventHandler.receiveGameEvent(event);
 
         // Feed forwarded events to the local GameLog so remote clients
-        // build their own game log (host populates via EventBus instead)
+        // build their own game log (host populates via EventBus instead).
+        // gameLog is null for deserialized GameViews until openView calls ensureGameLog().
         GameView gv = getGameView();
         if (gv != null) {
             GameLog gameLog = gv.getGameLog();
@@ -956,24 +952,19 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public void updateTurn(PlayerView player) { }
 
     @Override
-    public void updatePlayerControl() {
-    }
+    public void updatePlayerControl() { }
 
     @Override
-    public void updateZones(Iterable<PlayerZoneUpdate> zonesToUpdate) {
-    }
+    public void updateZones(Iterable<PlayerZoneUpdate> zonesToUpdate) { }
 
     @Override
-    public void updateCards(Iterable<CardView> cards) {
-    }
+    public void updateCards(Iterable<CardView> cards) { }
 
     @Override
-    public void updateManaPool(Iterable<PlayerView> manaPoolUpdate) {
-    }
+    public void updateManaPool(Iterable<PlayerView> manaPoolUpdate) { }
 
     @Override
-    public void updateLives(Iterable<PlayerView> livesUpdate) {
-    }
+    public void updateLives(Iterable<PlayerView> livesUpdate) { }
 
     @Override
     public void afterGameEnd() {
@@ -984,7 +975,12 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         daytime = null;
     }
 
-    public void updateDependencies() {        
+    @Override
+    public void updateDependencies() {
     }
-    // End of Choice code
+
+    @Override
+    public void applyDelta(DeltaPacket packet) {
+        // No-op for local games - network implementation is in NetworkGuiGame
+    }
 }

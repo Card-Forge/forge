@@ -5,7 +5,6 @@ import forge.ai.GameState;
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.event.GameEvent;
-import org.tinylog.Logger;
 import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
@@ -14,40 +13,53 @@ import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
-import forge.gamemodes.match.AbstractGuiGame;
+import forge.gamemodes.net.NetworkGuiGame;
+import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.GameEventProxy;
 import forge.gamemodes.net.GameProtocolSender;
+import forge.gamemodes.net.IHasNetLog;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.gui.control.GameEventForwarder;
 import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
+import forge.model.FModel;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
 import forge.trackable.Tracker;
 import forge.trackable.TrackableCollection;
 import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
+import net.jpountz.lz4.LZ4BlockOutputStream;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class NetGuiGame extends AbstractGuiGame {
+public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
 
     private final GameProtocolSender sender;
-    private final int slotIndex;
+    private final DeltaSyncManager deltaSyncManager;
+    private final int clientIndex;
+    // Delta sync is ENABLED - new objects are now properly handled.
+    // New objects are sent with full property data, existing objects only send changed properties.
+    private final Object deltaLock = new Object();
+    public static boolean useDeltaSync = true;
+    private boolean initialSyncSent = false;
+    private boolean fallbackLogged = false;  // Prevent duplicate fallback log messages
     private volatile boolean paused;
     private GameEventForwarder forwarder;
     private boolean flushing;
 
-    public NetGuiGame(final IToClient client, final int slotIndex) {
+    public RemoteClientGuiGame(final RemoteClient client) {
         this.sender = new GameProtocolSender(client);
-        this.slotIndex = slotIndex;
+        this.deltaSyncManager = new DeltaSyncManager();
+        this.clientIndex = client.getIndex();
     }
 
+    /** Alias for reconnection code that references slot index. */
     public int getSlotIndex() {
-        return slotIndex;
+        return clientIndex;
     }
 
     public void pause() {
@@ -60,6 +72,17 @@ public class NetGuiGame extends AbstractGuiGame {
 
     public boolean isPaused() {
         return paused;
+    }
+
+    /**
+     * Reset delta sync state for reconnection.
+     * After a client reconnects, it has no prior delta baseline,
+     * so we must send a full state before resuming delta sync.
+     */
+    public void resetForReconnect() {
+        initialSyncSent = false;
+        fallbackLogged = false;
+        deltaSyncManager.reset();
     }
 
     public void setForwarder(GameEventForwarder forwarder) {
@@ -96,8 +119,108 @@ public class NetGuiGame extends AbstractGuiGame {
         return sender.sendAndWait(method, args);
     }
 
+    // Bandwidth tracking — both sides measured via serialize+compress for apples-to-apples comparison
+    private long totalDeltaBytes = 0;
+    private long totalFullStateBytes = 0;
+    private int deltaPacketCount = 0;
+    private boolean logBandwidth = FModel.getNetPreferences().getPrefBoolean(forge.localinstance.properties.ForgeNetPreferences.FNetPref.NET_BANDWIDTH_LOGGING);
+
+    /**
+     * Send a game view update to the client.
+     * Uses delta sync if enabled and initial sync has been sent,
+     * otherwise sends the full game state.
+     */
     public void updateGameView() {
-        send(ProtocolMethod.setGameView, getGameView());
+        updateGameView(true);
+    }
+
+    private void updateGameView(boolean flush) {
+        GameView gameView = getGameView();
+        if (gameView == null) {
+            return;
+        }
+
+        if (!useDeltaSync || !initialSyncSent) {
+            if (logBandwidth && !fallbackLogged) {
+                netLog.info("[DeltaSync] Client {}: Fallback to full state - useDeltaSync={}, initialSyncSent={}",
+                    clientIndex, useDeltaSync, initialSyncSent);
+                fallbackLogged = true;
+            }
+            if (flush) {
+                send(ProtocolMethod.setGameView, gameView, -1L);
+            } else {
+                sender.write(ProtocolMethod.setGameView, gameView, -1L);
+            }
+            return;
+        }
+
+        // Flush pending events BEFORE collecting deltas — ensures events
+        // get the dirty props bundled with them, and this standalone delta
+        // only picks up whatever changed after the flush.
+        synchronized (deltaLock) {
+            flushPendingEvents();
+            DeltaPacket delta = deltaSyncManager.collectDeltas(gameView);
+            if (!delta.isEmpty()) {
+                if (flush) {
+                    sender.send(ProtocolMethod.applyDelta, delta);
+                } else {
+                    sender.write(ProtocolMethod.applyDelta, delta);
+                }
+
+                if (logBandwidth) {
+                    int deltaSize = measureSerializedSize(delta);
+                    int fullStateSize = measureSerializedSize(gameView);
+
+                    totalDeltaBytes += deltaSize;
+                    totalFullStateBytes += fullStateSize;
+                    deltaPacketCount++;
+
+                    int savings = fullStateSize > 0 ? (int)((1.0 - (double)deltaSize / fullStateSize) * 100) : 0;
+
+                    netLog.info("[DeltaSync] Packet #{}: Delta={} bytes, FullState={} bytes, Savings={}%",
+                        deltaPacketCount, deltaSize, fullStateSize, savings);
+                    netLog.info("[DeltaSync]   Cumulative: Delta={}, FullState={}, Savings={}%",
+                        totalDeltaBytes, totalFullStateBytes,
+                        totalFullStateBytes > 0 ? (int)((1.0 - (double)totalDeltaBytes / totalFullStateBytes) * 100) : 0);
+                }
+            }
+        }
+    }
+
+    /**
+     * Measure the serialized+compressed size of an object.
+     * Uses ObjectOutputStream + LZ4 — same pipeline as the network encoder —
+     * so delta and full-state measurements are directly comparable.
+     */
+    private int measureSerializedSize(Object obj) {
+        try {
+            java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
+            LZ4BlockOutputStream lz4Out = new LZ4BlockOutputStream(baos);
+            java.io.ObjectOutputStream oos = new java.io.ObjectOutputStream(lz4Out);
+            oos.writeObject(obj);
+            oos.close();
+            return baos.size();
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    /**
+     * Send the full game state to the client.
+     * Used for initial connection and reconnection.
+     */
+    public void sendFullState() {
+        GameView gameView = getGameView();
+        if (gameView == null) {
+            return;
+        }
+
+        long seq = deltaSyncManager.getCurrentSequence();
+        send(ProtocolMethod.setGameView, gameView, seq);
+        initialSyncSent = true;
+
+        // Register consumer on all objects — per-consumer dirty tracking starts here
+        deltaSyncManager.markObjectsAsSent(gameView);
     }
 
     @Override
@@ -110,6 +233,8 @@ public class NetGuiGame extends AbstractGuiGame {
     public void openView(final TrackableCollection<PlayerView> myPlayers) {
         send(ProtocolMethod.openView, myPlayers);
         updateGameView();
+        // Initialize delta sync by sending the initial full state
+        sendFullState();
     }
 
     @Override
@@ -119,6 +244,7 @@ public class NetGuiGame extends AbstractGuiGame {
 
     @Override
     public void showCombat() {
+        updateGameView();
         send(ProtocolMethod.showCombat);
     }
 
@@ -233,43 +359,51 @@ public class NetGuiGame extends AbstractGuiGame {
 
     @Override
     public int showOptionDialog(final String message, final String title, final FSkinProp icon, final List<String> options, final int defaultOption) {
+        updateGameView(); // Ensure game state is synced before asking for input
         final Integer result = sendAndWait(ProtocolMethod.showOptionDialog, message, title, icon, options, defaultOption);
         return result != null ? result : defaultOption;
     }
 
     @Override
     public String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput, final List<String> inputOptions, final boolean isNumeric) {
+        updateGameView(); // Ensure game state is synced before asking for input
         return sendAndWait(ProtocolMethod.showInputDialog, message, title, icon, initialInput, inputOptions, isNumeric);
     }
 
     @Override
     public boolean confirm(final CardView c, final String question, final boolean defaultIsYes, final List<String> options) {
+        updateGameView(); // Ensure game state is synced before asking for input
         final Boolean result = sendAndWait(ProtocolMethod.confirm, c, question, defaultIsYes, options);
         return result != null ? result : defaultIsYes;
     }
 
     @Override
     public <T> List<T> getChoices(final String message, final int min, final int max, final List<T> choices, final List<T> selected, final FSerializableFunction<T, String> display) {
+        updateGameView(); // Ensure game state is synced before asking for input
         return sendAndWait(ProtocolMethod.getChoices, message, min, max, choices, selected, display);
     }
 
     @Override
     public <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax, final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode) {
+        updateGameView(); // Ensure game state is synced before asking for input
         return sendAndWait(ProtocolMethod.order, title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode);
     }
 
     @Override
     public List<PaperCard> sideboard(final CardPool sideboard, final CardPool main, final String message) {
+        updateGameView(); // Ensure game state is synced before asking for input
         return sendAndWait(ProtocolMethod.sideboard, sideboard, main, message);
     }
 
     @Override
     public GameEntityView chooseSingleEntityForEffect(final String title, final List<? extends GameEntityView> optionList, final DelayedReveal delayedReveal, final boolean isOptional) {
+        updateGameView(); // Ensure game state is synced before asking for input
         return sendAndWait(ProtocolMethod.chooseSingleEntityForEffect, title, optionList, delayedReveal, isOptional);
     }
 
     @Override
     public List<GameEntityView> chooseEntitiesForEffect(final String title, final List<? extends GameEntityView> optionList, final int min, final int max, final DelayedReveal delayedReveal) {
+        updateGameView(); // Ensure game state is synced before asking for input
         return sendAndWait(ProtocolMethod.chooseEntitiesForEffect, title, optionList, min, max, delayedReveal);
     }
 
@@ -331,12 +465,48 @@ public class NetGuiGame extends AbstractGuiGame {
     @Override
     public void handleGameEvents(List<GameEvent> events) {
         if (paused) { return; }
-        Logger.info("Sending batch of {}: [{}]", () -> events.size(),
-                () -> events.stream().map(e -> e.getClass().getSimpleName()).collect(Collectors.joining(", ")));
+        netLog.info("Sending batch of {}: [{}]", events.size(),
+                events.stream().map(e -> e.getClass().getSimpleName()).collect(Collectors.joining(", ")));
         Tracker tracker = getGameView() != null ? getGameView().getTracker() : null;
         List<Object> proxied = GameEventProxy.wrapAll(events, tracker);
-        sender.write(ProtocolMethod.setGameView, getGameView());
-        sender.send(ProtocolMethod.handleGameEvents, proxied);
+        if (useDeltaSync && initialSyncSent) {
+            // Bundle events with delta so they're applied atomically:
+            // delta properties first, then events forwarded.
+            GameView gameView = getGameView();
+            if (gameView != null) {
+                synchronized (deltaLock) {
+                    DeltaPacket delta = deltaSyncManager.collectDeltas(gameView, false);
+                    delta.setProxiedEvents(proxied);
+                    sender.send(ProtocolMethod.applyDelta, delta);
+
+                    if (logBandwidth) {
+                        int deltaSize = measureSerializedSize(delta);
+                        int eventsSize = measureSerializedSize(proxied);
+                        int stateOnlyFullSize = measureSerializedSize(gameView);
+                        // Baseline: gameView + events sent separately (legacy protocol)
+                        int fullStateSize = stateOnlyFullSize + eventsSize;
+                        // State-only delta: strip events from delta to isolate state sync efficiency
+                        DeltaPacket stateOnly = delta.withoutEvents();
+                        int stateOnlyDeltaSize = measureSerializedSize(stateOnly);
+
+                        totalDeltaBytes += deltaSize;
+                        totalFullStateBytes += fullStateSize;
+                        deltaPacketCount++;
+
+                        int savings = fullStateSize > 0 ? (int)((1.0 - (double)deltaSize / fullStateSize) * 100) : 0;
+
+                        netLog.info("[DeltaSync] Packet #{}: Delta={} bytes, FullState={} bytes, Savings={}%, StateOnlyDelta={} bytes, StateOnlyFull={} bytes",
+                            deltaPacketCount, deltaSize, fullStateSize, savings, stateOnlyDeltaSize, stateOnlyFullSize);
+                        netLog.info("[DeltaSync]   Cumulative: Delta={}, FullState={}, Savings={}%",
+                            totalDeltaBytes, totalFullStateBytes,
+                            totalFullStateBytes > 0 ? (int)((1.0 - (double)totalDeltaBytes / totalFullStateBytes) * 100) : 0);
+                    }
+                }
+            }
+        } else {
+            updateGameView(false);
+            sender.send(ProtocolMethod.applyDelta, DeltaPacket.eventsOnly(proxied));
+        }
     }
 
     @Override
@@ -345,6 +515,14 @@ public class NetGuiGame extends AbstractGuiGame {
     @Override
     protected void updateCurrentPlayer(final PlayerView player) {
         // TODO Auto-generated method stub
+    }
+
+    @Override
+    public String toString() {
+        GameView gv = getGameView();
+        return String.format("RemoteClientGuiGame[client=%d, deltaSyncEnabled=%b, initialSyncSent=%b, gameView=%s]",
+                clientIndex, useDeltaSync, initialSyncSent,
+                gv != null ? "GameView@" + Integer.toHexString(System.identityHashCode(gv)) : "null");
     }
 
 }

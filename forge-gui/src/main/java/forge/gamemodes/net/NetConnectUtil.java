@@ -24,8 +24,6 @@ import forge.util.Localizer;
 import forge.util.URLValidator;
 import org.apache.commons.lang3.StringUtils;
 
-import static forge.util.URLValidator.parseURL;
-
 public class NetConnectUtil {
     private NetConnectUtil() { }
 
@@ -84,8 +82,7 @@ public class NetConnectUtil {
         chatInterface.setGameClient(new IRemote() {
             @Override
             public void send(final NetEvent event) {
-                if (event instanceof MessageEvent) {
-                    final MessageEvent message = (MessageEvent) event;
+                if (event instanceof MessageEvent message) {
                     if (server.handleCommand(message.getMessage())) {
                         return;
                     }
@@ -130,7 +127,7 @@ public class NetConnectUtil {
         String hostname;
         int port;
 
-        URLValidator.HostPort hostPort = parseURL(url);
+        URLValidator.HostPort hostPort = URLValidator.parseURL(url);
         if (hostPort == null) {
             return new ChatMessage(null, ForgeConstants.INVALID_HOST_COMMAND);
         }
@@ -166,8 +163,6 @@ public class NetConnectUtil {
             }
         });
         view.setPlayerChangeListener((index, event) -> client.send(event));
-
-
 
         try {
             client.connect();

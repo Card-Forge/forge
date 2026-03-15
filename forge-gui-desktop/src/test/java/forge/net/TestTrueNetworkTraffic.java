@@ -2,6 +2,10 @@ package forge.net;
 
 import forge.deck.Deck;
 import forge.game.Game;
+import forge.game.GameView;
+import forge.game.card.CardView;
+import forge.game.player.PlayerView;
+import forge.game.zone.ZoneType;
 import forge.gamemodes.match.GameLobby.GameLobbyData;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.match.LobbySlot;
@@ -10,12 +14,9 @@ import forge.gamemodes.net.client.ClientGameLobby;
 import forge.gamemodes.net.client.FGameClient;
 import forge.gamemodes.net.server.FServerManager;
 import forge.gamemodes.net.server.ServerGameLobby;
-import forge.gui.GuiBase;
 import forge.interfaces.ILobbyListener;
 import forge.interfaces.IUpdateable;
-import forge.localinstance.properties.ForgeNetPreferences;
-import forge.localinstance.properties.ForgePreferences.FPref;
-import forge.model.FModel;
+import forge.util.collect.FCollectionView;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -35,24 +36,9 @@ import org.testng.annotations.Test;
  */
 public class TestTrueNetworkTraffic {
 
-    private static boolean initialized = false;
-
     @BeforeClass
     public void setUp() {
-        if (!initialized) {
-            if (!(GuiBase.getInterface() instanceof HeadlessGuiDesktop)) {
-                GuiBase.setInterface(new HeadlessGuiDesktop());
-            }
-            FModel.initialize(null, preferences -> {
-                preferences.setPref(FPref.LOAD_CARD_SCRIPTS_LAZILY, false);
-                preferences.setPref(FPref.UI_LANGUAGE, "en-US");
-                preferences.setPref(FPref.ENFORCE_DECK_LEGALITY, false);
-                FModel.getNetPreferences().setPref(ForgeNetPreferences.FNetPref.UPnP, "NEVER");
-                return null;
-            });
-
-            initialized = true;
-        }
+        TestUtils.ensureFModelInitialized();
     }
 
     @Test(timeOut = 60000, description = "True network traffic test with remote client")
@@ -63,23 +49,23 @@ public class TestTrueNetworkTraffic {
         FGameClient client = null;
 
         try {
-            // 1. Create minimal decks
+            // Create minimal decks
             Deck deck1 = TestDeckLoader.createMinimalDeck("Mountain", 10);
             Deck deck2 = TestDeckLoader.createMinimalDeck("Forest", 10);
 
-            // 2. Allocate a free port
+            // Allocate a free port
             int port = PortAllocator.allocatePort();
             System.out.println("[TestTrueNetworkTraffic] Using port: " + port);
 
-            // 3. Start server
+            // Start server
             server.startServer(port);
             Assert.assertTrue(server.isHosting(), "Server should be hosting");
 
-            // 4. Create lobby and configure server side
+            // Create lobby and configure server side
             ServerGameLobby lobby = new ServerGameLobby();
             server.setLobby(lobby);
 
-            // Set no-op lobby listener on server
+            // No-op lobby listener
             server.setLobbyListener(new ILobbyListener() {
                 @Override public void message(String source, String message) {
                     System.out.println("[Server] " + (source != null ? source + ": " : "") + message);
@@ -89,29 +75,27 @@ public class TestTrueNetworkTraffic {
                 @Override public ClientGameLobby getLobby() { return null; }
             });
 
-            // Set no-op lobby update listener
+            // No-op lobby update listener
             lobby.setListener(new IUpdateable() {
                 @Override public void update(boolean fullUpdate) { }
                 @Override public void update(int slot, LobbySlotType type) { }
             });
 
-            // 5. Configure slot 0: AI host with Mountain deck
+            // Configure slots
             LobbySlot slot0 = lobby.getSlot(0);
             slot0.setType(LobbySlotType.AI);
             slot0.setDeck(deck1);
             slot0.setIsReady(true);
 
-            // Pre-load Forest deck on slot 1 (OPEN slot, will become REMOTE when client connects)
+            // Slot 1 stays OPEN; becomes REMOTE when client connects
             LobbySlot slot1 = lobby.getSlot(1);
             slot1.setDeck(deck2);
 
-            // 6. Connect client with HeadlessNetworkGuiGame
-            // GameClientHandler.channelActive() auto-sends a LoginEvent using the PLAYER_NAME pref.
-            // The client also needs a ClientGameLobby to handle openView in GameClientHandler.
+            // Connect client
             HeadlessNetworkGuiGame clientGui = new HeadlessNetworkGuiGame();
             client = new FGameClient("ignored", "0", clientGui, "localhost", port);
 
-            // Set up a ClientGameLobby for the client (required by GameClientHandler.beforeCall)
+            // ClientGameLobby required by GameClientHandler.beforeCall
             ClientGameLobby clientLobby = new ClientGameLobby();
             clientLobby.setListener(new IUpdateable() {
                 @Override public void update(boolean fullUpdate) { }
@@ -130,7 +114,6 @@ public class TestTrueNetworkTraffic {
                 @Override public ClientGameLobby getLobby() { return clientLobby; }
             });
 
-            // connect() triggers channelActive which auto-sends LoginEvent
             client.connect();
 
             // Wait for slot 1 to become REMOTE (client fully registered on server)
@@ -143,26 +126,26 @@ public class TestTrueNetworkTraffic {
             }
             System.out.println("[TestTrueNetworkTraffic] Client registered, slot 1 type: " + slot1.getType());
 
-            // 7. Mark slot 1 ready on server side
+            // Mark slot 1 ready
             slot1.setIsReady(true);
 
-            // 8. Start the game
+            // Start the game
             Runnable startGameRunnable = lobby.startGame();
             Assert.assertNotNull(startGameRunnable, "startGame() should return a Runnable");
             startGameRunnable.run();
 
-            // 9. Get HostedMatch and Game
+            // Get HostedMatch and Game
             HostedMatch hostedMatch = lobby.getHostedMatch();
             Assert.assertNotNull(hostedMatch, "HostedMatch should exist after startGame");
 
             Game game = hostedMatch.getGame();
             Assert.assertNotNull(game, "Game should exist after startGame");
 
-            // 10. Convert remote player to AI on server side
+            // Convert remote player to AI
             System.out.println("[TestTrueNetworkTraffic] Converting remote player (slot 1) to AI");
             server.convertToAI(1, slot1.getName());
 
-            // 11. Poll for game completion
+            // Poll for game completion
             long startTime = System.currentTimeMillis();
             long timeout = 45_000;
             while (!game.isGameOver()) {
@@ -173,18 +156,54 @@ public class TestTrueNetworkTraffic {
                 Thread.sleep(500);
             }
 
-            // 12. Server-side assertions
+            // Server-side assertions
             int turnCount = game.getPhaseHandler().getTurn();
             System.out.println("[TestTrueNetworkTraffic] Game completed in " + turnCount + " turns");
             Assert.assertTrue(turnCount > 0, "Game should have at least one turn");
 
-            // 13. Client-side assertions
+            // Client-side assertions — protocol lifecycle
             Assert.assertTrue(clientGui.isOpenViewCalled(),
                 "Client should have received openView over the wire");
             Assert.assertTrue(clientGui.getSetGameViewCount() > 0,
                 "Client should have received setGameView updates (count: " + clientGui.getSetGameViewCount() + ")");
 
-            // 14. Pipeline error assertions
+            // Client GameView state assertions
+            GameView clientGameView = clientGui.getGameView();
+            Assert.assertNotNull(clientGameView.getGameLog(),
+                "Client GameView.getGameLog() should be initialized by GameClientHandler");
+            Assert.assertEquals(clientGameView.getPlayers().size(), 2,
+                "Client GameView should have 2 players");
+
+            // Zone consistency — CardViews in zone collections must have matching Zone property
+            ZoneType[] zonesToCheck = {ZoneType.Hand, ZoneType.Battlefield, ZoneType.Graveyard, ZoneType.Library};
+            for (PlayerView pv : clientGameView.getPlayers()) {
+                for (ZoneType zone : zonesToCheck) {
+                    FCollectionView<CardView> cards = pv.getCards(zone);
+                    if (cards == null) continue;
+                    for (CardView cv : cards) {
+                        Assert.assertEquals(cv.getZone(), zone,
+                            "CardView id=" + cv.getId() + " in " + pv.getName() + "'s " + zone +
+                            " has stale zone: " + cv.getZone());
+                    }
+                }
+            }
+
+            // Card visibility — cards in public zones must be visible to all players
+            Iterable<PlayerView> allPlayers = clientGameView.getPlayers();
+            ZoneType[] publicZones = {ZoneType.Battlefield, ZoneType.Graveyard, ZoneType.Exile};
+            for (PlayerView pv : clientGameView.getPlayers()) {
+                for (ZoneType zone : publicZones) {
+                    FCollectionView<CardView> cards = pv.getCards(zone);
+                    if (cards == null) continue;
+                    for (CardView cv : cards) {
+                        Assert.assertTrue(cv.canBeShownToAny(allPlayers),
+                            "CardView id=" + cv.getId() + " in public zone " + zone +
+                            " should be visible but canBeShownToAny returned false");
+                    }
+                }
+            }
+
+            // Pipeline error assertions
             int sendErrors = server.getTotalSendErrors();
             Assert.assertEquals(sendErrors, 0,
                 "Server encountered " + sendErrors + " send error(s) during the game. " +
