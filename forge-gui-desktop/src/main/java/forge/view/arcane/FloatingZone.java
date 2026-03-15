@@ -260,11 +260,12 @@ public class FloatingZone extends FloatingCardArea {
             docked.refresh();
         }
 
-        //refresh flashback zone when graveyard, library, or exile zones updated
+        //refresh flashback zone when graveyard, library, exile, or command zones updated
         switch (zone) {
             case Graveyard:
             case Library:
             case Exile:
+            case Command:
                 refresh(player, ZoneType.Flashback);
                 break;
             default:
