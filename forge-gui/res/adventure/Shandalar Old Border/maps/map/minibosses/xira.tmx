@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="104">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="105">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx" />
  </editorsettings>
@@ -33,6 +33,27 @@
  <objectgroup id="4" name="Objects" opacity="0.9">
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="350" y="56.6638" width="16" height="17.6724">
    <properties>
+    <property name="dialog">[
+    {
+        "condition": [
+            { "checkQuestFlag": "mainQuest" },
+            { "checkCharacterFlag": "dungeonMasterQuestGiven", "not": true }
+        ],
+        "text": "You sense this creature is one of many powerful beings lurking in the hidden lairs of Shandalar. Perhaps you should track your progress in clearing them.",
+        "options": [
+            {
+                "name": "(Accept the challenge)",
+                "action": [
+                    {
+                        "issueQuest": "54",
+                        "setCharacterFlag": { "key": "dungeonMasterQuestGiven", "val": 1 }
+                    }
+                ],
+                "text": "[Quest Added: Dungeon Master]"
+            }
+        ]
+    }
+]</property>
     <property name="effect">{ "startBattleWithCard": [ "Fecundity|USG", "Taiga|LEA", "Bayou|LEA", "Hornet Cannon|STH", "The Hive|LEA", "Xira Arien|LEG" ] }</property>
     <property name="enemy" value="Xira" />
    </properties>
@@ -152,6 +173,32 @@
     <property name="speedModifier" type="float" value="30" />
     <property name="threatRange" type="int" value="20" />
     <property name="waypoints" value="" />
+   </properties>
+  </object>
+  <object id="104" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="400" y="360" width="120" height="60">
+   <properties>
+    <property name="dialog">[
+    {
+        "condition": [
+            { "checkQuestFlag": "mainQuest" },
+            { "checkCharacterFlag": "dungeonMasterQuestGiven", "not": true }
+        ],
+        "text": "You sense powerful creatures lurking in hidden lairs across Shandalar. Perhaps you should track your progress in clearing them.",
+        "options": [
+            {
+                "name": "(Accept the challenge)",
+                "action": [
+                    {
+                        "issueQuest": "54",
+                        "setCharacterFlag": { "key": "dungeonMasterQuestGiven", "val": 1 }
+                    },
+                    { "deleteMapObject": -1 }
+                ],
+                "text": "[Quest Added: Dungeon Master]"
+            }
+        ]
+    }
+]</property>
    </properties>
   </object>
  </objectgroup>

@@ -1,0 +1,58 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Defenders of the Cause
+Description=A green-white control deck from Anthologies. Establish ground stalemates while winning through aerial superiority with Serra Angel.
+Deck Type=constructed
+Set=ATH
+Image=defenders_of_the_cause.jpg
+[main]
+4 Plains|4ED|1
+4 Plains|4ED|2
+3 Plains|4ED|3
+4 Forest|4ED|1
+3 Forest|4ED|2
+3 Forest|4ED|3
+1 Brushland|ICE
+1 Drifting Meadow|USG
+1 Pendelhaven|LEG
+1 Slippery Karst|USG
+1 Armored Pegasus|TMP
+1 Benalish Knight|WTH
+1 Canopy Spider|TMP
+1 Carnivorous Plant|DRK
+1 Combat Medic|FEM
+1 Erhnam Djinn|CHR
+1 Freewind Falcon|VIS
+1 Giant Spider|4ED
+1 Gorilla Chieftain|ALL
+1 Icatian Javelineers|FEM
+1 Infantry Veteran|VIS
+1 Llanowar Elves|4ED
+1 Mirri, Cat Warrior|EXO
+1 Order of the White Shield|ICE
+1 Pegasus Charger|USG
+1 Ranger en-Vec|TMP
+1 Samite Healer|4ED
+1 Scavenger Folk|DRK
+1 Serra Angel|4ED
+1 Spectral Bears|HML
+1 White Knight|4ED
+1 Woolly Spider|ICE
+1 Youthful Knight|STH
+1 Disenchant|4ED
+1 Giant Growth|4ED
+1 Swords to Plowshares|4ED
+1 Warrior's Honor|VIS
+1 Armageddon|4ED
+1 Hurricane|4ED
+1 Overrun|TMP
+1 Pegasus Stampede|EXO
+1 Jalum Tome|CHR
+1 Serrated Arrows|HML
+1 Pacifism|TMP
+1 Sacred Mesa|MIR
+[sideboard]

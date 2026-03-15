@@ -69,7 +69,7 @@ public class HumanPlaySpellAbility {
 
             if (ability.getApi() == ApiType.Charm) {
                 if (ability.isAnnouncing("X")) {
-                    needX = ability.getPayCosts().hasXInAnyCostPart();
+                    needX = ability.costHasX();
                     // CR 601.4
                     if (!announceValuesLikeX()) {
                         game.clearTopLibsCast(ability);
@@ -78,7 +78,7 @@ public class HumanPlaySpellAbility {
                 }
                 if (!CharmEffect.makeChoices(ability)) {
                     game.clearTopLibsCast(ability);
-                    // 603.3c If no mode is chosen, the ability is removed from the stack.
+                    // CR 603.3c If no mode is chosen, the ability is removed from the stack.
                     return false;
                 }
             }

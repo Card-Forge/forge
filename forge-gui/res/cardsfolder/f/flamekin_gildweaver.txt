@@ -1,0 +1,9 @@
+Name:Flamekin Gildweaver
+ManaCost:3 R
+Types:Creature Elemental Sorcerer
+PT:4/3
+K:Trample
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBToken | TriggerDescription$ When this creature enters, create a Treasure token. (It's an artifact with "{T}, Sacrifice this tokoen: Add one mana of any color.")
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:Trample\nWhen this creature enters, create a Treasure token. (It's an artifact with "{T}, Sacrifice this tokoen: Add one mana of any color.")

@@ -1,0 +1,10 @@
+Name:Mudbutton Cursetosser
+ManaCost:B
+Types:Creature Goblin Warlock
+PT:2/1
+K:AlternateAdditionalCost:Behold<1/Goblin>:2
+S:Mode$ CantBlock | ValidCard$ Card.Self | Description$ CARDNAME can't block.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When this creature dies, destroy target creature an opponent controls with power 2 or less.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.OppCtrl+powerLE2 | TgtPrompt$ Select target creature an opponent controls with power 2 or less
+DeckHints:Type$Goblin
+Oracle:As an additional cost to cast this spell, behold a Goblin or pay {2}. (To behold a Goblin, choose a Goblin you control or reveal a Goblin card from your hand.)\nThis creature can't block.\nWhen this creature dies, destroy target creature an opponent controls with power 2 or less.

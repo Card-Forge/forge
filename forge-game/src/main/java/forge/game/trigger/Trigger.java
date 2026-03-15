@@ -40,6 +40,8 @@ import forge.util.ITranslatable;
 import forge.util.Lang;
 import forge.util.TextUtil;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.*;
 
 /**
@@ -509,8 +511,11 @@ public abstract class Trigger extends TriggerReplacementBase {
         this.id = id;
     }
 
-    public void addRemembered(Object o) {
+    public <T> void addRemembered(T o) {
         this.triggerRemembered.add(o);
+    }
+    public <T> void addRemembered(Collection<T> o) {
+        this.triggerRemembered.addAll(o);
     }
 
     @Override
@@ -653,5 +658,22 @@ public abstract class Trigger extends TriggerReplacementBase {
     }
     public boolean isLastChapter() {
         return isChapter() && getChapter() == getCardState().getFinalChapterNr();
+    }
+
+    @Override
+    public boolean isManaAbility() {
+        if (!TriggerType.TapsForMana.equals(getMode()) && !TriggerType.ManaAdded.equals(getMode())) {
+            return false;
+        }
+        return ensureAbility().isManaAbility();
+    }
+
+    public boolean looksBackInTime() {
+        return TriggerType.Exploited.equals(getMode()) ||
+                TriggerType.Destroyed.equals(getMode()) ||
+                TriggerType.Sacrificed.equals(getMode()) || TriggerType.SacrificedOnce.equals(getMode()) ||
+                ((TriggerType.ChangesZone.equals(getMode()) || TriggerType.ChangesZoneAll.equals(getMode()))
+                        && (StringUtils.contains(getParam("Origin"), "Battlefield") ||
+                        StringUtils.containsAny(getParam("Destination"), "Library", "Hand")));
     }
 }

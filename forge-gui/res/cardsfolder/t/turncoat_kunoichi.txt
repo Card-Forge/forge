@@ -1,0 +1,9 @@
+Name:Turncoat Kunoichi
+ManaCost:2 W
+Types:Creature Mutant Ninja Fox
+PT:3/2
+K:Sneak:2 W B
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTrap | TriggerDescription$ When this creature enters, choose target creature an opponent controls. Exile that creature until this creature leaves the battlefield. If this creature's sneak cost was paid, instead exile the chosen creature.
+SVar:TrigTrap:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Duration$ UntilHostLeavesPlay | ConditionDefined$ TriggeredCard | ConditionPresent$ Card.sneaked | ConditionCompare$ EQ0 | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destination$ Exile | ConditionDefined$ TriggeredCard | ConditionPresent$ Card.sneaked
+Oracle:Sneak {2}{W}{B} (You may cast this spell for {2}{W}{B} if you also return an unblocked attacker you control to hand during the declare blockers step. It enters tapped and attacking.)\nWhen this creature enters, choose target creature an opponent controls. Exile that creature until this creature leaves the battlefield. If this creature's sneak cost was paid, instead exile the chosen creature.

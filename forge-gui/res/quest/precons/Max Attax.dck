@@ -1,0 +1,41 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Max Attax
+Description=Max Attax goes all-in on massive creatures. Green-black fatties end games decisively.
+Deck Type=constructed
+Set=SCG
+Image=max_attax.jpg
+[main]
+2 Swamp|ONS|1
+2 Swamp|ONS|2
+2 Swamp|ONS|3
+5 Forest|ONS|1
+5 Forest|ONS|2
+4 Forest|ONS|3
+2 Barren Moor|ONS
+2 Temple of the False God|SCG
+2 Tranquil Thicket|ONS
+2 Elvish Aberration|SCG
+3 Fierce Empath|SCG
+1 Gluttonous Zombie|ONS
+3 Krosan Drover|SCG
+2 Kurgadon|SCG
+1 Root Elemental|SCG
+2 Spitting Gourna|ONS
+2 Symbiotic Beast|ONS
+2 Titanic Bulvox|SCG
+1 Treespring Lorian|ONS
+1 Venomspout Brackus|ONS
+2 Wirewood Guardian|SCG
+3 Accelerated Mutation|SCG
+2 Chill Haunting|SCG
+1 Smother|ONS
+2 Sprouting Vines|SCG
+1 Final Punishment|SCG
+2 Dragon Fangs|SCG
+1 Dragon Shadow|SCG
+[sideboard]

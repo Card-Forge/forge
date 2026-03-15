@@ -1,0 +1,10 @@
+Name:Deepway Navigator
+ManaCost:W U
+Types:Creature Merfolk Wizard
+PT:2/2
+K:Flash
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigUntapAll | TriggerDescription$ When CARDNAME enters, untap each other Merfolk you control.
+SVar:TrigUntapAll:DB$ UntapAll | ValidCards$ Merfolk.Other+YouCtrl
+S:Mode$ Continuous | Affected$ Creature.Merfolk+YouCtrl | AddPower$ 1 | CheckSVar$ RaidTest | SVarCompare$ GE3 | Description$ As long as you attacked with three or more Merfolk this turn, Merfolk you control get +1/+0.
+SVar:RaidTest:Count$AttackersDeclared
+Oracle:Flash\nWhen this creature enters, untap each other Merfolk you control.\nAs long as you attacked with three or more Merfolk this turn, Merfolk you control get +1/+0.

@@ -1,0 +1,8 @@
+Name:Foot Ninjas
+ManaCost:4 WB WB
+Types:Creature Human Ninja
+PT:5/5
+K:Sneak:3 WB
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ When this creature enters, you gain 3 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
+Oracle:Sneak {3}{W/B} (You may cast this spell for {3}{W/B} if you also return an unblocked attacker you control to hand during the declare blockers step. It enters tapped and attacking.)\nWhen this creature enters, you gain 3 life.

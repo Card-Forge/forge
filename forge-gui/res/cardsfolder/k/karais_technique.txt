@@ -1,0 +1,8 @@
+Name:Karai's Technique
+ManaCost:1 W B
+Types:Sorcery
+K:Sneak:W B
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBPump1,DBPump2
+SVar:DBPump1:DB$ Pump | ValidTgts$ Creature | ValidTgtsDesc$ creature to get +3/+3 | NumAtt$ +3 | NumDef$ +3 | SpellDescription$ Target creature gets +3/+3 until end of turn.
+SVar:DBPump2:DB$ Pump | ValidTgts$ Creature | ValidTgtsDesc$ creature to get -3/-3 | IsCurse$ True | NumAtt$ -3 | NumDef$ -3 | SpellDescription$ Target creature gets -3/-3 until end of turn.
+Oracle:Sneak {W}{B} (You may cast this spell for {W}{B} if you also return an unblocked attacker you control to hand during the declare blockers step.)\nChoose one or both —\n• Target creature gets +3/+3 until end of turn.\n• Target creature gets -3/-3 until end of turn.

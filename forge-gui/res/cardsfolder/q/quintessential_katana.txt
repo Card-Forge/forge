@@ -1,0 +1,11 @@
+Name:Quintessential Katana
+ManaCost:W
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | AddTrigger$ DamageTrigger | Description$ Equipped creature gets +1/+1 and has "Whenever this creature deals combat damage, untap it and you gain 2 life."
+SVar:DamageTrigger:Mode$ DamageDealtOnce | CombatDamage$ True | ValidSource$ Card.Self | Execute$ TrigUntap | TriggerDescription$ Whenever this creature deals combat damage, untap it and you gain 2 life.
+SVar:TrigUntap:DB$ Untap | Defined$ Self | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ninja.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigAttach | OptionalDecider$ You | TriggerDescription$ Whenever a Ninja you control enters, you may attach this Equipment to it.
+SVar:TrigAttach:DB$ Attach | Defined$ TriggeredCardLKICopy
+K:Equip:2
+Oracle:Equipped creature gets +1/+1 and has "Whenever this creature deals combat damage, untap it and you gain 2 life."\nWhenever a Ninja you control enters, you may attach this Equipment to it.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

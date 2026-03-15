@@ -82,15 +82,10 @@ public class CopyPermanentAi extends SpellAbilityAi {
             sa.resetTargets();
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
             sa.setTargetingPlayer(targetingPlayer);
-            if (targetingPlayer.getController().chooseTargetsFor(sa)) {
-                if (sa.isTargetNumberValid()) {
-                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                } else {
-                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
-                }
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            if (CardLists.getTargetableCards(aiPlayer.getGame().getCardsIn(sa.getTargetRestrictions().getZone()), sa).isEmpty()) {
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         } else if (sa.usesTargeting() && sa.getTargetRestrictions().canTgtPlayer()) {
                 if (!sa.isCurse()) {
                     if (sa.canTarget(aiPlayer)) {

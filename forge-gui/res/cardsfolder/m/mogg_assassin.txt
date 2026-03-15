@@ -2,9 +2,9 @@ Name:Mogg Assassin
 ManaCost:2 R
 Types:Creature Goblin Assassin
 PT:2/1
-A:AB$ Pump | Cost$ T | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | RememberObjects$ ThisTargetedCard | IsCurse$ True | SubAbility$ DBPump | StackDescription$ You choose {c:ThisTargetedCard} | SpellDescription$ You choose target creature an opponent controls, and that opponent chooses target creature. Flip a coin. If you win the flip, destroy the creature you chose. If you lose the flip, destroy the creature your opponent chose.
-SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TargetingPlayer$ ParentTargetedController | IsCurse$ True | ImprintCards$ ThisTargetedCard | SubAbility$ DBFlip | StackDescription$ That player chooses {c:ThisTargetedCard}
-SVar:DBFlip:DB$ FlipACoin | WinSubAbility$ DestroyRemembered | LoseSubAbility$ DestroyImprinted | SubAbility$ DBCleanup
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | RememberObjects$ ThisTargetedCard | IsCurse$ True | SubAbility$ DBPump | StackDescription$ {p:You} chooses {c:ThisTargetedCard}, | SpellDescription$ You choose target creature an opponent controls, and that opponent chooses target creature. Flip a coin. If you win the flip, destroy the creature you chose. If you lose the flip, destroy the creature your opponent chose.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TargetingPlayer$ ParentTargetedController | IsCurse$ True | ImprintCards$ ThisTargetedCard | SubAbility$ DBFlip | StackDescription$ and {p:ParentTargetedController} chooses {c:ThisTargetedCard}. {p:You} flips a coin. If {p:You} wins the flip, they destroy {c:ParentTarget}. If {p:You} loses the flip, they destroy {c:ThisTargetedCard}.
+SVar:DBFlip:DB$ FlipACoin | WinSubAbility$ DestroyRemembered | LoseSubAbility$ DestroyImprinted | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DestroyRemembered:DB$ Destroy | Defined$ Remembered
 SVar:DestroyImprinted:DB$ Destroy | Defined$ Imprinted
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True

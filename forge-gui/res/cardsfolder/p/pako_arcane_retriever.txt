@@ -2,7 +2,7 @@ Name:Pako, Arcane Retriever
 ManaCost:3 R G
 Types:Legendary Creature Elemental Dog
 PT:3/3
-K:Partner:Haldan, Avid Arcanist:Haldan
+K:Partner with:Haldan, Avid Arcanist:Haldan
 K:Haste
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, exile the top card of each player's library and put a fetch counter on each of them. Put a +1/+1 counter on NICKNAME for each noncreature card exiled this way.
 SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | Defined$ Player | DestinationZone$ Exile | ExileWithCounters$ FETCH | RememberChanged$ True | SubAbility$ DBPutCounter

@@ -22,6 +22,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import forge.card.*;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostShard;
 import forge.game.CardTraitBase;
 import forge.game.ForgeScript;
 import forge.game.GameObject;
@@ -29,6 +30,7 @@ import forge.game.IHasSVars;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.ApiType;
 import forge.game.card.CardView.CardStateView;
+import forge.game.keyword.IKeywordsChange;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordCollection;
 import forge.game.keyword.KeywordInterface;
@@ -39,6 +41,7 @@ import forge.game.spellability.LandAbility;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellPermanent;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityMode;
 import forge.game.trigger.Trigger;
 import forge.util.CardTranslation;
 import forge.util.ITranslatable;
@@ -48,20 +51,22 @@ import forge.util.collect.FCollectionView;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public class CardState implements GameObject, IHasSVars, ITranslatable {
     private String name = "";
     private CardType type = new CardType(false);
     private CardTypeView changedType = null;
     private ManaCost manaCost = ManaCost.NO_COST;
+    // Track mana cost after adjustments from perpetual cost-changing effects for display
+    private ManaCost perpetualAdjustedManaCost = null;
     private ColorSet color = ColorSet.C;
     private String oracleText = "";
     private String functionalVariantName = null;
@@ -104,6 +109,8 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     private SpellAbility manifestUp;
     private SpellAbility cloakUp;
 
+    private LandTraitChanges landTraitChanges = new LandTraitChanges(this);
+
     public CardState(Card card, CardStateName name) {
         this(card.getView().createAlternateState(name), card);
     }
@@ -141,7 +148,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     }
 
     public CardTypeView getTypeWithChanges() {
-        return ObjectUtils.firstNonNull(this.changedType, getType());
+        return Objects.requireNonNullElse(this.changedType, getType());
     }
 
     public void updateTypes() {
@@ -208,6 +215,64 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     public final void setManaCost(final ManaCost manaCost0) {
         manaCost = manaCost0;
         view.updateManaCost(this);
+    }
+
+    /**
+     * Calculate and save the value of the mana cost adjusted by any perpetual raise/lower cost
+     * effects for display.
+     */
+    public void calculatePerpetualAdjustedManaCost() {
+        // If the total amount reduced is more than the generic mana cost,
+        // keep track of the extra in case it could be applied to an X cost
+        if (getCard() == null || getCard().getGame() == null
+                || (manaCost.getGenericCost() == 0 && manaCost.getShardCount(ManaCostShard.X) == 0)) {
+            return;
+        }
+
+        int genericCostAdjustment = 0;
+        for (final StaticAbility stAb : getStaticAbilities()) {
+            // Only collect perpetual cost changes to this card (not cost changes that this card applies to other cards)
+            if ("Card.Self".equals(stAb.getParam("ValidCard"))) {
+                int reduceOrRaise = 0;
+                if (stAb.checkMode(StaticAbilityMode.ReduceCost)) {
+                    reduceOrRaise = 1;
+                } else if (stAb.checkMode(StaticAbilityMode.RaiseCost)) {
+                    reduceOrRaise = -1;
+                }
+                if (reduceOrRaise != 0) {
+                    try {
+                        genericCostAdjustment += Integer.parseInt(stAb.getParamOrDefault("Amount", "1")) * reduceOrRaise;
+                    } catch (NumberFormatException e) {
+                        // We only care about adjustments with a specific numeric value
+                    }
+                }
+            }
+        }
+
+        if (genericCostAdjustment == 0) {
+            return;
+        }
+
+        // This doesn't work on hybrid generic costs
+        int newGeneric = manaCost.getGenericCost() - genericCostAdjustment;
+        // Apply negative cost adjustments to cards with an X cost only.
+        // While this could be done for regular cards as well (to potentially offset other cost-increasing effects)
+        // it would rarely matter and would require changing the "no_cost" flag in ManaCost from -1
+        // otherwise a -1 generic adjustment will get interpreted as "no_cost"
+        if (manaCost.getShardCount(ManaCostShard.X) == 0) {
+            newGeneric = Math.max(0, newGeneric);
+        }
+
+        // Replace the original generic mana cost with the adjusted value
+        perpetualAdjustedManaCost = new ManaCost(
+                (newGeneric != 0 ? newGeneric + " " : "") +
+                        manaCost.getShortString().replace("" + manaCost.getGenericCost(), "")
+        );
+        view.updateManaCost(this);
+    }
+
+    public ManaCost getPerpetualAdjustedManaCost() {
+        return perpetualAdjustedManaCost == null ? getManaCost() : perpetualAdjustedManaCost;
     }
 
     public final ColorSet getColor() {
@@ -396,59 +461,41 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
 
     public final FCollectionView<SpellAbility> getSpellAbilities() {
         FCollection<SpellAbility> newCol = new FCollection<>();
-        updateSpellAbilities(newCol, null);
+        updateSpellAbilities(newCol);
         newCol.addAll(abilities);
-        card.updateSpellAbilities(newCol, this, null);
+        card.updateSpellAbilities(newCol, this);
         return newCol;
     }
     public final FCollectionView<SpellAbility> getManaAbilities() {
         FCollection<SpellAbility> newCol = new FCollection<>();
-        updateSpellAbilities(newCol, true);
-        // stream().toList() causes crash on Android 8-13, use Collectors.toList()
-        newCol.addAll(abilities.stream().filter(SpellAbility::isManaAbility).collect(Collectors.toList()));
-        card.updateSpellAbilities(newCol, this, true);
+        updateSpellAbilities(newCol);
+        newCol.addAll(abilities);
+        card.updateSpellAbilities(newCol, this);
+        newCol.removeIf(Predicate.not(SpellAbility::isManaAbility));
         return newCol;
     }
     public final FCollectionView<SpellAbility> getNonManaAbilities() {
         FCollection<SpellAbility> newCol = new FCollection<>();
-        updateSpellAbilities(newCol, false);
-        // stream().toList() causes crash on Android 8-13, use Collectors.toList()
-        newCol.addAll(abilities.stream().filter(Predicate.not(SpellAbility::isManaAbility)).collect(Collectors.toList()));
-        card.updateSpellAbilities(newCol, this, false);
+        updateSpellAbilities(newCol);
+        newCol.addAll(abilities);
+        card.updateSpellAbilities(newCol, this);
+        newCol.removeIf(SpellAbility::isManaAbility);
         return newCol;
     }
 
-    protected final void updateSpellAbilities(FCollection<SpellAbility> newCol, Boolean mana) {
+    protected final void updateSpellAbilities(FCollection<SpellAbility> newCol) {
         // add Split to Original
         if (getStateName().equals(CardStateName.Original)) {
             if (getCard().hasState(CardStateName.LeftSplit)) {
                 CardState leftState = getCard().getState(CardStateName.LeftSplit);
-                Collection<SpellAbility> leftAbilities = leftState.abilities;
-                if (null != mana) {
-                    leftAbilities = leftAbilities.stream()
-                            .filter(mana ? SpellAbility::isManaAbility : Predicate.not(SpellAbility::isManaAbility))
-                            // stream().toList() causes crash on Android 8-13, use Collectors.toList()
-                            .collect(Collectors.toList());
-                }
-                newCol.addAll(leftAbilities);
-                leftState.updateSpellAbilities(newCol, mana);
+                newCol.addAll(leftState.abilities);
+                leftState.updateSpellAbilities(newCol);
             }
             if (getCard().hasState(CardStateName.RightSplit)) {
                 CardState rightState = getCard().getState(CardStateName.RightSplit);
-                Collection<SpellAbility> rightAbilities = rightState.abilities;
-                if (null != mana) {
-                    rightAbilities = rightAbilities.stream()
-                            .filter(mana ? SpellAbility::isManaAbility : Predicate.not(SpellAbility::isManaAbility))
-                            // stream().toList() causes crash on Android 8-13, use Collectors.toList()
-                            .collect(Collectors.toList());
-                }
-                newCol.addAll(rightAbilities);
-                rightState.updateSpellAbilities(newCol, mana);
+                newCol.addAll(rightState.abilities);
+                rightState.updateSpellAbilities(newCol);
             }
-        }
-
-        if (null != mana && true == mana) {
-            return;
         }
 
         // SpellPermanent only for Original State
@@ -495,6 +542,64 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             }
             newCol.add(permanentAbility);
         }
+    }
+
+    public LandTraitChanges getLandTraitChanges() { return this.landTraitChanges; }
+
+    record LandTraitChanges(CardState state, Map<MagicColor.Color, SpellAbility> map) implements ICardTraitChanges, IKeywordsChange
+    {
+        LandTraitChanges(CardState state) {
+            this(state, Maps.newEnumMap(MagicColor.Color.class));
+        }
+
+        public List<SpellAbility> applySpellAbility(List<SpellAbility> list) {
+            if (state.getCard().hasRemoveIntrinsic()) {
+                list.clear();
+            }
+            CardTypeView type = state.getTypeWithChanges();
+            if (!type.isLand()) {
+                return list;
+            }
+            for (MagicColor.Color c : MagicColor.Color.values()) {
+               if (c.getBasicLandType() == null) {
+                   continue;
+               }
+               if (type.hasSubtype(c.getBasicLandType())) {
+                   list.add(map.computeIfAbsent(c, a -> {
+                       String abString  = "AB$ Mana | Cost$ T | Produced$ " + a.getShortName() +
+                               " | Secondary$ True | SpellDescription$ Add " + a.getSymbol() + ".";
+                       SpellAbility sa = AbilityFactory.getAbility(abString, state);
+                       sa.setIntrinsic(true); // always intrinsic
+                       return sa;
+                   }));
+               }
+            }
+            return list;
+        }
+        public List<Trigger> applyTrigger(List<Trigger> list) {
+            if (state.getCard().hasRemoveIntrinsic()) {
+                list.clear();
+            }
+            return list;
+        }
+        public List<ReplacementEffect> applyReplacementEffect(List<ReplacementEffect> list) {
+            if (state.getCard().hasRemoveIntrinsic()) {
+                list.clear();
+            }
+            return list;
+        }
+        public List<StaticAbility> applyStaticAbility(List<StaticAbility> list) {
+            if (state.getCard().hasRemoveIntrinsic()) {
+                list.clear();
+            }
+            return list;
+        }
+        public void applyKeywords(KeywordCollection list) {
+            if (state.getCard().hasRemoveIntrinsic()) {
+                list.clear();
+            }
+        }
+        public LandTraitChanges copy(Card host, boolean lki) { return this; }
     }
 
     public final Iterable<SpellAbility> getIntrinsicSpellAbilities() {

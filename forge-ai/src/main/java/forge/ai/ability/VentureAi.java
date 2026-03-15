@@ -21,22 +21,18 @@ import java.util.Map;
 public class VentureAi extends SpellAbilityAi {
     @Override
     protected AiAbilityDecision canPlay(Player aiPlayer, SpellAbility sa) {
-        // If this has a mana cost, do it at opponent's EOT if able to prevent spending mana early; if sorcery, do it in Main2
+        // do it at opponent's EOT if able to prevent spending mana early
         PhaseHandler ph = aiPlayer.getGame().getPhaseHandler();
         if (sa.getPayCosts().hasManaCost() || sa.getPayCosts().hasTapCost()) {
             if (isSorcerySpeed(sa, aiPlayer)) {
                 if (ph.is(PhaseType.MAIN2, aiPlayer)) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                } else {
-                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
-            } else {
-                if (ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == aiPlayer) {
-                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                } else {
-                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-                }
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            } else if (ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn() == aiPlayer) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }

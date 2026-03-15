@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="108">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="respawnEnemies" type="bool" value="true"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/FarmFood.tsx"/>
+ <layer id="1" name="Background" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt2LEJACEQRUFTsyvhqrZeuRrc049MMJksDxUER29tAAAAXOx9subATt+9rXKqP2mOfv369etfn7fz3Tn1zqXuv379Kf1Va/Tr169f///9lf8K1RLPKJn++/snqiFdMg==
+  </data>
+ </layer>
+ <layer id="6" name="Floor" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJztmNENwjAMRMMEyQYVoouWCrYCdmGS9qfiB4FNzkkl3pP8Z51PVRKfmhIAAAAAAAAAvGPKKZ2FNee2/oei1TuK9b6x+b+s3+1efq9r7uu/dq5Kp9dc/Pedu2f/z8OranQisPpX6Hiw7qVRfH5ORbPnvHtJ5V8179Z473j34EN0zv7h/WmpEzF3Mty5PftX9USAf3tPBPi390SAf3uPB29++5S7VD2R+a01qvzmyXi1/ygi8puFXndTBf5tLNHggM4=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt2LEJgDAARNFY2jmAiOu4q1M5iQTs7HPGvAep86uDpBQAgO84l3QBQH/WZzs3GwpAJ67pfWjvmNMFMK70/0f6fhjVH97ve8ftlf4s/Tl1f2q//clp0X8DE6sJhA==
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="48" height="48">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztmEsOwyAMROmyi5TkLrlET9PfsdJcqiepUIOUUowHwqdSjDSrIPxEsD0wnpQaRSKRSCQSiQpq6JV6gjIDndv3dfj1wpV7dMK/C/6HVuoK6KY/XBdw/l3Xz2XkP9Xa173wo/VzXvgnqZ/CL/zF+bm8tPlVmh+pD75c57i6SvzI+r5/lcqP9leqP+fifyxrUjy2v7vrp55bah3Kn6zZKK9h1uR4qLhoX6PyCIlLzbGxTc/k+uVMxF3zvA6/4s4JEnfq/fm7JSdD/Ocjzp8SszR/zP7vmT/2TlKKv/RdxxczJ/8WD+Grf2Zw3iH2PCD8gxMfuSeE4iMxc/IjLML//c2tAdT7A+VDWvNT68XE28If8m+hPaP6Pnd/d33Ims1Xzy1bqHZy/q2U9+f2lmND/Ztvz3IOLnYJ/9Zi5PQ/LUaq/0m5H6beL1u/9f7r+6fw59UbP7kMEQ==
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt17EJgEAMBdA4gYvcXOoUKo7qJF4ngp2IhnsPfpGQIlUgEQAAAG2b+4ilZu2/3uRde3cmo+z7AwAA8EzW/30qEVu59sZaD+V+HvifrPeHthzezwy4
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="60" template="../../../../common/maps/obj/entry_up.tx" x="357" y="768" width="38" height="16">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/magetower/Mirror_Gallery_1.tmx"/>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/enemy.tx" x="367.333" y="522">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [&quot;Magnetic Mountain|4ED&quot;, &quot;Eyes of the Wisent|LRW&quot;, &quot;Command Tower&quot;, &quot;Exotic Orchard&quot;, &quot;Dune-Brood Nephilim&quot;, &quot;Conqueror's Flail&quot; ] }"/>
+    <property name="enemy" value="Saskia"/>
+    <property name="pursueRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="95" template="../../../../common/maps/obj/enemy.tx" x="312" y="565.333">
+   <properties>
+    <property name="effect">{
+&quot;startBattleWithCard&quot;: [&quot;Altar of the Goyf|MH2&quot;, &quot;Urborg Lhurgoyf|DMU&quot;, &quot;Savage Lands|CMM&quot;, &quot;Trailblazer's Boots|ZEN&quot;, &quot;Seal of Primordium|MM3&quot;
+]}</property>
+    <property name="enemy" value="Disa"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="96" template="../../../../common/maps/obj/enemy.tx" x="315.333" y="485.333">
+   <properties>
+    <property name="effect">{
+&quot;startBattleWithCard&quot;: [&quot;Jungle Shrine&quot;, &quot;Waystone's Guidance|YTDM&quot;, &quot;Roar of Resistance&quot;, &quot;Bioengineered Future&quot;, &quot;Team Pennant&quot;
+]}</property>
+    <property name="enemy" value="Gahiji"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="97" template="../../../../common/maps/obj/enemy.tx" x="367.333" y="470">
+   <properties>
+    <property name="effect">{
+&quot;startBattleWithCard&quot;: [&quot;Sunlit Marsh&quot;, &quot;Wooded Ridgeline&quot;, &quot;Cindervines&quot;, &quot;Hidden Stockpile&quot;
+]}</property>
+    <property name="enemy" value="Tymna and Tana"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="98" template="../../../../common/maps/obj/enemy.tx" x="416" y="485.333">
+   <properties>
+    <property name="effect">{
+&quot;startBattleWithCard&quot;: [&quot;Sandsteppe Citadel&quot;, &quot;Priest of Fell Rites&quot;, &quot;Hunting Grounds&quot;, &quot;Insidious Roots&quot;
+]}</property>
+    <property name="enemy" value="Karador"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="99" template="../../../../common/maps/obj/enemy.tx" x="415.333" y="569.333">
+   <properties>
+    <property name="effect">{ 
+&quot;startBattleWithCard&quot;: [&quot;Ancestral Katana|NEO&quot;, &quot;Nomad Outpost|CMM&quot;, &quot;Experimental Synthesizer|NEO&quot;, &quot;Peerless Samurai|NEO&quot;, &quot;Waystone's Guidance|YTDM&quot;
+]}</property>
+    <property name="enemy" value="Isshin"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="100" template="../../../../common/maps/obj/enemy.tx" x="129.333" y="412.667">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Mox Sapphire&quot;, &quot;Sapphire Medallion&quot;, &quot;Sapphire Collector&quot;, &quot;Thought Reflection|2XM&quot;, &quot;Mind's Dilation|EMN&quot;]
+}</property>
+    <property name="enemy" value="Hakim"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="101" template="../../../../common/maps/obj/enemy.tx" x="126.667" y="596">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Tome of the Infinite&quot;, &quot;Wizard Class|BLC&quot;, &quot;Zuran Spellcaster|ICE&quot;, &quot;Reliquary Tower|M13&quot;, &quot;Karmic Justice|ODY&quot;, &quot;Phyrexian Arena|APC&quot;, &quot;Propaganda|TMP&quot;, &quot;Zuran Orb|ICE&quot; ]}"/>
+    <property name="enemy" value="Zur"/>
+   </properties>
+  </object>
+  <object id="102" template="../../../../common/maps/obj/enemy.tx" x="607.333" y="412">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Urza's Armor|8ED&quot;, &quot;Urza's Saga&quot;, &quot;Urza's Workshop|BRC&quot;, &quot;Urza's Bauble|ICE&quot;, &quot;Liberator, Urza's Battlethopter|BRO&quot;, &quot;Urza's Tome|DOM&quot;, &quot;Urza's Avenger|5ED&quot;  ] }"/>
+    <property name="enemy" value="Urza"/>
+   </properties>
+  </object>
+  <object id="103" template="../../../../common/maps/obj/enemy.tx" x="298" y="227.333">
+   <properties>
+    <property name="effect">{ 
+&quot;lifeModifier&quot;: 20, 
+&quot;startBattleWithCard&quot;: [ &quot;Teferi's Ageless Insight&quot;, &quot;Teferi's Honor Guard&quot;, &quot;Teferi's Drake|MIR&quot;, &quot;Teferi's Isle&quot;, &quot;Zhalfirin Void&quot;, &quot;Teferi's Sentinel|DOM&quot;, &quot;Oath of Teferi|DOM&quot; ] }</property>
+    <property name="enemy" value="Teferi"/>
+   </properties>
+  </object>
+  <object id="104" template="../../../../common/maps/obj/enemy.tx" x="514.667" y="224.667">
+   <properties>
+    <property name="effect">{ 
+&quot;lifeModifier&quot;: 20, 
+&quot;startBattleWithCard&quot;: [ &quot;Forest|KHM&quot;, &quot;Island|KHM&quot;, &quot;Ominous seas|IKO&quot;, &quot;Quest for Ula's Temple&quot;, &quot;komas_coil&quot;, &quot;komas_coil&quot;,  &quot;komas_coil&quot; ]
+}</property>
+    <property name="enemy" value="Koma"/>
+    <property name="hidden" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="105" template="../../../../common/maps/obj/enemy.tx" x="424" y="223.333">
+   <properties>
+    <property name="effect">{ 
+&quot;lifeModifier&quot;: 20, 
+&quot;startBattleWithCard&quot;: [ &quot;Inkmoth Nexus&quot;, &quot;Spellskite&quot;, &quot;The surgical bay|ONE&quot;, &quot;Viral Drake&quot;, &quot;Shrine of Piercing Vision|NPH&quot;, &quot;Surgical Skullbomb|ONE&quot;, &quot;Atmosphere Surgeon|ONE&quot;, &quot;Inexorable Tide|SOM&quot; ] }</property>
+    <property name="enemy" value="Jin-Gitaxias"/>
+    <property name="threatRange" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="106" template="../../../../common/maps/obj/enemy.tx" x="607.333" y="605.333" width="16" height="16">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Kiora's Follower|PBNG&quot;, &quot;Bident of Thassa&quot;, &quot;Quest for Ula's Temple|WWK&quot;, &quot;Temple of the False God|C17&quot;, &quot;Reservoir Kraken&quot;, &quot;Reef Worm|MH3&quot;, &quot;Ominous Seas|IKO&quot;
+ ]}</property>
+    <property name="enemy" value="Kiora"/>
+   </properties>
+  </object>
+  <object id="107" template="../../../../common/maps/obj/enemy.tx" x="223.333" y="224">
+   <properties>
+    <property name="effect">{
+&quot;lifeModifier&quot;: 20, 
+&quot;startBattleWithCard&quot;: [&quot;Thassa's Emissary&quot;, &quot;Altar of the Pantheron&quot;, &quot;Ever-Watching Threshold&quot;, &quot;Callaphe, beloved of the sea&quot;, &quot;Thassa's Ire|JOU&quot;, &quot;Thassa's Devourer|JOU&quot;, &quot;Traveler's Amulet|ths&quot;, &quot;Font of Fortunes|JOU&quot;
+]}</property>
+    <property name="enemy" value="Thassa"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

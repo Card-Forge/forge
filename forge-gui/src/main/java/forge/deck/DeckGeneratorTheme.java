@@ -142,14 +142,8 @@ public class DeckGeneratorTheme extends DeckGeneratorBase {
                     }
                 }
 
-                final int n = cardCounts.get(ss[0]);
-                if (ss.length == 1) {
-                	tDeck.add(pool.getCard(ss[0]));
-                }
-                else {
-                	tDeck.add(pool.getCard(ss[0],ss[1]));
-                }
-                cardCounts.put(ss[0], n + 1);
+                tDeck.add(ss.length == 1 ? pool.getCard(ss[0]) : pool.getCard(ss[0],ss[1]));
+                cardCounts.merge(ss[0], 1, Integer::sum);
                 errorBuilder.append(s).append("\n");
             }
         }

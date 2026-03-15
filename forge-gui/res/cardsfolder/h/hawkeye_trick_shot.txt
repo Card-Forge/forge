@@ -1,0 +1,11 @@
+Name:Hawkeye, Trick Shot
+ManaCost:3 R
+Types:Legendary Creature Human Archer Hero
+PT:3/4
+K:First Strike
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Hero.Other+YouCtrl | Execute$ TrigDamage | TriggerDescription$ Whenever NICKNAME or another Hero you control enters, it deals damage equal to the number of Heroes you control to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X | DamageSource$ TriggeredCard
+SVar:X:Count$Valid Hero.YouCtrl
+DeckHints:Type$Hero
+Oracle:First strike, reach\nWhenever Hawkeye or another Hero you control enters, it deals damage equal to the number of Heroes you control to any target.

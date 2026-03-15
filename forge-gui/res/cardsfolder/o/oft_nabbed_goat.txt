@@ -1,0 +1,12 @@
+Name:Oft-Nabbed Goat
+ManaCost:1 B
+Types:Creature Goat
+PT:0/5
+A:AB$ Draw | Cost$ 1 | Activator$ Player.Opponent | NumCards$ 1 | SorcerySpeed$ True | SubAbility$ TrigSteal | SpellDescription$ Draw a card. Gain control of this creature and put a -1/-1 counter on it. Only your opponents may activate this ability and only as a sorcery.
+SVar:TrigSteal:DB$ GainControl | Defined$ Self | SubAbility$ TrigCounter
+SVar:TrigCounter:DB$ PutCounter | CounterType$ M1M1 | CounterNum$ 1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+counters_GE1_M1M1 | TriggerZone$ Battlefield | Execute$ TrigDeath | TriggerDescription$ When this creature dies, if it had one or more -1/-1 counters on it, its owner draws that many cards and each other player loses that much life.
+SVar:TrigDeath:DB$ Draw | Defined$ TriggeredCardOwner | NumCards$ X | SubAbility$ TrigDrain
+SVar:TrigDrain:DB$ LoseLife | Defined$ NonTriggeredCardOwner | LifeAmount$ X
+SVar:X:TriggeredCard$CardCounters.M1M1
+Oracle:{1}: Draw a card. Gain control of this creature and put a -1/-1 counter on it. Activate only as a sorcery and only your opponents may activate this ability.\nWhen this creature dies, if it had one or more -1/-1 counters on it, its owner draws X cards and each other player loses X life, where X is the number of -1/-1 counters on it.

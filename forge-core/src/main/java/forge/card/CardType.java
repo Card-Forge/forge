@@ -23,7 +23,6 @@ import forge.util.ITranslatable;
 import forge.util.Localizer;
 import forge.util.Settable;
 import org.apache.commons.lang3.EnumUtils;
-import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -312,7 +311,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
 
     @Override
     public Set<String> getCreatureTypes() {
-        final Set<String> creatureTypes = Sets.newHashSet();
+        final Set<String> creatureTypes = Sets.newLinkedHashSet();
         if (!isCreature() && !isKindred()) {
             return creatureTypes;
         }
@@ -327,7 +326,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
 
     @Override
     public Set<String> getLandTypes() {
-        final Set<String> landTypes = Sets.newHashSet();
+        final Set<String> landTypes = Sets.newLinkedHashSet();
         if (isLand()) {
             for (final String t : subtypes) {
                 if (isALandType(t)) {
@@ -675,35 +674,6 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         }
 
         subtypes.removeIf(allowedTypes.negate());
-    }
-
-    @Override
-    public Iterator<String> iterator() {
-        final Iterator<CoreType> coreTypeIterator = coreTypes.iterator();
-        final Iterator<Supertype> supertypeIterator = supertypes.iterator();
-        final Iterator<String> subtypeIterator = subtypes.iterator();
-        return new Iterator<String>() {
-            @Override
-            public boolean hasNext() {
-                return coreTypeIterator.hasNext() || supertypeIterator.hasNext() || subtypeIterator.hasNext();
-            }
-
-            @Override
-            public String next() {
-                if (coreTypeIterator.hasNext()) {
-                    return coreTypeIterator.next().name();
-                }
-                if (supertypeIterator.hasNext()) {
-                    return supertypeIterator.next().name();
-                }
-                return subtypeIterator.next();
-            }
-
-            @Override
-            public void remove() {
-                throw new NotImplementedException("Removing this way not supported");
-            }
-        };
     }
 
     @Override

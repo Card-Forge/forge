@@ -1,0 +1,48 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Enchanter
+Description=The Enchanter deck weaves powerful auras onto creatures. Transform humble beings into unstoppable forces.
+Deck Type=constructed
+Set=UDS
+Image=enchanter.jpg
+[main]
+5 Island|USG|1
+4 Island|USG|2
+4 Island|USG|3
+3 Plains|USG|1
+2 Plains|USG|2
+2 Plains|USG|3
+2 Drifting Meadow|USG
+2 Remote Isle|USG
+3 Fledgling Osprey|UDS
+1 Horseshoe Crab|USG
+3 Metathran Elite|UDS
+1 Monk Realist|USG
+1 Mother of Runes|ULG
+1 Rayne, Academy Chancellor|UDS
+2 Thieving Magpie|UDS
+1 Thran Golem|UDS
+2 Thornwind Faeries|ULG
+2 Tormented Angel|UDS
+1 Vigilant Drake|ULG
+1 Wall of Glare|UDS
+1 Disenchant|TMP
+1 Humble|USG
+2 Miscalculation|ULG
+1 Opportunity|ULG
+1 Quash|UDS
+1 Radiant's Judgment|ULG
+1 Archery Training|UDS
+2 Brilliant Halo|USG
+1 Capashen Standard|UDS
+1 Confiscate|USG
+1 Hermetic Study|USG
+1 Mask of Law and Grace|UDS
+1 Private Research|UDS
+1 Sigil of Sleep|UDS
+1 Zephid's Embrace|USG
+[sideboard]

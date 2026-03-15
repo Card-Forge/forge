@@ -1,0 +1,5 @@
+Name:Robot Token
+ManaCost:no cost
+Types:Artifact Creature Robot
+PT:1/1
+Oracle:

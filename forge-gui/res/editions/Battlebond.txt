@@ -268,74 +268,74 @@ ScryfallCode=BBD
 256 M Rowan Kenrith @Anna Steinbauer
 
 [RareMythicDistribution]
-1 Will Kenrith|BBD|1
-1 Rowan Kenrith|BBD|1
-8 Regna, the Redeemer
-8 Krav, the Unredeemed
-8 Zndrsplt, Eye of Wisdom
-8 Okaun, Eye of Chaos
-8 Virtus the Veiled
-8 Gorm the Great
-8 Khorvath Brightflame
-8 Sylvia Brightspear
-8 Pir, Imaginative Rascal
-8 Toothy, Imaginary Friend
-1 Arena Rector
-1 Brightling
-8 Play of the Game
-8 Regna's Sanction
-8 Together Forever
-1 Arcane Artisan
-8 Game Plan
-8 Spellseeker
-8 Zndrsplt's Judgment
-1 Archfiend of Despair
-8 Mindblade Render
-1 Stunning Reversal
-8 Thrilling Encore
-8 Virtus's Maneuver
-8 Bonus Round
-8 Khorvath's Fury
-1 Najeela, the Blade-Blossom
-8 Stolen Strategy
-1 Bramble Sovereign
-8 Generous Patron
-1 Grothama, All-Devouring
-8 Pir's Whim
-8 Archon of Valor's Reach
-8 Last One Standing
-8 Sentinel Tower
-8 Victory Chimes
-8 Bountiful Promenade
-8 Luxury Suite
-8 Morphic Pool
-8 Sea of Clouds
-8 Spire Garden
-8 Angelic Chorus
-8 Kor Spiritdancer
-1 Land Tax
-8 Mangara of Corondor
-8 Mystic Confluence
-8 Sower of Temptation
-8 Tidespout Tyrant
-1 True-Name Nemesis
-8 Diabolic Intent
-1 Nirkana Revenant
-8 Noosegraf Mob
-8 Nyxathid
-8 Goblin Razerunners
-8 Magmatic Force
-8 War's Toll
-1 Doubling Season
-8 Greater Good
-8 Magus of the Candelabra
-8 Seedborn Muse
-8 Vigor
-8 Apocalypse Hydra
-8 Evil Twin
-8 Gwafa Hazid, Profiteer
-8 Mind's Eye
-1 Mycosynth Lattice
+1 Will Kenrith|BBD|[1]
+1 Rowan Kenrith|BBD|[2]
+8 Regna, the Redeemer|BBD
+8 Krav, the Unredeemed|BBD
+8 Zndrsplt, Eye of Wisdom|BBD
+8 Okaun, Eye of Chaos|BBD
+8 Virtus the Veiled|BBD
+8 Gorm the Great|BBD
+8 Khorvath Brightflame|BBD
+8 Sylvia Brightspear|BBD
+8 Pir, Imaginative Rascal|BBD
+8 Toothy, Imaginary Friend|BBD
+1 Arena Rector|BBD
+1 Brightling|BBD
+8 Play of the Game|BBD
+8 Regna's Sanction|BBD
+8 Together Forever|BBD
+1 Arcane Artisan|BBD
+8 Game Plan|BBD
+8 Spellseeker|BBD
+8 Zndrsplt's Judgment|BBD
+1 Archfiend of Despair|BBD
+8 Mindblade Render|BBD
+1 Stunning Reversal|BBD
+8 Thrilling Encore|BBD
+8 Virtus's Maneuver|BBD
+8 Bonus Round|BBD
+8 Khorvath's Fury|BBD
+1 Najeela, the Blade-Blossom|BBD
+8 Stolen Strategy|BBD
+1 Bramble Sovereign|BBD
+8 Generous Patron|BBD
+1 Grothama, All-Devouring|BBD
+8 Pir's Whim|BBD
+8 Archon of Valor's Reach|BBD
+8 Last One Standing|BBD
+8 Sentinel Tower|BBD
+8 Victory Chimes|BBD
+8 Bountiful Promenade|BBD
+8 Luxury Suite|BBD
+8 Morphic Pool|BBD
+8 Sea of Clouds|BBD
+8 Spire Garden|BBD
+8 Angelic Chorus|BBD
+8 Kor Spiritdancer|BBD
+1 Land Tax|BBD
+8 Mangara of Corondor|BBD
+8 Mystic Confluence|BBD
+8 Sower of Temptation|BBD
+8 Tidespout Tyrant|BBD
+1 True-Name Nemesis|BBD
+8 Diabolic Intent|BBD
+1 Nirkana Revenant|BBD
+8 Noosegraf Mob|BBD
+8 Nyxathid|BBD
+8 Goblin Razerunners|BBD
+8 Magmatic Force|BBD
+8 War's Toll|BBD
+1 Doubling Season|BBD
+8 Greater Good|BBD
+8 Magus of the Candelabra|BBD
+8 Seedborn Muse|BBD
+8 Vigor|BBD
+8 Apocalypse Hydra|BBD
+8 Evil Twin|BBD
+8 Gwafa Hazid, Profiteer|BBD
+8 Mind's Eye|BBD
+1 Mycosynth Lattice|BBD
 
 [tokens]
 1 w_1_1_spirit_flying @Ryan Yee

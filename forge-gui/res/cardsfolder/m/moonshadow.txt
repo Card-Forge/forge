@@ -1,0 +1,9 @@
+Name:Moonshadow
+ManaCost:B
+Types:Creature Elemental
+PT:7/7
+K:Menace
+K:etbCounter:M1M1:6
+T:Mode$ ChangesZoneAll | ValidCards$ Permanent.YouOwn+!token | Origin$ Any | Destination$ Graveyard | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE1_M1M1 | NoResolvingCheck$ True | Execute$ TrigRemoveCounter | TriggerDescription$ Whenever one or more permanent cards are put into your graveyard from anywhere while this creature has a -1/-1 counter on it, remove a -1/-1 counter from this creature.
+SVar:TrigRemoveCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ M1M1 | CounterNum$ 1
+Oracle:Menace\nThis creature enters with six -1/-1 counters on it.\nWhenever one or more permanent cards are put into your graveyard from anywhere while this creature has a -1/-1 counter on it, remove a -1/-1 counter from this creature.

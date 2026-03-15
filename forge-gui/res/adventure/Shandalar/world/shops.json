@@ -1805,15 +1805,15 @@
 		},
 		{
 		  "count":1,
-		  "cardText": "Elf"
+		  "cardText": "\\bElf\\b"
 		},
 		{
 		  "count":1,
-		  "cardText": "Elves"
+		  "cardText": "\\bElves\\b"
 		}
 	  ]
 	}]
-},{                                    
+},{
 "name":"Merfolk",                  
 "description":"Catch O' The Day",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
@@ -3498,11 +3498,11 @@
 		},
 		{
 		  "count":1,
-		  "cardText": "Hand"
+		  "cardText": "\\bHands?\\b"
 		}
 	  ]
 	}]
-},{                                    
+},{
 "name":"DnD",
 "description":"Boo's Bargains",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
@@ -4135,7 +4135,7 @@
 		},
 		{
 		  "count":1,
-		  "cardText": "Spirit"
+		  "cardText": "\\bSpirits?\\b"
 		}
 	  ]
 	}]
@@ -4156,7 +4156,7 @@
 		},
 		{
 		  "count":1,
-		  "cardText": "Spirit"
+		  "cardText": "\\bSpirits?\\b"
 		}
 	  ]
 	},
@@ -4171,7 +4171,7 @@
 		},
 		{
 		  "count":1,
-		  "cardText": "Spirit",
+		  "cardText": "\\bSpirits?\\b",
 		  "colors": ["blue"]
 		}
 	  ]
@@ -4193,7 +4193,7 @@
 		},
 		{
 		  "count":1,
-		  "cardText": "Spirit"
+		  "cardText": "\\bSpirits?\\b"
 		}
 	  ]
 	},
@@ -4208,7 +4208,7 @@
 		},
 		{
 		  "count":1,
-		  "cardText": "Spirit",
+		  "cardText": "\\bSpirits?\\b",
 		  "colors": ["white"]
 		}
 	  ]
@@ -4658,7 +4658,7 @@
 		},
 		{
 		  "count":1,
-		  "cardText": "Cat"
+		  "cardText": "\\bCats?\\b"
 		}
 	  ]
 	}
@@ -4701,7 +4701,7 @@
 		},
 		{
 		  "count":1,
-		  "cardText": "God"
+		  "cardText": "\\bGods?\\b"
 		}
 	  ]
 	},

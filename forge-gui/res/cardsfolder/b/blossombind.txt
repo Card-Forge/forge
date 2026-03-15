@@ -1,0 +1,10 @@
+Name:Blossombind
+ManaCost:1 U
+Types:Enchantment Aura
+K:Enchant:Creature
+SVar:AttachAILogic:Curse
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When this Aura enters, tap enchanted creature.
+SVar:TrigTap:DB$ Tap | Defined$ Enchanted
+R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Card.EnchantedBy | Layer$ CantHappen | Description$ Enchanted creature can't become untapped and can't have counters put on it.
+S:Mode$ CantPutCounter | ValidCard$ Card.EnchantedBy | Secondary$ True | Description$ Enchanted creature can't become untapped and can't have counters put on it.
+Oracle:Enchant creature\nWhen this Aura enters, tap enchanted creature.\nEnchanted creature can't become untapped and can't have counters put on it.

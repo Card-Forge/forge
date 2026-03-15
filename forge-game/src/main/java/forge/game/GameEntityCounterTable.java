@@ -1,9 +1,9 @@
 package forge.game;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
-
-import org.apache.commons.lang3.ObjectUtils;
+import java.util.stream.Collectors;
 
 import com.google.common.collect.ForwardingTable;
 import com.google.common.collect.HashBasedTable;
@@ -45,7 +45,7 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
             map = Maps.newHashMap();
             put(o, object, map);
         }
-        return map.put(type, ObjectUtils.firstNonNull(map.get(type), 0) + value);
+        return map.merge(type, value, Integer::sum);
     }
 
     public int get(Player putter, GameEntity object, CounterType type) {
@@ -54,7 +54,7 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
         if (map == null || !map.containsKey(type)) {
             return 0;
         }
-        return ObjectUtils.firstNonNull(map.get(type), 0);
+        return Objects.requireNonNullElse(map.get(type), 0);
     }
 
     public int totalValues() {
@@ -87,20 +87,10 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
     }
 
     public Map<GameEntity, Integer> filterTable(CounterType type, String valid, Card host, CardTraitBase sa) {
-        Map<GameEntity, Integer> result = Maps.newHashMap();
-
-        for (Map.Entry<GameEntity, Map<Optional<Player>, Map<CounterType, Integer>>> gm : columnMap().entrySet()) {
-            if (gm.getKey().isValid(valid, host.getController(), host, sa)) {
-                for (Map<CounterType, Integer> cm : gm.getValue().values()) {
-                    Integer old = ObjectUtils.firstNonNull(result.get(gm.getKey()), 0);
-                    Integer v = ObjectUtils.firstNonNull(cm.get(type), 0);
-                    if (old + v > 0) {
-                        result.put(gm.getKey(), old + v);
-                    }
-                }
-            }
-        }
-        return result;
+        return columnMap().entrySet().stream().filter(gm -> gm.getKey().isValid(valid, host.getController(), host, sa))
+            .collect(Collectors.groupingBy(gm -> gm.getKey(),
+                    Collectors.flatMapping(gm -> gm.getValue().values().stream(),
+                            Collectors.filtering(m -> m.containsKey(type), Collectors.summingInt(m -> m.getOrDefault(type, 0))))));
     }
 
     public void triggerCountersPutAll(final Game game) {

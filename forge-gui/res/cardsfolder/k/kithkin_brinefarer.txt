@@ -1,0 +1,9 @@
+Name:Kithkin Brinefarer
+ManaCost:1 G W
+Types:Creature Kithkin Warrior Bard
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Library | Destination$ Hand | ValidCard$ Kithkin.YouOwn | TriggerZones$ Battlefield | Execute$ TrigConjure | TriggerDescription$ Whenever a Kithkin card is put into your hand from your library, conjure a duplicate of that card into your hand.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | DefinedName$ TriggeredCard | Zone$ Hand
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigPumpAll | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, Kithkin creature cards in your hand perpetually get +1/+1.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.Kithkin+YouCtrl | PumpZone$ Hand | Duration$ Perpetual | NumAtt$ +1 | NumDef$ +1
+Oracle:Whenever a Kithkin card is put into your hand from your library, conjure a duplicate of that card into your hand.\nWhenever you attack, Kithkin creature cards in your hand perpetually get +1/+1.

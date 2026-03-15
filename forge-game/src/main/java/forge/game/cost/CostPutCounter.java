@@ -40,22 +40,11 @@ public class CostPutCounter extends CostPartWithList {
     private static final long serialVersionUID = 1L;
     // Put Counter doesn't really have a "Valid" portion of the cost
     private final CounterType counter;
-    private int lastPaidAmount = 0;
 
     private final GameEntityCounterTable counterTable = new GameEntityCounterTable();
 
     public final CounterType getCounter() {
         return this.counter;
-    }
-
-    /**
-     * Sets the last paid amount.
-     *
-     * @param paidAmount
-     *            the new last paid amount
-     */
-    public final void setLastPaidAmount(final int paidAmount) {
-        this.lastPaidAmount = paidAmount;
     }
 
     /**
@@ -89,13 +78,12 @@ public class CostPutCounter extends CostPartWithList {
      * @see forge.card.cost.CostPart#toString()
      */
     @Override
-    public final String toString() {
+    public String toString() {
         final StringBuilder sb = new StringBuilder();
         if (this.counter.is(CounterEnumType.LOYALTY)) {
             if (this.getAmount().equals("0")) {
                 sb.append("0");
-            }
-            else {
+            } else {
                 sb.append("+").append(this.getAmount());
             }
         } else {
@@ -121,13 +109,9 @@ public class CostPutCounter extends CostPartWithList {
      */
     @Override
     public final void refund(final Card source) {
-        if(this.payCostFromSource())
-            source.subtractCounter(this.counter, this.lastPaidAmount, null);
-        else {
-            final Integer i = this.convertAmount();
-            for (final Card c : this.getCardList()) {
-                c.subtractCounter(this.counter, i, null);
-            }
+        final Integer i = this.convertAmount();
+        for (final Card c : this.getCardList()) {
+            c.subtractCounter(this.counter, i, null);
         }
     }
 
@@ -183,11 +167,7 @@ public class CostPutCounter extends CostPartWithList {
      */
     @Override
     public boolean payAsDecided(Player payer, PaymentDecision decision, SpellAbility ability, final boolean effect) {
-        if (this.payCostFromSource()) {
-            executePayment(payer, ability, ability.getHostCard(), effect);
-        } else {
-            executePayment(payer, ability, decision.cards, effect);
-        }
+        super.payAsDecided(payer, decision, ability, effect);
         triggerCounterPutAll(ability, effect);
         return true;
     }

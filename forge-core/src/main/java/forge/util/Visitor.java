@@ -1,6 +1,6 @@
 package forge.util;
 
-public abstract class Visitor<T> {
+public interface Visitor<T> {
     /**
      * visit the object
      * the Visitor should return true it can be visit again
@@ -9,9 +9,9 @@ public abstract class Visitor<T> {
      * @param object
      * @return boolean
      */
-    public abstract boolean visit(T object);
+    boolean visit(T object);
 
-    public boolean visitAll(Iterable<? extends T> objects) {
+    default boolean visitAll(Iterable<? extends T> objects) {
         for (T obj : objects) {
             if (!visit(obj)) {
                 return false;

@@ -1,0 +1,40 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Finkel
+Description=Jon Finkel's black-red deck from Deckmasters 2001. Necropotence powers this aggressive deck designed by one of Magic's greatest players.
+Deck Type=constructed
+Set=DKM
+Image=finkel.jpg
+[main]
+4 Mountain|ICE|1
+4 Mountain|ICE|2
+4 Mountain|ICE|3
+4 Swamp|ICE|1
+4 Swamp|ICE|2
+4 Swamp|ICE|3
+1 Sulfurous Springs|ICE
+1 Underground River|ICE
+2 Abyssal Specter|ICE
+1 Balduvian Horde|ALL
+2 Foul Familiar|ICE
+2 Goblin Mutant|ICE
+2 Lim-Dûl's High Guard|ALL
+2 Orcish Cannoneers|ICE
+2 Phantasmal Fiend|ALL
+2 Phyrexian War Beast|ALL
+2 Storm Shaman|ALL
+2 Contagion|ALL
+2 Dark Banishing|ICE
+2 Dark Ritual|ICE
+2 Guerrilla Tactics|ALL
+2 Incinerate|ICE
+2 Lava Burst|ICE
+2 Pyroclasm|ICE
+2 Soul Burn|ICE
+2 Icy Manipulator|ICE
+1 Necropotence|ICE
+[sideboard]

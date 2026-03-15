@@ -1,0 +1,10 @@
+Name:Dread Tiller
+ManaCost:1 B G
+Types:Artifact Creature Scarecrow
+PT:2/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When this creature enters, put a -1/-1 counter on target creature.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.counters_GE1_M1M1 | Execute$ TrigChangeZone | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature with a -1/-1 counter on it dies, you may put a land card from your hand or graveyard onto the battlefield tapped.
+SVar:TrigChangeZone:DB$ ChangeZone | ChangeType$ Land.YouOwn | ChangeNum$ 1 | Origin$ Hand,Graveyard | Hidden$ True | Tapped$ True | Destination$ Battlefield
+SVar:PlayMain1:TRUE
+Oracle:When this creature enters, put a -1/-1 counter on target creature.\nWhenever a creature with a -1/-1 counter on it dies, you may put a land card from your hand or graveyard onto the battlefield tapped.

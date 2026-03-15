@@ -1,0 +1,7 @@
+Name:Bogslither's Embrace
+ManaCost:1 B
+Types:Sorcery
+K:AlternateAdditionalCost:Blight<1>:3
+A:SP$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature.
+DeckHas:Ability$Counters
+Oracle:As an additional cost to cast this spell, blight 1 or pay {3}. (To blight 1, put a -1/-1 counter on a creature you control.)\nExile target creature.

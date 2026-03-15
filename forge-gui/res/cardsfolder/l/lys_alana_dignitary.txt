@@ -1,0 +1,9 @@
+Name:Lys Alana Dignitary
+ManaCost:1 G
+Types:Creature Elf Advisor
+PT:2/3
+K:AlternateAdditionalCost:Behold<1/Elf>:2
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ 2 | CheckSVar$ X | SpellDescription$ Add {G}{G}. Activate only if there is an Elf card in your graveyard.
+SVar:X:Count$ValidGraveyard Elf.YouOwn
+DeckHints:Type$Elf
+Oracle:As an additional cost to cast this spell, behold an Elf or pay {2}. (To behold an Elf, choose an Elf you control or reveal an Elf card from your hand.)\n{T}: Add {G}{G}. Activate only if there is an Elf card in your graveyard.

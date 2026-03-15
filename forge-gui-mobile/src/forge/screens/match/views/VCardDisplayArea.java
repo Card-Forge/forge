@@ -206,7 +206,7 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
     @Override
     public String getActivateAction(int index) {
-        if (!GuiBase.isNetworkplay()) {
+        if (!GuiBase.isNetworkplay(MatchController.instance)) {
             //causes lag on netplay client side, also index shouldn't be out of bounds
             if (index >= 0 && index < orderedCards.get().size())
                 return MatchController.instance.getGameController().getActivateDescription(orderedCards.get().get(index));

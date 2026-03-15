@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="110">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="respawnEnemies" type="bool" value="true"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/buildingsbosses.tsx"/>
+ <layer id="1" name="Background" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt2LEJACEQRUFTsyvhqrZeuRrc049MMJksDxUER29tAAAAXOx9subATt+9rXKqP2mOfv369etfn7fz3Tn1zqXuv379Kf1Va/Tr169f///9lf8K1RLPKJn++/snqiFdMg==
+  </data>
+ </layer>
+ <layer id="6" name="Floor" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJztmGEKwjAMRnuD9gQO0YvOobfSXcoDKIj/xpbYL+3A9yD/QvI22iUsJQAAAAAAAABYYswpXYQx5bb+Q9HWO4rrbfH1v77f26P8Hrfc17+2r6pOr7749+27Z//n4RO1dSLw+K89g9rfOpfO4vNzKpo5551LKn9Vv3vjueOdg7PonP3D96dlnYi+o+HO7dlflRMB/vacCPC350SAvz3Hg3d/W9u7VDmR+1trVPubZ8er/UcRsb9Z6HU3VeBv4wXbyIKc
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt1yEOgDAMQNFZDOEAhHAd7i8wHIMDkAWBwKAoHe8lzWS/arJSAAC+Y+miCwDyGYfznYbYDgB4auvvk80+XZNR5nZowRp896L3w1+18H+fE7dX+mPpj1PvT+13f+K80X8AaXoOlw==
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="48" height="48">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztmDFuwzAMRb12cJYsnXIKr0aTsVcsArSN79QlMXKJHqA2aqG2IIpfFikXLQn8IbBAPiuyPqVmV1WNyWQymUx/XKdBNwUdC/E/DXp+kFdr/DC/HxRTSmzJLxHGj6mrq+oN0Hv9zfUKjr/UZfhT/6dS8/pf+FH/6if+Kzg+1784Lpdf+/tF5if0rpwvtYX4EX8MrUnjN/5cfjS/Nj86VoIf9VfKn6X4uyknxeP83c+/1p+oPFR/Mmejeo0xJ8dD1fX37cf9jxAfQepSY1zt0TM5v+yJunOez8OSf/zNrZMPoK5j8/0r55uU4l9TU5Pfl/HT/KlnEi1+7bNOqKYkf85ZIda3xnrn1PWA8CMsKf6L1JTkR1iMf/nM3wOo+weqD9man8qXUi+HP9a/xeZs9PR7QPPze+x5iC20nzu22N7J9W9avT83txwb2r+F5kwyuNoa/dsWIdn/bBFr+58Unaf980Uhd4m73t96/2n8svoCeC9kWg==
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt1zEKgCAAhlFv4NDS1Ak6Y3WeztcBSkJoC1tMfA/+xenDQTAEAACAvi0xhPXaFmuXAEC5cahd8E3qzjum2jXlcneL7cnz/gGgFa3+3/f53tsZ8F+tvj/05QSW2Azl
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="60" template="../../../../common/maps/obj/entry_up.tx" x="357" y="768" width="38" height="16">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/magetower/Mirror_Gallery_2.tmx"/>
+   </properties>
+  </object>
+  <object id="104" template="../../../../common/maps/obj/enemy.tx" x="368" y="540">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Sol Ring|LEA&quot;, &quot;Black Lotus|LEA&quot;, &quot;Faerie Dragon&quot;, &quot;Goblin Polka Band&quot;, &quot;Prismatic Dragon&quot;, &quot;Necropolis of Azar&quot;, &quot;Power Struggle&quot;, &quot;Pandora's Box&quot;]}"/>
+    <property name="enemy" value="Arzakon"/>
+    <property name="speedModifier" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="105" template="../../../../common/maps/obj/enemy.tx" x="365" y="231">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Icy Manipulator|LEA&quot;, &quot;Jayemdae Tome|LEA&quot;, &quot;Crystal Quarry|ODY&quot;, &quot;City of Brass|ARN&quot;, &quot;Reflecting Pool|TMP&quot;, &quot;Urza's Filter|INV&quot;, &quot;Howling Mine|7ED&quot;, &quot;Diamond Kaleidoscope|VIS&quot;, &quot;Rewards of Diversity|INV&quot;]}"/>
+    <property name="enemy" value="Cromat"/>
+   </properties>
+  </object>
+  <object id="106" template="../../../../common/maps/obj/enemy.tx" x="640" y="388">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Henge of Ramos|MMQ&quot;, &quot;Mercadian Atlas&quot;, &quot;Ramosian Greatsword|MOM&quot;, &quot;The Mana Rig|DMC&quot;, &quot;Henge Guardian|DDG&quot;, &quot;Dragon Engine|DMR&quot;, &quot;Fallaji Wayfarer|DMC&quot;]}"/>
+    <property name="enemy" value="Ramos"/>
+   </properties>
+  </object>
+  <object id="107" template="../../../../common/maps/obj/enemy.tx" x="635" y="607">
+   <properties>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Obelisk of Alara|CON&quot;, &quot;Armillary Sphere&quot;, &quot;Kaleidostone|CON&quot;, &quot;Manaforce Mace|CON&quot;, &quot;Maelstrom Nexus|ARB&quot;, &quot;Exotic Orchard|CON&quot; 
+]}</property>
+    <property name="enemy" value="Child of Alara"/>
+   </properties>
+  </object>
+  <object id="108" template="../../../../common/maps/obj/enemy.tx" x="102" y="391">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Sliver Hive|M15&quot;, &quot;Sliver Construct&quot;, &quot;Path of Ancestry|CMM&quot;, &quot;Descendants' Path|LCC&quot;, &quot;First Sliver's Chosen|MH1&quot;, &quot;Gemhide Sliver|CMM&quot;, &quot;Birthing Boughs|MH1&quot;]}"/>
+    <property name="enemy" value="The First Sliver"/>
+   </properties>
+  </object>
+  <object id="109" template="../../../../common/maps/obj/enemy.tx" x="98" y="611">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Underworld Dreams|THB&quot;, &quot;Shadowspear&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Temple of Abandon|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="enemy" value="Klothys"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

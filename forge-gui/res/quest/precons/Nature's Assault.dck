@@ -1,0 +1,29 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Nature's Assault
+Description=Nature's Assault summons the wild. Green creatures and natural magic.
+Deck Type=constructed
+Set=PO2
+Image=natures_assault.jpg
+[main]
+5 Forest|PO2
+5 Forest|PO2
+5 Forest|PO2
+3 Bear Cub|PO2
+2 Golden Bear|PO2
+2 Ironhoof Ox|PO2
+2 Norwood Archers|PO2
+3 Norwood Ranger|PO2
+2 Norwood Riders|PO2
+2 River Bear|PO2
+1 Sylvan Basilisk|PO2
+2 Wild Ox|PO2
+1 Alluring Scent|PO2
+1 Hurricane|PO2
+2 Monstrous Growth|PO2
+2 Natural Spring|PO2
+[sideboard]

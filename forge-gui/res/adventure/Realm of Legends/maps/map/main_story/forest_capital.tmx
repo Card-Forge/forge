@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="91">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/buildings-nocollide.tsx"/>
+ <layer id="1" name="Background" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1bEJACAMAMG04l7iKtl/AQsdQYjIFdd/99kiEgD42jiqOwDAkwBgm72+QZ++V93qW91Mx1k=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzlWO1OGzEQvF/cR+jBe1D1uQrSkeoeBPpapJUCSR+oWXGjzk12/UGLVAlLFgk5r8ezs2P7muZjtX3XNFdD0zwvf1+6+vE2tnZcKa7rU7/v//RvfV0MjN8mxmEu9Odu3XVtHFe7zZPidE9xEeNw+vxpOJ9Dn4v6KJhTzxt/UzDe4zvifE7g+ZtucyG28XJ5wvOrS4/R3Kby8y/wTZKzTQaj8qf853opD8ilrV05SeVL8ZXm1nAdiYcaTRi+z23TfL9Ic+jVRo4/xYVmc5TyaJw8teta9DQ1Op6Zw8e5MQ4eTxx8aetwAl+J1hUj5wlcHReNWQdvhu1uGfe1W2PM6X674CvVOmtw6n2uuDG2/eLRhtHjUjFCU4bvtn/tNR4zO7iRR/Q74ZvHK5fAqLrdkTb4GdaGfbfPET7UGXMFr0c3/fAe4nG5Gdb1xDGfnGdm4mfK8Md85LxUtYK5mX+LhdrgtViH30Bjnl96+WU+1OeQE9SQcQA8P9pzPVisn0uccTg/eyAnyG1Kfxj/QrnQmtMa8nKHBs5KahfcpepXPUjjohYfpHaAY9euczeT98Enj11d/UbrgmeV7GPQjPKHWgdu1VuJpqP5I3yoXf7fA3GpukIcPqfqHnIQTkvwIS+155soTjQPNKM+91b+OG4NvsirUJPMaQ1/0Z40Zvb5G/LC2y7tVRo7xx/vmdOCFfVXWoPwUPaezbA+f9gcNw7unL/gd8TUs5+1VL7sr973tLbRWOOHbn1mivjbLvnhmHpm0H0+4tPWihzzePZP3t/0fBrhs/xwTPgwnwmgqW2fP1t5Zw101qFi9OJG58BZ1qn55985Ts7ncY+P3h+k7tD8DkE9gM8Renbnu07KR/Ec//7WO1xUY7y/RveCaI6c/3n8lXTWya71tc+65fcr8CetK69+MZbvRiV3RvUhT//e+Y75GoU3r343wznm0rut+iR89+is1TQ/9fn3D6l3a9p0z2Dv57tP5L3QDp8BwFHk7zX4SluED9rBnMDE3y8pV977jffEF2kn2i/fA1sK3//SPiq+39bMGEI=
+  </data>
+ </layer>
+ <layer id="6" name="Ground2" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzNmM1uEzEQx805QYnKN9e021AXRaW8AbwEJzjQtA/A140DgpYT4gHgGSjqC7RJoKLiCbjBI/Ap8SHGyo52djpjr71Jmr80knfXa/927Bl7nTWNsWAZ2DLYPGgp57G5dcCGYKM54RsAx2LO6Ng+gN1rGXN/TuxBq2DEMV1oG3NmTuxsu/DjiPGdB9s9ITvH+KgWhGfLyvzYbhizQ+x5o/z8WUN+LySJQXoWan+Qx9NQiatZ8GEfG9f8bXYEnhdw/TK/12fvr68ac321fK8byWeEPn3i33ME/vyYkKti+NwYUsYtW5QlH/DvocxUK6Tct+V3Y/gmIcq3WKH+NPgkX0p8qL9rxvxbG5f53I7h69vjdVLEGS8B02WwT8I3zWJ8X0Ewvu6G60mqy7ef1q1XdH6k8G0F8t8kVcd/28paxvX5VFH+Dcnkz4pe14nm7zp8uGd0+53vEDs/lPihfBegzkUrx4KkGL4N1v9AWWslPmpcvtxeNz7ovoWP80/4nl9WZqqqFL5DUkYfun3tfjM8F6fNJ+X/p83xXLTC/5Q2ptPiQ93oGXOzV1wPFB9SPhxvSZvK/VS+28B2p1eOQ8pI56MvNjRhzKTyLSntIiMdax6/MZwxfDQPPLk6NqevMDbfwB6vlxnRj9SXh0aWtudJ9Z9j4/t0KhrXUtw4VVm7q/K9C7SjsWpxg3pPyreu+BlGFdhx/6j9iwhdqLlH06ay/uJa4OOTFPqf4+ugVP+u0gZlwO+sytc5rTNlfuQgl8aXCXyPEs9znOqeMT1shfnqnOdM6oxJGt837biznD1Sfts+3sZeZHu7rD3uv1R96fqvUyXx8ZxzkpqU/2KE53V03RsK9VzuO0jkq5JLjuKbLe3Nkc3O2H/8XHNHYOI2S2HOkDgy4jN6/R/eowd+
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="40" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztzqENACAMRNEKJKIDEPYfE1HVCYDkveTn7EUAAAB0c1QAAD9YWbvz7g/gLQckLQB7
+  </data>
+ </layer>
+ <layer id="5" name="Overlay" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjALigLgOA4OEzkC7YmDBaBhQDwz2sNzDPNAuIA00ajAwNGkMtCsIg8XAOF9CRLwP9vQxEsFNbQaGW9rY5R4x0tct5ACQG5ExMhio9HYbGJ53cITpKBgeADm9Dcb4xpUnCAF65hl6lS+4/HQdGGc3tHG7A1/ZQshsUoCwCX55Pc6hURaPglEwCoY2qONnYKgH4gb+gXYJJjiugZ8/CkbBKBi5AADWTyMr
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="56" template="../../../../common/maps/obj/shop.tx" x="208" y="162">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
+    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen,Hydra"/>
+    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
+    <property name="signYOffset" type="float" value="-2"/>
+    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
+   </properties>
+  </object>
+  <object id="47" template="../../../../common/maps/obj/inn.tx" x="199" y="419"/>
+  <object id="53" template="../../../../common/maps/obj/spellsmith.tx" x="327" y="228"/>
+  <object id="55" template="../../../../common/maps/obj/shop.tx" x="479" y="453">
+   <properties>
+    <property name="commonShopList" value="Forest"/>
+    <property name="noRestock" type="bool" value="true"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="58" template="../../../../common/maps/obj/entry_up.tx" x="257" y="644" width="80" height="20">
+   <properties>
+    <property name="spawn" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="59" template="../../../../common/maps/obj/entry_left.tx" x="321" y="623" width="16" height="80.9948" rotation="0"/>
+  <object id="60" template="../../../../common/maps/obj/entry_right.tx" x="254" y="623" width="16" height="85"/>
+  <object id="62" template="../../../../common/maps/obj/shop.tx" x="361" y="370">
+   <properties>
+    <property name="commonShopList" value="GreenEquipment"/>
+    <property name="hasSign" type="bool" value="true"/>
+    <property name="noRestock" type="bool" value="true"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="63" template="../../../../common/maps/obj/shop.tx" x="297" y="326">
+   <properties>
+    <property name="commonShopList" value="GreenItems"/>
+    <property name="hasSign" type="bool" value="true"/>
+    <property name="noRestock" type="bool" value="true"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="64" template="../../../../common/maps/obj/shop.tx" x="466" y="417">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel,Elemental"/>
+    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen"/>
+    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
+    <property name="signYOffset" type="float" value="-2"/>
+    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
+   </properties>
+  </object>
+  <object id="65" template="../../../../common/maps/obj/shop.tx" x="530" y="386">
+   <properties>
+    <property name="commonShopList" value="Legend4Green"/>
+    <property name="signYOffset" type="float" value="-2"/>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/shop.tx" x="513" y="241">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel,Elemental"/>
+    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen,Hydra"/>
+    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
+    <property name="signYOffset" type="float" value="-2"/>
+    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../common/maps/obj/shop.tx" x="448" y="130">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel,Elemental"/>
+    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen,Hydra"/>
+    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
+    <property name="signYOffset" type="float" value="-2"/>
+    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/shop.tx" x="257" y="194">
+   <properties>
+    <property name="commonShopList" value="GreenBoosterPackShop"/>
+    <property name="signYOffset" type="float" value="-2"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../common/maps/obj/shop.tx" x="97" y="417">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
+    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen,Hydra"/>
+    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
+    <property name="signYOffset" type="float" value="-2"/>
+    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
+   </properties>
+  </object>
+  <object id="76" template="../../../../common/maps/obj/shop.tx" x="96" y="209">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Green,Creature6Green,GreenBoosterPackShop,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
+    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen"/>
+    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
+    <property name="signXOffset" type="float" value="-16"/>
+    <property name="signYOffset" type="float" value="-8"/>
+    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
+   </properties>
+  </object>
+  <object id="78" template="../../../../common/maps/obj/RotatingShop.tx" x="462" y="369">
+   <properties>
+    <property name="rotation" value="Green1,Green2,Green3,Green4,Green5,Green6"/>
+   </properties>
+  </object>
+  <object id="79" template="../../../../common/maps/obj/RotatingShop.tx" x="160" y="161">
+   <properties>
+    <property name="rotation" value="Green1,Green2,Green3,Green4,Green5,Green6"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="80" template="../../../../common/maps/obj/RotatingShop.tx" x="96.6667" y="307.333">
+   <properties>
+    <property name="rotation" value="Green1,Green2,Green3,Green4,Green5,Green6"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="81" template="../../../../common/maps/obj/shardtrader.tx" x="495" y="162" width="19" height="19">
+   <properties>
+    <property name="signXOffset" type="float" value="14"/>
+    <property name="signYOffset" type="float" value="-2"/>
+   </properties>
+  </object>
+  <object id="84" template="../../../../common/maps/obj/shop.tx" x="448" y="308">
+   <properties>
+    <property name="commonShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
+    <property name="signYOffset" type="float" value="-2"/>
+    <property name="uncommonShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen,Hydra"/>
+   </properties>
+  </object>
+  <object id="85" template="../../../../common/maps/obj/shop.tx" x="214.5" y="296">
+   <properties>
+    <property name="commonShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
+    <property name="signYOffset" type="float" value="-2"/>
+    <property name="uncommonShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen,Hydra"/>
+   </properties>
+  </object>
+  <object id="86" template="../../../../common/maps/obj/shop.tx" x="126.667" y="261.333">
+   <properties>
+    <property name="commonShopList" value="Enchantment6Green,Creature6Green,Instant6Green,Elf,Wolf,Druid,Squirrel"/>
+    <property name="mythicShopList" value="Planeswalker4Green,WUBRG,RGU,UWG,UGB,RWG,RGB,GWB,Legend4Green,PhyrexianGreen,Hydra"/>
+    <property name="rareShopList" value="Artifact4Green,Land4Green,Dimir,Rakdos,Orzhov,Golgari,Vehicle2Green,Wand4Green,Shapeshifters,Insects"/>
+    <property name="signYOffset" type="float" value="-2"/>
+    <property name="uncommonShopList" value="Dinosaur4Green,Wolf4Green,Sliver4Green,Multicolor8Green"/>
+   </properties>
+  </object>
+  <object id="87" template="../../../../common/maps/obj/dialog.tx" x="150.5" y="389.25" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;You approach what seems to be a building for the stockpiling of food. Several people stand outside on guard, covered in sting-marks and swatting away swarms of bees. 'Please, adventurer, we need help!'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;Just as you please, here's some cheese for your bees.&quot;,
+                    &quot;text&quot;: &quot;The guards lift the cheese aloft and the insects fly away at their command. 'Glorious relief! Oh how we thank you! And all the townsfolk give their thanks too. Now we won't starve come winter.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+						{&quot;type&quot;: &quot;life&quot;, &quot;count&quot;: 1},
+						{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;The Cheese Stands Alone&quot;, &quot;count&quot;: 1 },
+						{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Killer Bees&quot;, &quot;count&quot;: 1 },
+						{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Unyaro Bees&quot;, &quot;count&quot;: 1 },
+						{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Unyaro Bee Sting&quot;, &quot;count&quot;: 1 },
+						{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Bee Sting&quot;, &quot;count&quot;: 1 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 1000}          
+                      ]
+                    },
+					{&quot;removeItem&quot;:&quot;Cheese of Bees&quot;},
+					{&quot;addMapReputation&quot;: 2}  ],
+					&quot;condition&quot;:[{&quot;item&quot;:&quot;Cheese of Bees&quot;}], 
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;What's the trouble? Other than the bees?&quot;,
+					&quot;text&quot;: &quot;'Well that's just the thing it IS the bees! And wasps, and hornets, and I don't even want to think about what else! Damn bugs getting into our food supplies. We've discovered that it's no coincidence, they're being led by this nasty assassin lady, Xira Arien. We need someone to take her out and retrieve her cheese of bees.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;Her... what?&quot;,
+					&quot;text&quot;: &quot;'The cheese of bees! It's an enchanted hunk of cheese that commands bees! And other such bugs we're pretty sure but its not like we have it around to test out. Anyway, retrieve the cheese and stop the swarms and we'll give you the town's blessing, and some money to boot. Her hive is a huge rib-cage looking thing. Can't miss it.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;I'll bee what I can do.&quot; } ]
+					 }]
+				},
+                {
+					&quot;name&quot;: &quot;I don't have time for this.&quot;,
+					&quot;text&quot;: &quot;You leave the guards to bee stung.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="89" template="../../../../common/maps/obj/dialog.tx" x="374" y="294" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;A council of rather grim-looking elves stand over a table, pouring over various maps. 'If you think you can handle a truly fearsome foe, we have a bounty for you. Otherwise, leave us.'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;Vorinclex has been slain.&quot;,
+                    &quot;text&quot;: &quot;'Incredible. Truly an impressive feat. All the forests are safer thanks to your heroism.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+						{&quot;type&quot;: &quot;life&quot;, &quot;count&quot;: 1},
+						{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Heroic Intervention&quot;, &quot;count&quot;: 1 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 5000}          
+                      ]
+                    },
+					{&quot;removeItem&quot;:&quot;Green Cartouche of Victory&quot;},
+					{&quot;addMapReputation&quot;: 4}  ],
+					&quot;condition&quot;:[{&quot;item&quot;:&quot;Green Cartouche of Victory&quot;}], 
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;No foe is too fearsome for me.&quot;,
+					&quot;text&quot;: &quot;'I certainly hope you can back up your boasts, or you'll be worse than dead - you may end up as one of the enemy. Yes, the one causing us such trouble right now is none other than the Phyrexian Praetor Vorinclex himself.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;A fearsome foe indeed.&quot;,
+					&quot;text&quot;: &quot;'Yes. His lair is a fortress of copper. His minions wield vicious poison and crushing strength, to say nothing of their leader. Defeat him and the town's blessing will be well-earned, and we shall pay you handsomely as well.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;I'm on the job.&quot; } ]
+					 }]
+				},
+                {
+					&quot;name&quot;: &quot;I'll just leave you folks to it then.&quot;,
+					&quot;text&quot;: &quot;You walk away quietly.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/dialog.tx" x="457.333" y="213.333" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;You approach a circle of druids standing around a sacred fountain. 'Hail, traveler! We are in need of a mighty hero to retrieve a sacred relic for us.'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;One clover. Still intact somehow, if rather sticky.&quot;,
+                    &quot;text&quot;: &quot;The druids rejoice. 'Wonderful! We knew that the clover would be lucky enough to survive digestion! And now favor will shine on our town again, as we hope it shines on you!'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+						{&quot;type&quot;: &quot;life&quot;, &quot;count&quot;: 1},
+						{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;As Luck Would Have It&quot;, &quot;count&quot;: 1 },
+						{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Wish Good Luck&quot;, &quot;count&quot;: 1 },
+						{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Lucky Clover&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Good-Fortune Unicorn&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Family's Favor&quot;, &quot;count&quot;: 1 },
+						{ &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Make Your Own Luck&quot;, &quot;count&quot;: 1 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 3000}          
+                      ]
+                    },
+					{&quot;removeItem&quot;:&quot;The Luckiest Clover&quot;},
+					{&quot;addMapReputation&quot;: 4}  ],
+					&quot;condition&quot;:[{&quot;item&quot;:&quot;The Luckiest Clover&quot;}], 
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;A mighty hero? That sounds like me.&quot;,
+					&quot;text&quot;: &quot;'Excellent! You see, we druids are responsible for keeping up our great capitols magical wards. A few weeks back, a massive hydra besieged our city. The wards held, but one stray head managed to pluck our luckiest clover, and we need it back.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;You want me to retrieve a clover?&quot;,
+					&quot;text&quot;: &quot;'Not just any clover, our luckiest clover. No, THE luckiest clover! Our magic might be strong, but to survive all the perils of this forsaken world, one needs luck on their side, and that was what our clover gave us. Fish it out of the belly of Gargos from its lake lair, and you'll have our blessing.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;Well, we'll see if I get lucky.&quot; } ]
+					 }]
+				},
+                {
+					&quot;name&quot;: &quot;Not sure I'm up for that.&quot;,
+					&quot;text&quot;: &quot;'Be well traveller, and may what luck you can find guide you.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

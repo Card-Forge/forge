@@ -19,6 +19,7 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
 
     @Override
     public void buildSpellAbility(SpellAbility sa) {
+        super.buildSpellAbility(sa);
         sa.setManaPart(new AbilityManaPart(sa, sa.getMapParams()));
         if (sa.getParent() == null) {
             sa.setUndoable(true); // will try at least

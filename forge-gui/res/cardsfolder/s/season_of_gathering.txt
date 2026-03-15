@@ -9,6 +9,6 @@ SVar:DBChoose:DB$ GenericChoice | Pawprint$ 2 | Choices$ DBKillArtifacts,DBKillE
 SVar:DBKillArtifacts:DB$ DestroyAll | ValidCards$ Artifact | SpellDescription$ Artifact
 SVar:DBKillEnchantments:DB$ DestroyAll | ValidCards$ Enchantment | SpellDescription$ Enchantment
 SVar:DBDraw:DB$ Draw | Pawprint$ 3 | NumCards$ X | SpellDescription$ Draw cards equal to the greatest power among creatures you control.
-SVar:X:Count$Valid Creature.YouCtrl$GreatestPower
+SVar:X:Count$Valid Creature.YouCtrl$GreatestCardPower
 DeckHas:Ability$Counters
 Oracle:Choose up to five {P} worth of modes. You may choose the same mode more than once.\n{P} — Put a +1/+1 counter on a creature you control. It gains vigilance and trample until end of turn.\n{P}{P} — Choose artifact or enchantment. Destroy all permanents of the chosen type.\n{P}{P}{P} — Draw cards equal to the greatest power among creatures you control.

@@ -1,0 +1,11 @@
+Name:Champion of the Weird
+ManaCost:3 B
+Types:Creature Goblin Berserker
+PT:5/5
+S:Mode$ RaiseCost | ValidCard$ Card.Self | Activator$ You | Type$ Spell | Cost$ BeholdExile<1/Goblin> | EffectZone$ All | Description$ As an additional cost to cast this spell, behold a Goblin and exile it. (Exile a Goblin you control or a Goblin card from your hand.)
+A:AB$ Blight | Cost$ PayLife<1> Blight<2> | SorcerySpeed$ True | ValidTgts$ Opponent | Num$ 2 | SpellDescription$ Target opponent blights 2. Activate only as a sorcery.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When this creature leaves the battlefield, return the exiled card to its owner's hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Defined$ ExiledWith | Origin$ Exile | Destination$ Hand
+SVar:PlayMain1:TRUE
+DeckHints:Type$Goblin
+Oracle:As an additional cost to cast this spell, behold a Goblin and exile it. (Exile a Goblin you control or a Goblin card from your hand.)\nPay 1 life, Blight 2: Target opponent blights 2. Activate only as a sorcery.\nWhen this creature leaves the battlefield, return the exiled card to its owner's hand.

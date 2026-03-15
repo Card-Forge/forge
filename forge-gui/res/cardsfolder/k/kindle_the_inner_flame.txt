@@ -1,0 +1,6 @@
+Name:Kindle the Inner Flame
+ManaCost:3 R
+Types:Kindred Sorcery Elemental
+A:SP$ CopyPermanent | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | AddKeywords$ Haste | AtEOTTrig$ Sacrifice | SpellDescription$ Create a token that's a copy of target creature you control, except it has haste and "At the beginning of the end step, sacrifice this token."
+K:Flashback:1 R Behold<3/Elemental>
+Oracle:Create a token that's a copy of target creature you control, except it has haste and "At the beginning of the end step, sacrifice this token."\nFlashback—{1}{R}, Behold three Elementals. (You may cast this card from your graveyard for its flashback cost. Then exile it. To behold an Elemental, choose an Elemental you control or reveal an Elemental card from your hand.)

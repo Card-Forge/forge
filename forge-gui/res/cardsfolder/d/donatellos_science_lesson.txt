@@ -1,0 +1,6 @@
+Name:Donatello's Science Lesson
+ManaCost:2 U
+Types:Instant
+A:SP$ Tap | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | SubAbility$ DBDraw | SpellDescription$ Tap up to two target creatures. Up to two target players each draw a card.
+SVar:DBDraw:DB$ Draw | ValidTgts$ Player | TargetMin$ 0 | TargetMax$ 2
+Oracle:Tap up to two target creatures. Up to two target players each draw a card.

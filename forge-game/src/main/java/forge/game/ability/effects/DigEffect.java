@@ -35,7 +35,7 @@ public class DigEffect extends SpellAbilityEffect {
         } else {
             final int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
             final String toChange = sa.getParamOrDefault("ChangeNum", "1");
-            final int numToChange = toChange.equals("All") || toChange.equals("Any") ? numToDig : AbilityUtils.calculateAmount(host, sa.getParam("ChangeNum"), sa);
+            final int numToChange = toChange.equals("All") || toChange.equals("Any") ? numToDig : AbilityUtils.calculateAmount(host, toChange, sa);
 
             String verb = " looks at ";
             if (sa.hasParam("DestinationZone") && sa.getParam("DestinationZone").equals("Exile") &&
@@ -78,7 +78,7 @@ public class DigEffect extends SpellAbilityEffect {
                 sb.append(" They ").append(sa.hasParam("Optional") ? "may " : "").append(verb2);
                 if (sa.hasParam("ChangeValid")) {
                     String what = sa.hasParam("ChangeValidDesc") ? sa.getParam("ChangeValidDesc") :
-                        sa.getParam("ChangeValid");
+                        sa.getParam("ChangeValid").toLowerCase();
                     if (!Strings.CI.contains(what, "card")) {
                         what = what + " card";
                     }
@@ -226,7 +226,7 @@ public class DigEffect extends SpellAbilityEffect {
                     if (changeValid.contains("ChosenType")) {
                         changeValid = changeValid.replace("ChosenType", host.getChosenType());
                     }
-                    valid = CardLists.getValidCards(top, changeValid, cont, host, sa);
+                    valid = CardLists.getValidCards(valid, changeValid, cont, host, sa);
                 } else if (!totalCMC && p == chooser && destZone1ChangeNum > 1) {
                     // If all the cards are valid choices, no need for a separate reveal dialog to the chooser
                     delayedReveal = null;

@@ -62,10 +62,6 @@ public class CounterAi extends SpellAbilityAi {
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
 
-            if (sa.hasParam("CounterNoManaSpell") && topSA.getTotalManaSpent() > 0) {
-                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
-            }
-
             if (sa.hasParam("UnlessCost") && "TargetedController".equals(sa.getParamOrDefault("UnlessPayer", "TargetedController"))) {
                 Cost unlessCost = AbilityUtils.calculateUnlessCost(sa, sa.getParam("UnlessCost"), false);
                 if (unlessCost.hasSpecificCostType(CostDiscard.class)) {

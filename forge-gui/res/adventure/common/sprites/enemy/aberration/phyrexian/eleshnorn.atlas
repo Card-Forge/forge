@@ -1,0 +1,65 @@
+eleshnorn.png
+size: 448,320
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 32, 272
+  size: 16, 16      
+Idle 
+  xy: 0, 0
+  size: 64, 80      
+Idle 
+  xy: 64, 0
+  size: 64, 80    
+Idle 
+  xy: 128, 0
+  size: 64, 80    
+Idle 
+  xy: 192, 0
+  size: 64, 80 
+Idle 
+  xy: 256, 0
+  size: 64, 80     
+Idle 
+  xy: 320, 0
+  size: 64, 80     
+Idle 
+  xy: 384, 0
+  size: 64, 80          
+Attack 
+  xy: 0, 80
+  size: 64, 80       
+Attack 
+  xy: 64, 80
+  size: 64, 80    
+Attack 
+  xy: 128, 80
+  size: 64, 80    
+Attack 
+  xy: 192, 80
+  size: 64, 80      
+Attack 
+  xy: 256, 80
+  size: 64, 80          
+Death 
+  xy: 0, 160
+  size: 64, 80      
+Death 
+  xy: 64, 160
+  size: 64, 80      
+Death 
+  xy: 128, 160
+  size: 64, 80      
+Death 
+  xy: 192, 160
+  size: 64, 80
+Death 
+  xy: 256, 160
+  size: 64, 80     
+Death 
+  xy: 320, 160
+  size: 64, 80     
+Death 
+  xy: 384, 160
+  size: 64, 80   

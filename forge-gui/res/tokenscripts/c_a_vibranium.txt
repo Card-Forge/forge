@@ -1,0 +1,7 @@
+Name:Vibranium Token
+ManaCost:no cost
+Colors:colorless
+Types:Artifact Vibranium
+K:Indestructible
+A:AB$ Mana | Cost$ T | Produced$ C | RestrictValid$ CantCastNonArtifactSpells | SpellDescription$ Add {C}. This mana can't be spent to cast a nonartifact spell.
+Oracle:Indestructible\n{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.

@@ -80,7 +80,7 @@ public class CostAddMana extends CostPart {
         for (int n = 0; n < decision.c; n++) {
             if (StringUtils.isNumeric(type)) {
                 for (int i = Integer.parseInt(type); i > 0; i--) {
-                    manaProduced.add(new Mana((byte)ManaAtom.COLORLESS, source, null));
+                    manaProduced.add(new Mana((byte)ManaAtom.COLORLESS, source, null, ai));
                 }
             } else {
                 byte attemptedMana = ManaAtom.fromName(type);
@@ -91,7 +91,7 @@ public class CostAddMana extends CostPart {
                         attemptedMana = (byte)ManaAtom.COLORLESS;
                     }
                 }*/
-                manaProduced.add(new Mana(attemptedMana, source, null));
+                manaProduced.add(new Mana(attemptedMana, source, null, ai));
             }
         }
         ai.getManaPool().add(manaProduced);

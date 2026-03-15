@@ -18,9 +18,9 @@
 package forge.game.spellability;
 
 import java.util.Map;
+import java.util.Objects;
 
 import forge.game.card.CardCopyService;
-import org.apache.commons.lang3.ObjectUtils;
 
 import forge.card.CardStateName;
 import forge.game.Game;
@@ -100,7 +100,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             card.setController(activator, 0);
         }
 
-        card = ObjectUtils.firstNonNull(getAlternateHost(card), card);
+        card = Objects.requireNonNullElse(getAlternateHost(card), card);
 
         if (!this.getRestrictions().canPlay(card, this)) {
             return null;

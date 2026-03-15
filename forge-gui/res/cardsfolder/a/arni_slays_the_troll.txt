@@ -7,6 +7,6 @@ SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl
 SVar:DBMana:DB$ Mana | Produced$ R | SubAbility$ DBPutCounter | SpellDescription$ Add {R}. Put two +1/+1 counters on up to one target creature you control.
 SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 2 | TargetMin$ 0 | TargetMax$ 1
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SpellDescription$ You gain life equal to the greatest power among creatures you control.
-SVar:X:Count$Valid Creature.YouCtrl$GreatestPower
+SVar:X:Count$Valid Creature.YouCtrl$GreatestCardPower
 DeckHas:Ability$Counters|LifeGain
 Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Target creature you control fights up to one target creature you don't control.\nII — Add {R}. Put two +1/+1 counters on up to one target creature you control.\nIII — You gain life equal to the greatest power among creatures you control.

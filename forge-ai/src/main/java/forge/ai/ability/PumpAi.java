@@ -375,12 +375,12 @@ public class PumpAi extends PumpAiBase {
         }
 
         if (sa.hasParam("TargetingPlayer") && sa.getActivatingPlayer().equals(ai) && !sa.isTrigger()) {
-            if (!ComputerUtilAbility.isFullyTargetable(sa)) { // Volcanic Offering: only prompt if second part can happen too
-                return false;
-            }
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
             sa.setTargetingPlayer(targetingPlayer);
-            return targetingPlayer.getController().chooseTargetsFor(sa);
+            if (CardLists.getTargetableCards(ai.getGame().getCardsIn(sa.getTargetRestrictions().getZone()), sa).isEmpty()) {
+                return false;
+            }
+            return true;
         }
 
         CardCollection list;
@@ -487,19 +487,6 @@ public class PumpAi extends PumpAiBase {
                     && game.getPhaseHandler().getPlayerTurn().isOpponentOf(ai)) {
                 list.remove(source);
             }
-        }
-
-        // Detain target nonland permanent: don't target noncreature permanents that don't have
-        // any activated abilities.
-        if ("DetainNonLand".equals(sa.getParam("AILogic"))) {
-            list = CardLists.filter(list, CardPredicates.CREATURES.or(card -> {
-                for (SpellAbility sa1 : card.getSpellAbilities()) {
-                    if (sa1.isActivatedAbility()) {
-                        return true;
-                    }
-                }
-                return false;
-            }));
         }
 
         // Filter AI-specific targets if provided
@@ -725,9 +712,8 @@ public class PumpAi extends PumpAiBase {
         if (sa.usesTargeting()) {
             if (pumpTgtAI(ai, sa, defense, attack, false, true)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
 
         if (source.isCreature()) {

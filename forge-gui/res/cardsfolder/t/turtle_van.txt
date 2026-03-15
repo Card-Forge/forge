@@ -1,0 +1,11 @@
+Name:Turtle Van
+ManaCost:3
+Types:Artifact Vehicle
+PT:4/4
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever this Vehicle attacks, put a +1/+1 counter on target creature that crewed it this turn. Then if that creature is a Mutant, Ninja, or Turtle, double the number of +1/+1 counters on it.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.CrewedThisTurn | TgtPrompt$ Select target creature that crewed it this turn | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBMultiplyCounter
+SVar:DBMultiplyCounter:DB$ MultiplyCounter | Defined$ Targeted.Mutant,Targeted.Ninja,Targeted.Turtle | CounterType$ P1P1
+K:Crew:1
+SVar:HasAttackEffect:TRUE
+DeckHints:Type$Mutant|Ninja|Turtle
+Oracle:Whenever this Vehicle attacks, put a +1/+1 counter on target creature that crewed it this turn. Then if that creature is a Mutant, Ninja, or Turtle, double the number of +1/+1 counters on it.\nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)

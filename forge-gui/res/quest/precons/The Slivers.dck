@@ -1,0 +1,39 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=The Slivers
+Description=The Slivers are a hive-minded race of creatures that share abilities. Build your swarm and watch as each Sliver makes all others more powerful.
+Deck Type=constructed
+Set=TMP
+Image=the_slivers.jpg
+[main]
+5 Island|TMP|1
+4 Island|TMP|2
+4 Island|TMP|3
+4 Swamp|TMP|1
+4 Swamp|TMP|2
+3 Swamp|TMP|3
+1 Rootwater Depths|TMP
+4 Clot Sliver|TMP
+4 Metallic Sliver|TMP
+1 Mindwhip Sliver|TMP
+3 Mnemonic Sliver|TMP
+4 Winged Sliver|TMP
+1 Fevered Convulsions|TMP
+2 Counterspell|TMP
+2 Dark Banishing|TMP
+2 Diabolic Edict|TMP
+1 Dismiss|TMP
+1 Ertai's Meddling|TMP
+2 Power Sink|TMP
+1 Spell Blast|TMP
+1 Whispers of the Muse|TMP
+2 Dream Cache|TMP
+1 Evincar's Justice|TMP
+1 Extinction|TMP
+1 Lobotomy|TMP
+1 Essence Bottle|TMP
+[sideboard]

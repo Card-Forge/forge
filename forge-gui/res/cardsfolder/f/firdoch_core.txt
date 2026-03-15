@@ -1,0 +1,7 @@
+Name:Firdoch Core
+ManaCost:3
+Types:Kindred Artifact Shapeshifter
+K:Changeling
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ Animate | Cost$ 4 | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ Artifact,Creature | SpellDescription$ This artifact becomes a 4/4 artifact creature until end of turn.
+Oracle:Changeling (This card is every creature type.)\n{T}: Add one mana of any color.\n{4}: This artifact becomes a 4/4 artifact creature until end of turn.

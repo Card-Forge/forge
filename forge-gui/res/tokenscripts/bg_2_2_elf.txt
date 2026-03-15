@@ -1,0 +1,6 @@
+Name:Elf Token
+ManaCost:no cost
+Colors:black,green
+Types:Creature Elf
+PT:2/2
+Oracle:

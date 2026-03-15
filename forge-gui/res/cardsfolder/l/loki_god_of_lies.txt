@@ -1,0 +1,9 @@
+Name:Loki, God of Lies
+ManaCost:1 R R
+Types:Legendary Creature God Sorcerer Villain
+PT:3/3
+T:Mode$ SpellCast | ValidCard$ Card | Execute$ TrigGainControl | ValidActivatingPlayer$ You | IsSingleTarget$ True | TriggerZones$ Battlefield | TargetsValid$ Creature.inZoneBattlefield | TriggerDescription$ Whenever you cast a spell that targets only a single creature, gain control of that creature until end of turn. If it's your turn, untap that creature and it gains haste until end of turn.
+SVar:TrigGainControl:DB$ GainControl | Defined$ TriggeredSpellAbilityTargets | LoseControl$ EOT | SubAbility$ DBUntap
+SVar:DBUntap:DB$ Untap | Defined$ TriggeredSpellAbilityTargets | ConditionPlayerTurn$ True | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ TriggeredSpellAbilityTargets | ConditionPlayerTurn$ True | KW$ Haste
+Oracle:Whenever you cast a spell that targets only a single creature, gain control of that creature until end of turn. If it's your turn, untap that creature and it gains haste until end of turn.

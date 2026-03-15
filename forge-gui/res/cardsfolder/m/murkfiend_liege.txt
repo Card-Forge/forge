@@ -4,6 +4,6 @@ Types:Creature Horror
 PT:4/4
 S:Mode$ Continuous | Affected$ Creature.Green+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other green creatures you control get +1/+1.
 S:Mode$ Continuous | Affected$ Creature.Blue+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other blue creatures you control get +1/+1.
-S:Mode$ Continuous | Affected$ Creature.Green+YouCtrl,Creature.Blue+YouCtrl | AddHiddenKeyword$ CARDNAME untaps during each other player's untap step. | Description$ Untap all green and/or blue creatures you control during each other player's untap step.
+S:Mode$ UntapOtherPlayer | ValidCard$ Creature.Green+YouCtrl,Creature.Blue+YouCtrl | Description$ Untap all green and/or blue creatures you control during each other player's untap step.
 SVar:PlayMain1:TRUE
 Oracle:Other green creatures you control get +1/+1.\nOther blue creatures you control get +1/+1.\nUntap all green and/or blue creatures you control during each other player's untap step.

@@ -1,0 +1,7 @@
+Name:Bark of Doran
+ManaCost:1 W
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddToughness$ 1 | Description$ Equipped creature gets +0/+1.
+S:Mode$ CombatDamageToughness | ValidCard$ Creature.EquippedBy+powerLTtoughness | Description$ As long as equipped creature's toughness is greater than its power, it assigns combat damage equal to its toughness rather than its power.
+K:Equip:1
+Oracle:Equipped creature gets +0/+1.\nAs long as equipped creature's toughness is greater than its power, it assigns combat damage equal to its toughness rather than its power.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)

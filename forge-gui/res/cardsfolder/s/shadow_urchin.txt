@@ -1,0 +1,14 @@
+Name:Shadow Urchin
+ManaCost:2 BR
+Types:Creature Ouphe
+PT:3/4
+T:Mode$ Attacks | TriggerZones$ Battlefield | ValidCard$ Card.Self | Execute$ DBBlight | TriggerDescription$ Whenever this creature attacks, blight 1. (Put a -1/-1 counter on a creature you control.)
+SVar:DBBlight:DB$ Blight | Defined$ You | Num$ 1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+HasCounters | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control with one or more counters on it dies, exile that many cards from the top of your library. Until your next end step, you may play those cards.
+SVar:TrigExile:DB$ Dig | Defined$ You | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | Duration$ UntilYourNextEndStep
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until your next end step, you may play those cards.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:TriggeredCard$CardCounters.ALL
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever this creature attacks, blight 1. (Put a -1/-1 counter on a creature you control.)\nWhenever a creature you control with one or more counters on it dies, exile that many cards from the top of your library. Until your next end step, you may play those cards.

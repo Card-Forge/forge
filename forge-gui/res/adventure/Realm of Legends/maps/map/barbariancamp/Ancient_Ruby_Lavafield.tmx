@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="93">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Mox Ruby|LEA&quot;, &quot;Ruby Collector&quot;, &quot;Ruby Medallion|TMP&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="8" name="Collision" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztlUEOwiAQRVmWjXHpkYwXNVJvZaweQ4kSkczMHwpDXPiTWbS0PP6nHZz7TYXJufld52kc6+o/9y/ejh0KVikLNmLm7KTWNWiZ1Bpa2PsVzFaFxqzWeu7hNbFr+L0yjuy54n+32luU/2L4TR3A3FaeETd6Phn0QMRN7KiefA035/dka/+tsmdutnRppekrVJ+mGLVsKW/ubOA8UtfcWjjP6Dzisq7Jn/Icn9+B+aRx9G4qyrNl35I8jxDHtfYs+bViH597e1f069FMxM6zos6xyLj579Iyc7Y0Bxr/66UHtJdQDg==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzF1tEJxDAIANB+HBwdoKtlrKzXIbpE8UPwRI3ReBGklCZ5aRJs7/M4biWfj51av0zi2P38zSoXgjo0JDvr4xjX105w4brC9ppa7jCj9k43a0bsle6Mvdr1zqPatewdLkS1jcYOl9v0Htp0ZQ5ajDypL3V5/R95li0997hezxvSenN3tWmNy89VlSutd5VHg/5H0LP8D7eTvW2T5zfqWW6lj3OgLkbUp22tfp3VKj7GqOZJ7T39pXptvXcmcV+1Ws3f3VN7o9+HxnLGnt0Py23KumdCW1PN5ect4/J4AVk1BK4=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJy9l0tOAkEQhgtJdJodIpdwb4LoOYgbHuEGaqI38AAuJXoVX2xci0EP4A3YycOqTFe6qKmeIQTo5E/ox9RXVV3dM4wcQAN1XQEoAcBzArDAPmC/47Kao16TdO0lrmlif4T6cunYt+8X6VQxJe93H+ANx969honNvqoEG9xvFnB1jJpVP1iWZC8EX+oEx28qgdHw8TUVt+1jYybZj7X7PYBJYuedRTET58rIBbNlbi1mpwrQRT0dpn16ntZQLqYujd9ilyJ+f3pu2wXmzGWfeUBeH7kLz2Yur/uLsGON645j7bm4vxZbqu997xp+x7g61k7E9lktsLsi9zpmqrWXJEjmQNab9nMqbGs+sX9QAxyf4fy8ms133nnnvY1xZ9WsXVa9HnzQeSc2n7+py553Wc+ay/mcGfv5iL9vj8KYxZaSOeD64XuFxj/K6Z7zeqqjgdd5bdknayy2L7Lm9D0zdukc+yObFYOud+mPVXNku2XsN3Opf1zOOQA5TedD5uTOc6VoX5lLdySxV2lki5WXG15TxGUxX9vWzFXnqYY02+LSPRKzbdktEjXN1lyLuQn1XZy7LaaVb+Zum6lj5vcv1RJ/U+wiZrm3zN5FzDJ2Yvd2lGvNnfv5dc/MOlzJlue1yIfYHaYb1xJx+J05TMKex+5Mttsqpe8W0kXeR02EyedorPh5bGqTUni+Z6zh73EpyZRcySe2rPE8G0XzMWmuZBc9u6rk/w+Wxd00u2fY/wcVrKYm
+  </data>
+ </layer>
+ <layer id="6" name="Clutter" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztls0OgjAMxzdOkrgX8kGMFy8+BV/hETyo0RfybbwrnjQLLtTRrhuMxKj/pNGxtr+VDpgQn6NSdf8bKcQ+ae0u3XHMNCvIOiTd9Z0HewwTsjCdZ+Nrg9K5OKYEZusyH8a0c1WK9tG/NZgvVJ9NrY+arxXl2frl6r1uH+OYRnatWAxmJXKPsHgXm5Ndj53DHq+R6xw7Z3qNrcX20b3HOBQXMrF8ob3FRMXAveSKaQJYWLwQfY4Zm/qpfR0q+IxoVaqfh+oppU3qx368/G5+7qwwbuh7bZu2puWzB2PIMKln1TAzFZ/97Ypxv4qAHBnw/ZVeLaR7zPlD2d/GqZVF4A3JEbKnQrWa6FyLCb5zrwh3OdFaTuCse2TOvX+1egLnaSdO
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy9V9tO20AQHYcnJDtSEsIngOkXIJV/oE/AU4P4GBRMRFGoykNV/qF/VakGXiLUPnDZkffIx5ONs6TQkY68Xu/u2TMze/E4E9npipy559iXY6F9ttxz22HiymUqcufw2+FiTeS+494dLteq9y8eWq/9tG2RVX0TqSGmbC333OfEj/HArZyYj9ovX3/m+XSMD90FBC2WG/2YA3jQRscGfxnQGWN/TUP0zY3/b9Mm4A99ss4/EcTaZOric+Whc7BzLrzucdb0g76jrLoTz/m1s1x3YjDtzOsvPAd8q/o4B8bex2oPyfyYMVCbGV72IbQzJh5W62sR0oxXzjuOvfKuopXHFuK2bTiHkVvw86o+Dum+MjkHn/NanyzglX/kF5oH+5/zTXm/ue9Hb6TZYmZ4sa5XzedYn4C3pNgitzTubZqt2boYXvZxQXFWU+7DpOJX+9EXuelX5dP1Gv2hyMYwMKGAMS+fQaF9HNo/DkT2Bk1Oxa6re+6JjDyOe4t5p5TXOIOKLHyGYB8Z0diDYQ1xPnjs1Xhq4bXc8DNivePrwPm51xy7Dct42d/wOWLNOkOcJ0u4Ry3QOPBaLiinVtH5Gvwc1nnAOaY5pJz7mxW+9+fxSN9tm7ZvCq37tFlpRl7xOjoKLdg3tJnnZV+rPfwH3rzb9LXae2tW3jKd37Pek/vAjXndqdcv9o3bNE73AdXHzO9ivebE+WDvejG67X0qZLrPM5RTDf7Nu83/jdBebceI5SjT8B0a91h75wvduQGeU5vZ85bvzudZffeJ/Q/jOFgeq4vPW5xDiOkLx9Yg/w==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="207.206" y="480.299" width="83.4919" height="16"/>
+  <object id="68" template="../../../../common/maps/obj/collision.tx" x="-0.264674" y="479.769" width="479.667" height="16"/>
+  <object id="69" template="../../../../common/maps/obj/collision.tx" x="-0.500167" y="-16.6667" width="479.667" height="16"/>
+  <object id="70" template="../../../../common/maps/obj/collision.tx" x="-16.6667" y="0" width="16" height="493.003"/>
+  <object id="71" template="../../../../common/maps/obj/collision.tx" x="479.667" y="-0.333333" width="16" height="495.12"/>
+  <object id="73" template="../../../../common/maps/obj/enemy.tx" x="232.407" y="351.717">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Gratuitous Violence|ons&quot;, &quot;Sunbird's Invocation|xln&quot; ] }"/>
+    <property name="enemy" value="Márton Stromgald"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/dialog.tx" x="216.5" y="412.75" width="47" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The very air in this place is thick with red mana, filling you with overwhelming heat and passion. In front of the lava pools ahead, a lone knight sits atop his steed, the infamous mox ruby hung around his neck. 
+
+Your manasight stone blazes with power, near-blindingly bright.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/scroll.tx" x="375.5" y="368">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Ruby Collector&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/scroll.tx" x="120" y="372">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Ruby Medallion&quot;, &quot;editions&quot;: [ &quot;TMP&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
