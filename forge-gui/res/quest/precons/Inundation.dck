@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Inundation
+Description=Inundation floods the board with white creatures. Threshold unlocks even greater power.
+Deck Type=constructed
+Set=JUD
+Image=inundation.jpg
+[main]
+7 Plains|ODY|1
+7 Plains|ODY|2
+6 Plains|ODY|3
+2 Aven Cloudchaser|ODY
+2 Beloved Chaplain|ODY
+3 Benevolent Bodyguard|JUD
+1 Commander Eesha|JUD
+1 Dedicated Martyr|ODY
+3 Militant Monk|TOR
+2 Mystic Penitent|ODY
+2 Nomad Decoy|ODY
+3 Patrol Hound|ODY
+1 Selfless Exorcist|JUD
+1 Shieldmage Advocate|JUD
+2 Spurnmage Advocate|JUD
+4 Suntail Hawk|JUD
+1 Tireless Tribe|ODY
+1 Valor|JUD
+1 Embolden|ODY
+3 Guided Strike|JUD
+1 Prismatic Strands|JUD
+2 Shelter|ODY
+2 Battle Screech|JUD
+2 Unquestioned Authority|JUD
+[sideboard]

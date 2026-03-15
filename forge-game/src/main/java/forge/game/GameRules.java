@@ -14,6 +14,7 @@ public class GameRules {
     private boolean matchAnteRarity = false;
     private boolean AISideboardingEnabled = false;
     private boolean sideboardForAI = false;
+    private boolean allowCheatShuffle = false;
     private final Set<GameType> appliedVariants = EnumSet.noneOf(GameType.class);
     private int simTimeout = 120;
 
@@ -86,6 +87,13 @@ public class GameRules {
     }
     public void setAISideboardingEnabled(final boolean aiSideboarding) {
         AISideboardingEnabled = aiSideboarding;
+    }
+
+    public boolean isAllowCheatShuffle() {
+        return allowCheatShuffle;
+    }
+    public void setAllowCheatShuffle(boolean allowCheatShuffle) {
+        this.allowCheatShuffle = allowCheatShuffle;
     }
 
     public int getGamesToWinMatch() {

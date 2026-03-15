@@ -6,10 +6,12 @@ import forge.ImageKeys;
 import forge.StaticData;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
+import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.deck.Deck;
 import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.util.IterableUtil;
 import forge.util.StreamUtil;
@@ -102,11 +104,15 @@ public class RewardData implements Serializable {
         if(legals != null)
             allCards = IterableUtil.filter(allCards, new CardUtil.CardPredicate(legals, true));
 
+        if (Config.instance().getSettingData().excludeAlchemyVariants) {
+            allCards = IterableUtil.filter(allCards, PaperCardPredicates.IS_REBALANCED.negate());
+        }
+        
         // Filter out by editions and obtainability
         if (configData.allowedEditions != null && configData.allowedEditions.length > 0) {
             allCards = IterableUtil.filter(allCards, PaperCardPredicates.printedInAnyEditions(configData.allowedEditions));
         } else if (configData.restrictedEditions != null && configData.restrictedEditions.length > 0) {
-            allCards = IterableUtil.filter(allCards, PaperCardPredicates.onlyPrintedInEditions(configData.restrictedEditions).negate());
+            allCards = IterableUtil.filter(allCards, PaperCardPredicates.isObtainableNotRestricted(configData.restrictedEditions));
         } else {
             allCards = IterableUtil.filter(allCards, PaperCardPredicates.isObtainableAnyEdition());
         }
@@ -117,7 +123,8 @@ public class RewardData implements Serializable {
         allCards = IterableUtil.filter(allCards, input -> {
             if (input == null)
                 return false;
-            if (Iterables.contains(input.getRules().getMainPart().getKeywords(), "Remove CARDNAME from your deck before playing if you're not playing for ante."))
+            if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE) &&
+                    Iterables.contains(input.getRules().getMainPart().getKeywords(), "Remove CARDNAME from your deck before playing if you're not playing for ante."))
                 return false;
             // TODO check if commander player
             if (input.getRules().getAiHints().getRemNonCommanderDecks())
@@ -179,8 +186,15 @@ public class RewardData implements Serializable {
                     HashSet<PaperCard> pool = new HashSet<>();
                     for (RewardData r : cardUnion) {
                         if (r.cardName != null && !r.cardName.isEmpty() ) {
-                            PaperCard pc = allCardVariants ? CardUtil.getCardByName(r.cardName)
-                                : StaticData.instance().getCommonCards().getCard(r.cardName);
+                            PaperCard pc;
+                            if (allCardVariants) {
+                                CardDb.CardRequest req = CardDb.CardRequest.fromString(r.cardName);
+                                pc = (req.edition != null)
+                                    ? CardUtil.getCardByNameAndEdition(req.cardName, req.edition)
+                                    : CardUtil.getCardByName(req.cardName);
+                            } else {
+                                pc = StaticData.instance().getCommonCards().getCard(r.cardName);
+                            }
                             if (pc != null)
                                 pool.add(pc);
                         } else if (r.sourceDeck != null && !r.sourceDeck.isEmpty() ) {
@@ -212,10 +226,13 @@ public class RewardData implements Serializable {
                 case "randomCard":
                     if (cardName != null && !cardName.isEmpty()) {
                         if (allCardVariants) {
-                            PaperCard card = CardUtil.getCardByName(cardName);
+                            CardDb.CardRequest request = CardDb.CardRequest.fromString(cardName);
+                            PaperCard card = (request.edition != null)
+                                ? CardUtil.getCardByNameAndEdition(request.cardName, request.edition)
+                                : CardUtil.getCardByName(request.cardName);
                             if (card != null) {
                                 for (int i = 0; i < count + addedCount; i++) {
-                                    PaperCard finalCard = CardUtil.getCardByNameAndEdition(cardName, card.getEdition());
+                                    PaperCard finalCard = CardUtil.getCardByNameAndEdition(request.cardName, card.getEdition());
                                     if (finalCard != null)
                                         ret.add(new Reward(finalCard, isNoSell));
                                 }
@@ -291,23 +308,27 @@ public class RewardData implements Serializable {
                             .forEach(allEditions::add);
                         ConfigData configData = Config.instance().getConfigData();
 
-                        for (String restricted : configData.restrictedEditions) {
-                            allEditions.removeIf(q -> q.getCode().equals(restricted));
+                        if (this.editions != null && this.editions.length > 0) {
+                            Set<String> allowed = new HashSet<>(Arrays.asList(this.editions));
+                            allEditions.removeIf(q -> !allowed.contains(q.getCode()));
+                        } else {
+                            for (String restricted : configData.restrictedEditions) {
+                                allEditions.removeIf(q -> q.getCode().equals(restricted));
+                            }
+                            for (String restrictedCard : configData.restrictedCards) {
+                                allEditions.removeIf(cardEdition -> cardEdition.getObtainableCards().stream().anyMatch(
+                                    o -> o.name().equals(restrictedCard)));
+                            }
+                            endDate = endDate == 0 ? 9999 : endDate;
+                            allEditions.removeIf(q -> {
+                            	Calendar cal = Calendar.getInstance();
+                            	cal.setTime(q.getDate());
+                            	return cal.get(Calendar.YEAR) < startDate || cal.get(Calendar.YEAR) > endDate;
+                        	  });
                         }
-                        for (String restrictedCard : configData.restrictedCards) {
-                            allEditions.removeIf(cardEdition -> cardEdition.getObtainableCards().stream().anyMatch(
-                                o -> o.name().equals(restrictedCard)));
-                        }
-
-                        endDate = endDate == 0 ? 9999 : endDate;
-                        allEditions.removeIf(q -> {
-                            Calendar cal = Calendar.getInstance();
-                            cal.setTime(q.getDate());
-                            return cal.get(Calendar.YEAR) < startDate || cal.get(Calendar.YEAR) > endDate;
-                        });
                         for (int i = 0; i < count + addedCount; i++) {
                             ret.add(new Reward(AdventureEventController.instance().generateBooster(
-                                allEditions.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(allEditions.size())).getCode())));
+                                allEditions.get(rewardRandom.nextInt(allEditions.size())).getCode())));
                         }
                     } else {
                         for (int i = 0; i < count + addedCount; i++) {
@@ -319,7 +340,7 @@ public class RewardData implements Serializable {
                 case "landSketchbookShop":
                     Array<ItemData> sketchbookItems = ItemListData.getSketchBooks();
                     for (int i = 0; i < count + addedCount; i++) {
-                        ItemData item = sketchbookItems.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(sketchbookItems.size));
+                        ItemData item = sketchbookItems.get(rewardRandom.nextInt(sketchbookItems.size));
                         if (item != null)
                             ret.add(new Reward(item));
                     }

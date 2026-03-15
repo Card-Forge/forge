@@ -1,0 +1,10 @@
+Name:Bristlebane Battler
+ManaCost:1 G
+Types:Creature Kithkin Soldier
+PT:6/6
+K:Trample
+K:Ward:2
+K:etbCounter:M1M1:5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE1_M1M1 | NoResolvingCheck$ True | Execute$ TrigRemoveCounter | TriggerDescription$ Whenever another creature you control enters while this creature has a -1/-1 counter on it, remove a -1/-1 counter from this creature.
+SVar:TrigRemoveCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ M1M1 | CounterNum$ 1
+Oracle:Trample, ward {2}\nThis creature enters with five -1/-1 counters on it.\nWhenever another creature you control enters while this creature has a -1/-1 counter on it, remove a -1/-1 counter from this creature.

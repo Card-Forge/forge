@@ -1,0 +1,12 @@
+Name:Pummeler for Hire
+ManaCost:4 G
+Types:Creature Giant Mercenary
+PT:4/4
+K:Vigilance
+K:Reach
+K:Ward:2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When this creature enters, you gain X life, where X is the greatest power among Giants you control.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ X
+SVar:X:Count$Valid Giant.YouCtrl$GreatestCardPower
+DeckHints:Type$Giant
+Oracle:Vigilance, reach\nWard {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nWhen this creature enters, you gain X life, where X is the greatest power among Giants you control.

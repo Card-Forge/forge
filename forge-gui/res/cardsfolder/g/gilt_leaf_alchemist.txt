@@ -1,0 +1,8 @@
+Name:Gilt-Leaf Alchemist
+ManaCost:G
+Types:Creature Elf Druid
+PT:1/1
+K:Deathtouch
+A:AB$ MakeCard | Cost$ T | Conjure$ True | Name$ Forest | Zone$ Battlefield | CheckSVar$ X | SVarCompare$ GE2 | SpellDescription$ Conjure a card named Forest onto the battlefield. Activate only if two or more Elf cards are in your graveyard.
+SVar:X:Count$ValidGraveyard Elf.YouOwn
+Oracle:Deathtouch\n{T}: Conjure a card named Forest onto the battlefield. Activate only if two or more Elf cards are in your graveyard.

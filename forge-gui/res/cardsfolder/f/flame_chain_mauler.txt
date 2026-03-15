@@ -1,0 +1,6 @@
+Name:Flame-Chain Mauler
+ManaCost:1 R
+Types:Creature Elemental Warrior
+PT:2/2
+A:AB$ Pump | Cost$ 1 R | Defined$ Self | NumAtt$ +1 | KW$ Menace | SpellDescription$ This creature gets +1/+0 and gains menace until end of turn. (It can't be blocked except by two or more creatures.)
+Oracle:{1}{R}: This creature gets +1/+0 and gains menace until end of turn. (It can't be blocked except by two or more creatures.)

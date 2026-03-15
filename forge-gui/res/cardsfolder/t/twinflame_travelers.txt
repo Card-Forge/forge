@@ -1,0 +1,7 @@
+Name:Twinflame Travelers
+ManaCost:2 U R
+Types:Creature Elemental Sorcerer
+PT:3/3
+K:Flying
+S:Mode$ Panharmonicon | ValidCard$ Elemental.Other+YouCtrl | Description$ If a triggered ability of another Elemental you control triggers, it triggers an additional time.
+Oracle:Flying\nIf a triggered ability of another Elemental you control triggers, it triggers an additional time.

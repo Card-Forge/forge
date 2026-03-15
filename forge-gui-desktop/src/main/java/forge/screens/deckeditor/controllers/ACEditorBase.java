@@ -217,7 +217,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
 
         for (final Entry<TItem, Integer> itemEntry : itemsToAdd) {
             final TItem item = itemEntry.getKey();
-            final PaperCard card = item instanceof PaperCard ? (PaperCard)item : null;
+            final PaperCard card = item instanceof PaperCard pc ? pc : null;
             int qty = itemEntry.getValue();
 
             int max;

@@ -1,0 +1,13 @@
+
+autotiles.png 
+size: 192,512
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+TileSet
+  rotate: false
+  xy: 96, 512
+  size: 48, 64
+  orig: 0, 0
+  offset: 0, 0
+  index: 0   

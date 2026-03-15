@@ -3,6 +3,7 @@ ManaCost:3 R
 Types:Enchantment
 T:Mode$ TapsForMana | ValidCard$ Land | Activator$ Opponent | TriggerZones$ Battlefield | Execute$ TrigTapAll | TriggerDescription$ Whenever an opponent taps a land for mana, tap all lands that player controls.
 SVar:TrigTapAll:DB$ TapAll | Defined$ TriggeredActivator | ValidCards$ Land
-S:Mode$ Continuous | Affected$ Creature.OppCtrl | AddKeyword$ If CARDNAME attacks, all creatures you control attack if able. | Description$ If a creature an opponent controls attacks, all creatures that player controls attack if able.
+# TODO fix for shared turn modes like TwoHeadedGiant
+S:Mode$ AttackRequirement | ValidCard$ Creature.OppCtrl | ValidAttacker$ Creature.OppCtrl | Description$ If a creature an opponent controls attacks, all creatures that player controls attack if able.
 SVar:NonStackingEffect:True
 Oracle:Whenever an opponent taps a land for mana, tap all lands that player controls.\nIf a creature an opponent controls attacks, all creatures that opponent controls attack if able.

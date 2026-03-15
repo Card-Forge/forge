@@ -1,0 +1,9 @@
+Name:Thoughtweft Lieutenant
+ManaCost:G W
+Types:Creature Kithkin Soldier
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Kithkin.YouCtrl+Other | Execute$ TrigPump | TriggerDescription$ Whenever this creature or another Kithkin you control enters, target creature you control gets +1/+1 and gains trample until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Trample
+SVar:BuffedBy:Kithkin
+DeckHints:Type$Kithkin
+Oracle:Whenever this creature or another Kithkin you control enters, target creature you control gets +1/+1 and gains trample until end of turn.

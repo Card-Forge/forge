@@ -26,6 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * A lightweight version of a card that matches real-world cards, to use outside of games (eg. inventory, decks, trade).
@@ -349,7 +350,9 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
                 return Set.of(this.name);
             else {
                 String translatedName = CardTranslation.getTranslatedName(this.name);
-                return Set.of(this.name, translatedName, StringUtils.stripAccents(translatedName));
+                return Stream.of(this.name, translatedName, StringUtils.stripAccents(translatedName))
+                        .filter(Objects::nonNull)
+                        .collect(Collectors.toSet());
             }
         }
         Set<String> names = new HashSet<>();
@@ -506,66 +509,6 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
                 this.cardAltImageKey = ImageUtil.getImageKey(this, "", true);
         }
         return cardAltImageKey;
-    }
-
-    private String cardWSpecImageKey = null;
-    @Override
-    public String getCardWSpecImageKey() {
-        if (this.cardWSpecImageKey == null) {
-            if (this.rules.getSplitType() == CardSplitType.Specialize)
-                this.cardWSpecImageKey = ImageUtil.getImageKey(this, "white", true);
-            else  // just use cardImageKey
-                this.cardWSpecImageKey = ImageUtil.getImageKey(this, "", true);
-        }
-        return cardWSpecImageKey;
-    }
-
-    private String cardUSpecImageKey = null;
-    @Override
-    public String getCardUSpecImageKey() {
-        if (this.cardUSpecImageKey == null) {
-            if (this.rules.getSplitType() == CardSplitType.Specialize)
-                this.cardUSpecImageKey = ImageUtil.getImageKey(this, "blue", true);
-            else  // just use cardImageKey
-                this.cardUSpecImageKey = ImageUtil.getImageKey(this, "", true);
-        }
-        return cardUSpecImageKey;
-    }
-
-    private String cardBSpecImageKey = null;
-    @Override
-    public String getCardBSpecImageKey() {
-        if (this.cardBSpecImageKey == null) {
-            if (this.rules.getSplitType() == CardSplitType.Specialize)
-                this.cardBSpecImageKey = ImageUtil.getImageKey(this, "black", true);
-            else  // just use cardImageKey
-                this.cardBSpecImageKey = ImageUtil.getImageKey(this, "", true);
-        }
-        return cardBSpecImageKey;
-    }
-
-    private String cardRSpecImageKey = null;
-    @Override
-    public String getCardRSpecImageKey() {
-        if (this.cardRSpecImageKey == null) {
-            if (this.rules.getSplitType() == CardSplitType.Specialize)
-                this.cardRSpecImageKey = ImageUtil.getImageKey(this, "red", true);
-            else  // just use cardImageKey
-                this.cardRSpecImageKey = ImageUtil.getImageKey(this, "", true);
-        }
-        return cardRSpecImageKey;
-    }
-
-    private String cardGSpecImageKey = null;
-    @Override
-    public String getCardGSpecImageKey() {
-        if (this.cardGSpecImageKey == null) {
-            if (this.rules.getSplitType() == CardSplitType.Specialize)
-                this.cardGSpecImageKey = ImageUtil.getImageKey(this, "green", true);
-            else  // just use cardImageKey
-                this.cardGSpecImageKey = ImageUtil.getImageKey(this, "", true);
-        }
-        return cardGSpecImageKey;
     }
 
     @Override

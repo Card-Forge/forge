@@ -7,6 +7,6 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME g
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ DBDig | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may reveal that many cards from the top of your library. Put an artifact card revealed this way into your hand and the rest into your graveyard.
 SVar:DBDig:DB$ Dig | Defined$ You | DigNum$ Y | Reveal$ True | ChangeValid$ Card.Artifact | DestinationZone$ Hand | DestinationZone2$ Graveyard
 SVar:Y:TriggerCount$DamageAmount
-SVar:X:Count$Valid Artifact.YouCtrl$GreatestCMC
+SVar:X:Count$Valid Artifact.YouCtrl$GreatestCardManaCost
 DeckHints:Type$Artifact
 Oracle:Flying\nGlint Raker gets +X/+0, where X is the highest mana value among artifacts you control.\nWhenever Glint Raker deals combat damage to a player, you may reveal that many cards from the top of your library. Put an artifact card revealed this way into your hand and the rest into your graveyard.

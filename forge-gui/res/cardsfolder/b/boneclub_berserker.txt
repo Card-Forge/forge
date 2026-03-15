@@ -1,0 +1,8 @@
+Name:Boneclub Berserker
+ManaCost:3 R
+Types:Creature Goblin Berserker
+PT:2/4
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ This creature gets +2/+0 for each other Goblin you control.
+SVar:X:Count$Valid Goblin.Other+YouCtrl/Twice
+DeckHints:Type$Goblin
+Oracle:This creature gets +2/+0 for each other Goblin you control.

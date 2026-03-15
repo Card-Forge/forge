@@ -2,7 +2,7 @@ Name:Regna, the Redeemer
 ManaCost:5 W
 Types:Legendary Creature Angel
 PT:4/4
-K:Partner:Krav, the Unredeemed:Krav
+K:Partner with:Krav, the Unredeemed:Krav
 K:Flying
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ YouTeamLifeGained | Execute$ TrigWarrior | TriggerDescription$ At the beginning of each end step, if your team gained life this turn, create two 1/1 white Warrior creature tokens.
 SVar:TrigWarrior:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_warrior | TokenOwner$ You

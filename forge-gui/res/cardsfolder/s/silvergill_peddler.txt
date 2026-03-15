@@ -1,0 +1,9 @@
+Name:Silvergill Peddler
+ManaCost:2 U
+Types:Creature Merfolk Citizen
+PT:2/3
+T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever this creature becomes tapped, draw a card, then discard a card.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
+DeckHas:Ability$Discard
+Oracle:Whenever this creature becomes tapped, draw a card, then discard a card.

@@ -1,0 +1,11 @@
+Name:Collective Inferno
+ManaCost:3 R R
+Types:Enchantment
+K:Convoke
+K:ETBReplacement:Other:ChooseCT
+SVar:ChooseCT:DB$ ChooseType | Type$ Creature | AILogic$ MostProminentInComputerDeck | SpellDescription$ As this enchantment enters, choose a creature type.
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.ChosenType+YouCtrl | ValidTarget$ Permanent,Player | ReplaceWith$ DmgTwice | Description$ Double all damage that sources you control of the chosen type would deal.
+SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
+SVar:X:ReplaceCount$DamageAmount/Twice
+SVar:PlayMain1:TRUE
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nAs this enchantment enters, choose a creature type.\nDouble all damage that sources you control of the chosen type would deal.

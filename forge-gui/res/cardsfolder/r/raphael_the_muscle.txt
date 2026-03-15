@@ -6,6 +6,6 @@ R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Creature.YouCtrl+H
 SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When NICKNAME enters, create a Mutagen token.
 SVar:TrigToken:DB$ Token | TokenScript$ c_a_mutagen_sac | TokenOwner$ You
-K:Partner - Character select
+K:Partner:Character select
 SVar:X:ReplaceCount$DamageAmount/Twice
 Oracle:Double all damage that creatures you control with counters on them would deal.\nWhen Raphael enters, create a Mutagen token.\nPartner—Character select (You can have two commanders if both have this ability.)

@@ -67,7 +67,6 @@ public class ConniveEffect extends SpellAbilityEffect {
         for (final Player p : controllers) {
             final CardCollection connivers = CardLists.filterControlledBy(toConnive, p);
             while (!connivers.isEmpty()) {
-                final Map<Player, CardCollectionView> discardedMap = Maps.newHashMap();
                 final Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                 final CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(moveParams, sa);
                 final GameEntityCounterTable counterPlacements = new GameEntityCounterTable();
@@ -78,25 +77,28 @@ public class ConniveEffect extends SpellAbilityEffect {
 
                 p.drawCards(num, sa, moveParams);
 
-                CardCollection validDiscards = CardLists.filter(p.getCardsIn(ZoneType.Hand), CardPredicates.NON_TOKEN);
-                if (validDiscards.isEmpty() || !p.canDiscardBy(sa, true)) { // hand being empty unlikely, just to be safe
+                // in case anything triggers from drawing that happened before discard, e.g. Sneaky Snacker
+                game.getTriggerHandler().collectTriggerForWaiting();
+
+                CardCollection hand = new CardCollection(p.getCardsIn(ZoneType.Hand));
+                if (hand.isEmpty() || !p.canDiscardBy(sa, true)) {
                     continue;
                 }
 
-                int amt = Math.min(validDiscards.size(), num);
+                int amt = Math.min(hand.size(), num);
                 CardCollectionView toBeDiscarded = amt == 0 ? CardCollection.EMPTY :
-                        p.getController().chooseCardsToDiscardFrom(p, sa, validDiscards, amt, amt);
+                        p.getController().chooseCardsToDiscardFrom(p, sa, hand, amt, amt);
 
                 toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
-
-                int numCntrs = CardLists.getValidCardCount(toBeDiscarded, "Card.nonLand", p, host, sa);
 
                 // need to get newest game state to check if it is still on the battlefield and the timestamp didn't change
                 Card gamec = game.getCardState(conniver);
                 // if the card is not in the game anymore, this might still return true, but it's no problem
                 if (game.getZoneOf(gamec).is(ZoneType.Battlefield) && gamec.equalsWithGameTimestamp(conniver)) {
+                    int numCntrs = CardLists.getValidCardCount(toBeDiscarded, "Card.nonLand", p, host, sa);
                     conniver.addCounter(CounterEnumType.P1P1, numCntrs, p, counterPlacements);
                 }
+                final Map<Player, CardCollectionView> discardedMap = Maps.newHashMap();
                 discardedMap.put(p, CardCollection.getView(toBeDiscarded));
                 discard(sa, true, discardedMap, moveParams);
                 counterPlacements.replaceCounterEffect(game, sa, true);

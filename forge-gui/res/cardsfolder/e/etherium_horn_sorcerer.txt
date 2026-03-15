@@ -1,6 +1,6 @@
 Name:Etherium-Horn Sorcerer
 ManaCost:4 U R
-Types:Artifact Creature Minotaur Wizard
+Types:Artifact Creature Minotaur Wizard Sorcerer
 PT:3/6
 A:AB$ ChangeZone | Cost$ 1 U R | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 K:Cascade

@@ -10,7 +10,7 @@ SVar:DBTap:DB$ Tap | Defined$ Targeted.YouDontCtrl | SubAbility$ DBGainLife | St
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 A:AB$ Dig | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | DigNum$ 3 | ChangeNum$ 1 | NoReveal$ True | StackDescription$ SpellDescription | SpellDescription$ Look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
 A:AB$ Effect | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem — Teferi, Who Slows the Sunset | Image$ emblem_teferi_who_slows_the_sunset | Triggers$ DrawOppStep | StaticAbilities$ UntapOppStep | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Untap all permanents you control during each opponent's untap step" and "You draw a card during each opponent's draw step."
-SVar:UntapOppStep:Mode$ Continuous | Affected$ Permanent.YouCtrl | AddHiddenKeyword$ CARDNAME untaps during each opponent's untap step. | Description$ Untap all permanents you control during each opponent's untap step.
+SVar:UntapOppStep:Mode$ UntapOtherPlayer | ValidCard$ Permanent.YouCtrl | ValidPlayer$ Opponent | Description$ Untap all permanents you control during each opponent's untap step.
 SVar:DrawOppStep:Mode$ Phase | Phase$ Draw | ValidPlayer$ Opponent | Execute$ TrigDraw | Static$ True | TriggerDescription$ You draw a card during each opponent's draw step.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:PlayMain1:TRUE

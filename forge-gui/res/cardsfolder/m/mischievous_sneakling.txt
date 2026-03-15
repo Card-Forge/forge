@@ -1,0 +1,7 @@
+Name:Mischievous Sneakling
+ManaCost:1 UB
+Types:Creature Shapeshifter
+PT:2/2
+K:Changeling
+K:Flash
+Oracle:Changeling (This card is every creature type.)\nFlash

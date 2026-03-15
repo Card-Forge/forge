@@ -1,0 +1,35 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Fiery Fury
+Description=Fiery Fury burns everything. Mono-red burn and aggressive creatures.
+Deck Type=constructed
+Set=WTH
+Image=fiery_fury.jpg
+[main]
+8 Mountain|MIR|1
+8 Mountain|MIR|2
+7 Mountain|MIR|3
+1 Crystal Vein|MIR
+3 Bloodrock Cyclops|WTH
+3 Goblin Vandal|WTH
+1 Hulking Cyclops|VIS
+3 Lava Hounds|WTH
+2 Roc Hatchling|WTH
+1 Suq'Ata Lancer|VIS
+2 Talruum Minotaur|MIR
+2 Viashino Sandstalker|VIS
+1 Wildfire Emissary|MIR
+2 Fireblast|VIS
+1 Firestorm|WTH
+3 Incinerate|MIR
+1 Thunderbolt|WTH
+2 Spitting Earth|MIR
+3 Cone of Flame|WTH
+2 Kaervek's Torch|MIR
+1 Heart of Bogardan|WTH
+3 Mind Stone|WTH
+[sideboard]

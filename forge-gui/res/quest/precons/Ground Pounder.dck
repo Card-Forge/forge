@@ -1,0 +1,58 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Ground Pounder
+Description=A red-green beatdown deck from Beatdown. Features the biggest, baddest creatures including Shivan Dragon and Force of Nature.
+Deck Type=constructed
+Set=BTD
+Image=ground_pounder.jpg
+[main]
+4 Forest|TMP|1
+4 Forest|TMP|2
+3 Forest|TMP|3
+4 Mountain|TMP|1
+4 Mountain|TMP|2
+3 Mountain|TMP|3
+1 Dwarven Ruins|FEM
+1 Havenwood Battleground|FEM
+1 Slippery Karst|USG
+1 Smoldering Crater|USG
+1 Balduvian Horde|ALL
+1 Ball Lightning|4ED
+1 Bloodrock Cyclops|WTH
+1 Clockwork Beast|4ED
+1 Crash of Rhinos|MIR
+1 Crashing Boars|EXO
+1 Deadly Insect|ALL
+1 Erhnam Djinn|CHR
+1 Force of Nature|4ED
+1 Hulking Cyclops|VIS
+1 Kird Ape|ARN
+1 Llanowar Elves|4ED
+1 Lowland Giant|TMP
+1 Plated Spider|UDS
+1 Quirion Elves|MIR
+1 Raging Goblin|EXO
+1 Scaled Wurm|ICE
+1 Segmented Wurm|TMP
+1 Shambling Strider|ICE
+1 Shivan Dragon|4ED
+1 Talruum Minotaur|MIR
+1 Thundering Giant|USG
+1 Viashino Warrior|MIR
+1 Woolly Spider|ICE
+1 Yavimaya Wurm|ULG
+1 Fog|4ED
+1 Giant Growth|4ED
+1 Lightning Bolt|4ED
+1 Shock|STH
+1 Sonic Burst|EXO
+1 Thunderbolt|WTH
+1 Fireball|4ED
+1 Lava Axe|ULG
+1 Rampant Growth|MIR
+1 Wild Growth|4ED
+[sideboard]

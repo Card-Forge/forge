@@ -1,0 +1,7 @@
+Name:Flamebraider
+ManaCost:1 R
+Types:Creature Elemental Bard
+PT:2/2
+A:AB$ Mana | Cost$ T | Produced$ Combo Any | Amount$ 2 | RestrictValid$ Spell.Elemental,Activated.Elemental | SpellDescription$ Add two mana in any combination of colors. Spend this mana only to cast Elemental spells or activate abilities of Elemental sources.
+AI:RemoveDeck:Random
+Oracle:{T}: Add two mana in any combination of colors. Spend this mana only to cast Elemental spells or activate abilities of Elemental sources.

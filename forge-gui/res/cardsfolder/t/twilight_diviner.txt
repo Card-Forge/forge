@@ -1,0 +1,10 @@
+Name:Twilight Diviner
+ManaCost:2 B
+Types:Creature Elf Cleric
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSurveil | TriggerDescription$ When this creature enters, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the resto on top of your library in any order.)
+SVar:TrigSurveil:DB$ Surveil | Amount$ 2
+T:Mode$ ChangesZoneAll | ValidCards$ Creature.Other+YouCtrl+wasCastFromGraveyard,Creature.Other+YouCtrl+ThisTurnEnteredFrom_Graveyard | Destination$ Battlefield | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigCopy | TriggerDescription$ Whenever one or more other creatures you control enter, if they entered or were cast from a graveyard, create a token that's a copy of one of them. This ability triggers only once each turn.
+SVar:TrigCopy:DB$ CopyPermanent | Choices$ Card.TriggeredCards | ChoiceTitle$ Choose one of those creatures to copy
+DeckHas:Ability$Surveil|Graveyard
+Oracle:When this creature enters, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the resto on top of your library in any order.)\nWhenever one or more other creatures you control enter, if they entered or were cast from a graveyard, create a token that's a copy of one of them. This ability triggers only once each turn.

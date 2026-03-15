@@ -1,0 +1,8 @@
+Name:Dream Harvest
+ManaCost:5 UB UB
+Types:Sorcery
+A:SP$ DigUntil | Defined$ Opponent | Valid$ Card | FoundDestination$ Exile | RevealedDestination$ Exile | MinTotalCMC$ 5 | RememberRevealed$ True | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ Each opponent exiles cards from the top of their library until they have exiled cards with total mana value 5 or greater this way. Until end of turn, you may cast cards exiled this way without paying their mana costs.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | ForgetOnMoved$ Exile | RememberObjects$ Remembered | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Exile | Description$ Until end of turn, you may cast cards exiled this way without paying their mana costs.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Each opponent exiles cards from the top of their library until they have exiled cards with total mana value 5 or greater this way. Until end of turn, you may cast cards exiled this way without paying their mana costs.

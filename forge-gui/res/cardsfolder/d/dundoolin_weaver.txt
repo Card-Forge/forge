@@ -1,0 +1,7 @@
+Name:Dundoolin Weaver
+ManaCost:1 G
+Types:Creature Kithkin Druid
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Creature.YouCtrl | PresentCompare$ GE3 | Execute$ TrigChangeZone | TriggerDescription$ When this creature enters, if you control three or more creatures, return target permanent card from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Permanent.YouOwn | TgtPrompt$ Choose target permanent card in your graveyard
+Oracle:When this creature enters, if you control three or more creatures, return target permanent card from your graveyard to your hand.

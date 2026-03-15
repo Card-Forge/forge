@@ -25,14 +25,18 @@ Image=grave_danger.jpg
 2 Compulsion|TOR
 2 Crypt Creeper|ODY
 1 False Memories|TOR
-11 Island|ODY
+4 Island|ODY|1
+4 Island|ODY|2
+3 Island|ODY|3
 1 Morgue Theft|ODY
 2 Obsessive Search|TOR
 4 Organ Grinder|TOR
 1 Painbringer|ODY
 2 Psychatog|ODY
 1 Skywing Aven|TOR
-11 Swamp|ODY
+4 Swamp|ODY|1
+4 Swamp|ODY|2
+3 Swamp|ODY|3
 2 Tainted Isle|TOR
 1 Zombie Assassin|ODY
 [sideboard]

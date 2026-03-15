@@ -1,0 +1,40 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Gatecrasher
+Description=Gatecrasher smashes through defenses. Green-red aggression breaks down doors.
+Deck Type=constructed
+Set=WTH
+Image=gatecrasher.jpg
+[main]
+3 Mountain|MIR|1
+2 Mountain|MIR|2
+2 Mountain|MIR|3
+5 Forest|MIR|1
+5 Forest|MIR|2
+5 Forest|MIR|3
+1 Aboroth|WTH
+3 Arctic Wolves|WTH
+1 Bogardan Firefiend|WTH
+2 Granger Guildmage|MIR
+1 Llanowar Behemoth|WTH
+3 Llanowar Sentinel|WTH
+1 Maraxus of Keld|WTH
+2 Redwood Treefolk|WTH
+2 Stampeding Wildebeests|VIS
+2 Striped Bears|WTH
+2 Uktabi Efreet|WTH
+1 Uktabi Orangutan|VIS
+3 Wall of Roots|MIR
+2 Fire Whip|WTH
+2 Incinerate|ICE
+2 Cone of Flame|WTH
+1 Creeping Mold|VIS
+1 Kaervek's Torch|MIR
+3 Rampant Growth|MIR
+1 Savage Twister|MIR
+2 Dragon Mask|VIS
+[sideboard]

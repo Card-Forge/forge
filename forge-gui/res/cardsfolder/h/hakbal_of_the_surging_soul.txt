@@ -3,7 +3,7 @@ ManaCost:2 G U
 Types:Legendary Creature Merfolk Scout
 PT:3/3
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExplore | TriggerDescription$ At the beginning of combat on your turn, each Merfolk creature you control explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on the exploring creature, then put the card back or put it into your graveyard.)
-SVar:TrigExplore:DB$ Explore | Defined$ Valid Merfolk.YouCtrl
+SVar:TrigExplore:DB$ Explore | Defined$ Valid Creature.Merfolk+YouCtrl
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you may put a land card from your hand onto the battlefield. If you don't, draw a card.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1 | Optional$ True | RememberChanged$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanup

@@ -2,7 +2,7 @@ import argparse
 import json
 import requests
 
-def manualRankings(edition='TLA'):
+def manualRankings(edition='ECL'):
     with open(edition + '.json', 'r') as f:
         cardlist = json.load(f)
         # remove duplicates
@@ -21,7 +21,7 @@ def manualRankings(edition='TLA'):
                 out.write('|'.join(l))
                 out.write('\n')
 
-def draftsimRankings(edition='TLA', extra=None):
+def draftsimRankings(edition='ECL', extra=None):
 	edition = edition.upper()
 	url1 = 'https://draftsim.com/generated/%s/' % (edition)
 	url2 = '%s' % edition
@@ -100,8 +100,7 @@ if __name__ == "__main__":
     parser.add_argument('-x', action='store', dest='altpage', help='Additional rankings page', required=False)
     parser.add_argument('-m', action='store_true', dest='manual', help='Additional rankings page', required=False)
     result = parser.parse_args()
-    manual = result.manual is not None
-    if manual:
+    if result.manual:
         manualRankings(result.setcode)
     else:
         draftsimRankings(result.setcode, result.altpage)

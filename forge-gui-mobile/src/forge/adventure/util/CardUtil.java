@@ -19,6 +19,7 @@ import forge.deck.io.DeckSerializer;
 import forge.game.GameFormat;
 import forge.item.BoosterPack;
 import forge.item.PaperCard;
+import forge.item.PaperCardPredicates;
 import forge.item.SealedTemplate;
 import forge.item.generation.UnOpenedProduct;
 import forge.model.FModel;
@@ -771,11 +772,23 @@ public class CardUtil {
     public static PaperCard getCardByName(String cardName) {
         List<PaperCard> validCards;
         // Faster to ask the CardDB for a card name than it is to search the pool.
-        if (Config.instance().getSettingData().useAllCardVariants)
-            validCards = FModel.getMagicDb().getCommonCards().getAllCards(cardName);
-        else
+        if (Config.instance().getSettingData().useAllCardVariants) {
+            ConfigData configData = Config.instance().getConfigData();
+            Predicate<PaperCard> editionFilter;
+            if (configData.allowedEditions != null && configData.allowedEditions.length > 0) {
+                Set<String> allowed = new HashSet<>(Arrays.asList(configData.allowedEditions));
+                editionFilter = card -> allowed.contains(card.getEdition());
+            } else {
+                editionFilter = card -> (!Arrays.asList(configData.restrictedEditions).contains(card.getEdition()));
+            }
+            Predicate<PaperCard> combined_predicate = editionFilter;
+            if (Config.instance().getSettingData().excludeAlchemyVariants) {
+                combined_predicate = editionFilter.and(PaperCardPredicates.IS_REBALANCED.negate());
+            }
+            validCards = FModel.getMagicDb().getCommonCards().getAllCards(cardName, combined_predicate);
+        } else {
             validCards = FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt(cardName);
-
+        }
         if (validCards.isEmpty()) {
             return getReplacement(cardName, "Wastes");
         }
@@ -784,6 +797,16 @@ public class CardUtil {
     }
 
     public static PaperCard getCardByNameAndEdition(String cardName, String edition) {
+        ConfigData configData = Config.instance().getConfigData();
+        if (configData.allowedEditions != null && configData.allowedEditions.length > 0) {
+            if (!Arrays.asList(configData.allowedEditions).contains(edition)) {
+                return getCardByName(cardName);
+            }
+        } else if (configData.restrictedEditions != null && configData.restrictedEditions.length > 0) {
+            if (Arrays.asList(configData.restrictedEditions).contains(edition)) {
+                return getCardByName(cardName);
+            }
+        }
         List<PaperCard> cardPool = Config.instance().getSettingData().useAllCardVariants
                 ? FModel.getMagicDb().getCommonCards().getAllCards(cardName)
                 : FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt(cardName);

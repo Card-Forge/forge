@@ -1,0 +1,11 @@
+Name:Zimone, Infinite Analyst
+ManaCost:1 G U
+Types:Legendary Creature Human Wizard
+PT:0/4
+S:Mode$ ReduceCost | ValidCard$ Card.hasXCost | Type$ Spell | Activator$ You | Amount$ Y | CheckSVar$ X | SVarCompare$ EQ0 | Description$ The first spell you cast with {X} in its mana cost each turn costs {1} less to cast for each +1/+1 counter on NICKNAME.
+T:Mode$ SpellCast | ValidCard$ Card.hasXCost | ValidActivatingPlayer$ You | ActivatorThisTurnCast$ EQ1 | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast your first spell with {X} in its mana cost each turn, put two +1/+1 counters on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2
+SVar:X:Count$ThisTurnCast_Card.YouCtrl+hasXCost
+SVar:Y:Count$CardCounters.P1P1
+DeckHas:Ability$Counters
+Oracle:The first spell you cast with {X} in its mana cost each turn costs {1} less to cast for each +1/+1 counter on Zimone.\nWhenever you cast your first spell with {X} in its mana cost each turn, put two +1/+1 counters on Zimone.

@@ -1,0 +1,38 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Rebel's Call
+Description=Rebel's Call assembles an army of Rebels. Search your deck for the right soldier at the right time.
+Deck Type=constructed
+Set=MMQ
+Image=rebels_call.jpg
+[main]
+7 Plains|MMQ|1
+7 Plains|MMQ|2
+6 Plains|MMQ|3
+1 Fountain of Cho|MMQ
+2 Ballista Squad|MMQ
+2 Charm Peddler|MMQ
+1 Cho-Manno, Revolutionary|MMQ
+2 Devout Witness|MMQ
+2 Jhovall Rider|MMQ
+2 Nightwind Glider|MMQ
+2 Pious Warrior|MMQ
+2 Ramosian Captain|MMQ
+2 Ramosian Commander|MMQ
+2 Ramosian Lieutenant|MMQ
+3 Ramosian Sergeant|MMQ
+1 Ramosian Sky Marshal|MMQ
+2 Steadfast Guard|MMQ
+2 Task Force|MMQ
+2 Thermal Glider|MMQ
+2 Arrest|MMQ
+2 Cho-Manno's Blessing|MMQ
+1 Moonlit Wake|MMQ
+1 Afterlife|MMQ
+2 Disenchant|MMQ
+2 Ramosian Rally|MMQ
+[sideboard]

@@ -114,7 +114,7 @@ public class RegenerateEffect extends SpellAbilityEffect {
         }
         game.getAction().moveToCommand(eff, sa);
 
-        game.getEndOfTurn().addUntil(exileEffectCommand(game, eff));
+        game.getEndOfTurn().addUntil(() -> game.getAction().exileEffect(eff));
     }
 
 }

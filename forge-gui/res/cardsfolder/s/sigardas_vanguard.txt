@@ -9,6 +9,6 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChoose | Secondary$ True |
 SVar:TrigChoose:DB$ ChooseCard | MinAmount$ 0 | Amount$ Max | Choices$ Creature | WithDifferentPowers$ True | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ ChosenCard | KW$ Double Strike | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
-SVar:Max:Count$DifferentPower_Creature
+SVar:Max:Count$Valid Creature$DifferentCardPower
 SVar:HasAttackEffect:TRUE
 Oracle:Flash\nFlying\nWhenever Sigarda's Vanguard enters or attacks, choose any number of creatures with different powers. Those creatures gain double strike until end of turn.

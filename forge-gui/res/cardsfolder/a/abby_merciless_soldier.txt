@@ -2,7 +2,7 @@ Name:Abby, Merciless Soldier
 ManaCost:1 R G
 Types:Legendary Creature Human Survivor
 PT:4/4
-K:Partner - Survivors
+K:Partner:Survivors
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When you cast this spell, create a number of 1/1 black Fungus Zombie creature tokens named Cordyceps Infected equal to the amount of mana spent to cast it.
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ cordyceps_infected | TokenOwner$ You
 SVar:X:Count$CastTotalManaSpent

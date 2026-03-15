@@ -96,37 +96,11 @@
 								"op": "&gt;=",
 								"val": 4
 							}
-						},
-						{
-                            "checkQuestFlag": "mainQuest",
-                            "not": true
-                        }
+						}
 					],
 					"text": "Suddenly, the gate disappears right in front of your eyes, You are now free to pass.",
 					"options": [ { "name": "(continue)" } ]
 				},
-				{
-                	"name": "Urza, I've done as you asked! It's time to end this!",
-                	"action": [ { "deleteMapObject": 55 } ],
-                	"condition": [
-                		{
-                			"getMapFlag": {
-                				"key": "enemiesDefeated",
-                				"op": "&gt;=",
-                				"val": 4
-                			}
-                		},
-                		{
-                             "checkQuestFlag": "Ch1BlueCastleComplete",
-                             "not": true
-                        },
-                        {
-                             "checkQuestFlag": "mainQuest"
-                        }
-                	],
-                		"text": "Suddenly, the gate disappears right in front of your eyes, You are now free to pass.",
-                		"options": [ { "name": "(continue)" } ]
-                },
 				{
 					"name": "You knock on the door",
 					"condition": [ { "checkMapFlag": "intro" } ],

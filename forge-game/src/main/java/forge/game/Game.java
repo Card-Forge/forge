@@ -33,6 +33,7 @@ import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.event.Event;
 import forge.game.event.GameEventDayTimeChanged;
+import forge.game.event.GameEventAddLog;
 import forge.game.event.GameEventGameOutcome;
 import forge.game.phase.Phase;
 import forge.game.phase.PhaseHandler;
@@ -45,14 +46,10 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.staticability.StaticAbilityCantChangeDayTime;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
-import forge.game.zone.CostPaymentStack;
-import forge.game.zone.MagicStack;
-import forge.game.zone.Zone;
-import forge.game.zone.ZoneType;
+import forge.game.zone.*;
 import forge.trackable.Tracker;
 import forge.util.*;
 import forge.util.collect.FCollection;
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
@@ -280,7 +277,7 @@ public class Game {
         if (c == null) {
             return null;
         }
-        return ObjectUtils.getIfNull(changeZoneLKIInfo.get(c.getId(), c.getGameTimestamp()), c);
+        return Objects.requireNonNullElse(changeZoneLKIInfo.get(c.getId(), c.getGameTimestamp()), c);
     }
     public final void clearChangeZoneLKIInfo() {
         changeZoneLKIInfo.clear();
@@ -493,9 +490,6 @@ public class Game {
     public final GameLog getGameLog() {
         return gameLog;
     }
-    public final void updateGameLogForView() {
-        view.updateGameLog(gameLog);
-    }
 
     public final Zone getStackZone() {
         return stackZone;
@@ -641,7 +635,7 @@ public class Game {
         return cards;
     }
 
-    private static class CardStateVisitor extends Visitor<Card> {
+    private static class CardStateVisitor implements Visitor<Card> {
         Card found = null;
         Card old = null;
 
@@ -671,7 +665,7 @@ public class Game {
         return visit.getFound(notFound);
     }
 
-    private static class CardIdVisitor extends Visitor<Card> {
+    private static class CardIdVisitor implements Visitor<Card> {
         Card found = null;
         int id;
 
@@ -729,6 +723,9 @@ public class Game {
                 return;
             }
             if (!visitor.visitAll(player.getZone(ZoneType.Battlefield).getCards(false))) {
+                return;
+            }
+            if (!visitor.visitAll(((PlayerZoneBattlefield)player.getZone(ZoneType.Battlefield)).getMeldedCards())) {
                 return;
             }
             if (!visitor.visitAll(player.getZone(ZoneType.Exile).getCards())) {
@@ -830,22 +827,22 @@ public class Game {
     public void onPlayerLost(Player p) {
         //set for Avatar
         p.setHasLost(true);
-        // Rule 800.4 Losing a Multiplayer game
+        // CR 800.4 Losing a Multiplayer game
         CardCollectionView cards = this.getCardsInGame();
         boolean planarControllerLost = false;
         boolean planarOwnerLost = false;
         boolean isMultiplayer = getPlayers().size() > 2;
         CardZoneTable triggerList = new CardZoneTable(getLastStateBattlefield(), getLastStateGraveyard());
 
-        // 702.142f & 707.9
+        // CR 702.142f & 707.9
         // If a player leaves the game, all face-down cards that player owns must be revealed to all players.
         // At the end of each game, all face-down cards must be revealed to all players.
-        if (!isMultiplayer) {
+        if (isMultiplayer) {
+            p.revealFaceDownCards();
+        } else {
             for (Player pl : getPlayers()) {
                 pl.revealFaceDownCards();
             }
-        } else {
-            p.revealFaceDownCards();
         }
 
         // TODO free any mindslaves
@@ -857,8 +854,8 @@ public class Game {
             }
         }
 
-        for (Card c : cards) {
-            if (c.isPlane() || c.isPhenomenon()) {
+        if (getActivePlanes() != null) {
+            for (Card c : getActivePlanes()) {
                 if (c.getController().equals(p)) {
                     planarControllerLost = true;
                 }
@@ -866,14 +863,17 @@ public class Game {
                     planarOwnerLost = true;
                 }
             }
+        }
 
+        for (Card c : cards) {
             if (isMultiplayer) {
                 // unattach all "Enchant Player"
                 c.removeAttachedTo(p);
                 if (c.getOwner().equals(p)) {
-                    if (c.getEffectSource() != null && !c.isEmblem()) {
-                        // move effect to another player so they continue to work
+                    // check that it wasn't cleaned up already
+                    if (c.getEffectSource() != null && !c.isEmblem() && p.getZone(ZoneType.Command).contains(c)) {
                         c.getZone().remove(c);
+                        // move effect to another player so they continue to work
                         getNextPlayerAfter(p).getZone(ZoneType.Command).add(c);
                     } else {
                         for (Card cc : cards) {
@@ -912,40 +912,39 @@ public class Game {
 
         triggerList.triggerChangesZoneAll(this, null);
 
-        // 901.6: If the current planar controller would leave the game, instead the next player
-        // in turn order that wouldn't leave the game becomes the planar controller, then the old
-        // planar controller leaves
+        // CR 901.6 If the current planar controller would leave the game, instead the next player
+        // in turn order that wouldn't leave the game becomes the planar controller
         if (planarControllerLost) {
             for (Card c : getActivePlanes()) {
-                if (c != null && !c.getOwner().equals(p)) {
+                if (!c.getOwner().equals(p)) {
                     c.setController(getNextPlayerAfter(p), 0);
                     getAction().controllerChangeZoneCorrection(c);
                 }
             }
         }
-        // 901.10: When a player leaves the game, all objects owned by that player except abilities
+        // CR 901.10 When a player leaves the game, all objects owned by that player except abilities
         // from phenomena leave the game. (See rule 800.4a.) If that includes a face-up plane card
-        // or phenomenon card, the planar controller turns the top card of his or her planar deck face up.the game.
+        // or phenomenon card, the planar controller turns the top card of his or her planar deck face up
         if (planarOwnerLost) {
             Player planarController = getPhaseHandler().getPlayerTurn();
             if (planarController.equals(p)) {
                 planarController = getNextPlayerAfter(p);
             }
-            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             CardCollection planesLeavingGame =  new CardCollection();
             for (Card c : getActivePlanes()) {
-                if (c != null && c.getOwner().equals(p)) {
+                if (c.getOwner().equals(p)) {
                     planesLeavingGame.add(c);
                     planarController.removeCurrentPlane(c);
                 }
             }
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Cards, planesLeavingGame);
             getTriggerHandler().runTrigger(TriggerType.PlaneswalkedFrom, runParams, false);
             planarController.planeswalk(null);
         }
 
         if (p.isMonarch()) {
-            // if the player who lost was the Monarch, someone else will be the monarch
+            // CR 724.4 if the player who lost was the Monarch, someone else will be the monarch
             // TODO need to check rules if it should try the next player if able
             if (p.equals(getPhaseHandler().getPlayerTurn())) {
                 getAction().becomeMonarch(getNextPlayerAfter(p), p.getMonarchSet());
@@ -955,10 +954,8 @@ public class Game {
         }
 
         if (p.hasInitiative()) {
-            // The third way to take the initiative is if the player who currently has the initiative leaves the game.
-            // When that happens, the player whose turn it is takes the initiative.
-            // If the player who has the initiative leaves the game on their own turn,
-            // or the active player left the game at the same time, the next player in turn order takes the initiative.
+            // CR 725.4 If the player who has the initiative leaves the game, the active player takes the initiative
+            // If the active player is leaving the game or if there is no active player, the next player in turn order takes the initiative.
             if (p.equals(getPhaseHandler().getPlayerTurn())) {
                 getAction().takeInitiative(getNextPlayerAfter(p), p.getInitiativeSet());
             } else {
@@ -1096,7 +1093,7 @@ public class Game {
         Predicate<Card> goodForAnte = CardPredicates.BASIC_LANDS.negate();
         Card ante = Aggregates.random(IterableUtil.filter(lib, goodForAnte));
         if (ante == null) {
-            getGameLog().add(GameLogEntryType.ANTE, "Only basic lands found. Will ante one of them");
+            fireEvent(new GameEventAddLog(GameLogEntryType.ANTE, "Only basic lands found. Will ante one of them"));
             ante = Aggregates.random(lib);
         }
         anteed.put(player, ante);

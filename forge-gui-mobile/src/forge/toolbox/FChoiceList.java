@@ -28,7 +28,6 @@ import forge.card.CardZoom;
 import forge.card.CardZoom.ActivateHandler;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostParser;
 import forge.game.card.CardView;
 import forge.game.card.IHasCardView;
 import forge.game.keyword.Keyword;
@@ -412,7 +411,7 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
                 String title = value.toString().substring(0, manaStringindex - 1); //support ability/name with spaces...
                 String cost = TextUtil.fastReplace(value.toString().substring(manaStringindex), "}{", " ");
                 cost = TextUtil.fastReplace(TextUtil.fastReplace(cost, "{", ""), "}", "");
-                ManaCost manaCost = new ManaCost(new ManaCostParser(cost));
+                ManaCost manaCost = new ManaCost(cost);
                 CardFaceSymbols.drawManaCost(g, manaCost, x + font.getBounds(title).width, y + (h - MANA_SYMBOL_SIZE) / 2, MANA_SYMBOL_SIZE);
                 g.drawText(title, font, foreColor, x, y, w, h, allowDefaultItemWrap(), Align.left, true);
             } else {

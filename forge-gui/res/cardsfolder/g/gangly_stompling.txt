@@ -1,0 +1,7 @@
+Name:Gangly Stompling
+ManaCost:2 RG
+Types:Creature Shapeshifter
+PT:4/2
+K:Changeling
+K:Trample
+Oracle:Changeling (This card is every creature type.)\nTrample

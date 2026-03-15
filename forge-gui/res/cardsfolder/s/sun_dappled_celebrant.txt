@@ -1,0 +1,7 @@
+Name:Sun-Dappled Celebrant
+ManaCost:4 W W
+Types:Creature Treefolk Cleric
+PT:5/6
+K:Convoke
+K:Vigilance
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nVigilance

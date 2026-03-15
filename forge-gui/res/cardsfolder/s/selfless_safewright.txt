@@ -1,0 +1,10 @@
+Name:Selfless Safewright
+ManaCost:3 G G
+Types:Creature Elf Warrior
+PT:4/2
+K:Flash
+K:Convoke
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChooseType | TriggerDescription$ When this creature enters, choose a creature type. Other permanents you control of that type gain hexproof and indestructible until end of turn.
+SVar:TrigChooseType:DB$ ChooseType | Defined$ You | Type$ Creature | SubAbility$ DBPumpAll | AILogic$ MostProminentComputerControls
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Permanent.YouCtrl+Other+ChosenType | KW$ Hexproof & Indestructible
+Oracle:Flash\nConvoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nWhen this creature enters, choose a creature type. Other permanents you control of that type gain hexproof and indestructible until end of turn.

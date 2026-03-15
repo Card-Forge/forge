@@ -4,6 +4,6 @@ Types:Sorcery
 A:SP$ DestroyAll | ValidCards$ Creature | RememberDestroyed$ True | SubAbility$ DBGainLife | SpellDescription$ Destroy all creatures. You gain life equal to the number of creatures you controlled that were destroyed this way.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:RememberedLKI$FilterControlledByYou_Number$1
+SVar:X:RememberedLKI$Valid Card.YouCtrl
 DeckHas:Ability$LifeGain
 Oracle:Destroy all creatures. You gain life equal to the number of creatures you controlled that were destroyed this way.

@@ -1,0 +1,12 @@
+Name:Mass of Mysteries
+ManaCost:W U B R G
+Types:Legendary Creature Elemental
+PT:5/5
+K:First Strike
+K:Vigilance
+K:Trample
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, another target Elemental you control gains myriad until end of turn. (Whenever it attacks, for each opponent other than defending player, you may create a token copy that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)
+SVar:TrigPump:DB$ Pump | ValidTgts$ Elemental.Other+YouCtrl | TgtPrompt$ Select another target Elemental you control | KW$ Myriad
+SVar:PlayMain1:TRUE
+DeckHints:Type$Elemental
+Oracle:First strike, vigilance, trample\nAt the beginning of combat on your turn, another target Elemental you control gains myriad until end of turn. (Whenever it attacks, for each opponent other than defending player, you may create a token copy that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)

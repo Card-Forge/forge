@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="37" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="108">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Howling Moon&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <layer id="1" name="Background" width="37" height="28">
+  <data encoding="base64" compression="zlib">
+   eJzt1TEKADAIQ1GHLl40t+jdS0HoCaoZvvDmRBxURqjcUXpw6gIA8MOf8LbX05E1ve9En185nbcDAHg7habAmQ==
+  </data>
+ </layer>
+ <layer id="2" name="Grass" width="37" height="28">
+  <data encoding="base64" compression="zlib">
+   eJzFl1FuwjAMhvu4pdLe97bbdKCeY4+cYpdpB7vHDrIxOMVi0V+4/5LUSUuJZCFomny2f8ehc1V1qqvq7O3V26+3D//bWuPb7/fp99vU19/AIrb3z37857GOr3GL0dZjJuE43IkFo6H8pDg6V5bHbtBDb3wf+ZvSjawred1mxg7vQQ8b4/uaS68lvsHOg75y89kontyaAZf+LpqCtg4FPHrdOVy3GC3FClw6D2ueNzI4fyETnaKG3h7Hdk+mJlADFib2wWJWplZpjeNUsm8pk+4Vuv71WcY5XIIJNYz6417Bc+WZzMVZuHSMeD/0V8vc4wpMeq/UnJiOpS579/8MKeFAT8jxOVRXoXNua4h5TOM59buLMOneApuKeW4uEMOp+M89i6xM4MBd6UTWK9aleXTc9UDMQ/nQPX9pjqUtFCvUj8QUdcla+HqYt+/L88UsLL0b/5fRd7wS/3ht+BdiCmmK73epfL9naAD34r279rkUj7X+SudoHvTfmJ+5TKy1PqIzNsTemntm0X2G9wILfE7ldTfYk7FHpeICn/h/KJ7F7h2lxuMPT9pyfQ==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="37" height="28">
+  <data encoding="base64" compression="zlib">
+   eJyNVztvE0EQvoC8F9s40FJBE0U0UICdYCeOqIA/QUnHQ0hUIOh5UxCb2ImdEvEPaJBSpEU8fgESICRegsYBfGFGO5/2u/UFGGm057293W9mvpkdZ6Uk2euSJJMxkXFbxp+iOzbucflRdSFNknnRKeefG6InRX/pHomf170g2/Q91hTJlK3py/hYtCO6LlqXvVuibdEV+f3I+TMbNtcwPNuGTbGoTUs2/3La73nc5lV076Homs3/JLsV+2YS1vUIS8ewbZN/fsu44YINsa+WU49lUfSrvPsheqns7Wrbe5W+nbVqNrbt/aqdCWH/jOWME6m3QXH06Lt527cZ+Qo4vovekuc58c+91GOKpWP+0TPGkc3rLr9OMfXNr7Bj6PLrVNS3L+TMAxWPQzGo3hF9YPpQ9JWsqVUmMQ3MPysu2NuIbMY68AccVTv0m8V0ct8LZY9HcXyW8aic/8l5/SJ6RH7PVDyfIM9mvA5ciAG4MGdrZkXfTvnnusU7M64pHrVlmfAoh8DTK4LpvuG5Zz65dipJ3kz7+dui3+TdZYodzl2yfBlG/NlNBhS3DVo/RRwHtvsWo4tl75P9FR/Pu6n31cOIT1dr4blp+YxYZcYp5M1eOrtPfoUNwIM41o3T8Mct0u/G8zuGN6P9r9c8F28QNj5Xa0PX5eOzZfhX7T38BE4y/xA7cBqcUv/g9zGrTXGOsHw8FM4Ymo4jP+2hWgys9TTPK5ULESbwB3Pw0ULBt7FwHFrGNfhD90BdLpJZ2kPrLXjDuLQuHbXa1KS6znKmOolnSDV9wbih9fo33T2ztMdmEuq9StO+0RwrwvXNhbtK9+RYKJ73Vf8e+d2z+6plCjtwt6hs0flXCvgIqVYCLtQn1KalqM5r/M6Xvaos2btWFNusFOr5IMr9/5FNw/VaMOwjfBq3y+WAgXU3QVw6lk8ah7/lB/zMdSOz38ornMf49E5hLFsF++Id6jRiuW53vz6zn7AOnMD9tGEYmpYf6EF0bjYp9g30ieB8Wgn1cYfu3q7VpjXqBVB/0IMgNxtWr8aEG2egN5hPizHAv8B8Wrh9tup50nWhh+pGil4JZwEf7uEd8lM74ip0LvIPei61ATVQY8yY1uycVhr6qBWbByaNgfahzQgLeonFXXwRczczLLAfvtbv3wmeD9V83MGhMdm+bPcXejz1N3qCFvklSYoxxPPc1/Zc3q/wn9qO3hN9NfdPqIWoBejp/nZHgXPgKOce7suey/MMed514W4flYIePjipqAV9qg+xZJQniH/XbEGeKj705BDUHvSLuLuqM0GLMIFTHZfvs27WAh7kLP5vIMaob2v/8C/H7vk+j4XnYkzgVD0t9hHi36b4g7ujUujRir6FcOyAiedifCqDyMai2qtyruZxYFRFLUKvWPRfkmMHTDzH+BTTyP5vxoL7HTUdd8Av4ifyH3WN71W2i/3Az+AU40PuFWHC/d5K8/0EYjYqTXJ3N2E/xDkIv6iMyMd6/h+Np6Jn
+  </data>
+ </layer>
+ <layer id="7" name="Roads" width="37" height="28">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBgcoFhloF2ACUbdRD1wkI52PWIkT58udZ0BB+S6h9rgBJTWZiDeTdSMtxNIbhgFuAEsnIjN68SkW0rKDZBeGB6sQHugHTDMQB8bA0M/CViPHbdZGnjsoWXayuDA7z5cZRupblKlgvtICU9qAHLCG+ReWroLW5gTk69PIrmJWnUtcpzC3EVsXagDdE8WB3XcQSwgFE4nqRxvlOZXUsMIn33UKkNICSNC9pHjlhZuytyED5BbRqEDWqVtXO4jpm0DC6PB1AYYbPEGAsS6CV99DQByujLC
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="296.5" y="447" width="69" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="62" template="../../../../common/maps/obj/enemy.tx" x="39.052" y="240.531">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Sarulf"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value="69,67,74,72"/>
+   </properties>
+  </object>
+  <object id="64" template="../../../../common/maps/obj/booster.tx" x="369.687" y="74.9257">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;MID&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;colors&quot;: [ &quot;green&quot; ],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MID&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;green&quot; ],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MID&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;green&quot; ],
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="67" template="../../../../common/maps/obj/waypoint.tx" x="186.459" y="239.84"/>
+  <object id="69" template="../../../../common/maps/obj/waypoint.tx" x="9.232" y="239.443"/>
+  <object id="72" template="../../../../common/maps/obj/waypoint.tx" x="391.474" y="276.933"/>
+  <object id="73" template="../../../../common/maps/obj/waypoint.tx" x="357.418" y="162.665"/>
+  <object id="74" template="../../../../common/maps/obj/waypoint.tx" x="255.191" y="267.979"/>
+  <object id="80" template="../../../../common/maps/obj/waypoint.tx" x="424.789" y="153.629"/>
+  <object id="82" template="../../../../common/maps/obj/collision.tx" x="-5.68291" y="447.892" width="606.918" height="16"/>
+  <object id="83" template="../../../../common/maps/obj/collision.tx" x="-1.77538" y="-17.1576" width="594.418" height="16"/>
+  <object id="84" template="../../../../common/maps/obj/collision.tx" x="-15.9632" y="-14.571" width="16" height="477.07"/>
+  <object id="85" template="../../../../common/maps/obj/collision.tx" x="591.229" y="-16.3625" width="16" height="477.07"/>
+  <object id="87" template="../../../../common/maps/obj/enemy.tx" x="350" y="122.5">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Full Moon's Rise|ISD&quot;, &quot;Hermit of the Natterknolls&quot;]
+}</property>
+    <property name="enemy" value="Tovolar"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="88" template="../../../../common/maps/obj/enemy.tx" x="386.5" y="144">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Rahilda"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value="73,80"/>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/enemy.tx" x="385" y="218">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Ulrich"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/enemy.tx" x="157.167" y="325.167">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Packsong Pup|VOW&quot;, &quot;Highspire Artisan&quot;]
+}</property>
+    <property name="enemy" value="Voja"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/collision.tx" x="370.291" y="80.5" width="31.418" height="16"/>
+  <object id="95" template="../../../../common/maps/obj/manashards.tx" x="34.6667" y="401.333"/>
+  <object id="98" template="../../obj/treasure.tx" x="24.6667" y="426.667">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;Green&quot; ]
+},
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;White&quot; ]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="99" template="../../../../common/maps/obj/booster.tx" x="337" y="74.3333">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;MID&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;colors&quot;: [ &quot;green&quot; ],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MID&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;green&quot; ],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;MID&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;green&quot; ],
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="100" template="../../../../common/maps/obj/dialog.tx" x="295.75" y="408.477" width="79.333" height="9.8788" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The woods ahead are majestic and the air is filled with the refreshing scent of pine. In the distance, a chorus of wolves howls loudly.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="101" template="../../../../common/maps/obj/scroll.tx" x="134.667" y="411.333">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Howling Moon&quot;, &quot;editions&quot;: [ &quot;VOW&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="102" template="../../../../common/maps/obj/scroll.tx" x="533.333" y="25.3333">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Immerwolf&quot;, &quot;editions&quot;: [ &quot;DKA&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="103" template="../../../../common/maps/obj/scroll.tx" x="566.667" y="154.667">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Full Moon's Rise&quot;, &quot;editions&quot;: [ &quot;ISD&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="105" template="../../../../common/maps/obj/scroll.tx" x="486" y="234">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Howl of the Night Pack&quot;, &quot;editions&quot;: [ &quot;M10&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="106" template="../../../../common/maps/obj/scroll.tx" x="151.333" y="74">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Howlpack Resurgence&quot;, &quot;editions&quot;: [ &quot;SOI&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="107" template="../../../../common/maps/obj/enemy.tx" x="280.5" y="388.5">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'Pst! You there, {var=player_name}! Come here, quickly!'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;The wolves have howled their last&quot;,
+					&quot;text&quot;: &quot;'Justice is served! Now let us enjoy the rewards of a job well done!'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Jacob Hauken, Inspector&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 1000 }           
+                      ]
+                    } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 5
+							}
+						}
+					],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;Who are you and how do you know my name?&quot;,
+					&quot;text&quot;: &quot;'Why, I'm Jacob Hauken, Innistrad's best investigator! Knowing things is my business. I've tracked down the culprits for a series of brutal murders to this very den! The problem is the culprits are a pack of wolves and werewolves, and I'm not equipped to bring them to justice. So, if you take care of that part, I'll happily split the reward with you!'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;Not interested, weirdo.&quot;,
+					&quot;text&quot;: &quot;'Hmph. Some people.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Jacob Hauken"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

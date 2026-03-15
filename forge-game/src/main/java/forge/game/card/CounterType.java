@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public interface CounterType extends Serializable {
 
-    public static CounterType getType(String name) {
+    static CounterType getType(String name) {
         if ("Any".equalsIgnoreCase(name)) {
             return null;
         }
@@ -15,17 +15,17 @@ public interface CounterType extends Serializable {
         }
     }
 
-    public String getName();
+    String getName();
 
-    public String getCounterOnCardDisplayName();
+    String getCounterOnCardDisplayName();
 
-    public boolean is(CounterEnumType eType);
+    boolean is(CounterEnumType eType);
 
-    public boolean isKeywordCounter();
+    boolean isKeywordCounter();
 
-    public int getRed();
+    int getRed();
 
-    public int getGreen();
+    int getGreen();
 
-    public int getBlue();
+    int getBlue();
 }

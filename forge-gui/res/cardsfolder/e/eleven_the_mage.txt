@@ -9,7 +9,7 @@ SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1 | SubAbility$ DBPlay
 SVar:DBPlay:DB$ Play | ConditionCheckSVar$ HandSize | ConditionSVarCompare$ GE11 | Valid$ Card.YouOwn | ValidSA$ Instant,Sorcery | ValidZone$ Hand | WithoutManaCost$ True | Amount$ 1 | Controller$ You | Optional$ True
 SVar:HandSize:Count$ValidHand Card.YouOwn
-K:Friends forever
+K:Partner:Friends forever
 SVar:HasAttackEffect:TRUE
 DeckHints:Type$Instant|Sorcery
-Oracle:Your maximum hand size is eleven.\nWhenever Eleven, the Mage attacks, you draw a card and you lose 1 life. Then if you have eleven or more cards in your hand, you may cast an instant or sorcery spell from your hand without paying its mana cost.\nFriends forever (You can have two commanders if both have friends forever.)
+Oracle:Your maximum hand size is eleven.\nWhenever Eleven, the Mage attacks, you draw a card and you lose 1 life. Then if you have eleven or more cards in your hand, you may cast an instant or sorcery spell from your hand without paying its mana cost.\nPartner—Friends forever (You can have two commanders if both have this ability.)

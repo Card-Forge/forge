@@ -4,7 +4,7 @@ Types:Sorcery
 A:SP$ DestroyAll | ValidCards$ Artifact | RememberDestroyed$ True | NoRegen$ True | SubAbility$ DBRepeat | SpellDescription$ Destroy all artifacts. They can't be regenerated. The controller of each of those artifacts gains life equal to its mana value.
 SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBGainLife | SubAbility$ DBCleanup
 SVar:DBGainLife:DB$ GainLife | Defined$ Player.IsRemembered | LifeAmount$ X
-SVar:X:RememberedLKI$FilterControlledByRemembered_CardManaCost
+SVar:X:RememberedLKI$Valid Card.RememberedPlayerCtrl$CardManaCost
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 AI:RemoveDeck:Random

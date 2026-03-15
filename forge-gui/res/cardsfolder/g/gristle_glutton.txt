@@ -1,0 +1,8 @@
+Name:Gristle Glutton
+ManaCost:1 R
+Types:Creature Goblin Scout
+PT:1/3
+A:AB$ Discard | Cost$ T Blight<1> | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ Discard a card. If you do, draw a card.
+SVar:DBDraw:DB$ Draw | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:{T}, Blight 1: Discard a card. If you do, draw a card. (To blight 1, put a -1/-1 counter on a creature you control.)

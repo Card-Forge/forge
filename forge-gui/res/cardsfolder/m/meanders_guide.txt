@@ -1,0 +1,10 @@
+Name:Meanders Guide
+ManaCost:2 W
+Types:Creature Merfolk Scout
+PT:3/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerDescription$ Whenever this creature attacks, you may tap another untapped Merfolk you control. When you do, return target creature card with mana value 3 or less from your graveyard to the battlefield.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ tapXType<1/Merfolk.Other> | Execute$ TrigReturn | TriggerDescription$ When you do, return target creature card with mana value 3 or less from your graveyard to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | TgtPrompt$ Select target creature card with mana value 3 or less in your graveyard | ValidTgts$ Creature.cmcLE3+YouOwn | Origin$ Graveyard | Destination$ Battlefield
+SVar:HasAttackEffect:TRUE
+DeckHints:Type$Merfolk
+Oracle:Whenever this creature attacks, you may tap another untapped Merfolk you control. When you do, return target creature card with mana value 3 or less from your graveyard to the battlefield.

@@ -86,7 +86,9 @@ public class NetConnectUtil {
             public void send(final NetEvent event) {
                 if (event instanceof MessageEvent) {
                     final MessageEvent message = (MessageEvent) event;
-                    chatInterface.addMessage(new ChatMessage(message.getSource(), message.getMessage()));
+                    if (server.handleCommand(message.getMessage())) {
+                        return;
+                    }
                     server.broadcast(event);
                 }
             }
@@ -129,14 +131,13 @@ public class NetConnectUtil {
         int port;
 
         URLValidator.HostPort hostPort = parseURL(url);
-        if(hostPort == null) {
+        if (hostPort == null) {
             return new ChatMessage(null, ForgeConstants.INVALID_HOST_COMMAND);
         }
 
         hostname = hostPort.host();
         port = hostPort.port();
-        if(port == -1) port = ForgeConstants.DEFAULT_SERVER_CONNECTION_PORT;
-
+        if (port == -1) port = Integer.valueOf(ForgeNetPreferences.FNetPref.NET_PORT.getDefault());
 
         final FGameClient client = new FGameClient(FModel.getPreferences().getPref(FPref.PLAYER_NAME), "0", gui, hostname, port);
         onlineLobby.setClient(client);
@@ -172,10 +173,47 @@ public class NetConnectUtil {
             client.connect();
         }
         catch (Exception ex) {
-            //return a message to close the connection so we will not crash...
-            return new ChatMessage(null, ForgeConstants.CLOSE_CONN_COMMAND);
+            // Return error with details for GUI display
+            String errorDetail = getConnectionErrorMessage(ex, hostname, port);
+            return new ChatMessage(null, ForgeConstants.CONN_ERROR_PREFIX + errorDetail);
         }
 
         return new ChatMessage(null, Localizer.getInstance().getMessage("lblConnectedIPPort", hostname, String.valueOf(port)));
+    }
+
+    /**
+     * Generate a user-friendly error message for connection failures.
+     */
+    private static String getConnectionErrorMessage(Exception ex, String hostname, int port) {
+        Localizer localizer = Localizer.getInstance();
+        StringBuilder sb = new StringBuilder();
+
+        // Get the root cause for better error messages
+        Throwable cause = ex.getCause() != null ? ex.getCause() : ex;
+        String causeName = cause.getClass().getSimpleName();
+
+        sb.append(localizer.getMessage("lblConnectionFailedTo", hostname, port));
+        sb.append("\n\n");
+
+        // Provide specific messages for common error types
+        if (causeName.contains("ConnectException") || causeName.contains("ConnectionRefused")) {
+            sb.append(localizer.getMessage("lblConnectionRefused"));
+        } else if (causeName.contains("UnknownHost")) {
+            sb.append(localizer.getMessage("lblUnknownHost"));
+        } else if (causeName.contains("Timeout") || causeName.contains("TimedOut")) {
+            sb.append(localizer.getMessage("lblConnectionTimeout"));
+        } else if (causeName.contains("NoRouteToHost")) {
+            sb.append(localizer.getMessage("lblNoRouteToHost"));
+        } else {
+            // Generic error with the exception message
+            String msg = cause.getMessage();
+            if (msg != null && !msg.isEmpty()) {
+                sb.append(msg);
+            } else {
+                sb.append(causeName);
+            }
+        }
+
+        return sb.toString();
     }
 }

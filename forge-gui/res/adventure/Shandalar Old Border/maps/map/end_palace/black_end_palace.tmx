@@ -83,37 +83,11 @@
 								"op": "&gt;=",
 								"val": 4
 							}
-						},
-						{
-                            "checkQuestFlag": "mainQuest",
-                            "not": true
-                        }
+						}
 					],
 					"text": "With a gust of black wind, the door scatters into thousands of pieces. You are now free to pass.",
 					"options": [ { "name": "(continue)" } ]
 				},
-				{
-                	"name": "Yawgmoth, your guardians have fallen! It's time to end this!",
-                	"action": [ { "deleteMapObject": 55 } ],
-                	"condition": [
-                	{
-                		"getMapFlag": {
-                	    	"key": "enemiesDefeated",
-                			"op": "&gt;=",
-                			"val": 4
-                		}
-                	},
-                    {
-                        "checkQuestFlag": "Ch1BlackCastleComplete",
-                        "not": true
-                    },
-                    {
-                        "checkQuestFlag": "mainQuest"
-                    }
-                	],
-                		"text": "With a gust of black wind, the door scatters into thousands of pieces. You are now free to pass.",
-                		"options": [ { "name": "(continue)" } ]
-                },
 				{
 					"name": "You knock on the door",
 					"condition": [ { "checkMapFlag": "intro" } ],

@@ -1,0 +1,7 @@
+Name:Kulrath Mystic
+ManaCost:2 U
+Types:Creature Elemental Wizard
+PT:2/4
+T:Mode$ SpellCast | ValidCard$ Card.cmcGE4 | ValidActivatingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell with mana value 4 or greater, this creature gets +2/+0 and gains vigilance until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +2 | KW$ Vigilance
+Oracle:Whenever you cast a spell with mana value 4 or greater, this creature gets +2/+0 and gains vigilance until end of turn.

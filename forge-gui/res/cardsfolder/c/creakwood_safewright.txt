@@ -1,0 +1,9 @@
+Name:Creakwood Safewright
+ManaCost:1 B
+Types:Creature Elf Warrior
+PT:5/5
+K:etbCounter:M1M1:3
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigRemoveCounter | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_GE1_M1M1 | CheckSVar$ X | SVarCompare$ GE1 | TriggerDescription$ At the beginning of your end step, if there is an Elf card in your graveyard and this creature has a -1/-1 counter on it, remove a -1/-1 counter from this creature.
+SVar:TrigRemoveCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ M1M1 | CounterNum$ 1
+SVar:X:Count$ValidGraveyard Elf.YouOwn
+Oracle:This creature enters with three -1/-1 counters on it.\nAt the beginning of your end step, if there is an Elf card in your graveyard and this creature has a -1/-1 counter on it, remove a -1/-1 counter from this creature.

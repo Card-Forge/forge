@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="86">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;The Fair Basilica&quot;, &quot;Orthodoxy Enforcer&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/phyrexia/phyrexiantiles.tsx"/>
+ <layer id="6" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy1k90NwjAMhM0jD8kyhGaDbshPx6Js0EnAaiy55lKQE066h6qpv8Y+j0ei0fgSiK7Ft/D5HtnzjfUpEs3F57iticwc+42XK5reNbOqiTzE9YyoB1dqay2H7bM904OrxXfi+7PuYb0nkpf7qPQzqX4yk+eKzj2dXHYqeWKO5Cerfspcbb5SA1P2AuUJzVXny7tDdpe00Dn7H97ZilBmvnFbMqWzZdkoQ1qc8ZZMSa4Qu6Zcctyaq1Rq1HYZ9Td14Op8/crtwdubc63HPbnCngFf9vsfzL2et/T2Bce+qCM=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzr0WNg6BnFo3gUj+JRPIpH8YjAAE3lcpw=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzbwcPAsIMOWAYN41IHA8hsfABdD6X2unESZy+yOmrYSw4YavYSG7a4AEj/SLMX3e7hbu9Ii19y7JWhMP9iM5fYckOGDH+D1OPzCzH2IttNyH6YGkL+INZedLvR7UcWJ8YPpNiLrgc9HklxPzIGAAplras=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy1lcsOwiAQRfki/hG1vla1rYlata5a165bv83bOCSEgpbXTW6gA8NpYAKMTVVxxhpypbixtOq4jPnoqOSV6LfwAAtL++TTnFDuHf33n3V6jD8ic30Um9vSnur9mNwMXsMbOt8Ofil73tN3R3x1fgg3hw/wjX8Zg+Gc1XhN84tAbk1MF8mcEK4w5C4QW5JXlrVFAu4JsTP5koibUY24SObEqKti5hpZxLq6OnBzmh9SV+O9voP3DjU9/ueW8nzfBRP/l2Lx5vJT8XTp97bvOY76ADiCbCA=
+  </data>
+ </layer>
+ <layer id="7" name="Ornamental Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjDTQrMfA0KJHf3tnAu2cNQD2joJRMAoQAAAO9QLz
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="271.665" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../common/maps/obj/enemy.tx" x="192.503" y="125.68">
+   <properties>
+    <property name="enemy" value="Brimaz"/>
+   </properties>
+  </object>
+  <object id="74" template="../../../../common/maps/obj/enemy.tx" x="262.792" y="176.537">
+   <properties>
+    <property name="enemy" value="Skrelv"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="75" template="../../../../common/maps/obj/enemy.tx" x="150.301" y="175.788">
+   <properties>
+    <property name="enemy" value="Ria Ivor"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="79" template="../../../../common/maps/obj/enemy.tx" x="206.581" y="63.8917">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Shrine of Loyal legions|NPH&quot;, &quot;Basilica Skullbomb|ONE&quot;, &quot;Norn's Annex|NPH&quot;, &quot;Priests of Norn|MBS&quot; ] }"/>
+    <property name="enemy" value="Elesh Norn"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="80" template="../../../../common/maps/obj/enemy.tx" x="224.496" y="126.773">
+   <properties>
+    <property name="enemy" value="Mondrak"/>
+   </properties>
+  </object>
+  <object id="82" template="../../../../common/maps/obj/booster.tx" x="102.61" y="39.251">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="83" template="../../../../common/maps/obj/booster.tx" x="312.018" y="39.7879">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;NPH&quot;,&quot;ONE&quot;,&quot;MOM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;colors&quot;: [ &quot;white&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="84" template="../../../../common/maps/obj/dialog.tx" x="175.851" y="238.707" width="80" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Loud, perfectly synchronized chanting fills this unsettlingly pristine porcelain hall. As you enter, it falls suddenly to utter silence. It is clear you are trespassing on sacred ground.
+
+Your manasight stone glows, sensing the power of the legends here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="85" template="../../../../common/maps/obj/dialog.tx" x="183.905" y="92.1214" width="62.8178" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The famed Mother of Machines herself stands ahead. She has no eyes, but still you feel her gaze of disdain upon you, as she addresses your approach.
+
+'Step forward and know perfection. All will be one.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

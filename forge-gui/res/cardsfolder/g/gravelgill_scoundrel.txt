@@ -1,0 +1,10 @@
+Name:Gravelgill Scoundrel
+ManaCost:1 U
+Types:Creature Merfolk Rogue
+PT:1/3
+K:Vigilance
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigUnblockable | TriggerDescription$ Whenever this creature attacks, you may tap another untapped creature you control. If you do, this creature can't be blocked this turn.
+SVar:TrigUnblockable:AB$ Effect | Cost$ tapXType<1/Creature.Other> | RememberObjects$ TriggeredAttacker | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
+SVar:HasAttackEffect:TRUE
+Oracle:Vigilance\nWhenever this creature attacks, you may tap another untapped creature you control. If you do, this creature can't be blocked this turn.

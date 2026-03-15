@@ -35,7 +35,7 @@
     <property name="reward">[{
   "type": "item",
   "count": 1,
-  "itemName": "Cave Diver's Boots"
+  "itemName": "Rhystic Amulet"
 }]</property>
    </properties>
   </object>

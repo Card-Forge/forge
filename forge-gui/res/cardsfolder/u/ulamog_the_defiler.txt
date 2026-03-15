@@ -7,7 +7,7 @@ T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescripti
 SVar:TrigExile:DB$ Dig | ValidTgts$ Opponent | DestinationZone$ Exile | DigNum$ Z | ChangeNum$ All
 SVar:Z:TargetedPlayer$CardsInLibrary/HalfUp
 K:etbCounter:P1P1:Y:no Condition:CARDNAME enters with a number of +1/+1 counters on it equal to the greatest mana value among cards in exile.
-SVar:Y:Count$ValidExile Card$GreatestCMC
+SVar:Y:Count$ValidExile Card$GreatestCardManaCost
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Annihilator:X | Description$ NICKNAME has annihilator X, where X is the number of +1/+1 counters on it.
 SVar:X:Count$CardCounters.P1P1
 DeckHas:Ability$Sacrifice|Counters

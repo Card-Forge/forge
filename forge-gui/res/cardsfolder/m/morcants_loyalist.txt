@@ -1,0 +1,9 @@
+Name:Morcant's Loyalist
+ManaCost:1 B G
+Types:Creature Elf Warrior
+PT:3/2
+S:Mode$ Continuous | Affected$ Elf.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Elves you control get +1/+1.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When this creature dies, return another target Elf card from your graveyard to your hand.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Elf.Other+YouOwn
+DeckHints:Type$Elf
+Oracle:Other Elves you control get +1/+1.\nWhen this creature dies, return another target Elf card from your graveyard to your hand.

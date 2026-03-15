@@ -258,7 +258,8 @@
 			"Hostile",
 			"Dungeon",
 			"Fort",
-			"Sidequest"
+			"Sidequest",
+			"AstralVisionary"
 		]
 	},
 	{
@@ -308,7 +309,8 @@
 			"Dungeon",
 			"Castle",
 			"BiomeWhite",
-			"Sidequest"
+			"Sidequest",
+			"SaintedOne"
 		]
 	},
 	{
@@ -1571,16 +1573,9 @@
 			"DungeonEffect",
 			"Dungeon",
 			"Hostile",
-			"BiomeBlue"
+			"BiomeBlue",
+			"HallsOfTime"
 		]
-	},
-	{
-		"name": "DEBUGZONE",
-		"type": "dungeon",
-		"spriteAtlas": "sprites/buildings.atlas",
-		"sprite": "WurmPond",
-		"map": "../Shandalar Old Border/maps/map/debug_map.tmx",
-		"radiusFactor": 5
 	},
 	{
 		"name": "DjinnPalace",
@@ -1909,16 +1904,6 @@
 		]
 	},
 	{
-		"name": "Fort",
-		"displayName": "The Frozen Ruins",
-		"type": "dungeon",
-		"count": 1,
-		"spriteAtlas": "sprites/buildings.atlas",
-		"sprite": "Fort",
-		"map": "../Shandalar Old Border/maps/map/fort/fort_colorless_1_snow.tmx",
-		"radiusFactor": 0.8
-	},
-	{
 		"name": "Fort1",
 		"displayName": "Tundra Fort",
 		"type": "dungeon",
@@ -2209,7 +2194,8 @@
 		"questTags": [
 			"Graveyard",
 			"BiomeBlack",
-			"Hostile"
+			"Hostile",
+			"LichlordAzar"
 		]
 	},
 	{
@@ -2351,7 +2337,8 @@
 			"BiomeRed",
 			"Grove",
 			"Hostile",
-			"Sidequest"
+			"Sidequest",
+			"DragonLord"
 		]
 	},
 	{
@@ -2367,7 +2354,8 @@
 			"BiomeGreen",
 			"Grove",
 			"Hostile",
-			"Sidequest"
+			"Sidequest",
+			"HydraLair"
 		]
 	},
 	{
@@ -2383,7 +2371,8 @@
 			"BiomeGreen",
 			"Grove",
 			"Hostile",
-			"Sidequest"
+			"Sidequest",
+			"GreatDruid"
 		]
 	},
 	{
@@ -2521,7 +2510,8 @@
 		"questTags": [
 			"Boss",
 			"Planeswalker",
-			"Hostile"
+			"Hostile",
+			"Arcanis"
 		]
 	},
 	{
@@ -2714,11 +2704,11 @@
 		"map": "../Shandalar Old Border/maps/map/magetower/magetower_6_infernalgenesis.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
+			"BiomeColorless",
 			"MageTower",
 			"Dungeon",
 			"Hostile",
-			null,
-			null
+			"Sidequest"
 		]
 	},
 	{
@@ -2731,11 +2721,11 @@
 		"map": "../Shandalar Old Border/maps/map/magetower/magetower_7_church.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
+			"BiomeColorless",
 			"MageTower",
 			"Dungeon",
 			"Hostile",
-			null,
-			null
+			"Sidequest"
 		]
 	},
 	{
@@ -2886,8 +2876,8 @@
 			"MageTower",
 			"Hostile",
 			"Dungeon",
-			null,
-			null
+			"BiomeBlue",
+			"Sidequest"
 		]
 	},
 	{
@@ -3912,14 +3902,6 @@
 		]
 	},
 	{
-		"name": "Test",
-		"count": 100,
-		"spriteAtlas": "sprites/buildings.atlas",
-		"sprite": "Test",
-		"map": "../Shandalar Old Border/maps/map/vampirecastle/vampirecastle_4.tmx",
-		"radiusFactor": 0.8
-	},
-	{
 		"name": "Tibalts Fortress",
 		"displayName": "Specter's Fortress",
 		"type": "dungeon",
@@ -3931,7 +3913,8 @@
 		"questTags": [
 			"Hostile",
 			"Boss",
-			"Planeswalker"
+			"Planeswalker",
+			"Tibalt"
 		]
 	},
 	{
@@ -4011,7 +3994,8 @@
 			"VampireCastle",
 			"Hostile",
 			"BiomeBlack",
-			"Dungeon"
+			"Dungeon",
+			"Sorin"
 		]
 	},
 	{
@@ -4208,19 +4192,6 @@
 		]
 	},
 	{
-		"name": "Debug Map",
-		"displayName": "Boss Testing Arena",
-		"type": "town",
-		"count": 1,
-		"spriteAtlas": "sprites/buildings.atlas",
-		"sprite": "Spawn",
-		"map": "../Shandalar Old Border/maps/map/debug_map.tmx",
-		"questTags": [
-			"Debug",
-			"Testing"
-		]
-	},
-	{
 		"name": "Bazaar of Wonders",
 		"displayName": "Bazaar of Wonders",
 		"type": "town",
@@ -4288,6 +4259,16 @@
 		]
 	},
 	{
+		"name": "DemonsBargain",
+		"displayName": "Demon's Bargain",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Cave",
+		"map": "../Shandalar Old Border/maps/map/lair/demons_bargain.tmx",
+		"radiusFactor": 0.6
+	},
+	{
 		"name": "CavePalladiaMors",
 		"displayName": "Palladia-Mors's Lair",
 		"type": "cave",
@@ -4320,5 +4301,109 @@
 			"Boss",
 			"BiomeRed"
 		]
+	},
+	{
+		"name": "ArtificerBazaar",
+		"displayName": "Artificer's Bazaar",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Building143",
+		"map": "../Shandalar Old Border/maps/map/lair/artificer_bazaar.tmx",
+		"radiusFactor": 0.6
+	},
+	{
+		"name": "ArtificerBazaar2",
+		"displayName": "Artificer's Bazaar",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Building143",
+		"map": "../Shandalar Old Border/maps/map/lair/artificer_bazaar2.tmx",
+		"radiusFactor": 0.6
+	},
+	{
+		"name": "ArtificerBazaar3",
+		"displayName": "Artificer's Bazaar",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Building143",
+		"map": "../Shandalar Old Border/maps/map/lair/artificer_bazaar3.tmx",
+		"radiusFactor": 0.6
+	},
+	{
+		"name": "AncientDiamondMine",
+		"displayName": "Ancient Diamond Mine",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Cave",
+		"map": "../Shandalar Old Border/maps/map/lair/ancient_diamond_mine.tmx",
+		"radiusFactor": 0.6,
+		"questTags": [
+			"DiamondMine",
+			"Hostile"
+		]
+	},
+	{
+		"name": "DragonsLairWhite",
+		"displayName": "Dragon's Lair",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Cave",
+		"map": "../Shandalar Old Border/maps/map/lair/dragons_lair_white.tmx",
+		"radiusFactor": 0.6
+	},
+	{
+		"name": "DragonsLairBlue",
+		"displayName": "Dragon's Lair",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Cave",
+		"map": "../Shandalar Old Border/maps/map/lair/dragons_lair_blue.tmx",
+		"radiusFactor": 0.6
+	},
+	{
+		"name": "DragonsLairBlack",
+		"displayName": "Dragon's Lair",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Cave",
+		"map": "../Shandalar Old Border/maps/map/lair/dragons_lair_black.tmx",
+		"radiusFactor": 0.6
+	},
+	{
+		"name": "DragonsLairRed",
+		"displayName": "Dragon's Lair",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Cave",
+		"map": "../Shandalar Old Border/maps/map/lair/dragons_lair_red.tmx",
+		"radiusFactor": 0.6
+	},
+	{
+		"name": "DragonsLairGreen",
+		"displayName": "Dragon's Lair",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Cave",
+		"map": "../Shandalar Old Border/maps/map/lair/dragons_lair_green.tmx",
+		"radiusFactor": 0.6
+	},
+	{
+		"name": "RiddlesLair",
+		"displayName": "Sphinx's Sanctum",
+		"type": "cave",
+		"count": 1,
+		"spriteAtlas": "sprites/buildings.atlas",
+		"sprite": "Cave",
+		"map": "../Shandalar Old Border/maps/map/lair/riddles_lair.tmx",
+		"radiusFactor": 0.6
 	}
 ]

@@ -2,7 +2,7 @@ Name:Kamber, the Plunderer
 ManaCost:3 B
 Types:Legendary Creature Vampire Rogue
 PT:3/4
-K:Partner:Laurine, the Diversion
+K:Partner with:Laurine, the Diversion
 K:Lifelink
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a creature an opponent controls dies, you gain 1 life and create a Blood token.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1 | SubAbility$ DBToken

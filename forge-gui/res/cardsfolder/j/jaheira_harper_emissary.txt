@@ -3,8 +3,8 @@ ManaCost:1 G
 Types:Legendary Creature Human Elf Druid
 PT:2/3
 K:Specialize:2
-K:Hexproof:Card.Artifact:artifacts and enchantments
-K:Hexproof:Card.Enchantment:Secondary
+K:Hexproof:Artifact
+K:Hexproof:Enchantment
 AlternateMode:Specialize
 Oracle:Specialize {2}\nHexproof from artifacts and enchantments
 
@@ -14,8 +14,8 @@ Name:Jaheira, Heroic Harper
 ManaCost:1 G W
 Types:Legendary Creature Human Elf Druid
 PT:3/4
-K:Hexproof:Card.Artifact:artifacts and enchantments
-K:Hexproof:Card.Enchantment:Secondary
+K:Hexproof:Artifact
+K:Hexproof:Enchantment
 T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When this creature specializes, destroy up to one target artifact or enchantment. Put a +1/+1 counter on each of up to two other target creatures.
 SVar:TrigDestroy:DB$ Destroy | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select up to one target artifact or enchantment | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature.Other | TgtPrompt$ Select up to two other target creatures
@@ -28,8 +28,8 @@ Name:Jaheira, Insightful Harper
 ManaCost:1 G U
 Types:Legendary Creature Human Elf Druid
 PT:3/4
-K:Hexproof:Card.Artifact:artifacts and enchantments
-K:Hexproof:Card.Enchantment:Secondary
+K:Hexproof:Artifact
+K:Hexproof:Enchantment
 T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When this creature specializes, destroy up to one target artifact or enchantment. Scry 2.
 SVar:TrigDestroy:DB$ Destroy | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select up to one target artifact or enchantment | SubAbility$ DBScry
 SVar:DBScry:DB$ Scry | ScryNum$ 2
@@ -41,8 +41,8 @@ Name:Jaheira, Ruthless Harper
 ManaCost:1 B G
 Types:Legendary Creature Human Elf Druid
 PT:3/4
-K:Hexproof:Card.Artifact:artifacts and enchantments
-K:Hexproof:Card.Enchantment:Secondary
+K:Hexproof:Artifact
+K:Hexproof:Enchantment
 T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When this creature specializes, destroy up to one target artifact or enchantment. Each opponent loses 3 life.
 SVar:TrigDestroy:DB$ Destroy | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select up to one target artifact or enchantment | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 3
@@ -54,8 +54,8 @@ Name:Jaheira, Stirring Harper
 ManaCost:1 R G
 Types:Legendary Creature Human Elf Druid
 PT:3/4
-K:Hexproof:Card.Artifact:artifacts and enchantments
-K:Hexproof:Card.Enchantment:Secondary
+K:Hexproof:Artifact
+K:Hexproof:Enchantment
 T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When this creature specializes, destroy up to one target artifact or enchantment. You get a boon with "When you cast your next creature spell, it perpetually gets +1/+0 and gains haste."
 SVar:TrigDestroy:DB$ Destroy | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select up to one target artifact or enchantment | SubAbility$ DBBoon
 SVar:DBBoon:DB$ Effect | Boon$ True | Duration$ Permanent | Triggers$ SpellCast
@@ -69,8 +69,8 @@ Name:Jaheira, Merciful Harper
 ManaCost:1 G G
 Types:Legendary Creature Human Elf Druid
 PT:3/4
-K:Hexproof:Card.Artifact:artifacts and enchantments
-K:Hexproof:Card.Enchantment:Secondary
+K:Hexproof:Artifact
+K:Hexproof:Enchantment
 T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When this creature specializes, destroy up to one target artifact or enchantment. You gain 4 life.
 SVar:TrigDestroy:DB$ Destroy | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select up to one target artifact or enchantment | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 4

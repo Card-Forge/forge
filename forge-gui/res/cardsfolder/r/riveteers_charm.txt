@@ -3,7 +3,7 @@ ManaCost:B R G
 Types:Instant
 A:SP$ Charm | Choices$ DBSac,DBExilePlay,DBExileGrave
 SVar:DBSac:DB$ Sacrifice | ValidTgts$ Opponent | SacValid$ Creature.cmcEQX,Planeswalker.cmcEQX | SacMessage$ creature or planeswalker they control with the highest mana value among creatures and planeswalkers they control | SpellDescription$ Target opponent sacrifices a creature or planeswalker they control with the highest mana value among creatures and planeswalkers they control.
-SVar:X:Count$Valid Creature.TargetedPlayerCtrl,Planeswalker.TargetedPlayerCtrl$GreatestCMC
+SVar:X:Count$Valid Creature.TargetedPlayerCtrl,Planeswalker.TargetedPlayerCtrl$GreatestCardManaCost
 SVar:DBExilePlay:DB$ Dig | Defined$ You | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top three cards of your library. Until your next end step, you may play those cards.
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | Duration$ UntilYourNextEndStep
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until your next end step, you may play those cards.

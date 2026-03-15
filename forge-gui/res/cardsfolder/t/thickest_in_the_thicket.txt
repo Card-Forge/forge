@@ -6,8 +6,8 @@ SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | C
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, draw two cards if you control the creature with the greatest power or tied for the greatest power.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 2 | ConditionPresent$ Creature.YouCtrl | ConditionCompare$ GE1 | ConditionCheckSVar$ Y | ConditionSVarCompare$ GEZ
 SVar:X:Targeted$CardPower
-SVar:Y:Count$Valid Creature.YouCtrl$GreatestPower
-SVar:Z:Count$Valid Creature.YouDontCtrl$GreatestPower
+SVar:Y:Count$Valid Creature.YouCtrl$GreatestCardPower
+SVar:Z:Count$Valid Creature.YouDontCtrl$GreatestCardPower
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Counters
 Oracle:When Thickest in the Thicket enters, put X +1/+1 counters on target creature, where X is that creature's power.\nAt the beginning of your end step, draw two cards if you control the creature with the greatest power or tied for the greatest power.

@@ -2,7 +2,7 @@ Name:Alisaie Leveilleur
 ManaCost:2 W
 Types:Legendary Creature Elf Wizard
 PT:3/2
-K:Partner:Alphinaud Leveilleur
+K:Partner with:Alphinaud Leveilleur
 K:First Strike
 S:Mode$ ReduceCost | ValidCard$ Card | Type$ Spell | Activator$ You | Amount$ 2 | CheckSVar$ YouCastThisTurn | SVarCompare$ EQ1 | Description$ Dualcast — The second spell you cast each turn costs {2} less to cast.
 SVar:YouCastThisTurn:Count$ThisTurnCast_Card.YouCtrl

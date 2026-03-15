@@ -21,7 +21,6 @@ Base=Uncommon:fromSheet("MKM cards")
 
 [RareMythic]
 Base=RareMythic:fromSheet("MKM cards")
-Replace=.175F fromSheet("MKM prerelease promo")
 
 [BasicLand]
 Base=BasicLand:fromSheet("MKM cards")

@@ -1,0 +1,7 @@
+Name:Tanufel Rimespeaker
+ManaCost:3 U
+Types:Creature Elemental Wizard
+PT:2/4
+T:Mode$ SpellCast | ValidCard$ Card.cmcGE4 | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell with mana value 4 or greater, draw a card.
+SVar:TrigDraw:DB$ Draw
+Oracle:Whenever you cast a spell with mana value 4 or greater, draw a card.

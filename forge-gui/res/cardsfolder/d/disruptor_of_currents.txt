@@ -1,0 +1,9 @@
+Name:Disruptor of Currents
+ManaCost:3 U U
+Types:Creature Merfolk Wizard
+PT:3/3
+K:Flash
+K:Convoke
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When this creature enters, return up to one other target nonland permanent to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Permanent.nonLand+Other | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Select up to one other target nonland permanent
+Oracle:Flash\nConvoke (Your creatures can help cast this spell, Each creature you tap while casting this spell pays {1} or one mana of that creature's color.)\nWhen this creature enters, return up to one other target nonland permanent to its owner's hand.

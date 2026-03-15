@@ -1238,10 +1238,12 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
 
         boolean usingListView = currentView == listView;
         switch(keyCode) {
-            case(Input.Keys.DPAD_RIGHT):
+            case Input.Keys.DPAD_RIGHT:
+            case Input.Keys.PAGE_DOWN:
                 setSelectedIndexRelative(usingListView ? 10 : 1);
                 return true;
             case Input.Keys.DPAD_LEFT:
+            case Input.Keys.PAGE_UP:
                 setSelectedIndexRelative(usingListView ? -10 : -1);
                 return true;
             case Input.Keys.DPAD_DOWN:
