@@ -102,7 +102,7 @@
   <object id="90" template="../../../../common/maps/obj/entry_up.tx" x="322.5" y="469.5" width="130" height="8">
    <properties>
     <property name="teleport" value="../Realm of Legends/maps/map/cave/Sliver_Hive_1.tmx"/>
-    <property name="teleportObjectId" value="153"/>
+    <property name="teleportObjectId" value="81"/>
    </properties>
   </object>
   <object id="91" template="../../obj/treasure.tx" x="82.5833" y="175.417">
