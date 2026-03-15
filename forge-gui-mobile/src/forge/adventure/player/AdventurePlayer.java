@@ -547,6 +547,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
         deck = new Deck(data.readString("deckName"));
         CardPool deckCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("deckCards")));
+        CardUtil.sanitizeCardPool(deckCards);
         deck.getMain().addAll(deckCards.getFilteredPool(isValid));
         unsupportedCards.addAll(deckCards.getFilteredPool(isUnsupported).toFlatList());
         if (data.containsKey("sideBoardCards")) {
@@ -624,6 +625,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                     decks.add(new Deck(data.readString("deck_name_" + i)));
                 }
                 CardPool mainCards = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("deck_" + i)));
+                CardUtil.sanitizeCardPool(mainCards);
                 decks.get(i).getMain().addAll(mainCards.getFilteredPool(isValid));
                 unsupportedCards.addAll(mainCards.getFilteredPool(isUnsupported).toFlatList());
                 if (data.containsKey("sideBoardCards_" + i)) {
@@ -697,6 +699,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         // Use false to skip loadout switching during load (equippedItems already loaded correctly above)
         setSelectedDeckSlot(data.readInt("selectedDeckIndex"), false);
         CardPool cardPool = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("cards")));
+        CardUtil.sanitizeCardPool(cardPool);
         cards.addAll(cardPool.getFilteredPool(isValid));
         unsupportedCards.addAll(cardPool.getFilteredPool(isUnsupported).toFlatList());
 
