@@ -769,7 +769,16 @@ public class ComputerUtilMana {
 
             saList.removeAll(saExcludeList);
 
-            SpellAbility saPayment = saList.isEmpty() ? null : chooseManaAbility(cost, sa, ai, toPay, saList, checkPlayable || !test);
+            SpellAbility saPayment;
+            if (saList.isEmpty()) {
+                saPayment = null;
+            } else if (!test && ai.getController() instanceof PlayerControllerAi) {
+                // Delegate to controller — allows RL agents to override the choice
+                saPayment = ((PlayerControllerAi) ai.getController())
+                        .chooseManaAbilityForPayment(cost, sa, toPay, saList, checkPlayable || !test);
+            } else {
+                saPayment = chooseManaAbility(cost, sa, ai, toPay, saList, checkPlayable || !test);
+            }
 
             if (saPayment != null && ComputerUtilCost.isSacrificeSelfCost(saPayment.getPayCosts()) && sa.isTargeting(saPayment.getHostCard())) {
                 // not a good idea to sac a card that you're targeting with the SA you're paying for

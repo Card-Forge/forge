@@ -74,6 +74,7 @@
         <module>adventure-editor</module>
         <module>forge-gui-android</module>
         <module>forge-installer</module>
+        <module>forge-research</module>
     </modules>
 
     <distributionManagement>

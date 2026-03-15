@@ -1,0 +1,191 @@
+syntax = "proto3";
+
+package forge.research;
+
+option java_package = "forge.research.proto";
+option java_multiple_files = true;
+
+service ForgeRlService {
+    rpc Reset(ResetRequest) returns (ResetResponse);
+    rpc Step(StepRequest) returns (StepResponse);
+}
+
+// ─── Requests ───────────────────────────────────────────────
+
+message ResetRequest {
+    string deck_path_a = 1;
+    string deck_path_b = 2;
+    int32 agent_player_index = 3;
+    int64 seed = 4;
+    bool dual_rl = 5;
+    string opponent_model_path = 6;
+}
+
+message StepRequest {
+    int32 action_index = 1;
+}
+
+// ─── Responses ──────────────────────────────────────────────
+
+message ResetResponse {
+    Observation observation = 1;
+    DecisionPoint decision_point = 2;
+}
+
+message StepResponse {
+    Observation observation = 1;
+    float reward = 2;
+    bool terminated = 3;
+    DecisionPoint decision_point = 4;
+    GameResult game_result = 5;
+}
+
+// ─── Observation ────────────────────────────────────────────
+
+message Observation {
+    GameInfo game_info = 1;
+    PlayerState agent_player = 2;
+    PlayerState opponent_player = 3;
+    repeated StackEntry stack = 4;
+    CombatState combat = 5;
+}
+
+message GameInfo {
+    int32 turn = 1;
+    int32 phase = 2;
+    int32 active_player_index = 3;
+    int32 priority_player_index = 4;
+    int32 agent_mulligan_count = 5;
+    int32 opponent_mulligan_count = 6;
+}
+
+message PlayerState {
+    int32 life = 1;
+    int32 poison_counters = 2;
+    int32 hand_size = 3;
+    int32 library_size = 4;
+    int32 lands_played = 5;
+    int32 max_lands = 6;
+    ManaPool mana_pool = 7;
+    repeated CardState hand = 8;
+    repeated CardState battlefield = 9;
+    repeated CardState graveyard = 10;
+    repeated CardState exile = 11;
+}
+
+message ManaPool {
+    int32 white = 1;
+    int32 blue = 2;
+    int32 black = 3;
+    int32 red = 4;
+    int32 green = 5;
+    int32 colorless = 6;
+}
+
+message CardState {
+    int32 card_id = 1;
+    string name = 2;
+    int32 name_id = 3;
+    int32 power = 4;
+    int32 toughness = 5;
+    int32 cmc = 6;
+    bool tapped = 7;
+    bool summoning_sick = 8;
+    int32 colors_bitmask = 9;
+    int32 damage = 10;
+    int32 loyalty = 11;
+    int32 controller_index = 12;
+    bool attacking = 13;
+    bool blocking = 14;
+    int32 counter_count = 15;
+    int32 keyword_count = 16;
+    int32 owner_index = 17;
+    repeated string types = 18;
+    repeated string keywords = 19;
+    repeated CounterState counters = 20;
+
+    // Encoded type/keyword/counter features for RL observation vector
+    // type_bitmask bits: 0=Creature, 1=Land, 2=Instant, 3=Sorcery,
+    //   4=Enchantment, 5=Artifact, 6=Planeswalker
+    int32 type_bitmask = 21;
+    // keyword_bitmask bits: 0=flying, 1=first_strike, 2=double_strike,
+    //   3=deathtouch, 4=lifelink, 5=trample, 6=haste, 7=reach,
+    //   8=vigilance, 9=menace, 10=defender, 11=hexproof,
+    //   12=indestructible, 13=flash
+    int32 keyword_bitmask = 22;
+    // Count of +1/+1 counters specifically (most strategically relevant)
+    int32 plus_one_counter_count = 23;
+}
+
+message CounterState {
+    string type = 1;
+    int32 count = 2;
+}
+
+message StackEntry {
+    int32 source_card_id = 1;
+    string description = 2;
+    int32 controller_index = 3;
+    string source_card_name = 4;
+}
+
+message CombatState {
+    repeated AttackerInfo attackers = 1;
+}
+
+message AttackerInfo {
+    int32 card_id = 1;
+    int32 defending_player_index = 2;
+    repeated int32 blocker_card_ids = 3;
+}
+
+// ─── Decision Point ─────────────────────────────────────────
+
+message DecisionPoint {
+    DecisionType type = 1;
+    string prompt = 2;
+    repeated ActionOption legal_actions = 3;
+    int32 min_selections = 4;
+    int32 max_selections = 5;
+    int32 player_index = 6;
+}
+
+enum DecisionType {
+    CHOOSE_SPELL_ABILITY = 0;
+    DECLARE_ATTACKERS = 1;
+    DECLARE_BLOCKERS = 2;
+    CHOOSE_TARGETS = 3;
+    MULLIGAN = 4;
+    CHOOSE_CARDS = 5;
+    CONFIRM_ACTION = 6;
+    CHOOSE_ENTITY = 7;
+    CHOOSE_COLOR = 8;
+    CHOOSE_NUMBER = 9;
+    CHOOSE_TYPE = 10;
+    CHOOSE_PILE = 11;
+    CHOOSE_MODE = 12;
+    ORDER_CARDS = 13;
+    AI_FALLBACK = 14;
+}
+
+message ActionOption {
+    int32 index = 1;
+    string description = 2;
+    int32 source_card_id = 3;
+    string source_card_name = 4;
+    int32 source_name_id = 5;
+    // Target information (populated when action involves targeting)
+    int32 target_card_id = 6;
+    int32 target_name_id = 7;
+    bool target_is_own = 8;    // true if target belongs to the acting player
+    bool target_is_player = 9; // true if target is a player (not a card)
+}
+
+// ─── Game Result ────────────────────────────────────────────
+
+message GameResult {
+    int32 winner_index = 1;
+    bool is_draw = 2;
+    int32 turns_played = 3;
+    string win_condition = 4;
+}
