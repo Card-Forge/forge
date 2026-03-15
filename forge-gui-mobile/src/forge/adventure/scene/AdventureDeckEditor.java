@@ -37,7 +37,10 @@ import forge.util.ItemPool;
 import forge.util.Localizer;
 import forge.util.Utils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -253,8 +256,12 @@ public class AdventureDeckEditor extends FDeckEditor {
                         };
 
                 }
-            }
-            if (event.format == AdventureEventController.EventFormat.Jumpstart) {
+            } else if (event.format == AdventureEventController.EventFormat.Sealed) {
+                return new DeckEditorPage[]{
+                        new AdventureDeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.DRAFT_POOL),
+                        new AdventureDeckSectionPage(DeckSection.Main, ItemManagerConfig.DRAFT_POOL)
+                };
+            } else if (event.format == AdventureEventController.EventFormat.Jumpstart) {
                 return new DeckEditorPage[]{
                         new AdventureDeckSectionPage(DeckSection.Main, ItemManagerConfig.DRAFT_POOL),
                         new AdventureDeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.SIDEBOARD)};
