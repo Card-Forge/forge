@@ -361,7 +361,7 @@ public class MultiProcessGameExecutor implements IHasNetLog {
 
     private void parseResult(String resultLine, ExecutionResult result) {
         try {
-            // Format: gameIndex|success|playerCount|deltas|turns|bytes|winner|decks|format
+            // Format: gameIndex|success|playerCount|deltas|turns|bytes|winner|decks|format|eventMismatches
             String[] parts = resultLine.split("\\|");
             if (parts.length >= 7) {
                 int gameIndex = Integer.parseInt(parts[0]);
@@ -387,6 +387,11 @@ public class MultiProcessGameExecutor implements IHasNetLog {
                 // Parse game format if present (part 8)
                 if (parts.length >= 9 && !parts[8].isEmpty()) {
                     gameResult.gameFormat = parts[8];
+                }
+
+                // Parse event-state mismatches if present (part 9)
+                if (parts.length >= 10) {
+                    gameResult.eventStateMismatches = Long.parseLong(parts[9]);
                 }
 
                 result.addResult(gameIndex, gameResult);
@@ -461,6 +466,10 @@ public class MultiProcessGameExecutor implements IHasNetLog {
 
         public long getTotalBytes() {
             return results.values().stream().mapToLong(r -> r.totalDeltaBytes).sum();
+        }
+
+        public long getTotalEventStateMismatches() {
+            return results.values().stream().mapToLong(r -> r.eventStateMismatches).sum();
         }
 
         /**

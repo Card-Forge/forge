@@ -350,7 +350,13 @@ public class NetworkPlayIntegrationTest implements IHasNetLog {
         Assert.assertEquals(checksumMismatches, 0,
                 String.format("Should have zero checksum mismatches, had %d", checksumMismatches));
 
-        // 4. Per-player-count validation
+        // 4. Check zero event-state mismatches
+        long eventMismatches = executionResult.getTotalEventStateMismatches();
+        netLog.info("Event-state mismatches: {} (target: 0)", eventMismatches);
+        Assert.assertEquals(eventMismatches, 0L,
+                String.format("Should have zero event-state mismatches, had %d", eventMismatches));
+
+        // 5. Per-player-count validation
         for (int p = 2; p <= 4; p++) {
             double playerSuccessRate = executionResult.getSuccessRateByPlayers(p) * 100;
             int playerGameCount = executionResult.getGameCountByPlayers(p);

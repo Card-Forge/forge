@@ -50,6 +50,7 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasNetLog {
     private final AtomicLong deltaPacketsReceived = new AtomicLong(0);
     private final AtomicLong fullStateSyncsReceived = new AtomicLong(0);
     private final AtomicLong totalDeltaBytes = new AtomicLong(0);
+    private final AtomicLong eventStateMismatches = new AtomicLong(0);
 
     public HeadlessNetworkClient(String username, String hostname, int port) {
         this.username = username;
@@ -124,6 +125,10 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasNetLog {
 
     public long getTotalDeltaBytes() {
         return totalDeltaBytes.get();
+    }
+
+    public long getEventStateMismatches() {
+        return eventStateMismatches.get();
     }
 
     public ClientGameLobby getLobby() {
@@ -332,6 +337,20 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasNetLog {
         }
 
         @Override
+        public void handleGameEvent(forge.game.event.GameEvent event) {
+            // Validate event-delta consistency BEFORE super dispatches to FControlGameEventHandler
+            if (event instanceof forge.game.event.GameEventCardTapped tapEvent) {
+                forge.game.card.CardView card = tapEvent.card();
+                if (card != null && card.isTapped() != tapEvent.tapped()) {
+                    client.eventStateMismatches.incrementAndGet();
+                    netLog.error("[EventDeltaCheck] MISMATCH: GameEventCardTapped says tapped={} but CardView.isTapped()={} for {}",
+                            tapEvent.tapped(), card.isTapped(), card);
+                }
+            }
+            super.handleGameEvent(event);
+        }
+
+        @Override
         public void setOriginalGameController(forge.game.player.PlayerView view, IGameController controller) {
             super.setOriginalGameController(view, controller);
             if (controller != null) {
@@ -468,11 +487,12 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasNetLog {
     }
 
     public String getMetricsSummary() {
-        return String.format("HeadlessClient[%s]: deltas=%d, fullSyncs=%d, bytes=%d, connected=%s, gameInProgress=%s",
+        return String.format("HeadlessClient[%s]: deltas=%d, fullSyncs=%d, bytes=%d, eventMismatches=%d, connected=%s, gameInProgress=%s",
                 username,
                 deltaPacketsReceived.get(),
                 fullStateSyncsReceived.get(),
                 totalDeltaBytes.get(),
+                eventStateMismatches.get(),
                 connected.get(),
                 gameInProgress.get());
     }

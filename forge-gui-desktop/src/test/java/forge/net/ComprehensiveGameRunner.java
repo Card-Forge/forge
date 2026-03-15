@@ -25,7 +25,7 @@ import forge.gamemodes.net.NetworkLogConfig;
  *   2 = Error (exception during execution)
  *
  * Output format (for parent process parsing):
- *   RESULT:gameIndex|success|playerCount|deltas|turns|bytes|winner|deck1,deck2,...|format
+ *   RESULT:gameIndex|success|playerCount|deltas|turns|bytes|winner|deck1,deck2,...|format|eventMismatches
  */
 public class ComprehensiveGameRunner implements IHasNetLog {
 
@@ -123,7 +123,7 @@ public class ComprehensiveGameRunner implements IHasNetLog {
 
     private static String formatResult(int gameIndex, int playerCount, UnifiedNetworkHarness.GameResult result) {
         String decksStr = result.deckNames.isEmpty() ? "" : String.join(",", result.deckNames);
-        return String.format("%d|%s|%d|%d|%d|%d|%s|%s|%s",
+        return String.format("%d|%s|%d|%d|%d|%d|%s|%s|%s|%d",
                 gameIndex,
                 result.success,
                 playerCount,
@@ -132,6 +132,7 @@ public class ComprehensiveGameRunner implements IHasNetLog {
                 result.totalDeltaBytes,
                 result.winner != null ? result.winner : "null",
                 decksStr,
-                result.gameFormat);
+                result.gameFormat,
+                result.eventStateMismatches);
     }
 }

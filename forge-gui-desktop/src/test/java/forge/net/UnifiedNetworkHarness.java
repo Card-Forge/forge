@@ -687,6 +687,7 @@ public class UnifiedNetworkHarness implements IHasNetLog {
                 result.deltaPacketsReceived += client.getDeltaPacketsReceived();
                 result.fullStateSyncsReceived += client.getFullStateSyncsReceived();
                 result.totalDeltaBytes += client.getTotalDeltaBytes();
+                result.eventStateMismatches += client.getEventStateMismatches();
             }
         }
         netLog.info("Client metrics: deltas={}, fullSyncs={}, bytes={}",
@@ -799,6 +800,7 @@ public class UnifiedNetworkHarness implements IHasNetLog {
         public long deltaPacketsReceived;
         public long fullStateSyncsReceived;
         public long totalDeltaBytes;
+        public long eventStateMismatches;
 
         // Deck information
         public List<String> deckNames = new ArrayList<>();
