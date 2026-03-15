@@ -337,17 +337,30 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasNetLog {
         }
 
         @Override
-        public void handleGameEvent(forge.game.event.GameEvent event) {
-            // Validate event-delta consistency BEFORE super dispatches to FControlGameEventHandler
-            if (event instanceof forge.game.event.GameEventCardTapped tapEvent) {
+        public void handleGameEvents(java.util.List<forge.game.event.GameEvent> events) {
+            // Validate event-delta consistency AFTER delta is applied but BEFORE
+            // super dispatches events to FControlGameEventHandler.
+            // Only check the LAST tap event per card in the batch — earlier events
+            // may reference intermediate states that the delta (final-state-only)
+            // correctly doesn't include.
+            java.util.Map<Integer, forge.game.event.GameEventCardTapped> lastTapPerCard = new java.util.LinkedHashMap<>();
+            for (forge.game.event.GameEvent event : events) {
+                if (event instanceof forge.game.event.GameEventCardTapped tapEvent) {
+                    forge.game.card.CardView card = tapEvent.card();
+                    if (card != null) {
+                        lastTapPerCard.put(card.getId(), tapEvent);
+                    }
+                }
+            }
+            for (forge.game.event.GameEventCardTapped tapEvent : lastTapPerCard.values()) {
                 forge.game.card.CardView card = tapEvent.card();
                 if (card != null && card.isTapped() != tapEvent.tapped()) {
                     client.eventStateMismatches.incrementAndGet();
-                    netLog.error("[EventDeltaCheck] MISMATCH: GameEventCardTapped says tapped={} but CardView.isTapped()={} for {}",
+                    netLog.warn("[EventDeltaCheck] MISMATCH: GameEventCardTapped says tapped={} but CardView.isTapped()={} for {} (may be zone-transition artifact)",
                             tapEvent.tapped(), card.isTapped(), card);
                 }
             }
-            super.handleGameEvent(event);
+            super.handleGameEvents(events);
         }
 
         @Override

@@ -31,11 +31,9 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 public class MultiProcessGameExecutor implements IHasNetLog {
 
-    private static final int BASE_PORT = 58000;
     private static final long DEFAULT_TIMEOUT_MS = 300000; // 5 minutes per game
 
     private final long timeoutMs;
-    private final int basePort;
 
     // Runner class for different game types
     private String runnerClass = "forge.net.ComprehensiveGameRunner"; // Supports 2-4 players
@@ -45,12 +43,7 @@ public class MultiProcessGameExecutor implements IHasNetLog {
     }
 
     public MultiProcessGameExecutor(long timeoutMs) {
-        this(timeoutMs, BASE_PORT);
-    }
-
-    public MultiProcessGameExecutor(long timeoutMs, int basePort) {
         this.timeoutMs = timeoutMs;
-        this.basePort = basePort;
     }
 
     /**
@@ -129,7 +122,7 @@ public class MultiProcessGameExecutor implements IHasNetLog {
 
             // Start all processes AND their output readers immediately
             for (int i = 0; i < gameCount; i++) {
-                int port = basePort + i;
+                int port = PortAllocator.allocatePort();
                 int playerCount = playerCounts[i];
                 boolean commander = commanderFlags != null && i < commanderFlags.length && commanderFlags[i];
                 ProcessInfo info = startGameProcess(javaBin, classpath, port, i, playerCount, batchId, batchNumber, commander);
@@ -215,9 +208,18 @@ public class MultiProcessGameExecutor implements IHasNetLog {
 
                 if (!completed) {
                     info.process.destroyForcibly();
-                    result.addTimeout(info.gameIndex);
-                    netLog.error("Game {} timed out after {}ms",
-                            info.gameIndex, timeoutMs);
+                    // Wait for reader thread — it may have already captured the RESULT line
+                    // before the process exceeded the timeout
+                    readerDone.await(5, TimeUnit.SECONDS);
+                    if (resultLine.get() != null) {
+                        parseResult(resultLine.get(), result);
+                        netLog.warn("Game {} exceeded timeout ({}ms) but completed — result captured",
+                                info.gameIndex, timeoutMs);
+                    } else {
+                        result.addTimeout(info.gameIndex);
+                        netLog.error("Game {} timed out after {}ms",
+                                info.gameIndex, timeoutMs);
+                    }
                     return;
                 }
 
@@ -275,7 +277,6 @@ public class MultiProcessGameExecutor implements IHasNetLog {
                 totalGames, totalBatches, batchSize, batchId);
 
         ExecutionResult aggregatedResult = new ExecutionResult(totalGames);
-        int currentPortOffset = 0;
         int batchNumber = 0;
 
         for (int batchStart = 0; batchStart < totalGames; batchStart += batchSize) {
@@ -293,9 +294,7 @@ public class MultiProcessGameExecutor implements IHasNetLog {
             netLog.info("Starting batch {} (games {}-{} of {})",
                     batchNumber, batchStart, batchEnd - 1, totalGames);
 
-            // Create executor for this batch with offset ports
-            MultiProcessGameExecutor batchExecutor = new MultiProcessGameExecutor(
-                    this.timeoutMs, this.basePort + currentPortOffset);
+            MultiProcessGameExecutor batchExecutor = new MultiProcessGameExecutor(this.timeoutMs);
             batchExecutor.withRunnerClass(this.runnerClass);
 
             // Pass batch number and shared batch ID for unique log filenames
@@ -307,21 +306,10 @@ public class MultiProcessGameExecutor implements IHasNetLog {
                 aggregatedResult.addResult(originalIndex, entry.getValue());
             }
 
-            currentPortOffset += batchLength;
             batchNumber++;
 
             netLog.info("Batch complete. Running total: {}/{} games",
                     aggregatedResult.getSuccessCount() + aggregatedResult.getFailureCount(), totalGames);
-
-            // Brief delay between batches to allow port cleanup
-            // This helps prevent "Address already in use" errors on rapid test execution
-            if (batchNumber < totalBatches) {
-                try {
-                    Thread.sleep(500); // 500ms delay between batches
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                }
-            }
         }
 
         netLog.info("All batches complete: {}", aggregatedResult.toSummary());
