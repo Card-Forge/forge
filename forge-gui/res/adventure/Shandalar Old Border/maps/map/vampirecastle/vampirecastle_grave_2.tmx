@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="27" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="106">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx" />
@@ -43,12 +43,6 @@
    <properties>
     <property name="reward">[
   {
-    "type": "randomCard",
-    "colors": [ "Black" ],
-    "subTypes": [ "Dementia" ],
-    "count": 5
-  },
-  {
     "type": "item",
     "count": 1,
     "probability": 0.1,
@@ -77,6 +71,48 @@
     "count": 1,
     "probability": 0.1,
     "itemName": "Dark Amulet"
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.02,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.1,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.38,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.72,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.54,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.24,
+    "count": 2,
+    "addMaxCount": 2
   }
 ]</property>
    </properties>
@@ -85,8 +121,8 @@
    <properties>
     <property name="enemy" value="Chainer Dementia Master" />
     <property name="inactive" type="bool" value="true" />
-    <property name="threatRange" type="int" value="50" />
-   <property name="effect">{"startBattleWithCard": ["Swamp|ODY|1", "Swamp|ODY|2", "Chainer, Dementia Master|TOR"]}</property></properties>
+    <property name="threatRange" type="int" value="100" />
+   <property name="effect">{"startBattleWithCard": ["Swamp|ODY|1", "Swamp|ODY|2", "Chainer, Dementia Master|TOR"]}</property><property name="speedModifier" type="float" value="20" /></properties>
   </object>
   <object id="105" template="../../../../../../common/maps/obj/enemy.tx" x="280" y="260">
    <properties>
@@ -98,12 +134,6 @@
    <properties>
     <property name="reward">[
   {
-    "type": "randomCard",
-    "colors": [ "Black" ],
-    "subTypes": [ "Dementia" ],
-    "count": 5
-  },
-  {
     "type": "item",
     "count": 1,
     "probability": 0.1,
@@ -132,6 +162,48 @@
     "count": 1,
     "probability": 0.1,
     "itemName": "Dark Amulet"
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.02,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.1,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.38,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.72,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.54,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.24,
+    "count": 2,
+    "addMaxCount": 2
   }
 ]</property>
    </properties>

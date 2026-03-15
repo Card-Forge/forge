@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="105">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx" />
@@ -96,17 +96,74 @@
   </object>
   <object id="76" template="../../../../../../common/maps/obj/treasure.tx" x="477" y="60.5">
    <properties>
-    <property name="reward">[{
-  "type": "randomCard",
-  "count": 1,
-  "rarity": [ "rare", "mythic rare" ],
-  "colors": [ "colorID" ]
-},{
-  "type": "randomCard",
-  "count": 4,
-  "rarity": [ "uncommon" ],
-  "addMaxCount": 2
-}]</property>
+    <property name="reward">[
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Xira Arien|LEG"
+  },
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Fecundity|USG"
+  },
+  {
+    "type": "card",
+    "probability": 0.5,
+    "count": 1,
+    "cardName": "Taiga|LEA"
+  },
+  {
+    "type": "card",
+    "probability": 0.5,
+    "count": 1,
+    "cardName": "Badlands|LEA"
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.3,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.56,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.6,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.34,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.16,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.04,
+    "count": 3,
+    "addMaxCount": 3
+  }
+]</property>
     <property name="spawn.Hard" type="bool" value="false" />
    </properties>
   </object>
