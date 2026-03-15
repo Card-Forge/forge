@@ -183,8 +183,8 @@ public class DeltaSyncManager implements IHasNetLog {
 
             // Clear dirty props since we just sent everything
             obj.getAndClearDirtyProps(consumerId);
-            if (obj instanceof CardView) {
-                ensureCardStateConsumers((CardView) obj);
+            if (obj instanceof CardView cv) {
+                ensureCardStateConsumers(cv);
             }
         } else if (!registeredObjects.contains(obj)) {
             // Replacement instance — same ID but different object (e.g. zone change
@@ -220,10 +220,10 @@ public class DeltaSyncManager implements IHasNetLog {
                 netLog.trace("[DeltaSync] Replaced instance: type={} id={}, {} props",
                         objType, obj.getId(), allProps.size());
             }
-            if (obj instanceof CardView) {
-                ensureCardStateConsumers((CardView) obj);
+            if (obj instanceof CardView cv) {
+                ensureCardStateConsumers(cv);
             }
-        } else if (obj instanceof CardView) {
+        } else if (obj instanceof CardView cv) {
             // CardView: check own dirty props AND CardStateView dirty props
             boolean hasDirty = obj.hasConsumerChanges(consumerId);
             EnumSet<TrackableProperty> dirtyProps = hasDirty
@@ -232,11 +232,8 @@ public class DeltaSyncManager implements IHasNetLog {
             Map<TrackableProperty, Object> delta = dirtyProps.isEmpty()
                     ? new EnumMap<>(TrackableProperty.class)
                     : buildPropertyMap(obj, dirtyProps);
-            // Merge delayed (frozen) props — Tapped, Sickness, etc. that
-            // respect freeze aren't written to the props map or marked dirty,
-            // but network clients need them in the same delta as their events
             mergeDelayedProps(obj, delta);
-            mergeCardStateDirtyProps((CardView) obj, delta);
+            mergeCardStateDirtyProps(cv, delta);
             if (!delta.isEmpty()) {
                 objectDeltas.put(deltaKey, delta);
             }
@@ -325,10 +322,8 @@ public class DeltaSyncManager implements IHasNetLog {
         }
         int type = DeltaPacket.typeTagFor(obj);
         if (type < 0) {
-            // CardStateViews aren't top-level delta objects, but need consumer
-            // registration so their per-property dirty tracking works
-            if (obj instanceof CardStateView) {
-                ensureCardStateConsumer((CardStateView) obj);
+            if (obj instanceof CardStateView csv) {
+                ensureCardStateConsumer(csv);
             }
             return;
         }
@@ -351,20 +346,18 @@ public class DeltaSyncManager implements IHasNetLog {
         Map<TrackableProperty, Object> props = obj.getProps();
         if (props != null) {
             for (Object value : props.values()) {
-                if (value instanceof TrackableObject) {
-                    walkAndCollect((TrackableObject) value, objectDeltas, newObjects, currentObjectIds);
+                if (value instanceof TrackableObject to) {
+                    walkAndCollect(to, objectDeltas, newObjects, currentObjectIds);
                 } else if (value instanceof TrackableCollection) {
                     for (Object item : (TrackableCollection<?>) value) {
-                        if (item instanceof TrackableObject) {
-                            walkAndCollect((TrackableObject) item, objectDeltas, newObjects, currentObjectIds);
+                        if (item instanceof TrackableObject to) {
+                            walkAndCollect(to, objectDeltas, newObjects, currentObjectIds);
                         }
                     }
                 }
             }
         }
     }
-
-    // ==================== Delayed (frozen) property merging ====================
 
     /**
      * Merge properties delayed by a tracker freeze into a delta map.
@@ -581,8 +574,8 @@ public class DeltaSyncManager implements IHasNetLog {
         }
         int type = DeltaPacket.typeTagFor(obj);
         if (type < 0) {
-            if (obj instanceof CardStateView) {
-                ensureCardStateConsumer((CardStateView) obj);
+            if (obj instanceof CardStateView csv) {
+                ensureCardStateConsumer(csv);
             }
             return;
         }

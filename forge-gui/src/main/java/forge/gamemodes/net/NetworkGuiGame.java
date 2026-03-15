@@ -344,56 +344,38 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
 
         if (prop == TrackableProperty.CurrentState) {
             csv = cardView.getCurrentState();
-            if (csv == null) {
-                netLog.warn("[DeltaSync] CurrentState is null for CardView {}, creating with state={}",
-                        cardView.getId(), csvData.state);
-                csv = cardView.createAlternateState(csvData.state);
-                cardView.set(TrackableProperty.CurrentState, csv);
-            }
         } else if (prop == TrackableProperty.AlternateState) {
             csv = cardView.getAlternateState();
-            if (csv == null) {
-                netLog.debug("[DeltaSync] Creating AlternateState for CardView {} with state={}",
-                        cardView.getId(), csvData.state);
-                csv = cardView.createAlternateState(csvData.state);
-                cardView.set(TrackableProperty.AlternateState, csv);
-            }
         } else if (prop == TrackableProperty.LeftSplitState) {
             csv = cardView.getLeftSplitState();
-            if (csv == null) {
-                csv = cardView.createAlternateState(csvData.state);
-                cardView.set(TrackableProperty.LeftSplitState, csv);
-            }
         } else if (prop == TrackableProperty.RightSplitState) {
             csv = cardView.getRightSplitState();
-            if (csv == null) {
-                csv = cardView.createAlternateState(csvData.state);
-                cardView.set(TrackableProperty.RightSplitState, csv);
-            }
         }
 
-        if (csv != null) {
-            // Resolve each property in the CardStateData and apply to the CardStateView
-            int appliedCount = 0;
-            for (Map.Entry<TrackableProperty, Object> entry : csvData.properties.entrySet()) {
-                TrackableProperty csvProp = entry.getKey();
-                Object csvValue = entry.getValue();
+        if (csv == null) {
+            netLog.warn("[DeltaSync] CardState is null for CardView {}, creating with state={}",
+                    cardView.getId(), csvData.state);
+            csv = cardView.createAlternateState(csvData.state);
+            cardView.set(prop, csv);
+        }
 
-                if (csvValue instanceof CardStateData) {
-                    netLog.error("[DeltaSync] Nested CardStateData not supported for property {}", csvProp);
-                    continue;
-                }
+        // Resolve each property in the CardStateData and apply to the CardStateView
+        int appliedCount = 0;
+        for (Map.Entry<TrackableProperty, Object> entry : csvData.properties.entrySet()) {
+            TrackableProperty csvProp = entry.getKey();
+            Object csvValue = entry.getValue();
 
-                Object resolved = resolveFromNetwork(csvProp, csvValue, tracker);
-                csv.set(csvProp, resolved);
-                appliedCount++;
+            if (csvValue instanceof CardStateData) {
+                netLog.error("[DeltaSync] Nested CardStateData not supported for property {}", csvProp);
+                continue;
             }
-            netLog.trace("[DeltaSync] Applied {}/{} properties to CardStateView (state={}) of CardView {}",
+
+            Object resolved = resolveFromNetwork(csvProp, csvValue, tracker);
+            csv.set(csvProp, resolved);
+            appliedCount++;
+        }
+        netLog.trace("[DeltaSync] Applied {}/{} properties to CardStateView (state={}) of CardView {}",
                     appliedCount, csvData.properties.size(), csvData.state, cardView.getId());
-        } else {
-            netLog.error("[DeltaSync] Failed to get/create CardStateView for property {} on CardView {}",
-                    prop, cardView.getId());
-        }
     }
 
     private int computeStateChecksum(GameView gameView) {
