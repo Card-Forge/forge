@@ -40,7 +40,50 @@
     <property name="teleport" value="" />
    </properties>
   </object>
-  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="295.083" y="317.416" />
+  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="295.083" y="317.416"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.005,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.03,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.175,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.45,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.84,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.51,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property></properties></object>
   <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="118.316" y="86.9616" />
   <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="232.682" y="94.6874">
    <properties>
@@ -61,7 +104,50 @@
    <property name="effect">{"startBattleWithCard": ["Forest|TMP", "Forest|TMP", "Nut Collector|ODY"]}</property>
     </properties>
   </object>
-  <object id="56" template="../../../../../../common/maps/obj/treasure.tx" x="346.878" y="113.617" />
+  <object id="56" template="../../../../../../common/maps/obj/treasure.tx" x="346.878" y="113.617"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.005,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.03,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.175,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.45,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.84,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.51,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property></properties></object>
   <object id="57" template="../../../../../../common/maps/obj/booster.tx" x="256.739" y="94.5055">
    <properties>
     <property name="reward">[

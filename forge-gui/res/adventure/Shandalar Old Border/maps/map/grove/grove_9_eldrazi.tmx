@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="37" height="33" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="118">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx" />
@@ -83,8 +83,8 @@
 ]</property>
     <property name="effect">{"startBattleWithCard": ["Mox Emerald|LEA", "Llanowar Elves|LEA", "Killer Bees|LEG"]}</property>
     <property name="enemy" value="The Great Druid" />
-    <property name="speedModifier" type="float" value="15" />
-    <property name="threatRange" type="int" value="50" />
+    <property name="speedModifier" type="float" value="20" />
+    <property name="threatRange" type="int" value="100" />
    </properties>
   </object>
   <object id="72" template="../../../../../../common/maps/obj/manashards.tx" x="441.407" y="39.8314" />
@@ -150,22 +150,56 @@
   <object id="114" template="../../../../../../common/maps/obj/waypoint.tx" x="452.271" y="114.235" />
   <object id="115" template="../../../../../../common/maps/obj/treasure.tx" x="317.333" y="49.3333">
    <properties>
-    <property name="reward">[{
-  "type": "randomCard",
-  "count": 2,
-  "colors": [ "Green" ]
-},{
-  "type": "randomCard",
-  "count": 1,
-  "probability": 0.5,
-  "rarity": [ "rare" ],
-  "colors": [ "Green" ]
-},{
-  "type": "randomCard",
-  "count": 3,
-  "addMaxCount": 2,
-  "colors": [ "Green" ]
-}]</property>
+    <property name="reward">[
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Birds of Paradise|LEA"
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.7,
+    "count": 4,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.6,
+    "count": 4,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.4,
+    "count": 4,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.2,
+    "count": 4,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.08,
+    "count": 4,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.02,
+    "count": 4,
+    "addMaxCount": 3
+  }
+]</property>
    </properties>
   </object>
   <object id="116" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="250" y="470" width="120" height="60">

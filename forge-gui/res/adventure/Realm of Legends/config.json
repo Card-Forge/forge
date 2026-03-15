@@ -184,14 +184,14 @@
         "Steel Boots",
         "Lotus Petal",
         "Echo Shield",
-        "Steel Armor"    
+        "Cloak of the Wastes"
       ]
     }
     ,{
       "name": "Normal",
       "startingLife": 25,
       "startingShards": 20,
-      "startingMoney": 2000,
+      "startingMoney": 2500,
       "startingDifficulty": true,
       "enemyLifeFactor": 1.0,
       "rewardMaxFactor" : 1.0,
@@ -211,7 +211,8 @@
         "Challenge Coin",
         "Challenge Coin",
         "Steel Boots",
-        "Lotus Petal" 
+        "Steel Armor",
+        "Lotus Petal"
       ]
     },{
       "name": "Hard",

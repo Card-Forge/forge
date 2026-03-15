@@ -45,8 +45,94 @@
     <property name="teleport" value="" />
    </properties>
   </object>
-  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="424.039" y="112.979" />
-  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="44.532" y="24.9313" />
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="424.039" y="112.979"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.04,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.18,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.66,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.66,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.32,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.14,
+    "count": 3,
+    "addMaxCount": 2
+  }
+]</property></properties></object>
+  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="44.532" y="24.9313"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.04,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.18,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.66,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.66,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.32,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.14,
+    "count": 3,
+    "addMaxCount": 2
+  }
+]</property></properties></object>
   <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="422.633" y="132.868" />
   <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="366.853" y="151.22">
    <properties>

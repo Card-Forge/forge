@@ -107,12 +107,62 @@
   <object id="75" template="../../../../../../common/maps/obj/manashards.tx" x="258" y="45" />
   <object id="76" template="../../../../../../common/maps/obj/treasure.tx" x="161.5" y="48">
    <properties>
-    <property name="reward">[{"type": "randomCard","colors": ["Black"], "count": 5 }, {"type": "item","count": 1,"probability":0.2,"itemName": "Spell Book"},
-{
-"type": "card",
-"probability": 1,
-"count": 1,
-"cardName": "Jet Medallion|TMP"}]</property>
+    <property name="reward">[
+  {
+    "type": "item",
+    "count": 1,
+    "probability": 0.2,
+    "itemName": "Spell Book"
+  },
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Jet Medallion|TMP"
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.02,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.1,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.38,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.72,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.54,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.24,
+    "count": 2,
+    "addMaxCount": 2
+  }
+]</property>
     <property name="spawn.Normal" type="bool" value="true" />
    </properties>
   </object>

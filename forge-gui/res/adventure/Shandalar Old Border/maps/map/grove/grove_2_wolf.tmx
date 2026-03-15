@@ -93,22 +93,43 @@
   <object id="85" template="../../../../../../common/maps/obj/collision.tx" x="591.229" y="-16.3625" width="16" height="477.07" />
   <object id="86" template="../../../../../../common/maps/obj/treasure.tx" x="342.926" y="77.6133">
    <properties>
-    <property name="reward">[{
-  "type": "randomCard",
-  "count": 2,
-  "colors": [ "Green" ]
-},{
-  "type": "randomCard",
-  "count": 1,
-  "probability": 0.5,
-  "rarity": [ "rare" ],
-  "colors": [ "Green" ]
-},{
-  "type": "randomCard",
-  "count": 3,
-  "addMaxCount": 2,
-  "colors": [ "Green" ]
-}]</property>
+    <property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.002,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.02,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.1,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.68,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 1.0,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property>
    </properties>
   </object>
   <object id="87" template="../../../../../../common/maps/obj/enemy.tx" x="350" y="122.5">
