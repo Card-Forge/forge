@@ -317,7 +317,7 @@
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
-		"sprite": "Building148",
+		"sprite": "Building101",
 		"map": "../Realm of Legends/maps/map/merfolkpool/Raffines_Tower.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
