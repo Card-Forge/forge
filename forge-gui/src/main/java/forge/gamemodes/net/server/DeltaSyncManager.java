@@ -213,17 +213,7 @@ public class DeltaSyncManager implements IHasNetLog {
             obj.registerConsumer(consumerId);
             registeredObjects.add(obj);
             Map<TrackableProperty, Object> allProps = buildFullPropertyMap(obj);
-            // Merge properties delayed by tracker freeze (Zone, Sickness, etc.)
-            // that haven't been written to the props map yet
-            Tracker tracker = obj.getTracker();
-            if (tracker != null && tracker.isFrozen()) {
-                for (Map.Entry<TrackableProperty, Object> entry : tracker.getDelayedPropsFor(obj).entrySet()) {
-                    Object netVal = toNetworkValue(entry.getKey(), entry.getValue());
-                    if (netVal != SKIP_MARKER) {
-                        allProps.put(entry.getKey(), netVal);
-                    }
-                }
-            }
+            mergeDelayedProps(obj, allProps);
             obj.getAndClearDirtyProps(consumerId);
             if (!allProps.isEmpty()) {
                 newObjects.put(deltaKey, allProps);
@@ -242,14 +232,23 @@ public class DeltaSyncManager implements IHasNetLog {
             Map<TrackableProperty, Object> delta = dirtyProps.isEmpty()
                     ? new EnumMap<>(TrackableProperty.class)
                     : buildPropertyMap(obj, dirtyProps);
+            // Merge delayed (frozen) props — Tapped, Sickness, etc. that
+            // respect freeze aren't written to the props map or marked dirty,
+            // but network clients need them in the same delta as their events
+            mergeDelayedProps(obj, delta);
             mergeCardStateDirtyProps((CardView) obj, delta);
             if (!delta.isEmpty()) {
                 objectDeltas.put(deltaKey, delta);
             }
-        } else if (obj.hasConsumerChanges(consumerId)) {
-            // Existing non-CardView object — standard per-consumer dirty set
-            EnumSet<TrackableProperty> dirtyProps = obj.getAndClearDirtyProps(consumerId);
-            Map<TrackableProperty, Object> delta = buildPropertyMap(obj, dirtyProps);
+        } else {
+            // Existing non-CardView object — check dirty props and delayed (frozen) props
+            EnumSet<TrackableProperty> dirtyProps = obj.hasConsumerChanges(consumerId)
+                    ? obj.getAndClearDirtyProps(consumerId)
+                    : EnumSet.noneOf(TrackableProperty.class);
+            Map<TrackableProperty, Object> delta = dirtyProps.isEmpty()
+                    ? new EnumMap<>(TrackableProperty.class)
+                    : buildPropertyMap(obj, dirtyProps);
+            mergeDelayedProps(obj, delta);
             if (!delta.isEmpty()) {
                 objectDeltas.put(deltaKey, delta);
                 netLog.trace("[DeltaSync] Delta: type={} id={}, {} dirty props",
@@ -361,6 +360,25 @@ public class DeltaSyncManager implements IHasNetLog {
                         }
                     }
                 }
+            }
+        }
+    }
+
+    // ==================== Delayed (frozen) property merging ====================
+
+    /**
+     * Merge properties delayed by a tracker freeze into a delta map.
+     * Properties with FreezeMode.RespectsFreeze (like Tapped, Sickness) are
+     * not written to the props map or marked dirty while frozen, but network
+     * clients need them in the same delta as their accompanying events.
+     */
+    private void mergeDelayedProps(TrackableObject obj, Map<TrackableProperty, Object> delta) {
+        Tracker tracker = obj.getTracker();
+        if (tracker == null || !tracker.isFrozen()) return;
+        for (Map.Entry<TrackableProperty, Object> entry : tracker.getDelayedPropsFor(obj).entrySet()) {
+            Object netVal = toNetworkValue(entry.getKey(), entry.getValue());
+            if (netVal != SKIP_MARKER) {
+                delta.put(entry.getKey(), netVal);
             }
         }
     }
