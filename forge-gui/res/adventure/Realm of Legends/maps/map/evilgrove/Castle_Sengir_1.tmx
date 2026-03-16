@@ -99,7 +99,7 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 6,
     &quot;colors&quot;: [ &quot;black&quot; ],
-    &quot;subType&quot;: [ &quot;Vampire&quot;],
+    &quot;subTypes&quot;: [ &quot;Vampire&quot;],
     &quot;rarity&quot;: [ &quot;uncommon&quot; ]
   }
 ]
@@ -114,7 +114,7 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 3,
     &quot;colors&quot;: [ &quot;black&quot; ],
-    &quot;subType&quot;: [ &quot;Vampire&quot;],
+    &quot;subTypes&quot;: [ &quot;Vampire&quot;],
     &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ]
   }
 ]
