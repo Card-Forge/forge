@@ -136,7 +136,14 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
 
         if (packet.hasChecksum()) {
             int serverChecksum = packet.getChecksum();
-            int clientChecksum = computeStateChecksum(getGameView());
+            int clientChecksum;
+            if (packet.getChecksumProperties() != null) {
+                int phaseOrdinal = getGameView().getPhase() != null ? getGameView().getPhase().ordinal() : -1;
+                clientChecksum = NetworkChecksumUtil.computeSampledChecksum(
+                        getGameView().getTurn(), phaseOrdinal, getGameView(), packet.getChecksumProperties());
+            } else {
+                clientChecksum = computeStateChecksum(getGameView());
+            }
 
             if (serverChecksum != clientChecksum) {
                 netLog.error("[DeltaSync] CHECKSUM MISMATCH! Server={}, Client={} at seq={}",
@@ -388,6 +395,10 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
         netLog.error("[DeltaSync]   GameView ID: {}", gameView.getId());
         netLog.error("[DeltaSync]   Turn: {}", gameView.getTurn());
         netLog.error("[DeltaSync]   Phase: {}", gameView.getPhase() != null ? gameView.getPhase().name() : "null");
+        if (packet.getChecksumProperties() != null) {
+            netLog.error("[DeltaSync]   Sampled properties: {}",
+                    NetworkChecksumUtil.sampledPropertyNames(packet.getChecksumProperties()));
+        }
         for (PlayerView player : NetworkChecksumUtil.getSortedPlayers(gameView)) {
             int handSize = player.getHand() != null ? player.getHand().size() : 0;
             int graveyardSize = player.getGraveyard() != null ? player.getGraveyard().size() : 0;

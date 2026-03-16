@@ -25,13 +25,15 @@ import java.util.Map;
  * Standard Java serialization handles the maps natively via Netty's ObjectEncoder.
  */
 public final class DeltaPacket implements NetEvent {
-    private static final long serialVersionUID = 6L;
+    private static final long serialVersionUID = 7L;
 
     private final long sequenceNumber;
     private final Map<Integer, Map<TrackableProperty, Object>> objectDeltas;
     private final Map<Integer, Map<TrackableProperty, Object>> newObjects;
     private final int checksum;
     private final boolean checksumIncluded;
+    /** Ordinals of TrackableProperty values included in the sampled checksum, or null. */
+    private final int[] checksumProperties;
     private List<Object> proxiedEvents;
 
     public static final int TYPE_CARD_VIEW = 0;
@@ -91,7 +93,7 @@ public final class DeltaPacket implements NetEvent {
 
     /** Create an events-only DeltaPacket with no state deltas (seq=-1 means no ack needed). */
     public static DeltaPacket eventsOnly(List<Object> proxiedEvents) {
-        DeltaPacket packet = new DeltaPacket(-1L, null, null, 0, false);
+        DeltaPacket packet = new DeltaPacket(-1L, null, null, 0, false, null);
         packet.setProxiedEvents(proxiedEvents);
         return packet;
     }
@@ -99,11 +101,18 @@ public final class DeltaPacket implements NetEvent {
     public DeltaPacket(long sequenceNumber, Map<Integer, Map<TrackableProperty, Object>> objectDeltas,
                        Map<Integer, Map<TrackableProperty, Object>> newObjects,
                        int checksum, boolean checksumIncluded) {
+        this(sequenceNumber, objectDeltas, newObjects, checksum, checksumIncluded, null);
+    }
+
+    public DeltaPacket(long sequenceNumber, Map<Integer, Map<TrackableProperty, Object>> objectDeltas,
+                       Map<Integer, Map<TrackableProperty, Object>> newObjects,
+                       int checksum, boolean checksumIncluded, int[] checksumProperties) {
         this.sequenceNumber = sequenceNumber;
         this.objectDeltas = objectDeltas != null ? objectDeltas : Collections.emptyMap();
         this.newObjects = newObjects != null ? newObjects : Collections.emptyMap();
         this.checksum = checksum;
         this.checksumIncluded = checksumIncluded;
+        this.checksumProperties = checksumProperties;
     }
 
     public long getSequenceNumber() {
@@ -126,6 +135,11 @@ public final class DeltaPacket implements NetEvent {
         return checksumIncluded;
     }
 
+    /** Property ordinals included in the sampled checksum, or null for legacy checksum. */
+    public int[] getChecksumProperties() {
+        return checksumProperties;
+    }
+
     public void setProxiedEvents(List<Object> events) {
         this.proxiedEvents = events;
     }
@@ -140,7 +154,7 @@ public final class DeltaPacket implements NetEvent {
 
     /** Return a shallow copy without proxied events, for state-only size measurement. */
     public DeltaPacket withoutEvents() {
-        return new DeltaPacket(sequenceNumber, objectDeltas, newObjects, checksum, checksumIncluded);
+        return new DeltaPacket(sequenceNumber, objectDeltas, newObjects, checksum, checksumIncluded, checksumProperties);
     }
 
     public boolean isEmpty() {
@@ -149,6 +163,9 @@ public final class DeltaPacket implements NetEvent {
 
     public int getApproximateSize() {
         int size = 8 + 4; // sequenceNumber + checksum
+        if (checksumProperties != null) {
+            size += 4 + checksumProperties.length * 4; // array overhead + int per ordinal
+        }
         for (Map<TrackableProperty, Object> delta : objectDeltas.values()) {
             size += 4 + delta.size() * 50; // key + ~50 bytes per property estimate
         }

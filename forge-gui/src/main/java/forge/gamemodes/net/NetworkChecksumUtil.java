@@ -3,14 +3,22 @@ package forge.gamemodes.net;
 import forge.card.mana.ManaAtom;
 import forge.game.GameView;
 import forge.game.card.CardView;
+import forge.game.card.CardView.CardStateView;
 import forge.game.combat.CombatView;
 import forge.game.player.PlayerView;
+import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
+import forge.trackable.TrackableCollection;
+import forge.trackable.TrackableObject;
+import forge.trackable.TrackableProperty;
+import forge.trackable.TrackableTypes;
+import forge.trackable.TrackableTypes.TrackableType;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Shared checksum computation for delta sync validation.
@@ -275,6 +283,194 @@ public final class NetworkChecksumUtil {
 
         return sb.toString();
     }
+
+    // ==================== Sampled checksum ====================
+
+    /** Cached array of properties eligible for sampled checksum. */
+    private static TrackableProperty[] eligibleProperties;
+
+    /**
+     * Get all TrackableProperty values whose types can be generically hashed.
+     * Excludes container/nested types that require special traversal.
+     */
+    public static TrackableProperty[] getEligibleProperties() {
+        if (eligibleProperties != null) {
+            return eligibleProperties;
+        }
+        List<TrackableProperty> eligible = new ArrayList<>();
+        for (TrackableProperty prop : TrackableProperty.values()) {
+            TrackableType<?> type = prop.getType();
+            // Exclude types that are nested containers or not meaningful for desync detection
+            if (type == TrackableTypes.CardStateViewType
+                    || type == TrackableTypes.CombatViewType
+                    || type == TrackableTypes.IPaperCardType
+                    || type == TrackableTypes.StackItemViewListType) {
+                continue;
+            }
+            eligible.add(prop);
+        }
+        eligibleProperties = eligible.toArray(new TrackableProperty[0]);
+        return eligibleProperties;
+    }
+
+    /**
+     * Walk the GameView object graph in deterministic order and collect
+     * all TrackableObjects whose properties should be sampled.
+     * Order: GameView, Players (sorted by ID), per-player visible zone cards
+     * (Battlefield, Hand, Graveyard, Exile, Command — sorted by ID),
+     * per-card state views (Current, Alternate, Left, Right), StackItemViews.
+     */
+    public static List<TrackableObject> collectChecksumObjects(GameView gameView) {
+        List<TrackableObject> objects = new ArrayList<>();
+        if (gameView == null) {
+            return objects;
+        }
+
+        // 1. GameView itself
+        objects.add(gameView);
+
+        // 2. Players sorted by ID
+        List<PlayerView> players = getSortedPlayers(gameView);
+        objects.addAll(players);
+
+        // 3. Per-player visible zone cards, sorted by ID
+        for (PlayerView player : players) {
+            List<CardView> cards = new ArrayList<>();
+            addCardsFromZone(cards, player.getBattlefield());
+            addCardsFromZone(cards, player.getHand());
+            addCardsFromZone(cards, player.getGraveyard());
+            addCardsFromZone(cards, player.getExile());
+            addCardsFromZone(cards, player.getCommand());
+            cards.sort(Comparator.comparingInt(CardView::getId));
+
+            for (CardView card : cards) {
+                objects.add(card);
+                // 4. Card state views (skip nulls)
+                addIfNotNull(objects, card.getCurrentState());
+                addIfNotNull(objects, card.getAlternateState());
+                addIfNotNull(objects, card.getLeftSplitState());
+                addIfNotNull(objects, card.getRightSplitState());
+            }
+        }
+
+        // 5. StackItemViews sorted by ID
+        if (gameView.getStack() != null) {
+            List<StackItemView> stackItems = new ArrayList<>();
+            for (StackItemView siv : gameView.getStack()) {
+                stackItems.add(siv);
+            }
+            stackItems.sort(Comparator.comparingInt(StackItemView::getId));
+            objects.addAll(stackItems);
+        }
+
+        return objects;
+    }
+
+    private static void addCardsFromZone(List<CardView> cards, Iterable<CardView> zone) {
+        if (zone == null) return;
+        for (CardView card : zone) {
+            cards.add(card);
+        }
+    }
+
+    private static void addIfNotNull(List<TrackableObject> objects, TrackableObject obj) {
+        if (obj != null) {
+            objects.add(obj);
+        }
+    }
+
+    /**
+     * Hash a property value generically for checksum purposes.
+     * Handles TrackableObject references (by ID), TrackableCollections (sorted IDs),
+     * Maps (sorted entries), and everything else via Objects.hashCode.
+     */
+    static int hashPropertyValue(TrackableProperty prop, Object value) {
+        if (value == null) {
+            return 0;
+        }
+        if (value instanceof TrackableObject) {
+            return ((TrackableObject) value).getId();
+        }
+        if (value instanceof TrackableCollection) {
+            // Sort IDs for determinism
+            List<Integer> ids = new ArrayList<>();
+            for (Object item : (TrackableCollection<?>) value) {
+                ids.add(item instanceof TrackableObject ? ((TrackableObject) item).getId() : Objects.hashCode(item));
+            }
+            ids.sort(null);
+            return ids.hashCode();
+        }
+        if (value instanceof Map) {
+            // Sort entries by key hashCode for determinism
+            Map<?, ?> map = (Map<?, ?>) value;
+            List<Integer> entryHashes = new ArrayList<>(map.size());
+            for (Map.Entry<?, ?> entry : map.entrySet()) {
+                entryHashes.add(31 * Objects.hashCode(entry.getKey()) + Objects.hashCode(entry.getValue()));
+            }
+            entryHashes.sort(null);
+            return entryHashes.hashCode();
+        }
+        return Objects.hashCode(value);
+    }
+
+    /**
+     * Compute a sampled checksum over a dynamic set of TrackableProperties.
+     * Starts with the core state checksum (turn + phase + player life), then
+     * reads the specified properties from all objects in the game view graph.
+     *
+     * @param turn the current turn number
+     * @param phaseOrdinal the phase ordinal, or -1 if phase is null
+     * @param gameView the game view to checksum
+     * @param sampledPropertyOrdinals ordinals of TrackableProperty values to sample
+     * @return checksum value
+     */
+    public static int computeSampledChecksum(int turn, int phaseOrdinal, GameView gameView,
+                                              int[] sampledPropertyOrdinals) {
+        // Start with core hash
+        int hash = computeStateChecksum(turn, phaseOrdinal, gameView.getPlayers());
+
+        // Convert ordinals to properties
+        TrackableProperty[] allProps = TrackableProperty.values();
+        TrackableProperty[] sampled = new TrackableProperty[sampledPropertyOrdinals.length];
+        for (int i = 0; i < sampledPropertyOrdinals.length; i++) {
+            sampled[i] = allProps[sampledPropertyOrdinals[i]];
+        }
+
+        // Walk object graph and hash sampled properties
+        List<TrackableObject> objects = collectChecksumObjects(gameView);
+        for (TrackableObject obj : objects) {
+            Map<TrackableProperty, Object> objProps = obj.getProps();
+            if (objProps == null) continue;
+            for (TrackableProperty prop : sampled) {
+                Object value = objProps.get(prop);
+                if (value != null && !value.equals(prop.getDefaultValue())) {
+                    hash = 31 * hash + prop.ordinal();
+                    hash = 31 * hash + hashPropertyValue(prop, value);
+                }
+            }
+        }
+
+        return hash;
+    }
+
+    /**
+     * Convert sampled property ordinals to a human-readable string of property names.
+     */
+    public static String sampledPropertyNames(int[] ordinals) {
+        if (ordinals == null || ordinals.length == 0) {
+            return "[]";
+        }
+        TrackableProperty[] allProps = TrackableProperty.values();
+        StringBuilder sb = new StringBuilder("[");
+        for (int i = 0; i < ordinals.length; i++) {
+            if (i > 0) sb.append(", ");
+            sb.append(allProps[ordinals[i]].name());
+        }
+        sb.append("]");
+        return sb.toString();
+    }
+
+    // ==================== Utility ====================
 
     /**
      * Get players sorted by ID for consistent iteration order.

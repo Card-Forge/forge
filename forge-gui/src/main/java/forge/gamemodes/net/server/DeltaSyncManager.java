@@ -21,6 +21,7 @@ import forge.trackable.TrackableTypes;
 import forge.trackable.TrackableTypes.TrackableType;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.EnumSet;
@@ -30,6 +31,7 @@ import java.util.HashSet;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -44,6 +46,9 @@ public class DeltaSyncManager implements IHasNetLog {
 
     // How often to include a checksum for validation (every N packets)
     private static final int CHECKSUM_INTERVAL = 20;
+    private static final int SAMPLE_SIZE = 15;
+    private static final int MIN_CHECKSUM_INTERVAL = 5;
+    private static final int CLEAN_STREAK_TO_RESTORE = 10;
 
     // Sentinel for properties that should be skipped in network transport
     static final Object SKIP_MARKER = new Object();
@@ -64,6 +69,12 @@ public class DeltaSyncManager implements IHasNetLog {
     // Not atomic: only accessed from game thread
     private long packetsSinceLastChecksum = 0;
 
+    // Sampled checksum state
+    private final EnumSet<TrackableProperty> recentDeltaProperties = EnumSet.noneOf(TrackableProperty.class);
+    private int checksumInterval = CHECKSUM_INTERVAL;
+    private int cleanChecksumStreak = 0;
+    private final Random checksumRng = new Random();
+
     /**
      * Reset all tracking state for reconnection.
      * Unregisters this consumer from all tracked objects.
@@ -79,6 +90,9 @@ public class DeltaSyncManager implements IHasNetLog {
         sequenceNumber.set(0);
         sentObjectIds.clear();
         packetsSinceLastChecksum = 0;
+        recentDeltaProperties.clear();
+        checksumInterval = CHECKSUM_INTERVAL;
+        cleanChecksumStreak = 0;
     }
 
     /**
@@ -111,6 +125,11 @@ public class DeltaSyncManager implements IHasNetLog {
         sentObjectIds.retainAll(currentObjectIds);
         sentObjectIds.addAll(currentObjectIds);
 
+        // Accumulate changed properties for delta-biased sampling
+        for (Map<TrackableProperty, Object> delta : objectDeltas.values()) {
+            recentDeltaProperties.addAll(delta.keySet());
+        }
+
         if (!newObjects.isEmpty()) {
             netLog.info("[DeltaSync] New objects: {}, Deltas: {}", newObjects.size(), objectDeltas.size());
         }
@@ -120,18 +139,31 @@ public class DeltaSyncManager implements IHasNetLog {
         // Checksum computation — only when state is known to be stable
         int checksum = 0;
         boolean includeChecksum = false;
+        int[] checksumPropertyOrdinals = null;
         if (allowChecksum) {
             packetsSinceLastChecksum++;
-            includeChecksum = packetsSinceLastChecksum >= CHECKSUM_INTERVAL;
+            includeChecksum = packetsSinceLastChecksum >= checksumInterval;
             if (includeChecksum) {
-                checksum = NetworkChecksumUtil.computeStateChecksum(snapshotTurn, snapshotPhaseOrdinal, gameView);
+                checksumPropertyOrdinals = selectChecksumProperties();
+                checksum = NetworkChecksumUtil.computeSampledChecksum(
+                        snapshotTurn, snapshotPhaseOrdinal, gameView, checksumPropertyOrdinals);
                 packetsSinceLastChecksum = 0;
-                logChecksumDetailsWithSnapshot(gameView, checksum, seq,
-                        snapshotTurn, snapshotPhaseOrdinal);
+                recentDeltaProperties.clear();
+                cleanChecksumStreak++;
+
+                // Restore default interval after sustained clean streak
+                if (checksumInterval < CHECKSUM_INTERVAL && cleanChecksumStreak >= CLEAN_STREAK_TO_RESTORE) {
+                    netLog.info("[DeltaSync] {} clean checksums, restoring interval to {}",
+                            cleanChecksumStreak, CHECKSUM_INTERVAL);
+                    checksumInterval = CHECKSUM_INTERVAL;
+                }
+
+                logSampledChecksumDetails(gameView, checksum, seq,
+                        snapshotTurn, snapshotPhaseOrdinal, checksumPropertyOrdinals);
             }
         }
 
-        return new DeltaPacket(seq, objectDeltas, newObjects, checksum, includeChecksum);
+        return new DeltaPacket(seq, objectDeltas, newObjects, checksum, includeChecksum, checksumPropertyOrdinals);
     }
 
     // ==================== Object type and key management ====================
@@ -628,17 +660,84 @@ public class DeltaSyncManager implements IHasNetLog {
         }
     }
 
+    // ==================== Sampled checksum selection ====================
+
+    /**
+     * Select properties for sampled checksum. Biases toward recently-changed
+     * properties (up to half the sample), fills rest randomly from eligible pool.
+     */
+    private int[] selectChecksumProperties() {
+        TrackableProperty[] eligible = NetworkChecksumUtil.getEligibleProperties();
+        List<TrackableProperty> selected = new ArrayList<>(SAMPLE_SIZE);
+
+        // Bias: pick up to SAMPLE_SIZE/2 from recently changed properties
+        int biasTarget = SAMPLE_SIZE / 2;
+        List<TrackableProperty> biasedCandidates = new ArrayList<>();
+        for (TrackableProperty prop : recentDeltaProperties) {
+            // Only include if in eligible pool
+            if (prop.getType() != TrackableTypes.CardStateViewType
+                    && prop.getType() != TrackableTypes.CombatViewType
+                    && prop.getType() != TrackableTypes.IPaperCardType
+                    && prop.getType() != TrackableTypes.StackItemViewListType) {
+                biasedCandidates.add(prop);
+            }
+        }
+        // Shuffle and pick up to biasTarget
+        Collections.shuffle(biasedCandidates, checksumRng);
+        int biasCount = Math.min(biasTarget, biasedCandidates.size());
+        for (int i = 0; i < biasCount; i++) {
+            selected.add(biasedCandidates.get(i));
+        }
+
+        // Fill remaining slots randomly from rest of eligible pool
+        EnumSet<TrackableProperty> selectedSet = EnumSet.noneOf(TrackableProperty.class);
+        selectedSet.addAll(selected);
+        List<TrackableProperty> remaining = new ArrayList<>();
+        for (TrackableProperty prop : eligible) {
+            if (!selectedSet.contains(prop)) {
+                remaining.add(prop);
+            }
+        }
+        Collections.shuffle(remaining, checksumRng);
+        int fillCount = Math.min(SAMPLE_SIZE - selected.size(), remaining.size());
+        for (int i = 0; i < fillCount; i++) {
+            selected.add(remaining.get(i));
+        }
+
+        // Convert to sorted ordinals for determinism
+        int[] ordinals = new int[selected.size()];
+        for (int i = 0; i < selected.size(); i++) {
+            ordinals[i] = selected.get(i).ordinal();
+        }
+        Arrays.sort(ordinals);
+        return ordinals;
+    }
+
+    /**
+     * Called when a resync is requested due to checksum mismatch.
+     * Halves the checksum interval (more frequent checks) and resets clean streak.
+     */
+    public void onResyncRequested() {
+        cleanChecksumStreak = 0;
+        int oldInterval = checksumInterval;
+        checksumInterval = Math.max(MIN_CHECKSUM_INTERVAL, checksumInterval / 2);
+        if (checksumInterval != oldInterval) {
+            netLog.info("[DeltaSync] Resync detected, checksum interval reduced: {} -> {}",
+                    oldInterval, checksumInterval);
+        }
+    }
+
     // ==================== Checksum and validation ====================
 
-    private void logChecksumDetailsWithSnapshot(GameView gameView, int checksum, long seq,
-                                                 int snapshotTurn, int snapshotPhaseOrdinal) {
+    private void logSampledChecksumDetails(GameView gameView, int checksum, long seq,
+                                            int snapshotTurn, int snapshotPhaseOrdinal,
+                                            int[] sampledOrdinals) {
         String phaseName = snapshotPhaseOrdinal >= 0 ?
                 forge.game.phase.PhaseType.values()[snapshotPhaseOrdinal].name() : "null";
-        netLog.info("[DeltaSync] Checksum for seq={}: {}", seq, checksum);
-        netLog.info("[DeltaSync] Checksum details (server snapshot state):");
-        netLog.info("[DeltaSync]   GameView ID: {}", gameView.getId());
-        netLog.info("[DeltaSync]   Turn: {} (snapshot)", snapshotTurn);
-        netLog.info("[DeltaSync]   Phase: {} (snapshot, current={})", phaseName,
+        netLog.info("[DeltaSync] Sampled checksum for seq={}: hash={}, props={}", seq, checksum,
+                NetworkChecksumUtil.sampledPropertyNames(sampledOrdinals));
+        netLog.info("[DeltaSync]   Turn: {} (snapshot), Phase: {} (snapshot, current={})",
+                snapshotTurn, phaseName,
                 gameView.getPhase() != null ? gameView.getPhase().name() : "null");
         for (PlayerView player : NetworkChecksumUtil.getSortedPlayers(gameView)) {
             int handSize = player.getHand() != null ? player.getHand().size() : 0;
@@ -648,8 +747,6 @@ public class DeltaSyncManager implements IHasNetLog {
                     player.getId(), player.getName(), player.getLife(),
                     handSize, graveyardSize, battlefieldSize);
         }
-        netLog.info("[DeltaSync] Server breakdown: {}",
-                NetworkChecksumUtil.computeChecksumBreakdown(snapshotTurn, snapshotPhaseOrdinal, gameView));
     }
 
     public long getCurrentSequence() {

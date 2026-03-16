@@ -57,6 +57,10 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
         this.clientIndex = client.getIndex();
     }
 
+    public DeltaSyncManager getDeltaSyncManager() {
+        return deltaSyncManager;
+    }
+
     /** Alias for reconnection code that references slot index. */
     public int getSlotIndex() {
         return clientIndex;
