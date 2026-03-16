@@ -409,9 +409,12 @@ public class DeltaSyncManager implements IHasNetLog {
 
     /**
      * Merge properties delayed by a tracker freeze into a delta map.
-     * Properties with FreezeMode.RespectsFreeze (like Tapped, Sickness) are
-     * not written to the props map or marked dirty while frozen, but network
+     * Properties with FreezeMode.RespectsFreeze are not written
+     * to the props map or marked dirty while frozen, but network
      * clients need them in the same delta as their accompanying events.
+     *
+     * This is safe because speculative freeze brackets (which call clearDelayed()) and real freeze brackets are disjoint
+     * — speculative brackets always start from freezeCounter == 0 and complete before any sync point where delta collection occurs.
      */
     private void mergeDelayedProps(TrackableObject obj, Map<TrackableProperty, Object> delta) {
         Tracker tracker = obj.getTracker();
@@ -522,6 +525,7 @@ public class DeltaSyncManager implements IHasNetLog {
         // Defensive copy mutable collections at the serialization boundary.
         // Views use in-place mutation + flagAsChanged(), so the live reference
         // could be mutated by the game thread while Netty serializes the packet.
+        // (some like TrackableProperty.Mana are already safe but that's a minor optimization)
         if (value instanceof Map) {
             return new HashMap<>((Map<?, ?>) value);
         }
