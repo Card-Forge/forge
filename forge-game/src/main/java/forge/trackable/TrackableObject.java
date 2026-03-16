@@ -127,7 +127,7 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
         copyingProps = false;
     }
 
-    //use when updating collection type properties without using set
+    // use when updating collection type properties without using set (or assigning the same object)
     protected final void flagAsChanged(final TrackableProperty key) {
         markDirtyForConsumers(key);
         key.updateObjLookup(tracker, props.get(key));

@@ -426,7 +426,8 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.NotedTypes);
     }
     void updateNotedTypes(Card c) {
-        set(TrackableProperty.NotedTypes, Lists.newArrayList(c.getNotedTypes()));
+        set(TrackableProperty.NotedTypes, c.getNotedTypes());
+        flagAsChanged(TrackableProperty.NotedTypes);
     }
 
     public String getChosenNumber() {
@@ -450,7 +451,8 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.ChosenColors);
     }
     void updateChosenColors(Card c) {
-        set(TrackableProperty.ChosenColors, Lists.newArrayList(c.getChosenColors()));
+        set(TrackableProperty.ChosenColors, c.getChosenColors());
+        flagAsChanged(TrackableProperty.ChosenColors);
     }
     public boolean hasPaperFoil() {
         return get(TrackableProperty.PaperFoil);
