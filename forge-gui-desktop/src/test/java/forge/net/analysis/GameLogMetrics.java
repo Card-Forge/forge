@@ -62,6 +62,9 @@ public class GameLogMetrics {
     private String firstTimestamp;
     private String lastTimestamp;
 
+    // Checksum stats
+    private int checksumCount;
+
     // Error tracking
     private List<String> warnings = new ArrayList<>();
     private List<String> errors = new ArrayList<>();
@@ -282,6 +285,18 @@ public class GameLogMetrics {
     /** Get occurrence counts by normalized error pattern. */
     public Map<String, Integer> getErrorCounts() {
         return errorCounts;
+    }
+
+    public int getChecksumCount() {
+        return checksumCount;
+    }
+
+    public void setChecksumCount(int checksumCount) {
+        this.checksumCount = checksumCount;
+    }
+
+    public int getChecksumMismatchCount() {
+        return checksumMismatchDetails.size();
     }
 
     public boolean hasChecksumMismatch() {

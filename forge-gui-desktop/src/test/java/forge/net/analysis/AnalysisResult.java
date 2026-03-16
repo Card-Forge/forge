@@ -31,6 +31,7 @@ public class AnalysisResult {
     private int gamesWithErrors;
     private int gamesWithWarnings;
     private int gamesWithChecksumMismatches;
+    private int totalChecksumMismatches;
     private int totalSendErrors;
 
     private long totalDeltaBytes;
@@ -78,6 +79,7 @@ public class AnalysisResult {
         gamesWithErrors = (int) allMetrics.stream().filter(m -> !m.getErrors().isEmpty()).count();
         gamesWithWarnings = (int) allMetrics.stream().filter(m -> !m.getWarnings().isEmpty()).count();
         gamesWithChecksumMismatches = (int) allMetrics.stream().filter(GameLogMetrics::hasChecksumMismatch).count();
+        totalChecksumMismatches = allMetrics.stream().mapToInt(GameLogMetrics::getChecksumMismatchCount).sum();
         totalSendErrors = allMetrics.stream().mapToInt(GameLogMetrics::getSendErrors).sum();
 
         totalDeltaBytes = allMetrics.stream().mapToLong(GameLogMetrics::getTotalDeltaBytes).sum();
@@ -348,7 +350,8 @@ public class AnalysisResult {
         if (getUniqueDeckCount() > 0) {
             sb.append(String.format("| Unique Decks Used | %d |\n", getUniqueDeckCount()));
         }
-        sb.append(String.format("| Checksum Mismatches | %d |\n", gamesWithChecksumMismatches));
+        sb.append(String.format("| Games with Checksum Mismatches | %d |\n", gamesWithChecksumMismatches));
+        sb.append(String.format("| Total Checksum Mismatches | %d |\n", totalChecksumMismatches));
         sb.append(String.format("| Games with Errors | %d |\n", gamesWithErrors));
         sb.append(String.format("| Games with Warnings | %d |\n", gamesWithWarnings));
         sb.append("\n");
@@ -665,7 +668,7 @@ public class AnalysisResult {
                 sb.append(String.format("- [%s] Average bandwidth savings >= 90%% (actual: %.1f%%)\n",
                         averageBandwidthSavings >= 90.0 ? "x" : " ", averageBandwidthSavings));
             }
-            sb.append(String.format("- [%s] Zero checksum mismatches (actual: %d)\n",
+            sb.append(String.format("- [%s] Zero games with checksum mismatches (actual: %d)\n",
                     gamesWithChecksumMismatches == 0 ? "x" : " ", gamesWithChecksumMismatches));
 
             // Per-player-count success rates
@@ -689,31 +692,37 @@ public class AnalysisResult {
 
             boolean hasMultipleFormats = statsByFormat.size() > 1;
             if (hasMultipleFormats) {
-                sb.append("| # | Log File | Status | Format | Players | Turns | Winner |\n");
-                sb.append("|---|----------|--------|--------|---------|-------|--------|\n");
+                sb.append("| # | Log File | Status | Format | Players | Turns | Packets | Checksums | Mismatches | Winner |\n");
+                sb.append("|---|----------|--------|--------|---------|-------|---------|-----------|------------|--------|\n");
             } else {
-                sb.append("| # | Log File | Status | Players | Turns | Winner |\n");
-                sb.append("|---|----------|--------|---------|-------|--------|\n");
+                sb.append("| # | Log File | Status | Players | Turns | Packets | Checksums | Mismatches | Winner |\n");
+                sb.append("|---|----------|--------|---------|-------|---------|-----------|------------|--------|\n");
             }
             for (GameLogMetrics m : sortedMetrics) {
                 String status = m.isSuccessful() ? "OK" : (m.hasChecksumMismatch() ? "DESYNC" : "FAIL");
                 String winner = m.getWinner() != null ? m.getWinner() : "-";
                 if (hasMultipleFormats) {
-                    sb.append(String.format("| %d | `%s` | %s | %s | %d | %d | %s |\n",
+                    sb.append(String.format("| %d | `%s` | %s | %s | %d | %d | %d | %d | %d | %s |\n",
                             m.getGameIndex(),
                             m.getLogFileName(),
                             status,
                             m.getGameFormat(),
                             m.getPlayerCount(),
                             m.getTurnCount(),
+                            m.getDeltaPacketCount(),
+                            m.getChecksumCount(),
+                            m.getChecksumMismatchCount(),
                             winner));
                 } else {
-                    sb.append(String.format("| %d | `%s` | %s | %d | %d | %s |\n",
+                    sb.append(String.format("| %d | `%s` | %s | %d | %d | %d | %d | %d | %s |\n",
                             m.getGameIndex(),
                             m.getLogFileName(),
                             status,
                             m.getPlayerCount(),
                             m.getTurnCount(),
+                            m.getDeltaPacketCount(),
+                            m.getChecksumCount(),
+                            m.getChecksumMismatchCount(),
                             winner));
                 }
             }

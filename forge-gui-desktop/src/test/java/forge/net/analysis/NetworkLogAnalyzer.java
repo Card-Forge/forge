@@ -90,6 +90,9 @@ public class NetworkLogAnalyzer {
     private static final Pattern CHECKSUM_MISMATCH_PATTERN = Pattern.compile(
             "CHECKSUM MISMATCH|checksum mismatch|desync", Pattern.CASE_INSENSITIVE);
 
+    private static final Pattern SAMPLED_CHECKSUM_PATTERN = Pattern.compile(
+            "\\[DeltaSync\\] Sampled checksum for seq=");
+
     // Patterns for checksum mismatch breakdown extraction
     private static final Pattern MISMATCH_LINE_PATTERN = Pattern.compile(
             "CHECKSUM MISMATCH!\\s+Server=([-\\d]+),\\s+Client=([-\\d]+)\\s+at\\s+seq=(\\d+)");
@@ -418,6 +421,7 @@ public class NetworkLogAnalyzer {
         try (BufferedReader reader = new BufferedReader(new FileReader(logFile))) {
             String line;
             int packetCount = 0;
+            int checksumCount = 0;
             long totalDeltaBytes = 0;
             long totalFullStateBytes = 0;
             long stateOnlyDeltaBytes = 0;
@@ -552,6 +556,12 @@ public class NetworkLogAnalyzer {
                     continue;
                 }
 
+                // Sampled checksum validation
+                if (SAMPLED_CHECKSUM_PATTERN.matcher(line).find()) {
+                    checksumCount++;
+                    continue;
+                }
+
                 // Checksum mismatch
                 if (CHECKSUM_MISMATCH_PATTERN.matcher(line).find()) {
                     metrics.setHasChecksumMismatch(true);
@@ -633,6 +643,7 @@ public class NetworkLogAnalyzer {
 
             // Set aggregated metrics
             metrics.setDeltaPacketCount(packetCount);
+            metrics.setChecksumCount(checksumCount);
             metrics.setTotalDeltaBytes(totalDeltaBytes);
             metrics.setTotalFullStateBytes(totalFullStateBytes);
             metrics.setStateOnlyDeltaBytes(stateOnlyDeltaBytes);
