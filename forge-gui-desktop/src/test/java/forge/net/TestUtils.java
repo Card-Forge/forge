@@ -53,6 +53,6 @@ public final class TestUtils {
         FModel.getNetPreferences().setPref(ForgeNetPreferences.FNetPref.UPnP, "NEVER");
 
         // Enable deep checksum for batch tests to catch GUI state desyncs
-        NetworkChecksumUtil.setDeepChecksumEnabled(true);
+        NetworkChecksumUtil.setStableChecksum(true);
     }
 }

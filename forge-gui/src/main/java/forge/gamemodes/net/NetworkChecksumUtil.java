@@ -33,14 +33,10 @@ public final class NetworkChecksumUtil {
      * mana pools, combat state, and stack size. Disabled by default for
      * production performance; enabled by the test harness to catch GUI desyncs.
      */
-    private static boolean deepChecksumEnabled = false;
+    private static boolean stableChecksum = false;
 
-    public static void setDeepChecksumEnabled(boolean enabled) {
-        deepChecksumEnabled = enabled;
-    }
-
-    public static boolean isDeepChecksumEnabled() {
-        return deepChecksumEnabled;
+    public static void setStableChecksum(boolean enabled) {
+        stableChecksum = enabled;
     }
 
     /**
@@ -68,9 +64,7 @@ public final class NetworkChecksumUtil {
     }
 
     /**
-     * Compute a state checksum with optional deep validation.
-     * When deepChecksumEnabled is true, includes zone sizes, mana pools,
-     * battlefield card properties, combat state, and stack size.
+     * Compute a state checksum with fixed properties.
      *
      * @param turn the current turn number
      * @param phaseOrdinal the phase ordinal, or -1 if phase is null
@@ -82,10 +76,6 @@ public final class NetworkChecksumUtil {
             return computeStateChecksum(turn, phaseOrdinal, (Iterable<PlayerView>) null);
         }
         int hash = computeStateChecksum(turn, phaseOrdinal, gameView.getPlayers());
-
-        if (!deepChecksumEnabled) {
-            return hash;
-        }
 
         // Deep checksum: per-player zone sizes and mana
         for (PlayerView player : getSortedPlayers(gameView)) {
@@ -169,7 +159,7 @@ public final class NetworkChecksumUtil {
      * after each component. Used to identify exactly where server/client diverge.
      */
     public static String computeChecksumBreakdown(int turn, int phaseOrdinal, GameView gameView) {
-        if (gameView == null || !deepChecksumEnabled) {
+        if (gameView == null || !stableChecksum) {
             return "deep checksum disabled or gameView null";
         }
         StringBuilder sb = new StringBuilder();
@@ -423,8 +413,13 @@ public final class NetworkChecksumUtil {
      * @param sampledPropertyOrdinals ordinals of TrackableProperty values to sample
      * @return checksum value
      */
-    public static int computeSampledChecksum(int turn, int phaseOrdinal, GameView gameView,
-                                              int[] sampledPropertyOrdinals) {
+    public static int computeSampledChecksum(GameView gameView, int[] sampledPropertyOrdinals) {
+        final int turn = gameView.getTurn();
+        int phaseOrdinal = gameView.getPhase() != null ? gameView.getPhase().ordinal() : -1;
+        if (stableChecksum) {
+            return computeStateChecksum(turn, phaseOrdinal, gameView);
+        }
+
         // Start with core hash
         int hash = computeStateChecksum(turn, phaseOrdinal, gameView.getPlayers());
 

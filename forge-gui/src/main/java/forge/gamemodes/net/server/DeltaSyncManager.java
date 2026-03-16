@@ -111,10 +111,6 @@ public class DeltaSyncManager implements IHasNetLog {
      *                      game state can race with game thread mutations.
      */
     public DeltaPacket collectDeltas(GameView gameView, boolean allowChecksum) {
-        // Capture checksum-relevant values at the start to avoid race conditions
-        final int snapshotTurn = gameView.getTurn();
-        final int snapshotPhaseOrdinal = gameView.getPhase() != null ? gameView.getPhase().ordinal() : -1;
-
         Map<Integer, Map<TrackableProperty, Object>> objectDeltas = new HashMap<>();
         Map<Integer, Map<TrackableProperty, Object>> newObjects = new HashMap<>();
         Set<Integer> currentObjectIds = new HashSet<>();
@@ -143,8 +139,7 @@ public class DeltaSyncManager implements IHasNetLog {
             packetsSinceLastChecksum++;
             if (packetsSinceLastChecksum >= checksumInterval) {
                 checksumPropertyOrdinals = selectChecksumProperties();
-                checksum = NetworkChecksumUtil.computeSampledChecksum(
-                        snapshotTurn, snapshotPhaseOrdinal, gameView, checksumPropertyOrdinals);
+                checksum = NetworkChecksumUtil.computeSampledChecksum(gameView, checksumPropertyOrdinals);
                 packetsSinceLastChecksum = 0;
                 recentDeltaProperties.clear();
                 cleanChecksumStreak++;
@@ -156,8 +151,7 @@ public class DeltaSyncManager implements IHasNetLog {
                     checksumInterval = CHECKSUM_INTERVAL;
                 }
 
-                logSampledChecksumDetails(gameView, checksum, seq,
-                        snapshotTurn, snapshotPhaseOrdinal, checksumPropertyOrdinals);
+                logSampledChecksumDetails(gameView, checksum, seq, checksumPropertyOrdinals);
             }
         }
 
@@ -731,15 +725,15 @@ public class DeltaSyncManager implements IHasNetLog {
 
     // ==================== Checksum and validation ====================
 
-    private void logSampledChecksumDetails(GameView gameView, int checksum, long seq,
-                                            int snapshotTurn, int snapshotPhaseOrdinal,
-                                            int[] sampledOrdinals) {
-        String phaseName = snapshotPhaseOrdinal >= 0 ?
-                forge.game.phase.PhaseType.values()[snapshotPhaseOrdinal].name() : "null";
+    private void logSampledChecksumDetails(GameView gameView, int checksum, long seq, int[] sampledOrdinals) {
+        int turn = gameView.getTurn();
+        int phaseOrdinal = gameView.getPhase() != null ? gameView.getPhase().ordinal() : -1;
+        String phaseName = phaseOrdinal >= 0 ?
+                forge.game.phase.PhaseType.values()[phaseOrdinal].name() : "null";
         netLog.info("[DeltaSync] Sampled checksum for seq={}: hash={}, props={}", seq, checksum,
                 NetworkChecksumUtil.sampledPropertyNames(sampledOrdinals));
         netLog.info("[DeltaSync]   Turn: {} (snapshot), Phase: {} (snapshot, current={})",
-                snapshotTurn, phaseName,
+                turn, phaseName,
                 gameView.getPhase() != null ? gameView.getPhase().name() : "null");
         for (PlayerView player : NetworkChecksumUtil.getSortedPlayers(gameView)) {
             int handSize = player.getHand() != null ? player.getHand().size() : 0;

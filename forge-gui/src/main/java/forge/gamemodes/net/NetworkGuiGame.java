@@ -136,14 +136,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
 
         if (packet.hasChecksum()) {
             int serverChecksum = packet.getChecksum();
-            int clientChecksum;
-            if (packet.getChecksumProperties() != null) {
-                int phaseOrdinal = getGameView().getPhase() != null ? getGameView().getPhase().ordinal() : -1;
-                clientChecksum = NetworkChecksumUtil.computeSampledChecksum(
-                        getGameView().getTurn(), phaseOrdinal, getGameView(), packet.getChecksumProperties());
-            } else {
-                clientChecksum = computeStateChecksum(getGameView());
-            }
+            int clientChecksum = NetworkChecksumUtil.computeSampledChecksum(getGameView(), packet.getChecksumProperties());
 
             if (serverChecksum != clientChecksum) {
                 netLog.error("[DeltaSync] CHECKSUM MISMATCH! Server={}, Client={} at seq={}",
@@ -382,11 +375,6 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
         }
         netLog.trace("[DeltaSync] Applied {}/{} properties to CardStateView (state={}) of CardView {}",
                     appliedCount, csvData.properties.size(), csvData.state, cardView.getId());
-    }
-
-    private int computeStateChecksum(GameView gameView) {
-        int phaseOrdinal = gameView.getPhase() != null ? gameView.getPhase().ordinal() : -1;
-        return NetworkChecksumUtil.computeStateChecksum(gameView.getTurn(), phaseOrdinal, gameView);
     }
 
     private void logChecksumDetails(GameView gameView, DeltaPacket packet) {
