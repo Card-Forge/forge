@@ -1,5 +1,6 @@
 package forge.gamemodes.net;
 
+import forge.card.CardStateName;
 import forge.game.GameView;
 import forge.game.event.GameEvent;
 import forge.game.card.CardView;
@@ -7,8 +8,6 @@ import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.AbstractGuiGame;
-import forge.gamemodes.net.DeltaPacket.CardStateData;
-import forge.gamemodes.net.server.DeltaSyncManager;
 import forge.interfaces.IGameController;
 import forge.trackable.Tracker;
 import forge.trackable.TrackableCollection;
@@ -57,18 +56,46 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
         // STEP 1: Create new objects first (so deltas can reference them)
         Map<Integer, Map<TrackableProperty, Object>> newObjects = packet.getNewObjects();
         List<Map.Entry<TrackableObject, Map<TrackableProperty, Object>>> pendingPropertyApplications = new ArrayList<>();
+        Map<Integer, CardStateView> csvRegistry = new HashMap<>();
 
         if (!newObjects.isEmpty()) {
+            // Sort by delta key so CardViews (type 0) are created before CSVs (type 4)
+            List<Map.Entry<Integer, Map<TrackableProperty, Object>>> sortedNew = new ArrayList<>(newObjects.entrySet());
+            sortedNew.sort(Comparator.comparingInt(Map.Entry::getKey));
+
             // Phase 1a: Create all objects first (without applying properties)
-            for (Map.Entry<Integer, Map<TrackableProperty, Object>> newEntry : newObjects.entrySet()) {
+            for (Map.Entry<Integer, Map<TrackableProperty, Object>> newEntry : sortedNew) {
                 int deltaKey = newEntry.getKey();
-                int objectType = DeltaSyncManager.getTypeFromDeltaKey(deltaKey);
-                int objectId = DeltaSyncManager.getIdFromDeltaKey(deltaKey);
+                int objectType = DeltaPacket.getTypeFromDeltaKey(deltaKey);
+                int objectId = DeltaPacket.getIdFromDeltaKey(deltaKey);
                 try {
-                    TrackableObject created = createObjectOnly(objectType, objectId, tracker);
-                    if (created != null) {
-                        pendingPropertyApplications.add(new AbstractMap.SimpleEntry<>(created, newEntry.getValue()));
+                    if (objectType == DeltaPacket.TYPE_CSV) {
+                        int cardId = getCardIdFromCsvEncodedId(objectId);
+                        CardStateName state = getStateFromCsvEncodedId(objectId);
+                        CardView parent = tracker.getObj(TrackableTypes.CardViewType, cardId);
+                        if (parent == null) {
+                            netLog.error("[DeltaSync] Parent CardView ID={} not found for CSV state={}",
+                                    cardId, state);
+                            continue;
+                        }
+                        CardStateView csv = findCsvByState(parent, state);
+                        if (csv != null) {
+                            Map<TrackableProperty, Object> csvProps = csv.getProps();
+                            if (csvProps != null) {
+                                csvProps.clear();
+                            }
+                        } else {
+                            csv = parent.createAlternateState(state);
+                        }
+                        csvRegistry.put(deltaKey, csv);
+                        pendingPropertyApplications.add(new AbstractMap.SimpleEntry<>(csv, newEntry.getValue()));
                         newObjectCount++;
+                    } else {
+                        TrackableObject created = createObjectOnly(objectType, objectId, tracker);
+                        if (created != null) {
+                            pendingPropertyApplications.add(new AbstractMap.SimpleEntry<>(created, newEntry.getValue()));
+                            newObjectCount++;
+                        }
                     }
                 } catch (Exception e) {
                     netLog.error(e, "[DeltaSync] Error creating new object type={} id={}", objectType, objectId);
@@ -80,7 +107,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
             int propsApplied = 0;
             for (Map.Entry<TrackableObject, Map<TrackableProperty, Object>> pending : pendingPropertyApplications) {
                 try {
-                    applyPropertyMap(pending.getKey(), pending.getValue(), tracker);
+                    applyPropertyMap(pending.getKey(), pending.getValue(), tracker, csvRegistry);
                     propsApplied++;
                 } catch (Exception e) {
                     netLog.error("[DeltaSync] Error applying properties to object {}: {}",
@@ -95,13 +122,22 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
             int deltaKey = entry.getKey();
             Map<TrackableProperty, Object> deltaProps = entry.getValue();
 
-            int objectType = DeltaSyncManager.getTypeFromDeltaKey(deltaKey);
-            int actualObjectId = DeltaSyncManager.getIdFromDeltaKey(deltaKey);
+            int objectType = DeltaPacket.getTypeFromDeltaKey(deltaKey);
+            int actualObjectId = DeltaPacket.getIdFromDeltaKey(deltaKey);
 
-            TrackableObject obj = findObjectByTypeAndId(tracker, objectType, actualObjectId);
+            TrackableObject obj;
+            if (objectType == DeltaPacket.TYPE_CSV) {
+                obj = csvRegistry.get(deltaKey);
+                if (obj == null) {
+                    obj = findObjectByTypeAndId(tracker, objectType, actualObjectId);
+                }
+            } else {
+                obj = findObjectByTypeAndId(tracker, objectType, actualObjectId);
+            }
+
             if (obj != null) {
                 try {
-                    applyPropertyMap(obj, deltaProps, tracker);
+                    applyPropertyMap(obj, deltaProps, tracker, csvRegistry);
                     appliedCount++;
                 } catch (Exception e) {
                     netLog.error("[DeltaSync] Error applying delta to object ID={} type={} (deltaKey={})",
@@ -161,15 +197,27 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
      * Apply a property map to a TrackableObject.
      * Resolves network values (IDs) back to object references.
      */
-    private void applyPropertyMap(TrackableObject obj, Map<TrackableProperty, Object> delta, Tracker tracker) {
+    private void applyPropertyMap(TrackableObject obj, Map<TrackableProperty, Object> delta,
+                                   Tracker tracker, Map<Integer, CardStateView> csvRegistry) {
         for (Map.Entry<TrackableProperty, Object> entry : delta.entrySet()) {
             TrackableProperty prop = entry.getKey();
             Object value = entry.getValue();
 
             try {
-                // Handle CardStateData specially — apply to existing CardStateView
-                if (value instanceof CardStateData csvData && obj instanceof CardView cardView) {
-                    applyCardStateData(cardView, prop, csvData, tracker);
+                // CSV slot-assignment properties carry a CardStateName ordinal
+                if (isCsvSlotProperty(prop) && obj instanceof CardView cardView) {
+                    if (value == null) {
+                        cardView.set(prop, null);
+                    } else {
+                        int ordinal = (Integer) value;
+                        CardStateName state = CardStateName.values()[ordinal];
+                        int csvKey = DeltaPacket.makeDeltaKey(DeltaPacket.TYPE_CSV,
+                                cardView.getId() * 16 + ordinal);
+                        CardStateView csv = csvRegistry.get(csvKey);
+                        if (csv == null) csv = findCsvByState(cardView, state);
+                        if (csv == null) csv = cardView.createAlternateState(state);
+                        cardView.set(prop, csv);
+                    }
                     continue;
                 }
 
@@ -340,49 +388,6 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
         return combat;
     }
 
-    /**
-     * Apply CardStateData to the appropriate CardStateView on a CardView.
-     */
-    private void applyCardStateData(CardView cardView, TrackableProperty prop,
-                                     CardStateData csvData, Tracker tracker) {
-        CardStateView csv = null;
-
-        if (prop == TrackableProperty.CurrentState) {
-            csv = cardView.getCurrentState();
-        } else if (prop == TrackableProperty.AlternateState) {
-            csv = cardView.getAlternateState();
-        } else if (prop == TrackableProperty.LeftSplitState) {
-            csv = cardView.getLeftSplitState();
-        } else if (prop == TrackableProperty.RightSplitState) {
-            csv = cardView.getRightSplitState();
-        }
-
-        if (csv == null) {
-            netLog.warn("[DeltaSync] CardState is null for CardView {}, creating with state={}",
-                    cardView.getId(), csvData.state);
-            csv = cardView.createAlternateState(csvData.state);
-            cardView.set(prop, csv);
-        }
-
-        // Resolve each property in the CardStateData and apply to the CardStateView
-        int appliedCount = 0;
-        for (Map.Entry<TrackableProperty, Object> entry : csvData.properties.entrySet()) {
-            TrackableProperty csvProp = entry.getKey();
-            Object csvValue = entry.getValue();
-
-            if (csvValue instanceof CardStateData) {
-                netLog.error("[DeltaSync] Nested CardStateData not supported for property {}", csvProp);
-                continue;
-            }
-
-            Object resolved = resolveFromNetwork(csvProp, csvValue, tracker);
-            csv.set(csvProp, resolved);
-            appliedCount++;
-        }
-        netLog.trace("[DeltaSync] Applied {}/{} properties to CardStateView (state={}) of CardView {}",
-                    appliedCount, csvData.properties.size(), csvData.state, cardView.getId());
-    }
-
     private void logChecksumDetails(GameView gameView, DeltaPacket packet) {
         netLog.error("[DeltaSync] Checksum details (client state):");
         netLog.error("[DeltaSync]   GameView ID: {}", gameView.getId());
@@ -420,25 +425,11 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
         TrackableObject existing = findObjectByTypeAndId(tracker, objectType, objectId);
         if (existing != null) {
             // This is a replacement instance (same ID, new server-side object after e.g.
-            // zone change). Clear non-structural properties so applyPropertyMap starts
-            // from a clean slate — otherwise stale values (counters, attacking, etc.)
-            // persist from the previous instance.
+            // zone change). Clear all properties so applyPropertyMap starts from a clean
+            // slate — otherwise stale values (counters, attacking, etc.) persist from
+            // the previous instance.
             Map<TrackableProperty, Object> props = existing.getProps();
-            if (objectType == DeltaPacket.TYPE_CARD_VIEW) {
-                // Keep CardStateView references but clear their properties too —
-                // applyCardStateData only sets properties in the delta, so stale
-                // values (Power, Toughness, etc.) would persist otherwise.
-                props.keySet().removeIf(p ->
-                        p != TrackableProperty.CurrentState &&
-                        p != TrackableProperty.AlternateState &&
-                        p != TrackableProperty.LeftSplitState &&
-                        p != TrackableProperty.RightSplitState);
-                CardView cardView = (CardView) existing;
-                clearCardStateProps(cardView.getCurrentState());
-                clearCardStateProps(cardView.getAlternateState());
-                clearCardStateProps(cardView.getLeftSplitState());
-                clearCardStateProps(cardView.getRightSplitState());
-            } else {
+            if (props != null) {
                 props.clear();
             }
             netLog.trace("[DeltaSync] {} ID={} already exists (replaced), cleared stale props",
@@ -479,15 +470,6 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
         return obj;
     }
 
-    private void clearCardStateProps(CardStateView csv) {
-        if (csv != null) {
-            Map<TrackableProperty, Object> csvProps = csv.getProps();
-            if (csvProps != null) {
-                csvProps.clear();
-            }
-        }
-    }
-
     private TrackableObject findObjectByTypeAndId(Tracker tracker, int objectType, int objectId) {
         switch (objectType) {
             case DeltaPacket.TYPE_CARD_VIEW:
@@ -498,6 +480,11 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
                 return tracker.getObj(TrackableTypes.StackItemViewType, objectId);
             case DeltaPacket.TYPE_GAME_VIEW:
                 return getGameView();
+            case DeltaPacket.TYPE_CSV:
+                int cardId = getCardIdFromCsvEncodedId(objectId);
+                CardStateName state = getStateFromCsvEncodedId(objectId);
+                CardView parent = tracker.getObj(TrackableTypes.CardViewType, cardId);
+                return parent != null ? findCsvByState(parent, state) : null;
             default:
                 netLog.warn("[DeltaSync] Unknown object type {} for object {}", objectType, objectId);
                 return null;
@@ -510,8 +497,37 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
             case DeltaPacket.TYPE_PLAYER_VIEW: return "PlayerView";
             case DeltaPacket.TYPE_STACK_ITEM_VIEW: return "StackItemView";
             case DeltaPacket.TYPE_GAME_VIEW: return "GameView";
+            case DeltaPacket.TYPE_CSV: return "CardStateView";
             default: return "Unknown(type=" + objectType + ")";
         }
+    }
+
+    private static CardStateView findCsvByState(CardView parent, CardStateName state) {
+        CardStateView csv;
+        csv = parent.getCurrentState();
+        if (csv != null && csv.getState() == state) return csv;
+        csv = parent.getAlternateState();
+        if (csv != null && csv.getState() == state) return csv;
+        csv = parent.getLeftSplitState();
+        if (csv != null && csv.getState() == state) return csv;
+        csv = parent.getRightSplitState();
+        if (csv != null && csv.getState() == state) return csv;
+        return null;
+    }
+
+    private static int getCardIdFromCsvEncodedId(int encodedId) {
+        return encodedId / 16;
+    }
+
+    private static CardStateName getStateFromCsvEncodedId(int encodedId) {
+        return CardStateName.values()[encodedId % 16];
+    }
+
+    private static boolean isCsvSlotProperty(TrackableProperty prop) {
+        return prop == TrackableProperty.CurrentState
+                || prop == TrackableProperty.AlternateState
+                || prop == TrackableProperty.LeftSplitState
+                || prop == TrackableProperty.RightSplitState;
     }
 
     private static ZoneType getZoneTypeForProperty(TrackableProperty prop) {

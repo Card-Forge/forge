@@ -3,6 +3,7 @@ package forge.gamemodes.net;
 import forge.card.CardStateName;
 import forge.game.GameView;
 import forge.game.card.CardView;
+import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
 import forge.gamemodes.net.server.RemoteClient;
@@ -25,7 +26,7 @@ import java.util.Map;
  * Standard Java serialization handles the maps natively via Netty's ObjectEncoder.
  */
 public final class DeltaPacket implements NetEvent {
-    private static final long serialVersionUID = 7L;
+    private static final long serialVersionUID = 8L;
 
     private final long sequenceNumber;
     private final Map<Integer, Map<TrackableProperty, Object>> objectDeltas;
@@ -39,13 +40,42 @@ public final class DeltaPacket implements NetEvent {
     public static final int TYPE_PLAYER_VIEW = 1;
     public static final int TYPE_STACK_ITEM_VIEW = 2;
     public static final int TYPE_GAME_VIEW = 3;
+    public static final int TYPE_CSV = 4;
+
+    static {
+        if (CardStateName.values().length > 16) {
+            throw new AssertionError("CardStateName has " + CardStateName.values().length
+                    + " values; CSV delta key encoding supports at most 16");
+        }
+    }
 
     public static int typeTagFor(TrackableObject obj) {
+        if (obj instanceof CardStateView) return TYPE_CSV;
         if (obj instanceof CardView) return TYPE_CARD_VIEW;
         if (obj instanceof PlayerView) return TYPE_PLAYER_VIEW;
         if (obj instanceof StackItemView) return TYPE_STACK_ITEM_VIEW;
         if (obj instanceof GameView) return TYPE_GAME_VIEW;
         return -1;
+    }
+
+    /**
+     * Create a composite delta key encoding both object type and ID.
+     * Upper 4 bits = type (0-15), lower 28 bits = ID.
+     */
+    public static int makeDeltaKey(int type, int id) {
+        return (type << 28) | (id & 0x0FFFFFFF);
+    }
+
+    public static int getTypeFromDeltaKey(int deltaKey) {
+        return (deltaKey >>> 28) & 0xF;
+    }
+
+    public static int getIdFromDeltaKey(int deltaKey) {
+        int id = deltaKey & 0x0FFFFFFF;
+        if ((id & 0x08000000) != 0) {
+            id |= 0xF0000000;
+        }
+        return id;
     }
 
     public static TrackableType<?> trackableTypeFor(int typeTag) {
@@ -54,20 +84,6 @@ public final class DeltaPacket implements NetEvent {
             case TYPE_PLAYER_VIEW: return TrackableTypes.PlayerViewType;
             case TYPE_STACK_ITEM_VIEW: return TrackableTypes.StackItemViewType;
             default: return null;
-        }
-    }
-
-    public static class CardStateData implements Serializable {
-        private static final long serialVersionUID = 1L;
-
-        public final int id;
-        public final CardStateName state;
-        public final Map<TrackableProperty, Object> properties;
-
-        public CardStateData(int id, CardStateName state, Map<TrackableProperty, Object> properties) {
-            this.id = id;
-            this.state = state;
-            this.properties = properties;
         }
     }
 
