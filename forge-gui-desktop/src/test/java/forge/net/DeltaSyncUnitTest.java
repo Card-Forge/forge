@@ -36,7 +36,7 @@ public class DeltaSyncUnitTest {
         props2.put(TrackableProperty.MaxHandSize, 7);
         deltas.put(2, props2);
 
-        DeltaPacket packet = new DeltaPacket(1L, deltas, new HashMap<>(), 0, false);
+        DeltaPacket packet = new DeltaPacket(1L, deltas, new HashMap<>(), 0, null);
 
         // Header: 8 (seq) + 4 (checksum) = 12 bytes
         // Delta key=1: 4 + 2*50 = 104 bytes
@@ -69,7 +69,7 @@ public class DeltaSyncUnitTest {
         newProps2.put(TrackableProperty.IsAI, false);
         newObjects.put(101, newProps2);
 
-        DeltaPacket packet = new DeltaPacket(1L, deltas, newObjects, 0, false);
+        DeltaPacket packet = new DeltaPacket(1L, deltas, newObjects, 0, null);
 
         // Header: 12, Delta: (4+1*50)=54, New 100: (4+3*50)=154, New 101: (4+4*50)=204
         int expectedSize = 12 + 54 + 154 + 204;
@@ -80,7 +80,7 @@ public class DeltaSyncUnitTest {
 
     @Test
     public void testEmptyDeltaPacketSize() {
-        DeltaPacket packet = new DeltaPacket(1L, new HashMap<>(), new HashMap<>(), 0, false);
+        DeltaPacket packet = new DeltaPacket(1L, new HashMap<>(), new HashMap<>(), 0, null);
         int size = packet.getApproximateSize();
 
         // Empty packet should just have header: 8 + 4 = 12 bytes

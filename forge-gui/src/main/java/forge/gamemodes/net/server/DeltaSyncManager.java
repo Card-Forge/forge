@@ -138,12 +138,10 @@ public class DeltaSyncManager implements IHasNetLog {
 
         // Checksum computation — only when state is known to be stable
         int checksum = 0;
-        boolean includeChecksum = false;
         int[] checksumPropertyOrdinals = null;
         if (allowChecksum) {
             packetsSinceLastChecksum++;
-            includeChecksum = packetsSinceLastChecksum >= checksumInterval;
-            if (includeChecksum) {
+            if (packetsSinceLastChecksum >= checksumInterval) {
                 checksumPropertyOrdinals = selectChecksumProperties();
                 checksum = NetworkChecksumUtil.computeSampledChecksum(
                         snapshotTurn, snapshotPhaseOrdinal, gameView, checksumPropertyOrdinals);
@@ -163,7 +161,7 @@ public class DeltaSyncManager implements IHasNetLog {
             }
         }
 
-        return new DeltaPacket(seq, objectDeltas, newObjects, checksum, includeChecksum, checksumPropertyOrdinals);
+        return new DeltaPacket(seq, objectDeltas, newObjects, checksum, checksumPropertyOrdinals);
     }
 
     // ==================== Object type and key management ====================

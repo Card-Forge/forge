@@ -31,7 +31,6 @@ public final class DeltaPacket implements NetEvent {
     private final Map<Integer, Map<TrackableProperty, Object>> objectDeltas;
     private final Map<Integer, Map<TrackableProperty, Object>> newObjects;
     private final int checksum;
-    private final boolean checksumIncluded;
     /** Ordinals of TrackableProperty values included in the sampled checksum, or null. */
     private final int[] checksumProperties;
     private List<Object> proxiedEvents;
@@ -93,25 +92,23 @@ public final class DeltaPacket implements NetEvent {
 
     /** Create an events-only DeltaPacket with no state deltas (seq=-1 means no ack needed). */
     public static DeltaPacket eventsOnly(List<Object> proxiedEvents) {
-        DeltaPacket packet = new DeltaPacket(-1L, null, null, 0, false, null);
+        DeltaPacket packet = new DeltaPacket(-1L, null, null, 0, null);
         packet.setProxiedEvents(proxiedEvents);
         return packet;
     }
 
     public DeltaPacket(long sequenceNumber, Map<Integer, Map<TrackableProperty, Object>> objectDeltas,
-                       Map<Integer, Map<TrackableProperty, Object>> newObjects,
-                       int checksum, boolean checksumIncluded) {
-        this(sequenceNumber, objectDeltas, newObjects, checksum, checksumIncluded, null);
+                       Map<Integer, Map<TrackableProperty, Object>> newObjects, int checksum) {
+        this(sequenceNumber, objectDeltas, newObjects, checksum, null);
     }
 
     public DeltaPacket(long sequenceNumber, Map<Integer, Map<TrackableProperty, Object>> objectDeltas,
                        Map<Integer, Map<TrackableProperty, Object>> newObjects,
-                       int checksum, boolean checksumIncluded, int[] checksumProperties) {
+                       int checksum, int[] checksumProperties) {
         this.sequenceNumber = sequenceNumber;
         this.objectDeltas = objectDeltas != null ? objectDeltas : Collections.emptyMap();
         this.newObjects = newObjects != null ? newObjects : Collections.emptyMap();
         this.checksum = checksum;
-        this.checksumIncluded = checksumIncluded;
         this.checksumProperties = checksumProperties;
     }
 
@@ -132,7 +129,7 @@ public final class DeltaPacket implements NetEvent {
     }
 
     public boolean hasChecksum() {
-        return checksumIncluded;
+        return checksumProperties != null;
     }
 
     /** Property ordinals included in the sampled checksum, or null for legacy checksum. */
@@ -154,7 +151,7 @@ public final class DeltaPacket implements NetEvent {
 
     /** Return a shallow copy without proxied events, for state-only size measurement. */
     public DeltaPacket withoutEvents() {
-        return new DeltaPacket(sequenceNumber, objectDeltas, newObjects, checksum, checksumIncluded, checksumProperties);
+        return new DeltaPacket(sequenceNumber, objectDeltas, newObjects, checksum, checksumProperties);
     }
 
     public boolean isEmpty() {

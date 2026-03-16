@@ -150,7 +150,6 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
                         serverChecksum, clientChecksum, packet.getSequenceNumber());
                 logChecksumDetails(getGameView(), packet);
                 requestFullStateResync();
-                return;
             } else {
                 netLog.info("[DeltaSync] Checksum OK (seq={}, checksum={})",
                         packet.getSequenceNumber(), serverChecksum);
