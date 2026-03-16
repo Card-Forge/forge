@@ -382,10 +382,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
         netLog.error("[DeltaSync]   GameView ID: {}", gameView.getId());
         netLog.error("[DeltaSync]   Turn: {}", gameView.getTurn());
         netLog.error("[DeltaSync]   Phase: {}", gameView.getPhase() != null ? gameView.getPhase().name() : "null");
-        if (packet.getChecksumProperties() != null) {
-            netLog.error("[DeltaSync]   Sampled properties: {}",
-                    NetworkChecksumUtil.sampledPropertyNames(packet.getChecksumProperties()));
-        }
+        netLog.error("[DeltaSync]   Sampled properties: {}", NetworkChecksumUtil.sampledPropertyNames(packet.getChecksumProperties()));
         for (PlayerView player : NetworkChecksumUtil.getSortedPlayers(gameView)) {
             int handSize = player.getHand() != null ? player.getHand().size() : 0;
             int graveyardSize = player.getGraveyard() != null ? player.getGraveyard().size() : 0;
@@ -401,9 +398,9 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
     }
 
     private void requestFullStateResync() {
-        netLog.warn("[DeltaSync] Requesting full state resync from server");
         IGameController controller = getGameController();
         if (controller != null) {
+            netLog.warn("[DeltaSync] Requesting full state resync from server");
             controller.requestResync();
         } else {
             netLog.error("[DeltaSync] Cannot request resync: No game controller available");

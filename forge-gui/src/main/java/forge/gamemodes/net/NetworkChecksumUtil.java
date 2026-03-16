@@ -374,17 +374,17 @@ public final class NetworkChecksumUtil {
      * Handles TrackableObject references (by ID), TrackableCollections (sorted IDs),
      * Maps (sorted entries), and everything else via Objects.hashCode.
      */
-    static int hashPropertyValue(TrackableProperty prop, Object value) {
+    static int hashPropertyValue(Object value) {
         if (value == null) {
             return 0;
         }
-        if (value instanceof TrackableObject) {
-            return ((TrackableObject) value).getId();
+        if (value instanceof TrackableObject to) {
+            return to.getId();
         }
-        if (value instanceof TrackableCollection) {
+        if (value instanceof TrackableCollection tc) {
             // Sort IDs for determinism
-            List<Integer> ids = new ArrayList<>();
-            for (Object item : (TrackableCollection<?>) value) {
+            List<Integer> ids = new ArrayList<>(tc.size());
+            for (Object item : tc) {
                 ids.add(item instanceof TrackableObject ? ((TrackableObject) item).getId() : Objects.hashCode(item));
             }
             ids.sort(null);
@@ -438,7 +438,7 @@ public final class NetworkChecksumUtil {
                 Object value = objProps.get(prop);
                 if (value != null && !value.equals(prop.getDefaultValue())) {
                     hash = 31 * hash + prop.ordinal();
-                    hash = 31 * hash + hashPropertyValue(prop, value);
+                    hash = 31 * hash + hashPropertyValue(value);
                 }
             }
         }

@@ -98,11 +98,6 @@ public final class DeltaPacket implements NetEvent {
     }
 
     public DeltaPacket(long sequenceNumber, Map<Integer, Map<TrackableProperty, Object>> objectDeltas,
-                       Map<Integer, Map<TrackableProperty, Object>> newObjects, int checksum) {
-        this(sequenceNumber, objectDeltas, newObjects, checksum, null);
-    }
-
-    public DeltaPacket(long sequenceNumber, Map<Integer, Map<TrackableProperty, Object>> objectDeltas,
                        Map<Integer, Map<TrackableProperty, Object>> newObjects,
                        int checksum, int[] checksumProperties) {
         this.sequenceNumber = sequenceNumber;
