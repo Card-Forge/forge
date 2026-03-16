@@ -262,9 +262,11 @@ public class DeltaSyncManager implements IHasNetLog {
     private void ensureCardStateConsumers(CardView card) {
         ensureCardStateConsumer(card.getCurrentState());
         ensureCardStateConsumer(card.getAlternateState());
+        ensureCardStateConsumer(card.getLeftSplitState());
+        ensureCardStateConsumer(card.getRightSplitState());
     }
 
-    /** Unregisters CurrentState and AlternateState only — these are the states tracked by ensureCardStateConsumers. */
+    /** Unregisters all CardStateViews tracked by ensureCardStateConsumers. */
     private void unregisterOldCardStateViews(CardView oldCard) {
         CardStateView cs = oldCard.getCurrentState();
         if (cs != null && registeredObjects.remove(cs)) {
@@ -274,28 +276,47 @@ public class DeltaSyncManager implements IHasNetLog {
         if (as != null && registeredObjects.remove(as)) {
             as.unregisterConsumer(consumerId);
         }
+        CardStateView ls = oldCard.getLeftSplitState();
+        if (ls != null && registeredObjects.remove(ls)) {
+            ls.unregisterConsumer(consumerId);
+        }
+        CardStateView rs = oldCard.getRightSplitState();
+        if (rs != null && registeredObjects.remove(rs)) {
+            rs.unregisterConsumer(consumerId);
+        }
     }
 
     private void mergeCardStateDirtyProps(CardView card, Map<TrackableProperty, Object> delta) {
         mergeOneStateDirtyProps(card.getCurrentState(), TrackableProperty.CurrentState, delta);
         mergeOneStateDirtyProps(card.getAlternateState(), TrackableProperty.AlternateState, delta);
+        mergeOneStateDirtyProps(card.getLeftSplitState(), TrackableProperty.LeftSplitState, delta);
+        mergeOneStateDirtyProps(card.getRightSplitState(), TrackableProperty.RightSplitState, delta);
     }
 
     private void mergeOneStateDirtyProps(CardStateView csv, TrackableProperty prop,
                                           Map<TrackableProperty, Object> delta) {
-        if (csv == null || !csv.hasConsumerChanges(consumerId)) return;
+        if (csv == null) return;
         if (delta.containsKey(prop)) return; // Full state already included from CardView dirty set
-        EnumSet<TrackableProperty> dirtyProps = csv.getAndClearDirtyProps(consumerId);
-        if (dirtyProps.isEmpty()) return;
 
         Map<TrackableProperty, Object> csvMap = new EnumMap<>(TrackableProperty.class);
-        Map<TrackableProperty, Object> csvProps = csv.getProps();
-        for (TrackableProperty dirtyProp : dirtyProps) {
-            Object netVal = toNetworkValue(dirtyProp, csvProps.get(dirtyProp));
-            if (netVal != SKIP_MARKER) {
-                csvMap.put(dirtyProp, netVal);
+
+        // Collect consumer-dirty properties
+        if (csv.hasConsumerChanges(consumerId)) {
+            EnumSet<TrackableProperty> dirtyProps = csv.getAndClearDirtyProps(consumerId);
+            Map<TrackableProperty, Object> csvProps = csv.getProps();
+            for (TrackableProperty dirtyProp : dirtyProps) {
+                Object netVal = toNetworkValue(dirtyProp, csvProps.get(dirtyProp));
+                if (netVal != SKIP_MARKER) {
+                    csvMap.put(dirtyProp, netVal);
+                }
             }
         }
+
+        // Include properties delayed by tracker freeze (e.g. Power/Toughness
+        // set during state-based effects). Same logic as mergeDelayedProps for
+        // top-level objects — peeks at delayed queue, no side effects.
+        mergeDelayedProps(csv, csvMap);
+
         if (!csvMap.isEmpty()) {
             delta.put(prop, new CardStateData(csv.getId(), csv.getState(), csvMap));
         }
