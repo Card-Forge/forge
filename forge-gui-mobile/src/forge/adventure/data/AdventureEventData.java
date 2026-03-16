@@ -439,7 +439,6 @@ public class AdventureEventData implements Serializable {
         rewards[2] = r2;
         r3.minWins = 3;
         r3.maxWins = 3;
-        r3.isNoSell = true;
         rewards[3] = r3;
     }
 
