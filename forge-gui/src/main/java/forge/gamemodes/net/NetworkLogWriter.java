@@ -62,7 +62,6 @@ public class NetworkLogWriter extends AbstractFormatPatternWriter {
         if (writer != null) {
             synchronized (writer) {
                 writer.write(rendered);
-                writer.newLine();
                 writer.flush();
             }
         }

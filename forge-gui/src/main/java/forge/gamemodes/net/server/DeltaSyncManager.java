@@ -70,6 +70,9 @@ public class DeltaSyncManager implements IHasNetLog {
     private final EnumSet<TrackableProperty> recentDeltaProperties = EnumSet.noneOf(TrackableProperty.class);
     private int checksumInterval = CHECKSUM_INTERVAL;
     private int cleanChecksumStreak = 0;
+    // Stored at checksum time, logged on resync request
+    private String lastChecksumBreakdown;
+    private List<String> lastChecksumDetail;
 
     /**
      * Reset all tracking state for reconnection.
@@ -89,6 +92,8 @@ public class DeltaSyncManager implements IHasNetLog {
         recentDeltaProperties.clear();
         checksumInterval = CHECKSUM_INTERVAL;
         cleanChecksumStreak = 0;
+        lastChecksumBreakdown = null;
+        lastChecksumDetail = null;
     }
 
     /**
@@ -162,6 +167,14 @@ public class DeltaSyncManager implements IHasNetLog {
             }
 
             logSampledChecksumDetails(gameView, checksum, seq, checksumPropertyOrdinals);
+
+            // Store breakdown for logging if the client reports a mismatch
+            int turn = gameView.getTurn();
+            int phaseOrdinal = gameView.getPhase() != null ? gameView.getPhase().ordinal() : -1;
+            lastChecksumBreakdown = NetworkChecksumUtil.computeChecksumBreakdown(turn, phaseOrdinal, gameView);
+            List<String> detail = new ArrayList<>();
+            NetworkChecksumUtil.computeSampledChecksum(gameView, checksumPropertyOrdinals, detail);
+            lastChecksumDetail = detail;
         }
 
         return new DeltaPacket(seq, objectDeltas, newObjects, checksum, checksumPropertyOrdinals);
@@ -585,6 +598,12 @@ public class DeltaSyncManager implements IHasNetLog {
         if (checksumInterval != oldInterval) {
             netLog.info("[DeltaSync] Resync detected, checksum interval reduced: {} -> {}",
                     oldInterval, checksumInterval);
+        }
+        if (lastChecksumBreakdown != null) {
+            netLog.error("[DeltaSync] Server breakdown: {}", lastChecksumBreakdown);
+        }
+        if (lastChecksumDetail != null) {
+            netLog.error("[DeltaSync] Server checksum detail: {}", lastChecksumDetail);
         }
     }
 
