@@ -3,7 +3,8 @@ ManaCost:1 U
 Types:Creature Drake
 PT:3/2
 K:Flying
-K:Hexproof:Activated,Triggered:activated and triggered abilities
+K:Hexproof:Activated:activated abilities
+K:Hexproof:Triggered:triggered abilities
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExchange | TriggerDescription$ When CARDNAME enters, exchange control of CARDNAME and target creature an opponent controls. If you do, you get {E}{E}{E}{E}, then sacrifice that creature unless you pay an amount of {E} equal to its mana value.
 SVar:TrigExchange:DB$ ExchangeControl | Defined$ Self | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | RememberExchanged$ True | SubAbility$ Energy
 SVar:Energy:DB$ PutCounter | ConditionDefined$ Remembered | ConditionPresent$ Card | Defined$ You | CounterType$ ENERGY | CounterNum$ 4 | SubAbility$ Sacrifice

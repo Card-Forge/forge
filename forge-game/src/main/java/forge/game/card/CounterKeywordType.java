@@ -5,7 +5,9 @@ import java.util.Map;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 
-public record CounterKeywordType(String keyword) implements CounterType {
+import forge.game.keyword.Keyword;
+
+public record CounterKeywordType(String keyword, String desc) implements CounterType {
 
     // Rule 122.1b
     static ImmutableList<String> keywordCounter = ImmutableList.of(
@@ -13,10 +15,9 @@ public record CounterKeywordType(String keyword) implements CounterType {
             "Indestructible", "Lifelink", "Menace", "Reach", "Shadow", "Trample", "Vigilance");
     private static Map<String, CounterKeywordType> sMap = Maps.newHashMap();
 
-
     public static CounterKeywordType get(String s) {
         if (!sMap.containsKey(s)) {
-            sMap.put(s, new CounterKeywordType(s));
+            sMap.put(s, new CounterKeywordType(s, isKeywordCounter(s) ? Keyword.getInstance(s).getTitle() : null));
         }
         return sMap.get(s);
     }
@@ -35,14 +36,7 @@ public record CounterKeywordType(String keyword) implements CounterType {
     }
 
     private String getKeywordDescription() {
-        if (keyword.startsWith("Hexproof:")) {
-            final String[] k = keyword.split(":");
-            return "Hexproof from " + k[2];
-        }
-        if (keyword.startsWith("Trample:")) {
-            return "Trample over Planeswalkers";
-        }
-        return keyword;
+        return desc != null ? desc : keyword;
     }
 
     public boolean is(CounterEnumType eType) {
@@ -50,6 +44,9 @@ public record CounterKeywordType(String keyword) implements CounterType {
     }
 
     public boolean isKeywordCounter() {
+        return isKeywordCounter(keyword);
+    }
+    public static boolean isKeywordCounter(String keyword) {
         if (keyword.startsWith("Hexproof:")) {
             return true;
         }
@@ -58,7 +55,6 @@ public record CounterKeywordType(String keyword) implements CounterType {
         }
         return keywordCounter.contains(keyword);
     }
-    
 
     public int getRed() {
         return 255;

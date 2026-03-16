@@ -31,7 +31,7 @@ public class TriggerRolledDie extends Trigger {
         if (hasParam("ValidResult")) {
             String[] params = getParam("ValidResult").split(",");
             int result = (int) runParams.get(AbilityKey.Result);
-            if (hasParam("Natural")) {
+            if (hasParam("Natural") && runParams.containsKey(AbilityKey.NaturalResult)) {
                 result = (int) runParams.get(AbilityKey.NaturalResult);
             }
             for (String param : params) {

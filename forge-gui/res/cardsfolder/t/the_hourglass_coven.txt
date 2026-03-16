@@ -3,7 +3,9 @@ ManaCost:4 B B
 Types:Legendary Creature Hag Warlock
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraft | TriggerDescription$ When CARDNAME enters, draft a card from CARDNAME's spellbook twice, then put those cards onto the battlefield.
-SVar:TrigDraft:DB$ Draft | DraftNum$ 2 | Spellbook$ Hag of Syphoned Breath,Hag of Dark Duress,Hag of Ceaseless Torment,Hag of Inner Weakness,Hag of Death's Legion,Hag of Scoured Thoughts,Hag of Twisted Visions,Hag of Mage's Doom,Hag of Noxious Nightmares | Zone$ Battlefield
+SVar:TrigDraft:DB$ Draft | DraftNum$ 2 | Spellbook$ Hag of Syphoned Breath,Hag of Dark Duress,Hag of Ceaseless Torment,Hag of Inner Weakness,Hag of Death's Legion,Hag of Scoured Thoughts,Hag of Twisted Visions,Hag of Mage's Doom,Hag of Noxious Nightmares | RememberDrafted$ True | SubAbility$ DBPut
+SVar:DBPut:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 S:Mode$ Continuous | Affected$ Warlock.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Warlocks you control get +1/+1.
 SVar:PlayMain1:TRUE
 DeckHints:Type$Warlock

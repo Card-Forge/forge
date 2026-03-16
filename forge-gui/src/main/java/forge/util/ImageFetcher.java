@@ -19,6 +19,7 @@ public abstract class ImageFetcher {
     // https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
     private static final HashMap<String, String> langCodeMap = new HashMap<>();
     protected static final boolean disableHostedDownload = true;
+    protected static Date scryfallCooldownTime = null;
     private static final HashSet<String> fetching = new HashSet<>();
 
     static {
@@ -171,33 +172,18 @@ public abstract class ImageFetcher {
             } else if (imageKey.endsWith(ImageKeys.SPECFACE_G)) {
                 face = "green";
             }
-            String filename = "";
-            switch (face) {
-                case "back":
-                    filename = paperCard.getCardAltImageKey();
-                    break;
-                case "white":
-                    filename = paperCard.getCardWSpecImageKey();
-                    break;
-                case "blue":
-                    filename = paperCard.getCardUSpecImageKey();
-                    break;
-                case "black":
-                    filename = paperCard.getCardBSpecImageKey();
-                    break;
-                case "red":
-                    filename = paperCard.getCardRSpecImageKey();
-                    break;
-                case "green":
-                    filename = paperCard.getCardGSpecImageKey();
-                    break;
-                default:
-                    filename = paperCard.getCardImageKey();
-                    break;
+            String filename;
+            if (face.equals("back")) {
+                filename = paperCard.getCardAltImageKey();
+            } else if (!face.isEmpty()) {
+                filename = ImageUtil.getImageKey(paperCard, face, true);
+            } else {
+                filename = paperCard.getCardImageKey();
             }
             if (useArtCrop) {
                 filename = TextUtil.fastReplace(filename, ".full", ".artcrop");
             }
+
             boolean updateLink = false;
             if ("back".equals(face)) { // Seems getimage relative path don't process variants for back faces.
                 try {
@@ -235,8 +221,12 @@ public abstract class ImageFetcher {
                 }
             }
             final String cardCollectorNumber = paperCard.getCollectorNumber();
-            if (!cardCollectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER)) {
+            if (!cardCollectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER) && !cardCollectorNumber.equals("0")) {
                 this.getScryfallDownloadURL(paperCard, face, useArtCrop, hasSetLookup, filename, downloadUrls);
+            } else {
+                System.out.println("Card " + paperCard.getName() + " does not have a collector number, skipping scryfall download.");
+                ImageKeys.missingCards.add(filename);
+                return;
             }
         } else if (ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD).equals(imageKey)) {
             // Extra logic for hidden card to not clog the other logic

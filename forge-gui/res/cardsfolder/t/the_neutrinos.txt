@@ -1,0 +1,14 @@
+Name:The Neutrinos
+ManaCost:2 R W
+Types:Legendary Creature Elf Rebel
+PT:2/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Alliance — Whenever another creature you control enters, CARDNAME get +1/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1
+T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attack, exile up to one target creature you own, then return it to the battlefield under your control tapped and attacking.
+SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Creature.YouOwn | TargetMin$ 0 | TargetMax$ 1 | ValidTgtsDesc$ creature you own | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ Battlefield | Tapped$ True | Attacking$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:BuffedBy:Creature
+SVar:HasAttackEffect:TRUE
+Oracle:Flying\nAlliance — Whenever another creature you control enters, The Neutrinos get +1/+0 until end of turn.\nWhenever The Neutrinos attack, exile up to one target creature you own, then return it to the battlefield under your control tapped and attacking.

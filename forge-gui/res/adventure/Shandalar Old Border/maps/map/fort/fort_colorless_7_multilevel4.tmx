@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="82">
  <editorsettings>
-  <export target="wastetown..tmx" format="tmx"/>
+  <export target="wastetown..tmx" format="tmx" />
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
- <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon/dungeon_2.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon/dungeon_2.tsx" />
  <layer id="1" name="Background" width="50" height="50">
   <data encoding="base64" compression="zlib">
    eJzt10EKwjAQQNEssildeVtPIvQQc0cpUgxDmtomkzrhLx64KNpPOjouUwgLAAAAYOg5h/CafrNee/f91jb8Q8sjfkj8vr7SkLZs71di1dGiQbeUeqw7ahs2ukF/jqcOfSbeO/T8WXeIYYdu8d4hA3SkLV7nQz9bnjtGea56zLkYn0eP7930vFvvJbndxKIjtzO02BNzM9FrPmpbdMNdv4O64+z/qKOG3h0S9++rtMOeubZ1BwAAAABgDG/+mcqs
@@ -28,7 +28,7 @@
  </layer>
  <layer id="3" name="Clutter" width="50" height="50">
   <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
+   <property name="spriteLayer" type="bool" value="true" />
   </properties>
   <data encoding="base64" compression="zlib">
    eJzdmtGNwjAMhuEFWIQBYBomYoF2FwYD3lFAlSIrdmzHrl2+l5N6pfnj/rZj7na7NvMJ+QXCdS+734qpoXOW3NvZJycOreduGRg/KgZWe5+0nzOOPeYdjIuT77HnwuuS/UtzGgOuKY2ZFkms19JkgeQdbqXW1P1A4zuvvIqmfn91XKL6ZzQlBhF75/Ybr3yLzmPO/lsaubr/NX+xfT0Ov59PcP3lqoYH551l0NlCey6kgO+oButVXN9b1TJKY+F25D+raKJ68HJWIu8xqFe9PaFrI9c185wHGXInup9ArPJ2pI9o/CZZz3oOkuqN8HrNecUeHzXP3RWfsZznspyjRuc5CDYHaclQgyl6ua3tjaN4nK+8ydbrChk1cdDOc7261MrpZS3PeR+um/V7lRG/bNVrBareRJ9nWnNQdP/l+lkaO22sMT1b9mRGLOI56ueeBo1Gbh+JqAVRf9eS8I4WEIBVD/fwcw/oY8v8i6bWp53n1vJzpjlH6mfR9wmyR3+R6PGoyyM+t9SD6YjKQ2rdET+3/r9ndJ6T6Mlc1z4AW1Iw
@@ -37,42 +37,150 @@
  <objectgroup id="4" name="Objects">
   <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="272.333" y="382.543">
    <properties>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/fort/fort_colorless_7_multilevel3.tmx"/>
-    <property name="teleportObjectId" value="38"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/fort/fort_colorless_7_multilevel3.tmx" />
+    <property name="teleportObjectId" value="38" />
    </properties>
   </object>
-  <object id="73" template="../../../../../../common/maps/obj/gold.tx" x="522.917" y="363.166"/>
-  <object id="74" template="../../../../../../common/maps/obj/treasure.tx" x="521.917" y="349.416"/>
+  <object id="73" template="../../../../../../common/maps/obj/gold.tx" x="522.917" y="363.166" />
+  <object id="74" template="../../../../../../common/maps/obj/treasure.tx" x="521.917" y="349.416"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 1.0,
+    "count": 4,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.6,
+    "count": 4,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.26,
+    "count": 4,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.1,
+    "count": 4,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.04,
+    "count": 4,
+    "addMaxCount": 3
+  }
+]</property></properties></object>
   <object id="75" template="../../../../../../common/maps/obj/enemy.tx" x="391.751" y="324.417">
    <properties>
-    <property name="enemy" value="Arzakon, Shandalar's Doom"/>
-    <property name="threatRange" type="int" value="80"/>
+    <property name="enemy" value="Arzakon, Shandalar's Doom" />
+    <property name="threatRange" type="int" value="100" />
    <property name="effect">{"startBattleWithCard": ["Black Lotus|LEA", "Celestial Prism|LEA", "Clay Statue|ATQ"]}</property>
-    </properties>
+    <property name="speedModifier" type="float" value="20" /></properties>
   </object>
-  <object id="78" template="../../../../../../common/maps/obj/treasure.tx" x="521.333" y="328"/>
-  <object id="79" template="../../../../../../common/maps/obj/gold.tx" x="521.333" y="307.667"/>
-  <object id="80" template="../../../../../../common/maps/obj/manashards.tx" x="408" y="411"/>
+  <object id="78" template="../../../../../../common/maps/obj/treasure.tx" x="521.333" y="328"><properties><property name="reward">[
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "City of Brass|ARN"
+  },
+  {
+    "type": "card",
+    "probability": 0.1,
+    "count": 1,
+    "cardName": "Tundra|LEA"
+  },
+  {
+    "type": "card",
+    "probability": 0.1,
+    "count": 1,
+    "cardName": "Underground Sea|LEA"
+  },
+  {
+    "type": "card",
+    "probability": 0.1,
+    "count": 1,
+    "cardName": "Badlands|LEA"
+  },
+  {
+    "type": "card",
+    "probability": 0.1,
+    "count": 1,
+    "cardName": "Taiga|LEA"
+  },
+  {
+    "type": "card",
+    "probability": 0.1,
+    "count": 1,
+    "cardName": "Savannah|LEA"
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 1.0,
+    "count": 4,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.6,
+    "count": 4,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.26,
+    "count": 4,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.1,
+    "count": 4,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.04,
+    "count": 4,
+    "addMaxCount": 3
+  }
+]</property></properties></object>
+  <object id="79" template="../../../../../../common/maps/obj/gold.tx" x="521.333" y="307.667" />
+  <object id="80" template="../../../../../../common/maps/obj/manashards.tx" x="408" y="411" />
   <object id="81" template="../../../../../../common/maps/obj/booster.tx" x="504.333" y="282.667">
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;ATQ&quot;, &quot;USG&quot;, &quot;ULG&quot;, &quot;UDS&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 10,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    "editions": [ "ATQ", "USG", "ULG", "UDS" ],
+    "type": "card",
+    "count": 10,
+    "rarity": [ "Common" ]
   },
   {
-    &quot;editions&quot;: [ &quot;ATQ&quot;, &quot;USG&quot;, &quot;ULG&quot;, &quot;UDS&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    "editions": [ "ATQ", "USG", "ULG", "UDS" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Uncommon" ]
   },
   {
-    &quot;editions&quot;: [ &quot;ATQ&quot;, &quot;USG&quot;, &quot;ULG&quot;, &quot;UDS&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+    "editions": [ "ATQ", "USG", "ULG", "UDS" ],
+    "type": "card",
+    "count": 3,
+    "rarity": [ "Rare" ]
   }
 ]
 </property>

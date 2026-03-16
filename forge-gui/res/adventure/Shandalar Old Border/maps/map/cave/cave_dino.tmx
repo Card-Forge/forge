@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="58">
  <editorsettings>
-  <export target="wastetown..tmx" format="tmx"/>
+  <export target="wastetown..tmx" format="tmx" />
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxr42RgaBvFo3gUj+JRPIpH8YjAAIblHPI=
@@ -17,7 +17,7 @@
  </layer>
  <layer id="3" name="Foreground" width="30" height="17">
   <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
+   <property name="spriteLayer" type="bool" value="true" />
   </properties>
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
@@ -26,27 +26,71 @@
  <objectgroup id="4" name="Objects">
   <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="282" width="48" height="16">
    <properties>
-    <property name="teleport" value=""/>
+    <property name="teleport" value="" />
    </properties>
   </object>
   <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="200.615" y="182.192">
    <properties>
-    <property name="enemy" value="Dinosaur Elite"/>
-    <property name="speedModifier" type="float" value="3"/>
-    <property name="threatRange" type="int" value="50"/>
+    <property name="enemy" value="Dinosaur Elite" />
+    <property name="speedModifier" type="float" value="3" />
+    <property name="threatRange" type="int" value="50" />
    </properties>
   </object>
-  <object id="54" template="../../../../../../common/maps/obj/manashards.tx" x="184.154" y="129.366"/>
-  <object id="55" template="../../../../../../common/maps/obj/gold.tx" x="195.799" y="151.069"/>
-  <object id="56" template="../../../../../../common/maps/obj/gold.tx" x="168.802" y="171.184"/>
-  <object id="57" template="../../../../../../common/maps/obj/gold.tx" x="238.147" y="172.773"/>
+  <object id="54" template="../../../../../../common/maps/obj/manashards.tx" x="184.154" y="129.366" />
+  <object id="55" template="../../../../../../common/maps/obj/gold.tx" x="195.799" y="151.069" />
+  <object id="56" template="../../../../../../common/maps/obj/gold.tx" x="168.802" y="171.184" />
+  <object id="57" template="../../../../../../common/maps/obj/gold.tx" x="238.147" y="172.773" />
   <object id="58" template="../../../../../../common/maps/obj/treasure.tx" x="200" y="155">
    <properties>
-    <property name="reward">[{
-  &quot;type&quot;: &quot;item&quot;,
-  &quot;count&quot;: 1,
-  &quot;itemName&quot;: &quot;Triassic Amulet&quot;
-}]</property>
+    <property name="reward">[
+  {
+    "type": "item",
+    "count": 1,
+    "itemName": "Triassic Amulet"
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.04,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.18,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.66,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.66,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.32,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.14,
+    "count": 3,
+    "addMaxCount": 2
+  }
+]</property>
    </properties>
   </object>
  </objectgroup>

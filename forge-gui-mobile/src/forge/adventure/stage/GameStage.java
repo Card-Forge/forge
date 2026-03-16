@@ -275,11 +275,7 @@ public abstract class GameStage extends Stage {
     HashMap<PlayerModification, Float> currentModifications = new HashMap<>();
 
     public void modifyPlayer(PlayerModification mod, float value) {
-        float currentValue = 0;
-        if (currentModifications.containsKey(mod)) {
-            currentValue = currentModifications.get(mod);
-        }
-        currentModifications.put(mod, currentValue + value);
+        currentModifications.merge(mod, value, Float::sum);
     }
 
     public void flyFor(float value) {

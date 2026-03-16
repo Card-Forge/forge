@@ -73,11 +73,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     public void setupAutoProfile(Deck deck) {
-        pilotsNonAggroDeck = deck.getName().contains("Control") || Deck.getAverageCMC(deck) > 3;
-    }
-
-    public void allowCheatShuffle(boolean value) {
-        brains.allowCheatShuffle(value);
+        pilotsNonAggroDeck = deck.getName().contains("Control") || deck.getAverageCMC() > 3;
     }
 
     public void setUseSimulation(boolean value) {
@@ -103,8 +99,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public List<PaperCard> sideboard(Deck deck, GameType gameType, String message) {
-        if (!brains.getGame().getRules().getAISideboardingEnabled()
-            || !deck.has(DeckSection.Sideboard)) {
+        if (!brains.getGame().getRules().getAISideboardingEnabled() || !deck.has(DeckSection.Sideboard)) {
             return null;
         }
 
@@ -243,11 +238,7 @@ public class PlayerControllerAi extends PlayerController {
         Map<Byte, Integer> result = new HashMap<>();
         for (int i = 0; i < manaAmount; ++i) {
             Byte chosen = chooseColor("", sa, colorSet);
-            if (result.containsKey(chosen)) {
-                result.put(chosen, result.get(chosen) + 1);
-            } else {
-                result.put(chosen, 1);
-            }
+            result.merge(chosen, 1, Integer::sum);
             if (different) {
                 colorSet = ColorSet.fromMask(colorSet.getColor() - chosen);
             }
@@ -818,8 +809,7 @@ public class PlayerControllerAi extends PlayerController {
                 continue;
             }
 
-            // If we don't want to scry anything to the bottom, remove the worst card that we have in order to satisfy
-            // the requirement
+            // If we don't want to scry anything to the bottom, remove the worst card that we have in order to satisfy the requirement
             toReturn.add(ComputerUtilCard.getWorstAI(hand));
         }
 
@@ -848,9 +838,40 @@ public class PlayerControllerAi extends PlayerController {
                 sa.resolve();
             }
         } else {
-            ComputerUtil.handlePlayingSpellAbility(player, sa, getGame());
+            ComputerUtil.handlePlayingSpellAbility(player, sa, getDeferredTargetingPlayerRunnable(sa));
         }
         return true;
+    }
+
+    /**
+     * If any ability in the SA chain has a TargetingPlayer,
+     * defers the human choice from canPlayAI (worker thread with possibly low timeout)
+     * to handlePlayingSpellAbility (game thread, no timeout).
+     */
+    private Runnable getDeferredTargetingPlayerRunnable(SpellAbility sa) {
+        SpellAbility root = sa;
+        while (sa != null) {
+            if (sa.hasParam("TargetingPlayer") && sa.getTargetingPlayer() != null) {
+                return () -> {
+                    SpellAbility cur = root;
+                    while (cur != null) {
+                        if (cur.hasParam("TargetingPlayer") && cur.getTargetingPlayer() != null) {
+                            cur.clearTargets();
+                            cur.getTargetingPlayer().getController().chooseTargetsFor(cur);
+                            // there's a chance a target gets selected that makes the cost unaffordable
+                            if (!ComputerUtilCost.canPayCost(root, root.getActivatingPlayer(), false)) {
+                                cur.resetTargets();
+                                root.setSkip(true);
+                                return;
+                            }
+                        }
+                        cur = cur.getSubAbility();
+                    }
+                };
+            }
+            sa = sa.getSubAbility();
+        }
+        return null;
     }
 
     @Override
@@ -859,13 +880,13 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public CardCollection chooseCardsToRevealFromHand(int min, int max, CardCollectionView valid) {
+    public CardCollectionView chooseCardsToRevealFromHand(int min, int max, CardCollectionView valid) {
         int numCardsToReveal = Math.min(max, valid.size());
-        return numCardsToReveal == 0 ? new CardCollection() : (CardCollection)valid.subList(0, numCardsToReveal);
+        return numCardsToReveal == 0 ? CardCollection.EMPTY : (CardCollection)valid.subList(0, numCardsToReveal);
     }
 
     @Override
-    public Player chooseStartingPlayer(boolean isFirstgame) {
+    public Player chooseStartingPlayer(boolean isFirstGame) {
         return this.player; // AI is brave :)
     }
 
@@ -1289,9 +1310,8 @@ public class PlayerControllerAi extends PlayerController {
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(host, sa.getParam("TargetingPlayer"), sa).get(0);
             sa.setTargetingPlayer(targetingPlayer);
             return targetingPlayer.getController().chooseTargetsFor(sa);
-        } else {
-            return brains.doTrigger(sa, isMandatory);
         }
+        return brains.doTrigger(sa, isMandatory);
     }
 
     @Override
@@ -1373,7 +1393,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public CardCollectionView cheatShuffle(CardCollectionView list) {
-        return brains.getBoolProperty(AiProps.CHEAT_WITH_MANA_ON_SHUFFLE) ? brains.cheatShuffle(list) : list;
+        return brains.cheatShuffle(list);
     }
 
     @Override
@@ -1470,7 +1490,7 @@ public class PlayerControllerAi extends PlayerController {
                 name = ComputerUtilCard.getMostProminentCardName(cards);
             } else if (logic.equals("CursedScroll")) {
                 name = SpecialCardAi.CursedScroll.chooseCard(player, sa);
-            } else if (logic.equals("PithingNeedle")) {
+            } else if (logic.equals("PithingNeedle") || logic.equals("PhyrexianRevoker") || logic.equals("SorcerousSpyglass")) {
                 name = SpecialCardAi.PithingNeedle.chooseCard(player, sa);
             }
 

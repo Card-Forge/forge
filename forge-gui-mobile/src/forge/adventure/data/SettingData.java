@@ -23,6 +23,8 @@ public class SettingData {
     public boolean disableNotForSale;
     public boolean showShopOverlay;
     public boolean useAllCardVariants;
+    public boolean disableCrackedItems;
     public boolean excludeAlchemyVariants;
     public boolean generateLDADecks;
+    public boolean bindEquipmentLoadoutsToDecks;
 }

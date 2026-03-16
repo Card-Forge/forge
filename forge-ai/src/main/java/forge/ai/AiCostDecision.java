@@ -432,8 +432,9 @@ public class AiCostDecision extends CostDecisionMakerBase {
             return PaymentDecision.card(source);
         }
 
-        final CardCollection typeList = CardLists.getValidCards(player.getGame().getCardsIn(ZoneType.Battlefield),
+        CardCollection typeList = CardLists.getValidCards(player.getGame().getCardsIn(ZoneType.Battlefield),
                 cost.getType().split(";"), player, source, ability);
+        typeList = CardLists.filter(typeList, CardPredicates.canReceiveCounters(cost.getCounter()));
 
         Card card;
         if (cost.getType().equals("Creature.YouCtrl")) {
@@ -588,7 +589,12 @@ public class AiCostDecision extends CostDecisionMakerBase {
             return null;
         }
 
-        CardCollectionView typeList = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), player, source, ability);
+        CardCollectionView typeList;
+        if (cost.payCostFromSource()) {
+            typeList = new CardCollection(ability.getHostCard());
+        } else {
+            typeList = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), player, source, ability);
+        }
         // only cards with counters are of interest
         typeList = CardLists.filter(typeList, CardPredicates.hasCounters());
 

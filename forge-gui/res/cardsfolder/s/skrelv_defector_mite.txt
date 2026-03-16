@@ -5,7 +5,7 @@ PT:1/1
 K:Toxic:1
 S:Mode$ CantBlock | ValidCard$ Creature.Self | Description$ CARDNAME can't block.
 A:AB$ ChooseColor | Cost$ WP T | Defined$ You | AILogic$ MostProminentInHumanDeck | SubAbility$ DBPump | SpellDescription$ Choose a color. Another target creature you control gains toxic 1 and hexproof from that color until end of turn.
-SVar:DBPump:DB$ Pump | Defined$ Targeted | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | KW$ Hexproof:Card.ChosenColor:chosenColor & Toxic:1 | DefinedKW$ ChosenColor | SubAbility$ DBEffect | StackDescription$ {c:Targeted} gains toxic 1 and hexproof from that color until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | KW$ Hexproof:ChosenColor & Toxic:1 | DefinedKW$ ChosenColor | SubAbility$ DBEffect | StackDescription$ {c:Targeted} gains toxic 1 and hexproof from that color until end of turn.
 SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ CantBlockBy | SubAbility$ DBCleanup | SpellDescription$ It can't be blocked by creatures of that color this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearChosenColor$ True
 SVar:CantBlockBy:Mode$ CantBlockBy | ValidAttacker$ Creature.IsRemembered | ValidBlocker$ Creature.ChosenColor | Description$ This creature can't be blocked by creatures of the chosen color this turn.

@@ -3,9 +3,9 @@ ManaCost:6 U
 Types:Creature Human Artificer
 PT:4/4
 S:Mode$ Continuous | Affected$ Creature.Artifact+YouCtrl | AddKeyword$ Flying | Description$ Artifact creatures you control have flying.
-SVar:PlayMain1:TRUE
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigAnimate | TriggerDescription$ At the beginning of combat on your turn, you may have target noncreature artifact you control becomes a 0/0 artifact creature. If you do, put four +1/+1 counters on it.
 SVar:TrigAnimate:DB$ Animate | ValidTgts$ Artifact.nonCreature+YouCtrl | TgtPrompt$ Select target noncreature artifact | Power$ 0 | Toughness$ 0 | Types$ Artifact,Creature | Duration$ Permanent | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ P1P1 | CounterNum$ 4
+SVar:PlayMain1:TRUE
 DeckHas:Ability$Counters
 Oracle:Artifact creatures you control have flying.\nAt the beginning of combat on your turn, you may have target noncreature artifact you control become a 0/0 artifact creature. If you do, put four +1/+1 counters on it.

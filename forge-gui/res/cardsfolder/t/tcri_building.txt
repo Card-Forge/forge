@@ -1,0 +1,10 @@
+Name:TCRI Building
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When this land enters, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1
+A:AB$ Mana | Cost$ T | Produced$ Combo U R | SpellDescription$ Add {U} or {R}.
+DeckHas:Ability$LifeGain
+Oracle:This land enters tapped.\nWhen this land enters, you gain 1 life.\n{T}: Add {U} oг {R}

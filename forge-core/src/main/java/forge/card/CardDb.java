@@ -401,7 +401,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     private boolean addFromSetByName(String cardName, CardEdition ed, CardRules cr) {
-        List<EditionEntry> cardsInSet = ed.getCardInSet(cardName);  // empty collection if not present
+        List<EditionEntry> cardsInSet = ed.getCardInSet(cardName);
         if (cr.hasFunctionalVariants()) {
             cardsInSet = cardsInSet.stream().filter(c -> StringUtils.isEmpty(c.getFunctionalVariantName())
                     || cr.getSupportedFunctionalVariants().contains(c.getFunctionalVariantName())

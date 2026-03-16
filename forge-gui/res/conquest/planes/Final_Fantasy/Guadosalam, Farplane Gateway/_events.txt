@@ -1,0 +1,9 @@
+Name:Tidus, Blitzball Star|Deck:Tidus, Blitzball Star.dck|Variant:Commander|Avatar:Tidus, Blitzball Star|Desc:
+Name:Edgar, King of Figaro|Deck:Edgar, King of Figaro.dck|Variant:Commander|Avatar:Edgar, King of Figaro|Desc:
+Name:Cid, Timeless Artificer|Deck:Cid, Timeless Artificer.dck|Variant:Commander|Avatar:Cid, Timeless Artificer|Desc:
+Name:Ultros, Obnoxious Octopus|Deck:Ultros, Obnoxious Octopus.dck|Variant:Commander|Avatar:Ultros, Obnoxious Octopus|Desc:
+Name:Blue Mage|Deck:Random|Variant:Planechase|Avatar:Planar Warden|Desc:
+Name:Yuna, Grand Summoner|Deck:Yuna, Grand Summoner.dck|Variant:Commander|Avatar:Yuna, Grand Summoner|Desc:
+Name:Lulu, Stern Guardian|Deck:Lulu, Stern Guardian.dck|Variant:Commander|Avatar:Lulu, Stern Guardian|Desc:
+Name:Hope Estheim|Deck:Hope Estheim.dck|Variant:Commander|Avatar:Hope Estheim|Desc:
+Name:Ultimecia, Temporal Threat|Deck:Ultimecia, Temporal Threat.dck|Variant:Commander|Avatar:Ultimecia, Temporal Threat|Desc:

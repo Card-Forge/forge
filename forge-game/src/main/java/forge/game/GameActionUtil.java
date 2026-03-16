@@ -816,8 +816,6 @@ public final class GameActionUtil {
 
         SpellAbilityEffect.addForgetOnMovedTrigger(eff, "Stack");
 
-        eff.updateStateForView();
-
         game.getAction().moveToCommand(eff, sa);
 
         return eff;

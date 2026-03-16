@@ -211,18 +211,17 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
         }
 
         Player controller = srcCard.getController();
-        if (this instanceof Trigger) {
+        if (this instanceof Trigger t) {
             // check for delayed trigger
-            if (((Trigger) this).getSpawningAbility() != null) {
-                controller = ((Trigger) this).getSpawningAbility().getActivatingPlayer();
+            if (t.getSpawningAbility() != null) {
+                controller = t.getSpawningAbility().getActivatingPlayer();
             }
         }
         return matchesValid(o, valids, srcCard, controller);
     }
 
     public boolean matchesValid(final Object o, final String[] valids, final Card srcCard, final Player srcPlayer) {
-        if (o instanceof GameObject) {
-            final GameObject c = (GameObject) o;
+        if (o instanceof GameObject c) {
             return c.isValid(valids, srcPlayer, srcCard, this);
         } else if (o instanceof Iterable<?>) {
             for (Object o2 : (Iterable<?>)o) {
@@ -234,17 +233,17 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
             if (ArrayUtils.contains(valids, o)) {
                 return true;
             }
-        } else if (o instanceof PlanarDice) {
+        } else if (o instanceof PlanarDice pd) {
             for (String s : valids) {
                 PlanarDice valid = PlanarDice.smartValueOf(s);
-                if (((PlanarDice) o).name().equals(valid.name())) {
+                if (pd.name().equals(valid.name())) {
                     return true;
                 }
             }
-        } else if (o instanceof GameLossReason) {
+        } else if (o instanceof GameLossReason glr) {
             for (String s : valids) {
                 GameLossReason valid = GameLossReason.smartValueOf(s);
-                if (((GameLossReason) o).name().equals(valid.name())) {
+                if (glr.name().equals(valid.name())) {
                     return true;
                 }
             }
@@ -746,6 +745,14 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
         copy.keyword = this.keyword;
     }
 
-    abstract public List<Object> getTriggerRemembered();
+    public List<Object> getTriggerRemembered() {
+        if (this instanceof SpellAbility sa && sa.isTrigger()) {
+            return sa.getTrigger().getTriggerRemembered();
+        }
+        if (this instanceof Trigger trig) {
+            return trig.getTriggerRemembered();
+        }
+        return ImmutableList.of();
+    }
 
 }

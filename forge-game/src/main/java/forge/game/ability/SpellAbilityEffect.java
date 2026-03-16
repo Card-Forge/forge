@@ -49,7 +49,30 @@ public abstract class SpellAbilityEffect {
         return sa.getDescription();
     }
 
-    public void buildSpellAbility(final SpellAbility sa) {}
+    public void buildSpellAbility(final SpellAbility sa) {
+        if (sa.hasParam("Forecast")) {
+            sa.putParam("ActivationZone", "Hand");
+            sa.putParam("ActivationLimit", "1");
+            sa.putParam("ActivationPhases", "Upkeep");
+            sa.putParam("PlayerTurn", "True");
+            sa.putParam("PrecostDesc", "Forecast — ");
+        }
+        if (sa.isBoast()) {
+            sa.putParam("PresentDefined", "Self");
+            sa.putParam("IsPresent", "Card.attackedThisTurn");
+            sa.putParam("PrecostDesc", "Boast — ");
+        }
+        if (sa.isExhaust()) {
+            sa.putParam("PrecostDesc", "Exhaust — ");
+        }
+        if (sa.isPowerUp()) {
+            sa.putParam("PrecostDesc", "Power-Up — ");
+        }
+
+        if (sa.hasParam("Named")) {
+            sa.setName(sa.getParam("Named"));
+        }
+    }
 
     /**
      * Returns this effect description with needed prelude and epilogue.
@@ -703,7 +726,7 @@ public abstract class SpellAbilityEffect {
                 eff.copyChangedTextFrom(host);
             }
 
-            game.getEndOfTurn().addUntil(exileEffectCommand(game, eff));
+            game.getEndOfTurn().addUntil(() -> game.getAction().exileEffect(eff));
 
             game.getAction().moveToCommand(eff, sa);
         }
@@ -901,7 +924,7 @@ public abstract class SpellAbilityEffect {
     protected static void addUntilCommand(final SpellAbility sa, GameCommand until, Player controller) {
         addUntilCommand(sa, until, sa.getParam("Duration"), controller);
     }
-    protected static void addUntilCommand(final SpellAbility sa, GameCommand until, String duration, Player controller) {
+    protected static void addUntilCommand(final SpellAbility sa, final GameCommand until, String duration, Player controller) {
         Card host = sa.getHostCard();
         final Game game = host.getGame();
         // in case host was LKI or still resolving
@@ -943,18 +966,9 @@ public abstract class SpellAbilityEffect {
                 game.getEndOfTurn().addUntilEnd(targeted, until);
             }
         } else if ("ThisTurnAndNextTurn".equals(duration)) {
-            game.getEndOfTurn().addUntil(new GameCommand() {
-                private static final long serialVersionUID = -5054153666503075717L;
-
-                @Override
-                public void run() {
-                    game.getEndOfTurn().addUntil(until);
-                }
-            });
+            game.getEndOfTurn().addUntil(() -> game.getEndOfTurn().addUntil(until));
         } else if ("UntilStateBasedActionChecked".equals(duration)) {
             game.addSBACheckedCommand(until);
-        } else if (duration != null && duration.startsWith("UntilAPlayerCastSpell")) {
-            game.getStack().addCastCommand(duration.split(" ")[1], until);
         } else if ("UntilHostLeavesPlay".equals(duration)) {
             host.addLeavesPlayCommand(until);
         } else if ("UntilHostLeavesPlayOrEOT".equals(duration)) {
@@ -1073,16 +1087,5 @@ public abstract class SpellAbilityEffect {
                 getDefinedPlayersOrTargeted(cause, "DefinedExiler").get(0) : cause.getActivatingPlayer();
         movedCard.setExiledBy(exiler);
         movedCard.setExiledSA(cause);
-    }
-
-    public static GameCommand exileEffectCommand(final Game game, final Card effect) {
-        return new GameCommand() {
-            private static final long serialVersionUID = 1L;
-
-            @Override
-            public void run() {
-                game.getAction().exileEffect(effect);
-            }
-        };
     }
 }

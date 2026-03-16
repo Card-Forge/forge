@@ -1,0 +1,10 @@
+Name:Preponderant Pearl
+ManaCost:U
+Types:Kindred Artifact Merfolk
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigConjure1 | TriggerDescription$ When this artifact enters, conjure a card named Ponder into your hand.
+SVar:TrigConjure1:DB$ MakeCard | Name$ Ponder | Zone$ Hand | Conjure$ True
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Merfolk.YouCtrl | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigConjure2 | TriggerDescription$ Whenever one or more Merfolk you control deal combat damage to a player, sacrifice this artifact. If you do, conjure a card named Flooded Strand into your hand.
+SVar:TrigConjure2:AB$ MakeCard | Cost$ Mandatory Sac<1/CARDNAME/this artifact> | Name$ Flooded Strand | Zone$ Hand | Conjure$ True
+DeckHas:Ability$Sacrifice
+DeckHints:Type$Merfolk
+Oracle:When this artifact enters, conjure a card named Ponder into your hand.\nWhenever one or more Merfolk you control deal combat damage to a player, sacrifice this artifact. If you do, conjure a card named Flooded Strand into your hand.

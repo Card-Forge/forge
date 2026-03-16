@@ -1,0 +1,14 @@
+Name:Shredder, Shadow Master
+ManaCost:3 B B
+Types:Legendary Creature Human Ninja
+PT:5/5
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Attacked$ Player | Execute$ TrigCopy | TriggerDescription$ Whenever NICKNAME attacks a player, for each other opponent, create a token that's a copy of NICKNAME tapped and attacking that player, except it isn't legendary. Sacrifice those tokens at end of combat.
+SVar:TrigCopy:DB$ RepeatEach | RepeatPlayers$ OppNonTriggeredDefender | RepeatSubAbility$ DBCopy | ChangeZoneTable$ True | SubAbility$ DelTrig
+SVar:DBCopy:DB$ CopyPermanent | Defined$ TriggeredAttackerLKICopy | TokenAttacking$ Remembered | TokenTapped$ True | ImprintTokens$ True | NonLegendary$ True
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | Execute$ TrigSac | RememberObjects$ ImprintedLKI | TriggerDescription$ Sacrifice those tokens at end of combat. | SubAbility$ DBCleanup
+SVar:TrigSac:DB$ SacrificeAll | Defined$ DelayTriggerRememberedLKI
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigLoseLifeOpp | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, that player loses half their life, rounded up.
+SVar:TrigLoseLifeOpp:DB$ LoseLife | Defined$ TriggeredTarget | LifeAmount$ X
+SVar:X:TriggeredTarget$LifeTotal/HalfUp
+Oracle:Whenever Shredder attacks a player, for each other opponent, create a token that's a copy of Shredder tapped and attacking that player, except it isn't legendary. Sacrifice those tokens at end of combat.\nWhenever Shredder deals combat damage to a player, that player loses half their life, rounded up.

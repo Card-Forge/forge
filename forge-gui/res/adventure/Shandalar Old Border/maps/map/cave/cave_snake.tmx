@@ -60,17 +60,43 @@
   </object>
   <object id="58" template="../../../../../../common/maps/obj/treasure.tx" x="70.4356" y="65.1836">
    <properties>
-    <property name="reward">[{
-  "type": "randomCard",
-  "count": 1,
-  "rarity": [ "rare" ],
-  "colors": [ "colorID" ]
-},{
-  "type": "randomCard",
-  "count": 4,
-  "rarity": [ "uncommon" ],
-  "addMaxCount": 2
-}]</property>
+    <property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.002,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.02,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.1,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.68,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 1.0,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property>
     <property name="spawn.Hard" type="bool" value="false" />
    </properties>
   </object>

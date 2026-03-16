@@ -6,7 +6,7 @@ K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTarget | TriggerDescription$ Whenever CARDNAME attacks, for each player, choose target permanent that player controls. Those players sacrifice those permanents. Each player who sacrificed a permanent this way reveals the top card of their library, then puts it onto the battlefield if it's a permanent card.
 SVar:TrigTarget:DB$ Pump | ValidTgts$ Permanent | TgtPrompt$ Select target permanent a player controls to be sacrificed. | TargetMin$ OneEach | TargetMax$ OneEach | TargetsForEachPlayer$ True | SubAbility$ DBSacrificeAll | AILogic$ SacOneEach
 SVar:DBSacrificeAll:DB$ SacrificeAll | Defined$ Targeted | RememberSacrificed$ True | SubAbility$ DBRepeatEach
-SVar:DBRepeatEach:DB$ RepeatEach | DefinedCards$ Remembered | UseImprinted$ True | RepeatSubAbility$ DBDig | SubAbility$ DBCleanup
+SVar:DBRepeatEach:DB$ RepeatEach | DefinedCards$ RememberedLKI | UseImprinted$ True | RepeatSubAbility$ DBDig | SubAbility$ DBCleanup
 SVar:DBDig:DB$ Dig | Defined$ ImprintedController | DigNum$ 1 | Reveal$ True | DestinationZone$ Battlefield | DestinationZone2$ Library | LibraryPosition2$ 0 | ChangeNum$ All | ChangeValid$ Permanent
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:OneEach:PlayerCountPlayers$Amount

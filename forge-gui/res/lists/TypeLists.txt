@@ -109,6 +109,7 @@ Elephant:Elephants
 Elf:Elves
 Elk:Elks
 Employee:Employees
+Eternal:Eternals
 Eye:Eyes
 Faerie:Faeries
 Ferret:Ferrets
@@ -385,6 +386,7 @@ Spacecraft:Spacecraft
 Stone:Stones
 Treasure:Treasures
 Vehicle:Vehicles
+Vibranium
 [WalkerTypes]
 Ajani
 Aminatou

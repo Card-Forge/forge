@@ -38,10 +38,11 @@
   </object>
   <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="405.666" y="515.667">
    <properties>
-    <property name="enemy" value="Vampire" />
+    <property name="enemy" value="High Vampire" />
+    <property name="speedModifier" type="float" value="10" />
+    <property name="threatRange" type="int" value="50" />
     <property name="waypoints" value="95,94" />
-   <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML|1", "Cemetery Gate|HML|2", "Crovax the Cursed|STH", "Swamp|TMP|2" ] }</property>
-    </properties>
+   </properties>
   </object>
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="272.917" y="202.438">
    <properties>
@@ -50,7 +51,50 @@
     <property name="threatRange" type="int" value="20" />
    </properties>
   </object>
-  <object id="68" template="../../../../../../common/maps/obj/treasure.tx" x="586.167" y="96.5" />
+  <object id="68" template="../../../../../../common/maps/obj/treasure.tx" x="586.167" y="96.5"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.005,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.03,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.175,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.45,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.84,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.51,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property></properties></object>
   <object id="70" template="../../../../../../common/maps/obj/entry_left.tx" x="3.66667" y="305" />
   <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="561.115" y="202.691">
    <properties>
@@ -235,11 +279,10 @@
   </object>
   <object id="93" template="../../../../../../common/maps/obj/enemy.tx" x="225.333" y="308">
    <properties>
-    <property name="enemy" value="Vampire" />
-    <property name="speedModifier" type="float" value="30" />
-    <property name="threatRange" type="int" value="40" />
-   <property name="effect">{ "startBattleWithCard": [ "Cemetery Gate|HML|1", "Cemetery Gate|HML|2", "Crovax the Cursed|STH", "Swamp|TMP|2" ] }</property>
-    </properties>
+    <property name="enemy" value="High Vampire" />
+    <property name="speedModifier" type="float" value="10" />
+    <property name="threatRange" type="int" value="50" />
+   </properties>
   </object>
   <object id="94" template="../../../../../../common/maps/obj/waypoint.tx" x="277.333" y="510.667" />
   <object id="95" template="../../../../../../common/maps/obj/waypoint.tx" x="545.333" y="505.333" />

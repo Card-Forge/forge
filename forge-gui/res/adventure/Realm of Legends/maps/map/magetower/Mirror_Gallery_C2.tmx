@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="117">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="respawnEnemies" type="bool" value="true"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/buildingsbosses.tsx"/>
+ <layer id="1" name="Background" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt2LEJACEQRUFTsyvhqrZeuRrc049MMJksDxUER29tAAAAXOx9subATt+9rXKqP2mOfv369etfn7fz3Tn1zqXuv379Kf1Va/Tr169f///9lf8K1RLPKJn++/snqiFdMg==
+  </data>
+ </layer>
+ <layer id="6" name="Floor" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJztmGEKwjAMRnuD9gQO0YvOobfSXcoDKIj/xpbYL+3A9yD/QvI22iUsJQAAAAAAAABYYswpXYQx5bb+Q9HWO4rrbfH1v77f26P8Hrfc17+2r6pOr7749+27Z//n4RO1dSLw+K89g9rfOpfO4vNzKpo5551LKn9Vv3vjueOdg7PonP3D96dlnYi+o+HO7dlflRMB/vacCPC350SAvz3Hg3d/W9u7VDmR+1trVPubZ8er/UcRsb9Z6HU3VeBv4wXbyIKc
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt1yEOgDAMQNFZDOEAhHAd7i8wHIMDkAWBwKAoHe8lzWS/arJSAAC+Y+miCwDyGYfznYbYDgB4auvvk80+XZNR5nZowRp896L3w1+18H+fE7dX+mPpj1PvT+13f+K80X8AaXoOlw==
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="48" height="48">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztmDFuwzAMRb12cJYsnXoKr0bSsVcsCjSJ75QlMXqJHqARaiGuIIpfFikXLQX8yQL5otj6X+o2TdOZTCaTyfTH9XzTVUH7Svy7m14e5NUbP8wfDoopZ6zJLzGMH9PQNs0B0LH95noH55/aOvy5/1Otdf0v/Kh/jRP/BZxf6l8cl6+v/f0i6xP7rZwv9ZX4EX+MvZPGb/yl/Gh9bX50rgQ/6q+UP0vxD1NNisf7e1h/qT9Rdah8MmejsoaryfFQfcN9+3F7F+IjSF9qju/tPJPzy5HoO+eZszt9PvHvyRno69lC/yr5JqX4l/TU4ne8oYyf5s89k2jxa591Yj0l+UvOCqncmsrOue8Dwo+w5Pgv0lOSH2Ex/p/Pwj2Aun+gcsja/FS9nH4l/Kn8lloz5+kfEc3P76nnMbbYfu7ZUnsnl9+0sj+3thwbmt9iayY5uN4a+W2NIZl/1hhL80+O3qb981Whdo273t96/2n8svoCqZdijA==
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt17ENgEAMA8Bs8BswATMC8zAfA4BERUUJVu4kN6lcWUoVAABAb8uoWq9s4+smANDHMT2TJrk7AKRK/d/3+c7bDfiv1P2hlxPHow/V
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="60" template="../../../../common/maps/obj/entry_up.tx" x="357" y="768" width="38" height="16">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/magetower/Mirror_Gallery_2.tmx"/>
+   </properties>
+  </object>
+  <object id="104" template="../../../../common/maps/obj/enemy.tx" x="268.74" y="210.928">
+   <properties>
+    <property name="effect">{
+&quot;lifeModifier&quot;: 20, 
+&quot;startBattleWithCard&quot;: [&quot;Angelic Shield&quot;, &quot;Temple of Enlightenment&quot;, &quot;Altar of the Pantheon|THB&quot;, &quot;Urn of Godfire&quot;, &quot;Ephara's Warden|THS&quot;, &quot;Font of Fortunes|JOU&quot;, &quot;Font of Vigor|JOU&quot;, &quot;The Birth of Meletis&quot;]}</property>
+    <property name="enemy" value="Ephara"/>
+   </properties>
+  </object>
+  <object id="105" template="../../../../common/maps/obj/enemy.tx" x="607.082" y="371.095">
+   <properties>
+    <property name="effect">{
+&quot;lifeModifier&quot;: 20, 
+&quot;startBattleWithCard&quot;: [&quot;Seer's Vision&quot;, &quot;Temple of Deceit&quot;, &quot;Altar of the Pantheon|THB&quot;, &quot;Urn of Godfire&quot;, &quot;Font of Return|JOU&quot;, &quot;Font of Fortunes|JOU&quot;, &quot;Black Oak of Odunos|BNG&quot;, &quot;Returned Phalanx|THS&quot;]}</property>
+    <property name="enemy" value="Phenax"/>
+   </properties>
+  </object>
+  <object id="106" template="../../../../common/maps/obj/enemy.tx" x="616.56" y="590.023">
+   <properties>
+    <property name="effect">{
+&quot;lifeModifier&quot;: 20, 
+&quot;startBattleWithCard&quot;: [&quot;Rain of Gore&quot;, &quot;Temple of Malice&quot;, &quot;Altar of the Pantheon|THB&quot;, &quot;Urn of Godfire&quot;, &quot;Font of Ire|JOU&quot;, &quot;Font of Return|JOU&quot;, &quot;Slaughter-Priest of Mogis|THB&quot;, &quot;Soulreaper of Mogis|THB&quot;]}</property>
+    <property name="enemy" value="Mogis"/>
+   </properties>
+  </object>
+  <object id="107" template="../../../../common/maps/obj/enemy.tx" x="114.258" y="603.291">
+   <properties>
+    <property name="effect">{
+&quot;lifeModifier&quot;: 20, 
+&quot;startBattleWithCard&quot;: [&quot;Rhythm of the Wild&quot;, &quot;Temple of Abandon&quot;, &quot;Altar of the Pantheon|THB&quot;, &quot;Urn of Godfire&quot;, &quot;Reckless Reveler|BNG&quot;, &quot;Font of Fertility|JOU&quot;, &quot;Font of Ire|JOU&quot;, &quot;Eidolon of the Great Revel|JOU&quot;]}</property>
+    <property name="enemy" value="Xenagos"/>
+   </properties>
+  </object>
+  <object id="108" template="../../../../common/maps/obj/enemy.tx" x="135.109" y="373.939">
+   <properties>
+    <property name="effect">{
+&quot;lifeModifier&quot;: 20, 
+&quot;startBattleWithCard&quot;: [&quot;Anthem of Champions&quot;, &quot;Temple of Plenty&quot;, &quot;Altar of the Pantheon|THB&quot;, &quot;Urn of Godfire&quot;, &quot;Font of Vigor|JOU&quot;, &quot;Font of Fertility|JOU&quot;, &quot;Alseid of Life's Bounty&quot;, &quot;Dictate of Karametra|JOU&quot;, &quot;Dryad of the Ilysian Grove&quot;]}</property>
+    <property name="enemy" value="Karametra"/>
+   </properties>
+  </object>
+  <object id="109" template="../../../../common/maps/obj/enemy.tx" x="461.131" y="207.137">
+   <properties>
+    <property name="effect">{
+&quot;lifeModifier&quot;: 20, 
+&quot;startBattleWithCard&quot;: [&quot;Outlaws' Merriment&quot;, &quot;Altar of the Pantheon|THB&quot;, &quot;Urn of Godfire&quot;, &quot;Favored of Iroas&quot;, &quot;Priest of Iroas&quot;, &quot;Armory of Iroas|JOU&quot;, &quot;Font of Ire|JOU&quot;, &quot;Font of Vigor|JOU&quot;]}</property>
+    <property name="enemy" value="Iroas"/>
+   </properties>
+  </object>
+  <object id="110" template="../../../../common/maps/obj/enemy.tx" x="680.058" y="370.148">
+   <properties>
+    <property name="effect">{
+&quot;lifeModifier&quot;: 20, 
+&quot;startBattleWithCard&quot;: [&quot;Jungle Barrier&quot;, &quot;Temple of Mystery&quot;, &quot;Altar of the Pantheon|THB&quot;, &quot;Urn of Godfire&quot;, &quot;Font of Fertility|JOU&quot;, &quot;Font of Fortunes|JOU&quot;, &quot;Dictate of Kruphix|JOU&quot;, &quot;Prophet of Kruphix&quot;]}</property>
+    <property name="enemy" value="Kruphix"/>
+   </properties>
+  </object>
+  <object id="111" template="../../../../common/maps/obj/enemy.tx" x="677.215" y="590.023">
+   <properties>
+    <property name="effect">{
+&quot;lifeModifier&quot;: 20, 
+&quot;startBattleWithCard&quot;: [&quot;Temple of Silence&quot;, &quot;Hidden Stockpile&quot;, &quot;Altar of the Pantheon|THB&quot;, &quot;Urn of Godfire&quot;, &quot;Font of Return|JOU&quot;, &quot;Font of Vigor|JOU&quot;, &quot;Scholar of Atheros|THS&quot;, &quot;Grim Guardian|JOU&quot;]}</property>
+    <property name="enemy" value="Athreos"/>
+   </properties>
+  </object>
+  <object id="112" template="../../../../common/maps/obj/enemy.tx" x="55.4985" y="600.448">
+   <properties>
+    <property name="effect">{
+&quot;lifeModifier&quot;: 20, 
+&quot;startBattleWithCard&quot;: [&quot;Cryptic Pursuit&quot;, &quot;Altar of the Pantheon|THB&quot;, &quot;Urn of Godfire&quot;, &quot;Font of Ire|JOU&quot;, &quot;Font of Fortunes|JOU&quot;, &quot;Stormcaller of Keranos|BNG&quot;, &quot;Storm God's Oracle|MH2&quot;]}</property>
+    <property name="enemy" value="Keranos"/>
+   </properties>
+  </object>
+  <object id="113" template="../../../../common/maps/obj/enemy.tx" x="62.1327" y="372.991">
+   <properties>
+    <property name="effect">{
+&quot;lifeModifier&quot;: 20, 
+&quot;startBattleWithCard&quot;: [&quot;Binding the Old Gods&quot;, &quot;Altar of the Pantheon|THB&quot;, &quot;Urn of Godfire&quot;, &quot;Font of Fertility|JOU&quot;, &quot;Font of Return|JOU&quot;, &quot;Pharika's Chosen|JOU&quot;, &quot;Pharika's Spawn|THB&quot;]}</property>
+    <property name="enemy" value="Pharika"/>
+   </properties>
+  </object>
+  <object id="114" template="../../../../common/maps/obj/enemy.tx" x="364.461" y="495.249">
+   <properties>
+    <property name="effect">{
+&quot;lifeModifier&quot;: 20, 
+&quot;startBattleWithCard&quot;: [&quot;Eternal of Harsh Truths|HOU&quot;, &quot;Mirage Mirror&quot;, &quot;Ipnu Rivulet|HOU&quot;, &quot;ifnir deadlands|HOU&quot;, &quot;accursed horde|HOU&quot;]}</property>
+    <property name="enemy" value="The Scarab God"/>
+   </properties>
+  </object>
+  <object id="115" template="../../../../common/maps/obj/enemy.tx" gid="2147495067" x="412.796" y="543.584">
+   <properties>
+    <property name="effect">{
+&quot;lifeModifier&quot;: 20, 
+&quot;startBattleWithCard&quot;: [&quot;Bolas's Citadel&quot;, &quot;Eternal of Harsh Truths|HOU&quot;, &quot;Mirage Mirror&quot;, &quot;Ipnu Rivulet|HOU&quot;, &quot;ramunap ruins|HOU&quot;, &quot;bloodwater entity|HOU&quot;]}</property>
+    <property name="enemy" value="The Locust God"/>
+    <property name="hidden" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="116" template="../../../../common/maps/obj/enemy.tx" x="316.127" y="540.741">
+   <properties>
+    <property name="effect">{
+&quot;lifeModifier&quot;: 20, 
+&quot;startBattleWithCard&quot;: [&quot;Bolas's Citadel&quot;, &quot;Bolas's Citadel&quot;, &quot;Eternal of Harsh Truths|HOU&quot;, &quot;Mirage Mirror&quot;, &quot;ramunap ruins|HOU&quot;, &quot;ifnir deadlands|HOU&quot;, &quot;Moaning Wall|HOU&quot;]}</property>
+    <property name="enemy" value="The Scorpion God"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

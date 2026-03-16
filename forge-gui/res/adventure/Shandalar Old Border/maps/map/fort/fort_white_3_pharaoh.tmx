@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="36" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="74">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx" />
@@ -35,7 +35,74 @@
     <property name="teleport" value="" />
    </properties>
   </object>
-  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="324.941" y="186.435" />
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="324.941" y="186.435"><properties><property name="reward">[
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Erhnam Djinn|ARN"
+  },
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Desert|ARN"
+  },
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Mountain|ARN"
+  },
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Ifh-Biff Efreet|ARN"
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.3,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.56,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.6,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.34,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.16,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.04,
+    "count": 3,
+    "addMaxCount": 3
+  }
+]</property></properties></object>
   <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="467.189" y="380.766">
    <properties>
     <property name="enemy" value="Mummy" />
@@ -43,7 +110,50 @@
     <property name="waypoints" value="67,68" />
    </properties>
   </object>
-  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="250.536" y="151.128" />
+  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="250.536" y="151.128"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.3,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.56,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.6,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.34,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.16,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.04,
+    "count": 3,
+    "addMaxCount": 3
+  }
+]</property></properties></object>
   <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="225.064" y="177.386" />
   <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="273.222" y="251.626">
    <properties>
@@ -71,8 +181,8 @@
    <properties>
     <property name="effect">{ "startBattleWithCard": [ "City of Brass|ARN", "Cyclopean Mummy|LEG", "Desert|ARN", "Diamond Valley|ARN", "Library of Alexandria|ARN", "Oasis|ARN", "Pyramids|ARN" ] }</property>
     <property name="enemy" value="Pharaoh" />
-    <property name="threatRange" type="int" value="40" />
-   </properties>
+    <property name="threatRange" type="int" value="100" />
+   <property name="speedModifier" type="float" value="20" /></properties>
   </object>
   <object id="58" template="../../../../../../common/maps/obj/enemy.tx" x="167.725" y="303.797">
    <properties>
@@ -120,7 +230,43 @@
 </property>
    </properties>
   </object>
-  <object id="72" template="../../../../../../common/maps/obj/treasure.tx" x="550.333" y="305" />
+  <object id="72" template="../../../../../../common/maps/obj/treasure.tx" x="550.333" y="305"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.002,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.02,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.1,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.68,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 1.0,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property></properties></object>
   <object id="73" template="../../../../../../common/maps/obj/enemy.tx" x="509" y="301">
    <properties>
     <property name="enemy" value="Greater Sandwurm" />

@@ -1,0 +1,20 @@
+[metadata]
+Name:Possibility Storm - Lorwyn Eclipsed #03
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2026/02/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Assume that you have Swamps and Forests remaining in your library, but otherwise that any cards you might access from your library are irrelevant to the puzzle. Remember that your solution must satisfy all blocks and other possible opponent decisions. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Deadly Precision;Bushwhack;Tifa's Limit Break;Consuming Ashes
+p0library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Forest;Forest;Forest;Forest;Forest;Forest;Forest;Swamp;Swamp;Swamp;Swamp;Swamp;Swamp;Swamp
+p0battlefield=Gravestone Strider;Kraven the Hunter;Swamp;Forest;Forest;Forest;Forest
+p1life=8
+p1graveyard=Bedrock Tortoise;Fang, Fearless l'Cie;Vanille, Cheerful l'Cie
+p1battlefield=Ragnarok, Divine Deliverance|Meld:Fang, Fearless l'Cie;Vanille, Cheerful l'Cie
+# Randomize the order of cards in the library
+p0precast=Ancestral Knowledge:TrigShuffle

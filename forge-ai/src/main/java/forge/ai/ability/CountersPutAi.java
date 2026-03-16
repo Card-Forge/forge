@@ -1073,6 +1073,15 @@ public class CountersPutAi extends CountersAi {
     public CounterType chooseCounterType(List<CounterType> options, SpellAbility sa, Map<String, Object> params) {
         Player ai = sa.getActivatingPlayer();
         GameEntity e = (GameEntity) params.get("Target");
+
+        if (e == null) {
+            List<Card> list = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
+            if (list.isEmpty()) {
+                return Iterables.getFirst(options, null);
+            }
+            e = list.get(0);
+        }
+
         // for Card try to select not useless counter
         if (e instanceof Card c) {
             if (c.getController().isOpponentOf(ai)) {

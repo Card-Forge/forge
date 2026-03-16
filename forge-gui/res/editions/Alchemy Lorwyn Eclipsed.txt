@@ -6,5 +6,33 @@ Type=Online
 ScryfallCode=YECL
 
 [cards]
-0 M Providence of Night @Justin Gerard
-0 R The Grand Goatnapper @Edgar Sánchez Hidalgo
+1 R Adaptive Armorer @Edgar Sánchez Hidalgo
+2 R Current Curriculum @Heather Hudson
+3 U Thoughtweft's Call @Margaret Organ-Kean
+4 M Aquatic Subtlety @Margaret Organ-Kean
+5 U Preponderant Pearl @Genel Jumalon
+6 U Reflective Rimekin @Chuck Lukacs
+7 R Thoughtsteal Sprites @Iris Compiet
+8 R Blighted Nightmare @Caio Monteiro
+9 M Infestation @John Tedrick
+10 U Putrid Hexhag @Caio Monteiro
+11 U Craterous Stomp @Jarel Threat
+12 M Limitless Rekindling @Tiffany Turrill
+13 R Tend to the Kiln @Omar Rayyan
+14 R Gilt-Leaf Alchemist @Chris Seaman
+15 U Opulent Clomper @Caio Monteiro
+16 U Topsoil Turner @Omar Rayyan
+17 R Wildgrove Summoner @Jacob Walker
+18 R Circadian Struggle @Steve Ellis
+19 U Elvish Elegy @A. M. Sartor
+20 R The Grand Goatnapper @Edgar Sánchez Hidalgo
+21 R Kithkin Brinefarer @Randy Gallegos
+22 R Oura, the Imitator @A. M. Sartor
+23 R Pep, Raucous Raider @Heather Hudson
+24 R Perennial Gravewarden @Larry MacDougall
+25 M Providence of Night @Justin Gerard
+26 M Salacinder and Soot, Rascals @Iris Compiet
+27 R Thorna and Twigtooth @Pete Venters
+28 U Volatile Rift @Raoul Vitale
+29 U Adherent's Heirloom @Chris Seaman
+30 R Echoing Cavern @Justin Gerard

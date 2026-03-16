@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="21" nextobjectid="211">
  <editorsettings>
   <export format="tmx" />
@@ -40,17 +40,80 @@
  <objectgroup id="12" name="Objects" opacity="0.9">
   <object id="140" template="../../../../../../common/maps/obj/treasure.tx" x="308.807" y="867.623">
    <properties>
-    <property name="reward">[{
-  "type": "randomCard",
-  "count": 1,
-  "rarity": [ "rare" ],
-  "colors": [ "colorID" ]
-},{
-  "type": "randomCard",
-  "count": 4,
-  "rarity": [ "uncommon" ],
-  "addMaxCount": 2
-}]</property>
+    <property name="reward">[
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Bayou|LEA"
+  },
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Lhurgoyf|ICE"
+  },
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Mortivore|ODY"
+  },
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Terravore|ODY"
+  },
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Spiritmonger|APC"
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.005,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.03,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.175,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.45,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.84,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.51,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property>
     <property name="spawn.Hard" type="bool" value="false" />
    </properties>
   </object>
@@ -146,8 +209,8 @@
   }
 ]
 </property>
-    <property name="threatRange" type="int" value="60" />
-   </properties>
+    <property name="threatRange" type="int" value="100" />
+   <property name="speedModifier" type="float" value="20" /></properties>
   </object>
   <object id="183" template="../../../../../../common/maps/obj/gate.tx" gid="3221229597" x="226.355" y="821.63" width="15.7579" height="22.3749" rotation="0">
    <properties>

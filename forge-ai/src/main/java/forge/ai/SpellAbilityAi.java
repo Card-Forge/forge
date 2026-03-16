@@ -3,13 +3,13 @@ package forge.ai;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.card.ICardFace;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostParser;
 import forge.game.GameEntity;
 import forge.game.card.Card;
 import forge.game.card.CardCopyService;
@@ -37,6 +37,19 @@ import forge.util.collect.FCollectionView;
  * The three main methods are canPlayAI(), chkAIDrawback and doTriggerAINoCost.
  */
 public abstract class SpellAbilityAi {
+
+    public Predicate<Card> CREATURE_OR_TAP_ABILITY = c -> {
+        if (c.isCreature()) {
+            return true;
+        }
+
+        for (final SpellAbility sa : c.getSpellAbilities()) {
+            if (sa.isAbility() && sa.getPayCosts().hasTapCost()) {
+                return true;
+            }
+        }
+        return false;
+    };
 
     public final AiAbilityDecision canPlayWithSubs(final Player aiPlayer, final SpellAbility sa) {
         AiAbilityDecision decision = canPlay(aiPlayer, sa);
@@ -112,7 +125,7 @@ public abstract class SpellAbilityAi {
         // if manaspent, check if AI can pay the colored mana as cost
         if (!con.getManaSpent().isEmpty()) {
             // need to use ManaCostBeingPaid check, can't use Cost#canPay
-            ManaCostBeingPaid paid = new ManaCostBeingPaid(new ManaCost(new ManaCostParser(con.getManaSpent())));
+            ManaCostBeingPaid paid = new ManaCostBeingPaid(new ManaCost(con.getManaSpent()));
             if (ComputerUtilMana.canPayManaCost(paid, sa, ai, sa.isTrigger())) {
                 con.setManaSpent("");
             }

@@ -94,12 +94,62 @@
   <object id="75" template="../../../../../../common/maps/obj/waypoint.tx" x="271.25" y="79.75" />
   <object id="76" template="../../../../../../common/maps/obj/treasure.tx" x="160" y="48.5">
    <properties>
-    <property name="reward">[{"type": "randomCard","colors": ["Red"], "count": 5 }, {"type": "item","count": 1,"probability":0.2,"itemName": "Dagger"},
-{
-"type": "card",
-"probability": 1,
-"count": 1,
-"cardName": "Ruby Medallion|TMP"}]</property>
+    <property name="reward">[
+  {
+    "type": "item",
+    "count": 1,
+    "probability": 0.2,
+    "itemName": "Dagger"
+  },
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Ruby Medallion|TMP"
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.02,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.1,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.38,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.72,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.54,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.24,
+    "count": 2,
+    "addMaxCount": 2
+  }
+]</property>
    </properties>
   </object>
  </objectgroup>

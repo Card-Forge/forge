@@ -1,6 +1,6 @@
 [metadata]
 Name=Frodo 2
-[main]
+[Main]
 3 Plateau
 3 Taiga
 3 Savannah
@@ -38,4 +38,4 @@ Name=Frodo 2
 1 Raging Kavu
 1 Rip-Clan Crasher
 1 Tattermunge Maniac
-[sideboard]
+[Sideboard]

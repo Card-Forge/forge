@@ -4,26 +4,41 @@ import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.util.Set;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.KeyStroke;
 
 import forge.Singletons;
 import forge.control.FControl;
+import forge.control.KeyboardShortcuts;
 import forge.gui.GuiChoose;
 import forge.gui.MouseUtil;
 import forge.gui.framework.FScreen;
+import forge.gui.framework.IVTopLevelUI;
 import forge.gui.framework.SLayoutIO;
+import forge.game.GameLogEntryType;
+import forge.game.GameLogVerbosity;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
+import forge.screens.match.VMatchUI;
+import forge.screens.match.views.VHand;
+import forge.view.arcane.FloatingZone;
+import forge.toolbox.FButton;
+import forge.toolbox.FCheckBox;
+import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedMenuItem;
+import forge.view.FDialog;
+import net.miginfocom.swing.MigLayout;
 import forge.util.Localizer;
 import forge.view.FFrame;
 import forge.view.FView;
@@ -47,10 +62,14 @@ public final class LayoutMenu {
         final JMenu menu = new JMenu(localizer.getMessage("lblLayout"));
         menu.setMnemonic(KeyEvent.VK_L);
         if (currentScreen != FScreen.HOME_SCREEN) {
-            menu.add(getMenu_ViewOptions());
             menu.add(getMenu_FileOptions());
+            menu.add(getMenu_ViewOptions());
         }
         menu.add(getMenu_ThemeOptions());
+        if (currentScreen != null && currentScreen.isMatchScreen()) {
+            menu.addSeparator();
+            menu.add(getMenu_HandOptions());
+        }
         menu.addSeparator();
         menu.add(getMenuItem_FullScreen());
         menu.add(getMenuItem_SetWindowSize());
@@ -64,8 +83,30 @@ public final class LayoutMenu {
         final Localizer localizer = Localizer.getInstance();
         final JMenu menu = new JMenu(localizer.getMessage("lblView"));
         menu.add(getMenuItem_ShowTabs());
+
+        final JCheckBoxMenuItem newCountItem = createStayOpenCheckBox(
+                localizer.getMessage("lblNewCardCountInTab"));
+        newCountItem.setState(prefs.getPrefBoolean(FPref.UI_ZONE_TAB_NEW_COUNT));
+        newCountItem.addActionListener(e -> {
+            prefs.setPref(FPref.UI_ZONE_TAB_NEW_COUNT, newCountItem.getState());
+            prefs.save();
+            FloatingZone.refreshAll();
+            refreshHandCards();
+        });
+        menu.add(newCountItem);
+
         if (currentScreen != null && currentScreen.isMatchScreen()) {
             menu.add(getMenuItem_ShowBackgroundImage());
+
+            menu.addSeparator();
+            menu.add(getMenu_LogPane());
+
+            menu.addSeparator();
+            final JMenu layoutMenu = getMenu_MultiplayerFieldLayout();
+            final JMenu panelsMenu = getMenu_MultiplayerFieldPanels();
+            menu.add(getMenuItem_SortMultiplayerFields(layoutMenu, panelsMenu));
+            menu.add(layoutMenu);
+            menu.add(panelsMenu);
         }
         return menu;
     }
@@ -131,10 +172,330 @@ public final class LayoutMenu {
         };
     }
 
+    private static JMenu getMenu_HandOptions() {
+        final Localizer localizer = Localizer.getInstance();
+        final JMenu menu = new JMenu(localizer.getMessage("lblHandPanel"));
+
+        // Order Hand by CMC and Color
+        final JCheckBoxMenuItem orderHandItem = createStayOpenCheckBox(localizer.getMessage("nlOrderHand"));
+        orderHandItem.setState(prefs.getPrefBoolean(FPref.UI_ORDER_HAND));
+        orderHandItem.addActionListener(e -> {
+            prefs.setPref(FPref.UI_ORDER_HAND, orderHandItem.getState());
+            prefs.save();
+            refreshHandCards();
+            refreshHandLayout();
+        });
+        menu.add(orderHandItem);
+
+        // Prevent Card Overlap
+        final JCheckBoxMenuItem noOverlapItem = createStayOpenCheckBox(localizer.getMessage("lblPreventCardOverlap"));
+        noOverlapItem.setState(prefs.getPrefBoolean(FPref.UI_HAND_NO_OVERLAP));
+        noOverlapItem.addActionListener(e -> {
+            prefs.setPref(FPref.UI_HAND_NO_OVERLAP, noOverlapItem.getState());
+            prefs.save();
+            refreshHandLayout();
+        });
+        menu.add(noOverlapItem);
+
+        // Limit Cards Per Row — checkbox + slider
+        int currentMax = prefs.getPrefInt(FPref.UI_HAND_MAX_CARDS_PER_ROW);
+        final boolean limitEnabled = currentMax > 0;
+
+        final java.awt.Color bg = javax.swing.UIManager.getColor("PopupMenu.background");
+        final JPanel sliderPanel = new JPanel(new java.awt.BorderLayout());
+        sliderPanel.setBackground(bg);
+
+        final JCheckBoxMenuItem limitItem = createStayOpenCheckBox(localizer.getMessage("lblLimitCardsPerRow"));
+        limitItem.setState(limitEnabled);
+
+        final FSkin.SkinnedSlider slider = new FSkin.SkinnedSlider(javax.swing.SwingConstants.HORIZONTAL, 4, 12,
+                limitEnabled ? currentMax : 8);
+        slider.setMajorTickSpacing(1);
+        slider.setPaintTicks(true);
+        slider.setPaintLabels(true);
+        slider.setSnapToTicks(true);
+        slider.setBackground(bg);
+        slider.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        slider.setFont(FSkin.getFont());
+        slider.setEnabled(limitEnabled);
+
+        limitItem.addActionListener(e -> {
+            final boolean on = limitItem.getState();
+            slider.setEnabled(on);
+            if (on) {
+                prefs.setPref(FPref.UI_HAND_MAX_CARDS_PER_ROW, String.valueOf(slider.getValue()));
+            } else {
+                prefs.setPref(FPref.UI_HAND_MAX_CARDS_PER_ROW, "0");
+            }
+            prefs.save();
+            refreshHandLayout();
+        });
+
+        slider.addChangeListener(e -> {
+            if (limitItem.getState()) {
+                prefs.setPref(FPref.UI_HAND_MAX_CARDS_PER_ROW, String.valueOf(slider.getValue()));
+                prefs.save();
+                refreshHandLayout();
+            }
+        });
+
+        sliderPanel.add(slider, java.awt.BorderLayout.CENTER);
+
+        menu.add(limitItem);
+        menu.add(sliderPanel);
+
+        return menu;
+    }
+
+    private static void refreshHandCards() {
+        final FScreen screen = Singletons.getControl().getCurrentScreen();
+        if (screen != null && screen.isMatchScreen()) {
+            final IVTopLevelUI view = screen.getView();
+            if (view instanceof VMatchUI vmu) {
+                for (final VHand h : vmu.getControl().getHandViews()) {
+                    h.getLayoutControl().updateHand();
+                }
+            }
+        }
+    }
+
+    private static void refreshHandLayout() {
+        final FScreen screen = Singletons.getControl().getCurrentScreen();
+        if (screen != null && screen.isMatchScreen()) {
+            final IVTopLevelUI view = screen.getView();
+            if (view instanceof VMatchUI vmu) {
+                int maxCards = prefs.getPrefInt(FPref.UI_HAND_MAX_CARDS_PER_ROW);
+                final boolean noOverlap = prefs.getPrefBoolean(FPref.UI_HAND_NO_OVERLAP);
+                for (final VHand h : vmu.getControl().getHandViews()) {
+                    h.getHandArea().setMaxCardsPerRow(maxCards);
+                    h.getHandArea().setNoOverlap(noOverlap);
+                    h.getHandArea().doLayout();
+                    h.getHandArea().repaint();
+                }
+            }
+        }
+    }
+
+    /** Creates a JCheckBoxMenuItem that stays open on click. */
+    private static JCheckBoxMenuItem createStayOpenCheckBox(final String text) {
+        return new JCheckBoxMenuItem(text) {
+            @Override
+            protected void processMouseEvent(final MouseEvent e) {
+                if (e.getID() == MouseEvent.MOUSE_RELEASED && contains(e.getPoint())) {
+                    doClick(0);
+                    setArmed(true);
+                } else {
+                    super.processMouseEvent(e);
+                }
+            }
+        };
+    }
+
+    /** Creates a JRadioButtonMenuItem that stays open on click. */
+    private static JRadioButtonMenuItem createStayOpenRadioButton(final String text) {
+        return new JRadioButtonMenuItem(text) {
+            @Override
+            protected void processMouseEvent(final MouseEvent e) {
+                if (e.getID() == MouseEvent.MOUSE_RELEASED && contains(e.getPoint())) {
+                    doClick(0);
+                    setArmed(true);
+                } else {
+                    super.processMouseEvent(e);
+                }
+            }
+        };
+    }
+
+    private static JCheckBoxMenuItem getMenuItem_SortMultiplayerFields(
+            final JMenu layoutMenu, final JMenu panelsMenu) {
+        final Localizer localizer = Localizer.getInstance();
+        final boolean enabled = !"OFF".equals(prefs.getPref(FPref.UI_MULTIPLAYER_FIELD_LAYOUT));
+        final JCheckBoxMenuItem menuItem = createStayOpenCheckBox(
+                localizer.getMessage("lblSortMultiplayerFields"));
+        menuItem.setToolTipText(localizer.getMessage("lblSortMultiplayerFieldsTooltip"));
+        menuItem.setState(enabled);
+        layoutMenu.setEnabled(enabled);
+        panelsMenu.setEnabled(enabled);
+        menuItem.addActionListener(e -> {
+            final boolean on = menuItem.getState();
+            prefs.setPref(FPref.UI_MULTIPLAYER_FIELD_LAYOUT, on ? "GRID" : "OFF");
+            prefs.save();
+            layoutMenu.setEnabled(on);
+            panelsMenu.setEnabled(on);
+            relayoutMatchFields();
+        });
+        return menuItem;
+    }
+
+    private static JMenu getMenu_MultiplayerFieldLayout() {
+        final Localizer localizer = Localizer.getInstance();
+        final JMenu menu = new JMenu(localizer.getMessage("lblMultiplayerFieldLayout"));
+        final ButtonGroup group = new ButtonGroup();
+        final String current = prefs.getPref(FPref.UI_MULTIPLAYER_FIELD_LAYOUT);
+
+        final String[] values = {"GRID", "ROWS"};
+        final String[] labelKeys = {"lblFieldLayoutGrid", "lblFieldLayoutRows"};
+        final String[] tooltipKeys = {"lblFieldLayoutGridTooltip", "lblFieldLayoutRowsTooltip"};
+
+        for (int i = 0; i < values.length; i++) {
+            final JRadioButtonMenuItem item = createStayOpenRadioButton(
+                    localizer.getMessage(labelKeys[i]));
+            item.setToolTipText(localizer.getMessage(tooltipKeys[i]));
+            item.setSelected(values[i].equals(current));
+            final String value = values[i];
+            item.addActionListener(e -> {
+                prefs.setPref(FPref.UI_MULTIPLAYER_FIELD_LAYOUT, value);
+                prefs.save();
+                relayoutMatchFields();
+            });
+            group.add(item);
+            menu.add(item);
+        }
+        return menu;
+    }
+
+    private static JMenu getMenu_MultiplayerFieldPanels() {
+        final Localizer localizer = Localizer.getInstance();
+        final JMenu menu = new JMenu(localizer.getMessage("lblMultiplayerFieldPanels"));
+        final ButtonGroup group = new ButtonGroup();
+        final String current = prefs.getPref(FPref.UI_MULTIPLAYER_FIELD_PANELS);
+
+        final String[] values = {"TABBED", "SPLIT"};
+        final String[] labelKeys = {"lblFieldPanelsTabbed", "lblFieldPanelsSplit"};
+        final String[] tooltipKeys = {"lblFieldPanelsTabbedTooltip", "lblFieldPanelsSplitTooltip"};
+
+        for (int i = 0; i < values.length; i++) {
+            final JRadioButtonMenuItem item = createStayOpenRadioButton(
+                    localizer.getMessage(labelKeys[i]));
+            item.setToolTipText(localizer.getMessage(tooltipKeys[i]));
+            item.setSelected(values[i].equals(current));
+            final String value = values[i];
+            item.addActionListener(e -> {
+                prefs.setPref(FPref.UI_MULTIPLAYER_FIELD_PANELS, value);
+                prefs.save();
+                relayoutMatchFields();
+            });
+            group.add(item);
+            menu.add(item);
+        }
+        return menu;
+    }
+
+    private static void relayoutMatchFields() {
+        final FScreen screen = Singletons.getControl().getCurrentScreen();
+        if (screen != null && screen.isMatchScreen()) {
+            final IVTopLevelUI view = screen.getView();
+            if (view instanceof VMatchUI) {
+                ((VMatchUI) view).relayoutMultiplayerFields();
+            }
+        }
+    }
+
+    private static JMenu getMenu_LogPane() {
+        final Localizer localizer = Localizer.getInstance();
+        final JMenu menu = new JMenu(localizer.getMessage("lblLogPanel"));
+        final ButtonGroup group = new ButtonGroup();
+        final GameLogVerbosity currentVerbosity = GameLogVerbosity.fromString(prefs.getPref(FPref.DEV_LOG_ENTRY_TYPE));
+
+        MenuUtil.addPrefCheckBox(menu, localizer.getMessage("lblLogShowCardImages"), FPref.UI_LOG_SHOW_CARD_IMAGES)
+                .addActionListener(e -> refreshLog());
+        menu.addSeparator();
+
+        // Custom Categories menu item (declared early so radio button listeners can reference it)
+        final JMenuItem customItem = new JMenuItem(localizer.getMessage("lblCustomCategories") + "...");
+        customItem.addActionListener(e -> showCustomLogCategoriesDialog());
+        customItem.setEnabled(currentVerbosity == GameLogVerbosity.CUSTOM);
+
+        // Preset radio buttons (Low, Medium, High)
+        final String[] tooltipKeys = {"lblLogVerbosityLow", "lblLogVerbosityMedium", "lblLogVerbosityHigh"};
+        final GameLogVerbosity[] presets = {GameLogVerbosity.LOW, GameLogVerbosity.MEDIUM, GameLogVerbosity.HIGH};
+        for (int i = 0; i < presets.length; i++) {
+            final GameLogVerbosity verbosity = presets[i];
+            final JRadioButtonMenuItem item = MenuUtil.createStayOpenRadioButton(verbosity.toString());
+            item.setToolTipText(localizer.getMessage(tooltipKeys[i]));
+            item.setSelected(verbosity == currentVerbosity);
+            item.addActionListener(e -> {
+                prefs.setPref(FPref.DEV_LOG_ENTRY_TYPE, verbosity.name());
+                prefs.save();
+                customItem.setEnabled(false);
+                refreshLog();
+            });
+            group.add(item);
+            menu.add(item);
+        }
+
+        // Custom radio button
+        final JRadioButtonMenuItem customRadio = MenuUtil.createStayOpenRadioButton(
+                GameLogVerbosity.CUSTOM.toString());
+        customRadio.setToolTipText(localizer.getMessage("lblLogVerbosityCustom"));
+        customRadio.setSelected(currentVerbosity == GameLogVerbosity.CUSTOM);
+        customRadio.addActionListener(e -> {
+            prefs.setPref(FPref.DEV_LOG_ENTRY_TYPE, GameLogVerbosity.CUSTOM.name());
+            prefs.save();
+            customItem.setEnabled(true);
+            refreshLog();
+        });
+        group.add(customRadio);
+        menu.add(customRadio);
+
+        // Separator + Custom Categories dialog item
+        menu.addSeparator();
+        menu.add(customItem);
+
+        return menu;
+    }
+
+    private static void refreshLog() {
+        final FScreen screen = Singletons.getControl().getCurrentScreen();
+        if (screen != null && screen.isMatchScreen()) {
+            final IVTopLevelUI view = screen.getView();
+            if (view instanceof VMatchUI) {
+                ((VMatchUI) view).getControl().refreshLog();
+            }
+        }
+    }
+
+    public static void showCustomLogCategoriesDialog() {
+        final Localizer localizer = Localizer.getInstance();
+        final FDialog dlg = new FDialog();
+        dlg.setTitle(localizer.getMessage("lblCustomLogSettings"));
+
+        final JPanel checkPanel = new JPanel(new MigLayout("insets 10, gap 5 3, wrap 2, fillx"));
+        checkPanel.setOpaque(false);
+
+        final Set<GameLogEntryType> customTypes = prefs.getCustomLogTypes();
+        for (final GameLogEntryType type : GameLogEntryType.values()) {
+            final FCheckBox cb = new FCheckBox(type.getCaption());
+            cb.setSelected(customTypes.contains(type));
+            cb.addActionListener(e -> {
+                final Set<GameLogEntryType> current = prefs.getCustomLogTypes();
+                if (cb.isSelected()) {
+                    current.add(type);
+                } else {
+                    current.remove(type);
+                }
+                prefs.setCustomLogTypes(current);
+                refreshLog();
+            });
+            checkPanel.add(cb, "sg check");
+        }
+
+        final FScrollPane scroller = new FScrollPane(checkPanel, false);
+        final FButton btnOk = new FButton("OK");
+        btnOk.addActionListener(e -> dlg.dispose());
+
+        dlg.add(scroller, "w 400!, h 300!, wrap");
+        dlg.add(btnOk, "w 80!, h 26!, ax center");
+        dlg.pack();
+        dlg.setLocationRelativeTo(null);
+        dlg.setVisible(true);
+    }
+
     private static JMenuItem getMenuItem_ShowTabs() {
         final Localizer localizer = Localizer.getInstance();
         final JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem(localizer.getMessage("lblPanelTabs"));
-        menuItem.setAccelerator(MenuUtil.getAcceleratorKey(KeyEvent.VK_T));
+        final KeyStroke ks = KeyboardShortcuts.getKeyStrokeForPref(FPref.SHORTCUT_PANELTABS);
+        if (ks != null) { menuItem.setAccelerator(ks); }
         menuItem.setState(!prefs.getPrefBoolean(FPref.UI_HIDE_GAME_TABS));
         menuItem.addActionListener(getShowTabsAction(menuItem));
         return menuItem;
