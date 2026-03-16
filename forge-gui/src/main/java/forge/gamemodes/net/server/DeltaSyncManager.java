@@ -5,6 +5,7 @@ import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
+import forge.game.zone.ZoneType;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.DeltaPacket.CardStateData;
 import forge.gamemodes.net.DeltaPacket.CombatData;
@@ -728,12 +729,9 @@ public class DeltaSyncManager implements IHasNetLog {
                 turn, phaseName,
                 gameView.getPhase() != null ? gameView.getPhase().name() : "null");
         for (PlayerView player : NetworkChecksumUtil.getSortedPlayers(gameView)) {
-            int handSize = player.getHand() != null ? player.getHand().size() : 0;
-            int graveyardSize = player.getGraveyard() != null ? player.getGraveyard().size() : 0;
-            int battlefieldSize = player.getBattlefield() != null ? player.getBattlefield().size() : 0;
             netLog.info("[DeltaSync]   Player {} ({}): Life={}, Hand={}, GY={}, BF={}",
                     player.getId(), player.getName(), player.getLife(),
-                    handSize, graveyardSize, battlefieldSize);
+                    player.getZoneSize(ZoneType.Hand), player.getZoneSize(ZoneType.Graveyard), player.getZoneSize(ZoneType.Battlefield));
         }
     }
 

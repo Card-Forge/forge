@@ -463,8 +463,6 @@ public final class NetworkChecksumUtil {
         return sb.toString();
     }
 
-    // ==================== Utility ====================
-
     /**
      * Get players sorted by ID for consistent iteration order.
      * Required for deterministic checksum computation across server and client.
