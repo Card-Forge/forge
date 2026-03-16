@@ -517,28 +517,7 @@ public class HumanPlay {
                 d.setExiledSA(ability);
             }
         }
-        if (ability.isOffering() && ability.getSacrificedAsOffering() != null) {
-            final Card offering = ability.getSacrificedAsOffering();
-            offering.setUsedToPay(false);
-            if (!manaInputCancelled) {
-                game.getAction().sacrifice(new CardCollection(offering), ability, false, params);
-            }
-            ability.resetSacrificedAsOffering();
-        }
-        if (ability.isEmerge() && ability.getSacrificedAsEmerge() != null) {
-            final Card emerge = ability.getSacrificedAsEmerge();
-            emerge.setUsedToPay(false);
-            if (!manaInputCancelled) {
-                game.getAction().sacrifice(new CardCollection(emerge), ability, false, params);
-                ability.setSacrificedAsEmerge(game.getChangeZoneLKIInfo(emerge));
-            } else {
-                ability.resetSacrificedAsEmerge();
-            }
-        }
-        if (!table.isEmpty() && !manaInputCancelled) {
-            table.triggerChangesZoneAll(game, ability);
-        }
-        return !manaInputCancelled;
+        return CostPayment.handleOfferings(ability, manaInputCancelled, !manaInputCancelled) && !manaInputCancelled;
     }
 
     public static boolean payManaCost(final PlayerControllerHuman controller, final ManaCost realCost, final CostPartMana mc, final SpellAbility ability, final Player activator, String prompt, ManaConversionMatrix matrix, boolean effect) {
@@ -562,24 +541,16 @@ public class HumanPlay {
         CardCollection cardsToDelve = new CardCollection();
         CostAdjustment.adjust(toPay, ability, activator, cardsToDelve, false, effect);
 
-        Card offering = null;
-        Card emerge = null;
-
         InputPayMana inpPayment;
-        if (ability.isOffering()) {
-            if (ability.getSacrificedAsOffering() == null) {
-                System.out.println("Sacrifice input for Offering cancelled");
-                return false;
-            }
-            offering = ability.getSacrificedAsOffering();
+        if (ability.isOffering() && ability.getSacrificedAsOffering() == null) {
+            System.out.println("Sacrifice input for Offering cancelled");
+            return false;
         }
-        if (ability.isEmerge()) {
-            if (ability.getSacrificedAsEmerge() == null) {
-                System.out.println("Sacrifice input for Emerge cancelled");
-                return false;
-            }
-            emerge = ability.getSacrificedAsEmerge();
+        if (ability.isEmerge() && ability.getSacrificedAsEmerge() == null) {
+            System.out.println("Sacrifice input for Emerge cancelled");
+            return false;
         }
+
         if (!toPay.isPaid()) {
             // if matrix still null it's effect payment
             if (matrix == null) {
@@ -600,17 +571,6 @@ public class HumanPlay {
             source.setXManaCostPaidByColor(toPay.getXManaCostPaidByColor());
         }
 
-        // Handle convoke and offerings
-        if (ability.isOffering()) {
-            if (ability.getSacrificedAsOffering() == null && offering != null) {
-                ability.setSacrificedAsOffering(offering);
-            }
-        }
-        if (ability.isEmerge()) {
-            if (ability.getSacrificedAsEmerge() == null && emerge != null) {
-                ability.setSacrificedAsEmerge(emerge);
-            }
-        }
         return handleOfferingConvokeAndDelve(ability, cardsToDelve, false);
     }
 }
