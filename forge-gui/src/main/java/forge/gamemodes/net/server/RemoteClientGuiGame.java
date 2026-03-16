@@ -479,7 +479,8 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
             GameView gameView = getGameView();
             if (gameView != null) {
                 synchronized (deltaLock) {
-                    DeltaPacket delta = deltaSyncManager.collectDeltas(gameView, false);
+                    boolean onGameThread = flushing || (forwarder != null && forwarder.isGameThreadFlush());
+                    DeltaPacket delta = deltaSyncManager.collectDeltas(gameView, onGameThread);
                     delta.setProxiedEvents(proxied);
                     sender.send(ProtocolMethod.applyDelta, delta);
 

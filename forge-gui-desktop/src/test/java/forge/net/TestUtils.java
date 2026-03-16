@@ -52,7 +52,9 @@ public final class TestUtils {
         FModel.getNetPreferences().setPref(ForgeNetPreferences.FNetPref.NET_BANDWIDTH_LOGGING, true);
         FModel.getNetPreferences().setPref(ForgeNetPreferences.FNetPref.UPnP, "NEVER");
 
-        // Enable deep checksum for batch tests to catch GUI state desyncs
-        NetworkChecksumUtil.setStableChecksum(true);
+        // Enable stable checksum for batch tests unless overridden via system property.
+        // Use -Dforge.checksum.mode=production to test with production (sampled) checksum.
+        boolean useStable = !"production".equalsIgnoreCase(System.getProperty("forge.checksum.mode"));
+        NetworkChecksumUtil.setStableChecksum(useStable);
     }
 }

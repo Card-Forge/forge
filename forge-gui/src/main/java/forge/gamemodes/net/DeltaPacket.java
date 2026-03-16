@@ -150,7 +150,7 @@ public final class DeltaPacket implements NetEvent {
     }
 
     public boolean isEmpty() {
-        return objectDeltas.isEmpty() && newObjects.isEmpty() && !hasEvents();
+        return objectDeltas.isEmpty() && newObjects.isEmpty() && !hasEvents() && !hasChecksum();
     }
 
     public int getApproximateSize() {

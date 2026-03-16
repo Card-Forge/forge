@@ -7,6 +7,7 @@ import forge.game.combat.CombatView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
+import forge.trackable.Tracker;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
@@ -59,7 +60,8 @@ public final class NetworkChecksumUtil {
         if (players != null) {
             for (PlayerView player : getSortedPlayers(players)) {
                 hash = 31 * hash + player.getId();
-                hash = 31 * hash + player.getLife();
+                Object life = getEffectiveValue(player, TrackableProperty.Life);
+                hash = 31 * hash + (life instanceof Integer ? (int) life : 0);
             }
         }
         return hash;
@@ -79,7 +81,7 @@ public final class NetworkChecksumUtil {
         }
         int hash = computeStateChecksum(turn, phaseOrdinal, gameView.getPlayers());
 
-        // Deep checksum: per-player zone sizes and mana
+        // Deep checksum: per-player zone sizes and mana (using effective values)
         for (PlayerView player : getSortedPlayers(gameView)) {
             hash = 31 * hash + player.getZoneSize(ZoneType.Hand);
             hash = 31 * hash + player.getZoneSize(ZoneType.Battlefield);
@@ -87,10 +89,15 @@ public final class NetworkChecksumUtil {
             hash = 31 * hash + player.getZoneSize(ZoneType.Exile);
             hash = 31 * hash + player.getZoneSize(ZoneType.Command);
 
-            // Mana pool hash
+            // Mana pool hash (use effective value for frozen tracker)
+            Object manaObj = getEffectiveValue(player, TrackableProperty.Mana);
             int manaHash = 0;
-            for (byte manaType : ManaAtom.MANATYPES) {
-                manaHash += player.getMana(manaType);
+            if (manaObj instanceof int[] manaPool) {
+                for (int m : manaPool) manaHash += m;
+            } else {
+                for (byte manaType : ManaAtom.MANATYPES) {
+                    manaHash += player.getMana(manaType);
+                }
             }
             hash = 31 * hash + manaHash;
         }
@@ -108,30 +115,36 @@ public final class NetworkChecksumUtil {
 
         for (CardView card : allBattlefieldCards) {
             hash = 31 * hash + card.getId();
-            hash = 31 * hash + (card.isTapped() ? 1 : 0);
-            if (card.getCurrentState() != null) {
-                hash = 31 * hash + card.getCurrentState().getPower();
-                hash = 31 * hash + card.getCurrentState().getToughness();
+            // Read via getEffectiveValue to include delayed props during tracker freeze
+            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Tapped)) ? 1 : 0);
+            CardView.CardStateView state = card.getCurrentState();
+            if (state != null) {
+                Object pow = getEffectiveValue(state, TrackableProperty.Power);
+                Object tou = getEffectiveValue(state, TrackableProperty.Toughness);
+                hash = 31 * hash + (pow instanceof Integer ? (int) pow : 0);
+                hash = 31 * hash + (tou instanceof Integer ? (int) tou : 0);
             }
-            hash = 31 * hash + (card.getZone() != null ? card.getZone().ordinal() : -1);
-            hash = 31 * hash + (card.getController() != null ? card.getController().getId() : -1);
+            Object zone = getEffectiveValue(card, TrackableProperty.Zone);
+            hash = 31 * hash + (zone instanceof ZoneType ? ((ZoneType) zone).ordinal() : -1);
+            Object ctrl = getEffectiveValue(card, TrackableProperty.Controller);
+            hash = 31 * hash + (ctrl instanceof PlayerView ? ((PlayerView) ctrl).getId() : -1);
 
             // Total counter count
-            Map<?, Integer> counters = card.getCounters();
+            Object countersObj = getEffectiveValue(card, TrackableProperty.Counters);
             int counterTotal = 0;
-            if (counters != null) {
-                for (Integer count : counters.values()) {
-                    counterTotal += count;
+            if (countersObj instanceof Map) {
+                for (Object count : ((Map<?, ?>) countersObj).values()) {
+                    if (count instanceof Integer) counterTotal += (int) count;
                 }
             }
             hash = 31 * hash + counterTotal;
 
-            hash = 31 * hash + (card.isSick() ? 1 : 0);
-            hash = 31 * hash + (card.isAttacking() ? 1 : 0);
-            hash = 31 * hash + (card.isBlocking() ? 1 : 0);
-            hash = 31 * hash + (card.isPhasedOut() ? 1 : 0);
-            hash = 31 * hash + (card.isFaceDown() ? 1 : 0);
-            hash = 31 * hash + (card.isFlipped() ? 1 : 0);
+            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Sickness)) ? 1 : 0);
+            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Attacking)) ? 1 : 0);
+            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Blocking)) ? 1 : 0);
+            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.PhasedOut)) ? 1 : 0);
+            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Facedown)) ? 1 : 0);
+            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Flipped)) ? 1 : 0);
         }
 
         // Deep checksum: combat state
@@ -277,8 +290,9 @@ public final class NetworkChecksumUtil {
 
     // ==================== Sampled checksum ====================
 
-    /** Cached array of properties eligible for sampled checksum. */
+    /** Cached arrays to avoid repeated allocation from values(). */
     private static Set<TrackableProperty> eligibleProperties = null;
+    private static TrackableProperty[] allProperties = null;
 
     /**
      * Get all TrackableProperty values whose types can be generically hashed.
@@ -301,6 +315,13 @@ public final class NetworkChecksumUtil {
             eligibleProperties.add(prop);
         }
         return eligibleProperties;
+    }
+
+    private static TrackableProperty[] getAllProperties() {
+        if (allProperties == null) {
+            allProperties = TrackableProperty.values();
+        }
+        return allProperties;
     }
 
     /**
@@ -370,9 +391,30 @@ public final class NetworkChecksumUtil {
     }
 
     /**
+     * Read the effective value of a property, checking the tracker's delayed
+     * queue when frozen. During a tracker freeze, mergeDelayedProps adds pending
+     * values to the delta that aren't yet in the live props. The checksum must
+     * read these same values to match what the client will have after applying
+     * the delta.
+     */
+    static Object getEffectiveValue(TrackableObject obj, TrackableProperty prop) {
+        Map<TrackableProperty, Object> props = obj.getProps();
+        Object value = props != null ? props.get(prop) : null;
+        Tracker tracker = obj.getTracker();
+        if (tracker != null && tracker.isFrozen()) {
+            Map<TrackableProperty, Object> delayed = tracker.getDelayedPropsFor(obj);
+            if (delayed.containsKey(prop)) {
+                value = delayed.get(prop);
+            }
+        }
+        return value;
+    }
+
+    /**
      * Hash a property value generically for checksum purposes.
      * Handles TrackableObject references (by ID), TrackableCollections (sorted IDs),
-     * Maps (sorted entries), and everything else via Objects.hashCode.
+     * Maps (sorted entries), Enums (by ordinal for cross-JVM consistency),
+     * and everything else via Objects.hashCode.
      */
     static int hashPropertyValue(Object value) {
         if (value == null) {
@@ -400,6 +442,10 @@ public final class NetworkChecksumUtil {
             entryHashes.sort(null);
             return entryHashes.hashCode();
         }
+        // Use ordinal() for enums — identity hashCode() differs across JVMs
+        if (value instanceof Enum<?> e) {
+            return e.ordinal();
+        }
         return Objects.hashCode(value);
     }
 
@@ -413,6 +459,14 @@ public final class NetworkChecksumUtil {
      * @return checksum value
      */
     public static int computeSampledChecksum(GameView gameView, int[] sampledPropertyOrdinals) {
+        return computeSampledChecksum(gameView, sampledPropertyOrdinals, null);
+    }
+
+    /**
+     * @param divergenceLog if non-null, logs per-property hash contributions for mismatch diagnosis
+     */
+    public static int computeSampledChecksum(GameView gameView, int[] sampledPropertyOrdinals,
+                                              List<String> divergenceLog) {
         final int turn = gameView.getTurn();
         int phaseOrdinal = gameView.getPhase() != null ? gameView.getPhase().ordinal() : -1;
         if (stableChecksum) {
@@ -421,24 +475,32 @@ public final class NetworkChecksumUtil {
 
         // Start with core hash
         int hash = computeStateChecksum(turn, phaseOrdinal, gameView.getPlayers());
+        if (divergenceLog != null) {
+            divergenceLog.add("base=" + hash);
+        }
 
         // Convert ordinals to properties
-        TrackableProperty[] allProps = TrackableProperty.values();
+        TrackableProperty[] allProps = getAllProperties();
         TrackableProperty[] sampled = new TrackableProperty[sampledPropertyOrdinals.length];
         for (int i = 0; i < sampledPropertyOrdinals.length; i++) {
             sampled[i] = allProps[sampledPropertyOrdinals[i]];
         }
 
-        // Walk object graph and hash sampled properties
+        // Walk object graph and hash sampled properties using effective values
+        // (includes delayed props during tracker freeze)
         List<TrackableObject> objects = collectChecksumObjects(gameView);
         for (TrackableObject obj : objects) {
-            Map<TrackableProperty, Object> objProps = obj.getProps();
-            if (objProps == null) continue;
+            if (obj.getProps() == null) continue;
             for (TrackableProperty prop : sampled) {
-                Object value = objProps.get(prop);
+                Object value = getEffectiveValue(obj, prop);
                 if (value != null && !value.equals(prop.getDefaultValue())) {
+                    int propHash = hashPropertyValue(value);
                     hash = 31 * hash + prop.ordinal();
-                    hash = 31 * hash + hashPropertyValue(value);
+                    hash = 31 * hash + propHash;
+                    if (divergenceLog != null) {
+                        divergenceLog.add(obj.getClass().getSimpleName() + "#" + obj.getId()
+                                + "." + prop.name() + "=" + propHash + " hash=" + hash);
+                    }
                 }
             }
         }
@@ -453,7 +515,7 @@ public final class NetworkChecksumUtil {
         if (ordinals == null || ordinals.length == 0) {
             return "[]";
         }
-        TrackableProperty[] allProps = TrackableProperty.values();
+        TrackableProperty[] allProps = getAllProperties();
         StringBuilder sb = new StringBuilder("[");
         for (int i = 0; i < ordinals.length; i++) {
             if (i > 0) sb.append(", ");

@@ -104,12 +104,13 @@ public class DeltaSyncManager implements IHasNetLog {
     }
 
     /**
-     * @param allowChecksum if false, skip checksum computation and don't count
-     *                      toward the checksum interval. Used by handleGameEvents()
-     *                      which may run on the scheduler daemon thread where live
-     *                      game state can race with game thread mutations.
+     * @param onGameThread true when called from the game thread (updateGameView),
+     *                     false from the event forwarder daemon thread. All calls
+     *                     count toward the checksum interval; only game-thread
+     *                     calls compute the checksum (the daemon thread can race
+     *                     with game-thread mutations, causing false positives).
      */
-    public DeltaPacket collectDeltas(GameView gameView, boolean allowChecksum) {
+    public DeltaPacket collectDeltas(GameView gameView, boolean onGameThread) {
         Map<Integer, Map<TrackableProperty, Object>> objectDeltas = new HashMap<>();
         Map<Integer, Map<TrackableProperty, Object>> newObjects = new HashMap<>();
         Set<Integer> currentObjectIds = new HashSet<>();
@@ -131,27 +132,28 @@ public class DeltaSyncManager implements IHasNetLog {
 
         long seq = sequenceNumber.incrementAndGet();
 
-        // Checksum computation — only when state is known to be stable
+        // All paths count toward the interval. Only compute on the game thread —
+        // the daemon thread can race with game-thread mutations (false positives).
+        // Tracker freeze is handled by getEffectiveValue() in the checksum computation,
+        // which reads delayed props to match what the delta carries.
         int checksum = 0;
         int[] checksumPropertyOrdinals = null;
-        if (allowChecksum) {
-            packetsSinceLastChecksum++;
-            if (packetsSinceLastChecksum >= checksumInterval) {
-                checksumPropertyOrdinals = selectChecksumProperties();
-                checksum = NetworkChecksumUtil.computeSampledChecksum(gameView, checksumPropertyOrdinals);
-                packetsSinceLastChecksum = 0;
-                recentDeltaProperties.clear();
-                cleanChecksumStreak++;
+        packetsSinceLastChecksum++;
+        if (onGameThread && packetsSinceLastChecksum >= checksumInterval) {
+            checksumPropertyOrdinals = selectChecksumProperties();
+            checksum = NetworkChecksumUtil.computeSampledChecksum(gameView, checksumPropertyOrdinals);
+            packetsSinceLastChecksum = 0;
+            recentDeltaProperties.clear();
+            cleanChecksumStreak++;
 
-                // Restore default interval after sustained clean streak
-                if (checksumInterval < CHECKSUM_INTERVAL && cleanChecksumStreak >= CLEAN_STREAK_TO_RESTORE) {
-                    netLog.info("[DeltaSync] {} clean checksums, restoring interval to {}",
-                            cleanChecksumStreak, CHECKSUM_INTERVAL);
-                    checksumInterval = CHECKSUM_INTERVAL;
-                }
-
-                logSampledChecksumDetails(gameView, checksum, seq, checksumPropertyOrdinals);
+            // Restore default interval after sustained clean streak
+            if (checksumInterval < CHECKSUM_INTERVAL && cleanChecksumStreak >= CLEAN_STREAK_TO_RESTORE) {
+                netLog.info("[DeltaSync] {} clean checksums, restoring interval to {}",
+                        cleanChecksumStreak, CHECKSUM_INTERVAL);
+                checksumInterval = CHECKSUM_INTERVAL;
             }
+
+            logSampledChecksumDetails(gameView, checksum, seq, checksumPropertyOrdinals);
         }
 
         return new DeltaPacket(seq, objectDeltas, newObjects, checksum, checksumPropertyOrdinals);
