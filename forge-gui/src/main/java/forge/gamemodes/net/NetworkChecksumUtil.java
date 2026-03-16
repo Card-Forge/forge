@@ -3,7 +3,6 @@ package forge.gamemodes.net;
 import forge.card.mana.ManaAtom;
 import forge.game.GameView;
 import forge.game.card.CardView;
-import forge.game.card.CardView.CardStateView;
 import forge.game.combat.CombatView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;

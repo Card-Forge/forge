@@ -1,7 +1,6 @@
 package forge.game.card;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import forge.ImageKeys;
