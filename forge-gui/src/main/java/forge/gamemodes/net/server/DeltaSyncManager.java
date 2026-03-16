@@ -31,7 +31,6 @@ import java.util.HashSet;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -73,7 +72,6 @@ public class DeltaSyncManager implements IHasNetLog {
     private final EnumSet<TrackableProperty> recentDeltaProperties = EnumSet.noneOf(TrackableProperty.class);
     private int checksumInterval = CHECKSUM_INTERVAL;
     private int cleanChecksumStreak = 0;
-    private final Random checksumRng = new Random();
 
     /**
      * Reset all tracking state for reconnection.
@@ -663,30 +661,24 @@ public class DeltaSyncManager implements IHasNetLog {
      * properties (up to half the sample), fills rest randomly from eligible pool.
      */
     private int[] selectChecksumProperties() {
-        TrackableProperty[] eligible = NetworkChecksumUtil.getEligibleProperties();
+        Set<TrackableProperty> eligible = NetworkChecksumUtil.getEligibleProperties();
         List<TrackableProperty> selected = new ArrayList<>(SAMPLE_SIZE);
 
-        // Bias: pick up to SAMPLE_SIZE/2 from recently changed properties
         int biasTarget = SAMPLE_SIZE / 2;
         List<TrackableProperty> biasedCandidates = new ArrayList<>();
         for (TrackableProperty prop : recentDeltaProperties) {
-            // Only include if in eligible pool
-            if (prop.getType() != TrackableTypes.CardStateViewType
-                    && prop.getType() != TrackableTypes.CombatViewType
-                    && prop.getType() != TrackableTypes.IPaperCardType
-                    && prop.getType() != TrackableTypes.StackItemViewListType) {
+            if (eligible.contains(prop)) {
                 biasedCandidates.add(prop);
             }
         }
-        // Shuffle and pick up to biasTarget
-        Collections.shuffle(biasedCandidates, checksumRng);
+        Collections.shuffle(biasedCandidates);
         int biasCount = Math.min(biasTarget, biasedCandidates.size());
         for (int i = 0; i < biasCount; i++) {
             selected.add(biasedCandidates.get(i));
         }
 
         // Fill remaining slots randomly from rest of eligible pool
-        EnumSet<TrackableProperty> selectedSet = EnumSet.noneOf(TrackableProperty.class);
+        Set<TrackableProperty> selectedSet = EnumSet.noneOf(TrackableProperty.class);
         selectedSet.addAll(selected);
         List<TrackableProperty> remaining = new ArrayList<>();
         for (TrackableProperty prop : eligible) {
@@ -694,7 +686,7 @@ public class DeltaSyncManager implements IHasNetLog {
                 remaining.add(prop);
             }
         }
-        Collections.shuffle(remaining, checksumRng);
+        Collections.shuffle(remaining);
         int fillCount = Math.min(SAMPLE_SIZE - selected.size(), remaining.size());
         for (int i = 0; i < fillCount; i++) {
             selected.add(remaining.get(i));

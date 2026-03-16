@@ -15,9 +15,11 @@ import forge.trackable.TrackableTypes.TrackableType;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Shared checksum computation for delta sync validation.
@@ -276,17 +278,17 @@ public final class NetworkChecksumUtil {
     // ==================== Sampled checksum ====================
 
     /** Cached array of properties eligible for sampled checksum. */
-    private static TrackableProperty[] eligibleProperties;
+    private static Set<TrackableProperty> eligibleProperties = null;
 
     /**
      * Get all TrackableProperty values whose types can be generically hashed.
      * Excludes container/nested types that require special traversal.
      */
-    public static TrackableProperty[] getEligibleProperties() {
+    public static Set<TrackableProperty> getEligibleProperties() {
         if (eligibleProperties != null) {
             return eligibleProperties;
         }
-        List<TrackableProperty> eligible = new ArrayList<>();
+        eligibleProperties = EnumSet.noneOf(TrackableProperty.class);
         for (TrackableProperty prop : TrackableProperty.values()) {
             TrackableType<?> type = prop.getType();
             // Exclude types that are nested containers or not meaningful for desync detection
@@ -296,9 +298,8 @@ public final class NetworkChecksumUtil {
                     || type == TrackableTypes.StackItemViewListType) {
                 continue;
             }
-            eligible.add(prop);
+            eligibleProperties.add(prop);
         }
-        eligibleProperties = eligible.toArray(new TrackableProperty[0]);
         return eligibleProperties;
     }
 
@@ -407,8 +408,6 @@ public final class NetworkChecksumUtil {
      * Starts with the core state checksum (turn + phase + player life), then
      * reads the specified properties from all objects in the game view graph.
      *
-     * @param turn the current turn number
-     * @param phaseOrdinal the phase ordinal, or -1 if phase is null
      * @param gameView the game view to checksum
      * @param sampledPropertyOrdinals ordinals of TrackableProperty values to sample
      * @return checksum value
