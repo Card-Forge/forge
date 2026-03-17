@@ -10,10 +10,7 @@ import forge.game.*;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
 import forge.game.cost.*;
-import forge.game.player.Player;
-import forge.game.player.PlayerCollection;
-import forge.game.player.PlayerController;
-import forge.game.player.PlayerView;
+import forge.game.player.*;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
@@ -29,17 +26,14 @@ import java.util.*;
 
 public class HumanCostDecision extends CostDecisionMakerBase {
     private final PlayerControllerHuman controller;
-    private String orString = null;
+    private final String orString;
     private boolean mandatory;
 
-    public HumanCostDecision(final PlayerControllerHuman controller, final Player p, final SpellAbility sa, final boolean effect) {
-        this(controller, p, sa, effect, sa.getHostCard(), null);
-    }
-    public HumanCostDecision(final PlayerControllerHuman controller, final Player p, final SpellAbility sa, final boolean effect, final Card source, final String orString) {
-        super(p, effect, sa, source);
+    public HumanCostDecision(final PlayerControllerHuman controller, final Player p, final SpellAbility sa, final boolean effect, String prompt) {
+        super(p, effect, sa, sa.getHostCard());
         this.controller = controller;
         mandatory = sa.getPayCosts().isMandatory();
-        this.orString = orString;
+        this.orString = PlaySpellAbility.getOrStringFromCost(ability, prompt);
     }
 
     @Override

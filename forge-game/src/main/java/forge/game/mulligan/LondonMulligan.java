@@ -1,7 +1,9 @@
 package forge.game.mulligan;
 
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 
 public class LondonMulligan extends AbstractMulligan {
     public LondonMulligan(Player p, boolean firstMullFree) {
@@ -22,8 +24,9 @@ public class LondonMulligan extends AbstractMulligan {
     public void mulliganDraw() {
         player.drawCards(handSizeAfterNextMulligan());
         int tuckingCards = tuckCardsDuringMulligan();
+        CardCollection hand = new CardCollection(player.getCardsIn(ZoneType.Hand));
 
-        for (final Card c : player.getController().tuckCardsViaMulligan(player, tuckingCards)) {
+        for (final Card c : player.getController().tuckCardsViaMulligan(hand, tuckingCards)) {
             player.getGame().getAction().moveToLibrary(c, -1, null);
         }
     }
