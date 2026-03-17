@@ -31516,10 +31516,10 @@
     "spawnRate": 0
   },
   {
-    "name": "Yennet",
+    "name": "Yennett",
     "sprite": "sprites/enemy/monstrosity/criosphinx.atlas",
     "deck": [
-      "decks/legends/yennet.dck"
+      "decks/legends/yennett.dck"
     ],
     "ai": "",
     "flying": true,
