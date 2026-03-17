@@ -181,7 +181,7 @@ public class WorldSave {
                 SaveFileData world = currentSave.world.save();
                 SaveFileData worldStage = WorldStage.getInstance().save();
                 SaveFileData archipelago = null;
-                if (ArchipelagoData.getInstance().isArchipelagoEnabled()) {
+                if (ArchipelagoData.getInstance().getArchipelagoMode() != ArchipelagoMode.disabled) {
                     archipelago = ArchipelagoData.getInstance().save();
                 }
                 SaveFileData poiChanges = currentSave.pointOfInterestChanges.save();

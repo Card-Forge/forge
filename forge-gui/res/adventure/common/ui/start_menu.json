@@ -75,9 +75,9 @@
       "name": "Settings",
       "text": "tr(lblSettings)",
       "selectable": true,
-      "width": 80,
+      "width": 65,
       "height": 30,
-      "x": 160,
+      "x": 195,
       "y": 180
     },
     {
@@ -85,9 +85,9 @@
       "name": "Backup",
       "text": "tr(lblData)",
       "selectable": true,
-      "width": 80,
+      "width": 60,
       "height": 30,
-      "x": 240,
+      "x": 260,
       "y": 180
     },
     {
@@ -109,6 +109,15 @@
       "height": 30,
       "x": 245,
       "y": 220
+    },
+    {
+      "type": "TextButton",
+      "name": "ApSettings",
+      "text": "[%130][+APIconSmall]",
+      "width": 35,
+      "height": 30,
+      "x": 160,
+      "y": 180
     }
   ]
 }

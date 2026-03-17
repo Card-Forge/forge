@@ -160,6 +160,15 @@
       "height": 25,
       "x": 153,
       "y": 0
+    },
+    {
+      "type": "TextButton",
+      "name": "apsettings",
+      "text": "[%100][+APIconSmall]",
+      "width": 25,
+      "height": 25,
+      "x": 83,
+      "y": 0
     }
   ]
 }

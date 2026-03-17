@@ -163,12 +163,13 @@ public class ArchipelagoData implements SaveFileContent {
         return true;
     }
 
-    public boolean isArchipelagoEnabled() {
-        return archipelagoMode != ArchipelagoMode.disabled;
+    public ArchipelagoMode getArchipelagoMode() {
+        return archipelagoMode;
     }
 
     // Keep this updated to reset any sets/maps/variables
     public void setupFreshSaveFile(ArchipelagoMode archipelagoMode) {
+        GameHUD.getInstance().setApButtonVisibility(archipelagoMode == ArchipelagoMode.networked_archipelago);
         cardsUnlockedByName.clear();
         this.addCardUnlockedByName("Plains");
         this.addCardUnlockedByName("Forest");
@@ -429,6 +430,7 @@ public class ArchipelagoData implements SaveFileContent {
         totalExtraMaxLifeEarned = data.containsKey("extraLife") ? data.readInt("extraLife") : 0;
         totalShardsEarned = data.containsKey("shards") ? data.readInt("shards") : 0;
         archipelagoMode = ArchipelagoMode.values()[data.containsKey("archipelagoMode") ? data.readInt("archipelagoMode") : 0];
+        GameHUD.getInstance().setApButtonVisibility(archipelagoMode == ArchipelagoMode.networked_archipelago);
         if (archipelagoMode == ArchipelagoMode.networked_archipelago) {
             // 1. Init APWorld
             // 2. Get current "index"
