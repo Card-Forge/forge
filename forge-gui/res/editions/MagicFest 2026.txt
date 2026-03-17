@@ -7,3 +7,5 @@ ScryfallCode=PF26
 
 [cards]
 1F R Wayfarer's Bauble @Diego Gisbert
+2 R Fyndhorn Elves @Julie Dillon
+3 R Prismatic Ending @Chris Seaman

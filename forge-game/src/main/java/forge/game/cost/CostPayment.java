@@ -272,11 +272,6 @@ public class CostPayment extends ManaConversionMatrix {
             return manaChoices.get(0);
         }
 
-        // if we are simulating mana payment for the human controller, use the first mana available (and avoid prompting the human player)
-        if (!player.getController().isAI()) {
-            return manaChoices.get(0);
-        }
-
         // Let them choose then
         return player.getController().chooseManaFromPool(manaChoices);
     }

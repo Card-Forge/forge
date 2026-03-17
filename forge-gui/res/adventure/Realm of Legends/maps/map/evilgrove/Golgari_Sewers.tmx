@@ -59,7 +59,7 @@
   <object id="100" template="../../../../common/maps/obj/enemy.tx" x="161.005" y="191.221">
    <properties>
     <property name="displayNameOverride" value=""/>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svogthos, the Restless Tomb|RAV&quot;, &quot;Golgari Germination&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Svogthos, the Restless Tomb|RAV&quot;, &quot;Golgari Decoy&quot;]}"/>
     <property name="enemy" value="Jarad"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="40"/>
@@ -135,7 +135,7 @@
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 11,
     &quot;editions&quot;: [ &quot;RAV&quot;, &quot;RTR&quot;, &quot;GRN&quot; ],
-    &quot;color&quot;: [ &quot;green&quot;, &quot;black&quot; ],
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;black&quot; ],
     &quot;colorType&quot;: &quot;MultiColor&quot;,
     &quot;rarity&quot;: [ &quot;Common&quot; ]
   },
@@ -143,7 +143,7 @@
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 3,
     &quot;editions&quot;: [ &quot;RAV&quot;, &quot;RTR&quot;, &quot;GRN&quot; ],
-    &quot;color&quot;: [ &quot;green&quot;, &quot;black&quot; ],
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;black&quot; ],
     &quot;colorType&quot;: &quot;MultiColor&quot;,
     &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
   },
@@ -151,7 +151,7 @@
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 1,
     &quot;editions&quot;: [ &quot;RAV&quot;, &quot;RTR&quot;, &quot;GRN&quot; ],
-    &quot;color&quot;: [ &quot;green&quot;, &quot;black&quot; ],
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;black&quot; ],
     &quot;colorType&quot;: &quot;MultiColor&quot;,
     &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
   }
