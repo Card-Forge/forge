@@ -3438,8 +3438,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (!getStaticAbilities().isEmpty()) {
             return false;
         }
-        if (!getReplacementEffects().isEmpty()
-                && (getReplacementEffects().size() > 1 || !isSaga() || hasKeyword(Keyword.READ_AHEAD))) {
+        if (!currentState.getReplacementEffects(false).isEmpty()) {
             return false;
         }
         if (!getTriggers().isEmpty()) {
@@ -7139,7 +7138,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return replacementEffect;
     }
 
-    public void updateReplacementEffects(List<ReplacementEffect> list, CardState state) {
+    public void updateReplacementEffects(List<ReplacementEffect> list, CardState state, boolean rulesHost) {
         for (final ICardTraitChanges ck : getChangedCardTraitsList(state)) {
             ck.applyReplacementEffect(list);
         }
@@ -7147,6 +7146,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         // Keywords are already sorted by Layer
         for (KeywordInterface kw : getUnhiddenKeywords(state)) {
             kw.applyReplacementEffect(list);
+        }
+
+        if (!rulesHost) {
+            return;
         }
 
         // Shield Counter aren't affected by Changed Card Traits
