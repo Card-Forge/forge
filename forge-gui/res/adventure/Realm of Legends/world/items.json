@@ -4618,7 +4618,7 @@
     "name": "Giant's Bracer",
     "description": "Equip 2, +0/+1 and hexproof while untapped.",
     "equipmentSlot": "Right",
-    "iconName": "GiantsBracer",
+    "iconName": "Giant'sBracer",
     "cost": 5000,
     "effect": {
       "startBattleWithCard": [
