@@ -545,6 +545,17 @@ public class GameAction {
 
         copied.updateStateForView();
 
+        // When a commander changes zones via copyCard, the Player.commanders list
+        // still holds the original Card. Update it to reference the copy so that
+        // PlayerView.Commander (and delta sync) tracks the current CardView.
+        if (copied != c && c.isCommander()) {
+            Player owner = c.getOwner();
+            if (owner.getCommanders().contains(c)) {
+                owner.removeCommander(c);
+                owner.addCommander(copied);
+            }
+        }
+
         // we don't want always trigger before counters are placed
         game.getTriggerHandler().suppressMode(TriggerType.Always);
         // Need to apply any static effects to produce correct triggers

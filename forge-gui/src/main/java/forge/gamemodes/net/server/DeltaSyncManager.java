@@ -242,8 +242,8 @@ public class DeltaSyncManager implements IHasNetLog {
             mergeDelayedProps(obj, delta);
             if (!delta.isEmpty()) {
                 objectDeltas.put(deltaKey, delta);
-                netLog.trace("[DeltaSync] Delta: key={} id={}, {} dirty props",
-                        String.format("0x%08X", deltaKey), obj.getId(), delta.size());
+                netLog.trace("[DeltaSync] Delta: key={} id={}, props={}",
+                        String.format("0x%08X", deltaKey), obj.getId(), delta.keySet());
             }
         }
     }
