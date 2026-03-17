@@ -3438,8 +3438,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (!getStaticAbilities().isEmpty()) {
             return false;
         }
-        if (!getReplacementEffects().isEmpty()
-                && (getReplacementEffects().size() > 1 || !isSaga() || hasKeyword(Keyword.READ_AHEAD))) {
+        FCollectionView<ReplacementEffect> re = getReplacementEffects();
+        if (!re.isEmpty()
+                && (re.size() > 1 || !isSaga() || hasKeyword(Keyword.READ_AHEAD))
+                && re.get(0) != shieldCounterReplaceDamage && re.get(0) != shieldCounterReplaceDestroy
+                && re.get(0) != stunCounterReplaceUntap && re.get(0) != finalityCounterReplaceDying) {
             return false;
         }
         if (!getTriggers().isEmpty()) {
