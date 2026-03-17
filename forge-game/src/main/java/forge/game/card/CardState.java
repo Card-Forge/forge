@@ -753,6 +753,10 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
 
         card.updateReplacementEffects(result, this, rulesHost);
 
+        if (!rulesHost) {
+            return result;
+        }
+
         // below are global rules
         if (type.hasSubtype("Saga") && !hasKeyword(Keyword.READ_AHEAD)) {
             if (sagaRep == null) {
