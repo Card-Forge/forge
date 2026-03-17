@@ -5,6 +5,11 @@
     "iconName": "ChallengeCoin"
   },
   {
+    "name": "Silver Challenge Coin",
+    "description": "A heavy coin made of silver. Redeem for a free sealed event.",
+    "iconName": "SilverChallengeCoin"
+  },
+  {
     "name": "Landscape Sketchbook - Mirage",
     "description": "Gives access to Mirage land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook",
@@ -4751,6 +4756,18 @@
     "effect": {
       "startBattleWithCard": [
         "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Winter Boots",
+    "description": "0/4, T, sac: -0/-X where X is snow lands",
+    "equipmentSlot": "Body",
+    "iconName": "WinterBoots",
+    "effect": {
+      "lifeModifier": -4,
+      "startBattleWithCard": [
+        "Priest of the Haunted Edge"
       ]
     }
   },

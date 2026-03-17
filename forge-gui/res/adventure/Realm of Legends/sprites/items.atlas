@@ -114,6 +114,9 @@ DireFlail
 ChitinousClub
   xy: 304, 400
   size: 16, 16
+WinterBoots
+  xy: 144, 176
+  size: 16, 16
 PureSoul
   xy: 176, 800
   size: 16, 16
