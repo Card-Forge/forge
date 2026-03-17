@@ -71,7 +71,7 @@ public class Cost implements Serializable {
     }
 
     public final boolean hasManaCost() {
-        return !this.hasNoManaCost();
+        return this.getCostMana() != null;
     }
 
     public final boolean hasSpecificCostType(Class<? extends CostPart> costType) {

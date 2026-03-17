@@ -84,18 +84,18 @@
                                                                 &quot;grantRewards&quot;: [
                                                                     {
                                                                         &quot;type&quot;: &quot;item&quot;,
+                                                                        &quot;count&quot;: 3,
+                                                                        &quot;itemName&quot;: &quot;Bronze Challenge Coin&quot;
+                                                                    },
+                                                                    {
+                                                                        &quot;type&quot;: &quot;item&quot;,
                                                                         &quot;count&quot;: 1,
                                                                         &quot;itemName&quot;: &quot;Challenge Coin&quot;
                                                                     },
                                                                     {
                                                                         &quot;type&quot;: &quot;item&quot;,
-                                                                        &quot;count&quot;: 2,
+                                                                        &quot;count&quot;: 1,
                                                                         &quot;itemName&quot;: &quot;Silver Challenge Coin&quot;
-                                                                    },
-                                                                    {
-                                                                        &quot;type&quot;: &quot;item&quot;,
-                                                                        &quot;count&quot;: 3,
-                                                                        &quot;itemName&quot;: &quot;Bronze Challenge Coin&quot;
                                                                     }
                                                                 ]
                                                             },
