@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Teenage Ninja Mutant Turtles #01
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2026/03/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Assume any cards that you could draw are not relevant to the solution. Remember that your solution must satisfy all possible blocking decisions. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Big Mother Mouser;Ill-Timed Explosion;Warmaker Gunship;Mind Transfer Protocol
+p0battlefield=Donatello, Mutant Mechanic;Synthesizer Labship;Costume Closet|Counters:P1P1=2;Hotfoot Gnome;Sword of Vengeance;Island;Island;Island;Dimension X;Dimension X;Dimension X;Dimension X
+p0library=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+p1life=13
+p1battlefield=Zog, Triceraton Castaway;West Wind Avatar
