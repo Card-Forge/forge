@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="138">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="139">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -12,12 +12,12 @@
  <tileset firstgid="36241" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
  <layer id="1" name="Background" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJztwzEJAAAMA7C+8w/VWw37E0gvqaqqqqqqqqqqqu8DFRHS7A==
+   eJzt1zsOABAURUGtjVmi9Wp1Cp9HTDH9PZEINadUATYoF2zQC/CP0oneolfvquboDbNnNRK9FeAn7mcAANjnpff0ir/AS70ApzTJd8Q8
   </data>
  </layer>
  <layer id="2" name="Walls" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJztmU0OwiAQhdk2pSdQr9ND6DXcWq/Sa/h3K+PaJkrSTqCdoQNlCJO8BQlT+SzDg9JWSrWD9jpvtdVUW49HAu+pUequ3To2036wzZ037huC9zBoLnagH2xz5437bsF7+//nD21v58brG1J5L7VS3aBrbW/nxptb/b7073259HSMm5qHrfvQvNR54BoL5/oQkhfjh7b1Geuhhhdb96F5y/pceFPlxdairb4k8fq8K8rv+4SLd8nHxl6WA+8aGV7oGZig+L9PwOdjeOHZ0cUrITC8S3PB8HYELzdB8X+fgM/n5DWSUL9zHrI09yXycvovZq13nV9C86ZyPorF65Mrmbecj7bhxdY8/H5FXR8495MSvm9w7idj3C9QfHRNXrlfiMtLuV849/J5KfGe4ZWy3+C6X6BEbN5P7x63b/2mst/A3hOYfrDNnZeK/6agwpu3Cm/eMpxfIdqdLQ==
+   eJztmU0OgjAQhbslwAnU63AIvYZb8RauuYaKtzKuhWiTMmlhpkyh0zDJWzTpYD9h+vpTZUpVnfZF2qqyodYejwTeU6nUo3DrWA77wTZ3ntk3BO+h01jsQD/Y5s4z+67Be///58/C3sbw3jI5vL4hlfeSK1V3uub2NobX1o6VN7X6fRW/9+VS6xg3NQ9b96F5qd+Bayyc80NIXowf2uZnrIdqXmzdh+blnJ/7eVgr1vrdeOXwYmvRVl+SeH3eFeX3fcLFO+VjppelwDtHmhd6BiYo/u8T8PkYXrh3dPFKCAzv1LegeWuCl+ug+L9PwOdz8mpJqN8xD5n69iXycvovZq537V9C88ayP1qK1ydXMm+K+6Mx3lj2C9iah+dX1PmBcz0p4XyDcz25xP0CxUfn5G33C8vyUu4Xzo18Xkq8R3ilrDe47hcosTTvp3GP27d+Y1lv9H5onjtBtUY/0xux9wvUvFj8NwZtvGlr401bmvMLB2qmeQ==
   </data>
  </layer>
  <layer id="3" name="Clutter" width="60" height="40">
@@ -179,16 +179,11 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
   </object>
   <object id="124" template="../../../../common/maps/obj/manashards.tx" x="258" y="514.667"/>
   <object id="125" template="../../../../common/maps/obj/gold.tx" x="415.5" y="548"/>
-  <object id="127" template="../../../../common/maps/obj/collision.tx" x="545.815" y="166.271" width="43.0363" height="70.1238"/>
-  <object id="128" template="../../../../common/maps/obj/collision.tx" x="640.542" y="67.7866" width="15.8242" height="24.9116"/>
-  <object id="129" template="../../../../common/maps/obj/collision.tx" x="337.482" y="243.938" width="172.036" height="14.1238"/>
-  <object id="130" template="../../../../common/maps/obj/collision.tx" x="335.982" y="337.938" width="172.036" height="14.1238"/>
   <object id="131" template="../../../../common/maps/obj/collision.tx" x="290.982" y="467.438" width="31.036" height="22.6238"/>
   <object id="132" template="../../../../common/maps/obj/collision.tx" x="340.982" y="469.688" width="31.036" height="22.6238"/>
-  <object id="133" template="../../../../common/maps/obj/collision.tx" x="258.482" y="544.688" width="110.536" height="12.6238"/>
   <object id="134" template="../../../../common/maps/obj/collision.tx" x="560.482" y="483.188" width="31.036" height="22.6238"/>
-  <object id="135" template="../../../../common/maps/obj/collision.tx" x="529.982" y="529.188" width="44.536" height="30.6238"/>
   <object id="136" template="../../../../common/maps/obj/collision.tx" x="485.982" y="468.188" width="20.036" height="22.6238"/>
   <object id="137" template="../../../../common/maps/obj/collision.tx" x="519.482" y="465.688" width="17.036" height="22.6238"/>
+  <object id="138" template="../../../../common/maps/obj/collision.tx" x="544.088" y="164.044" width="46.3242" height="11.9116"/>
  </objectgroup>
 </map>
