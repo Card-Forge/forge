@@ -34,9 +34,7 @@ public class CharmAi extends SpellAbilityAi {
 
         boolean timingRight = sa.isTrigger(); //is there a reason to play the charm now?
         boolean choiceForOpp = !ai.equals(sa.getActivatingPlayer());
-        boolean eachModeMustTargetADifferentPlayer = choices.stream().allMatch(ab ->
-                "True".equals(ab.getParam("TargetUnique"))
-                && Optional.ofNullable(ab.getParam("ValidTgts")).map(tgt -> "Player".equals(tgt) || "Opponent".equals(tgt)).orElse(false));
+        boolean eachModeMustTargetADifferentPlayer = Boolean.parseBoolean(sa.getParamOrDefault("EachModeMustTargetADifferentPlayer", "false"));
 
         // Reset the chosen list otherwise it will be locked in forever by earlier calls
         sa.setChosenList(null);

@@ -5,7 +5,7 @@ PT:4/5
 K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ Whenever CARDNAME attacks or dies, ABILITY
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigCharm | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or dies, ABILITY
-SVar:TrigCharm:DB$ Charm | CharmNum$ 2 | Choices$ DiscardSeek,DamageTreasures,DamagePump | AdditionalDescription$ . Each mode must target a different player.
+SVar:TrigCharm:DB$ Charm | CharmNum$ 2 | Choices$ DiscardSeek,DamageTreasures,DamagePump | EachModeMustTargetADifferentPlayer$ True
 SVar:DiscardSeek:DB$ Discard | ValidTgts$ Player | TargetUnique$ True | TgtPrompt$ Select target player to discard all the cards in their hand, then seek that many nonland cards | Mode$ Hand | RememberDiscarded$ True | SubAbility$ DBSeek | SpellDescription$ Target player discards all cards in their hand, then seeks that many nonland cards.
 SVar:DBSeek:DB$ Seek | Defined$ ParentTarget | Num$ X | Type$ Card.nonLand | SubAbility$ DBCleanup
 SVar:DamageTreasures:DB$ DealDamage | ValidTgts$ Player | TargetUnique$ True | TgtPrompt$ Select target player to deal 2 damage to and create two Treasures | NumDmg$ 2 | SubAbility$ DBToken | SpellDescription$ CARDNAME deals 2 damage to target player and they create two Treasure tokens.
