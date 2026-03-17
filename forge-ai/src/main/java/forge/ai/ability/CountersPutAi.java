@@ -302,8 +302,6 @@ public class CountersPutAi extends CountersAi {
             return doChargeToOppCtrlCMCLogic(ai, sa);
         } else if (logic.equals("TheOneRing")) {
             return SpecialCardAi.TheOneRing.consider(ai, sa);
-        } else if (amountStr.equals("StationX") && source.hasKeyword(Keyword.STATION)) {
-            return doStationAi(ai, sa);
         }
 
         if (sourceName.equals("Feat of Resistance")) { // sub-ability should take precedence
@@ -1238,21 +1236,5 @@ public class CountersPutAi extends CountersAi {
         }
         // If the AI has enough counters or more than the optimal CMC, it should not play the ability.
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-    }
-
-    private AiAbilityDecision doStationAi(Player ai, SpellAbility sa) {
-        Card source = sa.getHostCard();
-        PhaseHandler ph = source.getGame().getPhaseHandler();
-        int numStation = source.getKeywordMagnitude(Keyword.STATION);
-        // TODO: make this smarter so that the AI somehow determines it's safe to tap even if the opponent has an untapped creature
-        boolean isSafe = !ai.getOpponents().getCreaturesInPlay().anyMatch(CardPredicates.UNTAPPED);
-
-        if (ph.is(PhaseType.MAIN2, ai) && isSafe) {
-            if (source.getCounters(CounterEnumType.CHARGE) < numStation) {
-                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            }
-        }
-
-        return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
     }
 }
