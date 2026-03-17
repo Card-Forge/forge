@@ -238,6 +238,8 @@ public class DeckSelectScene extends UIScene {
     }
 
     private void edit() {
-        Forge.switchScene(DeckEditScene.getInstance());
+        DeckEditScene editScene = DeckEditScene.getInstance();
+        editScene.loadEvent(null);
+        Forge.switchScene(editScene);
     }
 }
