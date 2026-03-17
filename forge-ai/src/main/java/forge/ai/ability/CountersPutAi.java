@@ -302,7 +302,7 @@ public class CountersPutAi extends CountersAi {
             return doChargeToOppCtrlCMCLogic(ai, sa);
         } else if (logic.equals("TheOneRing")) {
             return SpecialCardAi.TheOneRing.consider(ai, sa);
-        } else if (amountStr.equals("StationX")) {
+        } else if (amountStr.equals("StationX") && source.hasKeyword(Keyword.STATION)) {
             return doStationAi(ai, sa);
         }
 
