@@ -490,9 +490,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
                         int deltaSize = measureSerializedSize(delta);
                         int eventsSize = measureSerializedSize(proxied);
                         int stateOnlyFullSize = measureSerializedSize(gameView);
-                        // Baseline: gameView + events sent separately (legacy protocol)
                         int fullStateSize = stateOnlyFullSize + eventsSize;
-                        // State-only delta: strip events from delta to isolate state sync efficiency
                         DeltaPacket stateOnly = delta.withoutEvents();
                         int stateOnlyDeltaSize = measureSerializedSize(stateOnly);
 

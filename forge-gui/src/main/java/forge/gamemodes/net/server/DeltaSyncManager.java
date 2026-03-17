@@ -64,7 +64,8 @@ public class DeltaSyncManager implements IHasNetLog {
     private final Map<Integer, TrackableObject> registeredByKey = new HashMap<>();
 
     // Not atomic: only accessed from game thread
-    private long packetsSinceLastChecksum = 0;
+    // Initialized to interval so the very first packet triggers a checksum
+    private long packetsSinceLastChecksum = CHECKSUM_INTERVAL;
 
     // Sampled checksum state
     private final EnumSet<TrackableProperty> recentDeltaProperties = EnumSet.noneOf(TrackableProperty.class);
@@ -88,7 +89,7 @@ public class DeltaSyncManager implements IHasNetLog {
 
         sequenceNumber.set(0);
         sentObjectIds.clear();
-        packetsSinceLastChecksum = 0;
+        packetsSinceLastChecksum = CHECKSUM_INTERVAL;
         recentDeltaProperties.clear();
         checksumInterval = CHECKSUM_INTERVAL;
         cleanChecksumStreak = 0;
@@ -203,6 +204,7 @@ public class DeltaSyncManager implements IHasNetLog {
             registeredByKey.put(deltaKey, obj);
 
             Map<TrackableProperty, Object> allProps = buildFullPropertyMap(obj);
+            mergeDelayedProps(obj, allProps);
             if (!allProps.isEmpty()) {
                 newObjects.put(deltaKey, allProps);
                 netLog.trace("[DeltaSync] New object: key={} id={}, {} props",

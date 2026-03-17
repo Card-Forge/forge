@@ -177,6 +177,8 @@ public final class NetworkChecksumUtil {
         if (gameView == null || !stableChecksum) {
             return "deep checksum disabled or gameView null";
         }
+        // This must mirror computeStateChecksum exactly (using getEffectiveValue)
+        // so that breakdown final == actual checksum, enabling accurate mismatch diagnosis.
         StringBuilder sb = new StringBuilder();
         int hash = computeStateChecksum(turn, phaseOrdinal, gameView.getPlayers());
         sb.append("base=").append(hash);
@@ -188,9 +190,15 @@ public final class NetworkChecksumUtil {
             zoneHash = 31 * zoneHash + player.getZoneSize(ZoneType.Graveyard);
             zoneHash = 31 * zoneHash + player.getZoneSize(ZoneType.Exile);
             zoneHash = 31 * zoneHash + player.getZoneSize(ZoneType.Command);
+
+            Object manaObj = getEffectiveValue(player, TrackableProperty.Mana);
             int manaHash = 0;
-            for (byte manaType : ManaAtom.MANATYPES) {
-                manaHash += player.getMana(manaType);
+            if (manaObj instanceof int[] manaPool) {
+                for (int m : manaPool) manaHash += m;
+            } else {
+                for (byte manaType : ManaAtom.MANATYPES) {
+                    manaHash += player.getMana(manaType);
+                }
             }
             zoneHash = 31 * zoneHash + manaHash;
             hash = zoneHash;
@@ -214,52 +222,78 @@ public final class NetworkChecksumUtil {
         allBattlefieldCards.sort(Comparator.comparingInt(CardView::getId));
         sb.append(" | cards(").append(allBattlefieldCards.size()).append(")=[");
         for (CardView card : allBattlefieldCards) {
-            sb.append(card.getId());
-            sb.append(card.isTapped() ? "T" : "U");
-            if (card.getCurrentState() != null) {
-                sb.append(card.getCurrentState().getPower()).append("/").append(card.getCurrentState().getToughness());
+            boolean tapped = Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Tapped));
+            CardView.CardStateView state = card.getCurrentState();
+            int power = 0, toughness = 0;
+            if (state != null) {
+                Object pow = getEffectiveValue(state, TrackableProperty.Power);
+                Object tou = getEffectiveValue(state, TrackableProperty.Toughness);
+                power = pow instanceof Integer ? (int) pow : 0;
+                toughness = tou instanceof Integer ? (int) tou : 0;
             }
-            // Show all hash-relevant properties
-            sb.append("z").append(card.getZone() != null ? card.getZone().ordinal() : -1);
-            sb.append("c").append(card.getController() != null ? card.getController().getId() : -1);
-            Map<?, Integer> cntrs = card.getCounters();
+            Object zoneObj = getEffectiveValue(card, TrackableProperty.Zone);
+            int zoneOrd = zoneObj instanceof ZoneType ? ((ZoneType) zoneObj).ordinal() : -1;
+            Object ctrlObj = getEffectiveValue(card, TrackableProperty.Controller);
+            int ctrlId = ctrlObj instanceof PlayerView ? ((PlayerView) ctrlObj).getId() : -1;
+            Object countersObj = getEffectiveValue(card, TrackableProperty.Counters);
             int ct = 0;
-            if (cntrs != null) { for (Integer v : cntrs.values()) ct += v; }
+            if (countersObj instanceof Map) {
+                for (Object v : ((Map<?, ?>) countersObj).values()) {
+                    if (v instanceof Integer) ct += (int) v;
+                }
+            }
+            boolean sick = Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Sickness));
+            boolean attacking = Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Attacking));
+            boolean blocking = Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Blocking));
+            boolean phasedOut = Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.PhasedOut));
+            boolean faceDown = Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Facedown));
+            boolean flipped = Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Flipped));
+
+            sb.append(card.getId());
+            sb.append(tapped ? "T" : "U");
+            if (state != null) sb.append(power).append("/").append(toughness);
+            sb.append("z").append(zoneOrd);
+            sb.append("c").append(ctrlId);
             if (ct > 0) sb.append("k").append(ct);
-            if (card.isSick()) sb.append("S");
-            if (card.isAttacking()) sb.append("A");
-            if (card.isBlocking()) sb.append("B");
-            if (card.isPhasedOut()) sb.append("P");
-            if (card.isFaceDown()) sb.append("D");
-            if (card.isFlipped()) sb.append("F");
+            if (sick) sb.append("S");
+            if (attacking) sb.append("A");
+            if (blocking) sb.append("B");
+            if (phasedOut) sb.append("P");
+            if (faceDown) sb.append("D");
+            if (flipped) sb.append("F");
             sb.append(" ");
         }
         sb.append("]");
 
-        // Recompute hash for cards
+        // Hash cards using same getEffectiveValue path as computeStateChecksum
         for (CardView card : allBattlefieldCards) {
             hash = 31 * hash + card.getId();
-            hash = 31 * hash + (card.isTapped() ? 1 : 0);
-            if (card.getCurrentState() != null) {
-                hash = 31 * hash + card.getCurrentState().getPower();
-                hash = 31 * hash + card.getCurrentState().getToughness();
+            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Tapped)) ? 1 : 0);
+            CardView.CardStateView state = card.getCurrentState();
+            if (state != null) {
+                Object pow = getEffectiveValue(state, TrackableProperty.Power);
+                Object tou = getEffectiveValue(state, TrackableProperty.Toughness);
+                hash = 31 * hash + (pow instanceof Integer ? (int) pow : 0);
+                hash = 31 * hash + (tou instanceof Integer ? (int) tou : 0);
             }
-            hash = 31 * hash + (card.getZone() != null ? card.getZone().ordinal() : -1);
-            hash = 31 * hash + (card.getController() != null ? card.getController().getId() : -1);
-            Map<?, Integer> counters = card.getCounters();
+            Object zone = getEffectiveValue(card, TrackableProperty.Zone);
+            hash = 31 * hash + (zone instanceof ZoneType ? ((ZoneType) zone).ordinal() : -1);
+            Object ctrl = getEffectiveValue(card, TrackableProperty.Controller);
+            hash = 31 * hash + (ctrl instanceof PlayerView ? ((PlayerView) ctrl).getId() : -1);
+            Object countersObj = getEffectiveValue(card, TrackableProperty.Counters);
             int counterTotal = 0;
-            if (counters != null) {
-                for (Integer count : counters.values()) {
-                    counterTotal += count;
+            if (countersObj instanceof Map) {
+                for (Object count : ((Map<?, ?>) countersObj).values()) {
+                    if (count instanceof Integer) counterTotal += (int) count;
                 }
             }
             hash = 31 * hash + counterTotal;
-            hash = 31 * hash + (card.isSick() ? 1 : 0);
-            hash = 31 * hash + (card.isAttacking() ? 1 : 0);
-            hash = 31 * hash + (card.isBlocking() ? 1 : 0);
-            hash = 31 * hash + (card.isPhasedOut() ? 1 : 0);
-            hash = 31 * hash + (card.isFaceDown() ? 1 : 0);
-            hash = 31 * hash + (card.isFlipped() ? 1 : 0);
+            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Sickness)) ? 1 : 0);
+            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Attacking)) ? 1 : 0);
+            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Blocking)) ? 1 : 0);
+            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.PhasedOut)) ? 1 : 0);
+            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Facedown)) ? 1 : 0);
+            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Flipped)) ? 1 : 0);
         }
         sb.append(" afterCards=").append(hash);
 
