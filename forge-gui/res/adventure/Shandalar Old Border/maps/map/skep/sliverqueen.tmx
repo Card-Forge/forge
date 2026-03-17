@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="69">
  <editorsettings>
   <export format="tmx" />
@@ -68,30 +68,96 @@
   <object id="68" template="../../../../../../common/maps/obj/treasure.tx" x="288.62" y="50.1133">
    <properties>
     <property name="reward">[
-	{
-		"type": "card",
-		"probability": 0.5,
-		"count": 1,
-		"cardName": "Evacuation|STH"
-	},
-	{
-		"type": "card",
-		"probability": 0.5,
-		"count": 1,
-		"cardName": "Mutilate|TOR"
-	},
-	{
-		"type": "card",
-		"probability": 1,
-		"count": 2,
-		"itemName": "Fumigate"
-	},
-	{
-		"type": "card",
-		"probability": 0.5,
-		"count": 2,
-		"itemName": "Favored Enemy"
-	}
+  {
+    "type": "card",
+    "probability": 0.5,
+    "count": 1,
+    "cardName": "Evacuation|STH"
+  },
+  {
+    "type": "card",
+    "probability": 0.5,
+    "count": 1,
+    "cardName": "Mutilate|TOR"
+  },
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "City of Brass|5ED"
+  },
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Harsh Mercy|ONS"
+  },
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Coat of Arms|EXO"
+  },
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Sliver Queen|STH"
+  },
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Sliver Overlord|SCG"
+  },
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Primitive Etchings|SCG"
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.7,
+    "count": 4,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.6,
+    "count": 4,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.4,
+    "count": 4,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.2,
+    "count": 4,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.08,
+    "count": 4,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.02,
+    "count": 4,
+    "addMaxCount": 3
+  }
 ]</property>
    </properties>
   </object>

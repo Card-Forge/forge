@@ -5,6 +5,11 @@
     "iconName": "ChallengeCoin"
   },
   {
+    "name": "Silver Challenge Coin",
+    "description": "A heavy coin made of silver. Redeem for a free sealed event.",
+    "iconName": "SilverChallengeCoin"
+  },
+  {
     "name": "Landscape Sketchbook - Mirage",
     "description": "Gives access to Mirage land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook",
@@ -2103,7 +2108,7 @@
     "iconName": "LotusPetal",
     "cost": 5000,
     "effect": {
-        "lifeModifier": -2,
+        "lifeModifier": -3,
         "startBattleWithCard": [
         "Lotus Petal|TMP"
      ]
@@ -2115,7 +2120,7 @@
     "equipmentSlot": "Left",
     "iconName": "BlackLotus",
     "effect": {
-        "lifeModifier": -3,
+        "lifeModifier": -7,
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Black Lotus|LEA"
@@ -2454,7 +2459,7 @@
     "effect": {
         "changeStartCards": -1,
         "startBattleWithCard": [
-        "Font of Fortune|JOU"
+        "Font of Fortunes|JOU"
      ]
     }
   },
@@ -4618,7 +4623,7 @@
     "name": "Giant's Bracer",
     "description": "Equip 2, +0/+1 and hexproof while untapped.",
     "equipmentSlot": "Right",
-    "iconName": "GiantsBracer",
+    "iconName": "Giant'sBracer",
     "cost": 5000,
     "effect": {
       "startBattleWithCard": [
@@ -4751,6 +4756,18 @@
     "effect": {
       "startBattleWithCard": [
         "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Winter Boots",
+    "description": "0/4, T, sac: -0/-X where X is snow lands",
+    "equipmentSlot": "Body",
+    "iconName": "WinterBoots",
+    "effect": {
+      "lifeModifier": -4,
+      "startBattleWithCard": [
+        "Priest of the Haunted Edge"
       ]
     }
   },

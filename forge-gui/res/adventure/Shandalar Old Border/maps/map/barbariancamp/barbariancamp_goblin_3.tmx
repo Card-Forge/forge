@@ -135,54 +135,148 @@
   <object id="78" template="../../../../../../common/maps/obj/treasure.tx" x="101.333" y="69.3333">
    <properties>
     <property name="reward">[
-	{
-		"type": "randomCard",
-		"colors": [ "Red" ],
-		"subTypes": [ "Goblin" ],
-		"count": 5
-	},
-	{
-		"type": "item",
-		"count": 1,
-		"probability": 0.2,
-		"itemName": "Battle Standard"
-	}
+  {
+    "type": "item",
+    "count": 1,
+    "probability": 0.2,
+    "itemName": "Battle Standard"
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.002,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.02,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.1,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.68,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 1.0,
+    "count": 1,
+    "addMaxCount": 2
+  }
 ]</property>
    </properties>
   </object>
   <object id="79" template="../../../../../../common/maps/obj/treasure.tx" x="262" y="174">
    <properties>
     <property name="reward">[
-	{
-		"type": "randomCard",
-		"colors": [ "Red" ],
-		"subTypes": [ "Goblin" ],
-		"count": 5
-	},
-	{
-		"type": "item",
-		"count": 1,
-		"probability": 0.2,
-		"itemName": "Battle Standard"
-	}
+  {
+    "type": "item",
+    "count": 1,
+    "probability": 0.2,
+    "itemName": "Battle Standard"
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.002,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.02,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.1,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.68,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 1.0,
+    "count": 1,
+    "addMaxCount": 2
+  }
 ]</property>
    </properties>
   </object>
   <object id="84" template="../../../../../../common/maps/obj/treasure.tx" x="144.5" y="273">
    <properties>
     <property name="reward">[
-	{
-		"type": "randomCard",
-		"colors": [ "Red" ],
-		"subTypes": [ "Goblin" ],
-		"count": 5
-	},
-	{
-		"type": "item",
-		"count": 1,
-		"probability": 0.2,
-		"itemName": "Battle Standard"
-	}
+  {
+    "type": "item",
+    "count": 1,
+    "probability": 0.2,
+    "itemName": "Battle Standard"
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.005,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.03,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.175,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.45,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.84,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.51,
+    "count": 1,
+    "addMaxCount": 2
+  }
 ]</property>
    </properties>
   </object>

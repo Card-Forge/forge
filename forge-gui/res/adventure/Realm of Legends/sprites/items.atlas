@@ -46,7 +46,7 @@ WardingStatueArms
   xy: 48, 576
   size: 16, 16
 MaptotheHostages
-  xy: 224, 848
+  xy: 208, 848
   size: 16, 16
 TheLuckiestClover
   xy: 112, 608
@@ -113,6 +113,9 @@ DireFlail
   size: 16, 16
 ChitinousClub
   xy: 304, 400
+  size: 16, 16
+WinterBoots
+  xy: 144, 176
   size: 16, 16
 PureSoul
   xy: 176, 800
