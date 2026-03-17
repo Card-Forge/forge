@@ -3,8 +3,6 @@ package forge.gamemodes.net;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgeNetPreferences.FNetPref;
 import forge.model.FModel;
-import org.tinylog.Logger;
-import org.tinylog.TaggedLogger;
 import org.tinylog.ThreadContext;
 
 import java.io.File;
@@ -25,9 +23,7 @@ import java.time.format.DateTimeFormatter;
  * The {@link NetworkLogWriter} routes file output to per-instance files based on
  * the {@code logfileKey} thread context value.
  */
-public final class NetworkLogConfig {
-
-    private static final TaggedLogger logger = Logger.tag("NETWORK");
+public final class NetworkLogConfig implements IHasNetLog {
 
     private static final String LOG_PREFIX = "network-debug";
 
@@ -45,7 +41,7 @@ public final class NetworkLogConfig {
     // Timestamp key for normal (non-test) mode, set once on first use
     private static volatile String normalModeKey = null;
 
-    // Cached user home path for sanitization (computed once)
+    // Cached user home path for sanitization
     private static final String USER_HOME = System.getProperty("user.home");
 
     private NetworkLogConfig() {
@@ -105,7 +101,7 @@ public final class NetworkLogConfig {
             sb.append("\n");
         }
 
-        logger.debug("HEXDUMP: " + label + "\n" + sb);
+        netLog.debug("HEXDUMP: " + label + "\n" + sb);
     }
 
     /**
@@ -300,8 +296,6 @@ public final class NetworkLogConfig {
      * - Max directory limit from NET_MAX_LOG_FILES preference
      * - Cleanup can be disabled via NET_LOG_CLEANUP_ENABLED preference
      * - Also cleans up legacy flat log files (network-debug-*.log)
-     *
-     * Runs once per setInstanceSuffix() call (same trigger as the old implementation).
      */
     private static void cleanupOldLogs() {
         try {
@@ -356,7 +350,7 @@ public final class NetworkLogConfig {
             }
 
             if (deleted > 0) {
-                logger.debug("Log cleanup: deleted " + deleted + " old log entries");
+                netLog.debug("Log cleanup: deleted " + deleted + " old log entries");
             }
         } catch (Exception e) {
             // Non-critical — don't let cleanup failures affect logging

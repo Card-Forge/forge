@@ -71,7 +71,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
                         newObjectCount++;
                     }
                 } catch (Exception e) {
-                    netLog.error("[DeltaSync] Error creating new object type={} id={}", objectType, objectId, e);
+                    netLog.error(e, "[DeltaSync] Error creating new object type={} id={}", objectType, objectId);
                 }
             }
             netLog.info("[DeltaSync] Created {} new objects (phase 1a)", newObjectCount);

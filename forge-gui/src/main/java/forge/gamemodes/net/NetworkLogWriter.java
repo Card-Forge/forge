@@ -16,7 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Custom tinylog writer that routes NETWORK-tagged log entries to per-instance files
- * based on the {@code logfileKey} thread context value. Replaces logback's SiftingAppender.
+ * based on the {@code logfileKey} thread context value.
  *
  * <p>Registered via {@code META-INF/services/org.tinylog.writers.Writer}.
  * Configuration name derived from class name: {@code network log}.
