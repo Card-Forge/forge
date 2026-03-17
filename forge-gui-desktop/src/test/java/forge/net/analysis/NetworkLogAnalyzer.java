@@ -177,6 +177,21 @@ public class NetworkLogAnalyzer {
         return normalized.trim();
     }
 
+    /**
+     * Check if a line is a DeltaSync diagnostic follow-up to a CHECKSUM MISMATCH event.
+     * These lines (client/server breakdown, player states, checksum details, etc.) are
+     * already captured by extractChecksumMismatchDetails() and should not be treated as
+     * separate error types in the error context section.
+     * The CHECKSUM MISMATCH! line itself is NOT a diagnostic line — it's the real error.
+     */
+    private static boolean isDeltaSyncDiagnosticLine(String line) {
+        if (!line.contains("[DeltaSync]")) return false;
+        // The actual mismatch detection is the real error — keep it
+        if (line.contains("CHECKSUM MISMATCH!")) return false;
+        // Everything else with [DeltaSync] in an ERROR line is diagnostic follow-up
+        return line.contains("[ERROR]");
+    }
+
     // ==================== Error Context Records ====================
 
     /**
@@ -619,9 +634,10 @@ public class NetworkLogAnalyzer {
                     continue;
                 }
 
-                // Errors — suppress JVM/Netty noise before counting
+                // Errors — suppress JVM/Netty noise and DeltaSync diagnostic lines before counting
                 if (ERROR_PATTERN.matcher(line).find()) {
-                    if (!SUPPRESSED_WARN_PATTERN.matcher(line).find()) {
+                    if (!SUPPRESSED_WARN_PATTERN.matcher(line).find()
+                            && !isDeltaSyncDiagnosticLine(line)) {
                         String truncated = truncateLine(line);
                         metrics.addError(truncated);
                         metrics.incrementErrorCount(normalizeError(truncated));
@@ -929,7 +945,10 @@ public class NetworkLogAnalyzer {
                 }
 
                 // Capture context for each new error type
-                if (ERROR_PATTERN.matcher(line).find() && !SUPPRESSED_WARN_PATTERN.matcher(line).find()) {
+                // Skip DeltaSync diagnostic lines that follow a CHECKSUM MISMATCH —
+                // they're captured by extractChecksumMismatchDetails() instead.
+                if (ERROR_PATTERN.matcher(line).find() && !SUPPRESSED_WARN_PATTERN.matcher(line).find()
+                        && !isDeltaSyncDiagnosticLine(line)) {
                     String normalized = normalizeError(line);
                     if (!seenErrors.contains(normalized)) {
                         seenErrors.add(normalized);
@@ -1057,10 +1076,6 @@ public class NetworkLogAnalyzer {
             }
 
             // Find mismatch lines and extract details from surrounding context.
-            // In multiplayer games, multiple clients may report the same seq mismatch —
-            // deduplicate by keeping the entry with the most detail (both breakdowns preferred).
-            Map<Integer, ChecksumMismatchDetail> detailsBySeq = new java.util.LinkedHashMap<>();
-
             for (int i = 0; i < allLines.size(); i++) {
                 Matcher mismatchMatcher = MISMATCH_LINE_PATTERN.matcher(allLines.get(i));
                 if (!mismatchMatcher.find()) continue;
@@ -1137,18 +1152,11 @@ public class NetworkLogAnalyzer {
                     }
                 }
 
-                ChecksumMismatchDetail newDetail = new ChecksumMismatchDetail(
+                details.add(new ChecksumMismatchDetail(
                         seqNumber, serverChecksum, clientChecksum,
                         serverBreakdown, clientBreakdown,
-                        serverPlayerStates, clientPlayerStates);
-
-                // Keep the entry with the most data for this seq number
-                ChecksumMismatchDetail existing = detailsBySeq.get(seqNumber);
-                if (existing == null || (newDetail.clientBreakdown() != null && existing.clientBreakdown() == null)) {
-                    detailsBySeq.put(seqNumber, newDetail);
-                }
+                        serverPlayerStates, clientPlayerStates));
             }
-            details.addAll(detailsBySeq.values());
         } catch (IOException e) {
             // Return whatever details we've collected
         }
