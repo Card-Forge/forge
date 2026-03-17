@@ -158,7 +158,7 @@ public class ManaAi extends SpellAbilityAi {
         int numCounters = 0;
         int manaSurplus = 0;
         if ("Count$xPaid".equals(host.getSVar("X")) && sa.getPayCosts().hasSpecificCostType(CostRemoveCounter.class)) {
-            CounterType ctrType = sa.getPayCosts().getByType(CostRemoveCounter.class).counter;
+            CounterType ctrType = sa.getPayCosts().getCostPartByType(CostRemoveCounter.class).counter;
             numCounters = host.getCounters(ctrType);
             manaReceived = numCounters;
             if (logic.startsWith("ManaRitualBattery.")) {
