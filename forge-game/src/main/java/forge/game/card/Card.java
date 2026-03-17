@@ -3439,10 +3439,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             return false;
         }
         FCollectionView<ReplacementEffect> re = getReplacementEffects();
+        re.remove(shieldCounterReplaceDamage);
+        re.remove(shieldCounterReplaceDestroy);
+        re.remove(stunCounterReplaceUntap);
+        re.remove(finalityCounterReplaceDying);
         if (!re.isEmpty()
-                && (re.size() > 1 || !isSaga() || hasKeyword(Keyword.READ_AHEAD))
-                && re.get(0) != shieldCounterReplaceDamage && re.get(0) != shieldCounterReplaceDestroy
-                && re.get(0) != stunCounterReplaceUntap && re.get(0) != finalityCounterReplaceDying) {
+                && (re.size() > 1 || !isSaga() || hasKeyword(Keyword.READ_AHEAD))) {
             return false;
         }
         if (!getTriggers().isEmpty()) {
