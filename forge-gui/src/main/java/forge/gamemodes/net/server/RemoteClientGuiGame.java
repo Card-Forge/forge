@@ -237,8 +237,10 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
     public void openView(final TrackableCollection<PlayerView> myPlayers) {
         send(ProtocolMethod.openView, myPlayers);
         updateGameView();
-        // Initialize delta sync by sending the initial full state
-        sendFullState();
+        // Note: sendFullState() is NOT called here. It is deferred to the
+        // startGameHook (after game initialization completes) so the initial
+        // sync captures the full game state including drawn hands, commanders,
+        // and command zone effects. See HostedMatch.startGame().
     }
 
     @Override

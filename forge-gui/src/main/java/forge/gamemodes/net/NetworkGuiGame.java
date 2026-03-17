@@ -199,6 +199,18 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
      */
     private void applyPropertyMap(TrackableObject obj, Map<TrackableProperty, Object> delta,
                                    Tracker tracker, Map<Integer, CardStateView> csvRegistry) {
+        // Snapshot existing CSVs before processing — slot assignments processed in ordinal
+        // order can displace a CSV from its slot before a later slot assignment looks for it.
+        Map<CardStateName, CardStateView> existingCsvs = null;
+        if (obj instanceof CardView cardView) {
+            for (TrackableProperty p : delta.keySet()) {
+                if (isCsvSlotProperty(p)) {
+                    existingCsvs = snapshotExistingCsvs(cardView);
+                    break;
+                }
+            }
+        }
+
         for (Map.Entry<TrackableProperty, Object> entry : delta.entrySet()) {
             TrackableProperty prop = entry.getKey();
             Object value = entry.getValue();
@@ -215,6 +227,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
                                 cardView.getId() * 16 + ordinal);
                         CardStateView csv = csvRegistry.get(csvKey);
                         if (csv == null) csv = findCsvByState(cardView, state);
+                        if (csv == null && existingCsvs != null) csv = existingCsvs.get(state);
                         if (csv == null) csv = cardView.createAlternateState(state);
                         cardView.set(prop, csv);
                     }
@@ -500,6 +513,20 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
             case DeltaPacket.TYPE_CSV: return "CardStateView";
             default: return "Unknown(type=" + objectType + ")";
         }
+    }
+
+    private static Map<CardStateName, CardStateView> snapshotExistingCsvs(CardView cardView) {
+        Map<CardStateName, CardStateView> map = new HashMap<>();
+        CardStateView csv;
+        csv = cardView.getCurrentState();
+        if (csv != null) map.put(csv.getState(), csv);
+        csv = cardView.getAlternateState();
+        if (csv != null) map.put(csv.getState(), csv);
+        csv = cardView.getLeftSplitState();
+        if (csv != null) map.put(csv.getState(), csv);
+        csv = cardView.getRightSplitState();
+        if (csv != null) map.put(csv.getState(), csv);
+        return map;
     }
 
     private static CardStateView findCsvByState(CardView parent, CardStateName state) {

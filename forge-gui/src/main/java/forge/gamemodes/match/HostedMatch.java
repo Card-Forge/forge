@@ -280,8 +280,22 @@ public class HostedMatch {
                 playbackControl.setGame(game);
                 game.subscribeToEvents(playbackControl);
             }
+            // Chain the initial delta sync with any existing startGameHook.
+            // This runs after game initialization (hands drawn, commanders placed,
+            // opening hand actions) but before the first turn, ensuring the initial
+            // sync captures the complete game state.
+            Runnable combinedHook = () -> {
+                for (final Entry<IGuiGame, Collection<PlayerView>> e : playersPerGui.asMap().entrySet()) {
+                    if (e.getKey() instanceof forge.gamemodes.net.server.RemoteClientGuiGame rcg) {
+                        rcg.sendFullState();
+                    }
+                }
+                if (startGameHook != null) {
+                    startGameHook.run();
+                }
+            };
             // Actually start the game!
-            match.startGame(game, startGameHook);
+            match.startGame(game, combinedHook);
             // this function waits?
             if (endGameHook != null){
                 endGameHook.run();
