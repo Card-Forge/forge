@@ -62,7 +62,12 @@ public final class DeltaPacket implements NetEvent {
      * Create a composite delta key encoding both object type and ID.
      * Upper 4 bits = type (0-15), lower 28 bits = ID.
      */
-    public static int makeDeltaKey(int type, int id) {
+    public static int makeDeltaKey(TrackableObject obj) {
+        int type = typeTagFor(obj);
+        int id = obj.getId();
+        if (obj instanceof CardStateView csv) {
+            id *= 16 + csv.getState().ordinal();
+        }
         return (type << 28) | (id & 0x0FFFFFFF);
     }
 

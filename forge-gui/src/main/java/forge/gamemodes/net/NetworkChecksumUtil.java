@@ -24,7 +24,7 @@ import java.util.Set;
 
 /**
  * Shared checksum computation for delta sync validation.
- * Used by both server (DeltaSyncManager) and client (NetworkGuiGame)
+ * Used by both server ({@link forge.gamemodes.net.server.DeltaSyncManager}) and client ({@link forge.gamemodes.net.NetworkGuiGame})
  * to ensure identical checksums.
  */
 public final class NetworkChecksumUtil {
@@ -51,7 +51,7 @@ public final class NetworkChecksumUtil {
      * @param players the players to include (will be sorted by ID internally)
      * @return checksum value
      */
-    public static int computeStateChecksum(int turn, int phaseOrdinal, Iterable<PlayerView> players) {
+    static int computeStateChecksum(int turn, int phaseOrdinal, Iterable<PlayerView> players) {
         int hash = 17;
         hash = 31 * hash + turn;
         if (phaseOrdinal >= 0) {
@@ -81,7 +81,6 @@ public final class NetworkChecksumUtil {
         }
         int hash = computeStateChecksum(turn, phaseOrdinal, gameView.getPlayers());
 
-        // Deep checksum: per-player zone sizes and mana (using effective values)
         for (PlayerView player : getSortedPlayers(gameView)) {
             hash = 31 * hash + player.getZoneSize(ZoneType.Hand);
             hash = 31 * hash + player.getZoneSize(ZoneType.Battlefield);
@@ -89,7 +88,6 @@ public final class NetworkChecksumUtil {
             hash = 31 * hash + player.getZoneSize(ZoneType.Exile);
             hash = 31 * hash + player.getZoneSize(ZoneType.Command);
 
-            // Mana pool hash (use effective value for frozen tracker)
             Object manaObj = getEffectiveValue(player, TrackableProperty.Mana);
             int manaHash = 0;
             if (manaObj instanceof int[] manaPool) {
@@ -115,7 +113,6 @@ public final class NetworkChecksumUtil {
 
         for (CardView card : allBattlefieldCards) {
             hash = 31 * hash + card.getId();
-            // Read via getEffectiveValue to include delayed props during tracker freeze
             hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Tapped)) ? 1 : 0);
             CardView.CardStateView state = card.getCurrentState();
             if (state != null) {
@@ -129,7 +126,6 @@ public final class NetworkChecksumUtil {
             Object ctrl = getEffectiveValue(card, TrackableProperty.Controller);
             hash = 31 * hash + (ctrl instanceof PlayerView ? ((PlayerView) ctrl).getId() : -1);
 
-            // Total counter count
             Object countersObj = getEffectiveValue(card, TrackableProperty.Counters);
             int counterTotal = 0;
             if (countersObj instanceof Map) {
@@ -147,7 +143,6 @@ public final class NetworkChecksumUtil {
             hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Flipped)) ? 1 : 0);
         }
 
-        // Deep checksum: combat state
         CombatView combat = gameView.getCombat();
         if (combat != null) {
             hash = 31 * hash + combat.getNumAttackers();
@@ -161,7 +156,6 @@ public final class NetworkChecksumUtil {
             }
         }
 
-        // Deep checksum: stack size
         if (gameView.getStack() != null) {
             hash = 31 * hash + gameView.getStack().size();
         }
@@ -337,9 +331,8 @@ public final class NetworkChecksumUtil {
             return eligibleProperties;
         }
         eligibleProperties = EnumSet.noneOf(TrackableProperty.class);
-        for (TrackableProperty prop : TrackableProperty.values()) {
+        for (TrackableProperty prop : getAllProperties()) {
             TrackableType<?> type = prop.getType();
-            // Exclude types that are nested containers or not meaningful for desync detection
             if (type == TrackableTypes.CardStateViewType
                     || type == TrackableTypes.CombatViewType
                     || type == TrackableTypes.IPaperCardType
@@ -361,9 +354,6 @@ public final class NetworkChecksumUtil {
     /**
      * Walk the GameView object graph in deterministic order and collect
      * all TrackableObjects whose properties should be sampled.
-     * Order: GameView, Players (sorted by ID), per-player visible zone cards
-     * (Battlefield, Hand, Graveyard, Exile, Command — sorted by ID),
-     * per-card state views (Current, Alternate, Left, Right), StackItemViews.
      */
     public static List<TrackableObject> collectChecksumObjects(GameView gameView) {
         List<TrackableObject> objects = new ArrayList<>();
@@ -371,14 +361,11 @@ public final class NetworkChecksumUtil {
             return objects;
         }
 
-        // 1. GameView itself
         objects.add(gameView);
 
-        // 2. Players sorted by ID
         List<PlayerView> players = getSortedPlayers(gameView);
         objects.addAll(players);
 
-        // 3. Per-player visible zone cards, sorted by ID
         for (PlayerView player : players) {
             List<CardView> cards = new ArrayList<>();
             addCardsFromZone(cards, player.getBattlefield());
@@ -390,7 +377,6 @@ public final class NetworkChecksumUtil {
 
             for (CardView card : cards) {
                 objects.add(card);
-                // 4. Card state views (skip nulls)
                 addIfNotNull(objects, card.getCurrentState());
                 addIfNotNull(objects, card.getAlternateState());
                 addIfNotNull(objects, card.getLeftSplitState());
@@ -398,7 +384,6 @@ public final class NetworkChecksumUtil {
             }
         }
 
-        // 5. StackItemViews sorted by ID
         if (gameView.getStack() != null) {
             List<StackItemView> stackItems = new ArrayList<>();
             for (StackItemView siv : gameView.getStack()) {
@@ -445,10 +430,7 @@ public final class NetworkChecksumUtil {
     }
 
     /**
-     * Hash a property value generically for checksum purposes.
-     * Handles TrackableObject references (by ID), TrackableCollections (sorted IDs),
-     * Maps (sorted entries), Enums (by ordinal for cross-JVM consistency),
-     * and everything else via Objects.hashCode.
+     * Hash a property value specifically for checksum purposes.
      */
     static int hashPropertyValue(Object value) {
         if (value == null) {
@@ -485,8 +467,8 @@ public final class NetworkChecksumUtil {
 
     /**
      * Compute a sampled checksum over a dynamic set of TrackableProperties.
-     * Starts with the core state checksum (turn + phase + player life), then
-     * reads the specified properties from all objects in the game view graph.
+     * Starts with the core state checksum, then reads the specified
+     * properties from all objects in the game view graph.
      *
      * @param gameView the game view to checksum
      * @param sampledPropertyOrdinals ordinals of TrackableProperty values to sample
@@ -520,8 +502,6 @@ public final class NetworkChecksumUtil {
             sampled[i] = allProps[sampledPropertyOrdinals[i]];
         }
 
-        // Walk object graph and hash sampled properties using effective values
-        // (includes delayed props during tracker freeze)
         List<TrackableObject> objects = collectChecksumObjects(gameView);
         for (TrackableObject obj : objects) {
             if (obj.getProps() == null) continue;

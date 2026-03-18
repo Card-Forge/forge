@@ -515,12 +515,12 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
     }
 
     @Override
-    public boolean isNetGame() { return true; }
+    public boolean isNetGame() {
+        return true;
+    }
 
     @Override
-    protected void updateCurrentPlayer(final PlayerView player) {
-        // TODO Auto-generated method stub
-    }
+    protected void updateCurrentPlayer(final PlayerView player) {}
 
     @Override
     public String toString() {

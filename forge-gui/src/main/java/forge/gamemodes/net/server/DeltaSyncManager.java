@@ -38,7 +38,7 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * Manages delta synchronization between server and clients.
  * Tracks changes to TrackableObjects via per-consumer dirty tracking and builds
- * minimal delta packets using property maps (standard Java serialization).
+ * minimal delta packets using property maps.
  */
 public class DeltaSyncManager implements IHasNetLog {
 
@@ -181,22 +181,12 @@ public class DeltaSyncManager implements IHasNetLog {
         return new DeltaPacket(seq, objectDeltas, newObjects, checksum, checksumPropertyOrdinals);
     }
 
-    // ==================== Object type and key management ====================
-
-    private static int deltaKeyFor(TrackableObject obj) {
-        if (obj instanceof CardStateView csv) {
-            return DeltaPacket.makeDeltaKey(DeltaPacket.TYPE_CSV,
-                    csv.getId() * 16 + csv.getState().ordinal());
-        }
-        return DeltaPacket.makeDeltaKey(DeltaPacket.typeTagFor(obj), obj.getId());
-    }
-
     // ==================== Delta collection ====================
 
     private void collectObjectDelta(TrackableObject obj,
                                     Map<Integer, Map<TrackableProperty, Object>> objectDeltas,
                                     Map<Integer, Map<TrackableProperty, Object>> newObjects) {
-        int deltaKey = deltaKeyFor(obj);
+        int deltaKey = DeltaPacket.makeDeltaKey(obj);
 
         if (!sentObjectIds.contains(deltaKey)) {
             // New object — register consumer and build full property map
@@ -264,9 +254,9 @@ public class DeltaSyncManager implements IHasNetLog {
         }
         int type = DeltaPacket.typeTagFor(obj);
         if (type < 0) {
-            return; // CombatView and any other non-delta objects
+            return;
         }
-        int deltaKey = deltaKeyFor(obj);
+        int deltaKey = DeltaPacket.makeDeltaKey(obj);
         if (currentObjectIds.contains(deltaKey)) {
             // Same deltaKey seen earlier this pass (e.g. stale CardView in Commander
             // property walked before current CardView in Battlefield zone collection).
@@ -499,7 +489,7 @@ public class DeltaSyncManager implements IHasNetLog {
     }
 
     private void registerAndMark(TrackableObject obj) {
-        int deltaKey = deltaKeyFor(obj);
+        int deltaKey = DeltaPacket.makeDeltaKey(obj);
         sentObjectIds.add(deltaKey);
         registeredByKey.put(deltaKey, obj);
         obj.registerConsumer(consumerId);
@@ -517,9 +507,9 @@ public class DeltaSyncManager implements IHasNetLog {
         }
         int type = DeltaPacket.typeTagFor(obj);
         if (type < 0) {
-            return; // CombatView and any other non-delta objects
+            return;
         }
-        int deltaKey = deltaKeyFor(obj);
+        int deltaKey = DeltaPacket.makeDeltaKey(obj);
         if (!visited.add(deltaKey)) {
             return;
         }
@@ -529,12 +519,12 @@ public class DeltaSyncManager implements IHasNetLog {
         Map<TrackableProperty, Object> props = obj.getProps();
         if (props != null) {
             for (Object value : props.values()) {
-                if (value instanceof TrackableObject) {
-                    walkAndMarkAsSent((TrackableObject) value, visited);
+                if (value instanceof TrackableObject to) {
+                    walkAndMarkAsSent(to, visited);
                 } else if (value instanceof TrackableCollection) {
                     for (Object item : (TrackableCollection<?>) value) {
-                        if (item instanceof TrackableObject) {
-                            walkAndMarkAsSent((TrackableObject) item, visited);
+                        if (item instanceof TrackableObject to) {
+                            walkAndMarkAsSent(to, visited);
                         }
                     }
                 }
