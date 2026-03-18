@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="105">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="106">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx" />
  </editorsettings>
@@ -256,6 +256,11 @@
         ]
     }
 ]</property>
+   </properties>
+  </object>
+   <object id="105" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="381.5" y="426.5" width="60" height="40">
+   <properties>
+    <property name="dialog">[{"condition":[{"item":"Xira's Trophy"}],"text":"","options":[],"action":[{"removeItem":"Xira's Trophy"},{"addItem":"Xira's Trophy"}]}]</property>
    </properties>
   </object>
  </objectgroup>
