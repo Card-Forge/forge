@@ -697,7 +697,6 @@ public class ComputerUtil {
         }
 
         CardLists.sortByPowerAsc(typeList);
-
         // TODO prefer noncreatures without tap abilities
 
         final CardCollection tapList = new CardCollection();
@@ -705,7 +704,6 @@ public class ComputerUtil {
         for (int i = 0; i < amount; i++) {
             tapList.add(typeList.get(i));
         }
-
         return tapList;
     }
 
