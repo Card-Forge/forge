@@ -1253,7 +1253,7 @@ public class CountersPutAi extends CountersAi {
         int predictedLife = ComputerUtil.predictNextCombatsRemainingLife(ai, false, true, 0, blockerList);
 
         if (ph.is(PhaseType.MAIN2, ai)) {
-            if (blockerList.isEmpty() || predictedLife >= ai.getStartingLife() * 2 / 3) {
+            if (blockerList.isEmpty() || predictedLife > ai.getStartingLife() * 2 / 3) {
                 if (source.getCounters(CounterEnumType.CHARGE) < numStation) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
