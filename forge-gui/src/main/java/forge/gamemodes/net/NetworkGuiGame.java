@@ -223,7 +223,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
                     } else {
                         int ordinal = (Integer) value;
                         CardStateName state = CardStateName.values()[ordinal];
-                        int csvKey = DeltaPacket.makeDeltaKey(obj);
+                        int csvKey = DeltaPacket.makeDeltaKey(DeltaPacket.TYPE_CSV, cardView.getId() * 16 + ordinal);
                         CardStateView csv = csvRegistry.get(csvKey);
                         if (csv == null) csv = findCsvByState(cardView, state);
                         if (csv == null && existingCsvs != null) csv = existingCsvs.get(state);
