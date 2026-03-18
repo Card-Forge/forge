@@ -282,6 +282,5 @@
 ]</property>
    </properties>
   </object>
-  <object id="124" template="../../../../common/maps/obj/collision.tx" x="182.259" y="92.7417" width="67.4828" height="23.85"/>
  </objectgroup>
 </map>
