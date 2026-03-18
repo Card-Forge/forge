@@ -189,9 +189,15 @@ public class DeltaSyncManager implements IHasNetLog {
         int deltaKey = DeltaPacket.makeDeltaKey(obj);
 
         if (!sentObjectIds.contains(deltaKey)) {
-            // New object — register consumer and build full property map
+            // New object — register consumer and build full property map.
+            // Clear dirty props BEFORE building the map so that any concurrent
+            // game-thread writes create NEW dirty bits that survive the clear.
+            // If we cleared AFTER, a write between buildFullPropertyMap (reads
+            // stale value) and getAndClearDirtyProps (clears the update's bit)
+            // would permanently lose the update.
             obj.registerConsumer(consumerId);
             registeredByKey.put(deltaKey, obj);
+            obj.getAndClearDirtyProps(consumerId);
 
             Map<TrackableProperty, Object> allProps = buildFullPropertyMap(obj);
             mergeDelayedProps(obj, allProps);
@@ -200,9 +206,6 @@ public class DeltaSyncManager implements IHasNetLog {
                 netLog.trace("[DeltaSync] New object: key={} id={}, {} props",
                         String.format("0x%08X", deltaKey), obj.getId(), allProps.size());
             }
-
-            // Clear dirty props since we just sent everything
-            obj.getAndClearDirtyProps(consumerId);
         } else if (registeredByKey.get(deltaKey) != obj) {
             // Replacement instance — different object at same key (e.g. zone change
             // creates a new Card+CardView via copyCard). Transfer consumer registration
@@ -215,10 +218,11 @@ public class DeltaSyncManager implements IHasNetLog {
             }
             obj.registerConsumer(consumerId);
             registeredByKey.put(deltaKey, obj);
+            obj.getAndClearDirtyProps(consumerId);
             Map<TrackableProperty, Object> allProps = buildFullPropertyMap(obj);
             mergeDelayedProps(obj, allProps);
-            obj.getAndClearDirtyProps(consumerId);
             if (!allProps.isEmpty()) {
+                objectDeltas.remove(deltaKey);
                 newObjects.put(deltaKey, allProps);
                 netLog.trace("[DeltaSync] Replaced instance: key={} id={}, {} props",
                         String.format("0x%08X", deltaKey), obj.getId(), allProps.size());
@@ -260,18 +264,20 @@ public class DeltaSyncManager implements IHasNetLog {
         if (currentObjectIds.contains(deltaKey)) {
             // Same deltaKey seen earlier this pass (e.g. stale CardView in Commander
             // property walked before current CardView in Battlefield zone collection).
-            // If this is a different Java instance not yet tracked, let it through for
-            // replacement detection in collectObjectDelta.
-            if (registeredByKey.containsValue(obj)) {
+            // If this is the exact same Java instance, it was already fully processed.
+            if (registeredByKey.get(deltaKey) == obj) {
                 return;
             }
+            // Different instance at same key — let replacement detection handle the
+            // delta, then fall through to walk children so that child replacements
+            // (e.g. CardStateViews with updated P/T) are also picked up.
             collectObjectDelta(obj, objectDeltas, newObjects);
-            return;
+        } else {
+            currentObjectIds.add(deltaKey);
+            collectObjectDelta(obj, objectDeltas, newObjects);
         }
-        currentObjectIds.add(deltaKey);
 
-        collectObjectDelta(obj, objectDeltas, newObjects);
-
+        obj.getVersion(); // volatile read — memory barrier for child traversal
         Map<TrackableProperty, Object> props = obj.getProps();
         if (props != null) {
             for (Object value : props.values()) {
@@ -316,6 +322,11 @@ public class DeltaSyncManager implements IHasNetLog {
      */
     private Map<TrackableProperty, Object> buildPropertyMap(TrackableObject obj,
                                                              EnumSet<TrackableProperty> dirtyProps) {
+        // Volatile read of version establishes happens-before from the game thread's
+        // props.put (which precedes the volatile version++ in markDirtyForConsumers).
+        // Without this, the daemon thread's props.get may see stale values when the
+        // game thread modifies properties concurrently after the dirty bit was consumed.
+        obj.getVersion();
         Map<TrackableProperty, Object> props = obj.getProps();
         Map<TrackableProperty, Object> delta = new EnumMap<>(TrackableProperty.class);
         for (TrackableProperty prop : dirtyProps) {
@@ -331,6 +342,7 @@ public class DeltaSyncManager implements IHasNetLog {
      * Build a full property map for a new object (all properties).
      */
     private Map<TrackableProperty, Object> buildFullPropertyMap(TrackableObject obj) {
+        obj.getVersion(); // volatile read — memory barrier (see buildPropertyMap)
         Map<TrackableProperty, Object> props = obj.getProps();
         if (props == null || props.isEmpty()) {
             return new EnumMap<>(TrackableProperty.class);
@@ -393,17 +405,9 @@ public class DeltaSyncManager implements IHasNetLog {
             return ids;
         }
 
-        // Defensive copy mutable collections at the serialization boundary.
-        // Views use in-place mutation + flagAsChanged(), so the live reference
-        // could be mutated by the game thread while Netty serializes the packet.
-        // (some like TrackableProperty.Mana are already safe but that's a minor optimization)
-        if (value instanceof Map) {
-            return new HashMap<>((Map<?, ?>) value);
-        }
-        if (value instanceof List) {
-            return new ArrayList<>((List<?>) value);
-        }
-
+        // No defensive copy needed here — flagAsChanged() now replaces mutable
+        // values with immutable copies at mutation time, and set() callers create
+        // new instances by convention. Values in props are safe to pass through.
         return value;
     }
 
@@ -495,6 +499,54 @@ public class DeltaSyncManager implements IHasNetLog {
         obj.registerConsumer(consumerId);
         // Clear any dirty props accumulated before registration
         obj.getAndClearDirtyProps(consumerId);
+    }
+
+    /**
+     * Register consumers on objects not yet tracked, without clearing dirty bits.
+     * Used when the view graph has been populated after the initial sendFullState
+     * (which sees an empty view). Objects already registered by collectDeltas'
+     * new-object path are skipped — their consumers and dirty bits are preserved.
+     */
+    public void registerNewObjects(GameView gameView) {
+        if (gameView == null) {
+            return;
+        }
+        int before = registeredByKey.size();
+        walkAndRegisterNew(gameView, new HashSet<>());
+        int added = registeredByKey.size() - before;
+        if (added > 0) {
+            netLog.info("[DeltaSync] Registered {} new objects (total {})", added, registeredByKey.size());
+        }
+    }
+
+    private void walkAndRegisterNew(TrackableObject obj, Set<Integer> visited) {
+        if (obj == null) return;
+        int type = DeltaPacket.typeTagFor(obj);
+        if (type < 0) return;
+        int deltaKey = DeltaPacket.makeDeltaKey(obj);
+        if (!visited.add(deltaKey)) return;
+
+        // Only register consumer if not already tracked — don't add to
+        // sentObjectIds so collectDeltas' new-object path still fires and
+        // sends the full property map to the client.
+        if (!registeredByKey.containsKey(deltaKey)) {
+            obj.registerConsumer(consumerId);
+        }
+
+        Map<TrackableProperty, Object> props = obj.getProps();
+        if (props != null) {
+            for (Object value : props.values()) {
+                if (value instanceof TrackableObject) {
+                    walkAndRegisterNew((TrackableObject) value, visited);
+                } else if (value instanceof TrackableCollection) {
+                    for (Object item : (TrackableCollection<?>) value) {
+                        if (item instanceof TrackableObject) {
+                            walkAndRegisterNew((TrackableObject) item, visited);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     /**

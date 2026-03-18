@@ -46,6 +46,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
     private final Object deltaLock = new Object();
     public static boolean useDeltaSync = true;
     private boolean initialSyncSent = false;
+    private boolean objectsRegistered = false;
     private boolean fallbackLogged = false;  // Prevent duplicate fallback log messages
     private volatile boolean paused;
     private GameEventForwarder forwarder;
@@ -85,6 +86,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
      */
     public void resetForReconnect() {
         initialSyncSent = false;
+        objectsRegistered = false;
         fallbackLogged = false;
         deltaSyncManager.reset();
     }
@@ -223,8 +225,13 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
         send(ProtocolMethod.setGameView, gameView, seq);
         initialSyncSent = true;
 
-        // Register consumer on all objects — per-consumer dirty tracking starts here
-        deltaSyncManager.markObjectsAsSent(gameView);
+        // Consumer registration is deferred — it happens on the first collectDeltas()
+        // call (see updateGameView). This ensures that all objects created during game
+        // initialization (prepareAllZones, hand dealing, commander placement) are present
+        // in the view graph when registration occurs. If we registered here, the view
+        // is still empty (openView runs before match.startGame/prepareAllZones), and
+        // zone updates during init would set dirty bits on the 3 registered objects
+        // but the Command zone dirty bit is sporadically lost (~10% of Commander games).
     }
 
     @Override
@@ -237,10 +244,8 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
     public void openView(final TrackableCollection<PlayerView> myPlayers) {
         send(ProtocolMethod.openView, myPlayers);
         updateGameView();
-        // Note: sendFullState() is NOT called here. It is deferred to the
-        // startGameHook (after game initialization completes) so the initial
-        // sync captures the full game state including drawn hands, commanders,
-        // and command zone effects. See HostedMatch.startGame().
+        // Initialize delta sync by sending the initial full state
+        sendFullState();
     }
 
     @Override
@@ -473,6 +478,23 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
         if (paused) { return; }
         netLog.info("Sending batch of {}: [{}]", events.size(),
                 events.stream().map(e -> e.getClass().getSimpleName()).collect(Collectors.joining(", ")));
+        // When GameEventGameStarted arrives, prepareAllZones has completed —
+        // commanders are placed and zones are populated. Register consumers on
+        // any objects not yet tracked (without clearing dirty bits).
+        if (!objectsRegistered) {
+            for (GameEvent ev : events) {
+                if (ev instanceof forge.game.event.GameEventGameStarted) {
+                    GameView gv = getGameView();
+                    if (gv != null) {
+                        synchronized (deltaLock) {
+                            deltaSyncManager.registerNewObjects(gv);
+                            objectsRegistered = true;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
         Tracker tracker = getGameView() != null ? getGameView().getTracker() : null;
         List<Object> proxied = GameEventProxy.wrapAll(events, tracker);
         if (useDeltaSync && initialSyncSent) {

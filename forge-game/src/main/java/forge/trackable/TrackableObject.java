@@ -16,7 +16,7 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
     private final int id;
     protected transient Tracker tracker;
     private final Map<TrackableProperty, Object> props;
-    private int version;
+    private volatile int version;
     // Per-consumer dirty tracking. Lazy-init: null until first registerConsumer.
     // In offline games (no consumers), set() does no tracking work at all.
     private transient Map<Integer, EnumSet<TrackableProperty>> consumers;
@@ -98,12 +98,13 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
      * Mark a property as dirty for all registered consumers and increment version.
      */
     private void markDirtyForConsumers(final TrackableProperty key) {
+        if (consumers == null) {
+            return;
+        }
         version++;
-        if (consumers != null) {
-            for (EnumSet<TrackableProperty> dirtySet : consumers.values()) {
-                synchronized (dirtySet) {
-                    dirtySet.add(key);
-                }
+        for (EnumSet<TrackableProperty> dirtySet : consumers.values()) {
+            synchronized (dirtySet) {
+                dirtySet.add(key);
             }
         }
     }
@@ -128,7 +129,24 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
     }
 
     // use when updating collection type properties without using set (or assigning the same object)
+    @SuppressWarnings("unchecked")
     protected final void flagAsChanged(final TrackableProperty key) {
+        // In network games, replace the mutable value with an immutable defensive copy.
+        // Callers mutate Map/List/Collection in-place then call this method. Without the
+        // copy, the daemon thread's toNetworkValue or walkAndCollect could iterate the
+        // same mutable object while the game thread mutates it on the next update.
+        if (consumers != null) {
+            Object value = props.get(key);
+            if (value instanceof TrackableCollection) {
+                TrackableCollection copy = new TrackableCollection<>();
+                copy.addAll((TrackableCollection<?>) value);
+                props.put(key, copy);
+            } else if (value instanceof Map) {
+                props.put(key, new java.util.HashMap<>((Map<?, ?>) value));
+            } else if (value instanceof java.util.List) {
+                props.put(key, new java.util.ArrayList<>((java.util.List<?>) value));
+            }
+        }
         markDirtyForConsumers(key);
         key.updateObjLookup(tracker, props.get(key));
     }
