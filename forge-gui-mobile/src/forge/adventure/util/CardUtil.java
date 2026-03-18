@@ -317,8 +317,8 @@ public class CardUtil {
                 PaperCard candidate = pool.get(r.nextInt(pool.size()));
                 if (candidate != null) {
                     if (allCardVariants) {
-                        // Get a random set variant
-                        PaperCard finalCandidate = CardUtil.getCardByName(candidate.getCardName());
+                        // Get a random variant, preserving edition when specified
+                        PaperCard finalCandidate = CardUtil.getCardByNameAndEdition(candidate.getCardName(), candidate.getEdition());
                         result.add(finalCandidate);
                     } else {
                         result.add(candidate);
