@@ -119,6 +119,7 @@ public enum EDocID {
     HAND_7 (),
 
     // Dockable zones, use setDoc to register.
+    ZONE_HAND (),
     ZONE_LIBRARY (),
     ZONE_GRAVEYARD (),
     ZONE_EXILE (),
@@ -165,6 +166,7 @@ public enum EDocID {
 
     private static final Map<ZoneType, EDocID> ZONE_DOC_IDS = new EnumMap<>(ZoneType.class);
     static {
+        ZONE_DOC_IDS.put(ZoneType.Hand, ZONE_HAND);
         ZONE_DOC_IDS.put(ZoneType.Library, ZONE_LIBRARY);
         ZONE_DOC_IDS.put(ZoneType.Graveyard, ZONE_GRAVEYARD);
         ZONE_DOC_IDS.put(ZoneType.Exile, ZONE_EXILE);

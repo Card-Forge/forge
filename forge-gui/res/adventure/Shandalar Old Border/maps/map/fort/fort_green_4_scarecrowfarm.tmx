@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="33" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="125">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx" />
@@ -41,29 +41,46 @@
    <properties>
     <property name="reward">[
   {
-    "editions": [ "UGL" ],
     "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.04,
     "count": 3,
-    "rarity": [ "Common" ]
+    "addMaxCount": 2
   },
   {
-    "editions": [ "UGL" ],
     "type": "card",
-    "count": 2,
-    "rarity": [ "Uncommon" ]
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.18,
+    "count": 3,
+    "addMaxCount": 2
   },
   {
-    "editions": [ "UGL" ],
     "type": "card",
-    "count": 1,
-    "rarity": [ "Rare" ]
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.66,
+    "count": 3,
+    "addMaxCount": 2
   },
   {
-    "editions": [ "UGL" ],
     "type": "card",
-    "count": 1,
-    "cardTypes": [ "Land" ],
-    "superTypes": [ "Basic" ]
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.66,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.32,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.14,
+    "count": 3,
+    "addMaxCount": 2
   }
 ]</property>
    </properties>
@@ -84,9 +101,9 @@
    <properties>
     <property name="effect">{ "startBattleWithCard": [ "Argothian Enchantress|USG", "Savannah|LEA", "Scarecrow|DRK", "Spellbook|EXO" ] }</property>
     <property name="enemy" value="Scarecrow Captain" />
-    <property name="threatRange" type="int" value="60" />
+    <property name="threatRange" type="int" value="100" />
     <property name="waypoints" value="98,117,118,117" />
-   </properties>
+   <property name="speedModifier" type="float" value="20" /></properties>
   </object>
   <object id="62" template="../../../../../../common/maps/obj/enemy.tx" x="353.762" y="308.389">
    <properties>
@@ -107,29 +124,87 @@
    <properties>
     <property name="reward">[
   {
-    "editions": [ "UGL" ],
     "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Savannah|LEA"
+  },
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Windswept Heath|ONS"
+  },
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Enchantress's Presence|ONS"
+  },
+  {
+    "type": "card",
+    "probability": 0.5,
+    "count": 1,
+    "cardName": "Argothian Enchantress|USG"
+  },
+  {
+    "type": "card",
+    "probability": 1,
     "count": 3,
-    "rarity": [ "Common" ]
+    "cardName": "Zodiac Rooster|PTK"
   },
   {
-    "editions": [ "UGL" ],
     "type": "card",
+    "probability": 1,
     "count": 2,
-    "rarity": [ "Uncommon" ]
+    "cardName": "Polluted Delta|ONS"
   },
   {
-    "editions": [ "UGL" ],
     "type": "card",
+    "probability": 1,
     "count": 1,
-    "rarity": [ "Rare" ]
+    "cardName": "Plains|UGL"
   },
   {
-    "editions": [ "UGL" ],
     "type": "card",
+    "probability": 1,
     "count": 1,
-    "cardTypes": [ "Land" ],
-    "superTypes": [ "Basic" ]
+    "cardName": "Island|UGL"
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.002,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.02,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.1,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.68,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 1.0,
+    "count": 1,
+    "addMaxCount": 2
   }
 ]</property>
    </properties>

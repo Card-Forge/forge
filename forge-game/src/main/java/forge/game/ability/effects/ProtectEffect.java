@@ -22,7 +22,6 @@ import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
-import forge.util.Localizer;
 import forge.util.TextUtil;
 
 public class ProtectEffect extends SpellAbilityEffect {
@@ -112,7 +111,7 @@ public class ProtectEffect extends SpellAbilityEffect {
             if (sa.hasParam("Choser") && sa.getParam("Choser").equals("Controller") && !tgtCards.isEmpty()) {
                 choser = tgtCards.get(0).getController();
             }
-            final String choice = choser.getController().chooseProtectionType(Localizer.getInstance().getMessage("lblChooseAProtection"), sa, choices);
+            final String choice = choser.getController().chooseProtectionType(sa, choices);
             if (null == choice)
                 return;
             gains.add(choice);

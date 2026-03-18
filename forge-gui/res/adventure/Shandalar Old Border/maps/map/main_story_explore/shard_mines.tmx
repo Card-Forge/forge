@@ -510,665 +510,240 @@
   <object id="10" template="../../../../../../common/maps/obj/gold.tx" x="176" y="1568" />
   <object id="11" template="../../../../../../common/maps/obj/treasure.tx" x="336" y="1136">
    <properties>
-    <property name="reward">[{
-  "count":3,
-  "type":"Union",
-  "probability": 1,
-  "cardUnion": [
-    {
-      "count":1,
-      "cardName": "Dwarven Miner|MIR"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Trader|HML"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Blastminer"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Miner"
-    },
-    {
-      "count":1,
-      "cardName": "Goblin Grenadiers|WTH"
-    },
-    {
-      "count":1,
-      "cardName": "Pardic Miner"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Weaponsmith|ATQ"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Demolition Team|LEA"
-    },
-    {
-      "count":1,
-      "cardName": "Cave Tiger|USG"
-    },
-    {
-      "count":1,
-      "cardName": "Excavation|PCY"
-    },
-    {
-      "count":1,
-      "cardName": "Howling Mine"
-    },
-    {
-      "count":1,
-      "cardName": "Orcish Mine"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Ruins|FEM"
-    },
-    {
-      "count":1,
-      "cardName": "Gemstone Mine"
-    },
-    {
-      "count":1,
-      "cardName": "Strip Mine"
-    },
-    {
-      "count":1,
-      "cardName": "Urza's Mine"
-    },
-    {
-      "count":1,
-      "cardName": "Excavator"
-    },
-    {
-      "count":1,
-      "cardName": "Shattering Pulse|EXO"
-    },
-    {
-      "count":1,
-      "cardName": "Soldevi Digger"
-    },
-    {
-      "count":1,
-      "cardName": "Entomb|ODY"
-    },
-    {
-      "count":1,
-      "cardName": "Goblin Digging Team"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Armorer|FEM"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Soldier|FEM"
-    },
-    {
-      "count":1,
-      "cardName": "Gemstone Mine|WTH"
-    },
-    {
-      "count":1,
-      "cardName": "Crystal Quarry"
-    },
-    {
-      "count":1,
-      "cardName": "Crystal Vein"
-    },
-    {
-      "count":1,
-      "cardName": "Ruins of Trokair|FEM"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Lieutenant|FEM"
-    },
-    {
-      "count":1,
-      "cardName": "Juggernaut|LEA"
-    },
-    {
-      "count":1,
-      "cardName": "Strip Mine|ATQ"
-    }
-  ]
-}]</property>
+    <property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.002,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.02,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.1,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.68,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 1.0,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property>
    </properties>
   </object>
   <object id="12" template="../../../../../../common/maps/obj/treasure.tx" x="400" y="544">
    <properties>
-    <property name="reward">[{
-  "count":3,
-  "type":"Union",
-  "probability": 1,
-  "cardUnion": [
-    {
-      "count":1,
-      "cardName": "Dwarven Miner|MIR"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Trader|HML"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Blastminer"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Miner"
-    },
-    {
-      "count":1,
-      "cardName": "Goblin Grenadiers|WTH"
-    },
-    {
-      "count":1,
-      "cardName": "Pardic Miner"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Weaponsmith|ATQ"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Demolition Team|LEA"
-    },
-    {
-      "count":1,
-      "cardName": "Cave Tiger|USG"
-    },
-    {
-      "count":1,
-      "cardName": "Excavation|PCY"
-    },
-    {
-      "count":1,
-      "cardName": "Howling Mine"
-    },
-    {
-      "count":1,
-      "cardName": "Orcish Mine"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Ruins|FEM"
-    },
-    {
-      "count":1,
-      "cardName": "Gemstone Mine"
-    },
-    {
-      "count":1,
-      "cardName": "Strip Mine"
-    },
-    {
-      "count":1,
-      "cardName": "Urza's Mine"
-    },
-    {
-      "count":1,
-      "cardName": "Excavator"
-    },
-    {
-      "count":1,
-      "cardName": "Shattering Pulse|EXO"
-    },
-    {
-      "count":1,
-      "cardName": "Soldevi Digger"
-    },
-    {
-      "count":1,
-      "cardName": "Entomb|ODY"
-    },
-    {
-      "count":1,
-      "cardName": "Goblin Digging Team"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Armorer|FEM"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Soldier|FEM"
-    },
-    {
-      "count":1,
-      "cardName": "Gemstone Mine|WTH"
-    },
-    {
-      "count":1,
-      "cardName": "Crystal Quarry"
-    },
-    {
-      "count":1,
-      "cardName": "Crystal Vein"
-    },
-    {
-      "count":1,
-      "cardName": "Ruins of Trokair|FEM"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Lieutenant|FEM"
-    },
-    {
-      "count":1,
-      "cardName": "Juggernaut|LEA"
-    },
-    {
-      "count":1,
-      "cardName": "Strip Mine|ATQ"
-    }
-
-  ]
-}]</property>
+    <property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.005,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.03,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.175,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.45,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.84,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.51,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property>
    </properties>
   </object>
   <object id="13" template="../../../../../../common/maps/obj/treasure.tx" x="144" y="192">
    <properties>
-    <property name="reward">[{
-  "count":3,
-  "type":"Union",
-  "probability": 1,
-  "cardUnion": [
-    {
-      "count":1,
-      "cardName": "Dwarven Miner|MIR"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Trader|HML"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Blastminer"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Miner"
-    },
-    {
-      "count":1,
-      "cardName": "Goblin Grenadiers|WTH"
-    },
-    {
-      "count":1,
-      "cardName": "Pardic Miner"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Weaponsmith|ATQ"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Demolition Team|LEA"
-    },
-    {
-      "count":1,
-      "cardName": "Cave Tiger|USG"
-    },
-    {
-      "count":1,
-      "cardName": "Excavation|PCY"
-    },
-    {
-      "count":1,
-      "cardName": "Howling Mine"
-    },
-    {
-      "count":1,
-      "cardName": "Orcish Mine"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Ruins|FEM"
-    },
-    {
-      "count":1,
-      "cardName": "Gemstone Mine"
-    },
-    {
-      "count":1,
-      "cardName": "Strip Mine"
-    },
-    {
-      "count":1,
-      "cardName": "Urza's Mine"
-    },
-    {
-      "count":1,
-      "cardName": "Excavator"
-    },
-    {
-      "count":1,
-      "cardName": "Shattering Pulse|EXO"
-    },
-    {
-      "count":1,
-      "cardName": "Soldevi Digger"
-    },
-    {
-      "count":1,
-      "cardName": "Entomb|ODY"
-    },
-    {
-      "count":1,
-      "cardName": "Goblin Digging Team"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Armorer|FEM"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Soldier|FEM"
-    },
-    {
-      "count":1,
-      "cardName": "Gemstone Mine|WTH"
-    },
-    {
-      "count":1,
-      "cardName": "Crystal Quarry"
-    },
-    {
-      "count":1,
-      "cardName": "Crystal Vein"
-    },
-    {
-      "count":1,
-      "cardName": "Ruins of Trokair|FEM"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Lieutenant|FEM"
-    },
-    {
-      "count":1,
-      "cardName": "Juggernaut|LEA"
-    },
-    {
-      "count":1,
-      "cardName": "Strip Mine|ATQ"
-    }
-
-  ]
-}]</property>
+    <property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.005,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.03,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.175,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.45,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.84,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.51,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property>
    </properties>
   </object>
   <object id="14" template="../../../../../../common/maps/obj/treasure.tx" x="416" y="128">
    <properties>
-    <property name="reward">[{
-  "count":3,
-  "type":"Union",
-  "probability": 1,
-  "cardUnion": [
-    {
-      "count":1,
-      "cardName": "Dwarven Miner|MIR"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Trader|HML"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Blastminer"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Miner"
-    },
-    {
-      "count":1,
-      "cardName": "Goblin Grenadiers|WTH"
-    },
-    {
-      "count":1,
-      "cardName": "Pardic Miner"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Weaponsmith|ATQ"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Demolition Team|LEA"
-    },
-    {
-      "count":1,
-      "cardName": "Cave Tiger|USG"
-    },
-    {
-      "count":1,
-      "cardName": "Excavation|PCY"
-    },
-    {
-      "count":1,
-      "cardName": "Howling Mine"
-    },
-    {
-      "count":1,
-      "cardName": "Orcish Mine"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Ruins|FEM"
-    },
-    {
-      "count":1,
-      "cardName": "Gemstone Mine"
-    },
-    {
-      "count":1,
-      "cardName": "Strip Mine"
-    },
-    {
-      "count":1,
-      "cardName": "Urza's Mine"
-    },
-    {
-      "count":1,
-      "cardName": "Excavator"
-    },
-    {
-      "count":1,
-      "cardName": "Shattering Pulse|EXO"
-    },
-    {
-      "count":1,
-      "cardName": "Soldevi Digger"
-    },
-    {
-      "count":1,
-      "cardName": "Entomb|ODY"
-    },
-    {
-      "count":1,
-      "cardName": "Goblin Digging Team"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Armorer|FEM"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Soldier|FEM"
-    },
-    {
-      "count":1,
-      "cardName": "Gemstone Mine|WTH"
-    },
-    {
-      "count":1,
-      "cardName": "Crystal Quarry"
-    },
-    {
-      "count":1,
-      "cardName": "Crystal Vein"
-    },
-    {
-      "count":1,
-      "cardName": "Ruins of Trokair|FEM"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Lieutenant|FEM"
-    },
-    {
-      "count":1,
-      "cardName": "Juggernaut|LEA"
-    },
-    {
-      "count":1,
-      "cardName": "Strip Mine|ATQ"
-    }
-
-  ]
-}]</property>
+    <property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.005,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.03,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.175,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.45,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.84,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.51,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property>
    </properties>
   </object>
   <object id="15" template="../../../../../../common/maps/obj/treasure.tx" x="144" y="608">
    <properties>
-    <property name="reward">[{
-  "count":3,
-  "type":"Union",
-  "probability": 1,
-  "cardUnion": [
-    {
-      "count":1,
-      "cardName": "Dwarven Miner|MIR"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Trader|HML"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Blastminer"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Miner"
-    },
-    {
-      "count":1,
-      "cardName": "Goblin Grenadiers|WTH"
-    },
-    {
-      "count":1,
-      "cardName": "Pardic Miner"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Weaponsmith|ATQ"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Demolition Team|LEA"
-    },
-    {
-      "count":1,
-      "cardName": "Cave Tiger|USG"
-    },
-    {
-      "count":1,
-      "cardName": "Excavation|PCY"
-    },
-    {
-      "count":1,
-      "cardName": "Howling Mine"
-    },
-    {
-      "count":1,
-      "cardName": "Orcish Mine"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Ruins|FEM"
-    },
-    {
-      "count":1,
-      "cardName": "Gemstone Mine"
-    },
-    {
-      "count":1,
-      "cardName": "Strip Mine"
-    },
-    {
-      "count":1,
-      "cardName": "Urza's Mine"
-    },
-    {
-      "count":1,
-      "cardName": "Excavator"
-    },
-    {
-      "count":1,
-      "cardName": "Shattering Pulse|EXO"
-    },
-    {
-      "count":1,
-      "cardName": "Soldevi Digger"
-    },
-    {
-      "count":1,
-      "cardName": "Entomb|ODY"
-    },
-    {
-      "count":1,
-      "cardName": "Goblin Digging Team"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Armorer|FEM"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Soldier|FEM"
-    },
-    {
-      "count":1,
-      "cardName": "Gemstone Mine|WTH"
-    },
-    {
-      "count":1,
-      "cardName": "Crystal Quarry"
-    },
-    {
-      "count":1,
-      "cardName": "Crystal Vein"
-    },
-    {
-      "count":1,
-      "cardName": "Ruins of Trokair|FEM"
-    },
-    {
-      "count":1,
-      "cardName": "Dwarven Lieutenant|FEM"
-    },
-    {
-      "count":1,
-      "cardName": "Juggernaut|LEA"
-    },
-    {
-      "count":1,
-      "cardName": "Strip Mine|ATQ"
-    }
-  ]
-},
-{
-  "type": "item",
-  "count": 1,
-  "itemName": "Landscape Sketchbook - Ixalan"
-}]</property>
+    <property name="reward">[
+  {
+    "type": "item",
+    "count": 1,
+    "itemName": "Landscape Sketchbook - Ixalan"
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.005,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.03,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.175,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.45,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.84,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.51,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property>
    </properties>
   </object>
   <object id="16" template="../../../../../../common/maps/obj/manashards.tx" x="32" y="864" />

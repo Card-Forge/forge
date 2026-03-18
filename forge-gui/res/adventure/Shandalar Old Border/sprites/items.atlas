@@ -303,9 +303,6 @@ TheBlackstaffofWaterdeep
 UnerringSling
   xy: 176, 448
   size: 16, 16
-JeweledAmulet
-  xy: 80, 848
-  size: 16, 16
 TravelersAmulet
   xy: 144, 864
   size: 16, 16
@@ -393,14 +390,8 @@ BlueStaff
 WhiteStaff
   xy: 352,160
   size: 16, 16
-BlueStaff
-  xy: 336,160
-  size: 16, 16
 DeathMagusStaff
   xy: 176,608
-  size: 16, 16
-SunMagusStaff
-  xy: 304,560
   size: 16, 16
 WildMagusStaff
   xy: 192,560
@@ -615,18 +606,6 @@ WorryBeads
 AcidicDagger
   xy: 304, 320
   size: 16, 16
-AladdinsRing
-  xy: 112, 992
-  size: 16, 16
-AmuletOfAzar
-  xy: 80, 816
-  size: 16, 16
-ArmorOfEvil
-  xy: 240, 96
-  size: 16, 16
-ArmorOfYawgmoth
-  xy: 240, 96
-  size: 16, 16
 AshnodsBattleGear
   xy: 224, 80
   size: 16, 16
@@ -681,9 +660,6 @@ GladiatorsGreaves
 GoblinTrumpet
   xy: 256, 928
   size: 16, 16
-GoldArmor
-  xy: 288, 96
-  size: 16, 16
 GrizzlyGlaive
   xy: 288, 544
   size: 16, 16
@@ -708,9 +684,6 @@ JestersCap
 JeweledNecklace
   xy: 80, 848
   size: 16, 16
-MadStaff
-  xy: 304, 608
-  size: 16, 16
 MapToTheVale
   xy: 176, 880
   size: 16, 16
@@ -728,9 +701,6 @@ WhaleboneGlider
   size: 16, 16
 MillersShoes
   xy: 128, 144
-  size: 16, 16
-PandorasBox
-  xy: 0, 736
   size: 16, 16
 PhyrexianGrimoire
   xy: 64, 672
@@ -789,9 +759,6 @@ TriangleOfWar
 TriassicEgg
   xy: 16, 544
   size: 16, 16
-UnerringSling
-  xy: 176, 448
-  size: 16, 16
 WarBeastRidersBoots
   xy: 48, 144
   size: 16, 16
@@ -809,9 +776,6 @@ RiverWaders
   size: 16, 16
 ClawsOfGix
   xy: 304, 848
-  size: 16, 16
-SulfuricStaff
-  xy: 304, 560
   size: 16, 16
 BelbesArmor
   xy: 272, 48

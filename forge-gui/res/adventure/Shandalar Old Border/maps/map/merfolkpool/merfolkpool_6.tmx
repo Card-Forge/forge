@@ -111,7 +111,50 @@
   </object>
   <object id="80" template="../../../../../../common/maps/obj/waypoint.tx" x="770.667" y="948.667" />
   <object id="81" template="../../../../../../common/maps/obj/waypoint.tx" x="980.667" y="779.333" />
-  <object id="82" template="../../../../../../common/maps/obj/treasure.tx" x="758" y="480" />
+  <object id="82" template="../../../../../../common/maps/obj/treasure.tx" x="758" y="480"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.005,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.03,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.175,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.45,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.84,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.51,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property></properties></object>
   <object id="83" template="../../../../../../common/maps/obj/gold.tx" x="1032.67" y="349.333" />
  </objectgroup>
 </map>

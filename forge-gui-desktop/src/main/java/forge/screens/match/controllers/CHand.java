@@ -145,6 +145,7 @@ public class CHand implements ICDoc {
         }
 
         p.setCardPanels(cardPanels);
+        view.updateTabLabel(ordering.size());
 
         //animate new cards into positions defined by placeholders
         final JLayeredPane layeredPane = Singletons.getView().getFrame().getLayeredPane();

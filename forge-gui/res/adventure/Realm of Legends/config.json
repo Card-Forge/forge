@@ -38,8 +38,6 @@
     "Caller of the Untamed",
     "Aether Searcher",
     "Arcane Savant",
-    "Halving Season",
-    "Mise",
     "Black Lotus",
     "Mox Emerald",
     "Mox Pearl",
@@ -72,7 +70,7 @@
     "Living Wish",
     "Fae of Wishes",
     "Coax from the Blind Eternities",
-    "Grizled Huntmaster",
+    "Grizzled Huntmaster",
     "Karn, the Great Creator",
     "Mastermind's Acquisition",
     "The Raven's Warning",
@@ -89,6 +87,7 @@
     "Wishclaw Talisman",
     "The One Ring",
     "Necropotence",
+    "Grafted Exoskeleton",
     "Emrakul, the Aeons Torn",
     "Bazaar of Baghdad",
     "Library of Alexandria",
@@ -185,14 +184,14 @@
         "Steel Boots",
         "Lotus Petal",
         "Echo Shield",
-        "Steel Armor"    
+        "Cloak of the Wastes"
       ]
     }
     ,{
       "name": "Normal",
       "startingLife": 25,
       "startingShards": 20,
-      "startingMoney": 2000,
+      "startingMoney": 2500,
       "startingDifficulty": true,
       "enemyLifeFactor": 1.0,
       "rewardMaxFactor" : 1.0,
@@ -212,7 +211,8 @@
         "Challenge Coin",
         "Challenge Coin",
         "Steel Boots",
-        "Lotus Petal" 
+        "Steel Armor",
+        "Lotus Petal"
       ]
     },{
       "name": "Hard",

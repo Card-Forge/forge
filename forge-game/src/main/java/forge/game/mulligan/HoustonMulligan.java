@@ -1,7 +1,9 @@
 package forge.game.mulligan;
 
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 
 public class HoustonMulligan extends AbstractMulligan {
 
@@ -27,7 +29,8 @@ public class HoustonMulligan extends AbstractMulligan {
     @Override
     public void keep() {
         super.keep();
-        for (final Card c : player.getController().tuckCardsViaMulligan(player, tuckCardsDuringMulligan())) {
+        CardCollection hand = new CardCollection(player.getCardsIn(ZoneType.Hand));
+        for (final Card c : player.getController().tuckCardsViaMulligan(hand, tuckCardsDuringMulligan())) {
             player.getGame().getAction().moveToLibrary(c, -1, null);
         }
     }
