@@ -497,7 +497,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
         }
         Tracker tracker = getGameView() != null ? getGameView().getTracker() : null;
         List<Object> proxied = GameEventProxy.wrapAll(events, tracker);
-        if (useDeltaSync && initialSyncSent) {
+        if (useDeltaSync && initialSyncSent && objectsRegistered) {
             // Bundle events with delta so they're applied atomically:
             // delta properties first, then events forwarded.
             GameView gameView = getGameView();

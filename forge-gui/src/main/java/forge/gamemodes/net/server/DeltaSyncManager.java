@@ -28,6 +28,7 @@ import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.IdentityHashMap;
+import java.util.LinkedHashMap;
 import java.util.Iterator;
 import java.util.HashSet;
 import java.util.List;
@@ -117,7 +118,7 @@ public class DeltaSyncManager implements IHasNetLog {
      */
     public DeltaPacket collectDeltas(GameView gameView, boolean onGameThread) {
         Map<Integer, Map<TrackableProperty, Object>> objectDeltas = new HashMap<>();
-        Map<Integer, Map<TrackableProperty, Object>> newObjects = new HashMap<>();
+        Map<Integer, Map<TrackableProperty, Object>> newObjects = new LinkedHashMap<>();
         Set<Integer> currentObjectIds = new HashSet<>();
 
         // Decide before the walk whether a checksum is due — if so, capture
@@ -182,7 +183,7 @@ public class DeltaSyncManager implements IHasNetLog {
             // Store breakdown for logging if the client reports a mismatch
             int turn = gameView.getTurn();
             int phaseOrdinal = gameView.getPhase() != null ? gameView.getPhase().ordinal() : -1;
-            lastChecksumBreakdown = NetworkChecksumUtil.computeChecksumBreakdown(turn, phaseOrdinal, gameView);
+            lastChecksumBreakdown = NetworkChecksumUtil.computeChecksumBreakdown(turn, phaseOrdinal, gameView, checksumSnapshot);
             List<String> detail = new ArrayList<>();
             NetworkChecksumUtil.computeSampledChecksumFromSnapshot(
                     gameView, checksumPropertyOrdinals, checksumSnapshot, detail);
@@ -321,12 +322,28 @@ public class DeltaSyncManager implements IHasNetLog {
             } catch (ConcurrentModificationException e) {
                 return; // Rare race — skip children this pass, next delta catches up
             }
+            // Skip CardView/PlayerView found as single property values — these are
+            // reference properties (ExiledWith, CloneOrigin, Owner, etc.) serialized
+            // as IDs by toNetworkValue. The actual instances are discovered through
+            // their primary containment (zone collections, GameView.players). Walking
+            // stale references causes replacement cascades where an old CardView (from
+            // before a zone change) overwrites the current one.
+            //
+            // For collections: when the parent is a CardView, its collection properties
+            // (AttachedCards, HauntedBy, MergedCards, etc.) are also references — skip
+            // CardView items. Zone collections on PlayerView/GameView must be walked.
+            boolean skipCardViewInCollections = obj instanceof CardView;
             for (Object value : values) {
                 if (value instanceof TrackableObject to) {
-                    walkAndCollect(to, objectDeltas, newObjects, currentObjectIds, checksumSnapshot);
+                    if (!(to instanceof CardView) && !(to instanceof PlayerView)) {
+                        walkAndCollect(to, objectDeltas, newObjects, currentObjectIds, checksumSnapshot);
+                    }
                 } else if (value instanceof TrackableCollection) {
                     for (Object item : (TrackableCollection<?>) value) {
                         if (item instanceof TrackableObject to) {
+                            if (skipCardViewInCollections && to instanceof CardView) {
+                                continue;
+                            }
                             walkAndCollect(to, objectDeltas, newObjects, currentObjectIds, checksumSnapshot);
                         }
                     }

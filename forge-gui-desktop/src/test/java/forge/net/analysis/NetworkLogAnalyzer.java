@@ -1123,18 +1123,27 @@ public class NetworkLogAnalyzer {
                     }
                 }
 
-                // Search forward for client breakdown and client player states.
+                // Search forward for client and server breakdowns and player states.
+                // Both breakdowns appear AFTER the mismatch line in the log:
+                //   CHECKSUM MISMATCH  ← line i
+                //   Client breakdown   ← logged by client
+                //   Server breakdown   ← logged by server in response to resync request
                 // Stop if we hit another CHECKSUM MISMATCH (a different client's detection).
                 String clientBreakdown = null;
                 List<PlayerState> clientPlayerStates = new ArrayList<>();
-                for (int j = i + 1; j < Math.min(allLines.size(), i + 20); j++) {
+                for (int j = i + 1; j < Math.min(allLines.size(), i + 30); j++) {
                     String next = allLines.get(j);
                     // Stop at another mismatch detection (different client)
                     if (j > i + 1 && MISMATCH_LINE_PATTERN.matcher(next).find()) break;
                     Matcher cbm = CLIENT_BREAKDOWN_PATTERN.matcher(next);
                     if (cbm.find()) {
                         clientBreakdown = cbm.group(1);
-                        break; // Client breakdown is the last line in the section
+                        continue;
+                    }
+                    Matcher sbm = SERVER_BREAKDOWN_PATTERN.matcher(next);
+                    if (sbm.find() && serverBreakdown == null) {
+                        serverBreakdown = sbm.group(1);
+                        continue;
                     }
                     Matcher psm = PLAYER_STATE_PATTERN.matcher(next);
                     if (psm.find()) {

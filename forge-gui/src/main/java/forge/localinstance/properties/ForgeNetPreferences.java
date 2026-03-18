@@ -28,7 +28,7 @@ public class ForgeNetPreferences extends PreferencesStore<ForgeNetPreferences.FN
         NET_PORT("36743"),
         UPnP("ASK"),
         NET_BANDWIDTH_LOGGING("false"),
-        NET_MAX_LOG_FILES("5"),
+        NET_MAX_LOG_FILES("10"),
         NET_LOG_CLEANUP_ENABLED("true");
 
         private final String strDefaultVal;

@@ -1,6 +1,5 @@
 package forge.gamemodes.net;
 
-import forge.card.mana.ManaAtom;
 import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.combat.CombatView;
@@ -78,21 +77,47 @@ public final class NetworkChecksumUtil {
      * @return checksum value
      */
     public static int computeStateChecksum(int turn, int phaseOrdinal, GameView gameView) {
+        return computeStateChecksum(turn, phaseOrdinal, gameView, null);
+    }
+
+    /**
+     * Snapshot-aware stable checksum. When snapshot is non-null, reads property
+     * values from the snapshot (captured during walkAndCollect) instead of live
+     * state, ensuring the server checksum matches exactly what the delta carries.
+     * When snapshot is null (client-side), reads live state as before.
+     */
+    public static int computeStateChecksum(int turn, int phaseOrdinal, GameView gameView,
+                                            Map<TrackableObject, Map<TrackableProperty, Object>> snapshot) {
         if (gameView == null) {
             return computeStateChecksum(turn, phaseOrdinal, (Iterable<PlayerView>) null);
         }
-        int hash = computeStateChecksum(turn, phaseOrdinal, gameView.getPlayers());
+        // Inline base hash to use snapValue for Life — the 3-arg overload reads
+        // live state via getEffectiveValue, which races with the game thread.
+        int hash = 17;
+        hash = 31 * hash + turn;
+        if (phaseOrdinal >= 0) {
+            hash = 31 * hash + phaseOrdinal;
+        }
+        List<PlayerView> sortedPlayers = getSortedPlayers(gameView);
+        for (PlayerView player : sortedPlayers) {
+            hash = 31 * hash + player.getId();
+            Object life = snapValue(player, TrackableProperty.Life, snapshot);
+            hash = 31 * hash + (life instanceof Integer ? (int) life : 0);
+        }
 
-        for (PlayerView player : getSortedPlayers(gameView)) {
-            hash = 31 * hash + player.getZoneSize(ZoneType.Hand);
-            hash = 31 * hash + player.getZoneSize(ZoneType.Battlefield);
-            hash = 31 * hash + player.getZoneSize(ZoneType.Graveyard);
-            hash = 31 * hash + player.getZoneSize(ZoneType.Exile);
-            hash = 31 * hash + player.getZoneSize(ZoneType.Command);
+        for (PlayerView player : sortedPlayers) {
+            hash = 31 * hash + snapZoneSize(player, TrackableProperty.Hand, snapshot);
+            hash = 31 * hash + snapZoneSize(player, TrackableProperty.Battlefield, snapshot);
+            hash = 31 * hash + snapZoneSize(player, TrackableProperty.Graveyard, snapshot);
+            hash = 31 * hash + snapZoneSize(player, TrackableProperty.Exile, snapshot);
+            hash = 31 * hash + snapZoneSize(player, TrackableProperty.Command, snapshot);
 
             int manaHash = 0;
-            for (byte manaType : ManaAtom.MANATYPES) {
-                manaHash += player.getMana(manaType);
+            Object manaObj = snapValue(player, TrackableProperty.Mana, snapshot);
+            if (manaObj instanceof Map) {
+                for (Object v : ((Map<?, ?>) manaObj).values()) {
+                    if (v instanceof Integer) manaHash += (int) v;
+                }
             }
             hash = 31 * hash + manaHash;
         }
@@ -100,9 +125,10 @@ public final class NetworkChecksumUtil {
         // Deep checksum: battlefield card properties (sorted by ID for determinism)
         List<CardView> allBattlefieldCards = new ArrayList<>();
         for (PlayerView player : getSortedPlayers(gameView)) {
-            if (player.getBattlefield() != null) {
-                for (CardView card : player.getBattlefield()) {
-                    allBattlefieldCards.add(card);
+            Object bf = snapValue(player, TrackableProperty.Battlefield, snapshot);
+            if (bf instanceof Iterable<?>) {
+                for (Object item : (Iterable<?>) bf) {
+                    if (item instanceof CardView) allBattlefieldCards.add((CardView) item);
                 }
             }
         }
@@ -110,20 +136,20 @@ public final class NetworkChecksumUtil {
 
         for (CardView card : allBattlefieldCards) {
             hash = 31 * hash + card.getId();
-            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Tapped)) ? 1 : 0);
+            hash = 31 * hash + (Boolean.TRUE.equals(snapValue(card, TrackableProperty.Tapped, snapshot)) ? 1 : 0);
             CardView.CardStateView state = card.getCurrentState();
             if (state != null) {
-                Object pow = getEffectiveValue(state, TrackableProperty.Power);
-                Object tou = getEffectiveValue(state, TrackableProperty.Toughness);
+                Object pow = snapValue(state, TrackableProperty.Power, snapshot);
+                Object tou = snapValue(state, TrackableProperty.Toughness, snapshot);
                 hash = 31 * hash + (pow instanceof Integer ? (int) pow : 0);
                 hash = 31 * hash + (tou instanceof Integer ? (int) tou : 0);
             }
-            Object zone = getEffectiveValue(card, TrackableProperty.Zone);
+            Object zone = snapValue(card, TrackableProperty.Zone, snapshot);
             hash = 31 * hash + (zone instanceof ZoneType ? ((ZoneType) zone).ordinal() : -1);
-            Object ctrl = getEffectiveValue(card, TrackableProperty.Controller);
+            Object ctrl = snapValue(card, TrackableProperty.Controller, snapshot);
             hash = 31 * hash + (ctrl instanceof PlayerView ? ((PlayerView) ctrl).getId() : -1);
 
-            Object countersObj = getEffectiveValue(card, TrackableProperty.Counters);
+            Object countersObj = snapValue(card, TrackableProperty.Counters, snapshot);
             int counterTotal = 0;
             if (countersObj instanceof Map) {
                 for (Object count : ((Map<?, ?>) countersObj).values()) {
@@ -132,12 +158,12 @@ public final class NetworkChecksumUtil {
             }
             hash = 31 * hash + counterTotal;
 
-            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Sickness)) ? 1 : 0);
-            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Attacking)) ? 1 : 0);
-            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Blocking)) ? 1 : 0);
-            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.PhasedOut)) ? 1 : 0);
-            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Facedown)) ? 1 : 0);
-            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Flipped)) ? 1 : 0);
+            hash = 31 * hash + (Boolean.TRUE.equals(snapValue(card, TrackableProperty.Sickness, snapshot)) ? 1 : 0);
+            hash = 31 * hash + (Boolean.TRUE.equals(snapValue(card, TrackableProperty.Attacking, snapshot)) ? 1 : 0);
+            hash = 31 * hash + (Boolean.TRUE.equals(snapValue(card, TrackableProperty.Blocking, snapshot)) ? 1 : 0);
+            hash = 31 * hash + (Boolean.TRUE.equals(snapValue(card, TrackableProperty.PhasedOut, snapshot)) ? 1 : 0);
+            hash = 31 * hash + (Boolean.TRUE.equals(snapValue(card, TrackableProperty.Facedown, snapshot)) ? 1 : 0);
+            hash = 31 * hash + (Boolean.TRUE.equals(snapValue(card, TrackableProperty.Flipped, snapshot)) ? 1 : 0);
         }
 
         CombatView combat = gameView.getCombat();
@@ -160,80 +186,128 @@ public final class NetworkChecksumUtil {
         return hash;
     }
 
+    /** Read a property value from snapshot if available, otherwise from live state. */
+    private static Object snapValue(TrackableObject obj, TrackableProperty prop,
+                                     Map<TrackableObject, Map<TrackableProperty, Object>> snapshot) {
+        if (snapshot != null) {
+            Map<TrackableProperty, Object> snap = snapshot.get(obj);
+            if (snap != null && snap.containsKey(prop)) {
+                return snap.get(prop);
+            }
+        }
+        return getEffectiveValue(obj, prop);
+    }
+
+    /** Read a zone collection size from snapshot if available. */
+    private static int snapZoneSize(PlayerView player, TrackableProperty zoneProp,
+                                     Map<TrackableObject, Map<TrackableProperty, Object>> snapshot) {
+        Object val = snapValue(player, zoneProp, snapshot);
+        if (val instanceof TrackableCollection<?>) return ((TrackableCollection<?>) val).size();
+        return player.getZoneSize(zoneProp == TrackableProperty.Hand ? ZoneType.Hand
+                : zoneProp == TrackableProperty.Battlefield ? ZoneType.Battlefield
+                : zoneProp == TrackableProperty.Graveyard ? ZoneType.Graveyard
+                : zoneProp == TrackableProperty.Exile ? ZoneType.Exile
+                : ZoneType.Command);
+    }
+
     /**
      * Compute a diagnostic breakdown of the deep checksum, showing the hash
      * after each component. Used to identify exactly where server/client diverge.
      */
     public static String computeChecksumBreakdown(int turn, int phaseOrdinal, GameView gameView) {
+        return computeChecksumBreakdown(turn, phaseOrdinal, gameView, null);
+    }
+
+    /**
+     * Snapshot-aware breakdown. When snapshot is non-null, reads from snapshot
+     * to match exactly what the checksum was computed from.
+     */
+    public static String computeChecksumBreakdown(int turn, int phaseOrdinal, GameView gameView,
+                                                   Map<TrackableObject, Map<TrackableProperty, Object>> snapshot) {
         if (gameView == null || !stableChecksum) {
             return "deep checksum disabled or gameView null";
         }
-        // This must mirror computeStateChecksum exactly (using getEffectiveValue)
-        // so that breakdown final == actual checksum, enabling accurate mismatch diagnosis.
+        // This must mirror computeStateChecksum exactly so that
+        // breakdown final == actual checksum, enabling accurate mismatch diagnosis.
         StringBuilder sb = new StringBuilder();
-        int hash = computeStateChecksum(turn, phaseOrdinal, gameView.getPlayers());
+        // Inline base hash with snapValue for Life (mirrors computeStateChecksum)
+        int hash = 17;
+        hash = 31 * hash + turn;
+        if (phaseOrdinal >= 0) {
+            hash = 31 * hash + phaseOrdinal;
+        }
+        List<PlayerView> sortedPlayers = getSortedPlayers(gameView);
+        for (PlayerView player : sortedPlayers) {
+            hash = 31 * hash + player.getId();
+            Object life = snapValue(player, TrackableProperty.Life, snapshot);
+            hash = 31 * hash + (life instanceof Integer ? (int) life : 0);
+        }
         sb.append("base=").append(hash);
 
-        for (PlayerView player : getSortedPlayers(gameView)) {
+        for (PlayerView player : sortedPlayers) {
             int zoneHash = hash;
-            zoneHash = 31 * zoneHash + player.getZoneSize(ZoneType.Hand);
-            zoneHash = 31 * zoneHash + player.getZoneSize(ZoneType.Battlefield);
-            zoneHash = 31 * zoneHash + player.getZoneSize(ZoneType.Graveyard);
-            zoneHash = 31 * zoneHash + player.getZoneSize(ZoneType.Exile);
-            zoneHash = 31 * zoneHash + player.getZoneSize(ZoneType.Command);
+            zoneHash = 31 * zoneHash + snapZoneSize(player, TrackableProperty.Hand, snapshot);
+            zoneHash = 31 * zoneHash + snapZoneSize(player, TrackableProperty.Battlefield, snapshot);
+            zoneHash = 31 * zoneHash + snapZoneSize(player, TrackableProperty.Graveyard, snapshot);
+            zoneHash = 31 * zoneHash + snapZoneSize(player, TrackableProperty.Exile, snapshot);
+            zoneHash = 31 * zoneHash + snapZoneSize(player, TrackableProperty.Command, snapshot);
 
             int manaHash = 0;
-            for (byte manaType : ManaAtom.MANATYPES) {
-                manaHash += player.getMana(manaType);
+            Object manaObj = snapValue(player, TrackableProperty.Mana, snapshot);
+            if (manaObj instanceof Map) {
+                for (Object v : ((Map<?, ?>) manaObj).values()) {
+                    if (v instanceof Integer) manaHash += (int) v;
+                }
             }
             zoneHash = 31 * zoneHash + manaHash;
             hash = zoneHash;
             sb.append(" | p").append(player.getId()).append("zones=").append(hash);
-            sb.append("(H").append(player.getZoneSize(ZoneType.Hand));
-            sb.append("B").append(player.getZoneSize(ZoneType.Battlefield));
-            sb.append("G").append(player.getZoneSize(ZoneType.Graveyard));
-            sb.append("E").append(player.getZoneSize(ZoneType.Exile));
-            sb.append("C").append(player.getZoneSize(ZoneType.Command));
+            sb.append("(H").append(snapZoneSize(player, TrackableProperty.Hand, snapshot));
+            sb.append("B").append(snapZoneSize(player, TrackableProperty.Battlefield, snapshot));
+            sb.append("G").append(snapZoneSize(player, TrackableProperty.Graveyard, snapshot));
+            sb.append("E").append(snapZoneSize(player, TrackableProperty.Exile, snapshot));
+            sb.append("C").append(snapZoneSize(player, TrackableProperty.Command, snapshot));
             sb.append("M").append(manaHash).append(")");
         }
 
         List<CardView> allBattlefieldCards = new ArrayList<>();
         for (PlayerView player : getSortedPlayers(gameView)) {
-            if (player.getBattlefield() != null) {
-                for (CardView card : player.getBattlefield()) {
-                    allBattlefieldCards.add(card);
+            Object bf = snapValue(player, TrackableProperty.Battlefield, snapshot);
+            if (bf instanceof Iterable<?>) {
+                for (Object item : (Iterable<?>) bf) {
+                    if (item instanceof CardView) allBattlefieldCards.add((CardView) item);
                 }
             }
         }
         allBattlefieldCards.sort(Comparator.comparingInt(CardView::getId));
         sb.append(" | cards(").append(allBattlefieldCards.size()).append(")=[");
         for (CardView card : allBattlefieldCards) {
-            boolean tapped = Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Tapped));
+            boolean tapped = Boolean.TRUE.equals(snapValue(card, TrackableProperty.Tapped, snapshot));
             CardView.CardStateView state = card.getCurrentState();
             int power = 0, toughness = 0;
             if (state != null) {
-                Object pow = getEffectiveValue(state, TrackableProperty.Power);
-                Object tou = getEffectiveValue(state, TrackableProperty.Toughness);
+                Object pow = snapValue(state, TrackableProperty.Power, snapshot);
+                Object tou = snapValue(state, TrackableProperty.Toughness, snapshot);
                 power = pow instanceof Integer ? (int) pow : 0;
                 toughness = tou instanceof Integer ? (int) tou : 0;
             }
-            Object zoneObj = getEffectiveValue(card, TrackableProperty.Zone);
+            Object zoneObj = snapValue(card, TrackableProperty.Zone, snapshot);
             int zoneOrd = zoneObj instanceof ZoneType ? ((ZoneType) zoneObj).ordinal() : -1;
-            Object ctrlObj = getEffectiveValue(card, TrackableProperty.Controller);
+            Object ctrlObj = snapValue(card, TrackableProperty.Controller, snapshot);
             int ctrlId = ctrlObj instanceof PlayerView ? ((PlayerView) ctrlObj).getId() : -1;
-            Object countersObj = getEffectiveValue(card, TrackableProperty.Counters);
+            Object countersObj = snapValue(card, TrackableProperty.Counters, snapshot);
             int ct = 0;
             if (countersObj instanceof Map) {
                 for (Object v : ((Map<?, ?>) countersObj).values()) {
                     if (v instanceof Integer) ct += (int) v;
                 }
             }
-            boolean sick = Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Sickness));
-            boolean attacking = Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Attacking));
-            boolean blocking = Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Blocking));
-            boolean phasedOut = Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.PhasedOut));
-            boolean faceDown = Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Facedown));
-            boolean flipped = Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Flipped));
+            boolean sick = Boolean.TRUE.equals(snapValue(card, TrackableProperty.Sickness, snapshot));
+            boolean attacking = Boolean.TRUE.equals(snapValue(card, TrackableProperty.Attacking, snapshot));
+            boolean blocking = Boolean.TRUE.equals(snapValue(card, TrackableProperty.Blocking, snapshot));
+            boolean phasedOut = Boolean.TRUE.equals(snapValue(card, TrackableProperty.PhasedOut, snapshot));
+            boolean faceDown = Boolean.TRUE.equals(snapValue(card, TrackableProperty.Facedown, snapshot));
+            boolean flipped = Boolean.TRUE.equals(snapValue(card, TrackableProperty.Flipped, snapshot));
 
             sb.append(card.getId());
             sb.append(tapped ? "T" : "U");
@@ -251,22 +325,22 @@ public final class NetworkChecksumUtil {
         }
         sb.append("]");
 
-        // Hash cards using same getEffectiveValue path as computeStateChecksum
+        // Hash cards using same path as computeStateChecksum
         for (CardView card : allBattlefieldCards) {
             hash = 31 * hash + card.getId();
-            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Tapped)) ? 1 : 0);
+            hash = 31 * hash + (Boolean.TRUE.equals(snapValue(card, TrackableProperty.Tapped, snapshot)) ? 1 : 0);
             CardView.CardStateView state = card.getCurrentState();
             if (state != null) {
-                Object pow = getEffectiveValue(state, TrackableProperty.Power);
-                Object tou = getEffectiveValue(state, TrackableProperty.Toughness);
+                Object pow = snapValue(state, TrackableProperty.Power, snapshot);
+                Object tou = snapValue(state, TrackableProperty.Toughness, snapshot);
                 hash = 31 * hash + (pow instanceof Integer ? (int) pow : 0);
                 hash = 31 * hash + (tou instanceof Integer ? (int) tou : 0);
             }
-            Object zone = getEffectiveValue(card, TrackableProperty.Zone);
+            Object zone = snapValue(card, TrackableProperty.Zone, snapshot);
             hash = 31 * hash + (zone instanceof ZoneType ? ((ZoneType) zone).ordinal() : -1);
-            Object ctrl = getEffectiveValue(card, TrackableProperty.Controller);
+            Object ctrl = snapValue(card, TrackableProperty.Controller, snapshot);
             hash = 31 * hash + (ctrl instanceof PlayerView ? ((PlayerView) ctrl).getId() : -1);
-            Object countersObj = getEffectiveValue(card, TrackableProperty.Counters);
+            Object countersObj = snapValue(card, TrackableProperty.Counters, snapshot);
             int counterTotal = 0;
             if (countersObj instanceof Map) {
                 for (Object count : ((Map<?, ?>) countersObj).values()) {
@@ -274,12 +348,12 @@ public final class NetworkChecksumUtil {
                 }
             }
             hash = 31 * hash + counterTotal;
-            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Sickness)) ? 1 : 0);
-            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Attacking)) ? 1 : 0);
-            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Blocking)) ? 1 : 0);
-            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.PhasedOut)) ? 1 : 0);
-            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Facedown)) ? 1 : 0);
-            hash = 31 * hash + (Boolean.TRUE.equals(getEffectiveValue(card, TrackableProperty.Flipped)) ? 1 : 0);
+            hash = 31 * hash + (Boolean.TRUE.equals(snapValue(card, TrackableProperty.Sickness, snapshot)) ? 1 : 0);
+            hash = 31 * hash + (Boolean.TRUE.equals(snapValue(card, TrackableProperty.Attacking, snapshot)) ? 1 : 0);
+            hash = 31 * hash + (Boolean.TRUE.equals(snapValue(card, TrackableProperty.Blocking, snapshot)) ? 1 : 0);
+            hash = 31 * hash + (Boolean.TRUE.equals(snapValue(card, TrackableProperty.PhasedOut, snapshot)) ? 1 : 0);
+            hash = 31 * hash + (Boolean.TRUE.equals(snapValue(card, TrackableProperty.Facedown, snapshot)) ? 1 : 0);
+            hash = 31 * hash + (Boolean.TRUE.equals(snapValue(card, TrackableProperty.Flipped, snapshot)) ? 1 : 0);
         }
         sb.append(" afterCards=").append(hash);
 
@@ -533,11 +607,18 @@ public final class NetworkChecksumUtil {
             Map<TrackableObject, Map<TrackableProperty, Object>> snapshot,
             List<String> divergenceLog) {
 
-        // stableChecksum mode (test harness) — single-threaded, no race concern
+        // stableChecksum mode (test harness) — use the snapshot-aware stable
+        // checksum so the server reads from the same values the delta carries.
+        // The client calls computeStateChecksum(turn, phase, gameView) without
+        // snapshot, reading from its local state which matches after delta apply.
         if (stableChecksum) {
-            return computeStateChecksum(gameView.getTurn(),
-                    gameView.getPhase() != null ? gameView.getPhase().ordinal() : -1,
-                    gameView);
+            Map<TrackableProperty, Object> gvSnap = snapshot != null ? snapshot.get(gameView) : null;
+            int turn = gvSnap != null && gvSnap.get(TrackableProperty.Turn) instanceof Integer
+                    ? (int) gvSnap.get(TrackableProperty.Turn) : gameView.getTurn();
+            int phaseOrd = gvSnap != null && gvSnap.get(TrackableProperty.Phase) instanceof PhaseType
+                    ? ((PhaseType) gvSnap.get(TrackableProperty.Phase)).ordinal()
+                    : (gameView.getPhase() != null ? gameView.getPhase().ordinal() : -1);
+            return computeStateChecksum(turn, phaseOrd, gameView, snapshot);
         }
 
         // Read turn and phase from the snapshot of the GameView

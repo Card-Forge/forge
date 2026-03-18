@@ -66,7 +66,7 @@ public final class DeltaPacket implements NetEvent {
         int type = typeTagFor(obj);
         int id = obj.getId();
         if (obj instanceof CardStateView csv) {
-            id *= 16 + csv.getState().ordinal();
+            id = id * 16 + csv.getState().ordinal();
         }
         return makeDeltaKey(type, id);
     }
