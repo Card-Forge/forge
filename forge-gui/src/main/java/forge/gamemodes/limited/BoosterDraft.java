@@ -391,7 +391,19 @@ public class BoosterDraft implements IBoosterDraft {
 
         final SealedTemplate tpl = draft.getSealedProductTemplate();
 
-        // TODO Determine PodSize from custom draft
+        int players = draft.getNumPlayers();
+        final int minPlayers = 2;
+        final int maxPlayers = 8;
+
+        // Check if numPlayers is set in draft file, if not default to 8.
+        if (players == 0) {
+            players = N_PLAYERS;
+        } else {
+            players = Math.max(players, minPlayers);
+            players = Math.min(players, maxPlayers);
+        }
+
+        setPodSize(players);
 
         final UnOpenedProduct toAdd = new UnOpenedProduct(tpl, dPool);
         toAdd.setLimitedPool(draft.isSingleton());
