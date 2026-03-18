@@ -1261,7 +1261,6 @@ public class CountersPutAi extends CountersAi {
             Card firstToTap = canTap.getFirst();
             if (source.getType().hasSubtype("Spacecraft") && !source.isCreature() && source.isUntapped()) {
                 if (numCharge < numStation && numCharge + firstToTap.getNetPower() >= numStation
-                        && firstToTap.getNetPower() > 0
                         && firstToTap.getNetPower() <= source.getBasePower()) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
@@ -1273,8 +1272,8 @@ public class CountersPutAi extends CountersAi {
             List<Card> nextTurnAttackers = CardLists.filter(ai.getStrongestOpponent().getCreaturesInPlay(), c -> CombatUtil.canAttackNextTurn(c, ai));
             CardCollection blockerList = CardLists.filter(canTap, CardPredicates.possibleBlockerForAtLeastOne(nextTurnAttackers));
 
-            if (blockerList.isEmpty() || ComputerUtil.predictNextCombatsRemainingLife(ai, false, true, 0, blockerList) > ai.getStartingLife() * 2 / 3) {
-                if (numCharge < numStation) {
+            if (numCharge < numStation) {
+                if (blockerList.isEmpty() || ComputerUtil.predictNextCombatsRemainingLife(ai, false, true, 0, blockerList) > ai.getStartingLife() * 2 / 3) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
             }
