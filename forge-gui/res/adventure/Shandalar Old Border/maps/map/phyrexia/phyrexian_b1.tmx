@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="77">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx" />
@@ -40,14 +40,57 @@
     <property name="teleport" value="" />
    </properties>
   </object>
-  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="160.239" y="31.7659" />
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="160.239" y="31.7659"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.3,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.56,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.6,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.34,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.16,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.04,
+    "count": 3,
+    "addMaxCount": 3
+  }
+]</property></properties></object>
   <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="192.235" y="47.7421">
    <properties>
     <property name="enemy" value="Gitaxian Scientist" />
-    <property name="threatRange" value="20" />
+    <property name="threatRange" value="100" />
     <property name="waypoints" value="68,69,70" />
    <property name="effect">{"startBattleWithCard": ["Phyrexian Arena|APC", "Phyrexian Infiltrator|INV", "Howling Mine|LEA", "Phyrexian Walker|VIS"]}</property>
-    </properties>
+    <property name="speedModifier" type="float" value="20" /></properties>
   </object>
   <object id="54" template="../../../../../../common/maps/obj/enemy.tx" x="273" y="145.112">
    <properties>
@@ -108,7 +151,50 @@
 </property>
    </properties>
   </object>
-  <object id="76" template="../../../../../../common/maps/obj/treasure.tx" x="256" y="32" />
+  <object id="76" template="../../../../../../common/maps/obj/treasure.tx" x="256" y="32"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.3,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.56,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.6,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.34,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.16,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.04,
+    "count": 3,
+    "addMaxCount": 3
+  }
+]</property></properties></object>
  </objectgroup>
  <objectgroup id="7" name="Waypoints">
   <object id="64" template="../../../../../../common/maps/obj/waypoint.tx" x="273" y="145" />

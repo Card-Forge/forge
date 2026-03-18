@@ -83,10 +83,6 @@ public class SpellAbilityVariables implements Cloneable {
     /** The gameLimitToCheck to check. */
     private String gameLimitToCheck = null;
 
-    /** The n cards in hand. */
-    private int cardsInHand = -1;
-    private int cardsInHand2 = -1;
-
     // Conditional States for Cards
     private boolean threshold = false;
     private boolean metalcraft = false;
@@ -310,21 +306,6 @@ public class SpellAbilityVariables implements Cloneable {
     public final void setGameTypes(final Set<GameType> gameTypes) {
         this.gameTypes.clear();
         this.gameTypes.addAll(gameTypes);
-    }
-
-    /**
-     * <p>
-     * setActivateCardsInHand.
-     * </p>
-     *
-     * @param cards
-     *            a int.
-     */
-    public final void setActivateCardsInHand(final int cards) {
-        this.setCardsInHand(cards);
-    }
-    public final void setActivateCardsInHand2(final int cards) {
-        this.setCardsInHand2(cards);
     }
 
     public final void setHellbent(final boolean bHellbent) {
@@ -763,31 +744,6 @@ public class SpellAbilityVariables implements Cloneable {
      */
     public final boolean isOpponentTurn() {
         return this.opponentTurn;
-    }
-
-    /**
-     * Gets the cards in hand.
-     *
-     * @return the cardsInHand
-     */
-    public final int getCardsInHand() {
-        return this.cardsInHand;
-    }
-    public final int getCardsInHand2() {
-        return this.cardsInHand2;
-    }
-
-    /**
-     * Sets the cards in hand.
-     *
-     * @param cardsInHand0
-     *            the cardsInHand to set
-     */
-    public final void setCardsInHand(final int cardsInHand0) {
-        this.cardsInHand = cardsInHand0;
-    }
-    public final void setCardsInHand2(final int cardsInHand0) {
-        this.cardsInHand2 = cardsInHand0;
     }
 
     /**

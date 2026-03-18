@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="62">
  <editorsettings>
-  <export target="wastetown..tmx" format="tmx"/>
+  <export target="wastetown..tmx" format="tmx" />
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
  <layer id="6" name="Collision" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJztlmEKgCAMhf0b1Qms63SIukv3quxuJTZYkkZtGcI+GIMt38NFLKUEIR1NRQuK71Arpfc8o+hrV4eMe+3Rp/qOpdPGaKTZevrW056h+vq6lgnVlou+Zpjzle8dufvqBxrwPOd9u+KcQ7Xc5wykvq+83zgcvuuL84ZpL8xIA/YCEOp/MefYXoB+zr6TpxHzXZi+o/XYwTgM0gz1qb5//OcIAoUNp+8uUA==
@@ -22,7 +22,7 @@
  </layer>
  <layer id="3" name="Clutter" width="30" height="30">
   <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
+   <property name="spriteLayer" type="bool" value="true" />
   </properties>
   <data encoding="base64" compression="zlib">
    eJzFljsOwjAMhruhDjlGJ44CKysSp4DSnUtwqHINcgYkUNVaci3bsZOofIshj8b23zpumpmxne0QGpFXK8/dyT7tOZZ58Oed4QsFfPPsoVwFf8G/IxobmXPw2X1Y78G5kM6h3AL/W4LqwxEXe1gsjsOqZ0RjWDuakxItpP1THiy5+AenXd5ai25ASiMvWMuePNvjlwfu29EofY9SYH+0mvTcz/bSrS03BmuBGrp9u7WVxjSwplxNwvNnEpMWr4RFu0j+f0hMnnhTNVzzp0RfD9J35Y03p4ZvTY172YO3tlihtdHSS9VEO4e7l0tI1X3pXgYejrOktVwvtSU4B1tpLfVSWvywjtPMcn97e6ncnsBaB3om71ZS/TllYO48ivU9TOVRO2PyVZrP6Q21OjDF8wNht13W
@@ -31,75 +31,172 @@
  <objectgroup id="4" name="Objects">
   <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="208" y="391.287" width="32" height="16">
    <properties>
-    <property name="teleport" value=""/>
+    <property name="teleport" value="" />
    </properties>
   </object>
-  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="279.5" y="375"/>
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="279.5" y="375"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.002,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.02,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.1,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.68,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 1.0,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property></properties></object>
   <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="159.006" y="286.459">
    <properties>
-    <property name="enemy" value="Cleric"/>
-    <property name="threatRange" type="int" value="40"/>
+    <property name="enemy" value="Cleric" />
+    <property name="threatRange" type="int" value="40" />
    </properties>
   </object>
-  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="216.171" y="122.719"/>
-  <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="152.5" y="374.5"/>
+  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="216.171" y="122.719"><properties><property name="reward">[
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Mishra's Factory|ATQ|3"
+  },
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Kismet|LEG"
+  },
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Hydroblast|ICE"
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.3,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.56,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.6,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.34,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.16,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.04,
+    "count": 3,
+    "addMaxCount": 3
+  }
+]</property></properties></object>
+  <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="152.5" y="374.5" />
   <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="214.827" y="151.762">
    <properties>
-    <property name="enemy" value="Sorceress Queen Kaja"/>
+    <property name="enemy" value="Sorceress Queen Kaja" />
    <property name="effect">{"startBattleWithCard": ["Mishra's Factory|ATQ|3", "Cuombajj Witches|ARN", "Sorceress Queen|ARN", "Millstone|ATQ", "Rainbow Vale|FEM", "Elven Lyre|FEM"]}</property>
    </properties>
   </object>
   <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="280.296" y="316.458">
    <properties>
-    <property name="enemy" value="White Dwarf"/>
-    <property name="threatRange" type="int" value="20"/>
+    <property name="enemy" value="White Dwarf" />
+    <property name="threatRange" type="int" value="20" />
    </properties>
   </object>
   <object id="57" template="../../../../../../common/maps/obj/booster.tx" x="127.641" y="236.154">
    <properties>
     <property name="reward">[
   {
-    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 10,
-    &quot;colors&quot;: [ &quot;white&quot; ],
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    "editions": [ "ONS", "LGN", "SCG" ],
+    "type": "card",
+    "count": 10,
+    "colors": [ "white" ],
+    "rarity": [ "Common" ]
   },
   {
-    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;colors&quot;: [ &quot;white&quot; ],
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    "editions": [ "ONS", "LGN", "SCG" ],
+    "type": "card",
+    "count": 3,
+    "colors": [ "white" ],
+    "rarity": [ "Uncommon" ]
   },
   {
-    &quot;editions&quot;: [ &quot;ONS&quot;, &quot;LGN&quot;, &quot;SCG&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 1,
-    &quot;colors&quot;: [ &quot;white&quot; ],
-    &quot;rarity&quot;: [ &quot;Rare&quot; ]
+    "editions": [ "ONS", "LGN", "SCG" ],
+    "type": "card",
+    "count": 1,
+    "colors": [ "white" ],
+    "rarity": [ "Rare" ]
   }
 ]
 </property>
    </properties>
   </object>
-  <object id="58" template="../../../../../../common/maps/obj/manashards.tx" x="303.975" y="224.625"/>
+  <object id="58" template="../../../../../../common/maps/obj/manashards.tx" x="303.975" y="224.625" />
   <object id="59" template="../../../../../../common/maps/obj/enemy.tx" x="238.878" y="221.935">
    <properties>
-    <property name="enemy" value="Apprentice White Wizard"/>
-    <property name="threatRange" type="int" value="40"/>
+    <property name="enemy" value="Apprentice White Wizard" />
+    <property name="threatRange" type="int" value="40" />
    </properties>
   </object>
   <object id="60" template="../../../../../../common/maps/obj/enemy.tx" x="191.392" y="220.555">
    <properties>
-    <property name="enemy" value="Apprentice White Wizard"/>
-    <property name="threatRange" type="int" value="40"/>
+    <property name="enemy" value="Apprentice White Wizard" />
+    <property name="threatRange" type="int" value="40" />
    </properties>
   </object>
   <object id="61" template="../../../../../../common/maps/obj/enemy.tx" x="272.777" y="254.466">
    <properties>
-    <property name="enemy" value="Monk"/>
-    <property name="threatRange" type="int" value="40"/>
+    <property name="enemy" value="Monk" />
+    <property name="threatRange" type="int" value="40" />
    </properties>
   </object>
  </objectgroup>

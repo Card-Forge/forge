@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="35" height="35" tilewidth="16" tileheight="16" infinite="0" nextlayerid="27" nextobjectid="231">
  <editorsettings>
   <export format="tmx" />
@@ -73,8 +73,8 @@
   }
 ]
 </property>
-    <property name="threatRange" type="int" value="40" />
-   </properties>
+    <property name="threatRange" type="int" value="100" />
+   <property name="speedModifier" type="float" value="20" /></properties>
   </object>
   <object id="179" template="../../../../../../common/maps/obj/waypoint.tx" x="180.342" y="117.105" />
   <object id="180" template="../../../../../../common/maps/obj/waypoint.tx" x="95.0087" y="198.272" />

@@ -32,11 +32,48 @@
  <objectgroup id="4" name="Objects">
   <object id="74" template="../../../../../../common/maps/obj/treasure.tx" x="729.333" y="692.333">
    <properties>
-    <property name="reward">[{
-  "type": "item",
-  "count": 1,
-  "itemName": "Rhystic Amulet"
-}]</property>
+    <property name="reward">[
+  {
+    "type": "item",
+    "count": 1,
+    "itemName": "Rhystic Amulet"
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.002,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.02,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.1,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.68,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 1.0,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property>
    </properties>
   </object>
   <object id="80" template="../../../../../../common/maps/obj/enemy.tx" x="968.667" y="788.333">
@@ -49,7 +86,43 @@
     <property name="enemy" value="Death Knight" />
    </properties>
   </object>
-  <object id="85" template="../../../../../../common/maps/obj/treasure.tx" x="184.5" y="1597.5" />
+  <object id="85" template="../../../../../../common/maps/obj/treasure.tx" x="184.5" y="1597.5"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.002,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.02,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.1,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.68,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 1.0,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property></properties></object>
   <object id="86" template="../../../../../../common/maps/obj/gold.tx" x="200.5" y="1595.5" />
   <object id="87" template="../../../../../../common/maps/obj/enemy.tx" x="578.25" y="1866.25">
    <properties>
@@ -62,7 +135,43 @@
    </properties>
   </object>
   <object id="89" template="../../../../../../common/maps/obj/gold.tx" x="479.75" y="2012.5" />
-  <object id="90" template="../../../../../../common/maps/obj/treasure.tx" x="24.6667" y="1947" />
+  <object id="90" template="../../../../../../common/maps/obj/treasure.tx" x="24.6667" y="1947"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.002,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.02,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.1,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.68,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 1.0,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property></properties></object>
   <object id="91" template="../../../../../../common/maps/obj/enemy.tx" x="592.333" y="3030.67">
    <properties>
     <property name="enemy" value="Zombie" />
@@ -83,7 +192,50 @@
     <property name="enemy" value="Lich" />
    <property name="effect">{ "startBattleWithCard": [ "Mirror Universe|LEG|1" ] }</property></properties>
   </object>
-  <object id="95" template="../../../../../../common/maps/obj/treasure.tx" x="473.667" y="3004.33" />
+  <object id="95" template="../../../../../../common/maps/obj/treasure.tx" x="473.667" y="3004.33"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.005,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.03,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.175,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.45,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.84,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.51,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property></properties></object>
   <object id="96" template="../../../../../../common/maps/obj/gold.tx" x="475" y="3017.67" />
   <object id="97" template="../../../../../../common/maps/obj/gold.tx" x="489.333" y="3048.33" />
   <object id="98" template="../../../../../../common/maps/obj/enemy.tx" x="1639.33" y="2433.33">
@@ -107,15 +259,130 @@
    </properties>
   </object>
   <object id="102" template="../../../../../../common/maps/obj/gold.tx" x="1653.5" y="1257.5" />
-  <object id="103" template="../../../../../../common/maps/obj/treasure.tx" x="1322.5" y="1292" />
-  <object id="104" template="../../../../../../common/maps/obj/treasure.tx" x="1455.5" y="1356.5" />
+  <object id="103" template="../../../../../../common/maps/obj/treasure.tx" x="1322.5" y="1292"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.002,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.02,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.1,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.68,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 1.0,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property></properties></object>
+  <object id="104" template="../../../../../../common/maps/obj/treasure.tx" x="1455.5" y="1356.5"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.002,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.02,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.1,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.68,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 1.0,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property></properties></object>
   <object id="105" template="../../../../../../common/maps/obj/gold.tx" x="1503.5" y="1280" />
   <object id="106" template="../../../../../../common/maps/obj/enemy.tx" x="2112.33" y="112.167">
    <properties>
     <property name="enemy" value="Vampire Lord" />
    </properties>
   </object>
-  <object id="107" template="../../../../../../common/maps/obj/treasure.tx" x="2071.33" y="91.6667" />
+  <object id="107" template="../../../../../../common/maps/obj/treasure.tx" x="2071.33" y="91.6667"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.005,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.03,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.175,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.45,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.84,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.51,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property></properties></object>
   <object id="108" template="../../../../../../common/maps/obj/enemy.tx" x="2843" y="330">
    <properties>
     <property name="enemy" value="Cyclops" />
@@ -146,9 +413,131 @@
    </properties>
   </object>
   <object id="116" template="../../../../../../common/maps/obj/gold.tx" x="3109.67" y="1475.67" />
-  <object id="117" template="../../../../../../common/maps/obj/treasure.tx" x="3090.67" y="1362.33" />
-  <object id="118" template="../../../../../../common/maps/obj/treasure.tx" x="2840" y="2658.5" />
-  <object id="119" template="../../../../../../common/maps/obj/treasure.tx" x="3047.5" y="2741.5" />
+  <object id="117" template="../../../../../../common/maps/obj/treasure.tx" x="3090.67" y="1362.33"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.005,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.03,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.175,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.45,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.84,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.51,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property></properties></object>
+  <object id="118" template="../../../../../../common/maps/obj/treasure.tx" x="2840" y="2658.5"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.002,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.02,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.1,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.68,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 1.0,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property></properties></object>
+  <object id="119" template="../../../../../../common/maps/obj/treasure.tx" x="3047.5" y="2741.5"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.02,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.1,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.38,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.72,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.54,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.24,
+    "count": 2,
+    "addMaxCount": 2
+  }
+]</property></properties></object>
   <object id="120" template="../../../../../../common/maps/obj/gold.tx" x="3001" y="2569.5" />
   <object id="121" template="../../../../../../common/maps/obj/gold.tx" x="2925.5" y="2571.5" />
   <object id="122" template="../../../../../../common/maps/obj/enemy.tx" x="2889" y="2745.5">
@@ -191,10 +580,89 @@
     <property name="enemy" value="Apprentice Green Wizard" />
    </properties>
   </object>
-  <object id="130" template="../../../../../../common/maps/obj/treasure.tx" x="2144.5" y="3149" />
+  <object id="130" template="../../../../../../common/maps/obj/treasure.tx" x="2144.5" y="3149"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.005,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.03,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.175,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.45,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.84,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.51,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property></properties></object>
   <object id="131" template="../../../../../../common/maps/obj/gold.tx" x="2185" y="3032.5" />
   <object id="132" template="../../../../../../common/maps/obj/gold.tx" x="2137" y="3003.5" />
-  <object id="133" template="../../../../../../common/maps/obj/treasure.tx" x="2231.5" y="3107" />
+  <object id="133" template="../../../../../../common/maps/obj/treasure.tx" x="2231.5" y="3107"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.002,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.02,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.1,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.68,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 1.0,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property></properties></object>
   <object id="134" template="../../../../../../common/maps/obj/entry_up.tx" x="1712" y="3199.5" width="48" height="16" />
  </objectgroup>
 </map>

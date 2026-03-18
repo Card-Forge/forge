@@ -29,7 +29,50 @@
     <property name="teleport" value="" />
    </properties>
   </object>
-  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="97.167" y="55.9167" />
+  <object id="48" template="../../../../../../common/maps/obj/treasure.tx" x="97.167" y="55.9167"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.04,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.18,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.66,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.66,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.32,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.14,
+    "count": 3,
+    "addMaxCount": 2
+  }
+]</property></properties></object>
   <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="143.634" y="54.4911" />
   <object id="55" template="../../../../../../common/maps/obj/enemy.tx" x="126.667" y="81.4997">
    <properties>
@@ -105,7 +148,50 @@
   <object id="80" template="../../../../../../common/maps/obj/waypoint.tx" x="355.333" y="158.333" />
   <object id="81" template="../../../../../../common/maps/obj/waypoint.tx" x="340.667" y="36.6667" />
   <object id="82" template="../../../../../../common/maps/obj/waypoint.tx" x="214.667" y="41.3333" />
-  <object id="84" template="../../../../../../common/maps/obj/treasure.tx" x="444.667" y="161" />
+  <object id="84" template="../../../../../../common/maps/obj/treasure.tx" x="444.667" y="161"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.005,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.03,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.175,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.45,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.84,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.51,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property></properties></object>
   <object id="85" template="../../../../../../common/maps/obj/manashards.tx" x="366.333" y="70.3333" />
   <object id="86" template="../../../../../../common/maps/obj/manashards.tx" x="41.3333" y="68.6667" />
   <object id="87" template="../../../../../../common/maps/obj/collision.tx" x="0.333333" y="-17.3333" width="481" height="16" />

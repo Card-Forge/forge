@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="56">
  <editorsettings>
-  <export target="wastetown..tmx" format="tmx"/>
+  <export target="wastetown..tmx" format="tmx" />
  </editorsettings>
  <properties>
-  <property name="dungeonEffect">{&quot;startBattleWithCard&quot;: [&quot;Urza's Tower|ATQ&quot;, &quot;Urza's Mine|ATQ&quot;, &quot;Urza's Power Plant|ATQ&quot;, &quot;Urza's Blueprints|ULG&quot;, &quot;Urza's Engine|ALL&quot;, &quot;Ornithopter|ATQ&quot;, &quot;Chill|TMP&quot;, &quot;Insight|TMP&quot;]}</property>
+  <property name="dungeonEffect">{"startBattleWithCard": ["Urza's Tower|ATQ", "Urza's Mine|ATQ", "Urza's Power Plant|ATQ", "Urza's Blueprints|ULG", "Urza's Engine|ALL", "Ornithopter|ATQ", "Chill|TMP", "Insight|TMP"]}</property>
  </properties>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJztwzEJAAAMA7C+8w/VWyFLIL2kqqqqvjuO1S8b
@@ -20,7 +20,7 @@
  </layer>
  <layer id="3" name="Foreground" width="30" height="30">
   <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
+   <property name="spriteLayer" type="bool" value="true" />
   </properties>
   <data encoding="base64" compression="zlib">
    eJzt0rEJADAIAEGrTJD9x8h8TiBoFZC78uuPANjlnlmHjlf8U3Xo8BXwWwKJagMl
@@ -34,14 +34,14 @@
  <objectgroup id="4" name="Objects">
   <object id="50" template="../../../../../../common/maps/obj/enemy.tx" x="194.663" y="282.618" width="32" height="32">
    <properties>
-    <property name="enemy" value="Urza Planeswalker"/>
-    <property name="threatRange" type="int" value="50"/>
+    <property name="enemy" value="Urza Planeswalker" />
+    <property name="threatRange" type="int" value="100" />
    <property name="effect">{"startBattleWithCard": ["Soldevi Excavations|ALL", "Urza's Armor|USG", "Mind Over Matter|EXO", "Urza's Avenger|ATQ"]}</property>
-    </properties>
+    <property name="speedModifier" type="float" value="20" /></properties>
   </object>
   <object id="51" template="../../../../../../common/maps/obj/entry_up.tx" x="209" y="480">
    <properties>
-    <property name="teleport" value=""/>
+    <property name="teleport" value="" />
    </properties>
   </object>
  </objectgroup>

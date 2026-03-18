@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="90">
  <editorsettings>
-  <export target="wastetown..tmx" format="tmx"/>
+  <export target="wastetown..tmx" format="tmx" />
  </editorsettings>
  <properties>
   <property name="dungeonEffect">{
-  &quot;startBattleWithCard&quot;: [ &quot;Goblin Burrows|ONS&quot; ],
+  "startBattleWithCard": [ "Goblin Burrows|ONS" ],
 }</property>
  </properties>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
  <layer id="8" name="Collision" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJztlUEOwiAQRVmWTePShQcyvaiReitT9RhK6kRsgBlgPnHhS0gTmvD4Q5ka85u4wZj5PS5DP9diP/NXi3O7jWsLws05QzfRugepM7aHFvexwtmKa6xVbWaNrOQu8WvV2LvngvuOOluu/jfgNzUxa6Myc16f+QzogZyX3B5Nv8Qb+jXd0rtV2zNTSPqKtpPI1Rvl9KQyI51ELLOkdxz263PcpUeOVGZk3yJK7lUPLzpzLi/KfXqd7UPQr3s7OXdYq9h/zDvu9ntInaE7twb3/s/KE7hfTLk=
@@ -32,7 +32,7 @@
  </layer>
  <layer id="3" name="Foreground" width="30" height="30">
   <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
+   <property name="spriteLayer" type="bool" value="true" />
   </properties>
   <data encoding="base64" compression="zlib">
    eJy9V9tO20AUPE6ekOxIcUg/oRi+oBL8A2/AE7T9mCqYKKCA4AHa76tU075EqJV626PsyOOTtdkG6JFGXm/WOzuzZy+ZZCLbA5FT95z4ciz0m9fuueUwdeUqFfnq8MVh1hf51nPvDhf95fu5h9brd9q2zJbfJlJDTNlG4bnPiB/9gVs5MR6Nz77+1PNpHzuDFoKOKIx+jAE8aKN9g78K6IyJH6Yhvi2M//dpE/BDn6zzewSxNpm7+bn00DHYMZde9yRr+qDvKKvuxHNe9R7XnRjMe6v6S88Bb1Uf58DEe6zxkKz2GQONheFlD6GdMfWwWv8VIc145bzjuVfedbRy30Lctg3nMHILPq/rcUj3pck5eM5rfdrCK0/kFxoH+8/5przX7vejZ9JssTC8WNfr5nOsJ+CtaG6RWzrvXZpt2LoYXva4pHnWUO7DZMmv8TEX+ZQvyx82auRjkc1xYECBYF4+g0L7OLTvjkT2Rk1OxRtX92cocuLxdtjOO6e8xhlUZuEzBPsIQnWPxjXEvf8a1vjdwWu54TPmetvXWU6Nn8MmD+Odw10e7zc8x1yHdCLU7/ctvKz1uMNzXssl5VQbJ3OHeHme1f8uz0M5dt3Bydz7r2rc5qvo8hyakVe8jo5CC/YZY+F52WuNh//AWwyaXmu8tGblrdLVPesluQ9cnze9ev1i37hP43QfUH3M+GYbNSfOB3vXi9Ft71Oh0H2ecePXC/wtBs3/G6G92vYRy1Gl4Ts07rH2zhe6cwM8pq6w5y3fnc+y+u4T+z+M58HyWF183uIcwpz+Bb0H/l0=
@@ -42,29 +42,50 @@
   <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="207.206" y="480.299" width="83.4919" height="16" />
   <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="134.001" y="151.842">
    <properties>
-    <property name="reward">[{
-  "type": "randomCard",
-  "count": 2,
-  "probability": 1,
-  "colors": [ "red" ]
-},{
-  "type": "randomCard",
-  "count": 1,
-  "probability": 1,
-  "rarity": [ "rare" ],
-  "colors": [ "red" ]
-},{
-  "type": "randomCard",
-  "count": 1,
-  "probability": 0.6,
-  "rarity": [ "uncommon", "rare" ],
-  "addMaxCount": 1
-},{
-  "type": "randomCard",
-  "count": 1,
-  "probability": 0.5,
-  "addMaxCount": 2
-}]</property>
+    <property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.02,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.1,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.38,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.72,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.54,
+    "count": 2,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.24,
+    "count": 2,
+    "addMaxCount": 2
+  }
+]</property>
    </properties>
   </object>
   <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="153.575" y="137.264">

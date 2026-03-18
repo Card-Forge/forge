@@ -25,6 +25,7 @@ import forge.card.CardRules;
 import forge.card.CardType;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
+import forge.util.StreamUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -32,6 +33,7 @@ import java.io.ObjectStreamException;
 import java.io.Serial;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -697,10 +699,10 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         return false;
     }
 
-    public static int getAverageCMC(Deck deck) {
+    public int getAverageCMC() {
         int totalCMC = 0;
         int totalCount = 0;
-        for (final Entry<DeckSection, CardPool> deckEntry : deck) {
+        for (final Entry<DeckSection, CardPool> deckEntry : this) {
             switch (deckEntry.getKey()) {
             case Main:
             case Commander:
@@ -718,5 +720,30 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             }
         }
         return totalCount == 0 ? 0 : Math.round(totalCMC / totalCount);
+    }
+
+    public String generateTextExport() {
+        final String nl = System.lineSeparator();
+        final StringBuilder deckList = new StringBuilder();
+        String dName = getName();
+        //fix copying a commander netdeck then importing it again...
+        if (dName.startsWith("[Commander")||dName.contains("Commander"))
+            dName = "";
+        deckList.append(dName == null ? "" : "Deck: "+dName + nl + nl);
+
+        for (DeckSection s : DeckSection.values()) {
+            CardPool cp = get(s);
+            if (cp == null || cp.isEmpty()) {
+                continue;
+            }
+            deckList.append(s.toString()).append(": ");
+            deckList.append(nl);
+
+            for (final Entry<String, Integer> ev: StreamUtil.stream(cp).collect(Collectors.groupingBy(ev -> ev.getKey().getCardName(), TreeMap::new, Collectors.summingInt(ev -> ev.getValue()))).entrySet()) {
+                deckList.append(ev.getValue()).append(" ").append(ev.getKey()).append(nl);
+            }
+            deckList.append(nl);
+        }
+        return deckList.toString();
     }
 }

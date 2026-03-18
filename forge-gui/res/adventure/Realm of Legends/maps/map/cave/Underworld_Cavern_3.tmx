@@ -107,7 +107,7 @@
 </property>
    </properties>
   </object>
-  <object id="98" template="../../../../common/maps/obj/dialog.tx" x="179.151" y="738.904" width="157.697" height="20.858" visible="1">
+  <object id="98" template="../../../../common/maps/obj/dialog.tx" x="265.151" y="748.904" width="37.0303" height="20.858" visible="1">
    <properties>
     <property name="dialog">[
 {
@@ -118,7 +118,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="99" template="../../../../common/maps/obj/dialog.tx" x="275.318" y="237.571" width="32.364" height="90.1913" visible="1">
+  <object id="99" template="../../../../common/maps/obj/dialog.tx" x="285.568" y="204.571" width="18.114" height="21.1913" visible="1">
    <properties>
     <property name="dialog">[
 {

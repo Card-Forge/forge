@@ -1171,12 +1171,7 @@ public class MapStage extends GameStage {
     }
 
     public void advanceQuestFlag(String key) {
-        Map<String, Byte> C = changes.getMapFlags();
-        if (C.get(key) != null) {
-            C.put(key, (byte) (C.get(key) + 1));
-        } else {
-            C.put(key, (byte) 1);
-        }
+        changes.getMapFlags().merge(key, (byte)1, (a, b) -> (byte)(a + b));
 
         AdventureQuestController.instance().updateQuestsMapFlag(key,changes.getMapFlags().get(key));
         AdventureQuestController.instance().showQuestDialogs(this);
