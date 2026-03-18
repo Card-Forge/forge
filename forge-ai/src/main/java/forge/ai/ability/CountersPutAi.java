@@ -302,6 +302,8 @@ public class CountersPutAi extends CountersAi {
             return doChargeToOppCtrlCMCLogic(ai, sa);
         } else if (logic.equals("TheOneRing")) {
             return SpecialCardAi.TheOneRing.consider(ai, sa);
+        } else if (amountStr.equals("StationX") && source.hasKeyword(Keyword.STATION)) {
+            return doStationAi(ai, sa);
         }
 
         if (sourceName.equals("Feat of Resistance")) { // sub-ability should take precedence
@@ -1236,5 +1238,28 @@ public class CountersPutAi extends CountersAi {
         }
         // If the AI has enough counters or more than the optimal CMC, it should not play the ability.
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+    }
+
+    private AiAbilityDecision doStationAi(Player ai, SpellAbility sa) {
+        Card source = sa.getHostCard();
+        PhaseHandler ph = source.getGame().getPhaseHandler();
+        int numStation = source.getKeywordMagnitude(Keyword.STATION);
+
+        // TODO: make this smarter so that the AI is better at predicting conditions when this is safe
+        // (also needs a modification to willPayCosts and ComputerUtil.chooseTapType to make better choices for what exactly to tap)
+        CardCollection canTap = CardLists.filter(ai.getCreaturesInPlay(), CardPredicates.UNTAPPED);
+        List<Card> nextTurnAttackers = CardLists.filter(ai.getStrongestOpponent().getCreaturesInPlay(), c -> CombatUtil.canAttackNextTurn(c, ai));
+        CardCollection blockerList = CardLists.filter(canTap, CardPredicates.possibleBlockerForAtLeastOne(nextTurnAttackers));
+        int predictedLife = ComputerUtil.predictNextCombatsRemainingLife(ai, false, true, 0, blockerList);
+
+        if (ph.is(PhaseType.MAIN2, ai)) {
+            if (blockerList.isEmpty() || predictedLife >= ai.getStartingLife() * 2 / 3) {
+                if (source.getCounters(CounterEnumType.CHARGE) < numStation) {
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                }
+            }
+        }
+
+        return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
     }
 }
