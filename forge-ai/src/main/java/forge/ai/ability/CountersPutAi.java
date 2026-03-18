@@ -302,7 +302,7 @@ public class CountersPutAi extends CountersAi {
             return doChargeToOppCtrlCMCLogic(ai, sa);
         } else if (logic.equals("TheOneRing")) {
             return SpecialCardAi.TheOneRing.consider(ai, sa);
-        } else if (amountStr.equals("StationX") && source.hasKeyword(Keyword.STATION)) {
+        } else if (sa.isKeyword(Keyword.STATION)) {
             return doStationAi(ai, sa);
         }
 
@@ -1250,10 +1250,9 @@ public class CountersPutAi extends CountersAi {
         CardCollection canTap = CardLists.filter(ai.getCreaturesInPlay(), CardPredicates.UNTAPPED);
         List<Card> nextTurnAttackers = CardLists.filter(ai.getStrongestOpponent().getCreaturesInPlay(), c -> CombatUtil.canAttackNextTurn(c, ai));
         CardCollection blockerList = CardLists.filter(canTap, CardPredicates.possibleBlockerForAtLeastOne(nextTurnAttackers));
-        int predictedLife = ComputerUtil.predictNextCombatsRemainingLife(ai, false, true, 0, blockerList);
 
         if (ph.is(PhaseType.MAIN2, ai)) {
-            if (blockerList.isEmpty() || predictedLife > ai.getStartingLife() * 2 / 3) {
+            if (blockerList.isEmpty() || ComputerUtil.predictNextCombatsRemainingLife(ai, false, true, 0, blockerList) > ai.getStartingLife() * 2 / 3) {
                 if (source.getCounters(CounterEnumType.CHARGE) < numStation) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
