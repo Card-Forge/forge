@@ -36,7 +36,7 @@
   </object>
   <object id="79" template="../../../../common/maps/obj/enemy.tx" x="744.5" y="168.62">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Baron Sengir|HML&quot;, &quot;Cemetery Gate&quot;, &quot;Seal of Doom|NEM&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Subversion|ULG&quot;, &quot;Cemetery Gate|HML|[44a]&quot;, &quot;Cemetery Gate|HML|[44b]&quot;, &quot;Koskun Falls|HML&quot;, &quot;Seal of Doom|NEM&quot;]}"/>
     <property name="enemy" value="Sengir"/>
     <property name="speedModifier" type="float" value="0"/>
     <property name="threatRange" type="int" value="0"/>

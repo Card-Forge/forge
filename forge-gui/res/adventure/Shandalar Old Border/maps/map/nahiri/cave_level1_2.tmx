@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="72">
  <editorsettings>
-  <export target="wastetown..tmx" format="tmx"/>
+  <export target="wastetown..tmx" format="tmx" />
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
  <layer id="1" name="Background" width="40" height="40">
   <data encoding="base64" compression="zlib">
    eJztwzEJAAAMA7Ae8y+tmupjJJBeUlVVVVVV1UcHQxwgzA==
@@ -17,7 +17,7 @@
  </layer>
  <layer id="3" name="Clutter" width="40" height="40">
   <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
+   <property name="spriteLayer" type="bool" value="true" />
   </properties>
   <data encoding="base64" compression="zlib">
    eJzt1+EKgjAQB/D7Umrga/XBDz5R9DLVNOitAhN6iRYtGCJ46u424f+DoYzdPLfpGBHAdlXu+o6aBWjbKz6ryYleBdE957U/l7L5+Iwtlc3taEtX/Op6RlwmmZTnO3a9yy9FT5vXgzmv2sbmqPbuT4rrDMK6CPa9E+wb4lvz7+bG3kbqNPZc465Ta5j7Hma6yWJ+DqG3kES3JGoC93cI3B9AClL9fv+uK2KzGfHDcdA6d2xdGzsBgAHJMwtADB9FdxHc
@@ -26,34 +26,163 @@
  <objectgroup id="4" name="Objects">
   <object id="61" template="../../../../../../common/maps/obj/door_up.tx" x="319.688" y="637.409">
    <properties>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel_4/cave_23B1.tmx"/>
-    <property name="teleportObjectId" value="61"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_multilevel_4/cave_23B1.tmx" />
+    <property name="teleportObjectId" value="61" />
    </properties>
   </object>
-  <object id="62" template="../../../../../../common/maps/obj/treasure.tx" x="335" y="107"/>
-  <object id="63" template="../../../../../../common/maps/obj/gold.tx" x="341.5" y="187.5"/>
-  <object id="64" template="../../../../../../common/maps/obj/treasure.tx" x="242" y="44.5"/>
-  <object id="65" template="../../../../../../common/maps/obj/treasure.tx" x="277.5" y="44"/>
-  <object id="66" template="../../../../../../common/maps/obj/gold.tx" x="261.5" y="41"/>
-  <object id="67" template="../../../../../../common/maps/obj/gold.tx" x="217" y="248.5"/>
+  <object id="62" template="../../../../../../common/maps/obj/treasure.tx" x="335" y="107"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.005,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.03,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.175,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.45,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.84,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.51,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property></properties></object>
+  <object id="63" template="../../../../../../common/maps/obj/gold.tx" x="341.5" y="187.5" />
+  <object id="64" template="../../../../../../common/maps/obj/treasure.tx" x="242" y="44.5"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.005,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.03,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.175,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.45,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.84,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.51,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property></properties></object>
+  <object id="65" template="../../../../../../common/maps/obj/treasure.tx" x="277.5" y="44"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.005,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.03,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.175,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.45,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.84,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.51,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property></properties></object>
+  <object id="66" template="../../../../../../common/maps/obj/gold.tx" x="261.5" y="41" />
+  <object id="67" template="../../../../../../common/maps/obj/gold.tx" x="217" y="248.5" />
   <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="160" y="138">
    <properties>
-    <property name="enemy" value="Werewolf"/>
+    <property name="enemy" value="Werewolf" />
    </properties>
   </object>
   <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="233.5" y="137">
    <properties>
-    <property name="enemy" value="Werewolf"/>
+    <property name="enemy" value="Werewolf" />
    </properties>
   </object>
   <object id="70" template="../../../../../../common/maps/obj/enemy.tx" x="296" y="153">
    <properties>
-    <property name="enemy" value="Werewolf"/>
+    <property name="enemy" value="Werewolf" />
    </properties>
   </object>
   <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="377.5" y="152.5">
    <properties>
-    <property name="enemy" value="Werewolf"/>
+    <property name="enemy" value="Werewolf" />
    </properties>
   </object>
  </objectgroup>

@@ -148,11 +148,11 @@ public final class AbilityFactory {
             return getAbility(mapParams, type, state, sVarHolder);
         } catch (Error | Exception ex) {
             String msg = "AbilityFactory:getAbility: crash when trying to create ability ";
-            
+
             Breadcrumb bread = new Breadcrumb(msg);
             bread.setData("Card", state.getName());
             bread.setData("Ability", abString);
-            
+
             Sentry.addBreadcrumb(bread);
             throw new RuntimeException(msg + " of card: " + state.getName(), ex);
         }

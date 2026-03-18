@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="79">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="80">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Titans' Nest&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Titans' Nest&quot;, &quot;Evolutionary Escalation&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -80,7 +80,7 @@
   <object id="70" template="../../../../common/maps/obj/waypoint.tx" x="115.628" y="210.231"/>
   <object id="71" template="../../../../common/maps/obj/waypoint.tx" x="348.909" y="146.804"/>
   <object id="72" template="../../../../common/maps/obj/waypoint.tx" x="223.669" y="193.568"/>
-  <object id="73" template="../../../../common/maps/obj/manashards.tx" x="436.524" y="73.1646"/>
+  <object id="73" template="../../../../common/maps/obj/manashards.tx" x="322.867" y="188.438"/>
   <object id="74" template="../../../../common/maps/obj/dialog.tx" x="175.297" y="229.831" width="50.167" height="15.5" visible="1">
    <properties>
     <property name="dialog">[
@@ -94,5 +94,44 @@
   </object>
   <object id="77" template="../../../../common/maps/obj/manashards.tx" x="39.3012" y="153.254"/>
   <object id="78" template="../../../../common/maps/obj/manashards.tx" x="172.605" y="52.2016"/>
+  <object id="79" template="../../../../common/maps/obj/enemy.tx" x="431.547" y="79.2629">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;A wounded man leans on a massive bone blade. 'Let's talk killing.'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;I've got a trophy for you.&quot;,
+                    &quot;text&quot;: &quot;One less monster. Good riddance. Come back if you find another.'&quot;,
+					&quot;action&quot;: [ 
+                    {&quot;grantRewards&quot;: [
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 500}
+                      ],
+                    },
+					{&quot;removeItem&quot;:&quot;Kill Trophy&quot;},
+				],
+					&quot;condition&quot;: [{&quot;item&quot;:&quot;Kill Trophy&quot;}],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]},
+				{
+					&quot;name&quot;: &quot;Let's talk.&quot;,
+					&quot;text&quot;: &quot;'This cavern's full of monsters. I got pretty badly injured hunting them, but it'd be a shame to just let good trophies go to waste.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;Trophies?&quot;,
+					&quot;text&quot;: &quot;'Sometimes you can get a special piece of the monsters here that's worth a lot to the right person. No one in these parts wants em', but I'm stocking up in case I ever get a chance to return home to Ikoria. I'll pay 500 gold apiece for any trophies you find.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;I'll keep an eye out.&quot; } ]
+					 }]
+				},
+                {
+					&quot;name&quot;: &quot;Not right now.&quot;,
+					&quot;text&quot;: &quot;'I'll be here. A hunter is always patient.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Chevill"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

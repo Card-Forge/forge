@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="35" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="79">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx" />
@@ -56,7 +56,62 @@
     <property name="threatRange" type="int" value="20" />
    </properties>
   </object>
-  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="119.354" y="112.639" />
+  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="119.354" y="112.639"><properties><property name="reward">[
+  {
+    "type": "card",
+    "probability": 0.2,
+    "count": 1,
+    "cardName": "Serra Angel|O90P"
+  },
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Armageddon|LEA"
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.04,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.18,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.66,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.66,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.32,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.14,
+    "count": 3,
+    "addMaxCount": 2
+  }
+]</property></properties></object>
   <object id="52" template="../../../../../../common/maps/obj/gold.tx" x="99.1001" y="131.475" />
   <object id="53" template="../../../../../../common/maps/obj/enemy.tx" x="122.559" y="128.649">
    <properties>
@@ -200,7 +255,7 @@
 ]</property>
     <property name="effect">{"startBattleWithCard": ["Mox Pearl|LEA", "Rainbow Knights|PAST", "White Knight|LEA"]}</property>
     <property name="enemy" value="The Sainted One" />
-    <property name="threatRange" type="int" value="50" />
-   </properties>
+    <property name="threatRange" type="int" value="100" />
+   <property name="speedModifier" type="float" value="20" /></properties>
   </object></objectgroup>
 </map>

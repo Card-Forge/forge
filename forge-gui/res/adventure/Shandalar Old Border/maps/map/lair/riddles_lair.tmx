@@ -104,8 +104,7 @@
                                 "addGold": 8000,
                                 "addShards": 250,
                                 "grantRewards": [
-                                  { "type": "randomCard", "sourceDeck": "decks/custom_lists/3ED_List.dck", "rarity": ["R"], "count": 3 },
-                                  { "type": "randomCard", "sourceDeck": "decks/custom_lists/2ED_List.dck", "rarity": ["R"], "count": 1 }
+                                  { "type": "cardPackShop", "count": 1, "editions": ["2ED"] }
                                 ]
                               }
                             ]

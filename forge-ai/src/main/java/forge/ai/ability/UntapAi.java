@@ -57,9 +57,8 @@ public class UntapAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             if (untapPrefTargeting(ai, sa, false)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
 
         final List<Card> pDefined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
@@ -85,17 +84,14 @@ public class UntapAi extends SpellAbilityAi {
             } else {
                 return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
             }
-        } else {
-            if (untapPrefTargeting(ai, sa, mandatory)) {
-                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else if (mandatory) {
-                // not enough preferred targets, but mandatory so keep going:
-                if (untapUnpreferredTargeting(sa, mandatory)) {
-                    return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
-                } else {
-                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-                }
+        } else if (untapPrefTargeting(ai, sa, mandatory)) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        } else if (mandatory) {
+            // not enough preferred targets, but mandatory so keep going:
+            if (untapUnpreferredTargeting(sa, mandatory)) {
+                return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
@@ -466,8 +462,6 @@ public class UntapAi extends SpellAbilityAi {
         // maybe we'll serendipitously untap into something like a removal spell or burn spell that'll help
         return ph.getNextTurn() == ai
                 && (ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS));
-
-        // haven't found any immediate playable options
     }
 
     @Override

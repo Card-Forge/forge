@@ -538,12 +538,13 @@
     }
   },
   {
-    "name": "Jeweled Amulet",
-    "description": "Store one mana for later use.",
+    "name": "Jeweled Necklace",
+    "description": "-2 Max Life. Store one mana for later use.",
     "equipmentSlot": "Neck",
     "iconName": "JeweledNecklace",
     "cost": 9000,
     "effect": {
+      "lifeModifier": -2,
       "startBattleWithCard": [
         "Jeweled Amulet|ICE"
       ]
@@ -673,16 +674,6 @@
     "name": "Green Key to the False God",
     "iconName": "GreenKey",
     "questItem": true
-  },
-  {
-    "name": "Steel Shield",
-    "description": "A solid steel shield granting +2 starting life.",
-    "equipmentSlot": "Left",
-    "iconName": "IronShield",
-    "cost": 1000,
-    "effect": {
-      "lifeModifier": 2
-    }
   },
   {
     "name": "Iron Armor",
@@ -1353,7 +1344,7 @@
     "description": "Pay 2 to temp transfer flying, first strike, trample, or shadow between creatures.",
     "equipmentSlot": "Neck",
     "iconName": "PhyrexianSplicer",
-    "cost": 1500,
+    "cost": 12000,
     "effect": {
       "startBattleWithCard": [
         "Phyrexian Splicer|TMP"
@@ -1655,11 +1646,12 @@
     "equipmentSlot": "Right",
     "iconName": "WombatTamersWhip",
     "effect": {
+      "lifeModifier": -2,
       "startBattleWithCard": [
         "Rabid Wombat|LEG"
       ]
     },
-    "description": "A 0/1 vigilance that gets +2/+2 for each Aura on it."
+    "description": "-2 Max Life. A 0/1 vigilance that gets +2/+2 for each Aura on it."
   },
   {
     "name": "Molten Gauntlet",
@@ -1896,11 +1888,12 @@
     "equipmentSlot": "Right",
     "iconName": "ScytheOfYawgmoth",
     "effect": {
+      "lifeModifier": -8,
       "startBattleWithCard": [
         "Order of Yawgmoth|USG"
       ]
     },
-    "description": "A 2/2 fear creature. Opponent discards when it deals damage.",
+    "description": "-8 Max Life. A 2/2 fear creature. Opponent discards when it deals damage.",
     "cost": 12000
   },
   {
@@ -2058,12 +2051,12 @@
     "equipmentSlot": "Neck",
     "iconName": "RhysticAmulet",
     "effect": {
-      "lifeModifier": -3,
+      "lifeModifier": -6,
       "startBattleWithCard": [
         "Rhystic Cave|PCY"
       ]
     },
-    "description": "-3 life. Tap for any color unless an opponent pays 1."
+    "description": "-6 Max Life. Tap for any color unless an opponent pays 1."
   },
   {
     "name": "Shoes of Sorrow",
@@ -2105,11 +2098,12 @@
     "equipmentSlot": "Neck",
     "iconName": "CrownOfTheVale",
     "effect": {
+      "lifeModifier": -4,
       "startBattleWithCard": [
         "Rainbow Vale|FEM"
       ]
     },
-    "description": "Tap for any color. Gives itself to your opponent."
+    "description": "-4 Max Life. Tap for any color. Gives itself to your opponent."
   },
   {
     "name": "Tasty Tome",
@@ -2304,18 +2298,6 @@
       ]
     },
     "description": "A 4/3 Serpent. Sac an Island to make target land an Island."
-  },
-  {
-    "name": "Phyrexian Splicer",
-    "equipmentSlot": "Neck",
-    "iconName": "PhyrexianSplicer",
-    "effect": {
-      "startBattleWithCard": [
-        "Phyrexian Splicer|TMP"
-      ]
-    },
-    "description": "Pay 2 and tap to move flying/first strike/shadow/trample.",
-    "cost": 12000
   },
   {
     "name": "Tome of the Trove",
@@ -2746,12 +2728,12 @@
   },
   {
     "name": "Krampus's Horns",
-    "description": "Start with Charcoal Diamond in play. -1 starting hand, -2 life.",
+    "description": "Start with Charcoal Diamond in play. -1 starting hand, -6 Max Life.",
     "equipmentSlot": "Neck",
     "iconName": "KrampussHorns",
     "effect": {
       "changeStartCards": -1,
-      "lifeModifier": -2,
+      "lifeModifier": -6,
       "startBattleWithCard": [
         "Charcoal Diamond|MIR"
       ]

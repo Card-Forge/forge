@@ -9,7 +9,7 @@ import java.util.*;
 public enum Keyword {
     UNDEFINED("", SimpleKeyword.class, false, ""),
     ABSORB("Absorb", KeywordWithAmount.class, false, "If a source would deal damage to this creature, prevent %d of that damage."),
-    AFFINITY("Affinity", KeywordWithType.class, false, "This spell costs {1} less to cast for each %s you control."),
+    AFFINITY("Affinity", Affinity.class, false, "This spell costs {1} less to cast for each %s you control."),
     AFFLICT("Afflict", KeywordWithAmount.class, false, "Whenever this creature becomes blocked, defending player loses %d life."),
     AFTERLIFE("Afterlife", KeywordWithAmount.class, false, "When this creature dies, create {%1$d:1/1 white and black Spirit creature token} with flying."),
     AFTERMATH("Aftermath", SimpleKeyword.class, false, "Cast this spell only from your graveyard. Then exile it."),
@@ -39,7 +39,7 @@ public enum Keyword {
     COMPLEATED("Compleated", Compleated.class, true, "This planeswalker enters with two fewer loyalty counters for each Phyrexian mana symbol life was paid for."),
     CONSPIRE("Conspire", SimpleKeyword.class, false, "As an additional cost to cast this spell, you may tap two untapped creatures you control that each share a color with it. If you do, copy it."),
     CONVOKE("Convoke", SimpleKeyword.class, true, "Your creatures can help cast this spell. Each creature you tap while playing this spell reduces its cost by {1} or by one mana of that creature's color."),
-    CRAFT("Craft", Craft.class, false, "%s: Return this card transformed under its owner's control. Craft only as a sorcery."),
+    CRAFT("Craft", Craft.class, false, "%s, Exile this artifact, %s: Return this card transformed under its owner's control. Craft only as a sorcery."),
     CREW("Crew", KeywordWithAmount.class, false, "Tap any number of creatures you control with total power %1$d or more: This Vehicle becomes an artifact creature until end of turn."),
     CUMULATIVE_UPKEEP("Cumulative upkeep", KeywordWithCost.class, false, "At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it."),
     CYCLING("Cycling", KeywordWithCost.class, false, "%s, Discard this card: Draw a card."), //Typecycling reminder text handled by Cycling class
@@ -111,7 +111,7 @@ public enum Keyword {
     KICKER("Kicker", Kicker.class, false, "You may pay an additional %s as you cast this spell."),
     JOB_SELECT("Job select", SimpleKeyword.class, false, "When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it."),
     JUMP_START("Jump-start", SimpleKeyword.class, false, "You may cast this card from your graveyard by discarding a card in addition to paying its other costs. Then exile this card."),
-    LANDWALK("Landwalk", KeywordWithType.class, true, "This creature is unblockable as long as defending player controls {1:%s}."),
+    LANDWALK("Landwalk", Landwalk.class, true, "This creature is unblockable as long as defending player controls {1:%s}."),
     LEVEL_UP("Level up", KeywordWithCost.class, false, "%s: Put a level counter on this. Level up only as a sorcery."),
     LIFELINK("Lifelink", SimpleKeyword.class, true, "Damage dealt by this creature also causes its controller to gain that much life."),
     LIVING_METAL("Living metal", SimpleKeyword.class, true, "During your turn, this Vehicle is also a creature."),
