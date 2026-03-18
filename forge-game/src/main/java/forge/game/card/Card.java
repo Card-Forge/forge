@@ -3453,6 +3453,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             if ((sa.isAdventure() || sa.isOmen()) && !getCurrentStateName().equals(sa.getCardStateName())) {
                 continue;
             }
+            if (sa.isLandAbility()) {
+                continue;
+            }
             if (!(sa instanceof SpellPermanent && sa.isBasicSpell())) {
                 return false;
             }
