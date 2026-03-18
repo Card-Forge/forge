@@ -18,8 +18,6 @@ public class GameEventForwarder {
     private final IGuiGame gui;
     private final List<GameEvent> pendingEvents = new ArrayList<>();
     private long lastFlushTime = System.nanoTime();
-    /** True when flush() is running from receiveGameEvent (game thread). */
-    private volatile boolean gameThreadFlush;
 
     private final ScheduledExecutorService scheduler =
             Executors.newSingleThreadScheduledExecutor(r -> {
@@ -46,12 +44,7 @@ public class GameEventForwarder {
         }
         if (timeThreshold || sizeThreshold) {
             cancelScheduledFlush();
-            gameThreadFlush = true;
-            try {
-                flush();
-            } finally {
-                gameThreadFlush = false;
-            }
+            flush();
         } else if (scheduledFlush == null || scheduledFlush.isDone()) {
             // Schedule a deferred flush for when the interval expires
             long delayNs = FLUSH_INTERVAL_NS - (now - lastFlushTime);
@@ -78,11 +71,6 @@ public class GameEventForwarder {
             scheduledFlush.cancel(false);
             scheduledFlush = null;
         }
-    }
-
-    /** True when flush is running on the game thread (from receiveGameEvent or flushPendingEvents). */
-    public boolean isGameThreadFlush() {
-        return gameThreadFlush;
     }
 
     public void shutdown() {

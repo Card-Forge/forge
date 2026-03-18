@@ -23,9 +23,11 @@ import forge.trackable.TrackableTypes.TrackableType;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.ConcurrentModificationException;
 import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.HashSet;
 import java.util.List;
@@ -118,7 +120,14 @@ public class DeltaSyncManager implements IHasNetLog {
         Map<Integer, Map<TrackableProperty, Object>> newObjects = new HashMap<>();
         Set<Integer> currentObjectIds = new HashSet<>();
 
-        walkAndCollect(gameView, objectDeltas, newObjects, currentObjectIds);
+        // Decide before the walk whether a checksum is due — if so, capture
+        // property snapshots during the walk under the same volatile barrier
+        // as the delta reads, so the checksum reflects exactly the values sent.
+        boolean checksumDue = onGameThread && (packetsSinceLastChecksum + 1) >= checksumInterval;
+        Map<TrackableObject, Map<TrackableProperty, Object>> checksumSnapshot =
+                checksumDue ? new IdentityHashMap<>() : null;
+
+        walkAndCollect(gameView, objectDeltas, newObjects, currentObjectIds, checksumSnapshot);
 
         // Update tracked objects — prune IDs for removed objects
         sentObjectIds.retainAll(currentObjectIds);
@@ -146,16 +155,17 @@ public class DeltaSyncManager implements IHasNetLog {
 
         long seq = sequenceNumber.incrementAndGet();
 
-        // All paths count toward the interval. Only compute on the game thread —
-        // the daemon thread can race with game-thread mutations (false positives).
-        // Tracker freeze is handled by getEffectiveValue() in the checksum computation,
-        // which reads delayed props to match what the delta carries.
+        // All paths count toward the interval. Only compute on the game thread.
+        // When checksumSnapshot is non-null, compute from the snapshot captured
+        // during walkAndCollect — this eliminates false positives from the game
+        // thread modifying properties between the delta build and checksum read.
         int checksum = 0;
         int[] checksumPropertyOrdinals = null;
         packetsSinceLastChecksum++;
-        if (onGameThread && packetsSinceLastChecksum >= checksumInterval) {
+        if (checksumDue) {
             checksumPropertyOrdinals = selectChecksumProperties();
-            checksum = NetworkChecksumUtil.computeSampledChecksum(gameView, checksumPropertyOrdinals);
+            checksum = NetworkChecksumUtil.computeSampledChecksumFromSnapshot(
+                    gameView, checksumPropertyOrdinals, checksumSnapshot, null);
             packetsSinceLastChecksum = 0;
             recentDeltaProperties.clear();
             cleanChecksumStreak++;
@@ -174,7 +184,8 @@ public class DeltaSyncManager implements IHasNetLog {
             int phaseOrdinal = gameView.getPhase() != null ? gameView.getPhase().ordinal() : -1;
             lastChecksumBreakdown = NetworkChecksumUtil.computeChecksumBreakdown(turn, phaseOrdinal, gameView);
             List<String> detail = new ArrayList<>();
-            NetworkChecksumUtil.computeSampledChecksum(gameView, checksumPropertyOrdinals, detail);
+            NetworkChecksumUtil.computeSampledChecksumFromSnapshot(
+                    gameView, checksumPropertyOrdinals, checksumSnapshot, detail);
             lastChecksumDetail = detail;
         }
 
@@ -248,11 +259,16 @@ public class DeltaSyncManager implements IHasNetLog {
      * Recursively walk the object graph starting from a TrackableObject, collecting deltas.
      * Discovers children by inspecting property values for TrackableObject/TrackableCollection
      * references. CombatView is serialized inline by toNetworkValue().
+     *
+     * @param checksumSnapshot if non-null, captures a property snapshot of each object
+     *                         under the same volatile barrier as the delta reads, for
+     *                         computing a race-free server checksum
      */
     private void walkAndCollect(TrackableObject obj,
                                 Map<Integer, Map<TrackableProperty, Object>> objectDeltas,
                                 Map<Integer, Map<TrackableProperty, Object>> newObjects,
-                                Set<Integer> currentObjectIds) {
+                                Set<Integer> currentObjectIds,
+                                Map<TrackableObject, Map<TrackableProperty, Object>> checksumSnapshot) {
         if (obj == null) {
             return;
         }
@@ -280,13 +296,38 @@ public class DeltaSyncManager implements IHasNetLog {
         obj.getVersion(); // volatile read — memory barrier for child traversal
         Map<TrackableProperty, Object> props = obj.getProps();
         if (props != null) {
-            for (Object value : props.values()) {
+            // Capture property snapshot for checksum under the same volatile barrier
+            // as the delta reads — ensures the checksum reflects exactly the values
+            // the client will have after applying this delta.
+            if (checksumSnapshot != null && !checksumSnapshot.containsKey(obj)) {
+                try {
+                    Map<TrackableProperty, Object> snap = new EnumMap<>(props);
+                    Tracker tracker = obj.getTracker();
+                    if (tracker != null && tracker.isFrozen()) {
+                        snap.putAll(tracker.getDelayedPropsFor(obj));
+                    }
+                    checksumSnapshot.put(obj, snap);
+                } catch (ConcurrentModificationException e) {
+                    // Skip snapshot for this object — rare race, checksum will
+                    // use live read as fallback via getEffectiveValue
+                }
+            }
+
+            // Snapshot values to avoid ConcurrentModificationException — the game
+            // thread may add/remove props entries while the daemon iterates.
+            Object[] values;
+            try {
+                values = props.values().toArray();
+            } catch (ConcurrentModificationException e) {
+                return; // Rare race — skip children this pass, next delta catches up
+            }
+            for (Object value : values) {
                 if (value instanceof TrackableObject to) {
-                    walkAndCollect(to, objectDeltas, newObjects, currentObjectIds);
+                    walkAndCollect(to, objectDeltas, newObjects, currentObjectIds, checksumSnapshot);
                 } else if (value instanceof TrackableCollection) {
                     for (Object item : (TrackableCollection<?>) value) {
                         if (item instanceof TrackableObject to) {
-                            walkAndCollect(to, objectDeltas, newObjects, currentObjectIds);
+                            walkAndCollect(to, objectDeltas, newObjects, currentObjectIds, checksumSnapshot);
                         }
                     }
                 }
@@ -347,8 +388,15 @@ public class DeltaSyncManager implements IHasNetLog {
         if (props == null || props.isEmpty()) {
             return new EnumMap<>(TrackableProperty.class);
         }
+        // Snapshot to avoid ConcurrentModificationException from game-thread writes
+        Map<TrackableProperty, Object> snapshot;
+        try {
+            snapshot = new EnumMap<>(props);
+        } catch (ConcurrentModificationException e) {
+            return new EnumMap<>(TrackableProperty.class); // Rare race — next delta catches up
+        }
         Map<TrackableProperty, Object> result = new EnumMap<>(TrackableProperty.class);
-        for (Map.Entry<TrackableProperty, Object> entry : props.entrySet()) {
+        for (Map.Entry<TrackableProperty, Object> entry : snapshot.entrySet()) {
             Object netValue = toNetworkValue(entry.getKey(), entry.getValue());
             if (netValue != SKIP_MARKER) {
                 result.put(entry.getKey(), netValue);

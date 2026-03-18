@@ -503,7 +503,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
             GameView gameView = getGameView();
             if (gameView != null) {
                 synchronized (deltaLock) {
-                    boolean onGameThread = flushing || (forwarder != null && forwarder.isGameThreadFlush());
+                    boolean onGameThread = flushing || forge.util.ThreadUtil.isGameThread();
                     DeltaPacket delta = deltaSyncManager.collectDeltas(gameView, onGameThread);
                     delta.setProxiedEvents(proxied);
                     sender.send(ProtocolMethod.applyDelta, delta);
