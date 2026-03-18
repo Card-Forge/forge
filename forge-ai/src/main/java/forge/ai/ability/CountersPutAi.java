@@ -1243,17 +1243,38 @@ public class CountersPutAi extends CountersAi {
     private AiAbilityDecision doStationAi(Player ai, SpellAbility sa) {
         Card source = sa.getHostCard();
         PhaseHandler ph = source.getGame().getPhaseHandler();
+
         int numStation = source.getKeywordMagnitude(Keyword.STATION);
+        int numCharge = source.getCounters(CounterEnumType.CHARGE);
+        CardCollection canTap = CardLists.filter(ai.getCreaturesInPlay(), c -> c.getNetPower() > 0 && c.isUntapped());
+        if (canTap.isEmpty()) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
+
+        CardLists.sortByPowerAsc(canTap); // Note: matches the way chooseTapType sorts them; maybe worth sorting in descending order for Station?
 
         // TODO: make this smarter so that the AI is better at predicting conditions when this is safe
         // (also needs a modification to willPayCosts and ComputerUtil.chooseTapType to make better choices for what exactly to tap)
-        CardCollection canTap = CardLists.filter(ai.getCreaturesInPlay(), CardPredicates.UNTAPPED);
-        List<Card> nextTurnAttackers = CardLists.filter(ai.getStrongestOpponent().getCreaturesInPlay(), c -> CombatUtil.canAttackNextTurn(c, ai));
-        CardCollection blockerList = CardLists.filter(canTap, CardPredicates.possibleBlockerForAtLeastOne(nextTurnAttackers));
 
+        // If a single creature is enough to turn an untapped station into a creature, allow it
+        if (ph.is(PhaseType.MAIN1, ai)) {
+            Card firstToTap = canTap.getFirst();
+            if (source.getType().hasSubtype("Spacecraft") && !source.isCreature() && source.isUntapped()) {
+                if (numCharge < numStation && numCharge + firstToTap.getNetPower() >= numStation
+                        && firstToTap.getNetPower() > 0
+                        && firstToTap.getNetPower() <= source.getBasePower()) {
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                }
+            }
+        }
+
+        // If there's nothing to possibly block next turn, or we can reasonably stay on high enough life, go for it
         if (ph.is(PhaseType.MAIN2, ai)) {
+            List<Card> nextTurnAttackers = CardLists.filter(ai.getStrongestOpponent().getCreaturesInPlay(), c -> CombatUtil.canAttackNextTurn(c, ai));
+            CardCollection blockerList = CardLists.filter(canTap, CardPredicates.possibleBlockerForAtLeastOne(nextTurnAttackers));
+
             if (blockerList.isEmpty() || ComputerUtil.predictNextCombatsRemainingLife(ai, false, true, 0, blockerList) > ai.getStartingLife() * 2 / 3) {
-                if (source.getCounters(CounterEnumType.CHARGE) < numStation) {
+                if (numCharge < numStation) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
             }

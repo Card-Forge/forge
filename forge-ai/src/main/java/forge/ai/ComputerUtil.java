@@ -692,7 +692,12 @@ public class ComputerUtil {
             return null;
         }
 
+        if (sa.isKeyword(Keyword.STATION)) {
+            typeList.removeAll(CardLists.filter(typeList, c -> c.getNetPower() <= 0));
+        }
+
         CardLists.sortByPowerAsc(typeList);
+
         // TODO prefer noncreatures without tap abilities
 
         final CardCollection tapList = new CardCollection();
@@ -700,6 +705,7 @@ public class ComputerUtil {
         for (int i = 0; i < amount; i++) {
             tapList.add(typeList.get(i));
         }
+
         return tapList;
     }
 
