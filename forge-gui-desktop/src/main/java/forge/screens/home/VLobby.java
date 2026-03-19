@@ -110,6 +110,8 @@ public class VLobby implements ILobbyView {
     private final JPanel decksFrame = new JPanel(new MigLayout("insets 0, gap 0, wrap, hidemode 3"));
     private final FCheckBox cbSingletons = new FCheckBox(localizer.getMessage("cbSingletons"));
     private final FCheckBox cbArtifacts = new FCheckBox(localizer.getMessage("cbRemoveArtifacts"));
+    // Shared team life checkbox (controls GameRules.useSharedTeamLife)
+    private final FCheckBox cbSharedTeamLife = new FCheckBox("Use shared team life");
     private final Deck[] decks = new Deck[MAX_PLAYERS];
 
     // Variants
@@ -182,6 +184,8 @@ public class VLobby implements ILobbyView {
             pnlStart.add(btnStart, "align center");
             // Start button event handling
             btnStart.addActionListener(arg0 -> {
+                // apply shared team life selection to lobby before starting
+                lobby.setUseSharedTeamLife(cbSharedTeamLife.isSelected());
                 Runnable startGame = lobby.startGame();
                 if (startGame != null) {
                     startGame.run();
@@ -198,6 +202,39 @@ public class VLobby implements ILobbyView {
         gamesInMatchFrame.setOpaque(false);
 
         pnlStart.add(gamesInMatchFrame);
+        // Add shared team life checkbox into start panel
+        cbSharedTeamLife.setToolTipText("If enabled, teammates share a single life total.");
+        cbSharedTeamLife.setSelected(false);
+        pnlStart.add(cbSharedTeamLife, "spanx 2, wrap");
+    }
+
+    /** Enable or disable the shared-team-life checkbox depending on team sizes. */
+    private void updateSharedTeamLifeCheckboxState() {
+        if (cbSharedTeamLife == null) { return; }
+        // Use lobby slot data (not UI panels) to determine team counts to avoid
+        // accessing playerPanels before they're created.
+        final Map<Integer, Integer> teamCounts = new HashMap<>();
+        final boolean useArchenemyTeams = lobby.hasVariant(GameType.Archenemy);
+        final int nSlots = lobby.getNumberOfSlots();
+        for (int i = 0; i < nSlots; i++) {
+            final LobbySlot slot = lobby.getSlot(i);
+            if (slot == null) { continue; }
+            if (slot.getType() == LobbySlotType.OPEN) { continue; }
+            final int team = useArchenemyTeams ? (slot.isArchenemy() ? 0 : 1) : slot.getTeam();
+            teamCounts.put(team, teamCounts.getOrDefault(team, 0) + 1);
+        }
+        boolean anyTeamHasMultiple = false;
+        for (final Integer cnt : teamCounts.values()) {
+            if (cnt != null && cnt >= 2) {
+                anyTeamHasMultiple = true;
+                break;
+            }
+        }
+        cbSharedTeamLife.setEnabled(anyTeamHasMultiple);
+        if (!anyTeamHasMultiple) {
+            cbSharedTeamLife.setSelected(false);
+            lobby.setUseSharedTeamLife(false);
+        }
     }
 
     public void updateDeckPanel() {
@@ -245,6 +282,9 @@ public class VLobby implements ILobbyView {
         addPlayerBtn.setEnabled(activePlayersNum < MAX_PLAYERS);
 
         final boolean allowNetworking = lobby.isAllowNetworking();
+
+        // Update shared-team-life checkbox availability whenever the lobby updates
+        updateSharedTeamLifeCheckboxState();
 
         ImmutableList<VariantCheckBox> vntBoxes = null;
         if (allowNetworking) {
@@ -679,6 +719,7 @@ public class VLobby implements ILobbyView {
         populateDeckPanel(gType);
 
         refreshPanels(true, true);
+        updateSharedTeamLifeCheckboxState();
     }
 
     /** Saves avatar prefs for players one and two. */
