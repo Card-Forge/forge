@@ -19,7 +19,8 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
     private volatile int version;
     // Per-consumer dirty tracking. Lazy-init: null until first registerConsumer.
     // In offline games (no consumers), set() does no tracking work at all.
-    private transient Map<Integer, EnumSet<TrackableProperty>> consumers;
+    // Volatile: multiple DeltaSyncManager threads call registerConsumer concurrently.
+    private transient volatile Map<Integer, EnumSet<TrackableProperty>> consumers;
     private boolean copyingProps;
 
     protected TrackableObject(final int id0, final Tracker tracker) {
@@ -98,11 +99,12 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
      * Mark a property as dirty for all registered consumers and increment version.
      */
     private void markDirtyForConsumers(final TrackableProperty key) {
-        if (consumers == null) {
+        Map<Integer, EnumSet<TrackableProperty>> c = consumers;
+        if (c == null) {
             return;
         }
         version++;
-        for (EnumSet<TrackableProperty> dirtySet : consumers.values()) {
+        for (EnumSet<TrackableProperty> dirtySet : c.values()) {
             synchronized (dirtySet) {
                 dirtySet.add(key);
             }
@@ -135,7 +137,7 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
         // Callers mutate Map/List/Collection in-place then call this method. Without the
         // copy, the daemon thread's toNetworkValue or walkAndCollect could iterate the
         // same mutable object while the game thread mutates it on the next update.
-        if (consumers != null) {
+        if (consumers != null) { // volatile read — safe even if concurrently nulled
             Object value = props.get(key);
             if (value instanceof TrackableCollection) {
                 TrackableCollection copy = new TrackableCollection<>();
@@ -163,10 +165,17 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
      * Creates an EnumSet for this consumer; lazy-inits the consumer map.
      */
     public void registerConsumer(int consumerId) {
-        if (consumers == null) {
-            consumers = new ConcurrentHashMap<>();
+        Map<Integer, EnumSet<TrackableProperty>> c = consumers;
+        if (c == null) {
+            synchronized (this) {
+                c = consumers;
+                if (c == null) {
+                    c = new ConcurrentHashMap<>();
+                    consumers = c;
+                }
+            }
         }
-        consumers.putIfAbsent(consumerId, EnumSet.noneOf(TrackableProperty.class));
+        c.putIfAbsent(consumerId, EnumSet.noneOf(TrackableProperty.class));
     }
 
     /**
@@ -187,10 +196,11 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
      * Returns a snapshot copy; the consumer's dirty set is cleared.
      */
     public EnumSet<TrackableProperty> getAndClearDirtyProps(int consumerId) {
-        if (consumers == null) {
+        Map<Integer, EnumSet<TrackableProperty>> c = consumers;
+        if (c == null) {
             return EnumSet.noneOf(TrackableProperty.class);
         }
-        EnumSet<TrackableProperty> dirtySet = consumers.get(consumerId);
+        EnumSet<TrackableProperty> dirtySet = c.get(consumerId);
         if (dirtySet == null) {
             return EnumSet.noneOf(TrackableProperty.class);
         }
@@ -208,10 +218,11 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
      * Quick check if a consumer has pending changes.
      */
     public boolean hasConsumerChanges(int consumerId) {
-        if (consumers == null) {
+        Map<Integer, EnumSet<TrackableProperty>> c = consumers;
+        if (c == null) {
             return false;
         }
-        EnumSet<TrackableProperty> dirtySet = consumers.get(consumerId);
+        EnumSet<TrackableProperty> dirtySet = c.get(consumerId);
         if (dirtySet == null) {
             return false;
         }
