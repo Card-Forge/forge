@@ -129,11 +129,6 @@ public class NewGameScene extends MenuScene {
             AdventureModes.Custom.setModes(custom);
         }
 
-        // Commander game mode in selection screen
-        modes.add(AdventureModes.Commander);
-        AdventureModes.Commander.setSelectionName(colorIdLabel);
-        AdventureModes.Commander.setModes(colorNames);
-
         String[] modeNames = new String[modes.size];
         int constructedIndex = -1;
 
@@ -469,7 +464,7 @@ public class NewGameScene extends MenuScene {
                 summaryText.append("Mode: Commander\n\nYou will be given a preconstructed commander deck based on the chosen color theme to start the playthrough.\n\nGood luck on your quest of creating a coherent deck that can win consistently and defeat the bosses.");
                 break;
             default:
-                summaryText.append("No summary available for your this game mode.");
+                summaryText.append("No summary available for this game mode.");
                 break;
         }
 
