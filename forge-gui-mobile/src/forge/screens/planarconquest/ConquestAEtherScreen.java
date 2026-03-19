@@ -123,6 +123,7 @@ public class ConquestAEtherScreen extends FScreen {
             } else if (card.getRarity() == CardRarity.BasicLand
                     && !card.isVeryBasicLand()
                     && selectedRarity == CardRarity.Common
+                    && btnCMCFilter.selectedOption == ConquestUtil.CMCFilter.CMC_LOW
                     && card.getRules().getColorIdentity().hasNoColorsExcept(commander.getCard().getRules().getColorIdentity())) {
                 filteredPool.add(card);
             }
