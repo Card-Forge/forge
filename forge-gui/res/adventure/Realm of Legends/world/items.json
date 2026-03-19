@@ -2424,7 +2424,7 @@
     "effect": {
         "lifeModifier": -6,
         "startBattleWithCard": [
-        "Binding of the Titans|THB"
+        "The Binding of the Titans|THB"
      ]
     }
   },
@@ -2615,13 +2615,16 @@
   },
     {
     "name": "Mask of Valgavoth",
-    "description": "Your opponents creatures lose hexproof and ward, if recurred gives -3/-3 on enter",
+    "description": "Cancels opponent's hexproof and ward, -3 enemy life",
     "equipmentSlot": "Neck",
     "iconName": "MaskofValgavoth",
     "effect": {
         "startBattleWithCard": [
         "Nowhere to Run|DSK"
-     ]
+     ],
+      "opponent": {
+        "lifeModifier": -3
+      }
     }
   },
     {

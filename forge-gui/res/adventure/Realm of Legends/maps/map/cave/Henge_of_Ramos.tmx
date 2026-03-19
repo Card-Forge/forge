@@ -63,7 +63,7 @@
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 5,
-  &quot;colorType&quot;: [ &quot;multicolor&quot; ],
+  &quot;colorType&quot;: [ &quot;MultiColor&quot; ],
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
   &quot;colors&quot;: [ &quot;white&quot;, &quot;blue&quot;, &quot;black&quot;, &quot;red&quot;, &quot;green&quot; ]
 }]</property>
@@ -174,35 +174,35 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
-  &quot;colorType&quot;: [ &quot;multicolor&quot; ],
+  &quot;colorType&quot;: [ &quot;MultiColor&quot; ],
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
   &quot;colors&quot;: [ &quot;white&quot;, &quot;blue&quot;, &quot;green&quot; ]
 },
 {
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
-  &quot;colorType&quot;: [ &quot;multicolor&quot; ],
+  &quot;colorType&quot;: [ &quot;MultiColor&quot; ],
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
   &quot;colors&quot;: [ &quot;blue&quot;, &quot;black&quot;, &quot;green&quot; ]
 },
 {
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
-  &quot;colorType&quot;: [ &quot;multicolor&quot; ],
+  &quot;colorType&quot;: [ &quot;MultiColor&quot; ],
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
   &quot;colors&quot;: [ &quot;black&quot;, &quot;red&quot;, &quot;white&quot; ]
 },
 {
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
-  &quot;colorType&quot;: [ &quot;multicolor&quot; ],
+  &quot;colorType&quot;: [ &quot;MultiColor&quot; ],
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
   &quot;colors&quot;: [ &quot;white&quot;, &quot;blue&quot;, &quot;red&quot; ]
 },
 {
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
-  &quot;colorType&quot;: [ &quot;multicolor&quot; ],
+  &quot;colorType&quot;: [ &quot;MultiColor&quot; ],
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
   &quot;colors&quot;: [ &quot;blue&quot;, &quot;red&quot;, &quot;green&quot; ]
 }]</property>
@@ -213,35 +213,35 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
-  &quot;colorType&quot;: [ &quot;multicolor&quot; ],
+  &quot;colorType&quot;: [ &quot;MultiColor&quot; ],
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
   &quot;colors&quot;: [ &quot;white&quot;, &quot;blue&quot;, &quot;black&quot; ]
 },
 {
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
-  &quot;colorType&quot;: [ &quot;multicolor&quot; ],
+  &quot;colorType&quot;: [ &quot;MultiColor&quot; ],
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
   &quot;colors&quot;: [ &quot;blue&quot;, &quot;black&quot;, &quot;red&quot; ]
 },
 {
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
-  &quot;colorType&quot;: [ &quot;multicolor&quot; ],
+  &quot;colorType&quot;: [ &quot;MultiColor&quot; ],
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
   &quot;colors&quot;: [ &quot;black&quot;, &quot;red&quot;, &quot;green&quot; ]
 },
 {
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
-  &quot;colorType&quot;: [ &quot;multicolor&quot; ],
+  &quot;colorType&quot;: [ &quot;MultiColor&quot; ],
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
   &quot;colors&quot;: [ &quot;white&quot;, &quot;blue&quot;, &quot;green&quot; ]
 },
 {
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
-  &quot;colorType&quot;: [ &quot;multicolor&quot; ],
+  &quot;colorType&quot;: [ &quot;MultiColor&quot; ],
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
   &quot;colors&quot;: [ &quot;white&quot;, &quot;red&quot;, &quot;green&quot; ]
 }]</property>
