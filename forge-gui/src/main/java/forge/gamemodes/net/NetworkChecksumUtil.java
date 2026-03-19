@@ -166,8 +166,9 @@ public final class NetworkChecksumUtil {
             hash = 31 * hash + (Boolean.TRUE.equals(snapValue(card, TrackableProperty.Flipped, snapshot)) ? 1 : 0);
         }
 
-        CombatView combat = gameView.getCombat();
-        if (combat != null) {
+        Object combatObj = snapValue(gameView, TrackableProperty.CombatView, snapshot);
+        if (combatObj instanceof CombatView) {
+            CombatView combat = (CombatView) combatObj;
             hash = 31 * hash + combat.getNumAttackers();
             List<Integer> attackerIds = new ArrayList<>();
             for (CardView attacker : combat.getAttackers()) {
@@ -179,8 +180,9 @@ public final class NetworkChecksumUtil {
             }
         }
 
-        if (gameView.getStack() != null) {
-            hash = 31 * hash + gameView.getStack().size();
+        Object stackObj = snapValue(gameView, TrackableProperty.Stack, snapshot);
+        if (stackObj instanceof TrackableCollection<?>) {
+            hash = 31 * hash + ((TrackableCollection<?>) stackObj).size();
         }
 
         return hash;
@@ -191,7 +193,11 @@ public final class NetworkChecksumUtil {
                                      Map<TrackableObject, Map<TrackableProperty, Object>> snapshot) {
         if (snapshot != null) {
             Map<TrackableProperty, Object> snap = snapshot.get(obj);
-            if (snap != null && snap.containsKey(prop)) {
+            if (snap != null) {
+                // Snapshot is authoritative — absent key means the property is at
+                // its default value (null). Do NOT fall back to live state, which
+                // can race with game-thread mutations and read a value that differs
+                // from what the delta carries.
                 return snap.get(prop);
             }
         }
@@ -357,7 +363,8 @@ public final class NetworkChecksumUtil {
         }
         sb.append(" afterCards=").append(hash);
 
-        CombatView combat = gameView.getCombat();
+        Object combatObj = snapValue(gameView, TrackableProperty.CombatView, snapshot);
+        CombatView combat = combatObj instanceof CombatView ? (CombatView) combatObj : null;
         sb.append(" | combat=").append(combat != null ? combat.getNumAttackers() : "null");
         if (combat != null) {
             hash = 31 * hash + combat.getNumAttackers();
@@ -372,8 +379,9 @@ public final class NetworkChecksumUtil {
         }
         sb.append(" afterCombat=").append(hash);
 
-        int stackSize = gameView.getStack() != null ? gameView.getStack().size() : 0;
-        if (gameView.getStack() != null) {
+        Object stackObj = snapValue(gameView, TrackableProperty.Stack, snapshot);
+        int stackSize = stackObj instanceof TrackableCollection<?> ? ((TrackableCollection<?>) stackObj).size() : 0;
+        if (stackObj instanceof TrackableCollection<?>) {
             hash = 31 * hash + stackSize;
         }
         sb.append(" | stack=").append(stackSize);

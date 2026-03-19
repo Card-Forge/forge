@@ -362,6 +362,8 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
                 CardView cv = tracker.getObj(TrackableTypes.CardViewType, id);
                 if (cv != null) {
                     attackers.add(cv);
+                } else {
+                    netLog.warn("[DeltaSync] CombatView attacker CardView ID={} not found in tracker (band {})", id, i);
                 }
             }
 
@@ -369,6 +371,10 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
             forge.game.GameEntityView defender = defRef[0] == 0
                     ? tracker.getObj(TrackableTypes.CardViewType, defRef[1])
                     : tracker.getObj(TrackableTypes.PlayerViewType, defRef[1]);
+            if (defender == null) {
+                netLog.warn("[DeltaSync] CombatView defender ID={} (type={}) not found in tracker (band {})",
+                        defRef[1], defRef[0] == 0 ? "Card" : "Player", i);
+            }
 
             List<CardView> blockers = null;
             List<Integer> blockerIds = data.bandBlockerIds.get(i);
@@ -378,6 +384,8 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
                     CardView cv = tracker.getObj(TrackableTypes.CardViewType, id);
                     if (cv != null) {
                         blockers.add(cv);
+                    } else {
+                        netLog.warn("[DeltaSync] CombatView blocker CardView ID={} not found in tracker (band {})", id, i);
                     }
                 }
             }
@@ -390,6 +398,8 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
                     CardView cv = tracker.getObj(TrackableTypes.CardViewType, id);
                     if (cv != null) {
                         plannedBlockers.add(cv);
+                    } else {
+                        netLog.warn("[DeltaSync] CombatView planned blocker CardView ID={} not found in tracker (band {})", id, i);
                     }
                 }
             }

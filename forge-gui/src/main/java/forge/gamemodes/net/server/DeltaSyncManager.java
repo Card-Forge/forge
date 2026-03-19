@@ -67,8 +67,11 @@ public class DeltaSyncManager implements IHasNetLog {
     private final Map<Integer, TrackableObject> registeredByKey = new HashMap<>();
 
     // Not atomic: only accessed from game thread
-    // Initialized to interval so the very first packet triggers a checksum
-    private long packetsSinceLastChecksum = CHECKSUM_INTERVAL;
+    // Start at 0 so the first checksum is deferred until the game state stabilizes.
+    // The first delta (seq=1) races with game initialization (hand drawing), so
+    // an immediate checksum would compare a mid-initialization snapshot against
+    // the client's post-delta state, causing false mismatches (~7% of games).
+    private long packetsSinceLastChecksum = 0;
 
     // Sampled checksum state
     private final EnumSet<TrackableProperty> recentDeltaProperties = EnumSet.noneOf(TrackableProperty.class);
@@ -92,7 +95,7 @@ public class DeltaSyncManager implements IHasNetLog {
 
         sequenceNumber.set(0);
         sentObjectIds.clear();
-        packetsSinceLastChecksum = CHECKSUM_INTERVAL;
+        packetsSinceLastChecksum = 0;
         recentDeltaProperties.clear();
         checksumInterval = CHECKSUM_INTERVAL;
         cleanChecksumStreak = 0;
@@ -197,7 +200,8 @@ public class DeltaSyncManager implements IHasNetLog {
 
     private void collectObjectDelta(TrackableObject obj,
                                     Map<Integer, Map<TrackableProperty, Object>> objectDeltas,
-                                    Map<Integer, Map<TrackableProperty, Object>> newObjects) {
+                                    Map<Integer, Map<TrackableProperty, Object>> newObjects,
+                                    Map<TrackableObject, Map<TrackableProperty, Object>> checksumSnapshot) {
         int deltaKey = DeltaPacket.makeDeltaKey(obj);
 
         if (!sentObjectIds.contains(deltaKey)) {
@@ -211,7 +215,7 @@ public class DeltaSyncManager implements IHasNetLog {
             registeredByKey.put(deltaKey, obj);
             obj.getAndClearDirtyProps(consumerId);
 
-            Map<TrackableProperty, Object> allProps = buildFullPropertyMap(obj);
+            Map<TrackableProperty, Object> allProps = buildFullPropertyMap(obj, checksumSnapshot);
             mergeDelayedProps(obj, allProps);
             if (!allProps.isEmpty()) {
                 newObjects.put(deltaKey, allProps);
@@ -231,7 +235,7 @@ public class DeltaSyncManager implements IHasNetLog {
             obj.registerConsumer(consumerId);
             registeredByKey.put(deltaKey, obj);
             obj.getAndClearDirtyProps(consumerId);
-            Map<TrackableProperty, Object> allProps = buildFullPropertyMap(obj);
+            Map<TrackableProperty, Object> allProps = buildFullPropertyMap(obj, checksumSnapshot);
             mergeDelayedProps(obj, allProps);
             if (!allProps.isEmpty()) {
                 objectDeltas.remove(deltaKey);
@@ -244,9 +248,15 @@ public class DeltaSyncManager implements IHasNetLog {
             EnumSet<TrackableProperty> dirtyProps = obj.hasConsumerChanges(consumerId)
                     ? obj.getAndClearDirtyProps(consumerId)
                     : EnumSet.noneOf(TrackableProperty.class);
-            Map<TrackableProperty, Object> delta = dirtyProps.isEmpty()
-                    ? new EnumMap<>(TrackableProperty.class)
-                    : buildPropertyMap(obj, dirtyProps);
+            Map<TrackableProperty, Object> delta;
+            if (!dirtyProps.isEmpty()) {
+                delta = buildPropertyMap(obj, dirtyProps, checksumSnapshot);
+            } else {
+                delta = new EnumMap<>(TrackableProperty.class);
+                // Still capture checksum snapshot even with no dirty props — the
+                // checksum reads ALL properties (Life, zones, P/T), not just dirty ones.
+                captureChecksumSnapshot(obj, checksumSnapshot);
+            }
             mergeDelayedProps(obj, delta);
             if (!delta.isEmpty()) {
                 objectDeltas.put(deltaKey, delta);
@@ -288,32 +298,15 @@ public class DeltaSyncManager implements IHasNetLog {
             // Different instance at same key — let replacement detection handle the
             // delta, then fall through to walk children so that child replacements
             // (e.g. CardStateViews with updated P/T) are also picked up.
-            collectObjectDelta(obj, objectDeltas, newObjects);
+            collectObjectDelta(obj, objectDeltas, newObjects, checksumSnapshot);
         } else {
             currentObjectIds.add(deltaKey);
-            collectObjectDelta(obj, objectDeltas, newObjects);
+            collectObjectDelta(obj, objectDeltas, newObjects, checksumSnapshot);
         }
 
         obj.getVersion(); // volatile read — memory barrier for child traversal
         Map<TrackableProperty, Object> props = obj.getProps();
         if (props != null) {
-            // Capture property snapshot for checksum under the same volatile barrier
-            // as the delta reads — ensures the checksum reflects exactly the values
-            // the client will have after applying this delta.
-            if (checksumSnapshot != null && !checksumSnapshot.containsKey(obj)) {
-                try {
-                    Map<TrackableProperty, Object> snap = new EnumMap<>(props);
-                    Tracker tracker = obj.getTracker();
-                    if (tracker != null && tracker.isFrozen()) {
-                        snap.putAll(tracker.getDelayedPropsFor(obj));
-                    }
-                    checksumSnapshot.put(obj, snap);
-                } catch (ConcurrentModificationException e) {
-                    // Skip snapshot for this object — rare race, checksum will
-                    // use live read as fallback via getEffectiveValue
-                }
-            }
-
             // Snapshot values to avoid ConcurrentModificationException — the game
             // thread may add/remove props entries while the daemon iterates.
             Object[] values;
@@ -379,16 +372,36 @@ public class DeltaSyncManager implements IHasNetLog {
      * Values are converted to network-safe form via toNetworkValue.
      */
     private Map<TrackableProperty, Object> buildPropertyMap(TrackableObject obj,
-                                                             EnumSet<TrackableProperty> dirtyProps) {
+                                                             EnumSet<TrackableProperty> dirtyProps,
+                                                             Map<TrackableObject, Map<TrackableProperty, Object>> checksumSnapshot) {
         // Volatile read of version establishes happens-before from the game thread's
         // props.put (which precedes the volatile version++ in markDirtyForConsumers).
         // Without this, the daemon thread's props.get may see stale values when the
         // game thread modifies properties concurrently after the dirty bit was consumed.
         obj.getVersion();
         Map<TrackableProperty, Object> props = obj.getProps();
+        // Snapshot all properties to ensure cross-property consistency and to provide
+        // the checksum snapshot from the SAME read as the delta values.
+        Map<TrackableProperty, Object> snapshot;
+        try {
+            snapshot = new EnumMap<>(props);
+        } catch (ConcurrentModificationException e) {
+            return new EnumMap<>(TrackableProperty.class); // Rare race — next delta catches up
+        }
+        // Store snapshot for checksum computation — same values the delta carries
+        if (checksumSnapshot != null && !checksumSnapshot.containsKey(obj)) {
+            Tracker tracker = obj.getTracker();
+            if (tracker != null && tracker.isFrozen()) {
+                Map<TrackableProperty, Object> withDelayed = new EnumMap<>(snapshot);
+                withDelayed.putAll(tracker.getDelayedPropsFor(obj));
+                checksumSnapshot.put(obj, withDelayed);
+            } else {
+                checksumSnapshot.put(obj, snapshot);
+            }
+        }
         Map<TrackableProperty, Object> delta = new EnumMap<>(TrackableProperty.class);
         for (TrackableProperty prop : dirtyProps) {
-            Object netValue = toNetworkValue(prop, props.get(prop));
+            Object netValue = toNetworkValue(prop, snapshot.get(prop));
             if (netValue != SKIP_MARKER) {
                 delta.put(prop, netValue);
             }
@@ -399,7 +412,8 @@ public class DeltaSyncManager implements IHasNetLog {
     /**
      * Build a full property map for a new object (all properties).
      */
-    private Map<TrackableProperty, Object> buildFullPropertyMap(TrackableObject obj) {
+    private Map<TrackableProperty, Object> buildFullPropertyMap(TrackableObject obj,
+                                                                 Map<TrackableObject, Map<TrackableProperty, Object>> checksumSnapshot) {
         obj.getVersion(); // volatile read — memory barrier (see buildPropertyMap)
         Map<TrackableProperty, Object> props = obj.getProps();
         if (props == null || props.isEmpty()) {
@@ -412,6 +426,17 @@ public class DeltaSyncManager implements IHasNetLog {
         } catch (ConcurrentModificationException e) {
             return new EnumMap<>(TrackableProperty.class); // Rare race — next delta catches up
         }
+        // Store snapshot for checksum computation — same values the delta carries
+        if (checksumSnapshot != null && !checksumSnapshot.containsKey(obj)) {
+            Tracker tracker = obj.getTracker();
+            if (tracker != null && tracker.isFrozen()) {
+                Map<TrackableProperty, Object> withDelayed = new EnumMap<>(snapshot);
+                withDelayed.putAll(tracker.getDelayedPropsFor(obj));
+                checksumSnapshot.put(obj, withDelayed);
+            } else {
+                checksumSnapshot.put(obj, snapshot);
+            }
+        }
         Map<TrackableProperty, Object> result = new EnumMap<>(TrackableProperty.class);
         for (Map.Entry<TrackableProperty, Object> entry : snapshot.entrySet()) {
             Object netValue = toNetworkValue(entry.getKey(), entry.getValue());
@@ -420,6 +445,25 @@ public class DeltaSyncManager implements IHasNetLog {
             }
         }
         return result;
+    }
+
+    /** Capture a checksum snapshot for an object if not already present. */
+    private void captureChecksumSnapshot(TrackableObject obj,
+                                          Map<TrackableObject, Map<TrackableProperty, Object>> checksumSnapshot) {
+        if (checksumSnapshot == null || checksumSnapshot.containsKey(obj)) return;
+        obj.getVersion(); // volatile read — memory barrier
+        Map<TrackableProperty, Object> props = obj.getProps();
+        if (props == null) return;
+        try {
+            Map<TrackableProperty, Object> snap = new EnumMap<>(props);
+            Tracker tracker = obj.getTracker();
+            if (tracker != null && tracker.isFrozen()) {
+                snap.putAll(tracker.getDelayedPropsFor(obj));
+            }
+            checksumSnapshot.put(obj, snap);
+        } catch (ConcurrentModificationException e) {
+            // Rare race — checksum will fall back to live read via getEffectiveValue
+        }
     }
 
     /**
