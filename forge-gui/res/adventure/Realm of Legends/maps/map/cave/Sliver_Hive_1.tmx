@@ -108,7 +108,7 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
   <object id="81" template="../../../../common/maps/obj/door_down.tx" x="311.525" y="11.3483" width="132.771" height="9.28954" rotation="0.284412">
    <properties>
     <property name="direction" value="down"/>
-    <property name="teleport" value="../Realm of Legends/maps/map/cave/Cavern_of_Calamity_2.tmx"/>
+    <property name="teleport" value="../Realm of Legends/maps/map/cave/Sliver_Hive_2.tmx"/>
     <property name="teleportObjectId" value="90"/>
    </properties>
   </object>
