@@ -180,7 +180,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
                 if (packet.getChecksumProperties() != null) {
                     java.util.List<String> clientDivLog = new java.util.ArrayList<>();
                     NetworkChecksumUtil.computeSampledChecksum(getGameView(),
-                            packet.getChecksumProperties(), clientDivLog);
+                            packet.getChecksumProperties(), null, clientDivLog);
                     netLog.error("[DeltaSync] Client checksum detail: {}", clientDivLog);
                 }
                 logChecksumDetails(getGameView(), packet);

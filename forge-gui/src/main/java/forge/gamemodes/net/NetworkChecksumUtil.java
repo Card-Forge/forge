@@ -3,6 +3,7 @@ package forge.gamemodes.net;
 import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.combat.CombatView;
+import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
@@ -12,8 +13,6 @@ import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.trackable.TrackableTypes;
 import forge.trackable.TrackableTypes.TrackableType;
-
-import forge.game.phase.PhaseType;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -137,7 +136,8 @@ public final class NetworkChecksumUtil {
         for (CardView card : allBattlefieldCards) {
             hash = 31 * hash + card.getId();
             hash = 31 * hash + (Boolean.TRUE.equals(snapValue(card, TrackableProperty.Tapped, snapshot)) ? 1 : 0);
-            CardView.CardStateView state = card.getCurrentState();
+            Object stateObj = snapValue(card, TrackableProperty.CurrentState, snapshot);
+            CardView.CardStateView state = stateObj instanceof CardView.CardStateView ? (CardView.CardStateView) stateObj : null;
             if (state != null) {
                 Object pow = snapValue(state, TrackableProperty.Power, snapshot);
                 Object tou = snapValue(state, TrackableProperty.Toughness, snapshot);
@@ -209,6 +209,10 @@ public final class NetworkChecksumUtil {
                                      Map<TrackableObject, Map<TrackableProperty, Object>> snapshot) {
         Object val = snapValue(player, zoneProp, snapshot);
         if (val instanceof TrackableCollection<?>) return ((TrackableCollection<?>) val).size();
+        // snapValue with a non-null snapshot is authoritative — if the value isn't a
+        // TrackableCollection, the zone is empty/absent in the snapshot. Only fall back
+        // to live state when there is no snapshot (client-side path).
+        if (snapshot != null) return 0;
         return player.getZoneSize(zoneProp == TrackableProperty.Hand ? ZoneType.Hand
                 : zoneProp == TrackableProperty.Battlefield ? ZoneType.Battlefield
                 : zoneProp == TrackableProperty.Graveyard ? ZoneType.Graveyard
@@ -289,7 +293,8 @@ public final class NetworkChecksumUtil {
         sb.append(" | cards(").append(allBattlefieldCards.size()).append(")=[");
         for (CardView card : allBattlefieldCards) {
             boolean tapped = Boolean.TRUE.equals(snapValue(card, TrackableProperty.Tapped, snapshot));
-            CardView.CardStateView state = card.getCurrentState();
+            Object stateObj = snapValue(card, TrackableProperty.CurrentState, snapshot);
+            CardView.CardStateView state = stateObj instanceof CardView.CardStateView ? (CardView.CardStateView) stateObj : null;
             int power = 0, toughness = 0;
             if (state != null) {
                 Object pow = snapValue(state, TrackableProperty.Power, snapshot);
@@ -335,7 +340,8 @@ public final class NetworkChecksumUtil {
         for (CardView card : allBattlefieldCards) {
             hash = 31 * hash + card.getId();
             hash = 31 * hash + (Boolean.TRUE.equals(snapValue(card, TrackableProperty.Tapped, snapshot)) ? 1 : 0);
-            CardView.CardStateView state = card.getCurrentState();
+            Object stObj = snapValue(card, TrackableProperty.CurrentState, snapshot);
+            CardView.CardStateView state = stObj instanceof CardView.CardStateView ? (CardView.CardStateView) stObj : null;
             if (state != null) {
                 Object pow = snapValue(state, TrackableProperty.Power, snapshot);
                 Object tou = snapValue(state, TrackableProperty.Toughness, snapshot);
@@ -541,109 +547,39 @@ public final class NetworkChecksumUtil {
 
     /**
      * Compute a sampled checksum over a dynamic set of TrackableProperties.
-     * Starts with the core state checksum, then reads the specified
-     * properties from all objects in the game view graph.
+     * Reads live state (client-side path with no snapshot).
+     */
+    public static int computeSampledChecksum(GameView gameView, int[] sampledPropertyOrdinals) {
+        return computeSampledChecksum(gameView, sampledPropertyOrdinals, null, null);
+    }
+
+    /**
+     * Compute a sampled checksum over a dynamic set of TrackableProperties.
+     * When snapshot is non-null (server-side), reads from pre-captured property
+     * snapshots taken during walkAndCollect under the same volatile barrier as
+     * the delta reads, ensuring the checksum matches exactly what the delta
+     * carries. When null (client-side), reads live state via getEffectiveValue.
      *
      * @param gameView the game view to checksum
      * @param sampledPropertyOrdinals ordinals of TrackableProperty values to sample
-     * @return checksum value
-     */
-    public static int computeSampledChecksum(GameView gameView, int[] sampledPropertyOrdinals) {
-        return computeSampledChecksum(gameView, sampledPropertyOrdinals, null);
-    }
-
-    /**
+     * @param snapshot property snapshots keyed by object identity (null for live reads)
      * @param divergenceLog if non-null, logs per-property hash contributions for mismatch diagnosis
+     * @return checksum value
      */
     public static int computeSampledChecksum(GameView gameView, int[] sampledPropertyOrdinals,
+                                              Map<TrackableObject, Map<TrackableProperty, Object>> snapshot,
                                               List<String> divergenceLog) {
-        final int turn = gameView.getTurn();
-        int phaseOrdinal = gameView.getPhase() != null ? gameView.getPhase().ordinal() : -1;
+        // Read turn and phase via snapValue — snapshot-aware when non-null, live when null
+        Object turnObj = snapValue(gameView, TrackableProperty.Turn, snapshot);
+        int turn = turnObj instanceof Integer ? (int) turnObj : 0;
+        Object phaseObj = snapValue(gameView, TrackableProperty.Phase, snapshot);
+        int phaseOrdinal = phaseObj instanceof PhaseType ? ((PhaseType) phaseObj).ordinal() : -1;
+
         if (stableChecksum) {
-            return computeStateChecksum(turn, phaseOrdinal, gameView);
+            return computeStateChecksum(turn, phaseOrdinal, gameView, snapshot);
         }
 
-        // Start with core hash
-        int hash = computeStateChecksum(turn, phaseOrdinal, gameView.getPlayers());
-        if (divergenceLog != null) {
-            divergenceLog.add("base=" + hash);
-        }
-
-        // Convert ordinals to properties
-        TrackableProperty[] allProps = getAllProperties();
-        TrackableProperty[] sampled = new TrackableProperty[sampledPropertyOrdinals.length];
-        for (int i = 0; i < sampledPropertyOrdinals.length; i++) {
-            sampled[i] = allProps[sampledPropertyOrdinals[i]];
-        }
-
-        List<TrackableObject> objects = collectChecksumObjects(gameView);
-        for (TrackableObject obj : objects) {
-            if (obj.getProps() == null) continue;
-            for (TrackableProperty prop : sampled) {
-                Object value = getEffectiveValue(obj, prop);
-                if (value != null && !value.equals(prop.getDefaultValue())) {
-                    int propHash = hashPropertyValue(value);
-                    hash = 31 * hash + prop.ordinal();
-                    hash = 31 * hash + propHash;
-                    if (divergenceLog != null) {
-                        divergenceLog.add(obj.getClass().getSimpleName() + "#" + obj.getId()
-                                + "." + prop.name() + "=" + propHash + " hash=" + hash);
-                    }
-                }
-            }
-        }
-
-        return hash;
-    }
-
-    /**
-     * Compute a sampled checksum from pre-captured property snapshots.
-     * The snapshot is captured during walkAndCollect under the same volatile
-     * barrier as the delta reads, so the checksum reflects exactly the values
-     * the client will have after applying the delta — eliminating false-positive
-     * mismatches from the game thread modifying properties between the delta
-     * build and checksum read.
-     *
-     * @param gameView the game view (used for object graph ordering via collectChecksumObjects)
-     * @param sampledPropertyOrdinals ordinals of TrackableProperty values to sample
-     * @param snapshot property snapshots keyed by object identity
-     * @param divergenceLog if non-null, logs per-property hash contributions for mismatch diagnosis
-     * @return checksum value
-     */
-    public static int computeSampledChecksumFromSnapshot(
-            GameView gameView, int[] sampledPropertyOrdinals,
-            Map<TrackableObject, Map<TrackableProperty, Object>> snapshot,
-            List<String> divergenceLog) {
-
-        // stableChecksum mode (test harness) — use the snapshot-aware stable
-        // checksum so the server reads from the same values the delta carries.
-        // The client calls computeStateChecksum(turn, phase, gameView) without
-        // snapshot, reading from its local state which matches after delta apply.
-        if (stableChecksum) {
-            Map<TrackableProperty, Object> gvSnap = snapshot != null ? snapshot.get(gameView) : null;
-            int turn = gvSnap != null && gvSnap.get(TrackableProperty.Turn) instanceof Integer
-                    ? (int) gvSnap.get(TrackableProperty.Turn) : gameView.getTurn();
-            int phaseOrd = gvSnap != null && gvSnap.get(TrackableProperty.Phase) instanceof PhaseType
-                    ? ((PhaseType) gvSnap.get(TrackableProperty.Phase)).ordinal()
-                    : (gameView.getPhase() != null ? gameView.getPhase().ordinal() : -1);
-            return computeStateChecksum(turn, phaseOrd, gameView, snapshot);
-        }
-
-        // Read turn and phase from the snapshot of the GameView
-        Map<TrackableProperty, Object> gvSnap = snapshot != null ? snapshot.get(gameView) : null;
-        int turn;
-        int phaseOrdinal;
-        if (gvSnap != null) {
-            Object turnObj = gvSnap.get(TrackableProperty.Turn);
-            turn = turnObj instanceof Integer ? (int) turnObj : 0;
-            Object phaseObj = gvSnap.get(TrackableProperty.Phase);
-            phaseOrdinal = phaseObj instanceof PhaseType ? ((PhaseType) phaseObj).ordinal() : -1;
-        } else {
-            turn = gameView.getTurn();
-            phaseOrdinal = gameView.getPhase() != null ? gameView.getPhase().ordinal() : -1;
-        }
-
-        // Build base hash from turn + phase + player life (from snapshots)
+        // Base hash: turn + phase + player life
         int hash = 17;
         hash = 31 * hash + turn;
         if (phaseOrdinal >= 0) {
@@ -652,14 +588,7 @@ public final class NetworkChecksumUtil {
         if (gameView.getPlayers() != null) {
             for (PlayerView player : getSortedPlayers(gameView.getPlayers())) {
                 hash = 31 * hash + player.getId();
-                Map<TrackableProperty, Object> playerSnap =
-                        snapshot != null ? snapshot.get(player) : null;
-                Object life;
-                if (playerSnap != null) {
-                    life = playerSnap.get(TrackableProperty.Life);
-                } else {
-                    life = getEffectiveValue(player, TrackableProperty.Life);
-                }
+                Object life = snapValue(player, TrackableProperty.Life, snapshot);
                 hash = 31 * hash + (life instanceof Integer ? (int) life : 0);
             }
         }
@@ -677,15 +606,8 @@ public final class NetworkChecksumUtil {
         List<TrackableObject> objects = collectChecksumObjects(gameView);
         for (TrackableObject obj : objects) {
             if (obj.getProps() == null) continue;
-            Map<TrackableProperty, Object> objSnap =
-                    snapshot != null ? snapshot.get(obj) : null;
             for (TrackableProperty prop : sampled) {
-                Object value;
-                if (objSnap != null) {
-                    value = objSnap.get(prop);
-                } else {
-                    value = getEffectiveValue(obj, prop);
-                }
+                Object value = snapValue(obj, prop, snapshot);
                 if (value != null && !value.equals(prop.getDefaultValue())) {
                     int propHash = hashPropertyValue(value);
                     hash = 31 * hash + prop.ordinal();

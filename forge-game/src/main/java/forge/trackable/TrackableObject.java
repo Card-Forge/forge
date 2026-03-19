@@ -1,8 +1,11 @@
 package forge.trackable;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
@@ -144,9 +147,9 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
                 copy.addAll((TrackableCollection<?>) value);
                 props.put(key, copy);
             } else if (value instanceof Map) {
-                props.put(key, new java.util.HashMap<>((Map<?, ?>) value));
-            } else if (value instanceof java.util.List) {
-                props.put(key, new java.util.ArrayList<>((java.util.List<?>) value));
+                props.put(key, new HashMap<>((Map<?, ?>) value));
+            } else if (value instanceof List) {
+                props.put(key, new ArrayList<>((List<?>) value));
             }
         }
         markDirtyForConsumers(key);

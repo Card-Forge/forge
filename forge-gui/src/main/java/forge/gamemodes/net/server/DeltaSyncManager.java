@@ -168,7 +168,7 @@ public class DeltaSyncManager implements IHasNetLog {
         packetsSinceLastChecksum++;
         if (checksumDue) {
             checksumPropertyOrdinals = selectChecksumProperties();
-            checksum = NetworkChecksumUtil.computeSampledChecksumFromSnapshot(
+            checksum = NetworkChecksumUtil.computeSampledChecksum(
                     gameView, checksumPropertyOrdinals, checksumSnapshot, null);
             packetsSinceLastChecksum = 0;
             recentDeltaProperties.clear();
@@ -188,7 +188,7 @@ public class DeltaSyncManager implements IHasNetLog {
             int phaseOrdinal = gameView.getPhase() != null ? gameView.getPhase().ordinal() : -1;
             lastChecksumBreakdown = NetworkChecksumUtil.computeChecksumBreakdown(turn, phaseOrdinal, gameView, checksumSnapshot);
             List<String> detail = new ArrayList<>();
-            NetworkChecksumUtil.computeSampledChecksumFromSnapshot(
+            NetworkChecksumUtil.computeSampledChecksum(
                     gameView, checksumPropertyOrdinals, checksumSnapshot, detail);
             lastChecksumDetail = detail;
         }
@@ -388,17 +388,7 @@ public class DeltaSyncManager implements IHasNetLog {
         } catch (ConcurrentModificationException e) {
             return new EnumMap<>(TrackableProperty.class); // Rare race — next delta catches up
         }
-        // Store snapshot for checksum computation — same values the delta carries
-        if (checksumSnapshot != null && !checksumSnapshot.containsKey(obj)) {
-            Tracker tracker = obj.getTracker();
-            if (tracker != null && tracker.isFrozen()) {
-                Map<TrackableProperty, Object> withDelayed = new EnumMap<>(snapshot);
-                withDelayed.putAll(tracker.getDelayedPropsFor(obj));
-                checksumSnapshot.put(obj, withDelayed);
-            } else {
-                checksumSnapshot.put(obj, snapshot);
-            }
-        }
+        storeChecksumSnapshot(obj, snapshot, checksumSnapshot);
         Map<TrackableProperty, Object> delta = new EnumMap<>(TrackableProperty.class);
         for (TrackableProperty prop : dirtyProps) {
             Object netValue = toNetworkValue(prop, snapshot.get(prop));
@@ -426,17 +416,7 @@ public class DeltaSyncManager implements IHasNetLog {
         } catch (ConcurrentModificationException e) {
             return new EnumMap<>(TrackableProperty.class); // Rare race — next delta catches up
         }
-        // Store snapshot for checksum computation — same values the delta carries
-        if (checksumSnapshot != null && !checksumSnapshot.containsKey(obj)) {
-            Tracker tracker = obj.getTracker();
-            if (tracker != null && tracker.isFrozen()) {
-                Map<TrackableProperty, Object> withDelayed = new EnumMap<>(snapshot);
-                withDelayed.putAll(tracker.getDelayedPropsFor(obj));
-                checksumSnapshot.put(obj, withDelayed);
-            } else {
-                checksumSnapshot.put(obj, snapshot);
-            }
-        }
+        storeChecksumSnapshot(obj, snapshot, checksumSnapshot);
         Map<TrackableProperty, Object> result = new EnumMap<>(TrackableProperty.class);
         for (Map.Entry<TrackableProperty, Object> entry : snapshot.entrySet()) {
             Object netValue = toNetworkValue(entry.getKey(), entry.getValue());
@@ -447,7 +427,11 @@ public class DeltaSyncManager implements IHasNetLog {
         return result;
     }
 
-    /** Capture a checksum snapshot for an object if not already present. */
+    /**
+     * Capture a checksum snapshot for an object if not already present.
+     * Used for objects with no dirty props — the checksum reads ALL properties
+     * (Life, zones, P/T), not just dirty ones.
+     */
     private void captureChecksumSnapshot(TrackableObject obj,
                                           Map<TrackableObject, Map<TrackableProperty, Object>> checksumSnapshot) {
         if (checksumSnapshot == null || checksumSnapshot.containsKey(obj)) return;
@@ -455,14 +439,27 @@ public class DeltaSyncManager implements IHasNetLog {
         Map<TrackableProperty, Object> props = obj.getProps();
         if (props == null) return;
         try {
-            Map<TrackableProperty, Object> snap = new EnumMap<>(props);
-            Tracker tracker = obj.getTracker();
-            if (tracker != null && tracker.isFrozen()) {
-                snap.putAll(tracker.getDelayedPropsFor(obj));
-            }
-            checksumSnapshot.put(obj, snap);
+            storeChecksumSnapshot(obj, new EnumMap<>(props), checksumSnapshot);
         } catch (ConcurrentModificationException e) {
             // Rare race — checksum will fall back to live read via getEffectiveValue
+        }
+    }
+
+    /**
+     * Store a property snapshot for checksum computation, merging delayed props
+     * if the tracker is frozen. Skips if checksumSnapshot is null or already contains obj.
+     */
+    private static void storeChecksumSnapshot(TrackableObject obj,
+                                               Map<TrackableProperty, Object> snapshot,
+                                               Map<TrackableObject, Map<TrackableProperty, Object>> checksumSnapshot) {
+        if (checksumSnapshot == null || checksumSnapshot.containsKey(obj)) return;
+        Tracker tracker = obj.getTracker();
+        if (tracker != null && tracker.isFrozen()) {
+            Map<TrackableProperty, Object> withDelayed = new EnumMap<>(snapshot);
+            withDelayed.putAll(tracker.getDelayedPropsFor(obj));
+            checksumSnapshot.put(obj, withDelayed);
+        } else {
+            checksumSnapshot.put(obj, snapshot);
         }
     }
 
@@ -642,15 +639,24 @@ public class DeltaSyncManager implements IHasNetLog {
             obj.registerConsumer(consumerId);
         }
 
+        // Same child traversal rules as walkAndCollect: skip single CardView/PlayerView
+        // reference properties (stale references), skip CardView items in CardView
+        // collection properties (attachment/haunt references vs zone collections).
         Map<TrackableProperty, Object> props = obj.getProps();
         if (props != null) {
+            boolean skipCardViewInCollections = obj instanceof CardView;
             for (Object value : props.values()) {
-                if (value instanceof TrackableObject) {
-                    walkAndRegisterNew((TrackableObject) value, visited);
+                if (value instanceof TrackableObject to) {
+                    if (!(to instanceof CardView) && !(to instanceof PlayerView)) {
+                        walkAndRegisterNew(to, visited);
+                    }
                 } else if (value instanceof TrackableCollection) {
                     for (Object item : (TrackableCollection<?>) value) {
-                        if (item instanceof TrackableObject) {
-                            walkAndRegisterNew((TrackableObject) item, visited);
+                        if (item instanceof TrackableObject to) {
+                            if (skipCardViewInCollections && to instanceof CardView) {
+                                continue;
+                            }
+                            walkAndRegisterNew(to, visited);
                         }
                     }
                 }
