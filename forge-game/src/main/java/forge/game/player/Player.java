@@ -293,9 +293,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
     }
 
-//    public final Team getTeamObject() {
-//        return team;
-//    }
+    public final Team getTeamObject() {
+        return team;
+    }
 //
 //    public final void setTeamObject(final Team t) {
 //        if (t == null) {
@@ -2152,9 +2152,15 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         // Rule 704.5c - If a player has ten or more poison counters, he or she loses the game.
-        // 704.6b In a Two-Headed Giant game, if a team has fifteen or more poison counters, that team loses the game. See rule 810, “Two-Headed Giant Variant.”
-        if (getCounters(CounterEnumType.POISON) >= 10 && loseConditionMet(GameLossReason.Poisoned, null)) {
+        if (getCounters(CounterEnumType.POISON) >= getTeamObject().getPoisonThreshold() && loseConditionMet(GameLossReason.Poisoned, null)) {
             return true;
+        }
+
+        // 704.6b In a Two-Headed Giant game, if a team has fifteen or more poison counters, that team loses the game. See rule 810, “Two-Headed Giant Variant.”
+        if (game.getRules().useSharedTeamLife()) {
+            if (getTeamObject().getPoisonCounters() >= getTeamObject().getPoisonThreshold() && loseConditionMet(GameLossReason.Poisoned, null)) {
+                return true;
+            }
         }
 
         if (game.getRules().hasAppliedVariant(GameType.Commander)) {

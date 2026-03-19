@@ -20,6 +20,8 @@ public final class Team {
     private int life = 20;
     private boolean startingLifeInitialized = false;
 
+    private int poisonThreshold = 10; // is commonly 10, but turns into 15 for 2HG
+
     private Team(int id, String name) {
         this.id = id;
         this.name = name;
@@ -85,5 +87,23 @@ public final class Team {
 
     public List<Player> getMembers() {
         return members;
+    }
+
+    public int getPoisonThreshold() {
+        return poisonThreshold;
+    }
+
+    public void setPoisonThreshold(int poisonThreshold) {
+        this.poisonThreshold = poisonThreshold;
+    }
+
+    public int getPoisonCounters() {
+        int count = 0;
+        for(Player p : members) {
+            if (p.getPoisonCounters() > 0) {
+                count += p.getPoisonCounters();
+            }
+        }
+        return count;
     }
 }
