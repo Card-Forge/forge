@@ -92,8 +92,6 @@ public class AttackConstraints {
                     ) || (
                  types.contains(AttackRestrictionType.NOT_ALONE)           && myMax <= 1
                     ) || (
-                 types.contains(AttackRestrictionType.NEED_BLACK_OR_GREEN) && myMax <= 1
-                    ) || (
                  types.contains(AttackRestrictionType.NEED_GREATER_POWER)  && myMax <= 1
                             )) {
                 reqs.removeIf(findAll(attacker));
@@ -106,11 +104,7 @@ public class AttackConstraints {
         // Next, remove creatures with constraints that can't be fulfilled.
         for (final Card attacker : myPossibleAttackers) {
             final Set<AttackRestrictionType> types = restrictions.get(attacker).getTypes();
-            if (types.contains(AttackRestrictionType.NEED_BLACK_OR_GREEN)) {
-                if (!myPossibleAttackers.anyMatch(AttackRestrictionType.NEED_BLACK_OR_GREEN.getPredicate(attacker))) {
-                    attackersToRemove.add(attacker);
-                }
-            } else if (types.contains(AttackRestrictionType.NEED_GREATER_POWER)) {
+            if (types.contains(AttackRestrictionType.NEED_GREATER_POWER)) {
                 if (!myPossibleAttackers.anyMatch(AttackRestrictionType.NEED_GREATER_POWER.getPredicate(attacker))) {
                     attackersToRemove.add(attacker);
                 }

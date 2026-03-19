@@ -31,7 +31,6 @@ public class AttackRestriction {
 
         if ((restrictions.contains(AttackRestrictionType.ONLY_ALONE) && (
                 restrictions.contains(AttackRestrictionType.NEED_GREATER_POWER) ||
-                restrictions.contains(AttackRestrictionType.NEED_BLACK_OR_GREEN) ||
                 restrictions.contains(AttackRestrictionType.NOT_ALONE) ||
                 restrictions.contains(AttackRestrictionType.NEED_TWO_OTHERS))
                 ) || (
@@ -55,10 +54,6 @@ public class AttackRestriction {
         if (restrictions.contains(AttackRestrictionType.NEED_GREATER_POWER)
                 && attackers.keySet().stream().noneMatch(AttackRestrictionType.NEED_GREATER_POWER.getPredicate(attacker))) {
             violations.add(AttackRestrictionType.NEED_GREATER_POWER);
-        }
-        if (restrictions.contains(AttackRestrictionType.NEED_BLACK_OR_GREEN)
-                && attackers.keySet().stream().noneMatch(AttackRestrictionType.NEED_BLACK_OR_GREEN.getPredicate(attacker))) {
-            violations.add(AttackRestrictionType.NEED_BLACK_OR_GREEN);
         }
         if (restrictions.contains(AttackRestrictionType.NOT_ALONE) && nAttackers <= 1) {
             violations.add(AttackRestrictionType.NOT_ALONE);
@@ -94,10 +89,6 @@ public class AttackRestriction {
 
         if (attacker.hasKeyword("CARDNAME can't attack unless a creature with greater power also attacks.")) {
             restrictions.add(AttackRestrictionType.NEED_GREATER_POWER);
-        }
-
-        if (attacker.hasKeyword("CARDNAME can't attack unless a black or green creature also attacks.")) {
-            restrictions.add(AttackRestrictionType.NEED_BLACK_OR_GREEN);
         }
 
         if (attacker.hasKeyword("CARDNAME can't attack or block alone.") || attacker.hasKeyword("CARDNAME can't attack alone.")) {
