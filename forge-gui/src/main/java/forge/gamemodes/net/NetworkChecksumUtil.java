@@ -33,7 +33,7 @@ public final class NetworkChecksumUtil {
     private NetworkChecksumUtil() {} // Utility class
 
     /**
-     * When true, checksums include battlefield card properties, zone sizes,
+     * When true, checksums include battlefield fixed card properties, zone sizes,
      * mana pools, combat state, and stack size. Disabled by default for
      * production performance; enabled by the test harness to catch GUI desyncs.
      */
@@ -69,27 +69,14 @@ public final class NetworkChecksumUtil {
     }
 
     /**
-     * Compute a state checksum with fixed properties.
-     *
-     * @param turn the current turn number
-     * @param phaseOrdinal the phase ordinal, or -1 if phase is null
-     * @param gameView the game view for deep checksum data
-     * @return checksum value
-     */
-    public static int computeStateChecksum(int turn, int phaseOrdinal, GameView gameView) {
-        return computeStateChecksum(turn, phaseOrdinal, gameView, null);
-    }
-
-    /**
      * Snapshot-aware stable checksum. When snapshot is non-null, reads property
      * values from the snapshot (captured during walkAndCollect) instead of live
      * state, ensuring the server checksum matches exactly what the delta carries.
-     * When snapshot is null (client-side), reads live state as before.
      */
     public static int computeStateChecksum(int turn, int phaseOrdinal, GameView gameView,
                                             Map<TrackableObject, Map<TrackableProperty, Object>> snapshot) {
         if (gameView == null) {
-            return computeStateChecksum(turn, phaseOrdinal, (Iterable<PlayerView>) null);
+            return computeStateChecksum(turn, phaseOrdinal, null);
         }
         // Inline base hash to use snapValue for Life — the 3-arg overload reads
         // live state via getEffectiveValue, which races with the game thread.
@@ -195,10 +182,8 @@ public final class NetworkChecksumUtil {
         if (snapshot != null) {
             Map<TrackableProperty, Object> snap = snapshot.get(obj);
             if (snap != null) {
-                // Snapshot is authoritative — absent key means the property is at
-                // its default value (null). Do NOT fall back to live state, which
-                // can race with game-thread mutations and read a value that differs
-                // from what the delta carries.
+                // Do NOT fall back to live state, which can race with game-thread mutations
+                // and read a value that differs from what the delta carries.
                 return snap.get(prop);
             }
         }
@@ -504,8 +489,6 @@ public final class NetworkChecksumUtil {
         }
     }
 
-
-
     /**
      * Read the effective value of a property, checking the tracker's delayed
      * queue when frozen. During a tracker freeze, mergeDelayedProps adds pending
@@ -572,22 +555,14 @@ public final class NetworkChecksumUtil {
 
     /**
      * Compute a sampled checksum over a dynamic set of TrackableProperties.
-     * Reads live state (client-side path with no snapshot).
-     */
-    public static int computeSampledChecksum(GameView gameView, int[] sampledPropertyOrdinals) {
-        return computeSampledChecksum(gameView, sampledPropertyOrdinals, null, null);
-    }
-
-    /**
-     * Compute a sampled checksum over a dynamic set of TrackableProperties.
      * When snapshot is non-null (server-side), reads from pre-captured property
      * snapshots taken during walkAndCollect under the same volatile barrier as
      * the delta reads, ensuring the checksum matches exactly what the delta
-     * carries. When null (client-side), reads live state via getEffectiveValue.
+     * carries.
      *
      * @param gameView the game view to checksum
      * @param sampledPropertyOrdinals ordinals of TrackableProperty values to sample
-     * @param snapshot property snapshots keyed by object identity (null for live reads)
+     * @param snapshot property snapshots keyed by object identity
      * @param divergenceLog if non-null, logs per-property hash contributions for mismatch diagnosis
      * @return checksum value
      */

@@ -509,32 +509,6 @@ public class DeltaSyncManager implements IHasNetLog {
         return new CombatData(allAttackerIds, allDefenderRefs, allBlockerIds, allPlannedBlockerIds);
     }
 
-    // ==================== Object registration ====================
-
-    /**
-     * Mark objects as sent and register consumer after initial full state sync.
-     * This starts per-consumer dirty tracking for all existing objects.
-     */
-    public void markObjectsAsSent(GameView gameView) {
-        if (gameView == null) {
-            return;
-        }
-
-        walkAndMarkAsSent(gameView, new HashSet<>());
-
-        netLog.info("[DeltaSync] Registered consumer {} on {} objects after full state sync",
-                consumerId, registeredByKey.size());
-    }
-
-    private void registerAndMark(TrackableObject obj) {
-        int deltaKey = DeltaPacket.makeDeltaKey(obj);
-        sentObjectIds.add(deltaKey);
-        registeredByKey.put(deltaKey, obj);
-        obj.registerConsumer(consumerId);
-        // Clear any dirty props accumulated before registration
-        obj.getAndClearDirtyProps(consumerId);
-    }
-
     /**
      * Register consumers on objects not yet tracked, without clearing dirty bits.
      * Used when the view graph has been populated after the initial sendFullState
@@ -546,14 +520,14 @@ public class DeltaSyncManager implements IHasNetLog {
             return;
         }
         int before = registeredByKey.size();
-        walkAndRegisterNew(gameView, new HashSet<>());
+        walkAndRegister(gameView, new HashSet<>());
         int added = registeredByKey.size() - before;
         if (added > 0) {
             netLog.info("[DeltaSync] Registered {} new objects (total {})", added, registeredByKey.size());
         }
     }
 
-    private void walkAndRegisterNew(TrackableObject obj, Set<Integer> visited) {
+    private void walkAndRegister(TrackableObject obj, Set<Integer> visited) {
         if (obj == null) return;
         int type = DeltaPacket.typeTagFor(obj);
         if (type < 0) return;
@@ -576,7 +550,7 @@ public class DeltaSyncManager implements IHasNetLog {
             for (Object value : props.values()) {
                 if (value instanceof TrackableObject to) {
                     if (!(to instanceof CardView) && !(to instanceof PlayerView)) {
-                        walkAndRegisterNew(to, visited);
+                        walkAndRegister(to, visited);
                     }
                 } else if (value instanceof TrackableCollection) {
                     for (Object item : (TrackableCollection<?>) value) {
@@ -584,42 +558,7 @@ public class DeltaSyncManager implements IHasNetLog {
                             if (skipCardViewInCollections && to instanceof CardView) {
                                 continue;
                             }
-                            walkAndRegisterNew(to, visited);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    /**
-     * Recursively walk the object graph starting from a TrackableObject, registering
-     * each for dirty tracking. Same traversal as walkAndCollect but for initial sync.
-     */
-    private void walkAndMarkAsSent(TrackableObject obj, Set<Integer> visited) {
-        if (obj == null) {
-            return;
-        }
-        int type = DeltaPacket.typeTagFor(obj);
-        if (type < 0) {
-            return;
-        }
-        int deltaKey = DeltaPacket.makeDeltaKey(obj);
-        if (!visited.add(deltaKey)) {
-            return;
-        }
-
-        registerAndMark(obj);
-
-        Map<TrackableProperty, Object> props = obj.getProps();
-        if (props != null) {
-            for (Object value : props.values()) {
-                if (value instanceof TrackableObject to) {
-                    walkAndMarkAsSent(to, visited);
-                } else if (value instanceof TrackableCollection) {
-                    for (Object item : (TrackableCollection<?>) value) {
-                        if (item instanceof TrackableObject to) {
-                            walkAndMarkAsSent(to, visited);
+                            walkAndRegister(to, visited);
                         }
                     }
                 }
