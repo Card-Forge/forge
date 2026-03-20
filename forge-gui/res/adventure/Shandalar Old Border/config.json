@@ -308,5 +308,6 @@
     "Fourth Edition", "Mirage", "Visions", "Weatherlight", "Tempest", "Stronghold", "Urza's Saga", "Urza's Legacy", "Urza's Destiny",
     "Mercadian Masques", "Nemesis", "Prophecy", "Invasion", "Planeshift", "Apocalypse",
     "Seventh Edition", "Portal Second Age", "Starter 1999", "Odyssey", "Torment", "Onslaught", "Scourge"
-  ]
+  ],
+  "allowGeneticAI": "false"
 }

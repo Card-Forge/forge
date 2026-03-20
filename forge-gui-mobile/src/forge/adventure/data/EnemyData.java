@@ -88,7 +88,7 @@ public class EnemyData implements Serializable {
     }
 
     public Deck generateDeck(boolean isFantasyMode, boolean useGeneticAI) {
-        boolean canUseGeneticAI = useGeneticAI && life > 16;
+        boolean canUseGeneticAI = useGeneticAI && life > 16 && Config.instance().getConfigData().allowGeneticAI.equalsIgnoreCase("true");
 
         if (canUseGeneticAI && Config.instance().getSettingData().generateLDADecks) {
             GameFormat fmt = FModel.getFormats().getStandard();

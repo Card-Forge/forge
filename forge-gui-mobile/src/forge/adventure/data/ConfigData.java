@@ -29,4 +29,5 @@ public class ConfigData {
     public String[] restrictedEvents;
     public String[] allowedEvents;
     public String[] allowedJumpstart;
+    public String allowGeneticAI = "true";
 }
