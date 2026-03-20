@@ -221,7 +221,10 @@ public abstract class Lang {
     }
 
     public String buildValidDesc(Collection<String> valid, boolean multiple) {
-        return joinHomogenous(valid.stream().map(s -> formatValidDesc(s)).collect(Collectors.toList()), null, multiple ? "and/or" : "or");
+        return buildValidDesc(valid, multiple ? "and/or" : "or");
+    }
+    public String buildValidDesc(Collection<String> valid, String join) {
+        return joinHomogenous(valid.stream().map(s -> formatValidDesc(s)).collect(Collectors.toList()), null, join);
     }
 
     public String formatValidDesc(String valid) {

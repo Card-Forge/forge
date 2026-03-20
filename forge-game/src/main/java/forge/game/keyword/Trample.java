@@ -4,7 +4,7 @@ public class Trample extends KeywordWithType {
     @Override
     public String getTitle() {
         if (!type.isEmpty()) {
-            return "Trample over planeswalkers";
+            return "Trample Over Planeswalkers";
         }
         return "Trample";
     }

@@ -5,10 +5,7 @@ import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import forge.LobbyPlayer;
-import forge.ai.ComputerUtil;
-import forge.ai.ComputerUtilMana;
-import forge.ai.SpellAbilityAi;
-import forge.ai.SpellApiToAi;
+import forge.ai.*;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.DrawAi;
 import forge.ai.ability.GameLossAi;
@@ -26,9 +23,7 @@ import forge.game.ability.effects.RollDiceEffect;
 import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
-import forge.game.cost.Cost;
-import forge.game.cost.CostPart;
-import forge.game.cost.CostPartMana;
+import forge.game.cost.*;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
@@ -46,7 +41,6 @@ import forge.gamesimulationtests.util.player.PlayerSpecification;
 import forge.gamesimulationtests.util.player.PlayerSpecificationHandler;
 import forge.gamesimulationtests.util.playeractions.*;
 import forge.item.PaperCard;
-import forge.player.HumanPlay;
 import forge.util.Aggregates;
 import forge.util.ITriggerEvent;
 import forge.util.MyRandom;
@@ -88,7 +82,7 @@ public class PlayerControllerForTests extends PlayerController {
     public void playSpellAbilityNoStack(SpellAbility effectSA, boolean mayChoseNewTargets) {
         //TODO: eventually (when the real code is refactored) this should be handled normally...
         if (effectSA.getDescription().equals("At the beginning of your upkeep, if you have exactly 1 life, you win the game.")) {//test_104_2b_effect_may_state_that_player_wins_the_game
-            HumanPlay.playSpellAbilityNoStack(null, player, effectSA, !mayChoseNewTargets);
+            PlaySpellAbility.playSpellAbilityNoStack(null, player, effectSA, !mayChoseNewTargets);
             return;
         }
         SpellAbilityAi sai = SpellApiToAi.Converter.get(effectSA.getApi());
@@ -99,7 +93,7 @@ public class PlayerControllerForTests extends PlayerController {
                 (effectSA.getHostCard().getName().equals("Near-Death Experience") && sai instanceof  GameWinAi) ||
                 (effectSA.getHostCard().getName().equals("Final Fortune") && sai instanceof GameLossAi)
         ) {//test_104_3f_if_a_player_would_win_and_lose_simultaneously_he_loses
-            HumanPlay.playSpellAbilityNoStack(null, player, effectSA, !mayChoseNewTargets);
+            PlaySpellAbility.playSpellAbilityNoStack(null, player, effectSA, !mayChoseNewTargets);
             return;
         }
         throw new IllegalStateException("Callers of this method currently assume that it performs extra functionality!");
@@ -134,7 +128,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public Integer announceRequirements(SpellAbility ability, String announce) {
+    public Integer announceRequirements(SpellAbility ability, int min, int max, String announce) {
         throw new IllegalStateException("Erring on the side of caution here...");
     }
 
@@ -303,7 +297,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public CardCollectionView chooseCardsToDiscardUnlessType(int min, CardCollectionView hand, String param, SpellAbility sa) {
+    public CardCollectionView chooseCardsToDiscardUnlessType(int min, CardCollectionView hand, String[] unlessTypes, SpellAbility sa) {
         throw new IllegalStateException("Erring on the side of caution here...");
     }
 
@@ -328,9 +322,8 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public CardCollectionView tuckCardsViaMulligan(final Player mulliganingPlayer, int cardsToReturn) {
-        CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
-        return hand;
+    public CardCollectionView tuckCardsViaMulligan(CardCollectionView hand, int cardsToReturn) {
+        return new CardCollection(Iterables.limit(hand, cardsToReturn));
     }
 
     @Override
@@ -460,7 +453,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public boolean chooseFlipResult(SpellAbility sa, Player flipper, boolean[] results, boolean call) {
+    public boolean chooseFlipResult(SpellAbility sa, Player flipper, boolean call) {
         return true;
     }
 
@@ -510,8 +503,8 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public int chooseSprocket(Card assignee, boolean forceDifferent) {
-        return forceDifferent && assignee.getSprocket() == 1 ? 2 : 1;
+    public int chooseSprocket(Card assignee, List<Integer> sprockets) {
+        return sprockets.get(0);
     }
 
     @Override
@@ -579,13 +572,13 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public StaticAbility chooseSingleStaticAbility(String prompt, List<StaticAbility> possibleStatics) {
+    public StaticAbility chooseSingleStaticAbility(List<StaticAbility> possibleStatics) {
         // TODO Auto-generated method stub
         return Iterables.getFirst(possibleStatics, null);
     }
 
     @Override
-    public String chooseProtectionType(String string, SpellAbility sa, List<String> choices) {
+    public String chooseProtectionType(SpellAbility sa, List<String> choices) {
         return choices.get(0);
     }
 
@@ -596,14 +589,19 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public boolean payCostDuringRoll(final Cost cost, final SpellAbility sa, final FCollectionView<Player> allPayers) {
+    public boolean payCostDuringRoll(final Cost cost, final SpellAbility sa) {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
+    public List<SpellAbility> orderSimultaneousSa(List<SpellAbility> activePlayerSAs) {
+        return activePlayerSAs;
+    }
+
+    @Override
     public void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs) {
-        for (final SpellAbility sa : activePlayerSAs) {
+        for (final SpellAbility sa : orderSimultaneousSa(activePlayerSAs)) {
             prepareSingleSa(sa.getHostCard(),sa,true);
             ComputerUtil.playStack(sa, player, getGame());
         }
@@ -686,6 +684,25 @@ public class PlayerControllerForTests extends PlayerController {
         // TODO Auto-generated method stub
         ManaCostBeingPaid cost = new ManaCostBeingPaid(toPay);
         return ComputerUtilMana.payManaCost(cost, sa, player, effect);
+    }
+
+    @Override
+    public boolean applyManaToCost(ManaCostBeingPaid toPay, SpellAbility ability, String prompt, ManaConversionMatrix matrix, boolean effect) {
+        assert(false);
+        //Untested placeholder. The AI does not currently pay like this.
+        return ComputerUtilMana.payManaCost(toPay, ability, player, effect);
+    }
+
+    @Override
+    public CardCollectionView chooseCardsForCost(CardCollectionView optionList, SpellAbility sa, CostPartWithList cpl, int amount, boolean isOptional, String prompt) {
+        assert(false);
+        //AI does not currently pay costs like this.
+        return new CardCollection(Iterables.limit(optionList, amount));
+    }
+
+    @Override
+    public CostDecisionMakerBase getCostDecisionMaker(Player player, SpellAbility ability, boolean effect, String prompt) {
+        return new AiCostDecision(player, ability, effect);
     }
 
     @Override
@@ -777,12 +794,6 @@ public class PlayerControllerForTests extends PlayerController {
             List<OptionalCostValue> optionalCostValues) {
         // TODO Auto-generated method stub
         return null;
-    }
-
-    @Override
-    public boolean confirmMulliganScry(Player p) {
-        // TODO Auto-generated method stub
-        return false;
     }
 
     @Override

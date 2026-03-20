@@ -268,47 +268,6 @@
     <property name="spawn.Hard" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="124" template="../../../../common/maps/obj/booster.tx" type="reward" x="290" y="160">
-   <properties>
-    <property name="reward">[
-  {
-    &quot;editions&quot;: [ &quot;CMM&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 12,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;CMM&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 4,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;CMM&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 2,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ],
-    &quot;superTypes&quot; :[&quot;Legendary&quot;]
-  },
-  {
-    &quot;editions&quot;: [ &quot;CMM&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;CMM&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ],
-    &quot;superTypes&quot; :[&quot;Legendary&quot;]
-  }
-]
-</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
-    <property name="spawn.Normal" type="bool" value="true"/>
-   </properties>
-  </object>
   <object id="125" template="../../../../common/maps/obj/booster.tx" type="reward" x="176" y="159.667">
    <properties>
     <property name="reward">[
@@ -347,47 +306,6 @@
 ]
 </property>
     <property name="spawn.Hard" type="bool" value="true"/>
-    <property name="spawn.Normal" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="126" template="../../../../common/maps/obj/booster.tx" type="reward" x="290" y="190.667">
-   <properties>
-    <property name="reward">[
-  {
-    &quot;editions&quot;: [ &quot;CMR&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 12,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;CMR&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 5,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;CMR&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ],
-    &quot;superTypes&quot; :[&quot;Legendary&quot;]
-  },
-  {
-    &quot;editions&quot;: [ &quot;CMR&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;CMR&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ],
-    &quot;superTypes&quot; :[&quot;Legendary&quot;]
-  }
-]
-</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
     <property name="spawn.Normal" type="bool" value="true"/>
    </properties>
   </object>
@@ -473,33 +391,6 @@
     <property name="spawn.Normal" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="129" template="../../../../common/maps/obj/booster.tx" type="reward" x="290" y="222">
-   <properties>
-    <property name="reward">[
-  {
-    &quot;editions&quot;: [ &quot;FDN&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 9,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;FDN&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;FDN&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 2,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
-  }
-]
-</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
-    <property name="spawn.Normal" type="bool" value="true"/>
-   </properties>
-  </object>
   <object id="130" template="../../../../common/maps/obj/booster.tx" type="reward" x="176" y="222">
    <properties>
     <property name="reward">[
@@ -524,33 +415,6 @@
 ]
 </property>
     <property name="spawn.Hard" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="131" template="../../../../common/maps/obj/booster.tx" type="reward" x="290" y="255">
-   <properties>
-    <property name="reward">[
-  {
-    &quot;editions&quot;: [ &quot;M13&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 11,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;M13&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;M13&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
-  }
-]
-</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
-    <property name="spawn.Normal" type="bool" value="true"/>
    </properties>
   </object>
   <object id="132" template="../../../../common/maps/obj/booster.tx" type="reward" x="176" y="255">
@@ -579,33 +443,6 @@
     <property name="spawn.Hard" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="135" template="../../../../common/maps/obj/booster.tx" type="reward" x="290" y="287">
-   <properties>
-    <property name="reward">[
-  {
-    &quot;editions&quot;: [ &quot;10E&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 11,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;10E&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;10E&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
-  }
-]
-</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
-    <property name="spawn.Normal" type="bool" value="true"/>
-   </properties>
-  </object>
   <object id="136" template="../../../../common/maps/obj/booster.tx" type="reward" x="176" y="287">
    <properties>
     <property name="reward">[
@@ -632,9 +469,10 @@
     <property name="spawn.Hard" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="137" template="../../../../common/maps/obj/treasure.tx" x="214.5" y="287">
+  <object id="137" template="../../../../common/maps/obj/treasure.tx" x="215" y="315">
    <properties>
-    <property name="reward">[{
+    <property name="reward">[
+{
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
@@ -750,12 +588,6 @@
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Foul Orchard&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
         &quot;cardName&quot;: &quot;Jungle Hollow&quot;
  },
 {
@@ -774,12 +606,6 @@
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Cinder Barrens&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
         &quot;cardName&quot;: &quot;Thornwood Falls&quot;
  },
 {
@@ -787,18 +613,6 @@
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
         &quot;cardName&quot;: &quot;Tangled Islet&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Woodland Stream&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Timber Gorge&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
@@ -822,12 +636,6 @@
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Stone Quarry&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
         &quot;cardName&quot;: &quot;Wind-Scarred Crag&quot;
  },
 {
@@ -841,18 +649,6 @@
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
         &quot;cardName&quot;: &quot;Dismal Backwater&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Submerged Boneyard&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Highland Lake&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
@@ -876,19 +672,7 @@
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Meandering River&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
         &quot;cardName&quot;: &quot;Tranquil Cove&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Forsaken Sanctuary&quot;
  },
 {
         &quot;type&quot;: &quot;card&quot;,
@@ -913,20 +697,22 @@
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
         &quot;cardName&quot;: &quot;Blossoming Sands&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Tranquil Expanse&quot;
  }
 ]
 </property>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="138" template="../../../../common/maps/obj/treasure.tx" x="198" y="305">
+  <object id="138" template="../../../../common/maps/obj/treasure.tx" x="215" y="285">
    <properties>
     <property name="reward">[{
+        &quot;type&quot;: &quot;card&quot;,
+        &quot;probability&quot;: 1,
+        &quot;count&quot;: 1,
+        &quot;cardName&quot;: &quot;Atogatog&quot;
+ },
+{
         &quot;type&quot;: &quot;card&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 2,
@@ -1141,258 +927,10 @@
     <property name="spawn.Hard" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="139" template="../../../../common/maps/obj/treasure.tx" x="233" y="305">
+  <object id="140" template="../../../../common/maps/obj/treasure.tx" x="215" y="255">
    <properties>
     <property name="reward">[
 {
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Putrefy&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Golgari Charm&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Grisly Salvage&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Deathreap Ritual&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Grave Upheaval&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Mayhem Devil&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Blightning&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Rakdos Charm&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Plasm Capture&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Biomass Mutation&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Simic Charm&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Decisive Denial&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Rhythm of the Wild&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Treacherous Terrain&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Hull Breach&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Gruul Charm&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Boros Charm&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Rip Apart&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Assemble the Legion&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Reconstruct History&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Ancient Excavation&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Extract from Darkness&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Memory Plunder&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Drown in the Loch&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Expressive Iteration&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Izzet Charm&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Galvanic Iteration&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Electrolyze&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Migratory Route&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Dovin's Veto&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Azorius Charm&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Sphinx's Revelation&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Mortify&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Despark&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Etchings of the Chosen&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Debtors' Knell&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Sylvan Reclamation&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Armadillo Cloak&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Camaraderie&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Collective Blessing&quot;
- }
-]
-</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
-    <property name="spawn.Normal" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="140" template="../../../../common/maps/obj/treasure.tx" x="214.667" y="248.333">
-   <properties>
-    <property name="reward">[{
         &quot;type&quot;: &quot;item&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
@@ -1533,193 +1071,6 @@ A rare few items are also slotless or use a custom slot. They won't show up on y
 ]
 }
 ]</property>
-   </properties>
-  </object>
-  <object id="156" template="../../../../common/maps/obj/treasure.tx" x="107.333" y="272">
-   <properties>
-    <property name="reward">[
-{
-        &quot;type&quot;: &quot;item&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;itemName&quot;: &quot;Silver Blessing of Speed&quot;
- }
-]
-</property>
-   </properties>
-  </object>
-  <object id="158" template="../../../../common/maps/obj/dialog.tx" x="97.6667" y="283.417" width="37.3333" height="39.8333" visible="1">
-   <properties>
-    <property name="dialog">[
-{
-   &quot;text&quot;: &quot;Thanks for being a playtester! Since the game is currently only around half-finished, the map is going to be very empty. Take a speed boost as a courtesy.&quot;,
-   &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
-}
-]</property>
-   </properties>
-  </object>
-  <object id="159" template="../../../../common/maps/obj/booster.tx" type="reward" x="144" y="159.67">
-   <properties>
-    <property name="reward">[
-  {
-    &quot;editions&quot;: [ &quot;CMM&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 12,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;CMM&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 4,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;CMM&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 2,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ],
-    &quot;superTypes&quot; :[&quot;Legendary&quot;]
-  },
-  {
-    &quot;editions&quot;: [ &quot;CMM&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;CMM&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ],
-    &quot;superTypes&quot; :[&quot;Legendary&quot;]
-  }
-]
-</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
-    <property name="spawn.Normal" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="160" template="../../../../common/maps/obj/booster.tx" type="reward" x="144" y="191.333">
-   <properties>
-    <property name="reward">[
-  {
-    &quot;editions&quot;: [ &quot;CMR&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 12,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;CMR&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 5,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;CMR&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ],
-    &quot;superTypes&quot; :[&quot;Legendary&quot;]
-  },
-  {
-    &quot;editions&quot;: [ &quot;CMR&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;CMR&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ],
-    &quot;superTypes&quot; :[&quot;Legendary&quot;]
-  }
-]
-</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
-    <property name="spawn.Normal" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="161" template="../../../../common/maps/obj/booster.tx" type="reward" x="144" y="222">
-   <properties>
-    <property name="reward">[
-  {
-    &quot;editions&quot;: [ &quot;FDN&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 9,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;FDN&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;FDN&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 2,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
-  }
-]
-</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
-    <property name="spawn.Normal" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="162" template="../../../../common/maps/obj/booster.tx" type="reward" x="144" y="255">
-   <properties>
-    <property name="reward">[
-  {
-    &quot;editions&quot;: [ &quot;M13&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 11,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;M13&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;M13&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
-  }
-]
-</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
-    <property name="spawn.Normal" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="163" template="../../../../common/maps/obj/booster.tx" type="reward" x="144" y="287">
-   <properties>
-    <property name="reward">[
-  {
-    &quot;editions&quot;: [ &quot;10E&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 11,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;10E&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;10E&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
-  }
-]
-</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
-    <property name="spawn.Normal" type="bool" value="false"/>
    </properties>
   </object>
  </objectgroup>

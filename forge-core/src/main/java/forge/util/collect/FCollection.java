@@ -1,5 +1,7 @@
 package forge.util.collect;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.*;
 import java.util.function.Predicate;
@@ -34,12 +36,20 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     /**
      * The {@link Set} representation of this collection.
      */
-    private final Set<T> set = new HashSet<>();
+    private transient Set<T> set = new HashSet<>();
 
     /**
      * The {@link List} representation of this collection.
      */
     private final List<T> list = new ArrayList<>();
+
+    /**
+     * Rebuild the transient set from the list after deserialization.
+     */
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        set = new HashSet<>(list);
+    }
 
     /**
      * Create an empty {@link FCollection}.

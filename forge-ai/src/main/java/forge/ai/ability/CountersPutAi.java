@@ -302,8 +302,10 @@ public class CountersPutAi extends CountersAi {
             return doChargeToOppCtrlCMCLogic(ai, sa);
         } else if (logic.equals("TheOneRing")) {
             return SpecialCardAi.TheOneRing.consider(ai, sa);
-        }else if ("PsychicFrog".equals(logic)) {
+        } else if ("PsychicFrog".equals(logic)) {
             return SpecialCardAi.PsychicFrog.considerCounterAbility(ai, sa , ph);
+        } else if (sa.isKeyword(Keyword.STATION)) {
+            return doStationAi(ai, sa);
         }
 
 
@@ -1076,6 +1078,15 @@ public class CountersPutAi extends CountersAi {
     public CounterType chooseCounterType(List<CounterType> options, SpellAbility sa, Map<String, Object> params) {
         Player ai = sa.getActivatingPlayer();
         GameEntity e = (GameEntity) params.get("Target");
+
+        if (e == null) {
+            List<Card> list = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
+            if (list.isEmpty()) {
+                return Iterables.getFirst(options, null);
+            }
+            e = list.get(0);
+        }
+
         // for Card try to select not useless counter
         if (e instanceof Card c) {
             if (c.getController().isOpponentOf(ai)) {
@@ -1230,5 +1241,47 @@ public class CountersPutAi extends CountersAi {
         }
         // If the AI has enough counters or more than the optimal CMC, it should not play the ability.
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+    }
+
+    private AiAbilityDecision doStationAi(Player ai, SpellAbility sa) {
+        Card source = sa.getHostCard();
+        PhaseHandler ph = source.getGame().getPhaseHandler();
+
+        int numStation = source.getKeywordMagnitude(Keyword.STATION);
+        int numCharge = source.getCounters(CounterEnumType.CHARGE);
+        CardCollection canTap = CardLists.filter(ai.getCreaturesInPlay(), c -> c.getNetPower() > 0 && c.isUntapped());
+        if (canTap.isEmpty()) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
+
+        CardLists.sortByPowerAsc(canTap); // Note: matches the way chooseTapType sorts them; maybe worth sorting in descending order for Station?
+
+        // TODO: make this smarter so that the AI is better at predicting conditions when this is safe
+        // (also needs a modification to willPayCosts and ComputerUtil.chooseTapType to make better choices for what exactly to tap)
+
+        // If a single creature is enough to turn an untapped station into a creature, allow it
+        if (ph.is(PhaseType.MAIN1, ai)) {
+            Card firstToTap = canTap.getFirst();
+            if (source.getType().hasSubtype("Spacecraft") && !source.isCreature() && source.isUntapped()) {
+                if (numCharge < numStation && numCharge + firstToTap.getNetPower() >= numStation
+                        && firstToTap.getNetPower() <= source.getBasePower()) {
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                }
+            }
+        }
+
+        // If there's nothing to possibly block next turn, or we can reasonably stay on high enough life, go for it
+        if (ph.is(PhaseType.MAIN2, ai)) {
+            List<Card> nextTurnAttackers = CardLists.filter(ai.getStrongestOpponent().getCreaturesInPlay(), c -> CombatUtil.canAttackNextTurn(c, ai));
+            CardCollection blockerList = CardLists.filter(canTap, CardPredicates.possibleBlockerForAtLeastOne(nextTurnAttackers));
+
+            if (numCharge < numStation) {
+                if (blockerList.isEmpty() || ComputerUtil.predictNextCombatsRemainingLife(ai, false, true, 0, blockerList) > ai.getStartingLife() * 2 / 3) {
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                }
+            }
+        }
+
+        return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
     }
 }

@@ -231,7 +231,7 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
             this.controller.setCurrentDeckInEditor(this.host.getDeckController().getCurrentDeckInEditor());
         // Get the list of allowed Sections
         List<DeckSection> supportedSections = new ArrayList<>();
-        for (DeckSection section : EnumSet.allOf(DeckSection.class)) {
+        for (DeckSection section : DeckSection.values()) {
             if (this.host.isSectionImportable(section))
                 supportedSections.add(section);
         }

@@ -20,8 +20,12 @@ package forge.screens.match.controllers;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.function.BiConsumer;
 import java.util.function.Function;
 
+import javax.swing.ButtonGroup;
+import javax.swing.JPopupMenu;
+import javax.swing.JRadioButtonMenuItem;
 import javax.swing.SwingUtilities;
 
 import forge.game.player.PlayerView;
@@ -32,6 +36,8 @@ import forge.screens.match.CMatchUI;
 import forge.screens.match.ZoneAction;
 import forge.screens.match.views.VField;
 import forge.toolbox.MouseTriggerEvent;
+import forge.util.Localizer;
+import forge.view.arcane.FloatingZone;
 
 /**
  * Controls Swing components of a player's field instance.
@@ -74,7 +80,42 @@ public class CField implements ICDoc {
         };
 
         Function<ZoneType, Runnable> zoneActionFactory = (zone) -> new ZoneAction(matchUI, player, zone);
-        view.getDetailsPanel().setupMouseActions(zoneActionFactory, manaAction);
+
+        final BiConsumer<ZoneType, MouseEvent> zoneRightClick = (zone, e) -> {
+            final Localizer localizer = Localizer.getInstance();
+            final JPopupMenu popup = new JPopupMenu();
+            final ButtonGroup group = new ButtonGroup();
+            final boolean isOwn = matchUI.isLocalPlayer(player);
+            final boolean currentlyTabMode = FloatingZone.isTabMode(zone, isOwn);
+
+            final JRadioButtonMenuItem windowItem = new JRadioButtonMenuItem(localizer.getMessage("lblOpenInWindow"));
+            final JRadioButtonMenuItem tabItem = new JRadioButtonMenuItem(localizer.getMessage("lblAddTabToHandPanel"));
+            windowItem.setSelected(!currentlyTabMode);
+            tabItem.setSelected(currentlyTabMode);
+            group.add(windowItem);
+            group.add(tabItem);
+
+            windowItem.addActionListener(evt -> {
+                if (currentlyTabMode) {
+                    FloatingZone.setTabMode(zone, false, isOwn);
+                    FloatingZone.closeExisting(matchUI, player, zone);
+                    FloatingZone.showOrHide(matchUI, player, zone);
+                }
+            });
+            tabItem.addActionListener(evt -> {
+                if (!currentlyTabMode) {
+                    FloatingZone.setTabMode(zone, true, isOwn);
+                    FloatingZone.closeExisting(matchUI, player, zone);
+                    FloatingZone.showOrHide(matchUI, player, zone);
+                }
+            });
+
+            popup.add(windowItem);
+            popup.add(tabItem);
+            popup.show(e.getComponent(), e.getX(), e.getY());
+        };
+
+        view.getDetailsPanel().setupMouseActions(zoneActionFactory, zoneRightClick, manaAction);
     }
 
     public final CMatchUI getMatchUI() {

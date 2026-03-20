@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="83">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx" />
@@ -127,9 +127,9 @@
    }
 ]</property>
     <property name="enemy" value="Jolrael, Empress of Beasts" />
-    <property name="threatRange" type="int" value="30" />
+    <property name="threatRange" type="int" value="100" />
    <property name="effect">{"startBattleWithCard": ["Jolrael, Empress of Beasts|PCY", "Undiscovered Paradise|VIS", "Jolrael's Centaur|MIR", "Nature's Revolt|TMP"]}</property>
-    </properties>
+    <property name="speedModifier" type="float" value="20" /></properties>
   </object>
   <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="658.333" y="600">
    <properties>
@@ -142,9 +142,9 @@
    }
 ]</property>
     <property name="enemy" value="Verdeloth the Ancient" />
-    <property name="threatRange" type="int" value="30" />
+    <property name="threatRange" type="int" value="100" />
    <property name="effect">{"startBattleWithCard": ["Heart of Yavimaya|ALL", "Greener Pastures|USG", "Saproling Infestation|INV", "Night Soil|FEM", "Fires of Yavimaya|INV", "Yavimaya Gnats|ICE"]}</property>
-    </properties>
+    <property name="speedModifier" type="float" value="20" /></properties>
   </object>
   <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="663.666" y="409.333">
    <properties>
@@ -157,9 +157,9 @@
    }
 ]</property>
     <property name="enemy" value="Rofellos" />
-    <property name="threatRange" type="int" value="30" />
+    <property name="threatRange" type="int" value="100" />
    <property name="effect">{"startBattleWithCard": ["Rofellos, Llanowar Emissary|UDS", "Ivy Seer|UDS", "Heedless One|ONS", "Braidwood Cup|UDS"]}</property>
-    </properties>
+    <property name="speedModifier" type="float" value="20" /></properties>
   </object>
   <object id="70" template="../../../../../../common/maps/obj/enemy.tx" x="97" y="410">
    <properties>
@@ -172,9 +172,9 @@
    }
 ]</property>
     <property name="enemy" value="Multani" />
-    <property name="threatRange" type="int" value="30" />
+    <property name="threatRange" type="int" value="100" />
    <property name="effect">{"startBattleWithCard": ["Heart of Yavimaya|ALL", "Multani's Presence|ULG", "Rowen|VIS", "Primitive Etchings|SCG", "Library of Leng|LEA", "Primal Rage|STH", "Fires of Yavimaya|INV", "Yavimaya Gnats|ICE"]}</property>
-    </properties>
+    <property name="speedModifier" type="float" value="20" /></properties>
   </object>
   <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="600.667" y="494">
    <properties>

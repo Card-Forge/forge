@@ -415,7 +415,7 @@ public class DeckProxy implements InventoryItem {
 
     public Integer getAverageCMC() {
         if (avgCMC == null) {
-            avgCMC = Deck.getAverageCMC(getDeck());
+            avgCMC = getDeck().getAverageCMC();
         }
         return avgCMC;
     }

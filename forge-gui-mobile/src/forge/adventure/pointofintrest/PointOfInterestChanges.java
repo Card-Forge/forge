@@ -150,19 +150,17 @@ public class PointOfInterestChanges implements SaveFileContent  {
 
     public void addObjectReputation(int id, int delta)
     {
-        reputation.put(id, (reputation.getOrDefault(id, 0)) + delta);
+        reputation.merge(id, delta, Integer::sum);
     }
 
-    public int getMapReputation(){
+    public int getMapReputation()
+    {
         return getObjectReputation(0);
     }
 
-    public int getObjectReputation(int id){
-        if (!reputation.containsKey(id))
-        {
-            reputation.put(id, 0);
-        }
-        return reputation.get(id);
+    public int getObjectReputation(int id)
+    {
+        return reputation.getOrDefault(id, 0);
     }
     public boolean hasDeletedObjects() {
         return deletedObjects != null && !deletedObjects.isEmpty();

@@ -46,12 +46,62 @@
   </object>
   <object id="66" template="../../../../../../common/maps/obj/treasure.tx" x="159.5" y="50.8333">
    <properties>
-    <property name="reward">[{"type": "randomCard","colors": ["White"], "count": 5 }, {"type": "item","count": 1,"probability":0.2,"itemName": "Jungle Shield"},
-{
-"type": "card",
-"probability": 1,
-"count": 1,
-"cardName": "Pearl Medallion|TMP"}]</property>
+    <property name="reward">[
+  {
+    "type": "item",
+    "count": 1,
+    "probability": 0.2,
+    "itemName": "Jungle Shield"
+  },
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Pearl Medallion|TMP"
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.04,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.18,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.66,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.66,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.32,
+    "count": 3,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.14,
+    "count": 3,
+    "addMaxCount": 2
+  }
+]</property>
    </properties>
   </object>
   <object id="67" template="../../../../../../common/maps/obj/booster.tx" x="176.167" y="49.3333">
