@@ -527,6 +527,9 @@ public class NewGameScene extends MenuScene {
             case Custom:
                 summaryText.append("Mode: Custom\n\nChoose your own preconstructed deck. Enemies can receive a random genetic AI deck (difficult).\n\nWarning: This will make encounter difficulty vary wildly from the developers' intent");
                 break;
+            case Precon:
+                summaryText.append("Mode: Precon\n\nYou will receive a specific preconstructed deck. You can choose a random or a specific preconstructed deck from an edition of your choice.\n\n");
+                break;
             case Commander:
                 summaryText.append("Mode: Commander\n\nYou will be given a preconstructed commander deck based on the chosen color theme to start the playthrough.\n\nGood luck on your quest of creating a coherent deck that can win consistently and defeat the bosses.");
                 break;
@@ -534,7 +537,7 @@ public class NewGameScene extends MenuScene {
                 summaryText.append("Mode: Commander Precon\n\nChoose a named commander preconstructed deck to start the playthrough.\n\nThis uses Commander deckbuilding and game rules, but lets you pick from the curated commander precon folder.");
                 break;
             default:
-                summaryText.append("No summary available for your this game mode.");
+                summaryText.append("No summary available for this game mode.");
                 break;
         }
 
