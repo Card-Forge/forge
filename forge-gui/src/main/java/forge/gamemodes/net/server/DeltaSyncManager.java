@@ -263,7 +263,6 @@ public class DeltaSyncManager implements IHasNetLog {
             obj.registerConsumer(consumerId);
             registeredByKey.put(deltaKey, obj);
             obj.getAndClearDirtyProps(consumerId);
-
             Map<TrackableProperty, Object> allProps = buildPropertyMap(obj, null, checksumSnapshot);
             if (allProps != null && !allProps.isEmpty()) {
                 newObjects.put(deltaKey, allProps);
@@ -291,10 +290,8 @@ public class DeltaSyncManager implements IHasNetLog {
                         String.format("0x%08X", deltaKey), obj.getId(), allProps.size());
             }
         } else {
-            // Existing object — check dirty props and delayed (frozen) props
-            EnumSet<TrackableProperty> dirtyProps = obj.hasConsumerChanges(consumerId)
-                    ? obj.getAndClearDirtyProps(consumerId)
-                    : EnumSet.noneOf(TrackableProperty.class);
+            // Existing object
+            EnumSet<TrackableProperty> dirtyProps = obj.getAndClearDirtyProps(consumerId);
             Map<TrackableProperty, Object> delta = buildPropertyMap(obj, dirtyProps, checksumSnapshot);
             if (delta != null && !delta.isEmpty()) {
                 objectDeltas.put(deltaKey, delta);

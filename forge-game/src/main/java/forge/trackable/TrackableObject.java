@@ -20,9 +20,9 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
     protected transient Tracker tracker;
     private final Map<TrackableProperty, Object> props;
     private volatile int version;
-    // Per-consumer dirty tracking. Lazy-init: null until first registerConsumer.
-    // In offline games (no consumers), set() does no tracking work at all.
-    // Volatile: multiple DeltaSyncManager threads call registerConsumer concurrently.
+    // Per-consumer dirty tracking. Lazy-init: null until first registerConsumer
+    // In offline games (no consumers), set() does no tracking work at all
+    // Volatile: multiple DeltaSyncManager threads call registerConsumer concurrently
     private transient volatile Map<Integer, EnumSet<TrackableProperty>> consumers;
     private boolean copyingProps;
 
@@ -212,23 +212,6 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
             EnumSet<TrackableProperty> copy = EnumSet.copyOf(dirtySet);
             dirtySet.clear();
             return copy;
-        }
-    }
-
-    /**
-     * Quick check if a consumer has pending changes.
-     */
-    public boolean hasConsumerChanges(int consumerId) {
-        Map<Integer, EnumSet<TrackableProperty>> c = consumers;
-        if (c == null) {
-            return false;
-        }
-        EnumSet<TrackableProperty> dirtySet = c.get(consumerId);
-        if (dirtySet == null) {
-            return false;
-        }
-        synchronized (dirtySet) {
-            return !dirtySet.isEmpty();
         }
     }
 

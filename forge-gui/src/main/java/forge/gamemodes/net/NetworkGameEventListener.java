@@ -17,11 +17,6 @@ import forge.game.event.GameEventTurnPhase;
  * Logs all significant game actions to NetworkLogConfig for debugging
  * and analysis of network play sessions.
  *
- * Uses Guava EventBus subscription pattern - subscribe to Game.events via:
- * <pre>
- * game.subscribeToEvents(new NetworkGameEventListener());
- * </pre>
- *
  * Log output uses the [GAME EVENT] prefix for easy filtering and
  * clear visual separation from network categories like [DeltaSync].
  */

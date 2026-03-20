@@ -19,13 +19,8 @@ import forge.trackable.TrackableTypes.TrackableType;
 import java.util.*;
 
 /**
- * Extension of AbstractGuiGame with network delta synchronization support.
  * This class handles all network-specific deserialization and state management,
  * keeping the core AbstractGuiGame class free from network dependencies.
- *
- * All network-specific logic (delta packet application, tracker initialization,
- * reconnection handling) is contained in this subclass, allowing the base
- * AbstractGuiGame to remain focused on core local game functionality.
  */
 public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetLog {
 
@@ -35,13 +30,13 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
             return;
         }
 
-        long startTime = System.currentTimeMillis();
-
         Tracker tracker = getGameView().getTracker();
         if (tracker == null) {
             netLog.error("[DeltaSync] Cannot apply delta: Tracker is null");
             return;
         }
+
+        long startTime = System.currentTimeMillis();
 
         // Log with game context for easier correlation
         String activePlayerName = getGameView().getPlayerTurn() != null ? getGameView().getPlayerTurn().getName() : "?";
@@ -53,17 +48,15 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
         int appliedCount = 0;
         int skippedCount = 0;
 
-        // STEP 1: Create new objects first (so deltas can reference them)
-        Map<Integer, Map<TrackableProperty, Object>> newObjects = packet.getNewObjects();
         List<Map.Entry<TrackableObject, Map<TrackableProperty, Object>>> pendingPropertyApplications = new ArrayList<>();
         Map<Integer, CardStateView> csvRegistry = new HashMap<>();
-
+        Map<Integer, Map<TrackableProperty, Object>> newObjects = packet.getNewObjects();
         if (!newObjects.isEmpty()) {
             // Sort by delta key so CardViews (type 0) are created before CSVs (type 4)
             List<Map.Entry<Integer, Map<TrackableProperty, Object>>> sortedNew = new ArrayList<>(newObjects.entrySet());
             sortedNew.sort(Comparator.comparingInt(Map.Entry::getKey));
 
-            // Phase 1a: Create all objects first (without applying properties)
+            // STEP 1: Create new objects first
             for (Map.Entry<Integer, Map<TrackableProperty, Object>> newEntry : sortedNew) {
                 int deltaKey = newEntry.getKey();
                 int objectType = DeltaPacket.getTypeFromDeltaKey(deltaKey);
@@ -103,7 +96,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
             }
             netLog.info("[DeltaSync] Created {} new objects (phase 1a)", newObjectCount);
 
-            // Phase 1b: Apply properties to all objects (all objects exist for cross-references)
+            // STEP 2: Populate new objects now that all exist for cross-references
             int propsApplied = 0;
             for (Map.Entry<TrackableObject, Map<TrackableProperty, Object>> pending : pendingPropertyApplications) {
                 try {
@@ -117,7 +110,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
             netLog.trace("[DeltaSync] Applied properties to {} objects (phase 1b)", propsApplied);
         }
 
-        // STEP 2: Apply property deltas to existing objects
+        // STEP 3: Apply property deltas to existing objects
         for (Map.Entry<Integer, Map<TrackableProperty, Object>> entry : packet.getObjectDeltas().entrySet()) {
             int deltaKey = entry.getKey();
             Map<TrackableProperty, Object> deltaProps = entry.getValue();
@@ -554,7 +547,6 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
     private static int getCardIdFromCsvEncodedId(int encodedId) {
         return encodedId / 16;
     }
-
     private static CardStateName getStateFromCsvEncodedId(int encodedId) {
         return CardStateName.values()[encodedId % 16];
     }

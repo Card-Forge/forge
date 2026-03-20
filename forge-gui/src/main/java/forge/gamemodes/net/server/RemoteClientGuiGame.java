@@ -29,6 +29,7 @@ import forge.trackable.Tracker;
 import forge.trackable.TrackableCollection;
 import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
+
 import net.jpountz.lz4.LZ4BlockOutputStream;
 
 import java.util.Collection;
@@ -38,17 +39,18 @@ import java.util.stream.Collectors;
 
 public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
 
+    // New objects are sent with full property data, existing objects only send changed properties.
+    public static boolean useDeltaSync = true;
+
     private final GameProtocolSender sender;
     private final DeltaSyncManager deltaSyncManager;
     private final int clientIndex;
-    // Delta sync is ENABLED - new objects are now properly handled.
-    // New objects are sent with full property data, existing objects only send changed properties.
     private final Object deltaLock = new Object();
-    public static boolean useDeltaSync = true;
     private boolean initialSyncSent = false;
     private boolean objectsRegistered = false;
     private boolean fallbackLogged = false;  // Prevent duplicate fallback log messages
     private volatile boolean paused;
+
     private GameEventForwarder forwarder;
     private boolean flushing;
 
@@ -139,7 +141,6 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
     public void updateGameView() {
         updateGameView(true);
     }
-
     private void updateGameView(boolean flush) {
         GameView gameView = getGameView();
         if (gameView == null) {
