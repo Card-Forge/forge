@@ -303,11 +303,10 @@ public class CountersPutAi extends CountersAi {
         } else if (logic.equals("TheOneRing")) {
             return SpecialCardAi.TheOneRing.consider(ai, sa);
         } else if ("PsychicFrog".equals(logic)) {
-            return SpecialCardAi.PsychicFrog.considerCounterAbility(ai, sa , ph);
+            return SpecialCardAi.PsychicFrog.considerCounterAbility(ai, sa, ph);
         } else if (sa.isKeyword(Keyword.STATION)) {
             return doStationAi(ai, sa);
         }
-
 
         if (sourceName.equals("Feat of Resistance")) { // sub-ability should take precedence
             CardCollection prot = ProtectAi.getProtectCreatures(ai, sa.getSubAbility());
