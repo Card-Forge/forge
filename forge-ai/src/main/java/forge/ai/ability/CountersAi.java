@@ -17,7 +17,6 @@
  */
 package forge.ai.ability;
 
-import com.google.common.collect.Iterables;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.*;
