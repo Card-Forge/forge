@@ -3103,27 +3103,19 @@ public class ComputerUtil {
     // call this to determine if it's safe to use a life payment spell
     // or trigger "emergency" strategies such as holding mana for Spike Weaver of Counterspell.
     public static boolean aiLifeInDanger(Player ai, boolean serious, int payment) {
+        if (payment == 0 && ai.getController().isAI()) {
+            AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
+            return aic.getPredictedRemainingLife(serious) == Integer.MIN_VALUE;
+        }
         return predictNextCombatsRemainingLife(ai, serious, false, payment, null) == Integer.MIN_VALUE;
     }
     public static int predictNextCombatsRemainingLife(Player ai, boolean serious, boolean checkDiff, int payment, final CardCollection excludedBlockers) {
-        // Check scope-based cache (only when excludedBlockers is null)
-        AiController aic = null;
-        if (excludedBlockers == null && ai.getController() instanceof PlayerControllerAi) {
-            aic = ((PlayerControllerAi) ai.getController()).getAi();
-            if (aic.hasCachedPredictCombat(serious, checkDiff, payment)) {
-                return aic.getCachedPredictCombatResult();
-            }
-        }
-
         // life won't change
         int remainingLife = Integer.MAX_VALUE;
 
         // performance shortcut
         // TODO if checking upcoming turn it should be a permanent effect
         if (ai.cantLoseForZeroOrLessLife()) {
-            if (aic != null) {
-                aic.setCachedPredictCombat(serious, checkDiff, payment, remainingLife);
-            }
             return remainingLife;
         }
 
@@ -3194,9 +3186,6 @@ public class ComputerUtil {
                 // find out the worst possible outcome
                 remainingLife = Math.min(ComputerUtilCombat.lifeThatWouldRemain(ai, combat), remainingLife);
             }
-        }
-        if (aic != null) {
-            aic.setCachedPredictCombat(serious, checkDiff, payment, remainingLife);
         }
         return remainingLife;
     }

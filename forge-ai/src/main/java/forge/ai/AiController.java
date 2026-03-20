@@ -93,6 +93,8 @@ public class AiController {
     private final AiCardMemory memory;
     private Combat predictedCombat;
     private Combat predictedCombatNextTurn;
+    private Integer predictedRemainingLife;
+    private Integer predictedRemainingLifeSerious;
     private boolean useSimulation;
     private SpellAbilityPicker simPicker;
     private int lastAttackAggression;
@@ -100,56 +102,11 @@ public class AiController {
     private List<SpellAbility> skipped;
     private boolean timeoutReached;
 
-    // Cache for predictNextCombatsRemainingLife within a single evaluation scope.
-    // Keyed on (serious, checkDiff, payment). Only used when excludedBlockers == null.
-    // Volatile: the FutureTask worker thread writes these, and the game thread may
-    // access them via canPlayFromEffectAI/doTrigger after a timeout cancellation.
-    private volatile boolean predictCombatCacheValid;
-    private volatile boolean cachedSerious;
-    private volatile boolean cachedCheckDiff;
-    private volatile int cachedPayment;
-    private volatile int cachedResult;
-    private volatile int predictCombatCacheScopeDepth;
-
     public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
         game = game0;
         memory = new AiCardMemory();
         simPicker = new SpellAbilityPicker(game, player);
-    }
-
-    void beginPredictCombatCacheScope() {
-        if (predictCombatCacheScopeDepth == 0) {
-            predictCombatCacheValid = false;
-        }
-        predictCombatCacheScopeDepth++;
-    }
-
-    void endPredictCombatCacheScope() {
-        predictCombatCacheScopeDepth--;
-        if (predictCombatCacheScopeDepth <= 0) {
-            predictCombatCacheScopeDepth = 0;
-            predictCombatCacheValid = false;
-        }
-    }
-
-    boolean hasCachedPredictCombat(boolean serious, boolean checkDiff, int payment) {
-        return predictCombatCacheValid
-                && cachedSerious == serious
-                && cachedCheckDiff == checkDiff
-                && cachedPayment == payment;
-    }
-
-    int getCachedPredictCombatResult() {
-        return cachedResult;
-    }
-
-    void setCachedPredictCombat(boolean serious, boolean checkDiff, int payment, int result) {
-        predictCombatCacheValid = true;
-        cachedSerious = serious;
-        cachedCheckDiff = checkDiff;
-        cachedPayment = payment;
-        cachedResult = result;
     }
 
     public boolean usesSimulation() {
@@ -197,6 +154,19 @@ public class AiController {
             aiAtk.declareAttackers(predictedCombatNextTurn);
         }
         return predictedCombatNextTurn;
+    }
+
+    public int getPredictedRemainingLife(boolean serious) {
+        if (serious) {
+            if (predictedRemainingLifeSerious == null) {
+                predictedRemainingLifeSerious = ComputerUtil.predictNextCombatsRemainingLife(player, true, false, 0, null);
+            }
+            return predictedRemainingLifeSerious;
+        }
+        if (predictedRemainingLife == null) {
+            predictedRemainingLife = ComputerUtil.predictNextCombatsRemainingLife(player, false, false, 0, null);
+        }
+        return predictedRemainingLife;
     }
 
     private List<SpellAbility> getPossibleETBCounters() {
@@ -1325,28 +1295,23 @@ public class AiController {
     }
 
     public AiPlayDecision canPlayFromEffectAI(Spell spell, boolean mandatory, boolean withoutPayingManaCost) {
-        beginPredictCombatCacheScope();
-        try {
-            if (spell instanceof SpellApiBased) {
-                boolean chance;
-                if (withoutPayingManaCost) {
-                    chance = SpellApiToAi.Converter.get(spell).doTriggerNoCostWithSubs(player, spell, mandatory).willingToPlay();
-                } else {
-                    chance = SpellApiToAi.Converter.get(spell).doTrigger(player, spell, mandatory);
-                }
-                if (!chance) {
-                    return AiPlayDecision.TargetingFailed;
-                }
-
-                if (mandatory) {
-                    return AiPlayDecision.WillPlay;
-                }
+        if (spell instanceof SpellApiBased) {
+            boolean chance;
+            if (withoutPayingManaCost) {
+                chance = SpellApiToAi.Converter.get(spell).doTriggerNoCostWithSubs(player, spell, mandatory).willingToPlay();
+            } else {
+                chance = SpellApiToAi.Converter.get(spell).doTrigger(player, spell, mandatory);
+            }
+            if (!chance) {
+                return AiPlayDecision.TargetingFailed;
             }
 
-            return canPlaySpellOrLandBasic(spell.getHostCard(), spell);
-        } finally {
-            endPredictCombatCacheScope();
+            if (mandatory) {
+                return AiPlayDecision.WillPlay;
+            }
         }
+
+        return canPlaySpellOrLandBasic(spell.getHostCard(), spell);
     }
 
     // declares blockers for given defender in a given combat
@@ -1410,6 +1375,8 @@ public class AiController {
         predictedCombat = null;
         // Also reset predicted combat for next turn here
         predictedCombatNextTurn = null;
+        predictedRemainingLife = null;
+        predictedRemainingLifeSerious = null;
 
         // Reset priority mana reservation that's meant to work for one spell only
         memory.clearMemorySet(AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL);
@@ -1655,8 +1622,6 @@ public class AiController {
         timeoutReached = false;
 
         FutureTask<SpellAbility> future = new FutureTask<>(() -> {
-            beginPredictCombatCacheScope();
-            try {
             //avoid ComputerUtil.aiLifeInDanger in loops as it slows down a lot.. call this outside loops will generally be fast...
             boolean isLifeInDanger = useLivingEnd && ComputerUtil.aiLifeInDanger(player, true, 0);
             for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
@@ -1737,9 +1702,6 @@ public class AiController {
             }
 
             return null;
-            } finally {
-                endPredictCombatCacheScope();
-            }
         });
 
         Thread t = new Thread(future, "Game AI Eval");
@@ -1791,20 +1753,15 @@ public class AiController {
     }
 
     public boolean doTrigger(SpellAbility sa, boolean mandatory) {
-        beginPredictCombatCacheScope();
-        try {
-            if (sa instanceof WrappedAbility)
-                return doTrigger(((WrappedAbility) sa).getWrappedAbility(), mandatory);
-            if (sa.getApi() != null)
-                return SpellApiToAi.Converter.get(sa).doTrigger(player, sa, mandatory);
-            if (sa.getPayCosts() == Cost.Zero && !sa.usesTargeting()) {
-                // For non-converted triggers (such as Cumulative Upkeep) that don't have costs or targets to worry about
-                return true;
-            }
-            return false;
-        } finally {
-            endPredictCombatCacheScope();
+        if (sa instanceof WrappedAbility)
+            return doTrigger(((WrappedAbility) sa).getWrappedAbility(), mandatory);
+        if (sa.getApi() != null)
+            return SpellApiToAi.Converter.get(sa).doTrigger(player, sa, mandatory);
+        if (sa.getPayCosts() == Cost.Zero && !sa.usesTargeting()) {
+            // For non-converted triggers (such as Cumulative Upkeep) that don't have costs or targets to worry about
+            return true;
         }
+        return false;
     }
 
     /**
