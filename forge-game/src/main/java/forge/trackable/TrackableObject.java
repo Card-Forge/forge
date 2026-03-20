@@ -142,10 +142,8 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
         // same mutable object while the game thread mutates it on the next update.
         if (consumers != null) { // volatile read — safe even if concurrently nulled
             Object value = props.get(key);
-            if (value instanceof TrackableCollection) {
-                TrackableCollection copy = new TrackableCollection<>();
-                copy.addAll((TrackableCollection<?>) value);
-                props.put(key, copy);
+            if (value instanceof TrackableCollection tc) {
+                props.put(key, new TrackableCollection<>(tc));
             } else if (value instanceof Map) {
                 props.put(key, new HashMap<>((Map<?, ?>) value));
             } else if (value instanceof List) {

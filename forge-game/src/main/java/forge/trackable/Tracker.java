@@ -1,18 +1,19 @@
 package forge.trackable;
 
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Table;
 
 import forge.trackable.TrackableTypes.TrackableType;
 
 public class Tracker {
     private int freezeCounter = 0;
-    private final List<DelayedPropChange> delayedPropChanges = new CopyOnWriteArrayList<>();
+    private final List<DelayedPropChange> delayedPropChanges = Lists.newArrayList();
 
     private final Table<TrackableType<?>, Integer, Object> objLookups = HashBasedTable.create();
 
@@ -72,8 +73,12 @@ public class Tracker {
      * Does not modify or remove the delayed changes.
      */
     public Map<TrackableProperty, Object> getDelayedPropsFor(TrackableObject obj) {
+        if (delayedPropChanges.isEmpty()) {
+            return Collections.emptyMap();
+        }
         Map<TrackableProperty, Object> result = new EnumMap<>(TrackableProperty.class);
-        for (DelayedPropChange change : delayedPropChanges) {
+        // needs thread safety
+        for (DelayedPropChange change : Lists.newArrayList(delayedPropChanges)) {
             if (change.object == obj) {
                 result.put(change.prop, change.value);
             }
