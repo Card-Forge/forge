@@ -15,6 +15,7 @@ import forge.trackable.TrackableTypes;
 import forge.trackable.TrackableTypes.TrackableType;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.List;
@@ -403,8 +404,18 @@ public final class NetworkChecksumUtil {
     private static TrackableProperty[] allProperties = null;
 
     /**
-     * Get all TrackableProperty values whose types can be generically hashed.
-     * Excludes container/nested types that require special traversal.
+     * Get all TrackableProperty values eligible for sampled checksum hashing.
+     * Excludes properties whose types are either:
+     * <ul>
+     *   <li>{@code CardStateViewType} — nested child objects of CardView,
+     *       already traversed individually in {@link #collectChecksumObjects}</li>
+     *   <li>{@code StackItemViewListType} — stack items are already traversed
+     *       individually in {@link #collectChecksumObjects}</li>
+     *   <li>{@code CombatViewType} — complex structure (attacker bands with
+     *       blockers); handled specially in the stable checksum path</li>
+     *   <li>{@code IPaperCardType} — server-side card definition reference,
+     *       not sent to or used by the client</li>
+     * </ul>
      */
     public static Set<TrackableProperty> getEligibleProperties() {
         if (eligibleProperties != null) {
@@ -434,8 +445,12 @@ public final class NetworkChecksumUtil {
     /**
      * Walk the GameView object graph in deterministic order and collect
      * all TrackableObjects whose properties should be sampled.
+     * When snapshot is non-null, discovers objects from the snapshot (ground truth
+     * of what the delta carries) rather than the live gameView, ensuring the same
+     * object set is hashed on both server and client.
      */
-    public static List<TrackableObject> collectChecksumObjects(GameView gameView) {
+    public static List<TrackableObject> collectChecksumObjects(GameView gameView,
+            Map<TrackableObject, Map<TrackableProperty, Object>> snapshot) {
         List<TrackableObject> objects = new ArrayList<>();
         if (gameView == null) {
             return objects;
@@ -448,26 +463,31 @@ public final class NetworkChecksumUtil {
 
         for (PlayerView player : players) {
             List<CardView> cards = new ArrayList<>();
-            addCardsFromZone(cards, player.getBattlefield());
-            addCardsFromZone(cards, player.getHand());
-            addCardsFromZone(cards, player.getGraveyard());
-            addCardsFromZone(cards, player.getExile());
-            addCardsFromZone(cards, player.getCommand());
+            addCardsFromSnapshot(cards, snapValue(player, TrackableProperty.Battlefield, snapshot));
+            addCardsFromSnapshot(cards, snapValue(player, TrackableProperty.Hand, snapshot));
+            addCardsFromSnapshot(cards, snapValue(player, TrackableProperty.Graveyard, snapshot));
+            addCardsFromSnapshot(cards, snapValue(player, TrackableProperty.Exile, snapshot));
+            addCardsFromSnapshot(cards, snapValue(player, TrackableProperty.Command, snapshot));
             cards.sort(Comparator.comparingInt(CardView::getId));
 
             for (CardView card : cards) {
                 objects.add(card);
-                addIfNotNull(objects, card.getCurrentState());
-                addIfNotNull(objects, card.getAlternateState());
-                addIfNotNull(objects, card.getLeftSplitState());
-                addIfNotNull(objects, card.getRightSplitState());
+                Object state = snapValue(card, TrackableProperty.CurrentState, snapshot);
+                if (state instanceof TrackableObject) objects.add((TrackableObject) state);
+                Object alt = snapValue(card, TrackableProperty.AlternateState, snapshot);
+                if (alt instanceof TrackableObject) objects.add((TrackableObject) alt);
+                Object left = snapValue(card, TrackableProperty.LeftSplitState, snapshot);
+                if (left instanceof TrackableObject) objects.add((TrackableObject) left);
+                Object right = snapValue(card, TrackableProperty.RightSplitState, snapshot);
+                if (right instanceof TrackableObject) objects.add((TrackableObject) right);
             }
         }
 
-        if (gameView.getStack() != null) {
+        Object stackObj = snapValue(gameView, TrackableProperty.Stack, snapshot);
+        if (stackObj instanceof Iterable<?>) {
             List<StackItemView> stackItems = new ArrayList<>();
-            for (StackItemView siv : gameView.getStack()) {
-                stackItems.add(siv);
+            for (Object item : (Iterable<?>) stackObj) {
+                if (item instanceof StackItemView) stackItems.add((StackItemView) item);
             }
             stackItems.sort(Comparator.comparingInt(StackItemView::getId));
             objects.addAll(stackItems);
@@ -476,18 +496,15 @@ public final class NetworkChecksumUtil {
         return objects;
     }
 
-    private static void addCardsFromZone(List<CardView> cards, Iterable<CardView> zone) {
-        if (zone == null) return;
-        for (CardView card : zone) {
-            cards.add(card);
+    private static void addCardsFromSnapshot(List<CardView> cards, Object zoneValue) {
+        if (zoneValue instanceof Iterable<?>) {
+            for (Object item : (Iterable<?>) zoneValue) {
+                if (item instanceof CardView) cards.add((CardView) item);
+            }
         }
     }
 
-    private static void addIfNotNull(List<TrackableObject> objects, TrackableObject obj) {
-        if (obj != null) {
-            objects.add(obj);
-        }
-    }
+
 
     /**
      * Read the effective value of a property, checking the tracker's delayed
@@ -511,6 +528,9 @@ public final class NetworkChecksumUtil {
 
     /**
      * Hash a property value specifically for checksum purposes.
+     * Must produce deterministic hashes for the same logical value across
+     * different Java object instances (server snapshot vs client deserialized).
+     * Types without a content-based hashCode() need explicit handling here.
      */
     static int hashPropertyValue(Object value) {
         if (value == null) {
@@ -520,7 +540,6 @@ public final class NetworkChecksumUtil {
             return to.getId();
         }
         if (value instanceof TrackableCollection tc) {
-            // Sort IDs for determinism
             List<Integer> ids = new ArrayList<>(tc.size());
             for (Object item : tc) {
                 ids.add(item instanceof TrackableObject ? ((TrackableObject) item).getId() : Objects.hashCode(item));
@@ -529,7 +548,6 @@ public final class NetworkChecksumUtil {
             return ids.hashCode();
         }
         if (value instanceof Map) {
-            // Sort entries by key hashCode for determinism
             Map<?, ?> map = (Map<?, ?>) value;
             List<Integer> entryHashes = new ArrayList<>(map.size());
             for (Map.Entry<?, ?> entry : map.entrySet()) {
@@ -538,11 +556,18 @@ public final class NetworkChecksumUtil {
             entryHashes.sort(null);
             return entryHashes.hashCode();
         }
-        // Use ordinal() for enums — identity hashCode() differs across JVMs
         if (value instanceof Enum<?> e) {
             return e.ordinal();
         }
-        return Objects.hashCode(value);
+        // KeywordCollectionView has no hashCode or content-based toString — hash by keyword strings
+        if (value instanceof forge.game.keyword.KeywordCollection.KeywordCollectionView kcv) {
+            List<String> kws = kcv.asStringList();
+            Collections.sort(kws);
+            return kws.hashCode();
+        }
+        // Fallback: use toString() for content-based hashing. Covers types like CardType
+        // and ManaCost that have content-based toString() but no hashCode() override.
+        return value.toString().hashCode();
     }
 
     /**
@@ -603,7 +628,7 @@ public final class NetworkChecksumUtil {
             sampled[i] = allProps[sampledPropertyOrdinals[i]];
         }
 
-        List<TrackableObject> objects = collectChecksumObjects(gameView);
+        List<TrackableObject> objects = collectChecksumObjects(gameView, snapshot);
         for (TrackableObject obj : objects) {
             if (obj.getProps() == null) continue;
             for (TrackableProperty prop : sampled) {

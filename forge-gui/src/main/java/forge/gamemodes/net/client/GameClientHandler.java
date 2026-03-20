@@ -3,6 +3,7 @@ package forge.gamemodes.net.client;
 import forge.game.*;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
+import forge.gamemodes.net.GameEventProxy;
 import forge.gamemodes.net.GameProtocolHandler;
 import forge.gamemodes.net.IHasNetLog;
 import forge.gamemodes.net.IRemote;
@@ -91,11 +92,11 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
             // subsequent handleGameEvents.beforeCall which needs to resolve IdRefs.
             if (protocolMethod == ProtocolMethod.setGameView && args.length > 0 && args[0] instanceof GameView gv) {
                 gv.updateObjLookup();
-                // updateObjLookup skips objects already in the tracker, so objects
-                // registered on the first setGameView become stale. Replace tracker
-                // entries with the incoming GameView's objects so that delta sync
-                // and IdRef resolution operate on the same objects the GameView holds.
-                refreshTrackerEntries(gv);
+                // updateObjLookup skips objects already in the tracker, so CardViews
+                // registered on the first setGameView become stale (wrong zone, etc.).
+                // Replace tracker entries with incoming server CardViews so that
+                // IdRef resolution in handleGameEvents gets current state.
+                refreshTrackerCardViews(gv);
             }
             replicateProps(args);
         }
@@ -161,23 +162,18 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
     }
 
     /**
-     * Replace tracker entries with objects from the incoming GameView.
+     * Replace tracker CardView entries with incoming server CardViews.
      * <p>
-     * {@code updateObjLookup()} skips objects already in the tracker, so when
-     * multiple {@code setGameView} calls arrive (initial sync, resync, etc.),
-     * the tracker retains the FIRST deserialized instances while the GameView
-     * field holds the LATEST. Delta sync applies properties to tracker objects
-     * (via {@code findObjectByTypeAndId → tracker.getObj}), but checksums read
-     * from the GameView's objects — if these are different instances, the delta-
-     * applied properties never reach the checksum, causing persistent mismatches.
-     * <p>
-     * Force-replacing PlayerViews and CardViews ensures the tracker and GameView
-     * always reference the same object instances.
+     * {@code updateObjLookup()} skips objects already in the tracker, so CardViews
+     * registered on the first {@code setGameView} become stale — their zone, state,
+     * and other properties no longer reflect the server's current game state.
+     * When {@link GameEventProxy} resolves IdRefs from the tracker, it gets these
+     * stale CardViews, causing issues like card-back images in the game log
+     * (the stale zone is Library, so {@code canBeShownTo} returns false).
      */
-    private void refreshTrackerEntries(final GameView gv) {
+    private void refreshTrackerCardViews(final GameView gv) {
         if (gv.getPlayers() == null) { return; }
         for (final PlayerView pv : gv.getPlayers()) {
-            tracker.putObj(TrackableTypes.PlayerViewType, pv.getId(), pv);
             final EnumMap<?, ?> props = pv.getProps();
             if (props == null) { continue; }
             for (final Object value : props.values()) {
