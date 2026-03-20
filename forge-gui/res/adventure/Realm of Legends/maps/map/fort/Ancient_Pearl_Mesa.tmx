@@ -44,7 +44,7 @@
   <object id="59" template="../../../../common/maps/obj/collision.tx" x="-16" y="-16" width="512" height="16"/>
   <object id="75" template="../../../../common/maps/obj/enemy.tx" x="205.874" y="83.0951">
    <properties>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;True Conviction&quot;, &quot;Song of the Worldsoul&quot;, &quot;w_2_2_soldier_vigilance&quot; ] }"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;True Conviction&quot;, &quot;Martyr's Bond&quot; ] }"/>
     <property name="enemy" value="General Jarkeld"/>
    </properties>
   </object>

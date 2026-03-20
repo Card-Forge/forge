@@ -25,7 +25,7 @@ public class BidLifeEffect extends SpellAbilityEffect {
         if (sa.hasParam("StartBidding")) {
             String start = sa.getParam("StartBidding");
             if ("Any".equals(start)) {
-                startBidding = activator.getController().announceRequirements(sa, Localizer.getInstance().getMessage("lblChooseStartingBid"));
+                startBidding = activator.getController().announceRequirements(sa, 0, Integer.MAX_VALUE, Localizer.getInstance().getMessage("lblChooseStartingBid"));
             } else {
                 startBidding = AbilityUtils.calculateAmount(host, start, sa);
             }

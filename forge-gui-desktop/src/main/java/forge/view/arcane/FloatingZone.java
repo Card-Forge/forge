@@ -42,6 +42,7 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
+import forge.gui.framework.SDisplayUtil;
 import forge.gui.framework.SLayoutConstants;
 import forge.gui.framework.SLayoutIO;
 import forge.gui.framework.SRearrangingUtil;
@@ -49,6 +50,7 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.match.CMatchUI;
+import forge.screens.match.views.VHand;
 import forge.screens.match.views.VZone;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FScrollPane;
@@ -71,8 +73,9 @@ public class FloatingZone extends FloatingCardArea {
     // ========== Tab mode preference ==========
 
     /** Returns true if the given zone type should open as a docked tab. */
-    public static boolean isTabMode(final ZoneType zone) {
-        final String pref = FModel.getPreferences().getPref(FPref.UI_ZONE_DOCK_ZONES);
+    public static boolean isTabMode(final ZoneType zone, final boolean isOwn) {
+        final FPref prefKey = isOwn ? FPref.UI_ZONE_DOCK_ZONES : FPref.UI_ZONE_DOCK_ZONES_OTHER;
+        final String pref = FModel.getPreferences().getPref(prefKey);
         if (pref == null || pref.isEmpty()) return false;
         for (final String s : pref.split(",")) {
             if (s.trim().equals(zone.name())) return true;
@@ -81,9 +84,10 @@ public class FloatingZone extends FloatingCardArea {
     }
 
     /** Sets whether the given zone type should open as a docked tab. */
-    public static void setTabMode(final ZoneType zone, final boolean tabMode) {
+    public static void setTabMode(final ZoneType zone, final boolean tabMode, final boolean isOwn) {
         final ForgePreferences prefs = FModel.getPreferences();
-        final String current = prefs.getPref(FPref.UI_ZONE_DOCK_ZONES);
+        final FPref prefKey = isOwn ? FPref.UI_ZONE_DOCK_ZONES : FPref.UI_ZONE_DOCK_ZONES_OTHER;
+        final String current = prefs.getPref(prefKey);
         final LinkedHashSet<String> zones = new LinkedHashSet<>();
         if (current != null && !current.isEmpty()) {
             for (final String s : current.split(",")) {
@@ -96,13 +100,23 @@ public class FloatingZone extends FloatingCardArea {
         } else {
             zones.remove(zone.name());
         }
-        prefs.setPref(FPref.UI_ZONE_DOCK_ZONES, String.join(",", zones));
+        prefs.setPref(prefKey, String.join(",", zones));
         prefs.save();
     }
 
     // ========== Floating zone API ==========
 
     public static void showOrHide(final CMatchUI matchUI, final PlayerView player, final ZoneType zone) {
+        // If a VHand tab already exists for this player (default layout) and tab mode
+        // is active, just select the existing tab instead of creating a duplicate.
+        if (zone == ZoneType.Hand && isTabMode(zone, matchUI.isLocalPlayer(player))) {
+            final VHand existingHand = matchUI.getHandFor(player);
+            if (existingHand != null && existingHand.getParentCell() != null) {
+                SDisplayUtil.showTab(existingHand);
+                return;
+            }
+        }
+
         final int key = getKey(player, zone);
         final VZone docked = dockedZones.get(key);
         if (docked != null) {
@@ -123,7 +137,8 @@ public class FloatingZone extends FloatingCardArea {
         }
 
         // No existing docked zone — check tab mode preference
-        if (isTabMode(zone)) {
+        final boolean isOwn = matchUI.isLocalPlayer(player);
+        if (isTabMode(zone, isOwn)) {
             showAsTab(matchUI, player, zone);
             return;
         }

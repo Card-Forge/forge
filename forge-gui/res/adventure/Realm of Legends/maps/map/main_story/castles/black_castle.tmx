@@ -108,7 +108,7 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Urza Assembles the Titans&quot;, &quot;Planeswalker's Mirth&quot;, &quot;Pramikon, Sky Rampart&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Urza Assembles the Titans&quot;, &quot;Fight or Flight&quot;, &quot;Pramikon, Sky Rampart&quot;]}"/>
     <property name="enemy" value="Commodore Guff"/>
     <property name="pursueRange" type="int" value="0"/>
     <property name="threatRange" type="int" value="0"/>

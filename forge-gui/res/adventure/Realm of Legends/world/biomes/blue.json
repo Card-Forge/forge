@@ -26,13 +26,29 @@
 		"Shell"
 	],
 	"enemies": [
+		"Alandra",
+		"Alquist Proft",
+		"Arna",
+		"Bria",
 		"Captain Howler",
-		"Shorikai",
+		"Codie",
 		"Eloise",
-		"Morska",
+		"Goro-Goro and Satoru",
+		"Jace",
+		"Kira",
 		"Loot",
+		"Morska",
+		"Nymris",
+		"Omo",
+		"Sai",
+		"Sakashima",
 		"Sevinne",
-		"Nemesis"
+		"Shorikai",
+		"Tamiyo",
+		"Tetsuko",
+		"Yarok",
+		"Nemesis",
+		"Grand Nemesis"
 	],
 	"pointsOfInterest": [
 		"Blue Castle",
@@ -54,9 +70,9 @@
 		"Quandrix Classroom",
 		"Raffine's Tower",
 		"Serpent Seaside",
+		"Sphinx of Riddles Blue",
 		"Teferi's Hideout",
 		"Urza's Tower",
-		"Sphinx of Riddles Blue",
 		"Wilds of Eldraine",
 		"Wizard Palace"
 	],
