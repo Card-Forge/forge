@@ -10,7 +10,8 @@ public enum AdventureModes {
     Pile(Forge.getLocalizer().getMessage("lblPile")),
     Custom(Forge.getLocalizer().getMessage("lblCustom")),
     Commander(Forge.getLocalizer().getMessage("lblCommander")),
-    Precon(Forge.getLocalizer().getMessageorUseDefault("lblPrecon", "Precon"));
+    Precon(Forge.getLocalizer().getMessageorUseDefault("lblPrecon", "Precon")),
+    CommanderPrecon(Forge.getLocalizer().getMessageorUseDefault("lblCommanderPrecon", "Commander Precon"));
 
     private final String name;
     private  String selectionName;
@@ -38,5 +39,17 @@ public enum AdventureModes {
 
     public  Array<String> getModes() {
         return modes;
+    }
+
+    public boolean isCommanderLike() {
+        return this == Commander || this == CommanderPrecon;
+    }
+
+    public boolean usesFolderDeckPicker() {
+        return this == Precon || this == CommanderPrecon;
+    }
+
+    public boolean usesStarterEditionSelector() {
+        return this == Standard || usesFolderDeckPicker();
     }
 }

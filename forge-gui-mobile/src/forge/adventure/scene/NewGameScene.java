@@ -71,6 +71,7 @@ public class NewGameScene extends MenuScene {
         modeHelp = ui.findActor("modeHelp");
         colorLabel = ui.findActor("colorIdL");
         String colorIdLabel = colorLabel.storedText;
+        String deckLabel = "[BLACK]" + Forge.getLocalizer().getMessage("lblDeck") + ":";
         custom = new Array<>();
         colorId = ui.findActor("colorId");
         String[] colorSet = Config.instance().colorIds();
@@ -125,25 +126,26 @@ public class NewGameScene extends MenuScene {
         // Precon mode: deck names in colorId, set filter in starterEdition
         if (Config.instance().hasPreconDecks()) {
             modes.add(AdventureModes.Precon);
-            AdventureModes.Precon.setSelectionName("[BLACK]" + Forge.getLocalizer().getMessage("lblDeck") + ":");
+            AdventureModes.Precon.setSelectionName(deckLabel);
             AdventureModes.Precon.setModes(Config.instance().filterPreconDecks(0));
         }
 
+        if (Config.instance().hasCommanderPreconDecks()) {
+            modes.add(AdventureModes.CommanderPrecon);
+            AdventureModes.CommanderPrecon.setSelectionName(deckLabel);
+            AdventureModes.CommanderPrecon.setModes(Config.instance().filterCommanderPreconDecks(0));
+        }
+
         modes.add(AdventureModes.Chaos);
-        AdventureModes.Chaos.setSelectionName("[BLACK]" + Forge.getLocalizer().getMessage("lblDeck") + ":");
+        AdventureModes.Chaos.setSelectionName(deckLabel);
         AdventureModes.Chaos.setModes(new Array<>(new String[]{Forge.getLocalizer().getMessage("lblRandomDeck")}));
         for (DeckProxy deckProxy : DeckProxy.getAllCustomStarterDecks())
             custom.add(deckProxy.getName());
         if (!custom.isEmpty()) {
             modes.add(AdventureModes.Custom);
-            AdventureModes.Custom.setSelectionName("[BLACK]" + Forge.getLocalizer().getMessage("lblDeck") + ":");
+            AdventureModes.Custom.setSelectionName(deckLabel);
             AdventureModes.Custom.setModes(custom);
         }
-
-        // Commander game mode in selection screen
-        modes.add(AdventureModes.Commander);
-        AdventureModes.Commander.setSelectionName(colorIdLabel);
-        AdventureModes.Commander.setModes(colorNames);
 
         String[] modeNames = new String[modes.size];
         int constructedIndex = -1;
@@ -159,9 +161,7 @@ public class NewGameScene extends MenuScene {
         mode.setCurrentIndex(constructedIndex != -1 ? constructedIndex : 0);
 
         AdventureModes initialMode = modes.get(mode.getCurrentIndex());
-        boolean showEdition = initialMode == AdventureModes.Standard;
-        starterEdition.setVisible(showEdition);
-        starterEditionLabel.setVisible(showEdition);
+        updateModeSelectionState(initialMode);
 
         gender.setTextList(new String[]{Forge.getLocalizer().getMessage("lblMale") + "[%120][CYAN] \u2642",
                 Forge.getLocalizer().getMessage("lblFemale") + "[%120][MAGENTA] \u2640"});
@@ -177,19 +177,7 @@ public class NewGameScene extends MenuScene {
         mode.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                AdventureModes smode = modes.get(mode.getCurrentIndex());
-                colorLabel.setText(smode.getSelectionName());
-                colorId.setTextList(smode.getModes());
-                boolean showEdition = (smode == AdventureModes.Standard || smode == AdventureModes.Precon);
-                starterEdition.setVisible(showEdition);
-                starterEditionLabel.setVisible(showEdition);
-                if (smode == AdventureModes.Precon) {
-                    starterEdition.setTextList(Config.instance().getPreconSetNames());
-                    starterEditionLabel.setText("[BLACK]" + Forge.getLocalizer().getMessageorUseDefault("lblEdition", "Edition") + ":");
-                } else if (smode == AdventureModes.Standard) {
-                    starterEditionLabel.setText(originalEditionLabelText);
-                    starterEdition.setTextList(originalEditionNames);
-                }
+                updateModeSelectionState(modes.get(mode.getCurrentIndex()));
             }
         });
         starterEdition.addListener(new ChangeListener() {
@@ -198,6 +186,8 @@ public class NewGameScene extends MenuScene {
                 AdventureModes smode = modes.get(mode.getCurrentIndex());
                 if (smode == AdventureModes.Precon) {
                     colorId.setTextList(Config.instance().filterPreconDecks(starterEdition.getCurrentIndex()));
+                } else if (smode == AdventureModes.CommanderPrecon) {
+                    colorId.setTextList(Config.instance().filterCommanderPreconDecks(starterEdition.getCurrentIndex()));
                 }
             }
         });
@@ -288,9 +278,32 @@ public class NewGameScene extends MenuScene {
         selectedName.setText(NameGenerator.getRandomName(val, "Any", ""));
     }
 
+    private void updateModeSelectionState(AdventureModes selectedMode) {
+        colorLabel.setText(selectedMode.getSelectionName());
+        boolean showEdition = selectedMode.usesStarterEditionSelector();
+        starterEdition.setVisible(showEdition);
+        starterEditionLabel.setVisible(showEdition);
+
+        if (selectedMode == AdventureModes.Precon) {
+            starterEdition.setTextList(Config.instance().getPreconSetNames());
+            starterEditionLabel.setText("[BLACK]" + Forge.getLocalizer().getMessageorUseDefault("lblEdition", "Edition") + ":");
+            colorId.setTextList(Config.instance().filterPreconDecks(starterEdition.getCurrentIndex()));
+        } else if (selectedMode == AdventureModes.CommanderPrecon) {
+            starterEdition.setTextList(Config.instance().getCommanderPreconSetNames());
+            starterEditionLabel.setText("[BLACK]" + Forge.getLocalizer().getMessageorUseDefault("lblEdition", "Edition") + ":");
+            colorId.setTextList(Config.instance().filterCommanderPreconDecks(starterEdition.getCurrentIndex()));
+        } else if (selectedMode == AdventureModes.Standard) {
+            starterEditionLabel.setText(originalEditionLabelText);
+            starterEdition.setTextList(originalEditionNames);
+            colorId.setTextList(selectedMode.getModes());
+        } else {
+            colorId.setTextList(selectedMode.getModes());
+        }
+    }
+
     private ColorSet getStartingColor() {
         AdventureModes currentMode = modes.get(mode.getCurrentIndex());
-        if (currentMode == AdventureModes.Precon || currentMode == AdventureModes.Chaos) {
+        if (currentMode.usesFolderDeckPicker() || currentMode == AdventureModes.Chaos) {
             return ColorSet.fromNames("W".toCharArray());
         }
         if (currentMode == AdventureModes.Custom) {
@@ -517,6 +530,9 @@ public class NewGameScene extends MenuScene {
                 break;
             case Commander:
                 summaryText.append("Mode: Commander\n\nYou will be given a preconstructed commander deck based on the chosen color theme to start the playthrough.\n\nGood luck on your quest of creating a coherent deck that can win consistently and defeat the bosses.");
+                break;
+            case CommanderPrecon:
+                summaryText.append("Mode: Commander Precon\n\nChoose a named commander preconstructed deck to start the playthrough.\n\nThis uses Commander deckbuilding and game rules, but lets you pick from the curated commander precon folder.");
                 break;
             default:
                 summaryText.append("No summary available for your this game mode.");

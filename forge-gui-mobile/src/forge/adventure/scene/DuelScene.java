@@ -14,7 +14,6 @@ import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.IAfterMatch;
 import forge.adventure.util.AdventureEventController;
-import forge.adventure.util.AdventureModes;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.assets.FBufferedImage;
@@ -236,7 +235,7 @@ public class DuelScene extends ForgeScene {
         String isDeckMissingMsg = "";
         if (eventData != null && eventData.eventRules != null) {
             mainGameType = eventData.eventRules.gameType;
-        } else if (AdventurePlayer.current().getAdventureMode() == AdventureModes.Commander){
+        } else if (AdventurePlayer.current().isCommanderMode()){
             mainGameType = GameType.Commander;
         } else {
             mainGameType = GameType.Adventure;
