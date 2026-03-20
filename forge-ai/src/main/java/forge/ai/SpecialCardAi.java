@@ -51,6 +51,7 @@ import forge.util.*;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -2090,9 +2091,7 @@ public class SpecialCardAi {
     }
 
     public static class PsychicFrog {
-
         private static boolean hasOwnGraveyardAbility(final Card c) {
-
             for (KeywordInterface ki : c.getKeywords()) {
                 String kw = ki.getOriginal();
                 if (kw.startsWith("Unearth") || kw.startsWith("Flashback")
