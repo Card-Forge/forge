@@ -657,6 +657,17 @@ public class ComputerUtilCost {
 
         if (root.costHasManaX()) {
             val = ComputerUtilMana.determineLeftoverMana(root, ai, effect);
+
+            if (sa.hasParam("AIMaxTgtCost")) {
+                String value = sa.getParam("AIMaxTgtCost");
+                String svar = source.getSVar(value);
+                if (svar.contains("LeftoverMana")) {
+                    // limit the CMC to available mana
+                    svar = svar.replace("LeftoverMana", ""+val);
+                }
+                int calculated = AbilityUtils.calculateAmount(source, svar, sa);
+                val = ObjectUtils.min(val, calculated);
+            }
         }
 
         if (sa.usesTargeting()) {

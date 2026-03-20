@@ -8,6 +8,7 @@ import java.util.List;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import org.testng.AssertJUnit;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import forge.game.Game;
@@ -897,4 +898,47 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         game.getAction().checkStateEffects(true);
         AssertJUnit.assertNull(picker.chooseSpellAbilityToPlay(null));
     }
+
+    @DataProvider(name = "testXIsTheLargestPayableCMCData")
+    public static Object[][] testXIsTheLargestPayableCMCData() {
+        return new Object[][] {
+                {"Green Sun's Zenith"},
+                //{"Finale of Devastation"}, //X is not limited to allow reach 10 and gain +X/+X
+                //{"Rocco, Cabaretti Caterer"}, //not working: it is creature with TrigChangeZone
+                {"Chord of Calling"},
+                {"Nature's Rhythm"}
+        };
+    }
+
+    @Test(dataProvider = "testXIsTheLargestPayableCMCData")
+    public void testXIsTheLargestPayableCMC(String cardName) {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        ai.setTeam(0);
+
+        Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+
+        // 9 mana available
+        addCards("Forest", 3, ai);
+        addCards("Mountain", 3, ai);
+        addCards("Plains", 3, ai);
+
+        // the most expensive payable creature is Endurance with CMC=3
+        addCardToZone(cardName, ai, ZoneType.Hand);
+        addCardToZone("Birds of Paradise", ai, ZoneType.Library); //CMC 1 - subpar
+        addCardToZone("Grizzly Bears", ai, ZoneType.Library); //CMC 2 - subpar
+        addCardToZone("Endurance", ai, ZoneType.Library); //CMC 3 - maximum
+        addCardToZone("Apex Devastator", ai, ZoneType.Library); //CMC 10 - to much
+        addCardToZone("Emrakul, the Aeons Torn", ai, ZoneType.Library); //CMC 15 - to much
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, ai);
+        game.getAction().checkStateEffects(true);
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, ai);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+
+        AssertJUnit.assertNotNull(sa);
+        AssertJUnit.assertEquals("Card '%s' was cast with X instead".formatted(cardName), 3, sa.getXManaCostPaid().intValue());
+    }
+
 }
