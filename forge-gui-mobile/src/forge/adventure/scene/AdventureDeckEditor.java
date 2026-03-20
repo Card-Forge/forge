@@ -9,7 +9,6 @@ import forge.adventure.data.AdventureEventData;
 import forge.adventure.data.ItemData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.util.AdventureEventController;
-import forge.adventure.util.AdventureModes;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.assets.FImage;
@@ -54,7 +53,7 @@ public class AdventureDeckEditor extends FDeckEditor {
 
         @Override
         public DeckFormat getDeckFormat() {
-            return AdventurePlayer.current().getAdventureMode() == AdventureModes.Commander ? DeckFormat.Commander : DeckFormat.Adventure;
+            return AdventurePlayer.current().isCommanderMode() ? DeckFormat.Commander : DeckFormat.Adventure;
         }
 
         @Override
@@ -69,7 +68,7 @@ public class AdventureDeckEditor extends FDeckEditor {
 
         @Override
         protected DeckEditorPage[] getInitialPages() {
-            if (AdventurePlayer.current().getAdventureMode() == AdventureModes.Commander)
+            if (AdventurePlayer.current().isCommanderMode())
                 return new DeckEditorPage[]{
                         new CollectionCatalogPage(),
                         new AdventureDeckSectionPage(DeckSection.Commander, ItemManagerConfig.ADVENTURE_EDITOR_POOL),
@@ -133,7 +132,7 @@ public class AdventureDeckEditor extends FDeckEditor {
     public boolean isCommanderEditor() {
         if (isLimitedEditor())
             return false;
-        if (AdventurePlayer.current().getAdventureMode() == AdventureModes.Commander)
+        if (AdventurePlayer.current().isCommanderMode())
             return true;
         return super.isCommanderEditor();
     }
@@ -1158,4 +1157,3 @@ public class AdventureDeckEditor extends FDeckEditor {
     }
 
 }
-

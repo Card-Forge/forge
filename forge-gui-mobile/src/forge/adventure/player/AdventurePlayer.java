@@ -341,6 +341,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return adventureMode;
     }
 
+    public boolean isCommanderMode() {
+        return adventureMode != null && adventureMode.isCommanderLike();
+    }
+
     public int getMaxLife() {
         return maxLife;
     }
