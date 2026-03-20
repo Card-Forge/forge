@@ -3,6 +3,7 @@ package forge.deck;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Map.Entry;
+
 import forge.Forge;
 import forge.assets.FImage;
 import forge.assets.FSkinImage;
@@ -43,32 +44,7 @@ public class FDeckViewer extends FScreen {
     };
 
     public static void copyDeckToClipboard(Deck deck) {
-        final String nl = System.lineSeparator();
-        final StringBuilder deckList = new StringBuilder();
-        String dName = deck.getName();
-        //fix copying a commander netdeck then importing it again...
-        if (dName.startsWith("[Commander")||dName.contains("Commander"))
-            dName = "";
-        deckList.append(dName == null ? "" : "Deck: "+dName + nl + nl);
-
-        for (DeckSection s : DeckSection.values()) {
-            CardPool cp = deck.get(s);
-            if (cp == null || cp.isEmpty()) {
-                continue;
-            }
-            deckList.append(s.toString()).append(": ");
-            deckList.append(nl);
-            Set<String> accounted = new HashSet<>();
-            for (final PaperCard ev : cp.toFlatList()) {
-                if (!accounted.contains(ev.getCardName())) {
-                    deckList.append(cp.countByName(ev.getCardName())).append(" ").append(ev.getCardName()).append(nl); //search for all  instances of that name in the list.
-                    accounted.add(ev.getCardName()); //add the name to the list so it ignores the next time it appears
-                }
-            }
-            deckList.append(nl);
-        }
-
-        Forge.getClipboard().setContents(deckList.toString());
+        Forge.getClipboard().setContents(deck.generateTextExport());
         FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblDeckListCopiedClipboard", deck.getName()));
     }
 

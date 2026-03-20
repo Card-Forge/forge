@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="46" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="21" nextobjectid="221">
  <editorsettings>
   <export format="tmx" />
@@ -78,9 +78,9 @@
 ]</property>
     <property name="effect">{ "startBattleWithCard": [ "Swamp|TMP|1", "Urborg Stalker|WTH" ] }</property>
     <property name="enemy" value="Demon of Tibalt" />
-    <property name="threatRange" type="int" value="60" />
+    <property name="threatRange" type="int" value="100" />
     <property name="waypoints" value="208,198,210,209" />
-   </properties>
+   <property name="speedModifier" type="float" value="20" /></properties>
   </object>
   <object id="173" template="../../../../../../common/maps/obj/manashards.tx" x="188.009" y="188.105" />
   <object id="174" template="../../../../../../common/maps/obj/manashards.tx" x="525.342" y="122.438" />
@@ -141,17 +141,62 @@
   </object>
   <object id="205" template="../../../../../../common/maps/obj/treasure.tx" x="379.675" y="25.7719">
    <properties>
-    <property name="reward">[{
-  "type": "randomCard",
-  "count": 2,
-  "rarity": [ "rare" ],
-  "colors": ["Black","Red"]
-},{
-  "type": "randomCard",
-  "count": 4,
-  "rarity": [ "uncommon" ],
-  "colors": ["Black","Red"]
-}]</property>
+    <property name="reward">[
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Laquatus's Champion|TOR"
+  },
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Hypnox|TOR"
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.3,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.56,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.6,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.34,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.16,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.04,
+    "count": 3,
+    "addMaxCount": 3
+  }
+]</property>
     <property name="spawn.Hard" type="bool" value="false" />
    </properties>
   </object>
@@ -191,17 +236,50 @@
   </object>
   <object id="219" template="../../../../../../common/maps/obj/treasure.tx" x="30.6754" y="297.772">
    <properties>
-    <property name="reward">[{
-  "type": "randomCard",
-  "count": 2,
-  "rarity": [ "rare" ],
-  "colors": ["Black","Red"]
-},{
-  "type": "randomCard",
-  "count": 4,
-  "rarity": [ "uncommon" ],
-  "colors": ["Black","Red"]
-}]</property>
+    <property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.005,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.03,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.175,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.45,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.84,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.51,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property>
     <property name="spawn.Hard" type="bool" value="false" />
    </properties>
   </object>

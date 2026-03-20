@@ -3,7 +3,7 @@ ManaCost:2 U U
 Types:Instant
 A:SP$ UntapAll | ValidTgts$ Opponent | Defined$ TargetedAndYou | ValidCards$ Creature | SubAbility$ DBGainCtrl | SpellDescription$ Untap all creatures you control and all creatures target opponent controls. You and that opponent each gain control of all creatures the other controls until end of turn. Those creatures gain haste until end of turn.
 SVar:DBGainCtrl:DB$ GainControl | AllValid$ Creature.TargetedPlayerCtrl | AddKWs$ Haste | NewController$ You | LoseControl$ EOT | RememberControlled$ True | StackDescription$ None | SubAbility$ DBGainCtrlOpp
-SVar:DBGainCtrlOpp:DB$ GainControl | AllValid$ Creature.IsNotRemembered+YouCtrl | AddKWs$ Haste | NewController$ Targeted | LoseControl$ EOT | StackDescription$ None | SubAbility$ DBCleanup
+SVar:DBGainCtrlOpp:DB$ GainControl | AllValid$ Creature.!IsRemembered+YouCtrl | AddKWs$ Haste | NewController$ Targeted | LoseControl$ EOT | StackDescription$ None | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 Oracle:Untap all creatures you control and all creatures target opponent controls. You and that opponent each gain control of all creatures the other controls until end of turn. Those creatures gain haste until end of turn.

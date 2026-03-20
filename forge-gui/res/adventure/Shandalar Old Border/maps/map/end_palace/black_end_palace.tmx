@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="87">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx" />
@@ -138,9 +138,9 @@
 ]</property>
     <property name="enemy" value="Mishra" />
     <property name="pursueRange" type="int" value="30" />
-    <property name="threatRange" type="int" value="20" />
+    <property name="threatRange" type="int" value="100" />
    <property name="effect">{"startBattleWithCard": ["Mishra's Workshop|ATQ", "Mishra's Groundbreaker|ALL", "Ankh of Mishra|LEA", "Dragon Engine|3ED"]}</property>
-    </properties>
+    <property name="speedModifier" type="float" value="20" /></properties>
   </object>
   <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="629.5" y="410.5">
    <properties>
@@ -154,9 +154,9 @@
 ]</property>
     <property name="enemy" value="Ashnod" />
     <property name="pursueRange" type="int" value="30" />
-    <property name="threatRange" type="int" value="30" />
+    <property name="threatRange" type="int" value="100" />
    <property name="effect">{ "startBattleWithCard": [ "Ashnod's Altar|ATQ", "Ashnod's Battle Gear|ATQ", "Ashnod's Cylix|ALL", "Ashnod's Transmogrant|ATQ", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS", "Phyrexian Walker|VIS", "Badlands|LEB", "Underground Sea|LEB" ] }</property>
-    </properties>
+    <property name="speedModifier" type="float" value="20" /></properties>
   </object>
   <object id="69" template="../../../../../../common/maps/obj/enemy.tx" x="365" y="232.63">
    <properties>
@@ -171,8 +171,8 @@
     <property name="effect">{ "startBattleWithCard": ["Tsabo's Web|INV", "Tsabo's Assassin|INV", "Metathran Zombie|INV", "Vodalian Zombie|INV", "Phyrexian Slayer|INV", "Antagonism|USG", "Phyrexian Lens|INV"] }</property>
     <property name="enemy" value="Tsabo Tavoc" />
     <property name="pursueRange" type="int" value="10" />
-    <property name="threatRange" type="int" value="10" />
-   </properties>
+    <property name="threatRange" type="int" value="100" />
+   <property name="speedModifier" type="float" value="20" /></properties>
   </object>
   <object id="70" template="../../../../../../common/maps/obj/enemy.tx" x="96.0511" y="407.602">
    <properties>
@@ -186,9 +186,9 @@
 ]</property>
     <property name="enemy" value="Gix" />
     <property name="pursueRange" type="int" value="30" />
-    <property name="threatRange" type="int" value="30" />
+    <property name="threatRange" type="int" value="100" />
    <property name="effect">{"startBattleWithCard": ["Priest of Gix|USG", "Priest of Gix|USG", "Tainted Aether|USG", "Oppression|USG", "Bereavement|USG"]}</property>
-    </properties>
+    <property name="speedModifier" type="float" value="20" /></properties>
   </object>
   <object id="71" template="../../../../../../common/maps/obj/enemy.tx" x="366.694" y="701.945">
    <properties>

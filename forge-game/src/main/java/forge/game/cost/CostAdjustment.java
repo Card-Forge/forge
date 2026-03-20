@@ -5,7 +5,6 @@ import com.google.common.collect.Lists;
 import forge.card.CardStateName;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostParser;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.GameObject;
@@ -26,7 +25,6 @@ import forge.game.staticability.StaticAbilityMode;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
@@ -219,7 +217,7 @@ public class CostAdjustment {
             int num = AbilityUtils.calculateAmount(host, amt, sa);
 
             if (sa.hasParam("ReduceAmount") && num > 0) {
-                cost.subtractManaCost(new ManaCost(new ManaCostParser(Strings.repeat(cst + " ", num))));
+                cost.subtractManaCost(new ManaCost(Strings.repeat(cst + " ", num)));
             } else {
                 sumGeneric += num;
             }
@@ -230,7 +228,7 @@ public class CostAdjustment {
         }
 
         while (!reduceAbilities.isEmpty()) {
-            StaticAbility choice = activator.getController().chooseSingleStaticAbility(Localizer.getInstance().getMessage("lblChooseCostReduction"), reduceAbilities);
+            StaticAbility choice = activator.getController().chooseSingleStaticAbility(reduceAbilities);
             reduceAbilities.remove(choice);
             sumGeneric += applyReduceCostAbility(choice, sa, cost, sumGeneric);
         }
@@ -491,7 +489,7 @@ public class CostAdjustment {
                 } else if (staticAbility.hasParam("IgnoreGeneric")) {
                     manaCost.decreaseShard(ManaCostShard.parseNonGeneric(cost), value);
                 } else {
-                    manaCost.subtractManaCost(new ManaCost(new ManaCostParser(Strings.repeat(cost + " ", value))));
+                    manaCost.subtractManaCost(new ManaCost(Strings.repeat(cost + " ", value)));
                 }
             }
             return sumGeneric;

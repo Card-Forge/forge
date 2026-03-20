@@ -1,0 +1,8 @@
+Name:Blighted Nightmare
+ManaCost:2 B
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When this enchantment enters, creature cards in your graveyard perpetually get +1/+1.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouOwn | PumpZone$ Graveyard | Duration$ Perpetual | NumAtt$ +1 | NumDef$ +1
+A:AB$ ChangeZone | Cost$ Blight<X> Return<1/CARDNAME> | Announce$ X | XMaxLimit$ GrTo | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn+cmcLEX | Origin$ Graveyard | Destination$ Battlefield | SorcerySpeed$ True | SpellDescription$ Return target creature card with mana value X or less from your graveyard to the battlefield. X can't be greater than the greatest toughness among creatures you control. Activate only as a sorcery.
+SVar:GrTo:Count$Valid Creature.YouCtrl$GreatestCardToughness
+Oracle:When this enchantment enters, creature cards in your graveyard perpetually get +1/+1.\nBlight X, Return this enchantment to its owner's hand: Return target creature card with mana value X or less from your graveyard to the battlefield. X can't be greater than the greatest toughness among creatures you control. Activate only as a sorcery.

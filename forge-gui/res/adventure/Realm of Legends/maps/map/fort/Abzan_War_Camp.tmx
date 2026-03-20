@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="122">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Abzan Devotee&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="40" height="26">
+  <data encoding="base64" compression="zlib">
+   eJzN1lEKwjAMBuDCpmP38Cy9gQ89ieApPJkw8Ba7g0jBh9Il6Z80lAl5mHTma5K6pTWEZIz3fAxkDbWWu78nNHlba719VK64HnNTXnRvXERFrSifVA/Kr/Vxv4k693/k9fss+7jvkJrVPdHUsjVznI8zSj7rOUF86AxGB6vUt9bctc6L5Msfi4+aD03fpf729Nvq4/YXB/tqZ2sOPS3a+nHrymuqfiN86P0jfeX1Azx3iM97HrPN0+cZGpvGd7+M24Olf2fzbdM5fGfvL+rL587TiP4Pas6v5LO+A7+WEG5Xm6/Ol32WZzwSnLHlk56fz4D5vovdlwAflVtTq16f1FtNPz+TLkdpo3w/PdHxqw==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="40" height="26">
+  <data encoding="base64" compression="zlib">
+   eJz7x8nAcI5lYDAIILNBYD8HA8N/oJsYuBgY4jgheKDchuw+ZAxy0yGgO/8A6dcDFHZY3cyFYCdw4nb/QOBYaDzCwg09/vHho1jSwGAKd6LjhwrxgQyo7T5qhSkt3TgS3AcrA/8PYNmMN/wGuGwmBg929w0FPFjzx1Bx3ygexaN4FJOLV7JB6BxWCB5o96DjZayo+Cwd7f7HjoqRwwfdXQPhPvRwArkRl7sGg/sIYX2oWuQ2KQgAAAtcOz8=
+  </data>
+ </layer>
+ <layer id="7" name="Mountain Walls" width="40" height="26">
+  <data encoding="base64" compression="zlib">
+   eJzNljtOw0AQhndDXg3QkFhJQ4uAA9ByDSRuQEUVXqKgpQPlAlwgIob4EpCKhiPQIigRGdm/PJnsy2sKRvrlZD3e+fLv7MaJVirx6LVp1lEjl8zfWuhJqBdQp6pQh1h40HcaJ7aU1ef5F6rUpSrzYnhpPtPvftYqONIiHzwDXWqo8zGpEE6+XpjfFi8dNyPYSDNdKisYuZCXehg5H2e731mtf7zv5huw+plHnLMfyIeQ/YaYM/8ORA48Q33MI8U9BWcVPsnK47Rl9xDr5QrOyL10rbGN72HNU8xSm+Kuu3qf71/eT3y/7DXtfLLOocFD8q9uyH4nLvQi8UlGG59pjWP5bGsEPqxzov8nH/qxZ/DQxScZJd/Nej1eyddnHoLRx8fvSb5GsYduu7lskbXNjJKPPofuDzzvWu/YuLLwDRmPiy/Tbh/rBubD/w0/D3k92/mH/O1CsyLvPbLfbHyog2tq8eWv/Gk4znRTD/HxvoctlC92z/rC512Mfy5W3KO9+8neK3YZx3VAjSqMo428B2VezO+j/McF65lyc1b1cLhZ5sGjmDXg7wtZwXkuckaq3Juh85OHYOJXOeaa662da9LJddJa5oSm2s8n/SW+kTI/w8fAAJnGKCasN03vqb6z2HRv6thrOFPHrWV9dPIr8saGdw0TH85Gl2c+T2Xe3PDMT+HTV7J6ryqfZKnCZuNDfFv4qGemBr5fmd5DSw==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="26">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJy9lj1vE0EQhtfITihCCEqEE/8BryybIAERAgrgRwAFoUECCmiQkEkoQGkoAxINH3+ADpmchRQ6Sj4LROgi0YAIDaSgQ7yj3eHm1rt3a3Mw0qs93+6dn3t3Zu7qFaXqBWpAidBcxDUx4gid9835NAvdxlptx7UAZzfyfj4OlyePz/Vr3a5/X83ea60kL/Mi5BfFS63UO+iVzl4z18IztMzx3pL3OpbvHpg+Q9+gL5bv9bgZD4FtwcPXg5aUURHPdWUUyrkQG/Mdrg6Kwj0u27/YegjFYjv7m2ulSDJPezmMw/DVp5TqC9H+9qf8otrtCu5u9jH+zJOKaqpojyUfR7uSjpfg4Qp0Afo+odQPaHti0OuuM0rPY/fcd578X1HGl1Dc2GXGVYx3oLvQTmeO42IH98WzzNrckHWRxxPiK8pBGZ1JpfZB85PhNcR3AGwHLV+oppaH4OvZ9RTr6CXPbT+ZRq+Z0S6BiS27x8cxfwI6KdZdrZmR9trt6/2/qBdi3ADbR8s3j//cH+DjOIv5RegctI2a+rUjy/dCx/WlGD7uucS5Z8zfF0kfAudZ02Mp/6bgS3LYYvhkPvK7gWN3O/WE/cmLZ3ak+ng6pH8Nz/zPtlHicHLInib5bsKfWzpdQ/Gmmkr2dD6O9SnGxy2n19FvyfcQbI90dp5ykKJVyfbP851sP5TfTqN8G0n/ZJvLy828/NwQ32yJrWWO2D4+TF/8FJhnf1t2nnLQrTnJyjEKn/t+kO+4Ij4K7i8c3Gd9e1CGf/Idx3xHwHAUOqYH+TYL+qfM7zL4fO+4U2A4DZ3RxodrtdR3ruPH8OtyzeRZKEbho9xZytGyyvYTEvnnnnsLPRkvhytWDfsM5IsUBY33m0o9aJrjK4Ge/q/YpMfki9RXOyZg6zfT8/+bLcQXUsg/Hn8DMEXaZA==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="51" template="../../obj/treasure.tx" x="176.166" y="54.6663">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;KTK&quot;, &quot;TDM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 11,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;black&quot;, &quot;white&quot; ],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;KTK&quot;, &quot;TDM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;black&quot;, &quot;white&quot; ],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;KTK&quot;, &quot;TDM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;black&quot;, &quot;white&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="61" template="../../../../common/maps/obj/entry_right.tx" x="620.833" y="323.333" width="16" height="32">
+   <properties>
+    <property name="direction" value="right"/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../common/maps/obj/enemy.tx" x="471" y="285">
+   <properties>
+    <property name="enemy" value="Daghatar"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="69" template="../../../../common/maps/obj/enemy.tx" x="305.5" y="239.5">
+   <properties>
+    <property name="enemy" value="Betor"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="94,95"/>
+   </properties>
+  </object>
+  <object id="70" template="../../../../common/maps/obj/enemy.tx" x="177" y="171">
+   <properties>
+    <property name="enemy" value="Anafenza"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="96,95"/>
+   </properties>
+  </object>
+  <object id="71" template="../../../../common/maps/obj/enemy.tx" x="175.5" y="111">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Abzan Monument|TDM&quot;, &quot;Abzan Banner|KTK&quot;]}"/>
+    <property name="enemy" value="Felothar"/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/enemy.tx" x="373.724" y="284.341">
+   <properties>
+    <property name="enemy" value="Hamza"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value="97,103"/>
+   </properties>
+  </object>
+  <object id="98" template="../../../../common/maps/obj/manashards.tx" x="233" y="107.5"/>
+  <object id="108" template="../../../../common/maps/obj/gold.tx" x="97" y="109"/>
+  <object id="109" template="../../../../common/maps/obj/dialog.tx" x="535.92" y="306.597" width="16" height="24" rotation="0" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;Signs ahead mark this camp the territory of the Abzan Clan of Tarkir. Orderly warriors clad in dragonscale armor march ahead, sand swirling at their mystic command.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="110" template="../../../../common/maps/obj/scroll.tx" x="413" y="350.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Sandsteppe Citadel&quot;, &quot;editions&quot;: [ &quot;TDM&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="111" template="../../../../common/maps/obj/dialog.tx" x="168.416" y="133.417" width="32.5" height="18.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A heavily armored woman stands before you, sand swirling beside her forming spectral warriors.
+
+'You stand now not just against me, but all the Abzan, past and present! Pray your death is swift.'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="112" template="../../../../common/maps/obj/enemy.tx" x="445.333" y="225">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;text&quot;: &quot;Hail, {var=player_name}. I see your travels have taken you far. I have been wandering as well, and have acquired some rare spells I am not in need of along the way. Take a look, perhaps they will be of use. Traveling this place does have its costs though, so I cannot simply give you them, but my prices are fair.&quot;,
+		&quot;options&quot;: [
+			{
+				&quot;name&quot;: &quot;(Continue)&quot; }
+		]
+	}
+]</property>
+    <property name="enemy" value="Mysterious Mage"/>
+   </properties>
+  </object>
+  <object id="113" template="../../../../common/maps/obj/shop.tx" x="416" y="184">
+   <properties>
+    <property name="commonShopList" value="WanderingMerchantWhite"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="114" template="../../../../common/maps/obj/collision.tx" x="205.65" y="47.2096" width="34.0047" height="31.5833"/>
+  <object id="115" template="../../../../common/maps/obj/collision.tx" x="113.296" y="47.9256" width="46.1754" height="31.5833"/>
+  <object id="116" template="../../../../common/maps/obj/collision.tx" x="352.331" y="318.208" width="47.6714" height="31.5833"/>
+  <object id="117" template="../../../../common/maps/obj/collision.tx" x="335.331" y="175.875" width="48.338" height="31.5833"/>
+  <object id="118" template="../../../../common/maps/obj/collision.tx" x="333.331" y="241.542" width="34.0047" height="31.5833"/>
+  <object id="119" template="../../../../common/maps/obj/collision.tx" x="192.664" y="178.542" width="34.0047" height="31.5833"/>
+  <object id="120" template="../../../../common/maps/obj/collision.tx" x="141.998" y="176.542" width="34.0047" height="31.5833"/>
+  <object id="121" template="../../obj/treasure.tx" x="176.167" y="76.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;KTK&quot;, &quot;TDM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 11,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;black&quot;, &quot;white&quot; ],
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;KTK&quot;, &quot;TDM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;black&quot;, &quot;white&quot; ],
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;KTK&quot;, &quot;TDM&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;colors&quot;: [ &quot;green&quot;, &quot;black&quot;, &quot;white&quot; ],
+    &quot;colorType&quot;: &quot;MultiColor&quot;,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

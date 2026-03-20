@@ -65,11 +65,14 @@ Introduces an entirely new type of game piece to track, which comes in four diff
 
 ## Missing variant cards
 
-### [Bounty](https://mtg.fandom.com/wiki/Outlaws_of_Thunder_Junction/Commander_decks#Bounty_cards) (Casual Variant)
+### [Bounty](https://mtg.wiki/page/Outlaws_of_Thunder_Junction/Commander_decks#Bounty_cards) (Casual Variant)
 The release of the Outlaws of Thunder Junction Commander Decks included a set of twelve "Bounty" cards and rules for a variant format that uses them. This format is not defined in the comprehensive rules, and is not currently implemented in Forge. 
 
-### [Hero's Path](https://mtg.fandom.com/wiki/Hero's_Path) (Promotional Variant)
+### [Hero's Path](https://mtg.wiki/page/Hero's_Path) (Promotional Variant)
 During the Theros Block, a series of promotional events was held. These featured three PvE encounters with unique rules, along with nontraditional cards for use by both the player and enemies in these encounters. The PvE encounters could be reconstructed in Forge, but supporting the Heroes and Godslayer weapons would add many complications.
+
+### [Turtle Team-Up](https://mtg.wiki/page/Teenage_Mutant_Ninja_Turtles/Turtle_Team-Up) (Casual Variant)
+The Teenage Mutant Ninja Turtles "Turtle Team-Up" box set featured a PvE variant using four player decks and a boss deck. Similar to the Hero's Path PvE modes, the boss deck is piloted by game rules and consists of nontraditional creatures, bosses, and events. The biggest hurdle to adapting this mode to Forge is support for shared team turns and shared team life totals. In particular, some event cards specifically call for the player team's consensus on a choice.
 
 
 ## Missing nonlegal and funny cards

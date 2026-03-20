@@ -15,12 +15,15 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.StreamUtil;
+
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class GameSimulationTest extends SimulationTest {
 
@@ -2699,14 +2702,11 @@ public class GameSimulationTest extends SimulationTest {
      */
     protected boolean areWordsInIterable(List<String> words, Iterable<String> iterable) {
         // Create a frequency map for the words in the iterable
-        Map<String, Integer> frequencyMap = new HashMap<>();
-        for (String item : iterable) {
-            frequencyMap.put(item, frequencyMap.getOrDefault(item, 0) + 1);
-        }
+        Map<String, Long> frequencyMap = StreamUtil.stream(iterable).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
         // Check if each word in the list appears exactly once
         for (String word : words) {
-            if (frequencyMap.getOrDefault(word, 0) != 1) {
+            if (frequencyMap.getOrDefault(word, 0l) != 1) {
                 return false;  // If the word doesn't appear exactly once, return false
             }
         }

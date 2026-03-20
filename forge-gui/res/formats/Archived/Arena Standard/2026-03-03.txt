@@ -1,0 +1,7 @@
+[format]
+Name:Arena Standard (TMT)
+Type:Archived
+Subtype:Standard
+Effective:2026-03-03
+Sets:WOE, LCI, MKM, OTJ, BIG, BLB, DSK, FDN, DFT, TDM, FIN, EOE, OM1, TLA, ECL, TMT
+Banned:Abuelo's Awakening; Cori-Steel Cutter; Heartfire Hero; Hopeless Nightmare; Leyline of Resonance; Monstrous Rage; Proft's Eidetic Memory; Screaming Nemesis; This Town Ain't Big Enough; Up the Beanstalk; Vivi Ornitier

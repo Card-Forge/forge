@@ -1,5 +1,5 @@
-<?xml version='1.0' encoding='utf-8'?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="39" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="103">
+<?xml version='1.0' encoding='UTF-8'?>
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="39" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="104">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx" />
  </editorsettings>
@@ -48,42 +48,108 @@
   </object>
   <object id="55" template="../../../../../../common/maps/obj/treasure.tx" x="423.522" y="190.333">
    <properties>
-    <property name="reward">[{
-  "type": "randomCard",
-  "count": 2,
-  "probability": 1,
-  "colors": [ "colorID" ]
-},{
-  "type": "randomCard",
-  "count": 1,
-  "probability": 1,
-  "rarity": [ "rare", "mythicrare" ],
-  "colors": [ "colorID" ]
-},{
-  "type": "randomCard",
-  "count": 1,
-  "addMaxCount": 2
-}]</property>
+    <property name="reward">[
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Treachery|UDS"
+  },
+  {
+    "type": "card",
+    "probability": 1,
+    "count": 1,
+    "cardName": "Arcanis the Omnipotent|ONS"
+  },
+  {
+    "type": "card",
+    "probability": 0.5,
+    "count": 1,
+    "cardName": "Rhystic Study|PCY"
+  },
+  {
+    "type": "card",
+    "probability": 0.5,
+    "count": 1,
+    "cardName": "Time Warp|TMP"
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.002,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.02,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.1,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.68,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 1.0,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property>
    </properties>
   </object>
   <object id="63" template="../../../../../../common/maps/obj/treasure.tx" x="152.522" y="49.333">
    <properties>
-    <property name="reward">[{
-  "type": "randomCard",
-  "count": 2,
-  "probability": 1,
-  "colors": [ "colorID" ]
-},{
-  "type": "randomCard",
-  "count": 1,
-  "probability": 1,
-  "rarity": [ "rare", "mythicrare" ],
-  "colors": [ "colorID" ]
-},{
-  "type": "randomCard",
-  "count": 1,
-  "addMaxCount": 2
-}]</property>
+    <property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.002,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.02,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.1,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.68,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 1.0,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property>
    </properties>
   </object>
   <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="20.652" y="97.522">
@@ -145,22 +211,43 @@
   </object>
   <object id="59" template="../../../../../../common/maps/obj/treasure.tx" x="36.5" y="16.5">
    <properties>
-    <property name="reward">[{
-  "type": "randomCard",
-  "count": 2,
-  "probability": 1,
-  "colors": [ "colorID" ]
-},{
-  "type": "randomCard",
-  "count": 1,
-  "probability": 1,
-  "rarity": [ "rare", "mythicrare" ],
-  "colors": [ "colorID" ]
-},{
-  "type": "randomCard",
-  "count": 1,
-  "addMaxCount": 2
-}]</property>
+    <property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.002,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.02,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.1,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.68,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 1.0,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property>
    </properties>
   </object>
   <object id="60" template="../../../../../../common/maps/obj/gold.tx" x="337.5" y="192.5">
@@ -315,6 +402,11 @@
         ]
     }
 ]</property>
+   </properties>
+  </object>
+   <object id="103" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="298.7" y="278.3" width="60" height="40">
+   <properties>
+    <property name="dialog">[{"condition":[{"item":"Arcanis's Trophy"}],"text":"","options":[],"action":[{"removeItem":"Arcanis's Trophy"},{"addItem":"Arcanis's Trophy"}]}]</property>
    </properties>
   </object>
  </objectgroup>

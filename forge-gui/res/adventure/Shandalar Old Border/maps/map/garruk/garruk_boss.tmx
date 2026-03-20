@@ -41,7 +41,50 @@
     <property name="enemy" value="Garruk" />
    </properties>
   </object>
-  <object id="68" template="../../../../../../common/maps/obj/treasure.tx" x="380.489" y="119.825" />
+  <object id="68" template="../../../../../../common/maps/obj/treasure.tx" x="380.489" y="119.825"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-S.dck",
+    "probability": 0.3,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.56,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.6,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.34,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.16,
+    "count": 3,
+    "addMaxCount": 3
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 0.04,
+    "count": 3,
+    "addMaxCount": 3
+  }
+]</property></properties></object>
   <object id="71" template="../../../../../../common/maps/obj/gold.tx" x="394.57" y="138.493" />
   <object id="88" template="../../../../../../common/maps/obj/manashards.tx" x="233.666" y="155.659" />
   <object id="89" template="../../../../../../common/maps/obj/manashards.tx" x="356.889" y="108.302" />

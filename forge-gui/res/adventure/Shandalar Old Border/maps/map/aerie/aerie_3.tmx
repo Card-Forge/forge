@@ -87,27 +87,40 @@
    <properties>
     <property name="reward">[
   {
-      "type": "card",
-      "probability": 1,
-      "count": 1,
-      "addMaxCount": 5,
-      "colors": [
-        "White",
-        "Blue",
-        "Green"
-      ],
-      "rarity": [
-        "Common",
-        "Rare",
-        "Uncommon"
-      ],
-      "subTypes": [
-        "Bird"
-      ],
-      "cardTypes": [
-        "Creature"
-      ]
-    }
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.002,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.02,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.1,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.68,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 1.0,
+    "count": 1,
+    "addMaxCount": 2
+  }
 ]</property>
    </properties>
   </object>

@@ -9,7 +9,6 @@ import forge.adventure.data.AdventureEventData;
 import forge.adventure.data.ItemData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.util.AdventureEventController;
-import forge.adventure.util.AdventureModes;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.assets.FImage;
@@ -37,7 +36,10 @@ import forge.util.ItemPool;
 import forge.util.Localizer;
 import forge.util.Utils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -51,7 +53,7 @@ public class AdventureDeckEditor extends FDeckEditor {
 
         @Override
         public DeckFormat getDeckFormat() {
-            return AdventurePlayer.current().getAdventureMode() == AdventureModes.Commander ? DeckFormat.Commander : DeckFormat.Adventure;
+            return AdventurePlayer.current().isCommanderMode() ? DeckFormat.Commander : DeckFormat.Adventure;
         }
 
         @Override
@@ -66,7 +68,7 @@ public class AdventureDeckEditor extends FDeckEditor {
 
         @Override
         protected DeckEditorPage[] getInitialPages() {
-            if (AdventurePlayer.current().getAdventureMode() == AdventureModes.Commander)
+            if (AdventurePlayer.current().isCommanderMode())
                 return new DeckEditorPage[]{
                         new CollectionCatalogPage(),
                         new AdventureDeckSectionPage(DeckSection.Commander, ItemManagerConfig.ADVENTURE_EDITOR_POOL),
@@ -130,7 +132,7 @@ public class AdventureDeckEditor extends FDeckEditor {
     public boolean isCommanderEditor() {
         if (isLimitedEditor())
             return false;
-        if (AdventurePlayer.current().getAdventureMode() == AdventureModes.Commander)
+        if (AdventurePlayer.current().isCommanderMode())
             return true;
         return super.isCommanderEditor();
     }
@@ -253,8 +255,12 @@ public class AdventureDeckEditor extends FDeckEditor {
                         };
 
                 }
-            }
-            if (event.format == AdventureEventController.EventFormat.Jumpstart) {
+            } else if (event.format == AdventureEventController.EventFormat.Sealed) {
+                return new DeckEditorPage[]{
+                        new AdventureDeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.DRAFT_POOL),
+                        new AdventureDeckSectionPage(DeckSection.Main, ItemManagerConfig.DRAFT_POOL)
+                };
+            } else if (event.format == AdventureEventController.EventFormat.Jumpstart) {
                 return new DeckEditorPage[]{
                         new AdventureDeckSectionPage(DeckSection.Main, ItemManagerConfig.DRAFT_POOL),
                         new AdventureDeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.SIDEBOARD)};
@@ -1151,4 +1157,3 @@ public class AdventureDeckEditor extends FDeckEditor {
     }
 
 }
-

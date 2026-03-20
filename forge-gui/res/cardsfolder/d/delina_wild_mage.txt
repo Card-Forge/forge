@@ -2,16 +2,16 @@ Name:Delina, Wild Mage
 ManaCost:3 R
 Types:Legendary Creature Elf Shaman
 PT:3/2
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBLoop | TriggerDescription$ Whenever CARDNAME attacks, choose target creature you control, then ABILITY
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBLoop | TriggerDescription$ Whenever NICKNAME attacks, choose target creature you control, then ABILITY
 SVar:DBLoop:DB$ Repeat | ValidTgts$ Creature.YouCtrl | RepeatCheckSVar$ RepeatCheck | RepeatSVarCompare$ GT0 | RepeatSubAbility$ DBRollDice | RepeatOptional$ True | AILogic$ CopyBestCreature.IgnoreLegendary
 SVar:DBRollDice:DB$ RollDice | Sides$ 20 | ResultSubAbilities$ 1-14:DBCopy,15-20:DBCopyRepeat | SpellDescription$ roll a d20.
-SVar:DBCopy:DB$ CopyPermanent | Defined$ Targeted | TokenTapped$ True | TokenAttacking$ True | NonLegendary$ True | AddSVars$ DelinaTrigExile | AddTriggers$ TrigPhase | SubAbility$ DBNotRepeat | SpellDescription$ 1—14 VERT Create a tapped and attacking token that's a copy of that creature, except it's not legendary and it has "Exile this creature at end of combat."
+SVar:DBCopy:DB$ CopyPermanent | Defined$ Targeted | TokenTapped$ True | TokenAttacking$ True | NonLegendary$ True | AddSVars$ DelinaTrigExile | AddTriggers$ TrigPhase | SubAbility$ DBNotRepeat | SpellDescription$ 1—14 VERT Create a tapped and attacking token that's a copy of that creature, except it's not legendary and it has "At end of combat, exile this token."
 SVar:DBNotRepeat:DB$ StoreSVar | SVar$ RepeatCheck | Type$ Number | Expression$ 0
 SVar:DBCopyRepeat:DB$ CopyPermanent | Defined$ Targeted | TokenTapped$ True | TokenAttacking$ True | NonLegendary$ True | AddSVars$ DelinaTrigExile | AddTriggers$ TrigPhase | SubAbility$ DBRepeat | SpellDescription$ 15—20 VERT Create one of those tokens. You may roll again.
-SVar:TrigPhase:Mode$ Phase | Phase$ EndCombat | TriggerZones$ Battlefield | Execute$ DelinaTrigExile | TriggerDescription$ Exile this creature at end of combat.
+SVar:TrigPhase:Mode$ Phase | Phase$ EndCombat | TriggerZones$ Battlefield | Execute$ DelinaTrigExile | TriggerDescription$ At end of combat, exile this token.
 SVar:DelinaTrigExile:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
 SVar:DBRepeat:DB$ StoreSVar | SVar$ RepeatCheck | Type$ Number | Expression$ 1
 SVar:RepeatCheck:Number$1
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Token
-Oracle:Whenever Delina, Wild Mage attacks, choose target creature you control, then roll a d20.\n1—14 | Create a tapped and attacking token that's a copy of that creature, except it's not legendary and it has "Exile this creature at end of combat."\n15—20 | Create one of those tokens. You may roll again.
+Oracle:Whenever Delina attacks, choose target creature you control, then roll a d20.\n1—14 | Create a tapped and attacking token that's a copy of that creature, except it's not legendary and it has "At end of combat, exile this token."\n15—20 | Create one of those tokens. You may roll again.

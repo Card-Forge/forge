@@ -4,4 +4,5 @@ Types:Creature Rabbit Unicorn
 PT:*/*
 S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of nonland permanents you control.
 SVar:X:Count$Valid Permanent.nonLand+YouCtrl
+SVar:NoZeroToughnessAI:True
 Oracle:Regal Bunnicorn's power and toughness are each equal to the number of nonland permanents you control.

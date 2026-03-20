@@ -3,6 +3,6 @@ ManaCost:G G
 Types:Creature Human Wizard
 PT:1/1
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Draw | Cost$ T | NumCards$ 1 | ActivationCardsInHand$ 7 | SpellDescription$ Draw a card. Activate only if you have exactly seven cards in hand.
+A:AB$ Draw | Cost$ T | PresentZone$ Hand | IsPresent$ Card.YouOwn | PresentCompare$ EQ7 | SpellDescription$ Draw a card. Activate only if you have exactly seven cards in hand.
 AI:RemoveDeck:Random
 Oracle:{T}: Add {C}.\n{T}: Draw a card. Activate only if you have exactly seven cards in hand.

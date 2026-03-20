@@ -3,6 +3,8 @@ package forge.gamemodes.match;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.MultimapBuilder;
 import com.google.common.eventbus.Subscribe;
 import forge.LobbyPlayer;
 import forge.StaticData;
@@ -11,6 +13,7 @@ import forge.game.*;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventSubgameEnd;
 import forge.game.event.GameEventSubgameStart;
+import forge.game.event.GameEventTurnPhase;
 import forge.game.event.IGameEventVisitor;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
@@ -37,8 +40,6 @@ import forge.sound.SoundSystem;
 import forge.trackable.TrackableCollection;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
-import forge.util.maps.HashMapOfLists;
-import forge.util.maps.MapOfLists;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -63,6 +64,16 @@ public class HostedMatch {
 
     public HostedMatch() {}
 
+    /**
+     * Look up the IGuiGame for a given Player from the guis map.
+     * This is the authoritative source for the GUI assigned to each player,
+     * unlike PlayerControllerHuman.getGui() which may be overwritten.
+     */
+    public IGuiGame getGuiForPlayer(final Player player) {
+        if (guis == null || player == null) { return null; }
+        return guis.get(player.getRegisteredPlayer());
+    }
+
     public void setStartGameHook(Runnable hook) {
         startGameHook = hook;
     }
@@ -76,7 +87,7 @@ public class HostedMatch {
         gameRules.setOrderCombatants(FModel.getPreferences().getPrefBoolean(FPref.LEGACY_ORDER_COMBATANTS));
         gameRules.setUseGrayText(FModel.getPreferences().getPrefBoolean(FPref.UI_GRAY_INACTIVE_TEXT));
         gameRules.setGamesPerMatch(FModel.getPreferences().getPrefInt(FPref.UI_MATCHES_PER_GAME));
-        // AI specific sideboarding rules
+        gameRules.setAllowCheatShuffle(FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_AI_CHEATS));
         switch (AiProfileUtil.getAISideboardingMode()) {
             case Off:
                 gameRules.setAISideboardingEnabled(false);
@@ -167,11 +178,13 @@ public class HostedMatch {
             if (game.getMatch().getOutcomes().isEmpty()) {
                 qc.getCards().resetNewList();
             }
+            qc.setActiveGame(game);
             game.subscribeToEvents(qc); // this one listens to player's mulligans ATM
         }
 
-        game.subscribeToEvents(SoundSystem.instance);
-        game.subscribeToEvents(visitor);
+        // SoundSystem receives GameEvents via handleGameEvent() on each GUI,
+        // so it doesn't need a direct event bus subscription here.
+        // (It still subscribes to the Match bus for UiEvent sounds like blocker assignment.)
 
         final FCollectionView<Player> players = game.getPlayers();
         final String[] avatarIndices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
@@ -179,7 +192,7 @@ public class HostedMatch {
         final GameView gameView = getGameView();
 
         humanCount = 0;
-        final MapOfLists<IGuiGame, PlayerView> playersPerGui = new HashMapOfLists<>(ArrayList::new);
+        final Multimap<IGuiGame, PlayerView> playersPerGui = MultimapBuilder.hashKeys().arrayListValues().build();
         for (int iPlayer = 0; iPlayer < players.size(); iPlayer++) {
             final RegisteredPlayer rp = match.getPlayers().get(iPlayer);
             final Player p = players.get(iPlayer);
@@ -193,7 +206,6 @@ public class HostedMatch {
                 }
             }
             p.updateAvatar();
-            //sleeve
             p.getLobbyPlayer().setSleeveIndex(rp.getPlayer().getSleeveIndex());
             if (p.getLobbyPlayer().getSleeveIndex() == -1) {
                 if (iPlayer < sleeveIndices.length) {
@@ -204,18 +216,23 @@ public class HostedMatch {
             }
             p.updateSleeve();
 
-            if (p.getController() instanceof PlayerControllerHuman) {
-                final PlayerControllerHuman humanController = (PlayerControllerHuman) p.getController();
+            if (p.getController() instanceof PlayerControllerHuman humanController) {
                 final IGuiGame gui = guis.get(p.getRegisteredPlayer());
                 humanController.setGui(gui);
                 gui.setGameView(null); //clear out game view first so we don't copy into old game view
                 gui.setGameView(gameView);
                 gui.setOriginalGameController(p.getView(), humanController);
 
-                game.subscribeToEvents(new FControlGameEventHandler(humanController));
-                playersPerGui.add(gui, p.getView());
+                if (gui instanceof forge.gamemodes.net.server.NetGuiGame ngg) {
+                    forge.gui.control.GameEventForwarder forwarder = new forge.gui.control.GameEventForwarder(gui);
+                    ngg.setForwarder(forwarder);
+                    game.subscribeToEvents(forwarder);
+                } else {
+                    game.subscribeToEvents(new FControlGameEventHandler(humanController));
+                }
+                playersPerGui.put(gui, p.getView());
 
-                if (gameControllers != null ) {
+                if (gameControllers != null) {
                     LobbySlot lobbySlot = getLobbySlot(p.getLobbyPlayer());
                     gameControllers.put(lobbySlot, humanController);
                 }
@@ -225,7 +242,7 @@ public class HostedMatch {
             }
         }
 
-        for (final Entry<IGuiGame, Collection<PlayerView>> e : playersPerGui.entrySet()) {
+        for (final Entry<IGuiGame, Collection<PlayerView>> e : playersPerGui.asMap().entrySet()) {
             e.getKey().openView(new TrackableCollection<>(e.getValue()));
         }
 
@@ -287,8 +304,8 @@ public class HostedMatch {
     private LobbySlot getLobbySlot(LobbyPlayer lobbyPlayer) {
         for (LobbySlot key: gameControllers.keySet()) {
             IGameController value = gameControllers.get(key);
-            if (value instanceof PlayerControllerHuman) {
-                if (lobbyPlayer == ((PlayerControllerHuman) value).getLobbyPlayer()) {
+            if (value instanceof PlayerControllerHuman pch) {
+                if (lobbyPlayer == pch.getLobbyPlayer()) {
                     return key;
                 }
             }
@@ -300,7 +317,6 @@ public class HostedMatch {
         final PlayerControllerHuman humanController = new WatchLocalGame(game, null, gui);
         registerSpectator(gui, humanController);
     }
-
     public void registerSpectator(final IGuiGame gui, final PlayerControllerHuman humanController) {
         gui.setSpectator(humanController);
         gui.openView(null);
@@ -322,6 +338,9 @@ public class HostedMatch {
         game = null;
 
         for (final PlayerControllerHuman humanController : humanControllers) {
+            if (humanController.getGui() instanceof forge.gamemodes.net.server.NetGuiGame ngg) {
+                ngg.shutdownForwarder();
+            }
             humanController.getGui().setGameSpeed(PlaybackSpeed.NORMAL);
             if (FModel.getPreferences().getPref(FPref.UI_AUTO_YIELD_MODE).equals(ForgeConstants.AUTO_YIELD_PER_CARD) || isMatchOver()) {
                 // when autoyielding per card, we need to clear auto yields between games since card IDs change
@@ -355,6 +374,10 @@ public class HostedMatch {
         return isMatchOver;
     }
 
+    public GameOutcome.AnteResult getAnteResult(RegisteredPlayer player) {
+        return match.getAnteResult(player);
+    }
+
     private final class MatchUiEventVisitor extends IGameEventVisitor.Base<Void> implements IUiEventVisitor<Void> {
         @Override
         public Void visit(final UiEventBlockerAssigned event) {
@@ -385,8 +408,6 @@ public class HostedMatch {
         @Override
         public Void visit(final GameEventSubgameStart event) {
             subGameCount++;
-            event.subgame().subscribeToEvents(SoundSystem.instance);
-            event.subgame().subscribeToEvents(visitor);
 
             final GameView gameView = event.subgame().getView();
 
@@ -434,7 +455,8 @@ public class HostedMatch {
                         gui.openView(new TrackableCollection<>(p.getView()));
                         gui.setGameView(null);
                         gui.setGameView(gameView);
-                        gui.updatePhase(true);
+                        gui.handleGameEvent(new GameEventTurnPhase(
+                                gameView.getPlayerTurn(), gameView.getPhase(), ""));
                         gui.message(event.message());
                     }
                 }

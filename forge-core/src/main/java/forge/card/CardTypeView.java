@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.Set;
 
 //Interface to expose only the desired functions of CardType without allowing modification
-public interface CardTypeView extends Iterable<String>, Serializable {
+public interface CardTypeView extends Serializable {
     boolean isEmpty();
     Collection<CoreType> getCoreTypes();
     Collection<Supertype> getSupertypes();

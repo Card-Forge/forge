@@ -11,7 +11,6 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostParser;
 import forge.card.mana.ManaCostShard;
 import forge.game.CardTraitPredicates;
 import forge.game.Game;
@@ -186,7 +185,8 @@ public class ComputerUtilMana {
                     }
 
                     // sources were previously sorted, so add their index to connect those values to some degree
-                    preOrder += abilities.indexOf(ability1) - abilities.indexOf(ability2);
+                    // This has been disabled because it makes the AI more likely to sacrifice lands than use creatures for mana
+                    // preOrder += abilities.indexOf(ability1) - abilities.indexOf(ability2);
 
                     return preOrder;
                 }
@@ -1754,7 +1754,7 @@ public class ComputerUtilMana {
 
         String shardSurplus = shardColor;
         for (int i = 1; i < 100; i++) {
-            ManaCost extra = new ManaCost(new ManaCostParser(shardSurplus));
+            ManaCost extra = new ManaCost(shardSurplus);
             if (!canPayManaCost(new ManaCostBeingPaid(ManaCost.combine(origCost, extra)), sa, player, effect)) {
                 return i - 1;
             }

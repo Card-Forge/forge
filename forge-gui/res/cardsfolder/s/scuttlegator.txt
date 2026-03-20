@@ -3,7 +3,7 @@ ManaCost:4 GU GU
 Types:Creature Crab Turtle Crocodile
 PT:6/6
 K:Defender
-K:Adapt:3:6 GU GU
+A:AB$ PutCounter | Cost$ 6 GU GU | Adapt$ 3
 S:Mode$ CanAttackDefender | ValidCard$ Card.Self+counters_GE1_P1P1 | Description$ As long as CARDNAME has a +1/+1 counter on it, it can attack as though it didn't have defender.
 DeckHas:Ability$Counters
 Oracle:Defender\n{6}{G/U}{G/U}: Adapt 3. (If this creature has no +1/+1 counters on it, put three +1/+1 counters on it.)\nAs long as Scuttlegator has a +1/+1 counter on it, it can attack as though it didn't have defender.
