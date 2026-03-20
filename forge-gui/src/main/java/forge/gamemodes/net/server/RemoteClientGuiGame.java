@@ -165,7 +165,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
         // only picks up whatever changed after the flush.
         synchronized (deltaLock) {
             flushPendingEvents();
-            DeltaPacket delta = deltaSyncManager.collectDeltas(gameView);
+            DeltaPacket delta = deltaSyncManager.collectDeltas(gameView, true);
             if (!delta.isEmpty()) {
                 if (flush) {
                     sender.send(ProtocolMethod.applyDelta, delta);

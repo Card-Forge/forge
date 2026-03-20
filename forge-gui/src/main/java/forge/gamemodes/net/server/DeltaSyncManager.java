@@ -47,23 +47,22 @@ public class DeltaSyncManager implements IHasNetLog {
 
     // How often to include a checksum for validation (every N packets)
     private static final int CHECKSUM_INTERVAL = 20;
-    private static final int SAMPLE_SIZE = 15;
     private static final int MIN_CHECKSUM_INTERVAL = 5;
     private static final int CLEAN_STREAK_TO_RESTORE = 10;
+    private static final int SAMPLE_SIZE = 15;
 
     // Sentinel for properties that should be skipped in network transport
     static final Object SKIP_MARKER = new Object();
 
-    // Global consumer ID counter — each DeltaSyncManager gets a unique ID
+    // each DeltaSyncManager gets a unique ID
     private static final AtomicInteger NEXT_CONSUMER_ID = new AtomicInteger(0);
-
     private final int consumerId = NEXT_CONSUMER_ID.getAndIncrement();
-    private final AtomicLong sequenceNumber = new AtomicLong(0);
-    // Objects that have been fully sent to the client (initial sync done)
-    // Objects not in this set need full serialization when first encountered
-    private final Set<Integer> sentObjectIds = ConcurrentHashMap.newKeySet();
 
-    // All objects registered with this consumer, keyed by delta key (for cleanup on disconnect/reset)
+    private final AtomicLong sequenceNumber = new AtomicLong(0);
+
+    // Objects that have been fully sent to the client (initial sync done)
+    private final Set<Integer> sentObjectIds = ConcurrentHashMap.newKeySet();
+    // Objects registered with this consumer (for cleanup on disconnect/reset)
     private final Map<Integer, TrackableObject> registeredByKey = new HashMap<>();
 
     // Not atomic: only accessed from game thread
@@ -82,37 +81,10 @@ public class DeltaSyncManager implements IHasNetLog {
     private List<String> lastChecksumDetail;
 
     /**
-     * Reset all tracking state for reconnection.
-     * Unregisters this consumer from all tracked objects.
-     * After reset, the next sync will be treated as a fresh initial sync.
-     */
-    public void reset() {
-        // Unregister consumer from all tracked objects
-        for (TrackableObject obj : registeredByKey.values()) {
-            obj.unregisterConsumer(consumerId);
-        }
-        registeredByKey.clear();
-
-        sequenceNumber.set(0);
-        sentObjectIds.clear();
-        packetsSinceLastChecksum = 0;
-        recentDeltaProperties.clear();
-        checksumInterval = CHECKSUM_INTERVAL;
-        cleanChecksumStreak = 0;
-        lastChecksumBreakdown = null;
-        lastChecksumDetail = null;
-    }
-
-    /**
      * Collect all changes from the GameView hierarchy and build a delta packet.
      * New objects are registered with this consumer and sent in full.
      * Existing objects only send properties dirty for THIS consumer.
-     */
-    public DeltaPacket collectDeltas(GameView gameView) {
-        return collectDeltas(gameView, true);
-    }
-
-    /**
+     *
      * @param onGameThread true when called from the game thread (updateGameView),
      *                     false from the event forwarder daemon thread. All calls
      *                     count toward the checksum interval; only game-thread
@@ -121,6 +93,7 @@ public class DeltaSyncManager implements IHasNetLog {
      */
     public DeltaPacket collectDeltas(GameView gameView, boolean onGameThread) {
         Map<Integer, Map<TrackableProperty, Object>> objectDeltas = new HashMap<>();
+        // need parent-before-child insertion order
         Map<Integer, Map<TrackableProperty, Object>> newObjects = new LinkedHashMap<>();
         Set<Integer> currentObjectIds = new HashSet<>();
 
@@ -167,8 +140,8 @@ public class DeltaSyncManager implements IHasNetLog {
         packetsSinceLastChecksum++;
         if (checksumDue) {
             checksumPropertyOrdinals = selectChecksumProperties();
-            checksum = NetworkChecksumUtil.computeSampledChecksum(
-                    gameView, checksumPropertyOrdinals, checksumSnapshot, null);
+            List<String> detail = new ArrayList<>();
+            checksum = NetworkChecksumUtil.computeSampledChecksum(gameView, checksumPropertyOrdinals, checksumSnapshot, detail);
             packetsSinceLastChecksum = 0;
             recentDeltaProperties.clear();
             cleanChecksumStreak++;
@@ -186,16 +159,93 @@ public class DeltaSyncManager implements IHasNetLog {
             int turn = gameView.getTurn();
             int phaseOrdinal = gameView.getPhase() != null ? gameView.getPhase().ordinal() : -1;
             lastChecksumBreakdown = NetworkChecksumUtil.computeChecksumBreakdown(turn, phaseOrdinal, gameView, checksumSnapshot);
-            List<String> detail = new ArrayList<>();
-            NetworkChecksumUtil.computeSampledChecksum(
-                    gameView, checksumPropertyOrdinals, checksumSnapshot, detail);
             lastChecksumDetail = detail;
         }
 
         return new DeltaPacket(seq, objectDeltas, newObjects, checksum, checksumPropertyOrdinals);
     }
 
-    // ==================== Delta collection ====================
+    /**
+     * Recursively walk the object graph starting from a TrackableObject, collecting deltas.
+     * Discovers children by inspecting property values for TrackableObject/TrackableCollection
+     * references. CombatView is serialized inline by toNetworkValue().
+     *
+     * @param checksumSnapshot if non-null, captures a property snapshot of each object
+     *                         under the same volatile barrier as the delta reads, for
+     *                         computing a race-free server checksum
+     */
+    private void walkAndCollect(TrackableObject obj,
+                                Map<Integer, Map<TrackableProperty, Object>> objectDeltas,
+                                Map<Integer, Map<TrackableProperty, Object>> newObjects,
+                                Set<Integer> currentObjectIds,
+                                Map<TrackableObject, Map<TrackableProperty, Object>> checksumSnapshot) {
+        if (obj == null) {
+            return;
+        }
+        int type = DeltaPacket.typeTagFor(obj);
+        if (type < 0) {
+            return;
+        }
+        int deltaKey = DeltaPacket.makeDeltaKey(obj);
+        if (currentObjectIds.contains(deltaKey)) {
+            // Same deltaKey seen earlier this pass (e.g. stale CardView in Commander
+            // property walked before current CardView in Battlefield zone collection).
+            // If this is the exact same Java instance, it was already fully processed.
+            if (registeredByKey.get(deltaKey) == obj) {
+                return;
+            }
+            // Different instance at same key — let replacement detection handle the
+            // delta, then fall through to walk children so that child replacements
+            // (e.g. CardStateViews with updated P/T) are also picked up.
+        } else {
+            currentObjectIds.add(deltaKey);
+        }
+
+        collectObjectDelta(obj, objectDeltas, newObjects, checksumSnapshot);
+
+        // volatile read — memory barrier for child traversal
+        obj.getVersion();
+        Map<TrackableProperty, Object> props = obj.getProps();
+        if (props != null) {
+            // Snapshot values to avoid ConcurrentModificationException — the game
+            // thread may add/remove props entries while the daemon iterates.
+            Object[] values;
+            try {
+                values = props.values().toArray();
+            } catch (ConcurrentModificationException e) {
+                // Rare race from game thread write
+                // skip children this pass, next delta catches up
+                return;
+            }
+            // Skip CardView/PlayerView found as single property values — these are
+            // reference properties (ExiledWith, CloneOrigin, Owner, etc.) serialized
+            // as IDs by toNetworkValue. The actual instances are discovered through
+            // their primary containment (zone collections, GameView.players). Walking
+            // stale references causes replacement cascades where an old CardView (from
+            // before a zone change) overwrites the current one.
+            //
+            // For collections: when the parent is a CardView, its collection properties
+            // (AttachedCards, HauntedBy, MergedCards, etc.) are also references — skip
+            // CardView items. Zone collections on PlayerView/GameView must be walked.
+            boolean skipCardViewInCollections = obj instanceof CardView;
+            for (Object value : values) {
+                if (value instanceof TrackableObject to) {
+                    if (!(to instanceof GameEntityView)) {
+                        walkAndCollect(to, objectDeltas, newObjects, currentObjectIds, checksumSnapshot);
+                    }
+                } else if (value instanceof TrackableCollection) {
+                    for (Object item : (TrackableCollection<?>) value) {
+                        if (item instanceof TrackableObject to) {
+                            if (skipCardViewInCollections && to instanceof CardView) {
+                                continue;
+                            }
+                            walkAndCollect(to, objectDeltas, newObjects, currentObjectIds, checksumSnapshot);
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     private void collectObjectDelta(TrackableObject obj,
                                     Map<Integer, Map<TrackableProperty, Object>> objectDeltas,
@@ -255,107 +305,6 @@ public class DeltaSyncManager implements IHasNetLog {
     }
 
     /**
-     * Recursively walk the object graph starting from a TrackableObject, collecting deltas.
-     * Discovers children by inspecting property values for TrackableObject/TrackableCollection
-     * references. CombatView is serialized inline by toNetworkValue().
-     *
-     * @param checksumSnapshot if non-null, captures a property snapshot of each object
-     *                         under the same volatile barrier as the delta reads, for
-     *                         computing a race-free server checksum
-     */
-    private void walkAndCollect(TrackableObject obj,
-                                Map<Integer, Map<TrackableProperty, Object>> objectDeltas,
-                                Map<Integer, Map<TrackableProperty, Object>> newObjects,
-                                Set<Integer> currentObjectIds,
-                                Map<TrackableObject, Map<TrackableProperty, Object>> checksumSnapshot) {
-        if (obj == null) {
-            return;
-        }
-        int type = DeltaPacket.typeTagFor(obj);
-        if (type < 0) {
-            return;
-        }
-        int deltaKey = DeltaPacket.makeDeltaKey(obj);
-        if (currentObjectIds.contains(deltaKey)) {
-            // Same deltaKey seen earlier this pass (e.g. stale CardView in Commander
-            // property walked before current CardView in Battlefield zone collection).
-            // If this is the exact same Java instance, it was already fully processed.
-            if (registeredByKey.get(deltaKey) == obj) {
-                return;
-            }
-            // Different instance at same key — let replacement detection handle the
-            // delta, then fall through to walk children so that child replacements
-            // (e.g. CardStateViews with updated P/T) are also picked up.
-        } else {
-            currentObjectIds.add(deltaKey);
-        }
-        collectObjectDelta(obj, objectDeltas, newObjects, checksumSnapshot);
-
-        // volatile read — memory barrier for child traversal
-        obj.getVersion();
-        Map<TrackableProperty, Object> props = obj.getProps();
-        if (props != null) {
-            // Snapshot values to avoid ConcurrentModificationException — the game
-            // thread may add/remove props entries while the daemon iterates.
-            Object[] values;
-            try {
-                values = props.values().toArray();
-            } catch (ConcurrentModificationException e) {
-                // Rare race from game thread write
-                // skip children this pass, next delta catches up
-                return;
-            }
-            // Skip CardView/PlayerView found as single property values — these are
-            // reference properties (ExiledWith, CloneOrigin, Owner, etc.) serialized
-            // as IDs by toNetworkValue. The actual instances are discovered through
-            // their primary containment (zone collections, GameView.players). Walking
-            // stale references causes replacement cascades where an old CardView (from
-            // before a zone change) overwrites the current one.
-            //
-            // For collections: when the parent is a CardView, its collection properties
-            // (AttachedCards, HauntedBy, MergedCards, etc.) are also references — skip
-            // CardView items. Zone collections on PlayerView/GameView must be walked.
-            boolean skipCardViewInCollections = obj instanceof CardView;
-            for (Object value : values) {
-                if (value instanceof TrackableObject to) {
-                    if (!(to instanceof GameEntityView)) {
-                        walkAndCollect(to, objectDeltas, newObjects, currentObjectIds, checksumSnapshot);
-                    }
-                } else if (value instanceof TrackableCollection) {
-                    for (Object item : (TrackableCollection<?>) value) {
-                        if (item instanceof TrackableObject to) {
-                            if (skipCardViewInCollections && to instanceof CardView) {
-                                continue;
-                            }
-                            walkAndCollect(to, objectDeltas, newObjects, currentObjectIds, checksumSnapshot);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    /**
-     * Merge properties delayed by a tracker freeze into a delta map.
-     * Properties with FreezeMode.RespectsFreeze are not written
-     * to the props map or marked dirty while frozen, but network
-     * clients need them in the same delta as their accompanying events.
-     *
-     * This is safe because speculative freeze brackets (which call clearDelayed()) and real freeze brackets are disjoint
-     * — speculative brackets always start from freezeCounter == 0 and complete before any sync point where delta collection occurs.
-     */
-    private void mergeDelayedProps(TrackableObject obj, Map<TrackableProperty, Object> delta, Set<TrackableProperty> dirtyProps) {
-        Tracker tracker = obj.getTracker();
-        if (tracker == null || !tracker.isFrozen()) return;
-        for (Map.Entry<TrackableProperty, Object> entry : tracker.getDelayedPropsFor(obj).entrySet()) {
-            delta.put(entry.getKey(), entry.getValue());
-            if (dirtyProps != null) {
-                dirtyProps.add(entry.getKey());
-            }
-        }
-    }
-
-    /**
      * Build a property map for a subset of dirty properties.
      */
     private Map<TrackableProperty, Object> buildPropertyMap(TrackableObject obj,
@@ -392,6 +341,26 @@ public class DeltaSyncManager implements IHasNetLog {
             }
         }
         return delta;
+    }
+
+    /**
+     * Merge properties delayed by a tracker freeze into a delta map.
+     * Properties with FreezeMode.RespectsFreeze are not written
+     * to the props map or marked dirty while frozen, but network
+     * clients need them in the same delta as their accompanying events.
+     *
+     * This is safe because speculative freeze brackets (which call clearDelayed()) and real freeze brackets are disjoint
+     * — speculative brackets always start from freezeCounter == 0 and complete before any sync point where delta collection occurs.
+     */
+    private void mergeDelayedProps(TrackableObject obj, Map<TrackableProperty, Object> delta, Set<TrackableProperty> dirtyProps) {
+        Tracker tracker = obj.getTracker();
+        if (tracker == null || !tracker.isFrozen()) return;
+        for (Map.Entry<TrackableProperty, Object> entry : tracker.getDelayedPropsFor(obj).entrySet()) {
+            delta.put(entry.getKey(), entry.getValue());
+            if (dirtyProps != null) {
+                dirtyProps.add(entry.getKey());
+            }
+        }
     }
 
     /**
@@ -566,8 +535,6 @@ public class DeltaSyncManager implements IHasNetLog {
         }
     }
 
-    // ==================== Sampled checksum selection ====================
-
     /**
      * Select properties for sampled checksum. Biases toward recently-changed
      * properties (up to half the sample), fills rest randomly from eligible pool.
@@ -613,6 +580,23 @@ public class DeltaSyncManager implements IHasNetLog {
         return ordinals;
     }
 
+    private void logSampledChecksumDetails(GameView gameView, int checksum, long seq, int[] sampledOrdinals) {
+        int turn = gameView.getTurn();
+        int phaseOrdinal = gameView.getPhase() != null ? gameView.getPhase().ordinal() : -1;
+        String phaseName = phaseOrdinal >= 0 ?
+                forge.game.phase.PhaseType.values()[phaseOrdinal].name() : "null";
+        netLog.info("[DeltaSync] Sampled checksum for seq={}: hash={}, props={}", seq, checksum,
+                NetworkChecksumUtil.sampledPropertyNames(sampledOrdinals));
+        netLog.info("[DeltaSync]   Turn: {} (snapshot), Phase: {} (snapshot, current={})",
+                turn, phaseName,
+                gameView.getPhase() != null ? gameView.getPhase().name() : "null");
+        for (PlayerView player : NetworkChecksumUtil.getSortedPlayers(gameView)) {
+            netLog.info("[DeltaSync]   Player {} ({}): Life={}, Hand={}, GY={}, BF={}",
+                    player.getId(), player.getName(), player.getLife(),
+                    player.getZoneSize(ZoneType.Hand), player.getZoneSize(ZoneType.Graveyard), player.getZoneSize(ZoneType.Battlefield));
+        }
+    }
+
     /**
      * Called when a resync is requested due to checksum mismatch.
      * Halves the checksum interval (more frequent checks) and resets clean streak.
@@ -633,23 +617,25 @@ public class DeltaSyncManager implements IHasNetLog {
         }
     }
 
-    // ==================== Checksum and validation ====================
-
-    private void logSampledChecksumDetails(GameView gameView, int checksum, long seq, int[] sampledOrdinals) {
-        int turn = gameView.getTurn();
-        int phaseOrdinal = gameView.getPhase() != null ? gameView.getPhase().ordinal() : -1;
-        String phaseName = phaseOrdinal >= 0 ?
-                forge.game.phase.PhaseType.values()[phaseOrdinal].name() : "null";
-        netLog.info("[DeltaSync] Sampled checksum for seq={}: hash={}, props={}", seq, checksum,
-                NetworkChecksumUtil.sampledPropertyNames(sampledOrdinals));
-        netLog.info("[DeltaSync]   Turn: {} (snapshot), Phase: {} (snapshot, current={})",
-                turn, phaseName,
-                gameView.getPhase() != null ? gameView.getPhase().name() : "null");
-        for (PlayerView player : NetworkChecksumUtil.getSortedPlayers(gameView)) {
-            netLog.info("[DeltaSync]   Player {} ({}): Life={}, Hand={}, GY={}, BF={}",
-                    player.getId(), player.getName(), player.getLife(),
-                    player.getZoneSize(ZoneType.Hand), player.getZoneSize(ZoneType.Graveyard), player.getZoneSize(ZoneType.Battlefield));
+    /**
+     * Reset all tracking state for reconnection.
+     * Unregisters this consumer from all tracked objects.
+     * After reset, the next sync will be treated as a fresh initial sync.
+     */
+    public void reset() {
+        // Unregister consumer from all tracked objects
+        for (TrackableObject obj : registeredByKey.values()) {
+            obj.unregisterConsumer(consumerId);
         }
+        registeredByKey.clear();
+        sentObjectIds.clear();
+        sequenceNumber.set(0);
+        packetsSinceLastChecksum = 0;
+        recentDeltaProperties.clear();
+        checksumInterval = CHECKSUM_INTERVAL;
+        cleanChecksumStreak = 0;
+        lastChecksumBreakdown = null;
+        lastChecksumDetail = null;
     }
 
     public long getCurrentSequence() {
