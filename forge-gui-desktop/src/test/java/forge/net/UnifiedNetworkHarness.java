@@ -4,6 +4,7 @@ import forge.deck.Deck;
 import forge.game.Game;
 import forge.game.GameOutcome;
 import forge.game.GameType;
+import forge.game.GameView;
 import forge.game.Match;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.match.GameLobby.GameLobbyData;
@@ -689,6 +690,17 @@ public class UnifiedNetworkHarness implements IHasNetLog {
                 result.totalDeltaBytes += client.getTotalDeltaBytes();
                 result.eventStateMismatches += client.getEventStateMismatches();
             }
+            // Snapshot client-side state from first remote client for post-game assertions
+            if (!remoteClients.isEmpty()) {
+                HeadlessNetworkClient first = remoteClients.get(0);
+                result.clientGameView = first.getGameView();
+                result.clientOpenViewCalled = first.isOpenViewCalled();
+                result.clientSetGameViewCount = first.getSetGameViewCount();
+            }
+        }
+        // Collect send errors from server
+        if (server != null) {
+            result.sendErrors = server.getTotalSendErrors();
         }
         netLog.info("Client metrics: deltas={}, fullSyncs={}, bytes={}",
                 result.deltaPacketsReceived, result.fullStateSyncsReceived, result.totalDeltaBytes);
@@ -801,6 +813,12 @@ public class UnifiedNetworkHarness implements IHasNetLog {
         public long fullStateSyncsReceived;
         public long totalDeltaBytes;
         public long eventStateMismatches;
+
+        // Client-side state snapshot (from first remote client, for assertions)
+        public int sendErrors;
+        public boolean clientOpenViewCalled;
+        public int clientSetGameViewCount;
+        public GameView clientGameView;
 
         // Deck information
         public List<String> deckNames = new ArrayList<>();

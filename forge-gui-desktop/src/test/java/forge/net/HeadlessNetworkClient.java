@@ -131,6 +131,18 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasNetLog {
         return eventStateMismatches.get();
     }
 
+    public forge.game.GameView getGameView() {
+        return guiGame != null ? guiGame.getGameView() : null;
+    }
+
+    public boolean isOpenViewCalled() {
+        return guiGame != null && guiGame.isOpenViewCalled();
+    }
+
+    public int getSetGameViewCount() {
+        return guiGame != null ? guiGame.getSetGameViewCount() : 0;
+    }
+
     public ClientGameLobby getLobby() {
         return lobby;
     }

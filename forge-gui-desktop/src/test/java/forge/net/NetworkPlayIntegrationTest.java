@@ -1,11 +1,16 @@
 package forge.net;
 
+import forge.game.GameView;
+import forge.game.card.CardView;
+import forge.game.player.PlayerView;
+import forge.game.zone.ZoneType;
 import forge.gamemodes.net.IHasNetLog;
 import forge.gamemodes.net.NetworkLogConfig;
 import forge.localinstance.properties.ForgeConstants;
 import forge.deck.Deck;
 import forge.net.analysis.AnalysisResult;
 import forge.net.analysis.NetworkLogAnalyzer;
+import forge.util.collect.FCollectionView;
 
 import org.testng.Assert;
 import org.testng.SkipException;
@@ -125,14 +130,14 @@ public class NetworkPlayIntegrationTest implements IHasNetLog {
      * Uses 10-card basic land decks for fast CI execution.
      * Games end in ~3 turns as players deck out (no spells to cast).
      * Deck legality is disabled via TestUtils.ensureFModelInitialized().
+     *
+     * Validates: protocol lifecycle (openView, setGameView), client-side GameView
+     * consistency (zone references, card visibility), and zero pipeline send errors.
      */
     @Test(timeOut = 60000, description = "True network traffic test with remote client")
     public void testTrueNetworkTraffic() {
         netLog.info("Starting true network traffic test...");
-        netLog.info("Using minimal 10-card basic land decks for fast CI execution");
 
-        // Use 10-card basic land decks for fast game completion
-        // With 7-card starting hand + 3 draws, game ends when first player decks out
         Deck deck1 = TestDeckLoader.createMinimalDeck("Mountain", 10);
         Deck deck2 = TestDeckLoader.createMinimalDeck("Forest", 10);
 
@@ -140,19 +145,66 @@ public class NetworkPlayIntegrationTest implements IHasNetLog {
                 .playerCount(2)
                 .remoteClients(1)
                 .decks(deck1, deck2)
-                .gameTimeout(60000)  // Reduced timeout - game should finish very quickly
+                .gameTimeout(60000)
                 .execute();
 
-        // Log bandwidth comparison (skip full analysis for minimal deck games)
         String bandwidthSummary = result.getBandwidthSummary();
         if (bandwidthSummary != null) {
             netLog.info("{}", bandwidthSummary);
         }
 
-        if (result.success) {
-            Assert.assertTrue(result.deltaPacketsReceived > 0, "Should have received delta sync packets");
-        }
         Assert.assertTrue(result.gameStarted, "Game should have started: " + result.toSummary());
+        Assert.assertTrue(result.deltaPacketsReceived > 0, "Should have received delta sync packets");
+
+        // Protocol lifecycle
+        Assert.assertTrue(result.clientOpenViewCalled,
+                "Client should have received openView over the wire");
+        Assert.assertTrue(result.clientSetGameViewCount > 0,
+                "Client should have received setGameView updates (count: " + result.clientSetGameViewCount + ")");
+
+        // Client GameView state
+        GameView clientGameView = result.clientGameView;
+        Assert.assertNotNull(clientGameView, "Client should have a GameView");
+        Assert.assertNotNull(clientGameView.getGameLog(),
+                "Client GameView.getGameLog() should be initialized");
+        Assert.assertEquals(clientGameView.getPlayers().size(), 2,
+                "Client GameView should have 2 players");
+
+        // Zone consistency — CardViews in zone collections must have matching Zone property
+        ZoneType[] zonesToCheck = {ZoneType.Hand, ZoneType.Battlefield, ZoneType.Graveyard, ZoneType.Library};
+        for (PlayerView pv : clientGameView.getPlayers()) {
+            for (ZoneType zone : zonesToCheck) {
+                FCollectionView<CardView> cards = pv.getCards(zone);
+                if (cards == null) continue;
+                for (CardView cv : cards) {
+                    Assert.assertEquals(cv.getZone(), zone,
+                            "CardView id=" + cv.getId() + " in " + pv.getName() + "'s " + zone +
+                            " has stale zone: " + cv.getZone());
+                }
+            }
+        }
+
+        // Card visibility — cards in public zones must be visible to all players
+        Iterable<PlayerView> allPlayers = clientGameView.getPlayers();
+        ZoneType[] publicZones = {ZoneType.Battlefield, ZoneType.Graveyard, ZoneType.Exile};
+        for (PlayerView pv : clientGameView.getPlayers()) {
+            for (ZoneType zone : publicZones) {
+                FCollectionView<CardView> cards = pv.getCards(zone);
+                if (cards == null) continue;
+                for (CardView cv : cards) {
+                    Assert.assertTrue(cv.canBeShownToAny(allPlayers),
+                            "CardView id=" + cv.getId() + " in public zone " + zone +
+                            " should be visible but canBeShownToAny returned false");
+                }
+            }
+        }
+
+        // Pipeline error assertions
+        Assert.assertEquals(result.sendErrors, 0,
+                "Server encountered " + result.sendErrors + " send error(s) during the game");
+
+        netLog.info("Test PASSED: {} turns, {} setGameView updates, 0 send errors",
+                result.turnCount, result.clientSetGameViewCount);
     }
 
     @Test(timeOut = 150000, description = "UnifiedNetworkHarness local mode test")
