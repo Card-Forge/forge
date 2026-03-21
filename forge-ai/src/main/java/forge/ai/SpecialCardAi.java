@@ -1533,6 +1533,192 @@ public class SpecialCardAi {
         }
     }
 
+    // Psychic Frog
+    public static class PsychicFrog {
+        private static boolean hasOwnGraveyardAbility(final Card c) {
+            for (KeywordInterface ki : c.getKeywords()) {
+                String kw = ki.getOriginal();
+                if (kw.startsWith("Unearth") || kw.startsWith("Flashback")
+                        || kw.startsWith("Escape") || kw.startsWith("Jump-start")
+                        || kw.startsWith("Retrace") || kw.startsWith("Dredge")
+                        || kw.startsWith("Disturb") || kw.startsWith("Aftermath")) {
+                    return true;
+                }
+            }
+
+            for (Trigger t : c.getTriggers()) {
+                SpellAbility ab = t.ensureAbility();
+                if (ab == null) continue;
+                if ((ab.getApi() == ApiType.ChangeZone || ab.getApi() == ApiType.ChangeZoneAll)
+                        && "Self".equals(ab.getParamOrDefault("Defined", ""))
+                        && "Graveyard".equals(ab.getParamOrDefault("Origin", ""))
+                        && "Battlefield".equals(ab.getParamOrDefault("Destination", ""))) {
+                    return true;
+                }
+            }
+            return c.hasSVar("IsReanimatorCard");
+        }
+
+        private static int countSafeToExile(final Player ai) {
+            int safe = 0;
+            for (Card c : ai.getCardsIn(ZoneType.Graveyard)) {
+                if (!hasOwnGraveyardAbility(c) && !c.hasSVar("IsReanimatorCard")) {
+                    safe++;
+                }
+            }
+            return safe;
+        }
+
+        public static AiAbilityDecision considerCounterAbility(final Player ai,
+                                                               final SpellAbility sa,
+                                                               final PhaseHandler ph) {
+            final Card source = sa.getHostCard();
+            final Combat combat = ai.getGame().getCombat();
+            final int counterAmount = 1;
+            AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
+
+            CardCollection hand = new CardCollection(ai.getCardsIn(ZoneType.Hand));
+            CardCollection discardCandidates = CardLists.filter(hand, c ->
+                    !c.hasSVar("DoNotDiscardIfAble") && !c.hasSVar("IsReanimatorCard")
+            );
+
+            if (discardCandidates.isEmpty()) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
+            }
+
+            //  Frog is BLOCKING
+            if (combat != null && ph.inCombat() && combat.isBlocking(source)) {
+
+                CardCollection attackers = combat.getAttackersBlockedBy(source);
+
+                // If all threats are flyers and the Frog doesn't fly, the counter won't help
+                boolean facingFlyingOnlyThreat = attackers.stream()
+                        .allMatch(a -> a.hasKeyword(Keyword.FLYING))
+                        && !source.hasKeyword(Keyword.FLYING);
+                if (facingFlyingOnlyThreat) {
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                }
+
+                boolean frogDiesWithout = ComputerUtilCombat.blockerWouldBeDestroyed(ai, source, combat);
+
+                // Hypothetical: would +1 toughness keep the Frog alive against the combined damage?
+                int totAtkPower = Aggregates.sum(attackers, Card::getNetPower);
+                boolean frogSurvivesWithCounter = (source.getNetToughness() + counterAmount) > totAtkPower;
+
+                if (frogDiesWithout && frogSurvivesWithCounter) {
+                    return new AiAbilityDecision(100, AiPlayDecision.ImpactCombat);
+                }
+
+                // Frog survives anyway – check whether the counter lets it trade up.
+                if (!frogDiesWithout) {
+                    for (Card attacker : attackers) {
+                        boolean couldntKillBefore = !ComputerUtilCombat.canDestroyAttacker(
+                                ai, attacker, source, combat, false);
+                        boolean canKillWithCounter = attacker.getNetToughness()
+                                <= (source.getNetPower() + counterAmount);
+                        if (couldntKillBefore && canKillWithCounter) {
+                            return new AiAbilityDecision(100, AiPlayDecision.ImpactCombat);
+                        }
+                    }
+                }
+
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
+
+            if ((ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn().equals(ai) && discardCandidates.size() >= 2)
+                    && (ai.getCardsIn(ZoneType.Hand).size() > ai.getMaxHandSize() / 2 || aic.getAttackAggression() > 3)) {
+                return new AiAbilityDecision(60, AiPlayDecision.WillPlay);
+            }
+
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
+
+        public static AiAbilityDecision considerFlyingAbility(final Player ai,
+                                                              final SpellAbility sa) {
+            final Card source = sa.getHostCard();
+            final Game game = ai.getGame();
+            final PhaseHandler ph = game.getPhaseHandler();
+            final Combat combat = game.getCombat();
+            final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
+
+            int gySize = ai.getCardsIn(ZoneType.Graveyard).size();
+            if (gySize < 3) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
+            }
+
+            if (source.hasKeyword(Keyword.FLYING)) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
+
+            int safeCount = countSafeToExile(ai);
+            boolean hasEnoughSafeCards = safeCount >= 3;
+
+            if (ph.isPlayerTurn(opp) && combat != null) {
+                boolean atBlockers = ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS);
+                if (atBlockers) {
+                    List<Card> unblockedFlyers = combat.getAttackers().stream()
+                            .filter(a -> a.hasKeyword(Keyword.FLYING)
+                                    && combat.getBlockers(a).isEmpty())
+                            .toList();
+
+                    for (Card flyer : unblockedFlyers) {
+
+                        boolean frogSurvivesBlock = !ComputerUtilCombat.canDestroyBlocker(
+                                ai, source, flyer, combat, false);
+                        boolean frogKillsFlyer = ComputerUtilCombat.canDestroyAttacker(
+                                ai, flyer, source, combat, false);
+                        boolean lifeAtRisk = ComputerUtilCombat.lifeInDanger(ai, combat);
+
+                        if (hasEnoughSafeCards) {
+                            if (frogSurvivesBlock && frogKillsFlyer) {
+                                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                            }
+                            if (lifeAtRisk) {
+                                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                            }
+                        } else if (lifeAtRisk) {
+
+                            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                        }
+                    }
+                }
+
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            } else if (ph.isPlayerTurn(ai)
+                    && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+
+                boolean alreadyAttacking = (combat != null && combat.isAttacking(source));
+                boolean couldAttack = CombatUtil.canAttack(source, opp);
+
+                if (!alreadyAttacking && !couldAttack) {
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                }
+
+                Predicate<Card> flyingOrReach = CardPredicates.hasKeyword(Keyword.FLYING)
+                        .or(CardPredicates.hasKeyword(Keyword.REACH));
+                boolean oppCanAnswerFlying = opp.getCreaturesInPlay().anyMatch(flyingOrReach);
+
+                int frogPower = source.getNetCombatDamage();
+
+                if (!oppCanAnswerFlying) {
+                    if (hasEnoughSafeCards && frogPower > 0) {
+                        int score = frogPower >= opp.getLife() ? 100 : 75;
+                        return new AiAbilityDecision(score, AiPlayDecision.WillPlay);
+                    }
+
+                    if (frogPower >= opp.getLife()) {
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                    }
+                }
+
+                if (frogPower >= opp.getLife()) {
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                }
+            }
+
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
+    }
     // Sarkhan the Mad
     public static class SarkhanTheMad {
         public static AiAbilityDecision considerDig(final Player ai, final SpellAbility sa) {
@@ -2090,192 +2276,6 @@ public class SpecialCardAi {
             }
 
             return numCastable >= minCastableInGY;
-        }
-    }
-
-    public static class PsychicFrog {
-        private static boolean hasOwnGraveyardAbility(final Card c) {
-            for (KeywordInterface ki : c.getKeywords()) {
-                String kw = ki.getOriginal();
-                if (kw.startsWith("Unearth") || kw.startsWith("Flashback")
-                        || kw.startsWith("Escape") || kw.startsWith("Jump-start")
-                        || kw.startsWith("Retrace") || kw.startsWith("Dredge")
-                        || kw.startsWith("Disturb") || kw.startsWith("Aftermath")) {
-                    return true;
-                }
-            }
-
-            for (Trigger t : c.getTriggers()) {
-                SpellAbility ab = t.ensureAbility();
-                if (ab == null) continue;
-                if ((ab.getApi() == ApiType.ChangeZone || ab.getApi() == ApiType.ChangeZoneAll)
-                        && "Self".equals(ab.getParamOrDefault("Defined", ""))
-                        && "Graveyard".equals(ab.getParamOrDefault("Origin", ""))
-                        && "Battlefield".equals(ab.getParamOrDefault("Destination", ""))) {
-                    return true;
-                }
-            }
-            return c.hasSVar("IsReanimatorCard");
-        }
-
-        private static int countSafeToExile(final Player ai) {
-            int safe = 0;
-            for (Card c : ai.getCardsIn(ZoneType.Graveyard)) {
-                if (!hasOwnGraveyardAbility(c) && !c.hasSVar("IsReanimatorCard")) {
-                    safe++;
-                }
-            }
-            return safe;
-        }
-
-        public static AiAbilityDecision considerCounterAbility(final Player ai,
-                                                               final SpellAbility sa,
-                                                               final PhaseHandler ph) {
-            final Card source = sa.getHostCard();
-            final Combat combat = ai.getGame().getCombat();
-            final int counterAmount = 1;
-            AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-
-            CardCollection hand = new CardCollection(ai.getCardsIn(ZoneType.Hand));
-            CardCollection discardCandidates = CardLists.filter(hand, c ->
-                    !c.hasSVar("DoNotDiscardIfAble") && !c.hasSVar("IsReanimatorCard")
-            );
-
-            if (discardCandidates.isEmpty()) {
-                return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
-            }
-
-            //  Frog is BLOCKING
-            if (combat != null && ph.inCombat() && combat.isBlocking(source)) {
-
-                CardCollection attackers = combat.getAttackersBlockedBy(source);
-
-                // If all threats are flyers and the Frog doesn't fly, the counter won't help
-                boolean facingFlyingOnlyThreat = attackers.stream()
-                        .allMatch(a -> a.hasKeyword(Keyword.FLYING))
-                        && !source.hasKeyword(Keyword.FLYING);
-                if (facingFlyingOnlyThreat) {
-                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-                }
-
-                boolean frogDiesWithout = ComputerUtilCombat.blockerWouldBeDestroyed(ai, source, combat);
-
-                // Hypothetical: would +1 toughness keep the Frog alive against the combined damage?
-                int totAtkPower = Aggregates.sum(attackers, Card::getNetPower);
-                boolean frogSurvivesWithCounter = (source.getNetToughness() + counterAmount) > totAtkPower;
-
-                if (frogDiesWithout && frogSurvivesWithCounter) {
-                    return new AiAbilityDecision(100, AiPlayDecision.ImpactCombat);
-                }
-
-                // Frog survives anyway – check whether the counter lets it trade up.
-                if (!frogDiesWithout) {
-                    for (Card attacker : attackers) {
-                        boolean couldntKillBefore = !ComputerUtilCombat.canDestroyAttacker(
-                                ai, attacker, source, combat, false);
-                        boolean canKillWithCounter = attacker.getNetToughness()
-                                <= (source.getNetPower() + counterAmount);
-                        if (couldntKillBefore && canKillWithCounter) {
-                            return new AiAbilityDecision(100, AiPlayDecision.ImpactCombat);
-                        }
-                    }
-                }
-
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-            }
-
-            if ((ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn().equals(ai) && discardCandidates.size() >= 2)
-                    && (ai.getCardsIn(ZoneType.Hand).size() > ai.getMaxHandSize() / 2 || aic.getAttackAggression() > 3)) {
-                return new AiAbilityDecision(60, AiPlayDecision.WillPlay);
-            }
-
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        }
-
-        public static AiAbilityDecision considerFlyingAbility(final Player ai,
-                                                              final SpellAbility sa) {
-            final Card source = sa.getHostCard();
-            final Game game = ai.getGame();
-            final PhaseHandler ph = game.getPhaseHandler();
-            final Combat combat = game.getCombat();
-            final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
-
-            int gySize = ai.getCardsIn(ZoneType.Graveyard).size();
-            if (gySize < 3) {
-                return new AiAbilityDecision(0, AiPlayDecision.CantAfford);
-            }
-
-            if (source.hasKeyword(Keyword.FLYING)) {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-            }
-
-            int safeCount = countSafeToExile(ai);
-            boolean hasEnoughSafeCards = safeCount >= 3;
-
-            if (ph.isPlayerTurn(opp) && combat != null) {
-                boolean atBlockers = ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS);
-                if (atBlockers) {
-                    List<Card> unblockedFlyers = combat.getAttackers().stream()
-                            .filter(a -> a.hasKeyword(Keyword.FLYING)
-                                    && combat.getBlockers(a).isEmpty())
-                            .toList();
-
-                    for (Card flyer : unblockedFlyers) {
-
-                        boolean frogSurvivesBlock = !ComputerUtilCombat.canDestroyBlocker(
-                                ai, source, flyer, combat, false);
-                        boolean frogKillsFlyer = ComputerUtilCombat.canDestroyAttacker(
-                                ai, flyer, source, combat, false);
-                        boolean lifeAtRisk = ComputerUtilCombat.lifeInDanger(ai, combat);
-
-                        if (hasEnoughSafeCards) {
-                            if (frogSurvivesBlock && frogKillsFlyer) {
-                                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                            }
-                            if (lifeAtRisk) {
-                                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                            }
-                        } else if (lifeAtRisk) {
-
-                            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                        }
-                    }
-                }
-
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-            } else if (ph.isPlayerTurn(ai)
-                    && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
-
-                boolean alreadyAttacking = (combat != null && combat.isAttacking(source));
-                boolean couldAttack = CombatUtil.canAttack(source, opp);
-
-                if (!alreadyAttacking && !couldAttack) {
-                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-                }
-
-                Predicate<Card> flyingOrReach = CardPredicates.hasKeyword(Keyword.FLYING)
-                        .or(CardPredicates.hasKeyword(Keyword.REACH));
-                boolean oppCanAnswerFlying = opp.getCreaturesInPlay().anyMatch(flyingOrReach);
-
-                int frogPower = source.getNetCombatDamage();
-
-                if (!oppCanAnswerFlying) {
-                    if (hasEnoughSafeCards && frogPower > 0) {
-                        int score = frogPower >= opp.getLife() ? 100 : 75;
-                        return new AiAbilityDecision(score, AiPlayDecision.WillPlay);
-                    }
-
-                    if (frogPower >= opp.getLife()) {
-                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                    }
-                }
-
-                if (frogPower >= opp.getLife()) {
-                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                }
-            }
-
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
     }
 
