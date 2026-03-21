@@ -399,6 +399,7 @@ public class NewGameScene extends MenuScene {
 
     private void showDifficultyHelp() {
         DifficultyData selectedDifficulty = Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()];
+        boolean enableGeneticAI = Config.instance().getConfigData().enableGeneticAI;
 
         difficultySummary = new DialogData();
         difficultySummary.name = "Summary";
@@ -410,7 +411,11 @@ public class NewGameScene extends MenuScene {
                 difficultySummary.text = String.format("Difficulty: %s\nHow Adventure Mode is intended to be played.\nStarter decks will include a second color.\nStarting equipment: Leather Boots", selectedDifficulty.name);
                 break;
             case "Hard":
-                difficultySummary.text = String.format("Difficulty: %s\nFor players who want a challenge.\nSome enemies will use genetic AI decks.\nStarter decks will include 2-3 colors.\nStarting equipment: None", selectedDifficulty.name);
+                if (enableGeneticAI) {
+                    difficultySummary.text = String.format("Difficulty: %s\nFor players who want a challenge.\nSome enemies will use genetic AI decks.\nStarter decks will include 2-3 colors.\nStarting equipment: None", selectedDifficulty.name);
+                } else {
+                    difficultySummary.text = String.format("Difficulty: %s\nFor players who want a challenge.\nStarter decks will include 2-3 colors.\nStarting equipment: None", selectedDifficulty.name);
+                }
                 break;
             case "Insane":
                 difficultySummary.text = String.format("Difficulty: %s\nFor players who don't want to like the game.\nIdentical to Hard difficulty, but with even less forgiving and rewarding results.\nStarter decks will include 2-3 colors.\nStarting equipment: None", selectedDifficulty.name);
@@ -453,6 +458,7 @@ public class NewGameScene extends MenuScene {
 
         AdventureModes selectedMode = modes.get(mode.getCurrentIndex());
         DifficultyData selectedDifficulty = Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()];
+        boolean enableGeneticAI = Config.instance().getConfigData().enableGeneticAI;
 
         modeSummary = new DialogData();
         modeSummary.name = "Summary";
@@ -525,7 +531,11 @@ public class NewGameScene extends MenuScene {
                 summaryText.append("Mode: Chaos\n\nYou (and all enemies) will receive a random preconstructed deck.\n\nWarning: This will make encounter difficulty vary wildly from the developers' intent");
                 break;
             case Custom:
-                summaryText.append("Mode: Custom\n\nChoose your own preconstructed deck. Enemies can receive a random genetic AI deck (difficult).\n\nWarning: This will make encounter difficulty vary wildly from the developers' intent");
+                if (enableGeneticAI) {
+                    summaryText.append("Mode: Custom\n\nChoose your own preconstructed deck. Enemies can receive a random genetic AI deck (difficult).\n\nWarning: This will make encounter difficulty vary wildly from the developers' intent");
+                } else {
+                    summaryText.append("Mode: Custom\n\nChoose your own preconstructed deck.");
+                }
                 break;
             case Precon:
                 summaryText.append("Mode: Precon\n\nYou will receive a specific preconstructed deck. You can choose a random or a specific preconstructed deck from an edition of your choice.\n\n");
