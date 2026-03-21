@@ -2130,7 +2130,6 @@ public class SpecialCardAi {
                                                                final PhaseHandler ph) {
             final Card source = sa.getHostCard();
             final Combat combat = ai.getGame().getCombat();
-            final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
             final int counterAmount = 1;
 
             CardCollection hand = new CardCollection(ai.getCardsIn(ZoneType.Hand));
@@ -2208,12 +2207,10 @@ public class SpecialCardAi {
 
             int safeCount = countSafeToExile(ai);
             boolean hasEnoughSafeCards = safeCount >= 3;
-            boolean canPayAtAll = gySize >= 3;
 
             if (ph.isPlayerTurn(opp) && combat != null) {
 
                 boolean atBlockers = ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS);
-                ;
                 if (atBlockers) {
                     List<Card> unblockedFlyers = combat.getAttackers().stream()
                             .filter(a -> a.hasKeyword(Keyword.FLYING)
@@ -2235,7 +2232,7 @@ public class SpecialCardAi {
                             if (lifeAtRisk) {
                                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                             }
-                        } else if (canPayAtAll && lifeAtRisk) {
+                        } else if (lifeAtRisk) {
 
                             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                         }
@@ -2267,19 +2264,17 @@ public class SpecialCardAi {
                         return new AiAbilityDecision(score, AiPlayDecision.WillPlay);
                     }
 
-                    if (canPayAtAll && frogPower >= opp.getLife()) {
+                    if (frogPower >= opp.getLife()) {
                         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                     }
                 }
 
-                if (canPayAtAll && frogPower >= opp.getLife()) {
+                if (frogPower >= opp.getLife()) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
             }
-
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
     }
-
 
 }
