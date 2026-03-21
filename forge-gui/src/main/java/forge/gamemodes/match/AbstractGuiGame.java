@@ -173,6 +173,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             } else {
                 gameControllers.remove(player);
                 autoPassUntilEndOfTurn.remove(player);
+                autoYieldUntilEndOfTurn.remove(player);
                 final PlayerView currentPlayer = getCurrentPlayer();
                 if (player.equals(currentPlayer)) {
                     // set current player to a value known to be legal
@@ -454,8 +455,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     @Override
-    public final boolean mayAutoPass(final PlayerView player) {
-        return autoPassUntilEndOfTurn.contains(player);
+    public final boolean shouldAutoPassPriority(final PlayerView player) {
+        return autoPassUntilEndOfTurn.contains(player) || autoYieldUntilEndOfTurn.contains(player);
     }
 
     private Timer awaitNextInputTimer;
@@ -591,6 +592,40 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             updateButtons(getCurrentPlayer(), false, true, false);
         }
     }
+
+    // Auto-yield until end of turn (yields to all opponents' triggers and spells without cancelling)
+
+    private final Set<PlayerView> autoYieldUntilEndOfTurn = Sets.newHashSet();
+
+    @Override
+    public final void autoYieldUntilEndOfTurn(final PlayerView player) {
+        autoYieldUntilEndOfTurn.add(player);
+        updateAutoYieldPrompt();
+    }
+
+    @Override
+    public final void autoYieldCancel(final PlayerView player) {
+        if (!autoYieldUntilEndOfTurn.remove(player)) {
+            return;
+        }
+
+        //prevent prompt getting stuck on yielding message while actually waiting for next input opportunity
+        final PlayerView playerView = getCurrentPlayer();
+        showPromptMessage(playerView, "");
+        updateButtons(playerView, false, false, false);
+        awaitNextInput();
+    }
+
+    @Override
+    public final void updateAutoYieldPrompt() {
+        if (!autoYieldUntilEndOfTurn.isEmpty()) {
+            //allow user to cancel auto-yield
+            cancelAwaitNextInput(); //don't overwrite prompt with awaiting opponent
+            showPromptMessage(getCurrentPlayer(), Localizer.getInstance().getMessage("lblAutoYieldingUntilEndOfTurn"));
+            updateButtons(getCurrentPlayer(), false, true, false);
+        }
+    }
+
     // End auto-yield/input code
 
     // Abilities to auto-yield to

@@ -2375,10 +2375,11 @@ public class GameAction {
 
             game.setStartingPlayer(first);
             game.getPhaseHandler().startFirstTurn(first, startGameHook);
-            //after game ends, ensure Auto-Pass canceled for all players so it doesn't apply to next game
+            //after game ends, ensure Auto-Pass and Auto-Yield canceled for all players so it doesn't apply to next game
             for (Player p : game.getRegisteredPlayers()) {
                 p.setNumCardsInHandStartedThisTurnWith(p.getCardsIn(ZoneType.Hand).size());
                 p.getController().autoPassCancel();
+                p.getController().autoYieldCancel();
             }
 
             first = game.getPhaseHandler().getPlayerTurn(); // needed only for restart

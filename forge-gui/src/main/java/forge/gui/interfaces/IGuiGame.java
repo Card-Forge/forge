@@ -263,11 +263,22 @@ public interface IGuiGame {
 
     void autoPassUntilEndOfTurn(PlayerView player);
 
-    boolean mayAutoPass(PlayerView player);
+    /**
+     * Returns true if the player should automatically pass priority,
+     * whether due to auto-pass (cancelled by opponent spells) or
+     * auto-yield (persists through opponent spells until end of turn).
+     */
+    boolean shouldAutoPassPriority(PlayerView player);
 
     void autoPassCancel(PlayerView player);
 
     void updateAutoPassPrompt();
+
+    void autoYieldUntilEndOfTurn(PlayerView player);
+
+    void autoYieldCancel(PlayerView player);
+
+    void updateAutoYieldPrompt();
 
     boolean shouldAutoYield(String key);
 

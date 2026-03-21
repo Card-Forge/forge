@@ -1482,7 +1482,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void declareAttackers(final Player attackingPlayer, final Combat combat) {
-        if (mayAutoPass()) {
+        if (shouldAutoPassPriority()) {
             if (CombatUtil.validateAttackers(combat)) {
                 return; // don't prompt to declare attackers if user chose to
                 // end the turn and not attacking is legal
@@ -1502,13 +1502,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final InputBlock inpBlock = new InputBlock(this, defender, combat);
         inpBlock.showAndWait();
         getGui().updateAutoPassPrompt();
+        getGui().updateAutoYieldPrompt();
     }
 
     @Override
     public List<SpellAbility> chooseSpellAbilityToPlay() {
         final MagicStack stack = getGame().getStack();
 
-        if (mayAutoPass()) {
+        if (shouldAutoPassPriority()) {
             // avoid prompting for input if current phase is set to be
             // auto-passed instead posing a short delay if needed to
             // prevent the game jumping ahead too quick
@@ -2416,6 +2417,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             FThreads.invokeInEdtNowOrLater(() -> {
                 // getGui().message("Cannot pass priority at this time.");
             });
+        }
+    }
+
+    @Override
+    public void autoYieldUntilEndOfTurn() {
+        final Input inp = inputProxy.getInput();
+        if (inp instanceof InputPassPriority) {
+            setAutoYieldUntilEndOfTurn();
+            inp.selectButtonOK();
         }
     }
 
@@ -3334,8 +3344,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
     }
 
-    public boolean mayAutoPass() {
-        return getGui().mayAutoPass(getLocalPlayerView());
+    /**
+     * Returns true if the player should automatically pass priority,
+     * whether due to auto-pass (cancelled by opponent spells) or
+     * auto-yield (persists through opponent spells until end of turn).
+     */
+    public boolean shouldAutoPassPriority() {
+        return getGui().shouldAutoPassPriority(getLocalPlayerView());
     }
 
     public void autoPassUntilEndOfTurn() {
@@ -3349,6 +3364,19 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         getGui().autoPassCancel(getLocalPlayerView());
+    }
+
+    public void setAutoYieldUntilEndOfTurn() {
+        getGui().autoYieldUntilEndOfTurn(getLocalPlayerView());
+    }
+
+    @Override
+    public void autoYieldCancel() {
+        if (getGui() == null) {
+            return;
+        }
+
+        getGui().autoYieldCancel(getLocalPlayerView());
     }
 
     @Override

@@ -87,9 +87,10 @@ public class InputLockUI implements Input {
     }
     @Override
     public void selectButtonCancel() {
-        //cancel auto pass for all players
+        //cancel auto pass and auto yield for all players
         for (final Player player : controller.getGame().getPlayers()) {
             player.getController().autoPassCancel();
+            player.getController().autoYieldCancel();
         }
     }
 

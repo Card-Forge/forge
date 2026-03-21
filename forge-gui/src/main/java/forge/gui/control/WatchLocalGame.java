@@ -71,6 +71,10 @@ public class WatchLocalGame extends PlayerControllerHuman {
     }
 
     @Override
+    public void autoYieldUntilEndOfTurn() {
+    }
+
+    @Override
     public void useMana(final byte mana) {
     }
 

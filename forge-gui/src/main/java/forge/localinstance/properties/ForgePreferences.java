@@ -296,6 +296,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         SHORTCUT_UNDO ("17 90"),
         SHORTCUT_CONCEDE ("17 81"),
         SHORTCUT_ENDTURN ("17 69"),
+        SHORTCUT_YIELD_UNTIL_EOT ("54"), // 6
         SHORTCUT_ALPHASTRIKE ("17 65"),
         SHORTCUT_SHOWTARGETING ("84"),
         SHORTCUT_AUTOYIELD_ALWAYS_YES ("89"),

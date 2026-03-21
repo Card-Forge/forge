@@ -650,6 +650,9 @@ public class MatchScreen extends FScreen {
                     return true;
                 }
                 break;
+            case Keys.NUM_6: //yield until end of turn
+                getGameController().autoYieldUntilEndOfTurn();
+                return true;
             case Keys.Q: //concede game on Ctrl+Q
                 if (KeyInputAdapter.isCtrlKeyDown()) {
                     confirmUserConcedes();

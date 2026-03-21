@@ -87,6 +87,7 @@ public enum ProtocolMethod {
     selectButtonCancel        (Mode.CLIENT, Void.TYPE),
     selectAbility             (Mode.CLIENT, Void.TYPE, SpellAbilityView.class),
     passPriorityUntilEndOfTurn(Mode.CLIENT, Void.TYPE),
+    autoYieldUntilEndOfTurn   (Mode.CLIENT, Void.TYPE),
     passPriority              (Mode.CLIENT, Void.TYPE),
     nextGameDecision          (Mode.CLIENT, Void.TYPE, NextGameDecision.class),
     getActivateDescription    (Mode.CLIENT, String.class, CardView.class),

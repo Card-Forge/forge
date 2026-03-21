@@ -131,6 +131,16 @@ public class KeyboardShortcuts {
             }
         };
 
+        /** Yield until end of turn (don't stop for opponent spells/abilities). */
+        final Action actYieldUntilEndOfTurn = new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
+                if (matchUI == null) { return; }
+                matchUI.getGameController().autoYieldUntilEndOfTurn();
+            }
+        };
+
         /** Alpha Strike. */
         final Action actAllAttack = new AbstractAction() {
             @Override
@@ -266,6 +276,7 @@ public class KeyboardShortcuts {
         list.add(new Shortcut(FPref.SHORTCUT_UNDO, localizer.getMessage("lblSHORTCUT_UNDO"), actUndo, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_CONCEDE, localizer.getMessage("lblSHORTCUT_CONCEDE"), actConcede, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_ENDTURN, localizer.getMessage("lblSHORTCUT_ENDTURN"), actEndTurn, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_YIELD_UNTIL_EOT, localizer.getMessage("lblSHORTCUT_YIELD_UNTIL_EOT"), actYieldUntilEndOfTurn, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_ALPHASTRIKE, localizer.getMessage("lblSHORTCUT_ALPHASTRIKE"), actAllAttack, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_SHOWTARGETING, localizer.getMessage("lblSHORTCUT_SHOWTARGETING"), actTgtOverlay, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_AUTOYIELD_ALWAYS_YES, localizer.getMessage("lblSHORTCUT_AUTOYIELD_ALWAYS_YES"), actAutoYieldAndYes, am, im));

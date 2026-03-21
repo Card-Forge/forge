@@ -1550,6 +1550,11 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
+    public void autoYieldCancel() {
+        // Do nothing
+    }
+
+    @Override
     public void awaitNextInput() {
         // Do nothing
     }

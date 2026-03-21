@@ -335,6 +335,7 @@ public abstract class PlayerController {
     }
 
     public abstract void autoPassCancel();
+    public abstract void autoYieldCancel();
 
     public abstract void awaitNextInput();
     public abstract void cancelAwaitNextInput();

@@ -90,7 +90,7 @@ public class InputPassPriority extends InputSyncronizedBase {
 
     @Override
     protected boolean allowAwaitNextInput() {
-        return chosenSa == null && !getController().mayAutoPass(); //don't allow awaiting next input if player chose to end the turn or if a spell/ability is chosen
+        return chosenSa == null && !getController().shouldAutoPassPriority(); //don't allow awaiting next input if player chose to auto-pass or auto-yield the turn, or if a spell/ability is chosen
     }
 
     private void passPriority(final Runnable runnable) {

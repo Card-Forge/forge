@@ -413,6 +413,7 @@ public class PhaseHandler implements java.io.Serializable {
 
                     for (Player player : game.getPlayers()) {
                         player.getController().autoPassCancel(); // autopass won't wrap to next turn
+                        player.getController().autoYieldCancel(); // autoyield won't wrap to next turn
                     }
 
                     nUpkeepsThisTurn = 0;
