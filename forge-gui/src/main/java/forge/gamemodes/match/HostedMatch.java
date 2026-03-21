@@ -386,7 +386,6 @@ public class HostedMatch {
                 final PlayerView p = humanController.getPlayer().getView();
                 if (event.attackerBeingBlocked() != null && event.attackerBeingBlocked().getController().equals(p)) {
                     humanController.getGui().autoPassCancel(p);
-                    humanController.getGui().autoYieldCancel(p);
                 }
             }
             return null;
