@@ -302,6 +302,8 @@ public class CountersPutAi extends CountersAi {
             return doChargeToOppCtrlCMCLogic(ai, sa);
         } else if (logic.equals("TheOneRing")) {
             return SpecialCardAi.TheOneRing.consider(ai, sa);
+        } else if ("PsychicFrog".equals(logic)) {
+            return SpecialCardAi.PsychicFrog.considerCounterAbility(ai, sa, ph);
         } else if (sa.isKeyword(Keyword.STATION)) {
             return doStationAi(ai, sa);
         }
