@@ -5,5 +5,5 @@ PT:5/5
 K:First Strike
 K:Vigilance
 K:Champion:Kithkin
-S:Mode$ Continuous | Affected$ Card.Self | CanBlockAny$ True | Description$ CARDNAME can block any number of creatures.
+S:Mode$ CanBlockAmount | ValidCard$ Card.Self | Amount$ Any | Description$ CARDNAME can block any number of creatures.
 Oracle:First strike, vigilance\nChampion a Kithkin (When this enters, sacrifice it unless you exile another Kithkin you control. When this leaves the battlefield, that card returns to the battlefield.)\nThoughtweft Trio can block any number of creatures.

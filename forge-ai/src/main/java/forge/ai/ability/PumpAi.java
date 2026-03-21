@@ -333,8 +333,6 @@ public class PumpAi extends PumpAiBase {
                         }
 
                         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                    } else if (grantsUsefulExtraBlockOpts(ai, sa, card, keywords)) {
-                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                     }
                 }
             }
