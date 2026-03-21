@@ -124,6 +124,7 @@
   ],
   "allowedJumpstart": [],
   "enableGeneticAI": false,
+  "defaultBasicLandSet": "4ED",
   "difficulties": [
     {
       "name": "Easy",

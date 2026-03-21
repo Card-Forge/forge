@@ -1,6 +1,6 @@
 Name:Transdimensional Bovine
 ManaCost:2 G
-Types:Legendary Creature Ox Avatar
+Types:Creature Ox Avatar
 PT:0/4
 K:Flying
 A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 2 | SpellDescription$ Add two mana of any one color.
