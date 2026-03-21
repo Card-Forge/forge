@@ -347,6 +347,10 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         baseToughnessString = s;
     }
 
+    public final boolean hasPrintedPT() {
+        return !StringUtils.isEmpty(basePowerString) || !StringUtils.isEmpty(baseToughnessString);
+    }
+
     public String getBaseLoyalty() {
         return baseLoyalty;
     }
