@@ -126,8 +126,9 @@ public class AdventureDeckEditor extends FDeckEditor {
 
             // Add the default edition unless it's already unlocked above
             String defaultArtSetCode = Config.instance().getConfigData().defaultBasicLandSet;
-            if (!unlockedEditions.contains(FModel.getMagicDb().getEditions().get(defaultArtSetCode))) {
-                unlockedEditions.add(FModel.getMagicDb().getEditions().get(defaultArtSetCode));
+            CardEdition defaultArtEdition = FModel.getMagicDb().getEditions().get(defaultArtSetCode);
+            if (!unlockedEditions.contains(defaultArtEdition)) {
+                unlockedEditions.add(defaultArtEdition);
             }
 
             return unlockedEditions;
