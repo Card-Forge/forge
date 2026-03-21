@@ -61,7 +61,7 @@ public class PumpAi extends PumpAiBase {
 
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph,
-            final String logic) {
+                                             final String logic) {
         // special Phase check for various AI logics
         if (logic.equals("MoveCounter")) {
             if (ph.inCombat() && ph.getPlayerTurn().isOpponentOf(ai)) {
@@ -126,6 +126,8 @@ public class PumpAi extends PumpAiBase {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         } else if ("GideonBlackblade".equals(aiLogic)) {
             return SpecialCardAi.GideonBlackblade.consider(ai, sa);
+        } else if ("PsychicFrog".equals(aiLogic)) {
+            return SpecialCardAi.PsychicFrog.considerFlyingAbility(ai, sa);
         } else if ("MoveCounter".equals(aiLogic)) {
             final SpellAbility moveSA = sa.findSubAbilityByType(ApiType.MoveCounter);
 
@@ -145,7 +147,7 @@ public class PumpAi extends PumpAiBase {
                 if (cType != null) {
                     attr = CardLists.filter(attr, CardPredicates.hasCounter(cType));
                     if (attr.isEmpty()) {
-                        return new AiAbilityDecision(0,AiPlayDecision.TargetingFailed);
+                        return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                     }
                     CardCollection best = CardLists.filter(attr, card -> {
                         int amount = 0;
@@ -347,7 +349,7 @@ public class PumpAi extends PumpAiBase {
     }
 
     private boolean pumpTgtAI(final Player ai, final SpellAbility sa, final int defense, final int attack, final boolean mandatory,
-    		boolean immediately) {
+                              boolean immediately) {
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & "))
                 : Lists.newArrayList();
         final Game game = ai.getGame();
@@ -421,7 +423,7 @@ public class PumpAi extends PumpAiBase {
                 } else {
                     return false;
                 }
-            }  else if (sa.getParam("AILogic").equals("SameName")) {
+            } else if (sa.getParam("AILogic").equals("SameName")) {
                 return doSameNameLogic(ai, sa);
             } else if (sa.getParam("AILogic").equals("SacOneEach")) {
                 // each player sacrifices one permanent, e.g. Vaevictis, Asmadi the Dire - grab the worst for allied and

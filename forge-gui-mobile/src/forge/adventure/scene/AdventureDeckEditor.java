@@ -96,7 +96,6 @@ public class AdventureDeckEditor extends FDeckEditor {
         @Override
         public List<CardEdition> getBasicLandSets(Deck currentDeck) {
             List<CardEdition> unlockedEditions = new ArrayList<>();
-            unlockedEditions.add(FModel.getMagicDb().getEditions().get("JMP"));
 
             // Loop through Landscapes and add them to unlockedEditions
             Map<String, CardEdition> editionsByName = new HashMap<>();
@@ -124,6 +123,14 @@ public class AdventureDeckEditor extends FDeckEditor {
                     unlockedEditions.add(edition);
                 }
             }
+
+            // Add the default edition unless it's already unlocked above
+            String defaultArtSetCode = Config.instance().getConfigData().defaultBasicLandSet;
+            CardEdition defaultArtEdition = FModel.getMagicDb().getEditions().get(defaultArtSetCode);
+            if (!unlockedEditions.contains(defaultArtEdition)) {
+                unlockedEditions.add(defaultArtEdition);
+            }
+
             return unlockedEditions;
         }
     }

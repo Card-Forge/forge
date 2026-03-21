@@ -344,10 +344,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         String type = sa.getParam("ChangeType");
         if (type != null && type.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
-            // Set PayX here to maximum value.
             final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
             sa.setXManaCostPaid(xPay);
-            type = type.replace("X", Integer.toString(xPay));
         }
 
         for (final Player p : pDefined) {
@@ -386,7 +384,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
             String num = sa.getParamOrDefault("ChangeNum", "1");
             if (num.contains("X")) {
                 if (sa.getSVar("X").equals("Count$xPaid")) {
-                    // Set PayX here to maximum value.
                     int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
                     if (xPay == 0) {
                         return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
@@ -394,9 +391,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     xPay = Math.min(xPay, list.size());
                     sa.setXManaCostPaid(xPay);
                 } else {
-                    // Figure out the X amount, bail if it's zero (nothing will change zone).
                     int xValue = AbilityUtils.calculateAmount(source, "X", sa);
                     if (xValue == 0) {
+                        // nothing will change zone
                         return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
                     }
                 }
