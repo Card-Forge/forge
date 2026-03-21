@@ -30,7 +30,7 @@ Name=Whirlpool
 2 Jilt|APC|1
 1 Opt|INV|1
 1 Scorching Lava|INV|1
-2 Stun|TMP|1
+2 Stun|INV|1
 1 Suffocating Blast|APC|1
 2 Chromatic Sphere|INV|1
 [Sideboard]

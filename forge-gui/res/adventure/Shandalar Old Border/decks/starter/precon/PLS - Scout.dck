@@ -22,7 +22,7 @@ Name=Scout
 1 Horned Kavu|PLS|1
 1 Mirrorwood Treefolk|PLS|1
 1 Nomadic Elf|INV|1
-1 Quirion Elves|MIR|1
+1 Quirion Elves|INV|1
 2 Quirion Explorer|PLS|1
 1 Radiant Kavu|PLS|1
 1 Rampant Elephant|INV|1
@@ -36,10 +36,10 @@ Name=Scout
 1 Thornscape Familiar|PLS|1
 1 Viashino Grappler|INV|1
 1 Armadillo Cloak|INV|1
-2 Fertile Ground|USG|1
+2 Fertile Ground|INV|1
 1 Eladamri's Call|PLS|1
 2 Gerrard's Command|PLS|1
-1 Harrow|TMP|1
+1 Harrow|INV|1
 1 Magma Burst|PLS|1
 1 Pollen Remedy|PLS|1
 1 Rith's Charm|PLS|1
