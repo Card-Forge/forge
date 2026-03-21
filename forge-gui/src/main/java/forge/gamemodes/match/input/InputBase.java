@@ -140,7 +140,22 @@ public abstract class InputBase implements java.io.Serializable, Input {
         final PhaseHandler ph = game.getPhaseHandler();
         final StringBuilder sb = new StringBuilder();
         Localizer localizer = Localizer.getInstance();
-        sb.append(localizer.getMessage("lblPriority")).append(": ").append(ph.getPriorityPlayer()).append("\n");
+        sb.append(localizer.getMessage("lblPriority")).append(": ");
+        // Support teams: display all players who currently have priority, marking the captain
+        java.util.List<forge.game.player.Player> pw = ph.getPlayersWithPriority();
+        if (pw.isEmpty()) {
+            sb.append(ph.getPriorityPlayer()).append("\n");
+        } else if (pw.size() == 1) {
+            sb.append(pw.get(0)).append("\n");
+        } else {
+            // multiple players: show as comma-separated, with captain (first) marked with *
+            for (int i = 0; i < pw.size(); i++) {
+                if (i > 0) { sb.append(", "); }
+                sb.append(pw.get(i));
+                if (i == 0) { sb.append(" (captain)"); }
+            }
+            sb.append("\n");
+        }
         sb.append(localizer.getMessage("lblTurn")).append(": ").append(ph.getTurn()).append(" (").append(ph.getPlayerTurn()).append(")");
 
         if (!game.isNeitherDayNorNight()) {

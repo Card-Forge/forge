@@ -18,6 +18,7 @@ public class GameRules {
     private int simTimeout = 120;
     // If true, use a shared life total per team (players on the same team share life)
     private boolean useSharedTeamLife = false;
+    private boolean useSharedTurns = false; // if true, players on the same team share turns (e.g. in Two-Headed Giant)
 
     // it's a preference, not rule... but I could hardly find a better place for it
     private boolean useGrayText;
@@ -142,5 +143,13 @@ public class GameRules {
 
     public void setUseSharedTeamLife(final boolean useSharedTeamLife) {
         this.useSharedTeamLife = useSharedTeamLife;
+    }
+
+    public boolean isUseSharedTurns() {
+        return useSharedTeamLife;
+    }
+
+    public void setUseSharedTurns(boolean useSharedTurns) {
+        this.useSharedTurns = useSharedTurns;
     }
 }
