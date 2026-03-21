@@ -47,7 +47,10 @@ import forge.game.spellability.SpellPermanent;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.zone.ZoneType;
-import forge.util.*;
+import forge.util.Aggregates;
+import forge.util.IterableUtil;
+import forge.util.MyRandom;
+import forge.util.TextUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
@@ -2131,6 +2134,7 @@ public class SpecialCardAi {
             final Card source = sa.getHostCard();
             final Combat combat = ai.getGame().getCombat();
             final int counterAmount = 1;
+            AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
 
             CardCollection hand = new CardCollection(ai.getCardsIn(ZoneType.Hand));
             CardCollection discardCandidates = CardLists.filter(hand, c ->
@@ -2180,8 +2184,8 @@ public class SpecialCardAi {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
-            if ((ph.is(PhaseType.END_OF_TURN, ai) && discardCandidates.size() >= 2)
-                    || ai.getCardsIn(ZoneType.Hand).size() > 7) {
+            if ((ph.is(PhaseType.END_OF_TURN) && ph.getNextTurn().equals(ai) && discardCandidates.size() >= 2)
+                    && (ai.getCardsIn(ZoneType.Hand).size() > ai.getMaxHandSize() / 2 || aic.getAttackAggression() > 3)) {
                 return new AiAbilityDecision(60, AiPlayDecision.WillPlay);
             }
 
@@ -2209,7 +2213,6 @@ public class SpecialCardAi {
             boolean hasEnoughSafeCards = safeCount >= 3;
 
             if (ph.isPlayerTurn(opp) && combat != null) {
-
                 boolean atBlockers = ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS);
                 if (atBlockers) {
                     List<Card> unblockedFlyers = combat.getAttackers().stream()
@@ -2240,9 +2243,7 @@ public class SpecialCardAi {
                 }
 
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-            }
-
-            if (ph.isPlayerTurn(ai)
+            } else if (ph.isPlayerTurn(ai)
                     && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
 
                 boolean alreadyAttacking = (combat != null && combat.isAttacking(source));
@@ -2273,6 +2274,7 @@ public class SpecialCardAi {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
             }
+
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
     }
