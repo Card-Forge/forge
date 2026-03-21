@@ -30905,5 +30905,337 @@
 		"IdentityBlack",
 		"BiomeBlack"
 	]
+},
+{
+	"name": "Jin-Gitaxias",
+	"sprite": "sprites/enemy/aberration/phyrexian/jin-gitaxias.atlas",
+	"deck": [
+		"decks/standard/copperhostbrutalizer.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.1,
+	"boss": true,
+	"scale": 0.65,
+	"bossIntro": "The work goes on. The progress is inevitable.",
+	"bossInsult": "Flesh is a flaw. We are the cure.",
+	"difficulty": 0.5,
+	"speed": 25,
+	"life": 80,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.75,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"rare",
+				"mythicrare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "W",
+	"questTags": [
+		"Phyrexian",
+		"Copper Host",
+		"Humanoid"
+	]
+},
+{
+	"name": "Vorinclex",
+	"sprite": "sprites/enemy/aberration/phyrexian/vorinclex.atlas",
+	"deck": [
+		"decks/standard/copperhostbrutalizer.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.1,
+	"boss": true,
+	"scale": 0.65,
+	"bossIntro": "The hunt is the only truth. The predator is the only king.",
+	"bossInsult": "Submit to the hunger. Become part of the machine.",
+	"difficulty": 0.5,
+	"speed": 25,
+	"life": 80,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.75,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"rare",
+				"mythicrare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "W",
+	"questTags": [
+		"Phyrexian",
+		"Copper Host",
+		"Humanoid"
+	]
+},
+{
+	"name": "Nissa",
+	"sprite": "sprites/enemy/humanoid/elf/nissa.atlas",
+	"deck": [
+		"decks/standard/copperhostbrutalizer.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.1,
+	"boss": true,
+	"scale": 0.5,
+	"bossIntro": "I am Nissa Revane, and I am the soul of this world!",
+	"bossInsult": "The ground of this plane is not a weapon... But it will defend itself.",
+	"difficulty": 0.5,
+	"speed": 25,
+	"life": 80,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.75,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"rare",
+				"mythicrare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "W",
+	"questTags": [
+		"Phyrexian",
+		"Copper Host",
+		"Humanoid"
+	]
+},
+{
+	"name": "Kozilek",
+	"sprite": "sprites/enemy/aberration/eldrazi/kozilek.atlas",
+	"deck": [
+		"decks/standard/copperhostbrutalizer.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.1,
+	"boss": true,
+	"scale": 1,
+	"bossIntro": "Your 'truth' is a thin veil over a void that is hungry. I am the hand that pulls the thread.",
+	"bossInsult": "Your reality is a structure of glass. I am the rock.",
+	"difficulty": 0.5,
+	"speed": 25,
+	"life": 80,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.75,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"rare",
+				"mythicrare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "W",
+	"questTags": [
+		"Phyrexian",
+		"Copper Host",
+		"Humanoid"
+	]
 }
 ]

@@ -421,17 +421,23 @@ public class DuelScene extends ForgeScene {
                 this.AIExtras = aiCards;
                 deck = deckProxy.getDeck();
             } else if (this.arenaBattleChallenge) {
-                deck = Aggregates.random(DeckProxy.getAllGeneticAIDecks()).getDeck();
+                if (Config.instance().getConfigData().enableGeneticAI) {
+                    deck = Aggregates.random(DeckProxy.getAllGeneticAIDecks()).getDeck();
+                } else {
+                    deck = currentEnemy.generateDeck(Current.player().isFantasyMode(), false);
+                }
             } else if (this.eventData != null) {
                 deck = eventData.nextOpponent.getDeck();
             } else {
-                deck = currentEnemy.copyPlayerDeck ? this.playerDeck : currentEnemy.generateDeck(Current.player().isFantasyMode(), Current.player().isUsingCustomDeck() || Current.player().isHardorInsaneDifficulty());
+                boolean useGeneticAI = Config.instance().getConfigData().enableGeneticAI && (Current.player().isUsingCustomDeck() || Current.player().isHardorInsaneDifficulty());
+                deck = currentEnemy.copyPlayerDeck ? this.playerDeck : currentEnemy.generateDeck(Current.player().isFantasyMode(), useGeneticAI);
             }
             if (deck == null) {
                 isDeckMissing = true;
-                isDeckMissingMsg = "Deck for " + currentEnemy.getName() + " is missing! " + (this.eventData == null ? "Genetic AI deck will be used." : "Player deck will be used.");
+                boolean canUseGeneticAI = Config.instance().getConfigData().enableGeneticAI;
+                isDeckMissingMsg = "Deck for " + currentEnemy.getName() + " is missing! " + (this.eventData == null ? (canUseGeneticAI ? "Genetic AI deck will be used." : "Player deck will be used.") : "Player deck will be used.");
                 System.err.println(isDeckMissingMsg);
-                deck = this.eventData == null ? Aggregates.random(DeckProxy.getAllGeneticAIDecks()).getDeck() : this.playerDeck;
+                deck = this.eventData == null && canUseGeneticAI ? Aggregates.random(DeckProxy.getAllGeneticAIDecks()).getDeck() : this.playerDeck;
             }
             RegisteredPlayer aiPlayer = RegisteredPlayer.forVariants(playerCount, appliedVariants, deck, null, false, null, null);
 
