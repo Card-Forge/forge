@@ -41,7 +41,7 @@
    ] }
 
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Command Tower|CM1&quot;, &quot;Command Beacon|C15&quot;, &quot;Plaza of Heroes|DMU&quot;, &quot;Helm of the Host|DOM&quot;, &quot;Platinum Angel|MRD&quot;, &quot;Chimil, the Inner Sun|LCI&quot;, &quot;Jodah's Codex|DMU&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Command Tower|CM1&quot;, &quot;Command Beacon|C15&quot;, &quot;Plaza of Heroes|DMU&quot;, &quot;Helm of the Host|DOM&quot;, &quot;Platinum Angel|MRD&quot;, &quot;Jodah's Codex|DMU&quot;]}"/>
     <property name="enemy" value="Jodah"/>
    </properties>
   </object>
