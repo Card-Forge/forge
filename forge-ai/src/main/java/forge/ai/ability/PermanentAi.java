@@ -77,8 +77,7 @@ public class PermanentAi extends SpellAbilityAi {
 
         ManaCost mana = sa.getPayCosts().getTotalMana();
         if (mana.countX() > 0) {
-            // Set PayX here to maximum value.
-            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, false);
+            final int xPay = ComputerUtilCost.setMaxXValue(sa, ai, false);
             if (source.hasConverge()) {
                 int nColors = ComputerUtilMana.getConvergeCount(sa, ai);
                 for (int i = 1; i <= xPay; i++) {
@@ -91,11 +90,8 @@ public class PermanentAi extends SpellAbilityAi {
                         break;
                     }
                 }
-            } else {
-                if (xPay <= 0) {
-                    return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
-                }
-                sa.setXManaCostPaid(xPay);
+            } else if (xPay <= 0) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
             }
         } else if (mana.isZero()) {
             // if mana is zero, but card mana cost does have X, then something is wrong
@@ -112,7 +108,7 @@ public class PermanentAi extends SpellAbilityAi {
 
             int generic = paidCost.getGenericManaAmount();
             // Set PayX here to maximum value.
-            int xPay = ComputerUtilCost.getMaxXValue(sa, ai, false);
+            int xPay = ComputerUtilCost.setMaxXValue(sa, ai, false);
             // currently cards with SacToReduceCost reduce by 2 generic
             xPay = Math.min(xPay, generic / 2);
             sa.setXManaCostPaid(xPay);

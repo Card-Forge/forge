@@ -78,7 +78,7 @@ Prevents text-changing effects from affecting the ability.
 
 Only needed if the card text doesn't contain the type/color words but the ability still needs to use them (e.g. "for each color ...").
 
-## AI params
+## Generic AI params
 * `IsCurse$ True` - for effects that are normally treated positive e.g. Pump
 
 * `AICheckSVar$ {Count}`

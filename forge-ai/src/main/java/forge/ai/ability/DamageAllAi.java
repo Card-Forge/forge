@@ -32,7 +32,7 @@ public class  DamageAllAi extends SpellAbilityAi {
         	dmg = ComputerUtilMana.getConvergeCount(sa, ai);
         }
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
-            x = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
+            x = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
         }
         if (x == -1) {
             if (determineOppToKill(ai, sa, source, dmg) != null) {
@@ -43,9 +43,8 @@ public class  DamageAllAi extends SpellAbilityAi {
             // creatures + player, e.g. Pestilence, etc.)
              if (evaluateDamageAll(ai, sa, source, dmg) > 0) {
                  return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-             } else {
-                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
              }
+             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         } else {
             int best = -1, best_x = -1;
             Player bestOpp = determineOppToKill(ai, sa, source, x);
@@ -182,9 +181,7 @@ public class  DamageAllAi extends SpellAbilityAi {
         final String damage = sa.getParam("NumDmg");
         int dmg;
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
-            // Set PayX here to maximum value.
-            dmg = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
-            sa.setXManaCostPaid(dmg);
+            dmg = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
         } else {
             dmg = AbilityUtils.calculateAmount(source, damage, sa);
         }
@@ -258,7 +255,7 @@ public class  DamageAllAi extends SpellAbilityAi {
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")
                 && sa.getPayCosts() != null && sa.getPayCosts().hasXInAnyCostPart()) {
             // Set PayX here to maximum value.
-            dmg = ComputerUtilCost.getMaxXValue(sa, ai, true);
+            dmg = ComputerUtilCost.setMaxXValue(sa, ai, true);
             sa.setXManaCostPaid(dmg);
         } else {
             dmg = AbilityUtils.calculateAmount(source, damage, sa);
