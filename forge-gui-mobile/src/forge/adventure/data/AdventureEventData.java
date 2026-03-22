@@ -490,12 +490,19 @@ public class AdventureEventData implements Serializable {
 
         String[] ret = new String[numBoosters];
 
-        for (int i = 0; i < numBoosters; i++) {
-            if (i < selectedBlock.getNumberSets())
-                ret[i] = selectedBlock.getSets().get(i).getCode();
-            else
-                ret[i] = Aggregates.random(selectedBlock.getSets()).getCode();
+        if (format ==  AdventureEventController.EventFormat.Sealed) {
+            for (int i = 0; i < numBoosters; i++) {
+                ret[i] = selectedBlock.getSets().get(i % selectedBlock.getNumberSets()).getCode();
+            }
+        } else {
+            for (int i = 0; i < numBoosters; i++) {
+                if (i < selectedBlock.getNumberSets())
+                    ret[i] = selectedBlock.getSets().get(i).getCode();
+                else
+                    ret[i] = Aggregates.random(selectedBlock.getSets()).getCode();
+            }
         }
+
         MyRandom.setRandom(placeholder);
         return ret;
     }
