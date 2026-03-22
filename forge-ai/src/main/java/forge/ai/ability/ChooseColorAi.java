@@ -37,8 +37,7 @@ public class ChooseColorAi extends SpellAbilityAi {
             if (ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
             }
-            // Set PayX here to maximum value.
-            sa.setXManaCostPaid(ComputerUtilCost.getMaxXValue(sa, ai, false));
+            ComputerUtilCost.setMaxXValue(sa, ai, false);
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 

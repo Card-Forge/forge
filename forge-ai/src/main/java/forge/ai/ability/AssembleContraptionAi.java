@@ -15,34 +15,6 @@ import forge.game.zone.ZoneType;
 import java.util.List;
 
 public class AssembleContraptionAi extends SpellAbilityAi {
-    @Override
-    protected AiAbilityDecision canPlay(Player ai, SpellAbility sa) {
-        CardCollectionView deck = getDeck(ai, sa);
-
-        if(deck.isEmpty())
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-
-        AiAbilityDecision superDecision = super.canPlay(ai, sa);
-        if (!superDecision.willingToPlay())
-            return superDecision;
-
-        if ("X".equals(sa.getParam("Amount")) && sa.getSVar("X").equals("Count$xPaid")) {
-            int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
-            xPay = Math.max(xPay, deck.size());
-            if (xPay == 0) {
-                return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
-            }
-            sa.getRootAbility().setXManaCostPaid(xPay);
-        }
-
-        if(sa.hasParam("DefinedContraption") && sa.usesTargeting()) {
-            if (getGoodReassembleTarget(ai, sa) == null) {
-                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
-            }
-        }
-
-        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-    }
 
     private static CardCollectionView getDeck(Player ai, SpellAbility sa) {
         return ai.getCardsIn(sa.getApi() == ApiType.OpenAttraction ?
@@ -51,17 +23,21 @@ public class AssembleContraptionAi extends SpellAbilityAi {
 
     @Override
     protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
+        CardCollectionView deck = getDeck(ai, sa);
+
+        if (deck.isEmpty())
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+
         if ("X".equals(sa.getParam("Amount")) && sa.getSVar("X").equals("Count$xPaid")) {
-            int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
+            int xPay = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
             if (xPay == 0) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
-            sa.getRootAbility().setXManaCostPaid(xPay);
         }
 
-        if(sa.hasParam("DefinedContraption") && sa.usesTargeting()) {
+        if (sa.hasParam("DefinedContraption") && sa.usesTargeting()) {
             Card target = getGoodReassembleTarget(ai, sa);
-            if(target != null)
+            if (target != null)
                 sa.getTargets().add(target);
             else
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
@@ -86,15 +62,8 @@ public class AssembleContraptionAi extends SpellAbilityAi {
     }
 
     @Override
-    protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
-        if(!mandatory && getDeck(aiPlayer, sa).isEmpty())
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        return super.doTriggerNoCost(aiPlayer, sa, mandatory);
-    }
-
-    @Override
     public AiAbilityDecision chkDrawback(Player aiPlayer, SpellAbility sa) {
-        if(getDeck(aiPlayer, sa).isEmpty())
+        if (getDeck(aiPlayer, sa).isEmpty())
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         return super.chkDrawback(aiPlayer, sa);
     }
