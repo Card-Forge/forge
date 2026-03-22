@@ -88,8 +88,7 @@ public class TokenAi extends SpellAbilityAi {
                 x = ComputerUtilMana.getConvergeCount(sa, ai);
             }
             if (sa.getSVar("X").equals("Count$xPaid")) {
-                // Set PayX here to maximum value.
-                x = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
+                x = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
                 sa.getRootAbility().setXManaCostPaid(x);
             }
             if (x <= 0) {
@@ -283,9 +282,7 @@ public class TokenAi extends SpellAbilityAi {
             int x = AbilityUtils.calculateAmount(source, tokenAmount, sa);
             if (sa.getSVar("X").equals("Count$xPaid")) {
                 if (x == 0) { // already paid outside trigger
-                    // Set PayX here to maximum value.
-                    x = ComputerUtilCost.getMaxXValue(sa, ai, true);
-                    sa.setXManaCostPaid(x);
+                    x = ComputerUtilCost.setMaxXValue(sa, ai, true);
                 }
             }
             if (x <= 0 && !mandatory) {

@@ -135,10 +135,7 @@ public class LifeGainAi extends SpellAbilityAi {
         boolean activateForCost = ComputerUtil.activateForCost(sa, ai);
         if (sourceName.equals("Dawnglow Infusion")
                 || (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid"))) {
-            // Set PayX here to maximum value.
-            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
-            sa.setXManaCostPaid(xPay);
-            lifeAmount = xPay;
+            lifeAmount = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
         } else {
             lifeAmount = AbilityUtils.calculateAmount(source, amountStr, sa);
         }
@@ -207,10 +204,8 @@ public class LifeGainAi extends SpellAbilityAi {
         }
 
         final String amountStr = sa.getParam("LifeAmount");
-        if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
-            // Set PayX here to maximum value.
-            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, true);
-            sa.setXManaCostPaid(xPay);
+        if (amountStr.equals("X")) {
+            ComputerUtilCost.setMaxXValue(sa, ai, true);
         }
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);

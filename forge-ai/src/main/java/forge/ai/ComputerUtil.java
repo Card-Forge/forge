@@ -315,12 +315,10 @@ public class ComputerUtil {
                         }
 
                         if (!prefList.isEmpty() || (overrideList != null && !overrideList.isEmpty())) {
-                            boolean isBestAI = "true".equalsIgnoreCase(activate.getSVar("AIPreferBestCard"));
-                            if (isBestAI) {
+                            if ("true".equalsIgnoreCase(activate.getSVar("AIPreferBestCard"))) {
                                 return ComputerUtilCard.getBestAI(overrideList == null ? prefList : overrideList);
-                            } else {
-                                return ComputerUtilCard.getWorstAI(overrideList == null ? prefList : overrideList);
                             }
+                            return ComputerUtilCard.getWorstAI(overrideList == null ? prefList : overrideList);
                         }
                     }
                 }
@@ -343,28 +341,30 @@ public class ComputerUtil {
                 if (!sacMeList.isEmpty()) {
                     CardLists.shuffle(sacMeList);
                     return sacMeList.getFirst();
-                } else {
-                    // empty sacMeList, so get some viable average preference if the option is enabled
-                    boolean enableDefaultPref = AiProfileUtil.getBoolProperty(ai, AiProps.SACRIFICE_DEFAULT_PREF_ENABLE);
-                    if (enableDefaultPref) {
-                        int minCMC = AiProfileUtil.getIntProperty(ai, AiProps.SACRIFICE_DEFAULT_PREF_MIN_CMC);
-                        int maxCMC = AiProfileUtil.getIntProperty(ai, AiProps.SACRIFICE_DEFAULT_PREF_MAX_CMC);
-                        int maxCreatureEval = AiProfileUtil.getIntProperty(ai, AiProps.SACRIFICE_DEFAULT_PREF_MAX_CREATURE_EVAL);
-                        boolean allowTokens = AiProfileUtil.getBoolProperty(ai, AiProps.SACRIFICE_DEFAULT_PREF_ALLOW_TOKENS);
-                        List<String> dontSac = Arrays.asList("Black Lotus", "Mox Pearl", "Mox Jet", "Mox Emerald", "Mox Ruby", "Mox Sapphire", "Lotus Petal");
-                        CardCollection allowList = CardLists.filter(typeList, card -> {
-                            if (card.isCreature() && ComputerUtilCard.evaluateCreature(card) > maxCreatureEval) {
-                                return false;
-                            }
+                }
+            }
 
-                            return (allowTokens && card.isToken())
-                                    || (card.getCMC() >= minCMC && card.getCMC() <= maxCMC && !dontSac.contains(card.getName()));
-                        });
-                        if (!allowList.isEmpty()) {
-                            CardLists.sortByCmcDesc(allowList);
-                            return allowList.getLast();
-                        }
+            if (AiProfileUtil.getBoolProperty(ai, AiProps.SACRIFICE_DEFAULT_PREF_ENABLE)) {
+                int minCMC = AiProfileUtil.getIntProperty(ai, AiProps.SACRIFICE_DEFAULT_PREF_MIN_CMC);
+                int maxCMC = AiProfileUtil.getIntProperty(ai, AiProps.SACRIFICE_DEFAULT_PREF_MAX_CMC);
+                int maxCreatureEval = AiProfileUtil.getIntProperty(ai, AiProps.SACRIFICE_DEFAULT_PREF_MAX_CREATURE_EVAL);
+                boolean allowTokens = AiProfileUtil.getBoolProperty(ai, AiProps.SACRIFICE_DEFAULT_PREF_ALLOW_TOKENS);
+                List<String> dontSac = Arrays.asList("Black Lotus", "Mox Pearl", "Mox Jet", "Mox Emerald", "Mox Ruby", "Mox Sapphire", "Lotus Petal");
+                CardCollection allowList = CardLists.filter(typeList, card -> {
+                    if (card.isCreature() && ComputerUtilCard.evaluateCreature(card) > maxCreatureEval) {
+                        return false;
                     }
+
+                    if (card.hasKeyword(Keyword.DISTURB) || card.hasKeyword(Keyword.ESCAPE) || card.hasKeyword(Keyword.DISTURB)) {
+                        return true;
+                    }
+
+                    return (allowTokens && card.isToken())
+                            || (card.getCMC() >= minCMC && card.getCMC() <= maxCMC && !dontSac.contains(card.getName()));
+                });
+                if (!allowList.isEmpty()) {
+                    CardLists.sortByCmcDesc(allowList);
+                    return allowList.getLast();
                 }
             }
 
@@ -435,7 +435,6 @@ public class ComputerUtil {
                 }
             }
 
-            // Survival of the Fittest logic
             if (prefDef.contains("DiscardCost$Special:SurvivalOfTheFittest")) {
                 return SpecialCardAi.SurvivalOfTheFittest.considerDiscardTarget(ai);
             }
@@ -448,9 +447,15 @@ public class ComputerUtil {
                 final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, Card::getCMC));
                 if (numLandsInPlay >= highestCMC
                         || (numLandsInPlay + landsInHand.size() > 6 && landsInHand.size() > 1)) {
-                    // Don't need more land.
+                    // Don't need more land
                     return ComputerUtilCard.getWorstLand(landsInHand);
                 }
+            }
+
+            CardCollection replayKW = typeList.filter(c -> c.hasKeyword(Keyword.DISTURB) || c.hasKeyword(Keyword.ESCAPE) || c.hasKeyword(Keyword.DISTURB)
+                    || c.hasKeyword(Keyword.FLASHBACK));
+            if (!replayKW.isEmpty()) {
+                return Aggregates.random(replayKW);
             }
 
             // try everything when about to die

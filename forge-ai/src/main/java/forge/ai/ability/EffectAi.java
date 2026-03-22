@@ -28,7 +28,6 @@ import forge.game.zone.MagicStack;
 import forge.game.zone.ZoneType;
 import forge.util.FileSection;
 import forge.util.MyRandom;
-import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 
 import java.util.ArrayList;
@@ -687,19 +686,6 @@ public class EffectAi extends SpellAbilityAi {
                 }
                 String valid = subAbility.getParamOrDefault("ValidCards", "");
 
-                // Ugh. If calculateAmount needs to be called with DestroyAll it _needs_
-                // to use the X variable
-                // We really need a better solution to this
-                if (valid.contains("X")) {
-                    valid = TextUtil.fastReplace(valid,
-                            "X", Integer.toString(AbilityUtils.calculateAmount(subAbility.getHostCard(), "X", subAbility)));
-                }
-
-                // host card is valid
-                if (host.isValid(valid.split(","), subAbility.getActivatingPlayer(), subAbility.getHostCard(), subAbility)) {
-                    return true;
-                }
-                // failed to check via valid, need to pass through the filterList method
                 CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);
 
                 if (subAbility.usesTargeting()) {

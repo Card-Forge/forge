@@ -32,6 +32,28 @@ import forge.util.TextUtil;
 
 public class ComputerUtilCost {
 
+    public static boolean checkExileFromGraveCost(final Cost cost, final Player payer, final SpellAbility sa) {
+        CardCollection payingCards = new CardCollection();
+        int needed = 0;
+        for (final CostPart part : cost.getCostParts()) {
+            if (part instanceof CostExile) {
+                if (part.payCostFromSource()) {
+                    continue;
+                }
+                int amt = part.getAbilityAmount(sa);
+                needed += amt;
+                CardCollection toAdd = ComputerUtil.chooseExileFrom(payer, (CostExile) part, sa.getHostCard(), amt, sa, true);
+                if (toAdd != null) {
+                    payingCards.addAll(toAdd);
+                }
+            }
+        }
+        if (payingCards.size() < needed) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * Check add m1 m1 counter cost.
      *
@@ -644,12 +666,13 @@ public class ComputerUtilCost {
         return false;
     }
 
-    public static int getMaxXValue(SpellAbility sa, Player ai, final boolean effect) {
+    public static int setMaxXValue(SpellAbility sa, Player ai, final boolean effect) {
         final Card source = sa.getHostCard();
         SpellAbility root = sa.getRootAbility();
         final Cost abCost = root.getPayCosts();
 
-        if (abCost == null || !abCost.hasXInAnyCostPart()) {
+        // check that X is really free choice
+        if (abCost == null || !abCost.hasXInAnyCostPart() || !sa.getSVar("X").equals("Count$xPaid")) {
             return 0;
         }
 
@@ -657,16 +680,10 @@ public class ComputerUtilCost {
 
         if (root.costHasManaX()) {
             val = ComputerUtilMana.determineLeftoverMana(root, ai, effect);
-
-            if (sa.hasParam("AIMaxTgtCost")) {
-                String value = sa.getParam("AIMaxTgtCost");
-                String svar = source.getSVar(value);
-                if (svar.contains("LeftoverMana")) {
-                    // limit the CMC to available mana
-                    svar = svar.replace("LeftoverMana", ""+val);
-                }
-                int calculated = AbilityUtils.calculateAmount(source, svar, sa);
-                val = ObjectUtils.min(val, calculated);
+            if (sa.hasParam("AIXMax")) {
+                sa.setXManaCostPaid(val);
+                int calculated = AbilityUtils.calculateAmount(source, sa.getParam("AIXMax"), sa);
+                val = Math.min(val, calculated);
             }
         }
 
@@ -711,7 +728,10 @@ public class ComputerUtilCost {
                 }
             }
         }
-        return ObjectUtils.defaultIfNull(val, 0);
+
+        int x = ObjectUtils.defaultIfNull(val, 0);
+        sa.setXManaCostPaid(x);
+        return x;
     }
 
     public static CardCollection paymentChoicesWithoutTargets(Iterable<Card> choices, SpellAbility source, Player ai) {
