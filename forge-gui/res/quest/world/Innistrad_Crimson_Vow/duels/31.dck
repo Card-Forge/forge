@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Seth
+Title=Seth
+Icon=Seth.jpg
+Difficulty=Easy
+Description=./Standard/Innistrad_Crimson_Vow/Felix_Hinderer_-_Naya_Werewolves_(Standard,_#1235964).dck
+Deck Type=constructed
+
+[Main]
+4 Tovolar, Dire Overlord
+4 Reckless Stormseeker
+4 Brutal Cathar
+4 Kessig Naturalist
+4 Werewolf Pack Leader
+2 Portable Hole
+2 Esika's Chariot
+2 Snakeskin Veil
+1 Paladin Class
+1 Unnatural Growth
+3 Ranger Class
+4 Showdown of the Skalds
+1 Plains
+4 Lair of the Hydra
+4 Cragcrown Pathway
+4 Rockfall Vale
+4 Needleverge Pathway
+4 Branchloft Pathway
+4 Overgrown Farmland
+[Sideboard]
+1 Lantern of the Lost
+1 Snakeskin Veil
+1 Paladin Class
+2 Outland Liberator
+2 Toski, Bearer of Secrets
+2 Portable Hole
+3 Cinderclasm
+3 Burning Hands

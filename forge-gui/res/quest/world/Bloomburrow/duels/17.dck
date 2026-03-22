@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Uncle Owen
+Title=Uncle Owen
+Icon=Uncle Owen.jpg
+Difficulty=Medium
+Description=./Standard/Bloomburrow/Hosokawa_Yuya_-_RG_Aggro_(Standard,_#2190879).dck
+Deck Type=constructed
+
+[Main]
+4 Monastery Swiftspear
+2 Questing Druid
+2 Slickshot Show-Off
+4 Emberheart Challenger
+4 Heartfire Hero
+4 Manifold Mouse
+1 Urabrask's Forge
+3 Shock
+2 Snakeskin Veil
+4 Monstrous Rage
+3 Witchstalker Frenzy
+4 Might of the Meek
+2 Innkeeper's Talent
+7 Mountain
+4 Karplusan Forest
+4 Copperline Gorge
+3 Restless Ridgeline
+1 Commercial District
+2 Rockface Village
+[Sideboard]
+1 Shock
+1 Obliterating Bolt
+3 Urabrask's Forge
+2 Questing Druid
+3 Tectonic Hazard
+3 Pick Your Poison
+2 Scorching Shot

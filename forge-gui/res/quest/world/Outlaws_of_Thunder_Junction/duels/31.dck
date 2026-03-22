@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Tibalt
+Title=Tibalt
+Icon=Tibalt.jpg
+Difficulty=Easy
+Description=./Standard/Outlaws_of_Thunder_Junction/AlexanderB4_-_Azorius_Control_(Standard,_#2063676).dck
+Deck Type=constructed
+
+[Main]
+1 Tishana's Tidebinder
+4 No More Lies
+4 Three Steps Ahead
+4 Memory Deluge
+4 Deduce
+3 March of Otherworldly Light
+2 Get Lost
+2 Sunfall
+1 Farewell
+1 Depopulate
+2 Temporary Lockdown
+1 Jace, the Perfected Mind
+4 The Wandering Emperor
+4 Deserted Beach
+4 Island
+4 Plains
+4 Field of Ruin
+2 Adarkar Wastes
+2 Seachrome Coast
+1 Mirrex
+4 Restless Anchorage
+1 Eiganjo, Seat of the Empire
+1 Otawara, Soaring City
+[Sideboard]
+2 Temporary Lockdown
+2 Tishana's Tidebinder
+1 Elesh Norn, Mother of Machines
+1 Dust Animus
+2 Kutzil's Flanker
+1 Hullbreaker Horror
+2 Knockout Blow
+1 Negate
+1 Unlicensed Hearse
+2 Cryptic Coat

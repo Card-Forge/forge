@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Wilhelm Grimm
+Title=Wilhelm Grimm
+Icon=Wilhelm Grimm.jpg
+Difficulty=Easy
+Description=./Standard/The_Brothers_War/Abe_Kenichi_-_UBR_Junk_(Standard,_#1529605).dck
+Deck Type=constructed
+
+[Main]
+2 Bladecoil Serpent
+4 Corpse Appraiser
+4 Fable of the Mirror-Breaker
+4 Bloodtithe Harvester
+3 Reckoner Bankbuster
+1 Siphon Insight
+2 Cut Down
+3 Make Disappear
+3 Go for the Throat
+3 Abrade
+4 Invoke Despair
+1 Otawara, Soaring City
+1 Takenuma, Abandoned Mire
+4 Xander's Lounge
+4 Shipwreck Marsh
+4 Haunted Ridge
+4 Sulfurous Springs
+4 Shivan Reef
+5 Swamp
+[Sideboard]
+1 Cut Down
+1 Soul Transfer
+1 Siphon Insight
+1 Abrade
+1 Negate
+2 Brotherhood's End
+2 Duress
+3 Sheoldred, the Apocalypse
+3 Disdainful Stroke

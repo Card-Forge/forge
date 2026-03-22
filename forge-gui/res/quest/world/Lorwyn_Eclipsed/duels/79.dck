@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=King Kong
+Title=King Kong
+Icon=King Kong.jpg
+Difficulty=Very Hard
+Description=./Modern/Lorwyn_Eclipsed/BM8558_-_Sultai_Living_End_(Modern,_#2819660).dck
+Deck Type=constructed
+
+[Main]
+4 Endurance
+4 Generous Ent
+4 Overlord of the Balemurk
+4 Shardless Agent
+4 Street Wraith
+4 Subtlety
+4 Wistfulness
+3 Deceit
+3 Formidable Speaker
+1 Halo Forager
+1 Troll of Khazad-dûm
+3 Force of Negation
+1 Flare of Denial
+1 Press the Enemy
+1 Sink into Stupor
+3 Living End
+4 Polluted Delta
+1 Breeding Pool
+1 Forest
+1 Hedge Maze
+1 Island
+1 Mistrise Village
+1 Otawara, Soaring City
+1 Overgrown Tomb
+1 Swamp
+1 Undercity Sewers
+1 Underground Mortuary
+1 Watery Grave
+[Sideboard]
+4 Mystical Dispute
+2 Culling Ritual
+2 Force of Vigor
+2 Harvester of Misery
+2 Inevitable Betrayal
+1 Damping Sphere
+1 Foundation Breaker
+1 Mai, Scornful Striker

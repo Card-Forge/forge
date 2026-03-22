@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Shaitan
+Title=Shaitan
+Icon=Shaitan.jpg
+Difficulty=Very Hard
+Description=../Modern/Dragons_of_Tarkir/States_West_Jordan/Oliver_Vazquez_-_Four-Color_Burn_(Modern,_#225288).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+4 Monastery Swiftspear
+4 Boros Charm
+4 Lightning Bolt
+4 Lightning Helix
+3 Searing Blaze
+4 Skullcrack
+2 Thunderous Wrath
+4 Lava Spike
+4 Rift Bolt
+1 Myth Realized
+1 Arid Mesa
+2 Blood Crypt
+4 Bloodstained Mire
+4 Mountain
+3 Sacred Foundry
+1 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+2 Deflecting Palm
+4 Destructive Revelry
+3 Path to Exile
+2 Rakdos Charm
+2 Smash to Smithereens

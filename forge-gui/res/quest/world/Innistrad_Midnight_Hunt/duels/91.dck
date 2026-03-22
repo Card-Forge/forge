@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Chief_Wiggum
+Title=Chief_Wiggum
+Icon=Chief_Wiggum.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Midnight_Hunt/Shimotani_Kazuki_-_Tribal_Zoo_(Modern,_#1228966).dck
+Deck Type=constructed
+
+[Main]
+1 Omnath, Locus of Creation
+4 Territorial Kavu
+4 Shardless Agent
+4 Bloodbraid Elf
+4 General Ferrous Rokiric
+4 Scion of Draco
+4 Mantis Rider
+4 Lightning Helix
+4 Lightning Bolt
+4 Tribal Flames
+1 Snow-Covered Forest
+1 Snow-Covered Plains
+1 Savai Triome
+1 Zagoth Triome
+1 Temple Garden
+1 Stomping Ground
+1 Breeding Pool
+2 Misty Rainforest
+2 Steam Vents
+2 Sacred Foundry
+3 Wooded Foothills
+3 Flooded Strand
+4 Windswept Heath
+[Sideboard]
+1 Lavinia, Azorius Renegade
+2 Stony Silence
+2 Drannith Magistrate
+2 Teferi, Time Raveler
+2 Sunset Revelry
+3 Rest in Peace
+3 Alpine Moon

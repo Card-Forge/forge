@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Gruul-precon
+Title=Gruul-precon
+Icon=Gruul-precon.jpg
+Difficulty=Hard
+Description=../Modern/Oath_of_the_Gatewatch/Liga_Modern_Premium_UG_EVO_Central/David_M_-_Goblins_(Modern,_#632202).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Foundry Street Denizen
+1 Frenzied Goblin
+4 Goblin Bushwhacker
+2 Goblin Chieftain
+4 Goblin Guide
+3 Goblin Piledriver
+4 Legion Loyalist
+3 Mogg Fanatic
+4 Mogg War Marshal
+4 Reckless Bushwhacker
+4 Lightning Bolt
+4 Goblin Grenade
+3 Cavern of Souls
+16 Mountain
+[Sideboard]
+2 Dragon's Claw
+2 Forked Bolt
+4 Smash to Smithereens
+3 Tormod's Crypt

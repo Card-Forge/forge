@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Oya
+Title=Oya
+Icon=Oya.jpg
+Difficulty=Very Hard
+Description=../Modern/Battle_for_Zendikar/Standard_Constructed_League/agebolter711_-_agebolter711_(5-0)_(Modern,_#519319).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Anafenza, the Foremost
+2 Den Protector
+4 Hangarback Walker
+4 Siege Rhino
+4 Warden of the First Tree
+2 Wingmate Roc
+4 Abzan Charm
+2 Dromoka's Command
+2 Murderous Cut
+2 Silkwrap
+4 Gideon, Ally of Zendikar
+2 Canopy Vista
+4 Flooded Strand
+2 Forest
+2 Llanowar Wastes
+2 Plains
+4 Shambling Vent
+1 Smoldering Marsh
+1 Sunken Hollow
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+2 Duress
+2 Hallowed Moonlight
+3 Infinite Obliteration
+2 Painful Truths
+1 Planar Outburst
+2 Rising Miasma
+3 Surge of Righteousness

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Tarzan
+Title=Tarzan
+Icon=Tarzan.jpg
+Difficulty=Medium
+Description=./Standard/Strixhaven_School_of_Mages/Daniel_Carletti_-_Naya_Aggro_(Standard,_#1168518).dck
+Deck Type=constructed
+
+[Main]
+1 Jegantha, the Wellspring
+2 Drannith Magistrate
+2 Clarion Spirit
+3 Tangled Florahedron
+4 Edgewall Innkeeper
+4 Elite Spellbinder
+4 Bonecrusher Giant
+4 Giant Killer
+4 Jaspera Sentinel
+4 Lovestruck Beast
+2 The Akroan War
+4 Showdown of the Skalds
+1 Mountain
+3 Plains
+3 Forest
+4 Fabled Passage
+4 Needleverge Pathway
+4 Branchloft Pathway
+4 Cragcrown Pathway
+[Sideboard]
+1 Redcap Melee
+1 Jegantha, the Wellspring
+2 Run Afoul
+2 Reidane, God of the Worthy
+2 Ox of Agonas
+2 Klothys, God of Destiny
+2 Fire Prophecy
+3 Glass Casket

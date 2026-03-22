@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Mines of Kazum Durl
+Title=Mines of Kazum Durl
+Icon=Mines of Kazum Durl.jpg
+Difficulty=Medium
+Description=./Standard/The_Brothers_War/Isizima_Kazuya_-_Mono_White_(Standard,_#1527694).dck
+Deck Type=constructed
+
+[Main]
+1 Loran of the Third Path
+1 Steel Seraph
+1 Cathar Commando
+2 Serra Paragon
+2 Anointed Peacekeeper
+2 Sanctuary Warden
+2 Ao, the Dawn Sky
+2 Ambitious Farmhand
+3 Spirited Companion
+4 Reckoner Bankbuster
+1 March of Otherworldly Light
+1 Fateful Absence
+2 Destroy Evil
+4 Lay Down Arms
+4 Wedding Announcement
+4 The Wandering Emperor
+1 Mishra's Foundry
+1 Eiganjo, Seat of the Empire
+4 Roadside Reliquary
+18 Plains
+[Sideboard]
+1 Elspeth Resplendent
+1 Fateful Absence
+1 Banishing Slash
+2 Unlicensed Hearse
+2 Farewell
+2 Runic Shot
+2 Fleeting Spirit
+2 Temporary Lockdown
+2 Loran of the Third Path

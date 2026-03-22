@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Sideshow Bob
+Title=Sideshow Bob
+Icon=Sideshow Bob.jpg
+Difficulty=Hard
+Description=../Modern/Dark_Ascension/SCG_Invitational_Qualifier_-_Lincoln,_Nebraska/Adam_Hodge_-_Rogue_(Modern,_#29044).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Birds of Paradise
+4 Bloodbraid Elf
+4 Boggart Ram-Gang
+4 Goblin Ruinblaster
+3 Llanowar Elves
+4 Strangleroot Geist
+4 Lightning Bolt
+4 Boom // Bust
+2 Flame Slash
+4 Molten Rain
+5 Forest
+4 Misty Rainforest
+1 Mountain
+4 Rootbound Crag
+3 Stomping Ground
+2 Treetop Village
+4 Verdant Catacombs
+[Sideboard]
+3 Ancient Grudge
+2 Choke
+3 Combust
+1 Grafdigger's Cage
+3 Kitchen Finks
+2 Relic of Progenitus

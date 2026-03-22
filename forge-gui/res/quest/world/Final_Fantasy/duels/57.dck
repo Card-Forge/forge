@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Samwise Gamgee
+Title=Samwise Gamgee
+Icon=Samwise Gamgee.jpg
+Difficulty=Very Hard
+Description=./Modern/Final_Fantasy/demonictutors_-_Golgari_Yawgmoth_(Modern,_#2517106).dck
+Deck Type=constructed
+
+[Main]
+4 Delighted Halfling
+1 Endurance
+1 Haywire Mite
+1 Sephiroth, Fabled SOLDIER
+1 Walking Ballista
+4 Wall of Roots
+4 Yawgmoth, Thran Physician
+4 Young Wolf
+4 Agatha's Soul Cauldron
+3 Chord of Calling
+4 Green Sun's Zenith
+4 Malevolent Rumble
+1 Dredger's Insight
+2 Grist, the Hunger Tide
+3 Boseiju, Who Endures
+1 Dryad Arbor
+2 Forest
+2 Overgrown Tomb
+1 Shifting Woodland
+1 Swamp
+1 Underground Mortuary
+4 Verdant Catacombs
+4 Wastewood Verge
+2 Windswept Heath
+1 Wooded Foothills
+[Sideboard]
+2 Endurance
+3 Fatal Push
+2 Force of Vigor
+4 Fulminator Mage
+1 Scavenging Ooze
+3 Thoughtseize

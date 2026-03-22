@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Ajok
+Title=Ajok
+Icon=Ajok.jpg
+Difficulty=Hard
+Description=./Modern/Wilds_of_Eldraine/Magicmalle_-_Golgari_Burn_Modern_(Modern,_#1730133).dck
+Deck Type=constructed
+
+[Main]
+4 Gnarlwood Dryad
+4 Street Wraith
+2 Death's Shadow
+4 Dash Hopes
+4 Bump in the Night
+4 Witherbloom Command
+2 Tasigur's Cruelty
+1 Brave the Wilds
+1 Smallpox
+1 Soul Reap
+4 Gonti's Machinations
+3 Shrieking Affliction
+4 Hopeless Nightmare
+7 Swamp
+5 Forest
+4 Verdant Catacombs
+2 Boseiju, Who Endures
+[Sideboard]

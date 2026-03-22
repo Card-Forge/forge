@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=Mr Smith
+Title=Mr Smith
+Icon=Mr Smith.jpg
+Difficulty=Easy
+Description=./Standard/Ravnica_Allegiance/Allison_Maino_-_Gr_Aggro_(Standard,_#788745).dck
+Deck Type=constructed
+
+[Main]
+2 Biogenic Ooze
+3 Ghalta, Primal Hunger
+4 Growth-Chamber Guardian
+4 Gruul Spellbreaker
+4 Kraul Harpooner
+4 Llanowar Elves
+2 Merfolk Branchwalker
+4 Nullhide Ferox
+4 Pelt Collector
+4 Steel Leaf Champion
+2 Thrashing Brontodon
+1 Thud
+14 Forest
+4 Rootbound Crag
+4 Stomping Ground
+[Sideboard]

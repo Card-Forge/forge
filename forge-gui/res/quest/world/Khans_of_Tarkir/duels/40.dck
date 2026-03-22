@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Sideshow Bob
+Title=Sideshow Bob
+Icon=Sideshow Bob.jpg
+Difficulty=Easy
+Description=Khans_of_Tarkir/SCG_Invitational_Qualifier_Eugene/Joseph_Torra_-_B-R_Aggro_(Standard,_#172966).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodsoaked Champion
+2 Brain Maggot
+4 Butcher of the Horde
+2 Seeker of the Way
+1 Tymaret, the Murder King
+1 Wingmate Roc
+3 Crackling Doom
+4 Magma Jet
+3 Mardu Charm
+2 Murderous Cut
+1 Utter End
+3 Despise
+3 Read the Bones
+1 Banishing Light
+1 Sarkhan, the Dragonspeaker
+2 Sorin, Solemn Visitor
+2 Battlefield Forge
+4 Bloodstained Mire
+2 Caves of Koilos
+2 Mountain
+4 Nomad Outpost
+3 Swamp
+2 Temple of Silence
+3 Temple of Triumph
+1 Urborg, Tomb of Yawgmoth
+[Sideboard]
+2 Bile Blight
+3 Drown in Sorrow
+1 End Hostilities
+2 Erase
+1 Hushwing Gryff
+4 Nyx-Fleece Ram

@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Spike Spiegel
+Title=Spike Spiegel
+Icon=Spike Spiegel.jpg
+Difficulty=Very Hard
+Description=./Modern/March_of_the_Machine/Brandon_Gille_-_Five-color_Elementals_(Modern,_#1621093).dck
+Deck Type=constructed
+
+[Main]
+2 Elesh Norn, Mother of Machines
+2 Fury
+4 Omnath, Locus of Creation
+4 Risen Reef
+4 Solitude
+3 Seasoned Pyromancer
+1 Endurance
+2 Dead // Gone
+4 Fire // Ice
+4 Leyline Binding
+4 Teferi, Time Raveler
+1 Breeding Pool
+2 Cavern of Souls
+4 Flooded Strand
+1 Godless Shrine
+1 Hallowed Fountain
+1 Ketria Triome
+3 Misty Rainforest
+1 Raugrin Triome
+1 Sacred Foundry
+1 Steam Vents
+1 Stomping Ground
+1 Temple Garden
+4 Windswept Heath
+1 Zagoth Triome
+1 Island
+1 Plains
+1 Forest
+[Sideboard]
+2 Endurance
+2 Force of Vigor
+1 Keruga, the Macrosage
+2 Murderous Cut
+3 Mystical Dispute
+2 Orvar, the All-Form
+1 Force of Negation
+1 Void Rend
+1 Kogla and Yidaro

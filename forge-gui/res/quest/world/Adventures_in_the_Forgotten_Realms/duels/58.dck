@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Rakdos
+Title=Rakdos
+Icon=Rakdos.jpg
+Difficulty=Hard
+Description=./Modern/Adventures_in_the_Forgotten_Realms/Magic_Dan_-_Red_Deck_Wins_(Modern,_#1185716).dck
+Deck Type=constructed
+
+[Main]
+4 Bonecrusher Giant
+4 Soul-Scar Mage
+4 Seasoned Pyromancer
+4 Ragavan, Nimble Pilferer
+4 Monastery Swiftspear
+4 Fury
+4 Spikefield Hazard
+4 Lightning Bolt
+4 Light Up the Stage
+4 Blood Moon
+1 Shinka, the Bloodsoaked Keep
+4 Den of the Bugbear
+15 Mountain
+[Sideboard]
+1 Obosh, the Preypiercer
+2 Kozilek's Return
+4 Shattering Spree
+4 Relic of Progenitus
+4 Void Mirror

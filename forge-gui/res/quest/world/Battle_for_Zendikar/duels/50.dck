@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Solaire
+Title=Solaire
+Icon=Solaire.jpg
+Difficulty=Medium
+Description=Battle_for_Zendikar/PPTQ_Montecatini_Terme_-_La_Rocca_di_Darsheyalon/Massimo_Mustone_-_Abzan_(Standard,_#420421).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Anafenza, the Foremost
+4 Den Protector
+4 Heir of the Wilds
+4 Siege Rhino
+4 Warden of the First Tree
+2 Wingmate Roc
+4 Abzan Charm
+4 Dromoka's Command
+1 Murderous Cut
+3 Gideon, Ally of Zendikar
+2 Canopy Vista
+4 Flooded Strand
+2 Forest
+2 Llanowar Wastes
+2 Plains
+4 Shambling Vent
+1 Smoldering Marsh
+1 Sunken Hollow
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+2 Duress
+2 Self-Inflicted Wound
+3 Silkwrap
+2 Tasigur, the Golden Fang
+3 Transgress the Mind
+2 Ultimate Price

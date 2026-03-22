@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Sisters of Stone Death
+Title=Sisters of Stone Death
+Icon=Sisters of Stone Death.jpg
+Difficulty=Medium
+Description=./Standard/Lorwyn_Eclipsed/Kaneko_Mitsutaka_-_Rakdos_Aggro_(Standard,_#2825695).dck
+Deck Type=constructed
+
+[Main]
+2 Laughing Jasper Flint
+4 Iridescent Vinelasher
+4 Hired Claw
+1 Sunspine Lynx
+4 Fireglass Mentor
+3 Gev, Scaled Scorch
+4 Gastal Thrillseeker
+1 Nova Hellkite
+3 Lightning Strike
+4 Burst Lightning
+2 Hidetsugu's Second Rite
+4 Mornsong Aria
+1 Swamp
+4 Mountain
+4 Blood Crypt
+1 Jagged Barrens
+2 Rockface Village
+4 Blazemire Verge
+4 Starting Town
+4 Multiversal Passage
+[Sideboard]
+2 Duress
+3 Soul-Guide Lantern
+2 Magebane Lizard
+2 Thought-Stalker Warlock
+2 Sunspine Lynx
+1 Ghost Vacuum
+2 Intimidation Tactics
+1 Strategic Betrayal

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Kangee
+Title=Kangee
+Icon=Kangee.jpg
+Difficulty=Easy
+Description=Magic_Origins/SCG_Invitational_Qualifier_Minneapolis/Bryan_Weilenman_-_Abzan_Aggro_(Standard,_#313754).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Anafenza, the Foremost
+4 Deathmist Raptor
+4 Den Protector
+4 Fleecemane Lion
+4 Hangarback Walker
+4 Siege Rhino
+4 Abzan Charm
+4 Dromoka's Command
+2 Hero's Downfall
+2 Sorin, Solemn Visitor
+3 Caves of Koilos
+2 Forest
+4 Llanowar Wastes
+2 Plains
+4 Sandsteppe Citadel
+3 Temple of Malady
+1 Temple of Silence
+1 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+2 Drown in Sorrow
+2 Self-Inflicted Wound
+4 Thoughtseize
+2 Tragic Arrogance
+3 Ultimate Price
+2 Wingmate Roc

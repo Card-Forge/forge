@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Magnum
+Title=Magnum
+Icon=Magnum.jpg
+Difficulty=Easy
+Description=Journey_into_Nyx/SCG_Invitational_Qualifier_Northglenn/Chris_LaVassaur_-_U-W_Control_(Standard,_#78067).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 AEtherling
+1 Elixir of Immortality
+3 Azorius Charm
+1 Deicide
+4 Dissolve
+1 Fated Retribution
+2 Last Breath
+4 Sphinx's Revelation
+2 Syncopate
+2 Divination
+4 Supreme Verdict
+2 Banishing Light
+2 Detention Sphere
+2 Elspeth, Sun's Champion
+4 Jace, Architect of Thought
+4 Hallowed Fountain
+4 Island
+3 Mutavault
+3 Plains
+4 Temple of Deceit
+4 Temple of Enlightenment
+4 Temple of Silence
+[Sideboard]
+2 Archangel of Thune
+4 Blood Baron of Vizkopa
+2 Celestial Flare
+1 Erebos, God of the Dead
+3 Nyx-Fleece Ram
+2 Thoughtseize

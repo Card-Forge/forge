@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Comic Book Guy
+Title=Comic Book Guy
+Icon=Comic Book Guy.jpg
+Difficulty=Medium
+Description=./Standard/Duskmourn_House_of_Horror/Atticus1806_-_Red_Deck_Wins_(Standard,_#2279509).dck
+Deck Type=constructed
+
+[Main]
+4 Emberheart Challenger
+4 Screaming Nemesis
+4 Heartfire Hero
+4 Manifold Mouse
+4 Monastery Swiftspear
+4 Hired Claw
+3 Witchstalker Frenzy
+4 Monstrous Rage
+4 Lightning Strike
+4 Burst Lightning
+4 Rockface Village
+17 Mountain
+[Sideboard]
+4 Twisted Fealty
+4 Urabrask's Forge
+3 Lithomantic Barrage
+4 Shock

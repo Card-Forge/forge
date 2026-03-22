@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Osiris
+Title=Osiris
+Icon=Osiris.jpg
+Difficulty=Easy
+Description=./Standard/Wilds_of_Eldraine/Capricorn_-_Naya_Adventures_(Standard,_#1738394).dck
+Deck Type=constructed
+
+[Main]
+4 Rocco, Street Chef
+3 Pia Nalaar, Consul of Revival
+4 Heartflame Duelist
+4 Questing Druid
+3 Woodland Acolyte
+4 Mishra's Research Desk
+4 Experimental Synthesizer
+4 Virtue of Loyalty
+4 Soul Partition
+4 Invasion of Gobakhan
+4 Jetmir's Garden
+4 Battlefield Forge
+2 Overgrown Farmland
+3 Sundown Pass
+4 Razorverge Thicket
+1 Eiganjo, Seat of the Empire
+1 Sokenzan, Crucible of Defiance
+1 Boseiju, Who Endures
+2 Rockfall Vale
+[Sideboard]

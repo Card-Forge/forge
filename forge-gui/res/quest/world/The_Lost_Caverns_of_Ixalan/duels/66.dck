@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Joker
+Title=Joker
+Icon=Joker.jpg
+Difficulty=Very Hard
+Description=./Modern/The_Lost_Caverns_of_Ixalan/SharpMox_-_Boros_Blitz_(Modern,_#1988996).dck
+Deck Type=constructed
+
+[Main]
+4 Adeline, Resplendent Cathar
+4 Burning-Tree Emissary
+4 Champion of the Parish
+4 Coppercoat Vanguard
+4 Esper Sentinel
+3 Inti, Seneschal of the Sun
+4 Riders of the Mark
+4 Thalia's Lieutenant
+4 Aether Vial
+4 Rally at the Hornburg
+4 Cavern of Souls
+4 Inspiring Vantage
+2 Mountain
+4 Sacred Foundry
+3 Secluded Courtyard
+4 Sunbaked Canyon
+[Sideboard]
+2 Chalice of the Void
+3 Containment Priest
+2 Cursed Totem
+2 Drannith Magistrate
+3 Magus of the Moon
+3 Sanctifier en-Vec

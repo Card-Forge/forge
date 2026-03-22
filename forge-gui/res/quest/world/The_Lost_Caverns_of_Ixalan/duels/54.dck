@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=InuYasha
+Title=InuYasha
+Icon=InuYasha.jpg
+Difficulty=Hard
+Description=./Modern/The_Lost_Caverns_of_Ixalan/Elbegast_-_Mono_Black_8-Field_(Modern,_#1977042).dck
+Deck Type=constructed
+
+[Main]
+4 Dauthi Voidwalker
+4 Grief
+2 Sheoldred, the Apocalypse
+4 Archon of Cruelty
+4 The One Ring
+3 Fatal Push
+2 Sheoldred's Edict
+4 Thoughtseize
+4 Persist
+4 Liliana of the Veil
+3 Castle Locthwain
+4 Demolition Field
+4 Field of Ruin
+4 Sunken Citadel
+8 Swamp
+1 Takenuma, Abandoned Mire
+1 Urborg, Tomb of Yawgmoth
+[Sideboard]
+1 Fatal Push
+1 Sheoldred's Edict
+3 Ashiok, Dream Render
+2 Cursed Totem
+2 Damnation
+2 Nihil Spellbomb
+1 Pithing Needle
+3 Tourach, Dread Cantor

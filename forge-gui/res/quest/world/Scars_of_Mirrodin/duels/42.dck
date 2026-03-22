@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Ras Al Ghul
+Title=Ras Al Ghul
+Icon=Ras Al Ghul.jpg
+Difficulty=Medium
+Description=Scars_of_Mirrodin/States-Champs_California/Alexander_Janson_-_U-G-R_Shaman_(Standard,_#7594).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Birds of Paradise
+4 Cunning Sparkmage
+4 Fauna Shaman
+1 Frost Titan
+2 Goblin Ruinblaster
+1 Memnite
+1 Obstinate Baloth
+3 Trinket Mage
+4 Vengevine
+1 Basilisk Collar
+1 Brittle Effigy
+3 Lightning Bolt
+4 Mana Leak
+3 Jace, the Mind Sculptor
+3 Copperline Gorge
+5 Forest
+3 Island
+4 Misty Rainforest
+2 Mountain
+3 Raging Ravine
+1 Rootbound Crag
+4 Scalding Tarn
+[Sideboard]
+1 Arc Trail
+2 Manic Vandal
+1 Nihil Spellbomb
+4 Unified Will

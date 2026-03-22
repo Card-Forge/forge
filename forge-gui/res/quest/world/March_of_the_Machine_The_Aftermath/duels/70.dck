@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Sun Quan
+Title=Sun Quan
+Icon=Sun Quan.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine_The_Aftermath/AlexanderB1_-_Five-color_Elementals_(Modern,_#1674699).dck
+Deck Type=constructed
+
+[Main]
+2 Elesh Norn, Mother of Machines
+4 Fable of the Mirror-Breaker
+2 Fury
+2 Nissa, Resurgent Animist
+4 Omnath, Locus of Creation
+3 Risen Reef
+4 Solitude
+3 Dead // Gone
+3 Fire // Ice
+4 Leyline Binding
+4 Teferi, Time Raveler
+1 Boseiju, Who Endures
+1 Breeding Pool
+2 Cavern of Souls
+4 Flooded Strand
+1 Hallowed Fountain
+3 Misty Rainforest
+1 Raugrin Triome
+1 Sacred Foundry
+1 Snow-Covered Forest
+1 Snow-Covered Island
+1 Snow-Covered Plains
+1 Steam Vents
+1 Stomping Ground
+1 Temple Garden
+4 Windswept Heath
+1 Zagoth Triome
+[Sideboard]
+1 Boseiju, Who Endures
+3 Endurance
+2 Force of Negation
+2 Force of Vigor
+1 Foundation Breaker
+1 Keruga, the Macrosage
+3 Leyline of Sanctity
+2 Orvar, the All-Form

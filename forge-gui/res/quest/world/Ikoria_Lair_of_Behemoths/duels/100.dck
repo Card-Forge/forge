@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Waylon Smithers
+Title=Waylon Smithers
+Icon=Waylon Smithers.jpg
+Difficulty=Very Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/Curryvore_-_UW_Blink_(Modern,_#1009804).dck
+Deck Type=constructed
+
+[Main]
+2 Vendilion Clique
+2 Yorion, Sky Nomad
+3 Restoration Angel
+3 Venser, Shaper Savant
+3 Kitchen Finks
+4 Wall of Omens
+4 Force of Negation
+4 Path to Exile
+1 Serum Visions
+2 Detention Sphere
+4 Spreading Seas
+2 Jace, the Mind Sculptor
+2 Teferi, Time Raveler
+1 Prismatic Vista
+2 Hallowed Fountain
+2 Glacial Fortress
+3 Snow-Covered Plains
+4 Snow-Covered Island
+4 Flooded Strand
+4 Field of Ruin
+4 Celestial Colonnade
+[Sideboard]
+1 Lyra Dawnbringer
+2 Celestial Purge
+2 Wing Shards
+3 Aether Gust
+3 Ceremonious Rejection
+4 Rest in Peace

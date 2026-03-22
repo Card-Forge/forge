@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Azorius-precon
+Title=Azorius-precon
+Icon=Azorius-precon.jpg
+Difficulty=Hard
+Description=./Modern/Marvels_Spider_Man/Magicmalle_-_Bedrock_tortoise_(Modern,_#2629908).dck
+Deck Type=constructed
+
+[Main]
+1 Bedrock Tortoise
+1 Perennial Behemoth
+1 Tamiyo, Inquisitive Student
+1 The Reality Chip
+1 Jace, Vryn's Prodigy
+1 Lady Octopus, Inspired Inventor
+1 Hedron Crab
+1 Saiba Cryptomancer
+1 Arboreal Grazer
+1 Ensnaring Bridge
+1 Life from the Loam
+4 Explore
+4 Malevolent Rumble
+4 Dredger's Insight
+1 Academy Ruins
+4 Khalni Garden
+[Sideboard]
+1 Fallaji Archaeologist

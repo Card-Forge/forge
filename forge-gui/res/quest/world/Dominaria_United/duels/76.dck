@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=WereHyena
+Title=WereHyena
+Icon=WereHyena.jpg
+Difficulty=Hard
+Description=./Modern/Dominaria_United/Graciasportanto_-_Temur_Cascade_(Modern,_#1462887).dck
+Deck Type=constructed
+
+[Main]
+4 Fury
+4 Scion of Draco
+4 Shardless Agent
+2 Dead // Gone
+4 Fire // Ice
+4 Force of Negation
+4 Violent Outburst
+4 Crashing Footfalls
+4 Leyline Binding
+3 Teferi, Time Raveler
+1 Indatha Triome
+1 Xander's Lounge
+1 Temple Garden
+1 Stomping Ground
+1 Steam Vents
+1 Otawara, Soaring City
+1 Ketria Triome
+1 Island
+1 Forest
+1 Breeding Pool
+1 Boseiju, Who Endures
+4 Wooded Foothills
+4 Misty Rainforest
+4 Flooded Strand
+[Sideboard]
+1 Unmoored Ego
+2 Radiant Flames
+4 Mystical Dispute
+4 Leyline of the Void
+4 Force of Vigor

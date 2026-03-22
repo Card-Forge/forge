@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Teysa
+Title=Teysa
+Icon=Teysa.jpg
+Difficulty=Hard
+Description=./Modern/Outlaws_of_Thunder_Junction/David_Stevens_-_Izzet_Aggro_(Modern,_#2083161).dck
+Deck Type=constructed
+
+[Main]
+4 Slickshot Show-Off
+4 Dragon's Rage Channeler
+4 Monastery Swiftspear
+4 Soul-Scar Mage
+4 Mishra's Bauble
+4 Lava Dart
+3 Mutagenic Growth
+4 Lightning Bolt
+4 Expressive Iteration
+4 Preordain
+3 Underworld Breach
+2 Mountain
+1 Thundering Falls
+4 Scalding Tarn
+2 Steam Vents
+2 Stomping Ground
+2 Arid Mesa
+4 Spirebluff Canal
+1 Fiery Islet
+[Sideboard]
+1 Vapor Snag
+2 Unlicensed Hearse
+1 Jegantha, the Wellspring
+1 Flame of Anor
+4 Pick Your Poison
+2 Annul
+4 Spell Pierce

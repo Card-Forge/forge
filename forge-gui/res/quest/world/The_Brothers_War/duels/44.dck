@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Jack Sparrow
+Title=Jack Sparrow
+Icon=Jack Sparrow.jpg
+Difficulty=Medium
+Description=./Standard/The_Brothers_War/German_Fraga_-_Mono-Red_Aggro_(Standard,_#1545376).dck
+Deck Type=constructed
+
+[Main]
+3 Squee, Dubious Monarch
+3 Feldon, Ronom Excavator
+4 Kumano Faces Kakkazan
+4 Monastery Swiftspear
+4 Phoenix Chick
+4 Thundering Raiju
+4 Bloodthirsty Adversary
+4 Lightning Strike
+4 Play with Fire
+4 Reckless Impulse
+1 Sokenzan, Crucible of Defiance
+3 Mishra's Foundry
+18 Mountain
+[Sideboard]
+1 Obliterating Bolt
+2 Cemetery Gatekeeper
+2 Chandra, Dressed to Kill
+2 Jaya, Fiery Negotiator
+4 Strangle
+4 Rending Flame

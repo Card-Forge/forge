@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Leprechaun
+Title=Leprechaun
+Icon=Leprechaun.jpg
+Difficulty=Medium
+Description=./Standard/War_of_the_Spark/Brandon_Dollaway_-_Simic_(Standard,_#795645).dck
+Deck Type=constructed
+
+[Main]
+4 Departed Deckhand
+3 Frilled Mystic
+2 Jadelight Ranger
+2 Kraul Harpooner
+4 Llanowar Elves
+4 Merfolk Branchwalker
+4 Nullhide Ferox
+4 Pelt Collector
+4 Steel Leaf Champion
+1 Thrashing Brontodon
+2 Ghalta, Primal Hunger
+2 God-Eternal Rhonas
+2 Spell Pierce
+7 Forest
+1 Island
+4 Breeding Pool
+4 Hinterland Harbor
+2 Simic Guildgate
+4 Unclaimed Territory
+[Sideboard]
+3 Exclusion Mage
+1 Frilled Mystic
+2 Kraul Harpooner
+1 Thrashing Brontodon
+2 Shapers' Sanctuary
+2 Disdainful Stroke
+1 Negate
+1 Vivien Reid
