@@ -252,14 +252,10 @@ public class CharmAi extends SpellAbilityAi {
             // Assign generic good choice to fill up choices if necessary 
             if ("Good".equals(sub.getParam("AILogic")) && aic.doTrigger(sub, false)) {
                 goodChoice = sub;
-            } else {
-                // Standard canPlayAi()
-                sub.setActivatingPlayer(ai);
-                if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
-                    chosenList.add(sub);
-                    if (chosenList.size() == min) {
-                        break; // enough choices
-                    }
+            } else if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
+                chosenList.add(sub);
+                if (chosenList.size() == min) {
+                    break; // enough choices
                 }
             }
         }

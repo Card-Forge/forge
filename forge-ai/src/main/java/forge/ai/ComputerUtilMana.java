@@ -1724,8 +1724,13 @@ public class ComputerUtilMana {
      */
     public static int determineLeftoverMana(final SpellAbility sa, final Player player, final boolean effect) {
         int max = 99;
-        if (sa.hasParam("XMaxLimit")) {
-            max = Math.min(max, AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("XMaxLimit"), sa));
+        if (sa.hasParam("XMax")) {
+            max = Math.min(max, AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("XMax"), sa));
+        }
+        if (sa.hasParam("AIXMax")) {
+            // when maximum depends on X calculate once before to avoid running more expensive checks for higher limit
+            sa.setXManaCostPaid(max);
+            max = Math.min(max, AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("AIXMax"), sa));
         }
         for (int i = 1; i <= max; i++) {
             if (!canPayManaCost(sa.getRootAbility(), player, i, effect)) {

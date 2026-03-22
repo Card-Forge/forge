@@ -3493,8 +3493,9 @@ public class CardFactoryUtil {
             newSA.setStackDescription(sb.toString());
             newSA.putParam("Secondary", "True");
             newSA.setAlternativeCost(AlternativeCost.Sneak);
-            newSA.setIntrinsic(intrinsic);
             newSA.getRestrictions().setInstantSpeed(true);
+
+            newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Station")) {
             String effect = "AB$ PutCounter | Cost$ tapXType<1/Creature.Other> | Defined$ Self " +

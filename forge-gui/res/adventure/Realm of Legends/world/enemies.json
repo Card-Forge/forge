@@ -1960,7 +1960,7 @@
     ],
     "ai": "",
     "speed": 45,
-    "scale": 1,
+    "scale": 0.3,
     "life": 50,
     "rewards": [
       {
@@ -9659,7 +9659,7 @@
     "name": "The Mimeoplasm",
     "sprite": "sprites/enemy/ooze/giant_slime.atlas",
     "deck": [
-      "decks/legends/the_mimeoplasm .dck"
+      "decks/legends/the_mimeoplasm.dck"
     ],
     "ai": "",
     "speed": 45,

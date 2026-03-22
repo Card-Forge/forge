@@ -48,7 +48,7 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Descendants' Path|LCC&quot;, &quot;First Sliver's Chosen|MH1&quot;, &quot;Gemhide Sliver|CMM&quot;, &quot;Birthing Boughs|MH1&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Descendants' Path|LCC&quot;, &quot;First Sliver's Chosen|MH1&quot;, &quot;Birthing Boughs|MH1&quot;]}"/>
     <property name="enemy" value="The First Sliver"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="100"/>
@@ -92,7 +92,7 @@
   {
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 4,
-    &quot;rarity&quot;: [ &quot;Rare, Mythic Rare&quot; ]
+    &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ]
   }
 ]
 </property>
@@ -112,7 +112,7 @@
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 4,
     &quot;subTypes&quot;: [ &quot;Sliver&quot; ],
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ]
   }
 ]
 </property>

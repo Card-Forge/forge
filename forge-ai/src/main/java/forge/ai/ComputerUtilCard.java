@@ -1303,10 +1303,8 @@ public class ComputerUtilCard {
                 if (CombatUtil.canAttack(c) || (phase.inCombat() && c.isAttacking())) {
                     return true;
                 }
-            } else {
-                if (CombatUtil.canBlock(c)) {
-                    return true;
-                }
+            } else if (CombatUtil.canBlock(c)) {
+                return true;
             }
         }
 

@@ -155,8 +155,7 @@ public abstract class SpellAbilityAi {
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
         if ("Never".equals(aiLogic)) {
             return false;
-        }
-        if (!"Once".equals(aiLogic)) {
+        } else if ("Once".equals(aiLogic)) {
             return !sa.getHostCard().getAbilityActivatedThisTurn().getActivators(sa).contains(ai);
         }
         return true;

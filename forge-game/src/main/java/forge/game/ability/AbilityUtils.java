@@ -2957,8 +2957,8 @@ public class AbilityUtils {
         if ("X".equals(announce)) {
             final boolean abXMin = ability.hasParam("XMin");
             if (abXMin) min = Integer.parseInt(ability.getParam("XMin"));
-            if (ability.hasParam("XMaxLimit")) {
-                max = Math.min(max, AbilityUtils.calculateAmount(host, ability.getParam("XMaxLimit"), ability));
+            if (ability.hasParam("XMax")) {
+                max = Math.min(max, AbilityUtils.calculateAmount(host, ability.getParam("XMax"), ability));
             }
             if (cost != null && cost.hasManaCost() && !abXMin) {
                 min = cost.getCostMana().getXMin();
