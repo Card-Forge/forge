@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Agrus
+Title=Agrus
+Icon=Agrus.jpg
+Difficulty=Easy
+Description=./Standard/Aetherdrift/Jesse_Piland_-_Mardu_Monument_(Standard,_#2381254).dck
+Deck Type=constructed
+
+[Main]
+4 Guardian of New Benalia
+4 Phyrexian Dragon Engine
+3 Zoraline, Cosmos Caller
+3 Inti, Seneschal of the Sun
+4 Fear of Missing Out
+1 Voldaren Thrillseeker
+4 Monument to Endurance
+2 Burst Lightning
+3 Bitter Triumph
+3 Torch the Tower
+2 Helping Hand
+4 Recommission
+4 Battlefield Forge
+1 Mountain
+4 Inspiring Vantage
+4 The Mycosynth Gardens
+4 Concealed Courtyard
+1 Sulfurous Springs
+4 Blackcleave Cliffs
+1 Caves of Koilos
+[Sideboard]
+2 Destroy Evil
+3 Sheltered by Ghosts
+2 Ghost Vacuum
+3 Pest Control
+3 Loran of the Third Path
+2 Voldaren Thrillseeker

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Joe Kidd
+Title=Joe Kidd
+Icon=Joe Kidd.jpg
+Difficulty=Hard
+Description=./Modern/Innistrad_Midnight_Hunt/FourDogsInaHorseSuit_-_Rakdos_Zombies_(Modern,_#1224994)_[!].dck
+Deck Type=constructed
+
+[Main]
+3 Mayhem Devil
+3 Shambling Ghast
+3 Fury
+3 Jadar, Ghoulcaller of Nephalia
+4 Geralf's Messenger
+4 Undead Augur
+4 Gravecrawler
+4 Dreadhorde Butcher
+4 Carrion Feeder
+1 Malakir Rebirth
+3 Lightning Bolt
+4 Goblin Bombardment
+1 Urborg, Tomb of Yawgmoth
+1 Godless Shrine
+2 Verdant Catacombs
+2 Blackcleave Cliffs
+2 Blood Crypt
+2 Polluted Delta
+3 Swamp
+3 Cavern of Souls
+4 Bloodstained Mire
+[Sideboard]
+2 Magnetic Theft
+3 Prismatic Ending
+3 Alpine Moon
+3 Dragon's Claw
+4 Leyline of the Void

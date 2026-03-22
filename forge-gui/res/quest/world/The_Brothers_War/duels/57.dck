@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Mr Slate
+Title=Mr Slate
+Icon=Mr Slate.jpg
+Difficulty=Very Hard
+Description=./Modern/The_Brothers_War/Marcell_Baranyi_-_Urza_(Modern,_#1549473)_[!].dck
+Deck Type=constructed
+
+[Main]
+3 Ingenious Smith
+4 Urza, Lord High Artificer
+4 Stoneforge Mystic
+4 Esper Sentinel
+1 Sword of the Meek
+1 Kaldra Compleat
+1 Nettlecyst
+1 Talisman of Progress
+1 Shadowspear
+1 Relic of Progenitus
+1 Pithing Needle
+1 Aether Spellbomb
+2 Springleaf Drum
+3 Thopter Foundry
+4 Portable Hole
+3 Metallic Rebuke
+4 Urza's Saga
+2 Teferi, Time Raveler
+1 Otawara, Soaring City
+1 Island
+1 Raugrin Triome
+1 Cavern of Souls
+2 Seachrome Coast
+2 Razortide Bridge
+2 Plains
+2 Hallowed Fountain
+3 Darksteel Citadel
+4 Flooded Strand
+[Sideboard]
+1 Hallowed Moonlight
+1 Chalice of the Void
+1 Hurkyl's Recall
+1 The Stone Brain
+1 Path to Exile
+2 Blossoming Calm
+2 Supreme Verdict
+2 Spell Pierce
+2 Damping Sphere
+2 Wear // Tear

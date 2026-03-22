@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=R2-D2
+Title=R2-D2
+Icon=R2-D2.jpg
+Difficulty=Hard
+Description=../Modern/Oath_of_the_Gatewatch/Modern_Constructed_League/Semprini_-_Zoo_(Modern,_#605715).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Burning-Tree Emissary
+4 Experiment One
+4 Goblin Guide
+4 Kird Ape
+4 Loam Lion
+4 Reckless Bushwhacker
+4 Wild Nacatl
+4 Atarka's Command
+2 Become Immense
+4 Lightning Bolt
+4 Rancor
+2 Bloodstained Mire
+1 Forest
+2 Misty Rainforest
+1 Mountain
+1 Sacred Foundry
+2 Stomping Ground
+1 Temple Garden
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+1 Crumble to Dust
+4 Destructive Revelry
+2 Lightning Helix
+4 Path to Exile
+2 Searing Blaze
+2 Tormod's Crypt

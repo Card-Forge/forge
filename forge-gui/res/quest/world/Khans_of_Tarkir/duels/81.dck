@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Doc Holiday
+Title=Doc Holiday
+Icon=Doc Holiday.jpg
+Difficulty=Hard
+Description=../Modern/Khans_of_Tarkir/SCG_Premier_IQ_Dallas/Joshua_Kendall_-_R-W_Burn_(Modern,_#219272).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Monastery Swiftspear
+4 Boros Charm
+4 Lightning Bolt
+3 Lightning Helix
+3 Searing Blaze
+4 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+4 Bloodstained Mire
+8 Mountain
+4 Sacred Foundry
+4 Wooded Foothills
+[Sideboard]
+3 Combust
+2 Kor Firewalker
+2 Molten Rain
+1 Peak Eruption
+2 Pyrite Spellbomb
+1 Relic of Progenitus
+1 Searing Blood
+2 Wear // Tear

@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Jack Sparrow
+Title=Jack Sparrow
+Icon=Jack Sparrow.jpg
+Difficulty=Medium
+Description=Scars_of_Mirrodin/States-Champs_Richmond/Chris_Bourroughs_-_Titan_Ramp_(Standard,_#7758).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Avenger of Zendikar
+2 Inferno Titan
+4 Primeval Titan
+1 Rampaging Baloths
+1 Wurmcoil Engine
+3 Harrow
+4 Lightning Bolt
+3 Summoning Trap
+4 Cultivate
+4 Explore
+4 Khalni Heart Expedition
+2 Evolving Wilds
+4 Forest
+12 Mountain
+2 Raging Ravine
+4 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+4 Acidic Slime
+2 Obstinate Baloth
+4 Pyroclasm
+1 Terastodon
+4 Tunnel Ignus

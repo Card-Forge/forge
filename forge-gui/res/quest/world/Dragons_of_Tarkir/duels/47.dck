@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Uncle Owen
+Title=Uncle Owen
+Icon=Uncle Owen.jpg
+Difficulty=Medium
+Description=Dragons_of_Tarkir/Standard_Daily_#8461488/MioCid_-_Rakdos_Midrange_(Standard,_#293319).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blood-Chin Rager
+4 Bloodsoaked Champion
+1 Flamewake Phoenix
+3 Goblin Rabblemaster
+2 Kolaghan, the Storm's Fury
+3 Stormbreath Dragon
+4 Thunderbreak Regent
+1 Tymaret, the Murder King
+3 Zurgo Bellstriker
+4 Draconic Roar
+4 Foul-Tongue Invocation
+2 Kolaghan's Command
+4 Bloodstained Mire
+1 Haven of the Spirit Dragon
+9 Mountain
+7 Swamp
+4 Temple of Malice
+[Sideboard]
+3 Duress
+2 Outpost Siege
+2 Roast
+2 Scouring Sands
+1 Self-Inflicted Wound
+2 Thoughtseize
+2 Ultimate Price
+1 Virulent Plague

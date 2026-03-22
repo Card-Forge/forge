@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Green Lantern
+Title=Green Lantern
+Icon=Green Lantern.jpg
+Difficulty=Medium
+Description=./Standard/Outlaws_of_Thunder_Junction/Jye_Terry_-_Domain_Ramp_(Standard,_#2062309).dck
+Deck Type=constructed
+
+[Main]
+3 Atraxa, Grand Unifier
+4 Topiary Stomper
+4 Archangel of Wrath
+1 Imodane's Recruiter
+1 Get Lost
+4 Herd Migration
+3 Sunfall
+2 Depopulate
+1 Pillage the Bog
+3 Up the Beanstalk
+2 Spelunking
+4 Leyline Binding
+2 Invasion of Zendikar
+4 Cavern of Souls
+1 Raffine's Tower
+3 Spara's Headquarters
+3 Forest
+3 Plains
+1 Island
+1 Swamp
+1 Mountain
+1 Boseiju, Who Endures
+4 Ziatora's Proving Ground
+4 Jetmir's Garden
+[Sideboard]
+1 Get Lost
+3 Negate
+3 Temporary Lockdown
+2 Rest in Peace
+2 Tranquil Frillback
+2 Long Goodbye
+2 Tishana's Tidebinder

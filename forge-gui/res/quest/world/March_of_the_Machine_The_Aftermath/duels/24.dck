@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Morpheus
+Title=Morpheus
+Icon=Morpheus.jpg
+Difficulty=Easy
+Description=./Standard/March_of_the_Machine_The_Aftermath/Dar_Ben_-_5c_Midrange_(Standard,_#1719977).dck
+Deck Type=constructed
+
+[Main]
+4 Armored Scrapgorger
+4 Deeproot Wayfinder
+2 Jolrael, Voice of Zhalfir
+4 Polukranos Reborn
+1 Serra Paragon
+2 Thalia and The Gitrog Monster
+1 Conduit of Worlds
+4 Cosmic Rebirth
+2 Invasion of Innistrad
+4 Leyline Binding
+2 The Wandering Emperor
+4 Wrenn and Realmbreaker
+1 Boseiju, Who Endures
+4 Deathcap Glade
+4 Dreamroot Cascade
+1 Eiganjo, Seat of the Empire
+3 Forest
+1 Island
+2 Jetmir's Garden
+1 Mountain
+1 Overgrown Farmland
+2 Plains
+2 Raffine's Tower
+1 Swamp
+1 Takenuma, Abandoned Mire
+2 Ziatora's Proving Ground
+[Sideboard]
+2 Filter Out
+2 Kogla and Yidaro
+2 Loran of the Third Path
+2 Surge of Salvation
+3 Thalia, Guardian of Thraben
+2 Thrun, Breaker of Silence
+2 Tyrranax Rex

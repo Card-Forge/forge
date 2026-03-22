@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=Neo
+Title=Neo
+Icon=Neo.jpg
+Difficulty=Easy
+Description=./Standard/Ikoria_Lair_of_Behemoths/Adam_Lewis_-_Mono-R_Obosh_(Standard,_#978049).dck
+Deck Type=constructed
+
+[Main]
+1 Legion Warboss
+1 Bonecrusher Giant
+2 Phoenix of Ash
+4 Scorch Spitter
+4 Grim Initiate
+4 Anax, Hardened in the Forge
+4 Tin Street Dodger
+4 Heraldic Banner
+2 Infuriate
+4 Shock
+4 Skewer the Critics
+4 Light Up the Stage
+22 Mountain
+[Sideboard]
+1 Obosh, the Preypiercer

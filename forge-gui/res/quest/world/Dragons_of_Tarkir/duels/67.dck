@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Grampa Simpson
+Title=Grampa Simpson
+Icon=Grampa Simpson.jpg
+Difficulty=Hard
+Description=../Modern/Dragons_of_Tarkir/States_Knoxville/Tyler_Beene_-_Burn_(Modern,_#230268).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Ash Zealot
+4 Eidolon of the Great Revel
+4 Monastery Swiftspear
+4 Young Pyromancer
+4 Boros Charm
+4 Lightning Bolt
+4 Lightning Helix
+3 Path to Exile
+2 Shard Volley
+4 Skullcrack
+4 Lava Spike
+1 Rift Bolt
+4 Arid Mesa
+8 Mountain
+2 Plains
+4 Sacred Foundry
+2 Wooded Foothills
+[Sideboard]
+2 Rending Volley
+2 Rest in Peace
+3 Searing Blood
+1 Slagstorm
+2 Stony Silence
+2 Torpor Orb
+2 Wear // Tear

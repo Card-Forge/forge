@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=LeChuck
+Title=LeChuck
+Icon=LeChuck.jpg
+Difficulty=Very Hard
+Description=./Modern/Dominaria_United/Marcos_Acosta_-_Izzet_Phoenix_(Modern,_#1475047)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Tolarian Terror
+4 Arclight Phoenix
+4 Demilich
+2 Otherworldly Gaze
+4 Manamorphose
+4 Lightning Bolt
+4 Lava Dart
+4 Gut Shot
+4 Thought Scour
+1 Maximize Velocity
+4 Tome Scour
+4 Serum Visions
+1 Breeding Pool
+1 Mountain
+1 Arid Mesa
+2 Island
+4 Steam Vents
+4 Spirebluff Canal
+4 Scalding Tarn
+[Sideboard]
+1 Spell Pierce
+2 Force of Negation
+2 Blood Moon
+2 Mystical Dispute
+2 Brazen Borrower
+2 Ancient Grudge
+4 Thing in the Ice

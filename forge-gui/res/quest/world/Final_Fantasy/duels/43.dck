@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=Napoleon
+Title=Napoleon
+Icon=Napoleon.jpg
+Difficulty=Easy
+Description=./Standard/Final_Fantasy/Hirayama_Rei_-_RG_Aggro_(Standard,_#2512521).dck
+Deck Type=constructed
+
+[Main]
+3 Bristly Bill, Spine Sower
+4 Mossborn Hydra
+4 Bloomvine Regent
+4 Sazh's Chocobo
+4 Tifa Lockhart
+4 Adventuring Gear
+4 Snakeskin Veil
+4 Worldsoul's Rage
+4 Commune with Beavers
+2 Evolving Wilds
+2 Mountain
+13 Forest
+4 Fabled Passage
+4 Escape Tunnel
+[Sideboard]

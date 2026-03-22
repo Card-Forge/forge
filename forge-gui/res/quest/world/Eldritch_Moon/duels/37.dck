@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Cave Troll
+Title=Cave Troll
+Icon=Cave Troll.jpg
+Difficulty=Medium
+Description=Eldritch_Moon/StarCityGames.com_Standard_Open_-_Baltimore,_MD/Collins_Mullen_-_Bant_(Standard,_#634462).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Archangel Avacyn
+3 Duskwatch Recruiter
+4 Reflector Mage
+4 Selfless Spirit
+4 Spell Queller
+4 Sylvan Advocate
+3 Thalia, Heretic Cathar
+3 Tireless Tracker
+4 Collected Company
+4 Dromoka's Command
+3 Canopy Vista
+4 Evolving Wilds
+3 Forest
+1 Island
+2 Lumbering Falls
+5 Plains
+4 Prairie Stream
+3 Yavimaya Coast
+[Sideboard]
+2 Declaration in Stone
+3 Lambholt Pacifist
+3 Negate
+2 Nissa, Vastwood Seer
+2 Ojutai's Command
+1 Tragic Arrogance

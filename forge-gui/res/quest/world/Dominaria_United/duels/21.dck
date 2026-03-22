@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Black Flame
+Title=Black Flame
+Icon=Black Flame.jpg
+Difficulty=Easy
+Description=./Standard/Dominaria_United/CovertGoBlue_-_UW_Control_(Standard,_#1448835).dck
+Deck Type=constructed
+
+[Main]
+4 Karn's Sylex
+2 Devious Cover-Up
+2 Memory Deluge
+4 Syncopate
+4 Ertai's Scorn
+4 Impulse
+4 Fateful Absence
+2 Farewell
+4 Silver Scrutiny
+4 The Wandering Emperor
+1 Otawara, Soaring City
+1 Eiganjo, Seat of the Empire
+4 Deserted Beach
+4 Tranquil Cove
+4 Adarkar Wastes
+6 Plains
+6 Island
+[Sideboard]

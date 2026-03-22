@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Tolsimir
+Title=Tolsimir
+Icon=Tolsimir.jpg
+Difficulty=Easy
+Description=./Standard/Avatar_The_Last_Airbender/BWG_-_Simic_Beanstalk_(Standard,_#2712075).dck
+Deck Type=constructed
+
+[Main]
+4 Badgermole Cub
+4 Gene Pollinator
+4 Jackal, Genius Geneticist
+4 Llanowar Elves
+4 Ouroboroid
+4 Pawpatch Recruit
+3 Azure Beastbinder
+3 Spyglass Siren
+2 Sab-Sunen, Luxa Embodied
+2 Tyvar, the Pummeler
+1 Repulsive Mutation
+4 Innkeeper's Talent
+5 Forest
+4 Botanical Sanctum
+4 Breeding Pool
+4 Multiversal Passage
+4 Willowrush Verge
+[Sideboard]
+3 Dragon Sniper
+3 Keen-Eyed Curator
+3 Repulsive Mutation
+2 Reclamation Sage
+2 Spider-Sense
+2 Tishana's Tidebinder

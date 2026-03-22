@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=The Torpor Orb
+Title=The Torpor Orb
+Icon=The Torpor Orb.jpg
+Difficulty=Medium
+Description=Magic_Origins/Standard_Champs_#8654170/silenttrigger_-_silenttrigger_(21st_Place)_(Standard,_#319102).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Abzan Falconer
+4 Favored Hoplite
+4 Hero of Iroas
+4 Lagonna-Band Trailblazer
+4 Phalanx Leader
+4 Defiant Strike
+2 Ephemeral Shields
+4 Gods Willing
+4 Gleam of Authority
+4 Grasp of the Hieromancer
+4 Ordeal of Heliod
+19 Plains
+[Sideboard]
+4 Glare of Heresy
+3 Murder Investigation
+4 Revoke Existence
+3 Seeker of the Way

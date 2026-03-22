@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Galahad
+Title=Galahad
+Icon=Galahad.jpg
+Difficulty=Hard
+Description=./Modern/Theros_Beyond_Death/Alexandre_Glorian_-_Dredge_(Modern,_#922563).dck
+Deck Type=constructed
+
+[Main]
+2 Golgari Thug
+2 Narcomoeba
+3 Ox of Agonas
+3 Merchant of the Vale
+4 Bloodghast
+4 Prized Amalgam
+4 Stinkweed Imp
+4 Shriekhorn
+2 Conflagrate
+4 Creeping Chill
+4 Cathartic Reunion
+4 Life from the Loam
+1 City of Brass
+1 Mountain
+1 Ghost Quarter
+2 Stomping Ground
+2 Blood Crypt
+3 Forgotten Cave
+3 Copperline Gorge
+3 Arid Mesa
+4 Bloodstained Mire
+[Sideboard]
+2 Ancient Grudge
+2 Thoughtseize
+3 Lightning Axe
+4 Nature's Claim
+4 Leyline of Sanctity

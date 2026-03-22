@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Betty Rubble
+Title=Betty Rubble
+Icon=Betty Rubble.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Crimson_Vow/ShutoShotokan_-_Humans_(Modern,_#1268028).dck
+Deck Type=constructed
+
+[Main]
+1 Abzan Falconer
+1 Charming Prince
+1 Halana and Alena, Partners
+3 Adeline, Resplendent Cathar
+3 Thalia, Guardian of Thraben
+3 Reflector Mage
+3 Noble Hierarch
+3 Meddling Mage
+3 Imperial Recruiter
+4 Thalia's Lieutenant
+4 Luminarch Aspirant
+4 Esper Sentinel
+4 Champion of the Parish
+4 Aether Vial
+3 Plains
+4 Ancient Ziggurat
+4 Cavern of Souls
+4 Horizon Canopy
+4 Unclaimed Territory
+[Sideboard]
+1 Sin Collector
+1 Kataki, War's Wage
+1 Drannith Magistrate
+1 Containment Priest
+1 Meddling Mage
+2 Outland Liberator
+2 Magus of the Moon
+2 Lavinia, Azorius Renegade
+4 Sanctifier en-Vec

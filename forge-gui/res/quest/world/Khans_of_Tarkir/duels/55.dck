@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Quicksilver
+Title=Quicksilver
+Icon=Quicksilver.jpg
+Difficulty=Hard
+Description=../Modern/Khans_of_Tarkir/GPT_Bologna_-_Il_Fermaglio_di_Alberto_Festa/Luke_Vianna_-_Red_Deck_Wins_(Modern,_#504438).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Monastery Swiftspear
+4 Boros Charm
+4 Lightning Bolt
+2 Lightning Helix
+4 Searing Blaze
+2 Shard Volley
+4 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+4 Bloodstained Mire
+6 Mountain
+4 Sacred Foundry
+4 Wooded Foothills
+[Sideboard]
+2 Deflecting Palm
+3 Kataki, War's Wage
+3 Kor Firewalker
+3 Smash to Smithereens
+2 Wear // Tear

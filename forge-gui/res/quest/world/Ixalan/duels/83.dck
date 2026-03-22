@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Robot83
+Title=Robot83
+Icon=Cable.jpg
+Difficulty=Hard
+Description=Sultai Energy 
+Deck Type=constructed
+
+[Main]
+4 Glint-Sleeve Siphoner
+2 Hostage Taker
+4 Longtusk Cub
+2 Rishkar, Peema Renegade
+4 Rogue Refiner
+1 The Scarab God
+4 Walking Ballista
+4 Winding Constrictor
+4 Blossoming Defense
+4 Fatal Push
+2 Vraska's Contempt
+4 Attune with Aether
+4 Aether Hub
+4 Blooming Marsh
+4 Botanical Sanctum
+2 Drowned Catacomb
+4 Forest
+1 Island
+2 Swamp
+[Sideboard]
+1 Bristling Hydra
+3 Cartouche of Ambition
+4 Negate
+2 River's Rebuke
+2 Spell Pierce
+1 The Scarab God
+2 Vizier of Many Faces

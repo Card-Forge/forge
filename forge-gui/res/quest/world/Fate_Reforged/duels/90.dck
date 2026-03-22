@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=A Wolf in Sheeps Clothing
+Title=A Wolf in Sheeps Clothing
+Icon=A Wolf in Sheeps Clothing.jpg
+Difficulty=Hard
+Description=../Modern/Fate_Reforged/SCG_Invitational_Qualifier_St_Joseph/Bryan_Lada_-_Infect_(Modern,_#604797).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Dryad Arbor
+4 Glistener Elf
+4 Noble Hierarch
+4 Phyrexian Crusader
+2 Plague Stinger
+3 Abrupt Decay
+2 Become Immense
+2 Dismember
+4 Groundswell
+2 Might of Old Krosa
+4 Vines of Vastwood
+4 Inquisition of Kozilek
+1 Sylvan Scrying
+2 Rancor
+1 Bloodstained Mire
+1 Forest
+4 Inkmoth Nexus
+3 Misty Rainforest
+4 Overgrown Tomb
+1 Pendelhaven
+2 Swamp
+1 Urborg, Tomb of Yawgmoth
+4 Verdant Catacombs
+[Sideboard]
+1 Doom Blade
+1 Grafdigger's Cage
+1 Illness in the Ranks
+3 Nature's Claim
+1 Nihil Spellbomb
+2 Spellskite
+1 Tasigur, the Golden Fang
+2 Thoughtseize
+2 Vampiric Link
+1 Viridian Corrupter

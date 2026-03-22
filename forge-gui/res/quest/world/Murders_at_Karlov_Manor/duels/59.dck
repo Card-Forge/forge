@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Cipher
+Title=Cipher
+Icon=Cipher.jpg
+Difficulty=Hard
+Description=./Modern/Murders_at_Karlov_Manor/AFX_-_5_Color_Creativity_(Modern,_#2005805).dck
+Deck Type=constructed
+
+[Main]
+4 Archon of Cruelty
+4 Fable of the Mirror-Breaker
+2 Fatal Push
+4 Lightning Bolt
+4 Indomitable Creativity
+4 Persist
+1 Transmogrify
+4 Thoughtseize
+4 Bitter Reunion
+1 Invasion of Ergamon
+4 Wrenn and Six
+4 Arid Mesa
+1 Stomping Ground
+4 Bloodstained Mire
+1 Boseiju, Who Endures
+2 Commercial District
+4 Dwarven Mine
+1 Mountain
+2 Raucous Theater
+1 Blood Crypt
+4 Wooded Foothills
+[Sideboard]
+1 Boseiju, Who Endures
+1 Surgical Extraction
+1 Emrakul, the Aeons Torn
+4 Pick Your Poison
+2 Terastodon
+2 Turn the Earth
+3 Veil of Summer
+1 Sundering Titan

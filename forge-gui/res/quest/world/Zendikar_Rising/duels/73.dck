@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Orzhov-precon
+Title=Orzhov-precon
+Icon=Orzhov-precon.jpg
+Difficulty=Very Hard
+Description=./Modern/Zendikar_Rising/Athanbak_-_Merfolk_(Modern,_#1039274).dck
+Deck Type=constructed
+
+[Main]
+2 Merrow Reejerey
+2 Brazen Borrower
+4 Silvergill Adept
+4 Merfolk Trickster
+4 Master of the Pearl Trident
+4 Lord of Atlantis
+4 Benthic Biomancer
+4 Aether Vial
+2 Force of Negation
+3 Dismember
+4 Spreading Seas
+2 Cavern of Souls
+2 Clearwater Pathway
+3 Waterlogged Grove
+3 Mutavault
+9 Island
+[Sideboard]
+2 Thieving Skydiver
+2 Damping Sphere
+2 Deprive
+2 Master of Waves
+3 Aether Gust
+4 Relic of Progenitus

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Lex Luthor
+Title=Lex Luthor
+Icon=Lex Luthor.jpg
+Difficulty=Medium
+Description=Dragons_of_Tarkir/Standard_Daily_#8348911/Onthestack_-_White_Weenie_(Standard,_#256072).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Battlewise Hoplite
+4 Den Protector
+4 Favored Hoplite
+4 Hero of Iroas
+4 Seeker of the Way
+3 Ajani's Presence
+4 Defiant Strike
+4 Dromoka's Command
+4 Gods Willing
+2 Treasure Cruise
+4 Ordeal of Thassa
+4 Flooded Strand
+1 Forest
+1 Island
+4 Mana Confluence
+2 Plains
+4 Temple of Enlightenment
+1 Temple of Plenty
+4 Windswept Heath
+[Sideboard]
+2 Aqueous Form
+2 Disdainful Stroke
+3 Encase in Ice
+1 Heliod's Pilgrim
+3 Ordeal of Heliod
+3 Stubborn Denial

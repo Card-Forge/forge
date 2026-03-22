@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Elegua
+Title=Elegua
+Icon=Elegua.jpg
+Difficulty=Easy
+Description=./Standard/Strixhaven_School_of_Mages/Bruzo_Ralden_-_Temur_Adventures_(Standard,_#1144195).dck
+Deck Type=constructed
+
+[Main]
+2 Elder Gargaroth
+3 Goldspan Dragon
+4 Kazandu Mammoth
+4 Edgewall Innkeeper
+4 Brazen Borrower
+4 Lovestruck Beast
+4 Bonecrusher Giant
+2 The Great Henge
+1 Spikefield Hazard
+1 Miscast
+2 Negate
+2 Disdainful Stroke
+2 Alrund's Epiphany
+2 Island
+2 Mountain
+2 Forest
+3 Fabled Passage
+4 Ketria Triome
+4 Barkchannel Pathway
+4 Cragcrown Pathway
+4 Riverglide Pathway
+[Sideboard]
+1 Embercleave
+1 Redcap Melee
+1 Test of Talents
+1 Scavenging Ooze
+1 Klothys, God of Destiny
+1 Prismari Command
+1 Vivien, Monsters' Advocate
+1 Koma, Cosmos Serpent
+2 Ox of Agonas
+2 Mystical Dispute
+3 Scorching Dragonfire

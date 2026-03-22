@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Isis
+Title=Isis
+Icon=Isis.jpg
+Difficulty=Medium
+Description=./Standard/Outlaws_of_Thunder_Junction/02DROP_-_Azorius_Mentor_(Standard,_#2064026).dck
+Deck Type=constructed
+
+[Main]
+4 Picklock Prankster
+4 Haughty Djinn
+4 Monastery Mentor
+4 Fading Hope
+4 March of Swirling Mist
+4 Otherworldly Gaze
+2 Destroy Evil
+3 Make Disappear
+4 Helping Hand
+4 Chart a Course
+3 Recommission
+4 Adarkar Wastes
+4 Deserted Beach
+1 Eiganjo, Seat of the Empire
+4 Island
+1 Meticulous Archive
+1 Otawara, Soaring City
+1 Plains
+4 Seachrome Coast
+[Sideboard]
+2 Kindly Ancestor
+1 Requisition Raid
+2 Destroy Evil
+4 Negate
+2 Unlicensed Hearse
+1 Cryptic Coat
+1 Sword of Once and Future
+2 Vanquish the Horde

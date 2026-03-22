@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Dino
+Title=Dino
+Icon=Dino.jpg
+Difficulty=Easy
+Description=./Standard/Edge_of_Eternities/Eric_(Ricky)_Lison_-_Boros_Burn_(Standard,_#2596471).dck
+Deck Type=constructed
+
+[Main]
+3 Greasewrench Goblin
+4 Hired Claw
+1 Kellan, Planar Trailblazer
+4 Magebane Lizard
+4 Screaming Nemesis
+4 Slickshot Show-Off
+4 Boros Charm
+4 Burst Lightning
+4 Lightning Helix
+4 Boltwave
+4 Plasma Bolt
+4 Inspiring Vantage
+7 Mountain
+4 Sacred Foundry
+1 Starting Town
+4 Sunbillow Verge
+[Sideboard]
+2 Abrade
+4 Case of the Crimson Pulse
+1 Heartflame Duelist
+2 High Noon
+3 Rest in Peace
+3 Sheltered by Ghosts

@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Bart Simpson
+Title=Bart Simpson
+Icon=Bart Simpson.jpg
+Difficulty=Medium
+Description=Gatecrash/PTQ_Theros_-_Cupertino,_California/Bradley_Yoo_-_Gruul_Aggro_(Standard,_#55097).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Boros Reckoner
+4 Burning-Tree Emissary
+4 Flinthoof Boar
+4 Ghor-Clan Rampager
+4 Hellrider
+4 Rakdos Cackler
+4 Stromkirk Noble
+4 Searing Spear
+2 Pillar of Flame
+4 Madcap Skills
+12 Mountain
+4 Rootbound Crag
+4 Stomping Ground
+2 Temple Garden
+[Sideboard]
+2 Electrickery
+3 Mark of Mutiny
+3 Mizzium Mortars
+3 Skullcrack
+4 Volcanic Strength

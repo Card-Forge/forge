@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Grumpy
+Title=Grumpy
+Icon=Grumpy.jpg
+Difficulty=Hard
+Description=../Modern/Aether_Revolt/Robert_Blum_-_Zoo_(Modern,_#668512).dck
+Deck Type=constructed
+
+[Main]
+4 Burning-Tree Emissary
+1 Dryad Arbor
+2 Ghor-Clan Rampager
+4 Goblin Guide
+4 Kird Ape
+4 Narnam Renegade
+4 Reckless Bushwhacker
+4 Tarmogoyf
+4 Wild Nacatl
+4 Atarka's Command
+4 Lightning Bolt
+4 Path to Exile
+1 Arid Mesa
+1 Forest
+1 Mountain
+2 Sacred Foundry
+2 Stomping Ground
+2 Temple Garden
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+2 Ancient Grudge
+1 Back to Nature
+2 Blessed Alliance
+1 Destructive Revelry
+2 Leyline of Sanctity
+2 Spellskite
+3 Sudden Shock
+2 Thalia, Guardian of Thraben

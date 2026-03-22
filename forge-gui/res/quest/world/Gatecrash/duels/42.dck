@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Leela
+Title=Leela
+Icon=Leela.jpg
+Difficulty=Easy
+Description=Gatecrash/Topdecker.gr_-_eFantasy.gr_-_Grand_Standard_Tournament/Gialamas_Alexandros_-_RDW_(Standard,_#50103).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ash Zealot
+3 Boros Reckoner
+4 Hellrider
+2 Legion Loyalist
+2 Lightning Mauler
+1 Pyreheart Wolf
+4 Rakdos Cackler
+4 Stonewright
+4 Stromkirk Noble
+4 Searing Spear
+4 Pillar of Flame
+2 Traitorous Blood
+22 Mountain
+[Sideboard]
+2 Brimstone Volley
+1 Mizzium Mortars
+3 Mugging
+4 Reckless Waif
+3 Skullcrack
+1 Thunderbolt

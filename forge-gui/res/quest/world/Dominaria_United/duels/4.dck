@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Endora
+Title=Endora
+Icon=Endora.jpg
+Difficulty=Easy
+Description=./Standard/Dominaria_United/Jorge_Fiol_-_Selesnya_Aggro_(Standard,_#1475338).dck
+Deck Type=constructed
+
+[Main]
+1 Iron Apprentice
+1 Dawnhart Wardens
+2 Llanowar Loamspeaker
+2 King Darien XLVIII
+3 Quirion Beastcaller
+4 Deathbonnet Sprout
+4 Snarling Wolf
+4 Fang of Shigeki
+4 Argivian Phalanx
+4 Search Party Captain
+4 Llanowar Stalker
+4 Ascendant Packleader
+2 Tail Swipe
+1 Boseiju, Who Endures
+1 Spara's Headquarters
+4 Secluded Courtyard
+4 Overgrown Farmland
+11 Forest
+[Sideboard]
+1 Torens, Fist of the Angels
+1 Eiganjo, Seat of the Empire
+1 Destroy Evil
+2 Return to Nature
+2 Bouncer's Beatdown
+2 Pithing Needle
+2 Serra Paragon
+2 Patch Up
+2 Fateful Absence

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Ekolo
+Title=Ekolo
+Icon=Ekolo.jpg
+Difficulty=Hard
+Description=./Modern/Lorwyn_Eclipsed/Colin_Friedsam_-_Domain_Zoo_(Modern,_#2817211).dck
+Deck Type=constructed
+
+[Main]
+4 Phlage, Titan of Fire's Fury
+3 Quantum Riddler
+4 Ragavan, Nimble Pilferer
+4 Scion of Draco
+4 Territorial Kavu
+3 Consign to Memory
+4 Lightning Bolt
+2 Stubborn Denial
+1 Winternight Stories
+4 Leyline Binding
+4 Leyline of the Guildpact
+3 Arena of Glory
+4 Arid Mesa
+4 Flooded Strand
+1 Godless Shrine
+1 Indatha Triome
+1 Mountain
+1 Plains
+2 Steam Vents
+1 Temple Garden
+1 Thundering Falls
+4 Wooded Foothills
+[Sideboard]
+1 Consign to Memory
+1 Containment Priest
+2 Deafening Silence
+1 Hexing Squelcher
+2 Mystical Dispute
+2 Nihil Spellbomb
+2 Obsidian Charmaw
+1 Thraben Charm
+1 Wear
+2 Wrath of the Skies
