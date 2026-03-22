@@ -37,6 +37,13 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
     private final StopButton btnStop  = new StopButton();
 
     VSubmenuOnlineLobby() {
+        btnStop.addActionListener(arg0 -> {
+            // do the STOP needful here
+            Runnable stopGame = VSubmenuOnlineLobby.this::reset;
+            if (stopGame != null) {
+                stopGame.run();
+            }
+        });
     }
 
     public ILobbyView setLobby(final GameLobby lobby) {
@@ -85,15 +92,6 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
         pnlTitle.add(lobby.getLblTitle(), "w 95%, h 40px!, gap 0 0 15px 15px, span 2");
         pnlTitle.add(btnStop, "gap 10 10 0 0, align right");
         container.add(pnlTitle,"w 80%, gap 0 0 0 0, al right, pushx");
-
-        // Stop button event handling
-        btnStop.addActionListener(arg0 -> {
-            // do the STOP needful here
-            Runnable stopGame = VSubmenuOnlineLobby.this::reset;
-            if (stopGame != null) {
-                stopGame.run();
-            }
-        });
 
         for (final FDeckChooser fdc : lobby.getDeckChoosers()) {
             fdc.populate();
@@ -171,15 +169,13 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
                 FNetOverlay.SINGLETON_INSTANCE.reset();
                 return true;
             }
-        } else {
-            if (client == null || SOptionPane.showConfirmDialog(Localizer.getInstance().getMessage("lblLeaveLobbyConfirm"), Localizer.getInstance().getMessage("lblLeave"))) {
-                if (client != null) {
-                    client.close();
-                    client = null;
-                }
-                FNetOverlay.SINGLETON_INSTANCE.reset();
-                return true;
+        } else if (client == null || SOptionPane.showConfirmDialog(Localizer.getInstance().getMessage("lblLeaveLobbyConfirm"), Localizer.getInstance().getMessage("lblLeave"))) {
+            if (client != null) {
+                client.close();
+                client = null;
             }
+            FNetOverlay.SINGLETON_INSTANCE.reset();
+            return true;
         }
         return false;
     }
