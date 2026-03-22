@@ -1143,14 +1143,14 @@ public class ComputerUtil {
         final CardState cardState = card.isFaceDown() ? card.getState(CardStateName.Original) : card.getCurrentState();
         final CardCollection myCreatures = ai.getCreaturesInPlay();
 
-        // 2897+ cards match `ManaCost:no cost`
+        // 2909+ cards match `ManaCost:no cost`
         // trigger/boost boardstate while you can
         if (card.getManaCost().isZero()) return true;
 
-        // 1419+ cards match `PlayMain1`
+        // 1432+ cards match `PlayMain1`
         // manually chosen, e.g. Bello, Bard of the Brambles
         if (card.hasSVar("PlayMain1")) {
-            if (card.getSVar("PlayMain1").equals("ALWAYS") || sa.getPayCosts().hasNoManaCost()) {
+            if (Set.of("ALWAYS", "TRUE", "True").contains(card.getSVar("PlayMain1")) || sa.getPayCosts().hasNoManaCost()) {
                 return true;
             } else if (card.getSVar("PlayMain1").equals("OPPONENTCREATURES")) {
                 // Only play these main1 when the opponent has creatures (stealing and giving them haste)
@@ -1179,14 +1179,14 @@ public class ComputerUtil {
             final Cost cost = nma.getPayCosts();
             if (cost.hasSpecificCostType(CostTap.class) && card.isAbilitySick()) continue;
 
-            // 1741+ cards match `A:AB\$.*Cost\$[^|]*Sac`
+            // 1761+ cards match `A:AB\$.*Cost\$[^|]*Sac`
             // sac as combat trick
             // A Killer Among Us etc
             // if (cost.hasSpecificCostType(CostSacrifice.class)) {
             //     return true;
             // }
 
-            // 242+ cards match `A:AB\$[^|]*(PumpAll|PutCounterAll)`
+            // 244+ cards match `A:AB\$[^|]*(PumpAll|PutCounterAll)`
             // Jazal Goldmane etc
             if (myCreatures.size() >= 1
                 && nma.getApi() != null && Set.of(
@@ -1217,7 +1217,7 @@ public class ComputerUtil {
             for (StaticAbility sta : cardState.getStaticAbilities()) {
                 final Set<StaticAbilityMode> mode = sta.getMode();
 
-                // 1141+ cards match `S:Mode\$ Continuous.*?Affected\$[^|]*?YouCtrl`
+                // 1138+ cards match `S:Mode\$ Continuous.*?Affected\$[^|]*?YouCtrl`
                 // Saryth, the Viper's Fang etc
                 if (mode.contains(StaticAbilityMode.Continuous)) {
                     final String affected = sta.getParam("Affected");
@@ -1226,7 +1226,7 @@ public class ComputerUtil {
                     }
                 }
 
-                // 31+ cards match `S:Mode\$ Panharmonicon`
+                // 32+ cards match `S:Mode\$ Panharmonicon`
                 // double triggers
                 if (mode.contains(StaticAbilityMode.Panharmonicon)) {
                     return true;
@@ -1331,7 +1331,7 @@ public class ComputerUtil {
         for (Trigger trigger : cardState.getTriggers()) {
             if (!"Battlefield".equals(trigger.getParam("TriggerZones"))) continue;
 
-            // 297+ cards match `Phase\$ BeginCombat.*?ValidPlayer\$(?![^|]*Opponent)`
+            // 303+ cards match `Phase\$ BeginCombat.*?ValidPlayer\$(?![^|]*Opponent)`
             // Odric, Lunarch Marshal etc. Ouroboroid is useful alone
             final String phase = trigger.getParam("Phase");
             if ("BeginCombat".equals(phase)) {
@@ -1345,7 +1345,7 @@ public class ComputerUtil {
 
             final TriggerType mode = trigger.getMode();
             if (mode != null) {
-                // 645+ cards match `Mode\$ ChangesZone.*?ValidCards?\$[^|]*Creature.*?TriggerZones\$ Battlefield`
+                // 658+ cards match `Mode\$ ChangesZone.*?ValidCards?\$[^|]*Creature.*?TriggerZones\$ Battlefield`
                 // death triggers
                 // Al Bhed Salvagers; Dennick, Pious Apparition etc
                 if ("Graveyard".equals(trigger.getParam("Destination"))
@@ -1355,16 +1355,16 @@ public class ComputerUtil {
                     return true;
                 }
     
-                // 330+ cards match `T:Mode\$[^|]*Attacker(Blocked|BlockedOnce|sDeclared|sDecalaredOnceTarget|s) `
+                // 333+ cards match `T:Mode\$[^|]*Attacker(Blocked|BlockedOnce|sDeclared|sDecalaredOnceTarget|s) `
                 // Cunning Evasion; Big Spender; Adeline, Resplendent Cathar; Breena, the Demagogue; Shared Animosity etc
                 if (Set.of(TriggerType.AttackerBlocked, TriggerType.AttackerBlockedOnce, TriggerType.AttackersDeclared, TriggerType.AttackersDeclaredOneTarget, TriggerType.Attacks).contains(mode)) {
                     return true;
                 }
 
-                // 213+ cards match `T:Mode\$ Damage.*YouCtrl`
+                // 217+ cards match `T:Mode\$ Damage.*YouCtrl`
                 // Breeches, Brazen Plunderer; Five-Alarm Fire; Aragorn, Hornburg Hero; Automated Assembly Line etc
                 if (Set.of(TriggerType.DamageAll, TriggerType.DamageDealtOnce, TriggerType.DamageDone, TriggerType.DamageDoneOnce).contains(mode)) {
-                    if (trigger.getParam("ValidSource").contains("YouCtrl")) return true;
+                    if (trigger.getParamOrDefault("ValidSource", "").contains("YouCtrl")) return true;
                 }
             }
         } // triggered abilities
@@ -1381,8 +1381,12 @@ public class ComputerUtil {
             return true;
         }
 
+        // Slower checks
+
+        // 626+ cards match `Types:.*Equipment`
         // cast equipment in Main1 when there are creatures to equip and no other unequipped equipment
-        if (card.isEquipment()) {
+        // TODO: Necropouncer and Samurai's Katana create a token and give it haste, but would that attack?
+        if (card.isEquipment() && myCreatures.size() > 0) {
             boolean playNow = false;
             for (Card c : card.getController().getCardsIn(ZoneType.Battlefield)) {
                 if (c.isEquipment() && !c.isEquipping()) {
@@ -1495,11 +1499,11 @@ public class ComputerUtil {
 
     public static boolean castSpellInMain1(final Player ai, final SpellAbility sa) {
         final Card source = sa.getHostCard();
-        if (source != null && "ALWAYS".equals(source.getSVar("PlayMain1"))) {
+        if (source != null && Set.of("ALWAYS", "TRUE", "True").contains(source.getSVar("PlayMain1"))) {
             return true;
         }
 
-        // 6+ cards match `A:SP.*BeforeCombat`
+        // 5+ cards match `A:SP.*BeforeCombat`
         // Footsteps of the Goryo etc
         if ("BeforeCombat".equals(sa.getParam("AILogic"))) {
             return true;
@@ -1532,7 +1536,7 @@ public class ComputerUtil {
             if (ApiType.PermanentNoncreature.equals(sa.getApi()) && buffedCard.hasKeyword(Keyword.PROWESS)) {
                 return true;
             }
-            //Fill the graveyard for Threshold
+            // Fill the graveyard for Threshold
             if (checkThreshold) {
                 for (StaticAbility stAb : buffedCard.getStaticAbilities()) {
                     if ("Threshold".equals(stAb.getParam("Condition"))) {
@@ -1569,7 +1573,7 @@ public class ComputerUtil {
 
         int activations = sa.getActivationsThisTurn();
 
-        //10 activations should still be acceptable
+        // 10 activations should still be acceptable
         if (activations < 10) {
             return false;
         }
