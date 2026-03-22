@@ -183,6 +183,10 @@ public class AdventureEventData implements Serializable {
     private static final Predicate<CardEdition> filterStandard = FModel.getFormats().getStandard().editionLegalPredicate;
 
     public static Predicate<CardEdition> selectSetPool() {
+        if (Config.instance().getConfigData().vintageOnlyEditions) {
+            return filterVintage;
+        }
+
         final int rollD100 = MyRandom.getRandom().nextInt(100);
         Predicate<CardEdition> rolledFilter;
         if (rollD100 < 30) {

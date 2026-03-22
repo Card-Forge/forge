@@ -122,6 +122,7 @@
     "ODY", "DKM", "TOR", "JUD", "ONS", "LGN", "SCG", "PHPR", "PAST", "DRC94",
     "O90P", "PALP", "PELP", "PGRU", "UGL"
   ],
+  "vintageOnlyEditions": true,
   "allowedJumpstart": [],
   "enableGeneticAI": false,
   "defaultBasicLandSet": "4ED",
