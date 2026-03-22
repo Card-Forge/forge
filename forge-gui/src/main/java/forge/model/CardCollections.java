@@ -153,7 +153,7 @@ public class CardCollections {
     public IStorage<Deck> getDanDan() {
         if (danDan == null) {
             danDan = new StorageImmediatelySerialized<>("DanDan decks",
-                    new DeckStorage(new File(ForgeConstants.DECK_DANDAN_DIR), ForgeConstants.DECK_BASE_DIR),
+                    new DeckStorage(new File(ForgeConstants.DECK_DANDAN_DIR), ForgeConstants.RES_DIR),
                     true);
         }
         return danDan;

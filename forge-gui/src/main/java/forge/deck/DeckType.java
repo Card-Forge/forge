@@ -5,7 +5,7 @@ import forge.util.Localizer;
 
 public enum DeckType {
     CUSTOM_DECK("lblCustomUserDecks"),
-    /** Saved under the user's {@code dandan} deck directory. */
+    /** Saved under {@code res/dandan}. */
     DAN_DAN_DECK("lblDanDanDecks"),
     CONSTRUCTED_DECK("lblConstructedDecks"),
     COMMANDER_DECK("lblCommanderDecks"),
