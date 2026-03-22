@@ -657,7 +657,7 @@ public class ComputerUtilCost {
 
         if (root.costHasManaX()) {
             val = ComputerUtilMana.determineLeftoverMana(root, ai, effect);
-
+            // TODO already calculate once before previous method to avoid running more expensive checks above this highest possible maximum
             if (sa.hasParam("AIMaxTgtCost")) {
                 String value = sa.getParam("AIMaxTgtCost");
                 String svar = source.getSVar(value);
