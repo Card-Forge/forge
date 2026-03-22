@@ -50,6 +50,7 @@ public class DeckImportController {
     private GameFormat currentGameFormat;
     private GameType currentGameType;
     private final List<DeckSection> allowedSections = new ArrayList<>();
+    private boolean commanderAutoDetected = false;
     private ItemPool<PaperCard> playerInventory;
     /**
      * If a free card is missing from a player's inventory (e.g. a basic land), it gets run through this function, which
@@ -113,6 +114,10 @@ public class DeckImportController {
 
     public boolean hasNoDefaultGameFormat(){
         return this.currentGameFormat == null;
+    }
+
+    public boolean wasCommanderAutoDetected() {
+        return commanderAutoDetected;
     }
 
     public String getCurrentGameFormatName(){
@@ -197,6 +202,15 @@ public class DeckImportController {
     public List<Token> parseInput(String input) {
         tokens.clear();
         cardsInTokens.clear();
+        commanderAutoDetected = false;
+
+        // Auto-detect Commander format from explicit section headers in input
+        if (!this.allowedSections.contains(DeckSection.Commander)
+                && inputContainsCommanderSection(input)) {
+            this.allowedSections.add(DeckSection.Commander);
+            commanderAutoDetected = true;
+        }
+
         DeckRecognizer recognizer = new DeckRecognizer();
         // Set Art Preference first thing
         recognizer.setArtPreference(this.artPreference);
@@ -223,6 +237,20 @@ public class DeckImportController {
         List<Token> parsedTokens = recognizer.parseCardList(lines);
         if (parsedTokens != null)
             tokens.addAll(parsedTokens);
+
+        // Heuristic Commander detection for headerless formats (e.g. Moxfield MTGO/Plain Text)
+        // Run when no explicit Commander header exists in the input and the deck looks like Commander.
+        // Note: the recognizer auto-assigns the first legendary creature to Commander section
+        // when Commander is allowed, so we check for headers rather than section emptiness.
+        if (!inputContainsCommanderSection(input) && looksLikeCommanderDeck()) {
+            if (!this.allowedSections.contains(DeckSection.Commander))
+                this.allowedSections.add(DeckSection.Commander);
+            // Use blank-line separator to identify commander(s).
+            // Only flag as auto-detected if a valid commander was actually found,
+            // to avoid false positives on other 100-singleton formats (Canadian Highlander, etc.)
+            if (identifyCommanderFromBlankLineSeparator(input))
+                commanderAutoDetected = true;
+        }
 
         if (this.currentGameFormatAllowsCommander()) {
             List<Pair<Integer, Token>> commanderTokens = getTokensInSection(DeckSection.Commander);
@@ -345,6 +373,104 @@ public class DeckImportController {
 
     public boolean currentGameFormatAllowsCommander(){
         return this.allowedSections.contains(DeckSection.Commander) || this.currentGameType == GameType.PlanarConquest;
+    }
+
+    /**
+     * Pre-scan input text for explicit Commander section headers (e.g. from Arena/Moxfield MTGA exports).
+     */
+    private static boolean inputContainsCommanderSection(String input) {
+        for (String line : input.split("\n")) {
+            String trimmed = line.trim().replaceAll("^[/#*]+\\s*", "")
+                    .replaceAll("[:\\s]+$", "").toLowerCase();
+            if (trimmed.equals("commander"))
+                return true;
+            if (line.trim().startsWith("CM:"))
+                return true;
+        }
+        return false;
+    }
+
+    /**
+     * Heuristic: detect Commander format from parsed tokens.
+     * Returns true if total card count is 98-102 and all non-basic-land cards are singletons.
+     */
+    private boolean looksLikeCommanderDeck() {
+        int totalCards = 0;
+        boolean allSingletons = true;
+        for (Token token : tokens) {
+            if (!token.isCardToken())
+                continue;
+            totalCards += token.getQuantity();
+            if (token.getQuantity() > 1) {
+                PaperCard card = token.getCard();
+                if (card == null || !card.getRules().getType().isBasicLand())
+                    allSingletons = false;
+            }
+        }
+        return totalCards >= 98 && totalCards <= 102 && allSingletons;
+    }
+
+    /**
+     * For headerless Commander formats (Moxfield MTGO/Plain Text), identify commander(s) from
+     * cards appearing after the last blank line in the input. Only assigns if the trailing card(s)
+     * are valid commander candidates (legendary creatures, eligible planeswalkers, etc.).
+     */
+    private boolean identifyCommanderFromBlankLineSeparator(String input) {
+        String[] lines = input.split("\n");
+        // Find cards after the last blank line
+        List<String> trailingCardNames = new ArrayList<>();
+        boolean foundBlank = false;
+        for (int i = lines.length - 1; i >= 0; i--) {
+            if (lines[i].trim().isEmpty()) {
+                foundBlank = true;
+                break;
+            }
+            trailingCardNames.add(0, lines[i].trim());
+        }
+        if (!foundBlank || trailingCardNames.isEmpty() || trailingCardNames.size() > 2)
+            return false;
+
+        // Undo any premature Commander auto-assignments from the recognizer.
+        // (The recognizer auto-assigns the first legendary creature to Commander
+        // when no section headers are present — move those back to Main first.)
+        for (Token token : tokens) {
+            if (token.isCardToken() && token.getTokenSection() == DeckSection.Commander) {
+                token.resetTokenSection(DeckSection.Main);
+            }
+        }
+
+        // Match trailing card names to tokens, assign to Commander section,
+        // and move them in the token list under a new Commander section header
+        List<Token> commanderTokens = new ArrayList<>();
+        for (Token token : tokens) {
+            if (!token.isCardToken())
+                continue;
+            PaperCard card = token.getCard();
+            if (card == null)
+                continue;
+            for (String trailingLine : trailingCardNames) {
+                if (trailingLine.contains(card.getName()) && DeckSection.Commander.validate(card)) {
+                    token.resetTokenSection(DeckSection.Commander);
+                    commanderTokens.add(token);
+                    break;
+                }
+            }
+        }
+
+        // Move matched commander tokens to a new Commander section at the top of the list
+        if (!commanderTokens.isEmpty()) {
+            for (Token ct : commanderTokens)
+                tokens.remove(ct);
+            // Insert after deck name (index 0) if present, otherwise at the very start
+            int insertAt = 0;
+            if (!tokens.isEmpty() && tokens.get(0).getType() == TokenType.DECK_NAME)
+                insertAt = 1;
+            tokens.add(insertAt, Token.DeckSection(DeckSection.Commander.name(), this.allowedSections));
+            for (int i = 0; i < commanderTokens.size(); i++)
+                tokens.add(insertAt + 1 + i, commanderTokens.get(i));
+            return true;
+        }
+        return false;
     }
 
     public List<Token> optimiseCardArtInTokens(){
