@@ -45,4 +45,11 @@ public interface IGameController {
     String getActivateDescription(CardView card);
 
     void reorderHand(CardView card, int index);
+
+    /**
+     * Request a full state resync from the server.
+     * Called automatically when checksum validation fails to recover from desynchronization.
+     */
+    void requestResync();
+
 }

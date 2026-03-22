@@ -7,13 +7,12 @@ import forge.gui.util.SOptionPane;
 import forge.localinstance.skin.FSkinProp;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import org.tinylog.Logger;
 
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapter {
+public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapter implements IHasNetLog {
 
     private final boolean runInEdt;
     protected GameProtocolHandler(final boolean runInEdt) {
@@ -24,17 +23,15 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
     protected abstract IRemote getRemote(ChannelHandlerContext ctx);
 
     protected abstract T getToInvoke(ChannelHandlerContext ctx);
-    protected abstract void beforeCall(ProtocolMethod protocolMethod, Object[] args);
+    protected abstract void beforeCall(ChannelHandlerContext ctx, ProtocolMethod protocolMethod, Object[] args);
 
     @Override
     public final void channelRead(final ChannelHandlerContext ctx, final Object msg) {
         final String[] catchedError = {""};
-        Logger.info("Received: {}", msg);
-        if (msg instanceof ReplyEvent) {
-            final ReplyEvent event = (ReplyEvent) msg;
+        netLog.info("Received: {}", msg);
+        if (msg instanceof ReplyEvent event) {
             getReplyPool(ctx).complete(event.getIndex(), event.getReply());
-        } else if (msg instanceof GuiGameEvent) {
-            final GuiGameEvent event = (GuiGameEvent) msg;
+        } else if (msg instanceof GuiGameEvent event) {
             final ProtocolMethod protocolMethod = event.getMethod();
             final String methodName = protocolMethod.name();
 
@@ -42,7 +39,7 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
             if (method == null) {
                 //throw new IllegalStateException(String.format("Method %s not found", protocolMethod.name()));
                 catchedError[0] += String.format("IllegalStateException: Method %s not found (GameProtocolHandler.java Line 43)\n", protocolMethod.name());
-                Logger.error("Method {} not found", protocolMethod.name());
+                netLog.error("Method {} not found", protocolMethod.name());
             }
 
             final Object[] args = event.getObjects();
@@ -52,10 +49,10 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
 
             // Pre-call actions (runs on IO thread — blocks all subsequent messages)
             final long beforeCallStart = System.currentTimeMillis();
-            beforeCall(protocolMethod, args);
+            beforeCall(ctx, protocolMethod, args);
             final long beforeCallMs = System.currentTimeMillis() - beforeCallStart;
             if (beforeCallMs > 50) {
-                Logger.info("beforeCall({}) took {} ms on IO thread", methodName, beforeCallMs);
+                netLog.info("beforeCall({}) took {} ms on IO thread", methodName, beforeCallMs);
             }
 
             final Class<?> returnType = protocolMethod.getReturnType();
@@ -67,11 +64,11 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
                     try {
                         method.invoke(toInvoke, args);
                     } catch (final IllegalAccessException | IllegalArgumentException e) {
-                        Logger.error("Unknown protocol method {} with {} args", methodName, args == null ? 0 : args.length);
+                        netLog.error("Unknown protocol method {} with {} args", methodName, args == null ? 0 : args.length);
                     } catch (final InvocationTargetException e) {
                         //throw new RuntimeException(e.getTargetException());
                         catchedError[0] += (String.format("RuntimeException: %s (GameProtocolHandler.java Line 65)\n", e.getTargetException().toString()));
-                        Logger.error("InvocationTargetException: {}", e.getTargetException().toString());
+                        netLog.error(e.getTargetException(), "InvocationTargetException in {}", methodName);
                     }
                 } else {
                     Serializable reply = null;
@@ -81,21 +78,21 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
                             protocolMethod.checkReturnValue(theReply);
                             reply = (Serializable) theReply;
                         } else if (theReply != null) {
-                            Logger.error("Non-serializable return type {} for method {}, returning null", returnType.getName(), methodName);
+                            netLog.warn("Non-serializable return type {} for method {}, returning null", returnType.getName(), methodName);
                         }
                     } catch (final IllegalAccessException | IllegalArgumentException e) {
-                        Logger.error("Unknown protocol method {} with {} args, replying with null", methodName, args == null ? 0 : args.length);
+                        netLog.error("Unknown protocol method {} with {} args, replying with null", methodName, args == null ? 0 : args.length);
                     } catch (final NullPointerException | InvocationTargetException e) {
                         //throw new RuntimeException(e.getTargetException());
                         catchedError[0] += e.toString();
                         SOptionPane.showMessageDialog(catchedError[0], "Error", FSkinProp.ICO_WARNING);
-                        Logger.error("Exception in protocol method {}: {}", methodName, e.toString());
+                        netLog.error("Exception in protocol method {}: {}", methodName, e.toString());
                     }
                     getRemote(ctx).send(new ReplyEvent(event.getId(), reply));
                 }
                 final long elapsed = System.currentTimeMillis() - startMs;
                 if (queueDelayMs > 50 || elapsed > 50) {
-                    Logger.info("Protocol {} processed in {} ms (queued {} ms)", methodName, elapsed, queueDelayMs);
+                    netLog.info("Protocol {} processed in {} ms (queued {} ms)", methodName, elapsed, queueDelayMs);
                 }
             };
 
@@ -109,7 +106,17 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
 
     @Override
     public final void exceptionCaught(final ChannelHandlerContext ctx, final Throwable cause) {
-        cause.printStackTrace();
+        netLog.info("Connection exception: {}", cause.getClass().getName());
+        netLog.info("Message: {}", cause.getMessage());
+        if (cause.getCause() != null) {
+            netLog.info("Cause: {} - {}",
+                cause.getCause().getClass().getName(), cause.getCause().getMessage());
+        }
+        // Log stack trace elements
+        StackTraceElement[] stack = cause.getStackTrace();
+        for (int i = 0; i < Math.min(stack.length, 10); i++) {
+            netLog.info("  at {}", stack[i].toString());
+        }
         ctx.close();
     }
 

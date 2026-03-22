@@ -16,7 +16,18 @@ public final class ServerGameLobby extends GameLobby {
         addSlot(new LobbySlot(LobbySlotType.OPEN, null, -1, -1, 1, false, false, Collections.emptySet()));
     }
 
-    public int connectPlayer(final String name, final int avatarIndex, final int sleeveIndex) {
+    /**
+     * Connect a player to the first available open slot.
+     * This method is synchronized to prevent race conditions when multiple
+     * clients connect simultaneously (which could assign the same slot to
+     * multiple clients).
+     *
+     * @param name the player's name
+     * @param avatarIndex the avatar index
+     * @param sleeveIndex the sleeve index
+     * @return the assigned slot index, or -1 if no slots available
+     */
+    public synchronized int connectPlayer(final String name, final int avatarIndex, final int sleeveIndex) {
         final int nSlots = getNumberOfSlots();
         for (int index = 0; index < nSlots; index++) {
             final LobbySlot slot = getSlot(index);

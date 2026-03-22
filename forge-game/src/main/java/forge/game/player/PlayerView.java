@@ -192,6 +192,7 @@ public class PlayerView extends GameEntityView {
     }
     void updateCounters(Player p) {
         set(TrackableProperty.Counters, p.getCounters());
+        flagAsChanged(TrackableProperty.Counters);
     }
 
     public boolean getIsExtraTurn() {
@@ -390,18 +391,20 @@ public class PlayerView extends GameEntityView {
         Map<Integer, Integer> map = get(TrackableProperty.CommanderCast);
         if (map == null) {
             map = Maps.newHashMap();
+            set(TrackableProperty.CommanderCast, map);
         }
         map.put(c.getId(), p.getCommanderCast(c));
-        set(TrackableProperty.CommanderCast, map);
+        flagAsChanged(TrackableProperty.CommanderCast);
     }
 
     void updateMergedCommanderCast(Player p, Card target, Card commander) {
         Map<Integer, Integer> map = get(TrackableProperty.CommanderCast);
         if (map == null) {
             map = Maps.newHashMap();
+            set(TrackableProperty.CommanderCast, map);
         }
         map.put(target.getId(), p.getCommanderCast(commander));
-        set(TrackableProperty.CommanderCast, map);
+        flagAsChanged(TrackableProperty.CommanderCast);
     }
 
     public PlayerView getMindSlaveMaster() {

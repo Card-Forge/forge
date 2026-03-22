@@ -1,6 +1,9 @@
 package forge.trackable;
 
+import java.util.Collections;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Lists;
@@ -63,6 +66,24 @@ public class Tracker {
 
     public void clearDelayed() {
         delayedPropChanges.clear();
+    }
+
+    /**
+     * Read-only peek at delayed property changes queued for a specific object.
+     * Does not modify or remove the delayed changes.
+     */
+    public Map<TrackableProperty, Object> getDelayedPropsFor(TrackableObject obj) {
+        if (delayedPropChanges.isEmpty()) {
+            return Collections.emptyMap();
+        }
+        Map<TrackableProperty, Object> result = new EnumMap<>(TrackableProperty.class);
+        // needs thread safety
+        for (DelayedPropChange change : Lists.newArrayList(delayedPropChanges)) {
+            if (change.object == obj) {
+                result.put(change.prop, change.value);
+            }
+        }
+        return result;
     }
 
     private class DelayedPropChange {

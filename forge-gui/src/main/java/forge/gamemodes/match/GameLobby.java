@@ -531,8 +531,8 @@ public abstract class GameLobby implements IHasGameType {
 
             for (final Player p : hostedMatch.getGame().getPlayers()) {
                 final LobbySlot slot = playerToSlot.get(p.getRegisteredPlayer());
-                if (p.getController() instanceof IGameController) {
-                    gameControllers.put(slot, (IGameController) p.getController());
+                if (p.getController() instanceof IGameController controller) {
+                    gameControllers.put(slot, controller);
                 }
             }
 

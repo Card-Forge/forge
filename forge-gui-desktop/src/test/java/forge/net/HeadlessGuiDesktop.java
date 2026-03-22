@@ -2,6 +2,7 @@ package forge.net;
 
 import forge.GuiDesktop;
 import forge.gamemodes.match.HostedMatch;
+import forge.gamemodes.net.IHasNetLog;
 import forge.gui.interfaces.IGuiGame;
 import forge.localinstance.skin.FSkinProp;
 import forge.localinstance.skin.ISkinImage;
@@ -9,15 +10,40 @@ import forge.localinstance.skin.ISkinImage;
 import java.util.List;
 
 /**
- * Headless implementation of GuiDesktop for automated testing.
- * Overrides methods that require Singletons.getControl() or FSkin to be initialized.
+ * Headless GuiDesktop for automated testing.
+ * Overrides methods that require Singletons.getControl() or FSkin.
  */
-public class HeadlessGuiDesktop extends GuiDesktop {
+public class HeadlessGuiDesktop extends GuiDesktop implements IHasNetLog {
+
+    private static volatile HostedMatch lastMatch;
+    private static boolean testingEnvironmentLogged = false;
+
+    // Tests must call NetworkLogConfig.setTestMode(true) AFTER GuiBase.setInterface()
+    // to avoid initialization order issues.
 
     @Override
     public HostedMatch hostMatch() {
-        // Skip Singletons.getControl().addMatch() which requires full GUI init
-        return new HostedMatch();
+        logTestingEnvironment();
+        lastMatch = new HostedMatch();
+        return lastMatch;
+    }
+
+    private static synchronized void logTestingEnvironment() {
+        if (!testingEnvironmentLogged) {
+            testingEnvironmentLogged = true;
+            netLog.info("================================================================================");
+            netLog.info("TESTING ENVIRONMENT - HeadlessGuiDesktop Active");
+            netLog.info("This log was created from automated test infrastructure.");
+            netLog.info("================================================================================");
+        }
+    }
+
+    public static HostedMatch getLastMatch() {
+        return lastMatch;
+    }
+
+    public static void clearLastMatch() {
+        lastMatch = null;
     }
 
     @Override
@@ -26,20 +52,19 @@ public class HeadlessGuiDesktop extends GuiDesktop {
     }
 
     @Override
-    public void showSpellShop() {
-    }
+    public void showSpellShop() { }
 
     @Override
-    public void showBazaar() {
-    }
-
-    // ========== Dialog methods - override to avoid FSkin dependency ==========
+    public void showBazaar() { }
 
     @Override
     public int showOptionDialog(final String message, final String title,
                                 final FSkinProp icon, final List<String> options,
                                 final int defaultOption) {
         System.err.println("[HeadlessGuiDesktop] " + title + ": " + message);
+        if (options != null && !options.isEmpty()) {
+            System.err.println("[HeadlessGuiDesktop] Options: " + options + ", returning: " + defaultOption);
+        }
         return defaultOption;
     }
 
@@ -64,6 +89,7 @@ public class HeadlessGuiDesktop extends GuiDesktop {
 
     @Override
     public String showFileDialog(final String title, final String defaultDir) {
+        System.err.println("[HeadlessGuiDesktop] File dialog: " + title);
         return null;
     }
 
@@ -72,8 +98,6 @@ public class HeadlessGuiDesktop extends GuiDesktop {
         System.err.println("[HeadlessGuiDesktop] Bug Report - " + title + ":");
         System.err.println(text);
     }
-
-    // ========== Audio methods - disable in headless mode ==========
 
     @Override
     public forge.sound.IAudioClip createAudioClip(final String filename) {
@@ -86,10 +110,9 @@ public class HeadlessGuiDesktop extends GuiDesktop {
     }
 
     @Override
-    public void startAltSoundSystem(final String filename, final boolean isSynchronized) {
-    }
+    public void startAltSoundSystem(final String filename, final boolean isSynchronized) { }
 
-    // EDT methods: inherit from GuiDesktop (SwingUtilities.invokeLater/invokeAndWait)
-    // to preserve real threading semantics. Running EDT synchronously would hide
-    // concurrency bugs between the game thread and EDT.
+    // EDT methods intentionally NOT overridden — inherits real SwingUtilities
+    // threading from GuiDesktop to preserve two-thread (Netty + EDT) concurrency
+    // so tests can catch race conditions.
 }
