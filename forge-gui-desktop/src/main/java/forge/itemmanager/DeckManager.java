@@ -315,6 +315,11 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                 DeckPreferences.setCurrentDeck((deck != null) ? deck.toString() : "");
                 editorCtrl = new CEditorConstructed(getCDetailPicture(), this.gameType);
                 break;
+            case DanDan:
+                screen = FScreen.DECK_EDITOR_CONSTRUCTED;
+                DeckPreferences.setDanDanDeck((deck != null) ? deck.toString() : "");
+                editorCtrl = new CEditorConstructed(getCDetailPicture(), this.gameType);
+                break;
             case Commander:
                 screen = FScreen.DECK_EDITOR_CONSTRUCTED;  // re-use "Deck Editor", rather than creating a new top level tab
                 DeckPreferences.setCommanderDeck((deck != null) ? deck.toString() : "");
@@ -386,6 +391,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
             case Commander:
             case Oathbreaker:
             case TinyLeaders:
+            case DanDan:
             case Constructed:
             case Draft:
             case Sealed:

@@ -5,6 +5,8 @@ import forge.util.Localizer;
 
 public enum DeckType {
     CUSTOM_DECK("lblCustomUserDecks"),
+    /** Saved under the user's {@code dandan} deck directory. */
+    DAN_DAN_DECK("lblDanDanDecks"),
     CONSTRUCTED_DECK("lblConstructedDecks"),
     COMMANDER_DECK("lblCommanderDecks"),
     RANDOM_COMMANDER_DECK("lblRandomCommanderDecks"),
@@ -43,6 +45,7 @@ public enum DeckType {
     NET_ARCHIVE_BLOCK_DECK("lblNetArchiveBlockDecks");
 
     public static DeckType[] ConstructedOptions;
+    public static DeckType[] DanDanOptions;
     public static DeckType[] CommanderOptions;
 
     static {
@@ -73,9 +76,54 @@ public enum DeckType {
                     DeckType.NET_ARCHIVE_VINTAGE_DECK,
                     DeckType.NET_ARCHIVE_BLOCK_DECK
             };
+            DanDanOptions = new DeckType[]{
+                    DeckType.DAN_DAN_DECK,
+                    DeckType.PRECONSTRUCTED_DECK,
+                    DeckType.QUEST_OPPONENT_DECK,
+                    DeckType.COLOR_DECK,
+                    DeckType.STANDARD_COLOR_DECK,
+                    DeckType.MODERN_COLOR_DECK,
+                    DeckType.PAUPER_COLOR_DECK,
+                    DeckType.STANDARD_CARDGEN_DECK,
+                    DeckType.MODERN_CARDGEN_DECK,
+                    DeckType.PAUPER_CARDGEN_DECK,
+                    DeckType.LEGACY_CARDGEN_DECK,
+                    DeckType.VINTAGE_CARDGEN_DECK,
+                    DeckType.PIONEER_CARDGEN_DECK,
+                    DeckType.HISTORIC_CARDGEN_DECK,
+                    DeckType.THEME_DECK,
+                    DeckType.RANDOM_DECK,
+                    DeckType.NET_DECK,
+                    DeckType.NET_ARCHIVE_STANDARD_DECK,
+                    DeckType.NET_ARCHIVE_PIONEER_DECK,
+                    DeckType.NET_ARCHIVE_MODERN_DECK,
+                    DeckType.NET_ARCHIVE_PAUPER_DECK,
+                    DeckType.NET_ARCHIVE_LEGACY_DECK,
+                    DeckType.NET_ARCHIVE_VINTAGE_DECK,
+                    DeckType.NET_ARCHIVE_BLOCK_DECK
+            };
         } else {
             ConstructedOptions = new DeckType[]{
                     DeckType.CUSTOM_DECK,
+                    DeckType.PRECONSTRUCTED_DECK,
+                    DeckType.QUEST_OPPONENT_DECK,
+                    DeckType.COLOR_DECK,
+                    DeckType.STANDARD_COLOR_DECK,
+                    DeckType.MODERN_COLOR_DECK,
+                    DeckType.PAUPER_COLOR_DECK,
+                    DeckType.THEME_DECK,
+                    DeckType.RANDOM_DECK,
+                    DeckType.NET_DECK,
+                    DeckType.NET_ARCHIVE_STANDARD_DECK,
+                    DeckType.NET_ARCHIVE_PIONEER_DECK,
+                    DeckType.NET_ARCHIVE_MODERN_DECK,
+                    DeckType.NET_ARCHIVE_PAUPER_DECK,
+                    DeckType.NET_ARCHIVE_LEGACY_DECK,
+                    DeckType.NET_ARCHIVE_VINTAGE_DECK,
+                    DeckType.NET_ARCHIVE_BLOCK_DECK
+            };
+            DanDanOptions = new DeckType[]{
+                    DeckType.DAN_DAN_DECK,
                     DeckType.PRECONSTRUCTED_DECK,
                     DeckType.QUEST_OPPONENT_DECK,
                     DeckType.COLOR_DECK,

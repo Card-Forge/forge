@@ -81,6 +81,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
 
         switch (this.gameType) {
             case Constructed:
+            case DanDan:
                 allSections.add(DeckSection.Avatar);
                 allSections.add(DeckSection.Conspiracy);
 
@@ -156,6 +157,9 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
             case Constructed:
                 this.controller = new DeckController<>(FModel.getDecks().getConstructed(), this, newCreator);
                 break;
+            case DanDan:
+                this.controller = new DeckController<>(FModel.getDecks().getDanDan(), this, newCreator);
+                break;
             case Commander:
                 this.controller = new DeckController<>(FModel.getDecks().getCommander(), this, newCreator);
                 break;
@@ -184,6 +188,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
             switch (this.gameType) {
                 case Constructed:
+                case DanDan:
                     return CardLimit.Default;
                 case Commander:
                 case Oathbreaker:
@@ -481,7 +486,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 deckManager.setPool(this.controller.getModel().getOrCreate(DeckSection.Schemes));
                 break;
             case Commander:
-                if(gameType == GameType.Constructed)
+                if(gameType == GameType.Constructed || gameType == GameType.DanDan)
                     break;
                 this.getCatalogManager().setup(ItemManagerConfig.COMMANDER_POOL);
                 this.getCatalogManager().setPool(commanderPool, true);

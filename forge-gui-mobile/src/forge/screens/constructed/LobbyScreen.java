@@ -148,6 +148,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         cbVariants.addItem(GameType.Oathbreaker);
         cbVariants.addItem(GameType.TinyLeaders);
         cbVariants.addItem(GameType.Brawl);
+        cbVariants.addItem(GameType.DanDan);
         cbVariants.addItem(GameType.Planechase);
         cbVariants.addItem(GameType.Archenemy);
         cbVariants.addItem(GameType.ArchenemyRumble);
@@ -184,14 +185,14 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         updatePlayersFromPrefs();
 
         FThreads.invokeInBackgroundThread(() -> {
-            playerPanels.get(0).initialize(FPref.CONSTRUCTED_P1_DECK_STATE, FPref.COMMANDER_P1_DECK_STATE, FPref.OATHBREAKER_P1_DECK_STATE, FPref.TINY_LEADER_P1_DECK_STATE, FPref.BRAWL_P1_DECK_STATE, DeckType.PRECONSTRUCTED_DECK);
-            playerPanels.get(1).initialize(FPref.CONSTRUCTED_P2_DECK_STATE, FPref.COMMANDER_P2_DECK_STATE, FPref.OATHBREAKER_P2_DECK_STATE, FPref.TINY_LEADER_P2_DECK_STATE, FPref.BRAWL_P2_DECK_STATE, DeckType.COLOR_DECK);
+            playerPanels.get(0).initialize(FPref.CONSTRUCTED_P1_DECK_STATE, FPref.COMMANDER_P1_DECK_STATE, FPref.OATHBREAKER_P1_DECK_STATE, FPref.TINY_LEADER_P1_DECK_STATE, FPref.BRAWL_P1_DECK_STATE, FPref.DAN_DAN_P1_DECK_STATE, DeckType.PRECONSTRUCTED_DECK);
+            playerPanels.get(1).initialize(FPref.CONSTRUCTED_P2_DECK_STATE, FPref.COMMANDER_P2_DECK_STATE, FPref.OATHBREAKER_P2_DECK_STATE, FPref.TINY_LEADER_P2_DECK_STATE, FPref.BRAWL_P2_DECK_STATE, FPref.DAN_DAN_P2_DECK_STATE, DeckType.COLOR_DECK);
             try {
                 if (getNumPlayers() > 2) {
-                    playerPanels.get(2).initialize(FPref.CONSTRUCTED_P3_DECK_STATE, FPref.COMMANDER_P3_DECK_STATE, FPref.OATHBREAKER_P3_DECK_STATE, FPref.TINY_LEADER_P3_DECK_STATE, FPref.BRAWL_P3_DECK_STATE, DeckType.COLOR_DECK);
+                    playerPanels.get(2).initialize(FPref.CONSTRUCTED_P3_DECK_STATE, FPref.COMMANDER_P3_DECK_STATE, FPref.OATHBREAKER_P3_DECK_STATE, FPref.TINY_LEADER_P3_DECK_STATE, FPref.BRAWL_P3_DECK_STATE, FPref.DAN_DAN_P3_DECK_STATE, DeckType.COLOR_DECK);
                 }
                 if (getNumPlayers() > 3) {
-                    playerPanels.get(3).initialize(FPref.CONSTRUCTED_P4_DECK_STATE, FPref.COMMANDER_P4_DECK_STATE, FPref.OATHBREAKER_P3_DECK_STATE, FPref.TINY_LEADER_P4_DECK_STATE, FPref.BRAWL_P4_DECK_STATE, DeckType.COLOR_DECK);
+                    playerPanels.get(3).initialize(FPref.CONSTRUCTED_P4_DECK_STATE, FPref.COMMANDER_P4_DECK_STATE, FPref.OATHBREAKER_P3_DECK_STATE, FPref.TINY_LEADER_P4_DECK_STATE, FPref.BRAWL_P4_DECK_STATE, FPref.DAN_DAN_P4_DECK_STATE, DeckType.COLOR_DECK);
                 }
             } catch (Exception e) {}
             /*playerPanels.get(4).initialize(FPref.CONSTRUCTED_P5_DECK_STATE, DeckType.COLOR_DECK);
@@ -456,6 +457,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             lstVariants.addItem(new Variant(GameType.Oathbreaker));
             lstVariants.addItem(new Variant(GameType.TinyLeaders));
             lstVariants.addItem(new Variant(GameType.Brawl));
+            lstVariants.addItem(new Variant(GameType.DanDan));
             lstVariants.addItem(new Variant(GameType.Planechase));
             lstVariants.addItem(new Variant(GameType.Archenemy));
             lstVariants.addItem(new Variant(GameType.ArchenemyRumble));
@@ -587,6 +589,24 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             default:
                 break;
         }
+        final FDeckChooser danDanDeckChooser = playerPanels.get(slot).getDanDanDeckChooser();
+        selectedDeckType = danDanDeckChooser.getSelectedDeckType();
+        switch (selectedDeckType){
+            case STANDARD_CARDGEN_DECK:
+            case PIONEER_CARDGEN_DECK:
+            case HISTORIC_CARDGEN_DECK:
+            case MODERN_CARDGEN_DECK:
+            case LEGACY_CARDGEN_DECK:
+            case VINTAGE_CARDGEN_DECK:
+            case PAUPER_CARDGEN_DECK:
+            case COLOR_DECK:
+            case STANDARD_COLOR_DECK:
+            case MODERN_COLOR_DECK:
+                danDanDeckChooser.refreshDeckListForAI();
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
@@ -618,9 +638,9 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 else {
                     panel = new PlayerPanel(this, allowNetworking, i, slot, lobby.mayEdit(i), lobby.hasControl());
                     if (i == 2) {
-                        panel.initialize(FPref.CONSTRUCTED_P3_DECK_STATE, FPref.COMMANDER_P3_DECK_STATE, FPref.OATHBREAKER_P3_DECK_STATE, FPref.TINY_LEADER_P3_DECK_STATE, FPref.BRAWL_P3_DECK_STATE, DeckType.COLOR_DECK);
+                        panel.initialize(FPref.CONSTRUCTED_P3_DECK_STATE, FPref.COMMANDER_P3_DECK_STATE, FPref.OATHBREAKER_P3_DECK_STATE, FPref.TINY_LEADER_P3_DECK_STATE, FPref.BRAWL_P3_DECK_STATE, FPref.DAN_DAN_P3_DECK_STATE, DeckType.COLOR_DECK);
                     } else if (i == 3) {
-                        panel.initialize(FPref.CONSTRUCTED_P4_DECK_STATE, FPref.COMMANDER_P4_DECK_STATE, FPref.OATHBREAKER_P4_DECK_STATE, FPref.TINY_LEADER_P4_DECK_STATE, FPref.BRAWL_P4_DECK_STATE, DeckType.COLOR_DECK);
+                        panel.initialize(FPref.CONSTRUCTED_P4_DECK_STATE, FPref.COMMANDER_P4_DECK_STATE, FPref.OATHBREAKER_P4_DECK_STATE, FPref.TINY_LEADER_P4_DECK_STATE, FPref.BRAWL_P4_DECK_STATE, FPref.DAN_DAN_P4_DECK_STATE, DeckType.COLOR_DECK);
                     }
                     playerPanels.add(panel);
                     playersScroll.add(panel);
@@ -728,6 +748,14 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 playerPanel.getBrawlDeckChooser().saveState();
                 deckName =  Forge.getLocalizer().getMessage("lblBrawlDeck") + ": "
                         + playerPanel.getBrawlDeckChooser().getDeck().getName();
+            }
+        }
+        else if (hasVariant(GameType.DanDan)) {
+            deck = playerPanel.getDanDanDeck();
+            if (deck != null) {
+                playerPanel.getDanDanDeckChooser().saveState();
+                deckName = Forge.getLocalizer().getMessage("lblDanDanDeck") + ": "
+                        + playerPanel.getDanDanDeckChooser().getDeck().getName();
             }
         }else {
             deck = playerPanel.getDeck();

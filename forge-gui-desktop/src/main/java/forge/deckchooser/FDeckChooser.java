@@ -144,6 +144,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         case TinyLeaders:
             updateDecks(DeckProxy.getAllTinyLeadersDecks(), ItemManagerConfig.COMMANDER_DECKS);
             break;
+        case DanDan:
+            updateDecks(DeckProxy.getAllDanDanDecks(), ItemManagerConfig.CONSTRUCTED_DECKS);
+            break;
         default:
             updateDecks(DeckProxy.getAllConstructedDecks(), ItemManagerConfig.CONSTRUCTED_DECKS);
             break;
@@ -343,7 +346,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     @Override
     public void deckTypeSelected(final DecksComboBoxEvent ev) {
         if (ev.getDeckType() == DeckType.NET_ARCHIVE_STANDARD_DECK && !refreshingDeckType) {
-            if (lstDecks.getGameType() != GameType.Constructed)
+            if (lstDecks.getGameType() != GameType.Constructed && lstDecks.getGameType() != GameType.DanDan)
                 return;
             //needed for loading net decks
             FThreads.invokeInBackgroundThread(() -> {
@@ -365,7 +368,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             return;
 
         } else if (ev.getDeckType() == DeckType.NET_ARCHIVE_PIONEER_DECK && !refreshingDeckType) {
-            if (lstDecks.getGameType() != GameType.Constructed)
+            if (lstDecks.getGameType() != GameType.Constructed && lstDecks.getGameType() != GameType.DanDan)
                 return;
             //needed for loading net decks
             FThreads.invokeInBackgroundThread(() -> {
@@ -386,7 +389,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             return;
 
         } else if (ev.getDeckType() == DeckType.NET_ARCHIVE_MODERN_DECK && !refreshingDeckType) {
-            if (lstDecks.getGameType() != GameType.Constructed)
+            if (lstDecks.getGameType() != GameType.Constructed && lstDecks.getGameType() != GameType.DanDan)
                 return;
             //needed for loading net decks
             FThreads.invokeInBackgroundThread(() -> {
@@ -407,7 +410,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             return;
 
         } else if (ev.getDeckType() == DeckType.NET_ARCHIVE_PAUPER_DECK && !refreshingDeckType) {
-            if (lstDecks.getGameType() != GameType.Constructed)
+            if (lstDecks.getGameType() != GameType.Constructed && lstDecks.getGameType() != GameType.DanDan)
                 return;
             //needed for loading net decks
             FThreads.invokeInBackgroundThread(() -> {
@@ -428,7 +431,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             return;
 
         } else if (ev.getDeckType() == DeckType.NET_ARCHIVE_LEGACY_DECK && !refreshingDeckType) {
-            if (lstDecks.getGameType() != GameType.Constructed)
+            if (lstDecks.getGameType() != GameType.Constructed && lstDecks.getGameType() != GameType.DanDan)
                 return;
             //needed for loading net decks
             FThreads.invokeInBackgroundThread(() -> {
@@ -449,7 +452,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             return;
 
         } else if (ev.getDeckType() == DeckType.NET_ARCHIVE_VINTAGE_DECK && !refreshingDeckType) {
-            if (lstDecks.getGameType() != GameType.Constructed)
+            if (lstDecks.getGameType() != GameType.Constructed && lstDecks.getGameType() != GameType.DanDan)
                 return;
             //needed for loading net decks
             FThreads.invokeInBackgroundThread(() -> {
@@ -470,7 +473,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             return;
 
         } else if (ev.getDeckType() == DeckType.NET_ARCHIVE_BLOCK_DECK && !refreshingDeckType) {
-            if (lstDecks.getGameType() != GameType.Constructed)
+            if (lstDecks.getGameType() != GameType.Constructed && lstDecks.getGameType() != GameType.DanDan)
                 return;
             //needed for loading net decks
             FThreads.invokeInBackgroundThread(() -> {
@@ -538,7 +541,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
         if (ev == null) {
             refreshingDeckType = true;
-            decksComboBox.refresh(deckType, isForCommander);
+            decksComboBox.refresh(deckType, lstDecks.getGameType());
             refreshingDeckType = false;
         }
         lstDecks.setCaption(deckType.toString());
@@ -546,6 +549,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         switch (deckType) {
             case CUSTOM_DECK:
                 updateCustom();
+                break;
+            case DAN_DAN_DECK:
+                updateDecks(DeckProxy.getAllDanDanDecks(), ItemManagerConfig.CONSTRUCTED_DECKS);
                 break;
             case COMMANDER_DECK:
                 updateCustom();

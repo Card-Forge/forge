@@ -72,6 +72,14 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         BRAWL_P6_DECK_STATE(""),
         BRAWL_P7_DECK_STATE(""),
         BRAWL_P8_DECK_STATE(""),
+        DAN_DAN_P1_DECK_STATE(""),
+        DAN_DAN_P2_DECK_STATE(""),
+        DAN_DAN_P3_DECK_STATE(""),
+        DAN_DAN_P4_DECK_STATE(""),
+        DAN_DAN_P5_DECK_STATE(""),
+        DAN_DAN_P6_DECK_STATE(""),
+        DAN_DAN_P7_DECK_STATE(""),
+        DAN_DAN_P8_DECK_STATE(""),
         UI_LANDSCAPE_MODE ("false"),
         UI_MATCHES_PER_GAME("3"),
         UI_APPLIED_VARIANTS(""),
@@ -357,6 +365,12 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
                 BRAWL_P3_DECK_STATE, BRAWL_P4_DECK_STATE,
                 BRAWL_P5_DECK_STATE, BRAWL_P6_DECK_STATE,
                 BRAWL_P7_DECK_STATE, BRAWL_P8_DECK_STATE };
+
+        public static FPref[] DAN_DAN_DECK_STATES = {
+                DAN_DAN_P1_DECK_STATE, DAN_DAN_P2_DECK_STATE,
+                DAN_DAN_P3_DECK_STATE, DAN_DAN_P4_DECK_STATE,
+                DAN_DAN_P5_DECK_STATE, DAN_DAN_P6_DECK_STATE,
+                DAN_DAN_P7_DECK_STATE, DAN_DAN_P8_DECK_STATE };
 
         /** Phase stop prefs in PhaseType order (UPKEEP through CLEANUP, skipping UNTAP). */
         public static FPref[] PHASES_AI = {

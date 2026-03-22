@@ -31,6 +31,7 @@ public enum GameType {
     AdventureEvent      (DeckFormat.Limited, true, true, true, "lblAdventure", ""),
     Puzzle              (DeckFormat.Puzzle, false, false, false, "lblPuzzle", "lblPuzzleDesc"),
     Constructed         (DeckFormat.Constructed, false, true, true, "lblConstructed", ""),
+    DanDan              (DeckFormat.DanDan, false, true, true, "lblDanDan", "lblDanDanDesc"),
     DeckManager         (DeckFormat.Constructed, false, true, true, "lblDeckManager", ""),
     Vanguard            (DeckFormat.Vanguard, true, true, true, "lblVanguard", "lblVanguardDesc"),
     Commander           (DeckFormat.Commander, false, false, false, "lblCommander", "lblCommanderDesc"),
@@ -160,7 +161,7 @@ public enum GameType {
             return EnumSet.noneOf(DeckSection.class); //Already an extra deck, like a dedicated Scheme or Planar deck.
         if(deckFormat == DeckFormat.Limited)
             return EnumSet.of(DeckSection.Conspiracy, DeckSection.Contraptions, DeckSection.Attractions);
-        if(this == Constructed || this == Commander)
+        if(this == Constructed || this == Commander || this == DanDan)
             return EnumSet.of(DeckSection.Avatar, DeckSection.Schemes, DeckSection.Planes, DeckSection.Conspiracy,
                     DeckSection.Attractions, DeckSection.Contraptions);
         return EnumSet.of(DeckSection.Attractions, DeckSection.Contraptions);

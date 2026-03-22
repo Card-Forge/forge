@@ -89,13 +89,14 @@ public class VLobby implements ILobbyView {
     private final VariantCheckBox vntOathbreaker = new VariantCheckBox(GameType.Oathbreaker);
     private final VariantCheckBox vntTinyLeaders = new VariantCheckBox(GameType.TinyLeaders);
     private final VariantCheckBox vntBrawl = new VariantCheckBox(GameType.Brawl);
+    private final VariantCheckBox vntDanDan = new VariantCheckBox(GameType.DanDan);
     private final VariantCheckBox vntPlanechase = new VariantCheckBox(GameType.Planechase);
     private final VariantCheckBox vntArchenemy = new VariantCheckBox(GameType.Archenemy);
     private final VariantCheckBox vntArchenemyRumble = new VariantCheckBox(GameType.ArchenemyRumble);
     private final ImmutableList<VariantCheckBox> vntBoxesLocal  =
-            ImmutableList.of(vntVanguard, vntMomirBasic, vntMoJhoSto, vntCommander, vntOathbreaker, vntBrawl, vntTinyLeaders, vntPlanechase, vntArchenemy, vntArchenemyRumble);
+            ImmutableList.of(vntVanguard, vntMomirBasic, vntMoJhoSto, vntCommander, vntOathbreaker, vntBrawl, vntDanDan, vntTinyLeaders, vntPlanechase, vntArchenemy, vntArchenemyRumble);
     private final ImmutableList<VariantCheckBox> vntBoxesNetwork =
-            ImmutableList.of(vntVanguard, vntMomirBasic, vntMoJhoSto, vntCommander, vntOathbreaker, vntBrawl, vntTinyLeaders /*, vntPlanechase, vntArchenemy, vntArchenemyRumble */);
+            ImmutableList.of(vntVanguard, vntMomirBasic, vntMoJhoSto, vntCommander, vntOathbreaker, vntBrawl, vntDanDan, vntTinyLeaders /*, vntPlanechase, vntArchenemy, vntArchenemyRumble */);
 
     // Player frame elements
     private final JPanel playersFrame = new JPanel(new MigLayout("insets 0, gap 0 5, wrap, hidemode 3"));
@@ -591,6 +592,7 @@ public class VLobby implements ILobbyView {
         case Oathbreaker:
         case TinyLeaders:
         case Brawl:
+        case DanDan:
             decksFrame.add(getDeckChooser(playerWithFocus), "grow, push");
             break;
         case Planechase:
@@ -803,6 +805,11 @@ public class VLobby implements ILobbyView {
                 deckType = iSlot == 0 ? DeckType.BRAWL_DECK : DeckType.CUSTOM_DECK;
                 prefKey = FPref.BRAWL_DECK_STATES[iSlot];
                 break;
+            case DanDan:
+                forCommander = false;
+                deckType = iSlot == 0 ? DeckType.DAN_DAN_DECK : DeckType.COLOR_DECK;
+                prefKey = FPref.DAN_DAN_DECK_STATES[iSlot];
+                break;
             default:
                 forCommander = false;
                 deckType = iSlot == 0 ? DeckType.PRECONSTRUCTED_DECK : DeckType.COLOR_DECK;
@@ -810,7 +817,7 @@ public class VLobby implements ILobbyView {
                 break;
         }
         return cachedDeckChoosers.computeIfAbsent(prefKey, (key) -> {
-            final GameType gameType = forCommander ? type : GameType.Constructed;
+            final GameType gameType = type == GameType.DanDan ? GameType.DanDan : (forCommander ? type : GameType.Constructed);
             final FDeckChooser fdc = new FDeckChooser(null, ai, gameType, forCommander);
             fdc.initialize(prefKey, deckType);
             fdc.getLstDecks().setSelectCommand(() -> selectMainDeck(fdc, iSlot, forCommander));
