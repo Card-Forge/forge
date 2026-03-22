@@ -182,9 +182,20 @@ public final class NetworkChecksumUtil {
         if (snapshot != null) {
             Map<TrackableProperty, Object> snap = snapshot.get(obj);
             if (snap != null) {
-                // Do NOT fall back to live state, which can race with game-thread mutations
-                // and read a value that differs from what the delta carries.
-                return snap.get(prop);
+                Object value = snap.get(prop);
+                // Collection properties: read live state instead of snapshot.
+                // Collections can be mutated in-place by the game thread (e.g.
+                // updateMergeCollections) between getAndClearDirtyProps and the
+                // snapshot — the snapshot captures the new collection but the
+                // delta doesn't include it (not dirty). Live state matches the
+                // client for non-dirty collection properties
+                if (value instanceof TrackableCollection) {
+                    return getEffectiveValue(obj, prop);
+                }
+                // Scalar properties: snapshot is authoritative. Do NOT fall back
+                // to live state, which can race with game-thread mutations and
+                // read a value that differs from what the delta carries
+                return value;
             }
         }
         return getEffectiveValue(obj, prop);

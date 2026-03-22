@@ -217,26 +217,29 @@ public class DeltaSyncManager implements IHasNetLog {
                 // skip children this pass, next delta catches up
                 return;
             }
-            // Skip CardView/PlayerView found as single property values — these are
-            // reference properties (ExiledWith, CloneOrigin, Owner, etc.) serialized
-            // as IDs by toNetworkValue. The actual instances are discovered through
-            // their primary containment (zone collections, GameView.players). Walking
-            // stale references causes replacement cascades where an old CardView (from
-            // before a zone change) overwrites the current one.
+            // Skip stale GameEntityView references to prevent replacement cascades.
+            // After a zone change, cross-reference properties (ExiledWith, CloneOrigin,
+            // AttachedCards, etc.) may hold old CardView instances. Walking them would
+            // overwrite correct state. Only GameEntityView parents have these stale
+            // cross-references; non-GameEntityView parents (StackItemView.SourceCard,
+            // SpellAbilityView.HostCard) hold primary containment references that must
+            // be walked.
             //
-            // For collections: when the parent is a CardView, its collection properties
-            // (AttachedCards, HauntedBy, MergedCards, etc.) are also references — skip
-            // CardView items. Zone collections on PlayerView/GameView must be walked.
-            boolean skipCardViewInCollections = obj instanceof CardView;
+            // For collections on CardView parents: skip CardView items already discovered
+            // through zone collections (in currentObjectIds). Walk undiscovered items
+            // which may be primary containment (e.g. MergedCardsCollection for Mutate)
+            boolean parentIsGameEntityView = obj instanceof GameEntityView;
+            boolean parentIsCardView = obj instanceof CardView;
             for (Object value : values) {
                 if (value instanceof TrackableObject to) {
-                    if (!(to instanceof GameEntityView)) {
+                    if (!(parentIsGameEntityView && to instanceof GameEntityView)) {
                         walkAndCollect(to, objectDeltas, newObjects, currentObjectIds, checksumSnapshot);
                     }
                 } else if (value instanceof TrackableCollection) {
                     for (Object item : (TrackableCollection<?>) value) {
                         if (item instanceof TrackableObject to) {
-                            if (skipCardViewInCollections && to instanceof CardView) {
+                            if (parentIsCardView && to instanceof CardView
+                                    && currentObjectIds.contains(DeltaPacket.makeDeltaKey(to))) {
                                 continue;
                             }
                             walkAndCollect(to, objectDeltas, newObjects, currentObjectIds, checksumSnapshot);
@@ -507,21 +510,21 @@ public class DeltaSyncManager implements IHasNetLog {
             obj.registerConsumer(consumerId);
         }
 
-        // Same child traversal rules as walkAndCollect: skip single CardView/PlayerView
-        // reference properties (stale references), skip CardView items in CardView
-        // collection properties (attachment/haunt references vs zone collections).
+        // Same child traversal rules as walkAndCollect — see comments there
         Map<TrackableProperty, Object> props = obj.getProps();
         if (props != null) {
-            boolean skipCardViewInCollections = obj instanceof CardView;
+            boolean parentIsGameEntityView = obj instanceof GameEntityView;
+            boolean parentIsCardView = obj instanceof CardView;
             for (Object value : props.values()) {
                 if (value instanceof TrackableObject to) {
-                    if (!(to instanceof CardView) && !(to instanceof PlayerView)) {
+                    if (!(parentIsGameEntityView && to instanceof GameEntityView)) {
                         walkAndRegister(to, visited);
                     }
                 } else if (value instanceof TrackableCollection) {
                     for (Object item : (TrackableCollection<?>) value) {
                         if (item instanceof TrackableObject to) {
-                            if (skipCardViewInCollections && to instanceof CardView) {
+                            if (parentIsCardView && to instanceof CardView
+                                    && visited.contains(DeltaPacket.makeDeltaKey(to))) {
                                 continue;
                             }
                             walkAndRegister(to, visited);

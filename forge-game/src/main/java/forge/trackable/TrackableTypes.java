@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.tinylog.Logger;
 import com.google.common.collect.Maps;
 
 import forge.card.CardType;
@@ -96,22 +95,22 @@ public class TrackableTypes {
         protected void copyChangedProps(TrackableObject from, TrackableObject to, TrackableProperty prop) {
             TrackableCollection<T> newCollection = from.get(prop);
             if (newCollection != null) {
-                //swap in objects in old collection for objects in new collection
-                for (int i = 0; i < newCollection.size(); i++) {
-                    try {
-                        T newObj = newCollection.get(i);
-                        if (newObj != null) {
-                            T existingObj = from.getTracker().getObj(itemType, newObj.getId());
-                            if (existingObj != null) {
-                                existingObj.copyChangedProps(newObj);
-                                newCollection.replace(i, existingObj);
-                            } else {
-                                //if object is new, cache in object lookup
-                                from.getTracker().putObj(itemType, newObj.getId(), newObj);
-                            }
+                // Snapshot to avoid IndexOutOfBoundsException from concurrent modification
+                // during setGameView resync (game thread can modify collections while the
+                // protocol handler iterates them)
+                @SuppressWarnings("unchecked")
+                T[] items = (T[]) newCollection.toArray(new TrackableObject[0]);
+                newCollection.clear();
+                for (T newObj : items) {
+                    if (newObj != null) {
+                        T existingObj = from.getTracker().getObj(itemType, newObj.getId());
+                        if (existingObj != null) {
+                            existingObj.copyChangedProps(newObj);
+                            newCollection.add(existingObj);
+                        } else {
+                            from.getTracker().putObj(itemType, newObj.getId(), newObj);
+                            newCollection.add(newObj);
                         }
-                    } catch (IndexOutOfBoundsException e) {
-                        Logger.warn("IndexOutOfBoundsException in TrackableTypes, trying to continue");
                     }
                 }
             }

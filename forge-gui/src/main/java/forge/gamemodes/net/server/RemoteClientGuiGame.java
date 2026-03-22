@@ -25,7 +25,6 @@ import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
-import forge.trackable.Tracker;
 import forge.trackable.TrackableCollection;
 import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
@@ -496,8 +495,13 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
                 }
             }
         }
-        Tracker tracker = getGameView() != null ? getGameView().getTracker() : null;
-        List<Object> proxied = GameEventProxy.wrapAll(events, tracker);
+        // Skip server-side sanity check (null tracker). The check uses objLookups
+        // which is only populated at initial setGameView — CardViews created later
+        // (bounced cards, tokens, zone changes) are never registered, causing their
+        // events to be silently dropped. The client resolves IdRefs AFTER applying
+        // the bundled delta, which creates the new objects. The client-side
+        // hasUnresolvedRefs check in unwrapAll is the real safety net.
+        List<Object> proxied = GameEventProxy.wrapAll(events, null);
         if (useDeltaSync && initialSyncSent && objectsRegistered) {
             // Bundle events with delta so they're applied atomically:
             // delta properties first, then events forwarded.

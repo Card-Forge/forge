@@ -18,6 +18,8 @@
 package forge.screens.match.views;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.IdentityHashMap;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -204,8 +206,16 @@ public class VLog implements IVDoc<CLog> {
             } else {
                 logEntries = model.getGameLog().getLogEntriesForVerbosity(verbosity);
             }
-            // Set subtraction - remove all log entries from new list which are already displayed.
-            logEntries.removeAll(this.displayedLogEntries);
+            // Use identity comparison to filter displayed entries. GameLogEntry
+            // is a record (value equality) and CardView.equals() compares by ID,
+            // so recasting the same card produces a value-equal entry that
+            // removeAll would incorrectly filter out. Identity comparison
+            // correctly distinguishes distinct game events.
+            IdentityHashMap<GameLogEntry, Boolean> displayed = new IdentityHashMap<>();
+            for (GameLogEntry e : this.displayedLogEntries) {
+                displayed.put(e, Boolean.TRUE);
+            }
+            logEntries.removeIf(displayed::containsKey);
             return logEntries;
         }
         return new ArrayList<>();
@@ -214,7 +224,11 @@ public class VLog implements IVDoc<CLog> {
     private void addNewLogEntriesToJPanel(final List<GameLogEntry> newLogEntries) {
         for (final GameLogEntry logEntry : newLogEntries) {
             gameLog.setTextFont(getJTextAreaFont(logEntry.type()));
-            gameLog.addLogEntry(logEntry.message(), logEntry.sourceCard(), controller.getMatchUI().getLocalPlayers());
+            // Empty viewers bypasses Zone-based visibility in getImageKey —
+            // log thumbnails always show face-up art (the log represents public
+            // actions). Face-down cards (Morph) still show face-down art via the
+            // FaceDown check in getImageKey, which runs before canBeShownToAny.
+            gameLog.addLogEntry(logEntry.message(), logEntry.sourceCard(), Collections.emptyList());
             this.displayedLogEntries.add(logEntry);
         }
     }
