@@ -74,11 +74,8 @@ public class DeltaSyncManager implements IHasNetLog {
     private final Set<Integer> sentObjectIds = ConcurrentHashMap.newKeySet();
     // Objects registered with this consumer (for cleanup on disconnect/reset)
     private final Map<Integer, TrackableObject> registeredByKey = new HashMap<>();
-    // Maps deltaKey → the CardView instance discovered through a zone collection
-    // this cycle. Used to block stale cross-reference replacements: if the existing
-    // registered instance IS the authoritative one, a stale replacement is blocked.
-    // Cleared and rebuilt each collectDeltas cycle.
-    private final Map<Integer, TrackableObject> authoritativeInstances = new HashMap<>();
+    // Used to block stale cross-reference replacements
+    private final Map<Integer, CardView> authoritativeInstances = new HashMap<>();
 
     // Not atomic: only accessed from game thread
     // Start at 0 so the first checksum is deferred until the game state stabilizes.
@@ -264,8 +261,8 @@ public class DeltaSyncManager implements IHasNetLog {
                     if (entry.getValue() instanceof TrackableCollection<?> tc) {
                         for (Object item : tc) {
                             if (item instanceof TrackableObject to) {
-                                if (to instanceof CardView) {
-                                    authoritativeInstances.put(DeltaPacket.makeDeltaKey(to), to);
+                                if (to instanceof CardView cv) {
+                                    authoritativeInstances.put(DeltaPacket.makeDeltaKey(cv), cv);
                                 }
                                 walkAndCollect(to, objectDeltas, newObjects, currentObjectIds, checksumSnapshot);
                             }
@@ -408,8 +405,7 @@ public class DeltaSyncManager implements IHasNetLog {
                     try {
                         for (Object item : tc) {
                             if (item instanceof CardView cv) {
-                                authoritativeInstances.putIfAbsent(
-                                        DeltaPacket.makeDeltaKey(cv), cv);
+                                authoritativeInstances.putIfAbsent(DeltaPacket.makeDeltaKey(cv), cv);
                             }
                         }
                     } catch (ConcurrentModificationException e) {

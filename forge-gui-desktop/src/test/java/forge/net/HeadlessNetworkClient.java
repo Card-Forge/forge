@@ -212,9 +212,6 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasNetLog {
      * Lobby listener that handles server updates.
      */
     private class ClientLobbyListener implements ILobbyListener {
-        /** Special value indicating the client hasn't been assigned a slot yet.
-         * Must match RemoteClient.UNASSIGNED_SLOT on the server. */
-        private static final int UNASSIGNED_SLOT = -1;
 
         @Override
         public void update(GameLobbyData state, int slot) {
