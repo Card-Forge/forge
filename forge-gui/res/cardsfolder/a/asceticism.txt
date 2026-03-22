@@ -1,7 +1,7 @@
 Name:Asceticism
 ManaCost:3 G G
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Hexproof | Description$ Creatures you control have hexproof. (They can't be the targets of spells or abilities your opponents control.)
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Hexproof | Description$ Creatures you control have hexproof.
 A:AB$ Regenerate | Cost$ 1 G | ValidTgts$ Creature | SpellDescription$ Regenerate target creature.
 SVar:NonStackingEffect:True
-Oracle:Creatures you control have hexproof. (They can't be the targets of spells or abilities your opponents control.)\n{1}{G}: Regenerate target creature.
+Oracle:Creatures you control have hexproof.\n{1}{G}: Regenerate target creature. (The next time it would be destroyed this turn, instead tap it, remove it from combat, and heal all damage on it.)

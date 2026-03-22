@@ -5,4 +5,4 @@ PT:5/7
 K:Reach
 S:Mode$ Continuous | Affected$ Land.YouCtrl | MayPlay$ True | AffectedZone$ Graveyard | Description$ You may play lands from your graveyard.
 S:Mode$ Panharmonicon | ValidMode$ ChangesZone,ChangesZoneAll | ValidCard$ Permanent.YouCtrl | ValidCause$ Land | Destination$ Battlefield | Description$ If a land entering causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
-Oracle:Reach\nYou may play lands from your graveyard.\nIf a land entering causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
+Oracle:Reach (This creature can block creatures with flying.)\nYou may play lands from your graveyard.\nIf a land entering causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.

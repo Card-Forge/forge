@@ -1,7 +1,7 @@
 Name:Arctic Flats
 ManaCost:no cost
 Types:Snow Land
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
-A:AB$ Mana | Cost$ T | Produced$ Combo W G | SpellDescription$ Add {W} or {G}.
-Oracle:Arctic Flats enters tapped.\n{T}: Add {G} or {W}.
+A:AB$ Mana | Cost$ T | Produced$ Combo W G | SpellDescription$ Add {G} or {W}.
+Oracle:This land enters tapped.\n{T}: Add {G} or {W}.

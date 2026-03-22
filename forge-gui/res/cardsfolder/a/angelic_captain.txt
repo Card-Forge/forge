@@ -3,8 +3,8 @@ ManaCost:3 R W
 Types:Creature Angel Ally
 PT:4/3
 K:Flying
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +1/+1 until end of turn for each other attacking Ally.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever this creature attacks, it gets +1/+1 until end of turn for each other attacking Ally.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X | NumDef$ +X
 SVar:X:Count$Valid Ally.attacking+Other
 DeckHints:Type$Ally
-Oracle:Flying\nWhenever Angelic Captain attacks, it gets +1/+1 until end of turn for each other attacking Ally.
+Oracle:Flying\nWhenever this creature attacks, it gets +1/+1 until end of turn for each other attacking Ally.

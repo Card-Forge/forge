@@ -3,5 +3,5 @@ ManaCost:1 G
 Types:Creature Troll
 PT:3/3
 K:Echo:1 G
-A:AB$ Regenerate | Cost$ 1 G | SpellDescription$ Regenerate CARDNAME.
-Oracle:Echo {1}{G} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\n{1}{G}: Regenerate Albino Troll.
+A:AB$ Regenerate | Cost$ 1 G | SpellDescription$ Regenerate this creature.
+Oracle:Echo {1}{G} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\n{1}{G}: Regenerate this creature.

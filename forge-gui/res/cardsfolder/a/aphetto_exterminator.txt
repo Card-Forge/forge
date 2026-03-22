@@ -3,6 +3,6 @@ ManaCost:2 B
 Types:Creature Human Wizard
 PT:3/1
 K:Morph:3 B
-T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, target creature gets -3/-3 until end of turn.
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ When this creature is turned face up, target creature gets -3/-3 until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True
-Oracle:Morph {3}{B} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Aphetto Exterminator is turned face up, target creature gets -3/-3 until end of turn.
+Oracle:Morph {3}{B} (You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen this creature is turned face up, target creature gets -3/-3 until end of turn.
