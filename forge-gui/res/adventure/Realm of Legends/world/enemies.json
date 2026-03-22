@@ -922,7 +922,7 @@
     ],
     "ai": "",
     "speed": 45,
-    "scale": 1,
+    "scale": 3,
     "life": 50,
     "rewards": [
       {
