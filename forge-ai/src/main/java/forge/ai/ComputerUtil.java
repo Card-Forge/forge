@@ -3108,6 +3108,10 @@ public class ComputerUtil {
     // call this to determine if it's safe to use a life payment spell
     // or trigger "emergency" strategies such as holding mana for Spike Weaver of Counterspell.
     public static boolean aiLifeInDanger(Player ai, boolean serious, int payment) {
+        if (payment == 0 && ai.getController().isAI()) {
+            AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
+            return aic.getPredictedRemainingLife(serious) == Integer.MIN_VALUE;
+        }
         return predictNextCombatsRemainingLife(ai, serious, false, payment, null) == Integer.MIN_VALUE;
     }
     public static int predictNextCombatsRemainingLife(Player ai, boolean serious, boolean checkDiff, int payment, final CardCollection excludedBlockers) {
@@ -3140,6 +3144,31 @@ public class ComputerUtil {
             if (!containsAttacker) {
                 continue;
             }
+
+            // Short-circuit: if total attacker damage can't kill AI even with zero blocks,
+            // skip the expensive blocking simulation (only for danger checks, not checkDiff)
+            if (!checkDiff) {
+                int totalDamage = 0;
+                boolean skipShortCircuit = false;
+                for (Card att : combat.getAttackers()) {
+                    if (att.hasKeyword(Keyword.INFECT)) {
+                        skipShortCircuit = true;
+                        break;
+                    }
+                    totalDamage += att.getNetCombatDamage();
+                    if (att.hasDoubleStrike()) {
+                        totalDamage += att.getNetCombatDamage();
+                    }
+                    if (!att.getSVar("MustBeBlocked").isEmpty()) {
+                        skipShortCircuit = true;
+                        break;
+                    }
+                }
+                if (!skipShortCircuit && totalDamage + payment < ai.getLife()) {
+                    continue;
+                }
+            }
+
             // TODO if it's next turn ignore mustBlockCards
             AiBlockController block = new AiBlockController(ai, false);
             // TODO for performance skip ahead to safer blocking approach (though probably only when not in checkDiff mode as that could lead to inflated prediction)
@@ -3150,10 +3179,12 @@ public class ComputerUtil {
             // If added, might need a parameter to define whether we want to check all threats or combat threats.
 
             if (serious && ComputerUtilCombat.lifeInSeriousDanger(ai, combat, payment)) {
-                return Integer.MIN_VALUE;
+                remainingLife = Integer.MIN_VALUE;
+                break;
             }
             if (!serious && ComputerUtilCombat.lifeInDanger(ai, combat, payment)) {
-                return Integer.MIN_VALUE;
+                remainingLife = Integer.MIN_VALUE;
+                break;
             }
 
             if (checkDiff && !ai.cantLoseForZeroOrLessLife()) {

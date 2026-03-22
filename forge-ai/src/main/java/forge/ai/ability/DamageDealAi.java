@@ -1082,11 +1082,7 @@ public class DamageDealAi extends DamageAiBase {
         Game game = ai.getGame();
         int chance = AiProfileUtil.getIntProperty(ai, AiProps.CHANCE_TO_CHAIN_TWO_DAMAGE_SPELLS);
 
-        if (chance > 0 && (ComputerUtilCombat.lifeInDanger(ai, game.getCombat()) || ComputerUtil.aiLifeInDanger(ai, true, 0))) {
-            chance = 100; // in danger, do it even if normally the chance is low (unless chaining is completely disabled)
-        }
-
-        if (!MyRandom.percentTrue(chance)) {
+        if (chance == 0) {
             return null;
         }
 
@@ -1098,6 +1094,13 @@ public class DamageDealAi extends DamageAiBase {
         // chaining to this could miscalculate
         if (sa.isDividedAsYouChoose()) {
             return null;
+        }
+
+        if (!MyRandom.percentTrue(chance)) {
+            // Random check failed; override only if life is in danger (defer expensive check to here)
+            if (!(ComputerUtilCombat.lifeInDanger(ai, game.getCombat()) || ComputerUtil.aiLifeInDanger(ai, true, 0))) {
+                return null;
+            }
         }
 
         // Try to chain damage/debuff effects

@@ -93,6 +93,8 @@ public class AiController {
     private final AiCardMemory memory;
     private Combat predictedCombat;
     private Combat predictedCombatNextTurn;
+    private Integer predictedRemainingLife;
+    private Integer predictedRemainingLifeSerious;
     private boolean useSimulation;
     private SpellAbilityPicker simPicker;
     private int lastAttackAggression;
@@ -152,6 +154,19 @@ public class AiController {
             aiAtk.declareAttackers(predictedCombatNextTurn);
         }
         return predictedCombatNextTurn;
+    }
+
+    public int getPredictedRemainingLife(boolean serious) {
+        if (serious) {
+            if (predictedRemainingLifeSerious == null) {
+                predictedRemainingLifeSerious = ComputerUtil.predictNextCombatsRemainingLife(player, true, false, 0, null);
+            }
+            return predictedRemainingLifeSerious;
+        }
+        if (predictedRemainingLife == null) {
+            predictedRemainingLife = ComputerUtil.predictNextCombatsRemainingLife(player, false, false, 0, null);
+        }
+        return predictedRemainingLife;
     }
 
     private List<SpellAbility> getPossibleETBCounters() {
@@ -1359,6 +1374,8 @@ public class AiController {
         predictedCombat = null;
         // Also reset predicted combat for next turn here
         predictedCombatNextTurn = null;
+        predictedRemainingLife = null;
+        predictedRemainingLifeSerious = null;
 
         // Reset priority mana reservation that's meant to work for one spell only
         memory.clearMemorySet(AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_NEXT_SPELL);
