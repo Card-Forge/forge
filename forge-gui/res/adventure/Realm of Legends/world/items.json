@@ -1049,7 +1049,7 @@
     "equipmentSlot": "Boots",
     "iconName": "UtopiaAnklet",
     "effect": {
-        "lifeModifier": -2,
+        "lifeModifier": -6,
         "startBattleWithCard": [
         "Utopia Tree|INV"
      ]
