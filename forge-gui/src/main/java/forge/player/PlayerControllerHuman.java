@@ -2709,7 +2709,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
             final Card card = gameCacheCounters.get(cv);
 
-            final Collection<CounterType> counters = subtract ? ImmutableList.copyOf(card.getCounters().keySet())
+            final List<CounterType> counters = subtract ? ImmutableList.copyOf(card.getCounters().keySet())
                     : CounterType.getValues();
 
             final CounterType counter = getGui().oneOrNone(localizer.getMessage("lblWhichTypeofCounter"), counters);
