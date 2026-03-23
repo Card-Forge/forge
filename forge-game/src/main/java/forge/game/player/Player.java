@@ -1291,6 +1291,14 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final PlayerZone getZone(final ZoneType zone) {
         return zones.get(zone);
     }
+
+    public void useSharedZoneFrom(final Player sharedPlayer, final ZoneType zone) {
+        if (sharedPlayer == null || zone == null) {
+            return;
+        }
+        zones.put(zone, sharedPlayer.getZone(zone));
+        updateZoneForView(getZone(zone));
+    }
     public void updateZoneForView(PlayerZone zone) {
         view.updateZone(zone);
     }
