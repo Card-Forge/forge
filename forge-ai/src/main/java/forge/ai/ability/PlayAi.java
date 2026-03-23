@@ -81,7 +81,7 @@ public class PlayAi extends SpellAbilityAi {
             if (cards.size() < 3)
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             if (sa.costHasManaX()) {
-                int amount = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
+                int amount = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
                 if (amount < ComputerUtilCard.getBestAI(cards).getCMC())
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 int totalCMC = 0;

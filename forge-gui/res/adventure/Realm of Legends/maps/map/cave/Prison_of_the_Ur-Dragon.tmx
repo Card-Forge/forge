@@ -153,7 +153,7 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Wondrous Crucible&quot;, &quot;Path of Discovery&quot;, &quot;Exploration&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Exploration&quot;, &quot;Path of Discovery&quot;]}"/>
     <property name="enemy" value="Golos"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>

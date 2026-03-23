@@ -183,6 +183,10 @@ public class AdventureEventData implements Serializable {
     private static final Predicate<CardEdition> filterStandard = FModel.getFormats().getStandard().editionLegalPredicate;
 
     public static Predicate<CardEdition> selectSetPool() {
+        if (Config.instance().getConfigData().vintageOnlyEditions) {
+            return filterVintage;
+        }
+
         final int rollD100 = MyRandom.getRandom().nextInt(100);
         Predicate<CardEdition> rolledFilter;
         if (rollD100 < 30) {
@@ -482,20 +486,27 @@ public class AdventureEventData implements Serializable {
         MyRandom.setRandom(getEventRandom());
 
         int numBoosters;
+        String[] ret;
+
         if (format == AdventureEventController.EventFormat.Sealed) {
             numBoosters = selectedBlock.getCntBoostersSealed();
+            ret = new String[numBoosters];
+
+            for (int i = 0; i < numBoosters; i++) {
+                ret[i] = selectedBlock.getSets().get(i % selectedBlock.getNumberSets()).getCode();
+            }
         } else {
             numBoosters = selectedBlock.getCntBoostersDraft();
+            ret = new String[numBoosters];
+
+            for (int i = 0; i < numBoosters; i++) {
+                if (i < selectedBlock.getNumberSets())
+                    ret[i] = selectedBlock.getSets().get(i).getCode();
+                else
+                    ret[i] = Aggregates.random(selectedBlock.getSets()).getCode();
+            }
         }
 
-        String[] ret = new String[numBoosters];
-
-        for (int i = 0; i < numBoosters; i++) {
-            if (i < selectedBlock.getNumberSets())
-                ret[i] = selectedBlock.getSets().get(i).getCode();
-            else
-                ret[i] = Aggregates.random(selectedBlock.getSets()).getCode();
-        }
         MyRandom.setRandom(placeholder);
         return ret;
     }

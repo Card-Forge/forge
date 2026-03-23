@@ -257,6 +257,11 @@
       {
         "type": "item",
         "count": 1,
+        "itemName": "Tome of Blight"
+      },
+      {
+        "type": "item",
+        "count": 1,
         "itemName": "Eldrazi Pentakey Shard 1"
       },
       {
@@ -625,7 +630,7 @@
     ],
     "ai": "",
     "speed": 45,
-    "scale": 1,
+    "scale": 2,
     "life": 70,
     "rewards": [
       {
@@ -695,7 +700,7 @@
   },
   {
     "name": "Azlask",
-    "sprite": "sprites/enemy/aberration/phyrexian/gitaxianscientist.atlas",
+    "sprite": "sprites/enemy/aberration/eldrazi/eldrazi_2.atlas",
     "deck": [
       "decks/legends/azlask.dck"
     ],
@@ -774,7 +779,7 @@
     ],
     "ai": "",
     "speed": 45,
-    "scale": 2,
+    "scale": 6,
     "life": 50,
     "rewards": [
       {
@@ -922,7 +927,7 @@
     ],
     "ai": "",
     "speed": 45,
-    "scale": 1,
+    "scale": 3,
     "life": 50,
     "rewards": [
       {
@@ -989,13 +994,13 @@
   },
   {
     "name": "Kozilek",
-    "sprite": "sprites/enemy/aberration/phyrexian/phyrexianangel.atlas",
+    "sprite": "sprites/enemy/aberration/eldrazi/kozilek.atlas",
     "deck": [
       "decks/legends/kozilek.dck"
     ],
     "ai": "",
     "speed": 45,
-    "scale": 6,
+    "scale": 3,
     "life": 70,
     "rewards": [
       {
@@ -1081,6 +1086,11 @@
       {
         "type": "item",
         "count": 1,
+        "itemName": "Jewel of Aggression"
+      },
+      {
+        "type": "item",
+        "count": 1,
         "itemName": "Black Key to the Ur-Dragon"
       },
       {
@@ -1152,6 +1162,11 @@
         "type": "item",
         "count": 1,
         "itemName": "Dune-Brood Anklet"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Jewel of Winds"
       },
       {
         "type": "item",
@@ -1230,6 +1245,11 @@
       {
         "type": "item",
         "count": 1,
+        "itemName": "Jewel of Rage"
+      },
+      {
+        "type": "item",
+        "count": 1,
         "itemName": "Green Key to the Ur-Dragon"
       },
       {
@@ -1301,6 +1321,11 @@
         "type": "item",
         "count": 1,
         "itemName": "Witch-Maw Anklet"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Jewel of War"
       },
       {
         "type": "item",
@@ -1384,6 +1409,11 @@
       {
         "type": "item",
         "count": 1,
+        "itemName": "Jewel of Blessings"
+      },
+      {
+        "type": "item",
+        "count": 1,
         "itemName": "White Key to the Ur-Dragon"
       },
       {
@@ -1458,7 +1488,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Sinister Concotion"
+        "itemName": "Sinister Concoction"
       },
       {
         "type": "card",
@@ -1687,6 +1717,11 @@
         "type": "item",
         "count": 1,
         "itemName": "Ramosian Greatsword"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Hengestrider Boots"
       },
       {
         "type": "item",
@@ -1960,13 +1995,13 @@
     ],
     "ai": "",
     "speed": 45,
-    "scale": 1,
+    "scale": 0.3,
     "life": 50,
     "rewards": [
       {
         "type": "item",
         "count": 1,
-        "itemName": "Evolving Robes"
+        "itemName": "Pilgrim's CloakPi"
       },
       {
         "type": "card",
@@ -2249,7 +2284,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Utopia Markings"
+        "itemName": "Utopia Anklet"
       },
       {
         "type": "card",
@@ -2395,6 +2430,11 @@
       {
         "type": "item",
         "count": 1,
+        "itemName": "Manaforce Mace"
+      },
+      {
+        "type": "item",
+        "count": 1,
         "itemName": "Eldrazi Pentakey Shard 3"
       },
       {
@@ -2466,6 +2506,11 @@
         "type": "item",
         "count": 1,
         "itemName": "Armor of the First"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Heirloom Blade"
       },
       {
         "type": "item",
@@ -2622,6 +2667,11 @@
         "itemName": "Diamond Belt"
       },
       {
+        "type": "item",
+        "count": 1,
+        "itemName": "Outlaw's Hat"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Akul the Unrepentant"
@@ -2689,7 +2739,12 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Soulguide Gauntlet"
+        "itemName": "Soul-Guide Gauntlet"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Shadowspear"
       },
       {
         "type": "item",
@@ -9659,7 +9714,7 @@
     "name": "The Mimeoplasm",
     "sprite": "sprites/enemy/ooze/giant_slime.atlas",
     "deck": [
-      "decks/legends/the_mimeoplasm .dck"
+      "decks/legends/the_mimeoplasm.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -11110,13 +11165,13 @@
     "name": "Santa",
     "sprite": "sprites/enemy/humanoid/human/wizard/red_wiz2.atlas",
     "deck": [
-      "decks/legends/jorn.dck"
+      "decks/legends/feldon.dck"
     ],
     "ai": "",
     "flying": true,
     "speed": 45,
     "scale": 1,
-    "life": 60,
+    "life": 40,
     "rewards": [
       {
         "type": "item",
@@ -11126,7 +11181,12 @@
       {
         "type": "card",
         "count": 1,
-        "cardName": "Jorn, God of Winter"
+        "cardName": "Feldon of the Third Path"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Feldon, Ronom Excavator"
       },
       {
         "type": "card",
@@ -11183,8 +11243,96 @@
         "count": 1
       }
     ],
-    "colors": "UBG",
+    "colors": "R",
     "gamesPerMatch": 3,
+    "spawnRate": 0
+  },
+  {
+    "name": "Jorn",
+    "sprite": "sprites/enemy/humanoid/human/wizard/blue_wiz2.atlas",
+    "deck": [
+      "decks/legends/jorn.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Winter Boots"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Jorn, God of Winter"
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      },
+      {
+        "type": "card",
+        "probability": 0.1,
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.2,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.1,
+        "count": 1
+      }
+    ],
+    "colors": "UBG",
     "spawnRate": 0
   },
   {

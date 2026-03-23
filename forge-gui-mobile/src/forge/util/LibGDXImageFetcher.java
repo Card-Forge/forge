@@ -2,7 +2,10 @@ package forge.util;
 
 import com.badlogic.gdx.files.FileHandle;
 import forge.Forge;
+import forge.adventure.data.ConfigData;
+import forge.adventure.util.Config;
 import forge.gui.GuiBase;
+import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import io.sentry.Sentry;
 
@@ -12,10 +15,25 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Files;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class LibGDXImageFetcher extends ImageFetcher {
+    @Override
+    protected boolean shouldTryScryfallSetLookupCandidate(PaperCard requestedCard, PaperCard candidate) {
+        if (!Forge.isMobileAdventureMode) {
+            return true;
+        }
+
+        ConfigData configData = Config.instance().getConfigData();
+        if (configData == null || configData.allowedEditions == null || configData.allowedEditions.length == 0) {
+            return true;
+        }
+
+        return Arrays.asList(configData.allowedEditions).contains(candidate.getEdition());
+    }
+
     @Override
     protected Runnable getDownloadTask(String[] downloadUrls, String destPath, Runnable notifyObservers) {
         return new LibGDXDownloadTask(downloadUrls, destPath, notifyObservers);

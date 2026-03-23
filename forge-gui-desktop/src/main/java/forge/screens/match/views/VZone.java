@@ -140,13 +140,12 @@ public class VZone implements IVDoc<CZone> {
         }
 
         final int delta = count - baseCount;
-        if (delta > 0
-                && FModel.getPreferences().getPrefBoolean(FPref.UI_ZONE_TAB_NEW_COUNT)) {
-            label += " (+" + delta + " new)";
+        if (delta != 0 && FModel.getPreferences().getPrefBoolean(FPref.UI_ZONE_TAB_NEW_COUNT)) {
+            label += " (" + delta + " new)";
         }
 
         tab.setText(label);
-        tab.setToolTipText(tab.getText());
+        tab.setToolTipText(label);
     }
 
     private String capitalizedName() {

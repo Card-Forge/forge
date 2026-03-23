@@ -159,9 +159,6 @@ Here are some often used examples to illustrate the basic ideas:
 >`SVar:X:Count$ValidGraveyard,Exile Instant.YouOwn,Sorcery.YouOwn`  
 number of instant and sorcery cards you own in exile and in your graveyard
 
->`SVar:X:Count$xPaid`  
-used for effects with X in their costs
-
 > XMath
 
 > Context switching
