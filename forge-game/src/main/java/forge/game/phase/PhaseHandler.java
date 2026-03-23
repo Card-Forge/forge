@@ -39,6 +39,7 @@ import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
 
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbilityAttackBlockRestrict;
 import forge.game.staticability.StaticAbilityNoCleanupDamage;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -701,24 +702,9 @@ public class PhaseHandler implements java.io.Serializable {
                 reachedSteadyState = true;
                 List<Card> remainingBlockers = CardLists.filterControlledBy(combat.getAllBlockers(), p);
                 for (Card c : remainingBlockers) {
-                    boolean removeBlocker = false;
-                    boolean cantBlockAlone = c.hasKeyword("CARDNAME can't attack or block alone.") || c.hasKeyword("CARDNAME can't block alone.");
-                    if (remainingBlockers.size() < 2 && cantBlockAlone) {
-                        removeBlocker = true;
-                    } else if (remainingBlockers.size() < 3 && c.hasKeyword("CARDNAME can't block unless at least two other creatures block.")) {
-                        removeBlocker = true;
-                    } else if (c.hasKeyword("CARDNAME can't block unless a creature with greater power also blocks.")) {
-                        removeBlocker = true;
-                        int power = c.getNetPower();
-                        // Note: This is O(n^2), but there shouldn't generally be many creatures with the above keyword.
-                        for (Card c2 : remainingBlockers) {
-                            if (c2.getNetPower() > power) {
-                                removeBlocker = false;
-                                break;
-                            }
-                        }
-                    }
-                    if (removeBlocker) {
+                    CardCollection others = new CardCollection(remainingBlockers);
+                    others.remove(c);
+                    if (!StaticAbilityAttackBlockRestrict.blockRestrict(c, others).isEmpty()) {
                         combat.undoBlockingAssignment(c);
                         reachedSteadyState = false;
                     }
