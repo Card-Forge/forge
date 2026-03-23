@@ -859,7 +859,7 @@ GoldBlessing
   xy: 256, 832
   size: 16, 16
 TruthButcher'sArmor
-  xy: 0, 304
+  xy: 304, 0
   size: 16, 16
 FlamingArmor
   xy: 160, 16
