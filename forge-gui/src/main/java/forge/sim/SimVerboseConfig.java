@@ -21,8 +21,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
@@ -100,36 +102,58 @@ public final class SimVerboseConfig {
 
     /**
      * Reads user config and merges with defaults. Missing file uses defaults only (draws on).
-     * Looks for {@link #getUserConfigFile()} first, then {@code <workingDir>/sim/sim-verbose.properties},
-     * then {@code <workingDir>/sim-verbose.properties}.
+     * Merges every existing file in order (later files override earlier keys for the same name):
+     * {@link #getUserConfigFile()}, {@code <workingDir>/sim/sim-verbose.properties},
+     * {@code <workingDir>/sim-verbose.properties}. So a project-local file can add
+     * {@code beginning_library_count} even when Forge user data already has a properties file
+     * without that key.
      */
     public static SimVerboseConfig load() {
         final Map<String, Boolean> map = new LinkedHashMap<>(DEFAULTS);
         Integer beginningLibraryCount = null;
-        final File userFile = resolveConfigFile();
-        if (userFile.isFile()) {
-            final Properties p = new Properties();
-            try (InputStream in = Files.newInputStream(userFile.toPath())) {
-                p.load(in);
-            } catch (final IOException e) {
-                System.err.println("Could not read sim verbose config " + userFile + ": " + e.getMessage());
+        final Properties p = loadMergedVerboseProperties();
+        for (final String name : p.stringPropertyNames()) {
+            String key = name.trim().toLowerCase(Locale.ROOT);
+            if (key.isEmpty()) {
+                continue;
             }
-            for (final String name : p.stringPropertyNames()) {
-                String key = name.trim().toLowerCase(Locale.ROOT);
-                if (key.isEmpty()) {
-                    continue;
-                }
-                if ("begining_cards_in_hand".equals(key)) {
-                    key = BEGINNING_CARDS_IN_HAND;
-                }
-                if (BEGINNING_LIBRARY_COUNT.equals(key)) {
-                    beginningLibraryCount = parseBeginningLibraryCount(p.getProperty(name));
-                    continue;
-                }
-                map.put(key, parseBool(p.getProperty(name), false));
+            if ("begining_cards_in_hand".equals(key)) {
+                key = BEGINNING_CARDS_IN_HAND;
             }
+            if (BEGINNING_LIBRARY_COUNT.equals(key)) {
+                beginningLibraryCount = parseBeginningLibraryCount(p.getProperty(name));
+                continue;
+            }
+            map.put(key, parseBool(p.getProperty(name), false));
         }
         return new SimVerboseConfig(map, beginningLibraryCount);
+    }
+
+    /**
+     * Loads and merges all sim-verbose.properties files that exist; same key in a later file wins.
+     */
+    static Properties loadMergedVerboseProperties() {
+        final Properties merged = new Properties();
+        for (final File f : listVerbosePropertyFiles()) {
+            if (!f.isFile()) {
+                continue;
+            }
+            try (InputStream in = Files.newInputStream(f.toPath())) {
+                merged.load(in);
+            } catch (final IOException e) {
+                System.err.println("Could not read sim verbose config " + f + ": " + e.getMessage());
+            }
+        }
+        return merged;
+    }
+
+    static List<File> listVerbosePropertyFiles() {
+        final List<File> list = new ArrayList<>(3);
+        final String wd = System.getProperty("user.dir", ".");
+        list.add(getUserConfigFile());
+        list.add(new File(wd + File.separator + "sim" + File.separator + "sim-verbose.properties"));
+        list.add(new File(wd, "sim-verbose.properties"));
+        return list;
     }
 
     /** Primary location under Forge user data (see Forge profile / install docs). */
@@ -138,21 +162,14 @@ public final class SimVerboseConfig {
         return new File(userDir + "sim" + File.separator + "sim-verbose.properties");
     }
 
+    /** First existing file among {@link #listVerbosePropertyFiles()} (for messages / tooling). */
     static File resolveConfigFile() {
-        final File primary = getUserConfigFile();
-        if (primary.isFile()) {
-            return primary;
+        for (final File f : listVerbosePropertyFiles()) {
+            if (f.isFile()) {
+                return f;
+            }
         }
-        final String wd = System.getProperty("user.dir", ".");
-        final File inSim = new File(wd + File.separator + "sim" + File.separator + "sim-verbose.properties");
-        if (inSim.isFile()) {
-            return inSim;
-        }
-        final File inWd = new File(wd, "sim-verbose.properties");
-        if (inWd.isFile()) {
-            return inWd;
-        }
-        return primary;
+        return getUserConfigFile();
     }
 
     static boolean parseBool(final String raw, final boolean ifNullOrBlank) {

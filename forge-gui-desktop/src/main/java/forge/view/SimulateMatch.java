@@ -185,7 +185,7 @@ public class SimulateMatch {
         System.out.println("\tP - Amount of players per match (used only with Tournaments, defaults to 2)");
         System.out.println("\tF - format of games, defaults to constructed");
         System.out.println("\tX - Maximum number of turns allowed in a game. Reaching this ends the game as a draw.");
-        System.out.println("\tv - Verbose mode. Extra sim logging is controlled by sim-verbose.properties (Forge userDir/sim/, or ./sim/, or working directory; see "
+        System.out.println("\tv - Verbose mode. Extra sim logging merges sim-verbose.properties from Forge userDir/sim/, then ./sim/, then working directory (later file overrides; see "
                 + ForgeConstants.SIM_VERBOSE_CONFIG_EXAMPLE + "). With full game log, [verbose] lines appear in time order; with -q they print after match results.");
         System.out.println("\tc - Clock flag. Set the maximum time in seconds before calling the match a draw, defaults to 120.");
         System.out.println("\tq - Quiet flag. Output just the game result, not the entire game log.");

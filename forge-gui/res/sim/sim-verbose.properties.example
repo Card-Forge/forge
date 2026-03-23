@@ -1,9 +1,11 @@
 # Sim verbose logging (forge.exe sim -v)
 #
-# Forge reads (first file found wins):
+# Forge merges every file that exists, in this order (same key in a later file wins):
 #   1) <Forge userDir>/sim/sim-verbose.properties  (see forge.profile.properties / OS app data path)
 #   2) <process working directory>/sim/sim-verbose.properties
 #   3) <process working directory>/sim-verbose.properties
+# So you can add beginning_library_count in (2) or (3) even if (1) exists without it.
+# Editing only this .example under res/sim does nothing until you copy it to one of the paths above.
 #
 # Copy this file to one of those paths (create the "sim" folder if needed).
 # Keys are case-insensitive. Values: true/false, yes/no, 1/0, on/off (first word only; text after # ignored).
@@ -19,7 +21,7 @@ beginning_cards_in_hand=true
 
 # At the start of each player's turn, log names from the top of that player's library.
 # Omit or 0: off. Positive: first n cards. -1: entire library (can be very long).
-beginning_library_count=5
+# beginning_library_count=5
 
 # Future verbose categories can be listed here as they are implemented, e.g.:
 # zoneChanges=true
