@@ -325,6 +325,12 @@ public class EffectAi extends SpellAbilityAi {
                     return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
                 }
                 if (phase.is(PhaseType.MAIN1, ai)) {
+                    if (ai.canLoseLife() && !ai.cantLoseForZeroOrLessLife()) {
+                        int predictedLife = ComputerUtil.predictNextCombatsRemainingLife(ai, false, false, 0, options);
+                        if (predictedLife <= 0) {
+                            return new AiAbilityDecision(0, AiPlayDecision.AnotherTime); // don't overextend
+                        }
+                    }
                     ComputerUtilCard.sortByEvaluateCreature(options);
                     for (Card card : options) {
                         if (!CombatUtil.canBeBlocked(card, ai.getOpponents().getCreaturesInPlay(), phase.getCombat())) {
