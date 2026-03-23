@@ -312,7 +312,7 @@ public class EffectAi extends SpellAbilityAi {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             } else if (logic.equals("MakeUnblockable")) {
                 if (ai.getOpponents().getCreaturesInPlay().isEmpty()) {
-                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                    return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
                 }
                 sa.resetTargets();
                 CardCollection options = new CardCollection(CardUtil.getValidCardsToTarget(sa));
