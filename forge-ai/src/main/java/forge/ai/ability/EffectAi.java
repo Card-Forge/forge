@@ -325,11 +325,9 @@ public class EffectAi extends SpellAbilityAi {
                     return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
                 }
                 if (phase.is(PhaseType.MAIN1, ai)) {
+                    int predictedLife = ai.getLife();
                     if (ai.canLoseLife() && !ai.cantLoseForZeroOrLessLife()) {
-                        int predictedLife = ComputerUtil.predictNextCombatsRemainingLife(ai, false, false, 0, options);
-                        if (predictedLife <= 0) {
-                            return new AiAbilityDecision(0, AiPlayDecision.AnotherTime); // don't overextend
-                        }
+                        predictedLife = ComputerUtil.predictNextCombatsRemainingLife(ai, false, false, 0, options);
                     }
                     ComputerUtilCard.sortByEvaluateCreature(options);
                     for (Card card : options) {
@@ -345,8 +343,8 @@ public class EffectAi extends SpellAbilityAi {
                         String cantBeBlocked = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self";
                         copy.addStaticAbility(cantBeBlocked);
                         copy.setSickness(false); // for some reason is copied as if having summoning sickness
-                        // TODO: also check the case where the AI would attack with the creature but it will be traded, to avoid trading?
-                        if (ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, copy) && !ComputerUtilCard.doesCreatureAttackAI(ai, card)) {
+                        // TODO: also check the case where the AI would attack with the creature but it will be traded, to avoid trading unfavorably?
+                        if (predictedLife > 0 && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, copy) && !ComputerUtilCard.doesCreatureAttackAI(ai, card)) {
                             sa.getTargets().add(card);
                             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                         }
