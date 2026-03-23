@@ -1,0 +1,6 @@
+Name:Render Speechless
+ManaCost:2 W B
+Types:Sorcery
+A:SP$ Discard | ValidTgts$ Opponent | DiscardValid$ Card.nonLand | NumCards$ 1 | Mode$ RevealYouChoose | SubAbility$ DBPutCounter | SpellDescription$ Target opponent reveals their hand. You choose a nonland card from it. That player discards that card.
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 2 | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature
+Oracle:Target opponent reveals their hand. You choose a nonland card from it. That player discards that card.\nPut two +1/+1 counters on up to one target creature.
