@@ -1301,6 +1301,14 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public void updateZoneForView(PlayerZone zone) {
         view.updateZone(zone);
+        if (game.getRules().getGameType() == GameType.DanDan
+                && (zone.is(ZoneType.Library) || zone.is(ZoneType.Graveyard))) {
+            for (final Player other : game.getPlayers()) {
+                if (other != this && other.getZone(zone.getZoneType()) == zone) {
+                    other.getView().updateZone(zone.getZoneType(), zone.getCards(false), other);
+                }
+            }
+        }
     }
 
     public void updateAllZonesForView() {

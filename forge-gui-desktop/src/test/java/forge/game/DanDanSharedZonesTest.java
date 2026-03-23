@@ -40,5 +40,7 @@ public class DanDanSharedZonesTest extends AITest {
                 p1.getZone(ZoneType.Library), p2.getZone(ZoneType.Library));
         AssertJUnit.assertSame("DanDan should use one shared graveyard zone",
                 p1.getZone(ZoneType.Graveyard), p2.getZone(ZoneType.Graveyard));
+        AssertJUnit.assertSame("DanDan should use one shared registered deck object",
+                game.getMatch().getPlayers().get(0).getDeck(), game.getMatch().getPlayers().get(1).getDeck());
     }
 }

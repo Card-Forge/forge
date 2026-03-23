@@ -1,9 +1,11 @@
 package forge.view;
 
+import com.google.common.eventbus.Subscribe;
 import java.io.File;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.commons.lang3.time.StopWatch;
 
@@ -30,7 +32,6 @@ import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.util.Lang;
 import forge.util.TextUtil;
-import forge.util.WordUtil;
 import forge.util.storage.IStorage;
 
 public class SimulateMatch {
@@ -83,7 +84,13 @@ public class SimulateMatch {
 
         GameType type = GameType.Constructed;
         if (params.containsKey("f")) {
-            type = GameType.valueOf(WordUtil.capitalize(params.get("f").get(0)));
+            final String requestedFormat = params.get("f").get(0);
+            type = parseGameType(requestedFormat);
+            if (type == null) {
+                System.out.println("Unknown format - " + requestedFormat);
+                argumentHelp();
+                return;
+            }
         }
 
         GameRules rules = new GameRules(type);
@@ -94,7 +101,9 @@ public class SimulateMatch {
         }
 
         if (params.containsKey("t")) {
-            simulateTournament(params, rules, outputGamelog);
+            final int maxTurns = params.containsKey("x") ? Integer.parseInt(params.get("x").get(0)) : 0;
+            final boolean verbose = params.containsKey("v");
+            simulateTournament(params, rules, outputGamelog, maxTurns, verbose);
             System.out.flush();
             return;
         }
@@ -133,6 +142,8 @@ public class SimulateMatch {
         if (params.containsKey("c")) {
             rules.setSimTimeout(Integer.parseInt(params.get("c").get(0)));
         }
+        final int maxTurns = params.containsKey("x") ? Integer.parseInt(params.get("x").get(0)) : 0;
+        final boolean verbose = params.containsKey("v");
 
         sb.append(" - ").append(Lang.nounWithNumeral(nGames, "game")).append(" of ").append(type);
 
@@ -144,12 +155,12 @@ public class SimulateMatch {
             int iGame = 0;
             while (!mc.isMatchOver()) {
                 // play games until the match ends
-                simulateSingleMatch(mc, iGame, outputGamelog);
+                simulateSingleMatch(mc, iGame, outputGamelog, maxTurns, verbose);
                 iGame++;
             }
         } else {
             for (int iGame = 0; iGame < nGames; iGame++) {
-                simulateSingleMatch(mc, iGame, outputGamelog);
+                simulateSingleMatch(mc, iGame, outputGamelog, maxTurns, verbose);
             }
         }
 
@@ -157,7 +168,7 @@ public class SimulateMatch {
     }
 
     private static void argumentHelp() {
-        System.out.println("Syntax: forge.exe sim -d <deck1[.dck]> ... <deckX[.dck]> -D [D] -n [N] -m [M] -t [T] -p [P] -f [F] -q");
+        System.out.println("Syntax: forge.exe sim -d <deck1[.dck]> ... <deckX[.dck]> -D [D] -n [N] -m [M] -t [T] -p [P] -f [F] -x [X] -v -q");
         System.out.println("\tsim - stands for simulation mode");
         System.out.println("\tdeck1 (or deck2,...,X) - constructed deck name or filename (has to be quoted when contains multiple words)");
         System.out.println("\tdeck is treated as file if it ends with a dot followed by three numbers or letters");
@@ -167,15 +178,66 @@ public class SimulateMatch {
         System.out.println("\tT - Type of tournament to run with all provided decks (Bracket, RoundRobin, Swiss)");
         System.out.println("\tP - Amount of players per match (used only with Tournaments, defaults to 2)");
         System.out.println("\tF - format of games, defaults to constructed");
+        System.out.println("\tX - Maximum number of turns allowed in a game. Reaching this ends the game as a draw.");
+        System.out.println("\tv - Verbose mode. Logs each card drawn (Library -> Hand). With full game log, lines appear in time order; with -q, draw lines print after match results.");
         System.out.println("\tc - Clock flag. Set the maximum time in seconds before calling the match a draw, defaults to 120.");
         System.out.println("\tq - Quiet flag. Output just the game result, not the entire game log.");
     }
 
-    public static void simulateSingleMatch(final Match mc, int iGame, boolean outputGamelog) {
+    private static GameType parseGameType(final String rawFormat) {
+        if (rawFormat == null || rawFormat.isEmpty()) {
+            return null;
+        }
+
+        final String normalized = rawFormat.replaceAll("[\\s_\\-]", "");
+        for (final GameType gameType : GameType.values()) {
+            final String enumName = gameType.name();
+            if (enumName.equalsIgnoreCase(rawFormat)
+                    || enumName.equalsIgnoreCase(normalized)
+                    || enumName.replaceAll("[\\s_\\-]", "").equalsIgnoreCase(normalized)) {
+                return gameType;
+            }
+        }
+        return null;
+    }
+
+    public static void simulateSingleMatch(final Match mc, int iGame, boolean outputGamelog, int maxTurns, boolean verbose) {
         final StopWatch sw = new StopWatch();
         sw.start();
 
         final Game g1 = mc.createGame();
+        final AtomicBoolean turnCapReached = new AtomicBoolean(false);
+        final AtomicBoolean stopTurnWatcher = new AtomicBoolean(false);
+        final Thread turnWatcher;
+        final List<String> verboseQuietBuffer = verbose && !outputGamelog
+                ? Collections.synchronizedList(new ArrayList<>()) : null;
+        if (verbose) {
+            // Log every Library -> Hand move. Do not dedupe by card id: the same Card can return to the
+            // library (mulligan) and be drawn again; dedupe would hide later draws (e.g. draw step).
+            // With full game log, append to GameLog so output matches game chronology (not all [verbose] first).
+            g1.subscribeToEvents(new VerboseDrawEventLogger(g1, verboseQuietBuffer));
+        }
+        if (maxTurns > 0) {
+            turnWatcher = new Thread(() -> {
+                while (!stopTurnWatcher.get() && !g1.isGameOver()) {
+                    if (g1.getPhaseHandler().getTurn() >= maxTurns) {
+                        turnCapReached.set(true);
+                        g1.setGameOver(GameEndReason.Draw);
+                        break;
+                    }
+                    try {
+                        Thread.sleep(20L);
+                    } catch (InterruptedException ignored) {
+                        Thread.currentThread().interrupt();
+                        break;
+                    }
+                }
+            }, "sim-turn-cap-watcher");
+            turnWatcher.setDaemon(true);
+            turnWatcher.start();
+        } else {
+            turnWatcher = null;
+        }
         // will run match in the same thread
         try {
             TimeLimitedCodeBlock.runWithTimeout(() -> {
@@ -187,6 +249,10 @@ public class SimulateMatch {
         } catch (Exception | StackOverflowError e) {
             e.printStackTrace();
         } finally {
+            stopTurnWatcher.set(true);
+            if (turnWatcher != null) {
+                turnWatcher.interrupt();
+            }
             if (sw.isStarted()) {
                 sw.stop();
             }
@@ -203,18 +269,31 @@ public class SimulateMatch {
         }
         Collections.reverse(log);
         for (GameLogEntry l : log) {
-            System.out.println(l);
+            if (l.type() == GameLogEntryType.INFORMATION && l.message() != null
+                    && l.message().startsWith("[verbose]")) {
+                System.out.println(l.message());
+            } else {
+                System.out.println(l);
+            }
+        }
+        if (verboseQuietBuffer != null && !verboseQuietBuffer.isEmpty()) {
+            for (final String line : verboseQuietBuffer) {
+                System.out.println(line);
+            }
         }
 
         // If both players life totals to 0 in a single turn, the game should end in a draw
         if (g1.getOutcome().isDraw()) {
             System.out.printf("\nGame Result: Game %d ended in a Draw! Took %d ms.%n", 1 + iGame, sw.getTime());
+            if (turnCapReached.get()) {
+                System.out.printf("Draw reason: reached maximum turn limit (%d).%n", maxTurns);
+            }
         } else {
             System.out.printf("\nGame Result: Game %d ended in %d ms. %s has won!\n%n", 1 + iGame, sw.getTime(), g1.getOutcome().getWinningLobbyPlayer().getName());
         }
     }
 
-    private static void simulateTournament(Map<String, List<String>> params, GameRules rules, boolean outputGamelog) {
+    private static void simulateTournament(Map<String, List<String>> params, GameRules rules, boolean outputGamelog, int maxTurns, boolean verbose) {
         String tournament = params.get("t").get(0);
         AbstractTournament tourney = null;
         int matchPlayers = params.containsKey("p") ? Integer.parseInt(params.get("p").get(0)) : 2;
@@ -310,7 +389,7 @@ public class SimulateMatch {
                 while (!mc.isMatchOver()) {
                     // play games until the match ends
                     try {
-                        simulateSingleMatch(mc, iGame, outputGamelog);
+                        simulateSingleMatch(mc, iGame, outputGamelog, maxTurns, verbose);
                         iGame++;
                     } catch (Exception e) {
                         exceptions++;
@@ -345,11 +424,46 @@ public class SimulateMatch {
         return null;
     }
 
+    private static final class VerboseDrawEventLogger {
+        private final Game game;
+        /** When non-null (-q), game log omits INFORMATION; buffer and print after match lines. */
+        private final List<String> quietBuffer;
+
+        private VerboseDrawEventLogger(final Game game0, final List<String> quietBuffer0) {
+            this.game = game0;
+            this.quietBuffer = quietBuffer0;
+        }
+
+        @Subscribe
+        public void onCardChangeZone(final forge.game.event.GameEventCardChangeZone event) {
+            if (event == null || event.from() == null || event.to() == null || event.card() == null) {
+                return;
+            }
+            if (event.from().zoneType() != forge.game.zone.ZoneType.Library
+                    || event.to().zoneType() != forge.game.zone.ZoneType.Hand) {
+                return;
+            }
+            final String playerName = event.to().player() == null ? "Unknown player" : event.to().player().getName();
+            final String line = String.format("[verbose] %s drew: %s", playerName, event.card().getName());
+            if (quietBuffer != null) {
+                quietBuffer.add(line);
+            } else {
+                game.getGameLog().add(GameLogEntryType.INFORMATION, line);
+            }
+        }
+    }
+
     private static Deck deckFromCommandLineParameter(String deckname, GameType type) {
         int dotpos = deckname.lastIndexOf('.');
         if (dotpos > 0 && dotpos == deckname.length() - 4) {
-            String baseDir = type.equals(GameType.Commander) ?
-                    ForgeConstants.DECK_COMMANDER_DIR : ForgeConstants.DECK_CONSTRUCTED_DIR;
+            final String baseDir;
+            if (type.equals(GameType.Commander)) {
+                baseDir = ForgeConstants.DECK_COMMANDER_DIR;
+            } else if (type.equals(GameType.DanDan)) {
+                baseDir = ForgeConstants.DECK_DANDAN_DIR;
+            } else {
+                baseDir = ForgeConstants.DECK_CONSTRUCTED_DIR;
+            }
 
             File f = new File(baseDir + deckname);
             if (!f.exists()) {
@@ -364,6 +478,8 @@ public class SimulateMatch {
         // Add other game types here...
         if (type.equals(GameType.Commander)) {
             deckStore = FModel.getDecks().getCommander();
+        } else if (type.equals(GameType.DanDan)) {
+            deckStore = FModel.getDecks().getDanDan();
         } else {
             deckStore = FModel.getDecks().getConstructed();
         }

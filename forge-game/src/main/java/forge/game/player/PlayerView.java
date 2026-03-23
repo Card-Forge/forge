@@ -501,17 +501,21 @@ public class PlayerView extends GameEntityView {
         }
     }
     void updateZone(PlayerZone zone) {
-        TrackableProperty prop = getZoneProp(zone.getZoneType());
+        updateZone(zone.getZoneType(), zone.getCards(false), zone.getPlayer());
+    }
+
+    void updateZone(final ZoneType zoneType, final Iterable<Card> cards, final Player flashbackOwner) {
+        TrackableProperty prop = getZoneProp(zoneType);
         if (prop == null) { return; }
-        set(prop, CardView.getCollection(zone.getCards(false)));
+        set(prop, CardView.getCollection(cards));
 
         //update flashback zone when relevant zones change
-        switch (zone.getZoneType()) {
+        switch (zoneType) {
             case Command:
             case Graveyard:
             case Library:
             case Exile:
-                updateFlashback(zone.getPlayer());
+                updateFlashback(flashbackOwner);
                 break;
             default:
                 break;

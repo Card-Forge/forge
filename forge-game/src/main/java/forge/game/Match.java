@@ -231,6 +231,7 @@ public class Match {
         final List<RegisteredPlayer> playersConditions = game.getMatch().getPlayers();
         final boolean isDanDan = rules.getGameType() == GameType.DanDan && !players.isEmpty();
         final Player sharedDanDanPlayer = isDanDan ? players.get(0) : null;
+        final RegisteredPlayer sharedDanDanCondition = isDanDan && !playersConditions.isEmpty() ? playersConditions.get(0) : null;
 
         boolean isFirstGame = gameOutcomes.isEmpty();
         boolean canSideBoard = !isFirstGame && rules.getGameType().isSideboardingAllowed();
@@ -252,6 +253,9 @@ public class Match {
         for (int i = 0; i < playersConditions.size(); i++) {
             final Player player = players.get(i);
             final RegisteredPlayer psc = playersConditions.get(i);
+            if (isDanDan && i > 0) {
+                psc.useSharedDeckFrom(sharedDanDanCondition);
+            }
             PlayerController person = player.getController();
 
             if (canSideBoard) {
