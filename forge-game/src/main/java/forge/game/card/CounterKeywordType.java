@@ -28,7 +28,7 @@ public record CounterKeywordType(String keyword, String desc) implements Counter
         // add fixed first
         Set<CounterType> result = keywordCounter.stream().map(CounterKeywordType::get).collect(Collectors.toSet());
         // add variable ones later
-        result.addAll(sMap.keySet());
+        result.addAll(sMap.values());
         return result;
     }
     
