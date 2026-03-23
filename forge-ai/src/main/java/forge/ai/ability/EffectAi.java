@@ -330,10 +330,16 @@ public class EffectAi extends SpellAbilityAi {
                         if (!CombatUtil.canBeBlocked(card, ai.getOpponents().getCreaturesInPlay(), phase.getCombat())) {
                             continue;
                         }
+                        if (card.getNetPower() >= ai.getWeakestOpponent().getLife() && ai.getWeakestOpponent().canLoseLife() && !ai.getWeakestOpponent().cantLoseForZeroOrLessLife()) {
+                            // try to finish off the opponent with an unblockable creature
+                            sa.getTargets().add(card);
+                            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                        }
                         final Card copy = CardCopyService.getLKICopy(card);
                         String cantBeBlocked = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self";
                         copy.addStaticAbility(cantBeBlocked);
                         copy.setSickness(false); // for some reason is copied as if having summoning sickness
+                        // TODO: also check the case where the AI would attack with the creature but it will be traded, to avoid trading?
                         if (ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, copy) && !ComputerUtilCard.doesCreatureAttackAI(ai, card)) {
                             sa.getTargets().add(card);
                             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
