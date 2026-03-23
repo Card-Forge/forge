@@ -396,6 +396,8 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().setVisible(true);
         getCbxSection().setVisible(false);
+        getLblDeckType().setVisible(false);
+        getCbxDeckType().setVisible(false);
 
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setVisible(true);
         VCurrentDeck.SINGLETON_INSTANCE.getLblTitle().setText(localizer.getMessage("lblTitle") + ":");
@@ -407,6 +409,8 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     public FLabel getBtnRemove4() { return btnRemove4; }
     public FLabel getBtnAddBasicLands() { return btnAddBasicLands; }
     public FComboBox getCbxSection() { return deckManager.getCbxSection(); }
+    public FLabel getLblDeckType() { return deckManager.getLblDeckType(); }
+    public FComboBox getCbxDeckType() { return deckManager.getCbxDeckType(); }
 
     public ContextMenuBuilder createContextMenuBuilder(final boolean isAddContextMenu0) {
         return new EditorContextMenuBuilder(isAddContextMenu0);

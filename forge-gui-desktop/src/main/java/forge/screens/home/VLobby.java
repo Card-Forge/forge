@@ -460,12 +460,19 @@ public class VLobby implements ILobbyView {
         final Collection<DeckProxy> selectedDecks = mainChooser.getLstDecks().getSelectedItems();
         if (playerIndex < activePlayersNum && lobby.mayEdit(playerIndex)) {
             final String text = type.toString() + ": " + Lang.joinHomogenous(selectedDecks, DeckProxy::getName);
-            if (isCommanderDeck) {
+            if (!isCommanderDeck && hasVariant(GameType.DanDan)) {
+                // DanDan uses one shared library, so apply the same deck to all active players.
+                for (int i = 0; i < activePlayersNum; i++) {
+                    getPlayerPanel(i).setDeckSelectorButtonText(text);
+                    fireDeckChangeListener(i, deck);
+                }
+            } else if (isCommanderDeck) {
                 getPlayerPanel(playerIndex).setCommanderDeckSelectorButtonText(text);
+                fireDeckChangeListener(playerIndex, deck);
             } else {
                 getPlayerPanel(playerIndex).setDeckSelectorButtonText(text);
+                fireDeckChangeListener(playerIndex, deck);
             }
-            fireDeckChangeListener(playerIndex, deck);
         }
         mainChooser.saveState();
     }
@@ -604,8 +611,11 @@ public class VLobby implements ILobbyView {
         case Oathbreaker:
         case TinyLeaders:
         case Brawl:
-        case DanDan:
             decksFrame.add(getDeckChooser(playerWithFocus), "grow, push");
+            break;
+        case DanDan:
+            // DanDan uses a shared deck/library for all players, so expose one chooser.
+            decksFrame.add(getDeckChooser(0), "grow, push");
             break;
         case Planechase:
             decksFrame.add(planarDeckPanels.get(playerWithFocus), "grow, push");

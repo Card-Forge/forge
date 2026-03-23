@@ -101,7 +101,13 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         .text("")
         .fontSize(12)
         .build();
+    private final FLabel lblDeckType = new FLabel.Builder()
+        .text(Localizer.getInstance().getMessage("lblDeck") + " " + Localizer.getInstance().getMessage("lblType") + ":")
+        .fontAlign(SwingConstants.LEFT)
+        .fontSize(12)
+        .build();
     private FComboBox cbxSection = new FComboBox();
+    private FComboBox cbxDeckType = new FComboBox();
 
     private static final SkinIcon VIEW_OPTIONS_ICON = FSkin.getIcon(FSkinProp.ICO_SETTINGS).resize(20, 20);
     private final FLabel btnViewOptions = new FLabel.Builder()
@@ -173,6 +179,10 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         this.add(this.lblEmpty);
         this.cbxSection.setVisible(false);
         this.add(this.cbxSection);
+        this.lblDeckType.setVisible(false);
+        this.add(this.lblDeckType);
+        this.cbxDeckType.setVisible(false);
+        this.add(this.cbxDeckType);
         for (final ItemView<T> view : this.views) {
             this.add(view.getButton());
             view.getButton().setSelected(view == this.currentView);
@@ -344,6 +354,8 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         final int ratioWidth = this.lblRatio.getAutoSizeWidth();
         int captionWidth = this.lblCaption.getAutoSizeWidth();
         final int cbxSectionWidth = this.cbxSection.isVisible() ? this.cbxSection.getAutoSizeWidth() : 0;
+        final int lblDeckTypeWidth = this.lblDeckType.isVisible() ? this.lblDeckType.getAutoSizeWidth() : 0;
+        final int cbxDeckTypeWidth = this.cbxDeckType.isVisible() ? this.cbxDeckType.getAutoSizeWidth() : 0;
         final int viewButtonCount = this.views.size() + 1; // +1 is for the options button
         final int widthViewButtons = viewButtonCount * viewButtonWidth + helper.getGapX() * (viewButtonCount);
 
@@ -351,6 +363,8 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         int availableCaptionWidth = helper.getParentWidth()
                 - viewButtonWidth   // btnFilters
                 - cbxSectionWidth
+                - lblDeckTypeWidth
+                - cbxDeckTypeWidth
                 - ratioWidth
                 - widthViewButtons;
 
@@ -368,6 +382,10 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         helper.include(this.cbxSection, cbxSectionWidth, FTextField.HEIGHT);
         helper.offset(helper.getGapX(), 0);
         helper.include(this.lblRatio, ratioWidth, FTextField.HEIGHT);
+        helper.offset(helper.getGapX(), 0);
+        helper.include(this.lblDeckType, lblDeckTypeWidth, FTextField.HEIGHT);
+        helper.offset(helper.getGapX(), 0);
+        helper.include(this.cbxDeckType, cbxDeckTypeWidth, FTextField.HEIGHT);
         helper.fillLine(this.lblEmpty, FTextField.HEIGHT, widthViewButtons);
         for (final ItemView<T> view : this.views) {
             helper.include(view.getButton(), viewButtonWidth, FTextField.HEIGHT);
@@ -1054,6 +1072,14 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
 
     public FComboBox getCbxSection() {
         return this.cbxSection;
+    }
+
+    public FLabel getLblDeckType() {
+        return this.lblDeckType;
+    }
+
+    public FComboBox getCbxDeckType() {
+        return this.cbxDeckType;
     }
 
     /**
