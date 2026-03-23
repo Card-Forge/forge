@@ -2368,13 +2368,13 @@
     }
   },
     {
-    "name": "Soulguide Gauntlet",
+    "name": "Soul-Guide Gauntlet",
     "description": "Sac to exile a graveyard or 1 and sac to draw",
     "equipmentSlot": "Left",
     "iconName": "SoulguideGauntlet",
     "effect": {
         "startBattleWithCard": [
-        "Soulguide Lantern|THB"
+        "Soul-Guide Lantern|THB"
      ]
     }
   },
