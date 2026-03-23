@@ -212,6 +212,11 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         return CardLimit.None; //if not enforcing deck legality, don't enforce default limit
     }
 
+    @Override
+    protected int getMaxCardCopiesAllowed(final PaperCard card) {
+        return this.gameType.getDeckFormat().getMaxCardCopies(card);
+    }
+
     public static void onAddItems(ACEditorBase<PaperCard, Deck> editor, Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
         DeckSection sectionMode = editor.sectionMode;
         DeckController<Deck> controller = editor.getDeckController();

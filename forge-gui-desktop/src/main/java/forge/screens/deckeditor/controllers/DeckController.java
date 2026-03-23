@@ -326,6 +326,10 @@ public class DeckController<T extends DeckBase> {
             return;
         }
 
+        if (model instanceof Deck deckModel) {
+            deckModel.setDeckFormat(view.getGameType().getDeckFormat());
+        }
+
         // copy to new instance before adding to current folder so further changes are auto-saved
         currentFolder.add((T) model.copyTo(model.getName()));
         model.setDirectory(DeckProxy.getDeckDirectory(currentFolder));

@@ -221,15 +221,10 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             int qty = itemEntry.getValue();
 
             int max;
-            if (deck == null || card == null || limit == CardLimit.None || DeckFormat.canHaveAnyNumberOf(card)) {
+            if (deck == null || card == null || limit == CardLimit.None) {
                 max = Integer.MAX_VALUE;
             } else {
-                max = (limit == CardLimit.Singleton ? 1 : FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT));
-
-                Integer cardCopies = DeckFormat.canHaveSpecificNumberInDeck(card);
-                if (cardCopies != null) {
-                    max = cardCopies;
-                }
+                max = (limit == CardLimit.Singleton ? 1 : getMaxCardCopiesAllowed(card));
 
                 Entry<String, Integer> cardAmountInfo = IterableUtil.find(cardsByName,
                         t -> t.getKey().equals(card.getRules().getNormalizedName()), null);
@@ -249,6 +244,17 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     }
 
     protected abstract CardLimit getCardLimit();
+
+    protected int getMaxCardCopiesAllowed(final PaperCard card) {
+        if (DeckFormat.canHaveAnyNumberOf(card)) {
+            return Integer.MAX_VALUE;
+        }
+        Integer cardCopies = DeckFormat.canHaveSpecificNumberInDeck(card);
+        if (cardCopies != null) {
+            return cardCopies;
+        }
+        return FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT);
+    }
 
     /**
      * Operation to add selected items to current deck.
