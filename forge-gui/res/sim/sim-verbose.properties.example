@@ -1,17 +1,21 @@
 # Sim verbose logging (forge.exe sim -v)
 #
-# Copy this file to your Forge user data directory as:
-#   <userDir>/sim/sim-verbose.properties
-# (create the "sim" folder if needed). Keys are case-insensitive.
-# Values: true/false, yes/no, 1/0, on/off.
+# Forge reads (first file found wins):
+#   1) <Forge userDir>/sim/sim-verbose.properties  (see forge.profile.properties / OS app data path)
+#   2) <process working directory>/sim/sim-verbose.properties
+#   3) <process working directory>/sim-verbose.properties
 #
-# If the file is missing, defaults match this example (draws enabled).
+# Copy this file to one of those paths (create the "sim" folder if needed).
+# Keys are case-insensitive. Values: true/false, yes/no, 1/0, on/off (first word only; text after # ignored).
+#
+# If the file is missing, defaults are: draws=true, beginning_cards_in_hand=true.
+# Create this file to turn categories off or customize.
 
 # Log each card moved from library to hand (draw step, mulligan, etc.).
 draws=true
 
 # At the start of each player's turn, log all cards in that player's hand.
-beginning_cards_in_hand=false
+beginning_cards_in_hand=true
 
 # Future verbose categories can be listed here as they are implemented, e.g.:
-# zoneChanges=false
+# zoneChanges=true

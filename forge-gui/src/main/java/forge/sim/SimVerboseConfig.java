@@ -46,7 +46,8 @@ public final class SimVerboseConfig {
     static {
         Map<String, Boolean> d = new LinkedHashMap<>();
         d.put(DRAWS, Boolean.TRUE);
-        d.put(BEGINNING_CARDS_IN_HAND, Boolean.FALSE);
+        // On by default with -v when no config file; set beginning_cards_in_hand=false to disable.
+        d.put(BEGINNING_CARDS_IN_HAND, Boolean.TRUE);
         DEFAULTS = Collections.unmodifiableMap(d);
     }
 
@@ -78,10 +79,12 @@ public final class SimVerboseConfig {
 
     /**
      * Reads user config and merges with defaults. Missing file uses defaults only (draws on).
+     * Looks for {@link #getUserConfigFile()} first, then {@code <workingDir>/sim/sim-verbose.properties},
+     * then {@code <workingDir>/sim-verbose.properties}.
      */
     public static SimVerboseConfig load() {
         final Map<String, Boolean> map = new LinkedHashMap<>(DEFAULTS);
-        final File userFile = getUserConfigFile();
+        final File userFile = resolveConfigFile();
         if (userFile.isFile()) {
             final Properties p = new Properties();
             try (InputStream in = Files.newInputStream(userFile.toPath())) {
@@ -90,9 +93,12 @@ public final class SimVerboseConfig {
                 System.err.println("Could not read sim verbose config " + userFile + ": " + e.getMessage());
             }
             for (final String name : p.stringPropertyNames()) {
-                final String key = name.trim().toLowerCase(Locale.ROOT);
+                String key = name.trim().toLowerCase(Locale.ROOT);
                 if (key.isEmpty()) {
                     continue;
+                }
+                if ("begining_cards_in_hand".equals(key)) {
+                    key = BEGINNING_CARDS_IN_HAND;
                 }
                 map.put(key, parseBool(p.getProperty(name), false));
             }
@@ -100,25 +106,51 @@ public final class SimVerboseConfig {
         return new SimVerboseConfig(map);
     }
 
+    /** Primary location under Forge user data (see Forge profile / install docs). */
     public static File getUserConfigFile() {
         final String userDir = ForgeProfileProperties.getUserDir();
         return new File(userDir + "sim" + File.separator + "sim-verbose.properties");
+    }
+
+    static File resolveConfigFile() {
+        final File primary = getUserConfigFile();
+        if (primary.isFile()) {
+            return primary;
+        }
+        final String wd = System.getProperty("user.dir", ".");
+        final File inSim = new File(wd + File.separator + "sim" + File.separator + "sim-verbose.properties");
+        if (inSim.isFile()) {
+            return inSim;
+        }
+        final File inWd = new File(wd, "sim-verbose.properties");
+        if (inWd.isFile()) {
+            return inWd;
+        }
+        return primary;
     }
 
     static boolean parseBool(final String raw, final boolean ifNullOrBlank) {
         if (raw == null) {
             return ifNullOrBlank;
         }
-        final String s = raw.trim();
+        String s = raw.trim();
         if (s.isEmpty()) {
             return ifNullOrBlank;
         }
-        if ("true".equalsIgnoreCase(s) || "yes".equalsIgnoreCase(s) || "1".equalsIgnoreCase(s)
-                || "on".equalsIgnoreCase(s)) {
+        final int hash = s.indexOf('#');
+        if (hash >= 0) {
+            s = s.substring(0, hash).trim();
+        }
+        if (s.isEmpty()) {
+            return ifNullOrBlank;
+        }
+        final String firstToken = s.split("\\s+", 2)[0];
+        if ("true".equalsIgnoreCase(firstToken) || "yes".equalsIgnoreCase(firstToken)
+                || "1".equalsIgnoreCase(firstToken) || "on".equalsIgnoreCase(firstToken)) {
             return true;
         }
-        if ("false".equalsIgnoreCase(s) || "no".equalsIgnoreCase(s) || "0".equalsIgnoreCase(s)
-                || "off".equalsIgnoreCase(s)) {
+        if ("false".equalsIgnoreCase(firstToken) || "no".equalsIgnoreCase(firstToken)
+                || "0".equalsIgnoreCase(firstToken) || "off".equalsIgnoreCase(firstToken)) {
             return false;
         }
         return ifNullOrBlank;

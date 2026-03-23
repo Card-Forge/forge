@@ -14,12 +14,15 @@ import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.io.DeckSerializer;
 import forge.game.Game;
+import forge.game.card.Card;
 import forge.game.GameEndReason;
 import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
 import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.Match;
+import forge.game.event.GameEventTurnBegan;
+import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.tournament.system.AbstractTournament;
 import forge.gamemodes.tournament.system.TournamentBracket;
@@ -27,6 +30,7 @@ import forge.gamemodes.tournament.system.TournamentPairing;
 import forge.gamemodes.tournament.system.TournamentPlayer;
 import forge.gamemodes.tournament.system.TournamentRoundRobin;
 import forge.gamemodes.tournament.system.TournamentSwiss;
+import forge.game.zone.ZoneType;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
 import forge.sim.SimVerboseConfig;
@@ -180,8 +184,8 @@ public class SimulateMatch {
         System.out.println("\tP - Amount of players per match (used only with Tournaments, defaults to 2)");
         System.out.println("\tF - format of games, defaults to constructed");
         System.out.println("\tX - Maximum number of turns allowed in a game. Reaching this ends the game as a draw.");
-        System.out.println("\tv - Verbose mode. Extra sim logging is controlled by " + SimVerboseConfig.getUserConfigFile()
-                + " (see " + ForgeConstants.SIM_VERBOSE_CONFIG_EXAMPLE + "). With full game log, [verbose] lines appear in time order; with -q they print after match results.");
+        System.out.println("\tv - Verbose mode. Extra sim logging is controlled by sim-verbose.properties (Forge userDir/sim/, or ./sim/, or working directory; see "
+                + ForgeConstants.SIM_VERBOSE_CONFIG_EXAMPLE + "). With full game log, [verbose] lines appear in time order; with -q they print after match results.");
         System.out.println("\tc - Clock flag. Set the maximum time in seconds before calling the match a draw, defaults to 120.");
         System.out.println("\tq - Quiet flag. Output just the game result, not the entire game log.");
     }
@@ -222,6 +226,9 @@ public class SimulateMatch {
             // library (mulligan) and be drawn again; dedupe would hide later draws (e.g. draw step).
             // With full game log, append to GameLog so output matches game chronology (not all [verbose] first).
             g1.subscribeToEvents(new VerboseDrawEventLogger(g1, verboseQuietBuffer));
+        }
+        if (verboseConfig != null && verboseConfig.isEnabled(SimVerboseConfig.BEGINNING_CARDS_IN_HAND)) {
+            g1.subscribeToEvents(new VerboseTurnBeginHandLogger(g1, verboseQuietBuffer));
         }
         if (maxTurns > 0) {
             turnWatcher = new Thread(() -> {
@@ -431,6 +438,14 @@ public class SimulateMatch {
         return null;
     }
 
+    private static void addVerboseSimLine(final Game game, final List<String> quietBuffer, final String line) {
+        if (quietBuffer != null) {
+            quietBuffer.add(line);
+        } else {
+            game.getGameLog().add(GameLogEntryType.INFORMATION, line);
+        }
+    }
+
     private static final class VerboseDrawEventLogger {
         private final Game game;
         /** When non-null (-q), game log omits INFORMATION; buffer and print after match lines. */
@@ -452,11 +467,43 @@ public class SimulateMatch {
             }
             final String playerName = event.to().player() == null ? "Unknown player" : event.to().player().getName();
             final String line = String.format("[verbose] %s drew: %s", playerName, event.card().getName());
-            if (quietBuffer != null) {
-                quietBuffer.add(line);
-            } else {
-                game.getGameLog().add(GameLogEntryType.INFORMATION, line);
+            addVerboseSimLine(game, quietBuffer, line);
+        }
+    }
+
+    /**
+     * Logs hand contents when {@link GameEventTurnBegan} fires (start of that player's turn, untap step).
+     */
+    private static final class VerboseTurnBeginHandLogger {
+        private final Game game;
+        private final List<String> quietBuffer;
+
+        private VerboseTurnBeginHandLogger(final Game game0, final List<String> quietBuffer0) {
+            this.game = game0;
+            this.quietBuffer = quietBuffer0;
+        }
+
+        @Subscribe
+        public void onTurnBegan(final GameEventTurnBegan event) {
+            if (event == null) {
+                return;
             }
+            // Active player is already set when TurnBegan fires; avoids cache/view mismatch.
+            final Player p = game.getPhaseHandler().getPlayerTurn();
+            if (p == null) {
+                return;
+            }
+            final StringBuilder sb = new StringBuilder();
+            for (final Card c : p.getCardsIn(ZoneType.Hand)) {
+                if (sb.length() > 0) {
+                    sb.append(", ");
+                }
+                sb.append(c.getName());
+            }
+            final String handList = sb.length() == 0 ? "(empty)" : sb.toString();
+            final String line = String.format("[verbose] Turn %d: %s hand: %s", event.turnNumber(), p.getName(),
+                    handList);
+            addVerboseSimLine(game, quietBuffer, line);
         }
     }
 
