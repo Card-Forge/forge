@@ -27,6 +27,24 @@ Jade
 BlueDiamond
   xy: 112, 640
   size: 16, 16
+OutlawsHat
+  xy: 32, 320
+  size: 16, 16
+ManaforceMace
+  xy: 304, 416
+  size: 16, 16
+Shadowspear
+  xy: 256, 560
+  size: 16, 16
+HeirloomBlade
+  xy: 192, 656
+  size: 16, 16
+HengestriderBoots
+  xy: 64, 96
+  size: 16, 16
+TomeofBlight
+  xy: 32, 720
+  size: 16, 16
 BowlofAncientBlood
   xy: 256, 960
   size: 16, 16

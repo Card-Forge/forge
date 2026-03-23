@@ -257,6 +257,11 @@
       {
         "type": "item",
         "count": 1,
+        "itemName": "Tome of Blight"
+      },
+      {
+        "type": "item",
+        "count": 1,
         "itemName": "Eldrazi Pentakey Shard 1"
       },
       {
@@ -1081,6 +1086,11 @@
       {
         "type": "item",
         "count": 1,
+        "itemName": "Jewel of Aggression"
+      },
+      {
+        "type": "item",
+        "count": 1,
         "itemName": "Black Key to the Ur-Dragon"
       },
       {
@@ -1156,6 +1166,11 @@
       {
         "type": "item",
         "count": 1,
+        "itemName": "Jewel of Winds"
+      },
+      {
+        "type": "item",
+        "count": 1,
         "itemName": "Blue Key to the Ur-Dragon"
       },
       {
@@ -1226,6 +1241,11 @@
         "type": "item",
         "count": 1,
         "itemName": "Yore-Tiller Anklet"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Jewel of Rage"
       },
       {
         "type": "item",
@@ -1305,6 +1325,11 @@
       {
         "type": "item",
         "count": 1,
+        "itemName": "Jewel of War"
+      },
+      {
+        "type": "item",
+        "count": 1,
         "itemName": "Red Key to the Ur-Dragon"
       },
       {
@@ -1380,6 +1405,11 @@
         "type": "item",
         "count": 1,
         "itemName": "Glint-Eye Anklet"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Jewel of Blessings"
       },
       {
         "type": "item",
@@ -1687,6 +1717,11 @@
         "type": "item",
         "count": 1,
         "itemName": "Ramosian Greatsword"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Hengestrider Boots"
       },
       {
         "type": "item",
@@ -2395,6 +2430,11 @@
       {
         "type": "item",
         "count": 1,
+        "itemName": "Manaforce Mace"
+      },
+      {
+        "type": "item",
+        "count": 1,
         "itemName": "Eldrazi Pentakey Shard 3"
       },
       {
@@ -2466,6 +2506,11 @@
         "type": "item",
         "count": 1,
         "itemName": "Armor of the First"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Heirloom Blade"
       },
       {
         "type": "item",
@@ -2622,6 +2667,11 @@
         "itemName": "Diamond Belt"
       },
       {
+        "type": "item",
+        "count": 1,
+        "itemName": "Outlaw's Hat"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Akul the Unrepentant"
@@ -2689,7 +2739,12 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Soulguide Gauntlet"
+        "itemName": "Soul-Guide Gauntlet"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Shadowspear"
       },
       {
         "type": "item",

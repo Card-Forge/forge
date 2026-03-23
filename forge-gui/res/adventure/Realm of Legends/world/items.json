@@ -1258,7 +1258,6 @@
       "iconName": "Witch-MawAnklet",
       "effect": {
         "changeStartCards": -1,
-        "lifeModifier": -4,
         "startBattleWithCard": [
           "Witch-Maw Nephilim|GPT"
         ]
@@ -1614,8 +1613,7 @@
       "equipmentSlot": "Boots",
       "iconName": "Dune-BroodAnklet",
       "effect": {
-        "changeStartCards": -1,
-        "lifeModifier": -4,
+        "lifeModifier": -8,
         "startBattleWithCard": [
           "Dune-Brood Nephilim|GPT"
         ]
@@ -1811,7 +1809,6 @@
       "iconName": "Ink-TreaderAnklet",
       "effect": {
         "changeStartCards": -1,
-        "lifeModifier": -4,
         "startBattleWithCard": [
           "Ink-Treader Nephilim|GPT"
         ]
@@ -2371,13 +2368,14 @@
     }
   },
     {
-    "name": "Soulguide Gauntlet",
+    "name": "Soul-Guide Gauntlet",
     "description": "Sac to exile a graveyard or 1 and sac to draw",
     "equipmentSlot": "Left",
     "iconName": "SoulguideGauntlet",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
-        "Soulguide Lantern|THB"
+        "Soul-Guide Lantern|THB"
      ]
     }
   },
@@ -3247,7 +3245,6 @@
     "equipmentSlot": "Right",
     "iconName": "RamosianGreatsword",
     "effect": {
-        "lifeModifier": -3,
         "startBattleWithCard": [
         "Ramosian Greatsword|MOM"
      ]
@@ -3467,7 +3464,7 @@
       "iconName": "TruthButcher'sArmor",
       "effect": {
         "changeStartCards": 4,
-        "lifeModifier": -16
+        "lifeModifier": -12
     }
   },
     {
@@ -3586,8 +3583,7 @@
       "equipmentSlot": "Body",
       "iconName": "CrystallineArmor",
       "effect": {
-        "changeStartCards": -1,
-        "lifeModifier": 5,
+        "lifeModifier": -5,
         "startBattleWithCard": [
           "Crystal Quarry|ODY"
         ]
@@ -3705,8 +3701,8 @@
     "equipmentSlot": "Body",
     "iconName": "ArmoroftheFirst",
     "effect": {
-        "changeStartCards": -1,
-        "startBattleWithCard": [
+      "lifeModifier": -5,
+      "startBattleWithCard": [
         "Sliver Hive|M15"
      ]
     }
@@ -4655,6 +4651,129 @@
     "effect": {
       "startBattleWithCard": [
         "Spiked Ripsaw|VOW"
+      ]
+    }
+  },
+  {
+    "name": "Jewel of Blessings",
+    "description": "All your creatures gain vigilance.",
+    "equipmentSlot": "Neck",
+    "iconName": "MoxPearl",
+    "effect": {
+      "startBattleWithCard": [
+        "Serra's Blessing|WTH"
+      ]
+    }
+  },
+  {
+    "name": "Jewel of War",
+    "description": "All your creatures gain menace.",
+    "equipmentSlot": "Neck",
+    "iconName": "MoxRuby",
+    "effect": {
+      "startBattleWithCard": [
+        "Goblin War Drums|A25"
+      ]
+    }
+  },
+  {
+    "name": "Jewel of Winds",
+    "description": "Your flying creatures get +1/+1.",
+    "equipmentSlot": "Neck",
+    "iconName": "MoxSapphire",
+    "effect": {
+      "startBattleWithCard": [
+        "Favorable Winds|SCD"
+      ]
+    }
+  },
+  {
+    "name": "Jewel of Aggression",
+    "description": "When you attack, opp loses life equal to # of attackers.",
+    "equipmentSlot": "Neck",
+    "iconName": "MoxJet",
+    "effect": {
+      "startBattleWithCard": [
+        "Within Range|TDC"
+      ]
+    }
+  },
+  {
+    "name": "Jewel of Rage",
+    "description": "All your creatures gain trample.",
+    "equipmentSlot": "Neck",
+    "iconName": "MoxEmerald",
+    "effect": {
+      "startBattleWithCard": [
+        "Primal Rage|STH"
+      ]
+    }
+  },
+  {
+    "name": "Outlaw's Hat",
+    "description": "When one of your outlaws dies, drain opp 1 life.",
+    "equipmentSlot": "Neck",
+    "iconName": "OutlawsHat",
+    "effect": {
+      "startBattleWithCard": [
+        "Rakish Crew|OTJ"
+      ]
+    }
+  },
+  {
+    "name": "Manaforce Mace",
+    "description": "Equip +3. +X/+X equal to domain",
+    "equipmentSlot": "Right",
+    "iconName": "ManaforceMace",
+    "effect": {
+      "lifeModifier": 3,
+      "startBattleWithCard": [
+        "Manaforce Mace"
+      ]
+    }
+  },
+  {
+    "name": "Shadowspear",
+    "description": "Equip 2: +1/+1 trample and lifelink. Can also remove hexproof/indest.",
+    "equipmentSlot": "Right",
+    "iconName": "Shadowspear",
+    "effect": {
+      "startBattleWithCard": [
+        "Shadowspear"
+      ]
+    }
+  },
+  {
+    "name": "Heirloom Blade",
+    "description": "Equip 1, +3/+1, on death get a random card of same creature type.",
+    "equipmentSlot": "Right",
+    "iconName": "HeirloomBlade",
+    "effect": {
+      "lifeModifier": -6,
+      "startBattleWithCard": [
+        "Heirloom Blade|C17"
+      ]
+    }
+  },
+  {
+    "name": "Hengestrider Boots",
+    "description": "3/4 artifact creature, 2: trample until EOT.",
+    "equipmentSlot": "Boots",
+    "iconName": "HengestriderBoots",
+    "effect": {
+      "startBattleWithCard": [
+        "Henge Guardian|DDG"
+      ]
+    }
+  },
+  {
+    "name": "Tome of Blight",
+    "description": "3, T, Sac: Destroy target land",
+    "equipmentSlot": "Left",
+    "iconName": "TomeofBlight",
+    "effect": {
+      "startBattleWithCard": [
+        "Ark of Blight|SCG"
       ]
     }
   },
