@@ -5,12 +5,14 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 
+import forge.StaticData;
 import forge.card.CardDb;
 import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.item.IPaperCard;
 import forge.item.PaperToken;
 import forge.util.Aggregates;
+import org.apache.commons.lang3.function.Predicates;
 
 import java.util.*;
 import java.util.function.Predicate;
@@ -35,9 +37,12 @@ public class TokenDb implements ITokenDatabase {
     private final CardEdition.Collection editions;
     private final Map<String, CardRules> rulesByName;
 
-    public TokenDb(Map<String, CardRules> rules, CardEdition.Collection editions) {
+    private boolean smartTokenSelection;
+
+    public TokenDb(Map<String, CardRules> rules, CardEdition.Collection editions, boolean smartTokenSelection) {
         this.rulesByName = rules;
         this.editions = editions;
+        this.smartTokenSelection = smartTokenSelection;
     }
 
     public boolean containsRule(String rule) {
@@ -84,14 +89,54 @@ public class TokenDb implements ITokenDatabase {
     }
 
     // try all editions to find token
-    protected PaperToken fallbackToken(String name) {
-        for (CardEdition edition : this.editions) {
-            String fullName = String.format("%s_%s", name, edition.getCode().toLowerCase());
-            if (loadTokenFromSet(edition, name)) {
-                return Aggregates.random(allTokenByName.get(fullName));
+    protected PaperToken fallbackToken(String name, CardEdition realEdition) {
+        if (smartTokenSelection) {
+            return smartFallbackToken(name, realEdition);
+        } else {
+            for (CardEdition edition : this.editions) {
+                String fullName = String.format("%s_%s", name, edition.getCode().toLowerCase());
+                if (loadTokenFromSet(edition, name)) {
+                    return Aggregates.random(allTokenByName.get(fullName));
+                }
             }
         }
         return null;
+    }
+
+    // Find latest token before release of original card, or earliest after that
+    private PaperToken smartFallbackToken(String name, CardEdition realEdition) {
+
+        // Try to optimistically adhere to CardArtPreference and filter out special editions other than realEdition's own type first
+        final EnumSet<CardEdition.Type> specialEditions = EnumSet.of(CardEdition.Type.FUNNY, CardEdition.Type.ONLINE, CardEdition.Type.OTHER);
+        specialEditions.remove(realEdition.getType());
+        CardDb.CardArtPreference artPreference = StaticData.instance().getCardArtPreference();
+
+        PaperToken paperToken = smartFallbackToken(name, realEdition, Predicate.<CardEdition>not(
+                edition -> specialEditions.contains(edition.getType())).and(artPreference::accept));
+
+        // Further fall back if a token still isn't found, try all editions without filtering
+        return paperToken != null ? paperToken : smartFallbackToken(name, realEdition, Predicates.truePredicate());
+    }
+
+    private PaperToken smartFallbackToken(String name, CardEdition realEdition, Predicate<CardEdition> eligible) {
+        String lastMatchedKey = null;
+        boolean reachedRealEdition = false; // This is to find the closest edition to realEdition, rather than terminate at the first (earliest) result
+        for (CardEdition edition : this.editions.getOrderedEditions(false)) {
+            if (edition.equals(realEdition)) {
+                reachedRealEdition = true;
+            }
+            if (!eligible.test(edition)) {
+                continue;
+            }
+            String fullName = String.format("%s_%s", name, edition.getCode().toLowerCase());
+            if (loadTokenFromSet(edition, name)) {
+                lastMatchedKey = fullName;
+            }
+            if (reachedRealEdition && lastMatchedKey != null) {
+                break;
+            }
+        }
+        return lastMatchedKey != null ? Aggregates.random(allTokenByName.get(lastMatchedKey)) : null;
     }
 
     @Override
@@ -119,7 +164,7 @@ public class TokenDb implements ITokenDatabase {
 
             return Iterables.get(collection, artIndex - 1);
         }
-        PaperToken fallback = this.fallbackToken(tokenName);
+        PaperToken fallback = this.fallbackToken(tokenName, realEdition);
         if (fallback != null) {
             return fallback;
         }
