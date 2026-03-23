@@ -311,6 +311,9 @@ public class EffectAi extends SpellAbilityAi {
                 }
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             } else if (logic.equals("MakeUnblockable")) {
+                if (ai.getOpponents().getCreaturesInPlay().isEmpty()) {
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                }
                 sa.resetTargets();
                 CardCollection options = new CardCollection(CardUtil.getValidCardsToTarget(sa));
                 options = CardLists.filterControlledBy(options, ai);
@@ -321,9 +324,12 @@ public class EffectAi extends SpellAbilityAi {
                 if (options.isEmpty()) {
                     return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
                 }
-                if (phase.is(PhaseType.MAIN1, ai)) {
+                if (phase.isPlayerTurn(ai) && phase.getPhase().isAfter(PhaseType.DRAW) && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                     ComputerUtilCard.sortByEvaluateCreature(options);
                     for (Card card : options) {
+                        if (!CombatUtil.canBeBlocked(card, ai.getOpponents().getCreaturesInPlay(), phase.getCombat())) {
+                            continue;
+                        }
                         final Card copy = CardCopyService.getLKICopy(card);
                         String cantBeBlocked = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self";
                         copy.addStaticAbility(cantBeBlocked);
