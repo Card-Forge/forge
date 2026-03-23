@@ -1,6 +1,6 @@
 Name:Fractal Mascot
 ManaCost:4 G U
-Types:Creature Fractal Elkl
+Types:Creature Fractal Elk
 PT:6/6
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When this creature enters, tap target creature an opponent controls. Put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
