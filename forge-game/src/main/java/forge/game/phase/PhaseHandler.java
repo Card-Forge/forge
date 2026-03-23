@@ -151,23 +151,20 @@ public class PhaseHandler implements java.io.Serializable {
     private void updatePlayersWithPriorityFrom(final Player p) {
         playersWithPriority.clear();
         if (p == null) { return; }
+        playersWithPriority.add(p);
         if (!p.getGame().getRules().isUseSharedTurns()) {
-            playersWithPriority.add(p);
             return;
         }
 
         if (p.getTeamObject() != null && p.getTeamObject() != forge.game.player.Team.UNASSIGNED) {
-            final java.util.List<Player> members = p.getTeamObject().getMembers();
-            if (members.size() > 1) {
-                for (Player m : members) {
-                    if (m != null && m.isInGame()) {
-                        playersWithPriority.add(m);
-                    }
+            for (Player m : p.getTeamObject().getMembers()) {
+                if (m.equals(p)) {
+                    continue;
+                }
+                if (m.isInGame()) {
+                    playersWithPriority.add(m);
                 }
             }
-        }
-        if (playersWithPriority.isEmpty()) {
-            playersWithPriority.add(p);
         }
     }
     public final void setPriority(final Player p) {
