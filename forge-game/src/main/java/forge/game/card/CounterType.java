@@ -1,7 +1,7 @@
 package forge.game.card;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 import com.google.common.collect.Lists;
 
@@ -17,7 +17,7 @@ public interface CounterType extends Serializable {
             return CounterKeywordType.get(name);
         }
     }
-    static Collection<CounterType> getValues() {
+    static List<CounterType> getValues() {
         List<CounterType> result = Lists.newArrayList();
         result.addAll(CounterEnumType.getValues());
         result.addAll(CounterKeywordType.getValues());
