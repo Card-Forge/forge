@@ -3703,8 +3703,8 @@
     "equipmentSlot": "Body",
     "iconName": "ArmoroftheFirst",
     "effect": {
-        "changeStartCards": -1,
-        "startBattleWithCard": [
+      "lifeModifier": -5,
+      "startBattleWithCard": [
         "Sliver Hive|M15"
      ]
     }
