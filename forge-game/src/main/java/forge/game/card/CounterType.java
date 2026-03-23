@@ -19,7 +19,7 @@ public interface CounterType extends Serializable {
     }
     static List<CounterType> getValues() {
         List<CounterType> result = Lists.newArrayList();
-        result.addAll(CounterEnumType.getValues());
+        result.addAll(List.of(CounterEnumType.values()));
         result.addAll(CounterKeywordType.getValues());
         return result;
     }
