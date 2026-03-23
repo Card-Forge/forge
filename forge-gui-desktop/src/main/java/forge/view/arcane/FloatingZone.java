@@ -530,7 +530,7 @@ public class FloatingZone extends FloatingCardArea {
         Iterable<CardView> zoneCards = player.getCards(zone);
         if (zoneCards != null) {
             cardList = new FCollection<>(zoneCards);
-            if (sortedByName) {
+            if (sortedByName && !(zone == ZoneType.Library && getMatchUI().getGameController().mayLookAtAllCards())) {
                 cardList.sort(comp);
             } else if (zone == ZoneType.Flashback) {
                 cardList.sort(ZONE_ORDER_COMPARATOR);

@@ -235,7 +235,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         final float screenScale = GuiBase.getInterface().getScreenScale();
         int imageWidth = Math.round(imagePanel.getWidth() * screenScale);
         int imageHeight = Math.round(imagePanel.getHeight() * screenScale);
-        cachedImage = new CachedCardImage(card, matchUI.getLocalPlayers(), imageWidth, imageHeight) {
+        cachedImage = new CachedCardImage(card, matchUI.getLocalPlayers(), imageWidth, imageHeight, matchUI) {
             @Override
             public void onImageFetched() {
                 if (cachedImage != null) {

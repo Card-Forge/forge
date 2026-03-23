@@ -99,7 +99,7 @@ public class VZone implements IVDoc<CZone> {
             for (final CardView card : cards) {
                 cardList.add(card);
             }
-            if (sortedByName) {
+            if (sortedByName && !(zone == ZoneType.Library && matchUI.getGameController().mayLookAtAllCards())) {
                 cardList.sort(Comparator.comparing(CardView::getName));
             } else if (zone == ZoneType.Flashback) {
                 cardList.sort(FloatingZone.ZONE_ORDER_COMPARATOR);
