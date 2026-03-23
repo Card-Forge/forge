@@ -543,7 +543,10 @@ public enum CounterEnumType implements CounterType {
         return Enum.valueOf(CounterEnumType.class, replacedName);
     }
 
-    public static final ImmutableList<CounterEnumType> values = ImmutableList.copyOf(values());
+    protected static final ImmutableList<CounterEnumType> values = ImmutableList.copyOf(values());
+    public static ImmutableList<CounterEnumType> getValues() {
+        return values;
+    }
 
     @Override
     public boolean is(CounterEnumType eType) {

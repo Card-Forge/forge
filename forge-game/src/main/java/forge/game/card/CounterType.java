@@ -1,6 +1,9 @@
 package forge.game.card;
 
 import java.io.Serializable;
+import java.util.Collection;
+
+import com.google.common.collect.Lists;
 
 public interface CounterType extends Serializable {
 
@@ -13,6 +16,12 @@ public interface CounterType extends Serializable {
         } catch (final IllegalArgumentException ex) {
             return CounterKeywordType.get(name);
         }
+    }
+    static Collection<CounterType> getValues() {
+        List<CounterType> result = Lists.newArrayList();
+        result.addAll(CounterEnumType.getValues());
+        result.addAll(CounterKeywordType.getValues());
+        return result;
     }
 
     String getName();
