@@ -2373,6 +2373,7 @@
     "equipmentSlot": "Left",
     "iconName": "SoulguideGauntlet",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Soul-Guide Lantern|THB"
      ]
