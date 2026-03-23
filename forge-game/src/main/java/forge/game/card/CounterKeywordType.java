@@ -1,6 +1,8 @@
 package forge.game.card;
 
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
@@ -20,6 +22,14 @@ public record CounterKeywordType(String keyword, String desc) implements Counter
             sMap.put(s, new CounterKeywordType(s, isKeywordCounter(s) ? Keyword.getInstance(s).getTitle() : null));
         }
         return sMap.get(s);
+    }
+
+    public static Set<CounterType> getValues() {
+        // add fixed first
+        Set<CounterType> result = keywordCounter.stream().map(CounterKeywordType::get).collect(Collectors.toSet());
+        // add variable ones later
+        result.addAll(sMap.keySet());
+        return result;
     }
     
     @Override
