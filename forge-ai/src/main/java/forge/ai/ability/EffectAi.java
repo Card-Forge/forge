@@ -335,6 +335,10 @@ public class EffectAi extends SpellAbilityAi {
                             sa.getTargets().add(card);
                             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                         }
+                        int predictedLife = ComputerUtil.predictNextCombatsRemainingLife(ai, false, false, 0, options);
+                        if (predictedLife <= 0 && ai.canLoseLife() && !ai.cantLoseForZeroOrLessLife()) {
+                            return new AiAbilityDecision(0, AiPlayDecision.AnotherTime); // don't overextend
+                        }
                         final Card copy = CardCopyService.getLKICopy(card);
                         String cantBeBlocked = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self";
                         copy.addStaticAbility(cantBeBlocked);
