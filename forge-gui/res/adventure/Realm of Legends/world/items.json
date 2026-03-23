@@ -1406,6 +1406,7 @@
     "equipmentSlot": "Boots",
     "iconName": "JoragaBoots",
     "effect": {
+        "changeStartCards": -1,
         "startBattleWithCard": [
         "Joraga Treespeaker|ROE"
      ]
@@ -1428,7 +1429,7 @@
       "equipmentSlot": "Boots",
       "iconName": "Yore-TillerAnklet",
       "effect": {
-        "changeStartCards": -1,
+        "changeStartCards": -2,
         "lifeModifier": -4,
         "startBattleWithCard": [
           "Yore-Tiller Nephilim|GPT"
@@ -1946,7 +1947,7 @@
     "equipmentSlot": "Left",
     "iconName": "MalignPrayerbook",
     "effect": {
-        "changeStartCards": -1,
+      "lifeModifier": -4,
         "startBattleWithCard": [
         "Vessel of Malignity|SOI"
      ]
@@ -2105,7 +2106,7 @@
     "iconName": "LotusPetal",
     "cost": 5000,
     "effect": {
-        "lifeModifier": -3,
+        "lifeModifier": -5,
         "startBattleWithCard": [
         "Lotus Petal|TMP"
      ]
@@ -2325,8 +2326,7 @@
     "iconName": "TomeofRemoval",
     "cost": 5000,
     "effect": {
-        "changeStartCards": -1,
-        "lifeModifier": -1,
+        "lifeModifier": -4,
         "startBattleWithCard": [
         "Seal of Removal|NEM"
      ]
@@ -3534,7 +3534,6 @@
     "equipmentSlot": "Body",
     "iconName": "NomadArmor",
     "effect": {
-      "lifeModifier": 3,       
       "changeStartCards": -1,
         "startBattleWithCard": [
         "Nomad Stadium|ODY"
@@ -3558,7 +3557,6 @@
     "equipmentSlot": "Body",
     "iconName": "CabalArmor",
     "effect": {
-        "lifeModifier": 3,  
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Cabal Pit|ODY"
@@ -3595,7 +3593,6 @@
     "equipmentSlot": "Body",
     "iconName": "CentaurArmor",
     "effect": {
-        "lifeModifier": 3,  
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Centaur Garden|ODY"
@@ -3713,7 +3710,6 @@
     "equipmentSlot": "Body",
     "iconName": "BarbarianArmor",
     "effect": {
-        "lifeModifier": 3,  
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Barbarian Ring|ODY"
@@ -3829,72 +3825,72 @@
     }
   },
   {
-    "name": "Plains Outfit",
-    "description": "Gives a plains. -2 life, -1 hand size.",
+    "name": "Meadow Outfit",
+    "description": "Taps for W. -5 life, -1 hand size.",
     "equipmentSlot": "Body",
     "iconName": "OutpostOutfit",
     "cost": 7500,
     "effect": {
-      "lifeModifier": -2,
+      "lifeModifier": -5,
       "changeStartCards": -1,
       "startBattleWithCard": [
-        "Plains|LEA"
+        "Drifting Meadow|DMR"
       ]
     }
   },
   {
-    "name": "Island Shirt",
-    "description": "Gives an island. -2 life, -1 hand size.",
+    "name": "Isle Shirt",
+    "description": "Taps for U. -5 life, -1 hand size.",
     "equipmentSlot": "Body",
     "iconName": "SeafloorShirt",
     "cost": 7500,
     "effect": {
-      "lifeModifier": -2,
+      "lifeModifier": -5,
       "changeStartCards": -1,
       "startBattleWithCard": [
-        "Island|LEA"
+        "Remote Isle|DMR"
       ]
     }
   },
   {
-    "name": "Swamp Leather",
-    "description": "Gives a swamp. -2 life, -1 hand size.",
+    "name": "Mire Leather",
+    "description": "Taps for B. -5 life, -1 hand size.",
     "equipmentSlot": "Body",
     "iconName": "BogDwellerLeather",
     "cost": 7500,
     "effect": {
-      "lifeModifier": -2,
+      "lifeModifier": -5,
       "changeStartCards": -1,
       "startBattleWithCard": [
-        "Swamp|LEA"
+        "Polluted Mire|DMR"
       ]
     }
   },
   {
-    "name": "Mountain Cloak",
-    "description": "Gives a mountain. -2 life, -1 hand size.",
+    "name": "Smoldering Cloak",
+    "description": "Taps for R. -5 life, -1 hand size.",
     "equipmentSlot": "Body",
     "iconName": "HighlandCloak",
     "cost": 7500,
     "effect": {
-      "lifeModifier": -2,
+      "lifeModifier": -5,
       "changeStartCards": -1,
       "startBattleWithCard": [
-        "Mountain|LEA"
+        "Smoldering Crater|DMR"
       ]
     }
   },
   {
-    "name": "Forest Shawl",
-    "description": "Gives a forest. -2 life, -1 hand size.",
+    "name": "Karst Shawl",
+    "description": "Taps for G. -5 life, -1 hand size.",
     "equipmentSlot": "Body",
     "iconName": "TimberlandShawl",
     "cost": 7500,
     "effect": {
-      "lifeModifier": -2,
+      "lifeModifier": -5,
       "changeStartCards": -1,
       "startBattleWithCard": [
-        "Forest|LEA|[295]"
+        "Slippery Karst|DMR"
       ]
     }
   },
@@ -3992,7 +3988,6 @@
     "equipmentSlot": "Body",
     "iconName": "CephalidArmor",
     "effect": {
-        "lifeModifier": 3,  
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Cephalid Coliseum|ODY"
@@ -4900,6 +4895,76 @@
     "iconName": "GhostRune",
     "cost": 7500,
     "effect": {
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Plains Outfit",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Body",
+    "iconName": "OutpostOutfit",
+    "cost": 7500,
+    "effect": {
+      "lifeModifier": -2,
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Island Shirt",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Body",
+    "iconName": "SeafloorShirt",
+    "cost": 7500,
+    "effect": {
+      "lifeModifier": -2,
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Swamp Leather",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Body",
+    "iconName": "BogDwellerLeather",
+    "cost": 7500,
+    "effect": {
+      "lifeModifier": -2,
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Mountain Cloak",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Body",
+    "iconName": "HighlandCloak",
+    "cost": 7500,
+    "effect": {
+      "lifeModifier": -2,
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Forest Shawl",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Body",
+    "iconName": "TimberlandShawl",
+    "cost": 7500,
+    "effect": {
+      "lifeModifier": -2,
+      "changeStartCards": -1,
       "startBattleWithCard": [
         "Darksteel Relic"
       ]
