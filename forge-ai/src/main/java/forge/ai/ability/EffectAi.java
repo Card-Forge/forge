@@ -324,7 +324,7 @@ public class EffectAi extends SpellAbilityAi {
                 if (options.isEmpty()) {
                     return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
                 }
-                if (phase.isPlayerTurn(ai) && phase.getPhase().isAfter(PhaseType.DRAW) && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                if (phase.is(PhaseType.MAIN1, ai)) {
                     ComputerUtilCard.sortByEvaluateCreature(options);
                     for (Card card : options) {
                         if (!CombatUtil.canBeBlocked(card, ai.getOpponents().getCreaturesInPlay(), phase.getCombat())) {
