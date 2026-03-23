@@ -17,5 +17,9 @@ draws=true
 # At the start of each player's turn, log all cards in that player's hand.
 beginning_cards_in_hand=true
 
+# At the start of each player's turn, log names from the top of that player's library.
+# Omit or 0: off. Positive: first n cards. -1: entire library (can be very long).
+beginning_library_count=5
+
 # Future verbose categories can be listed here as they are implemented, e.g.:
 # zoneChanges=true

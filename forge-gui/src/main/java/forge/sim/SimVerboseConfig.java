@@ -42,6 +42,12 @@ public final class SimVerboseConfig {
     /** At each turn start, log the active player's hand. */
     public static final String BEGINNING_CARDS_IN_HAND = "beginning_cards_in_hand";
 
+    /**
+     * At each turn start, log card names from the top of the active player's library.
+     * Value {@code 0} or absent: off. Positive: first {@code n} cards. {@code -1}: entire library.
+     */
+    public static final String BEGINNING_LIBRARY_COUNT = "beginning_library_count";
+
     private static final Map<String, Boolean> DEFAULTS;
     static {
         Map<String, Boolean> d = new LinkedHashMap<>();
@@ -52,9 +58,12 @@ public final class SimVerboseConfig {
     }
 
     private final Map<String, Boolean> categories;
+    /** {@code null} or {@code 0}: off; {@code -1}: log whole library; else first {@code n} cards from top. */
+    private final Integer beginningLibraryCardCount;
 
-    private SimVerboseConfig(final Map<String, Boolean> categories0) {
+    private SimVerboseConfig(final Map<String, Boolean> categories0, final Integer beginningLibraryCardCount0) {
         this.categories = Collections.unmodifiableMap(categories0);
+        this.beginningLibraryCardCount = beginningLibraryCardCount0;
     }
 
     /**
@@ -69,12 +78,24 @@ public final class SimVerboseConfig {
     }
 
     public boolean anyEnabled() {
+        if (logsBeginningLibrary()) {
+            return true;
+        }
         for (final Boolean b : categories.values()) {
             if (Boolean.TRUE.equals(b)) {
                 return true;
             }
         }
         return false;
+    }
+
+    /** @return configured count, or {@code null} if this logging is off */
+    public Integer getBeginningLibraryCardCount() {
+        return beginningLibraryCardCount;
+    }
+
+    public boolean logsBeginningLibrary() {
+        return beginningLibraryCardCount != null && beginningLibraryCardCount != 0;
     }
 
     /**
@@ -84,6 +105,7 @@ public final class SimVerboseConfig {
      */
     public static SimVerboseConfig load() {
         final Map<String, Boolean> map = new LinkedHashMap<>(DEFAULTS);
+        Integer beginningLibraryCount = null;
         final File userFile = resolveConfigFile();
         if (userFile.isFile()) {
             final Properties p = new Properties();
@@ -100,10 +122,14 @@ public final class SimVerboseConfig {
                 if ("begining_cards_in_hand".equals(key)) {
                     key = BEGINNING_CARDS_IN_HAND;
                 }
+                if (BEGINNING_LIBRARY_COUNT.equals(key)) {
+                    beginningLibraryCount = parseBeginningLibraryCount(p.getProperty(name));
+                    continue;
+                }
                 map.put(key, parseBool(p.getProperty(name), false));
             }
         }
-        return new SimVerboseConfig(map);
+        return new SimVerboseConfig(map, beginningLibraryCount);
     }
 
     /** Primary location under Forge user data (see Forge profile / install docs). */
@@ -154,5 +180,41 @@ public final class SimVerboseConfig {
             return false;
         }
         return ifNullOrBlank;
+    }
+
+    /**
+     * @return {@code null} if off or invalid; {@code -1} for whole library; positive for first {@code n} cards
+     */
+    static Integer parseBeginningLibraryCount(final String raw) {
+        if (raw == null) {
+            return null;
+        }
+        String s = raw.trim();
+        if (s.isEmpty()) {
+            return null;
+        }
+        final int hash = s.indexOf('#');
+        if (hash >= 0) {
+            s = s.substring(0, hash).trim();
+        }
+        if (s.isEmpty()) {
+            return null;
+        }
+        final String firstToken = s.split("\\s+", 2)[0];
+        try {
+            final int n = Integer.parseInt(firstToken);
+            if (n == 0) {
+                return null;
+            }
+            if (n == -1) {
+                return -1;
+            }
+            if (n < -1) {
+                return null;
+            }
+            return n;
+        } catch (final NumberFormatException ignored) {
+            return null;
+        }
     }
 }

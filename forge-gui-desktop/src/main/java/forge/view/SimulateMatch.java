@@ -30,6 +30,7 @@ import forge.gamemodes.tournament.system.TournamentPairing;
 import forge.gamemodes.tournament.system.TournamentPlayer;
 import forge.gamemodes.tournament.system.TournamentRoundRobin;
 import forge.gamemodes.tournament.system.TournamentSwiss;
+import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
@@ -227,8 +228,9 @@ public class SimulateMatch {
             // With full game log, append to GameLog so output matches game chronology (not all [verbose] first).
             g1.subscribeToEvents(new VerboseDrawEventLogger(g1, verboseQuietBuffer));
         }
-        if (verboseConfig != null && verboseConfig.isEnabled(SimVerboseConfig.BEGINNING_CARDS_IN_HAND)) {
-            g1.subscribeToEvents(new VerboseTurnBeginHandLogger(g1, verboseQuietBuffer));
+        if (verboseConfig != null && (verboseConfig.isEnabled(SimVerboseConfig.BEGINNING_CARDS_IN_HAND)
+                || verboseConfig.logsBeginningLibrary())) {
+            g1.subscribeToEvents(new VerboseTurnBeginLogger(g1, verboseQuietBuffer, verboseConfig));
         }
         if (maxTurns > 0) {
             turnWatcher = new Thread(() -> {
@@ -472,15 +474,18 @@ public class SimulateMatch {
     }
 
     /**
-     * Logs hand contents when {@link GameEventTurnBegan} fires (start of that player's turn, untap step).
+     * At {@link GameEventTurnBegan}: optional hand list and/or top-of-library names per sim-verbose.properties.
      */
-    private static final class VerboseTurnBeginHandLogger {
+    private static final class VerboseTurnBeginLogger {
         private final Game game;
         private final List<String> quietBuffer;
+        private final SimVerboseConfig config;
 
-        private VerboseTurnBeginHandLogger(final Game game0, final List<String> quietBuffer0) {
+        private VerboseTurnBeginLogger(final Game game0, final List<String> quietBuffer0,
+                final SimVerboseConfig config0) {
             this.game = game0;
             this.quietBuffer = quietBuffer0;
+            this.config = config0;
         }
 
         @Subscribe
@@ -493,17 +498,41 @@ public class SimulateMatch {
             if (p == null) {
                 return;
             }
-            final StringBuilder sb = new StringBuilder();
-            for (final Card c : p.getCardsIn(ZoneType.Hand)) {
-                if (sb.length() > 0) {
-                    sb.append(", ");
+            final int turn = event.turnNumber();
+            final String pname = p.getName();
+
+            if (config.isEnabled(SimVerboseConfig.BEGINNING_CARDS_IN_HAND)) {
+                final StringBuilder sb = new StringBuilder();
+                for (final Card c : p.getCardsIn(ZoneType.Hand)) {
+                    if (sb.length() > 0) {
+                        sb.append(", ");
+                    }
+                    sb.append(c.getName());
                 }
-                sb.append(c.getName());
+                final String handList = sb.length() == 0 ? "(empty)" : sb.toString();
+                addVerboseSimLine(game, quietBuffer,
+                        String.format("[verbose] Turn %d: %s hand: %s", turn, pname, handList));
             }
-            final String handList = sb.length() == 0 ? "(empty)" : sb.toString();
-            final String line = String.format("[verbose] Turn %d: %s hand: %s", event.turnNumber(), p.getName(),
-                    handList);
-            addVerboseSimLine(game, quietBuffer, line);
+
+            if (config.logsBeginningLibrary()) {
+                final Integer n = config.getBeginningLibraryCardCount();
+                final PlayerZone lib = p.getZone(ZoneType.Library);
+                final int size = lib.size();
+                final int limit = n != null && n == -1 ? size : Math.min(n, size);
+                final StringBuilder lb = new StringBuilder();
+                for (int i = 0; i < limit; i++) {
+                    if (lb.length() > 0) {
+                        lb.append(", ");
+                    }
+                    lb.append(lib.get(i).getName());
+                }
+                final String libList = size == 0 ? "(empty)" : lb.toString();
+                final String scope = n != null && n == -1
+                        ? String.format("all %d", size)
+                        : String.format("top %d", limit);
+                addVerboseSimLine(game, quietBuffer,
+                        String.format("[verbose] Turn %d: %s library (%s): %s", turn, pname, scope, libList));
+            }
         }
     }
 
