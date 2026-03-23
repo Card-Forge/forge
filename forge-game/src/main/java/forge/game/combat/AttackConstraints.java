@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.NoSuchElementException;
 import java.util.Objects;
-import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -82,56 +81,6 @@ public class AttackConstraints {
 
         final Map<Map<Card, GameEntity>, Integer> possible = new LinkedHashMap<>();
         final List<Attack> reqs = getSortedFilteredRequirements();
-        final CardCollection myPossibleAttackers = new CardCollection(possibleAttackers);
-
-        // First, remove all requirements of creatures that aren't going attack this combat anyway
-        final CardCollection attackersToRemove = new CardCollection();
-        for (final Card attacker : myPossibleAttackers) {
-            final Set<AttackRestrictionType> types = restrictions.get(attacker).getTypes();
-            if ((types.contains(AttackRestrictionType.NEED_TWO_OTHERS)     && myMax <= 2
-                    ) || (
-                 types.contains(AttackRestrictionType.NOT_ALONE)           && myMax <= 1
-                    ) || (
-                 types.contains(AttackRestrictionType.NEED_GREATER_POWER)  && myMax <= 1
-                            )) {
-                reqs.removeIf(findAll(attacker));
-                attackersToRemove.add(attacker);
-            }
-        }
-        myPossibleAttackers.removeAll(attackersToRemove);
-        attackersToRemove.clear();
-
-        // Next, remove creatures with constraints that can't be fulfilled.
-        for (final Card attacker : myPossibleAttackers) {
-            final Set<AttackRestrictionType> types = restrictions.get(attacker).getTypes();
-            if (types.contains(AttackRestrictionType.NEED_GREATER_POWER)) {
-                if (!myPossibleAttackers.anyMatch(AttackRestrictionType.NEED_GREATER_POWER.getPredicate(attacker))) {
-                    attackersToRemove.add(attacker);
-                }
-            }
-        }
-        myPossibleAttackers.removeAll(attackersToRemove);
-        for (final Card toRemove : attackersToRemove) {
-            reqs.removeIf(findAll(toRemove));
-        }
-
-        // First, successively try each creature that must attack alone.
-        for (final Card attacker : myPossibleAttackers) {
-            if (restrictions.get(attacker).getTypes().contains(AttackRestrictionType.ONLY_ALONE)) {
-                final Attack attack = findFirst(reqs, attacker);
-                if (attack == null) {
-                    // no requirements, we don't care anymore
-                    continue;
-                }
-                final Map<Card, GameEntity> attackMap = ImmutableMap.of(attack.attacker, attack.defender);
-                final int violations = countViolations(attackMap);
-                if (violations != -1) {
-                    possible.put(attackMap, violations);
-                }
-                // remove them from the requirements, as they'll not be relevant to this calculation any more
-                reqs.removeIf(findAll(attacker));
-            }
-        }
 
         // Now try all others (plus empty attack) and count their violations
         final FCollection<Map<Card, GameEntity>> legalAttackers = collectLegalAttackers(reqs, myMax);
@@ -161,7 +110,7 @@ public class AttackConstraints {
         final Map<GameEntity, Integer> toDefender = new LinkedHashMap<>();
         int attackersNeeded = 0;
 
-        outer: while (!reqs.isEmpty()) {
+        while (!reqs.isEmpty()) {
             final Iterator<Attack> iterator = reqs.iterator();
             final Attack req = iterator.next();
             final boolean isReserved = reserved.contains(req.attacker);
@@ -190,18 +139,7 @@ public class AttackConstraints {
                 continue;
             }
 
-            boolean haveTriedWithout = false;
-            final AttackRestriction restriction = restrictions.get(req.attacker);
             final AttackRequirement requirement = requirements.get(req.attacker);
-
-            // construct the predicate restrictions
-            final Collection<Predicate<Card>> predicateRestrictions = Lists.newLinkedList();
-            for (final AttackRestrictionType rType : restriction.getTypes()) {
-                final Predicate<Card> predicate = rType.getPredicate(req.attacker);
-                if (predicate != null) {
-                    predicateRestrictions.add(predicate);
-                }
-            }
 
             if (!requirement.getCausesToAttack().isEmpty()) {
                 final List<Attack> clonedReqs = deepClone(reqs);
@@ -216,34 +154,6 @@ public class AttackConstraints {
                     clonedReqs.removeIf(findAll(req.attacker));
                     final CardCollection clonedReserved = new CardCollection(reserved);
                     result.addAll(collectLegalAttackers(myAttackers, clonedReqs, clonedReserved, localMaximum));
-                    haveTriedWithout = true;
-                }
-            }
-
-            for (final Predicate<Card> predicateRestriction : predicateRestrictions) {
-                if (Sets.union(myAttackers.keySet(), reserved.asSet()).stream().anyMatch(predicateRestriction)) {
-                    // predicate fulfilled already, ignore!
-                    continue;
-                }
-                // otherwise: reserve first creature to match it!
-                final Attack match = findFirst(reqs, predicateRestriction);
-                if (match == null) {
-                    // no match: remove this creature completely
-                    reqs.removeIf(findAll(req.attacker));
-                    continue outer;
-                }
-                // found one! add it to reserve and lower local maximum
-                reserved.add(match.attacker);
-                localMaximum--;
-
-                // if limited, try both with and without this creature
-                if (!haveTriedWithout && isLimited) {
-                    // try without
-                    final List<Attack> clonedReqs = deepClone(reqs);
-                    clonedReqs.removeIf(findAll(req.attacker));
-                    final CardCollection clonedReserved = new CardCollection(reserved);
-                    result.addAll(collectLegalAttackers(myAttackers, clonedReqs, clonedReserved, localMaximum));
-                    haveTriedWithout = true;
                 }
             }
 
@@ -253,15 +163,6 @@ public class AttackConstraints {
             reqs.removeIf(findAll(req.attacker));
             reserved.remove(req.attacker);
             localMaximum--;
-
-            // need two other attackers: set that number to the number of attackers we still need (but never < 0)
-            if (restrictions.get(req.attacker).getTypes().contains(AttackRestrictionType.NEED_TWO_OTHERS)) {
-                final int previousNeeded = attackersNeeded;
-                attackersNeeded = Math.max(3 - (myAttackers.size() + reserved.size()), 0);
-                localMaximum -= Math.max(attackersNeeded - previousNeeded, 0);
-            } else if (restrictions.get(req.attacker).getTypes().contains(AttackRestrictionType.NOT_ALONE)) {
-                attackersNeeded = Math.max(2 - (myAttackers.size() + reserved.size()), 0);
-            }
         }
 
         // success if we've added everything we want
@@ -290,7 +191,7 @@ public class AttackConstraints {
         }
         @Override
         public String toString() {
-            return "[" + requirements + "] " + attacker + " to " + defender; 
+            return "[" + requirements + "] " + attacker + " to " + defender;
         }
     }
 
@@ -338,17 +239,6 @@ public class AttackConstraints {
             newList.add(new Attack(attack));
         }
         return newList;
-    }
-    private static Attack findFirst(final List<Attack> reqs, final Predicate<Card> predicate) {
-        for (final Attack req : reqs) {
-            if (predicate.test(req.attacker)) {
-                return req;
-            }
-        }
-        return null;
-    }
-    private static Attack findFirst(final List<Attack> reqs, final Card attacker) {
-        return findFirst(reqs, attacker::equals);
     }
     private static Predicate<Attack> findAll(final Card attacker) {
         return input -> input.attacker.equals(attacker);

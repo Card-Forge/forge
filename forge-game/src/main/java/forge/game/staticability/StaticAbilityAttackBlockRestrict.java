@@ -83,25 +83,31 @@ public class StaticAbilityAttackBlockRestrict {
         return true;
     }
 
-    static public List<StaticAbility> attackRestrict(final Card attacker, final Collection<Card> others) {
-        final Game game = attacker.getGame();
+    static public List<StaticAbility> attackRestrict(final Card card, final Collection<Card> others) {
+        return restrictCommon(StaticAbilityMode.AttackRestrict, card, others);
+    }
+    static public List<StaticAbility> blockRestrict(final Card card, final Collection<Card> others) {
+        return restrictCommon(StaticAbilityMode.BlockRestrict, card, others);
+    }
+
+    static public List<StaticAbility> restrictCommon(StaticAbilityMode mode, final Card card, final Collection<Card> others) {
+        final Game game = card.getGame();
         List<StaticAbility> result = Lists.newArrayList();
         for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
-                if (!stAb.checkConditions(StaticAbilityMode.AttackRestrict)) {
+                if (!stAb.checkConditions(mode)) {
                     continue;
                 }
-                if (!stAb.matchesValidParam("ValidCard", attacker)) {
+                if (!stAb.matchesValidParam("ValidCard", card)) {
                     continue;
                 }
-                if (validRestrictCommon(stAb, attacker, others)) {
+                if (validRestrictCommon(stAb, card, others)) {
                     result.add(stAb);
                 }
             }
         }
         return result;
     }
-
     static public boolean validRestrictCommon(StaticAbility stAb, Card card, Collection<Card> others) {
         long size;
         if (stAb.hasParam("ValidOthers")) {

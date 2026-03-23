@@ -76,6 +76,7 @@ public enum StaticAbilityMode {
 
     // StaticAbilityAttackBlockRestrict
     AttackRestrict,
+    BlockRestrict,
     AttackRestrictNum,
     BlockRestrictNum,
 
