@@ -2,6 +2,7 @@ package forge.game.card;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.LinkedHashSet;
 import java.util.stream.Collectors;
 
 import com.google.common.collect.ImmutableList;
@@ -26,7 +27,7 @@ public record CounterKeywordType(String keyword, String desc) implements Counter
 
     public static Set<CounterType> getValues() {
         // add fixed first
-        Set<CounterType> result = keywordCounter.stream().map(CounterKeywordType::get).collect(Collectors.toSet());
+        Set<CounterType> result = keywordCounter.stream().map(CounterKeywordType::get).collect(Collectors.toCollection(LinkedHashSet::new));
         // add variable ones later
         result.addAll(sMap.values());
         return result;
