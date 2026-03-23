@@ -34,7 +34,79 @@
 	  "cardText": "destroyed|dies|return.*(hand|battlefield|library|to play)|put.*battlefield from"
     }]
 },
-{                                      
+{
+"name":"PowerNine",                  
+"description":"High Roller's Club",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"RotatingShop",
+"overlaySprite":"Overlay6Black",
+  "rewards": [
+    {
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Black Lotus",
+			"editions": [ "LEA" ]
+    },
+    {
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Mox Pearl",
+			"editions": [ "LEA" ]
+	},
+	{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Mox Sapphire",
+			"editions": [ "LEA" ]
+	},
+	{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Mox Emerald",
+			"editions": [ "LEA" ]
+	},
+	{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Mox Ruby",
+			"editions": [ "LEA" ]
+	},
+	{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Mox Jet",
+			"editions": [ "LEA" ]
+	},
+	{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Time Walk",
+			"editions": [ "LEA" ]
+	},
+	{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Ancestral Recall",
+			"editions": [ "LEA" ]
+	},
+	{
+			"type": "card",
+			"probability": 1,
+			"count": 1,
+			"cardName": "Timetwister",
+			"editions": [ "LEA" ]
+	}
+    ]
+},
+{                                        
 "name":"Black3",                  
 "description":"Essence Extraction",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
@@ -5503,7 +5575,67 @@
 		}]
 	}]
 },
-  {
+{
+  "name":"ubwarhammer40K",
+  "description":"Warhammer 40K",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"UBShop",
+  "rewards": [
+    {
+      "count":8,
+      "type":"Union",
+      "cardUnion":[
+		{
+			"sourceDeck":"decks/shop/ubwarhammer40K.dck"
+		},
+		{
+			"count":1
+		}]
+	}]
+},
+{
+  "name":"AttractionShop",
+  "description":"Card-ival of Curiosities",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"FunnyShop",
+  "rewards": [
+    {
+      "count":4,
+      "sourceDeck":"decks/shop/funny/funny_cards.dck",
+	  "subTypes": ["Attraction"]
+    },
+    {
+      "count":4,
+      "sourceDeck":"decks/shop/funny/funny_cards.dck",
+      "cardText": "Attraction"
+    },
+    {
+      "count":1,
+      "probability": 0.5,
+      "sourceDeck":"decks/shop/funny/funny_cards_promo.dck",
+      "cardText": "Attraction"
+    }
+	]
+},
+{
+  "name":"ContraptionShop",
+  "description":"The Clank & Crank Co.",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"FunnyShop",
+  "rewards": [
+    {
+      "count":4,
+      "sourceDeck":"decks/shop/funny/funny_cards.dck",
+	  "subTypes": ["Contraption"]
+    },
+    {
+      "count":4,
+      "sourceDeck":"decks/shop/funny/funny_cards.dck",
+      "cardText": "Contraption"
+    }
+	]
+},
+{
     "name": "BoosterPackShop",
     "description":"Pack To Basics",
     "spriteAtlas":"maps/tileset/buildings.atlas",

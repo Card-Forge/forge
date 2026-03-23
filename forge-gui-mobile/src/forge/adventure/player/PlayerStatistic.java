@@ -30,6 +30,23 @@ public class PlayerStatistic implements SaveFileContent {
         }
         return wins;
     }
+    public float rank()   ///// used for overworld enemy spawn
+    {
+        int wins=0;
+        for(Map.Entry<String, Pair<Integer, Integer>> value:winLossRecord.entrySet())
+        {
+            wins+=value.getValue().getLeft();
+        }
+        if (wins < 20) {
+            return 0.5f;
+        } else if (wins >= 20 && wins < 60) {
+            return 1;
+        } else if (wins >= 60 && wins <= 150) {
+            return 2;
+        } else { // wins > 150
+            return 10;
+        }
+    }
     public int totalLoss()
     {
         int loss=0;

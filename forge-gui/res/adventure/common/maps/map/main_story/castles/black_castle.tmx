@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="87">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="89">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -11,57 +11,38 @@
  </properties>
  <tileset firstgid="1" source="../../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../../../../Innistrad/maps/tileset/Inn_Dungeon.tsx"/>
+ <tileset firstgid="32769" source="../../../../../Innistrad/maps/tileset/INN_dungen_crawler_tileset.tsx"/>
  <layer id="1" name="Background" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJzt2EEKgCAURVGnzVpCq3a90cAd/PQpJziz+F1UEOpXax0AAOBgz501B2b6zm2VVf1Jc/Tr11/33fHs2r/7+q/qn33vrLrnUtdfv/6U/qp39OvXr1////2V/xWqJe5RMv3n97+IYlv0
+   eJztlsENwjAMRXvtjRGA5RjBTNIBzGZMApeqvSREbRT/hFfpSZVa2U8/ieJlnqYFACCAtwEAgDr35/buX14CTioe0BfXi1adf8eNc9ySx60eUf5KdUb0d0ufyVzf/Zzwq15t/1Tv6PxLvVqvu+r+X59e/XvPP8q/9b0Tdc+p5o8//kdxK5/hS/rW+icqf/zPkZuZavu7pfdu7tvI+eOP/xEvVRTXSBn8x/f/AJrE19w=
   </data>
  </layer>
  <layer id="6" name="Floor" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJztmEEOwjAMBPOD5AdVBR9tq/Ir4Gtw4YbAbtdxDjNSbpZ3VCWy1VIAAAAAAAAA4BtLLWUVnq329Z+att8s7vePj//+/m6Pdvzcaq7/2VxVn6xc/HNz8c/NVftb59JV7H9pmjnnnUsqf1XevfPc8c7Bp+iejXr/e+eO7L8Y3tzI/qqaCPC310SAv70mAvztNR68+9uvvUtVE7m/9Ua1v3l2vLP/KCL2NwtZb1MF/jZe3r59Qg==
+   eJztlkEOwjAMBPcAvCPp4wDBC+BNfUhB8CA4wQWpQqhymk2cih3JN8s7h6Y2IIQQQgghhBBCiF8MAbgQ6xqq6mMbgR2x9tHH/xaAdTe/7sHXPzeXNccrV/6+ufL3zWX7W/fSkex/iJw9l7qXWP6svFXlvZO6BzddXt53bmvff+3clv0//4KpN9eyP6unBPK395Tg3/xPPXDu580pQar/4+3+XLB/Tk8Kqffb1N3F6il5v9Uu1v1mqXEuaybrfrMw9l8i8rfxAtYx2TA=
   </data>
  </layer>
  <layer id="2" name="Ground" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJzt17EJgDAQQNG4gKSxE7FwExd1NTeRYKGllWfMe3CkzK+OJCUAgO/Y++gCgPqM+TynHNsBAE+Vd/96mxr/AdtwTa2WLroA2hW996Lvh1b94f8+V9xe6I+lP07ZP6Xf/onzRv8BTFAKcQ==
+   eJzt17EJgDAQRuG4gKSxC4LgJqmdw7WympvIYaGlEPC/mPfBkTKvOpIQAAAA/DhGdQHgz6YOgHspXucctR0AALxl7/78mBb/AWW6p1XroC4A+qXee+r7gV794f++L+qCOvRr0a9j+8f62T86X/Sf5oUNfg==
   </data>
  </layer>
  <layer id="3" name="Foreground" width="48" height="48">
-  <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
-  </properties>
   <data encoding="base64" compression="zlib">
-   eJztmFsOgyAQRd2A/WvShbgCU11nP/pwB91O60paUomUMMwVeZg4JPdHyMwJAnOhOVRVIxKJRCKRSJRQ/VdvUKqhY7tM/OeJK3ZrhX8X/ENdVTdA9/rHdQXHP+r8exn5T7nmdS/86Pk5TvwvcLycn8Iv/On2ZZeJHzkfXHud42oz8SPxXf8qlB+tr1R9jsU/TDEpHl3f7fih65aKQ/kTk43yGiomx0PlNddtZ42x+0Lmwcem46uaydXLkchr8qhvl+Msu8/Fj+TVY+z9u2ZPUvzP0yyEPySn8G+Df+mdJBV/6ruOK2dM/jUewlW3VeO8w9L1gPD3Vn7knuDLj+SMyY+wCP9/n30GUO8PlA8pzU/FW5JvDb/Pv/nmjKr73P3d9iEmm+s812y+s5Pzb6m8Pze3HBvq31xzFrNxuVP4txItpv8p0UL9T8j9MPR+Wfqtd6vvn8IfVx+qQlaG
+   eJztmE1uAjEMhXMBukPqQYADoA5XguN0AS034Dot2y6rCpYQaSKiyI7f5G+mwpHeZhLZn5xJ8pLFizELlUqlUqlUqora3PUNyjZ0bNeI/63nKt3WI/P/zf43P9p+RuY/3ut8APTRz8ceHP85a7+WkXlqVddn4Uf3z3PP/wWO1/1T+ZW/3rrsGvEj+wO11iku3xOsG/Hb+JIXoeZK4uL40fOVO5+l+Cj/sY/J8bjzPYyf+t9ycTh/4rNxXsPGlHi4vP5/2wVjwr6UOsTYXHx7Zkrn5ZnJ6/PYb+/zh8I+ih/J68aE6zdnTXL8p9eHEP6UnMo/Df6hd5Ja/LXvOlTOkvw5HoI6t22TvMPQ/wHh3wT5kXtCLD+SsyQ/1XdZGnNd8nPkfAflPabAv10Zs1vF+XNyhnsA9/7A+RC0FrX4uXhD8uXwx/xbrGbcuS/d30Mf4rNR+7lji+2dkn+r5f2l2kpsqH+jalaySblr+LcxGuJ/ct+TY+238Fs16n9S7oep98ux33qn+v6p/GV1Axn+YjE=
   </data>
  </layer>
  <layer id="5" name="AboveSprites" width="48" height="48">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
   <data encoding="base64" compression="zlib">
    eJzt17EJACAQA8Bs8Buro+sC1o94B+lTBZIAAAD8bVQyT1Z1NwEAAABu/Hegi/3hBRuEwwT/
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="47" template="../../../obj/gold.tx" x="427" y="467">
-   <properties>
-    <property name="reward">[
-  {
-    &quot;type&quot;: &quot;gold&quot;,
-    &quot;count&quot;: 180,
-    &quot;addMaxCount&quot;: 40
- }
-]</property>
-   </properties>
-  </object>
-  <object id="49" template="../../../obj/gold.tx" x="310" y="466.5">
-   <properties>
-    <property name="reward">[
-  {
-    &quot;type&quot;: &quot;gold&quot;,
-    &quot;count&quot;: 180,
-    &quot;addMaxCount&quot;: 40
- }
-]</property>
-   </properties>
-  </object>
   <object id="55" template="../../../obj/gate.tx" x="368" y="640.333">
    <properties>
     <property name="dialog">[
@@ -95,7 +76,7 @@
 				},
 				{
                 	&quot;name&quot;: &quot;Griselbrand, I've done as you asked! It's time to end this!&quot;,
-                	&quot;action&quot;: [ { &quot;deleteMapObject&quot;: 55 } ],
+                	&quot;action&quot;: [ { &quot;deleteMapObject&quot;: 55 },{ &quot;deleteMapObject&quot;: 85 }  ],
                 	&quot;condition&quot;: [
                 	{
                 		&quot;getMapFlag&quot;: {
@@ -147,8 +128,39 @@
     ]
    }
 ]</property>
+    <property name="effect">{
+ &quot;startBattleWithCard&quot;: [ &quot;Nakaya Shade&quot; ],
+ &quot;lifeModifier&quot;: 6
+}</property>
     <property name="enemy" value="Shade"/>
     <property name="pursueRange" type="int" value="30"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Basilsk Colar&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Evil Ank&quot;
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;WWK&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;EOE&quot;]
+  }
+]
+</property>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
@@ -162,8 +174,39 @@
     ]
    }
 ]</property>
+    <property name="effect">{
+ &quot;startBattleWithCard&quot;: [ &quot;Feast on the Fallen&quot; ],
+ &quot;lifeModifier&quot;: 6
+}</property>
     <property name="enemy" value="Ghoul Gravecaller"/>
     <property name="pursueRange" type="int" value="30"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Basilsk Colar&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Evil Ank&quot;
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;WWK&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;EOE&quot;]
+  }
+]
+</property>
     <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
@@ -177,8 +220,39 @@
     ]
    }
 ]</property>
+    <property name="effect">{
+ &quot;startBattleWithCard&quot;: [ &quot;Cursebound Witch&quot;, &quot;Cursebound Witch&quot; ],
+ &quot;lifeModifier&quot;: 6
+}</property>
     <property name="enemy" value="Witch"/>
     <property name="pursueRange" type="int" value="30"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Basilsk Colar&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Evil Ank&quot;
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;WWK&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;EOE&quot;]
+  }
+]
+</property>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
@@ -193,11 +267,37 @@
    }
 ]</property>
     <property name="effect">{
- &quot;lifeModifier&quot;: 15,
- &quot;startBattleWithCard&quot;: [ &quot;Swamp&quot; ]
+ &quot;startBattleWithCard&quot;: [ &quot;Swamp&quot;, &quot;Quest for the Gravelord&quot; ]
 }</property>
     <property name="enemy" value="Grave Titan"/>
     <property name="pursueRange" type="int" value="10"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Basilsk Colar&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Evil Ank&quot;
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;WWK&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;EOE&quot;]
+  }
+]
+</property>
     <property name="threatRange" type="int" value="10"/>
    </properties>
   </object>
@@ -211,8 +311,39 @@
     ]
    }
 ]</property>
+    <property name="effect">{
+ &quot;startBattleWithCard&quot;: [ &quot;Bloodchief Ascension&quot; ],
+ &quot;lifeModifier&quot;: 6
+}</property>
     <property name="enemy" value="Ancient Vampire"/>
     <property name="pursueRange" type="int" value="30"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Basilsk Colar&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Evil Ank&quot;
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;WWK&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;EOE&quot;]
+  }
+]
+</property>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
@@ -239,32 +370,166 @@
   <object id="80" template="../../../obj/waypoint.tx" x="216.878" y="344.024"/>
   <object id="81" template="../../../obj/waypoint.tx" x="508.175" y="498.686"/>
   <object id="82" template="../../../obj/waypoint.tx" x="692.252" y="495.84"/>
-  <object id="85" template="../../../obj/enemy.tx" x="399" y="650.5">
+  <object id="85" template="../../../obj/enemy.tx" x="406.12" y="646.616">
    <properties>
     <property name="dialog">[
-  {
-    &quot;text&quot;: &quot;Welcome, {var=player_name}. My kind master, Griselbrand, has been waiting eagerly for this moment.&quot;,
-    &quot;options&quot;: [
-      {
-        &quot;name&quot;: &quot;Is that so? I guess you wouldn't mind opening that gate in front of me?&quot;,
-        &quot;text&quot;: &quot;I'm afraid I'm not allowed to do that, I am a mere servant of the mighty Griselbrand, ruler of everything unholy.&quot;,
-        &quot;options&quot;: [
-          {
-            &quot;name&quot;: &quot;What do I need to do to get passed though this gate?&quot;,
-            &quot;text&quot;: &quot;You must prove your strength by defeating at least four of the five enemies lurking within this cursed dungeon to be worthy of an audience with my illustrious master, who holds dominion over this realm of evil. Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.&quot;,
-            &quot;options&quot;: [
-              {
-                &quot;name&quot;: &quot;I'll show my worth, just make sure to open the gate when I defeat your challengers.&quot;,
-                &quot;text&quot;: &quot;Leave&quot;
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
+	{
+		&quot;text&quot;: &quot;Welcome, {var=player_name}. Griselbrand has been waiting eagerly for this moment.&quot;,
+		&quot;options&quot;: [
+			{
+				&quot;name&quot;: &quot;Is that so? I guess you wouldn't mind opening that gate in front of me?&quot;,
+				&quot;text&quot;: &quot;I'm afraid I'm not allowed to do that, I am a mere servant of the mighty Griselbrand, master of Demons.&quot;,
+				&quot;options&quot;: [
+					{
+						&quot;name&quot;: &quot;What do I need to do to get passed though this gate?&quot;,
+						&quot;text&quot;: &quot;You must prove your strength by defeating at least four of the five enemies lurking within this dungeon to be worthy of an audience with my illustrious master.\n Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.&quot;,
+						&quot;options&quot;: [
+							{
+								&quot;name&quot;: &quot;I'll show my worth, just make sure to open the gate when I do defeat your challengers.&quot;,
+								&quot;text&quot;: &quot;Leave&quot;,
+								&quot;action&quot;: [
+									{
+										&quot;setMapFlag&quot;: {
+											&quot;key&quot;: &quot;TalkToDoorGreeter&quot;,
+											&quot;val&quot;: 1
+										}
+									}
+
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	{
+		&quot;text&quot;: &quot;The challengers are still alive, you shall not pass beyond this gate&quot;,
+		&quot;condition&quot;: [
+			{ &quot;checkMapFlag&quot;: &quot;TalkToDoorGreeter&quot; }
+				],
+			&quot;options&quot;: [
+			{
+				&quot;name&quot;: &quot;(Continue)&quot;
+				}
+		]
+	},
+	{
+		&quot;text&quot;: &quot;I am impressed, you are welcome to meet my master upstairs, though I can't garantee you will be able to survive that encounter.&quot;,
+		&quot;condition&quot;: [
+			{
+				&quot;getMapFlag&quot;: {
+					&quot;key&quot;: &quot;enemiesDefeated&quot;,
+					&quot;op&quot;: &quot;&gt;=&quot;,
+					&quot;val&quot;: 4
+				}
+			}
+		],
+		&quot;options&quot;: [
+			{
+				&quot;name&quot;: &quot;(Continue)&quot;,
+				&quot;action&quot;: [
+					{ &quot;deleteMapObject&quot;: -1 }
+				]
+			}
+		]
+	}
 ]</property>
     <property name="enemy" value="Demon"/>
+   </properties>
+  </object>
+  <object id="87" template="../../../obj/treasure.tx" x="426.955" y="462.554">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;shards&quot;,
+    &quot;count&quot;: 10,
+    &quot;addMaxCount&quot;: 20
+},
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 6,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;black&quot; ]
+},
+{
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Basilsk Colar&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Evil Ank&quot;
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;EMA&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;MM3&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 200,
+    &quot;addMaxCount&quot;: 100
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="88" template="../../../obj/treasure.tx" x="309.155" y="469.027">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;shards&quot;,
+    &quot;count&quot;: 10,
+    &quot;addMaxCount&quot;: 20
+},
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 6,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;black&quot; ]
+},
+{
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Basilsk Colar&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Evil Ank&quot;
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;EMA&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;MM3&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 200,
+    &quot;addMaxCount&quot;: 100
+ }
+]</property>
    </properties>
   </object>
  </objectgroup>

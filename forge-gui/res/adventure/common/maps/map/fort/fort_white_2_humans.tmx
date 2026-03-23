@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="35" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="77">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="35" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="77">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -11,14 +11,9 @@
  <tileset firstgid="28289" source="../../tileset/dungeon/dungeon_bis.tsx"/>
  <tileset firstgid="44673" source="../../tileset/dungeon/animatedtiles.tsx"/>
  <tileset firstgid="61057" source="../../tileset/main-nocollide.tsx"/>
- <layer id="9" name="Collision2" width="35" height="25">
+ <layer id="9" name="Collision" width="35" height="25">
   <data encoding="base64" compression="zlib">
-   eJxjYBgF9AILealrniUfYXlcmNpgsLoFmx30dMsoGAWjgHzgxokfk6t21C3Uc8soGAWjYBSMAtoCAGjkFrU=
-  </data>
- </layer>
- <layer id="6" name="Collision" width="35" height="25">
-  <data encoding="base64" compression="zlib">
-   eJxjYCANLCgjHlMKHPkYGO5QATvwUe4We6gZC3gx8UJeiNx8LHLIGARsqegWEG2JhmFyhOwBqRsJbkGXGwi34JIbDG4hxQxau+UuVOz2CA4XSsq5u1Ryy2IC5RisvAMBfOoW8eK2g1oAOe4oiUdqgFG3jIJRMApGwSigBQAARRlSCg==
+   eJxjYCANLCgjHlMKHPkYGO5QATvwUe4We6gZC3gx8UJeiNx8LHLo6myp6BYQbYmGYXK2WOTQ1Y26hT5uwSVHyB56uIUUM2jtlrtQsdsjOFwoKefuUskti4kox2AAn7pFvLjtIBa4ceLHyHEHYuNTO+oW2rhlFIyCUTAKRgFtAQBJvWb8
   </data>
  </layer>
  <layer id="1" name="Background" width="35" height="25">
@@ -50,11 +45,12 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="50" template="../../obj/enemy.tx" x="277.606" y="130.186">
+  <object id="50" template="../../obj/enemy.tx" x="279.748" y="132.328">
    <properties>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Bard Class&quot; ] }"/>
     <property name="enemy" value="Human Bard"/>
-    <property name="threatRange" type="int" value="20"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
   <object id="51" template="../../obj/treasure.tx" x="119.354" y="112.639"/>
@@ -62,6 +58,7 @@
   <object id="53" template="../../obj/enemy.tx" x="122.559" y="128.649">
    <properties>
     <property name="enemy" value="Human elite"/>
+    <property name="speedModifier" type="float" value="10"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>

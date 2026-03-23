@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="85">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="88">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -10,9 +10,11 @@
  </properties>
  <tileset firstgid="1" source="../../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
- <layer id="1" name="Background" width="48" height="48">
+ <tileset firstgid="11905" source="../../../../../Innistrad/maps/tileset/INN_dungen_crawler_tileset.tsx"/>
+ <tileset firstgid="24193" source="../../../tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="1" name="Background" width="48" height="48" opacity="0.83">
   <data encoding="base64" compression="zlib">
-   eJzt2LEJACEQRUFTsyvhqrZeuRrc049MMJksDxUER29tAAAAXOx9subATt+9rXKqP2mOfv369etfn7fz3Tn1zqXuv379Kf1Va/Tr169f///9lf8K1RLPKJn++/snqiFdMg==
+   eJztzjENACAMAMFKQAI+wP/CUkk1wdAmN9z6+bwR78yQg14BAIA+9urVAQAAAACAnwqaazTo
   </data>
  </layer>
  <layer id="6" name="Floor" width="48" height="48">
@@ -22,45 +24,23 @@
  </layer>
  <layer id="2" name="Ground" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJzt1zEKgDAMQFG9gHRxE3Hw4J7JE0lx0NHJGPselI79U2i6DgDgO/YhugAgn6mc91xiOwDgqfrv38brZNwD7v1ZrX10AbQreu5Fvw+t+sP+viRur/TH0h+nzp/ab/7EeaP/AL1iC1I=
+   eJzt2EEKg0AMhWF7gTKb7qR04cE9U09URMHiwomYzIvyfzC4CclDcEbtOgAAgDy+T3UCALievszXd9HmQE6f4rdU+TP1Uc0lv3Yu+f3nTu/942tde98BGfNP/vOf6RPFMnd4+PQ5ovW5ozrn7vz8Kvqo5kbmb7Hv1fbhKJb8XjURyG+viXD3/P1y5tS+37Pm96yJQH57zRGe/xW8V2vq+WdY95/MrnbPt1rk/wGYjSMi
   </data>
  </layer>
  <layer id="3" name="Foreground" width="48" height="48">
-  <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
-  </properties>
   <data encoding="base64" compression="zlib">
-   eJztmNsNwyAMRbNA+t09kiaT9jVJ52izUIsaVGphfEN4RIqR7lcs+4gAvtAfmqZXqVQqlUqlyqjxoxcoM9DYoRD/aeZKPTrl3wX/vW2aC6Br++U6g/G3tvxeRv5TqXndCz96fk4z/xOM1/NT+ZU/374cCvEj54Nvr0tcXSF+JL/vX8Xyo/2V68+p+O9zTo7H9neaP3bdcnk4f+KycV7D5JR4uLruuh1IDP0WMw8hNpvf9EypX05MXZenIzH0m48fqWtj6P5dsyc5/sfxJ4Q/pqbyb4N/6Z0kF3/uu46vZkr+NR7C17fNkLzD0vWA8I+kPnJPCNVHaqbkR1iU//8bPQO49wfOh9Tm5/ItqbeGP+TfQnPG9X3p/k59iMvmO88tW+jslPxbLu8vza3Ehvo335ylHFLtHP6txkjpf2qMWP8Tcz+MvV/Wfuvd6vun8qfVG7JpOnI=
+   eJztWG1uwyAM7b/9Wfp791ibnnQfOUJPsHOsVU+yC6xIsWZRP2xIgVSzpSdFgdgvgM2D3Xaz2TkcDofD4XBUxOGKUwIX9hxM60MYG/Hfz7y47Yfbd7n22pF/rv08rYu/xCfXWvGfrmvl3YCPeU29Gft/Du1z2TJPrcb1v/DX6ifhPPP/Ftou29sa2rN+luYwr7uPVD8lc/6PzZ/ykucVfx4b8ZfqgyXXY15H4F/iT321HE61p/yTUb5Lc6XVFeTfur+i/Rnxt/wrxzT7RHxof4/5l65b5AfpE84NaY3gU+OD4h7YOh2jPjy3UB5Z4qI+5D/smdJ+Ke2raN7pHbe4TeJviUt94vxdUlMQ/6+XP1j4l8R0/uvgn3smqcW/9llHipnDf1D4L9EQKf2Q0g656wH15/9GXIIhHWMZW9IFljFbyt/qC82R5ZuW/GP9VcJf0z68La4B6P4B6RAtDvGpNf7IX048FGd61uOl9FtqzOJ9n87m/PwunddjHcK5SfWcuKVqp6bfUnOE1muOabGX6rfQvuSukL6V/jW0abFr6Lcedk/908NK9U/J+bD0fNn7rnet95/O/774BTxTTLU=
   </data>
  </layer>
  <layer id="5" name="AboveSprites" width="48" height="48">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
   <data encoding="base64" compression="zlib">
    eJzt17EJACAQA8Bs8Buro+sC1o94B+lTBZIAAAD8bVQyT1Z1NwEAAABu/Hegi/3hBRuEwwT/
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="47" template="../../../obj/gold.tx" x="432.5" y="463">
-   <properties>
-    <property name="reward">[
-  {
-    &quot;type&quot;: &quot;gold&quot;,
-    &quot;count&quot;: 180,
-    &quot;addMaxCount&quot;: 40
- }
-]</property>
-   </properties>
-  </object>
-  <object id="49" template="../../../obj/gold.tx" x="304.5" y="466">
-   <properties>
-    <property name="reward">[
-  {
-    &quot;type&quot;: &quot;gold&quot;,
-    &quot;count&quot;: 180,
-    &quot;addMaxCount&quot;: 40
- }
-]</property>
-   </properties>
-  </object>
   <object id="54" template="../../../obj/enemy.tx" x="223.57" y="537.245">
    <properties>
     <property name="enemy" value="Master Red Wizard"/>
@@ -101,7 +81,7 @@
 				},
 				{
                 	&quot;name&quot;: &quot;Lathliss, I've done as you asked! It's time to end this!&quot;,
-                	&quot;action&quot;: [ { &quot;deleteMapObject&quot;: 55 } ],
+                	&quot;action&quot;: [ { &quot;deleteMapObject&quot;: 55 }, { &quot;deleteMapObject&quot;: 72 } ],
                 	&quot;condition&quot;: [
                 		{
                     		&quot;getMapFlag&quot;: {
@@ -143,7 +123,7 @@
     <property name="teleport" value="../common/maps/map/main_story/castles/red_castle_f1.tmx"/>
    </properties>
   </object>
-  <object id="66" template="../../../obj/enemy.tx" x="81.5" y="606">
+  <object id="66" template="../../../obj/enemy.tx" x="79.5" y="608">
    <properties>
     <property name="defeatDialog">[
    {
@@ -153,11 +133,42 @@
     ]
    }
 ]</property>
+    <property name="effect">{
+ &quot;startBattleWithCard&quot;: [ &quot;Barbarian Ring&quot;, &quot;Fervor&quot; ],
+ &quot;lifeModifier&quot;: 6
+}</property>
     <property name="enemy" value="Barbarian"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Warren Tender's Baton&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Prayerbook of Ire&quot;
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;TOR&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;SNC&quot;]
+  }
+]
+</property>
     <property name="threatRange" type="int" value="40"/>
    </properties>
   </object>
-  <object id="67" template="../../../obj/enemy.tx" x="649.5" y="599">
+  <object id="67" template="../../../obj/enemy.tx" x="649.5" y="600">
    <properties>
     <property name="defeatDialog">[
    {
@@ -167,7 +178,38 @@
     ]
    }
 ]</property>
+    <property name="effect">{
+ &quot;startBattleWithCard&quot;: [ &quot;Crazed Goblin&quot;, &quot;Crazed Goblin&quot; ],
+ &quot;lifeModifier&quot;: 6
+}</property>
     <property name="enemy" value="Goblin King"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Warren Tender's Baton&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Prayerbook of Ire&quot;
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;TOR&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;SNC&quot;]
+  }
+]
+</property>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
@@ -181,7 +223,38 @@
     ]
    }
 ]</property>
+    <property name="effect">{
+ &quot;startBattleWithCard&quot;: [ &quot;Pyromancer Ascension&quot; ],
+ &quot;lifeModifier&quot;: 6
+}</property>
     <property name="enemy" value="Pyromancer"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Warren Tender's Baton&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Prayerbook of Ire&quot;
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;TOR&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;SNC&quot;]
+  }
+]
+</property>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
@@ -195,7 +268,38 @@
     ]
    }
 ]</property>
+    <property name="effect">{
+ &quot;startBattleWithCard&quot;: [ &quot;Mountain&quot;, &quot;Quest for Pure Flame&quot; ],
+ &quot;lifeModifier&quot;: 6
+}</property>
     <property name="enemy" value="Fire Giant"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Warren Tender's Baton&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Prayerbook of Ire&quot;
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;TOR&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;SNC&quot;]
+  }
+]
+</property>
     <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
@@ -209,7 +313,38 @@
     ]
    }
 ]</property>
+    <property name="effect">{
+ &quot;startBattleWithCard&quot;: [ &quot;Anaba Spirit Crafter&quot;, &quot;Didgeridoo&quot; ],
+ &quot;lifeModifier&quot;: 6
+}</property>
     <property name="enemy" value="Minotaur Warcaller"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Warren Tender's Baton&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Prayerbook of Ire&quot;
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;TOR&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;SNC&quot;]
+  }
+]
+</property>
     <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
@@ -220,30 +355,70 @@
     <property name="waypoints" value="83,82,79,80,78,77,76,75,84,81,82"/>
    </properties>
   </object>
-  <object id="72" template="../../../obj/enemy.tx" x="401.5" y="655">
+  <object id="72" template="../../../obj/enemy.tx" x="407" y="654">
    <properties>
     <property name="dialog">[
-  {
-    &quot;text&quot;: &quot;Welcome, {var=player_name}. Dragon queen Lathliss has been waiting eagerly for this moment.&quot;,
-    &quot;options&quot;: [
-      {
-        &quot;name&quot;: &quot;Is that so? I guess you wouldn't mind opening that gate in front of me?&quot;,
-        &quot;text&quot;: &quot;I'm afraid I'm not allowed to do that, I am only an ordinary dragon, a mere servant of the mighty Lathliss, queen of dragons.&quot;,
-        &quot;options&quot;: [
-          {
-            &quot;name&quot;: &quot;What do I need to do to get passed though this gate?&quot;,
-            &quot;text&quot;: &quot;You must prove your strength by defeating at least four of the five enemies lurking within this dungeon in order to be worthy of an audience with my illustrious master, who holds dominion over this realm of flames.\n Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.&quot;,
-            &quot;options&quot;: [
-              {
-                &quot;name&quot;: &quot;I'll show my worth, just make sure to open the gate when I defeat your challengers.&quot;,
-                &quot;text&quot;: &quot;Leave&quot;
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
+	{
+		&quot;text&quot;: &quot;Welcome, {var=player_name}. Lathliss has been waiting eagerly for this moment.&quot;,
+		&quot;options&quot;: [
+			{
+				&quot;name&quot;: &quot;Is that so? I guess you wouldn't mind opening that gate in front of me?&quot;,
+				&quot;text&quot;: &quot;I'm afraid I'm not allowed to do that, I am only an ordinary dragon, a mere servant of the mighty Lathliss, queen of dragons.&quot;,
+				&quot;options&quot;: [
+					{
+						&quot;name&quot;: &quot;What do I need to do to get passed though this gate?&quot;,
+						&quot;text&quot;: &quot;You must prove your strength by defeating at least four of the five enemies lurking within this dungeon to be worthy of an audience with my illustrious master.\n Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.&quot;,
+						&quot;options&quot;: [
+							{
+								&quot;name&quot;: &quot;I'll show my worth, just make sure to open the gate when I do defeat your challengers.&quot;,
+								&quot;text&quot;: &quot;Leave&quot;,
+								&quot;action&quot;: [
+									{
+										&quot;setMapFlag&quot;: {
+											&quot;key&quot;: &quot;TalkToDoorGreeter&quot;,
+											&quot;val&quot;: 1
+										}
+									}
+
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	{
+		&quot;text&quot;: &quot;The challengers are still alive, you shall not pass beyond this gate&quot;,
+		&quot;condition&quot;: [
+			{ &quot;checkMapFlag&quot;: &quot;TalkToDoorGreeter&quot; }
+				],
+			&quot;options&quot;: [
+			{
+				&quot;name&quot;: &quot;(Continue)&quot;
+				}
+		]
+	},
+	{
+		&quot;text&quot;: &quot;I am impressed, you are welcome to meet my master upstairs, though I can't garantee you will be able to survive that encounter.&quot;,
+		&quot;condition&quot;: [
+			{
+				&quot;getMapFlag&quot;: {
+					&quot;key&quot;: &quot;enemiesDefeated&quot;,
+					&quot;op&quot;: &quot;&gt;=&quot;,
+					&quot;val&quot;: 4
+				}
+			}
+		],
+		&quot;options&quot;: [
+			{
+				&quot;name&quot;: &quot;(Continue)&quot;,
+				&quot;action&quot;: [
+					{ &quot;deleteMapObject&quot;: -1 }
+				]
+			}
+		]
+	}
 ]</property>
     <property name="enemy" value="Dragon"/>
    </properties>
@@ -258,5 +433,99 @@
   <object id="82" template="../../../obj/waypoint.tx" x="513.5" y="497"/>
   <object id="83" template="../../../obj/waypoint.tx" x="685" y="497"/>
   <object id="84" template="../../../obj/waypoint.tx" x="228.5" y="352.5"/>
+  <object id="85" template="../../../obj/treasure.tx" x="310.5" y="470">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;shards&quot;,
+    &quot;count&quot;: 10,
+    &quot;addMaxCount&quot;: 20
+},
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 6,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;red&quot; ]
+},
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Warren Tender's Baton&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Prayerbook of Ire&quot;
+ },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;NEO&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;M12&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 200,
+    &quot;addMaxCount&quot;: 100
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="87" template="../../../obj/treasure.tx" x="428" y="468">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;shards&quot;,
+    &quot;count&quot;: 10,
+    &quot;addMaxCount&quot;: 20
+},
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 6,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;red&quot; ]
+},
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Warren Tender's Baton&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Prayerbook of Ire&quot;
+ },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;NEO&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;M12&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 200,
+    &quot;addMaxCount&quot;: 100
+ }
+]</property>
+   </properties>
+  </object>
  </objectgroup>
 </map>

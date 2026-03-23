@@ -2573,7 +2573,7 @@
   },
   {
     "name": "Chatterfang",
-    "sprite": "sprites/enemy/beast/squirrel.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/squirrel.atlas",
     "deck": [
       "decks/legends/chatterfang.dck"
     ],
@@ -4124,7 +4124,7 @@
   },
   {
     "name": "Ygra",
-    "sprite": "sprites/enemy/beast/lion.atlas",
+    "sprite": "sprites/enemy/beast/cat/lion.atlas",
     "deck": [
       "decks/legends/ygra.dck"
     ],
@@ -4642,7 +4642,7 @@
   },
   {
     "name": "The Scarab God",
-    "sprite": "sprites/enemy/beast/scarab.atlas",
+    "sprite": "sprites/enemy/beast/insect/scarab.atlas",
     "deck": [
       "decks/legends/the_scarab_god.dck"
     ],
@@ -4713,7 +4713,7 @@
   },
   {
     "name": "The Locust God",
-    "sprite": "sprites/enemy/beast/giantfly.atlas",
+    "sprite": "sprites/enemy/beast/insect/giantfly.atlas",
     "deck": [
       "decks/legends/the_locust_god.dck"
     ],
@@ -4783,7 +4783,7 @@
   },
   {
     "name": "The Scorpion God",
-    "sprite": "sprites/enemy/beast/scorpion.atlas",
+    "sprite": "sprites/enemy/beast/arachnid/scorpion.atlas",
     "deck": [
       "decks/legends/the_scorpion_god.dck"
     ],
@@ -4853,7 +4853,7 @@
   },
   {
     "name": "Gishath",
-    "sprite": "sprites/enemy/beast/ancient_2.atlas",
+    "sprite": "sprites/enemy/beast/dinosaur/ancient_2.atlas",
     "deck": [
       "decks/legends/gishath.dck"
     ],
@@ -5284,7 +5284,7 @@
   },
   {
     "name": "Marath",
-    "sprite": "sprites/enemy/beast/deer_2.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/deer_2.atlas",
     "deck": [
       "decks/legends/marath.dck"
     ],
@@ -5568,7 +5568,7 @@
   },
   {
     "name": "Gahiji",
-    "sprite": "sprites/enemy/beast/ancient_2.atlas",
+    "sprite": "sprites/enemy/beast/dinosaur/ancient_2.atlas",
     "deck": [
       "decks/legends/gahiji.dck"
     ],
@@ -9169,7 +9169,7 @@
   },
   {
     "name": "Koma",
-    "sprite": "sprites/enemy/beast/big_snake.atlas",
+    "sprite": "sprites/enemy/beast/reptile/big_snake.atlas",
     "deck": [
       "decks/legends/koma.dck"
     ],
@@ -13505,7 +13505,7 @@
   },
   {
     "name": "Goreclaw",
-    "sprite": "sprites/enemy/beast/bear_large.atlas",
+    "sprite": "sprites/enemy/beast/bear/bear_large.atlas",
     "deck": [
       "decks/legends/goreclaw.dck"
     ],
@@ -14352,7 +14352,7 @@
   },
   {
     "name": "Brokkos",
-    "sprite": "sprites/enemy/beast/rhino.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/rhino.atlas",
     "deck": [
       "decks/legends/brokkos.dck"
     ],
@@ -14541,7 +14541,7 @@
   },
   {
     "name": "Snapdax",
-    "sprite": "sprites/enemy/beast/tiger.atlas",
+    "sprite": "sprites/enemy/beast/cat/tiger.atlas",
     "deck": [
       "decks/legends/snapdax.dck"
     ],
@@ -14635,7 +14635,7 @@
   },
   {
     "name": "Nethroi",
-    "sprite": "sprites/enemy/beast/lion.atlas",
+    "sprite": "sprites/enemy/beast/cat/lion.atlas",
     "deck": [
       "decks/legends/nethroi.dck"
     ],
@@ -15015,7 +15015,7 @@
   },
   {
     "name": "Phelddagrif",
-    "sprite": "sprites/enemy/beast/hippo.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/hippo.atlas",
     "deck": [
       "decks/legends/phelddagrif.dck"
     ],
@@ -16176,7 +16176,7 @@
   },
   {
     "name": "Horde of Notions",
-    "sprite": "sprites/enemy/beast/cerodon.atlas",
+    "sprite": "sprites/enemy/monstrosity/cerodon.atlas",
     "deck": [
       "decks/legends/horde_of_notions.dck"
     ],
@@ -16451,7 +16451,7 @@
   },
   {
     "name": "Kogla",
-    "sprite": "sprites/enemy/beast/gorilla.atlas",
+    "sprite": "sprites/enemy/beast/ape/gorilla.atlas",
     "deck": [
       "decks/legends/kogla.dck"
     ],
@@ -17001,7 +17001,7 @@
   },
   {
     "name": "Bello",
-    "sprite": "sprites/enemy/beast/raccoon.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/raccoon.atlas",
     "deck": [
       "decks/legends/bello.dck"
     ],
@@ -18082,7 +18082,7 @@
   },
   {
     "name": "Voja",
-    "sprite": "sprites/enemy/beast/wolf.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/wolf.atlas",
     "deck": [
       "decks/legends/voja.dck"
     ],
@@ -18524,7 +18524,7 @@
   },
   {
     "name": "Albiorix",
-    "sprite": "sprites/enemy/beast/chicken.atlas",
+    "sprite": "sprites/enemy/beast/barn/chicken.atlas",
     "deck": [
       "decks/legends/albiorix.dck"
     ],
@@ -18591,7 +18591,7 @@
   },
   {
     "name": "Balmor",
-    "sprite": "sprites/enemy/beast/owl.atlas",
+    "sprite": "sprites/enemy/beast/bird/owl.atlas",
     "deck": [
       "decks/legends/balmor.dck"
     ],
@@ -18730,7 +18730,7 @@
   },
   {
     "name": "Commander Eesha",
-    "sprite": "sprites/enemy/beast/falcon.atlas",
+    "sprite": "sprites/enemy/beast/bird/falcon.atlas",
     "deck": [
       "decks/legends/commander_eesha.dck"
     ],
@@ -18797,7 +18797,7 @@
   },
   {
     "name": "Kastral",
-    "sprite": "sprites/enemy/beast/raven.atlas",
+    "sprite": "sprites/enemy/beast/bird/raven.atlas",
     "deck": [
       "decks/legends/kastral.dck"
     ],
@@ -19003,7 +19003,7 @@
   },
   {
     "name": "Vega",
-    "sprite": "sprites/enemy/beast/owl.atlas",
+    "sprite": "sprites/enemy/beast/bird/owl.atlas",
     "deck": [
       "decks/legends/vega.dck"
     ],
@@ -19137,7 +19137,7 @@
   },
   {
     "name": "Zinnia",
-    "sprite": "sprites/enemy/beast/parrot.atlas",
+    "sprite": "sprites/enemy/beast/bird/parrot.atlas",
     "deck": [
       "decks/legends/zinnia.dck"
     ],
@@ -19204,7 +19204,7 @@
   },
   {
     "name": "Zoraline",
-    "sprite": "sprites/enemy/beast/bat.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/bat.atlas",
     "deck": [
       "decks/legends/zoraline.dck"
     ],
@@ -19511,7 +19511,7 @@
   },
   {
     "name": "Jugan",
-    "sprite": "sprites/enemy/beast/big_snake.atlas",
+    "sprite": "sprites/enemy/beast/reptile/big_snake.atlas",
     "deck": [
       "decks/legends/jugan.dck"
     ],
@@ -19846,7 +19846,7 @@
   },
   {
     "name": "Aclazotz",
-    "sprite": "sprites/enemy/beast/bat.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/bat.atlas",
     "deck": [
       "decks/legends/aclazotz.dck"
     ],
@@ -21684,7 +21684,7 @@
   },
   {
     "name": "Beza",
-    "sprite": "sprites/enemy/beast/deer_2.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/deer_2.atlas",
     "deck": [
       "decks/legends/beza.dck"
     ],
@@ -21884,7 +21884,7 @@
   },
   {
     "name": "Lumra",
-    "sprite": "sprites/enemy/beast/bear.atlas",
+    "sprite": "sprites/enemy/beast/bear/bear.atlas",
     "deck": [
       "decks/legends/lumra.dck"
     ],
@@ -21950,7 +21950,7 @@
   },
   {
     "name": "Maha",
-    "sprite": "sprites/enemy/beast/owl.atlas",
+    "sprite": "sprites/enemy/beast/bird/owl.atlas",
     "deck": [
       "decks/legends/maha.dck"
     ],
@@ -22017,7 +22017,7 @@
   },
   {
     "name": "Wildsear",
-    "sprite": "sprites/enemy/beast/wolf.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/wolf.atlas",
     "deck": [
       "decks/legends/wildsear.dck"
     ],
@@ -23520,7 +23520,7 @@
   },
   {
     "name": "Ghalta",
-    "sprite": "sprites/enemy/beast/ghalta.atlas",
+    "sprite": "sprites/enemy/beast/dinosaur/ghalta.atlas",
     "deck": [
       "decks/legends/ghalta.dck"
     ],
@@ -23790,7 +23790,7 @@
   },
   {
     "name": "Zilortha",
-    "sprite": "sprites/enemy/beast/ancient.atlas",
+    "sprite": "sprites/enemy/beast/dinosaur/ancient.atlas",
     "deck": [
       "decks/legends/zilortha.dck"
     ],
@@ -24614,7 +24614,7 @@
   },
   {
     "name": "Skrelv",
-    "sprite": "sprites/enemy/beast/spider_cave.atlas",
+    "sprite": "sprites/enemy/beast/arachnid/spider_cave.atlas",
     "deck": [
       "decks/legends/skrelv.dck"
     ],
@@ -24879,7 +24879,7 @@
   },
   {
     "name": "Helga",
-    "sprite": "sprites/enemy/beast/frog.atlas",
+    "sprite": "sprites/enemy/beast/amphibian/frog.atlas",
     "deck": [
       "decks/legends/helga.dck"
     ],
@@ -24945,7 +24945,7 @@
   },
   {
     "name": "Ishkanah",
-    "sprite": "sprites/enemy/beast/spider_purple.atlas",
+    "sprite": "sprites/enemy/beast/arachnid/spider_purple.atlas",
     "deck": [
       "decks/legends/ishkanah.dck"
     ],
@@ -25214,7 +25214,7 @@
   },
   {
     "name": "Tatsunari",
-    "sprite": "sprites/enemy/beast/frog.atlas",
+    "sprite": "sprites/enemy/beast/amphibian/frog.atlas",
     "deck": [
       "decks/legends/tatsunari.dck"
     ],
@@ -29356,7 +29356,7 @@
   },
   {
     "name": "Kura",
-    "sprite": "sprites/enemy/beast/big_snake.atlas",
+    "sprite": "sprites/enemy/beast/reptile/big_snake.atlas",
     "deck": [
       "decks/legends/kura.dck"
     ],
@@ -29778,7 +29778,7 @@
   },
   {
     "name": "Ilharg",
-    "sprite": "sprites/enemy/beast/boar.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/boar.atlas",
     "deck": [
       "decks/legends/ilharg.dck"
     ],
@@ -30336,7 +30336,7 @@
   },
   {
     "name": "Aesi",
-    "sprite": "sprites/enemy/beast/big_snake.atlas",
+    "sprite": "sprites/enemy/beast/reptile/big_snake.atlas",
     "deck": [
       "decks/legends/aesi.dck"
     ],
@@ -30403,7 +30403,7 @@
   },
   {
     "name": "Arixmethes",
-    "sprite": "sprites/enemy/beast/turtle.atlas",
+    "sprite": "sprites/enemy/beast/reptile/turtle.atlas",
     "deck": [
       "decks/legends/arixmethes.dck"
     ],
@@ -30470,7 +30470,7 @@
   },
   {
     "name": "Charix",
-    "sprite": "sprites/enemy/beast/crab.atlas",
+    "sprite": "sprites/enemy/beast/ocean/crab.atlas",
     "deck": [
       "decks/legends/charix.dck"
     ],
@@ -30538,7 +30538,7 @@
   },
   {
     "name": "Plagon",
-    "sprite": "sprites/enemy/beast/octopus.atlas",
+    "sprite": "sprites/enemy/beast/ocean/octopus.atlas",
     "deck": [
       "decks/legends/plagon.dck"
     ],
@@ -31598,7 +31598,7 @@
   },
   {
     "name": "Toxrill",
-    "sprite": "sprites/enemy/beast/scarab.atlas",
+    "sprite": "sprites/enemy/beast/insect/scarab.atlas",
     "deck": [
       "decks/legends/toxrill.dck"
     ],
@@ -32005,7 +32005,7 @@
   },
   {
     "name": "Camellia",
-    "sprite": "sprites/enemy/beast/squirrel.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/squirrel.atlas",
     "deck": [
       "decks/legends/camellia.dck"
     ],
@@ -32071,7 +32071,7 @@
   },
   {
     "name": "Hazel",
-    "sprite": "sprites/enemy/beast/squirrel.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/squirrel.atlas",
     "deck": [
       "decks/legends/hazel.dck"
     ],
@@ -32137,7 +32137,7 @@
   },
   {
     "name": "Euru",
-    "sprite": "sprites/enemy/beast/squirrel.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/squirrel.atlas",
     "deck": [
       "decks/legends/euru.dck"
     ],
@@ -32203,7 +32203,7 @@
   },
   {
     "name": "Toski",
-    "sprite": "sprites/enemy/beast/squirrel.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/squirrel.atlas",
     "deck": [
       "decks/legends/toski.dck"
     ],
@@ -32269,7 +32269,7 @@
   },
   {
     "name": "Calamity",
-    "sprite": "sprites/enemy/beast/horseblack.atlas",
+    "sprite": "sprites/enemy/beast/horse/horseblack.atlas",
     "deck": [
       "decks/legends/calamity.dck"
     ],
@@ -33376,7 +33376,7 @@
   },
   {
     "name": "Arasta",
-    "sprite": "sprites/enemy/beast/spider_black.atlas",
+    "sprite": "sprites/enemy/beast/arachnid/spider_black.atlas",
     "deck": [
       "decks/legends/arasta.dck"
     ],
@@ -36331,7 +36331,7 @@
   },
   {
     "name": "Hamza",
-    "sprite": "sprites/enemy/beast/elephant.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/elephant.atlas",
     "deck": [
       "decks/legends/hamza.dck"
     ],
@@ -38621,7 +38621,7 @@
   },
   {
     "name": "Hope of Ghirapur",
-    "sprite": "sprites/enemy/beast/dragonfly.atlas",
+    "sprite": "sprites/enemy/beast/insect/dragonfly.atlas",
     "deck": [
       "decks/legends/hope_of_ghirapur.dck"
     ],
@@ -39441,7 +39441,7 @@
   },
   {
     "name": "Anzrag",
-    "sprite": "sprites/enemy/beast/nakedmolerat.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/nakedmolerat.atlas",
     "deck": [
       "decks/legends/anzrag.dck"
     ],
@@ -40519,7 +40519,7 @@
   },
   {
     "name": "Kari Zev",
-    "sprite": "sprites/enemy/beast/monkey_small.atlas",
+    "sprite": "sprites/enemy/beast/ape/monkey_small.atlas",
     "deck": [
       "decks/legends/kari_zev.dck"
     ],
@@ -40880,7 +40880,7 @@
   },
   {
     "name": "Ayula",
-    "sprite": "sprites/enemy/beast/bear.atlas",
+    "sprite": "sprites/enemy/beast/bear/bear.atlas",
     "deck": [
       "decks/legends/ayula.dck"
     ],
@@ -40945,7 +40945,7 @@
   },
   {
     "name": "Duskana",
-    "sprite": "sprites/enemy/beast/polarbear.atlas",
+    "sprite": "sprites/enemy/beast/polar/polarbear.atlas",
     "deck": [
       "decks/legends/duskana.dck"
     ],
@@ -41010,7 +41010,7 @@
   },
   {
     "name": "Hurska",
-    "sprite": "sprites/enemy/beast/bear.atlas",
+    "sprite": "sprites/enemy/beast/bear/bear.atlas",
     "deck": [
       "decks/legends/hurska.dck"
     ],
@@ -41075,7 +41075,7 @@
   },
   {
     "name": "Kudo",
-    "sprite": "sprites/enemy/beast/bear.atlas",
+    "sprite": "sprites/enemy/beast/bear/bear.atlas",
     "deck": [
       "decks/legends/kudo.dck"
     ],
@@ -41140,7 +41140,7 @@
   },
   {
     "name": "Ruxa",
-    "sprite": "sprites/enemy/beast/bear_large.atlas",
+    "sprite": "sprites/enemy/beast/bear/bear_large.atlas",
     "deck": [
       "decks/legends/ruxa.dck"
     ],
@@ -41337,7 +41337,7 @@
   },
   {
     "name": "Fumulus",
-    "sprite": "sprites/enemy/beast/giantfly.atlas",
+    "sprite": "sprites/enemy/beast/insect/giantfly.atlas",
     "deck": [
       "decks/legends/fumulus.dck"
     ],
@@ -41539,7 +41539,7 @@
   },
   {
     "name": "Zabaz",
-    "sprite": "sprites/enemy/beast/wasp.atlas",
+    "sprite": "sprites/enemy/beast/insect/wasp.atlas",
     "deck": [
       "decks/legends/zabaz.dck"
     ],
@@ -41605,7 +41605,7 @@
   },
   {
     "name": "Zask",
-    "sprite": "sprites/enemy/beast/scarab.atlas",
+    "sprite": "sprites/enemy/beast/insect/scarab.atlas",
     "deck": [
       "decks/legends/zask.dck"
     ],
@@ -43479,7 +43479,7 @@
   },
   {
     "name": "Kaheera",
-    "sprite": "sprites/enemy/beast/deer.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/deer.atlas",
     "deck": [
       "decks/legends/kaheera.dck"
     ],
@@ -43622,7 +43622,7 @@
   },
   {
     "name": "Kathril",
-    "sprite": "sprites/enemy/beast/ladybug.atlas",
+    "sprite": "sprites/enemy/beast/insect/ladybug.atlas",
     "deck": [
       "decks/legends/kathril.dck"
     ],
@@ -43695,7 +43695,7 @@
   },
   {
     "name": "Keruga",
-    "sprite": "sprites/enemy/beast/hippo.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/hippo.atlas",
     "deck": [
       "decks/legends/keruga.dck"
     ],
@@ -43766,7 +43766,7 @@
   },
   {
     "name": "Lurrus",
-    "sprite": "sprites/enemy/beast/caracal.atlas",
+    "sprite": "sprites/enemy/beast/cat/caracal.atlas",
     "deck": [
       "decks/legends/lurrus.dck"
     ],
@@ -43980,7 +43980,7 @@
   },
   {
     "name": "Otrimi",
-    "sprite": "sprites/enemy/beast/monkey_small.atlas",
+    "sprite": "sprites/enemy/beast/ape/monkey_small.atlas",
     "deck": [
       "decks/legends/otrimi.dck"
     ],
@@ -44051,7 +44051,7 @@
   },
   {
     "name": "Tayam",
-    "sprite": "sprites/enemy/beast/wolf.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/wolf.atlas",
     "deck": [
       "decks/legends/tayam.dck"
     ],
@@ -44122,7 +44122,7 @@
   },
   {
     "name": "Xyris",
-    "sprite": "sprites/enemy/beast/snake_green.atlas",
+    "sprite": "sprites/enemy/beast/reptile/snake_green.atlas",
     "deck": [
       "decks/legends/xyris.dck"
     ],
@@ -44267,7 +44267,7 @@
   },
   {
     "name": "Zirda",
-    "sprite": "sprites/enemy/beast/fox.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/fox.atlas",
     "deck": [
       "decks/legends/zirda.dck"
     ],
@@ -44338,7 +44338,7 @@
   },
   {
     "name": "Arahbo",
-    "sprite": "sprites/enemy/beast/cat.atlas",
+    "sprite": "sprites/enemy/beast/cat/cat.atlas",
     "deck": [
       "decks/legends/arahbo.dck"
     ],
@@ -44474,7 +44474,7 @@
   },
   {
     "name": "Jedit",
-    "sprite": "sprites/enemy/beast/tiger.atlas",
+    "sprite": "sprites/enemy/beast/cat/tiger.atlas",
     "deck": [
       "decks/legends/jedit_ojanen.dck"
     ],
@@ -44614,7 +44614,7 @@
   },
   {
     "name": "Rin and Seri",
-    "sprite": "sprites/enemy/beast/dog.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/dog.atlas",
     "deck": [
       "decks/legends/rin_and_seri.dck"
     ],
@@ -44875,7 +44875,7 @@
   },
   {
     "name": "Quintorius",
-    "sprite": "sprites/enemy/beast/elephant.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/elephant.atlas",
     "deck": [
       "decks/legends/quintorius.dck"
     ],
@@ -46381,7 +46381,7 @@
   },
   {
     "name": "Bruse Tarl",
-    "sprite": "sprites/enemy/beast/bull.atlas",
+    "sprite": "sprites/enemy/beast/barn/bull.atlas",
     "deck": [
       "decks/legends/bruse_tarl.dck"
     ],
@@ -47889,7 +47889,7 @@
   },
   {
     "name": "Doc Aurlock",
-    "sprite": "sprites/enemy/beast/bear_large.atlas",
+    "sprite": "sprites/enemy/beast/bear/bear_large.atlas",
     "deck": [
       "decks/legends/doc_aurlock.dck"
     ],
@@ -50990,7 +50990,7 @@
   },
   {
     "name": "Yoshimaru",
-    "sprite": "sprites/enemy/beast/dog.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/dog.atlas",
     "deck": [
       "decks/legends/yoshimaru.dck"
     ],
@@ -51542,7 +51542,7 @@
   },
   {
     "name": "Gorex",
-    "sprite": "sprites/enemy/beast/turtle.atlas",
+    "sprite": "sprites/enemy/beast/reptile/turtle.atlas",
     "deck": [
       "decks/legends/gorex.dck"
     ],
@@ -52109,7 +52109,7 @@
   },   
   {
     "name": "Archelos",
-    "sprite": "sprites/enemy/beast/turtle.atlas",
+    "sprite": "sprites/enemy/beast/reptile/turtle.atlas",
     "deck": [
       "decks/legends/archelos.dck"
     ],
@@ -52701,7 +52701,7 @@
   },
   {
     "name": "Loot",
-    "sprite": "sprites/enemy/beast/fox.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/fox.atlas",
     "deck": [
       "decks/legends/loot.dck"
     ],
@@ -52907,7 +52907,7 @@
   },
   {
     "name": "Arna",
-    "sprite": "sprites/enemy/beast/falcon.atlas",
+    "sprite": "sprites/enemy/beast/bird/falcon.atlas",
     "deck": [
       "decks/legends/arna.dck"
     ],
@@ -53846,7 +53846,7 @@
   },
   {
     "name": "Roon",
-    "sprite": "sprites/enemy/beast/elephant.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/elephant.atlas",
     "deck": [
       "decks/legends/roon.dck"
     ],
@@ -55651,7 +55651,7 @@
   },
   {
     "name": "Karumonix",
-    "sprite": "sprites/enemy/beast/wildratpoison.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/wildratpoison.atlas",
     "deck": [
       "decks/legends/karumonix.dck"
     ],
@@ -56536,7 +56536,7 @@
   },
   {
     "name": "Tolsimir",
-    "sprite": "sprites/enemy/beast/wolf.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/wolf.atlas",
     "deck": [
       "decks/legends/tolsimir.dck"
     ],
@@ -56612,7 +56612,7 @@
   },
   {
     "name": "Breena",
-    "sprite": "sprites/enemy/beast/owl.atlas",
+    "sprite": "sprites/enemy/beast/bird/owl.atlas",
     "deck": [
       "decks/legends/breena.dck"
     ],
@@ -56874,7 +56874,7 @@
   },
   {
     "name": "Grunn",
-    "sprite": "sprites/enemy/beast/gorilla.atlas",
+    "sprite": "sprites/enemy/beast/ape/gorilla.atlas",
     "deck": [
       "decks/legends/grunn.dck"
     ],
@@ -56939,7 +56939,7 @@
   },
   {
     "name": "Kibo",
-    "sprite": "sprites/enemy/beast/monkey_small.atlas",
+    "sprite": "sprites/enemy/beast/ape/monkey_small.atlas",
     "deck": [
       "decks/legends/kibo.dck"
     ],
@@ -57004,7 +57004,7 @@
   },
   {
     "name": "Ragavan",
-    "sprite": "sprites/enemy/beast/monkey_small.atlas",
+    "sprite": "sprites/enemy/beast/ape/monkey_small.atlas",
     "deck": [
       "decks/legends/ragavan.dck"
     ],
@@ -57275,7 +57275,7 @@
   },
   {
     "name": "The Pride of Hull Clade",
-    "sprite": "sprites/enemy/beast/turtle.atlas",
+    "sprite": "sprites/enemy/beast/reptile/turtle.atlas",
     "deck": [
       "decks/legends/the_pride_of_hull_clade.dck"
     ],
@@ -57686,7 +57686,7 @@
   },
   {
     "name": "Mm'menon",
-    "sprite": "sprites/enemy/beast/jellyfish.atlas",
+    "sprite": "sprites/enemy/beast/ocean/jellyfish.atlas",
     "deck": [
       "decks/legends/mm'menon.dck"
     ],
@@ -58170,7 +58170,7 @@
   },
   {
     "name": "Perrie",
-    "sprite": "sprites/enemy/beast/rhino.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/rhino.atlas",
     "deck": [
       "decks/legends/perrie.dck"
     ],
@@ -58989,7 +58989,7 @@
   },
   {
     "name": "Hugs",
-    "sprite": "sprites/enemy/beast/badger.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/badger.atlas",
     "deck": [
       "decks/legends/hugs.dck"
     ],
@@ -59186,7 +59186,7 @@
   },
   {
     "name": "Mr. Foxglove",
-    "sprite": "sprites/enemy/beast/fox.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/fox.atlas",
     "deck": [
       "decks/legends/mr_foxglove.dck"
     ],
@@ -60473,7 +60473,7 @@
   },
   {
     "name": "Sarulf",
-    "sprite": "sprites/enemy/beast/wolf.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/wolf.atlas",
     "deck": [
       "decks/legends/sarulf.dck"
     ],
@@ -61009,7 +61009,7 @@
   },
   {
     "name": "Rudolph",
-    "sprite": "sprites/enemy/beast/deer_2.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/deer_2.atlas",
     "deck": [
       "decks/legends/rudolph.dck"
     ],
@@ -61493,7 +61493,7 @@
   },
   {
     "name": "Mr. Orfeo",
-    "sprite": "sprites/enemy/beast/rhino.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/rhino.atlas",
     "deck": [
       "decks/legends/mr_orfeo.dck"
     ],
@@ -61638,7 +61638,7 @@
   },
   {
     "name": "Alania",
-    "sprite": "sprites/enemy/beast/raccoon.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/raccoon.atlas",
     "deck": [
       "decks/legends/mystery_list.dck"
     ],
@@ -61773,7 +61773,7 @@
   },
   {
     "name": "Ashiok",
-    "sprite": "sprites/enemy/beast/penguin.atlas",
+    "sprite": "sprites/enemy/beast/polar/penguin.atlas",
     "deck": [
       "decks/legends/mystery_list.dck"
     ],

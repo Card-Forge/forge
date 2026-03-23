@@ -7,7 +7,7 @@
 	],
 	"ai": "",
 	"spawnRate": 1,
-	"difficulty": 0.1,
+	"difficulty": 2,
 	"speed": 31,
 	"life": 30,
 	"rewards": [
@@ -77,7 +77,7 @@
 	"ai": "",
 	"randomizeDeck": true,
 	"spawnRate": 0.75,
-	"difficulty": 0.1,
+	"difficulty": 1,
 	"speed": 24,
 	"life": 15,
 	"rewards": [
@@ -146,7 +146,7 @@
 	"ai": "",
 	"randomizeDeck": true,
 	"spawnRate": 0.75,
-	"difficulty": 0.1,
+	"difficulty": 0.6,
 	"speed": 24,
 	"life": 15,
 	"rewards": [
@@ -202,8 +202,8 @@
 	],
 	"ai": "",
 	"randomizeDeck": true,
-	"spawnRate": 0.75,
-	"difficulty": 0.1,
+	"spawnRate": 1,
+	"difficulty": 1,
 	"speed": 24,
 	"life": 15,
 	"rewards": [
@@ -273,8 +273,8 @@
 	],
 	"ai": "",
 	"randomizeDeck": true,
-	"spawnRate": 0.75,
-	"difficulty": 0.1,
+	"spawnRate": 1,
+	"difficulty": 1,
 	"speed": 24,
 	"life": 15,
 	"rewards": [
@@ -342,7 +342,7 @@
 	"ai": "",
 	"randomizeDeck": true,
 	"spawnRate": 0.75,
-	"difficulty": 0.1,
+	"difficulty": 1,
 	"speed": 24,
 	"life": 15,
 	"rewards": [
@@ -409,7 +409,7 @@
 	"ai": "",
 	"flying": true,
 	"spawnRate": 1,
-	"difficulty": 0.3,
+	"difficulty": 2,
 	"speed": 20,
 	"scale": 1.6,
 	"life": 25,
@@ -496,7 +496,7 @@
 	"boss": true,
 	"flying": true,
 	"spawnRate": 1,
-	"difficulty": 0.3,
+	"difficulty": 2,
 	"speed": 20,
 	"scale": 1.6,
 	"life": 18,
@@ -580,7 +580,7 @@
 	],
 	"ai": "",
 	"spawnRate": 1,
-	"difficulty": 0.1,
+	"difficulty": 0.6,
 	"speed": 25,
 	"life": 13,
 	"rewards": [
@@ -650,9 +650,8 @@
 	],
 	"ai": "",
 	"spawnRate": 1,
-	"difficulty": 0.1,
+	"difficulty": 1.5,
 	"speed": 21,
-	"scale": 0.75,
 	"life": 18,
 	"rewards": [
 		{
@@ -713,7 +712,7 @@
 	],
 	"ai": "",
 	"spawnRate": 1,
-	"difficulty": 0.1,
+	"difficulty": 2,
 	"speed": 24,
 	"life": 15,
 	"rewards": [
@@ -789,12 +788,10 @@
 	],
 	"ai": "",
 	"boss": true,
-	"bossInsult": "Enlightenment comes most swiftly at life's end.",
-	"bossIntro": "I feed my hatred to the righteous and they join my crusade",
 	"flying": true,
 	"speed": 1,
-	"scale": 1.5,
-	"life": 60,
+	"scale": 3,
+	"life": 40,
 	"rewards": [
 		{
 			"type": "card",
@@ -853,7 +850,9 @@
 		"IdentityWhite",
 		"Akroma"
 	],
-	"gamesPerMatch": 3
+	"gamesPerMatch": 3,
+	"bossInsult": "Enlightenment comes most swiftly at life's end.",
+	"bossIntro": "I feed my hatred to the righteous and they join my crusade"
 },
 {
 	"name": "Amphin Warrior",
@@ -863,7 +862,7 @@
 	],
 	"ai": "",
 	"spawnRate": 1,
-	"difficulty": 0.1,
+	"difficulty": 1,
 	"speed": 27,
 	"scale": 0.7,
 	"life": 20,
@@ -918,7 +917,7 @@
 	"ai": "",
 	"flying": true,
 	"spawnRate": 1,
-	"difficulty": 0.1,
+	"difficulty": 2,
 	"speed": 29,
 	"scale": 0.85,
 	"life": 25,
@@ -990,7 +989,7 @@
 	"ai": "",
 	"flying": true,
 	"spawnRate": 1,
-	"difficulty": 0.1,
+	"difficulty": 1,
 	"speed": 20,
 	"life": 20,
 	"rewards": [
@@ -1152,7 +1151,7 @@
 {
 	"name": "Ape",
 	"nameOverride": "Ape Behemoth",
-	"sprite": "sprites/enemy/beast/behemoth.atlas",
+	"sprite": "sprites/enemy/beast/ape/behemoth.atlas",
 	"deck": [
 		"decks/standard/ape.json"
 	],
@@ -1249,6 +1248,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
+	"scale": 6,
 	"life": 15,
 	"rewards": [
 		{
@@ -1603,7 +1603,7 @@
 	"spawnRate": 1,
 	"difficulty": 0.8,
 	"speed": 18,
-	"scale": 0.55,
+	"scale": 3,
 	"life": 25,
 	"rewards": [
 		{
@@ -1935,7 +1935,7 @@
 },
 {
 	"name": "Armadillo",
-	"sprite": "sprites/enemy/beast/armadillo.atlas",
+	"sprite": "sprites/enemy/beast/smallmammals/armadillo.atlas",
 	"deck": [
 		"decks/standard/armadillo.dck"
 	],
@@ -2358,7 +2358,7 @@
 },
 {
 	"name": "Badger",
-	"sprite": "sprites/enemy/beast/badger.atlas",
+	"sprite": "sprites/enemy/beast/smallmammals/badger.atlas",
 	"deck": [
 		"decks/standard/badger.dck"
 	],
@@ -2955,7 +2955,7 @@
 },
 {
 	"name": "Bat",
-	"sprite": "sprites/enemy/beast/bat.atlas",
+	"sprite": "sprites/enemy/beast/smallmammals/bat.atlas",
 	"deck": [
 		"decks/standard/bat.dck"
 	],
@@ -3023,7 +3023,7 @@
 {
 	"name": "Bear",
 	"nameOverride": "Brown Bear",
-	"sprite": "sprites/enemy/beast/bear.atlas",
+	"sprite": "sprites/enemy/beast/bear/bear.atlas",
 	"deck": [
 		"decks/standard/bear.json"
 	],
@@ -3572,7 +3572,7 @@
 },
 {
 	"name": "Boar",
-	"sprite": "sprites/enemy/beast/boar.atlas",
+	"sprite": "sprites/enemy/beast/smallmammals/boar.atlas",
 	"deck": [
 		"decks/standard/boar.json",
 		"decks/standard/boar_gruul.dck",
@@ -3696,7 +3696,7 @@
 },
 {
 	"name": "Bull",
-	"sprite": "sprites/enemy/beast/bull.atlas",
+	"sprite": "sprites/enemy/beast/barn/bull.atlas",
 	"deck": [
 		"decks/standard/bull.dck"
 	],
@@ -3960,7 +3960,7 @@
 {
 	"name": "Camel",
 	"nameOverride": "",
-	"sprite": "sprites/enemy/beast/camel.atlas",
+	"sprite": "sprites/enemy/beast/largemammals/camel.atlas",
 	"deck": [
 		"decks/standard/camel.dck"
 	],
@@ -4030,7 +4030,7 @@
 },
 {
 	"name": "Caracal",
-	"sprite": "sprites/enemy/beast/caracal.atlas",
+	"sprite": "sprites/enemy/beast/cat/caracal.atlas",
 	"deck": [
 		"decks/standard/caracal.dck"
 	],
@@ -4179,7 +4179,7 @@
 },
 {
 	"name": "Cave Spider",
-	"sprite": "sprites/enemy/beast/spider_cave.atlas",
+	"sprite": "sprites/enemy/beast/arachnid/spider_cave.atlas",
 	"deck": [
 		"decks/standard/cave_spider.dck"
 	],
@@ -4326,7 +4326,7 @@
 	"ai": "",
 	"flying": true,
 	"spawnRate": 0.8,
-	"difficulty": 0.1,
+	"difficulty": 2,
 	"speed": 15,
 	"scale": 0.4,
 	"life": 25,
@@ -4415,13 +4415,13 @@
 },
 {
 	"name": "Cerodon",
-	"sprite": "sprites/enemy/beast/cerodon.atlas",
+	"sprite": "sprites/enemy/monstrosity/cerodon.atlas",
 	"deck": [
 		"decks/standard/cerodon.dck"
 	],
 	"ai": "",
 	"spawnRate": 0.2,
-	"difficulty": 0.1,
+	"difficulty": 1,
 	"speed": 25,
 	"life": 30,
 	"rewards": [
@@ -4506,7 +4506,7 @@
 	"ai": "",
 	"randomizeDeck": true,
 	"spawnRate": 0.25,
-	"difficulty": 0.25,
+	"difficulty": 3,
 	"speed": 28,
 	"life": 22,
 	"rewards": [
@@ -4600,7 +4600,7 @@
 	"ai": "",
 	"randomizeDeck": true,
 	"spawnRate": 0.25,
-	"difficulty": 0.25,
+	"difficulty": 3,
 	"speed": 28,
 	"life": 22,
 	"rewards": [
@@ -4694,7 +4694,7 @@
 	"ai": "",
 	"randomizeDeck": true,
 	"spawnRate": 0.25,
-	"difficulty": 0.25,
+	"difficulty": 3,
 	"speed": 28,
 	"life": 22,
 	"rewards": [
@@ -4779,7 +4779,7 @@
 	"name": "Chandra",
 	"sprite": "sprites/enemy/humanoid/human/shaman/chandra.atlas",
 	"deck": [
-		"decks/miniboss/Fire of Kaladesh.dck"
+		"decks/boss/Fire of Kaladesh.dck"
 	],
 	"ai": "",
 	"boss": true,
@@ -5616,7 +5616,7 @@
 },
 {
 	"name": "Chicken",
-	"sprite": "sprites/enemy/beast/chicken.atlas",
+	"sprite": "sprites/enemy/beast/barn/chicken.atlas",
 	"deck": [
 		"decks/standard/chicken.dck"
 	],
@@ -6040,7 +6040,7 @@
 	"nameOverride": "",
 	"sprite": "sprites/enemy/humanoid/conjurer.atlas",
 	"deck": [
-		"decks/miniboss/conjure.dck"
+		"decks/boss/conjure.dck"
 	],
 	"ai": "",
 	"boss": true,
@@ -6308,13 +6308,11 @@
 		"decks/standard/copperhostbrutalizer.dck"
 	],
 	"ai": "",
-	"spawnRate": 0.1,
 	"boss": true,
-	"scale": 0.5,
-	"bossIntro": "All worlds will know perfection.",
-	"bossInsult": "Our glorious infection has taken hold.",
+	"spawnRate": 0.1,
 	"difficulty": 0.5,
 	"speed": 25,
+	"scale": 0.5,
 	"life": 80,
 	"rewards": [
 		{
@@ -6382,7 +6380,92 @@
 		"Phyrexian",
 		"Copper Host",
 		"Humanoid"
-	]
+	],
+	"bossInsult": "Our glorious infection has taken hold.",
+	"bossIntro": "All worlds will know perfection."
+},
+{
+	"name": "Urabrask",
+	"sprite": "sprites/enemy/aberration/phyrexian/urabrask.atlas",
+	"deck": [
+		"decks/standard/copperhostbrutalizer.dck"
+	],
+	"ai": "",
+	"boss": true,
+	"spawnRate": 0.1,
+	"difficulty": 0.5,
+	"speed": 25,
+	"scale": 0.65,
+	"life": 80,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.75,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"rare",
+				"mythicrare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "W",
+	"questTags": [
+		"Phyrexian",
+		"Copper Host",
+		"Humanoid"
+	],
+	"bossInsult": "That Great Work of yours is looking pretty fragile",
+	"bossIntro": "Large or small, all will toil for the Great Work."
 },
 {
 	"name": "Copper Host Infector",
@@ -6470,8 +6553,8 @@
 		"decks/standard/bluewiz_corrupted.dck"
 	],
 	"ai": "",
-	"spawnRate": 0.2,
-	"difficulty": 0.1,
+	"spawnRate": 1,
+	"difficulty": 1,
 	"speed": 25,
 	"life": 15,
 	"rewards": [
@@ -6523,8 +6606,8 @@
 		"decks/standard/corruptedcleric.dck"
 	],
 	"ai": "",
-	"spawnRate": 0.2,
-	"difficulty": 0.1,
+	"spawnRate": 1,
+	"difficulty": 0.6,
 	"speed": 25,
 	"life": 15,
 	"rewards": [
@@ -6577,8 +6660,8 @@
 		"decks/standard/greenmage_corrupted.dck"
 	],
 	"ai": "",
-	"spawnRate": 0.2,
-	"difficulty": 0.1,
+	"spawnRate": 1,
+	"difficulty": 1,
 	"speed": 25,
 	"life": 15,
 	"rewards": [
@@ -6630,8 +6713,8 @@
 		"decks/standard/redwiz_corrupted.dck"
 	],
 	"ai": "",
-	"spawnRate": 0.2,
-	"difficulty": 0.1,
+	"spawnRate": 1,
+	"difficulty": 1,
 	"speed": 25,
 	"life": 15,
 	"rewards": [
@@ -6746,7 +6829,7 @@
 },
 {
 	"name": "Crab",
-	"sprite": "sprites/enemy/beast/crab.atlas",
+	"sprite": "sprites/enemy/beast/ocean/crab.atlas",
 	"deck": [
 		"decks/standard/crab.json",
 		"decks/standard/giant_crab.dck"
@@ -6876,7 +6959,7 @@
 },
 {
 	"name": "Crocodile",
-	"sprite": "sprites/enemy/beast/crocodile_water.atlas",
+	"sprite": "sprites/enemy/beast/reptile/crocodile_water.atlas",
 	"deck": [
 		"decks/standard/crocodile.dck"
 	],
@@ -7156,7 +7239,7 @@
 },
 {
 	"name": "Hermit Crab",
-	"sprite": "sprites/enemy/beast/hermitcrab.atlas",
+	"sprite": "sprites/enemy/beast/ocean/hermitcrab.atlas",
 	"deck": [
 		"decks/standard/hermitcrab.dck"
 	],
@@ -7214,7 +7297,7 @@
 },
 {
 	"name": "Hedgehog",
-	"sprite": "sprites/enemy/beast/hedgehog.atlas",
+	"sprite": "sprites/enemy/beast/smallmammals/hedgehog.atlas",
 	"deck": [
 		"decks/standard/hedgehog.dck"
 	],
@@ -8090,7 +8173,7 @@
 },
 {
 	"name": "Dinosaur Elite",
-	"sprite": "sprites/enemy/beast/ancient.atlas",
+	"sprite": "sprites/enemy/beast/dinosaur/ancient.atlas",
 	"deck": [
 		"decks/standard/dinosaurelite.dck"
 	],
@@ -8140,7 +8223,7 @@
 {
 	"name": "Dinosaur",
 	"nameOverride": "Giant Carnosaur",
-	"sprite": "sprites/enemy/beast/ancient_2.atlas",
+	"sprite": "sprites/enemy/beast/dinosaur/ancient_2.atlas",
 	"deck": [
 		"decks/standard/dinosaur_w_r.dck"
 	],
@@ -8356,7 +8439,7 @@
 },
 {
 	"name": "Dog",
-	"sprite": "sprites/enemy/beast/dog.atlas",
+	"sprite": "sprites/enemy/beast/smallmammals/dog.atlas",
 	"deck": [
 		"decks/standard/dog.json",
 		"decks/standard/dog.dck",
@@ -8560,7 +8643,7 @@
 },
 {
 	"name": "Dragonfly",
-	"sprite": "sprites/enemy/beast/dragonfly.atlas",
+	"sprite": "sprites/enemy/beast/insect/dragonfly.atlas",
 	"deck": [
 		"decks/standard/insect.dck"
 	],
@@ -9498,7 +9581,7 @@
 	],
 	"ai": "",
 	"spawnRate": 0.5,
-	"difficulty": 0.1,
+	"difficulty": 2,
 	"speed": 15,
 	"life": 19,
 	"rewards": [
@@ -9686,8 +9769,8 @@
 	"flying": true,
 	"spawnRate": 0.5,
 	"difficulty": 0.1,
-	"scale":0.7,
 	"speed": 30,
+	"scale": 0.7,
 	"life": 40,
 	"rewards": [
 		{
@@ -9773,7 +9856,7 @@
 },
 {
 	"name": "Elephant",
-	"sprite": "sprites/enemy/beast/elephant.atlas",
+	"sprite": "sprites/enemy/beast/largemammals/elephant.atlas",
 	"deck": [
 		"decks/standard/elephant.json"
 	],
@@ -9963,7 +10046,7 @@
 },
 {
 	"name": "Elk",
-	"sprite": "sprites/enemy/beast/deer_2.atlas",
+	"sprite": "sprites/enemy/beast/largemammals/deer_2.atlas",
 	"deck": [
 		"decks/standard/elk.dck"
 	],
@@ -10459,7 +10542,7 @@
 },
 {
 	"name": "Falcon",
-	"sprite": "sprites/enemy/beast/falcon.atlas",
+	"sprite": "sprites/enemy/beast/bird/falcon.atlas",
 	"deck": [
 		"decks/standard/falcon_w.dck"
 	],
@@ -11528,7 +11611,7 @@
 },
 {
 	"name": "Fox",
-	"sprite": "sprites/enemy/beast/fox.atlas",
+	"sprite": "sprites/enemy/beast/smallmammals/fox.atlas",
 	"deck": [
 		"decks/standard/fox.json",
 		"decks/standard/fox_greenwhite.dck"
@@ -11592,7 +11675,7 @@
 },
 {
 	"name": "Frog",
-	"sprite": "sprites/enemy/beast/frog.atlas",
+	"sprite": "sprites/enemy/beast/amphibian/frog.atlas",
 	"deck": [
 		"decks/standard/frog.json"
 	],
@@ -12001,8 +12084,8 @@
 	],
 	"ai": "",
 	"flying": true,
-	"spawnRate": 0.5,
-	"difficulty": 0.1,
+	"spawnRate": 1,
+	"difficulty": 0.9,
 	"speed": 23,
 	"life": 17,
 	"rewards": [
@@ -12092,8 +12175,8 @@
 	],
 	"ai": "",
 	"flying": true,
-	"spawnRate": 0.5,
-	"difficulty": 0.1,
+	"spawnRate": 1,
+	"difficulty": 0.6,
 	"speed": 25,
 	"life": 16,
 	"rewards": [
@@ -12259,15 +12342,15 @@
 },
 {
 	"name": "Ghalta",
-	"sprite": "sprites/enemy/beast/ghalta.atlas",
+	"sprite": "sprites/enemy/beast/dinosaur/ghalta.atlas",
 	"deck": [
 		"decks/boss/ghalta.dck"
 	],
 	"ai": "",
 	"boss": true,
 	"speed": 1,
-	"scale": 1.5,
-	"life": 60,
+	"scale": 2.5,
+	"life": 40,
 	"rewards": [
 		{
 			"type": "card",
@@ -12324,13 +12407,15 @@
 		"IdentityGreen",
 		"Ghalta"
 	],
-	"gamesPerMatch": 3
+	"gamesPerMatch": 3,
+	"bossInsult": "Extinction suits you.",
+	"bossIntro": "<i>A thundering roar calls forth a primeval army.<i>"
 },
 {
 	"name": "Garruk",
 	"sprite": "sprites/enemy/humanoid/human/shaman/garruk.atlas",
 	"deck": [
-		"decks/miniboss/garruk.dck"
+		"decks/boss/garruk.dck"
 	],
 	"ai": "",
 	"boss": true,
@@ -12420,7 +12505,7 @@
 	"name": "Sorin",
 	"sprite": "sprites/enemy/undead/sorin.atlas",
 	"deck": [
-		"decks/miniboss/sorin.dck"
+		"decks/boss/sorin.dck"
 	],
 	"ai": "",
 	"boss": true,
@@ -12840,7 +12925,7 @@
 },
 {
 	"name": "Giant Fly",
-	"sprite": "sprites/enemy/beast/giantfly.atlas",
+	"sprite": "sprites/enemy/beast/insect/giantfly.atlas",
 	"deck": [
 		"decks/standard/insect.dck"
 	],
@@ -12900,7 +12985,7 @@
 },
 {
 	"name": "Giant Panda",
-	"sprite": "sprites/enemy/beast/giantpanda.atlas",
+	"sprite": "sprites/enemy/beast/bear/giantpanda.atlas",
 	"deck": [
 		"decks/standard/giantpanda.dck"
 	],
@@ -12974,7 +13059,7 @@
 },
 {
 	"name": "Giant Spider",
-	"sprite": "sprites/enemy/beast/spider_purple.atlas",
+	"sprite": "sprites/enemy/beast/arachnid/spider_purple.atlas",
 	"deck": [
 		"decks/standard/spider_token.dck"
 	],
@@ -13281,6 +13366,49 @@
 	]
 },
 {
+	"name": "Worm",
+	"sprite": "sprites/enemy/beast/insect/smallworm.atlas",
+	"deck": [
+		"decks/standard/smallworm.dck"
+	],
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.2,
+	"life": 12,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"colors": [
+				"White"
+			],
+			"rarity": [
+				"Rare"
+			]
+		}
+	],
+	"colors": "G",
+	"questTags": [
+		"Worm",
+		"Nature",
+		"Subterranean",
+		"IdentityWhite"
+	]
+},
+{
 	"name": "Greater Zombie",
 	"sprite": "sprites/enemy/undead/zombie.atlas",
 	"deck": [
@@ -13435,8 +13563,8 @@
 	"boss": true,
 	"flying": true,
 	"speed": 1,
-	"scale": 1.5,
-	"life": 60,
+	"scale": 3,
+	"life": 40,
 	"rewards": [
 		{
 			"type": "card",
@@ -13493,13 +13621,15 @@
 		"IdentityBlack",
 		"Griselbrand"
 	],
-	"gamesPerMatch": 3
+	"gamesPerMatch": 3,
+	"bossInsult": "Kneel. It is the only thing you were ever worthy of doing before me.",
+	"bossIntro": "When the power of light fails you, what atrocities might you contemplate to curry favor with darkness?"
 },
 {
 	"name": "Grolnok",
 	"sprite": "sprites/enemy/aberration/gianttoad.atlas",
 	"deck": [
-		"decks/miniboss/frogboss.dck"
+		"decks/boss/frogboss.dck"
 	],
 	"ai": "",
 	"boss": true,
@@ -13659,7 +13789,7 @@
 },
 {
 	"name": "Gorilla",
-	"sprite": "sprites/enemy/beast/gorilla.atlas",
+	"sprite": "sprites/enemy/beast/ape/gorilla.atlas",
 	"deck": [
 		"decks/standard/gorilla.dck"
 	],
@@ -14654,6 +14784,89 @@
 	]
 },
 {
+	"name": "Treefolk Elite",
+	"sprite": "sprites/enemy/plant/treant_large.atlas",
+	"deck": [
+		"decks/standard/treefolkelite.dck"
+	],
+	"spawnRate": 1,
+	"difficulty": 0.2,
+	"scale": 0.5,
+	"speed": 16,
+	"life": 25,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"uncommon"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "randomCard",
+			"probability": 0.3,
+			"count": 1,
+			"colors": [
+				"green"
+			],
+			"rarity": [
+				"rare",
+				"mythicrare"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 150,
+			"addMaxCount": 150
+		}
+	],
+	"colors": "G",
+	"questTags": [
+		"Humanoid",
+		"Nature",
+		"Giant",
+		"Warrior",
+		"Territorial",
+		"IdentityGreen"
+	]
+},
+{
 	"name": "Gorgon",
 	"sprite": "sprites/enemy/monstrosity/gorgone.atlas",
 	"deck": [
@@ -14996,7 +15209,7 @@
 	"name": "Guardian Angel",
 	"sprite": "sprites/enemy/celestial/akroma.atlas",
 	"deck": [
-		"decks/miniboss/angel_rainbow_encounter.dck"
+		"decks/boss/angel_rainbow_encounter.dck"
 	],
 	"ai": "",
 	"difficulty": 0.2,
@@ -15415,7 +15628,7 @@
 },
 {
 	"name": "Hidden Snake",
-	"sprite": "sprites/enemy/beast/cobradungeon.atlas",
+	"sprite": "sprites/enemy/beast/reptile/cobradungeon.atlas",
 	"deck": [
 		"decks/standard/snake.json"
 	],
@@ -15680,7 +15893,7 @@
 {
 	"name": "Hippo",
 	"nameOverride": "Giant Bull Hippo",
-	"sprite": "sprites/enemy/beast/hippo.atlas",
+	"sprite": "sprites/enemy/beast/largemammals/hippo.atlas",
 	"deck": [
 		"decks/standard/hippo.dck"
 	],
@@ -16040,7 +16253,7 @@
 },
 {
 	"name": "Horse",
-	"sprite": "sprites/enemy/beast/horseblack.atlas",
+	"sprite": "sprites/enemy/beast/horse/horseblack.atlas",
 	"deck": [
 		"decks/standard/horse.dck"
 	],
@@ -16097,7 +16310,7 @@
 },
 {
 	"name": "Sunmare",
-	"sprite": "sprites/enemy/beast/horsearabian.atlas",
+	"sprite": "sprites/enemy/beast/horse/horsearabian.atlas",
 	"deck": [
 		"decks/standard/horse.dck"
 	],
@@ -16695,7 +16908,7 @@
 },
 {
 	"name": "Ibis",
-	"sprite": "sprites/enemy/beast/ibis.atlas",
+	"sprite": "sprites/enemy/beast/bird/ibis.atlas",
 	"deck": [
 		"decks/standard/bird_gu.dck"
 	],
@@ -17069,7 +17282,7 @@
 	"name": "Jace",
 	"sprite": "sprites/enemy/humanoid/human/wizard/jace.atlas",
 	"deck": [
-		"decks/miniboss/jace.dck"
+		"decks/boss/jace.dck"
 	],
 	"ai": "",
 	"boss": true,
@@ -17152,7 +17365,7 @@
 },
 {
 	"name": "Jellyfish",
-	"sprite": "sprites/enemy/beast/jellyfish.atlas",
+	"sprite": "sprites/enemy/beast/ocean/jellyfish.atlas",
 	"deck": [
 		"decks/standard/jellyfish.dck"
 	],
@@ -17392,7 +17605,7 @@
 	"name": "Kiora",
 	"sprite": "sprites/enemy/humanoid/merfolk/kiora.atlas",
 	"deck": [
-		"decks/miniboss/kiora.dck"
+		"decks/boss/kiora.dck"
 	],
 	"ai": "",
 	"boss": true,
@@ -18145,7 +18358,7 @@
 },
 {
 	"name": "Ladybug",
-	"sprite": "sprites/enemy/beast/ladybug.atlas",
+	"sprite": "sprites/enemy/beast/insect/ladybug.atlas",
 	"deck": [
 		"decks/standard/ladybug.dck"
 	],
@@ -18301,8 +18514,8 @@
 	"boss": true,
 	"flying": true,
 	"speed": 1,
-	"scale": 1.5,
-	"life": 60,
+	"scale": 2.5,
+	"life": 40,
 	"rewards": [
 		{
 			"type": "card",
@@ -18358,7 +18571,9 @@
 		"Boss",
 		"Lathliss"
 	],
-	"gamesPerMatch": 3
+	"gamesPerMatch": 3,
+	"bossInsult": "Even my hatchlings would have ended you faster.",
+	"bossIntro": "If I command it, my children will burn this world to ash."
 },
 {
 	"name": "Leonin Weaponmaster",
@@ -18575,7 +18790,7 @@
 	"name": "Liliana",
 	"sprite": "sprites/enemy/humanoid/human/wizard/black_wiz3.atlas",
 	"deck": [
-		"decks/miniboss/liliana_zombies.dck"
+		"decks/boss/liliana_zombies.dck"
 	],
 	"ai": "",
 	"boss": true,
@@ -18840,7 +19055,7 @@
 },
 {
 	"name": "Lion",
-	"sprite": "sprites/enemy/beast/lion.atlas",
+	"sprite": "sprites/enemy/beast/cat/lion.atlas",
 	"deck": [
 		"decks/standard/lion.dck"
 	],
@@ -18908,8 +19123,8 @@
 	"ai": "",
 	"boss": true,
 	"speed": 1,
-	"scale": 1.5,
-	"life": 60,
+	"scale": 3.5,
+	"life": 40,
 	"rewards": [
 		{
 			"type": "card",
@@ -18964,7 +19179,9 @@
 		"IdentityBlue",
 		"Lorthos"
 	],
-	"gamesPerMatch": 3
+	"gamesPerMatch": 3,
+	"bossInsult": "The deep remembers every failure… and now it remembers you.",
+	"bossIntro": "Struggle if you must. The ocean always claims what enters it."
 },
 {
 	"name": "Mageripper",
@@ -19028,7 +19245,7 @@
 	"ai": "",
 	"flying": true,
 	"spawnRate": 1,
-	"difficulty": 0.1,
+	"difficulty": 2,
 	"speed": 20,
 	"scale": 0.8,
 	"life": 20,
@@ -19254,8 +19471,8 @@
 	],
 	"ai": "",
 	"randomizeDeck": true,
-	"spawnRate": 0.5,
-	"difficulty": 0.1,
+	"spawnRate": 1,
+	"difficulty": 2,
 	"speed": 25,
 	"life": 20,
 	"rewards": [
@@ -19308,8 +19525,8 @@
 	"ai": "",
 	"flying": true,
 	"randomizeDeck": true,
-	"spawnRate": 0.5,
-	"difficulty": 0.1,
+	"spawnRate": 2,
+	"difficulty": 2,
 	"speed": 25,
 	"life": 20,
 	"rewards": [
@@ -19361,8 +19578,8 @@
 	],
 	"ai": "",
 	"randomizeDeck": true,
-	"spawnRate": 0.5,
-	"difficulty": 0.1,
+	"spawnRate": 2,
+	"difficulty": 2,
 	"speed": 24,
 	"life": 20,
 	"rewards": [
@@ -19415,8 +19632,8 @@
 	],
 	"ai": "",
 	"randomizeDeck": true,
-	"spawnRate": 0.5,
-	"difficulty": 0.1,
+	"spawnRate": 2,
+	"difficulty": 2,
 	"speed": 24,
 	"life": 20,
 	"rewards": [
@@ -19471,8 +19688,8 @@
 	],
 	"ai": "",
 	"randomizeDeck": true,
-	"spawnRate": 0.5,
-	"difficulty": 0.1,
+	"spawnRate": 2,
+	"difficulty": 2,
 	"speed": 24,
 	"life": 20,
 	"rewards": [
@@ -20517,7 +20734,7 @@
 },
 {
 	"name": "Monkey",
-	"sprite": "sprites/enemy/beast/monkey_small.atlas",
+	"sprite": "sprites/enemy/beast/ape/monkey_small.atlas",
 	"deck": [
 		"decks/standard/ragavan.dck"
 	],
@@ -20659,7 +20876,7 @@
 	"name": "Myr Superion",
 	"sprite": "sprites/enemy/construct/myr.atlas",
 	"deck": [
-		"decks/miniboss/myr_superion.dck"
+		"decks/boss/myr_superion.dck"
 	],
 	"ai": "",
 	"boss": true,
@@ -20798,7 +21015,7 @@
 	"name": "Nahiri",
 	"sprite": "sprites/enemy/humanoid/kor/nahiri.atlas",
 	"deck": [
-		"decks/miniboss/nahiri.dck"
+		"decks/boss/nahiri.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -20879,7 +21096,7 @@
 },
 {
 	"name": "Naked Mole Rat",
-	"sprite": "sprites/enemy/beast/nakedmolerat.atlas",
+	"sprite": "sprites/enemy/beast/smallmammals/nakedmolerat.atlas",
 	"deck": [
 		"decks/standard/shrinemole.dck"
 	],
@@ -21341,7 +21558,7 @@
 },
 {
 	"name": "Octopus",
-	"sprite": "sprites/enemy/beast/octopus.atlas",
+	"sprite": "sprites/enemy/beast/ocean/octopus.atlas",
 	"deck": [
 		"decks/standard/octopus.dck"
 	],
@@ -21472,10 +21689,101 @@
 	]
 },
 {
+	"name": "Walter, the Stray Camel",
+	"sprite": "sprites/enemy/beast/largemammals/camel.atlas",
+	"deck": [
+		"decks/boss/walter.dck"
+	],
+	"ai": "",
+	"boss": true,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 23,
+	"scale": 2,
+	"life": 35,
+	"rewards": [
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Slime-Covered Boots"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 1000,
+			"addMaxCount": 5000
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Experiment Kraj"
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "The Mimeoplasm"
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Dark Ritual"
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Biogenic Ooze"
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Gelatinous Cube"
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Scavenging Ooze"
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Rampant Growth"
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 1,
+			"cardName": "Cultivate"
+		},
+		{
+			"type": "shards",
+			"probability": 1,
+			"count": 10,
+			"addMaxCount": 20
+		}
+	],
+	"colors": "W",
+	"questTags": [
+		"Leader",
+		"Camel",
+		"Aberration",
+		"Ambush",
+		"Nature",
+		"IdentityWhite"
+	]
+},
+{
 	"name": "Ooze Boss",
 	"sprite": "sprites/enemy/ooze/giant_slime.atlas",
 	"deck": [
-		"decks/miniboss/ooze_boss.dck"
+		"decks/boss/ooze_boss.dck"
 	],
 	"ai": "",
 	"boss": true,
@@ -21573,7 +21881,7 @@
 },
 {
 	"name": "Owl",
-	"sprite": "sprites/enemy/beast/owl.atlas",
+	"sprite": "sprites/enemy/beast/bird/owl.atlas",
 	"deck": [
 		"decks/standard/owl.dck"
 	],
@@ -21727,7 +22035,7 @@
 },
 {
 	"name": "Penguin",
-	"sprite": "sprites/enemy/beast/penguin.atlas",
+	"sprite": "sprites/enemy/beast/polar/penguin.atlas",
 	"deck": [
 		"decks/standard/penguin.dck"
 	],
@@ -21744,6 +22052,80 @@
 			"addMaxCount": 4,
 			"rarity": [
 				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "G",
+	"questTags": [
+		"Territorial",
+		"Animal",
+		"Wild",
+		"IdentityBlue",
+		"Bird",
+		"Snow"
+	]
+},
+{
+	"name": "Penguin Elite",
+	"sprite": "sprites/enemy/beast/polar/penguinlarge.atlas",
+	"deck": [
+		"decks/standard/penguinelite.dck"
+	],
+	"ai": "",
+	"spawnRate": 0.3,
+	"difficulty": 0.1,
+	"speed": 24,
+	"scale": 1.5,
+	"life": 20,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 1,
+			"addMaxCount": 4,
+			"rarity": [
+				"uncommon",
+				"rare"
 			],
 			"cardTypes": [
 				"Creature",
@@ -22318,7 +22700,7 @@
 {
 	"name": "Poisonous Snake",
 	"nameOverride": "",
-	"sprite": "sprites/enemy/beast/snake_cobra.atlas",
+	"sprite": "sprites/enemy/beast/reptile/snake_cobra.atlas",
 	"deck": [
 		"decks/standard/poisonoussnake.dck"
 	],
@@ -22389,7 +22771,7 @@
 },
 {
 	"name": "Polar Bear",
-	"sprite": "sprites/enemy/beast/polarbear.atlas",
+	"sprite": "sprites/enemy/beast/polar/polarbear.atlas",
 	"deck": [
 		"decks/standard/polarbear.dck"
 	],
@@ -22462,7 +22844,7 @@
 },
 {
 	"name": "Porcupine",
-	"sprite": "sprites/enemy/beast/porcupine.atlas",
+	"sprite": "sprites/enemy/beast/smallmammals/porcupine.atlas",
 	"deck": [
 		"decks/standard/porcupine.dck"
 	],
@@ -23115,7 +23497,7 @@
 },
 {
 	"name": "Raccoon",
-	"sprite": "sprites/enemy/beast/raccoon.atlas",
+	"sprite": "sprites/enemy/beast/smallmammals/raccoon.atlas",
 	"deck": [
 		"decks/standard/enchantment_aggro.dck"
 	],
@@ -23173,7 +23555,7 @@
 },
 {
 	"name": "Parrot",
-	"sprite": "sprites/enemy/beast/parrot.atlas",
+	"sprite": "sprites/enemy/beast/bird/parrot.atlas",
 	"deck": [
 		"decks/standard/parrot.dck"
 	],
@@ -23526,14 +23908,14 @@
 },
 {
 	"name": "Raven",
-	"sprite": "sprites/enemy/beast/raven.atlas",
+	"sprite": "sprites/enemy/beast/bird/raven.atlas",
 	"deck": [
 		"decks/standard/raven.dck"
 	],
 	"ai": "",
 	"flying": true,
-	"spawnRate": 0.5,
-	"difficulty": 0.1,
+	"spawnRate": 1,
+	"difficulty": 1,
 	"speed": 20,
 	"scale": 0.7,
 	"life": 12,
@@ -23736,7 +24118,7 @@
 },
 {
 	"name": "Rhino",
-	"sprite": "sprites/enemy/beast/rhino.atlas",
+	"sprite": "sprites/enemy/beast/largemammals/rhino.atlas",
 	"deck": [
 		"decks/standard/rhino.dck"
 	],
@@ -24169,7 +24551,7 @@
 },
 {
 	"name": "Scarab",
-	"sprite": "sprites/enemy/beast/scarab.atlas",
+	"sprite": "sprites/enemy/beast/insect/scarab.atlas",
 	"deck": [
 		"decks/standard/scarab.dck"
 	],
@@ -24355,7 +24737,7 @@
 },
 {
 	"name": "Scorpion",
-	"sprite": "sprites/enemy/beast/scorpion.atlas",
+	"sprite": "sprites/enemy/beast/arachnid/scorpion.atlas",
 	"deck": [
 		"decks/standard/scorpion.dck"
 	],
@@ -25005,7 +25387,7 @@
 	"nameOverride": "Fungus of Slimefoot",
 	"sprite": "sprites/enemy/plant/slimefoot.atlas",
 	"deck": [
-		"decks/miniboss/slimefoot.dck"
+		"decks/boss/slimefoot.dck"
 	],
 	"ai": "",
 	"boss": true,
@@ -25154,8 +25536,8 @@
 		"decks/standard/sliver.json"
 	],
 	"ai": "",
-	"spawnRate": 0.5,
-	"difficulty": 0.1,
+	"spawnRate": 1,
+	"difficulty": 1,
 	"speed": 24,
 	"life": 15,
 	"rewards": [
@@ -25190,8 +25572,8 @@
 		"decks/standard/sliver_black.dck"
 	],
 	"ai": "",
-	"spawnRate": 0.5,
-	"difficulty": 0.2,
+	"spawnRate": 1,
+	"difficulty": 1,
 	"speed": 24,
 	"life": 20,
 	"rewards": [
@@ -25245,8 +25627,8 @@
 		"decks/standard/sliver_blue.dck"
 	],
 	"ai": "",
-	"spawnRate": 0.5,
-	"difficulty": 0.2,
+	"spawnRate": 1,
+	"difficulty": 1,
 	"speed": 24,
 	"life": 20,
 	"rewards": [
@@ -25300,8 +25682,8 @@
 		"decks/standard/sliver_green.dck"
 	],
 	"ai": "",
-	"spawnRate": 0.5,
-	"difficulty": 0.2,
+	"spawnRate": 1,
+	"difficulty": 1,
 	"speed": 24,
 	"life": 20,
 	"rewards": [
@@ -25355,8 +25737,8 @@
 		"decks/standard/sliver_red.dck"
 	],
 	"ai": "",
-	"spawnRate": 0.5,
-	"difficulty": 0.2,
+	"spawnRate": 1,
+	"difficulty": 1,
 	"speed": 24,
 	"life": 20,
 	"rewards": [
@@ -25410,8 +25792,8 @@
 		"decks/standard/sliver_white.dck"
 	],
 	"ai": "",
-	"spawnRate": 0.5,
-	"difficulty": 0.2,
+	"spawnRate": 1,
+	"difficulty": 1,
 	"speed": 24,
 	"life": 20,
 	"rewards": [
@@ -25461,7 +25843,7 @@
 	"name": "Slobad",
 	"sprite": "sprites/enemy/humanoid/goblin/slobad.atlas",
 	"deck": [
-		"decks/miniboss/slobad.dck"
+		"decks/boss/slobad.dck"
 	],
 	"ai": "",
 	"boss": true,
@@ -25612,7 +25994,7 @@
 },
 {
 	"name": "Snake",
-	"sprite": "sprites/enemy/beast/big_snake.atlas",
+	"sprite": "sprites/enemy/beast/reptile/big_snake.atlas",
 	"deck": [
 		"decks/standard/snake.json"
 	],
@@ -25813,7 +26195,7 @@
 },
 {
 	"name": "Spider",
-	"sprite": "sprites/enemy/beast/spider_black.atlas",
+	"sprite": "sprites/enemy/beast/arachnid/spider_black.atlas",
 	"deck": [
 		"decks/standard/spider.json"
 	],
@@ -26155,7 +26537,7 @@
 },
 {
 	"name": "Stray Cat",
-	"sprite": "sprites/enemy/beast/cat.atlas",
+	"sprite": "sprites/enemy/beast/cat/cat.atlas",
 	"deck": [
 		"decks/standard/cat_greenblack.dck",
 		"decks/standard/straycat.dck",
@@ -26287,7 +26669,7 @@
 },
 {
 	"name": "Squirrel",
-	"sprite": "sprites/enemy/beast/squirrel.atlas",
+	"sprite": "sprites/enemy/beast/smallmammals/squirrel.atlas",
 	"deck": [
 		"decks/standard/squirrel.dck"
 	],
@@ -26563,7 +26945,7 @@
 	"name": "Teferi",
 	"sprite": "sprites/enemy/humanoid/human/wizard/teferi.atlas",
 	"deck": [
-		"decks/miniboss/teferi_boss.dck"
+		"decks/boss/teferi_boss.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -26650,7 +27032,7 @@
 	"nameOverride": "Zedruu's Cook",
 	"sprite": "sprites/enemy/humanoid/halfling/korred.atlas",
 	"deck": [
-		"decks/miniboss/thecheff.dck"
+		"decks/boss/thecheff.dck"
 	],
 	"ai": "",
 	"boss": true,
@@ -26775,7 +27157,7 @@
 	"name": "Tibalt",
 	"sprite": "sprites/enemy/fiend/tibalt.atlas",
 	"deck": [
-		"decks/miniboss/tibalt.dck"
+		"decks/boss/tibalt.dck"
 	],
 	"ai": "",
 	"boss": true,
@@ -26877,7 +27259,7 @@
 },
 {
 	"name": "Tiger",
-	"sprite": "sprites/enemy/beast/tiger.atlas",
+	"sprite": "sprites/enemy/beast/cat/tiger.atlas",
 	"deck": [
 		"decks/standard/tiger.dck"
 	],
@@ -26940,7 +27322,7 @@
 	"name": "Torturer",
 	"sprite": "sprites/enemy/humanoid/human/bandit/bandittorturer.atlas",
 	"deck": [
-		"decks/miniboss/torturer.dck"
+		"decks/boss/torturer.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -27001,7 +27383,7 @@
 },
 {
 	"name": "Turtle",
-	"sprite": "sprites/enemy/beast/turtle.atlas",
+	"sprite": "sprites/enemy/beast/reptile/turtle.atlas",
 	"deck": [
 		"decks/standard/turtle.json"
 	],
@@ -27351,13 +27733,11 @@
 		"decks/standard/copperhostbrutalizer.dck"
 	],
 	"ai": "",
-	"spawnRate": 0.1,
 	"boss": true,
-	"scale": 0.65,
-	"bossIntro": "You will be reforged in the Furnace of Glory.",
-	"bossInsult": "You were so eager to spy on my work, I assume you'll appreciate a hands-on demonstration.",
+	"spawnRate": 0.1,
 	"difficulty": 0.5,
 	"speed": 25,
+	"scale": 0.65,
 	"life": 80,
 	"rewards": [
 		{
@@ -27425,13 +27805,15 @@
 		"Phyrexian",
 		"Copper Host",
 		"Humanoid"
-	]
+	],
+	"bossInsult": "You were so eager to spy on my work, I assume you'll appreciate a hands-on demonstration.",
+	"bossIntro": "You will be reforged in the Furnace of Glory."
 },
 {
 	"name": "Valyx Feaster of Torment",
 	"sprite": "sprites/enemy/fiend/valyx.atlas",
 	"deck": [
-		"decks/miniboss/valyx.dck"
+		"decks/boss/valyx.dck"
 	],
 	"ai": "",
 	"spawnRate": 1,
@@ -27646,7 +28028,7 @@
 },
 {
 	"name": "Viper",
-	"sprite": "sprites/enemy/beast/big_snake_2.atlas",
+	"sprite": "sprites/enemy/beast/reptile/big_snake_2.atlas",
 	"deck": [
 		"decks/standard/snake.dck"
 	],
@@ -27968,7 +28350,7 @@
 	],
 	"ai": "",
 	"spawnRate": 0.8,
-	"difficulty": 0.1,
+	"difficulty": 2,
 	"speed": 15,
 	"life": 15,
 	"rewards": [
@@ -28088,7 +28470,7 @@
 },
 {
 	"name": "Wasp",
-	"sprite": "sprites/enemy/beast/wasp.atlas",
+	"sprite": "sprites/enemy/beast/insect/wasp.atlas",
 	"deck": [
 		"decks/standard/wasp.dck"
 	],
@@ -28149,7 +28531,7 @@
 },
 {
 	"name": "Werebear",
-	"sprite": "sprites/enemy/beast/bear_large.atlas",
+	"sprite": "sprites/enemy/beast/bear/bear_large.atlas",
 	"deck": [
 		"decks/standard/bearboss.dck"
 	],
@@ -28298,7 +28680,7 @@
 },
 {
 	"name": "Plague Rat Swarm",
-	"sprite": "sprites/enemy/beast/wildratpoison.atlas",
+	"sprite": "sprites/enemy/beast/smallmammals/wildratpoison.atlas",
 	"deck": [
 		"decks/standard/rat_poisonrat.dck"
 	],
@@ -28363,7 +28745,7 @@
 },
 {
 	"name": "Wild Rat",
-	"sprite": "sprites/enemy/beast/wildrat.atlas",
+	"sprite": "sprites/enemy/beast/smallmammals/wildrat.atlas",
 	"deck": [
 		"decks/standard/infectrat.dck",
 		"decks/standard/rat.json",
@@ -28371,8 +28753,8 @@
 	],
 	"ai": "",
 	"randomizeDeck": true,
-	"spawnRate": 0.6,
-	"difficulty": 0.1,
+	"spawnRate": 1,
+	"difficulty": 0.6,
 	"speed": 15,
 	"scale": 0.8,
 	"life": 13,
@@ -28515,7 +28897,7 @@
 },
 {
 	"name": "Wolf",
-	"sprite": "sprites/enemy/beast/wolf.atlas",
+	"sprite": "sprites/enemy/beast/largemammals/wolf.atlas",
 	"deck": [
 		"decks/standard/wolfboss.dck"
 	],
@@ -28585,7 +28967,7 @@
 },
 {
 	"name": "Wolf Pup",
-	"sprite": "sprites/enemy/beast/wolfcub.atlas",
+	"sprite": "sprites/enemy/beast/smallmammals/wolfcub.atlas",
 	"deck": [
 		"decks/standard/wolf.json"
 	],
@@ -28694,7 +29076,7 @@
 },
 {
 	"name": "Vulture",
-	"sprite": "sprites/enemy/beast/vulture.atlas",
+	"sprite": "sprites/enemy/beast/bird/vulture.atlas",
 	"deck": [
 		"decks/standard/vulture.dck"
 	],
@@ -28916,7 +29298,7 @@
 	"name": "Wounded Sliver",
 	"sprite": "sprites/enemy/aberration/wsliver.atlas",
 	"deck": [
-		"decks/miniboss/sliver_shandalar.dck"
+		"decks/boss/sliver_shandalar.dck"
 	],
 	"ai": "reckless",
 	"boss": true,
@@ -28951,14 +29333,14 @@
 	"name": "Xira",
 	"sprite": "sprites/enemy/fey/xira.atlas",
 	"deck": [
-		"decks/miniboss/xira.dck"
+		"decks/boss/xira.dck"
 	],
 	"ai": "",
 	"boss": true,
 	"spawnRate": 1,
 	"difficulty": 0.8,
 	"speed": 31,
-    "scale": 1.5,
+	"scale": 1.5,
 	"life": 35,
 	"rewards": [
 		{
@@ -29138,7 +29520,7 @@
 	"name": "Zedruu",
 	"sprite": "sprites/enemy/humanoid/minotaur/zedru.atlas",
 	"deck": [
-		"decks/miniboss/zedruubis.dck"
+		"decks/boss/zedruubis.dck"
 	],
 	"ai": "",
 	"boss": true,
@@ -30534,8 +30916,8 @@
 	"flying": true,
 	"spawnRate": 0.6,
 	"difficulty": 0.1,
-	"scale": 1.2,
 	"speed": 21,
+	"scale": 1.2,
 	"life": 18,
 	"rewards": [
 		{
@@ -30641,9 +31023,9 @@
 	],
 	"ai": "",
 	"spawnRate": 0.6,
-	"scale": 1.2,
 	"difficulty": 0.1,
 	"speed": 21,
+	"scale": 1.2,
 	"life": 18,
 	"rewards": [
 		{
@@ -30695,9 +31077,9 @@
 	],
 	"ai": "",
 	"spawnRate": 0.6,
-	"scale": 1.2,
 	"difficulty": 0.1,
 	"speed": 21,
+	"scale": 1.2,
 	"life": 18,
 	"rewards": [
 		{
@@ -30808,9 +31190,9 @@
 	"ai": "",
 	"flying": true,
 	"spawnRate": 0.6,
-	"scale": 1.2,
 	"difficulty": 0.1,
 	"speed": 21,
+	"scale": 1.2,
 	"life": 18,
 	"rewards": [
 		{

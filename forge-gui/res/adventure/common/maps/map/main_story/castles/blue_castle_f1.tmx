@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="56">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="57">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -9,27 +9,30 @@
  </properties>
  <tileset firstgid="1" source="../../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../Innistrad/maps/tileset/Inn_Dungeon.tsx"/>
+ <tileset firstgid="16385" source="../../../../../Innistrad/maps/tileset/inn_main.tsx"/>
+ <tileset firstgid="26497" source="../../../tileset/dungeon/dungeon_bis.tsx"/>
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJztwzEJAAAMA7C+8w/VWyFLIL2kqqqqvjuO1S8b
+   eJybxsnAMG0QYxAYKHtxgVF7h6e99Exv9PQrIT9TC98xoxwPhJ3kuoHe9mGzl1w3Uhq/1NSHLx1S4m5qpqvhbi8t43cw2jvS4pfcMmmwlM8jzd6R5mdS7US3G11sijxUXB67+ZTYic8thOylBaamvQBgsX2q
   </data>
  </layer>
  <layer id="2" name="Ground" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJzjE2Bg4BvFGFgQiNdgwQI0tpcfiLEB3lF7qYqL+RkYCoC4kB9iXz6UX8RPn/QF8zet/UlPe0F5Zj0Qr8NCr4XauxqHPIgmN2/hSkPEAnLDAmZvIzDNNJGAm/mpY688kFYgAStSGPej9o7aO2rvqL3k2rsXSO/DglVxiO+nkr24gBIB+VF7icOwthQ2DGpfgezNx6OGFm0uUFiA7B2I9tVQthcA8ByJ4Q==
+   eJzt0NENQDAUheGzAGWBMgMGE1bBGGyH8KLiRUqDVuLBucmfPtwmX1o/AHzGGHMsVHWq1nDq6fvA0hUql/Ec3V4Cw4NG+Y5bRUD9oCaiS5cu3W/cJAZSrVluxiSPuyx+xz2bSnvb2dC9VymA3NDeNd0phJ179Rera/umv7oLGqrVjw==
   </data>
  </layer>
  <layer id="3" name="Foreground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIKhDXzKUPkibNjV4RKnFFzMY2C4lEe8eice6tgbmM/AEJRPHbMGM6BWeFEKtkHTT0QmA0MkEEdloorTGtwA2ncTiG9lYpdHzwfUAhFZQP8CcVQWhD9Y4mO4AFzph17pitaAVulysAJy6hla1E0DHe6F/hA6339g3TEKiAMAx90VHg==
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="30">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzt0rEJADAIAEGrTJD9x8h8TiBoFZC78uuPANjlnlmHjlf8U3Xo8BXwWwKJagMl
-  </data>
- </layer>
- <layer id="5" name="AboveSprites" width="30" height="30">
-  <data encoding="base64" compression="zlib">
-   eJztzbENADAIA0FvAANEGZUwOpHSU9LkT7JcvgTgF2HSuUub7S5/v322CwAAgF4BRR8CBQ==
+   eJztwQEBAAAAgiD/r25IQAEAAPBoDhAAAQ==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -55,6 +58,33 @@
  &quot;startBattleWithCard&quot;: [ &quot;Mox Sapphire&quot; ]
 }</property>
     <property name="enemy" value="Lorthos"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Amulet of Telepathy&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Mantel of Denial&quot;
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;CNS&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;CNS&quot;]
+  }
+]
+</property>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
@@ -63,46 +93,6 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="54" template="../../../obj/scroll.tx" x="208.062" y="75.204">
-   <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Mox Sapphire&quot;, &quot;count&quot;: 1 }, {&quot;type&quot;: &quot;item&quot;, &quot;count&quot;: 1, &quot;itemName&quot;: &quot;Strange Key&quot;} ]"/>
-   </properties>
-  </object>
-  <object id="55" template="../../../obj/gate.tx" x="208" y="160">
-   <properties>
-    <property name="dialog">[
-	{
-		&quot;text&quot;: &quot;A big gate is blocking the path. Through the bars you can see a Mox Sapphire in the room beyond. (You need all five colored keys to open this gate.)&quot;,
-		&quot;options&quot;: [
-			{ &quot;name&quot;: &quot;Leave&quot; },
-			{
-				&quot;name&quot;: &quot;Unlock with the five colored keys&quot;,
-				&quot;condition&quot;: [
-					{ &quot;item&quot;: &quot;Blue Key&quot; },
-					{ &quot;item&quot;: &quot;Green Key&quot; },
-					{ &quot;item&quot;: &quot;Black Key&quot; },
-					{ &quot;item&quot;: &quot;White Key&quot; },
-					{ &quot;item&quot;: &quot;Red Key&quot; }
-				],
-				&quot;text&quot;: &quot;The gate is unlocked.&quot;,
-				&quot;options&quot;: [
-					{
-						&quot;name&quot;: &quot;Continue&quot;,
-						&quot;action&quot;: [
-							{ &quot;deleteMapObject&quot;: -1 },
-							{ &quot;removeItem&quot;: &quot;Blue Key&quot; },
-							{ &quot;removeItem&quot;: &quot;Green Key&quot; },
-							{ &quot;removeItem&quot;: &quot;Black Key&quot; },
-							{ &quot;removeItem&quot;: &quot;White Key&quot; },
-							{ &quot;removeItem&quot;: &quot;Red Key&quot; }
-						]
-					}
-				]
-			}
-		]
-	}
-]</property>
-   </properties>
-  </object>
+  <object id="56" template="../../../obj/collision.tx" x="132.193" y="177.883" width="24.4521" height="25.3043"/>
  </objectgroup>
 </map>
