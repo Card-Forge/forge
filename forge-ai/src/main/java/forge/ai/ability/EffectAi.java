@@ -325,6 +325,10 @@ public class EffectAi extends SpellAbilityAi {
                     return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
                 }
                 if (phase.is(PhaseType.MAIN1, ai)) {
+                    int predictedLife = ComputerUtil.predictNextCombatsRemainingLife(ai, false, false, 0, options);
+                    if (predictedLife <= 0 && ai.canLoseLife() && !ai.cantLoseForZeroOrLessLife()) {
+                        return new AiAbilityDecision(0, AiPlayDecision.AnotherTime); // don't overextend
+                    }
                     ComputerUtilCard.sortByEvaluateCreature(options);
                     for (Card card : options) {
                         if (!CombatUtil.canBeBlocked(card, ai.getOpponents().getCreaturesInPlay(), phase.getCombat())) {
@@ -334,10 +338,6 @@ public class EffectAi extends SpellAbilityAi {
                             // try to finish off the opponent with an unblockable creature
                             sa.getTargets().add(card);
                             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                        }
-                        int predictedLife = ComputerUtil.predictNextCombatsRemainingLife(ai, false, false, 0, options);
-                        if (predictedLife <= 0 && ai.canLoseLife() && !ai.cantLoseForZeroOrLessLife()) {
-                            return new AiAbilityDecision(0, AiPlayDecision.AnotherTime); // don't overextend
                         }
                         final Card copy = CardCopyService.getLKICopy(card);
                         String cantBeBlocked = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self";
