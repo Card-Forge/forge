@@ -307,7 +307,19 @@ public class VLobby implements ILobbyView {
                         changePlayerFocus(i);
                     }
                 } else {
-                    panel.getDeckChooser().setIsAi(isSlotAI);
+                    final FDeckChooser existingDeckChooser = panel.getDeckChooser();
+                    final GameType expectedGameType = lobby.getGameType();
+                    if (existingDeckChooser.getLstDecks().getGameType() != expectedGameType) {
+                        final FDeckChooser deckChooser = createDeckChooser(expectedGameType, i, isSlotAI);
+                        deckChooser.populate();
+                        panel.setDeckChooser(deckChooser);
+                        if (type == LobbySlotType.LOCAL || isSlotAI) {
+                            // Ensure lobby deck selection updates immediately when the variant changes.
+                            deckChooser.getLstDecks().getSelectCommand().run();
+                        }
+                    } else {
+                        existingDeckChooser.setIsAi(isSlotAI);
+                    }
                 }
                 if (fullUpdate && (type == LobbySlotType.LOCAL || isSlotAI)) {
                     // Deck section selection
