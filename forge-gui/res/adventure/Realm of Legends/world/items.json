@@ -1258,7 +1258,6 @@
       "iconName": "Witch-MawAnklet",
       "effect": {
         "changeStartCards": -1,
-        "lifeModifier": -4,
         "startBattleWithCard": [
           "Witch-Maw Nephilim|GPT"
         ]
@@ -1614,8 +1613,7 @@
       "equipmentSlot": "Boots",
       "iconName": "Dune-BroodAnklet",
       "effect": {
-        "changeStartCards": -1,
-        "lifeModifier": -4,
+        "lifeModifier": -8,
         "startBattleWithCard": [
           "Dune-Brood Nephilim|GPT"
         ]
@@ -1811,7 +1809,6 @@
       "iconName": "Ink-TreaderAnklet",
       "effect": {
         "changeStartCards": -1,
-        "lifeModifier": -4,
         "startBattleWithCard": [
           "Ink-Treader Nephilim|GPT"
         ]
@@ -3467,7 +3464,7 @@
       "iconName": "TruthButcher'sArmor",
       "effect": {
         "changeStartCards": 4,
-        "lifeModifier": -16
+        "lifeModifier": -12
     }
   },
     {
