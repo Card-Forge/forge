@@ -112,7 +112,7 @@ GenerousRing
   xy: 128, 912
   size: 16, 16
 GenerousIngot
-  xy: 224, 944
+  xy: 288, 944
   size: 16, 16
 SpikedRipsaw
   xy: 304, 736
@@ -149,6 +149,27 @@ NobleSoul
   size: 16, 16
 RoyalSoul
   xy: 256, 864
+  size: 16, 16
+TokenofBlades
+  xy: 224, 736
+  size: 16, 16
+TokenofDecay
+  xy: 224, 944
+  size: 16, 16
+TokenofInsight
+  xy: 16, 608
+  size: 16, 16
+TokenofLanding
+  xy: 16, 592
+  size: 16, 16
+TokenofShielding
+  xy: 192, 128
+  size: 16, 16
+TokenofSpirit
+  xy: 128, 528
+  size: 16, 16
+TokenofSoaringSpirit
+  xy: 144, 512
   size: 16, 16
 MedalOutnumbered
   xy: 32, 608

@@ -560,6 +560,7 @@
     { "type": "item","count":1, "itemName": "Ring of Thune"  },
     { "type": "item","count":1, "itemName": "Skyclave Maul"  },
     { "type": "item","count":1, "itemName": "Meadow Outfit"  },
+    { "type": "item","count":1, "itemName": "Token of Shielding"  },
 	{ "type": "item","count":1, "itemName": "Token of Bounty"  }
     
     ]
@@ -594,6 +595,7 @@
     { "type": "item","count":1, "itemName": "Ring of Valkas"  },
     { "type": "item","count":1, "itemName": "Dire Flail"  },
     { "type": "item","count":1, "itemName": "Smoldering Cloak"  },
+    { "type": "item","count":1, "itemName": "Token of Blades"  },
 	{ "type": "item","count":1, "itemName": "Token of Violence"  }
     
     ]
@@ -626,6 +628,7 @@
     { "type": "item","count":1, "itemName": "Ring of Evos Isle"  },
     { "type": "item","count":1, "itemName": "Giant's Bracer"  },
     { "type": "item","count":1, "itemName": "Isle Shirt"  },
+    { "type": "item","count":1, "itemName": "Token of Insight"  },
 	{ "type": "item","count":1, "itemName": "Token of Investigation"  }
     
     ]
@@ -658,6 +661,7 @@
     { "type": "item","count":1, "itemName": "Ring of Xathrid"  },
     { "type": "item","count":1, "itemName": "Poet's Quill"  },
     { "type": "item","count":1, "itemName": "Mire Leather"  },
+    { "type": "item","count":1, "itemName": "Token of Decay"  },
 	{ "type": "item","count":1, "itemName": "Token of Blood"  }
     
     ]
@@ -690,6 +694,7 @@
     { "type": "item","count":1, "itemName": "Ring of Kalonia"  },
     { "type": "item","count":1, "itemName": "Spiked Ripsaw"  },
     { "type": "item","count":1, "itemName": "Karst Shawl"  },
+    { "type": "item","count":1, "itemName": "Token of Landing"  },
 	{ "type": "item","count":1, "itemName": "Token of Exploration"  }
     
     ]
@@ -736,6 +741,8 @@
 	"sprite":"ItemShop",   
 	  "rewards": [ 
 		{ "type": "item","count":1, "itemName": "Ghost rune"  },
+        { "type": "item","count":1, "itemName": "Token of Spirit"  },
+        { "type": "item","count":1, "itemName": "Token of Soaring Spirit"  },
 		{ "type": "item","count":1, "itemName": "Captive Soul of a Priest"  },
 		{ "type": "item","count":1, "itemName": "Captive Soul of a Saint"  },
 		{ "type": "item","count":1, "itemName": "Captive Soul of a Knight"  },
