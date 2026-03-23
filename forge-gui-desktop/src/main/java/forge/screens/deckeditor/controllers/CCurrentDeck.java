@@ -1,8 +1,8 @@
 package forge.screens.deckeditor.controllers;
 
 import java.awt.Dialog.ModalityType;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyAdapter;
 import java.io.File;
 import java.util.regex.Pattern;
 
@@ -88,6 +88,11 @@ public enum CCurrentDeck implements ICDoc {
                 if (!Character.isISOControl(e.getKeyChar())) {
                     CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().notifyModelChanged();
                 }
+            }
+
+            @Override
+            public void keyReleased(final KeyEvent e) {
+                CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().notifyModelChanged();
             }
         });
     }

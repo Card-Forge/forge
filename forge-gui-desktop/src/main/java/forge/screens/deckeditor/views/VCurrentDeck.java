@@ -14,6 +14,7 @@ import forge.localinstance.skin.FSkinProp;
 import forge.screens.deckeditor.controllers.CCurrentDeck;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
+import forge.toolbox.FTextArea;
 import forge.toolbox.FTextField;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
@@ -80,7 +81,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
             .opaque(true).hoverable(true).build();
 
     private final FTextField txfTitle = new FTextField.Builder().ghostText("[" + localizer.getMessage("lblNewDeck") +"]").build();
-    private final FTextField txfDescription = new FTextField.Builder().build();
+    private final FTextArea txfDescription = new FTextArea();
 
     private final JPanel pnlHeader = new JPanel();
 
@@ -107,7 +108,9 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
         pnlHeader.add(btnPrintProxies, "w 26px!, h 26px!");
         pnlHeader.add(btnImport, "w 61px!, h 26px!, wrap");
         pnlHeader.add(lblDescription, "h 26px!");
-        pnlHeader.add(txfDescription, "pushx, growx, spanx 7");
+        txfDescription.setFocusable(true);
+        txfDescription.setEditable(true);
+        pnlHeader.add(txfDescription, "pushx, growx, h 72px!, spanx 7");
     }
 
     //========== Overridden from IVDoc
@@ -207,7 +210,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
         return txfTitle;
     }
 
-    public FTextField getTxfDescription() {
+    public FTextArea getTxfDescription() {
         return txfDescription;
     }
 
