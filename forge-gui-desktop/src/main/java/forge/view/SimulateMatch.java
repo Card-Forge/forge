@@ -15,6 +15,7 @@ import forge.deck.DeckGroup;
 import forge.deck.io.DeckSerializer;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardView;
 import forge.game.GameEndReason;
 import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
@@ -36,6 +37,7 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
 import forge.sim.SimVerboseConfig;
 import forge.player.GamePlayerUtil;
+import forge.util.CardTranslation;
 import forge.util.Lang;
 import forge.util.TextUtil;
 import forge.util.storage.IStorage;
@@ -440,6 +442,33 @@ public class SimulateMatch {
         return null;
     }
 
+    /**
+     * Card name plus runtime game id in parentheses, matching {@link CardView#toString()} name/id suffix
+     * (without the leading zone prefix used in full {@code toString()}).
+     */
+    private static String verboseCardLabel(final CardView view) {
+        if (view == null) {
+            return "?";
+        }
+        if (view.getName() == null || view.getName().isEmpty()) {
+            return view.toString();
+        }
+        final String name = CardTranslation.getTranslatedName(view.getName());
+        final int id = view.getId();
+        if (id <= 0) {
+            return name;
+        }
+        return name + " (" + id + ")";
+    }
+
+    private static String verboseCardLabel(final Card card) {
+        if (card == null) {
+            return "?";
+        }
+        final CardView v = card.getView();
+        return v != null ? verboseCardLabel(v) : card.getName();
+    }
+
     private static void addVerboseSimLine(final Game game, final List<String> quietBuffer, final String line) {
         if (quietBuffer != null) {
             quietBuffer.add(line);
@@ -468,7 +497,7 @@ public class SimulateMatch {
                 return;
             }
             final String playerName = event.to().player() == null ? "Unknown player" : event.to().player().getName();
-            final String line = String.format("[verbose] %s drew: %s", playerName, event.card().getName());
+            final String line = String.format("[verbose] %s drew: %s", playerName, verboseCardLabel(event.card()));
             addVerboseSimLine(game, quietBuffer, line);
         }
     }
@@ -507,7 +536,7 @@ public class SimulateMatch {
                     if (sb.length() > 0) {
                         sb.append(", ");
                     }
-                    sb.append(c.getName());
+                    sb.append(verboseCardLabel(c));
                 }
                 final String handList = sb.length() == 0 ? "(empty)" : sb.toString();
                 addVerboseSimLine(game, quietBuffer,
@@ -524,7 +553,7 @@ public class SimulateMatch {
                     if (lb.length() > 0) {
                         lb.append(", ");
                     }
-                    lb.append(lib.get(i).getName());
+                    lb.append(verboseCardLabel(lib.get(i)));
                 }
                 final String libList = size == 0 ? "(empty)" : lb.toString();
                 final String scope = n != null && n == -1
