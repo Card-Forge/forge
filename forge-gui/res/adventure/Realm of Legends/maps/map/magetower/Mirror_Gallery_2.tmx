@@ -68,7 +68,7 @@
   </object>
   <object id="114" template="../../../../common/maps/obj/enemy.tx" gid="11419" x="368.874" y="488.152">
    <properties>
-    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Mirrorpool&quot;, &quot;Oboro, Palace in the Clouds&quot;, &quot;Minamo, School at Water's Edge&quot;, &quot;Mirror-Sigil Sergeant&quot;, &quot;Patron of the Moon&quot;, &quot;Mirror Room&quot;, &quot;Mirror Shield&quot;, &quot;Mirror Box&quot;, &quot;Leyline of Singularity&quot;, &quot;Mirror March&quot;, &quot;Mirrorworks&quot;, &quot;The Magic Mirror&quot;, &quot;Mirage Mirror&quot;
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Mirrorpool&quot;, &quot;Oboro, Palace in the Clouds&quot;, &quot;Minamo, School at Water's Edge&quot;, &quot;Patron of the Moon&quot;, &quot;Mirror Shield&quot;, &quot;Mirror Box&quot;, &quot;Leyline of Singularity&quot;, &quot;Mirrorworks&quot;, &quot;The Magic Mirror&quot;, &quot;Mirage Mirror&quot;
 ]}</property>
     <property name="enemy" value="Meloku"/>
    </properties>
@@ -97,7 +97,7 @@
   </object>
   <object id="120" template="../../../../common/maps/obj/enemy.tx" gid="11419" x="417.333" y="540">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Command Tower|CM1&quot;, &quot;Command Beacon|C15&quot;, &quot;Plaza of Heroes|DMU&quot;, &quot;Swiftfoot Boots|C13&quot;, &quot;Helm of the Host|DOM&quot;, &quot;Platinum Angel|MRD&quot;, &quot;Chimil, the Inner Sun|LCI&quot;, &quot;Jodah's Codex|DMU&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Command Tower|CM1&quot;, &quot;Command Beacon|C15&quot;, &quot;Plaza of Heroes|DMU&quot;, &quot;Helm of the Host|DOM&quot;, &quot;Platinum Angel|MRD&quot;, &quot;Jodah's Codex|DMU&quot;]}"/>
     <property name="enemy" value="Jodah"/>
    </properties>
   </object>

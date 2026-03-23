@@ -625,7 +625,7 @@
     ],
     "ai": "",
     "speed": 45,
-    "scale": 1,
+    "scale": 2,
     "life": 70,
     "rewards": [
       {
@@ -695,7 +695,7 @@
   },
   {
     "name": "Azlask",
-    "sprite": "sprites/enemy/aberration/phyrexian/gitaxianscientist.atlas",
+    "sprite": "sprites/enemy/aberration/eldrazi/eldrazi_2.atlas",
     "deck": [
       "decks/legends/azlask.dck"
     ],
@@ -774,7 +774,7 @@
     ],
     "ai": "",
     "speed": 45,
-    "scale": 2,
+    "scale": 6,
     "life": 50,
     "rewards": [
       {
@@ -922,7 +922,7 @@
     ],
     "ai": "",
     "speed": 45,
-    "scale": 1,
+    "scale": 3,
     "life": 50,
     "rewards": [
       {
@@ -989,13 +989,13 @@
   },
   {
     "name": "Kozilek",
-    "sprite": "sprites/enemy/aberration/phyrexian/phyrexianangel.atlas",
+    "sprite": "sprites/enemy/aberration/eldrazi/kozilek.atlas",
     "deck": [
       "decks/legends/kozilek.dck"
     ],
     "ai": "",
     "speed": 45,
-    "scale": 6,
+    "scale": 3,
     "life": 70,
     "rewards": [
       {
@@ -1966,7 +1966,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Evolving Robes"
+        "itemName": "Pilgrim's CloakPi"
       },
       {
         "type": "card",
@@ -2249,7 +2249,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Utopia Markings"
+        "itemName": "Utopia Anklet"
       },
       {
         "type": "card",

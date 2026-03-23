@@ -71,7 +71,7 @@
   </object>
   <object id="108" template="../../../../common/maps/obj/enemy.tx" x="102" y="391">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Sliver Hive|M15&quot;, &quot;Sliver Construct&quot;, &quot;Path of Ancestry|CMM&quot;, &quot;Descendants' Path|LCC&quot;, &quot;First Sliver's Chosen|MH1&quot;, &quot;Gemhide Sliver|CMM&quot;, &quot;Birthing Boughs|MH1&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Sliver Hive|M15&quot;, &quot;Sliver Construct&quot;, &quot;Path of Ancestry|CMM&quot;, &quot;Descendants' Path|LCC&quot;, &quot;First Sliver's Chosen|MH1&quot;, &quot;Birthing Boughs|MH1&quot;]}"/>
     <property name="enemy" value="The First Sliver"/>
    </properties>
   </object>
