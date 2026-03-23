@@ -58,6 +58,7 @@ public class VAutoYields extends FDialog {
                 autoYields.remove(selected);
                 btnRemove.setEnabled(autoYields.size() > 0);
                 matchUI.setShouldAutoYield(selected, false);
+                matchUI.getGameController().notifyAutoYieldChanged(selected, false);
                 VAutoYields.this.revalidate();
                 lstAutoYields.repaint();
             }
