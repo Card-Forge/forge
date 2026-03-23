@@ -80,6 +80,10 @@ public final class ForgeConstants {
     public static final String LICENSE_FILE                 = ASSETS_DIR + "LICENSE.txt";
     public static final String HOWTO_FILE                   = RES_DIR + "howto.txt";
 
+    /** Example sim verbose categories; copy to {@code <userDir>/sim/sim-verbose.properties}. */
+    public static final String SIM_VERBOSE_DIR              = RES_DIR + "sim" + PATH_SEPARATOR;
+    public static final String SIM_VERBOSE_CONFIG_EXAMPLE   = SIM_VERBOSE_DIR + "sim-verbose.properties.example";
+
     public static final String DRAFT_DIR                    = RES_DIR + "draft" + PATH_SEPARATOR;
     public static final String DRAFT_RANKINGS_FILE          = DRAFT_DIR + "rankings.txt";
     public static final String DRAFT_RANKINGS_FOLDER          = DRAFT_DIR + "rankings/";

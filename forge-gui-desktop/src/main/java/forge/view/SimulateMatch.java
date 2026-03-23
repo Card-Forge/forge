@@ -29,6 +29,7 @@ import forge.gamemodes.tournament.system.TournamentRoundRobin;
 import forge.gamemodes.tournament.system.TournamentSwiss;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
+import forge.sim.SimVerboseConfig;
 import forge.player.GamePlayerUtil;
 import forge.util.Lang;
 import forge.util.TextUtil;
@@ -102,8 +103,8 @@ public class SimulateMatch {
 
         if (params.containsKey("t")) {
             final int maxTurns = params.containsKey("x") ? Integer.parseInt(params.get("x").get(0)) : 0;
-            final boolean verbose = params.containsKey("v");
-            simulateTournament(params, rules, outputGamelog, maxTurns, verbose);
+            final SimVerboseConfig verboseCfg = params.containsKey("v") ? SimVerboseConfig.load() : null;
+            simulateTournament(params, rules, outputGamelog, maxTurns, verboseCfg);
             System.out.flush();
             return;
         }
@@ -143,7 +144,7 @@ public class SimulateMatch {
             rules.setSimTimeout(Integer.parseInt(params.get("c").get(0)));
         }
         final int maxTurns = params.containsKey("x") ? Integer.parseInt(params.get("x").get(0)) : 0;
-        final boolean verbose = params.containsKey("v");
+        final SimVerboseConfig verboseCfg = params.containsKey("v") ? SimVerboseConfig.load() : null;
 
         sb.append(" - ").append(Lang.nounWithNumeral(nGames, "game")).append(" of ").append(type);
 
@@ -155,12 +156,12 @@ public class SimulateMatch {
             int iGame = 0;
             while (!mc.isMatchOver()) {
                 // play games until the match ends
-                simulateSingleMatch(mc, iGame, outputGamelog, maxTurns, verbose);
+                simulateSingleMatch(mc, iGame, outputGamelog, maxTurns, verboseCfg);
                 iGame++;
             }
         } else {
             for (int iGame = 0; iGame < nGames; iGame++) {
-                simulateSingleMatch(mc, iGame, outputGamelog, maxTurns, verbose);
+                simulateSingleMatch(mc, iGame, outputGamelog, maxTurns, verboseCfg);
             }
         }
 
@@ -179,7 +180,8 @@ public class SimulateMatch {
         System.out.println("\tP - Amount of players per match (used only with Tournaments, defaults to 2)");
         System.out.println("\tF - format of games, defaults to constructed");
         System.out.println("\tX - Maximum number of turns allowed in a game. Reaching this ends the game as a draw.");
-        System.out.println("\tv - Verbose mode. Logs each card drawn (Library -> Hand). With full game log, lines appear in time order; with -q, draw lines print after match results.");
+        System.out.println("\tv - Verbose mode. Extra sim logging is controlled by " + SimVerboseConfig.getUserConfigFile()
+                + " (see " + ForgeConstants.SIM_VERBOSE_CONFIG_EXAMPLE + "). With full game log, [verbose] lines appear in time order; with -q they print after match results.");
         System.out.println("\tc - Clock flag. Set the maximum time in seconds before calling the match a draw, defaults to 120.");
         System.out.println("\tq - Quiet flag. Output just the game result, not the entire game log.");
     }
@@ -201,7 +203,11 @@ public class SimulateMatch {
         return null;
     }
 
-    public static void simulateSingleMatch(final Match mc, int iGame, boolean outputGamelog, int maxTurns, boolean verbose) {
+    /**
+     * @param verboseConfig loaded when {@code -v} was passed; {@code null} disables verbose logging
+     */
+    public static void simulateSingleMatch(final Match mc, int iGame, boolean outputGamelog, int maxTurns,
+            final SimVerboseConfig verboseConfig) {
         final StopWatch sw = new StopWatch();
         sw.start();
 
@@ -209,9 +215,9 @@ public class SimulateMatch {
         final AtomicBoolean turnCapReached = new AtomicBoolean(false);
         final AtomicBoolean stopTurnWatcher = new AtomicBoolean(false);
         final Thread turnWatcher;
-        final List<String> verboseQuietBuffer = verbose && !outputGamelog
+        final List<String> verboseQuietBuffer = verboseConfig != null && verboseConfig.anyEnabled() && !outputGamelog
                 ? Collections.synchronizedList(new ArrayList<>()) : null;
-        if (verbose) {
+        if (verboseConfig != null && verboseConfig.isEnabled(SimVerboseConfig.DRAWS)) {
             // Log every Library -> Hand move. Do not dedupe by card id: the same Card can return to the
             // library (mulligan) and be drawn again; dedupe would hide later draws (e.g. draw step).
             // With full game log, append to GameLog so output matches game chronology (not all [verbose] first).
@@ -293,7 +299,8 @@ public class SimulateMatch {
         }
     }
 
-    private static void simulateTournament(Map<String, List<String>> params, GameRules rules, boolean outputGamelog, int maxTurns, boolean verbose) {
+    private static void simulateTournament(Map<String, List<String>> params, GameRules rules, boolean outputGamelog,
+            int maxTurns, final SimVerboseConfig verboseConfig) {
         String tournament = params.get("t").get(0);
         AbstractTournament tourney = null;
         int matchPlayers = params.containsKey("p") ? Integer.parseInt(params.get("p").get(0)) : 2;
@@ -389,7 +396,7 @@ public class SimulateMatch {
                 while (!mc.isMatchOver()) {
                     // play games until the match ends
                     try {
-                        simulateSingleMatch(mc, iGame, outputGamelog, maxTurns, verbose);
+                        simulateSingleMatch(mc, iGame, outputGamelog, maxTurns, verboseConfig);
                         iGame++;
                     } catch (Exception e) {
                         exceptions++;
