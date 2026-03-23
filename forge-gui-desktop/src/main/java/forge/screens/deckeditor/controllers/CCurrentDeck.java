@@ -82,6 +82,14 @@ public enum CCurrentDeck implements ICDoc {
                 }
             }
         });
+        VCurrentDeck.SINGLETON_INSTANCE.getTxfDescription().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(final KeyEvent e) {
+                if (!Character.isISOControl(e.getKeyChar())) {
+                    CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().notifyModelChanged();
+                }
+            }
+        });
     }
 
     /**

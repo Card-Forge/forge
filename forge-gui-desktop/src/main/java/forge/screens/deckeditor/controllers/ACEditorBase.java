@@ -395,6 +395,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
         VCurrentDeck.SINGLETON_INSTANCE.getBtnImport().setVisible(true);
 
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setEnabled(true);
+        VCurrentDeck.SINGLETON_INSTANCE.getTxfDescription().setEnabled(true);
 
         VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(true);
 
@@ -407,6 +408,9 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
 
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setVisible(true);
         VCurrentDeck.SINGLETON_INSTANCE.getLblTitle().setText(localizer.getMessage("lblTitle") + ":");
+        VCurrentDeck.SINGLETON_INSTANCE.getTxfDescription().setVisible(true);
+        VCurrentDeck.SINGLETON_INSTANCE.getLblDescription().setVisible(true);
+        VCurrentDeck.SINGLETON_INSTANCE.getLblDescription().setText(localizer.getMessage("lblDescription") + ":");
     }
 
     public FLabel getBtnAdd()     { return btnAdd; }

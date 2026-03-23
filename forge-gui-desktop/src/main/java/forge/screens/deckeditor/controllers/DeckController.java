@@ -414,6 +414,7 @@ public class DeckController<T extends DeckBase> {
 
         VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText(tabCaption);
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setText(title);
+        VCurrentDeck.SINGLETON_INSTANCE.getTxfDescription().setText(model != null && model.getComment() != null ? model.getComment() : "");
         VCurrentDeck.SINGLETON_INSTANCE.getItemManager().setCaption(itemManagerCaption);
         DeckFileMenu.updateSaveEnabled();
     }
