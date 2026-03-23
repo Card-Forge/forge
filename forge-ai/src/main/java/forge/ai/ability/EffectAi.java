@@ -32,8 +32,8 @@ import forge.util.collect.FCollectionView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.Map;
+import java.util.Set;
 
 public class EffectAi extends SpellAbilityAi {
     @Override
@@ -308,6 +308,47 @@ public class EffectAi extends SpellAbilityAi {
                 if (!options.isEmpty() && phase.isPlayerTurn(ai) && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                     sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(options));
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                }
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            } else if (logic.equals("MakeUnblockable")) {
+                if (ai.getOpponents().getCreaturesInPlay().isEmpty()) {
+                    return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
+                }
+                sa.resetTargets();
+                CardCollection options = new CardCollection(CardUtil.getValidCardsToTarget(sa));
+                options = CardLists.filterControlledBy(options, ai);
+                options = CardLists.filter(options, CombatUtil::canAttack);
+                if (sa.getPayCosts().hasTapCost()) {
+                    options.remove(sa.getHostCard());
+                }
+                if (options.isEmpty()) {
+                    return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
+                }
+                if (phase.is(PhaseType.MAIN1, ai)) {
+                    int predictedLife = ai.getLife();
+                    if (ai.canLoseLife() && !ai.cantLoseForZeroOrLessLife()) {
+                        predictedLife = ComputerUtil.predictNextCombatsRemainingLife(ai, false, false, 0, options);
+                    }
+                    ComputerUtilCard.sortByEvaluateCreature(options);
+                    for (Card card : options) {
+                        if (!CombatUtil.canBeBlocked(card, ai.getOpponents().getCreaturesInPlay(), phase.getCombat())) {
+                            continue;
+                        }
+                        if (card.getNetPower() >= ai.getWeakestOpponent().getLife() && ai.getWeakestOpponent().canLoseLife() && !ai.getWeakestOpponent().cantLoseForZeroOrLessLife()) {
+                            // try to finish off the opponent with an unblockable creature
+                            sa.getTargets().add(card);
+                            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                        }
+                        final Card copy = CardCopyService.getLKICopy(card);
+                        String cantBeBlocked = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self";
+                        copy.addStaticAbility(cantBeBlocked);
+                        copy.setSickness(false); // for some reason is copied as if having summoning sickness
+                        // TODO: also check the case where the AI would attack with the creature but it will be traded, to avoid trading unfavorably?
+                        if (predictedLife > 0 && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, copy) && !ComputerUtilCard.doesCreatureAttackAI(ai, card)) {
+                            sa.getTargets().add(card);
+                            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                        }
+                    }
                 }
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             } else if (logic.equals("Burn")) {

@@ -333,7 +333,16 @@ public class CardUtil {
         if (card == null)
             return 0;
 
-        return switch (card.getRarity()) {
+        CardRarity effectiveRarity = card.getRarity();
+
+        if (card.getRarity() == CardRarity.BasicLand
+                && !card.isVeryBasicLand()
+                && !MagicColor.Constant.SNOW_LANDS.contains(card.getName())
+                && !card.getName().equals("Wastes")) {
+            effectiveRarity = CardRarity.Common; // adjust for lands which are L rarity but are not basic lands
+        }
+
+        return switch (effectiveRarity) {
             case BasicLand -> 5;
             case Common -> 50;
             case Uncommon -> 150;
