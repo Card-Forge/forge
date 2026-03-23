@@ -559,7 +559,7 @@
     { "type": "item","count":1, "itemName": "Mask of Hypochondria"  },
     { "type": "item","count":1, "itemName": "Ring of Thune"  },
     { "type": "item","count":1, "itemName": "Skyclave Maul"  },
-    { "type": "item","count":1, "itemName": "Plains Outfit"  },
+    { "type": "item","count":1, "itemName": "Meadow Outfit"  },
 	{ "type": "item","count":1, "itemName": "Token of Bounty"  }
     
     ]
@@ -593,7 +593,7 @@
     { "type": "item","count":1, "itemName": "Mask of Pyromania"  },
     { "type": "item","count":1, "itemName": "Ring of Valkas"  },
     { "type": "item","count":1, "itemName": "Dire Flail"  },
-    { "type": "item","count":1, "itemName": "Mountain Cloak"  },
+    { "type": "item","count":1, "itemName": "Smoldering Cloak"  },
 	{ "type": "item","count":1, "itemName": "Token of Violence"  }
     
     ]
@@ -625,7 +625,7 @@
     { "type": "item","count":1, "itemName": "Mask of Compulsion"  },
     { "type": "item","count":1, "itemName": "Ring of Evos Isle"  },
     { "type": "item","count":1, "itemName": "Giant's Bracer"  },
-    { "type": "item","count":1, "itemName": "Island Shirt"  },
+    { "type": "item","count":1, "itemName": "Isle Shirt"  },
 	{ "type": "item","count":1, "itemName": "Token of Investigation"  }
     
     ]
@@ -657,7 +657,7 @@
     { "type": "item","count":1, "itemName": "Mask of Mortiphobia"  },
     { "type": "item","count":1, "itemName": "Ring of Xathrid"  },
     { "type": "item","count":1, "itemName": "Poet's Quill"  },
-    { "type": "item","count":1, "itemName": "Swamp Leather"  },
+    { "type": "item","count":1, "itemName": "Mire Leather"  },
 	{ "type": "item","count":1, "itemName": "Token of Blood"  }
     
     ]
@@ -689,7 +689,7 @@
     { "type": "item","count":1, "itemName": "Mask of Narcissism"  },
     { "type": "item","count":1, "itemName": "Ring of Kalonia"  },
     { "type": "item","count":1, "itemName": "Spiked Ripsaw"  },
-    { "type": "item","count":1, "itemName": "Forest Shawl"  },
+    { "type": "item","count":1, "itemName": "Karst Shawl"  },
 	{ "type": "item","count":1, "itemName": "Token of Exploration"  }
     
     ]

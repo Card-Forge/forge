@@ -79,7 +79,7 @@
   </object>
   <object id="72" template="../../../../common/maps/obj/enemy.tx" x="110.333" y="387">
    <properties>
-    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Wondrous Crucible&quot;, &quot;Path of Discovery&quot;, &quot;Exploration&quot;
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Path of Discovery&quot;, &quot;Exploration&quot;
 ]}</property>
     <property name="enemy" value="Golos"/>
     <property name="threatRange" type="int" value="0"/>
@@ -87,7 +87,7 @@
   </object>
   <object id="104" template="../../../../common/maps/obj/enemy.tx" x="364.5" y="533">
    <properties>
-    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Scion of Draco&quot;, &quot;Opal Palace|C13&quot;, &quot;Maelstrom of the Spirit Dragon|TDM&quot;, &quot;Dragon Tempest|DTK&quot;
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Scion of Draco&quot;, &quot;Opal Palace|C13&quot;, &quot;Maelstrom of the Spirit Dragon|TDM&quot;
 ]}</property>
     <property name="enemy" value="The Ur-Dragon"/>
     <property name="speedModifier" type="float" value="0"/>

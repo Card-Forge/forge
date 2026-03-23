@@ -149,7 +149,7 @@ public class GameLogPanel extends JPanel {
         }
 
         if (card != null) {
-            ((JComponent) tar).putClientProperty(CARD_VIEW_KEY, card);
+            tar.putClientProperty(CARD_VIEW_KEY, card);
         }
 
         // If the minimum is not specified then the JTextArea will

@@ -52,7 +52,7 @@
 
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Scion of Draco&quot;, &quot;Opal Palace|C13&quot;, &quot;Maelstrom of the Spirit Dragon|TDM&quot;, &quot;Dragon Tempest|DTK&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Scion of Draco&quot;, &quot;Opal Palace|C13&quot;, &quot;Maelstrom of the Spirit Dragon|TDM&quot;]}"/>
     <property name="enemy" value="The Ur-Dragon"/>
     <property name="speedModifier" type="float" value="60"/>
     <property name="threatRange" type="int" value="80"/>
