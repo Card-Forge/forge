@@ -4,7 +4,7 @@ import forge.control.FControl;
 import forge.control.FControl.CloseAction;
 import forge.control.KeyboardShortcuts;
 import forge.control.KeyboardShortcuts.Shortcut;
-import forge.game.GameLogEntryType;
+import forge.game.GameLogVerbosity;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -59,6 +59,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final FLabel btnContentDirectoryUI = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnContentDirectoryUI")).build();
     private final FLabel btnClearImageCache = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnClearImageCache")).build();
     private final FLabel btnTokenPreviewer = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnTokenPreviewer")).build();
+    private final FLabel btnCustomLogSettings = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("lblCustomLogSettings")).build();
 
     private final FLabel btnPlayerName = new FLabel.Builder().opaque(true).hoverable(true).text("").build();
     private final FLabel btnServerPort = new FLabel.Builder().opaque(true).hoverable(true).text("").build();
@@ -135,7 +136,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private Timer searchTimer;
 
     // ComboBox items are added in CSubmenuPreferences since this is just the View.
-    private final FComboBoxPanel<GameLogEntryType> cbpGameLogEntryType = new FComboBoxPanel<>(localizer.getMessage("cbpGameLogEntryType")+":");
+    private final FComboBoxPanel<GameLogVerbosity> cbpGameLogEntryType = new FComboBoxPanel<>(localizer.getMessage("cbpGameLogEntryType")+":");
     private final FComboBoxPanel<CloseAction> cbpCloseAction = new FComboBoxPanel<>(localizer.getMessage("cbpCloseAction")+":");
     private final FComboBoxPanel<String> cbpDefaultFontSize = new FComboBoxPanel<>(localizer.getMessage("cbpDefaultFontSize")+":");
     private final FComboBoxPanel<String> cbpCardArtFormat = new FComboBoxPanel<>(localizer.getMessage("cbpCardArtFormat")+":");
@@ -170,7 +171,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         final String sectionConstraints = "w 80%!, h 42px!, gap 25px 0 80px 20px, span 2 1";
         final String titleConstraints = "w 80%!, h 22px!, gap 25px 0 0 0px, span 2 1";
         final String comboBoxConstraints = "w 80%!, h 25px!, gap 25px 0 0 0px, span 2 1";
-        final String descriptionConstraints = "w 80%!, h 22px!, gap 28px 0 0 20px, span 2 1";
+        final String descriptionConstraints = "w 80%!, h pref!, gap 28px 0 0 20px, span 2 1";
 
         pnlPrefs.add(new SectionLabel(localizer.getMessage("Troubleshooting")), sectionConstraints);
 
@@ -333,7 +334,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlPrefArtExpansionOnly")), descriptionConstraints);
 
         pnlPrefs.add(cbSmartCardArtSelectionOpt, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSmartCardArtOpt")), "w 80%!, h 22px!, gap 28px 0 0 0, span 2 1");
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSmartCardArtOpt")), "w 80%!, h pref!, gap 28px 0 0 0, span 2 1");
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSmartCardArtOptNote")), descriptionConstraints);
 
         //Draft Ranking Overlay
@@ -351,6 +352,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbpGameLogEntryType, comboBoxConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlGameLogEntryType")), descriptionConstraints);
+        pnlPrefs.add(btnCustomLogSettings, "w 25%!, h 30px!, gap 25px 0 0 20px, span 2 1, al left");
 
         pnlPrefs.add(cbpCloseAction, comboBoxConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlCloseAction")), descriptionConstraints);
@@ -561,7 +563,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     @SuppressWarnings("serial")
     private final class NoteLabel extends SkinnedLabel {
         private NoteLabel(final String txt0) {
-            super(txt0);
+            super("<html>" + txt0 + "</html>");
             this.setFont(FSkin.getItalicFont());
             this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         }
@@ -573,7 +575,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
      * into characters and (dis)assembly of keycode stack.
      */
     @SuppressWarnings("serial")
-    public class KeyboardShortcutField extends SkinnedTextField {
+    public static class KeyboardShortcutField extends SkinnedTextField {
         private String codeString;
 
         /**
@@ -608,6 +610,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
                     FModel.getPreferences().setPref(prefKey, getCodeString());
                     FModel.getPreferences().save();
                     shortcut0.attach();
+                    FControl.instance.getForgeMenu().refresh();
                     KeyboardShortcutField.this.setBackground(Color.white);
                 }
             });
@@ -648,7 +651,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
                 }
             }
 
-            this.setText(StringUtils.join(displayText, ' '));
+            this.setText(StringUtils.join(displayText, '+'));
         }
     }
 
@@ -846,7 +849,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         return cbpLandPlayed;
     }
 
-    public FComboBoxPanel<GameLogEntryType> getGameLogVerbosityComboBoxPanel() {
+    public FComboBoxPanel<GameLogVerbosity> getGameLogVerbosityComboBoxPanel() {
         return cbpGameLogEntryType;
     }
 
@@ -1052,6 +1055,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     public final FLabel getBtnClearImageCache() { return btnClearImageCache; }
     public final FLabel getBtnTokenPreviewer() { return btnTokenPreviewer; }
+    public FLabel getBtnCustomLogSettings() { return btnCustomLogSettings; }
 
     /* (non-Javadoc)
 		 * @see forge.gui.framework.IVDoc#getDocumentID()

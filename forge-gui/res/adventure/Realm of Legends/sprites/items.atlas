@@ -78,6 +78,9 @@ GreenCartouche
 VictoryStandard
   xy: 96, 592
   size: 16, 16
+KillTrophy
+   xy: 112, 816
+   size: 16, 16
 GenerousArmor
   xy: 224, 112
   size: 16, 16
@@ -92,6 +95,24 @@ GenerousRing
   size: 16, 16
 GenerousIngot
   xy: 224, 944
+  size: 16, 16
+SpikedRipsaw
+  xy: 304, 736
+  size: 16, 16
+SkyclaveMaul
+  xy: 224, 432
+  size: 16, 16
+Giant'sBracer
+  xy: 16, 272
+  size: 16, 16
+PoetsQuill
+  xy: 192, 768
+  size: 16, 16
+DireFlail
+  xy: 160, 368
+  size: 16, 16
+ChitinousClub
+  xy: 304, 400
   size: 16, 16
 PureSoul
   xy: 176, 800

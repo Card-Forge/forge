@@ -26,12 +26,18 @@
 		"Shell"
 	],
 	"enemies": [
-		"Shorikai",
+		"Arna",
+		"Captain Howler",
+		"Codie",
 		"Eloise",
-		"Morska",
+		"Goro-Goro and Satoru",
 		"Loot",
+		"Morska",
 		"Sevinne",
-		"Nemesis"
+		"Shorikai",
+		"Yarok",
+		"Nemesis",
+		"Grand Nemesis"
 	],
 	"pointsOfInterest": [
 		"Blue Castle",
@@ -40,6 +46,7 @@
 		"Island Town Identity",
 		"Island Town",
         "Island Town Tribal",
+		"Ancient Sapphire Pool",
 		"Azorius Senate Hall",
 		"Blue Tower of Worship",
 		"Cave of Wonders",
@@ -47,11 +54,16 @@
 		"High and Dry Docks",
 		"Izzet Lab",
 		"Jeskai War Camp",
+		"Kiora Island",
 		"Lab of Jin-Gitaxias",
+		"Quandrix Classroom",
+		"Raffine's Tower",
 		"Serpent Seaside",
+		"Sphinx of Riddles Blue",
 		"Teferi's Hideout",
 		"Urza's Tower",
-		"Sphinx of Riddles Blue"
+		"Wilds of Eldraine",
+		"Wizard Palace"
 	],
 	"structures": [
 		{

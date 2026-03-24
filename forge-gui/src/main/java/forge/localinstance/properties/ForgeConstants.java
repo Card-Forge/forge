@@ -36,7 +36,6 @@ public final class ForgeConstants {
     public static final String ASSETS_DIR                       = GuiBase.getInterface().getAssetsDir();
     public static final String PROFILE_FILE                     = ASSETS_DIR + "forge.profile.properties";
     public static final String PROFILE_TEMPLATE_FILE            = PROFILE_FILE + ".example";
-    public static final Integer DEFAULT_SERVER_CONNECTION_PORT  = 36743;
 
     public static final String RES_DIR                      = ASSETS_DIR + "res" + PATH_SEPARATOR;
     public static final String ADVENTURE_DIR                = RES_DIR + "adventure" + PATH_SEPARATOR;

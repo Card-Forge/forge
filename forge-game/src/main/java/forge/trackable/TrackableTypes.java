@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.tinylog.Logger;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -107,22 +108,19 @@ public class TrackableTypes {
                         if (newObj != null) {
                             T existingObj = from.getTracker().getObj(itemType, newObj.getId());
                             if (existingObj != null) {  //fix cards with alternate state/ manifest/ morph/ adventure etc...
-                                if (prop.getType() == TrackableTypes.CardViewCollectionType ||
-                                        prop.getType() == TrackableTypes.StackItemViewListType) {
-                                    newCollection.remove(i);
-                                    newCollection.add(i, newObj);
-                                } else { //if object exists already, update its changed properties
+                                if (prop.getType() != TrackableTypes.CardViewCollectionType &&
+                                        prop.getType() != TrackableTypes.StackItemViewListType) {
+                                    //if object exists already, update its changed properties
                                     existingObj.copyChangedProps(newObj);
-                                    newCollection.remove(i);
-                                    newCollection.add(i, existingObj);
+                                    newCollection.replace(i, existingObj);
                                 }
-                            }
-                            else { //if object is new, cache in object lookup
+                            } else {
+                                //if object is new, cache in object lookup
                                 from.getTracker().putObj(itemType, newObj.getId(), newObj);
                             }
                         }
                     } catch (IndexOutOfBoundsException e) {
-                        System.err.println("got an IndexOutOfBoundsException, trying to continue ...");
+                        Logger.warn("IndexOutOfBoundsException in TrackableTypes, trying to continue");
                     }
                 }
             }

@@ -1356,6 +1356,66 @@
 			"Story"]
 	},
 	{
+		"name": "Ancient Ruby Lavafield",
+		"displayName": "Ancient Ruby Lavafield",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building107",
+		"map": "../Realm of Legends/maps/map/barbariancamp/Ancient_Ruby_Lavafield.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Ancient Jet Hill",
+		"displayName": "Ancient Jet Hill",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building109",
+		"map": "../Realm of Legends/maps/map/evilgrove/Ancient_Jet_Hill.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Ancient Pearl Mesa",
+		"displayName": "Ancient Pearl Mesa",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building108",
+		"map": "../Realm of Legends/maps/map/fort/Ancient_Pearl_Mesa.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Ancient Emerald Clearing",
+		"displayName": "Ancient Emerald Clearing",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building105",
+		"map": "../Realm of Legends/maps/map/grove/Ancient_Emerald_Clearing.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Ancient Sapphire Pool",
+		"displayName": "Ancient Sapphire Pool",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building106",
+		"map": "../Realm of Legends/maps/map/merfolkpool/Ancient_Sapphire_Pool.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
 		"name": "Black Castle",
 		"displayName": "Fallen Black Castle",
 		"type": "castle",

@@ -4,7 +4,7 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Underworld Dreams|THB|[121]&quot;, &quot;Underworld Sentinel&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Underworld Dreams|THB|[121]&quot;, &quot;Shadowspear&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -65,7 +65,7 @@
     <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
-  <object id="82" template="../../../../common/maps/obj/dialog.tx" x="150.151" y="849.571" width="133.697" height="20.858" visible="1">
+  <object id="82" template="../../../../common/maps/obj/dialog.tx" x="181.484" y="875.571" width="73.697" height="15.5247" visible="1">
    <properties>
     <property name="dialog">[
 {
@@ -78,7 +78,7 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
 ]</property>
    </properties>
   </object>
-  <object id="85" template="../../../../common/maps/obj/dialog.tx" x="195.632" y="509.406" width="129.539" height="23.9917" rotation="266.378" visible="1">
+  <object id="85" template="../../../../common/maps/obj/dialog.tx" x="241.632" y="456.073" width="88.2057" height="16.6584" rotation="0" visible="1">
    <properties>
     <property name="dialog">[
 {

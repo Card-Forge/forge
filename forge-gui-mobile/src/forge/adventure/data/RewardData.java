@@ -257,7 +257,7 @@ public class RewardData implements Serializable {
                 case "item":
                     if(itemNames!=null) {
                         for (int i = 0; i < count + addedCount; i++) {
-                            String itemName = itemNames[WorldSave.getCurrentSave().getWorld().getRandom().nextInt(itemNames.length)];
+                            String itemName = itemNames[rewardRandom.nextInt(itemNames.length)];
                             ItemData itemData = ItemListData.getItem(itemName);
                             if (itemData != null)
                                 ret.add(new Reward(itemData));
@@ -285,19 +285,23 @@ public class RewardData implements Serializable {
                             .forEach(allEditions::add);
                         ConfigData configData = Config.instance().getConfigData();
 
-                        for (String restricted : configData.restrictedEditions) {
-                            allEditions.removeIf(q -> q.getCode().equals(restricted));
+                        if (this.editions != null && this.editions.length > 0) {
+                            Set<String> allowed = new HashSet<>(Arrays.asList(this.editions));
+                            allEditions.removeIf(q -> !allowed.contains(q.getCode()));
+                        } else {
+                            for (String restricted : configData.restrictedEditions) {
+                                allEditions.removeIf(q -> q.getCode().equals(restricted));
+                            }
+                            for (String restrictedCard : configData.restrictedCards) {
+                                allEditions.removeIf(cardEdition -> cardEdition.getObtainableCards().stream().anyMatch(
+                                    o -> o.name().equals(restrictedCard)));
+                            }
+                            endDate = endDate == 0 ? 9999 : endDate;
+                            allEditions.removeIf(q -> q.getDate().getYear()+1900 < startDate || q.getDate().getYear()+1900 > endDate);
                         }
-                        for (String restrictedCard : configData.restrictedCards) {
-                            allEditions.removeIf(cardEdition -> cardEdition.getObtainableCards().stream().anyMatch(
-                                o -> o.name().equals(restrictedCard)));
-                        }
-
-                        endDate = endDate == 0 ? 9999 : endDate;
-                        allEditions.removeIf(q -> q.getDate().getYear()+1900 < startDate || q.getDate().getYear()+1900 > endDate);
                         for (int i = 0; i < count + addedCount; i++) {
                             ret.add(new Reward(AdventureEventController.instance().generateBooster(
-                                allEditions.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(allEditions.size())).getCode())));
+                                allEditions.get(rewardRandom.nextInt(allEditions.size())).getCode())));
                         }
                     } else {
                         for (int i = 0; i < count + addedCount; i++) {
@@ -309,7 +313,7 @@ public class RewardData implements Serializable {
                 case "landSketchbookShop":
                     Array<ItemData> sketchbookItems = ItemListData.getSketchBooks();
                     for (int i = 0; i < count + addedCount; i++) {
-                        ItemData item = sketchbookItems.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(sketchbookItems.size));
+                        ItemData item = sketchbookItems.get(rewardRandom.nextInt(sketchbookItems.size));
                         if (item != null)
                             ret.add(new Reward(item));
                     }

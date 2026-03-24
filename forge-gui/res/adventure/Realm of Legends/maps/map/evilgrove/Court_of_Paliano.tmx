@@ -4,7 +4,7 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Throne of the High City &quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Marchesa's Decree&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -50,7 +50,7 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Marchesa's Decree|CN2&quot;, &quot;Marchesa's Emissary|CNS&quot;, Deadly Designs|CN2&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Throne of the High City&quot;, &quot;Marchesa's Emissary|CNS&quot;, Deadly Designs|CN2&quot;]}"/>
     <property name="enemy" value="Grenzo"/>
     <property name="reward">[
   {
@@ -281,10 +281,10 @@
 			[
 				{
 					&quot;name&quot;: &quot;The job is done.&quot;,
-					&quot;text&quot;: &quot;'Death to tyrants.''&quot;,
+					&quot;text&quot;: &quot;'Death to tyrants.'&quot;,
 					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
                     {&quot;grantRewards&quot;: [
-                       {&quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Adriana, Captain of the Guard&quot;, &quot;count&quot;: 1}     
+                       {&quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Adriana, Captain of the Guard&quot;, &quot;count&quot;: 1},     
                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 2500}                
                       ]
                     } ],

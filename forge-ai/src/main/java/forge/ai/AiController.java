@@ -17,7 +17,6 @@
  */
 package forge.ai;
 
-import com.esotericsoftware.minlog.Log;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -64,6 +63,7 @@ import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.*;
+
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 
@@ -72,7 +72,6 @@ import java.util.concurrent.FutureTask;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -94,7 +93,6 @@ public class AiController {
     private final AiCardMemory memory;
     private Combat predictedCombat;
     private Combat predictedCombatNextTurn;
-    private boolean cheatShuffle;
     private boolean useSimulation;
     private SpellAbilityPicker simPicker;
     private int lastAttackAggression;
@@ -107,14 +105,6 @@ public class AiController {
         game = game0;
         memory = new AiCardMemory();
         simPicker = new SpellAbilityPicker(game, player);
-    }
-
-    public boolean canCheatShuffle() {
-        return cheatShuffle;
-    }
-
-    public void allowCheatShuffle(boolean canCheatShuffle) {
-        this.cheatShuffle = canCheatShuffle;
     }
 
     public boolean usesSimulation() {
@@ -150,6 +140,7 @@ public class AiController {
             AiAttackController aiAtk = new AiAttackController(player);
             predictedCombat = new Combat(player);
             aiAtk.declareAttackers(predictedCombat);
+            // ignoring attack costs for performance
         }
         return predictedCombat;
     }
@@ -1320,8 +1311,11 @@ public class AiController {
         AiAttackController aiAtk = new AiAttackController(attacker);
         lastAttackAggression = aiAtk.declareAttackers(combat);
 
-        // Check if we can reinforce with Banding creatures
         aiAtk.reinforceWithBanding(combat);
+
+        // Per CR 508.1d, the decision to pay attack costs (e.g. Propaganda)
+        // is made at declaration time. Remove attackers the AI can't pay for.
+        removeUnpayableAttackers(combat);
 
         // if invalid: just try an attack declaration that we know to be legal
         if (!CombatUtil.validateAttackers(combat)) {
@@ -1335,10 +1329,21 @@ public class AiController {
                 aiAtk.declareAttackers(combat);
             }
         }
+    }
 
-        for (final Card element : combat.getAttackers()) {
-            // tapping of attackers happens after Propaganda is paid for
-            Log.debug("Computer just assigned " + element.getName() + " as an attacker.");
+    private void removeUnpayableAttackers(Combat combat) {
+        for (Card attacker : combat.getAttackers().threadSafeIterable()) {
+            Cost attackCost = CombatUtil.getAttackCost(game, attacker, combat.getDefenderByAttacker(attacker));
+            if (attackCost == null) {
+                continue;
+            }
+            SpellAbility fakeSA = new SpellAbility.EmptySa(attacker, attacker.getController());
+            fakeSA.setCardState(attacker.getCurrentState());
+            fakeSA.setPayCosts(attackCost);
+            fakeSA.setSVar("X", "0");
+            if (!ComputerUtilCost.canPayCost(attackCost, fakeSA, player, true)) {
+                combat.removeFromCombat(attacker);
+            }
         }
     }
 
@@ -1378,7 +1383,6 @@ public class AiController {
         CardCollection landsWannaPlay = ComputerUtilAbility.getAvailableLandsToPlay(game, player);
         if (landsWannaPlay != null) {
             landsWannaPlay = filterLandsToPlay(landsWannaPlay);
-            Log.debug("Computer " + game.getPhaseHandler().getPhase().nameForUi);
             if (landsWannaPlay != null && !landsWannaPlay.isEmpty()) {
                 // TODO search for other land it might want to play?
                 Card land = chooseBestLandToPlay(landsWannaPlay);
@@ -2098,7 +2102,7 @@ public class AiController {
      * @return an array of {@link forge.game.card.Card} objects.
      */
     public CardCollectionView cheatShuffle(CardCollectionView in) {
-        if (in.size() < 20 || !canCheatShuffle()) {
+        if (in.size() < 20 || !getBoolProperty(AiProps.CHEAT_WITH_MANA_ON_SHUFFLE) || !getGame().getRules().isAllowCheatShuffle()) {
             return in;
         }
 

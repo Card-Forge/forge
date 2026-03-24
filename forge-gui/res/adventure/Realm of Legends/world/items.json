@@ -659,7 +659,13 @@
     "description": "The victory is yours now. Return to the mountain capitol for a reward.",
     "iconName": "VictoryStandard",
     "questItem": true
-  }, 
+  },
+  {
+    "name": "Kill Trophy",
+    "description": "Shows triumph over a monster. Give to Chevill for a reward.",
+    "iconName": "KillTrophy",
+    "questItem": true
+  },
   {
     "name": "Colorless rune",
     "usableOnWorldMap": true,
@@ -1116,13 +1122,13 @@
     }
   },
     {
-    "name": "Mistform Sliverband",
-    "description": "1/1 sliver; slivers can pay 1 to change types until EOT",
+    "name": "Imposter's Sliverband",
+    "description": "A 3/3 artifact sliver with no abilities",
     "equipmentSlot": "Boots",
     "iconName": "MistformSliverband",
     "effect": {
         "startBattleWithCard": [
-        "Mistform Sliver|LGN"
+        "Venser's Sliver|TSP"
      ]
     }
   },
@@ -2097,6 +2103,7 @@
     "iconName": "LotusPetal",
     "cost": 5000,
     "effect": {
+        "lifeModifier": -2,
         "startBattleWithCard": [
         "Lotus Petal|TMP"
      ]
@@ -2108,6 +2115,7 @@
     "equipmentSlot": "Left",
     "iconName": "BlackLotus",
     "effect": {
+        "lifeModifier": -3,
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Black Lotus|LEA"
@@ -2179,7 +2187,7 @@
     "equipmentSlot": "Left",
     "iconName": "Kaleidostone",
     "effect": {
-        "lifeModifier": 2,
+        "lifeModifier": 5,
         "startBattleWithCard": [
         "Kaleidostone|CON"
      ]
@@ -2934,6 +2942,7 @@
     "equipmentSlot": "Right",
     "iconName": "SilverskinGauntlet",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Silverskin Armor|MBS"
      ]
@@ -2945,6 +2954,7 @@
     "equipmentSlot": "Right",
     "iconName": "BladedBracer",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Bladed Bracers|AVR"
      ]
@@ -2957,6 +2967,7 @@
     "iconName": "EchoShield",
     "cost": 500,
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Echo Circlet|SOM"
      ]
@@ -2979,6 +2990,7 @@
     "equipmentSlot": "Right",
     "iconName": "CelestialSword",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Celestial Sword|ICE"
      ]
@@ -2990,6 +3002,7 @@
     "equipmentSlot": "Right",
     "iconName": "AegisoftheMeek",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Aegis of the Meek|ICE"
      ]
@@ -3001,6 +3014,7 @@
     "equipmentSlot": "Right",
     "iconName": "RunedStalactite",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Runed Stalactite|LRW"
      ]
@@ -3034,6 +3048,7 @@
     "equipmentSlot": "Right",
     "iconName": "SpyKit",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Spy Kit|CN2"
      ]
@@ -3045,6 +3060,7 @@
     "equipmentSlot": "Right",
     "iconName": "ShieldoftheRighteous",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Shield of the Righteous|ARB"
      ]
@@ -3056,21 +3072,9 @@
     "equipmentSlot": "Right",
     "iconName": "ShortSword",
     "effect": {
-        "lifeModifier": 1,
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Short Sword|DOM"
-     ]
-    }
-  },
-    {
-    "name": "Darksteel Axe",
-    "description": "Equip 2, +2/+0, is indestructible",
-    "equipmentSlot": "Right",
-    "iconName": "DarksteelAxe",
-    "cost": 1000,
-    "effect": {
-        "startBattleWithCard": [
-        "Darksteel Axe|SOM"
      ]
     }
   },
@@ -3080,6 +3084,7 @@
     "equipmentSlot": "Right",
     "iconName": "SteelclawLance",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Steelclaw Lance|ELD"
      ]
@@ -3091,6 +3096,7 @@
     "equipmentSlot": "Right",
     "iconName": "StarforgedSword",
     "effect": {
+      "lifeModifier": 3,
         "startBattleWithCard": [
         "Starforged Sword|BLB"
      ]
@@ -3113,6 +3119,7 @@
     "equipmentSlot": "Right",
     "iconName": "TrustyMachete",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Trusty Machete|ZEN"
      ]
@@ -3124,6 +3131,7 @@
     "equipmentSlot": "Right",
     "iconName": "CeremonialKnife",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Ceremonial Knife|VOW"
      ]
@@ -3170,6 +3178,7 @@
     "equipmentSlot": "Right",
     "iconName": "AngelicArmaments",
     "effect": {
+        "lifeModifier": 4,
         "startBattleWithCard": [
         "Angelic Armaments|AVR"
      ]
@@ -3182,6 +3191,7 @@
     "iconName": "Brawler'sCestus",
     "cost": 1000,
     "effect": {
+        "lifeModifier": 4,
         "startBattleWithCard": [
         "Brawler's Plate|ORI"
      ]
@@ -3205,6 +3215,7 @@
     "iconName": "JoustingLance",
     "cost": 1000,
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Jousting Lance|DOM"
      ]
@@ -3216,6 +3227,7 @@
     "equipmentSlot": "Right",
     "iconName": "Fblthp'sLostFishingPole",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Fishing Pole|FDN"
      ]
@@ -3240,7 +3252,7 @@
     "iconName": "RingofXathrid",
     "cost": 5000,
     "effect": {
-        "lifeModifier": -2,
+        "lifeModifier": -5,
         "startBattleWithCard": [
         "Ring of Xathrid|M13"
      ]
@@ -3264,6 +3276,7 @@
     "equipmentSlot": "Right",
     "iconName": "PetrifiedHead",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Gorgon's Head|BNG"
      ]
@@ -3275,6 +3288,7 @@
     "equipmentSlot": "Right",
     "iconName": "BespokeGauntlet",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Bespoke Battlegarb|WOE"
      ]
@@ -3286,6 +3300,7 @@
     "equipmentSlot": "Right",
     "iconName": "RingofDragonBlood",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Dragon Blood|USG"
      ]
@@ -3298,7 +3313,7 @@
     "iconName": "RingofThune",
     "cost": 5000,
     "effect": {
-        "lifeModifier": -2,
+        "lifeModifier": -5,
         "startBattleWithCard": [
         "Ring of Thune|M13"
      ]
@@ -3311,7 +3326,7 @@
     "iconName": "RingofValkas",
     "cost": 5000,
     "effect": {
-        "lifeModifier": -2,
+        "lifeModifier": -5,
         "startBattleWithCard": [
         "Ring of Valkas|M13"
      ]
@@ -3334,6 +3349,7 @@
     "equipmentSlot": "Right",
     "iconName": "Witches'Eye",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Witches' Eye|THS"
      ]
@@ -3345,6 +3361,7 @@
     "equipmentSlot": "Right",
     "iconName": "DraconianCylix",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Draconian Cylix|FEM"
      ]
@@ -3368,7 +3385,7 @@
     "iconName": "RingofKalonia",
     "cost": 5000,
     "effect": {
-        "lifeModifier": -2,
+        "lifeModifier": -5,
         "startBattleWithCard": [
         "Ring of Kalonia|M13"
      ]
@@ -3381,7 +3398,7 @@
     "iconName": "RingofEvosIsle",
     "cost": 5000,
     "effect": {
-        "lifeModifier": -2,
+        "lifeModifier": -5,
         "startBattleWithCard": [
         "Ring of Evos Isle|M13"
      ]
@@ -3393,6 +3410,7 @@
     "equipmentSlot": "Right",
     "iconName": "SirenSongLyre",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Siren Song Lyre|BNG"
      ]
@@ -3405,6 +3423,7 @@
     "iconName": "SpidersilkGlove",
     "cost": 500,
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Spidersilk Net|DTK"
      ]
@@ -3776,7 +3795,7 @@
     "equipmentSlot": "Body",
     "iconName": "ArmorofUrami",
     "effect": {
-        "lifeModifier": -5,
+        "lifeModifier": -6,
         "startBattleWithCard": [
         "Tomb of Urami|SOK"
      ]
@@ -3806,205 +3825,72 @@
     }
   },
   {
-    "name": "Outpost Outfit",
-    "description": "Taps for W or sac for any color. -1 hand size.",
+    "name": "Plains Outfit",
+    "description": "Gives a plains. -2 life, -1 hand size.",
     "equipmentSlot": "Body",
     "iconName": "OutpostOutfit",
     "cost": 7500,
     "effect": {
+      "lifeModifier": -2,
       "changeStartCards": -1,
       "startBattleWithCard": [
-        "Abandoned Outpost"
+        "Plains|LEA"
       ]
     }
   },
   {
-    "name": "Seafloor Shirt",
-    "description": "Taps for U or sac for any color. -1 hand size.",
+    "name": "Island Shirt",
+    "description": "Gives an island. -2 life, -1 hand size.",
     "equipmentSlot": "Body",
     "iconName": "SeafloorShirt",
     "cost": 7500,
     "effect": {
+      "lifeModifier": -2,
       "changeStartCards": -1,
       "startBattleWithCard": [
-        "Seafloor Debris"
+        "Island|LEA"
       ]
     }
   },
   {
-    "name": "Bog Dweller Leather",
-    "description": "Taps for B or sac for any color. -1 hand size.",
+    "name": "Swamp Leather",
+    "description": "Gives a swamp. -2 life, -1 hand size.",
     "equipmentSlot": "Body",
     "iconName": "BogDwellerLeather",
     "cost": 7500,
     "effect": {
+      "lifeModifier": -2,
       "changeStartCards": -1,
       "startBattleWithCard": [
-        "Bog Wreckage"
+        "Swamp|LEA"
       ]
     }
   },
   {
-    "name": "Highland Cloak",
-    "description": "Taps for R or sac for any color. -1 hand size.",
+    "name": "Mountain Cloak",
+    "description": "Gives a mountain. -2 life, -1 hand size.",
     "equipmentSlot": "Body",
     "iconName": "HighlandCloak",
     "cost": 7500,
     "effect": {
+      "lifeModifier": -2,
       "changeStartCards": -1,
       "startBattleWithCard": [
-        "Ravaged Highlands"
+        "Mountain|LEA"
       ]
     }
   },
   {
-    "name": "Timberland Shawl",
-    "description": "Taps for G or sac for any color. -1 hand size.",
+    "name": "Forest Shawl",
+    "description": "Gives a forest. -2 life, -1 hand size.",
     "equipmentSlot": "Body",
     "iconName": "TimberlandShawl",
     "cost": 7500,
     "effect": {
+      "lifeModifier": -2,
       "changeStartCards": -1,
       "startBattleWithCard": [
-        "Timberland Ruins"
-      ]
-    }
-  },
-  {
-    "name": "Token of Bounty",
-    "description": "Grants a token in a special slot with 2, T, sac: Gain 3 life.",
-    "equipmentSlot": "Token",
-    "iconName": "TokenofBounty",
-    "cost": 30000,
-    "effect": {
-      "startBattleWithCard": [
-        "c_a_food_sac"
-      ]
-    }
-  },
-  {
-    "name": "Token of Investigation",
-    "description": "Grants a token in a special slot with 2, sac: Draw a card.",
-    "equipmentSlot": "Token",
-    "iconName": "TokenofInvestigation",
-    "cost": 70000,
-    "effect": {
-      "startBattleWithCard": [
-        "c_a_clue_draw"
-      ]
-    }
-  },
-  {
-    "name": "Token of Blood",
-    "description": "Grants a token in a special slot with 1, T, sac: Discard, then draw.",
-    "equipmentSlot": "Token",
-    "iconName": "TokenofBlood",
-    "cost": 50000,
-    "effect": {
-      "startBattleWithCard": [
-        "c_a_blood_draw"
-      ]
-    }
-  },
-  {
-    "name": "Token of Violence",
-    "description": "Grants a token in a special slot with equip 1: 1, T, sac: ping for 2",
-    "equipmentSlot": "Token",
-    "iconName": "TokenofViolence",
-    "cost": 50000,
-    "effect": {
-      "startBattleWithCard": [
-        "rock"
-      ]
-    }
-  },
-  {
-    "name": "Token of Exploration",
-    "description": "Grants a token in a special slot with 1, T, sac: Explore.",
-    "equipmentSlot": "Token",
-    "iconName": "TokenofExploration",
-    "cost": 50000,
-    "effect": {
-      "startBattleWithCard": [
-        "c_a_map_sac_explore"
-      ]
-    }
-  },
-  {
-    "name": "Cloak of the Wastes",
-    "description": "Gives a colorless land, but -1 hand size",
-    "equipmentSlot": "Body",
-    "iconName": "CloakoftheWastes",
-    "cost": 3000,
-    "effect": {
-      "changeStartCards": -1,
-      "startBattleWithCard": [
-        "Wastes|OGW"
-      ]
-    }
-  },
-  {
-    "name": "Outpost Outfit",
-    "description": "Taps for W or sac for any color. -1 hand size.",
-    "equipmentSlot": "Body",
-    "iconName": "OutpostOutfit",
-    "cost": 7500,
-    "effect": {
-      "changeStartCards": -1,
-      "startBattleWithCard": [
-        "Abandoned Outpost"
-      ]
-    }
-  },
-  {
-    "name": "Seafloor Shirt",
-    "description": "Taps for U or sac for any color. -1 hand size.",
-    "equipmentSlot": "Body",
-    "iconName": "SeafloorShirt",
-    "cost": 7500,
-    "effect": {
-      "changeStartCards": -1,
-      "startBattleWithCard": [
-        "Seafloor Debris"
-      ]
-    }
-  },
-  {
-    "name": "Bog Dweller Leather",
-    "description": "Taps for B or sac for any color. -1 hand size.",
-    "equipmentSlot": "Body",
-    "iconName": "BogDwellerLeather",
-    "cost": 7500,
-    "effect": {
-      "changeStartCards": -1,
-      "startBattleWithCard": [
-        "Bog Wreckage"
-      ]
-    }
-  },
-  {
-    "name": "Highland Cloak",
-    "description": "Taps for R or sac for any color. -1 hand size.",
-    "equipmentSlot": "Body",
-    "iconName": "HighlandCloak",
-    "cost": 7500,
-    "effect": {
-      "changeStartCards": -1,
-      "startBattleWithCard": [
-        "Ravaged Highlands"
-      ]
-    }
-  },
-  {
-    "name": "Timberland Shawl",
-    "description": "Taps for G or sac for any color. -1 hand size.",
-    "equipmentSlot": "Body",
-    "iconName": "TimberlandShawl",
-    "cost": 7500,
-    "effect": {
-      "changeStartCards": -1,
-      "startBattleWithCard": [
-        "Timberland Ruins"
+        "Forest|LEA|[295]"
       ]
     }
   },
@@ -4115,7 +4001,8 @@
     "equipmentSlot": "Body",
     "iconName": "OpalCloak",
     "effect": {
-        "startBattleWithCard": [
+      "lifeModifier": -5,
+      "startBattleWithCard": [
         "Opal Palace|C13"
      ]
     }
@@ -4126,7 +4013,8 @@
     "equipmentSlot": "Body",
     "iconName": "CloakofPrahv",
     "effect": {
-        "changeStartCards": -1,
+      "lifeModifier": 2,
+      "changeStartCards": -1,
         "startBattleWithCard": [
         "Prahv, Spires of Order|DIS"
      ]
@@ -4138,6 +4026,7 @@
     "equipmentSlot": "Body",
     "iconName": "CloakofSvogthos",
     "effect": {
+        "lifeModifier": 2,
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Svogthos, the Restless Tomb|RAV"
@@ -4150,6 +4039,7 @@
     "equipmentSlot": "Body",
     "iconName": "Vitu-GhaziCloak",
     "effect": {
+        "lifeModifier": 2,
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Vitu-Ghazi, the City-Tree|RAV"
@@ -4163,7 +4053,7 @@
       "iconName": "PinecrestCloak",
       "effect": {
         "changeStartCards": -1,
-        "lifeModifier": 2,
+        "lifeModifier": 4,
         "startBattleWithCard": [
           "Pinecrest Ridge|CHK"
         ]
@@ -4175,7 +4065,7 @@
     "equipmentSlot": "Body",
     "iconName": "ReliquaryRobes",
     "effect": {
-        "changeStartCards": -1,
+        "lifeModifier": -7,
         "startBattleWithCard": [
         "Reliquary Tower|C14"
      ]
@@ -4187,6 +4077,7 @@
     "equipmentSlot": "Body",
     "iconName": "MantleofDusk",
     "effect": {
+        "lifeModifier": 2,
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Duskmantle, House of Shadow|RAV"
@@ -4199,9 +4090,10 @@
     "equipmentSlot": "Body",
     "iconName": "CloakofOrzhova",
     "effect": {
+        "lifeModifier": 2,
         "changeStartCards": -1,
         "startBattleWithCard": [
-        "Orzhova, Church of Deals|GPT"
+        "Orzhova, the Church of Deals|GPT"
      ]
     }
   },
@@ -4212,7 +4104,7 @@
       "iconName": "TranquilCloak",
       "effect": {
         "changeStartCards": -1,
-        "lifeModifier": 2,
+        "lifeModifier": 4,
         "startBattleWithCard": [
           "Tranquil Garden|CHK"
         ]
@@ -4224,6 +4116,7 @@
     "equipmentSlot": "Body",
     "iconName": "NovijenCloak",
     "effect": {
+        "lifeModifier": 2,
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Novijen, Heart of Progress|DIS"
@@ -4261,7 +4154,7 @@
       "iconName": "CloudcrestCloak",
       "effect": {
         "changeStartCards": -1,
-        "lifeModifier": 2,
+        "lifeModifier": 4,
         "startBattleWithCard": [
           "Cloudcrest Lake|CHK"
         ]
@@ -4296,7 +4189,7 @@
       "iconName": "Lantern-LitCloak",
       "effect": {
         "changeStartCards": -1,
-        "lifeModifier": 2,
+        "lifeModifier": 4,
         "startBattleWithCard": [
           "Lantern-Lit Graveyard|CHK"
         ]
@@ -4377,7 +4270,7 @@
       "iconName": "WaterveilCloak",
       "effect": {
         "changeStartCards": -1,
-        "lifeModifier": 2,
+        "lifeModifier": 4,
         "startBattleWithCard": [
           "Waterveil Cavern|CHK"
         ]
@@ -4389,6 +4282,7 @@
     "equipmentSlot": "Body",
     "iconName": "RixMaadiCloak",
     "effect": {
+        "lifeModifier": 2,
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Rix Maadi, Dungeon Palace|DIS"
@@ -4521,12 +4415,12 @@
   },
   {
     "name": "Medal of the Outnumbered",
-    "description": "Opponent starts with two creatures, improves win rewards.",
+    "description": "Opponent starts with two creatures, greatly improves win rewards.",
     "equipmentSlot": "Medal",
     "iconName": "MedalOutnumbered",
-    "cost": 1000,
+    "cost": 2000,
     "effect": {
-        "cardRewardBonus": 1,
+        "cardRewardBonus": 2,
         "opponent": {
           "startBattleWithCard": [
             "Aurora Champion|BBD",
@@ -4553,16 +4447,15 @@
   },
   {
     "name": "Medal of the Outmaneuvered",
-    "description": "Opponent starts with two lands, greatly improves win rewards.",
+    "description": "Opponent starts with an extra land, improves win rewards.",
     "equipmentSlot": "Medal",
     "iconName": "MedalOutmaneuvered",
-    "cost": 2000,
+    "cost": 1000,
     "effect": {
-        "cardRewardBonus": 2,
+        "cardRewardBonus": 1,
         "opponent": {
           "startBattleWithCard": [
-            "Command Tower|CMD",
-            "Rogue's Passage|FDN"
+            "Command Tower|CMD"
           ]
         }
     }
@@ -4578,7 +4471,7 @@
         "opponent": {
           "startBattleWithCard": [
             "Phyrexian Arena|FDN",
-            "Smothering Tithe|CMM"
+            "Exploration|DMR"
           ]
         }
     }
@@ -4659,7 +4552,7 @@
     "effect": {
       "lifeModifier": -4,
       "startBattleWithCard": [
-      "Stitchwing Skaab"
+      "Stitchwing Skaab|SOI"
    ]
     }
   },
@@ -4670,7 +4563,7 @@
     "iconName": "ThirstingAxe",
     "effect": {
       "startBattleWithCard": [
-      "Thirsting Axe"
+      "Thirsting Axe|EMN"
    ]
     }
   },
@@ -4685,12 +4578,201 @@
    ]
     }
   },
+  {
+    "name": "Chitinous Club",
+    "description": "Equip 3, +2/+2 and menace",
+    "equipmentSlot": "Right",
+    "iconName": "ChitinousClub",
+    "cost": 1000,
+    "effect": {
+      "startBattleWithCard": [
+        "Chitinous Cloak|OGW"
+      ]
+    }
+  },
+  {
+    "name": "Dire Flail",
+    "description": "Equip 1, +2/+0, Craft with artifact for 3RR to upgrade.",
+    "equipmentSlot": "Right",
+    "iconName": "DireFlail",
+    "cost": 5000,
+    "effect": {
+      "startBattleWithCard": [
+        "Dire Flail|LCI"
+      ]
+    }
+  },
+  {
+    "name": "Poet's Quill",
+    "description": "Equip 1B, +1/+1 and lifelink.",
+    "equipmentSlot": "Right",
+    "iconName": "PoetsQuill",
+    "cost": 5000,
+    "effect": {
+      "startBattleWithCard": [
+        "Poet's Quill|STX"
+      ]
+    }
+  },
+  {
+    "name": "Giant's Bracer",
+    "description": "Equip 2, +0/+1 and hexproof while untapped.",
+    "equipmentSlot": "Right",
+    "iconName": "GiantsBracer",
+    "cost": 5000,
+    "effect": {
+      "startBattleWithCard": [
+        "Giant's Amulet|KHM"
+      ]
+    }
+  },
+  {
+    "name": "Skyclave Maul",
+    "description": "Equip 2WW, +2/+2 flying and first strike",
+    "equipmentSlot": "Right",
+    "iconName": "SkyclaveMaul",
+    "cost": 5000,
+    "effect": {
+      "startBattleWithCard": [
+        "Maul of the Skyclaves|ZNR"
+      ]
+    }
+  },
+  {
+    "name": "Spiked Ripsaw",
+    "description": "Equip 3, +3/+3 and trample if you sac a forest.",
+    "equipmentSlot": "Right",
+    "iconName": "SpikedRipsaw",
+    "cost": 5000,
+    "effect": {
+      "startBattleWithCard": [
+        "Spiked Ripsaw|VOW"
+      ]
+    }
+  },
+  {
+    "name": "Gisa's Favorite Shovel",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Right",
+    "iconName": "GhostRune",
+    "effect": {
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Segovian Sandals",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Boots",
+    "iconName": "GhostRune",
+    "effect": {
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Darksteel Axe",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Right",
+    "iconName": "DarksteelAxe",
+    "cost": 1000,
+    "effect": {
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Pocket Thopter",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Boots",
+    "iconName": "GhostRune",
+    "effect": {
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Miser's Shoes",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Boots",
+    "iconName": "GhostRune",
+    "effect": {
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Outpost Outfit",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Body",
+    "iconName": "GhostRune",
+    "cost": 7500,
+    "effect": {
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Seafloor Shirt",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Body",
+    "iconName": "GhostRune",
+    "cost": 7500,
+    "effect": {
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Bog Dweller Leather",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Body",
+    "iconName": "GhostRune",
+    "cost": 7500,
+    "effect": {
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Highland Cloak",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Body",
+    "iconName": "GhostRune",
+    "cost": 7500,
+    "effect": {
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Timberland Shawl",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Body",
+    "iconName": "GhostRune",
+    "cost": 7500,
+    "effect": {
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
     {
     "name": "Pilgrim's Cloak",
     "description": "Sac for a tapped basic",
     "equipmentSlot": "Body",
     "iconName": "Pilgrim'sCloak",
     "effect": {
+        "lifeModifier": -5,
         "startBattleWithCard": [
         "Evolving Wilds|FDN"
      ]

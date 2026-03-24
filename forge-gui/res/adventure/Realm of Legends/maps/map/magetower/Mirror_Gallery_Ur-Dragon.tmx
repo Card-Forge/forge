@@ -4,7 +4,8 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Dragonbroods' Relic&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Dragonbroods' Relic&quot;, &quot;Maelstrom Nexus&quot; ]}"/>
+  <property name="respawnEnemies" type="bool" value="true"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -40,89 +41,54 @@
  <objectgroup id="4" name="Objects">
   <object id="60" template="../../../../common/maps/obj/entry_up.tx" x="357" y="768" width="38" height="16">
    <properties>
-    <property name="teleport" value=""/>
+    <property name="teleport" value="../Realm of Legends/maps/map/magetower/Mirror_Gallery_2.tmx"/>
    </properties>
   </object>
   <object id="67" template="../../../../common/maps/obj/enemy.tx" x="642.667" y="603.666">
    <properties>
     <property name="deckOverride" value=""/>
-    <property name="defeatDialog">[
-   {
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-    ]
-   }
-]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Tome of the Guildpact&quot;, &quot;Glass of the Guildpact&quot;, &quot;Hero of Precinct One&quot;, &quot;Jenson Carthalion, Druid Exile&quot;
+]}</property>
     <property name="enemy" value="Jared"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
   <object id="68" template="../../../../common/maps/obj/enemy.tx" x="641.334" y="389">
    <properties>
-    <property name="defeatDialog">[
-   {
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-    ]
-   }
-]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Ancient Ziggurat&quot;, &quot;Rupture Spire&quot;, &quot;Exotic Orchard&quot;, &quot;Relic of Progenitus&quot;, &quot;Wall of Denial&quot;
+]}</property>
     <property name="enemy" value="Progenitus"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
   <object id="69" template="../../../../common/maps/obj/enemy.tx" x="365.5" y="229.667">
    <properties>
-    <property name="defeatDialog">[
-   {
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-    ]
-   }
-]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Dragonweave Tapestry&quot;, &quot;Dragonstorm Globe&quot;, &quot;Mox Jasper&quot;, &quot;Dragonfire Blade&quot;
+]}</property>
     <property name="enemy" value="Scion of the Ur-Dragon"/>
-    <property name="pursueRange" type="int" value="30"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
   <object id="71" template="../../../../common/maps/obj/enemy.tx" x="104.167" y="609.667">
    <properties>
-    <property name="defeatDialog">[
-   {
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-    ]
-   }
-]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Disrupting Scepter|lea&quot;, &quot;Chaos Orb|lea&quot;, &quot;Sol Ring|lea&quot;, &quot;Living Wall|lea&quot;, &quot;Juggernaut|lea&quot;
+]}</property>
     <property name="enemy" value="Garth"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
   <object id="72" template="../../../../common/maps/obj/enemy.tx" x="110.333" y="387">
    <properties>
-    <property name="defeatDialog">[
-   {
-   &quot;action&quot;: [
-      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
-      {&quot;deleteMapObject&quot;: -1}
-    ]
-   }
-]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Wondrous Crucible&quot;, &quot;Path of Discovery&quot;, &quot;Exploration&quot;
+]}</property>
     <property name="enemy" value="Golos"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
-  <object id="104" template="../../../../common/maps/obj/enemy.tx" x="364.5" y="519">
+  <object id="104" template="../../../../common/maps/obj/enemy.tx" x="364.5" y="533">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Haven of the Spirit Dragon|DTK&quot;, &quot;Maelstrom of the Spirit Dragon|TDM&quot;, &quot;Opal Palace|C13&quot;, &quot;Call the Spirit Dragons|TDM&quot;, &quot;Dragon Tempest|DTK&quot;, &quot;Dragon's Hoard|M19&quot;]}"/>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Scion of Draco&quot;, &quot;Opal Palace|C13&quot;, &quot;Maelstrom of the Spirit Dragon|TDM&quot;, &quot;Dragon Tempest|DTK&quot;
+]}</property>
     <property name="enemy" value="The Ur-Dragon"/>
     <property name="speedModifier" type="float" value="0"/>
     <property name="threatRange" type="int" value="0"/>
