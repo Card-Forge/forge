@@ -3106,9 +3106,10 @@ public class ComputerUtil {
     // Check if AI life is in danger/serious danger based on next expected combat
     // assuming a loss of "payment" life
     // call this to determine if it's safe to use a life payment spell
-    // or trigger "emergency" strategies such as holding mana for Spike Weaver of Counterspell.
+    // or trigger "emergency" strategies such as holding mana for Spike Weaver or Counterspell.
     public static boolean aiLifeInDanger(Player ai, boolean serious, int payment) {
-        return predictNextCombatsRemainingLife(ai, serious, false, payment, null) == Integer.MIN_VALUE;
+        return Integer.MIN_VALUE == AiCache.getCached("aiLifeInDanger", () -> predictNextCombatsRemainingLife(ai, serious, false, payment, null),
+                List.of(AiCache::identity, Objects::equals, Objects::equals), ai, serious, payment);
     }
     public static int predictNextCombatsRemainingLife(Player ai, boolean serious, boolean checkDiff, int payment, final CardCollection excludedBlockers) {
         // life won't change
