@@ -49,6 +49,7 @@ import com.google.common.collect.Lists;
 
 import forge.card.CardType;
 import forge.card.MagicColor;
+import forge.game.card.CounterKeywordType;
 import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FList;
 import forge.toolbox.FMouseAdapter;
@@ -408,6 +409,11 @@ public class ListChooser<T> {
             }
             if (value instanceof CardType.CoreType c) {
                 defRenderer.setIcon(fromSkinProp(FSkinProp.iconFromCoreType(c)));
+            }
+            if (value instanceof CounterKeywordType c) {
+                if (c.isKeywordCounter()) {
+                    defRenderer.setIcon(fromSkinProp(FSkinProp.iconFromKeyword(c.type(), c.keyword())));
+                }
             }
             return result;
         }
