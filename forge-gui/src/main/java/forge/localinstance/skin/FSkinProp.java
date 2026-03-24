@@ -17,7 +17,6 @@
  */
 package forge.localinstance.skin;
 
-import java.util.Locale;
 import java.util.Map;
 
 import com.google.common.collect.ImmutableMap;
@@ -787,7 +786,7 @@ public enum FSkinProp {
                 return IMG_ABILITY_HEXPROOF;
             }
             String k[] = original.split(":");
-            if (k.length > 2 && k[2].equals("monocolored") {
+            if (k.length > 2 && k[2].equals("monocolored")) {
                 return IMG_ABILITY_HEXPROOF_C;
             }
             return switch (MagicColor.Color.fromName(k[1])) {
