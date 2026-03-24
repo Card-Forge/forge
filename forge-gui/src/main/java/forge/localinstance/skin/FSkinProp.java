@@ -786,13 +786,17 @@ public enum FSkinProp {
             if (!original.contains(":")) {
                 return IMG_ABILITY_HEXPROOF;
             }
-            return switch (original.split(":")[1].toLowerCase(Locale.ROOT)) {
-                case MagicColor.Constant.WHITE -> IMG_ABILITY_HEXPROOF_W;
-                case MagicColor.Constant.BLUE -> IMG_ABILITY_HEXPROOF_U;
-                case MagicColor.Constant.BLACK -> IMG_ABILITY_HEXPROOF_B;
-                case MagicColor.Constant.RED -> IMG_ABILITY_HEXPROOF_R;
-                case MagicColor.Constant.GREEN -> IMG_ABILITY_HEXPROOF_G;
-                case MagicColor.Constant.COLORLESS -> IMG_ABILITY_HEXPROOF_C;
+            String k[] = original.split(":");
+            if (k.length > 2 && k[2].equals("monocolored") {
+                return IMG_ABILITY_HEXPROOF_C;
+            }
+            return switch (MagicColor.Color.fromName(k[1])) {
+                case WHITE -> IMG_ABILITY_HEXPROOF_W;
+                case BLUE -> IMG_ABILITY_HEXPROOF_U;
+                case BLACK -> IMG_ABILITY_HEXPROOF_B;
+                case RED -> IMG_ABILITY_HEXPROOF_R;
+                case GREEN -> IMG_ABILITY_HEXPROOF_G;
+                //case COLORLESS -> IMG_ABILITY_HEXPROOF_C; hexproof_c is for "monocolored"
                 default -> IMG_ABILITY_HEXPROOF;
             };
         }
