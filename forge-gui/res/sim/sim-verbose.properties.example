@@ -25,7 +25,7 @@ beginning_library_count=5
 
 # At the start of each player's turn, log names from the top of that player's graveyard.
 # Omit or 0: off. Positive: first n cards. -1: entire graveyard.
- beginning_graveyard_count=-1
+beginning_graveyard_count=-1
 
 # Future verbose categories can be listed here as they are implemented, e.g.:
 # zoneChanges=true
