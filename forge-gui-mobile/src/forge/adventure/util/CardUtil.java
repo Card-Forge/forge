@@ -368,8 +368,6 @@ public class CardUtil {
                 && !card.getName().equals("Wastes")) {
             effectiveRarity = CardRarity.Common; // adjust for lands which are L rarity but are not basic lands
         }
-
-        return switch (effectiveRarity) {
         AdventureReadPriceList.PriceData data = getPriceData();
         boolean useCustomPrices = data.mode == AdventureReadPriceList.PriceMode.FORCED
                 || Config.instance().getConfigData().usePriceListPrices;
@@ -380,8 +378,7 @@ public class CardUtil {
                 return price;
             }
         }    
-        // Fallback to rarity-based pricing
-        return switch (card.getRarity()) {
+        return switch (effectiveRarity) {
             case BasicLand -> 5;
             case Common -> 50;
             case Uncommon -> 150;
