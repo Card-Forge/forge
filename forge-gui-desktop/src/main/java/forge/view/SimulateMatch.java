@@ -562,6 +562,26 @@ public class SimulateMatch {
                 addVerboseSimLine(game, quietBuffer,
                         String.format("[verbose] Turn %d: %s library (%s): %s", turn, pname, scope, libList));
             }
+
+            if (config.logsBeginningGraveyard()) {
+                final Integer n = config.getBeginningGraveyardCardCount();
+                final PlayerZone gy = p.getZone(ZoneType.Graveyard);
+                final int size = gy.size();
+                final int limit = n != null && n == -1 ? size : Math.min(n, size);
+                final StringBuilder gb = new StringBuilder();
+                for (int i = 0; i < limit; i++) {
+                    if (gb.length() > 0) {
+                        gb.append(", ");
+                    }
+                    gb.append(verboseCardLabel(gy.get(i)));
+                }
+                final String gyList = size == 0 ? "(empty)" : gb.toString();
+                final String scope = n != null && n == -1
+                        ? String.format("all %d", size)
+                        : String.format("top %d", limit);
+                addVerboseSimLine(game, quietBuffer,
+                        String.format("[verbose] Turn %d: %s graveyard (%s): %s", turn, pname, scope, gyList));
+            }
         }
     }
 

@@ -49,6 +49,11 @@ public final class SimVerboseConfig {
      * Value {@code 0} or absent: off. Positive: first {@code n} cards. {@code -1}: entire library.
      */
     public static final String BEGINNING_LIBRARY_COUNT = "beginning_library_count";
+    /**
+     * At each turn start, log card names from the top of the active player's graveyard.
+     * Value {@code 0} or absent: off. Positive: first {@code n} cards. {@code -1}: entire graveyard.
+     */
+    public static final String BEGINNING_GRAVEYARD_COUNT = "beginning_graveyard_count";
 
     private static final Map<String, Boolean> DEFAULTS;
     static {
@@ -62,10 +67,14 @@ public final class SimVerboseConfig {
     private final Map<String, Boolean> categories;
     /** {@code null} or {@code 0}: off; {@code -1}: log whole library; else first {@code n} cards from top. */
     private final Integer beginningLibraryCardCount;
+    /** {@code null} or {@code 0}: off; {@code -1}: log whole graveyard; else first {@code n} cards. */
+    private final Integer beginningGraveyardCardCount;
 
-    private SimVerboseConfig(final Map<String, Boolean> categories0, final Integer beginningLibraryCardCount0) {
+    private SimVerboseConfig(final Map<String, Boolean> categories0, final Integer beginningLibraryCardCount0,
+            final Integer beginningGraveyardCardCount0) {
         this.categories = Collections.unmodifiableMap(categories0);
         this.beginningLibraryCardCount = beginningLibraryCardCount0;
+        this.beginningGraveyardCardCount = beginningGraveyardCardCount0;
     }
 
     /**
@@ -80,7 +89,7 @@ public final class SimVerboseConfig {
     }
 
     public boolean anyEnabled() {
-        if (logsBeginningLibrary()) {
+        if (logsBeginningLibrary() || logsBeginningGraveyard()) {
             return true;
         }
         for (final Boolean b : categories.values()) {
@@ -99,6 +108,14 @@ public final class SimVerboseConfig {
     public boolean logsBeginningLibrary() {
         return beginningLibraryCardCount != null && beginningLibraryCardCount != 0;
     }
+    /** @return configured count, or {@code null} if this logging is off */
+    public Integer getBeginningGraveyardCardCount() {
+        return beginningGraveyardCardCount;
+    }
+
+    public boolean logsBeginningGraveyard() {
+        return beginningGraveyardCardCount != null && beginningGraveyardCardCount != 0;
+    }
 
     /**
      * Reads user config and merges with defaults. Missing file uses defaults only (draws on).
@@ -111,6 +128,7 @@ public final class SimVerboseConfig {
     public static SimVerboseConfig load() {
         final Map<String, Boolean> map = new LinkedHashMap<>(DEFAULTS);
         Integer beginningLibraryCount = null;
+        Integer beginningGraveyardCount = null;
         final Properties p = loadMergedVerboseProperties();
         for (final String name : p.stringPropertyNames()) {
             String key = name.trim().toLowerCase(Locale.ROOT);
@@ -121,12 +139,16 @@ public final class SimVerboseConfig {
                 key = BEGINNING_CARDS_IN_HAND;
             }
             if (BEGINNING_LIBRARY_COUNT.equals(key)) {
-                beginningLibraryCount = parseBeginningLibraryCount(p.getProperty(name));
+                beginningLibraryCount = parseCountOption(p.getProperty(name));
+                continue;
+            }
+            if (BEGINNING_GRAVEYARD_COUNT.equals(key)) {
+                beginningGraveyardCount = parseCountOption(p.getProperty(name));
                 continue;
             }
             map.put(key, parseBool(p.getProperty(name), false));
         }
-        return new SimVerboseConfig(map, beginningLibraryCount);
+        return new SimVerboseConfig(map, beginningLibraryCount, beginningGraveyardCount);
     }
 
     /**
@@ -202,7 +224,7 @@ public final class SimVerboseConfig {
     /**
      * @return {@code null} if off or invalid; {@code -1} for whole library; positive for first {@code n} cards
      */
-    static Integer parseBeginningLibraryCount(final String raw) {
+    static Integer parseCountOption(final String raw) {
         if (raw == null) {
             return null;
         }
