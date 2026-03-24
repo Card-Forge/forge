@@ -3460,7 +3460,7 @@
     {
     "name": "Full Moon Necklace",
     "description": "Werewolves get +1/+0 and trample, sac to regen them all",
-    "equipmentSlot": "Right",
+    "equipmentSlot": "Neck",
     "iconName": "FullMoonNecklace",
     "effect": {
         "startBattleWithCard": [
