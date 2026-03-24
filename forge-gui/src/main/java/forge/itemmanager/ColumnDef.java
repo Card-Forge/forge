@@ -323,7 +323,25 @@ public enum ColumnDef {
      */
     DECK_SIDE("lblSide", "lblSideboard", 30, true, SortState.ASC,
             from -> toDeck(from.getKey()).getSideSize(),
-            from -> toDeck(from.getKey()).getSideSize());
+            from -> toDeck(from.getKey()).getSideSize()),
+    /**
+     * The key card indicator column for cards in the current deck.
+     */
+    DECK_KEY_CARD("lblKey", "ttKeyCard", 20, true, SortState.DESC,
+            from -> {
+                InventoryItem item = from.getKey();
+                if (item instanceof PaperCard) {
+                    return 0; // no special sorting for key cards
+                }
+                return -1;
+            },
+            from -> {
+                InventoryItem item = from.getKey();
+                if (item instanceof PaperCard) {
+                    return item; // pass the card through to the renderer
+                }
+                return null;
+            });
 
     ColumnDef(String shortName0, String longName0, int preferredWidth0, boolean isWidthFixed0, SortState sortState0,
               Function<Entry<InventoryItem, Integer>, Comparable<?>> fnSort0,

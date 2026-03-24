@@ -594,6 +594,17 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         return "";
     }
 
+    public List<String> getKeyCards() {
+        String hint = getAiHint("KeyCards");
+        if (hint == null || hint.isEmpty()) {
+            return List.of();
+        }
+        return List.of(hint.split(";")).stream()
+                .map(String::trim)
+                .filter(s -> !s.isEmpty())
+                .collect(Collectors.toList());
+    }
+
     public void setDraftNotes(Map<String, String> draftNotes) {
         if (draftNotes == null) {
             return;
@@ -617,6 +628,18 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             unplayableAI = new UnplayableAICards(this);
         }
         return unplayableAI;
+    }
+
+    public void setAiHint(String hintType, String hintValue) {
+        if (hintValue == null || hintValue.trim().isEmpty()) {
+            return;
+        }
+
+        // Remove existing hint of the same type, if any
+        aiHints.removeIf(hint -> hint.toLowerCase().startsWith(hintType.toLowerCase() + "$"));
+
+        // Add new hint if it's not empty
+        aiHints.add(hintType + "$" + hintValue.trim());
     }
 
     public static final class UnplayableAICards {
