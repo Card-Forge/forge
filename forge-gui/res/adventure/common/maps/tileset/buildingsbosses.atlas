@@ -107,10 +107,31 @@ Rakdos Guildgate
   size: 64,32
 Orzov Guildgate
   xy: 176,448
-  size: 48,41
+  size: 48,48
 Gruul Guildgate
   xy: 240,422
   size: 48,26
 Izzet Guildgate
   xy: 128,448
   size: 48,32
+Golgari Guildgate
+  xy: 336,400
+  size: 48,48
+Azorius Guildgate
+  xy: 336,400
+  size: 48,48
+Simic Guildgate
+  xy: 288,416
+  size: 48,32
+Boros Guildgate
+  xy: 278,448
+  size: 48,48
+Mystical Bog
+  xy: 320,448
+  size: 64,48
+Blood Moon
+  xy: 208,272
+  size: 32,48
+Idyllic Beachfront
+  xy: 240,272
+  size: 48,48
