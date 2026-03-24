@@ -227,92 +227,49 @@ public class DeltaSyncManager implements IHasNetLog {
         obj.getVersion();
         Map<TrackableProperty, Object> props = obj.getProps();
         if (props != null) {
-            // Snapshot values to avoid ConcurrentModificationException — the game
-            // thread may add/remove props entries while the daemon iterates.
-            // Skip stale GameEntityView references to prevent replacement cascades.
-            // After a zone change, cross-reference properties (ExiledWith, CloneOrigin,
-            // AttachedCards, etc.) may hold old CardView instances. Walking them would
-            // overwrite correct state. Only GameEntityView parents have these stale
-            // cross-references; non-GameEntityView parents (StackItemView.SourceCard,
-            // SpellAbilityView.HostCard) hold primary containment references that must
-            // be walked.
-            //
-            // For collections on CardView parents: skip CardView items already discovered
-            // through zone collections (in currentObjectIds). Walk undiscovered items
-            // which may be primary containment (e.g. MergedCardsCollection for Mutate).
-            //
-            // For PlayerView parents: walk zone collections FIRST so their CardViews
-            // are registered as authoritative before cross-reference collections
-            // (Commander, etc.) are walked. This prevents stale cross-references from
-            // overwriting correct zone data in collectObjectDelta.
-            if (obj instanceof PlayerView) {
-                // Two-pass walk: zone collections first, then everything else.
-                // Uses entrySet to identify which collections are zone collections.
-                @SuppressWarnings("unchecked")
-                Map.Entry<TrackableProperty, Object>[] entries;
-                try {
-                    entries = props.entrySet().toArray(new Map.Entry[0]);
-                } catch (ConcurrentModificationException e) {
-                    return;
-                }
-                // Pass 1: zone collections — mark items as authoritative
-                for (Map.Entry<TrackableProperty, Object> entry : entries) {
-                    if (!ZONE_COLLECTIONS.contains(entry.getKey())) continue;
-                    if (entry.getValue() instanceof TrackableCollection<?> tc) {
-                        for (Object item : tc) {
-                            if (item instanceof TrackableObject to) {
-                                if (to instanceof CardView cv) {
-                                    authoritativeInstances.put(DeltaPacket.makeDeltaKey(cv), cv);
-                                }
-                                walkAndCollect(to, objectDeltas, newObjects, currentObjectIds, checksumSnapshot);
-                            }
-                        }
+            // Snapshot props into entries, sorted with zone collections first.
+            // Zone-first ordering ensures zone CardViews are registered as
+            // authoritative before cross-reference properties are walked.
+            boolean parentIsGameEntityView = obj instanceof GameEntityView;
+            boolean parentIsCardView = obj instanceof CardView;
+            @SuppressWarnings("unchecked")
+            Map.Entry<TrackableProperty, Object>[] entries;
+            try {
+                entries = props.entrySet().toArray(new Map.Entry[0]);
+            } catch (ConcurrentModificationException e) {
+                return;
+            }
+            Arrays.sort(entries, (a, b) -> Boolean.compare(
+                    ZONE_COLLECTIONS.contains(b.getKey()), ZONE_COLLECTIONS.contains(a.getKey())));
+
+            for (Map.Entry<TrackableProperty, Object> entry : entries) {
+                Object value = entry.getValue();
+                boolean isZone = ZONE_COLLECTIONS.contains(entry.getKey());
+                if (value instanceof TrackableObject to) {
+                    // Skip stale GameEntityView cross-references from
+                    // GameEntityView parents (CardView→CardView, PlayerView→CardView).
+                    // Non-GameEntityView parents (StackItemView.SourceCard) hold
+                    // primary containment refs that must be walked.
+                    if (parentIsGameEntityView && to instanceof GameEntityView) {
+                        continue;
                     }
-                }
-                // Pass 2: everything else — skip stale cross-reference CardViews
-                for (Map.Entry<TrackableProperty, Object> entry : entries) {
-                    if (ZONE_COLLECTIONS.contains(entry.getKey())) continue;
-                    Object value = entry.getValue();
-                    if (value instanceof TrackableObject to) {
-                        if (!(to instanceof GameEntityView)) {
-                            walkAndCollect(to, objectDeltas, newObjects, currentObjectIds, checksumSnapshot);
-                        }
-                    } else if (value instanceof TrackableCollection<?> tc) {
-                        for (Object item : tc) {
-                            if (item instanceof TrackableObject to) {
-                                if (to instanceof CardView
-                                        && currentObjectIds.contains(DeltaPacket.makeDeltaKey(to))) {
-                                    continue;
-                                }
-                                walkAndCollect(to, objectDeltas, newObjects, currentObjectIds, checksumSnapshot);
+                    walkAndCollect(to, objectDeltas, newObjects, currentObjectIds, checksumSnapshot);
+                } else if (value instanceof TrackableCollection<?> tc) {
+                    for (Object item : tc) {
+                        if (item instanceof TrackableObject to) {
+                            // Register zone CardViews as authoritative
+                            if (isZone && to instanceof CardView cv) {
+                                authoritativeInstances.put(DeltaPacket.makeDeltaKey(cv), cv);
                             }
-                        }
-                    }
-                }
-            } else {
-                // Non-PlayerView parents: existing logic
-                boolean parentIsGameEntityView = obj instanceof GameEntityView;
-                boolean parentIsCardView = obj instanceof CardView;
-                Object[] values;
-                try {
-                    values = props.values().toArray();
-                } catch (ConcurrentModificationException e) {
-                    return;
-                }
-                for (Object value : values) {
-                    if (value instanceof TrackableObject to) {
-                        if (!(parentIsGameEntityView && to instanceof GameEntityView)) {
-                            walkAndCollect(to, objectDeltas, newObjects, currentObjectIds, checksumSnapshot);
-                        }
-                    } else if (value instanceof TrackableCollection) {
-                        for (Object item : (TrackableCollection<?>) value) {
-                            if (item instanceof TrackableObject to) {
-                                if (parentIsCardView && to instanceof CardView
-                                        && currentObjectIds.contains(DeltaPacket.makeDeltaKey(to))) {
-                                    continue;
-                                }
-                                walkAndCollect(to, objectDeltas, newObjects, currentObjectIds, checksumSnapshot);
+                            // Skip already-discovered CardViews in non-zone collections.
+                            // Zone items are always walked (sorted first, authoritative).
+                            // Non-zone collections on GameEntityView parents may hold
+                            // stale cross-refs (Commander, AttachedCards, etc.).
+                            if (!isZone && parentIsGameEntityView && to instanceof CardView
+                                    && currentObjectIds.contains(DeltaPacket.makeDeltaKey(to))) {
+                                continue;
                             }
+                            walkAndCollect(to, objectDeltas, newObjects, currentObjectIds, checksumSnapshot);
                         }
                     }
                 }
