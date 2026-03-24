@@ -293,7 +293,7 @@ public class ImageUtil {
 
     private static String specFaceToCollectorSuffix(String face) {
         MagicColor.Color color = MagicColor.Color.fromName(face);
-        if (color == MagicColor.Color.COLORLESS) return null;
+        if (color == null) return null;
         return color.getShortName().toLowerCase();
     }
 
