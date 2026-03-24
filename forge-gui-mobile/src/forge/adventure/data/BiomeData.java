@@ -3,8 +3,6 @@ package forge.adventure.data;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Array;
 
-import forge.adventure.player.AdventurePlayer;
-import forge.adventure.player.PlayerStatistic;
 import forge.adventure.util.AdventureQuestController;
 import forge.adventure.util.Current;
 import forge.util.Aggregates;
