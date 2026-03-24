@@ -144,7 +144,7 @@ public class DeltaSyncManager implements IHasNetLog {
         if (checksumDue) {
             checksumPropertyOrdinals = selectChecksumProperties();
             List<String> detail = new ArrayList<>();
-            checksum = NetworkChecksumUtil.computeSampledChecksum(gameView, checksumPropertyOrdinals, null, detail);
+            checksum = NetworkChecksumUtil.computeSampledChecksum(gameView, checksumPropertyOrdinals, detail);
             packetsSinceLastChecksum = 0;
             recentDeltaProperties.clear();
             cleanChecksumStreak++;

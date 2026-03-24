@@ -165,7 +165,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
 
         if (packet.hasChecksum()) {
             int serverChecksum = packet.getChecksum();
-            int clientChecksum = NetworkChecksumUtil.computeSampledChecksum(getGameView(), packet.getChecksumProperties(), null, null);
+            int clientChecksum = NetworkChecksumUtil.computeSampledChecksum(getGameView(), packet.getChecksumProperties(), null);
 
             if (serverChecksum != clientChecksum) {
                 netLog.error("[DeltaSync] CHECKSUM MISMATCH! Server={}, Client={} at seq={}",
@@ -173,7 +173,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
                 if (packet.getChecksumProperties() != null) {
                     List<String> clientDivLog = new ArrayList<>();
                     NetworkChecksumUtil.computeSampledChecksum(getGameView(),
-                            packet.getChecksumProperties(), null, clientDivLog);
+                            packet.getChecksumProperties(), clientDivLog);
                     netLog.error("[DeltaSync] Client checksum detail: {}", clientDivLog);
                 }
                 logChecksumDetails(getGameView(), packet);
