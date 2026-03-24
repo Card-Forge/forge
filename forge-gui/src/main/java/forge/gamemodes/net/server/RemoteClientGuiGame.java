@@ -44,7 +44,6 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
     private final GameProtocolSender sender;
     private final DeltaSyncManager deltaSyncManager;
     private final int clientIndex;
-    private final Object deltaLock = new Object();
     private boolean initialSyncSent = false;
     private boolean objectsRegistered = false;
     private boolean fallbackLogged = false;  // Prevent duplicate fallback log messages
@@ -94,6 +93,10 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
 
     public void setForwarder(GameEventForwarder forwarder) {
         this.forwarder = forwarder;
+    }
+
+    public GameEventForwarder getForwarder() {
+        return forwarder;
     }
 
     public void shutdownForwarder() {
@@ -163,32 +166,30 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
         // Flush pending events BEFORE collecting deltas — ensures events
         // get the dirty props bundled with them, and this standalone delta
         // only picks up whatever changed after the flush.
-        synchronized (deltaLock) {
-            flushPendingEvents();
-            DeltaPacket delta = deltaSyncManager.collectDeltas(gameView, true);
-            if (!delta.isEmpty()) {
-                if (flush) {
-                    sender.send(ProtocolMethod.applyDelta, delta);
-                } else {
-                    sender.write(ProtocolMethod.applyDelta, delta);
-                }
+        flushPendingEvents();
+        DeltaPacket delta = deltaSyncManager.collectDeltas(gameView);
+        if (!delta.isEmpty()) {
+            if (flush) {
+                sender.send(ProtocolMethod.applyDelta, delta);
+            } else {
+                sender.write(ProtocolMethod.applyDelta, delta);
+            }
 
-                if (logBandwidth) {
-                    int deltaSize = measureSerializedSize(delta);
-                    int fullStateSize = measureSerializedSize(gameView);
+            if (logBandwidth) {
+                int deltaSize = measureSerializedSize(delta);
+                int fullStateSize = measureSerializedSize(gameView);
 
-                    totalDeltaBytes += deltaSize;
-                    totalFullStateBytes += fullStateSize;
-                    deltaPacketCount++;
+                totalDeltaBytes += deltaSize;
+                totalFullStateBytes += fullStateSize;
+                deltaPacketCount++;
 
-                    int savings = fullStateSize > 0 ? (int)((1.0 - (double)deltaSize / fullStateSize) * 100) : 0;
+                int savings = fullStateSize > 0 ? (int)((1.0 - (double)deltaSize / fullStateSize) * 100) : 0;
 
-                    netLog.info("[DeltaSync] Packet #{}: Delta={} bytes, FullState={} bytes, Savings={}%",
-                        deltaPacketCount, deltaSize, fullStateSize, savings);
-                    netLog.info("[DeltaSync]   Cumulative: Delta={}, FullState={}, Savings={}%",
-                        totalDeltaBytes, totalFullStateBytes,
-                        totalFullStateBytes > 0 ? (int)((1.0 - (double)totalDeltaBytes / totalFullStateBytes) * 100) : 0);
-                }
+                netLog.info("[DeltaSync] Packet #{}: Delta={} bytes, FullState={} bytes, Savings={}%",
+                    deltaPacketCount, deltaSize, fullStateSize, savings);
+                netLog.info("[DeltaSync]   Cumulative: Delta={}, FullState={}, Savings={}%",
+                    totalDeltaBytes, totalFullStateBytes,
+                    totalFullStateBytes > 0 ? (int)((1.0 - (double)totalDeltaBytes / totalFullStateBytes) * 100) : 0);
             }
         }
     }
@@ -486,10 +487,8 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
                 if (ev instanceof forge.game.event.GameEventGameStarted) {
                     GameView gv = getGameView();
                     if (gv != null) {
-                        synchronized (deltaLock) {
-                            deltaSyncManager.registerNewObjects(gv);
-                            objectsRegistered = true;
-                        }
+                        deltaSyncManager.registerNewObjects(gv);
+                        objectsRegistered = true;
                     }
                     break;
                 }
@@ -507,32 +506,29 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
             // delta properties first, then events forwarded.
             GameView gameView = getGameView();
             if (gameView != null) {
-                synchronized (deltaLock) {
-                    boolean onGameThread = flushing || forge.util.ThreadUtil.isGameThread();
-                    DeltaPacket delta = deltaSyncManager.collectDeltas(gameView, onGameThread);
-                    delta.setProxiedEvents(proxied);
-                    sender.send(ProtocolMethod.applyDelta, delta);
+                DeltaPacket delta = deltaSyncManager.collectDeltas(gameView);
+                delta.setProxiedEvents(proxied);
+                sender.send(ProtocolMethod.applyDelta, delta);
 
-                    if (logBandwidth) {
-                        int deltaSize = measureSerializedSize(delta);
-                        int eventsSize = measureSerializedSize(proxied);
-                        int stateOnlyFullSize = measureSerializedSize(gameView);
-                        int fullStateSize = stateOnlyFullSize + eventsSize;
-                        DeltaPacket stateOnly = delta.withoutEvents();
-                        int stateOnlyDeltaSize = measureSerializedSize(stateOnly);
+                if (logBandwidth) {
+                    int deltaSize = measureSerializedSize(delta);
+                    int eventsSize = measureSerializedSize(proxied);
+                    int stateOnlyFullSize = measureSerializedSize(gameView);
+                    int fullStateSize = stateOnlyFullSize + eventsSize;
+                    DeltaPacket stateOnly = delta.withoutEvents();
+                    int stateOnlyDeltaSize = measureSerializedSize(stateOnly);
 
-                        totalDeltaBytes += deltaSize;
-                        totalFullStateBytes += fullStateSize;
-                        deltaPacketCount++;
+                    totalDeltaBytes += deltaSize;
+                    totalFullStateBytes += fullStateSize;
+                    deltaPacketCount++;
 
-                        int savings = fullStateSize > 0 ? (int)((1.0 - (double)deltaSize / fullStateSize) * 100) : 0;
+                    int savings = fullStateSize > 0 ? (int)((1.0 - (double)deltaSize / fullStateSize) * 100) : 0;
 
-                        netLog.info("[DeltaSync] Packet #{}: Delta={} bytes, FullState={} bytes, Savings={}%, StateOnlyDelta={} bytes, StateOnlyFull={} bytes",
-                            deltaPacketCount, deltaSize, fullStateSize, savings, stateOnlyDeltaSize, stateOnlyFullSize);
-                        netLog.info("[DeltaSync]   Cumulative: Delta={}, FullState={}, Savings={}%",
-                            totalDeltaBytes, totalFullStateBytes,
-                            totalFullStateBytes > 0 ? (int)((1.0 - (double)totalDeltaBytes / totalFullStateBytes) * 100) : 0);
-                    }
+                    netLog.info("[DeltaSync] Packet #{}: Delta={} bytes, FullState={} bytes, Savings={}%, StateOnlyDelta={} bytes, StateOnlyFull={} bytes",
+                        deltaPacketCount, deltaSize, fullStateSize, savings, stateOnlyDeltaSize, stateOnlyFullSize);
+                    netLog.info("[DeltaSync]   Cumulative: Delta={}, FullState={}, Savings={}%",
+                        totalDeltaBytes, totalFullStateBytes,
+                        totalFullStateBytes > 0 ? (int)((1.0 - (double)totalDeltaBytes / totalFullStateBytes) * 100) : 0);
                 }
             }
         } else {

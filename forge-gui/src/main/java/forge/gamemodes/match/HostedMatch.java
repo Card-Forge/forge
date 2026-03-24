@@ -249,6 +249,20 @@ public class HostedMatch {
             }
         }
 
+        // Register each remote client's event forwarder as an observer on ALL human
+        // players' InputQueues. This ensures events are flushed on the game thread
+        // before it blocks for input (e.g. host plays a land and retains priority).
+        for (PlayerControllerHuman hc : humanControllers) {
+            if (hc.getGui() instanceof forge.gamemodes.net.server.RemoteClientGuiGame ngg) {
+                forge.gui.control.GameEventForwarder fwd = ngg.getForwarder();
+                if (fwd != null) {
+                    for (PlayerControllerHuman allHc : humanControllers) {
+                        allHc.getInputQueue().addObserver(fwd);
+                    }
+                }
+            }
+        }
+
         for (final Entry<IGuiGame, Collection<PlayerView>> e : playersPerGui.asMap().entrySet()) {
             e.getKey().openView(new TrackableCollection<>(e.getValue()));
         }
