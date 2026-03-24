@@ -3,5 +3,5 @@ ManaCost:4 R R R
 Types:Creature Dragon
 PT:6/6
 K:Flying
-A:AB$ DealDamage | Cost$ R | ValidTgts$ Creature.DefenderCtrl | NumDmg$ 1 | IsPresent$ Card.Self+attacking | SpellDescription$ CARDNAME deals 1 damage to target creature defending player controls. Activate only if CARDNAME is attacking.
-Oracle:Flying\n{R}: Ancient Hellkite deals 1 damage to target creature defending player controls. Activate only if Ancient Hellkite is attacking.
+A:AB$ DealDamage | Cost$ R | ValidTgts$ Creature.DefenderCtrl | NumDmg$ 1 | IsPresent$ Card.Self+attacking | SpellDescription$ This creature deals 1 damage to target creature defending player controls. Activate only if this creature is attacking.
+Oracle:Flying\n{R}: This creature deals 1 damage to target creature defending player controls. Activate only if this creature is attacking.

@@ -2,7 +2,7 @@ Name:Ajani, Nacatl Pariah
 ManaCost:1 W
 Types:Legendary Creature Cat Warrior
 PT:1/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a 2/1 white Cat Warrior creature token.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When NICKNAME enters, create a 2/1 white Cat Warrior creature token.
 SVar:TrigToken:DB$ Token | TokenScript$ w_2_1_cat_warrior
 T:Mode$ ChangesZoneAll | TriggerZones$ Battlefield | ValidCards$ Cat.Other+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ Whenever one or more other Cats you control die, you may exile NICKNAME, then return him to the battlefield transformed under his owner's control.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn
@@ -10,7 +10,7 @@ SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Sacrifice|Token
 AlternateMode:DoubleFaced
-Oracle:When Ajani, Nacatl Pariah enters, create a 2/1 white Cat Warrior creature token.\nWhenever one or more other Cats you control die, you may exile Ajani, then return him to the battlefield transformed under his owner's control.
+Oracle:When Ajani enters, create a 2/1 white Cat Warrior creature token.\nWhenever one or more other Cats you control die, you may exile Ajani, then return him to the battlefield transformed under his owner's control.
 
 ALTERNATE
 
@@ -20,12 +20,12 @@ Colors:red,white
 Types:Legendary Planeswalker Ajani
 Loyalty:3
 A:AB$ PutCounterAll | Cost$ AddCounter<2/LOYALTY> | ValidCards$ Cat.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | Planeswalker$ True | SpellDescription$ Put a +1/+1 counter on each Cat you control.
-A:AB$ Token | Cost$ AddCounter<0/LOYALTY> | TokenScript$ w_2_1_cat_warrior | TokenOwner$ You | RememberOriginalTokens$ True | SubAbility$ DBImmediateTrig1 | Planeswalker$ True | SpellDescription$ Create a 2/1 white Cat Warrior creature token. When you do, if you control a red permanent other than CARDNAME, he deals damage equal to the number of creatures you control to any target.
-SVar:DBImmediateTrig1:DB$ ImmediateTrigger | TriggerAmount$ Remembered$Amount | ConditionPresent$ Permanent.Red+YouCtrl+Other | Execute$ TrigDamage | SubAbility$ DBCleanup2 | TriggerDescription$ When you do, if you control a red permanent other than CARDNAME, he deals damage equal to the number of creatures you control to any target.
-SVar:TrigDamage:DB$ DealDamage | NumDmg$ X | ValidTgts$ Any | ConditionPresent$ Permanent.Red+YouCtrl+Other | SpellDescription$ CARDNAME deals damage equal to the number of creatures you control to any target.
+A:AB$ Token | Cost$ AddCounter<0/LOYALTY> | TokenScript$ w_2_1_cat_warrior | TokenOwner$ You | RememberOriginalTokens$ True | SubAbility$ DBImmediateTrig1 | Planeswalker$ True | SpellDescription$ Create a 2/1 white Cat Warrior creature token. When you do, if you control a red permanent other than NICKNAME, he deals damage equal to the number of creatures you control to any target.
+SVar:DBImmediateTrig1:DB$ ImmediateTrigger | TriggerAmount$ Remembered$Amount | ConditionPresent$ Permanent.Red+YouCtrl+Other | Execute$ TrigDamage | SubAbility$ DBCleanup2 | TriggerDescription$ When you do, if you control a red permanent other than NICKNAME, he deals damage equal to the number of creatures you control to any target.
+SVar:TrigDamage:DB$ DealDamage | NumDmg$ X | ValidTgts$ Any | ConditionPresent$ Permanent.Red+YouCtrl+Other | SpellDescription$ NICKNAME deals damage equal to the number of creatures you control to any target.
 SVar:X:Count$Valid Creature.YouCtrl
 A:AB$ ChooseCard | Cost$ SubCounter<4/LOYALTY> | Planeswalker$ True | Ultimate$ True | Defined$ Opponent | Choices$ Permanent.nonLand | ChooseEach$ Artifact & Creature & Enchantment & Planeswalker | ControlledByPlayer$ Chooser | Mandatory$ True | Reveal$ True | SubAbility$ SacAllOthers | StackDescription$ SpellDescription | SpellDescription$ Each opponent chooses an artifact, a creature, an enchantment, and a planeswalker from among the nonland permanents they control, then sacrifices the rest.
 SVar:SacAllOthers:DB$ SacrificeAll | ValidCards$ Permanent.nonLand+OppCtrl+nonChosenCard | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 SVar:DBCleanup2:DB$ Cleanup | ClearRemembered$ True
-Oracle:[+2]: Put a +1/+1 counter on each Cat you control.\n[0]: Create a 2/1 white Cat Warrior creature token. When you do, if you control a red permanent other than Ajani, Nacatl Avenger, he deals damage equal to the number of creatures you control to any target.\n[-4]: Each opponent chooses an artifact, a creature, an enchantment and a planeswalker from among the nonland permanents they control, then sacrifices the rest.
+Oracle:[+2]: Put a +1/+1 counter on each Cat you control.\n[0]: Create a 2/1 white Cat Warrior creature token. When you do, if you control a red permanent other than Ajani, he deals damage equal to the number of creatures you control to any target.\n[-4]: Each opponent chooses an artifact, a creature, an enchantment, and a planeswalker from among the nonland permanents they control, then sacrifices the rest.

@@ -3,7 +3,7 @@ ManaCost:4 W W
 Types:Creature Archon
 PT:5/5
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When CARDNAME enters, you become the monarch.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMonarch | TriggerDescription$ When this creature enters, you become the monarch.
 SVar:TrigMonarch:DB$ BecomeMonarch
 R:Event$ LifeReduced | ValidPlayer$ You | IsDamage$ True | Monarch$ True | Layer$ CantHappen | ActiveZones$ Battlefield | Description$ As long as you're the monarch, damage doesn't cause you to lose life. (When a creature deals combat damage to you, its controller still becomes the monarch.)
-Oracle:Flying\nWhen Archon of Coronation enters, you become the monarch.\nAs long as you're the monarch, damage doesn't cause you to lose life. (When a creature deals combat damage to you, its controller still becomes the monarch.)
+Oracle:Flying\nWhen this creature enters, you become the monarch.\nAs long as you're the monarch, damage doesn't cause you to lose life. (When a creature deals combat damage to you, its controller still becomes the monarch.)

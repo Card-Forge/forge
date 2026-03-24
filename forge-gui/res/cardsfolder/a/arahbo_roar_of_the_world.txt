@@ -2,7 +2,7 @@ Name:Arahbo, Roar of the World
 ManaCost:3 G W
 Types:Legendary Creature Cat Avatar
 PT:5/5
-T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.StrictlySelf | PresentZone$ Battlefield | Execute$ TrigPump1 | TriggerDescription$ Eminence — At the beginning of combat on your turn, if CARDNAME is in the command zone or on the battlefield, another target Cat you control gets +3/+3 until end of turn.
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.StrictlySelf | PresentZone$ Battlefield | Execute$ TrigPump1 | TriggerDescription$ Eminence — At the beginning of combat on your turn, if NICKNAME is in the command zone or on the battlefield, another target Cat you control gets +3/+3 until end of turn.
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Command | IsPresent$ Card.StrictlySelf | PresentZone$ Command | Execute$ TrigPump1 | Secondary$ True
 SVar:TrigPump1:DB$ Pump | ValidTgts$ Creature.Cat+YouCtrl+Other | TgtPrompt$ Select another target Cat you control | NumAtt$ +3 | NumDef$ +3
 T:Mode$ Attacks | ValidCard$ Creature.Cat+Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump2 | TriggerDescription$ Whenever another Cat you control attacks, you may pay {1}{G}{W}. If you do, it gains trample and gets +X/+X until end of turn, where X is its power.
@@ -11,4 +11,4 @@ SVar:X:TriggeredAttacker$CardPower
 SVar:BuffedBy:Cat
 SVar:PlayMain1:TRUE
 DeckHints:Type$Cat
-Oracle:Eminence — At the beginning of combat on your turn, if Arahbo, Roar of the World is in the command zone or on the battlefield, another target Cat you control gets +3/+3 until end of turn.\nWhenever another Cat you control attacks, you may pay {1}{G}{W}. If you do, it gains trample and gets +X/+X until end of turn, where X is its power.
+Oracle:Eminence — At the beginning of combat on your turn, if Arahbo is in the command zone or on the battlefield, another target Cat you control gets +3/+3 until end of turn.\nWhenever another Cat you control attacks, you may pay {1}{G}{W}. If you do, it gains trample and gets +X/+X until end of turn, where X is its power.
