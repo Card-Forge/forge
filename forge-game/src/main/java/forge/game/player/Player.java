@@ -1181,7 +1181,13 @@ public class Player extends GameEntity implements Comparable<Player> {
      */
     private CardCollectionView doDraw(Map<Player, CardCollection> revealed, SpellAbility sa, Map<AbilityKey, Object> params, PlayerZone hand) {
         final CardCollection drawn = new CardCollection();
-        final PlayerZone library = getZone(ZoneType.Library);
+        final PlayerZone library;
+        if (game.getRules().getGameType() == GameType.DanDan && !game.getPlayers().isEmpty()) {
+            // DanDan uses one shared library; always draw from the canonical shared zone.
+            library = game.getPlayers().get(0).getZone(ZoneType.Library);
+        } else {
+            library = getZone(ZoneType.Library);
+        }
 
         SpellAbility cause = sa;
         if (cause != null && cause.isReplacementAbility()) {
@@ -1289,6 +1295,16 @@ public class Player extends GameEntity implements Comparable<Player> {
      * Returns PlayerZone corresponding to the given zone of game.
      */
     public final PlayerZone getZone(final ZoneType zone) {
+        if (zone != null && game != null && game.getRules().getGameType() == GameType.DanDan
+                && (zone == ZoneType.Library || zone == ZoneType.Graveyard)
+                && !game.getPlayers().isEmpty()) {
+            // DanDan library/graveyard are shared; always resolve through player 0's canonical zone.
+            final Player canonical = game.getPlayers().get(0);
+            final PlayerZone shared = canonical.zones.get(zone);
+            if (shared != null) {
+                return shared;
+            }
+        }
         return zones.get(zone);
     }
 

@@ -34,6 +34,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.border.Border;
 
+import forge.game.GameType;
+import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
@@ -58,6 +60,7 @@ import forge.toolbox.FSkin;
 import forge.toolbox.special.PlayerDetailsPanel;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
+import forge.util.collect.FCollectionView;
 import forge.view.FView;
 
 public class FloatingZone extends FloatingCardArea {
@@ -68,6 +71,27 @@ public class FloatingZone extends FloatingCardArea {
 
     private static int getKey(final PlayerView player, final ZoneType zone) {
         return 40 * player.getId() + zone.hashCode();
+    }
+
+    /**
+     * DanDan uses one physical library and graveyard, but each {@link PlayerView} holds its own
+     * trackable copy of those zones; they can get out of sync briefly. For display, always use the
+     * first registered player's list (same as the shared {@link forge.game.zone.PlayerZone} owner
+     * in {@link forge.game.Match}) so every UI shows identical order.
+     */
+    public static Iterable<CardView> cardsForZoneDisplay(final CMatchUI matchUI, final PlayerView player, final ZoneType zone) {
+        final GameView gameView = matchUI.getGameView();
+        if (gameView != null && gameView.getGameType() == GameType.DanDan
+                && (zone == ZoneType.Library || zone == ZoneType.Graveyard)) {
+            final FCollectionView<PlayerView> players = gameView.getPlayers();
+            if (players != null && !players.isEmpty()) {
+                final Iterable<CardView> shared = players.get(0).getCards(zone);
+                if (shared != null) {
+                    return shared;
+                }
+            }
+        }
+        return player.getCards(zone);
     }
 
     // ========== Tab mode preference ==========
@@ -527,7 +551,7 @@ public class FloatingZone extends FloatingCardArea {
     };
 
     protected Iterable<CardView> getCards() {
-        Iterable<CardView> zoneCards = player.getCards(zone);
+        Iterable<CardView> zoneCards = cardsForZoneDisplay(getMatchUI(), player, zone);
         if (zoneCards != null) {
             cardList = new FCollection<>(zoneCards);
             if (sortedByName && !(zone == ZoneType.Library && getMatchUI().getGameController().mayLookAtAllCards())) {

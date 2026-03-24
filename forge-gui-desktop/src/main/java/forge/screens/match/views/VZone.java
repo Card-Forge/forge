@@ -93,7 +93,7 @@ public class VZone implements IVDoc<CZone> {
     /** Refresh card panels from zone data. */
     public void refresh() {
         final List<CardPanel> cardPanels = new ArrayList<>();
-        final Iterable<CardView> cards = player.getCards(zone);
+        final Iterable<CardView> cards = FloatingZone.cardsForZoneDisplay(matchUI, player, zone);
         if (cards != null) {
             final List<CardView> cardList = new ArrayList<>();
             for (final CardView card : cards) {
