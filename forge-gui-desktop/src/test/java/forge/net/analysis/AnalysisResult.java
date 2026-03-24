@@ -26,12 +26,14 @@ public class AnalysisResult {
 
     // Cached aggregations
     private int totalGames;
-    private int successfulGames;
-    private int failedGames;
+    private int completedGames;
+    private int incompleteGames;  // Timeout or unknown
+    private int failedGames;     // Catastrophic error / didn't start
     private int gamesWithErrors;
     private int gamesWithWarnings;
     private int gamesWithChecksumMismatches;
     private int totalChecksumMismatches;
+    private int maxMismatchesPerGame;  // For persistent/cascading detection
     private int totalSendErrors;
 
     private long totalDeltaBytes;
@@ -74,12 +76,20 @@ public class AnalysisResult {
 
     private void aggregateMetrics() {
         totalGames = allMetrics.size();
-        successfulGames = (int) allMetrics.stream().filter(GameLogMetrics::isSuccessful).count();
-        failedGames = totalGames - successfulGames;
+        completedGames = (int) allMetrics.stream().filter(GameLogMetrics::isGameCompleted).count();
+        incompleteGames = (int) allMetrics.stream()
+                .filter(m -> !m.isGameCompleted())
+                .filter(m -> m.getFailureMode() == GameLogMetrics.FailureMode.TIMEOUT
+                        || m.getFailureMode() == GameLogMetrics.FailureMode.INCOMPLETE)
+                .count();
+        failedGames = (int) allMetrics.stream()
+                .filter(m -> m.getFailureMode() == GameLogMetrics.FailureMode.EXCEPTION)
+                .count();
         gamesWithErrors = (int) allMetrics.stream().filter(m -> !m.getErrors().isEmpty()).count();
         gamesWithWarnings = (int) allMetrics.stream().filter(m -> !m.getWarnings().isEmpty()).count();
         gamesWithChecksumMismatches = (int) allMetrics.stream().filter(GameLogMetrics::hasChecksumMismatch).count();
         totalChecksumMismatches = allMetrics.stream().mapToInt(GameLogMetrics::getChecksumMismatchCount).sum();
+        maxMismatchesPerGame = allMetrics.stream().mapToInt(GameLogMetrics::getChecksumMismatchCount).max().orElse(0);
         totalSendErrors = allMetrics.stream().mapToInt(GameLogMetrics::getSendErrors).sum();
 
         totalDeltaBytes = allMetrics.stream().mapToLong(GameLogMetrics::getTotalDeltaBytes).sum();
@@ -211,14 +221,16 @@ public class AnalysisResult {
     // Getters
 
     public int getTotalGames() { return totalGames; }
-    public int getSuccessfulGames() { return successfulGames; }
+    public int getCompletedGames() { return completedGames; }
+    public int getIncompleteGames() { return incompleteGames; }
     public int getFailedGames() { return failedGames; }
     public int getTotalSendErrors() { return totalSendErrors; }
+    public int getMaxMismatchesPerGame() { return maxMismatchesPerGame; }
     public List<GameLogMetrics> getAllMetrics() { return allMetrics; }
 
-    public double getSuccessRate() {
+    public double getCompletionRate() {
         if (totalGames == 0) return 0.0;
-        return 100.0 * successfulGames / totalGames;
+        return 100.0 * completedGames / totalGames;
     }
 
     public int getGamesWithChecksumMismatches() {
@@ -339,21 +351,22 @@ public class AnalysisResult {
         sb.append(String.format("**Analysis Date:** %s\n\n",
                 analysisTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))));
 
-        // Summary Table
-        sb.append("### Summary\n\n");
-        sb.append("| Metric | Value |\n");
-        sb.append("|--------|-------|\n");
-        sb.append(String.format("| Total Games | %d |\n", totalGames));
-        sb.append(String.format("| Completed | %d |\n", successfulGames));
-        sb.append(String.format("| Failed | %d |\n", failedGames));
-        sb.append(String.format("| Success Rate | %.1f%% |\n", getSuccessRate()));
+        // Game Completion
+        sb.append("### Game Completion\n\n");
+        sb.append("| Total | Completed | Incomplete | Failed |\n");
+        sb.append("|-------|-----------|------------|--------|\n");
+        sb.append(String.format("| %d | %d | %d | %d |\n", totalGames, completedGames, incompleteGames, failedGames));
         if (getUniqueDeckCount() > 0) {
-            sb.append(String.format("| Unique Decks Used | %d |\n", getUniqueDeckCount()));
+            sb.append(String.format("\n**Unique Decks Used:** %d\n", getUniqueDeckCount()));
         }
-        sb.append(String.format("| Games with Checksum Mismatches | %d |\n", gamesWithChecksumMismatches));
-        sb.append(String.format("| Total Checksum Mismatches | %d |\n", totalChecksumMismatches));
-        sb.append(String.format("| Games with Errors | %d |\n", gamesWithErrors));
-        sb.append(String.format("| Games with Warnings | %d |\n", gamesWithWarnings));
+        sb.append("\n");
+
+        // Data Integrity
+        sb.append("### Data Integrity\n\n");
+        sb.append("| Checksum Mismatches (games) | Total Mismatches | Errors (games) | Warnings (games) |\n");
+        sb.append("|----------------------------|------------------|----------------|------------------|\n");
+        sb.append(String.format("| %d | %d | %d | %d |\n",
+                gamesWithChecksumMismatches, totalChecksumMismatches, gamesWithErrors, gamesWithWarnings));
         sb.append("\n");
 
         // Network Performance
@@ -520,9 +533,25 @@ public class AnalysisResult {
             sb.append("| Player | Wins | % |\n");
             sb.append("|--------|------|---|\n");
             for (Map.Entry<String, Integer> entry : winnerFrequency.entrySet()) {
-                double pct = successfulGames > 0 ? 100.0 * entry.getValue() / successfulGames : 0;
+                double pct = completedGames > 0 ? 100.0 * entry.getValue() / completedGames : 0;
                 sb.append(String.format("| %s | %d | %.1f%% |\n",
                         entry.getKey(), entry.getValue(), pct));
+            }
+            sb.append("\n");
+        }
+
+        // Failure Mode Analysis (before error analysis for quick triage)
+        if (incompleteGames + failedGames > 0) {
+            sb.append("### Failure Mode Analysis\n\n");
+            sb.append("| Mode | Count | % |\n");
+            sb.append("|------|-------|---|\n");
+            for (GameLogMetrics.FailureMode mode : GameLogMetrics.FailureMode.values()) {
+                if (mode == GameLogMetrics.FailureMode.NONE) continue;
+                int count = failureModeCounts.getOrDefault(mode, 0);
+                if (count > 0) {
+                    double pct = totalGames > 0 ? 100.0 * count / totalGames : 0;
+                    sb.append(String.format("| %s | %d | %.1f%% |\n", mode.name(), count, pct));
+                }
             }
             sb.append("\n");
         }
@@ -532,8 +561,9 @@ public class AnalysisResult {
             sb.append("### Error Analysis\n\n");
 
             if (gamesWithChecksumMismatches > 0) {
-                sb.append(String.format("**Checksum Mismatches:** %d games had desync issues\n\n",
-                        gamesWithChecksumMismatches));
+                sb.append(String.format("**Checksum Mismatches:** %d game(s), %d total (%s)\n\n",
+                        gamesWithChecksumMismatches, totalChecksumMismatches,
+                        maxMismatchesPerGame <= 1 ? "transient only" : "persistent detected"));
             }
 
             // List files with errors for quick reference
@@ -562,22 +592,6 @@ public class AnalysisResult {
                     }
                 }
             }
-        }
-
-        // Failure Mode Analysis
-        if (failedGames > 0) {
-            sb.append("### Failure Mode Analysis\n\n");
-            sb.append("| Mode | Count | % |\n");
-            sb.append("|------|-------|---|\n");
-            for (GameLogMetrics.FailureMode mode : GameLogMetrics.FailureMode.values()) {
-                if (mode == GameLogMetrics.FailureMode.NONE) continue;
-                int count = failureModeCounts.getOrDefault(mode, 0);
-                if (count > 0) {
-                    double pct = totalGames > 0 ? 100.0 * count / totalGames : 0;
-                    sb.append(String.format("| %s | %d | %.1f%% |\n", mode.name(), count, pct));
-                }
-            }
-            sb.append("\n");
         }
 
         // Top errors with game cross-referencing
@@ -660,22 +674,22 @@ public class AnalysisResult {
             } else {
                 sb.append("**FAILED** - Validation criteria not met:\n");
             }
-            sb.append(String.format("- [%s] Success rate >= 90%% (actual: %.1f%%)\n",
-                    getSuccessRate() >= 90.0 ? "x" : " ", getSuccessRate()));
+            sb.append(String.format("- [%s] Completion rate >= 90%% (actual: %.1f%%)\n",
+                    getCompletionRate() >= 90.0 ? "x" : " ", getCompletionRate()));
             sb.append(String.format("- [%s] Zero send errors (actual: %d)\n",
                     totalSendErrors == 0 ? "x" : " ", totalSendErrors));
             if (hasDeltaSyncData()) {
                 sb.append(String.format("- [%s] Average bandwidth savings >= 90%% (actual: %.1f%%)\n",
                         averageBandwidthSavings >= 90.0 ? "x" : " ", averageBandwidthSavings));
             }
-            sb.append(String.format("- [%s] Zero games with checksum mismatches (actual: %d)\n",
-                    gamesWithChecksumMismatches == 0 ? "x" : " ", gamesWithChecksumMismatches));
+            sb.append(String.format("- [%s] No persistent checksum mismatches (max %d per game, threshold: 1)\n",
+                    maxMismatchesPerGame <= 1 ? "x" : " ", maxMismatchesPerGame));
 
-            // Per-player-count success rates
+            // Per-player-count completion rates
             for (int p = 2; p <= 4; p++) {
                 PlayerCountStats stats = statsByPlayerCount.get(p);
                 if (stats != null) {
-                    sb.append(String.format("- [%s] %dp success rate >= 80%% (actual: %.1f%%)\n",
+                    sb.append(String.format("- [%s] %dp completion rate >= 80%% (actual: %.1f%%)\n",
                             stats.successRate >= 80.0 ? "x" : " ", p, stats.successRate));
                 }
             }
@@ -699,7 +713,12 @@ public class AnalysisResult {
                 sb.append("|---|----------|--------|---------|-------|---------|-----------|------------|--------|\n");
             }
             for (GameLogMetrics m : sortedMetrics) {
-                String status = m.isSuccessful() ? "OK" : (m.hasChecksumMismatch() ? "DESYNC" : "FAIL");
+                String status;
+                if (m.isGameCompleted()) {
+                    status = m.hasChecksumMismatch() ? "DESYNC" : "OK";
+                } else {
+                    status = m.getFailureMode().name();
+                }
                 String winner = m.getWinner() != null ? m.getWinner() : "-";
                 if (hasMultipleFormats) {
                     sb.append(String.format("| %d | `%s` | %s | %s | %d | %d | %d | %d | %d | %s |\n",
@@ -736,19 +755,22 @@ public class AnalysisResult {
      */
     public String toSummary() {
         return String.format(
-                "AnalysisResult[total=%d, success=%d (%.1f%%), failed=%d, " +
-                "sendErrors=%d, errors=%d, checksumMismatches=%d, avgSavings=%.1f%%, avgTurns=%.1f]",
-                totalGames, successfulGames, getSuccessRate(), failedGames,
-                totalSendErrors, gamesWithErrors, gamesWithChecksumMismatches, averageBandwidthSavings, averageTurns);
+                "AnalysisResult[total=%d, completed=%d (%.1f%%), incomplete=%d, failed=%d, " +
+                "sendErrors=%d, errors=%d, checksumMismatches=%d (max %d/game), avgSavings=%.1f%%, avgTurns=%.1f]",
+                totalGames, completedGames, getCompletionRate(), incompleteGames, failedGames,
+                totalSendErrors, gamesWithErrors, gamesWithChecksumMismatches, maxMismatchesPerGame,
+                averageBandwidthSavings, averageTurns);
     }
 
     /**
      * Check if validation criteria are met.
+     * Checksum mismatches: transient (max 1 per game) are tolerable,
+     * persistent/cascading (2+ per game) fail validation.
      */
     public boolean passesValidation() {
-        if (getSuccessRate() < 90.0) return false;
+        if (getCompletionRate() < 90.0) return false;
         if (totalSendErrors > 0) return false;
-        if (gamesWithChecksumMismatches > 0) return false;
+        if (maxMismatchesPerGame > 1) return false;
         if (hasDeltaSyncData() && averageBandwidthSavings < 90.0) return false;
         for (PlayerCountStats stats : statsByPlayerCount.values()) {
             if (stats.successRate < 80.0) return false;

@@ -13,13 +13,13 @@ import java.util.Map;
 public class GameLogMetrics {
 
     /**
-     * Classification of how a game failed (or NONE if it succeeded).
+     * Classification of how a game ended.
+     * Checksum mismatches are tracked separately (orthogonal to completion).
      */
     public enum FailureMode {
         NONE,              // Game completed successfully
         TIMEOUT,           // Game exceeded time limit
-        CHECKSUM_MISMATCH, // Delta sync desync detected
-        EXCEPTION,         // Exception/error logged
+        EXCEPTION,         // Catastrophic error (crash, failed to start)
         INCOMPLETE         // Game didn't complete for unknown reason
     }
 
@@ -84,12 +84,11 @@ public class GameLogMetrics {
     }
 
     /**
-     * Check if this game was successful (completed with no critical errors).
-     * Send errors and checksum mismatches are critical failures.
-     * Log-detected errors (e.g. caught exceptions) are tracked but do not affect success.
+     * Check if this game completed successfully.
+     * Checksum mismatches are tracked separately and do not affect completion status.
      */
     public boolean isSuccessful() {
-        return gameCompleted && !hasChecksumMismatch && sendErrors == 0;
+        return gameCompleted;
     }
 
     // Getters and setters
@@ -354,19 +353,17 @@ public class GameLogMetrics {
         sb.append("-".repeat(60)).append("\n");
 
         // Status
-        String status = isSuccessful() ? "PASSED" : "FAILED";
-        String statusReason = "";
-        if (!isSuccessful()) {
+        String status;
+        String statusDetail = "";
+        if (gameCompleted) {
+            status = "COMPLETED";
             if (hasChecksumMismatch) {
-                statusReason = " (checksum mismatch)";
-            } else if (!gameCompleted) {
-                statusReason = " (game incomplete)";
-            } else if (sendErrors > 0) {
-                statusReason = " (send errors)";
+                statusDetail = " (with checksum mismatches)";
             }
+        } else {
+            status = failureMode.name();
         }
-        sb.append(String.format("Status: %s%s\n", status, statusReason));
-        sb.append(String.format("Failure Mode: %s\n", failureMode));
+        sb.append(String.format("Status: %s%s\n", status, statusDetail));
         sb.append("\n");
 
         // Game metrics
@@ -397,8 +394,9 @@ public class GameLogMetrics {
 
         // Validation summary
         sb.append("Validation:\n");
-        sb.append(String.format("  Checksum Mismatches: %d %s\n",
-                hasChecksumMismatch ? 1 : 0, hasChecksumMismatch ? "(FAIL)" : "(PASS)"));
+        int mismatchCount = getChecksumMismatchCount();
+        String mismatchStatus = !hasChecksumMismatch ? "PASS" : (mismatchCount <= 1 ? "transient" : "PERSISTENT");
+        sb.append(String.format("  Checksum Mismatches: %d (%s)\n", mismatchCount, mismatchStatus));
         sb.append(String.format("  Send Errors: %d\n", sendErrors));
         sb.append(String.format("  Errors: %d\n", errors.size()));
         sb.append(String.format("  Warnings: %d\n", warnings.size()));

@@ -695,12 +695,12 @@ public class NetworkLogAnalyzer {
 
     /**
      * Determine the failure mode based on metrics collected during parsing.
-     * Priority: CHECKSUM_MISMATCH > TIMEOUT > EXCEPTION > INCOMPLETE > NONE
+     * Checksum mismatches are tracked separately (orthogonal to completion).
+     * Failure modes only apply to games that did not complete.
      */
     private GameLogMetrics.FailureMode determineFailureMode(GameLogMetrics metrics) {
-        // Check for checksum mismatch (desync) first - most critical
-        if (metrics.hasChecksumMismatch()) {
-            return GameLogMetrics.FailureMode.CHECKSUM_MISMATCH;
+        if (metrics.isGameCompleted()) {
+            return GameLogMetrics.FailureMode.NONE;
         }
 
         // Check for timeout in error messages
@@ -710,17 +710,13 @@ public class NetworkLogAnalyzer {
             }
         }
 
-        // Check for any other exceptions/errors
+        // Catastrophic errors that ended/prevented the game
         if (!metrics.getErrors().isEmpty()) {
             return GameLogMetrics.FailureMode.EXCEPTION;
         }
 
-        // Check if game didn't complete for unknown reason
-        if (!metrics.isGameCompleted()) {
-            return GameLogMetrics.FailureMode.INCOMPLETE;
-        }
-
-        return GameLogMetrics.FailureMode.NONE;
+        // Game didn't complete for unknown reason
+        return GameLogMetrics.FailureMode.INCOMPLETE;
     }
 
     /**
