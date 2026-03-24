@@ -2,12 +2,13 @@ Name:Staff of the Demoncaller Effect
 ManaCost:no cost
 Colors:black
 Types:Enchantment
-T:Mode$ Always | Phase$ Draw | TriggerZones$ Command | Execute$ TrigConjure | Hidden$ True | TriggerDescription$ At the beginning of the game, conjure Griselbrand into exile, that card perpetually gains "At the beginning of your upkeep, if Griselbrand is in the command zone, you lose two life. "
-SVar:TrigConjure:DB$ MakeCard | Name$ Griselbrand |  Zone$ Command | RememberMade$ True | SubAbility$ DBAnimate
-SVar:DBAnimate:DB$ Animate | Triggers$ GriselbrandAngry | Defined$ Remembered | Duration$ Perpetual | SubAbility$ DBCleanup | SpellDescription$ At the beginning of your upkeep, if Griselbrand is in the command zone, you lose two life. 
-SVar:GriselbrandAngry:Mode$ Phase | Phase$ Upkeep | PresentZone$ Command | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigLife | TriggerDescription$ At the beginning of your upkeep, if Griselbrand is in the command zone, you lose two life. 
+T:Mode$ Always | Phase$ Main1 | TriggerZones$ Command | Execute$ TrigConjure | Hidden$ True | TriggerDescription$ At the beginning of the game, conjure Griselbrand into exile, that card perpetually gains "At the beginning of your upkeep, if Griselbrand is in the command zone, you lose one life. "
+SVar:TrigConjure:DB$ MakeCard | Name$ Griselbrand | Zone$ Command | RememberMade$ True | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Triggers$ GriselbrandAngry | staticAbilities$ StPlay | Defined$ Remembered | Duration$ Perpetual | SubAbility$ DBCleanup | SpellDescription$ At the beginning of your upkeep, if Griselbrand is in the command zone, you lose two life. 
+SVar:StPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.Self+nonLand | AffectedZone$ Command | Description$ You may cast this card from the command zone
+SVar:GriselbrandAngry:Mode$ Phase | Phase$ Upkeep | PresentZone$ Command | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigLife | TriggerDescription$ At the beginning of your upkeep, if Griselbrand is in the command zone, you lose one life. 
 SVar:TrigLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | Defined$ TriggeredNewCardLKICopy | WithCountersType$ P1P1
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBExileSelf
 SVar:DBExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
-Oracle:At the beginning of the game, conjure Griselbrand into exile, that card perpetually gains "At the beginning of your upkeep, if Griselbrand is in the command zone, you lose two life. "
+Oracle:At the beginning of the game, conjure Griselbrand into exile, that card perpetually gains "At the beginning of your upkeep, if Griselbrand is in the command zone, you lose one life. "
