@@ -102,7 +102,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
 
     public void shutdownForwarder() {
         if (forwarder != null) {
-            forwarder.shutdown();
+            forwarder.flush();
             forwarder = null;
         }
     }

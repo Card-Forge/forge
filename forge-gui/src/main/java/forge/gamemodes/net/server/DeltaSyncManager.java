@@ -106,8 +106,6 @@ public class DeltaSyncManager implements IHasNetLog {
         Map<Integer, Map<TrackableProperty, Object>> newObjects = new LinkedHashMap<>();
         Set<Integer> currentObjectIds = new HashSet<>();
 
-        boolean checksumDue = (packetsSinceLastChecksum + 1) >= checksumInterval;
-
         authoritativeInstances.clear();
         // Pre-scan zone collections across all players for cross-player coverage.
         preScanZoneCollections(gameView);
@@ -141,7 +139,7 @@ public class DeltaSyncManager implements IHasNetLog {
         int checksum = 0;
         int[] checksumPropertyOrdinals = null;
         packetsSinceLastChecksum++;
-        if (checksumDue) {
+        if (packetsSinceLastChecksum >= checksumInterval) {
             checksumPropertyOrdinals = selectChecksumProperties();
             List<String> detail = new ArrayList<>();
             checksum = NetworkChecksumUtil.computeSampledChecksum(gameView, checksumPropertyOrdinals, detail);

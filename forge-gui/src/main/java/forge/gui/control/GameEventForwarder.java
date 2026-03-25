@@ -21,10 +21,10 @@ import java.util.Observer;
  *   <li>Sync points: explicit {@link #flush()} from {@code flushPendingEvents()}</li>
  * </ul>
  *
- * <p>No daemon thread — all delta collection runs on the game thread.
+ * <p>No daemon thread — all delta collection runs on the game thread to avoid race issues.
  */
 public class GameEventForwarder implements Observer {
-    private static final long FLUSH_INTERVAL_NS = 500_000_000L; // 500ms
+    private static final long FLUSH_INTERVAL_NS = 500_000_000L;
     private static final int FLUSH_SIZE_THRESHOLD = 50;
 
     private final IGuiGame gui;
@@ -37,15 +37,12 @@ public class GameEventForwarder implements Observer {
 
     @Subscribe
     public void receiveGameEvent(GameEvent ev) {
-        synchronized (pendingEvents) {
-            pendingEvents.add(ev);
-        }
-        long now = System.nanoTime();
-        boolean timeThreshold = (now - lastFlushTime) >= FLUSH_INTERVAL_NS;
         boolean sizeThreshold;
         synchronized (pendingEvents) {
+            pendingEvents.add(ev);
             sizeThreshold = pendingEvents.size() >= FLUSH_SIZE_THRESHOLD;
         }
+        boolean timeThreshold = (System.nanoTime() - lastFlushTime) >= FLUSH_INTERVAL_NS;
         if (timeThreshold || sizeThreshold) {
             flush();
         }
@@ -73,8 +70,4 @@ public class GameEventForwarder implements Observer {
         flush();
     }
 
-    public void shutdown() {
-        // No daemon thread to shut down — flush any remaining events
-        flush();
-    }
 }
