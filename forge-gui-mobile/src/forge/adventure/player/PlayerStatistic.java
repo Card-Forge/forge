@@ -30,7 +30,7 @@ public class PlayerStatistic implements SaveFileContent {
         }
         return wins;
     }
-    public float rank()   ///// used for overworld enemy spawn
+    public float rank() // used for overworld enemy spawn
     {
         int wins=0;
         for(Map.Entry<String, Pair<Integer, Integer>> value:winLossRecord.entrySet())

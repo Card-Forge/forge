@@ -103,7 +103,7 @@ public class BiomeData implements Serializable {
 
     public EnemyData getEnemy(float difficultyFactor) {
         float totalDistribution = 0.0f;
-        difficultyFactor = Current.player().getStatistic().rank();      //// conpare difficulty data to on how many wins you have on your save 
+        difficultyFactor = Current.player().getStatistic().rank(); // compare difficulty data to how many wins you have on your save
         List<EnemyData> filteredEnemies = new ArrayList<>();
         for (EnemyData data : enemyList ){
             if (data.difficulty <= difficultyFactor) { 
