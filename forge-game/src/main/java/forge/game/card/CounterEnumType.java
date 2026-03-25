@@ -490,22 +490,13 @@ public enum CounterEnumType implements CounterType {
     private String name, counterOnCardDisplayName;
     private int red, green, blue;
 
-    CounterEnumType() {
-        this.name = this.name().substring(0, 1).toUpperCase() + this.name().substring(1).toLowerCase();
-        if (red == 0 && green == 0 && blue == 0) {
-            red = 255;
-            green = 255;
-            blue = 255;
-        }
-    }
-
     CounterEnumType(final String counterOnCardDisplayName) {
-        this();
-        this.counterOnCardDisplayName = counterOnCardDisplayName;
+        this(counterOnCardDisplayName, 255, 255, 255);
     }
 
     CounterEnumType(final String counterOnCardDisplayName, final int red, final int green, final int blue) {
-        this(counterOnCardDisplayName);
+        this.name = this.name().substring(0, 1).toUpperCase() + this.name().substring(1).toLowerCase();
+        this.counterOnCardDisplayName = counterOnCardDisplayName;
         this.red = red;
         this.green = green;
         this.blue = blue;
@@ -550,5 +541,4 @@ public enum CounterEnumType implements CounterType {
     public boolean isKeywordCounter() {
         return false;
     }
-
 }

@@ -5,7 +5,9 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
-public interface CounterType extends Serializable {
+import forge.util.ITranslatable;
+
+public interface CounterType extends Serializable, ITranslatable {
 
     static CounterType getType(String name) {
         if ("Any".equalsIgnoreCase(name)) {
@@ -37,4 +39,13 @@ public interface CounterType extends Serializable {
     int getGreen();
 
     int getBlue();
+
+    @Override
+    default String getTranslationKey() {
+        return toString();
+    }
+    @Override
+    default String getUntranslatedName() {
+        return toString();
+    }
 }
