@@ -37,6 +37,7 @@ import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
+import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -1842,7 +1843,7 @@ public class AbilityUtils {
                     }
                     return doXMath(v, expr, c, ctb);
                 }
-                
+
                 // Count$FromNamedAbility[abilityName].<True>.<False>
                 if (sq[0].startsWith("FromNamedAbility")) {
                     String abilityNamed = sq[0].substring(16);
@@ -2819,20 +2820,8 @@ public class AbilityUtils {
                 : game.getCardsIn(ZoneType.Battlefield);
 
             CardCollection cards = CardLists.getValidCards(cardsInZones, rest, player, c, ctb);
-            final Map<String, Integer> map = Maps.newHashMap();
-            for (final Card card : cards) {
-                // Remove Duplicated types
-                final String name = card.getName();
-                Integer count = map.get(name);
-                map.put(name, count == null ? 1 : count + 1);
-            }
-            int max = 0;
-            for (final Entry<String, Integer> entry : map.entrySet()) {
-                if (max < entry.getValue()) {
-                    max = entry.getValue();
-                }
-            }
-            return max;
+
+            return (int)cards.stream().collect(Collectors.groupingBy(Card::getName, Collectors.counting())).values().stream().mapToLong(v -> v).max().orElse(0);
         }
 
         if (sq[0].startsWith("MostProminentCreatureType")) {
@@ -2957,6 +2946,37 @@ public class AbilityUtils {
                 result.addAll(GameActionUtil.getAlternativeCosts(sa, controller, true));
             }
         }
+    }
+
+    public static Range<Integer> getAnnouncementBounds(SpellAbility ability, String announce) {
+        final Card host = ability.getHostCard();
+        int max = Integer.MAX_VALUE;
+        int min = 0;
+        Cost cost = ability.getPayCosts();
+
+        if ("X".equals(announce)) {
+            final boolean abXMin = ability.hasParam("XMin");
+            if (abXMin) min = Integer.parseInt(ability.getParam("XMin"));
+            if (ability.hasParam("XMax")) {
+                max = Math.min(max, AbilityUtils.calculateAmount(host, ability.getParam("XMax"), ability));
+            }
+            if (cost != null && cost.hasManaCost() && !abXMin) {
+                min = cost.getCostMana().getXMin();
+            }
+        }
+
+        if (ability.hasParam("AnnounceMax")) {
+            max = Math.min(max, AbilityUtils.calculateAmount(host, ability.getParam("AnnounceMax"), ability));
+        }
+
+        if (ability.usesTargeting()) {
+            // if announce is used as min targets, check what the max possible number would be
+            if (announce.equals(ability.getTargetRestrictions().getMinTargets())) {
+                max = Math.min(max, CardUtil.getValidCardsToTarget(ability).size());
+            }
+        }
+
+        return Range.of(min, max);
     }
 
     public static final String applyAbilityTextChangeEffects(final String def, final CardTraitBase ability) {

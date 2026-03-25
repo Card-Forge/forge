@@ -1,7 +1,5 @@
 package forge.screens.deckeditor.controllers;
 
-import java.util.EnumSet;
-
 import forge.deck.CardPool;
 import forge.deck.DeckBase;
 import forge.deck.DeckSection;
@@ -29,7 +27,7 @@ public abstract class CDeckEditor<TModel extends DeckBase> extends ACEditorBase<
         CardPool result = new CardPool();
         result.addAll(getCatalogManager().getPool());
 
-        for (DeckSection section: EnumSet.allOf(DeckSection.class)) {
+        for (DeckSection section: DeckSection.values()) {
             if (isSectionPickableFromCatalog(section)) {
                 result.addAll(getHumanDeck().getOrCreate(section));
             }

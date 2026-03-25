@@ -46,7 +46,7 @@ public class ScryAi extends SpellAbilityAi {
             }
 
             if ("X".equals(sa.getParam("ScryNum")) && sa.getSVar("X").equals("Count$xPaid")) {
-                int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
+                int xPay = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
                 if (xPay == 0) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
@@ -177,7 +177,7 @@ public class ScryAi extends SpellAbilityAi {
         }
 
         if ("X".equals(sa.getParam("ScryNum")) && sa.getSVar("X").equals("Count$xPaid")) {
-            int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
+            int xPay = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
             if (xPay == 0) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
             }

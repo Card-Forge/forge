@@ -308,7 +308,6 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     public String getFlavorName() {
         return flavorName;
     }
-
     public void setFlavorName(String flavorName) {
         this.flavorName = flavorName;
         view.updateName(this);
@@ -346,6 +345,10 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     }
     public final void setBaseToughnessString(final String s) {
         baseToughnessString = s;
+    }
+
+    public final boolean hasPrintedPT() {
+        return !StringUtils.isEmpty(basePowerString) || !StringUtils.isEmpty(baseToughnessString);
     }
 
     public String getBaseLoyalty() {
@@ -727,6 +730,9 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     }
 
     public FCollectionView<ReplacementEffect> getReplacementEffects() {
+        return getReplacementEffects(true);
+    }
+    public FCollectionView<ReplacementEffect> getReplacementEffects(boolean rulesHost) {
         FCollection<ReplacementEffect> result = new FCollection<>(replacementEffects);
         // add Split to Original
         if (getStateName().equals(CardStateName.Original)) {
@@ -749,7 +755,11 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             result.add(defenseRep);
         }
 
-        card.updateReplacementEffects(result, this);
+        card.updateReplacementEffects(result, this, rulesHost);
+
+        if (!rulesHost) {
+            return result;
+        }
 
         // below are global rules
         if (type.hasSubtype("Saga") && !hasKeyword(Keyword.READ_AHEAD)) {

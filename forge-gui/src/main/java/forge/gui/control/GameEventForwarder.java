@@ -6,16 +6,30 @@ import forge.gui.interfaces.IGuiGame;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 public class GameEventForwarder {
-    private static final long FLUSH_INTERVAL_NS = 50_000_000L; // 50ms
+    private static final long FLUSH_INTERVAL_NS = 500_000_000L; // 500ms
     private static final int FLUSH_SIZE_THRESHOLD = 50;
 
     private final IGuiGame gui;
     private final List<GameEvent> pendingEvents = new ArrayList<>();
     private long lastFlushTime = System.nanoTime();
 
-    public GameEventForwarder(IGuiGame gui) { this.gui = gui; }
+    private final ScheduledExecutorService scheduler =
+            Executors.newSingleThreadScheduledExecutor(r -> {
+                Thread t = new Thread(r, "GameEventForwarder-flush");
+                t.setDaemon(true);
+                return t;
+            });
+    private ScheduledFuture<?> scheduledFlush;
+
+    public GameEventForwarder(IGuiGame gui) {
+        this.gui = gui;
+    }
 
     @Subscribe
     public void receiveGameEvent(GameEvent ev) {
@@ -29,11 +43,17 @@ public class GameEventForwarder {
             sizeThreshold = pendingEvents.size() >= FLUSH_SIZE_THRESHOLD;
         }
         if (timeThreshold || sizeThreshold) {
+            cancelScheduledFlush();
             flush();
+        } else if (scheduledFlush == null || scheduledFlush.isDone()) {
+            // Schedule a deferred flush for when the interval expires
+            long delayNs = FLUSH_INTERVAL_NS - (now - lastFlushTime);
+            scheduledFlush = scheduler.schedule(this::flush, delayNs, TimeUnit.NANOSECONDS);
         }
     }
 
     public void flush() {
+        cancelScheduledFlush();
         List<GameEvent> batch;
         synchronized (pendingEvents) {
             if (pendingEvents.isEmpty()) {
@@ -44,5 +64,17 @@ public class GameEventForwarder {
         }
         lastFlushTime = System.nanoTime();
         gui.handleGameEvents(batch);
+    }
+
+    private void cancelScheduledFlush() {
+        if (scheduledFlush != null) {
+            scheduledFlush.cancel(false);
+            scheduledFlush = null;
+        }
+    }
+
+    public void shutdown() {
+        cancelScheduledFlush();
+        scheduler.shutdownNow();
     }
 }

@@ -676,16 +676,6 @@
     "questItem": true
   },
   {
-    "name": "Steel Shield",
-    "description": "A solid steel shield granting +2 starting life.",
-    "equipmentSlot": "Left",
-    "iconName": "IronShield",
-    "cost": 1000,
-    "effect": {
-      "lifeModifier": 2
-    }
-  },
-  {
     "name": "Iron Armor",
     "description": "Simple iron armor granting +2 starting life.",
     "equipmentSlot": "Body",
@@ -1354,7 +1344,7 @@
     "description": "Pay 2 to temp transfer flying, first strike, trample, or shadow between creatures.",
     "equipmentSlot": "Neck",
     "iconName": "PhyrexianSplicer",
-    "cost": 1500,
+    "cost": 12000,
     "effect": {
       "startBattleWithCard": [
         "Phyrexian Splicer|TMP"
@@ -2308,18 +2298,6 @@
       ]
     },
     "description": "A 4/3 Serpent. Sac an Island to make target land an Island."
-  },
-  {
-    "name": "Phyrexian Splicer",
-    "equipmentSlot": "Neck",
-    "iconName": "PhyrexianSplicer",
-    "effect": {
-      "startBattleWithCard": [
-        "Phyrexian Splicer|TMP"
-      ]
-    },
-    "description": "Pay 2 and tap to move flying/first strike/shadow/trample.",
-    "cost": 12000
   },
   {
     "name": "Tome of the Trove",

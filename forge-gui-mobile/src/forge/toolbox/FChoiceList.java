@@ -29,6 +29,8 @@ import forge.card.CardZoom.ActivateHandler;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.card.CardView;
+import forge.game.card.CounterKeywordType;
+import forge.game.card.CounterType;
 import forge.game.card.IHasCardView;
 import forge.game.keyword.Keyword;
 import forge.game.player.PlayerView;
@@ -113,6 +115,8 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
             renderer = new CoreTypeRenderer();
         } else if (item instanceof CardType.Supertype) {
             renderer = new SuperTypeRenderer();
+        } else if (item instanceof CounterType) {
+            renderer = new CounterTypeRenderer();
         } else if (item instanceof Integer || item == FilterOperator.EQUALS) { //allow numeric operators to be selected horizontally
             renderer = new NumberRenderer();
         } else if (item instanceof IHasSkinProp) {
@@ -670,16 +674,19 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
         @Override
         public void drawValue(Graphics g, T value, FSkinFont font, FSkinColor foreColor, boolean pressed, float x, float y, float w, float h) {
             FSkinProp skinProp = skinFunction.apply(value);
+
+            float iconSize = h * 0.8f;
+            float offset = (h - iconSize) / 2;
+
             if (skinProp != null) {
-                float iconSize = h * 0.8f;
-                float offset = (h - iconSize) / 2;
-
                 g.drawImage(FSkin.getImages().get(skinProp), x + offset - 1, y + offset, iconSize, iconSize);
-
-                float dx = iconSize + PADDING + 2 * offset - 1;
-                x += dx;
-                w -= dx;
             }
+            // this renderer always should indent because there could be an icon
+
+            float dx = iconSize + PADDING + 2 * offset - 1;
+            x += dx;
+            w -= dx;
+
             textRenderer.drawText(g, displayFunction.apply(value), font, foreColor, x, y, w, h, y, h, true, Align.left, true);
         }
     }
@@ -705,6 +712,18 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
     protected class SuperTypeRenderer extends AbstractIHasSkinPropRenderer {
         public SuperTypeRenderer() {
             super(v -> ((CardType.Supertype)v).getTranslatedName(), v -> null);
+        }
+    }
+
+    protected class CounterTypeRenderer extends AbstractIHasSkinPropRenderer {
+        public CounterTypeRenderer() {
+            super(v -> ((CounterType)v).getTranslatedName(), v -> {
+                if (v instanceof CounterKeywordType ck) {
+                    return FSkinProp.iconFromKeyword(ck.type(), ck.keyword());
+                } else {
+                    return null;
+                }
+            });
         }
     }
 

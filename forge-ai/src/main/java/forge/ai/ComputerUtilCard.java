@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import forge.StaticData;
@@ -607,17 +608,7 @@ public class ComputerUtilCard {
 
     public static Map<String, Integer> evaluateCreatureListByName(final CardCollectionView list) {
         // Compute value for each possible target
-        Map<String, Integer> values = Maps.newHashMap();
-        for (Card c : list) {
-            String name = c.getName();
-            int val = evaluateCreature(c);
-            if (values.containsKey(name)) {
-                values.put(name, values.get(name) + val);
-            } else {
-                values.put(name, val);
-            }
-        }
-        return values;
+        return list.stream().collect(Collectors.groupingBy(Card::getName, Collectors.summingInt(c -> evaluateCreature(c))));
     }
 
     public static boolean doesCreatureAttackAI(final Player aiPlayer, final Card card) {
@@ -764,26 +755,9 @@ public class ComputerUtilCard {
             return "";
         }
 
-        final Map<String, Integer> map = Maps.newHashMap();
-
-        for (final Card c : list) {
-            final String name = c.getName();
-            Integer currentCnt = map.get(name);
-            map.put(name, currentCnt == null ? Integer.valueOf(1) : Integer.valueOf(1 + currentCnt));
-        }
-
-        int max = 0;
-        String maxName = "";
-
-        for (final Entry<String, Integer> entry : map.entrySet()) {
-            final String type = entry.getKey();
-
-            if (max < entry.getValue()) {
-                max = entry.getValue();
-                maxName = type;
-            }
-        }
-        return maxName;
+        return list.stream()
+                .collect(Collectors.groupingBy(Card::getName, Collectors.counting()))
+                .entrySet().stream().max(Entry.comparingByValue()).orElse(Map.entry("", 0l)).getKey();
     }
 
     public static String getMostProminentType(final CardCollectionView list, final Collection<String> valid) {
@@ -825,8 +799,7 @@ public class ComputerUtilCard {
 
             Set<String> cardCreatureTypes = c.getType().getCreatureTypes();
             for (String type : cardCreatureTypes) {
-                Integer count = typesInDeck.getOrDefault(type, 0);
-                typesInDeck.put(type, count + weight);
+                typesInDeck.merge(type, weight, Integer::sum);
             }
 
             //also take into account abilities that generate tokens
@@ -837,16 +810,14 @@ public class ComputerUtilCard {
                         if (tokenCR == null)
                             continue;
                         for (String type : tokenCR.getType().getCreatureTypes()) {
-                            Integer count = typesInDeck.getOrDefault(type, 0);
-                            typesInDeck.put(type, count + 1);
+                            typesInDeck.merge(type, 1, Integer::sum);
                         }
                     }
                 }
 
                 // special rule for Fabricate and Servo
                 if (c.hasKeyword(Keyword.FABRICATE)) {
-                    Integer count = typesInDeck.getOrDefault("Servo", 0);
-                    typesInDeck.put("Servo", count + weight);
+                    typesInDeck.merge("Servo", weight, Integer::sum);
                 }
             }
         }
@@ -868,39 +839,16 @@ public class ComputerUtilCard {
         return maxType;
     }
 
-    public static String getMostProminentCardType(final CardCollectionView list, final Collection<String> valid) {
+    public static CardType.CoreType getMostProminentCardType(final CardCollectionView list, final Collection<CardType.CoreType> valid) {
         if (list.isEmpty() || valid.isEmpty()) {
-            return "";
+            return null;
         }
 
-        final Map<String, Integer> typesInDeck = Maps.newHashMap();
-        for (String type : valid) {
-            typesInDeck.put(type, 0);
-        }
-
-        for (final Card c : list) {
-            Iterable<CardType.CoreType> cardTypes = c.getType().getCoreTypes();
-            for (CardType.CoreType type : cardTypes) {
-                Integer count = typesInDeck.get(type.toString());
-                if (count != null) {
-                    typesInDeck.put(type.toString(), count + 1);
-                }
-            }
-        }
-
-        int max = 0;
-        String maxType = "";
-
-        for (final Entry<String, Integer> entry : typesInDeck.entrySet()) {
-            final String type = entry.getKey();
-
-            if (max < entry.getValue()) {
-                max = entry.getValue();
-                maxType = type;
-            }
-        }
-
-        return maxType;
+        Map.Entry<CardType.CoreType, Long> result = list.stream().flatMap(c -> c.getType().getCoreTypes().stream())
+                .filter(valid::contains)
+                .collect(Collectors.groupingBy(s -> s, Collectors.counting()))
+                .entrySet().stream().max(Entry.comparingByValue()).orElse(null);
+        return result == null ? null : result.getKey(); // Map.entry doesn't like null key
     }
 
     /**
@@ -1355,10 +1303,8 @@ public class ComputerUtilCard {
                 if (CombatUtil.canAttack(c) || (phase.inCombat() && c.isAttacking())) {
                     return true;
                 }
-            } else {
-                if (CombatUtil.canBlock(c)) {
-                    return true;
-                }
+            } else if (CombatUtil.canBlock(c)) {
+                return true;
             }
         }
 

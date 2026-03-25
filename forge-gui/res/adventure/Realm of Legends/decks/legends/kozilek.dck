@@ -45,7 +45,7 @@ Name=Kozilek
 1 Karn, the Great Creator|war
 1 Karn's Sylex|dmu
 1 Kozilek, Butcher of Truth|mm2
-1 Kozilek, the Broker Reality|mh3
+1 Kozilek, the Broken Reality|mh3
 1 Lithoform Engine|brc
 1 Lodestone Golem|mm2
 1 Mana Vault|mps
@@ -60,7 +60,6 @@ Name=Kozilek
 1 Platinum Angel|mps
 1 Rings of Brighthearth|cmr
 1 Roaming Throne|lci
-1 Rogue's Passage|otc
 1 Scorched Ruins|wth
 1 Semblance Anvil|som
 1 Shrine of the Forsaken Gods|mkc
@@ -95,5 +94,5 @@ Name=Kozilek
 1 War Room|mkc
 1 Ward of Bones|eve
 1 Wasteland|zne|[30]
-5 Wastes|ogw|[184]
+6 Wastes|ogw|[184]
 1 Winter Orb|lea

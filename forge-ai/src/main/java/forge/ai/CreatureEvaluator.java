@@ -47,6 +47,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
 
         if (considerPT) {
             value += addValue(power * 15, "power");
+            // TODO factor in marked damage - but probably not always?
             value += addValue(toughness * 10, "toughness: " + toughness);
 
             // because backside is always stronger the potential makes it better than a single faced card

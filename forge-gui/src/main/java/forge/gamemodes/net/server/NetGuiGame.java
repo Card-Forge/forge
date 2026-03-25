@@ -15,6 +15,7 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.AbstractGuiGame;
+import forge.gamemodes.net.GameEventProxy;
 import forge.gamemodes.net.GameProtocolSender;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.gui.control.GameEventForwarder;
@@ -22,6 +23,7 @@ import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
+import forge.trackable.Tracker;
 import forge.trackable.TrackableCollection;
 import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
@@ -29,6 +31,7 @@ import forge.util.ITriggerEvent;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class NetGuiGame extends AbstractGuiGame {
 
@@ -61,6 +64,13 @@ public class NetGuiGame extends AbstractGuiGame {
 
     public void setForwarder(GameEventForwarder forwarder) {
         this.forwarder = forwarder;
+    }
+
+    public void shutdownForwarder() {
+        if (forwarder != null) {
+            forwarder.shutdown();
+            forwarder = null;
+        }
     }
 
     private void flushPendingEvents() {
@@ -321,9 +331,12 @@ public class NetGuiGame extends AbstractGuiGame {
     @Override
     public void handleGameEvents(List<GameEvent> events) {
         if (paused) { return; }
-        Logger.info("Sending batch of {} game events", events.size());
+        Logger.info("Sending batch of {}: [{}]", () -> events.size(),
+                () -> events.stream().map(e -> e.getClass().getSimpleName()).collect(Collectors.joining(", ")));
+        Tracker tracker = getGameView() != null ? getGameView().getTracker() : null;
+        List<Object> proxied = GameEventProxy.wrapAll(events, tracker);
         sender.write(ProtocolMethod.setGameView, getGameView());
-        sender.send(ProtocolMethod.handleGameEvents, events);
+        sender.send(ProtocolMethod.handleGameEvents, proxied);
     }
 
     @Override

@@ -139,19 +139,19 @@
     &quot;editions&quot;: [ &quot;EOE&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 10,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    &quot;rarity&quot;: [ &quot;common&quot; ]
   },
   {
     &quot;editions&quot;: [ &quot;EOE&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    &quot;rarity&quot;: [ &quot;uncommon&quot; ]
   },
   {
     &quot;editions&quot;: [ &quot;EOE&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic Rare&quot; ]
   }
 ]
 </property>
@@ -177,19 +177,19 @@
     &quot;editions&quot;: [ &quot;EOE&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 10,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    &quot;rarity&quot;: [ &quot;common&quot; ]
   },
   {
     &quot;editions&quot;: [ &quot;EOE&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    &quot;rarity&quot;: [ &quot;uncommon&quot; ]
   },
   {
     &quot;editions&quot;: [ &quot;EOE&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ]
   }
 ]
 </property>
@@ -204,8 +204,8 @@
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 4,
     &quot;editions&quot;: [ &quot;EOE&quot;, &quot;EOC&quot;, &quot;YEOE&quot; ],
-    &quot;subtypes&quot;: [ &quot;Spacecraft&quot; ],
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;subTypes&quot;: [ &quot;Spacecraft&quot; ],
+    &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ]
   }
 ]
 </property>

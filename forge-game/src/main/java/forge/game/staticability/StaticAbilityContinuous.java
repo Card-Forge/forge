@@ -712,11 +712,13 @@ public final class StaticAbilityContinuous {
                     newKeywords.removeIf(input -> {
                         // replace one Keyword with list of keywords
                         if (input.contains("CardColors") || input.contains("cardColors")) {
-                            for (MagicColor.Color color : affectedCard.getColor()) {
-                                extraKeywords.add(
-                                    input.replaceAll("CardColors", StringUtils.capitalize(color.getName()))
-                                        .replaceAll("cardColors", color.getName())
+                            if (!(affectedCard.getColor().isColorless())) {
+                                for (MagicColor.Color color : affectedCard.getColor()) {
+                                    extraKeywords.add(
+                                            input.replaceAll("CardColors", StringUtils.capitalize(color.getName()))
+                                                    .replaceAll("cardColors", color.getName())
                                     );
+                                }
                             }
                             return true;
                         }

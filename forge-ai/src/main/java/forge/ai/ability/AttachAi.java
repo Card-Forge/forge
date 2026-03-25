@@ -79,11 +79,10 @@ public class AttachAi extends SpellAbilityAi {
         }
 
         if (abCost.getTotalMana().countX() > 0 && sa.getSVar("X").equals("Count$xPaid")) {
-            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
+            final int xPay = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
             if (xPay == 0) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
             }
-            sa.setXManaCostPaid(xPay);
         }
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);

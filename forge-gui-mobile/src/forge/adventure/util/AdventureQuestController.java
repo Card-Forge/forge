@@ -99,8 +99,7 @@ public class AdventureQuestController implements Serializable {
                     if (!toBoost.isEmpty()) {
                         float value = totalWeightToAssign / toBoost.size();
                         for (String key : toBoost) {
-                            float existingValue = boostedSpawns.getOrDefault(key, 0.0f);
-                                boostedSpawns.put(key, value + existingValue);
+                            boostedSpawns.merge(key, value, Float::sum);
                         }
                     }
                 }

@@ -1,0 +1,11 @@
+Name:Pterafractyl
+ManaCost:X G U
+Types:Creature Dinosaur Fractal
+PT:1/0
+K:Flying
+K:etbCounter:P1P1:X
+SVar:X:Count$xPaid
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When this creature attacks, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+SVar:HasAttackEffect:TRUE
+Oracle:Flying\nThis creature enters with X +1/+1 counters on it.\nWhen this creature attacks, you gain 2 life.

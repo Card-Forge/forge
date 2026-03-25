@@ -999,7 +999,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             if (autoSell != null && !autoSell.isVisible() && flipProcess == 1) {
                 autoSell.setVisible(true);
 
-                if (AdventurePlayer.current().getAdventureMode().equals(AdventureModes.Commander)) {
+                if (AdventurePlayer.current().isCommanderMode()) {
                     PaperCard pc = reward.getCard();
                     if (pc != null) {
                         setAutoSell(inCollectionLike(pc));

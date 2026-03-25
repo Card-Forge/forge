@@ -28,13 +28,12 @@ import forge.game.zone.MagicStack;
 import forge.game.zone.ZoneType;
 import forge.util.FileSection;
 import forge.util.MyRandom;
-import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.Map;
+import java.util.Set;
 
 public class EffectAi extends SpellAbilityAi {
     @Override
@@ -150,6 +149,23 @@ public class EffectAi extends SpellAbilityAi {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
                 randomReturn = true;
+            } else if (logic.equals("SecretTunnel")) {
+                randomReturn = false;
+                if (phase.is(PhaseType.COMBAT_BEGIN, ai)) {
+                    for (String s : CardFactoryUtil.getMostProminentCreatureType(ai.getCreaturesInPlay())) {
+                        CardCollection typedCards = CardLists.filter(ai.getCreaturesInPlay(), CardPredicates.isType(s));
+                        if (typedCards.size() >= 2) {
+                            Card tgt1 = typedCards.get(0);
+                            Card tgt2 = typedCards.get(1);
+                            if (ComputerUtilCard.doesCreatureAttackAI(ai, tgt1) || ComputerUtilCard.doesCreatureAttackAI(ai, tgt2)) {
+                                sa.getTargets().add(tgt1);
+                                sa.getTargets().add(tgt2);
+                                randomReturn = true;
+                                break;
+                            }
+                        }
+                    }
+                }
             } else if (logic.equals("WillCastCreature") && ai.isAI()) {
                 AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
                 SpellAbility saCreature = aic.predictSpellToCastInMain2(ApiType.PermanentNoncreature);
@@ -292,6 +308,47 @@ public class EffectAi extends SpellAbilityAi {
                 if (!options.isEmpty() && phase.isPlayerTurn(ai) && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                     sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(options));
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                }
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            } else if (logic.equals("MakeUnblockable")) {
+                if (ai.getOpponents().getCreaturesInPlay().isEmpty()) {
+                    return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
+                }
+                sa.resetTargets();
+                CardCollection options = new CardCollection(CardUtil.getValidCardsToTarget(sa));
+                options = CardLists.filterControlledBy(options, ai);
+                options = CardLists.filter(options, CombatUtil::canAttack);
+                if (sa.getPayCosts().hasTapCost()) {
+                    options.remove(sa.getHostCard());
+                }
+                if (options.isEmpty()) {
+                    return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
+                }
+                if (phase.is(PhaseType.MAIN1, ai)) {
+                    int predictedLife = ai.getLife();
+                    if (ai.canLoseLife() && !ai.cantLoseForZeroOrLessLife()) {
+                        predictedLife = ComputerUtil.predictNextCombatsRemainingLife(ai, false, false, 0, options);
+                    }
+                    ComputerUtilCard.sortByEvaluateCreature(options);
+                    for (Card card : options) {
+                        if (!CombatUtil.canBeBlocked(card, ai.getOpponents().getCreaturesInPlay(), phase.getCombat())) {
+                            continue;
+                        }
+                        if (card.getNetPower() >= ai.getWeakestOpponent().getLife() && ai.getWeakestOpponent().canLoseLife() && !ai.getWeakestOpponent().cantLoseForZeroOrLessLife()) {
+                            // try to finish off the opponent with an unblockable creature
+                            sa.getTargets().add(card);
+                            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                        }
+                        final Card copy = CardCopyService.getLKICopy(card);
+                        String cantBeBlocked = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self";
+                        copy.addStaticAbility(cantBeBlocked);
+                        copy.setSickness(false); // for some reason is copied as if having summoning sickness
+                        // TODO: also check the case where the AI would attack with the creature but it will be traded, to avoid trading unfavorably?
+                        if (predictedLife > 0 && ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, copy) && !ComputerUtilCard.doesCreatureAttackAI(ai, card)) {
+                            sa.getTargets().add(card);
+                            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                        }
+                    }
                 }
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             } else if (logic.equals("Burn")) {
@@ -670,19 +727,6 @@ public class EffectAi extends SpellAbilityAi {
                 }
                 String valid = subAbility.getParamOrDefault("ValidCards", "");
 
-                // Ugh. If calculateAmount needs to be called with DestroyAll it _needs_
-                // to use the X variable
-                // We really need a better solution to this
-                if (valid.contains("X")) {
-                    valid = TextUtil.fastReplace(valid,
-                            "X", Integer.toString(AbilityUtils.calculateAmount(subAbility.getHostCard(), "X", subAbility)));
-                }
-
-                // host card is valid
-                if (host.isValid(valid.split(","), subAbility.getActivatingPlayer(), subAbility.getHostCard(), subAbility)) {
-                    return true;
-                }
-                // failed to check via valid, need to pass through the filterList method
                 CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);
 
                 if (subAbility.usesTargeting()) {
