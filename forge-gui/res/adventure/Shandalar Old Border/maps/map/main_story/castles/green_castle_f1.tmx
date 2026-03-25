@@ -49,7 +49,7 @@
 },
 {
    "condition": [{"checkQuestFlag": "Ch1CastlesComplete"}],
-   "text": "As you land your final blow against Ghalta, you feel a another pulse of mana. But just as before, the locked room behind your fallen foe does not hold any prisoners.",
+   "text": "As you land your final blow against Ghalta, you feel another pulse of mana. But just as before, the locked room behind your fallen foe does not hold any prisoners.",
    "options": [{
       "name": "(Continue)", 
       "action": [{"setQuestFlag": {"key":"Ch1GreenCastleComplete", "val": 1} }, {"deleteMapObject": -1}, {"advanceQuestFlag": "Ch1CastlesComplete"}]

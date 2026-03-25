@@ -401,7 +401,7 @@
 
 	},
 	{
-		&quot;text&quot;: &quot;I am impressed, you are welcome to meet my master upstairs, though I can't garantee you will be able to survive that encounter. Goodbye Adventurer&quot;,
+		&quot;text&quot;: &quot;I am impressed, you are welcome to meet my master upstairs, though I can't guarantee you will be able to survive that encounter. Goodbye Adventurer&quot;,
 		&quot;condition&quot;: [
 			{
 				&quot;getMapFlag&quot;: {

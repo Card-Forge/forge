@@ -44,7 +44,7 @@
 },
 {
    "condition": [{"checkQuestFlag": "Ch1CastlesComplete"}],
-   "text": "As you land your final blow against the Lord of the Pit, you feel a another pulse of mana. But just as before, the locked room behind your fallen foe does not hold any prisoners.",
+   "text": "As you land your final blow against the Lord of the Pit, you feel another pulse of mana. But just as before, the locked room behind your fallen foe does not hold any prisoners.",
    "options": [{
       "name": "(Continue)", 
       "action": [{"setQuestFlag": {"key":"Ch1BlackCastleComplete", "val": 1} }, {"deleteMapObject": -1}, {"advanceQuestFlag": "Ch1CastlesComplete"}]
