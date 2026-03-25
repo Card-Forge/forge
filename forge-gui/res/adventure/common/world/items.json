@@ -1,17 +1,17 @@
 [
   {
     "name": "Challenge Coin",
-    "description": "A heavy coin made of gold.",
+    "description": "A heavy coin made of gold",
     "iconName": "ChallengeCoin"
   },
   {
     "name": "Silver Challenge Coin",
-    "description": "A decorative coin made of silver.",
+    "description": "A weighty coin made of silver",
     "iconName": "SilverChallengeCoin"
   },
   {
     "name": "Bronze Challenge Coin",
-    "description": "A lightweight coin made of bronze.",
+    "description": "A lightweight coin made of bronze",
     "iconName": "BronzeChallengeCoin"
   },
   {
@@ -362,7 +362,7 @@
   },
   {
     "name": "Chandra's Tome",
-    "description": "Draft a Chandra themed card that can be cast with mana of any color.",
+    "description": "Draft a Chandra themed card that can be cast with mana of any color",
     "equipmentSlot": "Left",
     "iconName": "ChandrasTome",
     "effect": {
@@ -373,7 +373,7 @@
   },
   {
     "name": "Phoenix Charm",
-    "description": "Draft a Phoenix card, or conjure one to be cast with mana of any color.",
+    "description": "Draft a Phoenix card, or conjure one to be cast with mana of any color",
     "equipmentSlot": "Neck",
     "iconName": "PhoenixCharm",
     "effect": {
@@ -384,12 +384,12 @@
   },
   {
     "name": "Chandra's Stone",
-    "description": "A small red gemstone recovered after your battle with Chandra.",
+    "description": "A small red gemstone recovered after your battle with Chandra",
     "iconName": "r"
   },
   {
     "name": "Phoenix",
-    "description": "Draft a Phoenix card, or conjure one to be cast with mana of any color.",
+    "description": "Draft a Phoenix card, or conjure one to be cast with mana of any color",
     "equipmentSlot": "Neck",
     "iconName": "PhoenixCharm",
     "effect": {
@@ -400,7 +400,7 @@
   },
   {
     "name": "Liliana's Stone",
-    "description": "A small black gemstone recovered after your battle with Liliana.",
+    "description": "A small black gemstone recovered after your battle with Liliana",
     "iconName": "b"
   },
   {
@@ -904,25 +904,25 @@
     }
   },
   {
-     "name": "Basilsk Colar",
+     "name": "Basilisk Collar",
     "equipmentSlot": "Neck",
     "cost": 25000,
     "description": "Equipment that gives deathouch and lifelink",
-    "iconName": "BasilskColar",
+    "iconName": "BasiliskCollar",
     "effect": {
       "lifeModifier": 1,
       "changeStartCards": -1,
       "startBattleWithCardInHand": [
-        "Basilsk Colar"
+        "Basilisk Collar"
       ]
     }
   },
   {
-    "name": "Evil Ank",
+    "name": "Evil Ankh",
     "equipmentSlot": "Right",
-    "description": "Start with Unearth in your hand.",
+    "description": "Start with Unearth in your hand",
     "cost": 25000,
-    "iconName": "EvilAnk",
+    "iconName": "EvilAnkh",
     "effect": {
       "lifeModifier": 1,
       "changeStartCards": -1,
@@ -957,7 +957,7 @@
   },
   {
     "name": "Concordant Boots",
-    "description": "All creatures have haste.",
+    "description": "All creatures have haste",
     "equipmentSlot": "Boots",
     "iconName": "ConcordantBoots",
     "cost": 9000,
@@ -969,7 +969,7 @@
   },
   {
     "name": "Crown of Growth",
-    "description": "Start with Giant Growth into your hand",
+    "description": "Start with Giant Growth in your hand",
     "equipmentSlot": "Neck",
     "iconName": "CrownofGrowth",
     "cost": 3000,
@@ -982,10 +982,10 @@
     }
   },
   {
-    "name": "Mantel of Denial",
-    "description": "Start with Counterspell  into your hand",
+    "name": "Mantle of Denial",
+    "description": "Start with Counterspell in your hand",
     "equipmentSlot": "Body",
-    "iconName": "MantelofDenial",
+    "iconName": "MantleofDenial",
     "cost": 3000,
      "effect": {
       "lifeModifier": 1,
@@ -1020,7 +1020,7 @@
   },
     {
         "name": "Amulet of Telepathy",
-    "description": "Your opponent plays with their hand revealed.",
+    "description": "Your opponent plays with their hand revealed",
     "equipmentSlot": "Neck",
     "iconName": "RelicAmulet",
     "cost": 3000,
@@ -1062,7 +1062,7 @@
         "Goblin Warrens|FEM"
       ]
     },
-    "description": "Pay 2R and sac 2 Goblins to create 3 1/1 Goblin tokens."
+    "description": "Pay 2R and sac 2 Goblins to create 3 1/1 Goblin tokens"
   },
   {
    "name": "Prayerbook of Ire",
@@ -1092,7 +1092,7 @@
       "lifeModifier": -6,
       "changeStartCards": 2
     },
-    "description": "-6 life. Draw 2 extra cards at game start."
+    "description": "-6 life. Draw 2 extra cards at game start"
   },
   {
       "name": "Angelic Armaments",
@@ -1512,7 +1512,7 @@
     "effect": {
       "colorView": true
     },
-    "description": "Grants Manasight, letting you know the colors used by your adversaries.",
+    "description": "Grants Manasight, letting you know the colors used by your adversaries",
     "iconName": "RelicAmulet"
   },
   {
@@ -1891,7 +1891,7 @@
   },
   {
     "name": "Hallowed Sigil",
-    "description": "Turn a creature hexproof until end of turn.",
+    "description": "Give a creature hexproof until end of turn",
     "equipmentSlot": "Neck",
     "iconName": "HallowedSigil",
     "effect": {
@@ -1902,7 +1902,7 @@
   },
   {
     "name": "Unhallowed Sigil",
-    "description": "Devour the life of an enemy creature, killing it.",
+    "description": "Devour the life of an enemy creature, killing it",
     "equipmentSlot": "Right",
     "iconName": "UnhallowedSigil",
     "effect": {
