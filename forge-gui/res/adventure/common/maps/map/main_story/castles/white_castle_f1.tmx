@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="55">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="62">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -9,27 +9,29 @@
  </properties>
  <tileset firstgid="1" source="../../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../Innistrad/maps/tileset/INN_dungen_crawler_tileset.tsx"/>
+ <tileset firstgid="24193" source="../../../tileset/dungeon/dungeon_bis.tsx"/>
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJztwzEJAAAMA7C+8w/VWyFLIL2kqqqqvjuO1S8b
+   eJztzbEJADAIBdG/iguazOO0sQ8IKbQId/DqC5cClyq+f3+n352v6j35BQAA6OYmrbSN74sDM+Rvvg==
   </data>
  </layer>
  <layer id="2" name="Ground" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJyz5GNgsBzFGNgGiK9jwdY0ttcKiLEBi1F7qYrn8TIwzAbiObwQ+2ZB+XN56ZO+YP6mtT/paS8oz9wC4ptY6BtQe6/hkAfR5OYtbGkolB17usImTm5YwOxt5GdgaCIBN/NTx155AQYGBRKwosCovaP2jto7au/A2LsXaM4+LFgVh/h+KtmLCygJ4JcftZc4DGtLYcOg9hXI3ll41NCizQUKC5C9A9G+Gsr2AgDj7PCe
+   eJztlUEKgzAQRf8BGs8QPYW2nintfUTPpKVd1NOYQQohGiQTuwidD48sMuExE0KaAmgEQRASaS2z5RNY54P9G9N7tfQG7NQJXsqogSmCpz7Ha0rgHsGjXOeU4qXzHG+u/XK9ufab2/2KNx/vpQKUx1uvjpfe7hXVOe93L8brbS+p74ji/0u/9rpx3SEv1XzruN5BAV0A1xuq6RXPezQL8nJ7+lfvAgkcMtM=
   </data>
  </layer>
  <layer id="3" name="Foreground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjBSglsTAoJ5Ef3uXAe1cTmN7lZIZGJSBWCUZIaYGZKsnE1ZHLhDMgdDzgH6bj8d/6PIwfeSCiVD9ckA/yOPxB7r8RArtJdfd1PIvvfTBwKh/aasPBkb9S1t9MDDS/DsKBhbM4YXQs3gH1h2jgDgAAFXEIGo=
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="30">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
    eJztwQEBAAAAgiD/r25IQAEAAPBoDhAAAQ==
-  </data>
- </layer>
- <layer id="5" name="AboveSprites" width="30" height="30">
-  <data encoding="base64" compression="zlib">
-   eJztzbENADAIA0FvAANEGZUwOpHSU9LkT7JcvgTgF2HSuUub7S5/v322CwAAgF4BRR8CBQ==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -55,6 +57,39 @@
  &quot;startBattleWithCard&quot;: [ &quot;Mox Pearl&quot; ]
 }</property>
     <property name="enemy" value="Akroma"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Angelic Armaments&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.05,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Robes of Omniscience&quot;
+ },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.05,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Angelic Greaves&quot;
+ },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;JOU&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;RIX&quot;]
+  }
+]
+</property>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
@@ -63,46 +98,12 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="53" template="../../../obj/scroll.tx" x="209" y="77.6667">
-   <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Mox Pearl&quot;, &quot;count&quot;: 1 }, {&quot;type&quot;: &quot;item&quot;, &quot;count&quot;: 1, &quot;itemName&quot;: &quot;Strange Key&quot;} ]"/>
-   </properties>
-  </object>
-  <object id="54" template="../../../obj/gate.tx" x="209" y="160">
-   <properties>
-    <property name="dialog">[
-	{
-		&quot;text&quot;: &quot;A big gate is blocking the path, through the bars you can see a Mox Pearl in the room beyond. (You need all five colored keys to open this gate.)&quot;,
-		&quot;options&quot;: [
-			{ &quot;name&quot;: &quot;Leave&quot; },
-			{
-				&quot;name&quot;: &quot;Unlock with the five colored keys&quot;,
-				&quot;condition&quot;: [
-					{ &quot;item&quot;: &quot;Blue Key&quot; },
-					{ &quot;item&quot;: &quot;Green Key&quot; },
-					{ &quot;item&quot;: &quot;Black Key&quot; },
-					{ &quot;item&quot;: &quot;White Key&quot; },
-					{ &quot;item&quot;: &quot;Red Key&quot; }
-				],
-				&quot;text&quot;: &quot;The gate is unlocked.&quot;,
-				&quot;options&quot;: [
-					{
-						&quot;name&quot;: &quot;Continue&quot;,
-						&quot;action&quot;: [
-							{ &quot;deleteMapObject&quot;: -1 },
-							{ &quot;removeItem&quot;: &quot;Blue Key&quot; },
-							{ &quot;removeItem&quot;: &quot;Green Key&quot; },
-							{ &quot;removeItem&quot;: &quot;Black Key&quot; },
-							{ &quot;removeItem&quot;: &quot;White Key&quot; },
-							{ &quot;removeItem&quot;: &quot;Red Key&quot; }
-						]
-					}
-				]
-			}
-		]
-	}
-]</property>
-   </properties>
-  </object>
+  <object id="55" template="../../../obj/collision.tx" x="127.199" y="182.462" width="32.1754" height="25.3043"/>
+  <object id="56" template="../../../obj/collision.tx" x="122.728" y="160.511" width="27.704" height="12.7032"/>
+  <object id="57" template="../../../obj/collision.tx" x="282.07" y="159.495" width="27.704" height="12.7032"/>
+  <object id="58" template="../../../obj/collision.tx" x="255.649" y="184.697" width="33.3948" height="20.8329"/>
+  <object id="59" template="../../../obj/collision.tx" x="194.269" y="133.886" width="27.704" height="40.7508"/>
+  <object id="60" template="../../../obj/collision.tx" x="322.719" y="173.316" width="11.851" height="196.435"/>
+  <object id="61" template="../../../obj/collision.tx" x="99.9643" y="176.974" width="10.6316" height="187.086"/>
  </objectgroup>
 </map>

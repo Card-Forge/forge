@@ -904,6 +904,47 @@
     }
   },
   {
+     "name": "Basilsk Colar",
+    "equipmentSlot": "Neck",
+    "cost": 25000,
+    "description": "Equipment that gives deathouch and lifelink",
+    "iconName": "BasilskColar",
+    "effect": {
+      "lifeModifier": 1,
+      "changeStartCards": -1,
+      "startBattleWithCardInHand": [
+        "Basilsk Colar"
+      ]
+    }
+  },
+  {
+    "name": "Evil Ank",
+    "equipmentSlot": "Right",
+    "description": "Start with Unearth in your hand.",
+    "cost": 25000,
+    "iconName": "EvilAnk",
+    "effect": {
+      "lifeModifier": 1,
+      "changeStartCards": -1,
+      "startBattleWithCardInHand": [
+        "Unearth"
+      ]
+    }
+  },
+  {
+    "name": "Staff of the Demoncaller",
+    "equipmentSlot": "Left",
+    "description": "Griselbrand starts in the command zone, but there's a catch ...",
+    "cost": 25000,
+    "iconName": "DemonCallerStaff",
+    "effect": {
+      "lifeModifier": 3,
+      "startBattleWithCardInCommandZone": [
+        "Staff of the Demoncaller Effect"
+      ]
+    }
+  },
+  {
     "name": "Dungeon Map",
     "equipmentSlot": "Right",
     "iconName": "DungeonMap",
@@ -911,6 +952,81 @@
     "effect": {
       "startBattleWithCard": [
         "Dungeon Map"
+      ]
+    }
+  },
+  {
+    "name": "Concordant Boots",
+    "description": "All creatures have haste.",
+    "equipmentSlot": "Boots",
+    "iconName": "ConcordantBoots",
+    "cost": 9000,
+    "effect": {
+      "startBattleWithCard": [
+        "Concordant Crossroads|LEG"
+      ]
+    }
+  },
+  {
+    "name": "Crown of Growth",
+    "description": "Start with Giant Growth into your hand",
+    "equipmentSlot": "Neck",
+    "iconName": "CrownofGrowth",
+    "cost": 3000,
+     "effect": {
+      "lifeModifier": 1,
+      "changeStartCards": -1,
+      "startBattleWithCardInHand": [
+        "Giant Growth"
+      ]
+    }
+  },
+  {
+    "name": "Mantel of Denial",
+    "description": "Start with Counterspell  into your hand",
+    "equipmentSlot": "Body",
+    "iconName": "MantelofDenial",
+    "cost": 3000,
+     "effect": {
+      "lifeModifier": 1,
+      "changeStartCards": -1,
+      "startBattleWithCardInHand": [
+        "Counterspell"
+      ]
+    }
+  },
+  {
+  "name": "Raptor Bondband",
+    "description": "4/2 dinosaur",
+    "equipmentSlot": "Boots",
+    "iconName": "RaptorBondband",
+    "effect": {
+        "lifeModifier": -3,
+        "startBattleWithCard": [
+        "Frenzied Raptor|IKO"
+     ]
+    }
+  },
+    {
+        "name": "Golden Egg",
+    "description": "Filter mana or pay 2 for 3 life",
+    "equipmentSlot": "Left",
+    "iconName": "GoldenEgg",
+    "effect": {
+        "startBattleWithCard": [
+        "Golden Egg|ELD"
+     ]
+    }
+  },
+    {
+        "name": "Amulet of Telepathy",
+    "description": "Your opponent plays with their hand revealed.",
+    "equipmentSlot": "Neck",
+    "iconName": "RelicAmulet",
+    "cost": 3000,
+    "effect": {
+      "startBattleWithCard": [
+        "Telepathy|USG"
       ]
     }
   },
@@ -937,6 +1053,29 @@
     }
   },
   {
+    "name": "Warren Tender's Baton",
+    "equipmentSlot": "Left",
+    "iconName": "WarrenTendersBaton",
+    "effect": {
+      "lifeModifier": 1,
+      "startBattleWithCard": [
+        "Goblin Warrens|FEM"
+      ]
+    },
+    "description": "Pay 2R and sac 2 Goblins to create 3 1/1 Goblin tokens."
+  },
+  {
+   "name": "Prayerbook of Ire",
+    "description": "3R for 5 damage to a player",
+    "equipmentSlot": "Left",
+    "iconName": "PrayerbookofIre",
+    "effect": {
+        "startBattleWithCard": [
+        "Font of Ire|JOU"
+     ]
+    }
+  },
+    {
     "name": "Wood Bow",
     "equipmentSlot": "Left",
     "iconName": "WoodBow",
@@ -946,6 +1085,40 @@
     }
   },
   {
+      "name": "Robes of Omniscience",
+    "equipmentSlot": "Body",
+    "iconName": "RobesOfOmniscience",
+    "effect": {
+      "lifeModifier": -6,
+      "changeStartCards": 2
+    },
+    "description": "-6 life. Draw 2 extra cards at game start."
+  },
+  {
+      "name": "Angelic Armaments",
+    "description": "Equip 4, +2/+2 and flying and become an angel",
+    "equipmentSlot": "Right",
+    "iconName": "AngelicArmaments",
+    "effect": {
+        "lifeModifier": 4,
+        "startBattleWithCard": [
+        "Angelic Armaments|AVR"
+     ]
+    }
+  },
+    {
+        "name": "Angelic Greaves",
+    "description": "0/4 wall with flying",
+    "equipmentSlot": "Boots",
+    "iconName": "AngelicGreaves",
+    "effect": {
+         "lifeModifier": 2,
+        "startBattleWithCard": [
+        "Angelic Wall|PO2"
+     ]
+    }
+  },
+    {
     "name": "Sandals",
     "equipmentSlot": "Boots",
     "iconName": "Sandals",

@@ -357,10 +357,11 @@ public class MapStage extends GameStage {
         boolean spawnEasy = prop.get("spawn.Easy", Boolean.class);
         boolean spawnNorm = prop.get("spawn.Normal", Boolean.class);
         boolean spawnHard = prop.get("spawn.Hard", Boolean.class);
+        boolean spawnInsane = prop.get("spawn.Insane", Boolean.class);
+        if (difficultyData.spawnRank == 3 && !spawnInsane) return false;
         if (difficultyData.spawnRank == 2 && !spawnHard) return false;
         if (difficultyData.spawnRank == 1 && !spawnNorm) return false;
         if (difficultyData.spawnRank == 0 && !spawnEasy) return false;
-
         if (prop.containsKey("spawnCondition") && !prop.get("spawnCondition").toString().isEmpty()){
 
         }

@@ -25,7 +25,10 @@ import forge.item.generation.UnOpenedProduct;
 import forge.model.FModel;
 import forge.util.Aggregates;
 import forge.util.IterableUtil;
-
+import forge.card.MagicColor;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.function.Predicate;
@@ -328,11 +331,35 @@ public class CardUtil {
         }
         return result;
     }
+    private static AdventureReadPriceList.PriceData priceData;
+
+    /**
+     * Clear the cached price data. Call this when switching adventures/planes
+     * so prices are reloaded from the new adventure's cardprices.txt.
+     */
+    public static void clearPriceCache() {
+        priceData = null;
+    }
+
+    private static AdventureReadPriceList.PriceData getPriceData() {
+        if (priceData == null) {
+            priceData = AdventureReadPriceList.loadPrices();
+        }
+        return priceData;
+    }
+
+    /**
+     * Returns the price mode for the current adventure's price list.
+     * FORCED means custom prices are always active (toggle disabled).
+     * OPTIONAL means the player controls it via the settings toggle.
+     */
+    public static AdventureReadPriceList.PriceMode getPriceMode() {
+        return getPriceData().mode;
+    }
 
     public static int getCardPrice(PaperCard card) {
         if (card == null)
             return 0;
-
         CardRarity effectiveRarity = card.getRarity();
 
         if (card.getRarity() == CardRarity.BasicLand
@@ -341,7 +368,16 @@ public class CardUtil {
                 && !card.getName().equals("Wastes")) {
             effectiveRarity = CardRarity.Common; // adjust for lands which are L rarity but are not basic lands
         }
+        AdventureReadPriceList.PriceData data = getPriceData();
+        boolean useCustomPrices = data.mode == AdventureReadPriceList.PriceMode.FORCED
+                || Config.instance().getConfigData().usePriceListPrices;
 
+        if (useCustomPrices) {
+            Integer price = data.prices.get(card.getName());
+            if (price != null) {
+                return price;
+            }
+        }    
         return switch (effectiveRarity) {
             case BasicLand -> 5;
             case Common -> 50;
@@ -351,9 +387,27 @@ public class CardUtil {
             default -> 600;
         };
     }
+    public static int getBoosterPrice(Deck booster) {
+    	if (booster == null)
+            return 0;
+    	String editionCode = booster.getComment();
+        AdventureReadPriceList.PriceData data = getPriceData();
+        boolean useCustomPrices = data.mode == AdventureReadPriceList.PriceMode.FORCED
+                || Config.instance().getConfigData().usePriceListPrices;
 
+        if (useCustomPrices) {
+            Integer price = data.prices.get(editionCode);
+            if (price != null) {
+                return price;
+            }
+        }
+        return 1000;
+     }
+    
     public static int getRewardPrice(Reward reward) {
         PaperCard card = reward.getCard();
+        Deck booster = reward.getDeck();
+
         if (card != null)
             return getCardPrice(card);
         if (reward.getItem() != null)
@@ -364,12 +418,9 @@ public class CardUtil {
             return reward.getCount() * 500;
         if (reward.getType() == Reward.Type.Gold)
             return reward.getCount();
-        /*
-         * if(reward.getType() == Reward.Type.CardPack)
-         * return reward.getDeck().get(DeckSection.Main).countAll()*70;
-         */
-        // TODO: Heitor - Price by card count and type of boosterPack.
-
+		if(reward.getType() == Reward.Type.CardPack)                // TODO: Heitor - Price by card count and type of boosterPack.
+         return getBoosterPrice(booster);
+		
         return 1000;
     }
 

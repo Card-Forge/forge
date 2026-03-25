@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="59">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="61">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -9,27 +9,30 @@
  </properties>
  <tileset firstgid="1" source="../../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../../../../Innistrad/maps/tileset/Inn_Dungeon.tsx"/>
+ <tileset firstgid="32769" source="../../../../../Innistrad/maps/tileset/INN_dungen_crawler_tileset.tsx"/>
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJztwzEJAAAMA7C+8w/VWyFLIL2kqqqqvjuO1S8b
+   eJx7VM7A8GgI4WmcEEwve7DhUXtH7aW2/fSwE91eetlJD6xUMfBuGMWjeBSP4lE8ikGY1DpptA6jHk5TZGBIB+IMxVF7ScEA1IuTkw==
   </data>
  </layer>
  <layer id="2" name="Ground" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJxz5mNgcB7FGNgNiB9iwa40ttcFiLEBp1F7qYpX8DIwLAXiZbwQ+5ZA+ct56ZO+YP6mtT/paS8ozzwB4sdY6EdQex/gkAfR5OYtbGmohhd7usImTm5YwOxt5GdgaCIBN/NTx155AQYGBRKwosCovaP2jto7au/A2LsXaM4+LFgVh/h+KtmLCygJ4JcftZc4DGtLYcOg9hXI3iV41NCizQUKC5C9A9G+Gsr2AgDO0wnp
+   eJxz5mNgcB7Fo3gUj2IKsRsQPwHixzjoJwTkXcm01wWI0UENL6YYLnEnCu09ocDAcJIEfEqBOvamKTIwpJOAMxRH7R21d9TeUXsHxl4WJQYGVjR8VgFixxkFTDk2JerYiw2kofkNGxi1lzi8AlinLsWBke3FpWY5L3n2EgoLkL3k+mmk2gsAydQ7lQ==
   </data>
  </layer>
  <layer id="3" name="Foreground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjAL6g+LVDAwlq+lv72egnV8GwF5qAv4uBgaBLvrb2w+0cwIWe+t46e8WdIAcJvR0D64wGS6AvwEYrg30sw8Wd/1AOyfQ0V5sAFs6+mvMwPDPmP5uqTUBuseE/vaOglFALlgGzT9LBkH9MAoIAwDOFxbZ
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="30">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzt0cEJACAMBME0YMvWnnd+Ioj3mKlgYasA4N5evwumtB7OJb1LagF4qQHcQwIt
-  </data>
- </layer>
- <layer id="5" name="AboveSprites" width="30" height="30">
-  <data encoding="base64" compression="zlib">
-   eJztzbENADAIA0FvAANEGZUwOpHSU9LkT7JcvgTgF2HSuUub7S5/v322CwAAgF4BRR8CBQ==
+   eJztwQEBAAAAgiD/r25IQAEAAPBoDhAAAQ==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -37,7 +40,7 @@
    <properties>
     <property name="defeatDialog">[{
    &quot;condition&quot;: [{&quot;checkQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;, &quot;not&quot;:true}],
-   &quot;text&quot;: &quot;As you land your final blow against Griselbrand, you feel a significant pulse of mana. But with the immediate threat removed, you can now see clearly that the locked room at the north end of the chamber does not hold any prisoners.&quot;,
+   &quot;text&quot;: &quot;As you land your final blow against Griselbrand, you feel a significant pulse of mana.&quot;,
    &quot;options&quot;: [{
       &quot;name&quot;: &quot;(Continue)&quot;, 
       &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;Ch1BlackCastleComplete&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}, {&quot;advanceQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;}]
@@ -45,7 +48,7 @@
 },
 {
    &quot;condition&quot;: [{&quot;checkQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;}],
-   &quot;text&quot;: &quot;As you land your final blow against Griselbrand, you feel a another pulse of mana. But just as before, the locked room behind your fallen foe does not hold any prisoners.&quot;,
+   &quot;text&quot;: &quot;As you land your final blow against Griselbrand, you feel a another pulse of mana.&quot;,
    &quot;options&quot;: [{
       &quot;name&quot;: &quot;(Continue)&quot;, 
       &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;Ch1BlackCastleComplete&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}, {&quot;advanceQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;}]
@@ -55,6 +58,39 @@
  &quot;startBattleWithCard&quot;: [ &quot;Mox Jet&quot; ]
 }</property>
     <property name="enemy" value="Griselbrand"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Basilsk Colar&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Evil Ank&quot;
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 4,
+    &quot;editions&quot;: [&quot;WWK&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 4,
+    &quot;editions&quot;: [&quot;EOE&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.30,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Staff of the Demoncaller&quot;
+}
+]
+</property>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
@@ -63,46 +99,7 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="56" template="../../../obj/scroll.tx" x="206.667" y="81.3333">
-   <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Mox Jet&quot;, &quot;count&quot;: 1 }, {&quot;type&quot;: &quot;item&quot;, &quot;count&quot;: 1, &quot;itemName&quot;: &quot;Strange Key&quot;} ]"/>
-   </properties>
-  </object>
-  <object id="58" template="../../../obj/gate.tx" x="208.667" y="160">
-   <properties>
-    <property name="dialog">[
-	{
-		&quot;text&quot;: &quot;A big gate is blocking the path, through the bars you can see a Mox Jet in the room beyond. (You need all five colored keys to open this gate.)&quot;,
-		&quot;options&quot;: [
-			{ &quot;name&quot;: &quot;Leave&quot; },
-			{
-				&quot;name&quot;: &quot;Unlock with the five colored keys&quot;,
-				&quot;condition&quot;: [
-					{ &quot;item&quot;: &quot;Blue Key&quot; },
-					{ &quot;item&quot;: &quot;Green Key&quot; },
-					{ &quot;item&quot;: &quot;Black Key&quot; },
-					{ &quot;item&quot;: &quot;White Key&quot; },
-					{ &quot;item&quot;: &quot;Red Key&quot; }
-				],
-				&quot;text&quot;: &quot;The gate is unlocked.&quot;,
-				&quot;options&quot;: [
-					{
-						&quot;name&quot;: &quot;Continue&quot;,
-						&quot;action&quot;: [
-							{ &quot;deleteMapObject&quot;: -1 },
-							{ &quot;removeItem&quot;: &quot;Blue Key&quot; },
-							{ &quot;removeItem&quot;: &quot;Green Key&quot; },
-							{ &quot;removeItem&quot;: &quot;Black Key&quot; },
-							{ &quot;removeItem&quot;: &quot;White Key&quot; },
-							{ &quot;removeItem&quot;: &quot;Red Key&quot; }
-						]
-					}
-				]
-			}
-		]
-	}
-]</property>
-   </properties>
-  </object>
+  <object id="59" template="../../../obj/collision.tx" x="304.524" y="305.109" width="24.4521" height="25.3043"/>
+  <object id="60" template="../../../obj/collision.tx" x="274.184" y="147.543" width="24.4521" height="25.3043"/>
  </objectgroup>
 </map>

@@ -8,8 +8,8 @@
   "startBattleWithCard": [ "Mountain|LEA", "Swamp|LEA", "Island|LEA", "Unholy Citadel|LEG", "Wall of Shadows|LEG", "Wall of Dust|LEG", "Wall of Vapor|LEG" ]
 }</property>
  </properties>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx" />
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJyr42RgqBvk+L0AfkyOmenCEEzIrtuiCBoZw+QtgewqMdzm4bIXXS0IWCOZiw1UikHUoNtJqr3ouAJqLj4AUoNuJzn2kgOwmUEPe7GBoWIvNey+IYrApOQnSvyIbCcx9iJjVnbi/ERNe0F2gnAOGwLjCkMbJLth+dwWKGZHhl9BGJudsHhAtrNcDNNeUBlWKgaxn5KyGd1emJ9vimIvq2HlJyV2Ekpj1KgfyLGXmvYQwuSkF2QMAD5y21A=
@@ -34,13 +34,13 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="285" width="48" height="16">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="285" width="48" height="16">
    <properties>
     <property name="teleport" value="" />
    </properties>
   </object>
-  <object id="62" template="../../../../../../common/maps/obj/gold.tx" x="193.167" y="39.75" />
-  <object id="55" template="../../../../../../common/maps/obj/treasure.tx" x="223.101" y="42.1694"><properties><property name="reward">[
+  <object id="62" template="../../../../common/maps/obj/gold.tx" x="193.167" y="39.75" />
+  <object id="55" template="../../../../common/maps/obj/treasure.tx" x="223.101" y="42.1694"><properties><property name="reward">[
   {
     "type": "card",
     "probability": 1,
@@ -90,15 +90,15 @@
     "addMaxCount": 3
   }
 ]</property></properties></object>
-  <object id="61" template="../../../../../../common/maps/obj/enemy.tx" x="209.675" y="119.464">
+  <object id="61" template="../../../../common/maps/obj/enemy.tx" x="209.675" y="119.464">
    <properties>
     <property name="enemy" value="Nicol Bolas" />
     <property name="speedModifier" type="float" value="20" />
     <property name="threatRange" type="int" value="100" />
    </properties>
   </object>
-  <object id="69" template="../../../../../../common/maps/obj/manashards.tx" x="98.7808" y="104.447" />
-  <object id="70" template="../../../../../../common/maps/obj/manashards.tx" x="342.344" y="62.6373" />
-  <object id="81" template="../../../../../../common/maps/obj/manashards.tx" x="250.577" y="202.911" />
+  <object id="69" template="../../../../common/maps/obj/manashards.tx" x="98.7808" y="104.447" />
+  <object id="70" template="../../../../common/maps/obj/manashards.tx" x="342.344" y="62.6373" />
+  <object id="81" template="../../../../common/maps/obj/manashards.tx" x="250.577" y="202.911" />
  </objectgroup>
 </map>

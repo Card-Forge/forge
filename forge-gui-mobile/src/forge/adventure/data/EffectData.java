@@ -19,6 +19,8 @@ public class EffectData implements Serializable {
     public int changeStartCards = 0;     //Amount to add to starting hand size.
     public String[] startBattleWithCard; //Cards that start in the Battlefield.
     public String[] startBattleWithCardInCommandZone; //Cards that start in the Command Zone of the Battlefield.
+    public String[] startBattleWithCardInHand; //Cards that start in the first hand you draw (currently doesn't work on mulligan) 
+
     //Map only effects.
     public boolean colorView = false;    //Allows to display enemy colors on the map.
     public float moveSpeed = 1.0f;       //Change of movement speed. Map only.
@@ -82,6 +84,27 @@ public class EffectData implements Serializable {
             }
         }
         return startCardsInCommandZone;
+    }
+    public Array<IPaperCard> startBattleWithCardsInHand(){
+        Array<IPaperCard> startCardsInHand=new Array<>(IPaperCard.class);
+        if(startBattleWithCardInHand != null) {
+            for (String name:startBattleWithCardInHand) {
+                PaperCard C = FModel.getMagicDb().getCommonCards().getCard(name);
+                if(C != null)
+                    startCardsInHand.add(C);
+                else {
+                    try {
+                        PaperToken T = FModel.getMagicDb().getAllTokens().getToken(name);
+                        if (T != null) startCardsInHand.add(T);
+                        else System.err.print("Can not find card/token \"" + name + "\"\n");
+                    } catch (Exception e) {
+                        //if it's not found probably the item is using funny cards and the users setting disabled non legal cards
+                        System.err.print("Can not find card/token \"" + name + "\"\n");
+                    }
+                }
+            }
+        }
+        return startCardsInHand;
     }
 
     public String itemize(Array<IPaperCard> paperCards) {
