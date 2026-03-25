@@ -36,7 +36,6 @@ import java.util.*;
 public class Config {
     private static Config currentConfig;
     private final String commonDirectoryName = "common";
-    private final String incompleteDirectoryName = "incomplete";
     private final String prefix;
     private final String commonPrefix;
     private final HashMap<String, FileHandle> Cache = new HashMap<>();
@@ -60,7 +59,7 @@ public class Config {
 
     private Config() {
         String path = resPath();
-        FilenameFilter planesFilter = (file, s) -> (!s.contains(".") && !s.equals(commonDirectoryName) && !s.equals(incompleteDirectoryName));
+        FilenameFilter planesFilter = (file, s) -> (!s.contains(".") && !s.equals(commonDirectoryName));
 
         adventures = new File(GuiBase.isAndroid() ? ForgeConstants.ADVENTURE_DIR : path + "/res/adventure").list(planesFilter);
         try {
