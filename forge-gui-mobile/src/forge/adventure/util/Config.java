@@ -359,7 +359,6 @@ public class Config {
         for (int i = 0; i < adventures.size; i++) {
             adventures.set(i, "<user>" + adventures.get(i));
         }
-
         adventures.addAll(this.adventures);
 
         // A hard-coded list of planes that are currently not finished and are considered to be in development
