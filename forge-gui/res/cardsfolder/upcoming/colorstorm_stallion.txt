@@ -6,7 +6,7 @@ K:Ward:1
 K:Haste
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Opus — Whenever you cast an instant or sorcery spell, this creature gets +1/+1 until end of turn. If five or more mana was spent to cast that spell, create a token that's a copy of this creature.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SubAbility$ DBCopy
-SVar:TrigCopy:DB$ CopyPermanent | ConditionCheckSVar$ X | ConditionSVarCompare$ GE5 | Defined$ Self
+SVar:DBCopy:DB$ CopyPermanent | ConditionCheckSVar$ X | ConditionSVarCompare$ GE5 | Defined$ Self
 SVar:X:TriggeredCard$CastTotalManaSpent
 DeckHints:Type$Instant|Sorcery
 Oracle:Ward {1}, haste\nOpus — Whenever you cast an instant or sorcery spell, this creature gets +1/+1 until end of turn. If five or more mana was spent to cast that spell, create a token that's a copy of this creature.
