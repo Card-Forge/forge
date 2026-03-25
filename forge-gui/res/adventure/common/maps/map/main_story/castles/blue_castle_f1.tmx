@@ -48,7 +48,7 @@
 },
 {
    &quot;condition&quot;: [{&quot;checkQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;}],
-   &quot;text&quot;: &quot;As you land your final blow against Lorthos, you feel a another pulse of mana. But just as before, the locked room behind your fallen foe does not hold any prisoners.&quot;,
+   &quot;text&quot;: &quot;As you land your final blow against Lorthos, you feel another pulse of mana. But just as before, the locked room behind your fallen foe does not hold any prisoners.&quot;,
    &quot;options&quot;: [{
       &quot;name&quot;: &quot;(Continue)&quot;, 
       &quot;action&quot;: [{&quot;setQuestFlag&quot;: {&quot;key&quot;:&quot;Ch1BlueCastleComplete&quot;, &quot;val&quot;: 1} }, {&quot;deleteMapObject&quot;: -1}, {&quot;advanceQuestFlag&quot;: &quot;Ch1CastlesComplete&quot;}]
