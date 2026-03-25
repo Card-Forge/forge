@@ -1,0 +1,9 @@
+Name:Mana Sculpt
+ManaCost:1 U U
+Types:Instant
+A:SP$ Counter | TargetType$ Spell | RememberCounteredCMC$ True | ValidTgts$ Card | SubAbility$ DBDelTrig | SpellDescription$ Counter target spell.
+SVar:DBDelTrig:DB$ DelayedTrigger | ConditionPresent$ Wizard.YouCtrl | Mode$ Phase | Phase$ Main1,Main2 | ValidPlayer$ You | Execute$ AddMana | SpellDescription$ If you control a Wizard, add an amount of {C} equal to the amount of mana spent to cast that spell at the beginning of your next main phase.| RememberNumber$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:AddMana:DB$ Mana | Produced$ C | Amount$ X
+SVar:X:Count$TriggerRememberAmount
+Oracle:Counter target spell. If you control a Wizard, add an amount of {C} equal to the amount of mana spent to cast that spell at the beginning of your next main phase.
