@@ -347,9 +347,9 @@ public class AdventureEventData implements Serializable {
             registeredDeck.getOrCreate(DeckSection.Sideboard).addAll(humanPool);
             registeredDeck.setName("Sealed Pool - " + cardBlockName);
 
-            // Store copy for rewards
+            // Store copy for rewards (in the Main section because that's what is counted for reward purposes)
             draftedDeck = new Deck();
-            draftedDeck.getOrCreate(DeckSection.Sideboard).addAll(humanPool);
+            draftedDeck.getOrCreate(DeckSection.Main).addAll(humanPool);
             draftedDeck.setName("Sealed Pool Cards");
 
             // Generate AI opponents' decks
@@ -752,9 +752,6 @@ public class AdventureEventData implements Serializable {
             rewards[3].maxWins = 3;
             draftedDeck.setName("Sealed Card Pool");
             draftedDeck.setComment("Prize for placing 1st overall in sealed event");
-            CardPool sideboard = draftedDeck.get(DeckSection.Sideboard);
-            draftedDeck.getMain().addAll(sideboard);
-            draftedDeck.get(DeckSection.Sideboard).clear();
             rewards[3].cardRewards = new Deck[]{draftedDeck};
 
         } else if (format == AdventureEventController.EventFormat.Jumpstart) {
