@@ -1,0 +1,9 @@
+Name:Witherbloom, the Balancer
+ManaCost:6 B G
+Types:Legendary Creature Elder Dragon
+PT:5/5
+K:Affinity:Creature
+K:Flying
+K:Deathtouch
+S:Mode$ Continuous | Affected$ Instant.wasCastByYou,Sorcery.wasCastByYou | AffectedZone$ Stack | AddKeyword$ Affinity:Creature | Description$ Instant and sorcery spells you cast have affinity for creatures.
+Oracle:Affinity for creatures (This spell costs {1} less to cast for each creature you control.)\nFlying, deathtouch\nInstant and sorcery spells you cast have affinity for creatures.
