@@ -204,6 +204,34 @@ public class DanDanSharedZonesTest extends AITest {
                 CardProperty.cardHasProperty(c, "YouOwn", p2, c, null));
     }
 
+    @Test
+    public void dandanSharedGraveyardTreatsYouCtrlAsSharedAccess() {
+        initAndCreateGame();
+
+        final Deck firstDeck = new Deck("DanDan P1");
+        final Deck secondDeck = new Deck("DanDan P2");
+
+        final List<RegisteredPlayer> players = Lists.newArrayList();
+        players.add(new RegisteredPlayer(firstDeck).setPlayer(new LobbyPlayerAi("p1", null)));
+        players.add(new RegisteredPlayer(secondDeck).setPlayer(new LobbyPlayerAi("p2", null)));
+
+        final GameRules rules = new GameRules(GameType.DanDan);
+        final Match match = new Match(rules, players, "DanDan shared graveyard controller checks");
+        final Game game = match.createGame();
+        match.startGame(game);
+
+        final Player p1 = game.getRegisteredPlayers().get(0);
+        final Player p2 = game.getRegisteredPlayers().get(1);
+
+        final Card c = addCardToZone("Memory Lapse", p1, ZoneType.Graveyard);
+        c.setController(p2, 0);
+
+        AssertJUnit.assertTrue("DanDan shared graveyard should allow YouCtrl checks from either player (p1)",
+                CardProperty.cardHasProperty(c, "YouCtrl", p1, c, null));
+        AssertJUnit.assertTrue("DanDan shared graveyard should still allow YouCtrl checks for controller (p2)",
+                CardProperty.cardHasProperty(c, "YouCtrl", p2, c, null));
+    }
+
     private static void assertSameOrderAndIds(final String zoneName, final Iterable<CardView> left, final Iterable<CardView> right) {
         final java.util.Iterator<CardView> li = left.iterator();
         final java.util.Iterator<CardView> ri = right.iterator();

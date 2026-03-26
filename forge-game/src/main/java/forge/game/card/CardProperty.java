@@ -179,19 +179,19 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("YouCtrl")) {
-            if (!controller.equals(sourceController)) {
+            if (!controller.equals(sourceController) && !isDanDanSharedGraveyard) {
                 return false;
             }
         } else if (property.startsWith("YourTeamCtrl")) {
-            if (controller.getTeam() != sourceController.getTeam()) {
+            if (controller.getTeam() != sourceController.getTeam() && !isDanDanSharedGraveyard) {
                 return false;
             }
         } else if (property.startsWith("YouDontCtrl")) {
-            if (controller.equals(sourceController)) {
+            if (controller.equals(sourceController) && !isDanDanSharedGraveyard) {
                 return false;
             }
         } else if (property.startsWith("OppCtrl")) {
-            if (!controller.getOpponents().contains(sourceController)) {
+            if (!controller.getOpponents().contains(sourceController) && !isDanDanSharedGraveyard) {
                 return false;
             }
         } else if (property.startsWith("ChosenCtrl")) {
