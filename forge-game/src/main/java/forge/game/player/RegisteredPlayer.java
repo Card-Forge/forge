@@ -28,7 +28,6 @@ public class RegisteredPlayer {
     private Iterable<IPaperCard> cardsOnBattlefield = null;
     private Iterable<IPaperCard> extraCardsOnBattlefield = null;
     private Iterable<IPaperCard> extraCardsInCommandZone = null;
-    private Iterable<IPaperCard> extraCardsInHand = null;
     private Iterable<? extends IPaperCard> schemes = null;
     private Iterable<PaperCard> planes = null;
     private Iterable<PaperCard> conspiracies = null;
@@ -88,10 +87,6 @@ public class RegisteredPlayer {
         return extraCardsInCommandZone == null ? EmptyList : extraCardsInCommandZone;
     }
 
-    public final Iterable<? extends IPaperCard> getExtraCardsInHand() {
-        return extraCardsInHand == null ? EmptyList : extraCardsInHand;
-    }
-
     public final void setCardsOnBattlefield(Iterable<IPaperCard> cardsOnTable) {
         this.cardsOnBattlefield = cardsOnTable;
     }
@@ -109,13 +104,7 @@ public class RegisteredPlayer {
         else
             this.extraCardsInCommandZone = Iterables.concat(this.extraCardsInCommandZone, extraCardsInCommandZone);
     }
-    
-    public final void addExtraCardsInHand(Iterable<IPaperCard> extraCardsInHand) {
-        if (this.extraCardsInHand == null)
-            this.extraCardsInHand = extraCardsInHand;
-        else
-            this.extraCardsInHand = Iterables.concat(this.extraCardsInHand, extraCardsInHand);
-    }
+
     public int getStartingHand() {
         return startingHand;
     }
