@@ -15,14 +15,16 @@ import forge.gui.FThreads;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.mana.ManaAtom;
+import forge.game.DanDanViewZones;
+import forge.game.GameView;
 import forge.game.player.PlayerView;
 import forge.localinstance.skin.FSkinProp;
+import forge.screens.match.CMatchUI;
 import forge.toolbox.FLabel;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinFont;
 import forge.toolbox.FSkin.SkinnedPanel;
-import forge.trackable.TrackableProperty;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 import org.apache.commons.text.WordUtils;
@@ -31,17 +33,19 @@ public class PlayerDetailsPanel extends JPanel {
     private static final long serialVersionUID = -6531759554646891983L;
 
     private final PlayerView player;
+    private final CMatchUI matchUI;
 
     // Info labels
     private final Map<ZoneType, DetailLabelZone> zoneLabels = new EnumMap<>(ZoneType.class);
     private final List<DetailLabelMana> manaLabels = new ArrayList<>();
     private final DetailLabelExtra extraLabel;
 
-    public PlayerDetailsPanel(final PlayerView player, final EnumSet<ZoneType> supportedZones) {
+    public PlayerDetailsPanel(final PlayerView player, final EnumSet<ZoneType> supportedZones, final CMatchUI matchUI) {
         this.player = player;
+        this.matchUI = matchUI;
 
         zoneLabels.put(ZoneType.Hand, new DetailLabelZone(ZoneType.Hand, "lblHandNOfMax", PlayerView::getMaxHandString));
-        zoneLabels.put(ZoneType.Graveyard, new DetailLabelZone(ZoneType.Graveyard, "lblGraveyardNCardsNTypes", p -> p.getZoneTypes(TrackableProperty.Graveyard)));
+        zoneLabels.put(ZoneType.Graveyard, new DetailLabelZone(ZoneType.Graveyard, "lblGraveyardNCardsNTypes", this::graveyardTypesForDisplay));
         zoneLabels.put(ZoneType.Library, new DetailLabelZone(ZoneType.Library, "lblLibraryNCards"));
         zoneLabels.put(ZoneType.Exile, new DetailLabelZone(ZoneType.Exile, "lblExileNCards"));
         zoneLabels.put(ZoneType.Flashback, new DetailLabelZone(ZoneType.Flashback, "lblFlashbackNCards"));
@@ -71,6 +75,23 @@ public class PlayerDetailsPanel extends JPanel {
 
     public static FSkinProp iconFromZone(ZoneType zoneType) {
         return FSkinProp.iconFromZone(zoneType, false);
+    }
+
+    /**
+     * Zone count shown on player detail labels. For DanDan {@link ZoneType#Library} and
+     * {@link ZoneType#Graveyard}, uses {@link DanDanViewZones#zoneCountForDisplay}.
+     */
+    public static int zoneCountForDisplay(final GameView gameView, final PlayerView p, final ZoneType zone) {
+        if (DanDanViewZones.isDanDan(gameView)
+                && (zone == ZoneType.Library || zone == ZoneType.Graveyard)) {
+            return DanDanViewZones.zoneCountForDisplay(gameView, p, zone);
+        }
+        return p.getZoneSize(zone);
+    }
+
+    /** @see #zoneCountForDisplay(GameView, PlayerView, ZoneType) */
+    public static int zoneCountForDisplay(final CMatchUI matchUI, final PlayerView p, final ZoneType zone) {
+        return zoneCountForDisplay(matchUI == null ? null : matchUI.getGameView(), p, zone);
     }
 
     /** Adds various labels to pool area JPanel container. */
@@ -265,9 +286,17 @@ public class PlayerDetailsPanel extends JPanel {
             this(zone, toolTipLabel, null);
         }
         private DetailLabelZone(ZoneType zone, String toolTipLabel, Function<PlayerView, Object> toolTipExtraArg) {
-            super(iconFromZone(zone), toolTipLabel, (PlayerView p) -> p.getZoneSize(zone), toolTipExtraArg);
+            super(iconFromZone(zone), toolTipLabel, (PlayerView p) -> getZoneCountForDisplay(p, zone), toolTipExtraArg);
             this.zone = zone;
         }
+    }
+
+    private int getZoneCountForDisplay(final PlayerView p, final ZoneType zone) {
+        return zoneCountForDisplay(matchUI, p, zone);
+    }
+
+    private Integer graveyardTypesForDisplay(final PlayerView p) {
+        return DanDanViewZones.graveyardTypeCountForDisplay(matchUI == null ? null : matchUI.getGameView(), p);
     }
 
     private class DetailLabelMana extends DetailLabelNumeric {

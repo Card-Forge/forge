@@ -882,7 +882,9 @@ public class GameAction {
     }
     public final Card moveToLibrary(Card c, int libPosition, SpellAbility cause, Map<AbilityKey, Object> params) {
         final PlayerZone library;
-        if (game.getRules().getGameType() == GameType.DanDan && !game.getPlayers().isEmpty()) {
+        final GameRules rules = game.getRules();
+        final boolean isDanDan = rules != null && (rules.getGameType() == GameType.DanDan || rules.hasAppliedVariant(GameType.DanDan));
+        if (isDanDan && !game.getPlayers().isEmpty()) {
             // DanDan uses one shared library zone for all players.
             library = game.getPlayers().get(0).getZone(ZoneType.Library);
         } else {

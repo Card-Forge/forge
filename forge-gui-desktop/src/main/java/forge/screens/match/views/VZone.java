@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 
+import forge.game.DanDanViewZones;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
@@ -93,13 +94,13 @@ public class VZone implements IVDoc<CZone> {
     /** Refresh card panels from zone data. */
     public void refresh() {
         final List<CardPanel> cardPanels = new ArrayList<>();
-        final Iterable<CardView> cards = FloatingZone.cardsForZoneDisplay(matchUI, player, zone);
+        final Iterable<CardView> cards = matchUI.cardsForZoneDisplay(player, zone);
         if (cards != null) {
             final List<CardView> cardList = new ArrayList<>();
             for (final CardView card : cards) {
                 cardList.add(card);
             }
-            if (sortedByName && !(zone == ZoneType.Library && matchUI.getGameController().mayLookAtAllCards())) {
+            if (sortedByName && !suppressNameSortForZone()) {
                 cardList.sort(Comparator.comparing(CardView::getName));
             } else if (zone == ZoneType.Flashback) {
                 cardList.sort(FloatingZone.ZONE_ORDER_COMPARATOR);
@@ -157,6 +158,15 @@ public class VZone implements IVDoc<CZone> {
     private void toggleSorted() {
         sortedByName = !sortedByName;
         refresh();
+    }
+
+    /** Match {@link FloatingZone} name-sort suppression for shared DanDan zones and dev view-all. */
+    private boolean suppressNameSortForZone() {
+        if (DanDanViewZones.isDanDan(matchUI.getGameView())
+                && (zone == ZoneType.Library || zone == ZoneType.Graveyard)) {
+            return true;
+        }
+        return zone == ZoneType.Library && matchUI.anyLocalMayLookAtAllCards();
     }
 
     public CMatchUI getMatchUI() { return matchUI; }

@@ -7,8 +7,10 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
+import forge.game.player.PlayerView;
 import forge.gui.framework.ICDoc;
 import forge.interfaces.IGameController;
+import forge.player.PlayerControllerHuman;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.views.IDevListener;
 import forge.screens.match.views.VDev;
@@ -85,7 +87,12 @@ public final class CDev implements ICDoc {
 
     public void toggleViewAllCards() {
         final boolean newValue = !view.getLblViewAll().getToggled();
-        getController().cheat().setViewAllCards(newValue);
+        for (final PlayerView pv : matchUI.getLocalPlayers()) {
+            final IGameController gc = matchUI.getGameController(pv);
+            if (gc instanceof PlayerControllerHuman) {
+                ((PlayerControllerHuman) gc).setMayLookAtAllCards(newValue);
+            }
+        }
         update();
     }
 
@@ -187,7 +194,7 @@ public final class CDev implements ICDoc {
         final IGameController controller = getController();
         if (controller != null) {
             final boolean canPlayUnlimitedLands = controller.canPlayUnlimitedLands();
-            final boolean mayLookAtAllCards = controller.mayLookAtAllCards();
+            final boolean mayLookAtAllCards = matchUI.anyLocalMayLookAtAllCards();
             for (final IDevListener listener : listeners) {
                 listener.update(canPlayUnlimitedLands, mayLookAtAllCards);
             }

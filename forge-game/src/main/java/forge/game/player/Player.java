@@ -60,6 +60,7 @@ import forge.util.*;
 import forge.util.collect.FCollection;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+import org.tinylog.Logger;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -79,6 +80,8 @@ public class Player extends GameEntity implements Comparable<Player> {
             ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command, ZoneType.Ante,
             ZoneType.Sideboard, ZoneType.PlanarDeck, ZoneType.SchemeDeck, ZoneType.AttractionDeck, ZoneType.ContraptionDeck,
             ZoneType.Junkyard, ZoneType.Merged, ZoneType.Subgame, ZoneType.None));
+
+    private static final boolean DEBUG_DANDAN_DRAW = Boolean.getBoolean("forge.debug.dandan.draw");
 
     private int life = 20;
     private int startingLife = 20;
@@ -1181,8 +1184,10 @@ public class Player extends GameEntity implements Comparable<Player> {
      */
     private CardCollectionView doDraw(Map<Player, CardCollection> revealed, SpellAbility sa, Map<AbilityKey, Object> params, PlayerZone hand) {
         final CardCollection drawn = new CardCollection();
+        final GameRules rules = game.getRules();
+        final boolean isDanDan = rules != null && (rules.getGameType() == GameType.DanDan || rules.hasAppliedVariant(GameType.DanDan));
         final PlayerZone library;
-        if (game.getRules().getGameType() == GameType.DanDan && !game.getPlayers().isEmpty()) {
+        if (isDanDan && !game.getPlayers().isEmpty()) {
             // DanDan uses one shared library; always draw from the canonical shared zone.
             library = game.getPlayers().get(0).getZone(ZoneType.Library);
         } else {
@@ -1210,6 +1215,15 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (!library.isEmpty()) {
             Card c;
 
+            if (DEBUG_DANDAN_DRAW && isDanDan) {
+                final Card top = library.get(0);
+                Logger.info("DanDan draw begin: turn={} drawer={} libOwner={} libSize={} topId={} topName={}",
+                        game.getPhaseHandler().getTurn(), getName(),
+                        library.getPlayer() == null ? "null" : library.getPlayer().getName(),
+                        library.size(),
+                        top == null ? -1 : top.getId(), top == null ? "null" : top.getName());
+            }
+
             if (hasKeyword("You draw cards from the bottom of your library instead of the top of your library.")) {
                 c = library.get(library.size() - 1);
             } else {
@@ -1225,6 +1239,24 @@ public class Player extends GameEntity implements Comparable<Player> {
 
             c = game.getAction().moveTo(hand, c, cause, params);
             drawn.add(c);
+
+            // In DanDan, the physical library is shared; ensure the drawn card becomes controlled by
+            // the drawing player so they can cast/play it.
+            if (isDanDan && c != null) {
+                if (c.getOwner() != this) {
+                    c.setOwner(this);
+                }
+                if (c.getController() != this) {
+                    c.setController(this, game.getNextTimestamp());
+                }
+            }
+
+            if (DEBUG_DANDAN_DRAW && isDanDan) {
+                Logger.info("DanDan draw moved: turn={} drawer={} drawnId={} drawnName={} -> handOwner={}",
+                        game.getPhaseHandler().getTurn(), getName(),
+                        c == null ? -1 : c.getId(), c == null ? "null" : c.getName(),
+                        hand == null || hand.getPlayer() == null ? "null" : hand.getPlayer().getName());
+            }
 
             // CR 121.6c additional actions can't be performed when draw gets replaced
             // but "drawn this way" effects should still count them
@@ -1295,7 +1327,9 @@ public class Player extends GameEntity implements Comparable<Player> {
      * Returns PlayerZone corresponding to the given zone of game.
      */
     public final PlayerZone getZone(final ZoneType zone) {
-        if (zone != null && game != null && game.getRules().getGameType() == GameType.DanDan
+        final GameRules rules = game == null ? null : game.getRules();
+        final boolean isDanDan = rules != null && (rules.getGameType() == GameType.DanDan || rules.hasAppliedVariant(GameType.DanDan));
+        if (zone != null && game != null && isDanDan
                 && (zone == ZoneType.Library || zone == ZoneType.Graveyard)
                 && !game.getPlayers().isEmpty()) {
             // DanDan library/graveyard are shared; always resolve through player 0's canonical zone.
@@ -1317,7 +1351,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public void updateZoneForView(PlayerZone zone) {
         view.updateZone(zone);
-        if (game.getRules().getGameType() == GameType.DanDan
+        final GameRules rules = game == null ? null : game.getRules();
+        final boolean isDanDan = rules != null && (rules.getGameType() == GameType.DanDan || rules.hasAppliedVariant(GameType.DanDan));
+        if (isDanDan
                 && (zone.is(ZoneType.Library) || zone.is(ZoneType.Graveyard))) {
             for (final Player other : game.getPlayers()) {
                 if (other != this && other.getZone(zone.getZoneType()) == zone) {

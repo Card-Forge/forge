@@ -125,6 +125,7 @@ import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import forge.view.FView;
 import forge.view.arcane.CardPanel;
+import forge.game.DanDanViewZones;
 import forge.view.arcane.FloatingZone;
 import net.miginfocom.layout.LinkHandler;
 import net.miginfocom.swing.MigLayout;
@@ -210,6 +211,16 @@ public final class CMatchUI
 
     private boolean isInGame() {
         return getGameView() != null;
+    }
+
+    /**
+     * Canonical zone cards for UI display.
+     * <p>
+     * For DanDan shared {@link ZoneType#Library}/{@link ZoneType#Graveyard}, this returns a single
+     * canonical sequence so all UI panels (floating zones, docked tabs, counts/tooltips) remain in sync.
+     */
+    public FCollectionView<CardView> cardsForZoneDisplay(final PlayerView player, final ZoneType zone) {
+        return DanDanViewZones.cardsForZoneDisplay(getGameView(), player, zone);
     }
 
     public String getAvatarImage(final String playerName) {
@@ -430,7 +441,11 @@ public final class CMatchUI
             final PlayerView owner = update.getPlayer();
 
             boolean setupPlayZone = false, updateHand = false, updateAnte = false, updateZones = false;
+            boolean touchedSharedDanDanZone = false;
             for (final ZoneType zone : update.getZones()) {
+                if (zone == ZoneType.Library || zone == ZoneType.Graveyard) {
+                    touchedSharedDanDanZone = true;
+                }
                 switch (zone) {
                 case Battlefield:
                     setupPlayZone = true;
@@ -441,11 +456,11 @@ public final class CMatchUI
                 case Hand:
                     updateHand = true;
                     updateZones = true;
-                    FloatingZone.refresh(owner, zone);
+                    FloatingZone.refreshZoneAfterModelUpdate(this, owner, zone);
                     break;
                 default:
                     updateZones = true;
-                    FloatingZone.refresh(owner, zone);
+                    FloatingZone.refreshZoneAfterModelUpdate(this, owner, zone);
                     break;
                 }
             }
@@ -454,8 +469,9 @@ public final class CMatchUI
                 cAntes.update();
             }
             final VField vField = getFieldViewFor(owner);
-            if(vField == null)
-                return;
+            if (vField == null) {
+                continue;
+            }
             if (setupPlayZone) {
                 vField.getTabletop().update();
             }
@@ -468,7 +484,16 @@ public final class CMatchUI
                 vField.updateDetails();
             }
             if (updateZones) {
-                vField.updateZones();
+                if (touchedSharedDanDanZone && getGameView() != null && DanDanViewZones.isDanDan(getGameView())) {
+                    for (final PlayerView p : getGameView().getPlayers()) {
+                        final VField vf = getFieldViewFor(p);
+                        if (vf != null) {
+                            vf.updateZones();
+                        }
+                    }
+                } else {
+                    vField.updateZones();
+                }
             }
         }
     }
@@ -561,7 +586,7 @@ public final class CMatchUI
                 }
                 break;
             default:
-                FloatingZone.refresh(c.getController(),zone); // in case the card is visible in the zone
+                FloatingZone.refreshZoneAfterModelUpdate(this, c.getController(), zone);
                 break;
             }
         }
