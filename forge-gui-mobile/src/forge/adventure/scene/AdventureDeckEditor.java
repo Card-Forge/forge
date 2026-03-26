@@ -659,7 +659,7 @@ public class AdventureDeckEditor extends FDeckEditor {
         for (int i = 0; i < currentEvent.participants.length && i < opponentDecks.length; i++) {
             currentEvent.participants[i].setDeck(opponentDecks[i]);
         }
-        currentEvent.draftedDeck = (Deck) currentEvent.registeredDeck.copyTo("Draft Deck");
+        currentEvent.rewardDeck = (Deck) currentEvent.registeredDeck.copyTo("Draft Deck");
         if (allowAddBasic()) {
             showAddBasicLandsDialog();
             //Might be annoying if you haven't pruned your deck yet, but best to remind player that

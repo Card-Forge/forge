@@ -55,7 +55,7 @@ public class AdventureEventData implements Serializable {
     public AdventureEventController.EventFormat format;
     private transient Random random = new Random();
     public Deck registeredDeck;
-    public Deck draftedDeck; //Copy of registered before basic lands are added for event reward purposes
+    public Deck rewardDeck; //Copy of registered before basic lands are added for event reward purposes
     public List<Deck> jumpstartBoosters = new ArrayList<>();
     public boolean isDraftComplete = false;
     public String description = "";
@@ -347,10 +347,10 @@ public class AdventureEventData implements Serializable {
             registeredDeck.getOrCreate(DeckSection.Sideboard).addAll(humanPool);
             registeredDeck.setName("Sealed Pool - " + cardBlockName);
 
-            // Store copy for rewards (in the Main section because that's what is counted for reward purposes)
-            draftedDeck = new Deck();
-            draftedDeck.getOrCreate(DeckSection.Main).addAll(humanPool);
-            draftedDeck.setName("Sealed Pool Cards");
+            // Store the reward pack consisting of every card in the opened sealed boosters
+            rewardDeck = new Deck();
+            rewardDeck.getOrCreate(DeckSection.Main).addAll(humanPool);
+            rewardDeck.setName("Sealed Pool Cards");
 
             // Generate AI opponents' decks
             for (AdventureEventParticipant participant : participants) {
@@ -741,18 +741,18 @@ public class AdventureEventData implements Serializable {
             rewards[3] = new AdventureEventReward();
             rewards[3].minWins = 3;
             rewards[3].maxWins = 3;
-            draftedDeck.setName("Drafted Deck");
-            draftedDeck.setComment("Prize for placing 1st overall in draft event");
-            rewards[3].cardRewards = new Deck[]{draftedDeck};
+            rewardDeck.setName("Drafted Deck");
+            rewardDeck.setComment("Prize for placing 1st overall in draft event");
+            rewards[3].cardRewards = new Deck[]{rewardDeck};
 
         } else if (format == AdventureEventController.EventFormat.Sealed) {
 
             rewards[3] = new AdventureEventReward();
             rewards[3].minWins = 3;
             rewards[3].maxWins = 3;
-            draftedDeck.setName("Sealed Card Pool");
-            draftedDeck.setComment("Prize for placing 1st overall in sealed event");
-            rewards[3].cardRewards = new Deck[]{draftedDeck};
+            rewardDeck.setName("Sealed Card Pool");
+            rewardDeck.setComment("Prize for placing 1st overall in sealed event");
+            rewards[3].cardRewards = new Deck[]{rewardDeck};
 
         } else if (format == AdventureEventController.EventFormat.Jumpstart) {
 
