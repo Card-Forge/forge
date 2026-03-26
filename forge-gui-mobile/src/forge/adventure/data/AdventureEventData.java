@@ -347,7 +347,7 @@ public class AdventureEventData implements Serializable {
             registeredDeck.getOrCreate(DeckSection.Sideboard).addAll(humanPool);
             registeredDeck.setName("Sealed Pool - " + cardBlockName);
 
-            // Store the reward pack consisting of every card in the opened sealed boosters
+            // Store the reward deck consisting of every card in the opened sealed boosters
             rewardDeck = new Deck();
             rewardDeck.getOrCreate(DeckSection.Main).addAll(humanPool);
             rewardDeck.setName("Sealed Pool Cards");
