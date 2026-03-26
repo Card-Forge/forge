@@ -12,6 +12,7 @@ import forge.game.CardTraitBase;
 import forge.game.EvenOdd;
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.GameType;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.combat.AttackRequirement;
@@ -41,6 +42,10 @@ public class CardProperty {
     public static boolean cardHasProperty(Card card, String property, Player sourceController, Card source, CardTraitBase spellAbility) {
         final Game game = card.getGame();
         final Combat combat = game.getCombat();
+        final boolean isDanDan = game != null && (game.getRules().getGameType() == GameType.DanDan
+                || game.getRules().hasAppliedVariant(GameType.DanDan));
+        final Zone cardZone = card.getZone();
+        final boolean isDanDanSharedGraveyard = isDanDan && cardZone != null && cardZone.is(ZoneType.Graveyard);
         // lki can't be null but it does return this
         final Card lki = game.getChangeZoneLKIInfo(card);
         final Player controller = lki.getController();
@@ -283,24 +288,25 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("YouOwn")) {
-            if (!card.getOwner().equals(sourceController)) {
+            if (!card.getOwner().equals(sourceController) && !isDanDanSharedGraveyard) {
                 return false;
             }
         } else if (property.startsWith("YouDontOwn")) {
-            if (card.getOwner().equals(sourceController)) {
+            if (card.getOwner().equals(sourceController) && !isDanDanSharedGraveyard) {
                 return false;
             }
         } else if (property.startsWith("OppOwn")) {
-            if (!card.getOwner().getOpponents().contains(sourceController)) {
+            if (!card.getOwner().getOpponents().contains(sourceController) && !isDanDanSharedGraveyard) {
                 return false;
             }
         } else if (property.equals("TargetedPlayerOwn")) {
-            if (!AbilityUtils.getDefinedPlayers(source, "TargetedPlayer", spellAbility).contains(card.getOwner())) {
+            if (!AbilityUtils.getDefinedPlayers(source, "TargetedPlayer", spellAbility).contains(card.getOwner())
+                    && !isDanDanSharedGraveyard) {
                 return false;
             }
         } else if (property.startsWith("OwnedBy")) {
             final String valid = property.substring(8);
-            if (!card.getOwner().isValid(valid, sourceController, source, spellAbility)) {
+            if (!card.getOwner().isValid(valid, sourceController, source, spellAbility) && !isDanDanSharedGraveyard) {
                 final List<Player> lp = AbilityUtils.getDefinedPlayers(source, valid, spellAbility);
                 if (!lp.contains(card.getOwner())) {
                     return false;

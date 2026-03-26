@@ -197,6 +197,10 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
     public final boolean checkZoneRestrictions(final Card c, final SpellAbility sa) {
         final Player activator = sa.getActivatingPlayer();
         final Zone cardZone = c.getLastKnownZone();
+        final boolean isDanDan = activator != null && activator.getGame() != null
+                && (activator.getGame().getRules().getGameType() == GameType.DanDan
+                || activator.getGame().getRules().hasAppliedVariant(GameType.DanDan));
+        final boolean isDanDanSharedGraveyard = isDanDan && cardZone != null && cardZone.is(ZoneType.Graveyard);
         Card cp = c;
 
         // for Bestow need to check the animated State
@@ -242,7 +246,9 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                     // NOTE: this assumes that it's always possible to cast cards from hand and you don't
                     // need special permissions for that. If WotC ever prints a card that forbids casting
                     // cards from hand, this may become relevant.
-                    if (!o.grantsZonePermissions() && cardZone != null && (!cardZone.is(ZoneType.Hand) || activator != c.getOwner())) {
+                    if (!o.grantsZonePermissions() && cardZone != null
+                            && (!cardZone.is(ZoneType.Hand) || activator != c.getOwner())
+                            && !isDanDanSharedGraveyard) {
                         final List<CardPlayOption> opts = c.mayPlay(activator);
                         boolean hasOtherGrantor = false;
                         for (CardPlayOption opt : opts) {

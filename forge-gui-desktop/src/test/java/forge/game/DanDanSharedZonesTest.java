@@ -5,6 +5,7 @@ import forge.ai.AITest;
 import forge.ai.LobbyPlayerAi;
 import forge.deck.Deck;
 import forge.game.card.Card;
+import forge.game.card.CardProperty;
 import forge.game.card.CardView;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
@@ -173,6 +174,34 @@ public class DanDanSharedZonesTest extends AITest {
             AssertJUnit.assertEquals("label count vs displayed list (P2) " + z, displayed,
                     PlayerDetailsPanel.zoneCountForDisplay(game.getView(), pv2, z));
         }
+    }
+
+    @Test
+    public void dandanSharedGraveyardTreatsYouOwnAsSharedAccess() {
+        initAndCreateGame();
+
+        final Deck firstDeck = new Deck("DanDan P1");
+        final Deck secondDeck = new Deck("DanDan P2");
+
+        final List<RegisteredPlayer> players = Lists.newArrayList();
+        players.add(new RegisteredPlayer(firstDeck).setPlayer(new LobbyPlayerAi("p1", null)));
+        players.add(new RegisteredPlayer(secondDeck).setPlayer(new LobbyPlayerAi("p2", null)));
+
+        final GameRules rules = new GameRules(GameType.DanDan);
+        final Match match = new Match(rules, players, "DanDan shared graveyard ownership checks");
+        final Game game = match.createGame();
+        match.startGame(game);
+
+        final Player p1 = game.getRegisteredPlayers().get(0);
+        final Player p2 = game.getRegisteredPlayers().get(1);
+
+        final Card c = addCardToZone("Opt", p1, ZoneType.Graveyard);
+        c.setOwner(p2);
+
+        AssertJUnit.assertTrue("DanDan shared graveyard should allow YouOwn checks from either player (p1)",
+                CardProperty.cardHasProperty(c, "YouOwn", p1, c, null));
+        AssertJUnit.assertTrue("DanDan shared graveyard should still allow YouOwn checks for owner (p2)",
+                CardProperty.cardHasProperty(c, "YouOwn", p2, c, null));
     }
 
     private static void assertSameOrderAndIds(final String zoneName, final Iterable<CardView> left, final Iterable<CardView> right) {
