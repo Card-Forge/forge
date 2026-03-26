@@ -125,7 +125,7 @@
   "vintageOnlyEditions": true,
   "allowedJumpstart": [],
   "enableGeneticAI": false,
-  "usePriceListPrices": false,
+  "usePriceListPrices": true,
   "defaultBasicLandSet": "4ED",
   "difficulties": [
     {
