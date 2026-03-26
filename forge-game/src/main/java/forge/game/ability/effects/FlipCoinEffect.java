@@ -174,7 +174,8 @@ public class FlipCoinEffect extends SpellAbilityEffect {
         do {
             Boolean fixedResult = StaticAbilityFlipCoinMod.fixedResult(flipper);
             for (int i = 0; i < amount; i++) {
-                won = flipCoin(flipper, sa, multiplier, fixedResult, info);
+                String iterationInfo = amount > 1 ? " " + (i+1) + "/"  + amount : "";
+                won = flipCoin(flipper, sa, multiplier, fixedResult, info + iterationInfo);
                 if (won) {
                     result++;
                 }
