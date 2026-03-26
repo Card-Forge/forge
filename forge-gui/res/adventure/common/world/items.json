@@ -912,7 +912,7 @@
     "effect": {
       "lifeModifier": 1,
       "changeStartCards": -1,
-      "startBattleWithCardInHand": [
+      "startBattleWithCard": [
         "Basilisk Collar"
       ]
     }
@@ -920,14 +920,14 @@
   {
     "name": "Evil Ankh",
     "equipmentSlot": "Right",
-    "description": "Start with Unearth in your hand",
+    "description": "Start with Ankh of Mishra",
     "cost": 25000,
     "iconName": "EvilAnkh",
     "effect": {
       "lifeModifier": 1,
       "changeStartCards": -1,
-      "startBattleWithCardInHand": [
-        "Unearth"
+      "startBattleWithCard": [
+        "Ankh of Mishra"
       ]
     }
   },
@@ -969,29 +969,29 @@
   },
   {
     "name": "Crown of Growth",
-    "description": "Start with Giant Growth in your hand",
+    "description": "Start with Season of Growth",
     "equipmentSlot": "Neck",
     "iconName": "CrownofGrowth",
     "cost": 3000,
      "effect": {
       "lifeModifier": 1,
       "changeStartCards": -1,
-      "startBattleWithCardInHand": [
-        "Giant Growth"
+      "startBattleWithCard": [
+        "Season of Growth"
       ]
     }
   },
   {
     "name": "Mantle of Denial",
-    "description": "Start with Counterspell in your hand",
+    "description": "Start with Hesitation",
     "equipmentSlot": "Body",
     "iconName": "MantleofDenial",
     "cost": 3000,
      "effect": {
       "lifeModifier": 1,
-      "changeStartCards": -1,
-      "startBattleWithCardInHand": [
-        "Counterspell"
+      "changeStartCards": 1,
+      "startBattleWithCard": [
+        "Hesitation"
       ]
     }
   },
