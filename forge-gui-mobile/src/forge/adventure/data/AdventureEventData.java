@@ -747,9 +747,15 @@ public class AdventureEventData implements Serializable {
 
         } else if (format == AdventureEventController.EventFormat.Sealed) {
 
-            if (wins == 3) {
-                rewards[3].cardRewards = new Deck[]{draftedDeck};
-            }
+            rewards[3] = new AdventureEventReward();
+            rewards[3].minWins = 3;
+            rewards[3].maxWins = 3;
+            draftedDeck.setName("Sealed Card Pool");
+            draftedDeck.setComment("Prize for placing 1st overall in sealed event");
+            CardPool sideboard = draftedDeck.get(DeckSection.Sideboard);
+            draftedDeck.getMain().addAll(sideboard);
+            draftedDeck.get(DeckSection.Sideboard).clear();
+            rewards[3].cardRewards = new Deck[]{draftedDeck};
 
         } else if (format == AdventureEventController.EventFormat.Jumpstart) {
 
