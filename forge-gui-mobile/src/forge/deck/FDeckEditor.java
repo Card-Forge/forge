@@ -2057,6 +2057,18 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         protected void addPerCardItems(FDropDownMenu menu, PaperCard card) {
+            Deck currentDeck = parentScreen.getDeck();
+            if (currentDeck != null) {
+                // Add key card toggle option
+                java.util.List<String> keyCards = new java.util.ArrayList<>(currentDeck.getKeyCards());
+                boolean isKeyCard = keyCards.stream().anyMatch(name -> name.equalsIgnoreCase(card.getName()));
+                String keyCardLabel = isKeyCard ? Forge.getLocalizer().getMessage("lblRemoveKeyCard") : Forge.getLocalizer().getMessage("lblAddKeyCard");
+                
+                menu.addItem(new FMenuItem(keyCardLabel, Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, e -> {
+                    toggleCardKeyCard(currentDeck, card, keyCards, isKeyCard);
+                }));
+            }
+            
             int markedColorCount = card.getRules().getSetColorID();
             if (markedColorCount > 0) {
                 menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblColorIdentity"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, e -> {
@@ -2138,6 +2150,28 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 addCard(newCard, amount);
                 removeCard(card, amount);
             }).handleEvent(e);
+        }
+
+        private void toggleCardKeyCard(final Deck deck, final PaperCard card, java.util.List<String> keyCards, boolean isCurrentlyKeyCard) {
+            String cardName = card.getName();
+            
+            if (isCurrentlyKeyCard) {
+                // Remove from key cards
+                keyCards.removeIf(name -> name.equalsIgnoreCase(cardName));
+            } else {
+                // Add to key cards
+                keyCards.add(cardName);
+            }
+            
+            // Update the deck's AiHint for KeyCards
+            String keyCardHint = String.join(";", keyCards);
+            deck.setAiHint("KeyCards", keyCardHint);
+            
+            // Mark deck as modified so it will be saved
+            parentScreen.getDeckController().notifyModelChanged();
+            
+            // Refresh the view to show updated status
+            cardManager.refresh();
         }
 
         private boolean isPartnerCommander(final PaperCard card) {
