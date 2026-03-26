@@ -4,7 +4,7 @@ format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 Avatar          
-  xy: 311, 101
+  xy: 306, 94
   size: 16, 16
 Idle 
   xy: 00,64
@@ -59,9 +59,6 @@ Attack
   size: 64,64
 Attack 
   xy: 320, 192
-  size: 64,64
-Attack 
-  xy: 384, 192
   size: 64,64
 Death 
   xy: 0,384

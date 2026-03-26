@@ -465,7 +465,7 @@
     &quot;type&quot;: &quot;cardPackShop&quot;,
     &quot;probability&quot;: 1,
     &quot;count&quot;: 1,
-    &quot;editions&quot;: [&quot;FDM&quot;]
+    &quot;editions&quot;: [&quot;FDN&quot;]
   },
   {
     &quot;type&quot;: &quot;cardPackShop&quot;,
@@ -512,7 +512,7 @@
     &quot;type&quot;: &quot;cardPackShop&quot;,
     &quot;probability&quot;: 1,
     &quot;count&quot;: 1,
-    &quot;editions&quot;: [&quot;FDM&quot;]
+    &quot;editions&quot;: [&quot;FDN&quot;]
   },
   {
     &quot;type&quot;: &quot;cardPackShop&quot;,
