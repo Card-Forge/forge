@@ -2157,15 +2157,11 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             
             if (isCurrentlyKeyCard) {
                 // Remove from key cards
-                keyCards.removeIf(name -> name.equalsIgnoreCase(cardName));
+                deck.removeKeyCard(cardName);
             } else {
                 // Add to key cards
-                keyCards.add(cardName);
+                deck.addKeyCard(cardName);
             }
-            
-            // Update the deck's AiHint for KeyCards
-            String keyCardHint = String.join(";", keyCards);
-            deck.setAiHint("KeyCards", keyCardHint);
             
             // Mark deck as modified so it will be saved
             parentScreen.getDeckController().notifyModelChanged();

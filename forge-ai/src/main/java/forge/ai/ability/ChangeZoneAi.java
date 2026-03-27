@@ -5,7 +5,6 @@ import com.google.common.collect.Lists;
 import forge.ai.*;
 import forge.card.CardType;
 import forge.card.MagicColor;
-import forge.deck.Deck;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
@@ -1480,10 +1479,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (fetchList.isEmpty()) {
             return null;
         }
-        List<String> keyCards = Lists.newArrayList();
-        // I want to tally the key cards
-        Deck d = player.getRegisteredPlayer().getDeck();
-        keyCards.addAll(d.getKeyCards());
+        List<String> keyCards = new ArrayList<>(player.getRegisteredPlayer().getDeck().getKeyCards());
+        // Only grab the keycards I don't already have access to
         if (destination.equals(ZoneType.Battlefield) || destination.equals(ZoneType.Hand)) {
             for(Card c : player.getCardsIn(Lists.newArrayList(ZoneType.Hand, ZoneType.Battlefield))) {
                 keyCards.remove(c.getName());

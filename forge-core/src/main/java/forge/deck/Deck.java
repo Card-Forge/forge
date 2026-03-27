@@ -51,6 +51,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     // Supports deferring loading a deck until we actually need its contents. This works in conjunction with
     // the lazy card load feature to ensure we don't need to load all cards on start up.
     private final Set<String> aiHints = new TreeSet<>();
+    private final List<String> keyCards = new ArrayList<>();
     private final Map<String, String> draftNotes = new HashMap<>();
     private Map<String, List<String>> deferredSections = null;
     private Map<String, List<String>> loadedSections = null;
@@ -255,6 +256,8 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         //noinspection ConstantValue
         if(tags != null) //Can happen deserializing old Decks.
             result.tags.addAll(this.tags);
+        if(keyCards != null)
+            result.keyCards.addAll(this.keyCards);
     }
 
     /*
@@ -595,14 +598,29 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     }
 
     public List<String> getKeyCards() {
-        String hint = getAiHint("KeyCards");
-        if (hint == null || hint.isEmpty()) {
-            return List.of();
+        return new ArrayList<>(keyCards);
+    }
+
+    public void addKeyCard(String cardName) {
+        if (cardName != null && !cardName.trim().isEmpty()) {
+            String trimmed = cardName.trim();
+            if (!keyCards.contains(trimmed)) {
+                keyCards.add(trimmed);
+            }
         }
-        return List.of(hint.split(";")).stream()
-                .map(String::trim)
-                .filter(s -> !s.isEmpty())
-                .collect(Collectors.toList());
+    }
+
+    public void removeKeyCard(String cardName) {
+        if (cardName != null) {
+            keyCards.remove(cardName.trim());
+        }
+    }
+
+    public boolean isKeyCard(String cardName) {
+        if (cardName == null) {
+            return false;
+        }
+        return keyCards.contains(cardName.trim());
     }
 
     public void setDraftNotes(Map<String, String> draftNotes) {

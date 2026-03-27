@@ -548,34 +548,17 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
         }
         
         private boolean isCardKeyCard(final Deck deck, final PaperCard card) {
-            for (String keyCardName : deck.getKeyCards()) {
-                if (keyCardName.equalsIgnoreCase(card.getName())) {
-                    return true;
-                }
-            }
-            return false;
+            return deck.isKeyCard(card.getName());
         }
         
         private void toggleCardKeyStatus(final Deck deck, final PaperCard card) {
-            java.util.List<String> keyCards = new java.util.ArrayList<>(deck.getKeyCards());
             String cardName = card.getName();
             
-            boolean isKeyCard = false;
-            for (String keyCardName : keyCards) {
-                if (keyCardName.equalsIgnoreCase(cardName)) {
-                    isKeyCard = true;
-                    break;
-                }
-            }
-            
-            if (isKeyCard) {
-                keyCards.removeIf(name -> name.equalsIgnoreCase(cardName));
+            if (deck.isKeyCard(cardName)) {
+                deck.removeKeyCard(cardName);
             } else {
-                keyCards.add(cardName);
+                deck.addKeyCard(cardName);
             }
-            
-            String keyCardHint = String.join(";", keyCards);
-            deck.setAiHint("KeyCards", keyCardHint);
             
             // Mark deck as modified so it will be saved
             CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().notifyModelChanged();

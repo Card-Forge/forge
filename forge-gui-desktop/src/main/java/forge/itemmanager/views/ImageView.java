@@ -1273,27 +1273,14 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             try {
                 final Deck currentDeck = (Deck) CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().getModel();
                 
-                if (currentDeck != null) {
-                    final List<String> keyCards = currentDeck.getKeyCards();
-                    
-                    // Check if this card is in the key cards list
-                    boolean isKeyCard = false;
-                    for (String keyCardName : keyCards) {
-                        if (keyCardName.equalsIgnoreCase(card.getName())) {
-                            isKeyCard = true;
-                            break;
-                        }
-                    }
-                    
-                    if (isKeyCard) {
-                        g.setColor(Color.yellow);
-                        g.setFont(g.getFont().deriveFont(Font.BOLD, 14f));
-                        FontMetrics fm = g.getFontMetrics();
-                        String indicator = "⭐";
-                        int x = bounds.x + bounds.width - fm.stringWidth(indicator) - 3;
-                        int y = bounds.y + fm.getAscent() + 3;
-                        g.drawString(indicator, x, y);
-                    }
+                if (currentDeck != null && currentDeck.isKeyCard(card.getName())) {
+                    g.setColor(Color.yellow);
+                    g.setFont(g.getFont().deriveFont(Font.BOLD, 14f));
+                    FontMetrics fm = g.getFontMetrics();
+                    String indicator = "⭐";
+                    int x = bounds.x + bounds.width - fm.stringWidth(indicator) - 3;
+                    int y = bounds.y + fm.getAscent() + 3;
+                    g.drawString(indicator, x, y);
                 }
             } catch (Exception e) {
                 // Silently ignore if deck context is not available

@@ -19,7 +19,6 @@ package forge.itemmanager.views;
 
 import java.awt.Component;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JTable;
@@ -111,27 +110,14 @@ public class DeckKeyCardRenderer extends ItemCellRenderer {
 
     private void toggleKeyCard(final Deck deck, final PaperCard card) {
         String cardName = card.getName();
-        List<String> keyCards = new ArrayList<>(deck.getKeyCards());
         
-        boolean isKeyCard = false;
-        for (String keyCardName : keyCards) {
-            if (keyCardName.equalsIgnoreCase(cardName)) {
-                isKeyCard = true;
-                break;
-            }
-        }
-        
-        if (isKeyCard) {
+        if (deck.isKeyCard(cardName)) {
             // Remove from key cards
-            keyCards.removeIf(name -> name.equalsIgnoreCase(cardName));
+            deck.removeKeyCard(cardName);
         } else {
             // Add to key cards
-            keyCards.add(cardName);
+            deck.addKeyCard(cardName);
         }
-        
-        // Update the deck's AiHint for KeyCards
-        String keyCardHint = String.join(";", keyCards);
-        deck.setAiHint("KeyCards", keyCardHint);
         
         // Mark deck as modified so it will be saved
         CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().notifyModelChanged();
