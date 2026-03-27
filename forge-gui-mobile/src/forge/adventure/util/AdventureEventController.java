@@ -5,6 +5,7 @@ import forge.adventure.data.AdventureEventData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.deck.Deck;
+import forge.deck.DeckFormat;
 import forge.item.BoosterPack;
 import forge.item.PaperCard;
 import forge.item.SealedTemplate;
@@ -45,6 +46,10 @@ public class AdventureEventController implements Serializable {
                 case Constructed -> "Constructed";
                 default -> name();
             };
+        }
+
+        public DeckFormat getDeckFormat() {
+            return DeckFormat.Limited;
         }
     }
 
