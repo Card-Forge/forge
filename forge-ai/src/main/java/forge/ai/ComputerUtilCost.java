@@ -353,7 +353,9 @@ public class ComputerUtilCost {
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostSacrifice sac) {
                 if (sac.payCostFromSource()) {
-                    if (!important) {
+                    // Allow self-sacrifice for tokens (they're designed to be sacrificed for effect)
+                    // even if not in immediate danger
+                    if (!important && !source.isToken()) {
                         return false;
                     }
                     if (!CardLists.filterControlledBy(source.getEnchantedBy(), source.getController()).isEmpty()) {

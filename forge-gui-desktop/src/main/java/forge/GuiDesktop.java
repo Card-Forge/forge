@@ -360,11 +360,16 @@ public class GuiDesktop implements IGuiBase {
     }
 
     private static float initializeScreenScale() {
-        GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
-        AffineTransform at = gc.getDefaultTransform();
-        double scaleX = at.getScaleX();
-        double scaleY = at.getScaleY();
-        return (float) Math.min(scaleX, scaleY);
+        try {
+            GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
+            AffineTransform at = gc.getDefaultTransform();
+            double scaleX = at.getScaleX();
+            double scaleY = at.getScaleY();
+            return (float) Math.min(scaleX, scaleY);
+        } catch (java.awt.HeadlessException e) {
+            // Running in headless mode (e.g., in tests or CI). Use default scale.
+            return 1.0f;
+        }
     }
     static float screenScale = initializeScreenScale();
 

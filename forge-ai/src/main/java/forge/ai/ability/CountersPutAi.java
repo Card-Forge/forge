@@ -467,7 +467,7 @@ public class CountersPutAi extends CountersAi {
                 // don't put the counter on the dead creature
                 if (sacSelf && c.equals(source)) {
                     return false;
-                } else if (hasSacCost && !ComputerUtil.shouldSacrificeThreatenedCard(ai, c, sa)) {
+                } else if (hasSacCost && !sacSelf && !ComputerUtil.shouldSacrificeThreatenedCard(ai, c, sa)) {
                     return false;
                 }
                 if ("NoCounterOfType".equals(sa.getParam("AILogic"))) {
