@@ -2,15 +2,15 @@
 Alpha, 3/6/LEA, LEA  
 Beta, 3/6/LEB, LEB  
 Unlimited, 3/6/2ED, 2ED  
-Arabian Nights, 5/9/2ED, ARN  
-Antiquities, 5/9/2ED, ATQ  
+Arabian Nights, 4/8/2ED, ARN ARN ARN 3ED
+Antiquities, 4/8/2ED, ATQ ATQ ATQ 3ED
 Revised, 3/6/3ED, 3ED  
-Legends, 3/6/3ED, LEG LEG 3ED
-The Dark, 5/9/3ED, DRK  
-Fallen Empires, 5/9/3ED, FEM  
+Legends, 3/6/3ED, LEG 3ED
+The Dark, 4/8/3ED, DRK DRK DRK 3ED
+Fallen Empires, 4/8/3ED, FEM FEM FEM 3ED
 Fourth Edition, 3/6/4ED, 4ED CHR  
 Ice Age, 3/6/ICE, ICE ALL CSP
-Homelands, 5/9/4ED, HML  
+Homelands, 4/8/4ED, HML HML HML 4ED
 Mirage, 3/6/MIR, MIR VIS WTH
 Fifth Edition, 3/6/5ED, 5ED  
 Portal, 3/6/POR, POR  
