@@ -2688,13 +2688,12 @@
   },
     {
     "name": "Fblthp's Lost Hat",
-    "description": "Win at 200 cards (which you can't have), boosts life as consolation",
+    "description": "Gain future sight if you find Fblthp.",
     "equipmentSlot": "Neck",
     "iconName": "Fblthp'sLostHat",
     "effect": {
-        "lifeModifier": 5,
         "startBattleWithCard": [
-        "Battle of Wits|ODY"
+        "Case of the Lost Witness"
      ]
     }
   },
@@ -2983,7 +2982,7 @@
     "equipmentSlot": "Right",
     "iconName": "BladedBracer",
     "effect": {
-        "lifeModifier": 2,
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Bladed Bracers|AVR"
      ]
