@@ -203,7 +203,7 @@ public class AdventureDeckEditor extends FDeckEditor {
 
         @Override
         public DeckFormat getDeckFormat() {
-            return DeckFormat.Limited;
+            return event.format.getDeckFormat();
         }
 
         @Override
@@ -262,12 +262,7 @@ public class AdventureDeckEditor extends FDeckEditor {
                         };
 
                 }
-            } else if (event.format == AdventureEventController.EventFormat.Sealed) {
-                return new DeckEditorPage[]{
-                        new AdventureDeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.DRAFT_POOL),
-                        new AdventureDeckSectionPage(DeckSection.Main, ItemManagerConfig.DRAFT_POOL)
-                };
-            } else if (event.format == AdventureEventController.EventFormat.Jumpstart) {
+            } else if (event.format == AdventureEventController.EventFormat.Jumpstart || event.format == AdventureEventController.EventFormat.Sealed) {
                 return new DeckEditorPage[]{
                         new AdventureDeckSectionPage(DeckSection.Main, ItemManagerConfig.DRAFT_POOL),
                         new AdventureDeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.SIDEBOARD)};
@@ -277,7 +272,7 @@ public class AdventureDeckEditor extends FDeckEditor {
     }
 
     private static class ContentPreviewPage extends CatalogPage {
-        Deck contents = new Deck();
+        Deck contents;
 
         protected ContentPreviewPage(Deck cardsToShow) {
             super(new AdventureCardManager(), ItemManagerConfig.ADVENTURE_STORE_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON);
