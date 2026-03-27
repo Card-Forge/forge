@@ -20,6 +20,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbilityCantSearchLibrary;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.Lang;
@@ -251,9 +252,8 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                     }
 
                     final Player searched = AbilityUtils.getDefinedPlayers(host, sa.getParam("QuasiLibrarySearch"), sa).get(0);
-                    final int fetchNum = Math.min(searched.getCardsIn(ZoneType.Library).size(), 4);
-                    CardCollectionView shown = !p.hasKeyword("LimitSearchLibrary")
-                            ? searched.getCardsIn(ZoneType.Library) : searched.getCardsIn(ZoneType.Library, fetchNum);
+                    final Integer fetchNum = StaticAbilityCantSearchLibrary.limitSearchLibraryConsideringSize(p);
+                    final CardCollectionView shown = fetchNum != null ? searched.getCardsIn(ZoneType.Library, fetchNum) : searched.getCardsIn(ZoneType.Library);
                     DelayedReveal delayedReveal = new DelayedReveal(shown, ZoneType.Library, PlayerView.get(searched),
                             host.getTranslatedName() + " - " +
                                     Localizer.getInstance().getMessage("lblLookingCardIn") + " ");

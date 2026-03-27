@@ -200,6 +200,11 @@ public enum StaticAbilityMode {
 
     // StaticAbilityCountersRemain
     CountersRemain,
+
+    // StaticAbilityCantSearchLibrary
+    LimitSearchLibrary,
+    CantSearchLibrary,
+    CantCauseToSearchLibrary
     ;
 
     public static StaticAbilityMode smartValueOf(final String value) {

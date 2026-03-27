@@ -20,6 +20,7 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.staticability.StaticAbilityCantSearchLibrary;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -1015,9 +1016,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 if (origin.contains(ZoneType.Library) && !sa.hasParam("NoLooking")) {
                     searchedLibrary = true;
 
-                    if (decider.hasKeyword("LimitSearchLibrary")) { // Aven Mindcensor
+                    Integer fetchNum = StaticAbilityCantSearchLibrary.limitSearchLibraryConsideringSize(decider);
+                    if (fetchNum != null) {
                         fetchList.removeAll(player.getCardsIn(ZoneType.Library));
-                        final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
                         if (fetchNum == 0) {
                             searchedLibrary = false;
                         } else {
@@ -1040,9 +1041,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 Set<ZoneType> revealZones = Sets.newHashSet();
                 Iterable<Card> toReveal = null;
                 if (origin.contains(ZoneType.Library) && searchedLibrary) {
-                    final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
+                    Integer fetchNum = StaticAbilityCantSearchLibrary.limitSearchLibraryConsideringSize(decider);
                     // Look at whole library before moving onto choosing a card
-                    toReveal = !decider.hasKeyword("LimitSearchLibrary") ? player.getCardsIn(ZoneType.Library) : player.getCardsIn(ZoneType.Library, fetchNum);
+                    toReveal = fetchNum != null ? player.getCardsIn(ZoneType.Library, fetchNum) : player.getCardsIn(ZoneType.Library);
                     revealZones.add(ZoneType.Library);
                 }
                 if (origin.contains(ZoneType.Hand) && player.isOpponentOf(decider)) {
