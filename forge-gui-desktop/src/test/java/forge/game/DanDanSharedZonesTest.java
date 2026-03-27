@@ -3,6 +3,7 @@ package forge.game;
 import com.google.common.collect.Lists;
 import forge.ai.AITest;
 import forge.ai.LobbyPlayerAi;
+import forge.deck.DeckSection;
 import forge.deck.Deck;
 import forge.game.card.Card;
 import forge.game.card.CardProperty;
@@ -10,6 +11,8 @@ import forge.game.card.CardView;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.player.RegisteredPlayer;
+import forge.item.PaperCard;
+import forge.StaticData;
 import forge.game.zone.ZoneType;
 import forge.toolbox.special.PlayerDetailsPanel;
 import org.testng.AssertJUnit;
@@ -230,6 +233,67 @@ public class DanDanSharedZonesTest extends AITest {
                 CardProperty.cardHasProperty(c, "YouCtrl", p1, c, null));
         AssertJUnit.assertTrue("DanDan shared graveyard should still allow YouCtrl checks for controller (p2)",
                 CardProperty.cardHasProperty(c, "YouCtrl", p2, c, null));
+    }
+
+    @Test
+    public void dandanSkipsSideboardingBetweenGames() {
+        initAndCreateGame();
+
+        final PaperCard island = StaticData.instance().getCommonCards().getCard("Island");
+        final PaperCard swamp = StaticData.instance().getCommonCards().getCard("Swamp");
+        AssertJUnit.assertNotNull(island);
+        AssertJUnit.assertNotNull(swamp);
+
+        final Deck firstDeck = new Deck("DanDan P1");
+        firstDeck.getOrCreate(DeckSection.Main).add(island, 60);
+        firstDeck.getOrCreate(DeckSection.Sideboard).add(swamp, 1);
+        firstDeck.setAiHints("SideboardingPlan$Island->Swamp");
+
+        final Deck secondDeck = new Deck("DanDan P2");
+        secondDeck.getOrCreate(DeckSection.Main).add(island, 60);
+        secondDeck.getOrCreate(DeckSection.Sideboard).add(swamp, 1);
+        secondDeck.setAiHints("SideboardingPlan$Island->Swamp");
+
+        final List<RegisteredPlayer> players = Lists.newArrayList();
+        players.add(new RegisteredPlayer(firstDeck).setPlayer(new LobbyPlayerAi("p1", null)));
+        players.add(new RegisteredPlayer(secondDeck).setPlayer(new LobbyPlayerAi("p2", null)));
+
+        final GameRules rules = new GameRules(GameType.DanDan);
+        // Ensure AI sideboarding would be deterministic if it were allowed.
+        rules.setAISideboardingEnabled(true);
+
+        final Match match = new Match(rules, players, "DanDan skip sideboarding between games");
+
+        // Game 1: not a sideboarding moment (first game)
+        final Game game1 = match.createGame();
+        match.startGame(game1);
+        game1.setGameOver(GameEndReason.Draw);
+
+        AssertJUnit.assertEquals(60, firstDeck.get(DeckSection.Main).countByName("Island"));
+        AssertJUnit.assertEquals(0, firstDeck.get(DeckSection.Main).countByName("Swamp"));
+        AssertJUnit.assertEquals(1, firstDeck.get(DeckSection.Sideboard).countByName("Swamp"));
+
+        AssertJUnit.assertEquals(60, secondDeck.get(DeckSection.Main).countByName("Island"));
+        AssertJUnit.assertEquals(0, secondDeck.get(DeckSection.Main).countByName("Swamp"));
+        AssertJUnit.assertEquals(1, secondDeck.get(DeckSection.Sideboard).countByName("Swamp"));
+
+        // Game 2: sideboarding moment, but DanDan should skip it.
+        final Game game2 = match.createGame();
+        match.startGame(game2);
+
+        AssertJUnit.assertEquals("DanDan main should not be swapped (p1)",
+                60, firstDeck.get(DeckSection.Main).countByName("Island"));
+        AssertJUnit.assertEquals("DanDan main should not gain Swamps (p1)",
+                0, firstDeck.get(DeckSection.Main).countByName("Swamp"));
+        AssertJUnit.assertEquals("DanDan sideboard should retain original Swamp (p1)",
+                1, firstDeck.get(DeckSection.Sideboard).countByName("Swamp"));
+
+        AssertJUnit.assertEquals("DanDan main should not be swapped (p2)",
+                60, secondDeck.get(DeckSection.Main).countByName("Island"));
+        AssertJUnit.assertEquals("DanDan main should not gain Swamps (p2)",
+                0, secondDeck.get(DeckSection.Main).countByName("Swamp"));
+        AssertJUnit.assertEquals("DanDan sideboard should retain original Swamp (p2)",
+                1, secondDeck.get(DeckSection.Sideboard).countByName("Swamp"));
     }
 
     private static void assertSameOrderAndIds(final String zoneName, final Iterable<CardView> left, final Iterable<CardView> right) {

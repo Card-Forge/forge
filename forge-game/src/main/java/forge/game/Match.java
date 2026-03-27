@@ -234,7 +234,9 @@ public class Match {
         final RegisteredPlayer sharedDanDanCondition = isDanDan && !playersConditions.isEmpty() ? playersConditions.get(0) : null;
 
         boolean isFirstGame = gameOutcomes.isEmpty();
-        boolean canSideBoard = !isFirstGame && rules.getGameType().isSideboardingAllowed();
+        // DanDan has a shared library/graveyard but no "between-games" sideboarding.
+        // Prevent sideboarding logic from ever running for DanDan matches.
+        boolean canSideBoard = !isFirstGame && rules.getGameType().isSideboardingAllowed() && !isDanDan;
         // Only allow this if feature flag is on AND for certain match types
         boolean sideboardForAIs = rules.getSideboardForAI() &&
             rules.getGameType().getDeckFormat().equals(DeckFormat.Constructed);
