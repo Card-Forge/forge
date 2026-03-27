@@ -179,19 +179,6 @@ public class EventScene extends MenuScene implements IAfterMatch {
         });
 
         editDeck = ui.findActor("editDeck");
-        editDeck.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                if (currentEvent.format == AdventureEventController.EventFormat.Draft
-                        && (currentEvent.eventStatus == Ready || currentEvent.eventStatus == Started)) {
-                    DraftScene.instance().loadEvent(currentEvent);
-                    Forge.switchScene(DraftScene.instance());
-                } else if (currentEvent.format == AdventureEventController.EventFormat.Jumpstart && currentEvent.eventStatus == Ready) {
-                    DeckEditScene.getInstance().loadEvent(currentEvent);
-                    Forge.switchScene(DeckEditScene.getInstance());
-                }
-            }
-        });
 
         Window window = ui.findActor("scrollWindow");
         root = ui.findActor("enemies");
@@ -217,11 +204,6 @@ public class EventScene extends MenuScene implements IAfterMatch {
     }
 
     private void refresh() {
-        if (currentEvent.format == AdventureEventController.EventFormat.Sealed) {
-            // in Sealed events, there is no draft table and no pack selection as such
-            metaDraftTable.setVisible(false);
-        }
-
         if (metaDraftTable.isVisible()) {
             scrollContainer = metaDraftTable;
             headerTable.clear();
@@ -429,14 +411,6 @@ public class EventScene extends MenuScene implements IAfterMatch {
         GameHUD.getInstance().updateBGM();
         scrollContainer.clear();
 
-        // TODO: should this be moved elsewhere?
-        if (currentEvent != null &&
-                currentEvent.format == AdventureEventController.EventFormat.Sealed &&
-                currentEvent.eventStatus == AdventureEventController.EventStatus.Entered &&
-                currentEvent.registeredDeck.getMain().countAll() >= 40) {
-                currentEvent.eventStatus = AdventureEventController.EventStatus.Ready;
-        }
-
         if (money != null) {
             WorldSave.getCurrentSave().getPlayer().onGoldChange(() -> money.setText("[+Gold] [BLACK]" + AdventurePlayer.current().getGold()));
         }
@@ -453,40 +427,39 @@ public class EventScene extends MenuScene implements IAfterMatch {
     }
 
     public void editDeck() {
-        if (currentEvent.eventStatus == Ready) {
-            DraftScene.instance().loadEvent(currentEvent);
-            Forge.switchScene(DraftScene.instance());
-        }
+        DeckEditScene.getInstance().loadEvent(currentEvent);
+        Forge.switchScene(DeckEditScene.getInstance());
     }
 
     public void advance() {
         switch (currentEvent.eventStatus) {
             case Available:
                 activate(entryDialog); //Entry fee pop-up
-
                 break;
             case Entered: //Start draft or select deck
                 //Show progress / wait indicator? Draft can take a while to generate
                 switch (currentEvent.format) {
                     case Draft:
-                        DraftScene.instance().loadEvent(currentEvent);
-                        Forge.switchScene(DraftScene.instance());
+                        editDeck();
                         break;
                     case Sealed:
                         if (currentEvent.registeredDeck.get(DeckSection.Sideboard) == null) {
                             currentEvent.generateSealedPool();
                         }
-                        DeckEditScene.getInstance().loadEvent(currentEvent);
-                        Forge.switchScene(DeckEditScene.getInstance());
+                        currentEvent.eventStatus = Ready;
+                        editDeck();
                         break;
                     case Jumpstart:
                         loadMetaDraft();
                 }
                 break;
             case Ready: //Commit to selected deck
-                //Add confirmation pop-up?
+                if(!validateDeck())
+                    break;
                 currentEvent.startEvent();
             case Started: //Play next round
+                if(!validateDeck())
+                    break;
                 advance.setDisabled(true);
                 startRound();
                 break;
@@ -497,7 +470,6 @@ public class EventScene extends MenuScene implements IAfterMatch {
                 break;
 
             case Abandoned: //Show results but don't allow any interaction
-
                 break;
         }
         refresh();
@@ -576,13 +548,13 @@ public class EventScene extends MenuScene implements IAfterMatch {
             currentEvent.matchesLost++;
         }
 
-        if (winner) {
-            //AdventureQuestController.instance().updateQuestsWin(currentMob,enemies);
-            //AdventureQuestController.instance().showQuestDialogs(MapStage.this);
-        } else {
-//            AdventureQuestController.instance().updateQuestsLose(currentMob);
+//        if (winner) {
+//            AdventureQuestController.instance().updateQuestsWin(currentMob,enemies);
 //            AdventureQuestController.instance().showQuestDialogs(MapStage.this);
-        }
+//        } else {
+//           AdventureQuestController.instance().updateQuestsLose(currentMob);
+//           AdventureQuestController.instance().showQuestDialogs(MapStage.this);
+//        }
 
         finishRound();
     }
@@ -602,6 +574,11 @@ public class EventScene extends MenuScene implements IAfterMatch {
     }
 
     public void loadMetaDraft() {
+        if(currentEvent.jumpstartBoosters.isEmpty()) {
+            metaDraftTable.setVisible(false);
+            return;
+        }
+
         metaDraftTable.setVisible(true);
 
         metaDraftTable.clear();
@@ -645,6 +622,24 @@ public class EventScene extends MenuScene implements IAfterMatch {
             metaDraftTable.add(selectButton).padLeft(10);
         }
         eventPages[0] = metaDraftTable;
+    }
+
+    private boolean validateDeck() {
+        String deckError = currentEvent.format.getDeckFormat().getDeckConformanceProblem(currentEvent.registeredDeck);
+
+        if(deckError != null) {
+            DialogData warning = new DialogData();
+            warning.locname = "lblInvalidDeck";
+            warning.text = "Deck " + deckError; //Needs localization but so does getDeckConformanceProblem.
+
+            DialogData dismiss = new DialogData();
+            dismiss.locname = "lblOK";
+            warning.options = new DialogData[]{dismiss};
+
+            loadDialog(warning);
+            return false;
+        }
+        return true;
     }
 
     private boolean selectedJumpstartPackIsLast(Deck selectedPack) {

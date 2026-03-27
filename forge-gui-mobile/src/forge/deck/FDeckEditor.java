@@ -463,12 +463,15 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         tabPages.stream().map(DeckEditorPage.class::cast).forEach(DeckEditorPage::initialize);
         tabsInitialized = true;
 
-        //Pick an initial page to show. Test for catalog page so we don't switch off a draft screen.
-        if(!tabPages.isEmpty() && tabPages.get(0) instanceof CatalogPage) { //DraftPackPage is also a CatalogPage
-            if(mainDeckPage != null && mainDeckPage.cardManager.getItemCount() > 0)
+        //Pick an initial page to show.
+        if(!tabPages.isEmpty()) {
+            if(isDraftEditor() && isDrafting() && catalogPage != null)
+                setSelectedPage(catalogPage);
+            else if(mainDeckPage != null && mainDeckPage.cardManager.getItemCount() > 0)
                 setSelectedPage(mainDeckPage);
             else if(sideboardPage != null && sideboardPage.cardManager.getItemCount() > 0)
                 setSelectedPage(sideboardPage);
+            //Otherwise we just show whatever tab is first.
         }
 
         //Show any extra sections that are currently in use.
