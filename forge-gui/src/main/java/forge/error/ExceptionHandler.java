@@ -99,7 +99,13 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
     /** {@inheritDoc} */
     @Override
     public final void uncaughtException(final Thread t, final Throwable ex) {
-        BugReporter.reportException(ex);
+        try {
+            BugReporter.reportException(ex);
+        } catch (final Throwable handlerFailure) {
+            System.err.println("Uncaught exception handler failed while reporting the original exception:");
+            ex.printStackTrace();
+            handlerFailure.printStackTrace();
+        }
     }
 
     /**
@@ -110,6 +116,12 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
      *            a {@link java.lang.Throwable} object.
      */
     public final void handle(final Throwable ex) {
-        BugReporter.reportException(ex);
+        try {
+            BugReporter.reportException(ex);
+        } catch (final Throwable handlerFailure) {
+            System.err.println("AWT exception handler failed while reporting the original exception:");
+            ex.printStackTrace();
+            handlerFailure.printStackTrace();
+        }
     }
 }

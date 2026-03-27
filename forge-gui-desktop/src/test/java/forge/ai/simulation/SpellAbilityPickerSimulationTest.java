@@ -897,4 +897,94 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         game.getAction().checkStateEffects(true);
         AssertJUnit.assertNull(picker.chooseSpellAbilityToPlay(null));
     }
+
+    @Test
+    public void testChampionsOfTyrChosenFromMultipleCardsInHand() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Plains", p);
+        addCard("Plains", p);
+        addCard("Mountain", p);
+        addCard("Mountain", p);
+        Card champions = addCardToZone("Champions of Tyr", p, ZoneType.Hand);
+        addCardToZone("Grizzly Bears", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        AssertJUnit.assertNotNull(sa);
+        AssertJUnit.assertEquals(champions, sa.getHostCard());
+    }
+
+    @Test
+    public void testChampionsOfTyrNotChosenWhenInsufficientMana() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Plains", p);
+        addCard("Plains", p);
+        addCard("Mountain", p);
+        addCardToZone("Champions of Tyr", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        AssertJUnit.assertNull(sa);
+    }
+
+    @Test
+    public void testChampionsOfTyrDeprioritizedWhenLethalIsAvailable() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+        p.setTeam(0);
+        opponent.setTeam(1);
+
+        addCard("Plains", p);
+        addCard("Plains", p);
+        addCard("Mountain", p);
+        addCard("Mountain", p);
+        addCardToZone("Champions of Tyr", p, ZoneType.Hand);
+        Card shock = addCardToZone("Shock", p, ZoneType.Hand);
+        opponent.setLife(2, null);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        AssertJUnit.assertNotNull(sa);
+        AssertJUnit.assertEquals(shock, sa.getHostCard());
+        AssertJUnit.assertEquals(opponent, sa.getTargets().getFirstTargetedPlayer());
+    }
+
+    @Test
+    public void testChampionsOfTyrDeprioritizedAgainstImmediateThreat() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+
+        addCard("Plains", p);
+        addCard("Plains", p);
+        addCard("Swamp", p);
+        addCard("Mountain", p);
+        addCardToZone("Champions of Tyr", p, ZoneType.Hand);
+        Card doomBlade = addCardToZone("Doom Blade", p, ZoneType.Hand);
+        Card dragon = addCard("Shivan Dragon", opponent);
+        p.setLife(5, null);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        AssertJUnit.assertNotNull(sa);
+        AssertJUnit.assertEquals(doomBlade, sa.getHostCard());
+        AssertJUnit.assertEquals(dragon, sa.getTargetCard());
+    }
 }
