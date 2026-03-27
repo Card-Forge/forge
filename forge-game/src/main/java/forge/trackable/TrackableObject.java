@@ -130,6 +130,11 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
         for (final TrackableProperty prop : from.props.keySet()) {
             prop.copyChangedProps(from, this);
         }
+        // Remove properties that reverted to default on the source.
+        // set() removes props that equal their default value, so they won't
+        // appear in from.props — but they may still be in our props with a
+        // stale non-default value.
+        props.keySet().retainAll(from.props.keySet());
         copyingProps = false;
     }
 
