@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<layout>
+    <cell x="0.0" y="0.0" w="0.09765" h="0.64321" sel="REPORT_LOG">
+        <doc>REPORT_STACK</doc>
+        <doc>REPORT_COMBAT</doc>
+        <doc>REPORT_LOG</doc>
+        <doc>REPORT_DEPENDENCIES</doc>
+    </cell>
+    <cell x="0.0" y="0.64321" w="0.09765" h="0.35679" sel="REPORT_MESSAGE">
+        <doc>REPORT_MESSAGE</doc>
+        <doc>BUTTON_DOCK</doc>
+    </cell>
+    <cell x="0.09765" y="0.0" w="0.73211" h="0.43402" sel="FIELD_1">
+        <doc>FIELD_1</doc>
+    </cell>
+    <cell x="0.82977" y="0.0" w="0.17023" h="0.46628" sel="CARD_DETAIL">
+        <doc>CARD_DETAIL</doc>
+        <doc>CARD_PICTURE</doc>
+    </cell>
+    <cell x="0.09765" y="0.54448" w="0.73211" h="0.45552" sel="FIELD_0">
+        <doc>FIELD_0</doc>
+    </cell>
+    <cell x="0.82977" y="0.46628" w="0.17023" h="0.53372" sel="HAND_0">
+        <doc>HAND_0</doc>
+    </cell>
+    <cell x="0.09765" y="0.43402" w="0.73211" h="0.11046" sel="ZONE_GRAVEYARD">
+        <doc>ZONE_GRAVEYARD</doc>
+    </cell>
+</layout>
