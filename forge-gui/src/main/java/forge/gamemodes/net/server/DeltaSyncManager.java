@@ -23,7 +23,6 @@ import forge.trackable.TrackableTypes.TrackableType;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.ConcurrentModificationException;
 import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -33,7 +32,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -77,8 +75,6 @@ public class DeltaSyncManager implements IHasNetLog {
 
     private final AtomicLong sequenceNumber = new AtomicLong(0);
 
-    // Objects that have been fully sent to the client (initial sync done)
-    private final Set<Integer> sentObjectIds = ConcurrentHashMap.newKeySet();
     // Objects registered with this consumer (for cleanup on disconnect/reset)
     private final Map<Integer, TrackableObject> registeredByKey = new HashMap<>();
     // Used to block stale cross-reference replacements
@@ -118,10 +114,6 @@ public class DeltaSyncManager implements IHasNetLog {
         // Pre-scan zone collections across all players for cross-player coverage.
         preScanZoneCollections(gameView);
         walkAndCollect(gameView, objectDeltas, newObjects, currentObjectIds);
-
-        // Update tracked objects — prune IDs for removed objects
-        sentObjectIds.retainAll(currentObjectIds);
-        sentObjectIds.addAll(currentObjectIds);
 
         // Prune registrations for objects no longer in the graph
         Iterator<Map.Entry<Integer, TrackableObject>> regIt = registeredByKey.entrySet().iterator();
@@ -183,58 +175,37 @@ public class DeltaSyncManager implements IHasNetLog {
                                 Map<Integer, Map<TrackableProperty, Object>> objectDeltas,
                                 Map<Integer, Map<TrackableProperty, Object>> newObjects,
                                 Set<Integer> currentObjectIds) {
-        if (obj == null) {
-            return;
-        }
+        if (obj == null) return;
         int type = DeltaPacket.typeTagFor(obj);
-        if (type < 0) {
-            return;
-        }
+        if (type < 0) return;
         int deltaKey = DeltaPacket.makeDeltaKey(obj);
-        boolean addedThisCall = false;
-        if (currentObjectIds.contains(deltaKey)) {
-            // Same deltaKey seen earlier this pass (e.g. stale CardView in Commander
-            // property walked before current CardView in Battlefield zone collection).
-            // If this is the exact same Java instance, it was already fully processed.
-            if (registeredByKey.get(deltaKey) == obj) {
-                return;
-            }
-            // Different instance at same key — let collectObjectDelta handle
-            // replacement detection. If blocked (stale), child walk is skipped.
-            // If not blocked (legitimate replacement), children are walked.
-        } else {
-            currentObjectIds.add(deltaKey);
-            addedThisCall = true;
+
+        // Block stale cross-references before touching currentObjectIds.
+        // Zone instances (seeded by preScanZoneCollections) are authoritative —
+        // any other instance at the same key is stale and must not be processed
+        // or have its children walked (stale CardStateViews would bypass the
+        // CardView-only auth check and overwrite correct deltas).
+        TrackableObject auth = authoritativeInstances.get(deltaKey);
+        if (auth != null && auth != obj) return;
+
+        // Dedup: skip if same instance already processed this pass
+        if (!currentObjectIds.add(deltaKey)) {
+            if (registeredByKey.get(deltaKey) == obj) return;
+            // Different instance at same key — replacement (zone change)
         }
 
-        // If collectObjectDelta blocks a stale cross-reference (authoritative
-        // check), skip walking children — they are stale too. Without this,
-        // stale CardStateViews reached through blocked parents (e.g.
-        // StackItemView.SourceCard) bypass the authoritative check (which only
-        // tracks CardViews) and overwrite correct deltas.
-        if (collectObjectDelta(obj, objectDeltas, newObjects)) {
-            // A blocked stale cross-reference must not prevent the authoritative
-            // instance (from a zone collection) from being processed later.
-            // Only remove if THIS call added the key — a prior legitimate walk
-            // (e.g. EXISTING path) may have already added it.
-            if (addedThisCall) {
-                currentObjectIds.remove(deltaKey);
-            }
-            return;
-        }
+        collectObjectDelta(obj, objectDeltas, newObjects);
 
         Map<TrackableProperty, Object> props = obj.getProps();
         if (props != null) {
             boolean parentIsGameEntityView = obj instanceof GameEntityView;
-
             for (Map.Entry<TrackableProperty, Object> entry : props.entrySet()) {
                 Object value = entry.getValue();
-                boolean isZone = ZONE_COLLECTIONS.contains(entry.getKey());
                 if (value instanceof TrackableObject to) {
-                    // Skip stale GameEntityView cross-references from
-                    // GameEntityView parents (CardView→CardView, PlayerView→CardView).
-                    // Non-GameEntityView parents (StackItemView.SourceCard) hold
-                    // primary containment refs that must be walked.
+                    // Skip GameEntityView→GameEntityView scalar cross-references
+                    // (CardView→CardView, PlayerView→CardView are stale after zone
+                    // changes). Non-GameEntityView parents (StackItemView.SourceCard)
+                    // hold primary containment refs — walked and auth-checked above.
                     if (parentIsGameEntityView && to instanceof GameEntityView) {
                         continue;
                     }
@@ -242,18 +213,6 @@ public class DeltaSyncManager implements IHasNetLog {
                 } else if (value instanceof TrackableCollection<?> tc) {
                     for (Object item : tc) {
                         if (item instanceof TrackableObject to) {
-                            // Register zone CardViews as authoritative
-                            if (isZone && to instanceof CardView cv) {
-                                authoritativeInstances.put(DeltaPacket.makeDeltaKey(cv), cv);
-                            }
-                            // Skip already-discovered CardViews in non-zone collections.
-                            // Zone items are always walked (sorted first, authoritative).
-                            // Non-zone collections on GameEntityView parents may hold
-                            // stale cross-refs (Commander, AttachedCards, etc.).
-                            if (!isZone && parentIsGameEntityView && to instanceof CardView
-                                    && currentObjectIds.contains(DeltaPacket.makeDeltaKey(to))) {
-                                continue;
-                            }
                             walkAndCollect(to, objectDeltas, newObjects, currentObjectIds);
                         }
                     }
@@ -263,64 +222,16 @@ public class DeltaSyncManager implements IHasNetLog {
     }
 
     /**
-     * Process a single object's delta. Returns true if the object was blocked
-     * (stale cross-reference), signaling the caller to skip walking children.
+     * Process a single object's delta. Stale cross-references are already
+     * filtered by the authoritative check in walkAndCollect.
      */
-    private boolean collectObjectDelta(TrackableObject obj,
+    private void collectObjectDelta(TrackableObject obj,
                                     Map<Integer, Map<TrackableProperty, Object>> objectDeltas,
                                     Map<Integer, Map<TrackableProperty, Object>> newObjects) {
         int deltaKey = DeltaPacket.makeDeltaKey(obj);
 
-        if (!sentObjectIds.contains(deltaKey)) {
-            // New object — register consumer and build full property map.
-            // Clear dirty props BEFORE building the map.
-            //
-            // If an authoritative instance exists for this key (from a zone
-            // collection this cycle) and it's not this object, block this stale
-            // cross-reference. Single-threaded execution ensures preScanZoneCollections
-            // is always accurate, so authoritativeInstances alone is sufficient.
-            TrackableObject auth = authoritativeInstances.get(deltaKey);
-            if (auth != null && auth != obj) {
-                return true;
-            }
-            obj.registerConsumer(consumerId);
-            registeredByKey.put(deltaKey, obj);
-            obj.getAndClearDirtyProps(consumerId);
-            Map<TrackableProperty, Object> allProps = buildPropertyMap(obj, null);
-            if (allProps != null && !allProps.isEmpty()) {
-                newObjects.put(deltaKey, allProps);
-                netLog.trace("[DeltaSync] New object: key={} id={}, {} props",
-                        String.format("0x%08X", deltaKey), obj.getId(), allProps.size());
-            }
-        } else if (registeredByKey.get(deltaKey) != obj) {
-            // Replacement instance — different object at same key (e.g. zone change
-            // creates a new Card+CardView via copyCard). Transfer consumer registration
-            // to the new instance and send full state.
-            // Sent via newObjects so the client can clear stale properties on the
-            // existing object before applying the new state.
-            //
-            // Block stale cross-reference replacements when an authoritative
-            // instance exists and this object isn't it.
-            TrackableObject auth = authoritativeInstances.get(deltaKey);
-            if (auth != null && auth != obj) {
-                return true;
-            }
-            TrackableObject old = registeredByKey.get(deltaKey);
-            if (old != null) {
-                old.unregisterConsumer(consumerId);
-            }
-            obj.registerConsumer(consumerId);
-            registeredByKey.put(deltaKey, obj);
-            obj.getAndClearDirtyProps(consumerId);
-            Map<TrackableProperty, Object> allProps = buildPropertyMap(obj, null);
-            if (allProps != null && !allProps.isEmpty()) {
-                objectDeltas.remove(deltaKey);
-                newObjects.put(deltaKey, allProps);
-                netLog.trace("[DeltaSync] Replaced instance: key={} id={}, {} props",
-                        String.format("0x%08X", deltaKey), obj.getId(), allProps.size());
-            }
-        } else {
-            // Existing object
+        if (registeredByKey.get(deltaKey) == obj) {
+            // Existing object — dirty props only
             EnumSet<TrackableProperty> dirtyProps = obj.getAndClearDirtyProps(consumerId);
             Map<TrackableProperty, Object> delta = buildPropertyMap(obj, dirtyProps);
             if (delta != null && !delta.isEmpty()) {
@@ -328,8 +239,26 @@ public class DeltaSyncManager implements IHasNetLog {
                 netLog.trace("[DeltaSync] Delta: key={} id={}, props={}",
                         String.format("0x%08X", deltaKey), obj.getId(), delta.keySet());
             }
+            return;
         }
-        return false;
+
+        // New or replacement — send full state via newObjects so the client
+        // clears stale properties before applying
+        TrackableObject old = registeredByKey.get(deltaKey);
+        if (old != null) {
+            old.unregisterConsumer(consumerId);
+            objectDeltas.remove(deltaKey);
+        }
+        obj.registerConsumer(consumerId);
+        registeredByKey.put(deltaKey, obj);
+        obj.getAndClearDirtyProps(consumerId);
+        Map<TrackableProperty, Object> allProps = buildPropertyMap(obj, null);
+        if (allProps != null && !allProps.isEmpty()) {
+            newObjects.put(deltaKey, allProps);
+            netLog.trace("[DeltaSync] {}: key={} id={}, {} props",
+                    old != null ? "Replaced instance" : "New object",
+                    String.format("0x%08X", deltaKey), obj.getId(), allProps.size());
+        }
     }
 
     /**
@@ -344,14 +273,10 @@ public class DeltaSyncManager implements IHasNetLog {
             for (TrackableProperty zoneProp : ZONE_COLLECTIONS) {
                 Object val = props.get(zoneProp);
                 if (val instanceof TrackableCollection<?> tc) {
-                    try {
-                        for (Object item : tc) {
-                            if (item instanceof CardView cv) {
-                                authoritativeInstances.putIfAbsent(DeltaPacket.makeDeltaKey(cv), cv);
-                            }
+                    for (Object item : tc) {
+                        if (item instanceof CardView cv) {
+                            authoritativeInstances.putIfAbsent(DeltaPacket.makeDeltaKey(cv), cv);
                         }
-                    } catch (ConcurrentModificationException e) {
-                        // Rare race — best effort
                     }
                 }
             }
@@ -542,31 +467,26 @@ public class DeltaSyncManager implements IHasNetLog {
         if (!visited.add(deltaKey)) return;
 
         // Only register consumer if not already tracked — don't add to
-        // sentObjectIds so collectDeltas' new-object path still fires and
+        // registeredByKey so collectDeltas' new-object path still fires and
         // sends the full property map to the client.
         if (!registeredByKey.containsKey(deltaKey)) {
             obj.registerConsumer(consumerId);
         }
 
-        // Same skip guards as walkAndCollect's non-PlayerView branch.
-        // No two-pass needed here: walkAndRegister only registers consumers
-        // (no data sent), and the first collectDeltas corrects registrations
+        // Same skip guards as walkAndCollect. No auth check needed here:
+        // walkAndRegister only registers consumers (no data sent), and the
+        // first collectDeltas corrects any stale registrations.
         Map<TrackableProperty, Object> props = obj.getProps();
         if (props != null) {
             boolean parentIsGameEntityView = obj instanceof GameEntityView;
-            boolean parentIsCardView = obj instanceof CardView;
             for (Object value : props.values()) {
                 if (value instanceof TrackableObject to) {
                     if (!(parentIsGameEntityView && to instanceof GameEntityView)) {
                         walkAndRegister(to, visited);
                     }
-                } else if (value instanceof TrackableCollection) {
-                    for (Object item : (TrackableCollection<?>) value) {
+                } else if (value instanceof TrackableCollection<?> tc) {
+                    for (Object item : tc) {
                         if (item instanceof TrackableObject to) {
-                            if (parentIsCardView && to instanceof CardView
-                                    && visited.contains(DeltaPacket.makeDeltaKey(to))) {
-                                continue;
-                            }
                             walkAndRegister(to, visited);
                         }
                     }
@@ -668,7 +588,6 @@ public class DeltaSyncManager implements IHasNetLog {
             obj.unregisterConsumer(consumerId);
         }
         registeredByKey.clear();
-        sentObjectIds.clear();
         sequenceNumber.set(0);
         packetsSinceLastChecksum = 0;
         recentDeltaProperties.clear();
