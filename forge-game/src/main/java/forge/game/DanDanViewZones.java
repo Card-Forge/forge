@@ -37,6 +37,13 @@ public final class DanDanViewZones {
                 return true;
             }
         }
+        final Match match = gameView.getMatch();
+        if (match != null) {
+            final GameRules rules = match.getRules();
+            if (rules != null && (rules.getGameType() == GameType.DanDan || rules.hasAppliedVariant(GameType.DanDan))) {
+                return true;
+            }
+        }
         return gameView.getGameType() == GameType.DanDan;
     }
 

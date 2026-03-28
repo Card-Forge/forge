@@ -50,7 +50,10 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deckchooser.FDeckViewer;
 import forge.game.GameEntityView;
+import forge.game.GameRules;
+import forge.game.GameType;
 import forge.game.GameView;
+import forge.game.Match;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
@@ -86,6 +89,7 @@ import forge.gui.framework.VEmptyDoc;
 import forge.gui.util.SOptionPane;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
+import forge.localinstance.properties.FileLocation;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -205,6 +209,26 @@ public final class CMatchUI
     FScreen getScreen() {
         return this.screen;
     }
+
+    /** User/default layout file for the current match (DanDan vs other game types). */
+    public FileLocation getActiveMatchLayoutFile() {
+        final GameView gv = getGameView();
+        if (gv == null) {
+            return ForgeConstants.MATCH_LAYOUT_FILE;
+        }
+        // Lobby uses {@link GameType#Constructed} with {@link GameType#DanDan} as an applied variant;
+        // match-level rules always carry that variant. Prefer match rules so we do not depend on
+        // {@link GameView#getGame()} (e.g. trackable/copy edge cases).
+        final Match match = gv.getMatch();
+        if (match != null) {
+            final GameRules rules = match.getRules();
+            if (rules != null && (rules.getGameType() == GameType.DanDan || rules.hasAppliedVariant(GameType.DanDan))) {
+                return ForgeConstants.MATCH_DANDAN_LAYOUT_FILE;
+            }
+        }
+        return ForgeConstants.MATCH_LAYOUT_FILE;
+    }
+
     public boolean isCurrentScreen() {
         return Singletons.getControl().getCurrentScreen() == this.screen;
     }

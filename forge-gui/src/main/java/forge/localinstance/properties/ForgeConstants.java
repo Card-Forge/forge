@@ -285,6 +285,7 @@ public final class ForgeConstants {
     public static final String STARS_FILE     = _DEFAULTS_DIR + "stars.png";
     public static final FileLocation WINDOW_LAYOUT_FILE      = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "window.xml");
     public static final FileLocation MATCH_LAYOUT_FILE       = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "match.xml");
+    public static final FileLocation MATCH_DANDAN_LAYOUT_FILE = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "match_dandan.xml");
     public static final FileLocation WORKSHOP_LAYOUT_FILE    = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "workshop.xml");
     public static final FileLocation EDITOR_LAYOUT_FILE      = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "editor.xml");
     public static final FileLocation GAUNTLET_DIR            = new FileLocation(_DEFAULTS_DIR, USER_DIR,       "gauntlet" + PATH_SEPARATOR);
