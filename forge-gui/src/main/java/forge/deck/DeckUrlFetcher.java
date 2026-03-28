@@ -231,15 +231,15 @@ public class DeckUrlFetcher {
     private static FetchResult fetchArchidekt(String deckId) throws IOException {
         String apiUrl = "https://archidekt.com/api/decks/" + deckId + "/";
         String json = httpGet(apiUrl);
-        if (json == null) {
-            return FetchResult.error("Could not fetch deck from Archidekt. Make sure the deck is public.");
+
+        // If the API returns an error or null, the deck may use new ID format
+        if (json == null || json.contains("\"error\"")) {
+            return FetchResult.error("Could not fetch deck from Archidekt. The deck may be private or use an unsupported URL format.");
         }
 
         StringBuilder sb = new StringBuilder();
         int totalCards = 0;
 
-        // Archidekt uses "cards" array with category info
-        // Each card: {"quantity":N, "card":{"oracleCard":{"name":"Card Name"}}, "categories":["Commander"]}
         Map<String, List<String>> sections = new LinkedHashMap<>();
 
         // Find the "cards" array
@@ -283,7 +283,10 @@ public class DeckUrlFetcher {
             if (oracleIdx >= 0) {
                 cardName = extractStringValue(cardObj, oracleIdx, "\"name\"");
             }
-            // Fallback: try card.name directly
+            // Fallback: try displayName or card.name
+            if (cardName == null || cardName.isEmpty()) {
+                cardName = extractStringValue(cardObj, 0, "\"displayName\"");
+            }
             if (cardName == null || cardName.isEmpty()) {
                 int cardIdx = cardObj.indexOf("\"card\"");
                 if (cardIdx >= 0) {
@@ -301,7 +304,6 @@ public class DeckUrlFetcher {
                     if (catArrayEnd >= 0) {
                         String catStr = cardObj.substring(catArrayStart + 1, catArrayEnd).trim();
                         if (!catStr.isEmpty()) {
-                            // Extract first category name
                             String firstCat = extractFirstQuotedString(catStr);
                             if (firstCat != null) {
                                 category = mapArchidektCategory(firstCat);
@@ -360,7 +362,7 @@ public class DeckUrlFetcher {
     // ========== EDHREC ==========
 
     private static FetchResult fetchEdhrec(String deckId) throws IOException {
-        // EDHREC deckpreview pages embed deck data in the page HTML as JSON
+        // EDHREC deckpreview pages embed deck data as JSON in the HTML
         String pageUrl = "https://edhrec.com/deckpreview/" + deckId;
         String html = httpGet(pageUrl);
         if (html == null) {
@@ -370,14 +372,8 @@ public class DeckUrlFetcher {
         StringBuilder sb = new StringBuilder();
         int totalCards = 0;
 
-        // Look for card list data in the page
-        // EDHREC deckpreview pages contain card names in various formats
-        // Try to find a JSON blob or card list within the HTML
-
-        // Pattern 1: Look for "commanders" and "cards" arrays in embedded JSON
-        List<String> commanders = extractEdhrecCardList(html, "commanders");
-        List<String> cards = extractEdhrecCardList(html, "cards");
-
+        // Extract commanders from "commanders":["Name1","Name2"] (may contain nulls)
+        List<String> commanders = extractEdhrecSimpleArray(html, "commanders");
         if (!commanders.isEmpty()) {
             sb.append("Commander\n");
             for (String card : commanders) {
@@ -387,18 +383,14 @@ public class DeckUrlFetcher {
             sb.append("\n");
         }
 
+        // Extract cards from "cardlists":[{"cardviews":[{"name":"Card Name",...},...]}]
+        List<String> cards = extractEdhrecCardlists(html);
         if (!cards.isEmpty()) {
             sb.append("Main\n");
             for (String card : cards) {
                 sb.append("1 ").append(card).append("\n");
             }
             totalCards += cards.size();
-        }
-
-        // Pattern 2: If no structured data found, try extracting from page text
-        if (totalCards == 0) {
-            // Try looking for deck list in a textarea or pre block
-            totalCards = extractEdhrecFallback(html, sb);
         }
 
         if (totalCards == 0) {
@@ -408,9 +400,9 @@ public class DeckUrlFetcher {
         return FetchResult.ok(sb.toString().trim(), "EDHREC", totalCards);
     }
 
-    private static List<String> extractEdhrecCardList(String html, String key) {
+    /** Extracts card names from a simple JSON array like "key":["Name1","Name2",null] */
+    private static List<String> extractEdhrecSimpleArray(String html, String key) {
         List<String> cards = new ArrayList<>();
-        // Look for "key":["Card1","Card2",...]
         String searchKey = "\"" + key + "\"";
         int idx = html.indexOf(searchKey);
         if (idx < 0) return cards;
@@ -422,38 +414,67 @@ public class DeckUrlFetcher {
         if (arrayEnd < 0) return cards;
 
         String arrayContent = html.substring(arrayStart + 1, arrayEnd);
-        // Parse quoted strings from the array
         Pattern namePattern = Pattern.compile("\"([^\"]+)\"");
         Matcher matcher = namePattern.matcher(arrayContent);
         while (matcher.find()) {
             String name = matcher.group(1);
-            if (!name.isEmpty() && !name.startsWith("http")) {
+            if (!name.isEmpty() && !name.startsWith("http") && !name.equals("null")) {
                 cards.add(name);
             }
         }
         return cards;
     }
 
-    private static int extractEdhrecFallback(String html, StringBuilder sb) {
-        // Try to find card names in common patterns within the HTML
-        // Look for data embedded as "cardlists" or similar
-        Pattern cardlistPattern = Pattern.compile("\"cardlists\"\\s*:\\s*\\[([^\\]]+)\\]");
-        Matcher m = cardlistPattern.matcher(html);
-        if (!m.find()) return 0;
+    /** Extracts card names from EDHREC's "cardlists":[{"cardviews":[{"name":"X",...}]}] structure */
+    private static List<String> extractEdhrecCardlists(String html) {
+        List<String> cards = new ArrayList<>();
+        // EDHREC embeds card data in cardviews objects with "name" fields
+        // The structure is deeply nested, so we search for "cardviews" arrays
+        // and extract "name" values from each card object within them
 
-        String listContent = m.group(1);
-        Pattern namePattern = Pattern.compile("\"name\"\\s*:\\s*\"([^\"]+)\"");
-        Matcher nm = namePattern.matcher(listContent);
+        int searchFrom = 0;
+        java.util.Set<String> seen = new java.util.LinkedHashSet<>();
 
-        int count = 0;
-        if (nm.find()) {
-            sb.append("Main\n");
-            do {
-                sb.append("1 ").append(nm.group(1)).append("\n");
-                count++;
-            } while (nm.find());
+        while (searchFrom < html.length()) {
+            int cvIdx = html.indexOf("\"cardviews\"", searchFrom);
+            if (cvIdx < 0) break;
+
+            int arrayStart = html.indexOf('[', cvIdx);
+            if (arrayStart < 0) break;
+
+            String cardviewsArray = extractJsonArray(html, arrayStart);
+            if (cardviewsArray == null) {
+                searchFrom = cvIdx + 12;
+                continue;
+            }
+
+            // Extract "name":"Card Name" from each cardview object
+            // The "name" field appears right after other fields like "cmc", "id", etc.
+            // We look for "name" that's followed by a card name (not a URL or set code)
+            Pattern namePattern = Pattern.compile("\"name\"\\s*:\\s*\"([^\"]{2,50})\"");
+            Matcher matcher = namePattern.matcher(cardviewsArray);
+            while (matcher.find()) {
+                String name = matcher.group(1);
+                // Filter: card names start with uppercase, don't contain URLs or slashes
+                if (Character.isUpperCase(name.charAt(0))
+                        && !name.startsWith("http")
+                        && !name.contains("scryfall")
+                        && !name.contains(".com")
+                        && !name.contains(".io")
+                        && !name.equals("Normal") && !name.equals("Foil")
+                        && !name.equals("Creature") && !name.equals("Instant")
+                        && !name.equals("Sorcery") && !name.equals("Artifact")
+                        && !name.equals("Enchantment") && !name.equals("Land")
+                        && !name.equals("Planeswalker")) {
+                    seen.add(name);
+                }
+            }
+
+            searchFrom = arrayStart + cardviewsArray.length();
         }
-        return count;
+
+        cards.addAll(seen);
+        return cards;
     }
 
     // ========== TAPPEDOUT ==========
@@ -727,7 +748,29 @@ public class DeckUrlFetcher {
         // Unescape common JSON escapes
         value = value.replace("\\\"", "\"").replace("\\\\", "\\")
                      .replace("\\/", "/").replace("\\n", "").replace("\\t", "");
+        // Unescape unicode sequences like \u0027 (apostrophe)
+        value = unescapeUnicode(value);
         return value;
+    }
+
+    /** Replaces \\uXXXX sequences with the corresponding character. */
+    private static String unescapeUnicode(String text) {
+        if (!text.contains("\\u")) return text;
+        StringBuilder result = new StringBuilder(text.length());
+        for (int i = 0; i < text.length(); i++) {
+            if (i + 5 < text.length() && text.charAt(i) == '\\' && text.charAt(i + 1) == 'u') {
+                try {
+                    int code = Integer.parseInt(text.substring(i + 2, i + 6), 16);
+                    result.append((char) code);
+                    i += 5;
+                    continue;
+                } catch (NumberFormatException e) {
+                    // not a valid unicode escape, keep as-is
+                }
+            }
+            result.append(text.charAt(i));
+        }
+        return result.toString();
     }
 
     /** Extracts the first quoted string from a text. */
