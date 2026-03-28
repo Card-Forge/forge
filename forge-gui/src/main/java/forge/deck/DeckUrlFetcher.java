@@ -133,7 +133,11 @@ public class DeckUrlFetcher {
         if (!commanders.isEmpty()) {
             sb.append("Commander\n");
             for (String line : commanders) {
-                sb.append(line).append("\n");
+                sb.append(line);
+                if (commanders.size() > 1) {
+                    sb.append(" |");
+                }
+                sb.append("\n");
             }
             totalCards += commanders.size();
             sb.append("\n");
@@ -328,7 +332,11 @@ public class DeckUrlFetcher {
             if (cardLines != null && !cardLines.isEmpty()) {
                 sb.append(section).append("\n");
                 for (String line : cardLines) {
-                    sb.append(line).append("\n");
+                    sb.append(line);
+                    if (section.equals("Commander") && cardLines.size() > 1) {
+                        sb.append(" |");
+                    }
+                    sb.append("\n");
                 }
                 sb.append("\n");
             }
@@ -377,7 +385,11 @@ public class DeckUrlFetcher {
         if (!commanders.isEmpty()) {
             sb.append("Commander\n");
             for (String card : commanders) {
-                sb.append("1 ").append(card).append("\n");
+                sb.append("1 ").append(card);
+                if (commanders.size() > 1) {
+                    sb.append(" |");
+                }
+                sb.append("\n");
             }
             totalCards += commanders.size();
             sb.append("\n");
@@ -487,31 +499,32 @@ public class DeckUrlFetcher {
             return FetchResult.error("Could not fetch deck from TappedOut. Make sure the deck is public.");
         }
 
-        // TappedOut text format: "1x Card Name" or "1 Card Name" with "Sideboard:" section
+        // TappedOut text format: "1x Card Name" or "1 Card Name" with "Sideboard:" and "Commander:" sections
         // Clean up the format to match DeckRecognizer expectations
-        StringBuilder sb = new StringBuilder();
+        // First pass: collect cards by section
+        List<String> commanderCards = new ArrayList<>();
+        List<String> mainCards = new ArrayList<>();
+        List<String> sideCards = new ArrayList<>();
+        String currentSection = "main";
         int totalCards = 0;
-        boolean inSideboard = false;
-        boolean wroteMain = false;
 
+        Pattern cardPattern = Pattern.compile("^(\\d+)x?\\s+(.+)$");
         for (String line : text.split("\n")) {
             line = line.trim();
             if (line.isEmpty()) continue;
 
-            if (line.toLowerCase().startsWith("sideboard")) {
-                inSideboard = true;
-                sb.append("\nSideboard\n");
+            String lower = line.toLowerCase();
+            if (lower.startsWith("commander")) {
+                currentSection = "commander";
+                continue;
+            }
+            if (lower.startsWith("sideboard")) {
+                currentSection = "sideboard";
                 continue;
             }
 
-            // Match lines like "1x Card Name" or "1 Card Name"
-            Pattern cardPattern = Pattern.compile("^(\\d+)x?\\s+(.+)$");
             Matcher cm = cardPattern.matcher(line);
             if (cm.matches()) {
-                if (!wroteMain && !inSideboard) {
-                    sb.append("Main\n");
-                    wroteMain = true;
-                }
                 int qty = Integer.parseInt(cm.group(1));
                 String name = cm.group(2).trim();
                 // Remove category tags that TappedOut sometimes appends
@@ -519,13 +532,44 @@ public class DeckUrlFetcher {
                 if (hashIdx > 0) name = name.substring(0, hashIdx).trim();
                 int asterIdx = name.indexOf('*');
                 if (asterIdx > 0) name = name.substring(0, asterIdx).trim();
-                sb.append(qty).append(" ").append(name).append("\n");
+                String cardLine = qty + " " + name;
+                switch (currentSection) {
+                    case "commander": commanderCards.add(cardLine); break;
+                    case "sideboard": sideCards.add(cardLine); break;
+                    default: mainCards.add(cardLine); break;
+                }
                 totalCards++;
             }
         }
 
         if (totalCards == 0) {
             return FetchResult.error("Could not parse deck from TappedOut. The deck may be empty or private.");
+        }
+
+        StringBuilder sb = new StringBuilder();
+        if (!commanderCards.isEmpty()) {
+            sb.append("Commander\n");
+            for (String card : commanderCards) {
+                sb.append(card);
+                if (commanderCards.size() > 1) {
+                    sb.append(" |");
+                }
+                sb.append("\n");
+            }
+            sb.append("\n");
+        }
+        if (!mainCards.isEmpty()) {
+            sb.append("Main\n");
+            for (String card : mainCards) {
+                sb.append(card).append("\n");
+            }
+            sb.append("\n");
+        }
+        if (!sideCards.isEmpty()) {
+            sb.append("Sideboard\n");
+            for (String card : sideCards) {
+                sb.append(card).append("\n");
+            }
         }
 
         return FetchResult.ok(sb.toString().trim(), "TappedOut", totalCards);
@@ -541,14 +585,17 @@ public class DeckUrlFetcher {
             return FetchResult.error("Could not fetch deck from MTGGoldfish. Make sure the deck exists.");
         }
 
-        // The download format is plain text:
-        // Card Name\n... (mainboard), blank line, then sideboard
-        StringBuilder sb = new StringBuilder();
+        // The download format is plain text with optional section headers:
+        // "Commander:", mainboard cards, blank line, then sideboard
+        List<String> commanderCards = new ArrayList<>();
+        List<String> mainCards = new ArrayList<>();
+        List<String> sideCards = new ArrayList<>();
+        String currentSection = "main";
         int totalCards = 0;
-        boolean inSideboard = false;
-        boolean wroteMain = false;
         boolean hitBlankLine = false;
+        boolean wroteMain = false;
 
+        Pattern cardPattern = Pattern.compile("^(\\d+)\\s+(.+)$");
         for (String line : text.split("\n")) {
             String trimmed = line.trim();
 
@@ -557,19 +604,23 @@ public class DeckUrlFetcher {
                 continue;
             }
 
-            // Match lines like "4 Card Name" or just "Card Name"
-            Pattern cardPattern = Pattern.compile("^(\\d+)\\s+(.+)$");
+            String lower = trimmed.toLowerCase();
+            if (lower.startsWith("commander")) {
+                currentSection = "commander";
+                hitBlankLine = false;
+                continue;
+            }
+
             Matcher cm = cardPattern.matcher(trimmed);
             if (cm.matches()) {
-                if (hitBlankLine && !inSideboard && wroteMain) {
-                    inSideboard = true;
-                    sb.append("\nSideboard\n");
+                if (currentSection.equals("main") && hitBlankLine && wroteMain) {
+                    currentSection = "sideboard";
                 }
-                if (!wroteMain && !inSideboard) {
-                    sb.append("Main\n");
-                    wroteMain = true;
+                switch (currentSection) {
+                    case "commander": commanderCards.add(trimmed); break;
+                    case "sideboard": sideCards.add(trimmed); break;
+                    default: mainCards.add(trimmed); wroteMain = true; break;
                 }
-                sb.append(trimmed).append("\n");
                 totalCards++;
             }
             hitBlankLine = false;
@@ -577,6 +628,32 @@ public class DeckUrlFetcher {
 
         if (totalCards == 0) {
             return FetchResult.error("Could not parse deck from MTGGoldfish.");
+        }
+
+        StringBuilder sb = new StringBuilder();
+        if (!commanderCards.isEmpty()) {
+            sb.append("Commander\n");
+            for (String card : commanderCards) {
+                sb.append(card);
+                if (commanderCards.size() > 1) {
+                    sb.append(" |");
+                }
+                sb.append("\n");
+            }
+            sb.append("\n");
+        }
+        if (!mainCards.isEmpty()) {
+            sb.append("Main\n");
+            for (String card : mainCards) {
+                sb.append(card).append("\n");
+            }
+            sb.append("\n");
+        }
+        if (!sideCards.isEmpty()) {
+            sb.append("Sideboard\n");
+            for (String card : sideCards) {
+                sb.append(card).append("\n");
+            }
         }
 
         return FetchResult.ok(sb.toString().trim(), "MTGGoldfish", totalCards);
