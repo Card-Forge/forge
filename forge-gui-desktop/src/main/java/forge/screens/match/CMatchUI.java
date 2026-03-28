@@ -354,10 +354,11 @@ public final class CMatchUI
     private void initHandViews() {
         final List<VHand> hands = new ArrayList<>();
         final Iterable<PlayerView> localPlayers = getLocalPlayers();
+        final boolean danDanHandsForAllSeats = getGameView() != null && DanDanViewZones.isDanDan(getGameView());
 
         int i = 0;
         for (final PlayerView p : sortedPlayers) {
-            if (allHands || isLocalPlayer(p) || CardView.mayViewAny(p.getHand(), localPlayers)) {
+            if (allHands || danDanHandsForAllSeats || isLocalPlayer(p) || CardView.mayViewAny(p.getHand(), localPlayers)) {
                 final EDocID doc = EDocID.Hands[i];
                 final VHand newHand = new VHand(this, doc, p);
                 newHand.getLayoutControl().initialize();
