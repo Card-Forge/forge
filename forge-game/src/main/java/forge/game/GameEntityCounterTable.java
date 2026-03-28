@@ -116,7 +116,6 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
     public void replaceCounterEffect(final Game game, final SpellAbility cause) {
         replaceCounterEffect(game, cause, cause != null && !(cause instanceof AbilityStatic), false, null);
     }
-
     @SuppressWarnings("unchecked")
     public boolean replaceCounterEffect(final Game game, final SpellAbility cause, final boolean effect, final boolean etb, Map<AbilityKey, Object> params) {
         if (isEmpty()) {

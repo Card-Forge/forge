@@ -1479,6 +1479,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (fetchList.isEmpty()) {
             return null;
         }
+        List<String> keyCards = new ArrayList<>(player.getRegisteredPlayer().getDeck().getKeyCards());
+        // Only grab the keycards I don't already have access to
+        if (destination.equals(ZoneType.Battlefield) || destination.equals(ZoneType.Hand)) {
+            for(Card c : player.getCardsIn(Lists.newArrayList(ZoneType.Hand, ZoneType.Battlefield))) {
+                keyCards.remove(c.getName());
+            }
+        }
+
         if (sa.hasParam("AILogic")) {
             String logic = sa.getParamOrDefault("AILogic", "");
             if ("NeverBounceItself".equals(logic)) {
@@ -1571,7 +1579,17 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 fetchList = sameNamed;
             }
 
+            // Tutor for the first key card in the list, since the list should be in priority order
+            for(String keyName : keyCards) {
+                CardCollection withKeyCard = CardLists.filter(fetchList, CardPredicates.nameEquals(keyName));
+                if (withKeyCard.isEmpty()) {
+                    continue;
+                }
+                return withKeyCard.getFirst();
+            }
+
             // Does AI need a land?
+            // The logic here seems wrong if the decider isn't the same as the player
             CardCollectionView hand = decider.getCardsIn(ZoneType.Hand);
             if (!hand.anyMatch(CardPredicates.LANDS) && CardLists.count(decider.getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS) < 4) {
                 boolean canCastSomething = false;
@@ -1670,7 +1688,12 @@ public class ChangeZoneAi extends SpellAbilityAi {
     @Override
     public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         // Called when looking for creature to attach aura or equipment
-        return AttachAi.attachGeneralAI(ai, sa, (List<Card>)options, !isOptional, (Card) params.get("Attach"), sa.getParam("AILogic"));
+
+        if (params.containsKey("Attach")) {
+            return AttachAi.attachGeneralAI(ai, sa, (List<Card>)options, !isOptional, (Card) params.get("Attach"), sa.getParam("AILogic"));
+        }
+
+        return super.chooseSingleCard(ai, sa, options, isOptional, targetedPlayer, params);
     }
 
     /* (non-Javadoc)

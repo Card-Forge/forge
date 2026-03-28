@@ -93,9 +93,8 @@ public class CountersProliferateAiTest extends AITest {
 
         // AI should not want to activate since value (1) < cost (4)
         SpellAbilityAi aiLogic = SpellApiToAi.Converter.get(ApiType.Proliferate);
-        AiPlayDecision decision = aiLogic.canPlayWithSubs(ai, proliferateSA).decision();
-        assertEquals("AI should not activate proliferate when value below cost",
-                AiPlayDecision.CantPlayAi, decision);
+        boolean decision = aiLogic.canPlayWithSubs(ai, proliferateSA).willingToPlay();
+        assertEquals("AI should not activate proliferate when value below cost", false, decision);
     }
 
     @Test
