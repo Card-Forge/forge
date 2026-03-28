@@ -191,6 +191,7 @@ public class DeltaSyncManager implements IHasNetLog {
             return;
         }
         int deltaKey = DeltaPacket.makeDeltaKey(obj);
+        boolean addedThisCall = false;
         if (currentObjectIds.contains(deltaKey)) {
             // Same deltaKey seen earlier this pass (e.g. stale CardView in Commander
             // property walked before current CardView in Battlefield zone collection).
@@ -198,28 +199,35 @@ public class DeltaSyncManager implements IHasNetLog {
             if (registeredByKey.get(deltaKey) == obj) {
                 return;
             }
-            // Different instance at same key — let replacement detection handle the
-            // delta, then fall through to walk children so that child replacements
-            // (e.g. CardStateViews with updated P/T) are also picked up.
+            // Different instance at same key — let collectObjectDelta handle
+            // replacement detection. If blocked (stale), child walk is skipped.
+            // If not blocked (legitimate replacement), children are walked.
         } else {
             currentObjectIds.add(deltaKey);
+            addedThisCall = true;
         }
 
-        collectObjectDelta(obj, objectDeltas, newObjects);
+        // If collectObjectDelta blocks a stale cross-reference (authoritative
+        // check), skip walking children — they are stale too. Without this,
+        // stale CardStateViews reached through blocked parents (e.g.
+        // StackItemView.SourceCard) bypass the authoritative check (which only
+        // tracks CardViews) and overwrite correct deltas.
+        if (collectObjectDelta(obj, objectDeltas, newObjects)) {
+            // A blocked stale cross-reference must not prevent the authoritative
+            // instance (from a zone collection) from being processed later.
+            // Only remove if THIS call added the key — a prior legitimate walk
+            // (e.g. EXISTING path) may have already added it.
+            if (addedThisCall) {
+                currentObjectIds.remove(deltaKey);
+            }
+            return;
+        }
 
         Map<TrackableProperty, Object> props = obj.getProps();
         if (props != null) {
-            // Snapshot props into entries, sorted with zone collections first.
-            // Zone-first ordering ensures zone CardViews are registered as
-            // authoritative before cross-reference properties are walked.
             boolean parentIsGameEntityView = obj instanceof GameEntityView;
-            @SuppressWarnings("unchecked")
-            Map.Entry<TrackableProperty, Object>[] entries =
-                    props.entrySet().toArray(new Map.Entry[0]);
-            Arrays.sort(entries, (a, b) -> Boolean.compare(
-                    ZONE_COLLECTIONS.contains(b.getKey()), ZONE_COLLECTIONS.contains(a.getKey())));
 
-            for (Map.Entry<TrackableProperty, Object> entry : entries) {
+            for (Map.Entry<TrackableProperty, Object> entry : props.entrySet()) {
                 Object value = entry.getValue();
                 boolean isZone = ZONE_COLLECTIONS.contains(entry.getKey());
                 if (value instanceof TrackableObject to) {
@@ -254,7 +262,11 @@ public class DeltaSyncManager implements IHasNetLog {
         }
     }
 
-    private void collectObjectDelta(TrackableObject obj,
+    /**
+     * Process a single object's delta. Returns true if the object was blocked
+     * (stale cross-reference), signaling the caller to skip walking children.
+     */
+    private boolean collectObjectDelta(TrackableObject obj,
                                     Map<Integer, Map<TrackableProperty, Object>> objectDeltas,
                                     Map<Integer, Map<TrackableProperty, Object>> newObjects) {
         int deltaKey = DeltaPacket.makeDeltaKey(obj);
@@ -263,11 +275,13 @@ public class DeltaSyncManager implements IHasNetLog {
             // New object — register consumer and build full property map.
             // Clear dirty props BEFORE building the map.
             //
-            // If the authoritative instance (from a zone collection this cycle) is
-            // already registered for this key, block this stale cross-reference.
+            // If an authoritative instance exists for this key (from a zone
+            // collection this cycle) and it's not this object, block this stale
+            // cross-reference. Single-threaded execution ensures preScanZoneCollections
+            // is always accurate, so authoritativeInstances alone is sufficient.
             TrackableObject auth = authoritativeInstances.get(deltaKey);
-            if (auth != null && registeredByKey.get(deltaKey) == auth && auth != obj) {
-                return;
+            if (auth != null && auth != obj) {
+                return true;
             }
             obj.registerConsumer(consumerId);
             registeredByKey.put(deltaKey, obj);
@@ -285,13 +299,11 @@ public class DeltaSyncManager implements IHasNetLog {
             // Sent via newObjects so the client can clear stale properties on the
             // existing object before applying the new state.
             //
-            // Block stale cross-reference replacements when the existing registered
-            // instance IS the authoritative one (discovered through a zone collection
-            // this cycle). Legitimate replacements (card moved zones) are allowed
-            // because the old instance won't match the new authoritative instance.
+            // Block stale cross-reference replacements when an authoritative
+            // instance exists and this object isn't it.
             TrackableObject auth = authoritativeInstances.get(deltaKey);
-            if (auth != null && registeredByKey.get(deltaKey) == auth) {
-                return;
+            if (auth != null && auth != obj) {
+                return true;
             }
             TrackableObject old = registeredByKey.get(deltaKey);
             if (old != null) {
@@ -317,6 +329,7 @@ public class DeltaSyncManager implements IHasNetLog {
                         String.format("0x%08X", deltaKey), obj.getId(), delta.keySet());
             }
         }
+        return false;
     }
 
     /**
