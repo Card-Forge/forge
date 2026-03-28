@@ -30,6 +30,7 @@ import forge.game.IHasSVars;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.ApiType;
 import forge.game.card.CardView.CardStateView;
+import forge.game.cost.Cost;
 import forge.game.keyword.IKeywordsChange;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordCollection;
@@ -1083,13 +1084,13 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
 
     public SpellAbility getManifestUp() {
         if (this.manifestUp == null) {
-            manifestUp = CardFactoryUtil.abilityTurnFaceUp(this, "ManifestUp", "Unmanifest");
+            manifestUp = CardFactoryUtil.abilityTurnFaceUp(this, new Cost(this.getManaCost(), true), "ManifestUp", "Unmanifest", "manacost");
         }
         return manifestUp;
     }
     public SpellAbility getCloakUp() {
         if (this.cloakUp == null) {
-            cloakUp = CardFactoryUtil.abilityTurnFaceUp(this, "CloakUp", "Uncloak");
+            cloakUp = CardFactoryUtil.abilityTurnFaceUp(this, new Cost(this.getManaCost(), true), "CloakUp", "Uncloak", "manacost");
         }
         return cloakUp;
     }
