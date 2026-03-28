@@ -722,8 +722,8 @@ public class DeckUrlFetcher {
         int keyIdx = json.indexOf(targetKey, searchStart);
         if (keyIdx < 0) return null;
 
-        // Don't search too far (max 500 chars forward for the name within this context)
-        if (keyIdx - searchStart > 500) return null;
+        // Don't search too far (max 2000 chars forward for the name within this context)
+        if (keyIdx - searchStart > 2000) return null;
 
         int colonIdx = json.indexOf(':', keyIdx + targetKey.length());
         if (colonIdx < 0) return null;
