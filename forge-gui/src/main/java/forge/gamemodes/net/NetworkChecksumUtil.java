@@ -488,7 +488,7 @@ public final class NetworkChecksumUtil {
             Map<?, ?> map = (Map<?, ?>) value;
             List<Integer> entryHashes = new ArrayList<>(map.size());
             for (Map.Entry<?, ?> entry : map.entrySet()) {
-                entryHashes.add(31 * Objects.hashCode(entry.getKey()) + Objects.hashCode(entry.getValue()));
+                entryHashes.add(31 * hashPropertyValue(entry.getKey()) + Objects.hashCode(entry.getValue()));
             }
             entryHashes.sort(null);
             return entryHashes.hashCode();
