@@ -2383,10 +2383,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 // ensure prompt updated if needed
                 currentInput.showMessageInitial();
             }
-            // Flush events to remote clients — the undo modifies game state
-            // (untaps lands, etc.) after the prompt is shown, and without this
-            // the updated state sits in the forwarder buffer until the next action.
-            inputQueue.updateObservers();
+            if (gui.isNetGame()) {
+                // Flush events to remote clients — the undo modifies game state
+                // (untaps lands, etc.) after the prompt is shown, and without this
+                // the updated state sits in the forwarder buffer until the next action.
+                inputQueue.updateObservers();
+            }
             return true;
         }
         return false;

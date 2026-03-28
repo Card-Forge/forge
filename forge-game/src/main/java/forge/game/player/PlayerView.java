@@ -451,7 +451,7 @@ public class PlayerView extends GameEntityView {
     }
 
     public FCollectionView<CardView> getCards(final ZoneType zone) {
-        TrackableProperty prop = getZoneProp(zone);
+        TrackableProperty prop = zone.getTrackableProperty();
         if (prop != null) {
             return get(prop);
         }
@@ -463,7 +463,7 @@ public class PlayerView extends GameEntityView {
     }
 
     public int getZoneSize(final ZoneType zone) {
-        TrackableProperty prop = getZoneProp(zone);
+        TrackableProperty prop = zone.getTrackableProperty();
         return prop == null ? 0 : getZoneSize(prop);
     }
 
@@ -484,11 +484,8 @@ public class PlayerView extends GameEntityView {
         return getZoneTypes(TrackableProperty.Graveyard) >= 4;
     }
 
-    private static TrackableProperty getZoneProp(final ZoneType zone) {
-        return zone.getTrackableProperty();
-    }
     void updateZone(PlayerZone zone) {
-        TrackableProperty prop = getZoneProp(zone.getZoneType());
+        TrackableProperty prop = zone.getZoneType().getTrackableProperty();
         if (prop == null) { return; }
         set(prop, CardView.getCollection(zone.getCards(false)));
 
