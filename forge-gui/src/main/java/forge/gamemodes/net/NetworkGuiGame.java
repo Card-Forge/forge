@@ -44,6 +44,17 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
         netLog.info("[DeltaSync] === START applyDelta seq={} (Turn {}, {}, Active={}) ===",
                 packet.getSequenceNumber(), getGameView().getTurn(), phaseName, activePlayerName);
 
+        // Resolve event card references BEFORE applying deltas — the tracker
+        // still has the pre-replacement CardView instances, so events get the
+        // correct references. Dispatch happens after deltas so event handlers
+        // read current game state.
+        List<GameEvent> resolvedEvents = null;
+        if (packet.hasEvents()) {
+            resolvedEvents = GameEventProxy.unwrapAll(packet.getProxiedEvents(), tracker);
+            netLog.info("[DeltaSync] Pre-resolved {} events before delta seq={}",
+                    resolvedEvents.size(), packet.getSequenceNumber());
+        }
+
         int newObjectCount = 0;
         int appliedCount = 0;
         int skippedCount = 0;
@@ -156,11 +167,9 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
                     packet.getSequenceNumber(), elapsed);
         }
 
-        // Forward bundled events AFTER delta is applied — guarantees
-        // getGameView() state is current when event handlers read it.
-        if (packet.hasEvents()) {
-            List<GameEvent> unwrapped = GameEventProxy.unwrapAll(packet.getProxiedEvents(), tracker);
-            handleGameEvents(unwrapped);
+        // Dispatch pre-resolved events now that game state is current.
+        if (resolvedEvents != null && !resolvedEvents.isEmpty()) {
+            handleGameEvents(resolvedEvents);
         }
 
         if (packet.hasChecksum()) {
@@ -446,10 +455,19 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
         // Check if object of the SAME TYPE already exists
         TrackableObject existing = findObjectByTypeAndId(tracker, objectType, objectId);
         if (existing != null) {
-            // This is a replacement instance (same ID, new server-side object after e.g.
-            // zone change). Clear all properties so applyPropertyMap starts from a clean
-            // slate — otherwise stale values (counters, attacking, etc.) persist from
-            // the previous instance.
+            if (objectType == DeltaPacket.TYPE_CARD_VIEW) {
+                // Create a NEW instance rather than clearing the existing one in-place.
+                // This mirrors the game engine: when a card changes zones, a new Card
+                // object is created while the old one persists for existing references
+                // (e.g., StackItemView.SourceCard still shows the card's state from
+                // when the ability went on the stack).
+                CardView replacement = new CardView(objectId, tracker);
+                tracker.putObj(TrackableTypes.CardViewType, objectId, replacement);
+                netLog.trace("[DeltaSync] CardView ID={} replaced with new instance", objectId);
+                return replacement;
+            }
+            // Non-CardView types: clear and reuse (PlayerView identity must be preserved
+            // for GUI player matching; other types are rarely replaced).
             Map<TrackableProperty, Object> props = existing.getProps();
             if (props != null) {
                 props.clear();

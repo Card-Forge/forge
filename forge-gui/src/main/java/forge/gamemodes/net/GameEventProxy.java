@@ -1,7 +1,9 @@
 package forge.gamemodes.net;
 
+import forge.game.card.CardView;
 import forge.game.event.GameEvent;
 import forge.trackable.TrackableObject;
+import forge.trackable.TrackableProperty;
 import forge.trackable.TrackableTypes.TrackableType;
 import forge.trackable.Tracker;
 
@@ -134,6 +136,26 @@ public class GameEventProxy implements Serializable, IHasNetLog {
     }
 
     /**
+     * Marker for a stale CardView reference — the event holds a previous
+     * incarnation of a card (same ID, different Java object) that has since
+     * been replaced in the tracker by a zone-change copy. Carries the
+     * image key and name from the original so the client can construct a
+     * detached CardView with the correct display data.
+     */
+    static final class StaleCardRef implements Serializable {
+        private static final long serialVersionUID = 1L;
+        final int id;
+        final String imageKey;
+        final String name;
+
+        StaleCardRef(int id, String imageKey, String name) {
+            this.id = id;
+            this.imageKey = imageKey;
+            this.name = name;
+        }
+    }
+
+    /**
      * ObjectOutputStream that replaces every TrackableObject with an IdRef.
      * If a tracker is provided, verifies each ID is resolvable as a
      * server-side sanity check.
@@ -159,10 +181,21 @@ public class GameEventProxy implements Serializable, IHasNetLog {
                 if (tag == DeltaPacket.TYPE_CARD_VIEW || tag == DeltaPacket.TYPE_PLAYER_VIEW) {
                     if (tracker != null) {
                         TrackableType<?> type = DeltaPacket.trackableTypeFor(tag);
-                        if (type != null && tracker.getObj(type, trackable.getId()) == null) {
-                            netLog.debug("Server-side check: {} id={} not in tracker",
-                                    trackable.getClass().getSimpleName(), trackable.getId());
-                            unresolvableRefs = true;
+                        if (type != null) {
+                            Object tracked = tracker.getObj(type, trackable.getId());
+                            if (tracked == null) {
+                                netLog.debug("Server-side check: {} id={} not in tracker",
+                                        trackable.getClass().getSimpleName(), trackable.getId());
+                                unresolvableRefs = true;
+                            } else if (tracked != trackable && tag == DeltaPacket.TYPE_CARD_VIEW) {
+                                // Stale reference: the event holds a previous incarnation
+                                // of this card (e.g. ability source that changed zones).
+                                // Preserve the image key so the client displays correctly
+                                CardView cv = (CardView) trackable;
+                                String imgKey = cv.getCurrentState() != null
+                                        ? cv.getCurrentState().getImageKey(null) : null;
+                                return new StaleCardRef(cv.getId(), imgKey, cv.getName());
+                            }
                         }
                     }
                     return new IdRef((byte) tag, trackable.getId());
@@ -193,6 +226,20 @@ public class GameEventProxy implements Serializable, IHasNetLog {
 
         @Override
         protected Object resolveObject(Object obj) {
+            if (obj instanceof StaleCardRef ref) {
+                // Create a detached CardView with the correct image key.
+                // Not registered in the tracker — used only for display
+                // (game log thumbnail) so it won't affect live game state
+                CardView detached = new CardView(ref.id, tracker);
+                if (ref.name != null) {
+                    detached.set(TrackableProperty.Name, ref.name);
+                    detached.getCurrentState().set(TrackableProperty.Name, ref.name);
+                }
+                if (ref.imageKey != null) {
+                    detached.getCurrentState().set(TrackableProperty.ImageKey, ref.imageKey);
+                }
+                return detached;
+            }
             if (obj instanceof IdRef ref) {
                 TrackableType<?> type = DeltaPacket.trackableTypeFor(ref.typeTag);
                 if (type != null) {
