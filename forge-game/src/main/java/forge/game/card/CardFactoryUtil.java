@@ -129,7 +129,7 @@ public class CardFactoryUtil {
     public static SpellAbility abilityTurnFaceUp(final CardState cardState, final Cost cost, String key, String desc, String reminderDesc) {
         StringBuilder sbCost = new StringBuilder();
         if (!cost.isOnlyManaCost()) {
-            sbCost.append("— ");
+            sbCost.append(" — ");
         }
         sbCost.append(cost.toString());
 
