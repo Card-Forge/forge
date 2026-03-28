@@ -365,8 +365,15 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
                     ? tracker.getObj(TrackableTypes.CardViewType, defRef[1])
                     : tracker.getObj(TrackableTypes.PlayerViewType, defRef[1]);
             if (defender == null) {
-                netLog.warn("[DeltaSync] CombatView defender ID={} (type={}) not found in tracker (band {})",
-                        defRef[1], defRef[0] == 0 ? "Card" : "Player", i);
+                if (defRef[1] == -1) {
+                    // Rule 506.4c: when a planeswalker/battle leaves combat,
+                    // the server replaces it with a fake Card(-1) placeholder
+                    // that isn't in the object graph
+                    defender = new CardView(defRef[1], tracker, "<Nothing>");
+                } else {
+                    netLog.warn("[DeltaSync] CombatView defender ID={} (type={}) not found in tracker (band {})",
+                            defRef[1], defRef[0] == 0 ? "Card" : "Player", i);
+                }
             }
 
             List<CardView> blockers = null;
