@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import com.google.common.collect.Lists;
 
@@ -22,10 +21,10 @@ public class CombatView extends TrackableObject {
 
     // Unique negative IDs so TrackableObject.equals() distinguishes instances.
     // Negative IDs avoid tracker registration (only id >= 0 is registered).
-    private static final AtomicInteger nextId = new AtomicInteger(-2);
+    private static int nextId = -2;
 
     public CombatView(final Tracker tracker) {
-        super(nextId.getAndDecrement(), tracker);
+        super(nextId--, tracker);
         set(TrackableProperty.AttackersWithDefenders, new ConcurrentHashMap<CardView, GameEntityView>());
         set(TrackableProperty.AttackersWithBlockers, new ConcurrentHashMap<CardView, FCollection<CardView>>());
         set(TrackableProperty.BandsWithDefenders, new ConcurrentHashMap<FCollection<CardView>, GameEntityView>());

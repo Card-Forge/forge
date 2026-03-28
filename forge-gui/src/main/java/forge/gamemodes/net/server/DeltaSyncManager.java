@@ -33,7 +33,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Manages delta synchronization between server and clients.
@@ -73,7 +72,7 @@ public class DeltaSyncManager implements IHasNetLog {
     private static final AtomicInteger NEXT_CONSUMER_ID = new AtomicInteger(0);
     private final int consumerId = NEXT_CONSUMER_ID.getAndIncrement();
 
-    private final AtomicLong sequenceNumber = new AtomicLong(0);
+    private long sequenceNumber = 0;
 
     // Objects registered with this consumer (for cleanup on disconnect/reset)
     private final Map<Integer, TrackableObject> registeredByKey = new HashMap<>();
@@ -134,7 +133,7 @@ public class DeltaSyncManager implements IHasNetLog {
             netLog.info("[DeltaSync] New objects: {}, Deltas: {}", newObjects.size(), objectDeltas.size());
         }
 
-        long seq = sequenceNumber.incrementAndGet();
+        long seq = ++sequenceNumber;
 
         int checksum = 0;
         int[] checksumPropertyOrdinals = null;
@@ -588,7 +587,7 @@ public class DeltaSyncManager implements IHasNetLog {
             obj.unregisterConsumer(consumerId);
         }
         registeredByKey.clear();
-        sequenceNumber.set(0);
+        sequenceNumber = 0;
         packetsSinceLastChecksum = 0;
         recentDeltaProperties.clear();
         checksumInterval = CHECKSUM_INTERVAL;
@@ -598,7 +597,7 @@ public class DeltaSyncManager implements IHasNetLog {
     }
 
     public long getCurrentSequence() {
-        return sequenceNumber.get();
+        return sequenceNumber;
     }
 
 }

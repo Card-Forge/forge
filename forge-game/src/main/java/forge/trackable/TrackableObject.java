@@ -1,14 +1,11 @@
 package forge.trackable;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentHashMap;
 
 import forge.game.IIdentifiable;
 
@@ -19,11 +16,10 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
     private final int id;
     protected transient Tracker tracker;
     private final Map<TrackableProperty, Object> props;
-    private volatile int version;
-    // Per-consumer dirty tracking. Lazy-init: null until first registerConsumer
-    // In offline games (no consumers), set() does no tracking work at all
-    // Volatile: multiple DeltaSyncManager threads call registerConsumer concurrently
-    private transient volatile Map<Integer, EnumSet<TrackableProperty>> consumers;
+    private int version;
+    // Per-consumer dirty tracking. Lazy-init: null until first registerConsumer.
+    // In offline games (no consumers), set() does no tracking work at all.
+    private transient Map<Integer, EnumSet<TrackableProperty>> consumers;
     private boolean copyingProps;
 
     protected TrackableObject(final int id0, final Tracker tracker) {
@@ -108,9 +104,7 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
         }
         version++;
         for (EnumSet<TrackableProperty> dirtySet : c.values()) {
-            synchronized (dirtySet) {
-                dirtySet.add(key);
-            }
+            dirtySet.add(key);
         }
     }
 
@@ -139,22 +133,7 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
     }
 
     // use when updating collection type properties without using set (or assigning the same object)
-    @SuppressWarnings("unchecked")
     protected final void flagAsChanged(final TrackableProperty key) {
-        // In network games, replace the mutable value with an immutable defensive copy.
-        // Callers mutate Map/List/Collection in-place then call this method. Without the
-        // copy, the daemon thread's toNetworkValue or walkAndCollect could iterate the
-        // same mutable object while the game thread mutates it on the next update.
-        if (consumers != null) { // volatile read — safe even if concurrently nulled
-            Object value = props.get(key);
-            if (value instanceof TrackableCollection tc) {
-                props.put(key, new TrackableCollection<>(tc));
-            } else if (value instanceof Map) {
-                props.put(key, new HashMap<>((Map<?, ?>) value));
-            } else if (value instanceof List) {
-                props.put(key, new ArrayList<>((List<?>) value));
-            }
-        }
         markDirtyForConsumers(key);
         key.updateObjLookup(tracker, props.get(key));
     }
@@ -173,13 +152,8 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
     public void registerConsumer(int consumerId) {
         Map<Integer, EnumSet<TrackableProperty>> c = consumers;
         if (c == null) {
-            synchronized (this) {
-                c = consumers;
-                if (c == null) {
-                    c = new ConcurrentHashMap<>();
-                    consumers = c;
-                }
-            }
+            c = new HashMap<>();
+            consumers = c;
         }
         c.putIfAbsent(consumerId, EnumSet.noneOf(TrackableProperty.class));
     }
@@ -210,14 +184,12 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
         if (dirtySet == null) {
             return EnumSet.noneOf(TrackableProperty.class);
         }
-        synchronized (dirtySet) {
-            if (dirtySet.isEmpty()) {
-                return EnumSet.noneOf(TrackableProperty.class);
-            }
-            EnumSet<TrackableProperty> copy = EnumSet.copyOf(dirtySet);
-            dirtySet.clear();
-            return copy;
+        if (dirtySet.isEmpty()) {
+            return EnumSet.noneOf(TrackableProperty.class);
         }
+        EnumSet<TrackableProperty> copy = EnumSet.copyOf(dirtySet);
+        dirtySet.clear();
+        return copy;
     }
 
 }

@@ -37,11 +37,8 @@ public class GameEventForwarder implements Observer {
 
     @Subscribe
     public void receiveGameEvent(GameEvent ev) {
-        boolean sizeThreshold;
-        synchronized (pendingEvents) {
-            pendingEvents.add(ev);
-            sizeThreshold = pendingEvents.size() >= FLUSH_SIZE_THRESHOLD;
-        }
+        pendingEvents.add(ev);
+        boolean sizeThreshold = pendingEvents.size() >= FLUSH_SIZE_THRESHOLD;
         boolean timeThreshold = (System.nanoTime() - lastFlushTime) >= FLUSH_INTERVAL_NS;
         if (timeThreshold || sizeThreshold) {
             flush();
@@ -49,14 +46,11 @@ public class GameEventForwarder implements Observer {
     }
 
     public void flush() {
-        List<GameEvent> batch;
-        synchronized (pendingEvents) {
-            if (pendingEvents.isEmpty()) {
-                return;
-            }
-            batch = new ArrayList<>(pendingEvents);
-            pendingEvents.clear();
+        if (pendingEvents.isEmpty()) {
+            return;
         }
+        List<GameEvent> batch = new ArrayList<>(pendingEvents);
+        pendingEvents.clear();
         lastFlushTime = System.nanoTime();
         gui.handleGameEvents(batch);
     }

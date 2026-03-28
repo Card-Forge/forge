@@ -77,8 +77,7 @@ public class Tracker {
             return Collections.emptyMap();
         }
         Map<TrackableProperty, Object> result = new EnumMap<>(TrackableProperty.class);
-        // needs thread safety
-        for (DelayedPropChange change : Lists.newArrayList(delayedPropChanges)) {
+        for (DelayedPropChange change : delayedPropChanges) {
             if (change.object == obj) {
                 result.put(change.prop, change.value);
             }

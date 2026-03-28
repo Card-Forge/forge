@@ -95,9 +95,8 @@ public class TrackableTypes {
         protected void copyChangedProps(TrackableObject from, TrackableObject to, TrackableProperty prop) {
             TrackableCollection<T> newCollection = from.get(prop);
             if (newCollection != null) {
-                // Snapshot to avoid IndexOutOfBoundsException from concurrent modification
-                // during setGameView resync (game thread can modify collections while the
-                // protocol handler iterates them)
+                // Snapshot via toArray: the loop below clears and rebuilds the collection,
+                // so direct iteration would throw ConcurrentModificationException
                 @SuppressWarnings("unchecked")
                 T[] items = (T[]) newCollection.toArray(new TrackableObject[0]);
                 newCollection.clear();
