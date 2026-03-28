@@ -20,6 +20,7 @@ import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.player.PlayerPredicates;
+import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.*;
@@ -279,7 +280,8 @@ public class DiscardEffect extends SpellAbilityEffect {
         Map<AbilityKey, Object> params = AbilityKey.newMap();
         CardZoneTable table = AbilityKey.addCardZoneTableParams(params, sa);
 
-        discard(sa, true, discardedMap, params);
+        // extra check for Circling Vultures
+        discard(sa, !(sa instanceof AbilityStatic), discardedMap, params);
 
         table.triggerChangesZoneAll(game, sa);
     }
