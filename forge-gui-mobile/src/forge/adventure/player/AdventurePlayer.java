@@ -320,7 +320,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     public Boolean isFemale() {
         return isFemale;
     }
-
+    
     public float getWorldPosX() {
         return worldPosX;
     }
@@ -1274,6 +1274,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         }
 
         int basePrice = (int) (CardUtil.getCardPrice(card) * difficultyData.sellFactor);
+
+        if (card.isFoil()) {
+            basePrice += basePrice * 20 / 100;
+        }
 
         float townPriceModifier = currentLocationChanges == null ? 1f : currentLocationChanges.getTownPriceModifier();
         return (int) (basePrice * (2.0f - townPriceModifier));

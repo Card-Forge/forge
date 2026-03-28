@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx" />
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx" />
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJzz42Rg8BvFo3gUj+JRPIpH8YjAAAvyrVM=
@@ -24,18 +24,18 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="209" y="272">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="209" y="272">
    <properties>
     <property name="teleport" value="" />
    </properties>
   </object>
-  <object id="65" template="../../../../../../common/maps/obj/door_down.tx" x="224.166" y="17">
+  <object id="65" template="../../../../common/maps/obj/door_down.tx" x="224.166" y="17">
    <properties>
     <property name="teleport" value="../Shandalar Old Border/maps/map/cave/cave_zombie_floor2.tmx" />
     <property name="teleportObjectId" value="66" />
    </properties>
   </object>
-  <object id="66" template="../../../../../../common/maps/obj/enemy.tx" x="66.1099" y="156.843">
+  <object id="66" template="../../../../common/maps/obj/enemy.tx" x="66.1099" y="156.843">
    <properties>
     <property name="enemy" value="Undead Goblin" />
    <property name="effect">{ "startBattleWithCard": [ "Dralnu's Crusade|PLS", "Goblin Burrows|ONS", "Marsh Goblins|DRK" ] }</property>
@@ -43,7 +43,7 @@
     <property name="threatRange" type="int" value="50" />
    </properties>
   </object>
-  <object id="67" template="../../../../../../common/maps/obj/treasure.tx" x="58.1448" y="93.8145"><properties><property name="reward">[
+  <object id="67" template="../../../../common/maps/obj/treasure.tx" x="58.1448" y="93.8145"><properties><property name="reward">[
   {
     "type": "card",
     "sourceDeck": "decks/rewards/tier-S.dck",
@@ -87,6 +87,6 @@
     "addMaxCount": 2
   }
 ]</property></properties></object>
-  <object id="68" template="../../../../../../common/maps/obj/manashards.tx" x="73.7287" y="249.653" />
+  <object id="68" template="../../../../common/maps/obj/manashards.tx" x="73.7287" y="249.653" />
  </objectgroup>
 </map>

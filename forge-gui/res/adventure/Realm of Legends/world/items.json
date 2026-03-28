@@ -1039,7 +1039,7 @@
     "effect": {
         "lifeModifier": -6,
         "startBattleWithCard": [
-        "NirkanaCutthroat|ROE"
+        "Nirkana Cutthroat|ROE"
      ]
     }
   },
@@ -1878,6 +1878,7 @@
     "equipmentSlot": "Left",
     "iconName": "AbzanGauntlet",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Abzan Monument|TDM"
      ]
@@ -1913,7 +1914,7 @@
     "iconName": "TomeofFire",
     "cost": 5000,
     "effect": {
-        "lifeModifier": -4,
+        "lifeModifier": -2,
         "startBattleWithCard": [
         "Seal of Fire|NEM"
      ]
@@ -1993,6 +1994,7 @@
     "equipmentSlot": "Left",
     "iconName": "MaptotheWorldTree",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Path to the World Tree|KHM"
      ]
@@ -2072,6 +2074,9 @@
     "equipmentSlot": "Left",
     "iconName": "Poisoner'sGlove",
     "effect": {
+      "opponent": {
+        "lifeModifier": -2
+      },
         "startBattleWithCard": [
         "Vial of Poison|M14"
      ]
@@ -2143,6 +2148,7 @@
     "equipmentSlot": "Left",
     "iconName": "TemurGauntlet",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Temur Monument|TDM"
      ]
@@ -2226,6 +2232,7 @@
     "equipmentSlot": "Left",
     "iconName": "SultaiGauntlet",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Sultai Monument|TDM"
      ]
@@ -2248,6 +2255,7 @@
     "equipmentSlot": "Left",
     "iconName": "PrayerbookofVigor",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Font of Vigor|JOU"
      ]
@@ -2259,6 +2267,7 @@
     "equipmentSlot": "Left",
     "iconName": "MarduGauntlet",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Mardu Monument|TDM"
      ]
@@ -2270,6 +2279,7 @@
     "equipmentSlot": "Left",
     "iconName": "JeskaiGauntlet",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Jeskai Monument|TDM"
      ]
@@ -2361,7 +2371,7 @@
     "equipmentSlot": "Left",
     "iconName": "PrayerbookofReturn",
     "effect": {
-        "changeStartCards": -1,
+      "lifeModifier": -4,
         "startBattleWithCard": [
         "Font of Return|JOU"
      ]
@@ -2397,6 +2407,9 @@
     "equipmentSlot": "Left",
     "iconName": "PrayerbookofIre",
     "effect": {
+      "opponent": {
+        "lifeModifier": -3
+      },
         "startBattleWithCard": [
         "Font of Ire|JOU"
      ]
@@ -2432,7 +2445,7 @@
     "equipmentSlot": "Left",
     "iconName": "VolatilePrayerbook",
     "effect": {
-        "lifeModifier": -2,
+        "lifeModifier": -4,
         "startBattleWithCard": [
         "Vessel of Volatility|SOI"
      ]
@@ -2455,7 +2468,7 @@
     "equipmentSlot": "Left",
     "iconName": "PrayerbookofFortunes",
     "effect": {
-        "changeStartCards": -1,
+        "changeStartCards": -4,
         "startBattleWithCard": [
         "Font of Fortunes|JOU"
      ]
@@ -2571,6 +2584,7 @@
     "equipmentSlot": "Neck",
     "iconName": "BreachingStormcrown",
     "effect": {
+        "lifeModifier": 5,
         "startBattleWithCard": [
         "Breaching Dragonstorm|TDM"
      ]
@@ -2594,6 +2608,7 @@
     "equipmentSlot": "Neck",
     "iconName": "AcornAmulet",
     "effect": {
+        "lifeModifier": 4,
         "startBattleWithCard": [
         "Squirrel Sanctuary|MH2"
      ]
@@ -2631,6 +2646,7 @@
     "equipmentSlot": "Neck",
     "iconName": "RoilingStormcrown",
     "effect": {
+      "lifeModifier": 2,
         "startBattleWithCard": [
         "Roiling Dragonstorm|TDM"
      ]
@@ -2672,13 +2688,12 @@
   },
     {
     "name": "Fblthp's Lost Hat",
-    "description": "Win at 200 cards (which you can't have), boosts life as consolation",
+    "description": "Gain future sight if you find Fblthp.",
     "equipmentSlot": "Neck",
     "iconName": "Fblthp'sLostHat",
     "effect": {
-        "lifeModifier": 5,
         "startBattleWithCard": [
-        "Battle of Wits|ODY"
+        "Case of the Lost Witness"
      ]
     }
   },
@@ -2722,6 +2737,7 @@
     "equipmentSlot": "Neck",
     "iconName": "CorrodingStormcrown",
     "effect": {
+      "lifeModifier": 2,
         "startBattleWithCard": [
         "Corroding Dragonstorm|TDM"
      ]
@@ -2746,6 +2762,9 @@
     "iconName": "AmuletofFury",
     "cost": 1000,
     "effect": {
+      "opponent": {
+        "lifeModifier": -2
+      },
         "startBattleWithCard": [
         "Planeswalker's Fury|PLS"
      ]
@@ -2796,6 +2815,7 @@
     "equipmentSlot": "Neck",
     "iconName": "TeemingStormcrown",
     "effect": {
+        "lifeModifier": 4,
         "startBattleWithCard": [
         "Teeming Dragonstorm|TDM"
      ]
@@ -2820,7 +2840,7 @@
     "iconName": "AmuletofMirth",
     "cost": 1000,
     "effect": {
-        "lifeModifier": 2,
+        "lifeModifier": 4,
         "startBattleWithCard": [
         "Planeswalker's Mirth|PLS"
      ]
@@ -2914,6 +2934,7 @@
     "equipmentSlot": "Neck",
     "iconName": "EncroachingStormcrown",
     "effect": {
+        "lifeModifier": 4,
         "startBattleWithCard": [
         "Encroaching Dragonstorm|TDM"
      ]
@@ -2925,6 +2946,7 @@
     "equipmentSlot": "Neck",
     "iconName": "AmuletofFavor",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Planeswalker's Favor|PLS"
      ]
@@ -2960,7 +2982,7 @@
     "equipmentSlot": "Right",
     "iconName": "BladedBracer",
     "effect": {
-        "lifeModifier": 2,
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Bladed Bracers|AVR"
      ]
@@ -3437,7 +3459,7 @@
     {
     "name": "Full Moon Necklace",
     "description": "Werewolves get +1/+0 and trample, sac to regen them all",
-    "equipmentSlot": "Right",
+    "equipmentSlot": "Neck",
     "iconName": "FullMoonNecklace",
     "effect": {
         "startBattleWithCard": [
@@ -3935,7 +3957,7 @@
     "description": "Grants a token in a special slot with equip 1: 1, T, sac: ping for 2",
     "equipmentSlot": "Token",
     "iconName": "TokenofViolence",
-    "cost": 50000,
+    "cost": 40000,
     "effect": {
       "startBattleWithCard": [
         "rock"
@@ -4773,6 +4795,104 @@
     }
   },
   {
+    "name": "Winter Boots",
+    "description": "0/4, T, sac: -0/-X where X is snow lands",
+    "equipmentSlot": "Body",
+    "iconName": "WinterBoots",
+    "effect": {
+      "lifeModifier": -4,
+      "startBattleWithCard": [
+        "Priest of the Haunted Edge"
+      ]
+    }
+  },
+  {
+    "name": "Token of Blades",
+    "description": "Grants a token in a special slot with Equip 2: +1/+1.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofBlades",
+    "cost": 50000,
+    "effect": {
+      "startBattleWithCard": [
+        "sword"
+      ]
+    }
+  },
+  {
+    "name": "Token of Decay",
+    "description": "Grants a 2/2 decayed zombie token in a special slot.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofDecay",
+    "cost": 40000,
+    "effect": {
+      "startBattleWithCard": [
+        "b_2_2_zombie_decayed"
+      ]
+    }
+  },
+  {
+    "name": "Token of Insight",
+    "description": "Grants a token in a special slot with 2, sac: Scry 1 then draw.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofInsight",
+    "cost": 90000,
+    "effect": {
+      "lifeModifier": -3,
+      "startBattleWithCard": [
+        "c_e_shard_draw"
+      ]
+    }
+  },
+  {
+    "name": "Token of Shielding",
+    "description": "Grants a 0/3 defender wall token in a special slot.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofShielding",
+    "cost": 60000,
+    "effect": {
+      "startBattleWithCard": [
+        "w_0_3_wall_defender"
+      ]
+    }
+  },
+  {
+    "name": "Token of Landing",
+    "description": "Grants a token in a special slot with 2, T, sac: get a tapped basic.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofLanding",
+    "cost": 50000,
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "c_a_lander_sac_search"
+      ]
+    }
+  },
+  {
+    "name": "Token of Spirit",
+    "description": "Grants a 1/1 colorless spirit token in a special slot.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofSpirit",
+    "cost": 50000,
+    "effect": {
+      "startBattleWithCard": [
+        "c_1_1_spirit"
+      ]
+    }
+  },
+  {
+    "name": "Token of Soaring Spirit",
+    "description": "Grants a 1/1 white/black spirit token with flying in a special slot.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofSoaringSpirit",
+    "cost": 100000,
+    "effect": {
+      "startBattleWithCard": [
+        "wb_1_1_spirit_flying"
+      ]
+    }
+  },
+  {
     "name": "Gisa's Favorite Shovel",
     "description": "This item has been removed. Please discard it.",
     "equipmentSlot": "Right",
@@ -4873,18 +4993,6 @@
     "effect": {
       "startBattleWithCard": [
         "Darksteel Relic"
-      ]
-    }
-  },
-  {
-    "name": "Winter Boots",
-    "description": "0/4, T, sac: -0/-X where X is snow lands",
-    "equipmentSlot": "Body",
-    "iconName": "WinterBoots",
-    "effect": {
-      "lifeModifier": -4,
-      "startBattleWithCard": [
-        "Priest of the Haunted Edge"
       ]
     }
   },

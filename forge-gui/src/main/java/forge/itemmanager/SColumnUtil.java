@@ -105,6 +105,8 @@ public final class SColumnUtil {
 
     public static Map<ColumnDef, ItemColumnConfig> getDeckEditorDefaultColumns() {
         Map<ColumnDef, ItemColumnConfig> columns = getCardColumns(ColumnDef.DECK_QUANTITY, false);
+        columns.put(ColumnDef.DECK_KEY_CARD, new ItemColumnConfig(ColumnDef.DECK_KEY_CARD));
+        columns.get(ColumnDef.DECK_KEY_CARD).setIndex(columns.size() - 1);
         columns.get(ColumnDef.CMC).setSortPriority(1);
         columns.get(ColumnDef.TYPE).setSortPriority(2);
         columns.get(ColumnDef.NAME).setSortPriority(3);

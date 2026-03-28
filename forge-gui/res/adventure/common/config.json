@@ -99,6 +99,7 @@
     "CLB",
     "CMM"
   ],
+  "usePriceListPrices": true,
   "difficulties": [
     {
       "name": "Easy",
@@ -235,7 +236,7 @@
       "startingMoney": 0,
       "enemyLifeFactor": 2.5,
       "rewardMaxFactor" : 0.0,
-      "spawnRank": 2,
+      "spawnRank": 3,
       "goldLoss": 0.5,
       "lifeLoss": 0.3,
       "sellFactor": 0.05,

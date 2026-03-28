@@ -1,0 +1,6 @@
+Name:Grapple with Death
+ManaCost:1 B G
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Artifact,Creature | ValidTgtsDesc$ artifact or creature | SubAbility$ DBGainLife | SpellDescription$ Destroy target artifact or creature. You gain 1 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+Oracle:Destroy target artifact or creature. You gain 1 life.

@@ -91,6 +91,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     boolean loaded = true;
     boolean alternate = false, shown = false;
     boolean isRewardShop, showOverlay, canAutoSell;
+    private String priceTag = "";
     TextraLabel overlayLabel;
     int artIndex = 1;
     String imageKey = "";
@@ -234,7 +235,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
     private void updateAutoSell() {
         reward.setAutoSell(!reward.isAutoSell());
-        autoSell.setText(reward.isAutoSell() ? "[%85][+Sell]" : "[%85][GRAY] ");
+        autoSell.setText(reward.isAutoSell() ? "[%85][+Sell]" + priceTag : "[%85][GRAY] " + priceTag);
         autoSell.getColor().a = reward.isAutoSell() ? 1f : 0.7f;
     }
 
@@ -251,7 +252,9 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         switch (reward.type) {
             case Card: {
                 if (!reward.isNoSell) {
-                    autoSell = Controls.newTextButton("[%85][GRAY] ");
+                    int sellPrice = AdventurePlayer.current().cardSellPrice(reward.getCard());
+                    priceTag = sellPrice > 0 ? " " + sellPrice : "";
+                    autoSell = Controls.newTextButton("[%85][GRAY] " + priceTag);
                     autoSell.getColor().a = 0.7f; // semi-transparent by default
                     autoSell.addListener(new InputListener() {
                         @Override
@@ -263,8 +266,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                             if (!reward.isAutoSell()) autoSell.getColor().a = 0.7f;
                         }
                     });
-                    float scale = autoSell.getWidth();
-                    autoSell.setSize(scale, scale * 1.2f);
+                    float btnHeight = autoSell.getTextraLabel().layout.getHeight() * 1.8f;
+                    autoSell.setSize(autoSell.getWidth(), btnHeight);
                     autoSell.addListener(new ClickListener() {
                         public void clicked(InputEvent event, float x, float y) {
                             updateAutoSell();

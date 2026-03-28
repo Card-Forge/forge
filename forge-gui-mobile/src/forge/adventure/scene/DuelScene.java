@@ -125,12 +125,12 @@ public class DuelScene extends ForgeScene {
                 if (eventData != null) {
                     //In an event. Apply the ante result to the current event deck.
                     eventData.registeredDeck.getOrCreate(DeckSection.Sideboard).add(anteResult.wonCards);
-                    if(eventData.draftedDeck != null)
-                        eventData.draftedDeck.getOrCreate(DeckSection.Sideboard).add(anteResult.wonCards);
+                    if(eventData.rewardDeck != null)
+                        eventData.rewardDeck.getOrCreate(DeckSection.Sideboard).add(anteResult.wonCards);
                     for(PaperCard card : anteResult.lostCards) {
                         eventData.registeredDeck.removeAnteCard(card);
-                        if(eventData.draftedDeck != null)
-                            eventData.draftedDeck.removeAnteCard(card);
+                        if(eventData.rewardDeck != null)
+                            eventData.rewardDeck.removeAnteCard(card);
                     }
                     //Could also add the cards to the opponent's pool, but their games aren't simulated and they never edit their decks.
                 }
@@ -266,7 +266,11 @@ public class DuelScene extends ForgeScene {
         };
         cardDisplay.setHeight(Forge.getScreenHeight() / 3);
 
-        String message = card.getName();
+        int ownedCount = Current.player().getCollectionCards(true).count(card);
+        String ownedInfo = won
+                ? (ownedCount == 0 ? " (New!)" : " (Owned: " + ownedCount + ")")
+                : (ownedCount > 0 ? " (Remaining: " + ownedCount + ")" : "");
+        String message = card.getName() + ownedInfo;
         List<String> buttons;
         if (won && eventData == null) {
             int sellPrice = Current.player().cardSellPrice(card);
@@ -300,12 +304,10 @@ public class DuelScene extends ForgeScene {
             changeStartCards += data.changeStartCards;
             startCards.addAll(data.startBattleWithCards());
             startCardsInCommandZone.addAll(data.startBattleWithCardsInCommandZone());
-
             extraManaShards += data.extraManaShards;
         }
         player.addExtraCardsOnBattlefield(startCards);
         player.addExtraCardsInCommandZone(startCardsInCommandZone);
-
         if (lifeMod != 0)
             player.setStartingLife(Math.max(1, lifeMod + player.getStartingLife()));
         player.setStartingHand(player.getStartingHand() + changeStartCards);

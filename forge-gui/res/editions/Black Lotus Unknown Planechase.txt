@@ -2,7 +2,7 @@
 Code=PUNK
 Date=2024-02-24
 Name=Black Lotus Unknown Planechase
-Type=Multiplayer
+Type=Funny
 ScryfallCode=PUNK
 
 [cards]

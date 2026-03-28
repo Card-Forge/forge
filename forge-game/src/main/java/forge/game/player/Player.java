@@ -1341,7 +1341,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * gets a list of first N cards in the requested zone. This function makes a CardCollectionView from Card[].
      */
     public final CardCollectionView getCardsIn(final ZoneType zone, final int n) {
-        return new CardCollection(Iterables.limit(getCardsIn(zone), n));
+        return new CardCollection(getCardsIn(zone).stream().limit(n));
     }
 
     /**
@@ -3031,8 +3031,8 @@ public class Player extends GameEntity implements Comparable<Player> {
             contraptionDeck.shuffle();
 
         // Adventure Mode items
-        Iterable<? extends IPaperCard> adventureItemCards = registeredPlayer.getExtraCardsInCommandZone();
-        if (adventureItemCards != null) {
+        Iterable<? extends IPaperCard> adventureItemCards  = registeredPlayer.getExtraCardsInCommandZone();
+        if (adventureItemCards  != null) {
             for (final IPaperCard cp : adventureItemCards) {
                 Card c = Card.fromPaperCard(cp, this);
                 com.add(c);

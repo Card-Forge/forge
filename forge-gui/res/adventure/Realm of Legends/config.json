@@ -157,6 +157,7 @@
     "CNS",
     "CN2"
   ],
+  "usePriceListPrices": false,
   "difficulties": [
     {
       "name": "Easy",
