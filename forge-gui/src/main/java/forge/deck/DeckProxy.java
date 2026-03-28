@@ -4,6 +4,7 @@ import forge.StaticData;
 import forge.card.*;
 import forge.card.mana.ManaCostShard;
 import forge.deck.io.DeckPreferences;
+import forge.deck.io.DeckSerializer;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.gamemodes.quest.QuestController;
@@ -16,6 +17,8 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.util.BinaryUtil;
+import forge.util.FileSection;
+import forge.util.FileUtil;
 import forge.util.IHasName;
 import forge.util.IterableUtil;
 import forge.util.storage.IStorage;
@@ -23,6 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.io.File;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Function;
@@ -647,6 +651,40 @@ public class DeckProxy implements InventoryItem {
             decks.add(new DeckProxy(e.getEventDeck(), "Quest Event", null, null));
         }
         return decks;
+    }
+
+    public static List<DeckProxy> getStandardAdventureDecks() {
+        final List<DeckProxy> decks = new ArrayList<>();
+        final String adventureDeckDir = ForgeConstants.ADVENTURE_COMMON_DIR + "decks" + ForgeConstants.PATH_SEPARATOR + "standard";
+        final File folder = new File(adventureDeckDir);
+        
+        if (!folder.exists() || !folder.isDirectory()) {
+            return decks;
+        }
+        
+        final File[] deckFiles = folder.listFiles((dir, name) -> name.endsWith(".dck"));
+        if (deckFiles == null) {
+            return decks;
+        }
+        
+        for (final File deckFile : deckFiles) {
+            try {
+                final Map<String, List<String>> sections = FileSection.parseSections(FileUtil.readFile(deckFile));
+                final Deck deck = DeckSerializer.fromSections(sections);
+                if (deck != null) {
+                    decks.add(new DeckProxy(deck, "Adventure Event", null, null));
+                }
+            } catch (final Exception e) {
+                // Skip decks that fail to load
+                System.err.println("Failed to load adventure deck: " + deckFile.getName());
+            }
+        }
+        
+        return decks;
+    }
+
+    public static List<DeckProxy> getAllAdventureEventAndChallenges() {
+        return getStandardAdventureDecks();
     }
 
     public static List<DeckProxy> getAllGeneticAIDecks() {

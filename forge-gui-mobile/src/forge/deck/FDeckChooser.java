@@ -1002,6 +1002,10 @@ public class FDeckChooser extends FScreen {
             pool = DeckProxy.getAllQuestEventAndChallenges();
             config = ItemManagerConfig.QUEST_EVENT_DECKS;
             break;
+        case ADVENTURE_OPPONENT_DECK:
+            pool = DeckProxy.getStandardAdventureDecks();
+            config = ItemManagerConfig.QUEST_EVENT_DECKS;
+            break;
         case PRECONSTRUCTED_DECK:
             pool = DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons());
             config = ItemManagerConfig.PRECON_DECKS;
@@ -1246,6 +1250,17 @@ public class FDeckChooser extends FScreen {
                 player.setStartingLife(((QuestEventChallenge) event).getAiLife());
             }
             player.setCardsOnBattlefield(QuestUtil.getComputerStartingCards(event));
+        }
+        else if (selectedDeckType == DeckType.ADVENTURE_OPPONENT_DECK) {
+            //Special branch for adventure events
+            QuestEvent event = DeckgenUtil.getAdventureEvent(lstDecks.getSelectedItem().getName());
+            if (event != null) {
+                player = new RegisteredPlayer(event.getEventDeck());
+                if (event instanceof QuestEventChallenge) {
+                    player.setStartingLife(((QuestEventChallenge) event).getAiLife());
+                }
+                player.setCardsOnBattlefield(QuestUtil.getComputerStartingCards(event));
+            }
         }
         else {
             player = new RegisteredPlayer(getDeck());

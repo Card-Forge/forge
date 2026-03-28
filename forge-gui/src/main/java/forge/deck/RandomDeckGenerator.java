@@ -97,6 +97,12 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
                             return Aggregates.random(DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons())).getDeck();
                         case QUEST_OPPONENT_DECK:
                             return Aggregates.random(DeckProxy.getAllQuestEventAndChallenges()).getDeck();
+                        case ADVENTURE_OPPONENT_DECK:
+                            final List<DeckProxy> adventureDecks = DeckProxy.getStandardAdventureDecks();
+                            if (!adventureDecks.isEmpty()) {
+                                return Aggregates.random(adventureDecks).getDeck();
+                            }
+                            break;
                         case COLOR_DECK:
                             List<String> colors = new ArrayList<>();
                             int count = Aggregates.randomInt(1, 3);

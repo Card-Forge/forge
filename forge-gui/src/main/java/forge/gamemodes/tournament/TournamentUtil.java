@@ -71,6 +71,12 @@ public class TournamentUtil {
                     deck = DeckgenUtil.getRandomQuestDeck();
                     eventNames.add(deck.getName());
                     break;
+                case ADVENTURE_OPPONENT_DECK:
+                    deck = DeckgenUtil.getRandomAdventureDeck();
+                    if (deck != null) {
+                        eventNames.add(deck.getName());
+                    }
+                    break;
                 case THEME_DECK:
                     deck = DeckgenUtil.getRandomThemeDeck();
                     eventNames.add(deck.getName());

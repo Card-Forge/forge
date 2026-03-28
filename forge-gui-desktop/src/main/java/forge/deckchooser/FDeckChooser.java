@@ -226,6 +226,10 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         updateDecks(DeckProxy.getAllQuestEventAndChallenges(), ItemManagerConfig.QUEST_EVENT_DECKS);
     }
 
+    private void updateAdventureEvents() {
+        updateDecks(DeckProxy.getStandardAdventureDecks(), ItemManagerConfig.ADVENTURE_EVENT_DECKS);
+    }
+
     private void updateRandom() {
         updateDecks(RandomDeckGenerator.getRandomDecks(lstDecks, isAi), ItemManagerConfig.STRING_ONLY);
     }
@@ -307,6 +311,19 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             }
             result.setCardsOnBattlefield(QuestUtil.getComputerStartingCards(event));
             return result;
+        }
+
+        // Special branch for adventure events
+        if (selectedDeckType == DeckType.ADVENTURE_OPPONENT_DECK) {
+            final QuestEvent event = DeckgenUtil.getAdventureEvent(lstDecks.getSelectedItem().getName());
+            if (event != null) {
+                final RegisteredPlayer result = new RegisteredPlayer(event.getEventDeck());
+                if (event instanceof QuestEventChallenge) {
+                    result.setStartingLife(((QuestEventChallenge) event).getAiLife());
+                }
+                result.setCardsOnBattlefield(QuestUtil.getComputerStartingCards(event));
+                return result;
+            }
         }
 
         return new RegisteredPlayer(getDeck());
@@ -610,6 +627,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                 break;
             case QUEST_OPPONENT_DECK:
                 updateQuestEvents();
+                break;
+            case ADVENTURE_OPPONENT_DECK:
+                updateAdventureEvents();
                 break;
             case PRECONSTRUCTED_DECK:
                 updatePrecons();

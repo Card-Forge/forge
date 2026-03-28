@@ -516,6 +516,23 @@ public class DeckgenUtil {
         return allQuestDecks.get(rand);
     }
 
+    public static Deck getRandomAdventureDeck() {
+        final List<Deck> allAdventureDecks = new ArrayList<>();
+        // Adventure decks are not available in the standard forge-gui module
+        // This method is a placeholder for future adventure deck integration
+        if (allAdventureDecks.isEmpty()) {
+            return null;
+        }
+        final int rand = (int) (Math.floor(MyRandom.getRandom().nextDouble() * allAdventureDecks.size()));
+        return allAdventureDecks.get(rand);
+    }
+
+    public static QuestEvent getAdventureEvent(final String name) {
+        // Adventure events are not available in the standard forge-gui module
+        // This method is a placeholder for future adventure event integration
+        return null;
+    }
+
     public static void randomSelectColors(final IItemManager<DeckProxy> deckManager) {
         final int size = deckManager.getItemCount();
         if (size == 0) { return; }
