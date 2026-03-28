@@ -903,6 +903,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
         if (runTriggers) {
             Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
+            repParams.put(AbilityKey.Cause, cause);
             game.getReplacementHandler().run(ReplacementType.TurnFaceUp, repParams);
 
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);

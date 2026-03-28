@@ -101,7 +101,7 @@ public class ConniveEffect extends SpellAbilityEffect {
                 final Map<Player, CardCollectionView> discardedMap = Maps.newHashMap();
                 discardedMap.put(p, CardCollection.getView(toBeDiscarded));
                 discard(sa, true, discardedMap, moveParams);
-                counterPlacements.replaceCounterEffect(game, sa, true);
+                counterPlacements.replaceCounterEffect(game, sa);
                 zoneMovements.triggerChangesZoneAll(game, sa);
             }
         }
