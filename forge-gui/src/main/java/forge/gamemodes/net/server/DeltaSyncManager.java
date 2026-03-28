@@ -56,12 +56,20 @@ public class DeltaSyncManager implements IHasNetLog {
     // Zone collection properties on PlayerView — the authoritative source for
     // CardView instances. Cross-reference properties (Commander, AttachedCards,
     // ExiledWith, etc.) may hold stale instances after zone changes via copyCard.
-    private static final EnumSet<TrackableProperty> ZONE_COLLECTIONS = EnumSet.of(
-            TrackableProperty.Ante, TrackableProperty.Battlefield,
-            TrackableProperty.Command, TrackableProperty.Exile,
-            TrackableProperty.Flashback, TrackableProperty.Graveyard,
-            TrackableProperty.Hand, TrackableProperty.Library,
-            TrackableProperty.Sideboard);
+    // Built dynamically from ZoneType's trackable property mapping.
+    // Excludes Flashback: virtual zone whose cards are references to cards in
+    // other zones (Graveyard, Library, etc.), not unique canonical instances.
+    private static final EnumSet<TrackableProperty> ZONE_COLLECTIONS;
+    static {
+        EnumSet<TrackableProperty> set = EnumSet.noneOf(TrackableProperty.class);
+        for (ZoneType z : ZoneType.values()) {
+            TrackableProperty prop = z.getTrackableProperty();
+            if (prop != null && z != ZoneType.Flashback) {
+                set.add(prop);
+            }
+        }
+        ZONE_COLLECTIONS = set;
+    }
 
     // each DeltaSyncManager gets a unique ID
     private static final AtomicInteger NEXT_CONSUMER_ID = new AtomicInteger(0);

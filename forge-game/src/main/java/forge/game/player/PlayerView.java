@@ -485,23 +485,7 @@ public class PlayerView extends GameEntityView {
     }
 
     private static TrackableProperty getZoneProp(final ZoneType zone) {
-        switch (zone) {
-            case Ante: return TrackableProperty.Ante;
-            case Battlefield: return TrackableProperty.Battlefield;
-            case Command: return TrackableProperty.Command;
-            case Exile: return TrackableProperty.Exile;
-            case Graveyard: return TrackableProperty.Graveyard;
-            case Hand: return TrackableProperty.Hand;
-            case Library: return TrackableProperty.Library;
-            case Flashback: return TrackableProperty.Flashback;
-            case Sideboard: return TrackableProperty.Sideboard;
-            case PlanarDeck: return TrackableProperty.PlanarDeck;
-            case SchemeDeck: return TrackableProperty.SchemeDeck;
-            case AttractionDeck: return TrackableProperty.AttractionDeck;
-            case ContraptionDeck: return TrackableProperty.ContraptionDeck;
-            case Junkyard: return TrackableProperty.Junkyard;
-            default: return null; //other zones not represented
-        }
+        return zone.getTrackableProperty();
     }
     void updateZone(PlayerZone zone) {
         TrackableProperty prop = getZoneProp(zone.getZoneType());
