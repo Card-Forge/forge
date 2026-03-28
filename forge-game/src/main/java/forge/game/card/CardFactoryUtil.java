@@ -136,7 +136,7 @@ public class CardFactoryUtil {
         // Cost need to be set later
         StringBuilder sb = new StringBuilder();
         sb.append("ST$ SetState | Cost$ 0 | PrecostDesc$ ").append(desc).append(" | CostDesc$ ").append(sbCost);
-        sb.append(" | ").append(key).append("$ True | Secondary$ True | Mode$ TurnFaceUp | SpellDescription$ (Turn this face up any time for its ").append(reminderDesc).append(" cost.)");
+        sb.append(" | ").append(key).append("$ True | Secondary$ True | IsPresent$ Card.Self+faceDown | Mode$ TurnFaceUp | SpellDescription$ (Turn this face up any time for its ").append(reminderDesc).append(" cost.)");
 
         final SpellAbility morphUp = AbilityFactory.getAbility(sb.toString(), cardState);
 
