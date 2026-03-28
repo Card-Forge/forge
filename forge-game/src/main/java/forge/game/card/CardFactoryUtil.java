@@ -3566,7 +3566,7 @@ public class CardFactoryUtil {
                     int counters = AbilityUtils.calculateAmount(c, k[1], this);
                     GameEntityCounterTable table = new GameEntityCounterTable();
                     c.addCounter(CounterEnumType.TIME, counters, getActivatingPlayer(), table);
-                    table.replaceCounterEffect(game, this, false); // this is a special Action, not an Effect
+                    table.replaceCounterEffect(game, this); // this is a special Action, not an Effect
 
                     String sb = TextUtil.concatWithSpace(getActivatingPlayer().toString(),"has suspended", c.getDisplayName(), "with", String.valueOf(counters),"time counters on it.");
                     game.fireEvent(new GameEventAddLog(GameLogEntryType.STACK_RESOLVE, sb));
