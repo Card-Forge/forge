@@ -588,6 +588,12 @@ public class CountersPutEffect extends SpellAbilityEffect {
             placer = AbilityUtils.getDefinedPlayers(card, sa.getParam("Placer"), sa).get(0);
         }
 
+        SpellAbility cause = sa;
+        if (sa.isReplacementAbility()) {
+            cause = (SpellAbility) sa.getReplacingObject(AbilityKey.Cause);
+        }
+
+
         GameEntityCounterTable table = new GameEntityCounterTable();
 
         if (sa.hasParam("TriggeredCounterMap")) {
@@ -642,7 +648,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             }
         }
 
-        table.replaceCounterEffect(game, sa, true);
+        table.replaceCounterEffect(game, cause);
 
         if (sa.hasParam("RemovePhase")) {
             for (Map.Entry<GameEntity, Map<CounterType, Integer>> e : table.row(Optional.of(placer)).entrySet()) {

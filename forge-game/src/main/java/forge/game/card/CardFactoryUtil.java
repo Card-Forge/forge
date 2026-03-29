@@ -126,94 +126,33 @@ public class CardFactoryUtil {
         return AbilityFactory.getAbility(unlockStr, cardState);
     }
 
-    /**
-     * <p>
-     * abilityMorphUp.
-     * </p>
-     *
-     * @return a {@link forge.game.spellability.AbilityActivated} object.
-     */
-    public static SpellAbility abilityMorphUp(final CardState cardState, final String costStr, final boolean mega, final boolean intrinsic) {
-        Cost cost = new Cost(costStr, true);
-        StringBuilder sbCost = new StringBuilder(mega ? "Megamorph" : "Morph");
-        sbCost.append(" ");
+    public static SpellAbility abilityTurnFaceUp(final CardState cardState, final Cost cost, String key, String desc, String reminderDesc) {
+        StringBuilder sbCost = new StringBuilder();
         if (!cost.isOnlyManaCost()) {
-            sbCost.append("— ");
+            sbCost.append(" — ");
         }
         sbCost.append(cost.toString());
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("ST$ SetState | Cost$ ").append(costStr).append(" | CostDesc$ ").append(sbCost);
-        sb.append(" | MorphUp$ True | Secondary$ True | IsPresent$ Card.Self+faceDown");
-        if (mega) {
-            sb.append(" | Mega$ True");
-        }
-
-        sb.append(" | Mode$ TurnFaceUp | SpellDescription$ (Turn this face up any time for its morph cost.)");
-
-        final SpellAbility morphUp = AbilityFactory.getAbility(sb.toString(), cardState);
-
-        // if Cost has X in cost, need to check source for an SVar for this
-        if (cost.hasXInAnyCostPart() && cardState.hasSVar("X")) {
-            morphUp.setSVar("X", cardState.getSVar("X"));
-        }
-
-        final StringBuilder sbStack = new StringBuilder();
-        sbStack.append(cardState.getName()).append(" - turn this card face up.");
-        morphUp.setStackDescription(sbStack.toString());
-
-        morphUp.setIntrinsic(intrinsic);
-
-        return morphUp;
-    }
-    public static SpellAbility abilityDisguiseUp(final CardState cardState, final String costStr, final boolean intrinsic) {
-        Cost cost = new Cost(costStr, true);
-        StringBuilder sbCost =  new StringBuilder("Disguise");
-        sbCost.append(" ");
-        if (!cost.isOnlyManaCost()) {
-            sbCost.append("— ");
-        }
-        sbCost.append(cost.toString());
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("ST$ SetState | Cost$ ").append(costStr).append(" | CostDesc$ ").append(sbCost);
-        sb.append(" | DisguiseUp$ True | Secondary$ True | IsPresent$ Card.Self+faceDown");
-        sb.append(" | Mode$ TurnFaceUp | SpellDescription$ (Turn this face up any time for its disguise cost.)");
-
-        final SpellAbility morphUp = AbilityFactory.getAbility(sb.toString(), cardState);
-
-        // if Cost has X in cost, need to check source for an SVar for this
-        if (cost.hasXInAnyCostPart() && cardState.hasSVar("X")) {
-            morphUp.setSVar("X", cardState.getSVar("X"));
-        }
-
-        final StringBuilder sbStack = new StringBuilder();
-        sbStack.append(cardState.getName()).append(" - turn this card face up.");
-        morphUp.setStackDescription(sbStack.toString());
-
-        morphUp.setIntrinsic(intrinsic);
-
-        return morphUp;
-    }
-
-    public static SpellAbility abilityTurnFaceUp(final CardState sourceCard, String key, String desc) {
-        final ManaCost manaCost = sourceCard.getManaCost();
-        String costDesc = manaCost.toString();
 
         // Cost need to be set later
         StringBuilder sb = new StringBuilder();
-        sb.append("ST$ SetState | Cost$ 0 | ").append("PrecostDesc$ ").append(desc).append(" | CostDesc$ ").append(costDesc);
-        sb.append(" | ").append(key).append("$ True | Secondary$ True | Mode$ TurnFaceUp | SpellDescription$ (Turn this face up any time for its mana cost.)");
+        sb.append("ST$ SetState | Cost$ 0 | PrecostDesc$ ").append(desc).append(" | CostDesc$ ").append(sbCost);
+        sb.append(" | ").append(key).append("$ True | Secondary$ True | IsPresent$ Card.Self+faceDown | Mode$ TurnFaceUp | SpellDescription$ (Turn this face up any time for its ").append(reminderDesc).append(" cost.)");
 
-        final SpellAbility manifestUp = AbilityFactory.getAbility(sb.toString(), sourceCard);
-        manifestUp.setPayCosts(new Cost(manaCost, true));
-        manifestUp.rebuiltDescription();
+        final SpellAbility morphUp = AbilityFactory.getAbility(sb.toString(), cardState);
+
+        // if Cost has X in cost, need to check source for an SVar for this
+        if (cost.hasXInAnyCostPart() && cardState.hasSVar("X")) {
+            morphUp.setSVar("X", cardState.getSVar("X"));
+        }
+
+        morphUp.setPayCosts(cost);
+        morphUp.rebuiltDescription();
 
         final StringBuilder sbStack = new StringBuilder();
-        sbStack.append(sourceCard.getName()).append(" - turn this card face up.");
-        manifestUp.setStackDescription(sbStack.toString());
+        sbStack.append(cardState.getName()).append(" - turn this card face up.");
+        morphUp.setStackDescription(sbStack.toString());
 
-        return manifestUp;
+        return morphUp;
     }
 
     public static boolean handleHiddenAgenda(Player player, Card card, KeywordInterface ki) {
@@ -2421,6 +2360,20 @@ public class CardFactoryUtil {
             re.setOverridingAbility(AbilityFactory.getAbility(sVarMadness, card));
 
             inst.addReplacement(re);
+        } else if (keyword.startsWith("Megamorph")) {
+            String repeffStr =  "Event$ TurnFaceUp | ValidCard$ Card.Self | ValidCause$ SpellAbility.SameKeyword | Decription$ Megamorph";
+            String counterStr = "DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1";
+            SpellAbility countersSA = AbilityFactory.getAbility(counterStr, card);
+
+            if (!intrinsic) {
+                countersSA.setIntrinsic(false);
+            }
+
+            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffStr, host, intrinsic, card);
+
+            re.setOverridingAbility(countersSA);
+
+            inst.addReplacement(re);
         } else if (keyword.startsWith("Modular") && inst instanceof Modular modular) {
             final String m = modular.getAmountString();
 
@@ -2808,14 +2761,15 @@ public class CardFactoryUtil {
             newSA.setAlternativeCost(AlternativeCost.Dash);
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
-        } else if (keyword.startsWith("Disguise")) {
+        } else if (keyword.startsWith("Disguise") && inst instanceof KeywordWithCost withCost) {
             final String[] k = keyword.split(":");
             final String reduceCost = k.length > 2 ? k[2] : null;
 
             SpellAbility faceDown = abilityCastFaceDown(card, intrinsic, "Disguise");
             faceDown.putParam("FaceDownKeyword", "Ward:2");
 
-            SpellAbility faceUp = abilityDisguiseUp(card, k[1], intrinsic);
+            SpellAbility faceUp = abilityTurnFaceUp(card, withCost.getCost(), "DisguiseUp", "Disguise", "disguise");
+            faceUp.setIntrinsic(intrinsic);
             if (reduceCost != null) {
                 faceUp.putParam("ReduceCost", reduceCost);
                 faceUp.setSVar(reduceCost, card.getSVar(reduceCost));
@@ -3165,16 +3119,16 @@ public class CardFactoryUtil {
             final SpellAbility sa = AbilityFactory.getAbility(sb.toString(), card);
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
-        } else if (keyword.startsWith("Morph")) {
-            final String[] k = keyword.split(":");
-
+        } else if (keyword.startsWith("Morph") && inst instanceof KeywordWithCost withCost) {
             inst.addSpellAbility(abilityCastFaceDown(card, intrinsic, "Morph"));
-            inst.addSpellAbility(abilityMorphUp(card, k[1], false, intrinsic));
-        } else if (keyword.startsWith("Megamorph")) {
-            final String[] k = keyword.split(":");
-
+            SpellAbility morphUp = abilityTurnFaceUp(card, withCost.getCost(), "MorphUp", "Morph", "morph");
+            morphUp.setIntrinsic(intrinsic);
+            inst.addSpellAbility(morphUp);
+        } else if (keyword.startsWith("Megamorph") && inst instanceof KeywordWithCost withCost) {
             inst.addSpellAbility(abilityCastFaceDown(card, intrinsic, "Morph"));
-            inst.addSpellAbility(abilityMorphUp(card, k[1], true, intrinsic));
+            SpellAbility morphUp = abilityTurnFaceUp(card, withCost.getCost(), "MorphUp", "Megamorph", "morph");
+            morphUp.setIntrinsic(intrinsic);
+            inst.addSpellAbility(morphUp);
         } else if (keyword.startsWith("More Than Meets the Eye")) {
             final String[] n = keyword.split(":");
             final Cost convertCost = new Cost(n[1], false);
@@ -3612,7 +3566,7 @@ public class CardFactoryUtil {
                     int counters = AbilityUtils.calculateAmount(c, k[1], this);
                     GameEntityCounterTable table = new GameEntityCounterTable();
                     c.addCounter(CounterEnumType.TIME, counters, getActivatingPlayer(), table);
-                    table.replaceCounterEffect(game, this, false); // this is a special Action, not an Effect
+                    table.replaceCounterEffect(game, this); // this is a special Action, not an Effect
 
                     String sb = TextUtil.concatWithSpace(getActivatingPlayer().toString(),"has suspended", c.getDisplayName(), "with", String.valueOf(counters),"time counters on it.");
                     game.fireEvent(new GameEventAddLog(GameLogEntryType.STACK_RESOLVE, sb));

@@ -40,7 +40,7 @@ public class KeywordWithCost extends KeywordInstance<KeywordWithCost> implements
         String[] allDetails = details.split(":");
         costString = allDetails[0].split("\\|", 2)[0].trim();
         if (!"ManaCost".equals(costString)) {
-            cost = new Cost(costString, false);
+            cost = new Cost(costString, true);
         }
     }
 

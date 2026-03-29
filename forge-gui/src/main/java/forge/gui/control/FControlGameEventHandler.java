@@ -10,6 +10,7 @@ import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiBase;
 import forge.gui.interfaces.IGuiGame;
+import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
@@ -127,7 +128,8 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             if (gameOver) {
                 gameOver = false;
                 if (humanController != null) {
-                    humanController.getInputQueue().onGameOver(true); // this will unlock any game threads waiting for inputs to complete
+                    // this will unlock any game threads waiting for inputs to complete
+                    humanController.getInputQueue().onGameOver(true);
                 }
             }
             if (gameFinished) {
@@ -258,8 +260,10 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(final GameEventSpellAbilityCast event) {
         needStackUpdate = true;
-        if(GuiBase.getInterface().isLibgdxPort()) {
-            return processEvent(); //mobile port don't have notify stack addition like the desktop
+        if (GuiBase.getInterface().isLibgdxPort() ||
+                ForgeConstants.STACK_EFFECT_NOTIFICATION_NEVER.equals(FModel.getPreferences().getPref(FPref.UI_STACK_EFFECT_NOTIFICATION_POLICY))) {
+            // mobile port don't have notify stack addition like the desktop
+            return processEvent();
         } else {
             processEvent();
 
@@ -278,8 +282,8 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(final GameEventSpellRemovedFromStack event) {
         needStackUpdate = true;
-        if(GuiBase.getInterface().isLibgdxPort()) {
-            return processEvent(); //mobile port don't have notify stack addition like the desktop
+        if (GuiBase.getInterface().isLibgdxPort() ||
+                ForgeConstants.STACK_EFFECT_NOTIFICATION_NEVER.equals(FModel.getPreferences().getPref(FPref.UI_STACK_EFFECT_NOTIFICATION_POLICY))) {
         } else {
             processEvent();
 
