@@ -1,0 +1,51 @@
+[duel]
+[metadata]
+Name=The Pied Piper
+Title=The Pied Piper
+Icon=The Pied Piper.jpg
+Difficulty=Medium
+Description=./Standard/Theros_Beyond_Death/Albert_Chyn_-_Esper_Hero_(Standard,_#980745).dck
+Deck Type=constructed
+
+[Main]
+1 Seraph of the Scales
+1 Deputy of Detention
+2 Kunoros, Hound of Athreos
+2 Elite Guardmage
+2 Dream Trawler
+4 Hero of Precinct One
+1 Despark
+1 Dovin's Veto
+1 Mortify
+3 Tyrant's Scorn
+1 Time Wipe
+1 Kaya's Wrath
+1 Revival // Revenge
+3 Discovery // Dispersal
+4 Thought Erasure
+3 Oath of Kaya
+1 Kaya, Orzhov Usurper
+1 Sorin, Vengeful Bloodlord
+3 Teferi, Time Raveler
+1 Temple of Enlightenment
+1 Island
+2 Temple of Silence
+2 Swamp
+2 Fabled Passage
+2 Temple of Deceit
+2 Plains
+4 Watery Grave
+4 Godless Shrine
+4 Hallowed Fountain
+[Sideboard]
+1 Deputy of Detention
+1 Disinformation Campaign
+1 Kaya, Orzhov Usurper
+1 Dovin's Veto
+1 Castle Locthwain
+1 Ashiok, Dream Render
+1 Command the Dreadhorde
+2 Unmoored Ego
+2 Despark
+2 Narset, Parter of Veils
+2 Absorb

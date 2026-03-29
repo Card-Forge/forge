@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Sideshow Bob
+Title=Sideshow Bob
+Icon=Sideshow Bob.jpg
+Difficulty=Very Hard
+Description=./Modern/Edge_of_Eternities/TaylorSpain_-_Azorius_Blink_(Modern,_#2645376).dck
+Deck Type=constructed
+
+[Main]
+4 White Orchid Phantom
+4 Guide of Souls
+4 Ocelot Pride
+4 Phelia, Exuberant Shepherd
+4 Witch Enchanter
+1 Mockingbird
+3 Starfield Shepherd
+4 Quantum Riddler
+1 Containment Priest
+1 Recruiter of the Guard
+4 Solitude
+2 Thraben Charm
+1 Consign to Memory
+4 Ephemerate
+2 Meticulous Archive
+3 Plains
+4 Hallowed Fountain
+4 Flagstones of Trokair
+3 Flooded Strand
+2 Arid Mesa
+1 Marsh Flats
+[Sideboard]
+2 Force of Negation
+1 Orim's Chant
+2 Wrath of the Skies
+2 Consign to Memory
+1 Clarion Conqueror
+1 Containment Priest
+1 Mistcaller
+2 Teferi, Time Raveler
+3 Mystical Dispute

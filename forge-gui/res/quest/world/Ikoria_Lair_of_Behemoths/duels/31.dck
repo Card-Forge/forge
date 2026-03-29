@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=En Sabah Nur
+Title=En Sabah Nur
+Icon=En Sabah Nur.jpg
+Difficulty=Easy
+Description=./Standard/Ikoria_Lair_of_Behemoths/Aaron_Shantz_-_Boros_Cycling_(Standard,_#969451).dck
+Deck Type=constructed
+
+[Main]
+4 Flourishing Fox
+4 Drannith Healer
+4 Valiant Rescuer
+4 Drannith Stinger
+3 Frostveil Ambush
+4 Zenith Flare
+4 Startling Development
+2 Boon of the Wish-Giver
+4 Go for Blood
+4 Memory Leak
+4 Footfall Crater
+4 Sacred Foundry
+5 Mountain
+10 Plains
+[Sideboard]
+1 Devout Decree
+1 Lurrus of the Dream-Den
+2 Fight as One
+2 Light of Hope
+3 Fry
+3 Apostle of Purifying Light
+3 Grafdigger's Cage

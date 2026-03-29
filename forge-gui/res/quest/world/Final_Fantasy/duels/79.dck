@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Professor X
+Title=Professor X
+Icon=Professor X.jpg
+Difficulty=Very Hard
+Description=./Modern/Final_Fantasy/Randy_Uebbing_-_Infect_(Modern,_#2520771).dck
+Deck Type=constructed
+
+[Main]
+4 Blighted Agent
+4 Ignoble Hierarch
+4 Noble Hierarch
+4 Phyrexian Crusader
+4 Tifa Lockhart
+4 Might of Old Krosa
+4 Royal Treatment
+2 Snakeskin Veil
+2 Vines of Vastwood
+4 Preordain
+3 Scale Up
+3 Stock Up
+2 Breeding Pool
+2 Forest
+1 Hedge Maze
+4 Misty Rainforest
+3 Overgrown Tomb
+3 Verdant Catacombs
+1 Waterlogged Grove
+3 Windswept Heath
+[Sideboard]
+3 Consign to Memory
+3 Endurance
+3 Fatal Push
+2 Force of Vigor
+2 Glistener Elf
+2 Veil of Summer

@@ -1,0 +1,14 @@
+[duel]
+[metadata]
+Name=Finn the Human
+Title=Finn the Human
+Icon=Finn the Human.jpg
+Difficulty=Very Hard
+Description=./Modern/Lorwyn_Eclipsed/Magicmalle_-_Ashling,_Rekindled_(Modern,_#2797842).dck
+Deck Type=constructed
+
+[Main]
+1 Ashling, Rekindled
+1 Seasoned Pyromancer
+3 Deep Analysis
+[Sideboard]

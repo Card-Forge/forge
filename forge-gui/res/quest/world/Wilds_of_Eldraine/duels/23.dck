@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Agrus
+Title=Agrus
+Icon=Agrus.jpg
+Difficulty=Medium
+Description=./Standard/Wilds_of_Eldraine/Higuchi_Yuuma_-_WRG_Aggro_(Standard,_#1755695).dck
+Deck Type=constructed
+
+[Main]
+2 Monastery Mentor
+4 Monastery Swiftspear
+4 Pia Nalaar, Consul of Revival
+3 Hearth Elemental
+4 Questing Druid
+1 Lightning Strike
+4 Play with Fire
+3 Soul Partition
+2 Monstrous Rage
+3 Reckless Impulse
+2 Strangle
+4 Wrenn's Resolve
+1 Invasion of Gobakhan
+2 Mountain
+4 Battlefield Forge
+4 Copperline Gorge
+4 Sundown Pass
+1 Eiganjo, Seat of the Empire
+3 Secluded Courtyard
+1 Sokenzan, Crucible of Defiance
+4 Restless Bivouac
+[Sideboard]
+1 Abrade
+3 Wedding Announcement
+2 Unlicensed Hearse
+2 Destroy Evil
+1 Invasion of Gobakhan
+3 Lithomantic Barrage
+1 Nahiri's Warcrafting
+2 Heartflame Duelist

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Mawu
+Title=Mawu
+Icon=Mawu.jpg
+Difficulty=Very Hard
+Description=./Modern/March_of_the_Machine/Sannabe_Shunsuke_-_BR_Evoke_(Modern,_#1626024).dck
+Deck Type=constructed
+
+[Main]
+1 Seasoned Pyromancer
+3 Dauthi Voidwalker
+4 Grief
+4 Fury
+4 Ragavan, Nimble Pilferer
+2 Bloodtithe Harvester
+3 Fable of the Mirror-Breaker
+1 Terminate
+3 Lightning Bolt
+3 Feign Death
+3 Undying Malice
+3 Thoughtseize
+2 Blood Moon
+4 Invasion of Azgol
+3 Snow-Covered Swamp
+1 Snow-Covered Mountain
+4 Blood Crypt
+4 Bloodstained Mire
+2 Polluted Delta
+1 Marsh Flats
+3 Blackcleave Cliffs
+1 Castle Locthwain
+1 Blightstep Pathway
+[Sideboard]
+2 Blood Moon
+2 Collective Brutality
+3 Engineered Explosives
+4 Leyline of the Void
+2 Necromentia
+2 Tourach, Dread Cantor

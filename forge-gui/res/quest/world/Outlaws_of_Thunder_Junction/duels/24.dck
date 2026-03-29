@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Luke Skywalker
+Title=Luke Skywalker
+Icon=Luke Skywalker.jpg
+Difficulty=Medium
+Description=./Standard/Outlaws_of_Thunder_Junction/Adrian_Zhu_-_Temur_Analyst_(Standard,_#2075684).dck
+Deck Type=constructed
+
+[Main]
+4 Aftermath Analyst
+4 Nissa, Resurgent Animist
+1 Shigeki, Jukai Visionary
+4 Memory Deluge
+1 Abrade
+2 Fires of Victory
+4 Ill-Timed Explosion
+4 Virtue of Strength
+2 Worldsoul's Rage
+1 Doppelgang
+3 Spelunking
+4 Brokers Hideout
+3 Cabaretti Courtyard
+7 Forest
+4 Maestros Theater
+2 Riveteers Overlook
+6 Island
+3 Mountain
+1 Boseiju, Who Endures
+[Sideboard]
+2 Pick Your Poison
+2 Negate
+1 Turn the Earth
+1 Lithomantic Barrage
+1 Abrade
+1 Bonny Pall, Clearcutter
+1 Titan of Industry
+2 Vampires' Vengeance
+2 Tishana's Tidebinder
+1 Thrun, Breaker of Silence
+1 Tyrranax Rex

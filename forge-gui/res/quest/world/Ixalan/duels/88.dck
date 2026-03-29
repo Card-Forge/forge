@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Robot88
+Title=Robot88
+Icon=Alouroua.jpg
+Difficulty=Hard
+Description=Abzan Tokens 
+Deck Type=constructed
+
+[Main]
+4 Anointer Priest
+1 Sunscourge Champion
+4 Renegade Map
+4 Fatal Push
+4 Fumigate
+2 Start // Finish
+4 Anointed Procession
+4 Cast Out
+4 Hidden Stockpile
+4 Legion's Landing
+3 Vraska, Relic Seeker
+4 Concealed Courtyard
+4 Evolving Wilds
+1 Forest
+2 Ifnir Deadlands
+6 Plains
+3 Shefet Dunes
+2 Swamp
+[Sideboard]
+1 Arguel's Blood Fast
+2 Authority of the Consuls
+4 Duress
+2 Ixalan's Binding
+2 Lost Legacy
+2 Solemnity
+1 Treasure Map
+1 Vraska's Contempt

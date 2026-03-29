@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Snow White
+Title=Snow White
+Icon=Snow White.jpg
+Difficulty=Hard
+Description=./Modern/Innistrad_Midnight_Hunt/1stTurnNegator_-_Temur_Control_(Modern,_#1218087).dck
+Deck Type=constructed
+
+[Main]
+1 Brazen Borrower
+4 Ice-Fang Coatl
+4 Murktide Regent
+4 Snapcaster Mage
+1 Spell Snare
+1 Spell Pierce
+1 Dead // Gone
+2 Prismari Command
+4 Thought Scour
+4 Lightning Bolt
+4 Consider
+4 Archmage's Charm
+4 Counterspell
+1 Breeding Pool
+1 Castle Vantress
+1 Ketria Triome
+1 Rimewood Falls
+1 Sulfur Falls
+2 Steam Vents
+2 Hall of Storm Giants
+2 Flooded Strand
+3 Snow-Covered Island
+4 Polluted Delta
+4 Misty Rainforest
+[Sideboard]
+1 Test of Talents
+1 Aether Gust
+1 Kozilek, Butcher of Truth
+1 Search for Azcanta
+2 Spreading Seas
+2 Flusterstorm
+2 Engineered Explosives
+2 Alpine Moon
+3 Relic of Progenitus

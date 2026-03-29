@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Ghost Rider
+Title=Ghost Rider
+Icon=Ghost Rider.jpg
+Difficulty=Very Hard
+Description=../Modern/Journey_into_Nyx/SCG_Premier_IQ_Atlanta/John_Jernigan_-_Red_Deck_Wins_(Modern,_#86675).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+3 Grim Lavamancer
+4 Vexing Devil
+3 Boros Charm
+4 Lightning Bolt
+3 Searing Blood
+3 Shard Volley
+4 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+4 Battlefield Forge
+4 Mountain
+4 Sacred Foundry
+4 Scalding Tarn
+[Sideboard]
+1 Combust
+4 Molten Rain
+1 Shattering Spree
+3 Smash to Smithereens
+4 Stony Silence
+2 Wear // Tear

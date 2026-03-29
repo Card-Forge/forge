@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=R2-D2
+Title=R2-D2
+Icon=R2-D2.jpg
+Difficulty=Very Hard
+Description=./Modern/Murders_at_Karlov_Manor/ALLEN_chan_-_Not_Dead_(Modern,_#1966416).dck
+Deck Type=constructed
+
+[Main]
+4 Shardless Agent
+1 Brazen Borrower
+3 Subtlety
+4 Scion of Draco
+3 Tishana's Tidebinder
+2 Force of Negation
+2 Flame of Anor
+4 Crashing Footfalls
+4 Lórien Revealed
+4 Ardent Plea
+4 Leyline Binding
+4 Leyline of the Guildpact
+1 Plains
+1 Island
+1 Forest
+1 Breeding Pool
+1 Hallowed Fountain
+1 Steam Vents
+4 Flooded Strand
+1 Mutavault
+2 Arid Mesa
+4 Misty Rainforest
+1 Temple Garden
+1 Xander's Lounge
+1 Lush Portico
+1 Thundering Falls
+[Sideboard]
+2 Magus of the Moon
+2 Dismember
+2 Teferi, Time Raveler
+1 Force of Negation
+2 Force of Vigor
+3 Mystical Dispute
+3 Endurance

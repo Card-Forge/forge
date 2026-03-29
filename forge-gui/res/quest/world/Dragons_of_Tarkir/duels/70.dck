@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Walle
+Title=Walle
+Icon=Walle.jpg
+Difficulty=Very Hard
+Description=../Modern/Dragons_of_Tarkir/Magic-League_Modern_Trial/Duodax_-_Burn_(Modern,_#612079).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+1 Grim Lavamancer
+4 Monastery Swiftspear
+4 Wild Nacatl
+1 Zurgo Bellstriker
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+2 Searing Blaze
+4 Lava Spike
+4 Rift Bolt
+3 Arid Mesa
+3 Bloodstained Mire
+2 Mountain
+3 Sacred Foundry
+3 Scalding Tarn
+3 Stomping Ground
+3 Wooded Foothills
+[Sideboard]
+4 Destructive Revelry
+4 Kor Firewalker
+4 Molten Rain
+1 Smash to Smithereens

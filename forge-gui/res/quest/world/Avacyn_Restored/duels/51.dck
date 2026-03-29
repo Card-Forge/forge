@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Doran
+Title=Doran
+Icon=Doran.jpg
+Difficulty=Very Hard
+Description=../Modern/Avacyn_Restored/PPTQ_L┬┤Antro_dell┬┤Orco_-_Messina,_Italy/Angelo_Schembri_-_Infect_(Modern,_#211989).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blighted Agent
+4 Glistener Elf
+2 Ichorclaw Myr
+4 Noble Hierarch
+2 Spellskite
+3 Apostle's Blessing
+4 Groundswell
+4 Might of Old Krosa
+4 Vines of Vastwood
+3 Distortion Strike
+4 Rancor
+2 Wild Defiance
+3 Breeding Pool
+3 Forest
+4 Inkmoth Nexus
+4 Misty Rainforest
+2 Pendelhaven
+4 Verdant Catacombs
+[Sideboard]
+2 Carrion Call
+2 Dispel
+1 Dryad Arbor
+3 Nature's Claim
+2 Spell Pierce
+2 Viridian Corrupter

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Dont Play With Matches
+Title=Dont Play With Matches
+Icon=Dont Play With Matches.jpg
+Difficulty=Hard
+Description=./Modern/Edge_of_Eternities/Isaac_Dodd_-_Mono-Green_Tron_(Modern,_#2685372).dck
+Deck Type=constructed
+
+[Main]
+4 Devourer of Destiny
+4 Sowing Mycospawn
+2 Thought-Knot Seer
+1 Ulamog, the Ceaseless Hunger
+4 Expedition Map
+4 Talisman of Resilience
+3 Chalice of the Void
+3 Trinisphere
+4 Kozilek's Command
+1 All Is Dust
+4 Karn, the Great Creator
+4 Ugin, Eye of the Storms
+4 Eldrazi Temple
+4 Ugin's Labyrinth
+4 Urza's Mine
+4 Urza's Power Plant
+4 Urza's Tower
+1 Boseiju, Who Endures
+1 Forest
+[Sideboard]
+2 Dismember
+2 The Stone Brain
+1 Cityscape Leveler
+1 Disruptor Flute
+1 Ensnaring Bridge
+1 Extinguisher Battleship
+1 Haywire Mite
+1 Kozilek, Butcher of Truth
+1 Liquimetal Coating
+1 Tormod's Crypt
+1 Torpor Orb
+1 Walking Ballista
+1 Wurmcoil Engine

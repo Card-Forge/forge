@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=IdiAmin
+Title=IdiAmin
+Icon=IdiAmin.jpg
+Difficulty=Very Hard
+Description=../Modern/Journey_into_Nyx/PTQ_Khans_of_Tarkir_-_Springfield,_MO/Chipper_Doudican_-_Red_Deck_Wins_(Modern,_#85052).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+1 Grim Lavamancer
+4 Boros Charm
+4 Lightning Bolt
+4 Lightning Helix
+3 Searing Blaze
+1 Shard Volley
+4 Skullcrack
+4 Bump in the Night
+3 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+4 Blackcleave Cliffs
+1 Blood Crypt
+1 Marsh Flats
+2 Mountain
+3 Sacred Foundry
+4 Scalding Tarn
+1 Stomping Ground
+[Sideboard]
+2 Combust
+4 Destructive Revelry
+2 Rain of Gore
+2 Rakdos Charm
+2 Relic of Progenitus
+3 Searing Blood

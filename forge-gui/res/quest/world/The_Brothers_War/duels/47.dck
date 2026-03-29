@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Abiku
+Title=Abiku
+Icon=Abiku.jpg
+Difficulty=Easy
+Description=./Standard/The_Brothers_War/Mah_Quintanilha_-_Esper_Midrange_(Standard,_#1519254).dck
+Deck Type=constructed
+
+[Main]
+1 Ertai Resurrected
+1 Ao, the Dawn Sky
+1 Sanctuary Warden
+1 Edgar, Charmed Groom
+2 Phyrexian Missionary
+2 Misery's Shadow
+2 Tenacious Underdog
+3 Sheoldred, the Apocalypse
+3 Dennick, Pious Apprentice
+3 Raffine, Scheming Seer
+3 Steel Seraph
+4 Gix, Yawgmoth Praetor
+2 Go for the Throat
+2 Infernal Grasp
+2 Cut Down
+2 Teferi, Temporal Pilgrim
+1 Plains
+1 Otawara, Soaring City
+1 Underground River
+1 Underground River
+1 Caves of Koilos
+1 Takenuma, Abandoned Mire
+1 Eiganjo, Seat of the Empire
+2 Plaza of Heroes
+2 Caves of Koilos
+3 Adarkar Wastes
+4 Shipwreck Marsh
+4 Raffine's Tower
+4 Shattered Sanctum
+[Sideboard]
+1 Negate
+1 Loran of the Third Path
+2 Negate
+2 Gix's Command
+2 Reckoner Bankbuster
+2 Destroy Evil
+2 Disdainful Stroke
+3 Duress

@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Pinky and the Brain
+Title=Pinky and the Brain
+Icon=Pinky and the Brain.jpg
+Difficulty=Very Hard
+Description=./Modern/Dominaria_United/Aaron_Acosta_-_Abzan_Affinity_(Modern,_#1475093).dck
+Deck Type=constructed
+
+[Main]
+1 Emrakul, the Aeons Torn
+1 Serra's Emissary
+2 Fable of the Mirror-Breaker
+2 Lightning Bolt
+3 Remand
+3 Fire // Ice
+3 Prismari Command
+1 Transmogrify
+3 Hard Evidence
+4 Indomitable Creativity
+4 Leyline Binding
+1 Nahiri, the Harbinger
+4 Wrenn and Six
+4 Teferi, Time Raveler
+1 Ketria Triome
+1 Raugrin Triome
+1 Stomping Ground
+1 Plains
+2 Sacred Foundry
+2 Steam Vents
+2 Bloodstained Mire
+2 Wooded Foothills
+4 Scalding Tarn
+4 Dwarven Mine
+4 Arid Mesa
+[Sideboard]
+1 Iona, Shield of Emeria
+2 Boseiju, Who Endures
+2 Hallowed Moonlight
+2 Blossoming Calm
+2 Flusterstorm
+2 Mystical Dispute
+2 Veil of Summer
+2 Wear // Tear

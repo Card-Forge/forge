@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Krypto
+Title=Krypto
+Icon=Krypto.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Midnight_Hunt/manacymbal_-_MOdern_-_Sultai_Reclamation_(Modern,_#1211083).dck
+Deck Type=constructed
+
+[Main]
+2 Endurance
+4 Ice-Fang Coatl
+1 Nexus of Fate
+1 Mystical Teachings
+1 Sultai Charm
+1 Consume the Meek
+2 Archmage's Charm
+2 Memory Deluge
+3 Cryptic Command
+4 Fatal Push
+4 Counterspell
+4 Growth Spiral
+2 Shark Typhoon
+3 Wilderness Reclamation
+2 Jace, the Mind Sculptor
+1 Rimewood Falls
+1 Snow-Covered Swamp
+1 Watery Grave
+1 Hall of Storm Giants
+1 Castle Vantress
+2 Zagoth Triome
+2 Snow-Covered Forest
+2 Prismatic Vista
+2 Breeding Pool
+2 Polluted Delta
+3 Snow-Covered Island
+3 Field of Ruin
+4 Misty Rainforest
+[Sideboard]
+1 Ashiok, Nightmare Muse
+1 Assassin's Trophy
+1 Fracturing Gust
+1 Endurance
+2 Flusterstorm
+2 Chalice of the Void
+2 Abrupt Decay
+2 Weather the Storm
+3 Veil of Summer

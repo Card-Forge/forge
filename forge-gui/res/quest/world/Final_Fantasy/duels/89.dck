@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Sentinel
+Title=Sentinel
+Icon=Sentinel.jpg
+Difficulty=Very Hard
+Description=./Modern/Final_Fantasy/DB_Taracogenius_-_Boros_Energy_(Modern,_#2522672).dck
+Deck Type=constructed
+
+[Main]
+4 Ocelot Pride
+4 Guide of Souls
+4 Phlage, Titan of Fire's Fury
+4 Ajani, Nacatl Pariah
+2 Voice of Victory
+4 Joshua, Phoenix's Dominant
+2 Magus of the Moon
+4 Thalia, Guardian of Thraben
+4 Ragavan, Nimble Pilferer
+4 Galvanic Discharge
+2 Elegant Parlor
+3 Arena of Glory
+3 Flooded Strand
+2 Windswept Heath
+4 Sacred Foundry
+3 Snow-Covered Plains
+1 Snow-Covered Mountain
+4 Arid Mesa
+2 Marsh Flats
+[Sideboard]
+1 Clarion Conqueror
+4 Kataki, War's Wage
+2 Magus of the Moon
+4 Drannith Magistrate
+4 Unlicensed Hearse

@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Galadriel
+Title=Galadriel
+Icon=Galadriel.jpg
+Difficulty=Medium
+Description=./Standard/Zendikar_Rising/Adam_Hernandez_-_Omnath_Adventures_(Standard,_#1044635).dck
+Deck Type=constructed
+
+[Main]
+1 Giant Killer
+1 Kenrith, the Returned King
+2 Brazen Borrower
+2 Lovestruck Beast
+4 Fae of Wishes
+4 Edgewall Innkeeper
+4 Omnath, Locus of Creation
+4 Bonecrusher Giant
+4 Beanstalk Giant
+4 Lucky Clover
+1 Bala Ged Recovery
+1 Shatterskull Smashing
+3 Escape to the Wilds
+1 Plains
+2 Ketria Triome
+2 Raugrin Triome
+2 Mountain
+3 Riverglide Pathway
+3 Cragcrown Pathway
+3 Fabled Passage
+4 Forest
+5 Island
+[Sideboard]
+1 Escape to the Wilds
+1 Fabled Passage
+1 Fling
+1 Negate
+1 Neutralize
+1 Once and Future
+1 Primal Might
+1 Redcap Melee
+1 Return to Nature
+1 Shadowspear
+1 Stern Dismissal
+1 Storm's Wrath
+1 Ugin, the Spirit Dragon
+2 Mystical Dispute

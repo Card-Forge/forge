@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Fat Albert
+Title=Fat Albert
+Icon=Fat Albert.jpg
+Difficulty=Easy
+Description=Gatecrash/SCG_Classic_Pittsburgh/Devin_Hileman_-_Boros_(Standard,_#51674).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ash Zealot
+1 Aurelia, the Warleader
+4 Boros Reckoner
+3 Burning-Tree Emissary
+3 Firefist Striker
+3 Hellrider
+4 Lightning Mauler
+4 Rakdos Cackler
+4 Stromkirk Noble
+3 Boros Charm
+4 Searing Spear
+2 Pillar of Flame
+4 Clifftop Retreat
+13 Mountain
+4 Sacred Foundry
+[Sideboard]
+2 Aurelia's Fury
+2 Blasphemous Act
+3 Skullcrack
+2 Spark Trooper
+3 Volcanic Strength

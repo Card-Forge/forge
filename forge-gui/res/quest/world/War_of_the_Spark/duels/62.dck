@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Aqueduct
+Title=Aqueduct
+Icon=Aqueduct.jpg
+Difficulty=Hard
+Description=./Modern/War_of_the_Spark/SoIMBA_Airwave_-_Jund_Eldrazi_(Modern,_#800366).dck
+Deck Type=constructed
+
+[Main]
+4 Birds of Paradise
+4 Bloodbraid Elf
+4 Eldrazi Obligator
+4 Goblin Rabblemaster
+2 Gruul Spellbreaker
+4 Noble Hierarch
+4 Reality Smasher
+4 Thought-Knot Seer
+3 Lightning Bolt
+4 Ancient Stirrings
+2 Domri, Anarch of Bolas
+2 Cavern of Souls
+4 Eldrazi Temple
+2 Forest
+4 Grove of the Burnwillows
+4 Karplusan Forest
+1 Kessig Wolf Run
+1 Mountain
+1 Stomping Ground
+2 Wooded Foothills
+[Sideboard]
+1 Abrade
+2 Alpine Moon
+2 Anger of the Gods
+2 Cindervines
+2 Damping Sphere
+2 Lava Coil
+1 Reclamation Sage
+2 Relic of Progenitus
+1 Scavenging Ooze

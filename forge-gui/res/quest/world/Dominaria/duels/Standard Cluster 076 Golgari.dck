@@ -1,0 +1,45 @@
+[metadata]
+Name=Golgari
+Deck Type=constructed
+Title=Golgari
+Description=Golgari
+Difficulty=Hard
+Icon=Preacher
+[Main]
+3 Aether Hub
+1 Aethersphere Harvester
+1 Arch of Orazca
+4 Blooming Marsh
+3 Blossoming Defense
+3 Fatal Push
+1 Forest
+1 Forest
+1 Forest
+1 Forest
+4 Foul Orchard
+4 Glint-Sleeve Siphoner
+1 Hashep Oasis
+2 Ifnir Deadlands
+4 Jadelight Ranger
+1 Liliana, Death's Majesty
+2 Ravenous Chupacabra
+2 Rishkar, Peema Renegade
+1 Scavenger Grounds
+2 Swamp
+2 Swamp
+1 Thrashing Brontodon
+3 Verdurous Gearhulk
+3 Vraska's Contempt
+1 Vraska, Relic Seeker
+4 Walking Ballista
+4 Winding Constrictor
+[Sideboard]
+1 Carnage Tyrant
+3 Deathgorge Scavenger
+3 Duress
+2 Gonti, Lord of Luxury
+1 Lifecrafter's Bestiary
+1 Liliana, Death's Majesty
+2 Lost Legacy
+1 Thrashing Brontodon
+1 Yahenni's Expertise

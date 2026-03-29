@@ -1,0 +1,44 @@
+[metadata]
+Name=Rakdos
+Deck Type=constructed
+Title=Rakdos
+Description=Rakdos
+Difficulty=Medium
+Icon=BaronSamedi
+[Main]
+4 Abrade
+3 Aethersphere Harvester
+4 Bomat Courier
+2 Canyon Slough
+3 Chandra, Torch of Defiance
+4 Dragonskull Summit
+1 Glorybringer
+2 Hazoret the Fervent
+1 Ifnir Deadlands
+4 Inventor's Apprentice
+2 Mountain
+4 Mountain
+2 Mountain
+1 Mountain
+3 Pia Nalaar
+1 Rekindling Phoenix
+1 Scavenger Grounds
+4 Scrapheap Scrounger
+4 Spire of Industry
+1 Swamp
+1 Swamp
+1 Swamp
+3 Unlicensed Disintegration
+4 Walking Ballista
+[Sideboard]
+1 Angrath, the Flame-Chained
+1 Arguel's Blood Fast
+1 Bontu's Last Reckoning
+1 Canyon Slough
+1 Dire Fleet Daredevil
+3 Doomfall
+2 Fatal Push
+1 Glorybringer
+1 Hazoret the Fervent
+1 Noxious Gearhulk
+2 Sweltering Suns

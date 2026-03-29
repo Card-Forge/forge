@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Silver Surfer
+Title=Silver Surfer
+Icon=Silver Surfer.jpg
+Difficulty=Hard
+Description=./Modern/Wilds_of_Eldraine/Masuda_Masahito_-_BR_Evoke_(Modern,_#1753174).dck
+Deck Type=constructed
+
+[Main]
+1 Kroxa, Titan of Death's Hunger
+4 Dauthi Voidwalker
+4 Grief
+4 Fury
+4 Ragavan, Nimble Pilferer
+4 Fable of the Mirror-Breaker
+4 Orcish Bowmasters
+3 Terminate
+2 Lightning Bolt
+2 Feign Death
+4 Not Dead After All
+4 Thoughtseize
+3 Swamp
+4 Blood Crypt
+4 Bloodstained Mire
+4 Polluted Delta
+3 Blackcleave Cliffs
+1 Castle Locthwain
+1 Takenuma, Abandoned Mire
+[Sideboard]
+1 Fatal Push
+3 Blood Moon
+3 Engineered Explosives
+3 Leyline of the Void
+3 Chalice of the Void
+2 Sheoldred, the Apocalypse

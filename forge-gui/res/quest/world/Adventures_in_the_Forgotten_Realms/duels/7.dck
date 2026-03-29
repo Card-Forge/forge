@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Zegana
+Title=Zegana
+Icon=Zegana.jpg
+Difficulty=Easy
+Description=./Standard/Adventures_in_the_Forgotten_Realms/Platinum-Mythic_Rank_Player_-_Angels_(Standard,_#1219694).dck
+Deck Type=constructed
+
+[Main]
+1 Legion Angel
+1 Shepherd of Heroes
+1 Valkyrie Harbinger
+2 Angel of Destiny
+4 Luminarch Aspirant
+4 Righteous Valkyrie
+4 Youthful Valkyrie
+4 Vengeful Reaper
+2 Valkyrie's Sword
+1 Blood on the Snow
+2 Agadeem's Awakening
+2 Ascent of the Worthy
+2 Cleric Class
+2 Rampage of the Valkyries
+2 Paladin Class
+3 Firja's Retribution
+4 Snowfield Sinkhole
+8 Snow-Covered Swamp
+11 Snow-Covered Plains
+[Sideboard]
+2 Legion Angel

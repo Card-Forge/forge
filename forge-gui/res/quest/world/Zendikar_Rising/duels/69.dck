@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=The Spectre
+Title=The Spectre
+Icon=The Spectre.jpg
+Difficulty=Hard
+Description=./Modern/Zendikar_Rising/Artem_Kuhtin_-_Spirits_(Modern,_#1089158).dck
+Deck Type=constructed
+
+[Main]
+2 Spectral Sailor
+3 Shacklegeist
+3 Selfless Spirit
+4 Rattlechains
+4 Mausoleum Wanderer
+4 Skyclave Apparition
+4 Spell Queller
+4 Supreme Phantom
+4 Drogskol Captain
+4 Aether Vial
+3 Path to Exile
+1 Waterlogged Grove
+1 Moorland Haunt
+2 Horizon Canopy
+2 Island
+2 Plains
+2 Hallowed Fountain
+3 Cavern of Souls
+4 Flooded Strand
+4 Seachrome Coast
+[Sideboard]
+1 Remorseful Cleric
+1 Kira, Great Glass-Spinner
+1 Path to Exile
+2 Rest in Peace
+2 Aven Mindcensor
+2 Disdainful Stroke
+3 Damping Sphere
+3 Kor Firewalker

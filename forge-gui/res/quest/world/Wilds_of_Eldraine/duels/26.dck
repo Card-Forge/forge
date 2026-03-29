@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Jubilee
+Title=Jubilee
+Icon=Jubilee.jpg
+Difficulty=Medium
+Description=./Standard/Wilds_of_Eldraine/Marcio_Carvalho_-_Enchantment_Aggro_(Standard,_#1740424).dck
+Deck Type=constructed
+
+[Main]
+3 Katilda, Dawnhart Martyr
+4 The Restoration of Eiganjo
+4 Spirited Companion
+4 Generous Visitor
+4 Jukai Naturalist
+4 Calix, Guided by Fate
+2 Yenna, Redtooth Regent
+4 Commune with Spirits
+3 Hallowed Haunting
+4 Wedding Announcement
+4 Ossification
+5 Plains
+5 Forest
+4 Brushland
+4 Razorverge Thicket
+1 Boseiju, Who Endures
+1 Eiganjo, Seat of the Empire
+[Sideboard]

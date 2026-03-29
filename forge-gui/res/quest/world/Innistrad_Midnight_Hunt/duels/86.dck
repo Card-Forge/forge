@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=King Kong
+Title=King Kong
+Icon=King Kong.jpg
+Difficulty=Hard
+Description=./Modern/Innistrad_Midnight_Hunt/Tiago_Scheller_-_Rakdos_Aggro_(Modern,_#1225781)_[!].dck
+Deck Type=constructed
+
+[Main]
+3 Jadar, Ghoulcaller of Nephalia
+3 Undead Augur
+4 Mayhem Devil
+4 Geralf's Messenger
+4 Bloodghast
+4 Gravecrawler
+4 Stitcher's Supplier
+4 Carrion Feeder
+4 Champion of the Perished
+2 Bone Shards
+4 Goblin Bombardment
+1 Verdant Catacombs
+1 Urborg, Tomb of Yawgmoth
+1 Godless Shrine
+2 Swamp
+2 Bloodstained Mire
+2 Blood Crypt
+3 Cavern of Souls
+4 Blackcleave Cliffs
+4 Marsh Flats
+[Sideboard]
+1 Bone Shards
+3 Void Mirror
+3 Alpine Moon
+4 Prismatic Ending
+4 Leyline of the Void

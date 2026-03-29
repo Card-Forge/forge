@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=The Court Jester
+Title=The Court Jester
+Icon=The Court Jester.jpg
+Difficulty=Hard
+Description=./Modern/Kamigawa_Neon_Dynasty/Aaron_Chew_-_Azorius_Affinity_(Modern,_#1456843)_[!].dck
+Deck Type=constructed
+
+[Main]
+2 Urza, Lord High Artificer
+3 Memnite
+4 Esper Sentinel
+4 Ingenious Smith
+4 Thought Monitor
+1 Aether Spellbomb
+1 Relic of Progenitus
+1 Shadowspear
+1 Nettlecyst
+1 Pithing Needle
+2 Cranial Plating
+3 Springleaf Drum
+4 Portable Hole
+3 Metallic Rebuke
+3 Thoughtcast
+4 Urza's Saga
+2 Teferi, Time Raveler
+1 Otawara, Soaring City
+1 Island
+1 Plains
+2 Spire of Industry
+4 Darksteel Citadel
+4 Razortide Bridge
+4 Seachrome Coast
+[Sideboard]
+1 March of Otherworldly Light
+1 Teferi, Time Raveler
+1 Hurkyl's Recall
+2 Meddling Mage
+2 Disenchant
+2 Etched Champion
+3 Dispatch
+3 Lavinia, Azorius Renegade

@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Sphinx
+Title=Sphinx
+Icon=Sphinx.jpg
+Difficulty=Very Hard
+Description=./Modern/Tarkir_Dragonstorm/manacymbal_-_TDS_-_Mox_of_Magmatic_(Modern,_#2440008).dck
+Deck Type=constructed
+
+[Main]
+4 Fable of the Mirror-Breaker
+4 Krenko's Buzzcrusher
+4 Magmatic Hellkite
+4 Seasoned Pyromancer
+4 Mishra's Research Desk
+4 Mox Opal
+4 Pyrite Spellbomb
+4 Relic of Progenitus
+1 Shadowspear
+4 Galvanic Blast
+4 Urza's Saga
+4 Darksteel Citadel
+4 Demolition Field
+4 Field of Ruin
+7 Mountain
+[Sideboard]
+3 Brotherhood's End
+3 Dead // Gone
+4 Leyline of Combustion
+3 Molten Rain
+2 Pithing Needle

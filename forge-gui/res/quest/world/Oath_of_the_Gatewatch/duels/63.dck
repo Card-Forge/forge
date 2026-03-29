@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Sharee
+Title=Sharee
+Icon=Sharee.jpg
+Difficulty=Very Hard
+Description=../Modern/Oath_of_the_Gatewatch/Big_Modern_Evolution_Central/David_Marg_-_Infect_(Modern,_#602346).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blighted Agent
+4 Glistener Elf
+4 Noble Hierarch
+2 Spellskite
+2 Viridian Corrupter
+2 Apostle's Blessing
+2 Become Immense
+4 Groundswell
+4 Might of Old Krosa
+4 Mutagenic Growth
+4 Vines of Vastwood
+2 Slip Through Space
+1 Rancor
+1 Wild Defiance
+2 Breeding Pool
+2 Forest
+4 Inkmoth Nexus
+2 Misty Rainforest
+2 Pendelhaven
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+1 Dismember
+2 Dispel
+1 Dryad Arbor
+2 Feed the Clan
+1 Hurkyl's Recall
+3 Nature's Claim
+2 Spell Pierce
+2 Twisted Image

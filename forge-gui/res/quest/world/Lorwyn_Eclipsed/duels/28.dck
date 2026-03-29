@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Albert Einstein
+Title=Albert Einstein
+Icon=Albert Einstein.jpg
+Difficulty=Easy
+Description=./Standard/Lorwyn_Eclipsed/Kora_Benck_-_Four-Color_Allies_(Standard,_#2785538).dck
+Deck Type=constructed
+
+[Main]
+4 Aang, Swift Savior
+4 Earth Kingdom Protectors
+4 Earth King's Lieutenant
+4 Earthen Ally
+4 Great Divide Guide
+4 South Pole Voyager
+3 Boiling Rock Rioter
+2 Katara, the Fearless
+1 Hakoda, Selfless Commander
+4 Allies at Last
+4 Celestial Reunion
+4 Cavern of Souls
+4 Jasmine Dragon Tea Shop
+4 Starting Town
+3 Breeding Pool
+3 Temple Garden
+2 Hallowed Fountain
+1 Hushwood Verge
+1 Plains
+[Sideboard]
+3 Mai, Scornful Striker
+3 Seam Rip
+3 Spider-Sense
+3 Winnowing
+2 Chomping Changeling
+1 Soul-Guide Lantern

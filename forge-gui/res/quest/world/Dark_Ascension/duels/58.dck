@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Swan
+Title=Swan
+Icon=Swan.jpg
+Difficulty=Very Hard
+Description=../Modern/Dark_Ascension/WPN_Qualifier_Modern_Turniers_vom_10.07.2012/Krug_Christian_-_Rogue_(Modern,_#34347).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Dark Confidant
+4 Delver of Secrets
+3 Grim Lavamancer
+3 Tarmogoyf
+1 Doom Blade
+1 Go for the Throat
+3 Gut Shot
+4 Lightning Bolt
+4 Mana Leak
+3 Remand
+1 Smother
+3 Spell Pierce
+2 Spell Snare
+1 Forked Bolt
+4 Serum Visions
+1 Island
+3 Misty Rainforest
+3 Scalding Tarn
+3 Steam Vents
+1 Stomping Ground
+1 Swamp
+2 Verdant Catacombs
+2 Watery Grave
+[Sideboard]
+4 Ancient Grudge
+2 Deathmark
+2 Disfigure
+2 Dispel
+2 Grafdigger's Cage
+3 Surgical Extraction

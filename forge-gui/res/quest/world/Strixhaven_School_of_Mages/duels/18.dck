@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Barney Rubble
+Title=Barney Rubble
+Icon=Barney Rubble.jpg
+Difficulty=Medium
+Description=./Standard/Strixhaven_School_of_Mages/Case_Johnson_-_Temur_Adventures_(Obosh)_(Standard,_#1176067).dck
+Deck Type=constructed
+
+[Main]
+2 Koma, Cosmos Serpent
+3 Llanowar Visionary
+4 Lovestruck Beast
+4 Edgewall Innkeeper
+4 Bonecrusher Giant
+4 Brazen Borrower
+1 Prismari Command
+1 Spikefield Hazard
+3 Saw It Coming
+1 Song-Mad Treachery
+3 Alrund's Epiphany
+3 Lukka, Coppercoat Outcast
+2 Forest
+2 Island
+2 Mountain
+2 Hall of Oracles
+3 Fabled Passage
+4 Ketria Triome
+4 Cragcrown Pathway
+4 Riverglide Pathway
+4 Barkchannel Pathway
+[Sideboard]
+1 Obosh, the Preypiercer
+2 Broken Wings
+2 Ox of Agonas
+2 Klothys, God of Destiny
+2 Crush the Weak
+3 Redcap Melee
+3 Mystical Dispute

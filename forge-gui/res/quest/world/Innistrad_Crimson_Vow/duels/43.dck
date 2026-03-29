@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Isis
+Title=Isis
+Icon=Isis.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Crimson_Vow/IzzetABCannon_-_Jund_Midrange_(Standard,_#1248779).dck
+Deck Type=constructed
+
+[Main]
+1 Valki, God of Lies
+3 Halana and Alena, Partners
+4 Immersturm Predator
+4 Goldspan Dragon
+4 Graveyard Trespasser
+4 Reckless Stormseeker
+4 Kalain, Reclusive Painter
+4 Esika's Chariot
+1 Flunk
+2 Infernal Grasp
+2 Abrade
+3 Shatterskull Smashing
+1 Swamp
+1 Forest
+2 Haunted Ridge
+2 Hive of the Eye Tyrant
+3 Rockfall Vale
+3 Mountain
+4 Cragcrown Pathway
+4 Blightstep Pathway
+4 Darkbore Pathway
+[Sideboard]
+2 Baleful Mastery
+3 Burning Hands
+3 Ray of Enfeeblement
+3 Go Blank
+4 Check for Traps
