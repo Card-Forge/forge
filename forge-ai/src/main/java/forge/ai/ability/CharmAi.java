@@ -14,6 +14,8 @@ import forge.util.collect.FCollection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class CharmAi extends SpellAbilityAi {
     @Override
@@ -32,6 +34,7 @@ public class CharmAi extends SpellAbilityAi {
 
         boolean timingRight = sa.isTrigger(); //is there a reason to play the charm now?
         boolean choiceForOpp = !ai.equals(sa.getActivatingPlayer());
+        boolean eachModeMustTargetADifferentPlayer = Boolean.parseBoolean(sa.getParamOrDefault("EachModeMustTargetADifferentPlayer", "false"));
 
         // Reset the chosen list otherwise it will be locked in forever by earlier calls
         sa.setChosenList(null);
@@ -44,6 +47,12 @@ public class CharmAi extends SpellAbilityAi {
             chosenList = choices.subList(1, choices.size());
         } else if ("Triskaidekaphobia".equals(ComputerUtilAbility.getAbilitySourceName(sa))) {
             chosenList = chooseTriskaidekaphobia(choices, ai);
+        } else if (eachModeMustTargetADifferentPlayer && min > 1) {
+            if (min > ai.getGame().getPlayers().size() || min > choices.size()) {
+                // not enough different players or modes to choose from
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
+            chosenList = chooseEachModeMustTargetADifferentPlayer(choices, timingRight, min, num, sa, ai);
         } else {
             // only randomize if not all possible together
             if (num < choices.size()) {
@@ -89,6 +98,57 @@ public class CharmAi extends SpellAbilityAi {
         }
 
         return super.checkApiLogic(ai, sa);
+    }
+
+    private boolean addedTheLastChoice(List<AbilitySub> chosenList, List<AbilitySub> choices, AbilitySub chosenMode, Player player, int num) {
+        chosenMode.resetTargets();
+        chosenMode.getTargets().add(player);
+        chosenList.add(chosenMode);
+        choices.remove(chosenMode);
+        return chosenList.size() == num;
+    }
+
+    private List<AbilitySub> chooseEachModeMustTargetADifferentPlayer(List<AbilitySub> choices, boolean isTrigger, int min, int num, SpellAbility sa, Player ai) {
+        List<AbilitySub> chosenList = Lists.newArrayList();
+        List<AbilitySub> choicesForAi = chooseOptionsAi(sa, choices, ai, isTrigger, 1, 1);
+        if (choicesForAi.isEmpty()) {
+            // nothing found for AI, do not bother assigning other modes to other players
+            return chosenList;
+        } else if (addedTheLastChoice(chosenList, choices, choicesForAi.get(0), ai, num)) {
+            return chosenList;
+        }
+
+        Map<Boolean, List<Player>> playersByAi = ai.getGame().getPlayers().stream().collect(Collectors.partitioningBy(player -> player.getController().isAI()));
+
+        //try to find choices for other AI players first
+        for (Player otherAi : playersByAi.getOrDefault(Boolean.TRUE, List.of())) {
+            if (ai.equals(otherAi)) {
+                // already assigned the best choice
+                continue;
+            }
+            List<AbilitySub> choicesForOtherAi = chooseOptionsAi(sa, choices, otherAi, isTrigger, 1, 1);
+            if (!choicesForOtherAi.isEmpty() && addedTheLastChoice(chosenList, choices, choicesForOtherAi.get(0), otherAi, num)) {
+                return chosenList;
+            }
+        }
+
+        //assign the remaining choices to human players at random
+        List<Player> humanPlayers = playersByAi.getOrDefault(Boolean.FALSE, List.of());
+        int remainingChoices = min - chosenList.size();
+        if (remainingChoices > 0 && humanPlayers.size() >= remainingChoices && choices.size() >= remainingChoices) {
+            Collections.shuffle(choices);
+            for (int i = 0; i < remainingChoices; i++) {
+                if (addedTheLastChoice(chosenList, choices, choices.get(i), humanPlayers.get(i), num)) {
+                    return chosenList;
+                }
+            }
+        }
+
+        if(chosenList.size() < min) {
+            // not enough choices
+            chosenList.clear();
+        }
+        return chosenList;
     }
 
     private List<AbilitySub> chooseOptionsAi(SpellAbility sa, List<AbilitySub> choices, final Player ai, boolean isTrigger, int num, int min) {

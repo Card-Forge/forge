@@ -161,6 +161,10 @@ public class CharmEffect extends SpellAbilityEffect {
             }
         }
 
+        if (Boolean.parseBoolean(sa.getParamOrDefault("EachModeMustTargetADifferentPlayer", "false"))) {
+            sb.append(". Each mode must target a different player.");
+        }
+
         if (!includeChosen) {
             sb.append(num == 1 ? " mode." : " modes.");
         } else if (!list.isEmpty()) {
