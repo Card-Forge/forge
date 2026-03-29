@@ -41,7 +41,6 @@ public class LegendaryRuleAi extends SpellAbilityAi {
         } else {
             // AI decision making - should AI compare damage and debuffs?
         }
-
         CounterType ice = CounterType.getType("ICE");
         CounterType ki = CounterType.getType("KI");
 
