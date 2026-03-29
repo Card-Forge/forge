@@ -3,7 +3,7 @@ Name:Possibility Storm - Ixalan #01
 URL:http://www.possibilitystorm.com/wp-content/uploads/2017/09/W_XLN01.jpg
 Goal:Win
 Turns:1
-Difficulty:Hard
+Difficulty:Rare
 Description:Win this turn. Your opponent does not have mana available and therefore can't activate Oketra's ability.
 [state]
 humanlife=20
