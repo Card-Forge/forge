@@ -90,7 +90,7 @@
   &quot;type&quot;: &quot;card&quot;,
   &quot;count&quot;: 1,
   &quot;cardName&quot;: &quot;Call from the Grave&quot;,
-  &quot;editions&quot;: [ "PAST" ]
+  &quot;editions&quot;: [ &quot;PAST&quot; ]
 },
 {
   &quot;type&quot;: &quot;card&quot;,
@@ -116,11 +116,6 @@
   &quot;type&quot;: &quot;card&quot;,
   &quot;count&quot;: 1,
   &quot;cardName&quot;: &quot;Gem Bazaar&quot;
-},
-{
-  &quot;type&quot;: &quot;card&quot;,
-  &quot;count&quot;: 1,
-  &quot;cardName&quot;: &quot;X&quot;
 }]</property>
    </properties>
   </object>
