@@ -48,6 +48,7 @@ public class StaticData {
 
     private boolean allowCustomCardsInDecksConformance;
     private boolean enableSmartCardArtSelection;
+    private boolean enableSmartTokenSelection;
     private boolean loadNonLegalCards;
 
     private boolean sourceImageForClone;
@@ -65,16 +66,17 @@ public class StaticData {
     private static StaticData lastInstance = null;
 
     public StaticData(CardStorageReader cardReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards) {
-        this(cardReader, null, customCardReader, null, editionFolder, customEditionsFolder, blockDataFolder, "", cardArtPreference, enableUnknownCards, loadNonLegalCards, false, false);
+        this(cardReader, null, customCardReader, null, editionFolder, customEditionsFolder, blockDataFolder, "", cardArtPreference, enableUnknownCards, loadNonLegalCards, false, false, false);
     }
 
-    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, CardStorageReader customTokenReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String setLookupFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards, boolean allowCustomCardsInDecksConformance, boolean enableSmartCardArtSelection) {
+    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, CardStorageReader customTokenReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String setLookupFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards, boolean allowCustomCardsInDecksConformance, boolean enableSmartCardArtSelection, boolean enableSmartTokenSelection) {
         this.cardReader = cardReader;
         this.tokenReader = tokenReader;
         this.editions = new CardEdition.Collection(new CardEdition.Reader(new File(editionFolder)));
         this.blockDataFolder = blockDataFolder;
         this.allowCustomCardsInDecksConformance = allowCustomCardsInDecksConformance;
         this.enableSmartCardArtSelection = enableSmartCardArtSelection;
+        this.enableSmartTokenSelection = enableSmartTokenSelection;
         this.loadNonLegalCards = loadNonLegalCards;
         lastInstance = this;
         Set<String> funnyCards = new HashSet<>();
@@ -153,7 +155,7 @@ public class StaticData {
                     tokens.put(card.getNormalizedName(), card);
                 }
             }
-            allTokens = new TokenDb(tokens, editions);
+            allTokens = new TokenDb(tokens, editions, enableSmartTokenSelection);
         } else {
             allTokens = null;
         }
