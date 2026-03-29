@@ -22,7 +22,6 @@ import java.util.Map;
  * Packet containing delta updates for TrackableObjects.
  * Contains changed properties for existing objects and full property maps for new objects.
  * Properties are sent as Map<TrackableProperty, Object> with ID substitution for object references.
- * Object type and ID are encoded in the composite delta key (upper 4 bits = type, lower 28 bits = ID).
  * Standard Java serialization handles the maps natively via Netty's ObjectEncoder.
  */
 public final class DeltaPacket implements NetEvent {
@@ -32,7 +31,6 @@ public final class DeltaPacket implements NetEvent {
     private final Map<Integer, Map<TrackableProperty, Object>> objectDeltas;
     private final Map<Integer, Map<TrackableProperty, Object>> newObjects;
     private final int checksum;
-    /** Ordinals of TrackableProperty values included in the sampled checksum, or null. */
     private final int[] checksumProperties;
     private List<Object> proxiedEvents;
 
@@ -157,6 +155,10 @@ public final class DeltaPacket implements NetEvent {
         return checksumProperties;
     }
 
+    public boolean isEmpty() {
+        return objectDeltas.isEmpty() && newObjects.isEmpty() && !hasEvents() && !hasChecksum();
+    }
+
     public void setProxiedEvents(List<Object> events) {
         this.proxiedEvents = events;
     }
@@ -172,10 +174,6 @@ public final class DeltaPacket implements NetEvent {
     /** Return a shallow copy without proxied events, for state-only size measurement. */
     public DeltaPacket withoutEvents() {
         return new DeltaPacket(sequenceNumber, objectDeltas, newObjects, checksum, checksumProperties);
-    }
-
-    public boolean isEmpty() {
-        return objectDeltas.isEmpty() && newObjects.isEmpty() && !hasEvents() && !hasChecksum();
     }
 
     public int getApproximateSize() {

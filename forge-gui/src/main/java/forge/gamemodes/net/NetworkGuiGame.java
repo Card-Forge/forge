@@ -419,36 +419,6 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
         return combat;
     }
 
-    private void logChecksumDetails(GameView gameView, DeltaPacket packet) {
-        netLog.error("[DeltaSync] Checksum details (client state):");
-        netLog.error("[DeltaSync]   GameView ID: {}", gameView.getId());
-        netLog.error("[DeltaSync]   Turn: {}", gameView.getTurn());
-        netLog.error("[DeltaSync]   Phase: {}", gameView.getPhase() != null ? gameView.getPhase().name() : "null");
-        netLog.error("[DeltaSync]   Sampled properties: {}", NetworkChecksumUtil.sampledPropertyNames(packet.getChecksumProperties()));
-        for (PlayerView player : NetworkChecksumUtil.getSortedPlayers(gameView)) {
-            int handSize = player.getHand() != null ? player.getHand().size() : 0;
-            int graveyardSize = player.getGraveyard() != null ? player.getGraveyard().size() : 0;
-            int battlefieldSize = player.getBattlefield() != null ? player.getBattlefield().size() : 0;
-            netLog.error("[DeltaSync]   Player {} ({}): Life={}, Hand={}, GY={}, BF={}",
-                    player.getId(), player.getName(), player.getLife(),
-                    handSize, graveyardSize, battlefieldSize);
-        }
-        netLog.error("[DeltaSync] Compare with server state in host log at seq={}", packet.getSequenceNumber());
-        int phaseOrdinal = gameView.getPhase() != null ? gameView.getPhase().ordinal() : -1;
-        netLog.error("[DeltaSync] Client breakdown: {}",
-                NetworkChecksumUtil.computeChecksumBreakdown(gameView.getTurn(), phaseOrdinal, gameView));
-    }
-
-    private void requestFullStateResync() {
-        IGameController controller = getGameController();
-        if (controller != null) {
-            netLog.warn("[DeltaSync] Requesting full state resync from server");
-            controller.requestResync();
-        } else {
-            netLog.error("[DeltaSync] Cannot request resync: No game controller available");
-        }
-    }
-
     private TrackableObject createObjectOnly(int objectType, int objectId, Tracker tracker) {
         String typeName = getObjectTypeName(objectType);
 
@@ -599,6 +569,36 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
             case Sideboard: return ZoneType.Sideboard;
             default: return null;
         }
+    }
+
+    private void requestFullStateResync() {
+        IGameController controller = getGameController();
+        if (controller != null) {
+            netLog.warn("[DeltaSync] Requesting full state resync from server");
+            controller.requestResync();
+        } else {
+            netLog.error("[DeltaSync] Cannot request resync: No game controller available");
+        }
+    }
+
+    private void logChecksumDetails(GameView gameView, DeltaPacket packet) {
+        netLog.error("[DeltaSync] Checksum details (client state):");
+        netLog.error("[DeltaSync]   GameView ID: {}", gameView.getId());
+        netLog.error("[DeltaSync]   Turn: {}", gameView.getTurn());
+        netLog.error("[DeltaSync]   Phase: {}", gameView.getPhase() != null ? gameView.getPhase().name() : "null");
+        netLog.error("[DeltaSync]   Sampled properties: {}", NetworkChecksumUtil.sampledPropertyNames(packet.getChecksumProperties()));
+        for (PlayerView player : NetworkChecksumUtil.getSortedPlayers(gameView)) {
+            int handSize = player.getHand() != null ? player.getHand().size() : 0;
+            int graveyardSize = player.getGraveyard() != null ? player.getGraveyard().size() : 0;
+            int battlefieldSize = player.getBattlefield() != null ? player.getBattlefield().size() : 0;
+            netLog.error("[DeltaSync]   Player {} ({}): Life={}, Hand={}, GY={}, BF={}",
+                    player.getId(), player.getName(), player.getLife(),
+                    handSize, graveyardSize, battlefieldSize);
+        }
+        netLog.error("[DeltaSync] Compare with server state in host log at seq={}", packet.getSequenceNumber());
+        int phaseOrdinal = gameView.getPhase() != null ? gameView.getPhase().ordinal() : -1;
+        netLog.error("[DeltaSync] Client breakdown: {}",
+                NetworkChecksumUtil.computeChecksumBreakdown(gameView.getTurn(), phaseOrdinal, gameView));
     }
 
 }

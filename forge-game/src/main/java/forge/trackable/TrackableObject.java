@@ -98,12 +98,11 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
      * Mark a property as dirty for all registered consumers and increment version.
      */
     private void markDirtyForConsumers(final TrackableProperty key) {
-        Map<Integer, EnumSet<TrackableProperty>> c = consumers;
-        if (c == null) {
+        if (consumers == null) {
             return;
         }
         version++;
-        for (EnumSet<TrackableProperty> dirtySet : c.values()) {
+        for (EnumSet<TrackableProperty> dirtySet : consumers.values()) {
             dirtySet.add(key);
         }
     }
@@ -173,11 +172,10 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
      * Returns a snapshot copy; the consumer's dirty set is cleared.
      */
     public EnumSet<TrackableProperty> getAndClearDirtyProps(int consumerId) {
-        Map<Integer, EnumSet<TrackableProperty>> c = consumers;
-        if (c == null) {
+        if (consumers == null) {
             return EnumSet.noneOf(TrackableProperty.class);
         }
-        EnumSet<TrackableProperty> dirtySet = c.get(consumerId);
+        EnumSet<TrackableProperty> dirtySet = consumers.get(consumerId);
         if (dirtySet == null || dirtySet.isEmpty()) {
             return EnumSet.noneOf(TrackableProperty.class);
         }
