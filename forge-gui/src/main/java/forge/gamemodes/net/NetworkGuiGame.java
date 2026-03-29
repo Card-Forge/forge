@@ -172,6 +172,9 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
             handleGameEvents(resolvedEvents);
         }
 
+        // Refresh all GUI views unconditionally after delta application.
+        afterDeltaApplied();
+
         if (packet.hasChecksum()) {
             int serverChecksum = packet.getChecksum();
             int clientChecksum = NetworkChecksumUtil.computeSampledChecksum(getGameView(), packet.getChecksumProperties(), null);
@@ -579,6 +582,10 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
         } else {
             netLog.error("[DeltaSync] Cannot request resync: No game controller available");
         }
+    }
+
+    protected void afterDeltaApplied() {
+        // Override in GUI subclasses to refresh views after delta application.
     }
 
     private void logChecksumDetails(GameView gameView, DeltaPacket packet) {

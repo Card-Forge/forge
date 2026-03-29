@@ -227,6 +227,15 @@ public final class CMatchUI
 
         cDetailPicture.setGameView(gameView0);
         screen.setTabCaption(gameView0.getTitle());
+        refreshAllViews();
+    }
+
+    @Override
+    protected void afterDeltaApplied() {
+        refreshAllViews();
+    }
+
+    private void refreshAllViews() {
         if (sortedPlayers != null) {
             FThreads.invokeInEdtNowOrLater(() -> {
                 for (final VField f : getFieldViews()) {
