@@ -174,7 +174,6 @@ public class DeltaSyncManager implements IHasNetLog {
                                 Map<Integer, Map<TrackableProperty, Object>> objectDeltas,
                                 Map<Integer, Map<TrackableProperty, Object>> newObjects,
                                 Set<Integer> currentObjectIds) {
-        if (obj == null) return;
         int type = DeltaPacket.typeTagFor(obj);
         if (type < 0) return;
         int deltaKey = DeltaPacket.makeDeltaKey(obj);
@@ -459,7 +458,6 @@ public class DeltaSyncManager implements IHasNetLog {
     }
 
     private void walkAndRegister(TrackableObject obj, Set<Integer> visited) {
-        if (obj == null) return;
         int type = DeltaPacket.typeTagFor(obj);
         if (type < 0) return;
         int deltaKey = DeltaPacket.makeDeltaKey(obj);

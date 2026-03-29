@@ -147,15 +147,12 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
 
     /**
      * Register a consumer for per-consumer dirty tracking.
-     * Creates an EnumSet for this consumer; lazy-inits the consumer map.
      */
     public void registerConsumer(int consumerId) {
-        Map<Integer, EnumSet<TrackableProperty>> c = consumers;
-        if (c == null) {
-            c = new HashMap<>();
-            consumers = c;
+        if (consumers == null) {
+            consumers = new HashMap<>();
         }
-        c.putIfAbsent(consumerId, EnumSet.noneOf(TrackableProperty.class));
+        consumers.putIfAbsent(consumerId, EnumSet.noneOf(TrackableProperty.class));
     }
 
     /**
@@ -181,10 +178,7 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
             return EnumSet.noneOf(TrackableProperty.class);
         }
         EnumSet<TrackableProperty> dirtySet = c.get(consumerId);
-        if (dirtySet == null) {
-            return EnumSet.noneOf(TrackableProperty.class);
-        }
-        if (dirtySet.isEmpty()) {
+        if (dirtySet == null || dirtySet.isEmpty()) {
             return EnumSet.noneOf(TrackableProperty.class);
         }
         EnumSet<TrackableProperty> copy = EnumSet.copyOf(dirtySet);

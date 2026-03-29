@@ -11,15 +11,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Wraps a {@link GameEvent} by serializing it into a byte array with all
- * {@link TrackableObject} references replaced by lightweight {@link IdRef}
- * markers. On the client side, the proxy is unwrapped by resolving each
- * IdRef from the client's {@link Tracker}.
- *
- * <p>This avoids Java serialization expanding TrackableObject references into
- * the full game state object graph when events are sent over the network.
- */
 public class GameEventProxy implements Serializable, IHasNetLog {
     private static final long serialVersionUID = 1L;
 
@@ -30,10 +21,13 @@ public class GameEventProxy implements Serializable, IHasNetLog {
     }
 
     /**
-     * Wraps a GameEvent by serializing it with TrackableObject references
-     * replaced by IdRef markers. If a tracker is provided, verifies that
-     * each replaced object is present in the tracker (server-side sanity
-     * check). Returns null if verification fails.
+     * Wraps a {@link GameEvent} by serializing it into a byte array with
+     * {@link TrackableObject} references replaced by lightweight {@link IdRef}
+     * markers.
+     * Returns null if verification fails.
+     *
+     * <p>This avoids Java serialization expanding TrackableObject references into
+     * the full game state object graph when events are sent over the network.
      */
     public static GameEventProxy wrap(GameEvent event, Tracker tracker) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream(256);
@@ -64,9 +58,8 @@ public class GameEventProxy implements Serializable, IHasNetLog {
     }
 
     /**
-     * Wraps a list of events. Uses the tracker for server-side sanity
-     * checking: events with unresolvable references are dropped rather
-     * than sent (the client would fail to resolve them too).
+     * Wraps a list of events. Events with unresolvable references are dropped
+     * rather than sent (the client would fail to resolve them too).
      */
     public static List<Object> wrapAll(List<GameEvent> events, Tracker tracker) {
         List<Object> result = new ArrayList<>(events.size());
@@ -113,13 +106,6 @@ public class GameEventProxy implements Serializable, IHasNetLog {
         return result;
     }
 
-    // Only CardView and PlayerView are replaced with IdRef markers. These two
-    // types carry the largest object graphs and are always present in the GameView
-    // (registered via updateObjLookup on the IO thread before proxy unwrapping).
-    // Other TrackableObject types (StackItemView, SpellAbilityView, CombatView)
-    // are either ephemeral or not reachable from GameView's property graph, so
-    // they serialize normally.
-
     /**
      * Lightweight serializable marker that replaces a TrackableObject reference
      * during proxy serialization.
@@ -156,7 +142,7 @@ public class GameEventProxy implements Serializable, IHasNetLog {
     }
 
     /**
-     * ObjectOutputStream that replaces every TrackableObject with an IdRef.
+     * ObjectOutputStream that replaces TrackableObject with an IdRef.
      * If a tracker is provided, verifies each ID is resolvable as a
      * server-side sanity check.
      */
@@ -178,6 +164,12 @@ public class GameEventProxy implements Serializable, IHasNetLog {
         protected Object replaceObject(Object obj) {
             if (obj instanceof TrackableObject trackable) {
                 int tag = DeltaPacket.typeTagFor(trackable);
+                // Only CardView and PlayerView are replaced with IdRef markers. These two
+                // types carry the largest object graphs and are always present in the GameView
+                // (registered via updateObjLookup on the IO thread before proxy unwrapping).
+                // Other TrackableObject types (StackItemView, SpellAbilityView, CombatView)
+                // are either ephemeral or not reachable from GameView's property graph, so
+                // they serialize normally.
                 if (tag == DeltaPacket.TYPE_CARD_VIEW || tag == DeltaPacket.TYPE_PLAYER_VIEW) {
                     if (tracker != null) {
                         TrackableType<?> type = DeltaPacket.trackableTypeFor(tag);

@@ -50,6 +50,7 @@ public final class DeltaPacket implements NetEvent {
     }
 
     public static int typeTagFor(TrackableObject obj) {
+        if (obj == null) return -1;
         if (obj instanceof CardStateView) return TYPE_CSV;
         if (obj instanceof CardView) return TYPE_CARD_VIEW;
         if (obj instanceof PlayerView) return TYPE_PLAYER_VIEW;

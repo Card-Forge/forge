@@ -70,7 +70,6 @@ public class Tracker {
 
     /**
      * Read-only peek at delayed property changes queued for a specific object.
-     * Does not modify or remove the delayed changes.
      */
     public Map<TrackableProperty, Object> getDelayedPropsFor(TrackableObject obj) {
         if (delayedPropChanges.isEmpty()) {
