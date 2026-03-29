@@ -71,10 +71,6 @@ public enum CounterEnumType implements CounterType {
 
     BRICK("BRICK", 226, 192, 164),
 
-    BURDEN("BURDEN", 135, 62, 35),
-
-    CAGE("CAGE", 155, 155, 155),
-
     CARRION("CRRON", 255, 163, 222),
 
     CELL ("CELL", 90, 10, 95),
@@ -250,8 +246,6 @@ public enum CounterEnumType implements CounterType {
     JAVELIN("JAVLN", 180, 206, 172),
 
     JUDGMENT("JUDGM", 249, 220, 52),
-
-    KI("KI", 190, 189, 255),
 
     KICK("KICK", 255, 255, 240),
 

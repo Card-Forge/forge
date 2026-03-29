@@ -7,7 +7,7 @@ import forge.ai.ComputerUtil;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
-import forge.game.card.CounterEnumType;
+import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
@@ -41,21 +41,23 @@ public class LegendaryRuleAi extends SpellAbilityAi {
         } else {
             // AI decision making - should AI compare damage and debuffs?
         }
+        CounterType ice = CounterType.getType("ICE");
+        CounterType ki = CounterType.getType("KI");
 
         // TODO: Can this be made more generic somehow?
         if (firstOption.getName().equals("Dark Depths")) {
             Card best = firstOption;
             for (Card c : options) {
-                if (c.getCounters(CounterEnumType.ICE) < best.getCounters(CounterEnumType.ICE)) {
+                if (c.getCounters(ice) < best.getCounters(ice)) {
                     best = c;
                 }
             }
             return best;
-        } else if (firstOption.getCounters(CounterEnumType.KI) > 0) {
+        } else if (firstOption.getCounters(ki) > 0) {
         	// Extra Rule for KI counter
         	Card best = firstOption;
             for (Card c : options) {
-                if (c.getCounters(CounterEnumType.KI) > best.getCounters(CounterEnumType.KI)) {
+                if (c.getCounters(ki) > best.getCounters(ki)) {
                     best = c;
                 }
             }
