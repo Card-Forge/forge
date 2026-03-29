@@ -32,7 +32,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
-import forge.game.staticability.StaticAbilityBlockRestrict;
+import forge.game.staticability.StaticAbilityAttackBlockRestrict;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
 import forge.game.staticability.StaticAbilityMustBlock;
 import forge.game.trigger.TriggerType;
@@ -46,6 +46,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -433,7 +434,7 @@ public class CombatUtil {
         CardCollection allOtherBlockers = combat.getAllBlockers();
         allOtherBlockers.remove(blocker);
         final int blockersFromOnePlayer = CardLists.count(allOtherBlockers, CardPredicates.isController(blocker.getController()));
-        if (blockersFromOnePlayer >= StaticAbilityBlockRestrict.blockRestrictNum(blocker.getController())) {
+        if (blockersFromOnePlayer >= StaticAbilityAttackBlockRestrict.blockRestrictNum(blocker.getController())) {
             return false;
         }
 
@@ -488,10 +489,7 @@ public class CombatUtil {
             return false;
         }
 
-        boolean cantBlockAlone = blocker.hasKeyword("CARDNAME can't attack or block alone.") || blocker.hasKeyword("CARDNAME can't block alone.");
-
-        final List<Card> list = blocker.getController().getCreaturesInPlay();
-        return list.size() >= 2 || !cantBlockAlone;
+        return true;
     }
 
     public static boolean canBlockMoreCreatures(final Card blocker, final CardCollectionView blockedBy) {
@@ -701,25 +699,12 @@ public class CombatUtil {
 
         // Creatures that aren't allowed to block unless certain restrictions are met.
         for (final Card blocker : blockers) {
-            boolean cantBlockAlone = blocker.hasKeyword("CARDNAME can't attack or block alone.") || blocker.hasKeyword("CARDNAME can't block alone.");
-            if (blockers.size() < 2 && cantBlockAlone) {
-                return TextUtil.concatWithSpace(blocker.toString(), "can't block alone.");
-            } else if (blockers.size() < 3 && blocker.hasKeyword("CARDNAME can't block unless at least two other creatures block.")) {
-                return TextUtil.concatWithSpace(blocker.toString(), "can't block unless at least two other creatures block.");
-            } else if (blocker.hasKeyword("CARDNAME can't block unless a creature with greater power also blocks.")) {
-                boolean found = false;
-                int power = blocker.getNetPower();
-                // Note: This is O(n^2), but there shouldn't generally be many creatures with the above keyword.
-                for (Card blocker2 : blockers) {
-                    if (blocker2.getNetPower() > power) {
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found) {
-                    return TextUtil.concatWithSpace(blocker.toString(), "can't block unless a creature with greater power also blocks.");
-                }
-            }
+            CardCollection others = new CardCollection(blockers);
+            others.remove(blocker);
+            List<StaticAbility> list = StaticAbilityAttackBlockRestrict.blockRestrict(blocker, others);
+            if (list.isEmpty())
+                continue;
+            return list.stream().map(StaticAbility::toString).collect(Collectors.joining(", "));
         }
 
         for (final Card attacker : attackers) {
