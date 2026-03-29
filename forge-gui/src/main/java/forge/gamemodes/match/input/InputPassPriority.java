@@ -303,7 +303,8 @@ public class InputPassPriority extends InputSyncronizedBase {
                     //must invoke in game thread so dialog can be shown on mobile game
                     ThreadUtil.invokeInGameThread(() -> {
                         Localizer localizer = Localizer.getInstance();
-                        String message = localizer.getMessage("lblYouHaveManaFloatingInYourManaPoolCouldBeLostIfPassPriority");
+                        String manaDesc = buildManaDescription(player.getView());
+                        String message = localizer.getMessage("lblManaFloatingWithAmount", manaDesc);
                         if (player.getManaPool().hasBurn()) {
                             message += " " + localizer.getMessage("lblYouWillTakeManaBurnDamageEqualAmountFloatingManaLostThisWay");
                         }
@@ -316,6 +317,19 @@ public class InputPassPriority extends InputSyncronizedBase {
             }
         }
         runnable.run(); //just pass priority immediately if no mana floating that would be lost
+    }
+
+    private static String buildManaDescription(PlayerView pv) {
+        StringBuilder sb = new StringBuilder();
+        byte[] types = forge.card.mana.ManaAtom.MANATYPES;
+        String[] symbols = {"{W}", "{U}", "{B}", "{R}", "{G}", "{C}"};
+        for (int i = 0; i < types.length; i++) {
+            int amount = pv.getMana(types[i]);
+            for (int j = 0; j < amount; j++) {
+                sb.append(symbols[i]);
+            }
+        }
+        return sb.toString();
     }
 
     public List<SpellAbility> getChosenSa() { return chosenSa; }

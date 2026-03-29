@@ -40,13 +40,16 @@ public class VZone implements IVDoc<CZone> {
     private final DragTab tab;
     private DragCell parentCell;
 
-    private final FScrollPane scroller = new FScrollPane(false);
+    private final FScrollPane scroller = new FScrollPane(false,
+            javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+            javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     private final ZoneCardArea cardArea;
 
     private final CMatchUI matchUI;
     private final PlayerView player;
     private final ZoneType zone;
     private boolean sortedByName = false;
+    private boolean fitCards = true;
     // Delta tracking for "+N new" tab labels. Baseline resets when the tab is viewed.
     private int baseCount = -1;
 
@@ -61,6 +64,9 @@ public class VZone implements IVDoc<CZone> {
         this.tab = new DragTab(capitalizedName());
 
         scroller.setViewportView(cardArea);
+
+        fitCards = FModel.getPreferences().getPrefBoolean(FPref.UI_ZONE_TAB_FIT_CARDS);
+        applyFitCards();
 
         control = new CZone(this);
 
@@ -79,6 +85,12 @@ public class VZone implements IVDoc<CZone> {
                     final JMenuItem sortItem = new JMenuItem(sortedByName ? localizer.getMessage("lblUnsort") : localizer.getMessage("lblSortByName"));
                     sortItem.addActionListener(ev -> toggleSorted());
                     menu.add(sortItem);
+
+                    final JMenuItem fitItem = new JMenuItem(fitCards
+                            ? localizer.getMessage("lblZoneTabScrollMode")
+                            : localizer.getMessage("lblZoneTabFitMode"));
+                    fitItem.addActionListener(ev -> toggleFitCards());
+                    menu.add(fitItem);
 
                     final JMenuItem closeItem = new JMenuItem(Localizer.getInstance().getMessage("lblClose"));
                     closeItem.addActionListener(ev -> FloatingZone.showOrHide(matchUI, player, zone));
@@ -157,6 +169,20 @@ public class VZone implements IVDoc<CZone> {
     private void toggleSorted() {
         sortedByName = !sortedByName;
         refresh();
+    }
+
+    private void toggleFitCards() {
+        fitCards = !fitCards;
+        FModel.getPreferences().setPref(FPref.UI_ZONE_TAB_FIT_CARDS, String.valueOf(fitCards));
+        FModel.getPreferences().save();
+        applyFitCards();
+        refresh();
+    }
+
+    private void applyFitCards() {
+        scroller.setHorizontalScrollBarPolicy(fitCards
+                ? javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER
+                : javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
     }
 
     public CMatchUI getMatchUI() { return matchUI; }
