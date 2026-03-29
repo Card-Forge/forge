@@ -10,7 +10,7 @@ import com.google.common.collect.Maps;
 
 
 public record CounterListType(String name, String desc, int red, int green, int blue) implements CounterType {
-    private static Map<String, CounterListType> sMap = Maps.newHashMap();
+    private static Map<String, CounterListType> sMap = Maps.newLinkedHashMap();
 
     public static CounterListType get(String s) {
         return sMap.get(s);
