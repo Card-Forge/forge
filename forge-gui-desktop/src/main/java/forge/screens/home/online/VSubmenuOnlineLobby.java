@@ -1,6 +1,12 @@
 package forge.screens.home.online;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import forge.deckchooser.FDeckChooser;
 import forge.gamemodes.match.GameLobby;
@@ -21,6 +27,7 @@ import forge.screens.home.StopButton;
 import forge.screens.home.VHomeUI;
 import forge.screens.home.VLobby;
 import forge.toolbox.FButton;
+import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
@@ -71,11 +78,69 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
         container.removeAll();
 
         if (lobby == null) {
-            final FButton btnConnect = new FButton(Localizer.getInstance().getMessage("lblConnectToServer"));
-            btnConnect.setFont(FSkin.getRelativeFont(20));
-            btnConnect.addActionListener(e -> getLayoutControl().connectToServer());
-            container.setLayout(new MigLayout("insets 0, gap 0, ax center, ay center"));
-            container.add(btnConnect, "w 300!, h 75!");
+            final Localizer localizer = Localizer.getInstance();
+            final String guideUrl = "https://github.com/Card-Forge/forge/wiki/network-play";
+
+            // Bordered info box
+            final JPanel infoBox = new JPanel(new MigLayout("insets 30 40 20 40, gap 0, wrap 1, ax center"));
+            infoBox.setBackground(new Color(40, 40, 40));
+            infoBox.setBorder(BorderFactory.createCompoundBorder(
+                    BorderFactory.createLineBorder(new Color(100, 100, 100), 1),
+                    BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+
+            // Title
+            final FLabel lblTitle = new FLabel.Builder()
+                    .text("- = *  H E R E   B E   E L D R A Z I  * = -")
+                    .fontSize(22).fontAlign(SwingConstants.CENTER).build();
+
+            // Warning text
+            final FLabel lblWarning = new FLabel.Builder()
+                    .text(localizer.getMessage("lblOnlineWarning"))
+                    .fontSize(16).fontAlign(SwingConstants.CENTER).build();
+
+            // Guide text with clickable link
+            final FLabel lblGuideText = new FLabel.Builder()
+                    .text(localizer.getMessage("lblOnlineGuideText"))
+                    .fontSize(16).fontAlign(SwingConstants.CENTER).build();
+
+            final FLabel lblGuideLink = new FLabel.Builder()
+                    .text("<html><u>" + localizer.getMessage("lblNetworkPlayGuide") + "</u></html>")
+                    .fontSize(16).fontStyle(Font.BOLD).fontAlign(SwingConstants.CENTER)
+                    .hoverable().cmdClick(() -> {
+                        try {
+                            java.awt.Desktop.getDesktop().browse(java.net.URI.create(guideUrl));
+                        } catch (final Exception ex) {
+                            java.awt.Toolkit.getDefaultToolkit().getSystemClipboard()
+                                    .setContents(new java.awt.datatransfer.StringSelection(guideUrl), null);
+                        }
+                    }).build();
+            lblGuideLink.setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.HAND_CURSOR));
+
+            // Buttons
+            final FButton btnHost = new FButton(localizer.getMessage("lblHostGame"));
+            btnHost.setFont(FSkin.getRelativeFont(18));
+            btnHost.addActionListener(e -> getLayoutControl().hostGame());
+
+            final FButton btnJoin = new FButton(localizer.getMessage("lblJoinGame"));
+            btnJoin.setFont(FSkin.getRelativeFont(18));
+            btnJoin.addActionListener(e -> getLayoutControl().joinGame());
+
+            final JPanel buttonPanel = new JPanel(new MigLayout("insets 0, gap 20, ax center"));
+            buttonPanel.setOpaque(false);
+            buttonPanel.add(btnHost, "w 200!, h 50!");
+            buttonPanel.add(btnJoin, "w 200!, h 50!");
+
+            infoBox.add(lblTitle, "ax center, gap 0 0 0 15");
+            infoBox.add(lblWarning, "ax center, gap 0 0 0 15");
+            infoBox.add(lblGuideText, "ax center, gap 0 0 0 0");
+            infoBox.add(lblGuideLink, "ax center, gap 0 0 0 25");
+            infoBox.add(buttonPanel, "ax center");
+
+            container.setLayout(new BorderLayout());
+            final JPanel wrapper = new JPanel(new MigLayout("ax center, ay center"));
+            wrapper.setOpaque(false);
+            wrapper.add(infoBox);
+            container.add(wrapper, BorderLayout.CENTER);
 
             if (container.isShowing()) {
                 container.validate();
