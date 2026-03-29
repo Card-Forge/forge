@@ -82,14 +82,9 @@ public class PhaseHandler implements java.io.Serializable {
     private transient Player playerTurn = null;
     private transient Player playerPreviousTurn = null;
 
-    // priority player
+    // priority management - uses either Priority or TeamPriority based on game rules
+    private transient PriorityManager priorityManager;
 
-    private transient Player pPlayerPriority = null;
-    private transient Player pFirstPriority = null;
-    // When a team may have priority simultaneously, this set contains all
-    // players who currently have priority. Preserve insertion order for
-    // predictable rotation/selection (captain should be first member of team).
-    private transient LinkedHashSet<Player> playersWithPriority = new LinkedHashSet<>();
     private transient Combat combat = null;
     private boolean skipDamageSteps = false;
     private boolean bRepeatCleanup = false;
@@ -102,6 +97,12 @@ public class PhaseHandler implements java.io.Serializable {
 
     public PhaseHandler(final Game game0) {
         game = game0;
+        // Initialize the appropriate priority manager based on game rules
+        if (game.getRules().isUseSharedTurns()) {
+            priorityManager = new TeamPriority(game);
+        } else {
+            priorityManager = new Priority(game);
+        }
     }
 
     public final PhaseType getPhase() {
@@ -136,45 +137,22 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public final Player getPriorityPlayer() {
-        return pPlayerPriority;
+        return priorityManager.getPriorityPlayer();
     }
     /**
      * Returns the list of players who currently share priority (team priority).
-     * The first element in the list is the team's captain (first member).
+     * In single-player mode, returns a list with just the priority player.
+     * In team mode, returns the team captain and all in-game team members.
      */
     public final List<Player> getPlayersWithPriority() {
-        if (playersWithPriority == null) {
-            return Collections.emptyList();
-        }
-        return new ArrayList<>(playersWithPriority);
+        return priorityManager.getPlayersWithPriority();
     }
-    private void updatePlayersWithPriorityFrom(final Player p) {
-        playersWithPriority.clear();
-        if (p == null) { return; }
-        playersWithPriority.add(p);
-        if (!p.getGame().getRules().isUseSharedTurns()) {
-            return;
-        }
 
-        if (p.getTeamObject() != null && p.getTeamObject() != forge.game.player.Team.UNASSIGNED) {
-            for (Player m : p.getTeamObject().getMembers()) {
-                if (m.equals(p)) {
-                    continue;
-                }
-                if (m.isInGame()) {
-                    playersWithPriority.add(m);
-                }
-            }
-        }
-    }
     public final void setPriority(final Player p) {
-        // Default: single-player priority
-        pFirstPriority = p;
-        pPlayerPriority = p;
-        updatePlayersWithPriorityFrom(p);
+        priorityManager.setPriority(p);
     }
     public final void resetPriority() {
-        setPriority(playerTurn);
+        priorityManager.resetPriority(playerTurn);
     }
 
     public final boolean inCombat() { return combat != null; }
@@ -1094,11 +1072,12 @@ public class PhaseHandler implements java.io.Serializable {
 
                 // If multiple players have priority (team), allow them all to choose simultaneously.
                 List<Player> toPoll = new ArrayList<>();
-                if (playersWithPriority != null && playersWithPriority.size() > 1) {
+                List<Player> playersWithPri = getPlayersWithPriority();
+                if (playersWithPri.size() > 1) {
                     // Start polling from current priority player to preserve expected order
                     boolean startAdding = false;
-                    for (Player pl : playersWithPriority) {
-                        if (pl.equals(pPlayerPriority)) {
+                    for (Player pl : playersWithPri) {
+                        if (pl.equals(getPriorityPlayer())) {
                             startAdding = true;
                         }
                         if (startAdding) {
@@ -1106,13 +1085,13 @@ public class PhaseHandler implements java.io.Serializable {
                         }
                     }
                     // If we started after current and missed earlier members, add them too
-                    for (Player pl : playersWithPriority) {
+                    for (Player pl : playersWithPri) {
                         if (!toPoll.contains(pl)) {
                             toPoll.add(pl);
                         }
                     }
                 } else {
-                    toPoll.add(pPlayerPriority);
+                    toPoll.add(getPriorityPlayer());
                 }
 
                 // Collect chosen abilities for all polled players
@@ -1135,8 +1114,8 @@ public class PhaseHandler implements java.io.Serializable {
                     } else {
                         // Multiple players tried to act simultaneously - pick captain if available
                         Player captain = null;
-                        if (pPlayerPriority != null && pPlayerPriority.getTeamObject() != null) {
-                          final java.util.List<Player> members = pPlayerPriority.getTeamObject().getMembers();
+                        if (getPriorityPlayer() != null && getPriorityPlayer().getTeamObject() != null) {
+                          final java.util.List<Player> members = getPriorityPlayer().getTeamObject().getMembers();
                           if (members != null && !members.isEmpty()) {
                             captain = members.get(0);
                           }
@@ -1150,26 +1129,25 @@ public class PhaseHandler implements java.io.Serializable {
                     }
                     chosenSa = chosenMap.get(chosenPlayer);
                     // Make the chosen player the active priority player so existing processing works
-                    pPlayerPriority = chosenPlayer;
-                    updatePlayersWithPriorityFrom(pPlayerPriority);
+                    setPriority(chosenPlayer);
                  } else {
                      chosenSa = null;
                  }
 
                 // this needs to come after chosenSa so it sees you conceding on own turn
-                if (playerTurn.hasLost() && pPlayerPriority.equals(playerTurn) && pFirstPriority.equals(playerTurn)) {
-                    // If the active player has lost, and they have priority, set the next player to have priority
-                    System.out.println("Active player is no longer in the game...");
-                    pPlayerPriority = game.getNextPlayerAfter(getPriorityPlayer());
-                    pFirstPriority = pPlayerPriority;
-                    updatePlayersWithPriorityFrom(pPlayerPriority);
+                if (playerTurn.hasLost() && getPriorityPlayer().equals(playerTurn)) {
+                    if (priorityManager.getStartOfPriorityPlayer().equals(playerTurn)) {
+                        // If the active player has lost, and they have priority, set the next player to have priority
+                        System.out.println("Active player is no longer in the game...");
+                        setPriority(game.getNextPlayerAfter(getPriorityPlayer()));
+                    }
                  }
 
                 if (chosenSa == null) {
                     break; // that means 'I pass'
                 }
                 if (DEBUG_PHASES) {
-                    System.out.print("... " + pPlayerPriority + " plays " + chosenSa);
+                    System.out.print("... " + getPriorityPlayer() + " plays " + chosenSa);
                 }
 
                 boolean rollback = false;
@@ -1178,10 +1156,10 @@ public class PhaseHandler implements java.io.Serializable {
                     final Zone originZone = saHost.getZone();
                     final CardZoneTable triggerList = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
 
-                    if (pPlayerPriority.getController().playChosenSpellAbility(sa)) {
+                    if (getPriorityPlayer().getController().playChosenSpellAbility(sa)) {
                         // 117.3c If a player has priority when they cast a spell, activate an ability, [play a land]
                         // that player receives priority afterward.
-                        pFirstPriority = pPlayerPriority; // all opponents have to pass before stack is allowed to resolve
+                        setPriority(getPriorityPlayer()); // all opponents have to pass before stack is allowed to resolve
                         // If this player was part of a team, after acting the team retains priority
                         // but the acting player becomes the effective priority holder for rotation.
                     } else if (game.EXPERIMENTAL_RESTORE_SNAPSHOT) {
@@ -1203,9 +1181,9 @@ public class PhaseHandler implements java.io.Serializable {
                     game.copyLastState();
                 }
                 loopCount++;
-            } while (loopCount < 999 || !pPlayerPriority.getController().isAI());
+            } while (loopCount < 999 || !getPriorityPlayer().getController().isAI());
 
-            if (loopCount >= 999 && pPlayerPriority.getController().isAI()) {
+            if (loopCount >= 999 && getPriorityPlayer().getController().isAI()) {
                 System.out.print("AI looped too much with: " + chosenSa);
             }
 
@@ -1220,17 +1198,16 @@ public class PhaseHandler implements java.io.Serializable {
             System.out.print(" >> (no priority given to " + getPriorityPlayer() + ")\n");
         }
 
-        // actingPlayer is the player who may act
-        // the firstAction is the player who gained Priority First in this segment
-        // of Priority
-        Player nextPlayer = game.getNextPlayerAfter(getPriorityPlayer());
+        // Advance priority to the next player in turn order. This returns true
+        // if priority has come full circle (returned to the first player).
+        boolean priorityRoundComplete = priorityManager.advancePriorityToNextPlayer();
 
-        if (game.isGameOver() || nextPlayer == null) { return; } // conceded?
+        if (game.isGameOver() || getPriorityPlayer() == null) { return; } // conceded?
 
         if (DEBUG_PHASES) {
-            System.out.println(TextUtil.concatWithSpace(playerTurn.toString(),TextUtil.addSuffix(phase.toString(),":"), pPlayerPriority.toString(),"is active, previous was", nextPlayer.toString()));
+            System.out.println(TextUtil.concatWithSpace(playerTurn.toString(),TextUtil.addSuffix(phase.toString(),":"), getPriorityPlayer().toString(),"is active, previous was", game.getNextPlayerAfter(getPriorityPlayer()).toString()));
         }
-        if (pFirstPriority == nextPlayer) {
+        if (priorityRoundComplete) {
             if (game.getStack().isEmpty()) {
                 if (playerTurn.hasLost()) {
                     setPriority(game.getNextPlayerAfter(playerTurn));
@@ -1247,12 +1224,6 @@ public class PhaseHandler implements java.io.Serializable {
             else if (!game.getStack().hasSimultaneousStackEntries()) {
                 game.getStack().resolveStack();
             }
-        } else {
-            // pass the priority to other player
-            // If we have a multi-player priority set, only advance to next player normally
-            // and keep the playersWithPriority set intact so team members still have priority.
-            pPlayerPriority = nextPlayer;
-            updatePlayersWithPriorityFrom(pPlayerPriority);
         }
 
         // If ever the karn's ultimate resolved
@@ -1265,7 +1236,7 @@ public class PhaseHandler implements java.io.Serializable {
 
         // update Priority for all players
         for (final Player p : game.getPlayers()) {
-            boolean has = playersWithPriority != null && playersWithPriority.contains(p);
+            boolean has = getPlayersWithPriority().contains(p);
             p.setHasPriority(has);
         }
     }
