@@ -50,6 +50,15 @@ public class DeckUrlFetcher {
         public String getSiteName() { return siteName; }
     }
 
+    /**
+     * Prepends a "Name: ..." line to the deck text if the deck name is available.
+     */
+    private static void appendDeckName(StringBuilder sb, String deckName) {
+        if (deckName != null && !deckName.trim().isEmpty()) {
+            sb.append("Name: ").append(deckName.trim()).append("\n");
+        }
+    }
+
     // URL patterns for each site
     private static final Pattern MOXFIELD_PATTERN = Pattern.compile(
             "(?:https?://)?(?:www\\.)?moxfield\\.com/decks/([\\w-]+)", Pattern.CASE_INSENSITIVE);
@@ -128,16 +137,16 @@ public class DeckUrlFetcher {
         StringBuilder sb = new StringBuilder();
         int totalCards = 0;
 
+        // Extract deck name from top-level JSON
+        String deckName = extractStringValue(json, 0, "\"name\"");
+        appendDeckName(sb, deckName);
+
         // Parse commanders
         List<String> commanders = parseMoxfieldSection(json, "commanders");
         if (!commanders.isEmpty()) {
             sb.append("Commander\n");
             for (String line : commanders) {
-                sb.append(line);
-                if (commanders.size() > 1) {
-                    sb.append(" |");
-                }
-                sb.append("\n");
+                sb.append(line).append("\n");
             }
             totalCards += commanders.size();
             sb.append("\n");
@@ -244,6 +253,10 @@ public class DeckUrlFetcher {
         StringBuilder sb = new StringBuilder();
         int totalCards = 0;
 
+        // Extract deck name from top-level JSON
+        String deckName = extractStringValue(json, 0, "\"name\"");
+        appendDeckName(sb, deckName);
+
         Map<String, List<String>> sections = new LinkedHashMap<>();
 
         // Find the "cards" array
@@ -332,11 +345,7 @@ public class DeckUrlFetcher {
             if (cardLines != null && !cardLines.isEmpty()) {
                 sb.append(section).append("\n");
                 for (String line : cardLines) {
-                    sb.append(line);
-                    if (section.equals("Commander") && cardLines.size() > 1) {
-                        sb.append(" |");
-                    }
-                    sb.append("\n");
+                    sb.append(line).append("\n");
                 }
                 sb.append("\n");
             }
@@ -380,16 +389,16 @@ public class DeckUrlFetcher {
         StringBuilder sb = new StringBuilder();
         int totalCards = 0;
 
+        // Extract deck name from page title or embedded JSON
+        String deckName = extractEdhrecDeckName(html);
+        appendDeckName(sb, deckName);
+
         // Extract commanders from "commanders":["Name1","Name2"] (may contain nulls)
         List<String> commanders = extractEdhrecSimpleArray(html, "commanders");
         if (!commanders.isEmpty()) {
             sb.append("Commander\n");
             for (String card : commanders) {
-                sb.append("1 ").append(card);
-                if (commanders.size() > 1) {
-                    sb.append(" |");
-                }
-                sb.append("\n");
+                sb.append("1 ").append(card).append("\n");
             }
             totalCards += commanders.size();
             sb.append("\n");
@@ -410,6 +419,28 @@ public class DeckUrlFetcher {
         }
 
         return FetchResult.ok(sb.toString().trim(), "EDHREC", totalCards);
+    }
+
+    /** Extracts the deck name from an EDHREC page, trying the "header" JSON field or page title. */
+    private static String extractEdhrecDeckName(String html) {
+        // Try "header":"Deck Name" in embedded JSON
+        String header = extractStringValue(html, 0, "\"header\"");
+        if (header != null && !header.isEmpty() && !header.contains("<")) {
+            return header;
+        }
+        // Fallback: try <title> tag
+        int titleStart = html.indexOf("<title>");
+        if (titleStart >= 0) {
+            int titleEnd = html.indexOf("</title>", titleStart);
+            if (titleEnd > titleStart) {
+                String title = html.substring(titleStart + 7, titleEnd).trim();
+                // Remove " - EDHREC" suffix if present
+                int dashIdx = title.lastIndexOf(" - ");
+                if (dashIdx > 0) title = title.substring(0, dashIdx).trim();
+                if (!title.isEmpty()) return title;
+            }
+        }
+        return null;
     }
 
     /** Extracts card names from a simple JSON array like "key":["Name1","Name2",null] */
@@ -547,14 +578,15 @@ public class DeckUrlFetcher {
         }
 
         StringBuilder sb = new StringBuilder();
+
+        // Extract deck name from slug
+        String deckName = deckSlug.replace("-", " ").replaceAll("\\s+$", "");
+        appendDeckName(sb, deckName);
+
         if (!commanderCards.isEmpty()) {
             sb.append("Commander\n");
             for (String card : commanderCards) {
-                sb.append(card);
-                if (commanderCards.size() > 1) {
-                    sb.append(" |");
-                }
-                sb.append("\n");
+                sb.append(card).append("\n");
             }
             sb.append("\n");
         }
@@ -634,11 +666,7 @@ public class DeckUrlFetcher {
         if (!commanderCards.isEmpty()) {
             sb.append("Commander\n");
             for (String card : commanderCards) {
-                sb.append(card);
-                if (commanderCards.size() > 1) {
-                    sb.append(" |");
-                }
-                sb.append("\n");
+                sb.append(card).append("\n");
             }
             sb.append("\n");
         }
