@@ -148,6 +148,7 @@ public class ArchipelagoData implements SaveFileContent {
     }
 
     public  boolean isSetUnlocked(String setCode){
+        if (archipelagoMode == ArchipelagoMode.disabled) return true;
         if (setCode == null || !setsUnlockedByCode.contains(setCode)){
             return false;
         } else {
