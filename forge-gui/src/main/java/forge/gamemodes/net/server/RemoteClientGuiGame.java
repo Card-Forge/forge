@@ -49,6 +49,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
     private boolean objectsRegistered = false;
     private boolean fallbackLogged = false;  // Prevent duplicate fallback log messages
     private volatile boolean paused;
+    private volatile boolean resyncPending;
 
     private GameEventForwarder forwarder;
     private boolean flushing;
@@ -164,6 +165,14 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
             return;
         }
 
+        // Resync requested by client (checksum mismatch) — send full state
+        // from the game thread where the gameView is consistent.
+        if (resyncPending) {
+            resyncPending = false;
+            sendFullState();
+            return;
+        }
+
         // Flush pending events BEFORE collecting deltas — ensures events
         // get the dirty props bundled with them, and this standalone delta
         // only picks up whatever changed after the flush.
@@ -211,6 +220,14 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
         } catch (Exception e) {
             return 0;
         }
+    }
+
+    /**
+     * Request a full state resync on the next updateGameView call.
+     * Called from the Netty thread; the actual send happens on the game thread.
+     */
+    public void setResyncPending() {
+        resyncPending = true;
     }
 
     /**

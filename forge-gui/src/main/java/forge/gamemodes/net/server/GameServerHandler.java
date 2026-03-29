@@ -43,9 +43,9 @@ final class GameServerHandler extends GameProtocolHandler<IGameController> imple
             if (client != null) {
                 IGuiGame gui = server.getGui(client.getIndex());
                 if (gui instanceof RemoteClientGuiGame netGui) {
-                    netLog.debug("[DeltaSync] Sending full state to client {}", client.getIndex());
+                    netLog.debug("[DeltaSync] Resync requested by client {}, deferring to game thread", client.getIndex());
                     netGui.getDeltaSyncManager().onResyncRequested();
-                    netGui.sendFullState();
+                    netGui.setResyncPending();
                 } else {
                     netLog.warn("[DeltaSync] GUI is not RemoteClientGuiGame, cannot resync client {}", client.getIndex());
                 }
