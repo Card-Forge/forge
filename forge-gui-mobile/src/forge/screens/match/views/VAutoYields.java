@@ -40,6 +40,7 @@ public class VAutoYields extends FDialog {
             if (selected != null) {
                 lstAutoYields.removeItem(selected);
                 MatchController.instance.setShouldAutoYield(selected, false);
+                MatchController.instance.getGameController().notifyAutoYieldChanged(selected, false);
                 setButtonEnabled(1, lstAutoYields.getCount() > 0);
                 lstAutoYields.cleanUpSelections();
                 VAutoYields.this.revalidate();
