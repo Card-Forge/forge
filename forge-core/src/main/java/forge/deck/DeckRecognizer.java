@@ -159,7 +159,8 @@ public class DeckRecognizer {
         public static Token DeckSection(final String sectionName0, List<DeckSection> allowedDeckSections){
             String sectionName = sectionName0.toLowerCase().trim();
             DeckSection matchedSection = null;
-            if (sectionName.equals("side") || sectionName.contains("sideboard") || sectionName.equals("sb"))
+            if (sectionName.equals("side") || sectionName.contains("sideboard") || sectionName.equals("sb")
+                    || sectionName.equals("companion"))
                 matchedSection = DeckSection.Sideboard;
             else if (sectionName.equals("main") || sectionName.contains("card")
                     || sectionName.equals("mainboard") || sectionName.equals("deck"))
@@ -406,7 +407,7 @@ public class DeckRecognizer {
     // Core Matching Patterns (initialised in Constructor)
     public static final String REGRP_DECKNAME = "deckName";
     public static final String REX_DECK_NAME =
-            String.format("^(\\/\\/\\s*)?(?<pre>(deck|name(\\s)?))(\\:|=)\\s*(?<%s>([a-zA-Z0-9',\\/\\-\\s\\)\\]\\(\\[\\#]+))\\s*(.*)$",
+            String.format("^(\\/\\/\\s*)?(?<pre>(deck|name(\\s)?))(\\:|=|\\s+)\\s*(?<%s>([a-zA-Z0-9',\\/\\-\\s\\)\\]\\(\\[\\#!]+))\\s*(.*)$",
                     REGRP_DECKNAME);
     public static final Pattern DECK_NAME_PATTERN = Pattern.compile(REX_DECK_NAME, Pattern.CASE_INSENSITIVE);
 
@@ -433,7 +434,7 @@ public class DeckRecognizer {
     public static final String REGRP_CARD = "cardname";
     public static final String REGRP_CARDNO = "count";
 
-    public static final String REX_CARD_NAME = String.format("(\\[)?(?<%s>[a-zA-Z0-9à-ÿÀ-Ÿ&',\\.:!\\+\\\"\\/\\-\\s]+)(\\])?", REGRP_CARD);
+    public static final String REX_CARD_NAME = String.format("(\\[)?(?<%s>[a-zA-Z0-9à-ÿÀ-Ÿ&',\\.:!\\?\\+\\\"\\/\\-\\s]+)(\\])?", REGRP_CARD);
     public static final String REX_SET_CODE = String.format("(?<%s>[a-zA-Z0-9_]{2,7})", REGRP_SET);
     public static final String REX_COLL_NUMBER = String.format("(?<%s>\\*?[0-9A-Z]+(?:\\S[0-9A-Z]*)?)", REGRP_COLLNR);
     public static final String REX_CARD_COUNT = String.format("(?<%s>[\\d]{1,2})(?<mult>x)?", REGRP_CARDNO);
@@ -486,7 +487,7 @@ public class DeckRecognizer {
     private static final CharSequence[] DECK_SECTION_NAMES = {
             "side", "sideboard", "sb",
             "main", "card", "mainboard",
-            "avatar", "commander", "schemes",
+            "avatar", "commander", "companion", "schemes",
             "conspiracy", "planes", "deck", "dungeon",
             "attractions", "contraptions"};
 
@@ -521,7 +522,7 @@ public class DeckRecognizer {
     public List<Token> parseCardList(String[] cardList) {
         List<Token> tokens = new ArrayList<>();
         DeckSection referenceDeckSectionInParsing = null;  // default
-        
+
         for (String line : cardList) {
             Token token = this.recognizeLine(line, referenceDeckSectionInParsing);
             if (token == null)
@@ -601,6 +602,12 @@ public class DeckRecognizer {
             line = SEARCH_SINGLE_SLASH.matcher(line).replaceFirst(" // ");
         if (line.startsWith(ASTERISK))  // Markdown lists (tappedout md export)
             line = line.substring(2);
+        // Moxfield foil/etched markers
+        if (line.endsWith("*F*")) {
+            line = line.substring(0, line.length() - 3).trim() + " (F)";
+        } else if (line.endsWith("*E*")) {
+            line = line.substring(0, line.length() - 3).trim();
+        }
 
         // == Patches to Corner Cases
         // FIX Commander in Deckstats export
