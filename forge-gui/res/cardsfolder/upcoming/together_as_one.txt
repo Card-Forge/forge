@@ -1,7 +1,7 @@
 Name:Together as One
 ManaCost:6
 Types:Sorcery
-A:SP$ Draw | NumCards$ X | ValidTgts$ Player | SubAbility$ DBDamage | SpellDescription$ Converge — Target player draws X cards, Together as One deals X damage to any target, and you gain X life, where X is the number of colors of mana spent to cast this spell.
+A:SP$ Draw | NumCards$ X | ValidTgts$ Player | SubAbility$ DBDamage | SpellDescription$ Converge — Target player draws X cards, CARDNAME deals X damage to any target, and you gain X life, where X is the number of colors of mana spent to cast this spell.
 SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Count$Converge
