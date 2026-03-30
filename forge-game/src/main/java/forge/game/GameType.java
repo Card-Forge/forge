@@ -1,6 +1,7 @@
 package forge.game;
 
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -44,12 +45,14 @@ public enum GameType {
     MomirBasic          (DeckFormat.Constructed, false, false, false, "lblMomirBasic", "lblMomirBasicDesc", player -> {
         Deck deck = new Deck();
         CardPool mainDeck = deck.getMain();
-        String setcode = Aggregates.random(StaticData.instance().getBlockLands());
-        mainDeck.add("Plains", setcode, 12, true);
-        mainDeck.add("Island", setcode, 12, true);
-        mainDeck.add("Swamp", setcode, 12, true);
-        mainDeck.add("Mountain", setcode, 12, true);
-        mainDeck.add("Forest", setcode, 12, true);
+        for (int i = 0; i < 12; i++) {
+            String setcode = Aggregates.random(StaticData.instance().getBlockLands());
+            mainDeck.add("Plains", setcode, 1, true);
+            mainDeck.add("Island", setcode, 1, true);
+            mainDeck.add("Swamp", setcode, 1, true);
+            mainDeck.add("Mountain", setcode, 1, true);
+            mainDeck.add("Forest", setcode, 1, true);
+        }
         deck.getOrCreate(DeckSection.Avatar).add(StaticData.instance().getVariantCards()
                 .getCard("Momir Vig, Simic Visionary Avatar"), 1);
         return deck;
@@ -57,12 +60,14 @@ public enum GameType {
     MoJhoSto      (DeckFormat.Constructed, false, false, false, "lblMoJhoSto", "lblMoJhoStoDesc", player -> {
         Deck deck = new Deck();
         CardPool mainDeck = deck.getMain();
-        String setcode = Aggregates.random(StaticData.instance().getBlockLands());
-        mainDeck.add("Plains", setcode, 12, true);
-        mainDeck.add("Island", setcode, 12, true);
-        mainDeck.add("Swamp", setcode, 12, true);
-        mainDeck.add("Mountain", setcode, 12, true);
-        mainDeck.add("Forest", setcode, 12, true);
+        for (int i = 0; i < 12; i++) {
+            String setcode = Aggregates.random(StaticData.instance().getBlockLands());
+            mainDeck.add("Plains", setcode, 1, true);
+            mainDeck.add("Island", setcode, 1, true);
+            mainDeck.add("Swamp", setcode, 1, true);
+            mainDeck.add("Mountain", setcode, 1, true);
+            mainDeck.add("Forest", setcode, 1, true);
+        }
         deck.getOrCreate(DeckSection.Avatar).add(StaticData.instance().getVariantCards()
                 .getCard("Momir Vig, Simic Visionary Avatar"), 1);
         deck.getOrCreate(DeckSection.Avatar).add(StaticData.instance().getVariantCards()
