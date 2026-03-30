@@ -338,6 +338,7 @@ public abstract class GameLobby implements IHasGameType {
 
     /** Returns a runnable to start a match with the applied variants if allowed. */
     public Runnable startGame() {
+        FModel.getBlocks(); // Ensure blocks are loaded for Momir Basic and MoJhoSto deck generation
         final List<LobbySlot> activeSlots = Lists.newArrayListWithCapacity(getNumberOfSlots());
         for (final LobbySlot slot : data.slots) {
             if (slot.getType() != LobbySlotType.OPEN) {
