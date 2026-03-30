@@ -1,7 +1,6 @@
 package forge.game;
 
 import java.util.EnumSet;
-import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 
