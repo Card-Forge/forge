@@ -1,10 +1,10 @@
 eleshnorn.png
-size: 448,320
+size: 512,320
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none          
 Avatar
-  xy: 32, 272
+  xy: 336, 176
   size: 16, 16      
 Idle 
   xy: 0, 0
@@ -26,40 +26,64 @@ Idle
   size: 64, 80     
 Idle 
   xy: 384, 0
-  size: 64, 80          
-Attack 
+  size: 64, 80
+Walk 
   xy: 0, 80
-  size: 64, 80       
-Attack 
+  size: 64, 80      
+Walk 
   xy: 64, 80
   size: 64, 80    
-Attack 
+Walk 
   xy: 128, 80
   size: 64, 80    
-Attack 
+Walk 
   xy: 192, 80
+  size: 64, 80 
+Walk 
+  xy: 256, 80
+  size: 64, 80     
+Walk 
+  xy: 320, 80
+  size: 64, 80     
+Walk 
+  xy: 384, 80
+  size: 64, 80
+Walk 
+  xy: 428, 80
+  size: 64, 80            
+Attack 
+  xy: 0, 160
+  size: 64, 80       
+Attack 
+  xy: 64, 160
+  size: 64, 80    
+Attack 
+  xy: 128, 160
+  size: 64, 80    
+Attack 
+  xy: 192, 160
   size: 64, 80      
 Attack 
-  xy: 256, 80
+  xy: 256, 160
   size: 64, 80          
 Death 
-  xy: 0, 160
+  xy: 0, 240
   size: 64, 80      
 Death 
-  xy: 64, 160
+  xy: 64, 240
   size: 64, 80      
 Death 
-  xy: 128, 160
+  xy: 128, 240
   size: 64, 80      
 Death 
-  xy: 192, 160
+  xy: 192, 240
   size: 64, 80
 Death 
-  xy: 256, 160
+  xy: 256, 240
   size: 64, 80     
 Death 
-  xy: 320, 160
+  xy: 320, 240
   size: 64, 80     
 Death 
-  xy: 384, 160
+  xy: 384, 240
   size: 64, 80   

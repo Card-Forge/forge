@@ -7,6 +7,7 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
+import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -61,7 +62,7 @@ public class PumpAi extends PumpAiBase {
 
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph,
-            final String logic) {
+                                             final String logic) {
         // special Phase check for various AI logics
         if (logic.equals("MoveCounter")) {
             if (ph.inCombat() && ph.getPlayerTurn().isOpponentOf(ai)) {
@@ -145,7 +146,7 @@ public class PumpAi extends PumpAiBase {
                 if (cType != null) {
                     attr = CardLists.filter(attr, CardPredicates.hasCounter(cType));
                     if (attr.isEmpty()) {
-                        return new AiAbilityDecision(0,AiPlayDecision.TargetingFailed);
+                        return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                     }
                     CardCollection best = CardLists.filter(attr, card -> {
                         int amount = 0;
@@ -259,12 +260,9 @@ public class PumpAi extends PumpAiBase {
 
         int defense;
         if (numDefense.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
-            // Set PayX here to maximum value.
-            int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
-            sa.setXManaCostPaid(xPay);
-            defense = xPay;
+            defense = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
             if (numDefense.equals("-X")) {
-                defense = -xPay;
+                defense = -defense;
             }
         } else {
             defense = AbilityUtils.calculateAmount(sa.getHostCard(), numDefense, sa);
@@ -275,9 +273,8 @@ public class PumpAi extends PumpAiBase {
 
         int attack;
         if (numAttack.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
-            // Set PayX here to maximum value.
             if (root.getXManaCostPaid() == null) {
-                final int xPay = ComputerUtilCost.getMaxXValue(root, ai, sa.isTrigger());
+                final int xPay = ComputerUtilCost.setMaxXValue(root, ai, sa.isTrigger());
                 root.setXManaCostPaid(xPay);
                 attack = xPay;
             } else {
@@ -318,7 +315,8 @@ public class PumpAi extends PumpAiBase {
                 if (!card.getController().isOpponentOf(ai)) {
                     if (ComputerUtilCard.shouldPumpCard(ai, sa, card, defense, attack, keywords, false)) {
                         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                    } else if (containsUsefulKeyword(ai, keywords, card, sa, attack)) {
+                    }
+                    if (containsUsefulKeyword(ai, keywords, card, sa, attack)) {
                         if (game.getPhaseHandler().is(PhaseType.MAIN1) && isSorcerySpeed(sa, ai) ||
                                 game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS, ai) ||
                                 game.getPhaseHandler().is(PhaseType.COMBAT_BEGIN, ai)) {
@@ -331,7 +329,8 @@ public class PumpAi extends PumpAiBase {
                         }
 
                         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                    } else if (grantsUsefulExtraBlockOpts(ai, sa, card, keywords)) {
+                    }
+                    if (grantsUsefulExtraBlockOpts(ai, sa, card, keywords)) {
                         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                     }
                 }
@@ -347,7 +346,7 @@ public class PumpAi extends PumpAiBase {
     }
 
     private boolean pumpTgtAI(final Player ai, final SpellAbility sa, final int defense, final int attack, final boolean mandatory,
-    		boolean immediately) {
+                              boolean immediately) {
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & "))
                 : Lists.newArrayList();
         final Game game = ai.getGame();
@@ -418,10 +417,9 @@ public class PumpAi extends PumpAiBase {
                 if (!list.isEmpty()) {
                     sa.getTargets().add(list.get(0));
                     return true;
-                } else {
-                    return false;
                 }
-            }  else if (sa.getParam("AILogic").equals("SameName")) {
+                return false;
+            } else if (sa.getParam("AILogic").equals("SameName")) {
                 return doSameNameLogic(ai, sa);
             } else if (sa.getParam("AILogic").equals("SacOneEach")) {
                 // each player sacrifices one permanent, e.g. Vaevictis, Asmadi the Dire - grab the worst for allied and
@@ -616,9 +614,7 @@ public class PumpAi extends PumpAiBase {
         if (numDefense.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             if (root.getXManaCostPaid() == null) {
-                final int xPay = ComputerUtilCost.getMaxXValue(root, ai, true);
-                root.setXManaCostPaid(xPay);
-                defense = xPay;
+                defense = ComputerUtilCost.setMaxXValue(root, ai, true);
             } else {
                 defense = root.getXManaCostPaid();
             }
@@ -630,9 +626,7 @@ public class PumpAi extends PumpAiBase {
         if (numAttack.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             if (root.getXManaCostPaid() == null) {
-                final int xPay = ComputerUtilCost.getMaxXValue(root, ai, true);
-                root.setXManaCostPaid(xPay);
-                attack = xPay;
+                attack = ComputerUtilCost.setMaxXValue(root, ai, true);
             } else {
                 attack = root.getXManaCostPaid();
             }
@@ -645,10 +639,13 @@ public class PumpAi extends PumpAiBase {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        } else {
-            boolean result = pumpTgtAI(ai, sa, defense, attack, mandatory, true);
-            return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
+
+        if (pumpTgtAI(ai, sa, defense, attack, mandatory, true)) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        }
+
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override
@@ -684,10 +681,8 @@ public class PumpAi extends PumpAiBase {
         int attack;
         if (numAttack.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
             if (root.getXManaCostPaid() == null) {
-                // X is not set yet
-                final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
-                root.setXManaCostPaid(xPay);
-                attack = xPay;
+                attack = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
+                root.setXManaCostPaid(attack);
             } else {
                 attack = root.getXManaCostPaid();
             }
@@ -698,10 +693,8 @@ public class PumpAi extends PumpAiBase {
         int defense;
         if (numDefense.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
             if (root.getXManaCostPaid() == null) {
-                // X is not set yet
-                final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
-                root.setXManaCostPaid(xPay);
-                defense = xPay;
+                defense = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
+                root.setXManaCostPaid(defense);
             } else {
                 defense = root.getXManaCostPaid();
             }
@@ -722,9 +715,8 @@ public class PumpAi extends PumpAiBase {
             }
             if (source.getNetToughness() + defense > 0) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
@@ -798,5 +790,14 @@ public class PumpAi extends PumpAiBase {
         }
 
         return false;
+    }
+
+    @Override
+    protected boolean willPayCosts(final Player payer, final SpellAbility sa, final Cost cost, final Card source) {
+        if (!ComputerUtilCost.checkExileFromGraveCost(cost, payer, sa)) {
+            return false;
+        }
+
+        return super.willPayCosts(payer,sa, cost, source);
     }
 }

@@ -13,7 +13,6 @@ public class GuiBase {
     private static String adventureDirectory = null;
     private static boolean interrupted = false;
     private static int androidAPI = 0;
-    private static int deviceRAM = 0;
     private static String downloadsDir = "";
     private static boolean usingAppDirectory = false;
     private static ForgePreferences forgePrefs;
@@ -36,23 +35,22 @@ public class GuiBase {
     public static void setUsingAppDirectory(boolean value) { usingAppDirectory = value; }
     public static boolean isUsingAppDirectory() { return usingAppDirectory; }
 
-    public static void setDeviceInfo(HWInfo hw, int AndroidAPI, int RAM, String dir) {
+    public static void setDeviceInfo(HWInfo hw, int AndroidAPI, String dir) {
         hwInfo = hw;
         androidAPI = AndroidAPI;
-        deviceRAM = RAM;
         downloadsDir = dir;
     }
     public static String getHWInfo() {
         Runtime runtime = Runtime.getRuntime();
         StringBuilder sb = new StringBuilder();
-        sb.append("##########################################\n");
-        sb.append("APP: Forge v.").append(getInterface().getCurrentVersion());
+        sb.append("##########################################");
+        sb.append("\nAPP: Forge v.").append(getInterface().getCurrentVersion());
         if (hwInfo != null) {
             sb.append("\nDEV: ").append(hwInfo.device().getName());
             sb.append(hwInfo.getChipset()
                     ? "\nSOC: " + hwInfo.device().getChipset()
                     : "\nCPU: " + hwInfo.device().getCpuDescription());
-            sb.append("\nRAM: ").append(deviceRAM).append(" MB");
+            sb.append("\nRAM: ").append(hwInfo.getTotalRam()).append(" MB");
             sb.append("\nOS: ").append(hwInfo.os().getRawDescription());
         } else {
             sb.append("\nJava: ").append(System.getProperty("java.version"))
@@ -75,7 +73,6 @@ public class GuiBase {
         return downloadsDir;
     }
     public static int getAndroidAPILevel() { return androidAPI; }
-    public static int getDeviceRAM() { return deviceRAM; }
 
     public static boolean isNetworkplay(IGuiGame game) {
         if (game != null) {

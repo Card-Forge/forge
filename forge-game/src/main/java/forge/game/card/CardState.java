@@ -30,6 +30,7 @@ import forge.game.IHasSVars;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.ApiType;
 import forge.game.card.CardView.CardStateView;
+import forge.game.cost.Cost;
 import forge.game.keyword.IKeywordsChange;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordCollection;
@@ -308,7 +309,6 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     public String getFlavorName() {
         return flavorName;
     }
-
     public void setFlavorName(String flavorName) {
         this.flavorName = flavorName;
         view.updateName(this);
@@ -346,6 +346,10 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     }
     public final void setBaseToughnessString(final String s) {
         baseToughnessString = s;
+    }
+
+    public final boolean hasPrintedPT() {
+        return !StringUtils.isEmpty(basePowerString) || !StringUtils.isEmpty(baseToughnessString);
     }
 
     public String getBaseLoyalty() {
@@ -727,6 +731,9 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     }
 
     public FCollectionView<ReplacementEffect> getReplacementEffects() {
+        return getReplacementEffects(true);
+    }
+    public FCollectionView<ReplacementEffect> getReplacementEffects(boolean rulesHost) {
         FCollection<ReplacementEffect> result = new FCollection<>(replacementEffects);
         // add Split to Original
         if (getStateName().equals(CardStateName.Original)) {
@@ -749,7 +756,11 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             result.add(defenseRep);
         }
 
-        card.updateReplacementEffects(result, this);
+        card.updateReplacementEffects(result, this, rulesHost);
+
+        if (!rulesHost) {
+            return result;
+        }
 
         // below are global rules
         if (type.hasSubtype("Saga") && !hasKeyword(Keyword.READ_AHEAD)) {
@@ -1073,13 +1084,13 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
 
     public SpellAbility getManifestUp() {
         if (this.manifestUp == null) {
-            manifestUp = CardFactoryUtil.abilityTurnFaceUp(this, "ManifestUp", "Unmanifest");
+            manifestUp = CardFactoryUtil.abilityTurnFaceUp(this, new Cost(this.getManaCost(), true), "ManifestUp", "Unmanifest", "manacost");
         }
         return manifestUp;
     }
     public SpellAbility getCloakUp() {
         if (this.cloakUp == null) {
-            cloakUp = CardFactoryUtil.abilityTurnFaceUp(this, "CloakUp", "Uncloak");
+            cloakUp = CardFactoryUtil.abilityTurnFaceUp(this, new Cost(this.getManaCost(), true), "CloakUp", "Uncloak", "manacost");
         }
         return cloakUp;
     }

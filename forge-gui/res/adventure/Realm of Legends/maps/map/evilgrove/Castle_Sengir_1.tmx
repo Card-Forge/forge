@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="140">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="147">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -25,12 +25,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzt1z9OAkEUBvBnoIAECgoTGpDGijPYiI0XEIkVV7A2JCB4AoaEwmVKLkEDHMJrEKJQ8ghuWJON7KxvXGbz/ZIvM9kss++xsH+IAORNL8Nz7ubl8IisrYgWnKX6uX2lD+Pz97jWMseLVFPMfqOc39sRUYNzN7JTexxWzy/3ueAsA/1+aqIv/fv8HLn6/917KBE1A3ksJV0RAEC4+7zMOjdDmXXSxNX7b1yvHlGfM+BkJkRZzhvPu5yel0xNH/XoAbueiklX8L/auaQrkHN9cXqfWcF+HZAuuD4DuEPqfeFlLLMOANj1zu/23vA4muo49txfUURVdRz3Jty3Nuy9FZi78h2M1SFXnJo6vX8a+D1HtbFXSiym91KTXn3+73dr/lFxeHYAAPibHazIenA=
+   eJztmTlOxDAYhR+CAiQopkCiYWmoOAMN0HABFlFxBUSJkFhPMB4pBRmXXIKGmUNwDcQ2JX8E0RgrmckEexJH75OefsdxnP85qxOAEPc8Lmer7jyvZMtJ3wroifrqb/2r/olnv/FNu9lfoZxK+i1yfHc6wK5or+Mn9zJ4Pb7isyfqG34/NPCpR5frSKjXb8JBCzg0dNSqOiNCCMlmf8FNP9ttN/00iVCfv2W5iYFb0Z1otgvMie6lfCW6jqvJ6WWruIhfTpaqzmC6nM5XnYE7NmfGt3la9J8HaRa8PxMSDq7mCxeRm34IqSuXDXnffZC5fdwexkkxxyGEMVlVwJoaxnMNdMW3trwPcrZP64+NuhB8J0Ti910D6xI3rH9Ftodxy6GQeI5U/nrb15dRHuS08Y35DWnSZ+korym2rzTmnfPThO8OhBDyP74BZ1WHTQ==
   </data>
  </layer>
  <layer id="8" name="Clutter" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJztmUtOwzAURb2AdMwnwzbsgo3AEmAIFQPEiA2QT0UbBpaasAo6QSwJUIc8Kw1pEtsNtfPsUB/pyq4TOb5+/sklxOFQ5/FIX113tEinm/SW6qvbJOdxoY+kKiv7zU+qlElnf5qi9MvEGEeETEDjEFJQENbz7FkQmW2zCk2/S/CSgZbgLQPlYT3PnuUD9ivDT9plz2n/32XzhnptmZhPxy/43zQJRnz/yv28LV3YGF+eP1a2iirtC0Z8eXukDFE8m2vxPmDEV0c7m/WIxroN++9vfGd66mn227Z3W/Zf1dgyus5f3WvcEOhjbVfhyusuFZxfM2D4vfYK2TCusfymT/rarALWeHYMBx1nNAz6OE/azKH5fZ/153e1Wc/eDmRduxwV6cXIbDsc/fFgWWzLe8gM5l0Oeo3reQxM9MkkISQAnSX1fFduKL98LXhfVG4K3n24jE/KL2/Gbtfv/4LM17rDO7rYvmv4ooR8U/79gyzeJzDPT0F+LP9fAtOXiOlCrK7MwecClFp+tnI4HA5MfgD2btEJ
+   eJztmT9OwzAUxs2ezlAytuEWXIMBjgArFQMjFyB/KtowRGrCIRBdKi7DLXiWG5I4jklr59lR/ZM+2bIlx59f/Bw5hDgc6ryc6xvrKWPlYl8+ZvrGNsl1zPSdVG3luvlJVVLpXE9TlH6pKLOIkDloFkIJCsJmnfYFkdk5q8D73YCXHLQBbzmoCJt12leM2K8MP2m3vaXDP5fum8xry8R+unjHf6ZJMOJ7KM+rtnRhY3xF/mjbNqp0LBjxFZ2RMrriyefiY8CIr4558uN0ves2nL9/8V3qGYdft7p3W85f1dhS+u5f3TluDAyR21W49/pLBefXDBh+HzwmG95rLL/pq745q4D1PjvGg45vNAyG+J60mVPzu1sO53e7z2dfJ5LX7iasvJ2YnYdjGM6mTDZR3kPmsO8K0EfcrKsg81r2mVqTeUJIALpKmvW+/Hy222Reyr66TCK6D5ch8kvhvfBxtcWvTkS+RH4xfNfvGnY3TKL7B1m8p7DPL0F+LP4vIfOGHd/Fult9WYHPNSj9J7/Z4NfhcDiw+AX8GM2I
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -99,7 +99,7 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 6,
     &quot;colors&quot;: [ &quot;black&quot; ],
-    &quot;subType&quot;: [ &quot;Vampire&quot;],
+    &quot;subTypes&quot;: [ &quot;Vampire&quot;],
     &quot;rarity&quot;: [ &quot;uncommon&quot; ]
   }
 ]
@@ -114,7 +114,7 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 3,
     &quot;colors&quot;: [ &quot;black&quot; ],
-    &quot;subType&quot;: [ &quot;Vampire&quot;],
+    &quot;subTypes&quot;: [ &quot;Vampire&quot;],
     &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ]
   }
 ]
@@ -147,5 +147,12 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
   <object id="137" template="../../../../common/maps/obj/collision.tx" x="625.982" y="50.5215" width="43.0363" height="43.4571"/>
   <object id="138" template="../../../../common/maps/obj/collision.tx" x="336.482" y="337.271" width="173.536" height="13.4571"/>
   <object id="139" template="../../../../common/maps/obj/collision.tx" x="337.732" y="241.771" width="173.536" height="13.4571"/>
+  <object id="140" template="../../../../common/maps/obj/collision.tx" x="291.149" y="465.605" width="33.703" height="26.4571"/>
+  <object id="141" template="../../../../common/maps/obj/collision.tx" x="338.482" y="464.105" width="33.703" height="26.4571"/>
+  <object id="142" template="../../../../common/maps/obj/collision.tx" x="485.815" y="465.771" width="19.703" height="21.4571"/>
+  <object id="143" template="../../../../common/maps/obj/collision.tx" x="518.148" y="465.605" width="19.703" height="21.4571"/>
+  <object id="144" template="../../../../common/maps/obj/collision.tx" x="257.815" y="545.605" width="108.703" height="14.4571"/>
+  <object id="145" template="../../../../common/maps/obj/collision.tx" x="561.482" y="483.938" width="29.3697" height="21.1238"/>
+  <object id="146" template="../../../../common/maps/obj/collision.tx" x="529.315" y="528.438" width="44.703" height="27.7905"/>
  </objectgroup>
 </map>

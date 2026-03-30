@@ -1,0 +1,9 @@
+Name:Prismari Charm
+ManaCost:U R
+Types:Instant
+A:SP$ Charm | Choices$ DBSurveil,DBDealDamage,DBChangeZone
+SVar:DBSurveil:DB$ Surveil | Amount$ 2 | SubAbility$ DBDraw | SpellDescription$ Surveil 2, then draw a card.
+SVar:DBDraw:DB$ Draw
+SVar:DBDealDamage:DB$ DealDamage | ValidTgts$ Any | TargetMin$ 1 | TargetMax$ 2 | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to each of one or two targets.
+SVar:DBChangeZone:DB$ ChangeZone | ValidTgts$ Permanent.nonLand | ValidTgtDesc$ nonland permanent | TgtZone$ Battlefield | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target nonland permanent to its owner's hand.
+Oracle:Choose one —\n• Surveil 2, then draw a card.\n• Prismari Charm deals 1 damage to each of one or two targets.\n• Return target nonland permanent to its owner's hand.

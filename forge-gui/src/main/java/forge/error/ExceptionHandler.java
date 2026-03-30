@@ -18,8 +18,6 @@
 
 package forge.error;
 
-import org.tinylog.Logger;
-
 import forge.FTrace;
 import forge.gui.error.BugReporter;
 import forge.localinstance.properties.ForgeConstants;
@@ -82,7 +80,8 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
         oldSystemErr = System.err;
         System.setErr(new PrintStream(new MultiplexOutputStream(System.err, logFileStream), true));
 
-        Logger.debug("Error handling registered!");
+        // no logger here, if it ever fails we'll know at least we passed through here
+        System.out.println("Error handling registered!");
         FTrace.initialize();
     }
 

@@ -128,12 +128,13 @@ public class CountersPutAi extends CountersAi {
         // based on what the expected targets could be
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getHostCard();
+        final Game game = ai.getGame();
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         Card choice = null;
         final String amountStr = sa.getParamOrDefault("CounterNum", "1");
         final boolean divided = sa.isDividedAsYouChoose();
         final String logic = sa.getParamOrDefault("AILogic", "");
-        PhaseHandler ph = ai.getGame().getPhaseHandler();
+        PhaseHandler ph = game.getPhaseHandler();
         final String[] types;
         if (sa.hasParam("CounterType")) {
             // TODO some cards let you choose types, should check each
@@ -302,6 +303,8 @@ public class CountersPutAi extends CountersAi {
             return doChargeToOppCtrlCMCLogic(ai, sa);
         } else if (logic.equals("TheOneRing")) {
             return SpecialCardAi.TheOneRing.consider(ai, sa);
+        } else if (sa.isKeyword(Keyword.STATION)) {
+            return doStationAi(ai, sa);
         }
 
         if (sourceName.equals("Feat of Resistance")) { // sub-ability should take precedence
@@ -332,13 +335,15 @@ public class CountersPutAi extends CountersAi {
             amount = 1; // TODO: improve this to possibly account for some variability depending on the roll outcome (e.g. 4 for 1d8, perhaps)
         }
 
-        if (sa.hasParam("Adapt")) {
-            Game game = ai.getGame();
+        if (ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             Combat combat = game.getCombat();
-
-            if (!source.canReceiveCounters(CounterEnumType.P1P1) || source.getCounters(CounterEnumType.P1P1) > 0) {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-            } else if (combat != null && ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+            if (sourceName.equals("Psychic Frog")) {
+                return doCombatAdaptLogic(source, amount, combat);
+            }
+            if (sa.hasParam("Adapt")) {
+                if (!source.canReceiveCounters(CounterEnumType.P1P1) || source.getCounters(CounterEnumType.P1P1) > 0) {
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                }
                 return doCombatAdaptLogic(source, amount, combat);
             }
         }
@@ -354,7 +359,7 @@ public class CountersPutAi extends CountersAi {
         if (amountStr.equals("X")) {
             if (sa.getSVar(amountStr).equals("Count$xPaid")) {
                 // By default, set PayX here to maximum value (used for most SAs of this type).
-                amount = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
+                amount = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
 
                 if (isClockwork) {
                     // Clockwork Avian and other similar cards: do not tap all mana for X,
@@ -380,7 +385,7 @@ public class CountersPutAi extends CountersAi {
                         .filter(CardPredicates.CREATURES)
                         .mapToInt(Card::getCMC)
                         .max().orElse(0);
-                if (amount > 0 && ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)) {
+                if (amount > 0 && ph.is(PhaseType.END_OF_TURN)) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
             }
@@ -430,7 +435,7 @@ public class CountersPutAi extends CountersAi {
         final boolean sacSelf = ComputerUtilCost.isSacrificeSelfCost(abCost);
 
         if (sa.usesTargeting()) {
-            if (!ai.getGame().getStack().isEmpty() && !isSorcerySpeed(sa, ai)) {
+            if (!game.getStack().isEmpty() && !isSorcerySpeed(sa, ai)) {
                 // only evaluates case where all tokens are placed on a single target
                 if (sa.getMinTargets() < 2) {
                     AiAbilityDecision decision = ComputerUtilCard.canPumpAgainstRemoval(ai, sa);
@@ -498,7 +503,7 @@ public class CountersPutAi extends CountersAi {
                     && sa.getPayCosts().hasOnlySpecificCostType(CostPutCounter.class)
                     && sa.isTargetNumberValid()
                     && sa.getTargets().isEmpty()
-                    && ai.getGame().getPhaseHandler().is(PhaseType.MAIN2, ai)) {
+                    && ph.is(PhaseType.MAIN2, ai)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
             }
 
@@ -566,7 +571,7 @@ public class CountersPutAi extends CountersAi {
                                 increasesCharmOutcome = !choices.get(0).getTargets().isEmpty(); 
                             }
                             if (source != null && !source.isSpell() || increasesCharmOutcome // does not cost a card or can buff charm for no expense
-                                    || ph.getTurn() - source.getTurnInZone() >= source.getGame().getPlayers().size() * 2) {
+                                    || ph.getTurn() - source.getTurnInZone() >= game.getPlayers().size() * 2) {
                                 if (abCost == Cost.Zero || ph.is(PhaseType.END_OF_TURN) && ph.getPlayerTurn().isOpponentOf(ai)) {
                                     // only use at opponent EOT unless it is free
                                     choice = chooseBoonTarget(list, type);
@@ -782,7 +787,7 @@ public class CountersPutAi extends CountersAi {
                     && amount == 0 // And counter amount wasn't set previously by something (e.g. Wildborn Preserver)
                     && sa.hasSVar(amountStr) && sa.getSVar(amountStr).equals("Count$xPaid")) {
                 // Spend all remaining mana to add X counters (eg. Hero of Leina Tower)
-                int payX = ComputerUtilCost.getMaxXValue(sa, ai, true);
+                int payX = ComputerUtilCost.setMaxXValue(sa, ai, true);
 
                 root.setXManaCostPaid(payX);
             }
@@ -1073,6 +1078,15 @@ public class CountersPutAi extends CountersAi {
     public CounterType chooseCounterType(List<CounterType> options, SpellAbility sa, Map<String, Object> params) {
         Player ai = sa.getActivatingPlayer();
         GameEntity e = (GameEntity) params.get("Target");
+
+        if (e == null) {
+            List<Card> list = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
+            if (list.isEmpty()) {
+                return Iterables.getFirst(options, null);
+            }
+            e = list.get(0);
+        }
+
         // for Card try to select not useless counter
         if (e instanceof Card c) {
             if (c.getController().isOpponentOf(ai)) {
@@ -1144,6 +1158,7 @@ public class CountersPutAi extends CountersAi {
     }
 
     private AiAbilityDecision doCombatAdaptLogic(Card source, int amount, Combat combat) {
+        // TODO use smarter ComputerUtilCombat checks
         if (combat.isAttacking(source)) {
             if (!combat.isBlocked(source)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
@@ -1227,5 +1242,47 @@ public class CountersPutAi extends CountersAi {
         }
         // If the AI has enough counters or more than the optimal CMC, it should not play the ability.
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+    }
+
+    private AiAbilityDecision doStationAi(Player ai, SpellAbility sa) {
+        Card source = sa.getHostCard();
+        PhaseHandler ph = source.getGame().getPhaseHandler();
+
+        int numStation = source.getKeywordMagnitude(Keyword.STATION);
+        int numCharge = source.getCounters(CounterEnumType.CHARGE);
+        CardCollection canTap = CardLists.filter(ai.getCreaturesInPlay(), c -> c.getNetPower() > 0 && c.isUntapped());
+        if (canTap.isEmpty()) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
+
+        CardLists.sortByPowerAsc(canTap); // Note: matches the way chooseTapType sorts them; maybe worth sorting in descending order for Station?
+
+        // TODO: make this smarter so that the AI is better at predicting conditions when this is safe
+        // (also needs a modification to willPayCosts and ComputerUtil.chooseTapType to make better choices for what exactly to tap)
+
+        // If a single creature is enough to turn an untapped station into a creature, allow it
+        if (ph.is(PhaseType.MAIN1, ai)) {
+            Card firstToTap = canTap.getFirst();
+            if (source.getType().hasSubtype("Spacecraft") && !source.isCreature() && source.isUntapped()) {
+                if (numCharge < numStation && numCharge + firstToTap.getNetPower() >= numStation
+                        && firstToTap.getNetPower() <= source.getBasePower()) {
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                }
+            }
+        }
+
+        // If there's nothing to possibly block next turn, or we can reasonably stay on high enough life, go for it
+        if (ph.is(PhaseType.MAIN2, ai)) {
+            List<Card> nextTurnAttackers = CardLists.filter(ai.getStrongestOpponent().getCreaturesInPlay(), c -> CombatUtil.canAttackNextTurn(c, ai));
+            CardCollection blockerList = CardLists.filter(canTap, CardPredicates.possibleBlockerForAtLeastOne(nextTurnAttackers));
+
+            if (numCharge < numStation) {
+                if (blockerList.isEmpty() || ComputerUtil.predictNextCombatsRemainingLife(ai, false, true, 0, blockerList) > ai.getStartingLife() * 2 / 3) {
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                }
+            }
+        }
+
+        return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
     }
 }

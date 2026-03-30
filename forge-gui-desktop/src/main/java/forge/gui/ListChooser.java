@@ -43,12 +43,15 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import java.awt.image.BufferedImage;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
 import forge.card.CardType;
 import forge.card.MagicColor;
+import forge.game.card.CounterKeywordType;
+import forge.game.card.CounterType;
 import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FList;
 import forge.toolbox.FMouseAdapter;
@@ -58,6 +61,7 @@ import forge.toolbox.FSkin;
 import forge.toolbox.FTextField;
 import forge.util.ITranslatable;
 import forge.util.Localizer;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * A simple class that shows a list of choices in a dialog. Two properties
@@ -190,7 +194,7 @@ public class ListChooser<T> {
     }
 
     private void applyFilter(final FTextField searchField) {
-        final String text = searchField.getText().toLowerCase();
+        final String text = normalize(searchField.getText());
         lstChoices.clearSelection();
 
         if (text.isEmpty()) {
@@ -199,7 +203,7 @@ public class ListChooser<T> {
             final List<T> startsWith = new ArrayList<>();
             final List<T> contains = new ArrayList<>();
             for (final T item : allItems) {
-                final String name = getDisplayText(item).toLowerCase();
+                final String name = normalize(getDisplayText(item));
                 if (name.startsWith(text)) {
                     startsWith.add(item);
                 } else if (name.contains(text)) {
@@ -216,6 +220,10 @@ public class ListChooser<T> {
         if (!displayedItems.isEmpty() && maxChoices > 0) {
             lstChoices.setSelectedIndex(0);
         }
+    }
+
+    private static String normalize(final String s) {
+        return StringUtils.stripAccents(s.toLowerCase()).replaceAll("[^a-z0-9 ]", "");
     }
 
     private String getDisplayText(final T value) {
@@ -384,6 +392,8 @@ public class ListChooser<T> {
         public final Function<T, String> transformer;
         public final DefaultListCellRenderer defRenderer;
 
+        static ImageIcon emptyIcon = new ImageIcon(new BufferedImage(24, 24, BufferedImage.TYPE_INT_ARGB));
+
         /**
          * TODO: Write javadoc for Constructor.
          */
@@ -400,18 +410,20 @@ public class ListChooser<T> {
             Component result = defRenderer.getListCellRendererComponent(list, getLabel(value), index, isSelected, cellHasFocus);
             if (value instanceof MagicColor.Color c) {
                 defRenderer.setIcon(fromSkinProp(FSkinProp.iconFromColor(c)));
-            }
-            if (value instanceof CardType.CoreType c) {
+            } else if (value instanceof CardType.CoreType c) {
                 defRenderer.setIcon(fromSkinProp(FSkinProp.iconFromCoreType(c)));
+            } else if (value instanceof CounterType) {
+                if (value instanceof CounterKeywordType c && c.isKeywordCounter()) {
+                    defRenderer.setIcon(fromSkinProp(FSkinProp.iconFromKeyword(c.type(), c.keyword())));
+                } else {
+                    defRenderer.setIcon(fromSkinProp(null));
+                }
             }
             return result;
         }
 
         protected ImageIcon fromSkinProp(FSkinProp prop) {
-            if (prop == null) {
-                return null;
-            }
-            return FSkin.getImage(prop, 24, 24).getIcon();
+            return prop == null ? emptyIcon : FSkin.getImage(prop, 24, 24).getIcon();
         }
 
         protected String getLabel(final T value) {

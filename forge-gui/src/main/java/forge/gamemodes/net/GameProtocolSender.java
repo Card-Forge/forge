@@ -16,6 +16,11 @@ public final class GameProtocolSender {
         remote.send(new GuiGameEvent(method, args));
     }
 
+    public void write(final ProtocolMethod method, final Object... args) {
+        method.checkArgs(args);
+        remote.write(new GuiGameEvent(method, args));
+    }
+
     @SuppressWarnings("unchecked")
     public <T> T sendAndWait(final ProtocolMethod method, final Object... args) {
         method.checkArgs(args);

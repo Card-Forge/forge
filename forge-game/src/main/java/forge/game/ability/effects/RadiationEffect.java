@@ -28,6 +28,6 @@ public class RadiationEffect extends SpellAbilityEffect {
                 p.removeRadCounters(-num);
             }
         }
-        table.replaceCounterEffect(game, sa, true);
+        table.replaceCounterEffect(game, sa);
     }
 }

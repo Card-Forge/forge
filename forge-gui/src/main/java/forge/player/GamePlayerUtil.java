@@ -90,7 +90,6 @@ public final class GamePlayerUtil {
 
         assert (!profile.isEmpty()); // TODO test instead of assert
 
-        System.out.println("[AI Preferences] using profile " + profile);
         player.setAiProfile(profile);
         player.setAvatarIndex(avatarIndex);
         player.setSleeveIndex(sleeveIndex);

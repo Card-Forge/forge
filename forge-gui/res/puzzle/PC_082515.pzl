@@ -3,7 +3,7 @@ Name:Perplexing Chimera (GatheringMagic.com) 082515 - Righteous Indignation
 URL:http://www.gatheringmagic.com/seanuy-082515-righteous-indignation/
 Goal:Win
 Turns:2
-Difficulty:Hard
+Difficulty:Rare
 Description:Win on your next turn.
 [state]
 ActivePlayer=AI

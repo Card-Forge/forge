@@ -2,12 +2,12 @@ package forge.game.ability.effects;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 
@@ -60,15 +60,9 @@ public class ReplaceTokenEffect extends SpellAbilityEffect {
         } else if ("AddToken".equals(sa.getParam("Type"))) {
             long timestamp = game.getNextTimestamp();
 
-            Map<Player, Integer> byController = Maps.newHashMap();
-            for (Map.Entry<Card, Integer> e : table.row(affected).entrySet()) {
-                if (!re.matchesValidParam("ValidToken", e.getKey())) {
-                    continue;
-                }
-                Player controller = e.getKey().getController();
-                int old = byController.getOrDefault(controller, 0);
-                byController.put(controller, old + e.getValue());
-            }
+            Map<Player, Integer> byController = table.row(affected).entrySet().stream()
+                    .filter(e -> re.matchesValidParam("ValidToken", e.getKey()))
+                    .collect(Collectors.groupingBy(e -> e.getKey().getController(), Collectors.summingInt(e -> e.getValue())));
 
             if (!byController.isEmpty()) {
                 // for Xorn, might matter if you could somehow create Treasure under multiple players control

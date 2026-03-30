@@ -3,7 +3,7 @@ Name:Perplexing Chimera (GatheringMagic.com) 120815 - Mirror Images
 URL:http://www.gatheringmagic.com/seanuy-120815-mirror-images/
 Goal:Win
 Turns:1
-Difficulty:Hard
+Difficulty:Rare
 Description:Win this turn. Urza's Incubator will be set to Shapeshifter type no matter what you choose.
 [state]
 ActivePlayer=human

@@ -3,7 +3,7 @@ Name:Perplexing Chimera (GatheringMagic.com) 112415 - The Art of the Lie
 URL:http://www.gatheringmagic.com/seanuy-112415-the-art-of-the-lie/
 Goal:Win
 Turns:1
-Difficulty:Hard
+Difficulty:Rare
 Description: Win this turn.
 [state]
 ActivePlayer=human

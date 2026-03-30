@@ -112,13 +112,13 @@ public class PlayerView extends GameEntityView {
 
         final StringBuilder sb = new StringBuilder();
 
-        sb.append(Localizer.getInstance().getMessage("lblCommanderCastCard", String.valueOf(getCommanderCast(v))));
+        sb.append(Localizer.getInstance().getMessage("lblCommanderCastCard", getCommanderCast(v)));
         sb.append("\n");
 
         for (final PlayerView p : Iterables.concat(Collections.singleton(this), getOpponents())) {
             final int damage = p.getCommanderDamage(v);
             if (damage > 0) {
-                sb.append(Localizer.getInstance().getMessage("lblCommanderDealNDamageToPlayer", p.toString(), CardTranslation.getTranslatedName(v.getName()), String.valueOf(damage)));
+                sb.append(Localizer.getInstance().getMessage("lblCommanderDealNDamageToPlayer", p, CardTranslation.getTranslatedName(v.getName()), damage));
                 sb.append("\n");
             }
         }
@@ -142,14 +142,14 @@ public class PlayerView extends GameEntityView {
 
         info.add("Commanders:");
         for (final CardView v : commanders) {
-            info.add(Localizer.getInstance().getMessage("lblCommanderCastPlayer", CardTranslation.getTranslatedName(v.getName()), String.valueOf(getCommanderCast(v))));
+            info.add(Localizer.getInstance().getMessage("lblCommanderCastPlayer", CardTranslation.getTranslatedName(v.getName()), getCommanderCast(v)));
         }
 
         // own commanders
         for (final CardView v : commanders) {
             final int damage = getCommanderDamage(v);
             if (damage > 0) {
-                info.add(Localizer.getInstance().getMessage("lblNCommanderDamageFromOwnCommander", CardTranslation.getTranslatedName(v.getName()), String.valueOf(damage)));
+                info.add(Localizer.getInstance().getMessage("lblNCommanderDamageFromOwnCommander", CardTranslation.getTranslatedName(v.getName()), damage));
             }
         }
 
@@ -158,7 +158,7 @@ public class PlayerView extends GameEntityView {
             for (final CardView v : p.getCommanders()) {
                 final int damage = getCommanderDamage(v);
                 if (damage > 0) {
-                    info.add(Localizer.getInstance().getMessage("lblNCommanderDamageFromPlayerCommander", p.toString(), CardTranslation.getTranslatedName(v.getName()), String.valueOf(damage)));
+                    info.add(Localizer.getInstance().getMessage("lblNCommanderDamageFromPlayerCommander", p, CardTranslation.getTranslatedName(v.getName()), damage));
                 }
             }
         }
@@ -438,9 +438,6 @@ public class PlayerView extends GameEntityView {
     public FCollectionView<CardView> getHand() {
         return get(TrackableProperty.Hand);
     }
-    public int getHandSize() {
-        return getZoneSize(TrackableProperty.Hand);
-    }
 
     public FCollectionView<CardView> getLibrary() {
         return get(TrackableProperty.Library);
@@ -474,16 +471,14 @@ public class PlayerView extends GameEntityView {
             return 0;
 
         for (CardView c : cards) {
-            types.addAll((Collection<? extends CardType.CoreType>) c.getCurrentState().getType().getCoreTypes());
+            types.addAll(c.getCurrentState().getType().getCoreTypes());
         }
 
         return types.size();
     }
 
     public boolean hasDelirium() {
-        if (get(TrackableProperty.HasDelirium) == null)
-            return false;
-        return get(TrackableProperty.HasDelirium);
+        return getZoneTypes(TrackableProperty.Graveyard) >= 4;
     }
 
     private static TrackableProperty getZoneProp(final ZoneType zone) {
@@ -510,24 +505,20 @@ public class PlayerView extends GameEntityView {
         if (prop == null) { return; }
         set(prop, CardView.getCollection(zone.getCards(false)));
 
-        //update delirium
-        if (ZoneType.Graveyard == zone.getZoneType())
-            set(TrackableProperty.HasDelirium, getZoneTypes(TrackableProperty.Graveyard) >= 4);
-
-        //update flashback zone when graveyard, library, or exile zones updated
+        //update flashback zone when relevant zones change
         switch (zone.getZoneType()) {
-        case Command:
-        case Graveyard:
-        case Library:
-        case Exile:
-            set(TrackableProperty.Flashback, CardView.getCollection(zone.getPlayer().getCardsIn(ZoneType.Flashback)));
-            break;
-        default:
-            break;
+            case Command:
+            case Graveyard:
+            case Library:
+            case Exile:
+                updateFlashback(zone.getPlayer());
+                break;
+            default:
+                break;
         }
     }
 
-    void updateFlashbackForPlayer(Player p) {
+    void updateFlashback(Player p) {
         set(TrackableProperty.Flashback, CardView.getCollection(p.getCardsIn(ZoneType.Flashback)));
     }
 
@@ -558,29 +549,29 @@ public class PlayerView extends GameEntityView {
 
     private List<String> getDetailsList() {
         final List<String> details = Lists.newArrayListWithCapacity(8);
-        details.add(Localizer.getInstance().getMessage("lblLifeHas", String.valueOf(getLife())));
+        details.add(Localizer.getInstance().getMessage("lblLifeHas", getLife()));
 
         Map<CounterType, Integer> counters = getCounters();
         if (counters != null) {
             for (Entry<CounterType, Integer> p : counters.entrySet()) {
                 if (p.getValue() > 0) {
-                    details.add(Localizer.getInstance().getMessage("lblTypeCounterHas", p.getKey().getName(), String.valueOf(p.getValue())));
+                    details.add(Localizer.getInstance().getMessage("lblTypeCounterHas", p.getKey().getName(), p.getValue()));
                 }
             }
         }
 
-        details.add(Localizer.getInstance().getMessage("lblCardInHandHas", String.valueOf(getHandSize()), getMaxHandString()));
-        details.add(Localizer.getInstance().getMessage("lblLandsPlayed", String.valueOf(getNumLandThisTurn()), this.getMaxLandString()));
-        details.add(Localizer.getInstance().getMessage("lblCardDrawnThisTurnHas", String.valueOf(getNumDrawnThisTurn())));
-        details.add(Localizer.getInstance().getMessage("lblDamagepreventionHas", String.valueOf(getPreventNextDamage())));
+        details.add(Localizer.getInstance().getMessage("lblCardInHandHas", getZoneSize(ZoneType.Hand), getMaxHandString()));
+        details.add(Localizer.getInstance().getMessage("lblLandsPlayed", getNumLandThisTurn(), getMaxLandString()));
+        details.add(Localizer.getInstance().getMessage("lblCardDrawnThisTurnHas", getNumDrawnThisTurn()));
+        details.add(Localizer.getInstance().getMessage("lblDamagepreventionHas", getPreventNextDamage()));
 
         int v = getAdditionalVote();
         if (v > 0) {
-            details.add(Localizer.getInstance().getMessage("lblAdditionalVotes", String.valueOf(v)));
+            details.add(Localizer.getInstance().getMessage("lblAdditionalVotes", v));
         }
         v = getOptionalAdditionalVote();
         if (v > 0) {
-            details.add(Localizer.getInstance().getMessage("lblOptionalAdditionalVotes", String.valueOf(v)));
+            details.add(Localizer.getInstance().getMessage("lblOptionalAdditionalVotes", v));
         }
 
         if (getControlVote()) {
@@ -590,7 +581,7 @@ public class PlayerView extends GameEntityView {
         if (getIsExtraTurn()) {
             details.add(Localizer.getInstance().getMessage("lblIsExtraTurn"));
         }
-        details.add(Localizer.getInstance().getMessage("lblExtraTurnCountHas", String.valueOf(getExtraTurnCount())));
+        details.add(Localizer.getInstance().getMessage("lblExtraTurnCountHas", getExtraTurnCount()));
 
         final String keywords = Lang.joinHomogenous(getDisplayableKeywords());
         if (!keywords.isEmpty()) {

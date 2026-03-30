@@ -98,8 +98,7 @@ public class SacrificeAi extends SpellAbilityAi {
             }
 
             if (num.equals("X") && sa.getSVar(num).equals("Count$xPaid")) {
-                // Set PayX here to maximum value.
-                sa.setXManaCostPaid(Math.min(ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger()), amount));
+                sa.setXManaCostPaid(Math.min(ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger()), amount));
             }
 
             final int half = (amount / 2) + (amount % 2); // Half of amount rounded up
@@ -127,8 +126,7 @@ public class SacrificeAi extends SpellAbilityAi {
             int amount = AbilityUtils.calculateAmount(source, num, sa);
 
             if (num.equals("X") && sa.getSVar(num).equals("Count$xPaid")) {
-                // Set PayX here to maximum value.
-                amount = Math.min(ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger()), amount);
+                amount = Math.min(ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger()), amount);
             }
 
             List<Card> humanList = CardLists.getValidCards(ai.getStrongestOpponent().getCardsIn(ZoneType.Battlefield), valid, sa.getActivatingPlayer(), source, sa);

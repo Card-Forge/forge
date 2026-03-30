@@ -340,7 +340,7 @@ F538 R Water Gun Balloon Game @Ralph Horsley
 101 C Big Winner @Paolo Parente
 103 C Circuits Act @Jakub Kasper
 106 C Eelectrocute @Dave Greco
-107 C _____ Goblin @Chuck Lukacs
+107 C ________ Goblin @Chuck Lukacs
 107m C "Name Sticker" Goblin @Chuck Lukacs
 108 U Goblin Airbrusher @Caroline Gariba
 114 C Minotaur de Force @Gaboleps
@@ -564,7 +564,7 @@ F538 R Water Gun Balloon Game @Ralph Horsley
 387 C Big Winner @Paolo Parente
 389 C Circuits Act @Jakub Kasper
 392 C Eelectrocute @Dave Greco
-393 C _____ Goblin @Chuck Lukacs
+393 C ________ Goblin @Chuck Lukacs
 394 U Goblin Airbrusher @Caroline Gariba
 400 C Minotaur de Force @Gaboleps
 401 C Non-Human Cannonball @Ralph Horsley

@@ -71,7 +71,7 @@ public class Cost implements Serializable {
     }
 
     public final boolean hasManaCost() {
-        return !this.hasNoManaCost();
+        return this.getCostMana() != null;
     }
 
     public final boolean hasSpecificCostType(Class<? extends CostPart> costType) {
@@ -872,8 +872,7 @@ public class Cost implements Serializable {
         return cost.toString();
     }
 
-    // TODO: If a Cost needs to pay more than 10 of something, fill this array
-    // as appropriate
+    // TODO: If a Cost needs to pay more than 10 of something, fill this array as appropriate
     /**
      * Constant.
      * <code>numNames="{zero, a, two, three, four, five, six, "{trunked}</code>
