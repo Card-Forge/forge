@@ -15,19 +15,13 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
- * Executes multiple network games in parallel using separate JVM processes.
+ * Runs multiple network games in parallel, each in a separate JVM process to
+ * avoid the FServerManager singleton limitation. Spawns {@link ComprehensiveGameRunner}
+ * as the child process entry point; each process gets its own port and log file.
  *
- * Each game runs in its own JVM process, avoiding the FServerManager singleton
- * limitation that prevents true parallelism within a single process.
- *
- * Each process:
- * - Has its own isolated FServerManager instance
- * - Uses a unique network port
- * - Writes to its own log file
- *
- * This enables true parallel execution for rapid log generation.
- *
- * Supports 2-4 player games with configurable player counts for comprehensive testing.
+ * <p>Used by {@link ComprehensiveTestExecutor} for batch execution.
+ * Results are parsed from child process stdout ({@code RESULT:} lines) and
+ * aggregated into {@link ExecutionResult}.
  */
 public class MultiProcessGameExecutor implements IHasNetLog {
 
@@ -460,9 +454,7 @@ public class MultiProcessGameExecutor implements IHasNetLog {
             return results.values().stream().mapToLong(r -> r.eventStateMismatches).sum();
         }
 
-        /**
-         * Get total turns across all successful games.
-         */
+        /** Only counts successful games. */
         public int getTotalTurns() {
             return results.values().stream()
                     .filter(r -> r.success)
@@ -470,9 +462,6 @@ public class MultiProcessGameExecutor implements IHasNetLog {
                     .sum();
         }
 
-        /**
-         * Get count of unique decks used across all games.
-         */
         public int getUniqueDecksCount() {
             return (int) results.values().stream()
                     .flatMap(r -> r.deckNames.stream())
@@ -480,18 +469,12 @@ public class MultiProcessGameExecutor implements IHasNetLog {
                     .count();
         }
 
-        /**
-         * Get set of unique deck names used across all games.
-         */
         public java.util.Set<String> getUniqueDeckNames() {
             return results.values().stream()
                     .flatMap(r -> r.deckNames.stream())
                     .collect(java.util.stream.Collectors.toCollection(java.util.TreeSet::new));
         }
 
-        /**
-         * Get total number of deck usages (sum of decks across all games).
-         */
         public int getTotalDeckUsages() {
             return results.values().stream()
                     .mapToInt(r -> r.deckNames.size())
@@ -507,29 +490,18 @@ public class MultiProcessGameExecutor implements IHasNetLog {
             return (double) getSuccessCount() / totalGames;
         }
 
-        // Player count aggregation methods
-
-        /**
-         * Get count of games by player count.
-         */
         public int getGameCountByPlayers(int playerCount) {
             return (int) results.values().stream()
                     .filter(r -> r.playerCount == playerCount)
                     .count();
         }
 
-        /**
-         * Get success count by player count.
-         */
         public int getSuccessCountByPlayers(int playerCount) {
             return (int) results.values().stream()
                     .filter(r -> r.playerCount == playerCount && r.success)
                     .count();
         }
 
-        /**
-         * Get success rate by player count.
-         */
         public double getSuccessRateByPlayers(int playerCount) {
             long total = results.values().stream()
                     .filter(r -> r.playerCount == playerCount)
@@ -541,9 +513,6 @@ public class MultiProcessGameExecutor implements IHasNetLog {
             return (double) success / total;
         }
 
-        /**
-         * Get total bytes by player count.
-         */
         public long getTotalBytesByPlayers(int playerCount) {
             return results.values().stream()
                     .filter(r -> r.playerCount == playerCount)
@@ -551,9 +520,7 @@ public class MultiProcessGameExecutor implements IHasNetLog {
                     .sum();
         }
 
-        /**
-         * Get average turns by player count.
-         */
+        /** Only counts successful games. */
         public double getAverageTurnsByPlayers(int playerCount) {
             return results.values().stream()
                     .filter(r -> r.playerCount == playerCount && r.success)
@@ -562,29 +529,18 @@ public class MultiProcessGameExecutor implements IHasNetLog {
                     .orElse(0.0);
         }
 
-        // Format aggregation methods
-
-        /**
-         * Get count of Commander format games.
-         */
         public int getCommanderGameCount() {
             return (int) results.values().stream()
                     .filter(r -> "Commander".equals(r.gameFormat))
                     .count();
         }
 
-        /**
-         * Get success count of Commander format games.
-         */
         public int getCommanderSuccessCount() {
             return (int) results.values().stream()
                     .filter(r -> "Commander".equals(r.gameFormat) && r.success)
                     .count();
         }
 
-        /**
-         * Get success rate of Commander format games.
-         */
         public double getCommanderSuccessRate() {
             long total = getCommanderGameCount();
             if (total == 0) return 0.0;

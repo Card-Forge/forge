@@ -28,9 +28,13 @@ import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
 
 /**
- * Headless NetworkGuiGame for automated testing.
- * Gets proper delta packet processing from NetworkGuiGame
- * while providing minimal implementations for abstract methods.
+ * Headless server-side GUI for hosted games. Extends {@link NetworkGuiGame} to get
+ * delta packet processing (deserialization, tracker updates) while providing no-op/default
+ * implementations for all abstract UI methods. Used as the host's {@code IGuiGame} by
+ * {@link HeadlessGuiDesktop#getNewGuiGame()}.
+ *
+ * <p>{@link HeadlessNetworkClient} subclasses this as {@code DeltaLoggingGuiGame}
+ * to add auto-response behavior and delta packet logging for remote client testing.
  */
 public class HeadlessNetworkGuiGame extends NetworkGuiGame {
 

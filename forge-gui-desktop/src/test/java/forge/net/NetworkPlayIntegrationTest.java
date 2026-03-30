@@ -86,8 +86,6 @@ public class NetworkPlayIntegrationTest implements IHasNetLog {
         }
     }
 
-    // ==================== Unit Tests ====================
-
     @Test
     public void testDeckLoaderHasPrecons() {
         Assert.assertTrue(TestDeckLoader.hasPrecons(), "Should have precon decks available");
@@ -122,8 +120,6 @@ public class NetworkPlayIntegrationTest implements IHasNetLog {
             }
         }
     }
-
-    // ==================== Single Game Integration Tests ====================
 
     /**
      * Key test for delta sync validation - uses actual TCP network client.
@@ -225,8 +221,6 @@ public class NetworkPlayIntegrationTest implements IHasNetLog {
         Assert.assertTrue(result.gameStarted, "Game should have started");
     }
 
-    // ==================== Batch Tests (Sequential and Parallel) ====================
-
     /**
      * Configurable sequential batch test.
      * Usage: -Dtest.gameCount=10 -Dtest.timeoutMs=300000
@@ -270,8 +264,6 @@ public class NetworkPlayIntegrationTest implements IHasNetLog {
         Assert.assertTrue(result.getSuccessCount() >= expectedSuccesses,
                 String.format("At least %d of %d games should succeed: %s", expectedSuccesses, gameCount, result.toSummary()));
     }
-
-    // ==================== Comprehensive Delta Sync Tests ====================
 
     /**
      * Comprehensive delta sync test with 100 games (default configuration).
@@ -379,8 +371,6 @@ public class NetworkPlayIntegrationTest implements IHasNetLog {
         args.add(input);
         forge.net.analysis.LogAnalyzerCli.main(args.toArray(new String[0]));
     }
-
-    // ==================== Helper Methods ====================
 
     private void validateComprehensiveResults(MultiProcessGameExecutor.ExecutionResult executionResult,
                                                AnalysisResult analysisResult) {

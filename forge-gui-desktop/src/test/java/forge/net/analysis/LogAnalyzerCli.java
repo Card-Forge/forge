@@ -8,9 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * CLI for analyzing network game log files.
- * Works with any log file format: forge.log, network-debug logs, or batch log directories.
- * Produces a markdown report with game results, network performance metrics, and error analysis.
+ * CLI wrapper around {@link NetworkLogAnalyzer} for standalone log analysis.
+ * Accepts log files or directories and produces a markdown report.
  *
  * <p>Easiest way to run (via Maven test wrapper):
  * <pre>
@@ -20,9 +19,7 @@ import java.util.List;
  *     -Drun.stress.tests=true -Dsurefire.failIfNoSpecifiedTests=false
  * </pre>
  *
- * <p>Options:
- *   -r         Recurse into subdirectories
- *   -o file    Write report to file (default: network-log-analysis.md in same directory as input file)
+ * <p>Options: -r (recurse), -o file (output path)
  */
 public class LogAnalyzerCli {
 

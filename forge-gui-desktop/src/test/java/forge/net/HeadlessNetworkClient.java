@@ -20,13 +20,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * Headless network client for automated testing with actual network traffic.
+ * Headless TCP client that connects to a Forge server as a remote player.
+ * Receives delta sync packets and auto-responds to game prompts, enabling
+ * true network traffic measurement without a display.
  *
- * This client connects to a Forge server as a remote player, enabling:
- * - Delta sync packet generation and logging
- * - True network traffic measurement
- * - Reconnection testing with real socket disconnect
- *
+ * <p>Used by {@link UnifiedNetworkHarness} as the remote player implementation.
+ * Internally extends {@link HeadlessNetworkGuiGame} via {@code DeltaLoggingGuiGame}
+ * to process delta packets and provide auto-response behavior.
  */
 public class HeadlessNetworkClient implements AutoCloseable, IHasNetLog {
 

@@ -9,16 +9,14 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Orchestrates comprehensive delta sync testing with multiple player counts.
+ * Orchestrates batch testing with configurable player-count distribution.
+ * Builds a shuffled schedule of 2/3/4-player games (default: 50/30/20)
+ * and executes them via {@link MultiProcessGameExecutor} (parallel, separate
+ * JVM per game) or sequentially via {@link UnifiedNetworkHarness} (same JVM,
+ * useful for debugging).
  *
- * Default configuration runs 100 games:
- * - 50 x 2-player games (50%)
- * - 30 x 3-player games (30%)
- * - 20 x 4-player games (20%)
- *
- * Supports both execution modes:
- * - Parallel: Games run in separate JVM processes (default)
- * - Sequential: Games run one-by-one in the same JVM (useful for debugging)
+ * <p>Called by {@link NetworkPlayIntegrationTest#runComprehensiveDeltaSyncTest()}
+ * and {@link NetworkPlayIntegrationTest#runQuickDeltaSyncTest()}.
  */
 public class ComprehensiveTestExecutor implements IHasNetLog {
 
@@ -37,25 +35,16 @@ public class ComprehensiveTestExecutor implements IHasNetLog {
     private long gameTimeoutMs = 300000; // 5 minutes per game
     private boolean sequential = false; // Run sequentially instead of parallel
 
-    /**
-     * Set the number of 2-player games.
-     */
     public ComprehensiveTestExecutor twoPlayerGames(int count) {
         this.twoPlayerGames = count;
         return this;
     }
 
-    /**
-     * Set the number of 3-player games.
-     */
     public ComprehensiveTestExecutor threePlayerGames(int count) {
         this.threePlayerGames = count;
         return this;
     }
 
-    /**
-     * Set the number of 4-player games.
-     */
     public ComprehensiveTestExecutor fourPlayerGames(int count) {
         this.fourPlayerGames = count;
         return this;
@@ -73,17 +62,11 @@ public class ComprehensiveTestExecutor implements IHasNetLog {
         return this;
     }
 
-    /**
-     * Set the parallel batch size.
-     */
     public ComprehensiveTestExecutor parallelBatchSize(int size) {
         this.parallelBatchSize = size;
         return this;
     }
 
-    /**
-     * Set the game timeout in milliseconds.
-     */
     public ComprehensiveTestExecutor gameTimeout(long timeoutMs) {
         this.gameTimeoutMs = timeoutMs;
         return this;
@@ -98,9 +81,6 @@ public class ComprehensiveTestExecutor implements IHasNetLog {
         return this;
     }
 
-    /**
-     * Get total number of games to run.
-     */
     public int getTotalGames() {
         return twoPlayerGames + threePlayerGames + fourPlayerGames;
     }
@@ -277,9 +257,6 @@ public class ComprehensiveTestExecutor implements IHasNetLog {
         return flags;
     }
 
-    /**
-     * Generate a summary report of the test configuration.
-     */
     public String getConfigurationSummary() {
         int total = getTotalGames();
         return String.format(

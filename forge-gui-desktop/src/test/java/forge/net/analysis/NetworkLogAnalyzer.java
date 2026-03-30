@@ -20,17 +20,12 @@ import java.util.stream.Collectors;
 import forge.gamemodes.net.NetworkLogConfig;
 
 /**
- * Parses game log files to extract metrics, errors, and game health data.
+ * Parses game log files to extract per-game {@link GameLogMetrics} and aggregates
+ * them into {@link AnalysisResult}. Supports both structured network debug logs
+ * (with [DeltaSync] and [GAME EVENT] prefixes) and generic forge.log formats.
  *
- * Supports both structured network debug logs (with [DeltaSync] and [GAME EVENT]
- * prefixes) and generic forge.log / game output formats. Structured patterns are
- * tried first; generic fallbacks catch games logged without network debug prefixes.
- *
- * Uses single-pass parsing with pre-compiled regex patterns for efficiency.
- * Supports parallel file analysis via parallelStream().
- *
- * Also provides error context extraction for debugging failures
- * (formerly in separate LogContextExtractor class).
+ * <p>Used by {@link NetworkPlayIntegrationTest} for batch result analysis and by
+ * {@link LogAnalyzerCli} for standalone log inspection.
  */
 public class NetworkLogAnalyzer {
 

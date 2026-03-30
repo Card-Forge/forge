@@ -105,7 +105,7 @@ public final class NetworkChecksumUtil {
             hash = 31 * hash + manaHash;
         }
 
-        // Deep checksum: battlefield card properties (sorted by ID for determinism)
+        // Battlefield card properties (sorted by ID for determinism)
         List<CardView> allBattlefieldCards = new ArrayList<>();
         for (PlayerView player : getSortedPlayers(gameView)) {
             Object bf = getEffectiveValue(player, TrackableProperty.Battlefield);
@@ -177,12 +177,12 @@ public final class NetworkChecksumUtil {
     }
 
     /**
-     * Compute a diagnostic breakdown of the deep checksum, showing the hash
+     * Compute a diagnostic breakdown of the stable checksum, showing the hash
      * after each component. Used to identify exactly where server/client diverge.
      */
     public static String computeChecksumBreakdown(int turn, int phaseOrdinal, GameView gameView) {
         if (gameView == null || !stableChecksum) {
-            return "deep checksum disabled or gameView null";
+            return "stable checksum disabled or gameView null";
         }
         // This must mirror computeStateChecksum exactly so that
         // breakdown final == actual checksum, enabling accurate mismatch diagnosis

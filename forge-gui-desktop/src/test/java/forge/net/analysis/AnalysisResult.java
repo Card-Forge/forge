@@ -16,8 +16,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Aggregates results across all analyzed games and generates reports.
- * Works with both delta sync structured logs and generic game logs.
+ * Aggregated analysis across multiple games, built by {@link NetworkLogAnalyzer}
+ * from individual {@link GameLogMetrics}. Generates markdown reports and provides
+ * validation queries (success rates, checksum mismatches, bandwidth savings).
  */
 public class AnalysisResult {
 

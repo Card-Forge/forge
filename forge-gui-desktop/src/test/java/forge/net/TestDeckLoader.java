@@ -16,9 +16,9 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
- * Thin wrapper around existing DeckSerializer for test deck loading.
- * Uses quest precons which are known-good balanced decks.
- *
+ * Deck loading for tests. Wraps DeckSerializer to load quest precons (known-good
+ * balanced decks) and commander precons, with retry logic for invalid decks.
+ * Used by {@link UnifiedNetworkHarness} to supply decks for test games.
  */
 public class TestDeckLoader {
 
@@ -138,18 +138,10 @@ public class TestDeckLoader {
         return deck.getMain().countAll() >= MIN_DECK_SIZE;
     }
 
-    /**
-     * Get the number of available precon decks.
-     * @return Count of available precons
-     */
     public static int getPreconCount() {
         return listAvailablePrecons().size();
     }
 
-    /**
-     * Check if precon decks are available.
-     * @return true if at least one precon deck exists
-     */
     public static boolean hasPrecons() {
         return !listAvailablePrecons().isEmpty();
     }
@@ -179,8 +171,6 @@ public class TestDeckLoader {
         }
         return deck;
     }
-
-    // ==================== Commander Precon Loading ====================
 
     /**
      * Load a commander precon deck by name.

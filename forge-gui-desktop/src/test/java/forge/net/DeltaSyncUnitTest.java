@@ -20,8 +20,6 @@ import java.util.Map;
  */
 public class DeltaSyncUnitTest {
 
-    // ==================== Delta Packet Size Tests ====================
-
     @Test
     public void testDeltaSizeCalculationAccuracy() {
         Map<Integer, Map<TrackableProperty, Object>> deltas = new HashMap<>();
@@ -86,8 +84,6 @@ public class DeltaSyncUnitTest {
         // Empty packet should just have header: 8 + 4 = 12 bytes
         Assert.assertEquals(size, 12, "Empty delta packet should be exactly 12 bytes (header only)");
     }
-
-    // ==================== Network Byte Tracker Tests ====================
 
     @Test
     public void testNetworkByteTrackerEnableDisable() {

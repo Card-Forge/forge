@@ -10,8 +10,12 @@ import forge.localinstance.skin.ISkinImage;
 import java.util.List;
 
 /**
- * Headless GuiDesktop for automated testing.
- * Overrides methods that require Singletons.getControl() or FSkin.
+ * Headless GuiDesktop for automated testing — the {@code GuiBase} interface that
+ * enables running without a display. Overrides UI methods (dialogs, audio, FSkin)
+ * with no-ops or defaults. {@link #getNewGuiGame()} returns {@link HeadlessNetworkGuiGame},
+ * which is the server-side GUI for hosted games.
+ *
+ * <p>Set via {@link TestUtils#ensureFModelInitialized()}.
  */
 public class HeadlessGuiDesktop extends GuiDesktop implements IHasNetLog {
 

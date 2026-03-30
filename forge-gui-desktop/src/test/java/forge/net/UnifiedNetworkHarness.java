@@ -36,28 +36,23 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Network test harness supporting 2-4 players with configurable remote clients.
+ * Core single-game executor for network tests. Starts a server, connects
+ * {@link HeadlessNetworkClient} instances as remote players, runs one game,
+ * and returns a {@link GameResult} with metrics.
  *
- * Configuration via builder pattern:
+ * <p>This is the building block — for batch execution, use
+ * {@link ComprehensiveTestExecutor} (orchestrates player-count distribution)
+ * which delegates to {@link MultiProcessGameExecutor} (parallel JVM processes)
+ * or runs this harness sequentially.
+ *
  * <pre>
- * // 2-player local AI (like NETWORK_LOCAL mode)
+ * // 2-player with remote client
  * GameResult result = new UnifiedNetworkHarness()
- *     .playerCount(2)
- *     .remoteClients(0)
- *     .execute();
+ *     .playerCount(2).remoteClients(1).execute();
  *
- * // 2-player with remote client (like NETWORK_REMOTE mode)
+ * // 3-player multiplayer
  * GameResult result = new UnifiedNetworkHarness()
- *     .playerCount(2)
- *     .remoteClients(1)
- *     .execute();
- *
- * // 3-player multiplayer with remote clients
- * GameResult result = new UnifiedNetworkHarness()
- *     .playerCount(3)
- *     .remoteClients(2)
- *     .useAiForRemotePlayers(true)
- *     .execute();
+ *     .playerCount(3).remoteClients(2).execute();
  * </pre>
  */
 public class UnifiedNetworkHarness implements IHasNetLog {
@@ -84,11 +79,7 @@ public class UnifiedNetworkHarness implements IHasNetLog {
     private ExecutorService clientExecutor;
     private final AtomicBoolean serverRunning = new AtomicBoolean(false);
 
-    // ==================== Builder Methods ====================
-
-    /**
-     * Set the number of players (2-4 supported).
-     */
+    /** @param count 2-4 supported */
     public UnifiedNetworkHarness playerCount(int count) {
         if (count < 2 || count > 4) {
             throw new IllegalArgumentException("Player count must be 2-4, got: " + count);
@@ -107,25 +98,16 @@ public class UnifiedNetworkHarness implements IHasNetLog {
         return this;
     }
 
-    /**
-     * Set a specific port to use instead of auto-allocating.
-     */
     public UnifiedNetworkHarness port(int port) {
         this.specifiedPort = port;
         return this;
     }
 
-    /**
-     * Set the game timeout in milliseconds.
-     */
     public UnifiedNetworkHarness gameTimeout(long timeoutMs) {
         this.gameTimeoutMs = timeoutMs;
         return this;
     }
 
-    /**
-     * Set the connection timeout in milliseconds.
-     */
     public UnifiedNetworkHarness connectionTimeout(long timeoutMs) {
         this.connectionTimeoutMs = timeoutMs;
         return this;
@@ -152,18 +134,12 @@ public class UnifiedNetworkHarness implements IHasNetLog {
         return this;
     }
 
-    /**
-     * Set specific decks for players.
-     * If not set, random precon decks are used.
-     */
+    /** If not set, random precon decks are used. */
     public UnifiedNetworkHarness decks(List<Deck> decks) {
         this.decks = decks;
         return this;
     }
 
-    /**
-     * Set decks for a 2-player game.
-     */
     public UnifiedNetworkHarness decks(Deck deck1, Deck deck2) {
         this.decks = new ArrayList<>();
         this.decks.add(deck1);
@@ -171,13 +147,6 @@ public class UnifiedNetworkHarness implements IHasNetLog {
         return this;
     }
 
-    // ==================== Execution ====================
-
-    /**
-     * Execute the network test with configured settings.
-     *
-     * @return GameResult with all test metrics
-     */
     public GameResult execute() {
         // Validate configuration
         if (remoteClientCount < 0 || remoteClientCount >= playerCount) {
@@ -193,11 +162,6 @@ public class UnifiedNetworkHarness implements IHasNetLog {
         }
     }
 
-    // ==================== Local Game Execution (No Remote Clients) ====================
-
-    /**
-     * Execute a game with all local AI players (no actual network traffic).
-     */
     private GameResult executeLocalGame() {
         GameResult result = new GameResult();
         result.playerCount = playerCount;
@@ -286,11 +250,6 @@ public class UnifiedNetworkHarness implements IHasNetLog {
         return result;
     }
 
-    // ==================== Remote Game Execution (With Remote Clients) ====================
-
-    /**
-     * Execute a game with remote clients connecting via TCP.
-     */
     private GameResult executeRemoteGame() {
         GameResult result = new GameResult();
         result.playerCount = playerCount;
@@ -520,8 +479,6 @@ public class UnifiedNetworkHarness implements IHasNetLog {
             finishedLatch.countDown();
         }
     }
-
-    // ==================== Helper Methods ====================
 
     private void ensureFModelInitialized() {
         TestUtils.ensureFModelInitialized();
@@ -781,8 +738,6 @@ public class UnifiedNetworkHarness implements IHasNetLog {
 
         netLog.info("Cleanup complete");
     }
-
-    // ==================== GameResult Inner Class ====================
 
     /** Result class for all network test configurations. */
     public static class GameResult {

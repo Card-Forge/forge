@@ -4,28 +4,15 @@ import forge.gamemodes.net.IHasNetLog;
 import forge.gamemodes.net.NetworkLogConfig;
 
 /**
- * Standalone runner for comprehensive network game testing.
- * Supports 2-4 player games with configurable options.
+ * Child JVM entry point for parallel game execution. Spawned by
+ * {@link MultiProcessGameExecutor}; delegates to {@link UnifiedNetworkHarness}
+ * to run a single game and prints a {@code RESULT:} line for the parent to parse.
  *
- * Designed to be invoked as a separate JVM process for parallel execution.
- *
- * Usage: java -cp <classpath> forge.net.ComprehensiveGameRunner <port> <gameIndex> <playerCount> [batchId] [batchNumber] [commander]
- *
- * Arguments:
- *   port        - Network port for the game server
- *   gameIndex   - Index of this game (for identification in logs)
- *   playerCount - Number of players (2, 3, or 4)
- *   batchId     - Optional batch ID for correlating logs from the same test run
- *   batchNumber - Optional batch number for unique log filenames
- *   commander   - Optional "true"/"false" for Commander format (default false)
- *
- * Exit codes:
- *   0 = Success (game completed with winner and delta packets)
- *   1 = Failure (game failed or no delta packets)
- *   2 = Error (exception during execution)
- *
- * Output format (for parent process parsing):
- *   RESULT:gameIndex|success|playerCount|deltas|turns|bytes|winner|deck1,deck2,...|format|eventMismatches
+ * <pre>
+ * Usage: java -cp classpath forge.net.ComprehensiveGameRunner port gameIndex playerCount [batchId] [batchNumber] [commander]
+ * Exit codes: 0=success, 1=failure, 2=error
+ * Output:     RESULT:gameIndex|success|playerCount|deltas|turns|bytes|winner|decks|format|eventMismatches
+ * </pre>
  */
 public class ComprehensiveGameRunner implements IHasNetLog {
 

@@ -7,7 +7,9 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 
 /**
- * Shared utilities for network test infrastructure.
+ * Bootstrap and shared utilities for network test infrastructure.
+ * {@link #ensureFModelInitialized()} is the entry point — all test classes call it
+ * to set up HeadlessGuiDesktop, load card data, and configure test preferences.
  */
 public final class TestUtils {
 

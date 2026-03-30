@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Stores per-game metrics extracted from log file analysis.
- * Supports both delta sync structured logs and generic game logs.
+ * Per-game metrics extracted from a single log file by {@link NetworkLogAnalyzer}.
+ * Tracks completion status, delta sync bandwidth, checksum mismatches, and errors.
+ * Aggregated into {@link AnalysisResult} for batch reporting.
  */
 public class GameLogMetrics {
 
