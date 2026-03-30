@@ -110,7 +110,6 @@ public class DeltaSyncManager implements IHasNetLog {
         Set<Integer> currentObjectIds = new HashSet<>();
 
         authoritativeInstances.clear();
-        // Pre-scan zone collections across all players for cross-player coverage.
         preScanZoneCollections(gameView);
         walkAndCollect(gameView, objectDeltas, newObjects, currentObjectIds);
 
@@ -133,7 +132,7 @@ public class DeltaSyncManager implements IHasNetLog {
             netLog.info("[DeltaSync] New objects: {}, Deltas: {}", newObjects.size(), objectDeltas.size());
         }
 
-        long seq = ++sequenceNumber;
+        sequenceNumber++;
 
         int checksum = 0;
         int[] checksumPropertyOrdinals = null;
@@ -153,7 +152,7 @@ public class DeltaSyncManager implements IHasNetLog {
                 checksumInterval = CHECKSUM_INTERVAL;
             }
 
-            logSampledChecksumDetails(gameView, checksum, seq, checksumPropertyOrdinals);
+            logSampledChecksumDetails(gameView, checksum, sequenceNumber, checksumPropertyOrdinals);
 
             // Store breakdown for logging if the client reports a mismatch
             int turn = gameView.getTurn();
@@ -162,7 +161,7 @@ public class DeltaSyncManager implements IHasNetLog {
             lastChecksumDetail = detail;
         }
 
-        return new DeltaPacket(seq, objectDeltas, newObjects, checksum, checksumPropertyOrdinals);
+        return new DeltaPacket(sequenceNumber, objectDeltas, newObjects, checksum, checksumPropertyOrdinals);
     }
 
     /**
@@ -194,26 +193,21 @@ public class DeltaSyncManager implements IHasNetLog {
 
         collectObjectDelta(obj, objectDeltas, newObjects);
 
-        Map<TrackableProperty, Object> props = obj.getProps();
-        if (props != null) {
-            boolean parentIsGameEntityView = obj instanceof GameEntityView;
-            for (Map.Entry<TrackableProperty, Object> entry : props.entrySet()) {
-                Object value = entry.getValue();
-                if (value instanceof TrackableObject to) {
-                    // Skip GameEntityView→GameEntityView scalar cross-references
-                    // (CardView→CardView, PlayerView→CardView are stale after zone
-                    // changes). Non-GameEntityView parents (StackItemView.SourceCard)
-                    // hold primary containment refs — walked and auth-checked above.
-                    if (parentIsGameEntityView && to instanceof GameEntityView) {
-                        continue;
-                    }
+        boolean parentIsGameEntityView = obj instanceof GameEntityView;
+        for (Map.Entry<TrackableProperty, Object> entry : ((Map<TrackableProperty, Object>) obj.getProps()).entrySet()) {
+            Object value = entry.getValue();
+            if (value instanceof TrackableObject to) {
+                // Skip GameEntityView→GameEntityView scalar cross-references
+                // (CardView→CardView, PlayerView→CardView are stale after zone
+                // changes). Non-GameEntityView parents (StackItemView.SourceCard)
+                // hold primary containment refs — walked and auth-checked above.
+                if (parentIsGameEntityView && to instanceof GameEntityView) {
+                    continue;
+                }
+                walkAndCollect(to, objectDeltas, newObjects, currentObjectIds);
+            } else if (value instanceof TrackableCollection<?> tc) {
+                for (TrackableObject to : tc) {
                     walkAndCollect(to, objectDeltas, newObjects, currentObjectIds);
-                } else if (value instanceof TrackableCollection<?> tc) {
-                    for (Object item : tc) {
-                        if (item instanceof TrackableObject to) {
-                            walkAndCollect(to, objectDeltas, newObjects, currentObjectIds);
-                        }
-                    }
                 }
             }
         }
@@ -227,12 +221,13 @@ public class DeltaSyncManager implements IHasNetLog {
                                     Map<Integer, Map<TrackableProperty, Object>> objectDeltas,
                                     Map<Integer, Map<TrackableProperty, Object>> newObjects) {
         int deltaKey = DeltaPacket.makeDeltaKey(obj);
+        TrackableObject old = registeredByKey.get(deltaKey);
 
-        if (registeredByKey.get(deltaKey) == obj) {
+        if (old == obj) {
             // Existing object — dirty props only
             EnumSet<TrackableProperty> dirtyProps = obj.getAndClearDirtyProps(consumerId);
             Map<TrackableProperty, Object> delta = buildPropertyMap(obj, dirtyProps);
-            if (delta != null && !delta.isEmpty()) {
+            if (!delta.isEmpty()) {
                 objectDeltas.put(deltaKey, delta);
                 netLog.trace("[DeltaSync] Delta: key={} id={}, props={}",
                         String.format("0x%08X", deltaKey), obj.getId(), delta.keySet());
@@ -242,16 +237,15 @@ public class DeltaSyncManager implements IHasNetLog {
 
         // New or replacement — send full state via newObjects so the client
         // clears stale properties before applying
-        TrackableObject old = registeredByKey.get(deltaKey);
         if (old != null) {
             old.unregisterConsumer(consumerId);
             objectDeltas.remove(deltaKey);
         }
         obj.registerConsumer(consumerId);
-        registeredByKey.put(deltaKey, obj);
         obj.getAndClearDirtyProps(consumerId);
+        registeredByKey.put(deltaKey, obj);
         Map<TrackableProperty, Object> allProps = buildPropertyMap(obj, null);
-        if (allProps != null && !allProps.isEmpty()) {
+        if (!allProps.isEmpty()) {
             newObjects.put(deltaKey, allProps);
             netLog.trace("[DeltaSync] {}: key={} id={}, {} props",
                     old != null ? "Replaced instance" : "New object",
@@ -266,11 +260,8 @@ public class DeltaSyncManager implements IHasNetLog {
     private void preScanZoneCollections(GameView gameView) {
         if (gameView == null || gameView.getPlayers() == null) return;
         for (PlayerView player : gameView.getPlayers()) {
-            Map<TrackableProperty, Object> props = player.getProps();
-            if (props == null) continue;
             for (TrackableProperty zoneProp : ZONE_COLLECTIONS) {
-                Object val = props.get(zoneProp);
-                if (val instanceof TrackableCollection<?> tc) {
+                if (((Map<TrackableProperty, Object>) player.getProps()).get(zoneProp) instanceof TrackableCollection<?> tc) {
                     for (Object item : tc) {
                         if (item instanceof CardView cv) {
                             authoritativeInstances.putIfAbsent(DeltaPacket.makeDeltaKey(cv), cv);
@@ -473,20 +464,16 @@ public class DeltaSyncManager implements IHasNetLog {
         // Same skip guards as walkAndCollect. No auth check needed here:
         // walkAndRegister only registers consumers (no data sent), and the
         // first collectDeltas corrects any stale registrations.
-        Map<TrackableProperty, Object> props = obj.getProps();
-        if (props != null) {
-            boolean parentIsGameEntityView = obj instanceof GameEntityView;
-            for (Object value : props.values()) {
-                if (value instanceof TrackableObject to) {
-                    if (!(parentIsGameEntityView && to instanceof GameEntityView)) {
-                        walkAndRegister(to, visited);
-                    }
-                } else if (value instanceof TrackableCollection<?> tc) {
-                    for (Object item : tc) {
-                        if (item instanceof TrackableObject to) {
-                            walkAndRegister(to, visited);
-                        }
-                    }
+        boolean parentIsGameEntityView = obj instanceof GameEntityView;
+        for (Object value : ((Map<TrackableProperty, Object>) obj.getProps()).values()) {
+            if (value instanceof TrackableObject to) {
+                if (parentIsGameEntityView && to instanceof GameEntityView) {
+                    continue;
+                }
+                walkAndRegister(to, visited);
+            } else if (value instanceof TrackableCollection<?> tc) {
+                for (TrackableObject to : tc) {
+                    walkAndRegister(to, visited);
                 }
             }
         }

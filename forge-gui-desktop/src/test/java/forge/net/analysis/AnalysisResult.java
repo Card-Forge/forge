@@ -68,7 +68,6 @@ public class AnalysisResult {
     private long minBlockedMs;
     private long maxBlockedMs;
 
-
     public AnalysisResult(List<GameLogMetrics> metrics) {
         this.allMetrics = metrics;
         this.analysisTime = LocalDateTime.now();
@@ -352,7 +351,6 @@ public class AnalysisResult {
         sb.append(String.format("**Analysis Date:** %s\n\n",
                 analysisTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))));
 
-        // Game Completion
         sb.append("### Game Completion\n\n");
         sb.append("| Total | Completed | Incomplete | Failed |\n");
         sb.append("|-------|-----------|------------|--------|\n");
@@ -362,7 +360,6 @@ public class AnalysisResult {
         }
         sb.append("\n");
 
-        // Data Integrity
         sb.append("### Data Integrity\n\n");
         sb.append("| Checksum Mismatches (games) | Total Mismatches | Errors (games) | Warnings (games) |\n");
         sb.append("|----------------------------|------------------|----------------|------------------|\n");
@@ -370,14 +367,12 @@ public class AnalysisResult {
                 gamesWithChecksumMismatches, totalChecksumMismatches, gamesWithErrors, gamesWithWarnings));
         sb.append("\n");
 
-        // Network Performance
         boolean hasNetPerf = totalEncodedMessages > 0 || totalTurns > 0;
         if (hasNetPerf) {
             sb.append("### Network Performance\n\n");
             sb.append("| Metric | Value |\n");
             sb.append("|--------|-------|\n");
 
-            // Session duration and turns
             String duration = computeAggregateDuration();
             if (duration != null) {
                 sb.append(String.format("| Session Duration | %s |\n", duration));
@@ -403,7 +398,6 @@ public class AnalysisResult {
                         TestUtils.formatBytes(minEncodedBytes), TestUtils.formatBytes(maxEncodedBytes)));
             }
 
-            // send() blocking
             if (totalSendBlocked > 0) {
                 sb.append(String.format("| send() Blocked Count | %,d |\n",
                         totalSendBlocked));
@@ -421,7 +415,6 @@ public class AnalysisResult {
             sb.append("\n");
         }
 
-        // Delta Sync Bandwidth (only if delta sync data present)
         if (hasDeltaSyncData()) {
             sb.append("### Delta Sync Bandwidth\n\n");
             sb.append("| Metric | Total | Avg per Game |\n");
@@ -458,7 +451,6 @@ public class AnalysisResult {
             sb.append("\n\n");
         }
 
-        // Results by Player Count (batch tests only)
         if (isBatchTestData() && !statsByPlayerCount.isEmpty()) {
             sb.append("### Results by Player Count\n\n");
             if (hasDeltaSyncData()) {
@@ -484,7 +476,6 @@ public class AnalysisResult {
             }
             sb.append("\n");
 
-            // Bandwidth by player count (only if delta sync data present)
             if (hasDeltaSyncData()) {
                 sb.append("### Bandwidth by Player Count\n\n");
                 sb.append("| Players | Games | Delta | Avg Delta | FullState | Avg FullState | Savings |\n");
@@ -505,7 +496,6 @@ public class AnalysisResult {
             }
         }
 
-        // Results by Format (only show if there are multiple formats)
         if (isBatchTestData() && statsByFormat.size() > 1) {
             sb.append("### Results by Format\n\n");
             if (hasDeltaSyncData()) {
@@ -528,7 +518,6 @@ public class AnalysisResult {
             sb.append("\n");
         }
 
-        // Winner distribution
         if (!winnerFrequency.isEmpty()) {
             sb.append("### Winner Distribution\n\n");
             sb.append("| Player | Wins | % |\n");
@@ -557,7 +546,6 @@ public class AnalysisResult {
             sb.append("\n");
         }
 
-        // Error Analysis
         if (gamesWithErrors > 0 || gamesWithChecksumMismatches > 0) {
             sb.append("### Error Analysis\n\n");
 
@@ -630,7 +618,6 @@ public class AnalysisResult {
             }
         }
 
-        // Warning Analysis
         if (gamesWithWarnings > 0) {
             sb.append("### Warning Analysis\n\n");
             sb.append(String.format("**Games with Warnings:** %d\n\n", gamesWithWarnings));
@@ -648,7 +635,6 @@ public class AnalysisResult {
             }
         }
 
-        // Batch Performance Section (batch tests only)
         if (isBatchTestData() && batchStats != null && !batchStats.isEmpty()) {
             sb.append("### Batch Performance\n\n");
             sb.append("| Batch | Games | Success Rate | Failures |\n");
@@ -665,7 +651,6 @@ public class AnalysisResult {
             sb.append("\n");
         }
 
-        // Validation Summary (batch tests only)
         if (isBatchTestData()) {
             sb.append("### Validation Status\n\n");
             boolean passed = passesValidation();
@@ -697,7 +682,6 @@ public class AnalysisResult {
             sb.append("\n");
         }
 
-        // List of analyzed log files
         sb.append("### Analyzed Log Files\n\n");
         sb.append(String.format("**Total files analyzed:** %d\n\n", totalGames));
         if (!allMetrics.isEmpty()) {
@@ -796,7 +780,7 @@ public class AnalysisResult {
         public PlayerCountStats(int playerCount, List<GameLogMetrics> metrics) {
             this.playerCount = playerCount;
             this.gameCount = metrics.size();
-            this.successCount = (int) metrics.stream().filter(GameLogMetrics::isSuccessful).count();
+            this.successCount = (int) metrics.stream().filter(GameLogMetrics::isGameCompleted).count();
             this.successRate = gameCount > 0 ? 100.0 * successCount / gameCount : 0.0;
 
             this.averageTurns = metrics.stream()
@@ -830,11 +814,11 @@ public class AnalysisResult {
         public BatchStats(int batchNumber, List<GameLogMetrics> games) {
             this.batchNumber = batchNumber;
             this.gameCount = games.size();
-            this.successCount = (int) games.stream().filter(GameLogMetrics::isSuccessful).count();
+            this.successCount = (int) games.stream().filter(GameLogMetrics::isGameCompleted).count();
             this.failureCount = gameCount - successCount;
             this.successRate = gameCount > 0 ? 100.0 * successCount / gameCount : 0.0;
             this.failedGames = games.stream()
-                    .filter(m -> !m.isSuccessful())
+                    .filter(m -> !m.isGameCompleted())
                     .map(m -> {
                         String reason = m.getFailureMode().name().toLowerCase();
                         return m.getLogFileName() + " (" + reason + ")";
@@ -859,7 +843,7 @@ public class AnalysisResult {
         public FormatStats(String format, List<GameLogMetrics> metrics) {
             this.format = format;
             this.gameCount = metrics.size();
-            this.successCount = (int) metrics.stream().filter(GameLogMetrics::isSuccessful).count();
+            this.successCount = (int) metrics.stream().filter(GameLogMetrics::isGameCompleted).count();
             this.successRate = gameCount > 0 ? 100.0 * successCount / gameCount : 0.0;
 
             this.averageTurns = metrics.stream()

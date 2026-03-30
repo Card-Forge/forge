@@ -147,14 +147,9 @@ public class NetworkLogAnalyzer {
     private static final Pattern DECK_PRELOADED_PATTERN = Pattern.compile(
             "deck\\s+pre-loaded:\\s*(.+)\\)\\s*$", Pattern.CASE_INSENSITIVE);
 
-    // Matches other deck name formats:
-    // - "deck:" or "deck loaded:"
-    // - "with deck:" or "Sending deck:"
-    // - "Client deck loaded:"
+    // Matches other deck name formats
     private static final Pattern DECK_NAME_PATTERN = Pattern.compile(
             "(?:deck(?:\\s+loaded)?:|with deck:|Sending deck:|Client deck loaded:)\\s*(.+?)(?:\\s*\\(|$)", Pattern.CASE_INSENSITIVE);
-
-    // ==================== Error Normalization ====================
 
     /**
      * Normalize error messages for grouping by removing timestamps, IDs, and other variable data.
@@ -186,8 +181,6 @@ public class NetworkLogAnalyzer {
         // Everything else with [DeltaSync] in an ERROR line is diagnostic follow-up
         return line.contains("[ERROR]");
     }
-
-    // ==================== Error Context Records ====================
 
     /**
      * Immutable record representing a player's state at error time.
@@ -395,8 +388,6 @@ public class NetworkLogAnalyzer {
             return sb.toString();
         }
     }
-
-    // ==================== Log Analysis Methods ====================
 
     /**
      * Analyze a single log file.
@@ -864,8 +855,6 @@ public class NetworkLogAnalyzer {
         System.out.println("[NetworkLogAnalyzer] Filtered to " + metrics.size() + " logs created after " + afterTime);
         return buildAnalysisResult(metrics);
     }
-
-    // ==================== Error Context Extraction Methods ====================
 
     /**
      * Extract context around each unique error type in a log file.

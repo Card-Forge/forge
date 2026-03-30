@@ -39,11 +39,11 @@ import java.util.stream.Collectors;
 
 public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
 
-    // New objects are sent with full property data, existing objects only send changed properties.
+    // New objects are sent with full property data, existing objects only send changed properties
     public static boolean useDeltaSync = true;
 
     private final GameProtocolSender sender;
-    private final DeltaSyncManager deltaSyncManager;
+    private final DeltaSyncManager syncManager;
     private final int clientIndex;
     private boolean initialSyncSent = false;
     private boolean objectsRegistered = false;
@@ -55,9 +55,9 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
     private boolean flushing;
 
     public RemoteClientGuiGame(final RemoteClient client) {
-        this.sender = new GameProtocolSender(client);
-        this.deltaSyncManager = new DeltaSyncManager();
-        this.clientIndex = client.getIndex();
+        sender = new GameProtocolSender(client);
+        syncManager = new DeltaSyncManager();
+        clientIndex = client.getIndex();
     }
 
     /** Alias for reconnection code that references slot index. */
@@ -86,7 +86,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
         initialSyncSent = false;
         objectsRegistered = false;
         fallbackLogged = false;
-        deltaSyncManager.reset();
+        syncManager.reset();
     }
 
     public void setForwarder(GameEventForwarder forwarder) {
@@ -173,7 +173,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
         // get the dirty props bundled with them, and this standalone delta
         // only picks up whatever changed after the flush.
         flushPendingEvents();
-        DeltaPacket delta = deltaSyncManager.collectDeltas(gameView);
+        DeltaPacket delta = syncManager.collectDeltas(gameView);
         if (!delta.isEmpty()) {
             if (flush) {
                 sender.send(ProtocolMethod.applyDelta, delta);
@@ -224,7 +224,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
      */
     public void setResyncPending() {
         resyncPending = true;
-        deltaSyncManager.onResyncRequested();
+        syncManager.onResyncRequested();
     }
 
     /**
@@ -237,7 +237,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
             return;
         }
 
-        long seq = deltaSyncManager.getCurrentSequence();
+        long seq = syncManager.getCurrentSequence();
         send(ProtocolMethod.setGameView, gameView, seq);
         initialSyncSent = true;
 
@@ -502,7 +502,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
                 if (ev instanceof forge.game.event.GameEventGameStarted) {
                     GameView gv = getGameView();
                     if (gv != null) {
-                        deltaSyncManager.registerNewObjects(gv);
+                        syncManager.registerNewObjects(gv);
                         objectsRegistered = true;
                     }
                     break;
@@ -516,7 +516,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
             // delta properties first, then events forwarded.
             GameView gameView = getGameView();
             if (gameView != null) {
-                DeltaPacket delta = deltaSyncManager.collectDeltas(gameView);
+                DeltaPacket delta = syncManager.collectDeltas(gameView);
                 delta.setProxiedEvents(proxied);
                 sender.send(ProtocolMethod.applyDelta, delta);
 

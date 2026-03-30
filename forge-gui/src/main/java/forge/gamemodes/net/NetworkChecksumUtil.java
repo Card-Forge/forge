@@ -451,8 +451,7 @@ public final class NetworkChecksumUtil {
      * the delta.
      */
     static Object getEffectiveValue(TrackableObject obj, TrackableProperty prop) {
-        Map<TrackableProperty, Object> props = obj.getProps();
-        Object value = props != null ? props.get(prop) : null;
+        Object value = ((Map<TrackableProperty, Object>) obj.getProps()).get(prop);
         Tracker tracker = obj.getTracker();
         if (tracker != null && tracker.isFrozen()) {
             Map<TrackableProperty, Object> delayed = tracker.getDelayedPropsFor(obj);
@@ -552,7 +551,6 @@ public final class NetworkChecksumUtil {
 
         List<TrackableObject> objects = collectChecksumObjects(gameView);
         for (TrackableObject obj : objects) {
-            if (obj.getProps() == null) continue;
             for (TrackableProperty prop : sampled) {
                 Object value = getEffectiveValue(obj, prop);
                 if (value != null && !value.equals(prop.getDefaultValue())) {

@@ -10,13 +10,10 @@ import java.util.Random;
 
 /**
  * Orchestrates batch testing with configurable player-count distribution.
- * Builds a shuffled schedule of 2/3/4-player games (default: 50/30/20)
- * and executes them via {@link MultiProcessGameExecutor} (parallel, separate
- * JVM per game) or sequentially via {@link UnifiedNetworkHarness} (same JVM,
+ * Builds a shuffled schedule of 2/3/4-player games and executes them
+ * them via {@link MultiProcessGameExecutor} (parallel, separate JVM
+ * per game) or sequentially via {@link UnifiedNetworkHarness} (same JVM,
  * useful for debugging).
- *
- * <p>Called by {@link NetworkPlayIntegrationTest#runComprehensiveDeltaSyncTest()}
- * and {@link NetworkPlayIntegrationTest#runQuickDeltaSyncTest()}.
  */
 public class ComprehensiveTestExecutor implements IHasNetLog {
 
@@ -50,10 +47,6 @@ public class ComprehensiveTestExecutor implements IHasNetLog {
         return this;
     }
 
-    /**
-     * Set the percentage of games that use Commander format (0-100).
-     * Default is 20 (20% of games).
-     */
     public ComprehensiveTestExecutor commanderPercentage(int percentage) {
         if (percentage < 0 || percentage > 100) {
             throw new IllegalArgumentException("Commander percentage must be 0-100, got: " + percentage);
@@ -72,10 +65,6 @@ public class ComprehensiveTestExecutor implements IHasNetLog {
         return this;
     }
 
-    /**
-     * Enable sequential execution (games run one-by-one in same JVM).
-     * Default is parallel execution (separate JVM per game).
-     */
     public ComprehensiveTestExecutor sequential(boolean seq) {
         this.sequential = seq;
         return this;
@@ -101,7 +90,6 @@ public class ComprehensiveTestExecutor implements IHasNetLog {
 
         long startTime = System.currentTimeMillis();
 
-        // Build player count and commander flag arrays with shuffled distribution
         int[] playerCounts = buildShuffledPlayerCounts();
         boolean[] commanderFlags = buildCommanderFlags(totalGames);
 
@@ -114,15 +102,10 @@ public class ComprehensiveTestExecutor implements IHasNetLog {
         MultiProcessGameExecutor.ExecutionResult result;
 
         if (sequential) {
-            // Run games sequentially in same JVM
             result = executeSequentially(playerCounts, commanderFlags);
         } else {
-            // Create executor with ComprehensiveGameRunner for parallel execution
-            MultiProcessGameExecutor executor = new MultiProcessGameExecutor(gameTimeoutMs)
-                    .withRunnerClass("forge.net.ComprehensiveGameRunner");
-
-            // Run all games in batches
-            result = executor.runGamesInBatches(playerCounts, commanderFlags, parallelBatchSize);
+            result = new MultiProcessGameExecutor(gameTimeoutMs).
+                    runGamesInBatches(playerCounts, commanderFlags, parallelBatchSize);
         }
 
         long duration = System.currentTimeMillis() - startTime;
@@ -132,10 +115,6 @@ public class ComprehensiveTestExecutor implements IHasNetLog {
         return result;
     }
 
-    /**
-     * Execute games sequentially in the same JVM.
-     * Useful for debugging as all games run in same process.
-     */
     private MultiProcessGameExecutor.ExecutionResult executeSequentially(int[] playerCounts, boolean[] commanderFlags) {
         ensureFModelInitialized();
 
@@ -204,26 +183,16 @@ public class ComprehensiveTestExecutor implements IHasNetLog {
      */
     private int[] buildShuffledPlayerCounts() {
         List<Integer> counts = new ArrayList<>();
-
-        // Add 2-player games
         for (int i = 0; i < twoPlayerGames; i++) {
             counts.add(2);
         }
-
-        // Add 3-player games
         for (int i = 0; i < threePlayerGames; i++) {
             counts.add(3);
         }
-
-        // Add 4-player games
         for (int i = 0; i < fourPlayerGames; i++) {
             counts.add(4);
         }
-
-        // Shuffle to distribute game types throughout the run
         Collections.shuffle(counts);
-
-        // Convert to array
         return counts.stream().mapToInt(Integer::intValue).toArray();
     }
 

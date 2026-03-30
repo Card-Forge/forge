@@ -39,14 +39,12 @@ public class GameLogMetrics {
     private int turnCount;
     private String winner;
 
-    // Delta sync metrics — both measured via serialize+compress for apples-to-apples comparison
     private int deltaPacketCount;
-    private long totalDeltaBytes;         // Serialized+compressed delta size (including events)
-    private long totalFullStateBytes;     // Serialized+compressed full GameView + events size
-    private long stateOnlyDeltaBytes;    // Delta size excluding events
-    private long stateOnlyFullBytes;     // Full GameView size excluding events
+    private long totalDeltaBytes;     // Serialized+compressed delta size (including events)
+    private long totalFullStateBytes; // Serialized+compressed full GameView + events size
+    private long stateOnlyDeltaBytes; // Delta size excluding events
+    private long stateOnlyFullBytes;  // Full GameView size excluding events
 
-    // Deck tracking
     private List<String> deckNames = new ArrayList<>();
 
     // Network performance metrics (from Encoded/send() blocked lines)
@@ -63,7 +61,6 @@ public class GameLogMetrics {
     private String firstTimestamp;
     private String lastTimestamp;
 
-    // Checksum stats
     private int checksumCount;
 
     // Error tracking
@@ -84,20 +81,9 @@ public class GameLogMetrics {
         return 100.0 * (1.0 - (double) totalDeltaBytes / totalFullStateBytes);
     }
 
-    /**
-     * Check if this game completed successfully.
-     * Checksum mismatches are tracked separately and do not affect completion status.
-     */
-    public boolean isSuccessful() {
-        return gameCompleted;
-    }
-
-    // Getters and setters
-
     public FailureMode getFailureMode() {
         return failureMode;
     }
-
     public void setFailureMode(FailureMode failureMode) {
         this.failureMode = failureMode;
     }
@@ -105,7 +91,6 @@ public class GameLogMetrics {
     public int getFirstErrorTurn() {
         return firstErrorTurn;
     }
-
     public void setFirstErrorTurn(int firstErrorTurn) {
         this.firstErrorTurn = firstErrorTurn;
     }
@@ -113,7 +98,6 @@ public class GameLogMetrics {
     public String getLogFileName() {
         return logFileName;
     }
-
     public void setLogFileName(String logFileName) {
         this.logFileName = logFileName;
     }
@@ -121,7 +105,6 @@ public class GameLogMetrics {
     public int getGameIndex() {
         return gameIndex;
     }
-
     public void setGameIndex(int gameIndex) {
         this.gameIndex = gameIndex;
     }
@@ -129,7 +112,6 @@ public class GameLogMetrics {
     public int getPlayerCount() {
         return playerCount;
     }
-
     public void setPlayerCount(int playerCount) {
         this.playerCount = playerCount;
     }
@@ -137,7 +119,6 @@ public class GameLogMetrics {
     public String getGameFormat() {
         return gameFormat;
     }
-
     public void setGameFormat(String gameFormat) {
         this.gameFormat = gameFormat;
     }
@@ -145,7 +126,6 @@ public class GameLogMetrics {
     public boolean isGameCompleted() {
         return gameCompleted;
     }
-
     public void setGameCompleted(boolean gameCompleted) {
         this.gameCompleted = gameCompleted;
     }
@@ -153,7 +133,6 @@ public class GameLogMetrics {
     public int getTurnCount() {
         return turnCount;
     }
-
     public void setTurnCount(int turnCount) {
         this.turnCount = turnCount;
     }
@@ -161,7 +140,6 @@ public class GameLogMetrics {
     public String getWinner() {
         return winner;
     }
-
     public void setWinner(String winner) {
         this.winner = winner;
     }
@@ -169,7 +147,6 @@ public class GameLogMetrics {
     public int getDeltaPacketCount() {
         return deltaPacketCount;
     }
-
     public void setDeltaPacketCount(int deltaPacketCount) {
         this.deltaPacketCount = deltaPacketCount;
     }
@@ -177,7 +154,6 @@ public class GameLogMetrics {
     public long getTotalDeltaBytes() {
         return totalDeltaBytes;
     }
-
     public void setTotalDeltaBytes(long totalDeltaBytes) {
         this.totalDeltaBytes = totalDeltaBytes;
     }
@@ -185,7 +161,6 @@ public class GameLogMetrics {
     public long getTotalFullStateBytes() {
         return totalFullStateBytes;
     }
-
     public void setTotalFullStateBytes(long totalFullStateBytes) {
         this.totalFullStateBytes = totalFullStateBytes;
     }
@@ -193,7 +168,6 @@ public class GameLogMetrics {
     public long getStateOnlyDeltaBytes() {
         return stateOnlyDeltaBytes;
     }
-
     public void setStateOnlyDeltaBytes(long stateOnlyDeltaBytes) {
         this.stateOnlyDeltaBytes = stateOnlyDeltaBytes;
     }
@@ -201,12 +175,9 @@ public class GameLogMetrics {
     public long getStateOnlyFullBytes() {
         return stateOnlyFullBytes;
     }
-
     public void setStateOnlyFullBytes(long stateOnlyFullBytes) {
         this.stateOnlyFullBytes = stateOnlyFullBytes;
     }
-
-    // Network performance getters
 
     public void recordEncodedMessage(long bytes) {
         encodedMessageCount++;
@@ -242,7 +213,6 @@ public class GameLogMetrics {
     public List<String> getDeckNames() {
         return deckNames;
     }
-
     public void addDeckName(String deckName) {
         if (deckName != null && !deckName.isEmpty() && !deckNames.contains(deckName)) {
             deckNames.add(deckName);
@@ -252,7 +222,6 @@ public class GameLogMetrics {
     public int getSendErrors() {
         return sendErrors;
     }
-
     public void setSendErrors(int sendErrors) {
         this.sendErrors = sendErrors;
     }
@@ -260,7 +229,6 @@ public class GameLogMetrics {
     public List<String> getWarnings() {
         return warnings;
     }
-
     public void addWarning(String warning) {
         if (warnings.size() < 100) { // Cap at 100 to limit memory
             warnings.add(warning);
@@ -281,7 +249,6 @@ public class GameLogMetrics {
     public void incrementErrorCount(String normalizedError) {
         errorCounts.merge(normalizedError, 1, Integer::sum);
     }
-
     /** Get occurrence counts by normalized error pattern. */
     public Map<String, Integer> getErrorCounts() {
         return errorCounts;
@@ -290,7 +257,6 @@ public class GameLogMetrics {
     public int getChecksumCount() {
         return checksumCount;
     }
-
     public void setChecksumCount(int checksumCount) {
         this.checksumCount = checksumCount;
     }
@@ -302,7 +268,6 @@ public class GameLogMetrics {
     public boolean hasChecksumMismatch() {
         return hasChecksumMismatch;
     }
-
     public void setHasChecksumMismatch(boolean hasChecksumMismatch) {
         this.hasChecksumMismatch = hasChecksumMismatch;
     }
@@ -310,7 +275,6 @@ public class GameLogMetrics {
     public List<NetworkLogAnalyzer.ChecksumMismatchDetail> getChecksumMismatchDetails() {
         return checksumMismatchDetails;
     }
-
     public void setChecksumMismatchDetails(List<NetworkLogAnalyzer.ChecksumMismatchDetail> details) {
         this.checksumMismatchDetails = details;
     }

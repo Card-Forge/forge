@@ -84,10 +84,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
                         }
                         CardStateView csv = findCsvByState(parent, state);
                         if (csv != null) {
-                            Map<TrackableProperty, Object> csvProps = csv.getProps();
-                            if (csvProps != null) {
-                                csvProps.clear();
-                            }
+                            ((Map<TrackableProperty, Object>) csv.getProps()).clear();
                         } else {
                             csv = parent.createAlternateState(state);
                         }
@@ -172,7 +169,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
             handleGameEvents(resolvedEvents);
         }
 
-        // Refresh all GUI views unconditionally after delta application.
+        // TODO shouldn't be needed if hands are ordered correctly
         afterDeltaApplied();
 
         if (packet.hasChecksum()) {
@@ -441,10 +438,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
             }
             // Non-CardView types: clear and reuse (PlayerView identity must be preserved
             // for GUI player matching; other types are rarely replaced).
-            Map<TrackableProperty, Object> props = existing.getProps();
-            if (props != null) {
-                props.clear();
-            }
+            ((Map<TrackableProperty, Object>) existing.getProps()).clear();
             netLog.trace("[DeltaSync] {} ID={} already exists (replaced), cleared stale props",
                     typeName, objectId);
             return existing;

@@ -79,7 +79,7 @@ public final class FServerManager implements IHasNetLog {
     private final Map<Integer, RemoteClientGuiGame> playerGuis = new ConcurrentHashMap<>(); // Store RemoteClientGuiGame instances for reuse
 
     // Network byte tracking for monitoring actual bandwidth usage
-    private final forge.gamemodes.net.NetworkByteTracker networkByteTracker =
+    private final forge.gamemodes.net.NetworkByteTracker byteTracker =
             FModel.getNetPreferences().getPrefBoolean(forge.localinstance.properties.ForgeNetPreferences.FNetPref.NET_BANDWIDTH_LOGGING) ? new forge.gamemodes.net.NetworkByteTracker() : null;
 
     private FServerManager() {
@@ -111,15 +111,15 @@ public final class FServerManager implements IHasNetLog {
      *
      * @return the NetworkByteTracker instance
      */
-    public forge.gamemodes.net.NetworkByteTracker getNetworkByteTracker() {
-        return networkByteTracker;
+    public forge.gamemodes.net.NetworkByteTracker getByteTracker() {
+        return byteTracker;
     }
 
     public void startServer(final int port) {
         this.port = port;
         String UPnPOption = FModel.getNetPreferences().getPref(ForgeNetPreferences.FNetPref.UPnP);
         boolean startUPnP;
-        if(UPnPOption.equalsIgnoreCase("ASK")) {
+        if (UPnPOption.equalsIgnoreCase("ASK")) {
             startUPnP = callUPnPDialog();
         } else {
             startUPnP = UPnPOption.equalsIgnoreCase("ALWAYS");
@@ -136,7 +136,7 @@ public final class FServerManager implements IHasNetLog {
                         public void initChannel(final SocketChannel ch) throws Exception {
                             final ChannelPipeline p = ch.pipeline();
                             p.addLast(
-                                    new CompatibleObjectEncoder(networkByteTracker),
+                                    new CompatibleObjectEncoder(byteTracker),
                                     new CompatibleObjectDecoder(9766 * 1024, ClassResolvers.cacheDisabled(null)),
                                     new IdleStateHandler(HEARTBEAT_TIMEOUT_SECONDS, 0, 0, TimeUnit.SECONDS),
                                     new MessageHandler(),

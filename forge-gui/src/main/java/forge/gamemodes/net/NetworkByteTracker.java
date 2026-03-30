@@ -6,9 +6,6 @@ import java.util.concurrent.atomic.AtomicLong;
  * Tracks actual bytes transmitted over the network.
  * This provides ground truth measurements for comparing with estimated sizes.
  *
- * Controlled by NetworkDebug.config:
- *   bandwidth.logging.enabled=true/false
- *
  * When disabled, network byte tracking has zero overhead.
  */
 public class NetworkByteTracker {
@@ -106,18 +103,9 @@ public class NetworkByteTracker {
         fullStatePacketCount.set(0);
     }
 
-    /**
-     * Enable or disable byte tracking.
-     * @param enabled true to enable tracking
-     */
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
-
-    /**
-     * Check if tracking is enabled.
-     * @return true if enabled
-     */
     public boolean isEnabled() {
         return enabled;
     }

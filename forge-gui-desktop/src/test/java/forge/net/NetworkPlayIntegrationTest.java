@@ -48,16 +48,11 @@ import java.util.List;
  * Run all tests including stress tests:
  *   mvn -pl forge-gui-desktop -am verify -Drun.stress.tests=true
  *
- * Run configurable batch tests (replaces removed hardcoded tests):
+ * Run configurable batch tests:
  *   mvn -pl forge-gui-desktop -am verify -Dtest="NetworkPlayIntegrationTest#testConfigurableSequential" \
  *       -Dtest.gameCount=3 -Drun.stress.tests=true -Dsurefire.failIfNoSpecifiedTests=false
  *   mvn -pl forge-gui-desktop -am verify -Dtest="NetworkPlayIntegrationTest#testConfigurableParallel" \
  *       -Dtest.gameCount=2 -Drun.stress.tests=true -Dsurefire.failIfNoSpecifiedTests=false
- *
- * Run player-count specific tests via comprehensive executor:
- *   mvn -pl forge-gui-desktop -am verify -Dtest="NetworkPlayIntegrationTest#runComprehensiveDeltaSyncTest" \
- *       -Dtest.2pGames=10 -Dtest.3pGames=0 -Dtest.4pGames=0 \
- *       -Drun.stress.tests=true -Dsurefire.failIfNoSpecifiedTests=false
  *
  * Run comprehensive test with custom configuration:
  *   mvn -pl forge-gui-desktop -am verify -Dtest="NetworkPlayIntegrationTest#runComprehensiveDeltaSyncTest" \
@@ -208,7 +203,6 @@ public class NetworkPlayIntegrationTest implements IHasNetLog {
         skipUnlessStressTestsEnabled();
         netLog.info("Testing UnifiedNetworkHarness local mode...");
 
-        // Test local AI mode (no remote clients)
         UnifiedNetworkHarness.GameResult result = new UnifiedNetworkHarness()
                 .playerCount(2)
                 .remoteClients(0)
@@ -268,13 +262,6 @@ public class NetworkPlayIntegrationTest implements IHasNetLog {
     /**
      * Comprehensive delta sync test with 100 games (default configuration).
      *
-     * Configurable via system properties:
-     * - -Dtest.2pGames=50 (default)
-     * - -Dtest.3pGames=30 (default)
-     * - -Dtest.4pGames=20 (default)
-     * - -Dtest.batchSize=10 (default)
-     * - -Dtest.timeoutMs=300000 (default)
-     *
      * Validation criteria:
      * - Success rate >= 90%
      * - Average bandwidth savings >= 90%
@@ -299,7 +286,6 @@ public class NetworkPlayIntegrationTest implements IHasNetLog {
 
         System.out.println("\n" + executionResult.toDetailedReport());
 
-        // Analyze log files from the run subdirectory
         File logSubDir = NetworkLogConfig.getLogDirectory();
         NetworkLogAnalyzer analyzer = new NetworkLogAnalyzer();
         AnalysisResult analysisResult = analyzer.analyzeComprehensiveTestAndAggregate(logSubDir, testStartTime);
@@ -403,7 +389,6 @@ public class NetworkPlayIntegrationTest implements IHasNetLog {
             }
         }
 
-        // Assertions
         Assert.assertTrue(successRate >= 90.0, String.format("Success rate should be >= 90%%, was %.1f%%", successRate));
 
         Assert.assertTrue(maxPerGame <= 1,

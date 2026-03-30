@@ -49,10 +49,6 @@ import java.util.concurrent.atomic.AtomicInteger;
  * // 2-player with remote client
  * GameResult result = new UnifiedNetworkHarness()
  *     .playerCount(2).remoteClients(1).execute();
- *
- * // 3-player multiplayer
- * GameResult result = new UnifiedNetworkHarness()
- *     .playerCount(3).remoteClients(2).execute();
  * </pre>
  */
 public class UnifiedNetworkHarness implements IHasNetLog {
@@ -70,7 +66,7 @@ public class UnifiedNetworkHarness implements IHasNetLog {
     private int specifiedPort = -1; // -1 means auto-allocate
     private boolean useAiForRemotePlayers = true;
     private boolean commander = false;
-    private List<Deck> decks = null; // null means use random precons
+    private List<Deck> decks = null;
 
     // Runtime state
     private FServerManager server;
@@ -79,7 +75,6 @@ public class UnifiedNetworkHarness implements IHasNetLog {
     private ExecutorService clientExecutor;
     private final AtomicBoolean serverRunning = new AtomicBoolean(false);
 
-    /** @param count 2-4 supported */
     public UnifiedNetworkHarness playerCount(int count) {
         if (count < 2 || count > 4) {
             throw new IllegalArgumentException("Player count must be 2-4, got: " + count);
@@ -628,7 +623,7 @@ public class UnifiedNetworkHarness implements IHasNetLog {
     private void collectNetworkMetrics(GameResult result) {
         if (server == null) return;
 
-        NetworkByteTracker tracker = server.getNetworkByteTracker();
+        NetworkByteTracker tracker = server.getByteTracker();
         if (tracker != null) {
             result.totalBytesSent = tracker.getTotalBytesSent();
             result.deltaBytesSent = tracker.getDeltaBytesSent();

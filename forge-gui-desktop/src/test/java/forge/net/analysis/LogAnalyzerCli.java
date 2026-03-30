@@ -11,14 +11,6 @@ import java.util.List;
  * CLI wrapper around {@link NetworkLogAnalyzer} for standalone log analysis.
  * Accepts log files or directories and produces a markdown report.
  *
- * <p>Easiest way to run (via Maven test wrapper):
- * <pre>
- *   mvn -pl forge-gui-desktop -am verify
- *     -Dtest="NetworkPlayIntegrationTest#analyzeLog"
- *     -Dlog.input="path/to/file.log"
- *     -Drun.stress.tests=true -Dsurefire.failIfNoSpecifiedTests=false
- * </pre>
- *
  * <p>Options: -r (recurse), -o file (output path)
  */
 public class LogAnalyzerCli {

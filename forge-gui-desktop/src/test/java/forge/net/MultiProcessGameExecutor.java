@@ -25,28 +25,13 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 public class MultiProcessGameExecutor implements IHasNetLog {
 
-    private static final long DEFAULT_TIMEOUT_MS = 300000; // 5 minutes per game
-
     private final long timeoutMs;
 
     // Runner class for different game types
-    private String runnerClass = "forge.net.ComprehensiveGameRunner"; // Supports 2-4 players
-
-    public MultiProcessGameExecutor() {
-        this(DEFAULT_TIMEOUT_MS);
-    }
+    private static String runnerClass = "forge.net.ComprehensiveGameRunner";
 
     public MultiProcessGameExecutor(long timeoutMs) {
         this.timeoutMs = timeoutMs;
-    }
-
-    /**
-     * Set the runner class for game execution.
-     * Use ComprehensiveGameRunner for multi-player support.
-     */
-    public MultiProcessGameExecutor withRunnerClass(String runnerClass) {
-        this.runnerClass = runnerClass;
-        return this;
     }
 
     /**
@@ -149,7 +134,6 @@ public class MultiProcessGameExecutor implements IHasNetLog {
 
             // Wait for all games to complete
             allDone.await();
-
         } catch (Exception e) {
             netLog.error("Error: {}", e.getMessage());
             e.printStackTrace();
@@ -288,11 +272,9 @@ public class MultiProcessGameExecutor implements IHasNetLog {
             netLog.info("Starting batch {} (games {}-{} of {})",
                     batchNumber, batchStart, batchEnd - 1, totalGames);
 
-            MultiProcessGameExecutor batchExecutor = new MultiProcessGameExecutor(this.timeoutMs);
-            batchExecutor.withRunnerClass(this.runnerClass);
-
             // Pass batch number and shared batch ID for unique log filenames
-            ExecutionResult batchResult = batchExecutor.runGamesWithPlayerCounts(batchPlayerCounts, batchCommanderFlags, batchNumber, batchId);
+            ExecutionResult batchResult = new MultiProcessGameExecutor(this.timeoutMs).
+                    runGamesWithPlayerCounts(batchPlayerCounts, batchCommanderFlags, batchNumber, batchId);
 
             // Merge batch results into aggregated result
             for (Map.Entry<Integer, UnifiedNetworkHarness.GameResult> entry : batchResult.getResults().entrySet()) {
@@ -562,7 +544,6 @@ public class MultiProcessGameExecutor implements IHasNetLog {
             sb.append("Multi-Process Parallel Game Execution Report\n");
             sb.append("=".repeat(80)).append("\n\n");
 
-            // Overall metrics
             sb.append("Overall Metrics:\n");
             sb.append("-".repeat(40)).append("\n");
             sb.append(String.format("  Total Games:     %d\n", totalGames));
@@ -578,7 +559,6 @@ public class MultiProcessGameExecutor implements IHasNetLog {
             sb.append(String.format("  Bytes/Packet:    %.1f\n", bytesPerPacket));
             sb.append("\n");
 
-            // Breakdown by player count
             sb.append("Breakdown by Player Count:\n");
             sb.append("-".repeat(40)).append("\n");
             for (int p = 2; p <= 4; p++) {
@@ -598,7 +578,6 @@ public class MultiProcessGameExecutor implements IHasNetLog {
             }
             sb.append("\n");
 
-            // Breakdown by format
             int commanderCount = getCommanderGameCount();
             if (commanderCount > 0) {
                 int constructedCount = totalGames - commanderCount - getErrorCount() - getTimeoutCount();
