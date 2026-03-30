@@ -486,8 +486,14 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                     panel.setDisplayEnabled(!hidden);
                 }
                 // Set group count on top card for badge rendering
-                if (grouping && stack.size() > 1) {
-                    stack.get(0).setGroupCount(stack.size());
+                // Exclude attached panels (equipment/auras) — they're pulled
+                // into the stack by addAttachedPanels but aren't grouped cards
+                if (grouping) {
+                    int groupCount = (int) stack.stream()
+                            .filter(p -> p.getAttachedToPanel() == null).count();
+                    if (groupCount > 1) {
+                        stack.get(0).setGroupCount(groupCount);
+                    }
                 }
                 rowBottom = Math.max(rowBottom, y + stack.getHeight());
                 x += stack.getWidth();
