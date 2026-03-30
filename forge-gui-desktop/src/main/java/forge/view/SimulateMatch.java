@@ -1,6 +1,5 @@
 package forge.view;
 
-import com.google.common.eventbus.Subscribe;
 import java.io.File;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -14,16 +13,12 @@ import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.io.DeckSerializer;
 import forge.game.Game;
-import forge.game.card.Card;
-import forge.game.card.CardView;
 import forge.game.GameEndReason;
 import forge.game.GameLogEntry;
 import forge.game.GameLogEntryType;
 import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.Match;
-import forge.game.event.GameEventTurnBegan;
-import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.tournament.system.AbstractTournament;
 import forge.gamemodes.tournament.system.TournamentBracket;
@@ -31,13 +26,9 @@ import forge.gamemodes.tournament.system.TournamentPairing;
 import forge.gamemodes.tournament.system.TournamentPlayer;
 import forge.gamemodes.tournament.system.TournamentRoundRobin;
 import forge.gamemodes.tournament.system.TournamentSwiss;
-import forge.game.zone.PlayerZone;
-import forge.game.zone.ZoneType;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
-import forge.sim.SimVerboseConfig;
 import forge.player.GamePlayerUtil;
-import forge.util.CardTranslation;
 import forge.util.Lang;
 import forge.util.TextUtil;
 import forge.util.storage.IStorage;
@@ -110,8 +101,7 @@ public class SimulateMatch {
 
         if (params.containsKey("t")) {
             final int maxTurns = params.containsKey("x") ? Integer.parseInt(params.get("x").get(0)) : 0;
-            final SimVerboseConfig verboseCfg = params.containsKey("v") ? SimVerboseConfig.load() : null;
-            simulateTournament(params, rules, outputGamelog, maxTurns, verboseCfg);
+            simulateTournament(params, rules, outputGamelog, maxTurns);
             System.out.flush();
             return;
         }
@@ -151,7 +141,6 @@ public class SimulateMatch {
             rules.setSimTimeout(Integer.parseInt(params.get("c").get(0)));
         }
         final int maxTurns = params.containsKey("x") ? Integer.parseInt(params.get("x").get(0)) : 0;
-        final SimVerboseConfig verboseCfg = params.containsKey("v") ? SimVerboseConfig.load() : null;
 
         sb.append(" - ").append(Lang.nounWithNumeral(nGames, "game")).append(" of ").append(type);
 
@@ -163,12 +152,12 @@ public class SimulateMatch {
             int iGame = 0;
             while (!mc.isMatchOver()) {
                 // play games until the match ends
-                simulateSingleMatch(mc, iGame, outputGamelog, maxTurns, verboseCfg);
+                simulateSingleMatch(mc, iGame, outputGamelog, maxTurns);
                 iGame++;
             }
         } else {
             for (int iGame = 0; iGame < nGames; iGame++) {
-                simulateSingleMatch(mc, iGame, outputGamelog, maxTurns, verboseCfg);
+                simulateSingleMatch(mc, iGame, outputGamelog, maxTurns);
             }
         }
 
@@ -176,7 +165,7 @@ public class SimulateMatch {
     }
 
     private static void argumentHelp() {
-        System.out.println("Syntax: forge.exe sim -d <deck1[.dck]> ... <deckX[.dck]> -D [D] -n [N] -m [M] -t [T] -p [P] -f [F] -x [X] -v -q");
+        System.out.println("Syntax: forge.exe sim -d <deck1[.dck]> ... <deckX[.dck]> -D [D] -n [N] -m [M] -t [T] -p [P] -f [F] -x [X] -q");
         System.out.println("\tsim - stands for simulation mode");
         System.out.println("\tdeck1 (or deck2,...,X) - constructed deck name or filename (has to be quoted when contains multiple words)");
         System.out.println("\tdeck is treated as file if it ends with a dot followed by three numbers or letters");
@@ -187,8 +176,6 @@ public class SimulateMatch {
         System.out.println("\tP - Amount of players per match (used only with Tournaments, defaults to 2)");
         System.out.println("\tF - format of games, defaults to constructed");
         System.out.println("\tX - Maximum number of turns allowed in a game. Reaching this ends the game as a draw.");
-        System.out.println("\tv - Verbose mode. Extra sim logging merges sim-verbose.properties from Forge userDir/sim/, then ./sim/, then working directory (later file overrides; see "
-                + ForgeConstants.SIM_VERBOSE_CONFIG_EXAMPLE + "). With full game log, [verbose] lines appear in time order; with -q they print after match results.");
         System.out.println("\tc - Clock flag. Set the maximum time in seconds before calling the match a draw, defaults to 120.");
         System.out.println("\tq - Quiet flag. Output just the game result, not the entire game log.");
     }
@@ -210,11 +197,7 @@ public class SimulateMatch {
         return null;
     }
 
-    /**
-     * @param verboseConfig loaded when {@code -v} was passed; {@code null} disables verbose logging
-     */
-    public static void simulateSingleMatch(final Match mc, int iGame, boolean outputGamelog, int maxTurns,
-            final SimVerboseConfig verboseConfig) {
+    public static void simulateSingleMatch(final Match mc, int iGame, boolean outputGamelog, int maxTurns) {
         final StopWatch sw = new StopWatch();
         sw.start();
 
@@ -222,18 +205,6 @@ public class SimulateMatch {
         final AtomicBoolean turnCapReached = new AtomicBoolean(false);
         final AtomicBoolean stopTurnWatcher = new AtomicBoolean(false);
         final Thread turnWatcher;
-        final List<String> verboseQuietBuffer = verboseConfig != null && verboseConfig.anyEnabled() && !outputGamelog
-                ? Collections.synchronizedList(new ArrayList<>()) : null;
-        if (verboseConfig != null && verboseConfig.isEnabled(SimVerboseConfig.DRAWS)) {
-            // Log every Library -> Hand move. Do not dedupe by card id: the same Card can return to the
-            // library (mulligan) and be drawn again; dedupe would hide later draws (e.g. draw step).
-            // With full game log, append to GameLog so output matches game chronology (not all [verbose] first).
-            g1.subscribeToEvents(new VerboseDrawEventLogger(g1, verboseQuietBuffer));
-        }
-        if (verboseConfig != null && (verboseConfig.isEnabled(SimVerboseConfig.BEGINNING_CARDS_IN_HAND)
-                || verboseConfig.logsBeginningLibrary())) {
-            g1.subscribeToEvents(new VerboseTurnBeginLogger(g1, verboseQuietBuffer, verboseConfig));
-        }
         if (maxTurns > 0) {
             turnWatcher = new Thread(() -> {
                 while (!stopTurnWatcher.get() && !g1.isGameOver()) {
@@ -286,17 +257,7 @@ public class SimulateMatch {
         }
         Collections.reverse(log);
         for (GameLogEntry l : log) {
-            if (l.type() == GameLogEntryType.INFORMATION && l.message() != null
-                    && l.message().startsWith("[verbose]")) {
-                System.out.println(l.message());
-            } else {
-                System.out.println(l);
-            }
-        }
-        if (verboseQuietBuffer != null && !verboseQuietBuffer.isEmpty()) {
-            for (final String line : verboseQuietBuffer) {
-                System.out.println(line);
-            }
+            System.out.println(l);
         }
 
         // If both players life totals to 0 in a single turn, the game should end in a draw
@@ -311,7 +272,7 @@ public class SimulateMatch {
     }
 
     private static void simulateTournament(Map<String, List<String>> params, GameRules rules, boolean outputGamelog,
-            int maxTurns, final SimVerboseConfig verboseConfig) {
+            int maxTurns) {
         String tournament = params.get("t").get(0);
         AbstractTournament tourney = null;
         int matchPlayers = params.containsKey("p") ? Integer.parseInt(params.get("p").get(0)) : 2;
@@ -407,7 +368,7 @@ public class SimulateMatch {
                 while (!mc.isMatchOver()) {
                     // play games until the match ends
                     try {
-                        simulateSingleMatch(mc, iGame, outputGamelog, maxTurns, verboseConfig);
+                        simulateSingleMatch(mc, iGame, outputGamelog, maxTurns);
                         iGame++;
                     } catch (Exception e) {
                         exceptions++;
@@ -440,149 +401,6 @@ public class SimulateMatch {
 
     public static Match simulateOffthreadGame(List<Deck> decks, GameType format, int games) {
         return null;
-    }
-
-    /**
-     * Card name plus runtime game id in parentheses, matching {@link CardView#toString()} name/id suffix
-     * (without the leading zone prefix used in full {@code toString()}).
-     */
-    private static String verboseCardLabel(final CardView view) {
-        if (view == null) {
-            return "?";
-        }
-        if (view.getName() == null || view.getName().isEmpty()) {
-            return view.toString();
-        }
-        final String name = CardTranslation.getTranslatedName(view.getName());
-        final int id = view.getId();
-        if (id <= 0) {
-            return name;
-        }
-        return name + " (" + id + ")";
-    }
-
-    private static String verboseCardLabel(final Card card) {
-        if (card == null) {
-            return "?";
-        }
-        final CardView v = card.getView();
-        return v != null ? verboseCardLabel(v) : card.getName();
-    }
-
-    private static void addVerboseSimLine(final Game game, final List<String> quietBuffer, final String line) {
-        if (quietBuffer != null) {
-            quietBuffer.add(line);
-        } else {
-            game.getGameLog().add(GameLogEntryType.INFORMATION, line);
-        }
-    }
-
-    private static final class VerboseDrawEventLogger {
-        private final Game game;
-        /** When non-null (-q), game log omits INFORMATION; buffer and print after match lines. */
-        private final List<String> quietBuffer;
-
-        private VerboseDrawEventLogger(final Game game0, final List<String> quietBuffer0) {
-            this.game = game0;
-            this.quietBuffer = quietBuffer0;
-        }
-
-        @Subscribe
-        public void onCardChangeZone(final forge.game.event.GameEventCardChangeZone event) {
-            if (event == null || event.from() == null || event.to() == null || event.card() == null) {
-                return;
-            }
-            if (event.from().zoneType() != forge.game.zone.ZoneType.Library
-                    || event.to().zoneType() != forge.game.zone.ZoneType.Hand) {
-                return;
-            }
-            final String playerName = event.to().player() == null ? "Unknown player" : event.to().player().getName();
-            final String line = String.format("[verbose] %s drew: %s", playerName, verboseCardLabel(event.card()));
-            addVerboseSimLine(game, quietBuffer, line);
-        }
-    }
-
-    /**
-     * At {@link GameEventTurnBegan}: optional hand list and/or top-of-library names per sim-verbose.properties.
-     */
-    private static final class VerboseTurnBeginLogger {
-        private final Game game;
-        private final List<String> quietBuffer;
-        private final SimVerboseConfig config;
-
-        private VerboseTurnBeginLogger(final Game game0, final List<String> quietBuffer0,
-                final SimVerboseConfig config0) {
-            this.game = game0;
-            this.quietBuffer = quietBuffer0;
-            this.config = config0;
-        }
-
-        @Subscribe
-        public void onTurnBegan(final GameEventTurnBegan event) {
-            if (event == null) {
-                return;
-            }
-            // Active player is already set when TurnBegan fires; avoids cache/view mismatch.
-            final Player p = game.getPhaseHandler().getPlayerTurn();
-            if (p == null) {
-                return;
-            }
-            final int turn = event.turnNumber();
-            final String pname = p.getName();
-
-            if (config.isEnabled(SimVerboseConfig.BEGINNING_CARDS_IN_HAND)) {
-                final StringBuilder sb = new StringBuilder();
-                for (final Card c : p.getCardsIn(ZoneType.Hand)) {
-                    if (sb.length() > 0) {
-                        sb.append(", ");
-                    }
-                    sb.append(verboseCardLabel(c));
-                }
-                final String handList = sb.length() == 0 ? "(empty)" : sb.toString();
-                addVerboseSimLine(game, quietBuffer,
-                        String.format("[verbose] Turn %d: %s hand: %s", turn, pname, handList));
-            }
-
-            if (config.logsBeginningLibrary()) {
-                final Integer n = config.getBeginningLibraryCardCount();
-                final PlayerZone lib = p.getZone(ZoneType.Library);
-                final int size = lib.size();
-                final int limit = n != null && n == -1 ? size : Math.min(n, size);
-                final StringBuilder lb = new StringBuilder();
-                for (int i = 0; i < limit; i++) {
-                    if (lb.length() > 0) {
-                        lb.append(", ");
-                    }
-                    lb.append(verboseCardLabel(lib.get(i)));
-                }
-                final String libList = size == 0 ? "(empty)" : lb.toString();
-                final String scope = n != null && n == -1
-                        ? String.format("all %d", size)
-                        : String.format("top %d", limit);
-                addVerboseSimLine(game, quietBuffer,
-                        String.format("[verbose] Turn %d: %s library (%s): %s", turn, pname, scope, libList));
-            }
-
-            if (config.logsBeginningGraveyard()) {
-                final Integer n = config.getBeginningGraveyardCardCount();
-                final PlayerZone gy = p.getZone(ZoneType.Graveyard);
-                final int size = gy.size();
-                final int limit = n != null && n == -1 ? size : Math.min(n, size);
-                final StringBuilder gb = new StringBuilder();
-                for (int i = 0; i < limit; i++) {
-                    if (gb.length() > 0) {
-                        gb.append(", ");
-                    }
-                    gb.append(verboseCardLabel(gy.get(i)));
-                }
-                final String gyList = size == 0 ? "(empty)" : gb.toString();
-                final String scope = n != null && n == -1
-                        ? String.format("all %d", size)
-                        : String.format("top %d", limit);
-                addVerboseSimLine(game, quietBuffer,
-                        String.format("[verbose] Turn %d: %s graveyard (%s): %s", turn, pname, scope, gyList));
-            }
-        }
     }
 
     private static Deck deckFromCommandLineParameter(String deckname, GameType type) {

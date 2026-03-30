@@ -241,7 +241,7 @@ public class PlanarConquestGeneraterGA extends AbstractGeneticAlgorithm<Deck> {
                 while (!mc.isMatchOver()) {
                     // play games until the match ends
                     try{
-                        SimulateMatch.simulateSingleMatch(mc, iGame, false, 0, null);
+                        SimulateMatch.simulateSingleMatch(mc, iGame, false, 0);
                         iGame++;
                     } catch(Exception e) {
                         exceptions++;
