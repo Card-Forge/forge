@@ -61,7 +61,7 @@ public enum CSubmenuPuzzleCreate implements ICDoc, IMenuProvider {
                 "URL:http://www.cardforge.org",
                 "Goal:Win",
                 "Turns:999",
-                "Difficulty:Easy",
+                "Difficulty:Common",
                 "Description:This is a completely empty puzzle placeholder."
                 )
         );

@@ -2581,7 +2581,7 @@
   {
     "name": "Ape",
     "nameOverride": "Ape Behemoth",
-    "sprite": "sprites/enemy/beast/behemoth.atlas",
+    "sprite": "sprites/enemy/beast/ape/behemoth.atlas",
     "deck": [
       "decks/standard/ape.dck"
     ],
@@ -4336,7 +4336,7 @@
   },
   {
     "name": "Armadillo",
-    "sprite": "sprites/enemy/beast/armadillo.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/armadillo.atlas",
     "deck": [
       "decks/standard/armadillo.dck"
     ],
@@ -5467,7 +5467,7 @@
   },
   {
     "name": "Badger",
-    "sprite": "sprites/enemy/beast/badger.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/badger.atlas",
     "deck": [
       "decks/standard/badger.dck"
     ],
@@ -7042,7 +7042,7 @@
   },
   {
     "name": "Bat",
-    "sprite": "sprites/enemy/beast/bat.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/bat.atlas",
     "deck": [
       "decks/standard/bat.dck"
     ],
@@ -7160,7 +7160,7 @@
   {
     "name": "Bear",
     "nameOverride": "Brown Bear",
-    "sprite": "sprites/enemy/beast/bear.atlas",
+    "sprite": "sprites/enemy/beast/bear/bear.atlas",
     "deck": [
       "decks/standard/bear.dck"
     ],
@@ -8288,7 +8288,7 @@
   },
   {
     "name": "Boar",
-    "sprite": "sprites/enemy/beast/boar.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/boar.atlas",
     "deck": [
       "decks/standard/boar.dck",
       "decks/standard/boar_gruul.dck",
@@ -8577,7 +8577,7 @@
   },
   {
     "name": "Bull",
-    "sprite": "sprites/enemy/beast/bull.atlas",
+    "sprite": "sprites/enemy/beast/barn/bull.atlas",
     "deck": [
       "decks/standard/bull.dck"
     ],
@@ -9116,7 +9116,7 @@
   {
     "name": "Camel",
     "nameOverride": "",
-    "sprite": "sprites/enemy/beast/camel.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/camel.atlas",
     "deck": [
       "decks/standard/camel.dck"
     ],
@@ -9295,7 +9295,7 @@
   },
   {
     "name": "Caracal",
-    "sprite": "sprites/enemy/beast/caracal.atlas",
+    "sprite": "sprites/enemy/beast/cat/caracal.atlas",
     "deck": [
       "decks/standard/caracal.dck"
     ],
@@ -9517,7 +9517,7 @@
   },
   {
     "name": "Cat",
-    "sprite": "sprites/enemy/beast/cat.atlas",
+    "sprite": "sprites/enemy/beast/cat/cat.atlas",
     "deck": [
       "decks/standard/straycat.dck"
     ],
@@ -9895,7 +9895,7 @@
   },
   {
     "name": "Cave Spider",
-    "sprite": "sprites/enemy/beast/spider_cave.atlas",
+    "sprite": "sprites/enemy/beast/arachnid/spider_cave.atlas",
     "deck": [
       "decks/standard/cave_spider.dck"
     ],
@@ -10569,7 +10569,7 @@
   },
   {
     "name": "Cerodon",
-    "sprite": "sprites/enemy/beast/cerodon.atlas",
+    "sprite": "sprites/enemy/monstrosity/cerodon.atlas",
     "deck": [
       "decks/standard/cerodon.dck"
     ],
@@ -11517,7 +11517,7 @@
   },
   {
     "name": "Chicken",
-    "sprite": "sprites/enemy/beast/chicken.atlas",
+    "sprite": "sprites/enemy/beast/barn/chicken.atlas",
     "deck": [
       "decks/elite/chicken.dck"
     ],
@@ -13906,7 +13906,7 @@
   },
   {
     "name": "Crab",
-    "sprite": "sprites/enemy/beast/crab.atlas",
+    "sprite": "sprites/enemy/beast/ocean/crab.atlas",
     "deck": [
       "decks/standard/crab.dck",
       "decks/standard/giant_crab.dck"
@@ -14249,7 +14249,7 @@
   },
   {
     "name": "Crocodile",
-    "sprite": "sprites/enemy/beast/crocodile_water.atlas",
+    "sprite": "sprites/enemy/beast/reptile/crocodile_water.atlas",
     "deck": [
       "decks/standard/crocodile.dck"
     ],
@@ -15010,7 +15010,7 @@
   },
   {
     "name": "Hermit Crab",
-    "sprite": "sprites/enemy/beast/hermitcrab.atlas",
+    "sprite": "sprites/enemy/beast/ocean/hermitcrab.atlas",
     "deck": [
       "decks/standard/hermitcrab.dck"
     ],
@@ -15123,7 +15123,7 @@
   },
   {
     "name": "Hedgehog",
-    "sprite": "sprites/enemy/beast/hedgehog.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/hedgehog.atlas",
     "deck": [
       "decks/standard/hedgehog.dck"
     ],
@@ -16773,7 +16773,7 @@
   },
   {
     "name": "Dinosaur Elite",
-    "sprite": "sprites/enemy/beast/ancient.atlas",
+    "sprite": "sprites/enemy/beast/dinosaur/ancient.atlas",
     "deck": [
       "decks/standard/dinosaurelite.dck"
     ],
@@ -16890,7 +16890,7 @@
   {
     "name": "Dinosaur",
     "nameOverride": "Giant Carnosaur",
-    "sprite": "sprites/enemy/beast/ancient_2.atlas",
+    "sprite": "sprites/enemy/beast/dinosaur/ancient_2.atlas",
     "deck": [
       "decks/standard/dinosaur_w_r.dck"
     ],
@@ -17739,7 +17739,7 @@
   },
   {
     "name": "Dog",
-    "sprite": "sprites/enemy/beast/dog.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/dog.atlas",
     "deck": [
       "decks/standard/dog.dck",
       "decks/standard/dog_w_beginner.dck"
@@ -18370,7 +18370,7 @@
   },
   {
     "name": "Dragonfly",
-    "sprite": "sprites/enemy/beast/dragonfly.atlas",
+    "sprite": "sprites/enemy/beast/insect/dragonfly.atlas",
     "deck": [
       "decks/standard/insect.dck"
     ],
@@ -21032,7 +21032,7 @@
   {
     "name": "Elephant",
     "nameOverride": "War Mammoth",
-    "sprite": "sprites/enemy/beast/elephant.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/elephant.atlas",
     "deck": [
       "decks/elite/elephant.dck"
     ],
@@ -21802,7 +21802,7 @@
   },
   {
     "name": "Elk",
-    "sprite": "sprites/enemy/beast/deer_2.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/deer_2.atlas",
     "deck": [
       "decks/standard/elk.dck"
     ],
@@ -22833,7 +22833,7 @@
   },
   {
     "name": "Falcon",
-    "sprite": "sprites/enemy/beast/falcon.atlas",
+    "sprite": "sprites/enemy/beast/bird/falcon.atlas",
     "deck": [
       "decks/standard/falcon_w.dck"
     ],
@@ -24927,7 +24927,7 @@
   },
   {
     "name": "Fox",
-    "sprite": "sprites/enemy/beast/fox.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/fox.atlas",
     "deck": [
       "decks/standard/fox.dck"
     ],
@@ -25150,7 +25150,7 @@
   },
   {
     "name": "Frog",
-    "sprite": "sprites/enemy/beast/frog.atlas",
+    "sprite": "sprites/enemy/beast/amphibian/frog.atlas",
     "deck": [
       "decks/standard/frog.dck"
     ],
@@ -26687,7 +26687,7 @@
   {
     "name": "Ghalta",
     "nameOverride": "Queen of Beasts",
-    "sprite": "sprites/enemy/beast/ghalta.atlas",
+    "sprite": "sprites/enemy/beast/dinosaur/ghalta.atlas",
     "deck": [
       "decks/boss/ghalta.dck"
     ],
@@ -28026,7 +28026,7 @@
   },
   {
     "name": "Giant Fly",
-    "sprite": "sprites/enemy/beast/giantfly.atlas",
+    "sprite": "sprites/enemy/beast/insect/giantfly.atlas",
     "deck": [
       "decks/standard/insect.dck"
     ],
@@ -28217,7 +28217,7 @@
   },
   {
     "name": "Giant Panda",
-    "sprite": "sprites/enemy/beast/giantpanda.atlas",
+    "sprite": "sprites/enemy/beast/bear/giantpanda.atlas",
     "deck": [
       "decks/standard/giantpanda.dck"
     ],
@@ -28336,7 +28336,7 @@
   },
   {
     "name": "Giant Spider",
-    "sprite": "sprites/enemy/beast/spider_purple.atlas",
+    "sprite": "sprites/enemy/beast/arachnid/spider_purple.atlas",
     "deck": [
       "decks/standard/spider_token.dck"
     ],
@@ -30180,7 +30180,7 @@
   {
     "name": "Gorilla",
     "nameOverride": "Savage Chieftain",
-    "sprite": "sprites/enemy/beast/gorilla.atlas",
+    "sprite": "sprites/enemy/beast/ape/gorilla.atlas",
     "deck": [
       "decks/elite/gorilla.dck"
     ],
@@ -34113,7 +34113,7 @@
   },
   {
     "name": "Hidden Snake",
-    "sprite": "sprites/enemy/beast/cobradungeon.atlas",
+    "sprite": "sprites/enemy/beast/reptile/cobradungeon.atlas",
     "deck": [
       "decks/standard/snake.dck"
     ],
@@ -34835,7 +34835,7 @@
   {
     "name": "Hippo",
     "nameOverride": "Giant Bull Hippo",
-    "sprite": "sprites/enemy/beast/hippo.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/hippo.atlas",
     "deck": [
       "decks/elite/hippo.dck"
     ],
@@ -35844,7 +35844,7 @@
   },
   {
     "name": "Horse",
-    "sprite": "sprites/enemy/beast/horseblack.atlas",
+    "sprite": "sprites/enemy/beast/horse/horseblack.atlas",
     "deck": [
       "decks/standard/horse.dck"
     ],
@@ -36029,7 +36029,7 @@
   },
   {
     "name": "Sunmare",
-    "sprite": "sprites/enemy/beast/horsearabian.atlas",
+    "sprite": "sprites/enemy/beast/horse/horsearabian.atlas",
     "deck": [
       "decks/standard/horse.dck"
     ],
@@ -38829,7 +38829,7 @@
   },
   {
     "name": "Jellyfish",
-    "sprite": "sprites/enemy/beast/jellyfish.atlas",
+    "sprite": "sprites/enemy/beast/ocean/jellyfish.atlas",
     "deck": [
       "decks/standard/jellyfish.dck"
     ],
@@ -41103,7 +41103,7 @@
   },
   {
     "name": "Ladybug",
-    "sprite": "sprites/enemy/beast/ladybug.atlas",
+    "sprite": "sprites/enemy/beast/insect/ladybug.atlas",
     "deck": [
       "decks/standard/ladybug.dck"
     ],
@@ -42422,7 +42422,7 @@
   },
   {
     "name": "Lion",
-    "sprite": "sprites/enemy/beast/lion.atlas",
+    "sprite": "sprites/enemy/beast/cat/lion.atlas",
     "deck": [
       "decks/standard/lion.dck"
     ],
@@ -47284,7 +47284,7 @@
   },
   {
     "name": "Monkey",
-    "sprite": "sprites/enemy/beast/monkey_small.atlas",
+    "sprite": "sprites/enemy/beast/ape/monkey_small.atlas",
     "deck": [
       "decks/elite/ragavan.dck"
     ],
@@ -48339,7 +48339,7 @@
   },
   {
     "name": "Naked Mole Rat",
-    "sprite": "sprites/enemy/beast/nakedmolerat.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/nakedmolerat.atlas",
     "deck": [
       "decks/standard/shrinemole.dck"
     ],
@@ -49575,7 +49575,7 @@
   },
   {
     "name": "Octopus",
-    "sprite": "sprites/enemy/beast/octopus.atlas",
+    "sprite": "sprites/enemy/beast/ocean/octopus.atlas",
     "deck": [
       "decks/standard/octopus.dck"
     ],
@@ -50261,7 +50261,7 @@
   },
   {
     "name": "Owl",
-    "sprite": "sprites/enemy/beast/owl.atlas",
+    "sprite": "sprites/enemy/beast/bird/owl.atlas",
     "deck": [
       "decks/standard/owl.dck"
     ],
@@ -50712,7 +50712,7 @@
   },
   {
     "name": "Penguin",
-    "sprite": "sprites/enemy/beast/penguin.atlas",
+    "sprite": "sprites/enemy/beast/polar/penguin.atlas",
     "deck": [
       "decks/standard/penguin.dck"
     ],
@@ -52216,7 +52216,7 @@
   {
     "name": "Poisonous Snake",
     "nameOverride": "",
-    "sprite": "sprites/enemy/beast/snake_cobra.atlas",
+    "sprite": "sprites/enemy/beast/reptile/snake_cobra.atlas",
     "deck": [
       "decks/standard/poisonoussnake.dck"
     ],
@@ -52384,7 +52384,7 @@
   },
   {
     "name": "Polar Bear",
-    "sprite": "sprites/enemy/beast/polarbear.atlas",
+    "sprite": "sprites/enemy/beast/polar/polarbear.atlas",
     "deck": [
       "decks/standard/polarbear.dck"
     ],
@@ -52496,7 +52496,7 @@
   },
   {
     "name": "Porcupine",
-    "sprite": "sprites/enemy/beast/porcupine.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/porcupine.atlas",
     "deck": [
       "decks/standard/porcupine.dck"
     ],
@@ -54398,7 +54398,7 @@
   },
   {
     "name": "Raccoon",
-    "sprite": "sprites/enemy/beast/raccoon.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/raccoon.atlas",
     "deck": [
       "decks/standard/enchantment_aggro.dck"
     ],
@@ -54618,7 +54618,7 @@
   },
   {
     "name": "Parrot",
-    "sprite": "sprites/enemy/beast/parrot.atlas",
+    "sprite": "sprites/enemy/beast/bird/parrot.atlas",
     "deck": [
       "decks/standard/parrot.dck"
     ],
@@ -55440,7 +55440,7 @@
   },
   {
     "name": "Raven",
-    "sprite": "sprites/enemy/beast/raven.atlas",
+    "sprite": "sprites/enemy/beast/bird/raven.atlas",
     "deck": [
       "decks/standard/raven.dck"
     ],
@@ -56157,7 +56157,7 @@
   },
   {
     "name": "Rhino",
-    "sprite": "sprites/enemy/beast/rhino.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/rhino.atlas",
     "deck": [
       "decks/standard/rhino.dck"
     ],
@@ -57452,7 +57452,7 @@
   },
   {
     "name": "Scarab",
-    "sprite": "sprites/enemy/beast/scarab.atlas",
+    "sprite": "sprites/enemy/beast/insect/scarab.atlas",
     "deck": [
       "decks/standard/scarab.dck"
     ],
@@ -58117,7 +58117,7 @@
   },
   {
     "name": "Scorpion",
-    "sprite": "sprites/enemy/beast/scorpion.atlas",
+    "sprite": "sprites/enemy/beast/arachnid/scorpion.atlas",
     "deck": [
       "decks/standard/scorpion.dck"
     ],
@@ -61626,7 +61626,7 @@
   },
   {
     "name": "Snake",
-    "sprite": "sprites/enemy/beast/big_snake.atlas",
+    "sprite": "sprites/enemy/beast/reptile/big_snake.atlas",
     "deck": [
       "decks/standard/snake.dck"
     ],
@@ -62261,7 +62261,7 @@
   },
   {
     "name": "Spider",
-    "sprite": "sprites/enemy/beast/spider_black.atlas",
+    "sprite": "sprites/enemy/beast/arachnid/spider_black.atlas",
     "deck": [
       "decks/standard/spider.dck"
     ],
@@ -63224,7 +63224,7 @@
   },
   {
     "name": "Stray Cat",
-    "sprite": "sprites/enemy/beast/cat.atlas",
+    "sprite": "sprites/enemy/beast/cat/cat.atlas",
     "deck": [
       "decks/standard/cat_greenblack.dck",
       "decks/standard/straycat.dck",
@@ -64328,7 +64328,7 @@
   {
     "name": "Squirrel",
     "nameOverride": "Nut Collector",
-    "sprite": "sprites/enemy/beast/squirrel.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/squirrel.atlas",
     "deck": [
       "decks/elite/squirrel.dck"
     ],
@@ -65926,7 +65926,7 @@
   },
   {
     "name": "Tiger",
-    "sprite": "sprites/enemy/beast/tiger.atlas",
+    "sprite": "sprites/enemy/beast/cat/tiger.atlas",
     "deck": [
       "decks/standard/tiger.dck"
     ],
@@ -66349,7 +66349,7 @@
   },
   {
     "name": "Turtle",
-    "sprite": "sprites/enemy/beast/turtle.atlas",
+    "sprite": "sprites/enemy/beast/reptile/turtle.atlas",
     "deck": [
       "decks/standard/turtle.dck"
     ],
@@ -67812,7 +67812,7 @@
   },
   {
     "name": "Viper",
-    "sprite": "sprites/enemy/beast/big_snake_2.atlas",
+    "sprite": "sprites/enemy/beast/reptile/big_snake_2.atlas",
     "deck": [
       "decks/standard/snake.dck"
     ],
@@ -68870,7 +68870,7 @@
   },
   {
     "name": "Wasp",
-    "sprite": "sprites/enemy/beast/wasp.atlas",
+    "sprite": "sprites/enemy/beast/insect/wasp.atlas",
     "deck": [
       "decks/standard/wasp.dck"
     ],
@@ -69045,7 +69045,7 @@
   },
   {
     "name": "Werebear",
-    "sprite": "sprites/enemy/beast/bear_large.atlas",
+    "sprite": "sprites/enemy/beast/bear/bear_large.atlas",
     "deck": [
       "decks/miniboss/bearboss.dck"
     ],
@@ -69563,7 +69563,7 @@
   },
   {
     "name": "Wild Rat",
-    "sprite": "sprites/enemy/beast/wildrat.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/wildrat.atlas",
     "deck": [
       "decks/standard/infectrat.dck",
       "decks/standard/rat.dck",
@@ -69866,7 +69866,7 @@
   {
     "name": "Wolf",
     "nameOverride": "Timber Alpha",
-    "sprite": "sprites/enemy/beast/wolf.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/wolf.atlas",
     "deck": [
       "decks/elite/wolfboss.dck"
     ],
@@ -70089,7 +70089,7 @@
   },
   {
     "name": "Wolf Pup",
-    "sprite": "sprites/enemy/beast/wolfcub.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/wolfcub.atlas",
     "deck": [
       "decks/standard/wolf.json"
     ],
@@ -70275,7 +70275,7 @@
   },
   {
     "name": "Vulture",
-    "sprite": "sprites/enemy/beast/vulture.atlas",
+    "sprite": "sprites/enemy/beast/bird/vulture.atlas",
     "deck": [
       "decks/standard/vulture.dck"
     ],
@@ -75175,7 +75175,7 @@
   },
   {
     "name": "Mill Mole",
-    "sprite": "sprites/enemy/beast/nakedmolerat.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/nakedmolerat.atlas",
     "deck": [
       "decks/elite/mill_mole.dck"
     ],
@@ -96331,7 +96331,7 @@
   },
   {
     "name": "Gorilla Chief",
-    "sprite": "sprites/enemy/beast/elephant.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/elephant.atlas",
     "deck": [
       "decks/miniboss/shandalar97_gorilla_chief.dck"
     ],
@@ -97376,7 +97376,7 @@
   },
   {
     "name": "Kogla",
-    "sprite": "sprites/enemy/beast/gorilla.atlas",
+    "sprite": "sprites/enemy/beast/ape/gorilla.atlas",
     "deck": [
       "decks/miniboss/shandalar97_kogla.dck"
     ],

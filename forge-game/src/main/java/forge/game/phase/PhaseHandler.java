@@ -285,7 +285,7 @@ public class PhaseHandler implements java.io.Serializable {
                             c.addCounter(CounterEnumType.LORE, 1, playerTurn, table);
                         }
                     }
-                    table.replaceCounterEffect(game, null, false);
+                    table.replaceCounterEffect(game, null);
 
                     // roll for attractions if we have any
                     if (playerTurn.getCardsIn(ZoneType.Battlefield).anyMatch(Card::isAttraction)) {

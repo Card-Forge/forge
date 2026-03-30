@@ -167,13 +167,14 @@ public class FlipCoinEffect extends SpellAbilityEffect {
         return flipCoins(flipper, sa, amount, "");
     }
     public static int flipCoins(final Player flipper, final SpellAbility sa, final int amount, final String info) {
-        int multiplier = getFlipMultiplier(flipper);
+        int multiplier = StaticAbilityFlipCoinMod.getFlipMultiplier(flipper);
         int result = 0;
         boolean won = false;
         do {
             Boolean fixedResult = StaticAbilityFlipCoinMod.fixedResult(flipper);
             for (int i = 0; i < amount; i++) {
-                won = flipCoin(flipper, sa, multiplier, fixedResult, info);
+                String iterationInfo = amount > 1 ? " " + (i+1) + "/"  + amount : "";
+                won = flipCoin(flipper, sa, multiplier, fixedResult, info + iterationInfo);
                 if (won) {
                     result++;
                 }
@@ -235,8 +236,4 @@ public class FlipCoinEffect extends SpellAbilityEffect {
         return wonOrHeads;
     }
 
-    public static int getFlipMultiplier(final Player flipper) {
-        String str = "If you would flip a coin, instead flip two coins and ignore one.";
-        return 1 << flipper.getAmountOfKeyword(str);
-    }
 }

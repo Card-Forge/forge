@@ -1,0 +1,7 @@
+Name:Potioner's Trove
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ GainLife | Cost$ T | LifeAmount$ 2 | CheckSVar$ CastTest | SpellDescription$ You gain 2 life. Activate only if you've cast an instant or sorcery spell this turn.
+SVar:CastTest:Count$ThisTurnCast_Card.Instant+YouCtrl,Card.Sorcery+YouCtrl
+Oracle:{T}: Add one mana of any color.\n{T}: You gain 2 life. Activate only if you've cast an instant or sorcery spell this turn.

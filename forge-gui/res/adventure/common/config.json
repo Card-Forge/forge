@@ -99,6 +99,7 @@
     "CLB",
     "CMM"
   ],
+  "usePriceListPrices": true,
   "difficulties": [
     {
       "name": "Easy",
@@ -235,7 +236,7 @@
       "startingMoney": 0,
       "enemyLifeFactor": 2.5,
       "rewardMaxFactor" : 0.0,
-      "spawnRank": 2,
+      "spawnRank": 3,
       "goldLoss": 0.5,
       "lifeLoss": 0.3,
       "sellFactor": 0.05,
@@ -271,26 +272,28 @@
     }
   ],
   "starterEditions": [
-	"JMP",
-	"DMU",
-	"BRO",
-	"J22",
-	"ONE",
-	"MOM",
-	"LTR",
-	"J25",
-	"(All)"
+      "JMP",
+      "DMU",
+      "BRO",
+      "J22",
+      "ONE",
+      "MOM",
+      "LTR",
+      "J25",
+      "TLA",
+      "(All)"
   ],
-  "starterEditionNames": [
-	"Jumpstart",
-	"Dominaria United",
-	"The Brothers' War",
-	"Jumpstart 22",
-	"Phyrexia: ONE",
-	"March of the Machine",
-	"Lord of the Rings",
-	"Jumpstart 25",
-	"(All)"
-	]
+    "starterEditionNames": [
+      "Jumpstart",
+      "Dominaria United",
+      "The Brothers' War",
+      "Jumpstart 22",
+      "Phyrexia: ONE",
+      "March of the Machine",
+      "Lord of the Rings",
+      "Jumpstart 25",
+      "The Last Airbender",
+      "(All)"
+    ]
 }
 

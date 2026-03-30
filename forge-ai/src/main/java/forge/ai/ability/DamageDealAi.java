@@ -1079,6 +1079,16 @@ public class DamageDealAi extends DamageAiBase {
             return null;
         }
 
+        if (sa.getSubAbility() != null || sa.getParent() != null) {
+            // Doesn't work yet for complex decisions where damage is only a part of the decision process
+            return null;
+        }
+
+        // chaining to this could miscalculate
+        if (sa.isDividedAsYouChoose()) {
+            return null;
+        }
+
         Game game = ai.getGame();
         int chance = AiProfileUtil.getIntProperty(ai, AiProps.CHANCE_TO_CHAIN_TWO_DAMAGE_SPELLS);
 
@@ -1087,16 +1097,6 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         if (!MyRandom.percentTrue(chance)) {
-            return null;
-        }
-
-        if (sa.getSubAbility() != null || sa.getParent() != null) {
-            // Doesn't work yet for complex decisions where damage is only a part of the decision process
-            return null;
-        }
-
-        // chaining to this could miscalculate
-        if (sa.isDividedAsYouChoose()) {
             return null;
         }
 

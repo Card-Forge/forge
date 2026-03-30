@@ -1,0 +1,6 @@
+Name:Embrace the Paradox
+ManaCost:3 G U
+Types:Instant
+A:SP$ Draw | Defined$ You | NumCards$ 3 | SubAbility$ DBChangeZone | SpellDescription$ Draw three cards. You may put a land card from your hand onto the battlefield tapped.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Optional$ You | ChangeType$ Land | ChangeNum$ 1 | Tapped$ True 
+Oracle:Draw three cards. You may put a land card from your hand onto the battlefield tapped.

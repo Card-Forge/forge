@@ -525,6 +525,60 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             }, true, shortcutModifiers == 0);
         }
 
+        /**
+         * Add context menu entry for marking/unmarking cards as key cards
+         */
+        public void addKeyCardToggle() {
+            final ItemManager im = getItemManager();
+            if (im == null || im.getSelectedItems().isEmpty()) { return; }
+            
+            CardManager cardManager = (CardManager) im;
+            PaperCard selectedCard = cardManager.getSelectedItem();
+            if (selectedCard == null) { return; }
+            
+            final Deck currentDeck = (Deck) CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().getModel();
+            if (currentDeck == null) { return; }
+            
+            boolean isKeyCard = isCardKeyCard(currentDeck, selectedCard);
+            String label = isKeyCard ? localizer.getMessage("lblRemoveKeyCard") : localizer.getMessage("lblAddKeyCard");
+            
+            GuiUtils.addMenuItem(menu, label, null, () -> {
+                toggleCardKeyStatus(currentDeck, selectedCard);
+            }, true, true);
+        }
+        
+        private boolean isCardKeyCard(final Deck deck, final PaperCard card) {
+            return deck.isKeyCard(card.getName());
+        }
+        
+        private void toggleCardKeyStatus(final Deck deck, final PaperCard card) {
+            String cardName = card.getName();
+            
+            if (deck.isKeyCard(cardName)) {
+                deck.removeKeyCard(cardName);
+            } else {
+                deck.addKeyCard(cardName);
+            }
+            
+            // Mark deck as modified so it will be saved
+            CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().notifyModelChanged();
+            
+            // Refresh all cards with this name in both deck and catalog managers
+            refreshCardsByName(cardName);
+        }
+        
+        private void refreshCardsByName(final String cardName) {
+            // Refresh deck manager to show updated key card status
+            if (deckManager != null) {
+                deckManager.refresh();
+            }
+            
+            // Refresh catalog manager to show updated key card status
+            if (catalogManager != null) {
+                catalogManager.refresh();
+            }
+        }
+
         private int getMaxMoveQuantity() {
             ItemPool<TItem> selectedItemPool = getItemManager().getSelectedItemPool();
             if (isAddContextMenu) {

@@ -259,6 +259,9 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
             sb.append("[COMPLETED] ");
         }
         sb.append(name);
+        if (this.difficulty != null) {
+            sb.append(" (" + this.difficulty + ")");
+        }
         return sb.toString();
     }
 
