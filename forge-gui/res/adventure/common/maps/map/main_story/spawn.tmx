@@ -311,7 +311,8 @@
 		{ &quot;removeItem&quot;: &quot;Green Key&quot; },
 		{ &quot;removeItem&quot;: &quot;Black Key&quot; },
 		{ &quot;removeItem&quot;: &quot;White Key&quot; },
-		{ &quot;removeItem&quot;: &quot;Red Key&quot; }
+		{ &quot;removeItem&quot;: &quot;Red Key&quot; },
+                       { &quot;addItem&quot;: &quot;Strange Key&quot; }
          ]
          }    
     ]
