@@ -46,7 +46,6 @@ public class DeckFileHeader {
 
     /** The Constant COMMENT. */
     public static final String COMMENT = "Comment";
-    public static final String DESCRIPTION = "Description";
     private static final String PLAYER = "Player";
     private static final String CSTM_POOL = "Custom Pool";
     private static final String PLAYER_TYPE = "PlayerType";
@@ -75,11 +74,7 @@ public class DeckFileHeader {
 
     public DeckFileHeader(final FileSection kvPairs) {
         this.name = kvPairs.get(DeckFileHeader.NAME);
-        String parsedComment = kvPairs.get(DeckFileHeader.COMMENT);
-        if (StringUtils.isBlank(parsedComment)) {
-            parsedComment = kvPairs.get(DeckFileHeader.DESCRIPTION);
-        }
-        this.comment = parsedComment;
+        this.comment = kvPairs.get(DeckFileHeader.COMMENT);
         this.deckType = DeckFormat.smartValueOf(kvPairs.get(DeckFileHeader.DECK_TYPE), DeckFormat.Constructed);
         this.customPool = kvPairs.getBoolean(DeckFileHeader.CSTM_POOL);
         this.intendedForAi = "computer".equalsIgnoreCase(kvPairs.get(DeckFileHeader.PLAYER)) || "ai".equalsIgnoreCase(kvPairs.get(DeckFileHeader.PLAYER_TYPE));

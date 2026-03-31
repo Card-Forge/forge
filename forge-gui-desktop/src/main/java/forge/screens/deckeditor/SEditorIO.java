@@ -30,8 +30,8 @@ public class SEditorIO {
     public static boolean saveDeck() {
         final DeckController<?> controller = CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController();
         final String name = VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().getText();
-        final String description = VCurrentDeck.SINGLETON_INSTANCE.getTxfDescription().getText();
-        controller.getModel().setComment(StringUtils.isBlank(description) ? null : description);
+        final String comment = VCurrentDeck.SINGLETON_INSTANCE.getTxfDescription().getText();
+        controller.getModel().setComment(StringUtils.isBlank(comment) ? null : comment);
         final String deckStr = DeckProxy.getDeckString(controller.getModelPath(), name);
         boolean performSave = false;
 
