@@ -207,18 +207,14 @@ public final class GameMenu {
         final ButtonGroup group = new ButtonGroup();
         final String current = prefs.getPref(FPref.UI_GROUP_PERMANENTS);
 
-        final String[] options = {"Default", "Stack Creatures", "Group Creatures/Tokens", "Group All Permanents"};
-        final String[] tooltips = {
-            "Creatures are never grouped or stacked. Identical lands and tokens are stacked (up to 5). Identical artifacts and enchantments are stacked (up to 4). Stacking fans cards out so each copy is partially visible.",
-            "Same as Default, but creatures are also stacked (up to 4).",
-            "Group identical creatures and tokens into a single compact pile with a count badge.",
-            "Group all identical permanents into a single compact pile with a count badge."
-        };
-        for (int i = 0; i < options.length; i++) {
-            SkinnedRadioButtonMenuItem item = new SkinnedRadioButtonMenuItem(options[i]);
-            item.setToolTipText(tooltips[i]);
-            item.setSelected(options[i].equals(current));
-            item.addActionListener(getGroupPermanentsAction(options[i]));
+        final String[] keys = {"default", "stack", "group_creatures", "group_all"};
+        final String[] labelKeys = {"lblGroupDefault", "lblGroupStack", "lblGroupCreatures", "lblGroupAll"};
+        final String[] tooltipKeys = {"nlGroupDefault", "nlGroupStack", "nlGroupCreatures", "nlGroupAll"};
+        for (int i = 0; i < keys.length; i++) {
+            SkinnedRadioButtonMenuItem item = new SkinnedRadioButtonMenuItem(localizer.getMessage(labelKeys[i]));
+            item.setToolTipText(localizer.getMessage(tooltipKeys[i]));
+            item.setSelected(keys[i].equals(current));
+            item.addActionListener(getGroupPermanentsAction(keys[i]));
             group.add(item);
             submenu.add(item);
         }
@@ -228,7 +224,7 @@ public final class GameMenu {
     private SkinnedCheckBoxMenuItem getMenuItem_TokensSeparateRow() {
         final Localizer localizer = Localizer.getInstance();
         SkinnedCheckBoxMenuItem menuItem = new SkinnedCheckBoxMenuItem(localizer.getMessage("cbpTokensSeparateRow"));
-        menuItem.setToolTipText("Show tokens in their own row instead of mixed with creatures.");
+        menuItem.setToolTipText(localizer.getMessage("nlTokensSeparateRow"));
         menuItem.setState(prefs.getPrefBoolean(FPref.UI_TOKENS_IN_SEPARATE_ROW));
         menuItem.addActionListener(e -> {
             final boolean enabled = !prefs.getPrefBoolean(FPref.UI_TOKENS_IN_SEPARATE_ROW);

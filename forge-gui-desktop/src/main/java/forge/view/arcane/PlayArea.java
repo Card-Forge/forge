@@ -91,6 +91,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     private boolean stackCreatures = false;
     private boolean groupTokensAndCreatures;
     private boolean groupAll;
+    private boolean grouping; // groupTokensAndCreatures || groupAll
 
     public PlayArea(final CMatchUI matchUI, final FScrollPane scrollPane, final boolean mirror, final PlayerView player, final ZoneType zone) {
         super(matchUI, scrollPane);
@@ -103,9 +104,10 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
     private void updateGroupScope() {
         String groupScope = FModel.getPreferences().getPref(FPref.UI_GROUP_PERMANENTS);
-        this.stackCreatures = "Stack Creatures".equals(groupScope);
-        this.groupTokensAndCreatures = "Group Creatures/Tokens".equals(groupScope) || "Group All Permanents".equals(groupScope);
-        this.groupAll = "Group All Permanents".equals(groupScope);
+        this.stackCreatures = "stack".equals(groupScope);
+        this.groupTokensAndCreatures = "group_creatures".equals(groupScope) || "group_all".equals(groupScope);
+        this.groupAll = "group_all".equals(groupScope);
+        this.grouping = groupTokensAndCreatures || groupAll;
     }
 
     private CardStackRow collectAllLands(List<CardPanel> remainingPanels) {
@@ -326,21 +328,18 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     }
 
     private Map<Integer, Integer> buildBlockerAssignments() {
-        try {
-            CombatView combat = getMatchUI().getGameView().getCombat();
-            if (combat == null) { return Collections.emptyMap(); }
-            Map<Integer, Integer> assignments = new HashMap<>();
-            for (CardView attacker : combat.getAttackers()) {
-                FCollection<CardView> blockers = combat.getPlannedBlockers(attacker);
-                if (blockers == null) { continue; }
-                for (CardView blocker : blockers) {
-                    assignments.put(blocker.getId(), attacker.getId());
-                }
+        if (getMatchUI().getGameView() == null) { return Collections.emptyMap(); }
+        CombatView combat = getMatchUI().getGameView().getCombat();
+        if (combat == null) { return Collections.emptyMap(); }
+        Map<Integer, Integer> assignments = new HashMap<>();
+        for (CardView attacker : combat.getAttackers()) {
+            FCollection<CardView> blockers = combat.getPlannedBlockers(attacker);
+            if (blockers == null) { continue; }
+            for (CardView blocker : blockers) {
+                assignments.put(blocker.getId(), attacker.getId());
             }
-            return assignments;
-        } catch (Exception e) {
-            return Collections.emptyMap();
         }
+        return assignments;
     }
 
     @Override
@@ -455,7 +454,6 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                         x -= r.getWidth();
                     }
                 }
-                boolean grouping = groupTokensAndCreatures || groupAll;
                 int maxVisible = 4;
 
                 // Reset groupCount on all panels in this stack
@@ -679,7 +677,6 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 wasUnsplit = true;
             } else {
                 List<CardPanel> stack = panel.getStack();
-                boolean grouping = groupTokensAndCreatures || groupAll;
                 if (stack != null && stack.size() >= (grouping ? 2 : 5)) {
                     // Split first, then check if the game accepts this card.
                     // If accepted, doUpdateCard will remove from splitCardIds when
@@ -741,14 +738,14 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 String prompt;
                 boolean alreadyInCombat = primary.isAttacking() || primary.isBlocking();
                 if (alreadyInCombat) {
-                    prompt = "How many to remove from combat?";
+                    prompt = loc.getMessage("lblGroupHowManyRemove");
                 } else {
                     if (activateDesc.equals(loc.getMessage("lblAttackWithCard"))) {
-                        prompt = "How many to declare as attackers?";
+                        prompt = loc.getMessage("lblGroupHowManyAttack");
                     } else if (activateDesc.equals(loc.getMessage("lblBlockWithCard"))) {
-                        prompt = "How many to assign as blockers?";
+                        prompt = loc.getMessage("lblGroupHowManyBlock");
                     } else {
-                        prompt = "How many to select?";
+                        prompt = loc.getMessage("lblGroupHowManySelect");
                     }
                 }
                 Integer count = SGuiChoose.getInteger(prompt, 1, stack.size());
@@ -1082,14 +1079,14 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         }
 
         private int getWidth() {
-            int visualCount = (PlayArea.this.groupTokensAndCreatures || PlayArea.this.groupAll)
+            int visualCount = PlayArea.this.grouping
                 ? Math.min(this.size(), 4) : this.size();
             return PlayArea.this.cardWidth + ((visualCount - 1) * PlayArea.this.stackSpacingX)
                     + PlayArea.this.cardSpacingX;
         }
 
         private int getHeight() {
-            int visualCount = (PlayArea.this.groupTokensAndCreatures || PlayArea.this.groupAll)
+            int visualCount = PlayArea.this.grouping
                 ? Math.min(this.size(), 4) : this.size();
             return PlayArea.this.cardHeight + ((visualCount - 1) * PlayArea.this.stackSpacingY)
                     + PlayArea.this.cardSpacingY;
