@@ -1,0 +1,11 @@
+Name:Exhibition Tidecaller
+ManaCost:U
+Types:Creature Djinn Wizard
+PT:0/2
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Opus — Whenever you cast an instant or sorcery spell, target player mills three cards. If five or more mana was spent to cast that spell, that player mills ten cards instead
+SVar:TrigMill:DB$ Mill | NumCards$ X | ValidTgts$ Player
+SVar:X:Count$Compare Y GE5.10.3
+SVar:Y:TriggeredCard$CastTotalManaSpent
+DeckHas:Ability$Mill
+DeckHints:Type$Instant|Sorcery
+Oracle:Opus — Whenever you cast an instant or sorcery spell, target player mills three cards. If five or more mana was spent to cast that spell, that player mills ten cards instead.
