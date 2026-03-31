@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Krypto
+Title=Krypto
+Icon=Krypto.jpg
+Difficulty=Medium
+Description=Worldwake/Worldwake_Game_Day_-_Dima_Game_-_Argentina/Jhonatan_Snaider_-_Vamps_(Standard,_#2107).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Bloodghast
+4 Gatekeeper of Malakir
+1 Kalastria Highborn
+3 Malakir Bloodwitch
+3 Vampire Hexmage
+4 Vampire Nighthawk
+4 Vampire Nocturnus
+1 Eldrazi Monument
+4 Tendrils of Corruption
+3 Urge to Feed
+2 Grim Discovery
+1 Mind Sludge
+2 Mire's Toll
+2 Sign in Blood
+4 Marsh Flats
+15 Swamp
+4 Verdant Catacombs
+[Sideboard]
+4 Deathmark
+2 Duress
+2 Marsh Casualties

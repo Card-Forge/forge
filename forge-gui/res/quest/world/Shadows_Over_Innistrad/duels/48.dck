@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Buffy
+Title=Buffy
+Icon=Buffy.jpg
+Difficulty=Medium
+Description=Shadows_over_Innistrad/SCG_States_Milford/Tristan_Blouin_-_Bant_(Standard,_#616197).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Archangel Avacyn
+4 Bounding Krasis
+1 Den Protector
+4 Duskwatch Recruiter
+1 Hidden Dragonslayer
+3 Jace, Vryn's Prodigy
+1 Nissa, Vastwood Seer
+4 Reflector Mage
+4 Sylvan Advocate
+3 Tireless Tracker
+4 Collected Company
+3 Dromoka's Command
+1 Ojutai's Command
+3 Canopy Vista
+4 Evolving Wilds
+3 Forest
+1 Fortified Village
+2 Island
+4 Lumbering Falls
+3 Plains
+1 Port Town
+4 Prairie Stream
+[Sideboard]
+2 Clip Wings
+2 Declaration in Stone
+2 Dispel
+1 Dragonlord Ojutai
+2 Lantern Scout
+2 Negate
+2 Silkwrap
+1 Surrak, the Hunt Caller

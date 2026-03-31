@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=BabaluAye
+Title=BabaluAye
+Icon=BabaluAye.jpg
+Difficulty=Easy
+Description=./Standard/Edge_of_Eternities/ATmagic_-_Mono-Red_Aggro_(Standard,_#2669034).dck
+Deck Type=constructed
+
+[Main]
+4 Burnout Bashtronaut
+4 Nova Hellkite
+4 Razorkin Needlehead
+4 Hired Claw
+4 Emberheart Challenger
+4 Screaming Nemesis
+4 Lightning Strike
+3 Witchstalker Frenzy
+4 Burst Lightning
+1 Shock
+18 Mountain
+4 Rockface Village
+2 Soulstone Sanctuary
+[Sideboard]
+3 Sunspine Lynx
+3 Obliterating Bolt
+3 Stingerback Terror
+2 Abrade
+2 Fire Magic
+2 Vengeful Possession

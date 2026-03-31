@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=The Mac Nac Feegle
+Title=The Mac Nac Feegle
+Icon=The Mac Nac Feegle.jpg
+Difficulty=Medium
+Description=./Standard/Dominaria_United/Alberto_Porras_López_-_Gruul_Werewolves_(Standard,_#1448939).dck
+Deck Type=constructed
+
+[Main]
+2 Avabruck Caretaker
+3 Tovolar, Dire Overlord
+3 Halana and Alena, Partners
+4 Reckless Stormseeker
+4 Outland Liberator
+4 Ill-Tempered Loner
+4 Volatile Arsonist
+4 Cemetery Prowler
+4 Kessig Naturalist
+4 Howlpack Piper
+1 Boseiju, Who Endures
+4 Karplusan Forest
+4 Rockfall Vale
+6 Forest
+9 Mountain
+[Sideboard]
+2 Tail Swipe
+2 Lightning Strike
+3 Arlinn, the Pack's Hope
+4 Rending Flame
+4 Tamiyo's Safekeeping

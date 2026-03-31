@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Owlman
+Title=Owlman
+Icon=Owlman.jpg
+Difficulty=Easy
+Description=./Standard/Avatar_The_Last_Airbender/Fred_Evans_-_Selesnya_Landfall_(Standard,_#2785390).dck
+Deck Type=constructed
+
+[Main]
+4 Badgermole Cub
+4 Icetill Explorer
+4 Llanowar Elves
+4 Mightform Harmonizer
+2 Sazh's Chocobo
+1 Bristly Bill, Spine Sower
+3 Esper Origins
+3 Lumbering Worldwagon
+4 Earthbender Ascension
+4 Seam Rip
+10 Forest
+4 Fabled Passage
+4 Hushwood Verge
+4 Terramorphic Expanse
+2 Ba Sing Se
+1 Eden, Seat of the Sanctum
+1 Evolving Wilds
+1 Plains
+[Sideboard]
+4 Clarion Conqueror
+4 Sheltered by Ghosts
+2 Felidar Retreat
+2 Scrapshooter
+2 Soul-Guide Lantern
+1 Mossborn Hydra

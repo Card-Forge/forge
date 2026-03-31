@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Oya
+Title=Oya
+Icon=Oya.jpg
+Difficulty=Hard
+Description=./Modern/Zendikar_Rising/Chandrian_-_Grixis_Pyromancer_(Modern,_#1054865).dck
+Deck Type=constructed
+
+[Main]
+4 Snapcaster Mage
+4 Cling to Dust
+4 Drown in the Loch
+4 Fatal Push
+4 Kolaghan's Command
+4 Lightning Bolt
+4 Opt
+4 Thought Scour
+4 Sleight of Hand
+4 Pyromancer Ascension
+1 Swamp
+1 Mystic Sanctuary
+1 Mountain
+1 Darkslick Shores
+2 Steam Vents
+2 Island
+2 Sulfur Falls
+2 Spirebluff Canal
+2 Watery Grave
+3 Scalding Tarn
+3 Polluted Delta
+[Sideboard]
+1 Lurrus of the Dream-Den
+1 Jace, Vryn's Prodigy
+1 Engineered Explosives
+2 Feed the Swarm
+3 Aether Gust
+3 Mystical Dispute
+4 Thing in the Ice

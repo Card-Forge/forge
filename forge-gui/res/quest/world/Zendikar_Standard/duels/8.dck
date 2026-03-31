@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=WereHyena
+Title=WereHyena
+Icon=WereHyena.jpg
+Difficulty=Easy
+Description=Zendikar/StarCityGames.com_$5,000_Standard_Open_11-10/Calosso_Fuentes_-_Luminarch_Planeswalker_Control_(Standard,_#3803).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Lightning Bolt
+3 Negate
+4 Path to Exile
+1 Volcanic Fallout
+4 Day of Judgment
+2 Martial Coup
+4 Luminarch Ascension
+4 Ajani Vengeant
+2 Chandra Nalaar
+3 Elspeth, Knight-Errant
+3 Jace Beleren
+4 Arid Mesa
+4 Glacial Fortress
+2 Island
+3 Mountain
+6 Plains
+3 Rupture Spire
+4 Scalding Tarn
+[Sideboard]
+4 Baneslayer Angel
+4 Celestial Purge
+2 Flashfreeze
+1 Telemin Performance

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=MamiWata
+Title=MamiWata
+Icon=MamiWata.jpg
+Difficulty=Medium
+Description=Kaladesh/SCG_Invitational_Qualifier_-_Edinboro,_PA/Jon_Wiebel_-_Mardu_Vehicles_(Standard,_#655776).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Inventor's Apprentice
+4 Scrapheap Scrounger
+2 Thalia, Heretic Cathar
+4 Thraben Inspector
+4 Toolcraft Exemplar
+4 Veteran Motorist
+3 Cultivator's Caravan
+4 Smuggler's Copter
+4 Harnessed Lightning
+3 Unlicensed Disintegration
+2 Gideon, Ally of Zendikar
+4 Aether Hub
+4 Concealed Courtyard
+4 Inspiring Vantage
+3 Mountain
+3 Plains
+4 Spirebluff Canal
+[Sideboard]
+2 Archangel Avacyn
+2 Ceremonious Rejection
+1 Chandra, Torch of Defiance
+1 Fragmentize
+4 Galvanic Bombardment
+1 Gideon, Ally of Zendikar
+1 Key to the City
+2 Revolutionary Rebuff
+1 Unlicensed Disintegration

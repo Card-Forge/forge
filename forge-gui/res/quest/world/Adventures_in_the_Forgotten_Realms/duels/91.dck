@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Green Lantern
+Title=Green Lantern
+Icon=Green Lantern.jpg
+Difficulty=Hard
+Description=./Modern/Adventures_in_the_Forgotten_Realms/jeffhoogland_-_Grixis_Dragons_(Modern,_#1192128).dck
+Deck Type=constructed
+
+[Main]
+2 Iymrith, Desert Doom
+3 Glorybringer
+4 Nicol Bolas, the Ravager
+4 Bonecrusher Giant
+2 Kolaghan's Command
+2 Prismari Command
+2 Cling to Dust
+2 Thoughtseize
+2 Bloodchief's Thirst
+2 Crux of Fate
+4 Inquisition of Kozilek
+2 Nicol Bolas, Dragon-God
+2 Chandra, Torch of Defiance
+1 Swamp
+1 Hall of Storm Giants
+2 Steam Vents
+2 Drowned Catacomb
+2 Hive of the Eye Tyrant
+3 Canyon Slough
+4 Watery Grave
+4 Sulfur Falls
+4 Blood Crypt
+4 Blightstep Pathway
+[Sideboard]
+1 Cling to Dust
+1 Chandra, Awakened Inferno
+1 Nicol Bolas, Dragon-God
+1 Inferno of the Star Mounts
+2 Heartless Act
+2 Negate
+2 Shadows' Verdict
+2 Thoughtseize
+3 Flunk

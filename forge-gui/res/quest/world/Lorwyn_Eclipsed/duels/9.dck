@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Ekolo
+Title=Ekolo
+Icon=Ekolo.jpg
+Difficulty=Medium
+Description=./Standard/Lorwyn_Eclipsed/Gavin_Meagher_-_Dimir_Midrange_(Standard,_#2785750).dck
+Deck Type=constructed
+
+[Main]
+4 Enduring Curiosity
+4 Floodpits Drowner
+4 Spyglass Siren
+3 Cecil, Dark Knight
+3 Sygg, Wanderwine Wisdom
+3 Tishana's Tidebinder
+2 Abigale, Eloquent First-Year
+1 Wan Shi Tong, Librarian
+3 Requiting Hex
+3 Shoot the Sheriff
+2 Bitter Triumph
+2 Spell Snare
+3 Kaito, Bane of Nightmares
+4 Bleachbone Verge
+4 Gloomlake Verge
+4 Multiversal Passage
+4 Watery Grave
+3 Hallowed Fountain
+2 Restless Reef
+1 Concealed Courtyard
+1 Swamp
+[Sideboard]
+3 Clarion Conqueror
+2 Annul
+2 Duress
+2 Flashfreeze
+2 Rest in Peace
+1 Kaito, Bane of Nightmares
+1 Requiting Hex
+1 Spell Pierce
+1 Wan Shi Tong, Librarian

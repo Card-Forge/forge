@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Beast
+Title=Beast
+Icon=Beast.jpg
+Difficulty=Easy
+Description=./Standard/Ravnica_Allegiance/Alex_Hinkley_-_Sultai_Midrange_(Standard,_#783899).dck
+Deck Type=constructed
+
+[Main]
+1 Carnage Tyrant
+1 Hostage Taker
+4 Hydroid Krasis
+4 Jadelight Ranger
+2 Kraul Harpooner
+4 Llanowar Elves
+4 Merfolk Branchwalker
+2 Ravenous Chupacabra
+4 Wildgrowth Walker
+3 Assassin's Trophy
+2 Vraska's Contempt
+2 Find // Finality
+3 Vivien Reid
+4 Forest
+1 Swamp
+4 Breeding Pool
+2 Drowned Catacomb
+1 Hinterland Harbor
+1 Memorial to Folly
+4 Overgrown Tomb
+3 Watery Grave
+4 Woodland Cemetery
+[Sideboard]
+2 Hostage Taker
+2 Kraul Harpooner
+1 Midnight Reaper
+2 Cast Down
+1 Moment of Craving
+2 Negate
+1 Vraska, Relic Seeker
+4 Duress

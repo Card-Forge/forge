@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Repressed Magic
+Title=Repressed Magic
+Icon=Repressed Magic.jpg
+Difficulty=Very Hard
+Description=./Modern/Kamigawa_Neon_Dynasty/Nsingman_-_Burn_(Modern,_#1399085).dck
+Deck Type=constructed
+
+[Main]
+4 Goblin Guide
+4 Eidolon of the Great Revel
+4 Monastery Swiftspear
+2 Skullcrack
+2 Lightning Helix
+4 Boros Charm
+4 Searing Blaze
+4 Lightning Bolt
+4 Skewer the Critics
+4 Lava Spike
+4 Rift Bolt
+1 Arid Mesa
+1 Sokenzan, Crucible of Defiance
+2 Bloodstained Mire
+2 Wooded Foothills
+2 Scalding Tarn
+2 Sacred Foundry
+2 Mountain
+4 Sunbaked Canyon
+4 Inspiring Vantage
+[Sideboard]
+3 Smash to Smithereens
+3 Sanctifier en-Vec
+3 Roiling Vortex
+3 Path to Exile
+3 Deflecting Palm

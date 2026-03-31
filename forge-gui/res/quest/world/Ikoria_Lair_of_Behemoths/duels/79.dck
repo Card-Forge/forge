@@ -1,0 +1,51 @@
+[duel]
+[metadata]
+Name=Sun Quan
+Title=Sun Quan
+Icon=Sun Quan.jpg
+Difficulty=Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/Do0mSwitch_-_Bant_Control_(Modern,_#1032025).dck
+Deck Type=constructed
+
+[Main]
+1 Wall of Blossoms
+4 Uro, Titan of Nature's Wrath
+1 Remand
+1 Spell Snare
+1 Aether Gust
+2 Mana Leak
+3 Cryptic Command
+3 Force of Negation
+4 Growth Spiral
+4 Path to Exile
+1 Supreme Verdict
+1 Jace, the Mind Sculptor
+2 Teferi, Hero of Dominaria
+3 Teferi, Time Raveler
+1 Temple Garden
+1 Snow-Covered Forest
+1 Forest
+1 Scalding Tarn
+1 Polluted Delta
+1 Ketria Triome
+1 Plains
+2 Snow-Covered Island
+2 Mystic Sanctuary
+2 Breeding Pool
+2 Field of Ruin
+2 Field of the Dead
+2 Island
+2 Hallowed Fountain
+4 Flooded Strand
+4 Misty Rainforest
+[Sideboard]
+1 Supreme Verdict
+1 Celestial Purge
+1 Dovin's Veto
+1 Mystical Dispute
+1 Engineered Explosives
+2 Timely Reinforcements
+2 Aether Gust
+2 Ceremonious Rejection
+2 Ashiok, Dream Render
+2 Veil of Summer

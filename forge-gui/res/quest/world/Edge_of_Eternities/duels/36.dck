@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Scarecrow
+Title=Scarecrow
+Icon=Scarecrow.jpg
+Difficulty=Medium
+Description=./Standard/Edge_of_Eternities/Aangelo00_-_Mono-White_Aggro_(Standard,_#2605726).dck
+Deck Type=constructed
+
+[Main]
+4 Cosmogrand Zenith
+4 Enduring Innocence
+4 Novice Inspector
+4 Voice of Victory
+3 Starfield Shepherd
+2 Nurturing Pixie
+2 Splitskin Doll
+1 Zack Fair
+3 Get Lost
+1 Day of Judgment
+4 Seam Rip
+2 Shardmage's Rescue
+3 Elspeth, Storm Slayer
+18 Plains
+3 Fountainport
+2 Soulstone Sanctuary
+[Sideboard]
+2 Aven Interrupter
+2 Beza, the Bounding Spring
+2 Crystal Barricade
+2 Ghost Vacuum
+2 Rest in Peace
+2 Sheltered by Ghosts
+1 Cathar Commando
+1 Exorcise
+1 Ultima

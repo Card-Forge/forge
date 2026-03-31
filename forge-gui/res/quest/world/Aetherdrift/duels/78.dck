@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Imperial Guard
+Title=Imperial Guard
+Icon=Imperial Guard.jpg
+Difficulty=Hard
+Description=./Modern/Aetherdrift/bonyjony_-_Selesnya_Control_(Modern,_#2370263).dck
+Deck Type=constructed
+
+[Main]
+1 Brightglass Gearhulk
+2 Eternal Witness
+4 Guide of Souls
+1 Haywire Mite
+4 Ocelot Pride
+4 Ranger-Captain of Eos
+3 Skyclave Apparition
+4 Solitude
+4 White Orchid Phantom
+3 Witch Enchanter
+4 Ephemerate
+2 Thraben Charm
+4 Birthing Ritual
+1 Boseiju, Who Endures
+4 Flagstones of Trokair
+2 Flooded Strand
+1 Forest
+2 Lush Portico
+3 Plains
+3 Temple Garden
+4 Windswept Heath
+[Sideboard]
+2 Collector Ouphe
+2 Damping Sphere
+1 Elesh Norn, Mother of Machines
+2 Endurance
+2 Gaddock Teeg
+1 Haywire Mite
+2 Sanctifier en-Vec
+3 Wrath of the Skies

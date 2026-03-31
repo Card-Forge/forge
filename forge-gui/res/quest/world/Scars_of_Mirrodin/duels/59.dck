@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Luke Skywalker
+Title=Luke Skywalker
+Icon=Luke Skywalker.jpg
+Difficulty=Hard
+Description=../Modern/Scars_of_Mirrodin/Andurin_Wednesday_Evening_Magic/David_Sanz_-_Eldrazi_Green_(Modern,_#22960).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Avenger of Zendikar
+1 Emrakul, the Aeons Torn
+1 Kozilek, Butcher of Truth
+1 Oracle of Mul Daya
+4 Overgrown Battlement
+4 Primeval Titan
+1 Ulamog, the Infinite Gyre
+2 Wall of Roots
+1 Harrow
+2 Summoning Trap
+2 All Is Dust
+2 Cultivate
+4 Explore
+4 Growth Spasm
+4 Eldrazi Temple
+3 Evolving Wilds
+1 Eye of Ugin
+14 Forest
+1 Khalni Garden
+1 Mystifying Maze
+3 Terramorphic Expanse
+[Sideboard]
+3 Brittle Effigy
+3 Krosan Grip
+2 Obstinate Baloth
+2 Relic of Progenitus
+1 Terastodon
+1 Tormod's Crypt
+1 Wurmcoil Engine

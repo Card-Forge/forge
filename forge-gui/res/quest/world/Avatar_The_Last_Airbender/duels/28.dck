@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Boba Fett
+Title=Boba Fett
+Icon=Boba Fett.jpg
+Difficulty=Easy
+Description=./Standard/Avatar_The_Last_Airbender/DrPP_-_Izzet_Splash_(Standard,_#2753960).dck
+Deck Type=constructed
+
+[Main]
+4 Quantum Riddler
+4 Thundertrap Trainer
+1 Soul-Guide Lantern
+1 Fire Magic
+1 Get Out
+2 Abrade
+4 Torch the Tower
+4 Boomerang Basics
+4 Splash Portal
+2 Stock Up
+1 Frostcliff Siege
+3 Roaring Furnace
+4 Stormchaser's Talent
+2 Ral, Crackling Wit
+4 Mountain
+9 Island
+4 Riverpyre Verge
+4 Spirebluff Canal
+2 Thundering Falls
+[Sideboard]
+2 Spell Pierce
+3 Soul-Guide Lantern
+2 Dissection Tools
+1 Negate
+1 Ruinous Rampage
+2 Disdainful Stroke
+2 Annul
+2 Slagstorm

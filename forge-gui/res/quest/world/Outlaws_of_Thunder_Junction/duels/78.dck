@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Boris Karloff
+Title=Boris Karloff
+Icon=Boris Karloff.jpg
+Difficulty=Very Hard
+Description=./Modern/Outlaws_of_Thunder_Junction/Ihateoko_-_Caged_Emrakul_(Modern,_#2150602).dck
+Deck Type=constructed
+
+[Main]
+2 Resolute Reinforcements
+4 Halo Hopper
+4 Warden of the Inner Sky
+4 Nurturing Pixie
+4 Ornithopter
+4 Emrakul, the Aeons Torn
+4 Memnite
+4 Martyr's Soul
+4 Clarion Spirit
+4 Collector's Cage
+4 Emeria's Call
+4 Legion's Landing
+2 Horizon Canopy
+4 Plains
+4 Windbrisk Heights
+2 Sunbaked Canyon
+2 Mishra's Factory
+[Sideboard]
+3 Requisition Raid
+2 Burrenton Forge-Tender
+3 Damping Sphere
+4 Sanctifier en-Vec
+3 Cursed Totem

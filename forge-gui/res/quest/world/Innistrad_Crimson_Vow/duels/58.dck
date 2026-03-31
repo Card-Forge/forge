@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Hermione Granger
+Title=Hermione Granger
+Icon=Hermione Granger.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Crimson_Vow/Parker_Connors_-_RDW_(Modern,_#1251266).dck
+Deck Type=constructed
+
+[Main]
+4 Fury
+4 Dragon's Rage Channeler
+4 Ragavan, Nimble Pilferer
+4 Seasoned Pyromancer
+4 Lightning Bolt
+4 Unholy Heat
+3 Firebolt
+4 Light Up the Stage
+4 Blood Moon
+4 Chandra, Dressed to Kill
+1 Scalding Tarn
+1 Sunbaked Canyon
+2 Fiery Islet
+3 Arid Mesa
+3 Bloodstained Mire
+4 Den of the Bugbear
+7 Mountain
+[Sideboard]
+1 Obosh, the Preypiercer
+3 Chalice of the Void
+3 Shattering Spree
+4 Pyrite Spellbomb
+4 Soul-Guide Lantern

@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Abraham Lincoln
+Title=Abraham Lincoln
+Icon=Abraham Lincoln.jpg
+Difficulty=Medium
+Description=Journey_into_Nyx/Magic-League_Standard_Trial_10-06-2014/Max09_-_Esper_Control_(Standard,_#78525).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 AEtherling
+1 Azorius Charm
+3 Devour Flesh
+2 Dissolve
+1 Doom Blade
+1 Hero's Downfall
+1 Last Breath
+3 Sphinx's Revelation
+1 Syncopate
+1 Warped Physique
+4 Supreme Verdict
+3 Thoughtseize
+4 Detention Sphere
+2 Elspeth, Sun's Champion
+4 Jace, Architect of Thought
+1 Jace, Memory Adept
+3 Godless Shrine
+4 Hallowed Fountain
+4 Island
+2 Mutavault
+1 Plains
+4 Temple of Deceit
+4 Temple of Enlightenment
+4 Temple of Silence
+1 Watery Grave
+[Sideboard]
+1 Blind Obedience
+2 Dark Betrayal
+1 Deicide
+1 Dispel
+1 Duress
+1 Negate
+4 Nightveil Specter
+4 Nyx-Fleece Ram

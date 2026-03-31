@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=House Party
+Title=House Party
+Icon=House Party.jpg
+Difficulty=Easy
+Description=Return_to_Ravnica/Game_Day_Return_to_Ravnica_-_Evolution_Store/David_Posadas_-_Bant_(Standard,_#40588).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Angel of Serenity
+2 Armada Wurm
+3 Geist of Saint Traft
+4 Restoration Angel
+3 Thragtusk
+1 Azorius Keyrune
+1 Selesnya Keyrune
+4 Azorius Charm
+2 Sphinx's Revelation
+3 Entreat the Angels
+2 Supreme Verdict
+3 Terminus
+4 Detention Sphere
+1 Jace, Architect of Thought
+2 Tamiyo, the Moon Sage
+4 Glacial Fortress
+4 Hallowed Fountain
+2 Hinterland Harbor
+4 Island
+2 Moorland Haunt
+3 Plains
+3 Sunpetal Grove
+2 Temple Garden
+[Sideboard]
+3 Centaur Healer
+1 Jace, Memory Adept
+3 Negate
+1 Oblivion Ring
+2 Ray of Revelation
+3 Rest in Peace

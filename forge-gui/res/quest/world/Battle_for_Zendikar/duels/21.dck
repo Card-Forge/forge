@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Tanit
+Title=Tanit
+Icon=Tanit.jpg
+Difficulty=Medium
+Description=Battle_for_Zendikar/SCG_Invitational_Qualifier_Lugoff/Mark_Hafey_-_Temur_(Standard,_#609150).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Deathmist Raptor
+4 Den Protector
+4 Eldrazi Skyspawner
+2 Elvish Visionary
+4 Frost Walker
+2 Ghirapur Gearcrafter
+4 Rattleclaw Mystic
+4 Savage Knuckleblade
+1 Yasova Dragonclaw
+2 Atarka's Command
+4 Collected Company
+2 Roast
+2 Cinder Glade
+3 Forest
+3 Island
+3 Lumbering Falls
+2 Mountain
+3 Shivan Reef
+4 Wooded Foothills
+3 Yavimaya Coast
+[Sideboard]
+2 Arc Lightning
+2 Disdainful Stroke
+3 Feed the Clan
+2 Naturalize
+2 Negate
+2 Wild Slash

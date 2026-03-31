@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Shanna
+Title=Shanna
+Icon=Shanna.jpg
+Difficulty=Very Hard
+Description=./Modern/March_of_the_Machine/KillerSheep_-_Grixis_Battles_(Modern,_#1630059).dck
+Deck Type=constructed
+
+[Main]
+4 Vampire Hexmage
+4 Dauthi Voidwalker
+4 Grief
+4 Fury
+4 Lightning Bolt
+3 Feign Death
+4 Undying Malice
+2 Thoughtseize
+4 Invasion of Tarkir
+4 Invasion of Amonkhet
+4 Invasion of Azgol
+2 Blood Crypt
+2 Blackcleave Cliffs
+1 Blood Crypt
+1 Steam Vents
+1 Watery Grave
+4 Polluted Delta
+4 Bloodstained Mire
+1 Scalding Tarn
+1 Swamp
+1 Swamp
+1 Mountain
+[Sideboard]
+3 Blood Moon
+1 Thoughtseize
+2 Terminate
+3 Spell Pierce
+2 Flusterstorm
+4 Path of Peril

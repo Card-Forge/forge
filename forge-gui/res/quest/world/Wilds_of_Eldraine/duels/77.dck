@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Nekusar the Mindrazer
+Title=Nekusar the Mindrazer
+Icon=Nekusar the Mindrazer.jpg
+Difficulty=Hard
+Description=./Modern/Wilds_of_Eldraine/Michael_Donahue_-_Dimir_Burn_(Modern,_#1751772).dck
+Deck Type=constructed
+
+[Main]
+4 Hedron Crab
+4 Ruin Crab
+4 Archive Trap
+4 Drown in the Loch
+3 Surgical Extraction
+3 Fatal Push
+3 Visions of Beyond
+4 Fractured Sanity
+4 Preordain
+3 Tasha's Hideous Laughter
+2 Jace, the Perfected Mind
+4 Polluted Delta
+1 Oboro, Palace in the Clouds
+1 Mikokoro, Center of the Sea
+4 Island
+2 Swamp
+1 Flooded Strand
+3 Field of Ruin
+1 Misty Rainforest
+1 Shelldock Isle
+3 Watery Grave
+1 Otawara, Soaring City
+[Sideboard]
+1 Damnation
+2 Engineered Explosives
+1 The Filigree Sylex
+1 Extirpate
+2 Crypt Incursion
+1 Nihil Spellbomb
+2 Ensnaring Bridge
+3 Stern Scolding
+1 Flusterstorm
+1 The End

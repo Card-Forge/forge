@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Iceman
+Title=Iceman
+Icon=Iceman.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine_The_Aftermath/Catra_Aldrich_-_Grixis_Storm_(Modern,_#1683139).dck
+Deck Type=constructed
+
+[Main]
+4 Mishra's Bauble
+4 Wishclaw Talisman
+4 Consider
+4 Otherworldly Gaze
+4 Twiddle
+4 Dream's Grip
+4 Spell Pierce
+2 Pact of Negation
+1 Echoing Truth
+2 Tome Scour
+1 Grapeshot
+1 Void Snare
+4 Underworld Breach
+1 Pyromancer Ascension
+4 Lotus Field
+4 Scalding Tarn
+2 Polluted Delta
+3 Misty Rainforest
+1 Otawara, Soaring City
+2 Watery Grave
+2 Island
+2 Steam Vents
+[Sideboard]
+1 Pithing Needle
+2 Engineered Explosives
+2 Pact of Negation
+3 Suspend
+1 Aeve, Progenitor Ooze
+1 Empty the Warrens
+4 Leyline of Sanctity
+1 Filter Out

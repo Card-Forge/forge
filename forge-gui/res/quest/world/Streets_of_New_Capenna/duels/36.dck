@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Dogbert
+Title=Dogbert
+Icon=Dogbert.jpg
+Difficulty=Medium
+Description=./Standard/Streets_of_New_Capenna/MTG_Arena_Zone_-_Esper_Angels_(Standard,_#1374755).dck
+Deck Type=constructed
+
+[Main]
+1 Legion Angel
+2 Inspiring Overseer
+2 Resplendent Marshal
+2 Linvala, Shield of Sea Gate
+2 Liesa, Forgotten Archangel
+4 Righteous Valkyrie
+4 Giada, Font of Hope
+4 Youthful Valkyrie
+2 Negate
+2 Void Rend
+4 Vanishing Verse
+2 Emeria's Call
+3 Firja's Retribution
+2 Elspeth Resplendent
+1 Eiganjo, Seat of the Empire
+1 Island
+1 Swamp
+2 Shipwreck Marsh
+2 Shineshadow Snarl
+2 Hengegate Pathway
+3 Plains
+4 Brightclimb Pathway
+4 Deserted Beach
+4 Shattered Sanctum
+[Sideboard]
+3 Legion Angel

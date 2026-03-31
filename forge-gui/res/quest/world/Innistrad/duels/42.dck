@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Erebos
+Title=Erebos
+Icon=Erebos.jpg
+Difficulty=Medium
+Description=Innistrad/#EM5k_Super_Cup_2011/Wesley_Ng_-_Red_Deck_Wins_(Standard,_#23261).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Chandra's Phoenix
+4 Goblin Fireslinger
+3 Grim Lavamancer
+1 Spikeshot Elder
+4 Stormblood Berserker
+4 Stromkirk Noble
+4 Shrine of Burning Rage
+3 Galvanic Blast
+4 Gut Shot
+2 Incinerate
+4 Volt Charge
+2 Arc Trail
+21 Mountain
+[Sideboard]
+2 Koth of the Hammer
+2 Manic Vandal
+1 Sword of Feast and Famine
+1 Sword of War and Peace
+2 Traitorous Blood
+4 Vulshok Refugee

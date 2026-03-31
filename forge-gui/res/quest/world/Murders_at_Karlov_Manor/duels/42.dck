@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Magnum
+Title=Magnum
+Icon=Magnum.jpg
+Difficulty=Medium
+Description=./Standard/Murders_at_Karlov_Manor/Boucha_-_Golgari_Roots_(Standard,_#1975259).dck
+Deck Type=constructed
+
+[Main]
+3 Haywire Mite
+4 Mosswood Dreadknight
+4 Rubblebelt Maverick
+3 Scorn-Blade Berserker
+3 Souls of the Lost
+3 Undead Butler
+2 Voldaren Thrillseeker
+3 Agatha's Soul Cauldron
+4 Seed of Hope
+4 Urborg Repossession
+4 Insidious Roots
+4 Tyvar, Jubilant Brawler
+4 Llanowar Wastes
+1 Boseiju, Who Endures
+4 Deathcap Glade
+3 Forest
+2 Swamp
+1 Takenuma, Abandoned Mire
+4 Underground Mortuary
+[Sideboard]
+2 Assassin's Trophy
+4 Duress
+3 Liliana of the Veil
+2 Terror Tide
+2 Soul-Guide Lantern
+2 Tear Asunder

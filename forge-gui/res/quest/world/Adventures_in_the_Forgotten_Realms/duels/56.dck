@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Doc Holiday
+Title=Doc Holiday
+Icon=Doc Holiday.jpg
+Difficulty=Very Hard
+Description=./Modern/Adventures_in_the_Forgotten_Realms/Tedpanic_-_UW_Control_(Modern,_#1185721).dck
+Deck Type=constructed
+
+[Main]
+3 Snapcaster Mage
+2 Spell Snare
+2 Force of Negation
+3 Cryptic Command
+3 Archmage's Charm
+4 Counterspell
+4 Opt
+4 Path to Exile
+2 Supreme Verdict
+1 Search for Azcanta
+1 Jace, Architect of Thought
+1 Teferi, Hero of Dominaria
+2 Jace, the Mind Sculptor
+3 Teferi, Time Raveler
+1 Polluted Delta
+2 Hallowed Fountain
+2 Plains
+2 Glacial Fortress
+3 Celestial Colonnade
+4 Flooded Strand
+4 Field of Ruin
+7 Island
+[Sideboard]
+1 Narset, Parter of Veils
+1 Wrath of God
+2 Celestial Purge
+2 Portable Hole
+2 Stony Silence
+2 Test of Talents
+2 Timely Reinforcements
+3 Rest in Peace

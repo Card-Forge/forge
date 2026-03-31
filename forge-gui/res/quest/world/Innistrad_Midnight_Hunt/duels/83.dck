@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Colossus
+Title=Colossus
+Icon=Colossus.jpg
+Difficulty=Hard
+Description=./Modern/Innistrad_Midnight_Hunt/Matthew_Viscuso_-_Sultai_Zombies_(Modern,_#1224930).dck
+Deck Type=constructed
+
+[Main]
+1 Baithook Angler
+1 Haunted Dead
+2 Carrion Feeder
+2 Hooting Mandrills
+2 Narcomoeba
+3 Silversmote Ghoul
+3 Hedron Crab
+4 Stitcher's Supplier
+4 Gravecrawler
+4 Vengevine
+4 Prized Amalgam
+4 Merfolk Secretkeeper
+3 Glimpse the Unthinkable
+4 Creeping Chill
+1 Swamp
+1 Island
+1 Breeding Pool
+2 Watery Grave
+3 Overgrown Tomb
+3 Misty Rainforest
+4 Verdant Catacombs
+4 Polluted Delta
+[Sideboard]
+1 Cling to Dust
+1 Wonder
+1 Thoughtseize
+1 Gnaw to the Bone
+1 Ancient Grudge
+2 Force of Vigor
+2 Abrupt Decay
+2 Fatal Push
+2 Leyline of the Void
+2 Pithing Needle

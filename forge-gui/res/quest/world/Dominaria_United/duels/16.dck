@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=WitchDoctor
+Title=WitchDoctor
+Icon=WitchDoctor.jpg
+Difficulty=Easy
+Description=./Standard/Dominaria_United/John_Mankier_-_Naya_Tokens_(Standard,_#1492468).dck
+Deck Type=constructed
+
+[Main]
+2 Jetmir, Nexus of Revels
+3 Queen Allenal of Ruadach
+4 Resolute Reinforcements
+4 Argivian Cavalier
+4 Courier's Briefcase
+4 Cabaretti Charm
+3 Captain's Call
+4 Join the Dance
+4 Careful Cultivation
+4 Rabble Rousing
+1 Mountain
+1 Sacred Peaks
+1 Rugged Highlands
+4 Racers' Ring
+4 Forest
+4 Botanical Plaza
+4 Wind-Scarred Crag
+5 Plains
+[Sideboard]
+2 Abrade
+2 Valorous Stance
+2 Destroy Evil
+3 Torch Breath
+3 Circle of Confinement
+3 Tamiyo's Safekeeping

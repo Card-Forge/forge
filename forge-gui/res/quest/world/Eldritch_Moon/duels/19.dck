@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Orzhov-precon
+Title=Orzhov-precon
+Icon=Orzhov-precon.jpg
+Difficulty=Easy
+Description=Eldritch_Moon/SCG_Invitational_Qualifier_-_Lexington,_KY/Eric_Flickinger_-_Bant_Company_(Standard,_#636485).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Archangel Avacyn
+4 Duskwatch Recruiter
+1 Jace, Vryn's Prodigy
+1 Nissa, Vastwood Seer
+4 Reflector Mage
+3 Selfless Spirit
+4 Spell Queller
+4 Sylvan Advocate
+3 Tireless Tracker
+4 Collected Company
+4 Dromoka's Command
+1 Ojutai's Command
+4 Evolving Wilds
+3 Forest
+3 Fortified Village
+1 Island
+2 Lumbering Falls
+6 Plains
+3 Prairie Stream
+4 Yavimaya Coast
+[Sideboard]
+2 Day's Undoing
+2 Declaration in Stone
+1 Linvala, the Preserver
+2 Negate
+2 Tamiyo, Field Researcher
+2 Tragic Arrogance

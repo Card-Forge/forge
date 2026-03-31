@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Conan the Barbarian
+Title=Conan the Barbarian
+Icon=Conan the Barbarian.jpg
+Difficulty=Hard
+Description=../Modern/Avacyn_Restored/Magic-League_Modern_Trial_17-08-2012/Mtgsoldier_-_Red_Deck_Wins_(Modern,_#36495).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+4 Hellspark Elemental
+4 Keldon Marauders
+4 Vexing Devil
+2 Flames of the Blood Hand
+4 Lightning Bolt
+4 Searing Blaze
+2 Shard Volley
+4 Bump in the Night
+4 Lava Spike
+4 Rift Bolt
+3 Arid Mesa
+4 Blackcleave Cliffs
+1 Blood Crypt
+8 Mountain
+4 Scalding Tarn
+[Sideboard]
+3 Rain of Gore
+3 Relic of Progenitus
+3 Smash to Smithereens
+3 Torpor Orb
+3 Volcanic Fallout

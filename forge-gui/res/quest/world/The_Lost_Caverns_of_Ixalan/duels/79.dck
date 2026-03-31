@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Treebeard
+Title=Treebeard
+Icon=Treebeard.jpg
+Difficulty=Hard
+Description=./Modern/The_Lost_Caverns_of_Ixalan/ScorpioPhoenix_-_Thopter_Control_(Modern,_#1993620)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Esper Sentinel
+1 Ingenious Smith
+4 Urza, Lord High Artificer
+4 Stoneforge Mystic
+1 Relic of Progenitus
+1 Kaldra Compleat
+1 Nettlecyst
+1 Pithing Needle
+4 Portable Hole
+1 Shadowspear
+1 Springleaf Drum
+1 Sword of the Meek
+3 Talisman of Progress
+1 Aether Spellbomb
+3 Thopter Foundry
+3 The One Ring
+3 Metallic Rebuke
+4 Urza's Saga
+4 Seachrome Coast
+2 Plains
+1 Eiganjo, Seat of the Empire
+4 Flooded Strand
+3 Hallowed Fountain
+1 Otawara, Soaring City
+1 Island
+1 Razortide Bridge
+1 Darksteel Citadel
+1 Cavern of Souls
+[Sideboard]
+3 Damping Sphere
+1 Stone of Erech
+2 Patrician's Scorn
+2 Stern Scolding
+2 Solitude
+1 Sanctifier en-Vec
+1 Flusterstorm
+2 Supreme Verdict
+1 Tishana's Tidebinder

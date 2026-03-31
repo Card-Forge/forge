@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=Cohen the Barbarian
+Title=Cohen the Barbarian
+Icon=Cohen the Barbarian.jpg
+Difficulty=Easy
+Description=./Standard/Phyrexia_All_Will_Be_One/27TrueRunes_-_Mono_Green_(Standard,_#1618885).dck
+Deck Type=constructed
+
+[Main]
+4 Evolving Adaptive
+4 Armored Scrapgorger
+4 Cankerbloom
+4 Bloated Contaminator
+4 Contagious Vorrac
+4 Evolved Spinoderm
+2 Tyvar's Stand
+4 Infectious Bite
+2 Ruthless Predation
+4 Nissa, Ascended Animist
+24 Forest
+[Sideboard]

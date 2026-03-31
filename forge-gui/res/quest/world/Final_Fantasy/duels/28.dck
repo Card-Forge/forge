@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Quest for Ulas Temple
+Title=Quest for Ulas Temple
+Icon=Quest for Ulas Temple.jpg
+Difficulty=Medium
+Description=./Standard/Final_Fantasy/David_Anderson_-_Boros_Prowess_(Standard,_#2523167).dck
+Deck Type=constructed
+
+[Main]
+2 Callous Sell-Sword
+4 Emberheart Challenger
+4 Heartfire Hero
+4 Manifold Mouse
+4 Optimistic Scavenger
+4 Monstrous Rage
+2 Demonic Ruckus
+4 Ethereal Armor
+4 Feather of Flight
+4 Shardmage's Rescue
+4 Sheltered by Ghosts
+4 Battlefield Forge
+4 Inspiring Vantage
+4 Mountain
+4 Plains
+4 Sunbillow Verge
+[Sideboard]
+2 Authority of the Consuls
+2 Boros Charm
+3 Destroy Evil
+2 Get Lost
+2 Rest in Peace
+2 Restoration Magic
+2 Split Up

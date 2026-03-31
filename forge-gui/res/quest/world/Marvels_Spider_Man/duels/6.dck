@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Shaitan
+Title=Shaitan
+Icon=Shaitan.jpg
+Difficulty=Easy
+Description=./Standard/Marvels_Spider_Man/Tim_Van_de_Putte_-_Simic_Omniscience_(Standard,_#2684231).dck
+Deck Type=constructed
+
+[Main]
+4 Kona, Rescue Beastie
+4 Marang River Regent
+4 Consult the Star Charts
+4 Dispelling Exhale
+4 Unauthorized Exit
+4 Stock Up
+4 Lost in the Maze
+4 Omniscience
+4 Roiling Dragonstorm
+4 Breeding Pool
+4 Cavern of Souls
+4 Evendo, Waking Haven
+4 Island
+4 Uthros, Titanic Godcore
+4 Willowrush Verge
+[Sideboard]
+3 Heritage Reclamation
+2 Aegis Turtle
+2 Quantum Riddler
+2 Spider-Sense
+2 Unable to Scream
+1 Annul
+1 Fresh Start
+1 Spell Pierce
+1 Surrak, Elusive Hunter

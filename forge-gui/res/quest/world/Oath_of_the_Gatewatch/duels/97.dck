@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Ancient Battlefield
+Title=Ancient Battlefield
+Icon=Ancient Battlefield.jpg
+Difficulty=Hard
+Description=../Modern/Oath_of_the_Gatewatch/Super_Modern_-_Inside_Games/Pedro_Pl_-_Goblins_(Modern,_#626707).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Foundry Street Denizen
+2 Frenzied Goblin
+4 Goblin Bushwhacker
+3 Goblin Chieftain
+4 Goblin Piledriver
+4 Legion Loyalist
+4 Mogg Fanatic
+4 Mogg War Marshal
+4 Reckless Bushwhacker
+4 Lightning Bolt
+4 Goblin Grenade
+19 Mountain
+[Sideboard]
+2 Blood Moon
+2 Dismember
+2 Forked Bolt
+1 Searing Blood
+1 Shattering Spree
+2 Skullcrack
+2 Smash to Smithereens
+2 Sudden Shock

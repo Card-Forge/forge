@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Black Panther
+Title=Black Panther
+Icon=Black Panther.jpg
+Difficulty=Very Hard
+Description=./Modern/Streets_of_New_Capenna/David_Disuanco_-_Rakdos_Midrange_(Modern,_#1522600).dck
+Deck Type=constructed
+
+[Main]
+1 Fable of the Mirror-Breaker
+1 Kroxa, Titan of Death's Hunger
+2 Magus of the Moon
+3 Seasoned Pyromancer
+4 Dauthi Voidwalker
+4 Ragavan, Nimble Pilferer
+4 Grief
+4 Fury
+1 Kolaghan's Command
+2 Lightning Bolt
+2 Terminate
+4 Undying Malice
+4 Feign Death
+1 Dreadbore
+1 Night's Whisper
+3 Thoughtseize
+1 Mountain
+1 Takenuma, Abandoned Mire
+1 Shizo, Death's Storehouse
+2 Blood Crypt
+3 Swamp
+3 Verdant Catacombs
+4 Bloodstained Mire
+4 Blackcleave Cliffs
+[Sideboard]
+1 Chalice of the Void
+1 Surgical Extraction
+1 Blood Moon
+2 Fatal Push
+2 Unlicensed Hearse
+2 Necromentia
+2 Hidetsugu Consumes All
+2 Engineered Explosives
+2 Tourach, Dread Cantor

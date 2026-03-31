@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Denethor
+Title=Denethor
+Icon=Denethor.jpg
+Difficulty=Hard
+Description=../Modern/Battle_for_Zendikar/Modern_Constructed_League/w4lrus_-_w4lrus_(5-0)_(Modern,_#502976).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Heliod, God of the Sun
+2 Kor Firewalker
+1 Mirran Crusader
+2 Spellskite
+1 Batterskull
+1 Relic of Progenitus
+1 Sword of Feast and Famine
+1 Sword of Fire and Ice
+1 Hero's Downfall
+1 Murderous Cut
+4 Path to Exile
+1 Ultimate Price
+3 Day of Judgment
+4 Inquisition of Kozilek
+4 Lingering Souls
+4 Thoughtseize
+2 Elspeth, Knight-Errant
+2 Sorin, Lord of Innistrad
+1 Caves of Koilos
+4 Godless Shrine
+3 Isolated Chapel
+3 Marsh Flats
+1 Mutavault
+4 Plains
+2 Shambling Vent
+3 Swamp
+1 Urborg, Tomb of Yawgmoth
+1 Vault of the Archangel
+1 Verdant Catacombs
+[Sideboard]
+1 Fulminator Mage
+1 Memoricide
+1 Sin Collector
+1 Stillmoon Cavalier
+4 Sundering Growth
+1 Torpor Orb
+2 Zealous Persecution
