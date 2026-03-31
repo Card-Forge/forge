@@ -1,0 +1,11 @@
+Name:Ral Zarek, Guest Lecturer
+ManaCost:1 B B
+Types:Legendary Planeswalker Ral
+Loyalty:3
+A:AB$ Surveil | Cost$ AddCounter<1/LOYALTY> | Amount$ 2 | Planeswalker$ True | SpellDescription$ Surveil 2.
+A:AB$ Discard | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Player | NumCards$ 1 | Mode$ TgtChoose | TgtPrompt$ Select any number of target players | TargetMin$ 0 | TargetMax$ MaxTgt | SpellDescription$ Any number of target players each discard a card.
+A:AB$ ChangeZone | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Card.Creature+cmcLE3+YouOwn | ValidTgtDesc$ creature card with mana value 3 or less in your graveyard | SpellDescription$ Return target creature card with mana value 3 or less from your graveyard to the battlefield.
+A:AB$ FlipACoin | Cost$ SubCounter<7/LOYALTY> | Amount$ 5 | NoCall$ True | HeadsSubAbility$ DBSkipTurn | Planeswalker$ True | Ultimate$ True | StackDescription$ SpellDescription | SpellDescription$ Flip five coins. Target opponent skips their next X turns, where X is the number of coins that came up heads.
+SVar:DBSkipTurn:DB$ SkipTurn | NumTurns$ X | ValidTgts$ Opponent
+SVar:MaxTgt:PlayerCountPlayers$Amount
+Oracle:[+1]: Surveil 2.\n[-1]: Any number of target players each discard a card.\n[-2]: Return target creature card with mana value 3 or less from your graveyard to the battlefield.\n[-7]: Flip five coins. Target opponent skips their next X turns, where X is the number of coins that came up heads.
