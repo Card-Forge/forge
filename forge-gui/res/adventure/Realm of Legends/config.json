@@ -158,6 +158,7 @@
     "CN2"
   ],
   "usePriceListPrices": false,
+  "allowChaos": false,
   "difficulties": [
     {
       "name": "Easy",

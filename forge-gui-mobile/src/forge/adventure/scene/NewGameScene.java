@@ -135,9 +135,11 @@ public class NewGameScene extends MenuScene {
             AdventureModes.CommanderPrecon.setModes(Config.instance().filterCommanderPreconDecks(0));
         }
 
-        modes.add(AdventureModes.Chaos);
-        AdventureModes.Chaos.setSelectionName(deckLabel);
-        AdventureModes.Chaos.setModes(new Array<>(new String[]{Forge.getLocalizer().getMessage("lblRandomDeck")}));
+        if (Config.instance().getConfigData().allowChaos) {
+            modes.add(AdventureModes.Chaos);
+            AdventureModes.Chaos.setSelectionName(deckLabel);
+            AdventureModes.Chaos.setModes(new Array<>(new String[]{Forge.getLocalizer().getMessage("lblRandomDeck")}));
+        }
         for (DeckProxy deckProxy : DeckProxy.getAllCustomStarterDecks())
             custom.add(deckProxy.getName());
         if (!custom.isEmpty()) {

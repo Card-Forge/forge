@@ -32,6 +32,7 @@ public class ConfigData {
     public String[] allowedJumpstart;
     public String defaultBasicLandSet = "JMP";
     public boolean enableGeneticAI = true;
+    public boolean allowChaos = true;
     public boolean usePriceListPrices = true;
 
 }
