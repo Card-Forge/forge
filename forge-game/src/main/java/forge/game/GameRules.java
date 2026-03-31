@@ -113,11 +113,19 @@ public class GameRules {
         return appliedVariants.contains(variant);
     }
 
+    public boolean isTypeOrVariant(final GameType type) {
+        return gameType == type || hasAppliedVariant(type);
+    }
+
+    public boolean isDanDan() {
+        return isTypeOrVariant(GameType.DanDan);
+    }
+
     public boolean hasCommander() {
-        return appliedVariants.contains(GameType.Commander)
-                || appliedVariants.contains(GameType.Oathbreaker)
-                || appliedVariants.contains(GameType.TinyLeaders)
-                || appliedVariants.contains(GameType.Brawl);
+        return isTypeOrVariant(GameType.Commander)
+                || isTypeOrVariant(GameType.Oathbreaker)
+                || isTypeOrVariant(GameType.TinyLeaders)
+                || isTypeOrVariant(GameType.Brawl);
     }
 
     public boolean useGrayText() {

@@ -198,8 +198,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         final Player activator = sa.getActivatingPlayer();
         final Zone cardZone = c.getLastKnownZone();
         final boolean isDanDan = activator != null && activator.getGame() != null
-                && (activator.getGame().getRules().getGameType() == GameType.DanDan
-                || activator.getGame().getRules().hasAppliedVariant(GameType.DanDan));
+                && activator.getGame().getRules().isDanDan();
         final boolean isDanDanSharedGraveyard = isDanDan && cardZone != null && cardZone.is(ZoneType.Graveyard);
         Card cp = c;
 

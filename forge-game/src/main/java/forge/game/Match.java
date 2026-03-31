@@ -229,7 +229,7 @@ public class Match {
 
         final FCollectionView<Player> players = game.getPlayers();
         final List<RegisteredPlayer> playersConditions = game.getMatch().getPlayers();
-        final boolean isDanDan = (rules.getGameType() == GameType.DanDan || rules.hasAppliedVariant(GameType.DanDan)) && !players.isEmpty();
+        final boolean isDanDan = rules.isDanDan() && !players.isEmpty();
         final Player sharedDanDanPlayer = isDanDan ? players.get(0) : null;
         final RegisteredPlayer sharedDanDanCondition = isDanDan && !playersConditions.isEmpty() ? playersConditions.get(0) : null;
 

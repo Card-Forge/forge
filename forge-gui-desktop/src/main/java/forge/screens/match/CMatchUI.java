@@ -51,7 +51,6 @@ import forge.deck.Deck;
 import forge.deckchooser.FDeckViewer;
 import forge.game.GameEntityView;
 import forge.game.GameRules;
-import forge.game.GameType;
 import forge.game.GameView;
 import forge.game.Match;
 import forge.game.card.Card;
@@ -222,7 +221,7 @@ public final class CMatchUI
         final Match match = gv.getMatch();
         if (match != null) {
             final GameRules rules = match.getRules();
-            if (rules != null && (rules.getGameType() == GameType.DanDan || rules.hasAppliedVariant(GameType.DanDan))) {
+            if (rules != null && rules.isDanDan()) {
                 return ForgeConstants.MATCH_DANDAN_LAYOUT_FILE;
             }
         }

@@ -1185,7 +1185,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private CardCollectionView doDraw(Map<Player, CardCollection> revealed, SpellAbility sa, Map<AbilityKey, Object> params, PlayerZone hand) {
         final CardCollection drawn = new CardCollection();
         final GameRules rules = game.getRules();
-        final boolean isDanDan = rules != null && (rules.getGameType() == GameType.DanDan || rules.hasAppliedVariant(GameType.DanDan));
+        final boolean isDanDan = rules != null && rules.isDanDan();
         final PlayerZone library;
         if (isDanDan && !game.getPlayers().isEmpty()) {
             // DanDan uses one shared library; always draw from the canonical shared zone.
@@ -1328,7 +1328,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      */
     public final PlayerZone getZone(final ZoneType zone) {
         final GameRules rules = game == null ? null : game.getRules();
-        final boolean isDanDan = rules != null && (rules.getGameType() == GameType.DanDan || rules.hasAppliedVariant(GameType.DanDan));
+        final boolean isDanDan = rules != null && rules.isDanDan();
         if (zone != null && game != null && isDanDan
                 && (zone == ZoneType.Library || zone == ZoneType.Graveyard)
                 && !game.getPlayers().isEmpty()) {
@@ -1352,7 +1352,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public void updateZoneForView(PlayerZone zone) {
         view.updateZone(zone);
         final GameRules rules = game == null ? null : game.getRules();
-        final boolean isDanDan = rules != null && (rules.getGameType() == GameType.DanDan || rules.hasAppliedVariant(GameType.DanDan));
+        final boolean isDanDan = rules != null && rules.isDanDan();
         if (isDanDan
                 && (zone.is(ZoneType.Library) || zone.is(ZoneType.Graveyard))) {
             for (final Player other : game.getPlayers()) {

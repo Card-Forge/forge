@@ -33,14 +33,14 @@ public final class DanDanViewZones {
         final Game g = gameView.getGame();
         if (g != null) {
             final GameRules rules = g.getRules();
-            if (rules != null && (rules.getGameType() == GameType.DanDan || rules.hasAppliedVariant(GameType.DanDan))) {
+            if (rules != null && rules.isDanDan()) {
                 return true;
             }
         }
         final Match match = gameView.getMatch();
         if (match != null) {
             final GameRules rules = match.getRules();
-            if (rules != null && (rules.getGameType() == GameType.DanDan || rules.hasAppliedVariant(GameType.DanDan))) {
+            if (rules != null && rules.isDanDan()) {
                 return true;
             }
         }

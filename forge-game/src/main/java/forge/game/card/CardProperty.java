@@ -12,7 +12,6 @@ import forge.game.CardTraitBase;
 import forge.game.EvenOdd;
 import forge.game.Game;
 import forge.game.GameEntity;
-import forge.game.GameType;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.combat.AttackRequirement;
@@ -42,8 +41,7 @@ public class CardProperty {
     public static boolean cardHasProperty(Card card, String property, Player sourceController, Card source, CardTraitBase spellAbility) {
         final Game game = card.getGame();
         final Combat combat = game.getCombat();
-        final boolean isDanDan = game != null && (game.getRules().getGameType() == GameType.DanDan
-                || game.getRules().hasAppliedVariant(GameType.DanDan));
+        final boolean isDanDan = game != null && game.getRules().isDanDan();
         final Zone cardZone = card.getZone();
         final boolean isDanDanSharedGraveyard = isDanDan && cardZone != null && cardZone.is(ZoneType.Graveyard);
         // lki can't be null but it does return this
