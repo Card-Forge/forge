@@ -368,6 +368,7 @@ Shard
 Attraction
 Blood
 Bobblehead:Bobbleheads
+Book:Books
 Clue:Clues
 Contraption:Contraptions
 Equipment
@@ -405,6 +406,7 @@ Dakkon
 Daretti
 Davriel
 Deb
+Dellian
 Dihada
 Domri
 Dovin
