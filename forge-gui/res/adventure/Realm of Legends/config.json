@@ -181,6 +181,9 @@
       "startItems": [
         "Challenge Coin",
         "Challenge Coin",
+        "Challenge Coin",
+        "Silver Challenge Coin",
+        "Silver Challenge Coin",
         "Silver Challenge Coin",
         "Steel Boots",
         "Chromatic Sphere",
@@ -210,6 +213,8 @@
       },
    "startItems": [
         "Challenge Coin",
+        "Challenge Coin",
+        "Silver Challenge Coin",
         "Silver Challenge Coin",
         "Steel Boots",
         "Steel Armor",
@@ -235,7 +240,8 @@
         "G":"decks/starter/G_Starter_Hard.dck"
       },
 "startItems": [
-        "Challenge Coin"
+        "Challenge Coin",
+        "Silver Challenge Coin"
       ]
     },{
       "name": "Insane",
