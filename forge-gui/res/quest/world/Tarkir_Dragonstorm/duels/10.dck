@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=RasAlGhul
+Title=RasAlGhul
+Icon=RasAlGhul.jpg
+Difficulty=Easy
+Description=./Standard/Tarkir_Dragonstorm/Egorable_-_Orzhov_Pixie_(Standard,_#2454083).dck
+Deck Type=constructed
+
+[Main]
+4 Nurturing Pixie
+4 Sunpearl Kirin
+1 Loran of the Third Path
+2 Beza, the Bounding Spring
+1 Sheoldred, the Apocalypse
+2 Grim Bauble
+3 Scrollshift
+3 Unholy Annex // Ritual Chamber
+4 Hopeless Nightmare
+3 Momentum Breaker
+4 Nowhere to Run
+4 Temporary Lockdown
+4 Plains
+4 Bleachbone Verge
+4 Concealed Courtyard
+2 Soulstone Sanctuary
+4 Swamp
+4 Caves of Koilos
+3 Restless Fortress
+[Sideboard]
+2 Dreams of Steel and Oil
+1 Destroy Evil
+2 Get Lost
+2 Rest in Peace
+1 Ghost Vacuum
+1 Kutzil's Flanker
+1 Loran of the Third Path
+3 Duress
+2 Wilt-Leaf Liege

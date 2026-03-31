@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Izzet-precon
+Title=Izzet-precon
+Icon=Izzet-precon.jpg
+Difficulty=Medium
+Description=Scars_of_Mirrodin/States-Champs_Florida/Sheridan_Mickelson_-_Valakut_Ramp_(Standard,_#7718).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Avenger of Zendikar
+2 Inferno Titan
+4 Primeval Titan
+2 Terastodon
+2 Harrow
+4 Lightning Bolt
+4 Summoning Trap
+4 Cultivate
+4 Explore
+4 Khalni Heart Expedition
+1 Koth of the Hammer
+3 Evolving Wilds
+5 Forest
+11 Mountain
+3 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+4 Joraga Treespeaker
+2 Naturalize
+4 Obstinate Baloth
+4 Pyroclasm

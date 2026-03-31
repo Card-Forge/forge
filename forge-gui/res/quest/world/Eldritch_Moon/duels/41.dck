@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Captain America
+Title=Captain America
+Icon=Captain America.jpg
+Difficulty=Medium
+Description=Eldritch_Moon/World_Championship_Seattle,_US_-_Seattle,_WA/THIAGO_SAPORITO_-_WUG_Aggro_(Standard,_#638030).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Archangel Avacyn
+4 Duskwatch Recruiter
+2 Elder Deep-Fiend
+1 Jace, Vryn's Prodigy
+1 Nissa, Vastwood Seer
+1 Noose Constrictor
+4 Reflector Mage
+2 Selfless Spirit
+4 Spell Queller
+4 Sylvan Advocate
+3 Tireless Tracker
+4 Collected Company
+1 Dromoka's Command
+1 Declaration in Stone
+1 Tamiyo, Field Researcher
+4 Evolving Wilds
+3 Forest
+3 Fortified Village
+2 Island
+2 Lumbering Falls
+5 Plains
+3 Prairie Stream
+4 Yavimaya Coast
+[Sideboard]
+1 Clash of Wills
+3 Gideon, Ally of Zendikar
+1 Negate
+1 Ojutai's Command
+2 Summary Dismissal
+2 Thalia, Heretic Cathar
+1 Tragic Arrogance

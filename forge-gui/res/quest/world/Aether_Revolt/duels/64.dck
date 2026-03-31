@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=BaronCimitiere
+Title=BaronCimitiere
+Icon=BaronCimitiere.jpg
+Difficulty=Very Hard
+Description=../Modern/Aether_Revolt/dinomaster_-_Deck_(Modern,_#662643).dck
+Deck Type=constructed
+
+[Main]
+2 Bedlam Reveler
+4 Felidar Guardian
+1 Tasigur, the Golden Fang
+4 Fatal Push
+2 Kolaghan's Command
+4 Lightning Bolt
+2 Path to Exile
+2 Spell Pierce
+1 Spell Snare
+2 Anger of the Gods
+2 Collective Brutality
+3 Inquisition of Kozilek
+2 Lingering Souls
+1 Painful Truths
+4 Saheeli Rai
+3 Arid Mesa
+3 Blood Crypt
+4 Bloodstained Mire
+1 Ghost Quarter
+2 Godless Shrine
+1 Hallowed Fountain
+1 Island
+3 Marsh Flats
+1 Plains
+2 Sacred Foundry
+1 Steam Vents
+1 Swamp
+1 Watery Grave
+[Sideboard]
+2 Blessed Alliance
+1 Crumble to Dust
+2 Dispel
+1 Engineered Explosives
+1 Grafdigger's Cage
+1 Izzet Staticaster
+1 Keranos, God of Storms
+2 Pithing Needle
+2 Rakdos Charm
+2 Stony Silence

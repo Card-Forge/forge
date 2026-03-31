@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Gbadu
+Title=Gbadu
+Icon=Gbadu.jpg
+Difficulty=Hard
+Description=./Modern/Guilds_of_Ravnica/Cimos21_-_Bant_Spirits_(Modern,_#768482).dck
+Deck Type=constructed
+
+[Main]
+3 Birds of Paradise
+4 Drogskol Captain
+3 Geist of Saint Traft
+4 Mausoleum Wanderer
+4 Noble Hierarch
+1 Rattlechains
+3 Selfless Spirit
+4 Spell Queller
+4 Supreme Phantom
+1 Sword of Fire and Ice
+4 Collected Company
+4 Path to Exile
+3 Botanical Sanctum
+1 Breeding Pool
+1 Cavern of Souls
+3 Flooded Strand
+1 Forest
+1 Hallowed Fountain
+3 Horizon Canopy
+1 Island
+1 Moorland Haunt
+1 Plains
+1 Temple Garden
+4 Windswept Heath
+[Sideboard]
+3 Damping Sphere
+1 Disdainful Stroke
+2 Knight of Autumn
+4 Rest in Peace
+3 Stony Silence
+2 Unified Will

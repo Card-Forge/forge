@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Horus
+Title=Horus
+Icon=Horus.jpg
+Difficulty=Easy
+Description=./Standard/Duskmourn_House_of_Horror/Capitano_CL_-_Gruul_Aggro_(Standard,_#2246308).dck
+Deck Type=constructed
+
+[Main]
+4 Questing Druid
+4 Emberheart Challenger
+4 Heartfire Hero
+4 Manifold Mouse
+4 Slickshot Show-Off
+4 Monastery Swiftspear
+3 Torch the Tower
+2 Snakeskin Veil
+4 Monstrous Rage
+3 Shock
+3 Innkeeper's Talent
+4 Karplusan Forest
+2 Restless Ridgeline
+2 Rockface Village
+3 Thornspire Verge
+4 Copperline Gorge
+6 Mountain
+[Sideboard]
+2 Pick Your Poison
+3 Urabrask's Forge
+4 Scorching Shot
+1 Ghost Vacuum
+1 Obliterating Bolt
+2 Pawpatch Formation
+1 Torch the Tower
+1 Snakeskin Veil

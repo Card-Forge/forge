@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Robot22
+Title=Robot22
+Icon=Kang.jpg
+Difficulty=Easy
+Description=Abzan Control 
+Deck Type=constructed
+
+[Main]
+1 Angel of Sanctions
+4 Anointer Priest
+1 Sunscourge Champion
+4 Renegade Map
+1 Treasure Map
+4 Fatal Push
+3 Fumigate
+4 Anointed Procession
+4 Cast Out
+4 Hidden Stockpile
+4 Legion's Landing
+2 Vraska, Relic Seeker
+4 Concealed Courtyard
+4 Evolving Wilds
+1 Forest
+2 Ifnir Deadlands
+6 Plains
+2 Shefet Dunes
+3 Swamp
+[Sideboard]
+1 Angel of Sanctions
+1 Arguel's Blood Fast
+2 Authority of the Consuls
+1 Doomfall
+4 Duress
+1 Ixalan's Binding
+2 Lost Legacy
+2 Solemnity
+1 Treasure Map

@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Doc Holiday
+Title=Doc Holiday
+Icon=Doc Holiday.jpg
+Difficulty=Medium
+Description=./Standard/Tarkir_Dragonstorm/Carl_Seaton_-_Red_Deck_Wins_(Standard,_#2452737).dck
+Deck Type=constructed
+
+[Main]
+4 Emberheart Challenger
+4 Heartfire Hero
+4 Hired Claw
+4 Manifold Mouse
+4 Screaming Nemesis
+4 Tersa Lightshatter
+4 Burst Lightning
+4 Lightning Strike
+4 Monstrous Rage
+1 Witchstalker Frenzy
+17 Mountain
+4 Rockface Village
+2 Soulstone Sanctuary
+[Sideboard]
+2 Case of the Crimson Pulse
+2 Ghost Vacuum
+3 Lithomantic Barrage
+4 Sunspine Lynx
+2 Urabrask's Forge
+2 Witchstalker Frenzy

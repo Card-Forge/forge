@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Starfire
+Title=Starfire
+Icon=Starfire.jpg
+Difficulty=Easy
+Description=Aether_Revolt/Khyler_Fields_-_Bant_Eldrazi_(Standard,_#668432).dck
+Deck Type=constructed
+
+[Main]
+3 Archangel Avacyn
+1 Bruna, the Fading Light
+1 Elder Deep-Fiend
+3 Eldrazi Displacer
+2 Gisela, the Broken Blade
+4 Matter Reshaper
+3 Reality Smasher
+4 Servant of the Conduit
+3 Thought-Knot Seer
+4 Thraben Inspector
+3 Declaration in Stone
+3 Authority of the Consuls
+2 Tamiyo, Field Researcher
+4 Aether Hub
+3 Botanical Sanctum
+4 Evolving Wilds
+1 Forest
+2 Fortified Village
+1 Island
+4 Plains
+2 Prairie Stream
+2 Sanctum of Ugin
+1 Wastes
+[Sideboard]
+1 Ajani Unyielding
+1 Blessed Alliance
+2 Cataclysmic Gearhulk
+2 Gideon, Ally of Zendikar
+2 Immolating Glare
+1 Linvala, the Preserver
+4 Negate
+2 Stasis Snare

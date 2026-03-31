@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Hagrid
+Title=Hagrid
+Icon=Hagrid.jpg
+Difficulty=Hard
+Description=./Modern/Avatar_The_Last_Airbender/ZKG_-_Dimir_Control_(Modern,_#2797962).dck
+Deck Type=constructed
+
+[Main]
+4 Subtlety
+2 Tamiyo, Inquisitive Student
+4 Wan Shi Tong, Librarian
+4 Orcish Bowmasters
+2 Cling to Dust
+4 Consult the Star Charts
+4 Fatal Push
+1 Force of Negation
+3 Sheoldred's Edict
+4 Counterspell
+2 Spell Snare
+2 Spell Pierce
+5 Island
+4 Field of Ruin
+4 Polluted Delta
+4 Flooded Strand
+2 Undercity Sewers
+1 Demolition Field
+1 Swamp
+3 Watery Grave
+[Sideboard]
+4 Consign to Memory
+2 Kaito, Bane of Nightmares
+3 Engineered Explosives
+2 Graveyard Trespasser
+1 Damnation
+3 Mystical Dispute

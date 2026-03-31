@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Zapp Brannigan
+Title=Zapp Brannigan
+Icon=Zapp Brannigan.jpg
+Difficulty=Hard
+Description=./Modern/Dominaria_United/Rémi_Martinez_-_Goblins_(Modern,_#1514307).dck
+Deck Type=constructed
+
+[Main]
+1 Stingscourger
+1 Skirk Prospector
+1 Pashalik Mons
+2 Goblin Ringleader
+2 Kiki-Jiki, Mirror Breaker
+2 Sling-Gang Lieutenant
+3 Boggart Harbinger
+3 Munitions Expert
+3 Mogg War Marshal
+4 Conspicuous Snoop
+4 Rundvelt Hordemaster
+4 Goblin Matron
+4 Ignoble Hierarch
+4 Aether Vial
+1 Blood Crypt
+1 Swamp
+1 Stomping Ground
+1 Grove of the Burnwillows
+2 Mountain
+4 Secluded Courtyard
+4 Cavern of Souls
+4 Bloodstained Mire
+4 Unclaimed Territory
+[Sideboard]
+1 Goblin Trashmaster
+2 Fury
+2 Chalice of the Void
+3 Warping Wail
+3 Magus of the Moon
+4 Leyline of the Void

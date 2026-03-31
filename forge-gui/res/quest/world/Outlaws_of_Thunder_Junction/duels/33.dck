@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Carnage
+Title=Carnage
+Icon=Carnage.jpg
+Difficulty=Easy
+Description=./Standard/Outlaws_of_Thunder_Junction/AHubbard_-_Orzhov_Midrange_(Standard,_#2015874).dck
+Deck Type=constructed
+
+[Main]
+4 Deep-Cavern Bat
+3 Fortune, Loyal Steed
+3 Guardian of Ghirapur
+4 Phyrexian Fleshgorger
+3 Sheoldred, the Apocalypse
+4 Spirited Companion
+3 Steel Seraph
+3 Tinybones, the Pickpocket
+1 Bitter Triumph
+4 Cut Down
+3 Go for the Throat
+4 Caves of Koilos
+4 Concealed Courtyard
+1 Eiganjo, Seat of the Empire
+2 Mirrex
+2 Plains
+2 Restless Fortress
+2 Shadowy Backstreet
+4 Shattered Sanctum
+3 Swamp
+1 Takenuma, Abandoned Mire
+[Sideboard]
+2 Destroy Evil
+3 Duress
+3 Knockout Blow
+4 Pest Control
+3 Rest in Peace

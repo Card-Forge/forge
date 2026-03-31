@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Robin Hood
+Title=Robin Hood
+Icon=Robin Hood.jpg
+Difficulty=Easy
+Description=./Standard/Ravnica_Allegiance/7720_-_Esper_Control_(Standard,_#786607).dck
+Deck Type=constructed
+
+[Main]
+3 Absorb
+3 Cast Down
+3 Chemister's Insight
+2 Moment of Craving
+3 Mortify
+2 Negate
+2 Vraska's Contempt
+2 Cry of the Carnarium
+3 Kaya's Wrath
+4 Thought Erasure
+2 Search for Azcanta
+1 Kaya, Orzhov Usurper
+4 Teferi, Hero of Dominaria
+4 Drowned Catacomb
+4 Glacial Fortress
+4 Godless Shrine
+4 Hallowed Fountain
+1 Island
+4 Isolated Chapel
+1 Swamp
+4 Watery Grave
+[Sideboard]
+1 Cry of the Carnarium
+2 Basilica Bell-Haunt
+2 Duress
+2 Hostage Taker
+1 Lyra Dawnbringer
+1 The Eldest Reborn
+4 Thief of Sanity
+2 Unmoored Ego

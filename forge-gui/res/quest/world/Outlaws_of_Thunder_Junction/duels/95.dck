@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Edna Krabappel
+Title=Edna Krabappel
+Icon=Edna Krabappel.jpg
+Difficulty=Hard
+Description=./Modern/Outlaws_of_Thunder_Junction/EnricoPalazzo_-_Izzet_Prowess_(Modern,_#2066474).dck
+Deck Type=constructed
+
+[Main]
+2 Sprite Dragon
+4 Monastery Swiftspear
+4 Soul-Scar Mage
+4 Dragon's Rage Channeler
+2 Brazen Borrower
+1 Slickshot Show-Off
+4 Mishra's Bauble
+4 Lightning Bolt
+4 Lava Dart
+4 Mutagenic Growth
+1 Gut Shot
+4 Expressive Iteration
+4 Preordain
+1 Underworld Breach
+2 Spirebluff Canal
+4 Arid Mesa
+4 Steam Vents
+3 Mountain
+2 Fiery Islet
+1 Misty Rainforest
+1 Stomping Ground
+[Sideboard]
+3 Dragon's Claw
+3 Relic of Progenitus
+3 Alpine Moon
+2 Ancient Grudge
+4 Stern Dismissal

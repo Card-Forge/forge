@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=The Great Gatsby
+Title=The Great Gatsby
+Icon=The Great Gatsby.jpg
+Difficulty=Hard
+Description=../Modern/Born_of_the_Gods/Grand_Prix_Kobe_2014/Kohei_Takano_-_Red_Deck_Wins_(Modern,_#83649).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+3 Grim Lavamancer
+4 Spark Elemental
+4 Vexing Devil
+4 Lightning Bolt
+4 Searing Blood
+3 Shard Volley
+4 Skullcrack
+4 Bump in the Night
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+4 Blackcleave Cliffs
+2 Blood Crypt
+4 Mountain
+4 Scalding Tarn
+[Sideboard]
+2 Blood Moon
+2 Combust
+2 Dragon's Claw
+3 Molten Rain
+3 Rakdos Charm
+1 Smash to Smithereens
+2 Torpor Orb

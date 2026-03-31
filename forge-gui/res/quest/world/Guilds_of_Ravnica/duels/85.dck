@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Wilhelm Grimm
+Title=Wilhelm Grimm
+Icon=Wilhelm Grimm.jpg
+Difficulty=Very Hard
+Description=./Modern/Guilds_of_Ravnica/99problems_-_Burn_(Modern,_#767397).dck
+Deck Type=constructed
+
+[Main]
+4 Ball Lightning
+4 Eidolon of the Great Revel
+4 Goblin Guide
+4 Monastery Swiftspear
+4 Spark Elemental
+4 Lightning Bolt
+1 Searing Blaze
+4 Skullcrack
+4 Bump in the Night
+4 Lava Spike
+4 Rift Bolt
+3 Arid Mesa
+2 Blackcleave Cliffs
+2 Blood Crypt
+4 Bloodstained Mire
+3 Mountain
+1 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+2 Destructive Revelry
+2 Dragon's Claw
+3 Fatal Push
+4 Leyline of the Void
+1 Risk Factor
+3 Searing Blood

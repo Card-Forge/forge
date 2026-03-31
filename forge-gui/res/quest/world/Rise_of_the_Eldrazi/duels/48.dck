@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Eomer
+Title=Eomer
+Icon=Eomer.jpg
+Difficulty=Easy
+Description=Rise_of_the_Eldrazi/Magic-League_Standard_Trial_22-06-10/mickeboyy_-_Red_Deck_Wins_(Standard,_#1310).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+4 Kiln Fiend
+4 Plated Geopede
+4 Burst Lightning
+4 Lightning Bolt
+4 Searing Blaze
+4 Staggershock
+4 Forked Bolt
+4 Zektar Shrine Expedition
+4 Arid Mesa
+4 Evolving Wilds
+12 Mountain
+4 Scalding Tarn
+[Sideboard]
+3 Banefire
+4 Blazing Torch
+4 Flame Slash
+4 Quenchable Fire

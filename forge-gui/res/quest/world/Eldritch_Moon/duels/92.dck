@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Isperia
+Title=Isperia
+Icon=Isperia.jpg
+Difficulty=Very Hard
+Description=../Modern/Eldritch_Moon/Ovinogeddon_Sunday_Modern/Tommaso_Passalacqua_-_Faeries_(Modern,_#640973).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Kalitas, Traitor of Ghet
+3 Mistbind Clique
+4 Spellstutter Sprite
+3 Vendilion Clique
+2 Cryptic Command
+3 Dismember
+3 Smother
+4 Ancestral Vision
+4 Collective Brutality
+4 Thoughtseize
+4 Bitterblossom
+1 Cavern of Souls
+4 Creeping Tar Pit
+1 Darkslick Shores
+5 Island
+4 Mutavault
+1 River of Tears
+4 Secluded Glen
+2 Swamp
+1 Urborg, Tomb of Yawgmoth
+1 Watery Grave
+[Sideboard]
+3 Countersquall
+2 Damnation
+2 Engineered Explosives
+3 Fulminator Mage
+2 Hurkyl's Recall
+3 Relic of Progenitus

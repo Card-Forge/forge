@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Teysa
+Title=Teysa
+Icon=Teysa.jpg
+Difficulty=Very Hard
+Description=../Modern/Khans_of_Tarkir/PPTQ_Milwaukee_@_Albion_Store_-_Kortrijk/Trygve_Vantomme_-_Red_Deck_Wins_(Modern,_#238524).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+4 Monastery Swiftspear
+4 Boros Charm
+4 Lightning Bolt
+3 Lightning Helix
+3 Searing Blaze
+2 Shard Volley
+4 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+1 Arid Mesa
+4 Bloodstained Mire
+8 Mountain
+2 Sacred Foundry
+1 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+2 Deflecting Palm
+3 Destructive Revelry
+1 Grim Lavamancer
+3 Kor Firewalker
+2 Molten Rain
+2 Path to Exile
+2 Searing Blood

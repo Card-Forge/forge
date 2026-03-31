@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=The Desert Caravan
+Title=The Desert Caravan
+Icon=The Desert Caravan.jpg
+Difficulty=Easy
+Description=./Standard/Ikoria_Lair_of_Behemoths/Adam_Daniere_-_Bant_MidRamp_(Standard,_#988952).dck
+Deck Type=constructed
+
+[Main]
+4 Uro, Titan of Nature's Wrath
+1 Neutralize
+2 Mystical Dispute
+2 Aether Gust
+4 Growth Spiral
+2 Shatter the Sky
+4 Elspeth Conquers Death
+4 Shark Typhoon
+2 Narset, Parter of Veils
+2 Nissa, Who Shakes the World
+4 Teferi, Time Raveler
+2 Temple of Plenty
+2 Temple of Mystery
+2 Plains
+2 Island
+2 Forest
+3 Temple of Enlightenment
+4 Temple Garden
+4 Breeding Pool
+4 Fabled Passage
+4 Hallowed Fountain
+[Sideboard]
+1 Tolsimir, Friend to Wolves
+1 Narset, Parter of Veils
+1 Aether Gust
+1 Mystical Dispute
+2 Shatter the Sky
+2 Dovin's Veto
+2 Glass Casket
+2 Knight of Autumn
+3 Devout Decree

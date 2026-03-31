@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Nelson Muntz
+Title=Nelson Muntz
+Icon=Nelson Muntz.jpg
+Difficulty=Hard
+Description=./Modern/Innistrad_Crimson_Vow/Battlerrules_-_Zombardment_(Modern,_#1321496)_[!].dck
+Deck Type=constructed
+
+[Main]
+2 Jadar, Ghoulcaller of Nephalia
+4 Undead Augur
+4 Shambling Ghast
+4 Headless Rider
+4 Gravecrawler
+4 Champion of the Perished
+4 Carrion Feeder
+4 Fatal Push
+4 Goblin Bombardment
+4 Liliana, Untouched by Death
+1 Godless Shrine
+1 Bloodstained Mire
+2 Castle Locthwain
+4 Blood Crypt
+4 Verdant Catacombs
+4 Marsh Flats
+6 Swamp
+[Sideboard]
+3 Magus of the Moon
+4 Wear // Tear
+4 Prismatic Ending
+4 Leyline of the Void

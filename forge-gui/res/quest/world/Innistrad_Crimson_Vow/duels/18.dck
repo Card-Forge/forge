@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Amphibian
+Title=Amphibian
+Icon=Amphibian.jpg
+Difficulty=Easy
+Description=./Standard/Innistrad_Crimson_Vow/Ishikawa_Kenji_-_Mono_Green_(Standard,_#1239798).dck
+Deck Type=constructed
+
+[Main]
+1 Avabruck Caretaker
+2 Ascendant Packleader
+2 Prosperous Innkeeper
+3 Sculptor of Winter
+3 Ulvenwald Oddity
+4 Werewolf Pack Leader
+4 Old-Growth Troll
+3 Esika's Chariot
+3 Snakeskin Veil
+3 Inscription of Abundance
+4 Blizzard Brawl
+2 Ranger Class
+1 Wrenn and Seven
+1 Lair of the Hydra
+2 Faceless Haven
+2 Kazandu Mammoth
+20 Snow-Covered Forest
+[Sideboard]
+1 Snakeskin Veil
+1 Devouring Tendrils
+1 Inscription of Abundance
+1 Choose Your Weapon
+1 Avabruck Caretaker
+2 Weathered Runestone
+2 Outland Liberator
+2 Tangletrap
+2 Tajuru Blightblade
+2 Froghemoth

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Agrus
+Title=Agrus
+Icon=Agrus.jpg
+Difficulty=Hard
+Description=./Modern/Theros_Beyond_Death/B1gDan_-_Bant_Company_(Modern,_#926213).dck
+Deck Type=constructed
+
+[Main]
+1 Walking Ballista
+1 Eternal Witness
+3 Gilded Goose
+3 Giver of Runes
+4 Heliod, Sun-Crowned
+4 Ice-Fang Coatl
+4 Noble Hierarch
+4 Ranger-Captain of Eos
+4 Spike Feeder
+4 Collected Company
+4 Once Upon a Time
+4 Teferi, Time Raveler
+1 Hallowed Fountain
+1 Prismatic Vista
+1 Temple Garden
+1 Breeding Pool
+2 Snow-Covered Island
+3 Snow-Covered Forest
+3 Snow-Covered Plains
+4 Flooded Strand
+4 Misty Rainforest
+[Sideboard]
+2 Damping Sphere
+2 Mystical Dispute
+2 Path to Exile
+2 Rest in Peace
+2 Weather the Storm
+2 Ashiok, Dream Render
+3 Veil of Summer

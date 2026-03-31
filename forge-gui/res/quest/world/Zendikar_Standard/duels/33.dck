@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Anansi
+Title=Anansi
+Icon=Anansi.jpg
+Difficulty=Medium
+Description=Zendikar/Zendikar_Game_Day_-_Cyborg_One_-_USA/Anthony_Karns_-_R-w_Control_(Standard,_#3526).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Armillary Sphere
+4 Burst Lightning
+2 Celestial Purge
+4 Lightning Bolt
+4 Path to Exile
+2 Banefire
+3 Earthquake
+3 Pyroclasm
+4 Ajani Vengeant
+4 Chandra Nalaar
+4 Arid Mesa
+14 Mountain
+4 Naya Panorama
+1 Plains
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+4 Day of Judgment
+2 Manabarbs
+2 Martial Coup
+3 Oblivion Ring

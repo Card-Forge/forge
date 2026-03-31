@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Horus
+Title=Horus
+Icon=Horus.jpg
+Difficulty=Hard
+Description=../Modern/Fate_Reforged/SCG_Invitational_Qualifier_Littleton/Zane_Houston_-_G-B_Midrange_(Modern,_#325637).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Courser of Kruphix
+4 Scavenging Ooze
+1 Tasigur, the Golden Fang
+2 Thragtusk
+4 Warden of the First Tree
+4 Abrupt Decay
+4 Disfigure
+2 Dismember
+1 Murderous Cut
+1 Maelstrom Pulse
+4 Thoughtseize
+3 Phyrexian Arena
+4 Forest
+4 Mutavault
+4 Overgrown Tomb
+1 Polluted Delta
+3 Swamp
+1 Urborg, Tomb of Yawgmoth
+4 Verdant Catacombs
+1 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+2 Creeping Corrosion
+3 Doom Blade
+2 Duress
+1 Golgari Charm
+2 Pithing Needle
+2 Thornling

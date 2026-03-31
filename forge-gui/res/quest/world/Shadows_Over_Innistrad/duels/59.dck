@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Token
+Title=Token
+Icon=Token.jpg
+Difficulty=Hard
+Description=../Modern/Shadows_over_Innistrad/Grand_Prix_Charlotte_2016/Brian_Braun-Duin_-_The_Rock_(Modern,_#621191).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Anafenza, the Foremost
+2 Archangel Avacyn
+4 Noble Hierarch
+4 Siege Rhino
+4 Tarmogoyf
+1 Tasigur, the Golden Fang
+3 Voice of Resurgence
+2 Abrupt Decay
+4 Path to Exile
+4 Lingering Souls
+1 Maelstrom Pulse
+4 Thoughtseize
+2 Forest
+2 Gavony Township
+1 Godless Shrine
+1 Horizon Canopy
+1 Isolated Chapel
+2 Overgrown Tomb
+1 Plains
+2 Razorverge Thicket
+2 Shambling Vent
+1 Swamp
+1 Temple Garden
+4 Verdant Catacombs
+4 Windswept Heath
+[Sideboard]
+2 Duress
+2 Feed the Clan
+1 Fracturing Gust
+2 Memoricide
+2 Nihil Spellbomb
+2 Stony Silence
+1 Worship
+2 Zealous Persecution

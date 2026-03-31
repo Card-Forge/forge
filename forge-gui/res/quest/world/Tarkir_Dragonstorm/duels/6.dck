@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=House Party
+Title=House Party
+Icon=House Party.jpg
+Difficulty=Easy
+Description=./Standard/Tarkir_Dragonstorm/Fujino_Hironobu_-_UBR_Control_(Standard,_#2438012).dck
+Deck Type=constructed
+
+[Main]
+3 Melek, Reforged Researcher
+4 Go for the Throat
+1 Mystical Teachings
+2 Pyrrhic Blast
+4 Sheoldred's Edict
+4 Moment of Truth
+3 Confounding Riddle
+2 Three Steps Ahead
+2 Shoot the Sheriff
+4 Pyroclasm
+2 Brotherhood's End
+4 Stock Up
+2 Strategic Betrayal
+1 Swamp
+2 Mountain
+3 Sulfurous Springs
+2 Underground River
+3 Raucous Theater
+3 Thundering Falls
+3 Blazemire Verge
+3 Gloomlake Verge
+3 Mistrise Village
+[Sideboard]
+3 Negate
+2 Essence Scatter
+3 Abrade
+2 Defabricate
+2 Three Steps Ahead
+3 Withering Torment

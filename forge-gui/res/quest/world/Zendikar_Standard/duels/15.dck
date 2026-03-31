@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Swan
+Title=Swan
+Icon=Swan.jpg
+Difficulty=Easy
+Description=Zendikar/Zendikar_Game_Day_-_Good_Games_-_Australia/Shuai_Chang_-_Mono_Red_(Standard,_#3578).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Ball Lightning
+4 Goblin Guide
+4 Hell's Thunder
+4 Hellspark Elemental
+4 Plated Geopede
+4 Burst Lightning
+4 Lightning Bolt
+2 Act of Treason
+3 Earthquake
+4 Arid Mesa
+12 Mountain
+4 Scalding Tarn
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+2 Banefire
+3 Dragon's Claw
+4 Goblin Ruinblaster
+2 Manabarbs
+1 Mark of Mutiny
+2 Unstable Footing

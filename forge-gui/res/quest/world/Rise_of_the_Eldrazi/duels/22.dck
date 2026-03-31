@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=BlackTalon
+Title=BlackTalon
+Icon=BlackTalon.jpg
+Difficulty=Medium
+Description=Rise_of_the_Eldrazi/StarCityGames_Standard_Open_-_Philadelphia_June-10/Ali_Aintrazi_-_Turboland_(Standard,_#1466).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Avenger of Zendikar
+1 Emrakul, the Aeons Torn
+4 Oracle of Mul Daya
+4 Overgrown Battlement
+1 Ulamog, the Infinite Gyre
+1 Expedition Map
+2 All Is Dust
+4 Explore
+3 Mind Spring
+4 Time Warp
+1 Garruk Wildspeaker
+3 Jace, the Mind Sculptor
+4 Eldrazi Temple
+1 Eye of Ugin
+6 Forest
+3 Halimar Depths
+7 Island
+4 Khalni Garden
+4 Misty Rainforest
+[Sideboard]
+2 Flashfreeze
+4 Fog
+1 Into the Roil
+2 Pithing Needle
+2 Sphinx of Jwar Isle
+2 Wall of Frost

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Zapp Brannigan
+Title=Zapp Brannigan
+Icon=Zapp Brannigan.jpg
+Difficulty=Hard
+Description=../Modern/Aether_Revolt/Guillaume_Lestruhaut_-_Token_(Modern,_#667448).dck
+Deck Type=constructed
+
+[Main]
+1 Dismember
+3 Fatal Push
+3 Path to Exile
+2 Raise the Alarm
+2 Secure the Wastes
+2 Zealous Persecution
+3 Inquisition of Kozilek
+4 Lingering Souls
+3 Thoughtseize
+1 Timely Reinforcements
+2 Bitterblossom
+4 Intangible Virtue
+1 Elspeth Tirel
+2 Gideon, Ally of Zendikar
+3 Sorin, Solemn Visitor
+4 Concealed Courtyard
+2 Ghost Quarter
+3 Godless Shrine
+4 Marsh Flats
+5 Plains
+2 Shambling Vent
+2 Swamp
+1 Vault of the Archangel
+1 Windswept Heath
+[Sideboard]
+2 Blessed Alliance
+2 Celestial Purge
+2 Leyline of Sanctity
+2 Pithing Needle
+1 Relic of Progenitus
+2 Rest in Peace
+2 Stony Silence
+2 Sundering Growth

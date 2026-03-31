@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Seabiscuit
+Title=Seabiscuit
+Icon=Seabiscuit.jpg
+Difficulty=Hard
+Description=./Modern/Ravnica_Allegiance/Hikokubo_Shouta_-_UBR_Control_(Modern,_#791144).dck
+Deck Type=constructed
+
+[Main]
+3 Snapcaster Mage
+1 Nicol Bolas, the Ravager
+2 Kalitas, Traitor of Ghet
+2 Tasigur, the Golden Fang
+4 Cremate
+3 Fatal Push
+2 Countersquall
+4 Lightning Bolt
+4 Kolaghan's Command
+2 Terminate
+2 Mana Leak
+2 Cryptic Command
+1 Spell Snare
+4 Inquisition of Kozilek
+1 Collective Brutality
+1 Painful Truths
+1 Search for Azcanta
+3 Island
+2 Swamp
+1 Mountain
+2 Creeping Tar Pit
+2 Steam Vents
+1 Blood Crypt
+1 Watery Grave
+2 Scalding Tarn
+4 Polluted Delta
+4 Bloodstained Mire
+[Sideboard]
+1 The Scorpion God
+1 Ritual of Soot
+2 Goblin Rabblemaster
+2 Fulminator Mage
+1 Bedevil
+2 Collective Brutality
+2 Cry of the Carnarium
+1 Shatterstorm
+2 Surgical Extraction
+1 Ceremonious Rejection

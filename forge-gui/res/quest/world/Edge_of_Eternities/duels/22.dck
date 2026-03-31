@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Seabiscuit
+Title=Seabiscuit
+Icon=Seabiscuit.jpg
+Difficulty=Medium
+Description=./Standard/Edge_of_Eternities/Aaron_Ward_-_Izzet_Cauldron_(Standard,_#2604641).dck
+Deck Type=constructed
+
+[Main]
+4 Fear of Missing Out
+4 Marauding Mako
+4 Vivi Ornitier
+3 Quantum Riddler
+3 Steamcore Scholar
+1 Tersa Lightshatter
+4 Agatha's Soul Cauldron
+3 Abrade
+3 Into the Flood Maw
+4 Winternight Stories
+1 Wild Ride
+4 Proft's Eidetic Memory
+5 Mountain
+4 Riverpyre Verge
+4 Spirebluff Canal
+3 Island
+2 Soulstone Sanctuary
+2 Starting Town
+2 Thundering Falls
+[Sideboard]
+2 Annul
+2 Broadside Barrage
+2 Disdainful Stroke
+2 Fire Magic
+2 Torch the Tower
+1 Marang River Regent
+1 Obliterating Bolt
+1 Ral, Crackling Wit
+1 Spell Pierce
+1 Tishana's Tidebinder

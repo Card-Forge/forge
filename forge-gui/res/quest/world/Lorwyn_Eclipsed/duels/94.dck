@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Frodo
+Title=Frodo
+Icon=Frodo.jpg
+Difficulty=Hard
+Description=./Modern/Lorwyn_Eclipsed/Giacomo_Magnani_-_Yawgmoth_(Modern,_#2788606).dck
+Deck Type=constructed
+
+[Main]
+1 Strangleroot Geist
+4 Delighted Halfling
+1 Ignoble Hierarch
+4 Yawgmoth, Thran Physician
+1 Endurance
+4 Young Wolf
+4 Badgermole Cub
+2 Formidable Speaker
+3 Walking Ballista
+4 Agatha's Soul Cauldron
+3 Green Sun's Zenith
+4 Malevolent Rumble
+3 Dredger's Insight
+1 Grist, the Hunger Tide
+2 Underground Mortuary
+2 Overgrown Tomb
+4 Windswept Heath
+1 Swamp
+2 Forest
+1 Dryad Arbor
+4 Verdant Catacombs
+2 Boseiju, Who Endures
+3 Spymaster's Vault
+[Sideboard]
+1 Grist, the Hunger Tide
+1 Endurance
+1 Force of Vigor
+1 Murderous Cut
+2 Damping Sphere
+1 Outland Liberator
+1 Vexing Bauble
+1 Scavenging Ooze
+4 Fatal Push
+2 Fulminator Mage

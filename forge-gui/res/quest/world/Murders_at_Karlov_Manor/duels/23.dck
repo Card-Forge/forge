@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Seabiscuit
+Title=Seabiscuit
+Icon=Seabiscuit.jpg
+Difficulty=Medium
+Description=./Standard/Murders_at_Karlov_Manor/Kasahara_Takashi_-_WU_Aggro_(Standard,_#1986750).dck
+Deck Type=constructed
+
+[Main]
+2 Gingerbrute
+3 Michiko's Reign of Truth
+2 Steel Seraph
+2 Skrelv, Defector Mite
+4 Norn's Inquisitor
+4 Spyglass Siren
+4 Novice Inspector
+2 Dusk Rose Reliquary
+2 Subterranean Schooner
+2 Cryptic Coat
+1 Spell Pierce
+2 Fading Hope
+4 Zoetic Glyph
+3 Case of the Filched Falcon
+6 Plains
+6 Island
+4 Adarkar Wastes
+2 Seachrome Coast
+1 Deserted Beach
+1 Eiganjo, Seat of the Empire
+1 Otawara, Soaring City
+1 Mirrex
+1 Restless Anchorage
+[Sideboard]
+2 Negate
+2 Soul-Guide Lantern
+1 Tezzeret, Betrayer of Flesh
+1 Depopulate
+3 Knockout Blow
+1 Soul Partition
+1 Archangel Elspeth
+1 Spring-Loaded Sawblades
+1 Subterranean Schooner
+2 No More Lies

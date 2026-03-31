@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=The Great Gazoo
+Title=The Great Gazoo
+Icon=The Great Gazoo.jpg
+Difficulty=Easy
+Description=Return_to_Ravnica/Grand_Prix_Nagoya/Ryuji_Murae_-_RB_Aggro_(Standard,_#42010).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ash Zealot
+4 Falkenrath Aristocrat
+3 Hellrider
+4 Knight of Infamy
+4 Rakdos Cackler
+4 Stromkirk Noble
+3 Thundermaw Hellkite
+4 Searing Spear
+2 Bonfire of the Damned
+4 Pillar of Flame
+4 Blood Crypt
+3 Cathedral of War
+4 Cavern of Souls
+4 Dragonskull Summit
+8 Mountain
+1 Swamp
+[Sideboard]
+2 Annihilating Fire
+1 Appetite for Brains
+1 Dreadbore
+1 Duress
+2 Mizzium Mortars
+2 Tormod's Crypt
+2 Tragic Slip
+1 Ultimate Price
+2 Volcanic Strength

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Silver Surfer
+Title=Silver Surfer
+Icon=Silver Surfer.jpg
+Difficulty=Medium
+Description=Rise_of_the_Eldrazi/National_Qualifier_2010_-_Kansai_-_Japan/Tadaki_Tsukagoshi_-_U-W_Control_(Standard,_#1439).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Baneslayer Angel
+3 Knight of the White Orchid
+2 Sphinx of Jwar Isle
+3 Wall of Omens
+3 Fieldmist Borderpost
+2 Negate
+3 Path to Exile
+3 Day of Judgment
+2 Martial Coup
+2 Mind Spring
+3 Oblivion Ring
+4 Spreading Seas
+2 Elspeth, Knight-Errant
+3 Jace, the Mind Sculptor
+4 Celestial Colonnade
+4 Glacial Fortress
+5 Island
+7 Plains
+2 Tectonic Edge
+[Sideboard]
+3 Celestial Purge
+1 Deprive
+1 Jace Beleren
+3 Kor Firewalker
+2 Kor Sanctifiers
+1 Telemin Performance
