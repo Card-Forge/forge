@@ -87,49 +87,8 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
             case Brawl:
                 return DeckgenUtil.generateCommanderDeck(isAi, GameType.Brawl);
             case DanDan:
-                while (true) {
-                    switch (Aggregates.random(DeckType.DanDanOptions)) {
-                        case DAN_DAN_DECK:
-                            if (!Iterables.isEmpty(DeckProxy.getAllDanDanDecks())) {
-                                return Aggregates.random(DeckProxy.getAllDanDanDecks()).getDeck();
-                            }
-                            continue;
-                        case PRECONSTRUCTED_DECK:
-                            return Aggregates.random(DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons())).getDeck();
-                        case QUEST_OPPONENT_DECK:
-                            return Aggregates.random(DeckProxy.getAllQuestEventAndChallenges()).getDeck();
-                        case COLOR_DECK:
-                            List<String> colorsDd = new ArrayList<>();
-                            int countDd = Aggregates.randomInt(1, 3);
-                            for (int i = 1; i <= countDd; i++) {
-                                colorsDd.add("Random " + i);
-                            }
-                            return DeckgenUtil.buildColorDeck(colorsDd, null, isAi);
-                        case STANDARD_CARDGEN_DECK:
-                            return DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().getStandard(), isAi);
-                        case PIONEER_CARDGEN_DECK:
-                            return DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().getPioneer(), isAi);
-                        case HISTORIC_CARDGEN_DECK:
-                            return DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().getHistoric(), isAi);
-                        case MODERN_CARDGEN_DECK:
-                            return DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().getModern(), isAi);
-                        case LEGACY_CARDGEN_DECK:
-                            return DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().get("Legacy"), isAi);
-                        case VINTAGE_CARDGEN_DECK:
-                            return DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().get("Vintage"), isAi);
-                        case PAUPER_CARDGEN_DECK:
-                            return DeckgenUtil.buildLDACArchetypeDeck(FModel.getFormats().getPauper(), isAi);
-                        case STANDARD_COLOR_DECK:
-                            return generateRandomColorDeckOfFormat(FModel.getFormats().getStandard());
-                        case MODERN_COLOR_DECK:
-                            return generateRandomColorDeckOfFormat(FModel.getFormats().getModern());
-                        case PAUPER_COLOR_DECK:
-                            return generateRandomColorDeckOfFormat(FModel.getFormats().getPauper());
-                        case THEME_DECK:
-                            return Aggregates.random(DeckProxy.getAllThemeDecks()).getDeck();
-                        default:
-                            continue;
-                    }
+                if (!Iterables.isEmpty(DeckProxy.getAllDanDanDecks())) {
+                    return Aggregates.random(DeckProxy.getAllDanDanDecks()).getDeck();
                 }
             case Archenemy:
                 return DeckgenUtil.generateSchemeDeck();
