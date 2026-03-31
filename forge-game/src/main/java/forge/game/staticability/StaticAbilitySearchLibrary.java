@@ -34,7 +34,9 @@ public class StaticAbilitySearchLibrary {
     }
 
     public static boolean cantSearchLibrary(Player player) {
-        return findStaticAbilityForValidPlayer(player, CantSearchLibrary).isPresent();
+        return findStaticAbilityForValidPlayer(player, CantSearchLibrary)
+                .filter(stAb -> !stAb.getIgnoreEffectPlayers().contains(player))
+                .isPresent();
     }
 
     public static boolean cantCauseToSearchLibrary(Player player) {
