@@ -20,7 +20,7 @@ import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
-import forge.game.staticability.StaticAbilityCantSearchLibrary;
+import forge.game.staticability.StaticAbilitySearchLibrary;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -1016,7 +1016,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 if (origin.contains(ZoneType.Library) && !sa.hasParam("NoLooking")) {
                     searchedLibrary = true;
 
-                    Integer fetchNum = StaticAbilityCantSearchLibrary.limitSearchLibraryConsideringSize(decider);
+                    Integer fetchNum = StaticAbilitySearchLibrary.limitSearchLibraryConsideringSize(decider);
                     if (fetchNum != null) {
                         fetchList.removeAll(player.getCardsIn(ZoneType.Library));
                         if (fetchNum == 0) {
@@ -1041,7 +1041,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 Set<ZoneType> revealZones = Sets.newHashSet();
                 Iterable<Card> toReveal = null;
                 if (origin.contains(ZoneType.Library) && searchedLibrary) {
-                    Integer fetchNum = StaticAbilityCantSearchLibrary.limitSearchLibraryConsideringSize(decider);
+                    Integer fetchNum = StaticAbilitySearchLibrary.limitSearchLibraryConsideringSize(decider);
                     // Look at whole library before moving onto choosing a card
                     toReveal = fetchNum != null ? player.getCardsIn(ZoneType.Library, fetchNum) : player.getCardsIn(ZoneType.Library);
                     revealZones.add(ZoneType.Library);

@@ -10,7 +10,7 @@ import static forge.game.staticability.StaticAbilityMode.LimitSearchLibrary;
 import static forge.game.staticability.StaticAbilityMode.CantCauseToSearchLibrary;
 
 
-public class StaticAbilityCantSearchLibrary {
+public class StaticAbilitySearchLibrary {
 
     /**
      * @return maximum number of cards which can be fetched from a library considering its size and search limit or null if there is no limit
