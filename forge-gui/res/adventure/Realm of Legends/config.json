@@ -158,7 +158,7 @@
     "CN2"
   ],
   "usePriceListPrices": false,
-  "allowChaos": false,
+  "chaosDeckFormat": "Commander",
   "difficulties": [
     {
       "name": "Easy",
