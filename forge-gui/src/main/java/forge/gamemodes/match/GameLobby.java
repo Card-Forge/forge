@@ -5,11 +5,13 @@ import com.google.common.collect.Maps;
 import com.google.common.primitives.Ints;
 import forge.LobbyPlayer;
 import forge.ai.AIOption;
+import forge.ai.AiProfileUtil;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckFormat;
 import forge.deck.DeckSection;
 import forge.game.GameType;
+import forge.game.GameRules;
 import forge.game.GameView;
 import forge.game.IHasGameType;
 import forge.game.player.Player;
@@ -37,6 +39,16 @@ public abstract class GameLobby implements IHasGameType {
     private GameLobbyData data = new GameLobbyData();
     private GameType currentGameType = GameType.Constructed;
     private int lastArchenemy = 0;
+    // whether to use shared team life in the GameRules when starting a match
+    private boolean useSharedTeamLife = false;
+
+    public void setUseSharedTeamLife(final boolean useSharedTeamLife) {
+        this.useSharedTeamLife = useSharedTeamLife;
+    }
+
+    public boolean getUseSharedTeamLife() {
+        return this.useSharedTeamLife;
+    }
 
     private IUpdateable listener;
 
@@ -525,10 +537,37 @@ public abstract class GameLobby implements IHasGameType {
         }
 
         //if above checks succeed, return runnable that can be used to finish starting game
-        return () -> {
+         return () -> {
             hostedMatch = GuiBase.getInterface().hostMatch();
             hostedMatch.setOnMatchOver(this::onMatchOver);
             hostedMatch.startMatch(GameType.Constructed, variantTypes, players, guis);
+            // Build GameRules from preferences (same defaults as HostedMatch.getDefaultRules)
+            final GameRules rules = new GameRules(GameType.Constructed);
+            rules.setPlayForAnte(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE));
+            rules.setMatchAnteRarity(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE_MATCH_RARITY));
+            rules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
+            rules.setOrderCombatants(FModel.getPreferences().getPrefBoolean(FPref.LEGACY_ORDER_COMBATANTS));
+            rules.setUseGrayText(FModel.getPreferences().getPrefBoolean(FPref.UI_GRAY_INACTIVE_TEXT));
+            rules.setGamesPerMatch(FModel.getPreferences().getPrefInt(FPref.UI_MATCHES_PER_GAME));
+            // AI specific sideboarding rules
+            switch (AiProfileUtil.getAISideboardingMode()) {
+                case Off:
+                    rules.setAISideboardingEnabled(false);
+                    rules.setSideboardForAI(false);
+                    break;
+                case AI:
+                    rules.setAISideboardingEnabled(true);
+                    rules.setSideboardForAI(false);
+                    break;
+                case HumanForAI:
+                    rules.setAISideboardingEnabled(true);
+                    rules.setSideboardForAI(true);
+                    break;
+            }
+            // apply shared team life setting from the lobby
+            rules.setUseSharedTeamLife(useSharedTeamLife);
+
+            hostedMatch.startMatch(rules, variantTypes, players, guis, null);
 
             for (final Player p : hostedMatch.getGame().getPlayers()) {
                 final LobbySlot slot = playerToSlot.get(p.getRegisteredPlayer());
@@ -537,11 +576,11 @@ public abstract class GameLobby implements IHasGameType {
                 }
             }
 
-            hostedMatch.gameControllers = gameControllers;
+             hostedMatch.gameControllers = gameControllers;
 
-            onGameStarted();
-        };
-    }
+             onGameStarted();
+         };
+     }
 
     protected void onMatchOver() {
         hostedMatch = null;

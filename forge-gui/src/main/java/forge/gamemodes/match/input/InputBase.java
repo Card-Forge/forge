@@ -140,7 +140,12 @@ public abstract class InputBase implements java.io.Serializable, Input {
         final PhaseHandler ph = game.getPhaseHandler();
         final StringBuilder sb = new StringBuilder();
         Localizer localizer = Localizer.getInstance();
-        sb.append(localizer.getMessage("lblPriority")).append(": ").append(ph.getPriorityPlayer()).append("\n");
+        sb.append(localizer.getMessage("lblPriority")).append(": ");
+        
+        // Get formatted active player message from priority manager
+        sb.append(ph.getActivePlayerMessage());
+        
+        sb.append("\n");
         sb.append(localizer.getMessage("lblTurn")).append(": ").append(ph.getTurn()).append(" (").append(ph.getPlayerTurn()).append(")");
 
         if (!game.isNeitherDayNorNight()) {

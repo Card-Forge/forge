@@ -170,7 +170,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private int numManaShards;
 
-    private int teamNumber = -1;
+    private Team team = Team.UNASSIGNED;
 
     private PlayerController controller;
     private final Game game;
@@ -267,11 +267,54 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final int getTeam() {
-        return teamNumber;
+        return team.getId();
     }
+
     public final void setTeam(int iTeam) {
-        teamNumber = iTeam;
+        Team newTeam;
+        if (game != null) {
+            newTeam = game.getOrCreateTeam(iTeam);
+        } else {
+            // If Game is null we're in trouble
+            newTeam = Team.of(iTeam);
+        }
+        this.team = newTeam;
+        this.team.addPlayer(this);
+        // If shared team life is enabled, initialize or sync life values
+        if (game != null && game.getRules().useSharedTeamLife() && this.team != null && this.team != Team.UNASSIGNED) {
+            if (!this.team.isStartingLifeInitialized()) {
+                // Use this player's startingLife as the team's starting life
+                this.team.setStartingLife(this.startingLife);
+                this.team.setLife(this.startingLife);
+            }
+            // Sync this player's life to the team's life
+            this.life = this.team.getLife();
+            view.updateLife(this);
+        }
     }
+
+    public final Team getTeamObject() {
+        return team;
+    }
+//
+//    public final void setTeamObject(final Team t) {
+//        if (t == null) {
+//            this.team = Team.UNASSIGNED;
+//        } else if (game != null) {
+//            this.team = game.getOrCreateTeam(t.getId());
+//        } else {
+//            this.team = t;
+//        }
+//        // Sync life to team if shared life enabled
+//        if (game != null && game.getRules().useSharedTeamLife() && this.team != null && this.team != Team.UNASSIGNED) {
+//            if (!this.team.isStartingLifeInitialized()) {
+//                this.team.setStartingLife(this.startingLife);
+//                this.team.setLife(this.startingLife);
+//            }
+//            this.life = this.team.getLife();
+//            view.updateLife(this);
+//        }
+//    }
 
     public boolean isArchenemy() {
         return getZone(ZoneType.SchemeDeck).size() > 0; //Only the archenemy has schemes.
@@ -409,7 +452,13 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public boolean isOpponentOf(Player other) {
-        return other != this && other != null && (other.teamNumber < 0 || other.teamNumber != teamNumber);
+        if (other == null || other == this) {
+            return false;
+        }
+        // if either player has an unassigned team (negative id) treat as opponent unless same player
+        int otherId = other.getTeam();
+        int myId = this.getTeam();
+        return (myId < 0) || (otherId != myId);
     }
     public boolean isOpponentOf(String other) {
         Player otherPlayer = null;
@@ -424,6 +473,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final boolean setLife(final int newLife, final SpellAbility sa) {
         boolean change = false;
+
         // rule 119.5
         if (life > newLife) {
             change = loseLife(life - newLife, false, false) > 0;
@@ -431,9 +481,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         else if (newLife > life) {
             change = gainLife(newLife - life, sa == null ? null : sa.getHostCard(), sa);
         }
-        else { // life == newLife
-            change = false;
-        }
+        // life == newLife is not a change, so do nothing
         return change;
     }
 
@@ -441,14 +489,66 @@ public class Player extends GameEntity implements Comparable<Player> {
         return startingLife;
     }
     public final void setStartingLife(final int startLife) {
-        //Should only be called from newGame().
+        //Should only be called from newGame(). If shared team life is enabled and player is on a team,
+        //initialize the team's starting life and sync players. Otherwise set per-player starting life.
         startingLife = startLife;
-        life = startLife;
+        if (game != null && game.getRules().useSharedTeamLife() && team != null && team != Team.UNASSIGNED) {
+            if (!team.isStartingLifeInitialized()) {
+                team.setStartingLife(startLife);
+                team.setLife(startLife);
+            }
+            // sync this player's life to the team
+            this.life = team.getLife();
+        } else {
+            life = startLife;
+        }
         view.updateLife(this);
     }
 
     public final int getLife() {
         return life;
+    }
+
+    /**
+     * Apply a life delta to this player. If shared team life is enabled and
+     * the player is on an assigned team, the change is applied to the team
+     * and all teammates are synchronized. Otherwise the change is applied to
+     * this player's individual life.
+     *
+     * @param delta positive to gain life, negative to lose life
+     * @param source optional Card source for triggers/events
+     * @param sa optional SpellAbility source for replacement rules
+     * @param manaBurn whether this change should trigger a mana burn event (only relevant for life loss)
+     * @return the previous life value (team- or player-level depending on rules)
+     */
+    private int applyLifeDelta(final int delta, final Card source, final SpellAbility sa, final boolean manaBurn) {
+        final boolean useShared = game != null && game.getRules().useSharedTeamLife() && team != null && team != Team.UNASSIGNED;
+        if (useShared) {
+            final int oldTeamLife = team.getLife();
+            team.setLife(oldTeamLife + delta);
+            final int newTeamLife = team.getLife();
+            // sync teammates' life and update views & fire per-player life-changed events
+            for (final Player p : team.getMembers()) {
+                p.life = newTeamLife;
+                p.view.updateLife(p);
+                game.fireEvent(new GameEventPlayerLivesChanged(p, oldTeamLife, newTeamLife));
+            }
+            if (manaBurn) {
+                // manaBurn is associated with a player-specific action, keep original player as source
+                game.fireEvent(new GameEventManaBurn(PlayerView.get(this), true, Math.abs(delta)));
+            }
+            return oldTeamLife;
+        }
+
+        final int oldLife = life;
+        life += delta;
+        view.updateLife(this);
+        if (manaBurn) {
+            game.fireEvent(new GameEventManaBurn(PlayerView.get(this), true, Math.abs(delta)));
+        } else {
+            game.fireEvent(new GameEventPlayerLivesChanged(this, oldLife, life));
+        }
+        return oldLife;
     }
 
     public final boolean gainLife(int lifeGain, final Card source, final SpellAbility sa) {
@@ -479,9 +579,8 @@ public class Player extends GameEntity implements Comparable<Player> {
             return false;
         }
 
-        int oldLife = life;
-        life += lifeGain;
-        view.updateLife(this);
+        // Centralized life application (handles shared team life)
+        int oldLife = applyLifeDelta(lifeGain, source, sa, false);
         boolean firstGain = lifeGainedTimesThisTurn == 0;
         lifeGainedThisTurn += lifeGain;
         lifeGainedTimesThisTurn++;
@@ -498,7 +597,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         runParams.put(AbilityKey.FirstTime, firstGain);
         game.getTriggerHandler().runTrigger(TriggerType.LifeGained, runParams, false);
 
-        game.fireEvent(new GameEventPlayerLivesChanged(this, oldLife, life));
+        // Already fired per-player events when syncing team life above
+        if (!(game != null && game.getRules().useSharedTeamLife() && team != null && team != Team.UNASSIGNED)) {
+            game.fireEvent(new GameEventPlayerLivesChanged(this, oldLife, life));
+        }
         return true;
     }
 
@@ -538,13 +640,8 @@ public class Player extends GameEntity implements Comparable<Player> {
             return 0;
         }
 
-        life -= toLose;
-        view.updateLife(this);
-        if (manaBurn) {
-            game.fireEvent(new GameEventManaBurn(PlayerView.get(this), true, toLose));
-        } else {
-            game.fireEvent(new GameEventPlayerLivesChanged(this, oldLife, life));
-        }
+        // Centralized life application (handles shared team life and mana burn)
+        int prevLife = applyLifeDelta(-toLose, null, null, manaBurn);
 
         boolean firstLost = lifeLostThisTurn == 0;
         lifeLostThisTurn += toLose;
@@ -2056,9 +2153,15 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         // Rule 704.5c - If a player has ten or more poison counters, he or she loses the game.
-        // 704.6b In a Two-Headed Giant game, if a team has fifteen or more poison counters, that team loses the game. See rule 810, “Two-Headed Giant Variant.”
-        if (getCounters(CounterEnumType.POISON) >= 10 && loseConditionMet(GameLossReason.Poisoned, null)) {
+        if (getCounters(CounterEnumType.POISON) >= getTeamObject().getPoisonThreshold() && loseConditionMet(GameLossReason.Poisoned, null)) {
             return true;
+        }
+
+        // 704.6b In a Two-Headed Giant game, if a team has fifteen or more poison counters, that team loses the game. See rule 810, “Two-Headed Giant Variant.”
+        if (game.getRules().useSharedTeamLife()) {
+            if (getTeamObject().getPoisonCounters() >= getTeamObject().getPoisonThreshold() && loseConditionMet(GameLossReason.Poisoned, null)) {
+                return true;
+            }
         }
 
         if (game.getRules().hasAppliedVariant(GameType.Commander)) {
@@ -3699,10 +3802,10 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (this.equals(other)) {
             return true;
         }
-        if (this.teamNumber < 0 || other.getTeam() < 0) {
+        if (this.getTeam() < 0 || other.getTeam() < 0) {
             return false;
         }
-        return this.teamNumber == other.getTeam();
+        return this.getTeam() == other.getTeam();
     }
 
     public final boolean isCursed() {

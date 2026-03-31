@@ -136,6 +136,8 @@ public class Game {
 
     private final GameView view;
     private final Tracker tracker = new Tracker();
+    // registry of team objects so players on the same team share mutable state (like life)
+    private final Map<Integer, Team> teams = new HashMap<>();
 
     /**
      * Gets the id.
@@ -376,6 +378,13 @@ public class Game {
 
     public GameView getView() {
         return view;
+    }
+
+    public Team getOrCreateTeam(int id) {
+        if (id == Team.UNASSIGNED_ID) {
+            return Team.UNASSIGNED;
+        }
+        return teams.computeIfAbsent(id, Team::of);
     }
 
     public Tracker getTracker() {
