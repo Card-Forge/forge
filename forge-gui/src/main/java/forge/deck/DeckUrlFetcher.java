@@ -163,14 +163,29 @@ public class DeckUrlFetcher {
             sb.append("\n");
         }
 
-        // Parse mainboard
+        // Collect commander/companion card names to avoid duplicates in mainboard
+        java.util.Set<String> commandZoneNames = new java.util.HashSet<>();
+        for (String line : commanders) {
+            // Lines are "N CardName" — extract the card name part
+            int spaceIdx = line.indexOf(' ');
+            if (spaceIdx > 0) commandZoneNames.add(line.substring(spaceIdx + 1).trim());
+        }
+        for (String line : companions) {
+            int spaceIdx = line.indexOf(' ');
+            if (spaceIdx > 0) commandZoneNames.add(line.substring(spaceIdx + 1).trim());
+        }
+
+        // Parse mainboard, excluding cards already in commander/companion zone
         List<String> mainboard = parseMoxfieldSection(json, "mainboard");
         if (!mainboard.isEmpty()) {
             sb.append("Main\n");
             for (String line : mainboard) {
+                int spaceIdx = line.indexOf(' ');
+                String cardName = spaceIdx > 0 ? line.substring(spaceIdx + 1).trim() : line;
+                if (commandZoneNames.contains(cardName)) continue;
                 sb.append(line).append("\n");
+                totalCards++;
             }
-            totalCards += mainboard.size();
             sb.append("\n");
         }
 
@@ -405,13 +420,16 @@ public class DeckUrlFetcher {
         }
 
         // Extract cards from "cardlists":[{"cardviews":[{"name":"Card Name",...},...]}]
+        // Exclude commanders to avoid duplicates
+        java.util.Set<String> cmdNames = new java.util.HashSet<>(commanders);
         List<String> cards = extractEdhrecCardlists(html);
         if (!cards.isEmpty()) {
             sb.append("Main\n");
             for (String card : cards) {
+                if (cmdNames.contains(card)) continue;
                 sb.append("1 ").append(card).append("\n");
+                totalCards++;
             }
-            totalCards += cards.size();
         }
 
         if (totalCards == 0) {
