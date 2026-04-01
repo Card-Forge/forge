@@ -3,13 +3,16 @@ package forge.menus;
 import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
 import javax.swing.JPanel;
+import javax.swing.JRadioButtonMenuItem;
 import javax.swing.SwingConstants;
 
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
+import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinnedLabel;
@@ -23,6 +26,9 @@ public final class AudioMenu {
         final Localizer localizer = Localizer.getInstance();
         final JMenu menu = new JMenu(localizer.getMessage("lblAudio"));
         menu.setMnemonic(KeyEvent.VK_A);
+        menu.add(getMenu_SoundSetOptions());
+        menu.add(getMenu_MusicSetOptions());
+        menu.addSeparator();
         int soundsVol = prefs.getPrefBoolean(FPref.UI_ENABLE_SOUNDS) ? prefs.getPrefInt(FPref.UI_VOL_SOUNDS) : 0;
         int musicVol = prefs.getPrefBoolean(FPref.UI_ENABLE_MUSIC) ? prefs.getPrefInt(FPref.UI_VOL_MUSIC) : 0;
         menu.add(buildSliderPanel(
@@ -42,6 +48,51 @@ public final class AudioMenu {
                     prefs.save();
                     SoundSystem.instance.refreshVolume();
                 }));
+        return menu;
+    }
+
+    private static JMenu getMenu_SoundSetOptions() {
+        final Localizer localizer = Localizer.getInstance();
+        final JMenu menu = new JMenu(localizer.getMessage("cbpSoundSets"));
+        final ButtonGroup group = new ButtonGroup();
+        final String currentSet = prefs.getPref(FPref.UI_CURRENT_SOUND_SET);
+        for (final String set : SoundSystem.instance.getAvailableSoundSets()) {
+            JRadioButtonMenuItem menuItem = new JRadioButtonMenuItem(set);
+            group.add(menuItem);
+            if (set.equals(currentSet)) {
+                menuItem.setSelected(true);
+            }
+            menuItem.setActionCommand(set);
+            menuItem.addActionListener(e -> {
+                prefs.setPref(FPref.UI_CURRENT_SOUND_SET, e.getActionCommand());
+                prefs.save();
+                SoundSystem.instance.invalidateSoundCache();
+            });
+            menu.add(menuItem);
+        }
+        return menu;
+    }
+
+    private static JMenu getMenu_MusicSetOptions() {
+        final Localizer localizer = Localizer.getInstance();
+        final JMenu menu = new JMenu(localizer.getMessage("cbpMusicSets"));
+        final ButtonGroup group = new ButtonGroup();
+        final String currentSet = prefs.getPref(FPref.UI_CURRENT_MUSIC_SET);
+        for (final String set : SoundSystem.getAvailableMusicSets()) {
+            JRadioButtonMenuItem menuItem = new JRadioButtonMenuItem(set);
+            group.add(menuItem);
+            if (set.equals(currentSet)) {
+                menuItem.setSelected(true);
+            }
+            menuItem.setActionCommand(set);
+            menuItem.addActionListener(e -> {
+                prefs.setPref(FPref.UI_CURRENT_MUSIC_SET, e.getActionCommand());
+                prefs.save();
+                MusicPlaylist.invalidateMusicPlaylist();
+                SoundSystem.instance.changeBackgroundTrack();
+            });
+            menu.add(menuItem);
+        }
         return menu;
     }
 

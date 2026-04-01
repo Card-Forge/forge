@@ -629,12 +629,11 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         // this happens if it's transformed backside (e.g. Disturbed)
         if (type.isAura()) {
             return getAuraSpell();
-        } else {
-            if (permanentAbility == null) {
-                permanentAbility = new SpellPermanent(card, this);
-            }
-            return permanentAbility;
         }
+        if (permanentAbility == null) {
+            permanentAbility = new SpellPermanent(card, this);
+        }
+        return permanentAbility;
     }
 
     public final SpellAbility getAuraSpell() {
