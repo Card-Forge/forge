@@ -7,7 +7,6 @@ import java.util.Optional;
 
 import static forge.game.staticability.StaticAbilityMode.CantSearchLibrary;
 import static forge.game.staticability.StaticAbilityMode.LimitSearchLibrary;
-import static forge.game.staticability.StaticAbilityMode.CantCauseToSearchLibrary;
 
 
 public class StaticAbilitySearchLibrary {
@@ -37,10 +36,6 @@ public class StaticAbilitySearchLibrary {
         return findStaticAbilityForValidPlayer(player, CantSearchLibrary)
                 .filter(stAb -> !stAb.getIgnoreEffectPlayers().contains(player))
                 .isPresent();
-    }
-
-    public static boolean cantCauseToSearchLibrary(Player player) {
-        return findStaticAbilityForValidPlayer(player, CantCauseToSearchLibrary).isPresent();
     }
 
     private static Optional<StaticAbility> findStaticAbilityForValidPlayer(final Player player, final StaticAbilityMode mode) {

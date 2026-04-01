@@ -3727,7 +3727,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             return false;
         }
         return targetPlayer == null || !targetPlayer.equals(sa.getActivatingPlayer())
-                || !StaticAbilitySearchLibrary.cantCauseToSearchLibrary(this);
+                || !StaticAbilitySearchLibrary.cantSearchLibrary(targetPlayer);
     }
 
     public void addAdditionalVote(long timestamp, int value) {
