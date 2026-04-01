@@ -87,8 +87,6 @@ forge-gui/tools/AllCards.json
 forge-gui/tools/EditionTrackingResults
 forge-gui/tools/PerSetTrackingResults
 
-tools/**
-
 *.tiled-session
 /forge-gui/res/adventure/*.tiled-project
 /forge-gui/res/adventure/*.tiled-session
