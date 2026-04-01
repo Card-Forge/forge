@@ -256,20 +256,21 @@ public class TokenAi extends SpellAbilityAi {
                 if (tgtRoleAura(ai, sa, actualToken, mandatory)) {
                     // Targeting handled in tgtRoleAura
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                } else {
-                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 }
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
 
-            if (tgt.canOnlyTgtOpponent()) {
+            if (sa.canTarget(ai)) {
+                sa.getTargets().add(ai);
+            } else if (mandatory || tgt.canOnlyTgtOpponent()) {
                 PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
-                if (mandatory && targetableOpps.isEmpty()) {
-                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                if (targetableOpps.isEmpty()) {
+                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 }
                 Player opp = targetableOpps.min(PlayerPredicates.compareByLife());
                 sa.getTargets().add(opp);
             } else {
-                sa.getTargets().add(ai);
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
         }
 
