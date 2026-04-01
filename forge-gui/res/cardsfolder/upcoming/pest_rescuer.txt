@@ -1,0 +1,11 @@
+Name:Pest Rescuer
+ManaCost:2 G
+Types:Creature Dryad Druid
+PT:2/2
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigToken | IsPresent$ Creature.Pest+token+YouCtrl | PresentCompare$ EQ0 | TriggerDescription$ At the beginning of each upkeep, if you don't control a Pest creature token, create a 1/1 black and green Pest creature token with "When this token dies, you gain 1 life.
+SVar:TrigToken:DB$ Token | TokenScript$ bg_1_1_pest_lifegain | TokenOwner$ You
+SVar:GainLife:DB$ ReplaceEffect | VarName$ LifeGained | VarValue$ X
+SVar:X:ReplaceCount$LifeGained/Plus.1
+SVar:PlayMain1:True
+DeckHints:Ability$LifeGain
+Oracle:At the beginning of each upkeep, if you don't control a Pest creature token, create a 1/1 black and green Pest creature token with "When this token dies, you gain 1 life."\nIf you would gain life, you gain that much life plus 1 instead.
