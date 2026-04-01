@@ -8,6 +8,6 @@ SVar:DBLoseLife1:DB$ LoseLife | LifeAmount$ 1
 A:AB$ Destroy | Cost$ SubCounter<3/LOYALTY> | ValidTgts$ Creature | Planeswalker$ True | SpellDescription$ Destroy target creature.
 A:AB$ Effect | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem — Professor Dellian Fel | Image$ emblem_professor_dellian_fel | Triggers$ LifeGainTrigger | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Whenever you gain life, target opponent loses that much life."
 SVar:LifeGainTrigger:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever you gain life, target opponent loses that much life.
-SVar:TrigDrain:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ X
+SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ X
 SVar:X:TriggerCount$LifeAmount
 Oracle:[+2]: You gain 3 life.\n[0]: You draw a card and lose 1 life.\n[-3]: Destroy target creature.\n[-6]: You get an emblem with "Whenever you gain life, target opponent loses that much life."
