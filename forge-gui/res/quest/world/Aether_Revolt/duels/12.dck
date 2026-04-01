@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=BlackTalon
+Title=BlackTalon
+Icon=BlackTalon.jpg
+Difficulty=Easy
+Description=Aether_Revolt/Matthew_Rayes_-_Wx_Vehicles_(Standard,_#664232).dck
+Deck Type=constructed
+
+[Main]
+3 Inventor's Apprentice
+4 Scrapheap Scrounger
+3 Thalia, Heretic Cathar
+4 Thraben Inspector
+4 Toolcraft Exemplar
+4 Veteran Motorist
+3 Cultivator's Caravan
+4 Heart of Kiran
+3 Shock
+4 Unlicensed Disintegration
+2 Gideon, Ally of Zendikar
+2 Aether Hub
+4 Concealed Courtyard
+4 Inspiring Vantage
+4 Mountain
+4 Plains
+4 Spire of Industry
+[Sideboard]
+1 Anguished Unmaking
+1 Chandra, Torch of Defiance
+3 Declaration in Stone
+2 Fragmentize
+2 Gideon, Ally of Zendikar
+1 Key to the City
+1 Lantern Spirit
+1 Needle Spires
+1 Selfless Spirit
+1 Shock
+1 Skysovereign, Consul Flagship

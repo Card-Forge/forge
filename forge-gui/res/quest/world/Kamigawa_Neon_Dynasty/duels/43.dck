@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Fin Fang Foom
+Title=Fin Fang Foom
+Icon=Fin Fang Foom.jpg
+Difficulty=Easy
+Description=./Standard/Kamigawa_Neon_Dynasty/95magic_-_Mono-White_Aggro_-_SNC_Standard_(Standard,_#1370999).dck
+Deck Type=constructed
+
+[Main]
+1 Legion Angel
+2 Brutal Cathar
+2 Skyclave Apparition
+2 Intrepid Adversary
+3 Adeline, Resplendent Cathar
+4 Luminarch Aspirant
+4 Thalia, Guardian of Thraben
+4 Usher of the Fallen
+4 Hopeful Initiate
+4 Elite Spellbinder
+2 Portable Hole
+4 The Wandering Emperor
+2 Eiganjo, Seat of the Empire
+3 Crawling Barrens
+3 Cave of the Frost Dragon
+16 Plains
+[Sideboard]
+1 Skyclave Apparition
+1 Portable Hole
+1 Brutal Cathar
+2 Reidane, God of the Worthy
+2 Guardian of Faith
+2 Fateful Absence
+3 Legion Angel
+3 Wedding Announcement

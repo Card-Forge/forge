@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Spiderman
+Title=Spiderman
+Icon=Spiderman.jpg
+Difficulty=Hard
+Description=./Modern/Adventures_in_the_Forgotten_Realms/DragonFodder_-_Rakdos_Food_(Modern,_#1198878).dck
+Deck Type=constructed
+
+[Main]
+2 Flamekin Harbinger
+2 Insolent Neonate
+2 Kroxa, Titan of Death's Hunger
+3 Spitebellows
+3 Stitcher's Supplier
+4 Lightning Skelemental
+4 Thunderkin Awakener
+1 The Underworld Cookbook
+2 Fatal Push
+2 Baleful Mastery
+4 Lightning Bolt
+4 Village Rites
+1 Legion's End
+1 Discerning Taste
+4 Unearth
+1 Marsh Flats
+1 Mountain
+1 Polluted Delta
+1 Sunbaked Canyon
+2 Den of the Bugbear
+3 Swamp
+4 Bloodstained Mire
+4 Blackcleave Cliffs
+4 Blood Crypt
+[Sideboard]
+1 Shenanigans
+1 Baleful Mastery
+1 Anger of the Gods
+2 Blood Moon
+2 Boil
+2 Feed the Swarm
+2 Kozilek's Return
+2 Rakdos Charm
+2 Shatterstorm

@@ -158,9 +158,8 @@ public class AnimateAi extends SpellAbilityAi {
             return new AiAbilityDecision(0, AiPlayDecision.CostNotAcceptable);
         }
 
-        if (sa.costHasManaX() && sa.getSVar("X").equals("Count$xPaid")) {
-            final int xPay = ComputerUtilCost.getMaxXValue(sa, aiPlayer, sa.isTrigger());
-            sa.setXManaCostPaid(xPay);
+        if (sa.costHasManaX()) {
+            ComputerUtilCost.setMaxXValue(sa, aiPlayer, sa.isTrigger());
         }
 
         if (sa.usesTargeting()) {

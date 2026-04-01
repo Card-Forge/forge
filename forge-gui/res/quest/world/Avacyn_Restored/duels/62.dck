@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Buffy
+Title=Buffy
+Icon=Buffy.jpg
+Difficulty=Hard
+Description=../Modern/Avacyn_Restored/SCG_Invitational_Qualifier_-_Newington,_CT/Jared_Ringrose_-_Infect_(Modern,_#69478).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blighted Agent
+4 Glistener Elf
+4 Ichorclaw Myr
+4 Noble Hierarch
+1 Spellskite
+[Sideboard]
+4 Apostle's Blessing
+4 Breeding Pool
+3 Dismember
+2 Dispel
+1 Distortion Strike
+2 Forest
+4 Groundswell
+4 Inkmoth Nexus
+4 Might of Old Krosa
+4 Misty Rainforest
+3 Mutagenic Growth
+4 Nature's Claim
+1 Pendelhaven
+3 Rancor
+3 Ranger's Guile
+1 Spell Pierce
+4 Verdant Catacombs
+4 Vines of Vastwood
+1 Wild Defiance

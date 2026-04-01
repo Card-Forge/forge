@@ -51,7 +51,7 @@ There is no built-in matchmaking. Network play is designed for playing against p
      - **Remote play:** Verify the host's external IP at [canyouseeme.org](http://canyouseeme.org).
  7. **Client** enters the host's address in the connection dialog and clicks OK.
      - The address format is **`IP:port`** — for example: `192.168.1.50:36743` (local) or `203.0.113.45:36743` (remote).
-     - If the port is omitted, Forge defaults to 36743.
+     - If the port is omitted, Forge defaults to 36743 (=FORGE on older phone keypads).
 8. **Configure the match:**
      - Host selects match type, teams, and game settings.
      - All players select decks, sleeves, and avatars.
@@ -169,9 +169,15 @@ Forge has built-in **UPnP** support that can automatically configure your router
 | **Not Now** | Skip UPnP this time. You will be prompted again next time. |
 | **Never** | Never attempt UPnP. Saved as a preference. You will need to configure port forwarding manually. |
 
-**If UPnP succeeds**, no manual router configuration is needed — skip to [Validate External Access](#2-validate-external-access) below.
+**If UPnP succeeds**, Forge will display a confirmation in the lobby chat:
+> UPnP: Port 36743 forwarded successfully. Remote players should be able to connect using your external IP.
 
-**If UPnP fails**, Forge will notify you that the port could not be opened automatically. You will need to configure port forwarding manually using the steps below. Common reasons for failure: UPnP is disabled on the router, the router doesn't support UPnP, or a firewall is blocking UPnP discovery.
+No manual router configuration is needed — skip to [Validate External Access](#2-validate-external-access) below.
+
+**If UPnP fails**, Forge will display a notification in the lobby chat after a few seconds:
+> UPnP: Automatic port forwarding failed for port 36743. You may need to set up manual port forwarding for remote play.
+
+You will need to configure port forwarding manually using the steps below. Common reasons for failure: UPnP is disabled on the router, the router doesn't support UPnP, or a firewall is blocking UPnP discovery.
 
 ### 1. Manual Port Forwarding on the Router
 

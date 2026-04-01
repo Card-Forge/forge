@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Odin
+Title=Odin
+Icon=Odin.jpg
+Difficulty=Easy
+Description=Shadows_over_Innistrad/SCG_States_Burnsville/Calvin_Buchanan_-_Rakdos_(Standard,_#615308).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Dark-Dwellers
+3 Kalitas, Traitor of Ghet
+2 Pia and Kiran Nalaar
+4 Sin Prodder
+3 Fiery Impulse
+4 Grasp of Darkness
+4 Kolaghan's Command
+1 Ultimate Price
+2 Languish
+2 Read the Bones
+2 Ruinous Path
+3 Transgress the Mind
+1 Ob Nixilis Reignited
+4 Foreboding Ruins
+7 Mountain
+4 Smoldering Marsh
+10 Swamp
+[Sideboard]
+2 Duress
+2 Infinite Obliteration
+2 Rending Volley
+2 Roast
+4 Self-Inflicted Wound
+1 To the Slaughter

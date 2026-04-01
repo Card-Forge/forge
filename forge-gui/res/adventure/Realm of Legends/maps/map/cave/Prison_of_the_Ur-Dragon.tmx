@@ -92,7 +92,7 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Tome of the Guildpact&quot;, &quot;Glass of the Guildpact&quot;, &quot;Hero of Precinct One&quot;, &quot;Jenson Carthalion, Druid Exile&quot;]}"/>
     <property name="enemy" value="Jared"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
@@ -107,7 +107,7 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ancient Ziggurat&quot;, &quot;Rupture Spire&quot;, &quot;Exotic Orchard&quot;, &quot;Relic of Progenitus&quot;, &quot;Wall of Denial&quot;]}"/>
     <property name="enemy" value="Progenitus"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
@@ -122,7 +122,7 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dragonweave Tapestry&quot;, &quot;Dragonstorm Globe&quot;, &quot;Mox Jasper&quot;, &quot;Dragonfire Blade&quot;]}"/>
     <property name="enemy" value="Scion of the Ur-Dragon"/>
     <property name="pursueRange" type="int" value="30"/>
     <property name="threatRange" type="int" value="0"/>
@@ -138,7 +138,7 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Disrupting Scepter|LEB&quot;, &quot;Chaos Orb|LEB&quot;, &quot;Sol Ring|LEB&quot;, &quot;Living Wall|LEB&quot;, &quot;Juggernaut|LEB&quot;]}"/>
     <property name="enemy" value="Garth"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
@@ -153,7 +153,7 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Exploration&quot;, &quot;Path of Discovery&quot;]}"/>
     <property name="enemy" value="Golos"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>

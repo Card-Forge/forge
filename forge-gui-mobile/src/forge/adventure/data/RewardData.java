@@ -285,16 +285,20 @@ public class RewardData implements Serializable {
                             .forEach(allEditions::add);
                         ConfigData configData = Config.instance().getConfigData();
 
-                        for (String restricted : configData.restrictedEditions) {
-                            allEditions.removeIf(q -> q.getCode().equals(restricted));
+                        if (this.editions != null && this.editions.length > 0) {
+                            Set<String> allowed = new HashSet<>(Arrays.asList(this.editions));
+                            allEditions.removeIf(q -> !allowed.contains(q.getCode()));
+                        } else {
+                            for (String restricted : configData.restrictedEditions) {
+                                allEditions.removeIf(q -> q.getCode().equals(restricted));
+                            }
+                            for (String restrictedCard : configData.restrictedCards) {
+                                allEditions.removeIf(cardEdition -> cardEdition.getObtainableCards().stream().anyMatch(
+                                    o -> o.name().equals(restrictedCard)));
+                            }
+                            endDate = endDate == 0 ? 9999 : endDate;
+                            allEditions.removeIf(q -> q.getDate().getYear()+1900 < startDate || q.getDate().getYear()+1900 > endDate);
                         }
-                        for (String restrictedCard : configData.restrictedCards) {
-                            allEditions.removeIf(cardEdition -> cardEdition.getObtainableCards().stream().anyMatch(
-                                o -> o.name().equals(restrictedCard)));
-                        }
-
-                        endDate = endDate == 0 ? 9999 : endDate;
-                        allEditions.removeIf(q -> q.getDate().getYear()+1900 < startDate || q.getDate().getYear()+1900 > endDate);
                         for (int i = 0; i < count + addedCount; i++) {
                             ret.add(new Reward(AdventureEventController.instance().generateBooster(
                                 allEditions.get(rewardRandom.nextInt(allEditions.size())).getCode())));

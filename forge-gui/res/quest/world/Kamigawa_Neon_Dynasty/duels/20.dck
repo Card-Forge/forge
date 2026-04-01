@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Hermes Conrad
+Title=Hermes Conrad
+Icon=Hermes Conrad.jpg
+Difficulty=Medium
+Description=./Standard/Kamigawa_Neon_Dynasty/Bradley_Yoo_-_Naya_Runes_(Standard,_#1351782).dck
+Deck Type=constructed
+
+[Main]
+2 Michiko's Reign of Truth
+4 Fable of the Mirror-Breaker
+4 Runeforge Champion
+4 Kami of Transience
+4 Jukai Naturalist
+4 Generous Visitor
+3 Rune of Sustenance
+4 Showdown of the Skalds
+4 Rune of Speed
+4 Rune of Might
+1 Lair of the Hydra
+1 Eiganjo, Seat of the Empire
+1 Boseiju, Who Endures
+2 Plains
+2 Forest
+4 Branchloft Pathway
+4 Cragcrown Pathway
+4 Needleverge Pathway
+4 Sundown Pass
+[Sideboard]
+1 Tamiyo's Safekeeping
+2 Yasharn, Implacable Earth
+2 Wedding Announcement
+2 The Wandering Emperor
+2 Portable Hole
+2 Fateful Absence
+4 Circle of Confinement

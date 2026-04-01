@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Ogun
+Title=Ogun
+Icon=Ogun.jpg
+Difficulty=Hard
+Description=./Modern/Strixhaven_School_of_Mages/MiguelCaster_-_Death_and_Taxes_(Modern,_#1166153).dck
+Deck Type=constructed
+
+[Main]
+3 Wall of Omens
+4 Elite Spellbinder
+4 Flickerwisp
+4 Giver of Runes
+4 Skyclave Apparition
+4 Stoneforge Mystic
+4 Tidehollow Sculler
+4 Wasteland Strangler
+4 Charming Prince
+1 Sword of Fire and Ice
+1 Maul of the Skyclaves
+1 Batterskull
+4 Aether Vial
+4 Ephemerate
+4 Path to Exile
+1 Swamp
+2 Shambling Vent
+2 Windswept Heath
+3 Silent Clearing
+3 Field of Ruin
+3 Godless Shrine
+4 Plains
+4 Marsh Flats
+4 Concealed Courtyard
+4 Brightclimb Pathway
+[Sideboard]
+1 Yorion, Sky Nomad
+1 Vanishing Verse
+1 Kaya, Orzhov Usurper
+1 Isolate
+2 Fatal Push
+2 Leonin Relic-Warder
+3 Auriok Champion
+4 Ashiok, Dream Render

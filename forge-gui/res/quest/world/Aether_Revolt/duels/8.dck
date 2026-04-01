@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Gollum
+Title=Gollum
+Icon=Gollum.jpg
+Difficulty=Medium
+Description=Aether_Revolt/Horiuchi_Makoto_-_BG_Aggro_(Standard,_#666253).dck
+Deck Type=constructed
+
+[Main]
+4 Grim Flayer
+1 Ishkanah, Grafwidow
+3 Mindwrack Demon
+4 Tireless Tracker
+4 Verdurous Gearhulk
+4 Walking Ballista
+4 Winding Constrictor
+2 Fatal Push
+3 Grasp of Darkness
+1 To the Slaughter
+2 Ruinous Path
+3 Traverse the Ulvenwald
+1 Nissa, Voice of Zendikar
+4 Blooming Marsh
+3 Evolving Wilds
+6 Forest
+4 Hissing Quagmire
+7 Swamp
+[Sideboard]
+2 Appetite for the Unnatural
+1 Fatal Push
+3 Lifecrafter's Bestiary
+1 Liliana, the Last Hope
+1 Noxious Gearhulk
+1 Ob Nixilis Reignited
+1 To the Slaughter
+3 Transgress the Mind
+2 Yahenni's Expertise

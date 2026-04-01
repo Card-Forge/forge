@@ -162,6 +162,7 @@ public enum StaticAbilityMode {
 
     // StaticAbilityFlipCoinMod
     FlipCoinMod,
+    FlipCoinDoubler,
 
     // StaticAbilityPlotZone
     PlotZone,

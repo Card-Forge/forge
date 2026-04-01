@@ -1,0 +1,53 @@
+[duel]
+[metadata]
+Name=Finn the Human
+Title=Finn the Human
+Icon=Finn the Human.jpg
+Difficulty=Very Hard
+Description=./Modern/War_of_the_Spark/Landon_Redoutey_-_Azorius_Control_(Modern,_#795988).dck
+Deck Type=constructed
+
+[Main]
+2 Snapcaster Mage
+1 Relic of Progenitus
+1 Absorb
+3 Cryptic Command
+1 Dovin's Veto
+2 Hieroglyphic Illumination
+2 Logic Knot
+1 Mana Leak
+3 Opt
+4 Path to Exile
+1 Settle the Wreckage
+1 Surgical Extraction
+1 Oust
+1 Serum Visions
+1 Supreme Verdict
+2 Terminus
+1 Timely Reinforcements
+1 Detention Sphere
+1 Search for Azcanta
+3 Jace, the Mind Sculptor
+2 Teferi, Hero of Dominaria
+6 Island
+3 Plains
+4 Celestial Colonnade
+4 Field of Ruin
+4 Flooded Strand
+1 Ghost Quarter
+1 Glacial Fortress
+2 Hallowed Fountain
+[Sideboard]
+1 Damping Sphere
+1 Cataclysmic Gearhulk
+1 Baneslayer Angel
+1 Detention Sphere
+2 Rest in Peace
+1 Stony Silence
+1 Celestial Purge
+1 Ceremonious Rejection
+1 Disdainful Stroke
+1 Dispel
+2 Dovin's Veto
+1 Timely Reinforcements
+1 Wrath of God

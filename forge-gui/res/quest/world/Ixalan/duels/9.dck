@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Robot9
+Title=Robot9
+Icon=Electro.jpg
+Difficulty=Medium
+Description=Temur Energy 
+Deck Type=constructed
+
+[Main]
+3 Bristling Hydra
+1 Carnage Tyrant
+3 Glorybringer
+4 Longtusk Cub
+4 Rogue Refiner
+4 Servant of the Conduit
+4 Whirler Virtuoso
+1 Abrade
+2 Essence Scatter
+4 Harnessed Lightning
+2 Magma Spray
+4 Attune with Aether
+2 Chandra, Torch of Defiance
+4 Aether Hub
+4 Botanical Sanctum
+4 Forest
+1 Island
+2 Mountain
+3 Rootbound Crag
+1 Sheltered Thicket
+3 Spirebluff Canal
+[Sideboard]
+1 Abrade
+1 Aethersphere Harvester
+1 Carnage Tyrant
+2 Chandra's Defeat
+1 Chandra, Torch of Defiance
+1 Confiscation Coup
+1 Jace's Defeat
+3 Negate
+2 River's Rebuke
+1 Slice in Twain
+1 Spell Pierce

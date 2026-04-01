@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Minerva McGonagall
+Title=Minerva McGonagall
+Icon=Minerva McGonagall.jpg
+Difficulty=Easy
+Description=./Standard/Innistrad_Crimson_Vow/Al_carrer!_-_Orzhov_Control_(Standard,_#1238990).dck
+Deck Type=constructed
+
+[Main]
+2 Nighthawk Scavenger
+2 Concealing Curtains
+2 Edgar, Charmed Groom
+3 Fell Stinger
+4 Graveyard Trespasser
+4 Shambling Ghast
+2 Deadly Dispute
+3 Vanishing Verse
+3 Infernal Grasp
+4 Blood on the Snow
+1 The Meathook Massacre
+2 Sorin the Mirthless
+3 Lolth, Spider Queen
+1 Shattered Sanctum
+4 Faceless Haven
+4 Brightclimb Pathway
+4 Snowfield Sinkhole
+6 Snow-Covered Swamp
+6 Snow-Covered Plains
+[Sideboard]
+1 By Invitation Only
+1 The Meathook Massacre
+2 Dread Fugue
+2 Bloodchief's Thirst
+3 Go Blank
+3 Elite Spellbinder
+3 Thalia, Guardian of Thraben

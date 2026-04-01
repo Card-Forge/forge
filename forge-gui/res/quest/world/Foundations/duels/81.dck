@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Ras Al Ghul
+Title=Ras Al Ghul
+Icon=Ras Al Ghul.jpg
+Difficulty=Very Hard
+Description=./Modern/Foundations/Carmel_Salinas_-_Burn_(Modern,_#2275724).dck
+Deck Type=constructed
+
+[Main]
+4 Monastery Swiftspear
+4 Goblin Guide
+4 Lightning Bolt
+4 Searing Blaze
+4 Skullcrack
+2 Shard Volley
+4 Bump in the Night
+4 Lava Spike
+4 Boltwave
+4 Skewer the Critics
+2 Flame Rift
+2 Scalding Tarn
+4 Blackcleave Cliffs
+2 Blood Crypt
+4 Bloodstained Mire
+4 Sunbaked Canyon
+1 Barbarian Ring
+3 Mountain
+[Sideboard]
+2 Smash to Smithereens
+3 Searing Blood
+2 Exquisite Firecraft
+2 Tormod's Crypt
+3 Rakdos Charm
+3 Rain of Gore

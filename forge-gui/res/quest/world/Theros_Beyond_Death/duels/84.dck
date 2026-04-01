@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=The Court Jester
+Title=The Court Jester
+Icon=The Court Jester.jpg
+Difficulty=Very Hard
+Description=./Modern/Theros_Beyond_Death/BoromirofGondor_-_Snow_Control_(Modern,_#1057223).dck
+Deck Type=constructed
+
+[Main]
+1 Deputy of Detention
+1 Geist of Saint Traft
+2 Uro, Titan of Nature's Wrath
+2 Birds of Paradise
+4 Stoneforge Mystic
+4 Spell Queller
+4 Noble Hierarch
+4 Ice-Fang Coatl
+1 Batterskull
+1 Sword of Fire and Ice
+1 Sword of Feast and Famine
+3 Force of Negation
+3 Mana Leak
+4 Path to Exile
+3 Teferi, Time Raveler
+1 Snow-Covered Plains
+1 Temple Garden
+1 Hallowed Fountain
+1 Breeding Pool
+2 Waterlogged Grove
+2 Windswept Heath
+3 Snow-Covered Island
+3 Snow-Covered Forest
+4 Misty Rainforest
+4 Flooded Strand
+[Sideboard]
+2 Aether Gust
+2 Celestial Purge
+2 Damping Sphere
+2 On Thin Ice
+2 Timely Reinforcements
+2 Veil of Summer
+3 Ashiok, Dream Render

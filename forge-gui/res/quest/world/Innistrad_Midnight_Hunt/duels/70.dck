@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Ratbert
+Title=Ratbert
+Icon=Ratbert.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Midnight_Hunt/Inada_Keisuke_-_Human_Aggro_(Modern,_#1216539).dck
+Deck Type=constructed
+
+[Main]
+1 Adeline, Resplendent Cathar
+1 Phantasmal Image
+1 Sanctifier en-Vec
+1 Reflector Mage
+1 Deputy of Detention
+3 Imperial Recruiter
+4 Esper Sentinel
+4 Thalia's Lieutenant
+4 Rem Karolus, Stalwart Slayer
+4 Meddling Mage
+4 Unsettled Mariner
+4 Champion of the Parish
+4 Aether Vial
+4 Lightning Bolt
+1 Steam Vents
+1 Hallowed Fountain
+1 Sacred Foundry
+1 Island
+2 Spirebluff Canal
+2 Plains
+2 Inspiring Vantage
+3 Arid Mesa
+3 Cavern of Souls
+4 Flooded Strand
+[Sideboard]
+1 Sanctum Prelate
+1 Auriok Champion
+2 Rest in Peace
+2 Prismatic Ending
+2 Flusterstorm
+2 Boros Charm
+2 Lavinia, Azorius Renegade
+3 Alpine Moon

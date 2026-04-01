@@ -3,7 +3,7 @@ Name:Perplexing Chimera (GatheringMagic.com) 122915 - Burn, Baby, Burn
 URL:http://www.gatheringmagic.com/seanuy-122915-burn-baby-burn/
 Goal:Win
 Turns:1
-Difficulty:Hard
+Difficulty:Rare
 Description: Win this turn. AI has these cards in hand - Lightning Bolt, Guerrilla Tactics, Skullcrack, Pyrotechnics.
 [state]
 ActivePlayer=human

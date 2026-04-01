@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=The Shade
+Title=The Shade
+Icon=The Shade.jpg
+Difficulty=Medium
+Description=Oath_of_the_Gatewatch/Standard_Champs_#9434064/RedArmada_-_UR_Prowess_(Standard,_#602959).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Abbot of Keral Keep
+4 Jace, Vryn's Prodigy
+2 Jori En, Ruin Diver
+4 Monastery Swiftspear
+4 Stormchaser Mage
+4 Fiery Impulse
+3 Kolaghan's Command
+4 Wild Slash
+2 Painful Truths
+2 Roast
+4 Treasure Cruise
+4 Bloodstained Mire
+1 Flooded Strand
+3 Island
+3 Mountain
+4 Polluted Delta
+1 Smoldering Marsh
+1 Sunken Hollow
+1 Swamp
+4 Wandering Fumarole
+1 Wooded Foothills
+[Sideboard]
+2 Arc Lightning
+2 Disdainful Stroke
+2 Dispel
+1 Goblin Dark-Dwellers
+2 Negate
+3 Self-Inflicted Wound
+1 Zurgo Bellstriker

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Ned Flanders
+Title=Ned Flanders
+Icon=Ned Flanders.jpg
+Difficulty=Very Hard
+Description=./Modern/Foundations/Spy_1_-_Eldrazi_Ramp_(Modern,_#2286700).dck
+Deck Type=constructed
+
+[Main]
+4 Thought-Knot Seer
+2 World Breaker
+4 Fanatic of Rhonas
+4 Sowing Mycospawn
+4 Nulldrifter
+2 Devourer of Destiny
+2 Sire of Seven Deaths
+4 Chalice of the Void
+3 Talisman of Curiosity
+4 The One Ring
+4 Kozilek's Command
+2 Forest
+1 Ghost Quarter
+4 Misty Rainforest
+2 Breeding Pool
+4 Eldrazi Temple
+1 Wastes
+2 Cavern of Souls
+1 Hedge Maze
+1 Shifting Woodland
+4 Ugin's Labyrinth
+1 Windswept Heath
+[Sideboard]
+2 Trinisphere
+2 Dismember
+1 Emrakul, the Promised End
+3 All Is Dust
+2 Unlicensed Hearse
+2 Wastescape Battlemage
+3 Consign to Memory

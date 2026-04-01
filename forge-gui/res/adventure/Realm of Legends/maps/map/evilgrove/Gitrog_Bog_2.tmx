@@ -98,9 +98,9 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Crawling Infestation&quot;, &quot;Sinister Concoction|SOI&quot;, &quot;Foul Orchard|SOI&quot;, &quot;Drownyard Temple|SOI&quot;, &quot;Crawling Sensation|SOI&quot;]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Crawling Infestation&quot;, &quot;Sinister Concoction|SOI&quot;, &quot;Foul Orchard|SOI&quot;, &quot;Crawling Sensation|SOI&quot;]
 }</property>
-    <property name="enemy" value="Gitrog"/>
+    <property name="enemy" value="The Gitrog Monster"/>
     <property name="reward">[
   {
     &quot;type&quot;: &quot;item&quot;,
@@ -123,12 +123,6 @@
    <properties>
     <property name="enemy" value="Ishkanah"/>
     <property name="threatRange" type="int" value="0"/>
-   </properties>
-  </object>
-  <object id="192" template="../../../../common/maps/obj/enemy.tx" x="142" y="790.497" width="16" height="21.0057">
-   <properties>
-    <property name="enemy" value="Frog"/>
-    <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
   <object id="195" template="../../../../common/maps/obj/manashards.tx" x="158.333" y="486.5"/>

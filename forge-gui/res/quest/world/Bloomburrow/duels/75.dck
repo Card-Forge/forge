@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Dilbert
+Title=Dilbert
+Icon=Dilbert.jpg
+Difficulty=Hard
+Description=./Modern/Bloomburrow/Yuya_Shimada_-_Caged_Emrakul_(Modern,_#2202172).dck
+Deck Type=constructed
+
+[Main]
+4 Ajani, Nacatl Pariah
+4 Emrakul, the Aeons Torn
+4 Guide of Souls
+4 Memnite
+4 Ocelot Pride
+4 Orcish Bowmasters
+4 Ornithopter
+2 Resolute Reinforcements
+4 Warden of the Inner Sky
+4 Collector's Cage
+2 Flare of Fortitude
+2 Dewdrop Cure
+4 Emeria's Call
+1 Turntimber Symbiosis
+1 Arid Mesa
+1 Flooded Strand
+1 Godless Shrine
+1 Marsh Flats
+3 Plains
+1 Shadowy Backstreet
+4 Windbrisk Heights
+1 Windswept Heath
+[Sideboard]
+1 Dewdrop Cure
+4 Drannith Magistrate
+2 Requisition Raid
+4 Sanctifier en-Vec
+4 Suncleanser

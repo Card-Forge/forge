@@ -1,0 +1,54 @@
+[duel]
+[metadata]
+Name=JuzamGenie
+Title=JuzamGenie
+Icon=JuzamGenie.jpg
+Difficulty=Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/Brandon_Logan_-_Bant_Soulherder_(Modern,_#1003330).dck
+Deck Type=constructed
+
+[Main]
+1 Thassa, Deep-Dwelling
+1 Deputy of Detention
+1 Knight of Autumn
+1 Luminous Broodmoth
+1 Mulldrifter
+2 Soulherder
+2 Uro, Titan of Nature's Wrath
+3 Eternal Witness
+4 Coiling Oracle
+4 Noble Hierarch
+4 Ice-Fang Coatl
+3 Force of Negation
+3 Path to Exile
+4 Ephemerate
+2 Time Warp
+2 Neoform
+1 Teferi, Time Raveler
+1 Temple Garden
+1 Prairie Stream
+1 Snow-Covered Plains
+1 Canopy Vista
+1 Flooded Strand
+1 Hallowed Fountain
+1 Breeding Pool
+2 Snow-Covered Island
+2 Prismatic Vista
+3 Windswept Heath
+3 Snow-Covered Forest
+4 Misty Rainforest
+[Sideboard]
+1 Worship
+1 Teferi, Time Raveler
+1 Aether Gust
+1 Celestial Purge
+1 Ceremonious Rejection
+1 Disdainful Stroke
+1 Force of Vigor
+1 Lavinia, Azorius Renegade
+1 Mystical Dispute
+1 Reflector Mage
+1 Thragtusk
+1 Timely Reinforcements
+1 Winds of Abandon
+2 Veil of Summer

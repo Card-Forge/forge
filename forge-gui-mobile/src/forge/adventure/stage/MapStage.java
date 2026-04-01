@@ -357,10 +357,11 @@ public class MapStage extends GameStage {
         boolean spawnEasy = prop.get("spawn.Easy", Boolean.class);
         boolean spawnNorm = prop.get("spawn.Normal", Boolean.class);
         boolean spawnHard = prop.get("spawn.Hard", Boolean.class);
+        boolean spawnInsane = prop.get("spawn.Insane", Boolean.class);
+        if (difficultyData.spawnRank == 3 && !spawnInsane) return false;
         if (difficultyData.spawnRank == 2 && !spawnHard) return false;
         if (difficultyData.spawnRank == 1 && !spawnNorm) return false;
         if (difficultyData.spawnRank == 0 && !spawnEasy) return false;
-
         if (prop.containsKey("spawnCondition") && !prop.get("spawnCondition").toString().isEmpty()){
 
         }
@@ -1171,12 +1172,7 @@ public class MapStage extends GameStage {
     }
 
     public void advanceQuestFlag(String key) {
-        Map<String, Byte> C = changes.getMapFlags();
-        if (C.get(key) != null) {
-            C.put(key, (byte) (C.get(key) + 1));
-        } else {
-            C.put(key, (byte) 1);
-        }
+        changes.getMapFlags().merge(key, (byte)1, (a, b) -> (byte)(a + b));
 
         AdventureQuestController.instance().updateQuestsMapFlag(key,changes.getMapFlags().get(key));
         AdventureQuestController.instance().showQuestDialogs(this);

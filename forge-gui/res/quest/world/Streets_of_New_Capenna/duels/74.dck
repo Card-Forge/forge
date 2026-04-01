@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Ghost Rider
+Title=Ghost Rider
+Icon=Ghost Rider.jpg
+Difficulty=Hard
+Description=./Modern/Streets_of_New_Capenna/Diego_Silva_-_Rakdos_Midrange_(Modern,_#1481013).dck
+Deck Type=constructed
+
+[Main]
+2 Fable of the Mirror-Breaker
+3 Dauthi Voidwalker
+3 Seasoned Pyromancer
+4 Fury
+4 Grief
+1 Spikefield Hazard
+2 Feign Death
+2 Kolaghan's Command
+2 Undying Malice
+3 Terminate
+3 Malakir Rebirth
+4 Lightning Bolt
+2 Inquisition of Kozilek
+3 Thoughtseize
+3 Blood Moon
+1 Liliana of the Veil
+2 Mountain
+2 Blood Crypt
+3 Verdant Catacombs
+3 Swamp
+4 Blackcleave Cliffs
+4 Bloodstained Mire
+[Sideboard]
+1 Ashiok, Dream Render
+1 Hidetsugu Consumes All
+2 Unlicensed Hearse
+2 Feed the Swarm
+2 Fatal Push
+2 Ob Nixilis, the Adversary
+2 Chalice of the Void
+3 Tourach, Dread Cantor

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Krypto
+Title=Krypto
+Icon=Krypto.jpg
+Difficulty=Easy
+Description=./Standard/Lorwyn_Eclipsed/Ethan_Kolby_-_Dimir_Elementals_(Standard,_#2785109).dck
+Deck Type=constructed
+
+[Main]
+4 Deceit
+4 Emptiness
+4 Overlord of the Balemurk
+4 Superior Spider-Man
+4 Wistfulness
+3 Sunderflock
+2 Moonshadow
+4 Not Dead After All
+3 Requiting Hex
+2 Spider-Sense
+1 Undying Malice
+2 Tragic Trajectory
+4 Cavern of Souls
+4 Gloomlake Verge
+4 Overgrown Tomb
+4 Watery Grave
+2 Multiversal Passage
+2 Swamp
+2 Willowrush Verge
+1 Undercity Sewers
+[Sideboard]
+2 Bitter Triumph
+2 Duress
+2 Quantum Riddler
+2 Soul-Guide Lantern
+2 Spell Snare
+2 Torpor Orb
+1 Negate
+1 Spider-Sense
+1 Sunderflock

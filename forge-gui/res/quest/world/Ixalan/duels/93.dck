@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Robot93
+Title=Robot93
+Icon=En Sabah Nur.jpg
+Difficulty=Hard
+Description=Temur 
+Deck Type=constructed
+
+[Main]
+4 Bristling Hydra
+4 Greenbelt Rampager
+4 Longtusk Cub
+3 Rhonas the Indomitable
+4 Rogue Refiner
+3 Voltaic Brawler
+4 Heart of Kiran
+2 Abrade
+2 Blossoming Defense
+4 Harnessed Lightning
+2 Spell Pierce
+4 Attune with Aether
+4 Aether Hub
+4 Botanical Sanctum
+4 Forest
+1 Island
+2 Mountain
+4 Rootbound Crag
+1 Sheltered Thicket
+[Sideboard]
+2 Chandra's Defeat
+2 Chandra, Torch of Defiance
+2 Deathgorge Scavenger
+2 Glorybringer
+2 Lifecrafter's Bestiary
+3 Negate
+2 Rampaging Ferocidon

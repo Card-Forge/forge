@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Owlman
+Title=Owlman
+Icon=Owlman.jpg
+Difficulty=Very Hard
+Description=./Modern/Foundations/DB_MurkPie_-_Dimir_Murktide_(Modern,_#2270897).dck
+Deck Type=constructed
+
+[Main]
+1 Harbinger of the Seas
+4 Psychic Frog
+2 Kiora, the Rising Tide
+4 Abhorrent Oculus
+4 Counterspell
+2 Force of Negation
+4 Thought Scour
+2 Sink into Stupor
+3 Spell Snare
+4 Fatal Push
+2 Shoot the Sheriff
+1 Dismember
+2 Spell Pierce
+3 Thoughtseize
+4 Unearth
+2 Flooded Strand
+2 Bloodstained Mire
+2 Island
+3 Undercity Sewers
+4 Polluted Delta
+1 Darkslick Shores
+1 Swamp
+1 Otawara, Soaring City
+2 Watery Grave
+[Sideboard]
+4 Consign to Memory
+1 Toxic Deluge
+1 Undercity Informer
+2 Stern Scolding
+2 Nihil Spellbomb
+2 Mystical Dispute
+2 Harbinger of the Seas
+1 Glistening Deluge

@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=IsaBere
+Title=IsaBere
+Icon=IsaBere.jpg
+Difficulty=Medium
+Description=./Standard/Guilds_of_Ravnica/Adrian_Throop_-_Izzet_Arclight_(Standard,_#778182).dck
+Deck Type=constructed
+
+[Main]
+4 Arclight Phoenix
+4 Crackling Drake
+4 Goblin Electromancer
+1 Chemister's Insight
+4 Opt
+4 Radical Idea
+4 Shock
+2 Beacon Bolt
+3 Chart a Course
+4 Discovery // Dispersal
+3 Lava Coil
+1 Tormenting Voice
+7 Island
+7 Mountain
+4 Steam Vents
+4 Sulfur Falls
+[Sideboard]
+1 Chemister's Insight
+3 Disdainful Stroke
+3 Fiery Cannonade
+3 Firemind's Research
+1 Lava Coil
+2 Negate
+2 Rekindling Phoenix

@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Sisters of Stone Death
+Title=Sisters of Stone Death
+Icon=Sisters of Stone Death.jpg
+Difficulty=Hard
+Description=../Modern/Born_of_the_Gods/2014_Modern_State_Championships_-_Delaware/Blake_Meisner_-_Mono_Green_(Modern,_#82678).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Dryad Militant
+4 Experiment One
+4 Kalonian Tusker
+4 Leatherback Baloth
+2 Scavenging Ooze
+4 Strangleroot Geist
+1 Thrun, the Last Troll
+1 Wilt-Leaf Liege
+3 Abrupt Decay
+3 Aspect of Hydra
+4 Vines of Vastwood
+4 Rancor
+13 Forest
+4 Overgrown Tomb
+1 Treetop Village
+4 Woodland Cemetery
+[Sideboard]
+2 Choke
+2 Creeping Corrosion
+2 Obstinate Baloth
+4 Skylasher
+3 Torpor Orb
+2 Unravel the AEther

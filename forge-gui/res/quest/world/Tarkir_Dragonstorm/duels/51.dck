@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Selesnya-precon
+Title=Selesnya-precon
+Icon=Selesnya-precon.jpg
+Difficulty=Very Hard
+Description=./Modern/Tarkir_Dragonstorm/meat_mtg_-_Severance_Ritual_(Modern,_#2448022).dck
+Deck Type=constructed
+
+[Main]
+2 Brightglass Gearhulk
+3 Emperor of Bones
+3 Eternal Witness
+4 Guide of Souls
+1 Haywire Mite
+4 Ocelot Pride
+4 Severance Priest
+4 Solitude
+4 White Orchid Phantom
+2 Witch Enchanter
+4 Ephemerate
+4 Birthing Ritual
+1 Boseiju, Who Endures
+4 Flagstones of Trokair
+1 Forest
+1 Godless Shrine
+1 Lush Portico
+4 Marsh Flats
+1 Overgrown Tomb
+1 Plains
+1 Shadowy Backstreet
+2 Temple Garden
+4 Windswept Heath
+[Sideboard]
+2 Collector Ouphe
+1 Elesh Norn, Mother of Machines
+2 Gaddock Teeg
+1 Knight of Autumn
+3 Orim's Chant
+2 Sanctifier en-Vec
+2 Skyclave Apparition
+2 Vindicate

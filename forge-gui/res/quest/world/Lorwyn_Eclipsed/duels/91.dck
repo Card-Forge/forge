@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Black Flame
+Title=Black Flame
+Icon=Black Flame.jpg
+Difficulty=Very Hard
+Description=./Modern/Lorwyn_Eclipsed/GryphGames_-_Jund_Aggro_(Modern,_#2821052).dck
+Deck Type=constructed
+
+[Main]
+4 Ball Lightning
+4 Flamekin Harbinger
+4 Hellspark Elemental
+4 Lightning Skelemental
+4 Thunderkin Awakener
+2 Emptiness
+4 Fatal Push
+4 Lightning Bolt
+3 Collected Company
+4 Unearth
+3 Cavern of Souls
+3 Secluded Courtyard
+3 Wooded Foothills
+2 Blood Crypt
+2 Bloodstained Mire
+2 Eclipsed Realms
+2 Snow-Covered Mountain
+2 Stomping Ground
+2 Ziatora's Proving Ground
+1 Primal Beyond
+1 Snow-Covered Swamp
+[Sideboard]
+2 Collective Brutality
+2 Deceit
+2 Fulminator Mage
+2 Nihil Spellbomb
+2 Surgical Extraction
+1 Abrade
+1 Damping Sphere
+1 Foundation Breaker
+1 Moonshadow
+1 Shenanigans

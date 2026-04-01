@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Dr Watson
+Title=Dr Watson
+Icon=Dr Watson.jpg
+Difficulty=Medium
+Description=New_Phyrexia/TCGPlayer_Championship_-_Chicago/Tim_Landale_-_Valakut_Ramp_(Standard,_#18536).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Avenger of Zendikar
+4 Inferno Titan
+3 Oracle of Mul Daya
+4 Primeval Titan
+1 Solemn Simulacrum
+2 Nature's Claim
+4 Summoning Trap
+2 Cultivate
+4 Explore
+4 Rampant Growth
+3 Khalni Heart Expedition
+3 Evolving Wilds
+3 Forest
+11 Mountain
+3 Raging Ravine
+2 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+2 Verdant Catacombs
+[Sideboard]
+3 Act of Aggression
+2 Combust
+2 Creeping Corrosion
+4 Obstinate Baloth
+3 Pyroclasm

@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Crocodile Dundee
+Title=Crocodile Dundee
+Icon=Crocodile Dundee.jpg
+Difficulty=Very Hard
+Description=./Modern/Murders_at_Karlov_Manor/Kipman_-_Simic_Merfolk_(Modern,_#2002181).dck
+Deck Type=constructed
+
+[Main]
+4 Cenote Scout
+4 Tide Shaper
+4 Lord of Atlantis
+4 Merfolk Trickster
+4 Master of the Pearl Trident
+4 Vodalian Hexcatcher
+4 Svyelun of Sea and Sky
+4 Tishana's Tidebinder
+4 Subtlety
+4 Aether Vial
+4 Botanical Sanctum
+2 Breeding Pool
+4 Cavern of Souls
+3 Mutavault
+2 Waterlogged Grove
+2 Island
+2 Scalding Tarn
+1 Misty Rainforest
+[Sideboard]
+4 Force of Negation
+2 Turn the Earth
+3 Stern Scolding
+2 Aether Gust
+4 Pick Your Poison

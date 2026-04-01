@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Simic-precon
+Title=Simic-precon
+Icon=Simic-precon.jpg
+Difficulty=Easy
+Description=./Standard/Tarkir_Dragonstorm/Piotr_Glogowski_-_Sultai_Teval_(Standard,_#2437182).dck
+Deck Type=constructed
+
+[Main]
+4 Kheru Goldkeeper
+4 Teval, Arbiter of Virtue
+4 Mox Jasper
+4 Gold Pan
+4 Seed of Hope
+2 For the Common Good
+4 Stock Up
+4 Commune with Evil
+4 Haunt the Network
+4 Dredger's Insight
+2 Ugin, Eye of the Storms
+3 Forest
+4 Underground Mortuary
+4 Wastewood Verge
+2 Willowrush Verge
+4 Yavimaya Coast
+2 Blooming Marsh
+1 Maelstrom of the Spirit Dragon
+[Sideboard]

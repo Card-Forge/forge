@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Ododua
+Title=Ododua
+Icon=Ododua.jpg
+Difficulty=Hard
+Description=./Modern/Zendikar_Rising/Ben_Jaiyen_-_Burn_(Modern,_#1060015).dck
+Deck Type=constructed
+
+[Main]
+4 Monastery Swiftspear
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Skullcrack
+2 Lightning Helix
+4 Lightning Bolt
+4 Searing Blaze
+4 Boros Charm
+4 Lava Spike
+4 Rift Bolt
+4 Skewer the Critics
+1 Fiery Islet
+2 Bloodstained Mire
+2 Sacred Foundry
+3 Snow-Covered Mountain
+4 Inspiring Vantage
+4 Sunbaked Canyon
+4 Wooded Foothills
+[Sideboard]
+1 Skullcrack
+1 Searing Blood
+2 Rest in Peace
+2 Roiling Vortex
+3 Kor Firewalker
+3 Smash to Smithereens
+3 Path to Exile

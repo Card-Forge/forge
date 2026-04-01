@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Doran
+Title=Doran
+Icon=Doran.jpg
+Difficulty=Hard
+Description=./Modern/Innistrad_Crimson_Vow/Brayden_Gray_-_Dimir_Affinity_(Modern,_#1297161)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Gingerbrute
+2 Etched Champion
+3 Frogmite
+4 Thought Monitor
+4 Ornithopter
+4 Sojourner's Companion
+4 Memnite
+1 Shadowspear
+3 Nettlecyst
+4 Cranial Plating
+4 Blood Fountain
+4 Springleaf Drum
+3 Thoughtcast
+4 Urza's Saga
+2 Spire of Industry
+2 Glimmervoid
+3 Treasure Vault
+4 Mistvault Bridge
+4 Darksteel Citadel
+[Sideboard]
+1 Pithing Needle
+1 Grafdigger's Cage
+1 Sai, Master Thopterist
+1 Aether Spellbomb
+2 Etched Champion
+2 Thieving Skydiver
+2 Fatal Push
+2 Thoughtseize
+3 Metallic Rebuke

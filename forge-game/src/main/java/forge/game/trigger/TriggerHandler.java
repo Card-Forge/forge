@@ -208,9 +208,8 @@ public class TriggerHandler {
 
         for (Trigger t : activeTriggers) {
             // Clear if no ZoneFrom, or not coming from the TriggerZone
-            if (c.getId() == t.getHostCard().getId()) {
-                if (!c.getTriggers().contains(t) || !t.zonesCheck(zoneFrom))
-                    toBeRemoved.add(t);
+            if (c.getId() == t.getHostCard().getId() && (!c.getTriggers().contains(t) || !t.zonesCheck(zoneFrom))) {
+                toBeRemoved.add(t);
             }
         }
 

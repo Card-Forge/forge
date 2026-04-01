@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Silver Surfer
+Title=Silver Surfer
+Icon=Silver Surfer.jpg
+Difficulty=Hard
+Description=./Modern/Zendikar_Rising/Blair_Splett_-_Dimir_Mill_(Modern,_#1042869).dck
+Deck Type=constructed
+
+[Main]
+4 Ruin Crab
+4 Hedron Crab
+3 Mesmeric Orb
+2 Surgical Extraction
+3 Drown in the Loch
+4 Archive Trap
+4 Fatal Push
+4 Visions of Beyond
+3 Bloodchief's Thirst
+3 Maddening Cacophony
+4 Glimpse the Unthinkable
+1 Oboro, Palace in the Clouds
+1 Flooded Strand
+2 Swamp
+2 Darkslick Shores
+2 Watery Grave
+3 Prismatic Vista
+3 Island
+4 Field of Ruin
+4 Polluted Delta
+[Sideboard]
+1 Lurrus of the Dream-Den
+2 Ensnaring Bridge
+2 Force of Negation
+2 Profane Memento
+2 Ashiok, Dream Render
+3 Ravenous Trap
+3 Stern Dismissal

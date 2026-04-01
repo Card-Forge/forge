@@ -13,7 +13,7 @@
  <tileset firstgid="32385" source="../../../../common/maps/tileset/buildingsbosses.tsx"/>
  <layer id="6" name="Collision" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJztmV8OgyAMxvu6qCdwXmeHcLfY+7Zz6djdFjPJzCJF/ljA9pf0SSL9ACt8AAjCvtwrgIchnlXq7OLT1gCjIbp6//4V0r+OtyWP0SHPFmlLoXdLH1iOGGvjcGS9ru+i0Ns3ANfGvJb181ik1ksNN70DUhdfB9Qr7E9IvY1Zq6kQvTjLPW7MfxMFJeYck+Vcl7hWXeGmlxs+83sr+Fwu65kek+cx+QxH9HiG+dy55mnZvBVBEPzh5FfY9uK6BuUCt/9tTnrVBl8/lFR6L6dfaPQeA2sTSk56fdq4kpPec/0NrE0oKqPvN/Y9xj+T1pagRuRCP48lJy/L5d5WEIS0fADYmUFl
+   eJztmM0NwyAMRt1zskHUJXtvM1fbbTpJlVtVGYsAxh/YT+ISEfDjH4iCQJf7QvRIpH2xjo7oc2lb3rYSvRLpurati+PwyU1SGblsglMv35w8Jf3M/YPiK/VpqS8Hgm/NWD6LtW9vvPk+hfX5PaGvFa33VWRq1qAR26kmZg++WntTD0piHs1RQuMMhUjq3Dg7/46zO//65Y7pG8C9vBTNu0HA0+tuhoI33yBAQZpjs829nHdaJGe0eLSxdLXYf6x8pTduTX8EX+6bJ18pT6t6Eegxd5F8tfHme+DJNQhG5wuePJEq
   </data>
  </layer>
  <layer id="7" name="Floor and Walls" width="60" height="40">
@@ -139,19 +139,19 @@
     &quot;editions&quot;: [ &quot;EOE&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 10,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    &quot;rarity&quot;: [ &quot;common&quot; ]
   },
   {
     &quot;editions&quot;: [ &quot;EOE&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    &quot;rarity&quot;: [ &quot;uncommon&quot; ]
   },
   {
     &quot;editions&quot;: [ &quot;EOE&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic Rare&quot; ]
   }
 ]
 </property>
@@ -177,19 +177,19 @@
     &quot;editions&quot;: [ &quot;EOE&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 10,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    &quot;rarity&quot;: [ &quot;common&quot; ]
   },
   {
     &quot;editions&quot;: [ &quot;EOE&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    &quot;rarity&quot;: [ &quot;uncommon&quot; ]
   },
   {
     &quot;editions&quot;: [ &quot;EOE&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ]
   }
 ]
 </property>
@@ -204,8 +204,8 @@
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 4,
     &quot;editions&quot;: [ &quot;EOE&quot;, &quot;EOC&quot;, &quot;YEOE&quot; ],
-    &quot;subtypes&quot;: [ &quot;spacecraft&quot; ],
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;subTypes&quot;: [ &quot;Spacecraft&quot; ],
+    &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ]
   }
 ]
 </property>

@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Owlman
+Title=Owlman
+Icon=Owlman.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine/PvtEnormous_-_Phoenix_Red_(Modern,_#1630815)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Hollow One
+4 Arclight Phoenix
+4 Dragon's Rage Channeler
+4 Bloodfeather Phoenix
+4 Lava Dart
+4 Lightning Bolt
+3 Gut Shot
+4 Manamorphose
+4 Faithless Salvaging
+4 Goblin Lore
+4 Burning Inquiry
+2 Sacred Foundry
+5 Mountain
+4 Bloodstained Mire
+4 Arid Mesa
+2 Scalding Tarn
+[Sideboard]
+4 Wear // Tear
+4 Silence
+4 Chained to the Rocks
+2 Prismatic Ending
+1 Jegantha, the Wellspring

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Eldrazi
+Title=Eldrazi
+Icon=Eldrazi.jpg
+Difficulty=Medium
+Description=Fate_Reforged/Standard_Champs_#8046237/monoQ6_-_Mono-Green_Devotion_(Standard,_#191212).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Courser of Kruphix
+4 Elvish Mystic
+2 Genesis Hydra
+1 Hornet Queen
+2 Polukranos, World Eater
+2 Stormbreath Dragon
+4 Sylvan Caryatid
+4 Voyaging Satyr
+4 Whisperwood Elemental
+2 Shamanic Revelation
+3 Outpost Siege
+2 Nissa, Worldwaker
+2 Ugin, the Spirit Dragon
+8 Forest
+4 Mountain
+4 Nykthos, Shrine to Nyx
+4 Temple of Abandon
+4 Wooded Foothills
+[Sideboard]
+2 Arc Lightning
+3 Ashcloud Phoenix
+2 Boon Satyr
+2 Goblin Rabblemaster
+2 Hornet Nest
+3 Mistcutter Hydra

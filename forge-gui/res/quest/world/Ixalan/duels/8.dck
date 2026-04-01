@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Robot8
+Title=Robot8
+Icon=Comic Book Guy.jpg
+Difficulty=Hard
+Description=Temur Energy 
+Deck Type=constructed
+
+[Main]
+4 Bristling Hydra
+3 Glorybringer
+4 Longtusk Cub
+4 Rogue Refiner
+4 Servant of the Conduit
+1 The Scarab God
+3 Whirler Virtuoso
+2 Abrade
+4 Harnessed Lightning
+2 Magma Spray
+4 Attune with Aether
+2 Chandra, Torch of Defiance
+4 Aether Hub
+4 Botanical Sanctum
+4 Forest
+1 Island
+2 Mountain
+3 Rootbound Crag
+2 Sheltered Thicket
+2 Spirebluff Canal
+1 Swamp
+[Sideboard]
+2 Chandra's Defeat
+1 Chandra, Torch of Defiance
+2 Confiscation Coup
+2 Deathgorge Scavenger
+3 Negate
+2 Nissa, Vital Force
+2 Spell Pierce
+1 Vizier of Many Faces

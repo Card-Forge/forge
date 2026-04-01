@@ -648,6 +648,7 @@ public final class CMatchUI
     @Override
     public void initialize() {
         Singletons.getControl().getForgeMenu().setProvider(this);
+        FloatingZone.closeAll();
         updatePlayerControl();
         KeyboardShortcuts.attachKeyboardShortcuts(this);
         for (final IVDoc<? extends ICDoc> view : myDocs.values()) {
@@ -658,7 +659,6 @@ public final class CMatchUI
             layoutControl.initialize();
             layoutControl.update();
         }
-        FloatingZone.closeAll();
     }
 
     @Override
@@ -806,7 +806,9 @@ public final class CMatchUI
     @Override
     public void updatePlayerControl() {
         initHandViews();
+        FloatingZone.registerZoneDocs(this, getLocalPlayers());
         SLayoutIO.loadLayout(null);
+        FloatingZone.pruneUnparentedDocks();
         view.populate();
         final PlayerZoneUpdates zones = new PlayerZoneUpdates();
         for (final PlayerView p : sortedPlayers) {
@@ -828,6 +830,9 @@ public final class CMatchUI
     @Override
     public void finishGame() {
         FloatingZone.closeAll(); //ensure floating card areas cleared and closed after the game
+        if (isNetGame()) {
+            writeMatchPreferences();
+        }
         final GameView gameView = getGameView();
         if (hasLocalPlayers() || gameView.isMatchOver()) {
             new ViewWinLose(gameView, this).show();
@@ -1234,84 +1239,34 @@ public final class CMatchUI
         return skippedPhase && label != null && !label.getEnabled();
     }
 
-    /**
-     * TODO: Needs to be reworked for efficiency with rest of prefs saves in codebase.
-     */
     public void writeMatchPreferences() {
         final ForgePreferences prefs = FModel.getPreferences();
         final List<VField> fieldViews = getFieldViews();
+        final PhaseType[] phases = PhaseType.values();
 
-        // AI field is at index [1]
-        final PhaseIndicator fvAi = fieldViews.get(1).getPhaseIndicator();
-        prefs.setPref(FPref.PHASE_AI_UPKEEP,           fvAi.getLblUpkeep().getEnabled());
-        prefs.setPref(FPref.PHASE_AI_DRAW,             fvAi.getLblDraw().getEnabled());
-        prefs.setPref(FPref.PHASE_AI_MAIN1,            fvAi.getLblMain1().getEnabled());
-        prefs.setPref(FPref.PHASE_AI_BEGINCOMBAT,      fvAi.getLblBeginCombat().getEnabled());
-        prefs.setPref(FPref.PHASE_AI_DECLAREATTACKERS, fvAi.getLblDeclareAttackers().getEnabled());
-        prefs.setPref(FPref.PHASE_AI_DECLAREBLOCKERS,  fvAi.getLblDeclareBlockers().getEnabled());
-        prefs.setPref(FPref.PHASE_AI_FIRSTSTRIKE,      fvAi.getLblFirstStrike().getEnabled());
-        prefs.setPref(FPref.PHASE_AI_COMBATDAMAGE,     fvAi.getLblCombatDamage().getEnabled());
-        prefs.setPref(FPref.PHASE_AI_ENDCOMBAT,        fvAi.getLblEndCombat().getEnabled());
-        prefs.setPref(FPref.PHASE_AI_MAIN2,            fvAi.getLblMain2().getEnabled());
-        prefs.setPref(FPref.PHASE_AI_EOT,              fvAi.getLblEndTurn().getEnabled());
-        prefs.setPref(FPref.PHASE_AI_CLEANUP,          fvAi.getLblCleanup().getEnabled());
-
-        // Human field is at index [0]
-        final PhaseIndicator fvHuman = fieldViews.get(0).getPhaseIndicator();
-        prefs.setPref(FPref.PHASE_HUMAN_UPKEEP,           fvHuman.getLblUpkeep().getEnabled());
-        prefs.setPref(FPref.PHASE_HUMAN_DRAW,             fvHuman.getLblDraw().getEnabled());
-        prefs.setPref(FPref.PHASE_HUMAN_MAIN1,            fvHuman.getLblMain1().getEnabled());
-        prefs.setPref(FPref.PHASE_HUMAN_BEGINCOMBAT,      fvHuman.getLblBeginCombat().getEnabled());
-        prefs.setPref(FPref.PHASE_HUMAN_DECLAREATTACKERS, fvHuman.getLblDeclareAttackers().getEnabled());
-        prefs.setPref(FPref.PHASE_HUMAN_DECLAREBLOCKERS,  fvHuman.getLblDeclareBlockers().getEnabled());
-        prefs.setPref(FPref.PHASE_HUMAN_FIRSTSTRIKE,      fvHuman.getLblFirstStrike().getEnabled());
-        prefs.setPref(FPref.PHASE_HUMAN_COMBATDAMAGE,     fvHuman.getLblCombatDamage().getEnabled());
-        prefs.setPref(FPref.PHASE_HUMAN_ENDCOMBAT,        fvHuman.getLblEndCombat().getEnabled());
-        prefs.setPref(FPref.PHASE_HUMAN_MAIN2,            fvHuman.getLblMain2().getEnabled());
-        prefs.setPref(FPref.PHASE_HUMAN_EOT,              fvHuman.getLblEndTurn().getEnabled());
-        prefs.setPref(FPref.PHASE_HUMAN_CLEANUP,          fvHuman.getLblCleanup().getEnabled());
-
+        for (int i = 0; i < fieldViews.size(); i++) {
+            final FPref[] keys = isLocalPlayer(sortedPlayers.get(i))
+                    ? FPref.PHASES_HUMAN : FPref.PHASES_AI;
+            final PhaseIndicator pi = fieldViews.get(i).getPhaseIndicator();
+            for (int p = 1; p < phases.length; p++) {
+                prefs.setPref(keys[p - 1], pi.getLabelFor(phases[p]).getEnabled());
+            }
+        }
         prefs.save();
     }
 
-    /**
-     * TODO: Needs to be reworked for efficiency with rest of prefs saves in codebase.
-     */
     private void actuateMatchPreferences() {
         final ForgePreferences prefs = FModel.getPreferences();
         final List<VField> fieldViews = getFieldViews();
+        final PhaseType[] phases = PhaseType.values();
 
-        // Human field is at index [0]
-        //TODO: Rework without that assumption; not true in 4 AI game or hotseat game.
-        final PhaseIndicator fvHuman = fieldViews.get(0).getPhaseIndicator();
-        fvHuman.getLblUpkeep().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_UPKEEP));
-        fvHuman.getLblDraw().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_DRAW));
-        fvHuman.getLblMain1().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_MAIN1));
-        fvHuman.getLblBeginCombat().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_BEGINCOMBAT));
-        fvHuman.getLblDeclareAttackers().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_DECLAREATTACKERS));
-        fvHuman.getLblDeclareBlockers().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_DECLAREBLOCKERS));
-        fvHuman.getLblFirstStrike().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_FIRSTSTRIKE));
-        fvHuman.getLblCombatDamage().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_COMBATDAMAGE));
-        fvHuman.getLblEndCombat().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_ENDCOMBAT));
-        fvHuman.getLblMain2().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_MAIN2));
-        fvHuman.getLblEndTurn().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_EOT));
-        fvHuman.getLblCleanup().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_CLEANUP));
-
-        // AI field is at index [1], ...
-        for (int i = 1; i < fieldViews.size(); i++) {
-            final PhaseIndicator fvAi = fieldViews.get(i).getPhaseIndicator();
-            fvAi.getLblUpkeep().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_UPKEEP));
-            fvAi.getLblDraw().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_DRAW));
-            fvAi.getLblMain1().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_MAIN1));
-            fvAi.getLblBeginCombat().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_BEGINCOMBAT));
-            fvAi.getLblDeclareAttackers().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_DECLAREATTACKERS));
-            fvAi.getLblDeclareBlockers().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_DECLAREBLOCKERS));
-            fvAi.getLblFirstStrike().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_FIRSTSTRIKE));
-            fvAi.getLblCombatDamage().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_COMBATDAMAGE));
-            fvAi.getLblEndCombat().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_ENDCOMBAT));
-            fvAi.getLblMain2().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_MAIN2));
-            fvAi.getLblEndTurn().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_EOT));
-            fvAi.getLblCleanup().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_CLEANUP));
+        for (int i = 0; i < fieldViews.size(); i++) {
+            final FPref[] keys = isLocalPlayer(sortedPlayers.get(i))
+                    ? FPref.PHASES_HUMAN : FPref.PHASES_AI;
+            final PhaseIndicator pi = fieldViews.get(i).getPhaseIndicator();
+            for (int p = 1; p < phases.length; p++) {
+                pi.getLabelFor(phases[p]).setEnabled(prefs.getPrefBoolean(keys[p - 1]));
+            }
         }
     }
 
@@ -1389,7 +1344,6 @@ public final class CMatchUI
 
                 FOptionPane.showOptionDialog(null, "Forge", null, mainPanel, ImmutableList.of(Localizer.getInstance().getMessage("lblOK")));
                 // here the user closed the modal - time to update the next notifiable stack index
-
             }
             // In any case, I have to increase the counter
             nextNotifiableStackIndex++;
@@ -1397,7 +1351,6 @@ public final class CMatchUI
             // Not yet time to show the modal - schedule the method again, and try again later
             Runnable tryAgainThread = () -> notifyStackAddition(event);
             GuiBase.getInterface().invokeInEdtLater(tryAgainThread);
-
         }
     }
 
@@ -1518,6 +1471,9 @@ public final class CMatchUI
 
     @Override
     public void handleLandPlayed(CardView land) {
+        if (ForgeConstants.LAND_PLAYED_NOTIFICATION_NEVER.equals(FModel.getPreferences().getPref(FPref.UI_LAND_PLAYED_NOTIFICATION_POLICY))) {
+            return;
+        }
         Runnable createPopupThread = () -> createLandPopupPanel(land);
         GuiBase.getInterface().invokeInEdtAndWait(createPopupThread);
     }

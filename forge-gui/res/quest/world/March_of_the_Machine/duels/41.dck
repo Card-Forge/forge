@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Chewbacca
+Title=Chewbacca
+Icon=Chewbacca.jpg
+Difficulty=Easy
+Description=./Standard/March_of_the_Machine/Alex_Poulosky_-_Rakdos_Midrange_(Standard,_#1636326).dck
+Deck Type=constructed
+
+[Main]
+4 Graveyard Trespasser
+3 Sheoldred, the Apocalypse
+4 Fable of the Mirror-Breaker
+4 Bloodtithe Harvester
+2 Archfiend of the Dross
+3 Reckoner Bankbuster
+1 Abrade
+4 Go for the Throat
+3 Cut Down
+4 Invoke Despair
+2 Chandra, Hope's Beacon
+1 Sokenzan, Crucible of Defiance
+4 Haunted Ridge
+4 Sulfurous Springs
+1 Takenuma, Abandoned Mire
+2 Mountain
+4 Blackcleave Cliffs
+9 Swamp
+1 Mirrex
+[Sideboard]
+2 Gix's Command
+4 Duress
+2 Lithomantic Barrage
+1 Unlicensed Hearse
+1 Breach the Multiverse
+2 Glistening Deluge
+1 Reckoner Bankbuster
+1 Cut Down
+1 Soul Transfer

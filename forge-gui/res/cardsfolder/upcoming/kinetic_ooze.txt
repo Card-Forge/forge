@@ -1,0 +1,13 @@
+Name:Kinetic Ooze
+ManaCost:X G
+Types:Creature Ooze
+PT:0/0
+K:etbCounter:P1P1:X
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When this creature enters, destroy up to one target artifact or enchantment with mana value X or less. If X is 5 or more, you draw a card. If X is 10 or more, double the number of +1/+1 counters on any number of other target creatures.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact.cmcLEX,Enchantment.cmcLEX | ValidTgtDesc$ artifact or enchantment with mana value X or less | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ X | ConditionSVarCompare$ GE5 | SubAbility$ DBDoubleCounters
+SVar:DBDoubleCounters:DB$ MultiplyCounter | ConditionCheckSVar$ X | ConditionSVarCompare$ GE10 | ValidTgts$ Creature.Other | ValidTgtDesc$ another creature | CounterType$ P1P1 | TargetMin$ 0 | TargetMax$ MaxTgt
+SVar:X:Count$xPaid
+SVar:MaxTgt:Count$Valid Creature.Other
+DeckHas:Ability$Counters
+Oracle:This creature enters with X +1/+1 counters on it.\nWhen this creature enters, destroy up to one target artifact or enchantment with mana value X or less. If X is 5 or more, you draw a card. If X is 10 or more, double the number of +1/+1 counters on any number of other target creatures.

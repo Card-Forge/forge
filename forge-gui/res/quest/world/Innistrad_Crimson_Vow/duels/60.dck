@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Eomer
+Title=Eomer
+Icon=Eomer.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Crimson_Vow/Tsuchiya_Shouta_-_BR_Evoke_(Modern,_#1479657).dck
+Deck Type=constructed
+
+[Main]
+1 Kroxa, Titan of Death's Hunger
+1 Fulminator Mage
+2 Seasoned Pyromancer
+4 Fury
+4 Ragavan, Nimble Pilferer
+4 Dauthi Voidwalker
+4 Grief
+1 Kolaghan's Command
+2 Undying Malice
+2 Feign Death
+2 Lightning Bolt
+2 Terminate
+3 Malakir Rebirth
+1 Dreadbore
+1 Agadeem's Awakening
+2 Night's Whisper
+4 Thoughtseize
+2 Blood Moon
+1 Scalding Tarn
+1 Prismatic Vista
+1 Verdant Catacombs
+1 Shizo, Death's Storehouse
+1 Mountain
+3 Swamp
+3 Blackcleave Cliffs
+3 Bloodstained Mire
+4 Blood Crypt
+[Sideboard]
+1 Liliana of the Veil
+1 Magus of the Moon
+1 Blood Moon
+2 Fatal Push
+2 Surgical Extraction
+2 Collective Brutality
+2 Relic of Progenitus
+2 Chalice of the Void
+2 Tourach, Dread Cantor
