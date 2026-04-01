@@ -664,7 +664,6 @@ public final class CMatchUI
         getCPrompt().getView().populate();
     }
 
-
     public void refreshLog() {
         cLog.getView().refreshDisplay();
     }

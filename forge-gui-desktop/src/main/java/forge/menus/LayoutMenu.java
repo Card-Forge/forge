@@ -353,7 +353,6 @@ public final class LayoutMenu {
     }
 
     private static JMenu getMenu_PromptPane() {
-        final Localizer localizer = Localizer.getInstance();
         final JMenu menu = new JMenu(localizer.getMessage("lblPromptPanel"));
         MenuUtil.addPrefCheckBox(menu, localizer.getMessage("cbCompactPrompt"), FPref.UI_COMPACT_PROMPT)
                 .addActionListener(e -> repopulatePrompt());
@@ -363,7 +362,6 @@ public final class LayoutMenu {
         MenuUtil.addPrefCheckBox(menu, localizer.getMessage("cbRemindOnPriority"), FPref.UI_REMIND_ON_PRIORITY);
         return menu;
     }
-
 
     private static JMenu getMenu_LogPane() {
         final JMenu menu = new JMenu(localizer.getMessage("lblLogPanel"));
