@@ -1,6 +1,5 @@
 package forge.screens.match.menus;
 
-import java.util.Collections;
 import java.util.List;
 
 import javax.swing.JMenu;
@@ -24,17 +23,12 @@ public class CMatchUIMenus implements IMenuProvider {
 
     @Override
     public List<JMenu> getMenus() {
-        final List<JMenu> menus = Lists.newArrayListWithCapacity(2);
+        final List<JMenu> menus = Lists.newArrayListWithCapacity(3);
         menus.add(new GameMenu(matchUI).getMenu());
         menus.add(new DisplayMenu(matchUI).getMenu());
-        return menus;
-    }
-
-    @Override
-    public List<JMenu> getTrailingMenus() {
         if (ForgePreferences.DEV_MODE) {
-            return Collections.singletonList(new DevModeMenu(matchUI.getCDev()).getMenu());
+            menus.add(new DevModeMenu(matchUI.getCDev()).getMenu());
         }
-        return Collections.emptyList();
+        return menus;
     }
 }

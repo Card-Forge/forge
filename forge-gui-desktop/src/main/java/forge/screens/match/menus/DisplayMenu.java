@@ -7,7 +7,6 @@ import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.SwingUtilities;
 
@@ -41,10 +40,20 @@ public final class DisplayMenu {
         final JMenu menu = new JMenu(localizer.getMessage("lblDisplay"));
         menu.setMnemonic(KeyEvent.VK_I);
 
-        // Targeting Arcs section
-        final JMenuItem arcsLabel = new JMenuItem(localizer.getMessage("lblTargetingArcs"));
-        arcsLabel.setEnabled(false);
-        menu.add(arcsLabel);
+        menu.add(getMenu_TargetingArcs(localizer));
+        menu.add(getMenu_CardOverlays(localizer));
+        menu.add(getCounterDisplayTypeSubmenu(localizer));
+        menu.addSeparator();
+        addBattlefieldPrefCheckBox(menu, localizer.getMessage("cbStackCreatures"), FPref.UI_STACK_CREATURES)
+                .setToolTipText(localizer.getMessage("nlStackCreatures"));
+        addBattlefieldPrefCheckBox(menu, localizer.getMessage("cbTokensInSeparateRow"), FPref.UI_TOKENS_IN_SEPARATE_ROW)
+                .setToolTipText(localizer.getMessage("nlTokensInSeparateRow"));
+
+        return menu;
+    }
+
+    private JMenu getMenu_TargetingArcs(final Localizer localizer) {
+        final JMenu menu = new JMenu(localizer.getMessage("lblTargetingArcs"));
 
         if (matchUI.getCDock().getArcState() == null) {
             final String arcStateStr = prefs.getPref(FPref.UI_TARGETING_OVERLAY);
@@ -71,13 +80,11 @@ public final class DisplayMenu {
             arcGroup.add(item);
             menu.add(item);
         }
+        return menu;
+    }
 
-        menu.addSeparator();
-
-        // Card Overlays section
-        final JMenuItem overlaysLabel = new JMenuItem(localizer.getMessage("lblCardOverlays"));
-        overlaysLabel.setEnabled(false);
-        menu.add(overlaysLabel);
+    private JMenu getMenu_CardOverlays(final Localizer localizer) {
+        final JMenu menu = new JMenu(localizer.getMessage("lblCardOverlays"));
 
         final boolean showOverlays = prefs.getPrefBoolean(FPref.UI_SHOW_CARD_OVERLAYS);
         final List<JCheckBoxMenuItem> overlayItems = new ArrayList<>();
@@ -104,19 +111,6 @@ public final class DisplayMenu {
         addOverlayItem(menu, overlayItems, localizer.getMessage("lblCardID"), FPref.UI_OVERLAY_CARD_ID, showOverlays);
         addOverlayItem(menu, overlayItems, localizer.getMessage("lblAbilityIcon"), FPref.UI_OVERLAY_ABILITY_ICONS, showOverlays);
         addOverlayItem(menu, overlayItems, localizer.getMessage("cbDisplayFoil"), FPref.UI_OVERLAY_FOIL_EFFECT, showOverlays);
-
-        menu.addSeparator();
-
-        // Battlefield section
-        final JMenuItem battlefieldLabel = new JMenuItem(localizer.getMessage("lblBattlefield"));
-        battlefieldLabel.setEnabled(false);
-        menu.add(battlefieldLabel);
-
-        addBattlefieldPrefCheckBox(menu, localizer.getMessage("cbStackCreatures"), FPref.UI_STACK_CREATURES)
-                .setToolTipText(localizer.getMessage("nlStackCreatures"));
-        addBattlefieldPrefCheckBox(menu, localizer.getMessage("cbTokensInSeparateRow"), FPref.UI_TOKENS_IN_SEPARATE_ROW)
-                .setToolTipText(localizer.getMessage("nlTokensInSeparateRow"));
-        menu.add(getCounterDisplayTypeSubmenu(localizer));
 
         return menu;
     }

@@ -3,7 +3,6 @@ package forge.menus;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -63,29 +62,15 @@ public final class ForgeMenu {
             @Override
             public void popupMenuCanceled(PopupMenuEvent popupMenuEvent) {}
         });
-        final List<JMenu> providerMenus = (provider != null) ? provider.getMenus() : null;
-        if (providerMenus != null && !providerMenus.isEmpty()) {
-            providerMenus.get(0).setBorderPainted(false);
-            add(providerMenus.get(0));
+        if (provider != null && provider.getMenus() != null) {
+            for (JMenu m : provider.getMenus()) {
+                m.setBorderPainted(false);
+                add(m);
+            }
         }
         add(new LayoutMenu().getMenu());
-        if (providerMenus != null) {
-            for (int i = 1; i < providerMenus.size(); i++) {
-                providerMenus.get(i).setBorderPainted(false);
-                add(providerMenus.get(i));
-            }
-        }
         add(new AudioMenu().getMenu());
         add(HelpMenu.getMenu());
-        if (provider != null) {
-            List<JMenu> trailing = provider.getTrailingMenus();
-            if (trailing != null) {
-                for (JMenu m : trailing) {
-                    m.setBorderPainted(false);
-                    add(m);
-                }
-            }
-        }
         addSeparator();
         add(OnlineMenu.getMenu());
         addSeparator();

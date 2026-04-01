@@ -16,9 +16,4 @@ public interface IMenuProvider {
      */
     List<JMenu> getMenus();
 
-    /**
-     * Returns menus to be placed after the system menus (Layout, Audio).
-     */
-    default List<JMenu> getTrailingMenus() { return java.util.Collections.emptyList(); }
-
 }

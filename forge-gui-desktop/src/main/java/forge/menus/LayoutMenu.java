@@ -31,6 +31,7 @@ import forge.model.FModel;
 import forge.screens.match.VMatchUI;
 import forge.screens.match.views.VHand;
 import forge.view.arcane.FloatingZone;
+import forge.toolbox.FOptionPane;
 import forge.toolbox.FButton;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FScrollPane;
@@ -66,14 +67,14 @@ public final class LayoutMenu {
         }
         menu.add(getMenu_ThemeOptions());
         if (currentScreen != null && currentScreen.isMatchScreen()) {
-            menu.addSeparator();
-            menu.add(getMenu_HandOptions());
+            menu.add(getMenuItem_ShowBackgroundImage());
         }
         menu.addSeparator();
         menu.add(getMenuItem_FullScreen());
         menu.add(getMenuItem_SetWindowSize());
         if (currentScreen != FScreen.HOME_SCREEN) {
             menu.add(getMenuItem_RevertLayout());
+            menu.add(getMenuItem_ResetMatchLayout());
         }
         if (currentScreen != null && currentScreen != FScreen.HOME_SCREEN) {
             menu.addSeparator();
@@ -91,9 +92,8 @@ public final class LayoutMenu {
             menu.add(newCountItem);
 
             if (currentScreen.isMatchScreen()) {
-                menu.add(getMenuItem_ShowBackgroundImage());
-
                 menu.addSeparator();
+                menu.add(getMenu_HandOptions());
                 menu.add(getMenu_PromptPane());
                 menu.add(getMenu_LogPane());
 
@@ -367,12 +367,14 @@ public final class LayoutMenu {
 
     private static JMenu getMenu_LogPane() {
         final JMenu menu = new JMenu(localizer.getMessage("lblLogPanel"));
-        final ButtonGroup group = new ButtonGroup();
         final GameLogVerbosity currentVerbosity = GameLogVerbosity.fromString(prefs.getPref(FPref.DEV_LOG_ENTRY_TYPE));
 
         MenuUtil.addPrefCheckBox(menu, localizer.getMessage("lblLogShowCardImages"), FPref.UI_LOG_SHOW_CARD_IMAGES)
                 .addActionListener(e -> refreshLog());
-        menu.addSeparator();
+
+        // Detail Level sub-submenu
+        final JMenu detailMenu = new JMenu(localizer.getMessage("lblDetailLevel"));
+        final ButtonGroup group = new ButtonGroup();
 
         // Custom Categories menu item (declared early so radio button listeners can reference it)
         final JMenuItem customItem = new JMenuItem(localizer.getMessage("lblCustomCategories") + "...");
@@ -394,7 +396,7 @@ public final class LayoutMenu {
                 refreshLog();
             });
             group.add(item);
-            menu.add(item);
+            detailMenu.add(item);
         }
 
         // Custom radio button
@@ -409,12 +411,13 @@ public final class LayoutMenu {
             refreshLog();
         });
         group.add(customRadio);
-        menu.add(customRadio);
+        detailMenu.add(customRadio);
 
-        // Separator + Custom Categories dialog item
-        menu.addSeparator();
-        menu.add(customItem);
+        // Custom Categories dialog item
+        detailMenu.addSeparator();
+        detailMenu.add(customItem);
 
+        menu.add(detailMenu);
         return menu;
     }
 
@@ -521,6 +524,19 @@ public final class LayoutMenu {
 
     private static ActionListener getRevertLayoutAction() {
         return e -> SLayoutIO.revertLayout();
+    }
+
+    private static JMenuItem getMenuItem_ResetMatchLayout() {
+        final JMenuItem menuItem = new JMenuItem(localizer.getMessage("btnDeleteMatchUI"));
+        menuItem.addActionListener(e -> {
+            final String userPrompt = localizer.getMessage("AresetMatchScreenLayout");
+            if (FOptionPane.showConfirmDialog(userPrompt, localizer.getMessage("TresetMatchScreenLayout"))) {
+                if (FScreen.deleteMatchLayoutFile()) {
+                    FOptionPane.showMessageDialog(localizer.getMessage("OKresetMatchScreenLayout"));
+                }
+            }
+        });
+        return menuItem;
     }
 
     private static JMenuItem getMenuItem_SetWindowSize() {
