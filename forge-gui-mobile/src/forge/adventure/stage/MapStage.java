@@ -916,6 +916,16 @@ public class MapStage extends GameStage {
         return null;
     }
 
+    public int getRemainingEnemyCount() {
+        int count = 0;
+        for (EnemySprite enemy : enemies) {
+            if (enemy.getStage() != null && enemy.defeatDialog == null) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     public Actor getByID(int id) { //Search actor by ID.
         for (MapActor A : new Array.ArrayIterator<>(actors)) {
             if (A.getId() == id)

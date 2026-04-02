@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -69,6 +70,8 @@ public class GameHUD extends Stage {
     private final TypingLabel lifePoints;
     private final TypingLabel money;
     private final TypingLabel shards;
+    private final TypingLabel enemyCounterText;
+    private final Image enemyCounterBackground;
     private final TextraLabel notificationText = Controls.newTextraLabel("");
     private final Image miniMap, gamehud, mapborder, avatarborder, blank;
     private final InputEvent eventTouchDown, eventTouchUp;
@@ -159,6 +162,14 @@ public class GameHUD extends Stage {
         shards.setText("[%95][+Shards]");
         money.setText("[%95][+Gold]");
         lifePoints.setText("[%95][+Life]");
+        enemyCounterText = Controls.newTypingLabel(Forge.getLocalizer().getMessage("lblRemainingEnemies", String.valueOf(0)));
+        enemyCounterText.setColor(Color.BLACK);
+        enemyCounterText.skipToTheEnd();
+        enemyCounterText.setVisible(false);
+
+        ScrollPaneStyle paperStyle = Controls.getSkin().get("paper", ScrollPaneStyle.class);
+        enemyCounterBackground = new Image(paperStyle.background);
+        enemyCounterBackground.setVisible(false);
         AdventurePlayer.current().onLifeChange(() -> {
             String effect = "{EMERGE}";
             String effectEnd = "{ENDEMERGE}";
@@ -183,6 +194,8 @@ public class GameHUD extends Stage {
         AdventurePlayer.current().onEquipmentChanged(this::updateAbility);
         addActor(ui);
         addActor(miniMapPlayer);
+        addActor(enemyCounterBackground);
+        addActor(enemyCounterText);
         console = new Console();
         console.setBounds(0, GuiBase.isAndroid() ? getHeight() : 0, getWidth(), getHeight() / 2);
         console.setVisible(false);
@@ -416,6 +429,7 @@ public class GameHUD extends Stage {
         }
         if (MapStage.getInstance().isInMap())
             updateBookmarkActor(MapStage.getInstance().getChanges().isBookmarked());
+        updateEnemyCounter();
         avatarGroup.setZIndex(ui.getChildren().size);
     }
 
@@ -428,6 +442,32 @@ public class GameHUD extends Stage {
         keys += AdventurePlayer.current().hasItem("White Key") ? "[+WhiteKey]\n" : "[+Dot]\n";
         keys += AdventurePlayer.current().hasItem("Strange Key") ? "[+StrangeKey]" : "[+Dot]";
         keyCollection.setText(keys);
+    }
+
+    public void updateEnemyCounter() {
+        if (MapStage.getInstance().isInMap() && AdventureQuestController.instance().hasClearQuestActive()) {
+            int remaining = MapStage.getInstance().getRemainingEnemyCount();
+            enemyCounterText.setText(Forge.getLocalizer().getMessage("lblRemainingEnemies", String.valueOf(remaining)));
+            enemyCounterText.setVisible(true);
+            enemyCounterBackground.setVisible(true);
+
+            float paddingX = 4f;
+            float paddingY = 1.5f;
+            float margin = 2f;
+            float textWidth = enemyCounterText.getPrefWidth();
+            float textHeight = Math.max(enemyCounterText.getPrefHeight(), 12f);
+            float bgWidth = textWidth + paddingX * 2f;
+            float bgHeight = textHeight + paddingY * 2f;
+
+            float bgX = getWidth() - bgWidth - margin;
+            float bgY = margin;
+
+            enemyCounterBackground.setBounds(bgX, bgY, bgWidth, bgHeight);
+            enemyCounterText.setBounds(bgX + paddingX, bgY + paddingY, textWidth, textHeight);
+        } else {
+            enemyCounterText.setVisible(false);
+            enemyCounterBackground.setVisible(false);
+        }
     }
 
     void clearAbility() {
