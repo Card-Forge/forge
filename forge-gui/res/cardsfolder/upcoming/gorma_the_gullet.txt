@@ -5,7 +5,7 @@ PT:1/1
 K:Lifelink
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature you control dies, put a +1/+1 counter on NICKNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
-K:ETBReplacement:Other:AddExtraCounter:Mandatory:Battlefield:Creature.nonToken+YouCtrl
+K:ETBReplacement:Other:AddExtraCounter:Mandatory:Battlefield:Creature.!token+YouCtrl
 SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ X | SpellDescription$ Nontoken creatures you control enter with an additional +1/+1 counter on them for each creature that died under your control this turn.
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.YouCtrl
 DeckHas:Ability$Counters
