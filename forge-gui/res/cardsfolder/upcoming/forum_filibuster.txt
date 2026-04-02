@@ -2,8 +2,8 @@ Name:Forum Filibuster
 ManaCost:3 W W
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, create a 2/1 white and black Inkling creature token with flying. When you do, return up to one target Aura or Equipment card from your graveyard to the battlefield attached to that token.
-SVar:TrigToken:DB$ Token | TokenScript$ wb_2_1_inkling_flying | RememberTokens$ True | TokenOwner$ You | SubAbility$ DBImmediateTrig
-SVar:DBImmediateTrig:DB$ ImmediateTrigger | TriggerAmount$ Remembered$Amount | Execute$ TrigReturn | SubAbility$ DBCleanup | TriggerDescription$ When you do, return up to one target Aura or Equipment card from your graveyard to the battlefield attached to that token.
+SVar:TrigToken:DB$ Token | TokenScript$ wb_2_1_inkling_flying | RememberOriginalTokens$ True | TokenOwner$ You | SubAbility$ DBImmediateTrig
+SVar:DBImmediateTrig:DB$ ImmediateTrigger | TriggerAmount$ Remembered$Amount | RememberObjects$ Remembered | Execute$ TrigReturn | SubAbility$ DBCleanup | TriggerDescription$ When you do, return up to one target Aura or Equipment card from your graveyard to the battlefield attached to that token.
 SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Aura.YouOwn,Equipment.YouOwn | TargetMin$ 0 | TargetMax$ 1 | Origin$ Graveyard | Destination$ Battlefield | ValidTgtDesc$ Aura or Equipment card in your graveyard | AttachedTo$ Remembered
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Token
