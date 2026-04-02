@@ -1,6 +1,7 @@
 package forge.game.staticability;
 
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
 import java.util.Optional;
@@ -32,9 +33,10 @@ public class StaticAbilitySearchLibrary {
                 .orElse(null);
     }
 
-    public static boolean cantSearchLibrary(Player player) {
+    public static boolean cantSearchLibrary(Player player, SpellAbility cause) {
         return findStaticAbilityForValidPlayer(player, CantSearchLibrary)
                 .filter(stAb -> !stAb.getIgnoreEffectPlayers().contains(player))
+                .filter(stAb -> stAb.matchesValidParam("ValidCause", cause))
                 .isPresent();
     }
 
