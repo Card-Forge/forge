@@ -1,0 +1,8 @@
+Name:Forum of Amity
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+A:AB$ Mana | Cost$ T | Produced$ Combo W B | SpellDescription$ Add {W} or {B}.
+A:AB$ Surveil | Cost$ 2 W B T | Amount$ 1 | SpellDescription$ Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+Oracle:This land enters tapped.\n{T}: Add {W} or {B}.\n{2}{W}{B}, {T}: Surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
