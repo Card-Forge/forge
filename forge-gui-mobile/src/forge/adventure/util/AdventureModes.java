@@ -42,8 +42,8 @@ public enum AdventureModes {
     }
 
     public boolean isCommanderLike() {
-        if (this == Commander || this == CommanderPrecon) return true;
-        return this == Chaos && "Commander".equalsIgnoreCase(Config.instance().getConfigData().chaosDeckFormat);
+        boolean isChaosCommander = this == Chaos && "Commander".equalsIgnoreCase(Config.instance().getConfigData().chaosDeckFormat);
+        return this == Commander || this == CommanderPrecon || isChaosCommander;
     }
 
     public boolean usesFolderDeckPicker() {
