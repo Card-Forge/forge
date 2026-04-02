@@ -3,7 +3,7 @@ ManaCost:X G G U
 Types:Legendary Creature Fractal Wolf
 PT:0/0
 K:Trample
-K:etbCounter:P1P1:Y
+K:etbCounter:P1P1:Y:no Condition:NICKNAME enters with twice X +1/+1 counters on it.
 SVar:X:Count$xPaid
 SVar:Y:SVar$X/Twice
 T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl+basePowerEQ0 | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever one or more creatures you control with base power 0 deal combat damage to a player, create a 0/0 green and blue Fractal creature token. Put a number of +1/+1 counters on it equal to the damage dealt.
