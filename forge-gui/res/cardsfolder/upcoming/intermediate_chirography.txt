@@ -1,0 +1,13 @@
+Name:Intermediate Chirography
+ManaCost:1 B
+Types:Enchantment Class
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this Class enters, create a 2/1 white and black Inkling creature token with flying.
+SVar:TrigToken:DB$ Token | TokenScript$ wb_2_1_inkling_flying | TokenOwner$ You
+K:Class:2:1 B:AddTrigger$ LifeLossTrigger
+SVar:LifeLossTrigger:Mode$ LifeLost | ValidPlayer$ You | TriggerZones$ Battlefield | FirstTime$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever you lose life for the first time each turn, put a +1/+1 counter on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1
+K:Class:3:2 B:AddTrigger$ EndStepTrigger
+SVar:EndStepTrigger:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ X | Execute$ TrigToken | TriggerDescription$ At the beginning of each end step, if a modified creature died under your control this turn, create a 2/1 white and black Inkling creature token with flying. (Equipment, Auras you control, and counters are modifications.)
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.modified+YouCtrl
+DeckHas:Ability$Counters
+Oracle:(Gain the next level as a sorcery to add its ability.)\nWhen this Class enters, create a 2/1 white and black Inkling creature token with flying.\n{1}{B}: Level 2\nWhenever you lose life for the first time each turn, put a +1/+1 counter on target creature you control.\n{2}{B}: Level 3\nAt the beginning of each end step, if a modified creature died under your control this turn, create a 2/1 white and black Inkling creature token with flying. (Equipment, Auras you control, and counters are modifications.)
