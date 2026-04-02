@@ -1,0 +1,11 @@
+Name:Brass Infiniscope
+ManaCost:4
+Types:Artifact
+A:AB$ Mana | SubAbility$ DBEffect | Cost$ T | Produced$ C | Amount$ 2 | SpellDescription$ Add {C}{C}. When you next cast a spell with {X} in its mana cost this turn, you draw a card and gain half X life, rounded down.
+SVar:DBEffect:DB$ Effect | Triggers$ CastTrigger
+SVar:CastTrigger:Mode$ SpellAbilityCast | ValidActivatingPlayer$ You | ValidSA$ Spell | OneOff$ True | Execute$ TrigDraw | HasXManaCost$ True | TriggerDescription$ When you next cast a spell with {X} in its mana cost this turn, you draw a card and gain half X life, rounded down.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBGainLife
+SVar:DBGain:DB$ GainLife | LifeAmount$ Y | SubAbility$ DBCleanup
+SVar:X:Count$xPaid
+SVar:Y:SVar$X/HalfDown
+Oracle:{T}: Add {C}{C}. When you next cast a spell with {X} in its mana cost this turn, you draw a card and gain half X life, rounded down.
