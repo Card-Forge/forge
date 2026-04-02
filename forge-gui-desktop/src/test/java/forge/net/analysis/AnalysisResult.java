@@ -1,5 +1,6 @@
 package forge.net.analysis;
 
+import forge.gamemodes.net.server.DeltaSyncManager;
 import forge.net.TestUtils;
 
 import java.time.LocalDateTime;
@@ -36,6 +37,8 @@ public class AnalysisResult {
     private int totalChecksumMismatches;
     private int maxMismatchesPerGame;  // For persistent/cascading detection
     private int totalSendErrors;
+    private int totalDeltaPackets;
+    private int totalChecksumsFired;
 
     private long totalDeltaBytes;
     private long totalFullStateBytes;
@@ -91,6 +94,8 @@ public class AnalysisResult {
         totalChecksumMismatches = allMetrics.stream().mapToInt(GameLogMetrics::getChecksumMismatchCount).sum();
         maxMismatchesPerGame = allMetrics.stream().mapToInt(GameLogMetrics::getChecksumMismatchCount).max().orElse(0);
         totalSendErrors = allMetrics.stream().mapToInt(GameLogMetrics::getSendErrors).sum();
+        totalDeltaPackets = allMetrics.stream().mapToInt(GameLogMetrics::getDeltaPacketCount).sum();
+        totalChecksumsFired = allMetrics.stream().mapToInt(GameLogMetrics::getChecksumCount).sum();
 
         totalDeltaBytes = allMetrics.stream().mapToLong(GameLogMetrics::getTotalDeltaBytes).sum();
         totalFullStateBytes = allMetrics.stream().mapToLong(GameLogMetrics::getTotalFullStateBytes).sum();
@@ -348,6 +353,43 @@ public class AnalysisResult {
         sb.append("## Network Log Analysis Results\n\n");
         sb.append(String.format("**Analysis Date:** %s\n\n",
                 analysisTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))));
+
+        if (isBatchTestData()) {
+            sb.append("### Validation Status\n\n");
+            boolean passed = passesValidation();
+
+            if (passed) {
+                sb.append("**PASSED** - All validation criteria met:\n");
+            } else {
+                sb.append("**FAILED** - Validation criteria not met:\n");
+            }
+            sb.append(String.format("- [%s] Completion rate >= 90%% (actual: %.1f%%)\n",
+                    getCompletionRate() >= 90.0 ? "x" : " ", getCompletionRate()));
+            sb.append(String.format("- [%s] Zero send errors (actual: %d)\n",
+                    totalSendErrors == 0 ? "x" : " ", totalSendErrors));
+            if (hasDeltaSyncData()) {
+                sb.append(String.format("- [%s] Average bandwidth savings >= 90%% (actual: %.1f%%)\n",
+                        averageBandwidthSavings >= 90.0 ? "x" : " ", averageBandwidthSavings));
+            }
+            sb.append(String.format("- [%s] No persistent checksum mismatches (max %d per game, threshold: 1)\n",
+                    maxMismatchesPerGame <= 1 ? "x" : " ", maxMismatchesPerGame));
+            if (hasDeltaSyncData()) {
+                int threshold = DeltaSyncManager.CHECKSUM_INTERVAL * 5 / 4;
+                long expectedMin = totalDeltaPackets / threshold;
+                boolean checksumsFiring = totalDeltaPackets < DeltaSyncManager.CHECKSUM_INTERVAL
+                        || totalChecksumsFired >= expectedMin;
+                sb.append(String.format("- [%s] Checksums firing (%d checksums from %d deltas, expected >= %d)\n",
+                        checksumsFiring ? "x" : " ", totalChecksumsFired, totalDeltaPackets, expectedMin));
+            }
+            for (int p = 2; p <= 4; p++) {
+                PlayerCountStats stats = statsByPlayerCount.get(p);
+                if (stats != null) {
+                    sb.append(String.format("- [%s] %dp completion rate >= 80%% (actual: %.1f%%)\n",
+                            stats.successRate >= 80.0 ? "x" : " ", p, stats.successRate));
+                }
+            }
+            sb.append("\n");
+        }
 
         sb.append("### Game Completion\n\n");
         sb.append("| Total | Completed | Incomplete | Failed |\n");
@@ -649,37 +691,6 @@ public class AnalysisResult {
             sb.append("\n");
         }
 
-        if (isBatchTestData()) {
-            sb.append("### Validation Status\n\n");
-            boolean passed = passesValidation();
-
-            if (passed) {
-                sb.append("**PASSED** - All validation criteria met:\n");
-            } else {
-                sb.append("**FAILED** - Validation criteria not met:\n");
-            }
-            sb.append(String.format("- [%s] Completion rate >= 90%% (actual: %.1f%%)\n",
-                    getCompletionRate() >= 90.0 ? "x" : " ", getCompletionRate()));
-            sb.append(String.format("- [%s] Zero send errors (actual: %d)\n",
-                    totalSendErrors == 0 ? "x" : " ", totalSendErrors));
-            if (hasDeltaSyncData()) {
-                sb.append(String.format("- [%s] Average bandwidth savings >= 90%% (actual: %.1f%%)\n",
-                        averageBandwidthSavings >= 90.0 ? "x" : " ", averageBandwidthSavings));
-            }
-            sb.append(String.format("- [%s] No persistent checksum mismatches (max %d per game, threshold: 1)\n",
-                    maxMismatchesPerGame <= 1 ? "x" : " ", maxMismatchesPerGame));
-
-            // Per-player-count completion rates
-            for (int p = 2; p <= 4; p++) {
-                PlayerCountStats stats = statsByPlayerCount.get(p);
-                if (stats != null) {
-                    sb.append(String.format("- [%s] %dp completion rate >= 80%% (actual: %.1f%%)\n",
-                            stats.successRate >= 80.0 ? "x" : " ", p, stats.successRate));
-                }
-            }
-            sb.append("\n");
-        }
-
         sb.append("### Analyzed Log Files\n\n");
         sb.append(String.format("**Total files analyzed:** %d\n\n", totalGames));
         if (!allMetrics.isEmpty()) {
@@ -755,6 +766,8 @@ public class AnalysisResult {
         if (totalSendErrors > 0) return false;
         if (maxMismatchesPerGame > 1) return false;
         if (hasDeltaSyncData() && averageBandwidthSavings < 90.0) return false;
+        if (hasDeltaSyncData() && totalDeltaPackets >= DeltaSyncManager.CHECKSUM_INTERVAL
+                && totalChecksumsFired < totalDeltaPackets / (DeltaSyncManager.CHECKSUM_INTERVAL * 5 / 4)) return false;
         for (PlayerCountStats stats : statsByPlayerCount.values()) {
             if (stats.successRate < 80.0) return false;
         }

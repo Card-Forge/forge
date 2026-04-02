@@ -42,7 +42,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class DeltaSyncManager implements IHasNetLog {
 
     // How often to include a checksum for validation (every N packets)
-    private static final int CHECKSUM_INTERVAL = 20;
+    public static final int CHECKSUM_INTERVAL = 20;
     private static final int MIN_CHECKSUM_INTERVAL = 5;
     private static final int CLEAN_STREAK_TO_RESTORE = 10;
     private static final int SAMPLE_SIZE = 15;

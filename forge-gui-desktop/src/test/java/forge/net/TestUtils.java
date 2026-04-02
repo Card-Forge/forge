@@ -1,6 +1,8 @@
 package forge.net;
 
+import forge.gamemodes.net.IHasNetLog;
 import forge.gamemodes.net.NetworkChecksumUtil;
+import forge.gamemodes.net.server.RemoteClientGuiGame;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeNetPreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -54,9 +56,18 @@ public final class TestUtils {
         FModel.getNetPreferences().setPref(ForgeNetPreferences.FNetPref.NET_BANDWIDTH_LOGGING, true);
         FModel.getNetPreferences().setPref(ForgeNetPreferences.FNetPref.UPnP, "NEVER");
 
-        // Enable stable checksum for batch tests unless overridden via system property.
-        // Use -Dforge.checksum.mode=production to test with production (sampled) checksum.
+        // Use -Dforge.checksum.mode=production to test with production (sampled) checksum
         boolean useStable = !"production".equalsIgnoreCase(System.getProperty("forge.checksum.mode"));
         NetworkChecksumUtil.setStableChecksum(useStable);
+
+        // Use -Dforge.deltasync=false to disable delta sync (full state every update)
+        String deltaSyncProp = System.getProperty("forge.deltasync");
+        if ("false".equalsIgnoreCase(deltaSyncProp)) {
+            RemoteClientGuiGame.useDeltaSync = false;
+        }
+
+        IHasNetLog.netLog.info("[TestConfig] checksum={}, deltasync={}",
+                useStable ? "stable" : "sampled",
+                RemoteClientGuiGame.useDeltaSync ? "on" : "off");
     }
 }

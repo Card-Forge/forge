@@ -6,9 +6,12 @@ import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.net.IHasNetLog;
 import forge.gamemodes.net.NetworkLogConfig;
+import forge.gamemodes.net.server.DeltaSyncManager;
+import forge.gamemodes.net.server.RemoteClientGuiGame;
 import forge.localinstance.properties.ForgeConstants;
 import forge.deck.Deck;
 import forge.net.analysis.AnalysisResult;
+import forge.net.analysis.GameLogMetrics;
 import forge.net.analysis.NetworkLogAnalyzer;
 import forge.util.collect.FCollectionView;
 
@@ -375,6 +378,13 @@ public class NetworkPlayIntegrationTest implements IHasNetLog {
         int maxPerGame = analysisResult.getMaxMismatchesPerGame();
         netLog.info("Checksum mismatches: {} games, max {} per game (threshold: 1)", checksumMismatches, maxPerGame);
 
+        int totalChecksums = analysisResult.getAllMetrics().stream()
+                .mapToInt(GameLogMetrics::getChecksumCount).sum();
+        int checksumThreshold = DeltaSyncManager.CHECKSUM_INTERVAL * 5 / 4;
+        long expectedMinChecksums = totalDeltas / checksumThreshold;
+        netLog.info("Checksums fired: {} (deltas={}, expected >= {})",
+                totalChecksums, totalDeltas, expectedMinChecksums);
+
         long eventMismatches = executionResult.getTotalEventStateMismatches();
         int successCount = executionResult.getSuccessCount();
         long eventTolerance = successCount * 2;
@@ -400,6 +410,14 @@ public class NetworkPlayIntegrationTest implements IHasNetLog {
         Assert.assertTrue(eventMismatches < eventTolerance,
                 String.format("Event-state mismatches should average < 2 per game, had %d in %d games",
                         eventMismatches, successCount));
+
+        // Threshold is CHECKSUM_INTERVAL * 5/4 to give headroom for the adaptive
+        // interval and game-end boundary effects while still catching checksum failures
+        if (RemoteClientGuiGame.useDeltaSync && totalDeltas >= DeltaSyncManager.CHECKSUM_INTERVAL) {
+            Assert.assertTrue(totalChecksums >= expectedMinChecksums,
+                    String.format("Checksums should fire ~every %d deltas, expected >= %d but got %d (from %d deltas)",
+                            DeltaSyncManager.CHECKSUM_INTERVAL, expectedMinChecksums, totalChecksums, totalDeltas));
+        }
 
         for (int p = 2; p <= 4; p++) {
             int playerGameCount = executionResult.getGameCountByPlayers(p);

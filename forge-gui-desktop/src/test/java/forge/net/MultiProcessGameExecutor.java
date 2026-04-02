@@ -305,6 +305,14 @@ public class MultiProcessGameExecutor implements IHasNetLog {
         if (Boolean.getBoolean("test.useAiForRemote")) {
             command.add("-Dtest.useAiForRemote=true");
         }
+        String checksumMode = System.getProperty("forge.checksum.mode");
+        if (checksumMode != null) {
+            command.add("-Dforge.checksum.mode=" + checksumMode);
+        }
+        String deltaSyncProp = System.getProperty("forge.deltasync");
+        if (deltaSyncProp != null) {
+            command.add("-Dforge.deltasync=" + deltaSyncProp);
+        }
 
         command.add(runnerClass);
         command.add(String.valueOf(port));
