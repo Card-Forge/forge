@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -35,6 +36,7 @@ import com.github.tommyettinger.textra.TypingLabel;
 import java.util.EnumSet;
 
 import forge.Forge;
+import forge.adventure.character.EnemySprite;
 import forge.adventure.character.CharacterSprite;
 import forge.adventure.data.AdventureQuestData;
 import forge.adventure.data.ItemData;
@@ -51,6 +53,7 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
 import forge.adventure.util.KeyBinding;
+import forge.adventure.util.NavArrowActor;
 import forge.adventure.util.UIActor;
 import forge.adventure.world.WorldSave;
 import forge.deck.Deck;
@@ -87,6 +90,9 @@ public class GameHUD extends Stage {
     private boolean dialogOnlyInput;
     private final Array<TextraButton> dialogButtonMap = new Array<>();
     private final Array<TextraButton> abilityButtonMap = new Array<>();
+    private final Array<NavArrowActor> hiddenEnemyChevrons = new Array<>();
+    private final Vector2 chevronStageCoordinates = new Vector2();
+    private final Vector3 playerProjectedCoordinates = new Vector3();
     private String lifepointsTextColor = "";
     private final ScrollPane notificationPane;
     private final Group mapGroup = new Group();
@@ -351,6 +357,7 @@ public class GameHUD extends Stage {
         int yPos = (int) gameStage.player.getY();
         int xPos = (int) gameStage.player.getX();
         act(Gdx.graphics.getDeltaTime()); //act the Hud
+        updateHiddenEnemyChevrons();
         super.draw(); //draw the Hud
         int xPosMini = (int) (((float) xPos / (float) WorldSave.getCurrentSave().getWorld().getTileSize() / (float) WorldSave.getCurrentSave().getWorld().getWidthInTiles()) * miniMap.getWidth());
         int yPosMini = (int) (((float) yPos / (float) WorldSave.getCurrentSave().getWorld().getTileSize() / (float) WorldSave.getCurrentSave().getWorld().getHeightInTiles()) * miniMap.getHeight());
@@ -467,6 +474,74 @@ public class GameHUD extends Stage {
         } else {
             enemyCounterText.setVisible(false);
             enemyCounterBackground.setVisible(false);
+        }
+    }
+
+    private void hideHiddenEnemyChevrons() {
+        for (NavArrowActor chevron : hiddenEnemyChevrons) {
+            chevron.setVisible(false);
+        }
+    }
+
+    private NavArrowActor getChevronActor(int index) {
+        while (hiddenEnemyChevrons.size <= index) {
+            NavArrowActor chevron = new NavArrowActor();
+            chevron.setTouchable(Touchable.disabled);
+            chevron.setVisible(false);
+            hiddenEnemyChevrons.add(chevron);
+            addActor(chevron);
+        }
+        return hiddenEnemyChevrons.get(index);
+    }
+
+    private void positionChevron(NavArrowActor chevron, EnemySprite enemy, int index) {
+        playerProjectedCoordinates.set(MapStage.getInstance().player.getX() + MapStage.getInstance().player.getWidth() * 0.5f,
+                MapStage.getInstance().player.getY() + MapStage.getInstance().player.getHeight() * 0.5f, 0f);
+        MapStage.getInstance().getCamera().project(playerProjectedCoordinates, 0f, 0f, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        chevronStageCoordinates.set(playerProjectedCoordinates.x, playerProjectedCoordinates.y);
+        screenToStageCoordinates(chevronStageCoordinates);
+
+        Vector2 navDirection = new Vector2(enemy.pos()).sub(MapStage.getInstance().player.pos());
+        if (navDirection.isZero(0.01f)) {
+            navDirection.set(1f, 0f);
+        } else {
+            navDirection.nor();
+        }
+
+        Vector2 side = new Vector2(-navDirection.y, navDirection.x);
+        int lane = index / 2;
+        float spread = (index % 2 == 0 ? 1f : -1f) * lane * 9f;
+        float offsetFromPlayer = 18f;
+        float pointerX = chevronStageCoordinates.x + navDirection.x * offsetFromPlayer + side.x * spread;
+        float pointerY = chevronStageCoordinates.y + navDirection.y * offsetFromPlayer + side.y * spread;
+
+        chevron.navTargetAngle = navDirection.angleDeg();
+        chevron.setPosition(pointerX, pointerY);
+        chevron.setVisible(true);
+    }
+
+    private void updateHiddenEnemyChevrons() {
+        if (!Config.instance().getSettingData().drawChevronsToHiddenEnemiesInClearQuest
+                || hidden
+                || !MapStage.getInstance().isInMap()
+                || !AdventureQuestController.instance().hasClearQuestActive()
+                || MapStage.getInstance().getRemainingEnemyCount() <= 0) {
+            hideHiddenEnemyChevrons();
+            return;
+        }
+
+        int chevronIndex = 0;
+        for (EnemySprite enemy : MapStage.getInstance().enemies) {
+            if (!enemy.hidden || enemy.getStage() == null || enemy.defeatDialog != null) {
+                continue;
+            }
+            NavArrowActor chevron = getChevronActor(chevronIndex);
+            positionChevron(chevron, enemy, chevronIndex);
+            chevronIndex++;
+        }
+
+        while (chevronIndex < hiddenEnemyChevrons.size) {
+            hiddenEnemyChevrons.get(chevronIndex++).setVisible(false);
         }
     }
 
