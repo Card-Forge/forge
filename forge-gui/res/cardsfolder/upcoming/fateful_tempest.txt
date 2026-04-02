@@ -1,7 +1,7 @@
 Name:Fateful Tempest
 ManaCost:2 R
 Types:Sorcery
-A:SP$ Vote | Defined$ Player | Choices$ DBVotePast,DBVotePresent | StoreVoteNum$ True | SpellDescription$ Council's dilemma — Starting with you, each player votes for past or present. You mill a card for each past vote, then Fateful Tempest deals damage to each opponent equal to the total mana value of cards milled this way. Exile the top card of your library for each present vote. Until the end of your next turn, you may play the exiled cards.
+A:SP$ Vote | Defined$ Player | Choices$ DBVotePast,DBVotePresent | StoreVoteNum$ True | SpellDescription$ Council's dilemma — Starting with you, each player votes for past or present. You mill a card for each past vote, then CARDNAME deals damage to each opponent equal to the total mana value of cards milled this way. Exile the top card of your library for each present vote. Until the end of your next turn, you may play the exiled cards.
 SVar:DBVotePast:DB$ Mill | NumCards$ VoteNum | Defined$ You | RememberMilled$ True | SubAbility$ DBDamage | SpellDescription$ Past
 SVar:DBDamage:DB$ DamageAll | ValidPlayers$ Player.Opponent | NumDmg$ X
 SVar:DBVotePresent:DB$ Dig | Defined$ You | DigNum$ VoteNum | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Present
