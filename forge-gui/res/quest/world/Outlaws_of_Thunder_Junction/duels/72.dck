@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Isis
+Title=Isis
+Icon=Isis.jpg
+Difficulty=Hard
+Description=./Modern/Outlaws_of_Thunder_Junction/AndreaMengucci_-_Gruul_Prowess_Modern_(Modern,_#2030528).dck
+Deck Type=constructed
+
+[Main]
+4 Dragon's Rage Channeler
+4 Monastery Swiftspear
+4 Questing Druid
+4 Slickshot Show-Off
+4 Soul-Scar Mage
+4 Mishra's Bauble
+2 Wild Slash
+4 Lava Dart
+4 Lightning Bolt
+3 Mutagenic Growth
+3 Abundant Harvest
+2 Underworld Breach
+3 Mountain
+2 Bloodstained Mire
+1 Commercial District
+3 Stomping Ground
+2 Arid Mesa
+1 Sunbaked Canyon
+2 Wooded Foothills
+4 Scalding Tarn
+[Sideboard]
+2 Blood Moon
+2 Destructive Revelry
+1 Jegantha, the Wellspring
+2 Magus of the Moon
+4 Pick Your Poison
+4 Tormod's Crypt

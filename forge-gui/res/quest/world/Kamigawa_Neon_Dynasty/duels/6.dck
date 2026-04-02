@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Samantha Stephens
+Title=Samantha Stephens
+Icon=Samantha Stephens.jpg
+Difficulty=Easy
+Description=./Standard/Kamigawa_Neon_Dynasty/BReal2_-_Mono_Green_(Standard,_#1304544).dck
+Deck Type=constructed
+
+[Main]
+3 Ulvenwald Oddity
+4 Ascendant Packleader
+4 Werewolf Pack Leader
+4 Sculptor of Winter
+4 Old-Growth Troll
+4 Esika's Chariot
+3 Invoke the Ancients
+4 Blizzard Brawl
+2 Ranger Class
+1 Boseiju, Who Endures
+3 Lair of the Hydra
+4 Kazandu Mammoth
+20 Snow-Covered Forest
+[Sideboard]
+1 Invoke the Ancients
+2 Unnatural Growth
+2 Master's Rebuke
+2 Briarbridge Tracker
+4 Snakeskin Veil
+4 Tangletrap

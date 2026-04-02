@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Kang
+Title=Kang
+Icon=Kang.jpg
+Difficulty=Very Hard
+Description=./Modern/The_Lost_Caverns_of_Ixalan/Alexander_Wiener_-_Rakdos_Grief_(Modern,_#1978134).dck
+Deck Type=constructed
+
+[Main]
+4 Ragavan, Nimble Pilferer
+4 Seasoned Pyromancer
+2 Magus of the Moon
+2 Sheoldred, the Apocalypse
+4 Grief
+4 Orcish Bowmasters
+4 Dauthi Voidwalker
+2 Troll of Khazad-dûm
+1 Malakir Rebirth
+4 Fatal Push
+4 Persist
+4 Thoughtseize
+2 Molten Collapse
+4 Blood Crypt
+4 Verdant Catacombs
+4 Marsh Flats
+3 Blackcleave Cliffs
+1 Mount Doom
+2 Swamp
+1 Takenuma, Abandoned Mire
+[Sideboard]
+2 Cast into the Fire
+2 Hidetsugu Consumes All
+2 Magus of the Moon
+2 Pithing Needle
+4 Leyline of the Void
+2 Sudden Edict
+1 Sheoldred's Edict

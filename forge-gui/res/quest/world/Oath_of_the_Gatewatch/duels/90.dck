@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Grampa Simpson
+Title=Grampa Simpson
+Icon=Grampa Simpson.jpg
+Difficulty=Very Hard
+Description=../Modern/Oath_of_the_Gatewatch/Grand_Prix_Bologna_2016/Marcio_Carvalho_-_Eldrazi_(Modern,_#605861).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Drowner of Hope
+4 Eldrazi Displacer
+4 Eldrazi Mimic
+4 Eldrazi Skyspawner
+4 Endless One
+4 Reality Smasher
+4 Thought-Knot Seer
+1 Cyclonic Rift
+2 Dismember
+4 Path to Exile
+4 Adarkar Wastes
+2 Cavern of Souls
+2 Caves of Koilos
+4 Eldrazi Temple
+4 Eye of Ugin
+4 Flooded Strand
+2 Hallowed Fountain
+1 Island
+1 Plains
+1 Urborg, Tomb of Yawgmoth
+[Sideboard]
+2 Grafdigger's Cage
+1 Hurkyl's Recall
+1 Oblivion Sower
+2 Ratchet Bomb
+1 Spellskite
+3 Stony Silence
+3 Stubborn Denial
+1 Vesuva

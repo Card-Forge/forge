@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Zombie Attack
+Title=Zombie Attack
+Icon=Zombie Attack.jpg
+Difficulty=Easy
+Description=./Standard/War_of_the_Spark/Aaron_Goforth_-_Bant_Superfriends_(Standard,_#800886).dck
+Deck Type=constructed
+
+[Main]
+3 Deputy of Detention
+3 Frilled Mystic
+4 Growth-Chamber Guardian
+4 Hydroid Krasis
+3 Incubation Druid
+4 Llanowar Elves
+2 God-Eternal Oketra
+1 Lyra Dawnbringer
+2 Shalai, Voice of Plenty
+2 Prison Realm
+4 Teferi, Time Raveler
+3 Vivien, Champion of the Wilds
+3 Forest
+4 Breeding Pool
+3 Glacial Fortress
+4 Hallowed Fountain
+4 Hinterland Harbor
+3 Sunpetal Grove
+4 Temple Garden
+[Sideboard]
+3 Knight of Autumn
+2 Prison Realm
+1 Disdainful Stroke
+1 Dovin's Veto
+2 Negate
+1 God-Eternal Oketra
+1 Lyra Dawnbringer
+2 Ajani, the Greathearted
+1 Teyo, the Shieldmage
+1 Vivien, Champion of the Wilds

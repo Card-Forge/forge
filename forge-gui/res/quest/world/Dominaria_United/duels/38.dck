@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Tanit
+Title=Tanit
+Icon=Tanit.jpg
+Difficulty=Easy
+Description=./Standard/Dominaria_United/AliEldrazi_-_Soul_of_Windgrace_(Standard,_#1483275).dck
+Deck Type=constructed
+
+[Main]
+1 Tenacious Underdog
+2 Sheoldred, the Apocalypse
+3 Soul of Windgrace
+3 Titan of Industry
+4 Fable of the Mirror-Breaker
+4 Bloodtithe Harvester
+2 Reckoner Bankbuster
+1 Unleash the Inferno
+2 Cut Down
+1 Burn Down the House
+1 Soul Transfer
+2 Invoke Despair
+3 The Cruelty of Gix
+4 Liliana of the Veil
+1 Takenuma, Abandoned Mire
+1 Boseiju, Who Endures
+1 Forest
+2 Mountain
+2 Sulfurous Springs
+3 Riveteers Overlook
+3 Deathcap Glade
+3 Rockfall Vale
+3 Swamp
+4 Haunted Ridge
+4 Ziatora's Proving Ground
+[Sideboard]
+1 Titan of Industry
+1 Sorin the Mirthless
+1 Sheoldred, the Apocalypse
+1 Soul Transfer
+1 Tear Asunder
+1 Reckoner Bankbuster
+1 Cut Down
+1 Unleash the Inferno
+1 Invoke Despair
+1 Burn Down the House
+2 Graveyard Trespasser
+3 Duress

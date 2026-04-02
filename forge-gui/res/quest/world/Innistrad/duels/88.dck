@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Blue Devil
+Title=Blue Devil
+Icon=Blue Devil.jpg
+Difficulty=Very Hard
+Description=../Modern/Innistrad/WPN_Qualifier_Modern_Turniers_vom_06.12.2011/Philipp_Baum_-_Counter_Cat_(Modern,_#23445).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Kird Ape
+3 Knight of the Reliquary
+4 Loam Lion
+4 Tarmogoyf
+4 Watchwolf
+4 Wild Nacatl
+4 Bant Charm
+4 Lightning Bolt
+3 Lightning Helix
+4 Path to Exile
+4 Arid Mesa
+1 Breeding Pool
+1 Forest
+1 Hallowed Fountain
+2 Horizon Canopy
+4 Misty Rainforest
+1 Plains
+1 Sacred Foundry
+4 Scalding Tarn
+1 Steam Vents
+1 Stomping Ground
+1 Temple Garden
+[Sideboard]
+2 Burrenton Forge-Tender
+1 Elspeth, Knight-Errant
+4 Mana Leak
+3 Seal of Primordium
+1 Snapcaster Mage
+2 Spell Pierce
+2 Sword of War and Peace

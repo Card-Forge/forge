@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Odysseus
+Title=Odysseus
+Icon=Odysseus.jpg
+Difficulty=Medium
+Description=Aether_Revolt/Terribad_-_BG_Constrictor_(Standard,_#667843).dck
+Deck Type=constructed
+
+[Main]
+4 Glint-Sleeve Siphoner
+4 Greenbelt Rampager
+4 Longtusk Cub
+4 Rishkar, Peema Renegade
+4 Verdurous Gearhulk
+4 Walking Ballista
+4 Winding Constrictor
+2 Aethersphere Harvester
+3 Fatal Push
+2 Grasp of Darkness
+4 Attune with Aether
+4 Aether Hub
+4 Blooming Marsh
+6 Forest
+3 Hissing Quagmire
+4 Swamp
+[Sideboard]
+1 Appetite for the Unnatural
+1 Fatal Push
+3 Lifecrafter's Bestiary
+2 Murder
+1 Nissa, Vital Force
+1 Noxious Gearhulk
+2 Ob Nixilis Reignited
+1 Skysovereign, Consul Flagship
+3 Transgress the Mind

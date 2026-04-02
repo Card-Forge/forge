@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Radiant
+Title=Radiant
+Icon=Radiant.jpg
+Difficulty=Hard
+Description=../Modern/Journey_into_Nyx/SCG_Invitational_Qualifier_Great_Falls/Matthew_Cox_-_Red_Deck_Wins_(Modern,_#88068).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+1 Grim Lavamancer
+4 Hellspark Elemental
+1 Vexing Devil
+4 Lightning Bolt
+2 Magma Jet
+3 Searing Blaze
+4 Shard Volley
+4 Skullcrack
+1 Flames of the Firebrand
+4 Lava Spike
+4 Rift Bolt
+20 Mountain
+[Sideboard]
+2 Combust
+3 Dragon's Claw
+2 Molten Rain
+3 Relic of Progenitus
+2 Searing Blood
+3 Smash to Smithereens

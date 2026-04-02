@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Baal
+Title=Baal
+Icon=Baal.jpg
+Difficulty=Very Hard
+Description=./Modern/Strixhaven_School_of_Mages/blindmalkavian_._-_Infect_(Modern,_#1153605).dck
+Deck Type=constructed
+
+[Main]
+3 Spellskite
+4 Noble Hierarch
+4 Blighted Agent
+4 Glistener Elf
+1 Dismember
+1 Dispel
+3 Blossoming Defense
+4 Snakeskin Veil
+4 Vines of Vastwood
+4 Might of Old Krosa
+1 Sylvan Scrying
+3 Distortion Strike
+4 Scale Up
+2 Pendelhaven
+3 Breeding Pool
+3 Forest
+4 Yavimaya Coast
+4 Botanical Sanctum
+4 Inkmoth Nexus
+[Sideboard]
+1 Pithing Needle
+1 Pulse of Murasa
+2 Dismember
+2 Test of Talents
+2 Life Goes On
+3 Veil of Summer
+4 Wilt

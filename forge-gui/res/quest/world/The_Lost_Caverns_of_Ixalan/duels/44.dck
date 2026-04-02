@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Chief_Wiggum
+Title=Chief_Wiggum
+Icon=Chief_Wiggum.jpg
+Difficulty=Easy
+Description=./Standard/The_Lost_Caverns_of_Ixalan/Jacopogiacomoni_-_Dimir_Midrange_(Standard,_#1980715).dck
+Deck Type=constructed
+
+[Main]
+1 Aclazotz, Deepest Betrayal
+3 Preacher of the Schism
+4 Deep-Cavern Bat
+4 Spyglass Siren
+4 Faerie Mastermind
+4 Gix, Yawgmoth Praetor
+2 Sheoldred, the Apocalypse
+2 Ertai Resurrected
+4 Go for the Throat
+4 Make Disappear
+3 Cut Down
+3 Swamp
+3 Restless Reef
+1 Takenuma, Abandoned Mire
+3 Mirrex
+3 Island
+4 Darkslick Shores
+1 Otawara, Soaring City
+4 Underground River
+3 Shipwreck Marsh
+[Sideboard]
+1 Sorin the Mirthless
+3 Path of Peril
+1 Negate
+3 Duress
+2 Disdainful Stroke
+2 Spell Pierce
+1 Cut Down
+2 Tishana's Tidebinder

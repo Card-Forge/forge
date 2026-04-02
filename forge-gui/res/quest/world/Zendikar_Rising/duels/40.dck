@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Jesse James
+Title=Jesse James
+Icon=Jesse James.jpg
+Difficulty=Easy
+Description=./Standard/Zendikar_Rising/Alan_Macfarlane_-_Izzet_Control_(Standard,_#1044907).dck
+Deck Type=constructed
+
+[Main]
+4 Sprite Dragon
+2 Silundi Vision
+2 Jwari Disruption
+2 Cinderclasm
+2 Kazuul's Fury
+3 Neutralize
+4 Thirst for Meaning
+4 Mystical Dispute
+4 Spikefield Hazard
+4 Opt
+3 Storm's Wrath
+3 Confounding Conundrum
+3 Shark Typhoon
+4 Fabled Passage
+4 Temple of Epiphany
+4 Riverglide Pathway
+4 Mountain
+4 Island
+[Sideboard]
+1 Rielle, the Everwise
+1 Shadowspear
+1 Brazen Borrower
+2 Improbable Alliance
+2 Essence Scatter
+2 Riddleform
+3 Negate
+3 Shredded Sails

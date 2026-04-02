@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Dr Fate
+Title=Dr Fate
+Icon=Dr Fate.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Crimson_Vow/ogino_yosiriro_-_Spirit_(Modern,_#1244473).dck
+Deck Type=constructed
+
+[Main]
+2 Skyclave Apparition
+2 Selfless Spirit
+3 Cemetery Illuminator
+3 Shacklegeist
+3 Noble Hierarch
+4 Drogskol Captain
+4 Spell Queller
+4 Supreme Phantom
+4 Rattlechains
+4 Mausoleum Wanderer
+2 Veil of Summer
+4 Collected Company
+1 Island
+1 Mana Confluence
+1 Moorland Haunt
+1 Plains
+1 Temple Garden
+1 Forest
+1 Breeding Pool
+2 Cavern of Souls
+4 Hallowed Fountain
+4 Flooded Strand
+4 Windswept Heath
+[Sideboard]
+1 Kataki, War's Wage
+1 Lavinia, Azorius Renegade
+1 Prismatic Ending
+1 Selfless Spirit
+1 Veil of Summer
+2 Spectral Sailor
+2 Path to Exile
+2 Teferi, Time Raveler
+2 Rest in Peace
+2 Lofty Denial

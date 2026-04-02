@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Ga-Gorib
+Title=Ga-Gorib
+Icon=Ga-Gorib.jpg
+Difficulty=Medium
+Description=./Standard/Tarkir_Dragonstorm/JamesonPerdue_-_Golgari_Obliterator_(Standard,_#2452097).dck
+Deck Type=constructed
+
+[Main]
+2 Harvester of Misery
+4 Phyrexian Obliterator
+4 Mosswood Dreadknight
+3 Surrak, Elusive Hunter
+4 Sentinel of the Nameless City
+3 Sheoldred, the Apocalypse
+3 Herd Heirloom
+2 Anoint with Affliction
+4 Go for the Throat
+4 Cut Down
+4 Bushwhack
+4 Llanowar Wastes
+4 Restless Cottage
+7 Swamp
+4 Wastewood Verge
+4 Blooming Marsh
+[Sideboard]
+3 Duress
+2 Maelstrom Pulse
+2 Gix's Command
+2 Tranquil Frillback
+2 Tear Asunder
+1 Vivien Reid
+1 Thrun, Breaker of Silence
+2 Ghost Vacuum

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Asanbosam
+Title=Asanbosam
+Icon=Asanbosam.jpg
+Difficulty=Hard
+Description=./Modern/Innistrad_Crimson_Vow/Kotva_-_Zombies_(Modern,_#1460188)_[!].dck
+Deck Type=constructed
+
+[Main]
+2 Cryptbreaker
+3 Headless Rider
+3 Geralf's Messenger
+3 Champion of the Perished
+4 Undead Augur
+4 Shambling Ghast
+4 Gravecrawler
+4 Dreadhorde Butcher
+4 Carrion Feeder
+4 Lightning Bolt
+4 Goblin Bombardment
+2 Liliana, Untouched by Death
+1 Urborg, Tomb of Yawgmoth
+2 Cavern of Souls
+3 Blood Crypt
+3 Marsh Flats
+3 Castle Locthwain
+4 Bloodstained Mire
+4 Swamp
+[Sideboard]
+2 Alpine Moon
+3 Thoughtseize
+3 Shenanigans
+3 Collective Brutality
+4 Leyline of the Void

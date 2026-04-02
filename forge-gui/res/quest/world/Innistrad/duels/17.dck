@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Aladdin
+Title=Aladdin
+Icon=Aladdin.jpg
+Difficulty=Medium
+Description=Innistrad/2011_MTGGrudgeMatch_-_Swiss_Event__-_10-01/DanJordan_-_Red_Deck_Wins_(Standard,_#20427).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Chandra's Phoenix
+4 Furnace Scamp
+3 Grim Lavamancer
+3 Manic Vandal
+4 Stormblood Berserker
+4 Stromkirk Noble
+4 Shrine of Burning Rage
+4 Galvanic Blast
+4 Incinerate
+2 Arc Trail
+2 Koth of the Hammer
+22 Mountain
+[Sideboard]
+2 Dismember
+1 Hero of Oxid Ridge
+1 Manabarbs
+2 Perilous Myr
+4 Vulshok Refugee

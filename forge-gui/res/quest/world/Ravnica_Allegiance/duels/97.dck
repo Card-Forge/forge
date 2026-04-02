@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Yemaya
+Title=Yemaya
+Icon=Yemaya.jpg
+Difficulty=Very Hard
+Description=./Modern/Ravnica_Allegiance/Ambrosio_Iniesta_-_Red_Deck_Wins_(Modern,_#782661).dck
+Deck Type=constructed
+
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+4 Monastery Swiftspear
+1 Grim Lavamancer
+4 Lightning Bolt
+4 Searing Blaze
+4 Boros Charm
+4 Lightning Helix
+4 Lava Spike
+4 Rift Bolt
+4 Skewer the Critics
+2 Sacred Foundry
+3 Arid Mesa
+4 Bloodstained Mire
+3 Wooded Foothills
+3 Mountain
+3 Inspiring Vantage
+1 Stomping Ground
+[Sideboard]
+3 Skullcrack
+2 Ensnaring Bridge
+2 Searing Blood
+3 Cindervines
+2 Rest in Peace
+1 Surgical Extraction
+2 Path to Exile

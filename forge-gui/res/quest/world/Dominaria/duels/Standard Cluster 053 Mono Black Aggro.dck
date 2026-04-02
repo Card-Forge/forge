@@ -1,0 +1,31 @@
+[metadata]
+Name=Mono Black Aggro
+Deck Type=constructed
+Title=Mono Black Aggro
+Description=Mono Black Aggro
+Difficulty=Hard
+Icon=Leela
+[Main]
+3 Aethersphere Harvester
+3 Bone Picker
+4 Dread Wanderer
+4 Fatal Push
+4 Glint-Sleeve Siphoner
+4 Grasping Scoundrel
+4 Ifnir Deadlands
+4 Night Market Lookout
+2 Ruin Raider
+4 Scrapheap Scrounger
+3 Supernatural Stamina
+1 Swamp
+6 Swamp
+5 Swamp
+3 Swamp
+4 Vicious Conquistador
+2 Walk the Plank
+[Sideboard]
+3 Doomfall
+4 Duress
+4 Gifted Aetherborn
+2 Harsh Scrutiny
+2 Walk the Plank

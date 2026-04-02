@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Preacher
+Title=Preacher
+Icon=Preacher.jpg
+Difficulty=Medium
+Description=./Standard/Wilds_of_Eldraine/AKA_Syx_-_Orzhov_Control_Auras_(Standard,_#1739024).dck
+Deck Type=constructed
+
+[Main]
+4 Eriette of the Charmed Apple
+4 Light-Paws, Emperor's Voice
+3 Spellbook Vendor
+4 Slumbering Keepguard
+3 Candy Grapple
+2 Beseech the Mirror
+3 Clawing Torment
+3 Lord Skitter's Blessing
+3 Ossification
+2 Radiant Grace
+3 Raffine's Guidance
+2 The Witch's Vanity
+2 Twisted Embrace
+2 Takenuma, Abandoned Mire
+4 Swamp
+6 Plains
+2 Eiganjo, Seat of the Empire
+4 Shattered Sanctum
+4 Caves of Koilos
+[Sideboard]
+1 Eriette's Whisper
+1 Kellan's Lightblades
+1 Archon of the Wild Rose
+1 Invasion of Theros
+1 Return Triumphant
+1 Warehouse Tabby

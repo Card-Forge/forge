@@ -101,6 +101,11 @@
       {
         "type": "card",
         "count": 1,
+        "cardName": "1996 World Champion"
+      },
+      {
+        "type": "card",
+        "count": 1,
         "cardName": "Ancestral Recall",
         "editions": [ "VMA" ]
       },

@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=King Goldemar
+Title=King Goldemar
+Icon=King Goldemar.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine/MrJACEtwo_-_8-Cast_Affinity_(Modern,_#1633637)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Frogmite
+4 Ornithopter
+2 Memnite
+2 Memnite
+1 Gingerbrute
+4 Thought Monitor
+4 Sojourner's Companion
+2 Patchwork Automaton
+4 Halo Hopper
+1 Aether Spellbomb
+1 Welding Jar
+3 Cranial Plating
+3 Springleaf Drum
+1 Cranial Plating
+1 Shadowspear
+1 Springleaf Drum
+4 Thoughtcast
+4 Urza's Saga
+1 Island
+2 Darksteel Citadel
+2 Darksteel Citadel
+1 Spire of Industry
+4 Mistvault Bridge
+3 Treasure Vault
+1 Otawara, Soaring City
+[Sideboard]
+1 Hurkyl's Recall
+1 Relic of Progenitus
+1 Pithing Needle
+1 Dismember
+1 Tormod's Crypt
+1 Dismember
+3 Metallic Rebuke
+3 Damping Sphere
+1 Jegantha, the Wellspring
+2 Haywire Mite

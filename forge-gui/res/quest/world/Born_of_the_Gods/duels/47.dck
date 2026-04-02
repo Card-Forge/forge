@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Abraham Lincoln
+Title=Abraham Lincoln
+Icon=Abraham Lincoln.jpg
+Difficulty=Medium
+Description=Born_of_the_Gods/DeckTutor_Series_3^_Tappa_Standard,_Bologna/Fabio_Montresor_-_Mono_Black_(Standard,_#68701).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Desecration Demon
+4 Gray Merchant of Asphodel
+3 Lifebane Zombie
+4 Nightveil Specter
+1 Whip of Erebos
+3 Abrupt Decay
+1 Bile Blight
+2 Devour Flesh
+4 Hero's Downfall
+2 Ultimate Price
+4 Thoughtseize
+3 Underworld Connections
+4 Golgari Guildgate
+4 Mutavault
+4 Overgrown Tomb
+11 Swamp
+2 Temple of Mystery
+[Sideboard]
+3 Dark Betrayal
+3 Doom Blade
+3 Duress
+2 Erebos, God of the Dead
+1 Vraska the Unseen

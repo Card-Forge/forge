@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Hulk
+Title=Hulk
+Icon=Hulk.jpg
+Difficulty=Easy
+Description=Worldwake/Star_City_$5,000_Standard_Open_-_Richmond/Alex_Bertoncini_-_Jund_(Standard,_#2353).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodbraid Elf
+2 Broodmate Dragon
+3 Great Sable Stag
+4 Siege-Gang Commander
+4 Sprouting Thrinax
+4 Lightning Bolt
+2 Terminate
+4 Blightning
+3 Maelstrom Pulse
+3 Rampant Growth
+2 Garruk Wildspeaker
+3 Dragonskull Summit
+2 Forest
+2 Mountain
+4 Raging Ravine
+3 Rootbound Crag
+4 Savage Lands
+3 Swamp
+4 Verdant Catacombs
+[Sideboard]
+2 Deathmark
+3 Fleshbag Marauder
+4 Goblin Ruinblaster
+2 Malakir Bloodwitch
+3 Thought Hemorrhage

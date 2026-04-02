@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Aqueduct
+Title=Aqueduct
+Icon=Aqueduct.jpg
+Difficulty=Easy
+Description=./Standard/Tarkir_Dragonstorm/Fujimoto_Yuma_-_UBG_Midrange_(Standard,_#2452238).dck
+Deck Type=constructed
+
+[Main]
+4 Marang River Regent
+4 Scavenger Regent
+4 Bloomvine Regent
+4 Sagu Wildling
+4 Disruptive Stormbrood
+2 Go for the Throat
+2 Sheoldred's Edict
+4 Dispelling Exhale
+2 Caustic Exhale
+4 Roiling Dragonstorm
+2 Corroding Dragonstorm
+2 Island
+3 Swamp
+6 Forest
+2 Cavern of Souls
+1 Darkslick Shores
+1 Gloomlake Verge
+1 Wastewood Verge
+4 Willowrush Verge
+4 Maelstrom of the Spirit Dragon
+[Sideboard]
+3 Spell Pierce
+2 Duress
+2 Soul-Guide Lantern
+2 Cut Down
+4 Wear Down
+2 Caustic Exhale

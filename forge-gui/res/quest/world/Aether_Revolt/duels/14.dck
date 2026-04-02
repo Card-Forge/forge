@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Comic Book Guy
+Title=Comic Book Guy
+Icon=Comic Book Guy.jpg
+Difficulty=Medium
+Description=Aether_Revolt/Alex_Bianchi_-_G-B_Aggro_(Standard,_#668411).dck
+Deck Type=constructed
+
+[Main]
+3 Catacomb Sifter
+4 Rishkar, Peema Renegade
+4 Sylvan Advocate
+4 Verdurous Gearhulk
+4 Walking Ballista
+4 Winding Constrictor
+2 Heart of Kiran
+2 Fatal Push
+4 Grasp of Darkness
+1 Liliana, the Last Hope
+4 Nissa, Voice of Zendikar
+4 Blooming Marsh
+2 Evolving Wilds
+8 Forest
+4 Hissing Quagmire
+6 Swamp
+[Sideboard]
+2 Distended Mindbender
+3 Flaying Tendrils
+1 Kalitas, Traitor of Ghet
+1 Natural Obsolescence
+1 Ob Nixilis Reignited
+3 Tireless Tracker
+4 Transgress the Mind

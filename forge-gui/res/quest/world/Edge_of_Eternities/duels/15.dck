@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Uncle Owen
+Title=Uncle Owen
+Icon=Uncle Owen.jpg
+Difficulty=Medium
+Description=./Standard/Edge_of_Eternities/CuteChandra19_-_Boros_Weapons_(Standard,_#2656751).dck
+Deck Type=constructed
+
+[Main]
+4 Carrot Cake
+4 Dusk Rose Reliquary
+4 Legion Extruder
+4 Perilous Snare
+2 Pinnacle Starcage
+4 Torch the Tower
+4 United Battlefront
+4 Caretaker's Talent
+4 Weapons Manufacturing
+4 Inspiring Vantage
+5 Plains
+5 Mountain
+3 Fountainport
+2 Elegant Parlor
+3 Sacred Foundry
+4 Sunbillow Verge
+[Sideboard]
+2 Chandra, Spark Hunter
+4 Authority of the Consuls
+4 Rest in Peace
+4 Voice of Victory
+1 Day of Judgment

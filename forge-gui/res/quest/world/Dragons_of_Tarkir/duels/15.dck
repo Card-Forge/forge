@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Dr Fate
+Title=Dr Fate
+Icon=Dr Fate.jpg
+Difficulty=Medium
+Description=Dragons_of_Tarkir/Standard_Daily_#8245656/ability170146_-_Mono-Green_Devotion_(Standard,_#234718).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Courser of Kruphix
+4 Deathmist Raptor
+3 Dragonlord Atarka
+4 Elvish Mystic
+3 Hornet Queen
+3 Polukranos, World Eater
+4 Rattleclaw Mystic
+4 Sylvan Caryatid
+4 Whisperwood Elemental
+3 See the Unwritten
+10 Forest
+3 Mountain
+3 Nykthos, Shrine to Nyx
+4 Temple of Abandon
+4 Wooded Foothills
+[Sideboard]
+3 Arc Lightning
+3 Den Protector
+2 Mistcutter Hydra
+4 Nylea's Disciple
+1 Purphoros, God of the Forge
+2 Xenagos, the Reveler

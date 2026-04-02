@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Ikenga
+Title=Ikenga
+Icon=Ikenga.jpg
+Difficulty=Hard
+Description=../Modern/Eldritch_Moon/Competitive_Modern_Constructed_League/The_Evil_Barron_-_Red_Deck_Wins_(Modern,_#659457).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Bedlam Reveler
+4 Eidolon of the Great Revel
+4 Goblin Guide
+4 Monastery Swiftspear
+4 Wild Nacatl
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+3 Searing Blaze
+4 Lava Spike
+4 Rift Bolt
+2 Arid Mesa
+4 Bloodstained Mire
+4 Mountain
+3 Sacred Foundry
+2 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+1 Deflecting Palm
+3 Destructive Revelry
+3 Path to Exile
+3 Rest in Peace
+1 Skullcrack
+1 Smash to Smithereens
+3 Tormod's Crypt

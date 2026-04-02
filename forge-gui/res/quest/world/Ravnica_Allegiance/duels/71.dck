@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Batman
+Title=Batman
+Icon=Batman.jpg
+Difficulty=Hard
+Description=./Modern/Ravnica_Allegiance/Alex_Swank_-_Faeries_(Modern,_#785641).dck
+Deck Type=constructed
+
+[Main]
+4 Snapcaster Mage
+3 Spellstutter Sprite
+2 Cast Down
+3 Cryptic Command
+4 Fatal Push
+1 Spell Pierce
+2 Surgical Extraction
+4 Inquisition of Kozilek
+4 Serum Visions
+3 Bitterblossom
+3 Jace, the Mind Sculptor
+3 Liliana of the Veil
+3 Island
+1 Swamp
+3 Creeping Tar Pit
+4 Darkslick Shores
+3 Field of Ruin
+2 Mutavault
+4 Polluted Delta
+2 Scalding Tarn
+2 Watery Grave
+[Sideboard]
+2 Engineered Explosives
+3 Nihil Spellbomb
+1 Disdainful Stroke
+1 Negate
+1 Ravenous Trap
+1 Spell Pierce
+1 Vendilion Clique
+1 Liliana, the Last Hope
+1 Collective Brutality
+2 Cry of the Carnarium

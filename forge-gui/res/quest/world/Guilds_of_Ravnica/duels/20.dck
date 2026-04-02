@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Token
+Title=Token
+Icon=Token.jpg
+Difficulty=Easy
+Description=./Standard/Guilds_of_Ravnica/Angelo_Labbao_-_White_Weenie_(Standard,_#771911).dck
+Deck Type=constructed
+
+[Main]
+4 Ajani's Pridemate
+4 Benalish Marshal
+3 Knight of Grace
+4 Leonin Vanguard
+4 Leonin Warleader
+2 Mentor of the Meek
+2 Resplendent Angel
+1 Shalai, Voice of Plenty
+2 Venerated Loxodon
+3 Make a Stand
+3 Ajani's Welcome
+4 Conclave Tribunal
+1 Dawn of Hope
+1 History of Benalia
+1 Ajani, Adversary of Tyrants
+1 Ajani, Wise Counselor
+1 Arch of Orazca
+19 Plains
+[Sideboard]
+2 Bounty Agent
+3 Invoke the Divine
+2 Remorseful Cleric
+2 Settle the Wreckage
+3 Shield Mare
+3 Take Vengeance

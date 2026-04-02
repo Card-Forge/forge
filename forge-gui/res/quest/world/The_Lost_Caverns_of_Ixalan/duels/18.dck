@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=A Wolf in Sheeps Clothing
+Title=A Wolf in Sheeps Clothing
+Icon=A Wolf in Sheeps Clothing.jpg
+Difficulty=Medium
+Description=./Standard/The_Lost_Caverns_of_Ixalan/Hanba_Kyohei_-_BR_Aggro_(Standard,_#1998041).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodtithe Harvester
+1 Tenacious Underdog
+2 Sheoldred, the Apocalypse
+2 Gix, Yawgmoth Praetor
+2 Archfiend of the Dross
+4 Deep-Cavern Bat
+4 Preacher of the Schism
+2 Geological Appraiser
+4 Inti, Seneschal of the Sun
+2 Go for the Throat
+3 Cut Down
+2 Bitter Triumph
+1 Gix's Command
+2 Liliana of the Veil
+5 Swamp
+1 Mountain
+2 Cavern of Souls
+4 Sulfurous Springs
+4 Blackcleave Cliffs
+4 Haunted Ridge
+1 Sokenzan, Crucible of Defiance
+1 Takenuma, Abandoned Mire
+3 Restless Vents
+[Sideboard]
+4 Duress
+2 Path of Peril
+1 Hidetsugu Consumes All
+2 Ob Nixilis, the Adversary
+2 Unlicensed Hearse
+1 Gix's Command
+2 Anoint with Affliction
+1 Aclazotz, Deepest Betrayal

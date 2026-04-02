@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Yemaya
+Title=Yemaya
+Icon=Yemaya.jpg
+Difficulty=Very Hard
+Description=./Modern/Bloomburrow/DB_Nikachu_-_Merfolk_(Modern,_#2200089).dck
+Deck Type=constructed
+
+[Main]
+4 Harbinger of the Seas
+2 Mockingbird
+4 Lord of Atlantis
+4 Silvergill Adept
+1 Glasspool Mimic
+4 Master of the Pearl Trident
+2 Rishadan Dockhand
+4 Tide Shaper
+1 Svyelun of Sea and Sky
+4 Aether Vial
+3 Force of Negation
+3 Flare of Denial
+4 Sink into Stupor
+4 Spreading Seas
+3 Mutavault
+2 Cavern of Souls
+9 Island
+2 Otawara, Soaring City
+[Sideboard]
+3 Vodalian Hexcatcher
+3 Tishana's Tidebinder
+2 Dismember
+4 Chalice of the Void
+3 Subtlety

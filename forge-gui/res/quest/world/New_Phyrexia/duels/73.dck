@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Abassi
+Title=Abassi
+Icon=Abassi.jpg
+Difficulty=Hard
+Description=../Modern/New_Phyrexia/Boise,_Idaho/Vivian_Gorman_in_PTQ_Barcelona_-_Faeries_(Modern,_#27298).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Mistbind Clique
+4 Scion of Oona
+1 Spellskite
+4 Spellstutter Sprite
+4 Vendilion Clique
+3 Vedalken Shackles
+4 Cryptic Command
+4 Mana Leak
+3 Remand
+4 Spell Snare
+2 Faerie Conclave
+17 Island
+4 Mutavault
+2 Tectonic Edge
+[Sideboard]
+1 Hurkyl's Recall
+2 Mortarpod
+3 Relic of Progenitus
+2 Steel Sabotage
+2 Surgical Extraction
+2 Threads of Disloyalty
+1 Wurmcoil Engine

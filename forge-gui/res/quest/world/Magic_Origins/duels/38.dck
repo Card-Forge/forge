@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Ra
+Title=Ra
+Icon=Ra.jpg
+Difficulty=Medium
+Description=Magic_Origins/SCG_Standard_Open_Worcester/Andrew_Jessup_-_Abzan_Aggro_(Standard,_#324119).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Anafenza, the Foremost
+4 Den Protector
+4 Fleecemane Lion
+4 Hangarback Walker
+2 Herald of Torment
+4 Siege Rhino
+4 Abzan Charm
+2 Bile Blight
+3 Dromoka's Command
+2 Hero's Downfall
+1 Ultimate Price
+3 Caves of Koilos
+2 Forest
+3 Llanowar Wastes
+2 Plains
+4 Sandsteppe Citadel
+3 Temple of Malady
+3 Temple of Silence
+2 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+2 Duress
+2 Elspeth, Sun's Champion
+2 Gather Courage
+2 Glare of Heresy
+2 Self-Inflicted Wound
+2 Tragic Arrogance
+2 Wingmate Roc

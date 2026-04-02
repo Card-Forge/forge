@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Dr Fate
+Title=Dr Fate
+Icon=Dr Fate.jpg
+Difficulty=Very Hard
+Description=./Modern/Lorwyn_Eclipsed/Higuchi_Yuma_-_Esper_Blink_(Modern,_#2820462).dck
+Deck Type=constructed
+
+[Main]
+3 Flickerwisp
+4 Solitude
+4 Phelia, Exuberant Shepherd
+2 Emperor of Bones
+3 Witch Enchanter
+1 Boggart Trawler
+2 Abhorrent Oculus
+4 Overlord of the Balemurk
+3 Quantum Riddler
+3 Emptiness
+4 Fatal Push
+3 Ephemerate
+4 Thoughtseize
+1 Teferi, Time Raveler
+2 Plains
+1 Swamp
+1 Hallowed Fountain
+1 Godless Shrine
+1 Watery Grave
+4 Flooded Strand
+1 Polluted Delta
+4 Marsh Flats
+1 Meticulous Archive
+2 Shadowy Backstreet
+1 Undercity Sewers
+[Sideboard]
+1 Damping Sphere
+1 Surgical Extraction
+2 Faerie Macabre
+1 Teferi, Time Raveler
+1 Drannith Magistrate
+1 Elesh Norn, Mother of Machines
+1 High Noon
+2 Wrath of the Skies
+3 Consign to Memory
+2 Clarion Conqueror

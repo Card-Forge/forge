@@ -1,0 +1,6 @@
+Name:Turbulent Steppe
+ManaCost:no cost
+Types:Land Mountain Plains
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ This land enters tapped unless your opponents control eight or more lands.
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Land.OppCtrl | ConditionCompare$ LT8
+Oracle:({T}: Add {R} or {W}.)\nThis land enters tapped unless your opponents control eight or more lands.

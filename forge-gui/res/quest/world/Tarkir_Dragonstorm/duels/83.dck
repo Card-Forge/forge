@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Seabiscuit
+Title=Seabiscuit
+Icon=Seabiscuit.jpg
+Difficulty=Very Hard
+Description=./Modern/Tarkir_Dragonstorm/Ben_Broz_-_W-U-B-R-G_Domain_(Modern,_#2445118).dck
+Deck Type=constructed
+
+[Main]
+4 Ragavan, Nimble Pilferer
+4 Scion of Draco
+4 Territorial Kavu
+3 Phlage, Titan of Fire's Fury
+3 Psychic Frog
+4 Lightning Bolt
+3 Spectral Denial
+2 Consign to Memory
+4 Tribal Flames
+4 Leyline Binding
+4 Leyline of the Guildpact
+4 Flooded Strand
+4 Wooded Foothills
+3 Arid Mesa
+1 Arena of Glory
+1 Blood Crypt
+1 Forest
+1 Indatha Triome
+1 Plains
+1 Sacred Foundry
+1 Steam Vents
+1 Temple Garden
+1 Thundering Falls
+1 Windswept Heath
+[Sideboard]
+3 Obsidian Charmaw
+2 Consign to Memory
+2 Hidetsugu Consumes All
+2 Meltdown
+2 Prismatic Ending
+2 Wear // Tear
+1 Fable of the Mirror-Breaker
+1 Unmoored Ego

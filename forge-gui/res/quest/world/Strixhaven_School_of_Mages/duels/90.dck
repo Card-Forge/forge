@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=PresterJohn
+Title=PresterJohn
+Icon=PresterJohn.jpg
+Difficulty=Very Hard
+Description=./Modern/Strixhaven_School_of_Mages/Sanitoeter_-_Izzet_Spells_(Modern,_#1141899)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Soul-Scar Mage
+4 Sprite Dragon
+4 Stormwing Entity
+4 Monastery Swiftspear
+2 Wild Slash
+2 Vapor Snag
+3 Opt
+3 Mutagenic Growth
+4 Lava Dart
+4 Lightning Bolt
+4 Manamorphose
+4 Expressive Iteration
+2 Steam Vents
+2 Bloodstained Mire
+2 Wooded Foothills
+2 Scalding Tarn
+3 Mountain
+3 Fiery Islet
+4 Spirebluff Canal
+[Sideboard]
+1 Stern Dismissal
+1 Mystical Dispute
+1 Kozilek's Return
+1 Bedlam Reveler
+2 Abrade
+2 Aether Gust
+2 Dragon's Claw
+2 Soul-Guide Lantern
+3 Spell Pierce

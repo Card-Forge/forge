@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Buffy
+Title=Buffy
+Icon=Buffy.jpg
+Difficulty=Hard
+Description=./Modern/Adventures_in_the_Forgotten_Realms/eggybenny_-_Modern_Blue_Moon_(Modern,_#1197274).dck
+Deck Type=constructed
+
+[Main]
+4 Snapcaster Mage
+4 Murktide Regent
+4 Thought Scour
+4 Counterspell
+4 Force of Negation
+4 Archmage's Charm
+4 Lightning Bolt
+4 Opt
+4 Prismari Command
+2 Blood Moon
+2 Hall of Storm Giants
+2 Sulfur Falls
+3 Steam Vents
+4 Scalding Tarn
+4 Flooded Strand
+7 Island
+[Sideboard]
+1 Shatterstorm
+2 Relic of Progenitus
+2 Mystical Dispute
+2 Flusterstorm
+2 Aether Gust
+3 Surgical Extraction
+3 Kozilek's Return

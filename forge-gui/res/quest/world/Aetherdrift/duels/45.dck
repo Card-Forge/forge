@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Totoro
+Title=Totoro
+Icon=Totoro.jpg
+Difficulty=Medium
+Description=./Standard/Aetherdrift/Giacomo_Marola_-_Azorius_Oculus_(Standard,_#2376774).dck
+Deck Type=constructed
+
+[Main]
+4 Abhorrent Oculus
+4 Haughty Djinn
+4 Picklock Prankster
+3 Bounce Off
+4 Moment of Truth
+2 Soul Partition
+2 Spell Pierce
+4 Chart a Course
+4 Helping Hand
+2 Recommission
+1 Split Up
+4 Founding the Third Path
+3 Adarkar Wastes
+4 Floodfarm Verge
+5 Island
+4 Meticulous Archive
+2 Plains
+4 Seachrome Coast
+[Sideboard]
+2 Destroy Evil
+2 Disdainful Stroke
+2 Elspeth's Smite
+1 Exorcise
+1 Ghost Vacuum
+1 Kutzil's Flanker
+2 Monastery Mentor
+2 Negate
+1 Split Up
+1 Temporary Lockdown

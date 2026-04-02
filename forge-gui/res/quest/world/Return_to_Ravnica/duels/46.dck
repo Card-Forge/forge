@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Riddler
+Title=Riddler
+Icon=Riddler.jpg
+Difficulty=Medium
+Description=Return_to_Ravnica/2012_States_-_Pennsylvania/AndrewConfer_-_Bant_Control_(Standard,_#39994).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Angel of Serenity
+2 Borderland Ranger
+3 Centaur Healer
+1 Restoration Angel
+1 Sigarda, Host of Herons
+4 Thragtusk
+1 Selesnya Charm
+1 Sphinx's Revelation
+2 Entreat the Angels
+4 Farseek
+2 Supreme Verdict
+4 Terminus
+2 Detention Sphere
+2 Garruk, Primal Hunter
+3 Jace, Architect of Thought
+2 Tamiyo, the Moon Sage
+1 Evolving Wilds
+3 Forest
+3 Glacial Fortress
+4 Hallowed Fountain
+3 Hinterland Harbor
+2 Island
+2 Plains
+3 Sunpetal Grove
+4 Temple Garden
+[Sideboard]
+1 Curse of Echoes
+1 Dissipate
+1 Essence Scatter
+2 Grafdigger's Cage
+1 Naturalize
+1 Negate
+1 Oblivion Ring
+1 Pithing Needle
+2 Tormod's Crypt
+1 Witchbane Orb

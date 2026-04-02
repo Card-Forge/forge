@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Beast
+Title=Beast
+Icon=Beast.jpg
+Difficulty=Very Hard
+Description=../Modern/Eldritch_Moon/Competitive_Modern_Constructed_League/Paulagher13_-_Zoo_(Modern,_#654617).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Burning-Tree Emissary
+4 Experiment One
+1 Ghor-Clan Rampager
+4 Goblin Guide
+4 Kird Ape
+4 Reckless Bushwhacker
+4 Tarmogoyf
+4 Wild Nacatl
+4 Atarka's Command
+4 Lightning Bolt
+1 Mutagenic Growth
+4 Path to Exile
+2 Arid Mesa
+1 Forest
+1 Mountain
+2 Sacred Foundry
+2 Stomping Ground
+2 Temple Garden
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+1 Blessed Alliance
+1 Deflecting Palm
+3 Destructive Revelry
+1 Domri Rade
+1 Dragon's Claw
+1 Grafdigger's Cage
+3 Lightning Helix
+1 Rest in Peace
+1 Scavenging Ooze
+2 Thalia, Guardian of Thraben

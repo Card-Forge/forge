@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Gambit
+Title=Gambit
+Icon=Gambit.jpg
+Difficulty=Hard
+Description=./Modern/Lorwyn_Eclipsed/DeathShadow22_-_Golgari_Yawgmoth_(Modern,_#2831024).dck
+Deck Type=constructed
+
+[Main]
+4 Delighted Halfling
+4 Badgermole Cub
+2 Formidable Speaker
+1 Strangleroot Geist
+4 Young Wolf
+4 Walking Ballista
+4 Yawgmoth, Thran Physician
+1 Endurance
+4 Agatha's Soul Cauldron
+4 Malevolent Rumble
+3 Green Sun's Zenith
+3 Dredger's Insight
+1 Grist, the Hunger Tide
+1 Underground Mortuary
+1 Shifting Woodland
+3 Spymaster's Vault
+1 Swamp
+2 Forest
+3 Overgrown Tomb
+1 Dryad Arbor
+3 Windswept Heath
+4 Verdant Catacombs
+2 Boseiju, Who Endures
+[Sideboard]
+1 Vexing Bauble
+3 Thoughtseize
+1 Fulminator Mage
+1 Scavenging Ooze
+1 Murderous Cut
+3 Fatal Push
+1 Damping Sphere
+1 Kraul Harpooner
+1 Ashiok, Dream Render
+1 Force of Vigor
+1 Outland Liberator

@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Niv-Mizzet
+Title=Niv-Mizzet
+Icon=Niv-Mizzet.jpg
+Difficulty=Hard
+Description=./Modern/Wilds_of_Eldraine/Selfeisek_-_Mono_Black_(Modern,_#1744883).dck
+Deck Type=constructed
+
+[Main]
+2 Dauthi Voidwalker
+4 Grief
+4 Orcish Bowmasters
+1 Pithing Needle
+3 The Rack
+1 Funeral Charm
+3 Fatal Push
+1 Cling to Dust
+1 Feign Death
+1 Undying Malice
+1 Sheoldred's Edict
+4 Not Dead After All
+2 Wrench Mind
+3 Thoughtseize
+1 Inquisition of Kozilek
+3 Shrieking Affliction
+4 Urza's Saga
+2 Liliana of the Veil
+2 Liliana of the Veil
+1 Castle Locthwain
+1 Swamp
+1 Swamp
+1 Swamp
+4 Urborg, Tomb of Yawgmoth
+4 Marsh Flats
+2 Mishra's Factory
+1 Swamp
+1 Swamp
+1 Swamp
+[Sideboard]
+2 Chalice of the Void
+1 Pithing Needle
+4 Leyline of the Void
+1 Collective Brutality
+1 Fatal Push
+2 Damping Sphere
+2 Break the Ice
+1 Dauthi Voidwalker
+1 Void Mirror

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Rogue
+Title=Rogue
+Icon=Rogue.jpg
+Difficulty=Very Hard
+Description=./Modern/Final_Fantasy/Travis_Brown_-_Hammer_Time_(Modern,_#2520724).dck
+Deck Type=constructed
+
+[Main]
+2 Cloud, Midgar Mercenary
+4 Esper Sentinel
+4 Ornithopter
+4 Puresteel Paladin
+4 Stoneforge Mystic
+4 Colossus Hammer
+4 Cori-Steel Cutter
+1 Lavaspur Boots
+4 Mox Opal
+1 Paradise Mantle
+1 Shadowspear
+2 Flare of Fortitude
+1 Forge Anew
+4 Sigarda's Aid
+4 Urza's Saga
+4 Arid Mesa
+1 Flooded Strand
+1 Hallowed Fountain
+2 Inkmoth Nexus
+4 Marsh Flats
+3 Plains
+1 Sacred Foundry
+[Sideboard]
+4 Consign to Memory
+1 Flare of Fortitude
+1 Grafdigger's Cage
+3 Magus of the Moon
+1 Pithing Needle
+3 Spell Pierce
+2 Surge of Salvation

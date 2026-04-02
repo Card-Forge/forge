@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Alice in Wonderland
+Title=Alice in Wonderland
+Icon=Alice in Wonderland.jpg
+Difficulty=Easy
+Description=./Standard/Tarkir_Dragonstorm/AlexanderRosdahl_-_Izzet_Spellslingers_(Standard,_#2454087).dck
+Deck Type=constructed
+
+[Main]
+4 Monastery Swiftspear
+4 Slickshot Show-Off
+4 Cori-Steel Cutter
+2 Spell Pierce
+4 Monstrous Rage
+4 Opt
+4 Burst Lightning
+2 Into the Flood Maw
+4 Stock Up
+4 Sleight of Hand
+4 Stormchaser's Talent
+4 Spirebluff Canal
+4 Mountain
+4 Island
+4 Riverpyre Verge
+4 Shivan Reef
+[Sideboard]
+3 Sunspine Lynx
+2 Abrade
+1 Torch the Tower
+1 Spell Pierce
+3 Ghost Vacuum
+2 Pyroclasm
+3 Drake Hatcher

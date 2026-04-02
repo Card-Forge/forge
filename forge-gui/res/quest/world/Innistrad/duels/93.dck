@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Iron Man
+Title=Iron Man
+Icon=Iron Man.jpg
+Difficulty=Hard
+Description=../Modern/Innistrad/Arcore_Gran_Modern_#3/Caloria_Domenico_-_Elves_(Modern,_#23124).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bramblewood Paragon
+2 Elvish Archdruid
+2 Essence Warden
+2 Ezuri, Renegade Leader
+2 Imperious Perfect
+4 Llanowar Elves
+3 Nissa's Chosen
+3 Wren's Run Vanquisher
+3 Obsidian Battle-Axe
+2 Fog
+2 Giant Growth
+3 Gilt-Leaf Ambush
+2 Vines of Vastwood
+1 Elvish Promenade
+3 Explore
+2 Parallel Lives
+2 Garruk Wildspeaker
+2 Nissa Revane
+16 Forest
+[Sideboard]

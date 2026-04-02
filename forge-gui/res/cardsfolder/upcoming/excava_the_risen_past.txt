@@ -1,0 +1,11 @@
+Name:Excava, the Risen Past
+ManaCost:2 R W
+Types:Legendary Creature Spirit Horse
+PT:3/3
+K:Flying
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigReanimate | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME attacks, return up to one target artifact, creature, or non-Aura enchantment card with mana value 3 or less from your graveyard to the battlefield with a finality counter on it. It's a 1/1 Spirit creature with flying in addition to its other types. (If a creature with a finality counter on it would die, exile it instead.)
+SVar:TrigReanimate:DB$ ChangeZone | ValidTgts$ Artifact.YouOwn+cmcLE3,Creature.YouOwn+cmcLE3,Enchantment.nonAura+YouOwn+cmcLE3 | ValidTgtDesc$ artifact, creature, or non-Aura enchantment card with mana value 3 or less in your graveyard | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ 1 | WithCountersType$ FINALITY | StaticEffect$ Animate
+SVar:Animate:Mode$ Continuous | Affected$ Card.IsRemembered | AddType$ Creature & Spirit | SetPower$ 1 | SetToughness$ 1 | AddKeyword$ Flying
+SVar:HasAttackEffect:TRUE
+Oracle:Flying, haste\nWhenever Excava attacks, return up to one target artifact, creature, or non-Aura enchantment card with mana value 3 or less from your graveyard to the battlefield with a finality counter on it. It's a 1/1 Spirit creature with flying in addition to its other types. (If a creature with a finality counter on it would die, exile it instead.)

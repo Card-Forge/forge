@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Asanbosam
+Title=Asanbosam
+Icon=Asanbosam.jpg
+Difficulty=Easy
+Description=./Standard/Marvels_Spider_Man/Shimizu_Kenshiro_-_Temur_Midrange_(Standard,_#2680695).dck
+Deck Type=constructed
+
+[Main]
+4 Llanowar Elves
+4 Outcaster Trailblazer
+4 Cactusfolk Sureshot
+2 Marang River Regent
+4 Temur Battlecrier
+2 Anticausal Vestige
+4 Quantum Riddler
+2 Mightform Harmonizer
+4 Spider Manifestation
+4 Lumbering Worldwagon
+2 Into the Flood Maw
+2 Devastating Onslaught
+2 Island
+2 Mountain
+4 Forest
+1 Botanical Sanctum
+4 Breeding Pool
+4 Stomping Ground
+1 Riverpyre Verge
+1 Willowrush Verge
+3 Starting Town
+[Sideboard]
+2 Annul
+2 Scrapshooter
+2 Dissection Tools
+2 Ghost Vacuum
+1 Heritage Reclamation
+3 Fire Magic
+3 Spider-Sense

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Riptide
+Title=Riptide
+Icon=Riptide.jpg
+Difficulty=Medium
+Description=./Standard/Foundations/Luis_Allende_-_Dimir_Aggro_(Standard,_#2280383).dck
+Deck Type=constructed
+
+[Main]
+4 Deep-Cavern Bat
+1 Enduring Curiosity
+2 Ertai Resurrected
+4 Faerie Mastermind
+2 Gix, Yawgmoth Praetor
+3 Preacher of the Schism
+2 Sheoldred, the Apocalypse
+4 Spyglass Siren
+1 Bitter Triumph
+3 Cut Down
+3 Go for the Throat
+2 Phantom Interference
+2 Three Steps Ahead
+2 Kaito, Bane of Nightmares
+4 Darkslick Shores
+4 Gloomlake Verge
+3 Island
+2 Mirrex
+4 Restless Reef
+5 Swamp
+3 Underground River
+[Sideboard]
+1 Aclazotz, Deepest Betrayal
+2 Anoint with Affliction
+1 Bloodthirsty Conqueror
+1 Cut Down
+1 Disdainful Stroke
+1 Ghost Vacuum
+1 Gix's Command
+2 Malicious Eclipse
+1 Negate
+2 Tishana's Tidebinder
+2 Withering Torment

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Tenga
+Title=Tenga
+Icon=Tenga.jpg
+Difficulty=Medium
+Description=Dark_Ascension/Pro_Tour_Dark_Ascension_Top_Standard_Decks/Eric_Meng_-_BR_Aggro_(Standard,_#25975).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Diregraf Ghoul
+2 Falkenrath Aristocrat
+2 Fume Spitter
+4 Geralf's Messenger
+4 Gravecrawler
+3 Porcelain Legionnaire
+4 Stormblood Berserker
+1 Sword of War and Peace
+2 Brimstone Volley
+3 Galvanic Blast
+3 Gut Shot
+4 Incinerate
+2 Arc Trail
+4 Blackcleave Cliffs
+4 Dragonskull Summit
+4 Mountain
+10 Swamp
+[Sideboard]
+1 Act of Aggression
+2 Distress
+1 Doom Blade
+1 Go for the Throat
+1 Liliana of the Veil
+2 Manabarbs
+1 Phyrexian Metamorph
+3 Ratchet Bomb
+1 Sword of Feast and Famine

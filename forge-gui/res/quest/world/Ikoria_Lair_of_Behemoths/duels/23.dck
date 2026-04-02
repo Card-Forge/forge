@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Wally
+Title=Wally
+Icon=Wally.jpg
+Difficulty=Medium
+Description=./Standard/Ikoria_Lair_of_Behemoths/ACtuallyMeAmKing_-_Mardu_Knights_(Standard,_#976116).dck
+Deck Type=constructed
+
+[Main]
+2 Blacklance Paragon
+4 Corpse Knight
+4 Fervent Champion
+4 Inspiring Veteran
+4 Knight of the Ebon Legion
+4 Skyknight Vanguard
+4 Venerable Knight
+4 Worthy Knight
+3 Unbreakable Formation
+4 Fight as One
+1 Call of the Death-Dweller
+1 Savai Triome
+2 Swamp
+3 Plains
+4 Tournament Grounds
+4 Sacred Foundry
+4 Blood Crypt
+4 Godless Shrine
+[Sideboard]
+1 Lurrus of the Dream-Den
+1 Blazing Volley
+2 Despark
+2 Deafening Clarion
+2 Soul-Guide Lantern
+3 Dead Weight
+4 Drill Bit

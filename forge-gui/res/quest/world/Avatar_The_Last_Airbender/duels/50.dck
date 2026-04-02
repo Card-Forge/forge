@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Waylon Smithers
+Title=Waylon Smithers
+Icon=Waylon Smithers.jpg
+Difficulty=Medium
+Description=./Standard/Avatar_The_Last_Airbender/ATmagic_-_Gruul_Delirium_(Standard,_#2703756).dck
+Deck Type=constructed
+
+[Main]
+4 Cenote Scout
+2 Inti, Seneschal of the Sun
+4 Patchwork Beastie
+4 Summon: Brynhildr
+4 Wildfire Wickerfolk
+4 Fear of Missing Out
+2 Overprotect
+2 Torch the Tower
+4 Violent Urge
+2 Beastie Beatdown
+4 Break Out
+2 Bushwhack
+2 Ba Sing Se
+1 Commercial District
+7 Forest
+3 Mountain
+4 Thornspire Verge
+1 Restless Ridgeline
+4 Stomping Ground
+[Sideboard]
+2 Sunspine Lynx
+2 Fire Magic
+2 Heritage Reclamation
+4 Soul-Guide Lantern
+1 Chandra, Spark Hunter
+2 Torch the Tower
+2 Obliterating Bolt

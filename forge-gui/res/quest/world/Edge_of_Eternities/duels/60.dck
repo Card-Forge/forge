@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Silver Surfer
+Title=Silver Surfer
+Icon=Silver Surfer.jpg
+Difficulty=Very Hard
+Description=./Modern/Edge_of_Eternities/RosG_-_Azorius_Midrange_(Modern,_#2649771).dck
+Deck Type=constructed
+
+[Main]
+4 Guide of Souls
+4 Ocelot Pride
+4 Phelia, Exuberant Shepherd
+4 Quantum Riddler
+4 Solitude
+4 White Orchid Phantom
+4 Witch Enchanter
+3 Starfield Shepherd
+1 Haliya, Guided by Light
+1 Mockingbird
+4 Ephemerate
+2 Thraben Charm
+1 Consign to Memory
+1 Rest in Peace
+4 Flagstones of Trokair
+4 Hallowed Fountain
+3 Flooded Strand
+3 Plains
+2 Marsh Flats
+2 Meticulous Archive
+1 Arid Mesa
+[Sideboard]
+3 Consign to Memory
+2 Ashiok, Dream Render
+2 Mystical Dispute
+2 Stony Silence
+2 Wrath of the Skies
+1 Celestial Purge
+1 Clarion Conqueror
+1 Mistcaller
+1 Sanctifier en-Vec
