@@ -5,7 +5,7 @@ A:SP$ Dig | DigNum$ 4 | ChangeNum$ All | DestinationZone$ Exile | RememberChange
 SVar:DBDig:DB$ Dig | DigNum$ 4 | ChangeNum$ All | DestinationZone$ Exile | Imprint$ True | SubAbility$ TheyChoose | StackDescription$ SpellDescription | SpellDescription$ then exile the top four cards of your library in a face-up pile.
 SVar:TheyChoose:DB$ TwoPiles | Zone$ Exile | DefinedPiles$ Remembered,Imprinted | Chooser$ Opponent | ChosenPile$ ToGrave | UnchosenPile$ DBPlay | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ An opponent chooses one of those piles. Put that pile into your graveyard. Look at the cards in the other pile. You may cast a spell from among them without paying its mana cost. Put the rest into your hand.
 SVar:ToGrave:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Graveyard
-SVar:DBPlay:DB$ Play | Defined$ Remembered | WithoutManaCost$ True | Optional$ True | Amount$ 1 | ForgetPlayed$ True | SubAbility$ DBChangeZone
+SVar:DBPlay:DB$ Play | Defined$ Remembered | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | Amount$ 1 | ForgetPlayed$ True | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Exile | Destination$ Hand
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 DeckHints:Ability$Graveyard
