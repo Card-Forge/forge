@@ -8,6 +8,5 @@ SVar:DBVotePresent:DB$ Dig | Defined$ You | DigNum$ VoteNum | ChangeNum$ All | D
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | Duration$ UntilTheEndOfYourNextTurn
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until the end of your next turn, you may play the exiled cards.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Count$ValidGraveyard Card.IsRemembered$CardManaCost/Plus.Y
-SVar:Y:Count$ValidExile Card.IsRemembered$CardManaCost
+SVar:X:Remembered$CardManaCost
 Oracle:Council's dilemma — Starting with you, each player votes for past or present. You mill a card for each past vote, then Fateful Tempest deals damage to each opponent equal to the total mana value of cards milled this way. Exile the top card of your library for each present vote. Until the end of your next turn, you may play the exiled cards.
