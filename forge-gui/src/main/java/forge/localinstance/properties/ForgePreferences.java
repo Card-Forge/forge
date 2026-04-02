@@ -188,8 +188,14 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_ZONE_TAB_NEW_COUNT("false"),
         UI_ENABLE_AI_PICKER("false"),
 
+        UI_VIBRATE_DEVICE_INTENSITY("100"),
+        UI_VIBRATE_CONTROLLER_INTENSITY("100"),
         UI_VIBRATE_ON_LIFE_LOSS("true"),
+        UI_VIBRATE_ON_POISON("true"),
         UI_VIBRATE_ON_LONG_PRESS("true"),
+        UI_VIBRATE_ON_ENEMY_ENCOUNTER("true"),
+        UI_VIBRATE_ON_ADVENTURE_REWARD("true"),
+        UI_VIBRATE_ON_SHOP_ACTION("true"),
 
         UI_LANGUAGE("en-US"),
 

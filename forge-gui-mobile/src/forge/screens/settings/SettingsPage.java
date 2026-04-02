@@ -641,12 +641,38 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             Forge.getLocalizer().getMessage("nlUseLaserArrows")), 5);
 
         // VIBRATION OPTIONS TAB
-        lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_LIFE_LOSS,
-            Forge.getLocalizer().getMessage("lblVibrateWhenLosingLife"),
-            Forge.getLocalizer().getMessage("nlVibrateWhenLosingLife")), 6);
+        Map<String, String> intensityOptions = new LinkedHashMap<>();
+        intensityOptions.put("Off (0%)", "0");
+        intensityOptions.put("Low (25%)", "25");
+        intensityOptions.put("Medium (50%)", "50");
+        intensityOptions.put("High (75%)", "75");
+        intensityOptions.put("Full (100%)", "100");
+        lstSettings.addItem(new LocalizedSelectSetting(FPref.UI_VIBRATE_DEVICE_INTENSITY,
+            Forge.getLocalizer().getMessage("lblVibrationDeviceIntensity"),
+            Forge.getLocalizer().getMessage("nlVibrationDeviceIntensity"),
+            intensityOptions), 6);
+        lstSettings.addItem(new LocalizedSelectSetting(FPref.UI_VIBRATE_CONTROLLER_INTENSITY,
+            Forge.getLocalizer().getMessage("lblVibrationControllerIntensity"),
+            Forge.getLocalizer().getMessage("nlVibrationControllerIntensity"),
+            intensityOptions), 6);
         lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_LONG_PRESS,
             Forge.getLocalizer().getMessage("lblVibrateAfterLongPress"),
             Forge.getLocalizer().getMessage("nlVibrateAfterLongPress")), 6);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_LIFE_LOSS,
+            Forge.getLocalizer().getMessage("lblVibrateWhenLosingLife"),
+            Forge.getLocalizer().getMessage("nlVibrateWhenLosingLife")), 6);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_POISON,
+            Forge.getLocalizer().getMessage("lblVibrateOnPoison"),
+            Forge.getLocalizer().getMessage("nlVibrateOnPoison")), 6);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_ENEMY_ENCOUNTER,
+            Forge.getLocalizer().getMessage("lblVibrateOnEnemyEncounter"),
+            Forge.getLocalizer().getMessage("nlVibrateOnEnemyEncounter")), 6);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_ADVENTURE_REWARD,
+            Forge.getLocalizer().getMessage("lblVibrateOnAdventureReward"),
+            Forge.getLocalizer().getMessage("nlVibrateOnAdventureReward")), 6);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_SHOP_ACTION,
+            Forge.getLocalizer().getMessage("lblVibrateOnShopAction"),
+            Forge.getLocalizer().getMessage("nlVibrateOnShopAction")), 6);
 
         // SOUND OPTIONS TAB
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_CURRENT_SOUND_SET,
