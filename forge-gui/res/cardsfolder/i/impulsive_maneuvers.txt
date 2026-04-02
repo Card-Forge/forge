@@ -2,7 +2,7 @@ Name:Impulsive Maneuvers
 ManaCost:2 R R
 Types:Enchantment
 T:Mode$ Attacks | ValidCard$ Creature | Execute$ CoinFlip | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature attacks, flip a coin. If you win the flip, the next time that creature would deal combat damage this turn, it deals double that damage instead. If you lose the flip, the next time that creature would deal combat damage this turn, prevent that damage.
-SVar:CoinFlip:DB$ FlipACoin | WinSubAbility$ CreateWinEffect | LoseSubAbility$ CreateLossEffect
+SVar:CoinFlip:DB$ FlipCoin | WinSubAbility$ CreateWinEffect | LoseSubAbility$ CreateLossEffect
 # Winning Effect
 SVar:CreateWinEffect:DB$ Effect | Name$ Impulsive Maneuvers's Effect — Won The Flip | ReplacementEffects$ EventWinDamageDone | ImprintCards$ TriggeredAttacker
 SVar:EventWinDamageDone:Event$ DamageDone | ValidSource$ Card.IsImprinted | IsCombat$ True | ReplaceWith$ DmgTwice | Description$ The next time creature would deal combat damage this turn, it deals double that damage instead.
