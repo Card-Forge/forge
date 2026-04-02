@@ -1,4 +1,4 @@
-Orysa, Tide Choreographer
+Name:Orysa, Tide Choreographer
 ManaCost:4 U
 Types:Legendary Creature Merfolk Bard
 PT:2/2
