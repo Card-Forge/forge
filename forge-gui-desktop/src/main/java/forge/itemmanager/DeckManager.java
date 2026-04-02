@@ -27,6 +27,7 @@ import forge.gui.GuiUtils;
 import forge.gui.UiCommand;
 import forge.gui.framework.FScreen;
 import forge.item.InventoryItem;
+import forge.itemmanager.views.DeckNameCommentRenderer;
 import forge.itemmanager.views.ItemCellRenderer;
 import forge.itemmanager.views.ItemListView;
 import forge.itemmanager.views.ItemTableColumn;
@@ -90,11 +91,21 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
 
         Map<ColumnDef, ItemTableColumn> colOverrides = null;
         if (config0.getCols().containsKey(ColumnDef.DECK_ACTIONS)) {
+            colOverrides = new HashMap<>();
             final ItemTableColumn column = new ItemTableColumn(new ItemColumn(config0.getCols().get(ColumnDef.DECK_ACTIONS)));
             column.setCellRenderer(new DeckActionsRenderer());
-            colOverrides = new HashMap<>();
             colOverrides.put(ColumnDef.DECK_ACTIONS, column);
         }
+        
+        if (config0.getCols().containsKey(ColumnDef.NAME)) {
+            if (colOverrides == null) {
+                colOverrides = new HashMap<>();
+            }
+            final ItemTableColumn nameColumn = new ItemTableColumn(new ItemColumn(config0.getCols().get(ColumnDef.NAME)));
+            nameColumn.setCellRenderer(new DeckNameCommentRenderer());
+            colOverrides.put(ColumnDef.NAME, nameColumn);
+        }
+        
         super.setup(config0, colOverrides);
 
         if (isStringOnly != wasStringOnly) {
