@@ -99,7 +99,7 @@ public enum ApiType {
     ExchangeTextBox (TextBoxExchangeEffect.class),
     Explore (ExploreEffect.class),
     Fight (FightEffect.class),
-    FlipACoin (FlipCoinEffect.class),
+    FlipCoin(FlipCoinEffect.class),
     FlipOntoBattlefield (FlipOntoBattlefieldEffect.class),
     Fog (FogEffect.class),
     GainControl (ControlGainEffect.class),
