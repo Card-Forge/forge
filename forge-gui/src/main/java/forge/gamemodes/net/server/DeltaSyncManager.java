@@ -56,16 +56,14 @@ public class DeltaSyncManager implements IHasNetLog {
     // Built dynamically from ZoneType's trackable property mapping.
     // Excludes Flashback: virtual zone whose cards are references to cards in
     // other zones (Graveyard, Library, etc.), not unique canonical instances.
-    private static final EnumSet<TrackableProperty> ZONE_COLLECTIONS;
+    private static final EnumSet<TrackableProperty> ZONE_COLLECTIONS = EnumSet.noneOf(TrackableProperty.class);
     static {
-        EnumSet<TrackableProperty> set = EnumSet.noneOf(TrackableProperty.class);
         for (ZoneType z : ZoneType.values()) {
             TrackableProperty prop = z.getTrackableProperty();
             if (prop != null && z != ZoneType.Flashback) {
-                set.add(prop);
+                ZONE_COLLECTIONS.add(prop);
             }
         }
-        ZONE_COLLECTIONS = set;
     }
 
     // each DeltaSyncManager gets a unique ID
@@ -275,8 +273,7 @@ public class DeltaSyncManager implements IHasNetLog {
     /**
      * Build a property map for a subset of dirty properties.
      */
-    private Map<TrackableProperty, Object> buildPropertyMap(TrackableObject obj,
-                                                             Set<TrackableProperty> dirtyProps) {
+    private Map<TrackableProperty, Object> buildPropertyMap(TrackableObject obj, Set<TrackableProperty> dirtyProps) {
         Map<TrackableProperty, Object> props = obj.getProps();
         // Copy props — mergeDelayedProps may add entries, and we iterate later
         Map<TrackableProperty, Object> snapshot = new EnumMap<>(props);

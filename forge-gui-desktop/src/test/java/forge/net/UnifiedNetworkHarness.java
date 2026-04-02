@@ -231,7 +231,6 @@ public class UnifiedNetworkHarness implements IHasNetLog {
 
             result.success = result.gameCompleted && result.turnCount > 0;
             result.gameDurationMs = System.currentTimeMillis() - startTime;
-
         } catch (Exception e) {
             result.errorMessage = e.getMessage();
             result.exception = e;
@@ -403,7 +402,6 @@ public class UnifiedNetworkHarness implements IHasNetLog {
             }
 
             result.gameDurationMs = System.currentTimeMillis() - startTime;
-
         } catch (Exception e) {
             result.errorMessage = e.getMessage();
             result.exception = e;
@@ -451,7 +449,6 @@ public class UnifiedNetworkHarness implements IHasNetLog {
 
                 attemptedLatch.countDown();
 
-                // Wait for game
                 client.waitForGameStart(gameTimeoutMs);
                 client.waitForGameFinish(gameTimeoutMs);
 

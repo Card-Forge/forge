@@ -376,7 +376,6 @@ public class GameLogMetrics {
             }
         }
 
-        // Error context if available
         NetworkLogAnalyzer.ErrorContext errorContext = getErrorContext();
         if (errorContext != null && errorContext.errorMessage() != null) {
             sb.append("\n");

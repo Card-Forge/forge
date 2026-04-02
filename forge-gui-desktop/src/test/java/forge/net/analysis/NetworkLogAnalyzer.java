@@ -317,7 +317,6 @@ public class NetworkLogAnalyzer {
             sb.append(String.format("**Desync at seq=%d** (Server checksum: `%s`, Client checksum: `%s`)\n\n",
                     seqNumber, serverChecksum, clientChecksum));
 
-            // Player state comparison
             if (!serverPlayerStates.isEmpty() || !clientPlayerStates.isEmpty()) {
                 sb.append("Player state comparison:\n\n");
                 sb.append("| Player | Life (S/C) | Hand (S/C) | GY (S/C) | BF (S/C) |\n");
@@ -557,19 +556,16 @@ public class NetworkLogAnalyzer {
                     continue;
                 }
 
-                // Sampled checksum validation
                 if (SAMPLED_CHECKSUM_PATTERN.matcher(line).find()) {
                     checksumCount++;
                     continue;
                 }
 
-                // Checksum mismatch
                 if (CHECKSUM_MISMATCH_PATTERN.matcher(line).find()) {
                     metrics.setHasChecksumMismatch(true);
                     continue;
                 }
 
-                // Player count
                 Matcher playerMatcher = PLAYER_COUNT_PATTERN.matcher(line);
                 if (playerMatcher.find()) {
                     for (int i = 1; i <= playerMatcher.groupCount(); i++) {
@@ -620,7 +616,6 @@ public class NetworkLogAnalyzer {
                     continue;
                 }
 
-                // Errors — suppress JVM/Netty noise and DeltaSync diagnostic lines before counting
                 if (ERROR_PATTERN.matcher(line).find()) {
                     if (!SUPPRESSED_WARN_PATTERN.matcher(line).find()
                             && !isDeltaSyncDiagnosticLine(line)) {
@@ -635,7 +630,6 @@ public class NetworkLogAnalyzer {
                     continue;
                 }
 
-                // Warnings — suppress JVM/Netty noise
                 if (WARN_PATTERN.matcher(line).find()) {
                     if (!SUPPRESSED_WARN_PATTERN.matcher(line).find()) {
                         metrics.addWarning(truncateLine(line));
@@ -643,7 +637,6 @@ public class NetworkLogAnalyzer {
                 }
             }
 
-            // Set aggregated metrics
             metrics.setDeltaPacketCount(packetCount);
             metrics.setChecksumCount(checksumCount);
             metrics.setTotalDeltaBytes(totalDeltaBytes);
@@ -666,7 +659,6 @@ public class NetworkLogAnalyzer {
                 metrics.setErrorContexts(contexts);
             }
 
-            // Extract checksum mismatch breakdown details
             if (metrics.hasChecksumMismatch()) {
                 metrics.setChecksumMismatchDetails(extractChecksumMismatchDetails(logFile));
             }
@@ -689,7 +681,6 @@ public class NetworkLogAnalyzer {
             return GameLogMetrics.FailureMode.NONE;
         }
 
-        // Check for timeout in error messages
         for (String error : metrics.getErrors()) {
             if (TIMEOUT_PATTERN.matcher(error).find()) {
                 return GameLogMetrics.FailureMode.TIMEOUT;

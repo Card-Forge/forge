@@ -218,8 +218,6 @@ public class AnalysisResult {
         maxBlockedMs = allMetrics.stream().mapToLong(GameLogMetrics::getMaxBlockedMs).max().orElse(0);
     }
 
-    // Getters
-
     public int getTotalGames() { return totalGames; }
     public int getCompletedGames() { return completedGames; }
     public int getIncompleteGames() { return incompleteGames; }

@@ -78,7 +78,6 @@ public class LogAnalyzerCli {
             allMetrics.add(metrics);
         }
 
-        // Generate report
         AnalysisResult result = analyzer.buildAnalysisResult(allMetrics);
         String report = result.generateReport();
 
