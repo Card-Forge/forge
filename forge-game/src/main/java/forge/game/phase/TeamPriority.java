@@ -94,7 +94,7 @@ public class TeamPriority implements PriorityManager, java.io.Serializable {
             return;
         }
 
-        // Add the player first
+        currentPlayer = player;
         currentTeamMembers.add(player);
 
         // Add team members in order
@@ -133,11 +133,11 @@ public class TeamPriority implements PriorityManager, java.io.Serializable {
 
         alreadyGainedPriority.add(currentPlayer.getTeamObject());
 
-        // If all teams return true
-
+        // Find the next team that hasn't had priority yet
         Player nextPlayer = currentPlayer;
         for (int i = 0; i < game.getPlayers().size(); i++) {
             nextPlayer = game.getNextPlayerAfter(nextPlayer);
+            System.out.println("[SEARCH] Checking " + nextPlayer + " (team " + nextPlayer.getTeamObject().getId() + ")");
             if (!alreadyGainedPriority.contains(nextPlayer.getTeamObject())) {
                 break;
             }
@@ -148,7 +148,6 @@ public class TeamPriority implements PriorityManager, java.io.Serializable {
         }
 
         initializeTeamMembers(nextPlayer);
-
         return false;
     }
 
@@ -190,6 +189,11 @@ public class TeamPriority implements PriorityManager, java.io.Serializable {
 
         StringBuilder sb = new StringBuilder();
         sb.append(currentPlayer);
+
+        if (!currentTeamMembers.contains(currentPlayer)) {
+            System.out.println("Current player " + currentPlayer + " is not in the current team members list. Reinitializing team members.");
+            initializeTeamMembers(currentPlayer);
+        }
 
         // Find the next in-game teammate using circular loop with modulo
         int length = currentTeamMembers.size();
