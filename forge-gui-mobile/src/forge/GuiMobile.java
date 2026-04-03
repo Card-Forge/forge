@@ -375,7 +375,7 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public void vibrate(int milliseconds, int amplitude) {
-        if (milliseconds > 0 && amplitude > 0) {
+        if (milliseconds > 0 && amplitude > 0 && Gdx.app.getType() != ApplicationType.Desktop) {
             Gdx.input.vibrate(milliseconds, amplitude, true);
         }
     }
@@ -385,5 +385,10 @@ public class GuiMobile implements IGuiBase {
         if (milliseconds > 0 && Controllers.getCurrent() != null && Controllers.getCurrent().canVibrate()) {
             Controllers.getCurrent().startVibration(milliseconds, amplitude);
         }
+    }
+
+    @Override
+    public boolean useControllerForHaptics() {
+        return Forge.hasGamepad() && Forge.lastInputWasController();
     }
 }

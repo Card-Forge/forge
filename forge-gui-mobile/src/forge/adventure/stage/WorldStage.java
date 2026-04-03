@@ -118,7 +118,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     player.playEffect(Paths.EFFECT_SPARKS, 0.5f);
                     mob.setAnimation(CharacterSprite.AnimationTypes.Attack);
                     SoundSystem.instance.play(SoundEffectType.Block, false);
-                    HapticEngine.vibrate(FPref.UI_VIBRATE_ON_ENEMY_ENCOUNTER, 50, mob.getData().boss ? 400 : 200);
+                    HapticEngine.vibrate(FPref.UI_VIBRATE_ON_ENEMY_ENCOUNTER, mob.getData().boss ? 400 : 200);
                     Forge.advFreezePlayerControls = true;
                     player.clearCollisionHeight();
                     startPause(0.8f, () -> {

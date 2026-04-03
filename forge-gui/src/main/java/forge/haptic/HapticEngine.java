@@ -13,7 +13,10 @@ import forge.player.GamePlayerUtil;
 /**
  * Centralized vibration with preference toggles and intensity scaling.
  * Match events are received via EventBus; adventure/UI events call
- * the static {@link #vibrate} methods directly.
+ * the static {@link #vibrate} method directly.
+ *
+ * Vibration is routed to either the device or a connected controller
+ * based on the most recent input type, never both at once.
  */
 public final class HapticEngine {
 
@@ -30,7 +33,7 @@ public final class HapticEngine {
             }
         } else if (evt instanceof GameEventPlayerPoisoned e) {
             if (isLocalPlayer(e.receiver())) {
-                vibrate(FPref.UI_VIBRATE_ON_POISON, Math.min(e.amount() * 200, 2000));
+                vibrate(FPref.UI_VIBRATE_ON_LIFE_LOSS, Math.min(e.amount() * 200, 2000));
             }
         }
     }
@@ -40,26 +43,22 @@ public final class HapticEngine {
         return local != null && player.isLobbyPlayer(local);
     }
 
-    public static void vibrate(FPref pref, int baseDeviceMs) {
-        vibrate(pref, baseDeviceMs, 0);
-    }
-
-    public static void vibrate(FPref pref, int baseDeviceMs, int baseControllerMs) {
-        if (baseDeviceMs <= 0 && baseControllerMs <= 0) return;
+    public static void vibrate(FPref pref, int durationMs) {
+        if (durationMs <= 0) return;
         if (!FModel.getPreferences().getPrefBoolean(pref)) return;
-        int deviceIntensity = getIntensity(FPref.UI_VIBRATE_DEVICE_INTENSITY);
-        if (baseDeviceMs > 0 && deviceIntensity > 0) {
-            GuiBase.getInterface().vibrate(baseDeviceMs, deviceIntensity * 255 / 100);
-        }
-        int controllerIntensity = getIntensity(FPref.UI_VIBRATE_CONTROLLER_INTENSITY);
-        if (baseControllerMs > 0 && controllerIntensity > 0) {
-            GuiBase.getInterface().vibrateController(baseControllerMs, controllerIntensity / 100f);
+        int intensity = getIntensity();
+        if (intensity <= 0) return;
+
+        if (GuiBase.getInterface().useControllerForHaptics()) {
+            GuiBase.getInterface().vibrateController(durationMs, intensity / 100f);
+        } else {
+            GuiBase.getInterface().vibrate(durationMs, intensity * 255 / 100);
         }
     }
 
-    private static int getIntensity(FPref pref) {
+    private static int getIntensity() {
         try {
-            return FModel.getPreferences().getPrefInt(pref);
+            return FModel.getPreferences().getPrefInt(FPref.UI_VIBRATE_INTENSITY);
         } catch (NumberFormatException e) {
             return 100;
         }

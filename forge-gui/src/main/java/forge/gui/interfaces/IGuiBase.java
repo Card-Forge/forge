@@ -71,4 +71,5 @@ public interface IGuiBase {
 
     default void vibrate(int milliseconds, int amplitude) {}
     default void vibrateController(int milliseconds, float amplitude) {}
+    default boolean useControllerForHaptics() { return false; }
 }

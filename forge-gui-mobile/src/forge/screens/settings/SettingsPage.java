@@ -647,13 +647,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         intensityOptions.put("Medium (50%)", "50");
         intensityOptions.put("High (75%)", "75");
         intensityOptions.put("Full (100%)", "100");
-        lstSettings.addItem(new LocalizedSelectSetting(FPref.UI_VIBRATE_DEVICE_INTENSITY,
-            Forge.getLocalizer().getMessage("lblVibrationDeviceIntensity"),
-            Forge.getLocalizer().getMessage("nlVibrationDeviceIntensity"),
-            intensityOptions), 6);
-        lstSettings.addItem(new LocalizedSelectSetting(FPref.UI_VIBRATE_CONTROLLER_INTENSITY,
-            Forge.getLocalizer().getMessage("lblVibrationControllerIntensity"),
-            Forge.getLocalizer().getMessage("nlVibrationControllerIntensity"),
+        lstSettings.addItem(new LocalizedSelectSetting(FPref.UI_VIBRATE_INTENSITY,
+            Forge.getLocalizer().getMessage("lblVibrationIntensity"),
+            Forge.getLocalizer().getMessage("nlVibrationIntensity"),
             intensityOptions), 6);
         lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_LONG_PRESS,
             Forge.getLocalizer().getMessage("lblVibrateAfterLongPress"),
@@ -661,9 +657,6 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_LIFE_LOSS,
             Forge.getLocalizer().getMessage("lblVibrateWhenLosingLife"),
             Forge.getLocalizer().getMessage("nlVibrateWhenLosingLife")), 6);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_POISON,
-            Forge.getLocalizer().getMessage("lblVibrateOnPoison"),
-            Forge.getLocalizer().getMessage("nlVibrateOnPoison")), 6);
         lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_ENEMY_ENCOUNTER,
             Forge.getLocalizer().getMessage("lblVibrateOnEnemyEncounter"),
             Forge.getLocalizer().getMessage("nlVibrateOnEnemyEncounter")), 6);
