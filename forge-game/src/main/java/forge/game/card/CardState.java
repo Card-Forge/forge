@@ -44,6 +44,7 @@ import forge.game.spellability.SpellPermanent;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityMode;
 import forge.game.trigger.Trigger;
+import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
 import forge.util.ITranslatable;
 import forge.util.IterableUtil;
@@ -273,7 +274,24 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
     }
 
     public ManaCost getPerpetualAdjustedManaCost() {
-        return perpetualAdjustedManaCost == null ? getManaCost() : perpetualAdjustedManaCost;
+        ManaCost base = perpetualAdjustedManaCost == null ? getManaCost() : perpetualAdjustedManaCost;
+
+        // Layer commander tax on top of perpetual adjustments when in command zone
+        Card card = getCard();
+        if (card != null && card.isCommander() && card.getZone() != null
+                && card.getZone().is(ZoneType.Command)) {
+            Player owner = card.getOwner();
+            if (owner != null) {
+                int tax = owner.getCommanderCast(card) * 2;
+                if (tax > 0) {
+                    int newGeneric = base.getGenericCost() + tax;
+                    String shards = base.getShortString().replaceFirst("" + base.getGenericCost(), "").trim();
+                    String costStr = newGeneric + (shards.isEmpty() ? "" : " " + shards);
+                    return new ManaCost(costStr);
+                }
+            }
+        }
+        return base;
     }
 
     public final ColorSet getColor() {
