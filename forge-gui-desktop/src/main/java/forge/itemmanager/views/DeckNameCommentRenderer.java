@@ -71,7 +71,7 @@ public final class DeckNameCommentRenderer extends ItemCellRenderer {
     }
 
     private static String toHtmlWrappedTooltip(final String comment) {
-        final String[] lines = comment.split("\r\n|\n|\r", -1);
+        final String[] lines = comment.split("[\r\n]", -1);
         final StringBuilder out = new StringBuilder("<html>");
         for (int i = 0; i < lines.length; i++) {
             if (i > 0) {
