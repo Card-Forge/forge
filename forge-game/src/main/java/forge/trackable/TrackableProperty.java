@@ -121,8 +121,6 @@ public enum TrackableProperty {
     Name(TrackableTypes.StringType),
     Colors(TrackableTypes.ColorSetType),
     OriginalColors(TrackableTypes.ColorSetType),
-    LeftSplitColors(TrackableTypes.ColorSetType),
-    RightSplitColors(TrackableTypes.ColorSetType),
     ImageKey(TrackableTypes.StringType),
     Type(TrackableTypes.CardTypeViewType),
     ManaCost(TrackableTypes.ManaCostType),
@@ -186,7 +184,7 @@ public enum TrackableProperty {
     NonAbilityText(TrackableTypes.StringType),
     FoilIndex(TrackableTypes.IntegerType),
 
-    CantHaveKeyword(TrackableTypes.StringListType),
+    CantHaveKeyword(TrackableTypes.StringSetType),
 
     //Player
     IsAI(TrackableTypes.BooleanType),
@@ -196,7 +194,6 @@ public enum TrackableProperty {
     SleeveIndex(TrackableTypes.IntegerType),
     Opponents(TrackableTypes.PlayerViewCollectionType),
     Life(TrackableTypes.IntegerType),
-    PoisonCounters(TrackableTypes.IntegerType),
     MaxHandSize(TrackableTypes.IntegerType),
     HasUnlimitedHandSize(TrackableTypes.BooleanType),
     MaxLandPlay(TrackableTypes.IntegerType),
@@ -235,7 +232,6 @@ public enum TrackableProperty {
     IsExtraTurn(TrackableTypes.BooleanType),
     ExtraTurnCount(TrackableTypes.IntegerType),
     HasPriority(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
-    HasDelirium(TrackableTypes.BooleanType),
     AvatarLifeDifference(TrackableTypes.IntegerType, FreezeMode.IgnoresFreeze),
     HasLost(TrackableTypes.BooleanType),
 
@@ -294,7 +290,6 @@ public enum TrackableProperty {
     StormCount(TrackableTypes.IntegerType),
     GameOver(TrackableTypes.BooleanType),
     PoisonCountersToLose(TrackableTypes.IntegerType),
-    NeedsPhaseRedrawn(TrackableTypes.BooleanType),
     PlayerTurn(TrackableTypes.PlayerViewType, FreezeMode.IgnoresFreeze),
     Phase(TrackableTypes.EnumType(PhaseType.class), FreezeMode.IgnoresFreeze),
     Dependencies(TrackableTypes.StringType);

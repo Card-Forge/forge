@@ -10,8 +10,7 @@ import java.util.*;
 public enum Keyword {
     UNDEFINED("", SimpleKeyword.class, false),
     ABSORB("Absorb", KeywordWithAmount.class, false),
-    ADAPT("Adapt", KeywordWithCostAndAmount.class, false),
-    AFFINITY("Affinity", KeywordWithType.class, false),
+    AFFINITY("Affinity", Affinity.class, false),
     AFFLICT("Afflict", KeywordWithAmount.class, false),
     AFTERLIFE("Afterlife", KeywordWithAmount.class, false),
     AFTERMATH("Aftermath", SimpleKeyword.class, false),
@@ -113,7 +112,7 @@ public enum Keyword {
     KICKER("Kicker", Kicker.class, false),
     JOB_SELECT("Job select", SimpleKeyword.class, false),
     JUMP_START("Jump-start", SimpleKeyword.class, false),
-    LANDWALK("Landwalk", KeywordWithType.class, true),
+    LANDWALK("Landwalk", Landwalk.class, true),
     LEVEL_UP("Level up", KeywordWithCost.class, false),
     LIFELINK("Lifelink", SimpleKeyword.class, true),
     LIVING_METAL("Living metal", SimpleKeyword.class, true),
@@ -126,8 +125,6 @@ public enum Keyword {
     MEGAMORPH("Megamorph", KeywordWithCost.class, false),
     MIRACLE("Miracle", KeywordWithCost.class, false),
     MOBILIZE("Mobilize", KeywordWithAmount.class, false),
-    // technically not a keyword but easier this way
-    MONSTROSITY("Monstrosity", KeywordWithCostAndAmount.class, false),
     MODULAR("Modular", Modular.class, false),
     MORE_THAN_MEETS_THE_EYE("More Than Meets the Eye", KeywordWithCost.class, false),
     MORPH("Morph", KeywordWithCost.class, false),

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="88">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="90">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -10,57 +10,38 @@
  </properties>
  <tileset firstgid="1" source="../../../tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../../Innistrad/maps/tileset/inn_dungeon_floor.tsx"/>
+ <tileset firstgid="12530" source="../../../../../Innistrad/maps/tileset/Inn_Dungeon.tsx"/>
+ <tileset firstgid="17010" source="../../../tileset/dungeon/dungeon_bis.tsx"/>
  <layer id="1" name="Background" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJzt2LEJACEQRUFTsyvhqrZeuRrc049MMJksDxUER29tAAAAXOx9subATt+9rXKqP2mOfv369etfn7fz3Tn1zqXuv379Kf1Va/Tr169f///9lf8K1RLPKJn++/snqiFdMg==
+   eJztmD0OwyAMhbN2iXqBSt17AsYeINfL1MN2QnURPzYQnkk8fBOgvGcbE3m/LctuGIZhGCdjc3gkej+PfzR4kujWmoucvpxuDTWTW0v5onuRteL10bXV/UDHmesn5k1rradycYQHml8JnDOt+umZXjFN+fV3MLbeEn9Uv6d+Snkp1c4oD7Hvhr2Ro7+mnnvpj8WPeijdj1LtjvYSy0/4Pkl6zch85O46qkZ6ekPEtDfr5B6Q/aandi3/PJvj38+ZY38G/T5XaA3GnPieE85M0Lqugqaef1UPs+sfwZG9Yfb4m/42Xm98DFqw95IHus5qdElnpSHPO2/GVzP3Tu1v1SzRXzt3LZ3Top8T3y9c2QST
   </data>
  </layer>
  <layer id="6" name="Floor" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJztmEEOwjAMBPOD5AdVBR9tq/Ir4Gtw4YbAbtdxDjNSbpZ3VCWy1VIAAAAAAAAA4BtLLWUVnq329Z+att8s7vePj//+/m6Pdvzcaq7/2VxVn6xc/HNz8c/NVftb59JV7H9pmjnnnUsqf1XevfPc8c7Bp+iejXr/e+eO7L8Y3tzI/qqaCPC310SAv70mAvztNR68+9uvvUtVE7m/9Ua1v3l2vLP/KCL2NwtZb1MF/jZe3r59Qg==
+   eJztlksKwkAQBfsInmBmzqBuPIS3U9FT5HZRdKMbQbKQHvPmE6yC3jV5RUjoZwYAAAAAAABLYVi1NvgvxmB2Fc4t1PU/RLOjcE6xjf/99d426fd5hLb+c3NVz2mVi3/bXPzb5qr9vXfpIvY/R82dy71LKn9V3jrVvTu5d3Cb5uVNc3v7/mvn9uw/Ov65nv1VOyXA379TAvz9OyVQuO13+E/J7W/fepdqp2R/qz2q/pbT8d6jeKaqv3n4dF8i+Pt4AnJAGcY=
   </data>
  </layer>
  <layer id="2" name="Ground" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJzt17EJgDAURVEt7RxAxMJZnNYh5YPgBj5jzoHUudUjGQYAgO8453QBQHuWeztXGwpAI+rdf0zP8Q/I2Md0AfQrvXvp+6FXf/i/bw23F/1Z+nNqf6rf/uS80X8BPoMHTQ==
+   eJzt17ENgCAURVEo7RyAaMMSLmDneG7hkOYnJlY0Fjz/557EisJbvUBKAAAA/3HN6gIA8Kc827mwoQAAJ+zev0/vxztAo2Z1ATAu9e6p/w+MKsL7/VzbZ8fWr+OryP0e0K9j+2P9UffHgx79NxUHDHk=
   </data>
  </layer>
  <layer id="3" name="Foreground" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJztmE2OwjAMhXMBaLtAmoOwROzZzFWGn9GcZ/aAWHK3WY0iGjVYfombJm0RtmQJ2tT+lMbOS9dLY9bq6urq6urq6gW9qY25tH7zfnNujV5Dz9T1OPxVy5XbFi/C/zcjfsSSYmPxnypj9gI/VA+uL+H4YzV+LUve01jz+i78jbAfXlv+M3OPe2aK/vm9eL36fff+r/yyuqR15uqrNL9EX3G1HuLafnbxY+OQbXbP/2ntS+K7ONy74p778XKg+NL9Fe3PKH6ot3H8pzYm4nH7O+VPXbcoDtInPhvSGjZmjAflbbw1W5MxjbeWUR1J8qIxLrfdM+l+SWvoCvL6PPba76pzeo/j5/ZpmteNofU7pKcg/vtH5xL+lJzKPw/+vmeSUvylzzpczpz8QzRESD+EtEPf9SDhdyzWkI7pox8kOXPyS1ik/DHtM2d+p38kOWkPQN8fkA6xeifGj7RbjvWD4vXJN2T+Q/oNzZk1dD73z++cjqc6xGfj+rljC/XOmH4rdXaJzW2MDem3mHbLbVzuG8OWU79NYTn1zxSWqn9Szoep58upv/XO9fun8uf1f6fjB2I=
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="48" height="48">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztmE0OgyAQhbmARRdNehDv1R8v1H3rutdrSCVawjBP5MfEmeRtxMx8QWEe9CelepFIJBKJRKKM6lql3qBMoO+2bRl+PXGljkb4D8E/aKVugO76x3UF33/o8msZ+U6l5vUo/Oj+OU78L9k/hV/4s/Nz69Kur9z8yP7gW+scV1OIH8nv+1ax/Gh/pfpzKv5hyknx2P7u5o/9b6k8lD9ZslFew+TkeKi6nfN/LsMdi5mHEJvNb3om1y9Hou6Sxzx7nme5Yz5+pK59x12/W9Ykxf+5zEL4Y2oK/z74155JcvHnPuv4aqbk3+IhfH3bBOcd1v4PCH/n1EfOCaH6SM2U/AiL8P+PuXsAdf9A+ZDa/FS+NfW28If8W2jOqL7Pnd9dH7Jk8+3nli20d3L+LZf35+aWY0P9m2/OUgZXO4d/qxEp/U+NiPU/MefD2PNl7bvevd5/Cn9afQEqOf42
-  </data>
- </layer>
- <layer id="5" name="AboveSprites" width="48" height="48">
-  <data encoding="base64" compression="zlib">
-   eJzt17EJACAQA8Bs8Buro+sC1o94B+lTBZIAAAD8bVQyT1Z1NwEAAABu/Hegi/3hBRuEwwT/
+   eJzt1zEKwCAMBdBcQJx61Y6tx+kx20XcRSrie/CHbH8KSQQAAL3ONLsBMMKVI+4vJc9uAuzKTQEA/OU5WuoMq/C/08O/xQj2Dyt4AUwBCXw=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="47" template="../../../obj/gold.tx" x="425.667" y="472.667">
-   <properties>
-    <property name="reward">[
-  {
-    &quot;type&quot;: &quot;gold&quot;,
-    &quot;count&quot;: 180,
-    &quot;addMaxCount&quot;: 40
- }
-]</property>
-   </properties>
-  </object>
-  <object id="49" template="../../../obj/gold.tx" x="312" y="470.333">
-   <properties>
-    <property name="reward">[
-  {
-    &quot;type&quot;: &quot;gold&quot;,
-    &quot;count&quot;: 180,
-    &quot;addMaxCount&quot;: 40
- }
-]</property>
-   </properties>
-  </object>
   <object id="54" template="../../../obj/enemy.tx" x="96.3333" y="406.667">
    <properties>
     <property name="defeatDialog">[
@@ -71,7 +52,38 @@
     ]
    }
 ]</property>
-    <property name="enemy" value="Merfolk Fighter"/>
+    <property name="effect">{
+ &quot;startBattleWithCard&quot;: [ &quot;Maritime Guard&quot;, &quot;Deeproot Pilgrimage&quot;],
+ &quot;lifeModifier&quot;: 6
+}</property>
+    <property name="enemy" value="Merfolk Elite"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Golden Egg&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Mantel of Denial&quot;
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;DMU&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;THB&quot;]
+  }
+]
+</property>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
@@ -108,7 +120,7 @@
 				},
 				{
                 	&quot;name&quot;: &quot;Lorthos, I've done as you asked! It's time to end this!&quot;,
-                	&quot;action&quot;: [ { &quot;deleteMapObject&quot;: 55 } ],
+                	&quot;action&quot;: [ { &quot;deleteMapObject&quot;: 55 },{ &quot;deleteMapObject&quot;: 85 } ],
                 	&quot;condition&quot;: [
                 		{
                 			&quot;getMapFlag&quot;: {
@@ -160,7 +172,38 @@
     ]
    }
 ]</property>
-    <property name="enemy" value="Aether Channeler"/>
+    <property name="effect">{
+ &quot;startBattleWithCard&quot;: [ &quot;Midnight Clock&quot;, &quot;Stinging Lionfish&quot; ],
+ &quot;lifeModifier&quot;: 6
+}</property>
+    <property name="enemy" value="Penguin Elite"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Golden Egg&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Mantel of Denial&quot;
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;DMU&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;THB&quot;]
+  }
+]
+</property>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
@@ -174,7 +217,38 @@
     ]
    }
 ]</property>
+    <property name="effect">{
+ &quot;startBattleWithCard&quot;: [ &quot;Archivist&quot;, &quot;Wizard Class&quot; ],
+ &quot;lifeModifier&quot;: 6
+}</property>
     <property name="enemy" value="Archmage"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Golden Egg&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Amulet of Telepathy&quot;
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;DMU&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;THB&quot;]
+  }
+]
+</property>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
@@ -188,7 +262,38 @@
     ]
    }
 ]</property>
+    <property name="effect">{
+ &quot;startBattleWithCard&quot;: [ &quot;Altar of the Brood&quot;,&quot;Glacial Wall&quot; ],
+ &quot;lifeModifier&quot;: 6
+}</property>
     <property name="enemy" value="Brain Mole"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Golden Egg&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Amulet of Telepathy&quot;
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;DMU&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;THB&quot;]
+  }
+]
+</property>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
@@ -202,7 +307,38 @@
     ]
    }
 ]</property>
+    <property name="effect">{
+ &quot;startBattleWithCard&quot;: [ &quot;Island&quot;,&quot;Quest for Ancient Secrets&quot; ],
+ &quot;lifeModifier&quot;: 6
+}</property>
     <property name="enemy" value="Storm Titan"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Amulet of Telepathy&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Mantel of Denial&quot;
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;DMU&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;THB&quot;]
+  }
+]
+</property>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
@@ -232,30 +368,166 @@
   </object>
   <object id="85" template="../../../obj/enemy.tx" x="398.667" y="652.667">
    <properties>
-    <property name="dialog">[
-  {
-    &quot;text&quot;: &quot;Welcome, {var=player_name}. Lorthos has been waiting eagerly for this moment.&quot;,
-    &quot;options&quot;: [
-      {
-        &quot;name&quot;: &quot;Is that so? I guess you wouldn't mind opening that gate in front of me?&quot;,
-        &quot;text&quot;: &quot;I'm afraid I'm not allowed to do that, I am a mere servant of the mighty Lorthos, master of the depths of the sea.&quot;,
-        &quot;options&quot;: [
-          {
-            &quot;name&quot;: &quot;What do I need to do to get passed though this gate?&quot;,
-            &quot;text&quot;: &quot;You must prove your strength by defeating at least four of the five enemies lurking within this dungeon to be worthy of an audience with my illustrious master.\n Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.&quot;,
-            &quot;options&quot;: [
-              {
-                &quot;name&quot;: &quot;I'll show my worth, just make sure to open the gate when I do defeat your challengers.&quot;,
-                &quot;text&quot;: &quot;Leave&quot;
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
+    <property name="dialog">
+[
+	{
+		&quot;text&quot;: &quot;Welcome, {var=player_name}. Lorthos has been waiting eagerly for this moment.&quot;,
+		&quot;options&quot;: [
+			{
+				&quot;name&quot;: &quot;Is that so? I guess you wouldn't mind opening that gate in front of me?&quot;,
+				&quot;text&quot;: &quot;I'm afraid I'm not allowed to do that, I am a mere servant of the mighty Lorthos, master of the depths of the sea.&quot;,
+				&quot;options&quot;: [
+					{
+						&quot;name&quot;: &quot;What do I need to do to get passed though this gate?&quot;,
+						&quot;text&quot;: &quot;You must prove your strength by defeating at least four of the five enemies lurking within this dungeon to be worthy of an audience with my illustrious master.\n Sharpen your blade, ready your spells, and gather your courage, for the challenges ahead will test the mettle of even the most seasoned warrior.&quot;,
+						&quot;options&quot;: [
+							{
+								&quot;name&quot;: &quot;I'll show my worth, just make sure to open the gate when I do defeat your challengers.&quot;,
+								&quot;text&quot;: &quot;Leave&quot;,
+								&quot;action&quot;: [
+									{
+										&quot;setMapFlag&quot;: {
+											&quot;key&quot;: &quot;TalkToDoorGreeter&quot;,
+											&quot;val&quot;: 1
+										}
+									}
+
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	{
+		&quot;text&quot;: &quot;The challengers are still alive, you shall not pass beyond this gate.&quot;,
+		&quot;condition&quot;: [
+			{ &quot;checkMapFlag&quot;: &quot;TalkToDoorGreeter&quot; }
+				],
+			&quot;options&quot;: [
+			{
+				&quot;name&quot;: &quot;(Continue)&quot;
+				}
+		]
+
+	},
+	{
+		&quot;text&quot;: &quot;I am impressed, you are welcome to meet my master upstairs, though I can't guarantee you will be able to survive that encounter.&quot;,
+		&quot;condition&quot;: [
+			{
+				&quot;getMapFlag&quot;: {
+					&quot;key&quot;: &quot;enemiesDefeated&quot;,
+					&quot;op&quot;: &quot;&gt;=&quot;,
+					&quot;val&quot;: 4
+				}
+			}
+		],
+		&quot;options&quot;: [
+			{
+				&quot;name&quot;: &quot;(Continue)&quot;,
+				&quot;action&quot;: [
+					{ &quot;deleteMapObject&quot;: -1 }
+				]
+			}
+		]
+	}
 ]</property>
     <property name="enemy" value="Djinn"/>
+   </properties>
+  </object>
+  <object id="88" template="../../../obj/treasure.tx" x="313" y="467">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;shards&quot;,
+    &quot;count&quot;: 10,
+    &quot;addMaxCount&quot;: 20
+},
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 6,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;blue&quot; ]
+},
+{
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Amulet of Telepathy&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Mantel of Denial&quot;
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;KTK&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;M15&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 200,
+    &quot;addMaxCount&quot;: 100
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="89" template="../../../obj/treasure.tx" x="424.5" y="461.5">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;shards&quot;,
+    &quot;count&quot;: 10,
+    &quot;addMaxCount&quot;: 20
+},
+{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 6,
+  &quot;probability&quot;: 0.5,
+  &quot;rarity&quot;: [ &quot;rare&quot; ],
+  &quot;colors&quot;: [ &quot;blue&quot; ]
+},
+{
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Amulet of Telepathy&quot;
+  },
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 0.10,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Mantel of Denial&quot;
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;KTK&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;cardPackShop&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;editions&quot;: [&quot;M15&quot;]
+  },
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 200,
+    &quot;addMaxCount&quot;: 100
+ }
+]</property>
    </properties>
   </object>
  </objectgroup>

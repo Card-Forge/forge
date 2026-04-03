@@ -146,7 +146,7 @@ public class AttackConstraints {
         if (empty != -1) {
             possible.put(Collections.emptyMap(), empty);
         }
- 
+
         // take the case with the fewest violations
         return possible.entrySet().stream()
                 .min(Comparator.comparingInt(Entry::getValue))

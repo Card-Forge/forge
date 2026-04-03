@@ -154,9 +154,6 @@ public final class FModel {
     private static final Supplier<ItemPool<PaperCard>> contraptionPool = Suppliers.memoize(() -> ItemPool.createFrom(getMagicDb().getVariantCards().getAllCards(PaperCardPredicates.fromRules(CardRulesPredicates.IS_CONTRAPTION)), PaperCard.class));
 
     public static void initialize(final IProgressBar progressBar, Function<ForgePreferences, Void> adjustPrefs) {
-        initialize(progressBar, adjustPrefs, false);
-    }
-    public static void initialize(final IProgressBar progressBar, Function<ForgePreferences, Void> adjustPrefs, boolean isSimTest) {
         ImageKeys.initializeDirs(
             ForgeConstants.CACHE_CARD_PICS_DIR, ForgeConstants.CACHE_CARD_PICS_SUBDIR,
             ForgeConstants.CACHE_TOKEN_PICS_DIR, ForgeConstants.CACHE_ICON_PICS_DIR,

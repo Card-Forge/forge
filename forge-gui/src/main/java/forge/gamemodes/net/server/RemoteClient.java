@@ -4,8 +4,10 @@ import forge.gamemodes.net.ReplyPool;
 import forge.gamemodes.net.event.IdentifiableNetEvent;
 import forge.gamemodes.net.event.NetEvent;
 import io.netty.channel.Channel;
+import org.tinylog.Logger;
 
 import java.util.concurrent.TimeoutException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public final class RemoteClient implements IToClient {
 
@@ -16,6 +18,7 @@ public final class RemoteClient implements IToClient {
     private String username;
     private int index = UNASSIGNED_SLOT;  // Initialize to -1 to indicate not yet assigned
     private volatile ReplyPool replies = new ReplyPool();
+    private final AtomicInteger sendErrors = new AtomicInteger(0);
 
     public RemoteClient(final Channel channel) {
         this.channel = channel;
@@ -40,12 +43,22 @@ public final class RemoteClient implements IToClient {
 
     @Override
     public void send(final NetEvent event) {
-        System.out.println("Sending event " + event + " to " + channel);
         try {
+            long startMs = System.currentTimeMillis();
             channel.writeAndFlush(event).sync();
+            long elapsed = System.currentTimeMillis() - startMs;
+            if (elapsed > 50) {
+                Logger.info("send() blocked {} ms for {} (event: {})", elapsed, username, event);
+            }
         } catch (Exception e) {
-            e.printStackTrace();
+            sendErrors.incrementAndGet();
+            Logger.error(e, "Network send error for {} (event: {})", username, event);
         }
+    }
+
+    @Override
+    public void write(final NetEvent event) {
+        channel.write(event);
     }
 
     @Override
@@ -69,6 +82,10 @@ public final class RemoteClient implements IToClient {
     }
     public void setIndex(final int index) {
         this.index = index;
+    }
+
+    public int getSendErrorCount() {
+        return sendErrors.get();
     }
 
     ReplyPool getReplyPool() {

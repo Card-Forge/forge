@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Zegana
+Title=Zegana
+Icon=Zegana.jpg
+Difficulty=Hard
+Description=../Modern/Shadows_over_Innistrad/SCG_Modern_Open_Columbus/Ben_Wienburg_-_Burn_(Modern,_#653296).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+1 Grim Lavamancer
+4 Monastery Swiftspear
+4 Wild Nacatl
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+4 Searing Blaze
+4 Lava Spike
+3 Rift Bolt
+4 Bloodstained Mire
+2 Mountain
+3 Sacred Foundry
+1 Scalding Tarn
+3 Stomping Ground
+3 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+1 Deflecting Palm
+3 Kor Firewalker
+2 Lightning Helix
+4 Path to Exile
+2 Skullcrack
+3 Westvale Abbey

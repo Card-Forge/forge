@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Grampa Simpson
+Title=Grampa Simpson
+Icon=Grampa Simpson.jpg
+Difficulty=Very Hard
+Description=./Modern/War_of_the_Spark/Drew_Anderson_-_Merfolk_(Modern,_#799317).dck
+Deck Type=constructed
+
+[Main]
+4 Benthic Biomancer
+3 Harbinger of the Tides
+4 Lord of Atlantis
+4 Master of the Pearl Trident
+4 Master of Waves
+4 Merfolk Trickster
+4 Silvergill Adept
+2 Thassa, God of the Sea
+4 Aether Vial
+2 Spell Pierce
+4 Spreading Seas
+13 Island
+2 Faerie Conclave
+4 Mutavault
+1 Minamo, School at Water's Edge
+1 Oboro, Palace in the Clouds
+[Sideboard]
+3 Relic of Progenitus
+2 Phyrexian Revoker
+2 Ceremonious Rejection
+1 Deprive
+2 Dismember
+1 Echoing Truth
+2 Vendilion Clique
+2 Ashiok, Dream Render

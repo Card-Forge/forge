@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Robot74
+Title=Robot74
+Icon=Wonder Twins.jpg
+Difficulty=Easy
+Description=Dimir 
+Deck Type=constructed
+
+[Main]
+2 Champion of Wits
+4 Gifted Aetherborn
+4 Kitesail Freebooter
+3 The Scarab God
+2 Torrential Gearhulk
+1 Essence Extraction
+2 Essence Scatter
+4 Fatal Push
+3 Glimmer of Genius
+3 Supreme Will
+2 Vraska's Contempt
+4 Chart a Course
+4 Drowned Catacomb
+4 Evolving Wilds
+4 Fetid Pools
+1 Field of Ruin
+5 Island
+8 Swamp
+[Sideboard]
+4 Duress
+2 Essence Extraction
+1 Gonti, Lord of Luxury
+4 Negate
+1 River's Rebuke
+2 Search for Azcanta
+1 Vraska's Contempt

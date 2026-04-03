@@ -39,7 +39,7 @@ import java.util.function.Predicate;
 public class AdventurePlayer implements Serializable, SaveFileContent {
     public static final int MIN_DECK_COUNT = 10;
     // this is a purely arbitrary limit, could be higher or lower; just meant as some sort of reasonable limit for the user
-    public static final int MAX_DECK_COUNT = 20;
+    private int maxDeckCount = 20;
     // Player profile data.
     private String name;
     private int heroRace;
@@ -72,6 +72,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     private final ArrayList<ItemData> inventoryItems = new ArrayList<>();
     private final Array<Deck> boostersOwned = new Array<>();
     private final HashMap<String, Long> equippedItems = new HashMap<>();
+    private final ArrayList<HashMap<String, Long>> deckLoadouts = new ArrayList<>();
     private final List<AdventureQuestData> quests = new ArrayList<>();
     private final List<AdventureEventData> events = new ArrayList<>();
     private final Set<PaperCard> unsupportedCards = new HashSet<>();
@@ -103,6 +104,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public int getDeckCount() { return decks.size(); }
 
+    public int getMaxDeckCount() { return maxDeckCount; }
+
     private void clearDecks() {
         decks.clear();
         for (int i = 0; i < MIN_DECK_COUNT; i++)
@@ -123,10 +126,12 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         maxLife = 20;
         life = 20;
         shards = 0;
+        maxDeckCount = 20;
         clearDecks();
         inventoryItems.clear();
         boostersOwned.clear();
         equippedItems.clear();
+        deckLoadouts.clear();
         characterFlags.clear();
         questFlags.clear();
         quests.clear();
@@ -157,6 +162,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         this.adventureMode = adventureMode;
         announceFantasy = fantasyMode = isFantasy; //Set Chaos mode first.
         announceCustom = usingCustomDeck = isUsingCustomDeck;
+
+        this.maxDeckCount = Config.instance().getConfigData().maxNumberOfDecks; // Get the MAX_DECK_COUNT from the config file
+        // Sanity Check make sure the number is not insane and make sure it is at least 20
+        this.maxDeckCount = Math.max(Math.min(this.maxDeckCount, 99), 20);
 
         clearDecks(); // Reset the empty decks to now already have the commander in the command zone.
         deck = startingDeck;
@@ -199,7 +208,40 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public void setSelectedDeckSlot(int slot) {
+        setSelectedDeckSlot(slot, true);
+    }
+
+    public void setSelectedDeckSlot(int slot, boolean switchLoadout) {
         if (slot >= 0 && slot < getDeckCount()) {
+            boolean bindLoadouts = Config.instance().getSettingData().bindEquipmentLoadoutsToDecks;
+            if (switchLoadout && bindLoadouts && slot != selectedDeckIndex) {
+                // Save current loadout to old deck
+                ensureDeckLoadoutsSize();
+                deckLoadouts.set(selectedDeckIndex, new HashMap<>(equippedItems));
+
+                // Clear current equipment
+                for (ItemData item : inventoryItems) {
+                    if (item != null) {
+                        item.isEquipped = false;
+                    }
+                }
+                equippedItems.clear();
+
+                // Restore loadout for new deck (if any)
+                HashMap<String, Long> newLoadout = deckLoadouts.get(slot);
+                if (newLoadout != null) {
+                    for (Map.Entry<String, Long> entry : newLoadout.entrySet()) {
+                        ItemData item = getItemFromInventory(entry.getValue());
+                        if (item != null) {
+                            item.isEquipped = true;
+                            equippedItems.put(entry.getKey(), entry.getValue());
+                        }
+                    }
+                }
+
+                onEquipmentChange.emit();
+            }
+
             selectedDeckIndex = slot;
             deck = decks.get(selectedDeckIndex);
             setColorIdentity(DeckProxy.getColorIdentity(deck));
@@ -278,7 +320,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     public Boolean isFemale() {
         return isFemale;
     }
-
+    
     public float getWorldPosX() {
         return worldPosX;
     }
@@ -297,6 +339,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public AdventureModes getAdventureMode(){
         return adventureMode;
+    }
+
+    public boolean isCommanderMode() {
+        return adventureMode != null && adventureMode.isCommanderLike();
     }
 
     public int getMaxLife() {
@@ -562,13 +608,17 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             }
         }
 
+        // Set max deck count to either the value in the config or the current player deck count and then ensure it is bound by 20 and 99
+        this.maxDeckCount = Math.min(Math.max(Math.max(data.containsKey("deckCount") ? data.readInt("deckCount") : 20, Config.instance().getConfigData().maxNumberOfDecks), 20), 99);
+
+
         // Load decks
         // Check if this save has dynamic deck count, use set-count load if not
         boolean hasDynamicDeckCount = data.containsKey("deckCount");
         if (hasDynamicDeckCount) {
             int dynamicDeckCount = data.readInt("deckCount");
             // In case the save had previously saved more decks than the current version allows (in case of the max being lowered)
-            dynamicDeckCount = Math.min(MAX_DECK_COUNT, dynamicDeckCount);
+            dynamicDeckCount = Math.min(maxDeckCount, dynamicDeckCount);
             for (int i = 0; i < dynamicDeckCount; i++){
                 // The first x elements are pre-created
                 if (i < MIN_DECK_COUNT) {
@@ -630,7 +680,26 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             }
         }
 
-        setSelectedDeckSlot(data.readInt("selectedDeckIndex"));
+        // Load deck loadouts (equipment tied to each deck)
+        for (int i = 0; i < getDeckCount(); i++) {
+            HashMap<String, Long> loadout = null;
+            if (data.containsKey("deckLoadout_slots_" + i) && data.containsKey("deckLoadout_items_" + i)) {
+                try {
+                    String[] loadoutSlots = (String[]) data.readObject("deckLoadout_slots_" + i);
+                    Long[] loadoutItems = (Long[]) data.readObject("deckLoadout_items_" + i);
+                    if (loadoutSlots.length == loadoutItems.length) {
+                        loadout = new HashMap<>();
+                        for (int j = 0; j < loadoutSlots.length; j++) {
+                            loadout.put(loadoutSlots[j], loadoutItems[j]);
+                        }
+                    }
+                } catch (Exception ignored) {}
+            }
+            deckLoadouts.add(loadout);
+        }
+
+        // Use false to skip loadout switching during load (equippedItems already loaded correctly above)
+        setSelectedDeckSlot(data.readInt("selectedDeckIndex"), false);
         CardPool cardPool = CardPool.fromCardList(Lists.newArrayList((String[]) data.readObject("cards")));
         cards.addAll(cardPool.getFilteredPool(isValid));
         unsupportedCards.addAll(cardPool.getFilteredPool(isUnsupported).toFlatList());
@@ -823,6 +892,25 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             if (decks.get(i).get(DeckSection.Commander) != null)
                 data.storeObject("commanderCards_" + i, decks.get(i).get(DeckSection.Commander).toCardList("\n").split("\n"));
         }
+
+        // Save deck loadouts (equipment tied to each deck)
+        // First, save current equipment to current deck's loadout
+        ensureDeckLoadoutsSize();
+        deckLoadouts.set(selectedDeckIndex, new HashMap<>(equippedItems));
+        for (int i = 0; i < getDeckCount(); i++) {
+            HashMap<String, Long> loadout = i < deckLoadouts.size() ? deckLoadouts.get(i) : null;
+            if (loadout != null) {
+                ArrayList<String> loadoutSlots = new ArrayList<>();
+                ArrayList<Long> loadoutItems = new ArrayList<>();
+                for (Map.Entry<String, Long> entry : loadout.entrySet()) {
+                    loadoutSlots.add(entry.getKey());
+                    loadoutItems.add(entry.getValue());
+                }
+                data.storeObject("deckLoadout_slots_" + i, loadoutSlots.toArray(new String[0]));
+                data.storeObject("deckLoadout_items_" + i, loadoutItems.toArray(new Long[0]));
+            }
+        }
+
         data.store("selectedDeckIndex", selectedDeckIndex);
         data.storeObject("cards", cards.toCardList("\n").split("\n"));
 
@@ -1187,6 +1275,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
         int basePrice = (int) (CardUtil.getCardPrice(card) * difficultyData.sellFactor);
 
+        if (card.isFoil()) {
+            basePrice += basePrice * 20 / 100;
+        }
+
         float townPriceModifier = currentLocationChanges == null ? 1f : currentLocationChanges.getTownPriceModifier();
         return (int) (basePrice * (2.0f - townPriceModifier));
     }
@@ -1452,6 +1544,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
      */
     public void clearDeck() {
         deck = decks.set(selectedDeckIndex, new Deck(Forge.getLocalizer().getMessage("lblEmptyDeck")));
+        ensureDeckLoadoutsSize();
+        deckLoadouts.set(selectedDeckIndex, null);
     }
 
     /**
@@ -1461,10 +1555,14 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         int oldIndex = selectedDeckIndex;
         this.setSelectedDeckSlot(0);
         decks.remove(oldIndex);
+        if (oldIndex < deckLoadouts.size()) {
+            deckLoadouts.remove(oldIndex);
+        }
     }
 
     public void addDeck(){
         decks.add(new Deck(Forge.getLocalizer().getMessage("lblEmptyDeck")));
+        deckLoadouts.add(null);
     }
 
     /**
@@ -1473,15 +1571,25 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
      * @return int - index of new copy slot, or -1 if no slot was available
      */
     public int copyDeck() {
-        for (int i = 0; i < MAX_DECK_COUNT; i++) {
+        for (int i = 0; i < maxDeckCount; i++) {
             if (i >= getDeckCount()) addDeck();
             if (isEmptyDeck(i)) {
                 decks.set(i, (Deck) deck.copyTo(deck.getName() + " (" + Forge.getLocalizer().getMessage("lblCopy") + ")"));
+                // Copy loadout from source deck to new slot
+                ensureDeckLoadoutsSize();
+                HashMap<String, Long> sourceLoadout = selectedDeckIndex < deckLoadouts.size() ? deckLoadouts.get(selectedDeckIndex) : null;
+                deckLoadouts.set(i, sourceLoadout != null ? new HashMap<>(sourceLoadout) : null);
                 return i;
             }
         }
 
         return -1;
+    }
+
+    private void ensureDeckLoadoutsSize() {
+        while (deckLoadouts.size() < getDeckCount()) {
+            deckLoadouts.add(null);
+        }
     }
 
     public boolean isEmptyDeck(int deckIndex) {

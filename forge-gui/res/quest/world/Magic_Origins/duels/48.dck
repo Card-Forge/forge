@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Betty Rubble
+Title=Betty Rubble
+Icon=Betty Rubble.jpg
+Difficulty=Easy
+Description=Magic_Origins/Standard_Daily_#8522324/medvedev_-_Big_Red_(Standard,_#302785).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Foundry Street Denizen
+4 Frenzied Goblin
+4 Goblin Glory Chaser
+4 Goblin Piledriver
+4 Goblin Rabblemaster
+1 Mardu Scout
+4 Subterranean Scout
+1 Zurgo Bellstriker
+4 Obelisk of Urd
+4 Dragon Fodder
+4 Hordeling Outburst
+21 Mountain
+1 Rogue's Passage
+[Sideboard]
+1 Goblin Heelcutter
+1 Hammer of Purphoros
+4 Impact Tremors
+4 Magmatic Chasm
+1 Outpost Siege
+4 Roast

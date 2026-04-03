@@ -5,6 +5,7 @@ import forge.ai.GameState;
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.event.GameEvent;
+import org.tinylog.Logger;
 import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
@@ -14,12 +15,15 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.AbstractGuiGame;
+import forge.gamemodes.net.GameEventProxy;
 import forge.gamemodes.net.GameProtocolSender;
 import forge.gamemodes.net.ProtocolMethod;
+import forge.gui.control.GameEventForwarder;
 import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
+import forge.trackable.Tracker;
 import forge.trackable.TrackableCollection;
 import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
@@ -27,12 +31,15 @@ import forge.util.ITriggerEvent;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class NetGuiGame extends AbstractGuiGame {
 
     private final GameProtocolSender sender;
     private final int slotIndex;
     private volatile boolean paused;
+    private GameEventForwarder forwarder;
+    private boolean flushing;
 
     public NetGuiGame(final IToClient client, final int slotIndex) {
         this.sender = new GameProtocolSender(client);
@@ -55,13 +62,37 @@ public class NetGuiGame extends AbstractGuiGame {
         return paused;
     }
 
+    public void setForwarder(GameEventForwarder forwarder) {
+        this.forwarder = forwarder;
+    }
+
+    public void shutdownForwarder() {
+        if (forwarder != null) {
+            forwarder.shutdown();
+            forwarder = null;
+        }
+    }
+
+    private void flushPendingEvents() {
+        if (forwarder != null && !flushing) {
+            flushing = true;
+            try {
+                forwarder.flush();
+            } finally {
+                flushing = false;
+            }
+        }
+    }
+
     private void send(final ProtocolMethod method, final Object... args) {
         if (paused) { return; }
+        flushPendingEvents();
         sender.send(method, args);
     }
 
     private <T> T sendAndWait(final ProtocolMethod method, final Object... args) {
         if (paused) { return null; }
+        flushPendingEvents();
         return sender.sendAndWait(method, args);
     }
 
@@ -163,8 +194,6 @@ public class NetGuiGame extends AbstractGuiGame {
         updateGameView();
         send(ProtocolMethod.setPanelSelection, hostCard);
     }
-
-
 
     @Override
     public GameState getGamestate() {
@@ -296,8 +325,18 @@ public class NetGuiGame extends AbstractGuiGame {
 
     @Override
     public void handleGameEvent(GameEvent event) {
-        updateGameView();
-        send(ProtocolMethod.handleGameEvent, event);
+        handleGameEvents(List.of(event));
+    }
+
+    @Override
+    public void handleGameEvents(List<GameEvent> events) {
+        if (paused) { return; }
+        Logger.info("Sending batch of {}: [{}]", () -> events.size(),
+                () -> events.stream().map(e -> e.getClass().getSimpleName()).collect(Collectors.joining(", ")));
+        Tracker tracker = getGameView() != null ? getGameView().getTracker() : null;
+        List<Object> proxied = GameEventProxy.wrapAll(events, tracker);
+        sender.write(ProtocolMethod.setGameView, getGameView());
+        sender.send(ProtocolMethod.handleGameEvents, proxied);
     }
 
     @Override

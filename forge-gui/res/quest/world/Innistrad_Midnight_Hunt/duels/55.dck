@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Reactor Meltdown
+Title=Reactor Meltdown
+Icon=Reactor Meltdown.jpg
+Difficulty=Hard
+Description=./Modern/Innistrad_Midnight_Hunt/DIEJINN_-_Dredge_(Modern,_#1227130).dck
+Deck Type=constructed
+
+[Main]
+2 Ox of Agonas
+4 Narcomoeba
+4 Prized Amalgam
+4 Silversmote Ghoul
+4 Stinkweed Imp
+4 Stitcher's Supplier
+4 Golgari Thug
+1 Faithful Mending
+2 Otherworldly Gaze
+3 Life from the Loam
+3 Thrilling Discovery
+4 Burning Inquiry
+4 Creeping Chill
+1 Breeding Pool
+1 Godless Shrine
+1 Mana Confluence
+1 Mountain
+1 Plains
+1 Sacred Foundry
+1 Steam Vents
+1 Swamp
+1 Blood Crypt
+2 Marsh Flats
+3 Bloodstained Mire
+3 Arid Mesa
+[Sideboard]
+1 Thassa's Oracle
+1 Conflagrate
+1 Darkblast
+2 Blood Moon
+2 Ray of Revelation
+2 Ancient Grudge
+3 Prismatic Ending
+3 Leyline of the Void

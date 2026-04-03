@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Jubilee
+Title=Jubilee
+Icon=Jubilee.jpg
+Difficulty=Very Hard
+Description=./Modern/Streets_of_New_Capenna/DragonFodder_-_Rakdos_Aggro_(Modern,_#1364518).dck
+Deck Type=constructed
+
+[Main]
+2 Kroxa, Titan of Death's Hunger
+3 Spitebellows
+4 Thunderkin Awakener
+4 Stitcher's Supplier
+4 Lightning Skelemental
+4 Goldhound
+3 Fatal Push
+4 Village Rites
+4 Lightning Bolt
+4 Unearth
+2 Ob Nixilis, the Adversary
+1 Nurturing Peatland
+1 Mountain
+1 Fiery Islet
+2 Den of the Bugbear
+2 Sunbaked Canyon
+2 Polluted Delta
+2 Blackcleave Cliffs
+3 Swamp
+4 Bloodstained Mire
+4 Blood Crypt
+[Sideboard]
+1 Ashiok, Dream Render
+2 Void Mirror
+2 Rakdos Charm
+2 Feed the Swarm
+2 Engineered Explosives
+2 Dragon's Claw
+2 Boil
+2 Blood Moon

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Piper
+Title=Piper
+Icon=Piper.jpg
+Difficulty=Easy
+Description=Aether_Revolt/MAtteo_Capozucca_-_Tokens_(Standard,_#668796).dck
+Deck Type=constructed
+
+[Main]
+1 Archangel Avacyn
+4 Lambholt Pacifist
+4 Sylvan Advocate
+2 Verdurous Gearhulk
+4 Walking Ballista
+3 Heart of Kiran
+2 Declaration in Stone
+4 Oath of Nissa
+4 Stasis Snare
+1 Ajani Unyielding
+4 Gideon, Ally of Zendikar
+4 Nissa, Voice of Zendikar
+2 Aether Hub
+4 Canopy Vista
+6 Forest
+4 Fortified Village
+5 Plains
+2 Westvale Abbey
+[Sideboard]
+1 Ajani Unyielding
+2 Authority of the Consuls
+2 Declaration in Stone
+2 Fumigate
+2 Natural State
+1 Quarantine Field
+2 Thalia, Heretic Cathar
+3 Tireless Tracker

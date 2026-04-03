@@ -4,7 +4,7 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Virtue of Loyalty&quot;, &quot;Youthful Knight&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Virtue of Loyalty|WOE&quot;, &quot;Mace of the Valiant|ELD&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -111,7 +111,7 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Venerable Knight|ELD&quot;, &quot;Court of Ardenvale|WOC&quot;, &quot;Court of Vantress|WOC&quot;, &quot;Court of Locthwain|WOC&quot;, &quot;Court of Embereth|WOC&quot;, &quot;Court of Garenbrig|WOC&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Court of Ardenvale|WOC&quot;, &quot;Court of Vantress|WOC&quot;, &quot;Court of Locthwain|WOC&quot;, &quot;Court of Embereth|WOC&quot;, &quot;Court of Garenbrig|WOC&quot;]}"/>
     <property name="enemy" value="Kenrith"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="40"/>

@@ -4,7 +4,7 @@ Types:Legendary Artifact Creature Robot
 PT:3/4
 K:More Than Meets the Eye:3 U
 K:Flying
-A:AB$ Mana | Cost$ RemoveAnyCounter<X1+/P1P1/Artifact.YouCtrl/among artifacts you control> | XMin$ 1 | ValidTgts$ Player | Produced$ C | Amount$ X | AmountDesc$ for each counter removed | RestrictValid$ CantCastNonArtifactSpells | SubAbility$ DBConvert | SpellDescription$ Target player adds that much {C}. This mana can't be spent to cast nonartifact spells.
+A:AB$ Mana | Cost$ RemoveAnyCounter<X1+/P1P1/Artifact> | XMin$ 1 | ValidTgts$ Player | Produced$ C | Amount$ X | AmountDesc$ for each counter removed | RestrictValid$ CantCastNonArtifactSpells | SubAbility$ DBConvert | SpellDescription$ Target player adds that much {C}. This mana can't be spent to cast nonartifact spells.
 SVar:DBConvert:DB$ SetState | Mode$ Transform | StackDescription$ SpellDescription | SpellDescription$ Convert NICKNAME.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
@@ -22,6 +22,6 @@ PT:3/4
 K:Living metal
 K:Flying
 A:AB$ SetState | Cost$ U U U | Mode$ Transform | SubAbility$ DBAdapt | StackDescription$ Convert NICKNAME, | SpellDescription$ Convert NICKNAME, then adapt 3. (If it has no +1/+1 counters on it, put three +1/+1 counters on it.)
-SVar:DBAdapt:DB$ PutCounter | Adapt$ True | CounterNum$ 3 | CounterType$ P1P1 | StackDescription$ then adapt 3.
+SVar:DBAdapt:DB$ PutCounter | Adapt$ 3 | StackDescription$ then adapt 3.
 DeckHas:Ability$Counters
 Oracle:Living metal (During your turn, this Vehicle is also a creature.)\nFlying\n{U}{U}{U}: Convert Jetfire, then adapt 3. (If it has no +1/+1 counters on it, put three +1/+1 counters on it.)

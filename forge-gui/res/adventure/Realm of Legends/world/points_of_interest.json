@@ -18,7 +18,7 @@
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Building11",
-		"map": "../Realm of Legends/maps/map/fort/abzan_war_camp.tmx",
+		"map": "../Realm of Legends/maps/map/fort/Abzan_War_Camp.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Story"]
@@ -30,7 +30,7 @@
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Castle",
-		"map": "../Realm of Legends/maps/map/fort/boros_fortress.tmx",
+		"map": "../Realm of Legends/maps/map/fort/Boros_Fortress.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Story"]
@@ -42,7 +42,7 @@
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
 		"sprite": "Monastery",
-		"map": "../Realm of Legends/maps/map/fort/church_of_avacyn.tmx",
+		"map": "../Realm of Legends/maps/map/fort/Church_of_Avacyn.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Story"]
@@ -186,7 +186,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "MageTowerWhite",
-		"map": "../Realm of Legends/maps/map/fort/white_tower_of_worship.tmx",
+		"map": "../Realm of Legends/maps/map/fort/White_Tower_of_Worship.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Story"]
@@ -317,7 +317,7 @@
 		"type": "cave",
 		"count": 1,
 		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
-		"sprite": "Building148",
+		"sprite": "Building101",
 		"map": "../Realm of Legends/maps/map/merfolkpool/Raffines_Tower.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
@@ -1032,6 +1032,18 @@
 			"Story"]
 	},
 	{
+		"name": "Arzakon's Fortress",
+		"displayName": "Arzakon's Fortress",
+		"type": "dungeon",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building51",
+		"map": "../Realm of Legends/maps/map/cave/Arzakons_Fortress.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
 		"name": "Bonder's Enclave",
 		"displayName": "Bonder's Enclave",
 		"type": "dungeon",
@@ -1344,6 +1356,66 @@
 			"Story"]
 	},
 	{
+		"name": "Ancient Ruby Lavafield",
+		"displayName": "Ancient Ruby Lavafield",
+		"type": "castle",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building107",
+		"map": "../Realm of Legends/maps/map/barbariancamp/Ancient_Ruby_Lavafield.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Ancient Jet Hill",
+		"displayName": "Ancient Jet Hill",
+		"type": "castle",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building109",
+		"map": "../Realm of Legends/maps/map/evilgrove/Ancient_Jet_Hill.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Ancient Pearl Mesa",
+		"displayName": "Ancient Pearl Mesa",
+		"type": "castle",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building108",
+		"map": "../Realm of Legends/maps/map/fort/Ancient_Pearl_Mesa.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Ancient Emerald Clearing",
+		"displayName": "Ancient Emerald Clearing",
+		"type": "castle",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building105",
+		"map": "../Realm of Legends/maps/map/grove/Ancient_Emerald_Clearing.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
+		"name": "Ancient Sapphire Pool",
+		"displayName": "Ancient Sapphire Pool",
+		"type": "castle",
+		"count": 1,
+		"spriteAtlas": "../Realm of Legends/sprites/buildings.atlas",
+		"sprite": "Building106",
+		"map": "../Realm of Legends/maps/map/merfolkpool/Ancient_Sapphire_Pool.tmx",
+		"radiusFactor": 0.8,
+		"questTags": [
+			"Story"]
+	},
+	{
 		"name": "Black Castle",
 		"displayName": "Fallen Black Castle",
 		"type": "castle",
@@ -1626,7 +1698,7 @@
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "PlainsCapital",
-		"map": "../Realm of Legends/maps/map/main_story/Plains_capital.tmx",
+		"map": "../Realm of Legends/maps/map/main_story/plains_capital.tmx",
 		"questTags": [
 			"Capital",
 			"BiomeWhite",
@@ -1640,7 +1712,7 @@
 		"count": 5,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "PlainsTown",
-		"map": "../Realm of Legends/maps/map/towns/Plains_town_1.tmx",
+		"map": "../Realm of Legends/maps/map/towns/plains_town_1.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Town",
@@ -1656,7 +1728,7 @@
 		"count": 5,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "PlainsTown",
-		"map": "../Realm of Legends/maps/map/towns/Plains_town_2.tmx",
+		"map": "../Realm of Legends/maps/map/towns/plains_town_2.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Town",
@@ -1672,7 +1744,7 @@
 		"count": 5,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "PlainsTown",
-		"map": "../Realm of Legends/maps/map/towns/Plains_town_3.tmx",
+		"map": "../Realm of Legends/maps/map/towns/plains_town_3.tmx",
 		"radiusFactor": 0.8,
 		"questTags": [
 			"Town",
@@ -1688,7 +1760,7 @@
 		"count": 5,
 		"spriteAtlas": "../common/maps/tileset/buildings.atlas",
 		"sprite": "PlainsTown",
-		"map": "../Realm of Legends/maps/map/towns/Plains_town_4.tmx",
+		"map": "../Realm of Legends/maps/map/towns/plains_town_4.tmx",
 		"radiusFactor": 0.8
 	},
 	{

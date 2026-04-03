@@ -23,6 +23,7 @@ import java.util.Map;
 public class CounterEffect extends SpellAbilityEffect {
     @Override
     public void buildSpellAbility(SpellAbility sa) {
+        super.buildSpellAbility(sa);
         if (sa.usesTargeting()) {
             sa.getTargetRestrictions().setZone(ZoneType.Stack);
         }
@@ -296,7 +297,7 @@ public class CounterEffect extends SpellAbilityEffect {
 
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
         runParams.put(AbilityKey.Cause, srcSA);
-        runParams.put(AbilityKey.CounteredSA, tgtSA);
+        runParams.put(AbilityKey.SpellAbility, tgtSA);
         game.getTriggerHandler().runTrigger(TriggerType.Countered, runParams, false);
 
         if (!tgtSA.isAbility()) {

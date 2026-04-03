@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Luna Lovegood
+Title=Luna Lovegood
+Icon=Luna Lovegood.jpg
+Difficulty=Very Hard
+Description=../Modern/Khans_of_Tarkir/Modern_PTQ_#8107753/jsxwhy_-_Burn_(Modern,_#216449).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+1 Grim Lavamancer
+4 Monastery Swiftspear
+4 Boros Charm
+1 Flames of the Blood Hand
+4 Lightning Bolt
+2 Lightning Helix
+3 Searing Blaze
+2 Shard Volley
+4 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+1 Clifftop Retreat
+6 Mountain
+3 Sacred Foundry
+1 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+1 Combust
+3 Destructive Revelry
+3 Kor Firewalker
+2 Molten Rain
+1 Pyrite Spellbomb
+1 Relic of Progenitus
+2 Smash to Smithereens

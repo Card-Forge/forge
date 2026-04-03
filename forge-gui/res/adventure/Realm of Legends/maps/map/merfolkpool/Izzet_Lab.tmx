@@ -4,7 +4,7 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;League Guildmage&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Izzet Guildmage&quot;, &quot;Goblin Test Pilot&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -12,7 +12,7 @@
  <tileset firstgid="28289" source="../../../../common/maps/tileset/dungeon/DarkAbbeyTiles.tsx"/>
  <layer id="6" name="Collision" width="30" height="27">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUDFcQzcvAsIsHFUfxQsRhNDZ5SoEsD4R240TQ0jwQcRiNLAcC0jzUsxcZgMyF+ReXPDXsJcUcUtXjM4dUQMtwRo5fWtiLK73C7KV1en7ECKEHMj0TAsMtPdMjXY3U9EwKGE7pqpabgWEPktheILueG1UNNexFj7tdaP6RxSK/iwr2DjcAAI+DL9Q=
+   eJxjYBgFo2AUDFcQzcvAsIsHFUfxQsRhNDZ5SoEsD4R240TQ0jwQcRiNLAcC0jzUsxcZgMyF+ReXPDXsJcUcUtXjM4dUQMtwRo5fWtiLK73C7KV1en7ECKEHMj3jE6emvdjMweceWvl3DzME0zJdDZS9MDuwYXqkZ2LFQWA4patabmAYI+XfvUBcz42qhhr2osfdLh7UcgOb/C4q2DvcAADoKDU6
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="27">
@@ -46,7 +46,7 @@
   </object>
   <object id="57" template="../../../../common/maps/obj/enemy.tx" x="231.141" y="220.489">
    <properties>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Nivix, Aerie of the Firemind|GPT&quot;, &quot;Izzet Guildmage|GPT&quot; ] }"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Nivix, Aerie of the Firemind|GPT&quot;, &quot;Firemind's Research&quot; ] }"/>
     <property name="enemy" value="Niv-Mizzet"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="10"/>

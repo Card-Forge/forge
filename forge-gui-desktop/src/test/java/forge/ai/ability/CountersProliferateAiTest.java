@@ -93,9 +93,8 @@ public class CountersProliferateAiTest extends AITest {
 
         // AI should not want to activate since value (1) < cost (4)
         SpellAbilityAi aiLogic = SpellApiToAi.Converter.get(ApiType.Proliferate);
-        AiPlayDecision decision = aiLogic.canPlayWithSubs(ai, proliferateSA).decision();
-        assertEquals("AI should not activate proliferate when value below cost",
-                AiPlayDecision.CantPlayAi, decision);
+        boolean decision = aiLogic.canPlayWithSubs(ai, proliferateSA).willingToPlay();
+        assertEquals("AI should not activate proliferate when value below cost", false, decision);
     }
 
     @Test
@@ -111,7 +110,7 @@ public class CountersProliferateAiTest extends AITest {
         addCards("Wastes", 4, ai);
 
         // Opponent has 9 poison counters - proliferating would win the game
-        opponent.setPoisonCounters(9, null);
+        opponent.setCounters(CounterEnumType.POISON, 9);
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, ai);
         game.getAction().checkStateEffects(true);

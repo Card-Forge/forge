@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Scarecrow
+Title=Scarecrow
+Icon=Scarecrow.jpg
+Difficulty=Easy
+Description=./Standard/Foundations/DB_oldemodave_-_Red_Deck_Wins_(Standard,_#2278573).dck
+Deck Type=constructed
+
+[Main]
+4 Emberheart Challenger
+4 Heartfire Hero
+4 Hired Claw
+4 Manifold Mouse
+4 Monastery Swiftspear
+3 Screaming Nemesis
+4 Burst Lightning
+3 Lightning Strike
+4 Monstrous Rage
+2 Shock
+3 Witchstalker Frenzy
+1 Boltwave
+4 Copperline Gorge
+4 Karplusan Forest
+5 Mountain
+3 Rockface Village
+4 Thornspire Verge
+[Sideboard]
+1 Chainsaw
+1 Flamewake Phoenix
+1 Innkeeper's Talent
+2 Lithomantic Barrage
+3 Pawpatch Formation
+2 Questing Druid
+1 Sunspine Lynx
+2 Torch the Tower
+2 Twisted Fealty

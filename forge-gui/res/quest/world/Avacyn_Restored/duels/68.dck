@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Riptide
+Title=Riptide
+Icon=Riptide.jpg
+Difficulty=Hard
+Description=../Modern/Avacyn_Restored/Arcore_(MI)_-_7┬¬_Tappa_SMC_2012/Civati_Andrea_-_Zoo_(Modern,_#36700).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Burning-Tree Shaman
+4 Goblin Guide
+2 Grim Lavamancer
+4 Kird Ape
+4 Scab-Clan Mauler
+3 Tarmogoyf
+4 Vexing Devil
+2 Shrine of Burning Rage
+3 Incinerate
+4 Lightning Bolt
+4 Searing Blaze
+3 Lava Spike
+3 Arid Mesa
+3 Forest
+8 Mountain
+4 Stomping Ground
+2 Verdant Catacombs
+[Sideboard]
+2 Magus of the Moon
+3 Shattering Spree
+2 Smash to Smithereens
+2 Torpor Orb
+3 Vexing Shusher
+3 Volcanic Fallout

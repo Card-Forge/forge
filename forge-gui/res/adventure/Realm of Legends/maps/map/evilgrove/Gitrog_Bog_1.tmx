@@ -231,7 +231,7 @@
   <object id="210" template="../../../../common/maps/obj/manashards.tx" x="64.3333" y="451.333"/>
   <object id="217" template="../../../../common/maps/obj/enemy.tx" x="648.5" y="179.33" width="16" height="17.6724">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Frostbridge Guard|WOE&quot;, &quot;Solitary Sanctuary|WOE&quot;, &quot;Glacial Fortress|M10&quot;, &quot;Siren Song Lyre|BNG&quot;, &quot;Three Bowls of Porridge|WOE&quot;]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Frostbridge Guard|WOE&quot;, &quot;Solitary Sanctuary|WOE&quot;, &quot;Glacial Fortress|M10&quot;, &quot;Three Bowls of Porridge|WOE&quot;]
 }</property>
     <property name="enemy" value="Hylda"/>
     <property name="reward">[
@@ -510,7 +510,7 @@ NORTH: DOMAIN OF THE THREE WITCHES&quot;,
     <property name="enemy" value="Glarb"/>
    </properties>
   </object>
-  <object id="278" template="../../../../common/maps/obj/enemy.tx" x="730" y="747.164" width="16" height="17.6724">
+  <object id="278" template="../../../../common/maps/obj/enemy.tx" x="918" y="857.664" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Helga"/>
     <property name="speedModifier" type="float" value="20"/>
@@ -520,13 +520,6 @@ NORTH: DOMAIN OF THE THREE WITCHES&quot;,
   <object id="279" template="../../../../common/maps/obj/enemy.tx" x="482" y="703.164" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Clement"/>
-   </properties>
-  </object>
-  <object id="280" template="../../../../common/maps/obj/enemy.tx" x="914" y="856.164" width="16" height="17.6724">
-   <properties>
-    <property name="enemy" value="Flubs"/>
-    <property name="speedModifier" type="float" value="20"/>
-    <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
  </objectgroup>

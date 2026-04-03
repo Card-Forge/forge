@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Storm2
+Title=Storm2
+Icon=Storm2.jpg
+Difficulty=Easy
+Description=./Standard/Foundations/Adam_Bruce_-_Abzan_Aggro_(Standard,_#2275335).dck
+Deck Type=constructed
+
+[Main]
+4 Emberheart Challenger
+2 Fugitive Codebreaker
+4 Hired Claw
+4 Monastery Swiftspear
+4 Slickshot Show-Off
+4 Boros Charm
+4 Burst Lightning
+4 Lightning Helix
+4 Monstrous Rage
+2 Shock
+4 Boltwave
+4 Battlefield Forge
+4 Inspiring Vantage
+9 Mountain
+2 Restless Bivouac
+1 Rockface Village
+[Sideboard]
+2 Fugitive Codebreaker
+2 Obliterating Bolt
+1 Pyroclasm
+2 Scorching Shot
+3 Screaming Nemesis
+3 Torch the Tower
+2 Urabrask's Forge

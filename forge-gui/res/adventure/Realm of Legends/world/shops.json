@@ -558,7 +558,9 @@
     { "type": "item","count":1, "itemName": "Tome of Dispelling"  },
     { "type": "item","count":1, "itemName": "Mask of Hypochondria"  },
     { "type": "item","count":1, "itemName": "Ring of Thune"  },
-    { "type": "item","count":1, "itemName": "Outpost Outfit"  },
+    { "type": "item","count":1, "itemName": "Skyclave Maul"  },
+    { "type": "item","count":1, "itemName": "Meadow Outfit"  },
+    { "type": "item","count":1, "itemName": "Token of Shielding"  },
 	{ "type": "item","count":1, "itemName": "Token of Bounty"  }
     
     ]
@@ -570,8 +572,6 @@
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"ItemShop",   
   "rewards": [ 
-    { "type": "item","count":1, "itemName": "White rune"  },
-	{ "type": "life","count":1    },
 	{ "type": "item","count":1, "itemName": "Peddler's Shoes"  },
 	{ "type": "item","count":1, "itemName": "Sunbeam Gauntlet"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Mirth"  },
@@ -593,7 +593,9 @@
     { "type": "item","count":1, "itemName": "Tome of Fire"  },
     { "type": "item","count":1, "itemName": "Mask of Pyromania"  },
     { "type": "item","count":1, "itemName": "Ring of Valkas"  },
-    { "type": "item","count":1, "itemName": "Highland Cloak"  },
+    { "type": "item","count":1, "itemName": "Dire Flail"  },
+    { "type": "item","count":1, "itemName": "Smoldering Cloak"  },
+    { "type": "item","count":1, "itemName": "Token of Blades"  },
 	{ "type": "item","count":1, "itemName": "Token of Violence"  }
     
     ]
@@ -605,12 +607,10 @@
 "spriteAtlas":"maps/tileset/buildings.atlas",    
 "sprite":"ItemShop",   
   "rewards": [ 
-    { "type": "item","count":1, "itemName": "Red rune"  },
-	{ "type": "life","count":1    },
     { "type": "item","count":1, "itemName": "Firefrightener Shoes"  },
 	{ "type": "item","count":1, "itemName": "Pyrite Gauntlet"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Fury"  },
-	{ "type": "item","count":1, "itemName": "Darksteel Axe"  },
+	{ "type": "item","count":1, "itemName": "Chitinous Club"  },
 	{ "type": "item","count":1, "itemName": "Flaming Armor"  },
 	{ "type": "item","count":1, "itemName": "Blazing Armor"  }
     ]
@@ -626,7 +626,9 @@
     { "type": "item","count":1, "itemName": "Tome of Removal"  },
     { "type": "item","count":1, "itemName": "Mask of Compulsion"  },
     { "type": "item","count":1, "itemName": "Ring of Evos Isle"  },
-    { "type": "item","count":1, "itemName": "Seafloor Shirt"  },
+    { "type": "item","count":1, "itemName": "Giant's Bracer"  },
+    { "type": "item","count":1, "itemName": "Isle Shirt"  },
+    { "type": "item","count":1, "itemName": "Token of Insight"  },
 	{ "type": "item","count":1, "itemName": "Token of Investigation"  }
     
     ]
@@ -638,8 +640,6 @@
 "spriteAtlas":"maps/tileset/buildings.atlas",    
 "sprite":"ItemShop",   
   "rewards": [ 
-    { "type": "item","count":1, "itemName": "Blue rune"  },
-	{ "type": "life","count":1    },
     { "type": "item","count":1, "itemName": "Trickster's Shoes"  },
 	{ "type": "item","count":1, "itemName": "Aether Gauntlet"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Mischief"  },
@@ -659,7 +659,9 @@
     { "type": "item","count":1, "itemName": "Tome of the Executioner"  },
     { "type": "item","count":1, "itemName": "Mask of Mortiphobia"  },
     { "type": "item","count":1, "itemName": "Ring of Xathrid"  },
-    { "type": "item","count":1, "itemName": "Bog Dweller Leather"  },
+    { "type": "item","count":1, "itemName": "Poet's Quill"  },
+    { "type": "item","count":1, "itemName": "Mire Leather"  },
+    { "type": "item","count":1, "itemName": "Token of Decay"  },
 	{ "type": "item","count":1, "itemName": "Token of Blood"  }
     
     ]
@@ -671,8 +673,6 @@
 "spriteAtlas":"maps/tileset/buildings.atlas",    
 "sprite":"ItemShop",   
   "rewards": [ 
-    { "type": "item","count":1, "itemName": "Black rune"  },
-	{ "type": "life","count":1    },
     { "type": "item","count":1, "itemName": "Witch's Shoes"  },
 	{ "type": "item","count":1, "itemName": "Necrogen Gauntlet"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Scorn"  },
@@ -692,7 +692,9 @@
     { "type": "item","count":1, "itemName": "Tome of Might"  },
     { "type": "item","count":1, "itemName": "Mask of Narcissism"  },
     { "type": "item","count":1, "itemName": "Ring of Kalonia"  },
-    { "type": "item","count":1, "itemName": "Timberland Shawl"  },
+    { "type": "item","count":1, "itemName": "Spiked Ripsaw"  },
+    { "type": "item","count":1, "itemName": "Karst Shawl"  },
+    { "type": "item","count":1, "itemName": "Token of Landing"  },
 	{ "type": "item","count":1, "itemName": "Token of Exploration"  }
     
     ]
@@ -704,8 +706,6 @@
 "spriteAtlas":"maps/tileset/buildings.atlas",    
 "sprite":"ItemShop",   
   "rewards": [ 
-    { "type": "item","count":1, "itemName": "Green rune"  },
-    { "type": "life","count":1   },
     { "type": "item","count":1, "itemName": "Greenseeker's Shoes"  },
 	{ "type": "item","count":1, "itemName": "Lifespark Gauntlet"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Favor"  },
@@ -741,6 +741,8 @@
 	"sprite":"ItemShop",   
 	  "rewards": [ 
 		{ "type": "item","count":1, "itemName": "Ghost rune"  },
+        { "type": "item","count":1, "itemName": "Token of Spirit"  },
+        { "type": "item","count":1, "itemName": "Token of Soaring Spirit"  },
 		{ "type": "item","count":1, "itemName": "Captive Soul of a Priest"  },
 		{ "type": "item","count":1, "itemName": "Captive Soul of a Saint"  },
 		{ "type": "item","count":1, "itemName": "Captive Soul of a Knight"  },

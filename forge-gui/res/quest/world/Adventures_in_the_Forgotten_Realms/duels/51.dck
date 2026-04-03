@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Lupin the Third
+Title=Lupin the Third
+Icon=Lupin the Third.jpg
+Difficulty=Hard
+Description=./Modern/Adventures_in_the_Forgotten_Realms/Kaneko_Seiya_-_WR_Aggro_(Modern,_#1215735).dck
+Deck Type=constructed
+
+[Main]
+1 Reidane, God of the Worthy
+2 Mirran Crusader
+2 Ethersworn Canonist
+2 Magus of the Moon
+3 Skyclave Apparition
+3 Thalia, Guardian of Thraben
+4 Esper Sentinel
+4 Stoneforge Mystic
+1 Sword of Fire and Ice
+1 Sword of Feast and Famine
+1 Sword of Hearth and Home
+1 Maul of the Skyclaves
+1 Batterskull
+1 Kaldra Compleat
+1 Shadowspear
+2 Portable Hole
+3 Lightning Bolt
+4 Path to Exile
+1 Fighter Class
+2 Field of Ruin
+2 Snow-Covered Mountain
+3 Windswept Heath
+4 Sacred Foundry
+4 Arid Mesa
+7 Snow-Covered Plains
+[Sideboard]
+1 Grafdigger's Cage
+1 Sword of Light and Shadow
+1 Gideon of the Trials
+2 Disenchant
+2 Containment Priest
+2 Rest in Peace
+3 Oblivion Ring
+3 Leyline of Sanctity

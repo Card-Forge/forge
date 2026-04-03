@@ -12,6 +12,7 @@ import forge.game.card.CounterEnumType;
 import forge.game.event.*;
 import forge.game.event.GameEventCardDamaged.DamageType;
 import forge.game.player.PlayerView;
+import forge.game.zone.ZoneType;
 import forge.util.*;
 
 public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
@@ -35,8 +36,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventScry ev) {
-        String scryOutcome = "";
-
+        String scryOutcome;
         if (ev.toTop() > 0 && ev.toBottom() > 0) {
             scryOutcome = localizer.getMessage("lblLogScryTopBottomLibrary").replace("%s", ev.player().toString()).replace("%top", String.valueOf(ev.toTop())).replace("%bottom", String.valueOf(ev.toBottom()));
         } else if (ev.toBottom() == 0) {
@@ -50,14 +50,13 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventSurveil ev) {
-        String surveilOutcome = "";
-
+        String surveilOutcome;
         if (ev.toLibrary() > 0 && ev.toGraveyard() > 0) {
-            surveilOutcome = localizer.getMessage("lblLogSurveiledToLibraryGraveyard", ev.player().toString(), String.valueOf(ev.toLibrary()), String.valueOf(ev.toGraveyard()));
+            surveilOutcome = localizer.getMessage("lblLogSurveiledToLibraryGraveyard", ev.player(), ev.toLibrary(), ev.toGraveyard());
         } else if (ev.toGraveyard() == 0) {
-            surveilOutcome = localizer.getMessage("lblLogSurveiledToLibrary", ev.player().toString(), String.valueOf(ev.toLibrary()));
+            surveilOutcome = localizer.getMessage("lblLogSurveiledToLibrary", ev.player(), ev.toLibrary());
         } else {
-            surveilOutcome = localizer.getMessage("lblLogSurveiledToGraveyard", ev.player().toString(), String.valueOf(ev.toGraveyard()));
+            surveilOutcome = localizer.getMessage("lblLogSurveiledToGraveyard", ev.player(), ev.toGraveyard());
         }
 
         return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, surveilOutcome);
@@ -66,7 +65,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
     @Override
     public GameLogEntry visit(GameEventSpellResolved ev) {
         String messageForLog = ev.hasFizzled() ? localizer.getMessage("lblLogCardAbilityFizzles", ev.spell().getHostCard().getName()) : ev.stackDescription();
-        return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, messageForLog);
+        return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, messageForLog, ev.spell().getHostCard());
     }
 
     @Override
@@ -88,7 +87,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
             messageForLog = localizer.getMessage("lblLogPlayerActionObject", player, action, object);
         }
 
-        return new GameLogEntry(GameLogEntryType.STACK_ADD, messageForLog);
+        return new GameLogEntry(GameLogEntryType.STACK_ADD, messageForLog, event.sa().getHostCard());
     }
 
     @Override
@@ -147,10 +146,10 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
             additionalLog = localizer.getMessage("lblAsM1M1Counters");
         }
         if (event.type() == DamageType.LoyaltyLoss) {
-            additionalLog = localizer.getMessage("lblRemovingNLoyaltyCounter", String.valueOf(event.amount()));
+            additionalLog = localizer.getMessage("lblRemovingNLoyaltyCounter", event.amount());
         }
-        String message = localizer.getMessage("lblSourceDealsNDamageToDest", event.source().toString(), String.valueOf(event.amount()), additionalLog.isEmpty() ? "" : " (" + additionalLog + ")", event.card().toString());
-        return new GameLogEntry(GameLogEntryType.DAMAGE, message);
+        String message = localizer.getMessage("lblSourceDealsNDamageToDest", event.source(), event.amount(), additionalLog.isEmpty() ? "" : " (" + additionalLog + ")", event.card().toString());
+        return new GameLogEntry(GameLogEntryType.DAMAGE, message, event.source());
     }
 
     /* (non-Javadoc)
@@ -158,13 +157,13 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
      */
     @Override
     public GameLogEntry visit(GameEventLandPlayed ev) {
-        String message = localizer.getMessage("lblLogPlayerPlayedLand", ev.player().toString(), ev.land().toString());
-        return new GameLogEntry(GameLogEntryType.LAND, message);
+        String message = localizer.getMessage("lblLogPlayerPlayedLand", ev.player(), ev.land());
+        return new GameLogEntry(GameLogEntryType.LAND, message, ev.land());
     }
 
     @Override
     public GameLogEntry visit(GameEventTurnBegan event) {
-        String message = localizer.getMessage("lblLogTurnNOwnerByPlayer", String.valueOf(event.turnNumber()), event.turnOwner().toString());
+        String message = localizer.getMessage("lblLogTurnNOwnerByPlayer", event.turnNumber(), event.turnOwner());
         return new GameLogEntry(GameLogEntryType.TURN, message);
     }
 
@@ -172,15 +171,21 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
     public GameLogEntry visit(GameEventPlayerDamaged ev) {
         String extra = ev.infect() ? localizer.getMessage("lblLogAsPoisonCounters") : "";
         String damageType = ev.combat() ? localizer.getMessage("lblCombat") : localizer.getMessage("lblNonCombat");
-        String message = localizer.getMessage("lblLogSourceDealsNDamageOfTypeToDest", ev.source().toString(),
-                            String.valueOf(ev.amount()), damageType, ev.target().toString(), extra);
-        return new GameLogEntry(GameLogEntryType.DAMAGE, message);
+        String message = localizer.getMessage("lblLogSourceDealsNDamageOfTypeToDest", ev.source(),
+                            ev.amount(), damageType, ev.target(), extra);
+        return new GameLogEntry(GameLogEntryType.DAMAGE, message, ev.source());
+    }
+
+    @Override
+    public GameLogEntry visit(GameEventPlayerLivesChanged ev) {
+        String message = localizer.getMessage("lblLogPlayerLifeChange", ev.player(), ev.oldLives(), ev.newLives());
+        return new GameLogEntry(GameLogEntryType.LIFE, message);
     }
 
     @Override
     public GameLogEntry visit(GameEventPlayerPoisoned ev) {
         String message = localizer.getMessage("lblLogPlayerReceivesNPosionCounterFrom",
-                            ev.receiver().toString(), String.valueOf(ev.amount()), ev.source().toString());
+                            ev.receiver(), ev.amount(), ev.source());
         return new GameLogEntry(GameLogEntryType.DAMAGE, message);
     }
 
@@ -261,7 +266,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventMulligan ev) {
-        String message = localizer.getMessage("lblPlayerHasMulliganedDownToNCards").replace("%d", String.valueOf(ev.player().getHandSize())).replace("%s", ev.player().toString());
+        String message = localizer.getMessage("lblPlayerHasMulliganedDownToNCards").replace("%d", String.valueOf(ev.player().getZoneSize(ZoneType.Hand))).replace("%s", ev.player().toString());
         return new GameLogEntry(GameLogEntryType.MULLIGAN, message);
     }
 
@@ -272,7 +277,7 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
 
     @Override
     public GameLogEntry visit(GameEventCardPlotted ev) {
-        return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, ev.toString());
+        return new GameLogEntry(GameLogEntryType.STACK_RESOLVE, ev.toString(), ev.card());
     }
 
     @Override
@@ -281,8 +286,31 @@ public class GameLogFormatter extends IGameEventVisitor.Base<GameLogEntry> {
     }
 
     @Override
+    public GameLogEntry visit(GameEventCardChangeZone ev) {
+        if (ev.from() == null || ev.to() == null) {
+            return null;
+        }
+        final ZoneType from = ev.from().zoneType();
+        final ZoneType to = ev.to().zoneType();
+        // Log mid-game ante additions (e.g. Contract from Below, Demonic Attorney)
+        if (to == ZoneType.Ante && from != ZoneType.Ante) {
+            final CardView c = ev.card();
+            return new GameLogEntry(GameLogEntryType.ANTE,
+                    (c != null ? c.getOwner() + " anted " + c : "a card was anted"));
+        }
+        // Only log Battlefield -> Graveyard/Exile to avoid duplicating entries
+        // already covered by other events (land played, spell cast, discard, etc.)
+        if (from != ZoneType.Battlefield || (to != ZoneType.Graveyard && to != ZoneType.Exile)) {
+            return null;
+        }
+        final String cardName = ev.card() != null ? ev.card().toString() : "a card";
+        final String message = localizer.getMessage("lblLogZoneChange", cardName, to, from);
+        return new GameLogEntry(GameLogEntryType.ZONE_CHANGE, message, ev.card());
+    }
+
+    @Override
     public GameLogEntry visit(GameEventAddLog ev) {
-        return new GameLogEntry(ev.type(), ev.message());
+        return new GameLogEntry(ev.type(), ev.message(), ev.sourceCard());
     }
 
     @Subscribe

@@ -55,7 +55,7 @@ With that, she finally collapses, dead.&quot;,
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Tariel, Reckoner of Souls|CMD&quot;, &quot;Nomad Outpost|TDM&quot;, &quot;Lightning Greaves|C19&quot;, &quot;Scroll of griselbrand|AVR&quot;, &quot;Scroll of avacyn|AVR&quot;, &quot;Vial of Dragonfire|DTK&quot; ] }"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Tariel, Reckoner of Souls|CMD&quot;, &quot;Nomad Outpost|TDM&quot;, &quot;Swiftfoot Boots&quot;, &quot;Scroll of griselbrand|AVR&quot;, &quot;Scroll of avacyn|AVR&quot;, &quot;Vial of Dragonfire|DTK&quot; ] }"/>
     <property name="enemy" value="Kaalia"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
@@ -64,10 +64,9 @@ With that, she finally collapses, dead.&quot;,
    <properties>
     <property name="reward">{
 &quot;type&quot;: &quot;card&quot;,
-&quot;probability&quot;: 1,
 &quot;count&quot;: 3,
-&quot;subTypes&quot;: &quot;dragon&quot;,
-&quot;rarity&quot;: &quot;mythic rare&quot;
+&quot;subTypes&quot;: &quot;Dragon&quot;,
+&quot;rarity&quot;: [&quot;mythic rare&quot;]
 }</property>
    </properties>
   </object>
@@ -115,10 +114,9 @@ With that, she finally collapses, dead.&quot;,
    <properties>
     <property name="reward">{
 &quot;type&quot;: &quot;card&quot;,
-&quot;probability&quot;: 1,
 &quot;count&quot;: 3,
-&quot;subTypes&quot;: &quot;angel&quot;,
-&quot;rarity&quot;: &quot;mythic rare&quot;
+&quot;subTypes&quot;: &quot;Angel&quot;,
+&quot;rarity&quot;: [&quot;mythic rare&quot;]
 }</property>
    </properties>
   </object>
@@ -126,10 +124,9 @@ With that, she finally collapses, dead.&quot;,
    <properties>
     <property name="reward">{
 &quot;type&quot;: &quot;card&quot;,
-&quot;probability&quot;: 1,
 &quot;count&quot;: 3,
-&quot;subTypes&quot;: &quot;demon&quot;,
-&quot;rarity&quot;: &quot;mythic rare&quot;
+&quot;subTypes&quot;: &quot;Demon&quot;,
+&quot;rarity&quot;: [&quot;mythic rare&quot;]
 }</property>
    </properties>
   </object>

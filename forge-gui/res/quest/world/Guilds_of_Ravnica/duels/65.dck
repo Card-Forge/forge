@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Hans
+Title=Hans
+Icon=Hans.jpg
+Difficulty=Very Hard
+Description=./Modern/Guilds_of_Ravnica/Andrew_Sajgo_-_Bant_Company_(Modern,_#766615).dck
+Deck Type=constructed
+
+[Main]
+3 Birds of Paradise
+2 Courser of Kruphix
+2 Geist of Saint Traft
+2 Knight of Autumn
+4 Knight of the Reliquary
+4 Noble Hierarch
+2 Reflector Mage
+1 Renegade Rallier
+4 Spell Queller
+2 Tireless Tracker
+4 Voice of Resurgence
+4 Collected Company
+1 Dromoka's Command
+3 Path to Exile
+1 Breeding Pool
+2 Flooded Strand
+2 Forest
+1 Gavony Township
+3 Ghost Quarter
+1 Hallowed Fountain
+2 Horizon Canopy
+1 Island
+2 Misty Rainforest
+1 Plains
+2 Temple Garden
+4 Windswept Heath
+[Sideboard]
+1 Dromoka's Command
+2 Knight of Autumn
+2 Meddling Mage
+3 Negate
+2 Settle the Wreckage
+2 Stony Silence
+3 Wheel of Sun and Moon

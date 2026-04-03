@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Selesnya-precon
+Title=Selesnya-precon
+Icon=Selesnya-precon.jpg
+Difficulty=Hard
+Description=./Modern/Innistrad_Crimson_Vow/Alexandre_Paskov_-_Ub_Affinity_(Modern,_#1306897)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Gingerbrute
+2 Myr Enforcer
+4 Thought Monitor
+4 Sojourner's Companion
+4 Ornithopter
+4 Memnite
+4 Frogmite
+1 Welding Jar
+1 Aether Spellbomb
+1 Shadowspear
+4 Springleaf Drum
+4 Cranial Plating
+4 Blood Fountain
+3 Thoughtcast
+4 Urza's Saga
+1 Watery Grave
+1 Sanctum of Ugin
+1 Glimmervoid
+2 Spire of Industry
+3 Mistvault Bridge
+3 Treasure Vault
+4 Darksteel Citadel
+[Sideboard]
+1 Thieving Skydiver
+1 Echoing Truth
+1 Grafdigger's Cage
+1 Pithing Needle
+1 Relic of Progenitus
+1 Tezzeret, Agent of Bolas
+2 Etched Champion
+2 Dispatch
+2 Damping Sphere
+3 Stubborn Denial

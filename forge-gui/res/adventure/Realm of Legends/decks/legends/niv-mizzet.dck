@@ -1,82 +1,82 @@
 [metadata]
 Name=Niv-Mizzet
 [Commander]
-1 Niv-Mizzet, Visionary|fdn
+1 Niv-Mizzet, Visionary|FDN
 [Main]
-1 Aetherize|fdn
-1 Arcane Denial|dsc
-1 Arcane Epiphany|fdn
-1 Arcane Signet|dsc
-1 Basilisk Collar|fdn
-1 Brainstorm|dsc
-1 Command Tower|fdc
-1 Commander's Sphere|dsc
-1 Compulsive Research|rvr
-1 cyclonic rift|rtr
-1 gelectrode|gpt
-1 vandalblast|rtr
-1 electrostatic field|grn
-1 electrodominance|rna
-1 boltwave|fdn
-1 lava spike|chk
-1 mizzium mortars|rtr
-1 finale of promise|war
-1 electrolyze|gpt
-1 risk factor|grn
-1 Counterspell|dsc
-1 Curiosity|wot
-1 invoke the firemind|gpt
-1 Deep Analysis|j25
-1 Expansion|rvr
-1 Expressive Iteration|stx
-1 Faerie Mastermind|mom
-1 Fiery Emancipation|m21
-1 Fire Diamond|mir
-1 Firemind's Research|grn
-1 Frantic Search|woc
-1 Glasspool Mimic|znr
-1 Gratuitous Violence|blc
-1 Guttersnipe|rtr
-1 Hedron Archive|blc
-1 Hypersonic Dragon|clu
-1 Inspiration|rtr
-1 Invert Polarity|mh3
-11 Island|gk1|[48]
-1 Izzet Guildgate|fdn
-1 talisman of creativity|tdc
-1 Keranos, God of Storms|jou
-1 Laboratory Maniac|inr
-1 Lightning Bolt|clu
-1 char|rav
-1 Mercurial Chemister|rtr
-1 Mirrormade|dsc
-13 Mountain|gk1|[49]
-1 Negate|mom
-1 Niv-Mizzet, Dracogenius|rtr
-1 Niv-Mizzet, Parun|rvr
-1 Niv-Mizzet, the Firemind|gpt
-1 Nivix, Aerie of the Firemind|gpt
-1 Ojer Pakpatiq, Deepest Epoch|lci
-1 Opt|j25
-1 Propaganda|c13
-1 Quench|rvr
-1 Refute|fdn
-1 Reliquary Tower|dsc
-1 Rush of Inspiration|mh3
-1 Sky Diamond|mir
-1 Sol Ring|fdc
-1 Song-Mad Treachery|znr
-1 Spell Pierce|dft
-1 Steam Vents|rvr
-1 Swiftwater Cliffs|fdn
-1 Talrand, Sky Summoner|otc
-1 Temple of Epiphany|blc
-1 Think Twice|fdn
-1 Thought Collapse|rna
-1 Thousand-Year Storm|fdn
-1 Thriving Bluff|j25
-1 Thriving Isle|j25
-1 Thundering Falls|mkm
-1 izzet boilerworks|gpt
-1 Ugin's Binding|mh3
-1 Unauthorized Exit|mkm
+1 Aetherize|FDN
+1 Arcane Denial|DSC
+1 Arcane Epiphany|FDN
+1 Arcane Signet|DSC
+1 Basilisk Collar|FDN
+1 Brainstorm|DSC
+1 Command Tower|FDC
+1 Commander's Sphere|DSC
+1 Compulsive Research|RVR
+1 Cyclonic Rift|RTR
+1 Gelectrode|GPT
+1 Vandalblast|RTR
+1 Electrostatic Field|GRN
+1 Electrodominance|RNA
+1 Boltwave|FDN
+1 Lava Spike|CHK
+1 Mizzium Mortars|RTR
+1 Finale of Promise|WAR
+1 Electrolyze|GPT
+1 Risk Factor|GRN
+1 Counterspell|DSC
+1 Curiosity|WOT
+1 Invoke the Firemind|GPT
+1 Deep Analysis|J25
+1 Expansion|RVR
+1 Expressive Iteration|STX
+1 Faerie Mastermind|MOM
+1 Fiery Emancipation|M21
+1 Fire Diamond|MIR
+1 Firemind's Research|GRN
+1 Frantic Search|WOC
+1 Glasspool Mimic|ZNR
+1 Gratuitous Violence|BLC
+1 Guttersnipe|RTR
+1 Hedron Archive|BLC
+1 Hypersonic Dragon|CLU
+1 Inspiration|RTR
+1 Invert Polarity|MH3
+11 Island|GK1|[48]
+1 Izzet Guildgate|FDN
+1 Talisman of Creativity|TDC
+1 Keranos, God of Storms|JOU
+1 Laboratory Maniac|INR
+1 Lightning Bolt|CLU
+1 Char|RAV
+1 Mercurial Chemister|RTR
+1 Mirrormade|DSC
+13 Mountain|GK1|[49]
+1 Negate|MOM
+1 Niv-Mizzet, Dracogenius|RTR
+1 Niv-Mizzet, Parun|RVR
+1 Niv-Mizzet, the Firemind|GPT
+1 Nivix, Aerie of the Firemind|GPT
+1 Ojer Pakpatiq, Deepest Epoch|LCI
+1 Opt|J25
+1 Propaganda|C13
+1 Quench|RVR
+1 Refute|FDN
+1 Reliquary Tower|DSC
+1 Rush of Inspiration|MH3
+1 Sky Diamond|MIR
+1 Sol Ring|FDC
+1 Song-Mad Treachery|ZNR
+1 Spell Pierce|DFT
+1 Steam Vents|RVR
+1 Swiftwater Cliffs|FDN
+1 Talrand, Sky Summoner|OTC
+1 Temple of Epiphany|BLC
+1 Think Twice|FDN
+1 Thought Collapse|RNA
+1 Thousand-Year Storm|FDN
+1 Thriving Bluff|J25
+1 Thriving Isle|J25
+1 Thundering Falls|MKM
+1 Izzet Boilerworks|GPT
+1 Ugin's Binding|MH3
+1 Unauthorized Exit|MKM

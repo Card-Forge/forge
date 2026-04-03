@@ -60,6 +60,7 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.menus.ForgeMenu;
 import forge.model.FModel;
+import forge.sound.SoundSystem;
 import forge.player.GamePlayerUtil;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.toolbox.FOptionPane;
@@ -68,7 +69,6 @@ import forge.util.BuildInfo;
 import forge.util.FileUtil;
 import forge.util.Localizer;
 import forge.util.RestartUtil;
-import forge.util.TextUtil;
 import forge.view.FFrame;
 import forge.view.FView;
 
@@ -231,6 +231,7 @@ public enum FControl implements KeyEventDispatcher {
         if (!canExitForge(false)) {
             return false;
         }
+        SoundSystem.instance.dispose();
         Singletons.getView().getFrame().setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         System.exit(0);
         return true;
@@ -281,11 +282,7 @@ public enum FControl implements KeyEventDispatcher {
                 System.err.printf("Error loading quest data (%s).. skipping for now..%n", questname);
             }
         }
-        // format release notes upon loading
-        try {
-            TextUtil.getFormattedChangelog(new File(FileUtil.pathCombine(System.getProperty("user.dir"), ForgeConstants.CHANGES_FILE_NO_RELEASE)), "");
-        } catch (Exception e) {
-        }
+
         // Handles resizing in null layouts of layers in JLayeredPane as well as saving window layout
         final FFrame window = Singletons.getView().getFrame();
         window.addComponentListener(new ComponentAdapter() {

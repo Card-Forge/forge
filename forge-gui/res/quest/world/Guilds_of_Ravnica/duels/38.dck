@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Kraj
+Title=Kraj
+Icon=Kraj.jpg
+Difficulty=Medium
+Description=./Standard/Guilds_of_Ravnica/Adachi_Yoshikazu_-_BG_Aggro_(Standard,_#776541).dck
+Deck Type=constructed
+
+[Main]
+2 Carnage Tyrant
+3 Doom Whisperer
+4 Druid of the Cowl
+3 Ixalli's Diviner
+4 Jadelight Ranger
+4 Llanowar Elves
+4 Merfolk Branchwalker
+2 Ravenous Chupacabra
+2 Vraska's Contempt
+2 Find // Finality
+3 Vivien Reid
+2 Vraska, Golgari Queen
+2 Vraska, Relic Seeker
+8 Forest
+4 Overgrown Tomb
+7 Swamp
+4 Woodland Cemetery
+[Sideboard]
+4 Cast Down
+4 Duress
+2 Karn, Scion of Urza
+3 Moment of Craving
+2 Vraska's Contempt

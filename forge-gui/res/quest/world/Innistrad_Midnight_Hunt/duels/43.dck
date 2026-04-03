@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Wally
+Title=Wally
+Icon=Wally.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Midnight_Hunt/Airball_-_9-27_Gruul_Werewolves_(Standard,_#1210321).dck
+Deck Type=constructed
+
+[Main]
+3 Tovolar, Dire Overlord
+3 Outland Liberator
+4 Werewolf Pack Leader
+4 Kessig Naturalist
+4 Reckless Stormseeker
+4 Esika's Chariot
+4 Moonrager's Slash
+2 Unnatural Moonrise
+4 Shatterskull Smashing
+3 Ranger Class
+4 Arlinn, the Pack's Hope
+2 Highland Forest
+2 Mountain
+2 Lair of the Hydra
+4 Cragcrown Pathway
+4 Rockfall Vale
+7 Forest
+[Sideboard]
+1 Wrenn and Seven
+1 Burn Down the House
+1 Ranger Class
+2 Tovolar's Huntmaster
+2 Tangletrap
+2 Snakeskin Veil
+3 Cathartic Pyre
+3 Burning Hands

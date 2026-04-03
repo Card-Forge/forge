@@ -3,7 +3,7 @@ Name:Possibility Storm - Hour of Devastation #07
 URL:http://www.possibilitystorm.com/wp-content/uploads/2017/08/HOU7-v2.jpg
 Goal:Win
 Turns:1
-Difficulty:Very Hard
+Difficulty:Mythic
 Description:Win this turn.
 [state]
 humanlife=20

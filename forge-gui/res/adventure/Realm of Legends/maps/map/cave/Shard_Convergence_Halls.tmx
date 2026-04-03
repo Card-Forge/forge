@@ -4,7 +4,7 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Obelisk of Alara&quot;, &quot;Terramorphic expanse&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Obelisk of Alara&quot;, &quot;Armillary Sphere&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -126,7 +126,7 @@
   <object id="65" template="../../../../common/maps/obj/gold.tx" x="319.75" y="182"/>
   <object id="72" template="../../../../common/maps/obj/enemy.tx" x="208.203" y="125.343">
    <properties>
-    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Kaleidostone|CON&quot;, &quot;Armillary Sphere|CON&quot;, &quot;Manaforce Mace|CON&quot;, &quot;Maelstrom Nexus|ARB&quot;, &quot;Exotic Orchard|CON&quot; 
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Kaleidostone|CON&quot;, &quot;Manaforce Mace|CON&quot;, &quot;Maelstrom Nexus|ARB&quot;, &quot;Exotic Orchard|CON&quot; 
 ]}</property>
     <property name="enemy" value="Child of Alara"/>
     <property name="speedModifier" type="float" value="30"/>
@@ -215,7 +215,7 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Jungle Shrine|ALA&quot;, &quot;Behemoth's Herald|ALA&quot;, &quot;Mayael's Aria|ARB&quot;, &quot;Armillary Sphere|CON&quot;, &quot;Naya Hushblade|ARB&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Jungle Shrine|ALA&quot;, &quot;Behemoth's Herald|ALA&quot;, &quot;Mayael's Aria|ARB&quot;, &quot;Behemoth Sledge&quot;, &quot;Naya Hushblade|ARB&quot;]}"/>
     <property name="enemy" value="Uril"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>

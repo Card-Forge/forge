@@ -55,7 +55,7 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Plains|PGRU&quot;, &quot;Island|PGRU&quot;, &quot;Swamp|PGRU&quot;, &quot;Mountain|PGRU&quot;, &quot;Forest|PGRU&quot;, &quot;Urza's Filter|INV&quot;, &quot;Howling Mine|7ED&quot;, &quot;Diamond Kaleidoscope|VIS&quot;, &quot;Rewards of Diversity|INV&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Crystal Quarry|ODY&quot;, &quot;City of Brass|ARN&quot;, &quot;Reflecting Pool|TMP&quot;, &quot;Urza's Filter|INV&quot;, &quot;Howling Mine|7ED&quot;, &quot;Diamond Kaleidoscope|VIS&quot;, &quot;Rewards of Diversity|INV&quot;]}"/>
     <property name="enemy" value="Cromat"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="50"/>
@@ -63,7 +63,7 @@
   </object>
   <object id="96" template="../../../../common/maps/obj/enemy.tx" x="388" y="128.667">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Tolaria|LEG&quot;, &quot;Plains|LEA&quot;, &quot;Urborg|LEG&quot;, &quot;Tawnos's Wand|ATQ&quot;, &quot;Wall of Vapor|LEG&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Tolaria|LEG&quot;, &quot;Plains|LEA&quot;, &quot;Urborg|LEG&quot;, &quot;Wall of Vapor|LEG&quot;]}"/>
     <property name="enemy" value="Chromium"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="50"/>
@@ -71,7 +71,7 @@
   </object>
   <object id="97" template="../../../../common/maps/obj/enemy.tx" x="338.333" y="318.333">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Hammerheim|LEG&quot;, &quot;Urborg|LEG&quot;, &quot;Pendelhaven|LEG&quot;, &quot;Celestial Sword|ICE&quot;, &quot;Wall of Dust|LEG&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Hammerheim|LEG&quot;, &quot;Urborg|LEG&quot;, &quot;Pendelhaven|LEG&quot;, &quot;Wall of Dust|LEG&quot;]}"/>
     <property name="enemy" value="Vaevictis"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="50"/>
@@ -79,7 +79,7 @@
   </object>
   <object id="98" template="../../../../common/maps/obj/enemy.tx" x="287" y="366.333">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Hammerheim|LEG&quot;, &quot;Plains|LEA&quot;, &quot;Pendelhaven|LEG&quot;, &quot;Dragon Blood|USG&quot;, &quot;Wall of Earth|LEG&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Hammerheim|LEG&quot;, &quot;Plains|LEA&quot;, &quot;Pendelhaven|LEG&quot;, &quot;Wall of Earth|LEG&quot;]}"/>
     <property name="enemy" value="Palladia-Mors"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="50"/>
@@ -87,7 +87,7 @@
   </object>
   <object id="99" template="../../../../common/maps/obj/enemy.tx" x="327.334" y="246">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Tolaria|LEG&quot;, &quot;Plains|LEA&quot;, &quot;Pendelhaven|LEG&quot;, &quot;Aegis of the Meek|ICE&quot;, &quot;Wall of Light|LEG&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Tolaria|LEG&quot;, &quot;Plains|LEA&quot;, &quot;Pendelhaven|LEG&quot;, &quot;Wall of Light|LEG&quot;]}"/>
     <property name="enemy" value="Arcades"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="50"/>
@@ -154,7 +154,7 @@
   </object>
   <object id="108" template="../../../../common/maps/obj/enemy.tx" x="243" y="210">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Tolaria|LEG&quot;, &quot;Hammerheim|LEG&quot;, &quot;Urborg|LEG&quot;, &quot;Draconian Cylix|FEM&quot;, &quot;Wall of Putrid Flesh|LEG&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Tolaria|LEG&quot;, &quot;Hammerheim|LEG&quot;, &quot;Urborg|LEG&quot;, &quot;Wall of Putrid Flesh|LEG&quot;]}"/>
     <property name="enemy" value="Nicol Bolas"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="50"/>

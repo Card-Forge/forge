@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling Red
+Title=Dungeon Crawling Red
+Icon=Dungeon Crawling Red.jpg
+Difficulty=Medium
+Description=./Standard/Duskmourn_House_of_Horror/Dengekidaikon_-_Naya_Control_(Standard,_#2215714).dck
+Deck Type=constructed
+
+[Main]
+4 Overlord of the Hauntwoods
+4 Overlord of the Mistmoors
+4 Urabrask's Forge
+3 Get Lost
+1 Analyze the Pollen
+2 Herd Migration
+2 Bushwhack
+3 Sunfall
+3 Caretaker's Talent
+3 Temporary Lockdown
+4 Leyline Binding
+4 Up the Beanstalk
+1 Copperline Gorge
+1 Mountain
+2 Karplusan Forest
+2 Fabled Passage
+3 Plains
+3 Forest
+3 Razorverge Thicket
+4 Brushland
+4 Hushwood Verge
+[Sideboard]
+2 Rest in Peace
+4 Aven Interrupter
+4 Calamity's Wake
+4 Exorcise
+1 Temporary Lockdown

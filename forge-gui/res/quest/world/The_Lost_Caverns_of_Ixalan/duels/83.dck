@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Tutankhamon
+Title=Tutankhamon
+Icon=Tutankhamon.jpg
+Difficulty=Very Hard
+Description=./Modern/The_Lost_Caverns_of_Ixalan/ARDITI_1-SHI_-_Dimir_Control_(Modern,_#1981194).dck
+Deck Type=constructed
+
+[Main]
+2 Murktide Regent
+4 Snapcaster Mage
+4 Orcish Bowmasters
+2 Tishana's Tidebinder
+4 Archmage's Charm
+4 Consider
+4 Counterspell
+3 Drown in the Loch
+1 Stern Scolding
+2 Spell Pierce
+2 Sheoldred's Edict
+4 Fatal Push
+4 Preordain
+1 Sunken Hollow
+2 Flooded Strand
+1 Hall of Storm Giants
+1 Otawara, Soaring City
+4 Polluted Delta
+2 Scalding Tarn
+1 Misty Rainforest
+4 Island
+3 Watery Grave
+1 Swamp
+[Sideboard]
+1 Stern Scolding
+1 Cursed Totem
+1 Dress Down
+3 Flusterstorm
+3 Spreading Seas
+2 Engineered Explosives
+2 Annul
+2 Stone of Erech

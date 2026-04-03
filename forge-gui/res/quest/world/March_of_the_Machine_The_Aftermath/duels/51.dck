@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Lilith
+Title=Lilith
+Icon=Lilith.jpg
+Difficulty=Very Hard
+Description=./Modern/March_of_the_Machine_The_Aftermath/AFX_-_4_Color_Omnath_(Modern,_#1669123).dck
+Deck Type=constructed
+
+[Main]
+1 Titania, Protector of Argoth
+4 Omnath, Locus of Creation
+2 Titania, Protector of Argoth
+4 Solitude
+3 Ragavan, Nimble Pilferer
+3 Nissa, Resurgent Animist
+3 Lightning Bolt
+3 Spell Pierce
+4 Prismatic Ending
+3 Expressive Iteration
+4 Leyline Binding
+4 Wrenn and Six
+1 Sacred Foundry
+1 Temple Garden
+1 Stomping Ground
+1 Steam Vents
+1 Breeding Pool
+1 Snow-Covered Forest
+1 Snow-Covered Island
+1 Snow-Covered Plains
+4 Flooded Strand
+4 Windswept Heath
+1 Indatha Triome
+1 Raugrin Triome
+4 Misty Rainforest
+[Sideboard]
+1 Wear // Tear
+2 Hallowed Moonlight
+1 Chalice of the Void
+1 Unmoored Ego
+2 Teferi, Time Raveler
+1 Engineered Explosives
+1 Wear // Tear
+1 Obsidian Charmaw
+2 Endurance
+2 Ephemerate
+1 Boseiju, Who Endures

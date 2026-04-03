@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Szadek
+Title=Szadek
+Icon=Szadek.jpg
+Difficulty=Very Hard
+Description=./Modern/Duskmourn_House_of_Horror/DelayingScheel5_-_Prison_Tron_(Modern,_#2237284).dck
+Deck Type=constructed
+
+[Main]
+1 Ulamog, the Infinite Gyre
+4 Devourer of Destiny
+4 Sowing Mycospawn
+2 Ulamog, the Ceaseless Hunger
+2 World Breaker
+4 The One Ring
+4 Expedition Map
+4 Talisman of Curiosity
+2 Talisman of Resilience
+4 Kozilek's Command
+3 All Is Dust
+4 Karn, the Great Creator
+4 Ugin's Labyrinth
+4 Eldrazi Temple
+4 Urza's Mine
+4 Urza's Power Plant
+4 Urza's Tower
+1 Forest
+1 Boseiju, Who Endures
+[Sideboard]
+3 Haywire Mite
+1 Cityscape Leveler
+1 The Stone Brain
+1 Shadowspear
+3 Ghost Vacuum
+1 Liquimetal Coating
+3 Thought-Knot Seer
+1 Walking Ballista
+1 Tormod's Crypt

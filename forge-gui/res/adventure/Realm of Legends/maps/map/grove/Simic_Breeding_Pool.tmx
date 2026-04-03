@@ -4,7 +4,7 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Combine Guildmage&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Clinging Anemones&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -42,7 +42,7 @@
     <property name="waypoints" value="60,59"/>
    </properties>
   </object>
-  <object id="53" template="../../../../common/maps/obj/enemy.tx" x="133.432" y="75.105">
+  <object id="53" template="../../../../common/maps/obj/enemy.tx" x="135.432" y="83.4686">
    <properties>
     <property name="enemy" value="Vannifar"/>
     <property name="speedModifier" type="float" value="20"/>
@@ -57,13 +57,14 @@
     <property name="waypoints" value="58,57"/>
    </properties>
   </object>
-  <object id="56" template="../../../../common/maps/obj/manashards.tx" x="134.677" y="47.683"/>
+  <object id="56" template="../../../../common/maps/obj/manashards.tx" x="135.404" y="62.9557"/>
   <object id="57" template="../../../../common/maps/obj/waypoint.tx" x="49.1023" y="150.224"/>
   <object id="58" template="../../../../common/maps/obj/waypoint.tx" x="225.688" y="151.218"/>
   <object id="59" template="../../../../common/maps/obj/waypoint.tx" x="370.047" y="144.525"/>
   <object id="60" template="../../../../common/maps/obj/waypoint.tx" x="195.713" y="150.47"/>
   <object id="61" template="../../../../common/maps/obj/enemy.tx" x="247.943" y="65.8219">
    <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Novijen, Heart of Progress&quot;, &quot;Simic Ascendancy&quot;]}"/>
     <property name="enemy" value="Prime Speaker Zegana"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="10"/>

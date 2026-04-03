@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Pointy Haired Boss
+Title=Pointy Haired Boss
+Icon=Pointy Haired Boss.jpg
+Difficulty=Medium
+Description=Eldritch_Moon/Pro_Tour_Eldritch_Moon_2016_-_18-20_Points/ADONNYS_MEDRANO_-_WUG_Aggro_(Standard,_#635161).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Archangel Avacyn
+3 Duskwatch Recruiter
+2 Eldrazi Displacer
+1 Nissa, Vastwood Seer
+4 Reflector Mage
+3 Selfless Spirit
+4 Spell Queller
+4 Sylvan Advocate
+1 Thalia, Heretic Cathar
+3 Tireless Tracker
+4 Collected Company
+4 Dromoka's Command
+3 Canopy Vista
+4 Evolving Wilds
+3 Forest
+1 Island
+2 Lumbering Falls
+4 Plains
+3 Prairie Stream
+1 Wastes
+4 Yavimaya Coast
+[Sideboard]
+1 Decimator of the Provinces
+2 Declaration in Stone
+3 Lambholt Pacifist
+1 Linvala, the Preserver
+2 Negate
+1 Ojutai's Command
+1 Tamiyo, Field Researcher
+2 Tragic Arrogance

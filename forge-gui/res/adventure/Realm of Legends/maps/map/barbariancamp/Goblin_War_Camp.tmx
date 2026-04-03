@@ -4,7 +4,7 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Goblin Warchief&quot;, &quot;Boggart Shenanigans&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Rundvelt Hordemaster&quot;, &quot;Boggart Shenanigans&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -96,14 +96,14 @@
     <property name="reward">[
 	{
 		&quot;type&quot;: &quot;randomCard&quot;,
-		&quot;colors&quot;: [ &quot;Red&quot; ],
+		&quot;colors&quot;: [ &quot;red&quot; ],
 		&quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ],
 		&quot;count&quot;: 1
 	},
 	{
 		&quot;type&quot;: &quot;randomCard&quot;,
-		&quot;colors&quot;: [ &quot;Red&quot; ],
-		&quot;subTypes&quot;: [ &quot;goblin&quot; ],
+		&quot;colors&quot;: [ &quot;red&quot; ],
+		&quot;subTypes&quot;: [ &quot;Goblin&quot; ],
 		&quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ],
 		&quot;count&quot;: 2
 	}
@@ -126,7 +126,7 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Torch Courier|GRN&quot;, &quot;Goblin Burrows|ONS&quot;, &quot;krenko's enforcer|m15&quot;, &quot;Krenko's Buzzcrusher|M15&quot;, &quot;Goblin Influx Array|YDMU&quot;, &quot;Goblin Warrens|FEM&quot; ] }"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Torch Courier|GRN&quot;, &quot;Goblin Burrows|ONS&quot;, &quot;Goblinslide|KTK&quot;, &quot;Goblin Influx Array|YDMU&quot; ] }"/>
     <property name="enemy" value="Krenko"/>
     <property name="threatRange" type="int" value="0"/>
     <property name="waypoints" value=""/>
@@ -191,14 +191,14 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
     <property name="reward">[
 	{
 		&quot;type&quot;: &quot;randomCard&quot;,
-		&quot;colors&quot;: [ &quot;Red&quot; ],
+		&quot;colors&quot;: [ &quot;red&quot; ],
 		&quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ],
 		&quot;count&quot;: 2
 	},
 	{
 		&quot;type&quot;: &quot;randomCard&quot;,
-		&quot;colors&quot;: [ &quot;Red&quot; ],
-		&quot;subTypes&quot;: [ &quot;goblin&quot; ],
+		&quot;colors&quot;: [ &quot;red&quot; ],
+		&quot;subTypes&quot;: [ &quot;Goblin&quot; ],
 		&quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ],
 		&quot;count&quot;: 2
 	}
@@ -210,14 +210,14 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
     <property name="reward">[
 	{
 		&quot;type&quot;: &quot;randomCard&quot;,
-		&quot;colors&quot;: [ &quot;Red&quot; ],
+		&quot;colors&quot;: [ &quot;red&quot; ],
 		&quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ],
 		&quot;count&quot;: 3
 	},
 	{
 		&quot;type&quot;: &quot;randomCard&quot;,
-		&quot;colors&quot;: [ &quot;Red&quot; ],
-		&quot;subTypes&quot;: [ &quot;goblin&quot; ],
+		&quot;colors&quot;: [ &quot;red&quot; ],
+		&quot;subTypes&quot;: [ &quot;Goblin&quot; ],
 		&quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ],
 		&quot;count&quot;: 3
 	}

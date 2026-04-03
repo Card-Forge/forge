@@ -27,6 +27,24 @@ Jade
 BlueDiamond
   xy: 112, 640
   size: 16, 16
+OutlawsHat
+  xy: 32, 320
+  size: 16, 16
+ManaforceMace
+  xy: 304, 416
+  size: 16, 16
+Shadowspear
+  xy: 256, 560
+  size: 16, 16
+HeirloomBlade
+  xy: 192, 656
+  size: 16, 16
+HengestriderBoots
+  xy: 64, 96
+  size: 16, 16
+TomeofBlight
+  xy: 32, 720
+  size: 16, 16
 BowlofAncientBlood
   xy: 256, 960
   size: 16, 16
@@ -46,7 +64,7 @@ WardingStatueArms
   xy: 48, 576
   size: 16, 16
 MaptotheHostages
-  xy: 224, 848
+  xy: 208, 848
   size: 16, 16
 TheLuckiestClover
   xy: 112, 608
@@ -78,6 +96,9 @@ GreenCartouche
 VictoryStandard
   xy: 96, 592
   size: 16, 16
+KillTrophy
+   xy: 112, 816
+   size: 16, 16
 GenerousArmor
   xy: 224, 112
   size: 16, 16
@@ -85,13 +106,34 @@ GenerousPants
   xy: 16, 480
   size: 16, 16
 GenerousNecklace
-  xy: 32, 848
+  xy: 144, 800
   size: 16, 16
 GenerousRing
   xy: 128, 912
   size: 16, 16
 GenerousIngot
-  xy: 224, 944
+  xy: 288, 944
+  size: 16, 16
+SpikedRipsaw
+  xy: 304, 736
+  size: 16, 16
+SkyclaveMaul
+  xy: 224, 432
+  size: 16, 16
+Giant'sBracer
+  xy: 16, 272
+  size: 16, 16
+PoetsQuill
+  xy: 192, 768
+  size: 16, 16
+DireFlail
+  xy: 160, 368
+  size: 16, 16
+ChitinousClub
+  xy: 304, 400
+  size: 16, 16
+WinterBoots
+  xy: 144, 176
   size: 16, 16
 PureSoul
   xy: 176, 800
@@ -107,6 +149,27 @@ NobleSoul
   size: 16, 16
 RoyalSoul
   xy: 256, 864
+  size: 16, 16
+TokenofBlades
+  xy: 224, 736
+  size: 16, 16
+TokenofDecay
+  xy: 224, 944
+  size: 16, 16
+TokenofInsight
+  xy: 16, 608
+  size: 16, 16
+TokenofLanding
+  xy: 16, 592
+  size: 16, 16
+TokenofShielding
+  xy: 192, 128
+  size: 16, 16
+TokenofSpirit
+  xy: 128, 528
+  size: 16, 16
+TokenofSoaringSpirit
+  xy: 144, 512
   size: 16, 16
 MedalOutnumbered
   xy: 32, 608
@@ -174,8 +237,8 @@ ThunderLasso
 FleshwrightChaps
   xy: 128, 432
   size: 16, 16
-GisasFavoriteShovel
-  xy: 112, 720
+ThirstingAxe
+  xy: 192, 240
   size: 16, 16
 UtopiaAnklet
   xy: 0, 960
@@ -210,7 +273,7 @@ BrimstoneBoots
 Peddler'sShoes
   xy: 16, 144
   size: 16, 16
-PocketThopter
+SkySkiffTurnkey
   xy: 160, 816
   size: 16, 16
 BloodfireBoots
@@ -240,8 +303,8 @@ DeathsporeShoes
 ObscuraShoes
   xy: 32, 128
   size: 16, 16
-SegovianSandals
-  xy: 16, 112
+AngelicRing
+  xy: 96, 896
   size: 16, 16
 SteelBoots
   xy: 48, 160
@@ -264,7 +327,7 @@ GixianGraft
 ArtificialSliverband
   xy: 64, 976
   size: 16, 16
-Miser'sShoes
+SinuousShoes
   xy: 64, 112
   size: 16, 16
 Caravaneer'sGreaves
@@ -299,6 +362,12 @@ BearhideBreeches
   size: 16, 16
 VindicatorGreaves
   xy: 112, 480
+  size: 16, 16
+MadHat
+  xy: 112, 320
+  size: 16, 16
+FaerieAnklet
+  xy: 32, 960
   size: 16, 16
 TimebugBoots
   xy: 96, 96
@@ -348,7 +417,7 @@ AcidicSliverband
 AnkletoftheEnd
   xy: 128, 928
   size: 16, 16
-HeapSocks
+ScarecrowSocks
   xy: 128, 96
   size: 16, 16
 SpectralSliverband
@@ -540,8 +609,11 @@ TomeofBinding
 VolatilePrayerbook
   xy: 128, 672
   size: 16, 16
-VileSongbook
-  xy: 128, 688
+AmuletofCompleation
+  xy: 128, 816
+  size: 16, 16
+OminousAmulet
+  xy: 32, 848
   size: 16, 16
 PrayerbookofFortunes
   xy: 128, 704
@@ -792,8 +864,8 @@ SirenSongLyre
 SpidersilkGlove
   xy: 144, 256
   size: 16, 16
-Wolfhunter'sQuiver
-  xy: 144, 560
+FullMoonNecklace
+  xy: 48, 864
   size: 16, 16
 StriderReins
   xy: 144, 576
@@ -826,7 +898,7 @@ GoldBlessing
   xy: 256, 832
   size: 16, 16
 TruthButcher'sArmor
-  xy: 0, 304
+  xy: 304, 0
   size: 16, 16
 FlamingArmor
   xy: 160, 16

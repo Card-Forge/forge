@@ -4,7 +4,7 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Silverquill campus&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Silverquill Apprentice&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -47,7 +47,7 @@
   <object id="52" template="../../../../common/maps/obj/gold.tx" x="270.167" y="270.5"/>
   <object id="53" template="../../../../common/maps/obj/enemy.tx" x="223.16" y="41.762">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Hall of Oracles|STX&quot;, &quot;Silverquill Apprentice|STX&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Hall of Oracles|STX&quot;, &quot;Sparring Regimen&quot;]}"/>
     <property name="enemy" value="Shadrix"/>
     <property name="reward">[
   {

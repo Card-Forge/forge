@@ -66,7 +66,7 @@ public class CountersMultiplyEffect extends SpellAbilityEffect {
                 }
             }
         }
-        table.replaceCounterEffect(game, sa, true);
+        table.replaceCounterEffect(game, sa);
     }
 
     private CounterType getCounterType(SpellAbility sa) {

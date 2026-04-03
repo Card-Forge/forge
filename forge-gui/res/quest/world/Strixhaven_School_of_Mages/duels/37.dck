@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=James Bond
+Title=James Bond
+Icon=James Bond.jpg
+Difficulty=Medium
+Description=./Standard/Strixhaven_School_of_Mages/Shusuke_Hayakawa_-_Abzan_Midrange_(Standard,_#1157691).dck
+Deck Type=constructed
+
+[Main]
+1 Kenrith, the Returned King
+3 Mavinda, Students' Advocate
+3 Vito, Thorn of the Dusk Rose
+4 Righteous Valkyrie
+4 Speaker of the Heavens
+4 Skyclave Cleric
+2 Fight as One
+4 Vanishing Verse
+4 Fortifying Draught
+4 Light of Hope
+4 Call of the Death-Dweller
+1 Castle Locthwain
+2 Forest
+3 Swamp
+4 Indatha Triome
+4 Shineshadow Snarl
+4 Necroblossom Snarl
+5 Plains
+[Sideboard]
+1 Jegantha, the Wellspring
+1 Kaya the Inexorable
+2 Fracture
+2 Duress
+3 Archon of Absolution
+3 Drannith Magistrate
+3 Reidane, God of the Worthy

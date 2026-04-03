@@ -90,7 +90,7 @@
   </object>
   <object id="123" template="../../../../common/maps/obj/enemy.tx" x="264.333" y="260">
    <properties>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Oran-Rief, the Vastwood&quot;, &quot;Chimeric Coils|5DN&quot;, &quot;Colossal Dreadmask|MH3&quot;, &quot;Managorger Hydra|ORI&quot; ]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Oran-Rief, the Vastwood&quot;, &quot;Chimeric Coils&quot;, &quot;Thunderous Snapper&quot; ]
 }</property>
     <property name="enemy" value="Gargos"/>
     <property name="speedModifier" type="float" value="50"/>
@@ -125,7 +125,7 @@
 }]</property>
    </properties>
   </object>
-  <object id="134" template="../../../../common/maps/obj/dialog.tx" x="631.774" y="406.721" width="63" height="21.3788" rotation="63.6515" visible="1">
+  <object id="134" template="../../../../common/maps/obj/dialog.tx" x="678.441" y="433.388" width="29.6667" height="21.3788" rotation="0" visible="1">
    <properties>
     <property name="dialog">[
 {
@@ -138,7 +138,7 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
 ]</property>
    </properties>
   </object>
-  <object id="136" template="../../../../common/maps/obj/dialog.tx" x="325.82" y="307.555" width="74.3333" height="19.2122" rotation="262.857" visible="1">
+  <object id="136" template="../../../../common/maps/obj/dialog.tx" x="309.153" y="271.555" width="27.6666" height="19.2122" rotation="0" visible="1">
    <properties>
     <property name="dialog">[
 {

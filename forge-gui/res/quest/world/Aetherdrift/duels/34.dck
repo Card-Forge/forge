@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Aquaman
+Title=Aquaman
+Icon=Aquaman.jpg
+Difficulty=Medium
+Description=./Standard/Aetherdrift/DragonBall_-_Boros_Convoke_(Standard,_#2378218).dck
+Deck Type=constructed
+
+[Main]
+4 Knight-Errant of Eos
+4 Imodane's Recruiter
+4 Nesting Bot
+4 Novice Inspector
+1 Yotian Frontliner
+4 Resolute Reinforcements
+2 Arabella, Abandoned Doll
+4 Warden of the Inner Sky
+4 Gleeful Demolition
+2 Warleader's Call
+1 Sheltered by Ghosts
+4 Case of the Gateway Express
+4 Inspiring Vantage
+4 Battlefield Forge
+4 Sunbillow Verge
+3 Mountain
+4 Plains
+3 Mirrex
+[Sideboard]
+2 Sheltered by Ghosts
+1 Chandra, Spark Hunter
+4 Invasion of Gobakhan
+2 Destroy Evil
+2 Torch the Tower
+2 Lithomantic Barrage
+2 Requisition Raid

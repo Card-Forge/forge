@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="65">
  <editorsettings>
-  <export target="wastetown..tmx" format="tmx"/>
+  <export target="wastetown..tmx" format="tmx" />
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx"/>
- <tileset firstgid="3477" source="../../../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="3477" source="../../../../common/maps/tileset/buildings.tsx" />
  <layer id="7" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBgFowAB9vAwMOzlob+9UbwMDNG89Ld3FIyCUTAKRhoAAKm9AmE=
@@ -27,43 +27,115 @@
  </layer>
  <layer id="3" name="Clutter" width="30" height="17">
   <properties>
-   <property name="spriteLayer" type="bool" value="true"/>
+   <property name="spriteLayer" type="bool" value="true" />
   </properties>
   <data encoding="base64" compression="zlib">
    eJxjYBgFuADbANm7BInNSme7D/MzMBzhh7ihhpd65hIKy/tAOx/wQ9iLqWctSljiksOnhhaAWPtwqQOJUzOMaAnQ/QDig9LCYhzylJiNDGidd+uomDdIATA/06tcoHfeIAcgxzU9y8uhEDa4AABmuxBJ
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="51" template="../../../../../../common/maps/obj/treasure.tx" x="207.75" y="268.583"/>
-  <object id="53" template="../../../../../../common/maps/obj/gold.tx" x="194.273" y="108.447"/>
-  <object id="55" template="../../../../../../common/maps/obj/treasure.tx" x="71.4167" y="92"/>
-  <object id="56" template="../../../../../../common/maps/obj/enemy.tx" x="110.833" y="201">
+  <object id="51" template="../../../../common/maps/obj/treasure.tx" x="207.75" y="268.583"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.002,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.02,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.1,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.68,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 1.0,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property></properties></object>
+  <object id="53" template="../../../../common/maps/obj/gold.tx" x="194.273" y="108.447" />
+  <object id="55" template="../../../../common/maps/obj/treasure.tx" x="71.4167" y="92"><properties><property name="reward">[
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-A.dck",
+    "probability": 0.002,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-B.dck",
+    "probability": 0.02,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-C.dck",
+    "probability": 0.1,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-D.dck",
+    "probability": 0.68,
+    "count": 1,
+    "addMaxCount": 2
+  },
+  {
+    "type": "card",
+    "sourceDeck": "decks/rewards/tier-E.dck",
+    "probability": 1.0,
+    "count": 1,
+    "addMaxCount": 2
+  }
+]</property></properties></object>
+  <object id="56" template="../../../../common/maps/obj/enemy.tx" x="110.833" y="201">
    <properties>
-    <property name="enemy" value="Imp"/>
+    <property name="enemy" value="Imp" />
    </properties>
   </object>
-  <object id="57" template="../../../../../../common/maps/obj/enemy.tx" x="288.667" y="152.583">
+  <object id="57" template="../../../../common/maps/obj/enemy.tx" x="288.667" y="152.583">
    <properties>
-    <property name="enemy" value="Imp"/>
+    <property name="enemy" value="Imp" />
    </properties>
   </object>
-  <object id="58" template="../../../../../../common/maps/obj/enemy.tx" x="183.417" y="198.167">
+  <object id="58" template="../../../../common/maps/obj/enemy.tx" x="183.417" y="198.167">
    <properties>
-    <property name="enemy" value="Imp"/>
+    <property name="enemy" value="Imp" />
    </properties>
   </object>
-  <object id="60" template="../../../../../../common/maps/obj/gold.tx" x="208" y="107.5"/>
-  <object id="61" template="../../../../../../common/maps/obj/enemy.tx" x="96" y="104">
+  <object id="60" template="../../../../common/maps/obj/gold.tx" x="208" y="107.5" />
+  <object id="61" template="../../../../common/maps/obj/enemy.tx" x="96" y="104">
    <properties>
-    <property name="enemy" value="Imp"/>
+    <property name="enemy" value="Imp" />
    </properties>
   </object>
-  <object id="63" template="../../../../../../common/maps/obj/door_left.tx" x="379.814" y="137.793">
+  <object id="63" template="../../../../common/maps/obj/door_left.tx" x="379.814" y="137.793">
    <properties>
-    <property name="teleport" value="../Shandalar Old Border/maps/map/jacetower/portal_1R2.tmx"/>
-    <property name="teleportObjectId" value="61"/>
+    <property name="teleport" value="../Shandalar Old Border/maps/map/jacetower/portal_1R2.tmx" />
+    <property name="teleportObjectId" value="61" />
    </properties>
   </object>
-  <object id="64" template="../../../../../../common/maps/obj/gold.tx" x="55" y="213"/>
+  <object id="64" template="../../../../common/maps/obj/gold.tx" x="55" y="213" />
  </objectgroup>
 </map>

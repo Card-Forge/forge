@@ -1,0 +1,11 @@
+Name:Biblioplex Hall
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T PayLife<1> | Produced$ Any | RestrictValid$ Spell.Instant,Spell.Sorcery | SpellDescription$ Add one mana of any color. Spend this mana only to cast an instant or sorcery spell.
+A:AB$ Animate | Cost$ 5 | ConditionPresent$ Card.Self+nonCreature | Defined$ Self | Power$ 2 | Toughness$ 4 | Types$ Creature,Wizard | Triggers$ CastTrigger | SpellDescription$ If this land isn't a creature, it becomes a 2/4 Wizard creature with "Whenever you cast an instant or sorcery spell, this creature gets +1/+0 until end of turn." It's still a land.
+SVar:CastTrigger:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you cast an instant or sorcery spell, this creature gets +1/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1
+DeckHas:Ability$Mana.Colorless
+DeckHints:Type$Instant|Sorcery
+Oracle:{T}: Add {C}.\n{T}, Pay 1 life: Add one mana of any color. Spend this mana only to cast an instant or sorcery spell.\n{5}: If this land isn't a creature, it becomes a 2/4 Wizard creature with "Whenever you cast an instant or sorcery spell, this creature gets +1/+0 until end of turn." It's still a land.

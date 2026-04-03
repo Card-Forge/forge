@@ -23,6 +23,7 @@ import forge.util.IterableUtil;
 import forge.util.Localizer;
 import forge.localinstance.properties.ForgeNetPreferences;
 
+import org.tinylog.Logger;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -31,9 +32,14 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import io.netty.handler.timeout.IdleState;
+import io.netty.handler.timeout.IdleStateEvent;
+import io.netty.handler.timeout.IdleStateHandler;
 
 import org.jupnp.UpnpService;
 import org.jupnp.UpnpServiceImpl;
+import org.jupnp.model.meta.Device;
+import org.jupnp.registry.Registry;
 import org.jupnp.support.igd.PortMappingListener;
 import org.jupnp.support.model.PortMapping;
 
@@ -43,9 +49,11 @@ import java.io.InputStreamReader;
 import java.net.*;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 
 public final class FServerManager {
+    static final int HEARTBEAT_TIMEOUT_SECONDS = Integer.getInteger("forge.net.heartbeatTimeout", 45);
     private static final int RECONNECT_TIMEOUT_SECONDS = 300;
 
     private static FServerManager instance = null;
@@ -100,7 +108,7 @@ public final class FServerManager {
         } else {
             startUPnP = UPnPOption.equalsIgnoreCase("ALWAYS");
         }
-        System.out.println("Starting Multiplayer Server");
+        Logger.info("Starting Multiplayer Server");
         try {
             final ServerBootstrap b = new ServerBootstrap()
                     .group(bossGroup, workerGroup)
@@ -113,6 +121,7 @@ public final class FServerManager {
                             p.addLast(
                                     new CompatibleObjectEncoder(),
                                     new CompatibleObjectDecoder(9766 * 1024, ClassResolvers.cacheDisabled(null)),
+                                    new IdleStateHandler(HEARTBEAT_TIMEOUT_SECONDS, 0, 0, TimeUnit.SECONDS),
                                     new MessageHandler(),
                                     new RegisterClientHandler(),
                                     new LobbyInputHandler(),
@@ -127,8 +136,7 @@ public final class FServerManager {
                 try {
                     ch.sync();
                 } catch (final InterruptedException e) {
-                    System.out.println(e.getMessage());
-                    e.printStackTrace();
+                    Logger.error(e, "Server channel interrupted");
                 } finally {
                     stopServer();
                 }
@@ -139,8 +147,7 @@ public final class FServerManager {
             Runtime.getRuntime().addShutdownHook(shutdownHook);
             isHosting = true;
         } catch (final InterruptedException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+            Logger.error(e, "Server bind interrupted");
         }
     }
 
@@ -189,6 +196,7 @@ public final class FServerManager {
             Runtime.getRuntime().removeShutdownHook(shutdownHook);
         }
         isHosting = false;
+        UPnPMapped = false;
         // create new EventLoopGroups for potential restart
         bossGroup = new NioEventLoopGroup(1);
         workerGroup = new NioEventLoopGroup();
@@ -196,6 +204,21 @@ public final class FServerManager {
 
     public boolean isHosting() {
         return isHosting;
+    }
+
+    public boolean isUPnPMapped() {
+        return UPnPMapped;
+    }
+
+    public int getTotalSendErrors() {
+        int total = 0;
+        for (final RemoteClient client : clients.values()) {
+            total += client.getSendErrorCount();
+        }
+        for (final RemoteClient client : disconnectedClients.values()) {
+            total += client.getSendErrorCount();
+        }
+        return total;
     }
 
     public void broadcast(final NetEvent event) {
@@ -329,8 +352,7 @@ public final class FServerManager {
         try {
             return getRoutableAddress(true, false);
         } catch (final Exception e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+            Logger.error(e, "Failed to get local address");
             return "localhost";
         }
     }
@@ -343,15 +365,13 @@ public final class FServerManager {
                     whatismyip.openStream()));
             return in.readLine();
         } catch (IOException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+            Logger.error(e, "Failed to get external address");
         } finally {
             if (in != null) {
                 try {
                     in.close();
                 } catch (IOException e) {
-                    System.out.println(e.getMessage());
-                    e.printStackTrace();
+                    Logger.error(e, "Failed to close stream");
                 }
             }
         }
@@ -371,14 +391,68 @@ public final class FServerManager {
             upnpService = new UpnpServiceImpl(GuiBase.getInterface().getUpnpPlatformService());
             upnpService.startup();
 
-            // Add a PortMappingListener
-            upnpService.getRegistry().addListener(new PortMappingListener(portMapping));
+            final ForgePortMappingListener listener = new ForgePortMappingListener(portMapping);
+            upnpService.getRegistry().addListener(listener);
             // Trigger device discovery
             upnpService.getControlPoint().search();
+
+            // If no IGD responds within 5 seconds, report failure
+            new Timer("upnp-timeout", true).schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    if (!listener.isCompleted()) {
+                        listener.setCompleted();
+                        onUPnPResult(false);
+                    }
+                }
+            }, 5000);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+            Logger.error(e, "UPnP port mapping failed");
         }
+    }
+
+    private void onUPnPResult(boolean success) {
+        String msg = success
+            ? localizer.getMessage("lblUPnPSuccess", String.valueOf(port))
+            : localizer.getMessage("lblUPnPFailed", String.valueOf(port));
+        if (lobbyListener != null) {
+            broadcast(new MessageEvent(msg));
+        }
+    }
+
+    /**
+     * Extends jupnp's PortMappingListener to report mapping success or failure.
+     * The superclass runs port mapping actions synchronously inside deviceAdded(),
+     * so by the time super.deviceAdded() returns, the result is known.
+     */
+    private class ForgePortMappingListener extends PortMappingListener {
+        private volatile boolean completed = false;
+
+        ForgePortMappingListener(PortMapping portMapping) {
+            super(portMapping);
+        }
+
+        @Override
+        public synchronized void deviceAdded(Registry registry, Device device) {
+            super.deviceAdded(registry, device);
+            if (!completed && !activePortMappings.isEmpty()) {
+                completed = true;
+                UPnPMapped = true;
+                onUPnPResult(true);
+            }
+        }
+
+        @Override
+        protected void handleFailureMessage(String message) {
+            super.handleFailureMessage(message);
+            if (!completed) {
+                completed = true;
+                onUPnPResult(false);
+            }
+        }
+
+        boolean isCompleted() { return completed; }
+        void setCompleted() { completed = true; }
     }
 
     // --- Reconnection helper methods ---
@@ -461,8 +535,8 @@ public final class FServerManager {
 
         for (final Player p : game.getPlayers()) {
             final IGuiGame gui = hostedMatch.getGuiForPlayer(p);
-            if (gui instanceof NetGuiGame && ((NetGuiGame) gui).getSlotIndex() == slotIndex) {
-                ((NetGuiGame) gui).pause();
+            if (gui instanceof NetGuiGame ngg && ngg.getSlotIndex() == slotIndex) {
+                ngg.pause();
                 return;
             }
         }
@@ -479,8 +553,7 @@ public final class FServerManager {
         // so name matching is unreliable
         for (final Player p : game.getPlayers()) {
             final IGuiGame gui = hostedMatch.getGuiForPlayer(p);
-            if (gui instanceof NetGuiGame && ((NetGuiGame) gui).getSlotIndex() == slotIndex) {
-                final NetGuiGame netGui = (NetGuiGame) gui;
+            if (gui instanceof NetGuiGame netGui && netGui.getSlotIndex() == slotIndex) {
                 netGui.resume();
 
                 // Send current GameView before openView (matches HostedMatch.startGame() ordering)
@@ -510,7 +583,7 @@ public final class FServerManager {
             return;
         }
 
-        System.out.println("Reconnect timeout for " + username + ". Converting to AI.");
+        Logger.info("Reconnect timeout for {}. Converting to AI.", username);
         convertToAI(client.getIndex(), username);
 
         // Reset lobby slot
@@ -519,7 +592,7 @@ public final class FServerManager {
         broadcast(new MessageEvent(String.format("%s did not reconnect in time. AI has taken over.", username)));
     }
 
-    private void convertToAI(final int slotIndex, final String username) {
+    public void convertToAI(final int slotIndex, final String username) {
         final HostedMatch hostedMatch = localLobby.getHostedMatch();
         if (hostedMatch == null) { return; }
         final Game game = hostedMatch.getGame();
@@ -545,6 +618,9 @@ public final class FServerManager {
     private class MessageHandler extends ChannelInboundHandlerAdapter {
         @Override
         public final void channelRead(final ChannelHandlerContext ctx, final Object msg) throws Exception {
+            if (msg instanceof HeartbeatEvent) {
+                return; // Consumed — arrival resets IdleStateHandler read timer
+            }
             if (msg instanceof MessageEvent) {
                 final String text = ((MessageEvent) msg).getMessage();
                 if (text != null && text.startsWith("/")) {
@@ -567,7 +643,7 @@ public final class FServerManager {
         public void channelActive(final ChannelHandlerContext ctx) throws Exception {
             final RemoteClient client = new RemoteClient(ctx.channel());
             clients.put(ctx.channel(), client);
-            System.out.println("Client connected to server at " + ctx.channel().remoteAddress());
+            Logger.info("Client connected to server at {}", ctx.channel().remoteAddress());
             updateLobbyState();
             super.channelActive(ctx);
         }
@@ -633,7 +709,7 @@ public final class FServerManager {
                     resumeAndResync(disconnected);
 
                     broadcast(new MessageEvent(String.format("%s has reconnected.", username)));
-                    System.out.println("Player reconnected: " + username);
+                    Logger.info("Player reconnected: {}", username);
                 } else {
                     // Normal login flow
                     final int index = localLobby.connectPlayer(event.getUsername(), event.getAvatarIndex(), event.getSleeveIndex());
@@ -669,6 +745,21 @@ public final class FServerManager {
     }
 
     private class DeregisterClientHandler extends ChannelInboundHandlerAdapter {
+        @Override
+        public void userEventTriggered(final ChannelHandlerContext ctx, final Object evt) throws Exception {
+            if (evt instanceof IdleStateEvent && ((IdleStateEvent) evt).state() == IdleState.READER_IDLE) {
+                final RemoteClient client = clients.get(ctx.channel());
+                final String name = client != null ? client.getUsername() : ctx.channel().remoteAddress().toString();
+                final String msg = name + " timed out after " + HEARTBEAT_TIMEOUT_SECONDS
+                    + " seconds without a network response. Closing connection.";
+                Logger.warn(msg);
+                broadcast(new MessageEvent(msg));
+                ctx.close();
+                return;
+            }
+            super.userEventTriggered(ctx, evt);
+        }
+
         @Override
         public void channelInactive(final ChannelHandlerContext ctx) throws Exception {
             final RemoteClient client = clients.remove(ctx.channel());
@@ -711,7 +802,7 @@ public final class FServerManager {
                 broadcast(new MessageEvent(
                     String.format("%s disconnected. Waiting %s for reconnect...", username, formatTime(RECONNECT_TIMEOUT_SECONDS))));
                 lobbyListener.message(null, "(Host can use /skipreconnect to replace disconnected player with AI, or /skiptimeout to wait indefinitely.)");
-                System.out.println("Player disconnected mid-game: " + username + " (slot " + client.getIndex() + "). Waiting for reconnect.");
+                Logger.info("Player disconnected mid-game: {} (slot {}). Waiting for reconnect.", username, client.getIndex());
             } else {
                 // Normal disconnect (lobby or no valid slot)
                 localLobby.disconnectPlayer(client.getIndex());

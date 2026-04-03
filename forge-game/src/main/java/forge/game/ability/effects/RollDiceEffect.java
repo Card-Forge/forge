@@ -160,7 +160,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
             int activationsThisTurn = Integer.parseInt(parts[1]);
             SpellAbility modifierSA = c.getFirstSpellAbility();
             Cost cost = new Cost(c.getSVar("RollRerollCost"), false);
-            boolean paid = player.getController().payCostDuringRoll(cost, modifierSA, null);
+            boolean paid = player.getController().payCostDuringRoll(cost, modifierSA);
             if (paid) {
                 for (Integer roll : diceToReroll) {
                     naturalRolls.remove(roll);
@@ -201,7 +201,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
                     SpellAbility modifierSA = c.getFirstSpellAbility();
                     String costString = c.getSVar("RollModifyCost");
                     Cost cost = new Cost(costString, false);
-                    boolean paid = player.getController().payCostDuringRoll(cost, modifierSA,  null);
+                    boolean paid = player.getController().payCostDuringRoll(cost, modifierSA);
                     if (paid) {
                         message = Localizer.getInstance().getMessage("lblChooseRollIncrement", rollToModify);
                         boolean isPositive = player.getController().chooseBinary(sa, message, PlayerController.BinaryChoiceType.IncreaseOrDecrease);

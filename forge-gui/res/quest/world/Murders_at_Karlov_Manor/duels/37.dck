@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=SantaMuerte
+Title=SantaMuerte
+Icon=SantaMuerte.jpg
+Difficulty=Easy
+Description=./Standard/Murders_at_Karlov_Manor/Kaptajnsly_-_Azorius_Midrange_(Standard,_#1977990).dck
+Deck Type=constructed
+
+[Main]
+2 Skrelv, Defector Mite
+4 Faerie Mastermind
+2 Surge Engine
+2 Kutzil's Flanker
+3 Werefox Bodyguard
+4 Twining Twins
+4 Autonomous Assembler
+4 Steel Seraph
+2 Cryptic Coat
+2 Destroy Evil
+2 No More Lies
+2 Soul Partition
+3 Invasion of Gobakhan
+4 Adarkar Wastes
+1 Demolition Field
+4 Deserted Beach
+1 Eiganjo, Seat of the Empire
+1 Island
+4 Meticulous Archive
+2 Mishra's Foundry
+1 Otawara, Soaring City
+2 Plains
+2 Restless Anchorage
+3 Seachrome Coast
+[Sideboard]
+3 Doorkeeper Thrull
+1 Negate
+2 Knockout Blow
+1 Loran of the Third Path
+2 Metropolis Reformer
+3 Temporary Lockdown
+1 Tishana's Tidebinder
+1 See Double
+1 Hullbreaker Horror

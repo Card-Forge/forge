@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Boba Fett
+Title=Boba Fett
+Icon=Boba Fett.jpg
+Difficulty=Easy
+Description=Innistrad/GPT_Orlando/Michael_Reilly_-_Red_Deck_Wins_(Standard,_#24240).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Chandra's Phoenix
+4 Goblin Fireslinger
+3 Grim Lavamancer
+1 Spikeshot Elder
+4 Stormblood Berserker
+4 Stromkirk Noble
+4 Shrine of Burning Rage
+3 Galvanic Blast
+4 Gut Shot
+2 Incinerate
+4 Volt Charge
+2 Arc Trail
+18 Mountain
+3 Rootbound Crag
+[Sideboard]
+2 Ancient Grudge
+4 Dismember
+2 Manabarbs
+2 Traitorous Blood
+4 Vulshok Refugee

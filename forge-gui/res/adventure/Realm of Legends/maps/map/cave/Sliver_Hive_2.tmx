@@ -48,7 +48,7 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Stoneforge Masterwork|OGW&quot;, &quot;Descendants' Path|LCC&quot;, &quot;First Sliver's Chosen|MH1&quot;, &quot;Gemhide Sliver|CMM&quot;, &quot;Birthing Boughs|MH1&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Descendants' Path|LCC&quot;, &quot;First Sliver's Chosen|MH1&quot;, &quot;Birthing Boughs|MH1&quot;]}"/>
     <property name="enemy" value="The First Sliver"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="100"/>
@@ -56,7 +56,7 @@
   </object>
   <object id="73" template="../../../../common/maps/obj/enemy.tx" x="244.004" y="253.825">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Wayfarer's Bauble|C14&quot;, &quot;Stoneforge Masterwork|OGW&quot;, &quot;Descendants' Path|LCC&quot;, &quot;Victual Sliver|STH&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Descendants' Path|LCC&quot;, &quot;Victual Sliver|STH&quot;]}"/>
     <property name="enemy" value="Sliver Queen"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="150"/>
@@ -92,7 +92,7 @@
   {
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 4,
-    &quot;rarity&quot;: [ &quot;Rare, Mythic Rare&quot; ]
+    &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ]
   }
 ]
 </property>
@@ -102,7 +102,7 @@
   <object id="90" template="../../../../common/maps/obj/entry_up.tx" x="322.5" y="469.5" width="130" height="8">
    <properties>
     <property name="teleport" value="../Realm of Legends/maps/map/cave/Sliver_Hive_1.tmx"/>
-    <property name="teleportObjectId" value="153"/>
+    <property name="teleportObjectId" value="81"/>
    </properties>
   </object>
   <object id="91" template="../../obj/treasure.tx" x="82.5833" y="175.417">
@@ -112,7 +112,7 @@
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 4,
     &quot;subTypes&quot;: [ &quot;Sliver&quot; ],
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ]
   }
 ]
 </property>
@@ -139,7 +139,7 @@
   <object id="97" template="../../../../common/maps/obj/manashards.tx" x="69.3333" y="108.917"/>
   <object id="98" template="../../../../common/maps/obj/enemy.tx" x="192" y="368">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Wayfarer's Bauble|C14&quot;, &quot;Stoneforge Masterwork|OGW&quot;, &quot;Descendants' Path|LCC&quot;, &quot;Mistform Sliver|LGN&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Ancestry|CMM&quot;, &quot;Descendants' Path|LCC&quot;, &quot;Venser's Sliver|TSP&quot;]}"/>
     <property name="enemy" value="Rukarumel"/>
     <property name="speedModifier" type="float" value="10"/>
     <property name="threatRange" type="int" value="20"/>

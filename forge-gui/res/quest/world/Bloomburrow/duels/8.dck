@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Sun Quan
+Title=Sun Quan
+Icon=Sun Quan.jpg
+Difficulty=Medium
+Description=./Standard/Bloomburrow/Daniel_Walton_-_Golgari_Ramp_(Standard,_#2275441).dck
+Deck Type=constructed
+
+[Main]
+4 Aftermath Analyst
+3 Iridescent Vinelasher
+4 Nissa, Resurgent Animist
+3 Lumra, Bellow of the Woods
+2 Cut Down
+4 Go for the Throat
+2 Anoint with Affliction
+1 Sheoldred's Edict
+2 Pillage the Bog
+4 Pitiless Carnage
+3 Spelunking
+1 Mudflat Village
+7 Swamp
+8 Forest
+1 Evolving Wilds
+4 Fabled Passage
+4 Escape Tunnel
+3 Restless Cottage
+[Sideboard]
+3 Scavenging Ooze
+4 Duress
+2 Glissa Sunslayer
+3 Choking Miasma
+2 Tear Asunder
+1 Dreams of Steel and Oil

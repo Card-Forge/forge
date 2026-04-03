@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Nelson Muntz
+Title=Nelson Muntz
+Icon=Nelson Muntz.jpg
+Difficulty=Hard
+Description=./Modern/Bloomburrow/Morphling83_-_Izzet_Control_(Modern,_#2190489).dck
+Deck Type=constructed
+
+[Main]
+4 Snapcaster Mage
+2 Murktide Regent
+2 Tamiyo, Inquisitive Student
+4 Thundertrap Trainer
+1 Spell Pierce
+3 Fatal Push
+2 Spell Snare
+3 Flare of Denial
+1 Sink into Stupor
+4 Flame of Anor
+4 Counterspell
+4 Lightning Bolt
+1 Expressive Iteration
+4 Preordain
+1 Darkslick Shores
+1 Spirebluff Canal
+2 Watery Grave
+1 Mountain
+3 Island
+3 Steam Vents
+2 Thundering Falls
+4 Scalding Tarn
+1 Misty Rainforest
+2 Bloodstained Mire
+1 Polluted Delta
+[Sideboard]
+2 Unlicensed Hearse
+2 Stern Scolding
+2 Consign to Memory
+3 Obsidian Charmaw
+1 Commandeer
+2 Magebane Lizard
+2 Pyroclasm
+1 Kozilek's Return

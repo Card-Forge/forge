@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Betty Rubble
+Title=Betty Rubble
+Icon=Betty Rubble.jpg
+Difficulty=Hard
+Description=./Modern/Streets_of_New_Capenna/Andréas_Lindholm_-_Jund_(Modern,_#1382152).dck
+Deck Type=constructed
+
+[Main]
+1 Kroxa, Titan of Death's Hunger
+1 Fury
+2 Seasoned Pyromancer
+4 Ragavan, Nimble Pilferer
+4 Tarmogoyf
+1 Shadowspear
+2 Nihil Spellbomb
+1 Abrupt Decay
+2 Riveteers Charm
+2 Fatal Push
+3 Lightning Bolt
+2 Inquisition of Kozilek
+4 Thoughtseize
+3 Urza's Saga
+4 Liliana of the Veil
+4 Wrenn and Six
+1 Stomping Ground
+1 Swamp
+1 Mountain
+1 Forest
+1 Boseiju, Who Endures
+2 Overgrown Tomb
+2 Blood Crypt
+2 Blackcleave Cliffs
+2 Wooded Foothills
+3 Bloodstained Mire
+4 Verdant Catacombs
+[Sideboard]
+1 Soul-Guide Lantern
+1 Riveteers Charm
+1 Tourach, Dread Cantor
+1 Chalice of the Void
+1 Pyrite Spellbomb
+1 Pithing Needle
+1 Alpine Moon
+1 Torpor Orb
+1 Void Mirror
+2 Collective Brutality
+2 Endurance
+2 Force of Vigor

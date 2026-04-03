@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="131">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="139">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -12,12 +12,12 @@
  <tileset firstgid="36241" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
  <layer id="1" name="Background" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJztwzEJAAAMA7C+8w/VWw37E0gvqaqqqqqqqqqqqu8DFRHS7A==
+   eJzt1zsOABAURUGtjVmi9Wp1Cp9HTDH9PZEINadUATYoF2zQC/CP0oneolfvquboDbNnNRK9FeAn7mcAANjnpff0ir/AS70ApzTJd8Q8
   </data>
  </layer>
  <layer id="2" name="Walls" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJztmW0OgyAMhvlrhifYdh0PsZ1l7lz7uttMNhJtQFssSps2eX+QUMczKS9I1zjXDTp53eqaqfYejwTea+vc06d1aaf9YJs7b9y3BO950FwcQT/Y5s4b992D9/H/z18+3tbGmxtSeW8H5/pB90O8rY1XW/1+/O99pfROjJuah6370rzUeZAaC+f6UJIX44ex9RnroYEXW/eleW19Nt5aebG1GKsvSbw574ry+zmR4l3ysbGXaeBdo8ALPQMTFP/PCfh8DC88O6Z4JQSGd2kuBN6e4OUhKP6fE/D5nLxBEup3zkOW5r5EXk7/xaz1qfNLad5azkdb8ebkSua189E+vNiah9+vqOsD535SwvcNzv3kFvcLFB9dk2f3C9vy2v0CLqTuN7juFyih4X6hlv0G9p4g9INt7rxa/LcGGa9uGa9uBc4vNVqY7w==
+   eJztmU0OgjAQhbslwAnU63AIvYZb8RauuYaKtzKuhWiTMmlhpkyh0zDJWzTpYD9h+vpTZUpVnfZF2qqyodYejwTeU6nUo3DrWA77wTZ3ntk3BO+h01jsQD/Y5s4z+67Be///58/C3sbw3jI5vL4hlfeSK1V3uub2NobX1o6VN7X6fRW/9+VS6xg3NQ9b96F5qd+Bayyc80NIXowf2uZnrIdqXmzdh+blnJ/7eVgr1vrdeOXwYmvRVl+SeH3eFeX3fcLFO+VjppelwDtHmhd6BiYo/u8T8PkYXrh3dPFKCAzv1LegeWuCl+ug+L9PwOdz8mpJqN8xD5n69iXycvovZq537V9C88ayP1qK1ydXMm+K+6Mx3lj2C9iah+dX1PmBcz0p4XyDcz25xP0CxUfn5G33C8vyUu4Xzo18Xkq8R3ilrDe47hcosTTvp3GP27d+Y1lv9H5onjtBtUY/0xux9wvUvFj8NwZtvGlr401bmvMLB2qmeQ==
   </data>
  </layer>
  <layer id="3" name="Clutter" width="60" height="40">
@@ -25,12 +25,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzt1zkKwkAUBuAnWihoYSHYuDRWnsQLuGDlFaxFcD1BprAwTuklbDyF1xBxKR3RYMCgmTjjZOT/4GemyPJeEpIJEYB660Jw4m5bDI5Oe34f+4/xwPWezy9qv7i/4Rw50Ym/n8eRrff3ppknavnSzpuuCAAgWCOj5jgdvOde2Pr9jWriEk1FZiLJFVFKZC7mI5Gxa6amXT18QK9uznQFv9VLm65AnVri8zabrP464L/g/QxgD1X/C4OFmuMAgF5Lh8h1nqOsoWXr/hIjKrPneLMSfXPJ3ju+uS3XYMHuqYhUmelqfsPrOayzvlIikf2WyvTq8Z7fi/yuymHtAADwnSuXFG9r
+   eJzt10sOwUAYB/BPWJCwsJDYeGysnMQFPGLlCtYi8TyBLizULF3CxilcQ8RjaYRGjaKYmhn+v+TLTE1T37+VtogA5JulvEt3i7R3BWnFTmPzPK5ZsN/n9m5eXF9/Noxoyx7PdWTq9T0qJ4kqrqomVXcEAOCtFJNznBruczdMff6+q2cT9XkNeIWnRBFeQz7v8OraanpaFv0XBKueUN3BdzWiqjuQpxB6vs88Hnwf8FtwfwYwh6z/C62xnOOAOdp/9v7nJ68J52QyIrJHl/GevY/PTcibsYiy1mU8mvLcTMgu5nWy7YVtca6zsXWqHK+8db3mZBBH97pXdt05me8Rc+1cazrkffVZ+iirQ8wl/rZVwrsDAMBnDsZFfmw=
   </data>
  </layer>
  <layer id="8" name="Clutter" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJztmU9SgzAUxnMAulahuxb1CJ5Fr6EdF44rT0DpDA0sMlPwzw1c6K3U6dKPqUzBJhFtIIDvN/PNSx+ZkJeXBEgZI4j9uTsw19a12NjZl70S5truGsW4eYutzWVyPG1y9rQtT+aMTaFJAAv5QbWcX/Pn9vpqgudSvCvEkkIrxJZCWVAt59eynseropjPZaK4+fvm60Y4u7Kxng6T9u9pkzby+1tulrsyRRfzK4sv9/GIsRhKor+33dX8ynDh96DxHvnuYn5VcMQZQ4lmrg/p+ety5Bca86q/HPuQnr8cccZQwvX1TO9xfaCJvb0PULzD5SFk7DH8P/P6BN8Lp5JvBoIgCKJ5Xp2NfXHs9qMtLkYbez6y2w+iOW47ltviHDLFu10G3YfVchvYGJMp3u186HhRLdflUsj9a0V9ld8WsvNwHW9C7v+eu59+DwVdXOsadUxRPmt4F4x9CPn5gy7fR1jnLuSF+v8l2oxLxYyrVZcl4uRQ3NL+RhAE0Qc+ARrJmPU=
+   eJztmcFOgzAcxpt4ZWcVdttQH8Fn0QcwPoCLB48+AWMJKxxIBlPvHjzoY3nz4Ndgs+KgYVJawP6SL/+mXUq//kuBjhCLpT2Px+r6uk+LuPiJd6m6vvsGnzdvtYtMKufTJJcvu/JsScgcmgWIkB+Uy6zNX5obqwreBL8beMmgDbxlUB6Uy6wtH7jfOvh6Foni7q/L7pvU2ZeJ++kk0X9Nk+jI76E8rPelij7mt8ofq6MRITGURH/vu6/5rcJFvQdNW+S7j/mtg8JnDCWStT6m569LkV9oSsv1ovcxPX8pfMZQQuW/U73HDYEu9vYhYP2Ol6eQkOfw/6zrc3wvXFR8M1gsFoulez6cIr47Zsehi+tJEa8mZsehk68j0yPQSxO/OueEn0NmeLfLoW1YLrelzguvZ9HEGpjj3c6HzlblclNuX6vrRS/cm+jRlN/fVJ2Hy5D5rZPYzstDp4lHnX7Fs4bPlJCbbfX5gyzfp7jPXcgL5f9LyHKta10vaL2asoZPCsUK9jeLxWIZC9+8Hrmc
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -72,7 +72,7 @@
   </object>
   <object id="110" template="../../../../common/maps/obj/enemy.tx" x="416" y="304">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Olivia's Bloodsworn|SOI&quot;, &quot;bride's gown|VOW&quot;, &quot;wedding invitation|VOW&quot;, &quot;wedding security|VOW&quot;, &quot;Call the bloodline|SOI&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Olivia's Bloodsworn|SOI&quot;, &quot;bride's gown|VOW&quot;, &quot;wedding invitation|VOW&quot;, &quot;Call the bloodline|SOI&quot;]}"/>
     <property name="enemy" value="Olivia"/>
     <property name="speedModifier" type="float" value="60"/>
     <property name="threatRange" type="int" value="60"/>
@@ -179,9 +179,11 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
   </object>
   <object id="124" template="../../../../common/maps/obj/manashards.tx" x="258" y="514.667"/>
   <object id="125" template="../../../../common/maps/obj/gold.tx" x="415.5" y="548"/>
-  <object id="127" template="../../../../common/maps/obj/collision.tx" x="545.815" y="166.271" width="43.0363" height="70.1238"/>
-  <object id="128" template="../../../../common/maps/obj/collision.tx" x="640.542" y="67.7866" width="15.8242" height="24.9116"/>
-  <object id="129" template="../../../../common/maps/obj/collision.tx" x="337.482" y="243.938" width="172.036" height="14.1238"/>
-  <object id="130" template="../../../../common/maps/obj/collision.tx" x="335.982" y="337.938" width="172.036" height="14.1238"/>
+  <object id="131" template="../../../../common/maps/obj/collision.tx" x="290.982" y="467.438" width="31.036" height="22.6238"/>
+  <object id="132" template="../../../../common/maps/obj/collision.tx" x="340.982" y="469.688" width="31.036" height="22.6238"/>
+  <object id="134" template="../../../../common/maps/obj/collision.tx" x="560.482" y="483.188" width="31.036" height="22.6238"/>
+  <object id="136" template="../../../../common/maps/obj/collision.tx" x="485.982" y="468.188" width="20.036" height="22.6238"/>
+  <object id="137" template="../../../../common/maps/obj/collision.tx" x="519.482" y="465.688" width="17.036" height="22.6238"/>
+  <object id="138" template="../../../../common/maps/obj/collision.tx" x="544.088" y="164.044" width="46.3242" height="11.9116"/>
  </objectgroup>
 </map>

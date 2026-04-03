@@ -87,7 +87,7 @@ public class HostedMatch {
         gameRules.setOrderCombatants(FModel.getPreferences().getPrefBoolean(FPref.LEGACY_ORDER_COMBATANTS));
         gameRules.setUseGrayText(FModel.getPreferences().getPrefBoolean(FPref.UI_GRAY_INACTIVE_TEXT));
         gameRules.setGamesPerMatch(FModel.getPreferences().getPrefInt(FPref.UI_MATCHES_PER_GAME));
-        // AI specific sideboarding rules
+        gameRules.setAllowCheatShuffle(FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_AI_CHEATS));
         switch (AiProfileUtil.getAISideboardingMode()) {
             case Off:
                 gameRules.setAISideboardingEnabled(false);
@@ -206,7 +206,6 @@ public class HostedMatch {
                 }
             }
             p.updateAvatar();
-            //sleeve
             p.getLobbyPlayer().setSleeveIndex(rp.getPlayer().getSleeveIndex());
             if (p.getLobbyPlayer().getSleeveIndex() == -1) {
                 if (iPlayer < sleeveIndices.length) {
@@ -217,22 +216,23 @@ public class HostedMatch {
             }
             p.updateSleeve();
 
-            if (p.getController() instanceof PlayerControllerHuman) {
-                final PlayerControllerHuman humanController = (PlayerControllerHuman) p.getController();
+            if (p.getController() instanceof PlayerControllerHuman humanController) {
                 final IGuiGame gui = guis.get(p.getRegisteredPlayer());
                 humanController.setGui(gui);
                 gui.setGameView(null); //clear out game view first so we don't copy into old game view
                 gui.setGameView(gameView);
                 gui.setOriginalGameController(p.getView(), humanController);
 
-                if (gui instanceof forge.gamemodes.net.server.NetGuiGame) {
-                    game.subscribeToEvents(new forge.gui.control.GameEventForwarder(gui));
+                if (gui instanceof forge.gamemodes.net.server.NetGuiGame ngg) {
+                    forge.gui.control.GameEventForwarder forwarder = new forge.gui.control.GameEventForwarder(gui);
+                    ngg.setForwarder(forwarder);
+                    game.subscribeToEvents(forwarder);
                 } else {
                     game.subscribeToEvents(new FControlGameEventHandler(humanController));
                 }
                 playersPerGui.put(gui, p.getView());
 
-                if (gameControllers != null ) {
+                if (gameControllers != null) {
                     LobbySlot lobbySlot = getLobbySlot(p.getLobbyPlayer());
                     gameControllers.put(lobbySlot, humanController);
                 }
@@ -304,8 +304,8 @@ public class HostedMatch {
     private LobbySlot getLobbySlot(LobbyPlayer lobbyPlayer) {
         for (LobbySlot key: gameControllers.keySet()) {
             IGameController value = gameControllers.get(key);
-            if (value instanceof PlayerControllerHuman) {
-                if (lobbyPlayer == ((PlayerControllerHuman) value).getLobbyPlayer()) {
+            if (value instanceof PlayerControllerHuman pch) {
+                if (lobbyPlayer == pch.getLobbyPlayer()) {
                     return key;
                 }
             }
@@ -317,7 +317,6 @@ public class HostedMatch {
         final PlayerControllerHuman humanController = new WatchLocalGame(game, null, gui);
         registerSpectator(gui, humanController);
     }
-
     public void registerSpectator(final IGuiGame gui, final PlayerControllerHuman humanController) {
         gui.setSpectator(humanController);
         gui.openView(null);
@@ -339,6 +338,9 @@ public class HostedMatch {
         game = null;
 
         for (final PlayerControllerHuman humanController : humanControllers) {
+            if (humanController.getGui() instanceof forge.gamemodes.net.server.NetGuiGame ngg) {
+                ngg.shutdownForwarder();
+            }
             humanController.getGui().setGameSpeed(PlaybackSpeed.NORMAL);
             if (FModel.getPreferences().getPref(FPref.UI_AUTO_YIELD_MODE).equals(ForgeConstants.AUTO_YIELD_PER_CARD) || isMatchOver()) {
                 // when autoyielding per card, we need to clear auto yields between games since card IDs change
@@ -370,6 +372,10 @@ public class HostedMatch {
 
     public boolean isMatchOver() {
         return isMatchOver;
+    }
+
+    public GameOutcome.AnteResult getAnteResult(RegisteredPlayer player) {
+        return match.getAnteResult(player);
     }
 
     private final class MatchUiEventVisitor extends IGameEventVisitor.Base<Void> implements IUiEventVisitor<Void> {

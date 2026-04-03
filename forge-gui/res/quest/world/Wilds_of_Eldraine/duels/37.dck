@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=C3PO
+Title=C3PO
+Icon=C3PO.jpg
+Difficulty=Easy
+Description=./Standard/Wilds_of_Eldraine/Hiraishi　Kentarou_-_UB_Aggro_(Standard,_#1750135).dck
+Deck Type=constructed
+
+[Main]
+4 Moon-Circuit Hacker
+3 Network Disruptor
+4 Prosperous Thief
+4 Thousand-Faced Shadow
+3 Dokuchi Silencer
+4 Silver-Fur Master
+2 Tenacious Underdog
+2 Ertai Resurrected
+4 Ingenious Prodigy
+2 Spell Pierce
+2 Go for the Throat
+2 Cut Down
+2 Kaito, Dancing Shadow
+7 Island
+3 Swamp
+4 Underground River
+4 Darkslick Shores
+2 Shipwreck Marsh
+1 Otawara, Soaring City
+1 Takenuma, Abandoned Mire
+[Sideboard]
+1 Negate
+3 Duress
+1 Disdainful Stroke
+1 Go for the Throat
+2 Biting-Palm Ninja
+1 Dokuchi Silencer
+2 Cut Down
+3 Archfiend of the Dross
+1 Sheoldred's Edict

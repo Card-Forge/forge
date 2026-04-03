@@ -1,78 +1,75 @@
 [metadata]
 Name=Firesong and Sunspeaker
 [Commander]
-1 Firesong and Sunspeaker|dom
+1 Firesong and Sunspeaker|2X2|[215]
 [Main]
-1 Brightflame|rav
-1 Blazing Sunsteel|cmr
-1 Mogg Maniac|sth
-1 Dawnsire, Sunstar Dreadnought|eoe
-1 molten impact|yneo
-1 Phyrexian Harvester|yone
-1 talisman of conviction|tdc
-1 ruby medallion|mh3
-1 maze of ith|dmr
-1 Aetherflux Reservoir|kld
-1 Alhammarret's Archive|c21
-1 Angel of Destiny|znr
-1 Angelheart Vial|roe
-1 Arcane Signet|voc
-1 Arcbond|frf
-1 Balefire Liege|2x2
-1 Battlefield Forge|ori
-1 Blasphemous Act|c14
-1 Boros Reckoner|gtc
-1 Brash Taunter|m21
-1 Chain Reaction|wwk
-1 Clifftop Retreat|dom
-1 Command Tower|cmr
-1 Commander's Sphere|c16
-1 Cosmos Elixir|khm
-1 Crackle with Power|stx
-1 Crush Contraband|grn
-1 Cursed Recording|dsk
-1 Dawn of Hope|wot
-1 Deflecting Palm|cmr
-1 Disenchant|ima
-1 Labyrinth of Skophos|thb
-1 Exemplar of Light|fdn
-1 Explosive Getaway|dft
-1 Fiery Emancipation|wot
-1 Healing Hands|ori
-1 Heartflame Duelist|woe
-1 Heliod's Intervention|thb
-1 Hour of Devastation|hou
-1 Invoke the Divine|dom
-1 Kabira Crossroads|c17
-1 Lightning Helix|ima
-1 Mangara, the Diplomat|blc
-1 Mind Stone|dmr
-13 Mountain|dom
-1 Path to Exile|2x2
-1 Pearl Medallion|mh3
-1 Phyrexian Vindicator|one
-15 Plains|dom
-1 mystifying maze|c17
-1 Radiant Scrollwielder|stx
-1 Revitalize|sta
-1 Reviving Dose|inv
-1 Rhox Faithmender|m13
-1 Ritual of Rejuvenation|xln
-1 Sacred Foundry|grn
-1 Sol Ring|cm2
-1 Solphim, Mayhem Dominus|one
-1 Star of Extinction|xln
-1 Storm Herd|khc
-1 Stuffy Doll|m13
-1 Sundown Pass|vow
-1 Sunforger|2xm
-1 Swiftfoot Boots|c17
-1 Temple of the False God|c15
-1 Temple of Triumph|ths
-1 Toralf, God of Fury|khm
-1 Treasonous Ogre|cns
-1 Truefire Captain|grn
-1 Vandalblast|rtr
-1 Warleader's Helix|dgm
-1 Wear|dgm
-1 Well of Lost Dreams|c21
+1 Abrade|TDC|[203]
+1 Alchemist's Greeting|INR|[393]
+1 Gilded Lotus|DOM
+1 Balefire Liege|EVE|[132]
+1 Barrage of Boulders|KTK|[100]
+1 Blazing Volley|IKO|[107]
+1 Boros Garrison|2X2|[319]
+1 Burst Lightning|ZEN|[119]
+1 Carbonize|SCG|[83]
+1 Chandra's Outrage|M11|[128]
+1 Cinder Pyromancer|EVE|[50]
+1 Cursebreak|AVR|[14]
+1 Deadly Riposte|FDN|[492]
+1 Electrickery|RTR|[93]
+1 End the Festivities|VOW|[155]
+1 Fiery Temper|C19|[142]
+1 Fireball|M11|[138]
+1 Fireblast|DMR|[119]
+1 Firebrand Archer|J25|[548]
+1 Flame Slash|CN2|[157]
+1 Forked Bolt|ROE|[146]
+1 Glacial Ray|CHK|[168]
+1 Heat Ray|USG|[199]
+1 Incinerate|ICE|[194]
+1 Into the Maw of Hell|ISD|[150]
+1 Jaya's Greeting|WAR|[136]
+1 Kessig Flamebreather|VOW|[164]
+1 Lava Axe|POR|[137]
+1 Arcane Signet|DMC
+1 Lightning Axe|SOI|[170]
+1 Lightning Blast|TMP|[185]
+1 Lightning Bolt|M10|[146]
+1 Lightning Helix|RAV|[213]
+1 Lightning Strike|M15|[155]
+1 Mangara's Blessing|MIR|[25]
+1 Mine Collapse|MH2|[135]
+1 Molten Blast|ZNR|[149]
+17 Mountain|DOM|[263]
+1 Wind-Scarred Crag|FDN
+1 Evolving Wilds|FDN
+1 Command Tower|DMC
+1 Obliterating Bolt|BRO|[145]
+1 Oust|ROE|[40]
+14 Plains|DOM|[251]
+1 Primal Amulet|XLN
+1 Rain of Embers|RAV|[138]
+1 Rending Flame|VOW|[175]
+1 Response|CMR|[449]
+1 Rite of the Dragoncaller|FDN|[92]
+1 Roast|DTK|[151]
+1 Sacred Fire|MID|[239]
+1 Sol Ring|DMC
+1 Sacred Peaks|DMU|[254]
+1 Scorching Shot|OTJ|[145]
+1 Scourge of the Nobilis|EVE|[146]
+1 Shock|STH|[98]
+1 Spirit Link|DMR|[29]
+1 Stoke the Flames|MOM|[166]
+1 Sudden Impact|PD2|[25]
+1 Survival Cache|IMA|[34]
+1 Swelter|JUD|[101]
+1 Thermo-Alchemist|MID|[164]
+1 Torch the Witness|MKM|[146]
+1 Twinblade Paladin|FDN|[503]
+1 Union of the Third Path|BRO|[31]
+1 Vertigo|ICE|[222]
+1 Volcanic Spite|MOM|[170]
+1 Wrap in Flames|MM2|[136]
+1 Yamabushi's Flame|CHK|[198]
+1 Yamabushi's Storm|CHK|[199]

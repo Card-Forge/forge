@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Milhouse_van_Houten
+Title=Milhouse_van_Houten
+Icon=Milhouse_van_Houten.jpg
+Difficulty=Medium
+Description=./Standard/Aetherdrift/Jacob_Milchman_-_Golgari_Graveyard_(Standard,_#2381230).dck
+Deck Type=constructed
+
+[Main]
+3 Molt Tender
+4 Cenote Scout
+4 Gnawing Vermin
+4 Souls of the Lost
+2 Harvester of Misery
+4 Overlord of the Balemurk
+4 Hollow Marauder
+4 Huskburster Swarm
+2 Chitin Gravestalker
+4 Overwhelming Remorse
+4 Up the Beanstalk
+4 Swamp
+4 Underground Mortuary
+4 Wastewood Verge
+2 Forest
+4 Blooming Marsh
+3 Llanowar Wastes
+[Sideboard]
+2 Haywire Mite
+4 Scrapshooter
+1 Duress
+1 Cut Down
+1 Harvester of Misery
+1 Starving Revenant
+2 Obstinate Baloth
+3 Terror Tide

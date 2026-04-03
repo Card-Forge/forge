@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Legolas
+Title=Legolas
+Icon=Legolas.jpg
+Difficulty=Easy
+Description=Journey_into_Nyx/States-Champs_Virginia_&_West_Virginia/Charley_Murdock_-_W-G_Aggro_(Standard,_#75422).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Brimaz, King of Oreskos
+4 Experiment One
+4 Fleecemane Lion
+4 Soldier of the Pantheon
+4 Voice of Resurgence
+4 Advent of the Wurm
+2 Rootborn Defenses
+4 Selesnya Charm
+4 Banishing Light
+1 Dictate of Heliod
+2 Ajani, Mentor of Heroes
+7 Forest
+9 Plains
+4 Temple Garden
+4 Temple of Plenty
+[Sideboard]
+3 Banisher Priest
+3 Celestial Flare
+2 Centaur Healer
+2 Mistcutter Hydra
+2 Sundering Growth
+2 Unflinching Courage

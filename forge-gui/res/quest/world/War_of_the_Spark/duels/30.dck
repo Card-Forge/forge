@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Gambit
+Title=Gambit
+Icon=Gambit.jpg
+Difficulty=Medium
+Description=./Standard/War_of_the_Spark/Andrew_Cuneo_-_Izzet_Wizards_(Standard,_#800519).dck
+Deck Type=constructed
+
+[Main]
+4 Adeliz, the Cinder Wind
+4 Augur of Bolas
+4 Dreadhorde Arcanist
+3 Goblin Electromancer
+2 Naru Meha, Master Wizard
+4 Opt
+1 Reckless Rage
+4 Shock
+4 Wizard's Lightning
+4 Wizard's Retort
+4 Chart a Course
+8 Island
+6 Mountain
+4 Steam Vents
+4 Sulfur Falls
+[Sideboard]
+3 Crackling Drake
+2 Entrancing Melody
+2 Fiery Cannonade
+1 God-Eternal Kefnet
+1 Lava Coil
+4 Negate
+1 Reckless Rage
+1 Shivan Fire
