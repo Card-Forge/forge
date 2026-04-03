@@ -106,9 +106,17 @@ public abstract class ImageFetcher {
         if (imageKey.startsWith(ImageKeys.BOOSTER_PREFIX)) {
             final ArrayList<String> downloadUrls = new ArrayList<>();
             final String filename = imageKey.substring(ImageKeys.BOOSTER_PREFIX.length());
-            // TODO Update image server or alternative hosting
-            downloadUrls.add("https://downloads.cardforge.org/images/products/boosters/" + filename);
-            System.out.println("Fetching from " + downloadUrls);
+            // Look up the download URL from booster-images.txt
+            for (String line : FileUtil.readFile(ForgeConstants.IMAGE_LIST_QUEST_BOOSTERS_FILE)) {
+                if (line.endsWith("/" + filename)) {
+                    downloadUrls.add(line);
+                    break;
+                }
+            }
+            if (downloadUrls.isEmpty()) {
+                System.err.println("No booster image URL found for: " + filename);
+                return;
+            }
 
 
             FileUtil.ensureDirectoryExists(ForgeConstants.CACHE_BOOSTER_PICS_DIR);
