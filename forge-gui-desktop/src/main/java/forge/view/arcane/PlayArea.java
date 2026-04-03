@@ -74,8 +74,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     // changes, but this does NOT cover undeclare during InputAttack since
     // cards aren't actually tapped yet — click handlers must clean up.
     private final Set<Integer> splitCardIds = new HashSet<>();
-    // Blocker card ID → attacker card ID; rebuilt each doLayout() from CombatView.
-    private Map<Integer, Integer> blockerAssignments = Collections.emptyMap();
+    // Combat pairing map; rebuilt each doLayout() from CombatView.
+    private Map<Integer, Integer> combatAssignments = Collections.emptyMap();
     // Coalesces multiple invokeLater(doLayout) calls within a single EDT cycle.
     private boolean layoutPending;
 
@@ -176,9 +176,12 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                     insertIndex = i + 1;
                     continue;
                 }
-                // Blockers assigned to different attackers can't group together
-                if (blockerAssignments.getOrDefault(card.getId(), 0)
-                        != blockerAssignments.getOrDefault(firstCard.getId(), 0)) {
+                // Cards with different combat pairings can't group together.
+                // Must unbox to int — != on boxed Integer compares references,
+                // not values, for IDs >= 128.
+                int cardAssign = combatAssignments.getOrDefault(card.getId(), 0);
+                int firstAssign = combatAssignments.getOrDefault(firstCard.getId(), 0);
+                if (cardAssign != firstAssign) {
                     insertIndex = i + 1;
                     continue;
                 }
@@ -287,17 +290,27 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         return placeholder;
     }
 
-    private Map<Integer, Integer> buildBlockerAssignments() {
+    // Builds a combat-assignment map used to prevent grouping of cards with
+    // different combat pairings. Maps blocker→attacker ID (so blockers of
+    // different attackers stay separate) AND attacker→hash of blocker IDs
+    // (so attackers with different blocker sets stay separate).
+    private Map<Integer, Integer> buildCombatAssignments() {
         if (getMatchUI().getGameView() == null) { return Collections.emptyMap(); }
         CombatView combat = getMatchUI().getGameView().getCombat();
         if (combat == null) { return Collections.emptyMap(); }
         Map<Integer, Integer> assignments = new HashMap<>();
         for (CardView attacker : combat.getAttackers()) {
             FCollection<CardView> blockers = combat.getPlannedBlockers(attacker);
-            if (blockers == null) { continue; }
+            if (blockers == null || blockers.isEmpty()) { continue; }
             for (CardView blocker : blockers) {
                 assignments.put(blocker.getId(), attacker.getId());
             }
+            // Also distinguish attackers by their blocker set
+            int blockerHash = 0;
+            for (CardView blocker : blockers) {
+                blockerHash ^= blocker.getId();
+            }
+            assignments.put(attacker.getId(), blockerHash);
         }
         return assignments;
     }
@@ -306,7 +319,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     public final void doLayout() {
         this.makeTokenRow = FModel.getPreferences().getPrefBoolean(FPref.UI_TOKENS_IN_SEPARATE_ROW);
         updateGroupScope();
-        blockerAssignments = buildBlockerAssignments();
+        combatAssignments = buildCombatAssignments();
         final Rectangle rect = this.getScrollPane().getVisibleRect();
 
         this.playAreaWidth = rect.width;
@@ -821,7 +834,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     public void update() {
         FThreads.assertExecutedByEdt(true);
         splitCardIds.clear();
-        blockerAssignments = Collections.emptyMap();
+        combatAssignments = Collections.emptyMap();
         recalculateCardPanels(model, zone);
     }
 
