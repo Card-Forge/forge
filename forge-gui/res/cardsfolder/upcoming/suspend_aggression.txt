@@ -1,10 +1,9 @@
 Name:Suspend Aggression
 ManaCost:1 R W
 Types:Instant
-A:SP$ Pump | ValidTgts$ Permanent.nonLand | ValidTgtDesc$ nonland permanent | SubAbility$ DBExile
-SVar:DBExile:DB$ ChangeZone | ThisDefinedAndTgts$ Card.TopLibrary+YouOwn | Origin$ Battlefield,Library | Destination$ Exile | SubAbility$ DBRepeatEach
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | ValidTgtDesc$ nonland permanent | SThisDefinedAndTgts$ Card.TopLibrary+YouOwn | Origin$ Battlefield,Library | Destination$ Exile | SubAbility$ DBRepeatEach
 SVar:DBRepeatEach:DB$ RepeatEach | RepeatCards$ Card.IsRemembered | RepeatSubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | StaticAbilities$ SusPlay | Duration$ Permanent | ExileOnMoved$ Exile | RememberObjects$ Remembered & RememberedOwner | Triggers$ RemoveTrigger | SubAbility$ DBCleanup
+SVar:DBEffect:DB$ Effect | StaticAbilities$ SusPlay | Duration$ Permanent | ExileOnMoved$ Exile | RememberObjects$ Remembered & RememberedOwner | Triggers$ RemoveTrigger
 SVar:SusPlay:Mode$ Continuous | Affected$ Card.IsRemembered | MayPlay$ True | MayPlayPlayer$ CardOwner | AffectedZone$ Exile | Description$ For each of those cards, its owner may play it until the end of their next turn.
 SVar:RemoveTrigger:Mode$ Phase | Phase$ Cleanup | ValidPlayer$ Player.IsRemembered | Static$ True | Execute$ TrigExile
 SVar:TrigExile:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
