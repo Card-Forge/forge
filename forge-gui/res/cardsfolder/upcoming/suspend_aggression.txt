@@ -1,0 +1,13 @@
+Name:Suspend Aggression
+ManaCost:1 R W
+Types:Instant
+A:SP$ Pump | ValidTgts$ Permanent.nonLand | ValidTgtDesc$ nonland permanent | RememberPumped$ True | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | ValidCards$ Card.TopLibrary+YouOwn | PumpZone$ Library | RememberPumped$ True | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield,Library | Destination$ Exile | Defined$ Remembered | SubAbility$ DBRepeatEach
+SVar:DBRepeatEach:DB$ RepeatEach | RepeatCards$ Card.IsRemembered | RepeatSubAbility$ DBEffect | SubAbility$ DBCleanup
+SVar:DBEffect:DB$ Effect | StaticAbilities$ SusPlay | Duration$ Permanent | ExileOnMoved$ Exile | RememberObjects$ Remembered & RememberedOwner | Triggers$ RemoveTrigger | SubAbility$ DBCleanup
+SVar:SusPlay:Mode$ Continuous | Affected$ Card.IsRemembered | MayPlay$ True | MayPlayPlayer$ CardOwner | AffectedZone$ Exile | Description$ For each of those cards, its owner may play it until the end of their next turn.
+SVar:RemoveTrigger:Mode$ Phase | Phase$ Cleanup | ValidPlayer$ Player.IsRemembered | Static$ True | Execute$ TrigExile
+SVar:TrigExile:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Exile target nonland permanent and the top card of your library. For each of those cards, its owner may play it until the end of their next turn.
