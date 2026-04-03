@@ -45,7 +45,7 @@ public final class HapticEngine {
         if (!FModel.getPreferences().getPrefBoolean(pref)) return;
         int intensity = getIntensity(FPref.UI_VIBRATE_DEVICE_INTENSITY);
         if (intensity <= 0) return;
-        GuiBase.getInterface().vibrate(scale(baseDeviceMs, intensity));
+        GuiBase.getInterface().vibrate(baseDeviceMs, intensity * 255 / 100);
     }
 
     public static void vibrate(FPref pref, int baseDeviceMs, int baseControllerMs, float controllerAmplitude) {
@@ -53,11 +53,11 @@ public final class HapticEngine {
         if (!FModel.getPreferences().getPrefBoolean(pref)) return;
         int deviceIntensity = getIntensity(FPref.UI_VIBRATE_DEVICE_INTENSITY);
         if (baseDeviceMs > 0 && deviceIntensity > 0) {
-            GuiBase.getInterface().vibrate(scale(baseDeviceMs, deviceIntensity));
+            GuiBase.getInterface().vibrate(baseDeviceMs, deviceIntensity * 255 / 100);
         }
         int controllerIntensity = getIntensity(FPref.UI_VIBRATE_CONTROLLER_INTENSITY);
         if (baseControllerMs > 0 && controllerIntensity > 0) {
-            GuiBase.getInterface().vibrateController(scale(baseControllerMs, controllerIntensity), controllerAmplitude);
+            GuiBase.getInterface().vibrateController(baseControllerMs, controllerAmplitude * controllerIntensity / 100f);
         }
     }
 
@@ -67,9 +67,5 @@ public final class HapticEngine {
         } catch (NumberFormatException e) {
             return 100;
         }
-    }
-
-    private static int scale(int baseMs, int intensity) {
-        return Math.max(1, baseMs * intensity / 100);
     }
 }

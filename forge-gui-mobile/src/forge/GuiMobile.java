@@ -374,9 +374,9 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public void vibrate(int milliseconds) {
-        if (milliseconds > 0) {
-            Gdx.input.vibrate(milliseconds);
+    public void vibrate(int milliseconds, int amplitude) {
+        if (milliseconds > 0 && amplitude > 0) {
+            Gdx.input.vibrate(milliseconds, amplitude, true);
         }
     }
 

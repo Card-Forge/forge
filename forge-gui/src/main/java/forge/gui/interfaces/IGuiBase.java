@@ -69,6 +69,6 @@ public interface IGuiBase {
     /** Returns true if any currently active game is a network game. */
     boolean hasNetGame();
 
-    default void vibrate(int milliseconds) {}
+    default void vibrate(int milliseconds, int amplitude) {}
     default void vibrateController(int milliseconds, float amplitude) {}
 }
