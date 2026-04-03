@@ -1,7 +1,7 @@
 Name:Group Project
 ManaCost:1 W
 Types:Sorcery
-A:SP$ Token | TokenScript$ rw_2_2_spirit | TokenOwner$ You | SpellDescription$ Create a 1/1 green Saproling creature token.
+A:SP$ Token | TokenScript$ rw_2_2_spirit | TokenOwner$ You | SpellDescription$ Create a 2/2 red and white Spirit creature token.
 K:Flashback:tapXType<3/Creature>
 DeckHas:Ability$Token
 Oracle:Create a 2/2 red and white Spirit creature token.\nFlashback—Tap three untapped creatures you control. (You may cast this card from your graveyard for its flashback cost. Then exile it.)
