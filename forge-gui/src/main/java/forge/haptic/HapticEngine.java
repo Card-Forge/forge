@@ -41,14 +41,10 @@ public final class HapticEngine {
     }
 
     public static void vibrate(FPref pref, int baseDeviceMs) {
-        if (baseDeviceMs <= 0) return;
-        if (!FModel.getPreferences().getPrefBoolean(pref)) return;
-        int intensity = getIntensity(FPref.UI_VIBRATE_DEVICE_INTENSITY);
-        if (intensity <= 0) return;
-        GuiBase.getInterface().vibrate(baseDeviceMs, intensity * 255 / 100);
+        vibrate(pref, baseDeviceMs, 0);
     }
 
-    public static void vibrate(FPref pref, int baseDeviceMs, int baseControllerMs, float controllerAmplitude) {
+    public static void vibrate(FPref pref, int baseDeviceMs, int baseControllerMs) {
         if (baseDeviceMs <= 0 && baseControllerMs <= 0) return;
         if (!FModel.getPreferences().getPrefBoolean(pref)) return;
         int deviceIntensity = getIntensity(FPref.UI_VIBRATE_DEVICE_INTENSITY);
@@ -57,7 +53,7 @@ public final class HapticEngine {
         }
         int controllerIntensity = getIntensity(FPref.UI_VIBRATE_CONTROLLER_INTENSITY);
         if (baseControllerMs > 0 && controllerIntensity > 0) {
-            GuiBase.getInterface().vibrateController(baseControllerMs, controllerAmplitude * controllerIntensity / 100f);
+            GuiBase.getInterface().vibrateController(baseControllerMs, controllerIntensity / 100f);
         }
     }
 

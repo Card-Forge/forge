@@ -1046,7 +1046,7 @@ public class MapStage extends GameStage {
                     break;
                 } else if (actor instanceof RewardSprite) {
                     freezeAllEnemyBehaviors = true;
-                    HapticEngine.vibrate(FPref.UI_VIBRATE_ON_ADVENTURE_REWARD, 50, 100, 1f);
+                    HapticEngine.vibrate(FPref.UI_VIBRATE_ON_ADVENTURE_REWARD, 50, 100);
                     RewardSprite RS = (RewardSprite) actor;
                     Array<Reward> rewards = RS.getRewards();
 
@@ -1093,7 +1093,7 @@ public class MapStage extends GameStage {
         player.playEffect(Paths.EFFECT_SPARKS, 0.5f);
         mob.setAnimation(CharacterSprite.AnimationTypes.Attack);
         SoundSystem.instance.play(SoundEffectType.Block, false);
-        HapticEngine.vibrate(FPref.UI_VIBRATE_ON_ENEMY_ENCOUNTER, 50, mob.getData().boss ? 400 : 200, 1f);
+        HapticEngine.vibrate(FPref.UI_VIBRATE_ON_ENEMY_ENCOUNTER, 50, mob.getData().boss ? 400 : 200);
         Forge.advFreezePlayerControls = true;
         player.clearCollisionHeight();
         startPause(0.8f, () -> {
