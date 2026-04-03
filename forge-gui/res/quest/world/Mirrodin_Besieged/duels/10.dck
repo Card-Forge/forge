@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Secret Squirrel
+Title=Secret Squirrel
+Icon=Secret Squirrel.jpg
+Difficulty=Medium
+Description=Mirrodin_Besieged/SCG_Invitational_Qualifier_-_Cornelius/John_Morris_-_Valakut_(Standard,_#12433).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Avenger of Zendikar
+3 Inferno Titan
+2 Oracle of Mul Daya
+4 Overgrown Battlement
+4 Primeval Titan
+4 Harrow
+4 Summoning Trap
+4 Explore
+2 Green Sun's Zenith
+4 Khalni Heart Expedition
+1 Evolving Wilds
+6 Forest
+2 Misty Rainforest
+12 Mountain
+2 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+1 Verdant Catacombs
+[Sideboard]
+3 Acidic Slime
+2 Koth of the Hammer
+3 Pyroclasm
+2 Slagstorm
+1 Terastodon
+2 Tumble Magnet

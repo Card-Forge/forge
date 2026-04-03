@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Cow
+Title=Cow
+Icon=Cow.jpg
+Difficulty=Easy
+Description=Fate_Reforged/Standard_Daily_#8068494/Hoey07_-_Sultai_Midrange_(Standard,_#203162).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Courser of Kruphix
+4 Elvish Mystic
+2 Fleecemane Lion
+4 Genesis Hydra
+4 Polukranos, World Eater
+4 Sylvan Caryatid
+1 Temur Sabertooth
+4 Voyaging Satyr
+4 Whisperwood Elemental
+1 Banishing Light
+4 Mastery of the Unseen
+1 Blossoming Sands
+9 Forest
+4 Nykthos, Shrine to Nyx
+2 Plains
+4 Temple of Plenty
+4 Windswept Heath
+[Sideboard]
+2 Boon Satyr
+2 Glare of Heresy
+1 Hornet Nest
+1 Hornet Queen
+2 Hunt the Hunter
+1 Last Breath
+2 Reclamation Sage
+1 Setessan Tactics
+1 Valorous Stance

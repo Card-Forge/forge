@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Robot28
+Title=Robot28
+Icon=Abiku.jpg
+Difficulty=Medium
+Description=Esper Tokens 
+Deck Type=constructed
+
+[Main]
+4 Anointer Priest
+4 Champion of Wits
+3 Sacred Cat
+2 The Scarab God
+3 Treasure Map
+4 Fatal Push
+3 Fumigate
+2 Start // Finish
+4 Anointed Procession
+4 Hidden Stockpile
+3 Legion's Landing
+4 Concealed Courtyard
+3 Drowned Catacomb
+4 Evolving Wilds
+3 Glacial Fortress
+1 Island
+3 Plains
+2 Shefet Dunes
+4 Swamp
+[Sideboard]
+4 Duress
+3 Harsh Scrutiny
+2 Lost Legacy
+3 Negate
+3 Sunscourge Champion

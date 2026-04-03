@@ -36,13 +36,11 @@ public abstract class CostPartWithList extends CostPart {
     private boolean intrinsic = true;
 
     protected final CardZoneTable table = new CardZoneTable();
-    // set is here because executePayment() adds card to list, while ai's decide payment does the same thing.
-    // set allows to avoid duplication
 
     public final CardCollectionView getLKIList() {
         return lkiList;
     }
-
+    // Set is here to avoid duplication because executePayment() adds card to list, while ai's decide payment does the same thing
     public final CardCollectionView getCardList() {
     	return cardList;
     }
@@ -120,11 +118,14 @@ public abstract class CostPartWithList extends CostPart {
     protected boolean executePayment(Player payer, SpellAbility ability, CardCollectionView targetCards, final boolean effect) {
         // need to refresh statics (e.g. sacrificing Omnath, Locus of Mana to Momentous Fall could end up with less toughness)
         payer.getGame().getAction().checkStaticAbilities();
+        // costs are paid sequentially, so need to make sure no to miss any LTB from zone changing hosts of previous parts
+        payer.getGame().getTriggerHandler().collectTriggerForWaiting();
         table.setLastStateBattlefield(payer.getGame().copyLastStateBattlefield());
         table.setLastStateGraveyard(payer.getGame().copyLastStateGraveyard());
 
         handleBeforePayment(payer, ability, targetCards);
-        if (canPayListAtOnce()) { // This is used by reveal. Without it when opponent would reveal hand, you'll get N message boxes.
+        // Used by reveal: without it when opponent would reveal hand, you'll get N message boxes
+        if (canPayListAtOnce()) {
             for (Card c: targetCards) {
                 lkiList.add(CardCopyService.getLKICopy(c));
             }

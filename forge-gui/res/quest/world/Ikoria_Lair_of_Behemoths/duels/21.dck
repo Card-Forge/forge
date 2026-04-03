@@ -1,0 +1,52 @@
+[duel]
+[metadata]
+Name=Betty Rubble
+Title=Betty Rubble
+Icon=Betty Rubble.jpg
+Difficulty=Easy
+Description=./Standard/Ikoria_Lair_of_Behemoths/Agung_Karym_-_Four-color_Zoo_(Standard,_#977390).dck
+Deck Type=constructed
+
+[Main]
+1 Quartzwood Crasher
+2 Gruul Spellbreaker
+2 Tolsimir, Friend to Wolves
+3 Nightpack Ambusher
+4 Leyline Prowler
+4 Zhur-Taa Goblin
+4 Paradise Druid
+1 The Great Henge
+2 Collision // Colossus
+2 Domri's Ambush
+1 Bastion of Remembrance
+2 Rhythm of the Wild
+2 Elspeth Conquers Death
+1 Liliana, Dreadhorde General
+1 Ugin, the Ineffable
+2 Garruk, Cursed Huntsman
+2 Vraska, Golgari Queen
+1 Indatha Triome
+1 Rugged Highlands
+1 Stomping Ground
+1 Temple of Abandon
+1 Jungle Hollow
+1 Overgrown Tomb
+1 Temple of Malady
+1 Blossoming Sands
+1 Temple Garden
+1 Temple of Malice
+1 Gruul Guildgate
+1 Savai Triome
+1 Guildmages' Forum
+2 Swamp
+3 Mountain
+3 Evolving Wilds
+4 Forest
+[Sideboard]
+1 Nightpack Ambusher
+1 Voracious Hydra
+1 Hydroid Krasis
+2 Deathsprout
+2 Gargos, Vicious Watcher
+2 Eerie Ultimatum
+2 Chromatic Lantern

@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Conan the Barbarian
+Title=Conan the Barbarian
+Icon=Conan the Barbarian.jpg
+Difficulty=Easy
+Description=./Standard/March_of_the_Machine/Alexander_Hayne_-_Grixis_Midrange_(Standard,_#1636228).dck
+Deck Type=constructed
+
+[Main]
+1 Bladecoil Serpent
+4 Fable of the Mirror-Breaker
+2 Sheoldred, the Apocalypse
+4 Corpse Appraiser
+4 Bloodtithe Harvester
+3 Reckoner Bankbuster
+1 Abrade
+3 Make Disappear
+4 Go for the Throat
+3 Cut Down
+4 Invoke Despair
+1 Brotherhood's End
+3 Shivan Reef
+4 Blackcleave Cliffs
+3 Shipwreck Marsh
+1 Underground River
+1 Takenuma, Abandoned Mire
+1 Otawara, Soaring City
+1 Sulfurous Springs
+2 Darkslick Shores
+2 Swamp
+4 Xander's Lounge
+4 Haunted Ridge
+[Sideboard]
+1 Obliterating Bolt
+1 Gix's Command
+1 Soul Transfer
+1 Cut Down
+2 Lithomantic Barrage
+2 Duress
+2 Disdainful Stroke
+1 Bladecoil Serpent
+1 Reckoner Bankbuster
+2 Negate
+1 Abrade

@@ -51,7 +51,7 @@
 	{
 	   &quot;text&quot;: &quot;With three great dying roars, the colossal dinosaur falls back. The whole valley shakes with the impact as an entire grove of trees is crushed under its weight.&quot;,
 	   &quot;options&quot;: [{
-		  &quot;name&quot;: &quot;(Continue)&quot;, }]
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Strider Harness|RIX&quot;, &quot;Jungle Shrine|LCC&quot;, &quot;The Skullspore Nexus|LCI&quot;, &quot;Poetic Ingenuity|LCI&quot;]}"/>

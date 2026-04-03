@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Picard
+Title=Picard
+Icon=Picard.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Crimson_Vow/Alberto_Porras_López_-_Mono-White_Aggro_❄️_(Standard,_#1257858).dck
+Deck Type=constructed
+
+[Main]
+2 Sungold Sentinel
+2 Thalia, Guardian of Thraben
+2 Skyclave Apparition
+2 Reidane, God of the Worthy
+3 Intrepid Adversary
+3 Brutal Cathar
+3 Adeline, Resplendent Cathar
+4 Hopeful Initiate
+4 Luminarch Aspirant
+4 Usher of the Fallen
+4 Stonebinder's Familiar
+2 Fateful Absence
+2 Paladin Class
+1 Cave of the Frost Dragon
+4 Faceless Haven
+18 Snow-Covered Plains
+[Sideboard]
+1 Elite Spellbinder
+2 Thalia, Guardian of Thraben
+4 Portable Hole

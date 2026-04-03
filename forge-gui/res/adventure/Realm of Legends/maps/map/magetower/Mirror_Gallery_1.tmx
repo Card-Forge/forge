@@ -3,9 +3,6 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Dragonbroods' Relic&quot; ]}"/>
- </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../../../../common/maps/tileset/buildingsbosses.tsx"/>
@@ -46,7 +43,7 @@
   </object>
   <object id="65" template="../../../../common/maps/obj/entry_down.tx" x="362.625" y="489.625" width="46" height="21.5">
    <properties>
-    <property name="teleport" value="../Realm of Legends/maps/map/cave/Prison_of_the_Ur-Dragon_f1.tmx"/>
+    <property name="teleport" value="../Realm of Legends/maps/map/magetower/Mirror_Gallery_2.tmx"/>
    </properties>
   </object>
   <object id="85" template="../../../../common/maps/obj/dialog.tx" x="333.32" y="716.027" width="85.697" height="23.1913" visible="1">
@@ -64,27 +61,27 @@ Your manasight stone blazes with power, near-blindingly bright.&quot;,
   </object>
   <object id="104" template="../../../../common/maps/obj/entry_down.tx" x="362.833" y="205.583" width="46" height="21.5">
    <properties>
-    <property name="teleport" value="../Realm of Legends/maps/map/cave/Prison_of_the_Ur-Dragon_f1.tmx"/>
+    <property name="teleport" value="../Realm of Legends/maps/map/magetower/Mirror_Gallery_W.tmx"/>
    </properties>
   </object>
   <object id="105" template="../../../../common/maps/obj/entry_down.tx" x="89.25" y="395" width="46" height="21.5">
    <properties>
-    <property name="teleport" value="../Realm of Legends/maps/map/cave/Prison_of_the_Ur-Dragon_f1.tmx"/>
+    <property name="teleport" value="../Realm of Legends/maps/map/magetower/Mirror_Gallery_G.tmx"/>
    </properties>
   </object>
   <object id="108" template="../../../../common/maps/obj/entry_down.tx" x="634.5" y="396.5" width="46" height="21.5">
    <properties>
-    <property name="teleport" value="../Realm of Legends/maps/map/cave/Prison_of_the_Ur-Dragon_f1.tmx"/>
+    <property name="teleport" value="../Realm of Legends/maps/map/magetower/Mirror_Gallery_U.tmx"/>
    </properties>
   </object>
   <object id="110" template="../../../../common/maps/obj/entry_down.tx" x="634" y="620" width="46" height="21.5">
    <properties>
-    <property name="teleport" value="../Realm of Legends/maps/map/cave/Prison_of_the_Ur-Dragon_f1.tmx"/>
+    <property name="teleport" value="../Realm of Legends/maps/map/magetower/Mirror_Gallery_B.tmx"/>
    </properties>
   </object>
   <object id="112" template="../../../../common/maps/obj/entry_down.tx" x="88.75" y="620.5" width="46" height="21.5">
    <properties>
-    <property name="teleport" value="../Realm of Legends/maps/map/cave/Prison_of_the_Ur-Dragon_f1.tmx"/>
+    <property name="teleport" value="../Realm of Legends/maps/map/magetower/Mirror_Gallery_R.tmx"/>
    </properties>
   </object>
   <object id="114" template="../../../../common/maps/obj/enemy.tx" gid="11419" x="367.083" y="549.5">

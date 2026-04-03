@@ -938,11 +938,8 @@ public class GameAction {
     }
 
     public final void moveToCommand(final Card effect, final SpellAbility sa) {
-        moveToCommand(effect, sa, AbilityKey.newMap());
-    }
-    public final void moveToCommand(final Card effect, final SpellAbility sa, Map<AbilityKey, Object> params) {
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        moveTo(ZoneType.Command, effect, sa, params);
+        moveTo(ZoneType.Command, effect, sa, null);
         effect.updateStateForView();
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
     }
@@ -1509,7 +1506,7 @@ public class GameAction {
                     if (loyal < beeble) {
                         GameEntityCounterTable counterTable = new GameEntityCounterTable();
                         c.addCounter(CounterEnumType.LOYALTY, beeble - loyal, c.getController(), counterTable);
-                        counterTable.replaceCounterEffect(game, null, false);
+                        counterTable.replaceCounterEffect(game, null);
                     } else if (loyal > beeble) {
                         c.subtractCounter(CounterEnumType.LOYALTY, loyal - beeble, null);
                     }
@@ -2785,7 +2782,7 @@ public class GameAction {
         damageMap.triggerDamageDoneOnce(isCombat, game);
         damageMap.clear();
 
-        counterTable.replaceCounterEffect(game, cause, !isCombat);
+        counterTable.replaceCounterEffect(game, cause);
         counterTable.clear();
     }
 

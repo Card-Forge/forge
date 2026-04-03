@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Iron Man
+Title=Iron Man
+Icon=Iron Man.jpg
+Difficulty=Very Hard
+Description=../Modern/Journey_into_Nyx/SCG_Invitational_Qualifier_-_Glen_Burnie,_MD/Mark_Talley-Sonotnice_-_Red_Deck_Wins_(Modern,_#79048).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+3 Grim Lavamancer
+4 Hellspark Elemental
+1 Shrine of Burning Rage
+3 Flame Javelin
+4 Lightning Bolt
+3 Searing Blaze
+1 Shard Volley
+4 Skullcrack
+4 Lava Spike
+2 Pillar of Flame
+4 Rift Bolt
+19 Mountain
+[Sideboard]
+3 Blood Moon
+2 Combust
+2 Dragon's Claw
+1 Grafdigger's Cage
+1 Pithing Needle
+1 Ratchet Bomb
+3 Smash to Smithereens
+1 Torpor Orb
+1 Tunnel Ignus

@@ -4,7 +4,7 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Syndicate Guildmage&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Orzhov Advokist&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -12,7 +12,7 @@
  <tileset firstgid="28289" source="../../../../common/maps/tileset/dungeon/DarkAbbeyTiles.tsx"/>
  <layer id="6" name="Collision" width="30" height="27">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUDFcQzcvAsIsHFUfxQsRhNDZ5SoEsD4R240TQ0jwQcRiNLAcC0jzUsxcZgMyF+ReXPDXsJcUcUtXjM4dUQMtwRo5fWtiLK73C7B0J6ZkQGG7pmR7paqDTMyjNwGj09IwsR+30TAoYTumqlpuBYQ+S2F4gu54bVQ017EUvi3ah+UcWi/wuKtg73AAAt5gtZA==
+   eJztlG0KgCAMhoX6E60TRNfpEHWW6F5Sd6sho1naB82C8oExmOK72ZtKRSKRr9IWSmmwoylMnbJr/S4VmFxnSy7B1CnzNaQEOV0Onkvz+tYldK+cMyTh5j0i5D3z7xtC1+dX0v2Dn/fqkrroUYyz/UjqcqiPkL56W9cV5Gf0k4YlS/l5PS/VfWA/kD6rK+krTpfPfbD/d5yjz+09Errrt0jD9t1w7YnYTOIxN1c=
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="27">
@@ -55,7 +55,7 @@
   </object>
   <object id="58" template="../../../../common/maps/obj/enemy.tx" x="195.648" y="321.313">
    <properties>
-    <property name="enemy" value="Karlov"/>
+    <property name="enemy" value="Obzedat"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>

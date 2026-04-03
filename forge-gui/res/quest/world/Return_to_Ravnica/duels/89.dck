@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Wonder Woman
+Title=Wonder Woman
+Icon=Wonder Woman.jpg
+Difficulty=Hard
+Description=../Modern/Return_to_Ravnica/Magic-League_Modern_Trial_10-01-2013/Rechtern_-_Red_Deck_Wins_(Modern,_#43819).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Ball Lightning
+3 Deathrite Shaman
+4 Goblin Guide
+3 Hellspark Elemental
+2 Keldon Marauders
+4 Vexing Devil
+4 Lightning Bolt
+3 Searing Blaze
+2 Shard Volley
+4 Bump in the Night
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+4 Blackcleave Cliffs
+2 Blood Crypt
+6 Mountain
+4 Scalding Tarn
+[Sideboard]
+3 Blood Moon
+2 Dragon's Claw
+4 Mindbreak Trap
+3 Rakdos Charm
+3 Smash to Smithereens

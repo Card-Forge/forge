@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Tolsimir
+Title=Tolsimir
+Icon=Tolsimir.jpg
+Difficulty=Hard
+Description=./Modern/War_of_the_Spark/Angelo_Schembri_-_Infect_(Modern,_#800303).dck
+Deck Type=constructed
+
+[Main]
+1 Dryad Arbor
+1 Spellskite
+4 Noble Hierarch
+4 Glistener Elf
+1 Birds of Paradise
+4 Blighted Agent
+4 Vines of Vastwood
+4 Blossoming Defense
+3 Become Immense
+1 Dismember
+4 Might of Old Krosa
+2 Groundswell
+2 Spell Pierce
+4 Mutagenic Growth
+3 Rancor
+2 Breeding Pool
+2 Forest
+2 Pendelhaven
+4 Wooded Foothills
+4 Windswept Heath
+4 Inkmoth Nexus
+[Sideboard]
+1 Grafdigger's Cage
+1 Spellskite
+2 Shapers' Sanctuary
+3 Lazotep Plating
+1 Dismember
+2 Nature's Claim
+1 Spell Pierce
+2 Dissenter's Deliverance
+1 Twisted Image
+1 Nissa, Voice of Zendikar

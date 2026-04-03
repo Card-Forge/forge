@@ -88,8 +88,7 @@ public class TokenAi extends SpellAbilityAi {
                 x = ComputerUtilMana.getConvergeCount(sa, ai);
             }
             if (sa.getSVar("X").equals("Count$xPaid")) {
-                // Set PayX here to maximum value.
-                x = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
+                x = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
                 sa.getRootAbility().setXManaCostPaid(x);
             }
             if (x <= 0) {
@@ -257,20 +256,21 @@ public class TokenAi extends SpellAbilityAi {
                 if (tgtRoleAura(ai, sa, actualToken, mandatory)) {
                     // Targeting handled in tgtRoleAura
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                } else {
-                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 }
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
 
-            if (tgt.canOnlyTgtOpponent()) {
+            if (sa.canTarget(ai)) {
+                sa.getTargets().add(ai);
+            } else if (mandatory || tgt.canOnlyTgtOpponent()) {
                 PlayerCollection targetableOpps = ai.getOpponents().filter(PlayerPredicates.isTargetableBy(sa));
-                if (mandatory && targetableOpps.isEmpty()) {
-                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                if (targetableOpps.isEmpty()) {
+                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 }
                 Player opp = targetableOpps.min(PlayerPredicates.compareByLife());
                 sa.getTargets().add(opp);
             } else {
-                sa.getTargets().add(ai);
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
         }
 
@@ -283,9 +283,7 @@ public class TokenAi extends SpellAbilityAi {
             int x = AbilityUtils.calculateAmount(source, tokenAmount, sa);
             if (sa.getSVar("X").equals("Count$xPaid")) {
                 if (x == 0) { // already paid outside trigger
-                    // Set PayX here to maximum value.
-                    x = ComputerUtilCost.getMaxXValue(sa, ai, true);
-                    sa.setXManaCostPaid(x);
+                    x = ComputerUtilCost.setMaxXValue(sa, ai, true);
                 }
             }
             if (x <= 0 && !mandatory) {

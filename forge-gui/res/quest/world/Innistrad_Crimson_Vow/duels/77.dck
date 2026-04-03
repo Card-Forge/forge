@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Scooby Doo
+Title=Scooby Doo
+Icon=Scooby Doo.jpg
+Difficulty=Hard
+Description=./Modern/Innistrad_Crimson_Vow/Nakano_Itaru_-_BG_Junk_(Modern,_#1241419).dck
+Deck Type=constructed
+
+[Main]
+1 Cemetery Prowler
+1 Questing Beast
+3 Scavenging Ooze
+4 Dark Confidant
+4 Tarmogoyf
+4 Ignoble Hierarch
+1 Assassin's Trophy
+2 Fatal Push
+2 Sudden Edict
+3 Abrupt Decay
+2 Maelstrom Pulse
+4 Thoughtseize
+4 Inquisition of Kozilek
+2 Liliana of the Veil
+2 Liliana, the Last Hope
+2 Grist, the Hunger Tide
+1 Wooded Foothills
+1 Bloodstained Mire
+1 Marsh Flats
+2 Forest
+2 Nurturing Peatland
+2 Swamp
+3 Blooming Marsh
+3 Overgrown Tomb
+4 Verdant Catacombs
+[Sideboard]
+1 Thrun, the Last Troll
+2 Surgical Extraction
+2 Damping Sphere
+2 Chalice of the Void
+2 Veil of Summer
+2 Plague Engineer
+2 Kitchen Finks
+2 Collector Ouphe

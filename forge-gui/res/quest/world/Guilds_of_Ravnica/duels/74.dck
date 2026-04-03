@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Kang
+Title=Kang
+Icon=Kang.jpg
+Difficulty=Hard
+Description=./Modern/Guilds_of_Ravnica/Behruz_Abdolahi_-_Gw_Valuetown_(Modern,_#770263).dck
+Deck Type=constructed
+
+[Main]
+1 Azusa, Lost but Seeking
+4 Birds of Paradise
+4 Courser of Kruphix
+1 Eternal Witness
+4 Knight of the Reliquary
+4 Noble Hierarch
+2 Ramunap Excavator
+2 Scavenging Ooze
+3 Tireless Tracker
+3 Voice of Resurgence
+4 Collected Company
+1 Dromoka's Command
+4 Path to Exile
+1 Worship
+1 Field of Ruin
+4 Forest
+1 Gavony Township
+4 Ghost Quarter
+2 Horizon Canopy
+2 Misty Rainforest
+2 Plains
+2 Temple Garden
+4 Windswept Heath
+[Sideboard]
+1 Bojuka Bog
+2 Choke
+2 Engineered Explosives
+1 Gideon, Ally of Zendikar
+1 Kataki, War's Wage
+2 Knight of Autumn
+1 Settle the Wreckage
+2 Stony Silence
+2 Surgical Extraction
+1 Worship

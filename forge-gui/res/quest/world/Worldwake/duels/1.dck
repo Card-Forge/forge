@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Gunnery Sergeant Hartman
+Title=Gunnery Sergeant Hartman
+Icon=Gunnery Sergeant Hartman.jpg
+Difficulty=Easy
+Description=Worldwake/Worldwake_Game_Day_-_Lost_Harbor_Games_-_Massachusetts/Chris_Ruscitti_-_Vampires_(Standard,_#2158).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Bloodghast
+4 Gatekeeper of Malakir
+2 Kalastria Highborn
+3 Malakir Bloodwitch
+4 Vampire Nighthawk
+3 Vampire Nocturnus
+3 Basilisk Collar
+4 Tendrils of Corruption
+3 Urge to Feed
+2 Grim Discovery
+2 Mind Sludge
+4 Sign in Blood
+4 Marsh Flats
+15 Swamp
+4 Verdant Catacombs
+[Sideboard]
+4 Deathmark
+3 Nemesis Trap
+1 Plains
+3 Vampire Hexmage
+3 Zealous Persecution

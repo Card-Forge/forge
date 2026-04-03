@@ -37,6 +37,8 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         int power = c.getNetCombatDamage();
         final int toughness = c.getNetToughness();
 
+        // TODO getKeyCards
+
         // TODO replace with ReplacementEffect checks
         if (c.hasKeyword("Prevent all combat damage that would be dealt by CARDNAME.")
                 || c.hasKeyword("Prevent all damage that would be dealt by CARDNAME.")
@@ -47,6 +49,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
 
         if (considerPT) {
             value += addValue(power * 15, "power");
+            // TODO factor in marked damage - but probably not always?
             value += addValue(toughness * 10, "toughness: " + toughness);
 
             // because backside is always stronger the potential makes it better than a single faced card

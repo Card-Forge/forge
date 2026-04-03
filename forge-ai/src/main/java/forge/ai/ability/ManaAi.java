@@ -8,7 +8,6 @@ import forge.card.mana.ManaCost;
 import forge.game.CardTraitPredicates;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.*;
-import forge.game.cost.CostPart;
 import forge.game.cost.CostRemoveCounter;
 import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
@@ -159,13 +158,7 @@ public class ManaAi extends SpellAbilityAi {
         int numCounters = 0;
         int manaSurplus = 0;
         if ("Count$xPaid".equals(host.getSVar("X")) && sa.getPayCosts().hasSpecificCostType(CostRemoveCounter.class)) {
-            CounterType ctrType = CounterEnumType.KI; // Petalmane Baku
-            for (CostPart part : sa.getPayCosts().getCostParts()) {
-                if (part instanceof CostRemoveCounter) {
-                    ctrType = ((CostRemoveCounter)part).counter;
-                    break;
-                }
-            }
+            CounterType ctrType = sa.getPayCosts().getCostPartByType(CostRemoveCounter.class).counter;
             numCounters = host.getCounters(ctrType);
             manaReceived = numCounters;
             if (logic.startsWith("ManaRitualBattery.")) {

@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Severus Snape
+Title=Severus Snape
+Icon=Severus Snape.jpg
+Difficulty=Hard
+Description=./Modern/The_Lost_Caverns_of_Ixalan/Abdullah_Caliskan_-_Merfolk_(Modern,_#1978141).dck
+Deck Type=constructed
+
+[Main]
+4 Vodalian Hexcatcher
+4 Tishana's Tidebinder
+4 Subtlety
+4 Lord of Atlantis
+4 Merfolk Trickster
+4 Master of the Pearl Trident
+3 Rishadan Dockhand
+4 Tide Shaper
+3 Svyelun of Sea and Sky
+4 Aether Vial
+2 Dismember
+2 Sea Gate Restoration
+10 Island
+3 Cavern of Souls
+3 Mutavault
+2 Otawara, Soaring City
+[Sideboard]
+2 Spell Pierce
+3 Stern Scolding
+2 Cursed Totem
+4 Hibernation
+4 Force of Negation

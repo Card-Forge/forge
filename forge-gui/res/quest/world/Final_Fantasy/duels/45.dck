@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Gix
+Title=Gix
+Icon=Gix.jpg
+Difficulty=Medium
+Description=./Standard/Final_Fantasy/IgarashiWataru_-_Mono-Red_Aggro_(Standard,_#2535200).dck
+Deck Type=constructed
+
+[Main]
+4 Emberheart Challenger
+4 Heartfire Hero
+4 Hired Claw
+4 Manifold Mouse
+4 Screaming Nemesis
+4 Twinmaw Stormbrood
+3 Magebane Lizard
+1 Tersa Lightshatter
+4 Burst Lightning
+4 Monstrous Rage
+1 Self-Destruct
+1 Torch the Tower
+16 Mountain
+4 Rockface Village
+2 Soulstone Sanctuary
+[Sideboard]
+3 Opera Love Song
+3 Sunspine Lynx
+2 Fire Magic
+2 Lightning Strike
+2 Suplex
+2 Torch the Tower
+1 Magebane Lizard

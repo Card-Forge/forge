@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Agrus
+Title=Agrus
+Icon=Agrus.jpg
+Difficulty=Medium
+Description=./Standard/Aetherdrift/Ghan6_-_Rakdos_Reanimator_(Standard,_#2379312).dck
+Deck Type=constructed
+
+[Main]
+2 Valgavoth, Terror Eater
+4 Fear of Missing Out
+3 Atraxa, Grand Unifier
+1 Sheoldred, the Apocalypse
+2 Etali, Primal Conqueror
+3 Monument to Endurance
+2 Fuel the Flames
+4 Bitter Triumph
+2 Torch the Tower
+2 Cut Down
+4 Zombify
+2 Rakdos Joins Up
+4 Bitter Reunion
+1 Liliana of the Veil
+1 Fabled Passage
+4 Blazemire Verge
+4 Raucous Theater
+1 Restless Vents
+4 Blackcleave Cliffs
+4 Sulfurous Springs
+3 Mountain
+3 Swamp
+[Sideboard]
+1 Blast Zone
+3 Duress
+1 Molten Collapse
+2 Withering Torment
+3 Ghost Vacuum
+1 Intimidation Tactics
+1 Fuel the Flames
+2 Skycrash
+1 Liliana of the Veil

@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Luna Lovegood
+Title=Luna Lovegood
+Icon=Luna Lovegood.jpg
+Difficulty=Very Hard
+Description=./Modern/Ravnica_Allegiance/Eric_Slater_-_Boros_Soldiers_(Modern,_#795894).dck
+Deck Type=constructed
+
+[Main]
+4 Champion of the Parish
+3 Field Marshal
+1 Legion Loyalist
+2 Precinct Captain
+2 Soldier of the Pantheon
+4 Thalia's Lieutenant
+4 Tithe Taker
+2 Brimaz, King of Oreskos
+2 Kytheon, Hero of Akros
+3 Thalia, Guardian of Thraben
+2 Thalia, Heretic Cathar
+4 Lightning Bolt
+3 Lightning Helix
+2 Path to Exile
+1 Mountain
+4 Plains
+4 Arid Mesa
+4 Cavern of Souls
+3 Inspiring Vantage
+3 Mutavault
+3 Sacred Foundry
+[Sideboard]
+2 Damping Sphere
+1 Grafdigger's Cage
+1 Ethersworn Canonist
+2 Mirran Crusader
+2 Leyline of Sanctity
+2 Rest in Peace
+1 Rule of Law
+1 Stony Silence
+1 Settle the Wreckage
+2 Surgical Extraction

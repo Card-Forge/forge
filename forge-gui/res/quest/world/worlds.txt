@@ -31,10 +31,63 @@ Name:The Gates of Magic|Dir:Starter|Sets:POR, PO2, S99, S00, PTK
 Name:Invasion|Dir:Invasion|Sets:INV, PLS, APC
 Name:Tempest|Dir:Tempest|Sets:TMP, STH, EXO
 Name:Random Core Set|Sets:LEA, LEB, 2ED, 3ED, 4ED, 5ED, 6ED, 7ED, 8ED, 9ED, 10E, M10, M11, M12, M13, M14, M15, ORI, M19, M20, M21
-Name:Ixalan|Sets:XLN, RIX
-Name:Innistrad|Sets:ISD, DKA, AVR, SOI, EMN
-Name:Kaladesh|Sets:AER, KLD, MPS, KLR
 Name:Non-Block Sets|Sets:IKO, THB, ELD, WAR, RNA, GRN, DOM, HML, FEM, DRK, LEG, ATQ, ARN, JMP, CNS, CN2, BBD, MB1, MMA, MM2, EMA, MM3, IMA, A25, UMA, 2XM, ZNR, CMR, KHM
-Name:Tarkir|Sets:KTK, FRF, DTK
 Name:Alara|Sets:ALA, CFX, ARB
 Name:Kaldheim: The Battle for Kaldheim|Dir:2021-01 Kaldheim|Sets:KHM
+
+Name:Aether Revolt (*)|Dir:Aether_Revolt|Sets:KLD, AER, EMN, SOI, BFZ, OGW
+Name:Kaladesh (*)|Dir:kaladesh|Sets:KLD, AER, EMN, SOI, BFZ, OGW
+Name:Avacyn (*)|Dir:Avacyn_Restored|Sets:SOM, MBS, NPH, M12, ISD, DKA, AVR
+Name:Battle for Zendikar (*)|Dir:Battle_for_Zendikar|Sets:M15, KTK, FRF, DTK, ORI, BFZ
+Name:Dark Ascension (*)|Dir:Dark_Ascension|Sets:SOM, MBS, NPH, M12, ISD, DKA
+Name:Dragons of Tarkir (*)|Dir:Dragons_of_Tarkir|Sets:THS, BNG, JOU, M15, KTK, FRF, DTK
+Name:Eldritch Moon (*)|Dir:Eldritch_Moon|Sets:EMN, SOI, OGW, BFZ, ORI, DTK, KTK, FRF
+Name:Zendikar (Standard) (*)|Dir:Standard_Zendikar|Sets:ALA, CFX, ARB, M10, ZEN
+Name:New Phyrexia (*)|Dir:New_Phyrexia|Sets:NPH, MBS, SOM, M11
+Name:Shadows Over Innistrad (*)|Dir:Shadows_Over_Innistrad|Sets:SOI, OGW, BFZ, ORI, DTK, KTK, FRF
+Name:Oath of the Gatewatch (*)|Dir:Oath_of_the_Gatewatch|Sets:OGW, BFZ, ORI, KTK, DTK, FRF
+Name:Born of the Gods (*)|Dir:Born_of_the_Gods|Sets:JOU, BNG, THS, M14
+Name:Fate Reforged (*)|Dir:Fate_Reforged|Sets:THS, BNG, JOU, M15, KTK, FRF
+Name:Gatecrash (*)|Dir:Gatecrash|Sets:ISD, DKA, AVR, M13, RTR, GTC
+Name:Innistrad (*)|Dir:Innistrad|Sets:SOM, MBS, NPH, M12, ISD
+Name:Khans of Tarkir (*)|Dir:Khans_of_Tarkir|Sets:THS, BNG, JOU, M15, KTK
+Name:Origins (*)|Dir:Magic_Origins|Sets:KTK, FRF, DTK, ORI
+Name:Journey into Nyx (*)|Dir:Journey_into_Nyx|Sets:RTR, GTC, DGM, M14, THS, BNG, JOU
+Name:Scars of Mirrodin (*)|Dir:Scars_of_Mirrodin|Sets:ZEN, WWK, ROE, M11, SOM
+Name:Mirrodin Besieged (*)|Dir:Mirrodin_Besieged|Sets:ZEN, WWK, ROE, M11, SOM, MBS
+Name:Return to Ravnica (*)|Dir:Return_to_Ravnica|Sets:ISD, DKA, AVR, M13, RTR
+Name:Rise of the Eldrazi (*)|Dir:Rise_of_the_Eldrazi|Sets:ALA, CFX, ARB, M10, ZEN, WWK, ROE
+Name:Worldwake (*)|Dir:Worldwake|Sets:ALA, CFX, ARB, M10, ZEN, WWK
+Name:Ixalan (*)|Dir:Ixalan|Sets:XLN, AKH, HOU, KLD, AER
+Name:Dominaria (*)|Dir:Dominaria|Sets:DOM, RIX, XLN, AKH, HOU, KLD, AER
+Name:Guilds of Ravnica (*)|Dir:Guilds_of_Ravnica|Sets:XLN, RIX, DOM, M19, GRN
+Name:Ravnica Allegiance (*)|Dir:Ravnica_Allegiance|Sets:XLN, RIX, DOM, M19, G18, GRN, RNA
+Name:War of the Spark (*)|Dir:War_of_the_Spark|Sets:XLN, RIX, DOM, M19, G18, GRN, RNA, WAR
+Name:Theros Beyond Death (*)|Dir:Theros_Beyond_Death|Sets:GRN, RNA, WAR, M20, ELD, THB
+Name:Ikoria Lair of Behemoths (*)|Dir:Ikoria_Lair_of_Behemoths|Sets:GRN, RNA, WAR, M20, ELD, THB, IKO
+Name:Zendikar Rising (*)|Dir:Zendikar_Rising|Sets:ELD, THB, IKO, M21, ZNR
+Name:Strixhaven School of Mages (*)|Dir:Strixhaven_School_of_Mages|Sets:ELD, THB, IKO, M21, ZNR, KHM, STX
+Name:Adventures in the Forgotten Realms (*)|Dir:Adventures_in_the_Forgotten_Realms|Sets:ELD, THB, IKO, M21, ZNR, KHM, STX, AFR
+Name:Innistrad Midnight Hunt (*)|Dir:Innistrad_Midnight_Hunt|Sets:ZNR, KHM, STX, AFR, MID
+Name:Innistrad Crimson Vow (*)|Dir:Innistrad_Crimson_Vow|Sets:ZNR, KHM, STX, AFR, MID, VOW
+Name:Kamigawa Neon Dynasty (*)|Dir:Kamigawa_Neon_Dynasty|Sets:ZNR, KHM, STX, AFR, MID, VOW, NEO
+Name:Streets of New Capenna (*)|Dir:Streets_of_New_Capenna|Sets:ZNR, KHM, STX, AFR, MID, VOW, NEO, SNC
+Name:Dominaria United (*)|Dir:Dominaria_United|Sets:MID, VOW, NEO, SNC, DMU
+Name:The Brothers War (*)|Dir:The_Brothers_War|Sets:MID, VOW, NEO, SNC, DMU, BRO
+Name:Phyrexia All Will Be One (*)|Dir:Phyrexia_All_Will_Be_One|Sets:MID, VOW, NEO, SNC, DMU, BRO, ONE
+Name:March of the Machine (*)|Dir:March_of_the_Machine|Sets:MID, VOW, NEO, SNC, DMU, BRO, ONE, MOM
+Name:March of the Machine: the Aftermath (*)|Dir:March_of_the_Machine_The_Aftermath|Sets:MID, VOW, NEO, SNC, DMU, BRO, ONE, MOM, MAT
+Name:Wilds of Eldraine (*)|Dir:Wilds_of_Eldraine|Sets:MID, VOW, NEO, SNC, DMU, BRO, ONE, MOM, MAT, WOE
+Name:The Lost Caverns of Ixalan (*)|Dir:The_Lost_Caverns_of_Ixalan|Sets:MID, VOW, NEO, SNC, DMU, BRO, ONE, MOM, MAT, WOE, LCI
+Name:Murders at Karlov Manor (*)|Dir:Murders_at_Karlov_Manor|Sets:MID, VOW, NEO, SNC, DMU, BRO, ONE, MOM, MAT, WOE, LCI, MKM
+Name:Outlaws of Thunder Junction (*)|Dir:Outlaws_of_Thunder_Junction|Sets:MID, VOW, NEO, SNC, DMU, BRO, ONE, MOM, MAT, WOE, LCI, MKM, OTJ, BIG
+Name:Bloomburrow (*)|Dir:Bloomburrow|Sets:DMU, BRO, ONE, MOM, MAT, WOE, LCI, MKM, OTJ, BIG, BLB
+Name:Duskmourn: House of Horror (*)|Dir:Duskmourn_House_of_Horror|Sets:DMU, BRO, ONE, MOM, MAT, WOE, LCI, MKM, OTJ, BIG, BLB, DSK
+Name:Foundations (*)|Dir:Foundations|Sets:DMU, BRO, ONE, MOM, MAT, WOE, LCI, MKM, OTJ, BIG, BLB, DSK, FDN
+Name:Aetherdrift (*)|Dir:Aetherdrift|Sets:DMU, BRO, ONE, MOM, MAT, WOE, LCI, MKM, OTJ, BIG, BLB, DSK, FDN, DFT
+Name:Tarkir Dragonstorm (*)|Dir:Tarkir_Dragonstorm|Sets:DMU, BRO, ONE, MOM, MAT, WOE, LCI, MKM, OTJ, BIG, BLB, DSK, FDN, DFT, TDM
+Name:Final Fantasy (*)|Dir:Final_Fantasy|Sets:DMU, BRO, ONE, MOM, MAT, WOE, LCI, MKM, OTJ, BIG, BLB, DSK, FDN, DFT, TDM, FIN
+Name:Edge of Eternities (*)|Dir:Edge_of_Eternities|Sets:WOE, LCI, MKM, OTJ, BIG, BLB, DSK, FDN, DFT, TDM, FIN, EOE
+Name:Marvel's Spider Man (*)|Dir:Marvels_Spider_Man|Sets:WOE, LCI, MKM, OTJ, BIG, BLB, DSK, FDN, DFT, TDM, FIN, EOE, SPM
+Name:Avatar The Last Airbender (*)|Dir:Avatar_The_Last_Airbender|Sets:WOE, LCI, MKM, OTJ, BIG, BLB, DSK, FDN, DFT, TDM, FIN, EOE, SPM, TLA
+Name:Lorwyn Eclipsed (*)|Dir:Lorwyn_Eclipsed|Sets:WOE, LCI, MKM, OTJ, BIG, BLB, DSK, FDN, DFT, TDM, FIN, EOE, SPM, TLA, ECL

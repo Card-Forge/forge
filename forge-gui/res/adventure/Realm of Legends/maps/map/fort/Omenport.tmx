@@ -11,7 +11,7 @@
  <tileset firstgid="11905" source="../../../../common/maps/tileset/FarmFood.tsx"/>
  <layer id="28" name="Collision" width="44" height="23">
   <data encoding="base64" compression="zlib">
-   eJztl18KwjAMxvvYIXgRXz3DHB61equxe0jQYIjtmqZJ2YMfhLH++fiRphmbpxBmFlx8fi9qWj5r7pW1KYbwjDqWRcCxKngf8R2cK5F3PifJj4SXekl4qVbCDrGxNZRZcpZSXvRr5ZUImWusKVNDeyp5wXirFxXWO/LS88DQqHRfe1hB9H5Cri+n39CI81qwgiiv5F5LpelxEnnxclnzWubAU9DzoG69eS28r+dvoKcXtxVvju/ovD3eI2veIr9/3rKOyJvjwX7Qy+DRS0q8e8wSDo/ex7/ft0nGS/eOYqXe+GzhpXtz4173rJe3559Sy8vrgY9rfUcpl6sXKqBHEw==
+   eJzt11sKwjAQBdCAPxXBjfjrGmpxqdEluJviPmSwQy9jHtNkEvrhhQH7YDikyYDj0blRlIx8nqpcpuWde+ZdPzj3HMosk8IxF3gfw7eky8O1fKZZH40Xe2m8mBnsVG/xDpo131Lr5X5bvZqwOWf1gT2USqwX3d/aC8P7nb34PbhKEjuvNVYKnk9a68vpt0oivRZWCno151qbkhmnSSuvjLXXcg1ahmYe7dvWXove1/Na3LOV28ob8u3dW9O75563WN+/N569eV+HtTA8D2oN1rMk5U2ZNY4Wsw+96M550dPLil7+fVv6a7zsit1vcc4svDX/KWvM6JWWkvScY6G1+gBsblEO
   </data>
  </layer>
  <layer id="24" name="Background" width="44" height="23">

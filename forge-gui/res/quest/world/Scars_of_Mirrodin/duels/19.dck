@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Conan the Barbarian
+Title=Conan the Barbarian
+Icon=Conan the Barbarian.jpg
+Difficulty=Medium
+Description=Scars_of_Mirrodin/Magic-League_Standard_Trial_03-10-2010/magicrichi_-_UGr_Force_(Standard,_#53).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Frost Titan
+4 Primeval Titan
+2 Into the Roil
+2 Jace's Ingenuity
+2 Lightning Bolt
+4 Mana Leak
+4 Cultivate
+3 Destructive Force
+4 Explore
+3 Garruk Wildspeaker
+4 Jace, the Mind Sculptor
+4 Forest
+4 Halimar Depths
+4 Island
+2 Khalni Garden
+4 Misty Rainforest
+3 Mountain
+2 Raging Ravine
+4 Scalding Tarn
+[Sideboard]
+3 Acidic Slime
+3 Negate
+2 Obstinate Baloth
+2 Pyroclasm
+3 Volition Reins

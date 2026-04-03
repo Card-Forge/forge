@@ -53,7 +53,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
             GameEntityCounterTable table = new GameEntityCounterTable();
             host.addCounter(CounterEnumType.AGE, 1, activator, table);
 
-            table.replaceCounterEffect(game, sa, true);
+            table.replaceCounterEffect(game, sa);
 
             Cost payCost = new Cost(ManaCost.ZERO, true);
             int n = host.getCounters(CounterEnumType.AGE);

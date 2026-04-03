@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Tombstone
+Title=Tombstone
+Icon=Tombstone.jpg
+Difficulty=Medium
+Description=./Standard/Aetherdrift/Spencer_Salas_-_Orzhov_Lifegain_(Standard,_#2368511).dck
+Deck Type=constructed
+
+[Main]
+3 Elas il-Kor, Sadistic Pilgrim
+1 Zahur, Glory's Past
+4 Deep-Cavern Bat
+4 Amalia Benavides Aguirre
+4 Snarling Gorehound
+4 Essence Channeler
+4 Starscape Cleric
+4 Hinterland Sanctifier
+4 Raise the Past
+2 Split Up
+4 Case of the Uneaten Feast
+4 Plains
+4 Swamp
+4 Concealed Courtyard
+4 Caves of Koilos
+4 Bleachbone Verge
+2 Shadowy Backstreet
+[Sideboard]
+3 Authority of the Consuls
+3 Cathar Commando
+3 Ghost Vacuum
+1 Lunar Convocation
+3 Duress
+2 Bartolomé del Presidio

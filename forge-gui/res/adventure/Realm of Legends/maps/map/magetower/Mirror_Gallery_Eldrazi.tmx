@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="72" height="66" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="101">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Eldrazi Temple&quot;, &quot;Matter Reshaper&quot; ]}"/>
+  <property name="respawnEnemies" type="bool" value="true"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <tileset firstgid="28289" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <tileset firstgid="38401" source="../../../../common/maps/tileset/dungeon/animatedtiles.tsx"/>
+ <tileset firstgid="54785" source="../../../../common/maps/tileset/buildingsbosses.tsx"/>
+ <layer id="1" name="Background" width="72" height="66">
+  <data encoding="base64" compression="zlib">
+   eJzt3M1NAzEQBeC9IMSBAwcaoAFALBIV5EoRnOiBYmgBkOiJAz2gEbJkbWJ7PPbO888gvQPKxtr5MnGyljeHi2U5WCyd5uZ5Wc7O40GfIyKudvKJZUan3yuezdYJfd5aNpQcG4kPZ0xE/am5RGKT68MdE2EjqZ3rwzHKGRPRN3v5cIxyxxvJJmUkGUvL5u5Wx2ZrVPq6aPhoutSM2WBtevXRsunRR9OGoj0v9+bTWw/9XJ6O+aTdzCYc+g61hxG6rpp5eqhr1NvcrNlHI9o4H/orsdG6DkUl18JdK1PPjNw3Ehf0eaNsXO0hm1H75FSoVn/O8R/bztWz2fg9FLKb3SYVs4nHbOIxG/MxH/MxnzZjPuHQmpD5HMe/pvhYzShkY0Zpm9mNaI5J2cxqRDa566n3K/68NZO7vhzzGWWNlfqGIll/D/l8r/8Z4T1YsleY6t+up9H/ZDPKPFW6l5rq//Li2/jHoOtE+XCDrtN8zMd82svee6LMZ2ybGffUpe4bcnt7ZrRx+XzUmVdKXWrcGyHtIYSRxIaeh9gjgzCS2KB8EEYSG6SPtpHEBu1DIR8NI4kN5fUN60PR+q7sfya9MH/fgHxS8WvhHB96LtpHkvfrdPxaOMe7cI1a9eHWKfXhGs3s44xinwOt+eTWV+qT6qOWfCS11fBxRnvc//YHarSDdA==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="72" height="66">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztmk9uEzEUxifNCrWoDWqyQizoKZAoLLJixZZDwBWA5AjsWIXcg0OAkkjlCCy6ZAliXmY+xbFsj/+9N06TJ32qKk1k+zfP77M9vjmvqpuTitJgVVVnq/77UapmNZt5rcG45tSh4bj//krqflRzWTdsXk+q6vvQrdvJw+L04aKRk48nG1XLAD4+edkX8y4+YHO2CeOzGLtr1vuLpq79u/ZnH8I8h3zeG/V9VrOZR/CZd9R0YvMyIC/74NPVJ5pfpBA2qEOYD79Huzbf/mwENmfrMvn41pRYPrP1PiOVD9jQM/NAPjQvXZJkk6LBpqlZOiPis2jHiWdC+CA4+AyUmsLJZps/Ss2C56s1jcYSWtfU/OGYU0uPesMt1B+M05h77XqdguY2BXKes+YcAh8KrNdR+yTYlMJHlTV/1o2vSbL5Nm7aGhbGyCT4mhQb8KH8gZ/0zcAl+Br1934ky4faL50RfE33Pe492EJhUjojY16tzGvOHDKtCaUZqf2JyqvW11IY2c76FhYO3Ixs/YzKn9bXKGIYTSc7xl25I8UoJx/4GiKUEfEBY1823Iyy5k/ra4gQ/yc2U2VPHMKGk5Grz8H50/qauo8Mqb+vJvuK2YfmZqS+v1RGsfswNU9izvo4GeXkQzKdkWFf4OvbOZSL0R/L+he8Yvulj99Uq7nPudDm+ePmf/yNzaFcdRr9wvgRSwM3Ljbgwelrqe9OHz/4SLBRGZV2LmLTcizLRn1Xh7BXW7Z78Kkwn0NhBD59tf+ih/dySHxKEfbgJz5mYQ9+4mMW9uCl8/l73U+76ndpdd9Jvl4Sn748Decc+voZZ0LVkTOaWdjkYPT1x+EzcrGxMbJ5ns6Gg48kIx82+vnrNucsnifFh8RdG0PYINAnm+c9FD4xbFQ+prtY+vd2bj5ccyyWzV7+bPbvYunnahJ8uBip98ZCA/1Rz5113nhGgg8HoxQ+GL9+f02P7dmRh8eVyCiVj09QGz4eVyIjKT7wuC9P9lU6I7H8cdw35px7qYzE8mdjv2/MNffePKqq53dpjLj5wM9c31Z91pexfFLziJOP7/eO0Lv+UnMtZW2Yi822H465lyt/dEb6fQqTSmCzzZ8M9xpi8qiPCGWD+zQseyeHL/bBSJ2vofObY//d5YvSjBZKWyFsuPj4+KIkI18+Jl9gyR9PX5RiZLvH28WGi0+IL0owQv6EsgEf129JHy+r6lOtz5ee+RPgi2ofuOI2YT2B3/6yiN7t06tmLM+uzHdCTfL1Rgk+nIG7NVDIWGzr5nd3O6GNQ40UPhQ+e4tj5kPRxejY+VC4GJ34NGHzkdT96H8nszJt
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="63" template="../../../../common/maps/obj/entry_up.tx" x="509" y="1056.33" width="62" height="16">
+   <properties>
+    <property name="teleport" value="../Realm of Legends/maps/map/magetower/Mirror_Gallery_2.tmx"/>
+   </properties>
+  </object>
+  <object id="95" template="../../../../common/maps/obj/enemy.tx" x="94.6667" y="561.333" width="64" height="64">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Idol of Oblivion|C19&quot;, &quot;Path of Annihilation|MH3&quot;, &quot;Spawning Bed&quot;]}"/>
+    <property name="enemy" value="Azlask"/>
+   </properties>
+  </object>
+  <object id="96" template="../../../../common/maps/obj/enemy.tx" x="177.333" y="944" width="64" height="64">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;It That Heralds the End|MH3&quot;, &quot;Eldrazi Mimic|OGW&quot;, &quot;Sanctum of Ugin|BFZ&quot;, Hedron Matrix|ROE&quot;]}"/>
+    <property name="enemy" value="Zhulodok"/>
+   </properties>
+  </object>
+  <object id="97" template="../../../../common/maps/obj/enemy.tx" x="810.667" y="1009.33" width="64" height="64">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;From Beyond&quot;, &quot;Awakening Zone&quot;, &quot;Writhing Chrysalis&quot;]}"/>
+    <property name="enemy" value="Ulalek"/>
+   </properties>
+  </object>
+  <object id="98" template="../../../../common/maps/obj/enemy.tx" x="541.333" y="230.667" width="64" height="64">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Pawn of Ulamog&quot;, &quot;Spawnsire of Ulamog&quot;, &quot;Oblivion Stone|M3C&quot;]}"/>
+    <property name="enemy" value="Ulamog"/>
+   </properties>
+  </object>
+  <object id="99" template="../../../../common/maps/obj/enemy.tx" x="761.333" y="366.667" width="64" height="64">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Eye of Ugin|WWK&quot;, &quot;Emrakul's Influence|EMN&quot;, &quot;Emrakul's Messenger|MH3&quot;]}"/>
+    <property name="enemy" value="Emrakul"/>
+   </properties>
+  </object>
+  <object id="100" template="../../../../common/maps/obj/enemy.tx" x="934.667" y="560" width="64" height="64">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Herald of Kozilek|BFZ&quot;, &quot;Kozilek's Unsealing|MH3&quot;, &quot;Bismuth Mindrender|M3C&quot;]}"/>
+    <property name="enemy" value="Kozilek"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

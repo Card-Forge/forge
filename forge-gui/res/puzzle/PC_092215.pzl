@@ -3,7 +3,7 @@ Name:Perplexing Chimera (GatheringMagic.com) 092215 - Queen's Gambit
 URL:http://www.gatheringmagic.com/seanuy-092215-queens-gambit/
 Goal:Win
 Turns:1
-Difficulty:Hard
+Difficulty:Rare
 Description: Win this turn.
 [state]
 ActivePlayer=human

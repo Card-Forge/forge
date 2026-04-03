@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Shrek
+Title=Shrek
+Icon=Shrek.jpg
+Difficulty=Medium
+Description=./Standard/Wilds_of_Eldraine/Chuchuzinho_-_Selesnya_Enchantments_(Standard,_#1744078).dck
+Deck Type=constructed
+
+[Main]
+2 Katilda, Dawnhart Martyr
+1 Michiko's Reign of Truth
+4 The Restoration of Eiganjo
+4 Spirited Companion
+4 Generous Visitor
+1 Teachings of the Kirin
+4 Jukai Naturalist
+4 Calix, Guided by Fate
+2 Yenna, Redtooth Regent
+4 Royal Treatment
+1 Circle of Confinement
+1 Hallowed Haunting
+2 Audacity
+3 Ossification
+4 Overgrown Farmland
+1 Boseiju, Who Endures
+1 Eiganjo, Seat of the Empire
+4 Razorverge Thicket
+7 Plains
+6 Forest
+[Sideboard]
+1 Borrowed Time
+1 Vanquish the Horde
+1 Rite of Harmony
+2 Circle of Confinement
+1 Hallowed Haunting
+2 Wedding Announcement
+3 Knockout Blow
+2 Destroy Evil
+1 Elesh Norn, Mother of Machines
+1 Nissa, Ascended Animist

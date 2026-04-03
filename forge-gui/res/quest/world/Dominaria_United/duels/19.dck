@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Saladin
+Title=Saladin
+Icon=Saladin.jpg
+Difficulty=Medium
+Description=./Standard/Dominaria_United/AliEldrazi_-_Mardu_Control_(Standard,_#1476804).dck
+Deck Type=constructed
+
+[Main]
+1 Liesa, Forgotten Archangel
+1 Serra Paragon
+2 Sheoldred, the Apocalypse
+2 Tenacious Underdog
+3 Archangel of Wrath
+4 Fable of the Mirror-Breaker
+4 Bloodtithe Harvester
+3 Reckoner Bankbuster
+1 Infernal Grasp
+2 Cut Down
+2 Destroy Evil
+2 Soul Transfer
+2 Wedding Announcement
+1 Elspeth Resplendent
+1 The Wandering Emperor
+4 Liliana of the Veil
+1 Sokenzan, Crucible of Defiance
+1 Sulfurous Springs
+1 Mountain
+1 Plains
+1 Takenuma, Abandoned Mire
+1 Eiganjo, Seat of the Empire
+3 Swamp
+4 Sundown Pass
+4 Shattered Sanctum
+4 Haunted Ridge
+4 Caves of Koilos
+[Sideboard]
+1 Cut Down
+1 Destroy Evil
+1 Soul Transfer
+1 Temporary Lockdown
+1 Wedding Announcement
+1 Archangel of Wrath
+1 Depopulate
+1 Edgar, Charmed Groom
+1 Sorin the Mirthless
+2 Unlicensed Hearse
+2 Farewell
+2 Graveyard Trespasser

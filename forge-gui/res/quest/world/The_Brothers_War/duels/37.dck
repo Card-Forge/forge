@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=IdiAmin
+Title=IdiAmin
+Icon=IdiAmin.jpg
+Difficulty=Easy
+Description=./Standard/The_Brothers_War/MTGHolic_-_Rakdos_Midrange_(Standard,_#1545227).dck
+Deck Type=constructed
+
+[Main]
+3 Graveyard Trespasser
+3 Sheoldred, the Apocalypse
+4 Fable of the Mirror-Breaker
+4 Bloodtithe Harvester
+4 Reckoner Bankbuster
+2 Go for the Throat
+3 Cut Down
+4 Abrade
+2 Brotherhood's End
+4 Invoke Despair
+1 Liliana of the Veil
+1 Takenuma, Abandoned Mire
+1 Sokenzan, Crucible of Defiance
+2 Ziatora's Proving Ground
+2 Mountain
+4 Sulfurous Springs
+4 Haunted Ridge
+4 Xander's Lounge
+8 Swamp
+[Sideboard]
+1 Liliana of the Veil
+1 Gix's Command
+1 Whack
+1 Go for the Throat
+2 Sorin the Mirthless
+2 Unlicensed Hearse
+2 Soul Transfer
+2 Brotherhood's End
+3 Duress

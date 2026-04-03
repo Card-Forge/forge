@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Quicksilver
+Title=Quicksilver
+Icon=Quicksilver.jpg
+Difficulty=Hard
+Description=./Modern/Edge_of_Eternities/Dean_Forshey_-_Esper_Ketramose_(Modern,_#2605991).dck
+Deck Type=constructed
+
+[Main]
+1 Boggart Trawler
+2 Emperor of Bones
+2 Flickerwisp
+3 Ketramose, the New Dawn
+4 Overlord of the Balemurk
+4 Phelia, Exuberant Shepherd
+4 Psychic Frog
+3 Quantum Riddler
+4 Solitude
+1 Witch Enchanter
+2 Relic of Progenitus
+3 Ephemerate
+3 Fatal Push
+1 Vanishing Verse
+3 Thoughtseize
+3 Flooded Strand
+2 Godless Shrine
+1 Hallowed Fountain
+1 Island
+4 Marsh Flats
+1 Meticulous Archive
+2 Plains
+1 Polluted Delta
+1 Shadowy Backstreet
+2 Swamp
+1 Undercity Sewers
+1 Watery Grave
+[Sideboard]
+1 Ashiok, Dream Render
+1 Celestial Purge
+1 Clarion Conqueror
+4 Consign to Memory
+1 Elesh Norn, Mother of Machines
+1 Exorcise
+1 High Noon
+1 Mystical Dispute
+1 Strategic Betrayal
+3 Wrath of the Skies

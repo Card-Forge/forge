@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=BrotherVoodoo
+Title=BrotherVoodoo
+Icon=BrotherVoodoo.jpg
+Difficulty=Medium
+Description=./Standard/Bloomburrow/Feitosa_-_Jeskai_Ral_(Standard,_#2191307).dck
+Deck Type=constructed
+
+[Main]
+2 Chrome Host Seedshark
+4 Deduce
+4 Lightning Helix
+3 Torch the Tower
+2 Abrade
+2 Three Steps Ahead
+3 No More Lies
+1 Final Showdown
+3 Sunfall
+4 Caretaker's Talent
+3 Ral, Crackling Wit
+2 Jace, the Perfected Mind
+1 Teferi, Temporal Pilgrim
+4 Restless Anchorage
+2 Fountainport
+4 Inspiring Vantage
+3 Adarkar Wastes
+1 Seachrome Coast
+4 Spirebluff Canal
+2 Demolition Field
+3 Island
+1 Mountain
+2 Plains
+[Sideboard]
+1 Jace, the Perfected Mind
+1 Abrade
+3 Negate
+2 Tishana's Tidebinder
+1 Skrelv's Hive
+1 Loran of the Third Path
+1 Requisition Raid
+2 Temporary Lockdown
+2 Dust Animus
+1 Destroy Evil

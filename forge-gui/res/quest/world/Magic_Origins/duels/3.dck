@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Hobbes
+Title=Hobbes
+Icon=Hobbes.jpg
+Difficulty=Easy
+Description=Magic_Origins/Standard_PTQ_#8762189/MagicPlayer1506021037_-_Abzan_Aggro_(Standard,_#324044).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Anafenza, the Foremost
+4 Fleecemane Lion
+4 Hangarback Walker
+4 Siege Rhino
+1 Tasigur, the Golden Fang
+2 Warden of the First Tree
+4 Abzan Charm
+4 Dromoka's Command
+2 Hero's Downfall
+2 Ultimate Price
+1 Valorous Stance
+3 Sorin, Solemn Visitor
+3 Caves of Koilos
+2 Forest
+3 Llanowar Wastes
+2 Plains
+4 Sandsteppe Citadel
+3 Temple of Malady
+3 Temple of Silence
+1 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+1 Arashin Cleric
+2 Den Protector
+2 Drown in Sorrow
+3 Duress
+1 Languish
+3 Self-Inflicted Wound
+1 Tragic Arrogance

@@ -1,86 +1,73 @@
 package forge.game.keyword;
 
 import forge.card.CardType;
-import forge.game.cost.Cost;
 import forge.game.cost.CostExile;
-import forge.game.cost.CostPart;
-import forge.game.cost.CostPartMana;
+
 import forge.util.Lang;
 
 public class Craft extends KeywordWithCost {
 
-    String manaString = "Mana?";
-    String exileString = "Exile?";
-    private String withDescription = "";
+    String desc;
+    String reminder;
+
+    @Override
+    public String getTitle() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getTitleWithoutCost());
+        sb.append(" ");
+        sb.append(cost.getCostMana());
+        return sb.toString();
+    }
+
+    @Override
+    public String getTitleWithoutCost() {
+        return "Craft with " + desc;
+    }
 
     @Override
     protected void parse(String details) {
         String[] k = details.split(":");
         super.parse(k[0]);
 
-        final Cost kCost = new Cost(k[0], true);
-        for (CostPart part : kCost.getCostParts()) {
-            if (part instanceof CostPartMana) {
-                manaString = part.toString();
-                break;
-            }
-        }
-
-        // Build "with" description from all CostExile parts
-        final java.util.List<String> withParts = new java.util.ArrayList<>();
-        int exilePartCount = 0;
-        for (CostPart part : kCost.getCostParts()) {
-            if (part instanceof CostExile) {
-                exilePartCount++;
-                String partType = part.getType().replace(".Other", "");
-                String type = part.getTypeDescription() != null
-                        ? part.getTypeDescription()
-                        : (CardType.CoreType.isValidEnum(partType) || "Permanent".equals(partType))
-                                ? partType.toLowerCase() : partType;
-                String amount = part.getAmount();
-                if ("1".equals(amount)) {
-                    withParts.add(Lang.nounWithNumeralExceptOne(1, type));
-                } else {
-                    withParts.add(Lang.getPlural(type));
-                }
-            }
-        }
-        if (!withParts.isEmpty()) {
-            withDescription = Lang.joinHomogenous(withParts);
-        }
-
-        // Build exile string for reminder text
-        if (exilePartCount > 1) {
-            exileString = "Exile " + withDescription
-                    + " from among permanents you control and/or cards in your graveyard";
-        } else {
+        if (k.length > 2) {
+            desc = k[1];
             final StringBuilder sb = new StringBuilder();
-            for (CostPart part : kCost.getCostParts()) {
-                if (part instanceof CostExile) {
-                    int xMin = 0;
-                    if (k[0].contains("XMin")) {
-                        String cutString = k[0].substring(k[0].indexOf("XMin") + 4);
-                        xMin = Integer.parseInt(cutString.substring(0, cutString.indexOf(" ")));
-                    }
-                    sb.append(((CostExile) part).exileMultiZoneCostString(true, xMin));
-                    break;
+            sb.append("Exile ").append(k[2]).append(" from among permanents you control and/or cards in your graveyard");
+            reminder = sb.toString();
+        } else {
+            CostExile exile = cost.getCostPartByType(CostExile.class);
+            final StringBuilder sb = new StringBuilder();
+            int xmin = cost.getCostMana().getXMin();
+            if (xmin > 0) {
+                sb.append(Lang.getNumeral(xmin)).append(" or more");
+            } else if (!"1".equals(exile.getAmount())) {
+                sb.append(Lang.getNumeral(Integer.parseInt(exile.getAmount())));
+            }
+            if (exile.getTypeDescription() != null) {
+                // permanent are skipped in desc
+                if (!"permanent".equals(exile.getTypeDescription())) {
+                    sb.append(" ");
+                    sb.append(exile.getTypeDescription());
+                }
+            } else {
+                sb.append(" ");
+                String partType = exile.getType();
+                //consume .Other from most partTypes
+                if (partType.contains(".Other")) partType = partType.replace(".Other", "");
+                // try to guess plural
+                if (xmin > 0 || !"1".equals(exile.getAmount())) {
+                    sb.append(CardType.getPluralType(partType));
+                } else {
+                    sb.append(Lang.getInstance().formatValidDesc(partType));
                 }
             }
-            exileString = sb.toString();
+            desc = sb.toString();
+            reminder = exile.exileMultiZoneCostString(true, xmin);
         }
     }
-
-    @Override
-    public String getTitle() {
-        if (!withDescription.isEmpty()) {
-            return "Craft with " + withDescription + " " + manaString;
-        }
-        return super.getTitle();
-    }
-
 
     @Override
     protected String formatReminderText(String reminderText) {
-        return String.format(reminderText, manaString + ", Exile this artifact, " + exileString);
+        return String.format(reminderText, cost.getCostMana(), reminder);
     }
 }

@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Galadriel
+Title=Galadriel
+Icon=Galadriel.jpg
+Difficulty=Easy
+Description=Rise_of_the_Eldrazi/GPT_Manila_2010_-_Manila_VIII_-_Philippines/Karlo_Vergara_-_Grixis_(Standard,_#1630).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Guul Draz Specter
+4 Sedraxis Specter
+4 Slavering Nulls
+3 Sphinx of Jwar Isle
+4 Into the Roil
+4 Lightning Bolt
+4 Terminate
+4 Blightning
+4 Spreading Seas
+2 Creeping Tar Pit
+4 Crumbling Necropolis
+4 Dragonskull Summit
+2 Drowned Catacomb
+1 Evolving Wilds
+2 Island
+4 Mountain
+6 Swamp
+[Sideboard]
+2 Consuming Vapors
+4 Duress
+2 Gatekeeper of Malakir
+4 Negate
+3 Volcanic Fallout

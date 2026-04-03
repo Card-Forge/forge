@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Albert Einstein
+Title=Albert Einstein
+Icon=Albert Einstein.jpg
+Difficulty=Hard
+Description=../Modern/Innistrad/PT_Ravnica_-_Top_Modern_Decks/Daniel_Pham_-_Infect_Aggro_(Modern,_#39463).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blighted Agent
+4 Glistener Elf
+2 Ichorclaw Myr
+4 Phyrexian Crusader
+4 Plague Stinger
+1 Dismember
+4 Groundswell
+3 Might of Old Krosa
+4 Mutagenic Growth
+4 Vines of Vastwood
+4 Rancor
+1 Breeding Pool
+2 Forest
+4 Inkmoth Nexus
+4 Misty Rainforest
+2 Overgrown Tomb
+2 Pendelhaven
+1 Swamp
+4 Verdant Catacombs
+2 Woodland Cemetery
+[Sideboard]
+2 Creeping Corrosion
+4 Spellskite

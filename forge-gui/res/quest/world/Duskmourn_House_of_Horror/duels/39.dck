@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Swan
+Title=Swan
+Icon=Swan.jpg
+Difficulty=Easy
+Description=./Standard/Duskmourn_House_of_Horror/Edel_-_Golgari_Midrange_(Standard,_#2233640).dck
+Deck Type=constructed
+
+[Main]
+4 Mosswood Dreadknight
+3 Bloodletter of Aclazotz
+4 Freestrider Lookout
+4 Iridescent Vinelasher
+1 Sheoldred, the Apocalypse
+4 Go for the Throat
+4 Cut Down
+2 Tear Asunder
+2 Duress
+4 Unholy Annex // Ritual Chamber
+2 Liliana of the Veil
+4 Restless Cottage
+4 Llanowar Wastes
+3 Forest
+5 Swamp
+4 Blooming Marsh
+2 Fountainport
+4 Fabled Passage
+[Sideboard]
+4 Tranquil Frillback
+2 Anoint with Affliction
+2 Dreams of Steel and Oil
+2 Duress
+2 Ghost Vacuum
+1 Liliana of the Veil
+2 Gix's Command

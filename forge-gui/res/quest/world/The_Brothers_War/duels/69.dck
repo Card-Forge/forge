@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=IdiAmin
+Title=IdiAmin
+Icon=IdiAmin.jpg
+Difficulty=Very Hard
+Description=./Modern/The_Brothers_War/NicolasGEM_-_Mono_Red_Obosh_(Modern,_#1524157).dck
+Deck Type=constructed
+
+[Main]
+1 Phoenix of Ash
+1 Magus of the Moon
+4 Seasoned Pyromancer
+4 Ragavan, Nimble Pilferer
+4 Fury
+4 Fable of the Mirror-Breaker
+4 Bonecrusher Giant
+4 Relic of Progenitus
+1 Lightning Bolt
+1 Lightning Bolt
+2 Lightning Bolt
+4 Spikefield Hazard
+2 Flame Slash
+4 Blood Moon
+1 Shinka, the Bloodsoaked Keep
+2 Sokenzan, Crucible of Defiance
+3 Den of the Bugbear
+4 Mutavault
+4 Ramunap Ruins
+6 Mountain
+[Sideboard]
+1 Pillage
+1 Pillage
+1 Obosh, the Preypiercer
+2 Brotherhood's End
+2 Shattering Spree
+2 Lantern of the Lost
+2 Ratchet Bomb
+4 Chalice of the Void

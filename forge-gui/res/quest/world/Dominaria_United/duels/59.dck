@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Demon
+Title=Demon
+Icon=Demon.jpg
+Difficulty=Very Hard
+Description=./Modern/Dominaria_United/Chapelle_Léo_-_Zoo_Domain_(Modern,_#1514236).dck
+Deck Type=constructed
+
+[Main]
+4 Wild Nacatl
+4 Territorial Kavu
+4 Nishoba Brawler
+4 Scion of Draco
+4 Ragavan, Nimble Pilferer
+2 Dromoka's Command
+4 Lightning Bolt
+4 Stubborn Denial
+4 Tribal Flames
+4 Leyline Binding
+1 Teferi, Time Raveler
+1 Breeding Pool
+1 Sacred Foundry
+1 Plains
+1 Overgrown Tomb
+1 Steam Vents
+1 Temple Garden
+1 Savai Triome
+1 Zagoth Triome
+1 Forest
+4 Flooded Strand
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+1 Teferi, Time Raveler
+1 Jegantha, the Wellspring
+1 Unlicensed Hearse
+2 Wear // Tear
+2 Hidetsugu Consumes All
+2 Rest in Peace
+2 Fury
+2 Flusterstorm
+2 Veil of Summer

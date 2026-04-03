@@ -1,8 +1,13 @@
 package forge.game.card;
 
 import java.io.Serializable;
+import java.util.List;
 
-public interface CounterType extends Serializable {
+import com.google.common.collect.Lists;
+
+import forge.util.ITranslatable;
+
+public interface CounterType extends Serializable, ITranslatable {
 
     static CounterType getType(String name) {
         if ("Any".equalsIgnoreCase(name)) {
@@ -13,6 +18,12 @@ public interface CounterType extends Serializable {
         } catch (final IllegalArgumentException ex) {
             return CounterKeywordType.get(name);
         }
+    }
+    static List<CounterType> getValues() {
+        List<CounterType> result = Lists.newArrayList();
+        result.addAll(List.of(CounterEnumType.values()));
+        result.addAll(CounterKeywordType.getValues());
+        return result;
     }
 
     String getName();
@@ -28,4 +39,13 @@ public interface CounterType extends Serializable {
     int getGreen();
 
     int getBlue();
+
+    @Override
+    default String getTranslationKey() {
+        return toString();
+    }
+    @Override
+    default String getUntranslatedName() {
+        return toString();
+    }
 }

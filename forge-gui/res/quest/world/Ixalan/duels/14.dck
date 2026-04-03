@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Robot14
+Title=Robot14
+Icon=Orzhov-precon.jpg
+Difficulty=Hard
+Description=Rakdos Aggro 
+Deck Type=constructed
+
+[Main]
+3 Bomat Courier
+2 Captain Lannery Storm
+4 Dread Wanderer
+4 Earthshaker Khenra
+1 Glorybringer
+2 Hazoret the Fervent
+2 Pia Nalaar
+4 Scrapheap Scrounger
+4 Fatal Push
+2 Lightning Strike
+4 Unlicensed Disintegration
+2 Cut // Ribbons
+2 Chandra, Torch of Defiance
+4 Canyon Slough
+4 Dragonskull Summit
+9 Mountain
+7 Swamp
+[Sideboard]
+2 Aethersphere Harvester
+2 Doomfall
+3 Duress
+2 Gonti, Lord of Luxury
+2 Rampaging Ferocidon
+2 Sweltering Suns
+1 The Scorpion God
+1 Vance's Blasting Cannons
