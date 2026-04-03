@@ -69,8 +69,10 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
     private final boolean mirror;
 
-    // Card IDs that have been split from their groups via individual click.
-    // Survives doLayout() calls; cleared on game state changes via update().
+    // Cards visually split from their group. Split and non-split cards
+    // can't share a stack. doUpdateCard removes entries on tapped state
+    // changes, but this does NOT cover undeclare during InputAttack since
+    // cards aren't actually tapped yet — click handlers must clean up.
     private final Set<Integer> splitCardIds = new HashSet<>();
     // Blocker card ID → attacker card ID; rebuilt each doLayout() from CombatView.
     private Map<Integer, Integer> blockerAssignments = Collections.emptyMap();
@@ -113,8 +115,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     private CardStackRow collectAllLands(List<CardPanel> remainingPanels) {
         return collectStacked(remainingPanels, RowType.Land,
                 (card, first) -> card.hasSameCounters(first)
-                        && card.isTapped() == first.isTapped()
-                        && card.getDamage() == first.getDamage(),
+                        && (!groupAll || card.isTapped() == first.isTapped())
+                        && (!groupAll || card.getDamage() == first.getDamage()),
                 STACK_MAX_LANDS, groupAll);
     }
 
@@ -144,13 +146,6 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 STACK_MAX_CREATURES, groupTokensAndCreatures);
     }
 
-    /**
-     * Shared stacking logic for lands, tokens, and creatures. Panels matching
-     * the given RowType are grouped by oracle name into stacks. Within a name
-     * group, panels are added to an existing stack only if the type-specific
-     * compatibility predicate passes. Stacks are kept adjacent by name and
-     * ordered via insertIndex tracking.
-     */
     private CardStackRow collectStacked(List<CardPanel> remainingPanels, RowType type,
             BiPredicate<CardView, CardView> isCompatible, int stackMax, boolean unlimitedGrouping) {
         final CardStackRow out = new CardStackRow();
@@ -187,7 +182,6 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                     insertIndex = i + 1;
                     continue;
                 }
-                // Candidate has attachments, type-specific incompatibility, or stack is full
                 if (!panel.getAttachedPanels().isEmpty()
                         || !isCompatible.test(card, firstCard)
                         || (!unlimitedGrouping && stack.size() >= stackMax)) {
@@ -270,50 +264,16 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         return out;
     }
 
-    /**
-     * Arranges "other" cards that haven't been placed in other rows into stacks
-     * based on sickness, cloning, counters, and cards attached to them. All cards
-     * that aren't equipped/enchanted/enchanting/equipping/etc that are otherwise
-     * the same get stacked.
-     */
     private CardStackRow collectAllOthers(final List<CardPanel> remainingPanels) {
-        CardStackRow out = new CardStackRow();
-        outerLoop:
-        for (final CardPanel panel : remainingPanels) {
-            for (final CardStack s : out) {
-                final CardView otherCard = s.get(0).getCard();
-                final CardStateView otherState = otherCard.getCurrentState();
-                final CardView thisCard = panel.getCard();
-                final CardStateView thisState = thisCard.getCurrentState();
-                if (otherState.getOracleName().equals(thisState.getOracleName()) && (groupAll || s.size() < STACK_MAX_OTHERS)) {
-                    // Split cards can't group with non-split cards
-                    boolean cardIsSplit = splitCardIds.contains(thisCard.getId());
-                    boolean stackIsSplit = splitCardIds.contains(otherCard.getId());
-                    if (cardIsSplit != stackIsSplit) {
-                        continue;
-                    }
-                    // Blockers assigned to different attackers can't group together
-                    int cardTarget = blockerAssignments.getOrDefault(thisCard.getId(), 0);
-                    int stackTarget = blockerAssignments.getOrDefault(otherCard.getId(), 0);
-                    if (cardTarget != stackTarget) {
-                        continue;
-                    }
-                    if (panel.getAttachedPanels().isEmpty()
-                            && thisCard.hasSameCounters(otherCard)
-                            && (thisCard.isSick() == otherCard.isSick())
-                            && (thisCard.isCloned() == otherCard.isCloned())
-                            && (!groupAll || thisCard.isTapped() == otherCard.isTapped())
-                            && (!groupAll || thisCard.getDamage() == otherCard.getDamage())) {
-                        s.add(panel);
-                        continue outerLoop;
-                    }
-                }
-            }
-
-            final CardStack stack = new CardStack();
+        CardStackRow out = collectStacked(remainingPanels, RowType.Other,
+                (card, first) -> card.hasSameCounters(first)
+                        && card.isSick() == first.isSick()
+                        && card.isCloned() == first.isCloned()
+                        && (!groupAll || card.isTapped() == first.isTapped())
+                        && (!groupAll || card.getDamage() == first.getDamage()),
+                STACK_MAX_OTHERS, groupAll);
+        for (CardStack stack : out) {
             stack.alignRight = true;
-            stack.add(panel);
-            out.add(stack);
         }
         return out;
     }
@@ -456,7 +416,6 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 }
                 int maxVisible = 4;
 
-                // Reset groupCount on all panels in this stack
                 for (CardPanel p : stack) { p.setGroupCount(0); }
 
                 for (int panelIndex = 0, panelCount = stack.size(); panelIndex < panelCount; panelIndex++) {
@@ -483,7 +442,6 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                     panel.setCardBounds(panelX, panelY, this.getCardWidth(), this.cardHeight);
                     panel.setDisplayEnabled(!hidden);
                 }
-                // Set group count on top card for badge rendering
                 // Exclude attached panels (equipment/auras) — they're pulled
                 // into the stack by addAttachedPanels but aren't grouped cards
                 if (grouping) {
@@ -667,34 +625,6 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         if (!selectAll && panel.getGroupCount() >= 2) {
             selectAll = panel.isBadgeHit(evt.getX(), evt.getY());
         }
-        // Split/un-split individual card from group
-        boolean wasUnsplit = false;
-        if (!selectAll && panel.getCard() != null) {
-            if (splitCardIds.contains(panel.getCard().getId())) {
-                // Re-clicking a split card un-splits it (re-merges into group)
-                splitCardIds.remove(panel.getCard().getId());
-                doLayout();
-                wasUnsplit = true;
-            } else {
-                List<CardPanel> stack = panel.getStack();
-                if (stack != null && stack.size() >= (grouping ? 2 : 5)) {
-                    // Split first, then check if the game accepts this card.
-                    // If accepted, doUpdateCard will remove from splitCardIds when
-                    // the card's state changes (e.g. tapping), allowing it to regroup.
-                    splitCardIds.add(panel.getCard().getId());
-                    if (getMatchUI().getGameController().selectCard(panel.getCard(), null, new MouseTriggerEvent(evt))) {
-                        doLayout();
-                        if ((panel.getTappedAngle() != 0) && (panel.getTappedAngle() != CardPanel.TAPPED_ANGLE)) {
-                            return;
-                        }
-                        super.mouseLeftClicked(panel, evt);
-                        return;
-                    }
-                    // Game rejected - undo the split
-                    splitCardIds.remove(panel.getCard().getId());
-                }
-            }
-        }
         // Badge click on tapped cards — undo once per card to reverse a batch
         // mana tap, rather than trying to activate (which shows disabled abilities).
         if (selectAll && panel.getCard() != null && panel.getCard().isTapped()
@@ -705,11 +635,40 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             doLayout();
             return;
         }
+        if (!selectAll && panel.getCard() != null) {
+            if (splitCardIds.contains(panel.getCard().getId())) {
+                // Re-clicking a split card un-splits it (merges back into group)
+                // and undeclares via selectCard in one operation.
+                splitCardIds.remove(panel.getCard().getId());
+                selectCard(panel, new MouseTriggerEvent(evt), false);
+                doLayout();
+                if ((panel.getTappedAngle() != 0) && (panel.getTappedAngle() != CardPanel.TAPPED_ANGLE)) {
+                    return;
+                }
+                super.mouseLeftClicked(panel, evt);
+                return;
+            }
+            List<CardPanel> stack = panel.getStack();
+            if (stack != null && stack.size() >= (grouping ? 2 : 5)) {
+                // Split from group, then check if the game accepts this card.
+                // If accepted, doUpdateCard will remove from splitCardIds when
+                // the card's tapped state changes, allowing it to regroup.
+                splitCardIds.add(panel.getCard().getId());
+                if (getMatchUI().getGameController().selectCard(panel.getCard(), null, new MouseTriggerEvent(evt))) {
+                    doLayout();
+                    if ((panel.getTappedAngle() != 0) && (panel.getTappedAngle() != CardPanel.TAPPED_ANGLE)) {
+                        return;
+                    }
+                    super.mouseLeftClicked(panel, evt);
+                    return;
+                }
+                splitCardIds.remove(panel.getCard().getId());
+            }
+        }
         boolean selected = selectCard(panel, new MouseTriggerEvent(evt), selectAll);
         // If this individual card was accepted (e.g. declared as attacker), mark it
         // as split so it can merge with other split cards from the same group.
-        // Skip if the card was just un-split (user is un-declaring, not declaring).
-        if (selected && !selectAll && !wasUnsplit && panel.getCard() != null) {
+        if (selected && !selectAll && panel.getCard() != null) {
             splitCardIds.add(panel.getCard().getId());
         }
         doLayout();
@@ -721,83 +680,103 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
     @Override
     public final void mouseRightClicked(final CardPanel panel, final MouseEvent evt) {
-        // Right-click on badge → prompt for how many to select
         if (panel.getGroupCount() >= 2 && panel.isBadgeHit(evt.getX(), evt.getY())) {
             List<CardPanel> stack = panel.getStack();
             if (stack != null && stack.size() >= 2) {
-                // Check if the game accepts card selection right now (side-effect-free)
-                CardView primary = stack.get(0).getCard();
-                String activateDesc = primary != null
-                        ? getMatchUI().getGameController().getActivateDescription(primary) : null;
-                if (activateDesc == null) {
-                    getMatchUI().flashIncorrectAction();
-                    return;
-                }
-                // Context-appropriate prompt based on card state
-                Localizer loc = Localizer.getInstance();
-                String prompt;
-                boolean alreadyInCombat = primary.isAttacking() || primary.isBlocking();
-                if (alreadyInCombat) {
-                    prompt = loc.getMessage("lblGroupHowManyRemove");
-                } else {
-                    if (activateDesc.equals(loc.getMessage("lblAttackWithCard"))) {
-                        prompt = loc.getMessage("lblGroupHowManyAttack");
-                    } else if (activateDesc.equals(loc.getMessage("lblBlockWithCard"))) {
-                        prompt = loc.getMessage("lblGroupHowManyBlock");
-                    } else {
-                        prompt = loc.getMessage("lblGroupHowManySelect");
-                    }
-                }
-                Integer count = SGuiChoose.getInteger(prompt, 1, stack.size());
-                if (count == null) {
-                    return; // cancelled
-                }
-                // Collect the first N card views from the stack
-                List<CardView> selected = new ArrayList<>();
-                selected.add(primary);
-                for (int i = 1; i < count && i < stack.size(); i++) {
-                    CardPanel p = stack.get(i);
-                    if (p.getCard() != null) {
-                        selected.add(p.getCard());
-                    }
-                }
-                List<CardView> others = selected.size() > 1 ? selected.subList(1, selected.size()) : null;
-                boolean isCombat = alreadyInCombat
-                        || activateDesc.equals(loc.getMessage("lblAttackWithCard"))
-                        || activateDesc.equals(loc.getMessage("lblBlockWithCard"));
-                if (alreadyInCombat) {
-                    // Use button=3 (right-click) to undeclare the selected cards
-                    MouseTriggerEvent rightClickTrigger = new MouseTriggerEvent(3, evt.getX(), evt.getY());
-                    getMatchUI().getGameController().selectCard(primary, others, rightClickTrigger);
-                } else if (isCombat) {
-                    // Combat inputs handle otherCardsToSelect natively
-                    MouseTriggerEvent leftClickTrigger = new MouseTriggerEvent(1, evt.getX(), evt.getY());
-                    getMatchUI().getGameController().selectCard(primary, others, leftClickTrigger);
-                } else {
-                    // Non-combat inputs (sacrifice, targeting) ignore otherCardsToSelect,
-                    // so select each card individually
-                    MouseTriggerEvent leftClickTrigger = new MouseTriggerEvent(1, evt.getX(), evt.getY());
-                    for (CardView cv : selected) {
-                        getMatchUI().getGameController().selectCard(cv, null, leftClickTrigger);
-                    }
-                }
-                // Clear all cards in this stack from splitCardIds, then mark
-                // only the selected subset as split. This ensures the selected
-                // cards separate from the remaining ones in the group.
-                for (CardPanel p : stack) {
+                handleBadgeRightClick(stack, evt);
+                return;
+            }
+        }
+        boolean selected = selectCard(panel, new MouseTriggerEvent(evt), evt.isShiftDown());
+        // Right-click undeclare: remove from splitCardIds so card merges back
+        if (selected && panel.getCard() != null) {
+            splitCardIds.remove(panel.getCard().getId());
+            if (evt.isShiftDown() && panel.getStack() != null) {
+                for (CardPanel p : panel.getStack()) {
                     if (p.getCard() != null) {
                         splitCardIds.remove(p.getCard().getId());
                     }
                 }
-                for (CardView cv : selected) {
-                    splitCardIds.add(cv.getId());
-                }
-                doLayout();
-                return;
+            }
+            doLayout();
+        }
+        super.mouseRightClicked(panel, evt);
+    }
+
+    private void handleBadgeRightClick(final List<CardPanel> stack, final MouseEvent evt) {
+        CardView primary = stack.get(0).getCard();
+        String activateDesc = primary != null
+                ? getMatchUI().getGameController().getActivateDescription(primary) : null;
+        if (activateDesc == null) {
+            getMatchUI().flashIncorrectAction();
+            return;
+        }
+        Localizer loc = Localizer.getInstance();
+        boolean alreadyInCombat = primary.isAttacking() || primary.isBlocking();
+        String prompt;
+        if (alreadyInCombat) {
+            prompt = loc.getMessage("lblGroupHowManyRemove");
+        } else if (activateDesc.equals(loc.getMessage("lblAttackWithCard"))) {
+            prompt = loc.getMessage("lblGroupHowManyAttack");
+        } else if (activateDesc.equals(loc.getMessage("lblBlockWithCard"))) {
+            prompt = loc.getMessage("lblGroupHowManyBlock");
+        } else {
+            prompt = loc.getMessage("lblGroupHowManySelect");
+        }
+        Integer count = SGuiChoose.getInteger(prompt, 1, stack.size());
+        if (count == null) {
+            return; // cancelled
+        }
+        List<CardView> selected = new ArrayList<>();
+        selected.add(primary);
+        for (int i = 1; i < count && i < stack.size(); i++) {
+            CardPanel p = stack.get(i);
+            if (p.getCard() != null) {
+                selected.add(p.getCard());
             }
         }
-        selectCard(panel, new MouseTriggerEvent(evt), evt.isShiftDown()); //select entire stack if shift key down
-        super.mouseRightClicked(panel, evt);
+        List<CardView> others = selected.size() > 1 ? selected.subList(1, selected.size()) : null;
+        boolean isCombat = alreadyInCombat
+                || activateDesc.equals(loc.getMessage("lblAttackWithCard"))
+                || activateDesc.equals(loc.getMessage("lblBlockWithCard"));
+        if (alreadyInCombat) {
+            MouseTriggerEvent rightClickTrigger = new MouseTriggerEvent(3, evt.getX(), evt.getY());
+            getMatchUI().getGameController().selectCard(primary, others, rightClickTrigger);
+        } else if (isCombat) {
+            MouseTriggerEvent leftClickTrigger = new MouseTriggerEvent(1, evt.getX(), evt.getY());
+            getMatchUI().getGameController().selectCard(primary, others, leftClickTrigger);
+        } else {
+            // Non-combat inputs (sacrifice, targeting) ignore otherCardsToSelect
+            MouseTriggerEvent leftClickTrigger = new MouseTriggerEvent(1, evt.getX(), evt.getY());
+            for (CardView cv : selected) {
+                getMatchUI().getGameController().selectCard(cv, null, leftClickTrigger);
+            }
+        }
+        // Update splitCardIds: clear whole stack, then mark the subset that
+        // should remain visually separate.
+        for (CardPanel p : stack) {
+            if (p.getCard() != null) {
+                splitCardIds.remove(p.getCard().getId());
+            }
+        }
+        if (alreadyInCombat) {
+            // Undeclaring: selected cards merge back. Non-selected stay split.
+            Set<Integer> selectedIds = new HashSet<>();
+            for (CardView cv : selected) {
+                selectedIds.add(cv.getId());
+            }
+            for (CardPanel p : stack) {
+                if (p.getCard() != null && !selectedIds.contains(p.getCard().getId())) {
+                    splitCardIds.add(p.getCard().getId());
+                }
+            }
+        } else {
+            // Declaring/selecting: selected cards split from the rest.
+            for (CardView cv : selected) {
+                splitCardIds.add(cv.getId());
+            }
+        }
+        doLayout();
     }
 
     private boolean selectCard(final CardPanel panel, final MouseTriggerEvent triggerEvent, final boolean selectEntireStack) {
