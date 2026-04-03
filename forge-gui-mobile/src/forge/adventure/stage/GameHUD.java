@@ -106,7 +106,7 @@ public class GameHUD extends Stage {
         gamehud = ui.findActor("gamehud");
         exitToWorldMapActor = ui.findActor("exittoworldmap");
         bookmarkActor = ui.findActor("bookmark");
-        apSettingsActor = ui.findActor("apsettings");
+        apSettingsActor = ui.findActor("aptracker");
         dialog = Controls.newDialog("");
         apSettingsActor.setVisible(false);
 
@@ -140,7 +140,7 @@ public class GameHUD extends Stage {
         ui.onButtonPress("deck", this::openDeck);
         ui.onButtonPress("exittoworldmap", this::exitToWorldMap);
         ui.onButtonPress("bookmark", this::bookmark);
-        ui.onButtonPress("apsettings", this::apTracker);
+        ui.onButtonPress("aptracker", this::openApTracker);
         keyCollection = ui.findActor("keyCollection");
         keyCollection.skipToTheEnd();
         lifePoints = ui.findActor("lifePoints");
@@ -661,7 +661,7 @@ public class GameHUD extends Stage {
         }
     }
 
-    private void apTracker() {
+    private void openApTracker() {
         if (console.isVisible())
             return;
         if (Forge.advFreezePlayerControls)

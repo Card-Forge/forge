@@ -4,7 +4,7 @@ import com.github.tommyettinger.textra.TextraButton;
 import forge.Forge;
 
 /**
- * Scene to handle settings of the base forge and adventure mode
+ * Scene to show the current archipelago progress in Forge
  */
 public class ArchipelagoTrackerScene extends UIScene {
 

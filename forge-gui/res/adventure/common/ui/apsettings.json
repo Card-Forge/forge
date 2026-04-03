@@ -111,7 +111,7 @@
     },
     {
       "type": "TextButton",
-      "name": "Connect",
+      "name": "connect",
       "text": "Connect",
       "width": 45,
       "height": 25,
