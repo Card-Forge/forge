@@ -2,7 +2,7 @@ Name:Suspend Aggression
 ManaCost:1 R W
 Types:Instant
 A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | ValidTgtDesc$ nonland permanent | ThisDefinedAndTgts$ TopOfLibrary | Origin$ Battlefield,Library | Destination$ Exile | RememberChanged$ True | SubAbility$ DBRepeatEach
-SVar:DBRepeatEach:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Card.IsRemembered | RepeatSubAbility$ DBEffect | SubAbility$ DBCleanup
+SVar:DBRepeatEach:DB$ RepeatEach | UseImprinted$ True | DefinedCards$ Remembered | RepeatSubAbility$ DBEffect | SubAbility$ DBCleanup
 SVar:DBEffect:DB$ Effect | StaticAbilities$ SusPlay | Duration$ Permanent | ExileOnMoved$ Exile | RememberObjects$ Imprinted & ImprintedOwner | Triggers$ RemoveTrigger
 SVar:SusPlay:Mode$ Continuous | Affected$ Card.IsRemembered | MayPlay$ True | MayPlayPlayer$ CardOwner | AffectedZone$ Exile | Description$ For each of those cards, its owner may play it until the end of their next turn.
 SVar:RemoveTrigger:Mode$ Phase | Phase$ Cleanup | ValidPlayer$ Player.IsRemembered | Static$ True | Execute$ TrigExile
