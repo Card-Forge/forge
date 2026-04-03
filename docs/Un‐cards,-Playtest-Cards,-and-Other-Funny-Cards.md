@@ -524,8 +524,12 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) Efteekay, Flame of the Kav
 1. (Uk) Literal Delver of Secrets
 1. (Uk) Lander Rizzi
-1. (Uk) Spaghetti Junction
+1. (P) Spaghetti Junction
 1. (Uk) Joraga Peach
+1. (Uk) Falko, Showoff Pilot
+1. (Uk) Brave Falconhawk
+1. (Uk) Fear of Fear Itself
+1. (Uk) 17-Year Cicadas
 1. Jester's Sombrero - May be able to do this with RemoveFromMatch?
 1. Gallery of Legends - (Attraction) Similar to Killer Cosplay?
 1. (P) Gunk Slug - Similar to Time Sidewalk and Bone Rattler?
@@ -810,6 +814,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. Mother of Goons
 1. Chivalrous Chevalier
 1. An Incident Has Occurred
+1. Cheer - "Giving a gift" may or may not refer to something in-game.
 
 #### Trackers, Markers, and Unique Designations
 1. The Fallen Apart - Arms and Legs
@@ -832,6 +837,8 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (P) Champion of the Hareish - "Buddy List", noting creature types.
 1. (Uk) The Keeper of Favorite Cards - "Favorites List", noting card names.
 1. (Uk) Retto, Family Racer - "Family" - noting card names secretly. Also dialog as payment.
+1. (Uk) The Fifth Alias - List not necessarily independent from card, but it'd take an extreme edge case to need more than one.
+1. (Uk) Syx, Robot Overlord - Ditto. Might be missing a clause that strikes the name from the list, or prevents guessing revealed invaders?
 
 #### Panglacial Worm-likes
 1. Infernal Spawn of Infernal Spawn of Evil - (Also dialog as payment)
@@ -1071,6 +1078,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) Blu, Mansion Prince - Create a token that's a copy of half of a randomly chosen room card.
 1. (Uk) Fear of Forgetting Names - Remove name from a permanent. 
 1. (Uk) Surprise, Nerd - Replace pump effects.
+1. (Uk) The Charitable Drafter - Draft a booster pack.
 
 
 
@@ -1094,6 +1102,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. Pheobe, Head of S.N.E.A.K. - (Also Flavor Text Matters)
 1. Grusilda, Monster Masher - Merges two dead creatures into one living one.
 1. It Came from Planet Glurg - Becomes a copy of X different creatures.
+1. (Uk) Monster Mash-Up - Grusilda as a sorcery.
 
 #### Multi-Split Cards
 (Most split card logic currently assumes only two parts)
@@ -1144,11 +1153,6 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) Your Favorite Missing Character - Any two colors, up to three creature types, an arbitrary name, and one of four listed abilities.
 1. (See Also: "Cryptic Spires", Black Border)
 1. (See Also: "The Prismatic Piper", "Faceless One", and "Clara Oswald", Black Border)
-
-#### Designate Secret List of Cards in Starting Deck
-(Might use a face-down command zone effect for keeping the list? Would need to stay linked to the source card, though.)
-1. (Uk) The Fifth Alias
-1. (Uk) Syx, Robot Overlord - Might be missing a clause that strikes the name from the list, or prevents guessing revealed invaders?
 
 #### Cards Outside the Battlefield become Copies
 1. (P) Bombardment - Transform your into Missiles. 
@@ -1378,6 +1382,9 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (P) Terry Pin, Turboturtle - Unclear if this includes keywords like Equip, or just when those exact words are printed in the ability text.
 1. (Uk) The Zonian Brawler - "Bite" effects matter. (Also Rulebreaker, Tier 3)
 1. (Uk) The Game-Changing Host - "Anything that could have changed The Game-Changing Host on the turn it enters applies retroactively." Also game-changer matters.
+1. (Uk) The Vast Scrier - Triggers "whenever this creature attacks" triggers. Unclear if this requires literal wording match or if keywords and looser attack triggers qualify.
+1. (Uk) The Snapstone Wielder - Each turn, lets you spend an amount of any-colored mana equal to the amount of counters you have. Also affects starting hand size, and casts spells with random targets (and it's unclear what to do with spells which have variable numbers of targets)
+1. (Uk) The Octopus Official - Unclear what zone the tournament piles are in, or if casting a spell 4 times means to cast once and copy 3 times.
 
 
 #### Rerolling Dice (using the stack)
@@ -1414,7 +1421,8 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. Mishra's Toy Workshop - Generates mana for token-creating abilities.
 1. (Uk) The Countering Runner - Discounts spells that would counter things. (Also "Psychic Damage") (Also "Ready to Run", Tier 2)
 1. (Uk) The Brewing Chef - "card that creates a token".
-1. (Uk) The Waffle Restaurant - "cards that can create Food tokens". Also this has to be recognized before the game because the check is for deck legality. See "Rulebreaker", tier 3
+1. (Uk) The Waffle Restaurant - "cards that can create Food tokens". Also this has to be recognized before the game because the check is for deck legality. See "Rulebreaker", Tier 3
+1. (Uk) The Traveling Postman - Chooses a random Magic card that creates a token that isn't a copy token,
 
 #### Memory
 (The AI for "accidentally" forgetting certain bits of info is a bit weird conceptually but not impossible)
@@ -1636,6 +1644,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) At Least It's a Dry Heat - Even without the geolocation needed to determine "sources on the east coast", tracking the causality of damage events through numbers would be Tier 4 at best.
 1. (Uk) Drive to Work - Sharing fun facts about cards.
 1. (Uk) Sorin's Remastered Manor - (Plane) Would need some combination of tags and types to form a criteria for "could be a horror movie monster".
+1. (Uk) The Commander Recommender - Revealing 15 cards of a commander deck from outside the game is do-able but very messy. "Guesses wrong" just expands on The Celestial Toymaker. The requirement that the commander deck be a legitimate one is unenforcable.
 
 #### Dexterity; tossing cards at other cards
 1. Landfill
@@ -1673,13 +1682,17 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. Rarity
 1. Grimlock, Dinobot Leader // Grimlock, Ferocious King - Also looks for Transformers creatures.
 
+#### External APIs
+(Could theoretically be determined digitally by accessing an outside source of information, but doing so would be a terrible idea for reasons which could fill several paragraphs.)
+1. Photo Op - Scrape Twitter?
+1. (Uk) A-Town - Acquire local IP and test it against a Geolocation database?
+
 
 ### Tier 7
 **Impossible in a rules engine, no good way to approximate it.**
 
 1. Blufferfish
 1. D00-DL, Caricaturist
-1. Photo Op
 1. (Uk) Sharp Eraser
 1. (Uk) The Convention Enthusiast
 
