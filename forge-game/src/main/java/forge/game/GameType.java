@@ -44,14 +44,11 @@ public enum GameType {
     MomirBasic          (DeckFormat.Constructed, false, false, false, "lblMomirBasic", "lblMomirBasicDesc", player -> {
         Deck deck = new Deck();
         CardPool mainDeck = deck.getMain();
-        for (int i = 0; i < 12; i++) {
-            String setcode = Aggregates.random(StaticData.instance().getBlockLands());
-            mainDeck.add("Plains", setcode, 1, true);
-            mainDeck.add("Island", setcode, 1, true);
-            mainDeck.add("Swamp", setcode, 1, true);
-            mainDeck.add("Mountain", setcode, 1, true);
-            mainDeck.add("Forest", setcode, 1, true);
-        }
+        mainDeck.add(Aggregates.random(StaticData.instance().getCommonCards().getAllCards("Plains"), 12));
+        mainDeck.add(Aggregates.random(StaticData.instance().getCommonCards().getAllCards("Island"), 12));
+        mainDeck.add(Aggregates.random(StaticData.instance().getCommonCards().getAllCards("Swamp"), 12));
+        mainDeck.add(Aggregates.random(StaticData.instance().getCommonCards().getAllCards("Mountain"), 12));
+        mainDeck.add(Aggregates.random(StaticData.instance().getCommonCards().getAllCards("Forest"), 12));
         deck.getOrCreate(DeckSection.Avatar).add(StaticData.instance().getVariantCards()
                 .getCard("Momir Vig, Simic Visionary Avatar"), 1);
         return deck;
@@ -59,14 +56,11 @@ public enum GameType {
     MoJhoSto      (DeckFormat.Constructed, false, false, false, "lblMoJhoSto", "lblMoJhoStoDesc", player -> {
         Deck deck = new Deck();
         CardPool mainDeck = deck.getMain();
-        for (int i = 0; i < 12; i++) {
-            String setcode = Aggregates.random(StaticData.instance().getBlockLands());
-            mainDeck.add("Plains", setcode, 1, true);
-            mainDeck.add("Island", setcode, 1, true);
-            mainDeck.add("Swamp", setcode, 1, true);
-            mainDeck.add("Mountain", setcode, 1, true);
-            mainDeck.add("Forest", setcode, 1, true);
-        }
+        mainDeck.add(Aggregates.random(StaticData.instance().getCommonCards().getAllCards("Plains"), 12));
+        mainDeck.add(Aggregates.random(StaticData.instance().getCommonCards().getAllCards("Island"), 12));
+        mainDeck.add(Aggregates.random(StaticData.instance().getCommonCards().getAllCards("Swamp"), 12));
+        mainDeck.add(Aggregates.random(StaticData.instance().getCommonCards().getAllCards("Mountain"), 12));
+        mainDeck.add(Aggregates.random(StaticData.instance().getCommonCards().getAllCards("Forest"), 12));
         deck.getOrCreate(DeckSection.Avatar).add(StaticData.instance().getVariantCards()
                 .getCard("Momir Vig, Simic Visionary Avatar"), 1);
         deck.getOrCreate(DeckSection.Avatar).add(StaticData.instance().getVariantCards()
