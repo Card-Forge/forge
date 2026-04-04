@@ -2,6 +2,7 @@ package forge;
 
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.Texture;
 import forge.adventure.stage.MapStage;
 import forge.assets.*;
@@ -376,5 +377,24 @@ public class GuiMobile implements IGuiBase {
     @Override
     public float getScreenScale() {
         return 1f;
+    }
+
+    @Override
+    public void vibrate(int milliseconds, int amplitude) {
+        if (milliseconds > 0 && amplitude > 0 && Gdx.app.getType() != ApplicationType.Desktop) {
+            Gdx.input.vibrate(milliseconds, amplitude, true);
+        }
+    }
+
+    @Override
+    public void vibrateController(int milliseconds, float amplitude) {
+        if (milliseconds > 0 && Controllers.getCurrent() != null && Controllers.getCurrent().canVibrate()) {
+            Controllers.getCurrent().startVibration(milliseconds, amplitude);
+        }
+    }
+
+    @Override
+    public boolean useControllerForHaptics() {
+        return Forge.hasGamepad() && Forge.lastInputWasController();
     }
 }

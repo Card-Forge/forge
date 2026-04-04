@@ -37,6 +37,7 @@ import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.player.LobbyPlayerHuman;
 import forge.player.PlayerControllerHuman;
+import forge.haptic.HapticEngine;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.trackable.TrackableCollection;
@@ -146,6 +147,7 @@ public class HostedMatch {
         }
         this.match = new Match(gameRules, sortedPlayers, title);
         this.match.subscribeToEvents(SoundSystem.instance);
+        this.match.subscribeToEvents(HapticEngine.instance);
         this.match.subscribeToEvents(visitor);
         this.matchPlaylist = playlist;
         startGame();

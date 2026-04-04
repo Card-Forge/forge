@@ -1,6 +1,7 @@
 package forge.gamemodes.match;
 
 import com.google.common.collect.*;
+import forge.game.GameEntityView;
 import forge.game.GameLog;
 import forge.game.GameView;
 import forge.game.card.CardView;
@@ -276,33 +277,24 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         }
     }
 
-    private final Set<PlayerView> highlightedPlayers = Sets.newHashSet();
+    private final Set<GameEntityView> highlighted = Sets.newHashSet();
 
     @Override
-    public void setHighlighted(final PlayerView pv, final boolean b) {
-        final boolean hasChanged = b ? highlightedPlayers.add(pv) : highlightedPlayers.remove(pv);
+    public void setHighlighted(final GameEntityView gv, final boolean b) {
+        final boolean hasChanged = b ? highlighted.add(gv) : highlighted.remove(gv);
         if (hasChanged) {
-            updateLives(Collections.singleton(pv));
+            if (gv instanceof PlayerView pv) {
+                updateLives(Collections.singleton(pv));
+            }
+            if (gv instanceof CardView cv) {
+                // since we are in UI thread, may redraw the card right now
+                updateSingleCard(cv);
+            }
         }
     }
 
-    public boolean isHighlighted(final PlayerView player) {
-        return highlightedPlayers.contains(player);
-    }
-
-    private final Set<CardView> highlightedCards = Sets.newHashSet();
-
-    // used to highlight cards in UI
-    @Override
-    public void setUsedToPay(final CardView card, final boolean value) {
-        final boolean hasChanged = value ? highlightedCards.add(card) : highlightedCards.remove(card);
-        if (hasChanged) { // since we are in UI thread, may redraw the card right now
-            updateSingleCard(card);
-        }
-    }
-
-    public boolean isUsedToPay(final CardView card) {
-        return highlightedCards.contains(card);
+    public boolean isHighlighted(final GameEntityView ge) {
+        return highlighted.contains(ge);
     }
 
     private final Set<CardView> selectableCards = Sets.newHashSet();

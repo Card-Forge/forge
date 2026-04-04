@@ -326,6 +326,13 @@ public class SettingsScene extends UIScene {
         }
 
 
+        addSettingSlider(Forge.getLocalizer().getMessage("lblVibrationIntensity"), ForgePreferences.FPref.UI_VIBRATE_INTENSITY, 0, 100);
+        addCheckBox(Forge.getLocalizer().getMessage("lblVibrateAfterLongPress"), ForgePreferences.FPref.UI_VIBRATE_ON_LONG_PRESS);
+        addCheckBox(Forge.getLocalizer().getMessage("lblVibrateWhenLosingLife"), ForgePreferences.FPref.UI_VIBRATE_ON_LIFE_LOSS);
+        addCheckBox(Forge.getLocalizer().getMessage("lblVibrateOnEnemyEncounter"), ForgePreferences.FPref.UI_VIBRATE_ON_ENEMY_ENCOUNTER);
+        addCheckBox(Forge.getLocalizer().getMessage("lblVibrateOnAdventureReward"), ForgePreferences.FPref.UI_VIBRATE_ON_ADVENTURE_REWARD);
+        addCheckBox(Forge.getLocalizer().getMessage("lblVibrateOnShopAction"), ForgePreferences.FPref.UI_VIBRATE_ON_SHOP_ACTION);
+
         settingGroup.row();
         backButton = ui.findActor("return");
         ui.onButtonPress("return", SettingsScene.this::back);

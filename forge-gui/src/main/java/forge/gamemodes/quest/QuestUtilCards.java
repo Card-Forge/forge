@@ -149,7 +149,6 @@ public final class QuestUtilCards {
         }
 
         return pool;
-
     }
 
     /**
@@ -268,7 +267,6 @@ public final class QuestUtilCards {
         final int nR = (int)(questPreferences.getPrefInt(DifficultyPrefs.STARTING_RARES, idxDifficulty) * variantModifier);
 
         addAllCards(BoosterUtils.getQuestStarterDeck(formatStartingPool, nC, nU, nR, userPrefs));
-
     }
 
     /**
@@ -338,7 +336,6 @@ public final class QuestUtilCards {
      * @param cards The cards to lose.
      */
     public void loseCards(final List<PaperCard> cards) {
-
         for(PaperCard card : cards) {
 
 	        removeCard(card, 1);
@@ -361,7 +358,6 @@ public final class QuestUtilCards {
      * @param qty The quantity of the card to remove.
      */
     public void removeCard(final PaperCard card, int qty) {
-
         questAssets.getCardPool().remove(card, qty);
 
         final int leftInPool = questAssets.getCardPool().count(card);
@@ -411,7 +407,6 @@ public final class QuestUtilCards {
      * @return the sell mutliplier
      */
     public double getSellMultiplier() {
-
         double baseMultiplier = Double.parseDouble(questPreferences.getPref(QPref.SHOP_SELLING_PERCENTAGE_BASE))/100.0;
         double maxMultiplier = Double.parseDouble(questPreferences.getPref(QPref.SHOP_SELLING_PERCENTAGE_MAX))/100.0;
 
@@ -437,7 +432,6 @@ public final class QuestUtilCards {
         }
 
         return multi;
-
     }
 
     /**
@@ -492,13 +486,11 @@ public final class QuestUtilCards {
      * @param quantity the count
      */
     private void generateBoostersInShop(final int quantity) {
-
     	questAssets.getShopList().addAllFlat(BoosterUtils.generateRandomBoosterPacks(quantity, questController));
 
         if (questPreferences.getPrefInt(QPref.SPECIAL_BOOSTERS) == 1) {
         	questAssets.getShopList().addAllFlat(generateRandomSpecialBoosterPacks(quantity));
         }
-
     }
 
     /**
@@ -523,7 +515,6 @@ public final class QuestUtilCards {
     }
 
     private static int getRandomCardFromBooster(final List<PaperCard> cards, final Predicate<PaperCard> predicate, final List<PaperCard> toAddTo, final int amount) {
-
     	if (amount <= 0) {
     		return 0;
 	    }
@@ -543,7 +534,6 @@ public final class QuestUtilCards {
 	    }
 
 	    return amount;
-
     }
 
     /**
@@ -577,7 +567,6 @@ public final class QuestUtilCards {
     }
 
     private void generateBoosterBoxesInShop(final int count) {
-
         if (count == 0) {
             return;
         }
@@ -606,7 +595,6 @@ public final class QuestUtilCards {
         }
 
         questAssets.getShopList().addAllOfTypeFlat(output);
-
     }
 
     /**
@@ -678,8 +666,6 @@ public final class QuestUtilCards {
      * Generate cards in shop.
      */
     private void generateCardsInShop() {
-
-        // Preferences
         final int startPacks = questPreferences.getPrefInt(QPref.SHOP_STARTING_PACKS);
         final int winsForPack = questPreferences.getPrefInt(QPref.SHOP_WINS_FOR_ADDITIONAL_PACK);
         final int maxPacks = questPreferences.getPrefInt(QPref.SHOP_MAX_PACKS);
@@ -702,7 +688,6 @@ public final class QuestUtilCards {
 	        // Spell shop no longer sells basic lands (we use "Add Basic Lands" instead)
 	        questAssets.getShopList().addAllOfType(generateBasicLands(0, 5, questController.getFormat()));
         }
-
     }
 
     /**
@@ -774,7 +759,6 @@ public final class QuestUtilCards {
     }
 
     public int getCompletionPercent(String edition) {
-
         for (String color : SealedProduct.specialSets) {
             if (color.equals(edition)) {
                 return 0;
@@ -806,7 +790,6 @@ public final class QuestUtilCards {
         }
 
         return (numOwnedCards * 100) / completeCards;
-
     }
 
     // These functions provide a way to sort and compare items in the spell shop according to how many are already owned

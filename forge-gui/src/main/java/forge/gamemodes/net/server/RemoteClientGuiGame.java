@@ -440,6 +440,12 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
     }
 
     @Override
+    public void setHighlighted(final GameEntityView ge, final boolean value) {
+        super.setHighlighted(ge, value);
+        send(ProtocolMethod.setHighlighted, ge, value);
+    }
+
+    @Override
     public void setCard(final CardView card) {
         updateGameView();
         send(ProtocolMethod.setCard, card);
