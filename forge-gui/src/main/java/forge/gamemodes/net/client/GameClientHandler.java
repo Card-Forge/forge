@@ -3,6 +3,7 @@ package forge.gamemodes.net.client;
 import forge.game.*;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
+import forge.gamemodes.net.CompatibleObjectDecoder;
 import forge.gamemodes.net.GameEventProxy;
 import forge.gamemodes.net.GameProtocolHandler;
 import forge.util.IHasForgeLog;
@@ -62,6 +63,11 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
                 if (args.length > 0 && args[0] instanceof GameView gameView) {
                     if (this.tracker == null) {
                         this.tracker = new Tracker();
+                        // Set tracker on decoder for IdRef resolution in protocol args
+                        CompatibleObjectDecoder decoder = ctx.pipeline().get(CompatibleObjectDecoder.class);
+                        if (decoder != null) {
+                            decoder.setTracker(this.tracker);
+                        }
                         if (gameView.getGameLog() == null) {
                             gameView.initGameLog();
                         }
