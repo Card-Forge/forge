@@ -113,8 +113,8 @@
     {
       "type": "TextButton",
       "name": "ApSettings",
-      "text": "[%130][+APIconSmall]",
-      "width": 35,
+      "text": "[%120][+APIconSmall]",
+      "width": 30,
       "height": 30,
       "x": 160,
       "y": 180

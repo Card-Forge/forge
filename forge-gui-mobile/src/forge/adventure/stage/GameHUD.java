@@ -108,6 +108,7 @@ public class GameHUD extends Stage {
         bookmarkActor = ui.findActor("bookmark");
         apSettingsActor = ui.findActor("aptracker");
         dialog = Controls.newDialog("");
+        apSettingsActor.pad(0, 0, 0, 2);
         apSettingsActor.setVisible(false);
 
         miniMapPlayer = new Image(Forge.getAssets().getTexture(Config.instance().getFile("ui/minimap_player.png")));

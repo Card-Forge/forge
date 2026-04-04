@@ -54,6 +54,7 @@ public class StartScene extends UIScene {
         dataButton = ui.findActor("Backup");
         apSettingsButton = ui.findActor("ApSettings");
 
+        apSettingsButton.pad(0, 0, 0, 2.5f);
         saveButton.setVisible(false);
         resumeButton.setVisible(false);
         version.setHeight(5);
@@ -261,8 +262,8 @@ public class StartScene extends UIScene {
 
         if (isArchipelagoNetworked) {
             apSettingsButton.setVisible(true);
-            settingsButton.setX(195);
-            settingsButton.setWidth(65);
+            settingsButton.setX(190);
+            settingsButton.setWidth(70);
             dataButton.setX(260);
             dataButton.setWidth(60);
         } else {
