@@ -73,7 +73,7 @@ public enum ProtocolMethod {
     setRememberedActions(Mode.SERVER, Void.TYPE),
     nextRememberedAction(Mode.SERVER, Void.TYPE),
     showWaitingTimer    (Mode.SERVER, Void.TYPE, PlayerView.class, String.class),
-    setUsedToPay        (Mode.SERVER, Void.TYPE, CardView.class, Boolean.TYPE),
+    setHighlighted      (Mode.SERVER, Void.TYPE, GameEntityView.class, Boolean.TYPE),
     handleGameEvents    (Mode.SERVER, Void.TYPE, List.class),
 
     // Client -> Server

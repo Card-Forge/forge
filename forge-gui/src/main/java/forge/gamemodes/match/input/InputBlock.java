@@ -129,8 +129,7 @@ public class InputBlock extends InputSyncronizedBase {
                         if (isCorrectAction) {
                             combat.addBlocker(currentAttacker, card);
                             card.getGame().getMatch().fireEvent(new UiEventBlockerAssigned(
-                                    CardView.get(card),
-                                    CardView.get(currentAttacker)));
+                                    CardView.get(card), CardView.get(currentAttacker)));
                         }
                     }
                 }
@@ -163,11 +162,11 @@ public class InputBlock extends InputSyncronizedBase {
 
     private void setCurrentAttacker(final Card card) {
         if (currentAttacker != null) {
-            getController().getGui().setUsedToPay(CardView.get(currentAttacker), false);
+            getController().getGui().setHighlighted(CardView.get(currentAttacker), false);
         }
         currentAttacker = card;
         if (card != null) {
-            getController().getGui().setUsedToPay(CardView.get(card), true);
+            getController().getGui().setHighlighted(CardView.get(card), true);
         }
     }
 }

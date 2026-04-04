@@ -234,9 +234,7 @@ public interface IGuiGame {
 
     void restoreOldZones(PlayerView playerView, PlayerZoneUpdates playerZoneUpdates);
 
-    void setHighlighted(PlayerView pv, boolean b);
-
-    void setUsedToPay(CardView card, boolean value);
+    void setHighlighted(GameEntityView pv, boolean b);
 
     void setSelectables(final Iterable<CardView> cards);
 
