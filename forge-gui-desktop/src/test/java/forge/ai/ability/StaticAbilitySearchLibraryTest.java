@@ -161,12 +161,8 @@ public class StaticAbilitySearchLibraryTest extends AITest {
         return card.getSpellAbilities()
                 .stream()
                 .filter( sa -> sa.getDescription().toLowerCase().contains("search your library"))
+                .peek( sa -> sa.setActivatingPlayer(card.getOwner()))
                 .findFirst()
-                .map( sa -> {
-                    //TODO avoid NPE in "forge.game.player.Player.isOpponentOf(forge.game.player.Player)" because the return value of "forge.game.spellability.SpellAbility.getActivatingPlayer()" is null
-                    sa.setActivatingPlayer(card.getOwner());
-                    return sa;
-                })
                 .orElse(null);
     }
 }
