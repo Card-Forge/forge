@@ -36,9 +36,8 @@ public class StaticAbilitySearchLibrary {
     public static boolean cantSearchLibrary(Player player, SpellAbility sa) {
         return findStaticAbilityForValidPlayer(player, CantSearchLibrary)
                 .filter(stAb -> !stAb.getIgnoreEffectPlayers().contains(player))
-                .filter(stAb -> !stAb.hasParam("ValidCause")
-                        || (stAb.matchesValidParam("ValidCause", sa)
-                            && player.equals(sa.getActivatingPlayer())))
+                .filter(stAb -> stAb.matchesValidParam("ValidCause", sa))
+                .filter(stAb -> stAb.matchesValidParam("ValidPlayerCauseRelative", player, sa.getHostCard()))
                 .isPresent();
     }
 
