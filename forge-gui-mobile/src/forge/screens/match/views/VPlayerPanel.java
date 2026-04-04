@@ -21,12 +21,10 @@ import forge.game.card.CardView;
 import forge.game.card.CounterEnumType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
-import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.menu.FMenuBar;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
-import forge.model.FModel;
 import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
 import forge.toolbox.FCardPanel;
@@ -573,23 +571,16 @@ public class VPlayerPanel extends FContainer {
         }
 
         private void update() {
-            int vibrateDuration = 0;
             int delta = player.getLife() - life;
             player.setAvatarLifeDifference(player.getAvatarLifeDifference() + delta);
             if (delta != 0) {
-                if (delta < 0) {
-                    vibrateDuration += delta * -100;
-                }
                 life = player.getLife();
                 lifeStr = String.valueOf(life);
             }
 
             delta = player.getCounters(CounterEnumType.POISON) - poisonCounters;
             if (delta != 0) {
-                if (delta > 0) {
-                    //TODO: Show animation on avatar for gaining poison counters
-                    vibrateDuration += delta * 200;
-                }
+                //TODO: Show animation on avatar for gaining poison counters
                 poisonCounters = player.getCounters(CounterEnumType.POISON);
             }
 
@@ -598,13 +589,6 @@ public class VPlayerPanel extends FContainer {
             ticketCounters = player.getCounters(CounterEnumType.TICKET);
             radCounters = player.getCounters(CounterEnumType.RAD);
             manaShards = player.getNumManaShards();
-
-            //when gui player loses life, vibrate device for a length of time based on amount of life lost
-            if (vibrateDuration > 0 && MatchController.instance.isLocalPlayer(player) &&
-                    FModel.getPreferences().getPrefBoolean(FPref.UI_VIBRATE_ON_LIFE_LOSS)) {
-                //never vibrate more than two seconds regardless of life lost or poison counters gained
-                Gdx.input.vibrate(Math.min(vibrateDuration, 2000));
-            }
         }
 
         private void updateShards() {

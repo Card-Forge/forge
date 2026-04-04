@@ -318,7 +318,7 @@ This follows our general approach where we try to find a reasonable middle groun
 
 ## Fight
 
-## FlipACoin
+## FlipCoin
 
 ## Fog
 This AF is based on the original *Fog* spell: "Prevent all combat damage that would be dealt this turn." While this could be done with an Effect, the specialized nature of the AI gives it its own AF.
