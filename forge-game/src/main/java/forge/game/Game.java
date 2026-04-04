@@ -97,8 +97,10 @@ public class Game {
     public boolean EXPERIMENTAL_RESTORE_SNAPSHOT = false;
     // While this is false here, its really set by the Match/Preferences
 
-    // If this merges with LKI In the future, it will need to change forms
     private GameSnapshot previousGameState = null;
+    private GameSnapshot pendingSnapshot = null;
+    private final Deque<GameSnapshot> undoStack = new ArrayDeque<>();
+    private static final int MAX_UNDO_DEPTH = 10;
     private CardCollection lastStateBattlefield = new CardCollection();
     private CardCollection lastStateGraveyard = new CardCollection();
 
@@ -186,21 +188,47 @@ public class Game {
     }
 
     public void stashGameState() {
-        // Take a snapshot of the current state to restore to previous state
+        // Save a pending snapshot before the player chooses an action
         if (EXPERIMENTAL_RESTORE_SNAPSHOT) {
-            previousGameState = new GameSnapshot(this);
-            previousGameState.makeCopy();
+            pendingSnapshot = new GameSnapshot(this);
+            pendingSnapshot.makeCopy();
+        }
+    }
+
+    public void commitGameState() {
+        // Push the pending snapshot onto the undo stack (called after a successful action)
+        if (pendingSnapshot != null) {
+            undoStack.push(pendingSnapshot);
+            pendingSnapshot = null;
+            if (undoStack.size() > MAX_UNDO_DEPTH) {
+                undoStack.removeLast();
+            }
         }
     }
 
     public boolean restoreGameState() {
-        // Restore game state snapshot
-        if (previousGameState == null || !EXPERIMENTAL_RESTORE_SNAPSHOT) {
+        // Restore from pending snapshot only (used for rollback of a failed spell/ability).
+        // This must NOT fall through to the undo stack — that's for deliberate user undo only.
+        if (!EXPERIMENTAL_RESTORE_SNAPSHOT || pendingSnapshot == null) {
             return false;
         }
-
-        previousGameState.restoreGameState(this);
+        pendingSnapshot.restoreGameState(this);
+        pendingSnapshot = null;
         return true;
+    }
+
+    public boolean undoToLastSnapshot() {
+        if (!EXPERIMENTAL_RESTORE_SNAPSHOT || undoStack.isEmpty()) return false;
+        GameSnapshot snapshot = undoStack.pop();
+        snapshot.restoreGameState(this);
+        // Re-stash so the pending snapshot reflects the restored state,
+        // not the pre-undo state that is now stale.
+        stashGameState();
+        return true;
+    }
+
+    public boolean canUndoToSnapshot() {
+        return EXPERIMENTAL_RESTORE_SNAPSHOT && !undoStack.isEmpty();
     }
 
     public void copyLastState() {
