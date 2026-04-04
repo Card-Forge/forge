@@ -379,6 +379,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         cards.addAll(event.attackers());
         cards.addAll(event.blockers());
 
+        needCombatUpdate = true;
         refreshFieldUpdate = true;
 
         processCards(cards, cardsRefreshDetails);

@@ -26,6 +26,7 @@ import java.util.function.BiPredicate;
 
 import com.google.common.collect.Lists;
 
+import forge.game.GameEntityView;
 import forge.game.card.CardView;
 import forge.game.combat.CombatView;
 import forge.util.collect.FCollection;
@@ -292,25 +293,34 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
     // Builds a combat-assignment map used to prevent grouping of cards with
     // different combat pairings. Maps blocker→attacker ID (so blockers of
-    // different attackers stay separate) AND attacker→hash of blocker IDs
-    // (so attackers with different blocker sets stay separate).
+    // different attackers stay separate), attacker→defender+blockerHash (so
+    // attackers assigned to different defenders or with different blocker
+    // sets stay separate).
     private Map<Integer, Integer> buildCombatAssignments() {
         if (getMatchUI().getGameView() == null) { return Collections.emptyMap(); }
         CombatView combat = getMatchUI().getGameView().getCombat();
         if (combat == null) { return Collections.emptyMap(); }
         Map<Integer, Integer> assignments = new HashMap<>();
         for (CardView attacker : combat.getAttackers()) {
+            // High bit ensures combat assignments are always negative, never
+            // colliding with the default 0 for non-combat cards
+            GameEntityView defender = combat.getDefender(attacker);
+            int assignment = (defender != null ? defender.getId() : 0) | Integer.MIN_VALUE;
+
             FCollection<CardView> blockers = combat.getPlannedBlockers(attacker);
-            if (blockers == null || blockers.isEmpty()) { continue; }
-            for (CardView blocker : blockers) {
-                assignments.put(blocker.getId(), attacker.getId());
+            if (blockers != null && !blockers.isEmpty()) {
+                for (CardView blocker : blockers) {
+                    assignments.put(blocker.getId(), attacker.getId() | Integer.MIN_VALUE);
+                }
+                // Multiplicative hash, not XOR — XOR of certain ID
+                // combinations cancels to 0
+                int blockerHash = 1;
+                for (CardView blocker : blockers) {
+                    blockerHash = 31 * blockerHash + blocker.getId();
+                }
+                assignment ^= blockerHash;
             }
-            // Also distinguish attackers by their blocker set
-            int blockerHash = 0;
-            for (CardView blocker : blockers) {
-                blockerHash ^= blocker.getId();
-            }
-            assignments.put(attacker.getId(), blockerHash);
+            assignments.put(attacker.getId(), assignment);
         }
         return assignments;
     }
@@ -634,6 +644,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
     @Override
     public final void mouseLeftClicked(final CardPanel panel, final MouseEvent evt) {
+        boolean isLocal = getMatchUI().isLocalPlayer(model);
         boolean selectAll = evt.isShiftDown();
         if (!selectAll && panel.getGroupCount() >= 2) {
             selectAll = panel.isBadgeHit(evt.getX(), evt.getY());
@@ -662,7 +673,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 return;
             }
             List<CardPanel> stack = panel.getStack();
-            if (stack != null && stack.size() >= (grouping ? 2 : 5)) {
+            if (stack != null && stack.size() >= (grouping ? 2 : 5)
+                    && isLocal) {
                 // Split from group, then check if the game accepts this card.
                 // If accepted, doUpdateCard will remove from splitCardIds when
                 // the card's tapped state changes, allowing it to regroup.
@@ -681,7 +693,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         boolean selected = selectCard(panel, new MouseTriggerEvent(evt), selectAll);
         // If this individual card was accepted (e.g. declared as attacker), mark it
         // as split so it can merge with other split cards from the same group.
-        if (selected && !selectAll && panel.getCard() != null) {
+        // Only split on the local player's own field — clicking opponent's cards
+        // (e.g. selecting an attacker during declare blockers) should not split.
+        if (selected && !selectAll && panel.getCard() != null && isLocal) {
             splitCardIds.add(panel.getCard().getId());
         }
         doLayout();
@@ -834,7 +848,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     public void update() {
         FThreads.assertExecutedByEdt(true);
         splitCardIds.clear();
-        combatAssignments = Collections.emptyMap();
+        // Don't clear combatAssignments — doLayout() rebuilds from CombatView.
+        // Clearing here races with network play: updateZones() runs AFTER
+        // showCombat() in the same processEvents pass, wiping assignments
         recalculateCardPanels(model, zone);
     }
 
