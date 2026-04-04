@@ -7,6 +7,8 @@ import java.util.List;
 
 import forge.game.*;
 import forge.game.card.CounterEnumType;
+import forge.game.spellability.AbilitySub;
+import forge.game.zone.ZoneType;
 import org.testng.annotations.Test;
 
 import com.google.common.collect.Lists;
@@ -105,6 +107,56 @@ public class StaticAbilitySearchLibraryTest extends AITest {
         game.getAction().checkStateEffects(true);
 
         assertFalse(p1.canSearchLibraryWith(findSearchLibraryAbility(aridMesa), p1));
+    }
+
+    @Test
+    public void testAshiok_opponentCanCauseOtherOpponentToSearchTheirLibrary() {
+        Game game = initAndCreateGame();
+        Player p1 = game.getPlayers().get(0);
+        Player p2 = game.getPlayers().get(1);
+        Player p3 = game.getPlayers().get(2);
+
+        Card ashiok = addCard("Ashiok, Dream Render", p1);
+        ashiok.setCounters(CounterEnumType.LOYALTY, 5);
+
+        Card grizzlyBears = addCard("Grizzly Bears", p2);
+
+        Card pathToExile = addCardToZone("Path to Exile", p3, ZoneType.Hand);
+
+
+        SpellAbility pathToExileSA = pathToExile.getSpellAbilities().get(0);
+        pathToExileSA.getTargets().add(grizzlyBears);
+        pathToExileSA.setActivatingPlayer(p3);
+
+        game.getAction().checkStateEffects(true);
+
+        AbilitySub sub = pathToExileSA.getSubAbility();
+
+        //TODO still failing
+        assertTrue(p2.canSearchLibraryWith(sub, p2));
+    }
+
+    @Test
+    public void testAshiok_opponentCanNotCauseToSearchTheirOwnLibrary() {
+        Game game = initAndCreateGame();
+        Player p1 = game.getPlayers().get(0);
+        Player p3 = game.getPlayers().get(2);
+
+        Card ashiok = addCard("Ashiok, Dream Render", p1);
+        ashiok.setCounters(CounterEnumType.LOYALTY, 5);
+
+        Card grizzlyBears = addCard("Grizzly Bears", p3);
+
+        Card pathToExile = addCardToZone("Path to Exile", p3, ZoneType.Hand);
+
+        SpellAbility pathToExileSA = pathToExile.getSpellAbilities().get(0);
+        pathToExileSA.getTargets().add(grizzlyBears);
+        pathToExileSA.setActivatingPlayer(p3);
+
+        game.getAction().checkStateEffects(true);
+
+        AbilitySub sub = pathToExileSA.getSubAbility();
+        assertFalse(p3.canSearchLibraryWith(sub, p3), "P3 can not search their own library by sending his own creature to exile");
     }
 
     private SpellAbility findSearchLibraryAbility(Card card){
