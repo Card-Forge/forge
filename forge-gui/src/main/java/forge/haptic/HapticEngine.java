@@ -46,7 +46,7 @@ public final class HapticEngine {
     public static void vibrate(FPref pref, int durationMs) {
         if (durationMs <= 0) return;
         if (!FModel.getPreferences().getPrefBoolean(pref)) return;
-        int intensity = getIntensity();
+        int intensity = FModel.getPreferences().getPrefInt(FPref.UI_VIBRATE_INTENSITY);
         if (intensity <= 0) return;
 
         if (GuiBase.getInterface().useControllerForHaptics()) {
@@ -56,11 +56,4 @@ public final class HapticEngine {
         }
     }
 
-    private static int getIntensity() {
-        try {
-            return FModel.getPreferences().getPrefInt(FPref.UI_VIBRATE_INTENSITY);
-        } catch (NumberFormatException e) {
-            return 100;
-        }
-    }
 }
