@@ -197,11 +197,6 @@ public class GameEventProxy implements Serializable, IHasNetLog {
         }
     }
 
-    /**
-     * ObjectInputStream that resolves IdRef markers back to TrackableObjects
-     * from the Tracker. Tracks whether any resolution failed so callers
-     * can drop damaged events.
-     */
     private static class IdResolvingInputStream extends ObjectInputStream {
         private final Tracker tracker;
         private boolean unresolvedRefs;

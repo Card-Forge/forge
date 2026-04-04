@@ -1,15 +1,21 @@
 package forge.gamemodes.net;
 
+import forge.trackable.Tracker;
 import io.netty.handler.codec.serialization.ClassResolver;
 
 import java.io.*;
 
 public class CObjectInputStream extends ObjectInputStream {
     private final ClassResolver classResolver;
+    private final Tracker tracker;
 
-    CObjectInputStream(InputStream in, ClassResolver classResolver) throws IOException {
+    CObjectInputStream(InputStream in, ClassResolver classResolver, Tracker tracker) throws IOException {
         super(in);
         this.classResolver = classResolver;
+        this.tracker = tracker;
+        if (tracker != null) {
+            enableResolveObject(true);
+        }
     }
 
     @Override
@@ -34,5 +40,10 @@ public class CObjectInputStream extends ObjectInputStream {
             clazz = super.resolveClass(desc);
         }
         return clazz;
+    }
+
+    @Override
+    protected Object resolveObject(Object obj) throws IOException {
+        return TrackableRef.resolve(obj, tracker);
     }
 }
