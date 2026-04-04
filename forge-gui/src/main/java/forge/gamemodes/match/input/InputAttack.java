@@ -29,7 +29,6 @@ import forge.game.combat.CombatUtil;
 import forge.game.event.GameEventCombatUpdate;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
-import forge.game.player.PlayerView;
 import forge.game.staticability.StaticAbilityMustAttack;
 import forge.game.zone.ZoneType;
 import forge.gui.events.UiEventAttackerDeclared;
@@ -288,7 +287,7 @@ public class InputAttack extends InputSyncronizedBase {
 
     private boolean undeclareAttacker(final Card card) {
         combat.removeFromCombat(card);
-        getController().getGui().setUsedToPay(CardView.get(card), false);
+        getController().getGui().setHighlighted(CardView.get(card), false);
         // When removing an attacker clear the attacking band
         activateBand(null);
 
@@ -300,12 +299,7 @@ public class InputAttack extends InputSyncronizedBase {
     private void setCurrentDefender(final GameEntity def) {
         currentDefender = def;
         for (final GameEntity ge : defenders) {
-            if (ge instanceof Card) {
-                getController().getGui().setUsedToPay(CardView.get((Card) ge), ge == def);
-            }
-            else if (ge instanceof Player) {
-                getController().getGui().setHighlighted(PlayerView.get((Player) ge), ge == def);
-            }
+            getController().getGui().setHighlighted(GameEntityView.get(ge), ge == def);
         }
         if (def != null) {
             potentialBanding = isBandingPossible();
@@ -317,14 +311,14 @@ public class InputAttack extends InputSyncronizedBase {
     private void activateBand(final AttackingBand band) {
         if (activeBand != null) {
             for (final Card card : activeBand.getAttackers()) {
-                getController().getGui().setUsedToPay(CardView.get(card), false);
+                getController().getGui().setHighlighted(CardView.get(card), false);
             }
         }
         activeBand = band;
 
         if (activeBand != null) {
             for (final Card card : activeBand.getAttackers()) {
-                getController().getGui().setUsedToPay(CardView.get(card), true);
+                getController().getGui().setHighlighted(CardView.get(card), true);
             }
         }
     }
