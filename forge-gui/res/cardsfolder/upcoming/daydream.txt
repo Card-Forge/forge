@@ -1,0 +1,8 @@
+Name:Daydream
+ManaCost:W
+Types:Sorcery
+A:SP$ ChangeZone | ValidTgts$ Creature.YouCtrl | ValidTgtDesc$ creature you control | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile target creature you control, then return that card to the battlefield under its owner's control with a +1/+1 counter on it.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ Battlefield | WithCountersType$ P1P1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+K:Flashback:2 W
+Oracle:Exile target creature you control, then return that card to the battlefield under its owner's control with a +1/+1 counter on it.\nFlashback {2}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

@@ -49,14 +49,14 @@ public class RollDiceEffect extends SpellAbilityEffect {
             this.naturalValue = naturalValue;
             this.modifiedValue = modifiedValue;
         }
-        // Getters
+
         public int getNaturalValue() {
             return naturalValue;
         }
         public int getModifiedValue() {
             return modifiedValue;
         }
-        // Setters
+
         public void setNaturalValue(int naturalValue) {
             this.naturalValue = naturalValue;
         }

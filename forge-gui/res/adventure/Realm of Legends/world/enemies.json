@@ -8811,7 +8811,6 @@
       }
     ],
     "colors": "R",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -29916,6 +29915,7 @@
       }
     ],
     "colors": "R",
+    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {

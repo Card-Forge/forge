@@ -385,11 +385,23 @@ public abstract class Trigger extends TriggerReplacementBase {
                 return false;
             }
             // CR 702.100c
-            if (!moved.isCreature() || !this.getHostCard().isCreature()) {
+            if (!moved.isCreature() || !getHostCard().isCreature()) {
                 return false;
             }
-            if (moved.getNetPower() <= this.getHostCard().getNetPower()
-                    && moved.getNetToughness() <= this.getHostCard().getNetToughness()) {
+            if (moved.getNetPower() <= getHostCard().getNetPower()
+                    && moved.getNetToughness() <= getHostCard().getNetToughness()) {
+                return false;
+            }
+        }
+        if (isKeyword(Keyword.INCREMENT)) {
+            if (!getHostCard().isCreature()) {
+                return false;
+            }
+            final SpellAbility sp = (SpellAbility) runParams.get(AbilityKey.SpellAbility);
+            final Player p = getHostCard().getController();
+            int v = (int) sp.getPayingMana().stream().filter(m ->  m.getPlayer().equals(p)).count();
+            if (v <= getHostCard().getNetPower()
+                    && v <= getHostCard().getNetToughness()) {
                 return false;
             }
         }
@@ -415,7 +427,7 @@ public abstract class Trigger extends TriggerReplacementBase {
             final Player attackedP = (Player) attacked;
             int life = attackedP.getLife();
             boolean found = false;
-            for (Player opp : this.getHostCard().getController().getOpponents()) {
+            for (Player opp : getHostCard().getController().getOpponents()) {
                 if (opp.equals(attackedP)) {
                     continue;
                 }

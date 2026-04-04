@@ -4,5 +4,5 @@ Colors:white
 Types:Enchantment
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AddKeyword$ Vigilance | Description$ Creatures you control have vigilance.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep, you gain 1 life.
-SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1
 Oracle:Creatures you control have vigilance.\nAt the beginning of your upkeep, you gain 1 life.

@@ -1,0 +1,12 @@
+Name:Furygale Flocking
+ManaCost:8 R R
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each instant and sorcery card in your graveyard.
+A:SP$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBToken | ChangeZoneTable$ True
+SVar:DBToken:DB$ Token | TokenScript$ ur_3_3_elemental_flying | TokenAmount$ 2 | TokenOwner$ You | RememberTokens$ True | PumpKeywords$ Haste | PumpDuration$ EOT | SubAbility$ DBEff
+SVar:DBEff:DB$ Effect | RememberObjects$ Remembered | ExileOnMoved$ Battlefield | StaticAbilities$ MustAttack | SubAbility$ DBCleanup
+SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.IsRemembered | MustAttack$ RememberedPlayer | Description$ This creature attacks its designated player this turn if able.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
+DeckHas:Ability$Token
+Oracle:This spell costs {1} less to cast for each instant and sorcery card in your graveyard.\nFor each opponent, create two 3/3 blue and red Elemental creature tokens with flying that attack that opponent this turn if able. They gain haste until end of turn.

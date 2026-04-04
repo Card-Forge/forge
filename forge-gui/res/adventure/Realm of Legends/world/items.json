@@ -1580,7 +1580,6 @@
     "equipmentSlot": "Boots",
     "iconName": "BloodswornBite",
     "effect": {
-        "lifeModifier": -4,
         "startBattleWithCard": [
         "Olivia's Bloodsworn|SOI"
      ]
@@ -2556,12 +2555,12 @@
   },
     {
     "name": "Ooze Amulet",
-    "description": "Pay 1G and sac a non-ooze at sorcery speed, make an X/X ooze of the sac'd's power",
+    "description": "1G: Remove X +1/+1 counters, make an X/X ooze",
     "equipmentSlot": "Neck",
     "iconName": "OozeAmulet",
     "effect": {
         "startBattleWithCard": [
-        "Ooze Garden|ALA"
+        "Ooze Flux|GTC"
      ]
     }
   },
@@ -3458,12 +3457,12 @@
   },
     {
     "name": "Full Moon Necklace",
-    "description": "Werewolves get +1/+0 and trample, sac to regen them all",
+    "description": "Wolves and Werewolves get +1/+1 and trample.",
     "equipmentSlot": "Neck",
     "iconName": "FullMoonNecklace",
     "effect": {
         "startBattleWithCard": [
-        "Full Moon's Rise"
+        "Howlpack Resurgence"
      ]
     }
   },
