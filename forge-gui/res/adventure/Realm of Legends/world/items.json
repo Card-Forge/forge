@@ -1580,7 +1580,6 @@
     "equipmentSlot": "Boots",
     "iconName": "BloodswornBite",
     "effect": {
-        "lifeModifier": -4,
         "startBattleWithCard": [
         "Olivia's Bloodsworn|SOI"
      ]
