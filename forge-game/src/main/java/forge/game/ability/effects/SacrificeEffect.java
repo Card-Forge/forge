@@ -76,8 +76,6 @@ public class SacrificeEffect extends SpellAbilityEffect {
 
         // Expand Sacrifice keyword here depending on what we need out of it.
         final int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Amount", "1"), sa);
-        final boolean devour = sa.isKeyword(Keyword.DEVOUR);
-        final boolean exploit = sa.isKeyword(Keyword.EXPLOIT);
         final boolean sacEachValid = sa.hasParam("SacEachValid");
 
         String valid = sa.getParamOrDefault("SacValid", "Self");
@@ -163,14 +161,13 @@ public class SacrificeEffect extends SpellAbilityEffect {
                 } else {
                     for (Card sac : game.getAction().sacrifice(choosenToSacrifice, sa, true, params)) {
                         Card lKICopy = zoneMovements.getLastStateBattlefield().get(sac);
-                        // Run Devour Trigger
-                        if (devour) {
+                        if (sa.isKeyword(Keyword.DEVOUR)) {
                             host.addDevoured(lKICopy);
                             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                             runParams.put(AbilityKey.Devoured, lKICopy);
                             game.getTriggerHandler().runTrigger(TriggerType.Devoured, runParams, false);
                         }
-                        if (exploit) {
+                        if (sa.isKeyword(Keyword.EXPLOIT)) {
                             host.addExploited(lKICopy);
                             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(host);
                             runParams.put(AbilityKey.Exploited, lKICopy);

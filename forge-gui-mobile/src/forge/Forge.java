@@ -1541,6 +1541,7 @@ public class Forge implements ApplicationListener {
                 public boolean axisMoved(Controller controller, int axisIndex, float value) {
                     //System.out.println(controller.getName()+"["+controller.getUniqueId()+"]: axis: "+axisIndex+" - "+value);
                     hasGamepad = true;
+                    // Axis deadzone filters joystick drift from counting
                     if (Math.abs(value) > 0.25f) {
                         lastInputWasController = true;
                     }
