@@ -1350,6 +1350,15 @@ public class CardView extends GameEntityView {
         }
         public String getImageKey(Iterable<PlayerView> viewers) {
             if (getState() == CardStateName.FaceDown) {
+                // For face-down exile cards (e.g. Gonti, Lord of Luxury), show the actual
+                // card face to players who have permission to look at it
+                if (getCard().isInZone(EnumSet.of(ZoneType.Exile))
+                        && viewers != null && canFaceDownBeShownToAny(viewers)) {
+                    CardStateView origState = getCard().getAlternateState();
+                    if (origState != null) {
+                        return origState.getTrackableImageKey();
+                    }
+                }
                 return getCard().getFacedownImageKey();
             }
             if (canBeShownToAny(viewers)) {
