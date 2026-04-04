@@ -3718,12 +3718,16 @@ public class Player extends GameEntity implements Comparable<Player> {
         return !StaticAbilityCantDiscard.cantDiscard(this, sa, effect);
     }
 
-    public boolean canSearchLibraryWith(SpellAbility sa) {
+    public boolean canSearchLibraryWith(SpellAbility sa, Player targetPlayer) {
         if (sa == null) {
             return true;
         }
 
-        return !StaticAbilitySearchLibrary.cantSearchLibrary(this, sa);
+        if (StaticAbilitySearchLibrary.cantSearchLibrary(this)) {
+            return false;
+        }
+        return targetPlayer == null || !targetPlayer.equals(sa.getActivatingPlayer())
+                || !StaticAbilitySearchLibrary.cantSearchLibrary(targetPlayer);
     }
 
     public void addAdditionalVote(long timestamp, int value) {
