@@ -478,7 +478,7 @@ public final class NetworkChecksumUtil {
         if (value instanceof TrackableCollection tc) {
             List<Integer> ids = new ArrayList<>(tc.size());
             for (Object item : tc) {
-                ids.add(item instanceof TrackableObject ? ((TrackableObject) item).getId() : Objects.hashCode(item));
+                ids.add(item instanceof TrackableObject to ? to.getId() : Objects.hashCode(item));
             }
             ids.sort(null);
             return ids.hashCode();

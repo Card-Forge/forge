@@ -72,6 +72,7 @@ public enum ProtocolMethod implements IHasNetLog {
     setRememberedActions(Mode.SERVER, Void.TYPE),
     nextRememberedAction(Mode.SERVER, Void.TYPE),
     showWaitingTimer    (Mode.SERVER, Void.TYPE, PlayerView.class, String.class),
+    setHighlighted      (Mode.SERVER, Void.TYPE, GameEntityView.class, Boolean.TYPE),
     applyDelta          (Mode.SERVER, Void.TYPE, DeltaPacket.class),
 
     // Client -> Server
