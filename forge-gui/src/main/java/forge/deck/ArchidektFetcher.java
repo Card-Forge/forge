@@ -126,6 +126,7 @@ public class ArchidektFetcher extends DeckSiteFetcher {
             }
         }
         for (Map.Entry<String, List<String>> entry : sections.entrySet()) {
+            if (entry.getKey().equals("Maybeboard")) continue;
             if (!entry.getValue().isEmpty()) {
                 sb.append(entry.getKey()).append("\n");
                 for (String line : entry.getValue()) {
