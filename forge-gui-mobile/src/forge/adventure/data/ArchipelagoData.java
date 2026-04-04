@@ -24,6 +24,8 @@ public class ArchipelagoData implements SaveFileContent {
     private final Set<String> allCardSets = new HashSet<>();
     // List of teleportation runes that we use to gate regions
     private final Set<String> regionTeleportingRunes = new HashSet<>(Arrays.asList("White rune","Black rune","Blue rune","Red rune","Green rune"));
+    // List of known main bosses that contribute to APWorld completion
+    private final Set<String> mainBosses = new HashSet<>(Arrays.asList("Lorthos","Emrakul","Lathliss", "Ghalta", "Griselbrand","Akroma", "Sliver Queen"));
 
     // Actual user data we want to store
     private final Map<String, Long> completedTownInnEvents = new HashMap<>();
@@ -310,13 +312,19 @@ public class ArchipelagoData implements SaveFileContent {
         updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BATTLES_WON);
     }
 
+    // Todo: Defeating a (mini-)boss should probably count as a check.
     // Note that the name of a boss is not unique so we'll need to filter from all enemies which have a `boss` value of `true`.
     // Returns `true` if the boss was not already defeated before.
     public boolean addMiniBossDefeated(String miniBossName) {
         return miniBossesDefeatedByName.add(miniBossName);
     }
     public boolean addBossDefeated(String bossName) {
-        return bossesDefeatedByName.add(bossName);
+        boolean result = bossesDefeatedByName.add(bossName);
+        // Win condition is reached if all bosses have been defeated.
+        if (bossesDefeatedByName.containsAll(mainBosses)) {
+            // Todo: Inform the APWorld that the win condition is reached.
+        }
+        return result;
     }
 
     public boolean addCardUnlockedByName(String cardName) {
