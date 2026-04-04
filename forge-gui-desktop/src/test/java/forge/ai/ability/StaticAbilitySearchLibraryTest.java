@@ -123,7 +123,6 @@ public class StaticAbilitySearchLibraryTest extends AITest {
 
         Card pathToExile = addCardToZone("Path to Exile", p3, ZoneType.Hand);
 
-
         SpellAbility pathToExileSA = pathToExile.getSpellAbilities().get(0);
         pathToExileSA.getTargets().add(grizzlyBears);
         pathToExileSA.setActivatingPlayer(p3);
@@ -132,7 +131,6 @@ public class StaticAbilitySearchLibraryTest extends AITest {
 
         AbilitySub sub = pathToExileSA.getSubAbility();
 
-        //TODO still failing
         assertTrue(p2.canSearchLibraryWith(sub, p2));
     }
 
@@ -164,6 +162,11 @@ public class StaticAbilitySearchLibraryTest extends AITest {
                 .stream()
                 .filter( sa -> sa.getDescription().toLowerCase().contains("search your library"))
                 .findFirst()
+                .map( sa -> {
+                    //TODO avoid NPE in "forge.game.player.Player.isOpponentOf(forge.game.player.Player)" because the return value of "forge.game.spellability.SpellAbility.getActivatingPlayer()" is null
+                    sa.setActivatingPlayer(card.getOwner());
+                    return sa;
+                })
                 .orElse(null);
     }
 }

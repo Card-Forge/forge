@@ -3723,7 +3723,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             return true;
         }
 
-        return !StaticAbilitySearchLibrary.cantSearchLibrary(this, targetPlayer);
+        return !StaticAbilitySearchLibrary.cantSearchLibrary(this, sa);
     }
 
     public void addAdditionalVote(long timestamp, int value) {
