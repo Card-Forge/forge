@@ -888,8 +888,8 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) The Unknown Wizard
 1. (Uk) Fear of the Unknown
 1. (Uk) Rinta, Cousin of Sitka
+1. (Uk) Lord of Atlanta
 1. (Uk) The Mystery Raceway - Also event outcome matters.
-1. (Uk) Lord of Atlanta - Also "Townwalk".
 1. (See Also: The Companion of the Wilds, Tier 3)
 
 #### Set Matters
