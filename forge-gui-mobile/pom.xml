@@ -110,6 +110,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <groupId>io.github.archipelagomw</groupId>
+            <artifactId>Java-Client</artifactId>
+            <version>0.2.0</version>
+        </dependency>
     </dependencies>
 
 </project>

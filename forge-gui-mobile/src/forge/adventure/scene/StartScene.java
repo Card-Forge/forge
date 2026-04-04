@@ -6,6 +6,8 @@ import com.badlogic.gdx.utils.Timer;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
+import forge.adventure.data.ArchipelagoData;
+import forge.adventure.data.ArchipelagoMode;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.GameStage;
 import forge.adventure.stage.MapStage;
@@ -27,7 +29,7 @@ import java.io.IOException;
 public class StartScene extends UIScene {
     private static StartScene object;
     Dialog exitDialog, backupDialog, zipDialog, unzipDialog;
-    TextraButton saveButton, resumeButton, continueButton;
+    TextraButton saveButton, resumeButton, continueButton, settingsButton, dataButton, apSettingsButton;
     TypingLabel version = Controls.newTypingLabel("{GRADIENT}[%80]v." + Forge.getDeviceAdapter().getVersionString() + "{ENDGRADIENT}");
 
 
@@ -43,17 +45,23 @@ public class StartScene extends UIScene {
         ui.onButtonPress("Backup", StartScene.this::backup);
         ui.onButtonPress("Exit", StartScene.this::Exit);
         ui.onButtonPress("Switch", StartScene.this::switchToClassic);
-
+        ui.onButtonPress("ApSettings", StartScene.this::apSettings);
 
         saveButton = ui.findActor("Save");
         resumeButton = ui.findActor("Resume");
         continueButton = ui.findActor("Continue");
+        settingsButton = ui.findActor("Settings");
+        dataButton = ui.findActor("Backup");
+        apSettingsButton = ui.findActor("ApSettings");
 
+        apSettingsButton.pad(0, 0, 0, 2.5f);
         saveButton.setVisible(false);
         resumeButton.setVisible(false);
         version.setHeight(5);
         version.skipToTheEnd();
         ui.addActor(version);
+
+        updateSettingRow();
     }
 
     public static StartScene instance() {
@@ -228,6 +236,11 @@ public class StartScene extends UIScene {
         Forge.switchToClassic();
     }
 
+    public boolean apSettings() {
+        Forge.switchScene(ArchipelagoSettingsScene.instance());
+        return true;
+    }
+
     public void updateResumeContinue() {
         boolean hasResumeButton = WorldSave.getCurrentSave().getWorld().getData() != null;
         resumeButton.setVisible(hasResumeButton);
@@ -244,6 +257,24 @@ public class StartScene extends UIScene {
         }
     }
 
+    private void updateSettingRow() {
+        boolean isArchipelagoNetworked = ArchipelagoData.getInstance().getArchipelagoMode() == ArchipelagoMode.networked_archipelago;
+
+        if (isArchipelagoNetworked) {
+            apSettingsButton.setVisible(true);
+            settingsButton.setX(190);
+            settingsButton.setWidth(70);
+            dataButton.setX(260);
+            dataButton.setWidth(60);
+        } else {
+            apSettingsButton.setVisible(false);
+            settingsButton.setX(160);
+            settingsButton.setWidth(80);
+            dataButton.setX(240);
+            dataButton.setWidth(80);
+        }
+    }
+
     @Override
     public void enter() {
         boolean hasSaveButton = WorldSave.getCurrentSave().getWorld().getData() != null;
@@ -254,6 +285,7 @@ public class StartScene extends UIScene {
         saveButton.setVisible(hasSaveButton);
         saveButton.setDisabled(TileMapScene.instance().currentMap().isInMap());
         updateResumeContinue();
+        updateSettingRow();
 
         GuiBase.setAdventureDirectory(Config.instance().getPrefix());
 
