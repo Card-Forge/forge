@@ -70,24 +70,18 @@ public class Untap extends Phase {
     public void executeAt() {
         super.executeAt();
 
-        doPhasing(game.getPhaseHandler().getPlayerTurn());
-        doDayTime(game.getPhaseHandler().getPreviousPlayerTurn());
+        // Handles both single priority turns or shared turns (e.g. team games).
+        PhaseHandler ph = game.getPhaseHandler();
+        for (Player p : ph.getActiveTurnPlayers()) {
+            doPhasing(p);
+        }
 
+        doDayTime(game.getPhaseHandler().getPreviousPlayerTurn());
         game.getAction().checkStaticAbilities();
 
-        doUntap();
-    }
-
-    /**
-     * <p>
-     * Executes untap phase for a specific player (used for shared turns).
-     * </p>
-     */
-    public void executeAt(Player player) {
-        super.executeAt();
-
-        // For teammates, we only untap their permanents, no phasing or day/night changes
-        doUntapForPlayer(player);
+        for (Player p : ph.getActiveTurnPlayers()) {
+            doUntapForPlayer(p);
+        }
     }
 
     /**
@@ -95,8 +89,7 @@ public class Untap extends Phase {
      * doUntap.
      * </p>
      */
-    private void doUntap() {
-        final Player active = game.getPhaseHandler().getPlayerTurn();
+    private void doUntapForPlayer(Player active) {
         Map<Player, CardCollection> untapMap = Maps.newHashMap();
 
         CardCollection untapList = new CardCollection(active.getCardsIn(ZoneType.Battlefield));
@@ -176,98 +169,6 @@ public class Untap extends Phase {
         // even if they are not creatures
         for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
             c.removeExertedBy(active);
-        }
-
-        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Map, untapMap);
-        game.getTriggerHandler().runTrigger(TriggerType.UntapAll, runParams, false);
-    }
-
-    /**
-     * <p>
-     * doUntapForPlayer - Untaps cards for a specific player (for shared turns teammates).
-     * </p>
-     */
-    private void doUntapForPlayer(final Player player) {
-        Map<Player, CardCollection> untapMap = Maps.newHashMap();
-
-        CardCollection untapList = new CardCollection(player.getCardsIn(ZoneType.Battlefield));
-
-        CardZoneTable triggerList = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
-        CardCollection bounceList = CardLists.getKeyword(untapList, "During your next untap step, as you untap your permanents, return CARDNAME to its owner's hand.");
-        for (final Card c : bounceList) {
-            Card moved = game.getAction().moveToHand(c, null);
-            triggerList.put(ZoneType.Battlefield, moved.getZone().getZoneType(), moved);
-        }
-        triggerList.triggerChangesZoneAll(game, null);
-        untapList.removeAll(bounceList);
-
-        final Map<String, Integer> restrictUntap = Maps.newHashMap();
-        for (KeywordInterface ki : player.getKeywords()) {
-            String kw = ki.getOriginal();
-            if (kw.startsWith("UntapAdjust")) {
-                String[] parse = kw.split(":");
-                if (!restrictUntap.containsKey(parse[1])
-                        || Integer.parseInt(parse[2]) < restrictUntap.get(parse[1])) {
-                    restrictUntap.put(parse[1], Integer.parseInt(parse[2]));
-                }
-            }
-            if (kw.startsWith("OnlyUntapChosen")) {
-                List<String> validTypes = Arrays.asList(kw.split(":")[1].split(","));
-                final String chosen = player.getController().chooseSomeType("Card", new SpellAbility.EmptySa(ApiType.ChooseType, null, player), validTypes);
-                untapList = CardLists.getType(untapList, chosen);
-            }
-        }
-
-        untapList = CardLists.filter(untapList,  c -> c.canUntap(player, false));
-
-        final String[] restrict = restrictUntap.keySet().toArray(new String[0]);
-        final CardCollection restrictList = CardLists.getValidCards(untapList, restrict, player, null, null);
-        untapList.removeAll(restrictList);
-        CardCollection restrictUntapped = new CardCollection();
-        while (!restrictList.isEmpty()) {
-            Map<String, Integer> remaining = Maps.newHashMap(restrictUntap);
-            for (Entry<String, Integer> entry : remaining.entrySet()) {
-                if (entry.getValue() == 0) {
-                    restrictList.removeAll(CardLists.getValidCards(restrictList, entry.getKey(), player, null, null));
-                    restrictUntap.remove(entry.getKey());
-                }
-            }
-            Card chosen = player.getController().chooseSingleEntityForEffect(restrictList, new SpellAbility.EmptySa(ApiType.Untap, null, player),
-                    "Select a card to untap\r\n(Selected:" + restrictUntapped + ")\r\n" + "Remaining cards that can untap: " + remaining, null);
-            if (chosen != null) {
-                for (Entry<String, Integer> rest : restrictUntap.entrySet()) {
-                    if (chosen.isValid(rest.getKey(), player, null, null)) {
-                        restrictUntap.put(rest.getKey(), rest.getValue() - 1);
-                    }
-                }
-                untapList.add(chosen);
-                restrictList.remove(chosen);
-            }
-        }
-
-        for (final Card c : untapList) {
-            if (optionalUntap(c, player)) {
-                untapMap.computeIfAbsent(player, i -> new CardCollection()).add(c);
-            }
-        }
-
-        for (final Card c : player.getAllOtherPlayers().getCardsIn(ZoneType.Battlefield)) {
-            if (c.isTapped() && StaticAbilityUntapOtherPlayer.untap(c, player) && c.untap(player)) {
-                untapMap.computeIfAbsent(c.getController(), i -> new CardCollection()).add(c);
-            }
-        }
-
-        // Remove temporary keywords
-        // TODO Replace with Static Abilities
-        for (final Card c : player.getCardsIn(ZoneType.Battlefield)) {
-            c.removeHiddenExtrinsicKeyword("This card doesn't untap during your next untap step.");
-        }
-
-        // remove exerted flags from all things in play
-        // even if they are not creatures
-        for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
-            c.removeExertedBy(player);
         }
 
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();

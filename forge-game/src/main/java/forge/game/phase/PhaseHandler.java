@@ -258,21 +258,18 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
             switch (phase) {
                 case UNTAP:
                     givePriorityToPlayer = false;
-                    game.getUntap().executeUntil(playerTurn);
-                    game.getUntap().executeAt();
-                    // In shared turns, also untap teammates' permanents
-                    if (game.getRules().isUseSharedTurns()) {
-                        for (Player teammate : playerTurn.getTeamMates(false)) {
-                            game.getUntap().executeUntil(teammate);
-                            game.getUntap().executeAt(teammate);
-                        }
+                    for (Player p : getActiveTurnPlayers()) {
+                        game.getUntap().executeUntil(p);
                     }
+                    game.getUntap().executeAt();
                     break;
 
                 case UPKEEP:
                     nUpkeepsThisTurn++;
                     nUpkeepsThisGame++;
-                    game.getUpkeep().executeUntil(playerTurn);
+                    for (Player p : getActiveTurnPlayers()) {
+                        game.getUpkeep().executeUntil(p);
+                    }
                     game.getUpkeep().executeAt();
 
                     if (playerTurn.getCardsIn(ZoneType.Battlefield).anyMatch(Card::isContraption)) {
@@ -285,13 +282,10 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                     for (Player p : game.getPlayers()) {
                         p.resetNumDrawnThisDrawStep();
                     }
-                    playerTurn.drawCard();
-                    // In shared turns, also make teammates draw
-                    if (game.getRules().isUseSharedTurns()) {
-                        for (Player teammate : playerTurn.getTeamMates(false)) {
-                            teammate.drawCard();
-                        }
+                    for (Player p : getActiveTurnPlayers()) {
+                        p.drawCard();
                     }
+
                     break;
 
                 case MAIN1:
@@ -303,16 +297,21 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
 
                     GameEntityCounterTable table = new GameEntityCounterTable();
                     // all Sagas get a Lore counter at the beginning of pre combat
-                    for (Card c : playerTurn.getCardsIn(ZoneType.Battlefield)) {
-                        if (c.isSaga() && c.hasChapter()) {
-                            c.addCounter(CounterEnumType.LORE, 1, playerTurn, table);
+                    for (Player p : getActiveTurnPlayers()) {
+                        for (Card c : p.getCardsIn(ZoneType.Battlefield)) {
+                            if (c.isSaga() && c.hasChapter()) {
+                                c.addCounter(CounterEnumType.LORE, 1, playerTurn, table);
+                            }
                         }
                     }
+
                     table.replaceCounterEffect(game, null);
 
                     // roll for attractions if we have any
-                    if (playerTurn.getCardsIn(ZoneType.Battlefield).anyMatch(Card::isAttraction)) {
-                        playerTurn.rollToVisitAttractions();
+                    for (Player p : getActiveTurnPlayers()) {
+                        if (p.getCardsIn(ZoneType.Battlefield).anyMatch(Card::isAttraction)) {
+                            playerTurn.rollToVisitAttractions();
+                        }
                     }
 
                     break;
@@ -392,40 +391,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
 
                 case CLEANUP:
                     // Rule 514.1
-                    final int handSize = playerTurn.getZone(ZoneType.Hand).size();
-                    final int max = playerTurn.getMaxHandSize();
-                    int numDiscard = playerTurn.isUnlimitedHandSize() || handSize <= max || handSize == 0 ? 0 : handSize - max;
-
-                    if (numDiscard > 0) {
-                        final CardZoneTable zoneMovements = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
-                        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-                        AbilityKey.addCardZoneTableParams(moveParams, zoneMovements);
-
-                        final CardCollection discarded = new CardCollection();
-                        List<Card> discardedBefore = Lists.newArrayList(playerTurn.getDiscardedThisTurn());
-                        for (Card c : playerTurn.getController().chooseCardsToDiscardToMaximumHandSize(numDiscard)) {
-                            Card moved = playerTurn.discard(c, null, false, moveParams);
-                            if (moved != null) {
-                                discarded.add(moved);
-                            }
-                        }
-                        zoneMovements.triggerChangesZoneAll(game, null);
-
-                        if (!discarded.isEmpty()) {
-                            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(playerTurn);
-                            runParams.put(AbilityKey.Cards, discarded);
-                            runParams.put(AbilityKey.Cause, null);
-                            runParams.put(AbilityKey.DiscardedBefore, discardedBefore);
-                            game.getTriggerHandler().runTrigger(TriggerType.DiscardedAll, runParams, false);
-                        }
-                    }
-
-                    // In shared turns, also make teammates discard to hand size
-                    if (game.getRules().isUseSharedTurns()) {
-                        for (Player teammate : playerTurn.getTeamMates(false)) {
-                            doTeammateDiscard(teammate);
-                        }
-                    }
+                    doDiscard();
 
                     // Rule 514.2
                     // Reset Damage received map
@@ -925,6 +891,14 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
         return nextPlayer;
     }
 
+    public List<Player> getActiveTurnPlayers() {
+        if (game.getRules().isUseSharedTurns()) {
+            return playerTurn.getTeamMates(true);
+        }
+
+        return List.of(playerTurn);
+    }
+
     public final synchronized boolean is(final PhaseType phase0, final Player player0) {
         return phase == phase0 && playerTurn.equals(player0);
     }
@@ -1386,14 +1360,17 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
 
     /**
      * Handles discarding for a teammate during cleanup phase in shared turns.
-     * @param player the teammate who needs to discard to hand size
      */
-    private void doTeammateDiscard(Player player) {
-        final int handSize = player.getZone(ZoneType.Hand).size();
-        final int max = player.getMaxHandSize();
-        int numDiscard = player.isUnlimitedHandSize() || handSize <= max || handSize == 0 ? 0 : handSize - max;
+    private void doDiscard() {
+        for(Player player : getActiveTurnPlayers()) {
+            final int handSize = player.getZone(ZoneType.Hand).size();
+            final int max = player.getMaxHandSize();
+            int numDiscard = player.isUnlimitedHandSize() || handSize <= max || handSize == 0 ? 0 : handSize - max;
 
-        if (numDiscard > 0) {
+            if (numDiscard <= 0) {
+                continue;
+            }
+
             final CardZoneTable zoneMovements = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
             Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
             AbilityKey.addCardZoneTableParams(moveParams, zoneMovements);
@@ -1408,13 +1385,15 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
             }
             zoneMovements.triggerChangesZoneAll(game, null);
 
-            if (!discarded.isEmpty()) {
-                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(player);
-                runParams.put(AbilityKey.Cards, discarded);
-                runParams.put(AbilityKey.Cause, null);
-                runParams.put(AbilityKey.DiscardedBefore, discardedBefore);
-                game.getTriggerHandler().runTrigger(TriggerType.DiscardedAll, runParams, false);
+            if (discarded.isEmpty()) {
+                continue;
             }
+
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(player);
+            runParams.put(AbilityKey.Cards, discarded);
+            runParams.put(AbilityKey.Cause, null);
+            runParams.put(AbilityKey.DiscardedBefore, discardedBefore);
+            game.getTriggerHandler().runTrigger(TriggerType.DiscardedAll, runParams, false);
         }
     }
 }
