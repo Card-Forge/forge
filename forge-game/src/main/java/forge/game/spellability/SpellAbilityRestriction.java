@@ -33,6 +33,7 @@ import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.Team;
 import forge.game.staticability.StaticAbilityCastWithFlash;
 import forge.game.staticability.StaticAbilityExhaust;
 import forge.game.staticability.StaticAbilityNumLoyaltyAct;
@@ -300,8 +301,19 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
 
-        if (this.isPlayerTurn() && !game.getPhaseHandler().isPlayerTurn(activator)) {
-            return false;
+        if (this.isPlayerTurn()) {
+            boolean isCorrectTurn = game.getPhaseHandler().isPlayerTurn(activator);
+            // In shared turn games, allow timing for teammates
+            if (!isCorrectTurn && game.getRules().isUseSharedTurns()) {
+                Player turnPlayer = game.getPhaseHandler().getPlayerTurn();
+                if (turnPlayer != null && activator.getTeamObject() != null && 
+                    activator.getTeamObject() != Team.UNASSIGNED) {
+                    isCorrectTurn = activator.getTeamObject().equals(turnPlayer.getTeamObject());
+                }
+            }
+            if (!isCorrectTurn) {
+                return false;
+            }
         }
 
         if (this.isOpponentTurn() && !game.getPhaseHandler().getPlayerTurn().isOpponentOf(activator)) {

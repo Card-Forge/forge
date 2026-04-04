@@ -566,6 +566,7 @@ public abstract class GameLobby implements IHasGameType {
             }
             // apply shared team life setting from the lobby
             rules.setUseSharedTeamLife(useSharedTeamLife);
+            rules.setUseSharedTurns(useSharedTeamLife);
 
             hostedMatch.startMatch(rules, variantTypes, players, guis, null);
 

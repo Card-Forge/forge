@@ -1982,6 +1982,13 @@ public class GameAction {
             }
             else if (teams.size() == 1) {
                 reason = GameEndReason.AllOpposingTeamsLost;
+                // For team victories, mark all winning team members as winners
+                // This ensures the end game log shows "1-1-0-0" for a 2v2 team win, not "1-0-0-0"
+                for (Player p : notLost) {
+                    if (p.getOutcome() == null) {
+                        p.setOutcome(PlayerOutcome.win());
+                    }
+                }
             }
             else {
                 return;

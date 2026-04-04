@@ -358,6 +358,11 @@ public class Game {
             pl.setTeam(teamNum);
         }
 
+        // If shared turns are enabled, reorder players so teams alternate
+        if (rules0.isUseSharedTurns()) {
+            orderPlayersForSharedTurns();
+        }
+
         action = new GameAction(this);
         stack = new MagicStack(this);
         phaseHandler = new PhaseHandler(this);
@@ -374,6 +379,39 @@ public class Game {
         view.updatePlayers(this);
 
         subscribeToEvents(gameLog.getEventVisitor());
+    }
+
+    /**
+     * Reorders the player list so that teams alternate in turn order.
+     * This ensures that in shared turn games, teammates don't have consecutive turns.
+     * For example: if P1 and P2 are on team 1, and P3 and P4 are on team 2,
+     * the order becomes: P1 -> P3 -> P2 -> P4 (or some other alternating pattern).
+     */
+    private void orderPlayersForSharedTurns() {
+        // Group players by team
+        Map<Integer, List<Player>> teamToPlayers = new HashMap<>();
+        for (Player p : ingamePlayers) {
+            int teamId = p.getTeam();
+            teamToPlayers.computeIfAbsent(teamId, k -> new ArrayList<>()).add(p);
+        }
+
+        // Build alternating turn order
+        PlayerCollection reorderedPlayers = new PlayerCollection();
+        List<List<Player>> teamQueues = new ArrayList<>(teamToPlayers.values());
+        
+        int maxTeamSize = teamQueues.stream().mapToInt(List::size).max().orElse(0);
+        
+        for (int position = 0; position < maxTeamSize; position++) {
+            for (List<Player> teamPlayers : teamQueues) {
+                if (position < teamPlayers.size()) {
+                    reorderedPlayers.add(teamPlayers.get(position));
+                }
+            }
+        }
+
+        // Replace ingamePlayers with the reordered list
+        ingamePlayers.clear();
+        ingamePlayers.addAll(reorderedPlayers);
     }
 
     public GameView getView() {

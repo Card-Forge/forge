@@ -1768,7 +1768,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final boolean canPlayLand(final Card land, final boolean ignoreZoneAndTiming, SpellAbility landSa) {
         if (!ignoreZoneAndTiming) {
             // CR 305.3
-            if (!game.getPhaseHandler().isPlayerTurn(this)) {
+            if (!isValidLandPlayTime()) {
                 return false;
             }
             if (!canCastSorcery() && (landSa == null || !landSa.withFlash(land, this))) {
@@ -1800,6 +1800,27 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         // check for adjusted max lands play per turn
         return getLandsPlayedThisTurn() < getMaxLandPlays();
+    }
+
+    /**
+     * Checks if it's a valid time for this player to play a land.
+     * In shared turn mode, teammates can also play lands during each other's turns.
+     */
+    private boolean isValidLandPlayTime() {
+        final Player currentPlayer = game.getPhaseHandler().getPlayerTurn();
+
+        // Check if it's this player's turn
+        if (this.equals(currentPlayer)) {
+            return true;
+        }
+
+        // Check if shared turns are enabled and it's a teammate's turn
+        if (game.getRules().isUseSharedTurns()) {
+            // Only allow if we're on the same team as the current player
+            return this.getTeam() == currentPlayer.getTeam();
+        }
+
+        return false;
     }
 
     public final int getMaxLandPlays() {
@@ -2521,7 +2542,12 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final PlayerOutcome getOutcome() {
         return stats.getOutcome();
     }
-    private void setOutcome(PlayerOutcome outcome) {
+    
+    /**
+     * Sets the outcome for this player. Used by game end logic to mark winners/losers.
+     * Public to allow GameAction to set outcomes for team-based game ends.
+     */
+    public final void setOutcome(PlayerOutcome outcome) {
         stats.setOutcome(outcome);
     }
 
@@ -2641,7 +2667,22 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public boolean canCastSorcery() {
         PhaseHandler now = game.getPhaseHandler();
-        return now.isPlayerTurn(this) && now.getPhase().isMain() && game.getStack().isEmpty();
+        Player turnPlayer = now.getPlayerTurn();
+
+        if (!game.getStack().isEmpty() || !now.getPhase().isMain()) {
+            return false;
+        }
+
+        // In shared turn games, allow sorcery casting for this player or their teammates
+        boolean isCorrectTurn = now.isPlayerTurn(this);
+        if (!isCorrectTurn && game.getRules().isUseSharedTurns()) {
+            // Check if any teammate has priority
+            if (this.getTeamObject() != null && this.getTeamObject() != Team.UNASSIGNED) {
+                isCorrectTurn = turnPlayer != null && this.getTeamObject().equals(turnPlayer.getTeamObject());
+            }
+        }
+
+        return isCorrectTurn;
     }
 
     public final PlayerController getController() {
