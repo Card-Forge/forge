@@ -25,7 +25,7 @@ public class ArchipelagoData implements SaveFileContent {
     // List of teleportation runes that we use to gate regions
     private final Set<String> regionTeleportingRunes = new HashSet<>(Arrays.asList("White rune","Black rune","Blue rune","Red rune","Green rune"));
     // List of known main bosses that contribute to APWorld completion
-    private final Set<String> mainBosses = new HashSet<>(Arrays.asList("Lorthos","Emrakul","Lathliss", "Ghalta", "Griselbrand","Akroma", "Sliver Queen"));
+    private final Set<String> mainBosses = new HashSet<>(Arrays.asList("Lorthos","Emrakul","Lathliss","Ghalta","Griselbrand","Akroma","Sliver Queen"));
 
     // Actual user data we want to store
     private final Map<String, Long> completedTownInnEvents = new HashMap<>();
