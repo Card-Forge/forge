@@ -72,6 +72,7 @@ public class Forge implements ApplicationListener {
     private static FScreen currentScreen;
     private static ControllerListener controllerListener;
     private static boolean hasGamepad = false;
+    private static boolean lastInputWasController = false;
     public static Texture lastPreview = null;
     protected static SplashScreen splashScreen;
     protected static ClosingScreen closingScreen;
@@ -283,6 +284,14 @@ public class Forge implements ApplicationListener {
             return hasGamepad && isLandscapeMode(); //portrait is not supported for Gamepad
         }
         return false;
+    }
+
+    public static boolean lastInputWasController() {
+        return lastInputWasController;
+    }
+
+    public static void setLastInputWasController(boolean value) {
+        lastInputWasController = value;
     }
 
     public static boolean hasExternalInput() {
@@ -1189,6 +1198,7 @@ public class Forge implements ApplicationListener {
 
         @Override
         public boolean keyDown(int keyCode) {
+            lastInputWasController = false;
             if (keyCode == Keys.MENU) {
                 showMenu();
                 return true;
@@ -1294,6 +1304,7 @@ public class Forge implements ApplicationListener {
 
         @Override
         public boolean touchDown(int x, int y, int pointer, int button) {
+            lastInputWasController = false;
             if (transitionScreen != null) {
                 boolean isFDialog = FOverlay.getTopOverlay() != null && FOverlay.getTopOverlay() instanceof FDialog;
                 if (!isFDialog)
@@ -1514,6 +1525,7 @@ public class Forge implements ApplicationListener {
                 public boolean buttonDown(Controller controller, int buttonIndex) {
                     //System.out.println(controller.getName()+"["+controller.getUniqueId()+"]: "+buttonIndex);
                     hasGamepad = true;
+                    lastInputWasController = true;
                     translateButtons(controller, buttonIndex, true);
                     return super.buttonDown(controller, buttonIndex);
                 }
@@ -1529,6 +1541,9 @@ public class Forge implements ApplicationListener {
                 public boolean axisMoved(Controller controller, int axisIndex, float value) {
                     //System.out.println(controller.getName()+"["+controller.getUniqueId()+"]: axis: "+axisIndex+" - "+value);
                     hasGamepad = true;
+                    if (Math.abs(value) > 0.25f) {
+                        lastInputWasController = true;
+                    }
                     translateAxis(controller, axisIndex, value);//prevent multi press axis
                     return super.axisMoved(controller, axisIndex, value);
                 }
