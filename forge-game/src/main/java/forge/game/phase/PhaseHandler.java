@@ -260,6 +260,13 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                     givePriorityToPlayer = false;
                     game.getUntap().executeUntil(playerTurn);
                     game.getUntap().executeAt();
+                    // In shared turns, also untap teammates' permanents
+                    if (game.getRules().isUseSharedTurns()) {
+                        for (Player teammate : playerTurn.getTeamMates(false)) {
+                            game.getUntap().executeUntil(teammate);
+                            game.getUntap().executeAt(teammate);
+                        }
+                    }
                     break;
 
                 case UPKEEP:
@@ -279,6 +286,12 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                         p.resetNumDrawnThisDrawStep();
                     }
                     playerTurn.drawCard();
+                    // In shared turns, also make teammates draw
+                    if (game.getRules().isUseSharedTurns()) {
+                        for (Player teammate : playerTurn.getTeamMates(false)) {
+                            teammate.drawCard();
+                        }
+                    }
                     break;
 
                 case MAIN1:
@@ -404,6 +417,13 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                             runParams.put(AbilityKey.Cause, null);
                             runParams.put(AbilityKey.DiscardedBefore, discardedBefore);
                             game.getTriggerHandler().runTrigger(TriggerType.DiscardedAll, runParams, false);
+                        }
+                    }
+
+                    // In shared turns, also make teammates discard to hand size
+                    if (game.getRules().isUseSharedTurns()) {
+                        for (Player teammate : playerTurn.getTeamMates(false)) {
+                            doTeammateDiscard(teammate);
                         }
                     }
 
@@ -545,7 +565,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
     }
 
     private void declareAttackersTurnBasedAction() {
-        final Player whoDeclares = Objects.requireNonNullElse(playerTurn.getDeclaresAttackers(), playerTurn);
+        final Player whoDeclares = getDeclarersForCombat(playerTurn, true);
 
         if (CombatUtil.canAttack(playerTurn)) {
             boolean success = false;
@@ -672,7 +692,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
         do {
             p = game.getNextPlayerAfter(p);
             // Apply Odric's effect here
-            Player whoDeclaresBlockers = Objects.requireNonNullElse(p.getDeclaresBlockers(), p);
+            Player whoDeclaresBlockers = getDeclarersForCombat(p, false);
             if (combat.isPlayerAttacked(p)) {
                 if (CombatUtil.canBlock(p, combat)) {
                     // Replacement effects (for Camouflage)
@@ -1335,6 +1355,65 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                 game.getEndOfTurn().executeUntil(p);
                 game.getEndOfTurn().executeUntilEndOfPhase(p);
                 game.getCleanup().executeUntil(p);
+            }
+        }
+    }
+
+    /**
+     * Determines who should declare attackers or blockers for a player.
+     * In shared turn games, allows teammates to declare on behalf of each other.
+     * @param player the player whose turn it is
+     * @param isAttackers true if determining attacker declarers, false for blockers
+     * @return the player who should declare (either a controller, teammate, or the player themselves)
+     */
+    private Player getDeclarersForCombat(Player player, boolean isAttackers) {
+        // First check if someone has explicitly taken control to declare
+        Player controlled = isAttackers ? player.getDeclaresAttackers() : player.getDeclaresBlockers();
+        if (controlled != null) {
+            return controlled;
+        }
+
+        // In shared turns mode, allow any teammate to declare
+        if (game.getRules().isUseSharedTurns()) {
+            // For now, return the player themselves (they can be prompted to get input from teammates)
+            // This allows the player or their UI to handle getting input from teammates
+            return player;
+        }
+
+        // Default: player declares for themselves
+        return player;
+    }
+
+    /**
+     * Handles discarding for a teammate during cleanup phase in shared turns.
+     * @param player the teammate who needs to discard to hand size
+     */
+    private void doTeammateDiscard(Player player) {
+        final int handSize = player.getZone(ZoneType.Hand).size();
+        final int max = player.getMaxHandSize();
+        int numDiscard = player.isUnlimitedHandSize() || handSize <= max || handSize == 0 ? 0 : handSize - max;
+
+        if (numDiscard > 0) {
+            final CardZoneTable zoneMovements = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
+            Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+            AbilityKey.addCardZoneTableParams(moveParams, zoneMovements);
+
+            final CardCollection discarded = new CardCollection();
+            List<Card> discardedBefore = Lists.newArrayList(player.getDiscardedThisTurn());
+            for (Card c : player.getController().chooseCardsToDiscardToMaximumHandSize(numDiscard)) {
+                Card moved = player.discard(c, null, false, moveParams);
+                if (moved != null) {
+                    discarded.add(moved);
+                }
+            }
+            zoneMovements.triggerChangesZoneAll(game, null);
+
+            if (!discarded.isEmpty()) {
+                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(player);
+                runParams.put(AbilityKey.Cards, discarded);
+                runParams.put(AbilityKey.Cause, null);
+                runParams.put(AbilityKey.DiscardedBefore, discardedBefore);
+                game.getTriggerHandler().runTrigger(TriggerType.DiscardedAll, runParams, false);
             }
         }
     }
