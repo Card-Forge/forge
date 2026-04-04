@@ -164,7 +164,7 @@
     {
       "type": "TextButton",
       "name": "aptracker",
-      "text": "[%100][+APIconSmall]",
+      "text": "[%120][+APIconSmall]",
       "width": 25,
       "height": 25,
       "x": 83,

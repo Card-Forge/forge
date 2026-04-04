@@ -220,6 +220,7 @@ public class GameHUD extends Stage {
         menuGroup.addActor(inventoryActor);
         menuGroup.addActor(exitToWorldMapActor);
         menuGroup.addActor(bookmarkActor);
+        menuGroup.addActor(apSettingsActor);
         ui.addActor(menuGroup);
         //AVATAR
         avatarGroup.addActor(avatar);
@@ -312,6 +313,7 @@ public class GameHUD extends Stage {
                     && !(Controls.actorContainsVector(openMapActor, touch)) //not inside openmap button
                     && !(Controls.actorContainsVector(logbookActor, touch)) //not inside stats button
                     && !(Controls.actorContainsVector(inventoryActor, touch)) //not inside inventory button
+                    && !(Controls.actorContainsVector(apSettingsActor, touch)) //not inside apSettings button
                     && !(Controls.actorContainsVector(exitToWorldMapActor, touch)) //not inside exit button
                     && !(Controls.actorContainsVector(bookmarkActor, touch)) //not inside bookmark button
                     && !(Controls.actorContainsVector(abilityButtonMap, touch)) //not inside abilityButtonMap
