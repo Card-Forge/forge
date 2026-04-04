@@ -60,7 +60,7 @@
   </object>
   <object id="59" template="../../../../common/maps/obj/enemy.tx" x="262.885" y="444.395">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Adventuring Gear|ZEN&quot;, &quot;Zendikar's Roil|ZNC&quot;, &quot;Cinder Glade|BFZ&quot;, &quot;Mul Daya Channelers|ROE&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Adventuring Gear|ZEN&quot;, &quot;Cinder Glade|BFZ&quot;, &quot;Mul Daya Channelers|ROE&quot;]}"/>
     <property name="enemy" value="Mina and Denn"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
