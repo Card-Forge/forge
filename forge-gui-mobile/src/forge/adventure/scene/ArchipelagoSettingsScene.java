@@ -6,7 +6,7 @@ import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
 
 /**
- * Scene to handle settings of the base forge and adventure mode
+ * Scene to handle settings of the archipelago client
  */
 public class ArchipelagoSettingsScene extends UIScene {
 
