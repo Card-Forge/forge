@@ -162,9 +162,12 @@ public class InputBlock extends InputSyncronizedBase {
     }
 
     private void setCurrentAttacker(final Card card) {
+        if (currentAttacker != null) {
+            getController().getGui().setUsedToPay(CardView.get(currentAttacker), false);
+        }
         currentAttacker = card;
-        for (final Card c : combat.getAttackers()) {
-            getController().getGui().setUsedToPay(CardView.get(c), card == c);
+        if (card != null) {
+            getController().getGui().setUsedToPay(CardView.get(card), true);
         }
     }
 }

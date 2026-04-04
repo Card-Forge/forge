@@ -279,6 +279,12 @@ public class NetGuiGame extends AbstractGuiGame {
     }
 
     @Override
+    public void setUsedToPay(final CardView card, final boolean value) {
+        super.setUsedToPay(card, value);
+        send(ProtocolMethod.setUsedToPay, card, value);
+    }
+
+    @Override
     public void setCard(final CardView card) {
         updateGameView();
         send(ProtocolMethod.setCard, card);
