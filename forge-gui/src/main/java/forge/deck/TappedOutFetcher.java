@@ -50,9 +50,14 @@ public class TappedOutFetcher extends DeckSiteFetcher {
                 currentSection = "sideboard";
                 continue;
             }
+            if (lower.startsWith("maybeboard") || lower.startsWith("maybe board")) {
+                currentSection = "skip";
+                continue;
+            }
 
             Matcher cm = cardPattern.matcher(line);
             if (cm.matches()) {
+                if (currentSection.equals("skip")) continue;
                 int qty = Integer.parseInt(cm.group(1));
                 String name = cm.group(2).trim();
                 int hashIdx = name.indexOf('#');
