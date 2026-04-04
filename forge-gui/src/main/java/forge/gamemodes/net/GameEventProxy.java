@@ -1,10 +1,7 @@
 package forge.gamemodes.net;
 
-import forge.game.card.CardView;
 import forge.game.event.GameEvent;
-import forge.game.player.PlayerView;
 import forge.trackable.TrackableObject;
-import forge.trackable.TrackableTypes;
 import forge.trackable.TrackableTypes.TrackableType;
 import forge.trackable.Tracker;
 
@@ -114,55 +111,6 @@ public class GameEventProxy implements Serializable, IHasNetLog {
         return result;
     }
 
-    // Only CardView and PlayerView are replaced with IdRef markers. These two
-    // types carry the largest object graphs and are always present in the GameView
-    // (registered via updateObjLookup on the IO thread before proxy unwrapping).
-    // Other TrackableObject types (StackItemView, SpellAbilityView, CombatView)
-    // are either ephemeral or not reachable from GameView's property graph, so
-    // they serialize normally.
-    private static final byte TYPE_CARD_VIEW = 0;
-    private static final byte TYPE_PLAYER_VIEW = 1;
-
-    /**
-     * Lightweight serializable marker that replaces a TrackableObject reference
-     * during proxy serialization.
-     */
-    static final class IdRef implements Serializable {
-        private static final long serialVersionUID = 1L;
-        final byte typeTag;
-        final int id;
-
-        IdRef(byte typeTag, int id) {
-            this.typeTag = typeTag;
-            this.id = id;
-        }
-    }
-
-    /**
-     * Returns the type tag for the given TrackableObject, or -1 if unsupported.
-     */
-    private static byte typeTagFor(TrackableObject obj) {
-        if (obj instanceof CardView) return TYPE_CARD_VIEW;
-        if (obj instanceof PlayerView) return TYPE_PLAYER_VIEW;
-        return -1;
-    }
-
-    /**
-     * Returns the TrackableType for the given type tag, for Tracker lookup.
-     */
-    private static TrackableType<?> trackableTypeFor(byte typeTag) {
-        switch (typeTag) {
-            case TYPE_CARD_VIEW: return TrackableTypes.CardViewType;
-            case TYPE_PLAYER_VIEW: return TrackableTypes.PlayerViewType;
-            default: return null;
-        }
-    }
-
-    /**
-     * ObjectOutputStream that replaces every TrackableObject with an IdRef.
-     * If a tracker is provided, verifies each ID is resolvable as a
-     * server-side sanity check.
-     */
     private static class IdReplacingOutputStream extends ObjectOutputStream {
         private final Tracker tracker;
         private boolean unresolvableRefs;
@@ -180,28 +128,23 @@ public class GameEventProxy implements Serializable, IHasNetLog {
         @Override
         protected Object replaceObject(Object obj) {
             if (obj instanceof TrackableObject trackable) {
-                byte tag = typeTagFor(trackable);
+                byte tag = TrackableRef.typeTagFor(trackable);
                 if (tag >= 0) {
                     if (tracker != null) {
-                        TrackableType<?> type = trackableTypeFor(tag);
+                        TrackableType<?> type = TrackableRef.trackableTypeFor(tag);
                         if (type != null && tracker.getObj(type, trackable.getId()) == null) {
                             netLog.debug("Server-side check: {} id={} not in tracker",
                                     trackable.getClass().getSimpleName(), trackable.getId());
                             unresolvableRefs = true;
                         }
                     }
-                    return new IdRef(tag, trackable.getId());
+                    return new TrackableRef.IdRef(tag, trackable.getId());
                 }
             }
             return obj;
         }
     }
 
-    /**
-     * ObjectInputStream that resolves IdRef markers back to TrackableObjects
-     * from the Tracker. Tracks whether any resolution failed so callers
-     * can drop damaged events.
-     */
     private static class IdResolvingInputStream extends ObjectInputStream {
         private final Tracker tracker;
         private boolean unresolvedRefs;
@@ -218,8 +161,8 @@ public class GameEventProxy implements Serializable, IHasNetLog {
 
         @Override
         protected Object resolveObject(Object obj) {
-            if (obj instanceof IdRef ref) {
-                TrackableType<?> type = trackableTypeFor(ref.typeTag);
+            if (obj instanceof TrackableRef.IdRef ref) {
+                TrackableType<?> type = TrackableRef.trackableTypeFor(ref.typeTag);
                 if (type != null) {
                     Object resolved = tracker.getObj(type, ref.id);
                     if (resolved == null) {

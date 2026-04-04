@@ -1,5 +1,6 @@
 package forge.gamemodes.net;
 
+import forge.gamemodes.net.event.GuiGameEvent;
 import forge.gui.GuiBase;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufOutputStream;
@@ -8,11 +9,18 @@ import io.netty.handler.codec.MessageToByteEncoder;
 import net.jpountz.lz4.LZ4BlockOutputStream;
 import org.tinylog.Logger;
 
+import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
 
 public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> {
     private static final byte[] LENGTH_PLACEHOLDER = new byte[4];
+    private final boolean enableIdReplacement;
+
+    public CompatibleObjectEncoder(boolean enableIdReplacement) {
+        this.enableIdReplacement = enableIdReplacement;
+    }
 
     @Override
     protected void encode(ChannelHandlerContext ctx, Serializable msg, ByteBuf out) throws Exception {
@@ -20,9 +28,17 @@ public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> 
         ByteBufOutputStream bout = new ByteBufOutputStream(out);
         ObjectOutputStream oout = null;
 
+        boolean replace = enableIdReplacement && shouldReplaceTrackables(msg);
+
         try {
             bout.write(LENGTH_PLACEHOLDER);
-            oout = GuiBase.hasPropertyConfig() ? new ObjectOutputStream(new LZ4BlockOutputStream(bout)) : new CObjectOutputStream(new LZ4BlockOutputStream(bout));
+            if (GuiBase.hasPropertyConfig()) {
+                oout = replace
+                        ? new ReplacingObjectOutputStream(new LZ4BlockOutputStream(bout))
+                        : new ObjectOutputStream(new LZ4BlockOutputStream(bout));
+            } else {
+                oout = new CObjectOutputStream(new LZ4BlockOutputStream(bout), replace);
+            }
             oout.writeObject(msg);
             oout.flush();
         } finally {
@@ -38,6 +54,26 @@ public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> 
         out.setInt(startIdx, msgSize);
         if (msgSize > 20_000) {
             Logger.info("Encoded {} bytes (compressed) for {}", msgSize, msg.getClass().getSimpleName());
+        }
+    }
+
+    private static boolean shouldReplaceTrackables(Serializable msg) {
+        if (msg instanceof GuiGameEvent event) {
+            ProtocolMethod method = event.getMethod();
+            return method != ProtocolMethod.setGameView && method != ProtocolMethod.openView;
+        }
+        return false;
+    }
+
+    private static class ReplacingObjectOutputStream extends ObjectOutputStream {
+        ReplacingObjectOutputStream(OutputStream out) throws IOException {
+            super(out);
+            enableReplaceObject(true);
+        }
+
+        @Override
+        protected Object replaceObject(Object obj) {
+            return TrackableRef.replace(obj);
         }
     }
 }

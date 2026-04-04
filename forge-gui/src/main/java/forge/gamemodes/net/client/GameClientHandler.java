@@ -7,6 +7,7 @@ import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.match.LobbySlot;
+import forge.gamemodes.net.CompatibleObjectDecoder;
 import forge.gamemodes.net.GameEventProxy;
 import forge.gamemodes.net.GameProtocolHandler;
 import forge.gamemodes.net.IRemote;
@@ -40,6 +41,7 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
     private Match match;
     private Game game;
     private GameView pendingGameView;
+    private volatile ChannelHandlerContext handlerCtx;
 
     /**
      * Creates a client-side game handler.
@@ -51,6 +53,12 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
         this.tracker = null;
         this.match = null;
         this.game = null;
+    }
+
+    @Override
+    public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
+        super.handlerAdded(ctx);
+        this.handlerCtx = ctx;
     }
 
     @Override
@@ -93,6 +101,11 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> {
 
                 // get a tracker
                 this.tracker = createTracker();
+
+                CompatibleObjectDecoder decoder = handlerCtx.pipeline().get(CompatibleObjectDecoder.class);
+                if (decoder != null) {
+                    decoder.setTracker(this.tracker);
+                }
 
                 for (PlayerView myPlayer : (TrackableCollection<PlayerView>) args[0]) {
                     if (myPlayer.getTracker() == null) {
