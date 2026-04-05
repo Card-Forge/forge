@@ -5,7 +5,7 @@ T:Mode$ ChangesZoneAll | ValidCards$ Card.YouOwn | Origin$ Graveyard | Destinati
 SVar:TrigDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 A:AB$ Mill | Cost$ T | Defined$ You | NumCards$ 1 | RememberMilled$ True | SubAbility$ DBEffect | SpellDescription$ Mill a card. You may play that card this turn.
-SVar:DBEffectYou:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBCleanup | ExileOnMoved$ Graveyard,Exile
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBCleanup | ExileOnMoved$ Graveyard,Exile
 SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Graveyard,Exile | Description$ You may play that card this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Graveyard
