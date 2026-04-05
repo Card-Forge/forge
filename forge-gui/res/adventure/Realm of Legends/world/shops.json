@@ -576,10 +576,8 @@
 	{ "type": "item","count":1, "itemName": "Sunbeam Gauntlet"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Mirth"  },
 	{ "type": "item","count":1, "itemName": "Jousting Lance"  },
-	{ "type": "item","count":1, "itemName": "Blessed Armor"  },
-	{ "type": "item","count":1, "itemName": "Divinely Blessed Armor"  }
+	{ "type": "item","count":1, "itemName": "Blessed Armor"  }
 
-    
     ]
 
 },
@@ -611,8 +609,7 @@
 	{ "type": "item","count":1, "itemName": "Pyrite Gauntlet"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Fury"  },
 	{ "type": "item","count":1, "itemName": "Chitinous Club"  },
-	{ "type": "item","count":1, "itemName": "Flaming Armor"  },
-	{ "type": "item","count":1, "itemName": "Blazing Armor"  }
+	{ "type": "item","count":1, "itemName": "Flaming Armor"  }
     ]
 
 },
@@ -644,8 +641,7 @@
 	{ "type": "item","count":1, "itemName": "Aether Gauntlet"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Mischief"  },
 	{ "type": "item","count":1, "itemName": "Hoversail Glove"  },
-	{ "type": "item","count":1, "itemName": "Sage's Robes"  },
-	{ "type": "item","count":1, "itemName": "Grand Sage's Robes"  }
+	{ "type": "item","count":1, "itemName": "Sage's Robes"  }
     ]
 
 },
@@ -677,8 +673,7 @@
 	{ "type": "item","count":1, "itemName": "Necrogen Gauntlet"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Scorn"  },
 	{ "type": "item","count":1, "itemName": "Blight Sickle"  },
-	{ "type": "item","count":1, "itemName": "Forbidden Robes"  },
-	{ "type": "item","count":1, "itemName": "Restricted Robes"  }
+	{ "type": "item","count":1, "itemName": "Forbidden Robes"  }
     ]
 
 },
@@ -710,8 +705,7 @@
 	{ "type": "item","count":1, "itemName": "Lifespark Gauntlet"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Favor"  },
 	{ "type": "item","count":1, "itemName": "Brawler's Cestus"  },
-	{ "type": "item","count":1, "itemName": "Heavy Armor"  },
-	{ "type": "item","count":1, "itemName": "Ultra Heavy Armor"  }
+	{ "type": "item","count":1, "itemName": "Heavy Armor"  }
     
     ]
 
