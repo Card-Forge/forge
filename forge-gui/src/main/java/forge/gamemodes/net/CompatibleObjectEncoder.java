@@ -2,6 +2,7 @@ package forge.gamemodes.net;
 
 import forge.gamemodes.net.event.GuiGameEvent;
 import forge.gui.GuiBase;
+import forge.trackable.Tracker;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.channel.ChannelHandlerContext;
@@ -17,9 +18,14 @@ public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> 
 
     private static final byte[] LENGTH_PLACEHOLDER = new byte[4];
     private final NetworkByteTracker byteTracker;
+    private volatile Tracker tracker;
 
     public CompatibleObjectEncoder(NetworkByteTracker byteTracker) {
         this.byteTracker = byteTracker;
+    }
+
+    public void setTracker(Tracker tracker) {
+        this.tracker = tracker;
     }
 
     @Override
@@ -28,13 +34,20 @@ public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> 
         ByteBufOutputStream bout = new ByteBufOutputStream(out);
         ObjectOutputStream oout = null;
 
+        // Replacement modes:
+        // - Server encoder (tracker set by RemoteClientGuiGame.setGameView):
+        //   verified replacement with stale CardView detection.
+        // - Client encoder (no tracker): simple IdRef replacement. No stale
+        //   detection — would create StaleCardRef markers that the server
+        //   resolves as detached CardViews, breaking game object identity.
+        Tracker currentTracker = this.tracker;
         boolean replace = shouldReplaceTrackables(msg);
 
         try {
             bout.write(LENGTH_PLACEHOLDER);
             if (GuiBase.hasPropertyConfig()) {
                 oout = replace
-                        ? new ReplacingObjectOutputStream(new LZ4BlockOutputStream(bout))
+                        ? new ReplacingObjectOutputStream(new LZ4BlockOutputStream(bout), currentTracker)
                         : new ObjectOutputStream(new LZ4BlockOutputStream(bout));
             } else {
                 oout = new CObjectOutputStream(new LZ4BlockOutputStream(bout), replace);
@@ -63,23 +76,39 @@ public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> 
         }
     }
 
+    /**
+     * Determines whether TrackableObject references should be replaced with
+     * IdRef markers for this message. Excludes:
+     * - setGameView/openView: carry full state to populate the client's Tracker
+     * - applyDelta: DeltaPacket contains property maps with carefully constructed
+     *   values that must arrive intact (new objects may reference other new objects
+     *   not yet in the tracker at decode time)
+     */
     private static boolean shouldReplaceTrackables(Serializable msg) {
+        // DIAG: re-enabled for investigation
         if (msg instanceof GuiGameEvent event) {
             ProtocolMethod method = event.getMethod();
-            return method != ProtocolMethod.setGameView && method != ProtocolMethod.openView;
+            return method != ProtocolMethod.setGameView
+                    && method != ProtocolMethod.openView
+                    && method != ProtocolMethod.applyDelta;
         }
-        return false;
+        return true;
     }
 
     private static class ReplacingObjectOutputStream extends ObjectOutputStream {
-        ReplacingObjectOutputStream(OutputStream out) throws IOException {
+        private final Tracker tracker;
+
+        ReplacingObjectOutputStream(OutputStream out, Tracker tracker) throws IOException {
             super(out);
+            this.tracker = tracker;
             enableReplaceObject(true);
         }
 
         @Override
         protected Object replaceObject(Object obj) {
-            return TrackableRef.replace(obj);
+            return tracker != null
+                    ? TrackableSerializer.replace(obj, tracker)
+                    : TrackableSerializer.replace(obj);
         }
     }
 }

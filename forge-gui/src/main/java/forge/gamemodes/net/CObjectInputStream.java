@@ -44,6 +44,6 @@ public class CObjectInputStream extends ObjectInputStream {
 
     @Override
     protected Object resolveObject(Object obj) throws IOException {
-        return TrackableRef.resolve(obj, tracker);
+        return TrackableSerializer.resolve(obj, tracker);
     }
 }

@@ -15,22 +15,22 @@ import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.net.NetworkGuiGame;
 import forge.gamemodes.net.DeltaPacket;
-import forge.gamemodes.net.GameEventProxy;
 import forge.gamemodes.net.GameProtocolSender;
 import forge.gamemodes.net.IHasNetLog;
 import forge.gamemodes.net.ProtocolMethod;
+import forge.gamemodes.net.TrackableSerializer;
 import forge.gui.control.GameEventForwarder;
 import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
-import forge.trackable.Tracker;
+
 import forge.trackable.TrackableCollection;
 import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
 
-import net.jpountz.lz4.LZ4BlockOutputStream;
+
 
 import java.util.Collection;
 import java.util.List;
@@ -42,11 +42,13 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
     // New objects are sent with full property data, existing objects only send changed properties
     public static boolean useDeltaSync = false;
 
+    private final RemoteClient client;
     private final GameProtocolSender sender;
     private final DeltaSyncManager syncManager;
     private final int clientIndex;
     private boolean initialSyncSent = false;
     private boolean objectsRegistered = false;
+    private boolean codecTrackerSet = false;
     private boolean fallbackLogged = false;  // Prevent duplicate fallback log messages
     private volatile boolean paused;
     private volatile boolean resyncPending;
@@ -55,6 +57,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
     private boolean flushing;
 
     public RemoteClientGuiGame(final RemoteClient client) {
+        this.client = client;
         sender = new GameProtocolSender(client);
         syncManager = new DeltaSyncManager();
         clientIndex = client.getIndex();
@@ -182,8 +185,8 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
             }
 
             if (logBandwidth) {
-                int deltaSize = measureSerializedSize(delta);
-                int fullStateSize = measureSerializedSize(gameView);
+                int deltaSize = measureDeltaSize(delta);
+                int fullStateSize = measureFullStateSize(gameView);
 
                 totalDeltaBytes += deltaSize;
                 totalFullStateBytes += fullStateSize;
@@ -200,22 +203,15 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
         }
     }
 
-    /**
-     * Measure the serialized+compressed size of an object.
-     * Uses ObjectOutputStream + LZ4 — same pipeline as the network encoder —
-     * so delta and full-state measurements are directly comparable.
-     */
-    private int measureSerializedSize(Object obj) {
-        try {
-            java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
-            LZ4BlockOutputStream lz4Out = new LZ4BlockOutputStream(baos);
-            java.io.ObjectOutputStream oos = new java.io.ObjectOutputStream(lz4Out);
-            oos.writeObject(obj);
-            oos.close();
-            return baos.size();
-        } catch (Exception e) {
-            return 0;
-        }
+    /** Measure serialized size with IdRef replacement (applyDelta wire format). */
+    private int measureDeltaSize(Object obj) {
+        forge.trackable.Tracker tracker = getGameView() != null ? getGameView().getTracker() : null;
+        return TrackableSerializer.measureReplacedSize(obj, tracker);
+    }
+
+    /** Measure serialized size without replacement (setGameView wire format). */
+    private int measureFullStateSize(Object obj) {
+        return TrackableSerializer.measurePlainSize(obj);
     }
 
     /**
@@ -253,6 +249,13 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
     @Override
     public void setGameView(final GameView gameView) {
         super.setGameView(gameView);
+        // Set codec tracker before any client protocol messages arrive.
+        // setGameView is called before openView, and the client can't respond
+        // until after openView — so the encoder/decoder are ready in time.
+        if (!codecTrackerSet && gameView != null && gameView.getTracker() != null) {
+            client.setCodecTracker(gameView.getTracker());
+            codecTrackerSet = true;
+        }
         updateGameView();
     }
 
@@ -515,24 +518,22 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
                 }
             }
         }
-        Tracker tracker = getGameView() != null ? getGameView().getTracker() : null;
-        List<Object> proxied = GameEventProxy.wrapAll(events, tracker);
         if (useDeltaSync && initialSyncSent && objectsRegistered) {
             // Bundle events with delta so they're applied atomically:
             // delta properties first, then events forwarded.
             GameView gameView = getGameView();
             if (gameView != null) {
                 DeltaPacket delta = syncManager.collectDeltas(gameView);
-                delta.setProxiedEvents(proxied);
+                delta.setEvents(new java.util.ArrayList<Object>(events));
                 sender.send(ProtocolMethod.applyDelta, delta);
 
                 if (logBandwidth) {
-                    int deltaSize = measureSerializedSize(delta);
-                    int eventsSize = measureSerializedSize(proxied);
-                    int stateOnlyFullSize = measureSerializedSize(gameView);
+                    int deltaSize = measureDeltaSize(delta);
+                    int eventsSize = measureDeltaSize(events);
+                    int stateOnlyFullSize = measureFullStateSize(gameView);
                     int fullStateSize = stateOnlyFullSize + eventsSize;
                     DeltaPacket stateOnly = delta.withoutEvents();
-                    int stateOnlyDeltaSize = measureSerializedSize(stateOnly);
+                    int stateOnlyDeltaSize = measureDeltaSize(stateOnly);
 
                     totalDeltaBytes += deltaSize;
                     totalFullStateBytes += fullStateSize;
@@ -549,7 +550,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
             }
         } else {
             updateGameView(false);
-            sender.send(ProtocolMethod.applyDelta, DeltaPacket.eventsOnly(proxied));
+            sender.send(ProtocolMethod.applyDelta, DeltaPacket.eventsOnly(new java.util.ArrayList<Object>(events)));
         }
     }
 

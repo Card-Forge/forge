@@ -44,14 +44,14 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetL
         netLog.info("[DeltaSync] === START applyDelta seq={} (Turn {}, {}, Active={}) ===",
                 packet.getSequenceNumber(), getGameView().getTurn(), phaseName, activePlayerName);
 
-        // Resolve event card references BEFORE applying deltas — the tracker
-        // still has the pre-replacement CardView instances, so events get the
-        // correct references. Dispatch happens after deltas so event handlers
-        // read current game state.
         List<GameEvent> resolvedEvents = null;
         if (packet.hasEvents()) {
-            resolvedEvents = GameEventProxy.unwrapAll(packet.getProxiedEvents(), tracker);
-            netLog.info("[DeltaSync] Pre-resolved {} events before delta seq={}",
+            List<GameEvent> events = new java.util.ArrayList<>(packet.getEvents().size());
+            for (Object item : packet.getEvents()) {
+                if (item instanceof GameEvent e) events.add(e);
+            }
+            resolvedEvents = events;
+            netLog.info("[DeltaSync] {} events received with delta seq={}",
                     resolvedEvents.size(), packet.getSequenceNumber());
         }
 

@@ -24,6 +24,6 @@ public class CObjectOutputStream extends ObjectOutputStream {
 
     @Override
     protected Object replaceObject(Object obj) throws IOException {
-        return TrackableRef.replace(obj);
+        return TrackableSerializer.replace(obj);
     }
 }

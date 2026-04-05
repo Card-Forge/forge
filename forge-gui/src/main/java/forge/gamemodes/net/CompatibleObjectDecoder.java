@@ -81,7 +81,7 @@ public class CompatibleObjectDecoder extends LengthFieldBasedFrameDecoder implem
 
         @Override
         protected Object resolveObject(Object obj) {
-            return TrackableRef.resolve(obj, tracker);
+            return TrackableSerializer.resolve(obj, tracker);
         }
     }
 }
