@@ -65,6 +65,19 @@ public class UnOpenedProduct implements IUnOpenedProduct {
         return BoosterGenerator.getBoosterPack(tpl);
     }
 
+    /**
+     * Returns all cards still remaining in the print sheets (not yet drawn into boosters).
+     * Used by cube drafts to capture surplus cards after booster initialization.
+     */
+    public List<PaperCard> getRemainingCards() {
+        if (sheets == null) return new ArrayList<>();
+        List<PaperCard> remaining = new ArrayList<>();
+        for (PrintSheet ps : sheets.values()) {
+            remaining.addAll(ps.toFlatList());
+        }
+        return remaining;
+    }
+
     // If they request cards from an arbitrary pool, there's no use to cache printsheets.
     private List<PaperCard> getBoosterPack() {
         List<PaperCard> result = new ArrayList<>();

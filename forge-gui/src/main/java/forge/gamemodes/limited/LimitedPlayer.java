@@ -738,6 +738,14 @@ public class LimitedPlayer {
     }
 
     public void addSingleBoosterPack() {
+        // In cube drafts, Lore Seeker adds a booster from the cube's surplus cards
+        DraftPack cubePack = draft.addBooster();
+        if (cubePack != null) {
+            packQueue.add(cubePack);
+            addLog(name() + " added a cube booster to the draft (Lore Seeker).");
+            return;
+        }
+
         // if this is just a normal draft, allow picking a pack from any set
         // If this is adventure or quest or whatever then we should limit it to something
         List<CardEdition> possibleEditions = FModel.getMagicDb().getEditions().stream()
