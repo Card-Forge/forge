@@ -85,7 +85,6 @@ public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> 
      *   not yet in the tracker at decode time)
      */
     private static boolean shouldReplaceTrackables(Serializable msg) {
-        // DIAG: re-enabled for investigation
         if (msg instanceof GuiGameEvent event) {
             ProtocolMethod method = event.getMethod();
             return method != ProtocolMethod.setGameView
