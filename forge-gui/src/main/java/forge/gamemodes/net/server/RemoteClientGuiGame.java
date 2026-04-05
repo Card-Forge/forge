@@ -32,6 +32,7 @@ import forge.util.ITriggerEvent;
 
 
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -522,7 +523,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
             GameView gameView = getGameView();
             if (gameView != null) {
                 DeltaPacket delta = syncManager.collectDeltas(gameView);
-                delta.setEvents(new java.util.ArrayList<Object>(events));
+                delta.setEvents(new ArrayList<>(events));
                 sender.send(ProtocolMethod.applyDelta, delta);
 
                 if (logBandwidth) {
@@ -548,7 +549,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
             }
         } else {
             updateGameView(false);
-            sender.send(ProtocolMethod.applyDelta, DeltaPacket.eventsOnly(new java.util.ArrayList<Object>(events)));
+            sender.send(ProtocolMethod.applyDelta, DeltaPacket.eventsOnly(new ArrayList<>(events)));
         }
     }
 

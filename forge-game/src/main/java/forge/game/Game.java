@@ -702,8 +702,8 @@ public class Game {
             forEachCardInGame(visit);
         }
         // Zone-specific search may miss if the view has stale zone info
-        // (e.g. from encoder IdRef resolution using a tracker that hasn't
-        // been updated after a zone change). Fall back to global search.
+        // (e.g. IdRef resolved from a tracker that wasn't updated after a
+        // zone change). Fall back to global search.
         if (visit.getFound() == null) {
             forEachCardInGame(visit);
         }
