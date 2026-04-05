@@ -34,6 +34,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.border.Border;
 
+import forge.game.DanDanViewZones;
+import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
@@ -59,7 +61,6 @@ import forge.toolbox.special.PlayerDetailsPanel;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
 import forge.view.FView;
-
 public class FloatingZone extends FloatingCardArea {
     private static final long serialVersionUID = 1927906492186378596L;
 
@@ -68,6 +69,21 @@ public class FloatingZone extends FloatingCardArea {
 
     private static int getKey(final PlayerView player, final ZoneType zone) {
         return 40 * player.getId() + zone.hashCode();
+    }
+
+    /** @see DanDanViewZones#cardsForZoneDisplay(GameView, PlayerView, ZoneType) */
+    public static Iterable<CardView> cardsForZoneDisplay(final CMatchUI matchUI, final PlayerView player, final ZoneType zone) {
+        return matchUI == null ? null : matchUI.cardsForZoneDisplay(player, zone);
+    }
+
+    /** @see DanDanViewZones#cardsForZoneDisplay(GameView, PlayerView, ZoneType) */
+    public static Iterable<CardView> cardsForZoneDisplay(final GameView gameView, final PlayerView player, final ZoneType zone) {
+        return DanDanViewZones.cardsForZoneDisplay(gameView, player, zone);
+    }
+
+    /** @see DanDanViewZones#isDanDan(GameView) */
+    public static boolean isDanDanGameView(final GameView gameView) {
+        return DanDanViewZones.isDanDan(gameView);
     }
 
     // ========== Tab mode preference ==========
@@ -270,6 +286,32 @@ public class FloatingZone extends FloatingCardArea {
             default:
                 break;
         }
+    }
+
+    /**
+     * After a zone model change, refresh UI for that zone. In DanDan, library and graveyard are shared
+     * in the model but each player has their own FloatingZone/VZone; zone updates are often attributed
+     * only to the canonical zone owner, so without fan-out the other player's window stays stale.
+     */
+    public static void refreshZoneAfterModelUpdate(final CMatchUI matchUI, final PlayerView zoneUpdateOwner, final ZoneType zone) {
+        if (matchUI != null && isDanDanSharedLibraryOrGraveyard(matchUI, zone)) {
+            final GameView gv = matchUI.getGameView();
+            if (gv != null && gv.getPlayers() != null) {
+                for (final PlayerView p : gv.getPlayers()) {
+                    refresh(p, zone);
+                }
+                return;
+            }
+        }
+        refresh(zoneUpdateOwner, zone);
+    }
+
+    private static boolean isDanDanSharedLibraryOrGraveyard(final CMatchUI matchUI, final ZoneType zone) {
+        if (zone != ZoneType.Library && zone != ZoneType.Graveyard) {
+            return false;
+        }
+        final GameView gv = matchUI.getGameView();
+        return gv != null && isDanDanGameView(gv);
     }
 
     public static void closeAll() {
@@ -527,10 +569,10 @@ public class FloatingZone extends FloatingCardArea {
     };
 
     protected Iterable<CardView> getCards() {
-        Iterable<CardView> zoneCards = player.getCards(zone);
+        Iterable<CardView> zoneCards = cardsForZoneDisplay(getMatchUI(), player, zone);
         if (zoneCards != null) {
             cardList = new FCollection<>(zoneCards);
-            if (sortedByName) {
+            if (sortedByName && !suppressNameSortForZone()) {
                 cardList.sort(comp);
             } else if (zone == ZoneType.Flashback) {
                 cardList.sort(ZONE_ORDER_COMPARATOR);
@@ -539,6 +581,15 @@ public class FloatingZone extends FloatingCardArea {
         } else {
             return null;
         }
+    }
+
+    /** Keep deck order for DanDan shared zones; use any local seat's dev view-all for library ordering. */
+    private boolean suppressNameSortForZone() {
+        if (getMatchUI().getGameView() != null && isDanDanGameView(getMatchUI().getGameView())
+                && (zone == ZoneType.Library || zone == ZoneType.Graveyard)) {
+            return true;
+        }
+        return zone == ZoneType.Library && getMatchUI().anyLocalMayLookAtAllCards();
     }
 
     private FloatingZone(final CMatchUI matchUI, final PlayerView player0, final ZoneType zone0) {

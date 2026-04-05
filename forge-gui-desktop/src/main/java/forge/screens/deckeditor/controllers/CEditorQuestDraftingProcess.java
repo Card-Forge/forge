@@ -61,6 +61,7 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
     private DragCell commanderDecksParent = null;
     private DragCell oathbreakerDecksParent = null;
     private DragCell brawlDecksParent = null;
+    private DragCell dandanDecksParent = null;
     private DragCell tinyLeadersDecksParent = null;
     private DragCell deckGenParent = null;
     private boolean saved = false;
@@ -284,6 +285,7 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
         commanderDecksParent = removeTab(VCommanderDecks.SINGLETON_INSTANCE);
         oathbreakerDecksParent = removeTab(VOathbreakerDecks.SINGLETON_INSTANCE);
         brawlDecksParent = removeTab(VBrawlDecks.SINGLETON_INSTANCE);
+        dandanDecksParent = removeTab(VDandanDecks.SINGLETON_INSTANCE);
         tinyLeadersDecksParent = removeTab(VTinyLeadersDecks.SINGLETON_INSTANCE);
 
         // set catalog table to single-selection only mode
@@ -339,6 +341,9 @@ public class CEditorQuestDraftingProcess extends ACEditorBase<PaperCard, DeckGro
         }
         if (brawlDecksParent!= null) {
             brawlDecksParent.addDoc(VBrawlDecks.SINGLETON_INSTANCE);
+        }
+        if (dandanDecksParent != null) {
+            dandanDecksParent.addDoc(VDandanDecks.SINGLETON_INSTANCE);
         }
         if (tinyLeadersDecksParent != null) {
             tinyLeadersDecksParent.addDoc(VTinyLeadersDecks.SINGLETON_INSTANCE);

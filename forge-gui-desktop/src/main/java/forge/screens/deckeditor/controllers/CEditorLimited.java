@@ -41,6 +41,7 @@ import forge.screens.deckeditor.AddBasicLandsDialog;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.deckeditor.views.VAllDecks;
 import forge.screens.deckeditor.views.VBrawlDecks;
+import forge.screens.deckeditor.views.VDandanDecks;
 import forge.screens.deckeditor.views.VCommanderDecks;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.deckeditor.views.VDeckgen;
@@ -67,6 +68,7 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
     private DragCell commanderDecksParent = null;
     private DragCell oathbreakerDecksParent = null;
     private DragCell brawlDecksParent = null;
+    private DragCell dandanDecksParent = null;
     private DragCell tinyLeadersDecksParent = null;
     private DragCell deckGenParent = null;
     private final List<DeckSection> allSections = new ArrayList<>();
@@ -241,6 +243,7 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().setVisible(false);
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setEnabled(false);
+        VCurrentDeck.SINGLETON_INSTANCE.getTxfDescription().setEnabled(false);
         this.getCbxSection().setVisible(true);
 
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
@@ -248,6 +251,7 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
         commanderDecksParent = removeTab(VCommanderDecks.SINGLETON_INSTANCE);
         oathbreakerDecksParent = removeTab(VOathbreakerDecks.SINGLETON_INSTANCE);
         brawlDecksParent = removeTab(VBrawlDecks.SINGLETON_INSTANCE);
+        dandanDecksParent = removeTab(VDandanDecks.SINGLETON_INSTANCE);
         tinyLeadersDecksParent = removeTab(VTinyLeadersDecks.SINGLETON_INSTANCE);
     }
 
@@ -282,6 +286,9 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
         }
         if (brawlDecksParent!= null) {
             brawlDecksParent.addDoc(VBrawlDecks.SINGLETON_INSTANCE);
+        }
+        if (dandanDecksParent != null) {
+            dandanDecksParent.addDoc(VDandanDecks.SINGLETON_INSTANCE);
         }
         if (tinyLeadersDecksParent != null) {
             tinyLeadersDecksParent.addDoc(VTinyLeadersDecks.SINGLETON_INSTANCE);

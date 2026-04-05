@@ -348,8 +348,14 @@ public class SimulateMatch {
     private static Deck deckFromCommandLineParameter(String deckname, GameType type) {
         int dotpos = deckname.lastIndexOf('.');
         if (dotpos > 0 && dotpos == deckname.length() - 4) {
-            String baseDir = type.equals(GameType.Commander) ?
-                    ForgeConstants.DECK_COMMANDER_DIR : ForgeConstants.DECK_CONSTRUCTED_DIR;
+            final String baseDir;
+            if (type.equals(GameType.Commander)) {
+                baseDir = ForgeConstants.DECK_COMMANDER_DIR;
+            } else if (type.equals(GameType.DanDan)) {
+                baseDir = ForgeConstants.DECK_DANDAN_DIR;
+            } else {
+                baseDir = ForgeConstants.DECK_CONSTRUCTED_DIR;
+            }
 
             File f = new File(baseDir + deckname);
             if (!f.exists()) {
@@ -364,6 +370,8 @@ public class SimulateMatch {
         // Add other game types here...
         if (type.equals(GameType.Commander)) {
             deckStore = FModel.getDecks().getCommander();
+        } else if (type.equals(GameType.DanDan)) {
+            deckStore = FModel.getDecks().getDanDan();
         } else {
             deckStore = FModel.getDecks().getConstructed();
         }

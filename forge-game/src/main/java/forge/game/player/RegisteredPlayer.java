@@ -57,6 +57,13 @@ public class RegisteredPlayer {
         return currentDeck;
     }
 
+    public void useSharedDeckFrom(final RegisteredPlayer shared) {
+        if (shared == null) {
+            return;
+        }
+        this.currentDeck = shared.getDeck();
+    }
+
     public final int getStartingLife() {
         return startingLife;
     }

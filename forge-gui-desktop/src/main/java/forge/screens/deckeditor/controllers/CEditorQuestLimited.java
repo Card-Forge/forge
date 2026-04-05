@@ -231,6 +231,7 @@ public final class CEditorQuestLimited extends CDeckEditor<DeckGroup> {
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setVisible(true);
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setEnabled(false);
+        VCurrentDeck.SINGLETON_INSTANCE.getTxfDescription().setEnabled(false);
 
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
         allDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);

@@ -30,12 +30,14 @@ import forge.itemmanager.ItemManagerConfig;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.deckeditor.AddBasicLandsDialog;
+import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FComboBox;
 import forge.util.ItemPool;
 import forge.util.Localizer;
 
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -52,6 +54,15 @@ import java.util.function.Supplier;
  * @version $Id: CEditorConstructed.java 24868 2014-02-17 05:08:05Z drdev $
  */
 public final class CEditorConstructed extends CDeckEditor<Deck> {
+    private static final GameType[] EDITABLE_DECK_TYPES = {
+            GameType.Constructed,
+            GameType.DanDan,
+            GameType.Commander,
+            GameType.Oathbreaker,
+            GameType.Brawl,
+            GameType.TinyLeaders
+    };
+
     private DeckController<Deck> controller;
     private final List<DeckSection> allSections = new ArrayList<>();
     private ItemPool<PaperCard> normalPool, avatarPool, planePool, schemePool, conspiracyPool,
@@ -81,6 +92,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
 
         switch (this.gameType) {
             case Constructed:
+            case DanDan:
                 allSections.add(DeckSection.Avatar);
                 allSections.add(DeckSection.Conspiracy);
 
@@ -156,6 +168,9 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
             case Constructed:
                 this.controller = new DeckController<>(FModel.getDecks().getConstructed(), this, newCreator);
                 break;
+            case DanDan:
+                this.controller = new DeckController<>(FModel.getDecks().getDanDan(), this, newCreator);
+                break;
             case Commander:
                 this.controller = new DeckController<>(FModel.getDecks().getCommander(), this, newCreator);
                 break;
@@ -184,6 +199,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
             switch (this.gameType) {
                 case Constructed:
+                case DanDan:
                     return CardLimit.Default;
                 case Commander:
                 case Oathbreaker:
@@ -194,6 +210,11 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
             }
         }
         return CardLimit.None; //if not enforcing deck legality, don't enforce default limit
+    }
+
+    @Override
+    protected int getMaxCardCopiesAllowed(final PaperCard card) {
+        return this.gameType.getDeckFormat().getMaxCardCopies(card);
     }
 
     public static void onAddItems(ACEditorBase<PaperCard, Deck> editor, Iterable<Entry<PaperCard, Integer>> items, boolean toAlternate) {
@@ -481,7 +502,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 deckManager.setPool(this.controller.getModel().getOrCreate(DeckSection.Schemes));
                 break;
             case Commander:
-                if(gameType == GameType.Constructed)
+                if(gameType == GameType.Constructed || gameType == GameType.DanDan)
                     break;
                 this.getCatalogManager().setup(ItemManagerConfig.COMMANDER_POOL);
                 this.getCatalogManager().setPool(commanderPool, true);
@@ -549,8 +570,41 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
             setEditorMode(ds);
         });
         this.getCbxSection().setVisible(true);
+        configureDeckTypeSelector();
 
         this.controller.refreshModel();
+    }
+
+    private void configureDeckTypeSelector() {
+        final FComboBox deckTypeSelector = this.getCbxDeckType();
+        deckTypeSelector.removeAllItems();
+        for (final GameType editableDeckType : EDITABLE_DECK_TYPES) {
+            deckTypeSelector.addItem(editableDeckType);
+        }
+        deckTypeSelector.setSelectedItem(this.gameType);
+
+        for (final ActionListener listener : deckTypeSelector.getActionListeners()) {
+            deckTypeSelector.removeActionListener(listener);
+        }
+
+        deckTypeSelector.addActionListener(actionEvent -> {
+            final Object selectedItem = deckTypeSelector.getSelectedItem();
+            if (!(selectedItem instanceof GameType selectedGameType) || selectedGameType == this.gameType) {
+                return;
+            }
+
+            if (!SEditorIO.confirmSaveChanges(FScreen.DECK_EDITOR_CONSTRUCTED, false)) {
+                deckTypeSelector.setSelectedItem(this.gameType);
+                return;
+            }
+
+            CDeckEditorUI.SINGLETON_INSTANCE
+                    .setEditorController(new CEditorConstructed(getCDetailPicture(), selectedGameType));
+            CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().loadDeck(new Deck());
+        });
+
+        getLblDeckType().setVisible(true);
+        deckTypeSelector.setVisible(true);
     }
 
     /* (non-Javadoc)
