@@ -120,6 +120,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_LIBGDX_TEXTURE_FILTERING("true"),
         UI_ANTE ("false"),
         UI_ANTE_MATCH_RARITY ("false"),
+        UI_ANTE_INCLUDE_BASIC_LANDS ("false"),
         UI_SKIN ("Default"),
         UI_CJK_FONT (""),
         UI_PREFERRED_AVATARS_ONLY ("false"),
