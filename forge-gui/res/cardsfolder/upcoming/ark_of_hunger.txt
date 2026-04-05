@@ -1,0 +1,12 @@
+Name:Ark of Hunger
+ManaCost:2 R W
+Types:Artifact
+T:Mode$ ChangesZoneAll | ValidCards$ Card.YouOwn | Origin$ Graveyard | Destination$ Any | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever one or more cards leave your graveyard, this artifact deals 1 damage to each opponent and you gain 1 life.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+A:AB$ Mill | Cost$ T | Defined$ You | NumCards$ 3 | RememberMilled$ True | SubAbility$ DBEffect | SpellDescription$ Mill a card. You may play that card this turn.
+SVar:DBEffectYou:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBCleanup | ExileOnMoved$ Graveyard,Exile
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Graveyard,Exile | Description$ You may play that card this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Graveyard
+Oracle:Whenever one or more cards leave your graveyard, this artifact deals 1 damage to each opponent and you gain 1 life.\n{T}: Mill a card. You may play that card this turn.
