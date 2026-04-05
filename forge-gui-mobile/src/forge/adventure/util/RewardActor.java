@@ -33,7 +33,6 @@ import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
 import forge.Graphics;
 import forge.ImageKeys;
-import forge.StaticData;
 import forge.adventure.data.ItemData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.scene.RewardScene;
@@ -52,13 +51,15 @@ import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
-import forge.util.Aggregates;
+import forge.util.MyRandom;
 import forge.util.CardTranslation;
 import forge.util.ImageFetcher;
 import forge.util.ImageUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static forge.localinstance.properties.ForgeConstants.IMAGE_LIST_QUEST_BOOSTERS_FILE;
@@ -206,11 +207,13 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         if(reward.type.equals(Reward.Type.CardPack))
         {
             Texture t = ImageCache.getInstance().getImage(imageKey, false, true);
+            if (t == null)
+                return;
             Sprite backSprite = Config.instance().getItemSprite("CardBack");
             Sprite item = new Sprite(new TextureRegion(t));
             setItemTooltips(item, backSprite, true);
-            //processSprite(backSprite, item, Controls.newTextraLabel("[%200]" + reward.getDeck().getComment() + " " +
-            //        "Booster"), 0, -10, true);
+            processSprite(backSprite, item, Controls.newTextraLabel("[%200]" + reward.getDeck().getComment() + " " +
+                    "Booster"), 0, -10, true);
         }
         Gdx.graphics.requestRendering();
     }
@@ -412,39 +415,34 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                         artIndex = 0;
 
                     } else {
-                        int maxIdx = StaticData.instance().getEditions().get(editionCode).getCntBoosterPictures();
-                        artIndex = Aggregates.randomInt(1, 2);//MyRandom.getRandom().nextInt(maxIdx) + 1;
-                        imageKey = ImageKeys.BOOSTER_PREFIX + editionCode + ((1 >= maxIdx) ? "" : ("_" + artIndex));
+                        // Collect all available booster image URLs for this edition
+                        List<String> available = new ArrayList<>();
+                        try {
+                            Scanner scanner = new Scanner(new File(IMAGE_LIST_QUEST_BOOSTERS_FILE));
+                            while (scanner.hasNextLine()) {
+                                String line = scanner.nextLine();
+                                String filename = line.substring(line.lastIndexOf('/') + 1);
+                                if (filename.startsWith(editionCode + "_") || filename.startsWith(editionCode + ".")) {
+                                    available.add(line);
+                                }
+                            }
+                        } catch (Exception ignored) {}
 
+                        if (!available.isEmpty()) {
+                            String chosen = available.get(MyRandom.getRandom().nextInt(available.size()));
+                            String chosenFile = chosen.substring(chosen.lastIndexOf('/') + 1);
+                            String name = chosenFile.substring(0, chosenFile.lastIndexOf('.'));
+                            imageKey = ImageKeys.BOOSTER_PREFIX + name + chosenFile.substring(chosenFile.lastIndexOf('.'));
+                        } else {
+                            imageKey = ImageKeys.BOOSTER_PREFIX + editionCode;
+                        }
                     }
                 } catch (Exception e) {
                     //Comment did not contain the edition code, this is not a basic booster pack
                 }
 
                 Sprite item = null;
-                boolean found = false;
-                if (imageKey != "") {
-                    isBooster = true;
-                    File file = new File(IMAGE_LIST_QUEST_BOOSTERS_FILE);
-                    try {
-                        Scanner scanner = new Scanner(file);
-                        String boosterPath = "";
-                        while(scanner.hasNextLine())
-                        {
-                            boosterPath = scanner.nextLine();
-                            if(boosterPath.contains(imageKey.substring(2))) {
-                                imageKey = imageKey + boosterPath.substring(boosterPath.length() - 4);
-                                found = true;
-                                break;
-                            }
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        System.out.println(e.getMessage());
-                        break;
-                    }
-                }
+                boolean found = !imageKey.isEmpty();
                 if(found) {
                     Texture t = ImageCache.getInstance().getImage(imageKey, false, true);
                     isBooster = true;

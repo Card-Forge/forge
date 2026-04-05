@@ -268,17 +268,12 @@ public class CharmEffect extends SpellAbilityEffect {
     }
 
     public static void chainAbilities(SpellAbility sa, List<AbilitySub> chosen) {
-        // Sort Chosen by SA order
-        chainAbilities(sa, chosen, Comparator.comparingInt(o -> o.getSVarInt("CharmOrder")));
-    }
-    public static void chainAbilities(SpellAbility sa, List<AbilitySub> chosen, Comparator<AbilitySub> comp) {
         if (chosen == null) {
             return;
         }
 
-        if (comp != null) {
-            chosen.sort(comp);
-        }
+        // Sort Chosen by SA order
+        chosen.sort(Comparator.comparingInt(o -> o.getSVarInt("CharmOrder")));
 
         int indx = 1;
         for (AbilitySub sub : chosen) {

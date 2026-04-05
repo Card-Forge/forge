@@ -278,7 +278,7 @@ public class CharmAi extends SpellAbilityAi {
         if (sub.hasParam("TargetUnique") && !chosen.isEmpty()) {
             // support "Each mode must target a different..."
             sa.setSubAbility(null);
-            CharmEffect.chainAbilities(sa, chosen, null);
+            CharmEffect.chainAbilities(sa, chosen);
             sa.appendSubAbility(sub);
         }
     }

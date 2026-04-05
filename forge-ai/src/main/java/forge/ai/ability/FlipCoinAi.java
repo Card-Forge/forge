@@ -9,7 +9,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
-public class FlipACoinAi extends SpellAbilityAi {
+public class FlipCoinAi extends SpellAbilityAi {
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#checkApiLogic(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
