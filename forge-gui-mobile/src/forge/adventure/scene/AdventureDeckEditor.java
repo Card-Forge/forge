@@ -798,6 +798,13 @@ public class AdventureDeckEditor extends FDeckEditor {
             event.getDraft().setLogEntry(this.draftLog);
             deckHeader.initDraftLog(this.draftLog, this);
         }
+        if (event.getDraft() != null) {
+            deckHeader.initCogworkButton(() -> {
+                event.getDraft().getHumanPlayer().cogworkLibrarianActivatedByUI = true;
+                deckHeader.btnCogwork.setVisible(false);
+                deckHeader.revalidate();
+            });
+        }
     }
 
     public AdventureDeckEditor(Deck deckToPreview) {

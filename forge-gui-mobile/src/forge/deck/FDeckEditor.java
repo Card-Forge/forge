@@ -1124,6 +1124,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         protected final FLabel btnSave;
         protected final FLabel btnMoreOptions;
         protected FDisplayObject btnDraftLog;
+        protected FLabel btnCogwork;
 
         protected DeckHeader() {
             setHeight(HEADER_HEIGHT);
@@ -1172,8 +1173,25 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 float width = Math.max(remainingWidth / 4, Math.min(height * 4, remainingWidth / 2));
                 btnDraftLog.setSize(width, height);
                 out.add(btnDraftLog);
+                remainingWidth -= width;
+            }
+            if(btnCogwork != null && btnCogwork.isVisible()) {
+                float width = Math.max(remainingWidth / 3, Math.min(height * 6, remainingWidth));
+                btnCogwork.setSize(width, height);
+                out.add(btnCogwork);
             }
             return out;
+        }
+
+        public void initCogworkButton(Runnable onActivate) {
+            this.btnCogwork = new FLabel.ButtonBuilder()
+                    .text(Localizer.getInstance().getMessage("lblUseCogworkLibrarian"))
+                    .pressedColor(Header.getBtnPressedColor())
+                    .command(e -> onActivate.run())
+                    .font(FSkinFont.get(14))
+                    .build();
+            this.btnCogwork.setVisible(false);
+            this.add(btnCogwork);
         }
 
         public void initDraftLog(GameLog draftLog, FContainer parentScreen) {
@@ -2247,6 +2265,17 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 return;
             }
 
+            // Show Cogwork Librarian button in the header if the ability is pending this pick
+            FLabel btnCogwork = parentScreen.deckHeader.btnCogwork;
+            if (btnCogwork != null) {
+                boolean librarianAvailable = getDraftPlayer().hasCogworkLibrarianAvailable()
+                        && !getDraftPlayer().cogworkLibrarianActivatedByUI;
+                if (btnCogwork.isVisible() != librarianAvailable) {
+                    btnCogwork.setVisible(librarianAvailable);
+                    parentScreen.deckHeader.revalidate();
+                }
+            }
+
             this.updateCaption();
             cardManager.setEnabled(true);
         }
@@ -2282,6 +2311,12 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             assert(destination instanceof DeckSectionPage);
             BoosterDraft draft = parentScreen.getDraft();
             cardManager.setEnabled(false); //Prevent any weird inputs until choices are made and the next set of cards is ready.
+            // Hide the Librarian button now — refresh() will show it again next pack if still available
+            FLabel btnCogwork = parentScreen.deckHeader.btnCogwork;
+            if (btnCogwork != null && btnCogwork.isVisible()) {
+                btnCogwork.setVisible(false);
+                parentScreen.deckHeader.revalidate();
+            }
             DeckSection section = ((DeckSectionPage) destination).deckSection;
             FThreads.invokeInBackgroundThread(() -> {
                 draft.setChoice(card, section);
