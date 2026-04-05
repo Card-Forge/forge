@@ -81,14 +81,7 @@ public final class CardRules implements ICardCharacteristics {
         addsWildCardColor = false;
         setColorID = 0;
 
-
-        //calculate color identity
-        byte colMask = calculateColorIdentity(mainPart);
-
-        if (otherPart != null) {
-            colMask |= calculateColorIdentity(otherPart);
-        }
-        colorIdentity = ColorSet.fromMask(colMask);
+        colorIdentity = calculateColorIdentity(this);
     }
 
     void reinitializeFromRules(CardRules newRules) {
@@ -107,6 +100,15 @@ public final class CardRules implements ICardCharacteristics {
         addsWildCardColor = newRules.addsWildCardColor;
         setColorID = newRules.setColorID;
         tokens = newRules.tokens;
+    }
+
+    private static ColorSet calculateColorIdentity(CardRules rules) {
+        byte colMask = calculateColorIdentity(rules.mainPart);
+
+        if (rules.otherPart != null) {
+            colMask |= calculateColorIdentity(rules.otherPart);
+        }
+        return ColorSet.fromMask(colMask);
     }
 
     private static byte calculateColorIdentity(final ICardFace face) {
@@ -551,12 +553,8 @@ public final class CardRules implements ICardCharacteristics {
         }
         this.allFaces = Collections.unmodifiableList(newFaceList);
 
-        //Recalculate color identity.
-        byte colMask = calculateColorIdentity(mainPart);
-        if (otherPart != null) {
-            colMask |= calculateColorIdentity(otherPart);
-        }
-        this.colorIdentity = ColorSet.fromMask(colMask);
+        //Recalculate color identity now that we have all the faces.
+        this.colorIdentity = calculateColorIdentity(this);
 
         this.placeholderFaces = null;
     }
