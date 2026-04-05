@@ -1,14 +1,18 @@
 package forge.gamemodes.net.server;
 
-import forge.util.IHasForgeLog;
+import forge.gamemodes.net.CompatibleObjectDecoder;
+import forge.gamemodes.net.CompatibleObjectEncoder;
+import forge.gamemodes.net.IHasNetLog;
 import forge.gamemodes.net.ReplyPool;
+import forge.trackable.Tracker;
 import forge.gamemodes.net.event.IdentifiableNetEvent;
 import forge.gamemodes.net.event.NetEvent;
 import io.netty.channel.Channel;
 
+import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public final class RemoteClient implements IToClient, IHasForgeLog {
+public final class RemoteClient implements IToClient, IHasNetLog {
 
     /** Special value indicating the client hasn't been assigned a slot yet. */
     public static final int UNASSIGNED_SLOT = -1;
@@ -61,7 +65,7 @@ public final class RemoteClient implements IToClient, IHasForgeLog {
     }
 
     @Override
-    public Object sendAndWait(final IdentifiableNetEvent event) {
+    public Object sendAndWait(final IdentifiableNetEvent event) throws TimeoutException {
         replies.initialize(event.getId());
         send(event);
         return replies.get(event.getId());
@@ -79,6 +83,22 @@ public final class RemoteClient implements IToClient, IHasForgeLog {
     }
     public void setIndex(final int index) {
         this.index = index;
+    }
+
+    /**
+     * Set the tracker on the channel's encoder and decoder for IdRef
+     * replacement/resolution. Called when the game starts (before any
+     * client protocol messages arrive).
+     */
+    public void setCodecTracker(Tracker tracker) {
+        CompatibleObjectEncoder encoder = channel.pipeline().get(CompatibleObjectEncoder.class);
+        if (encoder != null) {
+            encoder.setTracker(tracker);
+        }
+        CompatibleObjectDecoder decoder = channel.pipeline().get(CompatibleObjectDecoder.class);
+        if (decoder != null) {
+            decoder.setTracker(tracker);
+        }
     }
 
     public int getSendErrorCount() {
