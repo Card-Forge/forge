@@ -27,4 +27,5 @@ public class SettingData {
     public boolean excludeAlchemyVariants;
     public boolean generateLDADecks;
     public boolean bindEquipmentLoadoutsToDecks;
+    public boolean drawChevronsToHiddenEnemiesInClearQuest;
 }
