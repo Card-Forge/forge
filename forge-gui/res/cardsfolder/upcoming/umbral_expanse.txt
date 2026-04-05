@@ -1,6 +1,6 @@
 Name:Umbral Expanse
 ManaCost:no cost
-Types:Land Plaine Swamp
+Types:Land Plains Swamp
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 K:Cycling:2
