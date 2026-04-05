@@ -690,9 +690,9 @@
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Beastbreaker Boots"  },
     { "type": "item","count":1, "itemName": "Tome of Might"  },
-    { "type": "item","count":1, "itemName": "Mask of Narcissism"  },
     { "type": "item","count":1, "itemName": "Ring of Kalonia"  },
-    { "type": "item","count":1, "itemName": "Spiked Ripsaw"  },
+    { "type": "item","count":1, "itemName": "Mask of Narcissism"  },
+    { "type": "item","count":1, "itemName": "Colossal Dreadmace"  },
     { "type": "item","count":1, "itemName": "Karst Shawl"  },
     { "type": "item","count":1, "itemName": "Token of Landing"  },
 	{ "type": "item","count":1, "itemName": "Token of Exploration"  }

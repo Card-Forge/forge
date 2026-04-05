@@ -154,7 +154,7 @@
   "difficulties": [
     {
       "name": "Easy",
-      "startingLife": 30,
+      "startingLife": 35,
       "startingShards": 50,
       "startingMoney": 5000,
       "enemyLifeFactor": 0.8,
