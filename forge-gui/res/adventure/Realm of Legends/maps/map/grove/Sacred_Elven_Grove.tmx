@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="85">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="86">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -55,6 +55,8 @@ Shooting you a look of rage, the fiery planeswalker decides to comply, and as qu
 	]</property>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Sword of the Animist|ORI&quot;, &quot;Retreat to Kazandu&quot;, &quot;Lost in the Woods&quot;, &quot;Oran-Rief, the Vastwood|ZEN&quot;, &quot;Bonds of Mortality|OGW&quot;, &quot;Joraga Treespeaker|ROE&quot;]}"/>
     <property name="enemy" value="Nissa"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="0"/>
     <property name="threatRange" type="int" value="0"/>
     <property name="waypoints" value=""/>
@@ -134,7 +136,7 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
    </properties>
   </object>
   <object id="78" template="../../../../common/maps/obj/manashards.tx" x="436.5" y="342.5"/>
-  <object id="79" template="../../../../common/maps/obj/dialog.tx" x="227" y="238.227" width="61" height="47.5455" visible="1">
+  <object id="79" template="../../../../common/maps/obj/dialog.tx" x="226" y="235.727" width="61" height="47.5455" visible="1">
    <properties>
     <property name="dialog">[
 {
@@ -168,5 +170,27 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
   <object id="82" template="../../../../common/maps/obj/gold.tx" x="50.5" y="218.5"/>
   <object id="83" template="../../../../common/maps/obj/manashards.tx" x="436.5" y="361.5"/>
   <object id="84" template="../../../../common/maps/obj/collision.tx" x="193.528" y="160.249" width="125.881" height="31.3672"/>
+  <object id="85" template="../../../../common/maps/obj/enemy.tx" x="246.75" y="217.5">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;Nissa stumbles back from your final strike, badly bloodied and only standing due to using her staff as support. Suddenly, there is a flash of light and an explosion of smoke as a flame-haired woman wearing goggles appears from nowhere, grabbing Nissa for support.
+
+'Chandra... don't try to fight them... they're too strong. Let's just go while we still can...'
+
+Shooting you a look of rage, the fiery planeswalker decides to comply, and as quickly as she arrived, she has gone, taking the defeated Nissa with her.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Sword of the Animist|ORI&quot;, &quot;Retreat to Kazandu&quot;, &quot;Lost in the Woods&quot;, &quot;Bonds of Mortality|OGW&quot;, &quot;Joraga Treespeaker|ROE&quot;]}"/>
+    <property name="enemy" value="Nissa"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

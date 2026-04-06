@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="137">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="138">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -93,6 +93,8 @@
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Oran-Rief, the Vastwood&quot;, &quot;Chimeric Coils&quot;, &quot;Thunderous Snapper&quot; ]
 }</property>
     <property name="enemy" value="Gargos"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="50"/>
     <property name="threatRange" type="int" value="10"/>
    </properties>
@@ -147,6 +149,17 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 }
 ]</property>
+   </properties>
+  </object>
+  <object id="137" template="../../../../common/maps/obj/enemy.tx" x="265.636" y="259.455">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Chimeric Coils&quot;, &quot;Thunderous Snapper&quot; ]
+}</property>
+    <property name="enemy" value="Gargos"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="10"/>
    </properties>
   </object>
  </objectgroup>

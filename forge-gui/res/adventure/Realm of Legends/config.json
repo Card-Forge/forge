@@ -210,14 +210,14 @@
         "Silver Challenge Coin",
         "Steel Boots",
         "Steel Armor",
-        "Echo Shield"
+        "Chromatic Sphere"
       ]
     },{
       "name": "Hard",
       "startingLife": 20,
       "startingShards": 10,
       "startingMoney": 500,
-      "enemyLifeFactor": 1.5,
+      "enemyLifeFactor": 1.3,
       "rewardMaxFactor" : 0.5,
       "spawnRank": 2,         
       "goldLoss": 0,
@@ -241,7 +241,7 @@
       "startingLife": 15,
       "startingShards": 10,
       "startingMoney": 0,
-      "enemyLifeFactor": 2.0,
+      "enemyLifeFactor": 1.5,
       "rewardMaxFactor" : 0.1,
       "spawnRank": 2,
       "goldLoss": 0,

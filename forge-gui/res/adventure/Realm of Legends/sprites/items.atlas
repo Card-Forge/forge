@@ -810,6 +810,12 @@ EnormousEnergyBlade
 AngelicArmaments
   xy: 272, 368
   size: 16, 16
+SpidersilkHelm
+  xy: 128, 400
+  size: 16, 16
+Liliana'sVeil
+  xy: 144, 320
+  size: 16, 16
 Brawler'sCestus
   xy: 288, 320
   size: 16, 16

@@ -3466,6 +3466,18 @@
      ]
     }
   },
+  {
+    "name": "Spidersilk Helm",
+    "description": "Your creatures get +0/+1 and reach.",
+    "equipmentSlot": "Neck",
+    "iconName": "SpidersilkHelm",
+    "effect": {
+      "lifeModifier": -3,
+      "startBattleWithCard": [
+        "Spidersilk Armor|DDG"
+      ]
+    }
+  },
     {
     "name": "Full Moon Necklace",
     "description": "Wolves and Werewolves get +1/+1 and trample.",
@@ -3685,11 +3697,25 @@
     "equipmentSlot": "Body",
     "iconName": "UltraHeavyArmor",
     "cost": 3000,
-    "lifeModifier": 15,
     "effect": {
+      "lifeModifier": 15,
       "opponent": {
         "startBattleWithCard": [
           "Amulet of Vigor|WWK"
+        ]
+      }
+    }
+  },
+  {
+    "name": "Liliana's Veil",
+    "description": "At each end step, create a 2/2 zombie if you played a walker.",
+    "equipmentSlot": "Neck",
+    "iconName": "Liliana'sVeil",
+    "effect": {
+      "lifeModifier": -6,
+      "opponent": {
+        "startBattleWithCard": [
+          "Oath of Liliana|EMN"
         ]
       }
     }
