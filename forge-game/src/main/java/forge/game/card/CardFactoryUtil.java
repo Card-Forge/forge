@@ -1339,6 +1339,16 @@ public class CardFactoryUtil {
             for (final Trigger trigger : triggers) {
                 inst.addTrigger(trigger);
             }
+        } else if (keyword.equals("Increment")) {
+            final String trig = "Mode$ SpellCast | ValidActivatingPlayer$ You | TriggerZones$ Battlefield "
+                    + " | TriggerDescription$ Increment (" + inst.getReminderText() + ")";
+
+            final String effect = "DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1";
+
+            final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, intrinsic);
+            parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
+
+            inst.addTrigger(parsedTrigger);
         } else if (keyword.equals("Ingest")) {
             final String trigStr = "Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True"
                     + "| Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ Ingest ("

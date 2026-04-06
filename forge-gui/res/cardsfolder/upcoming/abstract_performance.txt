@@ -1,6 +1,6 @@
 Name:Abstract Performance
-ManaCost:3 B
-Types:Instant
+ManaCost:5 U
+Types:Sorcery
 A:SP$ Dig | DigNum$ 4 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | ExileFaceDown$ True | SubAbility$ DBDig | StackDescription$ SpellDescription | SpellDescription$ Exile the top four cards of your library in a face-down pile,
 SVar:DBDig:DB$ Dig | DigNum$ 4 | ChangeNum$ All | DestinationZone$ Exile | Imprint$ True | SubAbility$ TheyChoose | StackDescription$ SpellDescription | SpellDescription$ then exile the top four cards of your library in a face-up pile.
 SVar:TheyChoose:DB$ TwoPiles | Zone$ Exile | DefinedPiles$ Remembered,Imprinted | Chooser$ Opponent | ChosenPile$ ToGrave | UnchosenPile$ DBPlay | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ An opponent chooses one of those piles. Put that pile into your graveyard. Look at the cards in the other pile. You may cast a spell from among them without paying its mana cost. Put the rest into your hand.

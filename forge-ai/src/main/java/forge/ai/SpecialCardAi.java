@@ -307,7 +307,7 @@ public class SpecialCardAi {
 
 
             String choice = chooseCardViaScoring(ai, sa);
-            if (choice == null) {
+            if (choice != null) {
                 return choice;
             }
             return chooseNonBattlefieldName();
