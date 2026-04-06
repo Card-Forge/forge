@@ -45,15 +45,10 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasForg
         netLog.info("[DeltaSync] === START applyDelta seq={} (Turn {}, {}, Active={}) ===",
                 packet.getSequenceNumber(), getGameView().getTurn(), phaseName, activePlayerName);
 
-        List<GameEvent> resolvedEvents = null;
-        if (packet.hasEvents()) {
-            List<GameEvent> events = new java.util.ArrayList<>(packet.getEvents().size());
-            for (Object item : packet.getEvents()) {
-                if (item instanceof GameEvent e) events.add(e);
-            }
-            resolvedEvents = events;
+        boolean hasEvents = packet.hasEvents();
+        if (hasEvents) {
             netLog.info("[DeltaSync] {} events received with delta seq={}",
-                    resolvedEvents.size(), packet.getSequenceNumber());
+                    packet.getEvents().size(), packet.getSequenceNumber());
         }
 
         int newObjectCount = 0;
@@ -165,9 +160,12 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasForg
                     packet.getSequenceNumber(), elapsed);
         }
 
-        // Dispatch pre-resolved events now that game state is current.
-        if (resolvedEvents != null && !resolvedEvents.isEmpty()) {
-            handleGameEvents(resolvedEvents);
+        // Unwrap and dispatch events now that new objects are in the tracker.
+        if (hasEvents) {
+            List<GameEvent> resolvedEvents = TrackableSerializer.unwrapEvents(packet.getEvents(), tracker);
+            if (!resolvedEvents.isEmpty()) {
+                handleGameEvents(resolvedEvents);
+            }
         }
 
         // TODO shouldn't be needed if hands are ordered correctly
