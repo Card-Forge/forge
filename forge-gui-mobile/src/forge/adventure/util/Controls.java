@@ -59,6 +59,15 @@ public class Controls {
             batch.setColor(1f, 1f, 1f, 1f); // Set color before drawing each actor, per libGDX docs
             super.draw(batch, parentAlpha);
         }
+
+        public String toString() {
+            String name = getName();
+            if (name != null) return name;
+            String className = getClass().getName();
+            int dotIndex = className.lastIndexOf('.');
+            if (dotIndex != -1) className = className.substring(dotIndex + 1);
+            return className + ": " + storedText;  // Use storedText of TextraLabel, since its toString() isn't working properly.
+        }
     }
 
     static class TextButtonFix extends TextraButton {
@@ -94,6 +103,16 @@ public class Controls {
             layout();
         }
 
+        public String toString() {
+            String name = getName();
+            if (name != null) return name;
+            String className = getClass().getName();
+            String labelText = getTextraLabel().storedText;  // Use storedText of TextraLabel, since its toString() isn't working properly.
+            int dotIndex = className.lastIndexOf('.');
+            if (dotIndex != -1) className = className.substring(dotIndex + 1);
+            return className + ": " + labelText;
+        }
+
     }
 
     static class TypingButtonFix extends TypingButton {
@@ -127,6 +146,16 @@ public class Controls {
             getTextraLabel().getFont().markup(text, getTextraLabel().layout.clear());
             getTextraLabel().setWidth(getTextraLabel().layout.getWidth() + (getTextraLabel().style != null && getTextraLabel().style.background != null ? getTextraLabel().style.background.getLeftWidth() + getTextraLabel().style.background.getRightWidth() : 0.0F));
             layout();
+        }
+
+        public String toString() {
+            String name = getName();
+            if (name != null) return name;
+            String className = getClass().getName();
+            String labelText = getTextraLabel().storedText;  // Use storedText of TextraLabel, since its toString() isn't working properly.
+            int dotIndex = className.lastIndexOf('.');
+            if (dotIndex != -1) className = className.substring(dotIndex + 1);
+            return className + ": " + labelText;
         }
 
     }

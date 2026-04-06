@@ -627,7 +627,8 @@ public class UIScene extends Scene {
         stage.setKeyboardFocus(actor.actor);
         ScrollPane scrollPane = scrollPaneOfActor(actor.actor);
         if (scrollPane != null) {
-            scrollPane.scrollTo(actor.actor.getX(), actor.actor.getY(), actor.actor.getWidth(), actor.actor.getHeight(), false, false);
+            // Adding actor's height to the 'y' param to avoid the vertical position being incorrectly offset when moving the selection in a ScrollPane with keys.
+            scrollPane.scrollTo(actor.actor.getX(), actor.actor.getY() + actor.actor.getHeight(), actor.actor.getWidth(), actor.actor.getHeight(), false, false);
         }
         actor.onSelect(this);
     }

@@ -44,6 +44,7 @@ public class SaveLoadScene extends UIScene {
     TextraLabel header;
     int currentSlot = 0, lastSelectedSlot = 0;
     Image previewImage;
+    private Texture previewTexture;  // Reference to Texture created from a WorldSaveHeader.preview Pixmap so it can be disposed when replacing to avoid memory leak.
     TextraLabel previewDate, playerLocation;
     TextraButton saveLoadButton, back;
     Selectable<TextraButton> quickSave;
@@ -133,10 +134,18 @@ public class SaveLoadScene extends UIScene {
     }
 
     private void refreshSaveSlots() {
+        clearSelectable();
         layout.clear();
         buttons.clear();
-        addSaveSlot(Forge.getLocalizer().getMessage("lblAutoSave"), WorldSave.AUTO_SAVE_SLOT);
-        addSaveSlot(Forge.getLocalizer().getMessage("lblQuickSave"), WorldSave.QUICK_SAVE_SLOT);
+        autoSave = addSaveSlot(Forge.getLocalizer().getMessage("lblAutoSave"), WorldSave.AUTO_SAVE_SLOT);
+        quickSave = addSaveSlot(Forge.getLocalizer().getMessage("lblQuickSave"), WorldSave.QUICK_SAVE_SLOT);
+
+        // Directly set Auto and Quick save slot text again with localization, since addSaveSlots() will have replaced with name from data header.
+        autoSave.actor.setText(Forge.getLocalizer().getMessage("lblAutoSave"));
+        quickSave.actor.setText(Forge.getLocalizer().getMessage("lblQuickSave"));
+
+        autoSave.actor.setDisabled(mode == Modes.Save);
+        quickSave.actor.setDisabled(mode == Modes.Save);
         java.util.List<Integer> slotOrder = new java.util.ArrayList<>();
         for (int i = 1; i < NUMBEROFSAVESLOTS; i++) {
             slotOrder.add(i);
@@ -160,7 +169,8 @@ public class SaveLoadScene extends UIScene {
         for (int i : slotOrder) {
             addSaveSlot(Forge.getLocalizer().getMessage("lblSlot") + ": " + i, i);
         }
-        layout.invalidateHierarchy();
+        layout.layout();
+        select(lastSelectedSlot);
     }
 
     private static SaveLoadScene object;
@@ -233,7 +243,17 @@ public class SaveLoadScene extends UIScene {
         if (previews.containsKey(slot)) {
             WorldSaveHeader worldSaveHeader = previews.get(slot);
             if (worldSaveHeader.preview != null) {
-                previewImage.setDrawable(new TextureRegionDrawable(new Texture(worldSaveHeader.preview)));
+                // Dispose previously created preview texture to avoid memory leak
+                if (previewTexture != null) {
+                    try {
+                        previewTexture.dispose();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    previewTexture = null;
+                }
+                previewTexture = new Texture(worldSaveHeader.preview);
+                previewImage.setDrawable(new TextureRegionDrawable(previewTexture));
                 previewImage.setScaling(Scaling.fit);
                 previewImage.layout();
                 previewImage.setVisible(true);
@@ -250,6 +270,15 @@ public class SaveLoadScene extends UIScene {
                 previewImage.setVisible(false);
             if (previewDate != null)
                 previewDate.setVisible(false);
+            // Dispose preview texture when there's no preview to show
+            if (previewTexture != null) {
+                try {
+                    previewTexture.dispose();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                previewTexture = null;
+            }
         }
         return true;
     }
@@ -364,12 +393,21 @@ public class SaveLoadScene extends UIScene {
     }
 
     private void updateFiles() {
-
         File f = new File(WorldSave.getSaveDir());
         f.mkdirs();
         File[] names = f.listFiles();
         if (names == null)
             throw new RuntimeException("Can not find save directory");
+        // Dispose any existing previews to free Pixmap resources before clearing the previews map to avoid memory leak.
+        for (WorldSaveHeader h : previews.values()) {
+            try {
+                if (h != null) {
+                    h.dispose();
+                }
+            } catch (RuntimeException e) {
+                e.printStackTrace();
+            }
+        }
         previews.clear();
         for (File name : names) {
             if (WorldSave.isSafeFile(name.getName())) {
@@ -429,11 +467,8 @@ public class SaveLoadScene extends UIScene {
 
     @Override
     public void enter() {
-        unselectActors();
-        select(lastSelectedSlot);
         updateFiles();
-        autoSave.actor.setText(Forge.getLocalizer().getMessage("lblAutoSave"));
-        quickSave.actor.setText(Forge.getLocalizer().getMessage("lblQuickSave"));
+
         if (mode == Modes.NewGamePlus) {
             if (difficulty != null) {
                 difficulty.setVisible(true);

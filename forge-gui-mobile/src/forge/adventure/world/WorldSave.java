@@ -143,11 +143,11 @@ public class WorldSave {
     }
 
     public boolean autoSave() {
-        return save("auto save" + SaveLoadScene.instance().getSaveFileSuffix(), AUTO_SAVE_SLOT);
+        return save("Auto Save" + SaveLoadScene.instance().getSaveFileSuffix(), AUTO_SAVE_SLOT);
     }
 
     public boolean quickSave() {
-        return save("quick save" + SaveLoadScene.instance().getSaveFileSuffix(), QUICK_SAVE_SLOT);
+        return save("Quick Save" + SaveLoadScene.instance().getSaveFileSuffix(), QUICK_SAVE_SLOT);
     }
 
     public boolean quickLoad() {
