@@ -216,6 +216,24 @@ public class GameEventProxy implements Serializable, IHasNetLog {
             return unresolvedRefs;
         }
 
+        // needed for cross-platform play because Android implements Records via desugaring to regular classes,
+        // causing the serialVersionUID to auto-compute instead of default 0L
+        // (this approach avoids having to hardcode it on each individual GameEvent instead)
+        @Override
+        protected ObjectStreamClass readClassDescriptor() throws IOException, ClassNotFoundException {
+            ObjectStreamClass streamDesc = super.readClassDescriptor();
+            try {
+                Class<?> localClass = Class.forName(streamDesc.getName());
+                ObjectStreamClass localDesc = ObjectStreamClass.lookup(localClass);
+                if (localDesc != null && streamDesc.getSerialVersionUID() != localDesc.getSerialVersionUID()) {
+                    return localDesc;
+                }
+            } catch (ClassNotFoundException ignored) {
+                // Class not found locally — fall through to stream descriptor
+            }
+            return streamDesc;
+        }
+
         @Override
         protected Object resolveObject(Object obj) {
             if (obj instanceof StaleCardRef ref) {

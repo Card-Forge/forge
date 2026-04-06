@@ -150,25 +150,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public boolean mayLookAtAllCards() {
         return mayLookAtAllCards;
     }
-    /**
-     * Set this to {@code true} to enable this player to see all cards any other
-     * player can see.
-     *
-     * @param mayLookAtAllCards the mayLookAtAllCards to set
-     */
-    public void setMayLookAtAllCards(final boolean mayLookAtAllCards) {
-        this.mayLookAtAllCards = mayLookAtAllCards;
-    }
 
     private final ArrayList<Card> tempShownCards = new ArrayList<>();
 
     public <T> void tempShow(final Iterable<T> objects) {
         for (final T t : objects) {
             // assume you may see any card passed through here
-            if (t instanceof Card) {
-                tempShowCard((Card) t);
-            } else if (t instanceof CardView) {
-                tempShowCard(getCard((CardView) t));
+            if (t instanceof Card c) {
+                tempShowCard(c);
+            } else if (t instanceof CardView c) {
+                tempShowCard(getCard(c));
             }
         }
     }

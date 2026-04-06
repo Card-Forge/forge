@@ -1012,7 +1012,7 @@ public class Game {
         return ++hiddenCardIdCounter;
     }
 
-    public Multimap<Player, Card> chooseCardsForAnte(final boolean matchRarity) {
+    public Multimap<Player, Card> chooseCardsForAnte(final boolean matchRarity, final boolean includeBasicLands) {
         Multimap<Player, Card> anteed = ArrayListMultimap.create();
 
         if (matchRarity) {
@@ -1029,14 +1029,21 @@ public class Game {
 
             if (validRarities.size() == 0) { //If no possible rarity matches were found, use the original method to choose antes
                 for (Player player : getPlayers()) {
-                    chooseRandomCardsForAnte(player, anteed);
+                    chooseRandomCardsForAnte(player, anteed, includeBasicLands);
                 }
                 return anteed;
             }
 
-            //If possible, don't ante basic lands
-            if (validRarities.size() > 1) {
-                validRarities.remove(CardRarity.BasicLand);
+            //If possible, don't ante basic lands (unless the option to include them is enabled)
+            if (!includeBasicLands) {
+                if (validRarities.size() > 1) {
+                    validRarities.remove(CardRarity.BasicLand);
+                } else if (validRarities.size() == 1 && validRarities.get(0) == CardRarity.BasicLand) {
+                    for (Player player : getPlayers()) {
+                        chooseRandomCardsForAnte(player, anteed, includeBasicLands);
+                    }
+                    return anteed;
+                }
             }
 
             if (validRarities.contains(CardRarity.Special)) {
@@ -1076,20 +1083,27 @@ public class Game {
                     Card ante = library.get(MyRandom.getRandom().nextInt(library.size()));
                     anteed.put(player, ante);
                 } else {
-                    chooseRandomCardsForAnte(player, anteed);
+                    chooseRandomCardsForAnte(player, anteed, includeBasicLands);
                 }
             }
         }
         else {
             for (Player player : getPlayers()) {
-                chooseRandomCardsForAnte(player, anteed);
+                chooseRandomCardsForAnte(player, anteed, includeBasicLands);
             }
         }
         return anteed;
     }
 
-    private void chooseRandomCardsForAnte(final Player player, final Multimap<Player, Card> anteed) {
+    private void chooseRandomCardsForAnte(final Player player, final Multimap<Player, Card> anteed, final boolean includeBasicLands) {
         final CardCollectionView lib = player.getCardsIn(ZoneType.Library);
+        if (includeBasicLands) {
+            Card ante = Aggregates.random(lib);
+            if (ante != null) {
+                anteed.put(player, ante);
+            }
+            return;
+        }
         Predicate<Card> goodForAnte = CardPredicates.BASIC_LANDS.negate();
         Card ante = Aggregates.random(IterableUtil.filter(lib, goodForAnte));
         if (ante == null) {
