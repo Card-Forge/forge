@@ -79,24 +79,11 @@ public final class TrackableSerializer {
     }
 
     /**
-     * Simple replacement — no tracker, no stale detection.
-     * Used by the client encoder (which has no game-state awareness).
-     */
-    static Object replace(Object obj) {
-        if (obj instanceof TrackableObject trackable) {
-            byte tag = typeTagFor(trackable);
-            if (tag >= 0) {
-                return new IdRef(tag, trackable.getId());
-            }
-        }
-        return obj;
-    }
-
-    /**
-     * Verified replacement with stale detection.
-     * Used by the server encoder (which has the game's tracker).
-     * Returns {@link StaleCardRef} for stale CardViews, {@link IdRef} for
-     * current objects, or the original object for non-trackable types.
+     * Replaces TrackableObject references with {@link IdRef} markers, or
+     * {@link StaleCardRef} markers for CardViews whose tracker entry has
+     * been replaced by a zone-change copy. When {@code tracker} is null,
+     * stale detection is skipped (used by the client encoder, which has
+     * no game-state awareness).
      */
     static Object replace(Object obj, Tracker tracker) {
         if (obj instanceof TrackableObject trackable) {
@@ -247,7 +234,7 @@ public final class TrackableSerializer {
 
     // ---- Stream implementations ----
 
-    private static class ReplacingOutputStream extends ObjectOutputStream {
+    static class ReplacingOutputStream extends ObjectOutputStream {
         private final Tracker tracker;
 
         ReplacingOutputStream(OutputStream out, Tracker tracker) throws IOException {
@@ -258,11 +245,11 @@ public final class TrackableSerializer {
 
         @Override
         protected Object replaceObject(Object obj) {
-            return tracker != null ? replace(obj, tracker) : replace(obj);
+            return replace(obj, tracker);
         }
     }
 
-    private static class ResolvingInputStream extends ObjectInputStream {
+    static class ResolvingInputStream extends ObjectInputStream {
         private final Tracker tracker;
 
         ResolvingInputStream(InputStream in, Tracker tracker) throws IOException {

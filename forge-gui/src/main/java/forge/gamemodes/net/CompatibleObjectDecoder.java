@@ -9,8 +9,6 @@ import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.codec.serialization.ClassResolver;
 import net.jpountz.lz4.LZ4BlockInputStream;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.StreamCorruptedException;
 
@@ -46,7 +44,7 @@ public class CompatibleObjectDecoder extends LengthFieldBasedFrameDecoder implem
         ObjectInputStream ois;
         if (GuiBase.hasPropertyConfig()) {
             ois = currentTracker != null
-                    ? new ResolvingObjectInputStream(new LZ4BlockInputStream(new ByteBufInputStream(frame, true)), currentTracker)
+                    ? new TrackableSerializer.ResolvingInputStream(new LZ4BlockInputStream(new ByteBufInputStream(frame, true)), currentTracker)
                     : new ObjectInputStream(new LZ4BlockInputStream(new ByteBufInputStream(frame, true)));
         } else {
             ois = new CObjectInputStream(new LZ4BlockInputStream(new ByteBufInputStream(frame, true)), this.classResolver, currentTracker);
@@ -70,18 +68,4 @@ public class CompatibleObjectDecoder extends LengthFieldBasedFrameDecoder implem
         return var5;
     }
 
-    private static class ResolvingObjectInputStream extends ObjectInputStream {
-        private final Tracker tracker;
-
-        ResolvingObjectInputStream(InputStream in, Tracker tracker) throws IOException {
-            super(in);
-            this.tracker = tracker;
-            enableResolveObject(true);
-        }
-
-        @Override
-        protected Object resolveObject(Object obj) {
-            return TrackableSerializer.resolve(obj, tracker);
-        }
-    }
 }
