@@ -350,8 +350,9 @@ public class DeltaSyncManager implements IHasNetLog {
             return combatViewToCombatData((CombatView) value);
         }
 
-        if (type == TrackableTypes.StackItemViewType)
+        if (type == TrackableTypes.StackItemViewType) {
             return ((TrackableObject) value).getId();
+        }
 
         if (type == TrackableTypes.StackItemViewListType) {
             TrackableCollection<?> coll = (TrackableCollection<?>) value;

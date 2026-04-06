@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
 public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
 
     // New objects are sent with full property data, existing objects only send changed properties
-    public static boolean useDeltaSync = true;
+    public static boolean useDeltaSync = false;
 
     private final GameProtocolSender sender;
     private final DeltaSyncManager syncManager;
