@@ -84,6 +84,7 @@ public class HostedMatch {
         final GameRules gameRules = new GameRules(gameType);
         gameRules.setPlayForAnte(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE));
         gameRules.setMatchAnteRarity(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE_MATCH_RARITY));
+        gameRules.setAnteIncludeBasicLands(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE_INCLUDE_BASIC_LANDS));
         gameRules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
         gameRules.setOrderCombatants(FModel.getPreferences().getPrefBoolean(FPref.LEGACY_ORDER_COMBATANTS));
         gameRules.setUseGrayText(FModel.getPreferences().getPrefBoolean(FPref.UI_GRAY_INACTIVE_TEXT));

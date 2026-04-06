@@ -61,7 +61,8 @@ public final class DeckNameCommentRenderer extends ItemCellRenderer {
         if (!(table.getModel() instanceof ItemListView.ItemTableModel)) {
             return null;
         }
-        final ItemListView.ItemTableModel tm = (ItemListView.ItemTableModel) table.getModel();
+
+        final ItemListView<?>.ItemTableModel tm = (ItemListView<?>.ItemTableModel) table.getModel();
         final Entry<?, Integer> entry = tm.rowToItem(row);
         if (entry != null && entry.getKey() instanceof DeckProxy) {
             return (DeckProxy) entry.getKey();
@@ -70,7 +71,7 @@ public final class DeckNameCommentRenderer extends ItemCellRenderer {
     }
 
     private static String toHtmlWrappedTooltip(final String comment) {
-        final String[] lines = comment.split("\r\n|\n|\r", -1);
+        final String[] lines = comment.split("[\r\n]", -1);
         final StringBuilder out = new StringBuilder("<html>");
         for (int i = 0; i < lines.length; i++) {
             if (i > 0) {
