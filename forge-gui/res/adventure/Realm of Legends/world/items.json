@@ -3679,19 +3679,21 @@
      ]
     }
   },
-    {
-      "name": "Heavy Armor",
-      "description": "An amazing life boost but opponent's permanents enter untapped.",
-      "equipmentSlot": "Body",
-      "iconName": "UltraHeavyArmor",
-      "cost": 3000,
-      "lifeModifier": 15,
+  {
+    "name": "Heavy Armor",
+    "description": "An amazing life boost but opponent's permanents enter untapped.",
+    "equipmentSlot": "Body",
+    "iconName": "UltraHeavyArmor",
+    "cost": 3000,
+    "lifeModifier": 15,
+    "effect": {
       "opponent": {
         "startBattleWithCard": [
           "Amulet of Vigor|WWK"
         ]
       }
-    },
+    }
+  },
     {
     "name": "Armor of the First",
     "description": "Taps for C or any color for a Sliver, 5 and tap for a 1/1 sliver token if you control a sliver",
