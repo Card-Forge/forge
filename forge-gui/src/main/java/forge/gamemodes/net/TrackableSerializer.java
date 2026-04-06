@@ -1,6 +1,7 @@
 package forge.gamemodes.net;
 
 import forge.game.card.CardView;
+import forge.game.event.GameEvent;
 import forge.game.player.PlayerView;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
@@ -13,6 +14,8 @@ import org.tinylog.Logger;
 import net.jpountz.lz4.LZ4BlockOutputStream;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Handles serialization of {@link TrackableObject} references across the network.
@@ -147,22 +150,6 @@ public final class TrackableSerializer {
                 return resolved;
             }
         }
-        // Resolve raw TrackableObjects that were deserialized without IdRef
-        // replacement (e.g. events embedded in DeltaPacket, which excludes
-        // replacement to protect state data). Return the canonical tracker
-        // instance so downstream code can call getTracker() safely.
-        if (obj instanceof TrackableObject trackable && trackable.getTracker() == null) {
-            byte tag = typeTagFor(trackable);
-            if (tag >= 0) {
-                TrackableType<?> type = trackableTypeFor(tag);
-                if (type != null) {
-                    Object canonical = tracker.getObj(type, trackable.getId());
-                    if (canonical != null) {
-                        return canonical;
-                    }
-                }
-            }
-        }
         return obj;
     }
 
@@ -200,6 +187,66 @@ public final class TrackableSerializer {
         }
     }
 
+    // ---- Event wrapping for DeltaPacket ----
+
+    /**
+     * Serializable wrapper for a GameEvent whose TrackableObject references
+     * have been replaced with IdRef/StaleCardRef markers. Stored in
+     * DeltaPacket.events so events travel as compact byte arrays rather than
+     * full object graphs. Unwrapped after delta state is applied, when the
+     * client tracker is populated.
+     */
+    static final class WrappedEvent implements Serializable {
+        private static final long serialVersionUID = 1L;
+        final byte[] data;
+        WrappedEvent(byte[] data) { this.data = data; }
+    }
+
+    /**
+     * Wraps GameEvents by serializing each with IdRef replacement.
+     * Events that fail to serialize are dropped (logged).
+     */
+    public static List<Object> wrapEvents(List<GameEvent> events, Tracker tracker) {
+        List<Object> wrapped = new ArrayList<>(events.size());
+        for (GameEvent event : events) {
+            try {
+                ByteArrayOutputStream baos = new ByteArrayOutputStream(256);
+                try (ReplacingOutputStream out = new ReplacingOutputStream(baos, tracker)) {
+                    out.writeObject(event);
+                }
+                wrapped.add(new WrappedEvent(baos.toByteArray()));
+            } catch (IOException e) {
+                Logger.warn("Failed to wrap event {}: {}", event.getClass().getSimpleName(), e.getMessage());
+            }
+        }
+        return wrapped;
+    }
+
+    /**
+     * Unwraps events by deserializing with IdRef resolution from the tracker.
+     * Called after delta state is applied so new objects are resolvable.
+     * Events that fail to unwrap are dropped (logged).
+     */
+    public static List<GameEvent> unwrapEvents(List<Object> items, Tracker tracker) {
+        List<GameEvent> events = new ArrayList<>(items.size());
+        for (Object item : items) {
+            if (item instanceof WrappedEvent we) {
+                try {
+                    ByteArrayInputStream bais = new ByteArrayInputStream(we.data);
+                    try (ResolvingInputStream in = new ResolvingInputStream(bais, tracker)) {
+                        Object obj = in.readObject();
+                        if (obj instanceof GameEvent e) events.add(e);
+                    }
+                } catch (IOException | ClassNotFoundException e) {
+                    Logger.warn("Failed to unwrap event: {}", e.getMessage());
+                }
+            }
+        }
+        return events;
+    }
+
+    // ---- Stream implementations ----
+
     private static class ReplacingOutputStream extends ObjectOutputStream {
         private final Tracker tracker;
 
@@ -212,6 +259,21 @@ public final class TrackableSerializer {
         @Override
         protected Object replaceObject(Object obj) {
             return tracker != null ? replace(obj, tracker) : replace(obj);
+        }
+    }
+
+    private static class ResolvingInputStream extends ObjectInputStream {
+        private final Tracker tracker;
+
+        ResolvingInputStream(InputStream in, Tracker tracker) throws IOException {
+            super(in);
+            this.tracker = tracker;
+            enableResolveObject(true);
+        }
+
+        @Override
+        protected Object resolveObject(Object obj) {
+            return resolve(obj, tracker);
         }
     }
 

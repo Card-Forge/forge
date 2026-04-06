@@ -78,18 +78,19 @@ public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> 
 
     /**
      * Determines whether TrackableObject references should be replaced with
-     * IdRef markers for this message. Excludes:
+     * IdRef markers for this message. Excludes only:
      * - setGameView/openView: carry full state to populate the client's Tracker
-     * - applyDelta: DeltaPacket contains property maps with carefully constructed
-     *   values that must arrive intact (new objects may reference other new objects
-     *   not yet in the tracker at decode time)
+     *
+     * applyDelta is NOT excluded: its property maps already use Integer IDs
+     * (via DeltaSyncManager.toNetworkValue), and bundled events are wrapped
+     * by TrackableSerializer.wrapEvents before entering the packet, so no
+     * raw TrackableObjects remain in the serialization graph.
      */
     private static boolean shouldReplaceTrackables(Serializable msg) {
         if (msg instanceof GuiGameEvent event) {
             ProtocolMethod method = event.getMethod();
             return method != ProtocolMethod.setGameView
-                    && method != ProtocolMethod.openView
-                    && method != ProtocolMethod.applyDelta;
+                    && method != ProtocolMethod.openView;
         }
         return true;
     }
