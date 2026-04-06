@@ -9,9 +9,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
 import net.jpountz.lz4.LZ4BlockOutputStream;
 
-import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.io.Serializable;
 
 public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> implements IHasNetLog {
@@ -47,7 +45,7 @@ public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> 
             bout.write(LENGTH_PLACEHOLDER);
             if (GuiBase.hasPropertyConfig()) {
                 oout = replace
-                        ? new ReplacingObjectOutputStream(new LZ4BlockOutputStream(bout), currentTracker)
+                        ? new TrackableSerializer.ReplacingOutputStream(new LZ4BlockOutputStream(bout), currentTracker)
                         : new ObjectOutputStream(new LZ4BlockOutputStream(bout));
             } else {
                 oout = new CObjectOutputStream(new LZ4BlockOutputStream(bout), replace);
@@ -95,20 +93,4 @@ public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> 
         return true;
     }
 
-    private static class ReplacingObjectOutputStream extends ObjectOutputStream {
-        private final Tracker tracker;
-
-        ReplacingObjectOutputStream(OutputStream out, Tracker tracker) throws IOException {
-            super(out);
-            this.tracker = tracker;
-            enableReplaceObject(true);
-        }
-
-        @Override
-        protected Object replaceObject(Object obj) {
-            return tracker != null
-                    ? TrackableSerializer.replace(obj, tracker)
-                    : TrackableSerializer.replace(obj);
-        }
-    }
 }
