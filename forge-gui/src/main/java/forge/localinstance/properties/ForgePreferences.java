@@ -120,6 +120,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_LIBGDX_TEXTURE_FILTERING("true"),
         UI_ANTE ("false"),
         UI_ANTE_MATCH_RARITY ("false"),
+        UI_ANTE_INCLUDE_BASIC_LANDS ("false"),
         UI_SKIN ("Default"),
         UI_CJK_FONT (""),
         UI_PREFERRED_AVATARS_ONLY ("false"),
@@ -188,8 +189,12 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_ZONE_TAB_NEW_COUNT("false"),
         UI_ENABLE_AI_PICKER("false"),
 
+        UI_VIBRATE_INTENSITY("100"),
         UI_VIBRATE_ON_LIFE_LOSS("true"),
         UI_VIBRATE_ON_LONG_PRESS("true"),
+        UI_VIBRATE_ON_ENEMY_ENCOUNTER("true"),
+        UI_VIBRATE_ON_ADVENTURE_REWARD("true"),
+        UI_VIBRATE_ON_SHOP_ACTION("true"),
 
         UI_LANGUAGE("en-US"),
 

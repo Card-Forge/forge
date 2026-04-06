@@ -1,0 +1,13 @@
+Name:Berta, Wise Extrapolator
+ManaCost:2 G U
+Types:Legendary Creature Frog Druid
+PT:1/4
+K:Increment
+T:Mode$ CounterAddedOnce | ValidCard$ Card.Self | TriggerZones$ Battlefield | OptionalDecider$ You | CounterType$ P1P1 | Execute$ TrigMana | TriggerDescription$ Whenever one or more +1/+1 counters are put on NICKNAME, add one mana of any color.
+SVar:TrigMana:DB$ Mana | Produced$ Any
+A:AB$ Token | Cost$ X T | TokenScript$ gu_0_0_fractal | RememberTokens$ True | SubAbility$ DBPutCounter | SpellDescription$ Create a 0/0 green and blue Fractal creature token and put X +1/+1 counters on it.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$xPaid
+DeckHas:Ability$Counters|Token
+Oracle:Increment (Whenever you cast a spell, if the amount of mana you spent is greater than this creature's power or toughness, put a +1/+1 counter on this creature.)\nWhenever one or more +1/+1 counters are put on Berta, add one mana of any color.\n{X}, {T}: Create a 0/0 green and blue Fractal creature token and put X +1/+1 counters on it.

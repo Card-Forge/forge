@@ -133,12 +133,12 @@ public class InputLondonMulligan extends InputSyncronizedBase {
     }
 
     private void setCardHighlight(final Card card, final boolean state) {
-        getController().getGui().setUsedToPay(card.getView(), state);
+        getController().getGui().setHighlighted(card.getView(), state);
     }
 
     private void resetCardHighlights() {
         for (final Card c : selected) {
-            getController().getGui().setUsedToPay(c.getView(), false);
+            getController().getGui().setHighlighted(c.getView(), false);
         }
     }
 }

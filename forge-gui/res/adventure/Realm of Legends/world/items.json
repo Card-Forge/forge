@@ -1257,7 +1257,7 @@
       "equipmentSlot": "Boots",
       "iconName": "Witch-MawAnklet",
       "effect": {
-        "changeStartCards": -1,
+        "lifeModifier": -8,
         "startBattleWithCard": [
           "Witch-Maw Nephilim|GPT"
         ]
@@ -1430,7 +1430,6 @@
       "iconName": "Yore-TillerAnklet",
       "effect": {
         "changeStartCards": -2,
-        "lifeModifier": -4,
         "startBattleWithCard": [
           "Yore-Tiller Nephilim|GPT"
         ]
@@ -1460,13 +1459,24 @@
   },
     {
     "name": "Valorous Greaves",
-    "description": "2/1 knight, gives a +1/+1 counter to another knight on death",
+    "description": "2/2 knight, +1/+1 to your other knights",
     "equipmentSlot": "Boots",
     "iconName": "ValorousGreaves",
     "effect": {
         "startBattleWithCard": [
-        "Venerable Knight|ELD"
+        "Inspiring Veteran|ELD"
      ]
+    }
+  },
+  {
+    "name": "Battle Cry Boots",
+    "description": "2/2, 1R: +1/+0 and haste to gobs; attack w/6+ power: gob token",
+    "equipmentSlot": "Boots",
+    "iconName": "BattleCryBoots",
+    "effect": {
+      "startBattleWithCard": [
+        "Battle Cry Goblin|J25"
+      ]
     }
   },
     {
@@ -1580,7 +1590,6 @@
     "equipmentSlot": "Boots",
     "iconName": "BloodswornBite",
     "effect": {
-        "lifeModifier": -4,
         "startBattleWithCard": [
         "Olivia's Bloodsworn|SOI"
      ]
@@ -1797,7 +1806,6 @@
       "iconName": "Glint-EyeAnklet",
       "effect": {
         "changeStartCards": -2,
-        "lifeModifier": -4,
         "startBattleWithCard": [
           "Glint-Eye Nephilim|GPT"
         ]
@@ -1817,12 +1825,13 @@
   },
     {
     "name": "Fblthp's Lost Socks",
-    "description": "1/1 that draws a card on ETB",
+    "description": "2/5 hexproof",
     "equipmentSlot": "Boots",
     "iconName": "Fblthp'sLostSocks",
     "effect": {
+        "lifeModifier": -10,
         "startBattleWithCard": [
-        "Fblthp, the Lost|WAR"
+        "Humongulus"
      ]
     }
   },
@@ -2556,12 +2565,12 @@
   },
     {
     "name": "Ooze Amulet",
-    "description": "Pay 1G and sac a non-ooze at sorcery speed, make an X/X ooze of the sac'd's power",
+    "description": "1G: Remove X +1/+1 counters, make an X/X ooze",
     "equipmentSlot": "Neck",
     "iconName": "OozeAmulet",
     "effect": {
         "startBattleWithCard": [
-        "Ooze Garden|ALA"
+        "Ooze Flux|GTC"
      ]
     }
   },
@@ -2570,7 +2579,7 @@
     "description": "1U and discard to draw or 1U and sac to draw",
     "equipmentSlot": "Neck",
     "iconName": "MaskofCompulsion",
-    "cost": 5000,
+    "cost": 2000,
     "effect": {
         "changeStartCards": -1,
         "startBattleWithCard": [
@@ -2595,7 +2604,7 @@
     "description": "G and discard for +2/+2 or G and sac for +2/+2",
     "equipmentSlot": "Neck",
     "iconName": "MaskofNarcissism",
-    "cost": 5000,
+    "cost": 2000,
     "effect": {
         "startBattleWithCard": [
         "Narcissism|TOR"
@@ -2658,7 +2667,7 @@
     "equipmentSlot": "Neck",
     "iconName": "AmuletofAwakening",
     "effect": {
-        "lifeModifier": -10,
+        "lifeModifier": -6,
         "startBattleWithCard": [
         "Awakening Zone|ROE"
      ]
@@ -2760,7 +2769,7 @@
     "description": "Pay 3R for random burn",
     "equipmentSlot": "Neck",
     "iconName": "AmuletofFury",
-    "cost": 1000,
+    "cost": 2000,
     "effect": {
       "opponent": {
         "lifeModifier": -2
@@ -2775,7 +2784,7 @@
     "description": "1B and discard to exile a grave card or 1B and sac to exile a grave card",
     "equipmentSlot": "Neck",
     "iconName": "MaskofMortiphobia",
-    "cost": 5000,
+    "cost": 2000,
     "effect": {
         "startBattleWithCard": [
         "Mortiphobia|TOR"
@@ -2787,7 +2796,7 @@
     "description": "1R and random discard to ping 1 or 1R and sac to ping 1. Also lowers opp life.",
     "equipmentSlot": "Neck",
     "iconName": "MaskofPyromania",
-    "cost": 5000,
+    "cost": 2000,
     "effect": {
         "startBattleWithCard": [
         "Pyromania|TOR"
@@ -2802,7 +2811,7 @@
     "description": "W and discard to prevent 3 damage or W and sac to prevent 3 damage",
     "equipmentSlot": "Neck",
     "iconName": "MaskofHypochondria",
-    "cost": 5000,
+    "cost": 2000,
     "effect": {
         "startBattleWithCard": [
         "Hypochondria|TOR"
@@ -2838,7 +2847,7 @@
     "description": "Pay 3W for random lifegain",
     "equipmentSlot": "Neck",
     "iconName": "AmuletofMirth",
-    "cost": 1000,
+    "cost": 2000,
     "effect": {
         "lifeModifier": 4,
         "startBattleWithCard": [
@@ -2862,7 +2871,7 @@
     "description": "Pay 3U for random spell steal",
     "equipmentSlot": "Neck",
     "iconName": "AmuletofMischief",
-    "cost": 1000,
+    "cost": 2000,
     "effect": {
         "startBattleWithCard": [
         "Planeswalker's Mischief|PLS"
@@ -2874,7 +2883,7 @@
     "description": "Pay 3B for random debuff",
     "equipmentSlot": "Neck",
     "iconName": "AmuletofScorn",
-    "cost": 1000,
+    "cost": 2000,
     "effect": {
         "startBattleWithCard": [
         "Planeswalker's Scorn|PLS"
@@ -2945,6 +2954,7 @@
     "description": "Pay 3G for random buff",
     "equipmentSlot": "Neck",
     "iconName": "AmuletofFavor",
+    "cost": 2000,
     "effect": {
         "lifeModifier": 2,
         "startBattleWithCard": [
@@ -3279,7 +3289,7 @@
     "iconName": "RingofXathrid",
     "cost": 5000,
     "effect": {
-        "lifeModifier": -5,
+        "lifeModifier": -3,
         "startBattleWithCard": [
         "Ring of Xathrid|M13"
      ]
@@ -3340,7 +3350,7 @@
     "iconName": "RingofThune",
     "cost": 5000,
     "effect": {
-        "lifeModifier": -5,
+        "lifeModifier": -3,
         "startBattleWithCard": [
         "Ring of Thune|M13"
      ]
@@ -3353,7 +3363,7 @@
     "iconName": "RingofValkas",
     "cost": 5000,
     "effect": {
-        "lifeModifier": -5,
+        "lifeModifier": -3,
         "startBattleWithCard": [
         "Ring of Valkas|M13"
      ]
@@ -3412,7 +3422,7 @@
     "iconName": "RingofKalonia",
     "cost": 5000,
     "effect": {
-        "lifeModifier": -5,
+        "lifeModifier": -3,
         "startBattleWithCard": [
         "Ring of Kalonia|M13"
      ]
@@ -3425,7 +3435,7 @@
     "iconName": "RingofEvosIsle",
     "cost": 5000,
     "effect": {
-        "lifeModifier": -5,
+        "lifeModifier": -3,
         "startBattleWithCard": [
         "Ring of Evos Isle|M13"
      ]
@@ -3437,7 +3447,7 @@
     "equipmentSlot": "Right",
     "iconName": "SirenSongLyre",
     "effect": {
-        "lifeModifier": 2,
+        "lifeModifier": 4,
         "startBattleWithCard": [
         "Siren Song Lyre|BNG"
      ]
@@ -3458,12 +3468,12 @@
   },
     {
     "name": "Full Moon Necklace",
-    "description": "Werewolves get +1/+0 and trample, sac to regen them all",
+    "description": "Wolves and Werewolves get +1/+1 and trample.",
     "equipmentSlot": "Neck",
     "iconName": "FullMoonNecklace",
     "effect": {
         "startBattleWithCard": [
-        "Full Moon's Rise"
+        "Howlpack Resurgence"
      ]
     }
   },
@@ -3769,7 +3779,7 @@
     "equipmentSlot": "Body",
     "iconName": "SanctuaryArmor",
     "effect": {
-        "changeStartCards": -1,
+        "lifeModifier": -5,
         "startBattleWithCard": [
         "Animal Sanctuary|M21"
      ]
@@ -4086,7 +4096,7 @@
     "equipmentSlot": "Body",
     "iconName": "ReliquaryRobes",
     "effect": {
-        "lifeModifier": -10,
+        "lifeModifier": -8,
         "startBattleWithCard": [
         "Reliquary Tower|C14"
      ]
@@ -4660,14 +4670,14 @@
     }
   },
   {
-    "name": "Spiked Ripsaw",
-    "description": "Equip 3, +3/+3 and trample if you sac a forest.",
+    "name": "Colossal Dreadmace",
+    "description": "Equip 3GG, +6/+6 and trample.",
     "equipmentSlot": "Right",
-    "iconName": "SpikedRipsaw",
+    "iconName": "ColossalDreadmace",
     "cost": 5000,
     "effect": {
       "startBattleWithCard": [
-        "Spiked Ripsaw|VOW"
+        "Colossal Dreadmask|MH3"
       ]
     }
   },
@@ -4684,12 +4694,12 @@
   },
   {
     "name": "Jewel of War",
-    "description": "All your creatures gain menace.",
+    "description": "Your attacking creatures get +1/+0.",
     "equipmentSlot": "Neck",
     "iconName": "MoxRuby",
     "effect": {
       "startBattleWithCard": [
-        "Goblin War Drums|A25"
+        "Goblin Oriflamme|FDN"
       ]
     }
   },
@@ -4705,13 +4715,13 @@
     }
   },
   {
-    "name": "Jewel of Aggression",
-    "description": "When you attack, opp loses life equal to # of attackers.",
+    "name": "Ghoulish Jewel",
+    "description": "Once a turn when a nontoken dies make a 2/2 decayed zombie.",
     "equipmentSlot": "Neck",
     "iconName": "MoxJet",
     "effect": {
       "startBattleWithCard": [
-        "Within Range|TDC"
+        "Ghoulish Procession|INR"
       ]
     }
   },
@@ -4766,7 +4776,7 @@
     "equipmentSlot": "Right",
     "iconName": "HeirloomBlade",
     "effect": {
-      "lifeModifier": -6,
+      "lifeModifier": -3,
       "startBattleWithCard": [
         "Heirloom Blade|C17"
       ]
@@ -5047,6 +5057,30 @@
       "changeStartCards": -1,
       "startBattleWithCard": [
         "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Spiked Ripsaw",
+    "description": "This item has been discontinued.",
+    "equipmentSlot": "Right",
+    "iconName": "SpikedRipsaw",
+    "cost": 5000,
+    "effect": {
+      "startBattleWithCard": [
+        "Spiked Ripsaw|VOW"
+      ]
+    }
+  },
+  {
+    "name": "Jewel of Aggression",
+    "description": "This item has been discontinued.",
+    "equipmentSlot": "Neck",
+    "iconName": "MoxJet",
+    "cost": 20000,
+    "effect": {
+      "startBattleWithCard": [
+        "Within Range|TDC"
       ]
     }
   },

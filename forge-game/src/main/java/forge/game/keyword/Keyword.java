@@ -105,6 +105,7 @@ public enum Keyword {
     HORSEMANSHIP("Horsemanship", SimpleKeyword.class, true),
     IMPENDING("Impending", KeywordWithCostAndAmount.class, false),
     IMPROVISE("Improvise", SimpleKeyword.class, true),
+    INCREMENT("Increment", SimpleKeyword.class, false),
     INDESTRUCTIBLE("Indestructible", SimpleKeyword.class, true),
     INFECT("Infect", SimpleKeyword.class, true),
     INGEST("Ingest", SimpleKeyword.class, false),

@@ -122,6 +122,42 @@
         "editions": [ "VMA" ]
       },
       {
+        "type": "card",
+        "count": 1,
+        "cardName": "Tolarian Academy",
+        "editions": [ "VMA" ]
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Mox Pearl",
+        "editions": [ "VMA" ]
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Mox Sapphire",
+        "editions": [ "VMA" ]
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Mox Jet",
+        "editions": [ "VMA" ]
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Mox Ruby",
+        "editions": [ "VMA" ]
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Mox Emerald",
+        "editions": [ "VMA" ]
+      },
+      {
         "type": "gold",
         "count": 100000
       },
@@ -254,6 +290,10 @@
     "scale": 3,
     "life": 50,
     "rewards": [
+      {
+        "type": "life",
+        "count": 1
+      },
       {
         "type": "item",
         "count": 1,
@@ -1084,14 +1124,13 @@
     "life": 50,
     "rewards": [
       {
-        "type": "item",
-        "count": 1,
-        "itemName": "Ink-Treader Anklet"
+        "type": "life",
+        "count": 1
       },
       {
         "type": "item",
         "count": 1,
-        "itemName": "Jewel of Aggression"
+        "itemName": "Ink-Treader Anklet"
       },
       {
         "type": "item",
@@ -1164,14 +1203,13 @@
     "life": 50,
     "rewards": [
       {
-        "type": "item",
-        "count": 1,
-        "itemName": "Dune-Brood Anklet"
+        "type": "life",
+        "count": 1
       },
       {
         "type": "item",
         "count": 1,
-        "itemName": "Jewel of Winds"
+        "itemName": "Dune-Brood Anklet"
       },
       {
         "type": "item",
@@ -1243,14 +1281,13 @@
     "life": 50,
     "rewards": [
       {
-        "type": "item",
-        "count": 1,
-        "itemName": "Yore-Tiller Anklet"
+        "type": "life",
+        "count": 1
       },
       {
         "type": "item",
         "count": 1,
-        "itemName": "Jewel of Rage"
+        "itemName": "Yore-Tiller Anklet"
       },
       {
         "type": "item",
@@ -1323,14 +1360,13 @@
     "life": 50,
     "rewards": [
       {
-        "type": "item",
-        "count": 1,
-        "itemName": "Witch-Maw Anklet"
+        "type": "life",
+        "count": 1
       },
       {
         "type": "item",
         "count": 1,
-        "itemName": "Jewel of War"
+        "itemName": "Witch-Maw Anklet"
       },
       {
         "type": "item",
@@ -1407,14 +1443,13 @@
     "life": 50,
     "rewards": [
       {
-        "type": "item",
-        "count": 1,
-        "itemName": "Glint-Eye Anklet"
+        "type": "life",
+        "count": 1
       },
       {
         "type": "item",
         "count": 1,
-        "itemName": "Jewel of Blessings"
+        "itemName": "Glint-Eye Anklet"
       },
       {
         "type": "item",
@@ -1575,6 +1610,11 @@
         "itemName": "Courier's Boots"
       },
       {
+        "type": "item",
+        "count": 1,
+        "itemName": "Battle Cry Boots"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Krenko, Mob Boss"
@@ -1718,6 +1758,10 @@
     "scale": 3,
     "life": 50,
     "rewards": [
+      {
+        "type": "life",
+        "count": 1
+      },
       {
         "type": "item",
         "count": 1,
@@ -2428,6 +2472,10 @@
     "life": 50,
     "rewards": [
       {
+        "type": "life",
+        "count": 1
+      },
+      {
         "type": "item",
         "count": 1,
         "itemName": "Kaleidostone"
@@ -2507,6 +2555,10 @@
     "scale": 4,
     "life": 50,
     "rewards": [
+      {
+        "type": "life",
+        "count": 1
+      },
       {
         "type": "item",
         "count": 1,
@@ -2741,6 +2793,10 @@
     "scale": 3,
     "life": 50,
     "rewards": [
+      {
+        "type": "life",
+        "count": 1
+      },
       {
         "type": "item",
         "count": 1,
@@ -8811,7 +8867,6 @@
       }
     ],
     "colors": "R",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -29916,6 +29971,7 @@
       }
     ],
     "colors": "R",
+    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {

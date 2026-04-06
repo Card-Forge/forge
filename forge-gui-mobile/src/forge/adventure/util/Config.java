@@ -15,6 +15,7 @@ import forge.card.*;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
 import forge.deck.DeckgenUtil;
+import forge.game.GameType;
 import forge.gui.GuiBase;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
@@ -257,6 +258,9 @@ public class Config {
                     }
                 }
             case Chaos:
+                if ("Commander".equalsIgnoreCase(configData.chaosDeckFormat)) {
+                    return DeckgenUtil.generateCommanderDeck(false, GameType.Commander);
+                }
                 return DeckgenUtil.getRandomOrPreconOrThemeDeck("", false, false, false, configData.allowedEditions);
             case Custom:
                 return DeckProxy.getAllCustomStarterDecks().get(index).getDeck();

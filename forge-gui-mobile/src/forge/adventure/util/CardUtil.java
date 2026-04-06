@@ -17,6 +17,7 @@ import forge.deck.DeckSection;
 import forge.deck.DeckgenUtil;
 import forge.deck.io.DeckSerializer;
 import forge.game.GameFormat;
+import forge.game.GameType;
 import forge.item.BoosterPack;
 import forge.item.PaperCard;
 import forge.item.PaperCardPredicates;
@@ -750,6 +751,9 @@ public class CardUtil {
         }
 
         if (forAI && (isFantasyMode || useGeneticAI)) {
+            if (isFantasyMode && "Commander".equalsIgnoreCase(Config.instance().getConfigData().chaosDeckFormat)) {
+                return DeckgenUtil.generateCommanderDeck(true, GameType.Commander);
+            }
             return DeckgenUtil.getRandomOrPreconOrThemeDeck(colors, forAI, isTheme, useGeneticAI);
         }
 
