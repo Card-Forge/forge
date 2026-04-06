@@ -210,7 +210,7 @@
         "Silver Challenge Coin",
         "Steel Boots",
         "Steel Armor",
-        "Chromatic Sphere"
+        "Echo Shield"
       ]
     },{
       "name": "Hard",
@@ -233,7 +233,8 @@
       },
 "startItems": [
         "Challenge Coin",
-        "Silver Challenge Coin"
+        "Silver Challenge Coin",
+        "Steel Armor"
       ]
     },{
       "name": "Insane",
