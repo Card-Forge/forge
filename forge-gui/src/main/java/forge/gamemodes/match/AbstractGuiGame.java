@@ -240,10 +240,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             } catch (NullPointerException e) {
                 return true; // return true so it will work as normal
             }
-        } else {
-            if (getGameController().mayLookAtAllCards()) {
-                return true;
-            }
+        } else if (getGameController().mayLookAtAllCards()) {
+            return true;
         }
         return c.canBeShownToAny(getLocalPlayers());
     }
