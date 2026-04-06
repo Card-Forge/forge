@@ -77,8 +77,6 @@ public class CardInfoPopup {
     private static final double MTG_ASPECT_RATIO = 0.716;
 
     // Dark overlay colors
-    private static final Color BG_COLOR = new Color(30, 30, 30);
-    private static final Color BORDER_COLOR = new Color(80, 80, 80);
     private static final Color PILL_BG = new Color(45, 45, 45);
     private static final Color PILL_BORDER = new Color(70, 70, 70);
     private static final Color TEXT_PRIMARY = Color.WHITE;
@@ -192,11 +190,6 @@ public class CardInfoPopup {
         }
     }
 
-    private static int getThumbnailHeight() {
-        final int value = FModel.getPreferences().getPrefInt(FPref.UI_POPUP_IMAGE_SIZE);
-        return Math.max(250, Math.min(500, value));
-    }
-
     /**
      * Show the popup for the given card, displaying keyword explanations and/or
      * related card images based on the toggle flags.
@@ -223,7 +216,8 @@ public class CardInfoPopup {
         lastShowRelatedCards = showRelatedCards;
         lastShowCardImage = showCardImage;
 
-        final int thumbnailHeight = getThumbnailHeight();
+        final int thumbnailHeight = Math.max(250, Math.min(500,
+                FModel.getPreferences().getPrefInt(FPref.UI_POPUP_IMAGE_SIZE)));
         final String keywordKey = showKeywords ? nullSafe(state.getKeywordKey()) : "";
         final String cardName = showRelatedCards ? nullSafe(state.getName()) : "";
         final String cardImageKey = showCardImage ? nullSafe(state.getImageKey()) : "";
@@ -307,7 +301,12 @@ public class CardInfoPopup {
         // --- Related cards section ---
         List<RelatedCardEntry> relatedEntries = List.of();
         if (showRelatedCards && !cardName.isEmpty()) {
-            relatedEntries = buildRelatedCards(cardName, cardView);
+            relatedEntries = buildRelatedCardsStatic(cardName, cardView);
+            for (final RelatedCardEntry entry : relatedEntries) {
+                if (entry.image == null || entry.placeholder) {
+                    fetchIfMissing(entry.imageKey);
+                }
+            }
             hasRelated = !relatedEntries.isEmpty();
         }
 
@@ -685,18 +684,6 @@ public class CardInfoPopup {
             // Guard against any lookup failures
         }
 
-        return entries;
-    }
-
-    private List<RelatedCardEntry> buildRelatedCards(final String cardName,
-                                                     final CardView cardView) {
-        final List<RelatedCardEntry> entries = buildRelatedCardsStatic(cardName, cardView);
-        // Trigger auto-download for entries with null/default images
-        for (final RelatedCardEntry entry : entries) {
-            if (entry.image == null || entry.placeholder) {
-                fetchIfMissing(entry.imageKey);
-            }
-        }
         return entries;
     }
 

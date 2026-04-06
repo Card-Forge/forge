@@ -536,10 +536,7 @@ public final class KeywordInfoUtil {
                 return null;
             }
             final String lowerOracle = oracle.toLowerCase();
-            final String[] colorNames = {
-                "white", "blue", "black", "red", "green"
-            };
-            for (final String name : colorNames) {
+            for (final String name : MagicColor.Constant.ONLY_COLORS) {
                 if (lowerOracle.contains("devotion to " + name)) {
                     color1 = name;
                     break;
@@ -602,9 +599,6 @@ public final class KeywordInfoUtil {
     private static KeywordData annotateDomain(final KeywordData kw,
                                                final PlayerView controller,
                                                final Localizer localizer) {
-        final String[] basicLandTypes = {
-            "Plains", "Island", "Swamp", "Mountain", "Forest"
-        };
         final Set<String> found = new HashSet<>();
         final FCollectionView<CardView> domBattlefield =
                 controller.getBattlefield();
@@ -618,7 +612,7 @@ public final class KeywordInfoUtil {
                 if (!type.isLand()) {
                     continue;
                 }
-                for (final String blt : basicLandTypes) {
+                for (final String blt : MagicColor.Constant.BASIC_LANDS) {
                     if (type.hasSubtype(blt)) {
                         found.add(blt);
                     }
