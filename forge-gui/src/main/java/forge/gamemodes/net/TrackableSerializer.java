@@ -147,6 +147,22 @@ public final class TrackableSerializer {
                 return resolved;
             }
         }
+        // Resolve raw TrackableObjects that were deserialized without IdRef
+        // replacement (e.g. events embedded in DeltaPacket, which excludes
+        // replacement to protect state data). Return the canonical tracker
+        // instance so downstream code can call getTracker() safely.
+        if (obj instanceof TrackableObject trackable && trackable.getTracker() == null) {
+            byte tag = typeTagFor(trackable);
+            if (tag >= 0) {
+                TrackableType<?> type = trackableTypeFor(tag);
+                if (type != null) {
+                    Object canonical = tracker.getObj(type, trackable.getId());
+                    if (canonical != null) {
+                        return canonical;
+                    }
+                }
+            }
+        }
         return obj;
     }
 
