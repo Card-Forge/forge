@@ -816,6 +816,9 @@ SpidersilkHelm
 Liliana'sVeil
   xy: 144, 320
   size: 16, 16
+Urza'sRobe
+  xy: 384, 16
+  size: 16, 16
 Brawler'sCestus
   xy: 288, 320
   size: 16, 16
@@ -1024,7 +1027,7 @@ Vitu-GhaziCloak
   xy: 384, 0
   size: 16, 16
 PinecrestCloak
-  xy: 384, 16
+  xy: 336, 32
   size: 16, 16
 ReliquaryRobes
   xy: 400, 0

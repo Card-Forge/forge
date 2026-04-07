@@ -1061,7 +1061,6 @@
     "equipmentSlot": "Neck",
     "iconName": "AmuletofAgony",
     "effect": {
-        "lifeModifier": -6,
         "startBattleWithCard": [
         "Font of Agonies|RNA"
      ]
@@ -1073,7 +1072,7 @@
     "equipmentSlot": "Boots",
     "iconName": "KoboldBoots",
     "effect": {
-        "changeStartCards": -1,
+        "lifeModifier": -6,
         "startBattleWithCard": [
         "Kobolds of Kher Keep|LEG", "Crookshank Kobolds|LEG"
      ]
@@ -1356,7 +1355,7 @@
   },
     {
     "name": "Gixian Graft",
-    "description": "3/1 phyrexian, when it does, copy it into grave, unearth 1B",
+    "description": "3/1 phyrexian, when it dies, copy it into grave, unearth 1B",
     "equipmentSlot": "Boots",
     "iconName": "GixianGraft",
     "effect": {
@@ -1520,7 +1519,7 @@
     "iconName": "VindicatorGreaves",
     "cost": 5000,
     "effect": {
-        "lifeModifier": -6,
+        "lifeModifier": -4,
         "startBattleWithCard": [
         "Kabira Vindicator|ROE"
      ]
@@ -1935,6 +1934,7 @@
     "equipmentSlot": "Left",
     "iconName": "GoldenEgg",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Golden Egg|ELD"
      ]
@@ -4022,6 +4022,18 @@
       "startBattleWithCard": [
         "Opal Palace|C13"
      ]
+    }
+  },
+  {
+    "name": "Urza's Robe",
+    "description": "Taps for C for each urza's land if metalcraft",
+    "equipmentSlot": "Body",
+    "iconName": "Urza'sRobe",
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Urza's Workshop"
+      ]
     }
   },
     {
