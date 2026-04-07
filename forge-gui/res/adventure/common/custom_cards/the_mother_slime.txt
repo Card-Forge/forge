@@ -1,0 +1,15 @@
+Name:The Mother Slime
+ManaCost:no cost
+Colors:black,green
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigPut | TriggerDescription$ At the beginning of your upkeep, put two slime counter on this card, then each opponent conjures X cards named Blasted Landscape into their library, where X is the amount of Slime counters on this card. Those cards perpetually gain: "At the beginning of your end step, if this card is in your hand, it deals 1 damage to you". 
+SVar:TrigPut:DB$ PutCounter | Defined$ Self | CounterType$ SLIME | CounterNum$ 2 | SubAbility$ DBGunk
+SVar:DBGunk:DB$ MakeCard | Defined$ Opponent | Name$ Blasted Landscape | Zone$ Library | Amount$ X | Conjure$ True | RememberMade$ True | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Triggers$ TrigDamage | Duration$ Perpetual | SubAbility$ DBCleanup
+SVar:TrigDamage:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigDamageBis | PresentZone$ Hand | TriggerZones$ Hand | TriggerDescription$ At the beginning of your end step, if this card is in your hand, it deals 1 damage to you
+SVar:TrigDamageBis:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 1
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Ooze.YouCtrl | Execute$ TrigToken | TriggerZones$ Command | TriggerDescription$ Whenever an Ooze you control dies, create a Mutagen token. 
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_mutagen_sac | TokenOwner$ You
+SVar:X:Count$CardCounters.SLIME
+Oracle:At the beginning of your upkeep, put two slime counter on this card, then each opponent conjures X cards named Blasted Landscape into their library, where X is the amount of Slime counters on this card. Those cards perpetually gain: "at the beginning of your end step, if this card is in your hand, it deals 1 damage to you". \nWhenever an Ooze you control dies, create a Mutagen token. 
