@@ -2886,6 +2886,11 @@
         "itemName": "Urza's Bauble"
       },
       {
+        "type": "item",
+        "count": 1,
+        "itemName": "Urza's Robe"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Urza, Lord High Artificer"
@@ -16160,7 +16165,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Sinuous Shoes"
+        "itemName": "Shoes of the Swarm"
       },
       {
         "type": "card",
