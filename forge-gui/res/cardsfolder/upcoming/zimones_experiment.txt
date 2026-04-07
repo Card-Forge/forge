@@ -1,0 +1,10 @@
+Name:Zimone's Experiment
+ManaCost:3 G
+Types:Sorcery
+A:SP$ PeekAndReveal | PeekAmount$ 5 | SubAbility$ DBChoose | NoReveal$ True | RememberPeeked$ True | SpellDescription$ Look at the top five cards of your library. You may reveal up to two creature and/or land cards from among them, then put the rest on the bottom of your library in a random order. Put all land cards revealed this way onto the battlefield tapped and put all creature cards revealed this way into your hand.
+SVar:DBChoose:DB$ ChooseCard | SubAbility$ DBPutBattlefield | Choices$ Creature.IsRemembered,Land.IsRemembered | Amount$ 2 | ChoiceTitle$ Choose up to two creature and/or land cards to reveal | ChoiceZone$ Library
+SVar:DBPutBattlefield:DB$ ChangeZoneAll | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.ChosenCard | SubAbility$ DBHand
+SVar:DBHand:DB$ ChangeZoneAll | Origin$ Library | Destination$ Hand | ChangeType$ Creature.ChosenCard | SubAbility$ DBBottom
+SVar:DBBottom:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Look at the top five cards of your library. You may reveal up to two creature and/or land cards from among them, then put the rest on the bottom of your library in a random order. Put all land cards revealed this way onto the battlefield tapped and put all creature cards revealed this way into your hand.
