@@ -1378,13 +1378,13 @@
     }
   },
     {
-    "name": "Sinuous Shoes",
-    "description": "2/2 rat that becomes a 5/5 menace for 3BB",
+    "name": "Shoes of the Swarm",
+    "description": "*/1 rat, * is your rat count.",
     "equipmentSlot": "Boots",
     "iconName": "SinuousShoes",
     "effect": {
         "startBattleWithCard": [
-        "Sinuous Vermin"
+        "Swarm of Rats|9ED"
      ]
     }
   },
@@ -4934,6 +4934,17 @@
     "effect": {
       "startBattleWithCard": [
         "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Sinuous Shoes",
+    "description": "This item has been discontinued. Please discard it.",
+    "equipmentSlot": "Boots",
+    "iconName": "SinuousShoes",
+    "effect": {
+      "startBattleWithCard": [
+        "Sinuous Vermin"
       ]
     }
   },
