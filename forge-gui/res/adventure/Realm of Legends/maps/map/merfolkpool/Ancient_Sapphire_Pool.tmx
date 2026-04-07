@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="75">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="76">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -37,6 +37,8 @@
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Thought Reflection|2XM&quot;, &quot;Mind's Dilation|EMN&quot;]
 }</property>
     <property name="enemy" value="Hakim"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -72,6 +74,16 @@ Your manasight stone blazes with power, near-blindingly bright.&quot;,
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 }
 ]</property>
+   </properties>
+  </object>
+  <object id="75" template="../../../../common/maps/obj/enemy.tx" x="227.722" y="117.523">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Mind's Dilation|EMN&quot;]
+}</property>
+    <property name="enemy" value="Hakim"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
  </objectgroup>

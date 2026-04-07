@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="137">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="138">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -101,6 +101,8 @@
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Enormous Energy Blade|NEO&quot;, &quot;Weaver of Harmony|NEO&quot;, &quot;Era of Enlightenment|NEO&quot;]}"/>
     <property name="enemy" value="Go-Shintai"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
@@ -195,5 +197,14 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
   <object id="134" template="../../../../common/maps/obj/collision.tx" x="110.833" y="138.908" width="16.9997" height="27.5166"/>
   <object id="135" template="../../../../common/maps/obj/collision.tx" x="95.5001" y="41.2417" width="16.9997" height="27.5166"/>
   <object id="136" template="../../../../common/maps/obj/collision.tx" x="288.167" y="248.908" width="16.9997" height="27.5166"/>
+  <object id="137" template="../../../../common/maps/obj/enemy.tx" x="237.715" y="143.138">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Enormous Energy Blade|NEO&quot;, &quot;Era of Enlightenment|NEO&quot;]}"/>
+    <property name="enemy" value="Go-Shintai"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

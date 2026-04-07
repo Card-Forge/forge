@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="70" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="137">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="70" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="140">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -56,7 +56,9 @@
 	]</property>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Strider Harness|RIX&quot;, &quot;Jungle Shrine|LCC&quot;, &quot;The Skullspore Nexus|LCI&quot;, &quot;Poetic Ingenuity|LCI&quot;]}"/>
     <property name="enemy" value="Zacama"/>
-    <property name="speedModifier" type="float" value="5"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
@@ -109,12 +111,14 @@
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="90" template="../../../../common/maps/obj/enemy.tx" x="573.334" y="390.667">
+  <object id="90" template="../../../../common/maps/obj/enemy.tx" x="558.334" y="367">
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;dinosaur egg|lcc&quot;, &quot;Triassic Egg|LEG&quot;, &quot;strider harness|RIX&quot;, &quot;maskwood nexus|KLD&quot;]}"/>
     <property name="enemy" value="Atla Palani"/>
-    <property name="speedModifier" type="float" value="4"/>
-    <property name="threatRange" type="int" value="50"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value=""/>
    </properties>
   </object>
@@ -123,6 +127,8 @@
     <property name="displayNameOverride" value=""/>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Frilled Deathspitter|RIX&quot;, &quot;Strider Harness|RIX&quot;, &quot;restless ridgeline|LCI|2&quot;]}"/>
     <property name="enemy" value="Gishath"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
@@ -308,6 +314,44 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
   &quot;colors&quot;: [ &quot;White&quot; ]
 }]</property>
+   </properties>
+  </object>
+  <object id="137" template="../../../../common/maps/obj/enemy.tx" x="434" y="120">
+   <properties>
+    <property name="displayNameOverride" value=""/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Frilled Deathspitter|RIX&quot;, &quot;Strider Harness|RIX&quot;]}"/>
+    <property name="enemy" value="Gishath"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="138" template="../../../../common/maps/obj/enemy.tx" x="559.833" y="366.5">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;dinosaur egg|lcc&quot;, &quot;Triassic Egg|LEG&quot;]}"/>
+    <property name="enemy" value="Atla Palani"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="139" template="../../../../common/maps/obj/enemy.tx" x="552" y="273">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;With three great dying roars, the colossal dinosaur falls back. The whole valley shakes with the impact as an entire grove of trees is crushed under its weight.&quot;,
+	   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Strider Harness|RIX&quot;, &quot;Jungle Shrine|LCC&quot;, &quot;Poetic Ingenuity|LCI&quot;]}"/>
+    <property name="enemy" value="Zacama"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
  </objectgroup>

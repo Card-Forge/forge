@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="78">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="79">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -112,6 +112,8 @@
 	]</property>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;luxior, giada's gift|SNC&quot;, &quot;Bishop of wings|M20&quot;, &quot;Seraph sanctuary|AVR&quot;, &quot;answered prayers|MH1&quot;, &quot;angelic chorus|bbd&quot;, &quot;angelic renewal|uma&quot;]}"/>
     <property name="enemy" value="Giada"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -179,5 +181,23 @@ I'm sure you think I'll be easy since I look young. But I think you'll find my p
   <object id="75" template="../../../../common/maps/obj/collision.tx" x="33.3009" y="352.884" width="30.7315" height="15.2328"/>
   <object id="76" template="../../../../common/maps/obj/collision.tx" x="417.862" y="86.6488" width="28.7315" height="38.5206"/>
   <object id="77" template="../../../../common/maps/obj/collision.tx" x="145.384" y="7.2397" width="28.7315" height="38.5206"/>
+  <object id="78" template="../../../../common/maps/obj/enemy.tx" x="96.4956" y="44.8769">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;Your final strike causes the angel to begin dissolving into shimmering light.
+
+'They say angels never truly die... I hope that's true...'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;luxior, giada's gift|SNC&quot;, &quot;Seraph sanctuary|AVR&quot;, &quot;angelic chorus|bbd&quot;, &quot;angelic renewal|uma&quot;]}"/>
+    <property name="enemy" value="Giada"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
