@@ -651,6 +651,19 @@ public class GameAction {
             copied.clearControllers();
         }
 
+        if (zoneTo.is(ZoneType.Hand)) {
+            final GameRules rules = game.getRules();
+            if (rules != null && rules.isDanDan()) {
+                final Player handPlayer = zoneTo.getPlayer();
+                if (copied.getOwner() != handPlayer) {
+                    copied.setOwner(handPlayer);
+                }
+                if (copied.getController() != handPlayer) {
+                    copied.setController(handPlayer, game.getNextTimestamp());
+                }
+            }
+        }
+
         return copied;
     }
 
@@ -852,6 +865,10 @@ public class GameAction {
     }
     public final Card moveToHand(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
         final PlayerZone hand = c.getOwner().getZone(ZoneType.Hand);
+        return moveTo(hand, c, cause, params);
+    }
+    public final Card moveToHand(final Card c, final Player recipient, SpellAbility cause, Map<AbilityKey, Object> params) {
+        final PlayerZone hand = recipient != null ? recipient.getZone(ZoneType.Hand) : c.getOwner().getZone(ZoneType.Hand);
         return moveTo(hand, c, cause, params);
     }
 

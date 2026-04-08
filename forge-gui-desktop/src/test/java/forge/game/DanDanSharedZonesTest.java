@@ -5,12 +5,18 @@ import forge.ai.AITest;
 import forge.ai.LobbyPlayerAi;
 import forge.deck.DeckSection;
 import forge.deck.Deck;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardProperty;
 import forge.game.card.CardView;
+import forge.game.cost.Cost;
+import forge.game.cost.CostExile;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.player.RegisteredPlayer;
+import forge.game.spellability.SpellAbility;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerType;
 import forge.item.PaperCard;
 import forge.StaticData;
 import forge.game.zone.ZoneType;
@@ -208,6 +214,89 @@ public class DanDanSharedZonesTest extends AITest {
     }
 
     @Test
+    public void dandanTopGraveyardCreatureUsesActingPlayerGraveyardOrder() {
+        initAndCreateGame();
+
+        final Deck firstDeck = new Deck("DanDan P1");
+        final Deck secondDeck = new Deck("DanDan P2");
+        final List<RegisteredPlayer> players = Lists.newArrayList();
+        players.add(new RegisteredPlayer(firstDeck).setPlayer(new LobbyPlayerAi("p1", null)));
+        players.add(new RegisteredPlayer(secondDeck).setPlayer(new LobbyPlayerAi("p2", null)));
+
+        final GameRules rules = new GameRules(GameType.DanDan);
+        final Match match = new Match(rules, players, "DanDan TopGraveyardCreature payer view");
+        final Game game = match.createGame();
+        match.startGame(game);
+
+        final Player p1 = game.getRegisteredPlayers().get(0);
+        final Player p2 = game.getRegisteredPlayers().get(1);
+
+        addCardToZone("Runeclaw Bear", p1, ZoneType.Graveyard);
+        final Card topOwnedByP2 = addCardToZone("Grizzly Bears", p2, ZoneType.Graveyard);
+
+        final Card barrowGhoul = addCardToZone("Barrow Ghoul", p1, ZoneType.Battlefield);
+
+        AssertJUnit.assertTrue("P1 paying upkeep should treat P2-owned top creature as TopGraveyardCreature (Barrow Ghoul / shared GY)",
+                CardProperty.cardHasProperty(topOwnedByP2, "TopGraveyardCreature", p1, barrowGhoul, null));
+    }
+
+    @Test
+    public void dandanTopGraveyardCreatureAfterExileToGraveyard() {
+        initAndCreateGame();
+
+        final Deck firstDeck = new Deck("DanDan P1");
+        final Deck secondDeck = new Deck("DanDan P2");
+        final List<RegisteredPlayer> players = Lists.newArrayList();
+        players.add(new RegisteredPlayer(firstDeck).setPlayer(new LobbyPlayerAi("p1", null)));
+        players.add(new RegisteredPlayer(secondDeck).setPlayer(new LobbyPlayerAi("p2", null)));
+
+        final GameRules rules = new GameRules(GameType.DanDan);
+        final Match match = new Match(rules, players, "DanDan TopGraveyardCreature exile to GY");
+        final Game game = match.createGame();
+        match.startGame(game);
+
+        final Player p1 = game.getRegisteredPlayers().get(0);
+        final Player p2 = game.getRegisteredPlayers().get(1);
+
+        addCardToZone("Opt", p1, ZoneType.Graveyard);
+
+        // P1-owned creature so P2 paying Barrow upkeep matches "other player's" shared-graveyard case.
+        final Card bear = addCardToZone("Grizzly Bears", p1, ZoneType.Battlefield);
+        final Card inExile = game.getAction().exile(bear, null, null);
+        final Card inGy = game.getAction().moveToGraveyard(inExile, null, null);
+
+        AssertJUnit.assertTrue("Creature returned from exile to shared GY should still be a creature",
+                inGy.isCreature());
+        AssertJUnit.assertFalse("Returned card should not be immutable (Card.TopGraveyardCreature prefix)",
+                inGy.isImmutable());
+
+        final Card barrowP2 = addCardToZone("Barrow Ghoul", p2, ZoneType.Battlefield);
+
+        AssertJUnit.assertTrue("P2 paying upkeep should treat exile→GY creature as TopGraveyardCreature (DanDan shared GY)",
+                CardProperty.cardHasProperty(inGy, "TopGraveyardCreature", p2, barrowP2, null));
+        AssertJUnit.assertNotSame("Exile→GY regression: top creature may be owned by a different player than the payer",
+                p2, inGy.getOwner());
+
+        SpellAbility upkeepSa = null;
+        for (Trigger tr : barrowP2.getTriggers()) {
+            if (tr.getMode() == TriggerType.Phase) {
+                upkeepSa = tr.ensureAbility();
+                break;
+            }
+        }
+        AssertJUnit.assertNotNull("Barrow Ghoul should have a Phase trigger SA", upkeepSa);
+        upkeepSa.setActivatingPlayer(p2);
+        final String unlessCostStr = upkeepSa.getParam("UnlessCost");
+        AssertJUnit.assertNotNull("Barrow Ghoul upkeep should define UnlessCost", unlessCostStr);
+        final Cost unlessCost = AbilityUtils.calculateUnlessCost(upkeepSa, unlessCostStr, false);
+        AssertJUnit.assertNotNull(unlessCost);
+        final CostExile exilePart = unlessCost.getCostPartByType(CostExile.class);
+        AssertJUnit.assertNotNull("Unless cost should include CostExile", exilePart);
+        AssertJUnit.assertTrue("Barrow Ghoul UnlessCost (exile top GY creature) should be payable for P2",
+                exilePart.canPay(upkeepSa, p2, false));
+    }
+
+    @Test
     public void dandanSharedGraveyardTreatsYouCtrlAsSharedAccess() {
         initAndCreateGame();
 
@@ -294,6 +383,150 @@ public class DanDanSharedZonesTest extends AITest {
                 0, secondDeck.get(DeckSection.Main).countByName("Swamp"));
         AssertJUnit.assertEquals("DanDan sideboard should retain original Swamp (p2)",
                 1, secondDeck.get(DeckSection.Sideboard).countByName("Swamp"));
+    }
+
+    @Test
+    public void dandanSharedGraveyardToHandCanRouteToActingPlayerHand() {
+        initAndCreateGame();
+
+        final Deck firstDeck = new Deck("DanDan P1");
+        final Deck secondDeck = new Deck("DanDan P2");
+        final List<RegisteredPlayer> players = Lists.newArrayList();
+        players.add(new RegisteredPlayer(firstDeck).setPlayer(new LobbyPlayerAi("p1", null)));
+        players.add(new RegisteredPlayer(secondDeck).setPlayer(new LobbyPlayerAi("p2", null)));
+
+        final Match match = new Match(new GameRules(GameType.DanDan), players, "DanDan graveyard to acting hand");
+        final Game game = match.createGame();
+        match.startGame(game);
+
+        final Player p1 = game.getRegisteredPlayers().get(0);
+        final Player p2 = game.getRegisteredPlayers().get(1);
+        final Card c = addCardToZone("Opt", p1, ZoneType.Graveyard);
+        c.setOwner(p1);
+
+        final Card moved = game.getAction().moveToHand(c, p2, null, null);
+
+        AssertJUnit.assertTrue("Card should move to acting player's hand under DanDan recipient routing",
+                p2.getZone(ZoneType.Hand).contains(moved));
+        AssertJUnit.assertFalse("Card should not stay in owner's hand in recipient-routed DanDan move",
+                p1.getZone(ZoneType.Hand).contains(moved));
+        AssertJUnit.assertEquals("Returned card should be owned by hand player for DanDan visibility",
+                p2, moved.getOwner());
+        AssertJUnit.assertEquals("Returned card should be controlled by hand player for DanDan visibility",
+                p2, moved.getController());
+    }
+
+    @Test
+    public void dandanSharedLibraryToHandCanRouteToActingPlayerHand() {
+        initAndCreateGame();
+
+        final Deck firstDeck = new Deck("DanDan P1");
+        final Deck secondDeck = new Deck("DanDan P2");
+        final List<RegisteredPlayer> players = Lists.newArrayList();
+        players.add(new RegisteredPlayer(firstDeck).setPlayer(new LobbyPlayerAi("p1", null)));
+        players.add(new RegisteredPlayer(secondDeck).setPlayer(new LobbyPlayerAi("p2", null)));
+
+        final Match match = new Match(new GameRules(GameType.DanDan), players, "DanDan library to acting hand");
+        final Game game = match.createGame();
+        match.startGame(game);
+
+        final Player p1 = game.getRegisteredPlayers().get(0);
+        final Player p2 = game.getRegisteredPlayers().get(1);
+        seedSharedLibrary(p1, 8);
+        final Card top = p1.getZone(ZoneType.Library).get(0);
+        top.setOwner(p1);
+
+        final Card moved = game.getAction().moveToHand(top, p2, null, null);
+
+        AssertJUnit.assertTrue("Top shared-library card should move to acting player's hand in DanDan recipient routing",
+                p2.getZone(ZoneType.Hand).contains(moved));
+        AssertJUnit.assertEquals("Top card should be owned by hand player for DanDan visibility",
+                p2, moved.getOwner());
+        AssertJUnit.assertEquals("Top card should be controlled by hand player for DanDan visibility",
+                p2, moved.getController());
+    }
+
+    @Test
+    public void dandanSharedLibraryToBattlefieldCanUseActingPlayerAsController() {
+        initAndCreateGame();
+
+        final Deck firstDeck = new Deck("DanDan P1");
+        final Deck secondDeck = new Deck("DanDan P2");
+        final List<RegisteredPlayer> players = Lists.newArrayList();
+        players.add(new RegisteredPlayer(firstDeck).setPlayer(new LobbyPlayerAi("p1", null)));
+        players.add(new RegisteredPlayer(secondDeck).setPlayer(new LobbyPlayerAi("p2", null)));
+
+        final Match match = new Match(new GameRules(GameType.DanDan), players, "DanDan library to battlefield control");
+        final Game game = match.createGame();
+        match.startGame(game);
+
+        final Player p1 = game.getRegisteredPlayers().get(0);
+        final Player p2 = game.getRegisteredPlayers().get(1);
+        final Card c = addCardToZone("Delver of Secrets", p1, ZoneType.Library);
+        c.setOwner(p1);
+        c.setController(p2, 0);
+
+        game.getAction().moveToPlay(c, p2, null, null);
+
+        AssertJUnit.assertTrue("Card should be on battlefield",
+                c.isInZone(ZoneType.Battlefield));
+        AssertJUnit.assertEquals("Card should enter under acting player's control in recipient-routed DanDan move",
+                p2, c.getController());
+    }
+
+    @Test
+    public void dandanSharedGraveyardToBattlefieldCanUseActingPlayerAsController() {
+        initAndCreateGame();
+
+        final Deck firstDeck = new Deck("DanDan P1");
+        final Deck secondDeck = new Deck("DanDan P2");
+        final List<RegisteredPlayer> players = Lists.newArrayList();
+        players.add(new RegisteredPlayer(firstDeck).setPlayer(new LobbyPlayerAi("p1", null)));
+        players.add(new RegisteredPlayer(secondDeck).setPlayer(new LobbyPlayerAi("p2", null)));
+
+        final Match match = new Match(new GameRules(GameType.DanDan), players, "DanDan graveyard to battlefield control");
+        final Game game = match.createGame();
+        match.startGame(game);
+
+        final Player p1 = game.getRegisteredPlayers().get(0);
+        final Player p2 = game.getRegisteredPlayers().get(1);
+        final Card c = addCardToZone("Delver of Secrets", p1, ZoneType.Graveyard);
+        c.setOwner(p1);
+        c.setController(p2, 0);
+
+        game.getAction().moveToPlay(c, p2, null, null);
+
+        AssertJUnit.assertTrue("Card should be on battlefield",
+                c.isInZone(ZoneType.Battlefield));
+        AssertJUnit.assertEquals("Card should enter under acting player's control in DanDan move from shared graveyard",
+                p2, c.getController());
+    }
+
+    @Test
+    public void dandanMoveToHandOwnerIntentPathRemainsOwnerHand() {
+        initAndCreateGame();
+
+        final Deck firstDeck = new Deck("DanDan P1");
+        final Deck secondDeck = new Deck("DanDan P2");
+        final List<RegisteredPlayer> players = Lists.newArrayList();
+        players.add(new RegisteredPlayer(firstDeck).setPlayer(new LobbyPlayerAi("p1", null)));
+        players.add(new RegisteredPlayer(secondDeck).setPlayer(new LobbyPlayerAi("p2", null)));
+
+        final Match match = new Match(new GameRules(GameType.DanDan), players, "DanDan owner hand control");
+        final Game game = match.createGame();
+        match.startGame(game);
+
+        final Player p1 = game.getRegisteredPlayers().get(0);
+        final Player p2 = game.getRegisteredPlayers().get(1);
+        final Card c = addCardToZone("Opt", p1, ZoneType.Graveyard);
+        c.setOwner(p1);
+
+        game.getAction().moveToHand(c, null, null);
+
+        AssertJUnit.assertTrue("Owner-intent moveToHand overload should still route to owner hand",
+                p1.getZone(ZoneType.Hand).contains(c));
+        AssertJUnit.assertFalse("Owner-intent moveToHand overload should not route to other player hand",
+                p2.getZone(ZoneType.Hand).contains(c));
     }
 
     private static void assertSameOrderAndIds(final String zoneName, final Iterable<CardView> left, final Iterable<CardView> right) {

@@ -582,13 +582,13 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("TopGraveyardCreature")) {
-            CardCollection cards = CardLists.filter(card.getOwner().getCardsIn(ZoneType.Graveyard), CardPredicates.CREATURES);
+            CardCollection cards = CardLists.filter(graveyardOrderViewForProperty(game, sourceController, card), CardPredicates.CREATURES);
             Collections.reverse(cards);
             if (cards.isEmpty() || !card.equals(cards.get(0))) {
                 return false;
             }
         } else if (property.startsWith("TopGraveyard")) {
-            final CardCollection cards = new CardCollection(card.getOwner().getCardsIn(ZoneType.Graveyard));
+            final CardCollection cards = new CardCollection(graveyardOrderViewForProperty(game, sourceController, card));
             Collections.reverse(cards);
             if (property.substring(12).matches("[0-9][0-9]?")) {
                 int n = Integer.parseInt(property.substring(12));
@@ -606,7 +606,7 @@ public class CardProperty {
                 }
             }
         } else if (property.startsWith("BottomGraveyard")) {
-            final CardCollectionView cards = card.getOwner().getCardsIn(ZoneType.Graveyard);
+            final CardCollectionView cards = graveyardOrderViewForProperty(game, sourceController, card);
             if (cards.isEmpty() || !card.equals(cards.get(0))) {
                 return false;
             }
@@ -2103,6 +2103,17 @@ public class CardProperty {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Sequence used for Top/BottomGraveyard* properties. In DanDan, use the activating or paying
+     * player's view of the shared graveyard so it matches {@link forge.game.cost.CostExile} ("your graveyard").
+     */
+    private static CardCollectionView graveyardOrderViewForProperty(final Game game, final Player sourceController, final Card card) {
+        if (game != null && game.getRules().isDanDan() && sourceController != null) {
+            return sourceController.getCardsIn(ZoneType.Graveyard);
+        }
+        return card.getOwner().getCardsIn(ZoneType.Graveyard);
     }
 
     private static boolean hasTimestampMatch(final Card card, final CardCollectionView coll) {
