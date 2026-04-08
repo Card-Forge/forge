@@ -1,0 +1,8 @@
+Name:Divergent Equation
+ManaCost:X X U
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn | ValidTgtDesc$ instant or sorcery card in your graveyard | TargetMin$ 0 | TargetMax$ X | SubAbility$ DBExile | SpellDescription$ Return up to X target instant and/or sorcery cards from your graveyard to your hand.
+SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | SpellDescription$ Exile CARDNAME.
+SVar:X:Count$xPaid
+AI:RemoveDeck:All
+Oracle:Return up to X target instant and/or sorcery cards from your graveyard to your hand.\nExile Divergent Equation.
