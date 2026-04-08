@@ -1,0 +1,7 @@
+Name:Abstract Paintmage
+ManaCost:U UR R
+Types:Creature Djinn Sorcerer
+PT:2/2
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMana | TriggerDescription$ At the beginning of your first main phase, add {U}{R}. Spend this mana only to cast instant and sorcery spell.
+SVar:TrigMana:DB$ Mana | Produced$ U R | RestrictValid$ Spell.Instant,Spell.Sorcery
+Oracle:At the beginning of your first main phase, add {U}{R}. Spend this mana only to cast instant and sorcery spell.
