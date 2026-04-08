@@ -1,7 +1,7 @@
 Name:Mind into Matter
 ManaCost:X G U
 Types:Sorcery
-A:SP$ DB$ Draw | NumCards$ X | SubAbility$ DBChangeZone | SpellDescription$ Draw X cards. Then you may put a permanent card with mana value X or less from your hand onto the battlefield tapped.
+A:SP$ Draw | NumCards$ X | SubAbility$ DBChangeZone | SpellDescription$ Draw X cards. Then you may put a permanent card with mana value X or less from your hand onto the battlefield tapped.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Tapped$ True | ChangeType$ Permanent.cmcLEX
 SVar:X:Count$xPaid
 Oracle:Draw X cards. Then you may put a permanent card with mana value X or less from your hand onto the battlefield tapped.
