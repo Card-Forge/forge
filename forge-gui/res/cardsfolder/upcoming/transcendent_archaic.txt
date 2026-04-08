@@ -4,7 +4,7 @@ Types:Creature Avatar
 PT:6/6
 K:Vigilance
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Converge — When this creature enters, you may draw X cards, where X is the number of colors of mana spent to cast this spell. If you draw one or more cards this way, discard two cards.
-SVar:TrigDraw:DB$ Draw | NumCards$ X | RememberDrawn$ True | Optional$ True | SubAbility$ DBDiscard
+SVar:TrigDraw:DB$ Draw | NumCards$ X | RememberDrawn$ True | OptionalDecider$ True | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 2 | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Converge
