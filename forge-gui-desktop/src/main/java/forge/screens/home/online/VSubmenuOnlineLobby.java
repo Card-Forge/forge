@@ -21,6 +21,7 @@ import forge.gui.framework.FScreen;
 import forge.gui.framework.IVTopLevelUI;
 import forge.gui.interfaces.ILobbyView;
 import forge.gui.util.SOptionPane;
+import forge.localinstance.properties.ForgeConstants;
 import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
 import forge.screens.home.StopButton;
@@ -72,26 +73,21 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
 
         if (lobby == null) {
             final Localizer localizer = Localizer.getInstance();
-            final String guideUrl = "https://github.com/Card-Forge/forge/wiki/network-play";
 
-            // Bordered info box
             final JPanel infoBox = new JPanel(new MigLayout("insets 30 40 20 40, gap 0, wrap 1, ax center"));
             infoBox.setBackground(new Color(40, 40, 40));
             infoBox.setBorder(BorderFactory.createCompoundBorder(
                     BorderFactory.createLineBorder(new Color(100, 100, 100), 1),
                     BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-            // Title
             final FLabel lblTitle = new FLabel.Builder()
-                    .text("- = *  H E R E   B E   E L D R A Z I  * = -")
+                    .text(localizer.getMessage("lblOnlineEldraziTitle"))
                     .fontSize(22).fontAlign(SwingConstants.CENTER).build();
 
-            // Warning text
             final FLabel lblWarning = new FLabel.Builder()
                     .text(localizer.getMessage("lblOnlineWarning"))
                     .fontSize(16).fontAlign(SwingConstants.CENTER).build();
 
-            // Guide text with clickable link
             final FLabel lblGuideText = new FLabel.Builder()
                     .text(localizer.getMessage("lblOnlineGuideText"))
                     .fontSize(16).fontAlign(SwingConstants.CENTER).build();
@@ -101,15 +97,14 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
                     .fontSize(16).fontStyle(Font.BOLD).fontAlign(SwingConstants.CENTER)
                     .hoverable().cmdClick(() -> {
                         try {
-                            java.awt.Desktop.getDesktop().browse(java.net.URI.create(guideUrl));
+                            java.awt.Desktop.getDesktop().browse(java.net.URI.create(ForgeConstants.NETWORK_PLAY_WIKI_URL));
                         } catch (final Exception ex) {
                             java.awt.Toolkit.getDefaultToolkit().getSystemClipboard()
-                                    .setContents(new java.awt.datatransfer.StringSelection(guideUrl), null);
+                                    .setContents(new java.awt.datatransfer.StringSelection(ForgeConstants.NETWORK_PLAY_WIKI_URL), null);
                         }
                     }).build();
             lblGuideLink.setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.HAND_CURSOR));
 
-            // Buttons
             final FButton btnHost = new FButton(localizer.getMessage("lblHostGame"));
             btnHost.setFont(FSkin.getRelativeFont(18));
             btnHost.addActionListener(e -> getLayoutControl().hostGame());

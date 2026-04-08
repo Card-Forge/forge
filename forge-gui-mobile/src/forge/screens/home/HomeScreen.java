@@ -19,7 +19,7 @@ import forge.game.GameType;
 import forge.gui.FThreads;
 import forge.screens.FScreen;
 import forge.screens.achievements.AchievementsScreen;
-import forge.screens.online.OnlineMenu;
+import forge.screens.online.OnlineMenu.OnlineScreen;
 import forge.screens.planarconquest.ConquestMenu;
 import forge.screens.quest.QuestMenu;
 import forge.screens.settings.SettingsScreen;
@@ -82,7 +82,7 @@ public class HomeScreen extends FScreen {
         addButton(Forge.getLocalizer().getMessage("lblPlayOnline"), e -> {
             activeButtonIndex = 2;
             Forge.lastButtonIndex = activeButtonIndex;
-            OnlineMenu.getPreferredScreen().open();
+            OnlineScreen.Lobby.open();
         });
         addButton(Forge.getLocalizer().getMessage("lblDeckManager"), e -> {
             activeButtonIndex = 3;
@@ -152,7 +152,7 @@ public class HomeScreen extends FScreen {
         if (index < 0)
             return; //menu on startup
         if (index == 2)
-            OnlineMenu.getPreferredScreen().open();
+            OnlineScreen.Lobby.open();
         else if (index < 6)
             NewGameMenu.getPreferredScreen().open();
         else if (index == 6)

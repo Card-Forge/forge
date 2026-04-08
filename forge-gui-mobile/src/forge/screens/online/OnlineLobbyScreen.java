@@ -1,9 +1,12 @@
 package forge.screens.online;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Align;
 import com.google.common.collect.ImmutableList;
 
 import forge.Forge;
+import forge.assets.FSkinColor;
+import forge.assets.FSkinFont;
 import forge.gamemodes.match.GameLobby;
 import forge.gamemodes.net.ChatMessage;
 import forge.gamemodes.net.IOnlineChatInterface;
@@ -21,17 +24,12 @@ import forge.localinstance.skin.FSkinProp;
 import forge.screens.LoadingOverlay;
 import forge.screens.constructed.LobbyScreen;
 import forge.screens.online.OnlineMenu.OnlineScreen;
-import forge.assets.FSkinColor;
-import forge.assets.FSkinFont;
 import forge.toolbox.FButton;
 import forge.toolbox.FLabel;
 import forge.util.Utils;
 
 public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
 
-    private static final String GUIDE_URL = "https://github.com/Card-Forge/forge/wiki/network-play";
-
-    // Landing page components
     private final FLabel lblTitle;
     private final FLabel lblWarning;
     private final FLabel lblGuideText;
@@ -43,7 +41,7 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
         super(null, OnlineMenu.getMenu(), new OfflineLobby());
 
         lblTitle = new FLabel.Builder()
-                .text("- = *  H E R E   B E   E L D R A Z I  * = -")
+                .text(Forge.getLocalizer().getMessage("lblOnlineEldraziTitle"))
                 .font(FSkinFont.get(18)).align(Align.center).build();
         add(lblTitle);
 
@@ -61,7 +59,7 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
                 .text(Forge.getLocalizer().getMessage("lblNetworkPlayGuide"))
                 .font(FSkinFont.get(14)).align(Align.center)
                 .textColor(FSkinColor.get(FSkinColor.Colors.CLR_ACTIVE))
-                .command(e -> com.badlogic.gdx.Gdx.net.openURI(GUIDE_URL)).build();
+                .command(e -> Gdx.net.openURI(ForgeConstants.NETWORK_PLAY_WIKI_URL)).build();
         add(lblGuideLink);
 
         btnHost = new FButton(Forge.getLocalizer().getMessage("lblHostGame"));
@@ -144,38 +142,32 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
     @Override
     protected void doLayoutAboveBtnStart(float startY, float width, float height) {
         if (getGameLobby() == null) {
-            // Hide lobby controls and start button during landing page
             btnStart.setVisible(false);
             setLobbyControlsVisible(false);
 
             float padding = Utils.scale(10);
             float y = startY + height * 0.15f;
 
-            // Title
             float labelHeight = lblTitle.getAutoSizeBounds().height + padding;
             lblTitle.setBounds(padding, y, width - 2 * padding, labelHeight);
             lblTitle.setVisible(true);
             y += labelHeight + padding * 2;
 
-            // Warning
             labelHeight = lblWarning.getAutoSizeBounds().height + padding;
             lblWarning.setBounds(padding, y, width - 2 * padding, labelHeight);
             lblWarning.setVisible(true);
             y += labelHeight + padding;
 
-            // Guide text
             labelHeight = lblGuideText.getAutoSizeBounds().height + padding;
             lblGuideText.setBounds(padding, y, width - 2 * padding, labelHeight);
             lblGuideText.setVisible(true);
             y += labelHeight;
 
-            // Guide link
             labelHeight = lblGuideLink.getAutoSizeBounds().height + padding;
             lblGuideLink.setBounds(padding, y, width - 2 * padding, labelHeight);
             lblGuideLink.setVisible(true);
             y += labelHeight + padding * 4;
 
-            // Buttons side by side, centered with margin
             float buttonGap = padding * 2;
             float buttonWidth = width * 0.35f;
             float totalButtonWidth = buttonWidth * 2 + buttonGap;
@@ -186,7 +178,6 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
             btnJoin.setBounds(buttonX + buttonWidth + buttonGap, y, buttonWidth, buttonHeight);
             btnJoin.setVisible(true);
         } else {
-            // Hide landing page components, show lobby controls
             lblTitle.setVisible(false);
             lblWarning.setVisible(false);
             lblGuideText.setVisible(false);
