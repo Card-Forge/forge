@@ -28,6 +28,7 @@ import forge.screens.TransitionScreen;
 import forge.sound.SoundSystem;
 import forge.util.NameGenerator;
 
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -78,7 +79,6 @@ public class NewGameScene extends MenuScene {
         avatarImage = ui.findActor("avatarPreview");
         mode = ui.findActor("mode");
         modeHelp = ui.findActor("modeHelp");
-        archipelagoHelp = ui.findActor("archipelagoHelp");
         colorLabel = ui.findActor("colorIdL");
         String colorIdLabel = colorLabel.storedText;
         custom = new Array<>();
@@ -119,7 +119,20 @@ public class NewGameScene extends MenuScene {
             break;
         }
         // Todo: Implement this so it only works on Shandalar and doesn't crash
+
+        boolean isShandalar = Objects.equals(
+                Config.instance().getSettingData().plane,
+                "Shandalar"
+        );
+
         enableArchipelago = ui.findActor("enableArchipelago");
+        enableArchipelagoLabel = ui.findActor("enableArchipelagoL");
+        archipelagoHelp = ui.findActor("archipelagoHelp");
+
+        enableArchipelago.setVisible(isShandalar);
+        enableArchipelagoLabel.setVisible(isShandalar);
+        archipelagoHelp.setVisible(isShandalar);
+
         starterEdition = ui.findActor("starterEdition");
         starterEditionLabel = ui.findActor("starterEditionL");
         String[] starterEditions = Config.instance().starterEditions();
@@ -241,14 +254,15 @@ public class NewGameScene extends MenuScene {
         genderLabel = ui.findActor("genderL");
         difficultyLabel = ui.findActor("difficultyL");
         modeLabel = ui.findActor("modeL");
-        enableArchipelagoLabel = ui.findActor("enableArchipelagoL");
 
         addSelectorToScrollGroup(raceLabel, race, null);
         addSelectorToScrollGroup(genderLabel, gender, null);
         addSelectorToScrollGroup(difficultyLabel, difficulty, difficultyHelp);
         addSelectorToScrollGroup(colorLabel, colorId, null);
         addSelectorToScrollGroup(modeLabel, mode, modeHelp);
-        addSelectorToScrollGroup(enableArchipelagoLabel, enableArchipelago, archipelagoHelp);
+        if(isShandalar){
+            addSelectorToScrollGroup(enableArchipelagoLabel, enableArchipelago, archipelagoHelp);
+        }
         addSelectorToScrollGroup(starterEditionLabel, starterEdition, null);
 
         scrollPane = ui.findActor("selectorScroll");
