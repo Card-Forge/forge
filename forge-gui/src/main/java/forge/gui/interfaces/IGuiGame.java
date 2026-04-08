@@ -266,12 +266,15 @@ public interface IGuiGame {
 
     boolean mayAutoPass(PlayerView player);
 
+    /** Returns true if this GUI is a server-side proxy for a remote player. */
+    default boolean isRemoteGuiProxy() { return false; }
+
     void autoPassCancel(PlayerView player);
 
     void updateAutoPassPrompt();
 
     // Extended yield mode methods (experimental feature)
-    void setYieldMode(PlayerView player, YieldMode mode);
+    boolean setYieldMode(PlayerView player, YieldMode mode);
 
     /**
      * Update yield mode from remote client without triggering notification.

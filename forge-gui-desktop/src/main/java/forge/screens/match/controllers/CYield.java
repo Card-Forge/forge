@@ -104,8 +104,8 @@ public class CYield implements ICDoc {
         if (matchUI.getYieldMode(player) == mode) {
             matchUI.clearYieldMode(player);
         } else {
-            matchUI.setYieldMode(player, mode);
-            if (matchUI.getGameController() != null) {
+            boolean activated = matchUI.setYieldMode(player, mode);
+            if (activated && matchUI.getGameController() != null) {
                 matchUI.getGameController().selectButtonOk();
             }
         }
@@ -119,15 +119,39 @@ public class CYield implements ICDoc {
     private void yieldUntilEndTurn() { toggleYieldMode(YieldMode.UNTIL_END_OF_TURN); }
     private void yieldUntilYourTurn() { toggleYieldMode(YieldMode.UNTIL_YOUR_NEXT_TURN); }
 
+    /**
+     * Disable auto-pass-no-actions if it's currently on. Used by ESC to clear
+     * yield-like state alongside {@link CMatchUI#clearYieldMode}.
+     */
+    public void cancelAutoPassIfActive() {
+        if (FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS)) {
+            toggleAutoPass();
+        }
+    }
+
     private void toggleAutoPass() {
         ForgePreferences prefs = FModel.getPreferences();
         boolean newState = !prefs.getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS);
         prefs.setPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS, newState);
         prefs.save();
         updateYieldButtons();
-        // If toggled on, pass priority immediately so it takes effect now
-        if (newState && matchUI != null && matchUI.getGameController() != null) {
+        if (matchUI == null || matchUI.getGameController() == null) {
+            return;
+        }
+        if (newState) {
+            // If toggled on, pass priority immediately so it takes effect now
             matchUI.getGameController().selectButtonOk();
+        } else {
+            // If toggled off, clear the stale "Auto-passing — no actions available"
+            // prompt left over from updateAutoPassPrompt. Without this, the misleading
+            // message and disabled buttons remain visible until the next priority
+            // opportunity (which may not come until the next phase).
+            PlayerView player = matchUI.getCurrentPlayer();
+            if (player != null) {
+                matchUI.showPromptMessage(player, "");
+                matchUI.updateButtons(player, false, false, false);
+                matchUI.awaitNextInput();
+            }
         }
     }
 

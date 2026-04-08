@@ -43,7 +43,7 @@ public class YieldController {
     private final IGuiGame gui;
 
     // Legacy auto-pass tracking
-    private final Set<PlayerView> autoPassUntilEndOfTurn = Sets.newHashSet();
+    private final Set<PlayerView> autoPassUntilEndOfTurn = Sets.newConcurrentHashSet();
 
     /**
      * Consolidated yield state for a player.
@@ -62,7 +62,7 @@ public class YieldController {
     }
 
     // Extended yield mode tracking (experimental feature)
-    private final Map<PlayerView, YieldState> yieldStates = Maps.newHashMap();
+    private final Map<PlayerView, YieldState> yieldStates = Maps.newConcurrentMap();
 
     /**
      * Create a new YieldController with the given GUI game for updates and state access.
@@ -118,6 +118,10 @@ public class YieldController {
      * This is a persistent preference toggle, not a one-shot yield mode.
      */
     private boolean shouldAutoPassNoActions(PlayerView player) {
+        // Don't apply host preferences to remote players — they must opt in themselves
+        if (gui.isRemoteGuiProxy()) {
+            return false;
+        }
         if (!isYieldExperimentalEnabled()) {
             return false;
         }
@@ -128,7 +132,6 @@ public class YieldController {
         if (shouldInterruptYield(player)) {
             return false;
         }
-        // Auto-pass if no playable actions
         return !player.hasAvailableActions();
     }
 
@@ -163,25 +166,48 @@ public class YieldController {
             };
             gui.showPromptMessage(player, message);
             gui.updateButtons(player, false, true, false);
+            return;
+        }
+
+        // No yield mode active — but mayAutoPass may still be true via the
+        // persistent YIELD_AUTO_PASS_NO_ACTIONS pref. In that case clear the
+        // stale prompt left over from the previous input (e.g. a Pay Mana Cost
+        // prompt) so the user isn't shown a misleading message.
+        if (shouldAutoPassNoActions(player)) {
+            gui.cancelAwaitNextInput();
+            gui.showPromptMessage(player, Localizer.getInstance().getMessage("lblAutoPassingNoActions"));
+            gui.updateButtons(player, false, false, false);
         }
     }
 
     /**
      * Set the yield mode for a player.
+     * @return true if a new yield mode was activated; false otherwise (cleared, rejected, or feature disabled)
      */
-    public void setYieldMode(PlayerView player, final YieldMode mode) {
+    public boolean setYieldMode(PlayerView player, final YieldMode mode) {
         player = TrackableTypes.PlayerViewType.lookup(player); // ensure we use the correct player instance
         if (!isYieldExperimentalEnabled()) {
             // Fall back to legacy behavior for UNTIL_END_OF_TURN
             if (mode == YieldMode.UNTIL_END_OF_TURN) {
                 autoPassUntilEndOfTurn.add(player);
+                return true;
             }
-            return;
+            return false;
         }
 
         if (mode == null || mode == YieldMode.NONE) {
             clearYieldMode(player);
-            return;
+            return false;
+        }
+
+        GameView gameView = gui.getGameView();
+
+        // Reject UNTIL_STACK_CLEARS when the stack is already empty — must check
+        // before mutating any state so a rejected request leaves the player's
+        // existing yield/auto-pass state untouched
+        if (mode == YieldMode.UNTIL_STACK_CLEARS && gameView != null
+                && (gameView.getStack() == null || gameView.getStack().isEmpty())) {
+            return false;
         }
 
         // Clear any legacy auto-pass state to prevent interference
@@ -191,12 +217,10 @@ public class YieldController {
         YieldState state = new YieldState(mode);
         yieldStates.put(player, state);
 
-        GameView gameView = gui.getGameView();
-
         // Use network-safe GameView properties instead of gameView.getGame()
         // This ensures proper operation for non-host players in multiplayer
         if (gameView == null) {
-            return;
+            return true;
         }
 
         forge.game.phase.PhaseType phase = gameView.getPhase();
@@ -225,6 +249,7 @@ public class YieldController {
             default:
                 break;
         }
+        return true;
     }
 
     /**
@@ -300,8 +325,8 @@ public class YieldController {
             return false;
         }
 
-        // Check interrupt conditions
-        if (shouldInterruptYield(player)) {
+        // Skip interrupt check for remote players — host preferences don't apply to them
+        if (!gui.isRemoteGuiProxy() && shouldInterruptYield(player)) {
             clearYieldMode(player);
             return false;
         }

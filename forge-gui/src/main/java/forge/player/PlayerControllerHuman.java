@@ -1527,11 +1527,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public void declareAttackers(final Player attackingPlayer, final Combat combat) {
         if (mayAutoPass()) {
-            if (CombatUtil.validateAttackers(combat)) {
-                return; // don't prompt to declare attackers if user chose to
-                // end the turn and not attacking is legal
+            // canAttack catches eligible attackers (e.g. haste creatures) that
+            // validateAttackers misses on an empty combat object
+            if (!CombatUtil.canAttack(attackingPlayer) && CombatUtil.validateAttackers(combat)) {
+                return;
             }
-            // otherwise: cancel auto pass because of this unexpected attack
             autoPassCancel();
         }
 
@@ -1552,12 +1552,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public List<SpellAbility> chooseSpellAbilityToPlay() {
         final MagicStack stack = getGame().getStack();
 
-        if (FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS)) {
+        if (FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)
+                && FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS)) {
             int manaEstimate = ComputerUtilMana.getAvailableManaEstimate(getPlayer());
             getPlayer().getView().updateHasAvailableActions(getPlayer(), manaEstimate);
         }
 
         if (mayAutoPass()) {
+            // Update prompt so it doesn't stay stuck on the previous message
+            // (e.g. a trigger prompt that was already resolved)
+            getGui().updateAutoPassPrompt();
             // avoid prompting for input if current phase is set to be
             // auto-passed instead posing a short delay if needed to
             // prevent the game jumping ahead too quick
@@ -1579,7 +1583,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     e.printStackTrace();
                 }
             }
-            return null;
+            // Re-check after the delay — yield may have been cancelled during the sleep,
+            // in which case fall through to show the normal input prompt
+            if (mayAutoPass()) {
+                return null;
+            }
         }
 
         if (stack.isEmpty()) {

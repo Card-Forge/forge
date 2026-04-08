@@ -141,8 +141,8 @@ public class KeyboardShortcuts {
                 if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
                 if (matchUI == null || matchUI.getCurrentPlayer() == null) { return; }
                 if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) { return; }
-                matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_NEXT_PHASE);
-                if (matchUI.getGameController() != null) {
+                boolean activated = matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_NEXT_PHASE);
+                if (activated && matchUI.getGameController() != null) {
                     matchUI.getGameController().passPriority();
                 }
             }
@@ -155,8 +155,8 @@ public class KeyboardShortcuts {
                 if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
                 if (matchUI == null || matchUI.getCurrentPlayer() == null) { return; }
                 if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) { return; }
-                matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_STACK_CLEARS);
-                if (matchUI.getGameController() != null) {
+                boolean activated = matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_STACK_CLEARS);
+                if (activated && matchUI.getGameController() != null) {
                     matchUI.getGameController().passPriority();
                 }
             }
@@ -170,8 +170,8 @@ public class KeyboardShortcuts {
                 if (matchUI == null || matchUI.getCurrentPlayer() == null) { return; }
                 if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) { return; }
                 if (matchUI.getGameView() != null && matchUI.getGameView().getPlayers().size() >= 3) {
-                    matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_YOUR_NEXT_TURN);
-                    if (matchUI.getGameController() != null) {
+                    boolean activated = matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_YOUR_NEXT_TURN);
+                    if (activated && matchUI.getGameController() != null) {
                         matchUI.getGameController().passPriority();
                     }
                 }
@@ -185,8 +185,8 @@ public class KeyboardShortcuts {
                 if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
                 if (matchUI == null || matchUI.getCurrentPlayer() == null) { return; }
                 if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) { return; }
-                matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_END_OF_TURN);
-                if (matchUI.getGameController() != null) {
+                boolean activated = matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_END_OF_TURN);
+                if (activated && matchUI.getGameController() != null) {
                     matchUI.getGameController().passPriority();
                 }
             }
@@ -199,8 +199,8 @@ public class KeyboardShortcuts {
                 if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
                 if (matchUI == null || matchUI.getCurrentPlayer() == null) { return; }
                 if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) { return; }
-                matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_BEFORE_COMBAT);
-                if (matchUI.getGameController() != null) {
+                boolean activated = matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_BEFORE_COMBAT);
+                if (activated && matchUI.getGameController() != null) {
                     matchUI.getGameController().passPriority();
                 }
             }
@@ -213,14 +213,14 @@ public class KeyboardShortcuts {
                 if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
                 if (matchUI == null || matchUI.getCurrentPlayer() == null) { return; }
                 if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) { return; }
-                matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_END_STEP);
-                if (matchUI.getGameController() != null) {
+                boolean activated = matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_END_STEP);
+                if (activated && matchUI.getGameController() != null) {
                     matchUI.getGameController().passPriority();
                 }
             }
         };
 
-        /** Cancel current yield mode (experimental). */
+        /** Cancel current yield mode and auto-pass-no-actions (experimental). */
         final Action actCancelYield = new AbstractAction() {
             @Override
             public void actionPerformed(final ActionEvent e) {
@@ -231,6 +231,7 @@ public class KeyboardShortcuts {
                 if (currentYield != null && currentYield != YieldMode.NONE) {
                     matchUI.clearYieldMode(matchUI.getCurrentPlayer());
                 }
+                matchUI.getCYield().cancelAutoPassIfActive();
             }
         };
 

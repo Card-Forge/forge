@@ -176,13 +176,33 @@ public class InputPassPriority extends InputSyncronizedBase {
                 stop();
                 return;
             }
+            // CYield.toggleAutoPass enables the pref then calls selectButtonOk to advance
+            // the current input. If we reach onOk with a pending suggestion AND the pref
+            // is now ON, the user just toggled — the suggestion couldn't have appeared
+            // with the pref already on (mayAutoPass would have caught it). Suppress the
+            // accidental suggestion accept and just stop the input.
+            // Skip for remote proxies: the host's local pref doesn't apply to remote
+            // players, who can't toggle it via shortcut anyway, so this guard would
+            // produce a false positive on every Accept click from a remote client.
+            if (!getController().getGui().isRemoteGuiProxy()
+                    && FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS)) {
+                pendingSuggestion = null;
+                pendingSuggestionType = null;
+                pendingSuggestionMessage = null;
+                stop();
+                return;
+            }
 
             YieldMode mode = pendingSuggestion;
             pendingSuggestion = null;
             pendingSuggestionType = null;
             pendingSuggestionMessage = null;
-            getController().getGui().setYieldMode(getOwner(), mode);
-            stop();
+            boolean activated = getController().getGui().setYieldMode(getOwner(), mode);
+            if (activated) {
+                stop();
+            } else {
+                showNormalPrompt();
+            }
             return;
         }
 

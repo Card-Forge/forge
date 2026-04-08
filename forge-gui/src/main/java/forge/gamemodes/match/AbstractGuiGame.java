@@ -589,15 +589,18 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     // Extended yield mode methods (experimental feature)
     @Override
-    public final void setYieldMode(PlayerView player, final YieldMode mode) {
-        getYieldController().setYieldMode(player, mode);
-        updateAutoPassPrompt();
+    public final boolean setYieldMode(PlayerView player, final YieldMode mode) {
+        boolean activated = getYieldController().setYieldMode(player, mode);
+        if (activated) {
+            updateAutoPassPrompt();
 
-        // Notify remote server if this is a network client
-        IGameController controller = getGameController(player);
-        if (controller != null) {
-            controller.notifyYieldModeChanged(player, mode);
+            // Notify remote server if this is a network client
+            IGameController controller = getGameController(player);
+            if (controller != null) {
+                controller.notifyYieldModeChanged(player, mode);
+            }
         }
+        return activated;
     }
 
     @Override
@@ -613,7 +616,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         if (player == null) {
             return; // Player not found in game
         }
-        getYieldController().setYieldMode(player, mode);
+        getYieldController().setYieldModeSilent(player, mode);
     }
 
     @Override
