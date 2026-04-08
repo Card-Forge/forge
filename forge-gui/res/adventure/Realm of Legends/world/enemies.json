@@ -891,7 +891,7 @@
   },
   {
     "name": "Ulamog",
-    "sprite": "sprites/enemy/aberration/phyrexian/drossgrimnarch.atlas",
+    "sprite": "sprites/enemy/aberration/eldrazi/ulamog.atlas",
     "deck": [
       "decks/legends/ulamog.dck"
     ],
