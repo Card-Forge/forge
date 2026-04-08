@@ -38,7 +38,6 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
     private final FLabel lblGuideLink;
     private final FButton btnHost;
     private final FButton btnJoin;
-    private boolean showLanding = true;
 
     public OnlineLobbyScreen() {
         super(null, OnlineMenu.getMenu(), new OfflineLobby());
@@ -136,17 +135,15 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
             return;
         }
         if (getGameLobby() == null) {
-            showLanding = true;
             revalidate();
         } else {
-            showLanding = false;
             super.onActivate();
         }
     }
 
     @Override
     protected void doLayoutAboveBtnStart(float startY, float width, float height) {
-        if (showLanding) {
+        if (getGameLobby() == null) {
             // Hide lobby controls and start button during landing page
             btnStart.setVisible(false);
             setLobbyControlsVisible(false);
@@ -204,7 +201,6 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
     }
 
     private void activateHost() {
-        showLanding = false;
         setGameLobby(getLobby());
         revalidate();
         NetConnectUtil.ensurePlayerName();
@@ -222,7 +218,6 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
     }
 
     private void activateJoin() {
-        showLanding = false;
         setGameLobby(getLobby());
         revalidate();
         FThreads.invokeInBackgroundThread(() -> {
