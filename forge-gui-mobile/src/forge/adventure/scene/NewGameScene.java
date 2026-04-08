@@ -118,7 +118,6 @@ public class NewGameScene extends MenuScene {
             }
             break;
         }
-        // Todo: Implement this so it only works on Shandalar and doesn't crash
 
         boolean isShandalar = Objects.equals(
                 Config.instance().getSettingData().plane,
