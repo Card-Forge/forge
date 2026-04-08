@@ -1,0 +1,7 @@
+Name:Send in the Pest
+ManaCost:1 B
+Types:Sorcery
+A:SP$ Discard | Defined$ Player.Opponent | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBToken | SpellDescription$ Each opponent discards a card. You create a 1/1 black and green Pest creature token with "Whenever this token attacks, you gain 1 life."
+SVar:DBToken:DB$ Token | TokenScript$ bg_1_1_pest_attack_lifegain | TokenOwner$ You
+DeckHas:Ability$LifeGain|Token
+Oracle:Each opponent discards a card. You create a 1/1 black and green Pest creature token with "Whenever this token attacks, you gain 1 life."
