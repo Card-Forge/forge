@@ -2226,6 +2226,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 draft.postDraftActions();
                 hideTab(); //hide this tab page when finished drafting
                 parentScreen.completeDraft();
+                return; // pool is null; do not fall through to cardManager.setPool(pool) below
             }
 
             this.draftingFaceDown = getDraftPlayer().hasArchdemonCurse();

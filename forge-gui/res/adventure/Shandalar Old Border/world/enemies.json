@@ -3363,7 +3363,7 @@
     "spawnRate": 1,
     "difficulty": 0.8,
     "speed": 18,
-    "scale": 0.55,
+    "scale": 3,
     "life": 25,
     "rewards": [
       {
@@ -16014,7 +16014,7 @@
     "spawnRate": 0,
     "difficulty": 0.1,
     "speed": 31,
-    "scale": 0.6,
+    "scale": 1.2,
     "life": 25,
     "rewards": [
       {
@@ -65681,7 +65681,7 @@
     "spawnRate": 0,
     "difficulty": 0.8,
     "speed": 31,
-    "scale": 0.5,
+    "scale": 1.2,
     "life": 30,
     "rewards": [
       {

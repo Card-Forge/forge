@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="35" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="129">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="35" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="130">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -121,6 +121,8 @@
    <properties>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Charismatic Conqueror&quot;, &quot;Legion's Landing&quot;, &quot;Canonized in Blood&quot;, &quot;Tarrian's Soulcleaver&quot; ] }"/>
     <property name="enemy" value="Arguel"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
@@ -265,5 +267,15 @@ His smile flashes with fangs as he draws a curved blade.&quot;,
   <object id="126" template="../../../../common/maps/obj/collision.tx" x="608.779" y="239.636" width="16.1083" height="16.7274"/>
   <object id="127" template="../../../../common/maps/obj/collision.tx" x="529.863" y="434.386" width="26.2749" height="13.7274"/>
   <object id="128" template="../../../../common/maps/obj/collision.tx" x="531.238" y="462.886" width="26.2749" height="13.7274"/>
+  <object id="129" template="../../../../common/maps/obj/enemy.tx" x="224.492" y="77.8485">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Legion's Landing&quot;, &quot;Canonized in Blood&quot;, &quot;Tarrian's Soulcleaver&quot; ] }"/>
+    <property name="enemy" value="Arguel"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

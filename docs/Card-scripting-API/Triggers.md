@@ -1,27 +1,25 @@
 Triggers define when an ability should be automatically added to the stack.
 
 The base syntax looks like this:
-`T:Mode$ <TriggerType> | <Type-specific parameters> | [TriggerDescription$ {String}]`
+`T:Mode$ {TriggerType} | [Type-specific parameters] | Execute$ {SVar} | [TriggerDescription$ {String}]`
 
 - `Mode` - Specifies what game event the trigger should wait for
-- `TriggerDescription` - Describes the trigger, much like AF's SpellDescription parameter
-- `Execute$ {SVar}` - Specifies the name that holds the ability to run when the trigger goes off
+- `Execute` - Specifies the name that holds the ability to run when the trigger goes off
 
 Optional parameters that triggers can use are:
+- `TriggerDescription` - Describes the trigger, much like AF's SpellDescription parameter
 - `Secondary$ True` - This means that its trigger description won't show up in a card's text box. This can be used if you need to use several triggers to emulate a single effect on a real card
-- `Static$ True` - This is mainly used for "As CARDNAME enters the battlefield..." type things. It causes the triggered ability to resolve right away, instead of going on the stack
-- `ResolvingCheck`
+- `Static$ True` - This causes the triggered ability to resolve right away, instead of going on the stack. Mainly used for mana abilities or script helpers
+- `ResolvingCheck$ {Condition param}` - By default the only type not treated as having an "intervening if" is `Always`, but a few of it still have a part which turns them into that variant
 - `NoResolvingCheck$ True` - Makes a trigger not recheck its condition to resolve
-- `OptionalDecider {DefinedPlayer}`
+- `OptionalDecider {DefinedPlayer}` - If a player can decline applying all of a triggered ability's effects. When a "may" only allows some parts to be skipped (usually templated via separate sentences) use "Optional" params on the individual effects instead. The latter also always applies for variable drawing (or milling) because of *CR 121.2b*
 - `TriggerZones {ZoneType}` - By default triggers work in all zones. This parameter can be used to restrict which zone the card must be in, in order for the trigger to go off. For example, if it should only go off while the card is in the graveyard (as in *Auntie's Snitch*) you can use `TriggerZones$ Graveyard`. If a trigger's condition instead only applies to itself it's usually not required to explicitly add this since most events can only happen for cards in a single specific zone anyway.
-
-You can use certain parameters to further restrict when a trigger should go off. These parameters are defined in [Restrictions](Restrictions.md).
 
 In addition, the script has access to many values that are relevant to the trigger context.  
 These are accessed via Triggered-variables and are always of the form `Triggered<Object Name>`.  
 You can use Triggered-variables that return a card or a player directly in `Defined$` parameters or to grab extra info from, e.g. `SVar:X:TriggeredCard$CardPower`.
 You can get the controller or owner of a card returned by a Triggered-variable by appending "Controller" or "Owner" to the variable.
-Triggered-variables that return an integer can be accessed from their own Count-subfunction, i.e. `SVar:X:TriggerCount$TriggeredLifeAmount`.
+Triggered-variables that return an integer can be accessed from their own Count-subfunction, i.e. `SVar:X:TriggerCount$LifeAmount`.
 
 Depending on which type is specified, different triggered-variables are available and other parameters may be expected.  
 A few types also have "Once" variants to handle "One or more" conditions.  
