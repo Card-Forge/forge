@@ -1,7 +1,7 @@
 Name:Moment of Reckoning
 ManaCost:3 W W B B
 Types:Sorcery
-A:SP$ Charm | Choices$ DBDestroy,DBChangeZone | CharmNum$ 4 | CanRepeatModes$ True
+A:SP$ Charm | Choices$ DBDestroy,DBChangeZone | MinCharmNum$ 0 | CharmNum$ 4 | CanRepeatModes$ True
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Permanent.nonLand | ValidTgtDesc$ nonland permanent | SpellDescription$ Destroy target nonland permanent.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Permanent.nonLand+YouOwn | ValidTgtDesc$ nonland permanent card in your graveyard | SpellDescription$ Return target nonland permanent card from your graveyard to the battlefield.
 Oracle:Choose up to four. You may choose the same mode more than once.\n• Destroy target nonland permanent.\n• Return target nonland permanent card from your graveyard to the battlefield.
