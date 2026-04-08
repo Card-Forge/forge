@@ -1061,7 +1061,6 @@
     "equipmentSlot": "Neck",
     "iconName": "AmuletofAgony",
     "effect": {
-        "lifeModifier": -6,
         "startBattleWithCard": [
         "Font of Agonies|RNA"
      ]
@@ -1073,7 +1072,7 @@
     "equipmentSlot": "Boots",
     "iconName": "KoboldBoots",
     "effect": {
-        "changeStartCards": -1,
+        "lifeModifier": -6,
         "startBattleWithCard": [
         "Kobolds of Kher Keep|LEG", "Crookshank Kobolds|LEG"
      ]
@@ -1356,7 +1355,7 @@
   },
     {
     "name": "Gixian Graft",
-    "description": "3/1 phyrexian, when it does, copy it into grave, unearth 1B",
+    "description": "3/1 phyrexian, when it dies, copy it into grave, unearth 1B",
     "equipmentSlot": "Boots",
     "iconName": "GixianGraft",
     "effect": {
@@ -1378,13 +1377,13 @@
     }
   },
     {
-    "name": "Sinuous Shoes",
-    "description": "2/2 rat that becomes a 5/5 menace for 3BB",
+    "name": "Shoes of the Swarm",
+    "description": "*/1 rat, * is your rat count.",
     "equipmentSlot": "Boots",
     "iconName": "SinuousShoes",
     "effect": {
         "startBattleWithCard": [
-        "Sinuous Vermin"
+        "Swarm of Rats|9ED"
      ]
     }
   },
@@ -1520,7 +1519,7 @@
     "iconName": "VindicatorGreaves",
     "cost": 5000,
     "effect": {
-        "lifeModifier": -6,
+        "lifeModifier": -4,
         "startBattleWithCard": [
         "Kabira Vindicator|ROE"
      ]
@@ -1935,6 +1934,7 @@
     "equipmentSlot": "Left",
     "iconName": "GoldenEgg",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Golden Egg|ELD"
      ]
@@ -3466,6 +3466,18 @@
      ]
     }
   },
+  {
+    "name": "Spidersilk Helm",
+    "description": "Your creatures get +0/+1 and reach.",
+    "equipmentSlot": "Neck",
+    "iconName": "SpidersilkHelm",
+    "effect": {
+      "lifeModifier": -3,
+      "startBattleWithCard": [
+        "Spidersilk Armor|DDG"
+      ]
+    }
+  },
     {
     "name": "Full Moon Necklace",
     "description": "Wolves and Werewolves get +1/+1 and trample.",
@@ -3685,11 +3697,25 @@
     "equipmentSlot": "Body",
     "iconName": "UltraHeavyArmor",
     "cost": 3000,
-    "lifeModifier": 15,
     "effect": {
+      "lifeModifier": 15,
       "opponent": {
         "startBattleWithCard": [
           "Amulet of Vigor|WWK"
+        ]
+      }
+    }
+  },
+  {
+    "name": "Liliana's Veil",
+    "description": "At each end step, create a 2/2 zombie if you played a walker.",
+    "equipmentSlot": "Neck",
+    "iconName": "Liliana'sVeil",
+    "effect": {
+      "lifeModifier": -6,
+      "opponent": {
+        "startBattleWithCard": [
+          "Oath of Liliana|EMN"
         ]
       }
     }
@@ -3996,6 +4022,18 @@
       "startBattleWithCard": [
         "Opal Palace|C13"
      ]
+    }
+  },
+  {
+    "name": "Urza's Robe",
+    "description": "Taps for C for each urza's land if metalcraft",
+    "equipmentSlot": "Body",
+    "iconName": "Urza'sRobe",
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Urza's Workshop"
+      ]
     }
   },
     {
@@ -4908,6 +4946,17 @@
     "effect": {
       "startBattleWithCard": [
         "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Sinuous Shoes",
+    "description": "This item has been discontinued. Please discard it.",
+    "equipmentSlot": "Boots",
+    "iconName": "SinuousShoes",
+    "effect": {
+      "startBattleWithCard": [
+        "Sinuous Vermin"
       ]
     }
   },

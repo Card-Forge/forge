@@ -7789,7 +7789,7 @@
     "rewards": [
       {
         "type": "deckCard",
-        "probability": 0.5,
+        "probability": 1,
         "count": 1,
         "addMaxCount": 2,
         "rarity": [
@@ -7804,7 +7804,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.25,
+        "probability": 1,
         "count": 1,
         "addMaxCount": 1,
         "rarity": [
@@ -7820,7 +7820,7 @@
       },
       {
         "type": "deckCard",
-        "probability": 0.1,
+        "probability": 0.6,
         "count": 1,
         "rarity": [
           "rare"
@@ -7831,19 +7831,19 @@
       },
       {
         "type": "gold",
-        "probability": 0.3,
+        "probability": 0.8,
         "count": 10,
         "addMaxCount": 90
       },
       {
         "type": "shards",
-        "probability": 0.5,
+        "probability": 1,
         "count": 1,
         "addMaxCount": 2
       },
       {
         "type": "card",
-        "probability": 0.5,
+        "probability": 0.6,
         "count": 2,
         "addMaxCount": 4,
         "colors": [
@@ -27345,7 +27345,7 @@
         "type": "deckCard",
         "probability": 1,
         "count": 2,
-        "addMaxCount": 5,
+        "addMaxCount": 2,
         "rarity": [
           "rare",
           "Mythic Rare"
@@ -27367,7 +27367,7 @@
         "type": "card",
         "probability": 0.5,
         "count": 2,
-        "addMaxCount": 4,
+        "addMaxCount": 2,
         "colors": [
           "Black",
           "Red",
