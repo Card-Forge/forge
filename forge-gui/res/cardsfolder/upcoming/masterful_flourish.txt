@@ -1,0 +1,5 @@
+Name:Masterful Flourish
+ManaCost:B
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | ValidTgtDesc$ creature you control | NumAtt$ +1 | KW$ Indestructible | SpellDescription$ Target creature you control gets +1/+0 and gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)
+Oracle:Target creature you control gets +1/+0 and gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)
