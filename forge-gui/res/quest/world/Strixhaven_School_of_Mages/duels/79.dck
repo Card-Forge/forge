@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=PapaLegba
+Title=PapaLegba
+Icon=PapaLegba.jpg
+Difficulty=Hard
+Description=./Modern/Strixhaven_School_of_Mages/Chris_Campbell_-_Azorius_Affinity_(Modern,_#1229958)_[!].dck
+Deck Type=constructed
+
+[Main]
+2 Ethersworn Sphinx
+4 Ornithopter
+4 Myr Enforcer
+4 Sojourner's Companion
+4 Thought Monitor
+4 Frogmite
+4 Memnite
+4 Relic of Progenitus
+4 Springleaf Drum
+4 Tormod's Crypt
+4 Thoughtcast
+1 Rustvale Bridge
+3 Island
+3 Plains
+3 Silverbluff Bridge
+4 Darksteel Citadel
+4 Razortide Bridge
+[Sideboard]
+1 Gaea's Blessing
+1 Back to Nature
+1 Metallic Rebuke
+2 Test of Talents
+3 Swift Justice
+3 Fragmentize
+4 Boom // Bust

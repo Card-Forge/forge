@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Optimus Prime
+Title=Optimus Prime
+Icon=Optimus Prime.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Crimson_Vow/Mad-Ramon_-_Golgari_Festival_(Standard,_#1244727).dck
+Deck Type=constructed
+
+[Main]
+1 Primal Adversary
+1 Briarbridge Tracker
+3 Augur of Autumn
+4 Prosperous Innkeeper
+4 Esika's Chariot
+1 Hagra Mauling
+2 Infernal Grasp
+2 Power Word Kill
+3 Storm the Festival
+4 Binding the Old Gods
+3 Lolth, Spider Queen
+4 Wrenn and Seven
+1 Hive of the Eye Tyrant
+1 Woodland Chasm
+3 Lair of the Hydra
+4 Deathcap Glade
+4 Darkbore Pathway
+4 Tangled Florahedron
+5 Snow-Covered Forest
+6 Snow-Covered Swamp
+[Sideboard]
+1 Soul Shatter
+3 Go Blank
+3 Culling Ritual
+4 Ray of Enfeeblement
+4 Duress

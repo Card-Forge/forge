@@ -26,7 +26,13 @@ public class ConfigData {
     public String[] restrictedCards;
     public String[] restrictedEditions;
     public String[] allowedEditions;
+    public boolean vintageOnlyEditions = false;
     public String[] restrictedEvents;
     public String[] allowedEvents;
     public String[] allowedJumpstart;
+    public String defaultBasicLandSet = "JMP";
+    public boolean enableGeneticAI = true;
+    public String chaosDeckFormat;
+    public boolean usePriceListPrices = true;
+
 }

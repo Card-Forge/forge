@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Oreius
+Title=Oreius
+Icon=Oreius.jpg
+Difficulty=Very Hard
+Description=../Modern/New_Phyrexia/WPN_Qualifier_LegacyTurniers_vom_27.03.2012/S├╝├ƒ_Michael_-_Red_Deck_Wins_(Modern,_#29123).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Chandra's Spitfire
+4 Grim Lavamancer
+3 Keldon Marauders
+4 Mogg Fanatic
+2 Gut Shot
+4 Lightning Bolt
+4 Magma Jet
+4 Searing Blaze
+3 Browbeat
+4 Lava Spike
+4 Rift Bolt
+20 Mountain
+[Sideboard]
+3 Everlasting Torment
+2 Flame Jab
+4 Smash to Smithereens
+4 Volcanic Fallout

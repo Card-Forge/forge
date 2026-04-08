@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Odysseus
+Title=Odysseus
+Icon=Odysseus.jpg
+Difficulty=Very Hard
+Description=./Modern/Duskmourn_House_of_Horror/Freqing_-_Dimir_Murktide_(Modern,_#2245024).dck
+Deck Type=constructed
+
+[Main]
+3 Orcish Bowmasters
+2 Harbinger of the Seas
+4 Psychic Frog
+4 Abhorrent Oculus
+3 Murktide Regent
+2 Sink into Stupor
+2 Spell Snare
+4 Thought Scour
+4 Counterspell
+2 Force of Negation
+4 Fatal Push
+4 Consider
+4 Unearth
+2 Undercity Sewers
+2 Island
+1 Swamp
+4 Polluted Delta
+1 Scalding Tarn
+2 Flooded Strand
+2 Bloodstained Mire
+3 Watery Grave
+1 Otawara, Soaring City
+[Sideboard]
+2 Toxic Deluge
+4 Consign to Memory
+1 Harbinger of the Seas
+3 Thoughtseize
+1 Force of Negation
+2 Mystical Dispute
+2 Graveyard Trespasser

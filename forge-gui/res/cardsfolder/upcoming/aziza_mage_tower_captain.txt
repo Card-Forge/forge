@@ -1,0 +1,8 @@
+Name:Aziza, Mage Tower Captain
+ManaCost:R W
+Types:Legendary Creature Djinn Sorcerer
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ Whenever you cast an instant or sorcery spell, you may tap three untapped creatures you control. If you do, copy that spell. You may choose new targets for the copy.
+SVar:TrigCopy:AB$ CopySpellAbility | Cost$ tapXType<3/Creature> | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+DeckHints:Type$Instant|Sorcery
+Oracle:Whenever you cast an instant or sorcery spell, you may tap three untapped creatures you control. If you do, copy that spell. You may choose new targets for the copy.

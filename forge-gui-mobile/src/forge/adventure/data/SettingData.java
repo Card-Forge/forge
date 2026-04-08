@@ -8,7 +8,7 @@ package forge.adventure.data;
  */
 public class SettingData {
 
-    public int width;
+	public int width;
     public int height;
     public String plane;
     public boolean fullScreen;
@@ -27,4 +27,5 @@ public class SettingData {
     public boolean excludeAlchemyVariants;
     public boolean generateLDADecks;
     public boolean bindEquipmentLoadoutsToDecks;
+    public boolean drawChevronsToHiddenEnemiesInClearQuest;
 }

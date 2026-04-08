@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Anansi
+Title=Anansi
+Icon=Anansi.jpg
+Difficulty=Medium
+Description=./Standard/The_Lost_Caverns_of_Ixalan/TacoFarmer_-_Naya_Pia_(Standard,_#1979871).dck
+Deck Type=constructed
+
+[Main]
+4 Pia Nalaar, Consul of Revival
+4 Questing Druid
+4 Virtue of Loyalty
+4 Lightning Helix
+4 Get Lost
+4 Play with Fire
+1 Torch the Tower
+3 Reckless Impulse
+3 Wrenn's Resolve
+4 Quintorius Kand
+4 Cavern of Souls
+4 Restless Bivouac
+4 Battlefield Forge
+4 Sundown Pass
+1 Eiganjo, Seat of the Empire
+3 Mountain
+2 Plains
+1 Sokenzan, Crucible of Defiance
+2 Karplusan Forest
+[Sideboard]
+3 Destroy Evil
+4 End the Festivities
+4 Urabrask's Forge
+2 Lithomantic Barrage
+2 Unlicensed Hearse

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Pyro
+Title=Pyro
+Icon=Pyro.jpg
+Difficulty=Medium
+Description=./Standard/Marvels_Spider_Man/René_Hubrich_-_4c_Living_end_(Standard,_#2670320).dck
+Deck Type=constructed
+
+[Main]
+3 Steamcore Scholar
+4 Superior Spider-Man
+4 Overlord of the Balemurk
+3 Terror of the Peaks
+3 Ardyn, the Usurper
+4 Bringer of the Last Gift
+4 Bitter Triumph
+4 Cache Grab
+4 Dredger's Insight
+4 Awaken the Honored Dead
+4 Blazemire Verge
+2 Blooming Marsh
+3 Cavern of Souls
+4 Hedge Maze
+2 Multiversal Passage
+1 Raucous Theater
+1 Stomping Ground
+1 Undercity Sewers
+2 Underground Mortuary
+1 Watery Grave
+2 Willowrush Verge
+[Sideboard]
+2 Annul
+2 Stab
+2 Heritage Reclamation
+2 Spider-Punk
+3 Terror Tide
+2 Harvester of Misery
+2 Mister Negative

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Cave Troll
+Title=Cave Troll
+Icon=Cave Troll.jpg
+Difficulty=Very Hard
+Description=../Modern/Magic_Origins/States_San_Diego/Estevan_Lopez_-_Burn_(Modern,_#335598).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+1 Grim Lavamancer
+4 Monastery Mentor
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+2 Lightning Helix
+2 Searing Blaze
+2 Shard Volley
+2 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+4 Bloodstained Mire
+6 Mountain
+2 Sacred Foundry
+2 Stomping Ground
+2 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+2 Deflecting Palm
+4 Destructive Revelry
+2 Exquisite Firecraft
+3 Kor Firewalker
+2 Rending Volley
+2 Searing Blood

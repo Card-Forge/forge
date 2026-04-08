@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Cave Troll
+Title=Cave Troll
+Icon=Cave Troll.jpg
+Difficulty=Hard
+Description=../Modern/Journey_into_Nyx/PTQ_Khans_of_Tarkir_-_Springfield,_MO/Matt_Orr_-_Red_Deck_Wins_(Modern,_#85053).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+1 Grim Lavamancer
+4 Hellspark Elemental
+1 Flames of the Blood Hand
+4 Lightning Bolt
+4 Searing Blaze
+3 Shard Volley
+4 Skullcrack
+2 Thunderous Wrath
+2 Bump in the Night
+4 Lava Spike
+4 Rift Bolt
+3 Arid Mesa
+2 Blackcleave Cliffs
+4 Blood Crypt
+5 Mountain
+4 Scalding Tarn
+1 Stomping Ground
+[Sideboard]
+2 Blood Moon
+2 Combust
+1 Destructive Revelry
+2 Rain of Gore
+2 Rakdos Charm
+2 Shrine of Burning Rage
+4 Smash to Smithereens

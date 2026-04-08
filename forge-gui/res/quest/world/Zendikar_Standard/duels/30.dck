@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Tombstone
+Title=Tombstone
+Icon=Tombstone.jpg
+Difficulty=Easy
+Description=Zendikar/US_States_2009_-_Maine/Fai_Littman_-_Jund_(Standard,_#3267).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodbraid Elf
+3 Broodmate Dragon
+3 Great Sable Stag
+2 Siege-Gang Commander
+4 Sprouting Thrinax
+3 Bituminous Blast
+4 Lightning Bolt
+2 Terminate
+4 Blightning
+4 Maelstrom Pulse
+3 Rampant Growth
+3 Dragonskull Summit
+3 Forest
+2 Mountain
+1 Oran-Rief, the Vastwood
+4 Rootbound Crag
+4 Savage Lands
+4 Swamp
+3 Verdant Catacombs
+[Sideboard]
+3 Deathmark
+2 Duress
+4 Goblin Ruinblaster
+2 Jund Charm
+2 Malakir Bloodwitch
+1 Slave of Bolas
+1 Thought Hemorrhage

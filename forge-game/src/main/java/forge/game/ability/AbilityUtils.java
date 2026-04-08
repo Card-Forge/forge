@@ -37,11 +37,13 @@ import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
+import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -1828,18 +1830,13 @@ public class AbilityUtils {
                 }
 
                 if (sq[0].startsWith("TotalManaSpent ")) {
-                    final String[] k = sq[0].split(" ");
-                    int v = 0;
-                    if (sa.getRootAbility().getPayingMana() != null) {
-                        for (Mana m : sa.getRootAbility().getPayingMana()) {
-                            Card source = m.getSourceCard();
-                            if (source != null) {
-                                if (source.isValid(k[1].split(","), player, c, sa)) {
-                                    v += 1;
-                                }
-                            }
-                        }
+                    if (sa.getRootAbility().getPayingMana() == null) {
+                        return doXMath(0, expr, c, ctb);
                     }
+                    final String[] k = sq[0].split(" ");
+                    int v = (int) sa.getRootAbility().getPayingMana().stream().map(Mana::getSourceCard)
+                            .filter(Predicate.<Card>not(Objects::isNull).and(CardPredicates.restriction(k[1].split(","), player, c, ctb)))
+                            .count();
                     return doXMath(v, expr, c, ctb);
                 }
 
@@ -1877,17 +1874,12 @@ public class AbilityUtils {
             }
             if (sq[0].startsWith("CastTotalManaSpent ")) {
                 final String[] k = sq[0].split(" ");
-                int v = 0;
-                if (c.getCastSA() != null) {
-                    for (Mana m : c.getCastSA().getPayingMana()) {
-                        Card source = m.getSourceCard();
-                        if (source != null) {
-                            if (source.isValid(k[1].split(","), player, c, ctb)) {
-                                v += 1;
-                            }
-                        }
-                    }
+                if (c.getCastSA() == null) {
+                    return doXMath(0, expr, c, ctb);
                 }
+                int v = (int) c.getCastSA().getPayingMana().stream().map(Mana::getSourceCard)
+                        .filter(Predicate.<Card>not(Objects::isNull).and(CardPredicates.restriction(k[1].split(","), player, c, ctb)))
+                        .count();
                 return doXMath(v, expr, c, ctb);
             }
 
@@ -2945,6 +2937,37 @@ public class AbilityUtils {
                 result.addAll(GameActionUtil.getAlternativeCosts(sa, controller, true));
             }
         }
+    }
+
+    public static Range<Integer> getAnnouncementBounds(SpellAbility ability, String announce) {
+        final Card host = ability.getHostCard();
+        int max = Integer.MAX_VALUE;
+        int min = 0;
+        Cost cost = ability.getPayCosts();
+
+        if ("X".equals(announce)) {
+            final boolean abXMin = ability.hasParam("XMin");
+            if (abXMin) min = Integer.parseInt(ability.getParam("XMin"));
+            if (ability.hasParam("XMax")) {
+                max = Math.min(max, AbilityUtils.calculateAmount(host, ability.getParam("XMax"), ability));
+            }
+            if (cost != null && cost.hasManaCost() && !abXMin) {
+                min = cost.getCostMana().getXMin();
+            }
+        }
+
+        if (ability.hasParam("AnnounceMax")) {
+            max = Math.min(max, AbilityUtils.calculateAmount(host, ability.getParam("AnnounceMax"), ability));
+        }
+
+        if (ability.usesTargeting()) {
+            // if announce is used as min targets, check what the max possible number would be
+            if (announce.equals(ability.getTargetRestrictions().getMinTargets())) {
+                max = Math.min(max, CardUtil.getValidCardsToTarget(ability).size());
+            }
+        }
+
+        return Range.of(min, max);
     }
 
     public static final String applyAbilityTextChangeEffects(final String def, final CardTraitBase ability) {

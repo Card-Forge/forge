@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Kane
+Title=Kane
+Icon=Kane.jpg
+Difficulty=Hard
+Description=../Modern/Battle_for_Zendikar/SCG_Invitational_Qualifier_Granite_Falls/James_Abernethy_-_G-W_Hexproof_(Modern,_#379063).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Dryad Arbor
+4 Gladecover Scout
+4 Silhana Ledgewalker
+4 Slippery Bogle
+3 Mutagenic Growth
+2 Path to Exile
+4 Canopy Cover
+3 Daybreak Coronet
+4 Ethereal Armor
+4 Rancor
+4 Spider Umbra
+3 Unflinching Courage
+4 Canopy Vista
+3 Forest
+2 Plains
+3 Sunpetal Grove
+4 Temple Garden
+4 Windswept Heath
+[Sideboard]
+2 Dromoka's Command
+2 Erase
+3 Ray of Revelation
+2 Stasis Snare
+2 Suppression Field
+2 Vines of Vastwood

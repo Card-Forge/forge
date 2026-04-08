@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=The Very Hungry Caterpillar
+Title=The Very Hungry Caterpillar
+Icon=The Very Hungry Caterpillar.jpg
+Difficulty=Very Hard
+Description=../Modern/Return_to_Ravnica/GPT_-_San_Pietro_all┬┤olmo_(MI)/D┬┤angelo_Fabio_-_Mono_Black_(Modern,_#39641).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodghast
+4 Diregraf Ghoul
+4 Geralf's Messenger
+4 Gravecrawler
+4 Lotleth Troll
+3 Vengevine
+4 Abrupt Decay
+2 Darkblast
+4 Inquisition of Kozilek
+4 Smallpox
+2 Thoughtseize
+1 Marsh Flats
+4 Overgrown Tomb
+8 Swamp
+4 Verdant Catacombs
+4 Woodland Cemetery
+[Sideboard]
+4 Fulminator Mage
+2 Infest
+1 Nihil Spellbomb
+1 Seal of Primordium
+2 Surgical Extraction
+2 Torpor Orb
+2 Victim of Night

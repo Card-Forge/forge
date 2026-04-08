@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="133">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="135">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -70,6 +70,8 @@ She stumbles back, and lands in the waters below with a splash. You consider goi
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Quest for Ula's Temple|WWK&quot;, &quot;Temple of the False God|C17&quot;, &quot;Reservoir Kraken&quot;, &quot;Reef Worm|MH3&quot;, &quot;Ominous Seas|IKO&quot;
  ]}</property>
     <property name="enemy" value="Kiora"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="50"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
@@ -127,6 +129,8 @@ She stumbles back, and lands in the waters below with a splash. You consider goi
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Silvergill Douser&quot;, &quot;Svyelunite Priest&quot;, &quot;Svyelunite Temple&quot;, &quot;Merrow Commerce&quot;
  ]}</property>
     <property name="enemy" value="Svyelun"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
@@ -223,5 +227,38 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
    </properties>
   </object>
   <object id="132" template="../../../../common/maps/obj/gold.tx" x="795.333" y="570"/>
+  <object id="133" template="../../../../common/maps/obj/enemy.tx" x="156" y="101.333">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Silvergill Douser&quot;, &quot;Svyelunite Temple&quot;
+ ]}</property>
+    <property name="enemy" value="Svyelun"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="134" template="../../../../common/maps/obj/enemy.tx" x="809.333" y="148.667" width="16" height="16">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;Your final strike sends a spray of blood into the now-churning waters all around, dying them red for a moment before the tide washes it away.
+
+'To have stolen from gods, tamed sea serpents the size of castles... and to fall here...' 
+
+She stumbles back, and lands in the waters below with a splash. You consider going in to make sure the job is done, but you're confident her injuries were lethal.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Quest for Ula's Temple|WWK&quot;, &quot;Temple of the False God|C17&quot;, &quot;Reef Worm|MH3&quot;, &quot;Ominous Seas|IKO&quot;
+ ]}</property>
+    <property name="enemy" value="Kiora"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

@@ -27,6 +27,24 @@ Jade
 BlueDiamond
   xy: 112, 640
   size: 16, 16
+OutlawsHat
+  xy: 32, 320
+  size: 16, 16
+ManaforceMace
+  xy: 304, 416
+  size: 16, 16
+Shadowspear
+  xy: 256, 560
+  size: 16, 16
+HeirloomBlade
+  xy: 192, 656
+  size: 16, 16
+HengestriderBoots
+  xy: 64, 96
+  size: 16, 16
+TomeofBlight
+  xy: 32, 720
+  size: 16, 16
 BowlofAncientBlood
   xy: 256, 960
   size: 16, 16
@@ -46,7 +64,7 @@ WardingStatueArms
   xy: 48, 576
   size: 16, 16
 MaptotheHostages
-  xy: 224, 848
+  xy: 208, 848
   size: 16, 16
 TheLuckiestClover
   xy: 112, 608
@@ -94,7 +112,7 @@ GenerousRing
   xy: 128, 912
   size: 16, 16
 GenerousIngot
-  xy: 224, 944
+  xy: 288, 944
   size: 16, 16
 SpikedRipsaw
   xy: 304, 736
@@ -114,6 +132,9 @@ DireFlail
 ChitinousClub
   xy: 304, 400
   size: 16, 16
+WinterBoots
+  xy: 144, 176
+  size: 16, 16
 PureSoul
   xy: 176, 800
   size: 16, 16
@@ -128,6 +149,33 @@ NobleSoul
   size: 16, 16
 RoyalSoul
   xy: 256, 864
+  size: 16, 16
+ColossalDreadmace
+  xy: 272, 384
+  size: 16, 16
+BattleCryBoots
+  xy: 0, 144
+  size: 16, 16
+TokenofBlades
+  xy: 224, 736
+  size: 16, 16
+TokenofDecay
+  xy: 224, 944
+  size: 16, 16
+TokenofInsight
+  xy: 16, 608
+  size: 16, 16
+TokenofLanding
+  xy: 16, 592
+  size: 16, 16
+TokenofShielding
+  xy: 192, 128
+  size: 16, 16
+TokenofSpirit
+  xy: 128, 528
+  size: 16, 16
+TokenofSoaringSpirit
+  xy: 144, 512
   size: 16, 16
 MedalOutnumbered
   xy: 32, 608
@@ -762,6 +810,15 @@ EnormousEnergyBlade
 AngelicArmaments
   xy: 272, 368
   size: 16, 16
+SpidersilkHelm
+  xy: 128, 400
+  size: 16, 16
+Liliana'sVeil
+  xy: 144, 320
+  size: 16, 16
+Urza'sRobe
+  xy: 384, 16
+  size: 16, 16
 Brawler'sCestus
   xy: 288, 320
   size: 16, 16
@@ -856,7 +913,7 @@ GoldBlessing
   xy: 256, 832
   size: 16, 16
 TruthButcher'sArmor
-  xy: 0, 304
+  xy: 304, 0
   size: 16, 16
 FlamingArmor
   xy: 160, 16
@@ -970,7 +1027,7 @@ Vitu-GhaziCloak
   xy: 384, 0
   size: 16, 16
 PinecrestCloak
-  xy: 384, 16
+  xy: 336, 32
   size: 16, 16
 ReliquaryRobes
   xy: 400, 0

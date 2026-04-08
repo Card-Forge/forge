@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Gix
+Title=Gix
+Icon=Gix.jpg
+Difficulty=Very Hard
+Description=./Modern/Zendikar_Rising/Burke_Horst_-_Boros_Prison_(Modern,_#1089281).dck
+Deck Type=constructed
+
+[Main]
+2 Magus of the Tabernacle
+2 Goblin Dark-Dwellers
+2 Valakut Awakening
+2 Lightning Bolt
+4 Mana Tithe
+3 Oust
+4 Boom // Bust
+4 Molten Rain
+4 Stone Rain
+4 Pillage
+3 Suppression Field
+3 Ghostly Prison
+2 Battlefield Forge
+2 Mountain
+3 Cascading Cataracts
+4 Flagstones of Trokair
+4 Inspiring Vantage
+4 Sunbaked Canyon
+4 Sacred Foundry
+[Sideboard]
+1 Wrath of God
+1 Gemstone Caverns
+1 Ghostly Prison
+1 Suppression Field
+2 Lightning Bolt
+2 Trinisphere
+2 Defense Grid
+2 Boil
+3 Rest in Peace

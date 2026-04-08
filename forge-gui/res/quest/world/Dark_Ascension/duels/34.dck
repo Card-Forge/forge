@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Snow White
+Title=Snow White
+Icon=Snow White.jpg
+Difficulty=Easy
+Description=Dark_Ascension/Cool_Stuff_Games_-_FNM/Kyle_Greaves_-_Myrfolks_(Standard,_#28743).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blighted Agent
+4 Glistener Elf
+4 Ichorclaw Myr
+4 Plague Myr
+4 Livewire Lash
+2 Apostle's Blessing
+3 Mirran Mettle
+4 Mutagenic Growth
+4 Titanic Growth
+2 Unnatural Predation
+2 Artful Dodge
+9 Forest
+4 Hinterland Harbor
+4 Inkmoth Nexus
+6 Island
+[Sideboard]
+1 Blightwidow
+1 Corrosive Gale
+1 Pistus Strike
+2 Putrefax
+4 Ranger's Guile
+2 Unsummon
+4 Viridian Corrupter

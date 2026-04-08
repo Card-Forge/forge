@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Tenga
+Title=Tenga
+Icon=Tenga.jpg
+Difficulty=Easy
+Description=./Standard/War_of_the_Spark/Alex_Stok_-_Esper_Hero_(Standard,_#801191).dck
+Deck Type=constructed
+
+[Main]
+4 Hero of Precinct One
+3 Elite Guardmage
+4 Thief of Sanity
+2 Hostage Taker
+3 Tyrant's Scorn
+2 Despark
+4 Thought Erasure
+1 The Elderspell
+2 Oath of Kaya
+4 Teferi, Hero of Dominaria
+2 Ugin, the Ineffable
+3 Teferi, Time Raveler
+4 Glacial Fortress
+4 Godless Shrine
+4 Hallowed Fountain
+4 Isolated Chapel
+4 Watery Grave
+4 Drowned Catacomb
+1 Swamp
+1 Island
+[Sideboard]
+2 Dovin's Veto
+2 Narset, Parter of Veils
+2 Duress
+2 Enter the God-Eternals
+2 Deputy of Detention
+2 Command the Dreadhorde
+1 Hostage Taker
+2 The Elderspell

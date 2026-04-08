@@ -5,6 +5,7 @@ import forge.adventure.data.AdventureEventData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.deck.Deck;
+import forge.deck.DeckFormat;
 import forge.item.BoosterPack;
 import forge.item.PaperCard;
 import forge.item.SealedTemplate;
@@ -34,6 +35,21 @@ public class AdventureEventController implements Serializable {
             return Arrays.stream(EventFormat.values())
                     .filter(e -> e.name().equalsIgnoreCase(name))
                     .findFirst().orElse(null);
+        }
+
+        @Override
+        public String toString() {
+            return switch (this) {
+                case Sealed -> "Sealed Deck";
+                case Jumpstart -> "Jumpstart";
+                case Draft -> "Draft";
+                case Constructed -> "Constructed";
+                default -> name();
+            };
+        }
+
+        public DeckFormat getDeckFormat() {
+            return DeckFormat.Limited;
         }
     }
 
@@ -87,7 +103,12 @@ public class AdventureEventController implements Serializable {
                 random.nextInt(10) <= 2) {
             e = new AdventureEventData(eventSeed, EventFormat.Jumpstart);
         } else {
-            e = new AdventureEventData(eventSeed, EventFormat.Draft);
+            if (random.nextInt(4) == 3) {
+                // Experimental: 1 out of 4 chance for it to be a Sealed Deck event
+                e = new AdventureEventData(eventSeed, EventFormat.Sealed);
+            } else {
+                e = new AdventureEventData(eventSeed, EventFormat.Draft);
+            }
         }
 
         if (e.cardBlock == null) {

@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=Legolas
+Title=Legolas
+Icon=Legolas.jpg
+Difficulty=Easy
+Description=./Standard/March_of_the_Machine/27TrueRunes_-_Mono_Black_(Standard,_#1631241).dck
+Deck Type=constructed
+
+[Main]
+4 Life of Toshiro Umezawa
+4 Graveyard Trespasser
+4 Phyrexian Obliterator
+4 Phyrexian Fleshgorger
+4 Cut Down
+4 Go for the Throat
+2 Parasitic Grasp
+3 Gix's Command
+4 Invoke Despair
+3 Invasion of Innistrad
+23 Swamp
+1 Takenuma, Abandoned Mire
+[Sideboard]

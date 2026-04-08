@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Doc Holiday
+Title=Doc Holiday
+Icon=Doc Holiday.jpg
+Difficulty=Medium
+Description=./Standard/Ravnica_Allegiance/AlfredoTorres_-_Gruul_Aggro_(Standard,_#790176).dck
+Deck Type=constructed
+
+[Main]
+3 Dire Fleet Daredevil
+4 Goblin Chainwhirler
+4 Growth-Chamber Guardian
+4 Gruul Spellbreaker
+4 Kraul Harpooner
+4 Rekindling Phoenix
+3 Skarrgan Hellkite
+2 Collision // Colossus
+4 Lightning Strike
+2 Shock
+2 Lava Coil
+1 Forest
+2 Gruul Guildgate
+9 Mountain
+4 Rootbound Crag
+4 Stomping Ground
+4 Unclaimed Territory
+[Sideboard]
+2 Lava Coil
+4 Cindervines
+1 Domri, Chaos Bringer
+2 Legion Warboss
+2 Shivan Fire
+2 Status // Statue
+2 Vivien Reid

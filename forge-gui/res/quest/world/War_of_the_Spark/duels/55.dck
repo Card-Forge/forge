@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Hermione Granger
+Title=Hermione Granger
+Icon=Hermione Granger.jpg
+Difficulty=Hard
+Description=./Modern/War_of_the_Spark/thepensword_-_Blue_Moon_(Modern,_#801551).dck
+Deck Type=constructed
+
+[Main]
+4 Snapcaster Mage
+4 Thing in the Ice
+1 Vendilion Clique
+1 Abrade
+1 Burst Lightning
+3 Cryptic Command
+4 Lightning Bolt
+4 Opt
+4 Remand
+1 Spell Pierce
+2 Archmage's Charm
+2 Magmatic Sinkhole
+4 Serum Visions
+2 Blood Moon
+2 Narset, Parter of Veils
+3 Flooded Strand
+7 Island
+1 Mountain
+4 Scalding Tarn
+1 Spirebluff Canal
+2 Steam Vents
+2 Sulfur Falls
+1 Prismatic Vista
+[Sideboard]
+1 Abrade
+2 Anger of the Gods
+1 Ashiok, Dream Render
+1 Ceremonious Rejection
+2 Dispel
+1 Engineered Explosives
+1 Flame Slash
+2 Force of Negation
+2 Relic of Progenitus
+1 Spell Snare
+1 Surgical Extraction

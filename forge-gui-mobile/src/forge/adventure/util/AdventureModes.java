@@ -9,7 +9,9 @@ public enum AdventureModes {
     Chaos("[GOLD]"+Forge.getLocalizer().getMessage("lblChaos")),
     Pile(Forge.getLocalizer().getMessage("lblPile")),
     Custom(Forge.getLocalizer().getMessage("lblCustom")),
-    Commander(Forge.getLocalizer().getMessage("lblCommander"));
+    Commander(Forge.getLocalizer().getMessage("lblCommander")),
+    Precon(Forge.getLocalizer().getMessageorUseDefault("lblPrecon", "Precon")),
+    CommanderPrecon(Forge.getLocalizer().getMessageorUseDefault("lblCommanderPrecon", "Commander Precon"));
 
     private final String name;
     private String selectionName;
@@ -37,5 +39,18 @@ public enum AdventureModes {
 
     public Array<String> getModes() {
         return modes;
+    }
+
+    public boolean isCommanderLike() {
+        boolean isChaosCommander = this == Chaos && "Commander".equalsIgnoreCase(Config.instance().getConfigData().chaosDeckFormat);
+        return this == Commander || this == CommanderPrecon || isChaosCommander;
+    }
+
+    public boolean usesFolderDeckPicker() {
+        return this == Precon || this == CommanderPrecon;
+    }
+
+    public boolean usesStarterEditionSelector() {
+        return this == Standard || usesFolderDeckPicker();
     }
 }

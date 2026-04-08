@@ -55,6 +55,8 @@ public class NewGameScene extends MenuScene {
     private final ImageButton modeHelp;
     private DialogData modeSummary;
     private final Random rand = new Random();
+    private String originalEditionLabelText;
+    private Array<String> originalEditionNames;
 
     private final Array<AdventureModes> modes = new Array<>();
 
@@ -68,6 +70,7 @@ public class NewGameScene extends MenuScene {
         modeHelp = ui.findActor("modeHelp");
         colorLabel = ui.findActor("colorIdL");
         String colorIdLabel = colorLabel.storedText;
+        String deckLabel = "[BLACK]" + Forge.getLocalizer().getMessage("lblDeck") + ":";
         custom = new Array<>();
         colorId = ui.findActor("colorId");
         String[] colorSet = Config.instance().colorIds();
@@ -108,31 +111,40 @@ public class NewGameScene extends MenuScene {
 
         starterEdition = ui.findActor("starterEdition");
         starterEditionLabel = ui.findActor("starterEditionL");
+        originalEditionLabelText = starterEditionLabel.storedText;
         String[] starterEditions = Config.instance().starterEditions();
         String[] starterEditionNames = Config.instance().starterEditionNames();
         editionIds = new CardEdition[starterEditions.length];
         for (int i = 0; i < editionIds.length; i++)
             editionIds[i] = FModel.getMagicDb().getEditions().get(starterEditions[i]);
-        Array<String> editionNames = new Array<>(editionIds.length);
+        originalEditionNames = new Array<>(editionIds.length);
         for (String editionName : starterEditionNames)
-            editionNames.add(UIActor.localize(editionName));
-        starterEdition.setTextList(editionNames);
+            originalEditionNames.add(UIActor.localize(editionName));
+        starterEdition.setTextList(originalEditionNames);
+
+        // Precon mode: deck names in colorId, set filter in starterEdition
+        if (Config.instance().hasPreconDecks()) {
+            modes.add(AdventureModes.Precon);
+            AdventureModes.Precon.setSelectionName(deckLabel);
+            AdventureModes.Precon.setModes(Config.instance().filterPreconDecks(0));
+        }
+
+        if (Config.instance().hasCommanderPreconDecks()) {
+            modes.add(AdventureModes.CommanderPrecon);
+            AdventureModes.CommanderPrecon.setSelectionName(deckLabel);
+            AdventureModes.CommanderPrecon.setModes(Config.instance().filterCommanderPreconDecks(0));
+        }
 
         modes.add(AdventureModes.Chaos);
-        AdventureModes.Chaos.setSelectionName("[BLACK]" + Forge.getLocalizer().getMessage("lblDeck") + ":");
+        AdventureModes.Chaos.setSelectionName(deckLabel);
         AdventureModes.Chaos.setModes(new Array<>(new String[]{Forge.getLocalizer().getMessage("lblRandomDeck")}));
         for (DeckProxy deckProxy : DeckProxy.getAllCustomStarterDecks())
             custom.add(deckProxy.getName());
         if (!custom.isEmpty()) {
             modes.add(AdventureModes.Custom);
-            AdventureModes.Custom.setSelectionName("[BLACK]" + Forge.getLocalizer().getMessage("lblDeck") + ":");
+            AdventureModes.Custom.setSelectionName(deckLabel);
             AdventureModes.Custom.setModes(custom);
         }
-
-        // Commander game mode in selection screen
-        modes.add(AdventureModes.Commander);
-        AdventureModes.Commander.setSelectionName(colorIdLabel);
-        AdventureModes.Commander.setModes(colorNames);
 
         String[] modeNames = new String[modes.size];
         int constructedIndex = -1;
@@ -148,8 +160,7 @@ public class NewGameScene extends MenuScene {
         mode.setCurrentIndex(constructedIndex != -1 ? constructedIndex : 0);
 
         AdventureModes initialMode = modes.get(mode.getCurrentIndex());
-        starterEdition.setVisible(initialMode == AdventureModes.Standard);
-        starterEditionLabel.setVisible(initialMode == AdventureModes.Standard);
+        updateModeSelectionState(initialMode);
 
         gender.setTextList(new String[]{Forge.getLocalizer().getMessage("lblMale") + "[%120][CYAN] \u2642",
                 Forge.getLocalizer().getMessage("lblFemale") + "[%120][MAGENTA] \u2640"});
@@ -165,11 +176,18 @@ public class NewGameScene extends MenuScene {
         mode.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
+                updateModeSelectionState(modes.get(mode.getCurrentIndex()));
+            }
+        });
+        starterEdition.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
                 AdventureModes smode = modes.get(mode.getCurrentIndex());
-                colorLabel.setText(smode.getSelectionName());
-                colorId.setTextList(smode.getModes());
-                starterEdition.setVisible(smode == AdventureModes.Standard);
-                starterEditionLabel.setVisible(smode == AdventureModes.Standard);
+                if (smode == AdventureModes.Precon) {
+                    colorId.setTextList(Config.instance().filterPreconDecks(starterEdition.getCurrentIndex()));
+                } else if (smode == AdventureModes.CommanderPrecon) {
+                    colorId.setTextList(Config.instance().filterCommanderPreconDecks(starterEdition.getCurrentIndex()));
+                }
             }
         });
         race = ui.findActor("race");
@@ -259,6 +277,50 @@ public class NewGameScene extends MenuScene {
         selectedName.setText(NameGenerator.getRandomName(val, "Any", ""));
     }
 
+    private void updateModeSelectionState(AdventureModes selectedMode) {
+        colorLabel.setText(selectedMode.getSelectionName());
+        boolean showEdition = selectedMode.usesStarterEditionSelector();
+        starterEdition.setVisible(showEdition);
+        starterEditionLabel.setVisible(showEdition);
+
+        if (selectedMode == AdventureModes.Precon) {
+            starterEdition.setTextList(Config.instance().getPreconSetNames());
+            starterEditionLabel.setText("[BLACK]" + Forge.getLocalizer().getMessageorUseDefault("lblEdition", "Edition") + ":");
+            colorId.setTextList(Config.instance().filterPreconDecks(starterEdition.getCurrentIndex()));
+        } else if (selectedMode == AdventureModes.CommanderPrecon) {
+            starterEdition.setTextList(Config.instance().getCommanderPreconSetNames());
+            starterEditionLabel.setText("[BLACK]" + Forge.getLocalizer().getMessageorUseDefault("lblEdition", "Edition") + ":");
+            colorId.setTextList(Config.instance().filterCommanderPreconDecks(starterEdition.getCurrentIndex()));
+        } else if (selectedMode == AdventureModes.Standard) {
+            starterEditionLabel.setText(originalEditionLabelText);
+            starterEdition.setTextList(originalEditionNames);
+            colorId.setTextList(selectedMode.getModes());
+        } else {
+            colorId.setTextList(selectedMode.getModes());
+        }
+    }
+
+    private ColorSet getStartingColor() {
+        AdventureModes currentMode = modes.get(mode.getCurrentIndex());
+        if (currentMode.usesFolderDeckPicker() || currentMode == AdventureModes.Chaos) {
+            return ColorSet.fromNames("W".toCharArray());
+        }
+        if (currentMode == AdventureModes.Custom) {
+            return colorIds[0];
+        }
+        int idx = colorId.getCurrentIndex();
+        return colorIds[idx < colorIds.length ? idx : 0];
+    }
+
+    private CardEdition getStartingEdition() {
+        AdventureModes currentMode = modes.get(mode.getCurrentIndex());
+        if (currentMode == AdventureModes.Standard && editionIds.length > 0) {
+            int idx = starterEdition.getCurrentIndex();
+            return editionIds[idx < editionIds.length ? idx : 0];
+        }
+        return editionIds.length > 0 ? editionIds[0] : null;
+    }
+
     boolean started = false;
 
     public boolean start() {
@@ -275,10 +337,10 @@ public class NewGameScene extends MenuScene {
                     gender.getCurrentIndex() == 0,
                     race.getCurrentIndex(),
                     avatarIndex,
-                    colorIds[custom.isEmpty() || !AdventureModes.Custom.equals(modes.get(mode.getCurrentIndex())) ? colorId.getCurrentIndex() : 0],
+                    getStartingColor(),
                     Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],
                     modes.get(mode.getCurrentIndex()), colorId.getCurrentIndex(),
-                    editionIds[starterEdition.getCurrentIndex()], 0);//maybe replace with enum
+                    getStartingEdition(), 0);
             GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
             SoundSystem.instance.changeBackgroundTrack();
             WorldStage.getInstance().enterSpawnPOI();
@@ -323,10 +385,10 @@ public class NewGameScene extends MenuScene {
                     gender.getCurrentIndex() == 0,
                     race.getCurrentIndex(),
                     avatarIndex,
-                    colorIds[colorId.getCurrentIndex()],
+                    getStartingColor(),
                     Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],
                     modes.get(mode.getCurrentIndex()), colorId.getCurrentIndex(),
-                    editionIds[starterEdition.getCurrentIndex()], 0);
+                    getStartingEdition(), 0);
             GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
             Forge.switchScene(GameScene.instance());
         }
@@ -337,6 +399,7 @@ public class NewGameScene extends MenuScene {
 
     private void showDifficultyHelp() {
         DifficultyData selectedDifficulty = Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()];
+        boolean enableGeneticAI = Config.instance().getConfigData().enableGeneticAI;
 
         difficultySummary = new DialogData();
         difficultySummary.name = "Summary";
@@ -348,7 +411,11 @@ public class NewGameScene extends MenuScene {
                 difficultySummary.text = String.format("Difficulty: %s\nHow Adventure Mode is intended to be played.\nStarter decks will include a second color.\nStarting equipment: Leather Boots", selectedDifficulty.name);
                 break;
             case "Hard":
-                difficultySummary.text = String.format("Difficulty: %s\nFor players who want a challenge.\nSome enemies will use genetic AI decks.\nStarter decks will include 2-3 colors.\nStarting equipment: None", selectedDifficulty.name);
+                if (enableGeneticAI) {
+                    difficultySummary.text = String.format("Difficulty: %s\nFor players who want a challenge.\nSome enemies will use genetic AI decks.\nStarter decks will include 2-3 colors.\nStarting equipment: None", selectedDifficulty.name);
+                } else {
+                    difficultySummary.text = String.format("Difficulty: %s\nFor players who want a challenge.\nStarter decks will include 2-3 colors.\nStarting equipment: None", selectedDifficulty.name);
+                }
                 break;
             case "Insane":
                 difficultySummary.text = String.format("Difficulty: %s\nFor players who don't want to like the game.\nIdentical to Hard difficulty, but with even less forgiving and rewarding results.\nStarter decks will include 2-3 colors.\nStarting equipment: None", selectedDifficulty.name);
@@ -391,6 +458,7 @@ public class NewGameScene extends MenuScene {
 
         AdventureModes selectedMode = modes.get(mode.getCurrentIndex());
         DifficultyData selectedDifficulty = Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()];
+        boolean enableGeneticAI = Config.instance().getConfigData().enableGeneticAI;
 
         modeSummary = new DialogData();
         modeSummary.name = "Summary";
@@ -463,13 +531,23 @@ public class NewGameScene extends MenuScene {
                 summaryText.append("Mode: Chaos\n\nYou (and all enemies) will receive a random preconstructed deck.\n\nWarning: This will make encounter difficulty vary wildly from the developers' intent");
                 break;
             case Custom:
-                summaryText.append("Mode: Custom\n\nChoose your own preconstructed deck. Enemies can receive a random genetic AI deck (difficult).\n\nWarning: This will make encounter difficulty vary wildly from the developers' intent");
+                if (enableGeneticAI) {
+                    summaryText.append("Mode: Custom\n\nChoose your own preconstructed deck. Enemies can receive a random genetic AI deck (difficult).\n\nWarning: This will make encounter difficulty vary wildly from the developers' intent");
+                } else {
+                    summaryText.append("Mode: Custom\n\nChoose your own preconstructed deck.");
+                }
+                break;
+            case Precon:
+                summaryText.append("Mode: Precon\n\nYou will receive a specific preconstructed deck. You can choose a random or a specific preconstructed deck from an edition of your choice.\n\n");
                 break;
             case Commander:
                 summaryText.append("Mode: Commander\n\nYou will be given a preconstructed commander deck based on the chosen color theme to start the playthrough.\n\nGood luck on your quest of creating a coherent deck that can win consistently and defeat the bosses.");
                 break;
+            case CommanderPrecon:
+                summaryText.append("Mode: Commander Precon\n\nChoose a named commander preconstructed deck to start the playthrough.\n\nThis uses Commander deckbuilding and game rules, but lets you pick from the curated commander precon folder.");
+                break;
             default:
-                summaryText.append("No summary available for your this game mode.");
+                summaryText.append("No summary available for this game mode.");
                 break;
         }
 

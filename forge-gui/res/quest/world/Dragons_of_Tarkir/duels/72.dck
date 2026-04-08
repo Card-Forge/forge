@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Cipher
+Title=Cipher
+Icon=Cipher.jpg
+Difficulty=Hard
+Description=../Modern/Dragons_of_Tarkir/Modern_Daily_#8348860/ChaoticFoundation_-_Boros_(Modern,_#254715).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+4 Monastery Swiftspear
+4 Vexing Devil
+4 Lightning Bolt
+4 Magma Jet
+4 Searing Blaze
+4 Shard Volley
+4 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+20 Mountain
+[Sideboard]
+2 Dragon's Claw
+2 Pyroclasm
+3 Relic of Progenitus
+2 Rending Volley
+3 Smash to Smithereens
+3 Wear // Tear

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Ododua
+Title=Ododua
+Icon=Ododua.jpg
+Difficulty=Medium
+Description=./Standard/Duskmourn_House_of_Horror/Erratacorrige_-_Boros_Forge_(Standard,_#2223611).dck
+Deck Type=constructed
+
+[Main]
+2 Overlord of the Mistmoors
+2 Dusk Rose Reliquary
+4 Urabrask's Forge
+4 Carrot Cake
+4 Torch the Tower
+4 Lightning Helix
+3 Get Lost
+2 Virtue of Loyalty
+4 Sunfall
+2 High Noon
+4 Caretaker's Talent
+1 Mirrex
+2 Mountain
+3 Battlefield Forge
+3 Inspiring Vantage
+4 Elegant Parlor
+4 Plains
+4 Fountainport
+4 Sunken Citadel
+[Sideboard]
+1 Archangel Elspeth
+3 Rest in Peace
+2 Loran of the Third Path
+1 Split Up
+1 Serra Paragon
+1 Elesh Norn, Mother of Machines
+2 Brotherhood's End
+2 Exorcise
+2 High Noon

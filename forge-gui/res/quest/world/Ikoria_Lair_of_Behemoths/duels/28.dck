@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Saladin
+Title=Saladin
+Icon=Saladin.jpg
+Difficulty=Medium
+Description=./Standard/Ikoria_Lair_of_Behemoths/Aaron_Shamus_-_Mono-G_Aggro_(Standard,_#991010).dck
+Deck Type=constructed
+
+[Main]
+3 Syr Faren, the Hengehammer
+3 Gemrazer
+3 Questing Beast
+3 Yorvo, Lord of Garenbrig
+4 Paradise Druid
+4 Stonecoil Serpent
+4 Pelt Collector
+4 Barkhide Troll
+1 The Ozolith
+1 The Great Henge
+3 The First Iroan Games
+2 Samut, Tyrant Smasher
+2 Vivien, Arkbow Ranger
+3 Castle Garenbrig
+4 Stomping Ground
+16 Forest
+[Sideboard]
+1 The Great Henge
+1 Klothys, God of Destiny
+1 Shadowspear
+1 Gemrazer
+2 Voracious Hydra
+3 Cindervines
+3 Thrash // Threat
+3 Shifting Ceratops

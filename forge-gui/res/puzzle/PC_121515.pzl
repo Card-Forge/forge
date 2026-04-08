@@ -4,7 +4,7 @@ Name:Perplexing Chimera (GatheringMagic.com) 121515 - Lava's Labors Lost
 URL:http://www.gatheringmagic.com/seanuy-121515-lavas-labors-lost/
 Goal:Win
 Turns:2
-Difficulty:Hard
+Difficulty:Rare
 Description: Survive and win on your next turn.
 [state]
 ActivePlayer=AI

@@ -59,7 +59,10 @@ public class DeckSerializer {
             String sb = serializeDraftNotes(d.getDraftNotes());
             out.add(TextUtil.concatNoSpace(DeckFileHeader.DRAFT_NOTES, "=", sb));
         }
-    
+        if (!d.getKeyCards().isEmpty()) {
+            out.add(TextUtil.concatNoSpace(DeckFileHeader.KEY_CARDS, "=", StringUtils.join(d.getKeyCards(), ";")));
+        }
+
         for(Entry<DeckSection, CardPool> s : d) {
             if(s.getValue().isEmpty())
                 continue;
@@ -100,6 +103,9 @@ public class DeckSerializer {
         d.setAiHints(dh.getAiHints());
         d.getTags().addAll(dh.getTags());
         d.setDraftNotes(dh.getDraftNotes());
+        for (String keyCard : dh.getKeyCards()) {
+            d.addKeyCard(keyCard);
+        }
         d.setDeferredSections(sections);
         return d;
     }

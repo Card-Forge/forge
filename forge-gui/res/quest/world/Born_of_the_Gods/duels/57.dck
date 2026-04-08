@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Chief_Wiggum
+Title=Chief_Wiggum
+Icon=Chief_Wiggum.jpg
+Difficulty=Hard
+Description=../Modern/Born_of_the_Gods/TLR_-_Torneo_Finale_di_Napoles/Maurizio_Rossi_-_Zoo_(Modern,_#67126).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Brimaz, King of Oreskos
+2 Experiment One
+4 Ghor-Clan Rampager
+4 Goblin Guide
+1 Hero of Bladehold
+3 Hero of Oxid Ridge
+3 Kird Ape
+4 Tarmogoyf
+4 Wild Nacatl
+4 Lightning Bolt
+4 Lightning Helix
+4 Path to Exile
+4 Arid Mesa
+2 Forest
+3 Misty Rainforest
+1 Mountain
+2 Sacred Foundry
+1 Scalding Tarn
+2 Stomping Ground
+2 Temple Garden
+3 Verdant Catacombs
+[Sideboard]
+2 Engineered Explosives
+1 Grafdigger's Cage
+1 Linvala, Keeper of Silence
+2 Molten Rain
+1 Oblivion Ring
+1 Pyroclasm
+1 Sowing Salt
+1 Spellskite
+1 Thrun, the Last Troll
+2 Tormod's Crypt
+2 Wear // Tear

@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Ulasht
+Title=Ulasht
+Icon=Ulasht.jpg
+Difficulty=Hard
+Description=./Modern/Innistrad_Midnight_Hunt/Wendell_Dresser_-_Mono-White_Death_and_Taxes_(Modern,_#1225049).dck
+Deck Type=constructed
+
+[Main]
+2 Restoration Angel
+3 Esper Sentinel
+4 Thalia, Guardian of Thraben
+4 Ambitious Farmhand
+4 Stoneforge Mystic
+4 Giver of Runes
+4 Solitude
+4 Flickerwisp
+4 Archon of Emeria
+4 Skyclave Apparition
+1 Sword of Fire and Ice
+1 Batterskull
+1 Kaldra Compleat
+1 Shadowspear
+4 Aether Vial
+3 Path to Exile
+4 Emeria's Call
+4 Urza's Saga
+1 Sunbaked Canyon
+1 Silent Clearing
+1 Horizon Canopy
+2 Cave of the Frost Dragon
+2 Tectonic Edge
+4 Field of Ruin
+13 Plains
+[Sideboard]
+1 Pithing Needle
+1 Yorion, Sky Nomad
+1 Relic of Progenitus
+1 Aven Mindcensor
+1 Path to Exile
+2 Kataki, War's Wage
+2 Rest in Peace
+3 Sanctifier en-Vec
+3 Burrenton Forge-Tender

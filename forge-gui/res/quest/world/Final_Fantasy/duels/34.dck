@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Mr Slate
+Title=Mr Slate
+Icon=Mr Slate.jpg
+Difficulty=Easy
+Description=./Standard/Final_Fantasy/Chihiro_Sakai_-_Jeskai_Oculus_(Standard,_#2535139).dck
+Deck Type=constructed
+
+[Main]
+4 Abhorrent Oculus
+4 Fear of Missing Out
+4 Marauding Mako
+4 Steamcore Scholar
+2 Joshua, Phoenix's Dominant
+1 Tersa Lightshatter
+4 Torch the Tower
+2 Spell Pierce
+1 Abrade
+4 Helping Hand
+3 Glacial Dragonhunt
+1 Winternight Stories
+4 Proft's Eidetic Memory
+4 Inspiring Vantage
+4 Seachrome Coast
+4 Shivan Reef
+4 Spirebluff Canal
+2 Adarkar Wastes
+2 Battlefield Forge
+1 Island
+1 Mountain
+[Sideboard]
+3 Sheltered by Ghosts
+2 Disdainful Stroke
+2 Get Lost
+2 Ghost Vacuum
+2 Loran of the Third Path
+1 Brotherhood's End
+1 Chandra, Spark Hunter
+1 Destroy Evil
+1 Negate

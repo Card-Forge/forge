@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Sun Quan
+Title=Sun Quan
+Icon=Sun Quan.jpg
+Difficulty=Easy
+Description=Scars_of_Mirrodin/StarCityGames.com_Standard_Open_Kansas_City/Austin_Fritz_-_Valakut_Ramp_(Standard,_#8846).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Avenger of Zendikar
+3 Overgrown Battlement
+4 Primeval Titan
+4 Harrow
+2 Lightning Bolt
+4 Summoning Trap
+3 Cultivate
+4 Explore
+2 Pyroclasm
+4 Khalni Heart Expedition
+2 Koth of the Hammer
+3 Evolving Wilds
+5 Forest
+11 Mountain
+1 Raging Ravine
+2 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+2 Acidic Slime
+2 Gaea's Revenge
+2 Inferno Titan
+3 Nature's Claim
+2 Obstinate Baloth
+2 Ricochet Trap

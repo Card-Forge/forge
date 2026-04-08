@@ -1,6 +1,6 @@
 AbilityFactory parses differently from the Keyword parser. Your Ability line will look more like a collection of name-value pairs:
 
-`A:<AB/SP/DB/ST>$ <AFSubclass> | <Necessary$ Parameters> | (<Separated$ By> | <Pipes$ Here>) | [Optional$ {Values} [Nested$ Dependency]]`
+`A:<AB/SP/DB/ST>$ {AFSubclass} | <Necessary$ Parameters> | (<Separated$ By> | <Pipes$ Here>) | [Optional$ {Values} [Nested$ Dependency]]`
 
 The ability types are:
 - **AB** for Activated Abilities
@@ -21,16 +21,18 @@ Syntax definitions like the above will use different symbols to separate the var
 > - a good knowledge of the game rules is often helpful for some of the more complex cases covered
 
 # Common Parameters
-*Tip:* the convention is to put most of these before AF-specific params for readability (with the exception of Descriptions better suited at the very end)
+Depending on context these are usually optional.
+
+*Tip:* the convention is to put most of these before AF-specific params for readability (with the exception of descriptions-ones better suited at the very end)
 
 ## Cost / UnlessCost
 `Cost$ {AbilityCost}` is the appropriate way to set the cost of the ability. Currently for spells, any additional costs including the original Mana cost need to appear in the Cost param in the AbilityFactory. For each card that uses it, the order in which the cost is paid will always be the same.
 
 Secondary abilities such as those executed by triggers or replacements (usually) don't need costs. (This is one reason to use DB over AB in these cases.)
 
-`UnlessCost$ <AbilityCost>` allows a player to pay costs to prevent the resolving of the ability.  
+`UnlessCost$ {AbilityCost}` allows a player to pay costs to prevent the resolving of the ability.  
 Optionally that behaviour is adjusted with these parameters:
-- `UnlessPayer$ <Defined>` (Default: TargetedController) - for changing which players are included
+- `UnlessPayer$ {Defined}` (Default: TargetedController) - for changing which players are included
 - `UnlessSwitched$ True` - the cost has to be paid to resolve the ability instead (usually used to handle "any player may pay ...")
 - `UnlessResolveSubs$ {WhenPaid/WhenNotPaid}` - if the subability resolving should depend on the payment 
 
@@ -78,20 +80,16 @@ Prevents text-changing effects from affecting the ability.
 
 Only needed if the card text doesn't contain the type/color words but the ability still needs to use them (e.g. "for each color ...").
 
-## AI params
-* `IsCurse$ True` - for effects that are normally treated positive e.g. Pump
-
-* `AICheckSVar$ {Count}`
-
-* `AILogic$ {String}`
-
-* `AITgts$ BetterThanEvalRating.130`
-Normally the AI will only prefer targeting cards that satisfy the constraint. However, you can add `AITgtsStrict$ True` if playing it should only happen when enough of these cards are available, e.g. *Rootwater Matriarch*.
+## Generic AI params
+- `IsCurse$ True` - for effects that are normally treated positive e.g. Pump
+- `AICheckSVar$ {Count}`
+- `AILogic$ {String}`
+- `AITgts$ BetterThanEvalRating.130` -Normally the AI will only prefer targeting cards that satisfy the constraint. However, you can add `AITgtsStrict$ True` if playing it should only happen when enough of these cards are available, e.g. *Rootwater Matriarch*.
 
 # Factories (in Alphabetical Order)
 
 ## Animate
-Animate handles animation effects like "This card becomes a 5/5 green creature with flying until end of turn."
+Animate handles animation effects like "This artifact becomes a 4/4 red and green Dragon artifact creature with flying until end of turn."
 
 Parameters (all optional):
 - `Power` - the power to assign to the animated card
@@ -114,8 +112,7 @@ Parameters:
 can also be combined with `Object` so the choice is for what it should attach to
 - `RememberAttached`
 
-Note that Forge's engine handles this automatically for Aura spells, so adding AILogic is a bit different but usually required:
-
+Note that Forge's engine handles this automatically for Aura spells, so adding AILogic is a bit different but often required:  
 `SVar:AttachAILogic:{String}`
 - `Curse/Pump` - A generic Curse/Pump for which the AI has a handful of checks to see if an appropriate target exists
 - `GainControl` - Gains control of the attached permanent
@@ -210,11 +207,11 @@ Parameters:
 ### Clone
 
 ### CopyPermanent
-Copies a permanent.
-
 Parameters:
 - `NumCopies` (Default: 1) - number of copies to put into play
-- `Keywords` (Optional) - a list of keywords to add to the copies
+
+Optional modifiers for the copiable values:
+- `Keywords` - a list of keywords to add to each copy
 
 ### CopySpellAbility
 Parameters:
@@ -318,7 +315,7 @@ This follows our general approach where we try to find a reasonable middle groun
 
 ## Fight
 
-## FlipACoin
+## FlipCoin
 
 ## Fog
 This AF is based on the original *Fog* spell: "Prevent all combat damage that would be dealt this turn." While this could be done with an Effect, the specialized nature of the AI gives it its own AF.
@@ -470,22 +467,28 @@ Parameters:
 ### Investigate
 
 ### Token
-Token lets you create tokens of any type. They get defined by creating scripts in the `res/tokenscripts` folder.
+This AF lets you create tokens of any type. They get defined by creating scripts in the `res/tokenscripts` folder.
 
 Parameters:
 - `TokenScript$ {filename[,filename]}` - list of tokens to create
 - `TokenAmount$ {Integer}` (Default: 1)
 - `TokenOwner$ {DefinedPlayer}` (Default: You)
+- `RememberTokens$ True`
+- `RememberOriginalTokens$ True` - some cards specifically check the tokens didn't get replaced with different ones
+
+For modifying the final token all relevant parameters of [CopyPermanentEffect](#CopyPermanent) are also available. 
 
 ## Triggers
 If possible split the SpellDescription of the effect so the part for the trigger can become the StackDescription directly.
 
 ### DelayedTrigger
-The trigger-specific params are defined in [Triggers](Triggers.md).
+Note: The trigger-specific params are defined in [Triggers](Triggers.md).
 
 ### ImmediateTrigger
+Used to create reflexive triggers.
+
 Parameters:
-- `TriggerAmount$ {Integer}` (Default: 1)
+- `TriggerAmount$ {Integer}` (Default: 1) - if the trigger event can occur multiple times 
 
 ## Turn structure
 
@@ -494,6 +497,8 @@ Parameters:
 ### AddTurn
 
 ### EndTurn
+Parameters:
+- `Optional$`
 
 ### ReverseTurnOrder
 No own parameters.
@@ -587,7 +592,7 @@ Parameters:
 ### RearrangeTopOfLibrary
 
 ### Shuffle
-Used for shuffling a player's library.
+Shuffling a player's library.
 
 Parameters:
 - `Optional$ True` - if the activator gets to decide if each affected player shuffles

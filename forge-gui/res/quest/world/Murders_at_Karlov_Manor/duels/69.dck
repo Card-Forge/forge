@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Invisible Man
+Title=Invisible Man
+Icon=Invisible Man.jpg
+Difficulty=Hard
+Description=./Modern/Murders_at_Karlov_Manor/Aidan_Amato_-_Goryo's_Blink_(Modern,_#2002160).dck
+Deck Type=constructed
+
+[Main]
+4 Fallaji Archaeologist
+4 Grief
+2 Solitude
+4 Atraxa, Grand Unifier
+2 Griselbrand
+4 Tainted Indulgence
+4 Faithful Mending
+4 Ephemerate
+4 Goryo's Vengeance
+4 Force of Negation
+4 Thoughtseize
+1 Hallowed Fountain
+1 Meticulous Archive
+1 Watery Grave
+1 Undercity Sewers
+1 Godless Shrine
+1 Shadowy Backstreet
+1 Hedge Maze
+2 Flooded Strand
+4 Polluted Delta
+4 Marsh Flats
+1 Plains
+1 Island
+1 Swamp
+[Sideboard]
+3 Prismatic Ending
+2 Subtlety
+3 Celestial Purge
+1 Solitude
+1 Silence
+2 Surgical Extraction
+3 Teferi, Time Raveler

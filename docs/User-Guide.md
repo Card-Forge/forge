@@ -237,11 +237,14 @@ Underneath each player's battlefield portrait are zone buttons (hand, library, g
 **Display modes:** Right-click a zone button to toggle how it opens:
 
 - **Open in Window** — Opens a floating window that can be moved and resized independently. Right-click the window's title bar to toggle alphabetical sorting.
-- **Add Tab to Hand Panel** — Docks the zone as a tab alongside your hand panel, integrated into the main layout. The tab can be dragged to other cells like any other panel.
+- **Add Tab to Hand Panel** — Docks the zone as a tab alongside your hand panel, integrated into the main layout.
 
 Your preference is saved per zone and remembered separately for your own zones and opponent zones.
 
 **Drag-to-dock:** A floating zone window can also be docked by dragging its title bar over any cell's tab bar — a blue highlight shows where it will land. Once docked, right-click the tab for an option to undock it back to a floating window.
+
+> [!TIP]
+> Enable the Layout->View->New card count menu option to display a delta number in the tab header which may help you more quickly identify changes in complex boardstates.
 
 ## Auto-Sort Multiplayer Fields
 In multiplayer games (3+ players), Forge can automatically arrange opponent battlefield panels in turn order. This is controlled via the **Layout > View** menu during a match.

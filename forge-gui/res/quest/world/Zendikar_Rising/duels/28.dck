@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=IsaBere
+Title=IsaBere
+Icon=IsaBere.jpg
+Difficulty=Medium
+Description=./Standard/Zendikar_Rising/Aaron_Payne_-_Mardu_Midrange_(Standard,_#1086060).dck
+Deck Type=constructed
+
+[Main]
+2 Archon of Sun's Grace
+3 Yorion, Sky Nomad
+4 Skyclave Apparition
+4 Mazemind Tome
+1 Hagra Mauling
+3 Eliminate
+2 Ruinous Ultimatum
+4 Extinction Event
+4 Emeria's Call
+2 Omen of the Sun
+4 Omen of the Forge
+4 Doom Foretold
+4 Elspeth Conquers Death
+4 Elspeth's Nightmare
+4 Treacherous Blessing
+1 Mountain
+2 Temple of Malice
+3 Plains
+4 Temple of Triumph
+4 Brightclimb Pathway
+4 Needleverge Pathway
+4 Savai Triome
+4 Fabled Passage
+5 Swamp
+[Sideboard]
+1 Ugin, the Spirit Dragon
+1 Ox of Agonas
+1 Eliminate
+1 Yorion, Sky Nomad
+2 Kroxa, Titan of Death's Hunger
+2 Agonizing Remorse
+2 Heartless Act
+2 Soul Shatter
+3 Duress

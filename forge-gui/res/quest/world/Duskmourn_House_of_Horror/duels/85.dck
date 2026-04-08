@@ -1,0 +1,52 @@
+[duel]
+[metadata]
+Name=Riddler
+Title=Riddler
+Icon=Riddler.jpg
+Difficulty=Very Hard
+Description=./Modern/Duskmourn_House_of_Horror/Asmalsky_-_Grixis_Control_(Modern,_#2286211).dck
+Deck Type=constructed
+
+[Main]
+2 Orcish Bowmasters
+2 Psychic Frog
+3 Snapcaster Mage
+2 Tamiyo, Inquisitive Student
+1 Archmage's Charm
+4 Counterspell
+2 Drown in the Loch
+4 Fatal Push
+1 Invert Polarity
+3 Kolaghan's Command
+4 Lightning Bolt
+1 Terminate
+2 Expressive Iteration
+1 Lórien Revealed
+4 Preordain
+1 Jace, the Mind Sculptor
+1 Kaito, Bane of Nightmares
+1 Blood Crypt
+2 Bloodstained Mire
+1 Creeping Tar Pit
+2 Island
+1 Mountain
+4 Polluted Delta
+2 Scalding Tarn
+2 Steam Vents
+2 Swamp
+1 Thundering Falls
+1 Undercity Sewers
+2 Watery Grave
+1 Xander's Lounge
+[Sideboard]
+1 Cling to Dust
+2 Consign to Memory
+1 Cursed Totem
+1 Engineered Explosives
+1 Flusterstorm
+1 Harbinger of the Seas
+1 Meltdown
+2 Obsidian Charmaw
+2 Surgical Extraction
+2 Thoughtseize
+1 Toxic Deluge

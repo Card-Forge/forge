@@ -559,7 +559,8 @@
     { "type": "item","count":1, "itemName": "Mask of Hypochondria"  },
     { "type": "item","count":1, "itemName": "Ring of Thune"  },
     { "type": "item","count":1, "itemName": "Skyclave Maul"  },
-    { "type": "item","count":1, "itemName": "Plains Outfit"  },
+    { "type": "item","count":1, "itemName": "Meadow Outfit"  },
+    { "type": "item","count":1, "itemName": "Token of Shielding"  },
 	{ "type": "item","count":1, "itemName": "Token of Bounty"  }
     
     ]
@@ -575,10 +576,8 @@
 	{ "type": "item","count":1, "itemName": "Sunbeam Gauntlet"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Mirth"  },
 	{ "type": "item","count":1, "itemName": "Jousting Lance"  },
-	{ "type": "item","count":1, "itemName": "Blessed Armor"  },
-	{ "type": "item","count":1, "itemName": "Divinely Blessed Armor"  }
+	{ "type": "item","count":1, "itemName": "Blessed Armor"  }
 
-    
     ]
 
 },
@@ -593,7 +592,8 @@
     { "type": "item","count":1, "itemName": "Mask of Pyromania"  },
     { "type": "item","count":1, "itemName": "Ring of Valkas"  },
     { "type": "item","count":1, "itemName": "Dire Flail"  },
-    { "type": "item","count":1, "itemName": "Mountain Cloak"  },
+    { "type": "item","count":1, "itemName": "Smoldering Cloak"  },
+    { "type": "item","count":1, "itemName": "Token of Blades"  },
 	{ "type": "item","count":1, "itemName": "Token of Violence"  }
     
     ]
@@ -609,8 +609,7 @@
 	{ "type": "item","count":1, "itemName": "Pyrite Gauntlet"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Fury"  },
 	{ "type": "item","count":1, "itemName": "Chitinous Club"  },
-	{ "type": "item","count":1, "itemName": "Flaming Armor"  },
-	{ "type": "item","count":1, "itemName": "Blazing Armor"  }
+	{ "type": "item","count":1, "itemName": "Flaming Armor"  }
     ]
 
 },
@@ -625,7 +624,8 @@
     { "type": "item","count":1, "itemName": "Mask of Compulsion"  },
     { "type": "item","count":1, "itemName": "Ring of Evos Isle"  },
     { "type": "item","count":1, "itemName": "Giant's Bracer"  },
-    { "type": "item","count":1, "itemName": "Island Shirt"  },
+    { "type": "item","count":1, "itemName": "Isle Shirt"  },
+    { "type": "item","count":1, "itemName": "Token of Insight"  },
 	{ "type": "item","count":1, "itemName": "Token of Investigation"  }
     
     ]
@@ -641,8 +641,7 @@
 	{ "type": "item","count":1, "itemName": "Aether Gauntlet"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Mischief"  },
 	{ "type": "item","count":1, "itemName": "Hoversail Glove"  },
-	{ "type": "item","count":1, "itemName": "Sage's Robes"  },
-	{ "type": "item","count":1, "itemName": "Grand Sage's Robes"  }
+	{ "type": "item","count":1, "itemName": "Sage's Robes"  }
     ]
 
 },
@@ -657,7 +656,8 @@
     { "type": "item","count":1, "itemName": "Mask of Mortiphobia"  },
     { "type": "item","count":1, "itemName": "Ring of Xathrid"  },
     { "type": "item","count":1, "itemName": "Poet's Quill"  },
-    { "type": "item","count":1, "itemName": "Swamp Leather"  },
+    { "type": "item","count":1, "itemName": "Mire Leather"  },
+    { "type": "item","count":1, "itemName": "Token of Decay"  },
 	{ "type": "item","count":1, "itemName": "Token of Blood"  }
     
     ]
@@ -673,8 +673,7 @@
 	{ "type": "item","count":1, "itemName": "Necrogen Gauntlet"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Scorn"  },
 	{ "type": "item","count":1, "itemName": "Blight Sickle"  },
-	{ "type": "item","count":1, "itemName": "Forbidden Robes"  },
-	{ "type": "item","count":1, "itemName": "Restricted Robes"  }
+	{ "type": "item","count":1, "itemName": "Forbidden Robes"  }
     ]
 
 },
@@ -686,10 +685,11 @@
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Beastbreaker Boots"  },
     { "type": "item","count":1, "itemName": "Tome of Might"  },
-    { "type": "item","count":1, "itemName": "Mask of Narcissism"  },
     { "type": "item","count":1, "itemName": "Ring of Kalonia"  },
-    { "type": "item","count":1, "itemName": "Spiked Ripsaw"  },
-    { "type": "item","count":1, "itemName": "Forest Shawl"  },
+    { "type": "item","count":1, "itemName": "Mask of Narcissism"  },
+    { "type": "item","count":1, "itemName": "Colossal Dreadmace"  },
+    { "type": "item","count":1, "itemName": "Karst Shawl"  },
+    { "type": "item","count":1, "itemName": "Token of Landing"  },
 	{ "type": "item","count":1, "itemName": "Token of Exploration"  }
     
     ]
@@ -705,8 +705,7 @@
 	{ "type": "item","count":1, "itemName": "Lifespark Gauntlet"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Favor"  },
 	{ "type": "item","count":1, "itemName": "Brawler's Cestus"  },
-	{ "type": "item","count":1, "itemName": "Heavy Armor"  },
-	{ "type": "item","count":1, "itemName": "Ultra Heavy Armor"  }
+	{ "type": "item","count":1, "itemName": "Heavy Armor"  }
     
     ]
 
@@ -736,6 +735,8 @@
 	"sprite":"ItemShop",   
 	  "rewards": [ 
 		{ "type": "item","count":1, "itemName": "Ghost rune"  },
+        { "type": "item","count":1, "itemName": "Token of Spirit"  },
+        { "type": "item","count":1, "itemName": "Token of Soaring Spirit"  },
 		{ "type": "item","count":1, "itemName": "Captive Soul of a Priest"  },
 		{ "type": "item","count":1, "itemName": "Captive Soul of a Saint"  },
 		{ "type": "item","count":1, "itemName": "Captive Soul of a Knight"  },

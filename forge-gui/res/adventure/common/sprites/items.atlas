@@ -504,11 +504,47 @@ ZedruuLantern
 CartoucheOfSolidarity
   xy:320,176
   size:16,16
+PrayerbookofIre
+  xy: 112, 704
+  size: 16, 16
+WarrenTendersBaton
+  xy: 176, 592
+  size: 16, 16
+RobesOfOmniscience
+  xy: 96, 0
+  size: 16, 16
+AngelicGreaves
+  xy: 144, 144
+  size: 16, 16
+AngelicArmaments
+  xy: 272, 368
+  size: 16, 16
+EvilAnkh
+  xy: 144, 512
+  size: 16, 16
+ConcordantBoots
+  xy: 48, 128
+  size: 16, 16
+RaptorBondband
+  xy: 144, 960
+  size: 16, 16
+MantelofDenial
+  xy: 352, 32
+  size: 16, 16
+GoldenEgg
+  xy: 16, 544
+  size: 16, 16
+CrownofGrowth
+  xy: 144, 368
+  size: 16, 16
 CartoucheOfKnowledge
   xy:320,192
   size:16,16
 CartoucheOfStrength
   xy:320,208
+  size:16,16
+DemonCallerStaff
+  xy:176,608
   size:16,16
 CartoucheOfAmbition
   xy:320,224
@@ -518,6 +554,12 @@ CartoucheOfZeal
   size:16,16
 HallowedSigil
   xy:320,256
+  size:16,16
+BasiliskCollar
+  xy:112,528
+  size:16,16
+EvilAnk
+  xy:144,512
   size:16,16
 UnhallowedSigil
   xy:320,272

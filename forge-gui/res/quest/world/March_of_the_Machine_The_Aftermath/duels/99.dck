@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Mr Smith
+Title=Mr Smith
+Icon=Mr Smith.jpg
+Difficulty=Very Hard
+Description=./Modern/March_of_the_Machine_The_Aftermath/CharonsObol_-_Death_and_Taxes_(Modern,_#1648551).dck
+Deck Type=constructed
+
+[Main]
+4 Stoneforge Mystic
+3 Leonin Arbiter
+2 Thalia, Guardian of Thraben
+4 Giver of Runes
+4 Archon of Emeria
+4 Solitude
+3 Extraction Specialist
+4 Deeproot Wayfinder
+1 Sword of Fire and Ice
+1 Sword of Light and Shadow
+1 Batterskull
+4 Aether Vial
+1 Kaldra Compleat
+2 Ephemerate
+4 Plains
+1 Forest
+1 Temple Garden
+4 Ghost Quarter
+3 Horizon Canopy
+3 Tectonic Edge
+4 Razorverge Thicket
+2 Windswept Heath
+1 Boseiju, Who Endures
+[Sideboard]
+3 Gaddock Teeg
+1 Knight of Autumn
+3 Drannith Magistrate
+4 Sanctifier en-Vec
+2 Outland Liberator
+2 Metropolis Reformer

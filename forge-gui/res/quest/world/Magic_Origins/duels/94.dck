@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Scooby Doo
+Title=Scooby Doo
+Icon=Scooby Doo.jpg
+Difficulty=Very Hard
+Description=../Modern/Magic_Origins/States_Des_Moines/Jon_Janesen_-_Merfolk_(Modern,_#332382).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Coralhelm Commander
+4 Harbinger of the Tides
+2 Kira, Great Glass-Spinner
+4 Lord of Atlantis
+4 Master of the Pearl Trident
+3 Master of Waves
+2 Merrow Reejerey
+1 Phantasmal Image
+4 Silvergill Adept
+4 AEther Vial
+2 Vapor Snag
+4 Sea's Claim
+4 Spreading Seas
+3 Cavern of Souls
+11 Island
+1 Minamo, School at Water's Edge
+4 Mutavault
+1 Oboro, Palace in the Clouds
+[Sideboard]
+3 Engineered Explosives
+1 Grafdigger's Cage
+2 Mana Leak
+2 Negate
+2 Relic of Progenitus
+3 Tidebinder Mage
+1 Voidmage Prodigy

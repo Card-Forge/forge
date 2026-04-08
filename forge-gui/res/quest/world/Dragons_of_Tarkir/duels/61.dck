@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Barney Rubble
+Title=Barney Rubble
+Icon=Barney Rubble.jpg
+Difficulty=Very Hard
+Description=../Modern/Dragons_of_Tarkir/SCG_Invitational_Qualifier_Arvada/Mitch_McCartney_-_Goblins_(Modern,_#295363).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Foundry Street Denizen
+4 Goblin Bushwhacker
+4 Goblin Chieftain
+4 Goblin Guide
+4 Legion Loyalist
+4 Mogg War Marshal
+4 Lightning Bolt
+4 Dragon Fodder
+4 Goblin Grenade
+1 Krenko's Command
+4 Shared Animosity
+4 Cavern of Souls
+15 Mountain
+[Sideboard]
+4 Collateral Damage
+4 Rending Volley
+3 Shattering Spree
+4 Stingscourger

@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Shaitan
+Title=Shaitan
+Icon=Shaitan.jpg
+Difficulty=Medium
+Description=Zendikar/Outpost_Brussels_Big_Standard_Tournament_-_WII-IPod/Joffrey_Patriarca_-_Turbo_Fog_(Standard,_#3355).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Font of Mythos
+4 Howling Mine
+4 Angelsong
+2 Archive Trap
+4 Flashfreeze
+1 Negate
+4 Safe Passage
+3 Day of Judgment
+4 Time Warp
+2 Sunspring Expedition
+4 Jace Beleren
+4 Glacial Fortress
+10 Island
+4 Kabira Crossroads
+6 Plains
+[Sideboard]
+4 Baneslayer Angel
+2 Pithing Needle
+3 Quest for Ancient Secrets
+2 Wall of Denial

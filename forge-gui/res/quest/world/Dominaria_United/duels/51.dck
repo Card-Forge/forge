@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Impundulu
+Title=Impundulu
+Icon=Impundulu.jpg
+Difficulty=Very Hard
+Description=./Modern/Dominaria_United/Ashbrown_-_4_Color_Cascade_(Modern,_#1501352).dck
+Deck Type=constructed
+
+[Main]
+4 Fury
+4 Shardless Agent
+4 Scion of Draco
+2 Dead // Gone
+4 Violent Outburst
+4 Force of Negation
+4 Fire // Ice
+4 Crashing Footfalls
+1 Ardent Plea
+4 Leyline Binding
+2 Teferi, Time Raveler
+1 Flooded Strand
+1 Stomping Ground
+1 Indatha Triome
+1 Forest
+1 Steam Vents
+1 Xander's Lounge
+1 Sacred Foundry
+1 Windswept Heath
+1 Temple Garden
+1 Breeding Pool
+1 Plains
+1 Island
+2 Wooded Foothills
+2 Wooded Foothills
+3 Flooded Strand
+4 Misty Rainforest
+[Sideboard]
+1 Klothys, God of Destiny
+2 Unmoored Ego
+2 Leyline of Sanctity
+3 Endurance
+3 Mystical Dispute
+4 Force of Vigor

@@ -1,0 +1,8 @@
+Name:Procrastinate
+ManaCost:X U
+Types:Instant
+A:SP$ Tap | ValidTgts$ Creature | SubAbility$ DBPutCounter | SpellDescription$ Tap target creature. Put twice X stun counters on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ Y
+SVar:X:Count$xPaid
+SVar:Y:SVar$X/Twice
+Oracle:Tap target creature. Put twice X stun counters on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)

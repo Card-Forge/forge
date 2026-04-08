@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Imperial Guard
+Title=Imperial Guard
+Icon=Imperial Guard.jpg
+Difficulty=Hard
+Description=../Modern/Battle_for_Zendikar/Standard_Daily_#9286294/L1X0_-_L1X0_(3-1)_(Modern,_#518649).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Anafenza, the Foremost
+3 Den Protector
+3 Heir of the Wilds
+4 Siege Rhino
+1 Tasigur, the Golden Fang
+4 Warden of the First Tree
+2 Wingmate Roc
+4 Abzan Charm
+2 Dromoka's Command
+1 Murderous Cut
+2 Silkwrap
+3 Gideon, Ally of Zendikar
+1 Sorin, Solemn Visitor
+2 Canopy Vista
+4 Flooded Strand
+2 Forest
+2 Llanowar Wastes
+2 Plains
+4 Shambling Vent
+1 Smoldering Marsh
+1 Sunken Hollow
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+2 Duress
+2 Hallowed Moonlight
+1 Rising Miasma
+2 Self-Inflicted Wound
+1 Surge of Righteousness
+2 Transgress the Mind
+2 Ultimate Price

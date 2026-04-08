@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Harry Potter
+Title=Harry Potter
+Icon=Harry Potter.jpg
+Difficulty=Medium
+Description=Return_to_Ravnica/GPT_Bilbao_2012_-_eFantasy.gr/Iliadis_Stavros_-_Jund_(Standard,_#42479).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Dreg Mangler
+4 Falkenrath Aristocrat
+4 Hellrider
+4 Knight of Infamy
+4 Lotleth Troll
+3 Thundermaw Hellkite
+4 Vampire Nighthawk
+2 Searing Spear
+2 Ultimate Price
+1 Flames of the Firebrand
+4 Pillar of Flame
+4 Blood Crypt
+4 Cavern of Souls
+4 Dragonskull Summit
+2 Mountain
+4 Overgrown Tomb
+4 Rootbound Crag
+1 Swamp
+1 Woodland Cemetery
+[Sideboard]
+1 Duress
+4 Huntmaster of the Fells
+2 Mizzium Mortars
+3 Olivia Voldaren
+1 Rakdos's Return
+2 Thragtusk
+2 Tragic Slip

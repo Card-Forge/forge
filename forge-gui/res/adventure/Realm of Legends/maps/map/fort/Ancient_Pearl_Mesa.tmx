@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="81">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="82">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -44,8 +44,10 @@
   <object id="59" template="../../../../common/maps/obj/collision.tx" x="-16" y="-16" width="512" height="16"/>
   <object id="75" template="../../../../common/maps/obj/enemy.tx" x="205.874" y="83.0951">
    <properties>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;True Conviction&quot;, &quot;Song of the Worldsoul&quot;, &quot;w_2_2_soldier_vigilance&quot; ] }"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;True Conviction&quot;, &quot;Martyr's Bond&quot; ] }"/>
     <property name="enemy" value="General Jarkeld"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
    </properties>
   </object>
   <object id="78" template="../../../../common/maps/obj/scroll.tx" x="205.5" y="161">
@@ -69,6 +71,14 @@ Your manasight stone blazes with power, near-blindingly bright.&quot;,
   <object id="80" template="../../../../common/maps/obj/scroll.tx" x="287.5" y="106.5">
    <properties>
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Pearl Medallion&quot;, &quot;editions&quot;: [ &quot;TMP&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="81" template="../../../../common/maps/obj/enemy.tx" x="206.309" y="81.3351">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;True Conviction&quot; ] }"/>
+    <property name="enemy" value="General Jarkeld"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
    </properties>
   </object>
  </objectgroup>

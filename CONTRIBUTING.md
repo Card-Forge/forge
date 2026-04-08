@@ -8,7 +8,7 @@
 - Java JDK 17 or later
 - Git
 - Git client (optional)
-- Maven
+- [Maven](https://maven.apache.org/install.html)
 - GitHub account
 - Libgdx (optional: familiarity with this library is helpful for mobile platform development)
 - Android SDK (optional: for Android releases)
