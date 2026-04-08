@@ -78,10 +78,9 @@ public class DeltaSyncManager implements IHasNetLog {
     private final Map<Integer, CardView> authoritativeInstances = new HashMap<>();
 
     // Not atomic: only accessed from game thread
-    // Start at 0 so the first checksum is deferred until the game state stabilizes.
-    // The first delta (seq=1) races with game initialization (hand drawing), so
-    // an immediate checksum would compare a mid-initialization snapshot against
-    // the client's post-delta state, causing false mismatches (~7% of games).
+    // Defer the first checksum until the game state stabilizes — seq=1 races
+    // with game initialization (hand drawing), so an immediate checksum would
+    // compare a mid-init snapshot against the client's post-delta state.
     private long packetsSinceLastChecksum = 0;
 
     // Sampled checksum state

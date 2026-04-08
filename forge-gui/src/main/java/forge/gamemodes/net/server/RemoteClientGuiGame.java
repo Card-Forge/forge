@@ -247,7 +247,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
         // in the view graph when registration occurs. If we registered here, the view
         // is still empty (openView runs before match.startGame/prepareAllZones), and
         // zone updates during init would set dirty bits on the 3 registered objects
-        // but the Command zone dirty bit is sporadically lost (~10% of Commander games).
+        // but the Command zone dirty bit is sporadically lost in Commander games.
     }
 
     @Override
