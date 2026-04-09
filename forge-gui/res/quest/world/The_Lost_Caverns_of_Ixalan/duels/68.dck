@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Gold Finger
+Title=Gold Finger
+Icon=Gold Finger.jpg
+Difficulty=Hard
+Description=./Modern/The_Lost_Caverns_of_Ixalan/Madeio22_-_Mill_(Modern,_#1971426).dck
+Deck Type=constructed
+
+[Main]
+4 Hedron Crab
+4 Ruin Crab
+1 Mesmeric Orb
+4 Archive Trap
+4 Path to Exile
+1 Spell Pierce
+2 Get Lost
+3 Surgical Extraction
+1 Visions of Beyond
+4 Preordain
+4 Fractured Sanity
+2 Tasha's Hideous Laughter
+2 Jace, the Perfected Mind
+2 Teferi, Time Raveler
+4 Field of Ruin
+1 Oboro, Palace in the Clouds
+1 Otawara, Soaring City
+1 Plains
+3 Island
+1 Scalding Tarn
+1 Polluted Delta
+2 Seachrome Coast
+4 Flooded Strand
+3 Hallowed Fountain
+1 Shelldock Isle
+[Sideboard]
+3 Ensnaring Bridge
+3 Leyline of Sanctity
+2 Nine Lives
+3 Rest in Peace
+2 Cursed Totem
+2 Ghost Quarter

@@ -4,7 +4,7 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Jetmir's Garden&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Jetmir's Garden&quot;, &quot;Life of the Party&quot; ], &quot;opponent&quot;: { &quot;startBattleWithCard&quot;: [ &quot;Life of the Party&quot; ]}}"/>,
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -103,21 +103,21 @@
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 11,
     &quot;colors&quot;: [ &quot;green&quot;, &quot;white&quot;, &quot;red&quot; ],
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    &quot;rarity&quot;: [ &quot;common&quot; ]
   },
   {
     &quot;editions&quot;: [ &quot;SNC&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 3,
     &quot;colors&quot;: [ &quot;green&quot;, &quot;white&quot;, &quot;red&quot; ],
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    &quot;rarity&quot;: [ &quot;uncommon&quot; ]
   },
   {
     &quot;editions&quot;: [ &quot;SNC&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 1,
     &quot;colors&quot;: [ &quot;green&quot;, &quot;white&quot;, &quot;red&quot; ],
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ]
   }
 ]
 </property>
@@ -157,21 +157,21 @@
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 11,
     &quot;colors&quot;: [ &quot;green&quot;, &quot;white&quot;, &quot;red&quot; ],
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
+    &quot;rarity&quot;: [ &quot;common&quot; ]
   },
   {
     &quot;editions&quot;: [ &quot;SNC&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 3,
     &quot;colors&quot;: [ &quot;green&quot;, &quot;white&quot;, &quot;red&quot; ],
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+    &quot;rarity&quot;: [ &quot;uncommon&quot; ]
   },
   {
     &quot;editions&quot;: [ &quot;SNC&quot; ],
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 1,
     &quot;colors&quot;: [ &quot;green&quot;, &quot;white&quot;, &quot;red&quot; ],
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+    &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic Rare&quot; ]
   }
 ]
 </property>

@@ -60,7 +60,6 @@ public class StaticData {
     private IStorage<BoosterBox.Template> boosterBoxes;
     private IStorage<PrintSheet> printSheets;
     private final Map<String, List<String>> setLookup = new HashMap<>();
-    private List<String> blocksLandCodes = new ArrayList<>();
 
     private static StaticData lastInstance = null;
 
@@ -409,10 +408,6 @@ public class StaticData {
         databases.put("Common", commonCards);
         databases.put("Variant", variantCards);
         return databases;
-    }
-
-    public List<String> getBlockLands() {
-        return blocksLandCodes;
     }
 
     public TokenDb getAllTokens() { return allTokens; }
@@ -977,12 +972,11 @@ public class StaticData {
         this.sourceImageForClone = b;
     }
 
-    public boolean isRebalanced(String name)
-    {
+    public boolean isRebalanced(String name) {
         if (!name.startsWith("A-")) {
             return false;
         }
-        for(PaperCard pc : this.getCommonCards().getAllCards(name)) {
+        for (PaperCard pc : this.getCommonCards().getAllCards(name)) {
             CardEdition e = this.editions.get(pc.getEdition());
             if (e != null && e.isRebalanced(name)) {
                 return true;

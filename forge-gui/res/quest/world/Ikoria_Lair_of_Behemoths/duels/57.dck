@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Hobbes
+Title=Hobbes
+Icon=Hobbes.jpg
+Difficulty=Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/Athanasios_Bakolas_-_Selesnya_Cats_(Modern,_#969256).dck
+Deck Type=constructed
+
+[Main]
+1 Lurrus of the Dream-Den
+1 Brimaz, King of Oreskos
+1 Bronzehide Lion
+2 Leonin Warleader
+2 Kaheera, the Orphanguard
+2 Qasali Pridemage
+2 Fleecemane Lion
+2 Regal Caracal
+2 Leonin Vanguard
+4 Sacred Cat
+4 King of the Pride
+4 Qasali Ambusher
+4 Adorned Pouncer
+4 Aether Vial
+3 Path to Exile
+4 Sunpetal Grove
+4 Unclaimed Territory
+4 Forest
+4 Temple Garden
+6 Plains
+[Sideboard]
+1 Kaheera, the Orphanguard
+2 Hushbringer
+2 Deafening Silence
+2 Solemnity
+2 Leyline of Sanctity
+2 Prowling Serpopard
+2 Return to Nature
+2 Conclave Tribunal

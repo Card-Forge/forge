@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="104">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="109">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -16,12 +16,12 @@
  </layer>
  <layer id="6" name="Floor" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJztmGEKwjAMRnuD9gQO0YvOobfSXcoDKIj/xpbYL+3A9yD/QvI22iUsJQAAAAAAAABYYswpXYQx5bb+Q9HWO4rrbfH1v77f26P8Hrfc17+2r6pOr7749+27Z//n4RO1dSLw+K89g9rfOpfO4vNzKpo5551LKn9Vv3vjueOdg7PonP3D96dlnYi+o+HO7dlflRMB/vacCPC350SAvz3Hg3d/W9u7VDmR+1trVPubZ8er/UcRsb9Z6HU3VeBv4wXbyIKc
+   eJztmGEKwjAMRgs7QHsDEb3oJnoqnVdTEP+NLbFf2oHvQf6F5G20S1hKAAAAAAAAALDEmFOahHHJbf0PRVvvKK63xdf/+n5vc/k9brmvf21fVZ1effHv23fP/vfhE7V1IvD4rz2D2t86l87i83MqmjnnnUsqf1W/R+O5452DT9E5+4fvT8s6EX1Hw53bs78qJwL87TkR4G/PiQB/e44H7/62tnepciL3t9ao9jfPjlf7jyJif7PQ626qwN/GC6E/gP0=
   </data>
  </layer>
  <layer id="2" name="Ground" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJzt1yEOgDAMQNFZDOEAhHAd7i8wHIMDkAWBwKAoHe8lzWS/arJSAAC+Y+miCwDyGYfznYbYDgB4auvvk80+XZNR5nZowRp896L3w1+18H+fE7dX+mPpj1PvT+13f+K80X8AaXoOlw==
+   eJzt17EJgEAMQFHBykZuABHXcWf3sHEYOSwsbKyM0fcgXJlfBa5pAADeY+6iCwDyGcrxjiW2AwDu2vrrZLO052SUuR2+YA2+e9H74a++8H+fErdX+mPpj1PvT+13f+I80b8DKAAM+A==
   </data>
  </layer>
  <layer id="3" name="Foreground" width="48" height="48">
@@ -29,12 +29,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztmE1OxDAMhbNlUY7AFbqZ7QhYsgfOwcw5gAMgJH7mTmxgxCU4AKmmkUoUxy+NnSKwpbcYNbK/ZtI8J6tj51Ymk8lkMv1xnXt9KOisEf+p18WRvNbGD/PHQTGVxJL8EmH8mHadc8+AXroD1xM4/rVrw1/6P7Wa1//Cj/rXfuR/B8fX+hfHFfJrf7/I/KTelfOldSN+xB9Ta9L4jb+WH82vzY+OleBH/ZXyZyn+3ZiT4gn+Huef609UHqo/mbJRvcaQk+Oh6sb79mXv3JXXdY/5CFKXGhNqD57J+eWeqDvl+Tpx7sZzb7y2/eE3t07egLqBLfavmm+S4r/13Hde9yD/nJqa/LGMn+YvPZNo8WufdVI1Jflrzgq5vjXXO5euB4QfYSnxX6SmJD/CYvw/n8V7AHX/QPUhS/NT+Urq1fDn+rfcnA2e/pnQ9Pyee55iS+3ngS23d3L9m1bvz80tx4b2b6k5kwyutkb/tkRI9j9LxNz+p0SP4/75oJC7xV3vb73/NH5ZfQM1M2h3
+   eJztmD0OwjAMhSsxMZSrsLAiYORwXAAh8XcNzsECFVehFY1Uojh+aeIUUVt6E5H94aZ5ThezolioVCqVSvXn2tR6CmidiX9VaztNr6Xyw/x2UEwhMSR/ilB+TNeyKE6AzuWH6wiuv5R5+EOfU66+joUf9a+q5X+A62P9i+My+aXfX6Q/rv/K+dIyEz/ij649qfzKH8uP5pfmR9em4Ef9lfLnVPzXNifFY/zdzt/Xn6g81HzSZaNmjSYnx0PVtc/t2+RbnI8gdak1pnbjmZxfVkTdLo/N3ojbJ3egrmGz/SvmnfTx7+Y4f5+a0vwh/R8zf+idRIpf+q7jqpmSP+au4JtbfbMzsh9C+RGWEP9FaqL7OTYX9YzGzm+fAdT3B2oOGZqfyhdSL4bfN7/5etZ4+suh7v3d97uLzXWeGzbf2cnNb1KzP9dbjg2d31w9SxlcbYn5bYhIOf8MEX3nnxAd2vNzL5A7x7feX/3+qfxp9QYKNmJX
   </data>
  </layer>
  <layer id="5" name="AboveSprites" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJzt17ENgEAMA8Bs8BswATMC8zAfA4BERUUJVu4kN6lcWUoVAABAb8uoWq9s4+smANDHMT2TJrk7AKRK/d/3+c7bDfiv1P2hlxPHow/V
+   eJzt18EJgDAQRNEFC0gjQppR61ALUAtQC7EGi3PAAkQva9j/4F9ymtNCzAAAAAAgtimZzWpJ3ksAAIijyWat6tRZea95r9fuQY3Ze8k3q3Zvai90PwAgplL/70d99/QG4L9KvT+I5QI5kg62
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -76,7 +76,7 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="65" template="../../../../common/maps/obj/entry_down.tx" x="355.25" y="479" width="46" height="21.5">
+  <object id="65" template="../../../../common/maps/obj/entry_down.tx" x="355.146" y="486.5" width="46" height="21.5">
    <properties>
     <property name="teleport" value="../Realm of Legends/maps/map/cave/Prison_of_the_Ur-Dragon_f1.tmx"/>
    </properties>
@@ -92,8 +92,10 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Tome of the Guildpact&quot;, &quot;Glass of the Guildpact&quot;, &quot;Hero of Precinct One&quot;, &quot;Jenson Carthalion, Druid Exile&quot;]}"/>
     <property name="enemy" value="Jared"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -107,8 +109,10 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ancient Ziggurat&quot;, &quot;Rupture Spire&quot;, &quot;Exotic Orchard&quot;, &quot;Relic of Progenitus&quot;, &quot;Wall of Denial&quot;]}"/>
     <property name="enemy" value="Progenitus"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -122,9 +126,11 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dragonweave Tapestry&quot;, &quot;Dragonstorm Globe&quot;, &quot;Mox Jasper&quot;, &quot;Dragonfire Blade&quot;]}"/>
     <property name="enemy" value="Scion of the Ur-Dragon"/>
     <property name="pursueRange" type="int" value="30"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -138,8 +144,10 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Disrupting Scepter|LEB&quot;, &quot;Chaos Orb|LEB&quot;, &quot;Sol Ring|LEB&quot;, &quot;Living Wall|LEB&quot;, &quot;Juggernaut|LEB&quot;]}"/>
     <property name="enemy" value="Garth"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -153,8 +161,10 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Exploration&quot;, &quot;Path of Discovery&quot;]}"/>
     <property name="enemy" value="Golos"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -298,6 +308,93 @@ Your manasight stone blazes with power, near-blindingly bright.&quot;,
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 }
 ]</property>
+   </properties>
+  </object>
+  <object id="104" template="../../../../common/maps/obj/enemy.tx" x="643.545" y="602.909">
+   <properties>
+    <property name="deckOverride" value=""/>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Glass of the Guildpact&quot;, &quot;Hero of Precinct One&quot;, &quot;Jenson Carthalion, Druid Exile&quot;]}"/>
+    <property name="enemy" value="Jared"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="105" template="../../../../common/maps/obj/enemy.tx" x="641.273" y="388.364">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ancient Ziggurat&quot;, &quot;Rupture Spire&quot;, &quot;Relic of Progenitus&quot;, &quot;Wall of Denial&quot;]}"/>
+    <property name="enemy" value="Progenitus"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="106" template="../../../../common/maps/obj/enemy.tx" x="366.5" y="229.75">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Dragonstorm Globe&quot;, &quot;Mox Jasper&quot;, &quot;Dragonfire Blade&quot;]}"/>
+    <property name="enemy" value="Scion of the Ur-Dragon"/>
+    <property name="pursueRange" type="int" value="30"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="107" template="../../../../common/maps/obj/enemy.tx" x="111.5" y="385.75">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Path of Discovery&quot;]}"/>
+    <property name="enemy" value="Golos"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="108" template="../../../../common/maps/obj/enemy.tx" x="102.75" y="608.5">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Disrupting Scepter|LEB&quot;, &quot;Chaos Orb|LEB&quot;, &quot;Sol Ring|LEB&quot;, &quot;Living Wall|LEB&quot;]}"/>
+    <property name="enemy" value="Garth"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
  </objectgroup>

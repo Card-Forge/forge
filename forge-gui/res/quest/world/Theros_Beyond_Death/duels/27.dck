@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Cave Troll
+Title=Cave Troll
+Icon=Cave Troll.jpg
+Difficulty=Easy
+Description=./Standard/Theros_Beyond_Death/Aidon_Mclennan_-_Mono_Black_(Standard,_#928418).dck
+Deck Type=constructed
+
+[Main]
+1 Erebos, Bleak-Hearted
+1 Rankle, Master of Pranks
+2 Tymaret, Chosen from Death
+3 Ayara, First of Locthwain
+3 Nightmare Shepherd
+4 Cauldron Familiar
+4 Deathless Knight
+4 Yarok's Fenlurker
+4 Gray Merchant of Asphodel
+4 Murderous Rider
+4 Witch's Oven
+1 Eat to Extinction
+2 Treacherous Blessing
+2 Castle Locthwain
+4 Witch's Cottage
+17 Swamp
+[Sideboard]
+1 Treacherous Blessing
+1 Priest of Forgotten Gods
+1 Tymaret, Chosen from Death
+2 Sorcerous Spyglass
+2 Agonizing Remorse
+2 Drag to the Underworld
+3 Underworld Dreams
+3 Knight of the Ebon Legion

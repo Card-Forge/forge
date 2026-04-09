@@ -1,0 +1,11 @@
+Name:Casey & Raph, Hotheads
+ManaCost:4 R
+Types:Legendary Creature Mutant Ninja Human Turtle
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When NICKNAME enter, ABILITY
+SVar:TrigCharm:DB$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBExile,DBToken | AdditionalDescription$ . Each mode must target a different player.
+SVar:DBExile:DB$ Dig | ValidTgts$ Player | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Target player exiles the top card of their library. Until that player's next end step, they may play that card without paying its mana cost.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ CRPlay | EffectOwner$ RememberedOwner | Duration$ UntilYourNextEndStep | ExileOnMoved$ Exile | RememberObjects$ Remembered | SubAbility$ DBCleanup
+SVar:CRPlay:Mode$ Continuous | Affected$ Card.IsRemembered | MayPlay$ True | MayPlayWithoutManaCost$ True | AffectedZone$ Exile | Description$ Until that player's next end step, they may play that card without paying its mana cost.
+SVar:DBToken:DB$ Token | ValidTgts$ Player | TargetUnique$ True | TokenOwner$ ThisTargetedPlayer | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | SpellDescription$ Target player creates two Treasure tokens.
+Oracle:When Casey & Raph enter, choose one or both. Each mode must target a different player.\n• Target player exiles the top card of their library. Until that player's next end step, they may play that card without paying its mana cost.\n• Target player creates two Treasure tokens.

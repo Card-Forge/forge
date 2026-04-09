@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=King Goldemar
+Title=King Goldemar
+Icon=King Goldemar.jpg
+Difficulty=Very Hard
+Description=../Modern/Innistrad/SCG_Invitational_Qualifier_-_Lincoln,_Nebraska/Jim_Landis_-_Red_Deck_Wins_(Modern,_#29046).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+2 Hellspark Elemental
+4 Keldon Marauders
+4 Incinerate
+4 Lightning Bolt
+3 Magma Jet
+4 Searing Blaze
+4 Shard Volley
+3 Bump in the Night
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+4 Blackcleave Cliffs
+3 Dragonskull Summit
+8 Mountain
+1 Scalding Tarn
+[Sideboard]
+3 Ball Lightning
+2 Combust
+3 Everlasting Torment
+3 Smash to Smithereens
+4 Volcanic Fallout

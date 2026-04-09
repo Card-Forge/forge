@@ -3,7 +3,7 @@ Name:Perplexing Chimera (GatheringMagic.com) 052615 - Devil's Due
 URL:http://www.gatheringmagic.com/seanuy-052615-perplexing-chimera-devils-due/
 Goal:Win
 Turns:2
-Difficulty:Hard
+Difficulty:Rare
 Description:Win on your next turn.  AI has Evincar's Justice in hand.
 [state]
 ActivePlayer=AI

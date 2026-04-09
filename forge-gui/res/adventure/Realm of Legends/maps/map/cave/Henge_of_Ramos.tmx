@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="37" height="33" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="170">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="37" height="33" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="176">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -63,7 +63,7 @@
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 5,
-  &quot;colorType&quot;: [ &quot;multicolor&quot; ],
+  &quot;colorType&quot;: [ &quot;MultiColor&quot; ],
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
   &quot;colors&quot;: [ &quot;white&quot;, &quot;blue&quot;, &quot;black&quot;, &quot;red&quot;, &quot;green&quot; ]
 }]</property>
@@ -80,6 +80,8 @@
 	]</property>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ramosian Greatsword|MOM&quot;, &quot;The Mana Rig|DMC&quot;, &quot;Henge Guardian|DDG&quot;, &quot;Dragon Engine|DMR&quot;, &quot;Fallaji Wayfarer|DMC&quot;]}"/>
     <property name="enemy" value="Ramos"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="40"/>
     <property name="threatRange" type="int" value="20"/>
    </properties>
@@ -120,6 +122,10 @@
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Corroding Dragonstorm|TDM&quot;, &quot;Skull of Ramos|MMQ&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
     <property name="enemy" value="Teneb"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Insane" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
@@ -128,6 +134,8 @@
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Breaching Dragonstorm|TDM&quot;, &quot;Heart of Ramos|MMQ&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
     <property name="enemy" value="Numot"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
@@ -136,6 +144,8 @@
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Encroaching Dragonstorm|TDM&quot;, &quot;Horn of Ramos|MMQ&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
     <property name="enemy" value="Vorosh"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
@@ -144,6 +154,8 @@
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Roiling Dragonstorm|TDM&quot;, &quot;Eye of Ramos|MMQ&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
     <property name="enemy" value="Intet"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
@@ -152,6 +164,8 @@
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Teeming Dragonstorm|TDM&quot;, &quot;Tooth of Ramos|MMQ&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
     <property name="enemy" value="Oros"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
@@ -174,35 +188,35 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
-  &quot;colorType&quot;: [ &quot;multicolor&quot; ],
+  &quot;colorType&quot;: [ &quot;MultiColor&quot; ],
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
   &quot;colors&quot;: [ &quot;white&quot;, &quot;blue&quot;, &quot;green&quot; ]
 },
 {
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
-  &quot;colorType&quot;: [ &quot;multicolor&quot; ],
+  &quot;colorType&quot;: [ &quot;MultiColor&quot; ],
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
   &quot;colors&quot;: [ &quot;blue&quot;, &quot;black&quot;, &quot;green&quot; ]
 },
 {
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
-  &quot;colorType&quot;: [ &quot;multicolor&quot; ],
+  &quot;colorType&quot;: [ &quot;MultiColor&quot; ],
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
   &quot;colors&quot;: [ &quot;black&quot;, &quot;red&quot;, &quot;white&quot; ]
 },
 {
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
-  &quot;colorType&quot;: [ &quot;multicolor&quot; ],
+  &quot;colorType&quot;: [ &quot;MultiColor&quot; ],
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
   &quot;colors&quot;: [ &quot;white&quot;, &quot;blue&quot;, &quot;red&quot; ]
 },
 {
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
-  &quot;colorType&quot;: [ &quot;multicolor&quot; ],
+  &quot;colorType&quot;: [ &quot;MultiColor&quot; ],
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
   &quot;colors&quot;: [ &quot;blue&quot;, &quot;red&quot;, &quot;green&quot; ]
 }]</property>
@@ -213,35 +227,35 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
-  &quot;colorType&quot;: [ &quot;multicolor&quot; ],
+  &quot;colorType&quot;: [ &quot;MultiColor&quot; ],
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
   &quot;colors&quot;: [ &quot;white&quot;, &quot;blue&quot;, &quot;black&quot; ]
 },
 {
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
-  &quot;colorType&quot;: [ &quot;multicolor&quot; ],
+  &quot;colorType&quot;: [ &quot;MultiColor&quot; ],
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
   &quot;colors&quot;: [ &quot;blue&quot;, &quot;black&quot;, &quot;red&quot; ]
 },
 {
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
-  &quot;colorType&quot;: [ &quot;multicolor&quot; ],
+  &quot;colorType&quot;: [ &quot;MultiColor&quot; ],
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
   &quot;colors&quot;: [ &quot;black&quot;, &quot;red&quot;, &quot;green&quot; ]
 },
 {
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
-  &quot;colorType&quot;: [ &quot;multicolor&quot; ],
+  &quot;colorType&quot;: [ &quot;MultiColor&quot; ],
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
   &quot;colors&quot;: [ &quot;white&quot;, &quot;blue&quot;, &quot;green&quot; ]
 },
 {
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
-  &quot;colorType&quot;: [ &quot;multicolor&quot; ],
+  &quot;colorType&quot;: [ &quot;MultiColor&quot; ],
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;],
   &quot;colors&quot;: [ &quot;white&quot;, &quot;red&quot;, &quot;green&quot; ]
 }]</property>
@@ -268,5 +282,72 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
   <object id="167" template="../../../../common/maps/obj/collision.tx" x="471" y="194.451" width="24" height="56.0994"/>
   <object id="168" template="../../../../common/maps/obj/collision.tx" x="338.5" y="34.9503" width="44.75" height="10.8494"/>
   <object id="169" template="../../../../common/maps/obj/collision.tx" x="242.875" y="34.0753" width="44.75" height="10.8494"/>
+  <object id="170" template="../../../../common/maps/obj/enemy.tx" x="362.25" y="263.75">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Corroding Dragonstorm|TDM&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
+    <property name="enemy" value="Teneb"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="171" template="../../../../common/maps/obj/enemy.tx" x="281.5" y="266.25">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Breaching Dragonstorm|TDM&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
+    <property name="enemy" value="Numot"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="172" template="../../../../common/maps/obj/enemy.tx" x="313" y="212.75">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Teeming Dragonstorm|TDM&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
+    <property name="enemy" value="Oros"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="173" template="../../../../common/maps/obj/enemy.tx" x="381.5" y="190">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Encroaching Dragonstorm|TDM&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
+    <property name="enemy" value="Vorosh"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="174" template="../../../../common/maps/obj/enemy.tx" x="243.5" y="190.5">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Roiling Dragonstorm|TDM&quot;, &quot;Henge Guardian|DDG&quot;]}"/>
+    <property name="enemy" value="Intet"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="175" template="../../../../common/maps/obj/enemy.tx" x="304.25" y="129.5">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;With a deafening crash, the great dragon engine falls, thoroughly broken. As it does, the bright, shimmering light from the crystal in the henge's center fades to darkness.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ramosian Greatsword|MOM&quot;, &quot;The Mana Rig|DMC&quot;, &quot;Henge Guardian|DDG&quot;, &quot;Dragon Engine|DMR&quot;]}"/>
+    <property name="enemy" value="Ramos"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Tibalt
+Title=Tibalt
+Icon=Tibalt.jpg
+Difficulty=Medium
+Description=Zendikar/The_Gathering_1k_Open/Oliver_Russ_-_R-G_Beats_(Standard,_#2870).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodbraid Elf
+4 Borderland Ranger
+4 Master of the Wild Hunt
+4 Siege-Gang Commander
+2 Thornling
+4 Burst Lightning
+4 Lightning Bolt
+2 Earthquake
+4 Rampant Growth
+4 Garruk Wildspeaker
+5 Forest
+2 Gargoyle Castle
+4 Kazandu Refuge
+7 Mountain
+2 Oran-Rief, the Vastwood
+4 Rootbound Crag
+[Sideboard]
+3 Acidic Slime
+2 Chandra Nalaar
+4 Goblin Ruinblaster
+4 Great Sable Stag
+2 Windstorm

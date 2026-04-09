@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Ajok
+Title=Ajok
+Icon=Ajok.jpg
+Difficulty=Hard
+Description=./Modern/Aetherdrift/TAKAHASHI_YUMA_-_Goryo_shoot_(Modern,_#2385863).dck
+Deck Type=constructed
+
+[Main]
+1 Griselbrand
+4 Fallaji Archaeologist
+3 Atraxa, Grand Unifier
+2 Ulamog, the Defiler
+3 Emperor of Bones
+4 Psychic Frog
+3 Abhorrent Oculus
+2 Ketramose, the New Dawn
+1 Darkblast
+4 Goryo's Vengeance
+4 Ephemerate
+2 Force of Negation
+3 Faithful Mending
+1 Sink into Stupor
+3 Unearth
+1 Plains
+1 Island
+1 Swamp
+1 Hallowed Fountain
+1 Godless Shrine
+1 Watery Grave
+3 Flooded Strand
+4 Polluted Delta
+3 Marsh Flats
+1 Hedge Maze
+1 Meticulous Archive
+1 Shadowy Backstreet
+1 Undercity Sewers
+[Sideboard]
+1 Stony Silence
+2 Thoughtseize
+2 Surgical Extraction
+2 Teferi, Time Raveler
+1 Force of Negation
+1 Drannith Magistrate
+1 Temporary Lockdown
+1 Orcish Bowmasters
+1 Pest Control
+3 Consign to Memory

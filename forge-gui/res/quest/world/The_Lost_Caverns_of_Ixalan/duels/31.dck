@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Jacob Grimm
+Title=Jacob Grimm
+Icon=Jacob Grimm.jpg
+Difficulty=Easy
+Description=./Standard/The_Lost_Caverns_of_Ixalan/Laplasjan_-_Dimir_Midrange_(Standard,_#1996355).dck
+Deck Type=constructed
+
+[Main]
+1 Aclazotz, Deepest Betrayal
+3 Gix, Yawgmoth Praetor
+4 Deep-Cavern Bat
+2 Ertai Resurrected
+4 Faerie Mastermind
+4 Preacher of the Schism
+2 Sheoldred, the Apocalypse
+4 Spyglass Siren
+3 Cut Down
+4 Go for the Throat
+4 Make Disappear
+4 Underground River
+3 Mirrex
+1 Otawara, Soaring City
+3 Restless Reef
+3 Shipwreck Marsh
+3 Island
+1 Takenuma, Abandoned Mire
+3 Swamp
+4 Darkslick Shores
+[Sideboard]
+1 Cut Down
+2 Disdainful Stroke
+2 Duress
+1 Gix's Command
+2 Liliana of the Veil
+1 Negate
+2 Path of Peril
+2 Tishana's Tidebinder
+2 Unlicensed Hearse

@@ -3,7 +3,7 @@ Name:Perplexing Chimera (GatheringMagic.com) 110315 - Challenge the Pack
 URL:http://www.gatheringmagic.com/seanuy-110315-challenge-the-pack/
 Goal:Win
 Turns:1
-Difficulty:Hard
+Difficulty:Rare
 Description: Win this turn.
 [state]
 ActivePlayer=human

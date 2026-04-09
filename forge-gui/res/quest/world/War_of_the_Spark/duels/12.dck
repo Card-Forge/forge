@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Oberon
+Title=Oberon
+Icon=Oberon.jpg
+Difficulty=Medium
+Description=./Standard/War_of_the_Spark/Alessandro_Saracino_-_Grixis-control_(Standard,_#796961).dck
+Deck Type=constructed
+
+[Main]
+3 Nicol Bolas, the Ravager
+4 Bedevil
+2 Bedeck // Bedazzle
+1 Vraska's Contempt
+4 Discovery // Dispersal
+4 Thought Erasure
+2 Enter the God-Eternals
+2 Cry of the Carnarium
+2 Angrath's Rampage
+2 Ritual of Soot
+4 Nicol Bolas, Dragon-God
+2 Narset, Parter of Veils
+2 Liliana, Dreadhorde General
+2 Ugin, the Ineffable
+3 Steam Vents
+4 Sulfur Falls
+4 Watery Grave
+4 Drowned Catacomb
+4 Blood Crypt
+4 Dragonskull Summit
+2 Swamp
+[Sideboard]
+1 Enter the God-Eternals
+1 Cry of the Carnarium
+1 Vraska's Contempt
+4 Thief of Sanity
+2 Moment of Craving
+1 The Elderspell
+2 Unmoored Ego
+3 Duress

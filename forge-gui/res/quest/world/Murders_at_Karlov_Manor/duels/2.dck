@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Higgins
+Title=Higgins
+Icon=Higgins.jpg
+Difficulty=Easy
+Description=./Standard/Murders_at_Karlov_Manor/Brahiam_-_Grixis_Singularity_(Standard,_#1966921).dck
+Deck Type=constructed
+
+[Main]
+1 Kotose, the Silent Spider
+4 Hidetsugu and Kairi
+4 Deep-Cavern Bat
+2 Consider
+4 Make Disappear
+2 Cut Down
+1 Sheoldred's Edict
+3 Bitter Triumph
+3 Maestros Charm
+3 Memory Deluge
+2 Explosive Singularity
+2 Deadly Cover-Up
+1 Push // Pull
+3 Invasion of Amonkhet
+1 Island
+4 Shipwreck Marsh
+2 Shivan Reef
+4 Stormcarved Coast
+3 Underground River
+4 Sulfurous Springs
+1 Sokenzan, Crucible of Defiance
+2 Cavern of Souls
+4 Haunted Ridge
+[Sideboard]
+3 Negate
+3 Duress
+2 Go for the Throat
+3 Siphon Insight
+1 Cut Down
+1 The End
+2 Brotherhood's End

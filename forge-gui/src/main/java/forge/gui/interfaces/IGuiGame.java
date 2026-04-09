@@ -16,6 +16,7 @@ import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.net.DeltaPacket;
 import forge.gui.control.PlaybackSpeed;
 import forge.interfaces.IGameController;
 import forge.item.PaperCard;
@@ -32,6 +33,14 @@ import java.util.Map;
 
 public interface IGuiGame {
     void setGameView(GameView gameView);
+
+    /**
+     * Set the game view with a sequence number for delta sync baseline.
+     * Local games ignore the sequence number.
+     */
+    default void setGameView(GameView gameView, long sequenceNumber) {
+        setGameView(gameView);
+    }
 
     GameView getGameView();
 
@@ -235,9 +244,7 @@ public interface IGuiGame {
 
     void restoreOldZones(PlayerView playerView, PlayerZoneUpdates playerZoneUpdates);
 
-    void setHighlighted(PlayerView pv, boolean b);
-
-    void setUsedToPay(CardView card, boolean value);
+    void setHighlighted(GameEntityView pv, boolean b);
 
     void setSelectables(final Iterable<CardView> cards);
 
@@ -340,6 +347,12 @@ public interface IGuiGame {
     void clearAutoYields();
 
     void setCurrentPlayer(PlayerView player);
+
+    /**
+     * Apply a delta update packet to the local game state.
+     * @param packet the delta packet containing changes
+     */
+    void applyDelta(DeltaPacket packet);
 
     /** Signal to start a client-side elapsed timer for waiting display. */
     void showWaitingTimer(PlayerView forPlayer, String waitingForPlayerName);

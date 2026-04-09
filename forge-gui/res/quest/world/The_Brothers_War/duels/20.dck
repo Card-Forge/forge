@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=The Zombie
+Title=The Zombie
+Icon=The Zombie.jpg
+Difficulty=Medium
+Description=./Standard/The_Brothers_War/German_Fraga_-_Mono-White_Humans_(Standard,_#1514660).dck
+Deck Type=constructed
+
+[Main]
+1 Anointed Peacekeeper
+2 Hopeful Initiate
+2 Sungold Sentinel
+2 Valiant Veteran
+2 Serra Paragon
+2 Myrel, Shield of Argive
+3 Guardian of New Benalia
+4 Recruitment Officer
+4 Thalia, Guardian of Thraben
+4 Brutal Cathar
+4 Siege Veteran
+4 Lay Down Arms
+3 The Wandering Emperor
+2 Eiganjo, Seat of the Empire
+3 Demolition Field
+4 Field of Ruin
+14 Plains
+[Sideboard]
+1 Sunset Revelry
+1 Curse of Silence
+1 Loran of the Third Path
+1 Tocasia's Welcome
+2 Wedding Announcement
+3 Valorous Stance
+3 Sanctify
+3 Destroy Evil

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="120">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="124">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -29,7 +29,7 @@
  </layer>
  <objectgroup id="4" name="Objects">
   <object id="77" template="../../../../common/maps/obj/gold.tx" x="125.083" y="41.5"/>
-  <object id="80" template="../../../../common/maps/obj/enemy.tx" x="209.834" y="173.167">
+  <object id="80" template="../../../../common/maps/obj/enemy.tx" x="213.584" y="174.167">
    <properties>
     <property name="defeatDialog">[
 	{
@@ -40,15 +40,20 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Soulguide Lantern|THB&quot;, &quot;Temple of Abandon|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
     <property name="enemy" value="Klothys"/>
-    <property name="threatRange" type="int" value="50"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
   <object id="81" template="../../../../common/maps/obj/enemy.tx" x="98.333" y="485.167">
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Mystery|CP1&quot;, &quot;Torpor Orb&quot;, &quot;The First Iroan Games&quot;]}"/>
     <property name="enemy" value="Uro"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="10"/>
    </properties>
@@ -57,6 +62,8 @@
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Malice|BNG&quot;, &quot;The Triumph of Anax|THB&quot;, &quot;Torpor Orb&quot;]}"/>
     <property name="enemy" value="Kroxa"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -77,6 +84,9 @@
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Temple of Triumph|THS&quot;, &quot;Torpor Orb&quot;, &quot;Opal Titan|USG&quot;]}"/>
     <property name="enemy" value="Phlage"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="10"/>
    </properties>
@@ -107,7 +117,7 @@
 </property>
    </properties>
   </object>
-  <object id="98" template="../../../../common/maps/obj/dialog.tx" x="179.151" y="738.904" width="157.697" height="20.858" visible="1">
+  <object id="98" template="../../../../common/maps/obj/dialog.tx" x="265.151" y="748.904" width="37.0303" height="20.858" visible="1">
    <properties>
     <property name="dialog">[
 {
@@ -118,7 +128,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="99" template="../../../../common/maps/obj/dialog.tx" x="275.318" y="237.571" width="32.364" height="90.1913" visible="1">
+  <object id="99" template="../../../../common/maps/obj/dialog.tx" x="285.568" y="204.571" width="18.114" height="21.1913" visible="1">
    <properties>
     <property name="dialog">[
 {
@@ -321,6 +331,53 @@
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
   &quot;cardTypes&quot;: [ &quot;Enchantment&quot; ]
 }]</property>
+   </properties>
+  </object>
+  <object id="120" template="../../../../common/maps/obj/enemy.tx" x="101" y="483.5">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Torpor Orb&quot;, &quot;The First Iroan Games&quot;]}"/>
+    <property name="enemy" value="Uro"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="121" template="../../../../common/maps/obj/enemy.tx" x="409.125" y="443.5">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Torpor Orb&quot;, &quot;Opal Titan|USG&quot;]}"/>
+    <property name="enemy" value="Phlage"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="122" template="../../../../common/maps/obj/enemy.tx" x="379.75" y="166.5">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;The Triumph of Anax|THB&quot;, &quot;Torpor Orb&quot;]}"/>
+    <property name="enemy" value="Kroxa"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="123" template="../../../../common/maps/obj/enemy.tx" x="212.75" y="174.75">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;The goddess begins to fade into stardust as she staggers back from your deathblow.
+
+'To think one such as you... could deny destiny itself...'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Soulguide Lantern|THB&quot;, &quot;Temple of Abandon|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="enemy" value="Klothys"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
  </objectgroup>

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Kane
+Title=Kane
+Icon=Kane.jpg
+Difficulty=Easy
+Description=./Standard/Edge_of_Eternities/Erik_Nagy_-_Mono_Purple_(Standard,_#2670287).dck
+Deck Type=constructed
+
+[Main]
+4 Burnout Bashtronaut
+4 Hired Claw
+4 Emberheart Challenger
+4 Razorkin Needlehead
+4 Screaming Nemesis
+1 Tersa Lightshatter
+1 Sunspine Lynx
+4 Nova Hellkite
+4 Burst Lightning
+4 Lightning Strike
+2 Witchstalker Frenzy
+18 Mountain
+4 Rockface Village
+2 Soulstone Sanctuary
+[Sideboard]
+2 Fire Magic
+2 Abrade
+2 Magebane Lizard
+2 Obliterating Bolt
+1 Ruinous Rampage
+2 Vengeful Possession
+2 Chandra, Spark Hunter
+2 Sunspine Lynx

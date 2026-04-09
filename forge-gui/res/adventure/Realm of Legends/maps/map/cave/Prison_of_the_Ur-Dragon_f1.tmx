@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="91">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="92">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -52,8 +52,10 @@
 
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Maelstrom of the Spirit Dragon|TDM&quot;, &quot;Opal Palace|C13&quot;, &quot;Call the Spirit Dragons|TDM&quot;, &quot;Dragon Tempest|DTK&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Scion of Draco&quot;, &quot;Opal Palace|C13&quot;, &quot;Maelstrom of the Spirit Dragon|TDM&quot;]}"/>
     <property name="enemy" value="The Ur-Dragon"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="60"/>
     <property name="threatRange" type="int" value="80"/>
    </properties>
@@ -122,6 +124,24 @@
   &quot;rarity&quot;: [ &quot;mythic rare&quot; ],
   &quot;colors&quot;: [ &quot;blue&quot; ]
 }]</property>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/enemy.tx" x="246.786" y="69.5671">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;With a roar that somehow shakes the very fabric of space itself, the progenitor of all dragons falls back into the void, vanishing from sight.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Opal Palace|C13&quot;, &quot;Maelstrom of the Spirit Dragon|TDM&quot;]}"/>
+    <property name="enemy" value="The Ur-Dragon"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="60"/>
+    <property name="threatRange" type="int" value="80"/>
    </properties>
   </object>
  </objectgroup>

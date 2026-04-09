@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Niv Mizzet
+Title=Niv Mizzet
+Icon=Niv Mizzet.jpg
+Difficulty=Very Hard
+Description=./Modern/March_of_the_Machine_The_Aftermath/Kumin120311_-_Jund_Scam_(Modern,_#1650838).dck
+Deck Type=constructed
+
+[Main]
+1 Tarmogoyf
+2 Tarmogoyf
+2 Seasoned Pyromancer
+4 Grief
+4 Fury
+4 Ragavan, Nimble Pilferer
+2 Fable of the Mirror-Breaker
+1 Nissa, Resurgent Animist
+1 Nissa, Resurgent Animist
+2 Terminate
+1 Lightning Bolt
+2 Lightning Bolt
+1 Terminate
+2 Malakir Rebirth
+2 Feign Death
+2 Undying Malice
+4 Inquisition of Kozilek
+3 Wrenn and Six
+1 Stomping Ground
+2 Blood Crypt
+4 Verdant Catacombs
+2 Overgrown Tomb
+3 Bloodstained Mire
+3 Wooded Foothills
+1 Stomping Ground
+1 Boseiju, Who Endures
+1 Swamp
+1 Mountain
+1 Forest
+[Sideboard]
+1 Blood Moon
+1 Emrakul, the Aeons Torn
+3 Leyline of the Void
+2 Force of Vigor
+2 Blood Moon
+2 Engineered Explosives
+2 Orvar, the All-Form
+2 Endurance

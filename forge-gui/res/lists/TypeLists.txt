@@ -125,6 +125,7 @@ Gamma:Gammas
 Gargoyle:Gargoyles
 Germ:Germs
 Giant:Giants
+Giraffe:Giraffes
 Gith:Gith
 Glimmer:Glimmers
 Gnoll:Gnolls
@@ -368,6 +369,7 @@ Shard
 Attraction
 Blood
 Bobblehead:Bobbleheads
+Book:Books
 Clue:Clues
 Contraption:Contraptions
 Equipment
@@ -405,6 +407,7 @@ Dakkon
 Daretti
 Davriel
 Deb
+Dellian
 Dihada
 Domri
 Dovin

@@ -64,7 +64,7 @@ public class EarthbendEffect extends SpellAbilityEffect {
 
             GameEntityCounterTable table = new GameEntityCounterTable();
             c.addCounter(CounterEnumType.P1P1, num, pl, table);
-            table.replaceCounterEffect(game, sa, true);
+            table.replaceCounterEffect(game, sa);
 
             buildTrigger(sa, c, sbTrigA, "Graveyard");
             buildTrigger(sa, c, sbTrigB, "Exile");

@@ -5,6 +5,11 @@
     "iconName": "ChallengeCoin"
   },
   {
+    "name": "Silver Challenge Coin",
+    "description": "A heavy coin made of silver. Redeem for a free sealed event.",
+    "iconName": "SilverChallengeCoin"
+  },
+  {
     "name": "Landscape Sketchbook - Mirage",
     "description": "Gives access to Mirage land arts in the add basic lands menu of the deckbuilder's upper right corner.",
     "iconName": "LandscapeSketchbook",
@@ -659,7 +664,13 @@
     "description": "The victory is yours now. Return to the mountain capitol for a reward.",
     "iconName": "VictoryStandard",
     "questItem": true
-  }, 
+  },
+  {
+    "name": "Kill Trophy",
+    "description": "Shows triumph over a monster. Give to Chevill for a reward.",
+    "iconName": "KillTrophy",
+    "questItem": true
+  },
   {
     "name": "Colorless rune",
     "usableOnWorldMap": true,
@@ -1028,7 +1039,7 @@
     "effect": {
         "lifeModifier": -6,
         "startBattleWithCard": [
-        "NirkanaCutthroat|ROE"
+        "Nirkana Cutthroat|ROE"
      ]
     }
   },
@@ -1038,7 +1049,7 @@
     "equipmentSlot": "Boots",
     "iconName": "UtopiaAnklet",
     "effect": {
-        "lifeModifier": -2,
+        "lifeModifier": -6,
         "startBattleWithCard": [
         "Utopia Tree|INV"
      ]
@@ -1050,7 +1061,6 @@
     "equipmentSlot": "Neck",
     "iconName": "AmuletofAgony",
     "effect": {
-        "lifeModifier": -6,
         "startBattleWithCard": [
         "Font of Agonies|RNA"
      ]
@@ -1062,7 +1072,7 @@
     "equipmentSlot": "Boots",
     "iconName": "KoboldBoots",
     "effect": {
-        "changeStartCards": -1,
+        "lifeModifier": -6,
         "startBattleWithCard": [
         "Kobolds of Kher Keep|LEG", "Crookshank Kobolds|LEG"
      ]
@@ -1116,13 +1126,13 @@
     }
   },
     {
-    "name": "Mistform Sliverband",
-    "description": "1/1 sliver; slivers can pay 1 to change types until EOT",
+    "name": "Imposter's Sliverband",
+    "description": "A 3/3 artifact sliver with no abilities",
     "equipmentSlot": "Boots",
     "iconName": "MistformSliverband",
     "effect": {
         "startBattleWithCard": [
-        "Mistform Sliver|LGN"
+        "Venser's Sliver|TSP"
      ]
     }
   },
@@ -1246,8 +1256,7 @@
       "equipmentSlot": "Boots",
       "iconName": "Witch-MawAnklet",
       "effect": {
-        "changeStartCards": -1,
-        "lifeModifier": -4,
+        "lifeModifier": -8,
         "startBattleWithCard": [
           "Witch-Maw Nephilim|GPT"
         ]
@@ -1346,7 +1355,7 @@
   },
     {
     "name": "Gixian Graft",
-    "description": "3/1 phyrexian, when it does, copy it into grave, unearth 1B",
+    "description": "3/1 phyrexian, when it dies, copy it into grave, unearth 1B",
     "equipmentSlot": "Boots",
     "iconName": "GixianGraft",
     "effect": {
@@ -1368,13 +1377,13 @@
     }
   },
     {
-    "name": "Sinuous Shoes",
-    "description": "2/2 rat that becomes a 5/5 menace for 3BB",
+    "name": "Shoes of the Swarm",
+    "description": "*/1 rat, * is your rat count.",
     "equipmentSlot": "Boots",
     "iconName": "SinuousShoes",
     "effect": {
         "startBattleWithCard": [
-        "Sinuous Vermin"
+        "Swarm of Rats|9ED"
      ]
     }
   },
@@ -1396,6 +1405,7 @@
     "equipmentSlot": "Boots",
     "iconName": "JoragaBoots",
     "effect": {
+        "changeStartCards": -1,
         "startBattleWithCard": [
         "Joraga Treespeaker|ROE"
      ]
@@ -1418,8 +1428,7 @@
       "equipmentSlot": "Boots",
       "iconName": "Yore-TillerAnklet",
       "effect": {
-        "changeStartCards": -1,
-        "lifeModifier": -4,
+        "changeStartCards": -2,
         "startBattleWithCard": [
           "Yore-Tiller Nephilim|GPT"
         ]
@@ -1449,13 +1458,24 @@
   },
     {
     "name": "Valorous Greaves",
-    "description": "2/1 knight, gives a +1/+1 counter to another knight on death",
+    "description": "2/2 knight, +1/+1 to your other knights",
     "equipmentSlot": "Boots",
     "iconName": "ValorousGreaves",
     "effect": {
         "startBattleWithCard": [
-        "Venerable Knight|ELD"
+        "Inspiring Veteran|ELD"
      ]
+    }
+  },
+  {
+    "name": "Battle Cry Boots",
+    "description": "2/2, 1R: +1/+0 and haste to gobs; attack w/6+ power: gob token",
+    "equipmentSlot": "Boots",
+    "iconName": "BattleCryBoots",
+    "effect": {
+      "startBattleWithCard": [
+        "Battle Cry Goblin|J25"
+      ]
     }
   },
     {
@@ -1499,7 +1519,7 @@
     "iconName": "VindicatorGreaves",
     "cost": 5000,
     "effect": {
-        "lifeModifier": -6,
+        "lifeModifier": -4,
         "startBattleWithCard": [
         "Kabira Vindicator|ROE"
      ]
@@ -1569,7 +1589,6 @@
     "equipmentSlot": "Boots",
     "iconName": "BloodswornBite",
     "effect": {
-        "lifeModifier": -4,
         "startBattleWithCard": [
         "Olivia's Bloodsworn|SOI"
      ]
@@ -1603,8 +1622,7 @@
       "equipmentSlot": "Boots",
       "iconName": "Dune-BroodAnklet",
       "effect": {
-        "changeStartCards": -1,
-        "lifeModifier": -4,
+        "lifeModifier": -8,
         "startBattleWithCard": [
           "Dune-Brood Nephilim|GPT"
         ]
@@ -1787,7 +1805,6 @@
       "iconName": "Glint-EyeAnklet",
       "effect": {
         "changeStartCards": -2,
-        "lifeModifier": -4,
         "startBattleWithCard": [
           "Glint-Eye Nephilim|GPT"
         ]
@@ -1800,7 +1817,6 @@
       "iconName": "Ink-TreaderAnklet",
       "effect": {
         "changeStartCards": -1,
-        "lifeModifier": -4,
         "startBattleWithCard": [
           "Ink-Treader Nephilim|GPT"
         ]
@@ -1808,12 +1824,13 @@
   },
     {
     "name": "Fblthp's Lost Socks",
-    "description": "1/1 that draws a card on ETB",
+    "description": "2/5 hexproof",
     "equipmentSlot": "Boots",
     "iconName": "Fblthp'sLostSocks",
     "effect": {
+        "lifeModifier": -10,
         "startBattleWithCard": [
-        "Fblthp, the Lost|WAR"
+        "Humongulus"
      ]
     }
   },
@@ -1869,6 +1886,7 @@
     "equipmentSlot": "Left",
     "iconName": "AbzanGauntlet",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Abzan Monument|TDM"
      ]
@@ -1904,7 +1922,7 @@
     "iconName": "TomeofFire",
     "cost": 5000,
     "effect": {
-        "lifeModifier": -4,
+        "lifeModifier": -2,
         "startBattleWithCard": [
         "Seal of Fire|NEM"
      ]
@@ -1916,6 +1934,7 @@
     "equipmentSlot": "Left",
     "iconName": "GoldenEgg",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Golden Egg|ELD"
      ]
@@ -1938,7 +1957,7 @@
     "equipmentSlot": "Left",
     "iconName": "MalignPrayerbook",
     "effect": {
-        "changeStartCards": -1,
+      "lifeModifier": -4,
         "startBattleWithCard": [
         "Vessel of Malignity|SOI"
      ]
@@ -1984,6 +2003,7 @@
     "equipmentSlot": "Left",
     "iconName": "MaptotheWorldTree",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Path to the World Tree|KHM"
      ]
@@ -2063,6 +2083,9 @@
     "equipmentSlot": "Left",
     "iconName": "Poisoner'sGlove",
     "effect": {
+      "opponent": {
+        "lifeModifier": -2
+      },
         "startBattleWithCard": [
         "Vial of Poison|M14"
      ]
@@ -2097,6 +2120,7 @@
     "iconName": "LotusPetal",
     "cost": 5000,
     "effect": {
+        "lifeModifier": -5,
         "startBattleWithCard": [
         "Lotus Petal|TMP"
      ]
@@ -2108,6 +2132,7 @@
     "equipmentSlot": "Left",
     "iconName": "BlackLotus",
     "effect": {
+        "lifeModifier": -7,
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Black Lotus|LEA"
@@ -2132,6 +2157,7 @@
     "equipmentSlot": "Left",
     "iconName": "TemurGauntlet",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Temur Monument|TDM"
      ]
@@ -2179,7 +2205,7 @@
     "equipmentSlot": "Left",
     "iconName": "Kaleidostone",
     "effect": {
-        "lifeModifier": 2,
+        "lifeModifier": 5,
         "startBattleWithCard": [
         "Kaleidostone|CON"
      ]
@@ -2215,6 +2241,7 @@
     "equipmentSlot": "Left",
     "iconName": "SultaiGauntlet",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Sultai Monument|TDM"
      ]
@@ -2237,6 +2264,7 @@
     "equipmentSlot": "Left",
     "iconName": "PrayerbookofVigor",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Font of Vigor|JOU"
      ]
@@ -2248,6 +2276,7 @@
     "equipmentSlot": "Left",
     "iconName": "MarduGauntlet",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Mardu Monument|TDM"
      ]
@@ -2259,6 +2288,7 @@
     "equipmentSlot": "Left",
     "iconName": "JeskaiGauntlet",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Jeskai Monument|TDM"
      ]
@@ -2315,8 +2345,7 @@
     "iconName": "TomeofRemoval",
     "cost": 5000,
     "effect": {
-        "changeStartCards": -1,
-        "lifeModifier": -1,
+        "lifeModifier": -4,
         "startBattleWithCard": [
         "Seal of Removal|NEM"
      ]
@@ -2351,20 +2380,21 @@
     "equipmentSlot": "Left",
     "iconName": "PrayerbookofReturn",
     "effect": {
-        "changeStartCards": -1,
+      "lifeModifier": -4,
         "startBattleWithCard": [
         "Font of Return|JOU"
      ]
     }
   },
     {
-    "name": "Soulguide Gauntlet",
+    "name": "Soul-Guide Gauntlet",
     "description": "Sac to exile a graveyard or 1 and sac to draw",
     "equipmentSlot": "Left",
     "iconName": "SoulguideGauntlet",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
-        "Soulguide Lantern|THB"
+        "Soul-Guide Lantern|THB"
      ]
     }
   },
@@ -2386,6 +2416,9 @@
     "equipmentSlot": "Left",
     "iconName": "PrayerbookofIre",
     "effect": {
+      "opponent": {
+        "lifeModifier": -3
+      },
         "startBattleWithCard": [
         "Font of Ire|JOU"
      ]
@@ -2411,7 +2444,7 @@
     "effect": {
         "lifeModifier": -6,
         "startBattleWithCard": [
-        "Binding of the Titans|THB"
+        "The Binding of the Titans|THB"
      ]
     }
   },
@@ -2421,7 +2454,7 @@
     "equipmentSlot": "Left",
     "iconName": "VolatilePrayerbook",
     "effect": {
-        "lifeModifier": -2,
+        "lifeModifier": -4,
         "startBattleWithCard": [
         "Vessel of Volatility|SOI"
      ]
@@ -2444,9 +2477,9 @@
     "equipmentSlot": "Left",
     "iconName": "PrayerbookofFortunes",
     "effect": {
-        "changeStartCards": -1,
+        "changeStartCards": -4,
         "startBattleWithCard": [
-        "Font of Fortune|JOU"
+        "Font of Fortunes|JOU"
      ]
     }
   },
@@ -2532,12 +2565,12 @@
   },
     {
     "name": "Ooze Amulet",
-    "description": "Pay 1G and sac a non-ooze at sorcery speed, make an X/X ooze of the sac'd's power",
+    "description": "1G: Remove X +1/+1 counters, make an X/X ooze",
     "equipmentSlot": "Neck",
     "iconName": "OozeAmulet",
     "effect": {
         "startBattleWithCard": [
-        "Ooze Garden|ALA"
+        "Ooze Flux|GTC"
      ]
     }
   },
@@ -2546,7 +2579,7 @@
     "description": "1U and discard to draw or 1U and sac to draw",
     "equipmentSlot": "Neck",
     "iconName": "MaskofCompulsion",
-    "cost": 5000,
+    "cost": 2000,
     "effect": {
         "changeStartCards": -1,
         "startBattleWithCard": [
@@ -2560,6 +2593,7 @@
     "equipmentSlot": "Neck",
     "iconName": "BreachingStormcrown",
     "effect": {
+        "lifeModifier": 5,
         "startBattleWithCard": [
         "Breaching Dragonstorm|TDM"
      ]
@@ -2570,7 +2604,7 @@
     "description": "G and discard for +2/+2 or G and sac for +2/+2",
     "equipmentSlot": "Neck",
     "iconName": "MaskofNarcissism",
-    "cost": 5000,
+    "cost": 2000,
     "effect": {
         "startBattleWithCard": [
         "Narcissism|TOR"
@@ -2583,6 +2617,7 @@
     "equipmentSlot": "Neck",
     "iconName": "AcornAmulet",
     "effect": {
+        "lifeModifier": 4,
         "startBattleWithCard": [
         "Squirrel Sanctuary|MH2"
      ]
@@ -2602,13 +2637,16 @@
   },
     {
     "name": "Mask of Valgavoth",
-    "description": "Your opponents creatures lose hexproof and ward, if recurred gives -3/-3 on enter",
+    "description": "Cancels opponent's hexproof and ward, -3 enemy life",
     "equipmentSlot": "Neck",
     "iconName": "MaskofValgavoth",
     "effect": {
         "startBattleWithCard": [
         "Nowhere to Run|DSK"
-     ]
+     ],
+      "opponent": {
+        "lifeModifier": -3
+      }
     }
   },
     {
@@ -2617,6 +2655,7 @@
     "equipmentSlot": "Neck",
     "iconName": "RoilingStormcrown",
     "effect": {
+      "lifeModifier": 2,
         "startBattleWithCard": [
         "Roiling Dragonstorm|TDM"
      ]
@@ -2628,7 +2667,7 @@
     "equipmentSlot": "Neck",
     "iconName": "AmuletofAwakening",
     "effect": {
-        "lifeModifier": -10,
+        "lifeModifier": -6,
         "startBattleWithCard": [
         "Awakening Zone|ROE"
      ]
@@ -2658,13 +2697,12 @@
   },
     {
     "name": "Fblthp's Lost Hat",
-    "description": "Win at 200 cards (which you can't have), boosts life as consolation",
+    "description": "Gain future sight if you find Fblthp.",
     "equipmentSlot": "Neck",
     "iconName": "Fblthp'sLostHat",
     "effect": {
-        "lifeModifier": 5,
         "startBattleWithCard": [
-        "Battle of Wits|ODY"
+        "Case of the Lost Witness"
      ]
     }
   },
@@ -2708,6 +2746,7 @@
     "equipmentSlot": "Neck",
     "iconName": "CorrodingStormcrown",
     "effect": {
+      "lifeModifier": 2,
         "startBattleWithCard": [
         "Corroding Dragonstorm|TDM"
      ]
@@ -2730,8 +2769,11 @@
     "description": "Pay 3R for random burn",
     "equipmentSlot": "Neck",
     "iconName": "AmuletofFury",
-    "cost": 1000,
+    "cost": 2000,
     "effect": {
+      "opponent": {
+        "lifeModifier": -2
+      },
         "startBattleWithCard": [
         "Planeswalker's Fury|PLS"
      ]
@@ -2742,7 +2784,7 @@
     "description": "1B and discard to exile a grave card or 1B and sac to exile a grave card",
     "equipmentSlot": "Neck",
     "iconName": "MaskofMortiphobia",
-    "cost": 5000,
+    "cost": 2000,
     "effect": {
         "startBattleWithCard": [
         "Mortiphobia|TOR"
@@ -2754,7 +2796,7 @@
     "description": "1R and random discard to ping 1 or 1R and sac to ping 1. Also lowers opp life.",
     "equipmentSlot": "Neck",
     "iconName": "MaskofPyromania",
-    "cost": 5000,
+    "cost": 2000,
     "effect": {
         "startBattleWithCard": [
         "Pyromania|TOR"
@@ -2769,7 +2811,7 @@
     "description": "W and discard to prevent 3 damage or W and sac to prevent 3 damage",
     "equipmentSlot": "Neck",
     "iconName": "MaskofHypochondria",
-    "cost": 5000,
+    "cost": 2000,
     "effect": {
         "startBattleWithCard": [
         "Hypochondria|TOR"
@@ -2782,6 +2824,7 @@
     "equipmentSlot": "Neck",
     "iconName": "TeemingStormcrown",
     "effect": {
+        "lifeModifier": 4,
         "startBattleWithCard": [
         "Teeming Dragonstorm|TDM"
      ]
@@ -2804,9 +2847,9 @@
     "description": "Pay 3W for random lifegain",
     "equipmentSlot": "Neck",
     "iconName": "AmuletofMirth",
-    "cost": 1000,
+    "cost": 2000,
     "effect": {
-        "lifeModifier": 2,
+        "lifeModifier": 4,
         "startBattleWithCard": [
         "Planeswalker's Mirth|PLS"
      ]
@@ -2828,7 +2871,7 @@
     "description": "Pay 3U for random spell steal",
     "equipmentSlot": "Neck",
     "iconName": "AmuletofMischief",
-    "cost": 1000,
+    "cost": 2000,
     "effect": {
         "startBattleWithCard": [
         "Planeswalker's Mischief|PLS"
@@ -2840,7 +2883,7 @@
     "description": "Pay 3B for random debuff",
     "equipmentSlot": "Neck",
     "iconName": "AmuletofScorn",
-    "cost": 1000,
+    "cost": 2000,
     "effect": {
         "startBattleWithCard": [
         "Planeswalker's Scorn|PLS"
@@ -2900,6 +2943,7 @@
     "equipmentSlot": "Neck",
     "iconName": "EncroachingStormcrown",
     "effect": {
+        "lifeModifier": 4,
         "startBattleWithCard": [
         "Encroaching Dragonstorm|TDM"
      ]
@@ -2910,7 +2954,9 @@
     "description": "Pay 3G for random buff",
     "equipmentSlot": "Neck",
     "iconName": "AmuletofFavor",
+    "cost": 2000,
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Planeswalker's Favor|PLS"
      ]
@@ -2934,6 +2980,7 @@
     "equipmentSlot": "Right",
     "iconName": "SilverskinGauntlet",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Silverskin Armor|MBS"
      ]
@@ -2945,6 +2992,7 @@
     "equipmentSlot": "Right",
     "iconName": "BladedBracer",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Bladed Bracers|AVR"
      ]
@@ -2957,6 +3005,7 @@
     "iconName": "EchoShield",
     "cost": 500,
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Echo Circlet|SOM"
      ]
@@ -2979,6 +3028,7 @@
     "equipmentSlot": "Right",
     "iconName": "CelestialSword",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Celestial Sword|ICE"
      ]
@@ -2990,6 +3040,7 @@
     "equipmentSlot": "Right",
     "iconName": "AegisoftheMeek",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Aegis of the Meek|ICE"
      ]
@@ -3001,6 +3052,7 @@
     "equipmentSlot": "Right",
     "iconName": "RunedStalactite",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Runed Stalactite|LRW"
      ]
@@ -3034,6 +3086,7 @@
     "equipmentSlot": "Right",
     "iconName": "SpyKit",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Spy Kit|CN2"
      ]
@@ -3045,6 +3098,7 @@
     "equipmentSlot": "Right",
     "iconName": "ShieldoftheRighteous",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Shield of the Righteous|ARB"
      ]
@@ -3056,21 +3110,9 @@
     "equipmentSlot": "Right",
     "iconName": "ShortSword",
     "effect": {
-        "lifeModifier": 1,
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Short Sword|DOM"
-     ]
-    }
-  },
-    {
-    "name": "Darksteel Axe",
-    "description": "Equip 2, +2/+0, is indestructible",
-    "equipmentSlot": "Right",
-    "iconName": "DarksteelAxe",
-    "cost": 1000,
-    "effect": {
-        "startBattleWithCard": [
-        "Darksteel Axe|SOM"
      ]
     }
   },
@@ -3080,6 +3122,7 @@
     "equipmentSlot": "Right",
     "iconName": "SteelclawLance",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Steelclaw Lance|ELD"
      ]
@@ -3091,6 +3134,7 @@
     "equipmentSlot": "Right",
     "iconName": "StarforgedSword",
     "effect": {
+      "lifeModifier": 3,
         "startBattleWithCard": [
         "Starforged Sword|BLB"
      ]
@@ -3113,6 +3157,7 @@
     "equipmentSlot": "Right",
     "iconName": "TrustyMachete",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Trusty Machete|ZEN"
      ]
@@ -3124,6 +3169,7 @@
     "equipmentSlot": "Right",
     "iconName": "CeremonialKnife",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Ceremonial Knife|VOW"
      ]
@@ -3170,6 +3216,7 @@
     "equipmentSlot": "Right",
     "iconName": "AngelicArmaments",
     "effect": {
+        "lifeModifier": 4,
         "startBattleWithCard": [
         "Angelic Armaments|AVR"
      ]
@@ -3182,6 +3229,7 @@
     "iconName": "Brawler'sCestus",
     "cost": 1000,
     "effect": {
+        "lifeModifier": 4,
         "startBattleWithCard": [
         "Brawler's Plate|ORI"
      ]
@@ -3205,6 +3253,7 @@
     "iconName": "JoustingLance",
     "cost": 1000,
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Jousting Lance|DOM"
      ]
@@ -3216,6 +3265,7 @@
     "equipmentSlot": "Right",
     "iconName": "Fblthp'sLostFishingPole",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Fishing Pole|FDN"
      ]
@@ -3227,7 +3277,6 @@
     "equipmentSlot": "Right",
     "iconName": "RamosianGreatsword",
     "effect": {
-        "lifeModifier": -3,
         "startBattleWithCard": [
         "Ramosian Greatsword|MOM"
      ]
@@ -3240,7 +3289,7 @@
     "iconName": "RingofXathrid",
     "cost": 5000,
     "effect": {
-        "lifeModifier": -2,
+        "lifeModifier": -3,
         "startBattleWithCard": [
         "Ring of Xathrid|M13"
      ]
@@ -3264,6 +3313,7 @@
     "equipmentSlot": "Right",
     "iconName": "PetrifiedHead",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Gorgon's Head|BNG"
      ]
@@ -3275,6 +3325,7 @@
     "equipmentSlot": "Right",
     "iconName": "BespokeGauntlet",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Bespoke Battlegarb|WOE"
      ]
@@ -3286,6 +3337,7 @@
     "equipmentSlot": "Right",
     "iconName": "RingofDragonBlood",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Dragon Blood|USG"
      ]
@@ -3298,7 +3350,7 @@
     "iconName": "RingofThune",
     "cost": 5000,
     "effect": {
-        "lifeModifier": -2,
+        "lifeModifier": -3,
         "startBattleWithCard": [
         "Ring of Thune|M13"
      ]
@@ -3311,7 +3363,7 @@
     "iconName": "RingofValkas",
     "cost": 5000,
     "effect": {
-        "lifeModifier": -2,
+        "lifeModifier": -3,
         "startBattleWithCard": [
         "Ring of Valkas|M13"
      ]
@@ -3334,6 +3386,7 @@
     "equipmentSlot": "Right",
     "iconName": "Witches'Eye",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Witches' Eye|THS"
      ]
@@ -3345,6 +3398,7 @@
     "equipmentSlot": "Right",
     "iconName": "DraconianCylix",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Draconian Cylix|FEM"
      ]
@@ -3368,7 +3422,7 @@
     "iconName": "RingofKalonia",
     "cost": 5000,
     "effect": {
-        "lifeModifier": -2,
+        "lifeModifier": -3,
         "startBattleWithCard": [
         "Ring of Kalonia|M13"
      ]
@@ -3381,7 +3435,7 @@
     "iconName": "RingofEvosIsle",
     "cost": 5000,
     "effect": {
-        "lifeModifier": -2,
+        "lifeModifier": -3,
         "startBattleWithCard": [
         "Ring of Evos Isle|M13"
      ]
@@ -3393,6 +3447,7 @@
     "equipmentSlot": "Right",
     "iconName": "SirenSongLyre",
     "effect": {
+        "lifeModifier": 4,
         "startBattleWithCard": [
         "Siren Song Lyre|BNG"
      ]
@@ -3405,19 +3460,32 @@
     "iconName": "SpidersilkGlove",
     "cost": 500,
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Spidersilk Net|DTK"
      ]
     }
   },
+  {
+    "name": "Spidersilk Helm",
+    "description": "Your creatures get +0/+1 and reach.",
+    "equipmentSlot": "Neck",
+    "iconName": "SpidersilkHelm",
+    "effect": {
+      "lifeModifier": -3,
+      "startBattleWithCard": [
+        "Spidersilk Armor|DDG"
+      ]
+    }
+  },
     {
     "name": "Full Moon Necklace",
-    "description": "Werewolves get +1/+0 and trample, sac to regen them all",
-    "equipmentSlot": "Right",
+    "description": "Wolves and Werewolves get +1/+1 and trample.",
+    "equipmentSlot": "Neck",
     "iconName": "FullMoonNecklace",
     "effect": {
         "startBattleWithCard": [
-        "Full Moon's Rise"
+        "Howlpack Resurgence"
      ]
     }
   },
@@ -3440,19 +3508,18 @@
       "iconName": "TruthButcher'sArmor",
       "effect": {
         "changeStartCards": 4,
-        "lifeModifier": -12
+        "lifeModifier": -10
     }
   },
     {
       "name": "Flaming Armor",
-      "description": "Lowers foe's health as well as your own.",
+      "description": "Lowers foe's starting health.",
       "equipmentSlot": "Body",
       "iconName": "FlamingArmor",
-      "cost": 1000,
+      "cost": 3000,
       "effect": {
-        "lifeModifier": -2,
         "opponent": {
-          "lifeModifier": -5
+          "lifeModifier": -8
         }
       }
     },
@@ -3481,26 +3548,15 @@
     }
   },
     {
-      "name": "Restricted Robes",
-      "description": "Two extra cards at the cost of lots of life.",
-      "equipmentSlot": "Body",
-      "iconName": "RestrictedRobes",
-      "cost": 6000,
-      "effect": {
-        "changeStartCards": 2,
-        "lifeModifier": -7
-    }
-  },
-    {
       "name": "Blessed Armor",
       "description": "A powerful life boost, but boosts your foe as well.",
       "equipmentSlot": "Body",
-      "iconName": "BlessedArmor",
-      "cost": 1000,
+      "iconName": "DivinelyBlessedArmor",
+      "cost": 3000,
       "effect": {
-        "lifeModifier": 9,
+        "lifeModifier": 15,
         "opponent": {
-          "lifeModifier": 4
+          "lifeModifier": 5
         }
       }
     },
@@ -3510,7 +3566,6 @@
     "equipmentSlot": "Body",
     "iconName": "NomadArmor",
     "effect": {
-      "lifeModifier": 3,       
       "changeStartCards": -1,
         "startBattleWithCard": [
         "Nomad Stadium|ODY"
@@ -3519,13 +3574,13 @@
   },
     {
       "name": "Forbidden Robes",
-      "description": "Two extra cards at the cost of lots of life",
+      "description": "Two extra cards at the cost of life",
       "equipmentSlot": "Body",
-      "iconName": "ForbiddenRobes",
-      "cost": 1000,
+      "iconName": "RestrictedRobes",
+      "cost": 3000,
       "effect": {
         "changeStartCards": 2,
-        "lifeModifier": -10
+        "lifeModifier": -7
     }
   },
     {
@@ -3534,7 +3589,6 @@
     "equipmentSlot": "Body",
     "iconName": "CabalArmor",
     "effect": {
-        "lifeModifier": 3,  
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Cabal Pit|ODY"
@@ -3559,8 +3613,7 @@
       "equipmentSlot": "Body",
       "iconName": "CrystallineArmor",
       "effect": {
-        "changeStartCards": -1,
-        "lifeModifier": 5,
+        "lifeModifier": -5,
         "startBattleWithCard": [
           "Crystal Quarry|ODY"
         ]
@@ -3572,7 +3625,6 @@
     "equipmentSlot": "Body",
     "iconName": "CentaurArmor",
     "effect": {
-        "lifeModifier": 3,  
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Centaur Garden|ODY"
@@ -3597,6 +3649,7 @@
     "equipmentSlot": "Body",
     "iconName": "NivixVest",
     "effect": {
+        "lifeModifier": 4,
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Nivix, Aerie of the Firemind|GPT"
@@ -3609,6 +3662,7 @@
     "equipmentSlot": "Body",
     "iconName": "Rancher'sGarb",
     "effect": {
+        "lifeModifier": 3,
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Bucolic Ranch|OTJ"
@@ -3622,7 +3676,7 @@
     "iconName": "SteelArmor",
     "cost": 1000,
     "effect": {
-        "lifeModifier": 3
+        "lifeModifier": 4
     }
   },
     {
@@ -3637,39 +3691,33 @@
      ]
     }
   },
-    {
-      "name": "Divinely Blessed Armor",
-      "description": "A powerful life boost, but boosts your foe as well.",
-      "equipmentSlot": "Body",
-      "iconName": "DivinelyBlessedArmor",
-      "cost": 6000,
-      "effect": {
-        "lifeModifier": 12,
-        "opponent": {
-          "lifeModifier": 6
-        }
+  {
+    "name": "Heavy Armor",
+    "description": "An amazing life boost but opponent's permanents enter untapped.",
+    "equipmentSlot": "Body",
+    "iconName": "UltraHeavyArmor",
+    "cost": 3000,
+    "effect": {
+      "lifeModifier": 15,
+      "opponent": {
+        "startBattleWithCard": [
+          "Amulet of Vigor|WWK"
+        ]
       }
-    },
-    {
-      "name": "Heavy Armor",
-      "description": "An amazing life boost at the cost of a card.",
-      "equipmentSlot": "Body",
-      "iconName": "HeavyArmor",
-      "cost": 1000,
-      "effect": {
-        "changeStartCards": -1,
-        "lifeModifier": 13
     }
   },
-    {
-      "name": "Ultra Heavy Armor",
-      "description": "An amazing life boost at the cost of a card.",
-      "equipmentSlot": "Body",
-      "iconName": "UltraHeavyArmor",
-      "cost": 6000,
-      "effect": {
-        "changeStartCards": -1,
-        "lifeModifier": 16
+  {
+    "name": "Liliana's Veil",
+    "description": "At each end step, create a 2/2 zombie if you played a walker.",
+    "equipmentSlot": "Neck",
+    "iconName": "Liliana'sVeil",
+    "effect": {
+      "lifeModifier": -6,
+      "opponent": {
+        "startBattleWithCard": [
+          "Oath of Liliana|EMN"
+        ]
+      }
     }
   },
     {
@@ -3678,8 +3726,8 @@
     "equipmentSlot": "Body",
     "iconName": "ArmoroftheFirst",
     "effect": {
-        "changeStartCards": -1,
-        "startBattleWithCard": [
+      "lifeModifier": -5,
+      "startBattleWithCard": [
         "Sliver Hive|M15"
      ]
     }
@@ -3690,7 +3738,6 @@
     "equipmentSlot": "Body",
     "iconName": "BarbarianArmor",
     "effect": {
-        "lifeModifier": 3,  
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Barbarian Ring|ODY"
@@ -3698,24 +3745,12 @@
     }
   },
     {
-      "name": "Blazing Armor",
-      "description": "Lowers foe's health as well as your own.",
-      "equipmentSlot": "Body",
-      "iconName": "BlazingArmor",
-      "cost": 6000,
-      "effect": {
-        "lifeModifier": -5,
-        "opponent": {
-          "lifeModifier": -8
-        }
-      }
-    },
-    {
     "name": "Librarian's Robes",
     "description": "Taps for C or 2, T to look at top and draw if inst/sorc if hand size 0 or 7",
     "equipmentSlot": "Body",
     "iconName": "Librarian'sRobes",
     "effect": {
+        "lifeModifier": 2,
         "changeStartCards": -1,
         "startBattleWithCard": [
         "The Biblioplex|STX"
@@ -3728,7 +3763,7 @@
     "equipmentSlot": "Body",
     "iconName": "SanctuaryArmor",
     "effect": {
-        "changeStartCards": -1,
+        "lifeModifier": -5,
         "startBattleWithCard": [
         "Animal Sanctuary|M21"
      ]
@@ -3740,6 +3775,7 @@
     "equipmentSlot": "Body",
     "iconName": "GlacialArmor",
     "effect": {
+        "lifeModifier": 4,
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Mouth of Ronom|CSP"
@@ -3752,6 +3788,7 @@
     "equipmentSlot": "Body",
     "iconName": "NestWarden'sArmor",
     "effect": {
+        "lifeModifier": 2,
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Nesting Grounds|C20"
@@ -3776,7 +3813,7 @@
     "equipmentSlot": "Body",
     "iconName": "ArmorofUrami",
     "effect": {
-        "lifeModifier": -5,
+        "lifeModifier": -6,
         "startBattleWithCard": [
         "Tomb of Urami|SOK"
      ]
@@ -3787,9 +3824,9 @@
     "description": "Solid life boost",
     "equipmentSlot": "Body",
     "iconName": "MithrilArmor",
-    "cost": 2000,
+    "cost": 1500,
     "effect": {
-        "lifeModifier": 6
+        "lifeModifier": 8
     }
   },
   {
@@ -3806,67 +3843,72 @@
     }
   },
   {
-    "name": "Outpost Outfit",
-    "description": "Taps for W or sac for any color. -1 hand size.",
+    "name": "Meadow Outfit",
+    "description": "Taps for W. -5 life, -1 hand size.",
     "equipmentSlot": "Body",
     "iconName": "OutpostOutfit",
     "cost": 7500,
     "effect": {
+      "lifeModifier": -5,
       "changeStartCards": -1,
       "startBattleWithCard": [
-        "Abandoned Outpost"
+        "Drifting Meadow|DMR"
       ]
     }
   },
   {
-    "name": "Seafloor Shirt",
-    "description": "Taps for U or sac for any color. -1 hand size.",
+    "name": "Isle Shirt",
+    "description": "Taps for U. -5 life, -1 hand size.",
     "equipmentSlot": "Body",
     "iconName": "SeafloorShirt",
     "cost": 7500,
     "effect": {
+      "lifeModifier": -5,
       "changeStartCards": -1,
       "startBattleWithCard": [
-        "Seafloor Debris"
+        "Remote Isle|DMR"
       ]
     }
   },
   {
-    "name": "Bog Dweller Leather",
-    "description": "Taps for B or sac for any color. -1 hand size.",
+    "name": "Mire Leather",
+    "description": "Taps for B. -5 life, -1 hand size.",
     "equipmentSlot": "Body",
     "iconName": "BogDwellerLeather",
     "cost": 7500,
     "effect": {
+      "lifeModifier": -5,
       "changeStartCards": -1,
       "startBattleWithCard": [
-        "Bog Wreckage"
+        "Polluted Mire|DMR"
       ]
     }
   },
   {
-    "name": "Highland Cloak",
-    "description": "Taps for R or sac for any color. -1 hand size.",
+    "name": "Smoldering Cloak",
+    "description": "Taps for R. -5 life, -1 hand size.",
     "equipmentSlot": "Body",
     "iconName": "HighlandCloak",
     "cost": 7500,
     "effect": {
+      "lifeModifier": -5,
       "changeStartCards": -1,
       "startBattleWithCard": [
-        "Ravaged Highlands"
+        "Smoldering Crater|DMR"
       ]
     }
   },
   {
-    "name": "Timberland Shawl",
-    "description": "Taps for G or sac for any color. -1 hand size.",
+    "name": "Karst Shawl",
+    "description": "Taps for G. -5 life, -1 hand size.",
     "equipmentSlot": "Body",
     "iconName": "TimberlandShawl",
     "cost": 7500,
     "effect": {
+      "lifeModifier": -5,
       "changeStartCards": -1,
       "startBattleWithCard": [
-        "Timberland Ruins"
+        "Slippery Karst|DMR"
       ]
     }
   },
@@ -3911,145 +3953,7 @@
     "description": "Grants a token in a special slot with equip 1: 1, T, sac: ping for 2",
     "equipmentSlot": "Token",
     "iconName": "TokenofViolence",
-    "cost": 50000,
-    "effect": {
-      "startBattleWithCard": [
-        "rock"
-      ]
-    }
-  },
-  {
-    "name": "Token of Exploration",
-    "description": "Grants a token in a special slot with 1, T, sac: Explore.",
-    "equipmentSlot": "Token",
-    "iconName": "TokenofExploration",
-    "cost": 50000,
-    "effect": {
-      "startBattleWithCard": [
-        "c_a_map_sac_explore"
-      ]
-    }
-  },
-  {
-    "name": "Cloak of the Wastes",
-    "description": "Gives a colorless land, but -1 hand size",
-    "equipmentSlot": "Body",
-    "iconName": "CloakoftheWastes",
-    "cost": 3000,
-    "effect": {
-      "changeStartCards": -1,
-      "startBattleWithCard": [
-        "Wastes|OGW"
-      ]
-    }
-  },
-  {
-    "name": "Outpost Outfit",
-    "description": "Taps for W or sac for any color. -1 hand size.",
-    "equipmentSlot": "Body",
-    "iconName": "OutpostOutfit",
-    "cost": 7500,
-    "effect": {
-      "changeStartCards": -1,
-      "startBattleWithCard": [
-        "Abandoned Outpost"
-      ]
-    }
-  },
-  {
-    "name": "Seafloor Shirt",
-    "description": "Taps for U or sac for any color. -1 hand size.",
-    "equipmentSlot": "Body",
-    "iconName": "SeafloorShirt",
-    "cost": 7500,
-    "effect": {
-      "changeStartCards": -1,
-      "startBattleWithCard": [
-        "Seafloor Debris"
-      ]
-    }
-  },
-  {
-    "name": "Bog Dweller Leather",
-    "description": "Taps for B or sac for any color. -1 hand size.",
-    "equipmentSlot": "Body",
-    "iconName": "BogDwellerLeather",
-    "cost": 7500,
-    "effect": {
-      "changeStartCards": -1,
-      "startBattleWithCard": [
-        "Bog Wreckage"
-      ]
-    }
-  },
-  {
-    "name": "Highland Cloak",
-    "description": "Taps for R or sac for any color. -1 hand size.",
-    "equipmentSlot": "Body",
-    "iconName": "HighlandCloak",
-    "cost": 7500,
-    "effect": {
-      "changeStartCards": -1,
-      "startBattleWithCard": [
-        "Ravaged Highlands"
-      ]
-    }
-  },
-  {
-    "name": "Timberland Shawl",
-    "description": "Taps for G or sac for any color. -1 hand size.",
-    "equipmentSlot": "Body",
-    "iconName": "TimberlandShawl",
-    "cost": 7500,
-    "effect": {
-      "changeStartCards": -1,
-      "startBattleWithCard": [
-        "Timberland Ruins"
-      ]
-    }
-  },
-  {
-    "name": "Token of Bounty",
-    "description": "Grants a token in a special slot with 2, T, sac: Gain 3 life.",
-    "equipmentSlot": "Token",
-    "iconName": "TokenofBounty",
-    "cost": 30000,
-    "effect": {
-      "startBattleWithCard": [
-        "c_a_food_sac"
-      ]
-    }
-  },
-  {
-    "name": "Token of Investigation",
-    "description": "Grants a token in a special slot with 2, sac: Draw a card.",
-    "equipmentSlot": "Token",
-    "iconName": "TokenofInvestigation",
-    "cost": 70000,
-    "effect": {
-      "startBattleWithCard": [
-        "c_a_clue_draw"
-      ]
-    }
-  },
-  {
-    "name": "Token of Blood",
-    "description": "Grants a token in a special slot with 1, T, sac: Discard, then draw.",
-    "equipmentSlot": "Token",
-    "iconName": "TokenofBlood",
-    "cost": 50000,
-    "effect": {
-      "startBattleWithCard": [
-        "c_a_blood_draw"
-      ]
-    }
-  },
-  {
-    "name": "Token of Violence",
-    "description": "Grants a token in a special slot with equip 1: 1, T, sac: ping for 2",
-    "equipmentSlot": "Token",
-    "iconName": "TokenofViolence",
-    "cost": 50000,
+    "cost": 40000,
     "effect": {
       "startBattleWithCard": [
         "rock"
@@ -4102,7 +4006,6 @@
     "equipmentSlot": "Body",
     "iconName": "CephalidArmor",
     "effect": {
-        "lifeModifier": 3,  
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Cephalid Coliseum|ODY"
@@ -4115,9 +4018,22 @@
     "equipmentSlot": "Body",
     "iconName": "OpalCloak",
     "effect": {
-        "startBattleWithCard": [
+      "lifeModifier": -5,
+      "startBattleWithCard": [
         "Opal Palace|C13"
      ]
+    }
+  },
+  {
+    "name": "Urza's Robe",
+    "description": "Taps for C for each urza's land if metalcraft",
+    "equipmentSlot": "Body",
+    "iconName": "Urza'sRobe",
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Urza's Workshop"
+      ]
     }
   },
     {
@@ -4126,7 +4042,8 @@
     "equipmentSlot": "Body",
     "iconName": "CloakofPrahv",
     "effect": {
-        "changeStartCards": -1,
+      "lifeModifier": 4,
+      "changeStartCards": -1,
         "startBattleWithCard": [
         "Prahv, Spires of Order|DIS"
      ]
@@ -4138,6 +4055,7 @@
     "equipmentSlot": "Body",
     "iconName": "CloakofSvogthos",
     "effect": {
+        "lifeModifier": 4,
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Svogthos, the Restless Tomb|RAV"
@@ -4150,6 +4068,7 @@
     "equipmentSlot": "Body",
     "iconName": "Vitu-GhaziCloak",
     "effect": {
+        "lifeModifier": 2,
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Vitu-Ghazi, the City-Tree|RAV"
@@ -4163,7 +4082,7 @@
       "iconName": "PinecrestCloak",
       "effect": {
         "changeStartCards": -1,
-        "lifeModifier": 2,
+        "lifeModifier": 4,
         "startBattleWithCard": [
           "Pinecrest Ridge|CHK"
         ]
@@ -4175,7 +4094,7 @@
     "equipmentSlot": "Body",
     "iconName": "ReliquaryRobes",
     "effect": {
-        "changeStartCards": -1,
+        "lifeModifier": -8,
         "startBattleWithCard": [
         "Reliquary Tower|C14"
      ]
@@ -4187,6 +4106,7 @@
     "equipmentSlot": "Body",
     "iconName": "MantleofDusk",
     "effect": {
+        "lifeModifier": 4,
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Duskmantle, House of Shadow|RAV"
@@ -4199,9 +4119,10 @@
     "equipmentSlot": "Body",
     "iconName": "CloakofOrzhova",
     "effect": {
+        "lifeModifier": 4,
         "changeStartCards": -1,
         "startBattleWithCard": [
-        "Orzhova, Church of Deals|GPT"
+        "Orzhova, the Church of Deals|GPT"
      ]
     }
   },
@@ -4212,7 +4133,7 @@
       "iconName": "TranquilCloak",
       "effect": {
         "changeStartCards": -1,
-        "lifeModifier": 2,
+        "lifeModifier": 4,
         "startBattleWithCard": [
           "Tranquil Garden|CHK"
         ]
@@ -4224,6 +4145,7 @@
     "equipmentSlot": "Body",
     "iconName": "NovijenCloak",
     "effect": {
+        "lifeModifier": 2,
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Novijen, Heart of Progress|DIS"
@@ -4261,20 +4183,10 @@
       "iconName": "CloudcrestCloak",
       "effect": {
         "changeStartCards": -1,
-        "lifeModifier": 2,
+        "lifeModifier": 4,
         "startBattleWithCard": [
           "Cloudcrest Lake|CHK"
         ]
-    }
-  },
-    {
-      "name": "Grand Sage's Robes",
-      "description": "Grants an extra card with no life penalty.",
-      "equipmentSlot": "Body",
-      "iconName": "GrandSage'sRobes",
-      "cost": 6000,
-      "effect": {
-        "changeStartCards": 1
     }
   },
     {
@@ -4296,7 +4208,7 @@
       "iconName": "Lantern-LitCloak",
       "effect": {
         "changeStartCards": -1,
-        "lifeModifier": 2,
+        "lifeModifier": 4,
         "startBattleWithCard": [
           "Lantern-Lit Graveyard|CHK"
         ]
@@ -4308,6 +4220,7 @@
     "equipmentSlot": "Body",
     "iconName": "SunhomeCloak",
     "effect": {
+        "lifeModifier": 2,
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Sunhome, Fortress of the Legion|RAV"
@@ -4339,12 +4252,13 @@
   },
     {
       "name": "Sage's Robes",
-      "description": "An extra card at the cost of life.",
+      "description": "An extra card and some life.",
       "equipmentSlot": "Body",
-      "iconName": "Sage'sRobes",
+      "iconName": "GrandSage'sRobes",
+      "cost": 3000,
       "effect": {
         "changeStartCards": 1,
-        "lifeModifier": -3
+        "lifeModifier": 3
     }
   },
     {
@@ -4353,6 +4267,7 @@
     "equipmentSlot": "Body",
     "iconName": "SkarggCloak",
     "effect": {
+        "lifeModifier": 2,
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Skarrg, the Rage Pits|GPT"
@@ -4377,7 +4292,7 @@
       "iconName": "WaterveilCloak",
       "effect": {
         "changeStartCards": -1,
-        "lifeModifier": 2,
+        "lifeModifier": 4,
         "startBattleWithCard": [
           "Waterveil Cavern|CHK"
         ]
@@ -4389,6 +4304,7 @@
     "equipmentSlot": "Body",
     "iconName": "RixMaadiCloak",
     "effect": {
+        "lifeModifier": 4,
         "changeStartCards": -1,
         "startBattleWithCard": [
         "Rix Maadi, Dungeon Palace|DIS"
@@ -4521,12 +4437,12 @@
   },
   {
     "name": "Medal of the Outnumbered",
-    "description": "Opponent starts with two creatures, improves win rewards.",
+    "description": "Opponent starts with two creatures, greatly improves win rewards.",
     "equipmentSlot": "Medal",
     "iconName": "MedalOutnumbered",
-    "cost": 1000,
+    "cost": 2000,
     "effect": {
-        "cardRewardBonus": 1,
+        "cardRewardBonus": 2,
         "opponent": {
           "startBattleWithCard": [
             "Aurora Champion|BBD",
@@ -4553,16 +4469,15 @@
   },
   {
     "name": "Medal of the Outmaneuvered",
-    "description": "Opponent starts with two lands, greatly improves win rewards.",
+    "description": "Opponent starts with an extra land, improves win rewards.",
     "equipmentSlot": "Medal",
     "iconName": "MedalOutmaneuvered",
-    "cost": 2000,
+    "cost": 1000,
     "effect": {
-        "cardRewardBonus": 2,
+        "cardRewardBonus": 1,
         "opponent": {
           "startBattleWithCard": [
-            "Command Tower|CMD",
-            "Rogue's Passage|FDN"
+            "Command Tower|CMD"
           ]
         }
     }
@@ -4578,7 +4493,7 @@
         "opponent": {
           "startBattleWithCard": [
             "Phyrexian Arena|FDN",
-            "Smothering Tithe|CMM"
+            "Exploration|DMR"
           ]
         }
     }
@@ -4659,7 +4574,7 @@
     "effect": {
       "lifeModifier": -4,
       "startBattleWithCard": [
-      "Stitchwing Skaab"
+      "Stitchwing Skaab|SOI"
    ]
     }
   },
@@ -4670,7 +4585,7 @@
     "iconName": "ThirstingAxe",
     "effect": {
       "startBattleWithCard": [
-      "Thirsting Axe"
+      "Thirsting Axe|EMN"
    ]
     }
   },
@@ -4685,12 +4600,585 @@
    ]
     }
   },
+  {
+    "name": "Chitinous Club",
+    "description": "Equip 3, +2/+2 and menace",
+    "equipmentSlot": "Right",
+    "iconName": "ChitinousClub",
+    "cost": 1000,
+    "effect": {
+      "startBattleWithCard": [
+        "Chitinous Cloak|OGW"
+      ]
+    }
+  },
+  {
+    "name": "Dire Flail",
+    "description": "Equip 1, +2/+0, Craft with artifact for 3RR to upgrade.",
+    "equipmentSlot": "Right",
+    "iconName": "DireFlail",
+    "cost": 5000,
+    "effect": {
+      "startBattleWithCard": [
+        "Dire Flail|LCI"
+      ]
+    }
+  },
+  {
+    "name": "Poet's Quill",
+    "description": "Equip 1B, +1/+1 and lifelink.",
+    "equipmentSlot": "Right",
+    "iconName": "PoetsQuill",
+    "cost": 5000,
+    "effect": {
+      "startBattleWithCard": [
+        "Poet's Quill|STX"
+      ]
+    }
+  },
+  {
+    "name": "Giant's Bracer",
+    "description": "Equip 2, +0/+1 and hexproof while untapped.",
+    "equipmentSlot": "Right",
+    "iconName": "Giant'sBracer",
+    "cost": 5000,
+    "effect": {
+      "startBattleWithCard": [
+        "Giant's Amulet|KHM"
+      ]
+    }
+  },
+  {
+    "name": "Skyclave Maul",
+    "description": "Equip 2WW, +2/+2 flying and first strike",
+    "equipmentSlot": "Right",
+    "iconName": "SkyclaveMaul",
+    "cost": 5000,
+    "effect": {
+      "startBattleWithCard": [
+        "Maul of the Skyclaves|ZNR"
+      ]
+    }
+  },
+  {
+    "name": "Colossal Dreadmace",
+    "description": "Equip 3GG, +6/+6 and trample.",
+    "equipmentSlot": "Right",
+    "iconName": "ColossalDreadmace",
+    "cost": 5000,
+    "effect": {
+      "startBattleWithCard": [
+        "Colossal Dreadmask|MH3"
+      ]
+    }
+  },
+  {
+    "name": "Jewel of Blessings",
+    "description": "All your creatures gain vigilance.",
+    "equipmentSlot": "Neck",
+    "iconName": "MoxPearl",
+    "effect": {
+      "startBattleWithCard": [
+        "Serra's Blessing|WTH"
+      ]
+    }
+  },
+  {
+    "name": "Jewel of War",
+    "description": "Your attacking creatures get +1/+0.",
+    "equipmentSlot": "Neck",
+    "iconName": "MoxRuby",
+    "effect": {
+      "startBattleWithCard": [
+        "Goblin Oriflamme|FDN"
+      ]
+    }
+  },
+  {
+    "name": "Jewel of Winds",
+    "description": "Your flying creatures get +1/+1.",
+    "equipmentSlot": "Neck",
+    "iconName": "MoxSapphire",
+    "effect": {
+      "startBattleWithCard": [
+        "Favorable Winds|SCD"
+      ]
+    }
+  },
+  {
+    "name": "Ghoulish Jewel",
+    "description": "Once a turn when a nontoken dies make a 2/2 decayed zombie.",
+    "equipmentSlot": "Neck",
+    "iconName": "MoxJet",
+    "effect": {
+      "startBattleWithCard": [
+        "Ghoulish Procession|INR"
+      ]
+    }
+  },
+  {
+    "name": "Jewel of Rage",
+    "description": "All your creatures gain trample.",
+    "equipmentSlot": "Neck",
+    "iconName": "MoxEmerald",
+    "effect": {
+      "startBattleWithCard": [
+        "Primal Rage|STH"
+      ]
+    }
+  },
+  {
+    "name": "Outlaw's Hat",
+    "description": "When one of your outlaws dies, drain opp 1 life.",
+    "equipmentSlot": "Neck",
+    "iconName": "OutlawsHat",
+    "effect": {
+      "startBattleWithCard": [
+        "Rakish Crew|OTJ"
+      ]
+    }
+  },
+  {
+    "name": "Manaforce Mace",
+    "description": "Equip +3. +X/+X equal to domain",
+    "equipmentSlot": "Right",
+    "iconName": "ManaforceMace",
+    "effect": {
+      "lifeModifier": 3,
+      "startBattleWithCard": [
+        "Manaforce Mace"
+      ]
+    }
+  },
+  {
+    "name": "Shadowspear",
+    "description": "Equip 2: +1/+1 trample and lifelink. Can also remove hexproof/indest.",
+    "equipmentSlot": "Right",
+    "iconName": "Shadowspear",
+    "effect": {
+      "startBattleWithCard": [
+        "Shadowspear"
+      ]
+    }
+  },
+  {
+    "name": "Heirloom Blade",
+    "description": "Equip 1, +3/+1, on death get a random card of same creature type.",
+    "equipmentSlot": "Right",
+    "iconName": "HeirloomBlade",
+    "effect": {
+      "lifeModifier": -3,
+      "startBattleWithCard": [
+        "Heirloom Blade|C17"
+      ]
+    }
+  },
+  {
+    "name": "Hengestrider Boots",
+    "description": "3/4 artifact creature, 2: trample until EOT.",
+    "equipmentSlot": "Boots",
+    "iconName": "HengestriderBoots",
+    "effect": {
+      "startBattleWithCard": [
+        "Henge Guardian|DDG"
+      ]
+    }
+  },
+  {
+    "name": "Tome of Blight",
+    "description": "3, T, Sac: Destroy target land",
+    "equipmentSlot": "Left",
+    "iconName": "TomeofBlight",
+    "effect": {
+      "startBattleWithCard": [
+        "Ark of Blight|SCG"
+      ]
+    }
+  },
+  {
+    "name": "Winter Boots",
+    "description": "0/4, T, sac: -0/-X where X is snow lands",
+    "equipmentSlot": "Body",
+    "iconName": "WinterBoots",
+    "effect": {
+      "lifeModifier": -4,
+      "startBattleWithCard": [
+        "Priest of the Haunted Edge"
+      ]
+    }
+  },
+  {
+    "name": "Token of Blades",
+    "description": "Grants a token in a special slot with Equip 2: +1/+1.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofBlades",
+    "cost": 50000,
+    "effect": {
+      "startBattleWithCard": [
+        "sword"
+      ]
+    }
+  },
+  {
+    "name": "Token of Decay",
+    "description": "Grants a 2/2 decayed zombie token in a special slot.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofDecay",
+    "cost": 40000,
+    "effect": {
+      "startBattleWithCard": [
+        "b_2_2_zombie_decayed"
+      ]
+    }
+  },
+  {
+    "name": "Token of Insight",
+    "description": "Grants a token in a special slot with 2, sac: Scry 1 then draw.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofInsight",
+    "cost": 90000,
+    "effect": {
+      "lifeModifier": -3,
+      "startBattleWithCard": [
+        "c_e_shard_draw"
+      ]
+    }
+  },
+  {
+    "name": "Token of Shielding",
+    "description": "Grants a 0/3 defender wall token in a special slot.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofShielding",
+    "cost": 60000,
+    "effect": {
+      "startBattleWithCard": [
+        "w_0_3_wall_defender"
+      ]
+    }
+  },
+  {
+    "name": "Token of Landing",
+    "description": "Grants a token in a special slot with 2, T, sac: get a tapped basic.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofLanding",
+    "cost": 50000,
+    "effect": {
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "c_a_lander_sac_search"
+      ]
+    }
+  },
+  {
+    "name": "Token of Spirit",
+    "description": "Grants a 1/1 colorless spirit token in a special slot.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofSpirit",
+    "cost": 50000,
+    "effect": {
+      "startBattleWithCard": [
+        "c_1_1_spirit"
+      ]
+    }
+  },
+  {
+    "name": "Token of Soaring Spirit",
+    "description": "Grants a 1/1 white/black spirit token with flying in a special slot.",
+    "equipmentSlot": "Token",
+    "iconName": "TokenofSoaringSpirit",
+    "cost": 100000,
+    "effect": {
+      "startBattleWithCard": [
+        "wb_1_1_spirit_flying"
+      ]
+    }
+  },
+  {
+    "name": "Gisa's Favorite Shovel",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Right",
+    "iconName": "GhostRune",
+    "effect": {
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Segovian Sandals",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Boots",
+    "iconName": "GhostRune",
+    "effect": {
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Darksteel Axe",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Right",
+    "iconName": "DarksteelAxe",
+    "cost": 1000,
+    "effect": {
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Pocket Thopter",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Boots",
+    "iconName": "GhostRune",
+    "effect": {
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Miser's Shoes",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Boots",
+    "iconName": "GhostRune",
+    "effect": {
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Sinuous Shoes",
+    "description": "This item has been discontinued. Please discard it.",
+    "equipmentSlot": "Boots",
+    "iconName": "SinuousShoes",
+    "effect": {
+      "startBattleWithCard": [
+        "Sinuous Vermin"
+      ]
+    }
+  },
+  {
+    "name": "Outpost Outfit",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Body",
+    "iconName": "GhostRune",
+    "cost": 7500,
+    "effect": {
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Seafloor Shirt",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Body",
+    "iconName": "GhostRune",
+    "cost": 7500,
+    "effect": {
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Bog Dweller Leather",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Body",
+    "iconName": "GhostRune",
+    "cost": 7500,
+    "effect": {
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Highland Cloak",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Body",
+    "iconName": "GhostRune",
+    "cost": 7500,
+    "effect": {
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Timberland Shawl",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Body",
+    "iconName": "GhostRune",
+    "cost": 7500,
+    "effect": {
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Blazing Armor",
+    "description": "This item has been discontinued.",
+    "equipmentSlot": "Body",
+    "iconName": "BlazingArmor",
+    "cost": 6000,
+    "effect": {
+      "lifeModifier": -5,
+      "opponent": {
+        "lifeModifier": -8
+      }
+    }
+  },
+  {
+    "name": "Plains Outfit",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Body",
+    "iconName": "OutpostOutfit",
+    "cost": 7500,
+    "effect": {
+      "lifeModifier": -2,
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Island Shirt",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Body",
+    "iconName": "SeafloorShirt",
+    "cost": 7500,
+    "effect": {
+      "lifeModifier": -2,
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Swamp Leather",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Body",
+    "iconName": "BogDwellerLeather",
+    "cost": 7500,
+    "effect": {
+      "lifeModifier": -2,
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Restricted Robes",
+    "description": "This item has been discontinued.",
+    "equipmentSlot": "Body",
+    "iconName": "RestrictedRobes",
+    "cost": 6000,
+    "effect": {
+      "changeStartCards": 2,
+      "lifeModifier": -10
+    }
+  },
+  {
+    "name": "Spiked Ripsaw",
+    "description": "This item has been discontinued.",
+    "equipmentSlot": "Right",
+    "iconName": "SpikedRipsaw",
+    "cost": 5000,
+    "effect": {
+      "startBattleWithCard": [
+        "Spiked Ripsaw|VOW"
+      ]
+    }
+  },
+  {
+    "name": "Jewel of Aggression",
+    "description": "This item has been discontinued.",
+    "equipmentSlot": "Neck",
+    "iconName": "MoxJet",
+    "cost": 20000,
+    "effect": {
+      "startBattleWithCard": [
+        "Within Range|TDC"
+      ]
+    }
+  },
+  {
+    "name": "Mountain Cloak",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Body",
+    "iconName": "HighlandCloak",
+    "cost": 7500,
+    "effect": {
+      "lifeModifier": -2,
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Forest Shawl",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Body",
+    "iconName": "TimberlandShawl",
+    "cost": 7500,
+    "effect": {
+      "lifeModifier": -2,
+      "changeStartCards": -1,
+      "startBattleWithCard": [
+        "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Grand Sage's Robes",
+    "description": "This item has been discontinued.",
+    "equipmentSlot": "Body",
+    "iconName": "GrandSage'sRobes",
+    "cost": 6000,
+    "effect": {
+      "changeStartCards": 1
+    }
+  },
+  {
+    "name": "Ultra Heavy Armor",
+    "description": "This item has been discontinued.",
+    "equipmentSlot": "Body",
+    "iconName": "UltraHeavyArmor",
+    "cost": 6000,
+    "effect": {
+      "changeStartCards": -1,
+      "lifeModifier": 16
+    }
+  },
+  {
+    "name": "Divinely Blessed Armor",
+    "description": "This item has been removed. Please discard it.",
+    "equipmentSlot": "Body",
+    "iconName": "DivinelyBlessedArmor",
+    "cost": 6000,
+    "effect": {
+      "lifeModifier": 12,
+      "opponent": {
+        "lifeModifier": 6
+      }
+    }
+  },
     {
     "name": "Pilgrim's Cloak",
     "description": "Sac for a tapped basic",
     "equipmentSlot": "Body",
     "iconName": "Pilgrim'sCloak",
     "effect": {
+        "lifeModifier": -5,
         "startBattleWithCard": [
         "Evolving Wilds|FDN"
      ]

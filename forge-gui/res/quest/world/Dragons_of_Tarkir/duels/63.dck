@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Boros-precon
+Title=Boros-precon
+Icon=Boros-precon.jpg
+Difficulty=Very Hard
+Description=../Modern/Dragons_of_Tarkir/Modern_League_2016-01-13/r0thart_-_Burn_(5-0)_(Modern,_#517930).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Monastery Swiftspear
+4 Wild Nacatl
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+1 Lightning Helix
+3 Searing Blaze
+4 Lava Spike
+3 Rift Bolt
+4 Bloodstained Mire
+3 Mountain
+2 Sacred Foundry
+2 Stomping Ground
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+2 Deflecting Palm
+3 Destructive Revelry
+2 Kor Firewalker
+2 Molten Rain
+4 Path to Exile
+1 Skullcrack

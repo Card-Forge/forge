@@ -10,8 +10,15 @@ import net.jpountz.lz4.LZ4BlockOutputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> {
+public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> implements IHasNetLog {
+
     private static final byte[] LENGTH_PLACEHOLDER = new byte[4];
+
+    private final NetworkByteTracker byteTracker;
+
+    public CompatibleObjectEncoder(NetworkByteTracker byteTracker) {
+        this.byteTracker = byteTracker;
+    }
 
     @Override
     protected void encode(ChannelHandlerContext ctx, Serializable msg, ByteBuf out) throws Exception {
@@ -33,6 +40,16 @@ public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> 
         }
 
         int endIdx = out.writerIndex();
-        out.setInt(startIdx, endIdx - startIdx - 4);
+        int msgSize = endIdx - startIdx - 4;
+        out.setInt(startIdx, msgSize);
+
+        int bytesSent = endIdx - startIdx;
+        if (byteTracker != null) {
+            String messageType = msg.getClass().getSimpleName();
+            byteTracker.recordBytesSent(bytesSent, messageType);
+        }
+        if (msgSize > 20_000) {
+            netLog.info("Encoded {} bytes (compressed) for {}", msgSize, msg.getClass().getSimpleName());
+        }
     }
 }

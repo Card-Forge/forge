@@ -120,6 +120,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_LIBGDX_TEXTURE_FILTERING("true"),
         UI_ANTE ("false"),
         UI_ANTE_MATCH_RARITY ("false"),
+        UI_ANTE_INCLUDE_BASIC_LANDS ("false"),
         UI_SKIN ("Default"),
         UI_CJK_FONT (""),
         UI_PREFERRED_AVATARS_ONLY ("false"),
@@ -200,10 +201,17 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_FOR_TOUCHSCREN("false"),
         UI_SWITCH_STATES_DECKVIEW("Switch back on hover"),
         UI_ORDER_HAND("false"),
+        UI_HAND_MAX_CARDS_PER_ROW("0"),
+        UI_HAND_NO_OVERLAP("false"),
+        UI_ZONE_TAB_NEW_COUNT("false"),
         UI_ENABLE_AI_PICKER("false"),
 
+        UI_VIBRATE_INTENSITY("100"),
         UI_VIBRATE_ON_LIFE_LOSS("true"),
         UI_VIBRATE_ON_LONG_PRESS("true"),
+        UI_VIBRATE_ON_ENEMY_ENCOUNTER("true"),
+        UI_VIBRATE_ON_ADVENTURE_REWARD("true"),
+        UI_VIBRATE_ON_SHOP_ACTION("true"),
 
         UI_LANGUAGE("en-US"),
 
@@ -297,6 +305,9 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         ZONE_LOC_AI_COMMAND(""),
         ZONE_LOC_AI_ANTE(""),
         ZONE_LOC_AI_SIDEBOARD(""),
+
+        UI_ZONE_DOCK_ZONES(""),
+        UI_ZONE_DOCK_ZONES_OTHER(""),
 
         CHAT_WINDOW_LOC(""),
 
@@ -398,38 +409,6 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
     /** Instantiates a ForgePreferences object. */
     public ForgePreferences() {
         super(ForgeConstants.MAIN_PREFS_FILE, FPref.class);
-        migrateShortcutDefaults();
-        migrateLogVerbosity();
-    }
-
-    /** Migrate old GameLogEntryType values to GameLogVerbosity presets. */
-    private void migrateLogVerbosity() {
-        final String stored = getPref(FPref.DEV_LOG_ENTRY_TYPE);
-        try {
-            GameLogVerbosity.valueOf(stored); // strict check for enum name
-            return; // already a valid verbosity preset
-        } catch (IllegalArgumentException ignored) {}
-        // Also accept caption format ("High" etc.) from combobox storage
-        for (GameLogVerbosity v : GameLogVerbosity.values()) {
-            if (v.toString().equals(stored)) {
-                setPref(FPref.DEV_LOG_ENTRY_TYPE, v.name());
-                save();
-                return;
-            }
-        }
-        // Old value is a GameLogEntryType name — map to a preset
-        try {
-            int ordinal = GameLogEntryType.valueOf(stored).ordinal();
-            String mapped = ordinal <= 8 ? GameLogVerbosity.LOW.name()
-                          : ordinal <= 14 ? GameLogVerbosity.MEDIUM.name()
-                          : GameLogVerbosity.HIGH.name();
-            setPref(FPref.DEV_LOG_ENTRY_TYPE, mapped);
-            save();
-        } catch (IllegalArgumentException ignored) {
-            // Unrecognized value — reset to default
-            setPref(FPref.DEV_LOG_ENTRY_TYPE, FPref.DEV_LOG_ENTRY_TYPE.getDefault());
-            save();
-        }
     }
 
     /** Parse the custom log types preference into a Set. */
@@ -457,24 +436,6 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         }
         setPref(FPref.DEV_LOG_CUSTOM_TYPES, sj.toString());
         save();
-    }
-
-    /**
-     * Migrates shortcut preferences from old defaults to new Ctrl+key defaults.
-     * Previously, Concede/EndTurn/AlphaStrike had configurable shortcuts that
-     * differed from their hardcoded menu accelerators. Now the menu accelerators
-     * are driven by the configurable preferences, so the defaults must match.
-     */
-    private void migrateShortcutDefaults() {
-        migrateIfOldDefault(FPref.SHORTCUT_CONCEDE, "17", "17 81");
-        migrateIfOldDefault(FPref.SHORTCUT_ENDTURN, "69", "17 69");
-        migrateIfOldDefault(FPref.SHORTCUT_ALPHASTRIKE, "65", "17 65");
-    }
-
-    private void migrateIfOldDefault(final FPref pref, final String oldDefault, final String newDefault) {
-        if (oldDefault.equals(getPref(pref))) {
-            setPref(pref, newDefault);
-        }
     }
 
     @Override

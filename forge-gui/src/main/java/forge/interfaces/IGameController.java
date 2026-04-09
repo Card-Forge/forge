@@ -67,4 +67,11 @@ public interface IGameController {
 
     /** Notify server that a trigger accept/decline preference changed. */
     default void notifyTriggerChoiceChanged(int triggerId, TriggerChoice choice) { }
+
+    /**
+     * Request a full state resync from the server.
+     * Called automatically when checksum validation fails to recover from desynchronization.
+     */
+    void requestResync();
+
 }

@@ -72,6 +72,7 @@ public class Forge implements ApplicationListener {
     private static FScreen currentScreen;
     private static ControllerListener controllerListener;
     private static boolean hasGamepad = false;
+    private static boolean lastInputWasController = false;
     public static Texture lastPreview = null;
     protected static SplashScreen splashScreen;
     protected static ClosingScreen closingScreen;
@@ -128,8 +129,9 @@ public class Forge implements ApplicationListener {
     public static boolean forcedEnglishonCJKMissing = false;
     public static boolean createNewAdventureMap = false;
     private static Localizer localizer;
+    private static boolean desktopAutoOrientation = true;
 
-    public static ApplicationListener getApp(HWInfo hwInfo, Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean propertyConfig, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI) {
+    public static ApplicationListener getApp(HWInfo hwInfo, Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean propertyConfig, boolean androidOrientation, boolean isTablet, int AndroidAPI) {
         if (app == null) {
             app = new Forge();
             if (GuiBase.getInterface() == null) {
@@ -140,17 +142,17 @@ public class Forge implements ApplicationListener {
                 GuiBase.setInterface(new GuiMobile(assetDir0));
                 GuiBase.enablePropertyConfig(propertyConfig);
                 isPortraitMode = androidOrientation;
-                totalDeviceRAM = totalRAM;
                 isTabletDevice = isTablet;
                 androidVersion = AndroidAPI;
             }
             if (hwInfo != null) {
+                totalDeviceRAM = hwInfo.getTotalRam();
                 Sentry.configureScope(ScopeType.GLOBAL, scope -> {
                     scope.getContexts().setDevice(hwInfo.device());
                     scope.getContexts().setOperatingSystem(hwInfo.os());
                 });
             }
-            GuiBase.setDeviceInfo(hwInfo, AndroidAPI, totalRAM, deviceAdapter.getDownloadsDir());
+            GuiBase.setDeviceInfo(hwInfo, AndroidAPI, deviceAdapter.getDownloadsDir());
         }
         return app;
     }
@@ -178,6 +180,8 @@ public class Forge implements ApplicationListener {
 
         GuiBase.setIsAndroid(Gdx.app.getType() == Application.ApplicationType.Android);
 
+        ((GuiMobile) GuiBase.getInterface()).captureGlThread();
+
         if (!GuiBase.isAndroid() || (androidVersion > 25 && totalDeviceRAM > 3400)) {
             allowCardBG = true;
         }
@@ -187,9 +191,6 @@ public class Forge implements ApplicationListener {
         frameRate = new FrameRate();
         animationBatch = new SpriteBatch();
         inputProcessor = new MainInputProcessor();
-        //screenWidth and screenHeight should be set initially and only change upon restarting the app
-        screenWidth = Gdx.app.getGraphics().getWidth();
-        screenHeight = Gdx.app.getGraphics().getHeight();
 
         Gdx.input.setInputProcessor(inputProcessor);
         /*
@@ -202,12 +203,20 @@ public class Forge implements ApplicationListener {
         destroyThis = true; //Prevent back()
         if (Files.exists(Paths.get(ForgeConstants.DEFAULT_SKINS_DIR+ForgeConstants.ADV_TEXTURE_BG_FILE)))
             selector = getForgePreferences().getPref(FPref.UI_SELECTOR_MODE);
-        boolean landscapeMode = !isPortraitMode;
+
+        //screenWidth and screenHeight should be set initially and only change upon restarting the app
+        screenWidth = Gdx.app.getGraphics().getWidth();
+        screenHeight = Gdx.app.getGraphics().getHeight();
+        // Desktop default: auto-detect from initial window/backbuffer aspect ratio
+        if (!GuiBase.isAndroid() && desktopAutoOrientation) {
+            isPortraitMode = screenHeight > screenWidth;
+        }
         //update landscape mode preference if it doesn't match what the app loaded as
-        if (getForgePreferences().getPrefBoolean(FPref.UI_LANDSCAPE_MODE) != landscapeMode) {
-            getForgePreferences().setPref(FPref.UI_LANDSCAPE_MODE, landscapeMode);
+        if (getForgePreferences().getPrefBoolean(FPref.UI_LANDSCAPE_MODE) != isLandscapeMode()) {
+            getForgePreferences().setPref(FPref.UI_LANDSCAPE_MODE, isLandscapeMode());
             getForgePreferences().save();
         }
+
         String skinName;
         if (FileUtil.doesFileExist(ForgeConstants.MAIN_PREFS_FILE)) {
             skinName = getForgePreferences().getPref(FPref.UI_SKIN);
@@ -277,6 +286,14 @@ public class Forge implements ApplicationListener {
             return hasGamepad && isLandscapeMode(); //portrait is not supported for Gamepad
         }
         return false;
+    }
+
+    public static boolean lastInputWasController() {
+        return lastInputWasController;
+    }
+
+    public static void setLastInputWasController(boolean value) {
+        lastInputWasController = value;
     }
 
     public static boolean hasExternalInput() {
@@ -1183,6 +1200,7 @@ public class Forge implements ApplicationListener {
 
         @Override
         public boolean keyDown(int keyCode) {
+            lastInputWasController = false;
             if (keyCode == Keys.MENU) {
                 showMenu();
                 return true;
@@ -1288,6 +1306,7 @@ public class Forge implements ApplicationListener {
 
         @Override
         public boolean touchDown(int x, int y, int pointer, int button) {
+            lastInputWasController = false;
             if (transitionScreen != null) {
                 boolean isFDialog = FOverlay.getTopOverlay() != null && FOverlay.getTopOverlay() instanceof FDialog;
                 if (!isFDialog)
@@ -1508,6 +1527,7 @@ public class Forge implements ApplicationListener {
                 public boolean buttonDown(Controller controller, int buttonIndex) {
                     //System.out.println(controller.getName()+"["+controller.getUniqueId()+"]: "+buttonIndex);
                     hasGamepad = true;
+                    lastInputWasController = true;
                     translateButtons(controller, buttonIndex, true);
                     return super.buttonDown(controller, buttonIndex);
                 }
@@ -1523,6 +1543,10 @@ public class Forge implements ApplicationListener {
                 public boolean axisMoved(Controller controller, int axisIndex, float value) {
                     //System.out.println(controller.getName()+"["+controller.getUniqueId()+"]: axis: "+axisIndex+" - "+value);
                     hasGamepad = true;
+                    // Axis deadzone filters joystick drift from counting
+                    if (Math.abs(value) > 0.25f) {
+                        lastInputWasController = true;
+                    }
                     translateAxis(controller, axisIndex, value);//prevent multi press axis
                     return super.axisMoved(controller, axisIndex, value);
                 }
@@ -1652,5 +1676,9 @@ public class Forge implements ApplicationListener {
         Controllers.addListener(controllerListener);
         if (Controllers.getCurrent() != null)
             System.out.println("Gamepad: " + Controllers.getCurrent().getName());
+    }
+
+    public static void setDesktopAutoOrientation(boolean auto) {
+        desktopAutoOrientation = auto;
     }
 }

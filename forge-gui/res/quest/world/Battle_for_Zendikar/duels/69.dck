@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Izzet-precon
+Title=Izzet-precon
+Icon=Izzet-precon.jpg
+Difficulty=Very Hard
+Description=../Modern/Battle_for_Zendikar/SCG_Invitational_Qualifier_Erie/Joseph_Meyers_-_Rogue_(Modern,_#375447).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Graypelt Hunter
+3 Grovetender Druids
+3 Hada Freeblade
+3 Halimar Excavator
+2 Kabira Evangel
+3 Kazandu Blademaster
+3 Kor Bladewhirl
+2 Lantern Scout
+4 Ondu Cleric
+1 Turntimber Ranger
+3 Umara Raptor
+4 Collected Company
+2 Dromoka's Command
+2 Retreat to Emeria
+1 Gideon, Ally of Zendikar
+4 Ally Encampment
+4 Forest
+2 Hallowed Fountain
+3 Island
+4 Plains
+2 Temple Garden
+4 Windswept Heath
+[Sideboard]
+1 Darksteel Ingot
+1 Firemantle Mage
+1 Fracturing Gust
+2 Holy Day
+1 Melira, Sylvok Outcast
+2 Mirror Entity
+1 Munda, Ambush Leader
+4 Path to Exile

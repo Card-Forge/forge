@@ -27,14 +27,15 @@ import forge.screens.home.gauntlet.*;
 import forge.screens.home.sanctioned.VSubmenuConstructed;
 import forge.util.ItemPool;
 import forge.util.Localizer;
+import forge.util.StreamUtil;
 import forge.util.storage.IStorage;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Date;
-import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public class DeckController<T extends DeckBase> {
     private T model;
@@ -111,7 +112,7 @@ public class DeckController<T extends DeckBase> {
 
         // not the same as before
         Deck currentDeck = view.getHumanDeck();
-        for (DeckSection section: EnumSet.allOf(DeckSection.class)) {
+        for (DeckSection section: DeckSection.values()) {
             if (view.isSectionImportable(section)) {
                 CardPool sectionCards = currentDeck.getOrCreate(section);
                 if (!isInfinite) {
@@ -139,7 +140,7 @@ public class DeckController<T extends DeckBase> {
         CardEdition referenceEdition = StaticData.instance().getEditions().getTheLatestOfAllTheOriginalEditionsOfCardsIn(catalog);
         Date referenceReleaseDate = referenceEdition.getDate();
         Deck result = new Deck();
-        for (DeckSection section: EnumSet.allOf(DeckSection.class)) {
+        for (DeckSection section: DeckSection.values()) {
             if (view.isSectionImportable(section)) {
                 CardPool cards = pickSectionFromCatalog(catalog, deck.getOrCreate(section), referenceReleaseDate);
                 result.putSection(section, cards);
@@ -161,14 +162,7 @@ public class DeckController<T extends DeckBase> {
     }
 
     private Map<String, Integer> groupByName(CardPool section) {
-        Map<String, Integer> result = new HashMap<>();
-        for (Map.Entry<PaperCard, Integer> entry : section) {
-            PaperCard importedCard = entry.getKey();
-            Integer previousCount = result.getOrDefault(importedCard.getName(), 0);
-            int countToAdd = entry.getValue();
-            result.put(importedCard.getName(), countToAdd + previousCount);
-        }
-        return result;
+        return StreamUtil.stream(section).collect(Collectors.groupingBy(ev -> ev.getKey().getName(), Collectors.summingInt(ev -> ev.getValue())));
     }
 
     private void pickFromCatalog(Map<String, Integer> countByName, CardPool catalog, CardPool targetSection) {
@@ -204,21 +198,8 @@ public class DeckController<T extends DeckBase> {
 
     private HashMap<String, PaperCard> getBasicLandsByName(CardPool sourceSection) {
         HashMap<String, PaperCard> result = new HashMap<>();
-
-        for (Map.Entry<PaperCard, Integer> entry : sourceSection) {
-            PaperCard card = entry.getKey();
-
-            if (!card.getRules().getType().isBasicLand()) {
-                continue;
-            }
-
-            if (result.containsKey(card.getName())) {
-                continue;
-            }
-
-            result.put(card.getName(), card);
-        }
-
+        StreamUtil.stream(sourceSection).filter(pc -> pc.getKey().getRules().getType().isBasicLand())
+                .forEach(pc -> result.putIfAbsent(pc.getKey().getName(), pc.getKey()));
         return result;
     }
 

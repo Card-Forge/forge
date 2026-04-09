@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Doran
+Title=Doran
+Icon=Doran.jpg
+Difficulty=Easy
+Description=./Standard/Zendikar_Rising/Aaron_Payne_-_Four-color_Control_(Standard,_#1049950).dck
+Deck Type=constructed
+
+[Main]
+2 Fae of Wishes
+2 Midnight Clock
+1 Cling to Dust
+2 Hagra Mauling
+2 Spoils of Adventure
+2 Spikefield Hazard
+3 Silundi Vision
+3 Soul Shatter
+1 Pelakka Predation
+1 Storm's Wrath
+1 Shadows' Verdict
+1 Inscription of Insight
+2 Sea Gate Restoration
+2 Emeria's Call
+2 Extinction Event
+2 Shatterskull Smashing
+3 Agonizing Remorse
+3 Bloodchief's Thirst
+4 Field Research
+3 Double Vision
+2 Riverglide Pathway
+2 Savai Triome
+3 Needleverge Pathway
+3 Raugrin Triome
+4 Clearwater Pathway
+4 Brightclimb Pathway
+[Sideboard]
+1 Ugin, the Spirit Dragon
+1 Storm's Wrath
+1 Elspeth Conquers Death
+1 Necromentia
+1 Light of Hope
+1 Cling to Dust
+1 Channeled Force
+1 Spikefield Hazard
+1 Eliminate
+2 Shadows' Verdict
+2 Negate
+2 Duress

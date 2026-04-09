@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Dracula
+Title=Dracula
+Icon=Dracula.jpg
+Difficulty=Easy
+Description=./Standard/Wilds_of_Eldraine/Capricorn_-_Mardu_Control_(Standard,_#1737953).dck
+Deck Type=constructed
+
+[Main]
+4 Heartflame Duelist
+4 Werefox Bodyguard
+4 Decadent Dragon
+4 Shrouded Shepherd
+1 The Irencrag
+4 Virtue of Loyalty
+4 Virtue of Persistence
+4 The Wandering Emperor
+3 Liliana of the Veil
+2 Vraska, Betrayal's Sting
+2 Sorin the Mirthless
+2 Haunted Ridge
+4 Restless Fortress
+1 Takenuma, Abandoned Mire
+1 Sokenzan, Crucible of Defiance
+1 Restless Bivouac
+1 Eiganjo, Seat of the Empire
+4 Battlefield Forge
+4 Sulfurous Springs
+2 Sundown Pass
+4 Shattered Sanctum
+[Sideboard]

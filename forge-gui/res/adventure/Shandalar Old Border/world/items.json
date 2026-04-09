@@ -160,102 +160,122 @@
   {
     "name": "Landscape Sketchbook - Limited Edition Alpha",
     "description": "A leather bound notebook containing the original basic land artwork from Magic's first set",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Limited Edition Beta",
     "description": "A leather bound notebook containing classic basic land artwork from Magic's second printing",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Revised Edition",
     "description": "A leather bound notebook containing Third Edition basic lands with white borders",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Fourth Edition",
     "description": "A leather bound notebook containing Fourth Edition basic lands",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Fifth Edition",
     "description": "A leather bound notebook containing Fifth Edition basic lands",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Sixth Edition",
     "description": "A leather bound notebook containing Sixth Edition basic lands",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Ice Age",
     "description": "A leather bound notebook containing sketches of frost covered vistas and snow-covered lands",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Mirage",
     "description": "A leather bound notebook containing sketches of tropical locations",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Tempest",
     "description": "A leather bound notebook containing sketches of stormy, volcanic landscapes",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Urza's Saga",
     "description": "A leather bound notebook containing many different angles of the same terrain features",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Mercadian Masques",
     "description": "A leather bound notebook containing sketches of bustling marketplaces and grand architecture",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Odyssey",
     "description": "A leather bound notebook containing sketches of ancient ruins and mystical landscapes",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Onslaught",
     "description": "A leather bound notebook containing sketches of war-torn battlefields",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Portal",
     "description": "A leather bound notebook containing sketches designed for new planeswalkers",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Portal Second Age",
     "description": "A leather bound notebook containing sketches from the second portal",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Portal Three Kingdoms",
     "description": "A leather bound notebook containing sketches of ancient Eastern landscapes",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Starter 1999",
     "description": "A leather bound notebook containing sketches from the 1999 starter collection",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Starter 2000",
     "description": "A leather bound notebook containing sketches from the millennial starter collection",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Battle Royale",
     "description": "A leather bound notebook containing sketches from legendary battles",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Landscape Sketchbook - Beatdown Box Set",
     "description": "A leather bound notebook containing sketches of intense combat arenas",
-    "iconName": "LandscapeSketchbook"
+    "iconName": "LandscapeSketchbook",
+    "cost": 500
   },
   {
     "name": "Haunted Robes",
@@ -538,12 +558,13 @@
     }
   },
   {
-    "name": "Jeweled Amulet",
-    "description": "Store one mana for later use.",
+    "name": "Jeweled Necklace",
+    "description": "-2 Max Life. Store one mana for later use.",
     "equipmentSlot": "Neck",
     "iconName": "JeweledNecklace",
     "cost": 9000,
     "effect": {
+      "lifeModifier": -2,
       "startBattleWithCard": [
         "Jeweled Amulet|ICE"
       ]
@@ -673,16 +694,6 @@
     "name": "Green Key to the False God",
     "iconName": "GreenKey",
     "questItem": true
-  },
-  {
-    "name": "Steel Shield",
-    "description": "A solid steel shield granting +2 starting life.",
-    "equipmentSlot": "Left",
-    "iconName": "IronShield",
-    "cost": 1000,
-    "effect": {
-      "lifeModifier": 2
-    }
   },
   {
     "name": "Iron Armor",
@@ -1353,7 +1364,7 @@
     "description": "Pay 2 to temp transfer flying, first strike, trample, or shadow between creatures.",
     "equipmentSlot": "Neck",
     "iconName": "PhyrexianSplicer",
-    "cost": 1500,
+    "cost": 12000,
     "effect": {
       "startBattleWithCard": [
         "Phyrexian Splicer|TMP"
@@ -1655,11 +1666,12 @@
     "equipmentSlot": "Right",
     "iconName": "WombatTamersWhip",
     "effect": {
+      "lifeModifier": -2,
       "startBattleWithCard": [
         "Rabid Wombat|LEG"
       ]
     },
-    "description": "A 0/1 vigilance that gets +2/+2 for each Aura on it."
+    "description": "-2 Max Life. A 0/1 vigilance that gets +2/+2 for each Aura on it."
   },
   {
     "name": "Molten Gauntlet",
@@ -1896,11 +1908,12 @@
     "equipmentSlot": "Right",
     "iconName": "ScytheOfYawgmoth",
     "effect": {
+      "lifeModifier": -8,
       "startBattleWithCard": [
         "Order of Yawgmoth|USG"
       ]
     },
-    "description": "A 2/2 fear creature. Opponent discards when it deals damage.",
+    "description": "-8 Max Life. A 2/2 fear creature. Opponent discards when it deals damage.",
     "cost": 12000
   },
   {
@@ -2058,12 +2071,12 @@
     "equipmentSlot": "Neck",
     "iconName": "RhysticAmulet",
     "effect": {
-      "lifeModifier": -3,
+      "lifeModifier": -6,
       "startBattleWithCard": [
         "Rhystic Cave|PCY"
       ]
     },
-    "description": "-3 life. Tap for any color unless an opponent pays 1."
+    "description": "-6 Max Life. Tap for any color unless an opponent pays 1."
   },
   {
     "name": "Shoes of Sorrow",
@@ -2105,11 +2118,12 @@
     "equipmentSlot": "Neck",
     "iconName": "CrownOfTheVale",
     "effect": {
+      "lifeModifier": -4,
       "startBattleWithCard": [
         "Rainbow Vale|FEM"
       ]
     },
-    "description": "Tap for any color. Gives itself to your opponent."
+    "description": "-4 Max Life. Tap for any color. Gives itself to your opponent."
   },
   {
     "name": "Tasty Tome",
@@ -2304,18 +2318,6 @@
       ]
     },
     "description": "A 4/3 Serpent. Sac an Island to make target land an Island."
-  },
-  {
-    "name": "Phyrexian Splicer",
-    "equipmentSlot": "Neck",
-    "iconName": "PhyrexianSplicer",
-    "effect": {
-      "startBattleWithCard": [
-        "Phyrexian Splicer|TMP"
-      ]
-    },
-    "description": "Pay 2 and tap to move flying/first strike/shadow/trample.",
-    "cost": 12000
   },
   {
     "name": "Tome of the Trove",
@@ -2746,12 +2748,12 @@
   },
   {
     "name": "Krampus's Horns",
-    "description": "Start with Charcoal Diamond in play. -1 starting hand, -2 life.",
+    "description": "Start with Charcoal Diamond in play. -1 starting hand, -6 Max Life.",
     "equipmentSlot": "Neck",
     "iconName": "KrampussHorns",
     "effect": {
       "changeStartCards": -1,
-      "lifeModifier": -2,
+      "lifeModifier": -6,
       "startBattleWithCard": [
         "Charcoal Diamond|MIR"
       ]

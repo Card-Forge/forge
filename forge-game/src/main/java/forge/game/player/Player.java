@@ -324,7 +324,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public void updateFlashbackForView() {
-        view.updateFlashbackForPlayer(this);
+        view.updateFlashback(this);
+        game.fireEvent(new GameEventZone(ZoneType.Flashback, this, EventValueChangeType.Added, null));
     }
 
     //get single opponent for player if only one, otherwise returns null
@@ -1340,7 +1341,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * gets a list of first N cards in the requested zone. This function makes a CardCollectionView from Card[].
      */
     public final CardCollectionView getCardsIn(final ZoneType zone, final int n) {
-        return new CardCollection(Iterables.limit(getCardsIn(zone), n));
+        return new CardCollection(getCardsIn(zone).stream().limit(n));
     }
 
     /**
@@ -2565,14 +2566,11 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public void addController(long timestamp, Player pl, PlayerController pc, boolean event) {
-        final LobbyPlayer oldLobbyPlayer = getLobbyPlayer();
-        final PlayerController oldController = getController();
-
         controlledBy.put(timestamp, Pair.of(pl, pc));
         getView().updateMindSlaveMaster(this);
 
         if (event) {
-            game.fireEvent(new GameEventPlayerControl(this, oldLobbyPlayer, oldController, getLobbyPlayer(), getController()));
+            game.fireEvent(new GameEventPlayerControl(getView(), getLobbyPlayer().getName(), !getController().isAI()));
         }
     }
 
@@ -2580,20 +2578,17 @@ public class Player extends GameEntity implements Comparable<Player> {
         removeController(timestamp, true);
     }
     public void removeController(long timestamp, boolean event) {
-        final LobbyPlayer oldLobbyPlayer = getLobbyPlayer();
-        final PlayerController oldController = getController();
-
         controlledBy.remove(timestamp);
         getView().updateMindSlaveMaster(this);
 
         if (event) {
-            game.fireEvent(new GameEventPlayerControl(this, oldLobbyPlayer, oldController, getLobbyPlayer(), getController()));
+            game.fireEvent(new GameEventPlayerControl(getView(), getLobbyPlayer().getName(), !getController().isAI()));
         }
     }
 
     public void clearController() {
         controlledBy.clear();
-        game.fireEvent(new GameEventPlayerControl(this, null, null, getLobbyPlayer(), getController()));
+        game.fireEvent(new GameEventPlayerControl(getView(), null, !getController().isAI()));
     }
 
     public Map.Entry<Long, Player> getControlledWhileSearching() {
@@ -2857,7 +2852,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         return commanderCast.getOrDefault(commander, 0);
     }
     public void incCommanderCast(Card commander) {
-        commanderCast.put(commander, getCommanderCast(commander) + 1);
+        commanderCast.merge(commander, 1, Integer::sum);
         getView().updateCommanderCast(this, commander);
         getGame().fireEvent(new GameEventPlayerStatsChanged(this, false));
     }
@@ -3036,8 +3031,8 @@ public class Player extends GameEntity implements Comparable<Player> {
             contraptionDeck.shuffle();
 
         // Adventure Mode items
-        Iterable<? extends IPaperCard> adventureItemCards = registeredPlayer.getExtraCardsInCommandZone();
-        if (adventureItemCards != null) {
+        Iterable<? extends IPaperCard> adventureItemCards  = registeredPlayer.getExtraCardsInCommandZone();
+        if (adventureItemCards  != null) {
             for (final IPaperCard cp : adventureItemCards) {
                 Card c = Card.fromPaperCard(cp, this);
                 com.add(c);
@@ -3062,8 +3057,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public void initCommanderColor(Card cmd) {
-        if (cmd.getStaticAbilities().stream().anyMatch(stAb -> stAb.hasParam("Description") && stAb.getParam("Description")
-                .contains("If CARDNAME is your commander, choose a color before the game begins."))) {
+        if (cmd.getRules().getAddsWildCardColor()) {
             Player p = cmd.getController();
             String prompt = Localizer.getInstance().getMessage("lblChooseAColorFor", cmd.getName());
             SpellAbility cmdColorsa = new SpellAbility.EmptySa(ApiType.ChooseColor, cmd, p);
@@ -3946,6 +3940,20 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public void setExpentThisTurn(int v) {
         expentThisTurn = v;
+    }
+
+    public void addExpentThisTurn(int v, SpellAbility sp) {
+        if (v <= 0) {
+            return;
+        }
+        int startingMana = expentThisTurn;
+        int totalMana = expentThisTurn += v;
+        for (int i = startingMana + 1; i <= totalMana; i++) {
+            Map<AbilityKey, Object> expendParams = AbilityKey.mapFromPlayer(this);
+            expendParams.put(AbilityKey.SpellAbility, sp);
+            expendParams.put(AbilityKey.Amount, i);
+            game.getTriggerHandler().runTrigger(TriggerType.ManaExpend, expendParams, true);
+        }
     }
 
     public void visitAttractions(int light) {

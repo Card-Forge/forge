@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=The Great Gazoo
+Title=The Great Gazoo
+Icon=The Great Gazoo.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Crimson_Vow/Eric_Dziegel_-_Monoblack_Zombies_(Standard,_#1256148).dck
+Deck Type=constructed
+
+[Main]
+2 Undead Butler
+3 Headless Rider
+3 Jadar, Ghoulcaller of Nephalia
+4 Tainted Adversary
+4 Shambling Ghast
+4 Fell Stinger
+4 Champion of the Perished
+1 Baleful Mastery
+2 Infernal Grasp
+2 Agadeem's Awakening
+2 Eaten Alive
+3 The Meathook Massacre
+3 Lolth, Spider Queen
+1 Field of Ruin
+2 Hive of the Eye Tyrant
+4 Faceless Haven
+16 Snow-Covered Swamp
+[Sideboard]
+1 Blood on the Snow
+1 Crippling Fear
+1 Inscription of Ruin
+2 Go Blank
+2 Soul Shatter
+4 Ray of Enfeeblement
+4 Duress

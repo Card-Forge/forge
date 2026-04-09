@@ -1,5 +1,6 @@
 package forge.gamemodes.net.server;
 
+import forge.gamemodes.net.IHasNetLog;
 import forge.gamemodes.net.ReplyPool;
 import forge.gamemodes.net.event.IdentifiableNetEvent;
 import forge.gamemodes.net.event.NetEvent;
@@ -8,14 +9,14 @@ import io.netty.channel.Channel;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public final class RemoteClient implements IToClient {
+public final class RemoteClient implements IToClient, IHasNetLog {
 
     /** Special value indicating the client hasn't been assigned a slot yet. */
     public static final int UNASSIGNED_SLOT = -1;
 
     private volatile Channel channel;
     private String username;
-    private int index = UNASSIGNED_SLOT;  // Initialize to -1 to indicate not yet assigned
+    private int index = UNASSIGNED_SLOT;
     private volatile ReplyPool replies = new ReplyPool();
     private final AtomicInteger sendErrors = new AtomicInteger(0);
 
@@ -42,21 +43,28 @@ public final class RemoteClient implements IToClient {
 
     @Override
     public void send(final NetEvent event) {
-        System.out.println("Sending event " + event + " to " + channel);
         try {
+            long startMs = System.currentTimeMillis();
             channel.writeAndFlush(event).sync();
+            long elapsed = System.currentTimeMillis() - startMs;
+            if (elapsed > 50) {
+                netLog.info("send() blocked {} ms for {} (event: {})", elapsed, username, event);
+            }
         } catch (Exception e) {
             sendErrors.incrementAndGet();
-            e.printStackTrace();
+            netLog.error("Network send error for {} (event: {})", username, event, e);
         }
+    }
+
+    @Override
+    public void write(final NetEvent event) {
+        channel.write(event);
     }
 
     @Override
     public Object sendAndWait(final IdentifiableNetEvent event) throws TimeoutException {
         replies.initialize(event.getId());
-
         send(event);
-
         return replies.get(event.getId());
     }
 

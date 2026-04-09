@@ -3,7 +3,7 @@ package forge.gamemodes.net;
 import forge.deck.CardPool;
 import forge.game.GameEntityView;
 import forge.game.GameView;
-import forge.game.event.GameEvent;
+
 import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
@@ -31,9 +31,9 @@ import java.util.Map;
 /**
  * The methods that can be sent through this protocol.
  */
-public enum ProtocolMethod {
+public enum ProtocolMethod implements IHasNetLog {
     // Server -> Client
-    setGameView         (Mode.SERVER, Void.TYPE, GameView.class),
+    setGameView         (Mode.SERVER, Void.TYPE, GameView.class, Long.TYPE),
     openView            (Mode.SERVER, Void.TYPE, TrackableCollection/*PlayerView*/.class),
     afterGameEnd        (Mode.SERVER, Void.TYPE),
     showCombat          (Mode.SERVER, Void.TYPE),
@@ -78,7 +78,8 @@ public enum ProtocolMethod {
     syncYieldMode       (Mode.SERVER, Void.TYPE, PlayerView.class, YieldMode.class),
     setHostYieldEnabled (Mode.SERVER, Void.TYPE, Boolean.TYPE),
     showWaitingTimer    (Mode.SERVER, Void.TYPE, PlayerView.class, String.class),
-    handleGameEvent     (Mode.SERVER, Void.TYPE, GameEvent.class),
+    setHighlighted      (Mode.SERVER, Void.TYPE, GameEntityView.class, Boolean.TYPE),
+    applyDelta          (Mode.SERVER, Void.TYPE, DeltaPacket.class),
 
     // Client -> Server
     // Note: these should all return void, to avoid awkward situations in
@@ -100,7 +101,9 @@ public enum ProtocolMethod {
     reorderHand               (Mode.CLIENT, Void.TYPE, CardView.class, Integer.TYPE),
     notifyYieldStateChanged   (Mode.CLIENT, Void.TYPE, PlayerView.class, YieldMode.class, YieldPrefs.class),
     notifyAutoYieldChanged    (Mode.CLIENT, Void.TYPE, String.class, Boolean.TYPE),
-    notifyTriggerChoiceChanged(Mode.CLIENT, Void.TYPE, Integer.TYPE, TriggerChoice.class);
+    notifyTriggerChoiceChanged(Mode.CLIENT, Void.TYPE, Integer.TYPE, TriggerChoice.class),
+    requestResync             (Mode.CLIENT, Void.TYPE),
+    ;
 
     private enum Mode {
         SERVER(IGuiGame.class),
@@ -140,7 +143,7 @@ public enum ProtocolMethod {
             }
             return candidate;
         } catch (final NoSuchMethodException | SecurityException e) {
-            System.err.printf("Warning: class contains no accessible method named %s%n", name());
+            netLog.warn("Class contains no accessible method named {}", name());
             return getMethodNoArgs();
         }
     }
@@ -149,7 +152,7 @@ public enum ProtocolMethod {
         try {
             return mode.toInvoke.getMethod(name(), (Class<?>[]) null);
         } catch (final NoSuchMethodException | SecurityException e) {
-            System.err.printf("Warning: class contains no accessible arg-less method named %s%n", name());
+            netLog.warn("Class contains no accessible arg-less method named {}", name());
             return null;
         }
     }
@@ -170,12 +173,11 @@ public enum ProtocolMethod {
                 final Class<?> type = this.args[iArg];
                 if (!ReflectionUtil.isInstance(arg, type)) {
                     //throw new InternalError(String.format("Protocol method %s: illegal argument (%d) of type %s, %s expected", name(), iArg, arg.getClass().getName(), type.getName()));
-                    System.err.printf("InternalError: Protocol method %s: illegal argument (%d) of type %s, %s expected (ProtocolMethod.java)%n", name(), iArg, arg.getClass().getName(), type.getName());
+                    netLog.error("Protocol method {}: illegal argument ({}) of type {}, {} expected", name(), iArg, arg.getClass().getName(), type.getName());
                 }
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+            netLog.error(e, "Error checking args for protocol method {}", name());
         }
     }
 
@@ -190,7 +192,7 @@ public enum ProtocolMethod {
         }
         if (!ReflectionUtil.isInstance(value, returnType)) {
             //throw new IllegalStateException(String.format("Protocol method %s: illegal return object type %s returned by client, expected %s", name(), value.getClass().getName(), getReturnType().getName()));
-            System.err.printf("IllegalStateException: Protocol method %s: illegal return object type %s returned by client, expected %s  (ProtocolMethod.java)%n", name(), value.getClass().getName(), getReturnType().getName());
+            netLog.error("Protocol method {}: illegal return type {}, expected {}", name(), value.getClass().getName(), getReturnType().getName());
         }
     }
 }

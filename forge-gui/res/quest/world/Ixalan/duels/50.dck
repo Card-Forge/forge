@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Robot50
+Title=Robot50
+Icon=Vanellope von Schweetz.jpg
+Difficulty=Hard
+Description=Red Deck Wins 
+Deck Type=constructed
+
+[Main]
+4 Ahn-Crop Crasher
+4 Bomat Courier
+4 Earthshaker Khenra
+2 Glorybringer
+3 Hazoret the Fervent
+2 Kari Zev, Skyship Raider
+2 Pia Nalaar
+4 Soul-Scar Mage
+4 Lightning Strike
+1 Magma Spray
+4 Shock
+2 Chandra, Torch of Defiance
+15 Mountain
+4 Ramunap Ruins
+1 Scavenger Grounds
+4 Sunscorched Desert
+[Sideboard]
+2 Abrade
+1 Aethersphere Harvester
+2 Chandra's Defeat
+1 Chandra, Torch of Defiance
+1 Glorybringer
+1 Hazoret the Fervent
+1 Magma Spray
+3 Rampaging Ferocidon
+1 Scavenger Grounds
+1 Sweltering Suns
+1 Vance's Blasting Cannons

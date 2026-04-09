@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Frankenstein
+Title=Frankenstein
+Icon=Frankenstein.jpg
+Difficulty=Medium
+Description=./Standard/Theros_Beyond_Death/Akaichar_-_UW_Control_(Standard,_#946609).dck
+Deck Type=constructed
+
+[Main]
+1 Brazen Borrower
+1 Archon of Sun's Grace
+3 Dream Trawler
+1 Aether Gust
+1 Mystical Dispute
+2 Dovin's Veto
+2 Thirst for Meaning
+4 Absorb
+3 Shatter the Sky
+1 Banishing Light
+3 Elspeth Conquers Death
+3 The Birth of Meletis
+4 Omen of the Sea
+2 Narset, Parter of Veils
+4 Teferi, Time Raveler
+1 Field of Ruin
+2 Castle Vantress
+3 Castle Ardenvale
+4 Temple of Enlightenment
+4 Hallowed Fountain
+4 Plains
+7 Island
+[Sideboard]
+1 Archon of Sun's Grace
+1 Glass Casket
+1 Commence the Endgame
+1 Cerulean Drake
+1 Spectral Sailor
+1 Dovin's Veto
+1 Heliod's Intervention
+2 Aether Gust
+3 Devout Decree
+3 Mystical Dispute

@@ -5,7 +5,7 @@ Unlimited, 3/6/2ED, 2ED
 Arabian Nights, 5/9/2ED, ARN  
 Antiquities, 5/9/2ED, ATQ  
 Revised, 3/6/3ED, 3ED  
-Legends, 3/6/3ED, LEG  
+Legends, 3/6/3ED, LEG LEG 3ED
 The Dark, 5/9/3ED, DRK  
 Fallen Empires, 5/9/3ED, FEM  
 Fourth Edition, 3/6/4ED, 4ED CHR  
@@ -19,6 +19,7 @@ Portal Second Age, 3/6/PO2, PO2
 Urza, 3/6/USG, USG ULG UDS
 Sixth Edition, 3/6/6ED, 6ED  
 Portal Three Kingdoms, 5/9/PTK, PTK  
+Starter 1999, 3/6/S99, S99
 Masques, 3/6/MMQ, MMQ NMS PCY
 Invasion, 3/6/INV, INV PLS APC
 Seventh Edition, 3/6/7ED, 7ED  

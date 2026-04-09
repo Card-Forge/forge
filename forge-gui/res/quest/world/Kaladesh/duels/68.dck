@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Riddler
+Title=Riddler
+Icon=Riddler.jpg
+Difficulty=Hard
+Description=../Modern/Kaladesh/MissedTriggerGaming_-_Open_#4/Erlend_Kirkeb_-_Mardu_Madcap_(Modern,_#659269).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Emrakul, the Aeons Torn
+2 Platinum Emperion
+4 Wall of Omens
+4 Lightning Bolt
+2 Lightning Helix
+4 Path to Exile
+1 Terminate
+2 Collective Brutality
+1 Collective Defiance
+3 Inquisition of Kozilek
+4 Lingering Souls
+4 Madcap Experiment
+1 Thoughtseize
+3 Nahiri, the Harbinger
+2 Blood Crypt
+4 Bloodstained Mire
+3 Dragonskull Summit
+1 Godless Shrine
+1 Inspiring Vantage
+2 Isolated Chapel
+1 Mountain
+1 Plains
+2 Sacred Foundry
+2 Shambling Vent
+1 Swamp
+2 Windswept Heath
+2 Wooded Foothills
+[Sideboard]
+3 Anger of the Gods
+2 Gideon, Ally of Zendikar
+1 Goblin Dark-Dwellers
+1 Kolaghan's Command
+1 Ravenous Trap
+1 Rest in Peace
+2 Stony Silence
+1 Sudden Shock
+1 Thoughtseize
+2 Timely Reinforcements

@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Mortivore
+Title=Mortivore
+Icon=Mortivore.jpg
+Difficulty=Medium
+Description=./Standard/Bloomburrow/DoctorofTime_-_Gruul_Aggro_(Standard,_#2182933).dck
+Deck Type=constructed
+
+[Main]
+2 Questing Druid
+4 Emberheart Challenger
+2 Slickshot Show-Off
+4 Monastery Swiftspear
+4 Manifold Mouse
+4 Heartfire Hero
+4 Might of the Meek
+4 Monstrous Rage
+4 Shock
+3 Witchstalker Frenzy
+2 Snakeskin Veil
+2 Innkeeper's Talent
+4 Karplusan Forest
+2 Rockface Village
+8 Mountain
+4 Copperline Gorge
+3 Restless Ridgeline
+[Sideboard]
+4 Urabrask's Forge
+3 Tectonic Hazard
+2 Scorching Shot
+3 Pick Your Poison
+1 Witchstalker Frenzy
+2 Torch the Tower

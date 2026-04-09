@@ -13,3 +13,5 @@ ScryfallCode=PW26
 5 R Lightning Bolt @Fahmi Fauzi
 6 R Courier of Comestibles
 7 R Spicy Oatmeal Pizza
+8 R Into the Flood Maw @Danny Schwartz
+9 R Access Tunnel @Alayna Danner

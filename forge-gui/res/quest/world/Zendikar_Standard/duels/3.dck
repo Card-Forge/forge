@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=The Very Hungry Caterpillar
+Title=The Very Hungry Caterpillar
+Icon=The Very Hungry Caterpillar.jpg
+Difficulty=Medium
+Description=Zendikar/StarCityGames.com_$5,000_Standard_Open_-_Dallas/Maurice_Bennet_-_All_American_Control_(Standard,_#2949).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Sphinx of Jwar Isle
+4 Wall of Denial
+2 Double Negative
+3 Flashfreeze
+4 Lightning Bolt
+3 Path to Exile
+2 Divination
+2 Earthquake
+2 Mind Spring
+4 Spreading Seas
+3 Ajani Vengeant
+2 Jace Beleren
+4 Arid Mesa
+4 Glacial Fortress
+4 Island
+2 Mountain
+4 Plains
+4 Scalding Tarn
+4 Sejiri Refuge
+[Sideboard]
+2 Archive Trap
+1 Banefire
+4 Baneslayer Angel
+2 Day of Judgment
+3 Luminarch Ascension
+3 Negate

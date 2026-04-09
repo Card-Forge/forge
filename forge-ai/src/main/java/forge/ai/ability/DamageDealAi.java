@@ -83,18 +83,15 @@ public class DamageDealAi extends DamageAiBase {
                     }
                 }
 
-                // Set PayX here to maximum value.
-                dmg = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
-                sa.setXManaCostPaid(dmg);
+                dmg = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
             } else if (sa.getSVar(damage).equals("Count$CardsInYourHand") && source.isInZone(ZoneType.Hand)) {
                 dmg--; // the card will be spent casting the spell, so actual damage is 1 less
             }
         }
         if (damageTargetAI(ai, sa, dmg, true)) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
+        return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
     }
 
     @Override
@@ -108,7 +105,7 @@ public class DamageDealAi extends DamageAiBase {
 
         if (damage.equals("X") || (dmg == 0 && source.getSVar("X").equals("Count$xPaid"))) {
             if (sa.getSVar("X").equals("Count$xPaid") || sa.getSVar(damage).equals("Count$xPaid")) {
-                dmg = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
+                dmg = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
 
                 // Try not to waste spells like Blaze or Fireball on early targets, try to do more damage with them if possible
                 int holdChance = AiProfileUtil.getIntProperty(ai, AiProps.HOLD_X_DAMAGE_SPELLS_FOR_MORE_DAMAGE_CHANCE);
@@ -120,9 +117,6 @@ public class DamageDealAi extends DamageAiBase {
                         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                     }
                 }
-
-                // Set PayX here to maximum value. It will be adjusted later depending on the target.
-                sa.setXManaCostPaid(dmg);
             } else if (sa.getSVar(damage).contains("InYourHand") && source.isInZone(ZoneType.Hand)) {
                 dmg -= - 1; // the card will be spent casting the spell, so actual damage is 1 less
             } else if (sa.getSVar(damage).equals("TargetedPlayer$CardsInHand")) {
@@ -968,9 +962,7 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
-            // Set PayX here to maximum value.
-            dmg = ComputerUtilCost.getMaxXValue(sa, ai, true);
-            sa.setXManaCostPaid(dmg);
+            dmg = ComputerUtilCost.setMaxXValue(sa, ai, true);
         }
 
         if (!sa.usesTargeting()) {
@@ -981,9 +973,8 @@ public class DamageDealAi extends DamageAiBase {
 
             if (damageChooseNontargeted(ai, sa, dmg)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         } else {
             if (!damageChoosingTargets(ai, sa, sa.getTargetRestrictions(), dmg, mandatory, true) && !mandatory) {
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
@@ -1088,6 +1079,16 @@ public class DamageDealAi extends DamageAiBase {
             return null;
         }
 
+        if (sa.getSubAbility() != null || sa.getParent() != null) {
+            // Doesn't work yet for complex decisions where damage is only a part of the decision process
+            return null;
+        }
+
+        // chaining to this could miscalculate
+        if (sa.isDividedAsYouChoose()) {
+            return null;
+        }
+
         Game game = ai.getGame();
         int chance = AiProfileUtil.getIntProperty(ai, AiProps.CHANCE_TO_CHAIN_TWO_DAMAGE_SPELLS);
 
@@ -1096,16 +1097,6 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         if (!MyRandom.percentTrue(chance)) {
-            return null;
-        }
-
-        if (sa.getSubAbility() != null || sa.getParent() != null) {
-            // Doesn't work yet for complex decisions where damage is only a part of the decision process
-            return null;
-        }
-
-        // chaining to this could miscalculate
-        if (sa.isDividedAsYouChoose()) {
             return null;
         }
 

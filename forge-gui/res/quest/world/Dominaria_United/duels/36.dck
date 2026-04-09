@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Repressed Magic
+Title=Repressed Magic
+Icon=Repressed Magic.jpg
+Difficulty=Medium
+Description=./Standard/Dominaria_United/Jorge_Iraheta_-_Esper_Aggro_(Standard,_#1493511).dck
+Deck Type=constructed
+
+[Main]
+1 Henrika Domnathi
+1 Ludevic, Necrogenius
+2 Toluz, Clever Conductor
+2 Dennick, Pious Apprentice
+2 Adeline, Resplendent Cathar
+3 Ao, the Dawn Sky
+3 Sheoldred, the Apocalypse
+3 Ertai Resurrected
+4 Ratadrabik of Urborg
+4 Thalia, Guardian of Thraben
+4 Raffine, Scheming Seer
+3 Infernal Grasp
+1 Sorin the Mirthless
+2 Takenuma, Abandoned Mire
+2 Plaza of Heroes
+2 Otawara, Soaring City
+2 Eiganjo, Seat of the Empire
+2 Shipwreck Marsh
+2 Deserted Beach
+3 Caves of Koilos
+4 Raffine's Tower
+4 Shattered Sanctum
+4 Adarkar Wastes
+[Sideboard]
+2 Negate
+2 Disdainful Stroke
+2 Graveyard Trespasser
+2 Wedding Announcement
+2 The Wandering Emperor
+2 Destroy Evil
+3 Duress

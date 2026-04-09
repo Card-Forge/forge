@@ -20,8 +20,8 @@ public class Paths {
     public static final String COLOR_FRAME_ATLAS = "ui/color_frames.atlas";
     public static final String ARENA_ATLAS = "ui/arena.atlas";
     public static final String MAP_MARKER = "sprites/map_marker.atlas";
-
-
+    
+    
     public static final String EFFECT_HEAL = "particle_effects/heal.p";
     public static final String EFFECT_KILL = "particle_effects/killed.p";
     public static final String TRIGGER_KILL = "particle_effects/kill.p";
@@ -31,6 +31,7 @@ public class Paths {
     public static final String EFFECT_TELEPORT = "particle_effects/teleport.p";
     public static final String EFFECT_BLOOD = "particle_effects/blood.p";
     public static final String EFFECT_SPARKS = "particle_effects/sparks.p";
+    public static final String CARD_PRICES = "world/cardprices.txt";
     public static final String CUSTOM_CARDS = "custom_cards";
     public static final String CUSTOM_CARDS_PICS = "custom_card_pics";
 }

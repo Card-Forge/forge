@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Erebos
+Title=Erebos
+Icon=Erebos.jpg
+Difficulty=Very Hard
+Description=../Modern/Magic_Origins/Legacy_Daily_#9286326/Heng_-_Heng_(3-1)_(Modern,_#518918).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Monastery Swiftspear
+4 Fireblast
+4 Lightning Bolt
+4 Price of Progress
+1 Searing Blaze
+4 Chain Lightning
+4 Lava Spike
+4 Rift Bolt
+2 Sulfuric Vortex
+2 Barbarian Ring
+4 Bloodstained Mire
+9 Mountain
+4 Wooded Foothills
+[Sideboard]
+2 Ensnaring Bridge
+4 Exquisite Firecraft
+2 Pyroblast
+2 Pyrostatic Pillar
+1 Smash to Smithereens

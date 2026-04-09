@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Token
+Title=Token
+Icon=Token.jpg
+Difficulty=Medium
+Description=Khans_of_Tarkir/SCG_Super_IQ_Brooklyn/Joshua_Hakim_-_Abzan_Aggro_(Standard,_#149492).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Anafenza, the Foremost
+4 Fleecemane Lion
+4 Rakshasa Deathdealer
+4 Siege Rhino
+4 Wingmate Roc
+3 Abzan Charm
+3 Bile Blight
+3 Hero's Downfall
+1 Murderous Cut
+4 Thoughtseize
+1 Sorin, Solemn Visitor
+3 Caves of Koilos
+2 Forest
+3 Llanowar Wastes
+1 Plains
+4 Sandsteppe Citadel
+3 Temple of Malady
+3 Temple of Silence
+2 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+3 Back to Nature
+4 Drown in Sorrow
+3 Glare of Heresy
+2 Nissa, Worldwaker
+1 Utter End

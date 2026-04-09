@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=House Party
+Title=House Party
+Icon=House Party.jpg
+Difficulty=Easy
+Description=./Standard/Duskmourn_House_of_Horror/Coly2_-_Dimir_Midrange_(Standard,_#2253323).dck
+Deck Type=constructed
+
+[Main]
+4 Deep-Cavern Bat
+1 Sheoldred, the Apocalypse
+4 Faerie Mastermind
+4 Spyglass Siren
+4 Enduring Curiosity
+4 Preacher of the Schism
+2 Anoint with Affliction
+3 Cut Down
+4 Go for the Throat
+2 Phantom Interference
+1 Three Steps Ahead
+2 Kaito, Bane of Nightmares
+4 Darkslick Shores
+4 Gloomlake Verge
+2 Fountainport
+2 Island
+4 Underground River
+4 Restless Reef
+5 Swamp
+[Sideboard]
+1 Anoint with Affliction
+1 Blot Out
+1 Cut Down
+1 Disdainful Stroke
+2 Duress
+2 Ghost Vacuum
+1 Gix's Command
+2 Negate
+1 Sheoldred, the Apocalypse
+2 Tishana's Tidebinder
+1 Ertai Resurrected

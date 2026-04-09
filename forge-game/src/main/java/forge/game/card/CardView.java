@@ -341,6 +341,7 @@ public class CardView extends GameEntityView {
     }
     void updateCounters(Card c) {
         set(TrackableProperty.Counters, c.getCounters());
+        flagAsChanged(TrackableProperty.Counters);
         updateLethalDamage(c);
         CardStateView state = getCurrentState();
         state.updatePower(c);
@@ -425,6 +426,7 @@ public class CardView extends GameEntityView {
     }
     void updateNotedTypes(Card c) {
         set(TrackableProperty.NotedTypes, c.getNotedTypes());
+        flagAsChanged(TrackableProperty.NotedTypes);
     }
 
     public String getChosenNumber() {
@@ -449,6 +451,7 @@ public class CardView extends GameEntityView {
     }
     void updateChosenColors(Card c) {
         set(TrackableProperty.ChosenColors, c.getChosenColors());
+        flagAsChanged(TrackableProperty.ChosenColors);
     }
     public boolean hasPaperFoil() {
         return get(TrackableProperty.PaperFoil);
@@ -621,6 +624,7 @@ public class CardView extends GameEntityView {
     public List<String> getDraftAction() { return get(TrackableProperty.DraftAction); }
     void updateDraftAction(Card c) {
         set(TrackableProperty.DraftAction, c.getDraftActions());
+        flagAsChanged(TrackableProperty.DraftAction);
     }
 
     public List<String> getNamedCard() {
@@ -628,6 +632,7 @@ public class CardView extends GameEntityView {
     }
     void updateNamedCard(Card c) {
         set(TrackableProperty.NamedCard, c.getNamedCards());
+        flagAsChanged(TrackableProperty.NamedCard);
     }
     public boolean getMayPlayPlayers(PlayerView pv) {
         TrackableCollection<PlayerView> col = get(TrackableProperty.MayPlayPlayers);
@@ -995,7 +1000,7 @@ public class CardView extends GameEntityView {
     }
     public String getBackSideName() { return get(TrackableProperty.BackSideName); }
 
-    CardStateView createAlternateState(final CardStateName state0) {
+    public CardStateView createAlternateState(final CardStateName state0) {
         return new CardStateView(getId(), state0, tracker);
     }
 
@@ -1030,6 +1035,7 @@ public class CardView extends GameEntityView {
     public void updateNeedsTransformAnimation(boolean value) {
         set(TrackableProperty.NeedsTransformAnimation, value);
     }
+
     void updateState(Card c) {
         updateName(c);
         updateZoneText(c);
@@ -1128,7 +1134,7 @@ public class CardView extends GameEntityView {
         currentState.getView().setOriginalColors(c); //set original Colors
 
         currentStateView.updateAttractionLights(currentState);
-        currentStateView.updateHasPrintedPT((currentStateView.isVehicle() || currentStateView.isSpaceCraft()) && c.getRules() != null && c.getRules().hasPrintedPT());
+        currentStateView.updateHasPrintedPT((currentStateView.isVehicle() || currentStateView.isSpaceCraft()) && currentState.hasPrintedPT());
 
         CardState alternateState = isSplitCard && isFaceDown() ? c.getState(CardStateName.RightSplit) : c.getAlternateState();
 
@@ -1331,12 +1337,6 @@ public class CardView extends GameEntityView {
         public ColorSet getOriginalColors() {
             return get(TrackableProperty.OriginalColors);
         }
-        public ColorSet getLeftSplitColors() {
-            return get(TrackableProperty.LeftSplitColors);
-        }
-        public ColorSet getRightSplitColors() {
-            return get(TrackableProperty.RightSplitColors);
-        }
         void updateColors(Card c) {
             set(TrackableProperty.Colors, c.getColor());
         }
@@ -1345,10 +1345,6 @@ public class CardView extends GameEntityView {
         }
         void setOriginalColors(Card c) {
             set(TrackableProperty.OriginalColors, c.getColor());
-            if (c.isSplitCard()) {
-                set(TrackableProperty.LeftSplitColors, c.getColor(c.getState(CardStateName.LeftSplit)));
-                set(TrackableProperty.RightSplitColors, c.getColor(c.getState(CardStateName.RightSplit)));
-            }
         }
         void updateHasChangeColors(boolean hasChangeColor) {
             set(TrackableProperty.HasChangedColors, hasChangeColor);

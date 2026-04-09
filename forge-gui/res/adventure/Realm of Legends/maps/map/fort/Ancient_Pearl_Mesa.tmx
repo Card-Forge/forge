@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="82">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Mox Pearl|LEA&quot;, &quot;Pearl Medallion|TMP&quot;, &quot;Pearl Collector&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzr42Rg6MOC25AwNnl86onB1DJnqNtLrt3E6hu1d9TeUXtH7R3q9pJjJ6nuG6z20qL+BQDfkyFi
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJy1lUsSgkAMRLPRGtTyaOjdPAj+rqKXQGA27iWLlCF0hsFPV83CgfSbTweJiK6BqCyG49zPacV+7rYk2hUE1fXzpzCej44fqy7G3Eb53xf+0N6lWVOKidiNqU9xeaAzymFqtmWyqqAYAXOtf+3sYY5k7S3weCS8v2Gy9B0g9idCGUTSmW+d7Hriezqa97VPl9gLynwOuwr4rKyX158s1OdT7GjeF7bdRyoL/K5l7yfum2su4V2ncy/PcvMn/Jze1DVT/nwnc3LzCzEzgn7ZbP/L9b5vuVxZs/c/kWLazFem/rka/tb+Nnc5vY5qZC269rAerkk/R32ew36AXrFnrrmSbfGuQI8j9guj7YRw
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJytVd0NgkAMvhcjkjCJiXELSCSuA8ISjuIm+OQO8KgOIA1UPkt7gPolF45ef7/2wLkB1033bNwYmoxQtTZJvy+iz7MyGqm/Y8jz2vB/D5x7iPUMDOWFiBUZ53Ru87ysu0Wg5zYcYjMfp14/7d+ZCwTJKqhb2iB2bYxj0C2KeVt1+3346c+HYoJXPsdeIKxezwHaYmwr1jd+0fdByHOoHfsr7bUamZc80uUal3LGM0WX/WWgO9VDC9rMSl/avZsD5iQV74TM47P4Q12/oBKzhbliDZgn9WQuTzS7B9hTb+UsNM7PEYNjYi4s03o7B7GIXYtnCbXK+4KQc09g/tg+EbqZkBNS0Le+Jdr3QMtNs6+dzrevn77+WP8e62xJ3KXw3SUrrsYbyyrjf/sCUg1PwA==
+  </data>
+ </layer>
+ <layer id="7" name="Cave" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztlE1qwkAUx18DNh9UV1H0AkWpLV7EHkdduSxutMWjqOhewd6gl+ii+HGAvsfMn0wegZqkK/HBH8yMmV9+My8h+rsG90RDm41PVOesfXM94iz4d8uOZ6XB+QgvANn6CYh6EVHM97U9op1KxzN8YceK1eQsbVY5ufPQuIrjIzO+KulsHfYmw/HIz32yeY7yu8o6e15/ckf0GiR54+tPz7i1lKc4vudwzHLNWkvmF844zlg8Z6FxvdTRrWmYuGLPvnm8b+fHVbO+m9hPzjvPeWqu6/DCz36wbHc/0NMz9f8ieyz1xJxzkHYAG2cPDuZxLmW42tllC3Og3l30dLNET2lnzcZZoofQX+ixoj2l2Q+1NHvo7Cfe0WrNpBuVZ6KEC++lX/w7VJQtLhJ8g/7T7VbXVb+lHmN3
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="281" width="48" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="56" template="../../../../common/maps/obj/collision.tx" x="-16" y="0" width="16" height="272"/>
+  <object id="57" template="../../../../common/maps/obj/collision.tx" x="480" y="0" width="16" height="272"/>
+  <object id="58" template="../../../../common/maps/obj/collision.tx" x="-16" y="272" width="512" height="16"/>
+  <object id="59" template="../../../../common/maps/obj/collision.tx" x="-16" y="-16" width="512" height="16"/>
+  <object id="75" template="../../../../common/maps/obj/enemy.tx" x="205.874" y="83.0951">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;True Conviction&quot;, &quot;Martyr's Bond&quot; ] }"/>
+    <property name="enemy" value="General Jarkeld"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="78" template="../../../../common/maps/obj/scroll.tx" x="205.5" y="161">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Pearl Collector&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="79" template="../../../../common/maps/obj/dialog.tx" x="170" y="224.75" width="89.5" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The very air in this place is thick with white mana, filling you with a sense of profound courage. Atop the mesa ahead, a lone soldier stands, the infamous mox pearl hung around his neck. 
+
+Your manasight stone blazes with power, near-blindingly bright.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="80" template="../../../../common/maps/obj/scroll.tx" x="287.5" y="106.5">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Pearl Medallion&quot;, &quot;editions&quot;: [ &quot;TMP&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="81" template="../../../../common/maps/obj/enemy.tx" x="206.309" y="81.3351">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;True Conviction&quot; ] }"/>
+    <property name="enemy" value="General Jarkeld"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

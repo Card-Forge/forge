@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="65" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="281">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="65" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="284">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -143,6 +143,8 @@
   }
 ]
 </property>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -196,6 +198,8 @@
   }
 ]
 </property>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -243,6 +247,8 @@
   }
 ]
 </property>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -510,7 +516,7 @@ NORTH: DOMAIN OF THE THREE WITCHES&quot;,
     <property name="enemy" value="Glarb"/>
    </properties>
   </object>
-  <object id="278" template="../../../../common/maps/obj/enemy.tx" x="730" y="747.164" width="16" height="17.6724">
+  <object id="278" template="../../../../common/maps/obj/enemy.tx" x="918" y="857.664" width="16" height="17.6724">
    <properties>
     <property name="enemy" value="Helga"/>
     <property name="speedModifier" type="float" value="20"/>
@@ -522,11 +528,61 @@ NORTH: DOMAIN OF THE THREE WITCHES&quot;,
     <property name="enemy" value="Clement"/>
    </properties>
   </object>
-  <object id="280" template="../../../../common/maps/obj/enemy.tx" x="914" y="856.164" width="16" height="17.6724">
+  <object id="281" template="../../../../common/maps/obj/enemy.tx" x="585.875" y="524.372" width="16" height="17.6724">
    <properties>
-    <property name="enemy" value="Flubs"/>
-    <property name="speedModifier" type="float" value="20"/>
-    <property name="threatRange" type="int" value="60"/>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Eriette's Tempting Apple|WOE&quot;, &quot;Restless Fortress|WOE&quot;, &quot;The Witch's Vanity|WOE&quot;]
+}</property>
+    <property name="enemy" value="Eriette"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Eriette's Key&quot;
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="282" template="../../../../common/maps/obj/enemy.tx" x="649.75" y="178.914" width="16" height="17.6724">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Solitary Sanctuary|WOE&quot;, &quot;Glacial Fortress|M10&quot;, &quot;Three Bowls of Porridge|WOE&quot;]
+}</property>
+    <property name="enemy" value="Hylda"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Hylda's Key&quot;
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="283" template="../../../../common/maps/obj/enemy.tx" x="761" y="189.414" width="16" height="17.6724">
+   <properties>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Witches' Eye|THS&quot;, &quot;Scalding Cauldron|ELD&quot;, &quot;Bleeding Woods|DSK&quot;]
+}</property>
+    <property name="enemy" value="Agatha"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Agatha's Key&quot;
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
  </objectgroup>

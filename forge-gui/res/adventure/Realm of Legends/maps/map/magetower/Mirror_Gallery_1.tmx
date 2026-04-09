@@ -3,9 +3,6 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
- <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Dragonbroods' Relic&quot; ]}"/>
- </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
  <tileset firstgid="11905" source="../../../../common/maps/tileset/buildingsbosses.tsx"/>
@@ -17,12 +14,12 @@
  </layer>
  <layer id="6" name="Floor" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJztmGEKwjAMRnuD9gQO0YvOobfSXcoDKIj/xpbYL+3A9yD/QvI22iUsJQAAAAAAAABYYswpXYQx5bb+Q9HWO4rrbfH1v77f26P8Hrfc17+2r6pOr7749+27Z//n4RO1dSLw+K89g9rfOpfO4vNzKpo5551LKn9Vv3vjueOdg7PonP3D96dlnYi+o+HO7dlflRMB/vacCPC350SAvz3Hg3d/W9u7VDmR+1trVPubZ8er/UcRsb9Z6HU3VeBv4wXbyIKc
+   eJztmGEKwjAMRgs7QHsDEb3oJnoqnVdTEP+NLbFf2oHvQf6F5G20S1hKAAAAAAAAALDEmFOahHHJbf0PRVvvKK63xdf/+n5vc/k9brmvf21fVZ1effHv23fP/vfhE7V1IvD4rz2H2t86l87i83MqmjnnnUsqf1W/R+O5452DT9E5+4fvT8s6EX1Hw53bs78qJwL87TkR4G/PiQB/e44H7/62tnepciL3t9ao9jfPjlf7jyJif7PQ626qwN/GC4hFgbw=
   </data>
  </layer>
  <layer id="2" name="Ground" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJzt1yEOgDAMQNFZDOEAhHAd7i8wHIMDkAWBwKAoHe8lzWS/arJSAAC+Y+miCwDyGYfznYbYDgB4auvvk80+XZNR5nZowRp896L3w1+18H+fE7dX+mPpj1PvT+13f+K80X8AaXoOlw==
+   eJzt17EJgEAMQFHBykZuABHXcWf3sHEYOSwsbKyM0fcgXJlfBa5pAADeY+6iCwDyGcrxjiW2AwDu2vrrZLO052SUuR2+YA2+e9H74a++8H+fErdX+mPpj1PvT+13f+I80b8DKAAM+A==
   </data>
  </layer>
  <layer id="3" name="Foreground" width="48" height="48">
@@ -30,12 +27,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztmNtOFEEQQPsJ4kPPjAQlYsJPgEJUsmSjJn4N3hWUV42+e8G7CYKJGJT44meo8RIJ4RI+wQ+wKjOd6TRVPbVD7yxoV3Kys929PWen0tW9O5YoNRaJRCKRyD/OGeB3FzjdkP8p4MKhkrvtHLvNcKcFfa3d7dRnJvahf9+UUv1T+8/fDcod8QX629FL/xAR/WW80Eo9FfBM515PhOOf62b8O81TU8/1f/E/min1M6nmV+H/QzAWybK9e33ycKSYfzDrzvrVxfyH4XWlAuq7ope7r9yfLBloyD/N8nvfa+dQe57u0B+vD4K/7+zStL/vDCXxd88uvfKnzlCcPxeYtyb9pWND+L+EffNVDV7rsP43U6WuA1eBawQ3Utp/sma9biW00xW4z0WCS8B0cX05pedEtwHiu/nyZPyPQ/tnAcOZ358D88KNwb3rI7AKfCiuOVYZ/2NW+58RWHPtsnb0W2f9Icb/HbQve3iflWPc/Wsva9Lnb2oHvq/y7yTcPHTD3yX68/5Yex7qah7p3XOF9F+A+d8I4OpPFSeIe4b0b9esxcg48J3hZIf+vpD4nwd2GM55nq0547mMNux/NinPnybMey5Htj+Gqd299jceEn87TO3GkPjPwZqatbiV5v0zTvvtVOZPedhjJGvThMTfxeRjKKP7pf7cGJf5oj4+IOrmY837r0HbBsF6Iuun3N4SNXNR5/V1yfM/EfqNMn1VOQoRvvqJOeH6sXZ+Bb4BX4prCuqZhYxNmH+LYTsp+90a2u3nGjrcPBx0//mavwF92P/fhp7bt4ZDYepj3d+XvSb6y/gL0Tptrg==
+   eJztmFtLHDEUgANCxYfMTBerqD9jt1W0srJUwV/jra2tl1dF31svba1Cq4It6uKL4J9oSy9YSlX8IZ4wE2bInmTOjtlZLznwsbNJzHw7x5xkt+QxVnI4HA6H447zFDhtAAM5+fcDo20xi5WQZJtkoQx95dp27G/6bqD/gyHGWodunr8amLvAFMI/Gc30txHOn8YGZ+wdgfc89Fonjv/A8/GvN095Pdf74t8RMPbbS+dP5P+LMFYQBNf3OjLwKJq/PWjM+uXR/A/hdT8F7LMKL3VfWR6MKeTk7wfhvZcqIdiex+v0F9e3wd90dsnb33SGovirZ5dm+WNnKJ2/LkTe8vSnjrXh/xH2zc0MbHG7/q98xl4Cz4EXCNM+7j+YsV6XPdxpCu4zjjABjEXXkz4+p3ArIJ/NlCfp3wPtxwS6A7O/DpEX3Rixdx0CVeAgutZR1fh3JdpPWmqR0anx34P2Lwa+BvEYdf+6zpq05V9PqHmw6Y+5O3+zv6g9b3k6K7x2Lpv/P59g/s8EdPUnjcfIPW36VzLWYkEv8FPDkzr9TUHxHwEuNQwbnq0846kUc/Z/5sXnTxnyvS5HSX8R8tzXbH/pQfFPhjz3iaD4z8Oamkkw64f9r5X2OZ/mj3kkx1DWpgyKv4rMR2eA91P9dWNU1qL6+Aapm6tc7/8X2v4j/PNo/ZjbLlIzt3lYX3cMvxMJv6KmLy1HNsJUP0VOdP2idn4HfgDfomsM7JnZjDOY/1zDhRf3qzW00c/Vdqh5uO3+axm/A5pI/n5re27TGraFrI9Zv182G+dP4wp9oGn9
   </data>
  </layer>
  <layer id="5" name="AboveSprites" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJzt17EJgDAURdHfWWYDJ3CKDGbs3MX5HEDl8wsrsQjmmXvgNpLAqwKaAQAANWv2at+p5e2WON/KfgD/Myezcrakr5cAANCPfbynZsie4vZL7I8AAFCg+v++Td7TNwDtUn1/0JcDfSAWeA==
+   eJzt10EKgCAQheGBoJZdpDsYHaxa1V06Q4fLCBe1iRaiL/8PhoFQeEgKYwYAANSsw1Wx98TyNUtYn0t+AP8ztmaTr7lNnQQAgHLs1b2UhMyL83OKS53muzN74+eruve91zz/0FX/n9BV8yvf3yf1/EBpVOf3rbvq7RuAfKm+PyjLATrDIjM=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -46,7 +43,7 @@
   </object>
   <object id="65" template="../../../../common/maps/obj/entry_down.tx" x="362.625" y="489.625" width="46" height="21.5">
    <properties>
-    <property name="teleport" value="../Realm of Legends/maps/map/cave/Prison_of_the_Ur-Dragon_f1.tmx"/>
+    <property name="teleport" value="../Realm of Legends/maps/map/magetower/Mirror_Gallery_2.tmx"/>
    </properties>
   </object>
   <object id="85" template="../../../../common/maps/obj/dialog.tx" x="333.32" y="716.027" width="85.697" height="23.1913" visible="1">
@@ -64,27 +61,27 @@ Your manasight stone blazes with power, near-blindingly bright.&quot;,
   </object>
   <object id="104" template="../../../../common/maps/obj/entry_down.tx" x="362.833" y="205.583" width="46" height="21.5">
    <properties>
-    <property name="teleport" value="../Realm of Legends/maps/map/cave/Prison_of_the_Ur-Dragon_f1.tmx"/>
+    <property name="teleport" value="../Realm of Legends/maps/map/magetower/Mirror_Gallery_W.tmx"/>
    </properties>
   </object>
   <object id="105" template="../../../../common/maps/obj/entry_down.tx" x="89.25" y="395" width="46" height="21.5">
    <properties>
-    <property name="teleport" value="../Realm of Legends/maps/map/cave/Prison_of_the_Ur-Dragon_f1.tmx"/>
+    <property name="teleport" value="../Realm of Legends/maps/map/magetower/Mirror_Gallery_G.tmx"/>
    </properties>
   </object>
   <object id="108" template="../../../../common/maps/obj/entry_down.tx" x="634.5" y="396.5" width="46" height="21.5">
    <properties>
-    <property name="teleport" value="../Realm of Legends/maps/map/cave/Prison_of_the_Ur-Dragon_f1.tmx"/>
+    <property name="teleport" value="../Realm of Legends/maps/map/magetower/Mirror_Gallery_U.tmx"/>
    </properties>
   </object>
   <object id="110" template="../../../../common/maps/obj/entry_down.tx" x="634" y="620" width="46" height="21.5">
    <properties>
-    <property name="teleport" value="../Realm of Legends/maps/map/cave/Prison_of_the_Ur-Dragon_f1.tmx"/>
+    <property name="teleport" value="../Realm of Legends/maps/map/magetower/Mirror_Gallery_B.tmx"/>
    </properties>
   </object>
   <object id="112" template="../../../../common/maps/obj/entry_down.tx" x="88.75" y="620.5" width="46" height="21.5">
    <properties>
-    <property name="teleport" value="../Realm of Legends/maps/map/cave/Prison_of_the_Ur-Dragon_f1.tmx"/>
+    <property name="teleport" value="../Realm of Legends/maps/map/magetower/Mirror_Gallery_R.tmx"/>
    </properties>
   </object>
   <object id="114" template="../../../../common/maps/obj/enemy.tx" gid="11419" x="367.083" y="549.5">
