@@ -32,6 +32,7 @@ import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.VYieldSettings;
 import forge.screens.match.views.VYield;
+import forge.util.Localizer;
 
 /**
  * Controls the yield panel in the match UI.
@@ -159,18 +160,8 @@ public class CYield implements ICDoc {
                 YieldPrefs.fromCurrentPreferences());
         }
         if (newState) {
-            // If toggled on, pass priority immediately so it takes effect now
+            // Pass priority immediately so APINA takes effect now
             matchUI.getGameController().selectButtonOk();
-        } else {
-            // If toggled off, clear the stale "Auto-passing — no actions available"
-            // prompt left over from updateAutoPassPrompt. Without this, the misleading
-            // message and disabled buttons remain visible until the next priority
-            // opportunity (which may not come until the next phase).
-            if (player != null) {
-                matchUI.showPromptMessage(player, "");
-                matchUI.updateButtons(player, false, false, false);
-                matchUI.awaitNextInput();
-            }
         }
     }
 
@@ -230,8 +221,10 @@ public class CYield implements ICDoc {
         view.getBtnBeforeYourTurn().setHighlighted(currentMode == YieldMode.UNTIL_END_STEP_BEFORE_YOUR_TURN);
 
         // Auto-pass highlight is based on preference state, not yield mode
-        view.getBtnAutoPass().setHighlighted(
-            FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS));
+        boolean autoPassOn = FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS);
+        view.getBtnAutoPass().setHighlighted(autoPassOn);
+        view.getBtnAutoPass().setText(Localizer.getInstance().getMessage(
+            autoPassOn ? "lblYieldBtnAutoPassOn" : "lblYieldBtnAutoPass"));
     }
 
     /**

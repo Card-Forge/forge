@@ -130,7 +130,7 @@ public class YieldController {
             return true;
         }
         // Check persistent auto-pass when no actions available
-        if (shouldAutoPassNoActions(player)) {
+        if (isAutoPassingNoActions(player)) {
             return true;
         }
         // Check experimental yield system
@@ -144,7 +144,7 @@ public class YieldController {
      * local prefs for the host player, the remote client's stored snapshot for
      * remote players.
      */
-    private boolean shouldAutoPassNoActions(PlayerView player) {
+    public boolean isAutoPassingNoActions(PlayerView player) {
         if (!isYieldExperimentalEnabled()) {
             return false;
         }
@@ -152,7 +152,7 @@ public class YieldController {
         if (!prefValue) {
             return false;
         }
-        // Interrupt conditions still break through (attackers, blockers, targeting, etc.)
+        // Interrupt conditions still break through (attackers, targeting, etc.)
         if (shouldInterruptYield(player)) {
             return false;
         }
@@ -229,7 +229,7 @@ public class YieldController {
         // persistent YIELD_AUTO_PASS_NO_ACTIONS pref. In that case clear the
         // stale prompt left over from the previous input (e.g. a Pay Mana Cost
         // prompt) so the user isn't shown a misleading message.
-        if (shouldAutoPassNoActions(player)) {
+        if (isAutoPassingNoActions(player)) {
             gui.cancelAwaitNextInput();
             gui.showPromptMessage(player, Localizer.getInstance().getMessage("lblAutoPassingNoActions"));
             gui.updateButtons(player, false, false, false);
@@ -556,14 +556,6 @@ public class YieldController {
             }
         }
 
-        if (getInterruptPref(ForgePreferences.FPref.YIELD_INTERRUPT_ON_BLOCKERS)) {
-            // Only interrupt if there are creatures attacking THIS player or their planeswalkers/battles
-            if (phase == forge.game.phase.PhaseType.COMBAT_DECLARE_BLOCKERS &&
-                combatView != null && isBeingAttacked(combatView, player)) {
-                return true;
-            }
-        }
-
         if (getInterruptPref(ForgePreferences.FPref.YIELD_INTERRUPT_ON_TARGETING)) {
             forge.util.collect.FCollectionView<forge.game.spellability.StackItemView> stack = gameView.getStack();
             if (stack != null) {
@@ -584,18 +576,6 @@ public class YieldController {
 
                 // Interrupt for any opponent spell/ability that targets player or their permanents
                 if (isOpponent && targetsPlayerOrPermanents(topItem, player)) {
-                    return true;
-                }
-            }
-        }
-
-        if (getInterruptPref(ForgePreferences.FPref.YIELD_INTERRUPT_ON_COMBAT)) {
-            if (phase == forge.game.phase.PhaseType.COMBAT_BEGIN) {
-                YieldState state = yieldStates.get(player);
-                YieldMode mode = state != null ? state.mode : null;
-                // Don't interrupt UNTIL_END_OF_TURN on our own turn
-                boolean isOurTurn = currentPlayerTurn != null && currentPlayerTurn.equals(player);
-                if (!(mode == YieldMode.UNTIL_END_OF_TURN && isOurTurn)) {
                     return true;
                 }
             }

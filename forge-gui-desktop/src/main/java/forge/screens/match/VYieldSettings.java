@@ -53,12 +53,10 @@ public class VYieldSettings extends FDialog {
         y += ROW_HEIGHT + 2;
 
         y = addCheckbox(x, y, w, localizer.getMessage("lblInterruptOnAttackers"), FPref.YIELD_INTERRUPT_ON_ATTACKERS, prefs);
-        y = addCheckbox(x, y, w, localizer.getMessage("lblInterruptOnBlockers"), FPref.YIELD_INTERRUPT_ON_BLOCKERS, prefs);
         y = addCheckbox(x, y, w, localizer.getMessage("lblInterruptOnTargeting"), FPref.YIELD_INTERRUPT_ON_TARGETING, prefs);
         y = addCheckbox(x, y, w, localizer.getMessage("lblInterruptOnMassRemoval"), FPref.YIELD_INTERRUPT_ON_MASS_REMOVAL, prefs);
         y = addCheckbox(x, y, w, localizer.getMessage("lblInterruptOnOpponentSpell"), FPref.YIELD_INTERRUPT_ON_OPPONENT_SPELL, prefs);
         y = addCheckbox(x, y, w, localizer.getMessage("lblInterruptOnTriggers"), FPref.YIELD_INTERRUPT_ON_TRIGGERS, prefs);
-        y = addCheckbox(x, y, w, localizer.getMessage("lblInterruptOnCombat"), FPref.YIELD_INTERRUPT_ON_COMBAT, prefs);
         y = addCheckbox(x, y, w, localizer.getMessage("lblInterruptOnReveal"), FPref.YIELD_INTERRUPT_ON_REVEAL, prefs);
 
         y += SECTION_GAP;
