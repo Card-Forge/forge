@@ -148,7 +148,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     }
 
     private CardStackRow collectStacked(List<CardPanel> remainingPanels, RowType type,
-            BiPredicate<CardView, CardView> isCompatible, int stackMax, boolean unlimitedGrouping) {
+            BiPredicate<CardView, CardView> isCompatible, int stackMax, boolean groupingEnabled) {
         final CardStackRow out = new CardStackRow();
         outerLoop:
         for (Iterator<CardPanel> iterator = remainingPanels.iterator(); iterator.hasNext(); ) {
@@ -163,32 +163,34 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 final CardStack stack = out.get(i);
                 final CardPanel firstPanel = stack.get(0);
                 final CardView firstCard = firstPanel.getCard();
+                // State-level name so transform/MDFC creatures group by current face, not back face
                 if (!firstCard.getCurrentState().getOracleName().equals(state.getOracleName())) {
                     if (insertIndex != -1) { break; }
                     continue;
                 }
-                // First card in stack has attachments — insert before this stack
                 if (!firstPanel.getAttachedPanels().isEmpty() || firstCard.hasCardAttachments()) {
                     insertIndex = i;
                     break;
                 }
-                // Split cards can't group with non-split cards
-                if (splitCardIds.contains(card.getId()) != splitCardIds.contains(firstCard.getId())) {
-                    insertIndex = i + 1;
-                    continue;
-                }
-                // Cards with different combat pairings can't group together.
-                // Must unbox to int — != on boxed Integer compares references,
-                // not values, for IDs >= 128.
-                int cardAssign = combatAssignments.getOrDefault(card.getId(), 0);
-                int firstAssign = combatAssignments.getOrDefault(firstCard.getId(), 0);
-                if (cardAssign != firstAssign) {
-                    insertIndex = i + 1;
-                    continue;
+                if (groupingEnabled) {
+                    // Split cards can't group with non-split cards
+                    if (splitCardIds.contains(card.getId()) != splitCardIds.contains(firstCard.getId())) {
+                        insertIndex = i + 1;
+                        continue;
+                    }
+                    // Cards with different combat pairings can't group together.
+                    // Must unbox to int — != on boxed Integer compares references,
+                    // not values, for IDs >= 128.
+                    int cardAssign = combatAssignments.getOrDefault(card.getId(), 0);
+                    int firstAssign = combatAssignments.getOrDefault(firstCard.getId(), 0);
+                    if (cardAssign != firstAssign) {
+                        insertIndex = i + 1;
+                        continue;
+                    }
                 }
                 if (!panel.getAttachedPanels().isEmpty()
                         || !isCompatible.test(card, firstCard)
-                        || (!unlimitedGrouping && stack.size() >= stackMax)) {
+                        || (!groupingEnabled && stack.size() >= stackMax)) {
                     insertIndex = i + 1;
                     continue;
                 }
@@ -318,7 +320,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 for (CardView blocker : blockers) {
                     blockerHash = 31 * blockerHash + blocker.getId();
                 }
-                assignment ^= blockerHash;
+                assignment = (assignment ^ blockerHash) | Integer.MIN_VALUE;
             }
             assignments.put(attacker.getId(), assignment);
         }
@@ -673,7 +675,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 return;
             }
             List<CardPanel> stack = panel.getStack();
-            if (stack != null && stack.size() >= (grouping ? 2 : 5)
+            if (grouping && stack != null && stack.size() >= 2
                     && isLocal) {
                 // Split from group, then check if the game accepts this card.
                 // If accepted, doUpdateCard will remove from splitCardIds when
