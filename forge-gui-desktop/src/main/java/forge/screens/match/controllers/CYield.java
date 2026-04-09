@@ -24,6 +24,7 @@ import javax.swing.JButton;
 import forge.game.GameView;
 import forge.game.player.PlayerView;
 import forge.gamemodes.match.YieldMode;
+import forge.gamemodes.match.YieldPrefs;
 import forge.gui.framework.ICDoc;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -50,7 +51,9 @@ public class CYield implements ICDoc {
     private final ActionListener actEndStepBeforeYourTurn = evt -> yieldUntilEndStepBeforeYourTurn();
     private final ActionListener actEndTurn = evt -> yieldUntilEndTurn();
     private final ActionListener actYourTurn = evt -> yieldUntilYourTurn();
+    private final ActionListener actBeforeYourTurn = evt -> yieldUntilBeforeYourTurn();
     private final ActionListener actAutoPass = evt -> toggleAutoPass();
+    private final ActionListener actSettings = evt -> openSettings();
 
     public CYield(final CMatchUI matchUI) {
         this.matchUI = matchUI;
@@ -79,8 +82,9 @@ public class CYield implements ICDoc {
         initButton(view.getBtnBeforeYourTurn(), actEndStepBeforeYourTurn);
         initButton(view.getBtnEndTurn(), actEndTurn);
         initButton(view.getBtnYourTurn(), actYourTurn);
+        initButton(view.getBtnBeforeYourTurn(), actBeforeYourTurn);
         initButton(view.getBtnAutoPass(), actAutoPass);
-        initButton(view.getBtnSettings(), evt -> new VYieldSettings(matchUI).showDialog());
+        initButton(view.getBtnSettings(), actSettings);
 
         // Set initial button state
         updateYieldButtons();
@@ -121,6 +125,7 @@ public class CYield implements ICDoc {
     private void yieldUntilEndStepBeforeYourTurn() { toggleYieldMode(YieldMode.UNTIL_END_STEP_BEFORE_YOUR_TURN); }
     private void yieldUntilEndTurn() { toggleYieldMode(YieldMode.UNTIL_END_OF_TURN); }
     private void yieldUntilYourTurn() { toggleYieldMode(YieldMode.UNTIL_YOUR_NEXT_TURN); }
+    private void yieldUntilBeforeYourTurn() { toggleYieldMode(YieldMode.UNTIL_END_STEP_BEFORE_YOUR_TURN); }
 
     /**
      * Disable auto-pass-no-actions if it's currently on. Used by ESC to clear
@@ -132,6 +137,10 @@ public class CYield implements ICDoc {
         }
     }
 
+    private void openSettings() {
+        new VYieldSettings(matchUI).showDialog();
+    }
+
     private void toggleAutoPass() {
         ForgePreferences prefs = FModel.getPreferences();
         boolean newState = !prefs.getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS);
@@ -141,6 +150,14 @@ public class CYield implements ICDoc {
         if (matchUI == null || matchUI.getGameController() == null) {
             return;
         }
+        // Sync updated prefs to server (network play)
+        PlayerView player = matchUI.getCurrentPlayer();
+        if (player != null) {
+            YieldMode currentMode = matchUI.getYieldMode(player);
+            if (currentMode == null) currentMode = YieldMode.NONE;
+            matchUI.getGameController().notifyYieldStateChanged(player, currentMode,
+                YieldPrefs.fromCurrentPreferences());
+        }
         if (newState) {
             // If toggled on, pass priority immediately so it takes effect now
             matchUI.getGameController().selectButtonOk();
@@ -149,7 +166,6 @@ public class CYield implements ICDoc {
             // prompt left over from updateAutoPassPrompt. Without this, the misleading
             // message and disabled buttons remain visible until the next priority
             // opportunity (which may not come until the next phase).
-            PlayerView player = matchUI.getCurrentPlayer();
             if (player != null) {
                 matchUI.showPromptMessage(player, "");
                 matchUI.updateButtons(player, false, false, false);
@@ -180,6 +196,7 @@ public class CYield implements ICDoc {
         view.getBtnBeforeYourTurn().setEnabled(canYield);
         view.getBtnEndTurn().setEnabled(canYield);
         view.getBtnYourTurn().setEnabled(canYield);
+        view.getBtnBeforeYourTurn().setEnabled(canYield);
         view.getBtnClearStack().setEnabled(canYield);
 
         // Auto-pass is a persistent toggle, enable whenever yield panel is available
@@ -210,6 +227,7 @@ public class CYield implements ICDoc {
         view.getBtnBeforeYourTurn().setHighlighted(currentMode == YieldMode.UNTIL_END_STEP_BEFORE_YOUR_TURN);
         view.getBtnEndTurn().setHighlighted(currentMode == YieldMode.UNTIL_END_OF_TURN);
         view.getBtnYourTurn().setHighlighted(currentMode == YieldMode.UNTIL_YOUR_NEXT_TURN);
+        view.getBtnBeforeYourTurn().setHighlighted(currentMode == YieldMode.UNTIL_END_STEP_BEFORE_YOUR_TURN);
 
         // Auto-pass highlight is based on preference state, not yield mode
         view.getBtnAutoPass().setHighlighted(

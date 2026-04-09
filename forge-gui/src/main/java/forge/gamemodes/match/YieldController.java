@@ -148,7 +148,8 @@ public class YieldController {
         if (!isYieldExperimentalEnabled()) {
             return false;
         }
-        if (!getInterruptPref(ForgePreferences.FPref.YIELD_AUTO_PASS_NO_ACTIONS)) {
+        boolean prefValue = getInterruptPref(ForgePreferences.FPref.YIELD_AUTO_PASS_NO_ACTIONS);
+        if (!prefValue) {
             return false;
         }
         // Interrupt conditions still break through (attackers, blockers, targeting, etc.)
