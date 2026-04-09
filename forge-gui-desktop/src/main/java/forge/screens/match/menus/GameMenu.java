@@ -7,6 +7,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 
 import com.google.common.primitives.Ints;
 
@@ -18,8 +19,10 @@ import forge.menus.MenuUtil;
 import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.VAutoYields;
+import forge.screens.match.views.VField;
 import forge.screens.match.controllers.CDock.ArcState;
 import forge.toolbox.FSkin.SkinIcon;
+import forge.toolbox.FSkin.SkinnedCheckBoxMenuItem;
 import forge.toolbox.FSkin.SkinnedMenu;
 import forge.toolbox.FSkin.SkinnedMenuItem;
 import forge.toolbox.FSkin.SkinnedRadioButtonMenuItem;
@@ -50,6 +53,8 @@ public final class GameMenu {
         menu.addSeparator();
         menu.add(getMenuItem_TargetingArcs());
         menu.add(new CardOverlaysMenu(matchUI).getMenu());
+        menu.add(getSubmenu_StackGroupPermanents());
+        menu.add(getMenuItem_TokensSeparateRow());
         menu.add(getMenuItem_AutoYields());
         menu.addSeparator();
         menu.add(getMenuItem_ViewDeckList());
@@ -194,5 +199,55 @@ public final class GameMenu {
 
     private ActionListener getViewDeckListAction() {
         return e -> matchUI.viewDeckList();
+    }
+
+    private SkinnedMenu getSubmenu_StackGroupPermanents() {
+        final Localizer localizer = Localizer.getInstance();
+        final SkinnedMenu submenu = new SkinnedMenu(localizer.getMessage("cbpStackGroupPermanents"));
+        final ButtonGroup group = new ButtonGroup();
+        final String current = prefs.getPref(FPref.UI_GROUP_PERMANENTS);
+
+        final String[] keys = {"default", "stack", "group_creatures", "group_all"};
+        final String[] labelKeys = {"lblGroupDefault", "lblGroupStack", "lblGroupCreatures", "lblGroupAll"};
+        final String[] tooltipKeys = {"nlGroupDefault", "nlGroupStack", "nlGroupCreatures", "nlGroupAll"};
+        for (int i = 0; i < keys.length; i++) {
+            SkinnedRadioButtonMenuItem item = new SkinnedRadioButtonMenuItem(localizer.getMessage(labelKeys[i]));
+            item.setToolTipText(localizer.getMessage(tooltipKeys[i]));
+            item.setSelected(keys[i].equals(current));
+            item.addActionListener(getGroupPermanentsAction(keys[i]));
+            group.add(item);
+            submenu.add(item);
+        }
+        return submenu;
+    }
+
+    private SkinnedCheckBoxMenuItem getMenuItem_TokensSeparateRow() {
+        final Localizer localizer = Localizer.getInstance();
+        SkinnedCheckBoxMenuItem menuItem = new SkinnedCheckBoxMenuItem(localizer.getMessage("cbpTokensSeparateRow"));
+        menuItem.setToolTipText(localizer.getMessage("nlTokensSeparateRow"));
+        menuItem.setState(prefs.getPrefBoolean(FPref.UI_TOKENS_IN_SEPARATE_ROW));
+        menuItem.addActionListener(e -> {
+            final boolean enabled = !prefs.getPrefBoolean(FPref.UI_TOKENS_IN_SEPARATE_ROW);
+            prefs.setPref(FPref.UI_TOKENS_IN_SEPARATE_ROW, enabled);
+            prefs.save();
+            SwingUtilities.invokeLater(() -> {
+                for (final VField f : matchUI.getFieldViews()) {
+                    f.getTabletop().doLayout();
+                }
+            });
+        });
+        return menuItem;
+    }
+
+    private ActionListener getGroupPermanentsAction(final String value) {
+        return e -> {
+            prefs.setPref(FPref.UI_GROUP_PERMANENTS, value);
+            prefs.save();
+            SwingUtilities.invokeLater(() -> {
+                for (final VField f : matchUI.getFieldViews()) {
+                    f.getTabletop().doLayout();
+                }
+            });
+        };
     }
 }

@@ -424,6 +424,10 @@ public final class CMatchUI
         }
         cCombat.setModel(combat);
         cCombat.update();
+        // Combat pairings changed — rebuild layout so grouping reflects them
+        for (final VField f : getFieldViews()) {
+            f.getTabletop().doLayout();
+        }
     } // showCombat(CombatView)
 
     @Override
