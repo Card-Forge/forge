@@ -3511,7 +3511,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
         }
 
-        getGui().setYieldModeFromRemote(playerView, mode);
+        getGui().setYieldMode(playerView, mode, true);
     }
 
     private boolean isYieldExperimentalEnabled() {

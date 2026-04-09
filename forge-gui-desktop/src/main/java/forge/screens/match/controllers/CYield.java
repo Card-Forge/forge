@@ -104,7 +104,7 @@ public class CYield implements ICDoc {
         if (matchUI.getYieldMode(player) == mode) {
             matchUI.clearYieldMode(player);
         } else {
-            boolean activated = matchUI.setYieldMode(player, mode);
+            boolean activated = matchUI.setYieldMode(player, mode, false);
             if (activated && matchUI.getGameController() != null) {
                 matchUI.getGameController().selectButtonOk();
             }

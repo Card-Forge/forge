@@ -589,7 +589,20 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     // Extended yield mode methods (experimental feature)
     @Override
-    public final boolean setYieldMode(PlayerView player, final YieldMode mode) {
+    public final boolean setYieldMode(PlayerView player, final YieldMode mode, boolean fromRemote) {
+        if (fromRemote) {
+            // Host is receiving yield state from a network client. The deserialized
+            // PlayerView has a different tracker than the host's, so look up the
+            // canonical instance. Skip validation and the notify-server callback to
+            // avoid looping back to the client.
+            player = PlayerView.findById(getGameView(), player);
+            if (player == null) {
+                return false;
+            }
+            getYieldController().setYieldModeSilent(player, mode);
+            return true;
+        }
+
         boolean activated = getYieldController().setYieldMode(player, mode);
         if (activated) {
             updateAutoPassPrompt();
@@ -604,40 +617,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     @Override
-    public final void setYieldModeFromRemote(PlayerView player, final YieldMode mode) {
-        // Update yield state without triggering notification (to avoid loops)
-        // Used when server receives yield state from network client
-        // Note: Don't call updateAutoPassPrompt() here - the client already showed
-        // the correct prompt when it set the yield mode locally
-
-        // The PlayerView from network has a different tracker than server's PlayerViews.
-        // We need to find the matching PlayerView from the GameView using ID comparison.
-        player = lookupPlayerViewById(player);
-        if (player == null) {
-            return; // Player not found in game
-        }
-        getYieldController().setYieldModeSilent(player, mode);
-    }
-
-    @Override
-    public PlayerView lookupPlayerViewById(PlayerView networkPlayer) {
-        if (networkPlayer == null) {
-            return null;
-        }
-        GameView gv = getGameView();
-        if (gv == null) {
-            return networkPlayer; // Fall back to using the network instance
-        }
-        int playerId = networkPlayer.getId();
-        for (PlayerView pv : gv.getPlayers()) {
-            if (pv.getId() == playerId) {
-                return pv;
-            }
-        }
-        return networkPlayer; // Fall back if not found
-    }
-
-    @Override
     public void setHostYieldEnabled(boolean enabled) {
         // No-op default for local games. CMatchUI overrides to store and refresh UI.
     }
@@ -646,7 +625,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public void syncYieldMode(PlayerView player, YieldMode mode) {
         // Receive yield state sync from server (when server clears yield due to end condition)
         // Look up the correct PlayerView instance by ID (network PlayerViews have different trackers)
-        player = lookupPlayerViewById(player);
+        player = PlayerView.findById(getGameView(), player);
         if (player == null) {
             return;
         }
@@ -663,11 +642,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     @Override
     public final YieldMode getYieldMode(PlayerView player) {
         return getYieldController().getYieldMode(player);
-    }
-
-    @Override
-    public final boolean shouldAutoYieldForPlayer(PlayerView player) {
-        return getYieldController().shouldAutoYieldForPlayer(player);
     }
 
     // End auto-yield/input code

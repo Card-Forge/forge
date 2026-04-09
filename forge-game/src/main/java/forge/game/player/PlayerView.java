@@ -10,6 +10,7 @@ import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
 import forge.card.mana.ManaAtom;
 import forge.game.GameEntityView;
+import forge.game.GameView;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CounterType;
@@ -45,6 +46,24 @@ public class PlayerView extends GameEntityView {
             collection.add(p.getView());
         }
         return collection;
+    }
+
+    /**
+     * Look up a PlayerView by ID from the given GameView's player list. Used for
+     * network play where deserialized PlayerViews have different trackers than
+     * the host's GameView. Falls back to the input PlayerView if no match is
+     * found, or if the GameView is null.
+     */
+    public static PlayerView findById(GameView gv, PlayerView player) {
+        if (player == null) return null;
+        if (gv == null) return player;
+        int id = player.getId();
+        for (PlayerView pv : gv.getPlayers()) {
+            if (pv.getId() == id) {
+                return pv;
+            }
+        }
+        return player;
     }
 
     public PlayerView(final int id0, final Tracker tracker) {

@@ -209,7 +209,7 @@ public class InputPassPriority extends InputSyncronizedBase {
             pendingSuggestion = null;
             pendingSuggestionType = null;
             pendingSuggestionMessage = null;
-            boolean activated = getController().getGui().setYieldMode(getOwner(), mode);
+            boolean activated = getController().getGui().setYieldMode(getOwner(), mode, false);
             if (activated) {
                 stop();
             } else {
@@ -245,7 +245,7 @@ public class InputPassPriority extends InputSyncronizedBase {
             passPriority(() -> {
                 if (isExperimentalYieldEnabled()) {
                     // Use experimental yield system with smart interrupts
-                    getController().getGui().setYieldMode(getOwner(), YieldMode.UNTIL_END_OF_TURN);
+                    getController().getGui().setYieldMode(getOwner(), YieldMode.UNTIL_END_OF_TURN, false);
                 } else {
                     // Legacy behavior - cancels on any opponent spell
                     getController().autoPassUntilEndOfTurn();
@@ -359,7 +359,7 @@ public class InputPassPriority extends InputSyncronizedBase {
     }
 
     private PlayerView getPlayerView() {
-        return getController().getGui().lookupPlayerViewById(getOwner());
+        return PlayerView.findById(getController().getGui().getGameView(), getOwner());
     }
 
     private YieldMode getDefaultYieldMode() {
