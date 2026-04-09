@@ -75,6 +75,24 @@ public class InputPassPriority extends InputSyncronizedBase {
         if (isExperimentalYieldEnabled() && !isAlreadyYielding() && !suppressDueToYieldEnd) {
             ForgePreferences prefs = FModel.getPreferences();
 
+            // Skip suggestions when persistent auto-pass is active — the user
+            // already opted into automatic passing, one-shot yield suggestions
+            // are redundant and confusing (especially after interrupt recovery).
+            // Route through gui for per-player prefs: host reads local prefs,
+            // remote player reads their YieldPrefs snapshot.
+            forge.gui.interfaces.IGuiGame gui = getController().getGui();
+            boolean autoPassActive;
+            if (gui.isRemoteGuiProxy()) {
+                forge.gamemodes.match.YieldPrefs remote = gui.getRemoteYieldPrefs();
+                autoPassActive = remote != null && remote.getInterrupt(FPref.YIELD_AUTO_PASS_NO_ACTIONS);
+            } else {
+                autoPassActive = prefs.getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS);
+            }
+            if (autoPassActive) {
+                showNormalPrompt();
+                return;
+            }
+
             // Early exit: if both suggestion types are disabled (scope = "never"),
             // skip the entire smart-suggestion block including stack-transition tracking.
             // No state to maintain because no decline tracking happens for "never" scopes.

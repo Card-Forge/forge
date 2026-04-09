@@ -148,12 +148,25 @@ public class YieldController {
         if (!isYieldExperimentalEnabled()) {
             return false;
         }
-        if (!getInterruptPref(ForgePreferences.FPref.YIELD_AUTO_PASS_NO_ACTIONS)) {
+        boolean prefValue = getInterruptPref(ForgePreferences.FPref.YIELD_AUTO_PASS_NO_ACTIONS);
+        if (!prefValue) {
             return false;
         }
         // Interrupt conditions still break through (attackers, blockers, targeting, etc.)
         if (shouldInterruptYield(player)) {
             return false;
+        }
+        // Respect phase-skip settings: pass through unmarked phases even if
+        // the player has actions. Auto-pass should be additive to phase-skip,
+        // not cause stops at phases the user explicitly set to skip.
+        GameView gv = gui.getGameView();
+        if (gv != null && gv.getStack() != null && gv.getStack().isEmpty()) {
+            PlayerView turnPlayer = gv.getPlayerTurn();
+            forge.game.phase.PhaseType phase = gv.getPhase();
+            if (turnPlayer != null && phase != null
+                    && gui.isUiSetToSkipPhase(turnPlayer, phase)) {
+                return true;
+            }
         }
         return !player.hasAvailableActions();
     }
@@ -204,6 +217,7 @@ public class YieldController {
                 case UNTIL_YOUR_NEXT_TURN -> loc.getMessage("lblYieldingUntilYourNextTurn");
                 case UNTIL_BEFORE_COMBAT -> loc.getMessage("lblYieldingUntilBeforeCombat");
                 case UNTIL_END_STEP -> loc.getMessage("lblYieldingUntilEndStep");
+                case UNTIL_END_STEP_BEFORE_YOUR_TURN -> loc.getMessage("lblYieldingUntilBeforeYourTurn");
                 default -> "";
             };
             gui.showPromptMessage(player, message);
@@ -279,6 +293,9 @@ public class YieldController {
                 .withStartedAtOrAfterPhase(isAtOrAfterEndStep(phase));
             case UNTIL_YOUR_NEXT_TURN -> YieldState.of(mode)
                 .withStartedDuringOurTurn(currentPlayerTurn != null && currentPlayerTurn.equals(player));
+            case UNTIL_END_STEP_BEFORE_YOUR_TURN -> YieldState.of(mode)
+                .withStartTurn(currentTurn)
+                .withStartedAtOrAfterPhase(isAtOrAfterEndStep(phase));
             default -> YieldState.of(mode);
         };
         yieldStates.put(player, state);
@@ -485,6 +502,28 @@ public class YieldController {
                     if (differentTurn || sameTurnButStartedBeforeEndStep) {
                         clearYieldMode(player);
                         yield false;
+                    }
+                }
+                yield true;
+            }
+            case UNTIL_END_STEP_BEFORE_YOUR_TURN -> {
+                if (state.startTurn == null) {
+                    yieldStates.put(player, state.withStartTurn(currentTurn)
+                        .withStartedAtOrAfterPhase(isAtOrAfterEndStep(currentPhase)));
+                    yield true;
+                }
+
+                // Stop at the end step of the player immediately before us in turn order.
+                if (isAtOrAfterEndStep(currentPhase)) {
+                    boolean differentTurn = currentTurn > state.startTurn;
+                    boolean sameTurnButStartedBeforeEndStep = (currentTurn == state.startTurn.intValue())
+                        && !Boolean.TRUE.equals(state.startedAtOrAfterPhase);
+
+                    if (differentTurn || sameTurnButStartedBeforeEndStep) {
+                        if (isPlayerBeforeUs(currentPlayerTurn, player, gameView)) {
+                            clearYieldMode(player);
+                            yield false;
+                        }
                     }
                 }
                 yield true;
@@ -722,6 +761,36 @@ public class YieldController {
             (phase == forge.game.phase.PhaseType.END_OF_TURN || phase == forge.game.phase.PhaseType.CLEANUP);
     }
 
+    /**
+     * Check if the current player's turn belongs to the player immediately before us in turn order.
+     * In a 4-player game [A, B, C, D], if we are C, returns true only for B.
+     * Handles wraparound: if we are A, returns true for D.
+     */
+    private boolean isPlayerBeforeUs(PlayerView currentPlayerTurn, PlayerView us, GameView gameView) {
+        if (currentPlayerTurn == null || us == null) {
+            return true; // fallback: stop yielding if we can't determine
+        }
+
+        java.util.List<PlayerView> players = new java.util.ArrayList<>(gameView.getPlayers());
+        if (players.size() < 2) {
+            return true;
+        }
+
+        int ourIndex = -1;
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).equals(us)) {
+                ourIndex = i;
+                break;
+            }
+        }
+        if (ourIndex < 0) {
+            return true; // fallback
+        }
+
+        // The player before us is at (ourIndex - 1 + size) % size
+        int prevIndex = (ourIndex - 1 + players.size()) % players.size();
+        return players.get(prevIndex).equals(currentPlayerTurn);
+    }
 
     /**
      * Remove a player from legacy auto-pass (for AbstractGuiGame internal use).

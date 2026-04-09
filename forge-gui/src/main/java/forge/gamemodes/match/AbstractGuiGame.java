@@ -639,6 +639,12 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     @Override
     public final void clearYieldMode(PlayerView player) {
         getYieldController().clearYieldMode(player);
+
+        // Notify remote server that yield was cancelled (same pattern as setYieldMode)
+        IGameController controller = getGameController(player);
+        if (controller != null) {
+            controller.notifyYieldStateChanged(player, YieldMode.NONE, YieldPrefs.fromCurrentPreferences());
+        }
     }
 
     @Override

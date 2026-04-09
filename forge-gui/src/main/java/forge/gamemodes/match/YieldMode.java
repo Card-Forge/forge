@@ -23,12 +23,13 @@ package forge.gamemodes.match;
  */
 public enum YieldMode {
     NONE("No auto-yield"),
-    UNTIL_NEXT_PHASE("Yield until next phase"),
-    UNTIL_STACK_CLEARS("Yield until stack clears"),
-    UNTIL_END_OF_TURN("Yield until end of turn"),
-    UNTIL_YOUR_NEXT_TURN("Yield until your next turn"),
-    UNTIL_BEFORE_COMBAT("Yield until combat"),
-    UNTIL_END_STEP("Yield until end step");
+    UNTIL_NEXT_PHASE("Next Phase"),
+    UNTIL_STACK_CLEARS("Clear Stack"),
+    UNTIL_END_OF_TURN("Next Turn"),
+    UNTIL_YOUR_NEXT_TURN("Your Turn"),
+    UNTIL_BEFORE_COMBAT("Combat"),
+    UNTIL_END_STEP("End Step"),
+    UNTIL_END_STEP_BEFORE_YOUR_TURN("Before Your Turn");
 
     private final String description;
 

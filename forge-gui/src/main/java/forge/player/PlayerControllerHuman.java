@@ -1551,8 +1551,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public List<SpellAbility> chooseSpellAbilityToPlay() {
         final MagicStack stack = getGame().getStack();
 
-        if (FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)
-                && FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS)) {
+        if (FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS) && FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS)) {
             int manaEstimate = ComputerUtilMana.getAvailableManaEstimate(getPlayer());
             getPlayer().getView().updateHasAvailableActions(getPlayer(), manaEstimate);
         }
