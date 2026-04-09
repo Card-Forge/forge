@@ -667,8 +667,19 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     CardFactoryUtil.setFaceDownState(gameCard, sa);
                 }
 
-                Player battlefieldRecipient = gameCard.getController();
-                if (!sa.hasParam("GainControl") && shouldUseDanDanSelfRecipientHeuristic(sa)) {
+                // Search effects should default to the searching player's battlefield.
+                // Avoid using hidden-zone controller state directly as it can be stale/leaked.
+                Player battlefieldRecipient = activator;
+                if (isDanDanLibraryToBattlefieldSearch(sa, origin, destination)) {
+                    battlefieldRecipient = sa.getActivatingPlayer();
+                    if (gameCard.getOwner() != battlefieldRecipient) {
+                        gameCard.setOwner(battlefieldRecipient);
+                    }
+                    if (gameCard.getController() != battlefieldRecipient) {
+                        gameCard.runChangeControllerCommands();
+                        gameCard.setController(battlefieldRecipient, game.getNextTimestamp());
+                    }
+                } else if (!sa.hasParam("GainControl") && shouldUseDanDanSelfRecipientHeuristic(sa)) {
                     battlefieldRecipient = activator;
                     if (battlefieldRecipient != gameCard.getController()) {
                         gameCard.runChangeControllerCommands();
@@ -1403,8 +1414,19 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         c.turnFaceDown(true);
                         CardFactoryUtil.setFaceDownState(c, sa);
                     }
-                    Player battlefieldRecipient = c.getController();
-                    if (!sa.hasParam("GainControl") && shouldUseDanDanSelfRecipientHeuristic(sa)) {
+                    // Search effects should default to the searching player's battlefield.
+                    // Avoid using hidden-zone controller state directly as it can be stale/leaked.
+                    Player battlefieldRecipient = player;
+                    if (isDanDanLibraryToBattlefieldSearch(sa, origin, destination)) {
+                        battlefieldRecipient = sa.getActivatingPlayer();
+                        if (c.getOwner() != battlefieldRecipient) {
+                            c.setOwner(battlefieldRecipient);
+                        }
+                        if (c.getController() != battlefieldRecipient) {
+                            c.runChangeControllerCommands();
+                            c.setController(battlefieldRecipient, game.getNextTimestamp());
+                        }
+                    } else if (!sa.hasParam("GainControl") && shouldUseDanDanSelfRecipientHeuristic(sa)) {
                         battlefieldRecipient = sa.getActivatingPlayer();
                         if (battlefieldRecipient != c.getController()) {
                             c.runChangeControllerCommands();
@@ -1602,6 +1624,15 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             return activator;
         }
         return card.getOwner();
+    }
+
+    private static boolean isDanDanLibraryToBattlefieldSearch(final SpellAbility sa, final List<ZoneType> origin, final ZoneType destination) {
+        final Card host = sa.getHostCard();
+        final GameRules rules = host != null ? host.getGame().getRules() : null;
+        return rules != null && rules.isDanDan()
+                && !sa.hasParam("GainControl")
+                && destination == ZoneType.Battlefield
+                && origin.contains(ZoneType.Library);
     }
 
     private static boolean shouldUseDanDanSelfRecipientHeuristic(final SpellAbility sa) {
