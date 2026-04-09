@@ -143,7 +143,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_MULTIPLAYER_FIELD_LAYOUT ("OFF"),
         UI_MULTIPLAYER_FIELD_PANELS ("SPLIT"),
         UI_CLOSE_ACTION ("NONE"),
-        UI_MANA_LOST_PROMPT ("false"), // Prompt on losing mana when passing priority
+        UI_MANA_LOST_PROMPT ("true"), // Prompt on losing mana when passing priority
 
         // Experimental yield options (feature-gated)
         YIELD_EXPERIMENTAL_OPTIONS("true"),
@@ -160,6 +160,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         YIELD_DECLINE_SCOPE_STACK_YIELD("stack"),  // Decline scope: "never", "always", "stack", "turn"
         YIELD_DECLINE_SCOPE_NO_ACTIONS("turn"),  // Decline scope: "never", "always", "turn"
         YIELD_AUTO_PASS_NO_ACTIONS("true"),  // Auto-pass priority when no playable actions
+        YIELD_AUTO_CALL_COIN_FLIP("true"),  // Auto-call coin flips where only win/lose matters
 
         UI_STACK_EFFECT_NOTIFICATION_POLICY ("Never"),
         UI_LAND_PLAYED_NOTIFICATION_POLICY ("Never"),
