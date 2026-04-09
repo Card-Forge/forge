@@ -40,7 +40,6 @@ public class StackItemView extends TrackableObject implements IHasCardView {
         updateOptionalTrigger(si);
         updateSubInstance(si);
         updateOptionalCost(si);
-        updateApiType(si);
     }
 
     /**
