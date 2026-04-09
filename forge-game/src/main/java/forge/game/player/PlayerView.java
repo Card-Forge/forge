@@ -192,6 +192,7 @@ public class PlayerView extends GameEntityView {
     }
     void updateCounters(Player p) {
         set(TrackableProperty.Counters, p.getCounters());
+        flagAsChanged(TrackableProperty.Counters);
     }
 
     public boolean getIsExtraTurn() {
@@ -390,18 +391,20 @@ public class PlayerView extends GameEntityView {
         Map<Integer, Integer> map = get(TrackableProperty.CommanderCast);
         if (map == null) {
             map = Maps.newHashMap();
+            set(TrackableProperty.CommanderCast, map);
         }
         map.put(c.getId(), p.getCommanderCast(c));
-        set(TrackableProperty.CommanderCast, map);
+        flagAsChanged(TrackableProperty.CommanderCast);
     }
 
     void updateMergedCommanderCast(Player p, Card target, Card commander) {
         Map<Integer, Integer> map = get(TrackableProperty.CommanderCast);
         if (map == null) {
             map = Maps.newHashMap();
+            set(TrackableProperty.CommanderCast, map);
         }
         map.put(target.getId(), p.getCommanderCast(commander));
-        set(TrackableProperty.CommanderCast, map);
+        flagAsChanged(TrackableProperty.CommanderCast);
     }
 
     public PlayerView getMindSlaveMaster() {
@@ -448,7 +451,7 @@ public class PlayerView extends GameEntityView {
     }
 
     public FCollectionView<CardView> getCards(final ZoneType zone) {
-        TrackableProperty prop = getZoneProp(zone);
+        TrackableProperty prop = zone.getTrackableProperty();
         if (prop != null) {
             return get(prop);
         }
@@ -460,7 +463,7 @@ public class PlayerView extends GameEntityView {
     }
 
     public int getZoneSize(final ZoneType zone) {
-        TrackableProperty prop = getZoneProp(zone);
+        TrackableProperty prop = zone.getTrackableProperty();
         return prop == null ? 0 : getZoneSize(prop);
     }
 
@@ -481,27 +484,8 @@ public class PlayerView extends GameEntityView {
         return getZoneTypes(TrackableProperty.Graveyard) >= 4;
     }
 
-    private static TrackableProperty getZoneProp(final ZoneType zone) {
-        switch (zone) {
-            case Ante: return TrackableProperty.Ante;
-            case Battlefield: return TrackableProperty.Battlefield;
-            case Command: return TrackableProperty.Command;
-            case Exile: return TrackableProperty.Exile;
-            case Graveyard: return TrackableProperty.Graveyard;
-            case Hand: return TrackableProperty.Hand;
-            case Library: return TrackableProperty.Library;
-            case Flashback: return TrackableProperty.Flashback;
-            case Sideboard: return TrackableProperty.Sideboard;
-            case PlanarDeck: return TrackableProperty.PlanarDeck;
-            case SchemeDeck: return TrackableProperty.SchemeDeck;
-            case AttractionDeck: return TrackableProperty.AttractionDeck;
-            case ContraptionDeck: return TrackableProperty.ContraptionDeck;
-            case Junkyard: return TrackableProperty.Junkyard;
-            default: return null; //other zones not represented
-        }
-    }
     void updateZone(PlayerZone zone) {
-        TrackableProperty prop = getZoneProp(zone.getZoneType());
+        TrackableProperty prop = zone.getZoneType().getTrackableProperty();
         if (prop == null) { return; }
         set(prop, CardView.getCollection(zone.getCards(false)));
 

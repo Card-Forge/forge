@@ -17,10 +17,14 @@ import forge.trackable.Tracker;
 import forge.util.collect.FCollection;
 
 public class CombatView extends TrackableObject {
-    private static final long serialVersionUID = 68085618912864941L;
+    private static final long serialVersionUID = 68085618912864942L;
+
+    // Unique negative IDs so TrackableObject.equals() distinguishes instances.
+    // Negative IDs avoid tracker registration (only id >= 0 is registered).
+    private static int nextId = -2;
 
     public CombatView(final Tracker tracker) {
-        super(-1, tracker); //ID not needed
+        super(nextId--, tracker);
         set(TrackableProperty.AttackersWithDefenders, new ConcurrentHashMap<CardView, GameEntityView>());
         set(TrackableProperty.AttackersWithBlockers, new ConcurrentHashMap<CardView, FCollection<CardView>>());
         set(TrackableProperty.BandsWithDefenders, new ConcurrentHashMap<FCollection<CardView>, GameEntityView>());

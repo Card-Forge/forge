@@ -28,15 +28,6 @@ public class PortAllocator {
     // Maximum number of attempts to find an available port
     private static final int MAX_ATTEMPTS = 100;
 
-    /**
-     * Allocate an available port for testing.
-     *
-     * This method tries multiple ports until finding one that's available,
-     * helping avoid "Address already in use" errors in rapid test execution.
-     *
-     * @return an available port number
-     * @throws RuntimeException if no available port could be found
-     */
     public static int allocatePort() {
         return allocatePort(MAX_ATTEMPTS);
     }
