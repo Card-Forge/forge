@@ -315,12 +315,20 @@ public interface IGuiGame {
 
     void clearYieldMode(PlayerView player);
 
-    /** Store the yield-interrupt preference snapshot received from a remote client. */
+    /**
+     * Store the most recent yield preferences snapshot received from the remote
+     * client this GUI represents. Default implementation is a no-op for the
+     * host's own GUI; NetGuiGame stores it on a field so the host's
+     * YieldController can read the remote player's interrupt prefs.
+     */
     default void setRemoteYieldPrefs(YieldPrefs prefs) {}
 
-    /** Return the yield-interrupt preference snapshot for this remote player, or null if local. */
+    /**
+     * @return the most recent yield preferences snapshot received from the
+     *         remote client this GUI represents, or null if this is the host's
+     *         own GUI or no snapshot has been received yet.
+     */
     default YieldPrefs getRemoteYieldPrefs() { return null; }
-
 
     YieldMode getYieldMode(PlayerView player);
 

@@ -56,9 +56,13 @@ public interface IGameController {
     void requestResync();
 
     /**
-     * Notify the server that the client's yield mode has changed.
-     * Used for network play to sync yield state from client to server.
-     * Default implementation does nothing (for local/host games).
+     * Notify the host that the client's yield state has changed. Carries both
+     * the current yield mode and a fresh snapshot of the player's yield prefs
+     * (interrupt conditions, decline scopes, auto-pass-no-actions). The host
+     * uses the prefs snapshot when evaluating interrupts for the remote
+     * player. Sent on game open, F-key press, ESC, and on each
+     * VYieldSettings change. Default implementation is a no-op for local
+     * games.
      */
     default void notifyYieldStateChanged(PlayerView player, YieldMode mode, YieldPrefs prefs) {
         // Default: no-op for local games

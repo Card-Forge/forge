@@ -51,6 +51,7 @@ import forge.deck.Deck;
 import forge.deckchooser.FDeckViewer;
 import forge.game.GameEntityView;
 import forge.game.GameView;
+import forge.interfaces.IGameController;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
@@ -1167,6 +1168,7 @@ public final class CMatchUI
 
         // If we're a network client, send our initial yield-prefs snapshot to the
         // host so it can evaluate interrupts on our behalf with our actual prefs.
+        // Local games and the host process get a no-op default IGameController.
         if (myPlayers != null && !myPlayers.isEmpty()) {
             final IGameController controller = getGameController();
             if (controller instanceof forge.gamemodes.net.client.NetGameController) {
