@@ -2,6 +2,6 @@ Name:Efflorescence
 ManaCost:2 G
 Types:Instant
 A:SP$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBPump | SpellDescription$ Put two +1/+1 counters on target creature.
-SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Trample & Indestructible | ConditionCheckSVar$ X
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Trample & Indestructible | ConditionCheckSVar$ X | SpellDescription$ Infusion — If you gained life this turn, that creature also gains trample and indestructible until end of turn.
 SVar:X:Count$LifeYouGainedThisTurn
 Oracle:Put two +1/+1 counters on target creature.\nInfusion — If you gained life this turn, that creature also gains trample and indestructible until end of turn.
