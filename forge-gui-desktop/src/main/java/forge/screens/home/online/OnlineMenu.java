@@ -8,6 +8,7 @@ import java.io.IOException;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JSeparator;
 
 import forge.gui.FNetOverlay;
 import forge.localinstance.properties.ForgeConstants;
@@ -21,7 +22,9 @@ public final class OnlineMenu {
     public static JMenu getMenu() {
         JMenu menu = new JMenu(Localizer.getInstance().getMessage("lblOnline"));
         menu.setMnemonic(KeyEvent.VK_O);
-        menu.add(getMenuItem_ConnectToServer());
+        menu.add(getMenuItem_HostGame());
+        menu.add(getMenuItem_JoinGame());
+        menu.add(new JSeparator());
         menu.add(getMenuItem_OpenNetworkLogs());
         menu.add(chatItem);
         return menu;
@@ -41,9 +44,15 @@ public final class OnlineMenu {
         });
     }
 
-    private static JMenuItem getMenuItem_ConnectToServer() {
-        JMenuItem menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblConnectToServer"));
-        menuItem.addActionListener(e -> CSubmenuOnlineLobby.SINGLETON_INSTANCE.connectToServer());
+    private static JMenuItem getMenuItem_HostGame() {
+        JMenuItem menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblHostGame"));
+        menuItem.addActionListener(e -> CSubmenuOnlineLobby.SINGLETON_INSTANCE.hostGame());
+        return menuItem;
+    }
+
+    private static JMenuItem getMenuItem_JoinGame() {
+        JMenuItem menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblJoinGame"));
+        menuItem.addActionListener(e -> CSubmenuOnlineLobby.SINGLETON_INSTANCE.joinGame());
         return menuItem;
     }
 

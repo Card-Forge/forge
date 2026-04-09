@@ -29,15 +29,26 @@ import java.util.List;
 public class NetConnectUtil {
     private NetConnectUtil() { }
 
-    public static String getServerUrl() {
-        final String url = SOptionPane.showInputDialog(Localizer.getInstance().getMessage("lblOnlineMultiplayerDest"), Localizer.getInstance().getMessage("lblConnectToServer"));
-        if (url == null) { return null; }
+    /**
+     * Prompt for the server address to join. Returns null if cancelled, or the address string.
+     */
+    public static String getJoinServerUrl() {
+        final String url = SOptionPane.showInputDialog(
+                Localizer.getInstance().getMessage("lblEnterServerAddress"),
+                Localizer.getInstance().getMessage("lblJoinGame"));
+        if (url == null || url.isEmpty()) { return null; }
 
-        //prompt user for player one name if needed
+        ensurePlayerName();
+        return url;
+    }
+
+    /**
+     * Ensure the player name is set before connecting.
+     */
+    public static void ensurePlayerName() {
         if (StringUtils.isBlank(FModel.getPreferences().getPref(FPref.PLAYER_NAME))) {
             GamePlayerUtil.setPlayerName();
         }
-        return url;
     }
 
     public static ChatMessage host(final IOnlineLobby onlineLobby, final IOnlineChatInterface chatInterface) {

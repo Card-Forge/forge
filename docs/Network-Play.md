@@ -41,22 +41,22 @@ There is no built-in matchmaking. Network play is designed for playing against p
 
 1. **Configure network** — Host must configure network settings to enable external connections (see [Network Configuration](#network-configuration) below).
 2. **Verify versions** — Confirm all devices are running the same Forge version (see [Version Compatibility](#version-compatibility) below).
-3. **Launch Forge** on all devices.
+3. **Launch Forge** on all devices and navigate to the online play screen.
      - Mobile: Choose "Classic Mode", then "Play Online"
-     - Desktop: "Online Multiplayer" > "Lobby" > "Connect to Server"
-4. **Host** leaves the server address field **empty** and clicks OK.
+     - Desktop: "Online Multiplayer" > "Lobby"
+4. **Host** clicks **"Host a Game"** to start the server.
      - On first host, Forge will ask whether to **automatically open the port via UPnP** (see [UPnP](#upnp-automatic-port-forwarding) below). If your router supports UPnP, choosing "Just Once" or "Always" can skip manual port forwarding entirely.
 5. **Host** determines address to share with clients:
      - **Local play:** Use the **Copy Server URL** button in the lobby — this copies the address in the correct format. Forge displays the host's IP (typically `192.168.x.x`). Verify against the device's network settings. Ignore any suggestion to use `localhost`.
      - **Remote play:** Verify the host's external IP at [canyouseeme.org](http://canyouseeme.org).
- 7. **Client** enters the host's address in the connection dialog and clicks OK.
+6. **Client** clicks **"Join a Game"** and enters the host's address.
      - The address format is **`IP:port`** — for example: `192.168.1.50:36743` (local) or `203.0.113.45:36743` (remote).
      - If the port is omitted, Forge defaults to 36743 (=FORGE on older phone keypads).
-8. **Configure the match:**
+7. **Configure the match:**
      - Host selects match type, teams, and game settings.
      - All players select decks, sleeves, and avatars.
      - Each player toggles their **Ready** switch.
-9. **Host starts the match** once all players are ready.
+8. **Host starts the match** once all players are ready.
 
 ---
 
