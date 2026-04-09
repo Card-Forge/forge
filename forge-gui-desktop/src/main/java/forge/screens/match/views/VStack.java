@@ -306,11 +306,11 @@ public class VStack implements IVDoc<CStack> {
             jmiAlwaysYes.addActionListener(arg0 -> {
                 if (controller.getMatchUI().shouldAlwaysAcceptTrigger(triggerID)) {
                     controller.getMatchUI().setShouldAlwaysAskTrigger(triggerID);
-                    controller.getMatchUI().getGameController().notifyTriggerChoiceChanged(triggerID, 0);
+                    controller.getMatchUI().getGameController().notifyTriggerChoiceChanged(triggerID, forge.gamemodes.match.TriggerChoice.ASK);
                 }
                 else {
                     controller.getMatchUI().setShouldAlwaysAcceptTrigger(triggerID);
-                    controller.getMatchUI().getGameController().notifyTriggerChoiceChanged(triggerID, 1);
+                    controller.getMatchUI().getGameController().notifyTriggerChoiceChanged(triggerID, forge.gamemodes.match.TriggerChoice.ALWAYS_YES);
                 }
             });
             add(jmiAlwaysYes);
@@ -319,11 +319,11 @@ public class VStack implements IVDoc<CStack> {
             jmiAlwaysNo.addActionListener(arg0 -> {
                 if (controller.getMatchUI().shouldAlwaysDeclineTrigger(triggerID)) {
                     controller.getMatchUI().setShouldAlwaysAskTrigger(triggerID);
-                    controller.getMatchUI().getGameController().notifyTriggerChoiceChanged(triggerID, 0);
+                    controller.getMatchUI().getGameController().notifyTriggerChoiceChanged(triggerID, forge.gamemodes.match.TriggerChoice.ASK);
                 }
                 else {
                     controller.getMatchUI().setShouldAlwaysDeclineTrigger(triggerID);
-                    controller.getMatchUI().getGameController().notifyTriggerChoiceChanged(triggerID, -1);
+                    controller.getMatchUI().getGameController().notifyTriggerChoiceChanged(triggerID, forge.gamemodes.match.TriggerChoice.ALWAYS_NO);
                 }
             });
             add(jmiAlwaysNo);

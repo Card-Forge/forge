@@ -168,7 +168,7 @@ public class NetGameController implements IGameController {
     }
 
     @Override
-    public void notifyTriggerChoiceChanged(int triggerId, int choice) {
+    public void notifyTriggerChoiceChanged(int triggerId, forge.gamemodes.match.TriggerChoice choice) {
         send(ProtocolMethod.notifyTriggerChoiceChanged, triggerId, choice);
     }
 }

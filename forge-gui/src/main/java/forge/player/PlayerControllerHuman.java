@@ -3550,13 +3550,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public void notifyTriggerChoiceChanged(int triggerId, int choice) {
-        if (choice > 0) {
-            getGui().setShouldAlwaysAcceptTrigger(triggerId);
-        } else if (choice < 0) {
-            getGui().setShouldAlwaysDeclineTrigger(triggerId);
-        } else {
-            getGui().setShouldAlwaysAskTrigger(triggerId);
+    public void notifyTriggerChoiceChanged(int triggerId, forge.gamemodes.match.TriggerChoice choice) {
+        switch (choice) {
+            case ALWAYS_YES -> getGui().setShouldAlwaysAcceptTrigger(triggerId);
+            case ALWAYS_NO -> getGui().setShouldAlwaysDeclineTrigger(triggerId);
+            case ASK -> getGui().setShouldAlwaysAskTrigger(triggerId);
         }
     }
 

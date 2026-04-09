@@ -308,11 +308,11 @@ public class VStack extends FDropDown {
                                         e -> {
                                             if (gui.shouldAlwaysAcceptTrigger(triggerID)) {
                                                 gui.setShouldAlwaysAskTrigger(triggerID);
-                                                controller.notifyTriggerChoiceChanged(triggerID, 0);
+                                                controller.notifyTriggerChoiceChanged(triggerID, forge.gamemodes.match.TriggerChoice.ASK);
                                             }
                                             else {
                                                 gui.setShouldAlwaysAcceptTrigger(triggerID);
-                                                controller.notifyTriggerChoiceChanged(triggerID, 1);
+                                                controller.notifyTriggerChoiceChanged(triggerID, forge.gamemodes.match.TriggerChoice.ALWAYS_YES);
                                                 if (stackInstance.equals(gameView.peekStack())) {
                                                     //auto-yes if ability is on top of stack
                                                     controller.selectButtonOk();
@@ -324,11 +324,11 @@ public class VStack extends FDropDown {
                                         e -> {
                                             if (gui.shouldAlwaysDeclineTrigger(triggerID)) {
                                                 gui.setShouldAlwaysAskTrigger(triggerID);
-                                                controller.notifyTriggerChoiceChanged(triggerID, 0);
+                                                controller.notifyTriggerChoiceChanged(triggerID, forge.gamemodes.match.TriggerChoice.ASK);
                                             }
                                             else {
                                                 gui.setShouldAlwaysDeclineTrigger(triggerID);
-                                                controller.notifyTriggerChoiceChanged(triggerID, -1);
+                                                controller.notifyTriggerChoiceChanged(triggerID, forge.gamemodes.match.TriggerChoice.ALWAYS_NO);
                                                 if (stackInstance.equals(gameView.peekStack())) {
                                                     //auto-no if ability is on top of stack
                                                     controller.selectButtonCancel();
