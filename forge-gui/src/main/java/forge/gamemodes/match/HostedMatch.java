@@ -266,8 +266,33 @@ public class HostedMatch {
             }
         }
 
+        // Send openView to all GUIs — remote GUIs run in parallel threads to avoid
+        // deadlock with 3+ remote players (sequential sendAndWait blocks), while
+        // local GUIs run on the EDT since they perform Swing UI operations.
+        final List<Thread> openViewThreads = new ArrayList<>();
+        IGuiGame localGui = null;
+        TrackableCollection<PlayerView> localGuiPlayers = null;
+
         for (final Entry<IGuiGame, Collection<PlayerView>> e : playersPerGui.asMap().entrySet()) {
-            e.getKey().openView(new TrackableCollection<>(e.getValue()));
+            final IGuiGame gui = e.getKey();
+            final TrackableCollection<PlayerView> guiPlayers = new TrackableCollection<>(e.getValue());
+            if (gui.isRemoteGuiProxy()) {
+                final Thread t = new Thread(() -> gui.openView(guiPlayers), "openView");
+                openViewThreads.add(t);
+                t.start();
+            } else {
+                localGui = gui;
+                localGuiPlayers = guiPlayers;
+            }
+        }
+        // Open local GUI view on EDT while remote threads run in parallel
+        if (localGui != null) {
+            final IGuiGame lg = localGui;
+            final TrackableCollection<PlayerView> lp = localGuiPlayers;
+            FThreads.invokeInEdtAndWait(() -> lg.openView(lp));
+        }
+        for (final Thread t : openViewThreads) {
+            try { t.join(); } catch (final InterruptedException ie) { Thread.currentThread().interrupt(); }
         }
 
         if (humanCount == 0) { //watch game but do not participate
