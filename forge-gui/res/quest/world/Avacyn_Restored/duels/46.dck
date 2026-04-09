@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Green Lantern
+Title=Green Lantern
+Icon=Green Lantern.jpg
+Difficulty=Medium
+Description=Avacyn_Restored/Standard_Silver_TCQ_-_Niles,_IL_-_4-27-12/ChristopherCo_-_GW_Humans_(Standard,_#31664).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Avacyn's Pilgrim
+4 Champion of the Parish
+2 Fiend Hunter
+3 Gideon's Lawkeeper
+4 Hero of Bladehold
+4 Mayor of Avabruck
+3 Mirran Crusader
+2 Sigarda, Host of Herons
+3 Silverblade Paladin
+4 Thalia, Guardian of Thraben
+3 Oblivion Ring
+2 Cavern of Souls
+2 Forest
+2 Gavony Township
+10 Plains
+4 Razorverge Thicket
+4 Sunpetal Grove
+[Sideboard]
+3 Celestial Purge
+2 Corrosive Gale
+2 Grand Abolisher
+2 Naturalize
+2 Riders of Gavony
+1 Thrun, the Last Troll

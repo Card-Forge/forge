@@ -335,17 +335,14 @@ public class CountersPutAi extends CountersAi {
             amount = 1; // TODO: improve this to possibly account for some variability depending on the roll outcome (e.g. 4 for 1d8, perhaps)
         }
 
-        if (ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
-            Combat combat = game.getCombat();
-            if (sourceName.equals("Psychic Frog")) {
-                return doCombatAdaptLogic(source, amount, combat);
-            }
-            if (sa.hasParam("Adapt")) {
-                if (!source.canReceiveCounters(CounterEnumType.P1P1) || source.getCounters(CounterEnumType.P1P1) > 0) {
-                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-                }
-                return doCombatAdaptLogic(source, amount, combat);
-            }
+        if (sa.hasParam("Adapt") &&
+                (!source.canReceiveCounters(CounterEnumType.P1P1) || source.getCounters(CounterEnumType.P1P1) > 0)) {
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        }
+
+        if (ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) &&
+                (sa.hasParam("Adapt") || sourceName.equals("Psychic Frog"))) {
+            return doCombatAdaptLogic(source, amount, game.getCombat());
         }
 
         if ("Fight".equals(logic) || "PowerDmg".equals(logic)) {

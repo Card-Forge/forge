@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Eshu
+Title=Eshu
+Icon=Eshu.jpg
+Difficulty=Hard
+Description=./Modern/Ravnica_Allegiance/Drakanar_-_Merfolk_(Modern,_#780617).dck
+Deck Type=constructed
+
+[Main]
+4 Benthic Biomancer
+2 Harbinger of the Tides
+4 Lord of Atlantis
+4 Master of the Pearl Trident
+4 Master of Waves
+4 Merfolk Trickster
+4 Silvergill Adept
+4 Aether Vial
+4 Deprive
+2 Spell Pierce
+4 Spreading Seas
+1 Cavern of Souls
+14 Island
+4 Mutavault
+1 Oboro, Palace in the Clouds
+[Sideboard]
+2 Echoing Truth
+2 Gut Shot
+2 Hurkyl's Recall
+2 Mistcaller
+2 Relic of Progenitus
+2 Spellskite
+1 Tidebinder Mage
+2 Venser, Shaper Savant

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Genghis Khan
+Title=Genghis Khan
+Icon=Genghis Khan.jpg
+Difficulty=Easy
+Description=./Standard/Aetherdrift/EIJI_SOGO_-_Golgari_Aggro_(Standard,_#2367476).dck
+Deck Type=constructed
+
+[Main]
+4 Mosswood Dreadknight
+3 Preacher of the Schism
+2 Goldvein Hydra
+4 Llanowar Elves
+3 Sentinel of the Nameless City
+2 Webstrike Elite
+1 Agonasaur Rex
+3 Thunderous Velocipede
+2 Cut Down
+2 Go for the Throat
+2 Anoint with Affliction
+2 Tear Asunder
+2 Defend the Rider
+1 The End
+1 Gix's Command
+2 Maelstrom Pulse
+5 Swamp
+5 Forest
+4 Blooming Marsh
+2 Llanowar Wastes
+2 Restless Cottage
+2 Soulstone Sanctuary
+4 Wastewood Verge
+[Sideboard]
+2 Tranquil Frillback
+2 Duress
+1 Sheoldred's Edict
+2 Obstinate Baloth
+1 Harvester of Misery
+2 Nissa, Ascended Animist
+2 Dreams of Steel and Oil
+2 Sheoldred, the Apocalypse
+1 Fade from History

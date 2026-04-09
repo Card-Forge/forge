@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Ned Flanders
+Title=Ned Flanders
+Icon=Ned Flanders.jpg
+Difficulty=Hard
+Description=./Modern/Foundations/AndreaMengucci_-_Boros_Burn_(Modern,_#2270943).dck
+Deck Type=constructed
+
+[Main]
+4 Goblin Guide
+4 Eidolon of the Great Revel
+4 Monastery Swiftspear
+4 Searing Blaze
+4 Boros Charm
+4 Lightning Bolt
+4 Rift Bolt
+4 Skewer the Critics
+4 Lava Spike
+4 Boltwave
+1 Elegant Parlor
+2 Sacred Foundry
+2 Bloodstained Mire
+3 Arid Mesa
+2 Wooded Foothills
+2 Mountain
+4 Sunbaked Canyon
+4 Inspiring Vantage
+[Sideboard]
+2 Rest in Peace
+2 Magebane Lizard
+3 Exquisite Firecraft
+4 Searing Blood
+4 Untimely Malfunction

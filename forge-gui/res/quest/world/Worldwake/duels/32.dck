@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling Blue
+Title=Dungeon Crawling Blue
+Icon=Dungeon Crawling Blue.jpg
+Difficulty=Easy
+Description=Worldwake/Superstars_Standard_$2K_March-2010/William_Tian_-_Jund_(Standard,_#2182).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodbraid Elf
+3 Broodmate Dragon
+2 Siege-Gang Commander
+4 Sprouting Thrinax
+3 Bituminous Blast
+4 Lightning Bolt
+3 Terminate
+4 Blightning
+2 Maelstrom Pulse
+3 Rampant Growth
+2 Garruk Wildspeaker
+3 Dragonskull Summit
+2 Forest
+3 Mountain
+4 Raging Ravine
+3 Rootbound Crag
+4 Savage Lands
+3 Swamp
+4 Verdant Catacombs
+[Sideboard]
+3 Basilisk Collar
+3 Cunning Sparkmage
+4 Duress
+4 Goblin Guide

@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Fred Flintstone
+Title=Fred Flintstone
+Icon=Fred Flintstone.jpg
+Difficulty=Medium
+Description=./Standard/Dominaria_United/Hirotaka_Muto_-_Grixis_Midrange_(Standard,_#1452491).dck
+Deck Type=constructed
+
+[Main]
+1 Ertai Resurrected
+1 Sheoldred, the Apocalypse
+4 Sol'Kanar the Tainted
+4 Fable of the Mirror-Breaker
+4 Corpse Appraiser
+4 Bloodtithe Harvester
+2 Reckoner Bankbuster
+1 Fading Hope
+1 Negate
+2 Make Disappear
+2 Cut Down
+2 Voltage Surge
+2 Infernal Grasp
+2 The Meathook Massacre
+1 Kaito Shizuki
+1 Sorin the Mirthless
+1 Island
+1 Haunted Ridge
+1 Sokenzan, Crucible of Defiance
+1 Takenuma, Abandoned Mire
+1 Otawara, Soaring City
+2 Mountain
+2 Stormcarved Coast
+3 Shivan Reef
+3 Swamp
+3 Sulfurous Springs
+4 Shipwreck Marsh
+4 Xander's Lounge
+[Sideboard]
+1 Ertai Resurrected
+1 Negate
+1 Reckoner Bankbuster
+2 Abrade
+2 Unlicensed Hearse
+2 Duress
+2 Disdainful Stroke
+2 Kotose, the Silent Spider
+2 Soul Transfer

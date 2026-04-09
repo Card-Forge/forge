@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Fin Fang Foom
+Title=Fin Fang Foom
+Icon=Fin Fang Foom.jpg
+Difficulty=Hard
+Description=./Modern/Ravnica_Allegiance/Cevni_-_4_Colors_Control_(Modern,_#786250).dck
+Deck Type=constructed
+
+[Main]
+1 Nicol Bolas, the Ravager
+4 Snapcaster Mage
+1 Tasigur, the Golden Fang
+4 Cryptic Command
+3 Kolaghan's Command
+4 Lightning Helix
+2 Logic Knot
+4 Opt
+4 Path to Exile
+1 Sphinx's Revelation
+3 Terminus
+2 Search for Azcanta
+1 Jace, the Mind Sculptor
+2 Teferi, Hero of Dominaria
+1 Celestial Colonnade
+4 Flooded Strand
+1 Godless Shrine
+2 Hallowed Fountain
+3 Island
+1 Mountain
+1 Plains
+4 Polluted Delta
+2 Scalding Tarn
+2 Steam Vents
+1 Sulfur Falls
+1 Swamp
+1 Watery Grave
+[Sideboard]
+3 Celestial Purge
+1 Dispel
+1 Engineered Explosives
+2 Kambal, Consul of Allocation
+1 Kaya, Orzhov Usurper
+2 Negate
+3 Surgical Extraction
+2 Unmoored Ego

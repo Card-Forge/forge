@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Tibalt
+Title=Tibalt
+Icon=Tibalt.jpg
+Difficulty=Medium
+Description=./Standard/Ravnica_Allegiance/Alex_Byers_-_Mono_Blue_(Standard,_#782699).dck
+Deck Type=constructed
+
+[Main]
+3 Mist-Cloaked Herald
+4 Siren Stormtamer
+4 Pteramander
+4 Merfolk Trickster
+4 Tempest Djinn
+4 Opt
+2 Dive Down
+3 Spell Pierce
+4 Wizard's Retort
+1 Blink of an Eye
+1 Essence Capture
+3 Chart a Course
+4 Curious Obsession
+19 Island
+[Sideboard]
+3 Negate
+3 Diamond Mare
+3 Surge Mare
+2 Deep Freeze
+2 Entrancing Melody
+2 Exclusion Mage

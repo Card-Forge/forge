@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Osiris
+Title=Osiris
+Icon=Osiris.jpg
+Difficulty=Medium
+Description=./Standard/Tarkir_Dragonstorm/Foxantes_-_Azorius_Control_(Standard,_#2449371).dck
+Deck Type=constructed
+
+[Main]
+3 Horned Loch-Whale
+4 Beza, the Bounding Spring
+4 Three Steps Ahead
+3 No More Lies
+4 Elspeth's Smite
+4 Get Lost
+3 Deduce
+4 Sunfall
+3 Stock Up
+1 High Noon
+1 Elspeth, Storm Slayer
+4 Plains
+4 Island
+3 Seachrome Coast
+4 Restless Anchorage
+2 Demolition Field
+3 Fountainport
+4 Floodfarm Verge
+2 Adarkar Wastes
+[Sideboard]
+3 Negate
+2 Boon-Bringer Valkyrie
+2 Destroy Evil
+2 High Noon
+2 Tishana's Tidebinder
+2 Kutzil's Flanker
+2 Rest in Peace

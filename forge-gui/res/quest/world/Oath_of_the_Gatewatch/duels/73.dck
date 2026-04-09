@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Snow White
+Title=Snow White
+Icon=Snow White.jpg
+Difficulty=Very Hard
+Description=../Modern/Oath_of_the_Gatewatch/Competitive_Modern_Constructed_League/SilverRocket_-_Red_Deck_Wins_(Modern,_#643194).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Kird Ape
+4 Monastery Swiftspear
+4 Wild Nacatl
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+1 Lightning Helix
+2 Mutagenic Growth
+3 Searing Blaze
+4 Arid Mesa
+3 Bloodstained Mire
+1 Mountain
+3 Sacred Foundry
+2 Scalding Tarn
+3 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+2 Grafdigger's Cage
+3 Gut Shot
+1 Koth of the Hammer
+3 Natural State
+3 Path to Exile
+1 Rest in Peace
+1 Searing Blood
+1 Tormod's Crypt

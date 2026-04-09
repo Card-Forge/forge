@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Tolsimir
+Title=Tolsimir
+Icon=Tolsimir.jpg
+Difficulty=Very Hard
+Description=./Modern/Final_Fantasy/Sharkcaster_Mage_-_Domain_Aggro_(Modern,_#2524634).dck
+Deck Type=constructed
+
+[Main]
+3 Cecil, Dark Knight
+4 Ragavan, Nimble Pilferer
+4 Territorial Kavu
+4 Scion of Draco
+2 Spectral Denial
+2 Stubborn Denial
+4 Lightning Bolt
+4 Thoughtseize
+4 Tribal Flames
+4 Leyline Binding
+4 Leyline of the Guildpact
+1 Raucous Theater
+1 Thundering Falls
+1 Blood Crypt
+1 Overgrown Tomb
+1 Steam Vents
+1 Godless Shrine
+1 Breeding Pool
+4 Polluted Delta
+4 Wooded Foothills
+4 Scalding Tarn
+1 Mountain
+1 Spara's Headquarters
+[Sideboard]
+2 High Noon
+2 Wrath of the Skies
+4 Consign to Memory
+2 Clarion Conqueror
+2 Pyroclasm
+2 Wear // Tear
+1 Stubborn Denial

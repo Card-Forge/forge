@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Storm2
+Title=Storm2
+Icon=Storm2.jpg
+Difficulty=Easy
+Description=Born_of_the_Gods/SCG_Standard_Open_Seattle/Jeremy_White_-_Mono_Black_Devotion_(Standard,_#67111).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Desecration Demon
+4 Gray Merchant of Asphodel
+3 Lifebane Zombie
+3 Nightveil Specter
+4 Pack Rat
+3 Bile Blight
+2 Doom Blade
+4 Hero's Downfall
+1 Ultimate Price
+4 Thoughtseize
+3 Underworld Connections
+4 Mutavault
+17 Swamp
+4 Temple of Deceit
+[Sideboard]
+2 Dark Betrayal
+2 Devour Flesh
+1 Drown in Sorrow
+4 Duress
+2 Erebos, God of the Dead
+1 Whip of Erebos

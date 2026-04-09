@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="83">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="84">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -13,7 +13,7 @@
  </layer>
  <layer id="2" name="Ground" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzVWEtKA0EQHWHSSoLkcwPFha4mgnfwEiLuo6gg3sd8ZCSKVxD3iTdwIV7BjSu7ScrU1FT/pmcm+qAI0+nuel1dPzqK/hd2u1G01103Cz1Oe1F01luf/h2Nbe7qpaHF5roJVIzP/ey3EPLMIj8viaPoMDavrQMzyeEtdh+vGz786qQL9wo87uXYd3MhOn5VgVOj9Lckv6ZY/PbjrNBx6otlgvp6stT/IOW8YZcUceViyQdcjNG7Ut9zj/sbMDw5e/rEtxDZu8JcQN9FI7sG/O+e7HVywPMMsSXYCO6QcgFgLh8bC3HdOyR+ZktuOl4cdPwmUqYl8RuiPfD6kZRxQX4UOv/wgSl/0V4iifP5hfp/AJUcEiYmTID7whKam1OLPs73hvx0K79RGNVfQO/lW5vGYpU3IN4nhtyRaHwAYLJdEX4u64ZkXogPQG2FM7qmUddzUX5cr2jCANVOWw7Ae88cdSp/SJfxJ4Q9Fmnd08UBB7A17rVcdOL+R/ms8ldci0J6bWwbsEULcYL4VzqF4GMB1sG8MkH9DHTNmZ6wSTh8xfw++Myu+QjXBdxr4H0f0RjOf7g3xPZ5l/XvSOT3KZIzqF1obwycwd8wN3y3faRX12P71CvKUdcTz5EebDusE/gCTH12SL/A8U5Fvq5RsfVoZdU+DMgDuK5xvGx1rgxsOcyhttTlDBiCfr9ODFB/UKYfhUD10xP0/VfeNHQw8bvZtq83uSq8Cx63zXtcyv+vGLlur/iZ5rjiljmP4qZ7vwRMO7JmEHmW8tRZ8Zsux+g8NccG3/dln/yE77doWnmR3F4rev8uIz6qev+GGhz6bkHxA6nb40M=
+   eJzVWEtKA0EQHWHSSoLkcwPFha4mgnfwEiLuo6gg3sd8ZCSKVxD3iTdwIV7BjSu7yZSpqan+TU8m+qAI0+nuel1dPzqK/hd2u1G01103Cz1Oe1F01luf/h2Nbe7qpaHF5roJrBif+/lvIeSZRXFeEkfRYWxeWwdmksNb7D5eN3z41UkX7hV43Mux7+ZCdPxWBU6N0t+S/Jpi8duP80LHqS9WCerrSab/Qcp5wy4p4srFkg+4GKN3pb7nHvc3YHhy9vSJbyHyd4W5gL6LRn4N+N892evkgOcZYkuwEdwh5QLAXD42FuK69zzAN2cZNx0vDjp+EylTDT/T2TkM0R74TkdSxiX5Uej8wwem/EV7iSQu5hd6ZwFUCkiYmDAB3xdIaG5OLfo43xvy0638RmFUfwG9l29tGotl3oB4nxhyR6LxAYDJdmX4uawbknkhPgC1Fc7omkZdz0X5cb2iCQNUO205AO89c9Sp/CHN4k8IeyzSuqeLAw5ga9xruejE/Y/yWeWvuBaF9NrYNmCLFuIE8a90CsHHAqyDeVWC+hnomjM9YZNw+Ir5ffCZXfMRrgu418D7PqIxnP9wb4jt8y7r35Eo7lMmZ1C70N4YOIO/YW74bvtIr67H9qlXlKOuJ54jPdh2WCfwBZj67JB+geOdimJdo2Lr0aqqfRiQB3Bd43jZ6lwV2HKYQ22pyxkwBP1+nRig/qBKPwqB6qcn6PuvvGnoYOJ3s21fb3JVeBc8bpv3uJT/XzFy3V7yM81xxS1zHsVN934JmHZkzSDyLOWps+Q3zcboPDXHBt/3ZZ/8hO+3bFp5kdxeV/T+XUV8rOr9G2pw6LsFxQ824OSN
   </data>
  </layer>
  <layer id="8" name="Bridges" width="40" height="40">
@@ -23,7 +23,7 @@
  </layer>
  <layer id="6" name="Ground2" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AU0Aos1WJgWKZFvPgowA2mazIwzNAcaFdAALb42wx02xYgvq1DWO0oIB8MVHjOBMbtLDqlP3L8uBXotm1Y0t9gAKt1EFhYd6BdM3TAUKk/8jUYGAqguFBjoF2DCbqBbuqB4l4auY+SOFkOdNMKKB6M+XcUDBygZV5fDDR3CRazlwPFVgyi8gUfmA2s8+YA8WRW+ti3Ghgua0gIm+1At+0YJO1WcgElaXCw1VWjYHiDJ4Ow/TGQYDQ8Bh5QMw5G43MUjALqAAAJ1DRl
+   eJxjYBgFo2AU0Aos1WJgWKZFvPgowA2mazIwzNAcaFdAALb42wx02xYgvq1DWO0oIB8MVHjOBMbtLBLTnypQvRoZaZYcP24F2rMNS/rDBxyB6p1I1EMOWK2DwMK6tLVrOIGhUn/kazAwFEBxocZAuwYTdAPd1APFvTRyHyVxshzophVQTOu8OAqGFqBlXl8MNHcJFrOXA8VWDKLyBR+YDay/5gDxZFb62LcaGC5rSAib7UC37Rgk7VZyASVpcLDVVaNgeIMng7D9MZBgNDwGHlAzDkbjcxSMAuoAAGt6Nt4=
   </data>
  </layer>
  <layer id="3" name="Walls" width="40" height="40">
@@ -310,6 +310,46 @@
                 {
 					&quot;name&quot;: &quot;Pirates aren't really my thing.&quot;,
 					&quot;text&quot;: &quot;The townsfolk give you scornful looks as you walk away.&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="83" template="../../../../common/maps/obj/dialog.tx" x="520" y="214.667" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;You enter a library tower. The smell of ancient tomes swirls through the air as a wizard with an absurdly large beard approaches you. 'I can sense strong magic within you. I need someone capable of the near-impossible'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;The three great threats are ended.&quot;,
+                    &quot;text&quot;: &quot;'Truly, your magical ability knows no equal!'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+	               {&quot;type&quot;: &quot;item&quot;, &quot;count&quot;: 1, &quot;itemName&quot;: &quot;Jewel of Winds&quot;},
+                        {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Ancestral Recall&quot;},
+                        {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Mystical Tutor&quot;}          
+                      ]
+                    },
+					{&quot;addMapReputation&quot;: 10}  ],
+					&quot;condition&quot;:[{&quot;item&quot;: &quot;Ominous Amulet&quot;}, {&quot;item&quot;: &quot;Reliquary Robes&quot;}, {&quot;item&quot;: &quot;Urza's Bauble&quot;}], 
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;Nearly impossible means doable.&quot;,
+					&quot;text&quot;: &quot;'A fine attitude! There are several truly awesome threats that have made their home in these islands. Defeat the three greatest and I have three legendary treasures for you.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;Which three are we speaking of?&quot;,
+					&quot;text&quot;: &quot;'The lord high artificer, Urza. The mad enchanter, Zur. The sovereign of the deep, Kiora. If you can defeat them all and show me the relics they once had, I will give you knowledge and power untold.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;I will see what I can do.&quot; } ]
+					 }]
+				},
+                {
+					&quot;name&quot;: &quot;Little too impossible for my tastes.&quot;,
+					&quot;text&quot;: &quot;'Well, we can't all be the greatest.'&quot;,
 					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
 				}
 			]

@@ -1,0 +1,13 @@
+Name:Defiling Daemogoth
+ManaCost:3 B B
+Types:Creature Demon
+PT:5/4
+K:Menace
+T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | TriggerZones$ Battlefield | CombatDamage$ True | Execute$ TrigGainLife | TriggerDescription$ Whenever a creature you control deals combat damage to a player, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your end step, each opponent loses X life, where X is the amount of life you gained this turn.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ X
+SVar:X:Count$LifeYouGainedThisTurn
+DeckHas:Ability$LifeGain
+DeckHints:Ability$LifeGain
+Oracle:Menace\nWhenever a creature you control deals combat damage to a player, you gain 1 life.\nAt the beginning of your end step, each opponent loses X life, where X is the amount of life you gained this turn.

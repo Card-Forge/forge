@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Seth
+Title=Seth
+Icon=Seth.jpg
+Difficulty=Easy
+Description=Aether_Revolt/Matsuda_Hideyuki_-_Mono_White_(Standard,_#667440).dck
+Deck Type=constructed
+
+[Main]
+4 Expedition Envoy
+4 Scrapheap Scrounger
+2 Stern Constable
+4 Thalia's Lieutenant
+3 Thalia, Heretic Cathar
+4 Thraben Inspector
+4 Toolcraft Exemplar
+4 Town Gossipmonger
+4 Smuggler's Copter
+4 Declaration in Stone
+4 Always Watching
+4 Aether Hub
+4 Concealed Courtyard
+11 Plains
+[Sideboard]
+4 Fatal Push
+3 Gideon, Ally of Zendikar
+2 Make a Stand
+4 Selfless Spirit
+2 Shambling Vent

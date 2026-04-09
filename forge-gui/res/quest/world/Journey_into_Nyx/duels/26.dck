@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Napoleon
+Title=Napoleon
+Icon=Napoleon.jpg
+Difficulty=Medium
+Description=Journey_into_Nyx/MaxPoint_Gold_-_Paper_Heros_Comics/M._Yichao_Wang_-_Esper_Control_(Standard,_#74715).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 AEtherling
+3 Blood Baron of Vizkopa
+1 Obzedat, Ghost Council
+1 Devour Flesh
+3 Dissolve
+3 Hero's Downfall
+4 Sphinx's Revelation
+4 Supreme Verdict
+3 Thoughtseize
+1 Banishing Light
+4 Detention Sphere
+2 Elspeth, Sun's Champion
+4 Jace, Architect of Thought
+4 Godless Shrine
+4 Hallowed Fountain
+2 Island
+1 Plains
+4 Temple of Deceit
+3 Temple of Enlightenment
+4 Temple of Silence
+4 Watery Grave
+[Sideboard]
+2 Doom Blade
+1 Far // Away
+2 Gainsay
+4 Nightveil Specter
+2 Pithing Needle

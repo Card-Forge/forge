@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=The Pied Piper
+Title=The Pied Piper
+Icon=The Pied Piper.jpg
+Difficulty=Medium
+Description=./Standard/Tarkir_Dragonstorm/Fiola34_-_Jeskai_Convoke_(Standard,_#2454096).dck
+Deck Type=constructed
+
+[Main]
+4 Knight-Errant of Eos
+4 Imodane's Recruiter
+4 Resolute Reinforcements
+4 Novice Inspector
+1 Regal Bunnicorn
+4 Spyglass Siren
+4 Warden of the Inner Sky
+1 Nesting Bot
+3 Frontline Rush
+4 Gleeful Demolition
+2 Case of the Gateway Express
+4 Sheltered by Ghosts
+4 Adarkar Wastes
+4 Inspiring Vantage
+4 Seachrome Coast
+2 Shivan Reef
+4 Spirebluff Canal
+4 Battlefield Forge
+[Sideboard]
+1 Chandra, Spark Hunter
+2 Destroy Evil
+4 Protect the Negotiators
+2 Rest in Peace
+4 Torch the Tower
+2 Urabrask's Forge

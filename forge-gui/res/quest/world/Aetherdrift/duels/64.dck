@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Magnum
+Title=Magnum
+Icon=Magnum.jpg
+Difficulty=Very Hard
+Description=./Modern/Aetherdrift/SureThing_-_Selesnya_Ritual_(Modern,_#2376215).dck
+Deck Type=constructed
+
+[Main]
+2 Brightglass Gearhulk
+2 Eternal Witness
+4 Guide of Souls
+1 Mockingbird
+4 Ocelot Pride
+2 Phantasmal Image
+3 Ranger-Captain of Eos
+2 Skyclave Apparition
+4 Solitude
+4 White Orchid Phantom
+2 Witch Enchanter
+1 Portable Hole
+4 Ephemerate
+3 Birthing Ritual
+1 Static Prison
+3 Arid Mesa
+1 Boseiju, Who Endures
+4 Flagstones of Trokair
+1 Plains
+1 Hallowed Fountain
+2 Lush Portico
+1 Meticulous Archive
+1 Forest
+3 Temple Garden
+4 Windswept Heath
+[Sideboard]
+1 Chalice of the Void
+1 Deafening Silence
+1 Elesh Norn, Mother of Machines
+2 Endurance
+1 Ghost Vacuum
+1 Haywire Mite
+2 Loran of the Third Path
+1 Pithing Needle
+4 Sanctifier en-Vec
+1 Tormod's Crypt

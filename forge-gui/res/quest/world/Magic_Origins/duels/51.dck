@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Barroom Brawl
+Title=Barroom Brawl
+Icon=Barroom Brawl.jpg
+Difficulty=Very Hard
+Description=../Modern/Magic_Origins/SCG_Invitational_Qualifier_Catskill/Paul_Muller_-_Burn_(Modern,_#318156).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Monastery Swiftspear
+2 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+3 Lightning Helix
+3 Searing Blaze
+3 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+3 Arid Mesa
+4 Bloodstained Mire
+4 Mountain
+2 Sacred Foundry
+2 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+4 Destructive Revelry
+2 Exquisite Firecraft
+1 Grafdigger's Cage
+2 Kor Firewalker
+2 Path to Exile
+2 Rending Volley
+2 Searing Blood

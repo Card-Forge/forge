@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Beast2
+Title=Beast2
+Icon=Beast2.jpg
+Difficulty=Medium
+Description=./Standard/Theros_Beyond_Death/Andre_Volpe_-_Mono-W_Heliod_(Standard,_#950107).dck
+Deck Type=constructed
+
+[Main]
+4 Healer's Hawk
+4 Hushbringer
+4 Heliod, Sun-Crowned
+4 Alseid of Life's Bounty
+4 Ajani's Pridemate
+4 Daxos, Blessed by the Sun
+4 Linden, the Steadfast Queen
+2 Banishing Light
+2 Gideon Blackblade
+4 Ajani, Strength of the Pride
+1 Mobilized District
+4 Castle Ardenvale
+19 Plains
+[Sideboard]
+1 Elspeth, Sun's Nemesis
+1 Unbreakable Formation
+1 Brought Back
+2 Elspeth Conquers Death
+2 Banishing Light
+2 Glass Casket
+2 Tomik, Distinguished Advokist
+4 Devout Decree

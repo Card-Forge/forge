@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Luna Lovegood
+Title=Luna Lovegood
+Icon=Luna Lovegood.jpg
+Difficulty=Medium
+Description=./Standard/The_Brothers_War/Damian_Cohen_-_Azorius_Aggro_(Standard,_#1529147).dck
+Deck Type=constructed
+
+[Main]
+2 Myrel, Shield of Argive
+4 Valiant Veteran
+4 Recruitment Officer
+4 Siege Veteran
+4 Yotian Frontliner
+4 Skystrike Officer
+4 Harbin, Vanguard Aviator
+4 Brutal Cathar
+4 Thalia, Guardian of Thraben
+2 Valorous Stance
+1 Island
+1 Eiganjo, Seat of the Empire
+1 Otawara, Soaring City
+2 Plaza of Heroes
+3 Plains
+4 Secluded Courtyard
+4 Fortified Beachhead
+4 Deserted Beach
+4 Adarkar Wastes
+[Sideboard]
+1 Guardian of New Benalia
+2 Protect the Negotiators
+2 Dennick, Pious Apprentice
+2 The Wandering Emperor
+2 Sungold Sentinel
+2 Cathar Commando
+3 Wedding Announcement

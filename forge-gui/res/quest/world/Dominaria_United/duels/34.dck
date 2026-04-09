@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Saruman
+Title=Saruman
+Icon=Saruman.jpg
+Difficulty=Easy
+Description=./Standard/Dominaria_United/Albimtg_-_Grixis_Midrange_(Standard,_#1499021).dck
+Deck Type=constructed
+
+[Main]
+2 Wandering Mind
+4 Corpse Appraiser
+4 Bloodtithe Harvester
+4 Fable of the Mirror-Breaker
+3 Reckoner Bankbuster
+2 Infernal Grasp
+2 Negate
+2 Abrade
+3 Cut Down
+3 Make Disappear
+4 Invoke Despair
+1 Otawara, Soaring City
+1 Takenuma, Abandoned Mire
+1 Shivan Reef
+3 Shivan Reef
+4 Sulfurous Springs
+4 Xander's Lounge
+4 Haunted Ridge
+4 Shipwreck Marsh
+5 Swamp
+[Sideboard]
+1 Negate
+1 Disdainful Stroke
+1 Rona's Vortex
+1 Abrade
+1 Cut Down
+1 Soul Transfer
+2 Liliana of the Veil
+2 Sorin the Mirthless
+2 Infernal Grasp
+3 Duress

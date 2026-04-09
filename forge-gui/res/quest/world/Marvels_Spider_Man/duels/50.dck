@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Hobbes
+Title=Hobbes
+Icon=Hobbes.jpg
+Difficulty=Medium
+Description=./Standard/Marvels_Spider_Man/Cedric_Rominger_-_Orzhov_Demon_(Standard,_#2642727).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodletter of Aclazotz
+4 Deep-Cavern Bat
+4 Demon Wall
+2 Elegy Acolyte
+2 Morlun, Devourer of Spiders
+2 Qarsi Revenant
+2 Unstoppable Slasher
+3 Perilous Snare
+3 Archenemy's Charm
+3 Shoot the Sheriff
+2 Duress
+1 Friendly Neighborhood
+4 Unholy Annex
+1 Adagia, Windswept Bastion
+4 Bleachbone Verge
+4 Concealed Courtyard
+4 Godless Shrine
+1 Shadowy Backstreet
+3 Soulstone Sanctuary
+7 Swamp
+[Sideboard]
+2 Authority of the Consuls
+2 Duress
+2 Get Lost
+2 Intimidation Tactics
+2 Rest in Peace
+2 Strategic Betrayal
+1 Villainous Wrath
+2 Zero Point Ballad

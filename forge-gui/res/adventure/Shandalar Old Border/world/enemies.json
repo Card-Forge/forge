@@ -49022,7 +49022,8 @@
     "name": "Necromancer",
     "sprite": "sprites/enemy/humanoid/human/wizard/black_wiz2.atlas",
     "deck": [
-      "decks/standard/reanimator.dck"
+      "decks/standard/reanimator.dck",
+      "decks/standard/reanimator_livingdeath.dck"
     ],
     "ai": "",
     "spawnRate": 1,

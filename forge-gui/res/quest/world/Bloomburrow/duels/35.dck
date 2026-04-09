@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=InuYasha
+Title=InuYasha
+Icon=InuYasha.jpg
+Difficulty=Medium
+Description=./Standard/Bloomburrow/NicholasDrechsler_-_Orzhov_Lifegain_(Standard,_#2192792).dck
+Deck Type=constructed
+
+[Main]
+2 Darkstar Augur
+2 Gumdrop Poisoner
+2 Loran of the Third Path
+3 Ruin-Lurker Bat
+4 Deep-Cavern Bat
+4 Amalia Benavides Aguirre
+3 Starscape Cleric
+4 Essence Channeler
+4 Zoraline, Cosmos Caller
+1 Bitter Triumph
+2 Cut Down
+2 Sonar Strike
+2 Pest Control
+4 Fabled Passage
+1 Fountainport
+2 Cavern of Souls
+3 Concealed Courtyard
+4 Caves of Koilos
+2 Shadowy Backstreet
+1 Mudflat Village
+3 Swamp
+3 Plains
+2 Restless Fortress
+[Sideboard]
+2 Destroy Evil
+2 Virtue of Persistence
+2 Aclazotz, Deepest Betrayal
+2 Liliana of the Veil
+2 Darkstar Augur
+2 Loran of the Third Path
+1 Pest Control
+2 Anoint with Affliction

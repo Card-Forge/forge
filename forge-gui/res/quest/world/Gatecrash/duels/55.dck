@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Owlman
+Title=Owlman
+Icon=Owlman.jpg
+Difficulty=Very Hard
+Description=../Modern/Gatecrash/Modern_Turniers_vom_Dienstag_den_16.04.2013/Rusch_Michael_-_Boros_(Modern,_#51006).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Ash Zealot
+4 Goblin Guide
+3 Grim Lavamancer
+4 Steppe Lynx
+4 Vexing Devil
+1 Boros Charm
+4 Lightning Bolt
+4 Lightning Helix
+4 Searing Blaze
+2 Skullcrack
+4 Lava Spike
+2 Blind Obedience
+4 Arid Mesa
+2 Blood Crypt
+2 Clifftop Retreat
+3 Marsh Flats
+3 Mountain
+3 Sacred Foundry
+4 Scalding Tarn
+[Sideboard]
+3 Blood Moon
+3 Molten Rain
+2 Pithing Needle
+2 Rakdos Charm
+1 Sword of War and Peace
+3 Volcanic Fallout

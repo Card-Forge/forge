@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=MamanBrigitte
+Title=MamanBrigitte
+Icon=MamanBrigitte.jpg
+Difficulty=Easy
+Description=Zendikar/Campeonato_Paraibano_MTG_-__Brazil/Diego_Reynaldo_-_RW_Agroo_(Standard,_#3177).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Goblin Guide
+2 Hell's Thunder
+4 Hellspark Elemental
+4 Plated Geopede
+4 Burst Lightning
+4 Lightning Bolt
+4 Earthquake
+3 Quenchable Fire
+4 Zektar Shrine Expedition
+4 Arid Mesa
+8 Mountain
+4 Naya Panorama
+1 Plains
+4 Scalding Tarn
+4 Terramorphic Expanse
+[Sideboard]
+2 Chandra Nalaar
+4 Goblin Ruinblaster
+1 Lavaball Trap
+4 Path to Exile
+4 Volcanic Fallout

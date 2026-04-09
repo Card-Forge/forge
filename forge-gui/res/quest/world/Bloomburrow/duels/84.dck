@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Isperia
+Title=Isperia
+Icon=Isperia.jpg
+Difficulty=Hard
+Description=./Modern/Bloomburrow/Mark_Fowler_-_Mono-Blue_Merfolk_(Modern,_#2227861).dck
+Deck Type=constructed
+
+[Main]
+2 Rishadan Dockhand
+4 Silvergill Adept
+4 Lord of Atlantis
+4 Master of the Pearl Trident
+4 Harbinger of the Seas
+4 Tide Shaper
+2 Mockingbird
+2 Merfolk Trickster
+1 Glasspool Mimic
+1 Svyelun of Sea and Sky
+4 Aether Vial
+4 Sink into Stupor
+3 Force of Negation
+3 Flare of Denial
+2 Spreading Seas
+3 Mutavault
+2 Otawara, Soaring City
+9 Island
+2 Cavern of Souls
+[Sideboard]
+3 Tishana's Tidebinder
+3 Subtlety
+2 Dismember
+3 Vodalian Hexcatcher
+4 Chalice of the Void

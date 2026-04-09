@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Boris Karloff
+Title=Boris Karloff
+Icon=Boris Karloff.jpg
+Difficulty=Very Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/Curtisaxel_-_Infect_(Modern,_#1079858).dck
+Deck Type=constructed
+
+[Main]
+1 Birds of Paradise
+4 Glistener Elf
+4 Noble Hierarch
+4 Phyrexian Crusader
+4 Plague Stinger
+2 Mutagenic Growth
+2 Become Immense
+3 Vines of Vastwood
+3 Blossoming Defense
+4 Might of Old Krosa
+3 Inquisition of Kozilek
+3 Scale Up
+3 Thoughtseize
+1 Urborg, Tomb of Yawgmoth
+1 Blooming Marsh
+2 Wooded Foothills
+2 Overgrown Tomb
+2 Forest
+4 Inkmoth Nexus
+4 Windswept Heath
+4 Nurturing Peatland
+[Sideboard]
+1 Force of Vigor
+2 Collective Brutality
+2 Gemrazer
+2 Grafdigger's Cage
+2 Assassin's Trophy
+3 Fatal Push
+3 Veil of Summer

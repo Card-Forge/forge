@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Scotty
+Title=Scotty
+Icon=Scotty.jpg
+Difficulty=Medium
+Description=Khans_of_Tarkir/SCG_Invitational_Qualifier_CARY/Richard_Bowles_-_G-R_Monsters_(Standard,_#107541).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Boon Satyr
+4 Elvish Mystic
+4 Goblin Rabblemaster
+4 Polukranos, World Eater
+4 Rattleclaw Mystic
+4 Stormbreath Dragon
+4 Lightning Strike
+4 Magma Jet
+4 Stoke the Flames
+8 Forest
+8 Mountain
+4 Temple of Abandon
+4 Wooded Foothills
+[Sideboard]
+3 Anger of the Gods
+2 Chandra, Pyromaster
+3 Circle of Flame
+3 Crater's Claws
+4 Destructive Revelry

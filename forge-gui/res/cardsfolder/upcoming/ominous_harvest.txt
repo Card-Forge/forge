@@ -1,0 +1,7 @@
+Name:Ominous Harvest
+ManaCost:2 B
+Types:Sorcery
+K:Gravestorm
+A:SP$ Draw | ValidTgts$ Player | SubAbility$ DBLoseLife | SpellDescription$ Target player draws a card and loses 1 life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1 | Defined$ Targeted
+Oracle:Gravestorm (When you cast this spell, copy it for each permanent put into a graveyard from the battlefield this turn.)\nTarget player draws a card and loses 1 life.

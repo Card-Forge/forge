@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Robot76
+Title=Robot76
+Icon=The Zombie.jpg
+Difficulty=Hard
+Description=Jund Energy 
+Deck Type=constructed
+
+[Main]
+3 Bristling Hydra
+4 Glint-Sleeve Siphoner
+2 Glorybringer
+4 Longtusk Cub
+2 Rishkar, Peema Renegade
+4 Walking Ballista
+4 Winding Constrictor
+3 Fatal Push
+4 Harnessed Lightning
+2 Vraska's Contempt
+4 Attune with Aether
+3 Chandra, Torch of Defiance
+4 Aether Hub
+4 Blooming Marsh
+2 Canyon Slough
+1 Dragonskull Summit
+4 Forest
+2 Mountain
+2 Rootbound Crag
+2 Swamp
+[Sideboard]
+1 Aethersphere Harvester
+2 Deathgorge Scavenger
+2 Doomfall
+3 Duress
+2 Gonti, Lord of Luxury
+2 Lost Legacy
+2 Rampaging Ferocidon
+1 Rhonas the Indomitable

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=The Great Gazoo
+Title=The Great Gazoo
+Icon=The Great Gazoo.jpg
+Difficulty=Medium
+Description=Kaladesh/Competitive_Standard_Constructed_League/cocossiste_-_WU_Aggro_(Standard,_#656054).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Decimator of the Provinces
+4 Fairgrounds Warden
+4 Selfless Spirit
+4 Sylvan Advocate
+4 Thraben Inspector
+1 Tireless Tracker
+4 Verdurous Gearhulk
+4 Smuggler's Copter
+1 Blossoming Defense
+4 Gideon, Ally of Zendikar
+4 Nissa, Voice of Zendikar
+4 Canopy Vista
+7 Forest
+4 Fortified Village
+9 Plains
+1 Westvale Abbey
+[Sideboard]
+1 Bruna, the Fading Light
+4 Fragmentize
+2 Gisela, the Broken Blade
+2 Immolating Glare
+1 Key to the City
+1 Linvala, the Preserver
+1 Sigarda, Heron's Grace
+2 Thalia, Heretic Cathar
+1 Tireless Tracker

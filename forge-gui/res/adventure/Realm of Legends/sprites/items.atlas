@@ -150,6 +150,12 @@ NobleSoul
 RoyalSoul
   xy: 256, 864
   size: 16, 16
+ColossalDreadmace
+  xy: 272, 384
+  size: 16, 16
+BattleCryBoots
+  xy: 0, 144
+  size: 16, 16
 TokenofBlades
   xy: 224, 736
   size: 16, 16
@@ -803,6 +809,12 @@ EnormousEnergyBlade
   size: 16, 16
 AngelicArmaments
   xy: 272, 368
+  size: 16, 16
+SpidersilkHelm
+  xy: 128, 400
+  size: 16, 16
+Liliana'sVeil
+  xy: 144, 320
   size: 16, 16
 Brawler'sCestus
   xy: 288, 320

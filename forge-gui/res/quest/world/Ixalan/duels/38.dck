@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Robot38
+Title=Robot38
+Icon=Bugs Bunny.jpg
+Difficulty=Medium
+Description=Sultai Energy 
+Deck Type=constructed
+
+[Main]
+4 Bristling Hydra
+4 Glint-Sleeve Siphoner
+4 Longtusk Cub
+2 Rishkar, Peema Renegade
+4 Rogue Refiner
+2 The Scarab God
+4 Walking Ballista
+4 Winding Constrictor
+3 Fatal Push
+3 Vraska's Contempt
+4 Attune with Aether
+1 Claim // Fame
+4 Aether Hub
+4 Blooming Marsh
+4 Botanical Sanctum
+3 Drowned Catacomb
+3 Forest
+1 Island
+2 Swamp
+[Sideboard]
+2 Cartouche of Ambition
+2 Confiscation Coup
+2 Deathgorge Scavenger
+4 Negate
+2 Scrapheap Scrounger
+2 Supreme Will
+1 Vraska, Relic Seeker

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Quicksilver
+Title=Quicksilver
+Icon=Quicksilver.jpg
+Difficulty=Medium
+Description=Avacyn_Restored/2012_Silver_Qualifier_-_Xtreme_Games_8-11/BrandonGress_-_Monogreen_Infect_(Standard,_#35837).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Blight Mamba
+4 Ichorclaw Myr
+3 Necropede
+1 Putrefax
+4 Signal Pest
+1 Infiltration Lens
+2 Go for the Throat
+4 Mutagenic Growth
+4 Titanic Growth
+1 Increasing Savagery
+3 Revenge of the Hunted
+4 Rancor
+3 Wild Defiance
+9 Forest
+4 Inkmoth Nexus
+7 Swamp
+4 Woodland Cemetery
+[Sideboard]
+2 Gut Shot
+3 Mental Misstep
+3 Phyrexian Crusader
+2 Ruthless Invasion

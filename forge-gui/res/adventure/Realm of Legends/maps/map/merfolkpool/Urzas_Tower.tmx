@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="128">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="129">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -70,6 +70,8 @@ With a hacking cough that stains his robes with blood, he disappears in a flash,
 	]</property>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Urza's Workshop|BRC&quot;, &quot;Urza's Bauble|ICE&quot;, &quot;Liberator, Urza's Battlethopter|BRO&quot;, &quot;Urza's Tome|DOM&quot;, &quot;Urza's Avenger|5ED&quot;  ] }"/>
     <property name="enemy" value="Urza"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="10"/>
    </properties>
@@ -391,6 +393,27 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
 }
 ]</property>
     <property name="spawn.Hard" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="128" template="../../../../common/maps/obj/enemy.tx" x="206.75" y="276.25">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;Urza stumbles back, badly wounded from your final blow.
+
+'Clearly I underestimated you. There aren't many who can defeat me, especially these days. Well, when next we meet, don't expect me to fall for your same tricks again.'
+
+With a hacking cough that stains his robes with blood, he disappears in a flash, planeswalking away.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Urza's Workshop|BRC&quot;, &quot;Urza's Bauble|ICE&quot;, &quot;Liberator, Urza's Battlethopter|BRO&quot;, &quot;Urza's Tome|DOM&quot;  ] }"/>
+    <property name="enemy" value="Urza"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="10"/>
    </properties>
   </object>
  </objectgroup>

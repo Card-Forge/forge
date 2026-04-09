@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Gunnery Sergeant Hartman
+Title=Gunnery Sergeant Hartman
+Icon=Gunnery Sergeant Hartman.jpg
+Difficulty=Medium
+Description=./Standard/Aetherdrift/Doomenstein_-_Domain_Zur_Overlords_(Standard,_#2378202).dck
+Deck Type=constructed
+
+[Main]
+4 Overlord of the Hauntwoods
+4 Overlord of the Mistmoors
+3 Zur, Eternal Schemer
+4 Get Lost
+2 Ride's End
+3 Pest Control
+1 Herd Migration
+2 Day of Judgment
+2 Sunfall
+2 Analyze the Pollen
+4 Leyline Binding
+4 Up the Beanstalk
+2 Shadowy Backstreet
+1 Plains
+2 Floodfarm Verge
+1 Island
+2 Hedge Maze
+4 Hushwood Verge
+2 Forest
+4 Lush Portico
+2 Meticulous Archive
+3 Cavern of Souls
+1 Willowrush Verge
+1 Swamp
+[Sideboard]
+2 Rest in Peace
+4 Obstinate Baloth
+1 Nissa, Ascended Animist
+1 Ghost Vacuum
+2 Elspeth's Smite
+1 Doppelgang
+2 Authority of the Consuls
+2 Riverchurn Monument

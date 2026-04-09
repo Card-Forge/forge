@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Abiku
+Title=Abiku
+Icon=Abiku.jpg
+Difficulty=Very Hard
+Description=./Modern/Theros_Beyond_Death/Cyrus_Dahm_-_Gruul_Eldrazi_(Modern,_#929072).dck
+Deck Type=constructed
+
+[Main]
+1 Klothys, God of Destiny
+2 Bonecrusher Giant
+2 Scavenging Ooze
+4 Eldrazi Obligator
+4 Matter Reshaper
+4 Noble Hierarch
+4 Reality Smasher
+4 Thought-Knot Seer
+2 Dismember
+4 Lightning Bolt
+4 Once Upon a Time
+4 Ancient Stirrings
+1 Stomping Ground
+1 Wastes
+1 Mountain
+2 Prismatic Vista
+2 Forest
+2 Cavern of Souls
+4 Grove of the Burnwillows
+4 Eldrazi Temple
+4 Karplusan Forest
+[Sideboard]
+1 Relic of Progenitus
+1 Abrade
+1 Cindervines
+1 Collector Ouphe
+1 Phyrexian Revoker
+1 Obstinate Baloth
+1 Natural State
+2 Blood Sun
+2 Kitchen Finks
+2 Damping Sphere
+2 Grafdigger's Cage
