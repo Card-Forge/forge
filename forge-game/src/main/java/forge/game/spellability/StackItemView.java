@@ -107,12 +107,16 @@ public class StackItemView extends TrackableObject implements IHasCardView {
         set(TrackableProperty.OptionalCosts, OptionalCostString);
     }
 
+    // Transient: host-only, not serialized. Populated by updateApiType; used by YieldController
+    // for mass removal detection. Not tracked via TrackableProperty since clients never read it.
+    private transient String apiTypeCache;
+
     public String getApiType() {
-        return get(TrackableProperty.ApiType);
+        return apiTypeCache;
     }
     void updateApiType(SpellAbilityStackInstance si) {
         SpellAbility sa = si.getSpellAbility();
-        set(TrackableProperty.ApiType, sa != null && sa.getApi() != null ? sa.getApi().name() : null);
+        apiTypeCache = (sa != null && sa.getApi() != null) ? sa.getApi().name() : null;
     }
 
     public boolean isTrigger() {

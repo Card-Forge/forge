@@ -11,6 +11,7 @@ import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.phase.PhaseType;
 import forge.gamemodes.match.YieldMode;
+import forge.gamemodes.match.YieldPrefs;
 import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
@@ -286,13 +287,7 @@ public interface IGuiGame {
     void updateAutoPassPrompt();
 
     // Extended yield mode methods (experimental feature)
-    boolean setYieldMode(PlayerView player, YieldMode mode);
-
-    /**
-     * Update yield mode from remote client without triggering notification.
-     * Used by server to receive yield state from network clients.
-     */
-    void setYieldModeFromRemote(PlayerView player, YieldMode mode);
+    boolean setYieldMode(PlayerView player, YieldMode mode, boolean fromRemote);
 
     /**
      * Sync yield mode from server to client.
@@ -308,7 +303,11 @@ public interface IGuiGame {
 
     void clearYieldMode(PlayerView player);
 
-    boolean shouldAutoYieldForPlayer(PlayerView player);
+    /** Store the yield-interrupt preference snapshot received from a remote client. */
+    default void setRemoteYieldPrefs(YieldPrefs prefs) {}
+
+    /** Return the yield-interrupt preference snapshot for this remote player, or null if local. */
+    default YieldPrefs getRemoteYieldPrefs() { return null; }
 
     YieldMode getYieldMode(PlayerView player);
 
@@ -335,14 +334,6 @@ public interface IGuiGame {
      * @param packet the delta packet containing changes
      */
     void applyDelta(DeltaPacket packet);
-
-    /**
-     * Look up a PlayerView by ID from the current GameView's player list.
-     * Used for network play where deserialized PlayerViews have different trackers.
-     * @param player the PlayerView to look up (uses its ID for matching)
-     * @return the matching PlayerView from GameView, or the input player if not found
-     */
-    PlayerView lookupPlayerViewById(PlayerView player);
 
     /** Signal to start a client-side elapsed timer for waiting display. */
     void showWaitingTimer(PlayerView forPlayer, String waitingForPlayerName);

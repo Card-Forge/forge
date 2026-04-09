@@ -6,7 +6,9 @@ import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.gamemodes.match.NextGameDecision;
+import forge.gamemodes.match.TriggerChoice;
 import forge.gamemodes.match.YieldMode;
+import forge.gamemodes.match.YieldPrefs;
 import forge.util.ITriggerEvent;
 
 public interface IGameController {
@@ -58,7 +60,7 @@ public interface IGameController {
      * Used for network play to sync yield state from client to server.
      * Default implementation does nothing (for local/host games).
      */
-    default void notifyYieldModeChanged(PlayerView player, YieldMode mode) {
+    default void notifyYieldStateChanged(PlayerView player, YieldMode mode, YieldPrefs prefs) {
         // Default: no-op for local games
     }
 
@@ -67,7 +69,6 @@ public interface IGameController {
 
     /**
      * Notify server that a trigger accept/decline preference changed.
-     * @param choice 1 = always accept, -1 = always decline, 0 = ask
      */
-    default void notifyTriggerChoiceChanged(int triggerId, int choice) { }
+    default void notifyTriggerChoiceChanged(int triggerId, TriggerChoice choice) { }
 }

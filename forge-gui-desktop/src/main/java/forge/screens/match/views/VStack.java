@@ -33,6 +33,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 import forge.CachedCardImage;
+import forge.gamemodes.match.TriggerChoice;
 import forge.game.GameView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.spellability.StackItemView;
@@ -306,11 +307,11 @@ public class VStack implements IVDoc<CStack> {
             jmiAlwaysYes.addActionListener(arg0 -> {
                 if (controller.getMatchUI().shouldAlwaysAcceptTrigger(triggerID)) {
                     controller.getMatchUI().setShouldAlwaysAskTrigger(triggerID);
-                    controller.getMatchUI().getGameController().notifyTriggerChoiceChanged(triggerID, 0);
+                    controller.getMatchUI().getGameController().notifyTriggerChoiceChanged(triggerID, TriggerChoice.ASK);
                 }
                 else {
                     controller.getMatchUI().setShouldAlwaysAcceptTrigger(triggerID);
-                    controller.getMatchUI().getGameController().notifyTriggerChoiceChanged(triggerID, 1);
+                    controller.getMatchUI().getGameController().notifyTriggerChoiceChanged(triggerID, TriggerChoice.ALWAYS_YES);
                 }
             });
             add(jmiAlwaysYes);
@@ -319,11 +320,11 @@ public class VStack implements IVDoc<CStack> {
             jmiAlwaysNo.addActionListener(arg0 -> {
                 if (controller.getMatchUI().shouldAlwaysDeclineTrigger(triggerID)) {
                     controller.getMatchUI().setShouldAlwaysAskTrigger(triggerID);
-                    controller.getMatchUI().getGameController().notifyTriggerChoiceChanged(triggerID, 0);
+                    controller.getMatchUI().getGameController().notifyTriggerChoiceChanged(triggerID, TriggerChoice.ASK);
                 }
                 else {
                     controller.getMatchUI().setShouldAlwaysDeclineTrigger(triggerID);
-                    controller.getMatchUI().getGameController().notifyTriggerChoiceChanged(triggerID, -1);
+                    controller.getMatchUI().getGameController().notifyTriggerChoiceChanged(triggerID, TriggerChoice.ALWAYS_NO);
                 }
             });
             add(jmiAlwaysNo);

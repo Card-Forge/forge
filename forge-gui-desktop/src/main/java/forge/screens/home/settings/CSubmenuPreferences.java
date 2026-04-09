@@ -38,6 +38,7 @@ import java.awt.event.ItemEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -156,7 +157,7 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbCardTextHideReminder(), FPref.UI_CARD_IMAGE_RENDER_HIDE_REMINDER_TEXT));
         lstControls.add(Pair.of(view.getCbOpenPacksIndiv(), FPref.UI_OPEN_PACKS_INDIV));
         lstControls.add(Pair.of(view.getCbTokensInSeparateRow(), FPref.UI_TOKENS_IN_SEPARATE_ROW));
-        lstControls.add(Pair.of(view.getCbStackCreatures(), FPref.UI_STACK_CREATURES));
+        // UI_STACK_CREATURES replaced by UI_GROUP_PERMANENTS dropdown — see initializeStackGroupPermanentsComboBox()
         lstControls.add(Pair.of(view.getCbManaLostPrompt(), FPref.UI_MANA_LOST_PROMPT));
         lstControls.add(Pair.of(view.getCbYieldExperimentalOptions(), FPref.YIELD_EXPERIMENTAL_OPTIONS));
         lstControls.add(Pair.of(view.getCbEscapeEndsTurn(), FPref.UI_ALLOW_ESC_TO_END_TURN));
@@ -230,6 +231,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeCounterDisplayTypeComboBox();
         initializeCounterDisplayLocationComboBox();
         initializeGraveyardOrderingComboBox();
+        initializeStackGroupPermanentsComboBox();
         initializePlayerNameButton();
         initializeServerPortButton();
         initializeDefaultLanguageComboBox();
@@ -584,6 +586,27 @@ public enum CSubmenuPreferences implements ICDoc {
         final FComboBox<String> comboBox = createComboBox(elems, userSetting);
         final String selectedItem = this.prefs.getPref(userSetting);
         panel.setComboBox(comboBox, selectedItem);
+    }
+
+    private void initializeStackGroupPermanentsComboBox() {
+        final Localizer localizer = Localizer.getInstance();
+        final String[] keys = {"default", "stack", "group_creatures", "group_all"};
+        final String[] labelKeys = {"lblGroupDefault", "lblGroupStack", "lblGroupCreatures", "lblGroupAll"};
+        final Map<String, String> mapping = new LinkedHashMap<>();
+        final String[] labels = new String[keys.length];
+        for (int i = 0; i < keys.length; i++) {
+            labels[i] = localizer.getMessage(labelKeys[i]);
+            mapping.put(labels[i], keys[i]);
+        }
+        final FComboBoxPanel<String> panel = this.view.getCbpStackGroupPermanents();
+        final FComboBox<String> comboBox = createLocalizedComboBox(labels, FPref.UI_GROUP_PERMANENTS, mapping);
+        final String savedValue = this.prefs.getPref(FPref.UI_GROUP_PERMANENTS);
+        final String selectedLabel = mapping.entrySet().stream()
+                .filter(e -> e.getValue().equals(savedValue))
+                .map(Map.Entry::getKey)
+                .findFirst()
+                .orElse(labels[0]);
+        panel.setComboBox(comboBox, selectedLabel);
     }
 
     private void initializeCounterDisplayTypeComboBox() {

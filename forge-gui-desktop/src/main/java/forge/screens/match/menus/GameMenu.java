@@ -218,7 +218,7 @@ public final class GameMenu {
         // Yield Settings dialog launcher (below the enable toggle)
         final SkinnedMenuItem settingsItem = new SkinnedMenuItem(localizer.getMessage("lblYieldSettings"));
         settingsItem.setEnabled(yieldEnabled);
-        settingsItem.addActionListener(e -> new VYieldSettings().showDialog());
+        settingsItem.addActionListener(e -> new VYieldSettings(matchUI).showDialog());
 
         enableItem.addActionListener(e -> {
             final boolean newState = !prefs.getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS);

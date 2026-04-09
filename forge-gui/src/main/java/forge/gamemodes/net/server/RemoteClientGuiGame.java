@@ -13,6 +13,7 @@ import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.match.YieldPrefs;
 import forge.gamemodes.net.NetworkGuiGame;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.GameEventProxy;
@@ -50,6 +51,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
     private boolean fallbackLogged = false;  // Prevent duplicate fallback log messages
     private volatile boolean paused;
     private volatile boolean resyncPending;
+    private volatile YieldPrefs remoteYieldPrefs;
 
     private GameEventForwarder forwarder;
     private boolean flushing;
@@ -68,6 +70,16 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
     @Override
     public boolean isRemoteGuiProxy() {
         return true;
+    }
+
+    @Override
+    public void setRemoteYieldPrefs(YieldPrefs prefs) {
+        remoteYieldPrefs = prefs;
+    }
+
+    @Override
+    public YieldPrefs getRemoteYieldPrefs() {
+        return remoteYieldPrefs;
     }
 
     public void pause() {

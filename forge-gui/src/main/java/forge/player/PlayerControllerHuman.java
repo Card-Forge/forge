@@ -146,11 +146,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return mayLookAtAllCards;
     }
 
-    @Override
-    public boolean shouldTrackAvailableActions() {
-        return FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS);
-    }
-
     private final ArrayList<Card> tempShownCards = new ArrayList<>();
 
     public <T> void tempShow(final Iterable<T> objects) {
@@ -3514,11 +3509,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public void notifyYieldModeChanged(final PlayerView playerView, final forge.gamemodes.match.YieldMode mode) {
-        // Update the server's GUI with the client's yield mode
-        // This syncs yield state from network client to server
-        // Uses FromRemote methods to avoid triggering another notification and to handle
-        // PlayerView tracker mismatch (network PlayerViews have different trackers than server's)
+    public void notifyYieldStateChanged(final PlayerView playerView, final forge.gamemodes.match.YieldMode mode,
+            final forge.gamemodes.match.YieldPrefs prefs) {
+        // Update the server's GUI with the client's yield mode.
+        // prefs snapshot is stored on the RemoteClientGuiGame proxy so the host's
+        // YieldController can read the remote player's interrupt preferences.
+        getGui().setRemoteYieldPrefs(prefs);
 
         // If clearing yield, always pass through
         if (mode != null && mode != forge.gamemodes.match.YieldMode.NONE && !isYieldExperimentalEnabled()) {
@@ -3540,7 +3536,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
         }
 
-        getGui().setYieldModeFromRemote(playerView, mode);
+        getGui().setYieldMode(playerView, mode, true);
     }
 
     private boolean isYieldExperimentalEnabled() {
@@ -3553,13 +3549,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public void notifyTriggerChoiceChanged(int triggerId, int choice) {
-        if (choice > 0) {
-            getGui().setShouldAlwaysAcceptTrigger(triggerId);
-        } else if (choice < 0) {
-            getGui().setShouldAlwaysDeclineTrigger(triggerId);
-        } else {
-            getGui().setShouldAlwaysAskTrigger(triggerId);
+    public void notifyTriggerChoiceChanged(int triggerId, forge.gamemodes.match.TriggerChoice choice) {
+        switch (choice) {
+            case ALWAYS_YES: getGui().setShouldAlwaysAcceptTrigger(triggerId); break;
+            case ALWAYS_NO:  getGui().setShouldAlwaysDeclineTrigger(triggerId); break;
+            default:         getGui().setShouldAlwaysAskTrigger(triggerId); break;
         }
     }
 

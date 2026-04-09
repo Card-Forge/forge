@@ -9,6 +9,7 @@ import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.game.GameEntityView;
+import forge.game.GameView;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CounterType;
@@ -44,6 +45,24 @@ public class PlayerView extends GameEntityView {
             collection.add(p.getView());
         }
         return collection;
+    }
+
+    /**
+     * Look up a PlayerView by ID from the given GameView's player list. Used for
+     * network play where deserialized PlayerViews have different trackers than
+     * the host's GameView. Falls back to the input PlayerView if no match is
+     * found, or if the GameView is null.
+     */
+    public static PlayerView findById(GameView gv, PlayerView player) {
+        if (player == null) return null;
+        if (gv == null) return player;
+        int id = player.getId();
+        for (PlayerView pv : gv.getPlayers()) {
+            if (pv.getId() == id) {
+                return pv;
+            }
+        }
+        return player;
     }
 
     public PlayerView(final int id0, final Tracker tracker) {
@@ -532,9 +551,12 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.Mana, mana);
     }
 
+    // Server-only cache populated by updateHasAvailableActions. Transient because
+    // YieldController only runs on the host — no client reads this, so it must not cross the wire.
+    private transient boolean hasAvailableActionsCache;
+
     public boolean hasAvailableActions() {
-        Boolean val = get(TrackableProperty.HasAvailableActions);
-        return val != null && val;
+        return hasAvailableActionsCache;
     }
 
     // Cache version: skip expensive scan when game state hasn't changed
@@ -569,11 +591,11 @@ public class PlayerView extends GameEntityView {
             for (SpellAbility sa : card.getAllPossibleAbilities(p, true)) {
                 if (sa.isSpell()) {
                     if (canAffordMana.test(sa) && hasValidTargets(sa)) {
-                        set(TrackableProperty.HasAvailableActions, true);
+                        hasAvailableActionsCache = true;
                         return;
                     }
                 } else if (sa.isLandAbility()) {
-                    set(TrackableProperty.HasAvailableActions, true);
+                    hasAvailableActionsCache = true;
                     return;
                 }
             }
@@ -584,7 +606,7 @@ public class PlayerView extends GameEntityView {
             for (SpellAbility sa : card.getAllPossibleAbilities(p, true)) {
                 if (!sa.isManaAbility()) {
                     if (canAffordMana.test(sa) && hasValidTargets(sa)) {
-                        set(TrackableProperty.HasAvailableActions, true);
+                        hasAvailableActionsCache = true;
                         return;
                     }
                 }
@@ -597,7 +619,7 @@ public class PlayerView extends GameEntityView {
                 for (SpellAbility sa : card.getAllPossibleAbilities(p, true)) {
                     if (!sa.isManaAbility()) {
                         if (canAffordMana.test(sa) && hasValidTargets(sa)) {
-                            set(TrackableProperty.HasAvailableActions, true);
+                            hasAvailableActionsCache = true;
                             return;
                         }
                     }
@@ -605,7 +627,7 @@ public class PlayerView extends GameEntityView {
             }
         }
 
-        set(TrackableProperty.HasAvailableActions, false);
+        hasAvailableActionsCache = false;
     }
 
     /**
@@ -616,37 +638,6 @@ public class PlayerView extends GameEntityView {
             return true;
         }
         return sa.getTargetRestrictions().hasCandidates(sa);
-    }
-
-    /**
-     * Check if player has any mana available (floating or from untapped mana sources).
-     * Used by yield suggestion system to determine if player can cast spells.
-     */
-    public boolean hasManaAvailable() {
-        // Check floating mana
-        for (byte manaType : ManaAtom.MANATYPES) {
-            if (getMana(manaType) > 0) return true;
-        }
-
-        // Check for untapped mana sources (lands, rocks, dorks)
-        FCollectionView<CardView> battlefield = getBattlefield();
-        if (battlefield != null) {
-            for (CardView cv : battlefield) {
-                if (!cv.isTapped() && cv.getCurrentState().origProduceMana() != null) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    public boolean willLoseManaAtEndOfPhase() {
-        Boolean val = get(TrackableProperty.WillLoseManaAtEndOfPhase);
-        return val != null && val;
-    }
-    void updateWillLoseManaAtEndOfPhase(Player p) {
-        set(TrackableProperty.WillLoseManaAtEndOfPhase, p.getManaPool().willManaBeLostAtEndOfPhase());
     }
 
     private List<String> getDetailsList() {

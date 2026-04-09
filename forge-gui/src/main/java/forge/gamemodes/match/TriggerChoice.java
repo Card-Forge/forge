@@ -18,26 +18,14 @@
 package forge.gamemodes.match;
 
 /**
- * Yield modes for extended auto-pass functionality.
- * Used when experimental yield options are enabled.
+ * Per-trigger user choice for optional triggered abilities. Carried over the
+ * wire by {@code IGameController.notifyTriggerChoiceChanged}.
  */
-public enum YieldMode {
-    NONE("No auto-yield"),
-    UNTIL_NEXT_PHASE("Next Phase"),
-    UNTIL_STACK_CLEARS("Clear Stack"),
-    UNTIL_END_OF_TURN("Next Turn"),
-    UNTIL_YOUR_NEXT_TURN("Your Turn"),
-    UNTIL_BEFORE_COMBAT("Combat"),
-    UNTIL_END_STEP("End Step"),
-    UNTIL_END_STEP_BEFORE_YOUR_TURN("Before Your Turn");
-
-    private final String description;
-
-    YieldMode(String description) {
-        this.description = description;
-    }
-
-    public String getDescription() {
-        return description;
-    }
+public enum TriggerChoice {
+    /** Ask the user every time. */
+    ASK,
+    /** Always accept the trigger automatically. */
+    ALWAYS_YES,
+    /** Always decline the trigger automatically. */
+    ALWAYS_NO
 }

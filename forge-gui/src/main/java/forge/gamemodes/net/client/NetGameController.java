@@ -5,7 +5,9 @@ import forge.game.player.PlayerView;
 import forge.game.player.actions.PlayerAction;
 import forge.game.spellability.SpellAbilityView;
 import forge.gamemodes.match.NextGameDecision;
+import forge.gamemodes.match.TriggerChoice;
 import forge.gamemodes.match.YieldMode;
+import forge.gamemodes.match.YieldPrefs;
 import forge.gamemodes.net.GameProtocolSender;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.interfaces.IDevModeCheats;
@@ -163,8 +165,8 @@ public class NetGameController implements IGameController {
     }
 
     @Override
-    public void notifyYieldModeChanged(PlayerView player, YieldMode mode) {
-        send(ProtocolMethod.notifyYieldModeChanged, player, mode);
+    public void notifyYieldStateChanged(PlayerView player, YieldMode mode, YieldPrefs prefs) {
+        send(ProtocolMethod.notifyYieldStateChanged, player, mode, prefs);
     }
 
     @Override
@@ -173,7 +175,7 @@ public class NetGameController implements IGameController {
     }
 
     @Override
-    public void notifyTriggerChoiceChanged(int triggerId, int choice) {
+    public void notifyTriggerChoiceChanged(int triggerId, TriggerChoice choice) {
         send(ProtocolMethod.notifyTriggerChoiceChanged, triggerId, choice);
     }
 }

@@ -68,6 +68,7 @@ import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.net.IHasNetLog;
 import forge.gamemodes.net.NetworkGuiGame;
+import forge.interfaces.IGameController;
 import forge.gui.FNetOverlay;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -431,8 +432,10 @@ public final class CMatchUI
         cCombat.setModel(combat);
         cCombat.update();
         // Combat pairings changed — rebuild layout so grouping reflects them
-        for (final VField f : getFieldViews()) {
-            f.getTabletop().doLayout();
+        if (!"default".equals(FModel.getPreferences().getPref(FPref.UI_GROUP_PERMANENTS))) {
+            for (final VField f : getFieldViews()) {
+                f.getTabletop().doLayout();
+            }
         }
     } // showCombat(CombatView)
 
@@ -1161,6 +1164,17 @@ public final class CMatchUI
             FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkinProp.BG_MATCH), true);
         else
             FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage((Image)null);
+
+        // If we're a network client, send our initial yield-prefs snapshot to the
+        // host so it can evaluate interrupts on our behalf with our actual prefs.
+        if (myPlayers != null && !myPlayers.isEmpty()) {
+            final IGameController controller = getGameController();
+            if (controller instanceof forge.gamemodes.net.client.NetGameController) {
+                controller.notifyYieldStateChanged(myPlayers.get(0),
+                    forge.gamemodes.match.YieldMode.NONE,
+                    forge.gamemodes.match.YieldPrefs.fromCurrentPreferences());
+            }
+        }
     }
 
     /**

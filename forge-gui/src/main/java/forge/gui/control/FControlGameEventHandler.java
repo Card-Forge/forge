@@ -196,7 +196,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         PlayerView ap = ev.playerTurn();
         boolean refreshField = ap.getCards(ZoneType.Battlefield) != null &&
                 (ap.getCards(ZoneType.Battlefield).anyMatch(CardView::isToken)
-                || (FModel.getPreferences().getPrefBoolean(FPref.UI_STACK_CREATURES) && ap.getCards(ZoneType.Battlefield).anyMatch(c -> c.getCurrentState().isCreature())));
+                || (!"default".equals(FModel.getPreferences().getPref(FPref.UI_GROUP_PERMANENTS)) && ap.getCards(ZoneType.Battlefield).anyMatch(c -> c.getCurrentState().isCreature())));
         if (refreshField) {
             updateZone(ap, ZoneType.Battlefield);
         }

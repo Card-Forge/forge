@@ -10,7 +10,9 @@ import forge.game.player.DelayedReveal;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.gamemodes.match.NextGameDecision;
+import forge.gamemodes.match.TriggerChoice;
 import forge.gamemodes.match.YieldMode;
+import forge.gamemodes.match.YieldPrefs;
 import forge.gui.GuiBase;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.IGameController;
@@ -98,9 +100,9 @@ public enum ProtocolMethod {
     concede                   (Mode.CLIENT, Void.TYPE),
     alphaStrike               (Mode.CLIENT, Void.TYPE),
     reorderHand               (Mode.CLIENT, Void.TYPE, CardView.class, Integer.TYPE),
-    notifyYieldModeChanged    (Mode.CLIENT, Void.TYPE, PlayerView.class, YieldMode.class),
+    notifyYieldStateChanged   (Mode.CLIENT, Void.TYPE, PlayerView.class, YieldMode.class, YieldPrefs.class),
     notifyAutoYieldChanged    (Mode.CLIENT, Void.TYPE, String.class, Boolean.TYPE),
-    notifyTriggerChoiceChanged(Mode.CLIENT, Void.TYPE, Integer.TYPE, Integer.TYPE),
+    notifyTriggerChoiceChanged(Mode.CLIENT, Void.TYPE, Integer.TYPE, TriggerChoice.class),
     requestResync             (Mode.CLIENT, Void.TYPE);
 
     private enum Mode {

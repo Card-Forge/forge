@@ -76,11 +76,11 @@ public class CYield implements ICDoc {
         initButton(view.getBtnClearStack(), actClearStack);
         initButton(view.getBtnCombat(), actCombat);
         initButton(view.getBtnEndStep(), actEndStep);
-        initButton(view.getBtnEndStepBeforeYourTurn(), actEndStepBeforeYourTurn);
+        initButton(view.getBtnBeforeYourTurn(), actEndStepBeforeYourTurn);
         initButton(view.getBtnEndTurn(), actEndTurn);
         initButton(view.getBtnYourTurn(), actYourTurn);
         initButton(view.getBtnAutoPass(), actAutoPass);
-        initButton(view.getBtnSettings(), evt -> new VYieldSettings().showDialog());
+        initButton(view.getBtnSettings(), evt -> new VYieldSettings(matchUI).showDialog());
 
         // Set initial button state
         updateYieldButtons();
@@ -106,7 +106,7 @@ public class CYield implements ICDoc {
         if (matchUI.getYieldMode(player) == mode) {
             matchUI.clearYieldMode(player);
         } else {
-            boolean activated = matchUI.setYieldMode(player, mode);
+            boolean activated = matchUI.setYieldMode(player, mode, false);
             if (activated && matchUI.getGameController() != null) {
                 matchUI.getGameController().selectButtonOk();
             }
@@ -177,7 +177,7 @@ public class CYield implements ICDoc {
         view.getBtnNextPhase().setEnabled(canYield);
         view.getBtnCombat().setEnabled(canYield);
         view.getBtnEndStep().setEnabled(canYield);
-        view.getBtnEndStepBeforeYourTurn().setEnabled(canYield);
+        view.getBtnBeforeYourTurn().setEnabled(canYield);
         view.getBtnEndTurn().setEnabled(canYield);
         view.getBtnYourTurn().setEnabled(canYield);
         view.getBtnClearStack().setEnabled(canYield);
@@ -207,7 +207,7 @@ public class CYield implements ICDoc {
         view.getBtnClearStack().setHighlighted(currentMode == YieldMode.UNTIL_STACK_CLEARS);
         view.getBtnCombat().setHighlighted(currentMode == YieldMode.UNTIL_BEFORE_COMBAT);
         view.getBtnEndStep().setHighlighted(currentMode == YieldMode.UNTIL_END_STEP);
-        view.getBtnEndStepBeforeYourTurn().setHighlighted(currentMode == YieldMode.UNTIL_END_STEP_BEFORE_YOUR_TURN);
+        view.getBtnBeforeYourTurn().setHighlighted(currentMode == YieldMode.UNTIL_END_STEP_BEFORE_YOUR_TURN);
         view.getBtnEndTurn().setHighlighted(currentMode == YieldMode.UNTIL_END_OF_TURN);
         view.getBtnYourTurn().setHighlighted(currentMode == YieldMode.UNTIL_YOUR_NEXT_TURN);
 
