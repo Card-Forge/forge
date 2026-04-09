@@ -147,11 +147,9 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         // Experimental yield options (feature-gated)
         YIELD_EXPERIMENTAL_OPTIONS("false"),
         YIELD_INTERRUPT_ON_ATTACKERS("true"),
-        YIELD_INTERRUPT_ON_BLOCKERS("true"),
         YIELD_INTERRUPT_ON_TARGETING("true"),
         YIELD_INTERRUPT_ON_OPPONENT_SPELL("false"),
         YIELD_INTERRUPT_ON_TRIGGERS("false"),  // When triggered abilities on stack
-        YIELD_INTERRUPT_ON_COMBAT("false"),
         YIELD_INTERRUPT_ON_REVEAL("false"),   // When opponent reveals cards
         YIELD_INTERRUPT_ON_MASS_REMOVAL("true"),  // When mass removal spell cast
         YIELD_SUPPRESS_ON_OWN_TURN("true"),  // Suppress suggestions on player's own turn

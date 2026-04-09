@@ -1490,15 +1490,17 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public void declareAttackers(final Player attackingPlayer, final Combat combat) {
         if (mayAutoPass()) {
-            // canAttack catches eligible attackers (e.g. haste creatures) that
-            // validateAttackers misses on an empty combat object
-            if (!CombatUtil.canAttack(attackingPlayer) && CombatUtil.validateAttackers(combat)) {
+            if (isAutoPassingNoActions()) {
+                // Don't cancel — APINA resumes on subsequent priority passes
+                if (!CombatUtil.canAttack(attackingPlayer)) {
+                    return;
+                }
+            } else {
+                // Yield mode (EOT, next turn, etc.) — intentionally skip attackers
                 return;
             }
-            autoPassCancel();
         }
 
-        // This input should not modify combat object itself, but should return user choice
         final InputAttack inpAttack = new InputAttack(this, attackingPlayer, combat);
         inpAttack.showAndWait();
     }
@@ -3400,6 +3402,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         yieldJustEndedFlag = wasAutoPassingLastPriority && !result;
         wasAutoPassingLastPriority = result;
         return result;
+    }
+
+    public boolean isAutoPassingNoActions() {
+        return getGui().isAutoPassingNoActions(getLocalPlayerView());
     }
 
     public boolean didYieldJustEnd() {

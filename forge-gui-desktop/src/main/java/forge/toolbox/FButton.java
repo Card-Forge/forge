@@ -152,16 +152,13 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
     }
 
     private void resetImg() {
-        if (hovered) {
-            imgL = FSkin.getIcon(FSkinProp.IMG_BTN_OVER_LEFT);
-            imgM = FSkin.getIcon(FSkinProp.IMG_BTN_OVER_CENTER);
-            imgR = FSkin.getIcon(FSkinProp.IMG_BTN_OVER_RIGHT);
-        }
-        else if (useHighlightMode) {
-            // Highlight mode for yield buttons:
-            // - highlighted=true: UP images (red/orange) for active yield
-            // - highlighted=false: FOCUS images (blue) for normal state
-            if (highlighted) {
+        if (useHighlightMode) {
+            // Stale hovered flag can persist across tab switches and window focus changes
+            if (hovered) {
+                imgL = FSkin.getIcon(FSkinProp.IMG_BTN_OVER_LEFT);
+                imgM = FSkin.getIcon(FSkinProp.IMG_BTN_OVER_CENTER);
+                imgR = FSkin.getIcon(FSkinProp.IMG_BTN_OVER_RIGHT);
+            } else if (highlighted) {
                 imgL = FSkin.getIcon(FSkinProp.IMG_BTN_UP_LEFT);
                 imgM = FSkin.getIcon(FSkinProp.IMG_BTN_UP_CENTER);
                 imgR = FSkin.getIcon(FSkinProp.IMG_BTN_UP_RIGHT);
@@ -170,6 +167,12 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
                 imgM = FSkin.getIcon(FSkinProp.IMG_BTN_FOCUS_CENTER);
                 imgR = FSkin.getIcon(FSkinProp.IMG_BTN_FOCUS_RIGHT);
             }
+            return;
+        }
+        if (hovered) {
+            imgL = FSkin.getIcon(FSkinProp.IMG_BTN_OVER_LEFT);
+            imgM = FSkin.getIcon(FSkinProp.IMG_BTN_OVER_CENTER);
+            imgR = FSkin.getIcon(FSkinProp.IMG_BTN_OVER_RIGHT);
         }
         else if (isFocusOwner()) {
             imgL = FSkin.getIcon(FSkinProp.IMG_BTN_FOCUS_LEFT);
@@ -260,6 +263,7 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
      */
     public void setHighlighted(final boolean b0) {
         this.highlighted = b0;
+        this.hovered = false;
         if (isEnabled() && !isToggled()) {
             resetImg();
             repaintSelf();

@@ -42,27 +42,23 @@ public final class YieldPrefs implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private final boolean onAttackers;
-    private final boolean onBlockers;
     private final boolean onTargeting;
     private final boolean onOpponentSpell;
     private final boolean onTriggers;
-    private final boolean onCombat;
     private final boolean onReveal;
     private final boolean onMassRemoval;
     private final boolean autoPassNoActions;
     private final String stackYieldScope;
     private final String noActionsScope;
 
-    private YieldPrefs(boolean onAttackers, boolean onBlockers, boolean onTargeting,
-                       boolean onOpponentSpell, boolean onTriggers, boolean onCombat,
+    private YieldPrefs(boolean onAttackers, boolean onTargeting,
+                       boolean onOpponentSpell, boolean onTriggers,
                        boolean onReveal, boolean onMassRemoval, boolean autoPassNoActions,
                        String stackYieldScope, String noActionsScope) {
         this.onAttackers = onAttackers;
-        this.onBlockers = onBlockers;
         this.onTargeting = onTargeting;
         this.onOpponentSpell = onOpponentSpell;
         this.onTriggers = onTriggers;
-        this.onCombat = onCombat;
         this.onReveal = onReveal;
         this.onMassRemoval = onMassRemoval;
         this.autoPassNoActions = autoPassNoActions;
@@ -78,11 +74,9 @@ public final class YieldPrefs implements Serializable {
         ForgePreferences prefs = FModel.getPreferences();
         return new YieldPrefs(
             prefs.getPrefBoolean(FPref.YIELD_INTERRUPT_ON_ATTACKERS),
-            prefs.getPrefBoolean(FPref.YIELD_INTERRUPT_ON_BLOCKERS),
             prefs.getPrefBoolean(FPref.YIELD_INTERRUPT_ON_TARGETING),
             prefs.getPrefBoolean(FPref.YIELD_INTERRUPT_ON_OPPONENT_SPELL),
             prefs.getPrefBoolean(FPref.YIELD_INTERRUPT_ON_TRIGGERS),
-            prefs.getPrefBoolean(FPref.YIELD_INTERRUPT_ON_COMBAT),
             prefs.getPrefBoolean(FPref.YIELD_INTERRUPT_ON_REVEAL),
             prefs.getPrefBoolean(FPref.YIELD_INTERRUPT_ON_MASS_REMOVAL),
             prefs.getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS),
@@ -98,11 +92,9 @@ public final class YieldPrefs implements Serializable {
     public boolean getInterrupt(FPref pref) {
         return switch (pref) {
             case YIELD_INTERRUPT_ON_ATTACKERS -> onAttackers;
-            case YIELD_INTERRUPT_ON_BLOCKERS -> onBlockers;
             case YIELD_INTERRUPT_ON_TARGETING -> onTargeting;
             case YIELD_INTERRUPT_ON_OPPONENT_SPELL -> onOpponentSpell;
             case YIELD_INTERRUPT_ON_TRIGGERS -> onTriggers;
-            case YIELD_INTERRUPT_ON_COMBAT -> onCombat;
             case YIELD_INTERRUPT_ON_REVEAL -> onReveal;
             case YIELD_INTERRUPT_ON_MASS_REMOVAL -> onMassRemoval;
             case YIELD_AUTO_PASS_NO_ACTIONS -> autoPassNoActions;

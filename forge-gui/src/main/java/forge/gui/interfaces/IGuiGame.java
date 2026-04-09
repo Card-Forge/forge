@@ -273,6 +273,8 @@ public interface IGuiGame {
 
     boolean mayAutoPass(PlayerView player);
 
+    boolean isAutoPassingNoActions(PlayerView player);
+
     /** Returns true if this GUI is a server-side proxy for a remote player. */
     default boolean isRemoteGuiProxy() { return false; }
 
