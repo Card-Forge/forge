@@ -39,7 +39,6 @@ public class StackItemView extends TrackableObject implements IHasCardView {
         updateOptionalTrigger(si);
         updateSubInstance(si);
         updateOptionalCost(si);
-        updateApiType(si);
     }
 
     public String getKey() {
@@ -96,14 +95,6 @@ public class StackItemView extends TrackableObject implements IHasCardView {
                 OptionalCostString += OptionalCostString.isEmpty() ? "Additional" : ", Additional";
         }
         set(TrackableProperty.OptionalCosts, OptionalCostString);
-    }
-
-    public String getApiType() {
-        return get(TrackableProperty.ApiType);
-    }
-    void updateApiType(SpellAbilityStackInstance si) {
-        SpellAbility sa = si.getSpellAbility();
-        set(TrackableProperty.ApiType, sa != null && sa.getApi() != null ? sa.getApi().name() : null);
     }
 
     public boolean isTrigger() {

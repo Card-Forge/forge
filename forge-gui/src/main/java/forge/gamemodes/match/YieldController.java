@@ -46,18 +46,42 @@ public class YieldController {
     private final Set<PlayerView> autoPassUntilEndOfTurn = Sets.newConcurrentHashSet();
 
     /**
-     * Consolidated yield state for a player.
-     * Tracks mode and all mode-specific timing data.
+     * Consolidated yield state for a player. Immutable so that ConcurrentHashMap
+     * publication of the value reference is sufficient — readers on the game thread
+     * see a consistent snapshot even when writers on the Netty thread replace the
+     * map entry via setYieldModeSilent.
      */
-    private static class YieldState {
-        YieldMode mode;
-        Integer startTurn;                          // For UNTIL_END_OF_TURN, UNTIL_BEFORE_COMBAT, UNTIL_END_STEP
-        Boolean startedAtOrAfterPhase;              // For UNTIL_BEFORE_COMBAT and UNTIL_END_STEP
-        forge.game.phase.PhaseType startPhase;      // For UNTIL_NEXT_PHASE
-        Boolean startedDuringOurTurn;               // For UNTIL_YOUR_NEXT_TURN
+    private static final class YieldState {
+        final YieldMode mode;
+        final Integer startTurn;                          // For UNTIL_END_OF_TURN, UNTIL_BEFORE_COMBAT, UNTIL_END_STEP
+        final Boolean startedAtOrAfterPhase;              // For UNTIL_BEFORE_COMBAT and UNTIL_END_STEP
+        final forge.game.phase.PhaseType startPhase;      // For UNTIL_NEXT_PHASE
+        final Boolean startedDuringOurTurn;               // For UNTIL_YOUR_NEXT_TURN
 
-        YieldState(YieldMode mode) {
+        private YieldState(YieldMode mode, Integer startTurn, Boolean startedAtOrAfterPhase,
+                           forge.game.phase.PhaseType startPhase, Boolean startedDuringOurTurn) {
             this.mode = mode;
+            this.startTurn = startTurn;
+            this.startedAtOrAfterPhase = startedAtOrAfterPhase;
+            this.startPhase = startPhase;
+            this.startedDuringOurTurn = startedDuringOurTurn;
+        }
+
+        static YieldState of(YieldMode mode) {
+            return new YieldState(mode, null, null, null, null);
+        }
+
+        YieldState withStartTurn(Integer v) {
+            return new YieldState(mode, v, startedAtOrAfterPhase, startPhase, startedDuringOurTurn);
+        }
+        YieldState withStartedAtOrAfterPhase(Boolean v) {
+            return new YieldState(mode, startTurn, v, startPhase, startedDuringOurTurn);
+        }
+        YieldState withStartPhase(forge.game.phase.PhaseType v) {
+            return new YieldState(mode, startTurn, startedAtOrAfterPhase, v, startedDuringOurTurn);
+        }
+        YieldState withStartedDuringOurTurn(Boolean v) {
+            return new YieldState(mode, startTurn, startedAtOrAfterPhase, startPhase, v);
         }
     }
 
@@ -214,12 +238,10 @@ public class YieldController {
         // (legacy check in shouldAutoYieldForPlayer runs first and would override experimental mode)
         autoPassUntilEndOfTurn.remove(player);
 
-        YieldState state = new YieldState(mode);
-        yieldStates.put(player, state);
-
-        // Use network-safe GameView properties instead of gameView.getGame()
-        // This ensures proper operation for non-host players in multiplayer
+        // If gameView is unavailable at set time, fall back to a bare state — the lazy-init
+        // paths in shouldAutoYieldForPlayer will populate the timing fields on the next pass.
         if (gameView == null) {
+            yieldStates.put(player, YieldState.of(mode));
             return true;
         }
 
@@ -227,28 +249,21 @@ public class YieldController {
         int currentTurn = gameView.getTurn();
         PlayerView currentPlayerTurn = gameView.getPlayerTurn();
 
-        // Track mode-specific state
-        switch (mode) {
-            case UNTIL_NEXT_PHASE:
-                state.startPhase = phase;
-                break;
-            case UNTIL_END_OF_TURN:
-                state.startTurn = currentTurn;
-                break;
-            case UNTIL_BEFORE_COMBAT:
-                state.startTurn = currentTurn;
-                state.startedAtOrAfterPhase = isAtOrAfterCombat(phase);
-                break;
-            case UNTIL_END_STEP:
-                state.startTurn = currentTurn;
-                state.startedAtOrAfterPhase = isAtOrAfterEndStep(phase);
-                break;
-            case UNTIL_YOUR_NEXT_TURN:
-                state.startedDuringOurTurn = currentPlayerTurn != null && currentPlayerTurn.equals(player);
-                break;
-            default:
-                break;
-        }
+        // Build the initial state for this mode
+        YieldState state = switch (mode) {
+            case UNTIL_NEXT_PHASE -> YieldState.of(mode).withStartPhase(phase);
+            case UNTIL_END_OF_TURN -> YieldState.of(mode).withStartTurn(currentTurn);
+            case UNTIL_BEFORE_COMBAT -> YieldState.of(mode)
+                .withStartTurn(currentTurn)
+                .withStartedAtOrAfterPhase(isAtOrAfterCombat(phase));
+            case UNTIL_END_STEP -> YieldState.of(mode)
+                .withStartTurn(currentTurn)
+                .withStartedAtOrAfterPhase(isAtOrAfterEndStep(phase));
+            case UNTIL_YOUR_NEXT_TURN -> YieldState.of(mode)
+                .withStartedDuringOurTurn(currentPlayerTurn != null && currentPlayerTurn.equals(player));
+            default -> YieldState.of(mode);
+        };
+        yieldStates.put(player, state);
         return true;
     }
 
@@ -281,7 +296,7 @@ public class YieldController {
         // Clear legacy auto-pass to prevent interference
         autoPassUntilEndOfTurn.remove(player);
         // Just set the mode - detailed tracking is managed by server
-        yieldStates.put(player, new YieldState(mode));
+        yieldStates.put(player, YieldState.of(mode));
     }
 
     /**
@@ -348,7 +363,7 @@ public class YieldController {
                     // Set it now, but only continue if we're in a "starting" phase.
                     // If we appear to be past the starting point (e.g., in M2 when we
                     // probably started in M1), end the yield to avoid skipping too far.
-                    state.startPhase = currentPhase;
+                    yieldStates.put(player, state.withStartPhase(currentPhase));
 
                     // Safety check: if this is the second main phase and we just set
                     // startPhase, we likely missed our stop point due to timing
@@ -377,7 +392,7 @@ public class YieldController {
                 // Yield until end of the turn when yield was set - clear when turn number changes
                 if (state.startTurn == null) {
                     // Turn wasn't tracked when yield was set - track it now
-                    state.startTurn = currentTurn;
+                    yieldStates.put(player, state.withStartTurn(currentTurn));
                     yield true;
                 }
                 if (currentTurn > state.startTurn) {
@@ -392,7 +407,8 @@ public class YieldController {
 
                 if (state.startedDuringOurTurn == null) {
                     // Tracking wasn't set - initialize it now
-                    state.startedDuringOurTurn = isOurTurn;
+                    state = state.withStartedDuringOurTurn(isOurTurn);
+                    yieldStates.put(player, state);
                 }
 
                 if (isOurTurn) {
@@ -407,7 +423,7 @@ public class YieldController {
                     // Not our turn - if we started during our turn, mark that we've left it
                     if (Boolean.TRUE.equals(state.startedDuringOurTurn)) {
                         // We've left our turn, now waiting for it to come back
-                        state.startedDuringOurTurn = false;
+                        yieldStates.put(player, state.withStartedDuringOurTurn(false));
                     }
                 }
                 yield true;
@@ -415,8 +431,9 @@ public class YieldController {
             case UNTIL_BEFORE_COMBAT -> {
                 if (state.startTurn == null) {
                     // Tracking wasn't set - initialize it now
-                    state.startTurn = currentTurn;
-                    state.startedAtOrAfterPhase = isAtOrAfterCombat(currentPhase);
+                    state = state.withStartTurn(currentTurn)
+                                 .withStartedAtOrAfterPhase(isAtOrAfterCombat(currentPhase));
+                    yieldStates.put(player, state);
                 }
 
                 // Check if we should stop: we're at or past combat on a DIFFERENT turn than when we started,
@@ -435,8 +452,9 @@ public class YieldController {
             case UNTIL_END_STEP -> {
                 if (state.startTurn == null) {
                     // Tracking wasn't set - initialize it now
-                    state.startTurn = currentTurn;
-                    state.startedAtOrAfterPhase = isAtOrAfterEndStep(currentPhase);
+                    state = state.withStartTurn(currentTurn)
+                                 .withStartedAtOrAfterPhase(isAtOrAfterEndStep(currentPhase));
+                    yieldStates.put(player, state);
                 }
 
                 // Check if we should stop: we're at or past end step on a DIFFERENT turn than when we started,
@@ -525,7 +543,6 @@ public class YieldController {
         }
 
         if (prefs.getPrefBoolean(ForgePreferences.FPref.YIELD_INTERRUPT_ON_MASS_REMOVAL)) {
-            // Use network-safe StackItemView.getApiType() for mass removal detection
             if (hasMassRemovalOnStack(gameView, player)) {
                 return true;
             }
@@ -611,25 +628,20 @@ public class YieldController {
 
     /**
      * Check if there's a mass removal spell on the stack that could affect the player's permanents.
-     * Uses network-safe StackItemView.getApiType() for detection.
-     * Only interrupts if the spell was cast by an opponent.
+     * Walks the live engine stack via gameView.getGame() — YieldController only ever runs on
+     * the host process, where gameView.getGame() is non-null. Only interrupts for opponent spells.
      */
     private boolean hasMassRemovalOnStack(GameView gameView, PlayerView player) {
-        forge.util.collect.FCollectionView<forge.game.spellability.StackItemView> stack = gameView.getStack();
-        if (stack == null || stack.isEmpty()) {
-            return false;
+        forge.game.Game game = gameView.getGame();
+        if (game == null) {
+            return false; // host-only path; defensive
         }
-
-        for (forge.game.spellability.StackItemView si : stack) {
-            PlayerView activatingPlayer = si.getActivatingPlayer();
-
-            // Only interrupt for opponent's spells
-            if (activatingPlayer == null || activatingPlayer.equals(player)) {
+        for (forge.game.spellability.SpellAbilityStackInstance si : game.getStack()) {
+            forge.game.player.Player activator = si.getActivatingPlayer();
+            if (activator == null || activator.getView().equals(player)) {
                 continue;
             }
-
-            // Check if this is a mass removal spell type (including sub-instances)
-            if (isMassRemovalStackItem(si)) {
+            if (isMassRemovalInstance(si)) {
                 return true;
             }
         }
@@ -637,40 +649,34 @@ public class YieldController {
     }
 
     /**
-     * Determine if a stack item is a mass removal effect.
+     * Determine if a stack instance is a mass removal effect.
      * Recursively checks sub-instances for modal spells like Farewell.
      */
-    private boolean isMassRemovalStackItem(forge.game.spellability.StackItemView si) {
-        // Check the main ability
-        if (isMassRemovalApiType(si.getApiType())) {
+    private boolean isMassRemovalInstance(forge.game.spellability.SpellAbilityStackInstance si) {
+        forge.game.spellability.SpellAbility sa = si.getSpellAbility();
+        if (sa != null && isMassRemovalApi(sa.getApi())) {
             return true;
         }
-
-        // Check sub-instances for modal spells like Farewell
-        forge.game.spellability.StackItemView subInstance = si.getSubInstance();
-        if (subInstance != null && isMassRemovalStackItem(subInstance)) {
+        forge.game.spellability.SpellAbilityStackInstance subInstance = si.getSubInstance();
+        if (subInstance != null && isMassRemovalInstance(subInstance)) {
             return true;
         }
-
         return false;
     }
 
     /**
-     * Check if an API type name represents a mass removal effect.
+     * Check if an ApiType represents a mass removal effect.
+     *
+     * - DestroyAll: Wrath of God, Day of Judgment, Damnation
+     * - DamageAll: Blasphemous Act, Chain Reaction
+     * - SacrificeAll: All Is Dust, Bane of Progress
+     * - ChangeZoneAll: Farewell, Merciless Eviction (covers exile/bounce effects)
      */
-    private boolean isMassRemovalApiType(String apiType) {
-        if (apiType == null) {
-            return false;
-        }
-
-        // DestroyAll - Wrath of God, Day of Judgment, Damnation
-        // DamageAll - Blasphemous Act, Chain Reaction
-        // SacrificeAll - All Is Dust, Bane of Progress
-        // ChangeZoneAll - Farewell, Merciless Eviction (covers exile/bounce effects)
-        return "DestroyAll".equals(apiType) ||
-               "DamageAll".equals(apiType) ||
-               "SacrificeAll".equals(apiType) ||
-               "ChangeZoneAll".equals(apiType);
+    private boolean isMassRemovalApi(forge.game.ability.ApiType api) {
+        return api == forge.game.ability.ApiType.DestroyAll
+            || api == forge.game.ability.ApiType.DamageAll
+            || api == forge.game.ability.ApiType.SacrificeAll
+            || api == forge.game.ability.ApiType.ChangeZoneAll;
     }
 
     /**

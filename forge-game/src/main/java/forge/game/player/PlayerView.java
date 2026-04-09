@@ -558,9 +558,13 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.Mana, mana);
     }
 
+    // Server-only cache populated by updateHasAvailableActions for the smart-suggestion
+    // and auto-pass-no-actions paths in YieldController/InputPassPriority. Transient because
+    // it is host-local — no client reads it, so it must not cross the wire.
+    private transient boolean hasAvailableActionsCache;
+
     public boolean hasAvailableActions() {
-        Boolean val = get(TrackableProperty.HasAvailableActions);
-        return val != null && val;
+        return hasAvailableActionsCache;
     }
 
     /**
@@ -606,12 +610,12 @@ public class PlayerView extends GameEntityView {
             for (SpellAbility sa : card.getAllPossibleAbilities(p, true)) {
                 if (sa.isSpell()) {
                     if (canAffordSpell(sa, availableMana, availableColors) && hasValidTargets(sa)) {
-                        set(TrackableProperty.HasAvailableActions, true);
+                        hasAvailableActionsCache = true;
                         return;
                     }
                 } else if (sa.isLandAbility()) {
                     // Land abilities are already filtered by canPlay() for timing
-                    set(TrackableProperty.HasAvailableActions, true);
+                    hasAvailableActionsCache = true;
                     return;
                 }
             }
@@ -622,7 +626,7 @@ public class PlayerView extends GameEntityView {
             for (SpellAbility sa : card.getAllPossibleAbilities(p, true)) {
                 if (!sa.isManaAbility()) {
                     if (canAffordSpell(sa, availableMana, availableColors) && hasValidTargets(sa)) {
-                        set(TrackableProperty.HasAvailableActions, true);
+                        hasAvailableActionsCache = true;
                         return;
                     }
                 }
@@ -635,7 +639,7 @@ public class PlayerView extends GameEntityView {
                 for (SpellAbility sa : card.getAllPossibleAbilities(p, true)) {
                     if (!sa.isManaAbility()) {
                         if (canAffordSpell(sa, availableMana, availableColors) && hasValidTargets(sa)) {
-                            set(TrackableProperty.HasAvailableActions, true);
+                            hasAvailableActionsCache = true;
                             return;
                         }
                     }
@@ -643,7 +647,7 @@ public class PlayerView extends GameEntityView {
             }
         }
 
-        set(TrackableProperty.HasAvailableActions, false);
+        hasAvailableActionsCache = false;
     }
 
     /**
@@ -691,37 +695,6 @@ public class PlayerView extends GameEntityView {
             return true;
         }
         return sa.getTargetRestrictions().hasCandidates(sa);
-    }
-
-    /**
-     * Check if player has any mana available (floating or from untapped mana sources).
-     * Used by yield suggestion system to determine if player can cast spells.
-     */
-    public boolean hasManaAvailable() {
-        // Check floating mana
-        for (byte manaType : ManaAtom.MANATYPES) {
-            if (getMana(manaType) > 0) return true;
-        }
-
-        // Check for untapped mana sources (lands, rocks, dorks)
-        FCollectionView<CardView> battlefield = getBattlefield();
-        if (battlefield != null) {
-            for (CardView cv : battlefield) {
-                if (!cv.isTapped() && cv.getCurrentState().origProduceMana() != null) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    public boolean willLoseManaAtEndOfPhase() {
-        Boolean val = get(TrackableProperty.WillLoseManaAtEndOfPhase);
-        return val != null && val;
-    }
-    void updateWillLoseManaAtEndOfPhase(Player p) {
-        set(TrackableProperty.WillLoseManaAtEndOfPhase, p.getManaPool().willManaBeLostAtEndOfPhase());
     }
 
     private List<String> getDetailsList() {

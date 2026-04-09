@@ -17,7 +17,6 @@
  */
 package forge.gamemodes.match.input;
 
-import forge.ai.ComputerUtilMana;
 import forge.game.Game;
 import forge.game.GameView;
 import forge.game.card.Card;
@@ -75,6 +74,17 @@ public class InputPassPriority extends InputSyncronizedBase {
 
         if (isExperimentalYieldEnabled() && !isAlreadyYielding() && !suppressDueToYieldEnd) {
             ForgePreferences prefs = FModel.getPreferences();
+
+            // Early exit: if both suggestion types are disabled (scope = "never"),
+            // skip the entire smart-suggestion block including stack-transition tracking.
+            // No state to maintain because no decline tracking happens for "never" scopes.
+            boolean stackYieldOff = "never".equals(prefs.getPref(FPref.YIELD_DECLINE_SCOPE_STACK_YIELD));
+            boolean noActionsOff = "never".equals(prefs.getPref(FPref.YIELD_DECLINE_SCOPE_NO_ACTIONS));
+            if (stackYieldOff && noActionsOff) {
+                showNormalPrompt();
+                return;
+            }
+
             Localizer loc = Localizer.getInstance();
 
             // Track stack transitions for per-stack decline scope
@@ -84,8 +94,10 @@ public class InputPassPriority extends InputSyncronizedBase {
             getController().onPriorityReceived(stackNonEmpty);
 
             // Suggestion 1: Stack items but can't respond
-            if (shouldShowStackYieldPrompt()
-                && !getController().isSuggestionDeclined("STACK_YIELD")) {
+            // Check decline state first — short-circuits the expensive
+            // hasAvailableActions read when the suggestion is declined.
+            if (!getController().isSuggestionDeclined("STACK_YIELD")
+                && shouldShowStackYieldPrompt()) {
                 pendingSuggestion = YieldMode.UNTIL_STACK_CLEARS;
                 pendingSuggestionType = "STACK_YIELD";
                 pendingSuggestionMessage = loc.getMessage("lblCannotRespondToStackYieldPrompt");
@@ -93,8 +105,8 @@ public class InputPassPriority extends InputSyncronizedBase {
                 return;
             }
             // Suggestion 2: No available actions (empty hand, no abilities)
-            if (shouldShowNoActionsPrompt()
-                && !getController().isSuggestionDeclined("NO_ACTIONS")) {
+            if (!getController().isSuggestionDeclined("NO_ACTIONS")
+                && shouldShowNoActionsPrompt()) {
                 pendingSuggestion = getDefaultYieldMode();
                 pendingSuggestionType = "NO_ACTIONS";
                 pendingSuggestionMessage = loc.getMessage("lblNoActionsAvailableYieldPrompt");
@@ -251,25 +263,16 @@ public class InputPassPriority extends InputSyncronizedBase {
     private void passPriority(final Runnable runnable) {
         if (FModel.getPreferences().getPrefBoolean(FPref.UI_MANA_LOST_PROMPT)) {
             //if gui player has mana floating that will be lost if phase ended right now, prompt before passing priority
-            GameView gv = getGameView();
-            PlayerView pv = getPlayerView();
-            if (gv != null && pv != null) {
-                FCollectionView<StackItemView> stack = gv.getStack();
-                if ((stack == null || stack.isEmpty()) &&
-                    pv.willLoseManaAtEndOfPhase() &&
-                    pv.isLobbyPlayer(GamePlayerUtil.getGuiPlayer())) {
+            final Game game = getController().getGame();
+            if (game.getStack().isEmpty()) { //phase can't end right now if stack isn't empty
+                Player player = game.getPhaseHandler().getPriorityPlayer();
+                if (player != null && player.getManaPool().willManaBeLostAtEndOfPhase() && player.getLobbyPlayer() == GamePlayerUtil.getGuiPlayer()) {
                     //must invoke in game thread so dialog can be shown on mobile game
                     ThreadUtil.invokeInGameThread(() -> {
                         Localizer localizer = Localizer.getInstance();
                         String message = localizer.getMessage("lblYouHaveManaFloatingInYourManaPoolCouldBeLostIfPassPriority");
-                        // Note: hasBurn check still needs the transient Game access for now
-                        // This is acceptable as the mana burn message is just supplementary info
-                        final Game game = getController().getGame();
-                        if (game != null) {
-                            Player player = game.getPhaseHandler().getPriorityPlayer();
-                            if (player != null && player.getManaPool().hasBurn()) {
-                                message += " " + localizer.getMessage("lblYouWillTakeManaBurnDamageEqualAmountFloatingManaLostThisWay");
-                            }
+                        if (player.getManaPool().hasBurn()) {
+                            message += " " + localizer.getMessage("lblYouWillTakeManaBurnDamageEqualAmountFloatingManaLostThisWay");
                         }
                         if (getController().getGui().showConfirmDialog(message, localizer.getMessage("lblManaFloating"), localizer.getMessage("lblOK"), localizer.getMessage("lblCancel"))) {
                             runnable.run();
@@ -369,8 +372,9 @@ public class InputPassPriority extends InputSyncronizedBase {
     private boolean checkHasAvailableActions() {
         Player player = getController().getPlayer();
         if (player == null) return false;
-        int manaEstimate = ComputerUtilMana.getAvailableManaEstimate(player);
-        player.getView().updateHasAvailableActions(player, manaEstimate);
+        // Read-only: the value is freshened at the top of
+        // PlayerControllerHuman.chooseSpellAbilityToPlay before mayAutoPass()
+        // consumes it. Recomputing here just doubled the work each priority pass.
         return player.getView().hasAvailableActions();
     }
 

@@ -154,11 +154,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         this.mayLookAtAllCards = mayLookAtAllCards;
     }
 
-    @Override
-    public boolean shouldTrackAvailableActions() {
-        return FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS);
-    }
-
     private final ArrayList<Card> tempShownCards = new ArrayList<>();
 
     public <T> void tempShow(final Iterable<T> objects) {
