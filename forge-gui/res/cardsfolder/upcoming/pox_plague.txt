@@ -1,0 +1,11 @@
+Name:Pox Plague
+ManaCost:B B B B B
+Types:Sorcery
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBLoseLife | SpellDescription$ Each player loses half their life, then discards half the cards in their hand, then sacrifices half the permanents they control of their choice. Round down each time.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | Defined$ Player.IsRemembered | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | NumCards$ Y | Defined$ Player.IsRemembered | Mode$ TgtChoose | SubAbility$ DBSac
+SVar:DBSaz:DB$ Sacrifice | SacValid$ Creature | Amount$ Z | Defined$ Player.IsRemembered
+SVar:X:PlayerCountRemembered$LifeTotal/HalfDown
+SVar:Y:PlayerCountRemembered$CardsInHand/HalfDown
+SVar:Z:PlayerCountRemembered$Valid Permanent.RememberedPlayerCtrl/HalfDown
+Oracle:Each player loses half their life, then discards half the cards in their hand, then sacrifices half the permanents they control of their choice. Round down each time.
