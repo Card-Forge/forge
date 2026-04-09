@@ -48,6 +48,7 @@ public class VYield implements IVDoc<CYield> {
     private final FButton btnClearStack = new FButton(localizer.getMessage("lblYieldBtnClearStack"));
     private final FButton btnCombat = new FButton(localizer.getMessage("lblYieldBtnCombat"));
     private final FButton btnEndStep = new FButton(localizer.getMessage("lblYieldBtnEndStep"));
+    private final FButton btnEndStepBeforeYourTurn = new FButton(localizer.getMessage("lblYieldBtnEndStepBeforeYourTurn"));
     private final FButton btnEndTurn = new FButton(localizer.getMessage("lblYieldBtnEndTurn"));
     private final FButton btnYourTurn = new FButton(localizer.getMessage("lblYieldBtnYourTurn"));
     private final FButton btnAutoPass = new FButton(localizer.getMessage("lblYieldBtnAutoPass"));
@@ -64,6 +65,7 @@ public class VYield implements IVDoc<CYield> {
         btnClearStack.setFont(smallFont);
         btnCombat.setFont(smallFont);
         btnEndStep.setFont(smallFont);
+        btnEndStepBeforeYourTurn.setFont(smallFont);
         btnEndTurn.setFont(smallFont);
         btnYourTurn.setFont(smallFont);
         btnAutoPass.setFont(smallFont);
@@ -74,6 +76,7 @@ public class VYield implements IVDoc<CYield> {
         btnClearStack.setUseHighlightMode(true);
         btnCombat.setUseHighlightMode(true);
         btnEndStep.setUseHighlightMode(true);
+        btnEndStepBeforeYourTurn.setUseHighlightMode(true);
         btnEndTurn.setUseHighlightMode(true);
         btnYourTurn.setUseHighlightMode(true);
         btnAutoPass.setUseHighlightMode(true);
@@ -83,6 +86,7 @@ public class VYield implements IVDoc<CYield> {
         btnClearStack.setToolTipText(localizer.getMessage("lblYieldBtnClearStackTooltip"));
         btnCombat.setToolTipText(localizer.getMessage("lblYieldBtnCombatTooltip"));
         btnEndStep.setToolTipText(localizer.getMessage("lblYieldBtnEndStepTooltip"));
+        btnEndStepBeforeYourTurn.setToolTipText(localizer.getMessage("lblYieldBtnEndStepBeforeYourTurnTooltip"));
         btnEndTurn.setToolTipText(localizer.getMessage("lblYieldBtnEndTurnTooltip"));
         btnYourTurn.setToolTipText(localizer.getMessage("lblYieldBtnYourTurnTooltip"));
         btnAutoPass.setToolTipText(localizer.getMessage("lblYieldBtnAutoPassTooltip"));
@@ -98,27 +102,34 @@ public class VYield implements IVDoc<CYield> {
             ? "w 10:33%, h 40px:40px:60px"
             : "w 10:33%, hmin 24px";
 
-        // Two-row layout: 3 buttons on top, 3 on bottom
-        container.setLayout(new MigLayout("wrap 3, gap 2px!, insets 3px"));
+        // Layout: 4 columns to accommodate all yield options
+        container.setLayout(new MigLayout("wrap 4, gap 2px!, insets 3px"));
 
-        // Row 1: Your Turn, End Turn, Next Phase
+        String span2Constraints = largerButtons
+            ? "span 2, w 10:50%, h 40px:40px:60px"
+            : "span 2, w 10:50%, hmin 24px";
+        String fullWidthConstraints = largerButtons
+            ? "span 4, w 10:100%, h 40px:40px:60px"
+            : "span 4, w 10:100%, hmin 24px";
+        String settingsConstraints = largerButtons
+            ? "span 4, gaptop 3px, w 10:100%, h 40px:40px:60px"
+            : "span 4, gaptop 3px, w 10:100%, hmin 24px";
+
+        // Row 1: Your Turn | End Turn | End Step Before Your Turn (span 2)
         container.add(btnYourTurn, buttonConstraints);
         container.add(btnEndTurn, buttonConstraints);
-        container.add(btnNextPhase, buttonConstraints);
+        container.add(btnEndStepBeforeYourTurn, span2Constraints);
 
-        // Row 2: Combat, End Step, Clear Stack
+        // Row 2: Next Phase | Combat | End Step | Clear Stack
+        container.add(btnNextPhase, buttonConstraints);
         container.add(btnCombat, buttonConstraints);
         container.add(btnEndStep, buttonConstraints);
         container.add(btnClearStack, buttonConstraints);
 
-        // Row 3: Auto-pass spans 2 columns, Settings button in column 3
-        String autoPassConstraints = largerButtons
-            ? "span 2, gaptop 3px, w 10:66%, h 40px:40px:60px"
-            : "span 2, gaptop 3px, w 10:66%, hmin 24px";
-        String settingsConstraints = largerButtons
-            ? "gaptop 3px, w 10:33%, h 40px:40px:60px"
-            : "gaptop 3px, w 10:33%, hmin 24px";
-        container.add(btnAutoPass, autoPassConstraints);
+        // Row 3: Auto-pass (full width)
+        container.add(btnAutoPass, fullWidthConstraints);
+
+        // Row 4: Settings (full width)
         container.add(btnSettings, settingsConstraints);
     }
 
@@ -152,6 +163,7 @@ public class VYield implements IVDoc<CYield> {
     public FButton getBtnClearStack() { return btnClearStack; }
     public FButton getBtnCombat() { return btnCombat; }
     public FButton getBtnEndStep() { return btnEndStep; }
+    public FButton getBtnEndStepBeforeYourTurn() { return btnEndStepBeforeYourTurn; }
     public FButton getBtnEndTurn() { return btnEndTurn; }
     public FButton getBtnYourTurn() { return btnYourTurn; }
     public FButton getBtnAutoPass() { return btnAutoPass; }

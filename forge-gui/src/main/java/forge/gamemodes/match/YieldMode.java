@@ -28,7 +28,8 @@ public enum YieldMode {
     UNTIL_END_OF_TURN("Yield until end of turn"),
     UNTIL_YOUR_NEXT_TURN("Yield until your next turn"),
     UNTIL_BEFORE_COMBAT("Yield until combat"),
-    UNTIL_END_STEP("Yield until end step");
+    UNTIL_END_STEP("Yield until end step"),
+    UNTIL_END_STEP_BEFORE_YOUR_TURN("Yield until end step before your turn");
 
     private final String description;
 

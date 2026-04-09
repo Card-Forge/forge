@@ -47,6 +47,7 @@ public class CYield implements ICDoc {
     private final ActionListener actClearStack = evt -> yieldUntilStackClears();
     private final ActionListener actCombat = evt -> yieldUntilCombat();
     private final ActionListener actEndStep = evt -> yieldUntilEndStep();
+    private final ActionListener actEndStepBeforeYourTurn = evt -> yieldUntilEndStepBeforeYourTurn();
     private final ActionListener actEndTurn = evt -> yieldUntilEndTurn();
     private final ActionListener actYourTurn = evt -> yieldUntilYourTurn();
     private final ActionListener actAutoPass = evt -> toggleAutoPass();
@@ -75,6 +76,7 @@ public class CYield implements ICDoc {
         initButton(view.getBtnClearStack(), actClearStack);
         initButton(view.getBtnCombat(), actCombat);
         initButton(view.getBtnEndStep(), actEndStep);
+        initButton(view.getBtnEndStepBeforeYourTurn(), actEndStepBeforeYourTurn);
         initButton(view.getBtnEndTurn(), actEndTurn);
         initButton(view.getBtnYourTurn(), actYourTurn);
         initButton(view.getBtnAutoPass(), actAutoPass);
@@ -116,6 +118,7 @@ public class CYield implements ICDoc {
     private void yieldUntilStackClears() { toggleYieldMode(YieldMode.UNTIL_STACK_CLEARS); }
     private void yieldUntilCombat() { toggleYieldMode(YieldMode.UNTIL_BEFORE_COMBAT); }
     private void yieldUntilEndStep() { toggleYieldMode(YieldMode.UNTIL_END_STEP); }
+    private void yieldUntilEndStepBeforeYourTurn() { toggleYieldMode(YieldMode.UNTIL_END_STEP_BEFORE_YOUR_TURN); }
     private void yieldUntilEndTurn() { toggleYieldMode(YieldMode.UNTIL_END_OF_TURN); }
     private void yieldUntilYourTurn() { toggleYieldMode(YieldMode.UNTIL_YOUR_NEXT_TURN); }
 
@@ -174,6 +177,7 @@ public class CYield implements ICDoc {
         view.getBtnNextPhase().setEnabled(canYield);
         view.getBtnCombat().setEnabled(canYield);
         view.getBtnEndStep().setEnabled(canYield);
+        view.getBtnEndStepBeforeYourTurn().setEnabled(canYield);
         view.getBtnEndTurn().setEnabled(canYield);
         view.getBtnYourTurn().setEnabled(canYield);
         view.getBtnClearStack().setEnabled(canYield);
@@ -203,6 +207,7 @@ public class CYield implements ICDoc {
         view.getBtnClearStack().setHighlighted(currentMode == YieldMode.UNTIL_STACK_CLEARS);
         view.getBtnCombat().setHighlighted(currentMode == YieldMode.UNTIL_BEFORE_COMBAT);
         view.getBtnEndStep().setHighlighted(currentMode == YieldMode.UNTIL_END_STEP);
+        view.getBtnEndStepBeforeYourTurn().setHighlighted(currentMode == YieldMode.UNTIL_END_STEP_BEFORE_YOUR_TURN);
         view.getBtnEndTurn().setHighlighted(currentMode == YieldMode.UNTIL_END_OF_TURN);
         view.getBtnYourTurn().setHighlighted(currentMode == YieldMode.UNTIL_YOUR_NEXT_TURN);
 
