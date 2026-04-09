@@ -134,91 +134,31 @@ public class KeyboardShortcuts {
             }
         };
 
-        /** Yield until next phase (experimental). */
-        final Action actYieldUntilNextPhase = new AbstractAction() {
+        /** Build a yield-mode F-key action. The 3+ players guard applies only
+         *  to UNTIL_YOUR_NEXT_TURN; all other modes ignore it. */
+        final java.util.function.Function<YieldMode, Action> makeYieldAction = mode -> new AbstractAction() {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
                 if (matchUI == null || matchUI.getCurrentPlayer() == null) { return; }
                 if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) { return; }
-                boolean activated = matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_NEXT_PHASE, false);
+                if (mode == YieldMode.UNTIL_YOUR_NEXT_TURN
+                        && (matchUI.getGameView() == null || matchUI.getGameView().getPlayers().size() < 3)) {
+                    return;
+                }
+                boolean activated = matchUI.setYieldMode(matchUI.getCurrentPlayer(), mode, false);
                 if (activated && matchUI.getGameController() != null) {
                     matchUI.getGameController().passPriority();
                 }
             }
         };
 
-        /** Yield until stack clears (experimental). */
-        final Action actYieldUntilStackClears = new AbstractAction() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
-                if (matchUI == null || matchUI.getCurrentPlayer() == null) { return; }
-                if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) { return; }
-                boolean activated = matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_STACK_CLEARS, false);
-                if (activated && matchUI.getGameController() != null) {
-                    matchUI.getGameController().passPriority();
-                }
-            }
-        };
-
-        /** Yield until your next turn (experimental, 3+ players only). */
-        final Action actYieldUntilYourNextTurn = new AbstractAction() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
-                if (matchUI == null || matchUI.getCurrentPlayer() == null) { return; }
-                if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) { return; }
-                if (matchUI.getGameView() != null && matchUI.getGameView().getPlayers().size() >= 3) {
-                    boolean activated = matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_YOUR_NEXT_TURN, false);
-                    if (activated && matchUI.getGameController() != null) {
-                        matchUI.getGameController().passPriority();
-                    }
-                }
-            }
-        };
-
-        /** Yield until end of turn (experimental). */
-        final Action actYieldUntilEndOfTurn = new AbstractAction() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
-                if (matchUI == null || matchUI.getCurrentPlayer() == null) { return; }
-                if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) { return; }
-                boolean activated = matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_END_OF_TURN, false);
-                if (activated && matchUI.getGameController() != null) {
-                    matchUI.getGameController().passPriority();
-                }
-            }
-        };
-
-        /** Yield until before combat (experimental). */
-        final Action actYieldUntilBeforeCombat = new AbstractAction() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
-                if (matchUI == null || matchUI.getCurrentPlayer() == null) { return; }
-                if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) { return; }
-                boolean activated = matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_BEFORE_COMBAT, false);
-                if (activated && matchUI.getGameController() != null) {
-                    matchUI.getGameController().passPriority();
-                }
-            }
-        };
-
-        /** Yield until end step (experimental). */
-        final Action actYieldUntilEndStep = new AbstractAction() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
-                if (matchUI == null || matchUI.getCurrentPlayer() == null) { return; }
-                if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) { return; }
-                boolean activated = matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_END_STEP, false);
-                if (activated && matchUI.getGameController() != null) {
-                    matchUI.getGameController().passPriority();
-                }
-            }
-        };
+        final Action actYieldUntilNextPhase = makeYieldAction.apply(YieldMode.UNTIL_NEXT_PHASE);
+        final Action actYieldUntilStackClears = makeYieldAction.apply(YieldMode.UNTIL_STACK_CLEARS);
+        final Action actYieldUntilYourNextTurn = makeYieldAction.apply(YieldMode.UNTIL_YOUR_NEXT_TURN);
+        final Action actYieldUntilEndOfTurn = makeYieldAction.apply(YieldMode.UNTIL_END_OF_TURN);
+        final Action actYieldUntilBeforeCombat = makeYieldAction.apply(YieldMode.UNTIL_BEFORE_COMBAT);
+        final Action actYieldUntilEndStep = makeYieldAction.apply(YieldMode.UNTIL_END_STEP);
 
         /** Cancel current yield mode and auto-pass-no-actions (experimental). */
         final Action actCancelYield = new AbstractAction() {

@@ -347,7 +347,10 @@ public class InputPassPriority extends InputSyncronizedBase {
     // Smart yield suggestion helper methods
 
     private boolean isExperimentalYieldEnabled() {
-        // Smart suggestions are desktop-only (mobile GUI doesn't support yield panel)
+        // Smart yield suggestions are desktop-only because the mobile yield panel
+        // doesn't exist. This check disables suggestions for the host process when
+        // it happens to be running on libgdx (mobile-as-host scenario), even if a
+        // connected desktop client could otherwise use them.
         if (GuiBase.getInterface().isLibgdxPort()) {
             return false;
         }

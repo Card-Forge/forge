@@ -98,7 +98,6 @@ public class VYield implements IVDoc<CYield> {
             ? "w 10:33%, h 40px:40px:60px"
             : "w 10:33%, hmin 24px";
 
-        // Two-row layout: 3 buttons on top, 3 on bottom
         container.setLayout(new MigLayout("wrap 3, gap 2px!, insets 3px"));
 
         // Row 1: Your Turn, End Turn, Next Phase

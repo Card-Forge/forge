@@ -57,8 +57,8 @@ public class FButton extends SkinnedButton implements ILocalRepaint, IButton {
     private boolean allImagesPresent = false;
     private boolean toggle = false;
     private boolean hovered = false;
-    private boolean useHighlightMode = false; // Enable inverted color mode for yield buttons
-    private boolean highlighted = false; // When in highlight mode: true = red (active), false = blue (normal)
+    private boolean useHighlightMode = false;
+    private boolean highlighted = false;
     private final AlphaComposite disabledComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.25f);
     private KeyAdapter klEnter;
 

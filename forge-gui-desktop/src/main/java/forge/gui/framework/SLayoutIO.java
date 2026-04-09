@@ -78,7 +78,6 @@ public final class SLayoutIO {
 
             FThreads.invokeInEdtLater(() -> {
                 SLayoutIO.loadLayout(loadFile);
-                 // Repopulate the current screen to handle dynamic panels (yield, dev mode, etc.)
                 Singletons.getControl().getCurrentScreen().getView().populate();
                 SLayoutIO.saveLayout(null);
                 SOverlayUtils.hideOverlay();

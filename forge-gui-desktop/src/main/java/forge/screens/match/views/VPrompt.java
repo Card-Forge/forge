@@ -67,7 +67,7 @@ public class VPrompt implements IVDoc<CPrompt> {
     private final FScrollPane messageScroller = new FScrollPane(tarMessage, false,
     		ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     private final JLabel lblGames;
-    private CardView card = null ;
+    private CardView card = null ; 
 
     public void setCardView(final CardView card) {
 	this.card = card ;
@@ -221,5 +221,4 @@ public class VPrompt implements IVDoc<CPrompt> {
     public JLabel getLblGames() {
         return this.lblGames;
     }
-
 }
