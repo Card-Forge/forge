@@ -322,10 +322,12 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         //cancel auto-pass for all opponents of activating player
-        //when a new non-triggered ability is put on the stack
+        //when a new non-triggered ability is put on the stack.
+        //Use autoPassCancelLegacy so experimental yield modes (UNTIL_YOUR_NEXT_TURN etc.)
+        //are NOT cleared here — they manage interruption via shouldInterruptYield.
         if (!sp.isTrigger()) {
             for (final Player p : activator.getOpponents()) {
-                p.getController().autoPassCancel();
+                p.getController().autoPassCancelLegacy();
             }
         }
 

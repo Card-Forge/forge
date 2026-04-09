@@ -84,11 +84,28 @@ public class YieldController {
     }
 
     /**
-     * Cancel auto-pass for the given player.
+     * Cancel only the legacy auto-pass for the given player.
+     * Experimental yield modes (UNTIL_YOUR_NEXT_TURN etc.) are NOT cleared here;
+     * they handle interruption via shouldInterruptYield / shouldAutoYieldForPlayer.
+     * Called by engine events (spell on stack, phase transitions) to avoid wiping
+     * persistent yield modes that should survive across turns.
+     */
+    public void autoPassCancelLegacyOnly(PlayerView player) {
+        player = TrackableTypes.PlayerViewType.lookup(player);
+        autoPassUntilEndOfTurn.remove(player);
+        // yieldStates intentionally not touched — modes manage their own lifecycle
+    }
+
+    /**
+     * Cancel auto-pass for the given player (legacy and experimental).
      */
     public void autoPassCancel(PlayerView player) {
         player = TrackableTypes.PlayerViewType.lookup(player); // ensure consistent PlayerView instance
-        if (!autoPassUntilEndOfTurn.remove(player)) {
+
+        boolean removedLegacy = autoPassUntilEndOfTurn.remove(player);
+        boolean removedExperimental = yieldStates.remove(player) != null;
+
+        if (!removedLegacy && !removedExperimental) {
             return;
         }
 
@@ -96,6 +113,11 @@ public class YieldController {
         gui.showPromptMessage(player, "");
         gui.updateButtons(player, false, false, false);
         gui.awaitNextInput();
+
+        // Sync experimental yield cancellation to network clients
+        if (removedExperimental) {
+            gui.syncYieldMode(player, YieldMode.NONE);
+        }
     }
 
     /**
@@ -134,6 +156,26 @@ public class YieldController {
         if (shouldInterruptYield(player)) {
             return false;
         }
+        // Conservative safety check: during main phases with empty stack,
+        // never auto-pass on the player's own turn if they have cards in hand.
+        // hasAvailableActions uses AI mana logic and produces false negatives for human
+        // players — in particular it doesn't account for playing a land, which is always
+        // legal on your own turn. On an opponent's turn, also protect against false
+        // negatives when the player has mana available.
+        GameView gameView = gui.getGameView();
+        if (gameView != null) {
+            forge.game.phase.PhaseType phase = gameView.getPhase();
+            boolean isMainPhase = phase == forge.game.phase.PhaseType.MAIN1
+                    || phase == forge.game.phase.PhaseType.MAIN2;
+            boolean stackEmpty = gameView.getStack() == null || gameView.getStack().isEmpty();
+            boolean isOurTurn = player.equals(gameView.getPlayerTurn());
+            if (isMainPhase && stackEmpty
+                    && player.getHand() != null && !player.getHand().isEmpty()
+                    && (isOurTurn || player.hasManaAvailable())) {
+                return false;
+            }
+        }
+        // Auto-pass if no playable actions
         return !player.hasAvailableActions();
     }
 
@@ -169,23 +211,12 @@ public class YieldController {
             };
             gui.showPromptMessage(player, message);
             gui.updateButtons(player, false, true, false);
-            return;
-        }
-
-        // No yield mode active — but mayAutoPass may still be true via the
-        // persistent YIELD_AUTO_PASS_NO_ACTIONS pref. In that case clear the
-        // stale prompt left over from the previous input (e.g. a Pay Mana Cost
-        // prompt) so the user isn't shown a misleading message.
-        if (shouldAutoPassNoActions(player)) {
-            gui.cancelAwaitNextInput();
-            gui.showPromptMessage(player, Localizer.getInstance().getMessage("lblAutoPassingNoActions"));
-            gui.updateButtons(player, false, false, false);
         }
     }
 
     /**
      * Set the yield mode for a player.
-     * @return true if a new yield mode was activated; false otherwise (cleared, rejected, or feature disabled)
+     * @return true if the mode was activated, false if it was rejected (e.g., stack already empty for UNTIL_STACK_CLEARS)
      */
     public boolean setYieldMode(PlayerView player, final YieldMode mode) {
         player = TrackableTypes.PlayerViewType.lookup(player); // ensure we use the correct player instance
@@ -203,22 +234,14 @@ public class YieldController {
             return false;
         }
 
-        GameView gameView = gui.getGameView();
-
-        // Reject UNTIL_STACK_CLEARS when the stack is already empty — must check
-        // before mutating any state so a rejected request leaves the player's
-        // existing yield/auto-pass state untouched
-        if (mode == YieldMode.UNTIL_STACK_CLEARS && gameView != null
-                && (gameView.getStack() == null || gameView.getStack().isEmpty())) {
-            return false;
-        }
-
         // Clear any legacy auto-pass state to prevent interference
         // (legacy check in shouldAutoYieldForPlayer runs first and would override experimental mode)
         autoPassUntilEndOfTurn.remove(player);
 
         YieldState state = new YieldState(mode);
         yieldStates.put(player, state);
+
+        GameView gameView = gui.getGameView();
 
         // Use network-safe GameView properties instead of gameView.getGame()
         // This ensures proper operation for non-host players in multiplayer
@@ -229,6 +252,15 @@ public class YieldController {
         forge.game.phase.PhaseType phase = gameView.getPhase();
         int currentTurn = gameView.getTurn();
         PlayerView currentPlayerTurn = gameView.getPlayerTurn();
+
+        // Don't activate UNTIL_STACK_CLEARS if the stack is already empty
+        if (mode == YieldMode.UNTIL_STACK_CLEARS) {
+            boolean stackEmpty = gameView.getStack() == null || gameView.getStack().isEmpty();
+            if (stackEmpty) {
+                yieldStates.remove(player);
+                return false;
+            }
+        }
 
         // Track mode-specific state
         switch (mode) {
@@ -329,7 +361,7 @@ public class YieldController {
             return false;
         }
 
-        // Skip interrupt check for remote players — host preferences don't apply to them
+        // Check interrupt conditions (skip for remote players — host preferences don't apply)
         if (!gui.isRemoteGuiProxy() && shouldInterruptYield(player)) {
             clearYieldMode(player);
             return false;
@@ -462,8 +494,9 @@ public class YieldController {
                     state.startedAtOrAfterPhase = isAtOrAfterEndStep(currentPhase);
                 }
 
-                // Stop at the end step of the player immediately before us in turn order.
+                // Stop at the end step of the player who goes immediately before us in turn order.
                 // In a 4-player game (A, B, C, D), if we are C, we stop at B's end step.
+                // In a 2-player game, this is equivalent to stopping at the opponent's end step.
                 if (isAtOrAfterEndStep(currentPhase)) {
                     boolean differentTurn = currentTurn > state.startTurn;
                     boolean sameTurnButStartedBeforeEndStep = (currentTurn == state.startTurn.intValue()) && !Boolean.TRUE.equals(state.startedAtOrAfterPhase);
@@ -706,6 +739,36 @@ public class YieldController {
     }
 
     /**
+     * Check if the given player is the one who plays immediately before us in turn order.
+     * In a game with players [A, B, C, D], if we are C, the player before us is B.
+     */
+    private boolean isPlayerBeforeUs(PlayerView currentPlayerTurn, PlayerView us, GameView gameView) {
+        if (currentPlayerTurn == null || us == null) {
+            return true; // fallback: stop yielding if we can't determine
+        }
+
+        List<PlayerView> players = new ArrayList<>(gameView.getPlayers());
+        if (players == null || players.size() < 2) {
+            return true;
+        }
+
+        int ourIndex = -1;
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).equals(us)) {
+                ourIndex = i;
+                break;
+            }
+        }
+        if (ourIndex < 0) {
+            return true; // fallback
+        }
+
+        // The player before us is at (ourIndex - 1 + size) % size
+        int prevIndex = (ourIndex - 1 + players.size()) % players.size();
+        return players.get(prevIndex).equals(currentPlayerTurn);
+    }
+
+    /**
      * Check if the phase is at or after the beginning of combat.
      */
     private boolean isAtOrAfterCombat(forge.game.phase.PhaseType phase) {
@@ -721,35 +784,6 @@ public class YieldController {
             (phase == forge.game.phase.PhaseType.END_OF_TURN || phase == forge.game.phase.PhaseType.CLEANUP);
     }
 
-
-    /**
-     * Check if the given player is the one who plays immediately before us in turn order.
-     * In a game with players [A, B, C, D], if we are C, the player before us is B.
-     */
-    private boolean isPlayerBeforeUs(PlayerView currentPlayerTurn, PlayerView us, GameView gameView) {
-        if (currentPlayerTurn == null || us == null) {
-            return true; // fallback: stop yielding if we can't determine
-        }
-
-        List<PlayerView> players = new ArrayList<>(gameView.getPlayers());
-        if (players.size() < 2) {
-            return true;
-        }
-
-        int ourIndex = -1;
-        for (int i = 0; i < players.size(); i++) {
-            if (players.get(i).equals(us)) {
-                ourIndex = i;
-                break;
-            }
-        }
-        if (ourIndex < 0) {
-            return true; // fallback
-        }
-
-        int prevIndex = (ourIndex - 1 + players.size()) % players.size();
-        return players.get(prevIndex).equals(currentPlayerTurn);
-    }
 
     /**
      * Remove a player from legacy auto-pass (for AbstractGuiGame internal use).

@@ -345,6 +345,18 @@ public abstract class PlayerController {
 
     public abstract void autoPassCancel();
 
+    /**
+     * Cancel only the legacy auto-pass (autoPassUntilEndOfTurn).
+     * Experimental yield modes (UNTIL_YOUR_NEXT_TURN etc.) are NOT cleared —
+     * they manage their own lifecycle via shouldInterruptYield / shouldAutoYieldForPlayer.
+     * Use this in engine events (stack additions, phase transitions) where experimental
+     * modes should persist across game actions.
+     */
+    public void autoPassCancelLegacy() {
+        // Default falls back to full cancel for non-human controllers (AI, network proxies)
+        autoPassCancel();
+    }
+
     public abstract void awaitNextInput();
     public abstract void cancelAwaitNextInput();
 

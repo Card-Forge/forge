@@ -1491,12 +1491,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public void declareAttackers(final Player attackingPlayer, final Combat combat) {
         if (mayAutoPass()) {
-            // canAttack catches eligible attackers (e.g. haste creatures) that
-            // validateAttackers misses on an empty combat object
-            if (!CombatUtil.canAttack(attackingPlayer) && CombatUtil.validateAttackers(combat)) {
-                return;
+            if (CombatUtil.canAttack(attackingPlayer)) {
+                // player has creatures that can attack (e.g. haste creatures) — cancel auto pass
+                autoPassCancel();
+            } else if (CombatUtil.validateAttackers(combat)) {
+                return; // don't prompt to declare attackers if user chose to
+                // end the turn and not attacking is legal
+            } else {
+                // otherwise: cancel auto pass because of this unexpected attack
+                autoPassCancel();
             }
-            autoPassCancel();
         }
 
         // This input should not modify combat object itself, but should return user choice
@@ -1520,8 +1524,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         if (FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)
                 && FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS)) {
-            int manaEstimate = ComputerUtilMana.getAvailableManaEstimate(getPlayer());
-            getPlayer().getView().updateHasAvailableActions(getPlayer(), manaEstimate);
+            final Player player = getPlayer();
+            getPlayer().getView().updateHasAvailableActions(player,
+                sa -> ComputerUtilMana.canPayManaCost(sa, player, 0, false));
         }
 
         if (mayAutoPass()) {
@@ -1549,9 +1554,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     e.printStackTrace();
                 }
             }
-            // Re-check after the delay — yield may have been cancelled during the sleep,
-            // in which case fall through to show the normal input prompt
-            if (mayAutoPass()) {
+            // Re-check after delay: player may have cancelled yield during the sleep
+            if (!mayAutoPass()) {
+                // Yield was cancelled — fall through to show normal input prompt
+            } else {
                 netLog.trace("Returning null (mayAutoPass) for player {}", player.getName());
                 return null;
             }
@@ -1686,6 +1692,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final List<String> labels;
         switch (kindOfChoice) {
             case HeadsOrTails:
+                if (FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_CALL_COIN_FLIP)) {
+                    return true; // Auto-call Heads — result is 50/50 regardless of call
+                }
                 labels = ImmutableList.of(localizer.getMessage("lblHeads"), localizer.getMessage("lblTails"));
                 break;
             case TapOrUntap:
@@ -1719,6 +1728,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public boolean chooseFlipResult(final SpellAbility sa, final Player flipper, final boolean call) {
+        // For called flips (win/lose), auto-select the result matching our call to guarantee a win.
+        // For NoCall flips (heads/tails matters), always prompt the player.
+        if (call && FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_CALL_COIN_FLIP)) {
+            return true;
+        }
         final List<String> labelsSrc = call ? List.of(localizer.getMessage("lblHeads"), localizer.getMessage("lblTails"))
                 : List.of(localizer.getMessage("lblWinTheFlip"), localizer.getMessage("lblLoseTheFlip"));
         return getGui().one(sa.getHostCard().getDisplayName() + " - " + localizer.getMessage("lblChooseAResult"), labelsSrc).equals(labelsSrc.get(0));
@@ -3454,6 +3468,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         getGui().autoPassCancel(getLocalPlayerView());
+    }
+
+    @Override
+    public void autoPassCancelLegacy() {
+        if (getGui() == null) {
+            return;
+        }
+        getGui().autoPassCancelLegacy(getLocalPlayerView());
     }
 
     @Override

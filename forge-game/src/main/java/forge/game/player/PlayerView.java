@@ -7,7 +7,6 @@ import com.google.common.collect.Maps;
 import forge.LobbyPlayer;
 import forge.card.CardType;
 import forge.card.MagicColor;
-import forge.card.mana.ManaCostShard;
 import forge.card.mana.ManaAtom;
 import forge.game.GameEntityView;
 import forge.game.card.Card;
@@ -538,54 +537,42 @@ public class PlayerView extends GameEntityView {
         return val != null && val;
     }
 
+    // Cache version: skip expensive scan when game state hasn't changed
+    private long lastAvailableActionsTimestamp = -1;
+
     /**
      * Check if this player has any available actions (playable spells/abilities).
-     * Used for smart yield suggestions in network play.
+     * Used by the yield system to auto-pass when the player has nothing to do.
+     *
+     * getAllPossibleAbilities(p, true) already filters by canPlay(), which checks
+     * non-mana costs (tap/summoning sickness, sacrifice, discard, life, etc.)
+     * via CostPayment.canPayAdditionalCosts(). The canAffordMana predicate handles
+     * mana affordability including cost reductions (Goblin Electromancer) and
+     * increases (Thalia, Guardian of Thraben).
+     *
+     * Uses Game.getTimestamp() as a version counter — the timestamp increments on
+     * every game state change (zone changes, ability resolutions, etc.), so if it
+     * hasn't changed since the last scan, the cached result is still valid.
      *
      * @param p the player to check
-     * @param availableMana pre-computed mana estimate (e.g. from ComputerUtilMana.getAvailableManaEstimate)
+     * @param canAffordMana predicate that checks if a spell/ability's mana cost can be paid
+     *                      (should account for cost reductions/increases)
      */
-    public void updateHasAvailableActions(Player p, int availableMana) {
-        // Build color profile from floating mana and untapped mana-producing permanents
-        byte availableColors = 0;
-        for (byte color : ManaAtom.MANATYPES) {
-            if (p.getManaPool().getAmountOfColor(color) > 0) {
-                availableColors |= color;
-            }
+    public void updateHasAvailableActions(Player p, java.util.function.Predicate<SpellAbility> canAffordMana) {
+        long currentTimestamp = p.getGame().getTimestamp();
+        if (currentTimestamp == lastAvailableActionsTimestamp) {
+            return; // game state unchanged, cached result is valid
         }
-        for (Card card : p.getCardsIn(ZoneType.Battlefield)) {
-            if (availableColors == ManaAtom.ALL_MANA_TYPES) {
-                break; // already have all colors
-            }
-            if (!card.isTapped() && !card.getManaAbilities().isEmpty()) {
-                for (SpellAbility ma : card.getManaAbilities()) {
-                    if (ma.getManaPart() != null) {
-                        String produced = ma.getManaPart().getOrigProduced();
-                        if (produced.contains("Any")) {
-                            availableColors = ManaAtom.ALL_MANA_TYPES;
-                            break;
-                        } else {
-                            for (byte color : ManaAtom.MANATYPES) {
-                                if (ma.getManaPart().canProduce(MagicColor.toShortString(color), ma)) {
-                                    availableColors |= color;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
+        lastAvailableActionsTimestamp = currentTimestamp;
         // Check hand for playable spells that we can afford
         for (Card card : p.getCardsIn(ZoneType.Hand)) {
             for (SpellAbility sa : card.getAllPossibleAbilities(p, true)) {
                 if (sa.isSpell()) {
-                    if (canAffordSpell(sa, availableMana, availableColors) && hasValidTargets(sa)) {
+                    if (canAffordMana.test(sa) && hasValidTargets(sa)) {
                         set(TrackableProperty.HasAvailableActions, true);
                         return;
                     }
                 } else if (sa.isLandAbility()) {
-                    // Land abilities are already filtered by canPlay() for timing
                     set(TrackableProperty.HasAvailableActions, true);
                     return;
                 }
@@ -596,7 +583,7 @@ public class PlayerView extends GameEntityView {
         for (Card card : p.getCardsIn(ZoneType.Battlefield)) {
             for (SpellAbility sa : card.getAllPossibleAbilities(p, true)) {
                 if (!sa.isManaAbility()) {
-                    if (canAffordSpell(sa, availableMana, availableColors) && hasValidTargets(sa)) {
+                    if (canAffordMana.test(sa) && hasValidTargets(sa)) {
                         set(TrackableProperty.HasAvailableActions, true);
                         return;
                     }
@@ -609,7 +596,7 @@ public class PlayerView extends GameEntityView {
             for (Card card : p.getCardsIn(zone)) {
                 for (SpellAbility sa : card.getAllPossibleAbilities(p, true)) {
                     if (!sa.isManaAbility()) {
-                        if (canAffordSpell(sa, availableMana, availableColors) && hasValidTargets(sa)) {
+                        if (canAffordMana.test(sa) && hasValidTargets(sa)) {
                             set(TrackableProperty.HasAvailableActions, true);
                             return;
                         }
@@ -619,43 +606,6 @@ public class PlayerView extends GameEntityView {
         }
 
         set(TrackableProperty.HasAvailableActions, false);
-    }
-
-    /**
-     * Check if a spell/ability can be afforded given available mana count and colors.
-     * Handles hybrid (need any one color) and phyrexian (always payable via life) shards.
-     */
-    private boolean canAffordSpell(SpellAbility sa, int availableMana, byte availableColors) {
-        if (sa.getPayCosts() == null || !sa.getPayCosts().hasManaCost()) {
-            return true; // free ability
-        }
-        forge.card.mana.ManaCost manaCost = sa.getPayCosts().getTotalMana();
-        int cmc = manaCost.getCMC();
-        if (cmc > availableMana) {
-            return false;
-        }
-        // Check colored requirements shard by shard
-        for (ManaCostShard shard : manaCost) {
-            if (shard.isPhyrexian()) {
-                continue; // always payable via life
-            }
-            byte colorMask = shard.getColorMask();
-            if (colorMask == 0) {
-                continue; // generic/colorless
-            }
-            if (shard.isMultiColor()) {
-                // hybrid: need ANY one of the colors
-                if ((colorMask & availableColors) == 0) {
-                    return false;
-                }
-            } else {
-                // mono: need that specific color
-                if ((colorMask & availableColors) != colorMask) {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 
     /**

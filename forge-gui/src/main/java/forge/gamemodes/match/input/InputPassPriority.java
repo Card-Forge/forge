@@ -20,8 +20,8 @@ package forge.gamemodes.match.input;
 import forge.ai.ComputerUtilMana;
 import forge.game.Game;
 import forge.game.GameView;
-import forge.game.mana.ManaPool;
 import forge.game.card.Card;
+import forge.game.mana.ManaPool;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.player.actions.PassPriorityAction;
@@ -29,7 +29,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.StackItemView;
 import forge.gamemodes.match.YieldMode;
 import forge.gui.GuiBase;
-import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
@@ -75,33 +74,11 @@ public class InputPassPriority extends InputSyncronizedBase {
             && getController().didYieldJustEnd();
 
         if (isExperimentalYieldEnabled() && !isAlreadyYielding() && !suppressDueToYieldEnd) {
-            ForgePreferences prefs = FModel.getPreferences();
-            Localizer loc = Localizer.getInstance();
-
             // Track stack transitions for per-stack decline scope
             GameView gvForStack = getGameView();
             boolean stackNonEmpty = gvForStack != null && gvForStack.getStack() != null
                 && !gvForStack.getStack().isEmpty();
             getController().onPriorityReceived(stackNonEmpty);
-
-            // Suggestion 1: Stack items but can't respond
-            if (shouldShowStackYieldPrompt()
-                && !getController().isSuggestionDeclined("STACK_YIELD")) {
-                pendingSuggestion = YieldMode.UNTIL_STACK_CLEARS;
-                pendingSuggestionType = "STACK_YIELD";
-                pendingSuggestionMessage = loc.getMessage("lblCannotRespondToStackYieldPrompt");
-                showYieldSuggestionPrompt();
-                return;
-            }
-            // Suggestion 2: No available actions (empty hand, no abilities)
-            if (shouldShowNoActionsPrompt()
-                && !getController().isSuggestionDeclined("NO_ACTIONS")) {
-                pendingSuggestion = getDefaultYieldMode();
-                pendingSuggestionType = "NO_ACTIONS";
-                pendingSuggestionMessage = loc.getMessage("lblNoActionsAvailableYieldPrompt");
-                showYieldSuggestionPrompt();
-                return;
-            }
         }
 
         showNormalPrompt();
@@ -177,16 +154,9 @@ public class InputPassPriority extends InputSyncronizedBase {
                 stop();
                 return;
             }
-            // CYield.toggleAutoPass enables the pref then calls selectButtonOk to advance
-            // the current input. If we reach onOk with a pending suggestion AND the pref
-            // is now ON, the user just toggled — the suggestion couldn't have appeared
-            // with the pref already on (mayAutoPass would have caught it). Suppress the
-            // accidental suggestion accept and just stop the input.
-            // Skip for remote proxies: the host's local pref doesn't apply to remote
-            // players, who can't toggle it via shortcut anyway, so this guard would
-            // produce a false positive on every Accept click from a remote client.
-            if (!getController().getGui().isRemoteGuiProxy()
-                    && FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS)) {
+            // Check if the auto-pass toggle was just enabled (user clicked the button,
+            // which called selectButtonOk() — don't also activate the suggestion mode)
+            if (FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS)) {
                 pendingSuggestion = null;
                 pendingSuggestionType = null;
                 pendingSuggestionMessage = null;
@@ -257,9 +227,11 @@ public class InputPassPriority extends InputSyncronizedBase {
             if (game != null && pv != null && pv.isLobbyPlayer(GamePlayerUtil.getGuiPlayer())) {
                 GameView gv = getGameView();
                 FCollectionView<StackItemView> stack = gv != null ? gv.getStack() : null;
+                // Use live mana pool check (not cached PlayerView) to avoid stale state after spending mana
                 Player livePlayer = game.getPhaseHandler().getPriorityPlayer();
                 if ((stack == null || stack.isEmpty()) &&
                     livePlayer != null && livePlayer.getManaPool().willManaBeLostAtEndOfPhase()) {
+                    //must invoke in game thread so dialog can be shown on mobile game
                     ThreadUtil.invokeInGameThread(() -> {
                         Localizer localizer = Localizer.getInstance();
                         String manaDesc = buildManaDescription(livePlayer.getManaPool());
@@ -285,9 +257,13 @@ public class InputPassPriority extends InputSyncronizedBase {
         String[] symbols = {"{W}", "{U}", "{B}", "{R}", "{G}", "{C}"};
         for (int i = 0; i < types.length; i++) {
             int amount = pool.getAmountOfColor(types[i]);
-            if (amount == 0) continue;
+            if (amount == 0) {
+                continue;
+            }
             if (amount <= 3) {
-                for (int j = 0; j < amount; j++) sb.append(symbols[i]);
+                for (int j = 0; j < amount; j++) {
+                    sb.append(symbols[i]);
+                }
             } else {
                 sb.append(symbols[i]).append("x").append(amount);
             }
@@ -382,8 +358,8 @@ public class InputPassPriority extends InputSyncronizedBase {
     private boolean checkHasAvailableActions() {
         Player player = getController().getPlayer();
         if (player == null) return false;
-        int manaEstimate = ComputerUtilMana.getAvailableManaEstimate(player);
-        player.getView().updateHasAvailableActions(player, manaEstimate);
+        player.getView().updateHasAvailableActions(player,
+            sa -> ComputerUtilMana.canPayManaCost(sa, player, 0, false));
         return player.getView().hasAvailableActions();
     }
 
