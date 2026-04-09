@@ -15971,7 +15971,7 @@
     "ai": "",
     "flying": true,
     "speed": 60,
-    "scale": 0.7,
+    "scale": 1.5,
     "life": 30,
     "rewards": [
       {
@@ -55070,6 +55070,7 @@
     ],
     "ai": "",
     "speed": 45,
+    "scale": 0.3,
     "life": 20,
     "rewards": [
      {
