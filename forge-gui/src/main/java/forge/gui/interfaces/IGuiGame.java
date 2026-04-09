@@ -287,6 +287,18 @@ public interface IGuiGame {
     void updateAutoPassPrompt();
 
     // Extended yield mode methods (experimental feature)
+
+    /**
+     * Set the player's yield mode.
+     *
+     * @param fromRemote true when the host is receiving yield state from a
+     *                   network client. Skips validation (the client already
+     *                   validated locally), the prompt update (the client
+     *                   already showed its own), and the notify-server
+     *                   callback (echoing back would loop forever). false for
+     *                   local user actions on this process.
+     * @return true if the mode was activated.
+     */
     boolean setYieldMode(PlayerView player, YieldMode mode, boolean fromRemote);
 
     /**
@@ -308,6 +320,7 @@ public interface IGuiGame {
 
     /** Return the yield-interrupt preference snapshot for this remote player, or null if local. */
     default YieldPrefs getRemoteYieldPrefs() { return null; }
+
 
     YieldMode getYieldMode(PlayerView player);
 
@@ -334,6 +347,7 @@ public interface IGuiGame {
      * @param packet the delta packet containing changes
      */
     void applyDelta(DeltaPacket packet);
+
 
     /** Signal to start a client-side elapsed timer for waiting display. */
     void showWaitingTimer(PlayerView forPlayer, String waitingForPlayerName);
