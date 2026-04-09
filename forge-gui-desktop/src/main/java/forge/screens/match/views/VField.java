@@ -82,6 +82,13 @@ public class VField implements IVDoc<CField> {
     private final FLabel lblTicket     = new FLabel.Builder().fontAlign(SwingConstants.CENTER).fontStyle(Font.BOLD).icon(FSkin.getImage(FSkinProp.IMG_TICKET)).iconInBackground().build();
     private final FLabel lblRad        = new FLabel.Builder().fontAlign(SwingConstants.CENTER).fontStyle(Font.BOLD).icon(FSkin.getImage(FSkinProp.IMG_RAD)).iconInBackground().build();
 
+    private final FLabel lblDisconnected = new FLabel.Builder()
+            .fontAlign(SwingConstants.CENTER).fontStyle(Font.BOLD).fontSize(11)
+            .opaque(true).build();
+    private final FLabel btnReplaceAI = new FLabel.ButtonBuilder()
+            .text("Replace AI").fontStyle(Font.BOLD).fontSize(10)
+            .hoverable().selectable().build();
+
     private final PhaseIndicator phaseIndicator = new PhaseIndicator();
 
     private final Border borderAvatarSimple = new LineBorder(new Color(0, 0, 0, 0), 1);
@@ -118,9 +125,20 @@ public class VField implements IVDoc<CField> {
         lblTicket.setFocusable(false);
         lblRad.setFocusable(false);
 
+        lblDisconnected.setText("DISCONNECTED");
+        lblDisconnected.setForeground(Color.WHITE);
+        lblDisconnected.setBackground(new Color(180, 40, 40, 220));
+        lblDisconnected.setVisible(false);
+        lblDisconnected.setFocusable(false);
+
+        btnReplaceAI.setVisible(false);
+        btnReplaceAI.setFocusable(true);
+
         avatarArea.setOpaque(false);
         avatarArea.setBackground(FSkin.getColor(FSkin.Colors.CLR_HOVER));
         avatarArea.setLayout(new MigLayout("insets 0, gap 0"));
+        avatarArea.add(lblDisconnected, "w 100%!, h 16px!, hidemode 3, wrap");
+        avatarArea.add(btnReplaceAI, "w 100%!, h 18px!, hidemode 3, wrap");
         avatarArea.add(lblAvatar, "w 100%-6px!, h 100%-23px!, wrap, gap 3 3 3 0");
         avatarArea.add(lblLife, "w 100%!, h 20px!, wrap");
 
@@ -205,6 +223,28 @@ public class VField implements IVDoc<CField> {
 
     private boolean isHighlighted() {
         return control.getMatchUI().isHighlighted(player);
+    }
+
+    public void setDisconnected(final boolean disconnected, final Runnable replaceAction) {
+        lblDisconnected.setVisible(disconnected);
+        if (disconnected && replaceAction != null) {
+            for (final java.awt.event.MouseListener ml : btnReplaceAI.getMouseListeners()) {
+                if (ml instanceof java.awt.event.MouseAdapter) {
+                    btnReplaceAI.removeMouseListener(ml);
+                }
+            }
+            btnReplaceAI.setCommand(replaceAction);
+            btnReplaceAI.setVisible(true);
+        } else {
+            btnReplaceAI.setVisible(false);
+        }
+        if (disconnected) {
+            avatarArea.setBorder(new LineBorder(new Color(180, 40, 40), 2));
+        } else {
+            avatarArea.setBorder(isHighlighted() ? borderAvatarHighlighted : borderAvatarSimple);
+        }
+        avatarArea.revalidate();
+        avatarArea.repaint();
     }
 
     public void setAvatar(final SkinImage avatar) {

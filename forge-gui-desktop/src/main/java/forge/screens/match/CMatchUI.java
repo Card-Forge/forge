@@ -561,6 +561,23 @@ public final class CMatchUI
 
     // Player's mana pool changes
     @Override
+    public void showPlayerDisconnected(final PlayerView player, final boolean disconnected) {
+        final VField field = getFieldViewFor(player);
+        if (field == null) { return; }
+
+        Runnable replaceAction = null;
+        if (disconnected) {
+            final forge.gamemodes.net.server.FServerManager server = forge.gamemodes.net.server.FServerManager.getInstance();
+            if (server != null && server.isHosting()) {
+                final String playerName = player.getName();
+                replaceAction = () -> server.replaceDisconnectedWithAI(playerName);
+            }
+        }
+        final Runnable action = replaceAction;
+        forge.gui.FThreads.invokeInEdtNowOrLater(() -> field.setDisconnected(disconnected, action));
+    }
+
+    @Override
     public void updateManaPool(final Iterable<PlayerView> manaPoolUpdate) {
         for (final PlayerView p : manaPoolUpdate) {
             getFieldViewFor(p).updateManaPool();

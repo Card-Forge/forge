@@ -342,6 +342,9 @@ public interface IGuiGame {
     /** Signal to start a client-side elapsed timer for waiting display. */
     void showWaitingTimer(PlayerView forPlayer, String waitingForPlayerName);
 
+    /** Show or hide the disconnect indicator for the given player. */
+    default void showPlayerDisconnected(PlayerView player, boolean disconnected) { }
+
     /** Returns true if this game instance is a network game. */
     boolean isNetGame();
     void setNetGame();
