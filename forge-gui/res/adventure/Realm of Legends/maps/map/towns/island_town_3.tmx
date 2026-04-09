@@ -8,7 +8,7 @@
  <tileset firstgid="11905" source="../../../../common/maps/tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJy1lEEOwiAQRTGxJW49SrVGL8CFtIfwLi7qTTRqvI6wIE4odP4n6eJvIPDmf5gZrTHjwto1xry9rpu/wnrXLMv9JszIfRDcUPulnWo/c8fT7x0yfhlWmlfUS6knsI9CCG9o8yxEoZ65LJC/UJJT9j8EN/cXJEdjSZ2V90e9slw079SrxkFqcEDeJe5qjXNq3jnXb7U+Gb+y3xA+ot7fcyNmHOo9zcAJ3tZOmdqMQ7z3ySySKnmM/cXwg06iBmYuxD6tnSsyf+Zcbjawdd8td04yfw/VN60=
+   eJy1lMENwjAMRYNEG3FlFKAIFmAh2iHYhUPZBASIdYgPFlbqxP5CPfxLouT978QeYwjjzNo2IbySLqufaH3TzMv9ZEzm3gEuee/bqXaVOx5pb6/kRVh5vVhPww+xD0Ie3tDqLI/IT60Wnr9Q0snYfwNc7S9IjsWSOhvv782Kcr31zrNaHK8Hq94l7mKJcVCu1m//5ET+F/ebh+9Rl+65AjPOm73GW8cp05pxnuxdNoukShm5vxA+6Sg8IHOB+xR9d63+yDltNqC+bxE7J5lf3hs4uQ==
   </data>
  </layer>
  <layer id="2" name="Ground" width="30" height="17">
