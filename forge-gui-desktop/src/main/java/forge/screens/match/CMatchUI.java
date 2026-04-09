@@ -104,6 +104,7 @@ import forge.screens.match.controllers.CDock;
 import forge.screens.match.controllers.CLog;
 import forge.screens.match.controllers.CPrompt;
 import forge.screens.match.controllers.CStack;
+import forge.screens.match.controllers.CYield;
 import forge.screens.match.menus.CMatchUIMenus;
 import forge.screens.match.views.VField;
 import forge.screens.match.views.VHand;
@@ -171,6 +172,7 @@ public final class CMatchUI
     private final CLog cLog = new CLog(this);
     private final CPrompt cPrompt = new CPrompt(this);
     private final CStack cStack = new CStack(this);
+    private final CYield cYield = new CYield(this);
     private int nextNotifiableStackIndex = 0;
 
     public CMatchUI() {
@@ -190,6 +192,7 @@ public final class CMatchUI
         this.myDocs.put(EDocID.REPORT_COMBAT, cCombat.getView());
         this.myDocs.put(EDocID.REPORT_DEPENDENCIES, cDependencies.getView());
         this.myDocs.put(EDocID.REPORT_LOG, cLog.getView());
+        this.myDocs.put(EDocID.REPORT_YIELD, getCYield().getView());
         this.myDocs.put(EDocID.DEV_MODE, getCDev().getView());
         this.myDocs.put(EDocID.BUTTON_DOCK, getCDock().getView());
     }
@@ -268,6 +271,9 @@ public final class CMatchUI
     }
     public CStack getCStack() {
         return cStack;
+    }
+    public CYield getCYield() {
+        return cYield;
     }
     public TargetingOverlay getTargetingOverlay() {
         return targetingOverlay;
@@ -701,6 +707,24 @@ public final class CMatchUI
         cLog.getView().refreshDisplay();
     }
 
+    public void refreshYieldPanel() {
+        view.populate();
+    }
+
+    // Whether the host has advanced yield options enabled (network play).
+    // Defaults to true so local games are unaffected.
+    private volatile boolean hostYieldEnabled = true;
+
+    public boolean isHostYieldEnabled() {
+        return hostYieldEnabled;
+    }
+
+    @Override
+    public void setHostYieldEnabled(boolean enabled) {
+        this.hostYieldEnabled = enabled;
+        FThreads.invokeInEdtNowOrLater(() -> getCYield().updateYieldButtons());
+    }
+
     public void repaintCardOverlays() {
         final List<CardPanel> panels = getVisibleCardPanels();
         for (final CardPanel panel : panels) {
@@ -758,6 +782,9 @@ public final class CMatchUI
         final FButton btn1 = view.getBtnOK(), btn2 = view.getBtnCancel();
         btn1.setText(label1);
         btn2.setText(label2);
+
+        // Update yield buttons state when prompt changes (e.g., entering/exiting mulligan)
+        getCYield().updateYieldButtons();
 
         final FButton toFocus = enable1 && focus1 ? btn1 : (enable2 ? btn2 : null);
 
@@ -871,7 +898,10 @@ public final class CMatchUI
 
     @Override
     public void updateStack() {
-        FThreads.invokeInEdtNowOrLater(() -> getCStack().update());
+        FThreads.invokeInEdtNowOrLater(() -> {
+            getCStack().update();
+            getCYield().updateYieldButtons();  // Update yield button states
+        });
     }
 
     /**

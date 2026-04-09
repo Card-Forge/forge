@@ -65,6 +65,11 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
         return clientIndex;
     }
 
+    @Override
+    public boolean isRemoteGuiProxy() {
+        return true;
+    }
+
     public void pause() {
         paused = true;
     }
@@ -483,6 +488,17 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
     public boolean isUiSetToSkipPhase(final PlayerView playerTurn, final PhaseType phase) {
         final Boolean result = sendAndWait(ProtocolMethod.isUiSetToSkipPhase, playerTurn, phase);
         return Boolean.TRUE.equals(result);
+    }
+
+    @Override
+    public void syncYieldMode(final PlayerView player, final forge.gamemodes.match.YieldMode mode) {
+        // Send yield state to client (when server clears yield due to end condition)
+        send(ProtocolMethod.syncYieldMode, player, mode);
+    }
+
+    @Override
+    public void setHostYieldEnabled(final boolean enabled) {
+        send(ProtocolMethod.setHostYieldEnabled, enabled);
     }
 
     @Override

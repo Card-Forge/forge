@@ -4,14 +4,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ButtonGroup;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
 
 import com.google.common.primitives.Ints;
 
 import forge.control.KeyboardShortcuts;
+import forge.gamemodes.net.event.MessageEvent;
+import forge.gamemodes.net.server.FServerManager;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
@@ -19,10 +21,9 @@ import forge.menus.MenuUtil;
 import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.VAutoYields;
-import forge.screens.match.views.VField;
+import forge.screens.match.VYieldSettings;
 import forge.screens.match.controllers.CDock.ArcState;
 import forge.toolbox.FSkin.SkinIcon;
-import forge.toolbox.FSkin.SkinnedCheckBoxMenuItem;
 import forge.toolbox.FSkin.SkinnedMenu;
 import forge.toolbox.FSkin.SkinnedMenuItem;
 import forge.toolbox.FSkin.SkinnedRadioButtonMenuItem;
@@ -53,9 +54,7 @@ public final class GameMenu {
         menu.addSeparator();
         menu.add(getMenuItem_TargetingArcs());
         menu.add(new CardOverlaysMenu(matchUI).getMenu());
-        menu.add(getSubmenu_StackGroupPermanents());
-        menu.add(getMenuItem_TokensSeparateRow());
-        menu.add(getMenuItem_AutoYields());
+        menu.add(getYieldOptionsMenu());
         menu.addSeparator();
         menu.add(getMenuItem_ViewDeckList());
         return menu;
@@ -201,53 +200,43 @@ public final class GameMenu {
         return e -> matchUI.viewDeckList();
     }
 
-    private SkinnedMenu getSubmenu_StackGroupPermanents() {
+    private JMenu getYieldOptionsMenu() {
         final Localizer localizer = Localizer.getInstance();
-        final SkinnedMenu submenu = new SkinnedMenu(localizer.getMessage("cbpStackGroupPermanents"));
-        final ButtonGroup group = new ButtonGroup();
-        final String current = prefs.getPref(FPref.UI_GROUP_PERMANENTS);
+        final JMenu yieldMenu = new JMenu(localizer.getMessage("lblYieldOptions"));
+        final boolean yieldEnabled = prefs.getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS);
 
-        final String[] keys = {"default", "stack", "group_creatures", "group_all"};
-        final String[] labelKeys = {"lblGroupDefault", "lblGroupStack", "lblGroupCreatures", "lblGroupAll"};
-        final String[] tooltipKeys = {"nlGroupDefault", "nlGroupStack", "nlGroupCreatures", "nlGroupAll"};
-        for (int i = 0; i < keys.length; i++) {
-            SkinnedRadioButtonMenuItem item = new SkinnedRadioButtonMenuItem(localizer.getMessage(labelKeys[i]));
-            item.setToolTipText(localizer.getMessage(tooltipKeys[i]));
-            item.setSelected(keys[i].equals(current));
-            item.addActionListener(getGroupPermanentsAction(keys[i]));
-            group.add(item);
-            submenu.add(item);
-        }
-        return submenu;
-    }
+        // Auto-Yields (manage per-ability yields) - always available, independent of advanced options
+        yieldMenu.add(getMenuItem_AutoYields());
+        yieldMenu.addSeparator();
 
-    private SkinnedCheckBoxMenuItem getMenuItem_TokensSeparateRow() {
-        final Localizer localizer = Localizer.getInstance();
-        SkinnedCheckBoxMenuItem menuItem = new SkinnedCheckBoxMenuItem(localizer.getMessage("cbpTokensSeparateRow"));
-        menuItem.setToolTipText(localizer.getMessage("nlTokensSeparateRow"));
-        menuItem.setState(prefs.getPrefBoolean(FPref.UI_TOKENS_IN_SEPARATE_ROW));
-        menuItem.addActionListener(e -> {
-            final boolean enabled = !prefs.getPrefBoolean(FPref.UI_TOKENS_IN_SEPARATE_ROW);
-            prefs.setPref(FPref.UI_TOKENS_IN_SEPARATE_ROW, enabled);
+        // Enable Advanced Yield Options toggle with Ctrl+Y accelerator
+        final JCheckBoxMenuItem enableItem = new JCheckBoxMenuItem(localizer.getMessage("lblEnableAdvancedYieldOptions"));
+        final KeyStroke ks = KeyboardShortcuts.getKeyStrokeForPref(FPref.SHORTCUT_YIELD_OPTIONS);
+        if (ks != null) { enableItem.setAccelerator(ks); }
+        enableItem.setState(yieldEnabled);
+
+        // Yield Settings dialog launcher (below the enable toggle)
+        final SkinnedMenuItem settingsItem = new SkinnedMenuItem(localizer.getMessage("lblYieldSettings"));
+        settingsItem.setEnabled(yieldEnabled);
+        settingsItem.addActionListener(e -> new VYieldSettings().showDialog());
+
+        enableItem.addActionListener(e -> {
+            final boolean newState = !prefs.getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS);
+            prefs.setPref(FPref.YIELD_EXPERIMENTAL_OPTIONS, newState);
             prefs.save();
-            SwingUtilities.invokeLater(() -> {
-                for (final VField f : matchUI.getFieldViews()) {
-                    f.getTabletop().doLayout();
-                }
-            });
+            settingsItem.setEnabled(newState);
+            matchUI.refreshYieldPanel();
+            final FServerManager server = FServerManager.getInstance();
+            if (server != null && server.isHosting()) {
+                server.broadcast(new MessageEvent(localizer.getMessage(
+                    newState ? "lblYieldHostEnabled" : "lblYieldHostToggleDisabled")));
+                server.broadcastHostYieldEnabled(newState);
+            }
         });
-        return menuItem;
+        yieldMenu.add(enableItem);
+        yieldMenu.add(settingsItem);
+
+        return yieldMenu;
     }
 
-    private ActionListener getGroupPermanentsAction(final String value) {
-        return e -> {
-            prefs.setPref(FPref.UI_GROUP_PERMANENTS, value);
-            prefs.save();
-            SwingUtilities.invokeLater(() -> {
-                for (final VField f : matchUI.getFieldViews()) {
-                    f.getTabletop().doLayout();
-                }
-            });
-        };
-    }
 }

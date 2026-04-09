@@ -289,6 +289,22 @@ public final class FServerManager implements IHasNetLog {
         this.lobbyListener = listener;
     }
 
+    /**
+     * Tell all remote clients whether the host has advanced yield options enabled.
+     */
+    public void broadcastHostYieldEnabled(boolean enabled) {
+        final HostedMatch hostedMatch = localLobby.getHostedMatch();
+        if (hostedMatch == null) { return; }
+        final Game game = hostedMatch.getGame();
+        if (game == null) { return; }
+        for (final Player p : game.getPlayers()) {
+            final IGuiGame gui = hostedMatch.getGuiForPlayer(p);
+            if (gui instanceof NetGuiGame) {
+                gui.setHostYieldEnabled(enabled);
+            }
+        }
+    }
+
     public void updateLobbyState() {
         final LobbyUpdateEvent event = new LobbyUpdateEvent(localLobby.getData());
         broadcast(event);
