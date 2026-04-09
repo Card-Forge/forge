@@ -59,6 +59,12 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
     private static final long serialVersionUID = -5837776824284093004L;
 
     private final FTextArea txtInput = new FTextArea();
+
+    // URL Import components
+    private final JTextField urlInput = new JTextField();
+    private final FButton fetchButton = new FButton("Fetch");
+    private final FSkin.SkinnedLabel urlStatusLabel = new FSkin.SkinnedLabel(" ");
+
     // Memo: Background colour: #3e4f63
     // UN-USED COLOUR TO USE "#E1E35F;";
 
@@ -540,15 +546,78 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
         }
 
 
+        // === URL IMPORT PANEL ===
+        JPanel urlPanel = new JPanel(new MigLayout("insets 5, gap 5, fillx"));
+        urlPanel.setOpaque(false);
+        FSkin.SkinnedLabel urlLabel = new FSkin.SkinnedLabel("URL:");
+        urlLabel.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        urlLabel.setFont(FSkin.getBoldFont());
+        urlPanel.add(urlLabel, "w 30!");
+        urlPanel.add(this.urlInput, "growx, pushx");
+        urlPanel.add(this.fetchButton, "w 80!, h 26!");
+        this.urlStatusLabel.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT).getColor());
+        this.urlStatusLabel.setFont(FSkin.getItalicFont());
+        urlPanel.add(this.urlStatusLabel, "newline, spanx 3, growx");
+
+        // URL Fetch action
+        ActionListener fetchAction = e -> fetchDeckFromUrl();
+        this.fetchButton.addActionListener(fetchAction);
+        this.urlInput.addActionListener(fetchAction); // Enter key triggers fetch
+
         // === ASSEMBLING ALL PANELS TOGETHER
         // ==================================
-        this.add(this.scrollInput, "cell 0 0, w 40%, growy, pushy, spany 2");
-        this.add(this.scrollOutput, "cell 1 0, w 60%, growy, pushy, spany 2");
-        this.add(statsPanel, "cell 2 0, w 480:510:550, growy, pushy, ax c");
-        this.add(cardPreview, "cell 2 1, w 480:510:550, h 65%, growy, pushy, ax c");
-        this.add(closedOptsPanel, "cell 0 2, left, w 100%, h 25!, spanx 3, hidemode 3");
-        this.add(optionsPanel, "cell 0 2, left, w 100%, spanx 3, hidemode 3");
-        this.add(cmdPanel, "cell 0 3, w 100%, spanx 3");
+        this.add(urlPanel, "cell 0 0, w 100%, spanx 2, h 55!");
+        this.add(this.scrollInput, "cell 0 1, w 40%, growy, pushy, spany 2");
+        this.add(this.scrollOutput, "cell 1 1, w 60%, growy, pushy, spany 2");
+        this.add(statsPanel, "cell 2 0, w 480:510:550, growy, pushy, ax c, spany 2");
+        this.add(cardPreview, "cell 2 2, w 480:510:550, h 65%, growy, pushy, ax c");
+        this.add(closedOptsPanel, "cell 0 3, left, w 100%, h 25!, spanx 3, hidemode 3");
+        this.add(optionsPanel, "cell 0 3, left, w 100%, spanx 3, hidemode 3");
+        this.add(cmdPanel, "cell 0 4, w 100%, spanx 3");
+    }
+
+    private void fetchDeckFromUrl() {
+        String url = urlInput.getText().trim();
+        if (url.isEmpty()) {
+            urlStatusLabel.setText("Please enter a URL.");
+            urlStatusLabel.setForeground(Color.ORANGE);
+            return;
+        }
+        if (!DeckUrlFetcher.isSupportedUrl(url)) {
+            urlStatusLabel.setText("Site not supported. Supported: Moxfield, Archidekt, EDHREC, TappedOut, MTGGoldfish");
+            urlStatusLabel.setForeground(Color.ORANGE);
+            return;
+        }
+
+        fetchButton.setEnabled(false);
+        urlStatusLabel.setText("Fetching deck...");
+        urlStatusLabel.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT).getColor());
+
+        new SwingWorker<DeckUrlFetcher.FetchResult, Void>() {
+            @Override
+            protected DeckUrlFetcher.FetchResult doInBackground() {
+                return DeckUrlFetcher.fetch(url);
+            }
+
+            @Override
+            protected void done() {
+                fetchButton.setEnabled(true);
+                try {
+                    DeckUrlFetcher.FetchResult result = get();
+                    if (result.isSuccess()) {
+                        txtInput.setText(result.getDeckText());
+                        urlStatusLabel.setText(result.getMessage());
+                        urlStatusLabel.setForeground(new Color(0x89, 0xDC, 0x9F)); // green
+                    } else {
+                        urlStatusLabel.setText(result.getMessage());
+                        urlStatusLabel.setForeground(new Color(0xFF, 0x97, 0x7A)); // red/orange
+                    }
+                } catch (Exception ex) {
+                    urlStatusLabel.setText("Error fetching deck. Please try again.");
+                    urlStatusLabel.setForeground(new Color(0xFF, 0x97, 0x7A));
+                }
+            }
+        }.execute();
     }
 
     private void activateCardPreview(HyperlinkEvent e) {
