@@ -1035,7 +1035,6 @@ public class CardView extends GameEntityView {
     public void updateNeedsTransformAnimation(boolean value) {
         set(TrackableProperty.NeedsTransformAnimation, value);
     }
-
     void updateState(Card c) {
         updateName(c);
         updateZoneText(c);

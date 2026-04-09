@@ -37,8 +37,8 @@ import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -228,6 +228,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeColorIdentityCombobox();
         initializeSwitchStatesCombobox();
         initializeAutoYieldModeComboBox();
+        initializeStackGroupPermanentsComboBox();
         initializeCounterDisplayTypeComboBox();
         initializeCounterDisplayLocationComboBox();
         initializeGraveyardOrderingComboBox();

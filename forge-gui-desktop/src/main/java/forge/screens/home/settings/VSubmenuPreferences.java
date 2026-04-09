@@ -153,6 +153,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final FComboBoxPanel<String> cbpLandPlayed = new FComboBoxPanel<>(localizer.getMessage("cbpLandPlayed")+":");
     private final FComboBoxPanel<String> cbpDisplayCurrentCardColors = new FComboBoxPanel<>(localizer.getMessage("cbpDisplayCurrentCardColors")+":");
     private final FComboBoxPanel<String> cbpAutoYieldMode = new FComboBoxPanel<>(localizer.getMessage("cbpAutoYieldMode")+":");
+    private final FComboBoxPanel<String> cbpStackGroupPermanents = new FComboBoxPanel<>(localizer.getMessage("cbpStackGroupPermanents")+":");
     private final FComboBoxPanel<String> cbpCounterDisplayType = new FComboBoxPanel<>(localizer.getMessage("cbpCounterDisplayType")+":");
     private final FComboBoxPanel<String> cbpCounterDisplayLocation =new FComboBoxPanel<>(localizer.getMessage("cbpCounterDisplayLocation")+":");
     private final FComboBoxPanel<String> cbpGraveyardOrdering = new FComboBoxPanel<>(localizer.getMessage("cbpGraveyardOrdering")+":");
@@ -900,6 +901,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         return cbpAutoYieldMode;
     }
 
+    public FComboBoxPanel<String> getCbpStackGroupPermanents() {
+        return cbpStackGroupPermanents;
+    }
+
     public FComboBoxPanel<String> getCounterDisplayTypeComboBoxPanel() {
         return cbpCounterDisplayType;
     }
@@ -1013,6 +1018,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     public FComboBoxPanel<String> getCbpStackGroupPermanents() {
         return cbpStackGroupPermanents;
     }
+
 
     public final JCheckBox getCbManaLostPrompt() {
     	return cbManaLostPrompt;
