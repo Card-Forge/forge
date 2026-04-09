@@ -32,6 +32,8 @@ import forge.screens.match.CMatchUI;
 import forge.toolbox.special.CardZoomer;
 import forge.util.Localizer;
 import forge.view.KeyboardShortcutsDialog;
+import forge.view.arcane.CardPanel;
+import forge.view.arcane.CardPanelContainer;
 
 /** 
  * Consolidates keyboard shortcut assembly into one location
@@ -141,8 +143,8 @@ public class KeyboardShortcuts {
                 if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
                 if (matchUI == null || matchUI.getCurrentPlayer() == null) { return; }
                 if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) { return; }
-                boolean activated = matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_NEXT_PHASE);
-                if (activated && matchUI.getGameController() != null) {
+                matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_NEXT_PHASE);
+                if (matchUI.getGameController() != null) {
                     matchUI.getGameController().passPriority();
                 }
             }
@@ -170,8 +172,8 @@ public class KeyboardShortcuts {
                 if (matchUI == null || matchUI.getCurrentPlayer() == null) { return; }
                 if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) { return; }
                 if (matchUI.getGameView() != null && matchUI.getGameView().getPlayers().size() >= 3) {
-                    boolean activated = matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_YOUR_NEXT_TURN);
-                    if (activated && matchUI.getGameController() != null) {
+                    matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_YOUR_NEXT_TURN);
+                    if (matchUI.getGameController() != null) {
                         matchUI.getGameController().passPriority();
                     }
                 }
@@ -185,8 +187,8 @@ public class KeyboardShortcuts {
                 if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
                 if (matchUI == null || matchUI.getCurrentPlayer() == null) { return; }
                 if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) { return; }
-                boolean activated = matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_END_OF_TURN);
-                if (activated && matchUI.getGameController() != null) {
+                matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_END_OF_TURN);
+                if (matchUI.getGameController() != null) {
                     matchUI.getGameController().passPriority();
                 }
             }
@@ -199,8 +201,8 @@ public class KeyboardShortcuts {
                 if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
                 if (matchUI == null || matchUI.getCurrentPlayer() == null) { return; }
                 if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) { return; }
-                boolean activated = matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_BEFORE_COMBAT);
-                if (activated && matchUI.getGameController() != null) {
+                matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_BEFORE_COMBAT);
+                if (matchUI.getGameController() != null) {
                     matchUI.getGameController().passPriority();
                 }
             }
@@ -213,14 +215,14 @@ public class KeyboardShortcuts {
                 if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
                 if (matchUI == null || matchUI.getCurrentPlayer() == null) { return; }
                 if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) { return; }
-                boolean activated = matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_END_STEP);
-                if (activated && matchUI.getGameController() != null) {
+                matchUI.setYieldMode(matchUI.getCurrentPlayer(), YieldMode.UNTIL_END_STEP);
+                if (matchUI.getGameController() != null) {
                     matchUI.getGameController().passPriority();
                 }
             }
         };
 
-        /** Cancel current yield mode and auto-pass-no-actions (experimental). */
+        /** Cancel current yield mode (experimental). */
         final Action actCancelYield = new AbstractAction() {
             @Override
             public void actionPerformed(final ActionEvent e) {
@@ -231,7 +233,6 @@ public class KeyboardShortcuts {
                 if (currentYield != null && currentYield != YieldMode.NONE) {
                     matchUI.clearYieldMode(matchUI.getCurrentPlayer());
                 }
-                matchUI.getCYield().cancelAutoPassIfActive();
             }
         };
 
@@ -315,7 +316,12 @@ public class KeyboardShortcuts {
                 if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
                 if (matchUI == null) { return; }
                 if (!CardZoomer.SINGLETON_INSTANCE.isZoomerOpen()) {
-                    CardZoomer.SINGLETON_INSTANCE.doMouseWheelZoom();
+                    final CardPanel hovered = CardPanelContainer.lastHoveredPanel;
+                    if (hovered != null && hovered.getCard() != null
+                            && matchUI.mayView(hovered.getCard())) {
+                        CardZoomer.SINGLETON_INSTANCE.setCard(hovered.getCard().getCurrentState(), false);
+                        CardZoomer.SINGLETON_INSTANCE.doMouseWheelZoom();
+                    }
                 } else {
                     CardZoomer.SINGLETON_INSTANCE.closeZoomer();
                 }
@@ -383,9 +389,6 @@ public class KeyboardShortcuts {
                 prefs.save();
                 if (matchUI != null) {
                     matchUI.refreshYieldPanel();
-                    if (newState && matchUI.getGameController() != null) {
-                        matchUI.getGameController().selectButtonOk();
-                    }
                 }
             }
         };

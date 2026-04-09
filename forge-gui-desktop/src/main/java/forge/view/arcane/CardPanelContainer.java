@@ -421,16 +421,24 @@ public abstract class CardPanelContainer extends SkinnedPanel {
     }
 
     public final void mouseOut(final CardPanel panel, final MouseEvent evt) {
+        if (lastHoveredPanel == panel) {
+            lastHoveredPanel = null;
+        }
         for (final CardPanelMouseListener listener : this.listeners) {
             listener.mouseOut(this.hoveredPanel, evt);
         }
     }
 
     public void mouseOver(final CardPanel panel, final MouseEvent evt) {
+        lastHoveredPanel = panel;
         for (final CardPanelMouseListener listener : this.listeners) {
             listener.mouseOver(panel, evt);
         }
     }
+
+    /** Tracks the card panel currently under the mouse cursor across all containers.
+     *  Used by keyboard shortcuts (e.g. Z-zoom) that need to know the hovered card. */
+    public static volatile CardPanel lastHoveredPanel = null;
 
     public final List<CardPanel> getCardPanels() {
         return this.cardPanels;
