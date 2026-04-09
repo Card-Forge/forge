@@ -1,0 +1,8 @@
+Name:Soaring Stoneglider
+ManaCost:2 W
+Types:Creature Elephant Cleric
+PT:2/1
+K:AlternateAdditionalCost:ExileFromGrave<2/Card>:1 W
+K:Flying
+K:Vigilance
+Oracle:As an additional cost to cast this spell, exile two cards from your graveyard or pay {1}{W}.\nFlying, vigilance
