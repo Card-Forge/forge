@@ -77,6 +77,8 @@ public enum ProtocolMethod {
     setHostYieldEnabled (Mode.SERVER, Void.TYPE, Boolean.TYPE),
     showWaitingTimer    (Mode.SERVER, Void.TYPE, PlayerView.class, String.class),
     handleGameEvent     (Mode.SERVER, Void.TYPE, GameEvent.class),
+    setHighlighted      (Mode.SERVER, Void.TYPE, GameEntityView.class, Boolean.TYPE),
+    applyDelta          (Mode.SERVER, Void.TYPE, DeltaPacket.class),
 
     // Client -> Server
     // Note: these should all return void, to avoid awkward situations in
@@ -98,7 +100,8 @@ public enum ProtocolMethod {
     reorderHand               (Mode.CLIENT, Void.TYPE, CardView.class, Integer.TYPE),
     notifyYieldModeChanged    (Mode.CLIENT, Void.TYPE, PlayerView.class, YieldMode.class),
     notifyAutoYieldChanged    (Mode.CLIENT, Void.TYPE, String.class, Boolean.TYPE),
-    notifyTriggerChoiceChanged(Mode.CLIENT, Void.TYPE, Integer.TYPE, Integer.TYPE);
+    notifyTriggerChoiceChanged(Mode.CLIENT, Void.TYPE, Integer.TYPE, Integer.TYPE),
+    requestResync             (Mode.CLIENT, Void.TYPE);
 
     private enum Mode {
         SERVER(IGuiGame.class),

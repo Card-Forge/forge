@@ -24,6 +24,7 @@ import forge.util.BuildInfo;
 import forge.util.IterableUtil;
 import forge.util.Localizer;
 import forge.localinstance.properties.ForgeNetPreferences;
+import forge.gamemodes.net.server.RemoteClientGuiGame;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
@@ -300,7 +301,7 @@ public final class FServerManager implements IHasNetLog {
         if (game == null) { return; }
         for (final Player p : game.getPlayers()) {
             final IGuiGame gui = hostedMatch.getGuiForPlayer(p);
-            if (gui instanceof NetGuiGame) {
+            if (gui instanceof RemoteClientGuiGame) {
                 gui.setHostYieldEnabled(enabled);
             }
         }

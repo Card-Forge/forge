@@ -1143,8 +1143,7 @@ public final class CMatchUI
         }
         // Multiplayer: sort by turn order with local player first
         final String layout = FModel.getPreferences().getPref(FPref.UI_MULTIPLAYER_FIELD_LAYOUT);
-        if (players.size() > 2 && myPlayers != null && myPlayers.size() >= 1
-                && !"OFF".equals(layout)) {
+        if (players.size() > 2 && myPlayers != null && myPlayers.size() >= 1) {
             players = new FCollection<>(sortPlayersForMultiplayer(players, myPlayers.get(0), "ROWS".equals(layout)));
         }
         initMatch(players, myPlayers);
