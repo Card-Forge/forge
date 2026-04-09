@@ -36,6 +36,11 @@ public class NetGuiGame extends AbstractGuiGame {
     private volatile boolean paused;
     private GameEventForwarder forwarder;
     private boolean flushing;
+    // Most recent yield preferences snapshot received from the remote client.
+    // Read on the game thread by YieldController.shouldInterruptYield; written
+    // on the Netty thread when notifyYieldStateChanged arrives. volatile is
+    // sufficient since the value is an immutable YieldPrefs.
+    private volatile forge.gamemodes.match.YieldPrefs remoteYieldPrefs;
 
     public NetGuiGame(final IToClient client, final int slotIndex) {
         this.sender = new GameProtocolSender(client);
@@ -316,6 +321,16 @@ public class NetGuiGame extends AbstractGuiGame {
     public void syncYieldMode(final PlayerView player, final forge.gamemodes.match.YieldMode mode) {
         // Send yield state to client (when server clears yield due to end condition)
         send(ProtocolMethod.syncYieldMode, player, mode);
+    }
+
+    @Override
+    public void setRemoteYieldPrefs(forge.gamemodes.match.YieldPrefs prefs) {
+        this.remoteYieldPrefs = prefs;
+    }
+
+    @Override
+    public forge.gamemodes.match.YieldPrefs getRemoteYieldPrefs() {
+        return remoteYieldPrefs;
     }
 
     @Override

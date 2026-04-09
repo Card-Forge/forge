@@ -140,16 +140,15 @@ public class YieldController {
     /**
      * Check if auto-pass should fire because the player has no available actions.
      * This is a persistent preference toggle, not a one-shot yield mode.
+     * Reads YIELD_AUTO_PASS_NO_ACTIONS from the active player's source — host's
+     * local prefs for the host player, the remote client's stored snapshot for
+     * remote players.
      */
     private boolean shouldAutoPassNoActions(PlayerView player) {
-        // Don't apply host preferences to remote players — they must opt in themselves
-        if (gui.isRemoteGuiProxy()) {
-            return false;
-        }
         if (!isYieldExperimentalEnabled()) {
             return false;
         }
-        if (!FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.YIELD_AUTO_PASS_NO_ACTIONS)) {
+        if (!getInterruptPref(ForgePreferences.FPref.YIELD_AUTO_PASS_NO_ACTIONS)) {
             return false;
         }
         // Interrupt conditions still break through (attackers, blockers, targeting, etc.)
@@ -157,6 +156,25 @@ public class YieldController {
             return false;
         }
         return !player.hasAvailableActions();
+    }
+
+    /**
+     * Look up a yield interrupt preference for the player this YieldController serves.
+     * For the host's own GUI (CMatchUI), reads FModel.getPreferences().
+     * For a remote-player proxy GUI (NetGuiGame), reads the YieldPrefs snapshot
+     * stored on the proxy by notifyYieldStateChanged. Falls back to the Forge
+     * default value if no snapshot has arrived yet — the race window between
+     * game start and the client's first send is microseconds; a one-pass
+     * fallback is acceptable.
+     */
+    private boolean getInterruptPref(ForgePreferences.FPref pref) {
+        if (gui.isRemoteGuiProxy()) {
+            YieldPrefs remote = gui.getRemoteYieldPrefs();
+            return remote != null
+                ? remote.getInterrupt(pref)
+                : "true".equals(pref.getDefault());
+        }
+        return FModel.getPreferences().getPrefBoolean(pref);
     }
 
     /**
@@ -340,8 +358,9 @@ public class YieldController {
             return false;
         }
 
-        // Skip interrupt check for remote players — host preferences don't apply to them
-        if (!gui.isRemoteGuiProxy() && shouldInterruptYield(player)) {
+        // Interrupts apply uniformly: host prefs for the host player, remote
+        // client's stored prefs for remote players (via getInterruptPref).
+        if (shouldInterruptYield(player)) {
             clearYieldMode(player);
             return false;
         }
@@ -476,7 +495,9 @@ public class YieldController {
 
     /**
      * Check if yield should be interrupted based on game conditions.
-     * Uses network-safe GameView properties to work correctly for non-host players in multiplayer.
+     * Reads interrupt prefs through getInterruptPref so remote players honour
+     * their own client-side prefs (forwarded by notifyYieldStateChanged) rather
+     * than the host's.
      */
     private boolean shouldInterruptYield(final PlayerView player) {
         GameView gameView = gui.getGameView();
@@ -484,12 +505,11 @@ public class YieldController {
             return false;
         }
 
-        ForgePreferences prefs = FModel.getPreferences();
         forge.game.phase.PhaseType phase = gameView.getPhase();
         PlayerView currentPlayerTurn = gameView.getPlayerTurn();
         forge.game.combat.CombatView combatView = gameView.getCombat();
 
-        if (prefs.getPrefBoolean(ForgePreferences.FPref.YIELD_INTERRUPT_ON_ATTACKERS)) {
+        if (getInterruptPref(ForgePreferences.FPref.YIELD_INTERRUPT_ON_ATTACKERS)) {
             // Only interrupt if there are creatures attacking THIS player or their planeswalkers/battles
             if (phase == forge.game.phase.PhaseType.COMBAT_DECLARE_ATTACKERS &&
                 combatView != null && isBeingAttacked(combatView, player)) {
@@ -497,7 +517,7 @@ public class YieldController {
             }
         }
 
-        if (prefs.getPrefBoolean(ForgePreferences.FPref.YIELD_INTERRUPT_ON_BLOCKERS)) {
+        if (getInterruptPref(ForgePreferences.FPref.YIELD_INTERRUPT_ON_BLOCKERS)) {
             // Only interrupt if there are creatures attacking THIS player or their planeswalkers/battles
             if (phase == forge.game.phase.PhaseType.COMBAT_DECLARE_BLOCKERS &&
                 combatView != null && isBeingAttacked(combatView, player)) {
@@ -505,7 +525,7 @@ public class YieldController {
             }
         }
 
-        if (prefs.getPrefBoolean(ForgePreferences.FPref.YIELD_INTERRUPT_ON_TARGETING)) {
+        if (getInterruptPref(ForgePreferences.FPref.YIELD_INTERRUPT_ON_TARGETING)) {
             forge.util.collect.FCollectionView<forge.game.spellability.StackItemView> stack = gameView.getStack();
             if (stack != null) {
                 for (forge.game.spellability.StackItemView si : stack) {
@@ -516,7 +536,7 @@ public class YieldController {
             }
         }
 
-        if (prefs.getPrefBoolean(ForgePreferences.FPref.YIELD_INTERRUPT_ON_OPPONENT_SPELL)) {
+        if (getInterruptPref(ForgePreferences.FPref.YIELD_INTERRUPT_ON_OPPONENT_SPELL)) {
             // Use network-safe stack access via GameView
             forge.game.spellability.StackItemView topItem = gameView.peekStack();
             if (topItem != null) {
@@ -530,7 +550,7 @@ public class YieldController {
             }
         }
 
-        if (prefs.getPrefBoolean(ForgePreferences.FPref.YIELD_INTERRUPT_ON_COMBAT)) {
+        if (getInterruptPref(ForgePreferences.FPref.YIELD_INTERRUPT_ON_COMBAT)) {
             if (phase == forge.game.phase.PhaseType.COMBAT_BEGIN) {
                 YieldState state = yieldStates.get(player);
                 YieldMode mode = state != null ? state.mode : null;
@@ -542,13 +562,13 @@ public class YieldController {
             }
         }
 
-        if (prefs.getPrefBoolean(ForgePreferences.FPref.YIELD_INTERRUPT_ON_MASS_REMOVAL)) {
+        if (getInterruptPref(ForgePreferences.FPref.YIELD_INTERRUPT_ON_MASS_REMOVAL)) {
             if (hasMassRemovalOnStack(gameView, player)) {
                 return true;
             }
         }
 
-        if (prefs.getPrefBoolean(ForgePreferences.FPref.YIELD_INTERRUPT_ON_TRIGGERS)) {
+        if (getInterruptPref(ForgePreferences.FPref.YIELD_INTERRUPT_ON_TRIGGERS)) {
             forge.util.collect.FCollectionView<forge.game.spellability.StackItemView> stack = gameView.getStack();
             if (stack != null) {
                 for (forge.game.spellability.StackItemView si : stack) {

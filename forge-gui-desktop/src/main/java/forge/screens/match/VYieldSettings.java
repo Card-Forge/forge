@@ -1,7 +1,12 @@
 package forge.screens.match;
 
 import forge.Singletons;
+import forge.gamemodes.match.YieldMode;
+import forge.gamemodes.match.YieldPrefs;
+import forge.gamemodes.net.client.NetGameController;
+import forge.game.player.PlayerView;
 import forge.gui.UiCommand;
+import forge.interfaces.IGameController;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
@@ -26,8 +31,11 @@ public class VYieldSettings extends FDialog {
     private static final int BUTTON_HEIGHT = 26;
     private static final int DROPDOWN_WIDTH = 120;
 
-    public VYieldSettings() {
+    private final CMatchUI matchUI;
+
+    public VYieldSettings(CMatchUI matchUI) {
         super();
+        this.matchUI = matchUI;
         final Localizer localizer = Localizer.getInstance();
         final ForgePreferences prefs = FModel.getPreferences();
 
@@ -112,6 +120,7 @@ public class VYieldSettings extends FDialog {
         cb.addActionListener(e -> {
             prefs.setPref(pref, cb.isSelected());
             prefs.save();
+            pushPrefsToHostIfNetworkClient();
         });
         add(cb, x, y, w, ROW_HEIGHT);
         return y + ROW_HEIGHT;
@@ -147,6 +156,7 @@ public class VYieldSettings extends FDialog {
             if (idx >= 0 && idx < valueOptions.length) {
                 prefs.setPref(scopePref, valueOptions[idx]);
                 prefs.save();
+                pushPrefsToHostIfNetworkClient();
             }
         });
         add(combo, x + w - DROPDOWN_WIDTH, y, DROPDOWN_WIDTH, ROW_HEIGHT);
@@ -157,5 +167,22 @@ public class VYieldSettings extends FDialog {
     public void showDialog() {
         setVisible(true);
         dispose();
+    }
+
+    /**
+     * If the player is a network client, send a fresh YieldPrefs snapshot to
+     * the host. The current yield mode is included unchanged so the message
+     * doubles as the existing yield-state notification path. No-op for local
+     * games and the host process.
+     */
+    private void pushPrefsToHostIfNetworkClient() {
+        if (matchUI == null) return;
+        IGameController controller = matchUI.getGameController();
+        if (!(controller instanceof NetGameController)) return;
+        PlayerView player = matchUI.getCurrentPlayer();
+        if (player == null) return;
+        YieldMode currentMode = matchUI.getYieldMode(player);
+        if (currentMode == null) currentMode = YieldMode.NONE;
+        controller.notifyYieldStateChanged(player, currentMode, YieldPrefs.fromCurrentPreferences());
     }
 }

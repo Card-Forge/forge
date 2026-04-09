@@ -953,10 +953,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     protected void reveal(final CardCollectionView cards, final ZoneType zone, final PlayerView owner, String message, boolean addSuffix) {
-        // Skip reveal dialog during active yield if "Interrupt on Reveal" is disabled
-        forge.gamemodes.match.YieldMode yieldMode = getGui().getYieldMode(getLocalPlayerView());
-        if (yieldMode != null && yieldMode != forge.gamemodes.match.YieldMode.NONE) {
-            if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_INTERRUPT_ON_REVEAL)) {
+        // Skip reveal dialog during active yield if "Interrupt on Reveal" is disabled.
+        // Gate on the host's experimental flag so legacy UNTIL_END_OF_TURN users
+        // are unaffected. Read the interrupt pref from the active player's source
+        // (host's local prefs vs the remote client's stored snapshot).
+        if (isYieldExperimentalEnabled()) {
+            forge.gamemodes.match.YieldMode yieldMode = getGui().getYieldMode(getLocalPlayerView());
+            if (yieldMode != null && yieldMode != forge.gamemodes.match.YieldMode.NONE
+                    && !getActivePlayerInterruptPref(FPref.YIELD_INTERRUPT_ON_REVEAL)) {
                 // Still show the cards temporarily but skip the dialog that requires user input
                 if (!cards.isEmpty()) {
                     tempShowCards(cards);
@@ -1776,10 +1780,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (sa != null && sa.isManaAbility()) {
             getGame().fireEvent(new GameEventAddLog(GameLogEntryType.LAND, message));
         } else {
-            // Skip notification dialog during active yield if "Interrupt on Reveal/Choices" is disabled
-            forge.gamemodes.match.YieldMode yieldMode = getGui().getYieldMode(getLocalPlayerView());
-            if (yieldMode != null && yieldMode != forge.gamemodes.match.YieldMode.NONE) {
-                if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_INTERRUPT_ON_REVEAL)) {
+            // Skip notification dialog during active yield if "Interrupt on Reveal/Choices" is disabled.
+            // Gate on the host's experimental flag and read the interrupt pref from the
+            // active player's source (host's local prefs vs the remote client's stored snapshot).
+            if (isYieldExperimentalEnabled()) {
+                forge.gamemodes.match.YieldMode yieldMode = getGui().getYieldMode(getLocalPlayerView());
+                if (yieldMode != null && yieldMode != forge.gamemodes.match.YieldMode.NONE
+                        && !getActivePlayerInterruptPref(FPref.YIELD_INTERRUPT_ON_REVEAL)) {
                     // Log the message but don't show a dialog
                     getGame().getGameLog().add(GameLogEntryType.INFORMATION, message);
                     return;
@@ -3485,11 +3492,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public void notifyYieldModeChanged(final PlayerView playerView, final forge.gamemodes.match.YieldMode mode) {
-        // Update the server's GUI with the client's yield mode
-        // This syncs yield state from network client to server
-        // Uses FromRemote methods to avoid triggering another notification and to handle
-        // PlayerView tracker mismatch (network PlayerViews have different trackers than server's)
+    public void notifyYieldStateChanged(final PlayerView playerView, final forge.gamemodes.match.YieldMode mode,
+                                        final forge.gamemodes.match.YieldPrefs prefs) {
+        // Always store the client's prefs snapshot first — they are independent of
+        // mode acceptance, and if we reject the mode below the host still wants the
+        // current prefs for any future interrupt evaluation.
+        if (prefs != null) {
+            getGui().setRemoteYieldPrefs(prefs);
+        }
 
         // If clearing yield, always pass through
         if (mode != null && mode != forge.gamemodes.match.YieldMode.NONE && !isYieldExperimentalEnabled()) {
@@ -3516,6 +3526,22 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     private boolean isYieldExperimentalEnabled() {
         return FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS);
+    }
+
+    /**
+     * Look up a yield interrupt preference for the player this controller represents.
+     * For the host's own player, reads FModel.getPreferences(). For a remote
+     * player, reads the snapshot stored in the per-player NetGuiGame; falls back
+     * to the Forge default value if no snapshot has arrived yet.
+     */
+    private boolean getActivePlayerInterruptPref(FPref pref) {
+        if (getGui().isRemoteGuiProxy()) {
+            forge.gamemodes.match.YieldPrefs remote = getGui().getRemoteYieldPrefs();
+            return remote != null
+                ? remote.getInterrupt(pref)
+                : "true".equals(pref.getDefault());
+        }
+        return FModel.getPreferences().getPrefBoolean(pref);
     }
 
     @Override

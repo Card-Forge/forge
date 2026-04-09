@@ -304,6 +304,25 @@ public interface IGuiGame {
 
     YieldMode getYieldMode(PlayerView player);
 
+    /**
+     * Store the most recent yield preferences snapshot received from the remote
+     * client this GUI represents. Default implementation is a no-op for the
+     * host's own GUI; NetGuiGame stores it on a field so the host's
+     * YieldController can read the remote player's interrupt prefs.
+     */
+    default void setRemoteYieldPrefs(forge.gamemodes.match.YieldPrefs prefs) {
+        // No-op for local GUIs; only NetGuiGame stores the snapshot.
+    }
+
+    /**
+     * @return the most recent yield preferences snapshot received from the
+     *         remote client this GUI represents, or null if this is the host's
+     *         own GUI or no snapshot has been received yet.
+     */
+    default forge.gamemodes.match.YieldPrefs getRemoteYieldPrefs() {
+        return null;
+    }
+
     boolean shouldAutoYield(String key);
 
     void setShouldAutoYield(String key, boolean autoYield);

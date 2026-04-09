@@ -607,10 +607,12 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         if (activated) {
             updateAutoPassPrompt();
 
-            // Notify remote server if this is a network client
+            // Notify remote server if this is a network client. The prefs
+            // snapshot rides on every yield-state message so the host's stored
+            // copy stays fresh.
             IGameController controller = getGameController(player);
             if (controller != null) {
-                controller.notifyYieldModeChanged(player, mode);
+                controller.notifyYieldStateChanged(player, mode, YieldPrefs.fromCurrentPreferences());
             }
         }
         return activated;

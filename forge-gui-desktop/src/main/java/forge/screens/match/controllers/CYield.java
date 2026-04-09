@@ -78,7 +78,7 @@ public class CYield implements ICDoc {
         initButton(view.getBtnEndTurn(), actEndTurn);
         initButton(view.getBtnYourTurn(), actYourTurn);
         initButton(view.getBtnAutoPass(), actAutoPass);
-        initButton(view.getBtnSettings(), evt -> new VYieldSettings().showDialog());
+        initButton(view.getBtnSettings(), evt -> new VYieldSettings(matchUI).showDialog());
 
         // Set initial button state
         updateYieldButtons();

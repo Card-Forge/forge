@@ -158,8 +158,8 @@ public class NetGameController implements IGameController {
     }
 
     @Override
-    public void notifyYieldModeChanged(PlayerView player, YieldMode mode) {
-        send(ProtocolMethod.notifyYieldModeChanged, player, mode);
+    public void notifyYieldStateChanged(PlayerView player, YieldMode mode, forge.gamemodes.match.YieldPrefs prefs) {
+        send(ProtocolMethod.notifyYieldStateChanged, player, mode, prefs);
     }
 
     @Override
