@@ -145,6 +145,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
         sender.send(method, args);
     }
 
+    // TODO: Optional per-player turn timer — on timeout, auto-yield rather than returning null.
     private <T> T sendAndWait(final ProtocolMethod method, final Object... args) {
         if (paused) { return null; }
         flushPendingEvents();
