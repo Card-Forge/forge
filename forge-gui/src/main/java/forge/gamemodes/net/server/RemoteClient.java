@@ -6,7 +6,6 @@ import forge.gamemodes.net.event.IdentifiableNetEvent;
 import forge.gamemodes.net.event.NetEvent;
 import io.netty.channel.Channel;
 
-import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public final class RemoteClient implements IToClient, IHasNetLog {
@@ -62,7 +61,7 @@ public final class RemoteClient implements IToClient, IHasNetLog {
     }
 
     @Override
-    public Object sendAndWait(final IdentifiableNetEvent event) throws TimeoutException {
+    public Object sendAndWait(final IdentifiableNetEvent event) {
         replies.initialize(event.getId());
         send(event);
         return replies.get(event.getId());
