@@ -1,0 +1,11 @@
+Name:Choreographed Sparks
+ManaCost:R R
+Types:Instant
+A:SP$ Charm | Choices$ DBCopySpell,DBCopyCreature | MinCharmNum$ 1 | CharmNum$ 2 | Defined$ You
+SVar:DBCopySpell:DB$ CopySpellAbility | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | ValidTgtDesc$ instant or sorcery spell you control | TargetType$ Spell | MayChooseTarget$ True | SpellDescription$ Copy target instant or sorcery spell you control. You may choose new targets for the copy.
+SVar:DBCopyCreature:DB$ CopySpellAbility | ValidTgts$ Creature.YouCtrl | ValidTgtDesc$ creature spell you control | TargetType$ Spell | RememberNewCard$ True | SubAbility$ DBAnimate | SpellDescription$ Copy target creature spell you control. The copy gains haste and "At the beginning of the end step, sacrifice this token."
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Keywords$ Haste | Triggers$ EOTSac | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:EOTSac:Mode$ Phase | Phase$ End of Turn | Execute$ TrigSac | TriggerDescription$ At the beginning of the end step, sacrifice this token.
+SVar:TrigSac:DB$ Sacrifice
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:This spell can't be copied.\nChoose one or both —\n• Copy target instant or sorcery spell you control. You may choose new targets for the copy.\n• Copy target creature spell you control. The copy gains haste and "At the beginning of the end step, sacrifice this token."
