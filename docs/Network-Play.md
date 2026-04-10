@@ -16,20 +16,16 @@
 > [!CAUTION]
 > **Network play is a work-in-progress.** You will encounter bugs. When they appear, they will likely be mid-game and require restarting both the client and host. Please report bugs and issues to help improve stability.
 
-> [!CAUTION]
-> **There is no built-in matchmaking.** Network play is designed for playing against people you know and manually sharing connection details.
-
-> [!TIP]
-> **Cross-platform play is supported.** 
-
 > [!TIP]
 > The **[Forge Discord](https://discord.gg/nsAhGwD)** has a dedicated network play channel. You can use it to find opponents and folks there will be happy to help you with any issues!
+
 ---
 
 # Requirements
 
 | Requirement | Details |
 |---|---|
+| **Platforms** | Desktop and Mobile. **Cross-platform play is supported** — any platform can host or join. |
 | **Players** | Up to **8 players** per game (1 host + up to 7 remote players) |
 | **Roles** | **Host** runs Forge as the server; **Client** connects to it |
 | **Game Types** | **Constructed** formats only (no Draft or Sealed). Supported variants: Commander, Oathbreaker, Tiny Leaders, Brawl, Archenemy, Planechase, Vanguard. |
@@ -42,6 +38,9 @@
 ---
 
 # Quick Start
+
+> [!TIP]
+> **There is no built-in matchmaking.** Network play is designed for playing against people you know and manually sharing connection details.
 
 1. **Configure network** — Host must configure network settings to enable external connections (see [Network Configuration](#network-configuration) below).
 2. **Verify versions** — Confirm all devices are running the same Forge version (see [Version Compatibility](#version-compatibility) below).
