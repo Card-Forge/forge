@@ -6,6 +6,7 @@ import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.gamemodes.match.NextGameDecision;
+import forge.gamemodes.match.TriggerChoice;
 import forge.util.ITriggerEvent;
 
 public interface IGameController {
@@ -52,4 +53,9 @@ public interface IGameController {
      */
     void requestResync();
 
+    /** Notify server that auto-yield was toggled for an ability key. */
+    default void notifyAutoYieldChanged(String key, boolean autoYield) { }
+
+    /** Notify server that a trigger accept/decline preference changed. */
+    default void notifyTriggerChoiceChanged(int triggerId, TriggerChoice choice) { }
 }

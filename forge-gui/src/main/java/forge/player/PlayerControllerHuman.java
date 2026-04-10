@@ -47,6 +47,7 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.NextGameDecision;
+import forge.gamemodes.match.TriggerChoice;
 import forge.gamemodes.match.input.*;
 import forge.gamemodes.net.IHasNetLog;
 import forge.gui.FThreads;
@@ -3490,4 +3491,23 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // No-op for local games - resync is only used for network play
     }
 
+    @Override
+    public void notifyAutoYieldChanged(String key, boolean autoYield) {
+        getGui().setShouldAutoYield(key, autoYield);
+    }
+
+    @Override
+    public void notifyTriggerChoiceChanged(int triggerId, TriggerChoice choice) {
+        switch (choice) {
+            case ALWAYS_YES:
+                getGui().setShouldAlwaysAcceptTrigger(triggerId);
+                break;
+            case ALWAYS_NO:
+                getGui().setShouldAlwaysDeclineTrigger(triggerId);
+                break;
+            case ASK:
+                getGui().setShouldAlwaysAskTrigger(triggerId);
+                break;
+        }
+    }
 }

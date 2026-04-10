@@ -5,6 +5,7 @@ import forge.game.player.PlayerView;
 import forge.game.player.actions.PlayerAction;
 import forge.game.spellability.SpellAbilityView;
 import forge.gamemodes.match.NextGameDecision;
+import forge.gamemodes.match.TriggerChoice;
 import forge.gamemodes.net.GameProtocolSender;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.interfaces.IDevModeCheats;
@@ -124,6 +125,16 @@ public class NetGameController implements IGameController {
     @Override
     public void requestResync() {
         send(ProtocolMethod.requestResync);
+    }
+
+    @Override
+    public void notifyAutoYieldChanged(String key, boolean autoYield) {
+        send(ProtocolMethod.notifyAutoYieldChanged, key, autoYield);
+    }
+
+    @Override
+    public void notifyTriggerChoiceChanged(int triggerId, TriggerChoice choice) {
+        send(ProtocolMethod.notifyTriggerChoiceChanged, triggerId, choice);
     }
 
     private IMacroSystem macros;
