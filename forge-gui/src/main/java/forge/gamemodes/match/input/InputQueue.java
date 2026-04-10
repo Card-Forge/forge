@@ -18,6 +18,7 @@
 package forge.gamemodes.match.input;
 
 import forge.game.GameView;
+import forge.gamemodes.net.IHasNetLog;
 import forge.player.PlayerControllerHuman;
 
 import java.util.Observable;
@@ -32,7 +33,8 @@ import java.util.concurrent.LinkedBlockingDeque;
  * @author Forge
  * @version $Id: InputQueue.java 24769 2014-02-09 13:56:04Z Hellfish $
  */
-public class InputQueue extends Observable {
+public class InputQueue extends Observable implements IHasNetLog {
+
     private final BlockingDeque<InputSynchronized> inputStack = new LinkedBlockingDeque<>();
     private final GameView gameView;
 
@@ -64,9 +66,15 @@ public class InputQueue extends Observable {
     }
 
     public final void clearInputs() {
+        netLog.trace("clearInputs() called, stack size = {}", inputStack.size());
+        int count = 0;
         while(!inputStack.isEmpty()) {
-            inputStack.pop().stop();
+            InputSynchronized inp = inputStack.pop();
+            netLog.trace("Stopping input #{}: {}", count, inp.getClass().getSimpleName());
+            inp.stop();
+            count++;
         }
+        netLog.trace("clearInputs() done, stopped {} inputs", count);
 
         updateObservers();
     }

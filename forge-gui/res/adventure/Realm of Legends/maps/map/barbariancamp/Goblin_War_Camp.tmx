@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="120">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="121">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -115,7 +115,7 @@
   <object id="88" template="../../../../common/maps/obj/collision.tx" x="-2.98" y="-16" width="483.96" height="16"/>
   <object id="89" template="../../../../common/maps/obj/collision.tx" x="479.5" y="-16.472" width="16" height="434.944"/>
   <object id="90" template="../../../../common/maps/obj/collision.tx" x="-17" y="-15.472" width="16" height="434.944"/>
-  <object id="91" template="../../../../common/maps/obj/enemy.tx" x="111" y="81.5">
+  <object id="91" template="../../../../common/maps/obj/enemy.tx" x="110.461" y="80.9613">
    <properties>
     <property name="defeatDialog">[
 	{
@@ -128,6 +128,8 @@
 	]</property>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Torch Courier|GRN&quot;, &quot;Goblin Burrows|ONS&quot;, &quot;Goblinslide|KTK&quot;, &quot;Goblin Influx Array|YDMU&quot; ] }"/>
     <property name="enemy" value="Krenko"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
     <property name="waypoints" value=""/>
    </properties>
@@ -241,5 +243,26 @@ EXCEPT THE MEAT PIE LADY!&quot;,
   <object id="116" template="../../../../common/maps/obj/collision.tx" x="398.145" y="162.75" width="31.71" height="10.5"/>
   <object id="118" template="../../../../common/maps/obj/collision.tx" x="341.145" y="162" width="43.71" height="13"/>
   <object id="119" template="../../../../common/maps/obj/collision.tx" x="419.145" y="166.75" width="9.71" height="36"/>
+  <object id="120" template="../../../../common/maps/obj/enemy.tx" x="110.505" y="80.3403">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;Krekno stumbles back from the force of your final strike, landing against the mound of dead goblins that piled up during your battle.
+
+'Looks like da mob life finally caught up wit' me...' With that, his body falls limp and lifeless.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Torch Courier|GRN&quot;, &quot;Goblin Burrows|ONS&quot;, &quot;Goblinslide|KTK&quot; ] }"/>
+    <property name="enemy" value="Krenko"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

@@ -125,6 +125,7 @@ Gamma:Gammas
 Gargoyle:Gargoyles
 Germ:Germs
 Giant:Giants
+Giraffe:Giraffes
 Gith:Gith
 Glimmer:Glimmers
 Gnoll:Gnolls

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="34" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="86">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="34" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="87">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -11,7 +11,7 @@
  <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
  <layer id="6" name="Collision" width="30" height="34">
   <data encoding="base64" compression="zlib">
-   eJztlU0OgjAQhbt1AYIKN9Bb6MIQd3gbr+EBDIks1FO54SZmUhvqMFOnRWL8eclb1NL5ZqaDKPXXN2sz4k1pNw53aD6gWRJW3zIOO2f0a9xr3HUV6b1DRO8bS8TNxjTpep2352BdZ7Ql4vrp4ha5XveZZ+k9UlwQrnOSaL+KK5WE2ZcLNR5XrWHtwz1ntG3hvQkzV1KufTf2ebhDc58UA8eHes2zPlxszMXsvlxOFNfOlYs/JNcVn/v9XCp1KYflZsTefKvUYkvkQ8yzi5s6+unT6xPx7nBxXExfLtRWrbRdcZ4xX8ktcp4Je/i7IMnNMO1vnI+4/y2p3sGt77PbWHbJ7q20pxzXJ1/ghvT0mQpUc4N6kSbDcPejx3h95saX+9dn6QbVnIAr
+   eJztlc0NwjAMhSNx4tDSFtoNYAs4oIpbuw1rMABCggMwBaNwYRNkhajBtYOTghA/T3qHNMSf7ZhWqb++WYs+b0rLQbhD8wGNkrD6pnHYOaNf457jtjeR3ltH9L6xRNxsDJO250VzDta7nLZEXD9d3LLQ6y7zLL1HigvCdWaJ9rO4UkmYXblQ43bWGNY+3ENO2xbey5i5knLtu7HPwx2a+6QYOD7Ua37rw8XGXMzuyuVEce1cufiv4J562q743PNDpdSxCuNK4sPznNgb10pNaiIfYp5d3NTRT59e74n/DhfHxfTlQm2bmbYrziPmM7llwTNhD38XJLkZpv2N8xH33pLqHdzdbXYvll2yeyvtKcf1yRe4IT19pBLVfEG9SJPXcFf9+3hd5saX+9dn6Qqex4Gp
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="34">
@@ -37,7 +37,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztVs1OAjEQ7s2D4QW8Kf8/YiQBTurJsLAsB6OJ8go+gInP4oUf+QeDb6LRRH0ALr6EM6l1h7rdbRfk5Jd8oe20/WamZbqM/SMMnkqMOcXN66Lmc+lvNbI1xvo2/0UKbEc4xTidl6up99NB/nt9su6O7Zws62JfEOfh78GadPt1V9OP/RV03+Ds3oEfRa4bdRiLAeOOv2YS7CknvO4l3JcrYBM4gvVjifs1vnfawyY4WTHPQ/B/JBFzMLN5TGPHpbBje+Lo7Z8n/rUst51uMJaRSHWxn22480U/R8aCkLKW+23Lex7q5uvLZxgDP+LAhK2vJxCt+Nu74Me9whdEr/p7rA/5HmjmXBciHynJX9pPQr5TBjkXmJMY0h53FO0D0BkCZ8Bxhfd1MVTkQv4fjgJyFnQWMtKKXMi6mRA5C4NV66wJzk458Y310j20OeX3t2uQXz9dhJ+ujBjcsbtj3n4wfAsLhnWW2lGT0hS0TqpqlkqzY5nfaYFd2G8P3z+PWMW3DdUUvqFutMrzHfeoXTLoe4towZ5tYEfau1BdzxsnQN/bH53qciybgI5W2DPUwVzjjCiaR+AL1NGew9vaOlv+dp08xKGOJhr6ui9wtq9AG+bfRvgY3qNHEnPB5z7R7wuTWM/LjF2UuW4deL3NSetVXtJFrWlAjhA3EX+70ESgJmJItKYe8dI1YSDWL5gbqwp4DpaBpurJluMM0pXXBPn3qbDT89TR1Y1zQdpfBhKvig==
+   eJztVjtOAzEQtURBEeUCdJD/hyBFSlIBFcrmsykQSJArcAAkzkKTD/knKNRcAgQScIA0XIIZGbMTs961NyEVT3qK7bH9ZsbOeBn7RxA8FRmzC5vXRc3n4t9qZKqM9Wv8FykQCnOKcTovW1Xvp4Pc9/pE3RnbOV7Wxb4gzsPfgzXp9uuOphf7K+i+wdm9Az8KXDdiMxYFxmxvzQTYk3Zw3Qu4L5fAJnAE68cS96t875SLTXCyYp6H4P9IIuZgVuMxjW2Hwo7tia23f47417KcdqrBWFoi1cV+puHMF/0sGfND0lruty33eaibqy+fYRT8iAHjNX09gUjZ294FP+4UviB6ld9jfcj3QDPnuhD5SEr+0n4C8p00yLnAnMSQcrmjaB+AzhA4A47LvK+LoSIX8v9w5JMzv7OQkVLkQtZNB8hZEKxaZ01wesKJb6yb7uMWp/z+dg3y66WL8NKVEYU7dnvE2/eGb2HesM5SO2pSmoLWSVXNUml2LPM7LbAL++3h++cSq/i2oZrCN9SNVHi+Yy61SwZ9bxEt2LMN7Eh75yvreeME6Hv7o1NZjmUT0NEKeoY6mGucEUXzEHyBOtqzeVtbZ9vbrpOHGNTReENf9wXO9hVYg/k3YT6G9+iBxJz3uE/0+8Ik1rMSY+clrlsHXoU4ab3KSbqoNfXJEeI67G0XmgjURAyJ1tQlXromCMT6BXNiVQHPwTLQVD3Zcpx+uvIaP/8+FXZ6njq6unEuSPsLWYOwlg==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -47,7 +47,7 @@
    </properties>
   </object>
   <object id="52" template="../../../../common/maps/obj/gold.tx" x="338.371" y="263.481"/>
-  <object id="54" template="../../../../common/maps/obj/enemy.tx" x="296.638" y="55.2568">
+  <object id="54" template="../../../../common/maps/obj/enemy.tx" x="297.138" y="69.7568">
    <properties>
     <property name="defeatDialog">[
    {
@@ -61,6 +61,8 @@
 }</property>
     <property name="enemy" value="Koma"/>
     <property name="hidden" type="bool" value="true"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="60"/>
     <property name="threatRange" type="int" value="80"/>
    </properties>
@@ -228,6 +230,26 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
     <property name="enemy" value="Llawan"/>
     <property name="speedModifier" type="float" value="0"/>
     <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="86" template="../../../../common/maps/obj/enemy.tx" x="297.078" y="69.1036">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;komas_coil&quot;, &quot;komas_coil&quot; ]
+}</property>
+    <property name="enemy" value="Koma"/>
+    <property name="hidden" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="60"/>
+    <property name="threatRange" type="int" value="80"/>
    </properties>
   </object>
  </objectgroup>

@@ -1,0 +1,11 @@
+Name:Slumbering Trudge
+ManaCost:X G
+Types:Creature Plant Beast
+PT:6/6
+K:etbCounter:STUN:Y:no Condition:This creature enters with a number of stun counters on it equal to three minus X. If it entered with a stun counter on it, tap it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:X:Count$xPaid
+SVar:Y:Number$3/Minus.X
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+counters_GE1_STUN | Execute$ TrigTap | Secondary$ True | Static$ True | TriggerDescription$ This creature enters with a number of stun counters on it equal to three minus X. If it entered with a stun counter on it, tap it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+SVar:TrigTap:DB$ Tap | Defined$ Self
+DeckHas:Ability$Counters
+Oracle:This creature enters with a number of stun counters on it equal to three minus X. If it entered with a stun counter on it, tap it. (If a permanent with a stun counter would become untapped, remove one from it instead.)

@@ -1,0 +1,8 @@
+Name:Arnyn, Deathbloom Botanist
+ManaCost:2 B
+Types:Legendary Creature Vampire Druid
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+powerLE1,Creature.YouCtrl+toughnessLE1 | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a creature you control with power or toughness 1 or less dies, target opponent loses 2 life and you gain 2 life.
+SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+Oracle:Whenever a creature you control with power or toughness 1 or less dies, target opponent loses 2 life and you gain 2 life.

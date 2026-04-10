@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="90">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="100">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -58,6 +58,8 @@
 ]</property>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Crumbling Necropolis|ALA&quot;, &quot;Demon's Herald|ALA&quot;, &quot;Executioner's Capsule|ALA&quot;, &quot;Unscythe, Killer of Kings|ARB&quot;, &quot;Grixis Grimblade|ARB&quot;]}"/>
     <property name="enemy" value="Sedris"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -79,6 +81,8 @@
 ]</property>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Seaside Citadel|ALA&quot;, &quot;Angel's Herald|ALA&quot;, &quot;Angelic Benediction|ALA&quot;, &quot;Dispeller's Capsule|ALA&quot;, &quot;Bant Sureblade|ARB&quot;]}"/>
     <property name="enemy" value="Rafiq"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -129,6 +133,8 @@
     <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Kaleidostone|CON&quot;, &quot;Manaforce Mace|CON&quot;, &quot;Maelstrom Nexus|ARB&quot;, &quot;Exotic Orchard|CON&quot; 
 ]}</property>
     <property name="enemy" value="Child of Alara"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="20"/>
    </properties>
@@ -187,6 +193,8 @@
 ]</property>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Arcane Sanctum|ALA&quot;, &quot;Sphinx's Herald|ALA&quot;, &quot;Courier's Capsule|ALA&quot;, &quot;Etherwrought Page|ARB&quot;, &quot;Esper Stormblade|ARB&quot;]}"/>
     <property name="enemy" value="Sharuum"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -202,6 +210,8 @@
 ]</property>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Savage Lands|ALA&quot;, &quot;Dragon's Herald|ALA&quot;, &quot;Where Ancients Tread|ALA&quot;, &quot;Jund Hackblade|ARB&quot;]}"/>
     <property name="enemy" value="Karrthus"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -217,6 +227,8 @@
 ]</property>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Jungle Shrine|ALA&quot;, &quot;Behemoth's Herald|ALA&quot;, &quot;Mayael's Aria|ARB&quot;, &quot;Behemoth Sledge&quot;, &quot;Naya Hushblade|ARB&quot;]}"/>
     <property name="enemy" value="Uril"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -368,6 +380,102 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 }
 ]</property>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/enemy.tx" x="93.2152" y="322.974" width="16" height="20">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Savage Lands|ALA&quot;, &quot;Dragon's Herald|ALA&quot;, &quot;Jund Hackblade|ARB&quot;]}"/>
+    <property name="enemy" value="Karrthus"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="93" template="../../../../common/maps/obj/enemy.tx" x="92" y="226" width="16" height="20">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Jungle Shrine|ALA&quot;, &quot;Behemoth's Herald|ALA&quot;, &quot;Behemoth Sledge&quot;, &quot;Naya Hushblade|ARB&quot;]}"/>
+    <property name="enemy" value="Uril"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/enemy.tx" x="325.333" y="388.667" width="16" height="20">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Arcane Sanctum|ALA&quot;, &quot;Sphinx's Herald|ALA&quot;, &quot;Courier's Capsule|ALA&quot;, &quot;Esper Stormblade|ARB&quot;]}"/>
+    <property name="enemy" value="Sharuum"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="97" template="../../../../common/maps/obj/enemy.tx" x="280.333" y="214">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Crumbling Necropolis|ALA&quot;, &quot;Demon's Herald|ALA&quot;, &quot;Executioner's Capsule|ALA&quot;, &quot;Grixis Grimblade|ARB&quot;]}"/>
+    <property name="enemy" value="Sedris"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="98" template="../../../../common/maps/obj/enemy.tx" x="349.667" y="129">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Seaside Citadel|ALA&quot;, &quot;Angel's Herald|ALA&quot;, &quot;Dispeller's Capsule|ALA&quot;, &quot;Bant Sureblade|ARB&quot;]}"/>
+    <property name="enemy" value="Rafiq"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="99" template="../../../../common/maps/obj/enemy.tx" x="208.667" y="124.667">
+   <properties>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Kaleidostone|CON&quot;, &quot;Manaforce Mace|CON&quot;, &quot;Maelstrom Nexus|ARB&quot; 
+]}</property>
+    <property name="enemy" value="Child of Alara"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
  </objectgroup>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="93">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="94">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -46,6 +46,8 @@
    <properties>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Gratuitous Violence|ons&quot;, &quot;Sunbird's Invocation|xln&quot; ] }"/>
     <property name="enemy" value="Márton Stromgald"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -70,6 +72,17 @@ Your manasight stone blazes with power, near-blindingly bright.&quot;,
   <object id="92" template="../../../../common/maps/obj/scroll.tx" x="120" y="372">
    <properties>
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Ruby Medallion&quot;, &quot;editions&quot;: [ &quot;TMP&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="93" template="../../../../common/maps/obj/enemy.tx" x="233.667" y="351.667">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Sunbird's Invocation|xln&quot; ] }"/>
+    <property name="enemy" value="Márton Stromgald"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
  </objectgroup>

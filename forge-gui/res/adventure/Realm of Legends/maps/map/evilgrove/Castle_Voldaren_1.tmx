@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="139">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="140">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -72,8 +72,10 @@
   </object>
   <object id="110" template="../../../../common/maps/obj/enemy.tx" x="416" y="304">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Olivia's Bloodsworn|SOI&quot;, &quot;bride's gown|VOW&quot;, &quot;wedding invitation|VOW&quot;, &quot;Call the bloodline|SOI&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;bride's gown|VOW&quot;, &quot;wedding invitation|VOW&quot;, &quot;Call the bloodline|SOI&quot;]}"/>
     <property name="enemy" value="Olivia"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="60"/>
     <property name="threatRange" type="int" value="60"/>
    </properties>
@@ -185,5 +187,15 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
   <object id="136" template="../../../../common/maps/obj/collision.tx" x="485.982" y="468.188" width="20.036" height="22.6238"/>
   <object id="137" template="../../../../common/maps/obj/collision.tx" x="519.482" y="465.688" width="17.036" height="22.6238"/>
   <object id="138" template="../../../../common/maps/obj/collision.tx" x="544.088" y="164.044" width="46.3242" height="11.9116"/>
+  <object id="139" template="../../../../common/maps/obj/enemy.tx" x="416.667" y="305">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Olivia's Bloodsworn|SOI&quot;, &quot;bride's gown|VOW&quot;, &quot;wedding invitation|VOW&quot;, &quot;Call the bloodline|SOI&quot;]}"/>
+    <property name="enemy" value="Olivia"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="60"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
