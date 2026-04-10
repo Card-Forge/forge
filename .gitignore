@@ -95,5 +95,10 @@ forge-gui/tools/PerSetTrackingResults
 __pycache__
 *.pyc
 
-# Ignore Claude configuration
+# Ignore Claude/AI configuration
 .claude
+.claudeignore
+.superpowers/
+GEMINI.md
+convert_skills.js
+notes.md
