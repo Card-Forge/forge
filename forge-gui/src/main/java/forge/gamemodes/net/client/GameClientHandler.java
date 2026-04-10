@@ -3,7 +3,7 @@ package forge.gamemodes.net.client;
 import forge.game.*;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
-import forge.gamemodes.net.GameEventProxy;
+import forge.gamemodes.net.CompatibleObjectDecoder;
 import forge.gamemodes.net.GameProtocolHandler;
 import forge.gamemodes.net.IHasNetLog;
 import forge.gamemodes.net.IRemote;
@@ -62,6 +62,16 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
                 if (args.length > 0 && args[0] instanceof GameView gameView) {
                     if (this.tracker == null) {
                         this.tracker = new Tracker();
+                        // Set tracker on decoder for IdRef resolution in server messages.
+                        // The client encoder does NOT get a tracker — it uses simple
+                        // IdRef replacement without stale detection. Stale detection
+                        // on the client would create StaleCardRef markers for cards
+                        // updated by delta sync, causing the server to create detached
+                        // CardViews that don't match real game objects.
+                        CompatibleObjectDecoder decoder = ctx.pipeline().get(CompatibleObjectDecoder.class);
+                        if (decoder != null) {
+                            decoder.setTracker(this.tracker);
+                        }
                         if (gameView.getGameLog() == null) {
                             gameView.initGameLog();
                         }
@@ -167,7 +177,7 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
      * {@code updateObjLookup()} skips objects already in the tracker, so CardViews
      * registered on the first {@code setGameView} become stale — their zone, state,
      * and other properties no longer reflect the server's current game state.
-     * When {@link GameEventProxy} resolves IdRefs from the tracker, it gets these
+     * When the decoder resolves IdRefs from the tracker, it gets these
      * stale CardViews, causing issues like card-back images in the game log
      * (the stale zone is Library, so {@code canBeShownTo} returns false).
      */

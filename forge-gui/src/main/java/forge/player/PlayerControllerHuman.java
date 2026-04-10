@@ -1520,8 +1520,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final MagicStack stack = getGame().getStack();
 
         if (FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS) && FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS)) {
-            int manaEstimate = ComputerUtilMana.getAvailableManaEstimate(getPlayer());
-            getPlayer().getView().updateHasAvailableActions(getPlayer(), manaEstimate);
+            getPlayer().getView().updateHasAvailableActions(getPlayer(),
+                    sa -> ComputerUtilMana.canPayManaCost(sa, getPlayer(), 0, false));
         }
 
         if (mayAutoPass()) {
