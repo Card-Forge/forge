@@ -656,6 +656,10 @@ public class CardImageRenderer {
                     if (cv == null || isFaceDown)
                         cv = card;
                     CardStateView csv = cv.getState(true);
+                    if (csv == null) { // backup may not have adventure state (e.g. clone of adventure)
+                        cv = card;
+                        csv = cv.getState(true);
+                    }
                     text = cv.getText(csv, needTranslation && csv != null ? CardTranslation.getTranslationTexts(csv) : null);
 
                 } else {
