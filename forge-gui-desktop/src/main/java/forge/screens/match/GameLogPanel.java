@@ -3,6 +3,7 @@ package forge.screens.match;
 import java.awt.AWTEvent;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -27,8 +28,11 @@ import forge.CachedCardImage;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.gui.MouseUtil;
+import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
+import forge.toolbox.special.CardZoomer;
+import forge.view.arcane.CardInfoPopup;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinFont;
@@ -40,6 +44,7 @@ public class GameLogPanel extends JPanel {
     private static final String CARD_VIEW_KEY = "GameLogPanel.cardView";
 
     private FScrollPane scrollPane;
+    private CardInfoPopup cardInfoPopup;
     private MyScrollablePanel scrollablePanel;
     private SkinFont textFont = FSkin.getFont();
 
@@ -60,6 +65,10 @@ public class GameLogPanel extends JPanel {
     }
 
     public void reset() {
+        if (cardInfoPopup != null) {
+            cardInfoPopup.dispose();
+            cardInfoPopup = null;
+        }
         scrollablePanel.removeAll();
         scrollablePanel.validate();
     }
@@ -142,7 +151,7 @@ public class GameLogPanel extends JPanel {
         final boolean showCardImages = FModel.getPreferences().getPrefBoolean(FPref.UI_LOG_SHOW_CARD_IMAGES);
 
         final JTextArea tar;
-        if (card != null && showCardImages) {
+        if (card != null && showCardImages && viewers != null) {
             tar = new LogEntryTextArea(text, useAlternateBackColor, card, viewers);
         } else {
             tar = createNewLogEntryJTextArea(text, useAlternateBackColor);
@@ -190,6 +199,46 @@ public class GameLogPanel extends JPanel {
     }
 
     /** A log entry with an inline miniature card image, following VStack's StackInstanceTextArea pattern. */
+    private void showCardInfoPopupForEntry(final LogEntryTextArea entry) {
+        if (CardZoomer.SINGLETON_INSTANCE.isZoomerOpen()) {
+            return;
+        }
+        final Object cardProp = entry.getClientProperty(CARD_VIEW_KEY);
+        if (!(cardProp instanceof CardView) || ((CardView) cardProp).isFaceDown()) {
+            return;
+        }
+        final java.awt.Window ownerWindow = SwingUtilities.getWindowAncestor(this);
+        if (ownerWindow == null || !ownerWindow.isActive()) {
+            return;
+        }
+        final ForgePreferences prefs = FModel.getPreferences();
+        if (!prefs.getPrefBoolean(FPref.UI_SHOW_HOVER_TOOLTIPS)) {
+            return;
+        }
+        final boolean showKeywords = prefs.getPrefBoolean(FPref.UI_POPUP_KEYWORD_INFO);
+        final boolean showRelated = prefs.getPrefBoolean(FPref.UI_POPUP_RELATED_CARDS);
+        final boolean showCardImage = prefs.getPrefBoolean(FPref.UI_POPUP_CARD_IMAGE);
+        if (!showKeywords && !showRelated && !showCardImage) {
+            return;
+        }
+        if (cardInfoPopup == null) {
+            cardInfoPopup = new CardInfoPopup(ownerWindow);
+        }
+        try {
+            final Point entryLoc = entry.getLocationOnScreen();
+            cardInfoPopup.showForCard((CardView) cardProp, entryLoc, entry.getSize(),
+                    showKeywords, showRelated, showCardImage);
+        } catch (final java.awt.IllegalComponentStateException ignored) {
+            // Component not yet showing on screen
+        }
+    }
+
+    private void hideCardInfoPopup() {
+        if (cardInfoPopup != null) {
+            cardInfoPopup.hidePopup();
+        }
+    }
+
     private final class LogEntryTextArea extends SkinnedTextArea {
         private static final int PADDING = 3;
         private static final int CARD_WIDTH = 50;
@@ -298,10 +347,15 @@ public class GameLogPanel extends JPanel {
                             onCardHover.accept((CardView) cardProp);
                         }
                     }
+                    // Show hover tooltip for log entries with inline card images
+                    if (e.getSource() instanceof LogEntryTextArea) {
+                        showCardInfoPopupForEntry((LogEntryTextArea) e.getSource());
+                    }
                 }
                 break;
             case MouseEvent.MOUSE_EXITED:
                 MouseUtil.resetCursor();
+                hideCardInfoPopup();
                 break;
             case MouseEvent.MOUSE_RELEASED:
                 if (e.getButton() == 1 && isHoveringOverLogEntry) {

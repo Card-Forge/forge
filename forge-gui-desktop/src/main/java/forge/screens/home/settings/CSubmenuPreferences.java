@@ -7,6 +7,8 @@ import forge.ai.AiProfileUtil;
 import forge.control.FControl.CloseAction;
 import forge.download.AutoUpdater;
 import forge.game.GameLogEntryType;
+import forge.game.GameLogVerbosity;
+import forge.menus.LayoutMenu;
 import forge.gamemodes.net.server.FServerManager;
 import forge.gui.GuiBase;
 import forge.gui.UiCommand;
@@ -111,6 +113,7 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.clear(); // just in case
         lstControls.add(Pair.of(view.getCbAnte(), FPref.UI_ANTE));
         lstControls.add(Pair.of(view.getCbAnteMatchRarity(), FPref.UI_ANTE_MATCH_RARITY));
+        lstControls.add(Pair.of(view.getCbAnteIncludeBasicLands(), FPref.UI_ANTE_INCLUDE_BASIC_LANDS));
         lstControls.add(Pair.of(view.getCbManaBurn(), FPref.UI_MANABURN));
         lstControls.add(Pair.of(view.getCbOrderCombatants(), FPref.LEGACY_ORDER_COMBATANTS));
         lstControls.add(Pair.of(view.getCbScaleLarger(), FPref.UI_SCALE_LARGER));
@@ -156,6 +159,8 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbTokensInSeparateRow(), FPref.UI_TOKENS_IN_SEPARATE_ROW));
         lstControls.add(Pair.of(view.getCbStackCreatures(), FPref.UI_STACK_CREATURES));
         lstControls.add(Pair.of(view.getCbShowCastableBorder(), FPref.UI_SHOW_CASTABLE_BORDER));
+        lstControls.add(Pair.of(view.getCbHoverTooltipsEnabled(), FPref.UI_SHOW_HOVER_TOOLTIPS));
+        lstControls.add(Pair.of(view.getCbZoomTooltipsEnabled(), FPref.UI_SHOW_ZOOM_TOOLTIPS));
         lstControls.add(Pair.of(view.getCbManaLostPrompt(), FPref.UI_MANA_LOST_PROMPT));
         lstControls.add(Pair.of(view.getCbEscapeEndsTurn(), FPref.UI_ALLOW_ESC_TO_END_TURN));
         lstControls.add(Pair.of(view.getCbDetailedPaymentDesc(), FPref.UI_DETAILED_SPELLDESC_IN_PROMPT));
@@ -169,7 +174,10 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbLoadArchivedFormats(), FPref.LOAD_ARCHIVED_FORMATS));
         lstControls.add(Pair.of(view.getCbSmartCardArtSelectionOpt(), FPref.UI_SMART_CARD_ART));
         lstControls.add(Pair.of(view.getCbShowDraftRanking(), FPref.UI_OVERLAY_DRAFT_RANKING));
+        lstControls.add(Pair.of(view.getCbAiPicker(), FPref.UI_ENABLE_AI_PICKER));
 
+        view.getBtnCardOverlaySettings().setCommand((UiCommand) () ->
+                forge.screens.match.menus.CardOverlaySettingsDialog.show(null));
 
         for(final Pair<JCheckBox, FPref> kv : lstControls) {
           kv.getKey().addItemListener(arg0 -> {
@@ -335,10 +343,18 @@ public enum CSubmenuPreferences implements ICDoc {
 
     private void initializeGameLogVerbosityComboBox() {
         final FPref userSetting = FPref.DEV_LOG_ENTRY_TYPE;
-        final FComboBoxPanel<GameLogEntryType> panel = this.view.getGameLogVerbosityComboBoxPanel();
-        final FComboBox<GameLogEntryType> comboBox = createComboBox(GameLogEntryType.values(), userSetting);
-        final GameLogEntryType selectedItem = GameLogEntryType.valueOf(this.prefs.getPref(userSetting));
+        final FComboBoxPanel<GameLogVerbosity> panel = this.view.getGameLogVerbosityComboBoxPanel();
+        final FComboBox<GameLogVerbosity> comboBox = createComboBox(GameLogVerbosity.values(), userSetting);
+        final GameLogVerbosity selectedItem = GameLogVerbosity.fromString(this.prefs.getPref(userSetting));
         panel.setComboBox(comboBox, selectedItem);
+
+        view.getBtnCustomLogSettings().setCommand(
+                (UiCommand) LayoutMenu::showCustomLogCategoriesDialog);
+        view.getBtnCustomLogSettings().setEnabled(selectedItem == GameLogVerbosity.CUSTOM);
+        comboBox.addItemListener(e -> {
+            view.getBtnCustomLogSettings().setEnabled(
+                    comboBox.getSelectedItem() == GameLogVerbosity.CUSTOM);
+        });
     }
 
     private void initializeCloseActionComboBox() {

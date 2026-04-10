@@ -83,6 +83,23 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_SLEEVES ("0,1"),
         UI_SHOW_CARD_OVERLAYS ("true"),
         UI_SHOW_CASTABLE_BORDER ("false"),
+        UI_SHOW_HOVER_TOOLTIPS("true"),
+        UI_POPUP_KEYWORD_INFO("true"),
+        UI_POPUP_RELATED_CARDS("true"),
+        UI_POPUP_CARD_IMAGE("true"),
+        UI_POPUP_IMAGE_SIZE("375"),  // thumbnail height in pixels (250-500)
+        UI_POPUP_CARD_OVERLAYS("false"),
+        UI_HOVER_OVERLAY_CARD_NAME("false"),
+        UI_HOVER_OVERLAY_CARD_POWER("true"),
+        UI_HOVER_OVERLAY_CARD_MANA_COST("false"),
+        UI_HOVER_OVERLAY_CARD_PERPETUAL_MANA_COST("false"),
+        UI_HOVER_OVERLAY_CARD_ID("false"),
+        UI_HOVER_OVERLAY_ABILITY_ICONS("true"),
+        UI_SHOW_ZOOM_TOOLTIPS("true"),
+        UI_ZOOM_KEYWORD_INFO("true"),
+        UI_ZOOM_RELATED_CARDS("true"),
+        UI_MATCH_CARD_PICTURE_VISIBLE ("true"),
+        UI_MATCH_CARD_DETAIL_VISIBLE ("true"),
         UI_OVERLAY_CARD_NAME ("true"),
         UI_OVERLAY_CARD_POWER ("true"),
         UI_OVERLAY_CARD_MANA_COST ("true"),
@@ -332,6 +349,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         SHORTCUT_SHOWHOTKEYS("72"),
         SHORTCUT_PANELTABS("17 84"),
         SHORTCUT_CARDOVERLAYS("17 79"),
+        SHORTCUT_HOVERTOOLTIPS("17 72"),   // Ctrl+H
+        SHORTCUT_ZOOMTOOLTIPS("17 73"),    // Ctrl+I
         SHORTCUT_YIELD_OPTIONS("17 89"),                         // Ctrl+Y
         SHORTCUT_YIELD_AUTO_PASS("113"),                         // F2 key
         SHORTCUT_YIELD_UNTIL_NEXT_PHASE("114"),                  // F3 key

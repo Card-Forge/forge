@@ -34,6 +34,11 @@ import javax.swing.border.EmptyBorder;
 
 import forge.CachedCardImage;
 import forge.gamemodes.match.TriggerChoice;
+import forge.localinstance.properties.ForgePreferences;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
+import forge.toolbox.special.CardZoomer;
+import forge.view.arcane.CardInfoPopup;
 import forge.game.GameView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.spellability.StackItemView;
@@ -71,6 +76,7 @@ public class VStack implements IVDoc<CStack> {
     // Other fields
     private final AbilityMenu abilityMenu = new AbilityMenu();
 
+    private CardInfoPopup cardInfoPopup;
     private StackInstanceTextArea hoveredItem;
 
     public StackInstanceTextArea getHoveredItem() {
@@ -127,6 +133,7 @@ public class VStack implements IVDoc<CStack> {
         if (parentCell == null || !parentCell.getSelected().equals(this)) { return; }
 
         hoveredItem = null;
+        disposePopup();
         scroller.removeAll();
 
         boolean isFirst = true;
@@ -146,6 +153,55 @@ public class VStack implements IVDoc<CStack> {
         scroller.repaint();
 
         SwingUtilities.invokeLater(scroller::scrollToTop);
+    }
+
+    // --- Hover tooltip ---
+
+    private void showStackPopup(final StackInstanceTextArea tar) {
+        if (CardZoomer.SINGLETON_INSTANCE.isZoomerOpen()) {
+            hideStackPopup();
+            return;
+        }
+        final java.awt.Window owner = SwingUtilities.getWindowAncestor(scroller);
+        if (owner == null || !owner.isActive()) {
+            hideStackPopup();
+            return;
+        }
+        final ForgePreferences prefs = FModel.getPreferences();
+        if (!prefs.getPrefBoolean(FPref.UI_SHOW_HOVER_TOOLTIPS)) {
+            if (cardInfoPopup != null) { cardInfoPopup.hidePopup(); }
+            return;
+        }
+        final boolean showKw = prefs.getPrefBoolean(FPref.UI_POPUP_KEYWORD_INFO);
+        final boolean showRel = prefs.getPrefBoolean(FPref.UI_POPUP_RELATED_CARDS);
+        final boolean showImg = prefs.getPrefBoolean(FPref.UI_POPUP_CARD_IMAGE);
+        if (showKw || showRel || showImg) {
+            if (cardInfoPopup == null) {
+                cardInfoPopup = new CardInfoPopup(owner);
+            }
+            final java.awt.Point screenLoc = tar.getLocationOnScreen();
+            if (screenLoc == null) {
+                return;
+            }
+            cardInfoPopup.showForCard(tar.getItem().getSourceCard(),
+                    screenLoc, tar.getSize(),
+                    showKw, showRel, showImg);
+        } else {
+            hideStackPopup();
+        }
+    }
+
+    private void hideStackPopup() {
+        if (cardInfoPopup != null) {
+            cardInfoPopup.hidePopup();
+        }
+    }
+
+    private void disposePopup() {
+        if (cardInfoPopup != null) {
+            cardInfoPopup.dispose();
+            cardInfoPopup = null;
+        }
     }
 
     @SuppressWarnings("serial")
@@ -205,7 +261,7 @@ public class VStack implements IVDoc<CStack> {
                         hoveredItem = StackInstanceTextArea.this;
                     }
                     controller.getMatchUI().setCard(item.getSourceCard());
-
+                    showStackPopup(StackInstanceTextArea.this);
                 }
 
                 @Override
@@ -215,8 +271,9 @@ public class VStack implements IVDoc<CStack> {
                             hoveredItem = null;
                         }
                     }
+                    hideStackPopup();
                 }
-                
+
                 @Override
                 public void mouseClicked(final MouseEvent e) {
                     if (controller.getMatchUI().getCDock().getArcState() == ArcState.ON) {
