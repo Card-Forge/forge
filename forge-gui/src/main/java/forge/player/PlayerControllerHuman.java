@@ -3079,6 +3079,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                                 if (forgeCard.isCreature()) {
                                     forgeCard.setSickness(lastSummoningSickness);
                                 }
+                                if (forgeCard.isPlaneswalker()) {
+                                    String loyalty = forgeCard.getCurrentState().getBaseLoyalty();
+                                    if (StringUtils.isNumeric(loyalty)) {
+                                        forgeCard.addCounterInternal(CounterEnumType.LOYALTY, Integer.parseInt(loyalty), p, false, null, null);
+                                    }
+                                }
                             } else {
                                 getGui().message(localizer.getMessage("lblChosenCardNotPermanentorCantExistIndependentlyontheBattleground"), localizer.getMessage("lblError"));
                                 return;
