@@ -69,7 +69,6 @@ import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.net.IHasNetLog;
 import forge.gamemodes.net.NetworkGuiGame;
-import forge.interfaces.IGameController;
 import forge.gui.FNetOverlay;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;

@@ -6,7 +6,6 @@ import forge.StaticData;
 import forge.ai.AiProfileUtil;
 import forge.control.FControl.CloseAction;
 import forge.download.AutoUpdater;
-import forge.game.GameLogEntryType;
 import forge.game.GameLogVerbosity;
 import forge.menus.LayoutMenu;
 import forge.gamemodes.net.server.FServerManager;
