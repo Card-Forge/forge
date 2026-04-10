@@ -3,7 +3,7 @@ ManaCost:X G
 Types:Sorcery
 A:SP$ Token | TokenScript$ gu_0_0_fractal | RememberTokens$ True | SubAbility$ DBPutCounter | SpellDescription$ Create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it.
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBSurveil
-SVar:TrigSurveil:DB$ Surveil | Amount$ 2 | SubAbility$ DBCleanup | SpellDescription$ Surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+SVar:DBSurveil:DB$ Surveil | Amount$ 2 | SubAbility$ DBCleanup | SpellDescription$ Surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
 DeckHas:Ability$Token|Counters
