@@ -8,6 +8,7 @@
   - [Remote Network Setup](#remote-network-setup)
   - [VPN / Software-Defined Networks](#vpn--software-defined-networks)
 - [Known Limitations](#known-limitations)
+- [Network Logs](#network-logs)
 ---
 
 # Status & Support
@@ -15,8 +16,11 @@
 > [!CAUTION]
 > **Network play is a work-in-progress.** You will encounter bugs. When they appear, they will likely be mid-game and require restarting both the client and host. Please report bugs and issues to help improve stability.
 
-Cross-platform play is supported.  
-There is no built-in matchmaking. Network play is designed for playing against people you know and manually sharing connection details.
+> [!CAUTION]
+> **There is no built-in matchmaking.** Network play is designed for playing against people you know and manually sharing connection details.
+
+> [!TIP]
+> **Cross-platform play is supported.** 
 
 > [!TIP]
 > The **[Forge Discord](https://discord.gg/nsAhGwD)** has a dedicated network play channel. You can use it to find opponents and folks there will be happy to help you with any issues!
@@ -248,3 +252,21 @@ Forge automatically warns in the lobby chat when a client's version differs from
 
 ## Lag / High Bandwidth
 Network play currently lacks traffic optimization. A single game can transfer hundreds of megabytes. Slow connections will experience significant lag.
+
+---
+
+# Network Logs
+
+Forge writes detailed network logs during online multiplayer games. These are separate from the normal game log and are specifically used for troubleshooting network issues.
+
+**Please provide your logs when reporting bugs.** Logs are stored in the `networklogs/` folder inside your Forge data directory:
+
+| Platform | Path |
+|---|---|
+| **Windows** | `%APPDATA%/Forge/networklogs/` |
+| **macOS** | `~/Library/Application Support/Forge/networklogs/` |
+| **Linux** | `~/.forge/networklogs/` |
+
+On desktop, you can open this folder directly from the Forge game menu: **Online > Open Network Logs**.
+
+By default, logs from the last 10 games are kept; older logs are automatically removed. 

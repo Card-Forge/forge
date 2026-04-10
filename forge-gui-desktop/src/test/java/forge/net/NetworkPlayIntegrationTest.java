@@ -51,11 +51,11 @@ import java.util.List;
  * Run all tests including stress tests:
  *   mvn -pl forge-gui-desktop -am verify -Drun.stress.tests=true
  *
- * Run configurable batch tests:
+ * Run configurable batch tests (all entry points accept -Dtest.2pGames, -Dtest.3pGames, etc.):
  *   mvn -pl forge-gui-desktop -am verify -Dtest="NetworkPlayIntegrationTest#testConfigurableSequential" \
- *       -Dtest.gameCount=3 -Drun.stress.tests=true -Dsurefire.failIfNoSpecifiedTests=false
+ *       -Dtest.2pGames=3 -Drun.stress.tests=true -Dsurefire.failIfNoSpecifiedTests=false
  *   mvn -pl forge-gui-desktop -am verify -Dtest="NetworkPlayIntegrationTest#testConfigurableParallel" \
- *       -Dtest.gameCount=2 -Drun.stress.tests=true -Dsurefire.failIfNoSpecifiedTests=false
+ *       -Dtest.2pGames=5 -Dtest.3pGames=3 -Drun.stress.tests=true -Dsurefire.failIfNoSpecifiedTests=false
  *
  * Run comprehensive test with custom configuration:
  *   mvn -pl forge-gui-desktop -am verify -Dtest="NetworkPlayIntegrationTest#runComprehensiveDeltaSyncTest" \
@@ -220,46 +220,48 @@ public class NetworkPlayIntegrationTest implements IHasNetLog {
 
     /**
      * Configurable sequential batch test.
-     * Usage: -Dtest.gameCount=10 -Dtest.timeoutMs=300000
+     * Reads the same -Dtest.* system properties as the comprehensive tests.
+     * Defaults to 3 x 2-player games if no properties are set.
      */
     @Test(timeOut = 3600000, description = "Configurable sequential batch")
     public void testConfigurableSequential() {
         skipUnlessStressTestsEnabled();
-        int gameCount = Integer.getInteger("test.gameCount", 3);
-        long timeoutMs = Long.getLong("test.timeoutMs", 300000);
 
-        netLog.info("Sequential config: games={}, timeout={}ms", gameCount, timeoutMs);
+        ComprehensiveTestExecutor executor = ComprehensiveTestExecutor.fromSystemProperties()
+                .sequential(true);
+        netLog.info("Sequential config:\n{}", executor.getConfigurationSummary());
 
-        MultiProcessGameExecutor.ExecutionResult result = ComprehensiveTestExecutor.runSequentialGames(gameCount, timeoutMs);
+        MultiProcessGameExecutor.ExecutionResult result = executor.execute();
 
         netLog.info("Sequential result: {}", result.toSummary());
         System.out.println(result.toDetailedReport());
 
-        Assert.assertEquals(result.getSuccessCount(), gameCount, "All games should succeed: " + result.toSummary());
+        Assert.assertEquals(result.getSuccessCount(), executor.getTotalGames(),
+                "All games should succeed: " + result.toSummary());
     }
 
     /**
      * Configurable parallel batch test.
-     * Usage: -Dtest.gameCount=10 -Dtest.timeoutMs=300000
+     * Reads the same -Dtest.* system properties as the comprehensive tests.
+     * Defaults to 3 x 2-player games if no properties are set.
      */
     @Test(timeOut = 1800000, description = "Configurable parallel batch")
     public void testConfigurableParallel() {
         skipUnlessStressTestsEnabled();
-        int gameCount = Integer.getInteger("test.gameCount", 3);
-        long timeoutMs = Long.getLong("test.timeoutMs", 300000);
 
-        netLog.info("Parallel config: games={}, timeout={}ms", gameCount, timeoutMs);
+        ComprehensiveTestExecutor executor = ComprehensiveTestExecutor.fromSystemProperties();
+        netLog.info("Parallel config:\n{}", executor.getConfigurationSummary());
 
-        MultiProcessGameExecutor executor = new MultiProcessGameExecutor(timeoutMs);
-        MultiProcessGameExecutor.ExecutionResult result = executor.runGames(gameCount);
+        MultiProcessGameExecutor.ExecutionResult result = executor.execute();
 
         netLog.info("Parallel result: {}", result.toSummary());
         System.out.println(result.toDetailedReport());
 
         double expectedSuccessRate = 0.8;
-        int expectedSuccesses = (int) Math.ceil(gameCount * expectedSuccessRate);
+        int expectedSuccesses = (int) Math.ceil(executor.getTotalGames() * expectedSuccessRate);
         Assert.assertTrue(result.getSuccessCount() >= expectedSuccesses,
-                String.format("At least %d of %d games should succeed: %s", expectedSuccesses, gameCount, result.toSummary()));
+                String.format("At least %d of %d games should succeed: %s",
+                        expectedSuccesses, executor.getTotalGames(), result.toSummary()));
     }
 
     /**
@@ -275,7 +277,7 @@ public class NetworkPlayIntegrationTest implements IHasNetLog {
         skipUnlessStressTestsEnabled();
         netLog.info("Starting comprehensive delta sync validation");
 
-        ComprehensiveTestExecutor executor = ComprehensiveTestExecutor.fromSystemProperties();
+        ComprehensiveTestExecutor executor = ComprehensiveTestExecutor.comprehensive();
         netLog.info("Configuration:\n{}", executor.getConfigurationSummary());
 
         netLog.info("Executing {} games...", executor.getTotalGames());
