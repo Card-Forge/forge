@@ -30,13 +30,14 @@ public class MtgGoldfishFetcher extends DeckSiteFetcher {
             return FetchResult.error("Could not fetch deck from MTGGoldfish. Make sure the deck exists.");
         }
 
-        List<String> commanderCards = new ArrayList<>();
+        // MTGGoldfish's download format is a flat list: main deck, then an optional blank line
+        // followed by the sideboard. Commander decks are imported without a commander designation.
         List<String> mainCards = new ArrayList<>();
         List<String> sideCards = new ArrayList<>();
-        String currentSection = "main";
-        int totalCards = 0;
         boolean hitBlankLine = false;
         boolean wroteMain = false;
+        boolean isSideboard = false;
+        int totalCards = 0;
 
         Pattern cardPattern = Pattern.compile("^(\\d+)\\s+(.+)$");
         for (String line : text.split("\n")) {
@@ -47,22 +48,16 @@ public class MtgGoldfishFetcher extends DeckSiteFetcher {
                 continue;
             }
 
-            String lower = trimmed.toLowerCase();
-            if (lower.startsWith("commander")) {
-                currentSection = "commander";
-                hitBlankLine = false;
-                continue;
-            }
-
             Matcher cm = cardPattern.matcher(trimmed);
             if (cm.matches()) {
-                if (currentSection.equals("main") && hitBlankLine && wroteMain) {
-                    currentSection = "sideboard";
+                if (!isSideboard && hitBlankLine && wroteMain) {
+                    isSideboard = true;
                 }
-                switch (currentSection) {
-                    case "commander": commanderCards.add(trimmed); break;
-                    case "sideboard": sideCards.add(trimmed); break;
-                    default: mainCards.add(trimmed); wroteMain = true; break;
+                if (isSideboard) {
+                    sideCards.add(trimmed);
+                } else {
+                    mainCards.add(trimmed);
+                    wroteMain = true;
                 }
                 totalCards++;
             }
@@ -74,13 +69,6 @@ public class MtgGoldfishFetcher extends DeckSiteFetcher {
         }
 
         StringBuilder sb = new StringBuilder();
-        if (!commanderCards.isEmpty()) {
-            sb.append("Commander\n");
-            for (String card : commanderCards) {
-                sb.append(card).append("\n");
-            }
-            sb.append("\n");
-        }
         if (!mainCards.isEmpty()) {
             sb.append("Main\n");
             for (String card : mainCards) {

@@ -30,6 +30,11 @@ public class DeckUrlFetcher {
                     String.format("Deck loaded from %s (%d cards)", siteName, cardCount), siteName);
         }
 
+        public static FetchResult okWithNote(String deckText, String siteName, int cardCount, String note) {
+            return new FetchResult(true, deckText,
+                    String.format("Deck loaded from %s (%d cards). %s", siteName, cardCount, note), siteName);
+        }
+
         public static FetchResult error(String message) {
             return new FetchResult(false, null, message, null);
         }

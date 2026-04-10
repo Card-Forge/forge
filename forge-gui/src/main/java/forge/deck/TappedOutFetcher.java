@@ -30,46 +30,24 @@ public class TappedOutFetcher extends DeckSiteFetcher {
             return FetchResult.error("Could not fetch deck from TappedOut. Make sure the deck is public.");
         }
 
-        List<String> commanderCards = new ArrayList<>();
+        // TappedOut's text export is a flat alphabetical list with no section headers.
+        // Commander and sideboard sections cannot be detected; all cards are imported as main deck.
         List<String> mainCards = new ArrayList<>();
-        List<String> sideCards = new ArrayList<>();
-        String currentSection = "main";
         int totalCards = 0;
 
         Pattern cardPattern = Pattern.compile("^(\\d+)x?\\s+(.+)$");
         for (String line : text.split("\n")) {
             line = line.trim();
             if (line.isEmpty()) continue;
-
-            String lower = line.toLowerCase();
-            if (lower.startsWith("commander")) {
-                currentSection = "commander";
-                continue;
-            }
-            if (lower.startsWith("sideboard")) {
-                currentSection = "sideboard";
-                continue;
-            }
-            if (lower.startsWith("maybeboard") || lower.startsWith("maybe board")) {
-                currentSection = "skip";
-                continue;
-            }
-
             Matcher cm = cardPattern.matcher(line);
             if (cm.matches()) {
-                if (currentSection.equals("skip")) continue;
                 int qty = Integer.parseInt(cm.group(1));
                 String name = cm.group(2).trim();
                 int hashIdx = name.indexOf('#');
                 if (hashIdx > 0) name = name.substring(0, hashIdx).trim();
                 int asterIdx = name.indexOf('*');
                 if (asterIdx > 0) name = name.substring(0, asterIdx).trim();
-                String cardLine = qty + " " + name;
-                switch (currentSection) {
-                    case "commander": commanderCards.add(cardLine); break;
-                    case "sideboard": sideCards.add(cardLine); break;
-                    default: mainCards.add(cardLine); break;
-                }
+                mainCards.add(qty + " " + name);
                 totalCards++;
             }
         }
@@ -79,31 +57,13 @@ public class TappedOutFetcher extends DeckSiteFetcher {
         }
 
         StringBuilder sb = new StringBuilder();
-
         String deckName = deckSlug.replace("-", " ").replaceAll("\\s+$", "");
         appendDeckName(sb, deckName);
-
-        if (!commanderCards.isEmpty()) {
-            sb.append("Commander\n");
-            for (String card : commanderCards) {
-                sb.append(card).append("\n");
-            }
-            sb.append("\n");
-        }
-        if (!mainCards.isEmpty()) {
-            sb.append("Main\n");
-            for (String card : mainCards) {
-                sb.append(card).append("\n");
-            }
-            sb.append("\n");
-        }
-        if (!sideCards.isEmpty()) {
-            sb.append("Sideboard\n");
-            for (String card : sideCards) {
-                sb.append(card).append("\n");
-            }
+        for (String card : mainCards) {
+            sb.append(card).append("\n");
         }
 
-        return FetchResult.ok(sb.toString().trim(), getSiteName(), totalCards);
+        return FetchResult.okWithNote(sb.toString().trim(), getSiteName(), totalCards,
+                "Note: TappedOut's text export doesn't include commander or sideboard sections.");
     }
 }
