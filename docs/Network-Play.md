@@ -3,6 +3,7 @@
 - [Requirements](#requirements)
 - [Quick Start](#quick-start)
 - [Disconnect/Reconnect Support](#disconnectreconnect-support)
+- [AFK Timer](#afk-timer)
 - [Network Configuration](#network-configuration)
   - [Local Network Setup](#local-network-setup)
   - [Remote Network Setup](#remote-network-setup)
@@ -83,6 +84,36 @@ This means disconnects are typically detected within about 45 seconds, even when
 
 ## If the Player doesn't Reconnect
 When the 5-minute timeout expires, the disconnected player is **replaced by an AI** and the game continues.
+
+# AFK Timer
+
+The host can configure an **Away-From-Keyboard (AFK) timer** so that one idle player cannot stall the whole game. 
+
+This is a single host-side preference. Whatever the host has set applies uniformly to every player at the table, including the host themselves.
+
+## Configuring
+
+Set the value under **Preferences > Server Preferences > AFK Timeout**. The host's current value is read at each priority pass, so changes take effect immediately — including for an active match.
+
+The AFK timer is **enabled by default.**
+
+| Value | Behavior |
+|---|---|
+| `0` | Disabled. Priority prompts wait indefinitely. |
+| `1`–`60` | Auto-pass after this many minutes of inactivity on a priority decision. **Default: 5 minutes.** |
+
+## How it works
+
+**30 seconds before** the timer expires, a warning is broadcast in chat:
+> *PlayerName* will auto-pass in 30 seconds due to inactivity (AFK timeout: 5:00).
+
+If the player still hasn't acted, priority is auto-passed and a follow-up is broadcast:
+> *PlayerName* auto-passed due to inactivity (AFK timeout: 5:00, will now auto-pass after 10s each priority until active).
+
+Once a player has been flagged as AFK, the timer shortens to **10 seconds** for subsequent priority passes — so the table doesn't wait through the full timeout on every pass after the first. As soon as that player takes any action, the full timer resets.
+
+> [!NOTE]
+> This feature is in development and the AFK timer currently only governs **priority** prompts (a player's normal pass-priority window). Other in-game prompts — combat damage assignment, choice dialogs, target selection — currently wait indefinitely regardless of the host's AFK setting.
 
 ## Host Commands
 The host can type these commands in the lobby chat during the reconnection window. These commands are **host-only** — clients cannot use them.
