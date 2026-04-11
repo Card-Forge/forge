@@ -2,17 +2,16 @@ package forge.gamemodes.net.server;
 
 import forge.gamemodes.net.CompatibleObjectDecoder;
 import forge.gamemodes.net.CompatibleObjectEncoder;
-import forge.gamemodes.net.IHasNetLog;
 import forge.gamemodes.net.ReplyPool;
 import forge.trackable.Tracker;
 import forge.gamemodes.net.event.IdentifiableNetEvent;
 import forge.gamemodes.net.event.NetEvent;
+import forge.util.IHasForgeLog;
 import io.netty.channel.Channel;
 
-import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public final class RemoteClient implements IToClient, IHasNetLog {
+public final class RemoteClient implements IToClient, IHasForgeLog {
 
     /** Special value indicating the client hasn't been assigned a slot yet. */
     public static final int UNASSIGNED_SLOT = -1;
@@ -65,7 +64,7 @@ public final class RemoteClient implements IToClient, IHasNetLog {
     }
 
     @Override
-    public Object sendAndWait(final IdentifiableNetEvent event) throws TimeoutException {
+    public Object sendAndWait(final IdentifiableNetEvent event) {
         replies.initialize(event.getId());
         send(event);
         return replies.get(event.getId());

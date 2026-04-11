@@ -2,6 +2,7 @@ package forge.gamemodes.net;
 
 import forge.gui.GuiBase;
 import forge.trackable.Tracker;
+import forge.util.IHasForgeLog;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 import io.netty.channel.ChannelHandlerContext;
@@ -12,14 +13,10 @@ import net.jpountz.lz4.LZ4BlockInputStream;
 import java.io.ObjectInputStream;
 import java.io.StreamCorruptedException;
 
-public class CompatibleObjectDecoder extends LengthFieldBasedFrameDecoder implements IHasNetLog {
+public class CompatibleObjectDecoder extends LengthFieldBasedFrameDecoder implements IHasForgeLog {
 
     private final ClassResolver classResolver;
     private volatile Tracker tracker;
-
-    public CompatibleObjectDecoder(ClassResolver classResolver) {
-        this(1048576, classResolver);
-    }
 
     public CompatibleObjectDecoder(int maxObjectSize, ClassResolver classResolver) {
         super(maxObjectSize, 0, 4, 0, 4);
@@ -40,14 +37,13 @@ public class CompatibleObjectDecoder extends LengthFieldBasedFrameDecoder implem
         int frameSize = frame.readableBytes();
         long startMs = System.currentTimeMillis();
 
-        Tracker currentTracker = this.tracker;
         ObjectInputStream ois;
         if (GuiBase.hasPropertyConfig()) {
-            ois = currentTracker != null
-                    ? new TrackableSerializer.ResolvingInputStream(new LZ4BlockInputStream(new ByteBufInputStream(frame, true)), currentTracker)
+            ois = tracker != null
+                    ? new TrackableSerializer.ResolvingInputStream(new LZ4BlockInputStream(new ByteBufInputStream(frame, true)), tracker)
                     : new ObjectInputStream(new LZ4BlockInputStream(new ByteBufInputStream(frame, true)));
         } else {
-            ois = new CObjectInputStream(new LZ4BlockInputStream(new ByteBufInputStream(frame, true)), this.classResolver, currentTracker);
+            ois = new CObjectInputStream(new LZ4BlockInputStream(new ByteBufInputStream(frame, true)), this.classResolver, tracker);
         }
 
         Object var5 = null;
