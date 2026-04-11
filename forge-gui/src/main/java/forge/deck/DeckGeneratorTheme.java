@@ -61,7 +61,6 @@ public class DeckGeneratorTheme extends DeckGeneratorBase {
     public DeckGeneratorTheme(IDeckGenPool pool0) {
         super(pool0, DeckFormat.Constructed);
         setBasicLandPool(null);
-        this.maxDuplicates = 4;
     }
 
     /**
@@ -131,7 +130,7 @@ public class DeckGeneratorTheme extends DeckGeneratorBase {
                 ss = s.split("\\|");
                 
                 int lc = 0;
-                while ((cardCounts.get(ss[0]) >= g.maxCnt)) {
+                while (cardCounts.get(ss[0]) >= g.maxCnt) {
                     // looping
                     // forever
                     s = g.cardnames.get(MyRandom.getRandom().nextInt(cnSize));

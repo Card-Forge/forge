@@ -1,6 +1,6 @@
 package forge.net;
 
-import forge.gamemodes.net.IHasNetLog;
+import forge.util.IHasForgeLog;
 import forge.gamemodes.net.NetworkLogConfig;
 
 import java.util.ArrayList;
@@ -15,14 +15,14 @@ import java.util.Random;
  * per game) or sequentially via {@link UnifiedNetworkHarness} (same JVM,
  * useful for debugging).
  */
-public class ComprehensiveTestExecutor implements IHasNetLog {
+public class ComprehensiveTestExecutor implements IHasForgeLog {
 
     private static final int BASE_PORT = 58000;
 
-    // Default game distribution
-    private int twoPlayerGames = 50;
-    private int threePlayerGames = 30;
-    private int fourPlayerGames = 20;
+    // Default game distribution (small; presets override for comprehensive/quick tests)
+    private int twoPlayerGames = 3;
+    private int threePlayerGames = 0;
+    private int fourPlayerGames = 0;
 
     // Format distribution
     private int commanderPercentage = 30; // 30% of games use Commander format
@@ -251,34 +251,34 @@ public class ComprehensiveTestExecutor implements IHasNetLog {
     }
 
     /**
-     * Run N sequential 2-player games.
-     * Convenience method replacing SequentialGameExecutor.runGames().
-     *
-     * @param gameCount Number of 2-player games to run
-     * @return Execution result
+     * Create an executor with comprehensive test defaults (50/30/20),
+     * then apply any system property overrides.
      */
-    public static MultiProcessGameExecutor.ExecutionResult runSequentialGames(int gameCount, long timeoutMs) {
+    public static ComprehensiveTestExecutor comprehensive() {
         return new ComprehensiveTestExecutor()
-                .twoPlayerGames(gameCount)
-                .threePlayerGames(0)
-                .fourPlayerGames(0)
-                .gameTimeout(timeoutMs)
-                .sequential(true)
-                .execute();
+                .twoPlayerGames(50)
+                .threePlayerGames(30)
+                .fourPlayerGames(20)
+                .applySystemProperties();
     }
 
     /**
      * Create an executor from system properties.
+     * Defaults to 3 x 2-player games if no properties are set.
      * Properties:
-     *   -Dtest.2pGames=50
-     *   -Dtest.3pGames=30
-     *   -Dtest.4pGames=20
-     *   -Dtest.commanderPct=20
+     *   -Dtest.2pGames=3
+     *   -Dtest.3pGames=0
+     *   -Dtest.4pGames=0
+     *   -Dtest.commanderPct=30
      *   -Dtest.batchSize=10
      *   -Dtest.timeoutMs=300000
      */
     public static ComprehensiveTestExecutor fromSystemProperties() {
-        ComprehensiveTestExecutor executor = new ComprehensiveTestExecutor();
+        return new ComprehensiveTestExecutor().applySystemProperties();
+    }
+
+    private ComprehensiveTestExecutor applySystemProperties() {
+        ComprehensiveTestExecutor executor = this;
 
         String twoP = System.getProperty("test.2pGames");
         if (twoP != null) {

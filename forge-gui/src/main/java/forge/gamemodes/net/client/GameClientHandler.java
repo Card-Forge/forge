@@ -5,7 +5,7 @@ import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.gamemodes.net.CompatibleObjectDecoder;
 import forge.gamemodes.net.GameProtocolHandler;
-import forge.gamemodes.net.IHasNetLog;
+import forge.util.IHasForgeLog;
 import forge.gamemodes.net.IRemote;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.gamemodes.net.ReplyPool;
@@ -26,7 +26,7 @@ import io.netty.channel.ChannelHandlerContext;
 import java.util.EnumMap;
 import java.util.Iterator;
 
-final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements IHasNetLog {
+final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements IHasForgeLog {
 
     private final FGameClient client;
     private final IGuiGame gui;

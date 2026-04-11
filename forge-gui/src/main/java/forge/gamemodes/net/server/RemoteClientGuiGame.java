@@ -17,7 +17,7 @@ import forge.gamemodes.match.YieldPrefs;
 import forge.gamemodes.net.NetworkGuiGame;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.GameProtocolSender;
-import forge.gamemodes.net.IHasNetLog;
+import forge.util.IHasForgeLog;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.gamemodes.net.TrackableSerializer;
 import forge.gui.control.GameEventForwarder;
@@ -38,7 +38,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
+public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog {
 
     // New objects are sent with full property data, existing objects only send changed properties
     public static boolean useDeltaSync = false;
@@ -46,7 +46,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
     private final RemoteClient client;
     private final GameProtocolSender sender;
     private final DeltaSyncManager syncManager;
-    private final int clientIndex;
+
     private boolean initialSyncSent = false;
     private boolean objectsRegistered = false;
     private boolean codecTrackerSet = false;
@@ -66,12 +66,10 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
         this.client = client;
         sender = new GameProtocolSender(client);
         syncManager = new DeltaSyncManager();
-        clientIndex = client.getIndex();
     }
 
-    /** Alias for reconnection code that references slot index. */
-    public int getSlotIndex() {
-        return clientIndex;
+    public RemoteClient getClient() {
+        return client;
     }
 
     @Override
@@ -175,7 +173,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
         if (!useDeltaSync || !initialSyncSent) {
             if (logBandwidth && !fallbackLogged) {
                 netLog.info("[DeltaSync] Client {}: Fallback to full state - useDeltaSync={}, initialSyncSent={}",
-                    clientIndex, useDeltaSync, initialSyncSent);
+                    client.getIndex(), useDeltaSync, initialSyncSent);
                 fallbackLogged = true;
             }
             if (flush) {
@@ -601,7 +599,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
     public String toString() {
         GameView gv = getGameView();
         return String.format("RemoteClientGuiGame[client=%d, deltaSyncEnabled=%b, initialSyncSent=%b, gameView=%s]",
-                clientIndex, useDeltaSync, initialSyncSent,
+                client.getIndex(), useDeltaSync, initialSyncSent,
                 gv != null ? "GameView@" + Integer.toHexString(System.identityHashCode(gv)) : "null");
     }
 

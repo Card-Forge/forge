@@ -1,6 +1,6 @@
 package forge.net;
 
-import forge.gamemodes.net.IHasNetLog;
+import forge.util.IHasForgeLog;
 import forge.gamemodes.net.NetworkLogConfig;
 
 import java.io.BufferedReader;
@@ -23,7 +23,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * Results are parsed from child process stdout ({@code RESULT:} lines) and
  * aggregated into {@link ExecutionResult}.
  */
-public class MultiProcessGameExecutor implements IHasNetLog {
+public class MultiProcessGameExecutor implements IHasForgeLog {
 
     private final long timeoutMs;
 

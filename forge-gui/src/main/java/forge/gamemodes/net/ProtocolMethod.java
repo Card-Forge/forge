@@ -20,6 +20,7 @@ import forge.localinstance.skin.FSkinProp;
 import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
 import forge.util.FSerializableFunction;
+import forge.util.IHasForgeLog;
 import forge.util.ITriggerEvent;
 import forge.util.ReflectionUtil;
 
@@ -31,7 +32,7 @@ import java.util.Map;
 /**
  * The methods that can be sent through this protocol.
  */
-public enum ProtocolMethod {
+public enum ProtocolMethod implements IHasForgeLog {
     // Server -> Client
     setGameView         (Mode.SERVER, Void.TYPE, GameView.class),
     openView            (Mode.SERVER, Void.TYPE, TrackableCollection/*PlayerView*/.class),

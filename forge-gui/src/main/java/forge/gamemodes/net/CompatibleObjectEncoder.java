@@ -2,7 +2,7 @@ package forge.gamemodes.net;
 
 import forge.gamemodes.net.event.GuiGameEvent;
 import forge.gui.GuiBase;
-import forge.trackable.Tracker;
+import forge.util.IHasForgeLog;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.channel.ChannelHandlerContext;
@@ -12,7 +12,7 @@ import net.jpountz.lz4.LZ4BlockOutputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> implements IHasNetLog {
+public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> implements IHasForgeLog {
 
     private static final byte[] LENGTH_PLACEHOLDER = new byte[4];
     private final NetworkByteTracker byteTracker;

@@ -2,7 +2,7 @@ package forge.net;
 
 import forge.game.GameView;
 import forge.gamemodes.net.DeltaPacket;
-import forge.gamemodes.net.IHasNetLog;
+import forge.util.IHasForgeLog;
 import forge.gamemodes.match.GameLobby.GameLobbyData;
 import forge.gamemodes.net.client.ClientGameLobby;
 import forge.gamemodes.net.client.FGameClient;
@@ -28,7 +28,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * Internally extends {@link HeadlessNetworkGuiGame} via {@code DeltaLoggingGuiGame}
  * to process delta packets and provide auto-response behavior.
  */
-public class HeadlessNetworkClient implements AutoCloseable, IHasNetLog {
+public class HeadlessNetworkClient implements AutoCloseable, IHasForgeLog {
 
     private final String username;
     private final String hostname;

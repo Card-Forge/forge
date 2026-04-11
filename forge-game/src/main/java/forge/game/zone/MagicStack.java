@@ -593,7 +593,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         final Card source = sa.getHostCard();
         curResolvingCard = source;
 
-        boolean thisHasFizzled = hasFizzled(sa, source, null);
+        boolean thisHasFizzled = hasFizzled(sa, null);
 
         if (!thisHasFizzled) {
             game.copyLastState();
@@ -711,7 +711,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         return hasLegalTargeting(sa.getSubAbility());
     }
 
-    private boolean hasFizzled(final SpellAbility sa, final Card source, Boolean fizzle) {
+    private boolean hasFizzled(final SpellAbility sa, Boolean fizzle) {
         List<GameObject> toRemove = Lists.newArrayList();
         if (sa.usesTargeting() && !sa.isZeroTargets()) {
             if (fizzle == null) {
@@ -751,7 +751,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
         }
         if (sa.getSubAbility() != null) {
-            fizzle = hasFizzled(sa.getSubAbility(), source, fizzle);
+            fizzle = hasFizzled(sa.getSubAbility(), fizzle);
         }
 
         // Remove targets
