@@ -292,7 +292,12 @@ public final class FServerManager implements IHasNetLog {
      * ...) is blocked on those methods not being null-safe.
      */
     public AfkTimeout armAfkTimeout(final PlayerControllerHuman controller, final InputSynchronized input) {
-        if (!isHosting()) {
+        if (!isHosting() || localLobby == null) {
+            return AfkTimeout.NOOP;
+        }
+        final HostedMatch hostedMatch = localLobby.getHostedMatch();
+        if (hostedMatch == null || controller.getGame() != hostedMatch.getGame()) {
+            // Input belongs to a side-game the host started while waiting (e.g. local vs AI)
             return AfkTimeout.NOOP;
         }
         final int fullMinutes = FModel.getNetPreferences().getPrefInt(ForgeNetPreferences.FNetPref.NET_AFK_TIMEOUT);
