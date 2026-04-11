@@ -1,0 +1,10 @@
+Name:Tenured Concocter
+ManaCost:2 G
+Types:Creature Troll Druid
+PT:4/5
+K:Vigilance
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ SpellAbility.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever this creature becomes the target of a spell or ability an opponent controls, you may draw a card.
+SVar:TrigDraw:DB$ Draw
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | CheckSVar$ X | Description$ Infusion — This creature gets +2/+0 as long as you gained life this turn.
+SVar:X:Count$LifeYouGainedThisTurn
+Oracle:Vigilance\nWhenever this creature becomes the target of a spell or ability an opponent controls, you may draw a card.\nInfusion — This creature gets +2/+0 as long as you gained life this turn.

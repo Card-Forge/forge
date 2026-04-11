@@ -1,0 +1,9 @@
+Name:Startled Relic Sloth
+ManaCost:2 R W
+Types:Creature Sloth Beast
+PT:4/4
+K:Trample
+K:Lifelink
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, exile up to one target card from a graveyard.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Card | ValidTgtDesc$ card in a graveyard
+Oracle:Trample, lifelink\nAt the beginning of combat on your turn, exile up to one target card from a graveyard.
