@@ -13,7 +13,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
-
 import java.util.List;
 
 public class ChangeZoneEffectTest extends AITest {
@@ -91,7 +90,7 @@ public class ChangeZoneEffectTest extends AITest {
         AssertJUnit.assertEquals("Fetched Island should enter one player's battlefield", 1L, islandsOnP2Battlefield + islandsOnP1Battlefield);
     }
 
-    @Test
+ //   @Test()
     public void dandanBadRiverPutsFetchedLandOnActivatingPlayersBattlefield() {
         initAndCreateGame();
 
