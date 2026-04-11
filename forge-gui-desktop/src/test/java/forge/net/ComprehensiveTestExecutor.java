@@ -1,6 +1,6 @@
 package forge.net;
 
-import forge.gamemodes.net.IHasNetLog;
+import forge.util.IHasForgeLog;
 import forge.gamemodes.net.NetworkLogConfig;
 
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ import java.util.Random;
  * per game) or sequentially via {@link UnifiedNetworkHarness} (same JVM,
  * useful for debugging).
  */
-public class ComprehensiveTestExecutor implements IHasNetLog {
+public class ComprehensiveTestExecutor implements IHasForgeLog {
 
     private static final int BASE_PORT = 58000;
 

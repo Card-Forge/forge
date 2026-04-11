@@ -3,6 +3,7 @@ package forge.gamemodes.net;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgeNetPreferences.FNetPref;
 import forge.model.FModel;
+import forge.util.IHasForgeLog;
 import org.tinylog.ThreadContext;
 
 import java.io.File;
@@ -23,7 +24,7 @@ import java.time.format.DateTimeFormatter;
  * The {@link NetworkLogWriter} routes file output to per-instance files based on
  * the {@code logfileKey} thread context value.
  */
-public final class NetworkLogConfig implements IHasNetLog {
+public final class NetworkLogConfig implements IHasForgeLog {
 
     private static final String LOG_PREFIX = "network-debug";
 

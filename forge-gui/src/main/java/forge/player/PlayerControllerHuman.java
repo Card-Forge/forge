@@ -48,7 +48,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.match.input.*;
-import forge.gamemodes.net.IHasNetLog;
+import forge.util.IHasForgeLog;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.control.FControlGamePlayback;
@@ -88,7 +88,7 @@ import java.util.stream.Collectors;
  * <p>
  * Handles phase skips for now.
  */
-public class PlayerControllerHuman extends PlayerController implements IGameController, IHasNetLog {
+public class PlayerControllerHuman extends PlayerController implements IGameController, IHasForgeLog {
 
     /**
      * Cards this player may look at right now, for example when searching a
@@ -826,7 +826,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public Player chooseStartingPlayer(final boolean isFirstGame) {
-        String prompt = null;
+        String prompt;
         if (isFirstGame) {
             prompt = localizer.getMessage("lblYouHaveWonTheCoinToss", player.getName());
         } else {
@@ -3368,7 +3368,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public void awaitNextInput() {
         getGui().awaitNextInput();
     }
-
     @Override
     public void cancelAwaitNextInput() {
         getGui().cancelAwaitNextInput();

@@ -6,12 +6,13 @@ import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.trackable.TrackableTypes.TrackableType;
 import forge.trackable.Tracker;
+import forge.util.IHasForgeLog;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameEventProxy implements Serializable, IHasNetLog {
+public class GameEventProxy implements Serializable, IHasForgeLog {
     private static final long serialVersionUID = 1L;
 
     private final byte[] eventData;

@@ -603,7 +603,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
         return !getDisableAutoYields() && autoYields.contains(yieldPerAbility ? abilityKey : key);
     }
-
     @Override
     public final void setShouldAutoYield(final String key, final boolean autoYield) {
         String abilityKey = key.contains("): ") ? key.substring(key.indexOf("): ") + 3) : key;
@@ -617,11 +616,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     private boolean disableAutoYields;
-
     public final boolean getDisableAutoYields() {
         return disableAutoYields;
     }
-
     public final void setDisableAutoYields(final boolean b0) {
         disableAutoYields = b0;
     }
@@ -639,22 +636,18 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public final boolean shouldAlwaysAcceptTrigger(final int trigger) {
         return Boolean.TRUE.equals(triggersAlwaysAccept.get(trigger));
     }
-
     @Override
     public final boolean shouldAlwaysDeclineTrigger(final int trigger) {
         return Boolean.FALSE.equals(triggersAlwaysAccept.get(trigger));
     }
-
     @Override
     public final void setShouldAlwaysAcceptTrigger(final int trigger) {
         triggersAlwaysAccept.put(trigger, Boolean.TRUE);
     }
-
     @Override
     public final void setShouldAlwaysDeclineTrigger(final int trigger) {
         triggersAlwaysAccept.put(trigger, Boolean.FALSE);
     }
-
     @Override
     public final void setShouldAlwaysAskTrigger(final int trigger) {
         triggersAlwaysAccept.remove(trigger);

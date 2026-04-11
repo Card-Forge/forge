@@ -4,7 +4,7 @@ import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
-import forge.gamemodes.net.IHasNetLog;
+import forge.util.IHasForgeLog;
 import forge.gamemodes.net.NetworkLogConfig;
 import forge.gamemodes.net.server.DeltaSyncManager;
 import forge.gamemodes.net.server.RemoteClientGuiGame;
@@ -62,7 +62,7 @@ import java.util.List;
  *       -Dtest.2pGames=50 -Dtest.3pGames=30 -Dtest.4pGames=20 \
  *       -Drun.stress.tests=true -Dsurefire.failIfNoSpecifiedTests=false
  */
-public class NetworkPlayIntegrationTest implements IHasNetLog {
+public class NetworkPlayIntegrationTest implements IHasForgeLog {
 
     private static boolean initialized = false;
 
