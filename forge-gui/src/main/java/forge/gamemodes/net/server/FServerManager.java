@@ -662,7 +662,7 @@ public final class FServerManager implements IHasForgeLog {
 
         for (final Player p : game.getPlayers()) {
             final IGuiGame gui = hostedMatch.getGuiForPlayer(p);
-            if (gui instanceof RemoteClientGuiGame ngg && ngg.getSlotIndex() == slotIndex) {
+            if (gui instanceof RemoteClientGuiGame ngg && ngg.getClient().getIndex() == slotIndex) {
                 ngg.pause();
                 netLog.info("[Reconnect] Paused RemoteClientGuiGame for slot {} ({})", slotIndex, p.getName());
                 return;
@@ -681,7 +681,7 @@ public final class FServerManager implements IHasForgeLog {
         // so name matching is unreliable
         for (final Player p : game.getPlayers()) {
             final IGuiGame gui = hostedMatch.getGuiForPlayer(p);
-            if (gui instanceof RemoteClientGuiGame netGui && netGui.getSlotIndex() == slotIndex) {
+            if (gui instanceof RemoteClientGuiGame netGui && netGui.getClient().getIndex() == slotIndex) {
                 netLog.info("[Reconnect] Resuming RemoteClientGuiGame for slot {} ({})", slotIndex, p.getName());
                 netGui.resume();
 
@@ -733,7 +733,7 @@ public final class FServerManager implements IHasForgeLog {
 
         for (final Player p : game.getPlayers()) {
             final IGuiGame gui = hostedMatch.getGuiForPlayer(p);
-            if (gui instanceof RemoteClientGuiGame rgc && rgc.getSlotIndex() == slotIndex) {
+            if (gui instanceof RemoteClientGuiGame rgc && rgc.getClient().getIndex() == slotIndex) {
                 final LobbyPlayerAi aiLobbyPlayer = new LobbyPlayerAi(p.getName(), null);
                 final PlayerControllerAi aiCtrl = new PlayerControllerAi(game, p, aiLobbyPlayer);
                 p.dangerouslySetController(aiCtrl);

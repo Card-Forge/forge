@@ -179,7 +179,7 @@ public final class GamePlayerUtil {
             SOptionPane.showErrorDialog(localizer.getMessage("sOPServerPromptError", input));
             return serverPort;
         }
-        return  port;
+        return port;
     }
 
     public static void setAfkTimeout() {
