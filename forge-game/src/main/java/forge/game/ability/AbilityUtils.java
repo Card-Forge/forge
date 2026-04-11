@@ -2198,8 +2198,8 @@ public class AbilityUtils {
             int cmc = c.getCMC();
 
             if (sq[0].contains("LKI") && !c.isInZone(ZoneType.Stack) && c.getManaCost() != null) {
-                if (ctb instanceof SpellAbility && ((SpellAbility) ctb).getXManaCostPaid() != null) {
-                    cmc += ((SpellAbility) ctb).getXManaCostPaid() * c.getManaCost().countX();
+                if (ctb instanceof SpellAbility sa && sa.getXManaCostPaid() != null) {
+                    cmc += sa.getXManaCostPaid() * c.getManaCost().countX();
                 } else {
                     cmc += c.getXManaCostPaid() * c.getManaCost().countX();
                 }

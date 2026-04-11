@@ -158,7 +158,7 @@ public final class FServerManager implements IHasForgeLog {
                     stopServer();
                 }
             }).start();
-            if(startUPnP) {
+            if (startUPnP) {
                 mapNatPort();
             }
             Runtime.getRuntime().addShutdownHook(shutdownHook);
@@ -639,7 +639,7 @@ public final class FServerManager implements IHasForgeLog {
 
         for (final Player p : game.getPlayers()) {
             final IGuiGame gui = hostedMatch.getGuiForPlayer(p);
-            if (gui instanceof RemoteClientGuiGame && ((RemoteClientGuiGame) gui).getSlotIndex() == slotIndex) {
+            if (gui instanceof RemoteClientGuiGame rgc && rgc.getSlotIndex() == slotIndex) {
                 final LobbyPlayerAi aiLobbyPlayer = new LobbyPlayerAi(p.getName(), null);
                 final PlayerControllerAi aiCtrl = new PlayerControllerAi(game, p, aiLobbyPlayer);
                 p.dangerouslySetController(aiCtrl);
@@ -788,7 +788,7 @@ public final class FServerManager implements IHasForgeLog {
     private class DeregisterClientHandler extends ChannelInboundHandlerAdapter {
         @Override
         public void userEventTriggered(final ChannelHandlerContext ctx, final Object evt) throws Exception {
-            if (evt instanceof IdleStateEvent && ((IdleStateEvent) evt).state() == IdleState.READER_IDLE) {
+            if (evt instanceof IdleStateEvent ise && ise.state() == IdleState.READER_IDLE) {
                 final RemoteClient client = clients.get(ctx.channel());
                 final String name = client != null ? client.getUsername() : ctx.channel().remoteAddress().toString();
                 final String msg = name + " timed out after " + HEARTBEAT_TIMEOUT_SECONDS

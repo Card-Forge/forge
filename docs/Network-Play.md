@@ -71,24 +71,20 @@
 If a client player disconnects during an active game, the server enters **reconnection mode** instead of immediately ending the match.
 
 ## Disconnect Detection
-
 Forge uses a **heartbeat** mechanism to detect silent disconnects (client crashes, network loss, or force-closes). Each client sends a lightweight heartbeat to the server every **15 seconds** of inactivity. If the server receives no data from a client — no heartbeats, game events, or chat messages — for **45 seconds**, it closes the connection and announces the timeout in chat.
 
 This means disconnects are typically detected within about 45 seconds, even when the client cannot send a clean shutdown signal.
 
 ## What happens on Disconnect
-
 - The game **pauses** for the disconnected player — all other players see a notification.
 - A **5-minute countdown** begins, with status messages broadcast every 30 seconds.
 - The disconnected player can rejoin by reconnecting to the same server with the **same username**.
 - On successful reconnect, the full game state is re-sent to the player and the game resumes normally.
 
 ## If the Player doesn't Reconnect
-
 When the 5-minute timeout expires, the disconnected player is **replaced by an AI** and the game continues.
 
 ## Host Commands
-
 The host can type these commands in the lobby chat during the reconnection window. These commands are **host-only** — clients cannot use them.
 
 | Command | Effect |
@@ -123,8 +119,6 @@ You can get your **local IP address**:
 - In the Forge app from the Server URL dialog that appears immediately after hosting a server.
 - In **Windows PowerShell** by using the `ipconfig` command and copying the `IPv4 Address` result.
 - In **macOS / Linux terminal** by using the `ifconfig` command and copying the `inet` result.
-
-The **default port number** used by Forge is `36743`. You should refer to this unless you have changed the default port in your Forge preferences.
 
 Now validate that the port is open by using one of the following tests:
 - **Windows (PowerShell):** Open PowerShell and run:
@@ -255,7 +249,6 @@ Network play currently lacks traffic optimization. A single game can transfer hu
 ---
 
 # Network Logs
-
 Forge writes detailed network logs during online multiplayer games. These are separate from the normal game log and are specifically used for troubleshooting network issues.
 
 **Please provide your logs when reporting bugs.** Logs are stored in the `networklogs/` folder inside your Forge data directory:
