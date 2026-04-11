@@ -658,8 +658,10 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             allowedLandSets = List.of(FModel.getMagicDb().getEditions().get("JMP"));
         CardEdition defaultLandSet = allowedLandSets.get(0);
         List<CardEdition> finalAllowedLandSets = allowedLandSets;
+        boolean allowSnowLands = allowedLandSets.stream()
+                .anyMatch(e -> e != null && e.hasSnowBasicLands());
         FThreads.invokeInEdtNowOrLater(() -> {
-            AddBasicLandsDialog dialog = new AddBasicLandsDialog(deck, defaultLandSet, this::addChosenBasicLands, editorConfig.hasInfiniteCardPool() ? null : finalAllowedLandSets); //Null allows any lands to be selected
+            AddBasicLandsDialog dialog = new AddBasicLandsDialog(deck, defaultLandSet, this::addChosenBasicLands, editorConfig.hasInfiniteCardPool() ? null : finalAllowedLandSets, allowSnowLands); //Null allows any lands to be selected
             dialog.show();
 
         });

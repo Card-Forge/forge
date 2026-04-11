@@ -39,6 +39,7 @@ import forge.card.mana.ManaCostShard;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.toolbox.FCardPanel;
+import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDialog;
@@ -60,6 +61,7 @@ public class AddBasicLandsDialog extends FDialog {
 
     private final FLabel lblLandSet = add(new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblLandSet") + ":").font(FSkinFont.get(12)).textColor(FLabel.getInlineLabelColor()).build());
     private final FComboBox<CardEdition> cbLandSet = add(new FComboBox<>(IterableUtil.filter(StaticData.instance().getSortedEditions(), CardEdition::hasBasicLands)));
+    private FCheckBox chkSnow; // null unless the caller opts in to snow-covered basics
 
     private final FScrollPane scroller = add(new FScrollPane() {
         @Override
@@ -115,6 +117,9 @@ public class AddBasicLandsDialog extends FDialog {
     private CardEdition landSet;
 
     public AddBasicLandsDialog(Deck deck, CardEdition defaultLandSet, final Consumer<CardPool> callback0, List<CardEdition> editionOptions) {
+        this(deck, defaultLandSet, callback0, editionOptions, false);
+    }
+    public AddBasicLandsDialog(Deck deck, CardEdition defaultLandSet, final Consumer<CardPool> callback0, List<CardEdition> editionOptions, boolean allowSnowLands) {
         super(Forge.getLocalizer().getMessage("lblAddBasicLandsAutoSuggest").replace("%s", deck.getName()), 2);
 
         callback = callback0;
@@ -131,6 +136,12 @@ public class AddBasicLandsDialog extends FDialog {
 
         if (editionOptions != null && !editionOptions.isEmpty()) {
             cbLandSet.setItems(editionOptions, editionOptions.get(0));
+        }
+
+        if (allowSnowLands) {
+            chkSnow = add(new FCheckBox(Forge.getLocalizer().getMessage("lblSnowCovered"), false));
+            chkSnow.setFont(lblLandSet.getFont());
+            chkSnow.setCommand(e -> applySnowSelection());
         }
 
         if (cbLandSet.getSelectedItem() == defaultLandSet) {
@@ -233,11 +244,31 @@ public class AddBasicLandsDialog extends FDialog {
 
     private void onEditionChange() {
         landSet = cbLandSet.getSelectedItem();
+        if (chkSnow != null) {
+            boolean snowAvailable = landSet != null && landSet.hasSnowBasicLands();
+            chkSnow.setEnabled(snowAvailable);
+            if (!snowAvailable && chkSnow.isSelected()) {
+                chkSnow.setSelected(false);
+                setSnowOnAllPanels(false);
+            }
+        }
         pnlPlains.refreshArtChoices();
         pnlIsland.refreshArtChoices();
         pnlSwamp.refreshArtChoices();
         pnlMountain.refreshArtChoices();
         pnlForest.refreshArtChoices();
+    }
+
+    private void applySnowSelection() {
+        setSnowOnAllPanels(chkSnow != null && chkSnow.isSelected());
+    }
+
+    private void setSnowOnAllPanels(boolean snow) {
+        pnlPlains.setSnow(snow);
+        pnlIsland.setSnow(snow);
+        pnlSwamp.setSnow(snow);
+        pnlMountain.setSnow(snow);
+        pnlForest.setSnow(snow);
     }
 
     @Override
@@ -247,9 +278,13 @@ public class AddBasicLandsDialog extends FDialog {
         float y = padding;
         float w = width - 2 * padding;
 
-        //layout land set combo box
+        //layout land set combo box (snow checkbox shares the label's row when present)
         float comboBoxHeight = cbLandSet.getHeight();
         lblLandSet.setBounds(x, y, lblLandSet.getAutoSizeBounds().width, comboBoxHeight);
+        if (chkSnow != null) {
+            float chkW = chkSnow.getAutoSizeBounds().width + comboBoxHeight; // room for the box icon
+            chkSnow.setBounds(x + w - chkW, y, chkW, comboBoxHeight);
+        }
         y+= comboBoxHeight;
         cbLandSet.setBounds(x, y, w, comboBoxHeight);
 
@@ -306,12 +341,15 @@ public class AddBasicLandsDialog extends FDialog {
         private final LandCardPanel cardPanel;
         private final FLabel lblCount, btnSubtract, btnAdd;
         private final FComboBox<String> cbLandArt;
-        private final String cardName;
+        private final String baseCardName;
+        private String cardName;
+        private boolean useSnow;
         private PaperCard card;
         private int count, maxCount;
         private double symbolCount;
 
         private LandPanel(String cardName0) {
+            baseCardName = cardName0;
             cardName = cardName0;
             cardPanel = add(new LandCardPanel());
             cbLandArt = add(new FComboBox<>());
@@ -370,6 +408,17 @@ public class AddBasicLandsDialog extends FDialog {
             cbLandArt.addItem(Forge.getLocalizer().getMessage("lblAssortedArt"));
             for (int i = 1; i <= artChoiceCount; i++) {
                 cbLandArt.addItem(Forge.getLocalizer().getMessage("lblCardArtN", String.valueOf(i)));
+            }
+        }
+
+        private void setSnow(boolean snow) {
+            if (useSnow == snow) { return; }
+            useSnow = snow;
+            cardName = snow ? "Snow-Covered " + baseCardName : baseCardName;
+            refreshArtChoices();
+            int artIndex = cbLandArt.getSelectedIndex();
+            if (artIndex >= 0) {
+                card = generateCard(artIndex);
             }
         }
 

@@ -195,8 +195,10 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
         }
 
         CardEdition defaultLandSet = CardEdition.Predicates.getRandomSetWithAllBasicLands(availableEditionCodes);
+        boolean allowSnowLands = availableEditionCodes.stream()
+                .anyMatch(e -> e != null && e.hasSnowBasicLands());
 
-        AddBasicLandsDialog dialog = new AddBasicLandsDialog(deck, defaultLandSet);
+        AddBasicLandsDialog dialog = new AddBasicLandsDialog(deck, defaultLandSet, allowSnowLands);
         CardPool landsToAdd = dialog.show();
         if (landsToAdd != null) {
             editor.onAddItems(landsToAdd, false);
