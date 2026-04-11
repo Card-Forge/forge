@@ -10,7 +10,7 @@ import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.net.CompatibleObjectDecoder;
 import forge.gamemodes.net.CompatibleObjectEncoder;
-import forge.gamemodes.net.IHasNetLog;
+import forge.util.IHasForgeLog;
 import forge.gamemodes.net.event.*;
 import forge.gui.GuiBase;
 import forge.gui.interfaces.IGuiGame;
@@ -52,7 +52,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 
-public final class FServerManager implements IHasNetLog {
+public final class FServerManager implements IHasForgeLog {
 
     static final int HEARTBEAT_TIMEOUT_SECONDS = Integer.getInteger("forge.net.heartbeatTimeout", 45);
     private static final int RECONNECT_TIMEOUT_SECONDS = 300;

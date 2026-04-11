@@ -1,6 +1,6 @@
 package forge.net;
 
-import forge.gamemodes.net.IHasNetLog;
+import forge.util.IHasForgeLog;
 import forge.gamemodes.net.NetworkChecksumUtil;
 import forge.gamemodes.net.server.RemoteClientGuiGame;
 import forge.gui.GuiBase;
@@ -66,7 +66,7 @@ public final class TestUtils {
             RemoteClientGuiGame.useDeltaSync = false;
         }
 
-        IHasNetLog.netLog.info("[TestConfig] checksum={}, deltasync={}",
+        IHasForgeLog.netLog.info("[TestConfig] checksum={}, deltasync={}",
                 useStable ? "stable" : "sampled",
                 RemoteClientGuiGame.useDeltaSync ? "on" : "off");
     }
