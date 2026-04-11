@@ -1,6 +1,6 @@
 package forge.gamemodes.net.server;
 
-import forge.gamemodes.net.IHasNetLog;
+import forge.util.IHasForgeLog;
 import forge.gamemodes.net.ReplyPool;
 import forge.gamemodes.net.event.IdentifiableNetEvent;
 import forge.gamemodes.net.event.NetEvent;
@@ -8,7 +8,7 @@ import io.netty.channel.Channel;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public final class RemoteClient implements IToClient, IHasNetLog {
+public final class RemoteClient implements IToClient, IHasForgeLog {
 
     /** Special value indicating the client hasn't been assigned a slot yet. */
     public static final int UNASSIGNED_SLOT = -1;

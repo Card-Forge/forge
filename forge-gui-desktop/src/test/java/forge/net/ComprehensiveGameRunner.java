@@ -1,6 +1,6 @@
 package forge.net;
 
-import forge.gamemodes.net.IHasNetLog;
+import forge.util.IHasForgeLog;
 import forge.gamemodes.net.NetworkLogConfig;
 
 /**
@@ -14,7 +14,7 @@ import forge.gamemodes.net.NetworkLogConfig;
  * Output:     RESULT:gameIndex|success|playerCount|deltas|turns|bytes|winner|decks|format|eventMismatches
  * </pre>
  */
-public class ComprehensiveGameRunner implements IHasNetLog {
+public class ComprehensiveGameRunner implements IHasForgeLog {
 
     public static void main(String[] args) {
         if (args.length < 3) {

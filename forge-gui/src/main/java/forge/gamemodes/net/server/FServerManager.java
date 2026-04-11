@@ -11,7 +11,7 @@ import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.match.input.InputSynchronized;
 import forge.gamemodes.net.CompatibleObjectDecoder;
 import forge.gamemodes.net.CompatibleObjectEncoder;
-import forge.gamemodes.net.IHasNetLog;
+import forge.util.IHasForgeLog;
 import forge.gamemodes.net.event.*;
 import forge.gui.GuiBase;
 import forge.gui.interfaces.IGuiGame;
@@ -57,7 +57,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Predicate;
 
-public final class FServerManager implements IHasNetLog {
+public final class FServerManager implements IHasForgeLog {
 
     static final int HEARTBEAT_TIMEOUT_SECONDS = Integer.getInteger("forge.net.heartbeatTimeout", 45);
     private static final int RECONNECT_TIMEOUT_SECONDS = 300;
@@ -163,7 +163,7 @@ public final class FServerManager implements IHasNetLog {
                     stopServer();
                 }
             }).start();
-            if(startUPnP) {
+            if (startUPnP) {
                 mapNatPort();
             }
             Runtime.getRuntime().addShutdownHook(shutdownHook);
@@ -733,7 +733,7 @@ public final class FServerManager implements IHasNetLog {
 
         for (final Player p : game.getPlayers()) {
             final IGuiGame gui = hostedMatch.getGuiForPlayer(p);
-            if (gui instanceof RemoteClientGuiGame && ((RemoteClientGuiGame) gui).getSlotIndex() == slotIndex) {
+            if (gui instanceof RemoteClientGuiGame rgc && rgc.getSlotIndex() == slotIndex) {
                 final LobbyPlayerAi aiLobbyPlayer = new LobbyPlayerAi(p.getName(), null);
                 final PlayerControllerAi aiCtrl = new PlayerControllerAi(game, p, aiLobbyPlayer);
                 p.dangerouslySetController(aiCtrl);
@@ -882,7 +882,7 @@ public final class FServerManager implements IHasNetLog {
     private class DeregisterClientHandler extends ChannelInboundHandlerAdapter {
         @Override
         public void userEventTriggered(final ChannelHandlerContext ctx, final Object evt) throws Exception {
-            if (evt instanceof IdleStateEvent && ((IdleStateEvent) evt).state() == IdleState.READER_IDLE) {
+            if (evt instanceof IdleStateEvent ise && ise.state() == IdleState.READER_IDLE) {
                 final RemoteClient client = clients.get(ctx.channel());
                 final String name = client != null ? client.getUsername() : ctx.channel().remoteAddress().toString();
                 final String msg = name + " timed out after " + HEARTBEAT_TIMEOUT_SECONDS

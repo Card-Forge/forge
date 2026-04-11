@@ -1,6 +1,6 @@
 package forge.net;
 
-import forge.gamemodes.net.IHasNetLog;
+import forge.util.IHasForgeLog;
 import forge.gamemodes.net.NetworkChecksumUtil;
 import forge.gamemodes.net.server.RemoteClientGuiGame;
 import forge.gui.GuiBase;
@@ -60,13 +60,11 @@ public final class TestUtils {
         boolean useStable = !"production".equalsIgnoreCase(System.getProperty("forge.checksum.mode"));
         NetworkChecksumUtil.setStableChecksum(useStable);
 
-        // Use -Dforge.deltasync=false to disable delta sync (full state every update)
+        // Delta sync enabled by default in tests; use -Dforge.deltasync=false to disable
         String deltaSyncProp = System.getProperty("forge.deltasync");
-        if ("false".equalsIgnoreCase(deltaSyncProp)) {
-            RemoteClientGuiGame.useDeltaSync = false;
-        }
+        RemoteClientGuiGame.useDeltaSync = !"false".equalsIgnoreCase(deltaSyncProp);
 
-        IHasNetLog.netLog.info("[TestConfig] checksum={}, deltasync={}",
+        IHasForgeLog.netLog.info("[TestConfig] checksum={}, deltasync={}",
                 useStable ? "stable" : "sampled",
                 RemoteClientGuiGame.useDeltaSync ? "on" : "off");
     }

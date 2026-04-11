@@ -17,7 +17,7 @@ import forge.gamemodes.net.NetworkGuiGame;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.GameEventProxy;
 import forge.gamemodes.net.GameProtocolSender;
-import forge.gamemodes.net.IHasNetLog;
+import forge.util.IHasForgeLog;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.gui.control.GameEventForwarder;
 import forge.item.PaperCard;
@@ -37,7 +37,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
+public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog {
 
     // New objects are sent with full property data, existing objects only send changed properties
     public static boolean useDeltaSync = false;

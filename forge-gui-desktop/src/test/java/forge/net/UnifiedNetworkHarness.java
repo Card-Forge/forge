@@ -11,7 +11,7 @@ import forge.gamemodes.match.GameLobby.GameLobbyData;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
-import forge.gamemodes.net.IHasNetLog;
+import forge.util.IHasForgeLog;
 import forge.gamemodes.net.NetworkByteTracker;
 import forge.gamemodes.net.NetworkLogConfig;
 import forge.gamemodes.net.client.ClientGameLobby;
@@ -51,7 +51,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  *     .playerCount(2).remoteClients(1).execute();
  * </pre>
  */
-public class UnifiedNetworkHarness implements IHasNetLog {
+public class UnifiedNetworkHarness implements IHasForgeLog {
 
     private static final String[] PLAYER_NAMES = {"Alice (Host AI)", "Bob (Remote)", "Charlie (Remote)", "Diana (Remote)"};
 

@@ -1479,10 +1479,10 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (fetchList.isEmpty()) {
             return null;
         }
-        List<String> keyCards = new ArrayList<>(player.getRegisteredPlayer().getDeck().getKeyCards());
+        List<String> keyCards = player.getRegisteredPlayer().getDeck().getKeyCards();
         // Only grab the keycards I don't already have access to
         if (destination.equals(ZoneType.Battlefield) || destination.equals(ZoneType.Hand)) {
-            for(Card c : player.getCardsIn(Lists.newArrayList(ZoneType.Hand, ZoneType.Battlefield))) {
+            for (Card c : player.getCardsIn(Lists.newArrayList(ZoneType.Hand, ZoneType.Battlefield))) {
                 keyCards.remove(c.getName());
             }
         }
