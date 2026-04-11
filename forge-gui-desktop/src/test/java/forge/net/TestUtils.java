@@ -60,11 +60,9 @@ public final class TestUtils {
         boolean useStable = !"production".equalsIgnoreCase(System.getProperty("forge.checksum.mode"));
         NetworkChecksumUtil.setStableChecksum(useStable);
 
-        // Use -Dforge.deltasync=false to disable delta sync (full state every update)
+        // Delta sync enabled by default in tests; use -Dforge.deltasync=false to disable
         String deltaSyncProp = System.getProperty("forge.deltasync");
-        if ("false".equalsIgnoreCase(deltaSyncProp)) {
-            RemoteClientGuiGame.useDeltaSync = false;
-        }
+        RemoteClientGuiGame.useDeltaSync = !"false".equalsIgnoreCase(deltaSyncProp);
 
         IHasForgeLog.netLog.info("[TestConfig] checksum={}, deltasync={}",
                 useStable ? "stable" : "sampled",
