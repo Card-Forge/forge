@@ -30,8 +30,6 @@ import forge.trackable.TrackableCollection;
 import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
 
-
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
