@@ -496,11 +496,18 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             return;
         }
         this.waitingStartTime = System.currentTimeMillis();
-        waitingTimer = new java.util.Timer("waitingTimer");
-        waitingTimer.schedule(new java.util.TimerTask() {
+        // Capture timer so stale EDT tick runnables detect cancel/restart and skip
+        final java.util.Timer myTimer = new java.util.Timer("waitingTimer");
+        waitingTimer = myTimer;
+        myTimer.schedule(new java.util.TimerTask() {
             @Override
             public void run() {
-                FThreads.invokeInEdtLater(() -> updateWaitingDisplay(forPlayer, waitingForPlayerName));
+                FThreads.invokeInEdtLater(() -> {
+                    if (waitingTimer != myTimer) {
+                        return; // canceled or replaced before the EDT got to us
+                    }
+                    updateWaitingDisplay(forPlayer, waitingForPlayerName);
+                });
             }
         }, 1000, 1000);
     }
@@ -597,7 +604,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
         return !getDisableAutoYields() && autoYields.contains(yieldPerAbility ? abilityKey : key);
     }
-
     @Override
     public final void setShouldAutoYield(final String key, final boolean autoYield) {
         String abilityKey = key.contains("): ") ? key.substring(key.indexOf("): ") + 3) : key;
@@ -618,11 +624,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     private boolean disableAutoYields;
-
     public final boolean getDisableAutoYields() {
         return disableAutoYields;
     }
-
     public final void setDisableAutoYields(final boolean b0) {
         disableAutoYields = b0;
     }
@@ -640,24 +644,20 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public final boolean shouldAlwaysAcceptTrigger(final int trigger) {
         return Boolean.TRUE.equals(triggersAlwaysAccept.get(trigger));
     }
-
     @Override
     public final boolean shouldAlwaysDeclineTrigger(final int trigger) {
         return Boolean.FALSE.equals(triggersAlwaysAccept.get(trigger));
     }
-
     @Override
     public final void setShouldAlwaysAcceptTrigger(final int trigger) {
         triggersAlwaysAccept.put(trigger, Boolean.TRUE);
         notifyTriggerChoice(trigger, TriggerChoice.ALWAYS_YES);
     }
-
     @Override
     public final void setShouldAlwaysDeclineTrigger(final int trigger) {
         triggersAlwaysAccept.put(trigger, Boolean.FALSE);
         notifyTriggerChoice(trigger, TriggerChoice.ALWAYS_NO);
     }
-
     @Override
     public final void setShouldAlwaysAskTrigger(final int trigger) {
         triggersAlwaysAccept.remove(trigger);

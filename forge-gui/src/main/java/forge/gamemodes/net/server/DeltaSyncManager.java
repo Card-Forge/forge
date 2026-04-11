@@ -12,7 +12,7 @@ import forge.gamemodes.net.NetworkChecksumUtil;
 import forge.game.combat.CombatView;
 import forge.util.collect.FCollection;
 
-import forge.gamemodes.net.IHasNetLog;
+import forge.util.IHasForgeLog;
 import forge.trackable.Tracker;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
@@ -39,7 +39,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Tracks changes to TrackableObjects via per-consumer dirty tracking and builds
  * minimal delta packets using property maps.
  */
-public class DeltaSyncManager implements IHasNetLog {
+public class DeltaSyncManager implements IHasForgeLog {
 
     // How often to include a checksum for validation (every N packets)
     public static final int CHECKSUM_INTERVAL = 20;

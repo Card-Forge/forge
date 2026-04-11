@@ -89,7 +89,7 @@ Only needed if the card text doesn't contain the type/color words but the abilit
 # Factories (in Alphabetical Order)
 
 ## Animate
-Animate handles animation effects like "This artifact becomes a 4/4 red and green Dragon artifact creature with flying until end of turn."
+Handles animation effects like "This artifact becomes a 4/4 red and green Dragon artifact creature with flying until end of turn."
 
 Parameters (all optional):
 - `Power` - the power to assign to the animated card
@@ -467,7 +467,7 @@ Parameters:
 ### Investigate
 
 ### Token
-This AF lets you create tokens of any type. They get defined by creating scripts in the `res/tokenscripts` folder.
+Create tokens of any type. They get defined by putting scripts in the `res/tokenscripts` folder.
 
 Parameters:
 - `TokenScript$ {filename[,filename]}` - list of tokens to create

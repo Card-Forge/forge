@@ -719,6 +719,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             Forge.getLocalizer().getMessage("lblUPnPTitle"),
             Forge.getLocalizer().getMessage("nlServerUPnPOptions"),
             ForgeConstants.getUPnPPreferenceMapping()), 8);
+        lstSettings.addItem(new IntegerSelectSetting(
+            ForgeNetPreferences.FNetPref.NET_AFK_TIMEOUT,
+            Forge.getLocalizer().getMessage("lblAfkTimeout"),
+            Forge.getLocalizer().getMessage("nlAfkTimeout"), 0, 60), 8);
     }
 
     public void refreshSkinsList() {

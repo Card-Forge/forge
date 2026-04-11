@@ -74,19 +74,16 @@ public interface IGuiGame {
     void updatePlayerControl();
 
     void enableOverlay();
-
     void disableOverlay();
 
     void finishGame();
 
     void showManaPool(PlayerView player);
-
     void hideManaPool(PlayerView player);
 
     void updateStack();
 
     void notifyStackAddition(final GameEventSpellAbilityCast event);
-
     void notifyStackRemoval(final GameEventSpellRemovedFromStack event);
 
     void handleLandPlayed(CardView land);
@@ -259,35 +256,30 @@ public interface IGuiGame {
     void setGameSpeed(PlaybackSpeed gameSpeed);
 
     String getDayTime();
-
     void updateDayTime(String daytime);
 
     void awaitNextInput();
-
     void cancelAwaitNextInput();
+
+    /** Signal to start a client-side elapsed timer for waiting display. */
+    void showWaitingTimer(PlayerView forPlayer, String waitingForPlayerName);
 
     boolean isUiSetToSkipPhase(PlayerView playerTurn, PhaseType phase);
 
     void autoPassUntilEndOfTurn(PlayerView player);
-
     boolean mayAutoPass(PlayerView player);
-
     void autoPassCancel(PlayerView player);
 
     void updateAutoPassPrompt();
 
     boolean shouldAutoYield(String key);
-
     void setShouldAutoYield(String key, boolean autoYield);
 
     boolean shouldAlwaysAcceptTrigger(int trigger);
-
     boolean shouldAlwaysDeclineTrigger(int trigger);
 
     void setShouldAlwaysAcceptTrigger(int trigger);
-
     void setShouldAlwaysDeclineTrigger(int trigger);
-
     void setShouldAlwaysAskTrigger(int trigger);
 
     void clearAutoYields();
@@ -299,9 +291,6 @@ public interface IGuiGame {
      * @param packet the delta packet containing changes
      */
     void applyDelta(DeltaPacket packet);
-
-    /** Signal to start a client-side elapsed timer for waiting display. */
-    void showWaitingTimer(PlayerView forPlayer, String waitingForPlayerName);
 
     /** Returns true if this game instance is a network game. */
     boolean isNetGame();

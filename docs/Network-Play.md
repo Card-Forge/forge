@@ -8,6 +8,7 @@
   - [Remote Network Setup](#remote-network-setup)
   - [VPN / Software-Defined Networks](#vpn--software-defined-networks)
 - [Known Limitations](#known-limitations)
+- [Network Logs](#network-logs)
 ---
 
 # Status & Support
@@ -15,17 +16,16 @@
 > [!CAUTION]
 > **Network play is a work-in-progress.** You will encounter bugs. When they appear, they will likely be mid-game and require restarting both the client and host. Please report bugs and issues to help improve stability.
 
-Cross-platform play is supported.  
-There is no built-in matchmaking. Network play is designed for playing against people you know and manually sharing connection details.
-
 > [!TIP]
 > The **[Forge Discord](https://discord.gg/nsAhGwD)** has a dedicated network play channel. You can use it to find opponents and folks there will be happy to help you with any issues!
+
 ---
 
 # Requirements
 
 | Requirement | Details |
 |---|---|
+| **Platforms** | Desktop and Mobile. **Cross-platform play is supported** — any platform can host or join. |
 | **Players** | Up to **8 players** per game (1 host + up to 7 remote players) |
 | **Roles** | **Host** runs Forge as the server; **Client** connects to it |
 | **Game Types** | **Constructed** formats only (no Draft or Sealed). Supported variants: Commander, Oathbreaker, Tiny Leaders, Brawl, Archenemy, Planechase, Vanguard. |
@@ -38,6 +38,9 @@ There is no built-in matchmaking. Network play is designed for playing against p
 ---
 
 # Quick Start
+
+> [!TIP]
+> **There is no built-in matchmaking.** Network play is designed for playing against people you know and manually sharing connection details.
 
 1. **Configure network** — Host must configure network settings to enable external connections (see [Network Configuration](#network-configuration) below).
 2. **Verify versions** — Confirm all devices are running the same Forge version (see [Version Compatibility](#version-compatibility) below).
@@ -68,24 +71,20 @@ There is no built-in matchmaking. Network play is designed for playing against p
 If a client player disconnects during an active game, the server enters **reconnection mode** instead of immediately ending the match.
 
 ## Disconnect Detection
-
 Forge uses a **heartbeat** mechanism to detect silent disconnects (client crashes, network loss, or force-closes). Each client sends a lightweight heartbeat to the server every **15 seconds** of inactivity. If the server receives no data from a client — no heartbeats, game events, or chat messages — for **45 seconds**, it closes the connection and announces the timeout in chat.
 
 This means disconnects are typically detected within about 45 seconds, even when the client cannot send a clean shutdown signal.
 
 ## What happens on Disconnect
-
 - The game **pauses** for the disconnected player — all other players see a notification.
 - A **5-minute countdown** begins, with status messages broadcast every 30 seconds.
 - The disconnected player can rejoin by reconnecting to the same server with the **same username**.
 - On successful reconnect, the full game state is re-sent to the player and the game resumes normally.
 
 ## If the Player doesn't Reconnect
-
 When the 5-minute timeout expires, the disconnected player is **replaced by an AI** and the game continues.
 
 ## Host Commands
-
 The host can type these commands in the lobby chat during the reconnection window. These commands are **host-only** — clients cannot use them.
 
 | Command | Effect |
@@ -120,8 +119,6 @@ You can get your **local IP address**:
 - In the Forge app from the Server URL dialog that appears immediately after hosting a server.
 - In **Windows PowerShell** by using the `ipconfig` command and copying the `IPv4 Address` result.
 - In **macOS / Linux terminal** by using the `ifconfig` command and copying the `inet` result.
-
-The **default port number** used by Forge is `36743`. You should refer to this unless you have changed the default port in your Forge preferences.
 
 Now validate that the port is open by using one of the following tests:
 - **Windows (PowerShell):** Open PowerShell and run:
@@ -248,3 +245,20 @@ Forge automatically warns in the lobby chat when a client's version differs from
 
 ## Lag / High Bandwidth
 Network play currently lacks traffic optimization. A single game can transfer hundreds of megabytes. Slow connections will experience significant lag.
+
+---
+
+# Network Logs
+Forge writes detailed network logs during online multiplayer games. These are separate from the normal game log and are specifically used for troubleshooting network issues.
+
+**Please provide your logs when reporting bugs.** Logs are stored in the `networklogs/` folder inside your Forge data directory:
+
+| Platform | Path |
+|---|---|
+| **Windows** | `%APPDATA%/Forge/networklogs/` |
+| **macOS** | `~/Library/Application Support/Forge/networklogs/` |
+| **Linux** | `~/.forge/networklogs/` |
+
+On desktop, you can open this folder directly from the Forge game menu: **Online > Open Network Logs**.
+
+By default, logs from the last 10 games are kept; older logs are automatically removed. 
