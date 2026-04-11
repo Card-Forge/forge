@@ -1,5 +1,4 @@
 # Network Testing
-
 Automated testing tools have been developed for validating the network play pipeline. These run AI-vs-AI games over actual TCP connections and analyze the results, checking for crashes, desync, and network performance issues.
 
 > [!NOTE]
@@ -10,7 +9,6 @@ All tests live under `forge-gui-desktop/src/test/java/forge/net/`.
 ---
 
 # Prerequisites
-
 - Java 17+ and Maven installed
 - Forge repository cloned and buildable (`mvn -pl forge-gui-desktop -am install -DskipTests`)
 - No special network configuration needed — tests use localhost
@@ -18,12 +16,11 @@ All tests live under `forge-gui-desktop/src/test/java/forge/net/`.
 ---
 
 # How It Works
-
 Every test game starts a real TCP server and connects one or more headless AI clients to it. The server and clients exchange game state over the network just like a real multiplayer game — the only difference is there's no GUI and the AI makes all decisions. By default this uses delta sync, but you can test the full-state sync path instead with `-Dforge.deltasync=false`.
 
-Batch tests use random preconstructed decks from Forge's built-in quest precons (or commander precons for Commander-format games). The vertical slice test uses minimal 10-card basic land decks instead, so games end quickly by decking out.
+The vertical slice test uses minimal 10-card basic land decks instead, so games end quickly by decking out.
 
-Batch tests automatically run the log analyzer on completion and produce a markdown report alongside the log files. You can also run the analyzer separately against any log files — including logs from real games (see [Log Analyzer](#log-analyzer) below).
+Batch tests use random preconstructed decks from Forge's built-in quest precons (or commander precons for Commander-format games). Their logs get grouped logs into subdirectories named by timestamp (e.g., `run20260410-143022/`). Each game within a batch gets its own log file.
 
 There are two execution modes for running batches of games:
 
@@ -44,7 +41,6 @@ The key entry points in `NetworkPlayIntegrationTest`:
 ---
 
 # Running Tests
-
 All network tests are run via Maven from the repository root. Most batch tests are gated behind `-Drun.stress.tests=true` so they don't run during normal CI builds.
 
 The basic command structure is:
@@ -57,7 +53,6 @@ mvn -pl forge-gui-desktop -am verify \
 ```
 
 ## Configuration Properties
-
 All entry points accept the same configuration properties:
 
 | Property | Default | Description |
@@ -70,8 +65,7 @@ All entry points accept the same configuration properties:
 | `-Dtest.timeoutMs=N` | 300000 | Per-game timeout in milliseconds (default 5 min) |
 
 ## Entry Points
-
-**`testTrueNetworkTraffic`** — single 2-player game using minimal 10-card basic land decks (players deck out in a few turns). A fast vertical slice that validates the network pipeline end-to-end, not a real game. Under 60 seconds. The only network test that runs in CI — does not require `-Drun.stress.tests`.
+**`testTrueNetworkTraffic`** — single 2-player game using minimal 10-card basic land decks (players deck out in a few turns). A fast vertical slice that validates the network pipeline end-to-end, not a real game. Under 60 seconds.
 
 **`testConfigurableSequential`** — runs games sequentially in one JVM. Defaults to 3 x 2-player if no properties are set.
 
@@ -84,7 +78,6 @@ All entry points accept the same configuration properties:
 These two are standardised configurations used during network development to provide consistent, repeatable validation runs.
 
 ## Examples
-
 Quick pipeline check (no stress flag needed):
 ```bash
 mvn -pl forge-gui-desktop -am verify \
@@ -118,7 +111,6 @@ mvn -pl forge-gui-desktop -am verify \
 ---
 
 # Log Analyzer
-
 Batch tests automatically run the log analyzer and write a report to the log directory (named `network-debug-{batchId}-results.md`).
 
 The generated markdown report includes:
@@ -143,19 +135,3 @@ If no output path is given, the report is written as `network-log-analysis.md` i
 ```bash
     -Dlog.output="C:/Users/YourName/Desktop/report.md"
 ```
-
----
-
-# Log Location and Cleanup
-
-Network logs are stored in your Forge data directory under `networklogs/`:
-
-| Platform | Path |
-|---|---|
-| **Windows** | `%APPDATA%/Forge/networklogs/` |
-| **macOS** | `~/Library/Application Support/Forge/networklogs/` |
-| **Linux** | `~/.forge/networklogs/` |
-
-Batch tests group their logs into subdirectories named by timestamp (e.g., `run20260410-143022/`). Each game within a batch gets its own log file.
-
-Forge automatically cleans up old log files, keeping the 10 most recent batches. This can be configured in network preferences (`NET_LOG_CLEANUP_ENABLED`, `NET_MAX_LOG_FILES`).

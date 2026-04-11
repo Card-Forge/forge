@@ -37,30 +37,11 @@ import java.util.List;
  * - 3-4 player multiplayer with remote clients
  *
  * Test categories:
- * - Unit tests (3): Always run in CI - deck loader, server start/stop
- * - Single-game tests (2): testTrueNetworkTraffic (CI), testUnifiedHarnessLocalMode
+ * - Unit tests (3): deck loader, server start/stop
+ * - Single-game tests (2): testTrueNetworkTraffic, testUnifiedHarnessLocalMode
  * - Configurable batch tests (2): testConfigurableSequential, testConfigurableParallel
  * - Comprehensive tests (2): runComprehensiveDeltaSyncTest, runQuickDeltaSyncTest
  * - Utility tests (1): analyzeLog
- *
- * Usage examples:
- *
- * Run default CI tests (unit tests + testTrueNetworkTraffic):
- *   mvn -pl forge-gui-desktop -am verify
- *
- * Run all tests including stress tests:
- *   mvn -pl forge-gui-desktop -am verify -Drun.stress.tests=true
- *
- * Run configurable batch tests (all entry points accept -Dtest.2pGames, -Dtest.3pGames, etc.):
- *   mvn -pl forge-gui-desktop -am verify -Dtest="NetworkPlayIntegrationTest#testConfigurableSequential" \
- *       -Dtest.2pGames=3 -Drun.stress.tests=true -Dsurefire.failIfNoSpecifiedTests=false
- *   mvn -pl forge-gui-desktop -am verify -Dtest="NetworkPlayIntegrationTest#testConfigurableParallel" \
- *       -Dtest.2pGames=5 -Dtest.3pGames=3 -Drun.stress.tests=true -Dsurefire.failIfNoSpecifiedTests=false
- *
- * Run comprehensive test with custom configuration:
- *   mvn -pl forge-gui-desktop -am verify -Dtest="NetworkPlayIntegrationTest#runComprehensiveDeltaSyncTest" \
- *       -Dtest.2pGames=50 -Dtest.3pGames=30 -Dtest.4pGames=20 \
- *       -Drun.stress.tests=true -Dsurefire.failIfNoSpecifiedTests=false
  */
 public class NetworkPlayIntegrationTest implements IHasForgeLog {
 
@@ -79,9 +60,7 @@ public class NetworkPlayIntegrationTest implements IHasForgeLog {
             throw new SkipException("Stress tests skipped. Use -Drun.stress.tests=true to run.");
         }
         NetworkLogConfig.setTestMode(true);
-        if (NetworkLogConfig.getBatchId() == null) {
-            NetworkLogConfig.generateBatchId();
-        }
+        NetworkLogConfig.generateBatchId();
     }
 
     @Test
@@ -339,13 +318,6 @@ public class NetworkPlayIntegrationTest implements IHasForgeLog {
 
     /**
      * Analyze any log file or directory using the CLI analyzer.
-     * Usage:
-     *   mvn -pl forge-gui-desktop -am verify \
-     *       -Dtest="NetworkPlayIntegrationTest#analyzeLog" \
-     *       -Dlog.input="path/to/file.log" \
-     *       -Drun.stress.tests=true -Dsurefire.failIfNoSpecifiedTests=false
-     *
-     * Optional: -Dlog.output="path/to/report.md" (default: network-log-analysis.md in same directory as input)
      */
     @Test
     public void analyzeLog() {
