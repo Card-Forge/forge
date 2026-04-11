@@ -253,7 +253,7 @@ public final class FServerManager implements IHasForgeLog {
 
     public void broadcast(final NetEvent event) {
         if (event instanceof MessageEvent msgEvent) {
-            lobbyListener.message(msgEvent.getSource(), msgEvent.getMessage());
+            lobbyListener.message(msgEvent.getSource(), msgEvent.getMessage(), msgEvent.getType());
         }
         broadcastTo(event, clients.values());
     }
@@ -543,7 +543,7 @@ public final class FServerManager implements IHasForgeLog {
             ? localizer.getMessage("lblUPnPSuccess", String.valueOf(port))
             : localizer.getMessage("lblUPnPFailed", String.valueOf(port));
         if (lobbyListener != null) {
-            broadcast(new MessageEvent(msg));
+            broadcast(success ? new MessageEvent(msg) : MessageEvent.warning(msg));
         }
     }
 
@@ -724,7 +724,7 @@ public final class FServerManager implements IHasForgeLog {
         // Reset lobby slot
         localLobby.disconnectPlayer(client.getIndex());
 
-        broadcast(new MessageEvent(String.format("%s did not reconnect in time. AI has taken over.", username)));
+        broadcast(MessageEvent.warning(String.format("%s did not reconnect in time. AI has taken over.", username)));
     }
 
     public void convertToAI(final int slotIndex, final String username) {
@@ -858,12 +858,12 @@ public final class FServerManager implements IHasForgeLog {
                         final String clientVersion = event.getVersion();
                         final String hostVersion = BuildInfo.getVersionString();
                         if (clientVersion == null) {
-                            broadcast(new MessageEvent(String.format(
+                            broadcast(MessageEvent.warning(String.format(
                                 "Warning: Could not determine %s's Forge version. "
                                 + "Please use the same version as the host to avoid network compatibility issues.",
                                 event.getUsername())));
                         } else if (!clientVersion.equals(hostVersion)) {
-                            broadcast(new MessageEvent(String.format(
+                            broadcast(MessageEvent.warning(String.format(
                                 "Warning: %s is using Forge version %s (host: %s). "
                                 + "Please use the same version as the host to avoid network compatibility issues.",
                                 event.getUsername(), clientVersion, hostVersion)));
@@ -890,7 +890,7 @@ public final class FServerManager implements IHasForgeLog {
                 final String msg = name + " timed out after " + HEARTBEAT_TIMEOUT_SECONDS
                     + " seconds without a network response. Closing connection.";
                 netLog.warn(msg);
-                broadcast(new MessageEvent(msg));
+                broadcast(MessageEvent.warning(msg));
                 ctx.close();
                 return;
             }
@@ -941,7 +941,7 @@ public final class FServerManager implements IHasForgeLog {
                     }
                 }, 30_000L, 30_000L);
 
-                broadcast(new MessageEvent(
+                broadcast(MessageEvent.warning(
                     String.format("%s disconnected. Waiting %s for reconnect...", username, formatTime(RECONNECT_TIMEOUT_SECONDS))));
                 lobbyListener.message(null, "(Host can use /skipreconnect to replace disconnected player with AI, or /skiptimeout to wait indefinitely.)");
                 netLog.info("[Disconnect] Player disconnected mid-game: {} (slot {}). Waiting for reconnect.", username, playerIndex);

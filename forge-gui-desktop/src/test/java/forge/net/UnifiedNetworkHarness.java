@@ -496,7 +496,7 @@ public class UnifiedNetworkHarness implements IHasForgeLog {
             }
 
             @Override
-            public void message(String source, String message) {
+            public void message(String source, String message, forge.gamemodes.net.ChatMessage.MessageType type) {
                 netLog.info("Lobby message from {}: {}", source, message);
             }
 

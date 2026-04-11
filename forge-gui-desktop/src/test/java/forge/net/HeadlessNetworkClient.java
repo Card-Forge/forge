@@ -237,7 +237,7 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasForgeLog {
         }
 
         @Override
-        public void message(String source, String message) {
+        public void message(String source, String message, forge.gamemodes.net.ChatMessage.MessageType type) {
             netLog.info("Chat: {}: {}", source, message);
         }
 

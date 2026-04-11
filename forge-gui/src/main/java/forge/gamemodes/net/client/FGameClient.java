@@ -162,7 +162,7 @@ public class FGameClient implements IToServer, IHasForgeLog {
         public void channelRead(final ChannelHandlerContext ctx, final Object msg) throws Exception {
             if (msg instanceof MessageEvent event) {
                 for (final ILobbyListener listener : lobbyListeners) {
-                    listener.message(event.getSource(), event.getMessage());
+                    listener.message(event.getSource(), event.getMessage(), event.getType());
                 }
             }
             super.channelRead(ctx, msg);

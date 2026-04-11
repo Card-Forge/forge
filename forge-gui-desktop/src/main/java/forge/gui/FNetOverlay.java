@@ -81,6 +81,7 @@ public enum FNetOverlay implements IOnlineChatInterface {
     private StyledDocument doc;
     private SimpleAttributeSet systemStyle;
     private SimpleAttributeSet playerStyle;
+    private SimpleAttributeSet warningStyle;
 
     private final FTextField txtInput = new FTextField.Builder().maxLength(255).build();
     private final FLabel cmdSend = new FLabel.ButtonBuilder().text(Localizer.getInstance().getMessage("lblSend")).build(); 
@@ -124,6 +125,7 @@ public enum FNetOverlay implements IOnlineChatInterface {
         doc = txtLog.getStyledDocument();
         systemStyle = new SimpleAttributeSet();
         playerStyle = new SimpleAttributeSet();
+        warningStyle = new SimpleAttributeSet();
 
         // Configure system message style: light blue RGB(100, 150, 255) - matches mobile implementation
         StyleConstants.setForeground(systemStyle, new Color(100, 150, 255));
@@ -132,6 +134,9 @@ public enum FNetOverlay implements IOnlineChatInterface {
         FSkin.SkinColor skinTextColor = FSkin.getColor(FSkin.Colors.CLR_TEXT);
         Color playerColor = (skinTextColor != null) ? skinTextColor.getColor() : Color.WHITE;
         StyleConstants.setForeground(playerStyle, playerColor);
+
+        // Warning style: amber/caution color, distinct from blue system / white player.
+        StyleConstants.setForeground(warningStyle, new Color(230, 160, 50));
 
         window.setTitle(Localizer.getInstance().getMessage("lblChat"));
         window.setVisible(false);
@@ -191,8 +196,7 @@ public enum FNetOverlay implements IOnlineChatInterface {
         if (message != null) {
             try {
                 doc.remove(0, doc.getLength());
-                SimpleAttributeSet style = message.isSystemMessage() ? systemStyle : playerStyle;
-                doc.insertString(0, message.getFormattedMessage(), style);
+                doc.insertString(0, message.getFormattedMessage(), styleFor(message));
             } catch (BadLocationException e) {
                 // Fallback to plain text if styled insert fails
                 txtLog.setText(message.getFormattedMessage());
@@ -257,13 +261,19 @@ public enum FNetOverlay implements IOnlineChatInterface {
     @Override
     public void addMessage(final ChatMessage message) {
         try {
-            // Choose style based on message type
-            SimpleAttributeSet style = message.isSystemMessage() ? systemStyle : playerStyle;
             String text = "\n" + message.getFormattedMessage();
-            doc.insertString(doc.getLength(), text, style);
+            doc.insertString(doc.getLength(), text, styleFor(message));
         } catch (BadLocationException e) {
             // Fallback - should not occur in normal operation
             e.printStackTrace();
         }
+    }
+
+    private SimpleAttributeSet styleFor(final ChatMessage message) {
+        return switch (message.getType()) {
+            case WARNING -> warningStyle;
+            case SYSTEM  -> systemStyle;
+            default      -> playerStyle;
+        };
     }
 }

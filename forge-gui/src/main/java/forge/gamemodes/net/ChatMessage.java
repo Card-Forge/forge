@@ -13,7 +13,8 @@ public class ChatMessage {
 
     public enum MessageType {
         PLAYER,   // Regular player chat message
-        SYSTEM    // System notification (displayed in blue)
+        SYSTEM,   // System notification (displayed in blue)
+        WARNING   // Significant server warning (displayed in amber)
     }
 
     private final String source, message, timestamp;
