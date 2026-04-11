@@ -42,9 +42,11 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
     // New objects are sent with full property data, existing objects only send changed properties
     public static boolean useDeltaSync = false;
 
+    private final RemoteClient client;
     private final GameProtocolSender sender;
     private final DeltaSyncManager syncManager;
     private final int clientIndex;
+
     private boolean initialSyncSent = false;
     private boolean objectsRegistered = false;
     private boolean fallbackLogged = false;  // Prevent duplicate fallback log messages
@@ -55,9 +57,14 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
     private boolean flushing;
 
     public RemoteClientGuiGame(final RemoteClient client) {
+        this.client = client;
         sender = new GameProtocolSender(client);
         syncManager = new DeltaSyncManager();
         clientIndex = client.getIndex();
+    }
+
+    public RemoteClient getClient() {
+        return client;
     }
 
     /** Alias for reconnection code that references slot index. */
@@ -121,7 +128,6 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasNetLog {
         sender.send(method, args);
     }
 
-    // TODO: Optional per-player turn timer — on timeout, auto-yield rather than returning null.
     private <T> T sendAndWait(final ProtocolMethod method, final Object... args) {
         if (paused) { return null; }
         flushPendingEvents();

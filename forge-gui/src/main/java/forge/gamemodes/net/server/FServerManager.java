@@ -8,6 +8,7 @@ import forge.game.player.Player;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
+import forge.gamemodes.match.input.InputSynchronized;
 import forge.gamemodes.net.CompatibleObjectDecoder;
 import forge.gamemodes.net.CompatibleObjectEncoder;
 import forge.gamemodes.net.IHasNetLog;
@@ -49,7 +50,11 @@ import java.io.InputStreamReader;
 import java.net.*;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Predicate;
 
 public final class FServerManager implements IHasNetLog {
@@ -203,6 +208,7 @@ public final class FServerManager implements IHasNetLog {
         reconnectTimers.clear();
         disconnectedClients.clear();
         clients.clear();
+        afkSlots.clear();
 
         try {
             bossGroup.shutdownGracefully().sync();
@@ -248,6 +254,103 @@ public final class FServerManager implements IHasNetLog {
             lobbyListener.message(msgEvent.getSource(), msgEvent.getMessage());
         }
         broadcastTo(event, clients.values());
+    }
+
+    public String formatAfkTimeoutMessage() {
+        final int minutes = FModel.getNetPreferences().getPrefInt(ForgeNetPreferences.FNetPref.NET_AFK_TIMEOUT);
+        if (minutes <= 0) {
+            return Localizer.getInstance().getMessage("lblAfkTimeoutDisabled");
+        }
+        return Localizer.getInstance().getMessage("lblAfkTimeoutChat", minutes + ":00");
+    }
+
+    // Warnings must be one-shot — never use scheduleAtFixedRate here
+    private static final ScheduledExecutorService afkExecutor =
+            Executors.newSingleThreadScheduledExecutor(r -> {
+                Thread t = new Thread(r, "AFK-Timeout");
+                t.setDaemon(true);
+                return t;
+            });
+
+    private static final long AFK_REPEAT_TIMEOUT_MS = 10_000L;
+    private static final long AFK_WARNING_LEAD_MS = 30_000L;
+    private static final int HOST_SLOT = -1;
+
+    private final Set<Integer> afkSlots = Collections.newSetFromMap(new ConcurrentHashMap<>());
+
+    @FunctionalInterface
+    public interface AfkTimeout {
+        AfkTimeout NOOP = () -> {};
+        void cancel();
+    }
+
+    /**
+     * Arm an AFK timeout around an {@link InputPassPriority}-style blocking input for
+     * the given {@link PlayerControllerHuman}. Routes to the full overload with
+     * {@code null} remote client when the controller's GUI is the local host.
+     */
+    public AfkTimeout armAfkTimeout(final PlayerControllerHuman controller, final InputSynchronized input) {
+        if (!isHosting()) {
+            return AfkTimeout.NOOP;
+        }
+        final String playerName = controller.getPlayer().getName();
+        final RemoteClient remoteClient = controller.getGui() instanceof RemoteClientGuiGame remoteGui
+                ? remoteGui.getClient()
+                : null;
+        return armAfkTimeout(playerName, input, remoteClient);
+    }
+
+    /**
+     * First fire uses the full preference value with a {@value #AFK_WARNING_LEAD_MS}ms
+     * warning; while the player stays flagged, subsequent waits drop to
+     * {@value #AFK_REPEAT_TIMEOUT_MS}ms and broadcast nothing, so phases fly through
+     * until the player takes any action. Pass {@code null} for {@code remoteClient}
+     * when arming for the local host.
+     * <p>
+     * {@code cancelAll()} is safe here only because this is armed exclusively from
+     * {@code InputPassPriority}: the sole replies that can be pending on the channel
+     * are sub-prompts like {@code getAbilityToPlay}, which treat null as pass.
+     * Extending to other server-side waits (assignCombatDamage, getChoices, order,
+     * ...) is blocked on those methods not being null-safe.
+     */
+    public AfkTimeout armAfkTimeout(final String displayName, final InputSynchronized input, final RemoteClient remoteClient) {
+        final int fullMinutes = FModel.getNetPreferences().getPrefInt(ForgeNetPreferences.FNetPref.NET_AFK_TIMEOUT);
+        if (fullMinutes <= 0) {
+            return AfkTimeout.NOOP;
+        }
+        final int slot = remoteClient != null ? remoteClient.getIndex() : HOST_SLOT;
+        final boolean alreadyAfk = afkSlots.contains(slot);
+        final long timeoutMs = alreadyAfk ? AFK_REPEAT_TIMEOUT_MS : fullMinutes * 60_000L;
+        final long warningDelayMs = alreadyAfk ? -1 : timeoutMs - AFK_WARNING_LEAD_MS;
+        final AtomicBoolean settled = new AtomicBoolean(false);
+
+        final ScheduledFuture<?> warningFuture = warningDelayMs > 0
+                ? afkExecutor.schedule(() -> {
+                    if (settled.get()) { return; }
+                    broadcast(new MessageEvent(Localizer.getInstance().getMessage("lblAfkWarning", displayName)));
+                }, warningDelayMs, TimeUnit.MILLISECONDS)
+                : null;
+
+        final ScheduledFuture<?> timeoutFuture = afkExecutor.schedule(() -> {
+            if (!settled.compareAndSet(false, true)) { return; }
+            // Only first fire announces — subsequent shortened repeats pass silently
+            final boolean firstTimeAfk = afkSlots.add(slot);
+            if (firstTimeAfk) {
+                broadcast(new MessageEvent(Localizer.getInstance().getMessage(
+                        "lblAfkAutoPass", displayName, fullMinutes + ":00")));
+            }
+            if (remoteClient != null) {
+                remoteClient.getReplyPool().cancelAll();
+            }
+            input.stop();
+        }, timeoutMs, TimeUnit.MILLISECONDS);
+
+        return () -> {
+            if (!settled.compareAndSet(false, true)) { return; }
+            afkSlots.remove(slot);
+            if (warningFuture != null) { warningFuture.cancel(false); }
+            timeoutFuture.cancel(false);
+        };
     }
 
     public void broadcastExcept(final NetEvent event, final RemoteClient notTo) {
@@ -695,11 +798,6 @@ public final class FServerManager implements IHasNetLog {
             if (msg instanceof LoginEvent event) {
                 final String username = event.getUsername();
                 client.setUsername(username);
-                if (client.getIndex() == 0) {
-                    broadcast(new MessageEvent(String.format("Lobby hosted by %s.", username)));
-                } else {
-                    broadcast(new MessageEvent(String.format("%s joined the lobby.", username)));
-                }
             } else if (msg instanceof UpdateLobbyPlayerEvent event) {
                 localLobby.applyToSlot(client.getIndex(), event);
                 if (event.getName() != null) {
@@ -758,6 +856,11 @@ public final class FServerManager implements IHasNetLog {
                         ctx.close();
                     } else {
                         client.setIndex(index);
+                        if (index > 0) {
+                            broadcast(new MessageEvent(String.format("%s joined the lobby.", event.getUsername())));
+                            broadcastTo(new MessageEvent(formatAfkTimeoutMessage()),
+                                    Collections.singleton(client));
+                        }
                         // Warn if client version differs from host
                         final String clientVersion = event.getVersion();
                         final String hostVersion = BuildInfo.getVersionString();
