@@ -97,7 +97,7 @@ public class AddBasicLandsDialog {
         }
         chkSnow = new JCheckBox(Localizer.getInstance().getMessage("lblSnowCovered"));
         chkSnow.setOpaque(false);
-        chkSnow.setEnabled(landSet != null && landSet.hasSnowBasicLands());
+        chkSnow.setEnabled(landSet != null && "ICE".equals(landSet.getCode()));
         chkSnow.addActionListener(arg0 -> applySnowSelection());
         panel.add(chkSnow);
         panel.revalidate();
@@ -142,7 +142,7 @@ public class AddBasicLandsDialog {
         cbLandSet.addActionListener(arg0 -> {
             landSet = cbLandSet.getSelectedItem();
             if (chkSnow != null) {
-                boolean snowAvailable = landSet != null && landSet.hasSnowBasicLands();
+                boolean snowAvailable = landSet != null && "ICE".equals(landSet.getCode());
                 chkSnow.setEnabled(snowAvailable);
                 if (!snowAvailable && chkSnow.isSelected()) {
                     chkSnow.setSelected(false);

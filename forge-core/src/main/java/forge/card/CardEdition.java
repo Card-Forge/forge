@@ -1072,27 +1072,4 @@ public final class CardEdition implements Comparable<CardEdition> {
         }
         return true;
     }
-
-    /**
-     * True when this edition contains all five snow-covered basic lands at
-     * BasicLand rarity. Sets like Coldsnap or Kaldheim print snow basics at
-     * common rarity (where they appear in boosters as part of the normal pack
-     * distribution) and are intentionally excluded - the limited deckbuilder
-     * only needs to surface snow basics for sets like Ice Age or Modern
-     * Horizons where they were treated as basics but never appeared in packs.
-     */
-    public boolean hasSnowBasicLands() {
-        for (String landName : MagicColor.Constant.SNOW_LANDS) {
-            boolean foundAtBasicRarity = false;
-            for (EditionEntry entry : this.getCardInSet(landName)) {
-                if (entry.rarity() == CardRarity.BasicLand) {
-                    foundAtBasicRarity = true;
-                    break;
-                }
-            }
-            if (!foundAtBasicRarity)
-                return false;
-        }
-        return true;
-    }
 }

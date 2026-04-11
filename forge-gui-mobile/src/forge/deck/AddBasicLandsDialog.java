@@ -245,7 +245,7 @@ public class AddBasicLandsDialog extends FDialog {
     private void onEditionChange() {
         landSet = cbLandSet.getSelectedItem();
         if (chkSnow != null) {
-            boolean snowAvailable = landSet != null && landSet.hasSnowBasicLands();
+            boolean snowAvailable = landSet != null && "ICE".equals(landSet.getCode());
             chkSnow.setEnabled(snowAvailable);
             if (!snowAvailable && chkSnow.isSelected()) {
                 chkSnow.setSelected(false);
