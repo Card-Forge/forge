@@ -270,6 +270,11 @@ public interface IGuiGame {
 
     void autoPassUntilEndOfTurn(PlayerView player);
     boolean mayAutoPass(PlayerView player);
+    boolean isAutoPassingNoActions(PlayerView player);
+
+    /** Returns true if this GUI is a server-side proxy for a remote player. */
+    default boolean isRemoteGuiProxy() { return false; }
+
     void autoPassCancel(PlayerView player);
 
     /** Cancel only legacy auto-pass; experimental yield modes manage themselves. */
@@ -307,6 +312,9 @@ public interface IGuiGame {
     void setHostYieldEnabled(boolean enabled);
 
     void clearYieldMode(PlayerView player);
+
+    /** Called when a network player disconnects/reconnects. Default is a no-op for non-network GUIs. */
+    default void showPlayerDisconnected(PlayerView player, boolean disconnected) { }
 
     /**
      * Store the most recent yield preferences snapshot received from the remote

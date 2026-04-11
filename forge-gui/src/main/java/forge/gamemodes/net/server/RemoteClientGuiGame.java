@@ -61,11 +61,18 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     // on the Netty thread when notifyYieldStateChanged arrives. volatile is
     // sufficient since the value is an immutable YieldPrefs.
     private volatile YieldPrefs remoteYieldPrefs;
+    private final int clientIndex;
 
     public RemoteClientGuiGame(final RemoteClient client) {
         this.client = client;
         sender = new GameProtocolSender(client);
         syncManager = new DeltaSyncManager();
+        clientIndex = client.getIndex();
+    }
+
+    /** Alias for reconnection code that references slot index. */
+    public int getSlotIndex() {
+        return clientIndex;
     }
 
     public RemoteClient getClient() {

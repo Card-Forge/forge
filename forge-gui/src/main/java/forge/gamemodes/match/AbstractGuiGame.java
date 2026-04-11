@@ -11,6 +11,7 @@ import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.player.PlayerView;
 import forge.gamemodes.net.DeltaPacket;
+import forge.gamemodes.net.client.NetGameController;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.control.FControlGameEventHandler;
@@ -460,7 +461,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return getYieldController().mayAutoPass(player);
     }
 
-    @Override
     public final boolean isAutoPassingNoActions(final PlayerView player) {
         return getYieldController().isAutoPassingNoActions(player);
     }
@@ -523,7 +523,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                     if (waitingTimer != myTimer) {
                         return; // canceled or replaced before the EDT got to us
                     }
-                    updateWaitingDisplay(forPlayer, waitingForPlayerName);
+                    updateWaitingDisplay(forPlayer);
                 });
             }
         }, 1000, 1000);
@@ -698,6 +698,13 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         } else {
             autoYields.remove(yieldPerAbility ? abilityKey : key);
         }
+        // Sync to server in network games (NetGameController is the only
+        // controller that needs to send — this avoids re-entrancy when the
+        // server-side PlayerControllerHuman applies the received notification)
+        final IGameController gc = getGameController();
+        if (gc instanceof NetGameController) {
+            gc.notifyAutoYieldChanged(key, autoYield);
+        }
     }
 
     private boolean disableAutoYields;
@@ -728,14 +735,24 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     @Override
     public final void setShouldAlwaysAcceptTrigger(final int trigger) {
         triggersAlwaysAccept.put(trigger, Boolean.TRUE);
+        notifyTriggerChoice(trigger, TriggerChoice.ALWAYS_YES);
     }
     @Override
     public final void setShouldAlwaysDeclineTrigger(final int trigger) {
         triggersAlwaysAccept.put(trigger, Boolean.FALSE);
+        notifyTriggerChoice(trigger, TriggerChoice.ALWAYS_NO);
     }
     @Override
     public final void setShouldAlwaysAskTrigger(final int trigger) {
         triggersAlwaysAccept.remove(trigger);
+        notifyTriggerChoice(trigger, TriggerChoice.ASK);
+    }
+
+    private void notifyTriggerChoice(final int trigger, final TriggerChoice choice) {
+        final IGameController gc = getGameController();
+        if (gc instanceof NetGameController) {
+            gc.notifyTriggerChoiceChanged(trigger, choice);
+        }
     }
 
     // End of Triggers preliminary choice
