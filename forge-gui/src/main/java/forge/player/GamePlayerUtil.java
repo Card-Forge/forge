@@ -182,4 +182,35 @@ public final class GamePlayerUtil {
         return port;
     }
 
+    public static void setAfkTimeout() {
+        final int oldVal = FModel.getNetPreferences().getPrefInt(ForgeNetPreferences.FNetPref.NET_AFK_TIMEOUT);
+        int newVal = getAfkTimeoutPrompt(oldVal);
+        FModel.getNetPreferences().setPref(ForgeNetPreferences.FNetPref.NET_AFK_TIMEOUT, String.valueOf(newVal));
+        FModel.getNetPreferences().save();
+    }
+
+    private static Integer getAfkTimeoutPrompt(final Integer current) {
+        String input = SOptionPane.showInputDialog(
+                localizer.getMessage("sOPAfkTimeoutPromptMessage"),
+                localizer.getMessage("sOPAfkTimeoutPromptTitle"),
+                null,
+                current.toString(),
+                null,
+                true
+        );
+        if (input == null) { return current; }
+        int value;
+        try {
+            value = Integer.parseInt(input);
+        } catch (NumberFormatException nfe) {
+            SOptionPane.showErrorDialog(localizer.getMessage("sOPAfkTimeoutPromptError", input));
+            return current;
+        }
+        if (value < 0 || value > 60) {
+            SOptionPane.showErrorDialog(localizer.getMessage("sOPAfkTimeoutPromptError", input));
+            return current;
+        }
+        return value;
+    }
+
 }

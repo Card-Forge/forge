@@ -100,6 +100,8 @@ public class NetConnectUtil {
 
         view.update(true);
 
+        server.broadcast(new MessageEvent(server.formatAfkTimeoutMessage()));
+
         return new ChatMessage(null, Localizer.getInstance().getMessage("lblHostingPortOnN", String.valueOf(port)));
     }
 

@@ -23,7 +23,6 @@ import io.netty.handler.timeout.IdleStateHandler;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 public class FGameClient implements IToServer, IHasForgeLog {
 
@@ -133,7 +132,7 @@ public class FGameClient implements IToServer, IHasForgeLog {
     }
 
     @Override
-    public Object sendAndWait(final IdentifiableNetEvent event) throws TimeoutException {
+    public Object sendAndWait(final IdentifiableNetEvent event) {
         replies.initialize(event.getId());
 
         send(event);
