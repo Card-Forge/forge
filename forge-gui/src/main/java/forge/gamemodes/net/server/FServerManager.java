@@ -285,39 +285,24 @@ public final class FServerManager implements IHasNetLog {
     }
 
     /**
-     * Arm an AFK timeout around an {@link InputPassPriority}-style blocking input for
-     * the given {@link PlayerControllerHuman}. Routes to the full overload with
-     * {@code null} remote client when the controller's GUI is the local host.
-     */
-    public AfkTimeout armAfkTimeout(final PlayerControllerHuman controller, final InputSynchronized input) {
-        if (!isHosting()) {
-            return AfkTimeout.NOOP;
-        }
-        final String playerName = controller.getPlayer().getName();
-        final RemoteClient remoteClient = controller.getGui() instanceof RemoteClientGuiGame remoteGui
-                ? remoteGui.getClient()
-                : null;
-        return armAfkTimeout(playerName, input, remoteClient);
-    }
-
-    /**
-     * First fire uses the full preference value with a {@value #AFK_WARNING_LEAD_MS}ms
-     * warning; while the player stays flagged, subsequent waits drop to
-     * {@value #AFK_REPEAT_TIMEOUT_MS}ms and broadcast nothing, so phases fly through
-     * until the player takes any action. Pass {@code null} for {@code remoteClient}
-     * when arming for the local host.
-     * <p>
      * {@code cancelAll()} is safe here only because this is armed exclusively from
      * {@code InputPassPriority}: the sole replies that can be pending on the channel
      * are sub-prompts like {@code getAbilityToPlay}, which treat null as pass.
      * Extending to other server-side waits (assignCombatDamage, getChoices, order,
      * ...) is blocked on those methods not being null-safe.
      */
-    public AfkTimeout armAfkTimeout(final String displayName, final InputSynchronized input, final RemoteClient remoteClient) {
+    public AfkTimeout armAfkTimeout(final PlayerControllerHuman controller, final InputSynchronized input) {
+        if (!isHosting()) {
+            return AfkTimeout.NOOP;
+        }
         final int fullMinutes = FModel.getNetPreferences().getPrefInt(ForgeNetPreferences.FNetPref.NET_AFK_TIMEOUT);
         if (fullMinutes <= 0) {
             return AfkTimeout.NOOP;
         }
+        final String displayName = controller.getPlayer().getName();
+        final RemoteClient remoteClient = controller.getGui() instanceof RemoteClientGuiGame remoteGui
+                ? remoteGui.getClient()
+                : null;
         final int slot = remoteClient != null ? remoteClient.getIndex() : HOST_SLOT;
         final boolean alreadyAfk = afkSlots.contains(slot);
         final long timeoutMs = alreadyAfk ? AFK_REPEAT_TIMEOUT_MS : fullMinutes * 60_000L;
@@ -327,7 +312,8 @@ public final class FServerManager implements IHasNetLog {
         final ScheduledFuture<?> warningFuture = warningDelayMs > 0
                 ? afkExecutor.schedule(() -> {
                     if (settled.get()) { return; }
-                    broadcast(new MessageEvent(Localizer.getInstance().getMessage("lblAfkWarning", displayName)));
+                    broadcast(new MessageEvent(Localizer.getInstance().getMessage(
+                            "lblAfkWarning", displayName, fullMinutes + ":00")));
                 }, warningDelayMs, TimeUnit.MILLISECONDS)
                 : null;
 
