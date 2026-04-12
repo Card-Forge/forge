@@ -221,7 +221,7 @@ public class ArchipelagoData implements SaveFileContent {
         return true;
     }
 
-    ///  --- The checks below are mostly functional offline and should not be called from the networked part of the AP implementation. ---
+    /// --- The checks below are mostly functional offline and should not be called from the networked part of the AP implementation. ---
     private void unlockSetByName(String setToUnlock) {
         addSetUnlockedByCode(setToUnlock);
         String setUnlockedText = "FORGE_ARCHIPELAGO: CARD SET REWARD: " + setToUnlock;
