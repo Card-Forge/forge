@@ -48,8 +48,9 @@ public class ArchipelagoData implements SaveFileContent {
     // Todo: Fill list based on archipelago xml contents
     private int receivedAmountOfSetUnlockChecks = 0;
     private float setUnlockChecksRestAmount = 0;
+
     private final Set<String> listOfUnlockableItems = new HashSet<>();
-    private final int totalAmountOfSetUnlockChecks = 100;
+    private final int totalAmountOfSetUnlockChecks = 100; // Todo: This should be set based on the value we receive in the APWorld
     private final int totalBattlesWonBreakpoint = 3; // Reward for every 3 battles won.
     private final int totalTownQuestsAndEventsBreakpoint = 2; // Reward for every 2 town events or quests done.
     private final int totalCardsEarnedBreakPoint = 80; // Reward for every 80 unique cards gained.
@@ -64,6 +65,43 @@ public class ArchipelagoData implements SaveFileContent {
         return instance == null ? instance = new ArchipelagoData() : instance;
     }
 
+    // Keep this updated to reset any sets/maps/variables
+    public void setupFreshSaveFile(ArchipelagoMode archipelagoMode) {
+        GameHUD.getInstance().setApButtonVisibility(archipelagoMode == ArchipelagoMode.networked_archipelago);
+        cardsUnlockedByName.clear();
+        this.addCardUnlockedByName("Plains");
+        this.addCardUnlockedByName("Forest");
+        this.addCardUnlockedByName("Swamp");
+        this.addCardUnlockedByName("Mountain");
+        this.addCardUnlockedByName("Island");
+        this.addCardUnlockedByName("Wastes");
+
+        completedTownInnEvents.clear();
+        completedTownQuests.clear();
+        cardsEarnedByRarity.clear();
+        itemsGainedByName.clear();
+        packsEarnedBySet.clear();
+
+        setsUnlockedByCode.clear();
+        bossesDefeatedByName.clear();
+        miniBossesDefeatedByName.clear();
+        lockedWorldRegionsByName.clear();
+        lockedWorldRegionsByName.addAll(new HashSet<>(Arrays.asList("white","blue","black","red","green")));
+
+        lastArchipelagoRewardIndex = 0;
+        totalGoldEarned = 0;
+        totalExtraMaxLifeEarned = 0;
+        totalShardsEarned = 0;
+        totalBattlesWon = 0;
+
+        receivedAmountOfSetUnlockChecks = 0;
+        setUnlockChecksRestAmount = 0f;
+
+        this.archipelagoMode = archipelagoMode;
+
+        loadAllAvailableSets();
+    }
+
     // Todo: Add more checks for other things the player can do such as earn gold, shards, defeating bosses etc.
     private void updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES type) {
         if (archipelagoMode == ArchipelagoMode.disabled) return;
@@ -72,6 +110,7 @@ public class ArchipelagoData implements SaveFileContent {
                 if (totalBattlesWon > 0 && totalBattlesWon % totalBattlesWonBreakpoint == 0) {
                     unlockRandomSet();
                 }
+                // Todo: Signal the APWorld that the next battles won location is triggered
             }
             case TOWN_QUESTS_AND_EVENTS_DONE -> {
                 int totalTownQuestsAndEventsDone = 0;
@@ -84,6 +123,7 @@ public class ArchipelagoData implements SaveFileContent {
                 if (totalTownQuestsAndEventsDone > 0 && totalTownQuestsAndEventsDone % totalTownQuestsAndEventsBreakpoint == 0) {
                     unlockRandomRegion();
                 }
+                // Todo: Signal the APWorld that the next quest/event location is triggered
             }
             case TOTAL_CARDS_EARNED -> {
                 long totalCardsEarned = 0;
@@ -93,6 +133,7 @@ public class ArchipelagoData implements SaveFileContent {
                 if (totalCardsEarned > 0 && totalCardsEarned % totalCardsEarnedBreakPoint == 0) {
                     unlockRandomSet();
                 }
+                // Todo: Signal the APWorld that the next card location is triggered
             }
             case BOSS_WHITE_DEFEATED -> {
                 // Todo: Signal the APWorld that the boss is defeated
@@ -121,7 +162,7 @@ public class ArchipelagoData implements SaveFileContent {
         }
     }
 
-    public  boolean isSetUnlocked(String setCode){
+    public  boolean isSetUnlocked(String setCode) {
         if (archipelagoMode == ArchipelagoMode.disabled) return true;
         if (setCode == null || !setsUnlockedByCode.contains(setCode)){
             return false;
@@ -140,42 +181,6 @@ public class ArchipelagoData implements SaveFileContent {
 
     public ArchipelagoMode getArchipelagoMode() {
         return archipelagoMode;
-    }
-
-    // Keep this updated to reset any sets/maps/variables
-    public void setupFreshSaveFile(ArchipelagoMode archipelagoMode) {
-        GameHUD.getInstance().setApButtonVisibility(archipelagoMode == ArchipelagoMode.networked_archipelago);
-        cardsUnlockedByName.clear();
-        this.addCardUnlockedByName("Plains");
-        this.addCardUnlockedByName("Forest");
-        this.addCardUnlockedByName("Swamp");
-        this.addCardUnlockedByName("Mountain");
-        this.addCardUnlockedByName("Island");
-        this.addCardUnlockedByName("Wastes");
-
-        completedTownInnEvents.clear();
-        completedTownQuests.clear();
-        cardsEarnedByRarity.clear();
-        itemsGainedByName.clear();
-        packsEarnedBySet.clear();
-
-        setsUnlockedByCode.clear();
-        bossesDefeatedByName.clear();
-        miniBossesDefeatedByName.clear();
-        lockedWorldRegionsByName.clear();
-        lockedWorldRegionsByName.addAll(new HashSet<>(Arrays.asList("white","blue","black","red","green")));
-
-        totalGoldEarned = 0;
-        totalExtraMaxLifeEarned = 0;
-        totalShardsEarned = 0;
-        totalBattlesWon = 0;
-
-        receivedAmountOfSetUnlockChecks = 0;
-        setUnlockChecksRestAmount = 0f;
-
-        this.archipelagoMode = archipelagoMode;
-
-        loadAllAvailableSets();
     }
 
     public boolean checkCardUnlocked(PaperCard card) {
@@ -216,106 +221,7 @@ public class ArchipelagoData implements SaveFileContent {
         return true;
     }
 
-    public void addCompletedTownInnEvents() {
-        String townName = TileMapScene.instance().rootPoint.getDisplayName();
-        completedTownInnEvents.merge(townName, 1L, Long::sum);
-        System.out.println("FORGE_ARCHIPELAGO: INN EVENT COMPLETION DETECTED: " + townName + " - " + completedTownInnEvents.get(townName));
-        updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.TOWN_QUESTS_AND_EVENTS_DONE);
-    }
-
-    public void addCompletedQuests(AdventureQuestEvent event) {
-        String townName = event.poi.getDisplayName();
-        completedTownQuests.merge(townName, 1L, Long::sum);
-        System.out.println("FORGE_ARCHIPELAGO: QUEST COMPLETION DETECTED: " + townName + " - " + completedTownQuests.get(townName));
-        updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.TOWN_QUESTS_AND_EVENTS_DONE);
-    }
-
-    public void addCardByRarity(String rarity) {
-        cardsEarnedByRarity.merge(rarity, 1L, Long::sum);
-        // Todo: This method will be called a lot when we receive a large batch of cards, make sure this doesn't cause too much slowdown.
-        updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.TOTAL_CARDS_EARNED);
-    }
-
-    public void addGold(int amount) {
-        totalGoldEarned += amount;
-        System.out.println("FORGE_ARCHIPELAGO: GOLD REWARD DETECTED: " + amount);
-    }
-
-    // Due to MapDialog.SetEffects() using just a name string to add items to the player's inventory, it's likely that the name is unique.
-    // Todo: Verify that item names are unique.
-    public void addItem(String itemName) {
-        if (regionTeleportingRunes.contains(itemName)) {
-            // Unlock the region based on the color found in the itemName
-            if (itemName.toLowerCase().contains("white")) {
-                unlockRegionByName("white");
-            } else if (itemName.toLowerCase().contains("blue")) {
-                unlockRegionByName("blue");
-            } else if (itemName.toLowerCase().contains("black")) {
-                unlockRegionByName("black");
-            } else if (itemName.toLowerCase().contains("red")) {
-                unlockRegionByName("red");
-            } else if (itemName.toLowerCase().contains("green")) {
-                unlockRegionByName("green");
-            }
-            String regionUnlockMessage = "FORGE_ARCHIPELAGO: REGION REWARD DETECTED: " + itemName;
-            System.out.println(regionUnlockMessage);
-            GameHUD.getInstance().addNotification(regionUnlockMessage, 0.5f, 3f, 0.5f);
-        }
-        itemsGainedByName.merge(itemName, 1L, Long::sum);
-        System.out.println("FORGE_ARCHIPELAGO: ITEM REWARD DETECTED: " + itemName);
-    }
-
-    public void addPack(String boosterPackName) {
-        packsEarnedBySet.merge(boosterPackName, 1L, Long::sum);
-        System.out.println("FORGE_ARCHIPELAGO: CARD PACK REWARD DETECTED: +" + boosterPackName);
-    }
-
-    public void addMaxLife(int amount) {
-        totalExtraMaxLifeEarned += amount;
-        System.out.println("FORGE_ARCHIPELAGO: MAX LIFE REWARD DETECTED: +" + amount);
-    }
-
-    public void addShards(int amount) {
-        totalShardsEarned += amount;
-        System.out.println("FORGE_ARCHIPELAGO: SHARD REWARD DETECTED: +" + amount);
-    }
-
-    public void addTotalBattlesWon(int amount) {
-        totalBattlesWon += amount;
-        updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BATTLES_WON);
-    }
-
-    // Todo: Defeating a (mini-)boss should probably count as a check.
-    // Note that the name of a boss is not unique so we'll need to filter from all enemies which have a `boss` value of `true`.
-    // Returns `true` if the boss was not already defeated before.
-    public boolean addMiniBossDefeated(String miniBossName) {
-        return miniBossesDefeatedByName.add(miniBossName);
-    }
-    public boolean addBossDefeated(String bossName) {
-        boolean result = bossesDefeatedByName.add(bossName);
-        switch (bossName.toLowerCase()) {
-            case "akroma":
-                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BOSS_WHITE_DEFEATED);
-            case "lorthos":
-                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BOSS_BLUE_DEFEATED);
-            case "griselbrand":
-                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BOSS_BLACK_DEFEATED);
-            case "lathliss":
-                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BOSS_RED_DEFEATED);
-            case "ghalta":
-                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BOSS_GREEN_DEFEATED);
-            case "emrakul":
-                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BOSS_COLORLESS_DEFEATED);
-            case "sliver queen":
-                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BOSS_WUBRG_DEFEATED);
-        }
-        // Win condition is reached if all bosses have been defeated.
-        if (bossesDefeatedByName.containsAll(mainBosses)) {
-            updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.WIN_CONDITION_CLEARED);
-        }
-        return result;
-    }
-
+    ///  --- The checks below are mostly functional offline and should not be called from the networked part of the AP implementation. ---
     private void unlockSetByName(String setToUnlock) {
         addSetUnlockedByCode(setToUnlock);
         String setUnlockedText = "FORGE_ARCHIPELAGO: CARD SET REWARD: " + setToUnlock;
@@ -391,33 +297,150 @@ public class ArchipelagoData implements SaveFileContent {
             }
         }
     }
+    /// --- End ---
 
-    public void unlockManaCrystalRewardById(Integer id, Integer amount) {
+    /// --- The checks below can be called from the networked part of the AP implementation. Note that `setLastArchipelagoRewardIndex` must be called manually. ---
+    public void unlockManaCrystalReward(Integer id, Integer amount) {
         Current.player().addShards(amount);
+        addShards(amount);
     }
 
-    public void unlockGoldRewardById(Integer id, Integer amount) {
+    public void unlockGoldReward(int amount) {
         Current.player().giveGold(amount);
+        addGold(amount);
     }
 
     // Todo: Verify that this is actually what we want and it's working
-    public void unlockChallengeCoinsById(Integer id, Map<String, Integer> itemNamesAndAmounts) {
+    public void unlockChallengeCoinReward(Map<String, Integer> itemNamesAndAmounts) {
         for (Map.Entry<String, Integer> item : itemNamesAndAmounts.entrySet()) {
             for (int i = 0; i < item.getValue(); i++) {
                 Current.player().addItem(item.getKey());
+                addItem(item.getKey());
             }
         }
     }
 
+    public void unlockItemReward(String itemName) {
+        Current.player().addItem(itemName);
+        addItem(itemName);
+    }
+
+    // Todo: This should be called by the networked part of the AP implementation when we receive a reward.
     public void setLastArchipelagoRewardIndex(int id) {
         lastArchipelagoRewardIndex = id;
     }
+    /// --- End ---
+
+    /// --- The functions below are responsible for mutating the user data we store in the save file ---
+    // Todo: Defeating a (mini-)boss should probably count as a check.
+    // Note that the name of a boss is not unique so we'll need to filter from all enemies which have a `boss` value of `true`.
+    // Returns `true` if the boss was not already defeated before.
+    public boolean addMiniBossDefeated(String miniBossName) {
+        return miniBossesDefeatedByName.add(miniBossName);
+    }
+
+    public boolean addBossDefeated(String bossName) {
+        boolean result = bossesDefeatedByName.add(bossName);
+        switch (bossName.toLowerCase()) {
+            case "akroma":
+                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BOSS_WHITE_DEFEATED);
+            case "lorthos":
+                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BOSS_BLUE_DEFEATED);
+            case "griselbrand":
+                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BOSS_BLACK_DEFEATED);
+            case "lathliss":
+                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BOSS_RED_DEFEATED);
+            case "ghalta":
+                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BOSS_GREEN_DEFEATED);
+            case "emrakul":
+                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BOSS_COLORLESS_DEFEATED);
+            case "sliver queen":
+                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BOSS_WUBRG_DEFEATED);
+        }
+        // Win condition is reached if all bosses have been defeated.
+        if (bossesDefeatedByName.containsAll(mainBosses)) {
+            updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.WIN_CONDITION_CLEARED);
+        }
+        return result;
+    }
+
     public boolean addCardUnlockedByName(String cardName) {
         return cardsUnlockedByName.add(cardName);
     }
+
     public boolean addSetUnlockedByCode(String setCode) {
         return setsUnlockedByCode.add(setCode);
     }
+
+    public void addCompletedTownInnEvents() {
+        String townName = TileMapScene.instance().rootPoint.getDisplayName();
+        completedTownInnEvents.merge(townName, 1L, Long::sum);
+        System.out.println("FORGE_ARCHIPELAGO: INN EVENT COMPLETION DETECTED: " + townName + " - " + completedTownInnEvents.get(townName));
+        updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.TOWN_QUESTS_AND_EVENTS_DONE);
+    }
+
+    public void addCompletedQuests(AdventureQuestEvent event) {
+        String townName = event.poi.getDisplayName();
+        completedTownQuests.merge(townName, 1L, Long::sum);
+        System.out.println("FORGE_ARCHIPELAGO: QUEST COMPLETION DETECTED: " + townName + " - " + completedTownQuests.get(townName));
+        updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.TOWN_QUESTS_AND_EVENTS_DONE);
+    }
+
+    public void addCardByRarity(String rarity) {
+        cardsEarnedByRarity.merge(rarity, 1L, Long::sum);
+        // Todo: This method will be called a lot when we receive a large batch of cards, make sure this doesn't cause too much slowdown.
+        updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.TOTAL_CARDS_EARNED);
+    }
+
+    public void addGold(int amount) {
+        totalGoldEarned += amount;
+        System.out.println("FORGE_ARCHIPELAGO: GOLD REWARD DETECTED: " + amount);
+    }
+
+    // Due to MapDialog.SetEffects() using just a name string to add items to the player's inventory, it's likely that the name is unique.
+    // Todo: Verify that item names are unique.
+    public void addItem(String itemName) {
+        if (regionTeleportingRunes.contains(itemName)) {
+            // Unlock the region based on the color found in the itemName
+            if (itemName.toLowerCase().contains("white")) {
+                unlockRegionByName("white");
+            } else if (itemName.toLowerCase().contains("blue")) {
+                unlockRegionByName("blue");
+            } else if (itemName.toLowerCase().contains("black")) {
+                unlockRegionByName("black");
+            } else if (itemName.toLowerCase().contains("red")) {
+                unlockRegionByName("red");
+            } else if (itemName.toLowerCase().contains("green")) {
+                unlockRegionByName("green");
+            }
+            String regionUnlockMessage = "FORGE_ARCHIPELAGO: REGION REWARD DETECTED: " + itemName;
+            System.out.println(regionUnlockMessage);
+            GameHUD.getInstance().addNotification(regionUnlockMessage, 0.5f, 3f, 0.5f);
+        }
+        itemsGainedByName.merge(itemName, 1L, Long::sum);
+        System.out.println("FORGE_ARCHIPELAGO: ITEM REWARD DETECTED: " + itemName);
+    }
+
+    public void addPack(String boosterPackName) {
+        packsEarnedBySet.merge(boosterPackName, 1L, Long::sum);
+        System.out.println("FORGE_ARCHIPELAGO: CARD PACK REWARD DETECTED: +" + boosterPackName);
+    }
+
+    public void addMaxLife(int amount) {
+        totalExtraMaxLifeEarned += amount;
+        System.out.println("FORGE_ARCHIPELAGO: MAX LIFE REWARD DETECTED: +" + amount);
+    }
+
+    public void addShards(int amount) {
+        totalShardsEarned += amount;
+        System.out.println("FORGE_ARCHIPELAGO: SHARD REWARD DETECTED: +" + amount);
+    }
+
+    public void addTotalBattlesWon(int amount) {
+        totalBattlesWon += amount;
+        updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BATTLES_WON);
+    }
+    /// --- End ---
 
     // Helper functions for saving and loading
     private static void saveStringSet(SaveFileData parent, String key, Set<String> set) {
@@ -430,19 +453,6 @@ public class ArchipelagoData implements SaveFileContent {
         if (!parent.containsKey(key)) return;
 
         String[] values = (String[]) parent.readObject(key);
-        Collections.addAll(set, values);
-    }
-
-    private static void saveIntegerSet(SaveFileData parent, String key, Set<Integer> set) {
-        parent.storeObject(key, set.toArray(new Integer[0]));
-    }
-
-    private static void loadIntegerSet(SaveFileData parent, String key, Set<Integer> set) {
-        set.clear();
-
-        if (!parent.containsKey(key)) return;
-
-        Integer[] values = (Integer[]) parent.readObject(key);
         Collections.addAll(set, values);
     }
 
