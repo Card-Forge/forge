@@ -289,7 +289,10 @@ Forge writes detailed network logs during online multiplayer games. These are se
 | **Windows** | `%APPDATA%/Forge/networklogs/` |
 | **macOS** | `~/Library/Application Support/Forge/networklogs/` |
 | **Linux** | `~/.forge/networklogs/` |
+| **Android** | `Android/data/forge.app/files/Forge/networklogs/` (typically not browsable without a file manager — use the in-app export below) |
 
-On desktop, you can open this folder directly from the Forge game menu: **Online > Open Network Logs**.
+On **Desktop**, you can open this folder directly from the Forge game menu: **Online > Open Network Logs**.
+
+On **Mobile**, you can export logs in .zip file to your Downloads folder from **Settings > Files > Data Management > Export Network Logs**.
 
 By default, logs from the last 10 games are kept; older logs are automatically removed. 
