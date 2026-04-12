@@ -315,7 +315,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             for (ICardFace face : rule.getAllFaces()) {
                 addFaceToDbNames(face);
             }
-            if (rule.hasFunctionalVariants()){
+            if (rule.hasFunctionalVariants()) {
                 cacheFlavorNames(rule, extraRuleMappings);
             }
         }
@@ -339,8 +339,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             normalizedNames.put(normalName, name);
         }
 
-        if(face.hasFunctionalVariants()) {
-            for(ICardFace varFace : face.getFunctionalVariants().values())
+        if (face.hasFunctionalVariants()) {
+            for (ICardFace varFace : face.getFunctionalVariants().values())
                 cacheFlavorName(varFace);
         }
         if (face.getFlavorName() != null) //Probably shouldn't be putting a flavor name on the main print?
@@ -359,19 +359,19 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     private void cacheFlavorNames(CardRules rules, Map<String, CardRules> map) {
-        if(rules.getSupportedFunctionalVariants() == null)
+        if (rules.getSupportedFunctionalVariants() == null)
             return;
         boolean hasFlavorName = false;
         String baseName = rules.getName();
-        for(String variantName : rules.getSupportedFunctionalVariants()) {
+        for (String variantName : rules.getSupportedFunctionalVariants()) {
             String name = rules.getDisplayNameForVariant(variantName);
-            if(baseName.equals(name))
+            if (baseName.equals(name))
                 continue;
             hasFlavorName = true;
             map.put(name, rules);
             flavorNameMappings.put(name, variantName);
         }
-        if(hasFlavorName)
+        if (hasFlavorName)
             flavorNameMappings.put(baseName, IPaperCard.NO_FUNCTIONAL_VARIANT);
     }
 
@@ -387,12 +387,12 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         String flavorName = cis.getFlavorName();
         assert(variantName == null || flavorName == null); //Can't currently assign both this way.
 
-        if(variantName == null && !cr.getName().equals(cis.name())) {
+        if (variantName == null && !cr.getName().equals(cis.name())) {
             //If an edition entry uses a known flavor name without specifying the variant, swap to that variant.
             variantName = flavorNameMappings.get(cis.name());
             //System.out.printf("Auto-mapping flavor name \"%s\" -> \"%s\" $%s\n", cis.name(), cr.getName(), variantName);
         }
-        if(flavorName != null) {
+        if (flavorName != null) {
             String suggestedFlavorName = e.getCode().startsWith("OM") ? "Alchemy"
                     : e.getCode().equals("SLX") ? "UniversesWithin"
                     : null;
