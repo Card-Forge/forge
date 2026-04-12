@@ -1,5 +1,5 @@
 Name:Tenured Concocter
-ManaCost:2 G
+ManaCost:4 G
 Types:Creature Troll Druid
 PT:4/5
 K:Vigilance

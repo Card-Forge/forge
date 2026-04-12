@@ -28,9 +28,8 @@ public class ChooseColorAi extends SpellAbilityAi {
         if ("Nykthos, Shrine to Nyx".equals(sourceName)) {
             if (SpecialCardAi.NykthosShrineToNyx.consider(ai, sa)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if ("Oona, Queen of the Fae".equals(sourceName)) {

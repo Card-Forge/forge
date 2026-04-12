@@ -230,15 +230,13 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
             if (delta <= 0) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         } else if ("SaviorOfOllenbock".equals(aiLogic)) {
             if (SpecialCardAi.SaviorOfOllenbock.consider(aiPlayer, sa)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if (sa.isHidden()) {
@@ -798,9 +796,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if ("MimicVat".equals(sa.getParam("AILogic"))) {
             if (SpecialCardAi.MimicVat.considerExile(aiPlayer, sa)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if (!sa.usesTargeting()) {
@@ -809,11 +806,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
         if (!isPreferredTarget(aiPlayer, sa, false, true)) {
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-        } else {
-            // if we are here, we have a target
-            // so we can play the ability
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
+        // if we are here, we have a target
+        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
     /**
@@ -1191,24 +1186,20 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     }
                     if (!doWithoutTarget) {
                         return false;
-                    } else {
-                        break;
                     }
-                } else {
-                    if (!sa.isTrigger() && !ComputerUtil.shouldCastLessThanMax(ai, source)) {
-                        boolean aiTgtsOK = false;
-                        if (sa.hasParam("AIMinTgts")) {
-                            int minTgts = Integer.parseInt(sa.getParam("AIMinTgts"));
-                            if (sa.getTargets().size() >= minTgts) {
-                                aiTgtsOK = true;
-                            }
-                        }
-                        if (!aiTgtsOK) {
-                            return false;
+                } else if (!sa.isTrigger() && !ComputerUtil.shouldCastLessThanMax(ai, source)) {
+                    boolean aiTgtsOK = false;
+                    if (sa.hasParam("AIMinTgts")) {
+                        int minTgts = Integer.parseInt(sa.getParam("AIMinTgts"));
+                        if (sa.getTargets().size() >= minTgts) {
+                            aiTgtsOK = true;
                         }
                     }
-                    break;
+                    if (!aiTgtsOK) {
+                        return false;
+                    }
                 }
+                break;
             }
 
             list.remove(choice);
@@ -1432,15 +1423,13 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if ("DeathgorgeScavenger".equals(logic)) {
             if (SpecialCardAi.DeathgorgeScavenger.consider(ai, sa)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         } else if ("ExtraplanarLens".equals(logic)) {
             if (SpecialCardAi.ExtraplanarLens.consider(ai, sa)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         } else if ("ExileCombatThreat".equals(logic)) {
             return doExileCombatThreatLogic(ai, sa);
         }
@@ -1466,10 +1455,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
         } else {
             if (isUnpreferredTarget(ai, sa, mandatory)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                // If the AI is not the controller of the attachedTo card, then it is not a valid target.
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+            // If the AI is not the controller of the attachedTo card, then it is not a valid target.
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
@@ -1838,9 +1826,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     if (causeSa.getHostCard() == null || !causeSa.getHostCard().equals(sa.getReplacingObject(AbilityKey.Card))
                             || !causeSa.getActivatingPlayer().equals(aiPlayer)) {
                         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                    } else {
-                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                     }
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
         }
 
