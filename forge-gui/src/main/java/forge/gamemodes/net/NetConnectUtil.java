@@ -141,15 +141,11 @@ public class NetConnectUtil {
             localCopyIndex = 0;
         }
 
-        while (true) {
-            int result = SOptionPane.showOptionDialog(message, title, SOptionPane.INFORMATION_ICON, options, closeIndex);
-            if (externalUrl != null && result == 0) {
-                GuiBase.getInterface().copyToClipboard(externalUrl);
-            } else if (result == localCopyIndex) {
-                GuiBase.getInterface().copyToClipboard(internalUrl);
-            } else {
-                break;
-            }
+        int result = SOptionPane.showOptionDialog(message, title, SOptionPane.INFORMATION_ICON, options, closeIndex);
+        if (externalUrl != null && result == 0) {
+            GuiBase.getInterface().copyToClipboard(externalUrl);
+        } else if (result == localCopyIndex) {
+            GuiBase.getInterface().copyToClipboard(internalUrl);
         }
     }
 
