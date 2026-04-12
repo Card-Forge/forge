@@ -351,10 +351,6 @@ public abstract class PlayerController {
     public abstract void awaitNextInput();
     public abstract void cancelAwaitNextInput();
 
-    public void resetInputs() {
-        // Do nothing unless overridden by a subclass
-    }
-
     public boolean isGuiPlayer() {
         return false;
     }

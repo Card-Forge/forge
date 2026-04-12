@@ -121,7 +121,7 @@ public class StaticData {
 
                     final String cardName = card.getName();
                     card.setCustom();
-                    if(card.isVariant()) { //Append loaded custom cards to the respective list.
+                    if (card.isVariant()) { //Append loaded custom cards to the respective list.
                         variantsCards.put(cardName, card);
                     } else {
                         regularCards.put(cardName, card);
