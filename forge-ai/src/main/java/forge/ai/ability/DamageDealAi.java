@@ -740,7 +740,12 @@ public class DamageDealAi extends DamageAiBase {
                         || immediately) {
                     boolean pingAfterAttack = "PingAfterAttack".equals(logic) && phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.isPlayerTurn(ai);
                     boolean isPWAbility = sa.isPwAbility() && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class);
-                    if (isPWAbility || (pingAfterAttack && !avoidTargetP(ai, sa)) || shouldTgtP(ai, sa, dmg, noPrevention)) {
+                    // Activated abilities that target only players (not creatures) should fire at end of opponent's turn
+                    boolean freePingPlayerOnly = !source.isSpell() && sa.isAbility()
+                            && tgt.canTgtPlayer() && !tgt.canTgtCreature()
+                            && phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai)
+                            && !avoidTargetP(ai, sa);
+                    if (isPWAbility || (pingAfterAttack && !avoidTargetP(ai, sa)) || shouldTgtP(ai, sa, dmg, noPrevention) || freePingPlayerOnly) {
                         tcs.add(enemy);
                         if (divided) {
                             sa.addDividedAllocation(enemy, dmg);
