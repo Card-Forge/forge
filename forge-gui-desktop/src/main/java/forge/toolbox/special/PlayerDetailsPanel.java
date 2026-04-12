@@ -185,11 +185,19 @@ public class PlayerDetailsPanel extends JPanel {
     }
 
     private static abstract class DetailLabel extends FLabel {
+        private final int baseFontSize;
+
         public DetailLabel(final FSkinProp icon) {
+            this(icon, 14, 0.85);
+        }
+
+        public DetailLabel(final FSkinProp icon, int fontSize, double iconScaleFactor) {
             super(new FLabel.Builder().icon(FSkin.getImage(icon))
-                    .opaque(false).fontSize(14).hoverable()
+                    .opaque(false).fontSize(fontSize).hoverable()
                     .fontStyle(Font.BOLD).iconInBackground()
+                    .iconScaleFactor(iconScaleFactor)
                     .fontAlign(SwingConstants.RIGHT));
+            this.baseFontSize = fontSize;
         }
 
         public abstract void onContentUpdate();
@@ -216,7 +224,7 @@ public class PlayerDetailsPanel extends JPanel {
             final int max = getMaxTextWidth();
 
             SkinFont font = null;
-            for (int fontSize = 14; fontSize > 5; fontSize--) {
+            for (int fontSize = baseFontSize; fontSize > 5; fontSize--) {
                 font = FSkin.getBoldFont(fontSize);
                 if (font.measureTextWidth(g, text) <= max) {
                     break;
@@ -237,7 +245,13 @@ public class PlayerDetailsPanel extends JPanel {
 
         public DetailLabelNumeric(final FSkinProp icon, final String tooltipLabel,
                             Function<PlayerView, Integer> countFunction, Function<PlayerView, Object> toolTipExtraArg) {
-            super(icon);
+            this(icon, tooltipLabel, countFunction, toolTipExtraArg, 14, 0.85);
+        }
+
+        public DetailLabelNumeric(final FSkinProp icon, final String tooltipLabel,
+                            Function<PlayerView, Integer> countFunction, Function<PlayerView, Object> toolTipExtraArg,
+                            int fontSize, double iconScaleFactor) {
+            super(icon, fontSize, iconScaleFactor);
 
             this.countFunction = countFunction;
             //Format in one or two format args depending on if we have a second parameter.
@@ -274,7 +288,8 @@ public class PlayerDetailsPanel extends JPanel {
         public final String color;
 
         public DetailLabelMana(String color, String toolTipLabel) {
-            super(FSkinProp.MANA_IMG.get(color), toolTipLabel, (PlayerView p) -> p.getMana(ManaAtom.fromName(color)));
+            super(FSkinProp.MANA_IMG.get(color), toolTipLabel,
+                    (PlayerView p) -> p.getMana(ManaAtom.fromName(color)), null, 16, 0.70);
             this.color = color;
         }
     }
