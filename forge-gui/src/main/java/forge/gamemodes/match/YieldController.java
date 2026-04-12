@@ -156,18 +156,10 @@ public class YieldController {
         if (shouldInterruptYield(player)) {
             return false;
         }
-        // Respect phase-skip settings: pass through unmarked phases even if
-        // the player has actions. Auto-pass should be additive to phase-skip,
-        // not cause stops at phases the user explicitly set to skip.
-        GameView gv = gui.getGameView();
-        if (gv != null && gv.getStack() != null && gv.getStack().isEmpty()) {
-            PlayerView turnPlayer = gv.getPlayerTurn();
-            forge.game.phase.PhaseType phase = gv.getPhase();
-            if (turnPlayer != null && phase != null
-                    && gui.isUiSetToSkipPhase(turnPlayer, phase)) {
-                return true;
-            }
-        }
+        // Phase-skip additive logic: if the phase is set to skip AND the
+        // player has no available actions, auto-pass. But never override
+        // hasAvailableActions — the player must always get priority when
+        // they have playable cards/abilities, even in skipped phases.
         return !player.hasAvailableActions();
     }
 

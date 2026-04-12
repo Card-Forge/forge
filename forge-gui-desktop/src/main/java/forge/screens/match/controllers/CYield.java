@@ -32,7 +32,6 @@ import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.VYieldSettings;
 import forge.screens.match.views.VYield;
-import forge.util.Localizer;
 
 /**
  * Controls the yield panel in the match UI.
@@ -53,7 +52,6 @@ public class CYield implements ICDoc {
     private final ActionListener actEndTurn = evt -> yieldUntilEndTurn();
     private final ActionListener actYourTurn = evt -> yieldUntilYourTurn();
     private final ActionListener actBeforeYourTurn = evt -> yieldUntilBeforeYourTurn();
-    private final ActionListener actAutoPass = evt -> toggleAutoPass();
     private final ActionListener actSettings = evt -> openSettings();
 
     public CYield(final CMatchUI matchUI) {
@@ -75,6 +73,10 @@ public class CYield implements ICDoc {
 
     @Override
     public void initialize() {
+        // Auto-pass no-actions is not exposed in UI; force off each match start
+        FModel.getPreferences().setPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS, false);
+        FModel.getPreferences().setPref(FPref.UI_POPUP_CARD_IMAGE, false);
+
         // Initialize button action listeners
         initButton(view.getBtnNextPhase(), actNextPhase);
         initButton(view.getBtnClearStack(), actClearStack);
@@ -84,7 +86,6 @@ public class CYield implements ICDoc {
         initButton(view.getBtnEndTurn(), actEndTurn);
         initButton(view.getBtnYourTurn(), actYourTurn);
         initButton(view.getBtnBeforeYourTurn(), actBeforeYourTurn);
-        initButton(view.getBtnAutoPass(), actAutoPass);
         initButton(view.getBtnSettings(), actSettings);
 
         // Set initial button state
@@ -190,9 +191,6 @@ public class CYield implements ICDoc {
         view.getBtnBeforeYourTurn().setEnabled(canYield);
         view.getBtnClearStack().setEnabled(canYield);
 
-        // Auto-pass is a persistent toggle, enable whenever yield panel is available
-        view.getBtnAutoPass().setEnabled(canYield);
-
         // Highlight active yield button
         updateActiveYieldHighlight();
     }
@@ -220,11 +218,6 @@ public class CYield implements ICDoc {
         view.getBtnYourTurn().setHighlighted(currentMode == YieldMode.UNTIL_YOUR_NEXT_TURN);
         view.getBtnBeforeYourTurn().setHighlighted(currentMode == YieldMode.UNTIL_END_STEP_BEFORE_YOUR_TURN);
 
-        // Auto-pass highlight is based on preference state, not yield mode
-        boolean autoPassOn = FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS);
-        view.getBtnAutoPass().setHighlighted(autoPassOn);
-        view.getBtnAutoPass().setText(Localizer.getInstance().getMessage(
-            autoPassOn ? "lblYieldBtnAutoPassOn" : "lblYieldBtnAutoPass"));
     }
 
     /**

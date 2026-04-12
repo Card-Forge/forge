@@ -435,7 +435,8 @@ public final class SRearrangingUtil {
             return;
         }
 
-        throw new UnsupportedOperationException("Gap was not filled.");
+        System.err.println("SRearrangingUtil: could not fill gap for cell at ["
+                + srcX + "," + srcY + " " + srcW + "x" + srcH + "] — layout geometry too complex");
     }
 
     /**

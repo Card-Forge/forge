@@ -86,7 +86,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_SHOW_HOVER_TOOLTIPS("true"),
         UI_POPUP_KEYWORD_INFO("true"),
         UI_POPUP_RELATED_CARDS("true"),
-        UI_POPUP_CARD_IMAGE("true"),
+        UI_POPUP_CARD_IMAGE("false"),
         UI_POPUP_IMAGE_SIZE("375"),  // thumbnail height in pixels (250-500)
         UI_POPUP_CARD_OVERLAYS("false"),
         UI_HOVER_OVERLAY_CARD_NAME("false"),
@@ -159,7 +159,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_THEMED_COMBOBOX ("true"), // Now applies to all theme settings, not just Combo.
         UI_LOCK_TITLE_BAR ("false"),
         UI_HIDE_GAME_TABS ("false"), // Visibility of tabs in match screen.
-        UI_MULTIPLAYER_FIELD_LAYOUT ("OFF"),
+        UI_MULTIPLAYER_FIELD_LAYOUT ("ROWS"),
         UI_MULTIPLAYER_FIELD_PANELS ("SPLIT"),
         UI_CLOSE_ACTION ("NONE"),
         UI_MANA_LOST_PROMPT ("true"), // Prompt on losing mana when passing priority
@@ -176,7 +176,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         YIELD_SUPPRESS_AFTER_END("true"),  // Suppress suggestions for one priority pass after yield ends
         YIELD_DECLINE_SCOPE_STACK_YIELD("stack"),  // Decline scope: "never", "always", "stack", "turn"
         YIELD_DECLINE_SCOPE_NO_ACTIONS("turn"),  // Decline scope: "never", "always", "turn"
-        YIELD_AUTO_PASS_NO_ACTIONS("true"),  // Auto-pass priority when no playable actions
+        YIELD_AUTO_PASS_NO_ACTIONS("false"),  // Auto-pass priority when no playable actions
         YIELD_AUTO_CALL_COIN_FLIP("true"),  // Auto-call coin flips where only win/lose matters
 
         UI_STACK_EFFECT_NOTIFICATION_POLICY ("Never"),

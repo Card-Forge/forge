@@ -1,10 +1,12 @@
 <?xml version="1.0"?>
 <layout>
-	<cell x="0.0" y="0.0" w="0.2" h="0.643">
+	<cell x="0.0" y="0.0" w="0.2" h="0.509">
 		<doc>REPORT_STACK</doc>
 		<doc>REPORT_COMBAT</doc>
 		<doc>REPORT_LOG</doc>
 		<doc>REPORT_DEPENDENCIES</doc>
+	</cell>
+	<cell x="0.0" y="0.509" w="0.2" h="0.134">
 		<doc>REPORT_YIELD</doc>
 	</cell>
 	<cell x="0.0" y="0.643" w="0.2" h="0.357">
