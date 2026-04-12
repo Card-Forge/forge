@@ -3374,14 +3374,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public void resetInputs() {
-        final Input inp = inputProxy.getInput();
-        if (inp != null) {
-            inp.selectButtonCancel();
-        }
-    }
-
-    @Override
     public void nextGameDecision(final NextGameDecision decision) {
         gameView.getMatch().fireEvent(new UiEventNextGameDecision(this, decision));
     }

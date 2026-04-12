@@ -78,9 +78,8 @@ public class DamageDealAi extends DamageAiBase {
                 if ("XLifeDrain".equals(logic)) {
                     if (doXLifeDrainLogic(ai, sa)) {
                         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                    } else {
-                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                     }
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
 
                 dmg = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
@@ -179,9 +178,8 @@ public class DamageDealAi extends DamageAiBase {
                      */
                      if (damageTargetAI(ai, sa, n, true)) {
                          return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                     } else {
-                         return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                      }
+                     return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
                 } else {
                     /*
                      * Only ping when stack is clear to avoid hassle of evaluating stacked effects
@@ -189,9 +187,8 @@ public class DamageDealAi extends DamageAiBase {
                      */
                     if (ai.getGame().getStack().isEmpty() && damageTargetAI(ai, sa, n, false)) {
                         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                    } else {
-                        return new AiAbilityDecision(0, AiPlayDecision.StackNotEmpty);
                     }
+                    return new AiAbilityDecision(0, AiPlayDecision.StackNotEmpty);
                 }
             } else {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
@@ -205,9 +202,8 @@ public class DamageDealAi extends DamageAiBase {
                     if (tgt != null) {
                         if (ai.getGame().getPhaseHandler().getPlayerTurn() == tgt.getController()) {
                             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                        } else {
-                            return new AiAbilityDecision(0, AiPlayDecision.WaitForEndOfTurn);
                         }
+                        return new AiAbilityDecision(0, AiPlayDecision.WaitForEndOfTurn);
                     }
                 }
             }
@@ -520,7 +516,7 @@ public class DamageDealAi extends DamageAiBase {
 
         if ("PowerDmg".equals(logic)) {
             // check if it is better to target the player instead, the original target is already set in PumpAi.pumpTgtAI()
-            if (tgt.canTgtCreatureAndPlayer() && shouldTgtP(ai, sa, dmg, noPrevention)) {
+            if (tgt.canTgtCreature() && tgt.canTgtPlayer() && shouldTgtP(ai, sa, dmg, noPrevention)) {
                 sa.resetTargets();
                 sa.getTargets().add(enemy);
             }
@@ -632,7 +628,7 @@ public class DamageDealAi extends DamageAiBase {
                 }
             }
 
-            if (tgt.canTgtCreatureAndPlayer()) {
+            if (tgt.canTgtCreature() && tgt.canTgtPlayer()) {
                 Card c = null;
 
                 if (shouldTgtP(ai, sa, dmg, noPrevention)) {
