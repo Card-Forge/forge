@@ -675,29 +675,6 @@ public class DamageDealAi extends DamageAiBase {
 
                 // TODO: add check here if card is about to die from something
                 // on the stack or from taking combat damage
-
-                final Cost abCost = sa.getPayCosts();
-                boolean freePing = immediately || abCost == null || sa.getTargets().size() > 0;
-
-                if (!source.isSpell()) {
-                    if (phase.is(PhaseType.END_OF_TURN) && sa.isAbility() && abCost.isReusuableResource()) {
-                        if (phase.getNextTurn().equals(ai))
-                            freePing = true;
-                    }
-
-                    if (phase.is(PhaseType.MAIN2) && sa.isAbility()) {
-                        if (sa.isPwAbility() || source.hasSVar("EndOfTurnLeavePlay"))
-                            freePing = true;
-                    }
-                }
-
-                if (freePing && sa.canTarget(enemy) && !avoidTargetP(ai, sa)) {
-                    tcs.add(enemy);
-                    if (divided) {
-                        sa.addDividedAllocation(enemy, dmg);
-                        break;
-                    }
-                }
             } else if (tgt.canTgtCreature() || tgt.canTgtPlaneswalker()) {
                 final Card c = dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, mandatory);
                 if (c != null) {
@@ -734,18 +711,28 @@ public class DamageDealAi extends DamageAiBase {
                 return false;
             }
             if (sa.canTarget(enemy) && sa.canAddMoreTarget()) {
+                final Cost abCost = sa.getPayCosts();
+                boolean freePing = immediately || abCost == null || sa.getTargets().size() > 0;
+
+                if (!source.isSpell()) {
+                    if (phase.is(PhaseType.END_OF_TURN) && sa.isAbility() && abCost.isReusuableResource()) {
+                        if (phase.getNextTurn().equals(ai))
+                            freePing = true;
+                    }
+
+                    if (phase.is(PhaseType.MAIN2) && sa.isAbility()) {
+                        if (sa.isPwAbility() || source.hasSVar("EndOfTurnLeavePlay"))
+                            freePing = true;
+                    }
+                }
+
                 if ((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
                         || (isSorcerySpeed(sa, ai) && phase.is(PhaseType.MAIN2))
                         || ("BurnCreatures".equals(logic) && !enemy.getCreaturesInPlay().isEmpty())
                         || immediately) {
                     boolean pingAfterAttack = "PingAfterAttack".equals(logic) && phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.isPlayerTurn(ai);
                     boolean isPWAbility = sa.isPwAbility() && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class);
-                    // Activated abilities that target only players (not creatures) should fire at end of opponent's turn
-                    boolean freePingPlayerOnly = !source.isSpell() && sa.isAbility()
-                            && tgt.canTgtPlayer() && !tgt.canTgtCreature()
-                            && phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai)
-                            && !avoidTargetP(ai, sa);
-                    if (isPWAbility || (pingAfterAttack && !avoidTargetP(ai, sa)) || shouldTgtP(ai, sa, dmg, noPrevention) || freePingPlayerOnly) {
+                    if ((freePing && !avoidTargetP(ai, sa)) || isPWAbility || (pingAfterAttack && !avoidTargetP(ai, sa)) || shouldTgtP(ai, sa, dmg, noPrevention)) {
                         tcs.add(enemy);
                         if (divided) {
                             sa.addDividedAllocation(enemy, dmg);
