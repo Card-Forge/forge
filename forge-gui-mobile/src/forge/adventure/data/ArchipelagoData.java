@@ -102,7 +102,6 @@ public class ArchipelagoData implements SaveFileContent {
         loadAllAvailableSets();
     }
 
-    // Todo: Add more checks for other things the player can do such as earn gold, shards, defeating bosses etc.
     private void updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES type) {
         if (archipelagoMode == ArchipelagoMode.disabled) return;
         switch (type) {
