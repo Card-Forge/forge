@@ -305,6 +305,11 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
         // create faces list from rules
         for (final CardRules rule : rules.values()) {
+            // Collect placeholder-face rules unconditionally so they get supplied
+            // even when filtered out and remain reachable via rulesByName.
+            if (rule.hasPlaceholderFaces()) {
+                needsPlaceholderFaces.add(rule);
+            }
             if (filteredCards.contains(rule.getPreInitName()))
                 continue;
             for (ICardFace face : rule.getAllFaces()) {
@@ -312,9 +317,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             }
             if (rule.hasFunctionalVariants()){
                 cacheFlavorNames(rule, extraRuleMappings);
-            }
-            if (rule.hasPlaceholderFaces()) {
-                needsPlaceholderFaces.add(rule);
             }
         }
 

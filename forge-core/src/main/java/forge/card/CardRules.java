@@ -238,8 +238,14 @@ public final class CardRules implements ICardCharacteristics {
 
     @Override
     public CardType getType() {
+        if (mainPart == null) {
+            return new CardType(false); // Still initializing; filled in during supplyPlaceholderFaces
+        }
         switch (splitType.getAggregationMethod()) {
             case COMBINE: // no cards currently have different types
+                if (otherPart == null) {
+                    return mainPart.getType();
+                }
                 return CardType.combine(mainPart.getType(), otherPart.getType());
             default:
                 return mainPart.getType();
