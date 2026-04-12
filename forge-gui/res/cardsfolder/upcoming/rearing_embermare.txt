@@ -1,0 +1,7 @@
+Name:Rearing Embermare
+ManaCost:4 R
+Types:Creature Horse Beast
+PT:4/5
+K:Reach
+K:Haste
+Oracle:Reach, haste

@@ -1,0 +1,7 @@
+Name:Impractical Joke
+ManaCost:1 R
+Types:Sorcery
+A:SP$ Effect | StaticAbilities$ STCantPrevent | AILogic$ Burn | SubAbility$ DBDamage | SpellDescription$ Damage can't be prevented this turn. CARDNAME deals 3 damage to up to one target creature or planeswalker.
+SVar:STCantPrevent:Mode$ CantPreventDamage | Description$ Damage can't be prevented.
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | ValidTgtDesc$ creature or planeswalker | NumDmg$ 3 | TargetMin$ 0 | TargetMax$ 1
+Oracle:Damage can't be prevented this turn. Impractical Joke deals 3 damage to up to one target creature or planeswalker.

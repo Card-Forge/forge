@@ -1,0 +1,7 @@
+Name:Burrog Banemaker
+ManaCost:B
+Types:Creature Frog Warlock
+PT:1/1
+K:Deathtouch
+A:AB$ Pump | Cost$ 1 B | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ This creature gets +1/+1 until end of turn.
+Oracle:Deathtouch\n{1}{B}: This creature gets +1/+1 until end of turn.

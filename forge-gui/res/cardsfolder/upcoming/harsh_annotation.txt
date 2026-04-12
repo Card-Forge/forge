@@ -1,0 +1,6 @@
+Name:Harsh Annotation
+ManaCost:1 W
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature | SubAbility$ DBToken | SpellDescription$ Destroy target creature. Its controller creates a 1/1 white and black Inkling creature token with flying.
+SVar:DBToken:DB$ Token | TokenScript$ wb_1_1_inkling_flying | TokenOwner$ TargetedController
+Oracle:Destroy target creature. Its controller creates a 1/1 white and black Inkling creature token with flying.

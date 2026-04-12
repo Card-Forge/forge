@@ -1,15 +1,18 @@
 package forge.gamemodes.net.server;
 
 import forge.gamemodes.net.GameProtocolHandler;
+import forge.util.IHasForgeLog;
 import forge.gamemodes.net.IRemote;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.gamemodes.net.ReplyPool;
+import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.IGameController;
 import io.netty.channel.ChannelHandlerContext;
 
-final class GameServerHandler extends GameProtocolHandler<IGameController> {
+final class GameServerHandler extends GameProtocolHandler<IGameController> implements IHasForgeLog {
 
     private final FServerManager server = FServerManager.getInstance();
+
     GameServerHandler() {
         super(false);
     }
@@ -34,8 +37,19 @@ final class GameServerHandler extends GameProtocolHandler<IGameController> {
     }
 
     @Override
-    protected void beforeCall(final ProtocolMethod protocolMethod, final Object[] args) {
-        // Nothing needs to be done here
+    protected void beforeCall(final ChannelHandlerContext ctx, final ProtocolMethod protocolMethod, final Object[] args) {
+        if (protocolMethod == ProtocolMethod.requestResync) {
+            RemoteClient client = getClient(ctx);
+            if (client != null) {
+                IGuiGame gui = server.getGui(client.getIndex());
+                if (gui instanceof RemoteClientGuiGame netGui) {
+                    netLog.debug("[DeltaSync] Resync requested by client {}, deferring to game thread", client.getIndex());
+                    netGui.setResyncPending();
+                } else {
+                    netLog.warn("[DeltaSync] GUI is not RemoteClientGuiGame, cannot resync client {}", client.getIndex());
+                }
+            }
+        }
     }
 
 }

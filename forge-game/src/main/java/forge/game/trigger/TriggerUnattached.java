@@ -31,7 +31,7 @@ import forge.util.Localizer;
  * 
  * @author Forge
  */
-public class TriggerUnattach extends Trigger {
+public class TriggerUnattached extends Trigger {
 
     /**
      * <p>
@@ -45,7 +45,7 @@ public class TriggerUnattach extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerUnattach(final Map<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerUnattached(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 

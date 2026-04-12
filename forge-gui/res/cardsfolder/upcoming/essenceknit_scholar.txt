@@ -1,0 +1,11 @@
+Name:Essenceknit Scholar
+ManaCost:B BG G
+Types:Creature Dryad Warlock
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, create a 1/1 black and green Pest creature token with "Whenever this token attacks, you gain 1 life."
+SVar:TrigToken:DB$ Token | TokenScript$ bg_1_1_pest_attack_lifegain | TokenOwner$ You
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, if a creature died under your control this turn, draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.YouCtrl
+DeckHas:Ability$LifeGain
+Oracle:When this creature enters, create a 1/1 black and green Pest creature token with "Whenever this token attacks, you gain 1 life."\nAt the beginning of your end step, if a creature died under your control this turn, draw a card.

@@ -1,0 +1,8 @@
+Name:Applied Geometry
+ManaCost:2 G U
+Types:Sorcery
+A:SP$ CopyPermanent | ValidTgts$ Permanent.nonAura+YouCtrl | ValidTgtDesc$ non-Aura permanent you control | AddTypes$ Creature & Fractal | SetPower$ 0 | SetToughness$ 0 | RememberTokens$ True | SubAbility$ DBPutCounter | SpellDescription$ Create a token that's a copy of target non-Aura permanent you control, except it's a 0/0 Fractal creature in addition to its other types. Put six +1/+1 counters on it.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ 6 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token|Counters
+Oracle:Create a token that's a copy of target non-Aura permanent you control, except it's a 0/0 Fractal creature in addition to its other types. Put six +1/+1 counters on it.

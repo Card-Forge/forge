@@ -1,0 +1,10 @@
+Name:Living History
+ManaCost:B
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this enchantment enters, create a 2/2 red and white Spirit creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ rw_2_2_spirit | TokenOwner$ You
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | CheckSVar$ X | TriggerDescription$ Whenever you attack, if a card left your graveyard this turn, target attacking creature gets +2/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking | ValidTgtDesc$ attacking creature | NumAtt$ +2
+SVar:X:Count$LeftGraveyardThisTurn Card.YouOwn
+SVar:PlayMain1:TRUE
+Oracle:When this enchantment enters, create a 2/2 red and white Spirit creature token.\nWhenever you attack, if a card left your graveyard this turn, target attacking creature gets +2/+0 until end of turn.

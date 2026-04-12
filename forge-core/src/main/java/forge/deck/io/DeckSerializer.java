@@ -64,7 +64,7 @@ public class DeckSerializer {
             out.add(TextUtil.concatNoSpace(DeckFileHeader.KEY_CARDS, "=", StringUtils.join(d.getKeyCards(), ";")));
         }
 
-        for(Entry<DeckSection, CardPool> s : d) {
+        for (Entry<DeckSection, CardPool> s : d) {
             if(s.getValue().isEmpty())
                 continue;
             out.add(TextUtil.enclosedBracket(s.getKey().toString()));
@@ -75,7 +75,7 @@ public class DeckSerializer {
 
     public static String serializeDraftNotes(final Map<String, String> draftNotes) {
         StringBuilder sb = new StringBuilder();
-        for(String key : draftNotes.keySet()) {
+        for (String key : draftNotes.keySet()) {
             if (sb.length() > 0) {
                 sb.append(" | ");
             }

@@ -1,0 +1,9 @@
+Name:Rabid Attack
+ManaCost:1 B
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TargetMin$ 0 | TargetMax$ X | ValidTgtDesc$ creature you control | NumAtt$ +1 | SubAbility$ DBAnimate | SpellDescription$ Until end of turn, any number of target creatures you control each get +1/+0 and gain "When this creature dies, draw a card."
+SVar:DBAnimate:DB$ Animate | Triggers$ DieTrigger | Defined$ Targeted
+SVar:DieTrigger:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When this creature dies, draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:X:Count$Valid Creature.YouCtrl
+Oracle:Until end of turn, any number of target creatures you control each get +1/+0 and gain "When this creature dies, draw a card."

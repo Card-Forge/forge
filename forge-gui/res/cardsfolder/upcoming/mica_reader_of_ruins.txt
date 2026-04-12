@@ -1,0 +1,9 @@
+Name:Mica, Reader of Ruins
+ManaCost:3 R
+Types:Legendary Creature Human Artificer
+PT:2/2
+K:Ward:PayLife<3>
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ Whenever you cast an instant or sorcery spell, you may sacrifice an artifact. If you do, copy that spell and you may choose new targets for the copy.
+SVar:TrigCopy:AB$ CopySpellAbility | Cost$ Sac<1/Artifact> | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+DeckHints:Type$Instant|Sorcery
+Oracle:Ward—Pay 3 life. (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays 3 life.)\nWhenever you cast an instant or sorcery spell, you may sacrifice an artifact. If you do, copy that spell and you may choose new targets for the copy.

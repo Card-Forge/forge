@@ -305,10 +305,10 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         if (selectedDeckType == DeckType.QUEST_OPPONENT_DECK) {
             final QuestEvent event = DeckgenUtil.getQuestEvent(lstDecks.getSelectedItem().getName());
             final RegisteredPlayer result = new RegisteredPlayer(event.getEventDeck());
-            if (event instanceof QuestEventChallenge) {
-                result.setStartingLife(((QuestEventChallenge) event).getAiLife());
+            if (event instanceof QuestEventChallenge qec) {
+                result.setStartingLife(qec.getAiLife());
             }
-            result.setCardsOnBattlefield(QuestUtil.getComputerStartingCards(event));
+            result.addExtraCardsOnBattlefield(QuestUtil.getComputerStartingCards(event));
             return result;
         }
 

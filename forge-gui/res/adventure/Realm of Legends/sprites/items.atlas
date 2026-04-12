@@ -648,6 +648,12 @@ Gourmand'sHat
 OozeAmulet
   xy: 0, 800
   size: 16, 16
+Ajani'sAmulet
+  xy: 128, 800
+  size: 16, 16
+PackLeaderPants
+  xy: 0, 480
+  size: 16, 16
 MaskofCompulsion
   xy: 16, 320
   size: 16, 16
@@ -809,6 +815,15 @@ EnormousEnergyBlade
   size: 16, 16
 AngelicArmaments
   xy: 272, 368
+  size: 16, 16
+SpidersilkHelm
+  xy: 128, 400
+  size: 16, 16
+Liliana'sVeil
+  xy: 144, 320
+  size: 16, 16
+Urza'sRobe
+  xy: 384, 16
   size: 16, 16
 Brawler'sCestus
   xy: 288, 320
@@ -1018,7 +1033,7 @@ Vitu-GhaziCloak
   xy: 384, 0
   size: 16, 16
 PinecrestCloak
-  xy: 384, 16
+  xy: 336, 32
   size: 16, 16
 ReliquaryRobes
   xy: 400, 0

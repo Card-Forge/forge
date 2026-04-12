@@ -165,7 +165,6 @@ public class VMatchUI implements IVTopLevelUI {
             getBtnCancel().requestFocusInWindow();
         }
 
-
         final boolean sortFieldsEnabled = lstFields.size() > 2
                 && !"OFF".equals(FModel.getPreferences().getPref(FPref.UI_MULTIPLAYER_FIELD_LAYOUT));
 

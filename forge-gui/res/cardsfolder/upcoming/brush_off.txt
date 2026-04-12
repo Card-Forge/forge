@@ -1,0 +1,6 @@
+Name:Brush Off
+ManaCost:2 U U
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 U | ValidTarget$ Spell.Instant,Spell.Sorcery | EffectZone$ All | Description$ This spell costs {1}{U} less to cast if it targets an instant or sorcery spell.
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
+Oracle:This spell costs {1}{U} less to cast if it targets an instant or sorcery spell.\nCounter target spell.
