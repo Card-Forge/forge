@@ -133,6 +133,15 @@
     },
     {
       "type": "TextButton",
+      "name": "aptracker",
+      "text": "[%120][+APIconSmall]",
+      "width": 25,
+      "height": 25,
+      "x": 83,
+      "y": 240
+    },
+    {
+      "type": "TextButton",
       "name": "openmap",
       "text": "[%80]tr(lblZoom)",
       "binding": "Map",

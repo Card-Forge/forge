@@ -38,6 +38,9 @@ public class ArchipelagoData implements SaveFileContent {
     private final Set<String> bossesDefeatedByName = new HashSet<>();
     private final Set<String> miniBossesDefeatedByName = new HashSet<>();
     private final Set<String> lockedWorldRegionsByName = new HashSet<>();
+    private final Set<Integer> manaCrystalRewardsById = new HashSet<>();
+    private final Set<Integer> goldRewardsById = new HashSet<>();
+    private final Set<Integer> challengeCoinsById = new HashSet<>();
     private int totalGoldEarned = 0;
     private int totalExtraMaxLifeEarned = 0;
     private int totalShardsEarned = 0;
@@ -94,59 +97,6 @@ public class ArchipelagoData implements SaveFileContent {
                 }
             }
         }
-    }
-
-    private void unlockSetByName(String setToUnlock) {
-        addSetUnlockedByCode(setToUnlock);
-        String setUnlockedText = "FORGE_ARCHIPELAGO: CARD SET REWARD: " + setToUnlock;
-        // Some sets don't have booster packs such as full-art land sets (P23).
-        var booster = StaticData.instance().getBoosters().get(setToUnlock);
-        if (booster != null) {
-            Current.player().addBooster(AdventureEventController.instance().generateBooster(setToUnlock));
-            setUnlockedText = "FORGE_ARCHIPELAGO: CARD SET REWARD + BOOSTER DETECTED: " + setToUnlock;
-        }
-        System.out.println(setUnlockedText);
-        GameHUD.getInstance().addNotification(setUnlockedText, 0.5f, 3f, 0.5f);
-    }
-
-    public void unlockRandomSet() {
-        // Subtract unlocked sets from full list.
-        Set<String> lockedSets = new HashSet<>(allCardSets);
-        lockedSets.removeAll(setsUnlockedByCode);
-
-        // Nothing left to unlock
-        if (lockedSets.isEmpty()) {
-            return;
-        }
-
-        // If we already received all checks, unlock the entire list of locked sets
-        if (receivedAmountOfSetUnlockChecks >= totalAmountOfSetUnlockChecks) {
-            for (String set : lockedSets) {
-                unlockSetByName(set);
-            }
-        }
-
-        float amountOfSetsToUnlock = (float) allCardSets.size() / totalAmountOfSetUnlockChecks + setUnlockChecksRestAmount;
-        int amountOfSetsToUnlockFloored = (int) Math.floor(amountOfSetsToUnlock);
-        setUnlockChecksRestAmount = (amountOfSetsToUnlock - amountOfSetsToUnlockFloored);
-        for (int i = 0; i < amountOfSetsToUnlockFloored; i++) {
-            int targetSetIndex = new Random().nextInt(lockedSets.size());
-            String setToUnlock = null;
-
-            int setIndex = 0;
-            for (String set : lockedSets) {
-                if (setIndex++ == targetSetIndex) {
-                    setToUnlock = set;
-                    break;
-                }
-            }
-
-            if (setToUnlock != null) {
-                unlockSetByName(setToUnlock);
-                lockedSets.remove(setToUnlock);
-            }
-        }
-        receivedAmountOfSetUnlockChecks++;
     }
 
     public  boolean isSetUnlocked(String setCode){
@@ -328,12 +278,59 @@ public class ArchipelagoData implements SaveFileContent {
         return result;
     }
 
-    public boolean addCardUnlockedByName(String cardName) {
-        return cardsUnlockedByName.add(cardName);
+    private void unlockSetByName(String setToUnlock) {
+        addSetUnlockedByCode(setToUnlock);
+        String setUnlockedText = "FORGE_ARCHIPELAGO: CARD SET REWARD: " + setToUnlock;
+        // Some sets don't have booster packs such as full-art land sets (P23).
+        var booster = StaticData.instance().getBoosters().get(setToUnlock);
+        if (booster != null) {
+            Current.player().addBooster(AdventureEventController.instance().generateBooster(setToUnlock));
+            setUnlockedText = "FORGE_ARCHIPELAGO: CARD SET REWARD + BOOSTER DETECTED: " + setToUnlock;
+        }
+        System.out.println(setUnlockedText);
+        GameHUD.getInstance().addNotification(setUnlockedText, 0.5f, 3f, 0.5f);
     }
-    public boolean addSetUnlockedByCode(String setCode) {
-        return setsUnlockedByCode.add(setCode);
+
+    public void unlockRandomSet() {
+        // Subtract unlocked sets from full list.
+        Set<String> lockedSets = new HashSet<>(allCardSets);
+        lockedSets.removeAll(setsUnlockedByCode);
+
+        // Nothing left to unlock
+        if (lockedSets.isEmpty()) {
+            return;
+        }
+
+        // If we already received all checks, unlock the entire list of locked sets
+        if (receivedAmountOfSetUnlockChecks >= totalAmountOfSetUnlockChecks) {
+            for (String set : lockedSets) {
+                unlockSetByName(set);
+            }
+        }
+
+        float amountOfSetsToUnlock = (float) allCardSets.size() / totalAmountOfSetUnlockChecks + setUnlockChecksRestAmount;
+        int amountOfSetsToUnlockFloored = (int) Math.floor(amountOfSetsToUnlock);
+        setUnlockChecksRestAmount = (amountOfSetsToUnlock - amountOfSetsToUnlockFloored);
+        for (int i = 0; i < amountOfSetsToUnlockFloored; i++) {
+            int targetSetIndex = new Random().nextInt(lockedSets.size());
+            String setToUnlock = null;
+
+            int setIndex = 0;
+            for (String set : lockedSets) {
+                if (setIndex++ == targetSetIndex) {
+                    setToUnlock = set;
+                    break;
+                }
+            }
+
+            if (setToUnlock != null) {
+                unlockSetByName(setToUnlock);
+                lockedSets.remove(setToUnlock);
+            }
+        }
+        receivedAmountOfSetUnlockChecks++;
     }
+
     public void unlockRegionByName(String regionName) {
         lockedWorldRegionsByName.remove(regionName);
     }
@@ -357,6 +354,41 @@ public class ArchipelagoData implements SaveFileContent {
         }
     }
 
+    public void unlockManaCrystalRewardById(Integer id, Integer amount) {
+        Current.player().addShards(amount);
+        addManaCrystalUnlockedById(id);
+    }
+
+    public void unlockGoldRewardById(Integer id, Integer amount) {
+        Current.player().giveGold(amount);
+        addGoldUnlockedById(id);
+    }
+
+    public void unlockChallengeCoinsById(Integer id, Map<String, Integer> itemNamesAndAmounts) {
+        for (Map.Entry<String, Integer> item : itemNamesAndAmounts.entrySet()) {
+            for (int i = 0; i < item.getValue(); i++) {
+                Current.player().addItem(item.getKey());
+            }
+        }
+        addChallengeCoinsUnlockedById(id);
+    }
+
+    public boolean addManaCrystalUnlockedById(Integer id) {
+        return manaCrystalRewardsById.add(id);
+    }
+    public boolean addGoldUnlockedById(Integer id) {
+        return goldRewardsById.add(id);
+    }
+    public boolean addChallengeCoinsUnlockedById(Integer id) {
+        return challengeCoinsById.add(id);
+    }
+    public boolean addCardUnlockedByName(String cardName) {
+        return cardsUnlockedByName.add(cardName);
+    }
+    public boolean addSetUnlockedByCode(String setCode) {
+        return setsUnlockedByCode.add(setCode);
+    }
+
     // Helper functions for saving and loading
     private static void saveStringSet(SaveFileData parent, String key, Set<String> set) {
         parent.storeObject(key, set.toArray(new String[0]));
@@ -368,6 +400,19 @@ public class ArchipelagoData implements SaveFileContent {
         if (!parent.containsKey(key)) return;
 
         String[] values = (String[]) parent.readObject(key);
+        Collections.addAll(set, values);
+    }
+
+    private static void saveIntegerSet(SaveFileData parent, String key, Set<Integer> set) {
+        parent.storeObject(key, set.toArray(new Integer[0]));
+    }
+
+    private static void loadIntegerSet(SaveFileData parent, String key, Set<Integer> set) {
+        set.clear();
+
+        if (!parent.containsKey(key)) return;
+
+        Integer[] values = (Integer[]) parent.readObject(key);
         Collections.addAll(set, values);
     }
 
@@ -420,6 +465,9 @@ public class ArchipelagoData implements SaveFileContent {
         }
         loadAllAvailableSets();
 
+        // Debug func
+        Current.player().addShards(900000);
+
         // Load save data
         loadStringLongMap(data, "townEvents", completedTownInnEvents);
         loadStringLongMap(data, "townQuests", completedTownQuests);
@@ -431,6 +479,9 @@ public class ArchipelagoData implements SaveFileContent {
         loadStringSet(data, "cardsUnlocked", cardsUnlockedByName);
         loadStringSet(data, "setsUnlocked", setsUnlockedByCode);
         loadStringSet(data, "lockedRegions", lockedWorldRegionsByName);
+        loadIntegerSet(data, "manaCrystalRewardsUnlocked", manaCrystalRewardsById);
+        loadIntegerSet(data, "goldRewardsUnlocked", goldRewardsById);
+        loadIntegerSet(data, "challengeCoinRewardsUnlocked", challengeCoinsById);
 
         setUnlockChecksRestAmount = data.containsKey("setUnlocksReceivedRest") ? data.readFloat("setUnlocksReceivedRest") : 0;
         receivedAmountOfSetUnlockChecks = data.containsKey("setUnlocksReceived") ? data.readInt("setUnlocksReceived") : 0;
@@ -462,6 +513,9 @@ public class ArchipelagoData implements SaveFileContent {
         saveStringSet(data, "cardsUnlocked", cardsUnlockedByName);
         saveStringSet(data, "setsUnlocked", setsUnlockedByCode);
         saveStringSet(data, "lockedRegions", lockedWorldRegionsByName);
+        saveIntegerSet(data, "manaCrystalRewardsUnlocked", manaCrystalRewardsById);
+        saveIntegerSet(data, "goldRewardsUnlocked", goldRewardsById);
+        saveIntegerSet(data, "challengeCoinRewardsUnlocked", challengeCoinsById);
 
         data.store("setUnlocksReceivedRest", setUnlockChecksRestAmount);
         data.store("setUnlocksReceived", receivedAmountOfSetUnlockChecks);
