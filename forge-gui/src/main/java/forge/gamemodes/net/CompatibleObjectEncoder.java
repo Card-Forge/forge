@@ -39,14 +39,13 @@ public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> 
         // - Client encoder (no tracker): simple IdRef replacement. No stale
         //   detection — would create StaleCardRef markers that the server
         //   resolves as detached CardViews, breaking game object identity.
-        Tracker currentTracker = this.tracker;
         boolean replace = shouldReplaceTrackables(msg);
 
         try {
             bout.write(LENGTH_PLACEHOLDER);
             if (GuiBase.hasPropertyConfig()) {
                 oout = replace
-                        ? new TrackableSerializer.ReplacingOutputStream(new LZ4BlockOutputStream(bout), currentTracker)
+                        ? new TrackableSerializer.ReplacingOutputStream(new LZ4BlockOutputStream(bout), tracker)
                         : new ObjectOutputStream(new LZ4BlockOutputStream(bout));
             } else {
                 oout = new CObjectOutputStream(new LZ4BlockOutputStream(bout), replace);

@@ -174,8 +174,6 @@ public final class TrackableSerializer {
         }
     }
 
-    // ---- Event wrapping for DeltaPacket ----
-
     /**
      * Serializable wrapper for a GameEvent whose TrackableObject references
      * have been replaced with IdRef/StaleCardRef markers. Stored in
@@ -231,8 +229,6 @@ public final class TrackableSerializer {
         }
         return events;
     }
-
-    // ---- Stream implementations ----
 
     static class ReplacingOutputStream extends ObjectOutputStream {
         private final Tracker tracker;
