@@ -1,8 +1,12 @@
 package forge.screens.settings;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -87,6 +91,26 @@ public class FilesPage extends TabPage<SettingsScreen> {
                         break;
                 }
                 });
+            }
+        }, 0);
+        //Export Game Log
+        lstItems.addItem(new Extra(Forge.getLocalizer().getMessage("lblExportGameLog"), Forge.getLocalizer().getMessage("lblExportGameLogDescription")) {
+            @Override
+            public void select() {
+                exportLogs("lblExportGameLog",
+                        new File(ForgeProfileProperties.getUserDir()),
+                        (dir, name) -> name.startsWith("forge") && name.endsWith(".log"),
+                        "forge-logs");
+            }
+        }, 0);
+        //Export Network Logs
+        lstItems.addItem(new Extra(Forge.getLocalizer().getMessage("lblExportNetworkLogs"), Forge.getLocalizer().getMessage("lblExportNetworkLogsDescription")) {
+            @Override
+            public void select() {
+                exportLogs("lblExportNetworkLogs",
+                        new File(ForgeConstants.NETWORK_LOGS_DIR),
+                        (dir, name) -> name.startsWith("network-debug-") && name.endsWith(".log"),
+                        "forge-network-logs");
             }
         }, 0);
         //Auditer
@@ -224,6 +248,30 @@ public class FilesPage extends TabPage<SettingsScreen> {
     @Override
     protected void doLayout(float width, float height) {
         lstItems.setBounds(0, 0, width, height);
+    }
+
+    private void exportLogs(String dialogTitleKey, File sourceDir, FilenameFilter filter, String outputPrefix) {
+        if (Forge.getDeviceAdapter().needFileAccess()) {
+            Forge.getDeviceAdapter().requestFileAcces();
+            return;
+        }
+        final String dialogTitle = Forge.getLocalizer().getMessage(dialogTitleKey);
+        FThreads.invokeInEdtLater(() -> LoadingOverlay.show(Forge.getLocalizer().getMessage("lblExporting"), true, () -> {
+            try {
+                File[] matches = sourceDir.isDirectory() ? sourceDir.listFiles(filter) : null;
+                if (matches == null || matches.length == 0) {
+                    FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblNoLogFilesFound"), dialogTitle, FOptionPane.INFORMATION_ICON);
+                    return;
+                }
+                String stamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
+                File downloads = new FileHandle(Forge.getDeviceAdapter().getDownloadsDir()).file();
+                File zipFile = new File(downloads, outputPrefix + "-" + stamp + ".zip");
+                ZipUtil.zipFiles(Arrays.asList(matches), zipFile);
+                FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblSuccess") + "\n" + zipFile.getAbsolutePath(), dialogTitle, FOptionPane.INFORMATION_ICON);
+            } catch (IOException e) {
+                FOptionPane.showMessageDialog(e.toString(), Forge.getLocalizer().getMessage("lblError"), FOptionPane.ERROR_ICON);
+            }
+        }));
     }
 
     private abstract class FilesItem {
