@@ -54,7 +54,7 @@ public class ArchipelagoData implements SaveFileContent {
     private final int totalTownQuestsAndEventsBreakpoint = 2; // Reward for every 2 town events or quests done.
     private final int totalCardsEarnedBreakPoint = 80; // Reward for every 80 unique cards gained.
 
-    private enum ARCHIPELAGO_CHECK_TYPES {BATTLES_WON, TOWN_QUESTS_AND_EVENTS_DONE, TOTAL_CARDS_EARNED};
+    private enum ARCHIPELAGO_CHECK_TYPES {BATTLES_WON, TOWN_QUESTS_AND_EVENTS_DONE, TOTAL_CARDS_EARNED, BOSS_WHITE_DEFEATED, BOSS_BLUE_DEFEATED, BOSS_BLACK_DEFEATED, BOSS_RED_DEFEATED, BOSS_GREEN_DEFEATED, BOSS_COLORLESS_DEFEATED, BOSS_WUBRG_DEFEATED, WIN_CONDITION_CLEARED};
 
     public ArchipelagoData() {
         instance = this;
@@ -93,6 +93,30 @@ public class ArchipelagoData implements SaveFileContent {
                 if (totalCardsEarned > 0 && totalCardsEarned % totalCardsEarnedBreakPoint == 0) {
                     unlockRandomSet();
                 }
+            }
+            case BOSS_WHITE_DEFEATED -> {
+                // Todo: Signal the APWorld that the boss is defeated
+            }
+            case BOSS_BLUE_DEFEATED -> {
+                // Todo: Signal the APWorld that the boss is defeated
+            }
+            case BOSS_BLACK_DEFEATED -> {
+                // Todo: Signal the APWorld that the boss is defeated
+            }
+            case BOSS_RED_DEFEATED -> {
+                // Todo: Signal the APWorld that the boss is defeated
+            }
+            case BOSS_GREEN_DEFEATED -> {
+                // Todo: Signal the APWorld that the boss is defeated
+            }
+            case BOSS_COLORLESS_DEFEATED -> {
+                // Todo: Signal the APWorld that the boss is defeated
+            }
+            case BOSS_WUBRG_DEFEATED -> {
+                // Todo: Signal the APWorld that the boss is defeated
+            }
+            case  WIN_CONDITION_CLEARED -> {
+                // Todo: Signal the APWorld that the win condition is reached
             }
         }
     }
@@ -269,9 +293,25 @@ public class ArchipelagoData implements SaveFileContent {
     }
     public boolean addBossDefeated(String bossName) {
         boolean result = bossesDefeatedByName.add(bossName);
+        switch (bossName.toLowerCase()) {
+            case "akroma":
+                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BOSS_WHITE_DEFEATED);
+            case "lorthos":
+                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BOSS_BLUE_DEFEATED);
+            case "griselbrand":
+                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BOSS_BLACK_DEFEATED);
+            case "lathliss":
+                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BOSS_RED_DEFEATED);
+            case "ghalta":
+                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BOSS_GREEN_DEFEATED);
+            case "emrakul":
+                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BOSS_COLORLESS_DEFEATED);
+            case "sliver queen":
+                updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.BOSS_WUBRG_DEFEATED);
+        }
         // Win condition is reached if all bosses have been defeated.
         if (bossesDefeatedByName.containsAll(mainBosses)) {
-            // Todo: Inform the APWorld that the win condition is reached.
+            updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES.WIN_CONDITION_CLEARED);
         }
         return result;
     }
