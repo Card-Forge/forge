@@ -339,6 +339,7 @@ public class ArchipelagoData implements SaveFileContent {
 
     /// --- The functions below are responsible for mutating the user data we store in the save file ---
     // Todo: Make the functions below private where possible, rewrite other code to account for this.
+    // Todo: Make sure the functions below trigger all related checks in `updatePlayerChecks` when applicable.
     // Todo: Defeating a (mini-)boss should probably count as a check.
     // Note that the name of a boss is not unique so we'll need to filter from all enemies which have a `boss` value of `true`.
     // Returns `true` if the boss was not already defeated before.
