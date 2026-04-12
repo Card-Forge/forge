@@ -38,9 +38,7 @@ public class ArchipelagoData implements SaveFileContent {
     private final Set<String> bossesDefeatedByName = new HashSet<>();
     private final Set<String> miniBossesDefeatedByName = new HashSet<>();
     private final Set<String> lockedWorldRegionsByName = new HashSet<>();
-    private final Set<Integer> manaCrystalRewardsById = new HashSet<>();
-    private final Set<Integer> goldRewardsById = new HashSet<>();
-    private final Set<Integer> challengeCoinsById = new HashSet<>();
+    private int lastArchipelagoRewardIndex = 0;
     private int totalGoldEarned = 0;
     private int totalExtraMaxLifeEarned = 0;
     private int totalShardsEarned = 0;
@@ -356,31 +354,23 @@ public class ArchipelagoData implements SaveFileContent {
 
     public void unlockManaCrystalRewardById(Integer id, Integer amount) {
         Current.player().addShards(amount);
-        addManaCrystalUnlockedById(id);
     }
 
     public void unlockGoldRewardById(Integer id, Integer amount) {
         Current.player().giveGold(amount);
-        addGoldUnlockedById(id);
     }
 
+    // Todo: Verify that this is actually what we want and it's working
     public void unlockChallengeCoinsById(Integer id, Map<String, Integer> itemNamesAndAmounts) {
         for (Map.Entry<String, Integer> item : itemNamesAndAmounts.entrySet()) {
             for (int i = 0; i < item.getValue(); i++) {
                 Current.player().addItem(item.getKey());
             }
         }
-        addChallengeCoinsUnlockedById(id);
     }
 
-    public boolean addManaCrystalUnlockedById(Integer id) {
-        return manaCrystalRewardsById.add(id);
-    }
-    public boolean addGoldUnlockedById(Integer id) {
-        return goldRewardsById.add(id);
-    }
-    public boolean addChallengeCoinsUnlockedById(Integer id) {
-        return challengeCoinsById.add(id);
+    public void setLastArchipelagoRewardIndex(int id) {
+        lastArchipelagoRewardIndex = id;
     }
     public boolean addCardUnlockedByName(String cardName) {
         return cardsUnlockedByName.add(cardName);
@@ -479,9 +469,6 @@ public class ArchipelagoData implements SaveFileContent {
         loadStringSet(data, "cardsUnlocked", cardsUnlockedByName);
         loadStringSet(data, "setsUnlocked", setsUnlockedByCode);
         loadStringSet(data, "lockedRegions", lockedWorldRegionsByName);
-        loadIntegerSet(data, "manaCrystalRewardsUnlocked", manaCrystalRewardsById);
-        loadIntegerSet(data, "goldRewardsUnlocked", goldRewardsById);
-        loadIntegerSet(data, "challengeCoinRewardsUnlocked", challengeCoinsById);
 
         setUnlockChecksRestAmount = data.containsKey("setUnlocksReceivedRest") ? data.readFloat("setUnlocksReceivedRest") : 0;
         receivedAmountOfSetUnlockChecks = data.containsKey("setUnlocksReceived") ? data.readInt("setUnlocksReceived") : 0;
@@ -489,6 +476,7 @@ public class ArchipelagoData implements SaveFileContent {
         totalGoldEarned = data.containsKey("totalGold") ? data.readInt("totalGold") : 0;
         totalExtraMaxLifeEarned = data.containsKey("extraLife") ? data.readInt("extraLife") : 0;
         totalShardsEarned = data.containsKey("shards") ? data.readInt("shards") : 0;
+        lastArchipelagoRewardIndex = data.containsKey("lastArchipelagoRewardIndex") ? data.readInt("lastArchipelagoRewardIndex") : 0;
         archipelagoMode = ArchipelagoMode.values()[data.containsKey("archipelagoMode") ? data.readInt("archipelagoMode") : 0];
         GameHUD.getInstance().setApButtonVisibility(archipelagoMode == ArchipelagoMode.networked_archipelago);
         if (archipelagoMode == ArchipelagoMode.networked_archipelago) {
@@ -513,9 +501,6 @@ public class ArchipelagoData implements SaveFileContent {
         saveStringSet(data, "cardsUnlocked", cardsUnlockedByName);
         saveStringSet(data, "setsUnlocked", setsUnlockedByCode);
         saveStringSet(data, "lockedRegions", lockedWorldRegionsByName);
-        saveIntegerSet(data, "manaCrystalRewardsUnlocked", manaCrystalRewardsById);
-        saveIntegerSet(data, "goldRewardsUnlocked", goldRewardsById);
-        saveIntegerSet(data, "challengeCoinRewardsUnlocked", challengeCoinsById);
 
         data.store("setUnlocksReceivedRest", setUnlockChecksRestAmount);
         data.store("setUnlocksReceived", receivedAmountOfSetUnlockChecks);
@@ -523,6 +508,7 @@ public class ArchipelagoData implements SaveFileContent {
         data.store("totalGold", totalGoldEarned);
         data.store("extraLife", totalExtraMaxLifeEarned);
         data.store("shards", totalShardsEarned);
+        data.store("lastArchipelagoRewardIndex", lastArchipelagoRewardIndex);
         data.store("archipelagoMode", archipelagoMode.ordinal());
 
         return data;
