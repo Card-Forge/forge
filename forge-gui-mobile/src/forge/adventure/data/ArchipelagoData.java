@@ -55,7 +55,7 @@ public class ArchipelagoData implements SaveFileContent {
     private final int totalTownQuestsAndEventsBreakpoint = 2; // Reward for every 2 town events or quests done.
     private final int totalCardsEarnedBreakPoint = 80; // Reward for every 80 unique cards gained.
 
-    private enum ARCHIPELAGO_CHECK_TYPES {BATTLES_WON, TOWN_QUESTS_AND_EVENTS_DONE, TOTAL_CARDS_EARNED, BOSS_WHITE_DEFEATED, BOSS_BLUE_DEFEATED, BOSS_BLACK_DEFEATED, BOSS_RED_DEFEATED, BOSS_GREEN_DEFEATED, BOSS_COLORLESS_DEFEATED, BOSS_WUBRG_DEFEATED, WIN_CONDITION_CLEARED};
+    public enum ARCHIPELAGO_CHECK_TYPES {BATTLES_WON, TOWN_QUESTS_AND_EVENTS_DONE, TOTAL_CARDS_EARNED, BOSS_WHITE_DEFEATED, BOSS_BLUE_DEFEATED, BOSS_BLACK_DEFEATED, BOSS_RED_DEFEATED, BOSS_GREEN_DEFEATED, BOSS_COLORLESS_DEFEATED, BOSS_WUBRG_DEFEATED, WIN_CONDITION_CLEARED};
 
     public ArchipelagoData() {
         instance = this;
@@ -231,7 +231,9 @@ public class ArchipelagoData implements SaveFileContent {
             setUnlockedText = "FORGE_ARCHIPELAGO: CARD SET REWARD + BOOSTER DETECTED: " + setToUnlock;
         }
         System.out.println(setUnlockedText);
-        GameHUD.getInstance().addNotification(setUnlockedText, 0.5f, 3f, 0.5f);
+        if (archipelagoMode == ArchipelagoMode.solo_randomizer) {
+            generateGameNotification(setUnlockedText);
+        }
     }
 
     public void unlockRandomSet() {
@@ -299,7 +301,8 @@ public class ArchipelagoData implements SaveFileContent {
     /// --- End ---
 
     /// --- The checks below can be called from the networked part of the AP implementation. Note that `setLastArchipelagoRewardIndex` must be called manually. ---
-    public void unlockManaCrystalReward(Integer id, Integer amount) {
+    /// Todo: Add custom pop-up message to be shown upon receiving a check.
+    public void unlockManaCrystalReward(Integer amount) {
         Current.player().addShards(amount);
         addShards(amount);
     }
@@ -325,12 +328,17 @@ public class ArchipelagoData implements SaveFileContent {
     }
 
     // Todo: This should be called by the networked part of the AP implementation when we receive a reward.
-    public void setLastArchipelagoRewardIndex(int id) {
-        lastArchipelagoRewardIndex = id;
+    public void incrementLastArchipelagoRewardIndex() {
+        lastArchipelagoRewardIndex++;
+    }
+
+    public void generateGameNotification(String message) {
+        GameHUD.getInstance().addNotification(message, 0.5f, 3f, 0.5f);
     }
     /// --- End ---
 
     /// --- The functions below are responsible for mutating the user data we store in the save file ---
+    // Todo: Make the functions below private where possible, rewrite other code to account for this.
     // Todo: Defeating a (mini-)boss should probably count as a check.
     // Note that the name of a boss is not unique so we'll need to filter from all enemies which have a `boss` value of `true`.
     // Returns `true` if the boss was not already defeated before.
@@ -414,7 +422,9 @@ public class ArchipelagoData implements SaveFileContent {
             }
             String regionUnlockMessage = "FORGE_ARCHIPELAGO: REGION REWARD DETECTED: " + itemName;
             System.out.println(regionUnlockMessage);
-            GameHUD.getInstance().addNotification(regionUnlockMessage, 0.5f, 3f, 0.5f);
+            if (archipelagoMode == ArchipelagoMode.solo_randomizer) {
+                generateGameNotification(regionUnlockMessage);
+            }
         }
         itemsGainedByName.merge(itemName, 1L, Long::sum);
         System.out.println("FORGE_ARCHIPELAGO: ITEM REWARD DETECTED: " + itemName);
