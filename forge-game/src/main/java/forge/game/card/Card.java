@@ -5275,14 +5275,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
     }
 
-    public final void removeIntrinsicKeyword(final String s) {
-        if (currentState.removeIntrinsicKeyword(s)) {
-            updateKeywords();
-        }
-    }
-
-    public final void removeIntrinsicKeyword(final KeywordInterface s) {
-        if (currentState.removeIntrinsicKeyword(s)) {
+    public final void removeIntrinsicKeyword(final Keyword k) {
+        if (currentState.removeIntrinsicKeyword(k)) {
             updateKeywords();
         }
     }
