@@ -353,6 +353,7 @@ public class VMatchUI implements IVTopLevelUI {
 
         for (final Map.Entry<Integer, List<VField>> entry : fieldsByCell.entrySet()) {
             final DragCell cell = lstFields.get(entry.getKey()).getParentCell();
+            if (cell == null) { continue; }
             final List<VField> fields = entry.getValue();
 
             if (!splitMode) {
