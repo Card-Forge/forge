@@ -2574,6 +2574,28 @@
      ]
     }
   },
+  {
+    "name": "Ajani's Amulet",
+    "description": "Gain 1 life at each of your upkeeps",
+    "equipmentSlot": "Neck",
+    "iconName": "Ajani'sAmulet",
+    "effect": {
+      "startBattleWithCard": [
+        "Ajani's Mantra"
+      ]
+    }
+  },
+  {
+    "name": "Pack Leader Pants",
+    "description": "2/2 dog, Other dogs get +1/+1 and attack safely",
+    "equipmentSlot": "Boots",
+    "iconName": "PackLeaderPants",
+    "effect": {
+      "startBattleWithCard": [
+        "Pack Leader"
+      ]
+    }
+  },
     {
     "name": "Mask of Compulsion",
     "description": "1U and discard to draw or 1U and sac to draw",

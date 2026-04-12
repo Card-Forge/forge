@@ -1,0 +1,9 @@
+Name:Glorious Decay
+ManaCost:1 G
+Types:Instant
+A:SP$ Charm | Choices$ DBDestroy,DBDamage,DBChangeZone
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact | SpellDescription$ Destroy target artifact.
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature.withFlying | ValidTgtDesc$ creature with flying. | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature with flying.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | ValidTgtDesc$ card in a graveyard. | SubAbility$ DBDraw | SpellDescription$ Exile target card from a graveyard. Draw a card.
+SVar:DBDraw:DB$ Draw
+Oracle:Choose one —\n• Destroy target artifact.\n• Glorious Decay deals 4 damage to target creature with flying.\n• Exile target card from a graveyard. Draw a card.

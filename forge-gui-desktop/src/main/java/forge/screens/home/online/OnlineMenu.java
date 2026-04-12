@@ -1,13 +1,16 @@
 package forge.screens.home.online;
 
+import java.awt.Desktop;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import javax.swing.JSeparator;
 
 import forge.gui.FNetOverlay;
+import forge.localinstance.properties.ForgeConstants;
 import forge.util.Localizer;
 
 /**
@@ -19,7 +22,7 @@ public final class OnlineMenu {
         JMenu menu = new JMenu(Localizer.getInstance().getMessage("lblOnline"));
         menu.setMnemonic(KeyEvent.VK_O);
         menu.add(getMenuItem_ConnectToServer());
-        menu.add(new JSeparator());
+        menu.add(getMenuItem_OpenNetworkLogs());
         menu.add(chatItem);
         return menu;
     }
@@ -41,6 +44,26 @@ public final class OnlineMenu {
     private static JMenuItem getMenuItem_ConnectToServer() {
         JMenuItem menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblConnectToServer"));
         menuItem.addActionListener(e -> CSubmenuOnlineLobby.SINGLETON_INSTANCE.connectToServer());
+        return menuItem;
+    }
+
+    private static JMenuItem getMenuItem_OpenNetworkLogs() {
+        JMenuItem menuItem = new JMenuItem(Localizer.getInstance().getMessage("lblOpenNetworkLogs"));
+        menuItem.addActionListener(e -> {
+            File dir = new File(ForgeConstants.NETWORK_LOGS_DIR);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            try {
+                if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+                    Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + dir.getCanonicalPath());
+                } else {
+                    Desktop.getDesktop().open(dir);
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
         return menuItem;
     }
 }

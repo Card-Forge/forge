@@ -1,0 +1,5 @@
+Name:Stand Up for Yourself
+ManaCost:2 W
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature.powerGE3 | ValidTgtDesc$ creature with power 3 or greater | SpellDescription$ Destroy target creature with power 3 or greater.
+Oracle:Destroy target creature with power 3 or greater.

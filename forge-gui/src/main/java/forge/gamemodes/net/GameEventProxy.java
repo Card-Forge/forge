@@ -2,26 +2,17 @@ package forge.gamemodes.net;
 
 import forge.game.card.CardView;
 import forge.game.event.GameEvent;
-import forge.game.player.PlayerView;
 import forge.trackable.TrackableObject;
-import forge.trackable.TrackableTypes;
+import forge.trackable.TrackableProperty;
 import forge.trackable.TrackableTypes.TrackableType;
 import forge.trackable.Tracker;
+import forge.util.IHasForgeLog;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Wraps a {@link GameEvent} by serializing it into a byte array with all
- * {@link TrackableObject} references replaced by lightweight {@link IdRef}
- * markers. On the client side, the proxy is unwrapped by resolving each
- * IdRef from the client's {@link Tracker}.
- *
- * <p>This avoids Java serialization expanding TrackableObject references into
- * the full game state object graph when events are sent over the network.
- */
-public class GameEventProxy implements Serializable, IHasNetLog {
+public class GameEventProxy implements Serializable, IHasForgeLog {
     private static final long serialVersionUID = 1L;
 
     private final byte[] eventData;
@@ -31,10 +22,13 @@ public class GameEventProxy implements Serializable, IHasNetLog {
     }
 
     /**
-     * Wraps a GameEvent by serializing it with TrackableObject references
-     * replaced by IdRef markers. If a tracker is provided, verifies that
-     * each replaced object is present in the tracker (server-side sanity
-     * check). Returns null if verification fails.
+     * Wraps a {@link GameEvent} by serializing it into a byte array with
+     * {@link TrackableObject} references replaced by lightweight {@link IdRef}
+     * markers.
+     * Returns null if verification fails.
+     *
+     * <p>This avoids Java serialization expanding TrackableObject references into
+     * the full game state object graph when events are sent over the network.
      */
     public static GameEventProxy wrap(GameEvent event, Tracker tracker) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream(256);
@@ -65,9 +59,8 @@ public class GameEventProxy implements Serializable, IHasNetLog {
     }
 
     /**
-     * Wraps a list of events. Uses the tracker for server-side sanity
-     * checking: events with unresolvable references are dropped rather
-     * than sent (the client would fail to resolve them too).
+     * Wraps a list of events. Events with unresolvable references are dropped
+     * rather than sent (the client would fail to resolve them too).
      */
     public static List<Object> wrapAll(List<GameEvent> events, Tracker tracker) {
         List<Object> result = new ArrayList<>(events.size());
@@ -114,15 +107,6 @@ public class GameEventProxy implements Serializable, IHasNetLog {
         return result;
     }
 
-    // Only CardView and PlayerView are replaced with IdRef markers. These two
-    // types carry the largest object graphs and are always present in the GameView
-    // (registered via updateObjLookup on the IO thread before proxy unwrapping).
-    // Other TrackableObject types (StackItemView, SpellAbilityView, CombatView)
-    // are either ephemeral or not reachable from GameView's property graph, so
-    // they serialize normally.
-    private static final byte TYPE_CARD_VIEW = 0;
-    private static final byte TYPE_PLAYER_VIEW = 1;
-
     /**
      * Lightweight serializable marker that replaces a TrackableObject reference
      * during proxy serialization.
@@ -139,27 +123,27 @@ public class GameEventProxy implements Serializable, IHasNetLog {
     }
 
     /**
-     * Returns the type tag for the given TrackableObject, or -1 if unsupported.
+     * Marker for a stale CardView reference — the event holds a previous
+     * incarnation of a card (same ID, different Java object) that has since
+     * been replaced in the tracker by a zone-change copy. Carries the
+     * image key and name from the original so the client can construct a
+     * detached CardView with the correct display data.
      */
-    private static byte typeTagFor(TrackableObject obj) {
-        if (obj instanceof CardView) return TYPE_CARD_VIEW;
-        if (obj instanceof PlayerView) return TYPE_PLAYER_VIEW;
-        return -1;
-    }
+    static final class StaleCardRef implements Serializable {
+        private static final long serialVersionUID = 1L;
+        final int id;
+        final String imageKey;
+        final String name;
 
-    /**
-     * Returns the TrackableType for the given type tag, for Tracker lookup.
-     */
-    private static TrackableType<?> trackableTypeFor(byte typeTag) {
-        switch (typeTag) {
-            case TYPE_CARD_VIEW: return TrackableTypes.CardViewType;
-            case TYPE_PLAYER_VIEW: return TrackableTypes.PlayerViewType;
-            default: return null;
+        StaleCardRef(int id, String imageKey, String name) {
+            this.id = id;
+            this.imageKey = imageKey;
+            this.name = name;
         }
     }
 
     /**
-     * ObjectOutputStream that replaces every TrackableObject with an IdRef.
+     * ObjectOutputStream that replaces TrackableObject with an IdRef.
      * If a tracker is provided, verifies each ID is resolvable as a
      * server-side sanity check.
      */
@@ -180,17 +164,34 @@ public class GameEventProxy implements Serializable, IHasNetLog {
         @Override
         protected Object replaceObject(Object obj) {
             if (obj instanceof TrackableObject trackable) {
-                byte tag = typeTagFor(trackable);
-                if (tag >= 0) {
+                int tag = DeltaPacket.typeTagFor(trackable);
+                // Only CardView and PlayerView are replaced with IdRef markers. These two
+                // types carry the largest object graphs and are always present in the GameView
+                // (registered via updateObjLookup on the IO thread before proxy unwrapping).
+                // Other TrackableObject types (StackItemView, SpellAbilityView, CombatView)
+                // are either ephemeral or not reachable from GameView's property graph, so
+                // they serialize normally.
+                if (tag == DeltaPacket.TYPE_CARD_VIEW || tag == DeltaPacket.TYPE_PLAYER_VIEW) {
                     if (tracker != null) {
-                        TrackableType<?> type = trackableTypeFor(tag);
-                        if (type != null && tracker.getObj(type, trackable.getId()) == null) {
-                            netLog.debug("Server-side check: {} id={} not in tracker",
-                                    trackable.getClass().getSimpleName(), trackable.getId());
-                            unresolvableRefs = true;
+                        TrackableType<?> type = DeltaPacket.trackableTypeFor(tag);
+                        if (type != null) {
+                            Object tracked = tracker.getObj(type, trackable.getId());
+                            if (tracked == null) {
+                                netLog.debug("Server-side check: {} id={} not in tracker",
+                                        trackable.getClass().getSimpleName(), trackable.getId());
+                                unresolvableRefs = true;
+                            } else if (tracked != trackable && tag == DeltaPacket.TYPE_CARD_VIEW) {
+                                // Stale reference: the event holds a previous incarnation
+                                // of this card (e.g. ability source that changed zones).
+                                // Preserve the image key so the client displays correctly
+                                CardView cv = (CardView) trackable;
+                                String imgKey = cv.getCurrentState() != null
+                                        ? cv.getCurrentState().getImageKey(null) : null;
+                                return new StaleCardRef(cv.getId(), imgKey, cv.getName());
+                            }
                         }
                     }
-                    return new IdRef(tag, trackable.getId());
+                    return new IdRef((byte) tag, trackable.getId());
                 }
             }
             return obj;
@@ -236,8 +237,22 @@ public class GameEventProxy implements Serializable, IHasNetLog {
 
         @Override
         protected Object resolveObject(Object obj) {
+            if (obj instanceof StaleCardRef ref) {
+                // Create a detached CardView with the correct image key.
+                // Not registered in the tracker — used only for display
+                // (game log thumbnail) so it won't affect live game state
+                CardView detached = new CardView(ref.id, tracker);
+                if (ref.name != null) {
+                    detached.set(TrackableProperty.Name, ref.name);
+                    detached.getCurrentState().set(TrackableProperty.Name, ref.name);
+                }
+                if (ref.imageKey != null) {
+                    detached.getCurrentState().set(TrackableProperty.ImageKey, ref.imageKey);
+                }
+                return detached;
+            }
             if (obj instanceof IdRef ref) {
-                TrackableType<?> type = trackableTypeFor(ref.typeTag);
+                TrackableType<?> type = DeltaPacket.trackableTypeFor(ref.typeTag);
                 if (type != null) {
                     Object resolved = tracker.getObj(type, ref.id);
                     if (resolved == null) {

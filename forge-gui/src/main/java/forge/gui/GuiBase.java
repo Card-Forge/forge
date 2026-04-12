@@ -74,7 +74,7 @@ public class GuiBase {
     }
     public static int getAndroidAPILevel() { return androidAPI; }
 
-    public static boolean isNetworkplay(IGuiGame game) {
+    public static boolean isNetPlay(IGuiGame game) {
         if (game != null) {
             // query AbstractGuiGame implementation if provided
             return game.isNetGame();

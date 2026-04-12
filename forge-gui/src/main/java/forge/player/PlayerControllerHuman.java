@@ -48,6 +48,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.match.input.*;
+import forge.util.IHasForgeLog;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.control.FControlGamePlayback;
@@ -87,7 +88,8 @@ import java.util.stream.Collectors;
  * <p>
  * Handles phase skips for now.
  */
-public class PlayerControllerHuman extends PlayerController implements IGameController {
+public class PlayerControllerHuman extends PlayerController implements IGameController, IHasForgeLog {
+
     /**
      * Cards this player may look at right now, for example when searching a
      * library.
@@ -824,7 +826,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public Player chooseStartingPlayer(final boolean isFirstGame) {
-        String prompt = null;
+        String prompt;
         if (isFirstGame) {
             prompt = localizer.getMessage("lblYouHaveWonTheCoinToss", player.getName());
         } else {
@@ -972,7 +974,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         tempShowCards(topN);
         if (FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) &&
-                (!GuiBase.getInterface().isLibgdxPort()) && (!GuiBase.isNetworkplay(getGui()))) { //prevent crash for desktop vs mobile port it will crash the netplay since mobile doesnt have manipulatecardlist, send the alternate below
+                (!GuiBase.getInterface().isLibgdxPort()) && (!GuiBase.isNetPlay(getGui()))) { //prevent crash for desktop vs mobile port it will crash the netplay since mobile doesnt have manipulatecardlist, send the alternate below
             CardCollectionView cardList = player.getCardsIn(ZoneType.Library);
             ImmutablePair<CardCollection, CardCollection> result =
                     arrangeForMove(localizer.getMessage("lblMoveCardstoToporBbottomofLibrary"), cardList, topN, true, true);
@@ -1497,6 +1499,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public List<SpellAbility> chooseSpellAbilityToPlay() {
+        netLog.trace("ENTRY for player {}, phase={}, isGameOver={}",
+                player.getName(), getGame().getPhaseHandler().getPhase(), getGame().isGameOver());
         final MagicStack stack = getGame().getStack();
 
         if (mayAutoPass()) {
@@ -1521,12 +1525,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     e.printStackTrace();
                 }
             }
+            netLog.trace("Returning null (mayAutoPass) for player {}", player.getName());
             return null;
         }
 
         if (stack.isEmpty()) {
             if (getGui().isUiSetToSkipPhase(getGame().getPhaseHandler().getPlayerTurn().getView(),
                     getGame().getPhaseHandler().getPhase())) {
+                netLog.trace("Returning null (skipPhase) for player {}", player.getName());
                 return null; // avoid prompt for input if stack is empty and
                 // player is set to skip the current phase
             }
@@ -1539,12 +1545,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 } catch (final InterruptedException e) {
                     e.printStackTrace();
                 }
+                netLog.trace("Returning null (autoYield) for player {}", player.getName());
                 return null;
             }
         }
 
+        netLog.trace("Creating InputPassPriority for player {}", player.getName());
         final InputPassPriority defaultInput = new InputPassPriority(this);
         defaultInput.showAndWait();
+        netLog.trace("InputPassPriority returned for player {}, chosenSa={}", player.getName(), defaultInput.getChosenSa());
         return defaultInput.getChosenSa();
     }
 
@@ -1897,7 +1906,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         for (int i = 1; i < res.size(); i++) {
             // prompt user if there are multiple different options
             if (!res.get(i).equals(firstStr)) {
-                if (!GuiBase.isNetworkplay(getGui())) //non network game don't need serialization
+                if (!GuiBase.isNetPlay(getGui())) //non network game don't need serialization
                     return getGui().one(prompt, possibleReplacers);
                 ReplacementEffectView rev = getGui().one(prompt, possibleReplacers.stream().map(ReplacementEffect::getView).collect(Collectors.toList()));
                 return possibleReplacers.stream().filter(re -> re.getId() == rev.getId()).findAny().orElse(first);
@@ -1917,7 +1926,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return first;
         }
         String prompt = Localizer.getInstance().getMessage(isCostReduction ? "lblChooseCostReduction" : "lblChooseAbilityToPlay");
-        if (!GuiBase.isNetworkplay(getGui())) //non network game don't need serialization
+        if (!GuiBase.isNetPlay(getGui())) //non network game don't need serialization
             return getGui().one(prompt, possibleStatics);
         StaticAbilityView stv = getGui().one(prompt, possibleStatics.stream().map(StaticAbility::getView).collect(Collectors.toList()));
         return possibleStatics.stream().filter(st -> st.getId() == stv.getId()).findAny().orElse(first);
@@ -2364,6 +2373,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             if (currentInput instanceof InputPassPriority) {
                 // ensure prompt updated if needed
                 currentInput.showMessageInitial();
+            }
+            if (gui.isNetGame()) {
+                // Flush events to remote clients — the undo modifies game state
+                // (untaps lands, etc.) after the prompt is shown, and without this
+                // the updated state sits in the forwarder buffer until the next action.
+                inputQueue.updateObservers();
             }
             return true;
         }
@@ -3353,7 +3368,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public void awaitNextInput() {
         getGui().awaitNextInput();
     }
-
     @Override
     public void cancelAwaitNextInput() {
         getGui().cancelAwaitNextInput();
@@ -3468,6 +3482,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public boolean isOrderedZone() {
         return FModel.getPreferences().getPrefBoolean(FPref.UI_ORDER_HAND);
+    }
+
+    @Override
+    public void requestResync() {
+        // No-op for local games - resync is only used for network play
     }
 
 }

@@ -150,7 +150,7 @@ public enum TriggerType {
     Transformed(TriggerTransformed.class),
     TurnBegin(TriggerTurnBegin.class),
     TurnFaceUp(TriggerTurnFaceUp.class),
-    Unattach(TriggerUnattach.class),
+    Unattached(TriggerUnattached.class),
     UnlockDoor(TriggerUnlockDoor.class),
     UntapAll(TriggerUntapAll.class),
     Untaps(TriggerUntaps.class),

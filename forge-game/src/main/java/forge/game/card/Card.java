@@ -4049,7 +4049,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.AttachSource, this);
         runParams.put(AbilityKey.Object, old);
-        getGame().getTriggerHandler().runTrigger(TriggerType.Unattach, runParams, false);
+        getGame().getTriggerHandler().runTrigger(TriggerType.Unattached, runParams, false);
 
         runUnattachCommands();
     }

@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import forge.game.player.PlayerView;
 import forge.gamemodes.net.CompatibleObjectDecoder;
 import forge.gamemodes.net.CompatibleObjectEncoder;
-import forge.gamemodes.net.IHasNetLog;
+import forge.util.IHasForgeLog;
 import forge.gamemodes.net.ReplyPool;
 import forge.gamemodes.net.event.*;
 import forge.gui.interfaces.IGuiGame;
@@ -15,28 +15,36 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.handler.timeout.IdleStateHandler;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
-public class FGameClient implements IToServer, IHasNetLog {
+public class FGameClient implements IToServer, IHasForgeLog {
+
     static final int HEARTBEAT_INTERVAL_SECONDS = Integer.getInteger("forge.net.heartbeatInterval", 15);
     private final IGuiGame clientGui;
     private final String hostname;
     private final Integer port;
+    private final String username;
     private final List<ILobbyListener> lobbyListeners = Lists.newArrayList();
     private final ReplyPool replies = new ReplyPool();
     private volatile boolean disconnectSimulated;
     private Channel channel;
 
     public FGameClient(String username, String roomKey, IGuiGame clientGui, String hostname, int port) {
+        this.username = username;
         this.clientGui = clientGui;
         this.hostname = hostname;
         this.port = port;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     final IGuiGame getGui() {
@@ -57,7 +65,8 @@ public class FGameClient implements IToServer, IHasNetLog {
                 public void initChannel(final SocketChannel ch) throws Exception {
                     final ChannelPipeline pipeline = ch.pipeline();
                     pipeline.addLast(
-                            new CompatibleObjectEncoder(),
+                            new LoggingHandler(LogLevel.INFO),
+                            new CompatibleObjectEncoder(null), // Client doesn't need byte tracking
                             new CompatibleObjectDecoder(9766*1024, ClassResolvers.cacheDisabled(null)),
                             new IdleStateHandler(0, HEARTBEAT_INTERVAL_SECONDS, 0, TimeUnit.SECONDS),
                             new MessageHandler(),
@@ -123,7 +132,7 @@ public class FGameClient implements IToServer, IHasNetLog {
     }
 
     @Override
-    public Object sendAndWait(final IdentifiableNetEvent event) throws TimeoutException {
+    public Object sendAndWait(final IdentifiableNetEvent event) {
         replies.initialize(event.getId());
 
         send(event);
@@ -179,6 +188,8 @@ public class FGameClient implements IToServer, IHasNetLog {
 
         @Override
         public void channelInactive(final ChannelHandlerContext ctx) throws Exception {
+            netLog.info("[Disconnect] Channel became inactive, notifying {} listeners", lobbyListeners.size());
+            netLog.info("[Disconnect] Remote address was: {}", ctx.channel().remoteAddress());
             for (final ILobbyListener listener : lobbyListeners) {
                 listener.close();
             }

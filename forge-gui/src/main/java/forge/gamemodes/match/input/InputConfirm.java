@@ -201,6 +201,11 @@ public class InputConfirm extends InputSyncronizedBase {
         }
     }
     
+    @Override
+    protected final boolean allowAwaitNextInput() {
+        return true;
+    }
+
     /** {@inheritDoc} */
     @Override
     protected final void onOk() {
