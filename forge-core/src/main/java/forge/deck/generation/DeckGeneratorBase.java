@@ -69,7 +69,13 @@ public abstract class DeckGeneratorBase {
     }
 
     public DeckGeneratorBase(IDeckGenPool pool0, DeckFormat format0) {
-        pool = new DeckGenPool(format0.getCardPool(pool0).getAllCards());
+        final Iterable<PaperCard> allCards = format0.getCardPool(pool0).getAllCards();
+        final List<PaperCard> allCardsPreferredEditions = new ArrayList<>();
+        for (PaperCard c : allCards) {
+            PaperCard paperCard = pool0.getCard(c.getName());
+            allCardsPreferredEditions.add(paperCard);
+        }
+        pool = new DeckGenPool(allCardsPreferredEditions);
         format = format0;
         fullCardDB = pool0;
     }
