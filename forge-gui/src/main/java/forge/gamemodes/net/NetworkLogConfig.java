@@ -244,11 +244,18 @@ public final class NetworkLogConfig implements IHasForgeLog {
         if (testMode && (batchId != null || globalInstanceSuffix != null)) {
             return computeLogfileKey();
         }
-        // In normal mode, use timestamp-based key
+        // In normal mode, only return a key if logging was explicitly activated
+        return normalModeKey;
+    }
+
+    /**
+     * Activate network logging for a real (non-test) network game.
+     * Sets the timestamp-based log file key so the writer starts routing to files.
+     */
+    public static void activateNetworkLogging() {
         if (normalModeKey == null) {
             normalModeKey = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
         }
-        return normalModeKey;
     }
 
     /**
