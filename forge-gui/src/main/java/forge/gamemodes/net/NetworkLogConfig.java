@@ -259,6 +259,15 @@ public final class NetworkLogConfig implements IHasForgeLog {
     }
 
     /**
+     * Deactivate network logging after a network game ends.
+     * Clears the normal-mode key so the writer stops routing to files.
+     * Does not affect test mode.
+     */
+    public static void deactivateNetworkLogging() {
+        normalModeKey = null;
+    }
+
+    /**
      * Compute the composite logfile key from instance suffix and test mode.
      * In test mode with a batchId, the batchId is used as the subdirectory name
      * rather than being part of the filename.
