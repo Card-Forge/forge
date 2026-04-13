@@ -1,0 +1,8 @@
+Name:Improvisation Capstone
+ManaCost:5 R R
+Types:Sorcery
+A:SP$ DigUntil | Defined$ Opponent | Valid$ Card | FoundDestination$ Exile | RevealedDestination$ Exile | MinTotalCMC$ 4 | RememberRevealed$ True | SubAbility$ DBPlay | StackDescription$ SpellDescription | SpellDescription$ Exile cards from the top of your library until you exile cards with total mana value 4 or greater. You may cast any number of spells from among them without paying their mana costs.
+SVar:DBPlay:DB$ Play | Valid$ Card.nonLand+IsRemembered | ValidSA$ Spell | ValidZone$ Exile | WithoutManaCost$ True | Amount$ All | Controller$ You | Optional$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+K:Paradigm
+Oracle:Exile cards from the top of your library until you exile cards with total mana value 4 or greater. You may cast any number of spells from among them without paying their mana costs.\nParadigm (Then exile this spell. After you first resolve a spell with this name, you may cast a copy of it from exile without paying its mana cost at the beginning of each of your first main phases.)
