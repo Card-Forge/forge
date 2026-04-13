@@ -137,6 +137,7 @@ public enum Keyword {
     OFFERING("Offering", KeywordWithType.class, false, "You may cast this card any time you could cast an instant by sacrificing a %1$s and paying the difference in mana costs between this and the sacrificed %1$s. Mana cost includes color."),
     OFFSPRING("Offspring", KeywordWithCost.class, false, "You may pay an additional %s as you cast this spell. If you do, when this creature enters, create a 1/1 token copy of it."),
     OVERLOAD("Overload", KeywordWithCost.class, false, "You may cast this spell for its overload cost. If you do, change its text by replacing all instances of \"target\" with \"each.\""),
+    PARADIGM("Paradigm", SimpleKeyword.class, false, "Then exile this spell. After you first resolve a spell with this name, you may cast a copy of it from exile without paying its mana cost at the beginning of each of your first main phases."),
     PARTNER("Partner", Partner.class, true, "You can have two commanders if both have partner."),
     PARTNER_WITH("Partner with", KeywordWithType.class, false, "When this creature enters, target player may put %s into their hand from their library, then shuffle."),
     PERSIST("Persist", SimpleKeyword.class, false, "When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it."),
