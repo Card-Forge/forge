@@ -1,0 +1,11 @@
+# Shandalar Old Border block overrides
+#
+# Each line uses the same format as forge-gui/res/blockdata/blocks.txt and
+# replaces (or adds) the upstream block with the same name. Lines absent
+# here fall back to the upstream definition.
+#
+# Ice Age block: drop Coldsnap (post-Scourge, not in Old Border's legal
+# pool anyway, and its retroactive block assignment is a 2006 WotC ret-con).
+# Duplicate ICE to lock the draft composition at ICE / ICE / ALL, matching
+# the 1995 paper draft experience more closely.
+Ice Age, 3/6/ICE, ICE ICE ALL

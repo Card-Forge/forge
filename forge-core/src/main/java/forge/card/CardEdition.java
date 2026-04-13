@@ -561,6 +561,36 @@ public final class CardEdition implements Comparable<CardEdition> {
         return boosterTemplates.containsKey("Draft");
     }
 
+    /**
+     * Layer adventure-local edition overrides on top of the upstream
+     * collection. Each overlay file is parsed by the normal edition
+     * reader, so it accepts the same syntax as upstream files; the
+     * booster template of each parsed "patch" is copied onto the
+     * matching upstream edition identified by {@code Code=}. Fields
+     * absent from the overlay are left untouched.
+     */
+    public static void applyAdventureOverrides(File editionsDir, Collection editions) {
+        if (editionsDir == null || !editionsDir.isDirectory()) {
+            return;
+        }
+        try {
+            Reader reader = new Reader(editionsDir);
+            for (CardEdition patch : reader.readAll().values()) {
+                CardEdition target = editions.get(patch.getCode());
+                if (target == null) {
+                    System.err.println("Adventure edition override targets unknown edition " + patch.getCode() + " in " + editionsDir);
+                    continue;
+                }
+                if (patch.boosterTpl != null) {
+                    target.boosterTpl = patch.boosterTpl;
+                    target.boosterTemplates.put("Draft", patch.boosterTpl);
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Failed to apply adventure edition overrides from " + editionsDir + ": " + e);
+        }
+    }
+
     public List<PrintSheet> getPrintSheetsBySection() {
         final CardDb cardDb = StaticData.instance().getCommonCards();
 

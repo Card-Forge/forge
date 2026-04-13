@@ -21,6 +21,7 @@ import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgeProfileProperties;
+import forge.model.CardBlock;
 import forge.model.FModel;
 import forge.util.Aggregates;
 import forge.util.FileUtil;
@@ -121,7 +122,16 @@ public class Config {
             configData = new ConfigData();
         }
 
-
+        // Layer adventure-local overrides on top of upstream blocks.txt and editions/*.txt.
+        // Absent files fall through; errors are logged but don't break adventure startup.
+        File blocksOverlay = new File(prefix + "blockdata/blocks.txt");
+        if (blocksOverlay.isFile()) {
+            CardBlock.applyAdventureOverrides(blocksOverlay, FModel.getBlocks(), FModel.getMagicDb().getEditions());
+        }
+        File editionsOverlay = new File(prefix + "editions");
+        if (editionsOverlay.isDirectory()) {
+            CardEdition.applyAdventureOverrides(editionsOverlay, FModel.getMagicDb().getEditions());
+        }
     }
 
     private String resPath() {
