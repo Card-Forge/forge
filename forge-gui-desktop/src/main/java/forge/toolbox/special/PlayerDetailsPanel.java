@@ -78,12 +78,12 @@ public class PlayerDetailsPanel extends JPanel {
     }
 
     /**
-     * Zone count shown on player detail labels. For DanDan {@link ZoneType#Library} and
-     * {@link ZoneType#Graveyard}, uses {@link DanDanViewZones#zoneCountForDisplay}.
+     * Zone count shown on player detail labels. For DanDan {@link ZoneType#Library},
+     * {@link ZoneType#Graveyard}, and {@link ZoneType#Exile}, uses {@link DanDanViewZones#zoneCountForDisplay}.
      */
     public static int zoneCountForDisplay(final GameView gameView, final PlayerView p, final ZoneType zone) {
         if (DanDanViewZones.isDanDan(gameView)
-                && (zone == ZoneType.Library || zone == ZoneType.Graveyard)) {
+                && (zone == ZoneType.Library || zone == ZoneType.Graveyard || zone == ZoneType.Exile)) {
             return DanDanViewZones.zoneCountForDisplay(gameView, p, zone);
         }
         return p.getZoneSize(zone);

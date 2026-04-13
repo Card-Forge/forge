@@ -151,6 +151,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return mayLookAtAllCards;
     }
 
+    public void setMayLookAtAllCards(final boolean mayLookAtAllCards0) {
+        mayLookAtAllCards = mayLookAtAllCards0;
+    }
+
     private final ArrayList<Card> tempShownCards = new ArrayList<>();
 
     public <T> void tempShow(final Iterable<T> objects) {

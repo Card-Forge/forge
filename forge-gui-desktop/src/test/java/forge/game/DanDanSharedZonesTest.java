@@ -61,8 +61,37 @@ public class DanDanSharedZonesTest extends AITest {
                 p1.getZone(ZoneType.Library), p2.getZone(ZoneType.Library));
         AssertJUnit.assertSame("DanDan should use one shared graveyard zone",
                 p1.getZone(ZoneType.Graveyard), p2.getZone(ZoneType.Graveyard));
+        AssertJUnit.assertSame("DanDan should use one shared exile zone",
+                p1.getZone(ZoneType.Exile), p2.getZone(ZoneType.Exile));
         AssertJUnit.assertSame("DanDan should use one shared registered deck object",
                 game.getMatch().getPlayers().get(0).getDeck(), game.getMatch().getPlayers().get(1).getDeck());
+    }
+
+    @Test
+    public void dandanGameWideExileListNotDuplicated() {
+        initAndCreateGame();
+
+        final Deck firstDeck = new Deck("DanDan P1");
+        final Deck secondDeck = new Deck("DanDan P2");
+        final List<RegisteredPlayer> players = Lists.newArrayList();
+        players.add(new RegisteredPlayer(firstDeck).setPlayer(new LobbyPlayerAi("p1", null)));
+        players.add(new RegisteredPlayer(secondDeck).setPlayer(new LobbyPlayerAi("p2", null)));
+
+        final GameRules rules = new GameRules(GameType.DanDan);
+        final Match match = new Match(rules, players, "DanDan exile dedupe");
+        final Game game = match.createGame();
+        match.startGame(game);
+
+        final Player p1 = game.getRegisteredPlayers().get(0);
+        final Card onBattlefield = addCard("Island", p1);
+        final Card inExile = game.getAction().exile(onBattlefield, null, null);
+
+        AssertJUnit.assertEquals("Game-wide exile query should list each card once in DanDan",
+                1, game.getCardsIn(ZoneType.Exile).size());
+        AssertJUnit.assertTrue("Exiled card should be in shared exile zone",
+                p1.getZone(ZoneType.Exile).contains(inExile));
+        AssertJUnit.assertTrue("P2 should see same exile zone as P1",
+                game.getRegisteredPlayers().get(1).getZone(ZoneType.Exile).contains(inExile));
     }
 
     @Test
@@ -155,9 +184,13 @@ public class DanDanSharedZonesTest extends AITest {
         game.getAction().moveTo(ZoneType.Graveyard, p1.getZone(ZoneType.Library).get(0), null, null);
         p1.shuffle(null);
 
+        final Card toExile = addCardToZone("Opt", p1, ZoneType.Battlefield);
+        game.getAction().exile(toExile, null, null);
+
         // Ensure both PlayerViews receive shared-zone updates for assertions below.
         p1.updateZoneForView(p1.getZone(ZoneType.Library));
         p1.updateZoneForView(p1.getZone(ZoneType.Graveyard));
+        p1.updateZoneForView(p1.getZone(ZoneType.Exile));
 
         final PlayerView pv1 = p1.getView();
         final PlayerView pv2 = p2.getView();
@@ -167,16 +200,21 @@ public class DanDanSharedZonesTest extends AITest {
         final Iterable<CardView> displayedLibraryP2 = DanDanViewZones.cardsForZoneDisplay(game.getView(), pv2, ZoneType.Library);
         final Iterable<CardView> displayedGraveyardP1 = DanDanViewZones.cardsForZoneDisplay(game.getView(), pv1, ZoneType.Graveyard);
         final Iterable<CardView> displayedGraveyardP2 = DanDanViewZones.cardsForZoneDisplay(game.getView(), pv2, ZoneType.Graveyard);
+        final Iterable<CardView> displayedExileP1 = DanDanViewZones.cardsForZoneDisplay(game.getView(), pv1, ZoneType.Exile);
+        final Iterable<CardView> displayedExileP2 = DanDanViewZones.cardsForZoneDisplay(game.getView(), pv2, ZoneType.Exile);
 
         assertSameOrderAndIds("displayed library", displayedLibraryP1, displayedLibraryP2);
         assertSameOrderAndIds("displayed graveyard", displayedGraveyardP1, displayedGraveyardP2);
+        assertSameOrderAndIds("displayed exile", displayedExileP1, displayedExileP2);
         AssertJUnit.assertEquals("displayed library count should match for both players",
                 count(displayedLibraryP1), count(displayedLibraryP2));
         AssertJUnit.assertEquals("displayed graveyard count should match for both players",
                 count(displayedGraveyardP1), count(displayedGraveyardP2));
+        AssertJUnit.assertEquals("displayed exile count should match for both players",
+                count(displayedExileP1), count(displayedExileP2));
 
         // Label-layer count must match displayed zone list size (PlayerDetailsPanel zone badges).
-        for (final ZoneType z : new ZoneType[] { ZoneType.Library, ZoneType.Graveyard }) {
+        for (final ZoneType z : new ZoneType[] { ZoneType.Library, ZoneType.Graveyard, ZoneType.Exile }) {
             final int displayed = count(DanDanViewZones.cardsForZoneDisplay(game.getView(), pv1, z));
             AssertJUnit.assertEquals("label count vs displayed list (P1) " + z, displayed,
                     PlayerDetailsPanel.zoneCountForDisplay(game.getView(), pv1, z));

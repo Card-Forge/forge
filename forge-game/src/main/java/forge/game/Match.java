@@ -326,6 +326,7 @@ public class Match {
             } else {
                 player.useSharedZoneFrom(sharedDanDanPlayer, ZoneType.Library);
                 player.useSharedZoneFrom(sharedDanDanPlayer, ZoneType.Graveyard);
+                player.useSharedZoneFrom(sharedDanDanPlayer, ZoneType.Exile);
             }
             if (myDeck.getLeft().has(DeckSection.Sideboard)) {
                 preparePlayerZone(player, ZoneType.Sideboard, myDeck.getLeft().get(DeckSection.Sideboard), psc.useRandomFoil());

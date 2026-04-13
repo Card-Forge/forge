@@ -137,7 +137,7 @@ public class GameRules {
      * per-player controller or ownership for the given zone. Callers pass the card's
      * current zone or last-known zone as appropriate.
      * <p>
-     * Today this applies to DanDan's shared graveyard only; additional variants or zones
+     * Today this applies to DanDan's shared graveyard and exile; additional variants or zones
      * can be folded into the implementation without changing the method name.
      * </p>
      *
@@ -145,7 +145,7 @@ public class GameRules {
      * @return whether relaxed controller/ownership checks apply for card properties
      */
     public boolean relaxesControllerOwnershipForCardProperties(final ZoneType zoneType) {
-        return isDanDan() && zoneType == ZoneType.Graveyard;
+        return isDanDan() && (zoneType == ZoneType.Graveyard || zoneType == ZoneType.Exile);
     }
 
     /**

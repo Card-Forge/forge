@@ -1311,9 +1311,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         final GameRules rules = game == null ? null : game.getRules();
         final boolean isDanDan = rules != null && rules.isDanDan();
         if (zone != null && game != null && isDanDan
-                && (zone == ZoneType.Library || zone == ZoneType.Graveyard)
+                && (zone == ZoneType.Library || zone == ZoneType.Graveyard || zone == ZoneType.Exile)
                 && !game.getPlayers().isEmpty()) {
-            // DanDan library/graveyard are shared; always resolve through player 0's canonical zone.
+            // DanDan library/graveyard/exile are shared; always resolve through player 0's canonical zone.
             final Player canonical = game.getPlayers().get(0);
             final PlayerZone shared = canonical.zones.get(zone);
             if (shared != null) {
@@ -1335,7 +1335,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         final GameRules rules = game == null ? null : game.getRules();
         final boolean isDanDan = rules != null && rules.isDanDan();
         if (isDanDan
-                && (zone.is(ZoneType.Library) || zone.is(ZoneType.Graveyard))) {
+                && (zone.is(ZoneType.Library) || zone.is(ZoneType.Graveyard) || zone.is(ZoneType.Exile))) {
             for (final Player other : game.getPlayers()) {
                 if (other != this && other.getZone(zone.getZoneType()) == zone) {
                     other.getView().updateZone(zone.getZoneType(), zone.getCards(false), other);
@@ -1433,11 +1433,14 @@ public class Player extends GameEntity implements Comparable<Player> {
             cl.addAll(getZone(ZoneType.Sideboard).getCardsPlayerCanActivate(this));
         }
 
-        //External activatables from all opponents
+        // External activatables from all opponents (DanDan shared exile/library/graveyard: skip — same zone as self)
+        final boolean danDan = game.getRules() != null && game.getRules().isDanDan();
         for (final Player other : getAllOtherPlayers()) {
-            cl.addAll(other.getZone(ZoneType.Exile).getCardsPlayerCanActivate(this));
-            cl.addAll(other.getZone(ZoneType.Graveyard).getCardsPlayerCanActivate(this));
-            cl.addAll(other.getZone(ZoneType.Library).getCardsPlayerCanActivate(this));
+            if (!danDan) {
+                cl.addAll(other.getZone(ZoneType.Exile).getCardsPlayerCanActivate(this));
+                cl.addAll(other.getZone(ZoneType.Graveyard).getCardsPlayerCanActivate(this));
+                cl.addAll(other.getZone(ZoneType.Library).getCardsPlayerCanActivate(this));
+            }
             cl.addAll(other.getZone(ZoneType.Hand).getCardsPlayerCanActivate(this));
         }
         cl.addAll(getGame().getCardsPlayerCanActivateInStack());

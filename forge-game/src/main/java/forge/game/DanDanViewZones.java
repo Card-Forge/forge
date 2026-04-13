@@ -13,9 +13,10 @@ import forge.trackable.TrackableProperty;
 import forge.util.collect.FCollectionView;
 
 /**
- * Canonical {@link PlayerView} source for DanDan shared {@link ZoneType#Library} and
- * {@link ZoneType#Graveyard}: each seat may carry its own trackable copy, but UI and verbose tooling
- * should use the first registered player's lists so order and counts match the engine and sim.
+ * Canonical {@link PlayerView} source for DanDan shared {@link ZoneType#Library},
+ * {@link ZoneType#Graveyard}, and {@link ZoneType#Exile}: each seat may carry its own trackable copy,
+ * but UI and verbose tooling should use the first registered player's lists so order and counts match
+ * the engine and sim.
  */
 public final class DanDanViewZones {
 
@@ -43,13 +44,13 @@ public final class DanDanViewZones {
     }
 
     /**
-     * Card list to show for {@code player} in {@code zone}. For DanDan library/graveyard, returns the
-     * first player's list.
+     * Card list to show for {@code player} in {@code zone}. For DanDan library/graveyard/exile, returns
+     * the first player's list.
      */
     public static FCollectionView<CardView> cardsForZoneDisplay(final GameView gameView, final PlayerView player,
             final ZoneType zone) {
         if (gameView != null && isDanDan(gameView)
-                && (zone == ZoneType.Library || zone == ZoneType.Graveyard)) {
+                && (zone == ZoneType.Library || zone == ZoneType.Graveyard || zone == ZoneType.Exile)) {
             // Prefer live model zone order when available (desktop local games).
             final Game g = gameView.getGame();
             if (g != null && !g.getPlayers().isEmpty()) {

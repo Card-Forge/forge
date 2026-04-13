@@ -242,8 +242,8 @@ public final class CMatchUI
     /**
      * Canonical zone cards for UI display.
      * <p>
-     * For DanDan shared {@link ZoneType#Library}/{@link ZoneType#Graveyard}, this returns a single
-     * canonical sequence so all UI panels (floating zones, docked tabs, counts/tooltips) remain in sync.
+     * For DanDan shared {@link ZoneType#Library}, {@link ZoneType#Graveyard}, and {@link ZoneType#Exile},
+     * this returns a single canonical sequence so all UI panels (floating zones, docked tabs, counts/tooltips) remain in sync.
      */
     public FCollectionView<CardView> cardsForZoneDisplay(final PlayerView player, final ZoneType zone) {
         return DanDanViewZones.cardsForZoneDisplay(getGameView(), player, zone);

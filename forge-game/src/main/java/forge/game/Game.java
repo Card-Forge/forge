@@ -580,9 +580,36 @@ public class Game {
         return card == null ? null : card.getLastKnownZone();
     }
 
+    /** DanDan shares one physical zone across players; game-wide queries must not duplicate cards. */
+    private boolean isDanDanSingleSourceZone(final ZoneType zone) {
+        return rules != null && rules.isDanDan()
+                && (zone == ZoneType.Library || zone == ZoneType.Graveyard || zone == ZoneType.Exile);
+    }
+
+    /**
+     * Player to query for DanDan shared library/graveyard/exile. Uses an ingame player when any remain
+     * (each seat resolves the same canonical zone); after all players have lost, falls back to the
+     * first registered player so zones are still visible to tests and tooling.
+     */
+    private Player danDanCanonicalPlayerForSharedZones() {
+        if (!getPlayers().isEmpty()) {
+            return getPlayers().get(0);
+        }
+        if (!getRegisteredPlayers().isEmpty()) {
+            return getRegisteredPlayers().get(0);
+        }
+        return null;
+    }
+
     public synchronized CardCollectionView getCardsIn(final ZoneType zone) {
         if (zone == ZoneType.Stack) {
             return getStackZone().getCards();
+        }
+        if (isDanDanSingleSourceZone(zone)) {
+            final Player canonical = danDanCanonicalPlayerForSharedZones();
+            if (canonical != null) {
+                return canonical.getCardsIn(zone);
+            }
         }
         return getPlayers().getCardsIn(zone);
     }
@@ -590,6 +617,12 @@ public class Game {
     public CardCollectionView getCardsIncludePhasingIn(final ZoneType zone) {
         if (zone == ZoneType.Stack) {
             return getStackZone().getCards();
+        }
+        if (isDanDanSingleSourceZone(zone)) {
+            final Player canonical = danDanCanonicalPlayerForSharedZones();
+            if (canonical != null) {
+                return new CardCollection(canonical.getCardsIn(zone, false));
+            }
         }
 
         CardCollection cards = new CardCollection();

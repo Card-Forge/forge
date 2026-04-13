@@ -290,12 +290,12 @@ public class FloatingZone extends FloatingCardArea {
     }
 
     /**
-     * After a zone model change, refresh UI for that zone. In DanDan, library and graveyard are shared
-     * in the model but each player has their own FloatingZone/VZone; zone updates are often attributed
-     * only to the canonical zone owner, so without fan-out the other player's window stays stale.
+     * After a zone model change, refresh UI for that zone. In DanDan, library, graveyard, and exile are
+     * shared in the model but each player has their own FloatingZone/VZone; zone updates are often
+     * attributed only to the canonical zone owner, so without fan-out the other player's window stays stale.
      */
     public static void refreshZoneAfterModelUpdate(final CMatchUI matchUI, final PlayerView zoneUpdateOwner, final ZoneType zone) {
-        if (matchUI != null && isDanDanSharedLibraryOrGraveyard(matchUI, zone)) {
+        if (matchUI != null && isDanDanSharedZoneFanOut(matchUI, zone)) {
             final GameView gv = matchUI.getGameView();
             if (gv != null && gv.getPlayers() != null) {
                 for (final PlayerView p : gv.getPlayers()) {
@@ -307,8 +307,8 @@ public class FloatingZone extends FloatingCardArea {
         refresh(zoneUpdateOwner, zone);
     }
 
-    private static boolean isDanDanSharedLibraryOrGraveyard(final CMatchUI matchUI, final ZoneType zone) {
-        if (zone != ZoneType.Library && zone != ZoneType.Graveyard) {
+    private static boolean isDanDanSharedZoneFanOut(final CMatchUI matchUI, final ZoneType zone) {
+        if (zone != ZoneType.Library && zone != ZoneType.Graveyard && zone != ZoneType.Exile) {
             return false;
         }
         final GameView gv = matchUI.getGameView();
