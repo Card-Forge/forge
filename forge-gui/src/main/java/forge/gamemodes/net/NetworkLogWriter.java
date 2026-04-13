@@ -110,10 +110,9 @@ public class NetworkLogWriter extends AbstractFormatPatternWriter {
             sb.append("=".repeat(80)).append("\n");
             sb.append("Network Debug Log Started\n");
             sb.append("Log file key: ").append(key).append("\n");
-            try {
-                long pid = ProcessHandle.current().pid();
-                sb.append("PID: ").append(pid).append("\n");
-            } catch (NoClassDefFoundError e) { /* unavailable on Android */ }
+            if (!GuiBase.isAndroid()) {
+                sb.append("PID: ").append(ProcessHandle.current().pid()).append("\n");
+            }
             try {
                 String hwInfo = GuiBase.getHWInfo()
                         .replace("##########################################", "");
