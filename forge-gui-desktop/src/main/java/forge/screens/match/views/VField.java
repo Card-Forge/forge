@@ -174,10 +174,10 @@ public class VField implements IVDoc<CField> {
         final JPanel pnl = parentCell.getBody();
         pnl.setLayout(new MigLayout("insets 0, gap 0"));
 
-        pnl.add(avatarArea, "w 10%!, h 35%!");
+        pnl.add(avatarArea, "w 60px:10%:10%, h 35%!");
         pnl.add(phaseIndicator, "w 5%!, h 100%!, span 1 2");
-        pnl.add(scroller, "w 85%!, h 100%!, span 1 2, wrap");
-        pnl.add(detailsPanel, "w 10%!, h 64%!, gapleft 1px");
+        pnl.add(scroller, "w 0:85%, growx, h 100%!, span 1 2, wrap");
+        pnl.add(detailsPanel, "w 60px:10%:10%, h 64%!, gapleft 1px");
     }
 
     @Override
