@@ -56,6 +56,7 @@ public class HostedMatch {
     public HashMap<LobbySlot, IGameController> gameControllers = null;
     private Runnable startGameHook = null;
     private Runnable endGameHook = null;
+    private Runnable onMatchOver = null;
     private final List<PlayerControllerHuman> humanControllers = Lists.newArrayList();
     private Map<RegisteredPlayer, IGuiGame> guis;
     private int humanCount;
@@ -81,6 +82,7 @@ public class HostedMatch {
         startGameHook = hook;
     }
     public void setEndGameHook(Runnable hook) { endGameHook = hook; }
+    public void setOnMatchOver(Runnable callback) { onMatchOver = callback; }
 
     private static GameRules getDefaultRules(final GameType gameType) {
         final GameRules gameRules = new GameRules(gameType);
@@ -364,6 +366,18 @@ public class HostedMatch {
 
         game = null;
 
+        // Must precede shutdownForwarder — observer references become stale after null
+        for (PlayerControllerHuman hc : humanControllers) {
+            if (hc.getGui() instanceof forge.gamemodes.net.server.RemoteClientGuiGame ngg) {
+                forge.gui.control.GameEventForwarder fwd = ngg.getForwarder();
+                if (fwd != null) {
+                    for (PlayerControllerHuman allHc : humanControllers) {
+                        allHc.getInputQueue().deleteObserver(fwd);
+                    }
+                }
+            }
+        }
+
         for (final PlayerControllerHuman humanController : humanControllers) {
             if (humanController.getGui() instanceof forge.gamemodes.net.server.RemoteClientGuiGame ngg) {
                 ngg.shutdownForwarder();
@@ -520,6 +534,9 @@ public class HostedMatch {
             FThreads.invokeInEdtNowOrLater(() -> {
                 endCurrentGame();
                 isMatchOver = true;
+                if (onMatchOver != null) {
+                    onMatchOver.run();
+                }
             });
             return; // if any player chooses quit, quit the match
         }

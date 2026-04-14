@@ -527,6 +527,7 @@ public abstract class GameLobby implements IHasGameType {
         //if above checks succeed, return runnable that can be used to finish starting game
         return () -> {
             hostedMatch = GuiBase.getInterface().hostMatch();
+            hostedMatch.setOnMatchOver(this::onMatchOver);
             hostedMatch.startMatch(GameType.Constructed, variantTypes, players, guis);
 
             for (final Player p : hostedMatch.getGame().getPlayers()) {
@@ -540,6 +541,18 @@ public abstract class GameLobby implements IHasGameType {
 
             onGameStarted();
         };
+    }
+
+    protected void onMatchOver() {
+        hostedMatch = null;
+        gameControllers.clear();
+        for (int i = 0; i < getNumberOfSlots(); i++) {
+            final LobbySlot slot = getSlot(i);
+            if (slot != null) {
+                slot.setIsReady(false);
+            }
+        }
+        updateView(true);
     }
 
     public final static class GameLobbyData implements Serializable {

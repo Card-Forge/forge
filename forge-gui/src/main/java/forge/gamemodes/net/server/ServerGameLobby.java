@@ -82,4 +82,11 @@ public final class ServerGameLobby extends GameLobby {
     @Override
     protected void onGameStarted() {
     }
+
+    @Override
+    protected void onMatchOver() {
+        super.onMatchOver();
+        FServerManager.getInstance().clearPlayerGuis();
+        FServerManager.getInstance().updateLobbyState();
+    }
 }
