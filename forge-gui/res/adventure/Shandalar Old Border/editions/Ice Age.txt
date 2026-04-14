@@ -1,13 +1,16 @@
-# Shandalar Old Border edition override for Ice Age.
+# Shandalar Old Border edition overlay for Ice Age.
 #
-# Only [metadata] fields listed here are applied; the rest fall back to
-# the upstream forge-gui/res/editions/Ice Age.txt. Code= is the join key.
+# Parsed by the regular edition reader and registered as a plane-scoped
+# booster template for the ICE set. Only consulted when the Ice Age
+# (Old Border) block asks for an ICE booster; upstream callers outside
+# Adventure keep using the original ICE template.
 #
 # Historically ICE boosters were 11C + 3U + 1R with no basic lands at all,
-# and snow-covered basic lands only shipped in starter decks. This override
+# and snow-covered basic lands only shipped in starter decks. This overlay
 # trades one common slot for a guaranteed snow-covered basic land pinned
 # to the ICE printing, keeping the pack size at 15 cards so draft mechanics
 # stay unchanged.
 [metadata]
 Code=ICE
+Date=1995-06-03
 Booster=10 Common, 3 Uncommon, 1 Rare, 1 name("Snow-Covered Plains|ICE", "Snow-Covered Island|ICE", "Snow-Covered Swamp|ICE", "Snow-Covered Mountain|ICE", "Snow-Covered Forest|ICE")

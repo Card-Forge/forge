@@ -25,6 +25,7 @@ public class ConfigData {
     public RewardData legalCards;
     public String[] restrictedCards;
     public String[] restrictedEditions;
+    public String[] restrictedBlocks;
     public String[] allowedEditions;
     public boolean vintageOnlyEditions = false;
     public String[] restrictedEvents;

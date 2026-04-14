@@ -554,7 +554,7 @@ public class Config {
     }
 
     public void loadResources() {
-        AdventureOverrides.instance().load(prefix, FModel.getMagicDb().getEditions());
+        AdventureOverrides.instance().load(prefix, FModel.getMagicDb().getEditions(), configData);
         RewardData.getAllCards();//initialize before loading custom cards
         final CardRules.Reader rulesReader = new CardRules.Reader();
         ImageKeys.ADVENTURE_CARD_PICS_DIR = Config.currentConfig.getCommonFilePath(forge.adventure.util.Paths.CUSTOM_CARDS_PICS);// not the cleanest solution

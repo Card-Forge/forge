@@ -17,6 +17,7 @@
  */
 package forge.adventure.util;
 
+import forge.adventure.data.ConfigData;
 import forge.card.CardEdition;
 import forge.item.SealedTemplate;
 import forge.item.generation.UnOpenedProduct;
@@ -24,17 +25,22 @@ import forge.model.CardBlock;
 import forge.model.FModel;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Plane-scoped overrides for block and booster data. Parsed from the
  * adventure's {@code blockdata/blocks.txt} and {@code editions/*.txt}
- * files; never mutates upstream static data. Adventure consumers query
- * this registry and fall through to {@link FModel} when no override is
- * present; classic-mode code paths keep reading the upstream data.
+ * files; never mutates upstream static data. Overlay blocks are added
+ * on top of the upstream set, and the plane's {@code restrictedBlocks}
+ * config entry hides upstream blocks from Adventure event rolls.
+ * Classic-mode code paths keep reading the unmodified upstream data.
  */
 public final class AdventureOverrides {
     private static final AdventureOverrides INSTANCE = new AdventureOverrides();
@@ -45,16 +51,23 @@ public final class AdventureOverrides {
 
     private final Map<String, CardBlock> blocks = new LinkedHashMap<>();
     private final Map<String, SealedTemplate> boosters = new HashMap<>();
+    private final Set<String> restrictedBlocks = new HashSet<>();
 
     private AdventureOverrides() {}
 
     /**
      * Reload overrides for the current plane. Safe to call repeatedly;
-     * absent overlay files clear the registry back to empty.
+     * absent overlay files and config entries clear the registry back
+     * to empty.
      */
-    public void load(String prefix, CardEdition.Collection editions) {
+    public void load(String prefix, CardEdition.Collection editions, ConfigData configData) {
         blocks.clear();
         boosters.clear();
+        restrictedBlocks.clear();
+
+        if (configData != null && configData.restrictedBlocks != null) {
+            Collections.addAll(restrictedBlocks, configData.restrictedBlocks);
+        }
 
         File editionsDir = new File(prefix + "editions");
         if (editionsDir.isDirectory()) {
@@ -76,12 +89,18 @@ public final class AdventureOverrides {
             try {
                 CardBlock.Reader reader = new CardBlock.Reader(blocksOverlay.getAbsolutePath(), editions);
                 for (Map.Entry<String, CardBlock> entry : reader.readAll().entrySet()) {
+                    String name = entry.getKey();
+                    if (FModel.getBlocks().contains(name)) {
+                        System.err.println("Adventure block overlay '" + name
+                                + "' collides with an upstream block; pick a distinct name and list the upstream block in restrictedBlocks.");
+                        continue;
+                    }
                     CardBlock block = entry.getValue();
                     block.setBoosterResolver(code -> {
                         SealedTemplate tpl = boosters.get(code);
                         return tpl == null ? null : new UnOpenedProduct(tpl);
                     });
-                    blocks.put(entry.getKey(), block);
+                    blocks.put(name, block);
                 }
             } catch (Exception e) {
                 System.err.println("Failed to load adventure block overrides from " + blocksOverlay + ": " + e);
@@ -89,33 +108,36 @@ public final class AdventureOverrides {
         }
     }
 
-    /** @return the override block for the given name, or the upstream block if none. */
+    /**
+     * @return the overlay block for the given name, or the upstream
+     * block if it is not restricted, or {@code null} if the name maps
+     * to a restricted upstream block with no overlay.
+     */
     public CardBlock getBlock(String name) {
-        CardBlock override = blocks.get(name);
-        return override != null ? override : FModel.getBlocks().get(name);
+        CardBlock overlay = blocks.get(name);
+        if (overlay != null) return overlay;
+        if (restrictedBlocks.contains(name)) return null;
+        return FModel.getBlocks().get(name);
     }
 
     /**
-     * Iterate all blocks, substituting any name-matched overrides for
-     * upstream entries. Purely additive overrides (names not in
-     * upstream) are appended at the end.
+     * Iterate upstream blocks (minus any listed in {@code restrictedBlocks})
+     * followed by overlay blocks. Overlay entries are purely additive.
      */
     public Iterable<CardBlock> allBlocks() {
-        if (blocks.isEmpty()) {
+        if (blocks.isEmpty() && restrictedBlocks.isEmpty()) {
             return FModel.getBlocks();
         }
-        Map<String, CardBlock> merged = new LinkedHashMap<>();
+        List<CardBlock> merged = new ArrayList<>();
         for (CardBlock b : FModel.getBlocks()) {
-            CardBlock override = blocks.get(b.getName());
-            merged.put(b.getName(), override != null ? override : b);
+            if (restrictedBlocks.contains(b.getName())) continue;
+            merged.add(b);
         }
-        for (Map.Entry<String, CardBlock> entry : blocks.entrySet()) {
-            merged.putIfAbsent(entry.getKey(), entry.getValue());
-        }
-        return Collections.unmodifiableCollection(merged.values());
+        merged.addAll(blocks.values());
+        return Collections.unmodifiableList(merged);
     }
 
-    /** @return the override booster template for the given set code, or {@code null} if none. */
+    /** @return the overlay booster template for the given set code, or {@code null} if none. */
     public SealedTemplate getBoosterTemplate(String setCode) {
         return boosters.get(setCode);
     }
