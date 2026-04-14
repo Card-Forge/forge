@@ -478,10 +478,15 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
         return this.cmdRightClick;
     }
 
+    protected double getEffectiveIconScaleFactor() {
+        return iconScaleFactor;
+    }
+
     protected int getMaxTextWidth() {
         final int w = getWidth();
         final int h = getHeight();
-        final int sh = (int) (h * iconScaleFactor);
+        final int basis = iconInBackground ? Math.min(h, w) : h;
+        final int sh = (int) (basis * getEffectiveIconScaleFactor());
         final int sw = (int) (sh * iar);
         return w - sw;
     }
@@ -590,7 +595,8 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
 
         // Icon in background
         if (iconInBackground) {
-            final int sh = (int) (h * iconScaleFactor);
+            final int basis = Math.min(h, w);
+            final int sh = (int) (basis * getEffectiveIconScaleFactor());
             final int sw = (int) (sh * iar);
 
             final int x = iconAlignX == SwingConstants.CENTER
