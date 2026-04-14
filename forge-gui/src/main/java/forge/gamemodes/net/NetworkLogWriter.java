@@ -54,6 +54,8 @@ public class NetworkLogWriter extends AbstractFormatPatternWriter {
             String globalKey = NetworkLogConfig.getGlobalLogfileKey();
             if (globalKey != null) {
                 key = globalKey;
+            } else {
+                return; // No logging context configured
             }
         }
 
