@@ -1798,6 +1798,66 @@
      ]
     }
   },
+  {
+    "name": "Blistering Breeches",
+    "description": "5/2 wall.",
+    "equipmentSlot": "Boots",
+    "iconName": "BlisteringBreeches",
+    "cost": 3000,
+    "effect": {
+      "startBattleWithCard": [
+        "Blistering Barrier"
+      ]
+    }
+  },
+  {
+    "name": "Greaves of Glare",
+    "description": "0/5 wall, can block any # of creatures.",
+    "equipmentSlot": "Boots",
+    "iconName": "GreavesofGlare",
+    "cost": 3000,
+    "effect": {
+      "startBattleWithCard": [
+        "Wall of Glare"
+      ]
+    }
+  },
+  {
+    "name": "Whip Wrap",
+    "description": "1/4 wall, reach, T: keep a flying attacker tapped.",
+    "equipmentSlot": "Boots",
+    "iconName": "WhipWrap",
+    "cost": 3000,
+    "effect": {
+      "startBattleWithCard": [
+        "Whip Vine"
+      ]
+    }
+  },
+  {
+    "name": "Soul Shoes",
+    "description": "0/4 wall, reflects damage dealt to it to opponent.",
+    "equipmentSlot": "Boots",
+    "iconName": "SoulShoes",
+    "cost": 3000,
+    "effect": {
+      "startBattleWithCard": [
+        "Wall of Souls"
+      ]
+    }
+  },
+  {
+    "name": "Barrier Breeches",
+    "description": "0/6 flying wall.",
+    "equipmentSlot": "Boots",
+    "iconName": "BarrierBreeches",
+    "cost": 3000,
+    "effect": {
+      "startBattleWithCard": [
+        "Hover Barrier"
+      ]
+    }
+  },
     {
       "name": "Glint-Eye Anklet",
       "description": "2/2 that draws equal to damage on hit. 1 and discard for +1/+1 until EOT.",

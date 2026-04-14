@@ -576,6 +576,7 @@
 	{ "type": "item","count":1, "itemName": "Sunbeam Gauntlet"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Mirth"  },
 	{ "type": "item","count":1, "itemName": "Jousting Lance"  },
+    { "type": "item","count":1, "itemName": "Greaves of Glare"  },
 	{ "type": "item","count":1, "itemName": "Blessed Armor"  }
 
     ]
@@ -608,6 +609,7 @@
     { "type": "item","count":1, "itemName": "Firefrightener Shoes"  },
 	{ "type": "item","count":1, "itemName": "Pyrite Gauntlet"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Fury"  },
+    { "type": "item","count":1, "itemName": "Blistering Breeches"  },
 	{ "type": "item","count":1, "itemName": "Chitinous Club"  },
 	{ "type": "item","count":1, "itemName": "Flaming Armor"  }
     ]
@@ -640,6 +642,7 @@
     { "type": "item","count":1, "itemName": "Trickster's Shoes"  },
 	{ "type": "item","count":1, "itemName": "Aether Gauntlet"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Mischief"  },
+    { "type": "item","count":1, "itemName": "Barrier Breeches"  },
 	{ "type": "item","count":1, "itemName": "Hoversail Glove"  },
 	{ "type": "item","count":1, "itemName": "Sage's Robes"  }
     ]
@@ -672,6 +675,7 @@
     { "type": "item","count":1, "itemName": "Witch's Shoes"  },
 	{ "type": "item","count":1, "itemName": "Necrogen Gauntlet"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Scorn"  },
+    { "type": "item","count":1, "itemName": "Soul Shoes"  },
 	{ "type": "item","count":1, "itemName": "Blight Sickle"  },
 	{ "type": "item","count":1, "itemName": "Forbidden Robes"  }
     ]
@@ -704,6 +708,7 @@
     { "type": "item","count":1, "itemName": "Greenseeker's Shoes"  },
 	{ "type": "item","count":1, "itemName": "Lifespark Gauntlet"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Favor"  },
+    { "type": "item","count":1, "itemName": "Whip Wrap"  },
 	{ "type": "item","count":1, "itemName": "Brawler's Cestus"  },
 	{ "type": "item","count":1, "itemName": "Heavy Armor"  }
     
