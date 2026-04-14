@@ -57,6 +57,7 @@ public class NetConnectUtil {
         final ServerGameLobby lobby = new ServerGameLobby();
         final ILobbyView view = onlineLobby.setLobby(lobby);
 
+        NetworkLogConfig.activateNetworkLogging();
         server.startServer(port);
         server.setLobby(lobby);
 
@@ -202,6 +203,7 @@ public class NetConnectUtil {
         });
         view.setPlayerChangeListener((index, event) -> client.send(event));
 
+        NetworkLogConfig.activateNetworkLogging();
         try {
             client.connect();
         }

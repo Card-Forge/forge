@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import forge.game.player.PlayerView;
 import forge.gamemodes.net.CompatibleObjectDecoder;
 import forge.gamemodes.net.CompatibleObjectEncoder;
+import forge.gamemodes.net.NetworkLogConfig;
 import forge.util.IHasForgeLog;
 import forge.gamemodes.net.ReplyPool;
 import forge.gamemodes.net.event.*;
@@ -95,6 +96,7 @@ public class FGameClient implements IToServer, IHasForgeLog {
     public void close() {
         if (channel != null)
             channel.close();
+        NetworkLogConfig.deactivateNetworkLogging();
     }
 
     @Override
