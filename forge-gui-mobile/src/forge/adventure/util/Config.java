@@ -21,7 +21,6 @@ import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgeProfileProperties;
-import forge.model.CardBlock;
 import forge.model.FModel;
 import forge.util.Aggregates;
 import forge.util.FileUtil;
@@ -555,17 +554,7 @@ public class Config {
     }
 
     public void loadResources() {
-        // Layer adventure-local overrides on top of upstream blocks.txt and editions/*.txt.
-        // Called here (after FModel.initialize) so MagicDb and preferences are available.
-        // Absent files fall through; errors are logged but don't break adventure startup.
-        File blocksOverlay = new File(prefix + "blockdata/blocks.txt");
-        if (blocksOverlay.isFile()) {
-            CardBlock.applyAdventureOverrides(blocksOverlay, FModel.getBlocks(), FModel.getMagicDb().getEditions());
-        }
-        File editionsOverlay = new File(prefix + "editions");
-        if (editionsOverlay.isDirectory()) {
-            CardEdition.applyAdventureOverrides(editionsOverlay, FModel.getMagicDb().getEditions());
-        }
+        AdventureOverrides.instance().load(prefix, FModel.getMagicDb().getEditions());
         RewardData.getAllCards();//initialize before loading custom cards
         final CardRules.Reader rulesReader = new CardRules.Reader();
         ImageKeys.ADVENTURE_CARD_PICS_DIR = Config.currentConfig.getCommonFilePath(forge.adventure.util.Paths.CUSTOM_CARDS_PICS);// not the cleanest solution

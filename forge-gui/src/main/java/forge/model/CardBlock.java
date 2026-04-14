@@ -23,16 +23,14 @@ import forge.item.PaperCardPredicates;
 import forge.item.generation.IUnOpenedProduct;
 import forge.item.generation.UnOpenedProduct;
 import forge.util.TextUtil;
-import forge.util.storage.IStorage;
-import forge.util.storage.StorageBase;
 import forge.util.storage.StorageReaderFile;
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 // import forge.deck.Deck;
@@ -49,6 +47,7 @@ public final class CardBlock implements Comparable<CardBlock> {
     private final int cntBoostersDraft;
     private final int cntBoostersSealed;
     private Predicate<PaperCard> filter = null;
+    private Function<String, IUnOpenedProduct> boosterResolver;
 
     /**
      * Instantiates a new card block.
@@ -280,35 +279,21 @@ public final class CardBlock implements Comparable<CardBlock> {
      */
     public IUnOpenedProduct getBooster(final String code) {
         MetaSet ms = metaSets.get(code);
-        return ms == null ? new UnOpenedProduct(FModel.getMagicDb().getBoosters().get(code)) : ms.getBooster();
+        if (ms != null) return ms.getBooster();
+        if (boosterResolver != null) {
+            IUnOpenedProduct override = boosterResolver.apply(code);
+            if (override != null) return override;
+        }
+        return new UnOpenedProduct(FModel.getMagicDb().getBoosters().get(code));
     }
 
     /**
-     * Layer an adventure-local {@code blockdata/blocks.txt} overlay on
-     * top of the given block storage. Each line uses the same format as
-     * the upstream {@code blocks.txt} and is keyed by block name:
-     * entries matching an upstream block replace it, new entries are
-     * added. Parsed via the normal block reader so the syntax is
-     * identical; a typo throws a {@link RuntimeException} that's logged
-     * without breaking adventure startup.
+     * Install an optional booster resolver consulted before falling back
+     * to the shared {@code StaticData} booster cache. Used by adventure
+     * mods to supply plane-scoped booster templates without mutating the
+     * upstream edition data.
      */
-    public static void applyAdventureOverrides(File blocksOverlay, IStorage<CardBlock> blocks, CardEdition.Collection editions) {
-        if (blocksOverlay == null || !blocksOverlay.isFile()) {
-            return;
-        }
-        if (!(blocks instanceof StorageBase)) {
-            System.err.println("Adventure block overrides require a StorageBase; got " + blocks.getClass().getSimpleName());
-            return;
-        }
-        @SuppressWarnings("unchecked")
-        StorageBase<CardBlock> mutableBlocks = (StorageBase<CardBlock>) blocks;
-        try {
-            Reader reader = new Reader(blocksOverlay.getAbsolutePath(), editions);
-            for (Map.Entry<String, CardBlock> entry : reader.readAll().entrySet()) {
-                mutableBlocks.replace(entry.getKey(), entry.getValue());
-            }
-        } catch (Exception e) {
-            System.err.println("Failed to apply adventure block overrides from " + blocksOverlay + ": " + e);
-        }
+    public void setBoosterResolver(Function<String, IUnOpenedProduct> resolver) {
+        this.boosterResolver = resolver;
     }
 }

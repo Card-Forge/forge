@@ -101,17 +101,6 @@ public class StorageBase<T> implements IStorage<T> {
         throw new UnsupportedOperationException("This is a read-only storage");
     }
 
-    /**
-     * Replace (or insert) an entry in the underlying map. Intended for
-     * adventure mod data overrides that layer on top of the read-only
-     * upstream data loaded at startup. Unlike {@link #add}, this mutates
-     * the storage directly and is expected to be called only from
-     * adventure override loaders running during session init.
-     */
-    public void replace(final String name, final T item) {
-        map.put(name, item);
-    }
-
     // we don't have nested folders unless that's overridden in a derived class
     @SuppressWarnings("unchecked")
     @Override
