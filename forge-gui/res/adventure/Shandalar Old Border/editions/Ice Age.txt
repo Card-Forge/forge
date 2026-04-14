@@ -1,15 +1,4 @@
-# Shandalar Old Border edition overlay for Ice Age.
-#
-# Parsed by the regular edition reader and registered as a plane-scoped
-# booster template for the ICE set. Only consulted when the Ice Age
-# (Old Border) block asks for an ICE booster; upstream callers outside
-# Adventure keep using the original ICE template.
-#
-# Historically ICE boosters were 11C + 3U + 1R with no basic lands at all,
-# and snow-covered basic lands only shipped in starter decks. This overlay
-# trades one common slot for a guaranteed snow-covered basic land pinned
-# to the ICE printing, keeping the pack size at 15 cards so draft mechanics
-# stay unchanged.
+# Plane-scoped ICE booster: 10C + 3U + 1R + 1 snow-covered basic (ICE printing).
 [metadata]
 Code=ICE
 Date=1995-06-03

@@ -1,13 +1,2 @@
-# Shandalar Old Border block overlays
-#
-# Each line uses the same format as forge-gui/res/blockdata/blocks.txt and
-# is added on top of the upstream blocks. Names that collide with an
-# upstream block are skipped with a warning; to replace an upstream block,
-# pick a distinct name here and list the upstream block in the plane's
-# restrictedBlocks config entry.
-#
-# Old Border replaces the upstream "Ice Age" block (ICE / ALL / CSP) with
-# a 1995-style ICE / ICE / ALL draft: Coldsnap is post-Scourge and its
-# retroactive block assignment is a 2006 WotC ret-con, so it is hidden
-# via restrictedBlocks and this entry ships the Old Border variant.
+# 1995-style ICE/ICE/ALL draft; upstream "Ice Age" hidden via restrictedBlocks.
 Ice Age (Old Border), 3/6/ICE, ICE ICE ALL
