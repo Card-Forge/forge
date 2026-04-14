@@ -636,15 +636,7 @@ public class BoosterGenerator {
                 List<PaperCard> srcList = new ArrayList<>();
 
                 for (String cardName: cardNames) {
-                    // "Card Name|SET" pins a specific printing; bare name uses the default.
-                    int pipeIdx = cardName.indexOf('|');
-                    if (pipeIdx > 0) {
-                        srcList.add(StaticData.instance().getCommonCards().getCard(
-                                cardName.substring(0, pipeIdx).trim(),
-                                cardName.substring(pipeIdx + 1).trim()));
-                    } else {
-                        srcList.add(StaticData.instance().getCommonCards().getCard(cardName));
-                    }
+                    srcList.add(StaticData.instance().getCommonCards().getCard(cardName));
                 }
 
                 src = srcList;
