@@ -1,0 +1,14 @@
+Name:Dirgur Focusmage
+ManaCost:2 U
+Types:Creature Djinn Monk
+PT:1/4
+S:Mode$ ReduceCost | ValidCard$ Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Instant and sorcery spells you cast cost {1} less to cast.
+T:Mode$ SpellCast | ValidCard$ Instant.cmcGE5+.wasCastFromYourHandByYou,Sorcery.cmcGE5+.wasCastFromYourHandByYou | ValidActivatingPlayer$ You | Execute$ TrigPrepare | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an instant or sorcery spell with mana value 5 or greater from your hand, this creature becomes prepared.
+SVar:TrigPrepare:DB$ AlterAttribute | Attributes$ Prepared
+AlternateMode:Prepare
+DeckHints:Type$Instant|Sorcery
+Oracle:Instant and sorcery spells you cast cost {1} less to cast.\nWhenever you cast an instant or sorcery spell with mana value 5 or greater from your hand, this creature becomes prepared.
+
+ALTERNATE
+
+CopyFaceFrom:Braingeyser

@@ -1,0 +1,23 @@
+Name:Jadzi, Steward of Fate
+ManaCost:2 U
+Types:Legendary Creature Human Wizard
+PT:2/4
+K:ETBReplacement:Other:DBPrepare
+SVar:DBPrepare:DB$ AlterAttribute | Attributes$ Prepared | SpellDescription$ NICKNAME enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When NICKNAME enters, draw two cards, then discard two cards.
+SVar:TrigDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose
+AlternateMode:Prepare
+Oracle:Jadzi enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)\nWhen Jadzi enters, draw two cards, then discard two cards.
+
+ALTERNATE
+
+Name:Oracle's Gift
+ManaCost:X X U
+Types:Sorcery
+A:SP$ Token | TokenAmount$ X | TokenScript$ gu_0_0_fractal | SpellDescription$ Create X 0/0 green and blue Fractal creature tokens, then put X +1/+1 counters on each Fractal you control.
+SVar:DBPutCounter:DB$ PutCounterAll | ValidCards$ Fractal.YouCtrl | CounterType$ P1P1 | CounterNum$ X
+SVar:X:Count$xPaid
+DeckHas:Ability$Token|Counters
+DeckHints:Type$Fractal
+Oracle:Create X 0/0 green and blue Fractal creature tokens, then put X +1/+1 counters on each Fractal you control.

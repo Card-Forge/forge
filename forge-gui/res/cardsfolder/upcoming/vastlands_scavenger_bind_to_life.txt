@@ -1,0 +1,19 @@
+Name:Vastlands Scavenger
+ManaCost:1 G G
+Types:Creature Bear Druid
+PT:4/4
+K:Deathtouch
+K:ETBReplacement:Other:DBPrepare
+SVar:DBPrepare:DB$ AlterAttribute | Attributes$ Prepared | SpellDescription$ This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+AlternateMode:Prepare
+Oracle:Deathtouch\nThis creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+
+ALTERNATE
+
+Name:Bind to Life
+ManaCost:4 G
+Types:Instant
+A:SP$ Mill | NumCards$ 7 | Defined$ You | RememberMilled$ True | SubAbility$ DBChangeZone | SpellDescription$ Mill seven cards. Then put a creature card from among them onto the battlefield.
+SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Battlefield | ChangeType$ Creature.IsRemembered | Optional$ True | SelectPrompt$ You may select a creature card milled this way | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Mill seven cards. Then put a creature card from among them onto the battlefield.

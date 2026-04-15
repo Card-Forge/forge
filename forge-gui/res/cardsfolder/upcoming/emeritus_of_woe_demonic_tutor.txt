@@ -1,0 +1,15 @@
+Name:Emeritus of Woe
+ManaCost:3 B
+Types:Creature Vampire Warlock
+PT:5/4
+K:ETBReplacement:Other:DBPrepare
+SVar:DBPrepare:DB$ AlterAttribute | Attributes$ Prepared | SpellDescription$ This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | CheckSVar$ X | SVarCompare$ GE2 | Execute$ TrigPrepare | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, if two or more creatures died this turn, this creature becomes prepared.
+SVar:TrigPrepare:DB$ AlterAttribute | Attributes$ Prepared
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+AlternateMode:Prepare
+Oracle:This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)\nAt the beginning of your end step, if two or more creatures died this turn, this creature becomes prepared.
+
+ALTERNATE
+
+CopyFaceFrom:Demonic Tutor
