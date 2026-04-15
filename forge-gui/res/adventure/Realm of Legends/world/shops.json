@@ -553,13 +553,13 @@
 "description":"Plains Perfection",            
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"EquipmentShop",   
-  "rewards": [ 
+  "rewards": [
     { "type": "item","count":1, "itemName": "Vindicator Greaves"  },
-    { "type": "item","count":1, "itemName": "Tome of Dispelling"  },
-    { "type": "item","count":1, "itemName": "Mask of Hypochondria"  },
     { "type": "item","count":1, "itemName": "Ring of Thune"  },
     { "type": "item","count":1, "itemName": "Skyclave Maul"  },
     { "type": "item","count":1, "itemName": "Meadow Outfit"  },
+    { "type": "item","count":1, "itemName": "Jewel of Blessings"  },
+    { "type": "item","count":1, "itemName": "High Ground Helm"  },
     { "type": "item","count":1, "itemName": "Token of Shielding"  },
 	{ "type": "item","count":1, "itemName": "Token of Bounty"  }
     
@@ -574,7 +574,9 @@
   "rewards": [ 
 	{ "type": "item","count":1, "itemName": "Peddler's Shoes"  },
 	{ "type": "item","count":1, "itemName": "Sunbeam Gauntlet"  },
+    { "type": "item","count":1, "itemName": "Tome of Dispelling"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Mirth"  },
+    { "type": "item","count":1, "itemName": "Mask of Hypochondria"  },
 	{ "type": "item","count":1, "itemName": "Jousting Lance"  },
     { "type": "item","count":1, "itemName": "Greaves of Glare"  },
 	{ "type": "item","count":1, "itemName": "Blessed Armor"  }
@@ -589,9 +591,9 @@
 "sprite":"EquipmentShop",   
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Brimstone Boots"  },
-    { "type": "item","count":1, "itemName": "Tome of Fire"  },
-    { "type": "item","count":1, "itemName": "Mask of Pyromania"  },
     { "type": "item","count":1, "itemName": "Ring of Valkas"  },
+    { "type": "item","count":1, "itemName": "Jewel of War"  },
+    { "type": "item","count":1, "itemName": "Helm of Battle"  },
     { "type": "item","count":1, "itemName": "Dire Flail"  },
     { "type": "item","count":1, "itemName": "Smoldering Cloak"  },
     { "type": "item","count":1, "itemName": "Token of Blades"  },
@@ -608,6 +610,8 @@
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Firefrightener Shoes"  },
 	{ "type": "item","count":1, "itemName": "Pyrite Gauntlet"  },
+    { "type": "item","count":1, "itemName": "Tome of Fire"  },
+    { "type": "item","count":1, "itemName": "Mask of Pyromania"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Fury"  },
     { "type": "item","count":1, "itemName": "Blistering Breeches"  },
 	{ "type": "item","count":1, "itemName": "Chitinous Club"  },
@@ -622,9 +626,9 @@
 "sprite":"EquipmentShop",   
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Cryptologist's Fins"  },
-    { "type": "item","count":1, "itemName": "Tome of Removal"  },
-    { "type": "item","count":1, "itemName": "Mask of Compulsion"  },
     { "type": "item","count":1, "itemName": "Ring of Evos Isle"  },
+    { "type": "item","count":1, "itemName": "Jewel of Winds"  },
+    { "type": "item","count":1, "itemName": "Cunning Mask"  },
     { "type": "item","count":1, "itemName": "Giant's Bracer"  },
     { "type": "item","count":1, "itemName": "Isle Shirt"  },
     { "type": "item","count":1, "itemName": "Token of Insight"  },
@@ -641,6 +645,8 @@
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Trickster's Shoes"  },
 	{ "type": "item","count":1, "itemName": "Aether Gauntlet"  },
+    { "type": "item","count":1, "itemName": "Tome of Removal"  },
+    { "type": "item","count":1, "itemName": "Mask of Compulsion"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Mischief"  },
     { "type": "item","count":1, "itemName": "Barrier Breeches"  },
 	{ "type": "item","count":1, "itemName": "Hoversail Glove"  },
@@ -655,9 +661,9 @@
 "sprite":"EquipmentShop",   
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Cutthroat Skirt"  },
-    { "type": "item","count":1, "itemName": "Tome of the Executioner"  },
-    { "type": "item","count":1, "itemName": "Mask of Mortiphobia"  },
     { "type": "item","count":1, "itemName": "Ring of Xathrid"  },
+    { "type": "item","count":1, "itemName": "Ghoulish Jewel"  },
+    { "type": "item","count":1, "itemName": "Helm of the Fallen"  },
     { "type": "item","count":1, "itemName": "Poet's Quill"  },
     { "type": "item","count":1, "itemName": "Mire Leather"  },
     { "type": "item","count":1, "itemName": "Token of Decay"  },
@@ -674,6 +680,8 @@
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Witch's Shoes"  },
 	{ "type": "item","count":1, "itemName": "Necrogen Gauntlet"  },
+    { "type": "item","count":1, "itemName": "Tome of the Executioner"  },
+    { "type": "item","count":1, "itemName": "Mask of Mortiphobia"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Scorn"  },
     { "type": "item","count":1, "itemName": "Soul Shoes"  },
 	{ "type": "item","count":1, "itemName": "Blight Sickle"  },
@@ -688,10 +696,10 @@
 "sprite":"EquipmentShop",   
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Beastbreaker Boots"  },
-    { "type": "item","count":1, "itemName": "Tome of Might"  },
     { "type": "item","count":1, "itemName": "Ring of Kalonia"  },
-    { "type": "item","count":1, "itemName": "Mask of Narcissism"  },
     { "type": "item","count":1, "itemName": "Colossal Dreadmace"  },
+    { "type": "item","count":1, "itemName": "Jewel of Rage"  },
+    { "type": "item","count":1, "itemName": "Mighty Helm"  },
     { "type": "item","count":1, "itemName": "Karst Shawl"  },
     { "type": "item","count":1, "itemName": "Token of Landing"  },
 	{ "type": "item","count":1, "itemName": "Token of Exploration"  }
@@ -707,6 +715,8 @@
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Greenseeker's Shoes"  },
 	{ "type": "item","count":1, "itemName": "Lifespark Gauntlet"  },
+    { "type": "item","count":1, "itemName": "Tome of Might"  },
+    { "type": "item","count":1, "itemName": "Mask of Narcissism"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Favor"  },
     { "type": "item","count":1, "itemName": "Whip Wrap"  },
 	{ "type": "item","count":1, "itemName": "Brawler's Cestus"  },

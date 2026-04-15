@@ -825,6 +825,39 @@ BlisteringBreeches
 GreavesofGlare
   xy: 32, 480
   size: 16, 16
+HighGroundHelm
+  xy: 16, 336
+  size: 16, 16
+CunningMask
+  xy: 112, 352
+  size: 16, 16
+MightyHelm
+  xy: 80, 304
+  size: 16, 16
+HelmoftheFallen
+  xy: 16, 368
+  size: 16, 16
+HelmofBattle
+  xy: 112, 304
+  size: 16, 16
+VampiricAmulet
+  xy: 96, 816
+  size: 16, 16
+MassacreHelm
+  xy: 32, 320
+  size: 16, 16
+GloriousHelm
+  xy: 64, 384
+  size: 16, 16
+WarHelm
+  xy: 48, 368
+  size: 16, 16
+HelmofContemplation
+  xy: 144, 384
+  size: 16, 16
+HelmofMyth
+  xy: 128, 352
+  size: 16, 16
 WhipWrap
   xy: 144, 448
   size: 16, 16
