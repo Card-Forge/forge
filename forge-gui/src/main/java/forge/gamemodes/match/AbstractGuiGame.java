@@ -11,7 +11,6 @@ import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.player.PlayerView;
 import forge.gamemodes.net.DeltaPacket;
-import forge.gamemodes.net.client.NetGameController;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.control.FControlGameEventHandler;
@@ -19,10 +18,7 @@ import forge.gui.control.PlaybackSpeed;
 import forge.gui.interfaces.IGuiGame;
 import forge.gui.interfaces.IMayViewCards;
 import forge.interfaces.IGameController;
-import forge.localinstance.properties.ForgeConstants;
-import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.skin.FSkinProp;
-import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
 import forge.player.PlayerZoneUpdate;
 import forge.trackable.TrackableCollection;
@@ -590,88 +586,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
     // End auto-yield/input code
 
-    // Abilities to auto-yield to
-    private final Set<String> autoYields = Sets.newHashSet();
-
-    public final Iterable<String> getAutoYields() {
-        return autoYields;
-    }
-
-    @Override
-    public final boolean shouldAutoYield(final String key) {
-        String abilityKey = key.contains("): ") ? key.substring(key.indexOf("): ") + 3) : key;
-        boolean yieldPerAbility = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_AUTO_YIELD_MODE).equals(ForgeConstants.AUTO_YIELD_PER_ABILITY);
-
-        return !getDisableAutoYields() && autoYields.contains(yieldPerAbility ? abilityKey : key);
-    }
-    @Override
-    public final void setShouldAutoYield(final String key, final boolean autoYield) {
-        String abilityKey = key.contains("): ") ? key.substring(key.indexOf("): ") + 3) : key;
-        boolean yieldPerAbility = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_AUTO_YIELD_MODE).equals(ForgeConstants.AUTO_YIELD_PER_ABILITY);
-
-        if (autoYield) {
-            autoYields.add(yieldPerAbility ? abilityKey : key);
-        } else {
-            autoYields.remove(yieldPerAbility ? abilityKey : key);
-        }
-        // Sync to server in network games (NetGameController is the only
-        // controller that needs to send — this avoids re-entrancy when the
-        // server-side PlayerControllerHuman applies the received notification)
-        final IGameController gc = getGameController();
-        if (gc instanceof NetGameController) {
-            gc.notifyAutoYieldChanged(key, autoYield);
-        }
-    }
-
-    private boolean disableAutoYields;
-    public final boolean getDisableAutoYields() {
-        return disableAutoYields;
-    }
-    public final void setDisableAutoYields(final boolean b0) {
-        disableAutoYields = b0;
-    }
-
-    @Override
-    public final void clearAutoYields() {
-        autoYields.clear();
-        triggersAlwaysAccept.clear();
-    }
-
-    // Triggers preliminary choice: ask, decline or play
-    private final Map<Integer, Boolean> triggersAlwaysAccept = Maps.newTreeMap();
-
-    @Override
-    public final boolean shouldAlwaysAcceptTrigger(final int trigger) {
-        return Boolean.TRUE.equals(triggersAlwaysAccept.get(trigger));
-    }
-    @Override
-    public final boolean shouldAlwaysDeclineTrigger(final int trigger) {
-        return Boolean.FALSE.equals(triggersAlwaysAccept.get(trigger));
-    }
-    @Override
-    public final void setShouldAlwaysAcceptTrigger(final int trigger) {
-        triggersAlwaysAccept.put(trigger, Boolean.TRUE);
-        notifyTriggerChoice(trigger, TriggerChoice.ALWAYS_YES);
-    }
-    @Override
-    public final void setShouldAlwaysDeclineTrigger(final int trigger) {
-        triggersAlwaysAccept.put(trigger, Boolean.FALSE);
-        notifyTriggerChoice(trigger, TriggerChoice.ALWAYS_NO);
-    }
-    @Override
-    public final void setShouldAlwaysAskTrigger(final int trigger) {
-        triggersAlwaysAccept.remove(trigger);
-        notifyTriggerChoice(trigger, TriggerChoice.ASK);
-    }
-
-    private void notifyTriggerChoice(final int trigger, final TriggerChoice choice) {
-        final IGameController gc = getGameController();
-        if (gc instanceof NetGameController) {
-            gc.notifyTriggerChoiceChanged(trigger, choice);
-        }
-    }
-
-    // End of Triggers preliminary choice
+    // Auto-yield state now lives in IGameController (per-player).
 
     /**
      * Convenience for getChoices(message, 0, 1, choices).

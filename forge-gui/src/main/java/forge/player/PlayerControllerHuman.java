@@ -47,7 +47,6 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.NextGameDecision;
-import forge.gamemodes.match.TriggerChoice;
 import forge.gamemodes.match.input.*;
 import forge.util.IHasForgeLog;
 import forge.gui.FThreads;
@@ -96,9 +95,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      * library.
      */
     private boolean mayLookAtAllCards = false;
-    private boolean disableAutoYields = false;
 
     private IGuiGame gui;
+
+    // Per-player auto-yield state (moved from AbstractGuiGame)
+    private final Set<String> autoYields = Sets.newHashSet();
+    private final Map<Integer, Boolean> triggersAlwaysAccept = Maps.newTreeMap();
+    private boolean disableAutoYields;
 
     protected final InputQueue inputQueue;
     protected final InputProxy inputProxy;
@@ -138,13 +141,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     public PlayerView getLocalPlayerView() {
         return player == null ? null : player.getView();
-    }
-
-    public boolean getDisableAutoYields() {
-        return disableAutoYields;
-    }
-    public void setDisableAutoYields(final boolean disableAutoYields0) {
-        disableAutoYields = disableAutoYields0;
     }
 
     @Override
@@ -778,10 +774,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public boolean confirmTrigger(final WrappedAbility wrapper) {
         final SpellAbility sa = wrapper.getWrappedAbility();
         final Trigger regtrig = wrapper.getTrigger();
-        if (getGui().shouldAlwaysAcceptTrigger(regtrig.getId())) {
+        if (shouldAlwaysAcceptTrigger(regtrig.getId())) {
             return true;
         }
-        if (getGui().shouldAlwaysDeclineTrigger(regtrig.getId())) {
+        if (shouldAlwaysDeclineTrigger(regtrig.getId())) {
             return false;
         }
 
@@ -1539,7 +1535,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
         } else {
             final SpellAbility ability = stack.peekAbility();
-            if (ability != null && ability.isAbility() && getGui().shouldAutoYield(ability.yieldKey())) {
+            if (ability != null && ability.isAbility() && shouldAutoYield(ability.yieldKey())) {
                 // avoid prompt for input if top ability of stack is set to auto-yield
                 try {
                     Thread.sleep(FControlGamePlayback.resolveDelay);
@@ -3490,23 +3486,73 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // No-op for local games - resync is only used for network play
     }
 
+    // --- Auto-yield preferences (per-player) ---
+
     @Override
-    public void notifyAutoYieldChanged(String key, boolean autoYield) {
-        getGui().setShouldAutoYield(key, autoYield);
+    public boolean shouldAutoYield(final String key) {
+        String abilityKey = key.contains("): ") ? key.substring(key.indexOf("): ") + 3) : key;
+        boolean yieldPerAbility = FModel.getPreferences().getPref(FPref.UI_AUTO_YIELD_MODE)
+                .equals(ForgeConstants.AUTO_YIELD_PER_ABILITY);
+        return !disableAutoYields && autoYields.contains(yieldPerAbility ? abilityKey : key);
     }
 
     @Override
-    public void notifyTriggerChoiceChanged(int triggerId, TriggerChoice choice) {
-        switch (choice) {
-            case ALWAYS_YES:
-                getGui().setShouldAlwaysAcceptTrigger(triggerId);
-                break;
-            case ALWAYS_NO:
-                getGui().setShouldAlwaysDeclineTrigger(triggerId);
-                break;
-            case ASK:
-                getGui().setShouldAlwaysAskTrigger(triggerId);
-                break;
+    public void setShouldAutoYield(final String key, final boolean autoYield) {
+        String abilityKey = key.contains("): ") ? key.substring(key.indexOf("): ") + 3) : key;
+        boolean yieldPerAbility = FModel.getPreferences().getPref(FPref.UI_AUTO_YIELD_MODE)
+                .equals(ForgeConstants.AUTO_YIELD_PER_ABILITY);
+        if (autoYield) {
+            autoYields.add(yieldPerAbility ? abilityKey : key);
+        } else {
+            autoYields.remove(yieldPerAbility ? abilityKey : key);
         }
+    }
+
+    @Override
+    public Iterable<String> getAutoYields() {
+        return autoYields;
+    }
+
+    @Override
+    public void clearAutoYields() {
+        autoYields.clear();
+        triggersAlwaysAccept.clear();
+    }
+
+    @Override
+    public boolean getDisableAutoYields() {
+        return disableAutoYields;
+    }
+
+    @Override
+    public void setDisableAutoYields(final boolean disable) {
+        disableAutoYields = disable;
+    }
+
+    // --- Trigger accept/decline preferences (per-player) ---
+
+    @Override
+    public boolean shouldAlwaysAcceptTrigger(final int trigger) {
+        return Boolean.TRUE.equals(triggersAlwaysAccept.get(trigger));
+    }
+
+    @Override
+    public boolean shouldAlwaysDeclineTrigger(final int trigger) {
+        return Boolean.FALSE.equals(triggersAlwaysAccept.get(trigger));
+    }
+
+    @Override
+    public void setShouldAlwaysAcceptTrigger(final int trigger) {
+        triggersAlwaysAccept.put(trigger, Boolean.TRUE);
+    }
+
+    @Override
+    public void setShouldAlwaysDeclineTrigger(final int trigger) {
+        triggersAlwaysAccept.put(trigger, Boolean.FALSE);
+    }
+
+    @Override
+    public void setShouldAlwaysAskTrigger(final int trigger) {
+        triggersAlwaysAccept.remove(trigger);
     }
 }

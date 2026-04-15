@@ -34,7 +34,7 @@ public class VAutoYields extends FDialog {
         setTitle(Localizer.getInstance().getMessage("lblAutoYields"));
 
         autoYields = new ArrayList<>();
-        for (final String autoYield : matchUI.getAutoYields()) {
+        for (final String autoYield : matchUI.getGameController().getAutoYields()) {
             autoYields.add(autoYield);
         }
         lstAutoYields = new FList<>(new AutoYieldsListModel());
@@ -46,8 +46,8 @@ public class VAutoYields extends FDialog {
 
         listScroller = new FScrollPane(lstAutoYields, true);
 
-        chkDisableAll = new FCheckBox(Localizer.getInstance().getMessage("lblDisableAllAutoYields"), matchUI.getDisableAutoYields());
-        chkDisableAll.addChangeListener(e -> matchUI.setDisableAutoYields(chkDisableAll.isSelected()));
+        chkDisableAll = new FCheckBox(Localizer.getInstance().getMessage("lblDisableAllAutoYields"), matchUI.getGameController().getDisableAutoYields());
+        chkDisableAll.addChangeListener(e -> matchUI.getGameController().setDisableAutoYields(chkDisableAll.isSelected()));
 
         btnOk = new FButton(Localizer.getInstance().getMessage("lblOK"));
         btnOk.setCommand((UiCommand) () -> setVisible(false));
@@ -57,7 +57,7 @@ public class VAutoYields extends FDialog {
             if (selected != null) {
                 autoYields.remove(selected);
                 btnRemove.setEnabled(autoYields.size() > 0);
-                matchUI.setShouldAutoYield(selected, false);
+                matchUI.getGameController().setShouldAutoYield(selected, false);
                 VAutoYields.this.revalidate();
                 lstAutoYields.repaint();
             }
