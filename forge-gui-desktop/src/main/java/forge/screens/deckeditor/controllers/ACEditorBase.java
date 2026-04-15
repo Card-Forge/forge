@@ -221,15 +221,10 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             int qty = itemEntry.getValue();
 
             int max;
-            if (deck == null || card == null || limit == CardLimit.None || DeckFormat.canHaveAnyNumberOf(card)) {
+            if (deck == null || card == null || limit == CardLimit.None) {
                 max = Integer.MAX_VALUE;
             } else {
-                max = (limit == CardLimit.Singleton ? 1 : FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT));
-
-                Integer cardCopies = DeckFormat.canHaveSpecificNumberInDeck(card);
-                if (cardCopies != null) {
-                    max = cardCopies;
-                }
+                max = (limit == CardLimit.Singleton ? 1 : getMaxCardCopiesAllowed(card));
 
                 Entry<String, Integer> cardAmountInfo = IterableUtil.find(cardsByName,
                         t -> t.getKey().equals(card.getRules().getNormalizedName()), null);
@@ -249,6 +244,17 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     }
 
     protected abstract CardLimit getCardLimit();
+
+    protected int getMaxCardCopiesAllowed(final PaperCard card) {
+        if (DeckFormat.canHaveAnyNumberOf(card)) {
+            return Integer.MAX_VALUE;
+        }
+        Integer cardCopies = DeckFormat.canHaveSpecificNumberInDeck(card);
+        if (cardCopies != null) {
+            return cardCopies;
+        }
+        return FModel.getPreferences().getPrefInt(FPref.DECK_DEFAULT_CARD_LIMIT);
+    }
 
     /**
      * Operation to add selected items to current deck.
@@ -389,6 +395,7 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
         VCurrentDeck.SINGLETON_INSTANCE.getBtnImport().setVisible(true);
 
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setEnabled(true);
+        VCurrentDeck.SINGLETON_INSTANCE.getTxfDescription().setEnabled(true);
 
         VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(true);
 
@@ -396,9 +403,14 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().setVisible(true);
         getCbxSection().setVisible(false);
+        getLblDeckType().setVisible(false);
+        getCbxDeckType().setVisible(false);
 
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setVisible(true);
         VCurrentDeck.SINGLETON_INSTANCE.getLblTitle().setText(localizer.getMessage("lblTitle") + ":");
+        VCurrentDeck.SINGLETON_INSTANCE.getTxfDescription().setVisible(true);
+        VCurrentDeck.SINGLETON_INSTANCE.getLblDescription().setVisible(true);
+        VCurrentDeck.SINGLETON_INSTANCE.getLblDescription().setText(localizer.getMessage("lblDescription") + ":");
     }
 
     public FLabel getBtnAdd()     { return btnAdd; }
@@ -407,6 +419,8 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     public FLabel getBtnRemove4() { return btnRemove4; }
     public FLabel getBtnAddBasicLands() { return btnAddBasicLands; }
     public FComboBox getCbxSection() { return deckManager.getCbxSection(); }
+    public FLabel getLblDeckType() { return deckManager.getLblDeckType(); }
+    public FComboBox getCbxDeckType() { return deckManager.getCbxDeckType(); }
 
     public ContextMenuBuilder createContextMenuBuilder(final boolean isAddContextMenu0) {
         return new EditorContextMenuBuilder(isAddContextMenu0);

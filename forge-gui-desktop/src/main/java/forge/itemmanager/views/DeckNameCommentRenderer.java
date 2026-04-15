@@ -23,7 +23,6 @@ import java.util.Map.Entry;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 
-
 import org.apache.commons.lang3.StringUtils;
 
 import forge.deck.Deck;
@@ -62,6 +61,7 @@ public final class DeckNameCommentRenderer extends ItemCellRenderer {
         if (!(table.getModel() instanceof ItemListView.ItemTableModel)) {
             return null;
         }
+
         final ItemListView<?>.ItemTableModel tm = (ItemListView<?>.ItemTableModel) table.getModel();
         final Entry<?, Integer> entry = tm.rowToItem(row);
         if (entry != null && entry.getKey() instanceof DeckProxy) {

@@ -41,6 +41,8 @@ public class CardProperty {
     public static boolean cardHasProperty(Card card, String property, Player sourceController, Card source, CardTraitBase spellAbility) {
         final Game game = card.getGame();
         final Combat combat = game.getCombat();
+        final boolean useRelaxedOwnershipForCardProperties = game != null
+                && game.getRules().relaxesControllerOwnershipForCardProperties(card.getZone());
         // lki can't be null but it does return this
         final Card lki = game.getChangeZoneLKIInfo(card);
         final Player controller = lki.getController();
@@ -174,19 +176,19 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("YouCtrl")) {
-            if (!controller.equals(sourceController)) {
+            if (!controller.equals(sourceController) && !useRelaxedOwnershipForCardProperties) {
                 return false;
             }
         } else if (property.startsWith("YourTeamCtrl")) {
-            if (controller.getTeam() != sourceController.getTeam()) {
+            if (controller.getTeam() != sourceController.getTeam() && !useRelaxedOwnershipForCardProperties) {
                 return false;
             }
         } else if (property.startsWith("YouDontCtrl")) {
-            if (controller.equals(sourceController)) {
+            if (controller.equals(sourceController) && !useRelaxedOwnershipForCardProperties) {
                 return false;
             }
         } else if (property.startsWith("OppCtrl")) {
-            if (!controller.getOpponents().contains(sourceController)) {
+            if (!controller.getOpponents().contains(sourceController) && !useRelaxedOwnershipForCardProperties) {
                 return false;
             }
         } else if (property.startsWith("ChosenCtrl")) {
@@ -283,24 +285,25 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("YouOwn")) {
-            if (!card.getOwner().equals(sourceController)) {
+            if (!card.getOwner().equals(sourceController) && !useRelaxedOwnershipForCardProperties) {
                 return false;
             }
         } else if (property.startsWith("YouDontOwn")) {
-            if (card.getOwner().equals(sourceController)) {
+            if (card.getOwner().equals(sourceController) && !useRelaxedOwnershipForCardProperties) {
                 return false;
             }
         } else if (property.startsWith("OppOwn")) {
-            if (!card.getOwner().getOpponents().contains(sourceController)) {
+            if (!card.getOwner().getOpponents().contains(sourceController) && !useRelaxedOwnershipForCardProperties) {
                 return false;
             }
         } else if (property.equals("TargetedPlayerOwn")) {
-            if (!AbilityUtils.getDefinedPlayers(source, "TargetedPlayer", spellAbility).contains(card.getOwner())) {
+            if (!AbilityUtils.getDefinedPlayers(source, "TargetedPlayer", spellAbility).contains(card.getOwner())
+                    && !useRelaxedOwnershipForCardProperties) {
                 return false;
             }
         } else if (property.startsWith("OwnedBy")) {
             final String valid = property.substring(8);
-            if (!card.getOwner().isValid(valid, sourceController, source, spellAbility)) {
+            if (!card.getOwner().isValid(valid, sourceController, source, spellAbility) && !useRelaxedOwnershipForCardProperties) {
                 final List<Player> lp = AbilityUtils.getDefinedPlayers(source, valid, spellAbility);
                 if (!lp.contains(card.getOwner())) {
                     return false;
@@ -579,13 +582,13 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("TopGraveyardCreature")) {
-            CardCollection cards = CardLists.filter(card.getOwner().getCardsIn(ZoneType.Graveyard), CardPredicates.CREATURES);
+            CardCollection cards = CardLists.filter(graveyardOrderViewForProperty(game, sourceController, card), CardPredicates.CREATURES);
             Collections.reverse(cards);
             if (cards.isEmpty() || !card.equals(cards.get(0))) {
                 return false;
             }
         } else if (property.startsWith("TopGraveyard")) {
-            final CardCollection cards = new CardCollection(card.getOwner().getCardsIn(ZoneType.Graveyard));
+            final CardCollection cards = new CardCollection(graveyardOrderViewForProperty(game, sourceController, card));
             Collections.reverse(cards);
             if (property.substring(12).matches("[0-9][0-9]?")) {
                 int n = Integer.parseInt(property.substring(12));
@@ -603,7 +606,7 @@ public class CardProperty {
                 }
             }
         } else if (property.startsWith("BottomGraveyard")) {
-            final CardCollectionView cards = card.getOwner().getCardsIn(ZoneType.Graveyard);
+            final CardCollectionView cards = graveyardOrderViewForProperty(game, sourceController, card);
             if (cards.isEmpty() || !card.equals(cards.get(0))) {
                 return false;
             }
@@ -2100,6 +2103,17 @@ public class CardProperty {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Sequence used for Top/BottomGraveyard* properties. In DanDan, use the activating or paying
+     * player's view of the shared graveyard so it matches {@link forge.game.cost.CostExile} ("your graveyard").
+     */
+    private static CardCollectionView graveyardOrderViewForProperty(final Game game, final Player sourceController, final Card card) {
+        if (game != null && game.getRules().isDanDan() && sourceController != null) {
+            return sourceController.getCardsIn(ZoneType.Graveyard);
+        }
+        return card.getOwner().getCardsIn(ZoneType.Graveyard);
     }
 
     private static boolean hasTimestampMatch(final Card card, final CardCollectionView coll) {

@@ -4,10 +4,15 @@ import java.util.List;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.game.DanDanViewZones;
+import forge.game.GameView;
+import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
+import forge.screens.match.MatchController;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
+import forge.util.collect.FCollectionView;
 
 public class VZoneDisplay extends VCardDisplayArea {
     private final PlayerView player;
@@ -25,7 +30,9 @@ public class VZoneDisplay extends VCardDisplayArea {
 
     @Override
     public void update() {
-        refreshCardPanels(player.getCards(zoneType));
+        final GameView gv = MatchController.instance.getGameView();
+        final FCollectionView<CardView> cards = DanDanViewZones.cardsForZoneDisplay(gv, player, zoneType);
+        refreshCardPanels(cards);
     }
 
     @Override

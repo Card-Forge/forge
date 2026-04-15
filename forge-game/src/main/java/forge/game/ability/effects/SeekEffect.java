@@ -76,7 +76,7 @@ public class SeekEffect extends SpellAbilityEffect {
                     Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                     moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
                     moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
-                    Card movedCard = game.getAction().moveToHand(c, sa, moveParams);
+                    Card movedCard = game.getAction().moveToHand(c, seeker, sa, moveParams);
                     ZoneType resultZone = movedCard.getZone().getZoneType();
                     if (!resultZone.equals(ZoneType.Library)) { // as long as it moved we add to triggerList
                         triggerList.put(ZoneType.Library, movedCard.getZone().getZoneType(), movedCard);

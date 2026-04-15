@@ -140,6 +140,22 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return gameControllers.get(player);
     }
 
+    /**
+     * True if any local seat has dev "view all cards" enabled. {@link #getGameController()} is
+     * turn-based (current player only), so multi-seat local games must not use it alone for this flag.
+     */
+    public final boolean anyLocalMayLookAtAllCards() {
+        if (spectator != null && spectator.mayLookAtAllCards()) {
+            return true;
+        }
+        for (final IGameController c : gameControllers.values()) {
+            if (c != null && c.mayLookAtAllCards()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public final Collection<IGameController> getOriginalGameControllers() {
         return originalGameControllers.values();
     }
@@ -234,14 +250,16 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 return true;
             }
             try {
-                if (getGameController().mayLookAtAllCards()) { // when it bugged here, the game thinks the spectator (null)
+                if (anyLocalMayLookAtAllCards()) { // when it bugged here, the game thinks the spectator (null)
                     return true;                               // is the humancontroller here (maybe because there is an existing game thread???)
                 }
             } catch (NullPointerException e) {
                 return true; // return true so it will work as normal
             }
-        } else if (getGameController().mayLookAtAllCards()) {
-            return true;
+        } else {
+            if (anyLocalMayLookAtAllCards()) {
+                return true;
+            }
         }
         return c.canBeShownToAny(getLocalPlayers());
     }

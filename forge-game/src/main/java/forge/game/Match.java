@@ -229,9 +229,14 @@ public class Match {
 
         final FCollectionView<Player> players = game.getPlayers();
         final List<RegisteredPlayer> playersConditions = game.getMatch().getPlayers();
+        final boolean isDanDan = rules.isDanDan() && !players.isEmpty();
+        final Player sharedDanDanPlayer = isDanDan ? players.get(0) : null;
+        final RegisteredPlayer sharedDanDanCondition = isDanDan && !playersConditions.isEmpty() ? playersConditions.get(0) : null;
 
         boolean isFirstGame = gameOutcomes.isEmpty();
-        boolean canSideBoard = !isFirstGame && rules.getGameType().isSideboardingAllowed();
+        // DanDan has a shared library/graveyard but no "between-games" sideboarding.
+        // Prevent sideboarding logic from ever running for DanDan matches.
+        boolean canSideBoard = !isFirstGame && rules.getGameType().isSideboardingAllowed() && !isDanDan;
         // Only allow this if feature flag is on AND for certain match types
         boolean sideboardForAIs = rules.getSideboardForAI() &&
             rules.getGameType().getDeckFormat().equals(DeckFormat.Constructed);
@@ -250,6 +255,9 @@ public class Match {
         for (int i = 0; i < playersConditions.size(); i++) {
             final Player player = players.get(i);
             final RegisteredPlayer psc = playersConditions.get(i);
+            if (isDanDan && i > 0) {
+                psc.useSharedDeckFrom(sharedDanDanCondition);
+            }
             PlayerController person = player.getController();
 
             if (canSideBoard) {
@@ -313,7 +321,12 @@ public class Match {
                 }
             }
 
-            preparePlayerZone(player, ZoneType.Library, myDeck.getLeft().getMain(), psc.useRandomFoil());
+            if (!isDanDan || i == 0) {
+                preparePlayerZone(player, ZoneType.Library, myDeck.getLeft().getMain(), psc.useRandomFoil());
+            } else {
+                player.useSharedZoneFrom(sharedDanDanPlayer, ZoneType.Library);
+                player.useSharedZoneFrom(sharedDanDanPlayer, ZoneType.Graveyard);
+            }
             if (myDeck.getLeft().has(DeckSection.Sideboard)) {
                 preparePlayerZone(player, ZoneType.Sideboard, myDeck.getLeft().get(DeckSection.Sideboard), psc.useRandomFoil());
 
@@ -322,7 +335,10 @@ public class Match {
 
             player.initVariantsZones(psc);
 
-            player.shuffle(null);
+            //Necessary to prevent duplicating shuffle events (and triggers to shuffle listeners) in DanDan setup
+            if (!isDanDan || i == 0) {
+                player.shuffle(null);
+            }
 
             if (isFirstGame) {
                 Map<DeckSection, List<? extends PaperCard>> cardsComplained = player.getController().complainCardsCantPlayWell(myDeck.getLeft());

@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.eventbus.Subscribe;
+import forge.game.GameType;
 import forge.game.card.CardView;
 import forge.game.event.*;
 import forge.game.player.PlayerView;
@@ -184,6 +185,14 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
         synchronized (zonesUpdate) {
             zonesUpdate.add(new PlayerZoneUpdate(p, z));
+            if (matchController.getGameView().getGameType() == GameType.DanDan
+                    && (z == ZoneType.Library || z == ZoneType.Graveyard)) {
+                for (final PlayerView playerView : matchController.getGameView().getPlayers()) {
+                    if (playerView != p) {
+                        zonesUpdate.add(new PlayerZoneUpdate(playerView, z));
+                    }
+                }
+            }
         }
         return processEvent();
     }

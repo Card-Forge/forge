@@ -89,13 +89,14 @@ public class VLobby implements ILobbyView {
     private final VariantCheckBox vntOathbreaker = new VariantCheckBox(GameType.Oathbreaker);
     private final VariantCheckBox vntTinyLeaders = new VariantCheckBox(GameType.TinyLeaders);
     private final VariantCheckBox vntBrawl = new VariantCheckBox(GameType.Brawl);
+    private final VariantCheckBox vntDanDan = new VariantCheckBox(GameType.DanDan);
     private final VariantCheckBox vntPlanechase = new VariantCheckBox(GameType.Planechase);
     private final VariantCheckBox vntArchenemy = new VariantCheckBox(GameType.Archenemy);
     private final VariantCheckBox vntArchenemyRumble = new VariantCheckBox(GameType.ArchenemyRumble);
     private final ImmutableList<VariantCheckBox> vntBoxesLocal  =
-            ImmutableList.of(vntVanguard, vntMomirBasic, vntMoJhoSto, vntCommander, vntOathbreaker, vntBrawl, vntTinyLeaders, vntPlanechase, vntArchenemy, vntArchenemyRumble);
+            ImmutableList.of(vntVanguard, vntMomirBasic, vntMoJhoSto, vntCommander, vntOathbreaker, vntBrawl, vntDanDan, vntTinyLeaders, vntPlanechase, vntArchenemy, vntArchenemyRumble);
     private final ImmutableList<VariantCheckBox> vntBoxesNetwork =
-            ImmutableList.of(vntVanguard, vntMomirBasic, vntMoJhoSto, vntCommander, vntOathbreaker, vntBrawl, vntTinyLeaders /*, vntPlanechase, vntArchenemy, vntArchenemyRumble */);
+            ImmutableList.of(vntVanguard, vntMomirBasic, vntMoJhoSto, vntCommander, vntOathbreaker, vntBrawl, vntDanDan, vntTinyLeaders /*, vntPlanechase, vntArchenemy, vntArchenemyRumble */);
 
     // Player frame elements
     private final JPanel playersFrame = new JPanel(new MigLayout("insets 0, gap 0 5, wrap, hidemode 3"));
@@ -306,7 +307,19 @@ public class VLobby implements ILobbyView {
                         changePlayerFocus(i);
                     }
                 } else {
-                    panel.getDeckChooser().setIsAi(isSlotAI);
+                    final FDeckChooser existingDeckChooser = panel.getDeckChooser();
+                    final GameType expectedGameType = lobby.getGameType();
+                    if (existingDeckChooser.getLstDecks().getGameType() != expectedGameType) {
+                        final FDeckChooser deckChooser = createDeckChooser(expectedGameType, i, isSlotAI);
+                        deckChooser.populate();
+                        panel.setDeckChooser(deckChooser);
+                        if (type == LobbySlotType.LOCAL || isSlotAI) {
+                            // Ensure lobby deck selection updates immediately when the variant changes.
+                            deckChooser.getLstDecks().getSelectCommand().run();
+                        }
+                    } else {
+                        existingDeckChooser.setIsAi(isSlotAI);
+                    }
                 }
                 if (fullUpdate && (type == LobbySlotType.LOCAL || isSlotAI)) {
                     // Deck section selection
@@ -447,12 +460,19 @@ public class VLobby implements ILobbyView {
         final Collection<DeckProxy> selectedDecks = mainChooser.getLstDecks().getSelectedItems();
         if (playerIndex < activePlayersNum && lobby.mayEdit(playerIndex)) {
             final String text = type.toString() + ": " + Lang.joinHomogenous(selectedDecks, DeckProxy::getName);
-            if (isCommanderDeck) {
+            if (!isCommanderDeck && hasVariant(GameType.DanDan)) {
+                // DanDan uses one shared library, so apply the same deck to all active players.
+                for (int i = 0; i < activePlayersNum; i++) {
+                    getPlayerPanel(i).setDeckSelectorButtonText(text);
+                    fireDeckChangeListener(i, deck);
+                }
+            } else if (isCommanderDeck) {
                 getPlayerPanel(playerIndex).setCommanderDeckSelectorButtonText(text);
+                fireDeckChangeListener(playerIndex, deck);
             } else {
                 getPlayerPanel(playerIndex).setDeckSelectorButtonText(text);
+                fireDeckChangeListener(playerIndex, deck);
             }
-            fireDeckChangeListener(playerIndex, deck);
         }
         mainChooser.saveState();
     }
@@ -592,6 +612,10 @@ public class VLobby implements ILobbyView {
         case TinyLeaders:
         case Brawl:
             decksFrame.add(getDeckChooser(playerWithFocus), "grow, push");
+            break;
+        case DanDan:
+            // DanDan uses a shared deck/library for all players, so expose one chooser.
+            decksFrame.add(getDeckChooser(0), "grow, push");
             break;
         case Planechase:
             decksFrame.add(planarDeckPanels.get(playerWithFocus), "grow, push");
@@ -803,6 +827,11 @@ public class VLobby implements ILobbyView {
                 deckType = iSlot == 0 ? DeckType.BRAWL_DECK : DeckType.CUSTOM_DECK;
                 prefKey = FPref.BRAWL_DECK_STATES[iSlot];
                 break;
+            case DanDan:
+                forCommander = false;
+                deckType = iSlot == 0 ? DeckType.DAN_DAN_DECK : DeckType.COLOR_DECK;
+                prefKey = FPref.DAN_DAN_DECK_STATES[iSlot];
+                break;
             default:
                 forCommander = false;
                 deckType = iSlot == 0 ? DeckType.PRECONSTRUCTED_DECK : DeckType.COLOR_DECK;
@@ -810,7 +839,7 @@ public class VLobby implements ILobbyView {
                 break;
         }
         return cachedDeckChoosers.computeIfAbsent(prefKey, (key) -> {
-            final GameType gameType = forCommander ? type : GameType.Constructed;
+            final GameType gameType = type == GameType.DanDan ? GameType.DanDan : (forCommander ? type : GameType.Constructed);
             final FDeckChooser fdc = new FDeckChooser(null, ai, gameType, forCommander);
             fdc.initialize(prefKey, deckType);
             fdc.getLstDecks().setSelectCommand(() -> selectMainDeck(fdc, iSlot, forCommander));

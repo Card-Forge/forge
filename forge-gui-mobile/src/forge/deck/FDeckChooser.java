@@ -210,6 +210,9 @@ public class FDeckChooser extends FScreen {
         case Oathbreaker:
         case TinyLeaders:
         case Brawl:
+        case DanDan:
+            initialize(null, DeckType.DAN_DAN_DECK);
+            break;
         case Gauntlet:
             initialize(null, DeckType.CUSTOM_DECK);
             break;
@@ -273,6 +276,9 @@ public class FDeckChooser extends FScreen {
                 case Brawl:
                     lstDecks.setSelectedString(DeckPreferences.getBrawlDeck());
                     break;
+                case DanDan:
+                    lstDecks.setSelectedString(DeckPreferences.getDanDanDeck());
+                    break;
                 case Archenemy:
                     lstDecks.setSelectedString(DeckPreferences.getSchemeDeck());
                     break;
@@ -292,6 +298,9 @@ public class FDeckChooser extends FScreen {
                             break;
                         case BRAWL_DECK:
                             lstDecks.setSelectedString(DeckPreferences.getBrawlDeck());
+                            break;
+                        case DAN_DAN_DECK:
+                            lstDecks.setSelectedString(DeckPreferences.getDanDanDeck());
                             break;
                         case SCHEME_DECK:
                             lstDecks.setSelectedString(DeckPreferences.getSchemeDeck());
@@ -387,7 +396,7 @@ public class FDeckChooser extends FScreen {
                     }
                 }
                 else {
-                    setSelectedDeckType(DeckType.CUSTOM_DECK);
+                    setSelectedDeckType(lstDecks.getGameType() == GameType.DanDan ? DeckType.DAN_DAN_DECK : DeckType.CUSTOM_DECK);
                 }
             }
         });
@@ -405,6 +414,7 @@ public class FDeckChooser extends FScreen {
         case OATHBREAKER_DECK:
         case TINY_LEADERS_DECK:
         case BRAWL_DECK:
+        case DAN_DAN_DECK:
         case SCHEME_DECK:
         case PLANAR_DECK:
         case DRAFT_DECK:
@@ -438,6 +448,9 @@ public class FDeckChooser extends FScreen {
                                 case Brawl:
                                     storage = FModel.getDecks().getBrawl();
                                     break;
+                                case DanDan:
+                                    storage = FModel.getDecks().getDanDan();
+                                    break;
                                 case TinyLeaders:
                                     storage = FModel.getDecks().getTinyLeaders();
                                     break;
@@ -469,6 +482,8 @@ public class FDeckChooser extends FScreen {
                 return FDeckEditor.EditorConfigTinyLeaders;
             case BRAWL_DECK:
                 return FDeckEditor.EditorConfigBrawl;
+            case DAN_DAN_DECK:
+                return FDeckEditor.EditorConfigDanDan;
             case SCHEME_DECK:
                 return FDeckEditor.EditorConfigArchenemy;
             case PLANAR_DECK:
@@ -488,6 +503,8 @@ public class FDeckChooser extends FScreen {
             return FDeckEditor.EditorConfigTinyLeaders;
         case Brawl:
             return FDeckEditor.EditorConfigBrawl;
+        case DanDan:
+            return FDeckEditor.EditorConfigDanDan;
         case Archenemy:
             return FDeckEditor.EditorConfigArchenemy;
         case Planechase:
@@ -524,6 +541,9 @@ public class FDeckChooser extends FScreen {
             case Constructed:
                 DeckPreferences.setCurrentDeck(deck.getName());
                 break;
+            case DanDan:
+                DeckPreferences.setDanDanDeck(deck.getName());
+                break;
             default:
                 break;
         }
@@ -541,6 +561,35 @@ public class FDeckChooser extends FScreen {
             cmbDeckTypes = new FComboBox<>();
             cmbDeckTypes.setAutoClose(false);
             switch (lstDecks.getGameType()) {
+            case DanDan:
+                cmbDeckTypes.addItem(DeckType.DAN_DAN_DECK);
+                cmbDeckTypes.addItem(DeckType.PRECONSTRUCTED_DECK);
+                cmbDeckTypes.addItem(DeckType.QUEST_OPPONENT_DECK);
+                cmbDeckTypes.addItem(DeckType.COLOR_DECK);
+                cmbDeckTypes.addItem(DeckType.STANDARD_COLOR_DECK);
+                cmbDeckTypes.addItem(DeckType.MODERN_COLOR_DECK);
+                cmbDeckTypes.addItem(DeckType.PAUPER_COLOR_DECK);
+                cmbDeckTypes.addItem(DeckType.RANDOM_DECK);
+                cmbDeckTypes.addItem(DeckType.THEME_DECK);
+                if(FModel.isdeckGenMatrixLoaded()) {
+                    cmbDeckTypes.addItem(DeckType.STANDARD_CARDGEN_DECK);
+                    cmbDeckTypes.addItem(DeckType.MODERN_CARDGEN_DECK);
+                    cmbDeckTypes.addItem(DeckType.PAUPER_CARDGEN_DECK);
+                    cmbDeckTypes.addItem(DeckType.LEGACY_CARDGEN_DECK);
+                    cmbDeckTypes.addItem(DeckType.VINTAGE_CARDGEN_DECK);
+                    cmbDeckTypes.addItem(DeckType.PIONEER_CARDGEN_DECK);
+                    cmbDeckTypes.addItem(DeckType.HISTORIC_CARDGEN_DECK);
+                }
+                cmbDeckTypes.addItem(DeckType.NET_DECK);
+                cmbDeckTypes.addItem(DeckType.NET_ARCHIVE_STANDARD_DECK);
+                cmbDeckTypes.addItem(DeckType.NET_ARCHIVE_PIONEER_DECK);
+                cmbDeckTypes.addItem(DeckType.NET_ARCHIVE_MODERN_DECK);
+                cmbDeckTypes.addItem(DeckType.NET_ARCHIVE_PAUPER_DECK);
+                cmbDeckTypes.addItem(DeckType.NET_ARCHIVE_LEGACY_DECK);
+                cmbDeckTypes.addItem(DeckType.NET_ARCHIVE_VINTAGE_DECK);
+                cmbDeckTypes.addItem(DeckType.NET_ARCHIVE_BLOCK_DECK);
+
+                break;
             case Constructed:
             case Gauntlet:
                 cmbDeckTypes.addItem(DeckType.CUSTOM_DECK);
@@ -595,6 +644,7 @@ public class FDeckChooser extends FScreen {
                 cmbDeckTypes.addItem(DeckType.OATHBREAKER_DECK);
                 cmbDeckTypes.addItem(DeckType.TINY_LEADERS_DECK);
                 cmbDeckTypes.addItem(DeckType.BRAWL_DECK);
+                cmbDeckTypes.addItem(DeckType.DAN_DAN_DECK);
                 cmbDeckTypes.addItem(DeckType.SCHEME_DECK);
                 cmbDeckTypes.addItem(DeckType.PLANAR_DECK);
                 cmbDeckTypes.addItem(DeckType.DRAFT_DECK);
@@ -874,6 +924,10 @@ public class FDeckChooser extends FScreen {
                 pool = DeckProxy.getAllBrawlDecks();
                 config = ItemManagerConfig.COMMANDER_DECKS;
                 break;
+            case DanDan:
+                pool = DeckProxy.getAllDanDanDecks();
+                config = ItemManagerConfig.CONSTRUCTED_DECKS;
+                break;
             case Archenemy:
                 pool = DeckProxy.getAllSchemeDecks();
                 config = ItemManagerConfig.SCHEME_DECKS;
@@ -911,6 +965,10 @@ public class FDeckChooser extends FScreen {
         case BRAWL_DECK:
             pool = DeckProxy.getAllBrawlDecks();
             config = ItemManagerConfig.COMMANDER_DECKS;
+            break;
+        case DAN_DAN_DECK:
+            pool = DeckProxy.getAllDanDanDecks();
+            config = ItemManagerConfig.CONSTRUCTED_DECKS;
             break;
         case RANDOM_COMMANDER_DECK:
             pool = CommanderDeckGenerator.getCommanderDecks(lstDecks.getGameType().getDeckFormat(),isAi, false);
@@ -1412,6 +1470,11 @@ public class FDeckChooser extends FScreen {
         if (selectedDeckType == DeckType.BRAWL_DECK) {
             //cannot create gauntlet for tiny leaders decks, so just start single match
             testVariantDeck(userDeck, GameType.Brawl);
+            return;
+        }
+
+        if (selectedDeckType == DeckType.DAN_DAN_DECK) {
+            testVariantDeck(userDeck, GameType.DanDan);
             return;
         }
 

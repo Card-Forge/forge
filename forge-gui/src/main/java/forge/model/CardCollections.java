@@ -45,6 +45,7 @@ public class CardCollections {
     private IStorage<Deck> oathbreaker;
     private IStorage<Deck> tinyLeaders;
     private IStorage<Deck> brawl;
+    private IStorage<Deck> danDan;
     private IStorage<Deck> genetic;
     private IStorage<Deck> customStarter;
 
@@ -147,6 +148,15 @@ public class CardCollections {
                     new DeckStorage(new File(ForgeConstants.DECK_BRAWL_DIR), ForgeConstants.DECK_BASE_DIR));
         }
         return brawl;
+    }
+
+    public IStorage<Deck> getDanDan() {
+        if (danDan == null) {
+            danDan = new StorageImmediatelySerialized<>("DanDan decks",
+                    new DeckStorage(new File(ForgeConstants.DECK_DANDAN_DIR), ForgeConstants.RES_DIR),
+                    true);
+        }
+        return danDan;
     }
 
     public final IStorage<Deck> getGeneticAIDecks() {

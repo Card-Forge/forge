@@ -50,7 +50,9 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deckchooser.FDeckViewer;
 import forge.game.GameEntityView;
+import forge.game.GameRules;
 import forge.game.GameView;
+import forge.game.Match;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
@@ -87,6 +89,7 @@ import forge.gui.framework.VEmptyDoc;
 import forge.gui.util.SOptionPane;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
+import forge.localinstance.properties.FileLocation;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -128,6 +131,7 @@ import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import forge.view.FView;
 import forge.view.arcane.CardPanel;
+import forge.game.DanDanViewZones;
 import forge.view.arcane.FloatingZone;
 import net.miginfocom.layout.LinkHandler;
 import net.miginfocom.swing.MigLayout;
@@ -207,12 +211,42 @@ public final class CMatchUI
     FScreen getScreen() {
         return this.screen;
     }
+
+    /** User/default layout file for the current match (DanDan vs other game types). */
+    public FileLocation getActiveMatchLayoutFile() {
+        final GameView gv = getGameView();
+        if (gv == null) {
+            return ForgeConstants.MATCH_LAYOUT_FILE;
+        }
+        // Lobby uses {@link GameType#Constructed} with {@link GameType#DanDan} as an applied variant;
+        // match-level rules always carry that variant. Prefer match rules so we do not depend on
+        // {@link GameView#getGame()} (e.g. trackable/copy edge cases).
+        final Match match = gv.getMatch();
+        if (match != null) {
+            final GameRules rules = match.getRules();
+            if (rules != null && rules.isDanDan()) {
+                return ForgeConstants.MATCH_DANDAN_LAYOUT_FILE;
+            }
+        }
+        return ForgeConstants.MATCH_LAYOUT_FILE;
+    }
+
     public boolean isCurrentScreen() {
         return Singletons.getControl().getCurrentScreen() == this.screen;
     }
 
     private boolean isInGame() {
         return getGameView() != null;
+    }
+
+    /**
+     * Canonical zone cards for UI display.
+     * <p>
+     * For DanDan shared {@link ZoneType#Library}/{@link ZoneType#Graveyard}, this returns a single
+     * canonical sequence so all UI panels (floating zones, docked tabs, counts/tooltips) remain in sync.
+     */
+    public FCollectionView<CardView> cardsForZoneDisplay(final PlayerView player, final ZoneType zone) {
+        return DanDanViewZones.cardsForZoneDisplay(getGameView(), player, zone);
     }
 
     public String getAvatarImage(final String playerName) {
@@ -339,10 +373,11 @@ public final class CMatchUI
     private void initHandViews() {
         final List<VHand> hands = new ArrayList<>();
         final Iterable<PlayerView> localPlayers = getLocalPlayers();
+        final boolean danDanHandsForAllSeats = getGameView() != null && DanDanViewZones.isDanDan(getGameView());
 
         int i = 0;
         for (final PlayerView p : sortedPlayers) {
-            if (allHands || isLocalPlayer(p) || CardView.mayViewAny(p.getHand(), localPlayers)) {
+            if (allHands || danDanHandsForAllSeats || isLocalPlayer(p) || CardView.mayViewAny(p.getHand(), localPlayers)) {
                 final EDocID doc = EDocID.Hands[i];
                 final VHand newHand = new VHand(this, doc, p);
                 newHand.getLayoutControl().initialize();
@@ -455,7 +490,11 @@ public final class CMatchUI
             }
 
             boolean setupPlayZone = false, updateHand = false, updateAnte = false, updateZones = false;
+            boolean touchedSharedDanDanZone = false;
             for (final ZoneType zone : update.getZones()) {
+                if (zone == ZoneType.Library || zone == ZoneType.Graveyard) {
+                    touchedSharedDanDanZone = true;
+                }
                 switch (zone) {
                 case Battlefield:
                     setupPlayZone = true;
@@ -466,11 +505,11 @@ public final class CMatchUI
                 case Hand:
                     updateHand = true;
                     updateZones = true;
-                    FloatingZone.refresh(owner, zone);
+                    FloatingZone.refreshZoneAfterModelUpdate(this, owner, zone);
                     break;
                 default:
                     updateZones = true;
-                    FloatingZone.refresh(owner, zone);
+                    FloatingZone.refreshZoneAfterModelUpdate(this, owner, zone);
                     break;
                 }
             }
@@ -501,7 +540,16 @@ public final class CMatchUI
                 vField.updateDetails();
             }
             if (updateZones) {
-                vField.updateZones();
+                if (touchedSharedDanDanZone && getGameView() != null && DanDanViewZones.isDanDan(getGameView())) {
+                    for (final PlayerView p : getGameView().getPlayers()) {
+                        final VField vf = getFieldViewFor(p);
+                        if (vf != null) {
+                            vf.updateZones();
+                        }
+                    }
+                } else {
+                    vField.updateZones();
+                }
             }
         }
     }
@@ -594,7 +642,7 @@ public final class CMatchUI
                 }
                 break;
             default:
-                FloatingZone.refresh(c.getController(),zone); // in case the card is visible in the zone
+                FloatingZone.refreshZoneAfterModelUpdate(this, c.getController(), zone);
                 break;
             }
         }

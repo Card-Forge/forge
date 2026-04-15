@@ -346,6 +346,9 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             new FileDeckController<>(FModel.getDecks().getBrawl(), Deck::new, DeckPreferences::setBrawlDeck))
             .setCardFilter(DeckFormat.Brawl.isLegalCardPredicate());
 
+    public static DeckEditorConfig EditorConfigDanDan = new GameTypeDeckEditorConfig(GameType.DanDan,
+            new FileDeckController<>(FModel.getDecks().getDanDan(), Deck::new, DeckPreferences::setDanDanDeck));
+
     public static DeckEditorConfig EditorConfigArchenemy = new GameTypeDeckEditorConfig(GameType.Archenemy,
             new FileDeckController<>(FModel.getDecks().getScheme(), Deck::new, DeckPreferences::setSchemeDeck))
             .setCatalogConfig(ItemManagerConfig.SCHEME_POOL, "lblSchemes")

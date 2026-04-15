@@ -1358,12 +1358,27 @@ public class CardView extends GameEntityView {
                 return getCard().getFacedownImageKey();
             }
             if (canBeShownToAny(viewers)) {
-                if (isCloned() && StaticData.instance().useSourceImageForClone()) {
-                    return getBackup().getCurrentState().getImageKey(viewers);
+                if (getCard().isCloned() && StaticData.instance().useSourceImageForClone()) {
+                    return getCard().getBackup().getCurrentState().getImageKey(viewers);
                 }
                 return get(TrackableProperty.ImageKey);
             }
             return ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD);
+        }
+
+        /**
+         * Art key ignoring hidden-zone rules (library, another player's hand, etc.).
+         * Used when the UI layer has already decided the card may be shown (e.g. dev "view all cards").
+         * Still respects face-down and clone-source image preference.
+         */
+        public String getPhysicalCardImageKey(final Iterable<PlayerView> viewers) {
+            if (getState() == CardStateName.FaceDown) {
+                return getCard().getFacedownImageKey();
+            }
+            if (getCard().isCloned() && StaticData.instance().useSourceImageForClone()) {
+                return getCard().getBackup().getCurrentState().getPhysicalCardImageKey(viewers);
+            }
+            return get(TrackableProperty.ImageKey);
         }
         /*
         * Use this for revealing purposes only

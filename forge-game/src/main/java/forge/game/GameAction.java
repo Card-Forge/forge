@@ -651,6 +651,19 @@ public class GameAction {
             copied.clearControllers();
         }
 
+        if (zoneTo.is(ZoneType.Hand)) {
+            final GameRules rules = game.getRules();
+            if (rules != null && rules.isDanDan()) {
+                final Player handPlayer = zoneTo.getPlayer();
+                if (copied.getOwner() != handPlayer) {
+                    copied.setOwner(handPlayer);
+                }
+                if (copied.getController() != handPlayer) {
+                    copied.setController(handPlayer, game.getNextTimestamp());
+                }
+            }
+        }
+
         return copied;
     }
 
@@ -854,6 +867,10 @@ public class GameAction {
         final PlayerZone hand = c.getOwner().getZone(ZoneType.Hand);
         return moveTo(hand, c, cause, params);
     }
+    public final Card moveToHand(final Card c, final Player recipient, SpellAbility cause, Map<AbilityKey, Object> params) {
+        final PlayerZone hand = recipient != null ? recipient.getZone(ZoneType.Hand) : c.getOwner().getZone(ZoneType.Hand);
+        return moveTo(hand, c, cause, params);
+    }
 
     public final Card moveToPlay(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
         return moveToPlay(c, c.getController(), cause, params);
@@ -881,7 +898,15 @@ public class GameAction {
         return moveToLibrary(c, libPosition, cause, null);
     }
     public final Card moveToLibrary(Card c, int libPosition, SpellAbility cause, Map<AbilityKey, Object> params) {
-        final PlayerZone library = c.getOwner().getZone(ZoneType.Library);
+        final PlayerZone library;
+        final GameRules rules = game.getRules();
+        final boolean isDanDan = rules != null && rules.isDanDan();
+        if (isDanDan && !game.getPlayers().isEmpty()) {
+            // DanDan uses one shared library zone for all players.
+            library = game.getPlayers().get(0).getZone(ZoneType.Library);
+        } else {
+            library = c.getOwner().getZone(ZoneType.Library);
+        }
         if (libPosition == -1 || libPosition > library.size()) {
             libPosition = library.size();
         }

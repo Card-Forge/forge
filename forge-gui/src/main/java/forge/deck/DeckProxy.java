@@ -492,6 +492,20 @@ public class DeckProxy implements InventoryItem {
         return result;
     }
 
+    public static Iterable<DeckProxy> getAllDanDanDecks() {
+        return getAllDanDanDecks(null);
+    }
+    public static Iterable<DeckProxy> getAllDanDanDecks(Predicate<Deck> filter) {
+        final List<DeckProxy> result = new ArrayList<>();
+        if (filter == null) {
+            filter = DeckFormat.DanDan.hasLegalCardsPredicate(FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY));
+        } else {
+            filter = filter.and(DeckFormat.DanDan.hasLegalCardsPredicate(FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)));
+        }
+        addDecksRecursivelly("DanDan", GameType.DanDan, result, "", FModel.getDecks().getDanDan(), filter);
+        return result;
+    }
+
     public static Iterable<DeckProxy> getAllSchemeDecks() {
         return getAllSchemeDecks(null);
     }

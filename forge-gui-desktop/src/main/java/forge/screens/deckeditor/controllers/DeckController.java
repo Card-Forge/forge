@@ -326,6 +326,10 @@ public class DeckController<T extends DeckBase> {
             return;
         }
 
+        if (model instanceof Deck deckModel) {
+            deckModel.setDeckFormat(view.getGameType().getDeckFormat());
+        }
+
         // copy to new instance before adding to current folder so further changes are auto-saved
         currentFolder.add((T) model.copyTo(model.getName()));
         model.setDirectory(DeckProxy.getDeckDirectory(currentFolder));
@@ -410,6 +414,7 @@ public class DeckController<T extends DeckBase> {
 
         VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText(tabCaption);
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setText(title);
+        VCurrentDeck.SINGLETON_INSTANCE.getTxfDescription().setText(model != null && model.getComment() != null ? model.getComment() : "");
         VCurrentDeck.SINGLETON_INSTANCE.getItemManager().setCaption(itemManagerCaption);
         DeckFileMenu.updateSaveEnabled();
     }

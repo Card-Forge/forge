@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.collect.ImmutableList;
 
 import forge.Singletons;
+import forge.game.GameType;
 import forge.deck.DeckProxy;
 import forge.deck.io.DeckPreferences;
 import forge.gui.framework.FScreen;
@@ -29,6 +30,8 @@ public class SEditorIO {
     public static boolean saveDeck() {
         final DeckController<?> controller = CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController();
         final String name = VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().getText();
+        final String comment = VCurrentDeck.SINGLETON_INSTANCE.getTxfDescription().getText();
+        controller.getModel().setComment(StringUtils.isBlank(comment) ? null : comment);
         final String deckStr = DeckProxy.getDeckString(controller.getModelPath(), name);
         boolean performSave = false;
 
@@ -61,6 +64,10 @@ public class SEditorIO {
                     CBrawlDecks.SINGLETON_INSTANCE.refresh();
                     VBrawlDecks.SINGLETON_INSTANCE.getLstDecks().setSelectedString(deckStr);
                     break;
+                case DanDan:
+                    CDandanDecks.SINGLETON_INSTANCE.refresh();
+                    VDandanDecks.SINGLETON_INSTANCE.getLstDecks().setSelectedString(deckStr);
+                    break;
                 case Commander:
                     CCommanderDecks.SINGLETON_INSTANCE.refresh();
                     VCommanderDecks.SINGLETON_INSTANCE.getLstDecks().setSelectedString(deckStr);
@@ -85,7 +92,11 @@ public class SEditorIO {
         }
 
         if (Singletons.getControl().getCurrentScreen() == FScreen.DECK_EDITOR_CONSTRUCTED) {
-            DeckPreferences.setCurrentDeck(deckStr);
+            if (CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getGameType() == GameType.DanDan) {
+                DeckPreferences.setDanDanDeck(deckStr);
+            } else {
+                DeckPreferences.setCurrentDeck(deckStr);
+            }
         }
 
         return performSave;

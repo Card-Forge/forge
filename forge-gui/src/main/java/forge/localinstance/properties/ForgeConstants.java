@@ -264,6 +264,7 @@ public final class ForgeConstants {
     public static final String CONQUEST_SAVE_DIR          = USER_CONQUEST_DIR + "saves" + PATH_SEPARATOR;
     public static final String DECK_TINY_LEADERS_DIR      = DECK_BASE_DIR + "tiny_leaders" + PATH_SEPARATOR;
     public static final String DECK_BRAWL_DIR             = DECK_BASE_DIR + "brawl" + PATH_SEPARATOR;
+    public static final String DECK_DANDAN_DIR            = RES_DIR + "dandan" + PATH_SEPARATOR;
     public static final String MAIN_PREFS_FILE            = USER_PREFS_DIR + "forge.preferences";
     public static final String SERVER_PREFS_FILE          = USER_PREFS_DIR + "server.preferences";
     public static final String CARD_PREFS_FILE            = USER_PREFS_DIR + "card.preferences";
@@ -281,6 +282,7 @@ public final class ForgeConstants {
     public static final String STARS_FILE     = _DEFAULTS_DIR + "stars.png";
     public static final FileLocation WINDOW_LAYOUT_FILE      = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "window.xml");
     public static final FileLocation MATCH_LAYOUT_FILE       = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "match.xml");
+    public static final FileLocation MATCH_DANDAN_LAYOUT_FILE = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "match_dandan.xml");
     public static final FileLocation WORKSHOP_LAYOUT_FILE    = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "workshop.xml");
     public static final FileLocation EDITOR_LAYOUT_FILE      = new FileLocation(_DEFAULTS_DIR, USER_PREFS_DIR, "editor.xml");
     public static final FileLocation GAUNTLET_DIR            = new FileLocation(_DEFAULTS_DIR, USER_DIR,       "gauntlet" + PATH_SEPARATOR);

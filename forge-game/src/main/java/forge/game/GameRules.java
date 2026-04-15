@@ -1,5 +1,8 @@
 package forge.game;
 
+import forge.game.zone.Zone;
+import forge.game.zone.ZoneType;
+
 import java.util.EnumSet;
 import java.util.Set;
 
@@ -121,11 +124,43 @@ public class GameRules {
         return appliedVariants.contains(variant);
     }
 
+    public boolean isTypeOrVariant(final GameType type) {
+        return gameType == type || hasAppliedVariant(type);
+    }
+
+    public boolean isDanDan() {
+        return isTypeOrVariant(GameType.DanDan);
+    }
+
+    /**
+     * When true, card-property and related activation logic should not fail strictly on
+     * per-player controller or ownership for the given zone. Callers pass the card's
+     * current zone or last-known zone as appropriate.
+     * <p>
+     * Today this applies to DanDan's shared graveyard only; additional variants or zones
+     * can be folded into the implementation without changing the method name.
+     * </p>
+     *
+     * @param zoneType the zone type to evaluate, or null (treated as not relaxed)
+     * @return whether relaxed controller/ownership checks apply for card properties
+     */
+    public boolean relaxesControllerOwnershipForCardProperties(final ZoneType zoneType) {
+        return isDanDan() && zoneType == ZoneType.Graveyard;
+    }
+
+    /**
+     * @param zone the zone to evaluate, or null (treated as not relaxed)
+     * @see #relaxesControllerOwnershipForCardProperties(ZoneType)
+     */
+    public boolean relaxesControllerOwnershipForCardProperties(final Zone zone) {
+        return zone != null && relaxesControllerOwnershipForCardProperties(zone.getZoneType());
+    }
+
     public boolean hasCommander() {
-        return appliedVariants.contains(GameType.Commander)
-                || appliedVariants.contains(GameType.Oathbreaker)
-                || appliedVariants.contains(GameType.TinyLeaders)
-                || appliedVariants.contains(GameType.Brawl);
+        return isTypeOrVariant(GameType.Commander)
+                || isTypeOrVariant(GameType.Oathbreaker)
+                || isTypeOrVariant(GameType.TinyLeaders)
+                || isTypeOrVariant(GameType.Brawl);
     }
 
     public boolean useGrayText() {
