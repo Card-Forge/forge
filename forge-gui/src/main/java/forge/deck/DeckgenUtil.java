@@ -352,7 +352,7 @@ public class DeckgenUtil {
             final CardPool cards = gen.getDeck(60, forAi);
 
             if (null == deckName) {
-                deckName = Lang.joinHomogenous(Arrays.asList(selection));
+                deckName = Lang.joinHomogenous(List.of(selection));
             }
 
             // After generating card lists, build deck.
