@@ -1037,7 +1037,7 @@
     "iconName": "CutthroatSkirt",
     "cost": 5000,
     "effect": {
-        "lifeModifier": -6,
+        "lifeModifier": -4,
         "startBattleWithCard": [
         "Nirkana Cutthroat|ROE"
      ]
@@ -1049,7 +1049,7 @@
     "equipmentSlot": "Boots",
     "iconName": "UtopiaAnklet",
     "effect": {
-        "lifeModifier": -6,
+        "lifeModifier": -4,
         "startBattleWithCard": [
         "Utopia Tree|INV"
      ]
