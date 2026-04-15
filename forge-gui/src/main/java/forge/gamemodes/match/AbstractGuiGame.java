@@ -352,12 +352,16 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         }
         if (hasLocalPlayers()) {
             boolean concedeNeeded = false;
-            // check if anyone still needs to confirm
+            // check if anyone still needs to concede
             for (final IGameController c : getOriginalGameControllers()) {
-                if (c instanceof PlayerControllerHuman) {
-                    if (((PlayerControllerHuman) c).getPlayer().getOutcome() == null) {
+                if (c instanceof PlayerControllerHuman pch) {
+                    if (pch.getPlayer().getOutcome() == null) {
                         concedeNeeded = true;
                     }
+                } else {
+                    // Network client — no access to Player outcome, but game
+                    // is still in progress (isGameOver checked above)
+                    concedeNeeded = true;
                 }
             }
             if (concedeNeeded) {
@@ -375,6 +379,11 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 }
             } else {
                 return !ignoreConcedeChain;
+            }
+            if (isNetGame()) {
+                // Network: concede was sent to server asynchronously.
+                // Let the server drive game-end flow — don't send nextGameDecision here.
+                return false;
             }
             if (gameView.isGameOver()) {
                 // Don't immediately close, wait for win/lose screen

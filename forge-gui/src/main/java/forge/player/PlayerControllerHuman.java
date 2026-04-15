@@ -3344,6 +3344,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (player != null) {
             player.concede();
             getGame().getAction().checkGameOverCondition();
+            if (getGame().isGameOver()) {
+                // Release all input latches — the game thread may be blocked
+                // on a different player's input queue than the one who conceded
+                for (Player p : getGame().getPlayers()) {
+                    if (p.getController() instanceof PlayerControllerHuman pch) {
+                        pch.getInputQueue().onGameOver(true);
+                    }
+                }
+            }
         }
     }
 

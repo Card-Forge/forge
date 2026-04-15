@@ -305,6 +305,17 @@ public class HostedMatch {
                 endGameHook.run();
             }
 
+            // Flush any buffered game events to remote clients so they receive
+            // GameEventGameOutcome and GameEventGameFinished before we proceed.
+            for (PlayerControllerHuman hc : humanControllers) {
+                if (hc.getGui() instanceof forge.gamemodes.net.server.RemoteClientGuiGame ngg) {
+                    forge.gui.control.GameEventForwarder fwd = ngg.getForwarder();
+                    if (fwd != null) {
+                        fwd.flush();
+                    }
+                }
+            }
+
             // After game is over...
             isMatchOver = match.isMatchOver();
             if (humanCount == 0) {

@@ -47,6 +47,18 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
             protocolMethod.checkArgs(args);
 
             final Object toInvoke = getToInvoke(ctx);
+            if (toInvoke == null) {
+                netLog.info("Ignoring {} — controller no longer available (game ended)", methodName);
+                // For methods expecting a reply, send null so the client doesn't hang
+                final Class<?> earlyReturnType = protocolMethod.getReturnType();
+                if (!earlyReturnType.equals(Void.TYPE)) {
+                    final IRemote remote = getRemote(ctx);
+                    if (remote != null) {
+                        remote.send(new ReplyEvent(event.getId(), null));
+                    }
+                }
+                return;
+            }
 
             // Pre-call actions (runs on IO thread — blocks all subsequent messages)
             final long beforeCallStart = System.currentTimeMillis();
