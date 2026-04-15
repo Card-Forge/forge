@@ -375,6 +375,11 @@
         "itemName": "Bloodsworn Bite"
       },
       {
+        "type": "item",
+        "count": 1,
+        "itemName": "Vampiric Amulet"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Edgar Markov"
