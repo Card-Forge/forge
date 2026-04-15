@@ -530,8 +530,6 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         sa.resetTargets();
-
-        // target loop
         TargetChoices tcs = sa.getTargets();
 
         // Do not use if would kill self
@@ -539,19 +537,10 @@ public class DamageDealAi extends DamageAiBase {
             return false;
         }
 
-        if ("ChoiceBurn".equals(logic)) {
-            // do not waste burns on player if other choices are present
-            if (shouldTgtP(ai, sa, dmg, noPrevention)) {
-                tcs.add(enemy);
-                return true;
-            }
-            return false;
-        }
         if ("Polukranos".equals(logic)) {
             int dmgTaken = 0;
-            CardCollection humCreatures = enemy.getCreaturesInPlay();
             Card lastTgt = null;
-            humCreatures = CardLists.getTargetableCards(humCreatures, sa);
+            CardCollection humCreatures = CardLists.getTargetableCards(enemy.getCreaturesInPlay(), sa);
             ComputerUtilCard.sortByEvaluateCreature(humCreatures);
             // try to kill things without dying
             for (Card humanCreature : humCreatures) {
@@ -629,8 +618,6 @@ public class DamageDealAi extends DamageAiBase {
             }
 
             if (tgt.canTgtCreature() && tgt.canTgtPlayer()) {
-                Card c = null;
-
                 if (shouldTgtP(ai, sa, dmg, noPrevention)) {
                     tcs.add(enemy);
                     if (divided) {
@@ -644,7 +631,7 @@ public class DamageDealAi extends DamageAiBase {
                 }
 
                 // look for creature targets; currently also catches planeswalkers that can be killed immediately
-                c = dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, false);
+                Card c = dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, false);
                 if (c != null) {
                     //option to hold removal instead only applies for single targeted removal
                     if (sa.isSpell() && !divided && !immediately && tgt.getMaxTargets(source, sa) == 1) {
@@ -707,33 +694,29 @@ public class DamageDealAi extends DamageAiBase {
                 return false;
             }
             if (sa.canTarget(enemy) && sa.canAddMoreTarget()) {
-                final Cost abCost = sa.getPayCosts();
-                boolean freePing = immediately || abCost == null || sa.getTargets().size() > 0;
-
-                if (!source.isSpell()) {
-                    if (phase.is(PhaseType.END_OF_TURN) && sa.isAbility() && abCost.isReusuableResource()) {
-                        if (phase.getNextTurn().equals(ai))
-                            freePing = true;
+                boolean freePing = immediately || sa.getTargets().size() > 0;
+                if (sa.isActivatedAbility()) {
+                    if (phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai) && sa.getPayCosts().isReusuableResource()) {
+                        freePing = true;
                     }
-
-                    if (phase.is(PhaseType.MAIN2) && sa.isAbility()) {
-                        if (sa.isPwAbility() || source.hasSVar("EndOfTurnLeavePlay"))
-                            freePing = true;
+                    if (phase.is(PhaseType.MAIN2) && source.hasSVar("EndOfTurnLeavePlay")) {
+                        freePing = true;
+                    }
+                    if ("PingAfterAttack".equals(logic) && phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.isPlayerTurn(ai)) {
+                        freePing = true;
                     }
                 }
 
-                if ((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
+                if ((freePing && !avoidTargetP(ai, sa))
+                        || (((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
                         || (isSorcerySpeed(sa, ai) && phase.is(PhaseType.MAIN2))
-                        || ("BurnCreatures".equals(logic) && !enemy.getCreaturesInPlay().isEmpty())
-                        || immediately) {
-                    boolean pingAfterAttack = "PingAfterAttack".equals(logic) && phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.isPlayerTurn(ai);
-                    boolean isPWAbility = sa.isPwAbility() && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class);
-                    if ((freePing && !avoidTargetP(ai, sa)) || isPWAbility || (pingAfterAttack && !avoidTargetP(ai, sa)) || shouldTgtP(ai, sa, dmg, noPrevention)) {
-                        tcs.add(enemy);
-                        if (divided) {
-                            sa.addDividedAllocation(enemy, dmg);
-                            break;
-                        }
+                        || ("BurnCreatures".equals(logic) && !enemy.getCreaturesInPlay().isEmpty()))
+                        && ((sa.isPwAbility() && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class))
+                        || shouldTgtP(ai, sa, dmg, noPrevention)))) {
+                    tcs.add(enemy);
+                    if (divided) {
+                        sa.addDividedAllocation(enemy, dmg);
+                        break;
                     }
                 }
             }
