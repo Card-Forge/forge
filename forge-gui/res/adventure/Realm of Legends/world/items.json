@@ -1072,7 +1072,7 @@
     "equipmentSlot": "Boots",
     "iconName": "KoboldBoots",
     "effect": {
-        "lifeModifier": -6,
+        "lifeModifier": -4,
         "startBattleWithCard": [
         "Kobolds of Kher Keep|LEG", "Crookshank Kobolds|LEG"
      ]
@@ -1084,6 +1084,7 @@
     "equipmentSlot": "Boots",
     "iconName": "CloudseederShoes",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Cloudseeder|TSR"
      ]
@@ -1095,6 +1096,9 @@
     "equipmentSlot": "Boots",
     "iconName": "Courier'sBoots",
     "effect": {
+      "opponent": {
+        "lifeModifier": -3
+      },
         "startBattleWithCard": [
         "Torch Courier|GRN"
      ]
@@ -1110,7 +1114,7 @@
           "Jolly Gerbils|BLB"
         ],
         "opponent": {
-          "lifeModifier": 10
+          "lifeModifier": 5
         }
       }
     },
@@ -1167,6 +1171,7 @@
     "iconName": "Peddler'sShoes",
     "cost": 1000,
     "effect": {
+        "lifeModifier": 6,
         "startBattleWithCard": [
         "Tonic Peddler|MMQ"
      ]
@@ -1178,6 +1183,7 @@
     "equipmentSlot": "Boots",
     "iconName": "SkySkiffTurnkey",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Sky Skiff"
      ]
@@ -1189,7 +1195,10 @@
     "equipmentSlot": "Boots",
     "iconName": "BloodfireBoots",
     "effect": {
-        "startBattleWithCard": [
+      "opponent": {
+        "lifeModifier": -2
+      },
+      "startBattleWithCard": [
         "Bloodfire Dwarf|APC"
      ]
     }
@@ -1201,6 +1210,7 @@
     "iconName": "Witch'sShoes",
     "cost": 1000,
     "effect": {
+        "lifeModifier": 5,
         "startBattleWithCard": [
         "Plague Witch|NEM"
      ]
@@ -1212,6 +1222,7 @@
     "equipmentSlot": "Boots",
     "iconName": "PetalmanePants",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Petalmane Baku|BOK"
      ]
@@ -1223,6 +1234,7 @@
     "equipmentSlot": "Boots",
     "iconName": "EnduringSliverband",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Enduring Sliver|MH1"
      ]
@@ -1234,6 +1246,7 @@
     "equipmentSlot": "Boots",
     "iconName": "JadeAnklet",
     "effect": {
+        "lifeModifier": 4,
         "startBattleWithCard": [
         "Jade Idol|CHK"
      ]
@@ -1268,6 +1281,7 @@
     "equipmentSlot": "Boots",
     "iconName": "DeathsporeShoes",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Deathspore Thallid|TSP"
      ]
@@ -1279,7 +1293,7 @@
     "equipmentSlot": "Boots",
     "iconName": "ObscuraShoes",
     "effect": {
-        "lifeModifier": -3,
+        "lifeModifier": -2,
         "startBattleWithCard": [
         "Obscura Initiate|SNC"
      ]
@@ -1348,6 +1362,7 @@
     "equipmentSlot": "Boots",
     "iconName": "EmpyrialGreaves",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Angel's Herald|ALA"
      ]
@@ -1359,7 +1374,7 @@
     "equipmentSlot": "Boots",
     "iconName": "GixianGraft",
     "effect": {
-        "lifeModifier": -6,
+        "lifeModifier": -3,
         "startBattleWithCard": [
         "Gixian Recycler|YBRO"
      ]
@@ -1371,6 +1386,7 @@
     "equipmentSlot": "Boots",
     "iconName": "ArtificialSliverband",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Sliversmith|TSR"
      ]
@@ -1394,6 +1410,7 @@
     "iconName": "Caravaneer'sGreaves",
     "cost": 1000,
     "effect": {
+        "lifeModifier": 4,
         "startBattleWithCard": [
         "Caravan Escort|ROE"
      ]
@@ -1405,7 +1422,7 @@
     "equipmentSlot": "Boots",
     "iconName": "JoragaBoots",
     "effect": {
-        "changeStartCards": -1,
+        "lifeModifier": -6,
         "startBattleWithCard": [
         "Joraga Treespeaker|ROE"
      ]
@@ -1417,6 +1434,7 @@
     "equipmentSlot": "Boots",
     "iconName": "HellkiteGreaves",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Dragon's Herald|ALA"
      ]
@@ -1428,7 +1446,8 @@
       "equipmentSlot": "Boots",
       "iconName": "Yore-TillerAnklet",
       "effect": {
-        "changeStartCards": -2,
+        "changeStartCards": -1,
+        "lifeModifier": -8,
         "startBattleWithCard": [
           "Yore-Tiller Nephilim|GPT"
         ]
@@ -1484,7 +1503,6 @@
     "equipmentSlot": "Boots",
     "iconName": "DeathspitterSkirt",
     "effect": {
-        "lifeModifier": -3,
         "startBattleWithCard": [
         "Frilled Deathspitter|RIX"
      ]
@@ -1496,6 +1514,7 @@
     "equipmentSlot": "Boots",
     "iconName": "Lookout'sHarness",
     "effect": {
+        "lifeModifier": 5,
         "startBattleWithCard": [
         "Cliffside Lookout|BFZ"
      ]
@@ -1519,7 +1538,7 @@
     "iconName": "VindicatorGreaves",
     "cost": 5000,
     "effect": {
-        "lifeModifier": -4,
+        "lifeModifier": -3,
         "startBattleWithCard": [
         "Kabira Vindicator|ROE"
      ]
@@ -1542,7 +1561,6 @@
     "equipmentSlot": "Boots",
     "iconName": "GlimmerbellBondband",
     "effect": {
-        "lifeModifier": -2,
         "startBattleWithCard": [
         "Glimmerbell|IKO"
      ]
@@ -1555,6 +1573,9 @@
     "iconName": "FirefrightenerShoes",
     "cost": 1000,
     "effect": {
+      "opponent": {
+        "lifeModifier": -2
+      },
         "startBattleWithCard": [
         "Firefright Mage|PLC"
      ]
@@ -1578,6 +1599,7 @@
     "equipmentSlot": "Boots",
     "iconName": "SovereignGreaves",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Sphinx's Herald|ALA"
      ]
@@ -1589,6 +1611,7 @@
     "equipmentSlot": "Boots",
     "iconName": "BloodswornBite",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Olivia's Bloodsworn|SOI"
      ]
@@ -1600,6 +1623,7 @@
     "equipmentSlot": "Boots",
     "iconName": "VictualSliverband",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Victual Sliver|STH"
      ]
@@ -1611,6 +1635,7 @@
     "equipmentSlot": "Boots",
     "iconName": "Gingerboots",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Gingerbrute|ELD"
      ]
@@ -1622,7 +1647,7 @@
       "equipmentSlot": "Boots",
       "iconName": "Dune-BroodAnklet",
       "effect": {
-        "lifeModifier": -8,
+        "lifeModifier": -4,
         "startBattleWithCard": [
           "Dune-Brood Nephilim|GPT"
         ]
@@ -1668,6 +1693,7 @@
     "equipmentSlot": "Boots",
     "iconName": "PrincelyGreaves",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Demon's Herald|ALA"
      ]
@@ -1713,6 +1739,7 @@
     "equipmentSlot": "Boots",
     "iconName": "ScarecrowSocks",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Scarecrow Guide"
      ]
@@ -1724,6 +1751,7 @@
     "equipmentSlot": "Boots",
     "iconName": "SpectralSliverband",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Spectral Sliver|LGN"
      ]
@@ -1735,6 +1763,7 @@
     "equipmentSlot": "Boots",
     "iconName": "SabertoothBondband",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Savai Sabertooth|IKO"
      ]
@@ -1746,6 +1775,7 @@
     "equipmentSlot": "Boots",
     "iconName": "BandarBoots",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Wily Bandar|KLD"
      ]
@@ -1758,6 +1788,7 @@
     "iconName": "Trickster'sShoes",
     "cost": 1000,
     "effect": {
+        "lifeModifier": 4,
         "startBattleWithCard": [
         "Trickster Mage|NEM"
      ]
@@ -1769,6 +1800,7 @@
     "equipmentSlot": "Boots",
     "iconName": "GodsireGreaves",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Behemoth's Herald|ALA"
      ]
@@ -1780,7 +1812,7 @@
     "equipmentSlot": "Boots",
     "iconName": "DrapedDragonhide",
     "effect": {
-        "lifeModifier": -4,
+        "lifeModifier": -2,
         "startBattleWithCard": [
         "Dragon Whelp|LEA"
      ]
@@ -1788,7 +1820,7 @@
   },
     {
     "name": "Cryptologist's Fins",
-    "description": "0/1 merfolk wizard. Level up to gain draw power.",
+    "description": "0/1 merfolk wizard. 1U: looter; twice more: T: draw.",
     "equipmentSlot": "Boots",
     "iconName": "Cryptologist'sFins",
     "cost": 5000,
@@ -1803,7 +1835,7 @@
     "description": "5/2 wall.",
     "equipmentSlot": "Boots",
     "iconName": "BlisteringBreeches",
-    "cost": 3000,
+    "cost": 5000,
     "effect": {
       "startBattleWithCard": [
         "Blistering Barrier"
@@ -1815,7 +1847,7 @@
     "description": "0/5 wall, can block any # of creatures.",
     "equipmentSlot": "Boots",
     "iconName": "GreavesofGlare",
-    "cost": 3000,
+    "cost": 5000,
     "effect": {
       "startBattleWithCard": [
         "Wall of Glare"
@@ -1851,7 +1883,7 @@
     "description": "0/6 flying wall.",
     "equipmentSlot": "Boots",
     "iconName": "BarrierBreeches",
-    "cost": 3000,
+    "cost": 6000,
     "effect": {
       "startBattleWithCard": [
         "Hover Barrier"
@@ -1876,7 +1908,7 @@
       "equipmentSlot": "Boots",
       "iconName": "Ink-TreaderAnklet",
       "effect": {
-        "changeStartCards": -1,
+        "lifeModifier": -4,
         "startBattleWithCard": [
           "Ink-Treader Nephilim|GPT"
         ]
@@ -1900,7 +1932,7 @@
     "equipmentSlot": "Boots",
     "iconName": "RaptorBondband",
     "effect": {
-        "lifeModifier": -3,
+        "lifeModifier": -2,
         "startBattleWithCard": [
         "Frenzied Raptor|IKO"
      ]
@@ -1912,6 +1944,7 @@
     "equipmentSlot": "Boots",
     "iconName": "PlatedSliverband",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Plated Sliver|LGN"
      ]
@@ -1924,6 +1957,7 @@
     "iconName": "Greenseeker'sShoes",
     "cost": 1000,
     "effect": {
+        "lifeModifier": 4,
         "startBattleWithCard": [
         "Greenseeker|TSR"
      ]
@@ -1935,6 +1969,7 @@
     "equipmentSlot": "Boots",
     "iconName": "AngelicGreaves",
     "effect": {
+        "lifeModifier": 4,
         "startBattleWithCard": [
         "Angelic Wall|PO2"
      ]
@@ -1958,6 +1993,7 @@
     "equipmentSlot": "Left",
     "iconName": "BasilicaSkullbomb",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Basilica Skullbomb|ONE"
      ]
@@ -1994,7 +2030,7 @@
     "equipmentSlot": "Left",
     "iconName": "GoldenEgg",
     "effect": {
-        "lifeModifier": 2,
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Golden Egg|ELD"
      ]
@@ -2006,6 +2042,7 @@
     "equipmentSlot": "Left",
     "iconName": "Urza'sBauble",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Urza's Bauble|ICE"
      ]
@@ -2029,7 +2066,6 @@
     "equipmentSlot": "Left",
     "iconName": "TomeofTriumph",
     "effect": {
-        "lifeModifier": -6,
         "startBattleWithCard": [
         "The Triumph of Anax|THB"
      ]
@@ -2041,6 +2077,7 @@
     "equipmentSlot": "Left",
     "iconName": "Mishra'sBauble",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Mishra's Bauble|CSP"
      ]
@@ -2052,6 +2089,9 @@
     "equipmentSlot": "Left",
     "iconName": "FurnaceSkullbomb",
     "effect": {
+      "opponent": {
+        "lifeModifier": -4
+      },
         "startBattleWithCard": [
         "Furnace Skullbomb|ONE"
      ]
@@ -2157,6 +2197,7 @@
     "equipmentSlot": "Left",
     "iconName": "ChimericCoils",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Chimeric Coils|5DN"
      ]
@@ -2180,7 +2221,7 @@
     "iconName": "LotusPetal",
     "cost": 5000,
     "effect": {
-        "lifeModifier": -5,
+        "lifeModifier": -3,
         "startBattleWithCard": [
         "Lotus Petal|TMP"
      ]
@@ -2253,7 +2294,6 @@
     "equipmentSlot": "Left",
     "iconName": "AmnesiacPrayerbook",
     "effect": {
-        "lifeModifier": -2,
         "startBattleWithCard": [
         "Vessel of Paramnesia|SOI"
      ]
@@ -2278,6 +2318,7 @@
     "iconName": "SunbeamGauntlet",
     "cost": 1000,
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Sunbeam Spellbomb|MRD"
      ]
@@ -2313,6 +2354,7 @@
     "equipmentSlot": "Left",
     "iconName": "MazeSkullbomb",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Maze Skullbomb|ONE"
      ]
@@ -2360,6 +2402,7 @@
     "equipmentSlot": "Left",
     "iconName": "SurgicalSkullbomb",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Surgical Skullbomb|ONE"
      ]
@@ -2393,6 +2436,7 @@
     "equipmentSlot": "Left",
     "iconName": "TemptingApple",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Eriette's Tempting Apple|WOE"
      ]
@@ -2417,7 +2461,6 @@
     "equipmentSlot": "Left",
     "iconName": "NascentPrayerbook",
     "effect": {
-        "lifeModifier": -2,
         "startBattleWithCard": [
         "Vessel of Nascency|SOI"
      ]
@@ -2429,6 +2472,9 @@
     "equipmentSlot": "Left",
     "iconName": "LittleBlackBook",
     "effect": {
+      "opponent": {
+        "lifeModifier": -2
+      },
         "startBattleWithCard": [
         "Deadly Designs|CN2"
      ]
@@ -2440,7 +2486,6 @@
     "equipmentSlot": "Left",
     "iconName": "PrayerbookofReturn",
     "effect": {
-      "lifeModifier": -4,
         "startBattleWithCard": [
         "Font of Return|JOU"
      ]
@@ -2491,6 +2536,7 @@
     "iconName": "LifesparkGauntlet",
     "cost": 1000,
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Lifespark Spellbomb|MRD"
      ]
@@ -2522,12 +2568,12 @@
   },
     {
     "name": "Amulet of Compleation",
-    "description": "Surveil 1 when a Phyrexian you control dies",
+    "description": "Your phyrexians get +1/+1",
     "equipmentSlot": "Neck",
     "iconName": "AmuletofCompleation",
     "effect": {
         "startBattleWithCard": [
-        "Gift of Compleation"
+        "Sculpted Perfection"
      ]
     }
   },
@@ -2537,7 +2583,7 @@
     "equipmentSlot": "Left",
     "iconName": "PrayerbookofFortunes",
     "effect": {
-        "changeStartCards": -4,
+        "lifeModifier": -4,
         "startBattleWithCard": [
         "Font of Fortunes|JOU"
      ]
@@ -2549,6 +2595,7 @@
     "equipmentSlot": "Left",
     "iconName": "WeddingInvitation",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Wedding Invitation|VOW"
      ]
@@ -2560,6 +2607,7 @@
     "equipmentSlot": "Left",
     "iconName": "DrossSkullbomb",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Dross Skullbomb|ONE"
      ]
@@ -2583,7 +2631,6 @@
     "iconName": "TomeofMight",
     "cost": 5000,
     "effect": {
-        "lifeModifier": -3,
         "startBattleWithCard": [
         "Seal of Strength|NEM"
      ]
@@ -2617,7 +2664,7 @@
     "equipmentSlot": "Neck",
     "iconName": "Gourmand'sHat",
     "effect": {
-        "changeStartCards": -1,
+        "lifeModifier": -6,
         "startBattleWithCard": [
         "Gourmand's Talent|BLC"
      ]
@@ -2629,6 +2676,7 @@
     "equipmentSlot": "Neck",
     "iconName": "OozeAmulet",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Ooze Flux|GTC"
      ]
@@ -2663,7 +2711,7 @@
     "iconName": "MaskofCompulsion",
     "cost": 2000,
     "effect": {
-        "changeStartCards": -1,
+        "lifeModifier": -6,
         "startBattleWithCard": [
         "Compulsion|TOR"
      ]
@@ -2675,7 +2723,7 @@
     "equipmentSlot": "Neck",
     "iconName": "BreachingStormcrown",
     "effect": {
-        "lifeModifier": 5,
+        "lifeModifier": 6,
         "startBattleWithCard": [
         "Breaching Dragonstorm|TDM"
      ]
@@ -2695,13 +2743,12 @@
   },
     {
     "name": "Acorn Amulet",
-    "description": "When a nontoken you control dies, pay 1 to bounce this, recast it for G to get a 1/1",
+    "description": "Your commander has: at your EOT, if a creature went to grave, make two tapped squirrels",
     "equipmentSlot": "Neck",
     "iconName": "AcornAmulet",
     "effect": {
-        "lifeModifier": 4,
         "startBattleWithCard": [
-        "Squirrel Sanctuary|MH2"
+        "Cloakwood Hermit"
      ]
     }
   },
@@ -2711,7 +2758,7 @@
     "equipmentSlot": "Neck",
     "iconName": "AmuletofAeonsTorn",
     "effect": {
-        "lifeModifier": -8,
+        "lifeModifier": -4,
         "startBattleWithCard": [
         "Emrakul's Influence|EMN"
      ]
@@ -2719,16 +2766,13 @@
   },
     {
     "name": "Mask of Valgavoth",
-    "description": "Cancels opponent's hexproof and ward, -3 enemy life",
+    "description": "You can cast off top of library by sacing a nonland",
     "equipmentSlot": "Neck",
     "iconName": "MaskofValgavoth",
     "effect": {
         "startBattleWithCard": [
-        "Nowhere to Run|DSK"
-     ],
-      "opponent": {
-        "lifeModifier": -3
-      }
+        "Into the Pit"
+     ]
     }
   },
     {
@@ -2737,7 +2781,7 @@
     "equipmentSlot": "Neck",
     "iconName": "RoilingStormcrown",
     "effect": {
-      "lifeModifier": 2,
+      "lifeModifier": 4,
         "startBattleWithCard": [
         "Roiling Dragonstorm|TDM"
      ]
@@ -2772,6 +2816,7 @@
     "equipmentSlot": "Neck",
     "iconName": "PinnacleCirclet",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Helix Pinnacle|EVE"
      ]
@@ -2794,6 +2839,7 @@
     "equipmentSlot": "Neck",
     "iconName": "Bonder'sHelm",
     "effect": {
+        "lifeModifier": 2,
         "startBattleWithCard": [
         "Weaponize the Monsters|IKO"
      ]
@@ -2805,6 +2851,7 @@
     "equipmentSlot": "Neck",
     "iconName": "AmuletofAnnihilation",
     "effect": {
+        "lifeModifier": 4,
         "startBattleWithCard": [
         "Path of Annihilation|MH3"
      ]
@@ -2828,7 +2875,7 @@
     "equipmentSlot": "Neck",
     "iconName": "CorrodingStormcrown",
     "effect": {
-      "lifeModifier": 2,
+      "lifeModifier": 4,
         "startBattleWithCard": [
         "Corroding Dragonstorm|TDM"
      ]
@@ -2851,10 +2898,10 @@
     "description": "Pay 3R for random burn",
     "equipmentSlot": "Neck",
     "iconName": "AmuletofFury",
-    "cost": 2000,
+    "cost": 4000,
     "effect": {
       "opponent": {
-        "lifeModifier": -2
+        "lifeModifier": -4
       },
         "startBattleWithCard": [
         "Planeswalker's Fury|PLS"
@@ -2868,6 +2915,7 @@
     "iconName": "MaskofMortiphobia",
     "cost": 2000,
     "effect": {
+        "lifeModifier": 4,
         "startBattleWithCard": [
         "Mortiphobia|TOR"
      ]
@@ -2884,7 +2932,7 @@
         "Pyromania|TOR"
      ],
      "opponent": {
-      "lifeModifier": -2
+      "lifeModifier": -4
     }
     }
   },
@@ -2895,6 +2943,7 @@
     "iconName": "MaskofHypochondria",
     "cost": 2000,
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Hypochondria|TOR"
      ]
@@ -2906,7 +2955,7 @@
     "equipmentSlot": "Neck",
     "iconName": "TeemingStormcrown",
     "effect": {
-        "lifeModifier": 4,
+        "lifeModifier": 6,
         "startBattleWithCard": [
         "Teeming Dragonstorm|TDM"
      ]
@@ -2918,7 +2967,7 @@
     "equipmentSlot": "Neck",
     "iconName": "SkywiseTalisman",
     "effect": {
-        "changeStartCards": -1,
+        "lifeModifier": -6,
         "startBattleWithCard": [
         "Skywise Teachings|DTK"
      ]
@@ -2929,9 +2978,9 @@
     "description": "Pay 3W for random lifegain",
     "equipmentSlot": "Neck",
     "iconName": "AmuletofMirth",
-    "cost": 2000,
+    "cost": 4000,
     "effect": {
-        "lifeModifier": 4,
+        "lifeModifier": 6,
         "startBattleWithCard": [
         "Planeswalker's Mirth|PLS"
      ]
@@ -2939,12 +2988,12 @@
   },
     {
     "name": "Worn Coin",
-    "description": "Give a toughness 2< creature flying, flip at EOT to see if it dies",
+    "description": "Whenever blocks happen, flip. Win=blockers die, lose=attackers die",
     "equipmentSlot": "Neck",
     "iconName": "WornCoin",
     "effect": {
         "startBattleWithCard": [
-        "Goblin Kites|FEM"
+        "Tide of War"
      ]
     }
   },
@@ -2953,8 +3002,9 @@
     "description": "Pay 3U for random spell steal",
     "equipmentSlot": "Neck",
     "iconName": "AmuletofMischief",
-    "cost": 2000,
+    "cost": 4000,
     "effect": {
+        "lifeModifier": 4,
         "startBattleWithCard": [
         "Planeswalker's Mischief|PLS"
      ]
@@ -2965,8 +3015,9 @@
     "description": "Pay 3B for random debuff",
     "equipmentSlot": "Neck",
     "iconName": "AmuletofScorn",
-    "cost": 2000,
+    "cost": 4000,
     "effect": {
+        "lifeModifier": 4,
         "startBattleWithCard": [
         "Planeswalker's Scorn|PLS"
      ]
@@ -2978,7 +3029,7 @@
     "equipmentSlot": "Neck",
     "iconName": "FortuneTeller'sHat",
     "effect": {
-        "changeStartCards": -1,
+        "lifeModifier": -6,
         "startBattleWithCard": [
         "Fortune Teller's Talent|BLC"
      ]
@@ -2990,6 +3041,7 @@
     "equipmentSlot": "Neck",
     "iconName": "CrownofWinter",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Solitary Sanctuary|WOE"
      ]
@@ -3001,7 +3053,7 @@
     "equipmentSlot": "Neck",
     "iconName": "Scavenger'sBandana",
     "effect": {
-        "changeStartCards": -1,
+        "lifeModifier": -6,
         "startBattleWithCard": [
         "Scavenger's Talent|BLB"
      ]
@@ -3025,7 +3077,7 @@
     "equipmentSlot": "Neck",
     "iconName": "EncroachingStormcrown",
     "effect": {
-        "lifeModifier": 4,
+        "lifeModifier": 6,
         "startBattleWithCard": [
         "Encroaching Dragonstorm|TDM"
      ]
@@ -3036,9 +3088,9 @@
     "description": "Pay 3G for random buff",
     "equipmentSlot": "Neck",
     "iconName": "AmuletofFavor",
-    "cost": 2000,
+    "cost": 4000,
     "effect": {
-        "lifeModifier": 2,
+        "lifeModifier": 4,
         "startBattleWithCard": [
         "Planeswalker's Favor|PLS"
      ]
@@ -3050,7 +3102,7 @@
     "equipmentSlot": "Neck",
     "iconName": "OminousAmulet",
     "effect": {
-        "lifeModifier": -8,
+        "lifeModifier": -4,
         "startBattleWithCard": [
         "Ominous Seas"
      ]
@@ -3062,7 +3114,7 @@
     "equipmentSlot": "Right",
     "iconName": "SilverskinGauntlet",
     "effect": {
-        "lifeModifier": 2,
+        "lifeModifier": 4,
         "startBattleWithCard": [
         "Silverskin Armor|MBS"
      ]
@@ -3157,6 +3209,7 @@
     "equipmentSlot": "Right",
     "iconName": "Tawnos'sWand",
     "effect": {
+        "lifeModifier": 3,
         "startBattleWithCard": [
         "Tawnos's Wand|ME4"
      ]
@@ -3180,7 +3233,7 @@
     "equipmentSlot": "Right",
     "iconName": "ShieldoftheRighteous",
     "effect": {
-        "lifeModifier": 2,
+        "lifeModifier": 4,
         "startBattleWithCard": [
         "Shield of the Righteous|ARB"
      ]
@@ -4176,7 +4229,7 @@
     "equipmentSlot": "Body",
     "iconName": "ReliquaryRobes",
     "effect": {
-        "lifeModifier": -8,
+        "lifeModifier": -7,
         "startBattleWithCard": [
         "Reliquary Tower|C14"
      ]
@@ -4643,6 +4696,7 @@
     "equipmentSlot": "Boots",
     "iconName": "FaerieAnklet",
     "effect": {
+      "lifeModifier": 3,
       "startBattleWithCard": [
       "Faerie Dragon"
    ]
@@ -4666,6 +4720,9 @@
     "equipmentSlot": "Right",
     "iconName": "ThirstingAxe",
     "effect": {
+      "opponent": {
+        "lifeModifier": -2
+      },
       "startBattleWithCard": [
       "Thirsting Axe|EMN"
    ]
@@ -4759,6 +4816,7 @@
     "description": "All your creatures gain vigilance.",
     "equipmentSlot": "Neck",
     "iconName": "MoxPearl",
+    "cost": 30000,
     "effect": {
       "startBattleWithCard": [
         "Serra's Blessing|WTH"
@@ -4770,6 +4828,7 @@
     "description": "Your attacking creatures get +1/+0.",
     "equipmentSlot": "Neck",
     "iconName": "MoxRuby",
+    "cost": 30000,
     "effect": {
       "startBattleWithCard": [
         "Goblin Oriflamme|FDN"
@@ -4781,6 +4840,7 @@
     "description": "Your flying creatures get +1/+1.",
     "equipmentSlot": "Neck",
     "iconName": "MoxSapphire",
+    "cost": 30000,
     "effect": {
       "startBattleWithCard": [
         "Favorable Winds|SCD"
@@ -4792,6 +4852,7 @@
     "description": "Once a turn when a nontoken dies make a 2/2 decayed zombie.",
     "equipmentSlot": "Neck",
     "iconName": "MoxJet",
+    "cost": 30000,
     "effect": {
       "startBattleWithCard": [
         "Ghoulish Procession|INR"
@@ -4803,6 +4864,7 @@
     "description": "All your creatures gain trample.",
     "equipmentSlot": "Neck",
     "iconName": "MoxEmerald",
+    "cost": 30000,
     "effect": {
       "startBattleWithCard": [
         "Primal Rage|STH"
@@ -4810,13 +4872,140 @@
     }
   },
   {
+    "name": "High Ground Helm",
+    "description": "Your creatures can each block an extra creature.",
+    "equipmentSlot": "Neck",
+    "iconName": "HighGroundHelm",
+    "cost": 9000,
+    "effect": {
+      "startBattleWithCard": [
+        "High Ground"
+      ]
+    }
+  },
+  {
+    "name": "Cunning Mask",
+    "description": "You can bounce your blocked attackers.",
+    "equipmentSlot": "Neck",
+    "iconName": "CunningMask",
+    "cost": 9000,
+    "effect": {
+      "startBattleWithCard": [
+        "Cunning Evasion"
+      ]
+    }
+  },
+  {
+    "name": "Mighty Helm",
+    "description": "Your creatures with power 5+ get two +1/+1s on enter.",
+    "equipmentSlot": "Neck",
+    "iconName": "MightyHelm",
+    "cost": 9000,
+    "effect": {
+      "startBattleWithCard": [
+        "Mighty Emergence"
+      ]
+    }
+  },
+  {
+    "name": "Helm of the Fallen",
+    "description": "Each upkeep, if opp lost life last turn, put a +1/+1 counter.",
+    "equipmentSlot": "Neck",
+    "iconName": "HelmoftheFallen",
+    "cost": 9000,
+    "effect": {
+      "startBattleWithCard": [
+        "Feast on the Fallen"
+      ]
+    }
+  },
+  {
+    "name": "Helm of Battle",
+    "description": "During your combat, give a creature +2/+0.",
+    "equipmentSlot": "Neck",
+    "iconName": "HelmofBattle",
+    "cost": 9000,
+    "effect": {
+      "startBattleWithCard": [
+        "Battle Plan"
+      ]
+    }
+  },
+  {
+    "name": "Vampiric Amulet",
+    "description": "Your attacking creatures get first strike, vampires get a +1/+1 counters on hit.",
+    "equipmentSlot": "Neck",
+    "iconName": "VampiricAmulet",
+    "effect": {
+      "startBattleWithCard": [
+        "Stensia Masquerade"
+      ]
+    }
+  },
+  {
+    "name": "Massacre Helm",
+    "description": "When your creatures die, opp loses 1. When theirs die, you gain 1.",
+    "equipmentSlot": "Neck",
+    "iconName": "MassacreHelm",
+    "effect": {
+      "startBattleWithCard": [
+        "The Meathook Massacre"
+      ]
+    }
+  },
+  {
+    "name": "Glorious Helm",
+    "description": "Your creatures get +1/+1.",
+    "equipmentSlot": "Neck",
+    "iconName": "GloriousHelm",
+    "effect": {
+      "startBattleWithCard": [
+        "Glorious Anthem|USG"
+      ]
+    }
+  },
+  {
+    "name": "War Helm",
+    "description": "Your creatures get menace.",
+    "equipmentSlot": "Neck",
+    "iconName": "WarHelm",
+    "effect": {
+      "startBattleWithCard": [
+        "Goblin War Drums|A25"
+      ]
+    }
+  },
+  {
+    "name": "Helm of Contemplation",
+    "description": "When you cast a noncreature, pay 1 to tap and stun a creature.",
+    "equipmentSlot": "Neck",
+    "iconName": "HelmofContemplation",
+    "effect": {
+      "startBattleWithCard": [
+        "Quiet Contemplation"
+      ]
+    }
+  },
+  {
+    "name": "Helm of Myth",
+    "description": "Your commander recasts cost 1 less, draw when commander is zoned.",
+    "equipmentSlot": "Neck",
+    "iconName": "HelmofMyth",
+    "effect": {
+      "startBattleWithCard": [
+        "Myth Unbound"
+      ]
+    }
+  },
+  {
     "name": "Outlaw's Hat",
-    "description": "When one of your outlaws dies, drain opp 1 life.",
+    "description": "Gives a 1/1 mercenary. When one of your outlaws dies, drain opp 1 life.",
     "equipmentSlot": "Neck",
     "iconName": "OutlawsHat",
     "effect": {
       "startBattleWithCard": [
-        "Rakish Crew|OTJ"
+        "Rakish Crew|OTJ",
+        "r_1_1_mercenary_tappump"
       ]
     }
   },
@@ -4872,6 +5061,7 @@
     "equipmentSlot": "Left",
     "iconName": "TomeofBlight",
     "effect": {
+      "lifeModifier": 3,
       "startBattleWithCard": [
         "Ark of Blight|SCG"
       ]
@@ -4883,7 +5073,6 @@
     "equipmentSlot": "Body",
     "iconName": "WinterBoots",
     "effect": {
-      "lifeModifier": -4,
       "startBattleWithCard": [
         "Priest of the Haunted Edge"
       ]
