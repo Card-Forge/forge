@@ -1573,9 +1573,7 @@
     "iconName": "FirefrightenerShoes",
     "cost": 1000,
     "effect": {
-      "opponent": {
-        "lifeModifier": -2
-      },
+      "lifeModifier": 3,
         "startBattleWithCard": [
         "Firefright Mage|PLC"
      ]
@@ -2928,12 +2926,10 @@
     "iconName": "MaskofPyromania",
     "cost": 2000,
     "effect": {
+        "lifeModifier": 4,
         "startBattleWithCard": [
         "Pyromania|TOR"
-     ],
-     "opponent": {
-      "lifeModifier": -4
-    }
+     ]
     }
   },
     {
