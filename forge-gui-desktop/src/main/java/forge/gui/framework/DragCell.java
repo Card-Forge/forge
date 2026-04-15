@@ -39,6 +39,7 @@ public final class DragCell extends JPanel implements ILocalRepaint {
     private int smoothY = 0;
     private int smoothW = 0;
     private int smoothH = 0;
+    private int minW = SResizingUtil.W_MIN;
 
     // Core layout stuff
     private final JPanel pnlHead = new JPanel(new MigLayout("insets 0, gap 0, hidemode 3"));
@@ -256,6 +257,14 @@ public final class DragCell extends JPanel implements ILocalRepaint {
     /** @param w0 &emsp; int */
     public void setSmoothW(final int w0) {
         this.smoothW = w0;
+    }
+
+    public int getMinW() {
+        return minW;
+    }
+
+    public void setMinW(final int minW0) {
+        this.minW = minW0;
     }
 
     /** @param h0 &emsp; int */

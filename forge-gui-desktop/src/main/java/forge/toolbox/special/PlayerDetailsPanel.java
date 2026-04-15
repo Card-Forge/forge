@@ -206,13 +206,18 @@ public class PlayerDetailsPanel extends JPanel {
         protected double getEffectiveIconScaleFactor() {
             final String text = getText();
             if (text == null || text.length() <= 1) { return baseIconScaleFactor; }
-            // For 2+ digit numbers, shrink the icon so text always has room
             final int w = getWidth();
             if (w == 0) { return baseIconScaleFactor; }
             final int basis = Math.min(getHeight(), w);
             if (basis == 0) { return baseIconScaleFactor; }
-            // Each extra digit beyond 1 reduces the icon by ~15%
-            final double reduction = Math.pow(0.85, text.length() - 1);
+            // For 2+ digit numbers, shrink the icon aggressively so text has room.
+            // 2 digits: 0.55x, 3 digits: 0.40x, 4+: 0.30x
+            final double reduction;
+            switch (text.length()) {
+                case 2: reduction = 0.55; break;
+                case 3: reduction = 0.40; break;
+                default: reduction = 0.30; break;
+            }
             return baseIconScaleFactor * reduction;
         }
 
