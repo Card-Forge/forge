@@ -1853,14 +1853,14 @@
     }
   },
   {
-    "name": "Whip Wrap",
-    "description": "1/4 wall, reach, T: keep a flying attacker tapped.",
+    "name": "Spore Skirt",
+    "description": "0/1 flying wall, taps down for 4 turns on block.",
     "equipmentSlot": "Boots",
     "iconName": "WhipWrap",
     "cost": 3000,
     "effect": {
       "startBattleWithCard": [
-        "Whip Vine"
+        "Mindbender Spores"
       ]
     }
   },
@@ -5338,6 +5338,18 @@
       "changeStartCards": -1,
       "startBattleWithCard": [
         "Darksteel Relic"
+      ]
+    }
+  },
+  {
+    "name": "Whip Wrap",
+    "description": "This item has been discontinued.",
+    "equipmentSlot": "Boots",
+    "iconName": "WhipWrap",
+    "cost": 3000,
+    "effect": {
+      "startBattleWithCard": [
+        "Whip Vine"
       ]
     }
   },
