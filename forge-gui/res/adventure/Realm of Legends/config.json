@@ -185,7 +185,7 @@
     }
     ,{
       "name": "Normal",
-      "startingLife": 25,
+      "startingLife": 30,
       "startingShards": 20,
       "startingMoney": 2500,
       "startingDifficulty": true,

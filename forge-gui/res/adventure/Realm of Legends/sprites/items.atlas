@@ -819,6 +819,21 @@ AngelicArmaments
 SpidersilkHelm
   xy: 128, 400
   size: 16, 16
+BlisteringBreeches
+  xy: 48, 480
+  size: 16, 16
+GreavesofGlare
+  xy: 32, 480
+  size: 16, 16
+WhipWrap
+  xy: 144, 448
+  size: 16, 16
+SoulShoes
+  xy: 64, 144
+  size: 16, 16
+BarrierBreeches
+  xy: 112, 464
+  size: 16, 16
 Liliana'sVeil
   xy: 144, 320
   size: 16, 16
