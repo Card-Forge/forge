@@ -400,7 +400,7 @@ public class SpecialCardAi {
             int bestScore = Integer.MIN_VALUE;
 
             for (Player opp : ai.getOpponents()) {
-                List<String> keyCards = new ArrayList<>(opp.getRegisteredPlayer().getDeck().getKeyCards());
+                List<String> keyCards = opp.getRegisteredPlayer().getDeck().getKeyCards();
 
                 for (Card c : opp.getAllCards()) {
                     String name = c.getName();
