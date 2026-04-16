@@ -284,67 +284,6 @@ public interface IGuiGame {
 
     void updateAutoPassPrompt();
 
-    // Extended yield mode methods (experimental feature)
-
-    /**
-     * Set the player's yield mode.
-     *
-     * @param fromRemote true when the host is receiving yield state from a
-     *                   network client. Skips validation (the client already
-     *                   validated locally), the prompt update (the client
-     *                   already showed its own), and the notify-server
-     *                   callback (echoing back would loop forever). false for
-     *                   local user actions on this process.
-     * @return true if the mode was activated.
-     */
-    boolean setYieldMode(PlayerView player, YieldMode mode, boolean fromRemote);
-
-    /**
-     * Sync yield mode from server to client.
-     * Used when server clears yield (end condition met) and needs to update client UI.
-     */
-    void syncYieldMode(PlayerView player, YieldMode mode);
-
-    /**
-     * Sync whether the host has advanced yield options enabled.
-     * Used in network play to disable client yield buttons when host lacks the setting.
-     */
-    void setHostYieldEnabled(boolean enabled);
-
-    void clearYieldMode(PlayerView player);
-
-    /** Called when a network player disconnects/reconnects. Default is a no-op for non-network GUIs. */
-    default void showPlayerDisconnected(PlayerView player, boolean disconnected) { }
-
-    /**
-     * Store the most recent yield preferences snapshot received from the remote
-     * client this GUI represents. Default implementation is a no-op for the
-     * host's own GUI; NetGuiGame stores it on a field so the host's
-     * YieldController can read the remote player's interrupt prefs.
-     */
-    default void setRemoteYieldPrefs(YieldPrefs prefs) {}
-
-    /**
-     * @return the most recent yield preferences snapshot received from the
-     *         remote client this GUI represents, or null if this is the host's
-     *         own GUI or no snapshot has been received yet.
-     */
-    default YieldPrefs getRemoteYieldPrefs() { return null; }
-
-    YieldMode getYieldMode(PlayerView player);
-
-    boolean shouldAutoYield(String key);
-    void setShouldAutoYield(String key, boolean autoYield);
-
-    boolean shouldAlwaysAcceptTrigger(int trigger);
-    boolean shouldAlwaysDeclineTrigger(int trigger);
-
-    void setShouldAlwaysAcceptTrigger(int trigger);
-    void setShouldAlwaysDeclineTrigger(int trigger);
-    void setShouldAlwaysAskTrigger(int trigger);
-
-    void clearAutoYields();
-
     void setCurrentPlayer(PlayerView player);
 
     /**
@@ -356,4 +295,32 @@ public interface IGuiGame {
     /** Returns true if this game instance is a network game. */
     boolean isNetGame();
     void setNetGame();
+
+    // ----- Experimental yield modes (fork customization, not in upstream) -----
+
+    /**
+     * Set the player's yield mode. Returns true if the mode was activated.
+     * fromRemote=true means host received this from a network client —
+     * skips validation, prompt update, and notify-server callback.
+     */
+    default boolean setYieldMode(PlayerView player, YieldMode mode, boolean fromRemote) { return false; }
+
+    /** Sync yield mode from server to client (used when server clears yield due to end condition). */
+    default void syncYieldMode(PlayerView player, YieldMode mode) { }
+
+    /** Sync whether the host has advanced yield options enabled. */
+    default void setHostYieldEnabled(boolean enabled) { }
+
+    default void clearYieldMode(PlayerView player) { }
+
+    default YieldMode getYieldMode(PlayerView player) { return null; }
+
+    /** Store the most recent yield preferences snapshot from a remote client. */
+    default void setRemoteYieldPrefs(YieldPrefs prefs) { }
+
+    /** Get the most recent yield preferences snapshot, or null. */
+    default YieldPrefs getRemoteYieldPrefs() { return null; }
+
+    /** Called when a network player disconnects/reconnects. Default is a no-op for non-network GUIs. */
+    default void showPlayerDisconnected(PlayerView player, boolean disconnected) { }
 }

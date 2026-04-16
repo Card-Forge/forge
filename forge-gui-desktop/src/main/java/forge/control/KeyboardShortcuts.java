@@ -207,10 +207,10 @@ public class KeyboardShortcuts {
                 if (matchUI == null) { return; }
                 StackItemView si = matchUI.getGameView().peekStack();
                 if (si != null && si.isAbility()) {
-                    matchUI.setShouldAutoYield(si.getKey(), true);
+                    matchUI.getGameController().setShouldAutoYield(si.getKey(), true);
                     int triggerID = si.getSourceTrigger();
                     if (si.isOptionalTrigger() && matchUI.isLocalPlayer(si.getActivatingPlayer())) {
-                        matchUI.setShouldAlwaysAcceptTrigger(triggerID);
+                        matchUI.getGameController().setShouldAlwaysAcceptTrigger(triggerID);
                     }
                     matchUI.getGameController().passPriority();
                 }
@@ -225,10 +225,10 @@ public class KeyboardShortcuts {
                 if (matchUI == null) { return; }
                 StackItemView si = matchUI.getGameView().peekStack();
                 if (si != null && si.isAbility()) {
-                    matchUI.setShouldAutoYield(si.getKey(), true);
+                    matchUI.getGameController().setShouldAutoYield(si.getKey(), true);
                     int triggerID = si.getSourceTrigger();
                     if (si.isOptionalTrigger() && matchUI.isLocalPlayer(si.getActivatingPlayer())) {
-                        matchUI.setShouldAlwaysDeclineTrigger(triggerID);
+                        matchUI.getGameController().setShouldAlwaysDeclineTrigger(triggerID);
                     }
                     matchUI.getGameController().passPriority();
                 }

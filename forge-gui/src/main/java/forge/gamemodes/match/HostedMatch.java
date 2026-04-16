@@ -396,7 +396,7 @@ public class HostedMatch {
             humanController.getGui().setGameSpeed(PlaybackSpeed.NORMAL);
             if (FModel.getPreferences().getPref(FPref.UI_AUTO_YIELD_MODE).equals(ForgeConstants.AUTO_YIELD_PER_CARD) || isMatchOver()) {
                 // when autoyielding per card, we need to clear auto yields between games since card IDs change
-                humanController.getGui().clearAutoYields();
+                humanController.clearAutoYields();
             }
 
             if (humanCount > 0) //conceded

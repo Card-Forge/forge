@@ -15,7 +15,6 @@ import forge.card.CardImageRenderer;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.game.spellability.StackItemView;
-import forge.gui.interfaces.IGuiGame;
 import forge.screens.match.views.VField;
 import forge.screens.match.views.VReveal;
 import forge.toolbox.FDisplayObject;
@@ -664,7 +663,6 @@ public class MatchScreen extends FScreen {
                 break;
             case Keys.Y: //auto-yield, always yes, Ctrl+Y on Android, Y when running on desktop
                 if (KeyInputAdapter.isCtrlKeyDown() || GuiBase.getInterface().isRunningOnDesktop()) {
-                    final IGuiGame gui = MatchController.instance;
                     final IGameController controller = MatchController.instance.getGameController();
                     final GameView gameView = MatchController.instance.getGameView();
                     final FCollectionView<StackItemView> stack = MatchController.instance.getGameView().getStack();
@@ -677,10 +675,10 @@ public class MatchScreen extends FScreen {
                     }
                     final int triggerID = stackInstance.getSourceTrigger();
 
-                    if (gui.shouldAlwaysAcceptTrigger(triggerID)) {
-                        gui.setShouldAlwaysAskTrigger(triggerID);
+                    if (controller.shouldAlwaysAcceptTrigger(triggerID)) {
+                        controller.setShouldAlwaysAskTrigger(triggerID);
                     } else {
-                        gui.setShouldAlwaysAcceptTrigger(triggerID);
+                        controller.setShouldAlwaysAcceptTrigger(triggerID);
                         if (stackInstance.equals(gameView.peekStack())) {
                             //auto-yes if ability is on top of stack
                             controller.selectButtonOk();
@@ -688,7 +686,7 @@ public class MatchScreen extends FScreen {
                     }
 
                     final String key = stackInstance.getKey();
-                    gui.setShouldAutoYield(key, true);
+                    controller.setShouldAutoYield(key, true);
                     if (stackInstance.equals(gameView.peekStack())) {
                         //auto-pass priority if ability is on top of stack
                         controller.passPriority();
@@ -697,7 +695,6 @@ public class MatchScreen extends FScreen {
                 break;
             case Keys.N: //auto-yield, always no, Ctrl+N on Android, N when running on desktop
                 if (KeyInputAdapter.isCtrlKeyDown() || GuiBase.getInterface().isRunningOnDesktop()) {
-                    final IGuiGame gui = MatchController.instance;
                     final IGameController controller = MatchController.instance.getGameController();
                     final GameView gameView = MatchController.instance.getGameView();
                     final FCollectionView<StackItemView> stack = MatchController.instance.getGameView().getStack();
@@ -710,10 +707,10 @@ public class MatchScreen extends FScreen {
                     }
                     final int triggerID = stackInstance.getSourceTrigger();
 
-                    if (gui.shouldAlwaysDeclineTrigger(triggerID)) {
-                        gui.setShouldAlwaysAskTrigger(triggerID);
+                    if (controller.shouldAlwaysDeclineTrigger(triggerID)) {
+                        controller.setShouldAlwaysAskTrigger(triggerID);
                     } else {
-                        gui.setShouldAlwaysDeclineTrigger(triggerID);
+                        controller.setShouldAlwaysDeclineTrigger(triggerID);
                         if (stackInstance.equals(gameView.peekStack())) {
                             //auto-no if ability is on top of stack
                             controller.selectButtonCancel();
@@ -721,7 +718,7 @@ public class MatchScreen extends FScreen {
                     }
 
                     final String key = stackInstance.getKey();
-                    gui.setShouldAutoYield(key, true);
+                    controller.setShouldAutoYield(key, true);
                     if (stackInstance.equals(gameView.peekStack())) {
                         //auto-pass priority if ability is on top of stack
                         controller.passPriority();

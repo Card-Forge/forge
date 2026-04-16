@@ -55,24 +55,25 @@ public interface IGameController {
      */
     void requestResync();
 
-    /**
-     * Notify the host that the client's yield state has changed. Carries both
-     * the current yield mode and a fresh snapshot of the player's yield prefs
-     * (interrupt conditions, decline scopes, auto-pass-no-actions). The host
-     * uses the prefs snapshot when evaluating interrupts for the remote
-     * player. Sent on game open, F-key press, ESC, and on each
-     * VYieldSettings change. Default implementation is a no-op for local
-     * games.
-     */
-    default void notifyYieldStateChanged(PlayerView player, YieldMode mode, YieldPrefs prefs) {
-        // Default: no-op for local games
-    }
+    // --- Auto-yield preferences (per-player) ---
+    boolean shouldAutoYield(String key);
+    void setShouldAutoYield(String key, boolean autoYield);
+    Iterable<String> getAutoYields();
+    void clearAutoYields();
+    boolean getDisableAutoYields();
+    void setDisableAutoYields(boolean disable);
 
-    /** Notify server that auto-yield was toggled for an ability key. */
-    default void notifyAutoYieldChanged(String key, boolean autoYield) { }
+    // --- Trigger accept/decline preferences (per-player) ---
+    boolean shouldAlwaysAcceptTrigger(int trigger);
+    boolean shouldAlwaysDeclineTrigger(int trigger);
+    void setShouldAlwaysAcceptTrigger(int trigger);
+    void setShouldAlwaysDeclineTrigger(int trigger);
+    void setShouldAlwaysAskTrigger(int trigger);
 
     /**
-     * Notify server that a trigger accept/decline preference changed.
+     * Notify peer(s) that this player's experimental yield mode changed.
+     * Default is a no-op; NetGameController forwards over the wire to the host.
+     * Fork customization (upstream does not have experimental yield modes).
      */
-    default void notifyTriggerChoiceChanged(int triggerId, TriggerChoice choice) { }
+    default void notifyYieldStateChanged(PlayerView player, YieldMode mode, YieldPrefs prefs) { }
 }
