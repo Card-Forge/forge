@@ -79,7 +79,7 @@
     <property name="uncommonShopList" value="Creature2White,Creature,White,SmallCats"/>
    </properties>
   </object>
-  <object id="64" template="../../../../common/maps/obj/shop.tx" x="142.344" y="308.259">
+  <object id="69" template="../../../../common/maps/obj/shop.tx" x="142.344" y="308.259">
    <properties>
     <property name="commonShopList" value="White,White,Enchantment4White,Creature2White,Instant4White"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB,PhyrexianWhite"/>
@@ -87,7 +87,7 @@
     <property name="uncommonShopList" value="Artifact,Knight4White,Bird4White,Soldier4White,Angel,Sliver2White,Spirit4White,Wand,Equip,Multicolor"/>
    </properties>
   </object>
-  <object id="65" template="../../../../common/maps/obj/shop.tx" x="191.743" y="308.259">
+  <object id="67" template="../../../../common/maps/obj/shop.tx" x="191.743" y="308.259">
    <properties>
     <property name="commonShopList" value="White,White,Enchantment4White,Creature2White,Instant4White"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4White"/>
@@ -95,7 +95,7 @@
     <property name="uncommonShopList" value="Azorius,Boros,Selesnya,Orzhov,Azorius,Boros,Selesnya,Orzhov,Land"/>
    </properties>
   </object>
-  <object id="66" template="../../../../common/maps/obj/shop.tx" x="305.038" y="306.112">
+  <object id="68" template="../../../../common/maps/obj/shop.tx" x="305.038" y="306.112">
    <properties>
     <property name="commonShopList" value="Knight4White,Bird4White,Soldier4White,Angel,Sliver2White,Spirit4White"/>
     <property name="mythicShopList" value="Planeswalker,WUBRG,Vehicle,Artifact,Equip,Wand,Legend4White,Gods"/>
