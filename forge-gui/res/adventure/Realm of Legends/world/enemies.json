@@ -375,6 +375,11 @@
         "itemName": "Bloodsworn Bite"
       },
       {
+        "type": "item",
+        "count": 1,
+        "itemName": "Vampiric Amulet"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Edgar Markov"
@@ -23534,9 +23539,14 @@
         "cardName": "Etali, Primal Storm"
       },
       {
+        "type": "card",
+        "count": 1,
+        "cardName": "Etali, Primal Conqueror"
+      },
+      {
         "type": "deckCard",
         "count": 2,
-        "addMaxCount": 4,
+        "addMaxCount": 2,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -23605,9 +23615,14 @@
         "cardName": "Ghalta and Mavren"
       },
       {
+        "type": "card",
+        "count": 1,
+        "cardName": "Ghalta, Stampede Tyrant"
+      },
+      {
         "type": "deckCard",
         "count": 2,
-        "addMaxCount": 4,
+        "addMaxCount": 2,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -37396,9 +37411,14 @@
         "cardName": "Selvala, Eager Trailblazer"
       },
       {
+        "type": "card",
+        "count": 1,
+        "cardName": "Selvala, Heart of the Wilds"
+      },
+      {
         "type": "deckCard",
         "count": 1,
-        "addMaxCount": 3,
+        "addMaxCount": 1,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -46030,9 +46050,14 @@
         "cardName": "Gerrard, Weatherlight Hero"
       },
       {
+        "type": "card",
+        "count": 1,
+        "cardName": "Gerrard Capashen"
+      },
+      {
         "type": "deckCard",
         "count": 1,
-        "addMaxCount": 3,
+        "addMaxCount": 2,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -61824,7 +61849,7 @@
     "ai": "",
     "spawnRate": 0,
     "difficulty": 0.1,
-    "scale": 1,
+    "scale": 0.6,
     "speed": 0,
     "life": 1,
     "rewards": [

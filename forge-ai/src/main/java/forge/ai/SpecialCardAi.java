@@ -303,14 +303,144 @@ public class SpecialCardAi {
     public static class PithingNeedle {
         // TODO Build out exclusion list based off cards in my deck and cards that other needles have chosen
         public static String chooseCard(final Player ai, final SpellAbility sa) {
-            // TODO Choose cards via deck key cards
-
+            String keyCardChoice = chooseCardViaKeyCard(ai, sa);
+            if (keyCardChoice != null) {
+                return keyCardChoice;
+            }
 
             String choice = chooseCardViaScoring(ai, sa);
             if (choice != null) {
                 return choice;
             }
             return chooseNonBattlefieldName();
+        }
+
+        // Helper method to score a card's abilities and static effects
+        // Used by both chooseCardViaKeyCard and chooseCardViaScoring
+        private static int scoreCardAbilities(final Card c, boolean skipManaAbilities) {
+            int score = 0;
+
+            for (SpellAbility ab : c.getSpellAbilities()) {
+                if (!ab.isActivatedAbility()) {
+                    continue;
+                }
+                if (skipManaAbilities && ab.isManaAbility()) {
+                    continue;
+                }
+
+                // Alter this score based off the ApiType
+                switch (ab.getApi()) {
+                    case Destroy:
+                        score += 20;
+                        break;
+                    case DamageAll:
+                    case DestroyAll:
+                        score += 30;
+                        break;
+                    case WinsGame:
+                    case LosesGame:
+                        score += 50;
+                        break;
+                    case Draw:
+                        score += 10;
+                        break;
+                    case GainControl:
+                    case Play:
+                    case DealDamage:
+                        score += 15;
+                        break;
+                    case ChangeZone:
+                        if (ab.getParam("Destination") != null && ab.getParam("Destination").equals("Battlefield")) {
+                            score += 15;
+                        } else {
+                            score += 5;
+                        }
+                        break;
+                    default:
+                        score += 5;
+                }
+
+                score += 10;
+
+                // Give higher score to cheaper abilities, as they are more likely to be used and thus worth naming
+                if (ab.getPayCosts().getCostMana() != null) {
+                    if (ab.getPayCosts().hasXInAnyCostPart()) {
+                        score += 15;
+                    } else {
+                        Integer convertedAmount = ab.getPayCosts().getCostMana().convertAmount();
+                        if (convertedAmount != null) {
+                            score += Math.max(0, 20 - convertedAmount ^ 2);
+                        }
+                    }
+                }
+                if (ab.getPayCosts().hasSpecificCostType(CostSacrifice.class)) {
+                    score += 10;
+                }
+            }
+
+            for (StaticAbility st : c.getStaticAbilities()) {
+                if (st.hasParam("GainsAbilitiesOf") && st.getParamOrDefault("Affected", "Self").contains("Self")) {
+                    score += 10;
+                }
+
+                if (st.hasParam("AddAbility") && st.getParamOrDefault("Affected", "Self").contains("Self")) {
+                    score += 10;
+                }
+            }
+
+            return score;
+        }
+
+        public static String chooseCardViaKeyCard(final Player ai, final SpellAbility sa) {
+            boolean skipManaAbilities = sa.getParam("AILogic").equals("PithingNeedle");
+            boolean skipLands = sa.getParam("AILogic").equals("PhyrexianRevoker");
+            boolean knowHand = sa.getParam("AILogic").equals("SorcerousSpyglass");
+
+            String bestKeyCard = null;
+            int bestScore = Integer.MIN_VALUE;
+
+            for (Player opp : ai.getOpponents()) {
+                List<String> keyCards = opp.getRegisteredPlayer().getDeck().getKeyCards();
+
+                for (Card c : opp.getAllCards()) {
+                    String name = c.getName();
+                    if (!keyCards.contains(name)) {
+                        continue;
+                    }
+
+                    // Skip lands if required
+                    if (skipLands && c.isLand()) {
+                        continue;
+                    }
+
+                    // Base score for key cards
+                    int score = 100;
+
+                    // Add ability-based scoring
+                    score += scoreCardAbilities(c, skipManaAbilities);
+
+                    if (score == 100) {
+                        // No activated abilities found, skip this key card
+                        continue;
+                    }
+
+                    // Bonus for cards on battlefield (more likely to be a key card in play)
+                    if (c.isInZone(ZoneType.Battlefield)) {
+                        score += 20;
+                    }
+
+                    if (knowHand && c.isInZone(ZoneType.Hand)) {
+                        score += 8;
+                    }
+
+                    if (score > bestScore) {
+                        bestScore = score;
+                        bestKeyCard = name;
+                    }
+                }
+            }
+
+            return bestKeyCard;
         }
 
         public static String chooseNonBattlefieldName() {
@@ -334,75 +464,7 @@ public class SpecialCardAi {
                     }
 
                     String name = c.getName();
-                    int score = 0;
-
-                    for(SpellAbility ab : c.getSpellAbilities()) {
-                        if (!ab.isActivatedAbility()) {
-                            continue;
-                        }
-                        if (skipManaAbilities && ab.isManaAbility()) {
-                            continue;
-                        }
-
-                        // Alter this score based off the APiType
-                        switch (ab.getApi()) {
-                            case Destroy:
-                                score += 20;
-                                break;
-                            case DamageAll:
-                            case DestroyAll:
-                                score += 30;
-                                break;
-                            case WinsGame:
-                            case LosesGame:
-                                score += 50;
-                                break;
-                            case Draw:
-                                score += 10;
-                                break;
-                            case GainControl:
-                            case Play:
-                            case DealDamage:
-                                score += 15;
-                                break;
-                            case ChangeZone:
-                                if (ab.getParam("Destination").equals("Battlefield")) {
-                                    score += 15;
-                                } else {
-                                    score += 5;
-                                }
-                                break;
-                            default:
-                                score += 5;
-                        }
-
-                        score += 10;
-
-                        // GIve higher score to cheaper abilities, as they are more likely to be used and thus worth naming
-                        if (ab.getPayCosts().getCostMana() != null) {
-                            if (ab.getPayCosts().hasXInAnyCostPart()) {
-                                score += 15;
-                            } else {
-                                Integer convertedAmount = ab.getPayCosts().getCostMana().convertAmount();
-                                if (convertedAmount != null) {
-                                    score += Math.max(0, 20 - convertedAmount ^ 2);
-                                }
-                            }
-                        }
-                        if (ab.getPayCosts().hasSpecificCostType(CostSacrifice.class)) {
-                            score += 10;
-                        }
-                    }
-
-                    for(StaticAbility st : c.getStaticAbilities()) {
-                        if (st.hasParam("GainsAbilitiesOf") && st.getParamOrDefault("Affected", "Self").contains("Self")) {
-                            score += 10;
-                        }
-
-                        if (st.hasParam("AddAbility") && st.getParamOrDefault("Affected", "Self").contains("Self")) {
-                            score += 10;
-                        }
-                    }
+                    int score = scoreCardAbilities(c, skipManaAbilities);
 
                     if (score == 0) {
                         continue;
