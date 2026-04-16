@@ -1467,7 +1467,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (fetchList.isEmpty()) {
             return null;
         }
-        List<String> keyCards = new ArrayList<>(player.getRegisteredPlayer().getDeck().getKeyCards());
+        List<String> keyCards = player.getRegisteredPlayer().getDeck().getKeyCards();
         String position = sa.getParamOrDefault("LibraryPosition", null);
         // FOcus on the keycards I don't already have access to
         if (destination.equals(ZoneType.Battlefield) || destination.equals(ZoneType.Hand) ||
