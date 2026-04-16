@@ -139,8 +139,6 @@ public class NetGameController implements IGameController {
         send(ProtocolMethod.requestResync);
     }
 
-    // --- Auto-yield preferences (local mirror + network send) ---
-
     @Override
     public boolean shouldAutoYield(final String key) {
         String abilityKey = key.contains("): ") ? key.substring(key.indexOf("): ") + 3) : key;
@@ -182,8 +180,6 @@ public class NetGameController implements IGameController {
     public void setDisableAutoYields(final boolean disable) {
         disableAutoYields = disable;
     }
-
-    // --- Trigger accept/decline preferences (local mirror + network send) ---
 
     @Override
     public boolean shouldAlwaysAcceptTrigger(final int trigger) {

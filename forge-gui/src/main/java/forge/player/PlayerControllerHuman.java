@@ -98,7 +98,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     private IGuiGame gui;
 
-    // Per-player auto-yield state (moved from AbstractGuiGame)
     private final Set<String> autoYields = Sets.newHashSet();
     private final Map<Integer, Boolean> triggersAlwaysAccept = Maps.newTreeMap();
     private boolean disableAutoYields;
@@ -3478,8 +3477,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // No-op for local games - resync is only used for network play
     }
 
-    // --- Auto-yield preferences (per-player) ---
-
     @Override
     public boolean shouldAutoYield(final String key) {
         String abilityKey = key.contains("): ") ? key.substring(key.indexOf("): ") + 3) : key;
@@ -3520,8 +3517,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public void setDisableAutoYields(final boolean disable) {
         disableAutoYields = disable;
     }
-
-    // --- Trigger accept/decline preferences (per-player) ---
 
     @Override
     public boolean shouldAlwaysAcceptTrigger(final int trigger) {

@@ -586,8 +586,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
     // End auto-yield/input code
 
-    // Auto-yield state now lives in IGameController (per-player).
-
     /**
      * Convenience for getChoices(message, 0, 1, choices).
      *
