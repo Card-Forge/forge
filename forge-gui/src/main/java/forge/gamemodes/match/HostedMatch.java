@@ -377,20 +377,14 @@ public class HostedMatch {
 
         game = null;
 
-        // Must precede shutdownForwarder — observer references become stale after null
-        for (PlayerControllerHuman hc : humanControllers) {
-            if (hc.getGui() instanceof forge.gamemodes.net.server.RemoteClientGuiGame ngg) {
+        for (final PlayerControllerHuman humanController : humanControllers) {
+            if (humanController.getGui() instanceof forge.gamemodes.net.server.RemoteClientGuiGame ngg) {
                 forge.gui.control.GameEventForwarder fwd = ngg.getForwarder();
                 if (fwd != null) {
                     for (PlayerControllerHuman allHc : humanControllers) {
                         allHc.getInputQueue().deleteObserver(fwd);
                     }
                 }
-            }
-        }
-
-        for (final PlayerControllerHuman humanController : humanControllers) {
-            if (humanController.getGui() instanceof forge.gamemodes.net.server.RemoteClientGuiGame ngg) {
                 ngg.shutdownForwarder();
             }
             humanController.getGui().setGameSpeed(PlaybackSpeed.NORMAL);
