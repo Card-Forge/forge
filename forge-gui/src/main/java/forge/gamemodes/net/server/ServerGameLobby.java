@@ -85,6 +85,12 @@ public final class ServerGameLobby extends GameLobby {
 
     @Override
     protected void onMatchOver() {
+        for (int i = 0; i < getNumberOfSlots(); i++) {
+            final LobbySlot slot = getSlot(i);
+            if (slot != null) {
+                slot.setIsReady(false);
+            }
+        }
         super.onMatchOver();
         FServerManager.getInstance().clearPlayerGuis();
         FServerManager.getInstance().updateLobbyState();

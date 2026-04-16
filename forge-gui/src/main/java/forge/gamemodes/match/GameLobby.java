@@ -546,12 +546,6 @@ public abstract class GameLobby implements IHasGameType {
     protected void onMatchOver() {
         hostedMatch = null;
         gameControllers.clear();
-        for (int i = 0; i < getNumberOfSlots(); i++) {
-            final LobbySlot slot = getSlot(i);
-            if (slot != null) {
-                slot.setIsReady(false);
-            }
-        }
         updateView(true);
     }
 
