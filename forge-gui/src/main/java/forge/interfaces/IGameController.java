@@ -52,4 +52,18 @@ public interface IGameController {
      */
     void requestResync();
 
+    // --- Auto-yield preferences (per-player) ---
+    boolean shouldAutoYield(String key);
+    void setShouldAutoYield(String key, boolean autoYield);
+    Iterable<String> getAutoYields();
+    void clearAutoYields();
+    boolean getDisableAutoYields();
+    void setDisableAutoYields(boolean disable);
+
+    // --- Trigger accept/decline preferences (per-player) ---
+    boolean shouldAlwaysAcceptTrigger(int trigger);
+    boolean shouldAlwaysDeclineTrigger(int trigger);
+    void setShouldAlwaysAcceptTrigger(int trigger);
+    void setShouldAlwaysDeclineTrigger(int trigger);
+    void setShouldAlwaysAskTrigger(int trigger);
 }
