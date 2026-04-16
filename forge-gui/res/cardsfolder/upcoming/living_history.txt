@@ -1,5 +1,5 @@
 Name:Living History
-ManaCost:B
+ManaCost:1 R
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this enchantment enters, create a 2/2 red and white Spirit creature token.
 SVar:TrigToken:DB$ Token | TokenScript$ rw_2_2_spirit | TokenOwner$ You

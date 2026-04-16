@@ -1,6 +1,6 @@
 Name:Jodah's Codex
 ManaCost:5
-Types:Artifact
+Types:Artifact Book
 A:AB$ Draw | Cost$ 5 T | NumCards$ 1 | ReduceCost$ X | SpellDescription$ Draw a card. This ability costs {1} less to activate for each basic land type among lands you control.
 SVar:X:Count$Domain
 AI:RemoveDeck:Random

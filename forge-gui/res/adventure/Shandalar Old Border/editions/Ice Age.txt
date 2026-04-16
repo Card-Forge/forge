@@ -1,0 +1,5 @@
+# Plane-scoped ICE booster: 10C + 3U + 1R + 1 snow-covered basic (ICE printing).
+[metadata]
+Code=ICE
+Date=1995-06-03
+Booster=10 Common, 3 Uncommon, 1 Rare, 1 name("Snow-Covered Plains|ICE", "Snow-Covered Island|ICE", "Snow-Covered Swamp|ICE", "Snow-Covered Mountain|ICE", "Snow-Covered Forest|ICE")
