@@ -4149,7 +4149,7 @@
     "equipmentSlot": "Body",
     "iconName": "OpalCloak",
     "effect": {
-      "lifeModifier": -5,
+      "lifeModifier": -3,
       "startBattleWithCard": [
         "Opal Palace|C13"
      ]
