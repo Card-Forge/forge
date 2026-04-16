@@ -1,6 +1,5 @@
 package forge.interfaces;
 
-import java.util.Collections;
 import java.util.List;
 
 import forge.game.card.CardView;
