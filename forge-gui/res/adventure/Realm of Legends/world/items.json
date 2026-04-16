@@ -4326,7 +4326,7 @@
     "equipmentSlot": "Body",
     "iconName": "SeraphimWings",
     "effect": {
-        "changeStartCards": -1,
+      "lifeModifier": -5,
         "startBattleWithCard": [
         "Seraph Sanctuary|AVR"
      ]
@@ -4372,7 +4372,7 @@
   },
     {
     "name": "Commander's Robes",
-    "description": "Taps for any color of your commander; no hand size penalty",
+    "description": "Taps for any color of your commander; no penalties",
     "equipmentSlot": "Body",
     "iconName": "Commander'sRobes",
     "effect": {
