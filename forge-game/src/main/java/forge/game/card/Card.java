@@ -211,7 +211,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private boolean renowned;
     private boolean solved;
     private boolean tributed;
-    private boolean prepared;
+    private Card preparedEffect;
     private StaticAbility suspectedStatic = null;
 
     private SpellAbility manifestedSA;
@@ -6607,8 +6607,19 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return true;
     }
 
-    public boolean isPrepared() { return this.prepared; }
-    public void setPrepared(final boolean prepared) { this.prepared = prepared; }
+    public boolean isPrepared() {
+        return preparedEffect != null;
+    }
+    public Card getPrepared() {
+        return preparedEffect;
+    }
+    public void setPrepared(final Card eff) {
+        if (eff == null && preparedEffect != null) {
+            game.getAction().exile((Card) preparedEffect.getFirstRemembered(), null , null);
+            game.getAction().exileEffect(preparedEffect);
+        }
+        preparedEffect = eff;
+    }
 
     public final boolean isManifested() {
         return manifestedSA != null;

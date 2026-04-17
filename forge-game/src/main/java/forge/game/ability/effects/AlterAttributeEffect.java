@@ -7,6 +7,7 @@ import forge.card.GamePieceType;
 import forge.game.Game;
 import forge.game.GameLogEntryType;
 import forge.game.GameType;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -15,7 +16,10 @@ import forge.game.card.CardCopyService;
 import forge.game.event.GameEventAddLog;
 import forge.game.event.GameEventCardPlotted;
 import forge.game.player.Player;
+import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
@@ -42,7 +46,7 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
         }
 
         for (Card c : defined) {
-            final Card gameCard = c.getGame().getCardState(c, null);
+            final Card gameCard = game.getCardState(c, null);
             // gameCard is LKI in that case, the card is not in game anymore
             // or the timestamp did change
             // this should check Self too
@@ -59,31 +63,36 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
                         break;
                     case "Plotted":
                         altered = gameCard.setPlotted(activate);
-                        c.getGame().fireEvent(new GameEventCardPlotted(c, activator));
+                        game.fireEvent(new GameEventCardPlotted(c, activator));
                         break;
                     case "Prepared":
+                        Card eff = null;
                         if (activate) {
-                            if (gameCard.isPrepared() || !game.getCardState(gameCard).equalsWithGameTimestamp(gameCard) || !gameCard.hasState(CardStateName.PreparedSpell)) {
+                            if (gameCard.isPrepared() || !gameCard.hasState(CardStateName.PreparedSpell)) {
                                 continue;
                             }
                             Card prepared = new CardCopyService(gameCard).copyCard(true, activator);
                             prepared.setGamePieceType(GamePieceType.TOKEN);
                             prepared.setState(CardStateName.PreparedSpell, true);
                             prepared.getOwner().getZone(ZoneType.Exile).add(prepared);
-                            final Card eff = createEffect(sa, activator, gameCard + "'s Prepared Spell", prepared.getImageKey());
+                            eff = createEffect(sa, activator, gameCard + "'s Prepared Spell", prepared.getImageKey());
                             eff.addRemembered(prepared);
                             eff.setRenderForUI(false);
-                            gameCard.addLeavesPlayCommand(() -> {
-                                game.getAction().exileEffect(eff);
-                                game.getAction().exile(prepared, null , null);
-                            });
-                            addForgetOnCastTrigger(eff, "Card.IsRemembered");
+                            String castTrig = "Mode$ SpellCast | TriggerZones$ Command | Static$ True | ValidCard$ Card.IsRemembered";
+                            String unprepare = "DB$ AlterAttribute | Defined$ EffectSource | Attributes$ Prepared | Activate$ False";
+                            String exile = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile";
+                            final Trigger parsedTrigger = TriggerHandler.parseTrigger(castTrig, eff, true);
+                            final SpellAbility unprepareSA = AbilityFactory.getAbility(unprepare, eff);
+                            parsedTrigger.setOverridingAbility(unprepareSA);
+                            final AbilitySub exileSA = (AbilitySub) AbilityFactory.getAbility(exile, eff);
+                            unprepareSA.setSubAbility(exileSA);
                             String mayPlay = "Mode$ Continuous | MayPlay$ True | MayPlayPlayer$ EffectSourceController | EffectZone$ Command | " +
                                     "Affected$ Card.IsRemembered | AffectedZone$ Exile";
                             eff.addStaticAbility(mayPlay);
                             game.getAction().moveToCommand(eff, sa);
+                            gameCard.addLeavesPlayCommand(() -> gameCard.setPrepared(null));
                         }
-                        gameCard.setPrepared(activate);
+                        gameCard.setPrepared(eff);
                         break;
                     case "Solve":
                     case "Solved":
@@ -91,7 +100,7 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
                         if (altered) {
                             Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(gameCard);
                             runParams.put(AbilityKey.Player, sa.getActivatingPlayer());
-                            c.getGame().getTriggerHandler().runTrigger(TriggerType.CaseSolved, runParams, false);
+                            game.getTriggerHandler().runTrigger(TriggerType.CaseSolved, runParams, false);
                         }
                         break;
                     case "Suspect":
@@ -107,7 +116,7 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
                             gameCard.addSaddledByThisTurn(saddlers);
                             Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(gameCard);
                             runParams.put(AbilityKey.Crew, saddlers);
-                            c.getGame().getTriggerHandler().runTrigger(TriggerType.BecomesSaddled, runParams, false);
+                            game.getTriggerHandler().runTrigger(TriggerType.BecomesSaddled, runParams, false);
                         }
                         break;
                     case "Commander":
@@ -116,16 +125,16 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
                         if (gameCard.isCommander() == activate || p.getCommanders().contains(gameCard) == activate)
                             break; //Isn't changing status.
                         if (activate) {
-                            if (!gameCard.getGame().getRules().hasCommander()) {
+                            if (!game.getRules().hasCommander()) {
                                 System.out.println("Commander status applied in non-commander format. Applying Commander variant.");
-                                gameCard.getGame().getRules().addAppliedVariant(GameType.Commander);
+                                game.getRules().addAppliedVariant(GameType.Commander);
                             }
                             p.addCommander(gameCard);
                             //Seems important enough to mention in the game log.
-                            gameCard.getGame().fireEvent(new GameEventAddLog(GameLogEntryType.STACK_RESOLVE, String.format("%s is now %s's commander.", gameCard.getPaperCard().getDisplayName(), p)));
+                            game.fireEvent(new GameEventAddLog(GameLogEntryType.STACK_RESOLVE, String.format("%s is now %s's commander.", gameCard.getPaperCard().getDisplayName(), p)));
                         } else {
                             p.removeCommander(gameCard);
-                            gameCard.getGame().fireEvent(new GameEventAddLog(GameLogEntryType.STACK_RESOLVE, String.format("%s is no longer %s's commander.", gameCard.getPaperCard().getDisplayName(), p)));
+                            game.fireEvent(new GameEventAddLog(GameLogEntryType.STACK_RESOLVE, String.format("%s is no longer %s's commander.", gameCard.getPaperCard().getDisplayName(), p)));
                         }
                         altered = true;
                         break;
