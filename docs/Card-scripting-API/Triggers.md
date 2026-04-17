@@ -28,8 +28,8 @@ Below are either frequently used or more complicated modes.
 # Always
 Always-triggers represent State triggers, a special kind of triggers with their own rule ([CR 603.8](https://yawgatog.com/resources/magic-rules/#R6038)).
 
-# Attached / Unattach
-Goes off when a card becomes attached, via enchanting or equipping, to another card or player.
+# Attached / Unattached
+Goes off when a card becomes attached to / unattached from another card or player.
 
 Parameters:
 - `ValidSource` - The card that is being attached to another must match this for the trigger to go off
@@ -49,7 +49,7 @@ TriggeredObjects:
 - `Card` - The card that became monstrous
 
 # BecomesTarget
-BecomesTarget-triggers go off when a spell or ability (or either) is put on the stack targeting something.
+Goes off when a spell or ability (or either) is put on the stack targeting something.
 
 Parameters:
 - `ValidSource` - The card that targets something must match this
@@ -433,7 +433,7 @@ TriggeredObjects:
 - `Player` - The player whose turn it is
 
 # SpellCast / AbilityCast / SpellAbilityCast
-These triggers go off whenever a spell,ability or either respectively is cast by either player.
+These triggers go off whenever a spell, ability or either respectively is cast.
 
 Parameters:
 - `ValidActivatingPlayer` - The player who activated the ability/spell must match this. (NOTE: For spells, the activator and controller are the same. They usually the same for abilities too, with the exception being abilities that can be activated by any player)

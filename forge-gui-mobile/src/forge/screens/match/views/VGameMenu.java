@@ -36,20 +36,19 @@ public class VGameMenu extends FDropDownMenu {
         addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblAutoYields"), Forge.hdbuttons ? FSkinImage.HDYIELD : FSkinImage.WARNING, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                final boolean autoYieldsDisabled = MatchController.instance.getDisableAutoYields();
+                final boolean autoYieldsDisabled = MatchController.instance.getGameController().getDisableAutoYields();
                 final VAutoYields autoYields = new VAutoYields() {
                     @Override
                     public void setVisible(boolean b0) {
                         super.setVisible(b0);
                         if (!b0) {
-                            if (autoYieldsDisabled && !MatchController.instance.getDisableAutoYields()) {
+                            if (autoYieldsDisabled && !MatchController.instance.getGameController().getDisableAutoYields()) {
                                 //if re-enabling auto-yields, auto-yield to current ability on stack if applicable
                                 if (MatchController.instance.getGameView().peekStack() != null) {
                                     final String key = MatchController.instance.getGameView().peekStack().getKey();
-                                    final boolean autoYield = MatchController.instance.shouldAutoYield(key);
-                                    MatchController.instance.setShouldAutoYield(key, !autoYield);
-                                    MatchController.instance.getGameController().notifyAutoYieldChanged(key, !autoYield);
-                                    if (!autoYield && MatchController.instance.shouldAutoYield(key)) {
+                                    final boolean autoYield = MatchController.instance.getGameController().shouldAutoYield(key);
+                                    MatchController.instance.getGameController().setShouldAutoYield(key, !autoYield);
+                                    if (!autoYield && MatchController.instance.getGameController().shouldAutoYield(key)) {
                                         //auto-pass priority if ability is on top of stack
                                         MatchController.instance.getGameController().passPriority();
                                     }

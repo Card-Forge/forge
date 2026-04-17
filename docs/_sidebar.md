@@ -50,6 +50,7 @@
   - [Dev Mode](Development/DevMode.md)
   - [Ownership](Development/ownership.md)
   - [Docker Container](docker-setup.md)
+  - [Network Testing](Development/Network-Testing.md)
 
 - Customization & Themes
   - [Skins](Skins.md)

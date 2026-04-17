@@ -15,6 +15,7 @@ import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.trackable.TrackableTypes;
 import forge.trackable.TrackableTypes.TrackableType;
+import forge.util.IHasForgeLog;
 
 import java.util.*;
 
@@ -22,7 +23,7 @@ import java.util.*;
  * This class handles all network-specific deserialization and state management,
  * keeping the core AbstractGuiGame class free from network dependencies.
  */
-public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasNetLog {
+public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasForgeLog {
 
     @Override
     public void applyDelta(DeltaPacket packet) {

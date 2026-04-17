@@ -5,6 +5,7 @@ import forge.gamemodes.net.event.ReplyEvent;
 import forge.gui.FThreads;
 import forge.gui.util.SOptionPane;
 import forge.localinstance.skin.FSkinProp;
+import forge.util.IHasForgeLog;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
@@ -12,7 +13,7 @@ import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapter implements IHasNetLog {
+public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapter implements IHasForgeLog {
 
     private final boolean runInEdt;
     protected GameProtocolHandler(final boolean runInEdt) {

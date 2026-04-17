@@ -46,6 +46,7 @@ public class NetConnectUtil {
         final ServerGameLobby lobby = new ServerGameLobby();
         final ILobbyView view = onlineLobby.setLobby(lobby);
 
+        NetworkLogConfig.activateNetworkLogging();
         server.startServer(port);
         server.setLobby(lobby);
 
@@ -100,6 +101,8 @@ public class NetConnectUtil {
 
         view.update(true);
 
+        server.broadcast(new MessageEvent(server.formatAfkTimeoutMessage()));
+
         return new ChatMessage(null, Localizer.getInstance().getMessage("lblHostingPortOnN", String.valueOf(port)));
     }
 
@@ -139,15 +142,11 @@ public class NetConnectUtil {
             localCopyIndex = 0;
         }
 
-        while (true) {
-            int result = SOptionPane.showOptionDialog(message, title, SOptionPane.INFORMATION_ICON, options, closeIndex);
-            if (externalUrl != null && result == 0) {
-                GuiBase.getInterface().copyToClipboard(externalUrl);
-            } else if (result == localCopyIndex) {
-                GuiBase.getInterface().copyToClipboard(internalUrl);
-            } else {
-                break;
-            }
+        int result = SOptionPane.showOptionDialog(message, title, SOptionPane.INFORMATION_ICON, options, closeIndex);
+        if (externalUrl != null && result == 0) {
+            GuiBase.getInterface().copyToClipboard(externalUrl);
+        } else if (result == localCopyIndex) {
+            GuiBase.getInterface().copyToClipboard(internalUrl);
         }
     }
 
@@ -193,6 +192,7 @@ public class NetConnectUtil {
         });
         view.setPlayerChangeListener((index, event) -> client.send(event));
 
+        NetworkLogConfig.activateNetworkLogging();
         try {
             client.connect();
         }

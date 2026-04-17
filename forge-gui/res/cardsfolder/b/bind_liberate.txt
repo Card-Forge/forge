@@ -1,0 +1,4 @@
+CopyFaceFrom:Bind
+AlternateMode:Split
+ALTERNATE
+CopyFaceFrom:Liberate

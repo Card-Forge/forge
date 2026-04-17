@@ -24,7 +24,6 @@ import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
 import forge.gui.card.CardDetailUtil;
 import forge.gui.card.CardDetailUtil.DetailColors;
-import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.IGameController;
 import forge.menu.FCheckBoxMenuItem;
 import forge.menu.FDropDown;
@@ -282,7 +281,6 @@ public class VStack extends FDropDown {
                 return true;
             }
             final GameView gameView = MatchController.instance.getGameView();
-            final IGuiGame gui = MatchController.instance;
             final IGameController controller = MatchController.instance.getGameController();
             final PlayerView player = MatchController.instance.getCurrentPlayer();
             if (player != null) { //don't show menu if tapping on art
@@ -291,11 +289,10 @@ public class VStack extends FDropDown {
                         @Override
                         protected void buildMenu() {
                             final String key = stackInstance.getKey();
-                            final boolean autoYield = gui.shouldAutoYield(key);
+                            final boolean autoYield = controller.shouldAutoYield(key);
                             addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("cbpAutoYieldMode"), autoYield,
                                     e -> {
-                                        gui.setShouldAutoYield(key, !autoYield);
-                                        controller.notifyAutoYieldChanged(key, !autoYield);
+                                        controller.setShouldAutoYield(key, !autoYield);
                                         if (!autoYield && stackInstance.equals(gameView.peekStack())) {
                                             //auto-pass priority if ability is on top of stack
                                             controller.passPriority();
@@ -304,15 +301,13 @@ public class VStack extends FDropDown {
                             if (stackInstance.isOptionalTrigger() && stackInstance.getActivatingPlayer().equals(player)) {
                                 final int triggerID = stackInstance.getSourceTrigger();
                                 addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblAlwaysYes"),
-                                        gui.shouldAlwaysAcceptTrigger(triggerID),
+                                        controller.shouldAlwaysAcceptTrigger(triggerID),
                                         e -> {
-                                            if (gui.shouldAlwaysAcceptTrigger(triggerID)) {
-                                                gui.setShouldAlwaysAskTrigger(triggerID);
-                                                controller.notifyTriggerChoiceChanged(triggerID, forge.gamemodes.match.TriggerChoice.ASK);
+                                            if (controller.shouldAlwaysAcceptTrigger(triggerID)) {
+                                                controller.setShouldAlwaysAskTrigger(triggerID);
                                             }
                                             else {
-                                                gui.setShouldAlwaysAcceptTrigger(triggerID);
-                                                controller.notifyTriggerChoiceChanged(triggerID, forge.gamemodes.match.TriggerChoice.ALWAYS_YES);
+                                                controller.setShouldAlwaysAcceptTrigger(triggerID);
                                                 if (stackInstance.equals(gameView.peekStack())) {
                                                     //auto-yes if ability is on top of stack
                                                     controller.selectButtonOk();
@@ -320,15 +315,13 @@ public class VStack extends FDropDown {
                                             }
                                         }));
                                 addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblAlwaysNo"),
-                                        gui.shouldAlwaysDeclineTrigger(triggerID),
+                                        controller.shouldAlwaysDeclineTrigger(triggerID),
                                         e -> {
-                                            if (gui.shouldAlwaysDeclineTrigger(triggerID)) {
-                                                gui.setShouldAlwaysAskTrigger(triggerID);
-                                                controller.notifyTriggerChoiceChanged(triggerID, forge.gamemodes.match.TriggerChoice.ASK);
+                                            if (controller.shouldAlwaysDeclineTrigger(triggerID)) {
+                                                controller.setShouldAlwaysAskTrigger(triggerID);
                                             }
                                             else {
-                                                gui.setShouldAlwaysDeclineTrigger(triggerID);
-                                                controller.notifyTriggerChoiceChanged(triggerID, forge.gamemodes.match.TriggerChoice.ALWAYS_NO);
+                                                controller.setShouldAlwaysDeclineTrigger(triggerID);
                                                 if (stackInstance.equals(gameView.peekStack())) {
                                                     //auto-no if ability is on top of stack
                                                     controller.selectButtonCancel();

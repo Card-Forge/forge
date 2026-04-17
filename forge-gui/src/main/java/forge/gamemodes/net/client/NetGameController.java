@@ -1,5 +1,7 @@
 package forge.gamemodes.net.client;
 
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.player.actions.PlayerAction;
@@ -11,13 +13,24 @@ import forge.gamemodes.net.ProtocolMethod;
 import forge.interfaces.IDevModeCheats;
 import forge.interfaces.IGameController;
 import forge.interfaces.IMacroSystem;
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
 import forge.util.ITriggerEvent;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class NetGameController implements IGameController {
 
     private final GameProtocolSender sender;
+
+    // Local mirror of yield state for UI display
+    private final Set<String> autoYields = Sets.newHashSet();
+    private final Map<Integer, Boolean> triggersAlwaysAccept = Maps.newTreeMap();
+    private boolean disableAutoYields;
+
     public NetGameController(final IToServer server) {
         this.sender = new GameProtocolSender(server);
     }
@@ -127,6 +140,76 @@ public class NetGameController implements IGameController {
         send(ProtocolMethod.requestResync);
     }
 
+    @Override
+    public boolean shouldAutoYield(final String key) {
+        String abilityKey = key.contains("): ") ? key.substring(key.indexOf("): ") + 3) : key;
+        boolean yieldPerAbility = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_AUTO_YIELD_MODE)
+                .equals(ForgeConstants.AUTO_YIELD_PER_ABILITY);
+        return !disableAutoYields && autoYields.contains(yieldPerAbility ? abilityKey : key);
+    }
+
+    @Override
+    public void setShouldAutoYield(final String key, final boolean autoYield) {
+        String abilityKey = key.contains("): ") ? key.substring(key.indexOf("): ") + 3) : key;
+        boolean yieldPerAbility = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_AUTO_YIELD_MODE)
+                .equals(ForgeConstants.AUTO_YIELD_PER_ABILITY);
+        if (autoYield) {
+            autoYields.add(yieldPerAbility ? abilityKey : key);
+        } else {
+            autoYields.remove(yieldPerAbility ? abilityKey : key);
+        }
+        send(ProtocolMethod.setShouldAutoYield, key, autoYield);
+    }
+
+    @Override
+    public Iterable<String> getAutoYields() {
+        return autoYields;
+    }
+
+    @Override
+    public void clearAutoYields() {
+        autoYields.clear();
+        triggersAlwaysAccept.clear();
+    }
+
+    @Override
+    public boolean getDisableAutoYields() {
+        return disableAutoYields;
+    }
+
+    @Override
+    public void setDisableAutoYields(final boolean disable) {
+        disableAutoYields = disable;
+    }
+
+    @Override
+    public boolean shouldAlwaysAcceptTrigger(final int trigger) {
+        return Boolean.TRUE.equals(triggersAlwaysAccept.get(trigger));
+    }
+
+    @Override
+    public boolean shouldAlwaysDeclineTrigger(final int trigger) {
+        return Boolean.FALSE.equals(triggersAlwaysAccept.get(trigger));
+    }
+
+    @Override
+    public void setShouldAlwaysAcceptTrigger(final int trigger) {
+        triggersAlwaysAccept.put(trigger, Boolean.TRUE);
+        send(ProtocolMethod.setShouldAlwaysAcceptTrigger, trigger);
+    }
+
+    @Override
+    public void setShouldAlwaysDeclineTrigger(final int trigger) {
+        triggersAlwaysAccept.put(trigger, Boolean.FALSE);
+        send(ProtocolMethod.setShouldAlwaysDeclineTrigger, trigger);
+    }
+
+    @Override
+    public void setShouldAlwaysAskTrigger(final int trigger) {
+        triggersAlwaysAccept.remove(trigger);
+        send(ProtocolMethod.setShouldAlwaysAskTrigger, trigger);
+    }
+
     private IMacroSystem macros;
     @Override
     public IMacroSystem macros() {
@@ -165,15 +248,5 @@ public class NetGameController implements IGameController {
     @Override
     public void notifyYieldStateChanged(PlayerView player, YieldMode mode, forge.gamemodes.match.YieldPrefs prefs) {
         send(ProtocolMethod.notifyYieldStateChanged, player, mode, prefs);
-    }
-
-    @Override
-    public void notifyAutoYieldChanged(String key, boolean autoYield) {
-        send(ProtocolMethod.notifyAutoYieldChanged, key, autoYield);
-    }
-
-    @Override
-    public void notifyTriggerChoiceChanged(int triggerId, forge.gamemodes.match.TriggerChoice choice) {
-        send(ProtocolMethod.notifyTriggerChoiceChanged, triggerId, choice);
     }
 }

@@ -2,7 +2,7 @@ package forge.net;
 
 import forge.GuiDesktop;
 import forge.gamemodes.match.HostedMatch;
-import forge.gamemodes.net.IHasNetLog;
+import forge.util.IHasForgeLog;
 import forge.gui.interfaces.IGuiGame;
 import forge.localinstance.skin.FSkinProp;
 import forge.localinstance.skin.ISkinImage;
@@ -17,7 +17,7 @@ import java.util.List;
  *
  * <p>Set via {@link TestUtils#ensureFModelInitialized()}.
  */
-public class HeadlessGuiDesktop extends GuiDesktop implements IHasNetLog {
+public class HeadlessGuiDesktop extends GuiDesktop implements IHasForgeLog {
 
     private static volatile HostedMatch lastMatch;
     private static boolean testingEnvironmentLogged = false;

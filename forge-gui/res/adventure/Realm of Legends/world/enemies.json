@@ -375,6 +375,11 @@
         "itemName": "Bloodsworn Bite"
       },
       {
+        "type": "item",
+        "count": 1,
+        "itemName": "Vampiric Amulet"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Edgar Markov"
@@ -897,7 +902,7 @@
     ],
     "ai": "",
     "speed": 45,
-    "scale": 6,
+    "scale": 3,
     "life": 70,
     "rewards": [
       {
@@ -1045,7 +1050,7 @@
     ],
     "ai": "",
     "speed": 45,
-    "scale": 3,
+    "scale": 2,
     "life": 70,
     "rewards": [
       {
@@ -2050,7 +2055,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Pilgrim's CloakPi"
+        "itemName": "Pilgrim's Cloak"
       },
       {
         "type": "card",
@@ -2120,7 +2125,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Opal Armor"
+        "itemName": "Opal Cloak"
       },
       {
         "type": "item",
@@ -23534,9 +23539,14 @@
         "cardName": "Etali, Primal Storm"
       },
       {
+        "type": "card",
+        "count": 1,
+        "cardName": "Etali, Primal Conqueror"
+      },
+      {
         "type": "deckCard",
         "count": 2,
-        "addMaxCount": 4,
+        "addMaxCount": 2,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -23605,9 +23615,14 @@
         "cardName": "Ghalta and Mavren"
       },
       {
+        "type": "card",
+        "count": 1,
+        "cardName": "Ghalta, Stampede Tyrant"
+      },
+      {
         "type": "deckCard",
         "count": 2,
-        "addMaxCount": 4,
+        "addMaxCount": 2,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -37396,9 +37411,14 @@
         "cardName": "Selvala, Eager Trailblazer"
       },
       {
+        "type": "card",
+        "count": 1,
+        "cardName": "Selvala, Heart of the Wilds"
+      },
+      {
         "type": "deckCard",
         "count": 1,
-        "addMaxCount": 3,
+        "addMaxCount": 1,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -44489,17 +44509,22 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
-     {
+      {
+        "type": "item",
+        "count": 1,
+        "cardName": "Ajani's Amulet"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Ajani, Nacatl Pariah"
       },
       {
         "type": "deckCard",
-        "count": 1,
-        "addMaxCount": 3,
+        "count": 2,
+        "addMaxCount": 4,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -44507,8 +44532,8 @@
       },
       {
         "type": "deckCard",
-        "count": 2,
-        "addMaxCount": 4,
+        "count": 1,
+        "addMaxCount": 3,
         "rarity": [
           "common",
           "uncommon"
@@ -44516,31 +44541,48 @@
       },
       {
         "type": "randomCard",
-        "count": 1,
-        "addMaxCount": 3,
-        "rarity": [
-          "Rare",
-          "Mythic Rare"
-	]
-      },
-      {
-        "type": "randomCard",
         "count": 2,
         "addMaxCount": 4,
         "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
           "common",
           "uncommon"
-	]
+        ]
       },
       {
         "type": "gold",
-        "count": 50,
-        "addMaxCount": 250
+        "count": 100,
+        "addMaxCount": 1000
       },
       {
         "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      },
+      {
+        "type": "card",
+        "probability": 0.1,
         "count": 1,
-        "addMaxCount": 5
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.2,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.1,
+        "count": 1
       }
     ],
     "colors": "WR",
@@ -44694,17 +44736,22 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
-     {
+      {
+        "type": "item",
+        "count": 1,
+        "cardName": "Pack Leader Pants"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Rin and Seri, Inseparable"
       },
       {
         "type": "deckCard",
-        "count": 1,
-        "addMaxCount": 3,
+        "count": 2,
+        "addMaxCount": 4,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -44712,8 +44759,8 @@
       },
       {
         "type": "deckCard",
-        "count": 2,
-        "addMaxCount": 4,
+        "count": 1,
+        "addMaxCount": 3,
         "rarity": [
           "common",
           "uncommon"
@@ -44721,31 +44768,48 @@
       },
       {
         "type": "randomCard",
-        "count": 1,
-        "addMaxCount": 3,
-        "rarity": [
-          "Rare",
-          "Mythic Rare"
-	]
-      },
-      {
-        "type": "randomCard",
         "count": 2,
         "addMaxCount": 4,
         "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
           "common",
           "uncommon"
-	]
+        ]
       },
       {
         "type": "gold",
-        "count": 50,
-        "addMaxCount": 250
+        "count": 100,
+        "addMaxCount": 1000
       },
       {
         "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      },
+      {
+        "type": "card",
+        "probability": 0.1,
         "count": 1,
-        "addMaxCount": 5
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.2,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.1,
+        "count": 1
       }
     ],
     "colors": "WRG",
@@ -45986,9 +46050,14 @@
         "cardName": "Gerrard, Weatherlight Hero"
       },
       {
+        "type": "card",
+        "count": 1,
+        "cardName": "Gerrard Capashen"
+      },
+      {
         "type": "deckCard",
         "count": 1,
-        "addMaxCount": 3,
+        "addMaxCount": 2,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -61780,7 +61849,7 @@
     "ai": "",
     "spawnRate": 0,
     "difficulty": 0.1,
-    "scale": 1,
+    "scale": 0.6,
     "speed": 0,
     "life": 1,
     "rewards": [

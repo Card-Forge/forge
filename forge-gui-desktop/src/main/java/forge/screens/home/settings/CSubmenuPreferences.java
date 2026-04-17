@@ -232,6 +232,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeGraveyardOrderingComboBox();
         initializePlayerNameButton();
         initializeServerPortButton();
+        initializeAfkTimeoutButton();
         initializeDefaultLanguageComboBox();
 
         disableLazyLoading();
@@ -722,6 +723,27 @@ public enum CSubmenuPreferences implements ICDoc {
         return () -> {
             GamePlayerUtil.setServerPort();
             setServerPortButtonText();
+        };
+    }
+
+    private void initializeAfkTimeoutButton() {
+        final FLabel btn = view.getBtnAfkTimeout();
+        setAfkTimeoutButtonText();
+        btn.setCommand(getAfkTimeoutButtonCommand());
+    }
+    private void setAfkTimeoutButtonText() {
+        final FLabel btn = view.getBtnAfkTimeout();
+        final int minutes = netPrefs.getPrefInt(ForgeNetPreferences.FNetPref.NET_AFK_TIMEOUT);
+        if (minutes <= 0) {
+            btn.setText(localizer.getMessage("lblAfkTimeoutDisabled"));
+        } else {
+            btn.setText(minutes + ":00");
+        }
+    }
+    private UiCommand getAfkTimeoutButtonCommand() {
+        return () -> {
+            GamePlayerUtil.setAfkTimeout();
+            setAfkTimeoutButtonText();
         };
     }
 }

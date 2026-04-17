@@ -67,7 +67,7 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
-import forge.gamemodes.net.IHasNetLog;
+import forge.util.IHasForgeLog;
 import forge.gamemodes.net.NetworkGuiGame;
 import forge.gui.FNetOverlay;
 import forge.gui.FThreads;
@@ -144,7 +144,7 @@ import net.miginfocom.swing.MigLayout;
  */
 public final class CMatchUI
     extends NetworkGuiGame
-    implements ICDoc, IMenuProvider, IHasNetLog {
+    implements ICDoc, IMenuProvider, IHasForgeLog {
 
     public static final EnumSet<ZoneType> FLOATING_ZONE_TYPES = EnumSet.of(ZoneType.Library, ZoneType.Graveyard, ZoneType.Exile,
             ZoneType.Flashback, ZoneType.Command, ZoneType.Ante, ZoneType.Sideboard, ZoneType.PlanarDeck,

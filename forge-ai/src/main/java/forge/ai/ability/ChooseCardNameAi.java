@@ -33,9 +33,8 @@ public class ChooseCardNameAi extends SpellAbilityAi {
             if (logic.equals("CursedScroll")) {
                 if (SpecialCardAi.CursedScroll.consider(ai, sa)) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                } else {
-                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             final TargetRestrictions tgt = sa.getTargetRestrictions();

@@ -10,7 +10,6 @@ import forge.game.player.DelayedReveal;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.gamemodes.match.NextGameDecision;
-import forge.gamemodes.match.TriggerChoice;
 import forge.gamemodes.match.YieldMode;
 import forge.gamemodes.match.YieldPrefs;
 import forge.gui.GuiBase;
@@ -20,6 +19,7 @@ import forge.localinstance.skin.FSkinProp;
 import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
 import forge.util.FSerializableFunction;
+import forge.util.IHasForgeLog;
 import forge.util.ITriggerEvent;
 import forge.util.ReflectionUtil;
 
@@ -31,7 +31,7 @@ import java.util.Map;
 /**
  * The methods that can be sent through this protocol.
  */
-public enum ProtocolMethod implements IHasNetLog {
+public enum ProtocolMethod implements IHasForgeLog {
     // Server -> Client
     setGameView         (Mode.SERVER, Void.TYPE, GameView.class, Long.TYPE),
     openView            (Mode.SERVER, Void.TYPE, TrackableCollection/*PlayerView*/.class),
@@ -100,10 +100,11 @@ public enum ProtocolMethod implements IHasNetLog {
     alphaStrike               (Mode.CLIENT, Void.TYPE),
     reorderHand               (Mode.CLIENT, Void.TYPE, CardView.class, Integer.TYPE),
     notifyYieldStateChanged   (Mode.CLIENT, Void.TYPE, PlayerView.class, YieldMode.class, YieldPrefs.class),
-    notifyAutoYieldChanged    (Mode.CLIENT, Void.TYPE, String.class, Boolean.TYPE),
-    notifyTriggerChoiceChanged(Mode.CLIENT, Void.TYPE, Integer.TYPE, TriggerChoice.class),
     requestResync             (Mode.CLIENT, Void.TYPE),
-    ;
+    setShouldAutoYield           (Mode.CLIENT, Void.TYPE, String.class, Boolean.TYPE),
+    setShouldAlwaysAcceptTrigger  (Mode.CLIENT, Void.TYPE, Integer.TYPE),
+    setShouldAlwaysDeclineTrigger (Mode.CLIENT, Void.TYPE, Integer.TYPE),
+    setShouldAlwaysAskTrigger     (Mode.CLIENT, Void.TYPE, Integer.TYPE);
 
     private enum Mode {
         SERVER(IGuiGame.class),

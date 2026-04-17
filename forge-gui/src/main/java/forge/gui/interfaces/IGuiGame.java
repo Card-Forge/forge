@@ -75,19 +75,16 @@ public interface IGuiGame {
     void updatePlayerControl();
 
     void enableOverlay();
-
     void disableOverlay();
 
     void finishGame();
 
     void showManaPool(PlayerView player);
-
     void hideManaPool(PlayerView player);
 
     void updateStack();
 
     void notifyStackAddition(final GameEventSpellAbilityCast event);
-
     void notifyStackRemoval(final GameEventSpellRemovedFromStack event);
 
     void handleLandPlayed(CardView land);
@@ -260,17 +257,17 @@ public interface IGuiGame {
     void setGameSpeed(PlaybackSpeed gameSpeed);
 
     String getDayTime();
-
     void updateDayTime(String daytime);
 
     void awaitNextInput();
-
     void cancelAwaitNextInput();
+
+    /** Signal to start a client-side elapsed timer for waiting display. */
+    void showWaitingTimer(PlayerView forPlayer, String waitingForPlayerName);
 
     boolean isUiSetToSkipPhase(PlayerView playerTurn, PhaseType phase);
 
     void autoPassUntilEndOfTurn(PlayerView player);
-
     boolean mayAutoPass(PlayerView player);
 
     boolean isAutoPassingNoActions(PlayerView player);
@@ -282,71 +279,21 @@ public interface IGuiGame {
 
     void updateAutoPassPrompt();
 
-    // Extended yield mode methods (experimental feature)
-
-    /**
-     * Set the player's yield mode.
-     *
-     * @param fromRemote true when the host is receiving yield state from a
-     *                   network client. Skips validation (the client already
-     *                   validated locally), the prompt update (the client
-     *                   already showed its own), and the notify-server
-     *                   callback (echoing back would loop forever). false for
-     *                   local user actions on this process.
-     * @return true if the mode was activated.
-     */
     boolean setYieldMode(PlayerView player, YieldMode mode, boolean fromRemote);
 
-    /**
-     * Sync yield mode from server to client.
-     * Used when server clears yield (end condition met) and needs to update client UI.
-     */
     void syncYieldMode(PlayerView player, YieldMode mode);
 
-    /**
-     * Sync whether the host has advanced yield options enabled.
-     * Used in network play to disable client yield buttons when host lacks the setting.
-     */
     void setHostYieldEnabled(boolean enabled);
 
     void clearYieldMode(PlayerView player);
 
     YieldMode getYieldMode(PlayerView player);
 
-    /**
-     * Store the most recent yield preferences snapshot received from the remote
-     * client this GUI represents. Default implementation is a no-op for the
-     * host's own GUI; NetGuiGame stores it on a field so the host's
-     * YieldController can read the remote player's interrupt prefs.
-     */
-    default void setRemoteYieldPrefs(forge.gamemodes.match.YieldPrefs prefs) {
-        // No-op for local GUIs; only NetGuiGame stores the snapshot.
-    }
+    default void setRemoteYieldPrefs(forge.gamemodes.match.YieldPrefs prefs) {}
 
-    /**
-     * @return the most recent yield preferences snapshot received from the
-     *         remote client this GUI represents, or null if this is the host's
-     *         own GUI or no snapshot has been received yet.
-     */
     default forge.gamemodes.match.YieldPrefs getRemoteYieldPrefs() {
         return null;
     }
-
-    boolean shouldAutoYield(String key);
-
-    void setShouldAutoYield(String key, boolean autoYield);
-
-    boolean shouldAlwaysAcceptTrigger(int trigger);
-
-    boolean shouldAlwaysDeclineTrigger(int trigger);
-
-    void setShouldAlwaysAcceptTrigger(int trigger);
-
-    void setShouldAlwaysDeclineTrigger(int trigger);
-
-    void setShouldAlwaysAskTrigger(int trigger);
-
-    void clearAutoYields();
 
     void setCurrentPlayer(PlayerView player);
 
@@ -355,9 +302,6 @@ public interface IGuiGame {
      * @param packet the delta packet containing changes
      */
     void applyDelta(DeltaPacket packet);
-
-    /** Signal to start a client-side elapsed timer for waiting display. */
-    void showWaitingTimer(PlayerView forPlayer, String waitingForPlayerName);
 
     /** Returns true if this game instance is a network game. */
     boolean isNetGame();

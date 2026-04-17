@@ -292,9 +292,8 @@ public class VStack implements IVDoc<CStack> {
             jmiAutoYield = new JCheckBoxMenuItem(Localizer.getInstance().getMessage("cbpAutoYieldMode"));
             jmiAutoYield.addActionListener(arg0 -> {
                 final String key = item.getKey();
-                final boolean autoYield = controller.getMatchUI().shouldAutoYield(key);
-                controller.getMatchUI().setShouldAutoYield(key, !autoYield);
-                controller.getMatchUI().getGameController().notifyAutoYieldChanged(key, !autoYield);
+                final boolean autoYield = controller.getMatchUI().getGameController().shouldAutoYield(key);
+                controller.getMatchUI().getGameController().setShouldAutoYield(key, !autoYield);
                 if (!autoYield && controller.getMatchUI().getGameView().peekStack() == item) {
                     //auto-pass priority if ability is on top of stack
                     controller.getMatchUI().getGameController().passPriority();
@@ -304,26 +303,22 @@ public class VStack implements IVDoc<CStack> {
 
             jmiAlwaysYes = new JCheckBoxMenuItem(Localizer.getInstance().getMessage("lblAlwaysYes"));
             jmiAlwaysYes.addActionListener(arg0 -> {
-                if (controller.getMatchUI().shouldAlwaysAcceptTrigger(triggerID)) {
-                    controller.getMatchUI().setShouldAlwaysAskTrigger(triggerID);
-                    controller.getMatchUI().getGameController().notifyTriggerChoiceChanged(triggerID, forge.gamemodes.match.TriggerChoice.ASK);
+                if (controller.getMatchUI().getGameController().shouldAlwaysAcceptTrigger(triggerID)) {
+                    controller.getMatchUI().getGameController().setShouldAlwaysAskTrigger(triggerID);
                 }
                 else {
-                    controller.getMatchUI().setShouldAlwaysAcceptTrigger(triggerID);
-                    controller.getMatchUI().getGameController().notifyTriggerChoiceChanged(triggerID, forge.gamemodes.match.TriggerChoice.ALWAYS_YES);
+                    controller.getMatchUI().getGameController().setShouldAlwaysAcceptTrigger(triggerID);
                 }
             });
             add(jmiAlwaysYes);
 
             jmiAlwaysNo = new JCheckBoxMenuItem(Localizer.getInstance().getMessage("lblAlwaysNo"));
             jmiAlwaysNo.addActionListener(arg0 -> {
-                if (controller.getMatchUI().shouldAlwaysDeclineTrigger(triggerID)) {
-                    controller.getMatchUI().setShouldAlwaysAskTrigger(triggerID);
-                    controller.getMatchUI().getGameController().notifyTriggerChoiceChanged(triggerID, forge.gamemodes.match.TriggerChoice.ASK);
+                if (controller.getMatchUI().getGameController().shouldAlwaysDeclineTrigger(triggerID)) {
+                    controller.getMatchUI().getGameController().setShouldAlwaysAskTrigger(triggerID);
                 }
                 else {
-                    controller.getMatchUI().setShouldAlwaysDeclineTrigger(triggerID);
-                    controller.getMatchUI().getGameController().notifyTriggerChoiceChanged(triggerID, forge.gamemodes.match.TriggerChoice.ALWAYS_NO);
+                    controller.getMatchUI().getGameController().setShouldAlwaysDeclineTrigger(triggerID);
                 }
             });
             add(jmiAlwaysNo);
@@ -333,11 +328,11 @@ public class VStack implements IVDoc<CStack> {
             item = item0;
             triggerID = item.getSourceTrigger();
 
-            jmiAutoYield.setSelected(controller.getMatchUI().shouldAutoYield(item.getKey()));
+            jmiAutoYield.setSelected(controller.getMatchUI().getGameController().shouldAutoYield(item.getKey()));
 
             if (item.isOptionalTrigger() && controller.getMatchUI().isLocalPlayer(item.getActivatingPlayer())) {
-                jmiAlwaysYes.setSelected(controller.getMatchUI().shouldAlwaysAcceptTrigger(triggerID));
-                jmiAlwaysNo.setSelected(controller.getMatchUI().shouldAlwaysDeclineTrigger(triggerID));
+                jmiAlwaysYes.setSelected(controller.getMatchUI().getGameController().shouldAlwaysAcceptTrigger(triggerID));
+                jmiAlwaysNo.setSelected(controller.getMatchUI().getGameController().shouldAlwaysDeclineTrigger(triggerID));
                 jmiAlwaysYes.setVisible(true);
                 jmiAlwaysNo.setVisible(true);
             } else {

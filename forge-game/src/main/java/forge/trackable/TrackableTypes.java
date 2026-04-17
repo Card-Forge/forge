@@ -104,7 +104,11 @@ public class TrackableTypes {
                     if (newObj != null) {
                         T existingObj = from.getTracker().getObj(itemType, newObj.getId());
                         if (existingObj != null) {
-                            existingObj.copyChangedProps(newObj);
+                            // Skip CardView collections — cross-zone refs like Commander hold stale copies
+                            if (prop.getType() != TrackableTypes.CardViewCollectionType &&
+                                    prop.getType() != TrackableTypes.StackItemViewListType) {
+                                existingObj.copyChangedProps(newObj);
+                            }
                             newCollection.add(existingObj);
                         } else {
                             from.getTracker().putObj(itemType, newObj.getId(), newObj);
