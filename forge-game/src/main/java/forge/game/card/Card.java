@@ -4399,6 +4399,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             if (hasState(stateName)) {
                 return stateName;
             }
+        } else if (getCurrentStateName() == CardStateName.PreparedSpell) {
+            return CardStateName.PreparedSpell;
         }
         return CardStateName.Original;
     }
