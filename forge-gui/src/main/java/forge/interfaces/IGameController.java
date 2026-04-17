@@ -6,7 +6,6 @@ import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.gamemodes.match.NextGameDecision;
-import forge.gamemodes.match.TriggerChoice;
 import forge.gamemodes.match.YieldMode;
 import forge.gamemodes.match.YieldPrefs;
 import forge.util.ITriggerEvent;
