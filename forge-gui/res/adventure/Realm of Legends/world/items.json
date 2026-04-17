@@ -3625,7 +3625,6 @@
     "equipmentSlot": "Right",
     "iconName": "StriderReins",
     "effect": {
-        "lifeModifier": -3,
         "startBattleWithCard": [
         "Strider Harness|RIX"
      ]
