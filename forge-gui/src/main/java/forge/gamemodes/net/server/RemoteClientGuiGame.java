@@ -65,12 +65,10 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
         this.client = client;
         sender = new GameProtocolSender(client);
         syncManager = new DeltaSyncManager();
-        clientIndex = client.getIndex();
     }
 
-    /** Alias for reconnection code that references slot index. */
-    public int getSlotIndex() {
-        return clientIndex;
+    public RemoteClient getClient() {
+        return client;
     }
 
     public RemoteClient getClient() {

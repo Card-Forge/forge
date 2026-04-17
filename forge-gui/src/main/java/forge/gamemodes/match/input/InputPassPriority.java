@@ -27,6 +27,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.StackItemView;
 import forge.gamemodes.match.YieldMode;
 import forge.gamemodes.net.server.FServerManager;
+import forge.gamemodes.net.server.FServerManager.AfkTimeout;
 import forge.gui.GuiBase;
 import forge.gamemodes.net.server.FServerManager.AfkTimeout;
 import forge.localinstance.properties.ForgePreferences;

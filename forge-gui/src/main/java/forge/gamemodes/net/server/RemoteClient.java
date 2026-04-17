@@ -1,7 +1,6 @@
 package forge.gamemodes.net.server;
 
-import forge.gamemodes.net.CompatibleObjectDecoder;
-import forge.gamemodes.net.CompatibleObjectEncoder;
+import forge.util.IHasForgeLog;
 import forge.gamemodes.net.ReplyPool;
 import forge.trackable.Tracker;
 import forge.gamemodes.net.event.IdentifiableNetEvent;

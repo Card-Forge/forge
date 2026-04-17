@@ -284,6 +284,22 @@ public interface IGuiGame {
 
     void updateAutoPassPrompt();
 
+    boolean setYieldMode(PlayerView player, YieldMode mode, boolean fromRemote);
+
+    void syncYieldMode(PlayerView player, YieldMode mode);
+
+    void setHostYieldEnabled(boolean enabled);
+
+    void clearYieldMode(PlayerView player);
+
+    YieldMode getYieldMode(PlayerView player);
+
+    default void setRemoteYieldPrefs(forge.gamemodes.match.YieldPrefs prefs) {}
+
+    default forge.gamemodes.match.YieldPrefs getRemoteYieldPrefs() {
+        return null;
+    }
+
     void setCurrentPlayer(PlayerView player);
 
     /**

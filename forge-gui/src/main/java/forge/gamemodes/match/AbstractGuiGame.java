@@ -529,7 +529,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                     if (waitingTimer != myTimer) {
                         return; // canceled or replaced before the EDT got to us
                     }
-                    updateWaitingDisplay(forPlayer);
+                    updateWaitingDisplay(forPlayer, waitingForPlayerName);
                 });
             }
         }, 1000, 1000);

@@ -864,21 +864,6 @@ public final class FServerManager implements IHasForgeLog {
 
         for (final Player p : game.getPlayers()) {
             final IGuiGame gui = hostedMatch.getGuiForPlayer(p);
-            if (gui instanceof RemoteClientGuiGame ngg && ngg.getSlotIndex() == slotIndex) {
-                ngg.resume();
-                return;
-            }
-        }
-    }
-
-    private void pauseRemoteClientGuiGame(final int slotIndex) {
-        final HostedMatch hostedMatch = localLobby.getHostedMatch();
-        if (hostedMatch == null) { return; }
-        final Game game = hostedMatch.getGame();
-        if (game == null) { return; }
-
-        for (final Player p : game.getPlayers()) {
-            final IGuiGame gui = hostedMatch.getGuiForPlayer(p);
             if (gui instanceof RemoteClientGuiGame ngg && ngg.getClient().getIndex() == slotIndex) {
                 ngg.pause();
                 netLog.info("[Reconnect] Paused RemoteClientGuiGame for slot {} ({})", slotIndex, p.getName());

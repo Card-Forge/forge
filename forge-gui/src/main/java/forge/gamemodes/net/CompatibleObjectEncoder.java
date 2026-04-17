@@ -2,7 +2,6 @@ package forge.gamemodes.net;
 
 import forge.gamemodes.net.event.GuiGameEvent;
 import forge.gui.GuiBase;
-import forge.trackable.Tracker;
 import forge.util.IHasForgeLog;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufOutputStream;

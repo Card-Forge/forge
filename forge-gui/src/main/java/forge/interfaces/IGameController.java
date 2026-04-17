@@ -48,6 +48,8 @@ public interface IGameController {
 
     void reorderHand(CardView card, int index);
 
+    default void notifyYieldStateChanged(PlayerView player, YieldMode mode, YieldPrefs prefs) {}
+
     /**
      * Request a full state resync from the server.
      * Called automatically when checksum validation fails to recover from desynchronization.
@@ -68,11 +70,4 @@ public interface IGameController {
     void setShouldAlwaysAcceptTrigger(int trigger);
     void setShouldAlwaysDeclineTrigger(int trigger);
     void setShouldAlwaysAskTrigger(int trigger);
-
-    /**
-     * Notify peer(s) that this player's experimental yield mode changed.
-     * Default is a no-op; NetGameController forwards over the wire to the host.
-     * Fork customization (upstream does not have experimental yield modes).
-     */
-    default void notifyYieldStateChanged(PlayerView player, YieldMode mode, YieldPrefs prefs) { }
 }
