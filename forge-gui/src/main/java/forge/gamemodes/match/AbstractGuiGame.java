@@ -585,35 +585,21 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         getYieldController().updateAutoPassPrompt(getCurrentPlayer());
     }
 
-    // Extended yield mode methods (experimental feature)
     @Override
-    public final boolean setYieldMode(PlayerView player, final YieldMode mode, boolean fromRemote) {
-        if (fromRemote) {
-            // Host is receiving yield state from a network client. The deserialized
-            // PlayerView has a different tracker than the host's, so look up the
-            // canonical instance. Skip validation and the notify-server callback to
-            // avoid looping back to the client.
-            player = PlayerView.findById(getGameView(), player);
-            if (player == null) {
-                return false;
-            }
-            getYieldController().setYieldModeSilent(player, mode);
-            return true;
-        }
+    public boolean activateYieldMode(PlayerView player, YieldMode mode) {
+        return getYieldController().setYieldMode(player, mode);
+    }
 
-        boolean activated = getYieldController().setYieldMode(player, mode);
-        if (activated) {
-            updateAutoPassPrompt();
+    @Override
+    public void applyRemoteYieldMode(PlayerView player, YieldMode mode) {
+        player = PlayerView.findById(getGameView(), player);
+        if (player == null) return;
+        getYieldController().setYieldModeSilent(player, mode);
+    }
 
-            // Notify remote server if this is a network client. The prefs
-            // snapshot rides on every yield-state message so the host's stored
-            // copy stays fresh.
-            IGameController controller = getGameController(player);
-            if (controller != null) {
-                controller.notifyYieldStateChanged(player, mode, YieldPrefs.fromCurrentPreferences());
-            }
-        }
-        return activated;
+    @Override
+    public YieldMode getCurrentYieldMode(PlayerView player) {
+        return getYieldController().getYieldMode(player);
     }
 
     @Override
@@ -623,31 +609,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public void syncYieldMode(PlayerView player, YieldMode mode) {
-        // Receive yield state sync from server (when server clears yield due to end condition)
-        // Look up the correct PlayerView instance by ID (network PlayerViews have different trackers)
         player = PlayerView.findById(getGameView(), player);
-        if (player == null) {
-            return;
-        }
-        // Use silent methods to avoid triggering callback which would loop back here
+        if (player == null) return;
         getYieldController().setYieldModeSilent(player, mode);
-        // Note: Don't call updateAutoPassPrompt() - server already sent the correct prompt
-    }
-
-    @Override
-    public final void clearYieldMode(PlayerView player) {
-        getYieldController().clearYieldMode(player);
-
-        // Notify remote server that yield was cancelled (same pattern as setYieldMode)
-        IGameController controller = getGameController(player);
-        if (controller != null) {
-            controller.notifyYieldStateChanged(player, YieldMode.NONE, YieldPrefs.fromCurrentPreferences());
-        }
-    }
-
-    @Override
-    public final YieldMode getYieldMode(PlayerView player) {
-        return getYieldController().getYieldMode(player);
     }
 
     // End auto-yield/input code

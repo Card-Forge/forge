@@ -99,12 +99,14 @@ public enum ProtocolMethod implements IHasForgeLog {
     concede                   (Mode.CLIENT, Void.TYPE),
     alphaStrike               (Mode.CLIENT, Void.TYPE),
     reorderHand               (Mode.CLIENT, Void.TYPE, CardView.class, Integer.TYPE),
-    notifyYieldStateChanged   (Mode.CLIENT, Void.TYPE, PlayerView.class, YieldMode.class, YieldPrefs.class),
     requestResync             (Mode.CLIENT, Void.TYPE),
     setShouldAutoYield           (Mode.CLIENT, Void.TYPE, String.class, Boolean.TYPE),
     setShouldAlwaysAcceptTrigger  (Mode.CLIENT, Void.TYPE, Integer.TYPE),
     setShouldAlwaysDeclineTrigger (Mode.CLIENT, Void.TYPE, Integer.TYPE),
-    setShouldAlwaysAskTrigger     (Mode.CLIENT, Void.TYPE, Integer.TYPE);
+    setShouldAlwaysAskTrigger     (Mode.CLIENT, Void.TYPE, Integer.TYPE),
+    setYieldMode             (Mode.CLIENT, Void.TYPE, YieldMode.class),
+    setYieldInterruptPref    (Mode.CLIENT, Void.TYPE, forge.localinstance.properties.ForgePreferences.FPref.class, Boolean.TYPE),
+    setYieldPrefs            (Mode.CLIENT, Void.TYPE, YieldPrefs.class);
 
     private enum Mode {
         SERVER(IGuiGame.class),

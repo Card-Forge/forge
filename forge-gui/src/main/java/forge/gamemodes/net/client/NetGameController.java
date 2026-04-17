@@ -8,6 +8,7 @@ import forge.game.player.actions.PlayerAction;
 import forge.game.spellability.SpellAbilityView;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.match.YieldMode;
+import forge.gamemodes.match.YieldPrefs;
 import forge.gamemodes.net.GameProtocolSender;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.interfaces.IDevModeCheats;
@@ -30,6 +31,10 @@ public class NetGameController implements IGameController {
     private final Set<String> autoYields = Sets.newHashSet();
     private final Map<Integer, Boolean> triggersAlwaysAccept = Maps.newTreeMap();
     private boolean disableAutoYields;
+
+    private YieldMode yieldMode = YieldMode.NONE;
+    private final java.util.EnumMap<ForgePreferences.FPref, Boolean> yieldInterruptPrefs =
+            new java.util.EnumMap<>(ForgePreferences.FPref.class);
 
     public NetGameController(final IToServer server) {
         this.sender = new GameProtocolSender(server);
@@ -246,7 +251,41 @@ public class NetGameController implements IGameController {
     }
 
     @Override
-    public void notifyYieldStateChanged(PlayerView player, YieldMode mode, forge.gamemodes.match.YieldPrefs prefs) {
-        send(ProtocolMethod.notifyYieldStateChanged, player, mode, prefs);
+    public YieldMode getYieldMode() {
+        return yieldMode;
+    }
+
+    @Override
+    public void setYieldMode(final YieldMode mode) {
+        this.yieldMode = mode == null ? YieldMode.NONE : mode;
+        send(ProtocolMethod.setYieldMode, this.yieldMode);
+    }
+
+    @Override
+    public boolean getYieldInterruptPref(final ForgePreferences.FPref pref) {
+        Boolean stored = yieldInterruptPrefs.get(pref);
+        return stored != null ? stored : "true".equals(pref.getDefault());
+    }
+
+    @Override
+    public void setYieldInterruptPref(final ForgePreferences.FPref pref, final boolean value) {
+        yieldInterruptPrefs.put(pref, value);
+        send(ProtocolMethod.setYieldInterruptPref, pref, value);
+    }
+
+    @Override
+    public YieldPrefs getYieldPrefs() {
+        return new YieldPrefs(this);
+    }
+
+    @Override
+    public void setYieldPrefs(final YieldPrefs prefs) {
+        if (prefs == null) return;
+        this.yieldMode = prefs.getMode();
+        this.yieldInterruptPrefs.clear();
+        for (Map.Entry<ForgePreferences.FPref, Boolean> e : prefs.getInterrupts().entrySet()) {
+            this.yieldInterruptPrefs.put(e.getKey(), e.getValue());
+        }
+        send(ProtocolMethod.setYieldPrefs, prefs);
     }
 }

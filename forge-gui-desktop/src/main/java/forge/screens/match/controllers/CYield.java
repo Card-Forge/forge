@@ -22,10 +22,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import forge.game.GameView;
-import forge.game.player.PlayerView;
 import forge.gamemodes.match.YieldMode;
-import forge.gamemodes.match.YieldPrefs;
 import forge.gui.framework.ICDoc;
+import forge.interfaces.IGameController;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
@@ -105,13 +104,14 @@ public class CYield implements ICDoc {
      */
     private void toggleYieldMode(YieldMode mode) {
         if (matchUI == null || matchUI.getCurrentPlayer() == null) return;
-        PlayerView player = matchUI.getCurrentPlayer();
-        if (matchUI.getYieldMode(player) == mode) {
-            matchUI.clearYieldMode(player);
+        IGameController ctrl = matchUI.getGameController();
+        if (ctrl == null) return;
+        if (ctrl.getYieldMode() == mode) {
+            ctrl.setYieldMode(YieldMode.NONE);
         } else {
-            boolean activated = matchUI.setYieldMode(player, mode, false);
-            if (activated && matchUI.getGameController() != null) {
-                matchUI.getGameController().selectButtonOk();
+            ctrl.setYieldMode(mode);
+            if (ctrl.getYieldMode() == mode) {
+                ctrl.selectButtonOk();
             }
         }
     }
@@ -125,10 +125,7 @@ public class CYield implements ICDoc {
     private void yieldUntilYourTurn() { toggleYieldMode(YieldMode.UNTIL_YOUR_NEXT_TURN); }
     private void yieldUntilBeforeYourTurn() { toggleYieldMode(YieldMode.UNTIL_END_STEP_BEFORE_YOUR_TURN); }
 
-    /**
-     * Disable auto-pass-no-actions if it's currently on. Used by ESC to clear
-     * yield-like state alongside {@link CMatchUI#clearYieldMode}.
-     */
+    /** Disable auto-pass-no-actions if it's currently on. */
     public void cancelAutoPassIfActive() {
         if (FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS)) {
             toggleAutoPass();
@@ -148,14 +145,8 @@ public class CYield implements ICDoc {
         if (matchUI == null || matchUI.getGameController() == null) {
             return;
         }
-        // Sync updated prefs to server (network play)
-        PlayerView player = matchUI.getCurrentPlayer();
-        if (player != null) {
-            YieldMode currentMode = matchUI.getYieldMode(player);
-            if (currentMode == null) currentMode = YieldMode.NONE;
-            matchUI.getGameController().notifyYieldStateChanged(player, currentMode,
-                YieldPrefs.fromCurrentPreferences());
-        }
+        // Sync updated pref to server (network play)
+        matchUI.getGameController().setYieldInterruptPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS, newState);
         if (newState) {
             // Pass priority immediately so APINA takes effect now
             matchUI.getGameController().selectButtonOk();
@@ -200,9 +191,9 @@ public class CYield implements ICDoc {
     private void updateActiveYieldHighlight() {
         // Get current yield mode for the current player
         YieldMode currentMode = YieldMode.NONE;
-        PlayerView currentPlayer = matchUI.getCurrentPlayer();
-        if (currentPlayer != null) {
-            currentMode = matchUI.getYieldMode(currentPlayer);
+        IGameController ctrl = matchUI.getGameController();
+        if (ctrl != null) {
+            currentMode = ctrl.getYieldMode();
         }
 
         // Set highlight state based on active yield mode

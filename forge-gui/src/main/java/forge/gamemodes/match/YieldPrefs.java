@@ -17,30 +17,32 @@
  */
 package forge.gamemodes.match;
 
+import forge.interfaces.IGameController;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.EnumMap;
+import java.util.Map;
 
-/**
- * Immutable snapshot of a player's yield-related preferences.
- *
- * <p>In network play the host needs to know each remote client's interrupt
- * preferences (e.g. "interrupt my yield when an opponent casts a spell")
- * to evaluate yield decisions on the host side. The client serializes
- * its preferences into this value type and sends it via
- * {@code IGameController.notifyYieldStateChanged}; the host stores it on
- * the per-player {@code NetGuiGame} and reads it through
- * {@code IGuiGame.getRemoteYieldPrefs}.
- *
- * <p>The host's own preferences are read directly from
- * {@code FModel.getPreferences()} — this snapshot is only consulted when
- * {@code IGuiGame.isRemoteGuiProxy()} is true.
- */
+/** Immutable snapshot of a player's yield-related preferences, used for bulk network sync. */
 public final class YieldPrefs implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    /** Boolean interrupt FPrefs captured in a bulk snapshot. */
+    static final FPref[] INTERRUPT_PREFS = {
+        FPref.YIELD_INTERRUPT_ON_ATTACKERS,
+        FPref.YIELD_INTERRUPT_ON_TARGETING,
+        FPref.YIELD_INTERRUPT_ON_OPPONENT_SPELL,
+        FPref.YIELD_INTERRUPT_ON_TRIGGERS,
+        FPref.YIELD_INTERRUPT_ON_REVEAL,
+        FPref.YIELD_INTERRUPT_ON_MASS_REMOVAL,
+        FPref.YIELD_AUTO_PASS_NO_ACTIONS,
+    };
+
+    private final YieldMode mode;
     private final boolean onAttackers;
     private final boolean onTargeting;
     private final boolean onOpponentSpell;
@@ -48,13 +50,11 @@ public final class YieldPrefs implements Serializable {
     private final boolean onReveal;
     private final boolean onMassRemoval;
     private final boolean autoPassNoActions;
-    private final String stackYieldScope;
-    private final String noActionsScope;
 
-    private YieldPrefs(boolean onAttackers, boolean onTargeting,
+    private YieldPrefs(YieldMode mode, boolean onAttackers, boolean onTargeting,
                        boolean onOpponentSpell, boolean onTriggers,
-                       boolean onReveal, boolean onMassRemoval, boolean autoPassNoActions,
-                       String stackYieldScope, String noActionsScope) {
+                       boolean onReveal, boolean onMassRemoval, boolean autoPassNoActions) {
+        this.mode = mode == null ? YieldMode.NONE : mode;
         this.onAttackers = onAttackers;
         this.onTargeting = onTargeting;
         this.onOpponentSpell = onOpponentSpell;
@@ -62,33 +62,40 @@ public final class YieldPrefs implements Serializable {
         this.onReveal = onReveal;
         this.onMassRemoval = onMassRemoval;
         this.autoPassNoActions = autoPassNoActions;
-        this.stackYieldScope = stackYieldScope;
-        this.noActionsScope = noActionsScope;
     }
 
-    /**
-     * Snapshot the current yield preferences from {@code FModel.getPreferences()}.
-     * Called by network clients when sending state to the host.
-     */
+    /** Snapshot from an IGameController (controller-layer state). */
+    public YieldPrefs(IGameController controller) {
+        this(
+            controller.getYieldMode(),
+            controller.getYieldInterruptPref(FPref.YIELD_INTERRUPT_ON_ATTACKERS),
+            controller.getYieldInterruptPref(FPref.YIELD_INTERRUPT_ON_TARGETING),
+            controller.getYieldInterruptPref(FPref.YIELD_INTERRUPT_ON_OPPONENT_SPELL),
+            controller.getYieldInterruptPref(FPref.YIELD_INTERRUPT_ON_TRIGGERS),
+            controller.getYieldInterruptPref(FPref.YIELD_INTERRUPT_ON_REVEAL),
+            controller.getYieldInterruptPref(FPref.YIELD_INTERRUPT_ON_MASS_REMOVAL),
+            controller.getYieldInterruptPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS)
+        );
+    }
+
+    /** Snapshot from local ForgePreferences (used at game-start before a controller exists). */
     public static YieldPrefs fromCurrentPreferences() {
         ForgePreferences prefs = FModel.getPreferences();
         return new YieldPrefs(
+            YieldMode.NONE,
             prefs.getPrefBoolean(FPref.YIELD_INTERRUPT_ON_ATTACKERS),
             prefs.getPrefBoolean(FPref.YIELD_INTERRUPT_ON_TARGETING),
             prefs.getPrefBoolean(FPref.YIELD_INTERRUPT_ON_OPPONENT_SPELL),
             prefs.getPrefBoolean(FPref.YIELD_INTERRUPT_ON_TRIGGERS),
             prefs.getPrefBoolean(FPref.YIELD_INTERRUPT_ON_REVEAL),
             prefs.getPrefBoolean(FPref.YIELD_INTERRUPT_ON_MASS_REMOVAL),
-            prefs.getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS),
-            prefs.getPref(FPref.YIELD_DECLINE_SCOPE_STACK_YIELD),
-            prefs.getPref(FPref.YIELD_DECLINE_SCOPE_NO_ACTIONS)
+            prefs.getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS)
         );
     }
 
-    /**
-     * Look up the value for one of the yield interrupt preferences.
-     * Returns false if {@code pref} is not a yield interrupt or auto-pass key.
-     */
+    public YieldMode getMode() { return mode; }
+
+    /** Returns false if {@code pref} is not a recognized yield interrupt key. */
     public boolean getInterrupt(FPref pref) {
         return switch (pref) {
             case YIELD_INTERRUPT_ON_ATTACKERS -> onAttackers;
@@ -102,6 +109,12 @@ public final class YieldPrefs implements Serializable {
         };
     }
 
-    public String getStackYieldScope() { return stackYieldScope; }
-    public String getNoActionsScope() { return noActionsScope; }
+    /** Returns a read-only view of the boolean interrupt prefs keyed by FPref. */
+    public Map<FPref, Boolean> getInterrupts() {
+        EnumMap<FPref, Boolean> map = new EnumMap<>(FPref.class);
+        for (FPref pref : INTERRUPT_PREFS) {
+            map.put(pref, getInterrupt(pref));
+        }
+        return Collections.unmodifiableMap(map);
+    }
 }

@@ -1143,15 +1143,11 @@ public final class CMatchUI
         else
             FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage((Image)null);
 
-        // If we're a network client, send our initial yield-prefs snapshot to the
-        // host so it can evaluate interrupts on our behalf with our actual prefs.
-        // Local games and the host process get a no-op default IGameController.
+        // If we're a network client, seed the host with our initial yield prefs.
         if (myPlayers != null && !myPlayers.isEmpty()) {
             final IGameController controller = getGameController();
             if (controller instanceof forge.gamemodes.net.client.NetGameController) {
-                controller.notifyYieldStateChanged(myPlayers.get(0),
-                    forge.gamemodes.match.YieldMode.NONE,
-                    forge.gamemodes.match.YieldPrefs.fromCurrentPreferences());
+                controller.setYieldPrefs(forge.gamemodes.match.YieldPrefs.fromCurrentPreferences());
             }
         }
     }
