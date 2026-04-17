@@ -5787,6 +5787,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             incR[0] = incR[0].substring(1); // consume negation sign
         }
 
+        // need to filter out prepared spells for other cards
+        if (getCurrentStateName() == CardStateName.PreparedSpell && isInZone(ZoneType.Exile)) {
+            return testFailed;
+        }
+
         if (incR[0].equals("Spell")) {
             if (!isSpell()) {
                 return testFailed;

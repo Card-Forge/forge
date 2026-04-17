@@ -77,14 +77,14 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
                             eff = createEffect(sa, activator, gameCard + "'s Prepared Spell", prepared.getImageKey());
                             eff.addRemembered(prepared);
                             eff.setRenderForUI(false);
-                            String castTrig = "Mode$ SpellCast | TriggerZones$ Command | Static$ True | ValidCard$ Card.IsRemembered";
+                            String castTrig = "Mode$ SpellCast | TriggerZones$ Command | Static$ True | ValidSA$ Spell.IsRemembered";
                             String unprepare = "DB$ AlterAttribute | Defined$ EffectSource | Attributes$ Prepared | Activate$ False";
                             final Trigger parsedTrigger = TriggerHandler.parseTrigger(castTrig, eff, true);
                             eff.addTrigger(parsedTrigger);
                             final SpellAbility unprepareSA = AbilityFactory.getAbility(unprepare, eff);
                             parsedTrigger.setOverridingAbility(unprepareSA);
                             String mayPlay = "Mode$ Continuous | MayPlay$ True | MayPlayPlayer$ EffectSourceController | EffectZone$ Command | " +
-                                    "Affected$ Card.IsRemembered | AffectedZone$ Exile";
+                                    "AffectedDefined$ Remembered | AffectedZone$ Exile";
                             eff.addStaticAbility(mayPlay);
                             game.getAction().moveToCommand(eff, sa);
                             gameCard.addLeavesPlayCommand(() -> gameCard.setPrepared(null));
