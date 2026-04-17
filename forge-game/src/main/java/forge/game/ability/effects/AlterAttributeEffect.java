@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import java.util.Map;
 
+import forge.card.CardStateName;
 import forge.game.GameLogEntryType;
 import forge.game.GameType;
 import forge.game.ability.AbilityKey;
@@ -54,6 +55,12 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
                         altered = gameCard.setPlotted(activate);
 
                         c.getGame().fireEvent(new GameEventCardPlotted(c, sa.getActivatingPlayer()));
+                        break;
+                    case "Prepare":
+                        if (activate && !gameCard.hasState(CardStateName.PreparedSpell)) {
+                            continue;
+                        }
+                        gameCard.setPrepared(activate);
                         break;
                     case "Solve":
                     case "Solved":
