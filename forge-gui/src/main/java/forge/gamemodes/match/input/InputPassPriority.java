@@ -94,16 +94,7 @@ public class InputPassPriority extends InputSyncronizedBase {
             // Skip suggestions when persistent auto-pass is active — the user
             // already opted into automatic passing, one-shot yield suggestions
             // are redundant and confusing (especially after interrupt recovery).
-            // Route through gui for per-player prefs: host reads local prefs,
-            // remote player reads their YieldPrefs snapshot.
-            forge.gui.interfaces.IGuiGame gui = getController().getGui();
-            boolean autoPassActive;
-            if (gui.isRemoteGuiProxy()) {
-                forge.gamemodes.match.YieldPrefs remote = gui.getRemoteYieldPrefs();
-                autoPassActive = remote != null && remote.getInterrupt(FPref.YIELD_AUTO_PASS_NO_ACTIONS);
-            } else {
-                autoPassActive = prefs.getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS);
-            }
+            boolean autoPassActive = getController().getYieldInterruptPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS);
             if (autoPassActive) {
                 showNormalPrompt();
                 return;
@@ -203,7 +194,7 @@ public class InputPassPriority extends InputSyncronizedBase {
     }
 
     private boolean isAlreadyYielding() {
-        YieldMode currentMode = getController().getGui().getYieldMode(getOwner());
+        YieldMode currentMode = getController().getYieldMode();
         return currentMode != null && currentMode != YieldMode.NONE;
     }
 
@@ -213,7 +204,7 @@ public class InputPassPriority extends InputSyncronizedBase {
         // If accepting a yield suggestion (but not if a yield was already set externally)
         if (pendingSuggestion != null) {
             // Check if a yield mode was already set (e.g., by clicking a yield button)
-            YieldMode currentMode = getController().getGui().getYieldMode(getOwner());
+            YieldMode currentMode = getController().getYieldMode();
             if (currentMode != null && currentMode != YieldMode.NONE) {
                 // A yield mode is already active - clear suggestion and pass through
                 pendingSuggestion = null;
@@ -243,8 +234,8 @@ public class InputPassPriority extends InputSyncronizedBase {
             pendingSuggestion = null;
             pendingSuggestionType = null;
             pendingSuggestionMessage = null;
-            boolean activated = getController().getGui().setYieldMode(getOwner(), mode, false);
-            if (activated) {
+            getController().setYieldMode(mode);
+            if (getController().getYieldMode() == mode) {
                 stop();
             } else {
                 showNormalPrompt();
@@ -279,7 +270,7 @@ public class InputPassPriority extends InputSyncronizedBase {
             passPriority(() -> {
                 if (isExperimentalYieldEnabled()) {
                     // Use experimental yield system with smart interrupts
-                    getController().getGui().setYieldMode(getOwner(), YieldMode.UNTIL_END_OF_TURN, false);
+                    getController().setYieldMode(YieldMode.UNTIL_END_OF_TURN);
                 } else {
                     // Legacy behavior - cancels on any opponent spell
                     getController().autoPassUntilEndOfTurn();

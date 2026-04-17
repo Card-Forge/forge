@@ -8,6 +8,7 @@ import forge.game.spellability.SpellAbilityView;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.match.YieldMode;
 import forge.gamemodes.match.YieldPrefs;
+import forge.localinstance.properties.ForgePreferences;
 import forge.util.ITriggerEvent;
 
 public interface IGameController {
@@ -48,12 +49,7 @@ public interface IGameController {
 
     void reorderHand(CardView card, int index);
 
-    default void notifyYieldStateChanged(PlayerView player, YieldMode mode, YieldPrefs prefs) {}
-
-    /**
-     * Request a full state resync from the server.
-     * Called automatically when checksum validation fails to recover from desynchronization.
-     */
+    /** Request a full state resync from the server. */
     void requestResync();
 
     // --- Auto-yield preferences (per-player) ---
@@ -70,4 +66,12 @@ public interface IGameController {
     void setShouldAlwaysAcceptTrigger(int trigger);
     void setShouldAlwaysDeclineTrigger(int trigger);
     void setShouldAlwaysAskTrigger(int trigger);
+
+    // --- Yield-mode and interrupt preferences (per-player) ---
+    YieldMode getYieldMode();
+    void setYieldMode(YieldMode mode);
+    boolean getYieldInterruptPref(ForgePreferences.FPref pref);
+    void setYieldInterruptPref(ForgePreferences.FPref pref, boolean value);
+    YieldPrefs getYieldPrefs();
+    void setYieldPrefs(YieldPrefs prefs);
 }

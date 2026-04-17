@@ -24,6 +24,7 @@ import forge.gamemodes.net.event.MessageEvent;
 import forge.gamemodes.net.server.FServerManager;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
+import forge.interfaces.IGameController;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
@@ -150,9 +151,11 @@ public class KeyboardShortcuts {
                         && (matchUI.getGameView() == null || matchUI.getGameView().getPlayers().size() < 3)) {
                     return;
                 }
-                boolean activated = matchUI.setYieldMode(matchUI.getCurrentPlayer(), mode, false);
-                if (activated && matchUI.getGameController() != null) {
-                    matchUI.getGameController().passPriority();
+                IGameController ctrl = matchUI.getGameController();
+                if (ctrl == null) { return; }
+                ctrl.setYieldMode(mode);
+                if (ctrl.getYieldMode() == mode) {
+                    ctrl.passPriority();
                 }
             }
         };
@@ -172,9 +175,12 @@ public class KeyboardShortcuts {
                 if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
                 if (matchUI == null || matchUI.getCurrentPlayer() == null) { return; }
                 if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) { return; }
-                YieldMode currentYield = matchUI.getYieldMode(matchUI.getCurrentPlayer());
-                if (currentYield != null && currentYield != YieldMode.NONE) {
-                    matchUI.clearYieldMode(matchUI.getCurrentPlayer());
+                IGameController ctrl = matchUI.getGameController();
+                if (ctrl != null) {
+                    YieldMode currentYield = ctrl.getYieldMode();
+                    if (currentYield != null && currentYield != YieldMode.NONE) {
+                        ctrl.setYieldMode(YieldMode.NONE);
+                    }
                 }
             }
         };

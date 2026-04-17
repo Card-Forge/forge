@@ -49,6 +49,8 @@ public interface IGuiGame {
 
     void setGameController(PlayerView player, IGameController gameController);
 
+    IGameController getGameController();
+
     void setSpectator(IGameController spectator);
 
     void openView(TrackableCollection<PlayerView> myPlayers);
@@ -284,21 +286,17 @@ public interface IGuiGame {
 
     void updateAutoPassPrompt();
 
-    boolean setYieldMode(PlayerView player, YieldMode mode, boolean fromRemote);
+    /** Activate YieldController for the local player (no remote feedback loop). Returns true if a mode was activated. */
+    boolean activateYieldMode(PlayerView player, YieldMode mode);
+
+    /** Apply a mode received from a remote client (silent, no callbacks). */
+    void applyRemoteYieldMode(PlayerView player, YieldMode mode);
+
+    YieldMode getCurrentYieldMode(PlayerView player);
 
     void syncYieldMode(PlayerView player, YieldMode mode);
 
     void setHostYieldEnabled(boolean enabled);
-
-    void clearYieldMode(PlayerView player);
-
-    YieldMode getYieldMode(PlayerView player);
-
-    default void setRemoteYieldPrefs(forge.gamemodes.match.YieldPrefs prefs) {}
-
-    default forge.gamemodes.match.YieldPrefs getRemoteYieldPrefs() {
-        return null;
-    }
 
     void setCurrentPlayer(PlayerView player);
 

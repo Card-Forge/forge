@@ -54,12 +54,6 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
 
     private GameEventForwarder forwarder;
     private boolean flushing;
-    // Most recent yield preferences snapshot received from the remote client.
-    // Read on the game thread by YieldController.shouldInterruptYield; written
-    // on the Netty thread when notifyYieldStateChanged arrives. volatile is
-    // sufficient since the value is an immutable YieldPrefs.
-    private volatile YieldPrefs remoteYieldPrefs;
-    private final int clientIndex;
 
     public RemoteClientGuiGame(final RemoteClient client) {
         this.client = client;

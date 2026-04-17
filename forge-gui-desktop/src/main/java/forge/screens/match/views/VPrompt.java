@@ -30,8 +30,8 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
 import forge.game.card.CardView;
-import forge.game.player.PlayerView;
 import forge.gamemodes.match.YieldMode;
+import forge.interfaces.IGameController;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -80,11 +80,11 @@ public class VPrompt implements IVDoc<CPrompt> {
                 // Try to cancel yield first if experimental options enabled
                 if (FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) {
                     if (controller.getMatchUI() != null) {
-                        PlayerView player = controller.getMatchUI().getCurrentPlayer();
-                        if (player != null) {
-                            YieldMode currentYield = controller.getMatchUI().getYieldMode(player);
+                        IGameController ctrl = controller.getMatchUI().getGameController();
+                        if (ctrl != null) {
+                            YieldMode currentYield = ctrl.getYieldMode();
                             if (currentYield != null && currentYield != YieldMode.NONE) {
-                                controller.getMatchUI().clearYieldMode(player);
+                                ctrl.setYieldMode(YieldMode.NONE);
                                 return;
                             }
                         }
