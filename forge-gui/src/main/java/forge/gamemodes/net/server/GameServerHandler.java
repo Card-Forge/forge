@@ -33,7 +33,8 @@ final class GameServerHandler extends GameProtocolHandler<IGameController> imple
 
     @Override
     protected IGameController getToInvoke(final ChannelHandlerContext ctx) {
-        return server.getController(getClient(ctx).getIndex());
+        final RemoteClient client = getClient(ctx);
+        return client != null ? server.getController(client.getIndex()) : null;
     }
 
     @Override
