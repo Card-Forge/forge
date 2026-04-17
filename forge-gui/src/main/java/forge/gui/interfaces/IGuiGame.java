@@ -294,10 +294,6 @@ public interface IGuiGame {
 
     YieldMode getCurrentYieldMode(PlayerView player);
 
-    void syncYieldMode(PlayerView player, YieldMode mode);
-
-    void setHostYieldEnabled(boolean enabled);
-
     void setCurrentPlayer(PlayerView player);
 
     /**

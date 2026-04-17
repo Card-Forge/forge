@@ -51,6 +51,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     private boolean fallbackLogged = false;  // Prevent duplicate fallback log messages
     private volatile boolean paused;
     private volatile boolean resyncPending;
+    private volatile YieldPrefs remoteYieldPrefs;
 
     private GameEventForwarder forwarder;
     private boolean flushing;
@@ -65,8 +66,8 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
         return client;
     }
 
-    public RemoteClient getClient() {
-        return client;
+    public int getSlotIndex() {
+        return client.getIndex();
     }
 
     @Override

@@ -535,14 +535,12 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         }, 1000, 1000);
     }
 
-    private void updateWaitingDisplay(final PlayerView forPlayer) {
+    private void updateWaitingDisplay(final PlayerView forPlayer, final String waitingForPlayerName) {
         long elapsedSec = (System.currentTimeMillis() - waitingStartTime) / 1000;
         if (elapsedSec < 2) {
             return;
         }
-        // Re-resolve the waiting player name each tick so it updates
-        // when hasPriority is synchronized from the server
-        String currentName = findWaitingForPlayerName(forPlayer);
+        String currentName = waitingForPlayerName;
         if (currentName == null) {
             return;
         }
