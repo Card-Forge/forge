@@ -16,7 +16,6 @@ import forge.game.card.CardCopyService;
 import forge.game.event.GameEventAddLog;
 import forge.game.event.GameEventCardPlotted;
 import forge.game.player.Player;
-import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
@@ -80,12 +79,10 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
                             eff.setRenderForUI(false);
                             String castTrig = "Mode$ SpellCast | TriggerZones$ Command | Static$ True | ValidCard$ Card.IsRemembered";
                             String unprepare = "DB$ AlterAttribute | Defined$ EffectSource | Attributes$ Prepared | Activate$ False";
-                            String exile = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile";
                             final Trigger parsedTrigger = TriggerHandler.parseTrigger(castTrig, eff, true);
+                            eff.addTrigger(parsedTrigger);
                             final SpellAbility unprepareSA = AbilityFactory.getAbility(unprepare, eff);
                             parsedTrigger.setOverridingAbility(unprepareSA);
-                            final AbilitySub exileSA = (AbilitySub) AbilityFactory.getAbility(exile, eff);
-                            unprepareSA.setSubAbility(exileSA);
                             String mayPlay = "Mode$ Continuous | MayPlay$ True | MayPlayPlayer$ EffectSourceController | EffectZone$ Command | " +
                                     "Affected$ Card.IsRemembered | AffectedZone$ Exile";
                             eff.addStaticAbility(mayPlay);
