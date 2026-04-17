@@ -3,23 +3,27 @@ package forge.game.ability.effects;
 import java.util.Map;
 
 import forge.card.CardStateName;
+import forge.card.GamePieceType;
 import forge.game.GameLogEntryType;
 import forge.game.GameType;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardCopyService;
 import forge.game.event.GameEventAddLog;
 import forge.game.event.GameEventCardPlotted;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
+import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.TextUtil;
 
 public class AlterAttributeEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
+        Player activator = sa.getActivatingPlayer();
         boolean activate = Boolean.parseBoolean(sa.getParamOrDefault("Activate", "true"));
         String[] attributes = sa.getParam("Attributes").split(",");
         CardCollection defined = getDefinedCardsOrTargeted(sa);
@@ -30,7 +34,7 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
                     ? TextUtil.fastReplace(sa.getParam("OptionQuestion"), "TARGETS", targets)
                     : getStackDescription(sa);
 
-            if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, message, null)) {
+            if (!activator.getController().confirmAction(sa, null, message, null)) {
                 return;
             }
         }
@@ -54,11 +58,24 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
                     case "Plotted":
                         altered = gameCard.setPlotted(activate);
 
-                        c.getGame().fireEvent(new GameEventCardPlotted(c, sa.getActivatingPlayer()));
+                        c.getGame().fireEvent(new GameEventCardPlotted(c, activator));
                         break;
-                    case "Prepare":
-                        if (activate && !gameCard.hasState(CardStateName.PreparedSpell)) {
-                            continue;
+                    case "Prepared":
+                        if (activate) {
+                            if (gameCard.isPrepared() || !gameCard.hasState(CardStateName.PreparedSpell)) {
+                                continue;
+                            }
+                            Card prepared = new CardCopyService(gameCard).copyCard(true, activator);
+                            prepared.setGamePieceType(GamePieceType.TOKEN);
+                            prepared.setState(CardStateName.PreparedSpell, true);
+                            prepared.getOwner().getZone(ZoneType.Exile).add(prepared);
+                            final Card eff = createEffect(sa, activator, gameCard + "'s Prepared Spell", prepared.getImageKey());
+                            eff.addRemembered(prepared);
+                            eff.addImprintedCard(gameCard);
+                            String mayPlay = "Mode$ Continuous | MayPlay$ True | MayPlayPlayer$ You | EffectZone$ Command | " +
+                                    "Affected$ Card.IsRemembered | AffectedZone$ Exile";
+                            eff.addStaticAbility(mayPlay);
+                            prepared.getGame().getAction().moveToCommand(eff, sa);
                         }
                         gameCard.setPrepared(activate);
                         break;
