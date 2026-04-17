@@ -14,6 +14,6 @@ Name:Bind to Life
 ManaCost:4 G
 Types:Instant
 A:SP$ Mill | NumCards$ 7 | Defined$ You | RememberMilled$ True | SubAbility$ DBChangeZone | SpellDescription$ Mill seven cards. Then put a creature card from among them onto the battlefield.
-SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Battlefield | ChangeType$ Creature.IsRemembered | SelectPrompt$ Select a creature card milled this way | SubAbility$ DBCleanup
+SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard,Exile | Destination$ Battlefield | ChangeType$ Creature.IsRemembered | Mandatory$ True | SelectPrompt$ Select a creature card milled this way | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Mill seven cards. Then put a creature card from among them onto the battlefield.
