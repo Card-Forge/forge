@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="35" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="109">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="35" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="113">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -35,7 +35,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -313,5 +313,29 @@
    </properties>
   </object>
   <object id="108" template="../../../../common/maps/obj/collision.tx" x="79.25" y="71.278" width="33.75" height="24.694"/>
+  <object id="109" template="../../../../common/maps/obj/shop.tx" x="447.617" y="167.962">
+   <properties>
+    <property name="commonShopList" value="Horrors"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="111" template="../../../../common/maps/obj/shop.tx" x="241" y="264">
+   <properties>
+    <property name="commonShopList" value="InnistradBoosters"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="112" template="../../../../common/maps/obj/shop.tx" x="144.5" y="264">
+   <properties>
+    <property name="commonShopList" value="Zombie"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
