@@ -902,7 +902,7 @@
     ],
     "ai": "",
     "speed": 45,
-    "scale": 6,
+    "scale": 3,
     "life": 70,
     "rewards": [
       {
@@ -1050,7 +1050,7 @@
     ],
     "ai": "",
     "speed": 45,
-    "scale": 3,
+    "scale": 2,
     "life": 70,
     "rewards": [
       {
@@ -2055,7 +2055,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Pilgrim's CloakPi"
+        "itemName": "Pilgrim's Cloak"
       },
       {
         "type": "card",
@@ -2125,7 +2125,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Opal Armor"
+        "itemName": "Opal Cloak"
       },
       {
         "type": "item",

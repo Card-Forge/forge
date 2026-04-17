@@ -255,6 +255,10 @@ public class CardCopyService {
             newCopy.getState(CardStateName.Original).copyFrom(copyFrom.getState(CardStateName.Original), true);
             newCopy.addAlternateState(CardStateName.Secondary, false);
             newCopy.getState(CardStateName.Secondary).copyFrom(copyFrom.getState(CardStateName.Secondary), true);
+        } else if (copyFrom.hasState(CardStateName.PreparedSpell)) {
+            newCopy.getState(CardStateName.Original).copyFrom(copyFrom.getState(CardStateName.Original), true);
+            newCopy.addAlternateState(CardStateName.PreparedSpell, false);
+            newCopy.getState(CardStateName.PreparedSpell).copyFrom(copyFrom.getState(CardStateName.PreparedSpell), true);
         } else if (copyFrom.isSplitCard()) {
             newCopy.getState(CardStateName.Original).copyFrom(copyFrom.getState(CardStateName.Original), true);
             newCopy.addAlternateState(CardStateName.LeftSplit, false);
@@ -370,6 +374,7 @@ public class CardCopyService {
         newCopy.setForetold(copyFrom.isForetold());
         newCopy.setForetoldCostByEffect(copyFrom.isForetoldCostByEffect());
 
+        newCopy.setPrepared(copyFrom.isPrepared());
         newCopy.setPlotted(copyFrom.isPlotted());
 
         newCopy.setMeldedWith(getLKICopy(copyFrom.getMeldedWith(), cachedMap));
