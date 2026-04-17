@@ -5150,7 +5150,7 @@
     "description": "Grants a 1/1 white/black spirit token with flying in a special slot.",
     "equipmentSlot": "Token",
     "iconName": "TokenofSoaringSpirit",
-    "cost": 100000,
+    "cost": 80000,
     "effect": {
       "startBattleWithCard": [
         "wb_1_1_spirit_flying"
