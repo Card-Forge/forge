@@ -111,7 +111,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbOpenPacksIndiv = new OptionsCheckBox(localizer.getMessage("cbOpenPacksIndiv"));
     private final JCheckBox cbTokensInSeparateRow = new OptionsCheckBox(localizer.getMessage("cbTokensInSeparateRow"));
     private final JCheckBox cbStackCreatures = new OptionsCheckBox(localizer.getMessage("cbStackCreatures"));
-    private final JCheckBox cbShowCastableBorder = new OptionsCheckBox(localizer.getMessage("cbShowCastableBorder"));
     private final JCheckBox cbHoverTooltipsEnabled = new OptionsCheckBox(localizer.getMessage("cbHoverTooltipsEnabled"));
     private final JCheckBox cbZoomTooltipsEnabled = new OptionsCheckBox(localizer.getMessage("cbZoomTooltipsEnabled"));
     private final JCheckBox cbFilterLandsByColorId = new OptionsCheckBox(localizer.getMessage("cbFilterLandsByColorId"));
@@ -453,9 +452,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbStackCreatures, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlStackCreatures")), descriptionConstraints);
 
-        pnlPrefs.add(cbShowCastableBorder, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlShowCastableBorder")), descriptionConstraints);
-
         pnlPrefs.add(cbHoverTooltipsEnabled, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlHoverTooltipsEnabled")), descriptionConstraints);
 
@@ -463,6 +459,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlZoomTooltipsEnabled")), descriptionConstraints);
 
         pnlPrefs.add(btnCardOverlaySettings, "w 25%!, h 30px!, gap 25px 0 0 20px, span 2 1, al left");
+
 
         pnlPrefs.add(cbTimedTargOverlay, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlTimedTargOverlay")), descriptionConstraints);
@@ -1023,10 +1020,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         return cbStackCreatures;
     }
 
-    public final JCheckBox getCbShowCastableBorder() {
-        return cbShowCastableBorder;
-    }
-
     public final JCheckBox getCbHoverTooltipsEnabled() {
         return cbHoverTooltipsEnabled;
     }
@@ -1046,6 +1039,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     public FLabel getBtnCustomLogSettings() { return btnCustomLogSettings; }
     public FLabel getBtnCardOverlaySettings() { return btnCardOverlaySettings; }
+
 
     public final JCheckBox getCbManaLostPrompt() {
     	return cbManaLostPrompt;

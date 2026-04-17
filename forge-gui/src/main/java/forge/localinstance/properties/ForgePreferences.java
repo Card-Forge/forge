@@ -82,7 +82,6 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_AVATARS ("0,1"),
         UI_SLEEVES ("0,1"),
         UI_SHOW_CARD_OVERLAYS ("true"),
-        UI_SHOW_CASTABLE_BORDER ("false"),
         UI_SHOW_HOVER_TOOLTIPS("true"),
         UI_POPUP_KEYWORD_INFO("true"),
         UI_POPUP_RELATED_CARDS("true"),
