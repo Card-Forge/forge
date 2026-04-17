@@ -1,6 +1,6 @@
 Name:Tamiyo's Logbook
 ManaCost:2 U
-Types:Artifact
+Types:Artifact Book
 A:AB$ Draw | Cost$ 5 U T | NumCards$ 1 | ReduceCost$ X | SpellDescription$ Draw a card. This ability costs {1} less to activate for each other artifact you control.
 SVar:X:Count$Valid Artifact.YouCtrl+Other
 DeckHints:Type$Artifact

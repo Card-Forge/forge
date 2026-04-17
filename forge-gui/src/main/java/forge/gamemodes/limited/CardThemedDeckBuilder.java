@@ -75,7 +75,6 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
     protected Iterable<PaperCard> keyCards;
     protected Map<Integer,Integer> targetCMCs;
 
-
     public CardThemedDeckBuilder(IDeckGenPool pool, DeckFormat format){
         super(pool,format);
     }
@@ -83,7 +82,6 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
     public CardThemedDeckBuilder(PaperCard keyCard0, PaperCard secondKeyCard0, final List<PaperCard> dList, GameFormat format, boolean isForAI){
         this(keyCard0,secondKeyCard0, dList, format, isForAI, DeckFormat.Constructed);
     }
-
 
     /**
      *
@@ -150,7 +148,6 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         }
         findBasicLandSets();
     }
-
 
     @Override
     public CardPool getDeck(final int size, final boolean forAi) {

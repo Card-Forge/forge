@@ -1,18 +1,19 @@
 package forge.gamemodes.net;
 
 import forge.gui.GuiBase;
+import forge.util.IHasForgeLog;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.codec.serialization.ClassResolver;
 import net.jpountz.lz4.LZ4BlockInputStream;
-import org.tinylog.Logger;
 
 import java.io.ObjectInputStream;
 import java.io.StreamCorruptedException;
 
-public class CompatibleObjectDecoder extends LengthFieldBasedFrameDecoder {
+public class CompatibleObjectDecoder extends LengthFieldBasedFrameDecoder implements IHasForgeLog {
+
     private final ClassResolver classResolver;
 
     public CompatibleObjectDecoder(ClassResolver classResolver) {
@@ -41,14 +42,14 @@ public class CompatibleObjectDecoder extends LengthFieldBasedFrameDecoder {
         try {
             var5 = ois.readObject();
         } catch (StreamCorruptedException e) {
-            Logger.error("Version Mismatch: {}", e.getMessage());
+            netLog.error("Version Mismatch: {}", e.getMessage());
         } finally {
             ois.close();
         }
 
         long elapsed = System.currentTimeMillis() - startMs;
         if (elapsed > 50 || frameSize > 20_000) {
-            Logger.info("Decoded {} in {} ms ({} bytes compressed)",
+            netLog.info("Decoded {} in {} ms ({} bytes compressed)",
                     var5 != null ? var5.getClass().getSimpleName() : "null", elapsed, frameSize);
         }
 

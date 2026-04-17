@@ -52,7 +52,8 @@ public class CounterAi extends SpellAbilityAi {
             if ((topSA.isSpell() && !topSA.isCounterableBy(sa)) || ai.getYourTeam().contains(topSA.getActivatingPlayer())) {
                 // might as well check for player's friendliness
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-            } else if (sa.hasParam("ConditionWouldDestroy") && !CounterEffect.checkForConditionWouldDestroy(sa, topSA)) {
+            }
+            if (sa.hasParam("ConditionWouldDestroy") && !CounterEffect.checkForConditionWouldDestroy(sa, topSA)) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlaySa);
             }
 

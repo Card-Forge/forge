@@ -50,7 +50,7 @@ public abstract class ImageFetcher {
             // the wrong frame.
             addScryfallUrl(c, face, useArtCrop, downloadUrls);
 
-            List<PaperCard> clones = StaticData.instance().getCommonCards().getAllCards(c.getName());
+            List<PaperCard> clones = StaticData.instance().getCommonCards().getAllCardsNoAlt(c.getName());
             for (PaperCard pc : clones) {
                 if (c.getEdition().equalsIgnoreCase(pc.getEdition())) {
                     continue;
@@ -221,7 +221,7 @@ public abstract class ImageFetcher {
                     }
                     downloadUrls.add(setDownload.toString());
                 } else {
-                    List<PaperCard> clones = StaticData.instance().getCommonCards().getAllCards(paperCard.getName());
+                    List<PaperCard> clones = StaticData.instance().getCommonCards().getAllCardsNoAlt(paperCard.getName());
                     for (PaperCard pc : clones) {
                         if (clones.size() > 1) {//clones only
                             if (!paperCard.getEdition().equalsIgnoreCase(pc.getEdition())) {

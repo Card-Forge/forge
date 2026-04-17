@@ -341,7 +341,7 @@
                     &quot;text&quot;: &quot;'The dark ones are pleased! Their worshippers are now free to continue their supplication! You have the city's gratitude.'&quot;,
 					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
                     {&quot;grantRewards&quot;: [
-	               {&quot;type&quot;: &quot;item&quot;, &quot;count&quot;: 1, &quot;itemName&quot;: &quot;Ghoulish Jewel&quot;},
+	               {&quot;type&quot;: &quot;item&quot;, &quot;count&quot;: 1, &quot;itemName&quot;: &quot;Massacre Helm&quot;},
                         {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Vampiric Tutor&quot;},
                         {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Yawgmoth's Bargain&quot;}          
                       ]

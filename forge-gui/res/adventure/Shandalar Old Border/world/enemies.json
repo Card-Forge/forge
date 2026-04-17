@@ -12518,6 +12518,11 @@
         "itemName": "War Beast Gauntlet"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "gold",
         "probability": 0.75,
         "count": 150,
@@ -16024,6 +16029,11 @@
         "itemName": "Eye of Horror"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "card",
         "probability": 1,
         "count": 1,
@@ -17531,6 +17541,11 @@
         "itemName": "Cursed Lamp"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "gold",
         "probability": 0.85,
         "count": 400,
@@ -18911,6 +18926,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Broodling Egg"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
       },
       {
         "type": "gold",
@@ -21975,6 +21995,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Crown of the False God"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.5,
+        "count": 1
       },
       {
         "type": "card",
@@ -25930,6 +25955,11 @@
         "itemName": "Tome of the Gate"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "gold",
         "probability": 0.85,
         "count": 400,
@@ -28538,6 +28568,11 @@
         "itemName": "Infiltrator's Knife"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "gold",
         "probability": 0.85,
         "count": 400,
@@ -29713,6 +29748,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Belt of Worry Beads"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
       },
       {
         "type": "card",
@@ -40732,6 +40772,11 @@
         "itemName": "Kobold King's Blade"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "gold",
         "probability": 0.75,
         "count": 150,
@@ -45853,6 +45898,11 @@
     "life": 25,
     "rewards": [
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "card",
         "probability": 1,
         "count": 1,
@@ -48092,6 +48142,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Rebel Falconer's Glove"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.5,
+        "count": 1
       },
       {
         "type": "life",
@@ -51882,6 +51937,11 @@
         "itemName": "Djinn's Silks"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "card",
         "probability": 1,
         "count": 1,
@@ -55641,6 +55701,11 @@
     "speed": 24,
     "life": 25,
     "rewards": [
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
       {
         "type": "card",
         "probability": 1,
@@ -61363,6 +61428,11 @@
         "itemName": "Slivercaller's Gauntlet"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.5,
+        "count": 1
+      },
+      {
         "type": "life",
         "probability": 1,
         "count": 1
@@ -61819,6 +61889,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Winter Cap"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
       },
       {
         "type": "gold",
@@ -63476,6 +63551,11 @@
         "itemName": "Crown of the Vale"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "card",
         "probability": 1,
         "count": 1,
@@ -63718,6 +63798,11 @@
         "itemName": "Tasty Tome"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "card",
         "probability": 1,
         "count": 1,
@@ -63952,6 +64037,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Shield of Air"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
       },
       {
         "type": "card",
@@ -64198,6 +64288,11 @@
       {
         "type": "item",
         "itemName": "Attendant's Prayerbook",
+        "count": 1
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
         "count": 1
       },
       {
@@ -65108,6 +65203,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Imp Tamer's Glove"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
       },
       {
         "type": "life",
@@ -66110,6 +66210,11 @@
     "scale": 0.7,
     "life": 30,
     "rewards": [
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
       {
         "type": "card",
         "probability": 1,
@@ -67150,6 +67255,11 @@
     "speed": 31,
     "life": 30,
     "rewards": [
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.5,
+        "count": 1
+      },
       {
         "type": "life",
         "probability": 1,
@@ -69062,6 +69172,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Grizzly Glaive"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
       },
       {
         "type": "gold",
@@ -71585,6 +71700,11 @@
         "itemName": "Storm Gauntlet"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "life",
         "probability": 1,
         "count": 1
@@ -72592,6 +72712,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Rhystic Amulet"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
       },
       {
         "type": "gold",
@@ -84009,6 +84134,11 @@
         "itemName": "Groundbreaker Mace"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "card",
         "probability": 1,
         "count": 1,
@@ -84145,6 +84275,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "River Waders"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
       },
       {
         "type": "card",
@@ -84397,6 +84532,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Ashnod's Greaves"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
       },
       {
         "type": "card",
@@ -84669,6 +84809,11 @@
         "itemName": "Claws of Gix"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "card",
         "probability": 1,
         "count": 1,
@@ -84896,6 +85041,11 @@
     "speed": 30,
     "life": 40,
     "rewards": [
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
       {
         "type": "card",
         "cardName": "Latulla, Keldon Overseer|PCY",
@@ -85125,6 +85275,11 @@
     "speed": 30,
     "life": 40,
     "rewards": [
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
       {
         "type": "card",
         "cardName": "Márton Stromgald|ICE",
@@ -85361,6 +85516,11 @@
         "itemName": "Narcissist's Mask"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "card",
         "cardName": "Jeska, Warrior Adept|JUD",
         "count": 1
@@ -85590,6 +85750,11 @@
     "speed": 30,
     "life": 40,
     "rewards": [
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
       {
         "type": "card",
         "cardName": "Eron the Relentless|HML",
@@ -85838,6 +86003,11 @@
         "probability": 1
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "card",
         "cardName": "Jolrael, Empress of Beasts|PCY",
         "count": 1,
@@ -85963,6 +86133,11 @@
     "speed": 30,
     "life": 40,
     "rewards": [
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
       {
         "type": "card",
         "cardName": "Verdeloth the Ancient|INV",
@@ -86193,6 +86368,11 @@
     "life": 40,
     "rewards": [
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "card",
         "cardName": "Rofellos, Llanowar Emissary|UDS",
         "count": 1
@@ -86421,6 +86601,11 @@
     "speed": 30,
     "life": 40,
     "rewards": [
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
       {
         "type": "card",
         "cardName": "Multani, Maro-Sorcerer|ULG",
@@ -86651,6 +86836,11 @@
     "life": 40,
     "rewards": [
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "card",
         "cardName": "Hazduhr the Abbot|HML",
         "count": 1
@@ -86778,6 +86968,11 @@
     "speed": 30,
     "life": 40,
     "rewards": [
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
       {
         "type": "card",
         "cardName": "Selenia, Dark Angel|TMP",
@@ -87014,6 +87209,11 @@
     "life": 40,
     "rewards": [
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "card",
         "cardName": "Decree of Justice|SCG",
         "count": 1
@@ -87242,6 +87442,11 @@
     "speed": 30,
     "life": 40,
     "rewards": [
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
       {
         "type": "card",
         "cardName": "Reya Dawnbringer|INV",
@@ -87473,6 +87678,11 @@
     "life": 40,
     "rewards": [
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "card",
         "cardName": "Candelabra of Tawnos|ATQ",
         "count": 1
@@ -87587,6 +87797,11 @@
     "speed": 30,
     "life": 40,
     "rewards": [
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
       {
         "type": "card",
         "cardName": "Tolarian Academy|USG",
@@ -87816,6 +88031,11 @@
     "speed": 30,
     "life": 40,
     "rewards": [
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
       {
         "type": "card",
         "cardName": "Rayne, Academy Chancellor|UDS",
@@ -88056,6 +88276,11 @@
         "itemName": "Shield of Tears",
         "count": 1,
         "probability": 1
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
       },
       {
         "type": "card",
@@ -96349,6 +96574,11 @@
         "itemName": "Ley Line Walker Boots"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "gold",
         "probability": 0.85,
         "count": 400,
@@ -96566,6 +96796,11 @@
         "probability": 0.1,
         "count": 1,
         "itemName": "Shield of the Hivelord"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
       },
       {
         "type": "gold",
@@ -96790,6 +97025,11 @@
         "type": "item",
         "probability": 1,
         "itemName": "Torturer's Hood",
+        "count": 1
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
         "count": 1
       },
       {
@@ -97392,6 +97632,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Shaman's Staff"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
       },
       {
         "type": "gold",
@@ -99284,6 +99529,11 @@
     "life": 30,
     "rewards": [
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "gold",
         "probability": 1.0,
         "count": 3000,
@@ -99493,6 +99743,11 @@
     "speed": 15,
     "life": 30,
     "rewards": [
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
       {
         "type": "gold",
         "probability": 1.0,
@@ -99708,6 +99963,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Time Walker's Trophy"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
       },
       {
         "type": "gold",
@@ -100395,6 +100655,11 @@
         "itemName": "Crooked Scales"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.5,
+        "count": 1
+      },
+      {
         "type": "card",
         "probability": 1,
         "count": 1,
@@ -100708,6 +100973,11 @@
         "itemName": "Kry Greaves"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "gold",
         "probability": 0.85,
         "count": 400,
@@ -100935,6 +101205,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Immortal Anklet"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
       },
       {
         "type": "gold",
@@ -101166,6 +101441,11 @@
         "itemName": "Marble Mace"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "gold",
         "probability": 0.85,
         "count": 400,
@@ -101395,6 +101675,11 @@
         "itemName": "Life Matrix"
       },
       {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
+      },
+      {
         "type": "gold",
         "probability": 0.85,
         "count": 400,
@@ -101622,6 +101907,11 @@
         "probability": 1,
         "count": 1,
         "itemName": "Gauntlets of Chaos"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.2,
+        "count": 1
       },
       {
         "type": "gold",

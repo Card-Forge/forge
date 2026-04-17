@@ -1,22 +1,21 @@
 package forge.gamemodes.net.server;
 
+import forge.util.IHasForgeLog;
 import forge.gamemodes.net.ReplyPool;
 import forge.gamemodes.net.event.IdentifiableNetEvent;
 import forge.gamemodes.net.event.NetEvent;
 import io.netty.channel.Channel;
-import org.tinylog.Logger;
 
-import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public final class RemoteClient implements IToClient {
+public final class RemoteClient implements IToClient, IHasForgeLog {
 
     /** Special value indicating the client hasn't been assigned a slot yet. */
     public static final int UNASSIGNED_SLOT = -1;
 
     private volatile Channel channel;
     private String username;
-    private int index = UNASSIGNED_SLOT;  // Initialize to -1 to indicate not yet assigned
+    private int index = UNASSIGNED_SLOT;
     private volatile ReplyPool replies = new ReplyPool();
     private final AtomicInteger sendErrors = new AtomicInteger(0);
 
@@ -48,11 +47,11 @@ public final class RemoteClient implements IToClient {
             channel.writeAndFlush(event).sync();
             long elapsed = System.currentTimeMillis() - startMs;
             if (elapsed > 50) {
-                Logger.info("send() blocked {} ms for {} (event: {})", elapsed, username, event);
+                netLog.info("send() blocked {} ms for {} (event: {})", elapsed, username, event);
             }
         } catch (Exception e) {
             sendErrors.incrementAndGet();
-            Logger.error(e, "Network send error for {} (event: {})", username, event);
+            netLog.error("Network send error for {} (event: {})", username, event, e);
         }
     }
 
@@ -62,11 +61,9 @@ public final class RemoteClient implements IToClient {
     }
 
     @Override
-    public Object sendAndWait(final IdentifiableNetEvent event) throws TimeoutException {
+    public Object sendAndWait(final IdentifiableNetEvent event) {
         replies.initialize(event.getId());
-
         send(event);
-
         return replies.get(event.getId());
     }
 

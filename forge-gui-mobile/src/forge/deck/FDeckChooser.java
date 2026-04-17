@@ -1242,10 +1242,10 @@ public class FDeckChooser extends FScreen {
             //Special branch for quest events
             QuestEvent event = DeckgenUtil.getQuestEvent(lstDecks.getSelectedItem().getName());
             player = new RegisteredPlayer(event.getEventDeck());
-            if (event instanceof QuestEventChallenge) {
-                player.setStartingLife(((QuestEventChallenge) event).getAiLife());
+            if (event instanceof QuestEventChallenge qec) {
+                player.setStartingLife(qec.getAiLife());
             }
-            player.setCardsOnBattlefield(QuestUtil.getComputerStartingCards(event));
+            player.addExtraCardsOnBattlefield(QuestUtil.getComputerStartingCards(event));
         }
         else {
             player = new RegisteredPlayer(getDeck());

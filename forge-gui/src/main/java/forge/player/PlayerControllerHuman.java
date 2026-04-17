@@ -48,6 +48,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.match.input.*;
+import forge.util.IHasForgeLog;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.control.FControlGamePlayback;
@@ -87,15 +88,19 @@ import java.util.stream.Collectors;
  * <p>
  * Handles phase skips for now.
  */
-public class PlayerControllerHuman extends PlayerController implements IGameController {
+public class PlayerControllerHuman extends PlayerController implements IGameController, IHasForgeLog {
+
     /**
      * Cards this player may look at right now, for example when searching a
      * library.
      */
     private boolean mayLookAtAllCards = false;
-    private boolean disableAutoYields = false;
 
     private IGuiGame gui;
+
+    private final Set<String> autoYields = Sets.newHashSet();
+    private final Map<Integer, Boolean> triggersAlwaysAccept = Maps.newTreeMap();
+    private boolean disableAutoYields;
 
     protected final InputQueue inputQueue;
     protected final InputProxy inputProxy;
@@ -135,13 +140,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     public PlayerView getLocalPlayerView() {
         return player == null ? null : player.getView();
-    }
-
-    public boolean getDisableAutoYields() {
-        return disableAutoYields;
-    }
-    public void setDisableAutoYields(final boolean disableAutoYields0) {
-        disableAutoYields = disableAutoYields0;
     }
 
     @Override
@@ -775,10 +773,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public boolean confirmTrigger(final WrappedAbility wrapper) {
         final SpellAbility sa = wrapper.getWrappedAbility();
         final Trigger regtrig = wrapper.getTrigger();
-        if (getGui().shouldAlwaysAcceptTrigger(regtrig.getId())) {
+        if (shouldAlwaysAcceptTrigger(regtrig.getId())) {
             return true;
         }
-        if (getGui().shouldAlwaysDeclineTrigger(regtrig.getId())) {
+        if (shouldAlwaysDeclineTrigger(regtrig.getId())) {
             return false;
         }
 
@@ -824,7 +822,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public Player chooseStartingPlayer(final boolean isFirstGame) {
-        String prompt = null;
+        String prompt;
         if (isFirstGame) {
             prompt = localizer.getMessage("lblYouHaveWonTheCoinToss", player.getName());
         } else {
@@ -972,7 +970,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         tempShowCards(topN);
         if (FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) &&
-                (!GuiBase.getInterface().isLibgdxPort()) && (!GuiBase.isNetworkplay(getGui()))) { //prevent crash for desktop vs mobile port it will crash the netplay since mobile doesnt have manipulatecardlist, send the alternate below
+                (!GuiBase.getInterface().isLibgdxPort()) && (!GuiBase.isNetPlay(getGui()))) { //prevent crash for desktop vs mobile port it will crash the netplay since mobile doesnt have manipulatecardlist, send the alternate below
             CardCollectionView cardList = player.getCardsIn(ZoneType.Library);
             ImmutablePair<CardCollection, CardCollection> result =
                     arrangeForMove(localizer.getMessage("lblMoveCardstoToporBbottomofLibrary"), cardList, topN, true, true);
@@ -1497,6 +1495,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public List<SpellAbility> chooseSpellAbilityToPlay() {
+        netLog.trace("ENTRY for player {}, phase={}, isGameOver={}",
+                player.getName(), getGame().getPhaseHandler().getPhase(), getGame().isGameOver());
         final MagicStack stack = getGame().getStack();
 
         if (mayAutoPass()) {
@@ -1521,30 +1521,35 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     e.printStackTrace();
                 }
             }
+            netLog.trace("Returning null (mayAutoPass) for player {}", player.getName());
             return null;
         }
 
         if (stack.isEmpty()) {
             if (getGui().isUiSetToSkipPhase(getGame().getPhaseHandler().getPlayerTurn().getView(),
                     getGame().getPhaseHandler().getPhase())) {
+                netLog.trace("Returning null (skipPhase) for player {}", player.getName());
                 return null; // avoid prompt for input if stack is empty and
                 // player is set to skip the current phase
             }
         } else {
             final SpellAbility ability = stack.peekAbility();
-            if (ability != null && ability.isAbility() && getGui().shouldAutoYield(ability.yieldKey())) {
+            if (ability != null && ability.isAbility() && shouldAutoYield(ability.yieldKey())) {
                 // avoid prompt for input if top ability of stack is set to auto-yield
                 try {
                     Thread.sleep(FControlGamePlayback.resolveDelay);
                 } catch (final InterruptedException e) {
                     e.printStackTrace();
                 }
+                netLog.trace("Returning null (autoYield) for player {}", player.getName());
                 return null;
             }
         }
 
+        netLog.trace("Creating InputPassPriority for player {}", player.getName());
         final InputPassPriority defaultInput = new InputPassPriority(this);
         defaultInput.showAndWait();
+        netLog.trace("InputPassPriority returned for player {}, chosenSa={}", player.getName(), defaultInput.getChosenSa());
         return defaultInput.getChosenSa();
     }
 
@@ -1897,7 +1902,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         for (int i = 1; i < res.size(); i++) {
             // prompt user if there are multiple different options
             if (!res.get(i).equals(firstStr)) {
-                if (!GuiBase.isNetworkplay(getGui())) //non network game don't need serialization
+                if (!GuiBase.isNetPlay(getGui())) //non network game don't need serialization
                     return getGui().one(prompt, possibleReplacers);
                 ReplacementEffectView rev = getGui().one(prompt, possibleReplacers.stream().map(ReplacementEffect::getView).collect(Collectors.toList()));
                 return possibleReplacers.stream().filter(re -> re.getId() == rev.getId()).findAny().orElse(first);
@@ -1917,7 +1922,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return first;
         }
         String prompt = Localizer.getInstance().getMessage(isCostReduction ? "lblChooseCostReduction" : "lblChooseAbilityToPlay");
-        if (!GuiBase.isNetworkplay(getGui())) //non network game don't need serialization
+        if (!GuiBase.isNetPlay(getGui())) //non network game don't need serialization
             return getGui().one(prompt, possibleStatics);
         StaticAbilityView stv = getGui().one(prompt, possibleStatics.stream().map(StaticAbility::getView).collect(Collectors.toList()));
         return possibleStatics.stream().filter(st -> st.getId() == stv.getId()).findAny().orElse(first);
@@ -2364,6 +2369,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             if (currentInput instanceof InputPassPriority) {
                 // ensure prompt updated if needed
                 currentInput.showMessageInitial();
+            }
+            if (gui.isNetGame()) {
+                // Flush events to remote clients — the undo modifies game state
+                // (untaps lands, etc.) after the prompt is shown, and without this
+                // the updated state sits in the forwarder buffer until the next action.
+                inputQueue.updateObservers();
             }
             return true;
         }
@@ -3353,18 +3364,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public void awaitNextInput() {
         getGui().awaitNextInput();
     }
-
     @Override
     public void cancelAwaitNextInput() {
         getGui().cancelAwaitNextInput();
-    }
-
-    @Override
-    public void resetInputs() {
-        final Input inp = inputProxy.getInput();
-        if (inp != null) {
-            inp.selectButtonCancel();
-        }
     }
 
     @Override
@@ -3470,4 +3472,74 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return FModel.getPreferences().getPrefBoolean(FPref.UI_ORDER_HAND);
     }
 
+    @Override
+    public void requestResync() {
+        // No-op for local games - resync is only used for network play
+    }
+
+    @Override
+    public boolean shouldAutoYield(final String key) {
+        String abilityKey = key.contains("): ") ? key.substring(key.indexOf("): ") + 3) : key;
+        boolean yieldPerAbility = FModel.getPreferences().getPref(FPref.UI_AUTO_YIELD_MODE)
+                .equals(ForgeConstants.AUTO_YIELD_PER_ABILITY);
+        return !disableAutoYields && autoYields.contains(yieldPerAbility ? abilityKey : key);
+    }
+
+    @Override
+    public void setShouldAutoYield(final String key, final boolean autoYield) {
+        String abilityKey = key.contains("): ") ? key.substring(key.indexOf("): ") + 3) : key;
+        boolean yieldPerAbility = FModel.getPreferences().getPref(FPref.UI_AUTO_YIELD_MODE)
+                .equals(ForgeConstants.AUTO_YIELD_PER_ABILITY);
+        if (autoYield) {
+            autoYields.add(yieldPerAbility ? abilityKey : key);
+        } else {
+            autoYields.remove(yieldPerAbility ? abilityKey : key);
+        }
+    }
+
+    @Override
+    public Iterable<String> getAutoYields() {
+        return autoYields;
+    }
+
+    @Override
+    public void clearAutoYields() {
+        autoYields.clear();
+        triggersAlwaysAccept.clear();
+    }
+
+    @Override
+    public boolean getDisableAutoYields() {
+        return disableAutoYields;
+    }
+
+    @Override
+    public void setDisableAutoYields(final boolean disable) {
+        disableAutoYields = disable;
+    }
+
+    @Override
+    public boolean shouldAlwaysAcceptTrigger(final int trigger) {
+        return Boolean.TRUE.equals(triggersAlwaysAccept.get(trigger));
+    }
+
+    @Override
+    public boolean shouldAlwaysDeclineTrigger(final int trigger) {
+        return Boolean.FALSE.equals(triggersAlwaysAccept.get(trigger));
+    }
+
+    @Override
+    public void setShouldAlwaysAcceptTrigger(final int trigger) {
+        triggersAlwaysAccept.put(trigger, Boolean.TRUE);
+    }
+
+    @Override
+    public void setShouldAlwaysDeclineTrigger(final int trigger) {
+        triggersAlwaysAccept.put(trigger, Boolean.FALSE);
+    }
+
+    @Override
+    public void setShouldAlwaysAskTrigger(final int trigger) {
+        triggersAlwaysAccept.remove(trigger);
+    }
 }

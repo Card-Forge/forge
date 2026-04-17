@@ -15,6 +15,7 @@ import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.net.DeltaPacket;
 import forge.gui.control.PlaybackSpeed;
 import forge.interfaces.IGameController;
 import forge.item.PaperCard;
@@ -31,6 +32,14 @@ import java.util.Map;
 
 public interface IGuiGame {
     void setGameView(GameView gameView);
+
+    /**
+     * Set the game view with a sequence number for delta sync baseline.
+     * Local games ignore the sequence number.
+     */
+    default void setGameView(GameView gameView, long sequenceNumber) {
+        setGameView(gameView);
+    }
 
     GameView getGameView();
 
@@ -65,19 +74,16 @@ public interface IGuiGame {
     void updatePlayerControl();
 
     void enableOverlay();
-
     void disableOverlay();
 
     void finishGame();
 
     void showManaPool(PlayerView player);
-
     void hideManaPool(PlayerView player);
 
     void updateStack();
 
     void notifyStackAddition(final GameEventSpellAbilityCast event);
-
     void notifyStackRemoval(final GameEventSpellRemovedFromStack event);
 
     void handleLandPlayed(CardView land);
@@ -250,43 +256,29 @@ public interface IGuiGame {
     void setGameSpeed(PlaybackSpeed gameSpeed);
 
     String getDayTime();
-
     void updateDayTime(String daytime);
 
     void awaitNextInput();
-
     void cancelAwaitNextInput();
+
+    /** Signal to start a client-side elapsed timer for waiting display. */
+    void showWaitingTimer(PlayerView forPlayer, String waitingForPlayerName);
 
     boolean isUiSetToSkipPhase(PlayerView playerTurn, PhaseType phase);
 
     void autoPassUntilEndOfTurn(PlayerView player);
-
     boolean mayAutoPass(PlayerView player);
-
     void autoPassCancel(PlayerView player);
 
     void updateAutoPassPrompt();
 
-    boolean shouldAutoYield(String key);
-
-    void setShouldAutoYield(String key, boolean autoYield);
-
-    boolean shouldAlwaysAcceptTrigger(int trigger);
-
-    boolean shouldAlwaysDeclineTrigger(int trigger);
-
-    void setShouldAlwaysAcceptTrigger(int trigger);
-
-    void setShouldAlwaysDeclineTrigger(int trigger);
-
-    void setShouldAlwaysAskTrigger(int trigger);
-
-    void clearAutoYields();
-
     void setCurrentPlayer(PlayerView player);
 
-    /** Signal to start a client-side elapsed timer for waiting display. */
-    void showWaitingTimer(PlayerView forPlayer, String waitingForPlayerName);
+    /**
+     * Apply a delta update packet to the local game state.
+     * @param packet the delta packet containing changes
+     */
+    void applyDelta(DeltaPacket packet);
 
     /** Returns true if this game instance is a network game. */
     boolean isNetGame();

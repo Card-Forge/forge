@@ -6,26 +6,30 @@ import forge.gui.interfaces.IGuiGame;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
+import java.util.Observable;
+import java.util.Observer;
 
-public class GameEventForwarder {
-    private static final long FLUSH_INTERVAL_NS = 500_000_000L; // 500ms
+/**
+ * Buffers game events and flushes them to the GUI in batches.
+ *
+ * <p>Flush triggers (all on the game thread):
+ * <ul>
+ *   <li>Size threshold: 50+ buffered events in {@link #receiveGameEvent}</li>
+ *   <li>Time threshold: 500ms+ since last flush in {@link #receiveGameEvent}</li>
+ *   <li>Input queue change: registered as {@link Observer} on player InputQueues,
+ *       ensuring events are delivered before the game thread blocks for input</li>
+ *   <li>Sync points: explicit {@link #flush()} from {@code flushPendingEvents()}</li>
+ * </ul>
+ *
+ * <p>No daemon thread — all delta collection runs on the game thread to avoid race issues.
+ */
+public class GameEventForwarder implements Observer {
+    private static final long FLUSH_INTERVAL_NS = 500_000_000L;
     private static final int FLUSH_SIZE_THRESHOLD = 50;
 
     private final IGuiGame gui;
     private final List<GameEvent> pendingEvents = new ArrayList<>();
     private long lastFlushTime = System.nanoTime();
-
-    private final ScheduledExecutorService scheduler =
-            Executors.newSingleThreadScheduledExecutor(r -> {
-                Thread t = new Thread(r, "GameEventForwarder-flush");
-                t.setDaemon(true);
-                return t;
-            });
-    private ScheduledFuture<?> scheduledFlush;
 
     public GameEventForwarder(IGuiGame gui) {
         this.gui = gui;
@@ -33,48 +37,31 @@ public class GameEventForwarder {
 
     @Subscribe
     public void receiveGameEvent(GameEvent ev) {
-        synchronized (pendingEvents) {
-            pendingEvents.add(ev);
-        }
-        long now = System.nanoTime();
-        boolean timeThreshold = (now - lastFlushTime) >= FLUSH_INTERVAL_NS;
-        boolean sizeThreshold;
-        synchronized (pendingEvents) {
-            sizeThreshold = pendingEvents.size() >= FLUSH_SIZE_THRESHOLD;
-        }
+        pendingEvents.add(ev);
+        boolean sizeThreshold = pendingEvents.size() >= FLUSH_SIZE_THRESHOLD;
+        boolean timeThreshold = (System.nanoTime() - lastFlushTime) >= FLUSH_INTERVAL_NS;
         if (timeThreshold || sizeThreshold) {
-            cancelScheduledFlush();
             flush();
-        } else if (scheduledFlush == null || scheduledFlush.isDone()) {
-            // Schedule a deferred flush for when the interval expires
-            long delayNs = FLUSH_INTERVAL_NS - (now - lastFlushTime);
-            scheduledFlush = scheduler.schedule(this::flush, delayNs, TimeUnit.NANOSECONDS);
         }
     }
 
     public void flush() {
-        cancelScheduledFlush();
-        List<GameEvent> batch;
-        synchronized (pendingEvents) {
-            if (pendingEvents.isEmpty()) {
-                return;
-            }
-            batch = new ArrayList<>(pendingEvents);
-            pendingEvents.clear();
+        if (pendingEvents.isEmpty()) {
+            return;
         }
+        List<GameEvent> batch = new ArrayList<>(pendingEvents);
+        pendingEvents.clear();
         lastFlushTime = System.nanoTime();
         gui.handleGameEvents(batch);
     }
 
-    private void cancelScheduledFlush() {
-        if (scheduledFlush != null) {
-            scheduledFlush.cancel(false);
-            scheduledFlush = null;
-        }
+    /**
+     * Called when an InputQueue changes (setInput/removeInput/clearInputs).
+     * Flushes any pending events on the game thread before it blocks for input.
+     */
+    @Override
+    public void update(Observable o, Object arg) {
+        flush();
     }
 
-    public void shutdown() {
-        cancelScheduledFlush();
-        scheduler.shutdownNow();
-    }
 }

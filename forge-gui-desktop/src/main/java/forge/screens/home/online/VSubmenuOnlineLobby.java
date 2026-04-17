@@ -11,6 +11,7 @@ import javax.swing.SwingConstants;
 import forge.deckchooser.FDeckChooser;
 import forge.gamemodes.match.GameLobby;
 import forge.gamemodes.net.IOnlineLobby;
+import forge.gamemodes.net.NetConnectUtil;
 import forge.gamemodes.net.client.FGameClient;
 import forge.gamemodes.net.server.FServerManager;
 import forge.gui.FNetOverlay;
@@ -149,7 +150,14 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
         lobby.getLblTitle().setText(Localizer.getInstance().getMessage("lblOnlineLobbyTitle"));
         pnlTitle.removeAll();
         pnlTitle.setOpaque(false);
-        pnlTitle.add(lobby.getLblTitle(), "w 95%, h 40px!, gap 0 0 15px 15px, span 2");
+        final boolean hosting = FServerManager.getInstance().isHosting();
+        pnlTitle.add(lobby.getLblTitle(), "w 95%, h 40px!, gap 0 0 15px 15px, span " + (hosting ? "3" : "2"));
+        if (hosting) {
+            FButton btnServerUrl = new FButton(Localizer.getInstance().getMessage("lblServerURL"));
+            btnServerUrl.setFont(FSkin.getRelativeFont(14));
+            pnlTitle.add(btnServerUrl, "w 150!, h 35!, gap 10 10 0 0, align right");
+            btnServerUrl.addActionListener(e -> NetConnectUtil.copyHostedServerUrl());
+        }
         pnlTitle.add(btnStop, "gap 10 10 0 0, align right");
         container.add(pnlTitle,"w 80%, gap 0 0 0 0, al right, pushx");
 
@@ -242,5 +250,24 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
 
     @Override
     public void closeConn(String msg) {
+        // Clean up connection state
+        if (client != null) {
+            client.close();
+            client = null;
+        }
+        FServerManager server = FServerManager.getInstance();
+        if (server.isHosting()) {
+            server.stopServer();
+        }
+        FNetOverlay.SINGLETON_INSTANCE.reset();
+
+        // Clear lobby and repopulate
+        this.lobby = null;
+        populate();
+
+        // Show error message if provided
+        if (msg != null && !msg.isEmpty()) {
+            SOptionPane.showErrorDialog(msg, Localizer.getInstance().getMessage("lblConnectionError"));
+        }
     }
 }
