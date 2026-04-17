@@ -4,6 +4,7 @@ import java.util.Map;
 
 import forge.card.CardStateName;
 import forge.card.GamePieceType;
+import forge.game.Game;
 import forge.game.GameLogEntryType;
 import forge.game.GameType;
 import forge.game.ability.AbilityKey;
@@ -24,6 +25,7 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         Player activator = sa.getActivatingPlayer();
+        Game game = activator.getGame();
         boolean activate = Boolean.parseBoolean(sa.getParamOrDefault("Activate", "true"));
         String[] attributes = sa.getParam("Attributes").split(",");
         CardCollection defined = getDefinedCardsOrTargeted(sa);
@@ -57,12 +59,11 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
                         break;
                     case "Plotted":
                         altered = gameCard.setPlotted(activate);
-
                         c.getGame().fireEvent(new GameEventCardPlotted(c, activator));
                         break;
                     case "Prepared":
                         if (activate) {
-                            if (gameCard.isPrepared() || !gameCard.hasState(CardStateName.PreparedSpell)) {
+                            if (gameCard.isPrepared() || !game.getCardState(gameCard).equalsWithGameTimestamp(gameCard) || !gameCard.hasState(CardStateName.PreparedSpell)) {
                                 continue;
                             }
                             Card prepared = new CardCopyService(gameCard).copyCard(true, activator);
@@ -71,11 +72,16 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
                             prepared.getOwner().getZone(ZoneType.Exile).add(prepared);
                             final Card eff = createEffect(sa, activator, gameCard + "'s Prepared Spell", prepared.getImageKey());
                             eff.addRemembered(prepared);
-                            eff.addImprintedCard(gameCard);
-                            String mayPlay = "Mode$ Continuous | MayPlay$ True | MayPlayPlayer$ You | EffectZone$ Command | " +
+                            eff.setRenderForUI(false);
+                            gameCard.addLeavesPlayCommand(() -> {
+                                game.getAction().exileEffect(eff);
+                                game.getAction().exile(prepared, null , null);
+                            });
+                            addForgetOnCastTrigger(eff, "Card.IsRemembered");
+                            String mayPlay = "Mode$ Continuous | MayPlay$ True | MayPlayPlayer$ EffectSourceController | EffectZone$ Command | " +
                                     "Affected$ Card.IsRemembered | AffectedZone$ Exile";
                             eff.addStaticAbility(mayPlay);
-                            prepared.getGame().getAction().moveToCommand(eff, sa);
+                            game.getAction().moveToCommand(eff, sa);
                         }
                         gameCard.setPrepared(activate);
                         break;
