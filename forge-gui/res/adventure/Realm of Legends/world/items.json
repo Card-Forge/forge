@@ -2016,7 +2016,6 @@
     "iconName": "TomeofFire",
     "cost": 5000,
     "effect": {
-        "lifeModifier": -2,
         "startBattleWithCard": [
         "Seal of Fire|NEM"
      ]
