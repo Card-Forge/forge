@@ -309,8 +309,8 @@ public class VStack extends FDropDown {
                                             else {
                                                 controller.setShouldAlwaysAcceptTrigger(triggerID);
                                                 if (stackInstance.equals(gameView.peekStack())) {
-                                                    //auto-yes if ability is on top of stack
-                                                    controller.selectButtonOk();
+                                                    //pass priority so trigger resolves with auto-yes flag
+                                                    controller.passPriority();
                                                 }
                                             }
                                         }));
@@ -323,8 +323,8 @@ public class VStack extends FDropDown {
                                             else {
                                                 controller.setShouldAlwaysDeclineTrigger(triggerID);
                                                 if (stackInstance.equals(gameView.peekStack())) {
-                                                    //auto-no if ability is on top of stack
-                                                    controller.selectButtonCancel();
+                                                    //pass priority so trigger resolves with auto-no flag
+                                                    controller.passPriority();
                                                 }
                                             }
                                         }));

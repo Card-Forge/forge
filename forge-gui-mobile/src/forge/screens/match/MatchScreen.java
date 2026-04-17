@@ -679,10 +679,6 @@ public class MatchScreen extends FScreen {
                         controller.setShouldAlwaysAskTrigger(triggerID);
                     } else {
                         controller.setShouldAlwaysAcceptTrigger(triggerID);
-                        if (stackInstance.equals(gameView.peekStack())) {
-                            //auto-yes if ability is on top of stack
-                            controller.selectButtonOk();
-                        }
                     }
 
                     final String key = stackInstance.getKey();
@@ -711,10 +707,6 @@ public class MatchScreen extends FScreen {
                         controller.setShouldAlwaysAskTrigger(triggerID);
                     } else {
                         controller.setShouldAlwaysDeclineTrigger(triggerID);
-                        if (stackInstance.equals(gameView.peekStack())) {
-                            //auto-no if ability is on top of stack
-                            controller.selectButtonCancel();
-                        }
                     }
 
                     final String key = stackInstance.getKey();
