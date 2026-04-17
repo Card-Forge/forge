@@ -3,7 +3,7 @@ package forge.player;
 import com.google.common.collect.*;
 import forge.LobbyPlayer;
 import forge.StaticData;
-import forge.ai.ComputerUtilMana;
+import forge.ai.AvailableActions;
 import forge.ai.GameState;
 import forge.ai.PlayerControllerAi;
 import forge.card.*;
@@ -1529,9 +1529,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 player.getName(), getGame().getPhaseHandler().getPhase(), getGame().isGameOver());
         final MagicStack stack = getGame().getStack();
 
-        if (FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS) && FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS)) {
-            getPlayer().getView().updateHasAvailableActions(getPlayer(),
-                    sa -> ComputerUtilMana.canPayManaCost(sa, getPlayer(), 0, false));
+        if (FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)
+                && FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS)) {
+            long timeoutMs = computeAvailableActionsBudgetMs(getPlayer());
+            boolean result = AvailableActions.compute(getPlayer(), timeoutMs);
+            getPlayer().getView().setHasAvailableActions(result);
         }
 
         if (mayAutoPass()) {
@@ -3425,6 +3427,17 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     public boolean isAutoPassingNoActions() {
         return getGui().isAutoPassingNoActions(getLocalPlayerView());
+    }
+
+    private long computeAvailableActionsBudgetMs(Player p) {
+        int prefMs = FModel.getPreferences().getPrefInt(FPref.YIELD_AVAILABLE_ACTIONS_BUDGET_MS);
+        if (prefMs > 0) {
+            return prefMs;   // explicit user override — bypasses clamps
+        }
+        int cardCount = p.getCardsIn(ZoneType.Hand).size()
+                + p.getCardsIn(ZoneType.Battlefield).size()
+                + p.getCardsIn(ZoneType.Flashback).size();
+        return Math.min(1500L, Math.max(50L, 50L * cardCount));
     }
 
     public boolean didYieldJustEnd() {
