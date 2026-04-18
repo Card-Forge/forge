@@ -2,11 +2,11 @@ package forge.util;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import forge.card.CardType;
 import forge.util.lang.*;
 import org.apache.commons.lang3.StringUtils;
-import org.testng.collections.Maps;
 
 import java.util.Collection;
 import java.util.Collections;
