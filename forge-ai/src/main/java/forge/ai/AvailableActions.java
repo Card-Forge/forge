@@ -6,15 +6,22 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import org.tinylog.Logger;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 // Heuristic: does the player have any playable action this priority window?
 // Bounded by timeoutMs; returns true on expiry (false-positive — player is prompted).
 public final class AvailableActions {
+
+    private static final Comparator<Card> BY_CMC_ASC = Comparator.comparingInt(Card::getCMC);
 
     private AvailableActions() {}
 
     public static boolean compute(Player player, long timeoutMs) {
         long deadlineNanos = System.nanoTime() + timeoutMs * 1_000_000L;
-        for (Card card : player.getCardsIn(ZoneType.Hand)) {
+
+        for (Card card : sortedCardsIn(player, ZoneType.Hand)) {
             for (SpellAbility sa : card.getAllPossibleAbilities(player, true)) {
                 if (checkTimeout(deadlineNanos, timeoutMs)) return true;
                 if (sa.isSpell()) {
@@ -27,6 +34,7 @@ public final class AvailableActions {
             }
         }
 
+        // Not sorted: activation costs are per-ability, not the permanent's CMC.
         for (Card card : player.getCardsIn(ZoneType.Battlefield)) {
             for (SpellAbility sa : card.getAllPossibleAbilities(player, true)) {
                 if (checkTimeout(deadlineNanos, timeoutMs)) return true;
@@ -36,18 +44,26 @@ public final class AvailableActions {
             }
         }
 
-        for (ZoneType zone : new ZoneType[]{ZoneType.Graveyard, ZoneType.Exile, ZoneType.Command}) {
-            for (Card card : player.getCardsIn(zone)) {
-                for (SpellAbility sa : card.getAllPossibleAbilities(player, true)) {
-                    if (checkTimeout(deadlineNanos, timeoutMs)) return true;
-                    if (!sa.isManaAbility() && canAfford(sa, player) && hasValidTargets(sa)) {
-                        return true;
-                    }
+        for (Card card : sortedCardsIn(player, ZoneType.Flashback)) {
+            for (SpellAbility sa : card.getAllPossibleAbilities(player, true)) {
+                if (checkTimeout(deadlineNanos, timeoutMs)) return true;
+                if (!sa.isManaAbility() && canAfford(sa, player) && hasValidTargets(sa)) {
+                    return true;
                 }
             }
         }
 
         return false;
+    }
+
+    // Sort cheap cards first so cheap-to-validate matches early-exit
+    private static Iterable<Card> sortedCardsIn(Player player, ZoneType zone) {
+        Iterable<Card> cards = player.getCardsIn(zone);
+        List<Card> copy = new ArrayList<>();
+        cards.forEach(copy::add);
+        if (copy.size() < 2) return copy;
+        copy.sort(BY_CMC_ASC);
+        return copy;
     }
 
     private static boolean canAfford(SpellAbility sa, Player player) {
