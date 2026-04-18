@@ -724,7 +724,24 @@ public class BoosterGenerator {
             } else if (operator.startsWith("name(")) {
                 operator = StringUtils.strip(operator.substring(4), "() ");
                 String[] cardNames = TextUtil.splitWithParenthesis(operator, ',', '"', '"');
-                toAdd = PaperCardPredicates.names(Lists.newArrayList(cardNames));
+                // Support "Card Name|SET" pinning: resolve to a specific PaperCard.
+                List<String> plain = new ArrayList<>();
+                List<PaperCard> pinned = new ArrayList<>();
+                for (String n : cardNames) {
+                    if (n.contains("|")) {
+                        PaperCard c = StaticData.instance().getCommonCards().getCard(n);
+                        if (c != null) pinned.add(c);
+                    } else {
+                        plain.add(n);
+                    }
+                }
+                Predicate<PaperCard> plainPred = plain.isEmpty() ? null : PaperCardPredicates.names(plain);
+                Predicate<PaperCard> pinnedPred = pinned.isEmpty() ? null : pinned::contains;
+                if (plainPred != null && pinnedPred != null) {
+                    toAdd = plainPred.or(pinnedPred);
+                } else {
+                    toAdd = plainPred != null ? plainPred : pinnedPred;
+                }
             } else if (operator.startsWith("color(")) {
                 operator = StringUtils.strip(operator.substring("color(".length() + 1), "()\" ");
                 switch (operator.toLowerCase()) {
