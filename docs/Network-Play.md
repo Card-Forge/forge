@@ -182,7 +182,7 @@ Once validated, provide the host's internal IP and port to the client (e.g., `19
 > Follow these instructions to play with people **on different networks** - e.g. players you meet on the Forge Discord.
 
 > [!IMPORTANT]
-> You must complete the **[Local Network Setup](#local-network-setup)** first. Remote setup builds on a working local configuration.
+> Complete the **[Local Network Setup](#local-network-setup)** first. Remote setup builds on a working local configuration.
 
 ### UPnP (Automatic Port Forwarding)
 Forge has built-in **UPnP** support that can automatically configure your router's port forwarding. When you host a server, Forge will prompt:
@@ -259,7 +259,7 @@ For self-hosted options (e.g. OpenVPN on your own server or router), you will ne
 2. One player creates a network at [my.zerotier.com](https://my.zerotier.com) and shares the **Network ID**.
 3. All other players join using that Network ID.
 4. The network creator approves each device in the ZeroTier web console.
-5. Once connected, follow the **[Local Network Setup](#local-network-setup)** — use the ZeroTier-assigned IP addresses instead of your normal LAN IP, plus the port number. For example: `10.147.17.101:36743`
+5. Once connected, follow the **[Local Network Setup](#local-network-setup)** — use the ZeroTier-assigned IP addresses instead of your normal LAN IP.
 
 ### Security Note
 Any player on a shared private network can see other devices on that network. Only share access with people you trust, and disconnect when you're not playing.
