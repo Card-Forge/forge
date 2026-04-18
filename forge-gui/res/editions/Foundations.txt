@@ -796,7 +796,7 @@ Replace=.024F Uncommon:fromSheet("FDN borderless")
 745 U Rune-Sealed Wall @Rockey Chen
 746 U Spectral Sailor @Cristi Balanescu
 747 M Sphinx of the Final Word @Lius Lasahido
-748 C Strix Lookout
+748 C Strix Lookout @Josiah "Jo" Cameron
 749 R Tempest Djinn @Zezhou Chen
 750 C Unsummon @Ron Spencer
 751 U Bloodtithe Collector @Maria Zolotukhina
