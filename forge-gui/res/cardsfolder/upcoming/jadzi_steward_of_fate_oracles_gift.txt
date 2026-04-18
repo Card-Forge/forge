@@ -15,7 +15,7 @@ ALTERNATE
 Name:Oracle's Gift
 ManaCost:X X U
 Types:Sorcery
-A:SP$ Token | TokenAmount$ X | TokenScript$ gu_0_0_fractal | SpellDescription$ Create X 0/0 green and blue Fractal creature tokens, then put X +1/+1 counters on each Fractal you control.
+A:SP$ Token | TokenAmount$ X | TokenScript$ gu_0_0_fractal | SubAbility$ DBPutCounter | SpellDescription$ Create X 0/0 green and blue Fractal creature tokens, then put X +1/+1 counters on each Fractal you control.
 SVar:DBPutCounter:DB$ PutCounterAll | ValidCards$ Fractal.YouCtrl | CounterType$ P1P1 | CounterNum$ X
 SVar:X:Count$xPaid
 DeckHas:Ability$Token|Counters
