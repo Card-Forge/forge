@@ -22,9 +22,6 @@ import java.util.Locale;
 
 /**
  * The class Counters.
- *
- * @author Clemens Koza
- * @version V0.0 17.02.2010
  */
 public enum CounterEnumType implements CounterType {
 
@@ -33,233 +30,41 @@ public enum CounterEnumType implements CounterType {
 
     LOYALTY("LOYAL", 198, 198, 198),
 
-    ACORN("ACORN", 139, 69, 19),
-
-    AEGIS("AEGIS", 207, 207, 207),
-
     AGE("AGE", 255, 137, 57),
-
-    AIM("AIM", 255, 180, 0),
-
-    ARROW("ARROW", 237, 195, 0),
-
-    ARROWHEAD("ARWHD", 230, 191, 167),
 
     AWAKENING("AWAKE", 0, 231, 79),
 
-    BAIT("BAIT", 120, 100, 60),
-
     BLAZE("BLAZE", 255, 124, 82),
-
-    BLESSING("BLESS", 251, 0, 94),
-
-    BLIGHT("BLGHT", 130, 115, 160),
-
-    BLOOD("BLOOD", 255, 108, 111),
-
-    BLOODLINE("BLDLN", 224, 44, 44),
-
-    BLOODSTAIN("BLDST", 224, 44, 44),
-
-    BORE("BORE", 98, 47, 34),
-
-    BOUNTY("BOUNT", 255, 158, 0),
-
-    BRAIN("BRAIN", 197, 62, 212),
 
     BRIBERY("BRIBE", 172, 201, 235),
 
-    BRICK("BRICK", 226, 192, 164),
-
-    CARRION("CRRON", 255, 163, 222),
-
-    CELL ("CELL", 90, 10, 95),
-
     CHARGE("CHARG", 246, 192, 0),
-
-    CHORUS("CHRUS", 0, 192, 246),
-
-    COIN("COIN", 255, 215, 0),
-
-    COLLECTION("CLLCT", 255, 215, 0),
-
-    COMPONENT("COMPN", 224, 160, 48),
-
-    CONQUEROR("CONQR", 225, 210, 25),
-
-    CONTESTED("CONTES", 255, 76, 2),
-
-    CORPSE("CRPSE", 230, 186, 209),
-
-    CORRUPTION("CRPTN", 210, 121, 210),
-
-    CROAK("CROAK", 155, 255, 5),
-
-    CREDIT("CRDIT", 188, 197, 234),
-
-    CRYSTAL("CRYST", 255, 85, 206),
-
-    CUBE("CUBE", 148, 219, 0),
-
-    CURRENCY("CURR", 223, 200, 0),
-
-    DEATH("DEATH", 255, 108, 110),
 
     DEFENSE("DEF", 164, 23, 32),
 
-    DELAY("DELAY", 102, 206, 255),
-
     DEPLETION("DPLT", 185, 201, 208),
-
-    DESCENT("DESCT", 175, 35, 40),
-
-    DESPAIR("DESPR", 238, 186, 187),
-
-    DEVOTION("DEVOT", 255, 111, 255),
-
-    DISCOVERY("DISCO", 12, 230, 100),
-
-    DIVINITY("DVNTY", 0, 233, 255),
 
     DOOM("DOOM", 255, 104, 118),
 
-    DREAD ("DREAD", 205, 170, 240),
-
     DREAM("DREAM", 190, 189, 255),
-
-    DUTY("DUTY", 232, 245, 245),
-
-    ECHO("ECHO", 225, 180, 255),
-
-    EGG("EGG", 255, 245, 195),
-
-    ELIXIR("ELIXR", 81, 221, 175),
-
-    EMBER("EMBER", 247, 52, 43),
-
-    EON("EON", 23, 194, 255),
-
-    ERUPTION("ERUPTION", 255, 124, 124),
-
-    EXPOSURE("EXPOSURE", 50, 180, 30),
-
-    EYEBALL("EYE", 184, 202, 201),
-
-    EYESTALK("EYES", 184, 202, 201),
-
-    EVERYTHING("EVRY", 255, 255, 255),
 
     FADE("FADE", 159, 209, 192),
 
-    FATE("FATE", 255, 164, 226),
-
-    FEATHER("FTHR", 195, 202, 165),
-
-    FEEDING("FEED", 245, 21, 5),
-
-    FELLOWSHIP("FLWS", 255, 255, 255),
-
-    FETCH("FETCH", 180, 235, 52),
-
-    FILIBUSTER("FLBTR", 255, 179, 119),
-
-    FILM("FILM", 255, 255, 255),
-
     FINALITY("FINAL", 255, 255, 255),
-
-    FIRE("FIRE", 240, 30, 35),
-
-    FLAME("FLAME", 255, 143, 43),
 
     FLAVOR("FLAVOR", 208, 152, 97), ///adventure only
 
-    FLOOD("FLOOD", 0, 203, 255),
-
-    FORESHADOW("FRSHD", 144, 99, 207),
-
-    FUNGUS("FNGUS", 121, 219, 151),
-
-    FUNK("FUNK", 215, 24, 222),
-
-    FURY("FURY", 255, 120, 89),
-
-    FUSE("FUSE", 255, 122, 85),
-
-    GEM("GEM", 255, 99, 251),
-
     GHOSTFORM("GHSTF", 223, 0, 254),
-
-    GLYPH("GLYPH", 184, 202, 199),
 
     GOLD("GOLD", 248, 191, 0),
 
-    GROWTH("GRWTH", 87, 226, 32),
-
-    HARMONY("HRMNY", 0, 230, 155),
-
-    HATCHING("HATCH", 204, 255, 204),
-
-    HATCHLING("HTCHL", 201, 199, 186),
-
-    HEALING("HEAL", 255, 166, 236),
-
-    HIT("HIT", 255, 245, 195),
-
-    HONE("HONE", 51, 227, 255),
-
-    HOPE("HOPE", 232, 245, 245),
-
-    HOOFPRINT("HOOF", 233, 189, 170),
-
-    HOUR("HOUR", 198, 197, 210),
-
-    HOURGLASS("HRGLS", 0, 215, 255),
-
-    HUNGER("HUNGR", 255, 91, 149),
-
-    HUSK("HUSK", 227, 212, 173),
-
     ICE("ICE", 0, 239, 255),
-
-    IMPOSTOR("IMPO", 173, 194, 255),
 
     INCARNATION("INCRN", 247, 206, 64),
 
-    INCUBATION("INCBT", 40, 210, 25),
-
-    INGREDIENT("INGRD", 180, 50, 145),
-
-    INFECTION("INFCT", 0, 230, 66),
-
-    INFLUENCE("INFL", 201, 99, 212),
-
-    INGENUITY("INGTY", 67, 186, 205),
-
-    INTEL("INTEL", 80, 250, 180),
-
-    INTERVENTION("INTRV", 205, 203, 105),
-
-    INVITATION("INVIT", 205, 0, 26),
-
-    ISOLATION("ISOLT", 250, 190, 0),
-
-    JAVELIN("JAVLN", 180, 206, 172),
-
-    JUDGMENT("JUDGM", 249, 220, 52),
-
-    KICK("KICK", 255, 255, 240),
-
-    KNOWLEDGE("KNOWL", 0, 115, 255),
-
-    LANDMARK("LNMRK", 186, 28, 28),
-
     LEVEL("LEVEL", 60, 222, 185),
 
-    LOOT("LOOT", 255, 215, 0),
-
     LORE("LORE", 209, 198, 161),
-
-    LUCK("LUCK", 185, 174, 255),
 
     MANABOND("MANA", 0, 255, 0),
 
@@ -273,75 +78,13 @@ public enum CounterEnumType implements CounterType {
 
     M2M2("-2/-2", "-2/-2", 255, 110, 106),
 
-    MAGNET("MAGNT", 198, 197, 210),
-
-    MANA("MANA", 0, 237, 152),
-
     MANIFESTATION("MNFST", 104, 225, 8),
-
-    MANNEQUIN("MANQN", 206, 199, 162),
-
-    MATRIX("MATRX", 183, 174, 255),
-
-    MEMORY("MEMRY", 174, 183, 255),
-
-    MIDWAY("MDWAY", 84, 101, 207),
-
-    MINE("MINE", 255, 100, 127),
-
-    MINING("MINNG", 184, 201, 207),
-
-    MIRE("MIRE", 153, 209, 199),
 
     MUSIC("MUSIC", 255, 138, 255),
 
-    MUSTER("MUSTR", 235, 196, 0),
-
-    NECRODERMIS("NECRO", 80, 209, 250),
-
-    NET("NET", 0, 221, 251),
-
-    NEST("NEST", 80, 80, 50),
-
-    OIL("OIL", 99, 102, 106),
-
-    OMEN("OMEN", 255, 178, 120),
-
-    ORE("ORE", 200, 201, 163),
-
-    PAGE("PAGE", 218, 195, 162),
-
-    PAIN("PAIN", 255, 108, 111),
-
-    PALLIATION("PALLI", 114, 243, 250),
-
     PARALYZATION("PRLYZ", 220, 201, 0),
 
-    PETAL("PETAL", 255, 162, 216),
-
     PETRIFICATION("PETRI", 185, 201, 208),
-
-    PIN("PIN", 194, 196, 233),
-
-    PLAGUE("PLGUE", 94, 226, 25),
-
-    PLOT("PLOT", 255, 172, 133),
-
-    PRESSURE("PRESS", 255, 164, 159),
-
-    PHYLACTERY("PHYLA", 117, 219, 153),
-
-    PHYRESIS("PHYRE", 125, 97, 128),
-
-    PLAN("PLAN", 20, 35, 235),
-
-    POINT("POINT", 153, 255, 130),
-
-    POLYP("POLYP", 236, 185, 198),
-
-    POSSESSION("POSSN", 60, 65, 85),
-
-    PREY("PREY", 240, 0, 0),
 
     PUPA("PUPA", 0, 223, 203),
 
@@ -359,39 +102,11 @@ public enum CounterEnumType implements CounterType {
 
     QUEST("QUEST", 251, 189, 0),
 
-    RALLY("RALLY", 25, 230, 225),
-
-    RELEASE("RELEASE", 200, 210, 50),
-
-    REPRIEVE("REPR", 240, 120, 50),
-
-    REJECTION("REJECT", 212, 235, 242),
-
-    REV("REV", 255, 108, 111),
-
-    REVIVAL("REVIVL", 130, 230, 50),
-
-    RIBBON("RIBBON", 233, 245, 232),
-
-    RITUAL("RITUAL", 155, 17, 30),
-
-    ROPE("ROPE", 239, 223, 187),
-
     RUST("RUST", 255, 181, 116),
-
-    SCREAM("SCREM", 0, 220, 255),
-
-    SCROLL("SCRLL", 206, 199, 162),
 
     SHELL("SHELL", 190, 207, 111),
 
     SHIELD("SHLD", 202, 198, 186),
-
-    SHRED("SHRED", 255, 165, 152),
-
-    SILVER("SILVER", 192, 192, 192),
-
-    SKEWER("SKEWER", 202, 192, 156),
 
     SLEEP("SLEEP", 178, 192, 255),
 
@@ -399,73 +114,13 @@ public enum CounterEnumType implements CounterType {
 
     SLEIGHT("SLGHT", 185, 174, 255),
 
-    SLIME("SLIME", 101, 220, 163),
-
-    SOUL("SOUL", 243, 190, 247),
-
-    SOOT("SOOT", 211, 194, 198),
-
-    SPITE("SPITE", 0, 218, 255),
-
-    SPORE("SPORE", 122, 218, 150),
-
-    STASH("STASH", 248, 191, 0),
-
-    STORAGE("STORG", 255, 177, 121),
-
-    STORY("STORY", 180, 72, 195),
-
-    STRIFE("STRFE", 255, 89, 223),
-
-    STUDY("STUDY", 226, 192, 165),
-
     STUN("STUN", 226, 192, 165),
-
-    SUPPLY("SPPLY", 70, 105, 60),
-
-    TAKEOVER("TKVR", 63, 49, 191),
-
-    TASK("TASK", 191, 63, 49),
-
-    THEFT("THEFT", 255, 176, 125),
-
-    TIDE("TIDE", 0, 212, 187),
 
     TIME("TIME", 255, 121, 255),
 
-    TOWER("tower", "TOWER", 0, 239, 255),
-
     TRAINING("TRAIN", 220, 201, 0),
 
-    TRAP("TRAP", 255, 121, 86),
-
-    TREASURE("TRSUR", 255, 184, 0),
-
-    UNITY("UNITY", 242, 156, 255),
-
-    UNLOCK("UNLCK", 222, 146, 205),
-
-    VALOR("VALOR", 252, 250, 222),
-
-    VELOCITY("VELO", 255, 95, 138),
-
-    VERSE("VERSE", 0, 237, 155),
-
-    VITALITY("VITAL", 255, 94, 142),
-
-    VORTEX("VORTX", 142, 200, 255),
-
-    VOYAGE("VOYAGE", 38, 150, 137),
-
     WAGE("WAGE", 242, 190, 106),
-
-    WINCH("WINCH", 208, 195, 203),
-
-    WIND("WIND", 0, 236, 255),
-
-    WISH("WISH", 255, 85, 206),
-
-    WRECK("WRECK", 208, 55, 255),
 
     // Player Counters
 
