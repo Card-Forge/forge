@@ -592,14 +592,14 @@
     &quot;text&quot;: &quot;'Welcome, customer, to Gwafa Hazid's emporium of spells!'&quot;,
     &quot;options&quot;: [
       {
-        &quot;name&quot;: &quot;I'll buy some spells. (Spend 2000 gold)&quot;,
+        &quot;name&quot;: &quot;I'll buy some spells. (Spend 4000 gold)&quot;,
         &quot;condition&quot;: [
-          { &quot;hasGold&quot;: 3000 }
+          { &quot;hasGold&quot;: 4000 }
         ],
         &quot;text&quot;: &quot;'See you next time, valued customer! There's always more in stock!'&quot;,
         &quot;action&quot;: [
           {
-            &quot;addGold&quot;: -3000,
+            &quot;addGold&quot;: -4000,
             &quot;grantRewards&quot;: [
               { &quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 50 }
             ]
@@ -607,16 +607,16 @@
         ]
       },
       {
-        &quot;name&quot;: &quot;I'll buy some spells. (Spend 3000 gold)&quot;,
+        &quot;name&quot;: &quot;I'll buy some spells. (Spend 4000 gold)&quot;,
         &quot;condition&quot;: [
-          { &quot;hasGold&quot;: 3000, &quot;not&quot;: true }
+          { &quot;hasGold&quot;: 4000, &quot;not&quot;: true }
         ],
         &quot;text&quot;: &quot;No cash, no cards. Come back when you've won some more fights!&quot;,
 					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
       },
 				{
 					&quot;name&quot;: &quot;What are you selling?&quot;,
-					&quot;text&quot;: &quot;'Spells at a great discount! Why, for just thrice the price of a 'spell pack' that other merchants sell, I give you FIFTY spells! And far more importantly, the spells I sell can be ANYTHING! Why, you might get 50 rare spells! Of course, I can't guarantee that, but I CAN guarantee my mystery boxes haven't been searched or seeded, they're one hundred percent genuine random. Straight from falling off the back of a caravan to your pocket, my friend!'&quot;,
+					&quot;text&quot;: &quot;'Spells at a great discount! Why, for just a few times the price of a 'spell pack' that other merchants sell, I give you FIFTY spells! And far more importantly, the spells I sell can be ANYTHING! Why, you might get 50 rare spells! Of course, I can't guarantee that, but I CAN guarantee my mystery boxes haven't been searched or seeded, they're one hundred percent genuine random. Straight from falling off the back of a caravan to your pocket, my friend!'&quot;,
 					&quot;options&quot;: [ { &quot;name&quot;: &quot;I'll think on it.&quot; } ]
 				},
                 {
