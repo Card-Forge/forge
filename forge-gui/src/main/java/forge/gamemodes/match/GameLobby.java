@@ -540,30 +540,8 @@ public abstract class GameLobby implements IHasGameType {
          return () -> {
             hostedMatch = GuiBase.getInterface().hostMatch();
             hostedMatch.setOnMatchOver(this::onMatchOver);
-            hostedMatch.startMatch(GameType.Constructed, variantTypes, players, guis);
-            // Build GameRules from preferences (same defaults as HostedMatch.getDefaultRules)
-            final GameRules rules = new GameRules(GameType.Constructed);
-            rules.setPlayForAnte(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE));
-            rules.setMatchAnteRarity(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE_MATCH_RARITY));
-            rules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
-            rules.setOrderCombatants(FModel.getPreferences().getPrefBoolean(FPref.LEGACY_ORDER_COMBATANTS));
-            rules.setUseGrayText(FModel.getPreferences().getPrefBoolean(FPref.UI_GRAY_INACTIVE_TEXT));
-            rules.setGamesPerMatch(FModel.getPreferences().getPrefInt(FPref.UI_MATCHES_PER_GAME));
-            // AI specific sideboarding rules
-            switch (AiProfileUtil.getAISideboardingMode()) {
-                case Off:
-                    rules.setAISideboardingEnabled(false);
-                    rules.setSideboardForAI(false);
-                    break;
-                case AI:
-                    rules.setAISideboardingEnabled(true);
-                    rules.setSideboardForAI(false);
-                    break;
-                case HumanForAI:
-                    rules.setAISideboardingEnabled(true);
-                    rules.setSideboardForAI(true);
-                    break;
-            }
+
+            final GameRules rules = HostedMatch.getDefaultRules(GameType.Constructed);
             // apply shared team life setting from the lobby
             rules.setUseSharedTeamLife(useSharedTeamLife);
             rules.setUseSharedTurns(useSharedTeamLife);
