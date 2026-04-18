@@ -51,9 +51,9 @@
 4. **Host** leaves the server address field **empty** and clicks OK.
      - On first host, Forge will ask whether to **automatically open the port via UPnP** (see [UPnP](#upnp-automatic-port-forwarding) below). If your router supports UPnP, choosing "Just Once" or "Always" can skip manual port forwarding entirely.
 5. **Host** determines address to share with clients:
-     - **Local play:** Use the **Copy Server URL** button in the lobby — this copies the address in the correct format. Forge displays the host's IP (typically `192.168.x.x`). Verify against the device's network settings. Ignore any suggestion to use `localhost`.
-     - **Remote play:** Verify the host's external IP at [canyouseeme.org](http://canyouseeme.org).
- 7. **Client** enters the host's address in the connection dialog and clicks OK.
+     - **Local play:** Use the **Copy Local URL** button in the lobby — this copies the address in the correct format. Forge displays the host's IP (typically `192.168.x.x`). Verify against the device's network settings. Ignore any suggestion to use `localhost`.
+     - **Remote play:** Use the **Copy External URL** button in the lobby — if necessary verify the external IP at [canyouseeme.org](http://canyouseeme.org).
+ 7. **Client** enters the host's IP address in the connection dialog and clicks OK.
      - The address format is **`IP:port`** — for example: `192.168.1.50:36743` (local) or `203.0.113.45:36743` (remote).
      - If the port is omitted, Forge defaults to 36743 (=FORGE on older phone keypads).
 8. **Configure the match:**
@@ -85,6 +85,14 @@ This means disconnects are typically detected within about 45 seconds, even when
 ## If the Player doesn't Reconnect
 When the 5-minute timeout expires, the disconnected player is **replaced by an AI** and the game continues.
 
+## Host Commands
+The host can type these commands in the lobby chat during the reconnection window. These commands are **host-only** — clients cannot use them.
+
+| Command | Effect |
+|---|---|
+| `/skipreconnect [player]` | Immediately replace the disconnected player with AI (skip the countdown). Player name can be omitted if only one player is disconnected. |
+| `/skiptimeout [player]` | Cancel the countdown timer and wait **indefinitely** for the player to reconnect. |
+
 # AFK Timer
 The host can configure an **Away-From-Keyboard (AFK) timer** so that one idle player cannot stall the whole game. 
 
@@ -112,14 +120,6 @@ Once a player has been flagged as AFK, the timer shortens to **10 seconds** for 
 > [!NOTE]
 > This feature currently only governs **priority** prompts (a player's normal pass-priority window). Other in-game prompts — combat damage assignment, choice dialogs, target selection — currently wait indefinitely regardless of the host's AFK setting.
 
-## Host Commands
-The host can type these commands in the lobby chat during the reconnection window. These commands are **host-only** — clients cannot use them.
-
-| Command | Effect |
-|---|---|
-| `/skipreconnect [player]` | Immediately replace the disconnected player with AI (skip the countdown). Player name can be omitted if only one player is disconnected. |
-| `/skiptimeout [player]` | Cancel the countdown timer and wait **indefinitely** for the player to reconnect. |
-
 ---
 
 # Network Configuration
@@ -127,7 +127,8 @@ The host can type these commands in the lobby chat during the reconnection windo
 ## Local Network Setup
 
 > [!TIP]
-> Follow these instructions to play with people **on the same network** - e.g. all players are connected to your Wifi network.
+> Follow these instructions to play with people **on the same network** - e.g. all players are connected to your Wifi network. 
+> You will also need to complete this step for remote play.
 
 ### 1. Configure the Host Firewall
 
@@ -139,9 +140,11 @@ The host can type these commands in the lobby chat during the reconnection windo
 | **Linux** | Allow port 36743 through your firewall (e.g., `ufw allow 36743/tcp`). |
 
 ### 2. Validate the Port is Open
-The simplest test is to connect with Forge from another device on the same network. If the client connects to the lobby, the port is open and you can skip ahead. If the connection fails, use the tools below to confirm whether the port is reachable.
+The simplest test is to connect with Forge from another device on the same network. 
 
-For these tests you will need your **local IP address** and the **port number** used by Forge. 
+If the client connects to the lobby, the port is open and you can skip ahead. 
+
+If the connection fails, use the tools below to confirm whether the port is reachable. For these tests you will need your **local IP address** and the **port number** used by Forge. 
 
 You can get your **local IP address**:
 - In the Forge app from the Server URL dialog that appears immediately after hosting a server.
@@ -179,7 +182,7 @@ Once validated, provide the host's internal IP and port to the client (e.g., `19
 > Follow these instructions to play with people **on different networks** - e.g. players you meet on the Forge Discord.
 
 > [!IMPORTANT]
-> Complete the **[Local Network Setup](#local-network-setup)** first. Remote setup builds on a working local configuration.
+> You must complete the **[Local Network Setup](#local-network-setup)** first. Remote setup builds on a working local configuration.
 
 ### UPnP (Automatic Port Forwarding)
 Forge has built-in **UPnP** support that can automatically configure your router's port forwarding. When you host a server, Forge will prompt:
@@ -205,7 +208,9 @@ You will need to configure port forwarding manually using the steps below. Commo
 
 ### 1. Manual Port Forwarding on the Router
 
-Access your router's admin interface (typically `http://192.168.x.1/`, where `x` matches your local IP subnet). Navigate to port forwarding settings (may be under "Advanced") and create a rule:
+[See this guide](https://www.noip.com/support/knowledgebase/general-port-forwarding-guide) on how to set up port forwarding. You will need login access to your router.
+
+You will need to create a port forwarding rule like below (your router may not have exactly the same fields):
 
 | Field | Value |
 |---|---|
@@ -213,8 +218,6 @@ Access your router's admin interface (typically `http://192.168.x.1/`, where `x`
 | External Port | 36743 |
 | Internal IP | Host machine's local IP |
 | Internal Port | 36743 |
-
-Router-specific guides: [portforward.com/router.htm](https://portforward.com/router.htm) (use the guides only — their software isn't recommended).
 
 ### 2. Validate External Access
 
@@ -226,6 +229,8 @@ Share the external IP shown on that page with the client. Remember the client ne
 
 Here's how a typical network topology might look, when playing through Firewall and Port Forwarding:
 ![netplay](netplay.png)
+
+If after this you **still** can't reach your device through its external IP, you may wish to try one of the options below.
 
 ## VPN / Software-Defined Networks
 
@@ -254,7 +259,7 @@ For self-hosted options (e.g. OpenVPN on your own server or router), you will ne
 2. One player creates a network at [my.zerotier.com](https://my.zerotier.com) and shares the **Network ID**.
 3. All other players join using that Network ID.
 4. The network creator approves each device in the ZeroTier web console.
-5. Once connected, follow the **[Local Network Setup](#local-network-setup)** — use the ZeroTier-assigned IP addresses instead of your normal LAN IPs.
+5. Once connected, follow the **[Local Network Setup](#local-network-setup)** — use the ZeroTier-assigned IP addresses instead of your normal LAN IP, plus the port number. For example: `10.147.17.101:36743`
 
 ### Security Note
 Any player on a shared private network can see other devices on that network. Only share access with people you trust, and disconnect when you're not playing.
