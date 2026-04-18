@@ -6,9 +6,12 @@ import com.google.common.collect.Lists;
 import forge.card.CardType;
 import forge.util.lang.*;
 import org.apache.commons.lang3.StringUtils;
+import org.testng.collections.Maps;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -18,38 +21,29 @@ import java.util.stream.Collectors;
  */
 public abstract class Lang {
 
+    private static Map<String, Lang> languages = Collections.synchronizedMap(Maps.newHashMap());
+
     private static Lang instance;
     private static Lang englishInstance;
 
-    protected String languageCode;
-    protected String countryCode;
-
     public static void createInstance(String localeID) {
-        String[] splitLocale = localeID.split("-");
-        String language = splitLocale[0];
-        String country = splitLocale[1];
-        if (language.equals("de")) {
-            instance = new LangGerman();
-        } else if (language.equals("es")) {
-            instance = new LangSpanish();
-        } else if (language.equals("it")) {
-            instance = new LangItalian();
-        } else if (language.equals("zh")) {
-            instance = new LangChinese();
-        } else if (language.equals("ja")) {
-            instance = new LangJapanese();
-        } else if (language.equals("fr")) {
-            instance = new LangFrench();
-        } else { // default is English
-            instance = new LangEnglish();
-        }
-        instance.languageCode = language;
-        instance.countryCode = country;
+        instance = initInstance(localeID);
 
         // Create english instance for internal usage
-        englishInstance = new LangEnglish();
-        englishInstance.languageCode = "en";
-        englishInstance.countryCode = "US";
+        englishInstance = initInstance("en-US");
+    }
+
+    public static Lang initInstance(String localeID) {
+        return languages.computeIfAbsent(localeID, k -> switch (k.split("-")[0]) {
+            case "de" -> new LangGerman();
+            case "es" -> new LangSpanish();
+            case "it" -> new LangItalian();
+            case "zh" -> new LangChinese();
+            case "ja" -> new LangJapanese();
+            case "ko" -> new LangKorean();
+            case "fr" -> new LangFrench();
+            default -> new LangEnglish();
+        });
     }
 
     public static Lang getInstance() {
@@ -61,6 +55,14 @@ public abstract class Lang {
     }
 
     protected Lang() {
+    }
+
+    public String getFontFile() {
+        return null;
+    }
+
+    public char canDisplayCheck() {
+        return ' ';
     }
 
     /**

@@ -42,6 +42,7 @@ import forge.toolbox.CardFaceSymbols;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinIcon;
 import forge.util.CardTranslation;
+import forge.util.Lang;
 
 public class FCardImageRenderer {
     private static boolean isInitialed = false;
@@ -74,7 +75,7 @@ public class FCardImageRenderer {
 
         NAME_FONT = new Font(Font.SERIF, Font.BOLD, 26);
         TYPE_FONT = new Font(Font.SERIF, Font.BOLD, 22);
-        if ("ja-JP".equals(FModel.getPreferences().getPref(FPref.UI_LANGUAGE)) || "zh-CN".equals(FModel.getPreferences().getPref(FPref.UI_LANGUAGE))) {
+        if (Lang.initInstance(FModel.getPreferences().getPref(FPref.UI_LANGUAGE)).getFontFile() != null) {
             TEXT_FONT = new Font(Font.SANS_SERIF, Font.PLAIN, 24);
             REMINDER_FONT = new Font(Font.SANS_SERIF, Font.PLAIN, 22);
         } else {
