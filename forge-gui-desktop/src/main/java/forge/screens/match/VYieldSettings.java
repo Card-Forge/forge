@@ -1,6 +1,10 @@
 package forge.screens.match;
 
 import forge.Singletons;
+import forge.gamemodes.match.YieldMode;
+import forge.gamemodes.match.YieldPrefs;
+import forge.gamemodes.net.client.NetGameController;
+import forge.game.player.PlayerView;
 import forge.gui.UiCommand;
 import forge.interfaces.IGameController;
 import forge.localinstance.properties.ForgePreferences;
@@ -10,17 +14,10 @@ import forge.toolbox.FButton;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FLabel;
-import forge.toolbox.FTextField;
 import forge.util.Localizer;
 import forge.view.FDialog;
 
 import javax.swing.JSeparator;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.DocumentFilter;
-import javax.swing.text.PlainDocument;
 
 /**
  * Dialog for configuring yield interrupt conditions and automatic suggestions.
@@ -104,13 +101,6 @@ public class VYieldSettings extends FDialog {
         y = addCheckbox(x, y, w, localizer.getMessage("lblSuppressAfterYield"), FPref.YIELD_SUPPRESS_AFTER_END, prefs);
 
         y += SECTION_GAP;
-        JSeparator sep2 = new JSeparator();
-        add(sep2, x, y, w, 2);
-        y += 2 + SECTION_GAP;
-
-        y = addTimeoutField(x, y, w, prefs);
-
-        y += SECTION_GAP;
 
         // OK button
         FButton btnOk = new FButton(localizer.getMessage("lblOK"));
@@ -126,13 +116,9 @@ public class VYieldSettings extends FDialog {
     private int addCheckbox(int x, int y, int w, String label, FPref pref, ForgePreferences prefs) {
         FCheckBox cb = new FCheckBox(label, prefs.getPrefBoolean(pref));
         cb.addActionListener(e -> {
-            boolean value = cb.isSelected();
-            prefs.setPref(pref, value);
+            prefs.setPref(pref, cb.isSelected());
             prefs.save();
-            IGameController controller = matchUI == null ? null : matchUI.getGameController();
-            if (controller != null) {
-                controller.setYieldInterruptPref(pref, value);
-            }
+            pushPrefsToHostIfNetworkClient();
         });
         add(cb, x, y, w, ROW_HEIGHT);
         return y + ROW_HEIGHT;
@@ -168,6 +154,7 @@ public class VYieldSettings extends FDialog {
             if (idx >= 0 && idx < valueOptions.length) {
                 prefs.setPref(scopePref, valueOptions[idx]);
                 prefs.save();
+                pushPrefsToHostIfNetworkClient();
             }
         });
         add(combo, x + w - DROPDOWN_WIDTH, y, DROPDOWN_WIDTH, ROW_HEIGHT);
@@ -175,68 +162,25 @@ public class VYieldSettings extends FDialog {
         return y + ROW_HEIGHT;
     }
 
-    private int addTimeoutField(int x, int y, int w, ForgePreferences prefs) {
-        final int fieldWidth = DROPDOWN_WIDTH;
-        int lblWidth = w - fieldWidth - PADDING;
-        String tooltip = "0 = Dynamic (50ms \u00d7 playable cards, clamped to 50-1500ms).";
-        FLabel lbl = new FLabel.Builder().text("Auto-pass calculation timeout (ms)")
-                .fontAlign(javax.swing.SwingConstants.LEFT).build();
-        lbl.setToolTipText(tooltip);
-        add(lbl, x, y, lblWidth, ROW_HEIGHT);
-
-        int current = prefs.getPrefInt(FPref.YIELD_AVAILABLE_ACTIONS_BUDGET_MS);
-        FTextField field = new FTextField.Builder()
-                .ghostText("Dynamic")
-                .tooltip(tooltip)
-                .text(current > 0 ? String.valueOf(current) : "")
-                .build();
-        ((PlainDocument) field.getDocument()).setDocumentFilter(new DigitsOnlyFilter(4));
-        field.getDocument().addDocumentListener(new DocumentListener() {
-            private void save() {
-                String text = field.getText();
-                int value = (text == null || text.isEmpty()) ? 0 : Integer.parseInt(text);
-                if (value > 9999) value = 9999;
-                prefs.setPref(FPref.YIELD_AVAILABLE_ACTIONS_BUDGET_MS, String.valueOf(value));
-                prefs.save();
-            }
-            @Override public void insertUpdate(DocumentEvent e)  { save(); }
-            @Override public void removeUpdate(DocumentEvent e)  { save(); }
-            @Override public void changedUpdate(DocumentEvent e) { save(); }
-        });
-        add(field, x + w - fieldWidth, y, fieldWidth, ROW_HEIGHT);
-        return y + ROW_HEIGHT;
-    }
-
-    private static final class DigitsOnlyFilter extends DocumentFilter {
-        private final int maxLength;
-        DigitsOnlyFilter(int maxLength) { this.maxLength = maxLength; }
-        @Override
-        public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-            if (string == null) return;
-            String filtered = scrub(string);
-            if (filtered.isEmpty()) return;
-            if (fb.getDocument().getLength() + filtered.length() > maxLength) return;
-            super.insertString(fb, offset, filtered, attr);
-        }
-        @Override
-        public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-            String filtered = text == null ? "" : scrub(text);
-            int newLength = fb.getDocument().getLength() - length + filtered.length();
-            if (newLength > maxLength) return;
-            super.replace(fb, offset, length, filtered, attrs);
-        }
-        private static String scrub(String s) {
-            StringBuilder sb = new StringBuilder(s.length());
-            for (int i = 0; i < s.length(); i++) {
-                char c = s.charAt(i);
-                if (Character.isDigit(c)) sb.append(c);
-            }
-            return sb.toString();
-        }
-    }
-
     public void showDialog() {
         setVisible(true);
         dispose();
+    }
+
+    /**
+     * If the player is a network client, send a fresh YieldPrefs snapshot to
+     * the host. The current yield mode is included unchanged so the message
+     * doubles as the existing yield-state notification path. No-op for local
+     * games and the host process.
+     */
+    private void pushPrefsToHostIfNetworkClient() {
+        if (matchUI == null) return;
+        IGameController controller = matchUI.getGameController();
+        if (!(controller instanceof NetGameController)) return;
+        PlayerView player = matchUI.getCurrentPlayer();
+        if (player == null) return;
+        YieldMode currentMode = matchUI.getYieldMode(player);
+        if (currentMode == null) currentMode = YieldMode.NONE;
+        controller.notifyYieldStateChanged(player, currentMode, YieldPrefs.fromCurrentPreferences());
     }
 }

@@ -234,7 +234,6 @@ public enum TrackableProperty {
     HasPriority(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
     AvatarLifeDifference(TrackableTypes.IntegerType, FreezeMode.IgnoresFreeze),
     HasLost(TrackableTypes.BooleanType),
-    HasAvailableActions(TrackableTypes.BooleanType),
 
     //SpellAbility
     HostCard(TrackableTypes.CardViewType),

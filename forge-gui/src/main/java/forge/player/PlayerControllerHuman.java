@@ -3,7 +3,7 @@ package forge.player;
 import com.google.common.collect.*;
 import forge.LobbyPlayer;
 import forge.StaticData;
-import forge.ai.AvailableActions;
+import forge.ai.ComputerUtilMana;
 import forge.ai.GameState;
 import forge.ai.PlayerControllerAi;
 import forge.card.*;
@@ -48,8 +48,6 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.NextGameDecision;
-import forge.gamemodes.match.YieldMode;
-import forge.gamemodes.match.YieldPrefs;
 import forge.gamemodes.match.input.*;
 import forge.gamemodes.net.event.MessageEvent;
 import forge.gamemodes.net.server.FServerManager;
@@ -106,10 +104,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     private final Set<String> autoYields = Sets.newHashSet();
     private final Map<Integer, Boolean> triggersAlwaysAccept = Maps.newTreeMap();
     private boolean disableAutoYields;
-
-    // Yield prefs: authoritative for remote proxies; local path reads FModel/YieldController.
-    private YieldMode yieldModeField = YieldMode.NONE;
-    private final EnumMap<FPref, Boolean> yieldInterruptPrefs = new EnumMap<>(FPref.class);
 
     protected final InputQueue inputQueue;
     protected final InputProxy inputProxy;
@@ -937,8 +931,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // are unaffected. Read the interrupt pref from the active player's source
         // (host's local prefs vs the remote client's stored snapshot).
         if (isYieldExperimentalEnabled()) {
-            YieldMode yieldMode = getYieldMode();
-            if (yieldMode != null && yieldMode != YieldMode.NONE
+            forge.gamemodes.match.YieldMode yieldMode = getGui().getYieldMode(getLocalPlayerView());
+            if (yieldMode != null && yieldMode != forge.gamemodes.match.YieldMode.NONE
                     && !getActivePlayerInterruptPref(FPref.YIELD_INTERRUPT_ON_REVEAL)) {
                 // Still show the cards temporarily but skip the dialog that requires user input
                 if (!cards.isEmpty()) {
@@ -1529,11 +1523,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 player.getName(), getGame().getPhaseHandler().getPhase(), getGame().isGameOver());
         final MagicStack stack = getGame().getStack();
 
-        if (FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)
-                && FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS)) {
-            long timeoutMs = computeAvailableActionsBudgetMs(getPlayer());
-            boolean result = AvailableActions.compute(getPlayer(), timeoutMs);
-            getPlayer().getView().setHasAvailableActions(result);
+        if (FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS) && FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS)) {
+            getPlayer().getView().updateHasAvailableActions(getPlayer(),
+                    sa -> ComputerUtilMana.canPayManaCost(sa, getPlayer(), 0, false));
         }
 
         if (mayAutoPass()) {
@@ -1758,8 +1750,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             // Gate on the host's experimental flag and read the interrupt pref from the
             // active player's source (host's local prefs vs the remote client's stored snapshot).
             if (isYieldExperimentalEnabled()) {
-                YieldMode yieldMode = getYieldMode();
-                if (yieldMode != null && yieldMode != YieldMode.NONE
+                forge.gamemodes.match.YieldMode yieldMode = getGui().getYieldMode(getLocalPlayerView());
+                if (yieldMode != null && yieldMode != forge.gamemodes.match.YieldMode.NONE
                         && !getActivePlayerInterruptPref(FPref.YIELD_INTERRUPT_ON_REVEAL)) {
                     // Log the message but don't show a dialog
                     getGame().getGameLog().add(GameLogEntryType.INFORMATION, message);
@@ -3429,17 +3421,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return getGui().isAutoPassingNoActions(getLocalPlayerView());
     }
 
-    private long computeAvailableActionsBudgetMs(Player p) {
-        int prefMs = FModel.getPreferences().getPrefInt(FPref.YIELD_AVAILABLE_ACTIONS_BUDGET_MS);
-        if (prefMs > 0) {
-            return prefMs;   // explicit user override — bypasses clamps
-        }
-        int cardCount = p.getCardsIn(ZoneType.Hand).size()
-                + p.getCardsIn(ZoneType.Battlefield).size()
-                + p.getCardsIn(ZoneType.Flashback).size();
-        return Math.min(1500L, Math.max(50L, 50L * cardCount));
-    }
-
     public boolean didYieldJustEnd() {
         boolean flag = yieldJustEndedFlag;
         yieldJustEndedFlag = false;
@@ -3522,83 +3503,56 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public YieldMode getYieldMode() {
-        if (getGui().isRemoteGuiProxy()) {
-            return yieldModeField;
+    public void notifyYieldStateChanged(final PlayerView playerView, final forge.gamemodes.match.YieldMode mode,
+                                        final forge.gamemodes.match.YieldPrefs prefs) {
+        // Always store the client's prefs snapshot first — they are independent of
+        // mode acceptance, and if we reject the mode below the host still wants the
+        // current prefs for any future interrupt evaluation.
+        if (prefs != null) {
+            getGui().setRemoteYieldPrefs(prefs);
         }
-        return getGui().getCurrentYieldMode(getLocalPlayerView());
-    }
 
-    @Override
-    public void setYieldMode(final YieldMode mode) {
-        YieldMode normalized = mode == null ? YieldMode.NONE : mode;
-        if (getGui().isRemoteGuiProxy()) {
-            // Server-side proxy: check if host has experimental yield enabled before accepting
-            if (normalized != YieldMode.NONE && !isYieldExperimentalEnabled()) {
-                final FServerManager server = FServerManager.getInstance();
-                if (server != null && server.isHosting()) {
-                    server.broadcast(new MessageEvent(
-                        localizer.getMessage("lblYieldHostDisabled", getLocalPlayerView().getName())));
-                }
-                getGui().setHostYieldEnabled(false);
-                if (normalized != YieldMode.UNTIL_END_OF_TURN) {
-                    getGui().syncYieldMode(getLocalPlayerView(), YieldMode.NONE);
-                    return;
-                }
+        // If clearing yield, always pass through
+        if (mode != null && mode != forge.gamemodes.match.YieldMode.NONE && !isYieldExperimentalEnabled()) {
+            // Host doesn't have experimental yield enabled — warn the client
+            final FServerManager server = FServerManager.getInstance();
+            if (server != null && server.isHosting()) {
+                server.broadcast(new MessageEvent(
+                    localizer.getMessage("lblYieldHostDisabled", playerView.getName())));
             }
-            yieldModeField = normalized;
-            getGui().applyRemoteYieldMode(getLocalPlayerView(), normalized);
-            return;
-        }
-        boolean activated = getGui().activateYieldMode(getLocalPlayerView(), normalized);
-        if (activated || normalized == YieldMode.NONE) {
-            yieldModeField = normalized;
-        }
-        if (activated) {
-            getGui().updateAutoPassPrompt();
-        }
-    }
 
-    @Override
-    public boolean getYieldInterruptPref(final FPref pref) {
-        Boolean stored = yieldInterruptPrefs.get(pref);
-        if (stored != null) {
-            return stored;
-        }
-        // Unset: host falls through to FModel (user's saved VYieldSettings),
-        // remote proxies fall back to the FPref default until setYieldPrefs seeds them.
-        if (getGui().isRemoteGuiProxy()) {
-            return "true".equals(pref.getDefault());
-        }
-        return FModel.getPreferences().getPrefBoolean(pref);
-    }
+            // Tell client to disable yield buttons
+            getGui().setHostYieldEnabled(false);
 
-    @Override
-    public void setYieldInterruptPref(final FPref pref, final boolean value) {
-        yieldInterruptPrefs.put(pref, value);
-    }
-
-    @Override
-    public YieldPrefs getYieldPrefs() {
-        return new YieldPrefs(this);
-    }
-
-    @Override
-    public void setYieldPrefs(final YieldPrefs prefs) {
-        if (prefs == null) return;
-        yieldInterruptPrefs.clear();
-        for (Map.Entry<FPref, Boolean> e : prefs.getInterrupts().entrySet()) {
-            yieldInterruptPrefs.put(e.getKey(), e.getValue());
+            // UNTIL_END_OF_TURN works via legacy auto-pass, so allow it through
+            if (mode != forge.gamemodes.match.YieldMode.UNTIL_END_OF_TURN) {
+                // Reject experimental-only modes — clear the client's stuck yield state
+                getGui().syncYieldMode(playerView, forge.gamemodes.match.YieldMode.NONE);
+                return;
+            }
         }
-        setYieldMode(prefs.getMode());
+
+        getGui().setYieldMode(playerView, mode, true);
     }
 
     private boolean isYieldExperimentalEnabled() {
         return FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS);
     }
 
+    /**
+     * Look up a yield interrupt preference for the player this controller represents.
+     * For the host's own player, reads FModel.getPreferences(). For a remote
+     * player, reads the snapshot stored in the per-player NetGuiGame; falls back
+     * to the Forge default value if no snapshot has arrived yet.
+     */
     private boolean getActivePlayerInterruptPref(FPref pref) {
-        return getYieldInterruptPref(pref);
+        if (getGui().isRemoteGuiProxy()) {
+            forge.gamemodes.match.YieldPrefs remote = getGui().getRemoteYieldPrefs();
+            return remote != null
+                ? remote.getInterrupt(pref)
+                : "true".equals(pref.getDefault());
+        }
+        return FModel.getPreferences().getPrefBoolean(pref);
     }
 
     @Override
