@@ -261,8 +261,6 @@ public class CardFactory {
             card.updateKeywordsCache();
         }
 
-        // ******************************************************************
-        // ************** Link to different CardFactories *******************
         buildBattleAbilities(card);
         CardFactoryUtil.setupKeywordedAbilities(card); // Should happen AFTER setting left/right split abilities to set Fuse ability to both sides
         card.updateStateForView();
