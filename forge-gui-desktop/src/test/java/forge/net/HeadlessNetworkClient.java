@@ -2,6 +2,7 @@ package forge.net;
 
 import forge.game.GameView;
 import forge.gamemodes.net.DeltaPacket;
+import forge.gamemodes.net.ChatMessage;
 import forge.util.IHasForgeLog;
 import forge.gamemodes.match.GameLobby.GameLobbyData;
 import forge.gamemodes.net.client.ClientGameLobby;
@@ -237,7 +238,7 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasForgeLog {
         }
 
         @Override
-        public void message(String source, String message, forge.gamemodes.net.ChatMessage.MessageType type) {
+        public void message(String source, String message, ChatMessage.MessageType type) {
             netLog.info("Chat: {}: {}", source, message);
         }
 

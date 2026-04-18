@@ -42,10 +42,6 @@ public class ChatMessage {
         return source == null || source.equals(prefs.getPref(FPref.PLAYER_NAME));
     }
 
-    public boolean isSystemMessage() {
-        return type == MessageType.SYSTEM;
-    }
-
     public MessageType getType() {
         return type;
     }

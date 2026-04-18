@@ -135,7 +135,7 @@ public enum FNetOverlay implements IOnlineChatInterface {
         Color playerColor = (skinTextColor != null) ? skinTextColor.getColor() : Color.WHITE;
         StyleConstants.setForeground(playerStyle, playerColor);
 
-        // Warning style: amber/caution color, distinct from blue system / white player.
+        // Warning style: amber/caution color, distinct from blue system / white player
         StyleConstants.setForeground(warningStyle, new Color(230, 160, 50));
 
         window.setTitle(Localizer.getInstance().getMessage("lblChat"));
