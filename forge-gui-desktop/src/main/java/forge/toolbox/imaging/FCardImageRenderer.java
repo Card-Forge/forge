@@ -44,7 +44,7 @@ import forge.toolbox.FSkin.SkinIcon;
 import forge.util.CardTranslation;
 
 public class FCardImageRenderer {
-    private static boolean isInitialed = false;
+    private static boolean initialized = false;
     private static final float BASE_IMAGE_WIDTH = 488;
     private static final float BASE_IMAGE_HEIGHT = 680;
     private static final float NAME_BOX_TINT = 0.2f;
@@ -99,7 +99,7 @@ public class FCardImageRenderer {
         cachedFonts.put(REMINDER_FONT, new Font[REMINDER_FONT.getSize() * arrayMultiplier]);
         cachedFonts.put(ARTIST_FONT, new Font[ARTIST_FONT.getSize() * arrayMultiplier]);
 
-        isInitialed = true;
+        initialized = true;
     }
 
     private static Color tintColor(Color source, Color tint, float alpha) {
@@ -170,7 +170,7 @@ public class FCardImageRenderer {
     }
 
     public static void drawCardImage(Graphics2D g, CardView card, boolean altState, int width, int height, BufferedImage art, String legalString) {
-        if (!isInitialed) {
+        if (!initialized) {
             initialize();
         }
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);

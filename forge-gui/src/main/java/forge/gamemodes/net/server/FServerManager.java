@@ -372,8 +372,8 @@ public final class FServerManager implements IHasForgeLog {
 
     public void unsetReady() {
         if (this.localLobby != null && this.localLobby.getSlot(0) != null) {
-                this.localLobby.getSlot(0).setIsReady(false);
-                updateLobbyState();
+            this.localLobby.getSlot(0).setIsReady(false);
+            updateLobbyState();
         }
     }
 
