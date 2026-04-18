@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="119">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="120">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -33,7 +33,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzFlT1PAkEQhofDDyiIWmkrxsQoVJhgZyz46DDhB9hoTLSxEEjoBQv9DQRtrIzS2NpbQKGJtkZ/gT06m731lmFv7/bu0Dd5c0xub56d3dkFwF25M3er3vcL42OCSMf1chiJGgaF0ZpMYtM5iG8qRYDdonkcVn3MMUA/5LlN4jCqlHD+6PwWt0kcVNUymcO58xSW46ik4no5Kq7oTyERC44cy+91Ok15s2l/ivi3RilWjQ8q2p//0c/Hrb/p52e8B14knyD3FZ9v0h20j4yDknscRPNtgAXiOrIbLWfMBzI+bc57bDSOUjXCpWJsZiorDhCL898NH/1syqX6tjhTKCbxJ8n1c1bDcvfK3Drd3EfPfbS43bR6B7DWA1gJwKbcrsFePU0BZG3rJNZNXjvK3SY5arifdZc9PZzmNTN7iZ7HFJ7hufb4ONajX7P6XIzrVx2cW9rej6pHXkux5osZgKWMP+7QcvJ0kXmFvjbshaa91jlkbmq4dF/YmrFal7H/0qwHe+r8bG5yv+h8RLgXCYDLhBP7uU/ke4jVwb4ZKs5QJ8vNtEP2aT0JsJH0ZskSc7ud4VyWk3HZU+coJOoT+6aqdxLy4jZ93M1B/pvC1PsD+Z7fXQ==
+   eJzFlT1PAkEQhofDDyiIWmkrxsQoVJhgZyz46DDhB9hoTLSxEEjoBQv9DQRtrIzS2NpbQKGJtkZ/gT06m731luF27/bu0Dd5c0xub5+dndkFQK3cmdpu7/uF8TFBpON6OYxEDoPCaE4msekaxDeVIsBu0TwOqz7OMUA/5LlN4jCqlHD96PwWt0kcVNUyWcO58xSW46jkxvVyVFzRn0IiFhw5lt/rdJryZtP+FPFvjlLsNj6oaH/+Rz8ft/6mn5/xHniRfILcV3y+SXfQPjIOSuo4iObbAAvEdWQ3Ws6YD2R82pz32GgcpWqES8XYzFRWHCAW578bPvrZlEv1bXGmUEziT5Lr56yG5e6VuXW6uY+e+2hxq7R6B7DWA1gJwKbcrkGtnqYAsrZ1Evsm7x3lbpM5aljPuqKmh9M8Z2Yv0fOYwjM81x4fx3r0a1Y/F+P6VQfXlrbrUfWY13LZ88UMwFLGH3doOfN0kXmFvjbshaa91zlkbmq4tC5sz1iuy9h/adaDPff52drkftH5iHAvEgCXCSeW90Yl+R5iebD6Dl3OUCfLzbRD6rSeBNhIOrG8NyqJu+52hnPZnIzLnjpHIZGfqJtbvpOQF7fp424O8t8UJt8fdo7gnw==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -309,6 +309,14 @@
 	}
 ]</property>
     <property name="enemy" value="Whisper"/>
+   </properties>
+  </object>
+  <object id="119" template="../../../../common/maps/obj/shop.tx" x="79.5" y="437.5">
+   <properties>
+    <property name="commonShopList" value="NewDominariaBoosters"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
    </properties>
   </object>
  </objectgroup>
