@@ -74,8 +74,8 @@ Replace=.024F Uncommon:fromSheet("FDN borderless")
 33 U Clinquant Skymage @Kevin Sidharta
 34 R Curator of Destinies @Ralph Horsley
 35 R Drake Hatcher @Chris Rallis
-36 C Elementalist Adept @LA Draws
-37 C Erudite Wizard @Joannis Fiore
+36 C Elementalist Adept @L.A. Draws
+37 C Erudite Wizard @Ioannis Fiore
 38 U Faebloom Trick @Annie Stegg
 39 U Grappling Kraken @Ben Wootten
 40 R High Fae Trickster @Justyna Dura
@@ -408,7 +408,7 @@ Replace=.024F Uncommon:fromSheet("FDN borderless")
 [alternate art]
 362 M Sire of Seven Deaths @Alexander Mokhov
 363 R Arahbo, the First Fang @Chris Rahn
-364 R Celestial Armor @Olena Richards
+364 R Celestial Armor @José Parodi
 365 R Crystal Barricade @Alayna Danner
 366 R Exemplar of Light @Chris Rahn
 367 R Giada, Font of Hope @Scott M. Fischer
@@ -466,7 +466,7 @@ Replace=.024F Uncommon:fromSheet("FDN borderless")
 419 M Liliana, Dreadhorde General @Dmitry Burmak
 420 M Chandra, Flameshaper @Lie Setiawan
 421 M Vivien Reid @Zara Alfonso
-432 M Day of Judgment @Toshiaki Takayama
+432 M Day of Judgment @Takayama Toshiaki
 433 M Herald of Eternal Dawn @Nijihayashi
 434 M Kaito, Cunning Infiltrator @Ittoku
 435 M Think Twice @HNCL
@@ -478,7 +478,7 @@ Replace=.024F Uncommon:fromSheet("FDN borderless")
 441 M Progenitus @Sansyu
 
 [showcase]
-422 M Day of Judgment @Toshiaki Takayama
+422 M Day of Judgment @Takayama Toshiaki
 423 M Herald of Eternal Dawn @Nijihayashi
 424 M Kaito, Cunning Infiltrator @Ittoku
 425 M Think Twice @HNCL
@@ -779,6 +779,47 @@ Replace=.024F Uncommon:fromSheet("FDN borderless")
 726 U Hedron Archive @Craig J Spearing
 727 M Maze's End @Cliff Childs
 730 C Hinterland Sanctifier @Justine Cruz
+731 C Crusader of Odric @Michael Komarck
+732 C Dazzling Angel @Daneen Wilkerson
+733 R Exemplar of Light @Ekaterina Burmak
+734 C Healer's Hawk @Milivoj Ćeran
+735 U Herald of Faith @Tommy Arnold
+736 C Inspiring Overseer @Irina Nordsol
+737 R Linden, the Steadfast Queen @Ryan Pancoast
+738 M Lyra Dawnbringer @Chris Rahn
+739 U Prayer of Binding @Wylie Beckert
+740 U Serra Angel @Greg Staples
+741 R Arcanis the Omnipotent @Justin Sweet
+742 C Icewind Elemental @Andrew Mar
+743 C Kitesail Corsair @Greg Opalinski
+744 C Mocking Sprite @Ben Hill
+745 U Rune-Sealed Wall @Rockey Chen
+746 U Spectral Sailor @Cristi Balanescu
+747 M Sphinx of the Final Word @Lius Lasahido
+748 C Strix Lookout
+749 R Tempest Djinn @Zezhou Chen
+750 C Unsummon @Ron Spencer
+751 U Bloodtithe Collector @Maria Zolotukhina
+752 U Gatekeeper of Malakir @Karl Kopinski
+753 R Kalastria Highborn @D. Alexander Gregory
+754 M Massacre Wurm @Jason Chan
+755 C Pulse Tracker @Andrew Robinson
+756 C Vampire Interloper @James Ryman
+757 U Vampire Nighthawk @Jason Chan
+758 C Vampire Soulcaller @Aaron J. Riley
+759 C Carnelian Orb of Dragonkind @Lars Grant-West
+760 R Drakuseth, Maw of Flames @Grzegorz Rutkowski
+761 U Firespitter Whelp @David Álvarez
+762 C Kargan Dragonrider @Greg Opalinski
+763 U Shivan Dragon @Donato Giancola
+764 R Terror of Mount Velus @Billy Christian
+765 U Pelakka Wurm @Daniel Ljunggren
+766 R Primal Might @Randy Vargas
+767 C Springbloom Druid @Randy Gallegos
+768 R Surrak, the Hunt Caller @Wesley Burt
+769 M Vizier of the Menagerie @Victor Adame Minguez
+770 U Diamond Mare @Alayna Danner
+771 U Cryptic Caves @Sung Choi
 
 [promo]
 728 R Phyrexian Arena @Aaron J. Riley
