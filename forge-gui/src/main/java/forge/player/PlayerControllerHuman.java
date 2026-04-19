@@ -98,9 +98,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     private IGuiGame gui;
 
-    private final Set<String> autoYields = Sets.newHashSet();
-    private final Map<Integer, Boolean> triggersAlwaysAccept = Maps.newTreeMap();
-    private boolean disableAutoYields;
+    // Inlined server-side mirror used only when this controller serves a remote network
+    // player (gui instanceof RemoteClientGuiGame). Two scope buckets so the host doesn't
+    // need to know the client's UI_AUTO_YIELD_MODE: the client tells us which bucket via
+    // the isAbilityScope flag on setShouldAutoYield.
+    private final Set<String> remoteCardYields = Sets.newHashSet();
+    private final Set<String> remoteAbilityYields = Sets.newHashSet();
+    private final Map<Integer, Boolean> remoteTriggerDecisions = Maps.newTreeMap();
+    private boolean remoteAutoYieldsDisabled;
 
     protected final InputQueue inputQueue;
     protected final InputProxy inputProxy;
@@ -3486,69 +3491,119 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // No-op for local games - resync is only used for network play
     }
 
-    @Override
-    public boolean shouldAutoYield(final String key) {
-        String abilityKey = key.contains("): ") ? key.substring(key.indexOf("): ") + 3) : key;
-        boolean yieldPerAbility = FModel.getPreferences().getPref(FPref.UI_AUTO_YIELD_MODE)
-                .equals(ForgeConstants.AUTO_YIELD_PER_ABILITY);
-        return !disableAutoYields && autoYields.contains(yieldPerAbility ? abilityKey : key);
+    private boolean isRemoteClient() {
+        return gui instanceof forge.gamemodes.net.server.RemoteClientGuiGame;
+    }
+
+    private AutoYieldStore localStore() {
+        return ((LobbyPlayerHuman) getLobbyPlayer()).getYieldStore();
+    }
+
+    private boolean activeModeIsInstall() {
+        return ForgeConstants.AUTO_YIELD_PER_ABILITY_INSTALL.equals(
+                FModel.getPreferences().getPref(FPref.UI_AUTO_YIELD_MODE));
+    }
+
+    private AutoYieldStore.Tier activeTier() {
+        String mode = FModel.getPreferences().getPref(FPref.UI_AUTO_YIELD_MODE);
+        if (ForgeConstants.AUTO_YIELD_PER_CARD.equals(mode))            return AutoYieldStore.Tier.GAME;
+        if (ForgeConstants.AUTO_YIELD_PER_ABILITY_SESSION.equals(mode)) return AutoYieldStore.Tier.SESSION;
+        return AutoYieldStore.Tier.MATCH;
     }
 
     @Override
-    public void setShouldAutoYield(final String key, final boolean autoYield) {
-        String abilityKey = key.contains("): ") ? key.substring(key.indexOf("): ") + 3) : key;
-        boolean yieldPerAbility = FModel.getPreferences().getPref(FPref.UI_AUTO_YIELD_MODE)
-                .equals(ForgeConstants.AUTO_YIELD_PER_ABILITY);
-        if (autoYield) {
-            autoYields.add(yieldPerAbility ? abilityKey : key);
-        } else {
-            autoYields.remove(yieldPerAbility ? abilityKey : key);
+    public boolean shouldAutoYield(final String key) {
+        if (isRemoteClient()) {
+            if (remoteAutoYieldsDisabled) return false;
+            if (remoteCardYields.contains(key)) return true;
+            return remoteAbilityYields.contains(AutoYieldStore.abilitySuffix(key));
         }
+        if (localStore().isDisabled()) return false;
+        if (activeModeIsInstall()) {
+            return PersistentYieldStore.get().contains(AutoYieldStore.abilitySuffix(key));
+        }
+        boolean abilityScope = activeTier() != AutoYieldStore.Tier.GAME;
+        String storageKey = abilityScope ? AutoYieldStore.abilitySuffix(key) : key;
+        return localStore().shouldYield(activeTier(), storageKey);
+    }
+
+    @Override
+    public void setShouldAutoYield(final String key, final boolean autoYield, final boolean isAbilityScope) {
+        if (isRemoteClient()) {
+            Set<String> bucket = isAbilityScope ? remoteAbilityYields : remoteCardYields;
+            if (autoYield) bucket.add(key); else bucket.remove(key);
+            return;
+        }
+        if (activeModeIsInstall()) {
+            PersistentYieldStore.get().setYield(AutoYieldStore.abilitySuffix(key), autoYield);
+            return;
+        }
+        String storageKey = isAbilityScope ? AutoYieldStore.abilitySuffix(key) : key;
+        localStore().setYield(activeTier(), storageKey, autoYield);
     }
 
     @Override
     public Iterable<String> getAutoYields() {
-        return autoYields;
+        if (isRemoteClient()) {
+            return com.google.common.collect.Iterables.concat(remoteCardYields, remoteAbilityYields);
+        }
+        if (activeModeIsInstall()) return PersistentYieldStore.get().getYields();
+        return localStore().getYields(activeTier());
     }
 
     @Override
     public void clearAutoYields() {
-        autoYields.clear();
-        triggersAlwaysAccept.clear();
+        if (isRemoteClient()) {
+            remoteCardYields.clear();
+            remoteAbilityYields.clear();
+            remoteTriggerDecisions.clear();
+            return;
+        }
+        AutoYieldStore s = localStore();
+        s.onGameEnd();
+        if (getGame() == null || getGame().getView().isMatchOver()) {
+            s.onMatchEnd();
+        }
     }
 
     @Override
     public boolean getDisableAutoYields() {
-        return disableAutoYields;
+        return isRemoteClient() ? remoteAutoYieldsDisabled : localStore().isDisabled();
     }
 
     @Override
     public void setDisableAutoYields(final boolean disable) {
-        disableAutoYields = disable;
+        if (isRemoteClient()) remoteAutoYieldsDisabled = disable;
+        else localStore().setDisabled(disable);
     }
 
     @Override
     public boolean shouldAlwaysAcceptTrigger(final int trigger) {
-        return Boolean.TRUE.equals(triggersAlwaysAccept.get(trigger));
+        if (isRemoteClient()) return Boolean.TRUE.equals(remoteTriggerDecisions.get(trigger));
+        return localStore().getTriggerDecision(trigger) == AutoYieldStore.TriggerDecision.ACCEPT;
     }
 
     @Override
     public boolean shouldAlwaysDeclineTrigger(final int trigger) {
-        return Boolean.FALSE.equals(triggersAlwaysAccept.get(trigger));
+        if (isRemoteClient()) return Boolean.FALSE.equals(remoteTriggerDecisions.get(trigger));
+        return localStore().getTriggerDecision(trigger) == AutoYieldStore.TriggerDecision.DECLINE;
     }
 
     @Override
     public void setShouldAlwaysAcceptTrigger(final int trigger) {
-        triggersAlwaysAccept.put(trigger, Boolean.TRUE);
+        if (isRemoteClient()) remoteTriggerDecisions.put(trigger, Boolean.TRUE);
+        else localStore().setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.ACCEPT);
     }
 
     @Override
     public void setShouldAlwaysDeclineTrigger(final int trigger) {
-        triggersAlwaysAccept.put(trigger, Boolean.FALSE);
+        if (isRemoteClient()) remoteTriggerDecisions.put(trigger, Boolean.FALSE);
+        else localStore().setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.DECLINE);
     }
 
     @Override
     public void setShouldAlwaysAskTrigger(final int trigger) {
-        triggersAlwaysAccept.remove(trigger);
+        if (isRemoteClient()) remoteTriggerDecisions.remove(trigger);
+        else localStore().setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.ASK);
     }
 }

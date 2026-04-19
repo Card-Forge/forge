@@ -1,7 +1,5 @@
 package forge.gamemodes.net.client;
 
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.player.actions.PlayerAction;
@@ -18,17 +16,12 @@ import forge.model.FModel;
 import forge.util.ITriggerEvent;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public class NetGameController implements IGameController {
 
     private final GameProtocolSender sender;
 
-    // Local mirror of yield state for UI display
-    private final Set<String> autoYields = Sets.newHashSet();
-    private final Map<Integer, Boolean> triggersAlwaysAccept = Maps.newTreeMap();
-    private boolean disableAutoYields;
+    private final forge.player.AutoYieldStore yieldStore = new forge.player.AutoYieldStore();
 
     public NetGameController(final IToServer server) {
         this.sender = new GameProtocolSender(server);
@@ -139,74 +132,96 @@ public class NetGameController implements IGameController {
         send(ProtocolMethod.requestResync);
     }
 
-    @Override
-    public boolean shouldAutoYield(final String key) {
-        String abilityKey = key.contains("): ") ? key.substring(key.indexOf("): ") + 3) : key;
-        boolean yieldPerAbility = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_AUTO_YIELD_MODE)
-                .equals(ForgeConstants.AUTO_YIELD_PER_ABILITY);
-        return !disableAutoYields && autoYields.contains(yieldPerAbility ? abilityKey : key);
+    private boolean activeModeIsInstall() {
+        return ForgeConstants.AUTO_YIELD_PER_ABILITY_INSTALL.equals(
+                FModel.getPreferences().getPref(ForgePreferences.FPref.UI_AUTO_YIELD_MODE));
+    }
+
+    private boolean activeModeIsAbilityScope() {
+        return !ForgeConstants.AUTO_YIELD_PER_CARD.equals(
+                FModel.getPreferences().getPref(ForgePreferences.FPref.UI_AUTO_YIELD_MODE));
+    }
+
+    private forge.player.AutoYieldStore.Tier activeTier() {
+        String mode = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_AUTO_YIELD_MODE);
+        if (ForgeConstants.AUTO_YIELD_PER_CARD.equals(mode))            return forge.player.AutoYieldStore.Tier.GAME;
+        if (ForgeConstants.AUTO_YIELD_PER_ABILITY_SESSION.equals(mode)) return forge.player.AutoYieldStore.Tier.SESSION;
+        return forge.player.AutoYieldStore.Tier.MATCH;
     }
 
     @Override
-    public void setShouldAutoYield(final String key, final boolean autoYield) {
-        String abilityKey = key.contains("): ") ? key.substring(key.indexOf("): ") + 3) : key;
-        boolean yieldPerAbility = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_AUTO_YIELD_MODE)
-                .equals(ForgeConstants.AUTO_YIELD_PER_ABILITY);
-        if (autoYield) {
-            autoYields.add(yieldPerAbility ? abilityKey : key);
-        } else {
-            autoYields.remove(yieldPerAbility ? abilityKey : key);
+    public boolean shouldAutoYield(final String key) {
+        if (yieldStore.isDisabled()) return false;
+        if (activeModeIsInstall()) {
+            return forge.player.PersistentYieldStore.get().contains(forge.player.AutoYieldStore.abilitySuffix(key));
         }
-        send(ProtocolMethod.setShouldAutoYield, key, autoYield);
+        String storageKey = activeModeIsAbilityScope() ? forge.player.AutoYieldStore.abilitySuffix(key) : key;
+        return yieldStore.shouldYield(activeTier(), storageKey);
+    }
+
+    @Override
+    public void setShouldAutoYield(final String key, final boolean autoYield, final boolean isAbilityScope) {
+        if (activeModeIsInstall()) {
+            forge.player.PersistentYieldStore.get().setYield(forge.player.AutoYieldStore.abilitySuffix(key), autoYield);
+        } else {
+            String storageKey = isAbilityScope ? forge.player.AutoYieldStore.abilitySuffix(key) : key;
+            yieldStore.setYield(activeTier(), storageKey, autoYield);
+        }
+        send(ProtocolMethod.setShouldAutoYield, key, autoYield, isAbilityScope);
     }
 
     @Override
     public Iterable<String> getAutoYields() {
-        return autoYields;
+        return activeModeIsInstall()
+                ? forge.player.PersistentYieldStore.get().getYields()
+                : yieldStore.getYields(activeTier());
     }
 
     @Override
     public void clearAutoYields() {
-        autoYields.clear();
-        triggersAlwaysAccept.clear();
+        // No-op locally: tier lifecycle is driven separately. Server-side mirror is cleared by HostedMatch.
     }
 
     @Override
-    public boolean getDisableAutoYields() {
-        return disableAutoYields;
-    }
+    public boolean getDisableAutoYields() { return yieldStore.isDisabled(); }
 
     @Override
-    public void setDisableAutoYields(final boolean disable) {
-        disableAutoYields = disable;
-    }
+    public void setDisableAutoYields(final boolean disable) { yieldStore.setDisabled(disable); }
 
     @Override
     public boolean shouldAlwaysAcceptTrigger(final int trigger) {
-        return Boolean.TRUE.equals(triggersAlwaysAccept.get(trigger));
+        return yieldStore.getTriggerDecision(trigger) == forge.player.AutoYieldStore.TriggerDecision.ACCEPT;
     }
 
     @Override
     public boolean shouldAlwaysDeclineTrigger(final int trigger) {
-        return Boolean.FALSE.equals(triggersAlwaysAccept.get(trigger));
+        return yieldStore.getTriggerDecision(trigger) == forge.player.AutoYieldStore.TriggerDecision.DECLINE;
     }
 
     @Override
     public void setShouldAlwaysAcceptTrigger(final int trigger) {
-        triggersAlwaysAccept.put(trigger, Boolean.TRUE);
+        yieldStore.setTriggerDecision(trigger, forge.player.AutoYieldStore.TriggerDecision.ACCEPT);
         send(ProtocolMethod.setShouldAlwaysAcceptTrigger, trigger);
     }
 
     @Override
     public void setShouldAlwaysDeclineTrigger(final int trigger) {
-        triggersAlwaysAccept.put(trigger, Boolean.FALSE);
+        yieldStore.setTriggerDecision(trigger, forge.player.AutoYieldStore.TriggerDecision.DECLINE);
         send(ProtocolMethod.setShouldAlwaysDeclineTrigger, trigger);
     }
 
     @Override
     public void setShouldAlwaysAskTrigger(final int trigger) {
-        triggersAlwaysAccept.remove(trigger);
+        yieldStore.setTriggerDecision(trigger, forge.player.AutoYieldStore.TriggerDecision.ASK);
         send(ProtocolMethod.setShouldAlwaysAskTrigger, trigger);
+    }
+
+    /** Replays all currently-active yields to the host. Called from FGameClient.setGameControllers. */
+    public void replayActiveYields() {
+        boolean abilityScope = activeModeIsAbilityScope();
+        for (String key : getAutoYields()) {
+            send(ProtocolMethod.setShouldAutoYield, key, Boolean.TRUE, abilityScope);
+        }
     }
 
     private IMacroSystem macros;
