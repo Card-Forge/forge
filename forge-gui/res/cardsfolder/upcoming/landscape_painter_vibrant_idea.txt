@@ -10,7 +10,7 @@ Oracle:This creature enters prepared. (While it's prepared, you may cast a copy 
 ALTERNATE
 
 Name:Vibrant Idea
-ManaCost:2 U
+ManaCost:4 U
 Types:Sorcery
 A:SP$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards.
 Oracle:Draw two cards.
