@@ -293,7 +293,7 @@ public class FCardImageRenderer {
      * (e.g. for specialize faces that aren't the CardView's current or alternate state).
      */
     public static void drawCardStateImage(Graphics2D g, CardStateView state, int width, int height, BufferedImage art, String legalString) {
-        if (!isInitialed) {
+        if (!initialized) {
             initialize();
         }
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
