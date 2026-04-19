@@ -2391,20 +2391,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         inputProxy.selectButtonCancel();
     }
 
-    @Override
-    public void selectButtonOkIfInputConfirm() {
-        if (inputQueue.getInput() instanceof InputConfirm) {
-            selectButtonOk();
-        }
-    }
-
-    @Override
-    public void selectButtonCancelIfInputConfirm() {
-        if (inputQueue.getInput() instanceof InputConfirm) {
-            selectButtonCancel();
-        }
-    }
-
     public void confirm() {
         if (inputQueue.getInput() instanceof InputConfirm) {
             selectButtonOk();
@@ -3554,11 +3540,17 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public void setShouldAlwaysAcceptTrigger(final int trigger) {
         triggersAlwaysAccept.put(trigger, Boolean.TRUE);
+        if (inputQueue.getInput() instanceof InputConfirm) {
+            selectButtonOk();
+        }
     }
 
     @Override
     public void setShouldAlwaysDeclineTrigger(final int trigger) {
         triggersAlwaysAccept.put(trigger, Boolean.FALSE);
+        if (inputQueue.getInput() instanceof InputConfirm) {
+            selectButtonCancel();
+        }
     }
 
     @Override

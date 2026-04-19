@@ -308,10 +308,6 @@ public class VStack extends FDropDown {
                                             }
                                             else {
                                                 controller.setShouldAlwaysAcceptTrigger(triggerID);
-                                                if (stackInstance.equals(gameView.peekStack())) {
-                                                    //auto-yes if already in the matching InputConfirm
-                                                    controller.selectButtonOkIfInputConfirm();
-                                                }
                                             }
                                         }));
                                 addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblAlwaysNo"),
@@ -322,10 +318,6 @@ public class VStack extends FDropDown {
                                             }
                                             else {
                                                 controller.setShouldAlwaysDeclineTrigger(triggerID);
-                                                if (stackInstance.equals(gameView.peekStack())) {
-                                                    //auto-no if already in the matching InputConfirm
-                                                    controller.selectButtonCancelIfInputConfirm();
-                                                }
                                             }
                                         }));
                             }

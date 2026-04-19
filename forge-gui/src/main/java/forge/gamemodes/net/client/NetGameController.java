@@ -77,16 +77,6 @@ public class NetGameController implements IGameController {
     }
 
     @Override
-    public void selectButtonOkIfInputConfirm() {
-        send(ProtocolMethod.selectButtonOkIfInputConfirm);
-    }
-
-    @Override
-    public void selectButtonCancelIfInputConfirm() {
-        send(ProtocolMethod.selectButtonCancelIfInputConfirm);
-    }
-
-    @Override
     public void selectAbility(final SpellAbilityView sa) {
         send(ProtocolMethod.selectAbility, sa);
     }
