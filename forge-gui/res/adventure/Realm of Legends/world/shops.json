@@ -816,10 +816,174 @@
 			{ "type": "item","count":1, "itemName": "Staff of Invisibility"  },
 			{ "type": "item","count":1, "itemName": "Bronze Blessing of Speed"  },
 			{ "type": "item","count":1, "itemName": "Silver Blessing of Speed"  },
-			{ "type": "item","count":1, "itemName": "Gold Blessing of Speed"  }
-			]
+			{ "type": "item","count":1, "itemName": "Gold Blessing of Speed"  },
+            {"type": "cardPackShop", "count": 1, "editions": ["THB"] },
+            {"type": "cardPackShop", "count": 1, "editions": ["THB"] },
+            {"type": "cardPackShop", "count": 1, "editions": ["THB"] },
+            {"type": "cardPackShop", "count": 1, "editions": ["THB"] }
+          ]
 		
 		},
+  {
+    "name":"BloomburrowBoosters",
+    "description":"Bumbleflower's Boosters",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"BoosterShop",
+    "rewards": [
+      {"type": "cardPackShop", "count": 1, "editions": ["BLB"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["BLB"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["BLB"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["BLB"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["BLB"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["BLB"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["BLB"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["BLB"] }
+    ]
+  },
+  {
+    "name":"OutlawBoosters",
+    "description":"Outlaw's Draw",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"BoosterShop",
+    "rewards": [
+      {"type": "cardPackShop", "count": 1, "editions": ["OTJ"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["OTJ"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["OTJ"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["OTJ"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["OTJ"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["OTJ"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["OTJ"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["OTJ"] }
+    ]
+  },
+  {
+    "name":"EdgeBoosters",
+    "description":"Vending Machine of Eternities",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"BoosterShop",
+    "rewards": [
+      {"type": "cardPackShop", "count": 1, "editions": ["EOE"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["EOE"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["EOE"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["EOE"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["EOE"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["EOE"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["EOE"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["EOE"] }
+    ]
+  },
+  {
+    "name":"NewDominariaBoosters",
+    "description":"Packed in Dominaria",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"BoosterShop",
+    "rewards": [
+      {"type": "cardPackShop", "count": 1, "editions": ["DOM"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["DOM"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["DOM"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["DOM"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["DMU"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["DMU"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["DMU"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["DMU"] }
+    ]
+  },
+  {
+    "name":"OldDominariaBoosters",
+    "description":"Dominarian Vintage",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"BoosterShop",
+    "rewards": [
+      {"type": "cardPackShop", "count": 1, "editions": ["WTH"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["TMP"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["STH"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["EXO"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["INV"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["PLS"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["APC"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["MMQ"] }
+    ]
+  },
+  {
+    "name":"ClassicBoosters",
+    "description":"Sealed Core",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"BoosterShop",
+    "rewards": [
+      {"type": "cardPackShop", "count": 1, "editions": ["4ED"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["5ED"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["6ED"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["7ED"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["8ED"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["9ED"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["10E"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["CHR"] }
+    ]
+  },
+  {
+    "name":"ZendikarBoosters",
+    "description":"Hedron Crackers",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"BoosterShop",
+    "rewards": [
+      {"type": "cardPackShop", "count": 1, "editions": ["ZEN"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["WWK"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["ROE"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["BFZ"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["OGW"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["ZNR"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["ZEN"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["ZNR"] }
+    ]
+  },
+  {
+    "name":"AlaraBoosters",
+    "description":"Conflux of Commerce",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"BoosterShop",
+    "rewards": [
+      {"type": "cardPackShop", "count": 1, "editions": ["ALA"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["ALA"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["ALA"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["ALA"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["ARB"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["ARB"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["CON"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["CON"] }
+    ]
+  },
+  {
+    "name":"EldraineBoosters",
+    "description":"Throne of Packs",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"BoosterShop",
+    "rewards": [
+      {"type": "cardPackShop", "count": 1, "editions": ["ELD"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["ELD"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["ELD"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["ELD"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["WOE"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["WOE"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["WOE"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["WOE"] }
+    ]
+  },
+  {
+    "name":"InnistradBoosters",
+    "description":"Packed with Terror",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"BoosterShop",
+    "rewards": [
+      {"type": "cardPackShop", "count": 1, "editions": ["ISD"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["ISD"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["DKA"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["AVR"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["SOI"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["EMN"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["MID"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["VOW"] }
+    ]
+  },
 {                                      
 "name":"Swamp",    
 "description":"Swamps For Sale",

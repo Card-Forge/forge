@@ -3272,8 +3272,6 @@ public class CardFactoryUtil {
             newSA.setAlternativeCost(AlternativeCost.Overload);
             inst.addSpellAbility(newSA);
         } else if (keyword.equals("Paradigm")) {
-            // Paradigm does modify existing SA, and does not add new one
-
             // Add the Paradigm effect as a subAbility
             String abExile = "DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile";
             final AbilitySub saExile = (AbilitySub) AbilityFactory.getAbility(abExile, card);

@@ -1,0 +1,17 @@
+Name:Quill-Blade Laureate
+ManaCost:1 W
+Types:Creature Human Cleric
+PT:1/1
+K:Double Strike
+K:ETBReplacement:Other:DBPrepare
+SVar:DBPrepare:DB$ AlterAttribute | Attributes$ Prepared | SpellDescription$ This creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+AlternateMode:Prepare
+Oracle:Double strike\nThis creature enters prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+
+ALTERNATE
+
+Name:Twofold Intent
+ManaCost:1 W
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +1 | KW$ Double Strike | SpellDescription$ Target creature gets +1/+0 and gains double strike until end of turn.
+Oracle:Target creature gets +1/+0 and gains double strike until end of turn.

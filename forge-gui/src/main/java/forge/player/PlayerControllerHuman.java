@@ -98,9 +98,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     private IGuiGame gui;
 
-    private final Set<String> autoYields = Sets.newHashSet();
-    private final Map<Integer, Boolean> triggersAlwaysAccept = Maps.newTreeMap();
-    private boolean disableAutoYields;
+    // Inlined server-side mirror used only when this controller serves a remote network
+    // player (gui instanceof RemoteClientGuiGame). Two scope buckets so the host doesn't
+    // need to know the client's UI_AUTO_YIELD_MODE: the client tells us which bucket via
+    // the isAbilityScope flag on setShouldAutoYield.
+    private final Set<String> remoteCardYields = Sets.newHashSet();
+    private final Set<String> remoteAbilityYields = Sets.newHashSet();
+    private final Map<Integer, Boolean> remoteTriggerDecisions = Maps.newTreeMap();
+    private boolean remoteAutoYieldsDisabled;
 
     protected final InputQueue inputQueue;
     protected final InputProxy inputProxy;
@@ -814,9 +819,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 cardView = wrapper.getCardView();
             return this.getGui().confirm(cardView, buildQuestion.toString().replaceAll("\n", " "));
         } else {
-            final InputConfirm inp = new InputConfirm(this, buildQuestion.toString(), wrapper);
-            inp.showAndWait();
-            return inp.getResult();
+            return InputConfirm.confirm(this, wrapper, buildQuestion.toString());
         }
     }
 
@@ -831,7 +834,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         if (getGame().getPlayers().size() == 2) {
             prompt += "\n\n" + localizer.getMessage("lblWouldYouLiketoPlayorDraw");
-            final InputConfirm inp = new InputConfirm(this, prompt, localizer.getMessage("lblPlay"), localizer.getMessage("lblDraw"));
+            final InputConfirm inp = new InputConfirm(this, prompt, localizer.getMessage("lblPlay"), localizer.getMessage("lblDraw"), true);
             inp.showAndWait();
             return inp.getResult() ? this.player : this.player.getOpponents().get(0);
         }
@@ -1021,8 +1024,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
             tempShowCard(c);
             getGui().setCard(view);
-            boolean result = false;
-            result = InputConfirm.confirm(this, view, localizer.getMessage("lblPutCardsOnTheTopLibraryOrGraveyard", CardTranslation.getTranslatedName(view.getName())),
+            boolean result = InputConfirm.confirm(this, view, localizer.getMessage("lblPutCardsOnTheTopLibraryOrGraveyard", CardTranslation.getTranslatedName(view.getName())),
                     true, ImmutableList.of(localizer.getMessage("lblLibrary"), localizer.getMessage("lblGraveyard")));
             if (result) {
                 toTop = topN;
@@ -1059,8 +1061,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         tempShowCard(c);
         getGui().setCard(c.getView());
 
-        boolean result = false;
-        result = InputConfirm.confirm(this, view, localizer.getMessage("lblPutCardOnTopOrBottomLibrary", CardTranslation.getTranslatedName(view.getName())),
+        boolean result = InputConfirm.confirm(this, view, localizer.getMessage("lblPutCardOnTopOrBottomLibrary", CardTranslation.getTranslatedName(view.getName())),
                 true, ImmutableList.of(localizer.getMessage("lblTop"), localizer.getMessage("lblBottom")));
 
         endTempShowCards();
@@ -1448,9 +1449,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 cardView = effectSA == null ? null : effectSA.getCardView();
             return this.getGui().confirm(cardView, question.replaceAll("\n", " "));
         } else {
-            final InputConfirm inp = new InputConfirm(this, question, effectSA);
-            inp.showAndWait();
-            return inp.getResult();
+            return InputConfirm.confirm(this, effectSA, question);
         }
     }
 
@@ -1717,14 +1716,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     cardView = CardView.getCardForUi(iPaperCard);
                 else
                     cardView = sa.getHostCard().getView();
-                getGui().confirm(cardView, message, ImmutableList.of(localizer.getMessage("lblOK")));
+                getGui().confirm(cardView, message, true, ImmutableList.of(localizer.getMessage("lblOK")));
             } else {
                 getGui().message(message, sa == null || sa.getHostCard() == null ? "" : CardView.get(sa.getHostCard()).toString());
             }
         }
     }
-
-    // end of not related candidates for move.
 
     /*
      * (non-Javadoc)
@@ -1884,9 +1881,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
             return this.getGui().confirm(cardView, question.replaceAll("\n", " "));
         } else {
-            final InputConfirm inp = new InputConfirm(this, question, sa);
-            inp.showAndWait();
-            return inp.getResult();
+            return InputConfirm.confirm(this, sa, question);
         }
     }
 
@@ -2391,12 +2386,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         inputProxy.selectButtonCancel();
     }
 
-    public void confirm() {
-        if (inputQueue.getInput() instanceof InputConfirm) {
-            selectButtonOk();
-        }
-    }
-
     @Override
     public void passPriority() {
         passPriority(false);
@@ -2806,7 +2795,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
             final Player player = gameCachePlayer.get(pv);
 
-            final Integer life = getGui().getInteger(localizer.getMessage("lblSetLifetoWhat"), 0);
+            final Integer life = getGui().getInteger(localizer.getMessage("lblSetLifetoWhat"), 0, Integer.MAX_VALUE, false);
             if (life == null) {
                 return;
             }
@@ -3486,60 +3475,104 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // No-op for local games - resync is only used for network play
     }
 
-    @Override
-    public boolean shouldAutoYield(final String key) {
-        String abilityKey = key.contains("): ") ? key.substring(key.indexOf("): ") + 3) : key;
-        boolean yieldPerAbility = FModel.getPreferences().getPref(FPref.UI_AUTO_YIELD_MODE)
-                .equals(ForgeConstants.AUTO_YIELD_PER_ABILITY);
-        return !disableAutoYields && autoYields.contains(yieldPerAbility ? abilityKey : key);
+    private boolean isRemoteClient() {
+        return gui instanceof forge.gamemodes.net.server.RemoteClientGuiGame;
+    }
+
+    private AutoYieldStore localStore() {
+        return ((LobbyPlayerHuman) getLobbyPlayer()).getYieldStore();
+    }
+
+    private boolean activeModeIsInstall() {
+        return ForgeConstants.AUTO_YIELD_PER_ABILITY_INSTALL.equals(
+                FModel.getPreferences().getPref(FPref.UI_AUTO_YIELD_MODE));
+    }
+
+    private AutoYieldStore.Tier activeTier() {
+        String mode = FModel.getPreferences().getPref(FPref.UI_AUTO_YIELD_MODE);
+        if (ForgeConstants.AUTO_YIELD_PER_CARD.equals(mode))            return AutoYieldStore.Tier.GAME;
+        if (ForgeConstants.AUTO_YIELD_PER_ABILITY_SESSION.equals(mode)) return AutoYieldStore.Tier.SESSION;
+        return AutoYieldStore.Tier.MATCH;
     }
 
     @Override
-    public void setShouldAutoYield(final String key, final boolean autoYield) {
-        String abilityKey = key.contains("): ") ? key.substring(key.indexOf("): ") + 3) : key;
-        boolean yieldPerAbility = FModel.getPreferences().getPref(FPref.UI_AUTO_YIELD_MODE)
-                .equals(ForgeConstants.AUTO_YIELD_PER_ABILITY);
-        if (autoYield) {
-            autoYields.add(yieldPerAbility ? abilityKey : key);
-        } else {
-            autoYields.remove(yieldPerAbility ? abilityKey : key);
+    public boolean shouldAutoYield(final String key) {
+        if (isRemoteClient()) {
+            if (remoteAutoYieldsDisabled) return false;
+            if (remoteCardYields.contains(key)) return true;
+            return remoteAbilityYields.contains(AutoYieldStore.abilitySuffix(key));
         }
+        if (localStore().isDisabled()) return false;
+        if (activeModeIsInstall()) {
+            return PersistentYieldStore.get().contains(AutoYieldStore.abilitySuffix(key));
+        }
+        boolean abilityScope = activeTier() != AutoYieldStore.Tier.GAME;
+        String storageKey = abilityScope ? AutoYieldStore.abilitySuffix(key) : key;
+        return localStore().shouldYield(activeTier(), storageKey);
+    }
+
+    @Override
+    public void setShouldAutoYield(final String key, final boolean autoYield, final boolean isAbilityScope) {
+        if (isRemoteClient()) {
+            Set<String> bucket = isAbilityScope ? remoteAbilityYields : remoteCardYields;
+            if (autoYield) bucket.add(key); else bucket.remove(key);
+            return;
+        }
+        String storageKey = isAbilityScope ? AutoYieldStore.abilitySuffix(key) : key;
+        if (activeModeIsInstall()) {
+            PersistentYieldStore.get().setYield(storageKey, autoYield);
+            return;
+        }
+        localStore().setYield(activeTier(), storageKey, autoYield);
     }
 
     @Override
     public Iterable<String> getAutoYields() {
-        return autoYields;
+        if (isRemoteClient()) {
+            return com.google.common.collect.Iterables.concat(remoteCardYields, remoteAbilityYields);
+        }
+        if (activeModeIsInstall()) return PersistentYieldStore.get().getYields();
+        return localStore().getYields(activeTier());
     }
 
     @Override
     public void clearAutoYields() {
-        autoYields.clear();
-        triggersAlwaysAccept.clear();
+        if (isRemoteClient()) {
+            remoteCardYields.clear();
+            remoteAbilityYields.clear();
+            remoteTriggerDecisions.clear();
+            return;
+        }
+        localStore().onGameEnd(getGame() == null || getGame().getView().isMatchOver());
     }
 
     @Override
     public boolean getDisableAutoYields() {
-        return disableAutoYields;
+        return isRemoteClient() ? remoteAutoYieldsDisabled : localStore().isDisabled();
     }
 
     @Override
     public void setDisableAutoYields(final boolean disable) {
-        disableAutoYields = disable;
+        if (isRemoteClient()) remoteAutoYieldsDisabled = disable;
+        else localStore().setDisabled(disable);
     }
 
     @Override
     public boolean shouldAlwaysAcceptTrigger(final int trigger) {
-        return Boolean.TRUE.equals(triggersAlwaysAccept.get(trigger));
+        if (isRemoteClient()) return Boolean.TRUE.equals(remoteTriggerDecisions.get(trigger));
+        return localStore().getTriggerDecision(trigger) == AutoYieldStore.TriggerDecision.ACCEPT;
     }
 
     @Override
     public boolean shouldAlwaysDeclineTrigger(final int trigger) {
-        return Boolean.FALSE.equals(triggersAlwaysAccept.get(trigger));
+        if (isRemoteClient()) return Boolean.FALSE.equals(remoteTriggerDecisions.get(trigger));
+        return localStore().getTriggerDecision(trigger) == AutoYieldStore.TriggerDecision.DECLINE;
     }
 
     @Override
     public void setShouldAlwaysAcceptTrigger(final int trigger) {
-        triggersAlwaysAccept.put(trigger, Boolean.TRUE);
+        if (isRemoteClient()) remoteTriggerDecisions.put(trigger, Boolean.TRUE);
+        else localStore().setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.ACCEPT);
         if (inputQueue.getInput() instanceof InputConfirm) {
             selectButtonOk();
         }
@@ -3547,7 +3580,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void setShouldAlwaysDeclineTrigger(final int trigger) {
-        triggersAlwaysAccept.put(trigger, Boolean.FALSE);
+        if (isRemoteClient()) remoteTriggerDecisions.put(trigger, Boolean.FALSE);
+        else localStore().setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.DECLINE);
         if (inputQueue.getInput() instanceof InputConfirm) {
             selectButtonCancel();
         }
@@ -3555,6 +3589,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void setShouldAlwaysAskTrigger(final int trigger) {
-        triggersAlwaysAccept.remove(trigger);
+        if (isRemoteClient()) remoteTriggerDecisions.remove(trigger);
+        else localStore().setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.ASK);
     }
 }

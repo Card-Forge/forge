@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="100">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="101">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -36,7 +36,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJy9ls9qFEEQxnvHgERn5pAgZH0AkwksgRB8DfUcDEs2j+Ax5JqYP97UvIZvsATWB8h6F9RjyEXQo1bR/dGVmqmZaU3yQdFNT3f/qnq6q9s5565y51ZL504L16g1+la12Fsad1T40pqjScdh3HrZf4z2i8ei7KOuWO9KTbF+Hsb6t4G3Nll9dp+2c2Ws3HdMtkf2PKvP+ei1c+cvfKm53H8ebCurxyCl/8kk+DhT/Z+8Cn4Sb+WlL6U2M8+FmDsOc+21xC01z+ptK9u+zIlXkJUG9xfVf5NdithTtGn0PyXeGdm7jnjzBW9biVxL+Q7FS1bu1L8xdzqMzNvgvqf/++lxvV22MXdjFJlcT+HKfTlX/0nvnaZ+6PPmQZ0Lnywu62SJ/ueSr4/CN45hYxS5h5Vz38l+VL6uZXH12vF5Y+4F1atlOmPLtq+Y8w/z1mM7/EKfiThHkgtDfkG8i4U31oUYp7kHxc2yKd6Z2m9gwqdxyFPssrXOcs59wbK4Mn+Ae51HNoR45TpPQ/76ovYV62sVzYqXBSbfRc/KyNZcLd3edEbYP7kmUmCuhjsbbEs/HzZzL41zZIm5uP/WSvudAB5krUNfgQuWvgstvrV+KZL3n/U+0fF2Sfv1P36msiGc85T8/HHg7Vy9Xbr8n4q3wodBnKePdlX+kOraV4tij8h8Yb11tCYqX7Kmw7T9jPXt+8aBZoJj3YVt/46/6TcadNWSK25byK/IV/ct5CuI/WjLlVLz7GaZypU5Crkjhf8vAucvPI+Teg==
+   eJy9ls9OFEEQxntHE4POzAFiYH0AYAgbEtz4GsLZSDYsj8CRcAUBvam8hm+wIVkfgOVuohwJFxI9alW6v3RRMzV/DPolle70dPevqnu6up1z7iZ1biV37ixzlVqlb0WNvaNxx5kvrTmqdBLGreXtx2i/eCzKNmqK9V+pKtav/Vj/3vNWJ6vP7ot6royV+47I9sheJeU5n7517vy1LzWX+8+CDZNyDFJ6T8bBx6nq/3w7+Em8pS1fSm0mngsxdxTm2quJW2qWlNuW3vgyJV5Glhvcn1T/RXYpYu+iTaP/GfHek31oiDd97G3YkWsp3aF4yfKd8jfmTvqR+RDcj7S/X56V22UbczcGkcn1Llz5X87UPul/p6of+uw/KnPhk8Vlnc7Tfs77+iB84xg2BpF7VDj3g+y68HUti6vXjs8bcy+oXizQGVuwfcWcv5m3FtvhF/qMxTmSXBjyC+Kdy7yxLsQ4zT3M7pdV8U7V/wYmfBqFPMUuW+ss5zwQLIsr8we4t2lkQ4hXrvMk5K8r9V+xvhXRrHhZYPJdtJxHtuZq6faqM8L+yTWRAnMl3NlgW7p7Us29NM6RJebi/lvN7XcCeJDmLq5T3l63ORYXLH0XWny9fi+JOezAZcn7z3qf6HibpP2y9rmNurIhnPMu+flzz9u5ers0+T8Rb4VPvThPG+2q/CFlnS9oTvwjMl9Ybx2tscqXrEm/mSuF9W37xoGmgmPdhXV7x9/0Gw26qckVDy3kV+Sr/y3kK4j9qMuVUrPkftmVK3MUckcX/t8InD+9eZTA
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -476,6 +476,15 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
     <property name="spawn.Insane" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="100" template="../../../../common/maps/obj/shop.tx" x="240.5" y="325">
+   <properties>
+    <property name="commonShopList" value="AlaraBoosters"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="signYOffset" type="float" value="-2"/>
+    <property name="uncommonShopList" value=""/>
    </properties>
   </object>
  </objectgroup>

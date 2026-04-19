@@ -372,8 +372,8 @@ public final class FServerManager implements IHasForgeLog {
 
     public void unsetReady() {
         if (this.localLobby != null && this.localLobby.getSlot(0) != null) {
-                this.localLobby.getSlot(0).setIsReady(false);
-                updateLobbyState();
+            this.localLobby.getSlot(0).setIsReady(false);
+            updateLobbyState();
         }
     }
 
@@ -482,6 +482,107 @@ public final class FServerManager implements IHasForgeLog {
             netLog.error(e, "Failed to get local address");
             return "localhost";
         }
+    }
+
+    /**
+     * Returns all usable IPv4 addresses from all network interfaces.
+     * Each entry maps a friendly display name to its IPv4 address.
+     * Results are ordered: routable address first, then others alphabetically.
+     */
+    public static LinkedHashMap<String, String> getAllLocalAddresses() {
+        final LinkedHashMap<String, String> result = new LinkedHashMap<>();
+        final String routableAddress = getLocalAddress();
+
+        try {
+            final Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
+            final TreeMap<String, String> sorted = new TreeMap<>();
+
+            while (interfaces.hasMoreElements()) {
+                final NetworkInterface iface = interfaces.nextElement();
+                if (!iface.isUp() || iface.isLoopback()) {
+                    continue;
+                }
+                final Enumeration<InetAddress> addresses = iface.getInetAddresses();
+                while (addresses.hasMoreElements()) {
+                    final InetAddress addr = addresses.nextElement();
+                    if (addr instanceof Inet4Address && !addr.isLoopbackAddress()) {
+                        final String ip = addr.getHostAddress();
+                        final String name = getFriendlyInterfaceName(iface.getName(), iface.getDisplayName(), ip);
+                        if (ip.equals(routableAddress)) {
+                            result.put(name, ip);
+                        } else {
+                            sorted.put(name, ip);
+                        }
+                    }
+                }
+            }
+            result.putAll(sorted);
+        } catch (final SocketException e) {
+            netLog.error(e, "Failed to enumerate network interfaces");
+        }
+
+        if (result.isEmpty()) {
+            result.put("Default", routableAddress);
+        }
+        return result;
+    }
+
+    private static String getFriendlyInterfaceName(final String ifName, final String displayName, final String ip) {
+        final String lower = ifName.toLowerCase();
+        final String lowerDisplay = displayName.toLowerCase();
+
+        if (lower.startsWith("ham") || lowerDisplay.contains("hamachi")) {
+            return "Hamachi";
+        }
+        if (lower.startsWith("zt") || lowerDisplay.contains("zerotier")) {
+            return "ZeroTier";
+        }
+        if (isTailscaleAddress(ip)) {
+            return "Tailscale";
+        }
+        if (lower.startsWith("wg")) {
+            return "WireGuard";
+        }
+        if ((lower.startsWith("tun") && !lower.startsWith("utun")) || lower.startsWith("tap")) {
+            return "VPN (" + ifName + ")";
+        }
+        if (lower.startsWith("utun")) {
+            return "VPN Tunnel";
+        }
+        if (lower.startsWith("feth")) {
+            return "Virtual Network";
+        }
+        if (lower.startsWith("en")) {
+            if (lowerDisplay.contains("wi-fi") || lowerDisplay.contains("wifi") || lowerDisplay.contains("airport")) {
+                return "Wi-Fi";
+            }
+            if (lowerDisplay.contains("thunderbolt") || lowerDisplay.contains("ethernet")) {
+                return "Ethernet";
+            }
+            return "LAN (" + ifName + ")";
+        }
+        if (lower.startsWith("eth") || lower.startsWith("ens") || lower.startsWith("enp")) {
+            return "Ethernet";
+        }
+        if (lower.startsWith("wl")) {
+            return "Wi-Fi";
+        }
+        if (lowerDisplay.contains("radmin")) {
+            return "Radmin VPN";
+        }
+        return displayName;
+    }
+
+    private static boolean isTailscaleAddress(final String ip) {
+        try {
+            final String[] parts = ip.split("\\.");
+            if (parts.length == 4) {
+                final int first = Integer.parseInt(parts[0]);
+                final int second = Integer.parseInt(parts[1]);
+                return first == 100 && second >= 64 && second <= 127;
+            }
+        } catch (final NumberFormatException ignored) { }
+        return false;
     }
 
     public static String getExternalAddress() {
@@ -945,11 +1046,15 @@ public final class FServerManager implements IHasForgeLog {
                     String.format("%s disconnected. Waiting %s for reconnect...", username, formatTime(RECONNECT_TIMEOUT_SECONDS))));
                 lobbyListener.message(null, "(Host can use /skipreconnect to replace disconnected player with AI, or /skiptimeout to wait indefinitely.)");
                 netLog.info("[Disconnect] Player disconnected mid-game: {} (slot {}). Waiting for reconnect.", username, playerIndex);
-            } else {
-                // Normal disconnect (lobby or no valid slot)
+            } else if (client.hasValidSlot()) {
+                // Peer completed registration but match isn't active (or slot was freed earlier)
                 localLobby.disconnectPlayer(playerIndex);
                 broadcast(new MessageEvent(String.format("%s left the lobby.", username)));
                 broadcast(new LogoutEvent(username));
+            } else {
+                // Peer disconnected before completing registration — probe, crashed handshake, or rejection
+                netLog.info("[Disconnect] Unregistered peer disconnected from {}",
+                    ctx.channel().remoteAddress());
             }
             super.channelInactive(ctx);
         }

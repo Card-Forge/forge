@@ -95,7 +95,7 @@ public enum ProtocolMethod implements IHasForgeLog {
     alphaStrike               (Mode.CLIENT, Void.TYPE),
     reorderHand               (Mode.CLIENT, Void.TYPE, CardView.class, Integer.TYPE),
     requestResync             (Mode.CLIENT, Void.TYPE),
-    setShouldAutoYield           (Mode.CLIENT, Void.TYPE, String.class, Boolean.TYPE),
+    setShouldAutoYield        (Mode.CLIENT, Void.TYPE, String.class, Boolean.TYPE, Boolean.TYPE),
     setShouldAlwaysAcceptTrigger  (Mode.CLIENT, Void.TYPE, Integer.TYPE),
     setShouldAlwaysDeclineTrigger (Mode.CLIENT, Void.TYPE, Integer.TYPE),
     setShouldAlwaysAskTrigger     (Mode.CLIENT, Void.TYPE, Integer.TYPE);
