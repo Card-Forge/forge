@@ -208,11 +208,11 @@ public final class SResizingUtil {
         boolean rightLock = false;
 
         for (final DragCell t : LEFT_PANELS) {
-            if ((t.getW() + dX) < W_MIN) { leftLock = true; break; }
+            if ((t.getW() + dX) < t.getMinW()) { leftLock = true; break; }
         }
 
         for (final DragCell t : RIGHT_PANELS) {
-            if ((t.getW() - dX) < W_MIN) { rightLock = true; break; }
+            if ((t.getW() - dX) < t.getMinW()) { rightLock = true; break; }
         }
 
         if (dX < 0 && leftLock) { return; }

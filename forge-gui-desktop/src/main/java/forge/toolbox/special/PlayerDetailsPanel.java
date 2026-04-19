@@ -185,11 +185,40 @@ public class PlayerDetailsPanel extends JPanel {
     }
 
     private static abstract class DetailLabel extends FLabel {
+        private final int baseFontSize;
+        private final double baseIconScaleFactor;
+
         public DetailLabel(final FSkinProp icon) {
+            this(icon, 14, 0.85);
+        }
+
+        public DetailLabel(final FSkinProp icon, int fontSize, double iconScaleFactor) {
             super(new FLabel.Builder().icon(FSkin.getImage(icon))
-                    .opaque(false).fontSize(14).hoverable()
+                    .opaque(false).fontSize(fontSize).hoverable()
                     .fontStyle(Font.BOLD).iconInBackground()
+                    .iconScaleFactor(iconScaleFactor)
                     .fontAlign(SwingConstants.RIGHT));
+            this.baseFontSize = fontSize;
+            this.baseIconScaleFactor = iconScaleFactor;
+        }
+
+        @Override
+        protected double getEffectiveIconScaleFactor() {
+            final String text = getText();
+            if (text == null || text.length() <= 1) { return baseIconScaleFactor; }
+            final int w = getWidth();
+            if (w == 0) { return baseIconScaleFactor; }
+            final int basis = Math.min(getHeight(), w);
+            if (basis == 0) { return baseIconScaleFactor; }
+            // For 2+ digit numbers, shrink the icon aggressively so text has room.
+            // 2 digits: 0.55x, 3 digits: 0.40x, 4+: 0.30x
+            final double reduction;
+            switch (text.length()) {
+                case 2: reduction = 0.55; break;
+                case 3: reduction = 0.40; break;
+                default: reduction = 0.30; break;
+            }
+            return baseIconScaleFactor * reduction;
         }
 
         public abstract void onContentUpdate();
@@ -216,7 +245,7 @@ public class PlayerDetailsPanel extends JPanel {
             final int max = getMaxTextWidth();
 
             SkinFont font = null;
-            for (int fontSize = 14; fontSize > 5; fontSize--) {
+            for (int fontSize = baseFontSize; fontSize > 5; fontSize--) {
                 font = FSkin.getBoldFont(fontSize);
                 if (font.measureTextWidth(g, text) <= max) {
                     break;
@@ -237,7 +266,13 @@ public class PlayerDetailsPanel extends JPanel {
 
         public DetailLabelNumeric(final FSkinProp icon, final String tooltipLabel,
                             Function<PlayerView, Integer> countFunction, Function<PlayerView, Object> toolTipExtraArg) {
-            super(icon);
+            this(icon, tooltipLabel, countFunction, toolTipExtraArg, 14, 0.85);
+        }
+
+        public DetailLabelNumeric(final FSkinProp icon, final String tooltipLabel,
+                            Function<PlayerView, Integer> countFunction, Function<PlayerView, Object> toolTipExtraArg,
+                            int fontSize, double iconScaleFactor) {
+            super(icon, fontSize, iconScaleFactor);
 
             this.countFunction = countFunction;
             //Format in one or two format args depending on if we have a second parameter.
@@ -274,7 +309,8 @@ public class PlayerDetailsPanel extends JPanel {
         public final String color;
 
         public DetailLabelMana(String color, String toolTipLabel) {
-            super(FSkinProp.MANA_IMG.get(color), toolTipLabel, (PlayerView p) -> p.getMana(ManaAtom.fromName(color)));
+            super(FSkinProp.MANA_IMG.get(color), toolTipLabel,
+                    (PlayerView p) -> p.getMana(ManaAtom.fromName(color)), null, 16, 0.70);
             this.color = color;
         }
     }
