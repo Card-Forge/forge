@@ -945,11 +945,15 @@ public final class FServerManager implements IHasForgeLog {
                     String.format("%s disconnected. Waiting %s for reconnect...", username, formatTime(RECONNECT_TIMEOUT_SECONDS))));
                 lobbyListener.message(null, "(Host can use /skipreconnect to replace disconnected player with AI, or /skiptimeout to wait indefinitely.)");
                 netLog.info("[Disconnect] Player disconnected mid-game: {} (slot {}). Waiting for reconnect.", username, playerIndex);
-            } else {
-                // Normal disconnect (lobby or no valid slot)
+            } else if (client.hasValidSlot()) {
+                // Peer completed registration but match isn't active (or slot was freed earlier)
                 localLobby.disconnectPlayer(playerIndex);
                 broadcast(new MessageEvent(String.format("%s left the lobby.", username)));
                 broadcast(new LogoutEvent(username));
+            } else {
+                // Peer disconnected before completing registration — probe, crashed handshake, or rejection
+                netLog.info("[Disconnect] Unregistered peer disconnected from {}",
+                    ctx.channel().remoteAddress());
             }
             super.channelInactive(ctx);
         }
