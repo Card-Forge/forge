@@ -216,7 +216,6 @@ public class NetGameController implements IGameController {
         send(ProtocolMethod.setShouldAlwaysAskTrigger, trigger);
     }
 
-    /** Replays all currently-active yields to the host. Called from FGameClient.setGameControllers. */
     public void replayActiveYields() {
         boolean abilityScope = activeModeIsAbilityScope();
         for (String key : getAutoYields()) {
