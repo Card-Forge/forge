@@ -262,7 +262,12 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_AUTO_YIELD_MODE,
             Forge.getLocalizer().getMessage("lblAutoYields"),
             Forge.getLocalizer().getMessage("nlpAutoYieldMode"),
-            new String[] { ForgeConstants.AUTO_YIELD_PER_ABILITY, ForgeConstants.AUTO_YIELD_PER_CARD }), 1);
+            new String[] {
+                ForgeConstants.AUTO_YIELD_PER_CARD,
+                ForgeConstants.AUTO_YIELD_PER_ABILITY,
+                ForgeConstants.AUTO_YIELD_PER_ABILITY_SESSION,
+                ForgeConstants.AUTO_YIELD_PER_ABILITY_INSTALL,
+            }), 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ALLOW_ESC_TO_END_TURN,
             Forge.getLocalizer().getMessage("cbEscapeEndsTurn"),
             Forge.getLocalizer().getMessage("nlEscapeEndsTurn")), 1);

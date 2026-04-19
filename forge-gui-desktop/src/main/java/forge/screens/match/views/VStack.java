@@ -293,7 +293,9 @@ public class VStack implements IVDoc<CStack> {
             jmiAutoYield.addActionListener(arg0 -> {
                 final String key = item.getKey();
                 final boolean autoYield = controller.getMatchUI().getGameController().shouldAutoYield(key);
-                controller.getMatchUI().getGameController().setShouldAutoYield(key, !autoYield);
+                boolean abilityScope = !forge.localinstance.properties.ForgeConstants.AUTO_YIELD_PER_CARD.equals(
+                        forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_YIELD_MODE));
+                controller.getMatchUI().getGameController().setShouldAutoYield(key, !autoYield, abilityScope);
                 if (!autoYield && controller.getMatchUI().getGameView().peekStack() == item) {
                     //auto-pass priority if ability is on top of stack
                     controller.getMatchUI().getGameController().passPriority();
