@@ -3,5 +3,5 @@ ManaCost:4 R
 Types:Sorcery
 A:SP$ PutCounter | Support$ 2 | SubAbility$ DBGainControl
 SVar:DBGainControl:DB$ GainControl | ValidTgts$ Creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
-SVar:PlayMain1
+SVar:PlayMain1:TRUE
 Oracle:Support 2. (Put a +1/+1 counter on each of up to two target creatures.)\nGain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
