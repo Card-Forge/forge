@@ -42,9 +42,10 @@ import forge.toolbox.CardFaceSymbols;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinIcon;
 import forge.util.CardTranslation;
+import forge.util.Lang;
 
 public class FCardImageRenderer {
-    private static boolean isInitialed = false;
+    private static boolean initialized = false;
     private static final float BASE_IMAGE_WIDTH = 488;
     private static final float BASE_IMAGE_HEIGHT = 680;
     private static final float NAME_BOX_TINT = 0.2f;
@@ -74,7 +75,7 @@ public class FCardImageRenderer {
 
         NAME_FONT = new Font(Font.SERIF, Font.BOLD, 26);
         TYPE_FONT = new Font(Font.SERIF, Font.BOLD, 22);
-        if ("ja-JP".equals(FModel.getPreferences().getPref(FPref.UI_LANGUAGE)) || "zh-CN".equals(FModel.getPreferences().getPref(FPref.UI_LANGUAGE))) {
+        if (Lang.initInstance(FModel.getPreferences().getPref(FPref.UI_LANGUAGE)).getFontFile() != null) {
             TEXT_FONT = new Font(Font.SANS_SERIF, Font.PLAIN, 24);
             REMINDER_FONT = new Font(Font.SANS_SERIF, Font.PLAIN, 22);
         } else {
@@ -99,7 +100,7 @@ public class FCardImageRenderer {
         cachedFonts.put(REMINDER_FONT, new Font[REMINDER_FONT.getSize() * arrayMultiplier]);
         cachedFonts.put(ARTIST_FONT, new Font[ARTIST_FONT.getSize() * arrayMultiplier]);
 
-        isInitialed = true;
+        initialized = true;
     }
 
     private static Color tintColor(Color source, Color tint, float alpha) {
@@ -170,7 +171,7 @@ public class FCardImageRenderer {
     }
 
     public static void drawCardImage(Graphics2D g, CardView card, boolean altState, int width, int height, BufferedImage art, String legalString) {
-        if (!isInitialed) {
+        if (!initialized) {
             initialize();
         }
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);

@@ -1238,8 +1238,10 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 }
                 
                 // Draw key card indicator if applicable
-                drawKeyCardIndicator(g, (PaperCard) paperCard, bounds);
-                
+                if (paperCard instanceof PaperCard pc) {
+                    drawKeyCardIndicator(g, pc, bounds);
+                }
+
                 //draw draft ranking
                 if (showRanking && FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_OVERLAY_DRAFT_RANKING)) {
                     double score = CardRanker.getRawScore((PaperCard) item);

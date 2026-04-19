@@ -374,8 +374,9 @@ public class CardCopyService {
         newCopy.setForetold(copyFrom.isForetold());
         newCopy.setForetoldCostByEffect(copyFrom.isForetoldCostByEffect());
 
-        newCopy.setPrepared(copyFrom.isPrepared());
         newCopy.setPlotted(copyFrom.isPlotted());
+
+        newCopy.setPrepared(copyFrom.getPrepared());
 
         newCopy.setMeldedWith(getLKICopy(copyFrom.getMeldedWith(), cachedMap));
 

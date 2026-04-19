@@ -211,7 +211,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     private boolean renowned;
     private boolean solved;
     private boolean tributed;
-    private boolean prepared;
+    private Card preparedEffect;
     private StaticAbility suspectedStatic = null;
 
     private SpellAbility manifestedSA;
@@ -3014,19 +3014,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
             // add Adventure to AbilityText
             if (sa.isAdventure() && state.getStateName().equals(CardStateName.Original)) {
-                CardState advState = getState(CardStateName.Secondary);
                 StringBuilder sbSA = new StringBuilder();
                 sbSA.append(Localizer.getInstance().getMessage("lblAdventure"));
-                sbSA.append(" — ").append(CardTranslation.getTranslatedName(advState.getName()));
+                sbSA.append(" — ").append(CardTranslation.getTranslatedName(getState(CardStateName.Secondary)));
                 sbSA.append(" ").append(sa.getPayCosts().toSimpleString());
                 sbSA.append(": ");
                 sbSA.append(sAbility);
                 sAbility = sbSA.toString();
             } else if (sa.isOmen() && state.getStateName().equals(CardStateName.Original)) {
-                CardState advState = getState(CardStateName.Secondary);
                 StringBuilder sbSA = new StringBuilder();
                 sbSA.append(Localizer.getInstance().getMessage("lblOmen"));
-                sbSA.append(" — ").append(CardTranslation.getTranslatedName(advState.getName()));
+                sbSA.append(" — ").append(CardTranslation.getTranslatedName(getState(CardStateName.Secondary)));
                 sbSA.append(" ").append(sa.getPayCosts().toSimpleString());
                 sbSA.append(": ");
                 sbSA.append(sAbility);
@@ -3141,6 +3139,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (isGoaded()) {
             sb.append("is goaded by: ").append(Lang.joinHomogenous(getGoaded()));
             sb.append("\r\n");
+        }
+
+        if (hasState(CardStateName.PreparedSpell) && state.getStateName().equals(CardStateName.Original)) {
+            CardState prepState = getState(CardStateName.PreparedSpell);
+            SpellAbility prepSA = prepState.getFirstSpellAbility();
+            if (prepSA != null) {
+                sb.append(Localizer.getInstance().getMessage("lblPrepared"));
+                sb.append(" — ").append(CardTranslation.getTranslatedName(prepState));
+                sb.append(" ").append(prepSA.getPayCosts().toSimpleString());
+                sb.append(": ");
+                sb.append(prepSA);
+            }
         }
 
         // replace triple line feeds with double line feeds
@@ -4389,6 +4399,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             if (hasState(stateName)) {
                 return stateName;
             }
+        } else if (getCurrentStateName() == CardStateName.PreparedSpell) {
+            return CardStateName.PreparedSpell;
         }
         return CardStateName.Original;
     }
@@ -5777,6 +5789,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
             incR[0] = incR[0].substring(1); // consume negation sign
         }
 
+        // need to filter out prepared spells for other cards
+        if (getCurrentStateName() == CardStateName.PreparedSpell && isInZone(ZoneType.Exile)) {
+            return testFailed;
+        }
+
         if (incR[0].equals("Spell")) {
             if (!isSpell()) {
                 return testFailed;
@@ -6597,8 +6614,19 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return true;
     }
 
-    public boolean isPrepared() { return this.prepared; }
-    public void setPrepared(final boolean prepared) { this.prepared = prepared; }
+    public boolean isPrepared() {
+        return preparedEffect != null;
+    }
+    public Card getPrepared() {
+        return preparedEffect;
+    }
+    public void setPrepared(final Card eff) {
+        if (eff == null && preparedEffect != null) {
+            game.getAction().exile((Card) preparedEffect.getFirstRemembered(), null , null);
+            game.getAction().exileEffect(preparedEffect);
+        }
+        preparedEffect = eff;
+    }
 
     public final boolean isManifested() {
         return manifestedSA != null;
