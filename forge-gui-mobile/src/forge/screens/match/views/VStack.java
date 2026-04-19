@@ -309,8 +309,8 @@ public class VStack extends FDropDown {
                                             else {
                                                 controller.setShouldAlwaysAcceptTrigger(triggerID);
                                                 if (stackInstance.equals(gameView.peekStack())) {
-                                                    //pass priority so trigger resolves with auto-yes flag
-                                                    controller.passPriority();
+                                                    //auto-yes if already in the matching InputConfirm
+                                                    controller.selectButtonOkIfInputConfirm();
                                                 }
                                             }
                                         }));
@@ -323,8 +323,8 @@ public class VStack extends FDropDown {
                                             else {
                                                 controller.setShouldAlwaysDeclineTrigger(triggerID);
                                                 if (stackInstance.equals(gameView.peekStack())) {
-                                                    //pass priority so trigger resolves with auto-no flag
-                                                    controller.passPriority();
+                                                    //auto-no if already in the matching InputConfirm
+                                                    controller.selectButtonCancelIfInputConfirm();
                                                 }
                                             }
                                         }));

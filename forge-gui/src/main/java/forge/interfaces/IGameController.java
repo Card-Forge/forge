@@ -24,6 +24,12 @@ public interface IGameController {
 
     void selectButtonCancel();
 
+    /** Press OK on the active input if it is an InputConfirm, else no-op. */
+    void selectButtonOkIfInputConfirm();
+
+    /** Press Cancel on the active input if it is an InputConfirm, else no-op. */
+    void selectButtonCancelIfInputConfirm();
+
     void passPriority();
 
     void passPriorityUntilEndOfTurn();
