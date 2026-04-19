@@ -3518,11 +3518,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             if (autoYield) bucket.add(key); else bucket.remove(key);
             return;
         }
+        String storageKey = isAbilityScope ? AutoYieldStore.abilitySuffix(key) : key;
         if (activeModeIsInstall()) {
-            PersistentYieldStore.get().setYield(AutoYieldStore.abilitySuffix(key), autoYield);
+            PersistentYieldStore.get().setYield(storageKey, autoYield);
             return;
         }
-        String storageKey = isAbilityScope ? AutoYieldStore.abilitySuffix(key) : key;
         localStore().setYield(activeTier(), storageKey, autoYield);
     }
 
@@ -3543,11 +3543,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             remoteTriggerDecisions.clear();
             return;
         }
-        AutoYieldStore s = localStore();
-        s.onGameEnd();
-        if (getGame() == null || getGame().getView().isMatchOver()) {
-            s.onMatchEnd();
-        }
+        localStore().onGameEnd(getGame() == null || getGame().getView().isMatchOver());
     }
 
     @Override

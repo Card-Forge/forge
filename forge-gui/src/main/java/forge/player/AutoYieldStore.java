@@ -42,11 +42,12 @@ public class AutoYieldStore {
         else triggerDecisions.put(triggerId, decision);
     }
 
-    public void onGameEnd() { yieldsByTier.get(Tier.GAME).clear(); }
-
-    public void onMatchEnd() {
-        yieldsByTier.get(Tier.MATCH).clear();
+    public void onGameEnd(boolean matchOver) {
         triggerDecisions.clear();
+        yieldsByTier.get(Tier.GAME).clear();
+        if (matchOver) {
+            yieldsByTier.get(Tier.MATCH).clear();
+        }
     }
 
     /** Strips the "Card (id=N): " prefix to derive the ability-scope key, or returns the input unchanged. */

@@ -519,9 +519,6 @@ public final class FServerManager implements IHasForgeLog {
             result.putAll(sorted);
         } catch (final SocketException e) {
             netLog.error(e, "Failed to enumerate network interfaces");
-            if (result.isEmpty()) {
-                result.put("Default", routableAddress);
-            }
         }
 
         if (result.isEmpty()) {

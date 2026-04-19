@@ -13,6 +13,8 @@ import forge.interfaces.IMacroSystem;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
+import forge.player.AutoYieldStore;
+import forge.player.PersistentYieldStore;
 import forge.util.ITriggerEvent;
 
 import java.util.List;
@@ -21,7 +23,7 @@ public class NetGameController implements IGameController {
 
     private final GameProtocolSender sender;
 
-    private final forge.player.AutoYieldStore yieldStore = new forge.player.AutoYieldStore();
+    private final AutoYieldStore yieldStore = new AutoYieldStore();
 
     public NetGameController(final IToServer server) {
         this.sender = new GameProtocolSender(server);
@@ -142,38 +144,38 @@ public class NetGameController implements IGameController {
                 FModel.getPreferences().getPref(ForgePreferences.FPref.UI_AUTO_YIELD_MODE));
     }
 
-    private forge.player.AutoYieldStore.Tier activeTier() {
+    private AutoYieldStore.Tier activeTier() {
         String mode = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_AUTO_YIELD_MODE);
-        if (ForgeConstants.AUTO_YIELD_PER_CARD.equals(mode))            return forge.player.AutoYieldStore.Tier.GAME;
-        if (ForgeConstants.AUTO_YIELD_PER_ABILITY_SESSION.equals(mode)) return forge.player.AutoYieldStore.Tier.SESSION;
-        return forge.player.AutoYieldStore.Tier.MATCH;
+        if (ForgeConstants.AUTO_YIELD_PER_CARD.equals(mode))            return AutoYieldStore.Tier.GAME;
+        if (ForgeConstants.AUTO_YIELD_PER_ABILITY_SESSION.equals(mode)) return AutoYieldStore.Tier.SESSION;
+        return AutoYieldStore.Tier.MATCH;
     }
 
     @Override
     public boolean shouldAutoYield(final String key) {
         if (yieldStore.isDisabled()) return false;
         if (activeModeIsInstall()) {
-            return forge.player.PersistentYieldStore.get().contains(forge.player.AutoYieldStore.abilitySuffix(key));
+            return PersistentYieldStore.get().contains(AutoYieldStore.abilitySuffix(key));
         }
-        String storageKey = activeModeIsAbilityScope() ? forge.player.AutoYieldStore.abilitySuffix(key) : key;
+        String storageKey = activeModeIsAbilityScope() ? AutoYieldStore.abilitySuffix(key) : key;
         return yieldStore.shouldYield(activeTier(), storageKey);
     }
 
     @Override
     public void setShouldAutoYield(final String key, final boolean autoYield, final boolean isAbilityScope) {
+        String storageKey = isAbilityScope ? AutoYieldStore.abilitySuffix(key) : key;
         if (activeModeIsInstall()) {
-            forge.player.PersistentYieldStore.get().setYield(forge.player.AutoYieldStore.abilitySuffix(key), autoYield);
+            PersistentYieldStore.get().setYield(storageKey, autoYield);
         } else {
-            String storageKey = isAbilityScope ? forge.player.AutoYieldStore.abilitySuffix(key) : key;
             yieldStore.setYield(activeTier(), storageKey, autoYield);
         }
-        send(ProtocolMethod.setShouldAutoYield, key, autoYield, isAbilityScope);
+        send(ProtocolMethod.setShouldAutoYield, storageKey, autoYield, isAbilityScope);
     }
 
     @Override
     public Iterable<String> getAutoYields() {
         return activeModeIsInstall()
-                ? forge.player.PersistentYieldStore.get().getYields()
+                ? PersistentYieldStore.get().getYields()
                 : yieldStore.getYields(activeTier());
     }
 
@@ -190,29 +192,29 @@ public class NetGameController implements IGameController {
 
     @Override
     public boolean shouldAlwaysAcceptTrigger(final int trigger) {
-        return yieldStore.getTriggerDecision(trigger) == forge.player.AutoYieldStore.TriggerDecision.ACCEPT;
+        return yieldStore.getTriggerDecision(trigger) == AutoYieldStore.TriggerDecision.ACCEPT;
     }
 
     @Override
     public boolean shouldAlwaysDeclineTrigger(final int trigger) {
-        return yieldStore.getTriggerDecision(trigger) == forge.player.AutoYieldStore.TriggerDecision.DECLINE;
+        return yieldStore.getTriggerDecision(trigger) == AutoYieldStore.TriggerDecision.DECLINE;
     }
 
     @Override
     public void setShouldAlwaysAcceptTrigger(final int trigger) {
-        yieldStore.setTriggerDecision(trigger, forge.player.AutoYieldStore.TriggerDecision.ACCEPT);
+        yieldStore.setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.ACCEPT);
         send(ProtocolMethod.setShouldAlwaysAcceptTrigger, trigger);
     }
 
     @Override
     public void setShouldAlwaysDeclineTrigger(final int trigger) {
-        yieldStore.setTriggerDecision(trigger, forge.player.AutoYieldStore.TriggerDecision.DECLINE);
+        yieldStore.setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.DECLINE);
         send(ProtocolMethod.setShouldAlwaysDeclineTrigger, trigger);
     }
 
     @Override
     public void setShouldAlwaysAskTrigger(final int trigger) {
-        yieldStore.setTriggerDecision(trigger, forge.player.AutoYieldStore.TriggerDecision.ASK);
+        yieldStore.setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.ASK);
         send(ProtocolMethod.setShouldAlwaysAskTrigger, trigger);
     }
 
