@@ -16,7 +16,6 @@ import forge.item.IPaperCard;
 import forge.util.collect.FCollection;
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 
 import forge.Forge;
@@ -615,13 +614,7 @@ public class MatchController extends NetworkGuiGame {
 
     @Override
     public boolean confirm(final CardView c, final String question, final boolean defaultIsYes, final List<String> options) {
-        final List<String> optionsToUse;
-        if (options == null) {
-            optionsToUse = ImmutableList.of(Forge.getLocalizer().getMessage("lblYes"), Forge.getLocalizer().getMessage("lblNo"));
-        } else {
-            optionsToUse = options;
-        }
-        return FOptionPane.showCardOptionDialog(c, question, "", SOptionPane.INFORMATION_ICON, optionsToUse, defaultIsYes ? 0 : 1) == 0;
+        return FOptionPane.showCardOptionDialog(c, question, "", SOptionPane.INFORMATION_ICON, options, defaultIsYes ? 0 : 1) == 0;
     }
 
     @Override

@@ -814,9 +814,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 cardView = wrapper.getCardView();
             return this.getGui().confirm(cardView, buildQuestion.toString().replaceAll("\n", " "));
         } else {
-            final InputConfirm inp = new InputConfirm(this, buildQuestion.toString(), wrapper);
-            inp.showAndWait();
-            return inp.getResult();
+            return InputConfirm.confirm(this, wrapper, buildQuestion.toString());
         }
     }
 
@@ -831,7 +829,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         if (getGame().getPlayers().size() == 2) {
             prompt += "\n\n" + localizer.getMessage("lblWouldYouLiketoPlayorDraw");
-            final InputConfirm inp = new InputConfirm(this, prompt, localizer.getMessage("lblPlay"), localizer.getMessage("lblDraw"));
+            final InputConfirm inp = new InputConfirm(this, prompt, localizer.getMessage("lblPlay"), localizer.getMessage("lblDraw"), true);
             inp.showAndWait();
             return inp.getResult() ? this.player : this.player.getOpponents().get(0);
         }
@@ -1446,9 +1444,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 cardView = effectSA == null ? null : effectSA.getCardView();
             return this.getGui().confirm(cardView, question.replaceAll("\n", " "));
         } else {
-            final InputConfirm inp = new InputConfirm(this, question, effectSA);
-            inp.showAndWait();
-            return inp.getResult();
+            return InputConfirm.confirm(this, effectSA, question);
         }
     }
 
@@ -1715,14 +1711,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     cardView = CardView.getCardForUi(iPaperCard);
                 else
                     cardView = sa.getHostCard().getView();
-                getGui().confirm(cardView, message, ImmutableList.of(localizer.getMessage("lblOK")));
+                getGui().confirm(cardView, message, true, ImmutableList.of(localizer.getMessage("lblOK")));
             } else {
                 getGui().message(message, sa == null || sa.getHostCard() == null ? "" : CardView.get(sa.getHostCard()).toString());
             }
         }
     }
-
-    // end of not related candidates for move.
 
     /*
      * (non-Javadoc)
@@ -1882,9 +1876,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
             return this.getGui().confirm(cardView, question.replaceAll("\n", " "));
         } else {
-            final InputConfirm inp = new InputConfirm(this, question, sa);
-            inp.showAndWait();
-            return inp.getResult();
+            return InputConfirm.confirm(this, sa, question);
         }
     }
 
@@ -2389,12 +2381,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         inputProxy.selectButtonCancel();
     }
 
-    public void confirm() {
-        if (inputQueue.getInput() instanceof InputConfirm) {
-            selectButtonOk();
-        }
-    }
-
     @Override
     public void passPriority() {
         passPriority(false);
@@ -2804,7 +2790,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
             final Player player = gameCachePlayer.get(pv);
 
-            final Integer life = getGui().getInteger(localizer.getMessage("lblSetLifetoWhat"), 0);
+            final Integer life = getGui().getInteger(localizer.getMessage("lblSetLifetoWhat"), 0, Integer.MAX_VALUE, false);
             if (life == null) {
                 return;
             }
