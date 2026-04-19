@@ -58,7 +58,12 @@ public interface IGameController {
 
     // --- Auto-yield preferences (per-player) ---
     boolean shouldAutoYield(String key);
-    void setShouldAutoYield(String key, boolean autoYield);
+    /**
+     * @param isAbilityScope true if {@code key} is an ability suffix (Per Ability * modes);
+     *   false if {@code key} is the full raw key (Per Card mode). Server-side handlers
+     *   route storage by this flag instead of consulting the host's own UI_AUTO_YIELD_MODE.
+     */
+    void setShouldAutoYield(String key, boolean autoYield, boolean isAbilityScope);
     Iterable<String> getAutoYields();
     void clearAutoYields();
     boolean getDisableAutoYields();

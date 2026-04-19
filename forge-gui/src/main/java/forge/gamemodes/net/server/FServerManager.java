@@ -540,10 +540,7 @@ public final class FServerManager implements IHasForgeLog {
             }
             result.putAll(sorted);
         } catch (final SocketException e) {
-            Logger.error(e, "Failed to enumerate network interfaces");
-            if (result.isEmpty()) {
-                result.put("Default", routableAddress);
-            }
+            netLog.error(e, "Failed to enumerate network interfaces");
         }
 
         if (result.isEmpty()) {
@@ -556,42 +553,27 @@ public final class FServerManager implements IHasForgeLog {
         final String lower = ifName.toLowerCase();
         final String lowerDisplay = displayName.toLowerCase();
 
-        // Hamachi: interface name "ham0", "ham1", etc. or display name contains "hamachi"
         if (lower.startsWith("ham") || lowerDisplay.contains("hamachi")) {
             return "Hamachi";
         }
-
-        // ZeroTier: "zt*" on Linux, display name contains "zerotier" on macOS/Windows
         if (lower.startsWith("zt") || lowerDisplay.contains("zerotier")) {
             return "ZeroTier";
         }
-
-        // Tailscale: uses 100.64.0.0/10 CGNAT range (100.64.x.x - 100.127.x.x)
         if (isTailscaleAddress(ip)) {
             return "Tailscale";
         }
-
-        // WireGuard: interface name "wg0", "wg1", etc.
         if (lower.startsWith("wg")) {
             return "WireGuard";
         }
-
-        // OpenVPN: common names "tun0", "tap0" (but not utun which is macOS system)
         if ((lower.startsWith("tun") && !lower.startsWith("utun")) || lower.startsWith("tap")) {
             return "VPN (" + ifName + ")";
         }
-
-        // macOS: utun* = generic tunnel (VPN clients, iCloud Private Relay, etc.)
         if (lower.startsWith("utun")) {
             return "VPN Tunnel";
         }
-
-        // macOS: feth* = fake/virtual ethernet (Docker, virtualization, dev tools)
         if (lower.startsWith("feth")) {
             return "Virtual Network";
         }
-
-        // macOS: en0 = Wi-Fi or Ethernet, en1, etc.
         if (lower.startsWith("en")) {
             if (lowerDisplay.contains("wi-fi") || lowerDisplay.contains("wifi") || lowerDisplay.contains("airport")) {
                 return "Wi-Fi";
@@ -601,23 +583,15 @@ public final class FServerManager implements IHasForgeLog {
             }
             return "LAN (" + ifName + ")";
         }
-
-        // Linux: eth0, ens33, enp0s3, etc.
         if (lower.startsWith("eth") || lower.startsWith("ens") || lower.startsWith("enp")) {
             return "Ethernet";
         }
-
-        // Linux: wlan0, wlp2s0, etc.
         if (lower.startsWith("wl")) {
             return "Wi-Fi";
         }
-
-        // Radmin VPN
         if (lowerDisplay.contains("radmin")) {
             return "Radmin VPN";
         }
-
-        // Fallback: use display name
         return displayName;
     }
 
@@ -627,7 +601,6 @@ public final class FServerManager implements IHasForgeLog {
             if (parts.length == 4) {
                 final int first = Integer.parseInt(parts[0]);
                 final int second = Integer.parseInt(parts[1]);
-                // Tailscale CGNAT: 100.64.0.0/10 → first octet 100, second 64-127
                 return first == 100 && second >= 64 && second <= 127;
             }
         } catch (final NumberFormatException ignored) { }

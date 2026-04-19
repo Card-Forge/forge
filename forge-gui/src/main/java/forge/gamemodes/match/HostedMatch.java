@@ -30,7 +30,6 @@ import forge.gui.control.WatchLocalGame;
 import forge.gui.events.*;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.IGameController;
-import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
@@ -413,10 +412,7 @@ public class HostedMatch {
                 ngg.shutdownForwarder();
             }
             humanController.getGui().setGameSpeed(PlaybackSpeed.NORMAL);
-            if (FModel.getPreferences().getPref(FPref.UI_AUTO_YIELD_MODE).equals(ForgeConstants.AUTO_YIELD_PER_CARD) || isMatchOver()) {
-                // when autoyielding per card, we need to clear auto yields between games since card IDs change
-                humanController.clearAutoYields();
-            }
+            humanController.clearAutoYields();
 
             if (humanCount > 0) //conceded
                 humanController.getGui().afterGameEnd();

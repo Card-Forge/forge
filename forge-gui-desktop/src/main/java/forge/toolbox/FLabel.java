@@ -661,9 +661,7 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
     }
 
     protected void resetIcon() {
-        // Non-background icon — scale based on the smaller of width/height
-        // so icons shrink when the panel gets narrow, not just short
-        if (img != null && iconScaleAuto  && !iconInBackground) {
+        if (img != null && iconScaleAuto && !iconInBackground) {
             final int basis = Math.min(getHeight(), getWidth());
             final int h = (int) (basis * iconScaleFactor);
             final int w = (int) (h * iar);

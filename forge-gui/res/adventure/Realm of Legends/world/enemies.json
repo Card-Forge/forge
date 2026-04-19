@@ -59271,17 +59271,22 @@
     "ai": "",
     "scale": 0.5,
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
-     {
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Cragflame"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Mabel, Heir to Cragflame"
       },
       {
         "type": "deckCard",
-        "count": 1,
-        "addMaxCount": 3,
+        "count": 2,
+        "addMaxCount": 4,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -59298,8 +59303,8 @@
       },
       {
         "type": "randomCard",
-        "count": 1,
-        "addMaxCount": 3,
+        "count": 2,
+        "addMaxCount": 4,
         "rarity": [
           "Rare",
           "Mythic Rare"

@@ -1853,6 +1853,18 @@
     }
   },
   {
+    "name": "Cragflame",
+    "description": "Equip 2, +1/+1 vigilance, trample, and haste.",
+    "equipmentSlot": "Right",
+    "iconName": "Cragflame",
+    "effect": {
+      "lifeModifier": -6,
+      "startBattleWithCard": [
+        "cragflame"
+      ]
+    }
+  },
+  {
     "name": "Spore Skirt",
     "description": "0/1 flying wall, taps down for 4 turns on block.",
     "equipmentSlot": "Boots",
