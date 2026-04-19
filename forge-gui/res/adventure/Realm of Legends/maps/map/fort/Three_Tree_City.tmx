@@ -186,6 +186,7 @@
     ]
    }
 ]</property>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Short Bow&quot;, &quot;Rockface Village&quot; ] }"/>
     <property name="enemy" value="Mabel"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="50"/>

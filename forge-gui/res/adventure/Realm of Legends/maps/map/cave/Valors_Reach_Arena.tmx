@@ -128,13 +128,13 @@
 {
       &quot;type&quot;: &quot;card&quot;,
       &quot;count&quot;:1, 
-      &quot;cardName&quot;: &quot;champion's helm&quot;,
+      &quot;cardName&quot;: &quot;Champion's Helm&quot;,
       &quot;editions&quot;: [&quot;CMM&quot;]
 },
 {
       &quot;type&quot;: &quot;card&quot;,
       &quot;count&quot;:1, 
-      &quot;cardName&quot;: &quot;last one standing&quot;,
+      &quot;cardName&quot;: &quot;Last One Standing&quot;,
       &quot;editions&quot;: [&quot;BBD&quot;]
 },
 {
