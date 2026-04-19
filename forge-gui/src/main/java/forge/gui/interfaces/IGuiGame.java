@@ -15,6 +15,7 @@ import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.match.input.InputConfirm;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gui.control.PlaybackSpeed;
 import forge.interfaces.IGameController;
@@ -25,6 +26,7 @@ import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
 import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
+import forge.util.Localizer;
 
 import java.util.Collection;
 import java.util.List;
@@ -40,11 +42,9 @@ public interface IGuiGame {
     default void setGameView(GameView gameView, long sequenceNumber) {
         setGameView(gameView);
     }
-
     GameView getGameView();
 
     void setOriginalGameController(PlayerView view, IGameController gameController);
-
     void setGameController(PlayerView player, IGameController gameController);
 
     void setSpectator(IGameController spectator);
@@ -59,8 +59,9 @@ public interface IGuiGame {
 
     void showCardPromptMessage(PlayerView playerView, String message, CardView card);
 
-    void updateButtons(PlayerView owner, boolean okEnabled, boolean cancelEnabled, boolean focusOk);
-
+    default void updateButtons(final PlayerView owner, final boolean okEnabled, final boolean cancelEnabled, final boolean focusOk) {
+        updateButtons(owner, Localizer.getInstance().getMessage("lblOK"), Localizer.getInstance().getMessage("lblCancel"), okEnabled, cancelEnabled, focusOk);
+    }
     void updateButtons(PlayerView owner, String label1, String label2, boolean enable1, boolean enable2, boolean focus1);
 
     void flashIncorrectAction();
@@ -129,49 +130,41 @@ public interface IGuiGame {
     // The Object passed should be GameEntityView for most case. Can be Byte for "generate mana of any combination" effect
     Map<Object, Integer> assignGenericAmount(CardView effectSource, Map<Object, Integer> target, int amount, final boolean atLeastOne, final String amountLabel);
 
-    void message(String message);
-
+    default void message(final String message) {
+        message(message, "Forge");
+    }
     void message(String message, String title);
 
-    void showErrorDialog(String message);
-
+    default void showErrorDialog(final String message) {
+        showErrorDialog(message, "Error");
+    }
     void showErrorDialog(String message, String title);
 
-    boolean showConfirmDialog(String message, String title);
-
-    boolean showConfirmDialog(String message, String title, boolean defaultYes);
-
-    boolean showConfirmDialog(String message, String title, String yesButtonText, String noButtonText);
-
+    default boolean showConfirmDialog(final String message, final String title) {
+        return showConfirmDialog(message, title, InputConfirm.defaultOptions.get(0), InputConfirm.defaultOptions.get(1));
+    }
+    default boolean showConfirmDialog(final String message, final String title, final String yesButtonText, final String noButtonText) {
+        return showConfirmDialog(message, title, yesButtonText, noButtonText, true);
+    }
     boolean showConfirmDialog(String message, String title, String yesButtonText, String noButtonText, boolean defaultYes);
 
     int showOptionDialog(String message, String title, FSkinProp icon, List<String> options, int defaultOption);
 
-    String showInputDialog(String message, String title, boolean isNumeric);
-
-    String showInputDialog(String message, String title, FSkinProp icon);
-
-    String showInputDialog(String message, String title, FSkinProp icon, String initialInput);
-
     String showInputDialog(String message, String title, FSkinProp icon, String initialInput, List<String> inputOptions, boolean isNumeric);
 
-    boolean confirm(CardView c, String question);
-
-    boolean confirm(CardView c, String question, List<String> options);
-
+    default boolean confirm(final CardView c, final String question) {
+        return confirm(c, question, true, InputConfirm.defaultOptions);
+    }
     boolean confirm(CardView c, String question, boolean defaultIsYes, List<String> options);
 
-    <T> List<T> getChoices(String message, int min, int max, List<T> choices);
-
+    // returned Object will never be null
+    default <T> List<T> getChoices(final String message, final int min, final int max, final List<T> choices) {
+        return getChoices(message, min, max, choices, null, null);
+    }
     <T> List<T> getChoices(String message, int min, int max, List<T> choices, List<T> selected, FSerializableFunction<T, String> display);
 
     // Get Integer in range
-    Integer getInteger(String message, int min);
-
-    Integer getInteger(String message, int min, int max);
-
     Integer getInteger(String message, int min, int max, boolean sortDesc);
-
     Integer getInteger(String message, int min, int max, int cutoff);
 
     /**
@@ -196,19 +189,22 @@ public interface IGuiGame {
      * @param choices a T object.
      * @return One of {@code choices}. Can only be {@code null} if {@code choices} is empty.
      */
-    <T> T one(String message, List<T> choices);
+    default <T> T one(final String message, final List<T> choices) {
+        return one(message, choices, null);
+    }
     <T> T one(String message, List<T> choices, FSerializableFunction<T, String> display);
 
     <T> void reveal(String message, List<T> items);
 
-    <T> List<T> many(String title, String topCaption, int cnt, List<T> sourceChoices, CardView c);
-
-    <T> List<T> many(String title, String topCaption, int min, int max, List<T> sourceChoices, CardView c);
-
+    default <T> List<T> many(final String title, final String topCaption, final int cnt, final List<T> sourceChoices, final CardView c) {
+        return many(title, topCaption, cnt, cnt, sourceChoices, c);
+    }
+    default <T> List<T> many(final String title, final String topCaption, final int min, final int max, final List<T> sourceChoices, final CardView c) {
+        return many(title, topCaption, min, max, sourceChoices, null, c);
+    }
     <T> List<T> many(String title, String topCaption, int min, int max, List<T> sourceChoices, List<T> destChoices, CardView c);
 
     <T> List<T> order(String title, String top, List<T> sourceChoices, CardView c);
-
     <T> List<T> order(String title, String top, int remainingObjectsMin, int remainingObjectsMax, List<T> sourceChoices, List<T> destChoices, CardView referenceCard, boolean sideboardingMode);
 
     /**
@@ -249,7 +245,6 @@ public interface IGuiGame {
     boolean isSelecting();
 
     boolean isGamePaused();
-
     void setGamePause(boolean pause);
 
     PlaybackSpeed getGameSpeed();
