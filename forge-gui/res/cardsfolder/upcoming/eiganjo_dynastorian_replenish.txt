@@ -1,0 +1,14 @@
+Name:Eiganjo Dynastorian
+ManaCost:2 W
+Types:Creature Fox Advisor
+PT:2/3
+K:Vigilance
+T:Mode$ AttackersDeclared | Execute$ TrigPrepare | ValidAttackers$ Creature | ValidAttackersAmount$ GE2 | TriggerZones$ Battlefield | AttackingPlayer$ You | TriggerDescription$ Whenever you attack with two or more creatures, this creature becomes prepared. (While it’s prepared, you may cast a copy of its spell. Doing so unprepares it.)
+SVar:TrigPrepare:DB$ AlterAttribute | Attributes$ Prepared
+AlternateMode:Prepare
+SVar:PlayMain1:TRUE
+Oracle:Vigilance\nWhenever you attack with two or more creatures, this creature becomes prepared. (While it’s prepared, you may cast a copy of its spell. Doing so unprepares it.)
+
+ALTERNATE
+
+CopyFaceFrom:Replenish
