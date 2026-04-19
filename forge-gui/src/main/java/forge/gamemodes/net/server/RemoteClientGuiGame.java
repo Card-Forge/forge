@@ -153,6 +153,11 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
                     client.getIndex(), useDeltaSync, initialSyncSent);
                 fallbackLogged = true;
             }
+            // Batch flush already emits setGameView; skip the duplicate.
+            if (forwarder != null && forwarder.hasPendingEvents()) {
+                flushPendingEvents();
+                return;
+            }
             if (flush) {
                 send(ProtocolMethod.setGameView, gameView, -1L);
             } else {
