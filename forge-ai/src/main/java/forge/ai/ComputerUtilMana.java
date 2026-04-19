@@ -1080,7 +1080,7 @@ public class ComputerUtilMana {
 
         // For combat tricks, always obey mana reservation
         if (curPhase == PhaseType.COMBAT_DECLARE_BLOCKERS || curPhase == PhaseType.CLEANUP) {
-            if (!(ai.getGame().getPhaseHandler().isPlayerTurn(ai))) {
+            if (!(ai.getGame().getPhaseHandler().hasTurnPriority(ai))) {
                 AiCardMemory.clearMemorySet(ai, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_ENEMY_DECLBLK);
                 AiCardMemory.clearMemorySet(ai, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT);
             } else

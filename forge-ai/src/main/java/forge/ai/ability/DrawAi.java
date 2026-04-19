@@ -421,7 +421,7 @@ public class DrawAi extends SpellAbilityAi {
             }
 
             if (aiTarget) {
-                if (!ai.isCardInPlay("Laboratory Maniac") && computerHandSize + numCards > computerMaxHandSize && game.getPhaseHandler().isPlayerTurn(ai)) {
+                if (!ai.isCardInPlay("Laboratory Maniac") && computerHandSize + numCards > computerMaxHandSize && game.getPhaseHandler().hasTurnPriority(ai)) {
                     if (xPaid) {
                         numCards = computerMaxHandSize - computerHandSize;
                         if (source.isInZone(ZoneType.Hand)) {
@@ -512,7 +512,7 @@ public class DrawAi extends SpellAbilityAi {
 
             if ((computerHandSize + numCards > computerMaxHandSize)) {
                 // Don't draw too many cards and then risk discarding cards at EOT
-                 if (game.getPhaseHandler().isPlayerTurn(ai)
+                 if (game.getPhaseHandler().hasTurnPriority(ai)
                         && !sa.isTrigger()
                         && !assumeSafeX
                         && !drawback) {

@@ -62,6 +62,11 @@ public class Priority implements PriorityManager, java.io.Serializable {
         currentPlayer = player;
     }
 
+    @Override
+    public final boolean hasTurnPriority(final Player player, final Player turnPlayer) {
+        return Objects.equals(player, turnPlayer);
+    }
+
     /**
      * Resets priority to a specific player at the start of a new priority round.
      * This is typically called when priority returns to the turn player.

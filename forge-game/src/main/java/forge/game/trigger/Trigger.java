@@ -248,13 +248,13 @@ public abstract class Trigger extends TriggerReplacementBase {
         }
 
         if (hasParam("PlayerTurn")) {
-            if (!phaseHandler.isPlayerTurn(this.getHostCard().getController())) {
+            if (!phaseHandler.hasTurnPriority(this.getHostCard().getController())) {
                 return false;
             }
         }
 
         if (hasParam("NotPlayerTurn")) {
-            if (phaseHandler.isPlayerTurn(this.getHostCard().getController())) {
+            if (phaseHandler.hasTurnPriority(this.getHostCard().getController())) {
                 return false;
             }
         }

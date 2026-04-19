@@ -761,7 +761,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             if (ph.getPhase().isBefore(PhaseType.MAIN2) && handSize > 1) {
                 return false;
             }
-            if (ph.isPlayerTurn(ai) && handSize >= ai.getMaxHandSize()) {
+            if (ph.hasTurnPriority(ai) && handSize >= ai.getMaxHandSize()) {
                 return false;
             }
         }
@@ -1059,7 +1059,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         if (destination.equals(ZoneType.Exile) || origin.contains(ZoneType.Battlefield)) {
             // don't rush bouncing stuff when not going to attack
             if (!immediately && game.getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
-                    && game.getPhaseHandler().isPlayerTurn(ai)
+                    && game.getPhaseHandler().hasTurnPriority(ai)
                     && ai.getCreaturesInPlay().isEmpty()) {
                 return false;
             }
@@ -1261,7 +1261,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         }
         // Reload planeswalkers
-        else if (!aiPlaneswalkers.isEmpty() && (sa.getHostCard().isSorcery() || !game.getPhaseHandler().isPlayerTurn(ai))) {
+        else if (!aiPlaneswalkers.isEmpty() && (sa.getHostCard().isSorcery() || !game.getPhaseHandler().hasTurnPriority(ai))) {
             int maxLoyaltyToConsider = AiProfileUtil.getIntProperty(ai, AiProps.BLINK_RELOAD_PLANESWALKER_MAX_LOYALTY);
             int loyaltyDiff = AiProfileUtil.getIntProperty(ai, AiProps.BLINK_RELOAD_PLANESWALKER_LOYALTY_DIFF);
             int chance = AiProfileUtil.getIntProperty(ai, AiProps.BLINK_RELOAD_PLANESWALKER_CHANCE);

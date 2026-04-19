@@ -1109,7 +1109,7 @@ public class ComputerUtil {
             if (discardCMC > landsInPlay.size() + landsInHand.size() + 2) {
                 // not castable for some time.
                 return true;
-            } else if (!game.getPhaseHandler().isPlayerTurn(ai)
+            } else if (!game.getPhaseHandler().hasTurnPriority(ai)
                     && game.getPhaseHandler().getPhase().isAfter(PhaseType.MAIN2)
                     && discardCMC > landsInPlay.size() + landsInHand.size()
                     && discardCMC > landsInPlay.size() + 1
@@ -3126,7 +3126,7 @@ public class ComputerUtil {
         for (Player opp: ai.getOpponents()) {
             Combat combat = new Combat(opp);
             boolean containsAttacker = false;
-            boolean thisCombat = ai.getGame().getPhaseHandler().isPlayerTurn(opp) && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_BEGIN);
+            boolean thisCombat = ai.getGame().getPhaseHandler().hasTurnPriority(opp) && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_BEGIN);
 
             // TODO !thisCombat should include cards that will phase in
             for (Card att : opp.getCreaturesInPlay()) {

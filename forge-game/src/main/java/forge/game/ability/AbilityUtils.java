@@ -2171,7 +2171,7 @@ public class AbilityUtils {
         // Count$IfCastInOwnMainPhase.<numMain>.<numNotMain>
         if (sq[0].endsWith("InOwnMainPhase")) {
             final PhaseHandler cPhase = game.getPhaseHandler();
-            final boolean isMyMain = cPhase.getPhase().isMain() && cPhase.isPlayerTurn(player) &&
+            final boolean isMyMain = cPhase.getPhase().isMain() && cPhase.hasTurnPriority(player) &&
                     (!sq[0].startsWith("IfCast") || c.wasCast());
             return doXMath(Integer.parseInt(sq[isMyMain ? 1 : 2]), expr, c, ctb);
         }
@@ -2904,7 +2904,7 @@ public class AbilityUtils {
             if (s.isLandAbility()) {
                 s.setActivatingPlayer(controller);
                 // CR 305.3
-                if (controller.getGame().getPhaseHandler().isPlayerTurn(controller) && controller.canPlayLand(tgtCard, true, s)) {
+                if (controller.getGame().getPhaseHandler().hasTurnPriority(controller) && controller.canPlayLand(tgtCard, true, s)) {
                     sas.add(s);
                 }
             } else {

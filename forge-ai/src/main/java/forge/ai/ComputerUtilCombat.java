@@ -2286,7 +2286,7 @@ public class ComputerUtilCombat {
 	            		continue;
 	            	}
 	            	//the AI will will fail to predict tapping of attackers
-	            	if (controller.getGame().getPhaseHandler().isPlayerTurn(controller)) {
+	            	if (controller.getGame().getPhaseHandler().hasTurnPriority(controller)) {
 		            	if (combat == null || !combat.isAttacking(combatant) || combat.isAttacking(c)) {
 		            		continue;
 		            	}

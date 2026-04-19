@@ -2982,7 +2982,7 @@ public class CardFactoryUtil {
                     Player activator = this.getActivatingPlayer();
                     final Game game = activator.getGame();
 
-                    if (!activator.hasKeyword("Foretell on any player's turn") && !game.getPhaseHandler().isPlayerTurn(activator)) {
+                    if (!activator.hasKeyword("Foretell on any player's turn") && !game.getPhaseHandler().hasTurnPriority(activator)) {
                         return false;
                     }
 

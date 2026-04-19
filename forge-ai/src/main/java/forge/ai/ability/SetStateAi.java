@@ -186,7 +186,7 @@ public class SetStateAi extends SpellAbilityAi {
         }
 
         // check which state would be better for attacking
-        if (ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+        if (ph.hasTurnPriority(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
             boolean transformAttack = false;
 
             // if an opponent can't block it, no need to transform (back)
@@ -206,7 +206,7 @@ public class SetStateAi extends SpellAbilityAi {
             if (transformAttack) {
                 return true;
             }
-        } else if (ph.isPlayerTurn(ai) && ph.getPhase().equals(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+        } else if (ph.hasTurnPriority(ai) && ph.getPhase().equals(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             if (ph.inCombat() && ph.getCombat().isUnblocked(original)) {
                 // if source is unblocked, check for the power
                 return original.getNetPower() <= copy.getNetPower();

@@ -108,7 +108,7 @@ public abstract class DamageAiBase extends SpellAbilityAi {
             PhaseHandler phase = game.getPhaseHandler();
             // If this is a spell, cast it instead of discarding
             if ((phase.is(PhaseType.END_OF_TURN) || phase.is(PhaseType.MAIN2))
-                    && phase.isPlayerTurn(comp) && hand.size() > comp.getMaxHandSize()) {
+                    && phase.hasTurnPriority(comp) && hand.size() > comp.getMaxHandSize()) {
                 return true;
             }
 
@@ -117,14 +117,14 @@ public abstract class DamageAiBase extends SpellAbilityAi {
                 float value = 0;
                 if (isSorcerySpeed(sa, comp)) {
                     //lower chance for sorcery as other spells may be cast in main2
-                    if (phase.isPlayerTurn(comp) && phase.is(PhaseType.MAIN2)) {
+                    if (phase.hasTurnPriority(comp) && phase.is(PhaseType.MAIN2)) {
                         value = 1.0f * restDamage / enemy.getLife();
                     }
                 } else {
                     // If Sudden Impact type spell, and can hit at least 3 cards during draw phase
                     // have a 100% chance to go for it, enemy hand will only lose cards over time!
                     // But if 3 or less cards, use normal rules, just in case enemy starts holding card or plays a draw spell or we need mana for other instants.
-                    if (phase.isPlayerTurn(enemy)) {
+                    if (phase.hasTurnPriority(enemy)) {
                         if (dmgByCardsInHand
                                 && (phase.is(PhaseType.DRAW))
                                 && (enemy.getCardsIn(ZoneType.Hand).size() > 3)) {

@@ -69,7 +69,7 @@ public class DetainAi extends SpellAbilityAi {
             Card primeTarget = ComputerUtil.getKilledByTargeting(sa, list);
             if (primeTarget != null) {
                 choice = primeTarget;
-            } else if (phase.isPlayerTurn(ai) && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+            } else if (phase.hasTurnPriority(ai) && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 // Tap creatures possible blockers before combat during AI's turn.
                 List<Card> attackers;
                 if (phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
@@ -88,7 +88,7 @@ public class DetainAi extends SpellAbilityAi {
                 } else if (sa.isTrigger() || ComputerUtil.castSpellInMain1(ai, sa)) {
                     choice = ComputerUtilCard.getMostExpensivePermanentAI(list);
                 }
-            } else if (phase.isPlayerTurn(opp)
+            } else if (phase.hasTurnPriority(opp)
                     && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 // Tap creatures possible blockers before combat during AI's turn.
                 if (list.anyMatch(CardPredicates.CREATURES)) {

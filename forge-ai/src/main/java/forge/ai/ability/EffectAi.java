@@ -66,7 +66,7 @@ public class EffectAi extends SpellAbilityAi {
                     randomReturn = true;
                 }
             } else if (logic.equals("RestrictBlocking")) {
-                if (!phase.isPlayerTurn(ai) || phase.getPhase().isBefore(PhaseType.COMBAT_BEGIN)
+                if (!phase.hasTurnPriority(ai) || phase.getPhase().isBefore(PhaseType.COMBAT_BEGIN)
                         || phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
@@ -145,7 +145,7 @@ public class EffectAi extends SpellAbilityAi {
                 }
                 randomReturn = true;
             } else if (logic.equals("ChainVeil")) {
-                if (!phase.isPlayerTurn(ai) || !phase.getPhase().equals(PhaseType.MAIN2) || ai.getPlaneswalkersInPlay().isEmpty()) {
+                if (!phase.hasTurnPriority(ai) || !phase.getPhase().equals(PhaseType.MAIN2) || ai.getPlaneswalkersInPlay().isEmpty()) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
                 randomReturn = true;
@@ -183,7 +183,7 @@ public class EffectAi extends SpellAbilityAi {
                 }
                 randomReturn = true;
             } else if (logic.equals("Evasion")) {
-                if (!phase.isPlayerTurn(ai)) {
+                if (!phase.hasTurnPriority(ai)) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
 
@@ -305,7 +305,7 @@ public class EffectAi extends SpellAbilityAi {
                 if (sa.getPayCosts().hasTapCost()) {
                     options.remove(sa.getHostCard());
                 }
-                if (!options.isEmpty() && phase.isPlayerTurn(ai) && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                if (!options.isEmpty() && phase.hasTurnPriority(ai) && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                     sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(options));
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
@@ -476,7 +476,7 @@ public class EffectAi extends SpellAbilityAi {
             if (hasMayPlayFromGrave && sa.usesTargeting()) {
                 List<Card> targetables = CardUtil.getValidCardsToTarget(sa);
 
-                if (!phase.isPlayerTurn(ai) && phase.is(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+                if (!phase.hasTurnPriority(ai) && phase.is(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                     Combat combat = game.getCombat();
                     CardCollection attackersVsAi = combat.getAttackersOf(ai);
                     if (!attackersVsAi.isEmpty()) {
@@ -521,7 +521,7 @@ public class EffectAi extends SpellAbilityAi {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
-            if (cantBlock && duration == null && phase.isPlayerTurn(ai) && !phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+            if (cantBlock && duration == null && phase.hasTurnPriority(ai) && !phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
@@ -558,7 +558,7 @@ public class EffectAi extends SpellAbilityAi {
                         Card primeTarget = ComputerUtil.getKilledByTargeting(sa, oppCreatures);
                         if (primeTarget != null) {
                             choice = primeTarget;
-                        } else if (phase.isPlayerTurn(ai) && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                        } else if (phase.hasTurnPriority(ai) && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                             // Tap creatures possible blockers before combat during AI's turn.
                             List<Card> attackers;
                             if (phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
@@ -681,7 +681,7 @@ public class EffectAi extends SpellAbilityAi {
 
         Combat combat = game.getCombat();
 
-        if (game.getPhaseHandler().isPlayerTurn(host.getController())) {
+        if (game.getPhaseHandler().hasTurnPriority(host.getController())) {
             // attacking player
             if (!combat.isAttacking(host)) {
                 return false;

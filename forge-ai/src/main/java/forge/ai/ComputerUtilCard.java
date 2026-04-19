@@ -1027,7 +1027,7 @@ public class ComputerUtilCard {
         }
 
         //interrupt 1: Check whether a possible blocker will be killed for the AI to make a bigger attack
-        if (ph.is(PhaseType.MAIN1) && ph.isPlayerTurn(ai) && c.isCreature()) {
+        if (ph.is(PhaseType.MAIN1) && ph.hasTurnPriority(ai) && c.isCreature()) {
             AiAttackController aiAtk = new AiAttackController(ai);
             final Combat combat = new Combat(ai);
             aiAtk.removeBlocker(c);
@@ -1043,7 +1043,7 @@ public class ComputerUtilCard {
         }
 
         // interrupt 2: remove blocker to save my attacker
-        if (ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) && !ph.isPlayerTurn(ai)) {
+        if (ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) && !ph.hasTurnPriority(ai)) {
             Combat currCombat = game.getCombat();
             if (currCombat != null && !currCombat.getAllBlockers().isEmpty() && currCombat.getAllBlockers().contains(c)) {
                 for (Card attacker : currCombat.getAttackersBlockedBy(c)) {
@@ -1129,7 +1129,7 @@ public class ComputerUtilCard {
                 valueTempo += 0.5; // especially when nothing else can be targeted
             }
         }
-        if (!ph.isPlayerTurn(ai) && ph.getPhase().equals(PhaseType.END_OF_TURN)) {
+        if (!ph.hasTurnPriority(ai) && ph.getPhase().equals(PhaseType.END_OF_TURN)) {
             valueTempo *= 2;    //prefer to cast at opponent EOT
         }
         if (valueTempo >= 0.8 && ph.getPhase().isBefore(PhaseType.COMBAT_END)) {
@@ -1146,10 +1146,10 @@ public class ComputerUtilCard {
                 threat += 1.0f * ComputerUtilCombat.damageIfUnblocked(c, ai, combat, true) / ai.getLife();
                 //TODO:add threat from triggers and other abilities (ie. Master of Cruelties)
             }
-            if (ph.isPlayerTurn(ai) && phaseType.isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+            if (ph.hasTurnPriority(ai) && phaseType.isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 threat *= 0.1f;
             }
-            if (!ph.isPlayerTurn(ai) &&
+            if (!ph.hasTurnPriority(ai) &&
                     (phaseType.isBefore(PhaseType.COMBAT_BEGIN) || phaseType.isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS))) {
                 threat *= 0.1f;
             }
@@ -1290,7 +1290,7 @@ public class ComputerUtilCard {
 
         // will the creature attack (only relevant for sorcery speed)?
         if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
-                && phase.isPlayerTurn(ai)
+                && phase.hasTurnPriority(ai)
                 && (SpellAbilityAi.isSorcerySpeed(sa, ai) || main1Preferred)
                 && power > 0
                 && doesCreatureAttackAI(ai, c)) {
@@ -1299,7 +1299,7 @@ public class ComputerUtilCard {
 
         // buff attacker/blocker using triggered pump (unless it's lethal and we don't want to be reckless)
         if (immediately && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS) && !loseCardAtEOT) {
-            if (phase.isPlayerTurn(ai)) {
+            if (phase.hasTurnPriority(ai)) {
                 if (CombatUtil.canAttack(c) || (phase.inCombat() && c.isAttacking())) {
                     return true;
                 }
@@ -1309,7 +1309,7 @@ public class ComputerUtilCard {
         }
 
         if (keywords.contains("Banding") && !c.hasKeyword(Keyword.BANDING)) {
-            if (phase.is(PhaseType.COMBAT_BEGIN) && phase.isPlayerTurn(ai) && !ComputerUtilCard.doesCreatureAttackAI(ai, c)) {
+            if (phase.is(PhaseType.COMBAT_BEGIN) && phase.hasTurnPriority(ai) && !ComputerUtilCard.doesCreatureAttackAI(ai, c)) {
                 // will this card participate in an attacking band?
                 Card bandingCard = getPumpedCreature(ai, sa, c, toughness, power, keywords);
                 // TODO: It may be possible to use AiController.getPredictedCombat here, but that makes it difficult to
@@ -1347,7 +1347,7 @@ public class ComputerUtilCard {
         float chance = 0;
 
         //create and buff attackers
-        if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.isPlayerTurn(ai) && opp.getLife() > 0) {
+        if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.hasTurnPriority(ai) && opp.getLife() > 0) {
             //1. become attacker for whatever reason
             if (!doesCreatureAttackAI(ai, c) && doesSpecifiedCreatureAttackAI(ai, pumped)) {
                 float threat = 1.0f * ComputerUtilCombat.damageIfUnblocked(pumped, opp, combat, true) / opp.getLife();
@@ -1414,7 +1414,7 @@ public class ComputerUtilCard {
         //combat trickery
         if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             //clunky code because ComputerUtilCombat.combatantWouldBeDestroyed() does not work for this sort of artificial combat
-            Combat pumpedCombat = new Combat(phase.isPlayerTurn(ai) ? ai : opp);
+            Combat pumpedCombat = new Combat(phase.hasTurnPriority(ai) ? ai : opp);
             List<Card> opposing = null;
             boolean pumpedWillDie = false;
             final boolean isAttacking = combat.isAttacking(c);
@@ -1942,7 +1942,7 @@ public class ComputerUtilCard {
 
             // A special case which checks that this creature will attack if it's the AI's turn
             if (needsToPlay.equalsIgnoreCase("WillAttack")) {
-                if (sa != null && game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {
+                if (sa != null && game.getPhaseHandler().hasTurnPriority(sa.getActivatingPlayer())) {
                     return doesSpecifiedCreatureAttackAI(sa.getActivatingPlayer(), card) ?
                             AiPlayDecision.WillPlay : AiPlayDecision.BadEtbEffects;
                 } else {

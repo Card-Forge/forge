@@ -279,7 +279,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("ActivePlayerCtrl")) {
-            if (!game.getPhaseHandler().isPlayerTurn(controller)) {
+            if (!game.getPhaseHandler().hasTurnPriority(controller)) {
                 return false;
             }
         } else if (property.startsWith("YouOwn")) {
@@ -1679,7 +1679,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("couldAttackButNotAttacking")) {
-            if (!game.getPhaseHandler().isPlayerTurn(controller)) return false;
+            if (!game.getPhaseHandler().hasTurnPriority(controller)) return false;
             return CombatUtil.couldAttackButNotAttacking(combat, card);
         } else if (property.equals("linkedCastSA")) {
             if (card.getCastSA() == null) {

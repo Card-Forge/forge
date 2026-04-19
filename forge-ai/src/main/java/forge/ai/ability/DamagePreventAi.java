@@ -50,7 +50,7 @@ public class DamagePreventAi extends SpellAbilityAi {
                         } else if (o instanceof Player) {
                             // Don't need to worry about Combat Damage during AI's turn
                             final Player p = (Player) o;
-                            if (!handler.isPlayerTurn(p)) {
+                            if (!handler.hasTurnPriority(p)) {
                                 flag = flag || (p == ai && ((ComputerUtilCombat.wouldLoseLife(ai, combat) && sa
                                         .isAbility()) || ComputerUtilCombat.lifeInDanger(ai, combat)));
                             }

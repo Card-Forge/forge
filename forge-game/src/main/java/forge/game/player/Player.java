@@ -286,6 +286,8 @@ public class Player extends GameEntity implements Comparable<Player> {
                 // Use this player's startingLife as the team's starting life
                 this.team.setStartingLife(this.startingLife);
                 this.team.setLife(this.startingLife);
+                // 2HG rule: teams need 15 poison counters to lose
+                this.team.setPoisonThreshold(15);
             }
             // Sync this player's life to the team's life
             this.life = this.team.getLife();
@@ -1807,20 +1809,7 @@ public class Player extends GameEntity implements Comparable<Player> {
      * In shared turn mode, teammates can also play lands during each other's turns.
      */
     private boolean isValidLandPlayTime() {
-        final Player currentPlayer = game.getPhaseHandler().getPlayerTurn();
-
-        // Check if it's this player's turn
-        if (this.equals(currentPlayer)) {
-            return true;
-        }
-
-        // Check if shared turns are enabled and it's a teammate's turn
-        if (game.getRules().isUseSharedTurns()) {
-            // Only allow if we're on the same team as the current player
-            return this.getTeam() == currentPlayer.getTeam();
-        }
-
-        return false;
+        return game.getPhaseHandler().hasTurnPriority(this);
     }
 
     public final int getMaxLandPlays() {
@@ -2657,7 +2646,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         elementalBendThisTurn.clear();
 
         // set last turn nr
-        if (game.getPhaseHandler().isPlayerTurn(this)) {
+        if (game.getPhaseHandler().hasTurnPriority(this)) {
             setBeenDealtCombatDamageSinceLastTurn(false);
             setAttackedPlayersMyLastTurn(getAttackedPlayersMyTurn());
             clearAttackedMyTurn();
@@ -2667,22 +2656,11 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public boolean canCastSorcery() {
         PhaseHandler now = game.getPhaseHandler();
-        Player turnPlayer = now.getPlayerTurn();
-
         if (!game.getStack().isEmpty() || !now.getPhase().isMain()) {
             return false;
         }
-
-        // In shared turn games, allow sorcery casting for this player or their teammates
-        boolean isCorrectTurn = now.isPlayerTurn(this);
-        if (!isCorrectTurn && game.getRules().isUseSharedTurns()) {
-            // Check if any teammate has priority
-            if (this.getTeamObject() != null && this.getTeamObject() != Team.UNASSIGNED) {
-                isCorrectTurn = turnPlayer != null && this.getTeamObject().equals(turnPlayer.getTeamObject());
-            }
-        }
-
-        return isCorrectTurn;
+        // hasTurnPriority returns true for the active player AND their teammates (in shared turns)
+        return now.hasTurnPriority(this);
     }
 
     public final PlayerController getController() {

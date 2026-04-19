@@ -111,7 +111,7 @@ public class TokenAi extends SpellAbilityAi {
         boolean isCreature = actualToken.isCreature();
 
         // Don't generate tokens without haste before main 2 if possible
-        if (ph.getPhase().isBefore(PhaseType.MAIN2) && ph.isPlayerTurn(ai) && !haste && !sa.hasParam("ActivationPhases")
+        if (ph.getPhase().isBefore(PhaseType.MAIN2) && ph.hasTurnPriority(ai) && !haste && !sa.hasParam("ActivationPhases")
                 && !ComputerUtil.castSpellInMain1(ai, sa)) {
             boolean buff = false;
             for (Card c : ai.getCardsIn(ZoneType.Battlefield)) {
@@ -123,12 +123,12 @@ public class TokenAi extends SpellAbilityAi {
                 return false;
             }
         }
-        if ((ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS))
+        if ((ph.hasTurnPriority(ai) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS))
                 && !sa.hasParam("ActivationPhases") && !sa.hasParam("PlayerTurn") && !isSorcerySpeed(sa, ai)
                 && !haste && !pwMinus) {
             return false;
         }
-        return (!ph.getPhase().isAfter(PhaseType.COMBAT_BEGIN) && ph.isPlayerTurn(ai)) || !oneShot;
+        return (!ph.getPhase().isAfter(PhaseType.COMBAT_BEGIN) && ph.hasTurnPriority(ai)) || !oneShot;
     }
 
     @Override

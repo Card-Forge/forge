@@ -35,7 +35,7 @@ public class PermanentAi extends SpellAbilityAi {
         }
 
         // Wait for Main2 if possible
-        return !ph.is(PhaseType.MAIN1) || !ph.isPlayerTurn(ai) || sa.hasParam("WithoutManaCost") || ComputerUtil.castPermanentInMain1(ai, sa);
+        return !ph.is(PhaseType.MAIN1) || !ph.hasTurnPriority(ai) || sa.hasParam("WithoutManaCost") || ComputerUtil.castPermanentInMain1(ai, sa);
     }
 
     /**

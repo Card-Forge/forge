@@ -111,7 +111,7 @@ public class AnimateAi extends SpellAbilityAi {
             }
         }
         // Don't use instant speed animate abilities before AI's COMBAT_BEGIN
-        if (!ph.is(PhaseType.COMBAT_BEGIN) && ph.isPlayerTurn(ai) && !isSorcerySpeed(sa, ai)
+        if (!ph.is(PhaseType.COMBAT_BEGIN) && ph.hasTurnPriority(ai) && !isSorcerySpeed(sa, ai)
                 && !sa.hasParam("ActivationPhases") && !"Permanent".equals(sa.getParam("Duration"))) {
             return false;
         }
@@ -133,7 +133,7 @@ public class AnimateAi extends SpellAbilityAi {
         boolean activateAsPotentialBlocker = "UntilYourNextTurn".equals(sa.getParam("Duration"))
                 && game.getPhaseHandler().getNextTurn() != ai
                 && source.isPermanent();
-        if (ph.isPlayerTurn(ai) && ai.getLife() < 6 && opponent.getLife() > 6
+        if (ph.hasTurnPriority(ai) && ai.getLife() < 6 && opponent.getLife() > 6
                 && opponent.getZone(ZoneType.Battlefield).contains(CardPredicates.CREATURES)
                 && !sa.hasParam("AILogic") && !"Permanent".equals(sa.getParam("Duration")) && !activateAsPotentialBlocker) {
             return false;
@@ -172,7 +172,7 @@ public class AnimateAi extends SpellAbilityAi {
         boolean givesHaste = sa.hasParam("Keywords") && sa.getParam("Keywords").contains("Haste");
         for (final Card c : defined) {
             bFlag |= !c.isCreature() && !c.isTapped()
-                    && (!c.hasSickness() || givesHaste || !ph.isPlayerTurn(aiPlayer))
+                    && (!c.hasSickness() || givesHaste || !ph.hasTurnPriority(aiPlayer))
                     && !c.isEquipping();
 
             // for creatures that could be improved (like Figure of Destiny)
@@ -205,7 +205,7 @@ public class AnimateAi extends SpellAbilityAi {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
                 Card animatedCopy = becomeAnimated(c, sa);
-                if (ph.isPlayerTurn(aiPlayer)
+                if (ph.hasTurnPriority(aiPlayer)
                         && !ComputerUtilCard.doesSpecifiedCreatureAttackAI(aiPlayer, animatedCopy)) {
                     return new AiAbilityDecision(0, AiPlayDecision.DoesntImpactCombat);
                 }
@@ -349,7 +349,7 @@ public class AnimateAi extends SpellAbilityAi {
 
                 // if its player turn,
                 // check if its Permanent or that creature would attack
-                if (ph.isPlayerTurn(ai)) {
+                if (ph.hasTurnPriority(ai)) {
                     if (!"Permanent".equals(sa.getParam("Duration"))
                             && !ComputerUtilCard.doesSpecifiedCreatureAttackAI(ai, animatedCopy)
                             && !"UntilHostLeavesPlay".equals(sa.getParam("Duration"))) {

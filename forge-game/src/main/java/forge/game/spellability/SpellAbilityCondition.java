@@ -28,7 +28,6 @@ import forge.game.card.Card;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
-import forge.game.player.Team;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import forge.util.collect.FCollection;
@@ -300,15 +299,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
 
         if (this.isPlayerTurn()) {
             boolean b = !sa.getParam("ConditionPlayerTurn").equals("False");
-            boolean isCorrectTurn = phase.isPlayerTurn(activator);
-            // In shared turn games, allow timing for teammates
-            if (!isCorrectTurn && game.getRules().isUseSharedTurns()) {
-                Player turnPlayer = phase.getPlayerTurn();
-                if (turnPlayer != null && activator.getTeamObject() != null && 
-                    activator.getTeamObject() != Team.UNASSIGNED) {
-                    isCorrectTurn = activator.getTeamObject().equals(turnPlayer.getTeamObject());
-                }
-            }
+            boolean isCorrectTurn = phase.hasTurnPriority(activator);
             if (!b && isCorrectTurn) {
                 return false;
             } else if (b && !isCorrectTurn) {

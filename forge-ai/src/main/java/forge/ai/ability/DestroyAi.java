@@ -63,7 +63,7 @@ public class DestroyAi extends SpellAbilityAi {
 
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph, final String logic) {
         if ("AtOpponentsCombatOrAfter".equals(logic)) {
-            if (ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+            if (ph.hasTurnPriority(ai) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 return false;
             }
         } else if ("AtEOT".equals(logic)) {
@@ -84,7 +84,7 @@ public class DestroyAi extends SpellAbilityAi {
             havepact |= ai.isCardInPlay("Butcher of Malakir");
             havepact |= ai.isCardInPlay("Dictate of Erebos");
             if (havepact) {
-                if ((!ph.isPlayerTurn(ai))
+                if ((!ph.hasTurnPriority(ai))
                         && ((ph.is(PhaseType.END_OF_TURN)) || (ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS)))
                         && (ai.getOpponents().getCreaturesInPlay().size() > 0)) {
                     CardCollection list = CardLists.getTargetableCards(ai.getCardsIn(ZoneType.Battlefield), sa);
@@ -283,7 +283,7 @@ public class DestroyAi extends SpellAbilityAi {
             list = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
             if ("WillSkipTurn".equals(logic) && (source.getController().equals(ai)
                 || ai.getCreaturesInPlay().size() < ai.getWeakestOpponent().getCreaturesInPlay().size()
-                || !source.getGame().getPhaseHandler().isPlayerTurn(ai)
+                || !source.getGame().getPhaseHandler().hasTurnPriority(ai)
                 || ai.getLife() <= 5)) {
                 // Basic ai logic for Lethal Vapors
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
@@ -415,8 +415,8 @@ public class DestroyAi extends SpellAbilityAi {
 
         // if the opponent didn't play a land and has few lands OTB, might be worth mana-locking him
         PhaseHandler ph = ai.getGame().getPhaseHandler();
-        boolean oppSkippedLandDrop = (tgtPlayer.getLandsPlayedLastTurn() == 0 && ph.isPlayerTurn(ai))
-                || (tgtPlayer.getLandsPlayedThisTurn() == 0 && ph.isPlayerTurn(tgtPlayer) && ph.getPhase().isAfter(PhaseType.MAIN2));
+        boolean oppSkippedLandDrop = (tgtPlayer.getLandsPlayedLastTurn() == 0 && ph.hasTurnPriority(ai))
+                || (tgtPlayer.getLandsPlayedThisTurn() == 0 && ph.hasTurnPriority(tgtPlayer) && ph.getPhase().isAfter(PhaseType.MAIN2));
         boolean canManaLock = oppLandsOTB <= amountLandsToManalock && oppSkippedLandDrop;
 
         // Best target is a basic land, and there's only one of it, so destroying it may potentially color-lock the opponent

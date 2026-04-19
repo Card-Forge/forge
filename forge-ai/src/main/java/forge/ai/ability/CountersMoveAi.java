@@ -60,7 +60,7 @@ public class CountersMoveAi extends SpellAbilityAi {
                 if (ph.inCombat() && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                     for (final Card c : srcCards) {
                         // source is not controlled by current player
-                        if (!ph.isPlayerTurn(c.getController())) {
+                        if (!ph.hasTurnPriority(c.getController())) {
                             continue;
                         }
 

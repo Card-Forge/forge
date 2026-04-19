@@ -96,7 +96,7 @@ public class FogAi extends SpellAbilityAi {
         // if card would be destroyed, react and use immediately if it's not own turn
         if ((AiCardMemory.isRememberedCard(ai, hostCard, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT))
                 && (!game.getStack().isEmpty())
-                && (!game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer()))) {
+                && (!game.getPhaseHandler().hasTurnPriority(sa.getActivatingPlayer()))) {
             final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(ai, null);
             if (objects.contains(hostCard)) {
                 AiCardMemory.clearMemorySet(ai, AiCardMemory.MemorySet.HELD_MANA_SOURCES_FOR_ENEMY_DECLBLK);
@@ -105,7 +105,7 @@ public class FogAi extends SpellAbilityAi {
         }
 
         // Reserve mana to cast this card if it will be likely needed
-        if (((game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer()))
+        if (((game.getPhaseHandler().hasTurnPriority(sa.getActivatingPlayer()))
                 || (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)))
                 && (AiCardMemory.isMemorySetEmpty(ai, AiCardMemory.MemorySet.CHOSEN_FOG_EFFECT))
                 && (ComputerUtil.aiLifeInDanger(ai, false, 0))) {
@@ -164,7 +164,7 @@ public class FogAi extends SpellAbilityAi {
     protected AiAbilityDecision doTriggerNoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         final Game game = aiPlayer.getGame();
         boolean chance;
-        if (game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer().getWeakestOpponent())) {
+        if (game.getPhaseHandler().hasTurnPriority(sa.getActivatingPlayer().getWeakestOpponent())) {
             chance = game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE);
         } else {
             chance = game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DAMAGE);

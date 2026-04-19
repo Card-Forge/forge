@@ -5,7 +5,6 @@ import com.google.common.collect.Maps;
 import com.google.common.primitives.Ints;
 import forge.LobbyPlayer;
 import forge.ai.AIOption;
-import forge.ai.AiProfileUtil;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckFormat;
@@ -41,6 +40,8 @@ public abstract class GameLobby implements IHasGameType {
     private int lastArchenemy = 0;
     // whether to use shared team life in the GameRules when starting a match
     private boolean useSharedTeamLife = false;
+    // whether to use shared turns (teammates act together) when starting a match
+    private boolean useSharedTurns = false;
 
     public void setUseSharedTeamLife(final boolean useSharedTeamLife) {
         this.useSharedTeamLife = useSharedTeamLife;
@@ -48,6 +49,14 @@ public abstract class GameLobby implements IHasGameType {
 
     public boolean getUseSharedTeamLife() {
         return this.useSharedTeamLife;
+    }
+
+    public void setUseSharedTurns(final boolean useSharedTurns) {
+        this.useSharedTurns = useSharedTurns;
+    }
+
+    public boolean getUseSharedTurns() {
+        return this.useSharedTurns;
     }
 
     private IUpdateable listener;
@@ -542,9 +551,17 @@ public abstract class GameLobby implements IHasGameType {
             hostedMatch.setOnMatchOver(this::onMatchOver);
 
             final GameRules rules = HostedMatch.getDefaultRules(GameType.Constructed);
-            // apply shared team life setting from the lobby
+            // apply shared team life and shared turns settings from the lobby
             rules.setUseSharedTeamLife(useSharedTeamLife);
-            rules.setUseSharedTurns(useSharedTeamLife);
+            rules.setUseSharedTurns(useSharedTurns);
+
+            // Two-Headed Giant defaults: 30 starting life per team, 15 poison counters to lose
+            if (useSharedTeamLife) {
+                rules.setPoisonCountersToLose(15);
+                for (RegisteredPlayer rp : players) {
+                    rp.setStartingLife(30);
+                }
+            }
 
             hostedMatch.startMatch(rules, variantTypes, players, guis, null);
 

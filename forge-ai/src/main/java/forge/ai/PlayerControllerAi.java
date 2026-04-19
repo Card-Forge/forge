@@ -1423,7 +1423,7 @@ public class PlayerControllerAi extends PlayerController {
         CardCollection untapped = CardLists.filter(untappedCards, c -> c.getManaAbilities().isEmpty());
 
         // Filter out creatures if AI hasn't attacked yet
-        if (ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+        if (ph.hasTurnPriority(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
             if (!creatures) {
                 untapped = CardLists.filter(untapped, c -> !c.isCreature());
             } else {
@@ -1432,8 +1432,8 @@ public class PlayerControllerAi extends PlayerController {
             }
         }
 
-        if ((ph.isPlayerTurn(ai) && ph.getPhase().isAfter(PhaseType.COMBAT_BEGIN)) ||
-                (!ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS))) {
+        if ((ph.hasTurnPriority(ai) && ph.getPhase().isAfter(PhaseType.COMBAT_BEGIN)) ||
+                (!ph.hasTurnPriority(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS))) {
             // Do not convoke potential blockers until after opponent's attack
             final CardCollectionView blockers = ComputerUtil.protectRecursion(sa, () -> ComputerUtilCard.getLikelyBlockers(ai, null), CardCollection.EMPTY);
             untapped.removeAll(blockers);

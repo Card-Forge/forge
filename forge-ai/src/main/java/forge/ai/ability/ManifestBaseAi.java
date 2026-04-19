@@ -42,7 +42,7 @@ public abstract class ManifestBaseAi extends SpellAbilityAi {
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
         // Only manifest things on your turn if sorcery speed, or would pump one of my creatures
-        if (ph.isPlayerTurn(ai)) {
+        if (ph.hasTurnPriority(ai)) {
             if (ph.getPhase().isBefore(PhaseType.MAIN2)
                     && !sa.hasParam("ActivationPhases")
                     && !ComputerUtil.castSpellInMain1(ai, sa)) {

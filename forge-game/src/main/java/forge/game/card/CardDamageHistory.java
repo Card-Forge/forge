@@ -237,7 +237,7 @@ public class CardDamageHistory {
         if (isCombat && target instanceof Player) {
             final Player pTgt = (Player) target;
             damagedThisCombat.add(pTgt);
-            if (pTgt.getLastTurnNr() > 0 && !pTgt.getGame().getPhaseHandler().isPlayerTurn(pTgt)) {
+            if (pTgt.getLastTurnNr() > 0 && !pTgt.getGame().getPhaseHandler().hasTurnPriority(pTgt)) {
                 pTgt.setBeenDealtCombatDamageSinceLastTurn(true);
             }
         }

@@ -71,7 +71,7 @@ public class SpecialAiLogic {
                         return false;
                     }
                 }
-                if ((!choice.isCreature() || choice.isTapped()) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS) && ph.isPlayerTurn(ai) // prevent surprise combatant
+                if ((!choice.isCreature() || choice.isTapped()) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS) && ph.hasTurnPriority(ai) // prevent surprise combatant
                         || ComputerUtilCard.evaluateCreature(choice) < 1.5 * ComputerUtilCard.evaluateCreature(token)) {
                     choice = null;
                 }
@@ -96,7 +96,7 @@ public class SpecialAiLogic {
                 ));
             }
             if (bestOwnCardToUpgrade != null) {
-                if (ComputerUtilCard.isUselessCreature(ai, bestOwnCardToUpgrade) || (ph.getPhase().isAfter(PhaseType.COMBAT_END) || !ph.isPlayerTurn(ai))) {
+                if (ComputerUtilCard.isUselessCreature(ai, bestOwnCardToUpgrade) || (ph.getPhase().isAfter(PhaseType.COMBAT_END) || !ph.hasTurnPriority(ai))) {
                     choice = bestOwnCardToUpgrade;
                 }
             }
@@ -403,7 +403,7 @@ public class SpecialAiLogic {
         }
 
         // not AI turn
-        if (!game.getPhaseHandler().isPlayerTurn(player)) {
+        if (!game.getPhaseHandler().hasTurnPriority(player)) {
             return false;
         }
 

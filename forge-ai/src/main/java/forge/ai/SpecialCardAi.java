@@ -549,7 +549,7 @@ public class SpecialCardAi {
             // Only check for sacrifice if it's the owner's turn, and it can attack.
             // TODO: Maybe check if sacrificing a creature allows AI to kill the opponent with the rest on their turn?
             if (!CombatUtil.canAttack(c) ||
-                    !ai.getGame().getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {
+                    !ai.getGame().getPhaseHandler().hasTurnPriority(sa.getActivatingPlayer())) {
                 return false;
             }
 
@@ -1385,7 +1385,7 @@ public class SpecialCardAi {
             } else if (computerHandSize + exiledWithNecro - 1 >= maxHandSize) {
                 // Only draw until we reach max hand size
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-            } else if (!ph.isPlayerTurn(ai) || !ph.is(PhaseType.MAIN2)) {
+            } else if (!ph.hasTurnPriority(ai) || !ph.is(PhaseType.MAIN2)) {
                 // Only activate in AI's own turn (sans the exception above)
                 return new AiAbilityDecision(0, AiPlayDecision.WaitForMain2);
             }
@@ -1419,7 +1419,7 @@ public class SpecialCardAi {
         public static boolean consider(final Player ai, final SpellAbility sa) {
             Game game = ai.getGame();
             PhaseHandler ph = game.getPhaseHandler();
-            if (!ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.MAIN2)) {
+            if (!ph.hasTurnPriority(ai) || ph.getPhase().isBefore(PhaseType.MAIN2)) {
                 // TODO: currently limited to Main 2, somehow improve to let the AI use this SA at other time?
                 return false;
             }
@@ -2083,7 +2083,7 @@ public class SpecialCardAi {
             } else if (computerHandSize + 1 > maxHandSize) {
                 // Only draw until we reach max hand size
                 return false;
-            } else if (!ph.isPlayerTurn(ai)) {
+            } else if (!ph.hasTurnPriority(ai)) {
                 // Only activate in AI's own turn (sans the exception above)
                 return false;
             }

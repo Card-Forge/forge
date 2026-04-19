@@ -658,7 +658,7 @@ public class CountersPutAi extends CountersAi {
             if (ph.getPhase().isBefore(PhaseType.MAIN2) && !ComputerUtil.castSpellInMain1(ai, sa)) {
                 return new AiAbilityDecision(0, AiPlayDecision.WaitForMain2);
             }
-            if (ph.isPlayerTurn(ai) && !isSorcerySpeed(sa, ai)) {
+            if (ph.hasTurnPriority(ai) && !isSorcerySpeed(sa, ai)) {
                 return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
             }
         }

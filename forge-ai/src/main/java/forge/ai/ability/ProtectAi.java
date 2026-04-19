@@ -201,11 +201,11 @@ public class ProtectAi extends SpellAbilityAi {
             // If the cost is tapping, don't activate before declare attack/block
             if (sa.getPayCosts().hasTapCost()) {
                 if (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
-                        && game.getPhaseHandler().isPlayerTurn(ai)) {
+                        && game.getPhaseHandler().hasTurnPriority(ai)) {
                     list.remove(sa.getHostCard());
                 }
                 if (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                        && game.getPhaseHandler().isPlayerTurn(ai)) {
+                        && game.getPhaseHandler().hasTurnPriority(ai)) {
                     list.remove(sa.getHostCard());
                 }
             }

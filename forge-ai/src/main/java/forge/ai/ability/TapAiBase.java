@@ -90,8 +90,6 @@ public abstract class TapAiBase extends SpellAbilityAi {
      * 
      * @param source
      *            a {@link forge.game.card.Card} object.
-     * @param tgt
-     *            a {@link forge.game.spellability.TargetRestrictions} object.
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
      * @param mandatory
@@ -146,7 +144,7 @@ public abstract class TapAiBase extends SpellAbilityAi {
             if (primeTarget != null) {
                 choice = primeTarget;
                 goodTargets = true;
-            } else if (phase.isPlayerTurn(ai) && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+            } else if (phase.hasTurnPriority(ai) && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 // Tap creatures possible blockers before combat during AI's turn.
                 List<Card> attackers;
                 if (phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
@@ -166,7 +164,7 @@ public abstract class TapAiBase extends SpellAbilityAi {
                 } else if (sa.isTrigger() || ComputerUtil.castSpellInMain1(ai, sa)) {
                     choice = ComputerUtilCard.getMostExpensivePermanentAI(tapList);
                 }
-            } else if (phase.isPlayerTurn(opp)
+            } else if (phase.hasTurnPriority(opp)
                     && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 // Tap creatures possible blockers before combat during AI's turn.
                 if (tapList.anyMatch(CardPredicates.CREATURES)) {

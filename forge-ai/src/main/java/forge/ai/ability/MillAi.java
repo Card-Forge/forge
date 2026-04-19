@@ -35,9 +35,9 @@ public class MillAi extends SpellAbilityAi {
     @Override
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
         if ("ExileAndPlayUntilEOT".equals(sa.getParam("AILogic"))) {
-            return ph.is(PhaseType.MAIN1) && ph.isPlayerTurn(ai); // try to maximize the chance of being able to play the card this turn
+            return ph.is(PhaseType.MAIN1) && ph.hasTurnPriority(ai); // try to maximize the chance of being able to play the card this turn
         } else if ("ExileAndPlayOrDealDamage".equals(sa.getParam("AILogic"))) {
-            return (ph.is(PhaseType.MAIN1) || ph.is(PhaseType.MAIN2)) && ph.isPlayerTurn(ai); // Chandra, Torch of Defiance and similar
+            return (ph.is(PhaseType.MAIN1) || ph.is(PhaseType.MAIN2)) && ph.hasTurnPriority(ai); // Chandra, Torch of Defiance and similar
         }
         if (!sa.isPwAbility()) { // Planeswalker abilities are only activated at sorcery speed
             if ("You".equals(sa.getParam("Defined")) && !(!isSorcerySpeed(sa, ai) && ph.is(PhaseType.END_OF_TURN)

@@ -70,6 +70,13 @@ public class TeamPriority implements PriorityManager, java.io.Serializable {
         initializeTeamMembers(player);
     }
 
+    @Override
+    public final boolean hasTurnPriority(final Player player, final Player turnPlayer) {
+        return turnPlayer.equals(player) ||
+                firstPlayer.equals(turnPlayer) && currentTeamMembers.contains(player) ||
+                firstPlayer.equals(player) && currentTeamMembers.contains(turnPlayer);
+    }
+
     /**
      * Resets priority to a specific player at the start of a new priority round.
      *

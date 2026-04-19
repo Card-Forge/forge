@@ -119,8 +119,9 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
         return turn;
     }
 
-    public final boolean isPlayerTurn(final Player player) {
-        return player.equals(playerTurn);
+    public final boolean hasTurnPriority(final Player player) {
+        // Passing this through for priority manager, to make our lives easier for TeamPriority.
+        return priorityManager.hasTurnPriority(player, playerTurn);
     }
 
     public final Player getPlayerTurn() {
@@ -531,21 +532,26 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
     }
 
     private void declareAttackersTurnBasedAction() {
-        final Player whoDeclares = getDeclarersForCombat(playerTurn, true);
+        final List<Player> activePlayers = getActiveTurnPlayers();
 
-        if (CombatUtil.canAttack(playerTurn)) {
+        if (activePlayers.stream().anyMatch(CombatUtil::canAttack)) {
             boolean success = false;
             do {
                 if (game.isGameOver()) { // they just like to close window at any moment
                     return;
                 }
 
-                whoDeclares.getController().declareAttackers(playerTurn, combat);
+                // In shared turns each active player declares attackers with their own creatures
+                for (Player ap : activePlayers) {
+                    if (!CombatUtil.canAttack(ap)) { continue; }
+                    final Player whoDeclares = Objects.requireNonNullElse(ap.getDeclaresAttackers(), ap);
+                    whoDeclares.getController().declareAttackers(ap, combat);
+                }
                 combat.removeAbsentCombatants();
 
                 success = CombatUtil.validateAttackers(combat);
                 if (!success) {
-                    whoDeclares.getController().notifyOfValue(null, null, "Attack declaration invalid");
+                    playerTurn.getController().notifyOfValue(null, null, "Attack declaration invalid");
                     continue;
                 }
 
@@ -559,18 +565,26 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                     }
                 }
 
-                // CR 508.1g
-                List<Card> possibleExerters = CombatUtil.getOptionalAttackCostCreatures(combat.getAttackers(), CostExert.class);
-                if (!possibleExerters.isEmpty()) {
-                    possibleExerters = whoDeclares.getController().exertAttackers(possibleExerters);
+                // CR 508.1g - ask each active player's controller about their own creatures
+                List<Card> possibleExerters = new ArrayList<>();
+                for (Player ap : activePlayers) {
+                    List<Card> apExerters = CombatUtil.getOptionalAttackCostCreatures(
+                            CardLists.filterControlledBy(combat.getAttackers(), ap), CostExert.class);
+                    if (!apExerters.isEmpty()) {
+                        possibleExerters.addAll(ap.getController().exertAttackers(apExerters));
+                    }
                 }
 
-                List<Card> possibleEnlisters = CombatUtil.getOptionalAttackCostCreatures(combat.getAttackers(), CostEnlist.class);
-                if (!possibleEnlisters.isEmpty()) {
-                    // TODO might want to skip if can't be paid
-                    possibleEnlisters = whoDeclares.getController().enlistAttackers(possibleEnlisters);
-                    possibleExerters.addAll(possibleEnlisters);
+                List<Card> possibleEnlisters = new ArrayList<>();
+                for (Player ap : activePlayers) {
+                    List<Card> apEnlisters = CombatUtil.getOptionalAttackCostCreatures(
+                            CardLists.filterControlledBy(combat.getAttackers(), ap), CostEnlist.class);
+                    if (!apEnlisters.isEmpty()) {
+                        // TODO might want to skip if can't be paid
+                        possibleEnlisters.addAll(ap.getController().enlistAttackers(apEnlisters));
+                    }
                 }
+                possibleExerters.addAll(possibleEnlisters);
 
                 for (final Card attacker : combat.getAttackers()) {
                     // TODO currently doesn't refund previous attackers (can really only happen if you cancel paying for a creature with an attack requirement that could be satisfied without a tax)
@@ -605,7 +619,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
             if (!tapped.isEmpty()) {
                 final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                 runParams.put(AbilityKey.Cards, tapped);
-                whoDeclares.getGame().getTriggerHandler().runTrigger(TriggerType.TapAll, runParams, false);
+                game.getTriggerHandler().runTrigger(TriggerType.TapAll, runParams, false);
             }
         }
 
@@ -658,7 +672,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
         do {
             p = game.getNextPlayerAfter(p);
             // Apply Odric's effect here
-            Player whoDeclaresBlockers = getDeclarersForCombat(p, false);
+            Player whoDeclaresBlockers = Objects.requireNonNullElse(p.getDeclaresBlockers(), p);
             if (combat.isPlayerAttacked(p)) {
                 if (CombatUtil.canBlock(p, combat)) {
                     // Replacement effects (for Camouflage)
@@ -1333,30 +1347,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
         }
     }
 
-    /**
-     * Determines who should declare attackers or blockers for a player.
-     * In shared turn games, allows teammates to declare on behalf of each other.
-     * @param player the player whose turn it is
-     * @param isAttackers true if determining attacker declarers, false for blockers
-     * @return the player who should declare (either a controller, teammate, or the player themselves)
-     */
-    private Player getDeclarersForCombat(Player player, boolean isAttackers) {
-        // First check if someone has explicitly taken control to declare
-        Player controlled = isAttackers ? player.getDeclaresAttackers() : player.getDeclaresBlockers();
-        if (controlled != null) {
-            return controlled;
-        }
 
-        // In shared turns mode, allow any teammate to declare
-        if (game.getRules().isUseSharedTurns()) {
-            // For now, return the player themselves (they can be prompted to get input from teammates)
-            // This allows the player or their UI to handle getting input from teammates
-            return player;
-        }
-
-        // Default: player declares for themselves
-        return player;
-    }
 
     /**
      * Handles discarding for a teammate during cleanup phase in shared turns.

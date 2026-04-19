@@ -55,11 +55,11 @@ public class PlayerProperty {
                 return false;
             }
         } else if (property.equals("Active")) {
-            if (!game.getPhaseHandler().isPlayerTurn(player)) {
+            if (!game.getPhaseHandler().hasTurnPriority(player)) {
                 return false;
             }
         } else if (property.equals("NonActive")) {
-            if (game.getPhaseHandler().isPlayerTurn(player)) {
+            if (game.getPhaseHandler().hasTurnPriority(player)) {
                 return false;
             }
         } else if (property.equals("OpponentToActive")) {

@@ -33,6 +33,8 @@ public interface PriorityManager {
      */
     void resetPriority(Player player);
 
+    boolean hasTurnPriority(Player player, Player turnPlayer);
+
     /**
      * Advances priority to the next player in turn order.
      * <p>

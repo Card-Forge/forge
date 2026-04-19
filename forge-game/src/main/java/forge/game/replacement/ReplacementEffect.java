@@ -21,8 +21,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import com.google.common.collect.*;
-
 import forge.util.ITranslatable;
 import org.apache.commons.lang3.StringUtils;
 
@@ -161,7 +159,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
 
         if (hasParam("PlayerTurn")) {
             if (getParam("PlayerTurn").equals("True")) {
-                if (!game.getPhaseHandler().isPlayerTurn(getHostCard().getController())) {
+                if (!game.getPhaseHandler().hasTurnPriority(getHostCard().getController())) {
                     return false;
                 }
             } else {

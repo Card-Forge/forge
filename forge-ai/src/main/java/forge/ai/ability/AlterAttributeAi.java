@@ -117,7 +117,7 @@ public class AlterAttributeAi extends SpellAbilityAi {
             switch (attr.trim()) {
                 case "Saddle":
                 case "Saddled":
-                    if (!ph.isPlayerTurn(ai)) {
+                    if (!ph.hasTurnPriority(ai)) {
                         return false;
                     }
                     // it is too late for combat, Saddle is Sorcery Speed

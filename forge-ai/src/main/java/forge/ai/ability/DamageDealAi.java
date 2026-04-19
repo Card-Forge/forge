@@ -152,7 +152,7 @@ public class DamageDealAi extends DamageAiBase {
         if ("DiscardLands".equals(logic)) {
             dmg = 2;
         } else if (logic.startsWith("ProcRaid.")) {
-            if (ai.getGame().getPhaseHandler().isPlayerTurn(ai) && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+            if (ai.getGame().getPhaseHandler().hasTurnPriority(ai) && ai.getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 for (Card potentialAtkr : ai.getCreaturesInPlay()) {
                     if (ComputerUtilCard.doesCreatureAttackAI(ai, potentialAtkr)) {
                         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
@@ -702,7 +702,7 @@ public class DamageDealAi extends DamageAiBase {
                     if (phase.is(PhaseType.MAIN2) && source.hasSVar("EndOfTurnLeavePlay")) {
                         freePing = true;
                     }
-                    if ("PingAfterAttack".equals(logic) && phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.isPlayerTurn(ai)) {
+                    if ("PingAfterAttack".equals(logic) && phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS) && phase.hasTurnPriority(ai)) {
                         freePing = true;
                     }
                 }

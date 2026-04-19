@@ -287,7 +287,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
      *
      * @param layer
      *            the {@link StaticAbilityLayer} under investigation.
-     * @param ignoreTempSuppression
+     * @param previousRun
      *            whether to ignore temporary suppression of this ability, to be
      *            used when this ability has already begun applying in another
      *            layer and has since been removed from its host card by another
@@ -382,11 +382,11 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             if (condition.equals("MaxSpeed") && !controller.maxSpeed()) return false;
 
             if (condition.equals("PlayerTurn")) {
-                if (!ph.isPlayerTurn(controller)) {
+                if (!ph.hasTurnPriority(controller)) {
                     return false;
                 }
             } else if (condition.equals("NotPlayerTurn")) {
-                if (ph.isPlayerTurn(controller)) {
+                if (ph.hasTurnPriority(controller)) {
                     return false;
                 }
             } else if (condition.equals("ExtraTurn")) {

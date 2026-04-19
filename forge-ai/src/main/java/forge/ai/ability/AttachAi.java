@@ -412,7 +412,6 @@ public class AttachAi extends SpellAbilityAi {
      *            the sa
      * @param mandatory
      *            the mandatory
-     * @param newParam TODO
      *
      * @return the player
      */
@@ -1555,7 +1554,7 @@ public class AttachAi extends SpellAbilityAi {
                     && canBeBlocked
                     && ComputerUtilCombat.canAttackNextTurn(card);
         } else if (keyword.equals("Haste")) {
-            return card.hasSickness() && ph.isPlayerTurn(ai) && !card.isTapped()
+            return card.hasSickness() && ph.hasTurnPriority(ai) && !card.isTapped()
                     && card.getNetCombatDamage() + powerBonus > 0
                     && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     && ComputerUtilCombat.canAttackNextTurn(card);

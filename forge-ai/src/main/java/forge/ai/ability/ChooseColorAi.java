@@ -33,7 +33,7 @@ public class ChooseColorAi extends SpellAbilityAi {
         }
 
         if ("Oona, Queen of the Fae".equals(sourceName)) {
-            if (ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+            if (ph.hasTurnPriority(ai) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
             }
             ComputerUtilCost.setMaxXValue(sa, ai, false);

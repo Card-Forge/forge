@@ -212,7 +212,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
                     attachment.addUnattachCommand(loseControl);
                 }
                 if (lose.contains("UntilTheEndOfYourNextTurn")) {
-                    if (game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {
+                    if (game.getPhaseHandler().hasTurnPriority(sa.getActivatingPlayer())) {
                         game.getEndOfTurn().registerUntilEnd(sa.getActivatingPlayer(), loseControl);
                     } else {
                         game.getEndOfTurn().addUntilEnd(sa.getActivatingPlayer(), loseControl);
@@ -250,10 +250,8 @@ public class ControlGainEffect extends SpellAbilityEffect {
      * getLoseControlCommand.
      * </p>
      *
-     * @param i
+     * @param tStamp
      *            a int.
-     * @param originalController
-     *            a {@link forge.game.player.Player} object.
      * @return a {@link forge.GameCommand} object.
      */
     private static GameCommand getLoseControlCommand(final Card c, final long tStamp, final Card hostCard) {

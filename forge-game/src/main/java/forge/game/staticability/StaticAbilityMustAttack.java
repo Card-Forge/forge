@@ -28,8 +28,8 @@ public class StaticAbilityMustAttack {
                     if (stAb.hasParam("MustAttack")) {
                         List<GameEntity> def = AbilityUtils.getDefinedEntities(stAb.getHostCard(), stAb.getParam("MustAttack"), stAb);
                         for (GameEntity e : def) {
-                            if ((e instanceof Player attackPl && game.getPhaseHandler().isPlayerTurn(attackPl)) ||
-                                    ((e instanceof Card attackPw && game.getPhaseHandler().isPlayerTurn(attackPw.getController())))) {
+                            if ((e instanceof Player attackPl && game.getPhaseHandler().hasTurnPriority(attackPl)) ||
+                                    ((e instanceof Card attackPw && game.getPhaseHandler().hasTurnPriority(attackPw.getController())))) {
                                 // CR 506.2
                                 continue;
                             }

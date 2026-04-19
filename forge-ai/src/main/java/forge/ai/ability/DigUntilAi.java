@@ -26,7 +26,7 @@ public class DigUntilAi extends SpellAbilityAi {
         }
         // if we don't use anything now, we wasted our opportunity.
         if ((ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN))
-                && (!ai.getGame().getPhaseHandler().isPlayerTurn(ai))) {
+                && (!ai.getGame().getPhaseHandler().hasTurnPriority(ai))) {
             chance = 1;
         }
 
@@ -48,7 +48,7 @@ public class DigUntilAi extends SpellAbilityAi {
                 // But we still want more (and want to fill grave) if nothing better to do then
                 // This is important for Replenish/Living Death type decks
                 if (!ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)
-                        && !ai.getGame().getPhaseHandler().isPlayerTurn(ai)) {
+                        && !ai.getGame().getPhaseHandler().hasTurnPriority(ai)) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
             }

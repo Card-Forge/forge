@@ -953,14 +953,14 @@ public abstract class SpellAbilityEffect {
         } else if ("UntilYourNextTurn".equals(duration)) {
             game.getCleanup().addUntil(controller, until);
         } else if ("UntilTheEndOfYourNextTurn".equals(duration)) {
-            if (game.getPhaseHandler().isPlayerTurn(controller)) {
+            if (game.getPhaseHandler().hasTurnPriority(controller)) {
                 game.getEndOfTurn().registerUntilEnd(controller, until);
             } else {
                 game.getEndOfTurn().addUntilEnd(controller, until);
             }
         } else if ("UntilTheEndOfTargetedNextTurn".equals(duration)) {
             Player targeted = sa.getTargets().getFirstTargetedPlayer();
-            if (game.getPhaseHandler().isPlayerTurn(targeted)) {
+            if (game.getPhaseHandler().hasTurnPriority(targeted)) {
                 game.getEndOfTurn().registerUntilEnd(targeted, until);
             } else {
                 game.getEndOfTurn().addUntilEnd(targeted, until);
