@@ -75,7 +75,7 @@ public class BasicMacroSystem implements IMacroSystem {
         // to like to clip text in long messages...
         final String prompt = localizer.getMessage("lblEnterASequence");
         String textSequence = playerControllerHuman.getGui().showInputDialog(prompt, dialogTitle, FSkinProp.ICO_QUEST_NOTES,
-                rememberedSequenceText);
+                rememberedSequenceText, null, false);
         if (textSequence == null || textSequence.trim().isEmpty()) {
             rememberedActions.clear();
             if (!rememberedSequenceText.isEmpty()) {
