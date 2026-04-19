@@ -47,6 +47,9 @@ public final class ServerGameLobby extends GameLobby {
     }
     public void disconnectPlayer(final int index) {
         final LobbySlot slot = getSlot(index);
+        if (slot == null) {
+            return;
+        }
         slot.setType(LobbySlotType.OPEN);
         slot.setName(StringUtils.EMPTY);
         slot.setIsReady(false);
