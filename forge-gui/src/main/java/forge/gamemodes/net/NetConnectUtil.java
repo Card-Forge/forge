@@ -29,6 +29,37 @@ import java.util.List;
 public class NetConnectUtil {
     private NetConnectUtil() { }
 
+    /**
+     * Base listener that forwards the four draft-specific callbacks to the given
+     * {@link ILobbyView}. Host-side and client-side listeners share the same draft
+     * forwarding logic; subclasses only need to override the non-draft methods.
+     */
+    private static abstract class DraftForwardingLobbyListener implements ILobbyListener {
+        private final ILobbyView view;
+
+        DraftForwardingLobbyListener(final ILobbyView view) {
+            this.view = view;
+        }
+
+        @Override
+        public void draftPackArrived(int seatIndex, java.util.List<forge.item.PaperCard> pack,
+                int packNumber, int pickNumber, int timerDurationSeconds) {
+            view.onDraftPackArrived(seatIndex, pack, packNumber, pickNumber, timerDurationSeconds);
+        }
+        @Override
+        public void draftSeatPicked(int seatIndex, int[] seatQueueDepths) {
+            view.onDraftSeatPicked(seatIndex, seatQueueDepths);
+        }
+        @Override
+        public void draftAutoPicked(int seatIndex, forge.item.PaperCard card, int packNumber, int pickInPack) {
+            view.onDraftAutoPicked(seatIndex, card, packNumber, pickInPack);
+        }
+        @Override
+        public void receiveEventPool(String eventId, forge.deck.Deck pool) {
+            view.onReceiveEventPool(eventId, pool);
+        }
+    }
+
     public static String getServerUrl() {
         final String url = SOptionPane.showInputDialog(Localizer.getInstance().getMessage("lblOnlineMultiplayerDest"), Localizer.getInstance().getMessage("lblConnectToServer"));
         if (url == null) { return null; }
@@ -64,7 +95,7 @@ public class NetConnectUtil {
             server.updateLobbyState();
         });
 
-        server.setLobbyListener(new ILobbyListener() {
+        server.setLobbyListener(new DraftForwardingLobbyListener(view) {
             @Override
             public void update(final GameLobbyData state, final int slot) {
                 // NO-OP, lobby connected directly
@@ -170,7 +201,7 @@ public class NetConnectUtil {
         final ClientGameLobby lobby = new ClientGameLobby();
         final ILobbyView view =  onlineLobby.setLobby(lobby);
         lobby.setListener(view);
-        client.addLobbyListener(new ILobbyListener() {
+        client.addLobbyListener(new DraftForwardingLobbyListener(view) {
             @Override
             public void message(final String source, final String message) {
                 chatInterface.addMessage(new ChatMessage(source, message));

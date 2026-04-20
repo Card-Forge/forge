@@ -23,6 +23,7 @@ import forge.deck.DeckProxy;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameFormat;
 import forge.gamemodes.limited.CardRanker;
+import forge.gamemodes.net.EventFormat;
 import forge.gui.card.CardPreferences;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
@@ -309,6 +310,15 @@ public enum ColumnDef {
                     return deckEdition.getCode();
                 return null;
             }),
+    DECK_EVENT_TYPE("lblEventType", "lblEventType", 50, false, SortState.ASC,
+            from -> eventFormatDisplay(eventTag(from.getKey(), "eventFormat")),
+            from -> eventFormatDisplay(eventTag(from.getKey(), "eventFormat"))),
+    DECK_EVENT_PRODUCT("lblProduct", "lblProduct", 80, false, SortState.ASC,
+            from -> eventTag(from.getKey(), "eventProduct"),
+            from -> eventTag(from.getKey(), "eventProduct")),
+    DECK_EVENT_DATE("lblEventDate", "lblEventDate", 60, false, SortState.DESC,
+            from -> eventTag(from.getKey(), "eventDate"),
+            from -> eventTag(from.getKey(), "eventDate")),
     DECK_AI("lblAI", "lblAIStatus", 38, true, SortState.DESC,
             from -> toDeck(from.getKey()).getAI().inMainDeck,
             from -> toDeck(from.getKey()).getAI()),
@@ -439,6 +449,25 @@ public enum ColumnDef {
 
     private static DeckProxy toDeck(final InventoryItem i) {
         return i instanceof DeckProxy ? ((DeckProxy) i) : null;
+    }
+
+    private static String eventTag(final InventoryItem i, final String key) {
+        DeckProxy d = toDeck(i);
+        if (d == null) return "";
+        String v = DeckProxy.getEventTag(d.getDeck(), key);
+        return v != null ? v : "";
+    }
+
+    private static String eventFormatDisplay(final String rawFormat) {
+        if (rawFormat.isEmpty()) return "";
+        Localizer localizer = Localizer.getInstance();
+        if (EventFormat.BOOSTER_DRAFT.name().equals(rawFormat)) {
+            return localizer.getMessage("lblNetworkModeDraft");
+        }
+        if (EventFormat.SEALED.name().equals(rawFormat)) {
+            return localizer.getMessage("lblNetworkModeSealed");
+        }
+        return rawFormat;
     }
 
     private static ColorSet toDeckColor(final InventoryItem i) {

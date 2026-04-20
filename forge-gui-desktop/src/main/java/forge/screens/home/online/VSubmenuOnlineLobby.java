@@ -65,6 +65,10 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
         this.client = client;
     }
 
+    public FGameClient getClient() {
+        return this.client;
+    }
+
     @Override
     public void populate() {
         final JPanel container = VHomeUI.SINGLETON_INSTANCE.getPnlDisplay();
@@ -106,7 +110,7 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
             fdc.getDecksComboBox().addListener(ev -> lobby.focusOnAvatar());
         }
 
-        container.add(lobby.getConstructedFrame(), "gap 20px 20px 20px 0px, push, grow");
+        container.add(lobby.getConstructedFrame(), "gap 20px 20px 10px 0px, push, grow");
         container.add(lobby.getPanelStart(), "gap 0 0 3.5%! 3.5%!, ax center");
 
         if (container.isShowing()) {
@@ -175,6 +179,7 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
             if (SOptionPane.showConfirmDialog(Localizer.getInstance().getMessage("lblLeaveLobbyDescription"), Localizer.getInstance().getMessage("lblLeave"))) {
                 server.stopServer();
                 FNetOverlay.SINGLETON_INSTANCE.reset();
+                if (lobby != null) lobby.cancelActiveDraft();
                 return true;
             }
         } else if (client == null || SOptionPane.showConfirmDialog(Localizer.getInstance().getMessage("lblLeaveLobbyConfirm"), Localizer.getInstance().getMessage("lblLeave"))) {
@@ -183,6 +188,7 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
                 client = null;
             }
             FNetOverlay.SINGLETON_INSTANCE.reset();
+            if (lobby != null) lobby.cancelActiveDraft();
             return true;
         }
         return false;

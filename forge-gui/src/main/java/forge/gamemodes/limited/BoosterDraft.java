@@ -58,12 +58,13 @@ public class BoosterDraft implements IBoosterDraft {
 
     int podSize;
     private final List<LimitedPlayer> players = new ArrayList<>();
-    private final LimitedPlayer localPlayer;
+    private LimitedPlayer localPlayer;
     private boolean readyForComputerPick = false;
 
     private IDraftLog draftLog = null;
 
     private boolean shouldShowDraftLog = false;
+    private boolean forNetwork = false;
 
     private DraftOptions.DoublePick doublePickDuringDraft;
     protected int nextBoosterGroup = 0;
@@ -88,6 +89,23 @@ public class BoosterDraft implements IBoosterDraft {
         return draft;
     }
 
+    /**
+     * Create a draft for network play. Product is generated but boosters are NOT
+     * initialized — the caller must configure pod size and human seats, then call
+     * {@link #initializeBoosters()} manually.
+     *
+     * @param draftType the draft pool type
+     * @return a partially-initialized draft, or null if product generation fails
+     */
+    public static BoosterDraft createDraftForNetwork(final LimitedPoolType draftType) {
+        final BoosterDraft draft = new BoosterDraft(draftType);
+        draft.forNetwork = true;
+        if (!draft.generateProduct()) {
+            return null;
+        }
+        return draft;
+    }
+
     protected boolean generateProduct() {
         switch (this.draftFormat) {
             case Full: // Draft from all cards in Forge
@@ -107,8 +125,14 @@ public class BoosterDraft implements IBoosterDraft {
                         ? FModel.getBlocks()
                         : FModel.getFantasyBlocks();
 
+                // TODO Conspiracy blocks gated for network draft: pack-effect prompts
+                // (Agent of Acquisitions, Cogwork Librarian, etc.) pop on the host, the
+                // conspiracy player-flag state isn't replicated to clients, and the draft
+                // log isn't shipped over the wire. Custom/Chaos/Import paths can still
+                // smuggle CNS cards in — fix those when the underlying issues are resolved.
                 for (final CardBlock b : storage) {
                     if (b.getCntBoostersDraft() > 0) {
+                        if (forNetwork && b.getName().contains("Conspiracy")) continue;
                         blocks.add(b);
                     }
                 }
@@ -347,6 +371,38 @@ public class BoosterDraft implements IBoosterDraft {
         while (this.players.size() > this.podSize) {
             this.players.remove(this.players.size() - 1);
         }
+    }
+
+    /**
+     * Authoritatively set which seats are human-controlled. Seats in {@code humanSeats}
+     * become {@link LimitedPlayer} instances; all other seats become {@link LimitedPlayerAI}.
+     * The constructor seeds seat 0 as a local human by default for single-player use —
+     * network drafts must call this to reassign according to the shuffled seat layout,
+     * which may place the host at a different seat.
+     *
+     * <p>Must be called before {@link #initializeBoosters()} so pack state is allocated
+     * against the final seat configuration. Only network drafts call this; single-player
+     * code leaves seat 0 as the default human.
+     *
+     * @param humanSeats seat indices (0-based) that should be human-controlled
+     */
+    public void setHumanSeats(Set<Integer> humanSeats) {
+        for (int seat = 0; seat < players.size(); seat++) {
+            boolean shouldBeHuman = humanSeats.contains(seat);
+            LimitedPlayer current = players.get(seat);
+            if (shouldBeHuman && current instanceof LimitedPlayerAI) {
+                players.set(seat, new LimitedPlayer(seat, this));
+            } else if (!shouldBeHuman && !(current instanceof LimitedPlayerAI)) {
+                players.set(seat, new LimitedPlayerAI(seat, this));
+            }
+        }
+        // Keep localPlayer consistent with whatever occupies seat 0 now.
+        this.localPlayer = players.get(0);
+    }
+
+    /** Returns the total number of booster rounds in this draft. */
+    public int getNumRounds() {
+        return product.size();
     }
 
     public int getPodSize() {

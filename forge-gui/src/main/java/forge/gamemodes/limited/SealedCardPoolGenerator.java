@@ -69,6 +69,9 @@ public class SealedCardPoolGenerator {
     /** The Land set code. */
     private String landSetCode = null;
 
+    /** Human-readable name of the specific block / edition / custom pool chosen (null for Full). */
+    private String productName = null;
+
     public static DeckGroup generateSealedDeck(final boolean addBasicLands) {
         final String prompt = Localizer.getInstance().getMessage("lblChooseSealedDeckFormat");
         final LimitedPoolType poolType = SGuiChoose.oneOrNone(prompt, LimitedPoolType.values());
@@ -160,7 +163,7 @@ public class SealedCardPoolGenerator {
      * @param poolType
      *            a {@link java.lang.String} object.
      */
-    private SealedCardPoolGenerator(final LimitedPoolType poolType) {
+    public SealedCardPoolGenerator(final LimitedPoolType poolType) {
         switch(poolType) {
             case Full:
                 // Choose number of boosters
@@ -229,6 +232,7 @@ public class SealedCardPoolGenerator {
 
                 //chosenEdition but really it should be defined by something in the edition file?
                 landSetCode = chosenEdition.getCode();
+                productName = chosenEdition.getName();
 
                 break;
             case Block:
@@ -279,6 +283,7 @@ public class SealedCardPoolGenerator {
                 }
 
                 landSetCode = block.getLandSet().getCode();
+                productName = block.getName();
                 break;
 
             case Custom:
@@ -324,6 +329,7 @@ public class SealedCardPoolGenerator {
                 }
 
                 landSetCode = draft.getLandSetCode();
+                productName = draft.getName();
                 break;
             case Import:
                 /*
@@ -558,11 +564,19 @@ public class SealedCardPoolGenerator {
 
     /**
      * Gets the land set code.
-     * 
+     *
      * @return the landSetCode
      */
     public String getLandSetCode() {
         return this.landSetCode;
+    }
+
+    /**
+     * Human-readable name of the specific block / edition / custom pool chosen
+     * during construction, or null if the pool type has no sub-selection (Full).
+     */
+    public String getProductName() {
+        return this.productName;
     }
 
     public boolean isEmpty() {
