@@ -25,7 +25,7 @@ public final class AvailableActions {
             for (SpellAbility sa : card.getAllPossibleAbilities(player, true)) {
                 if (checkTimeout(deadlineNanos, timeoutMs)) return true;
                 if (sa.isSpell()) {
-                    if (canAfford(sa, player) && hasValidTargets(sa)) {
+                    if (canAfford(sa, player) && ComputerUtilAbility.isFullyTargetable(sa)) {
                         return true;
                     }
                 } else if (sa.isLandAbility()) {
@@ -38,7 +38,7 @@ public final class AvailableActions {
         for (Card card : player.getCardsIn(ZoneType.Battlefield)) {
             for (SpellAbility sa : card.getAllPossibleAbilities(player, true)) {
                 if (checkTimeout(deadlineNanos, timeoutMs)) return true;
-                if (!sa.isManaAbility() && canAfford(sa, player) && hasValidTargets(sa)) {
+                if (!sa.isManaAbility() && canAfford(sa, player) && ComputerUtilAbility.isFullyTargetable(sa)) {
                     return true;
                 }
             }
@@ -47,7 +47,7 @@ public final class AvailableActions {
         for (Card card : sortedCardsIn(player, ZoneType.Flashback)) {
             for (SpellAbility sa : card.getAllPossibleAbilities(player, true)) {
                 if (checkTimeout(deadlineNanos, timeoutMs)) return true;
-                if (!sa.isManaAbility() && canAfford(sa, player) && hasValidTargets(sa)) {
+                if (!sa.isManaAbility() && canAfford(sa, player) && ComputerUtilAbility.isFullyTargetable(sa)) {
                     return true;
                 }
             }
@@ -71,13 +71,6 @@ public final class AvailableActions {
             return true;
         }
         return ComputerUtilMana.canPayManaCost(sa, player, 0, false);
-    }
-
-    private static boolean hasValidTargets(SpellAbility sa) {
-        if (!sa.usesTargeting()) {
-            return true;
-        }
-        return sa.getTargetRestrictions().hasCandidates(sa);
     }
 
     private static boolean checkTimeout(long deadlineNanos, long timeoutMs) {
