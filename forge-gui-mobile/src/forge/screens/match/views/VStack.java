@@ -310,10 +310,6 @@ public class VStack extends FDropDown {
                                             }
                                             else {
                                                 controller.setShouldAlwaysAcceptTrigger(triggerID);
-                                                if (stackInstance.equals(gameView.peekStack())) {
-                                                    //auto-yes if ability is on top of stack
-                                                    controller.selectButtonOk();
-                                                }
                                             }
                                         }));
                                 addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblAlwaysNo"),
@@ -324,10 +320,6 @@ public class VStack extends FDropDown {
                                             }
                                             else {
                                                 controller.setShouldAlwaysDeclineTrigger(triggerID);
-                                                if (stackInstance.equals(gameView.peekStack())) {
-                                                    //auto-no if ability is on top of stack
-                                                    controller.selectButtonCancel();
-                                                }
                                             }
                                         }));
                             }

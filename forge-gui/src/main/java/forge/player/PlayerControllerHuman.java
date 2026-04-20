@@ -3573,12 +3573,20 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public void setShouldAlwaysAcceptTrigger(final int trigger) {
         if (isRemoteClient()) remoteTriggerDecisions.put(trigger, Boolean.TRUE);
         else localStore().setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.ACCEPT);
+        if (isPromptingForTrigger(trigger)) selectButtonOk();
     }
 
     @Override
     public void setShouldAlwaysDeclineTrigger(final int trigger) {
         if (isRemoteClient()) remoteTriggerDecisions.put(trigger, Boolean.FALSE);
         else localStore().setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.DECLINE);
+        if (isPromptingForTrigger(trigger)) selectButtonCancel();
+    }
+
+    private boolean isPromptingForTrigger(final int trigger) {
+        if (!(inputQueue.getInput() instanceof InputConfirm)) return false;
+        final SpellAbilityStackInstance top = getGame().getStack().peek();
+        return top != null && top.isStateTrigger(trigger);
     }
 
     @Override
