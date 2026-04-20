@@ -374,6 +374,41 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
     // Inputs
 
+    private boolean sharesAnyCoreType(final Card a, final Card b) {
+        for (CardType.CoreType coreType : CardType.CoreType.values()) {
+            if (a.getType().hasType(coreType) && b.getType().hasType(coreType)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean sharesCommonCoreType(final Iterable<Card> cards) {
+        boolean foundAny = false;
+
+        for (CardType.CoreType coreType : CardType.CoreType.values()) {
+            boolean allHaveType = true;
+            boolean sawCard = false;
+
+            for (final Card card : cards) {
+                sawCard = true;
+                if (!card.getType().hasType(coreType)) {
+                    allHaveType = false;
+                    break;
+                }
+            }
+
+            if (sawCard) {
+                foundAny = true;
+                if (allHaveType) {
+                    return true;
+                }
+            }
+        }
+
+        return !foundAny;
+    }
+
     private PaymentDecision exileFromSame(final CostExile cost, final CardCollectionView list, final int nNeeded, final List<Player> payableZone) {
         if (nNeeded == 0) {
             return PaymentDecision.number(0);
@@ -468,18 +503,58 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return null;
         }
 
-        final List<ZoneType> origin = Lists.newArrayList(cost.from);
-        final String required = sharedType ? " (must share a card type)" : "";
+        if (!sharedType) {
+            final List<ZoneType> origin = Lists.newArrayList(cost.from);
+            final List<Card> chosen = controller.chooseCardsForZoneChange(
+                    ZoneType.Exile,
+                    origin,
+                    ability,
+                    typeList,
+                    mandatory ? nNeeded : 0,
+                    nNeeded,
+                    null,
+                    cost.toString(nNeeded),
+                    null
+            );
 
-        final List<Card> chosen = controller.chooseCardsForZoneChange(ZoneType.Exile, origin, ability, typeList,
-                mandatory ? nNeeded : 0, nNeeded, null, cost.toString(nNeeded) + required,
-                null);
+            if (chosen.size() < nNeeded) {
+                return null;
+            }
+            return PaymentDecision.card(chosen);
+        }
 
+        if (typeList.size() < nNeeded) {
+            return null;
+        }
+
+        final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, mandatory ? nNeeded : 0, nNeeded, typeList, ability) {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            protected boolean onCardSelected(final Card c, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
+                for (final Card selectedCard : this.selected) {
+                    if (!sharesAnyCoreType(selectedCard, c)) {
+                        return false;
+                    }
+                }
+                return super.onCardSelected(c, otherCardsToSelect, triggerEvent);
+            }
+        };
+
+        inp.setMessage(cost.toString(nNeeded) + " (must share a card type)");
+        inp.setCancelAllowed(!mandatory);
+        inp.showAndWait();
+
+        if (inp.hasCancelled()) {
+            return null;
+        }
+
+        final CardCollection chosen = new CardCollection(inp.getSelected());
         if (chosen.size() < nNeeded) {
             return null;
         }
-        if (sharedType) {
-            if (!chosen.get(1).sharesCardTypeWith(chosen.get(0))) return null;
+        if (!sharesCommonCoreType(chosen)) {
+            return null;
         }
 
         return PaymentDecision.card(chosen);
