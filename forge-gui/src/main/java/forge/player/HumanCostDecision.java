@@ -374,15 +374,6 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
     // Inputs
 
-    private boolean sharesAnyCoreType(final Card a, final Card b) {
-        for (CardType.CoreType coreType : CardType.CoreType.values()) {
-            if (a.getType().hasType(coreType) && b.getType().hasType(coreType)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     private boolean sharesCommonCoreType(final Iterable<Card> cards) {
         boolean foundAny = false;
 
@@ -533,7 +524,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             @Override
             protected boolean onCardSelected(final Card c, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
                 for (final Card selectedCard : this.selected) {
-                    if (!sharesAnyCoreType(selectedCard, c)) {
+                    if (!selectedCard.sharesCardTypeWith(c)) {
                         return false;
                     }
                 }
