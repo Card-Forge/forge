@@ -47,7 +47,9 @@ public class VGameMenu extends FDropDownMenu {
                                 if (MatchController.instance.getGameView().peekStack() != null) {
                                     final String key = MatchController.instance.getGameView().peekStack().getKey();
                                     final boolean autoYield = MatchController.instance.getGameController().shouldAutoYield(key);
-                                    MatchController.instance.getGameController().setShouldAutoYield(key, !autoYield);
+                                    boolean abilityScope = !forge.localinstance.properties.ForgeConstants.AUTO_YIELD_PER_CARD.equals(
+                                            forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_YIELD_MODE));
+                                    MatchController.instance.getGameController().setShouldAutoYield(key, !autoYield, abilityScope);
                                     if (!autoYield && MatchController.instance.getGameController().shouldAutoYield(key)) {
                                         //auto-pass priority if ability is on top of stack
                                         MatchController.instance.getGameController().passPriority();

@@ -568,7 +568,12 @@ public enum CSubmenuPreferences implements ICDoc {
     }
 
     private void initializeAutoYieldModeComboBox() {
-        final String[] elems = {ForgeConstants.AUTO_YIELD_PER_ABILITY, ForgeConstants.AUTO_YIELD_PER_CARD};
+        final String[] elems = {
+            ForgeConstants.AUTO_YIELD_PER_CARD,
+            ForgeConstants.AUTO_YIELD_PER_ABILITY,
+            ForgeConstants.AUTO_YIELD_PER_ABILITY_SESSION,
+            ForgeConstants.AUTO_YIELD_PER_ABILITY_INSTALL,
+        };
         final FPref userSetting = FPref.UI_AUTO_YIELD_MODE;
         final FComboBoxPanel<String> panel = this.view.getAutoYieldModeComboBoxPanel();
         final FComboBox<String> comboBox = createComboBox(elems, userSetting);

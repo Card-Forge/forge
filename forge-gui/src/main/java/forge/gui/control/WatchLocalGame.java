@@ -59,10 +59,6 @@ public class WatchLocalGame extends PlayerControllerHuman {
     }
 
     @Override
-    public void confirm() {
-    }
-
-    @Override
     public void passPriority() {
     }
 

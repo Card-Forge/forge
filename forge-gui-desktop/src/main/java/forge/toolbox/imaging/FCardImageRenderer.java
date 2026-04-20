@@ -130,16 +130,16 @@ public class FCardImageRenderer {
         if (rarity == null)// NPE from Rarity weird...
             return Color.MAGENTA;
         switch(rarity) {
-        case Uncommon:
-            return C_UNCOMMON;
-        case Rare:
-            return C_RARE;
-        case MythicRare:
-            return C_MYTHIC;
-        case Special: //"Timeshifted" or other Special Rarity Cards
-            return C_SPECIAL;
-        default: //case BasicLand: + case Common:
-            return C_COMMON;
+            case Uncommon:
+                return C_UNCOMMON;
+            case Rare:
+                return C_RARE;
+            case MythicRare:
+                return C_MYTHIC;
+            case Special: //"Timeshifted" or other Special Rarity Cards
+                return C_SPECIAL;
+            default: //case BasicLand: + case Common:
+                return C_COMMON;
         }
     }
 
@@ -251,7 +251,7 @@ public class FCardImageRenderer {
                 drawCardStateImage(g, rightState, rightText, heightAdjust / 2, width + widthAdjust, rightArt);
             }
         } else if (card.isFlipCard()) {
-            boolean needTranslation = !card.isToken() || !(card.getCloneOrigin() == null);
+            boolean needTranslation = !card.isToken() || card.getCloneOrigin() != null;
             final CardStateView state = card.getState(false);
             final String text = card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(state) : null);
             final CardStateView flipState = card.getState(true);
@@ -264,8 +264,9 @@ public class FCardImageRenderer {
                 g.rotate(Math.PI);
             }
             drawFlipCardImage(g, state, text, flipState, flipText, width, height - heightAdjust, art);
-        } else if (card.hasSecondaryState()) {
-            boolean needTranslation = !card.isToken() || !(card.getCloneOrigin() == null);
+        } else if (card.hasSecondaryState() ||
+                (card.hasAlternateState() && card.getAlternateState().getState() == CardStateName.PreparedSpell)) {
+            boolean needTranslation = !card.isToken() || card.getCloneOrigin() != null;
             final CardStateView state = card.getState(false);
             final String text = card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(state) : null);
             final CardStateView advState = card.getState(true);
@@ -274,7 +275,7 @@ public class FCardImageRenderer {
             updateAreaSizes(ratio, ratio);
             drawAdvCardImage(g, state, text, advState, advText, width, height, art);
         } else {
-            boolean needTranslation = !card.isToken() || !(card.getCloneOrigin() == null);
+            boolean needTranslation = !card.isToken() || card.getCloneOrigin() != null;
             final CardStateView state = card.getState(altState);
             final String text = card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(state) : null);
             CARD_ART_RATIO = 1.37f;
@@ -521,6 +522,7 @@ public class FCardImageRenderer {
 
     private static void drawAdvCardImage(Graphics2D g, CardStateView state, String text, CardStateView advState, String advText, int w, int h, BufferedImage art) {
         int x = 0, y = 0;
+        boolean prepared = advState.getState() == CardStateName.PreparedSpell;
 
         //determine colors for borders
         final List<DetailColors> borderColors = CardDetailUtil.getBorderColors(state, true);
@@ -550,7 +552,7 @@ public class FCardImageRenderer {
 
         //draw text box
         Color[] textBoxColors = tintColors(Color.WHITE, colors, TEXT_BOX_TINT);
-        int textX = x + ART_INSET + textBoxWidth;
+        int textX = x + ART_INSET + (prepared? 0 : textBoxWidth);
         drawTextBox(g, state, text, textBoxColors, textX, textY, textBoxWidth, textBoxHeight, 1);
 
         //draw header containing name and mana cost
@@ -568,7 +570,7 @@ public class FCardImageRenderer {
         int advTypeHeight = advHeaderHeight - 1;
         NAME_SIZE = TYPE_SIZE - 2;
         TYPE_SIZE = NAME_SIZE - 1;
-        textX = x + ART_INSET;
+        textX = x + ART_INSET + (prepared ? textBoxWidth : 0);
 
         // refresh if adventure has different color
         colors = fillColorBackground(g, CardDetailUtil.getBorderColors(advState, true), 0, 0, 0, 0, BLACK_BORDER_THICKNESS);
@@ -586,7 +588,7 @@ public class FCardImageRenderer {
         //draw text box
         TEXT_COLOR = Color.BLACK;
         int yAdjust = advHeaderHeight + advTypeHeight;
-        drawTextBox(g, advState, advText, textBoxColors, textX, textY, textBoxWidth, textBoxHeight, (yAdjust << 16));
+        drawTextBox(g, advState, advText, textBoxColors, textX, textY, textBoxWidth, textBoxHeight - (prepared ? ptBoxHeight : 0), (yAdjust << 16));
     }
 
     private static Color[] fillColorBackground(Graphics2D g, List<DetailColors> backColors, int x, int y, int w, int h, int borderThickness) {
@@ -602,50 +604,50 @@ public class FCardImageRenderer {
     private static void fillColorBackground(Graphics2D g, Color[] colors, float x, float y, float w, float h) {
         Paint oldPaint = g.getPaint();
         switch (colors.length) {
-        case 1:
-            g.setColor(colors[0]);
-            g.fillRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h));
-            break;
-        case 2:
-            GradientPaint gradient = new GradientPaint(x, y, colors[0], x + w, y, colors[1]);
-            g.setPaint(gradient);
-            g.fillRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h));
-            break;
-        case 3:
-            float halfWidth = w / 2;
-            GradientPaint gradient1 = new GradientPaint(x, y, colors[0], x + halfWidth, y, colors[1]);
-            g.setPaint(gradient1);
-            g.fillRect(Math.round(x), Math.round(y), Math.round(halfWidth), Math.round(h));
-            GradientPaint gradient2 = new GradientPaint(x + halfWidth, y, colors[1], x + w, y, colors[2]);
-            g.setPaint(gradient2);
-            g.fillRect(Math.round(x + halfWidth), Math.round(y), Math.round(halfWidth), Math.round(h));
-            break;
+            case 1:
+                g.setColor(colors[0]);
+                g.fillRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h));
+                break;
+            case 2:
+                GradientPaint gradient = new GradientPaint(x, y, colors[0], x + w, y, colors[1]);
+                g.setPaint(gradient);
+                g.fillRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h));
+                break;
+            case 3:
+                float halfWidth = w / 2;
+                GradientPaint gradient1 = new GradientPaint(x, y, colors[0], x + halfWidth, y, colors[1]);
+                g.setPaint(gradient1);
+                g.fillRect(Math.round(x), Math.round(y), Math.round(halfWidth), Math.round(h));
+                GradientPaint gradient2 = new GradientPaint(x + halfWidth, y, colors[1], x + w, y, colors[2]);
+                g.setPaint(gradient2);
+                g.fillRect(Math.round(x + halfWidth), Math.round(y), Math.round(halfWidth), Math.round(h));
+                break;
         }
         g.setPaint(oldPaint);
     }
     private static void fillRoundColorBackground(Graphics2D g, Color[] colors, float x, float y, float w, float h, float arcWidth, float arcHeight) {
         Paint oldPaint = g.getPaint();
         switch (colors.length) {
-        case 1:
-            g.setColor(colors[0]);
-            g.fillRoundRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h), Math.round(arcWidth), Math.round(arcHeight));
-            break;
-        case 2:
-            GradientPaint gradient = new GradientPaint(x, y, colors[0], x + w, y, colors[1]);
-            g.setPaint(gradient);
-            g.fillRoundRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h), Math.round(arcWidth), Math.round(arcHeight));
-            break;
-        case 3:
-            float halfWidth = w / 2;
-            GradientPaint gradient1 = new GradientPaint(x, y, colors[0], x + halfWidth, y, colors[1]);
-            g.setPaint(gradient1);
-            g.fillRoundRect(Math.round(x), Math.round(y), Math.round(halfWidth), Math.round(h), Math.round(arcWidth), Math.round(arcHeight));
-            g.fillRect(Math.round(x + halfWidth - arcWidth), Math.round(y), Math.round(arcWidth), Math.round(h));
-            GradientPaint gradient2 = new GradientPaint(x + halfWidth, y, colors[1], x + w, y, colors[2]);
-            g.setPaint(gradient2);
-            g.fillRoundRect(Math.round(x + halfWidth), Math.round(y), Math.round(halfWidth), Math.round(h), Math.round(arcWidth), Math.round(arcHeight));
-            g.fillRect(Math.round(x + halfWidth), Math.round(y), Math.round(arcWidth), Math.round(h));
-            break;
+            case 1:
+                g.setColor(colors[0]);
+                g.fillRoundRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h), Math.round(arcWidth), Math.round(arcHeight));
+                break;
+            case 2:
+                GradientPaint gradient = new GradientPaint(x, y, colors[0], x + w, y, colors[1]);
+                g.setPaint(gradient);
+                g.fillRoundRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h), Math.round(arcWidth), Math.round(arcHeight));
+                break;
+            case 3:
+                float halfWidth = w / 2;
+                GradientPaint gradient1 = new GradientPaint(x, y, colors[0], x + halfWidth, y, colors[1]);
+                g.setPaint(gradient1);
+                g.fillRoundRect(Math.round(x), Math.round(y), Math.round(halfWidth), Math.round(h), Math.round(arcWidth), Math.round(arcHeight));
+                g.fillRect(Math.round(x + halfWidth - arcWidth), Math.round(y), Math.round(arcWidth), Math.round(h));
+                GradientPaint gradient2 = new GradientPaint(x + halfWidth, y, colors[1], x + w, y, colors[2]);
+                g.setPaint(gradient2);
+                g.fillRoundRect(Math.round(x + halfWidth), Math.round(y), Math.round(halfWidth), Math.round(h), Math.round(arcWidth), Math.round(arcHeight));
+                g.fillRect(Math.round(x + halfWidth), Math.round(y), Math.round(arcWidth), Math.round(h));
+                break;
         }
         g.setPaint(oldPaint);
     }
@@ -690,7 +692,7 @@ public class FCardImageRenderer {
         x += padding;
         w -= 2 * padding;
         drawVerticallyCenteredString(g, CardTranslation.getTranslatedName(state.getName()),
-            new Rectangle(x, y, w, h), NAME_FONT, NAME_SIZE);
+                new Rectangle(x, y, w, h), NAME_FONT, NAME_SIZE);
     }
 
     private static void drawArt(Graphics2D g, Color[] colors, int x, int y, int w, int h, BufferedImage art) {
@@ -770,7 +772,7 @@ public class FCardImageRenderer {
      * @param textBoxFlags [0] bit: has PT box, [1] bit: leveler PT box, [2] bit: leveler Level box, [16~31] bit: y adjust
      */
     private static void drawTextBox(Graphics2D g, CardStateView state, String text, Color[] colors,
-            int x, int y, int w, int h, int textBoxFlags) {
+                                    int x, int y, int w, int h, int textBoxFlags) {
         int yAdjust = (textBoxFlags >> 16);
         FSkinProp imageProp = null;
         if (state.isLand()) {
@@ -1073,7 +1075,7 @@ public class FCardImageRenderer {
         }
 
         public int drawPieces(Graphics2D g, int x, int y, int width, int lineHeight,
-                Font txFont, FontMetrics txMetrics, Font rmFont, FontMetrics rmMetrics) {
+                              Font txFont, FontMetrics txMetrics, Font rmFont, FontMetrics rmMetrics) {
             int pos = 0;
             int lines = 1;
             for (Piece p : pieces) {

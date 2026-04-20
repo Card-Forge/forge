@@ -39,7 +39,9 @@ public class VAutoYields extends FDialog {
             String selected = lstAutoYields.getSelectedItem();
             if (selected != null) {
                 lstAutoYields.removeItem(selected);
-                MatchController.instance.getGameController().setShouldAutoYield(selected, false);
+                boolean abilityScope = !forge.localinstance.properties.ForgeConstants.AUTO_YIELD_PER_CARD.equals(
+                        forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_YIELD_MODE));
+                MatchController.instance.getGameController().setShouldAutoYield(selected, false, abilityScope);
                 setButtonEnabled(1, lstAutoYields.getCount() > 0);
                 lstAutoYields.cleanUpSelections();
                 VAutoYields.this.revalidate();
