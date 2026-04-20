@@ -156,6 +156,7 @@ public class FOptionPane extends FDialog {
 
     private int result = -1; //default result to -1, indicating dialog closed without choosing option
     private final FButton[] buttons;
+    private FTextPane prompt;
 
     public FOptionPane(final String message, final String title, final SkinImage icon, final Component comp, final List<String> options, final int defaultOption) {
         FThreads.assertExecutedByEdt(true);
@@ -166,7 +167,6 @@ public class FOptionPane extends FDialog {
         final int gapAboveButtons = padding * 3 / 2;
         final int gapBottom = comp == null ? gapAboveButtons : padding;
         FLabel centeredLabel = null;
-        FTextPane prompt = null;
 
         if (icon != null) {
             if (icon.getWidth() < 100) {
@@ -185,7 +185,7 @@ public class FOptionPane extends FDialog {
             prompt = new FTextPane();
             prompt.setContentType("text/html");
             prompt.putClientProperty(JEditorPane.HONOR_DISPLAY_PROPERTIES, Boolean.TRUE);
-            prompt.setText(FSkin.encodeSymbols(message, false));
+            prompt.setText(renderMessageHtml(message));
             prompt.setFont(FSkin.getFont(14));
             if(centeredLabel != null)
                 prompt.setTextAlignment(StyleConstants.ALIGN_CENTER);
@@ -298,6 +298,19 @@ public class FOptionPane extends FDialog {
         this.result = result0;
         //delay hiding so action can finish first
         SwingUtilities.invokeLater(() -> setVisible(false));
+    }
+
+    /** Update the dialog body after it has been shown. Safe to call from any thread. */
+    public void setMessage(final String message) {
+        SwingUtilities.invokeLater(() -> {
+            if (prompt != null) {
+                prompt.setText(renderMessageHtml(message));
+            }
+        });
+    }
+
+    private static String renderMessageHtml(final String message) {
+        return FSkin.encodeSymbols(message, false).replace("\n", "<br>");
     }
 
     public boolean isButtonEnabled(final int index) {

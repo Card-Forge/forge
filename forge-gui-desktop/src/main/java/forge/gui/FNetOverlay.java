@@ -93,6 +93,9 @@ public enum FNetOverlay implements IOnlineChatInterface {
     public void setGameClient(final IRemote remote) {
         this.remote = remote;
     }
+    public FGameClient getGameClient() {
+        return remote instanceof FGameClient fc ? fc : null;
+    }
 
     private final ActionListener onSend = e -> {
         final String message = txtInput.getText();
@@ -102,10 +105,15 @@ public enum FNetOverlay implements IOnlineChatInterface {
         }
 
         if (remote != null) {
-            if ("/simulatedisconnect".equalsIgnoreCase(message.trim()) && remote instanceof FGameClient) {
-                System.out.println("[FNetOverlay] /simulatedisconnect intercepted, remote=" + remote.getClass().getSimpleName());
-                addMessage(ChatMessage.createSystemMessage("Simulating disconnect: all network writes suspended."));
-                ((FGameClient) remote).simulateDisconnect();
+            final String trimmed = message.trim();
+            if (trimmed.toLowerCase().startsWith("/simulatedisconnect") && remote instanceof FGameClient fc) {
+                final String[] parts = trimmed.split("\\s+", 2);
+                final FGameClient.DisconnectMode mode = parts.length >= 2 && "inbound".equalsIgnoreCase(parts[1])
+                        ? FGameClient.DisconnectMode.INBOUND
+                        : FGameClient.DisconnectMode.OUTBOUND;
+                System.out.println("[FNetOverlay] /simulatedisconnect intercepted, mode=" + mode);
+                addMessage(ChatMessage.createSystemMessage("Simulating disconnect (" + mode + "): network traffic suspended."));
+                fc.simulateDisconnect(mode);
                 return;
             }
             remote.send(new MessageEvent(prefs.getPref(FPref.PLAYER_NAME), message));

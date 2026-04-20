@@ -8,6 +8,7 @@ import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.AbstractGuiGame;
+import forge.gamemodes.net.client.FGameClient;
 import forge.interfaces.IGameController;
 import forge.trackable.Tracker;
 import forge.trackable.TrackableCollection;
@@ -581,6 +582,14 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasForg
 
     protected void afterDeltaApplied() {
         // Override in GUI subclasses to refresh views after delta application.
+    }
+
+    /**
+     * Notified on client-side reconnect state transitions. GUI subclasses override
+     * to drive the banner or modal; non-GUI subclasses (server-side proxy, headless
+     * test helper) can leave the default no-op.
+     */
+    public void onReconnectStateChanged(FGameClient.ReconnectState state, int attemptIndex, int nextDelaySeconds) {
     }
 
     private void logChecksumDetails(GameView gameView, DeltaPacket packet) {

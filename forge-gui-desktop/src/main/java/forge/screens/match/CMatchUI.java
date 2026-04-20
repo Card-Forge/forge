@@ -68,6 +68,7 @@ import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
 import forge.util.IHasForgeLog;
 import forge.gamemodes.net.NetworkGuiGame;
+import forge.gamemodes.net.client.FGameClient;
 import forge.gui.FNetOverlay;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -95,6 +96,7 @@ import forge.menus.IMenuProvider;
 import forge.model.FModel;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
+import forge.screens.home.online.VSubmenuOnlineLobby;
 import forge.screens.match.controllers.CAntes;
 import forge.screens.match.controllers.CCombat;
 import forge.screens.match.controllers.CDependencies;
@@ -161,6 +163,9 @@ public final class CMatchUI
     private JPopupMenu openAbilityMenu;
 
     private IVDoc<? extends ICDoc> selectedDocBeforeCombat;
+
+    private ReconnectModals.ReconnectingHandle reconnectingHandle;
+    private boolean userDismissedReconnectDialog;
 
     private final CAntes cAntes = new CAntes(this);
     private final CCombat cCombat = new CCombat();
@@ -1592,5 +1597,57 @@ public final class CMatchUI
             }
         });
         menu.add(item);
+    }
+
+    @Override
+    public void onReconnectStateChanged(FGameClient.ReconnectState state, int attemptIndex, int nextDelaySeconds) {
+        FThreads.invokeInEdtLater(() -> dispatchReconnectState(state, attemptIndex, nextDelaySeconds));
+    }
+
+    private void dispatchReconnectState(final FGameClient.ReconnectState state, final int attemptIndex, final int nextDelaySeconds) {
+        final FGameClient client = FNetOverlay.SINGLETON_INSTANCE.getGameClient();
+        switch (state) {
+            case RECONNECTING:
+                if (userDismissedReconnectDialog) break;
+                if (reconnectingHandle == null && client != null) {
+                    reconnectingHandle = ReconnectModals.showReconnecting(client,
+                            () -> {
+                                userDismissedReconnectDialog = true;
+                                reconnectingHandle = null;
+                            },
+                            this::returnToMainMenu);
+                }
+                if (reconnectingHandle != null) {
+                    reconnectingHandle.update(attemptIndex, FGameClient.getTotalReconnectAttempts(), nextDelaySeconds);
+                }
+                break;
+            case CONNECTED:
+                if (reconnectingHandle != null) { reconnectingHandle.dismiss(); reconnectingHandle = null; }
+                if (userDismissedReconnectDialog) {
+                    SOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblReconnectedToast"));
+                }
+                userDismissedReconnectDialog = false;
+                break;
+            case FAILED:
+                if (reconnectingHandle != null) { reconnectingHandle.dismiss(); reconnectingHandle = null; }
+                userDismissedReconnectDialog = false;
+                if (client != null) ReconnectModals.showFailed(client, this::returnToMainMenu);
+                break;
+            case SEAT_LOST:
+                if (reconnectingHandle != null) { reconnectingHandle.dismiss(); reconnectingHandle = null; }
+                userDismissedReconnectDialog = false;
+                if (client != null) ReconnectModals.showSeatLost(client, this::returnToMainMenu);
+                break;
+        }
+    }
+
+    private void returnToMainMenu() {
+        FThreads.invokeInEdtNowOrLater(() -> {
+            view.armBypassConcedeOnClose();
+            VSubmenuOnlineLobby.SINGLETON_INSTANCE.closeConn("");
+            Singletons.getView().getNavigationBar().closeTab(screen);
+            Singletons.getControl().setCurrentScreen(FScreen.HOME_SCREEN);
+            LinkHandler.clearWeakReferencesNow();
+        });
     }
 }
