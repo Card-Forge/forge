@@ -4,7 +4,7 @@ Types:Creature Cat Cleric
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, target player creates a 1/1 white and black Inkling creature token with flying. Then if an opponent controls more creatures than you, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
 SVar:TrigToken:DB$ Token | ValidTgts$ Player | TokenScript$ wb_1_1_inkling_flying | TokenOwner$ TargetedPlayer | SubAbility$ DBPrepare
-SVar:DBPrepare:DB$ AlterAttribute | Attributes$ Prepared | ConditionCheckSVar$ OppCreatures | SVarCompare$ GTYourCreatures
+SVar:DBPrepare:DB$ AlterAttribute | Attributes$ Prepared | ConditionCheckSVar$ OppCreatures | ConditionSVarCompare$ GTYourCreatures
 SVar:OppCreatures:PlayerCountOpponents$HighestValid Creature.YouCtrl
 SVar:YourCreatures:Count$Valid Creature.YouCtrl
 AlternateMode:Prepare
