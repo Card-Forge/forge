@@ -133,4 +133,30 @@ public class ChangeZoneEffectTest extends AITest {
         AssertJUnit.assertTrue("DanDan fetchland should put searched land under activating player's control",
                 movedIslandControlledByActivator);
     }
+
+    @Test
+    public void dandanLibraryToHandSearchPutsCardInActivatingPlayersHand() {
+        initAndCreateGame();
+
+        final Deck firstDeck = new Deck("DanDan P1");
+        final Deck secondDeck = new Deck("DanDan P2");
+        final List<RegisteredPlayer> players = Lists.newArrayList();
+        players.add(new RegisteredPlayer(firstDeck).setPlayer(new LobbyPlayerAi("p1", null)));
+        players.add(new RegisteredPlayer(secondDeck).setPlayer(new LobbyPlayerAi("p2", null)));
+
+        final Match match = new Match(new GameRules(GameType.DanDan), players, "DanDan Demonic Tutor hand routing");
+        final Game game = match.createGame();
+        match.startGame(game);
+
+        final Player p1 = game.getRegisteredPlayers().get(0);
+        final Player p2 = game.getRegisteredPlayers().get(1);
+
+        final Card island = addCardToZone("Island", p1, ZoneType.Library);
+        final Card moved = game.getAction().moveToHand(island, p2, null, null);
+
+        AssertJUnit.assertTrue("Moved card should be in activating player's hand", p2.getZone(ZoneType.Hand).contains(moved));
+        AssertJUnit.assertFalse("Moved card should not be in non-activating player's hand", p1.getZone(ZoneType.Hand).contains(moved));
+        AssertJUnit.assertEquals("DanDan hand routing should set owner to hand recipient", p2, moved.getOwner());
+        AssertJUnit.assertEquals("DanDan hand routing should set controller to hand recipient", p2, moved.getController());
+    }
 }

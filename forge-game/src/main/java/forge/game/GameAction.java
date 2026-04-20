@@ -654,7 +654,10 @@ public class GameAction {
         if (zoneTo.is(ZoneType.Hand)) {
             final GameRules rules = game.getRules();
             if (rules != null && rules.isDanDan()) {
-                final Player handPlayer = zoneTo.getPlayer();
+                Player handPlayer = zoneTo.getPlayer();
+                if (cause != null && cause.getActivatingPlayer() != null && zoneFrom.is(ZoneType.Library) && !cause.hasParam("GainControl")) {
+                    handPlayer = cause.getActivatingPlayer();
+                }
                 if (copied.getOwner() != handPlayer) {
                     copied.setOwner(handPlayer);
                 }

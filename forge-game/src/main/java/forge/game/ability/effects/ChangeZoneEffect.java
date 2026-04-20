@@ -749,7 +749,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
 
                 if (destination.equals(ZoneType.Hand)) {
-                    movedCard = game.getAction().moveToHand(gameCard, resolveHandRecipientForDanDan(sa, activator, gameCard), sa, moveParams);
+                    final Player handRecipient = isDanDanLibraryToHandSearch(sa, origin, destination, activator)
+                            ? activator
+                            : resolveHandRecipientForDanDan(sa, activator, gameCard);
+                    movedCard = game.getAction().moveToHand(gameCard, handRecipient, sa, moveParams);
                 } else {
                     movedCard = game.getAction().moveTo(destination, gameCard, libPos, sa, moveParams);
                 }
@@ -1475,7 +1478,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
                 else {
                     if (destination.equals(ZoneType.Hand)) {
-                        movedCard = game.getAction().moveToHand(c, resolveHandRecipientForDanDan(sa, sa.getActivatingPlayer(), c), sa, moveParams);
+                        final Player handRecipient = isDanDanLibraryToHandSearch(sa, origin, destination, sa.getActivatingPlayer())
+                                ? sa.getActivatingPlayer()
+                                : resolveHandRecipientForDanDan(sa, sa.getActivatingPlayer(), c);
+                        movedCard = game.getAction().moveToHand(c, handRecipient, sa, moveParams);
                     } else {
                         movedCard = game.getAction().moveTo(destination, c, 0, sa, moveParams);
                     }
@@ -1620,10 +1626,23 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
     }
 
     private static Player resolveHandRecipientForDanDan(final SpellAbility sa, final Player activator, final Card card) {
+        final GameRules rules = activator != null ? activator.getGame().getRules() : null;
+        if (rules != null && rules.isDanDan() && !sa.hasParam("GainControl")) {
+            return activator;
+        }
         if (shouldUseDanDanSelfRecipientHeuristic(sa)) {
             return activator;
         }
         return card.getOwner();
+    }
+
+    private static boolean isDanDanLibraryToHandSearch(final SpellAbility sa, final List<ZoneType> origin,
+                                                       final ZoneType destination, final Player activator) {
+        final GameRules rules = activator != null ? activator.getGame().getRules() : null;
+        if (rules == null || !rules.isDanDan() || sa.hasParam("GainControl")) {
+            return false;
+        }
+        return destination == ZoneType.Hand && origin.contains(ZoneType.Library);
     }
 
     private static boolean isDanDanLibraryToBattlefieldSearch(final SpellAbility sa, final List<ZoneType> origin, final ZoneType destination) {
