@@ -65,6 +65,7 @@ public class BoosterDraft implements IBoosterDraft {
 
     private boolean shouldShowDraftLog = false;
     private boolean forNetwork = false;
+    private String productName;
 
     private DraftOptions.DoublePick doublePickDuringDraft;
     protected int nextBoosterGroup = 0;
@@ -141,6 +142,7 @@ public class BoosterDraft implements IBoosterDraft {
                 if (block == null) {
                     return false;
                 }
+                this.productName = block.getName();
 
                 final List<CardEdition> cardSets = block.getSets();
                 final Stack<String> sets = new Stack<>();
@@ -175,6 +177,7 @@ public class BoosterDraft implements IBoosterDraft {
                         return false;
                     }
 
+                    this.productName = block.getName() + " (" + p + ")";
                     final String[] pp = p.toString().split("/");
                     for (int i = 0; i < nPacks; i++) {
                         this.product.add(block.getBooster(pp[i]));
@@ -182,6 +185,7 @@ public class BoosterDraft implements IBoosterDraft {
                 } else {
                     // Only one set is chosen. If that set lets you draft 2 cards to start adjust draft settings now
                     String setCode = sets.get(0);
+                    this.productName = block.getName() + " (" + setCode + ")";
                     CardEdition edition = FModel.getMagicDb().getEditions().get(setCode);
                     // If this is metaset, edtion will be null
                     if (edition != null) {
@@ -216,6 +220,7 @@ public class BoosterDraft implements IBoosterDraft {
                         return false;
                     }
 
+                    this.productName = customDraft.getName();
                     this.setupCustomDraft(customDraft);
                 }
                 break;
@@ -241,6 +246,7 @@ public class BoosterDraft implements IBoosterDraft {
                 if (theme == null) {
                     return false; // abort if no theme is selected
                 }
+                this.productName = theme.getLabel();
                 // Filter all sets by theme restrictions
                 final Predicate<CardEdition> themeFilter = theme.getEditionFilter();
                 final CardEdition.Collection allEditions = StaticData.instance().getEditions();
@@ -284,6 +290,7 @@ public class BoosterDraft implements IBoosterDraft {
                         SOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblFailedToImportCube") + ": " + inputCubeId);
                         return false;
                     }
+                    this.productName = importedDraft.getName();
                     this.setupCustomDraft(importedDraft);
                 } catch (Exception e) {
                     SOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblErrorImportingCube") + ": " + e.getMessage());
@@ -403,6 +410,11 @@ public class BoosterDraft implements IBoosterDraft {
     /** Returns the total number of booster rounds in this draft. */
     public int getNumRounds() {
         return product.size();
+    }
+
+    /** Human-readable name of the chosen block / theme / cube (null for Full). */
+    public String getProductName() {
+        return productName;
     }
 
     public int getPodSize() {

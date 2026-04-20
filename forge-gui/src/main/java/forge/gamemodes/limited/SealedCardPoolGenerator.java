@@ -257,6 +257,7 @@ public class SealedCardPoolGenerator {
                     sets.push(ms);
                 }
 
+                String packSummary = null;
                 if (sets.size() > 1 ) {
                     final List<String> setCombos = getSetCombos(sets, nPacks);
                     if (setCombos == null || setCombos.isEmpty()) {
@@ -266,6 +267,7 @@ public class SealedCardPoolGenerator {
                     final String p = setCombos.size() > 1 ? SGuiChoose.oneOrNone(Localizer.getInstance().getMessage("lblChoosePackNumberToPlay"), setCombos) : setCombos.get(0);
                     if (p == null) { return; }
 
+                    packSummary = p;
                     for (String pz : TextUtil.split(p, ',')) {
                         String[] pps = TextUtil.splitWithParenthesis(pz.trim(), ' ');
                         String setCode = pps[pps.length - 1];
@@ -276,6 +278,7 @@ public class SealedCardPoolGenerator {
                     }
                 }
                 else {
+                    packSummary = sets.get(0);
                     IUnOpenedProduct prod = block.getBooster(sets.get(0));
                     for (int i = 0; i < nPacks; i++) {
                         this.product.add(prod);
@@ -283,7 +286,7 @@ public class SealedCardPoolGenerator {
                 }
 
                 landSetCode = block.getLandSet().getCode();
-                productName = block.getName();
+                productName = block.getName() + " (" + packSummary + ")";
                 break;
 
             case Custom:

@@ -340,7 +340,7 @@ public final class BoosterDraftHost implements IHasForgeLog {
             EventParticipant participant = findParticipant(i);
             if (participant == null) continue;
 
-            Deck pool = new Deck(player.getDeck(), NetworkEvent.poolNameFor(participant, event));
+            Deck pool = new Deck(player.getDeck(), NetworkEvent.poolNameFor(event));
             NetworkEvent.setEventTags(pool, event);
             int slot = participant.getLobbySlotIndex();
             dispatches.add(() -> FServerManager.getInstance().sendToSlot(slot,

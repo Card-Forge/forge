@@ -21,6 +21,7 @@ import forge.deck.*;
 import forge.deckchooser.FDeckChooser;
 import forge.game.GameType;
 import forge.game.card.CardView;
+import forge.gamemodes.limited.BoosterDraft;
 import forge.gamemodes.limited.LimitedPoolType;
 import forge.gamemodes.match.GameLobby;
 import forge.gamemodes.match.LobbySlot;
@@ -1046,12 +1047,20 @@ public class VLobby implements ILobbyView {
                 localizer.getMessage("lblNetworkChooseDraftFormat"), poolTypes);
         if (chosen == null) return;
 
+        // Step 3: For draft, build the BoosterDraft now so block/set/cube/theme sub-dialogs
+        // pop before the timer prompt — matches the offline CSubmenuDraft flow.
+        BoosterDraft draft = null;
+        if (isDraft) {
+            draft = BoosterDraft.createDraftForNetwork(chosen);
+            if (draft == null) return;
+        }
+
         // Re-fetch current event after modal dialog — earlier reference may be stale
         // if a lobby update has run during EDT event pump
         NetworkEvent event = serverLobby.getCurrentEvent();
         if (event == null) return;
 
-        // Step 3: Pick timer + disconnect grace period (draft only, combined prompt)
+        // Step 4: Pick timer + disconnect grace period (draft only, combined prompt)
         int timerSeconds = event.getPickTimerSeconds();
         int graceSeconds = event.getDisconnectGraceSeconds();
         if (isDraft) {
@@ -1090,7 +1099,7 @@ public class VLobby implements ILobbyView {
         }
 
         // Delegate server-side configuration
-        if (!serverLobby.configureEvent(chosen, timerSeconds, graceSeconds)) {
+        if (!serverLobby.configureEvent(chosen, draft, timerSeconds, graceSeconds)) {
             return;
         }
         updateEventPanelState();
@@ -1276,13 +1285,21 @@ public class VLobby implements ILobbyView {
             allDecks = new ArrayList<>(DeckProxy.getAllNetworkEventDecks());
         }
 
-        // Preserve the user's current pick across pool rebuilds — setPool would
-        // otherwise reset selection to index 0 every time focus changes.
+        // Preserve the user's current pick across pool rebuilds. Match by deck name —
+        // reloadNetworkEventDecks() rebuilds DeckProxy instances so reference equality
+        // would fail on every lobby update, silently resetting selection.
         DeckProxy previouslySelected = chooser.getLstDecks().getSelectedItem();
+        String prevName = (previouslySelected != null && previouslySelected.getDeck() != null)
+                ? previouslySelected.getDeck().getName() : null;
         chooser.getLstDecks().setPool(allDecks);
         chooser.getLstDecks().setup(ItemManagerConfig.NET_EVENT_DECKS);
-        if (previouslySelected != null) {
-            chooser.getLstDecks().setSelectedItem(previouslySelected);
+        if (prevName != null) {
+            for (DeckProxy dp : allDecks) {
+                if (dp.getDeck() != null && prevName.equals(dp.getDeck().getName())) {
+                    chooser.getLstDecks().setSelectedItem(dp);
+                    break;
+                }
+            }
         }
     }
 

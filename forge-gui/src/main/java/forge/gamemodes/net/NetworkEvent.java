@@ -1,6 +1,7 @@
 package forge.gamemodes.net;
 
 import forge.deck.Deck;
+import forge.gamemodes.limited.BoosterDraft;
 import forge.gamemodes.limited.LimitedPoolType;
 import forge.gamemodes.limited.SealedCardPoolGenerator;
 
@@ -29,6 +30,7 @@ public final class NetworkEvent {
     private LimitedPoolType poolType;
     private int numRounds = 3;
     private SealedCardPoolGenerator sealedGenerator;
+    private BoosterDraft draft;
 
     public NetworkEvent(EventFormat format) {
         this.eventId = UUID.randomUUID().toString().substring(0, 8);
@@ -57,6 +59,8 @@ public final class NetworkEvent {
     public void setPoolType(LimitedPoolType poolType) { this.poolType = poolType; }
     public SealedCardPoolGenerator getSealedGenerator() { return sealedGenerator; }
     public void setSealedGenerator(SealedCardPoolGenerator gen) { this.sealedGenerator = gen; }
+    public BoosterDraft getDraft() { return draft; }
+    public void setDraft(BoosterDraft draft) { this.draft = draft; }
     public int getNumRounds() { return numRounds; }
     public void setNumRounds(int numRounds) { this.numRounds = numRounds; }
 
@@ -74,24 +78,26 @@ public final class NetworkEvent {
         deck.getTags().add("eventDate:" + event.createdAt.format(EVENT_DATE_TAG));
     }
 
-    private static final DateTimeFormatter POOL_NAME_TIMESTAMP =
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    private static final DateTimeFormatter POOL_NAME_DATE =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    /** Conventional pool name: "Name - Format - Product - YYYY-MM-DD HHMM". */
-    public static String poolNameFor(EventParticipant participant, NetworkEvent event) {
+    /** Conventional pool name: "Format - Product - YYYY-MM-DD". */
+    public static String poolNameFor(NetworkEvent event) {
         String formatLabel = event.getFormat() == EventFormat.BOOSTER_DRAFT ? "Draft" : "Sealed";
         String product = productLabelFor(event.getProductDescription());
-        return participant.getName()
-                + " - " + formatLabel
+        return formatLabel
                 + " - " + product
-                + " - " + event.createdAt.format(POOL_NAME_TIMESTAMP);
+                + " - " + event.createdAt.format(POOL_NAME_DATE);
     }
 
-    /** Strip the "PoolType: " prefix ("Full: Innistrad" -> "Innistrad") and filesystem-illegal chars. */
+    /** Strip the "PoolType: " prefix ("Full: Innistrad" -> "Innistrad"), drop any trailing
+     *  parenthetical (e.g., set-combo codes shown in the config panel), and remove
+     *  filesystem-illegal chars — yields a concise label suitable for a deck filename. */
     private static String productLabelFor(String description) {
         if (description == null || description.isEmpty()) return "";
         int sep = description.indexOf(": ");
         String label = sep >= 0 ? description.substring(sep + 2) : description;
+        label = label.replaceAll("\\s*\\([^)]*\\)\\s*$", "");
         return label.replaceAll("[\\\\/:*?\"<>|]", "").trim();
     }
 

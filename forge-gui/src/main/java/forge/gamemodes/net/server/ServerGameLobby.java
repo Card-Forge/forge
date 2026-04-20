@@ -156,17 +156,16 @@ public final class ServerGameLobby extends GameLobby implements IHasForgeLog {
     }
 
     /**
-     * Configure the current event with the user's chosen pool type and pick timer.
-     * For sealed events, creates the SealedCardPoolGenerator (which may show sub-dialogs).
+     * Configure the current event with the user's chosen pool type, pick timer, and
+     * pre-built draft or sealed product. The caller is responsible for popping any
+     * product sub-dialogs (block/set/cube/theme) before calling this — mirrors how
+     * the offline flow builds a {@link BoosterDraft} right after pool selection.
      * On success, broadcasts the fully-configured event to clients.
-     * <p>
-     * MUST be called from the EDT — {@code SealedCardPoolGenerator} pops modal dialogs,
-     * and the method is {@code synchronized}, so any off-EDT caller would deadlock or
-     * raise a dialog from the wrong thread.
      *
-     * @return false if the user cancelled a sub-dialog, true otherwise
+     * @param draft pre-built draft for {@link EventFormat#BOOSTER_DRAFT} events; ignored for sealed
+     * @return false if no current event exists or sealed pool generation failed, true otherwise
      */
-    public synchronized boolean configureEvent(LimitedPoolType poolType,
+    public synchronized boolean configureEvent(LimitedPoolType poolType, BoosterDraft draft,
             int pickTimerSeconds, int disconnectGraceSeconds) {
         NetworkEvent event = getCurrentEvent();
         if (event == null) return false;
@@ -182,6 +181,11 @@ public final class ServerGameLobby extends GameLobby implements IHasForgeLog {
             event.setSealedGenerator(gen);
             if (gen.getProductName() != null) {
                 event.setProductDescription(poolType + ": " + gen.getProductName());
+            }
+        } else {
+            event.setDraft(draft);
+            if (draft != null && draft.getProductName() != null) {
+                event.setProductDescription(poolType + ": " + draft.getProductName());
             }
         }
 
@@ -281,7 +285,7 @@ public final class ServerGameLobby extends GameLobby implements IHasForgeLog {
         List<EventParticipant> participants = event.getParticipants();
         int podSize = participants.size();
 
-        BoosterDraft draft = BoosterDraft.createDraftForNetwork(event.getPoolType());
+        BoosterDraft draft = event.getDraft();
         if (draft == null) return null;
 
         if (podSize != draft.getPodSize()) {
@@ -376,7 +380,7 @@ public final class ServerGameLobby extends GameLobby implements IHasForgeLog {
                 continue;
             }
 
-            Deck deck = new Deck(NetworkEvent.poolNameFor(participant, event));
+            Deck deck = new Deck(NetworkEvent.poolNameFor(event));
             deck.getOrCreate(DeckSection.Sideboard).addAll(pool);
             NetworkEvent.setEventTags(deck, event);
 
