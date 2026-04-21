@@ -26,6 +26,10 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
     protected abstract T getToInvoke(ChannelHandlerContext ctx);
     protected abstract void beforeCall(ChannelHandlerContext ctx, ProtocolMethod protocolMethod, Object[] args);
 
+    protected boolean shouldDispatchToGuiThread(final ProtocolMethod protocolMethod) {
+        return runInEdt;
+    }
+
     @Override
     public final void channelRead(final ChannelHandlerContext ctx, final Object msg) {
         final String[] catchedError = {""};
@@ -47,6 +51,18 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
             protocolMethod.checkArgs(args);
 
             final Object toInvoke = getToInvoke(ctx);
+            if (toInvoke == null) {
+                netLog.info("Ignoring {} — controller no longer available (game ended)", methodName);
+                // For methods expecting a reply, send null so the client doesn't hang
+                final Class<?> earlyReturnType = protocolMethod.getReturnType();
+                if (!earlyReturnType.equals(Void.TYPE)) {
+                    final IRemote remote = getRemote(ctx);
+                    if (remote != null) {
+                        remote.send(new ReplyEvent(event.getId(), null));
+                    }
+                }
+                return;
+            }
 
             // Pre-call actions (runs on IO thread — blocks all subsequent messages)
             final long beforeCallStart = System.currentTimeMillis();
@@ -97,7 +113,7 @@ public abstract class GameProtocolHandler<T> extends ChannelInboundHandlerAdapte
                 }
             };
 
-            if (runInEdt) {
+            if (shouldDispatchToGuiThread(protocolMethod)) {
                 FThreads.invokeInEdtNowOrLater(toRun);
             } else {
                 FThreads.invokeInBackgroundThread(toRun);

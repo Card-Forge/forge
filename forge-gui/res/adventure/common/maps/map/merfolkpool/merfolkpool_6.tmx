@@ -51,7 +51,7 @@
   <object id="60" template="../../obj/treasure.tx" x="376" y="796.5"/>
   <object id="61" template="../../obj/door_down.tx" x="888.667" y="814.333">
    <properties>
-    <property name="teleport" value="../common/maps/map/merfolkpool/merfolkpool_6b.tmx"/>
+    <property name="teleport" value="../common/maps/map/merfolkpool/merfolkpool_6B.tmx"/>
     <property name="teleportObjectId" value="55"/>
    </properties>
   </object>

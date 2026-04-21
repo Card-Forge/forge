@@ -10,6 +10,7 @@ import com.google.common.collect.Lists;
 
 import forge.ai.AITest;
 import forge.ai.LobbyPlayerAi;
+import forge.ai.SpellAbilityAi;
 import forge.ai.SpellApiToAi;
 import forge.deck.Deck;
 import forge.game.Game;
@@ -75,7 +76,7 @@ public class DamageDealAiTest extends AITest {
         options.add(aiCreature);
 
         // Get the DamageDealAi and test chooseSingleEntity
-        DamageDealAi damageAi = (DamageDealAi) SpellApiToAi.Converter.get(ApiType.DealDamage);
+        SpellAbilityAi damageAi = SpellApiToAi.Converter.get(ApiType.DealDamage);
         GameEntity chosen = damageAi.chooseSingleEntity(ai, damageSa, options, false, null, null);
 
         // AI should choose opponent player, not its own creature
@@ -107,7 +108,7 @@ public class DamageDealAiTest extends AITest {
         options.add(killableCreature);
 
         // Get the DamageDealAi and test chooseSingleEntity
-        DamageDealAi damageAi = (DamageDealAi) SpellApiToAi.Converter.get(ApiType.DealDamage);
+        SpellAbilityAi damageAi = SpellApiToAi.Converter.get(ApiType.DealDamage);
         GameEntity chosen = damageAi.chooseSingleEntity(ai, damageSa, options, false, null, null);
 
         // AI should choose the creature it can kill (Grizzly Bears)
@@ -138,7 +139,7 @@ public class DamageDealAiTest extends AITest {
         options.add(strongCreature);
 
         // Get the DamageDealAi and test chooseSingleEntity (not optional = mandatory)
-        DamageDealAi damageAi = (DamageDealAi) SpellApiToAi.Converter.get(ApiType.DealDamage);
+        SpellAbilityAi damageAi = SpellApiToAi.Converter.get(ApiType.DealDamage);
         GameEntity chosen = damageAi.chooseSingleEntity(ai, damageSa, options, false, null, null);
 
         // AI should choose its worst creature (Elvish Mystic)
@@ -176,7 +177,7 @@ public class DamageDealAiTest extends AITest {
         options.add(allyCreature);
 
         // Get the DamageDealAi and test chooseSingleEntity
-        DamageDealAi damageAi = (DamageDealAi) SpellApiToAi.Converter.get(ApiType.DealDamage);
+        SpellAbilityAi damageAi = SpellApiToAi.Converter.get(ApiType.DealDamage);
         GameEntity chosen = damageAi.chooseSingleEntity(ai, damageSa, options, false, null, null);
 
         // AI should choose ally's worst creature before its own

@@ -52,4 +52,23 @@ public interface IGameController {
      */
     void requestResync();
 
+    // --- Auto-yield preferences (per-player) ---
+    boolean shouldAutoYield(String key);
+    /**
+     * @param isAbilityScope true if {@code key} is an ability suffix (Per Ability * modes);
+     *   false if {@code key} is the full raw key (Per Card mode). Server-side handlers
+     *   route storage by this flag instead of consulting the host's own UI_AUTO_YIELD_MODE.
+     */
+    void setShouldAutoYield(String key, boolean autoYield, boolean isAbilityScope);
+    Iterable<String> getAutoYields();
+    void clearAutoYields();
+    boolean getDisableAutoYields();
+    void setDisableAutoYields(boolean disable);
+
+    // --- Trigger accept/decline preferences (per-player) ---
+    boolean shouldAlwaysAcceptTrigger(int trigger);
+    boolean shouldAlwaysDeclineTrigger(int trigger);
+    void setShouldAlwaysAcceptTrigger(int trigger);
+    void setShouldAlwaysDeclineTrigger(int trigger);
+    void setShouldAlwaysAskTrigger(int trigger);
 }

@@ -988,6 +988,9 @@ public class AbilityUtils {
             addPlayer(card.getImprintedCards(), defined, players);
         } else if (defined.startsWith("EffectSource")) {
             Card root = findEffectRoot(card);
+            if (root == null) {
+                root = findEffectRoot(sa.getHostCard());
+            }
             if (root != null) {
                 addPlayer(Lists.newArrayList(root), defined, players);
             }

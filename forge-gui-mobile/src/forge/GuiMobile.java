@@ -134,11 +134,6 @@ public class GuiMobile implements IGuiBase {
     }
 
     @Override
-    public ISkinImage getCardArt(final PaperCard card) {
-        return CardRenderer.getCardArt(card);
-    }
-
-    @Override
     public ISkinImage getCardArt(final PaperCard card, final boolean backFace) {
         return CardRenderer.getCardArt(card, backFace);
     }

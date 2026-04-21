@@ -102,7 +102,7 @@ public class StaticData {
             for (CardRules card : cardReader.loadCards()) {
                 if (null == card) continue;
 
-                final String cardName = card.getName();
+                final String cardName = card.getPreInitName();
 
                 if (!loadNonLegalCards && funnyCards.contains(cardName) && !card.getType().isBasicLand())
                     filtered.add(cardName);
@@ -119,7 +119,7 @@ public class StaticData {
 
                     final String cardName = card.getName();
                     card.setCustom();
-                    if(card.isVariant()) { //Append loaded custom cards to the respective list.
+                    if (card.isVariant()) { //Append loaded custom cards to the respective list.
                         variantsCards.put(cardName, card);
                     } else {
                         regularCards.put(cardName, card);

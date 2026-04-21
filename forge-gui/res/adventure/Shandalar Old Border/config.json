@@ -114,6 +114,7 @@
     "Urza's Science Fair Project"
   ],
   "restrictedEditions": ["8ED", "P8ED", "MRD"],
+  "restrictedBlocks": ["Ice Age"],
   "allowedEditions": [
     "LEA", "LEB", "2ED", "3ED", "ARN", "ATQ", "LEG", "DRK", "FEM", "4ED",
     "ICE", "CHR", "HML", "ALL", "MIR", "VIS", "5ED", "POR", "WTH", "TMP",

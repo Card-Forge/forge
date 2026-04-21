@@ -5,6 +5,7 @@ import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.gamemodes.net.CompatibleObjectDecoder;
 import forge.gamemodes.net.GameProtocolHandler;
+import forge.gui.GuiBase;
 import forge.util.IHasForgeLog;
 import forge.gamemodes.net.IRemote;
 import forge.gamemodes.net.ProtocolMethod;
@@ -52,6 +53,17 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
     @Override
     protected IGuiGame getToInvoke(final ChannelHandlerContext ctx) {
         return gui;
+    }
+
+    @Override
+    protected boolean shouldDispatchToGuiThread(final ProtocolMethod protocolMethod) {
+        // Libgdx blocking prompts deadlock if run on the GL thread — route return-value
+        // protocol methods to a background thread.
+        if (GuiBase.getInterface().isLibgdxPort()
+                && !protocolMethod.getReturnType().equals(Void.TYPE)) {
+            return false;
+        }
+        return super.shouldDispatchToGuiThread(protocolMethod);
     }
 
     @SuppressWarnings("unchecked")

@@ -50,22 +50,6 @@ public class TargetChoices extends ForwardingList<GameObject> implements Cloneab
 
     private final Map<GameObject, Integer> dividedMap = Maps.newHashMap();
 
-    public final int getTotalTargetedCMC() {
-        int totalCMC = 0;
-        for (Card c : IterableUtil.filter(targets, Card.class)) {
-            totalCMC += c.getCMC();
-        }
-        return totalCMC;
-    }
-
-    public final int getTotalTargetedPower() {
-        int totalPower = 0;
-        for (Card c : IterableUtil.filter(targets, Card.class)) {
-            totalPower += c.getNetPower();
-        }
-        return totalPower;
-    }
-
     public final boolean forEachControllerChanged(Card c) {
         return !c.getController().equals(cardControllers.get(c));
     }

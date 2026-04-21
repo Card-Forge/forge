@@ -120,7 +120,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
 
     @Test
     public void testGetAllCardsWithName() {
-        List<PaperCard> allCounterSpellPrints = this.cardDb.getAllCards(this.cardNameCounterspell);
+        List<PaperCard> allCounterSpellPrints = this.cardDb.getAllCardsNoAlt(this.cardNameCounterspell);
         assertNotNull(allCounterSpellPrints);
         for (PaperCard card : allCounterSpellPrints)
             assertEquals(card.getName(), this.cardNameCounterspell);
@@ -139,7 +139,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
     void testGetAllCardsOfaGivenNameAndPrintedInSets() {
         List<String> allowedSets = new ArrayList<>(Arrays.asList(this.editionsCounterspell));
         Predicate<PaperCard> printedInSets = (Predicate<PaperCard>) this.cardDb.wasPrintedInSets(allowedSets);
-        List<PaperCard> allCounterSpellsInSets = this.cardDb.getAllCards(this.cardNameCounterspell, printedInSets);
+        List<PaperCard> allCounterSpellsInSets = this.cardDb.getAllCardsNoAlt(this.cardNameCounterspell, printedInSets);
         assertNotNull(allCounterSpellsInSets);
         assertTrue(allCounterSpellsInSets.size() > 0);
         assertTrue(allCounterSpellsInSets.size() > 1);
@@ -163,7 +163,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
     void testGetAllCardsOfaGivenNameAndLegalInSets() {
         List<String> allowedSets = new ArrayList<>(Arrays.asList(this.editionsCounterspell));
         Predicate<PaperCard> legalInSets = (Predicate<PaperCard>) this.cardDb.isLegal(allowedSets);
-        List<PaperCard> allCounterSpellsInSets = this.cardDb.getAllCards(this.cardNameCounterspell, legalInSets);
+        List<PaperCard> allCounterSpellsInSets = this.cardDb.getAllCardsNoAlt(this.cardNameCounterspell, legalInSets);
         assertNotNull(allCounterSpellsInSets);
         assertTrue(allCounterSpellsInSets.size() > 0);
         assertTrue(allCounterSpellsInSets.size() > 1);

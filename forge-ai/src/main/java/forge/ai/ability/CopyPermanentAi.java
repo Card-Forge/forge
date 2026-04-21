@@ -204,9 +204,8 @@ public class CopyPermanentAi extends SpellAbilityAi {
             if (betterChoices.isEmpty()) {
                 if (mandatory) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                } else {
-                    return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
                 }
+                return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
             }
         }
 

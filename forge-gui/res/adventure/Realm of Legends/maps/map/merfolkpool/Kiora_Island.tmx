@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="135">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="136">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -45,7 +45,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzt2E0OgjAQhuE5kSIGj6ELFYHrGl3qQkXxNM7G+Aehgq1p8z7JJIQmhA+mLUHkUzmqOfnFuG/SWOSQiByTbuO+KTXPfCKy0KoGj/P34+dxn+20T/ce9OpJ+6rUOvfsr6m+t1n8m3uyaal9lWqtLPVXFonkWkVk5/r/0tTPF81ZaV0Dy9vUz5k+g1yr8GBud9W235juR6ZrYDU2v7c6fedc235juh+5WgNDnXMAAAAAALjS918EALxjXQEAAKFb6/fOdvham4C/gchL3pCQl7whIS95XbsBTflpVA==
+   eJzt2E0OgjAQhuG5hR6C+APiMXShInBdo0tdqCiextkY/yAgCKTN+ySTEJqQfjptCSLfknHGzR/GTRO4Ikdf5ORXGzdNonkWU5GlVjp43n9cv46bbK99ejCgV8/aV4nWpWZ/zfR/m7v/mVOTVtpXgda6of4KRyKRVjxq5vldyevnq+ZMtW6W5c3r51B/g0grNmBtV1V03pQ9j8rugalXfm5Z6q65ovOm7HnU1h5o65oDAAAAABTrOSJ9p+tZtMfTrJMG8tb9FgEAn9hXAACA7Tb6vrMbvtfW4ncg8pLXJuQlr03IS9623QGf1Gqa
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -258,6 +258,14 @@ She stumbles back, and lands in the waters below with a splash. You consider goi
     <property name="spawn.Insane" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="50"/>
     <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="135" template="../../../../common/maps/obj/shop.tx" x="816.5" y="423">
+   <properties>
+    <property name="commonShopList" value="Merfolk"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
    </properties>
   </object>
  </objectgroup>

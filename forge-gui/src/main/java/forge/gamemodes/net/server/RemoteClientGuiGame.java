@@ -152,6 +152,11 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
                     client.getIndex(), useDeltaSync, initialSyncSent);
                 fallbackLogged = true;
             }
+            // Batch flush already emits setGameView; skip the duplicate.
+            if (forwarder != null && forwarder.hasPendingEvents()) {
+                flushPendingEvents();
+                return;
+            }
             if (flush) {
                 send(ProtocolMethod.setGameView, gameView, -1L);
             } else {
@@ -168,10 +173,12 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
             return;
         }
 
-        // Flush pending events BEFORE collecting deltas — ensures events
-        // get the dirty props bundled with them, and this standalone delta
-        // only picks up whatever changed after the flush.
-        flushPendingEvents();
+        // If events are pending, the batch flush bundles dirty props with
+        // them into applyDelta — skip the redundant graph walk here.
+        if (forwarder != null && forwarder.hasPendingEvents()) {
+            flushPendingEvents();
+            return;
+        }
         DeltaPacket delta = syncManager.collectDeltas(gameView);
         if (!delta.isEmpty()) {
             if (flush) {

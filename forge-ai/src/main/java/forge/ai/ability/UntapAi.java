@@ -74,16 +74,16 @@ public class UntapAi extends SpellAbilityAi {
         if (!sa.usesTargeting()) {
             if (mandatory) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else if ("Never".equals(sa.getParam("AILogic"))) {
+            }
+            if ("Never".equals(sa.getParam("AILogic"))) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             final List<Card> pDefined = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
             if (pDefined.isEmpty() || (pDefined.get(0).isTapped() && pDefined.get(0).getController() == ai)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
         } else if (untapPrefTargeting(ai, sa, mandatory)) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         } else if (mandatory) {

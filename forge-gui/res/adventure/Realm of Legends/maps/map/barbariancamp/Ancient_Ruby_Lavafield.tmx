@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="94">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="95">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -33,7 +33,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJy9V9tO20AQHYcnJDtSEsIngOkXIJV/oE/AU4P4GBRMRFGoykNV/qF/VakGXiLUPnDZkffIx5ONs6TQkY68Xu/u2TMze/E4E9npipy559iXY6F9ttxz22HiymUqcufw2+FiTeS+494dLteq9y8eWq/9tG2RVX0TqSGmbC333OfEj/HArZyYj9ovX3/m+XSMD90FBC2WG/2YA3jQRscGfxnQGWN/TUP0zY3/b9Mm4A99ss4/EcTaZOric+Whc7BzLrzucdb0g76jrLoTz/m1s1x3YjDtzOsvPAd8q/o4B8bex2oPyfyYMVCbGV72IbQzJh5W62sR0oxXzjuOvfKuopXHFuK2bTiHkVvw86o+Dum+MjkHn/NanyzglX/kF5oH+5/zTXm/ue9Hb6TZYmZ4sa5XzedYn4C3pNgitzTubZqt2boYXvZxQXFWU+7DpOJX+9EXuelX5dP1Gv2hyMYwMKGAMS+fQaF9HNo/DkT2Bk1Oxa6re+6JjDyOe4t5p5TXOIOKLHyGYB8Z0diDYQ1xPnjs1Xhq4bXc8DNivePrwPm51xy7Dct42d/wOWLNOkOcJ0u4Ry3QOPBaLiinVtH5Gvwc1nnAOaY5pJz7mxW+9+fxSN9tm7ZvCq37tFlpRl7xOjoKLdg3tJnnZV+rPfwH3rzb9LXae2tW3jKd37Pek/vAjXndqdcv9o3bNE73AdXHzO9ivebE+WDvejG67X0qZLrPM5RTDf7Nu83/jdBebceI5SjT8B0a91h75wvduQGeU5vZ85bvzudZffeJ/Q/jOFgeq4vPW5xDiOkLx9Yg/w==
+   eJy1V01P20AQHYcTkh0pCaH9Ba2puNEDEv0P7Ylyaip+DAomolVA5YDgP/CvKtW0lwi1B9ruyPvk58nGWdJ0pCev17v79s3Mfniciex0RU7dc+zLsdA+L9zzpcPElctU5LvDN4fzDZEfHffu8Hmjev/kofXaT9sWWdU3kRpiytZyz31G/BgP3MqJ+ah99fWnnk/HeNVdQNBiudGPOYAHbXRs8JcBnTH2yzRE39z4/z5tAv7QJ+v8GUGsTaYuPhceOgc758LrHmdNP+g7yqo78ZyXneW6E4NpZ15/4TngW9XHOTD2PlZ7SObHjIHazPCyD6GdMfGwWp+KkGa8ct5x7JV3Fa08thC3bcM5jNyCn1f1cUj3hck5+JzX+mQBr/wjv9A82P+cb8r7xX0/WpNmi5nhxbpeNZ9jfQLekmKL3NK4t2m2ZutieNnHBcVZTbnfJxW/2k1f5LZflU82a/SHIlvDwIQCxrx8BoX2cWg/GIi8GTQ5Ffuu7k9PZOTxsbeYd0p5jTOoyMJnCPaREY09GNYQ54PHXo3fLbyWG35GrHd8HTg/9Jpjt2EZL/sbPkesWWeI83gJ96gFGgdeywXl1Co6n4K7YZ0HnGOaQ8r5drvCdX8ej/Tdtmn7ptC6d9uVZuQVr6OjwIJ9tivyfHd5DGNs5nnZ12oPAd49x/l6jbx5t+lrtUWa12XKW6bze9b/5D50Y1516vWLfeM+jdN9SPUx8zvfrDlxPti7Xoxue58Kme7zDOVUg3/zbvN/I7RX2zFiOco0fIfGPdbe+UJ3boDn1Gb2vOW781lW331i/8M4DpbH6uLzFucQYvoXnNEiRQ==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -69,7 +69,7 @@ Your manasight stone blazes with power, near-blindingly bright.&quot;,
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Ruby Collector&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
-  <object id="92" template="../../../../common/maps/obj/scroll.tx" x="120" y="372">
+  <object id="92" template="../../../../common/maps/obj/scroll.tx" x="380.628" y="421.164">
    <properties>
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Ruby Medallion&quot;, &quot;editions&quot;: [ &quot;TMP&quot; ], &quot;count&quot;: 1 } ]"/>
    </properties>
@@ -83,6 +83,14 @@ Your manasight stone blazes with power, near-blindingly bright.&quot;,
     <property name="spawn.Insane" type="bool" value="false"/>
     <property name="spawn.Normal" type="bool" value="true"/>
     <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/shop.tx" x="144.231" y="373.465">
+   <properties>
+    <property name="commonShopList" value="ClassicBoosters"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
    </properties>
   </object>
  </objectgroup>

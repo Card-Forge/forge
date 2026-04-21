@@ -21,6 +21,9 @@ Emerald
 Ivory
   xy: 0, 640
   size: 16, 16
+Cragflame
+  xy: 288, 656
+  size: 16, 16
 Jade
   xy: 16, 640
   size: 16, 16
@@ -818,6 +821,54 @@ AngelicArmaments
   size: 16, 16
 SpidersilkHelm
   xy: 128, 400
+  size: 16, 16
+BlisteringBreeches
+  xy: 48, 480
+  size: 16, 16
+GreavesofGlare
+  xy: 32, 480
+  size: 16, 16
+HighGroundHelm
+  xy: 16, 336
+  size: 16, 16
+CunningMask
+  xy: 112, 352
+  size: 16, 16
+MightyHelm
+  xy: 80, 304
+  size: 16, 16
+HelmoftheFallen
+  xy: 16, 368
+  size: 16, 16
+HelmofBattle
+  xy: 112, 304
+  size: 16, 16
+VampiricAmulet
+  xy: 96, 816
+  size: 16, 16
+MassacreHelm
+  xy: 32, 320
+  size: 16, 16
+GloriousHelm
+  xy: 64, 384
+  size: 16, 16
+WarHelm
+  xy: 48, 368
+  size: 16, 16
+HelmofContemplation
+  xy: 144, 384
+  size: 16, 16
+HelmofMyth
+  xy: 128, 352
+  size: 16, 16
+WhipWrap
+  xy: 144, 448
+  size: 16, 16
+SoulShoes
+  xy: 64, 144
+  size: 16, 16
+BarrierBreeches
+  xy: 112, 464
   size: 16, 16
 Liliana'sVeil
   xy: 144, 320
