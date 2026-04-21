@@ -1610,20 +1610,13 @@ public class VLobby implements ILobbyView {
     }
 
     private String resolveParticipantName(int seatIndex) {
-        EventParticipant p = findParticipant(lastEventView != null ? lastEventView.getParticipants() : null, seatIndex);
+        EventParticipant p = EventParticipant.findBySeat(
+                lastEventView != null ? lastEventView.getParticipants() : null, seatIndex);
         if (p == null && lobby instanceof ServerGameLobby sgl && sgl.getCurrentEvent() != null) {
-            p = findParticipant(sgl.getCurrentEvent().getParticipants(), seatIndex);
+            p = EventParticipant.findBySeat(sgl.getCurrentEvent().getParticipants(), seatIndex);
         }
         if (p == null) return localizer.getMessage("lblSeatN", String.valueOf(seatIndex));
         return p.isAI() ? p.getName() + " (" + localizer.getMessage("lblAI") + ")" : p.getName();
-    }
-
-    private static EventParticipant findParticipant(List<EventParticipant> list, int seatIndex) {
-        if (list == null) return null;
-        for (EventParticipant p : list) {
-            if (p.getSeatIndex() == seatIndex) return p;
-        }
-        return null;
     }
 
     @Override

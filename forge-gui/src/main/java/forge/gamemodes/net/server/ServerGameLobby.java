@@ -385,8 +385,7 @@ public final class ServerGameLobby extends GameLobby implements IHasForgeLog {
             NetworkEvent.setEventTags(deck, event);
 
             server.sendToSlot(participant.getLobbySlotIndex(),
-                    new ReceiveEventPoolEvent(eventId, deck),
-                    l -> l.receiveEventPool(eventId, deck));
+                    new ReceiveEventPoolEvent(eventId, deck));
             netLog.info("Sent sealed pool to {} ({} cards)", participant.getName(), pool.countAll());
         }
     }

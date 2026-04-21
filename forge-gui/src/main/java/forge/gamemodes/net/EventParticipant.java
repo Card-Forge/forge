@@ -1,6 +1,7 @@
 package forge.gamemodes.net;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * A player or AI in a network draft/sealed event.
@@ -36,4 +37,12 @@ public final class EventParticipant implements Serializable {
     public int getLobbySlotIndex() { return lobbySlotIndex; }
     public boolean isHuman() { return type == Type.HUMAN; }
     public boolean isAI() { return type == Type.AI; }
+
+    public static EventParticipant findBySeat(List<EventParticipant> list, int seatIndex) {
+        if (list == null) return null;
+        for (EventParticipant p : list) {
+            if (p.getSeatIndex() == seatIndex) return p;
+        }
+        return null;
+    }
 }

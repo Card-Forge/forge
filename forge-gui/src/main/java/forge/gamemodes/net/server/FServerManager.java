@@ -59,7 +59,6 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 public final class FServerManager implements IHasForgeLog {
@@ -112,15 +111,15 @@ public final class FServerManager implements IHasForgeLog {
 
     /**
      * Send an event to the given slot. If the slot is a remote client, sends
-     * the NetEvent over the wire; otherwise invokes {@code localAction} on the
-     * local lobby listener (the host's own path).
+     * the NetEvent over the wire; otherwise dispatches it to the local lobby
+     * listener (the host's own path) via {@link #dispatchToLocalListener}.
      */
-    public void sendToSlot(int slotIndex, NetEvent remoteEvent, Consumer<ILobbyListener> localAction) {
+    public void sendToSlot(int slotIndex, NetEvent remoteEvent) {
         RemoteClient client = getClientBySlotIndex(slotIndex);
         if (client != null) {
             client.send(remoteEvent);
-        } else if (lobbyListener != null) {
-            localAction.accept(lobbyListener);
+        } else {
+            dispatchToLocalListener(remoteEvent);
         }
     }
 

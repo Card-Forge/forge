@@ -284,7 +284,7 @@ public final class BoosterDraftHost implements IHasForgeLog {
     }
 
     private void addSendPackToHuman(List<Runnable> dispatches, int seatIndex, DraftPack pack) {
-        EventParticipant participant = findParticipant(seatIndex);
+        EventParticipant participant = EventParticipant.findBySeat(participants, seatIndex);
         if (participant == null || participant.isAI()) return;
 
         List<PaperCard> packCards = new ArrayList<>(pack);
@@ -294,8 +294,7 @@ public final class BoosterDraftHost implements IHasForgeLog {
         int slot = participant.getLobbySlotIndex();
 
         dispatches.add(() -> FServerManager.getInstance().sendToSlot(slot,
-                new DraftPackArrivedEvent(seatIndex, packCards, packNum, pickNum, timerSecs),
-                l -> l.draftPackArrived(seatIndex, packCards, packNum, pickNum, timerSecs)));
+                new DraftPackArrivedEvent(seatIndex, packCards, packNum, pickNum, timerSecs)));
     }
 
     private void addBroadcastSeatPicked(List<Runnable> dispatches, int seatIndex) {
@@ -337,15 +336,14 @@ public final class BoosterDraftHost implements IHasForgeLog {
             LimitedPlayer player = players.get(i);
             if (player instanceof LimitedPlayerAI) continue;
 
-            EventParticipant participant = findParticipant(i);
+            EventParticipant participant = EventParticipant.findBySeat(participants, i);
             if (participant == null) continue;
 
             Deck pool = new Deck(player.getDeck(), NetworkEvent.poolNameFor(event));
             NetworkEvent.setEventTags(pool, event);
             int slot = participant.getLobbySlotIndex();
             dispatches.add(() -> FServerManager.getInstance().sendToSlot(slot,
-                    new ReceiveEventPoolEvent(eventId, pool),
-                    l -> l.receiveEventPool(eventId, pool)));
+                    new ReceiveEventPoolEvent(eventId, pool)));
         }
     }
 
@@ -457,7 +455,7 @@ public final class BoosterDraftHost implements IHasForgeLog {
     }
 
     private boolean isAiSeat(int seatIndex) {
-        EventParticipant p = findParticipant(seatIndex);
+        EventParticipant p = EventParticipant.findBySeat(participants, seatIndex);
         return p == null || p.isAI();
     }
 
@@ -474,7 +472,7 @@ public final class BoosterDraftHost implements IHasForgeLog {
     }
 
     private void addBroadcastDisconnect(List<Runnable> dispatches, int seatIndex) {
-        EventParticipant participant = findParticipant(seatIndex);
+        EventParticipant participant = EventParticipant.findBySeat(participants, seatIndex);
         if (participant == null) return;
         String name = participant.getName();
         int graceSeconds = event.getDisconnectGraceSeconds();
@@ -486,7 +484,7 @@ public final class BoosterDraftHost implements IHasForgeLog {
     }
 
     private void addBroadcastReconnect(List<Runnable> dispatches, int seatIndex) {
-        EventParticipant participant = findParticipant(seatIndex);
+        EventParticipant participant = EventParticipant.findBySeat(participants, seatIndex);
         if (participant == null) return;
         String name = participant.getName();
         dispatches.add(() -> FServerManager.getInstance().broadcast(new MessageEvent(
@@ -494,7 +492,7 @@ public final class BoosterDraftHost implements IHasForgeLog {
     }
 
     private void addBroadcastGraceExpired(List<Runnable> dispatches, int seatIndex) {
-        EventParticipant participant = findParticipant(seatIndex);
+        EventParticipant participant = EventParticipant.findBySeat(participants, seatIndex);
         if (participant == null) return;
         String name = participant.getName();
         dispatches.add(() -> FServerManager.getInstance().broadcast(new MessageEvent(
@@ -531,23 +529,13 @@ public final class BoosterDraftHost implements IHasForgeLog {
     }
 
     private void addNotifyAutoPick(List<Runnable> dispatches, int seatIndex, PaperCard card) {
-        EventParticipant participant = findParticipant(seatIndex);
+        EventParticipant participant = EventParticipant.findBySeat(participants, seatIndex);
         if (participant == null || participant.isAI()) return;
         int slot = participant.getLobbySlotIndex();
         int packNumber = currentPackNumber;
         int pickInPack = computePickInPack(picksMadePerSeat[seatIndex]);
         dispatches.add(() -> FServerManager.getInstance().sendToSlot(slot,
-                new DraftAutoPickedEvent(seatIndex, card, packNumber, pickInPack),
-                l -> l.draftAutoPicked(seatIndex, card, packNumber, pickInPack)));
-    }
-
-    private EventParticipant findParticipant(int seatIndex) {
-        for (EventParticipant p : participants) {
-            if (p.getSeatIndex() == seatIndex) {
-                return p;
-            }
-        }
-        return null;
+                new DraftAutoPickedEvent(seatIndex, card, packNumber, pickInPack)));
     }
 
     private static void run(List<Runnable> dispatches) {
