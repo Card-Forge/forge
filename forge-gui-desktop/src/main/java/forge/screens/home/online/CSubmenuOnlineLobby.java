@@ -12,6 +12,7 @@ import java.util.Objects;
 
 import javax.swing.JMenu;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import com.google.common.collect.ImmutableList;
@@ -94,50 +95,87 @@ public enum CSubmenuOnlineLobby implements ICDoc, IMenuProvider {
         });
     }
 
-    private void showServerAddressesDialog() {
-        final int port = FModel.getNetPreferences().getPrefInt(ForgeNetPreferences.FNetPref.NET_PORT);
+    static void showServerAddressesDialog() {
+        final ForgeNetPreferences netPrefs = FModel.getNetPreferences();
+        final int port = netPrefs.getPrefInt(ForgeNetPreferences.FNetPref.NET_PORT);
         final LinkedHashMap<String, String> addresses = FServerManager.getAllLocalAddresses();
         final String externalAddress = FServerManager.getExternalAddress();
         final Localizer localizer = Localizer.getInstance();
 
-        final JPanel panel = new JPanel(new MigLayout("insets 0, gap 4 6, wrap 3", "[grow][grow][pref]"));
+        // Collect rows in display order; we auto-copy and star whichever row matches
+        // the last-copied URL, falling back to the first row.
+        final List<String> orderedLabels = new ArrayList<>();
+        final List<String> orderedUrls = new ArrayList<>();
+        if (externalAddress != null) {
+            orderedLabels.add("External (WAN)");
+            orderedUrls.add(externalAddress + ":" + port);
+        }
+        for (final Map.Entry<String, String> entry : addresses.entrySet()) {
+            orderedLabels.add(entry.getKey());
+            orderedUrls.add(entry.getValue() + ":" + port);
+        }
+
+        // If the remembered URL is present in the current list, auto-copy and star it.
+        // Otherwise fall back to the first entry (external if present, else first local
+        // interface) — matches the old copyHostedServerUrl default. Do NOT overwrite
+        // the remembered value on fallback, so a later reconnect to the original
+        // network restores the preference.
+        final String rememberedUrl = netPrefs.getPref(ForgeNetPreferences.FNetPref.NET_LAST_COPIED_URL);
+        int starIndex = orderedUrls.indexOf(rememberedUrl);
+        if (starIndex < 0) {
+            starIndex = orderedUrls.isEmpty() ? -1 : 0;
+        }
+        if (starIndex >= 0) {
+            copyToClipboard(orderedUrls.get(starIndex));
+        }
+
+        final JPanel panel = new JPanel(new MigLayout("insets 0, gap 4 6, wrap 3", "[pref]30[pref]30[pref]"));
         panel.setOpaque(false);
 
-        panel.add(new FLabel.Builder().text(localizer.getMessage("lblInterface")).fontStyle(Font.BOLD).fontSize(12).build(), "growx");
-        panel.add(new FLabel.Builder().text(localizer.getMessage("lblAddress")).fontStyle(Font.BOLD).fontSize(12).build(), "growx");
+        panel.add(new FLabel.Builder()
+                .text(localizer.getMessage("lblChooseAddressToCopy"))
+                .fontSize(12).fontAlign(SwingConstants.LEFT).build(),
+                "span 3, growx, gapbottom 10");
+
+        panel.add(new FLabel.Builder().text(localizer.getMessage("lblInterface")).fontStyle(Font.BOLD).fontSize(12).fontAlign(SwingConstants.LEFT).build(), "growx");
+        panel.add(new FLabel.Builder().text(localizer.getMessage("lblAddress")).fontStyle(Font.BOLD).fontSize(12).fontAlign(SwingConstants.LEFT).build(), "growx");
         panel.add(new FLabel.Builder().text("").build());
 
-        if (externalAddress != null) {
-            final String externalUrl = externalAddress + ":" + port;
-            panel.add(new FLabel.Builder().text("External (WAN)").fontSize(12).build(), "growx");
-            panel.add(new FLabel.Builder().text(externalUrl).fontSize(12).build(), "growx");
+        final FOptionPane[] holder = new FOptionPane[1];
+        for (int i = 0; i < orderedUrls.size(); i++) {
+            final String url = orderedUrls.get(i);
+            final String label = (i == starIndex) ? orderedLabels.get(i) + " \u2605" : orderedLabels.get(i);
+            panel.add(new FLabel.Builder().text(label).fontSize(12).fontAlign(SwingConstants.LEFT).build(), "growx");
+            panel.add(new FLabel.Builder().text(url).fontSize(12).fontAlign(SwingConstants.LEFT).build(), "growx");
             final FButton btnCopy = new FButton(localizer.getMessage("lblCopy"));
             btnCopy.setFont(FSkin.getFont(11));
-            btnCopy.addActionListener(e -> copyToClipboard(externalUrl));
+            btnCopy.addActionListener(e -> {
+                copyToClipboard(url);
+                netPrefs.setPref(ForgeNetPreferences.FNetPref.NET_LAST_COPIED_URL, url);
+                netPrefs.save();
+                holder[0].setVisible(false);
+            });
             panel.add(btnCopy, "w 70!, h 24!");
         }
 
-        boolean first = true;
-        for (final Map.Entry<String, String> entry : addresses.entrySet()) {
-            final String url = entry.getValue() + ":" + port;
-            final String label = first ? entry.getKey() + " \u2605" : entry.getKey();
-            first = false;
-
-            panel.add(new FLabel.Builder().text(label).fontSize(12).build(), "growx");
-            panel.add(new FLabel.Builder().text(url).fontSize(12).build(), "growx");
-            final FButton btnCopy = new FButton(localizer.getMessage("lblCopy"));
-            btnCopy.setFont(FSkin.getFont(11));
-            btnCopy.addActionListener(e -> copyToClipboard(url));
-            panel.add(btnCopy, "w 70!, h 24!");
+        if (starIndex >= 0) {
+            panel.add(new FLabel.Builder()
+                    .text(localizer.getMessage("lblServerUrlCopiedToClipboard", orderedUrls.get(starIndex)))
+                    .fontSize(11).fontStyle(Font.ITALIC).fontAlign(SwingConstants.LEFT).build(),
+                    "span 3, growx, gaptop 10");
         }
 
-        FOptionPane.showOptionDialog(
-                localizer.getMessage("lblChooseAddressToCopy"),
+        // Pass null as the prompt message so dialog width is driven by the panel's
+        // actual content width rather than the much-wider localised instruction line.
+        holder[0] = new FOptionPane(
+                null,
                 localizer.getMessage("lblServerURL"),
                 FOptionPane.INFORMATION_ICON,
                 panel,
                 ImmutableList.of(localizer.getMessage("lblOK")),
                 0);
+        holder[0].setVisible(true);
+        holder[0].dispose();
     }
 
     private static void copyToClipboard(final String text) {
