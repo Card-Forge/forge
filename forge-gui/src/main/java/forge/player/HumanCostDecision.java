@@ -374,32 +374,6 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
     // Inputs
 
-    private boolean sharesCommonCoreType(final Iterable<Card> cards) {
-        boolean foundAny = false;
-
-        for (CardType.CoreType coreType : CardType.CoreType.values()) {
-            boolean allHaveType = true;
-            boolean sawCard = false;
-
-            for (final Card card : cards) {
-                sawCard = true;
-                if (!card.getType().hasType(coreType)) {
-                    allHaveType = false;
-                    break;
-                }
-            }
-
-            if (sawCard) {
-                foundAny = true;
-                if (allHaveType) {
-                    return true;
-                }
-            }
-        }
-
-        return !foundAny;
-    }
-
     private PaymentDecision exileFromSame(final CostExile cost, final CardCollectionView list, final int nNeeded, final List<Player> payableZone) {
         if (nNeeded == 0) {
             return PaymentDecision.number(0);
@@ -485,71 +459,67 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         return PaymentDecision.card(list);
     }
 
-    private PaymentDecision exileFromMiscZone(final CostExile cost, final int nNeeded, final CardCollection typeList, final boolean sharedType) {
-        // when it's always a single triggered card getting exiled don't act like it might be different by offering the zone for choice
-        if (cost.zoneRestriction == -1 && ability.isTrigger() && nNeeded == 1 && typeList.size() == 1) {
-            if (confirmAction(cost, Localizer.getInstance().getMessage("lblExileConfirm", typeList.getFirst().getTranslatedName()))) {
-                return PaymentDecision.card(typeList.getFirst());
-            }
-            return null;
+private PaymentDecision exileFromMiscZone(final CostExile cost, final int nNeeded, final CardCollection typeList, final boolean sharedType) {
+    // when it's always a single triggered card getting exiled don't act like it might be different by offering the zone for choice
+    if (cost.zoneRestriction == -1 && ability.isTrigger() && nNeeded == 1 && typeList.size() == 1) {
+        if (confirmAction(cost, Localizer.getInstance().getMessage("lblExileConfirm", typeList.getFirst().getTranslatedName()))) {
+            return PaymentDecision.card(typeList.getFirst());
         }
+        return null;
+    }
 
-        if (!sharedType) {
-            final List<ZoneType> origin = Lists.newArrayList(cost.from);
-            final List<Card> chosen = controller.chooseCardsForZoneChange(
-                    ZoneType.Exile,
-                    origin,
-                    ability,
-                    typeList,
-                    mandatory ? nNeeded : 0,
-                    nNeeded,
-                    null,
-                    cost.toString(nNeeded),
-                    null
-            );
+    if (!sharedType) {
+        final List<ZoneType> origin = Lists.newArrayList(cost.from);
+        final List<Card> chosen = controller.chooseCardsForZoneChange(
+                ZoneType.Exile,
+                origin,
+                ability,
+                typeList,
+                mandatory ? nNeeded : 0,
+                nNeeded,
+                null,
+                cost.toString(nNeeded),
+                null
+        );
 
-            if (chosen.size() < nNeeded) {
-                return null;
-            }
-            return PaymentDecision.card(chosen);
-        }
-
-        if (typeList.size() < nNeeded) {
-            return null;
-        }
-
-        final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, mandatory ? nNeeded : 0, nNeeded, typeList, ability) {
-            private static final long serialVersionUID = 1L;
-
-            @Override
-            protected boolean onCardSelected(final Card c, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
-                for (final Card selectedCard : this.selected) {
-                    if (!selectedCard.sharesCardTypeWith(c)) {
-                        return false;
-                    }
-                }
-                return super.onCardSelected(c, otherCardsToSelect, triggerEvent);
-            }
-        };
-
-        inp.setMessage(cost.toString(nNeeded) + " (must share a card type)");
-        inp.setCancelAllowed(!mandatory);
-        inp.showAndWait();
-
-        if (inp.hasCancelled()) {
-            return null;
-        }
-
-        final CardCollection chosen = new CardCollection(inp.getSelected());
         if (chosen.size() < nNeeded) {
             return null;
         }
-        if (!sharesCommonCoreType(chosen)) {
-            return null;
-        }
-
         return PaymentDecision.card(chosen);
     }
+
+    if (typeList.size() < nNeeded) {
+        return null;
+    }
+
+    final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, mandatory ? nNeeded : 0, nNeeded, typeList, ability) {
+        private static final long serialVersionUID = 1L;
+
+        @Override
+        protected boolean onCardSelected(final Card c, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
+            final Card firstSelected = Iterables.getFirst(this.selected, null);
+            if (firstSelected != null && !firstSelected.sharesCardTypeWith(c)) {
+                return false;
+            }
+            return super.onCardSelected(c, otherCardsToSelect, triggerEvent);
+        }
+    };
+
+    inp.setMessage(cost.toString(nNeeded) + " (must share a card type)");
+    inp.setCancelAllowed(!mandatory);
+    inp.showAndWait();
+
+    if (inp.hasCancelled()) {
+        return null;
+    }
+
+    final CardCollection chosen = new CardCollection(inp.getSelected());
+    if (chosen.size() < nNeeded) {
+        return null;
+    }
+
+    return PaymentDecision.card(chosen);
+}
 
     private PaymentDecision exileFromTopGraveType(final int nNeeded, final CardCollection typeList) {
         Collections.reverse(typeList);
