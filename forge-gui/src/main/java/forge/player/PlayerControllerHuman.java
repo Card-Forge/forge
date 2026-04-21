@@ -1520,16 +1520,36 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     e.printStackTrace();
                 }
             }
-            netLog.trace("Returning null (mayAutoPass) for player {}", player.getName());
-            return null;
+            // Don't auto-pass over floating mana that would be lost — fall through
+            // to InputPassPriority so the mana-loss dialog can fire.
+            if (FModel.getPreferences().getPrefBoolean(FPref.UI_MANA_LOST_PROMPT) && stack.isEmpty()) {
+                Player priority = getGame().getPhaseHandler().getPriorityPlayer();
+                if (priority != null && priority.getManaPool().willManaBeLostAtEndOfPhase()
+                        && priority.getLobbyPlayer() == GamePlayerUtil.getGuiPlayer()) {
+                    // fall through to show InputPassPriority
+                } else {
+                    netLog.trace("Returning null (mayAutoPass) for player {}", player.getName());
+                    return null;
+                }
+            } else {
+                netLog.trace("Returning null (mayAutoPass) for player {}", player.getName());
+                return null;
+            }
         }
 
         if (stack.isEmpty()) {
             if (getGui().isUiSetToSkipPhase(getGame().getPhaseHandler().getPlayerTurn().getView(),
                     getGame().getPhaseHandler().getPhase())) {
-                netLog.trace("Returning null (skipPhase) for player {}", player.getName());
-                return null; // avoid prompt for input if stack is empty and
-                // player is set to skip the current phase
+                // Don't skip over a phase where floating mana would be lost.
+                boolean wouldLoseMana = FModel.getPreferences().getPrefBoolean(FPref.UI_MANA_LOST_PROMPT)
+                        && getGame().getPhaseHandler().getPriorityPlayer() != null
+                        && getGame().getPhaseHandler().getPriorityPlayer().getManaPool().willManaBeLostAtEndOfPhase()
+                        && getGame().getPhaseHandler().getPriorityPlayer().getLobbyPlayer() == GamePlayerUtil.getGuiPlayer();
+                if (!wouldLoseMana) {
+                    netLog.trace("Returning null (skipPhase) for player {}", player.getName());
+                    return null; // avoid prompt for input if stack is empty and
+                    // player is set to skip the current phase
+                }
             }
         } else {
             final SpellAbility ability = stack.peekAbility();
