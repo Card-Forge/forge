@@ -205,7 +205,11 @@ public class VLobby implements ILobbyView {
             lblEventDateCaption.setForeground(captionColor);
             lblEventStatus.setForeground(captionColor);
 
-            // Row 1: title (+ X dismiss for host in right column)
+            // Row 1: title (+ X dismiss for host). Nested panel so hiding the X doesn't let
+            // MigLayout's wrap-count logic drop the status label onto this row.
+            final JPanel titleRow = new JPanel(new MigLayout("insets 0, fillx"));
+            titleRow.setOpaque(false);
+            titleRow.add(lblEventPanelTitle, "growx, pushx");
             if (lobby.hasControl()) {
                 btnDismissEvent.setCommand(() -> {
                     if (lobby instanceof ServerGameLobby serverLobby) {
@@ -218,14 +222,12 @@ public class VLobby implements ILobbyView {
                     updateActionButtons();
                     updateDeckListFilter();
                 });
-                eventConfigPanel.add(lblEventPanelTitle, "growx, pushx");
-                eventConfigPanel.add(btnDismissEvent, "w 24px!, h 24px!, align right, wrap");
-            } else {
-                eventConfigPanel.add(lblEventPanelTitle, "span 2, growx, wrap");
+                titleRow.add(btnDismissEvent, "w 24px!, h 24px!, align right");
             }
+            eventConfigPanel.add(titleRow, "span 2, growx, wrap");
 
-            // Row 2: status subtitle (italic, muted)
-            eventConfigPanel.add(lblEventStatus, "span 2, growx, wrap, gapbottom 4");
+            // Row 2: centered status message (shown only when no event exists)
+            eventConfigPanel.add(lblEventStatus, "span 2, align center, wrap, gapbottom 4");
 
             // Rows 3-6: caption | value pairs
             eventConfigPanel.add(lblEventFormatCaption);
@@ -383,6 +385,7 @@ public class VLobby implements ILobbyView {
                 try {
                     cboModePanel.setSelectedIndex(desiredIndex);
                     currentMode = hostIsLimited ? LobbyMode.LIMITED : LobbyMode.CONSTRUCTED;
+                    setVariantsVisible(!hostIsLimited);
                 } finally {
                     suppressModeListener = false;
                 }
@@ -896,14 +899,7 @@ public class VLobby implements ILobbyView {
         }
         updateEventPanelState();
 
-        // Toggle variants panel visibility — it's inside an FScrollPane
-        Container scrollPane = variantsPanel.getParent();
-        while (scrollPane != null && !(scrollPane instanceof JScrollPane)) {
-            scrollPane = scrollPane.getParent();
-        }
-        if (scrollPane != null) {
-            scrollPane.setVisible(!isLimited);
-        }
+        setVariantsVisible(!isLimited);
 
         // Update right panel content
         updateRightPanelForMode();
@@ -913,6 +909,16 @@ public class VLobby implements ILobbyView {
 
         constructedFrame.revalidate();
         constructedFrame.repaint();
+    }
+
+    private void setVariantsVisible(boolean visible) {
+        Container scrollPane = variantsPanel.getParent();
+        while (scrollPane != null && !(scrollPane instanceof JScrollPane)) {
+            scrollPane = scrollPane.getParent();
+        }
+        if (scrollPane != null) {
+            scrollPane.setVisible(visible);
+        }
     }
 
     private void updateRightPanelForMode() {
@@ -1139,25 +1145,13 @@ public class VLobby implements ILobbyView {
             btnDismissEvent.setVisible(inState1 || inState2);
         }
 
-        // Row 2 — status subtitle (visible in States 0/1; hidden in State 2 since data rows speak)
+        // Row 2 — centered status message (State 0 only; data rows carry the message in States 1/2)
         String statusText = "";
-        if (isHost) {
-            if (inState1) {
-                boolean isSealed = currentEvent != null && currentEvent.getFormat() == EventFormat.SEALED;
-                statusText = localizer.getMessage(
-                        isSealed ? "lblNetworkNewEventNoPools" : "lblNetworkNewEventNotDrafted");
-            } else if (!inState2) {
-                statusText = localizer.getMessage("lblNetworkNoEventStatus");
-            }
-        } else if (inState1) {
-            statusText = localizer.getMessage("lblNetworkHostSettingUpEvent");
-        } else if (!inState2) {
+        if (!inState1 && !inState2) {
             statusText = localizer.getMessage("lblNetworkWaitingForHost");
         }
         lblEventStatus.setText(statusText);
         lblEventStatus.setVisible(!statusText.isEmpty());
-
-        // Rows 3-6 — value cells for Format / Product / Pick timer / Date
         String formatText = "\u2014";
         String productText = "\u2014";
         String timerText = "\u2014";
@@ -1201,6 +1195,8 @@ public class VLobby implements ILobbyView {
             } else {
                 timerText = localizer.getMessage("lblNetworkPickTimerNotApplicable");
             }
+            dateText = localizer.getMessage(evFormat == EventFormat.SEALED
+                    ? "lblNetworkNewEventNoPools" : "lblNetworkNewEventNotDrafted");
         }
         lblEventFormat.setText(formatText);
         lblEventProduct.setText(productText);
