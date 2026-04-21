@@ -11,6 +11,7 @@ import forge.gamemodes.match.GameLobby.GameLobbyData;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
+import forge.gamemodes.net.ChatMessage;
 import forge.util.IHasForgeLog;
 import forge.gamemodes.net.NetworkByteTracker;
 import forge.gamemodes.net.NetworkLogConfig;
@@ -496,7 +497,7 @@ public class UnifiedNetworkHarness implements IHasForgeLog {
             }
 
             @Override
-            public void message(String source, String message) {
+            public void message(String source, String message, ChatMessage.MessageType type) {
                 netLog.info("Lobby message from {}: {}", source, message);
             }
 

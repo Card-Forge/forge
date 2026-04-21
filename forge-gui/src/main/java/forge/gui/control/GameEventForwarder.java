@@ -55,6 +55,10 @@ public class GameEventForwarder implements Observer {
         gui.handleGameEvents(batch);
     }
 
+    public boolean hasPendingEvents() {
+        return !pendingEvents.isEmpty();
+    }
+
     /**
      * Called when an InputQueue changes (setInput/removeInput/clearInputs).
      * Flushes any pending events on the game thread before it blocks for input.
