@@ -97,6 +97,8 @@ public final class LayoutMenu {
 
         if (currentScreen != null && currentScreen.isMatchScreen()) {
             menu.add(getMenuItem_ShowBackgroundImage());
+            menu.add(getMenuItem_ShowCardPicture());
+            menu.add(getMenuItem_ShowCardDetail());
 
             menu.addSeparator();
             menu.add(getMenu_LogPane());
@@ -380,6 +382,40 @@ public final class LayoutMenu {
             final IVTopLevelUI view = screen.getView();
             if (view instanceof VMatchUI) {
                 ((VMatchUI) view).relayoutMultiplayerFields();
+            }
+        }
+    }
+
+    private static JMenuItem getMenuItem_ShowCardPicture() {
+        final Localizer localizer = Localizer.getInstance();
+        final JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem(localizer.getMessage("lblCardPicturePanel"));
+        menuItem.setState(prefs.getPrefBoolean(FPref.UI_MATCH_CARD_PICTURE_VISIBLE));
+        menuItem.addActionListener(e -> {
+            prefs.setPref(FPref.UI_MATCH_CARD_PICTURE_VISIBLE, menuItem.getState());
+            prefs.save();
+            relayoutCardPanels();
+        });
+        return menuItem;
+    }
+
+    private static JMenuItem getMenuItem_ShowCardDetail() {
+        final Localizer localizer = Localizer.getInstance();
+        final JCheckBoxMenuItem menuItem = new JCheckBoxMenuItem(localizer.getMessage("lblCardDetailPanel"));
+        menuItem.setState(prefs.getPrefBoolean(FPref.UI_MATCH_CARD_DETAIL_VISIBLE));
+        menuItem.addActionListener(e -> {
+            prefs.setPref(FPref.UI_MATCH_CARD_DETAIL_VISIBLE, menuItem.getState());
+            prefs.save();
+            relayoutCardPanels();
+        });
+        return menuItem;
+    }
+
+    private static void relayoutCardPanels() {
+        final FScreen screen = Singletons.getControl().getCurrentScreen();
+        if (screen != null && screen.isMatchScreen()) {
+            final IVTopLevelUI view = screen.getView();
+            if (view instanceof VMatchUI) {
+                ((VMatchUI) view).relayoutCardPanels();
             }
         }
     }

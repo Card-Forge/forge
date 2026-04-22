@@ -288,6 +288,52 @@ public class FCardImageRenderer {
         g.dispose();
     }
 
+    /**
+     * Render a single card state with full boilerplate (border, legal text, etc.).
+     * Use this when you have a specific CardStateView to render rather than a CardView
+     * (e.g. for specialize faces that aren't the CardView's current or alternate state).
+     */
+    public static void drawCardStateImage(Graphics2D g, CardStateView state, int width, int height, BufferedImage art, String legalString) {
+        if (!isInitialed) {
+            initialize();
+        }
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+        float ratio = Math.min((float)width / BASE_IMAGE_WIDTH, (float)height / BASE_IMAGE_HEIGHT);
+        BLACK_BORDER_THICKNESS = Math.round(10 * ratio);
+        g.setColor(Color.BLACK);
+        g.fillRect(0, 0, width, height);
+
+        if (legalString != null) {
+            TEXT_COLOR = Color.LIGHT_GRAY;
+            int x = BLACK_BORDER_THICKNESS * 3;
+            int y = height - BLACK_BORDER_THICKNESS * 3;
+            int w = width;
+            boolean hasPTBox = (state.isCreature() && !state.getKeywordKey().contains("Level up"))
+                    || state.isPlaneswalker() || state.isBattle() || state.isVehicle();
+            if (hasPTBox) {
+                w -= PT_BOX_WIDTH + BLACK_BORDER_THICKNESS * 5;
+            } else {
+                w -= BLACK_BORDER_THICKNESS * 6;
+            }
+            int h = BLACK_BORDER_THICKNESS * 3;
+            drawVerticallyCenteredString(g, legalString, new Rectangle(x, y, w, h), ARTIST_FONT, ARTIST_SIZE);
+        }
+
+        width -= 2 * BLACK_BORDER_THICKNESS;
+        height -= 2 * BLACK_BORDER_THICKNESS;
+        g.translate(BLACK_BORDER_THICKNESS, BLACK_BORDER_THICKNESS);
+        TEXT_COLOR = Color.BLACK;
+        CARD_ART_RATIO = 1.37f;
+        if (art != null && Math.abs((float)art.getWidth() / (float)art.getHeight() - CARD_ART_RATIO) > 0.1f) {
+            CARD_ART_RATIO = (float)art.getWidth() / (float)art.getHeight();
+        }
+        updateAreaSizes(ratio, ratio);
+        drawCardStateImage(g, state, state.getOracleText(), width, height, art);
+        g.dispose();
+    }
+
     private static void drawCardStateImage(Graphics2D g, CardStateView state, String text, int w, int h, BufferedImage art) {
         int x = 0, y = 0;
 

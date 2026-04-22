@@ -50,6 +50,7 @@ public final class GameMenu {
         menu.addSeparator();
         menu.add(getMenuItem_TargetingArcs());
         menu.add(new CardOverlaysMenu(matchUI).getMenu());
+        menu.add(new CardInfoPopupMenu().getMenu());
         menu.add(getMenuItem_AutoYields());
         menu.addSeparator();
         menu.add(getMenuItem_ViewDeckList());

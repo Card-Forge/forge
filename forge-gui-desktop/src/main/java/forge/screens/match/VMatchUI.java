@@ -11,6 +11,8 @@ import forge.Singletons;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
+import forge.gui.framework.ICDoc;
+import forge.gui.framework.IVDoc;
 import forge.gui.framework.IVTopLevelUI;
 import forge.gui.framework.RectangleOfDouble;
 import forge.gui.framework.SRearrangingUtil;
@@ -157,6 +159,10 @@ public class VMatchUI implements IVTopLevelUI {
             // Dev mode enabled? May already by added, or put in message cell by default.
             getControl().getCPrompt().getView().getParentCell().addDoc(vDev);
         }
+
+        // Hide card panels based on preferences.
+        removeHiddenCardPanel(FPref.UI_MATCH_CARD_PICTURE_VISIBLE, EDocID.CARD_PICTURE);
+        removeHiddenCardPanel(FPref.UI_MATCH_CARD_DETAIL_VISIBLE, EDocID.CARD_DETAIL);
 
         //focus first enabled Prompt button if returning to match screen
         if (getBtnOK().isEnabled()) {
@@ -367,6 +373,115 @@ public class VMatchUI implements IVTopLevelUI {
         assignExtraFieldsToCells();
         SResizingUtil.resizeWindow();
         SRearrangingUtil.updateBorders();
+    }
+
+    private void removeHiddenCardPanel(FPref pref, EDocID docId) {
+        if (FModel.getPreferences().getPrefBoolean(pref)) {
+            return;
+        }
+        IVDoc<? extends ICDoc> doc = docId.getDoc();
+        if (doc != null && doc.getParentCell() != null) {
+            DragCell parent = doc.getParentCell();
+            parent.removeDoc(doc);
+            doc.setParentCell(null);
+            if (parent.getDocs().isEmpty()) {
+                SRearrangingUtil.fillGap(parent);
+                FView.SINGLETON_INSTANCE.removeDragCell(parent);
+            } else {
+                parent.setSelected(parent.getDocs().get(0));
+            }
+        }
+    }
+
+    public void relayoutCardPanels() {
+        final ForgePreferences prefs = FModel.getPreferences();
+
+        // Picture processed first (bottom half); detail second (top half).
+        relayoutCardPanel(prefs, FPref.UI_MATCH_CARD_PICTURE_VISIBLE,
+                EDocID.CARD_PICTURE, EDocID.CARD_DETAIL, false);
+        relayoutCardPanel(prefs, FPref.UI_MATCH_CARD_DETAIL_VISIBLE,
+                EDocID.CARD_DETAIL, EDocID.CARD_PICTURE, true);
+
+        SResizingUtil.resizeWindow();
+        SRearrangingUtil.updateBorders();
+    }
+
+    private void relayoutCardPanel(ForgePreferences prefs, FPref pref,
+            EDocID docId, EDocID siblingId, boolean insertAboveSibling) {
+        IVDoc<? extends ICDoc> doc = docId.getDoc();
+        if (doc == null) { return; }
+        boolean visible = prefs.getPrefBoolean(pref);
+
+        if (!visible && doc.getParentCell() != null) {
+            // Hide: remove from cell, fill gap if empty
+            DragCell parent = doc.getParentCell();
+            parent.removeDoc(doc);
+            doc.setParentCell(null);
+            if (parent.getDocs().isEmpty()) {
+                SRearrangingUtil.fillGap(parent);
+                FView.SINGLETON_INSTANCE.removeDragCell(parent);
+            } else {
+                parent.setSelected(parent.getDocs().get(0));
+            }
+        } else if (visible && doc.getParentCell() == null) {
+            // Show: split sibling's cell if visible, otherwise create
+            // a new column on the right side of the window.
+            IVDoc<? extends ICDoc> sibling = siblingId.getDoc();
+            if (sibling != null && sibling.getParentCell() != null) {
+                splitCellVertically(sibling.getParentCell(), doc,
+                        insertAboveSibling);
+            } else {
+                addDocAsRightColumn(doc);
+            }
+        }
+    }
+
+    /**
+     * Splits an existing cell in half vertically and places the new doc
+     * in the top or bottom half.
+     */
+    private void splitCellVertically(DragCell existingCell,
+            IVDoc<? extends ICDoc> newDoc, boolean newOnTop) {
+        final RectangleOfDouble b = existingCell.getRoughBounds();
+        final double halfH = b.getH() / 2.0;
+        final RectangleOfDouble topBounds = new RectangleOfDouble(
+                b.getX(), b.getY(), b.getW(), halfH);
+        final RectangleOfDouble bottomBounds = new RectangleOfDouble(
+                b.getX(), b.getY() + halfH, b.getW(), halfH);
+
+        final DragCell newCell = new DragCell();
+        if (newOnTop) {
+            existingCell.setRoughBounds(bottomBounds);
+            newCell.setRoughBounds(topBounds);
+        } else {
+            existingCell.setRoughBounds(topBounds);
+            newCell.setRoughBounds(bottomBounds);
+        }
+        FView.SINGLETON_INSTANCE.addDragCell(newCell);
+        newCell.addDoc(newDoc);
+    }
+
+    /**
+     * Creates a new column on the right side of the window for the given doc
+     * by shrinking cells that currently touch the right edge.
+     */
+    private void addDocAsRightColumn(IVDoc<? extends ICDoc> doc) {
+        final double columnWidth = 0.2;
+        // Shrink cells whose right edge is at 1.0 to make room
+        for (final DragCell cell : FView.SINGLETON_INSTANCE.getDragCells()) {
+            final RectangleOfDouble b = cell.getRoughBounds();
+            if (b.getX() + b.getW() > 1.0 - 0.001) {
+                cell.setRoughBounds(new RectangleOfDouble(
+                        b.getX(), b.getY(),
+                        b.getW() - columnWidth, b.getH()));
+            }
+        }
+        // Create new cell on the right spanning full height
+        final DragCell newCell = new DragCell();
+        newCell.setRoughBounds(new RectangleOfDouble(
+                1.0 - columnWidth, 0.0, columnWidth, 1.0));
+        FView.SINGLETON_INSTANCE.addDragCell(newCell);
+        newCell.addDoc(doc);
     }
 
     public CMatchUI getControl() {

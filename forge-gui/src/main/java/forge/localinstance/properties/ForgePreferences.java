@@ -104,6 +104,21 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_OPEN_PACKS_INDIV ("false"),
         UI_STACK_CREATURES ("false"),
         UI_TOKENS_IN_SEPARATE_ROW("false"),
+        UI_SHOW_HOVER_TOOLTIPS("true"),
+        UI_POPUP_KEYWORD_INFO("true"),
+        UI_POPUP_RELATED_CARDS("true"),
+        UI_POPUP_CARD_IMAGE("true"),
+        UI_POPUP_IMAGE_SIZE("375"),  // thumbnail height in pixels (250–500)
+        UI_POPUP_CARD_OVERLAYS("false"),
+        UI_HOVER_OVERLAY_CARD_NAME("false"),
+        UI_HOVER_OVERLAY_CARD_POWER("true"),
+        UI_HOVER_OVERLAY_CARD_MANA_COST("false"),
+        UI_HOVER_OVERLAY_CARD_PERPETUAL_MANA_COST("false"),
+        UI_HOVER_OVERLAY_CARD_ID("false"),
+        UI_HOVER_OVERLAY_ABILITY_ICONS("true"),
+        UI_SHOW_ZOOM_TOOLTIPS("true"),
+        UI_ZOOM_KEYWORD_INFO("true"),
+        UI_ZOOM_RELATED_CARDS("true"),
         UI_UPLOAD_DRAFT ("false"),
         UI_SCALE_LARGER ("true"),
         UI_RENDER_BLACK_BORDERS ("true"),
@@ -136,6 +151,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_CURRENT_AI_PROFILE ("Default"),
         UI_CLONE_MODE_SOURCE ("false"),
         UI_MATCH_IMAGE_VISIBLE ("true"),
+        UI_MATCH_CARD_PICTURE_VISIBLE ("true"),
+        UI_MATCH_CARD_DETAIL_VISIBLE ("true"),
         UI_THEMED_COMBOBOX ("true"), // Now applies to all theme settings, not just Combo.
         UI_LOCK_TITLE_BAR ("false"),
         UI_HIDE_GAME_TABS ("false"), // Visibility of tabs in match screen.
@@ -311,6 +328,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         SHORTCUT_SHOWHOTKEYS("72"),
         SHORTCUT_PANELTABS("17 84"),
         SHORTCUT_CARDOVERLAYS("17 79"),
+        SHORTCUT_HOVERTOOLTIPS("17 72"),   // Ctrl+H
+        SHORTCUT_ZOOMTOOLTIPS("17 73"),    // Ctrl+I
 
         LAST_IMPORTED_CUBE_ID("");
 

@@ -60,6 +60,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final FLabel btnClearImageCache = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnClearImageCache")).build();
     private final FLabel btnTokenPreviewer = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnTokenPreviewer")).build();
     private final FLabel btnCustomLogSettings = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("lblCustomLogSettings")).build();
+    private final FLabel btnCardOverlaySettings = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("lblCardOverlaySettings")).build();
 
     private final FLabel btnPlayerName = new FLabel.Builder().opaque(true).hoverable(true).text("").build();
     private final FLabel btnServerPort = new FLabel.Builder().opaque(true).hoverable(true).text("").build();
@@ -113,6 +114,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbOpenPacksIndiv = new OptionsCheckBox(localizer.getMessage("cbOpenPacksIndiv"));
     private final JCheckBox cbTokensInSeparateRow = new OptionsCheckBox(localizer.getMessage("cbTokensInSeparateRow"));
     private final JCheckBox cbStackCreatures = new OptionsCheckBox(localizer.getMessage("cbStackCreatures"));
+    private final JCheckBox cbHoverTooltipsEnabled = new OptionsCheckBox(localizer.getMessage("cbHoverTooltipsEnabled"));
+    private final JCheckBox cbZoomTooltipsEnabled = new OptionsCheckBox(localizer.getMessage("cbZoomTooltipsEnabled"));
     private final JCheckBox cbFilterLandsByColorId = new OptionsCheckBox(localizer.getMessage("cbFilterLandsByColorId"));
     private final JCheckBox cbShowStormCount = new OptionsCheckBox(localizer.getMessage("cbShowStormCount"));
     private final JCheckBox cbRemindOnPriority = new OptionsCheckBox(localizer.getMessage("cbRemindOnPriority"));
@@ -449,6 +452,12 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbStackCreatures, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlStackCreatures")), descriptionConstraints);
 
+        pnlPrefs.add(cbHoverTooltipsEnabled, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlHoverTooltipsEnabled")), descriptionConstraints);
+
+        pnlPrefs.add(cbZoomTooltipsEnabled, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlZoomTooltipsEnabled")), descriptionConstraints);
+
         pnlPrefs.add(cbTimedTargOverlay, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlTimedTargOverlay")), descriptionConstraints);
 
@@ -466,6 +475,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbSROptimize, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSrOptimize")), descriptionConstraints);
+
+        pnlPrefs.add(btnCardOverlaySettings, "w 25%!, h 30px!, gap 25px 0 0 20px, span 2 1, al left");
 
         // Sound options
         pnlPrefs.add(new SectionLabel(localizer.getMessage("SoundOptions")), sectionConstraints + ", gaptop 2%");
@@ -1013,6 +1024,14 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         return cbStackCreatures;
     }
 
+    public final JCheckBox getCbHoverTooltipsEnabled() {
+        return cbHoverTooltipsEnabled;
+    }
+
+    public final JCheckBox getCbZoomTooltipsEnabled() {
+        return cbZoomTooltipsEnabled;
+    }
+
     public final JCheckBox getCbManaLostPrompt() {
     	return cbManaLostPrompt;
     }
@@ -1073,6 +1092,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     public final FLabel getBtnClearImageCache() { return btnClearImageCache; }
     public final FLabel getBtnTokenPreviewer() { return btnTokenPreviewer; }
     public FLabel getBtnCustomLogSettings() { return btnCustomLogSettings; }
+    public FLabel getBtnCardOverlaySettings() { return btnCardOverlaySettings; }
 
     /* (non-Javadoc)
 		 * @see forge.gui.framework.IVDoc#getDocumentID()
