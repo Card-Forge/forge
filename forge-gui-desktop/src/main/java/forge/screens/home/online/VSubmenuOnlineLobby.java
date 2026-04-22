@@ -11,7 +11,6 @@ import javax.swing.SwingConstants;
 import forge.deckchooser.FDeckChooser;
 import forge.gamemodes.match.GameLobby;
 import forge.gamemodes.net.IOnlineLobby;
-import forge.gamemodes.net.NetConnectUtil;
 import forge.gamemodes.net.client.FGameClient;
 import forge.gamemodes.net.server.FServerManager;
 import forge.gui.FNetOverlay;
@@ -156,7 +155,7 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
             FButton btnServerUrl = new FButton(Localizer.getInstance().getMessage("lblServerURL"));
             btnServerUrl.setFont(FSkin.getRelativeFont(14));
             pnlTitle.add(btnServerUrl, "w 150!, h 35!, gap 10 10 0 0, align right");
-            btnServerUrl.addActionListener(e -> NetConnectUtil.copyHostedServerUrl());
+            btnServerUrl.addActionListener(e -> CSubmenuOnlineLobby.showServerAddressesDialog());
         }
         pnlTitle.add(btnStop, "gap 10 10 0 0, align right");
         container.add(pnlTitle,"w 80%, gap 0 0 0 0, al right, pushx");
