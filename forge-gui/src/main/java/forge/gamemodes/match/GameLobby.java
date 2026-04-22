@@ -96,6 +96,16 @@ public abstract class GameLobby implements IHasGameType {
         }
         return data.slots.get(index);
     }
+
+    /** First non-OPEN slot that isn't ready, or null if every filled slot is ready. */
+    public LobbySlot findFirstUnreadySlot() {
+        for (int i = 0; i < getNumberOfSlots(); i++) {
+            LobbySlot slot = getSlot(i);
+            if (slot == null || slot.getType() == LobbySlotType.OPEN) continue;
+            if (!slot.isReady()) return slot;
+        }
+        return null;
+    }
     public void applyToSlot(final int index, final UpdateLobbyPlayerEvent event) {
         final LobbySlot slot = getSlot(index);
         if (slot == null || event == null) {

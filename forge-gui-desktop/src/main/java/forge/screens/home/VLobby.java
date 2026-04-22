@@ -6,7 +6,6 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.util.*;
-import java.util.function.Consumer;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
@@ -15,27 +14,18 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.Singletons;
 import forge.ai.AIOption;
 import forge.deck.*;
 import forge.deckchooser.FDeckChooser;
 import forge.game.GameType;
 import forge.game.card.CardView;
-import forge.gamemodes.limited.BoosterDraft;
-import forge.gamemodes.limited.LimitedPoolType;
 import forge.gamemodes.match.GameLobby;
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.net.*;
-import forge.gamemodes.net.client.FGameClient;
-import forge.gamemodes.net.event.DraftPickEvent;
 import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
-import forge.gamemodes.net.server.ServerGameLobby;
 import forge.gui.CardDetailPanel;
-import forge.gui.FDraftOverlay;
-import forge.gui.GuiChoose;
 import forge.gui.SwingPrefBinders;
-import forge.gui.framework.FScreen;
 import forge.gui.interfaces.ILobbyView;
 import forge.gui.util.SOptionPane;
 import forge.interfaces.IPlayerChangeListener;
@@ -45,12 +35,6 @@ import forge.itemmanager.ItemManagerConfig;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.screens.deckeditor.CDeckEditorUI;
-import forge.screens.deckeditor.controllers.CEditorLimited;
-import forge.screens.deckeditor.controllers.CEditorNetworkDraft;
-import forge.screens.deckeditor.controllers.NetworkDraftLog;
-import forge.screens.deckeditor.views.VEditorLog;
-import forge.screens.home.online.VSubmenuOnlineLobby;
 import forge.toolbox.*;
 import forge.toolbox.FSkin.SkinImage;
 import forge.util.*;
@@ -71,6 +55,7 @@ public class VLobby implements ILobbyView {
 
     // General variables
     private final GameLobby lobby;
+    private CLobby controller;
     private IPlayerChangeListener playerChangeListener = null;
     private final LblHeader lblTitle = new LblHeader(localizer.getMessage("lblHeaderConstructedMode"));
     private int activePlayersNum = 0;
@@ -132,11 +117,7 @@ public class VLobby implements ILobbyView {
     private final Vector<Object> humanListData = new Vector<>();
     private final Vector<Object> aiListData = new Vector<>();
 
-    // Mode selector (network only)
-    private enum LobbyMode { CONSTRUCTED, LIMITED }
-    private LobbyMode currentMode = LobbyMode.CONSTRUCTED;
-    private boolean suppressModeListener;
-    private EventFormat configuredFormat;
+    // Mode selector (network only). Mode state lives in CLobby; this combo is the widget.
     private final FComboBoxPanel<String> cboModePanel = new FComboBoxPanel<>(Localizer.getInstance().getMessage("lblNetworkLobbyMode"),
             ImmutableList.of(Localizer.getInstance().getMessage("lblNetworkModeConstructed"),
                     Localizer.getInstance().getMessage("lblNetworkModeLimited")));
@@ -160,30 +141,24 @@ public class VLobby implements ILobbyView {
     // Split panel for right side in Draft/Sealed mode
     private final FPanel eventRightPanel = new FPanel(new MigLayout("insets 0, gap 0, wrap, fill"));
 
-    // Event dropdown (host selects completed events from local deck files)
-
-    // Active event state
-    private String activeEventId;
-    private boolean activeConformance = true;
-    private List<String> eventIdsByDropdownIndex = new ArrayList<>();
-
     // Action buttons for Draft/Sealed mode
     private final FButton btnStartEvent = new FButton(Localizer.getInstance().getMessage("lblNetworkStartDraft"));
     private final FButton btnStartMatch = new FButton(Localizer.getInstance().getMessage("lblNetworkStartMatch"));
 
-    // Network draft state
-    private CEditorNetworkDraft networkDraftEditor;
-    private int mySeatIndex;
-    private int lastPackNumber;
+    // (network draft state lives in CLobby)
 
     // CTR
     public VLobby(final GameLobby lobby) {
         this.lobby = lobby;
+        // Create controller first — VLobby.update() and render methods rely on a non-null
+        // controller. External callers (e.g. CSubmenuOnlineLobby) pick up the same instance
+        // via view.getController().
+        new CLobby(this);
 
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         if (lobby.isAllowNetworking()) {
-            cboModePanel.addActionListener(e -> onModeChanged());
+            cboModePanel.addActionListener(e -> controller.onModeChanged());
             // Set a larger font on the combo box to match/exceed the variants label
             for (final Component c : cboModePanel.getComponents()) {
                 c.setFont(FSkin.getBoldFont(14).getBaseFont());
@@ -211,17 +186,7 @@ public class VLobby implements ILobbyView {
             titleRow.setOpaque(false);
             titleRow.add(lblEventPanelTitle, "growx, pushx");
             if (lobby.hasControl()) {
-                btnDismissEvent.setCommand(() -> {
-                    if (lobby instanceof ServerGameLobby serverLobby) {
-                        configuredFormat = null;
-                        serverLobby.clearCurrentEvent();
-                    }
-                    activeEventId = null;
-                    broadcastEventSelection();
-                    updateEventPanelState();
-                    updateActionButtons();
-                    updateDeckListFilter();
-                });
+                btnDismissEvent.setCommand(() -> controller.onDismissEvent());
                 titleRow.add(btnDismissEvent, "w 24px!, h 24px!, align right");
             }
             eventConfigPanel.add(titleRow, "span 2, growx, wrap");
@@ -242,7 +207,7 @@ public class VLobby implements ILobbyView {
             // Row 7: filter checkbox
             cbDeckConformance.setSelected(true);
             if (lobby.hasControl()) {
-                cbDeckConformance.addActionListener(e -> onConformanceChanged());
+                cbDeckConformance.addActionListener(e -> controller.onConformanceChanged());
             } else {
                 cbDeckConformance.setEnabled(false);
             }
@@ -306,7 +271,7 @@ public class VLobby implements ILobbyView {
         }
         if (lobby.isAllowNetworking() && lobby.hasControl()) {
             btnStartEvent.setFont(FSkin.getRelativeFont(18));
-            btnStartEvent.addActionListener(e -> startEvent());
+            btnStartEvent.addActionListener(e -> controller.startEvent());
             btnStartMatch.setFont(FSkin.getRelativeFont(18));
             btnStartMatch.addActionListener(arg0 -> {
                 Runnable startGame = lobby.startGame();
@@ -315,7 +280,7 @@ public class VLobby implements ILobbyView {
                 }
             });
             btnNewEvent.setFont(FSkin.getRelativeFont(18));
-            btnNewEvent.addActionListener(e -> openEventConfigDialog());
+            btnNewEvent.addActionListener(e -> controller.openEventConfigDialog());
         }
         String defaultGamesInMatch = FModel.getPreferences().getPref(FPref.UI_MATCHES_PER_GAME);
         if (defaultGamesInMatch == null || defaultGamesInMatch.isEmpty()) {
@@ -373,52 +338,8 @@ public class VLobby implements ILobbyView {
         activePlayersNum = lobby.getNumberOfSlots();
         addPlayerBtn.setEnabled(activePlayersNum < MAX_PLAYERS);
 
-        // Client: sync lobby mode from host's state. Items are [Constructed, Limited].
-        // Suppress the mode-change listener — we'll do the UI refresh ourselves
-        // below (updateRightPanelForMode) rather than letting onModeChanged
-        // rebuild the panel and the outer update() rebuild it a second time.
-        if (lobby.isAllowNetworking() && !lobby.hasControl() && lobby.getData() != null) {
-            boolean hostIsLimited = lobby.getData().isLimitedMode();
-            int desiredIndex = hostIsLimited ? 1 : 0;
-            if (cboModePanel.getSelectedIndex() != desiredIndex) {
-                suppressModeListener = true;
-                try {
-                    cboModePanel.setSelectedIndex(desiredIndex);
-                    currentMode = hostIsLimited ? LobbyMode.LIMITED : LobbyMode.CONSTRUCTED;
-                    setVariantsVisible(!hostIsLimited);
-                } finally {
-                    suppressModeListener = false;
-                }
-            }
-        }
-
-        // Detect event-state transitions from the latest lobby data snapshot and
-        // drive the same UI updates the dedicated callbacks used to perform.
-        final GameLobby.GameLobbyData data = lobby.getData();
-        if (data != null) {
-            boolean eventPanelNeedsUpdate = false;
-            NetworkEventView newView = data.getEventView();
-            if (newView != lastEventView) {
-                lastEventView = newView;
-                eventPanelNeedsUpdate = true;
-            }
-            String newEventId = data.getActiveEventId();
-            boolean newConformance = data.isActiveConformance();
-            if (!java.util.Objects.equals(newEventId, activeEventId) || newConformance != activeConformance) {
-                activeEventId = newEventId;
-                activeConformance = newConformance;
-                if (!lobby.hasControl()) {
-                    cbDeckConformance.setSelected(newConformance);
-                }
-                eventPanelNeedsUpdate = true;
-                if (!lobby.hasControl()) {
-                    updateDeckListFilter();
-                }
-            }
-            if (eventPanelNeedsUpdate) {
-                updateEventPanelState();
-            }
-        }
+        controller.syncModeFromHost();
+        controller.onLobbyDataChanged();
 
         final boolean allowNetworking = lobby.isAllowNetworking();
 
@@ -507,6 +428,43 @@ public class VLobby implements ILobbyView {
         refreshPanels(true, true);
     }
 
+    public void setController(final CLobby controller) {
+        this.controller = controller;
+    }
+
+    public CLobby getController() {
+        return controller;
+    }
+
+    GameLobby getLobby() {
+        return lobby;
+    }
+
+    String getCurrentModeSelection() {
+        return cboModePanel.getSelectedItem();
+    }
+
+    int getCurrentModeIndex() {
+        return cboModePanel.getSelectedIndex();
+    }
+
+    void setCurrentModeIndex(int idx) {
+        cboModePanel.setSelectedIndex(idx);
+    }
+
+    void refreshConstructedFrame() {
+        constructedFrame.revalidate();
+        constructedFrame.repaint();
+    }
+
+    boolean getConformanceSelected() {
+        return cbDeckConformance.isSelected();
+    }
+
+    void setConformanceSelected(boolean selected) {
+        cbDeckConformance.setSelected(selected);
+    }
+
     public void setPlayerChangeListener(final IPlayerChangeListener listener) {
         this.playerChangeListener = listener;
     }
@@ -515,7 +473,7 @@ public class VLobby implements ILobbyView {
         // Limited mode: deck is produced by the draft/sealed flow (no pre-selection
         // required when starting a new event) or is selected from the filtered event
         // deck list when running a match from a past event. Skip the generic check.
-        boolean deckRequired = currentMode != LobbyMode.LIMITED;
+        boolean deckRequired = !controller.isLimitedMode();
         if (ready && deckRequired && decks[index] == null && !vntMomirBasic.isSelected() && !vntMoJhoSto.isSelected()) {
             SOptionPane.showErrorDialog("Select a deck before readying!");
             update(false);
@@ -861,57 +819,7 @@ public class VLobby implements ILobbyView {
         refreshPanels(true, true);
     }
 
-    private void onModeChanged() {
-        // update() uses this flag to refresh the combo silently — the outer
-        // update() path handles the panel rebuild, so skip the work here.
-        if (suppressModeListener) return;
-
-        // Client: mode is host-controlled. If a user click diverges from the synced
-        // value, revert via setSelectedIndex (which re-fires this listener). Only
-        // return early when we actually revert — otherwise fall through so the rest
-        // of the UI (right panel, action buttons) updates with the new mode.
-        // (setEnabled(false) breaks FComboBox rendering, so we intercept here.)
-        if (lobby.isAllowNetworking() && !lobby.hasControl()) {
-            boolean hostIsLimited = lobby.getData() != null && lobby.getData().isLimitedMode();
-            int desiredIndex = hostIsLimited ? 1 : 0;
-            if (cboModePanel.getSelectedIndex() != desiredIndex) {
-                cboModePanel.setSelectedIndex(desiredIndex);
-                return;
-            }
-        }
-
-        final String selected = cboModePanel.getSelectedItem();
-        if (localizer.getMessage("lblNetworkModeLimited").equals(selected)) {
-            currentMode = LobbyMode.LIMITED;
-        } else {
-            currentMode = LobbyMode.CONSTRUCTED;
-        }
-
-        final boolean isLimited = (currentMode == LobbyMode.LIMITED);
-
-        // Clear event when switching away from Limited, and broadcast the new mode.
-        if (lobby.hasControl() && lobby instanceof ServerGameLobby serverLobby) {
-            if (!isLimited) {
-                configuredFormat = null;
-                serverLobby.clearCurrentEvent();
-            }
-            serverLobby.setLimitedMode(isLimited);
-        }
-        updateEventPanelState();
-
-        setVariantsVisible(!isLimited);
-
-        // Update right panel content
-        updateRightPanelForMode();
-
-        // Update action buttons
-        updateActionButtons();
-
-        constructedFrame.revalidate();
-        constructedFrame.repaint();
-    }
-
-    private void setVariantsVisible(boolean visible) {
+    void setVariantsVisible(boolean visible) {
         Container scrollPane = variantsPanel.getParent();
         while (scrollPane != null && !(scrollPane instanceof JScrollPane)) {
             scrollPane = scrollPane.getParent();
@@ -921,9 +829,9 @@ public class VLobby implements ILobbyView {
         }
     }
 
-    private void updateRightPanelForMode() {
+    void updateRightPanelForMode() {
         decksFrame.removeAll();
-        if (currentMode == LobbyMode.CONSTRUCTED) {
+        if (!controller.isLimitedMode()) {
             populateDeckPanel(lobby.getGameType());
         } else {
             eventRightPanel.removeAll();
@@ -939,7 +847,7 @@ public class VLobby implements ILobbyView {
             decksFrame.add(eventRightPanel, "w 100%, h 100%, growy, pushy");
 
             if (lobby.hasControl()) {
-                scanAvailableEvents();
+                controller.scanAvailableEvents();
             }
             updateDeckListFilter();
         }
@@ -947,8 +855,8 @@ public class VLobby implements ILobbyView {
         decksFrame.repaint();
     }
 
-    private void updateActionButtons() {
-        final boolean isLimited = (currentMode == LobbyMode.LIMITED);
+    void updateActionButtons() {
+        final boolean isLimited = controller.isLimitedMode();
 
         // Rebuild pnlStart layout
         pnlStart.removeAll();
@@ -956,12 +864,12 @@ public class VLobby implements ILobbyView {
         if (lobby.hasControl()) {
             if (isLimited) {
                 pnlStart.setLayout(new MigLayout("insets 0, gap 0"));
-                final String label = (configuredFormat == EventFormat.SEALED)
+                final String label = (controller.getConfiguredFormat() == EventFormat.SEALED)
                         ? localizer.getMessage("lblNetworkGeneratePools")
                         : localizer.getMessage("lblNetworkStartDraft");
                 btnStartEvent.setText(label);
-                boolean isExistingEvent = activeEventId != null;
-                btnStartEvent.setEnabled(configuredFormat != null && !isExistingEvent);
+                boolean isExistingEvent = controller.getActiveEventId() != null;
+                btnStartEvent.setEnabled(controller.getConfiguredFormat() != null && !isExistingEvent);
                 btnStartMatch.setEnabled(isExistingEvent);
                 final String eventBtn = "w " + EVENT_BTN_WIDTH + "px!, h " + EVENT_BTN_HEIGHT + "px!";
                 pnlStart.add(btnNewEvent, "cell 0 0, " + eventBtn + ", gapright 20");
@@ -980,281 +888,30 @@ public class VLobby implements ILobbyView {
         pnlStart.repaint();
     }
 
-    private void startEvent() {
-        if (!(lobby instanceof ServerGameLobby serverLobby)) return;
-        NetworkEvent event = serverLobby.getCurrentEvent();
-        if (event == null) {
-            FOptionPane.showErrorDialog(localizer.getMessage("lblNetworkNoEventConfigured"));
-            return;
+    /** Render the event panel from pre-computed contents. No decisions live here. */
+    void setEventPanelContents(CLobby.EventPanelContents c) {
+        lblEventStatus.setText(c.statusText());
+        lblEventStatus.setVisible(!c.statusText().isEmpty());
+        lblEventFormat.setText(c.formatText());
+        lblEventProduct.setText(c.productText());
+        lblEventPickTimer.setText(c.timerText());
+        lblEventDate.setText(c.dateText());
+        if (lobby.hasControl()) {
+            btnDismissEvent.setVisible(c.showDismissX());
         }
-
-        // Require all non-OPEN participants to be ready before starting the draft/sealed
-        for (int i = 0; i < lobby.getNumberOfSlots(); i++) {
-            LobbySlot slot = lobby.getSlot(i);
-            if (slot == null || slot.getType() == LobbySlotType.OPEN) continue;
-            if (!slot.isReady()) {
-                SOptionPane.showMessageDialog(localizer.getMessage("lblPlayerIsNotReady", slot.getName()));
-                return;
-            }
-        }
-
-        if (event.getFormat() == EventFormat.SEALED) {
-            serverLobby.startSealedEvent();
-        } else if (event.getFormat() == EventFormat.BOOSTER_DRAFT) {
-            ServerGameLobby.DraftStartResult result = serverLobby.startDraftEvent();
-            if (result == null) {
-                FOptionPane.showErrorDialog(localizer.getMessage("lblNetworkFailedDraft"));
-                return;
-            }
-            mySeatIndex = result.hostSeatIndex();
-            FDraftOverlay.SINGLETON_INSTANCE.initDraft(
-                    mySeatIndex, result.names(), result.aiFlags(), result.totalPacks());
-            NetworkDraftLog.logDraftStart(
-                    event.getParticipants(), result.totalPacks(),
-                    event.getProductDescription(), mySeatIndex);
-            lastPackNumber = 0;
-        }
-    }
-
-    private void openEventConfigDialog() {
-        if (!(lobby instanceof ServerGameLobby serverLobby)) return;
-
-        // Step 0: If past events exist, offer a choice between creating new and loading one
-        if (!eventIdsByDropdownIndex.isEmpty()) {
-            String[] setupOptions = {
-                    localizer.getMessage("lblNetworkSetUpEventCreate"),
-                    localizer.getMessage("lblNetworkSetUpEventLoadPast")
-            };
-            String setupChoice = GuiChoose.oneOrNone(
-                    localizer.getMessage("lblNetworkSetUpEventPrompt"), setupOptions);
-            if (setupChoice == null) return;
-            if (setupChoice.equals(setupOptions[1])) {
-                openLoadPastEventDialog();
-                return;
-            }
-        }
-
-        // Step 1: Choose event type (Draft / Sealed)
-        String[] formatNames = { localizer.getMessage("lblNetworkModeDraft"), localizer.getMessage("lblNetworkModeSealed") };
-        String chosenFormatName = GuiChoose.oneOrNone(
-                localizer.getMessage("lblNetworkChooseEventType"), formatNames);
-        if (chosenFormatName == null) return;
-        EventFormat chosenFormat = formatNames[0].equals(chosenFormatName)
-                ? EventFormat.BOOSTER_DRAFT : EventFormat.SEALED;
-
-        // Create event with chosen format
-        serverLobby.createEvent(chosenFormat);
-        configuredFormat = chosenFormat;
-
-        // Step 2: Choose pool type
-        boolean isDraft = (chosenFormat == EventFormat.BOOSTER_DRAFT);
-        LimitedPoolType[] poolTypes = LimitedPoolType.values(isDraft);
-        LimitedPoolType chosen = GuiChoose.oneOrNone(
-                localizer.getMessage("lblNetworkChooseDraftFormat"), poolTypes);
-        if (chosen == null) return;
-
-        // Step 3: For draft, build the BoosterDraft now so block/set/cube/theme sub-dialogs
-        // pop before the timer prompt — matches the offline CSubmenuDraft flow.
-        BoosterDraft draft = null;
-        if (isDraft) {
-            draft = BoosterDraft.createDraftForNetwork(chosen);
-            if (draft == null) return;
-        }
-
-        // Re-fetch current event after modal dialog — earlier reference may be stale
-        // if a lobby update has run during EDT event pump
-        NetworkEvent event = serverLobby.getCurrentEvent();
-        if (event == null) return;
-
-        // Step 4: Pick timer + disconnect grace period (draft only, combined prompt)
-        int timerSeconds = event.getPickTimerSeconds();
-        int graceSeconds = event.getDisconnectGraceSeconds();
-        if (isDraft) {
-            FTextField pickField = new FTextField.Builder().text(String.valueOf(timerSeconds)).build();
-            FTextField graceField = new FTextField.Builder().text(String.valueOf(graceSeconds)).build();
-            FLabel pickLbl = new FLabel.Builder().fontSize(12).text(localizer.getMessage("lblNetworkPickTimerPrompt")).build();
-            FLabel graceLbl1 = new FLabel.Builder().fontSize(12).text(localizer.getMessage("lblNetworkGraceTimerPromptLine1")).build();
-            FLabel graceLbl2 = new FLabel.Builder().fontSize(12).text(localizer.getMessage("lblNetworkGraceTimerPromptLine2")).build();
-
-            JPanel panel = new JPanel(new MigLayout("insets 4, gap 2 4, wrap 1"));
-            panel.setOpaque(false);
-            panel.add(pickLbl);
-            panel.add(pickField, "w 80!");
-            panel.add(graceLbl1, "gaptop 10");
-            panel.add(graceLbl2);
-            panel.add(graceField, "w 80!");
-
-            int result = FOptionPane.showOptionDialog(
-                    null,
-                    localizer.getMessage("lblNetworkDraftTimersTitle"),
-                    null,
-                    panel,
-                    java.util.Arrays.asList(
-                            localizer.getMessage("lblOK"),
-                            localizer.getMessage("lblCancel")));
-            if (result == 0) {
-                try {
-                    int parsed = Integer.parseInt(pickField.getText().trim());
-                    if (parsed >= 0) timerSeconds = parsed;
-                } catch (NumberFormatException ignored) { }
-                try {
-                    int parsed = Integer.parseInt(graceField.getText().trim());
-                    if (parsed >= 0) graceSeconds = parsed;
-                } catch (NumberFormatException ignored) { }
-            }
-        }
-
-        // Delegate server-side configuration
-        if (!serverLobby.configureEvent(chosen, draft, timerSeconds, graceSeconds)) {
-            return;
-        }
-        updateEventPanelState();
-        updateActionButtons();
-    }
-
-    private void openLoadPastEventDialog() {
-        if (eventIdsByDropdownIndex.isEmpty()) return;
-        List<EventChoice> choices = new ArrayList<>(eventIdsByDropdownIndex.size());
-        for (String id : eventIdsByDropdownIndex) {
-            choices.add(new EventChoice(id, getEventDisplayLabel(id)));
-        }
-        EventChoice chosen = GuiChoose.oneOrNone(
-                localizer.getMessage("lblNetworkLoadPastEventPrompt"), choices);
-        if (chosen == null) return;
-        activeEventId = chosen.id();
-        updateEventPanelState();
-        updateActionButtons();
-        updateDeckListFilter();
-        broadcastEventSelection();
-    }
-
-    private record EventChoice(String id, String label) {
-        @Override public String toString() { return label; }
-    }
-
-    private void updateEventPanelState() {
-        if (!lobby.isAllowNetworking()) return;
-
-        final boolean isHost = lobby.hasControl();
-        final NetworkEvent currentEvent = (lobby instanceof ServerGameLobby sgl) ? sgl.getCurrentEvent() : null;
-        final boolean inState2 = activeEventId != null;
-        final boolean inState1 = !inState2 && (isHost ? currentEvent != null : lastEventView != null);
-
-        // Row 1 — corner X dismiss visible for host whenever an event is active
-        if (isHost) {
-            btnDismissEvent.setVisible(inState1 || inState2);
-        }
-
-        // Row 2 — centered status message (State 0 only; data rows carry the message in States 1/2)
-        String statusText = "";
-        if (!inState1 && !inState2) {
-            statusText = localizer.getMessage("lblNetworkWaitingForHost");
-        }
-        lblEventStatus.setText(statusText);
-        lblEventStatus.setVisible(!statusText.isEmpty());
-        String formatText = "\u2014";
-        String productText = "\u2014";
-        String timerText = "\u2014";
-        String dateText = "\u2014";
-        if (inState2) {
-            String[] tags = findEventTags(activeEventId);
-            if (tags != null) {
-                if (tags[0] != null) {
-                    formatText = EventFormat.BOOSTER_DRAFT.name().equals(tags[0])
-                            ? localizer.getMessage("lblNetworkModeDraft")
-                            : localizer.getMessage("lblNetworkModeSealed");
-                }
-                if (tags[1] != null && !tags[1].isEmpty()) productText = tags[1];
-                if (tags[2] != null && !tags[2].isEmpty()) dateText = tags[2];
-            }
-        } else if (inState1) {
-            EventFormat evFormat;
-            int timerSec;
-            String desc;
-            LimitedPoolType pool = null;
-            if (isHost) {
-                evFormat = currentEvent.getFormat();
-                timerSec = currentEvent.getPickTimerSeconds();
-                desc = currentEvent.getProductDescription();
-                pool = currentEvent.getPoolType();
-            } else {
-                evFormat = lastEventView.getFormat();
-                timerSec = lastEventView.getPickTimerSeconds();
-                desc = lastEventView.getProductDescription();
-            }
-            formatText = (evFormat == EventFormat.BOOSTER_DRAFT)
-                    ? localizer.getMessage("lblNetworkModeDraft")
-                    : localizer.getMessage("lblNetworkModeSealed");
-            if (desc != null && !desc.isEmpty()) {
-                productText = desc;
-            } else if (pool != null) {
-                productText = pool.toString();
-            }
-            if (evFormat == EventFormat.BOOSTER_DRAFT) {
-                timerText = timerSec > 0 ? timerSec + "s" : "\u2014";
-            } else {
-                timerText = localizer.getMessage("lblNetworkPickTimerNotApplicable");
-            }
-            dateText = localizer.getMessage(evFormat == EventFormat.SEALED
-                    ? "lblNetworkNewEventNoPools" : "lblNetworkNewEventNotDrafted");
-        }
-        lblEventFormat.setText(formatText);
-        lblEventProduct.setText(productText);
-        lblEventPickTimer.setText(timerText);
-        lblEventDate.setText(dateText);
-
-        // Row 7 — filter checkbox: visible only when an event is loaded (State 2).
-        cbDeckConformance.setVisible(inState2);
-        cbDeckConformance.setEnabled(isHost && !inState1);
-
+        cbDeckConformance.setVisible(c.showConformance());
+        cbDeckConformance.setEnabled(c.conformanceEnabled());
         eventConfigPanel.revalidate();
         eventConfigPanel.repaint();
     }
 
-    private String getEventDisplayLabel(String eventId) {
-        String[] tags = findEventTags(eventId);
-        if (tags == null) return eventId;
-        String displayFormat = EventFormat.BOOSTER_DRAFT.name().equals(tags[0]) ? "Draft" : "Sealed";
-        return displayFormat + " \u2014 " + (tags[1] == null ? "" : tags[1]) + " \u2014 (" + (tags[2] == null ? "" : tags[2]) + ")";
+    /** Delegator kept for existing call sites; prefer controller.refreshEventPanel(). */
+    void updateEventPanelState() {
+        controller.refreshEventPanel();
     }
 
-    /** Returns {eventFormat, eventProduct, eventDate} for the deck tagged with eventId, or null if not found. */
-    private static String[] findEventTags(String eventId) {
-        for (Deck d : FModel.getDecks().getNetworkEventDecks()) {
-            if (eventId.equals(DeckProxy.getEventTag(d, "eventId"))) {
-                return new String[] {
-                        DeckProxy.getEventTag(d, "eventFormat"),
-                        DeckProxy.getEventTag(d, "eventProduct"),
-                        DeckProxy.getEventTag(d, "eventDate"),
-                };
-            }
-        }
-        return null;
-    }
-
-    private void scanAvailableEvents() {
-        LinkedHashSet<String> eventIds = new LinkedHashSet<>();
-        for (Deck d : FModel.getDecks().getNetworkEventDecks()) {
-            String eventId = DeckProxy.getEventTag(d, "eventId");
-            if (eventId != null) eventIds.add(eventId);
-        }
-        eventIdsByDropdownIndex = new ArrayList<>(eventIds);
-    }
-
-    private void onConformanceChanged() {
-        activeConformance = cbDeckConformance.isSelected();
-        updateDeckListFilter();
-        broadcastEventSelection();
-    }
-
-    private void broadcastEventSelection() {
-        if (lobby.hasControl() && lobby instanceof ServerGameLobby serverLobby) {
-            serverLobby.selectEventForMatch(activeEventId, activeConformance);
-        }
-    }
-
-    private void updateDeckListFilter() {
-        if (currentMode == LobbyMode.CONSTRUCTED) return;
+    void updateDeckListFilter() {
+        if (!controller.isLimitedMode()) return;
         if (playerWithFocus >= playerPanels.size() || !lobby.mayEdit(playerWithFocus)) return;
 
         final FDeckChooser chooser = getDeckChooser(playerWithFocus);
@@ -1267,11 +924,12 @@ public class VLobby implements ILobbyView {
         // Re-read pools from disk so edits made in the deck editor are reflected.
         FModel.getDecks().reloadNetworkEventDecks();
 
+        final String activeEventId = controller.getActiveEventId();
         List<DeckProxy> allDecks;
         if (activeEventId == null) {
             // No event loaded — there are no valid decks for a limited match yet.
             allDecks = new ArrayList<>();
-        } else if (activeConformance) {
+        } else if (controller.isActiveConformance()) {
             allDecks = new ArrayList<>(DeckProxy.getAllNetworkEventDecks());
             allDecks.removeIf(dp -> {
                 Deck d = dp.getDeck();
@@ -1524,161 +1182,28 @@ public class VLobby implements ILobbyView {
         }
     }
 
-    // Tracks last-seen event view so clients can init the overlay on first pack;
-    // updated in update() when GameLobbyData.eventView changes
-    private NetworkEventView lastEventView;
-
     @Override
     public void onDraftPackArrived(int seatIndex, List<PaperCard> pack,
             int packNumber, int pickNumber, int timerDurationSeconds) {
-        SwingUtilities.invokeLater(() -> {
-            // Init overlay/editor BEFORE processing pack info so pod names are set first.
-            if (networkDraftEditor == null) {
-                initDraftEditor(seatIndex);
-            }
-
-            FDraftOverlay.SINGLETON_INSTANCE.onPackArrived(packNumber, pickNumber, pack.size(), timerDurationSeconds);
-
-            // Log pack header on new pack round
-            if (packNumber != lastPackNumber) {
-                lastPackNumber = packNumber;
-                boolean passingRight = (packNumber % 2 == 1);
-                NetworkDraftLog.logPackHeader(packNumber, passingRight);
-            }
-
-            networkDraftEditor.showPack(pack, packNumber, pickNumber);
-        });
-    }
-
-    private void initDraftEditor(int seatIndex) {
-        mySeatIndex = seatIndex;
-
-        // Initialize FDraftOverlay if not already done (client path).
-        // Always prefer the latest state's eventView over the cached copy — the
-        // first lobby broadcast during configureEvent() carries an empty
-        // participants list; only the subsequent state broadcast from
-        // startDraftEvent carries the populated pod.
-        if (lobby.getData() != null && lobby.getData().getEventView() != null) {
-            lastEventView = lobby.getData().getEventView();
-        }
-        if (lastEventView != null) {
-            List<EventParticipant> participants = lastEventView.getParticipants();
-            int totalPacks = lastEventView.getNumRounds();
-            String[] names = new String[participants.size()];
-            boolean[] aiFlags = new boolean[participants.size()];
-            // Index by seat, not list position — seats are shuffled server-side
-            // so list order and seat order diverge.
-            for (EventParticipant p : participants) {
-                int seat = p.getSeatIndex();
-                if (seat >= 0 && seat < names.length) {
-                    names[seat] = p.getName();
-                    aiFlags[seat] = p.isAI();
-                }
-            }
-            FDraftOverlay.SINGLETON_INSTANCE.initDraft(
-                    mySeatIndex, names, aiFlags, totalPacks);
-            // Log draft start for client
-            NetworkDraftLog.logDraftStart(
-                    participants, totalPacks,
-                    lastEventView.getProductDescription(), mySeatIndex);
-        }
-
-        // Build pick sender based on host vs client
-        Consumer<DraftPickEvent> pickSender;
-        if (lobby instanceof ServerGameLobby serverLobby) {
-            pickSender = ev -> serverLobby.handleDraftPick(ev, -1);
-        } else {
-            FGameClient gameClient =
-                    VSubmenuOnlineLobby.SINGLETON_INSTANCE.getClient();
-            if (gameClient == null) {
-                return;
-            }
-            pickSender = gameClient::send;
-        }
-
-        networkDraftEditor = new CEditorNetworkDraft(
-                mySeatIndex, pickSender, this::cancelActiveDraft,
-                CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture());
-        VEditorLog.SINGLETON_INSTANCE.resetNewDraft();
-
-        Singletons.getControl().setCurrentScreen(FScreen.DRAFTING_PROCESS);
-        CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(networkDraftEditor);
-    }
-
-    private String resolveParticipantName(int seatIndex) {
-        EventParticipant p = EventParticipant.findBySeat(
-                lastEventView != null ? lastEventView.getParticipants() : null, seatIndex);
-        if (p == null && lobby instanceof ServerGameLobby sgl && sgl.getCurrentEvent() != null) {
-            p = EventParticipant.findBySeat(sgl.getCurrentEvent().getParticipants(), seatIndex);
-        }
-        if (p == null) return localizer.getMessage("lblSeatN", String.valueOf(seatIndex));
-        return p.isAI() ? p.getName() + " (" + localizer.getMessage("lblAI") + ")" : p.getName();
+        controller.onDraftPackArrived(seatIndex, pack, packNumber, pickNumber, timerDurationSeconds);
     }
 
     @Override
     public void onDraftSeatPicked(int seatIndex, int[] seatQueueDepths) {
-        SwingUtilities.invokeLater(() -> {
-            FDraftOverlay.SINGLETON_INSTANCE.onSeatPicked(seatQueueDepths);
-
-            int depth = (seatIndex >= 0 && seatIndex < seatQueueDepths.length) ? seatQueueDepths[seatIndex] : 0;
-            if (seatIndex == mySeatIndex) {
-                // Flush our own deferred log line with the authoritative depth
-                if (networkDraftEditor != null) {
-                    networkDraftEditor.flushSelfPickLog(depth);
-                }
-            } else {
-                NetworkDraftLog.logOtherPick(resolveParticipantName(seatIndex), depth);
-            }
-        });
+        controller.onDraftSeatPicked(seatIndex, seatQueueDepths);
     }
 
     @Override
     public void onDraftAutoPicked(int seatIndex, PaperCard card, int packNumber, int pickInPack) {
-        SwingUtilities.invokeLater(() -> {
-            if (networkDraftEditor != null) {
-                networkDraftEditor.addAutoPickedCard(card, packNumber, pickInPack);
-            }
-        });
+        controller.onDraftAutoPicked(seatIndex, card, packNumber, pickInPack);
     }
 
-    /**
-     * Abort any active network draft: release the push-model editor reference
-     * and hide the floating overlay. Called on disconnect / stop lobby / when
-     * the user manually leaves the draft screen. Safe to call when no draft
-     * is in progress.
-     */
     public void cancelActiveDraft() {
-        networkDraftEditor = null;
-        FDraftOverlay.SINGLETON_INSTANCE.reset();
+        controller.cancelActiveDraft();
     }
 
     @Override
     public void onReceiveEventPool(String eventId, Deck pool) {
-        SwingUtilities.invokeLater(() -> {
-            if (networkDraftEditor != null) {
-                networkDraftEditor.completeDraft(pool);
-                networkDraftEditor = null;
-            } else {
-                // Sealed path: save pool and open deck editor
-                FModel.getDecks().getNetworkEventDecks().add(pool);
-                CEditorLimited<Deck> editor = new CEditorLimited<>(
-                        FModel.getDecks().getNetworkEventDecks(), Deck::new,
-                        FScreen.DECK_EDITOR_SEALED, CDeckEditorUI.SINGLETON_INSTANCE.getCDetailPicture());
-                Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_SEALED);
-                CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(editor);
-                editor.getDeckController().load(null, pool.getName());
-            }
-            lastPackNumber = 0;
-
-            activeEventId = eventId;
-            activeConformance = true;
-            if (lobby.hasControl()) {
-                scanAvailableEvents();
-                broadcastEventSelection();
-            }
-            updateRightPanelForMode();
-            updateEventPanelState();
-            updateActionButtons();
-        });
+        controller.onReceiveEventPool(eventId, pool);
     }
 }

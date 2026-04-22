@@ -3,6 +3,8 @@ package forge.gamemodes.net;
 import java.io.Serializable;
 import java.util.List;
 
+import forge.util.Localizer;
+
 /**
  * A player or AI in a network draft/sealed event.
  * <p>
@@ -44,5 +46,19 @@ public final class EventParticipant implements Serializable {
             if (p.getSeatIndex() == seatIndex) return p;
         }
         return null;
+    }
+
+    /**
+     * Display name for a seat, looking up first in the given view's participants then falling
+     * back to the current event's list. Appends " (AI)" for AI seats. If no participant found,
+     * returns a localized "Seat N" placeholder.
+     */
+    public static String resolveName(int seatIndex, List<EventParticipant> viewParticipants,
+            List<EventParticipant> currentEventParticipants) {
+        Localizer localizer = Localizer.getInstance();
+        EventParticipant p = findBySeat(viewParticipants, seatIndex);
+        if (p == null) p = findBySeat(currentEventParticipants, seatIndex);
+        if (p == null) return localizer.getMessage("lblSeatN", String.valueOf(seatIndex));
+        return p.isAI() ? p.getName() + " (" + localizer.getMessage("lblAI") + ")" : p.getName();
     }
 }

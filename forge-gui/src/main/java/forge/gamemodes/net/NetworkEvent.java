@@ -1,9 +1,12 @@
 package forge.gamemodes.net;
 
 import forge.deck.Deck;
+import forge.deck.DeckProxy;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gamemodes.limited.LimitedPoolType;
 import forge.gamemodes.limited.SealedCardPoolGenerator;
+import forge.model.FModel;
+import forge.util.Localizer;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -12,11 +15,18 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Server-side mutable model for a network limited event (draft or sealed).
- * Lives in memory only during the event session — discarded after pool distribution.
- * Each participant's pool is persisted as a Deck with event metadata in tags.
+ * Model and helpers for a network limited event (draft or sealed).
  * <p>
- * Not serializable — the wire-safe representation is {@link NetworkEventView}.
+ * The instance side is the server-side mutable event — in-memory only during the event
+ * session, discarded after pool distribution. The wire-safe representation is
+ * {@link NetworkEventView}. Each participant's pool is persisted as a Deck with event
+ * metadata in tags.
+ * <p>
+ * The static side is a home for cross-platform event helpers — tag I/O
+ * ({@link #setEventTags}, {@link #findEventTags}), display formatting
+ * ({@link #poolNameFor}, {@link #getEventDisplayLabel}, {@link #computeEventPanelText}),
+ * and the {@link EventChoice} / {@link EventPanelText} data records — so desktop and
+ * mobile UIs share identical behaviour without re-deriving the logic per platform.
  */
 public final class NetworkEvent {
     private final String eventId;
@@ -104,5 +114,124 @@ public final class NetworkEvent {
     public NetworkEventView toView() {
         return new NetworkEventView(eventId, format, phase,
                 participants, pickTimerSeconds, productDescription, numRounds);
+    }
+
+    /** An event id paired with its display label, e.g., for dialog-driven event selection. */
+    public record EventChoice(String id, String label) {
+        @Override public String toString() { return label; }
+    }
+
+    /** Pre-computed display strings for the event-details panel — platform-agnostic. */
+    public record EventPanelText(
+            String formatText,
+            String productText,
+            String timerText,
+            String dateText,
+            String statusText) { }
+
+    /** Returns {eventFormat, eventProduct, eventDate} for the deck tagged with eventId, or null. */
+    public static String[] findEventTags(String eventId) {
+        for (Deck d : FModel.getDecks().getNetworkEventDecks()) {
+            if (eventId.equals(DeckProxy.getEventTag(d, "eventId"))) {
+                return new String[] {
+                        DeckProxy.getEventTag(d, "eventFormat"),
+                        DeckProxy.getEventTag(d, "eventProduct"),
+                        DeckProxy.getEventTag(d, "eventDate"),
+                };
+            }
+        }
+        return null;
+    }
+
+    /** Short display label for a past event id, e.g., "Draft — Innistrad — (2026-04-20 10:15)". */
+    public static String getEventDisplayLabel(String eventId) {
+        String[] tags = findEventTags(eventId);
+        if (tags == null) return eventId;
+        String displayFormat = EventFormat.BOOSTER_DRAFT.name().equals(tags[0]) ? "Draft" : "Sealed";
+        return displayFormat + " — " + (tags[1] == null ? "" : tags[1])
+                + " — (" + (tags[2] == null ? "" : tags[2]) + ")";
+    }
+
+    /**
+     * Compute the five display strings for the event-details panel, given state + lobby snapshot.
+     * Platform-agnostic: both desktop and mobile views can call this and get identical text.
+     *
+     * @param isHost          whether this client owns the lobby
+     * @param activeEventId   id of the loaded past event, or null if none loaded
+     * @param currentEvent    host's in-flight event (null on client and when no event is being set up)
+     * @param lastEventView   last-received wire snapshot (null before any broadcast arrives)
+     */
+    public static EventPanelText computeEventPanelText(
+            boolean isHost, String activeEventId,
+            NetworkEvent currentEvent, NetworkEventView lastEventView) {
+        if (activeEventId != null) {
+            return textForLoadedEvent(activeEventId);
+        }
+        boolean inFlight = isHost ? currentEvent != null : lastEventView != null;
+        if (inFlight) {
+            return textForInFlightEvent(isHost, currentEvent, lastEventView);
+        }
+        return emptyEventText();
+    }
+
+    /** Text for a past event loaded from disk, read off the deck tags. */
+    private static EventPanelText textForLoadedEvent(String eventId) {
+        Localizer localizer = Localizer.getInstance();
+        String formatText = "—";
+        String productText = "—";
+        String dateText = "—";
+        String[] tags = findEventTags(eventId);
+        if (tags != null) {
+            if (tags[0] != null) {
+                formatText = EventFormat.BOOSTER_DRAFT.name().equals(tags[0])
+                        ? localizer.getMessage("lblNetworkModeDraft")
+                        : localizer.getMessage("lblNetworkModeSealed");
+            }
+            if (tags[1] != null && !tags[1].isEmpty()) productText = tags[1];
+            if (tags[2] != null && !tags[2].isEmpty()) dateText = tags[2];
+        }
+        return new EventPanelText(formatText, productText, "—", dateText, "");
+    }
+
+    /** Text for an event currently being configured/drafted, read off the event model. */
+    private static EventPanelText textForInFlightEvent(boolean isHost,
+            NetworkEvent currentEvent, NetworkEventView lastEventView) {
+        Localizer localizer = Localizer.getInstance();
+        EventFormat evFormat;
+        int timerSec;
+        String desc;
+        LimitedPoolType pool = null;
+        if (isHost) {
+            evFormat = currentEvent.getFormat();
+            timerSec = currentEvent.getPickTimerSeconds();
+            desc = currentEvent.getProductDescription();
+            pool = currentEvent.getPoolType();
+        } else {
+            evFormat = lastEventView.getFormat();
+            timerSec = lastEventView.getPickTimerSeconds();
+            desc = lastEventView.getProductDescription();
+        }
+        String formatText = (evFormat == EventFormat.BOOSTER_DRAFT)
+                ? localizer.getMessage("lblNetworkModeDraft")
+                : localizer.getMessage("lblNetworkModeSealed");
+        String productText = "—";
+        if (desc != null && !desc.isEmpty()) {
+            productText = desc;
+        } else if (pool != null) {
+            productText = pool.toString();
+        }
+        String timerText = (evFormat == EventFormat.BOOSTER_DRAFT)
+                ? (timerSec > 0 ? timerSec + "s" : "—")
+                : localizer.getMessage("lblNetworkPickTimerNotApplicable");
+        String dateText = localizer.getMessage(evFormat == EventFormat.SEALED
+                ? "lblNetworkNewEventNoPools" : "lblNetworkNewEventNotDrafted");
+        return new EventPanelText(formatText, productText, timerText, dateText, "");
+    }
+
+    /** Placeholder text when no event is configured yet — caller typically shows a "waiting" message. */
+    private static EventPanelText emptyEventText() {
+        Localizer localizer = Localizer.getInstance();
+        return new EventPanelText("—", "—", "—", "—",
+                localizer.getMessage("lblNetworkWaitingForHost"));
     }
 }
