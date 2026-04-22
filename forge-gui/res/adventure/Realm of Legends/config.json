@@ -14,7 +14,6 @@
     "Drannith Magistrate",
     "Back to Basics",
     "Limited Resources",
-    "Constant Mists",
     "Karakas",
     "The Tabernacle at Pendrell Vale",
     "Portcullis",
@@ -47,7 +46,6 @@
     "Tolarian Academy",
     "Mox Opal",
     "Channel",
-    "Dockside Extortionist",
     "Mana Vault",
     "Fastbond",
     "Mishra's Workshop",
@@ -85,7 +83,6 @@
     "Necropotence",
     "Grafted Exoskeleton",
     "Emrakul, the Aeons Torn",
-    "Bazaar of Baghdad",
     "Library of Alexandria",
     "Yawgmoth's Bargain",
     "Fabled Path of Searo Point",
@@ -186,7 +183,7 @@
     }
     ,{
       "name": "Normal",
-      "startingLife": 25,
+      "startingLife": 30,
       "startingShards": 20,
       "startingMoney": 2500,
       "startingDifficulty": true,
@@ -218,7 +215,7 @@
       "startingLife": 20,
       "startingShards": 10,
       "startingMoney": 500,
-      "enemyLifeFactor": 1.5,
+      "enemyLifeFactor": 1.3,
       "rewardMaxFactor" : 0.5,
       "spawnRank": 2,         
       "goldLoss": 0,
@@ -234,14 +231,15 @@
       },
 "startItems": [
         "Challenge Coin",
-        "Silver Challenge Coin"
+        "Silver Challenge Coin",
+        "Steel Armor"
       ]
     },{
       "name": "Insane",
       "startingLife": 15,
       "startingShards": 10,
       "startingMoney": 0,
-      "enemyLifeFactor": 2.0,
+      "enemyLifeFactor": 1.5,
       "rewardMaxFactor" : 0.1,
       "spawnRank": 2,
       "goldLoss": 0,

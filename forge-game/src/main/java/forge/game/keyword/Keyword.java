@@ -138,6 +138,7 @@ public enum Keyword {
     OFFERING("Offering", KeywordWithType.class, false),
     OFFSPRING("Offspring", KeywordWithCost.class, false),
     OVERLOAD("Overload", KeywordWithCost.class, false),
+    PARADIGM("Paradigm", SimpleKeyword.class, false),
     PARTNER("Partner", Partner.class, true),
     PARTNER_WITH("Partner with", KeywordWithType.class, false),
     PERSIST("Persist", SimpleKeyword.class, false),

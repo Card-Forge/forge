@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="70" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="137">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="70" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="141">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -21,7 +21,7 @@
  </layer>
  <layer id="7" name="Tree" width="70" height="50">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer id="8" name="OverTree" width="70" height="50">
@@ -56,7 +56,9 @@
 	]</property>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Strider Harness|RIX&quot;, &quot;Jungle Shrine|LCC&quot;, &quot;The Skullspore Nexus|LCI&quot;, &quot;Poetic Ingenuity|LCI&quot;]}"/>
     <property name="enemy" value="Zacama"/>
-    <property name="speedModifier" type="float" value="5"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
@@ -109,12 +111,14 @@
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="90" template="../../../../common/maps/obj/enemy.tx" x="573.334" y="390.667">
+  <object id="90" template="../../../../common/maps/obj/enemy.tx" x="558.334" y="367">
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;dinosaur egg|lcc&quot;, &quot;Triassic Egg|LEG&quot;, &quot;strider harness|RIX&quot;, &quot;maskwood nexus|KLD&quot;]}"/>
     <property name="enemy" value="Atla Palani"/>
-    <property name="speedModifier" type="float" value="4"/>
-    <property name="threatRange" type="int" value="50"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value=""/>
    </properties>
   </object>
@@ -123,6 +127,8 @@
     <property name="displayNameOverride" value=""/>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Frilled Deathspitter|RIX&quot;, &quot;Strider Harness|RIX&quot;, &quot;restless ridgeline|LCI|2&quot;]}"/>
     <property name="enemy" value="Gishath"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
@@ -308,6 +314,52 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
   &quot;colors&quot;: [ &quot;White&quot; ]
 }]</property>
+   </properties>
+  </object>
+  <object id="137" template="../../../../common/maps/obj/enemy.tx" x="434" y="120">
+   <properties>
+    <property name="displayNameOverride" value=""/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Frilled Deathspitter|RIX&quot;, &quot;Strider Harness|RIX&quot;]}"/>
+    <property name="enemy" value="Gishath"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="138" template="../../../../common/maps/obj/enemy.tx" x="559.833" y="366.5">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;dinosaur egg|lcc&quot;, &quot;Triassic Egg|LEG&quot;]}"/>
+    <property name="enemy" value="Atla Palani"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="139" template="../../../../common/maps/obj/enemy.tx" x="552" y="273">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;With three great dying roars, the colossal dinosaur falls back. The whole valley shakes with the impact as an entire grove of trees is crushed under its weight.&quot;,
+	   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Strider Harness|RIX&quot;, &quot;Jungle Shrine|LCC&quot;, &quot;Poetic Ingenuity|LCI&quot;]}"/>
+    <property name="enemy" value="Zacama"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="140" template="../../../../common/maps/obj/shop.tx" x="497.5" y="709.5">
+   <properties>
+    <property name="commonShopList" value="Dinosaur"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
    </properties>
   </object>
  </objectgroup>

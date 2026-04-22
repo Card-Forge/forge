@@ -497,17 +497,6 @@ public class TargetRestrictions {
 
     /**
      * <p>
-     * canTgtCreatureAndPlayer.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean canTgtCreatureAndPlayer() {
-        return this.canTgtPlayer() && this.canTgtCreature();
-    }
-
-    /**
-     * <p>
      * hasCandidates.
      * </p>
      * 

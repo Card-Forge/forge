@@ -1,4 +1,5 @@
 # Restrictions
+Many of these are also available for all traits, e.g. to further restrict when a trigger should go off.
 
 ## `Activation$ {Option}`
 This can accept several different values which basically follow the text of the card:

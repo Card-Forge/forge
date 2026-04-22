@@ -16,7 +16,6 @@ import forge.item.IPaperCard;
 import forge.util.collect.FCollection;
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 
 import forge.Forge;
@@ -39,7 +38,7 @@ import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
-import forge.gamemodes.match.AbstractGuiGame;
+import forge.gamemodes.net.NetworkGuiGame;
 import forge.gamemodes.match.HostedMatch;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -71,7 +70,7 @@ import forge.util.ITriggerEvent;
 import forge.util.WaitCallback;
 import forge.util.collect.FCollectionView;
 
-public class MatchController extends AbstractGuiGame {
+public class MatchController extends NetworkGuiGame {
     private MatchController() { }
     public static final MatchController instance = new MatchController();
 
@@ -143,7 +142,7 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public void refreshField() {
-        if(!GuiBase.isNetworkplay(this))
+        if(!GuiBase.isNetPlay(this))
             return;
         refreshCardDetails(null);
     }
@@ -182,7 +181,7 @@ public class MatchController extends AbstractGuiGame {
             }
         }
         view = new MatchScreen(playerPanels);
-        if(GuiBase.isNetworkplay(this))
+        if(GuiBase.isNetPlay(this))
             view.resetFields();
         clearSelectables();  //fix uncleared selection
 
@@ -264,7 +263,7 @@ public class MatchController extends AbstractGuiGame {
             }
         }
 
-        if(GuiBase.isNetworkplay(this))
+        if(GuiBase.isNetPlay(this))
             checkStack();
 
         if (ph != null && saveState && ph.isMain()) {
@@ -615,13 +614,7 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public boolean confirm(final CardView c, final String question, final boolean defaultIsYes, final List<String> options) {
-        final List<String> optionsToUse;
-        if (options == null) {
-            optionsToUse = ImmutableList.of(Forge.getLocalizer().getMessage("lblYes"), Forge.getLocalizer().getMessage("lblNo"));
-        } else {
-            optionsToUse = options;
-        }
-        return FOptionPane.showCardOptionDialog(c, question, "", SOptionPane.INFORMATION_ICON, optionsToUse, defaultIsYes ? 0 : 1) == 0;
+        return FOptionPane.showCardOptionDialog(c, question, "", SOptionPane.INFORMATION_ICON, options, defaultIsYes ? 0 : 1) == 0;
     }
 
     @Override

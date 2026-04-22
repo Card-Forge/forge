@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="84">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="86">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -24,7 +24,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJy9lT0OwjAMhV0h8VOJDcHEEeAcXKadKKwcCDExwS24Q3cO0IFY5SmWFYe0BT4pSvoTPzt9SYmIqjlRmRPtXQ92ZHOe+fHx3T8mRMuMaOXaOvP3Q0idrui4fH11ejfX7pkdv8jbvszTtRBHz+H6Q/U1o7bntQBVpFb5Xmy9JVIXc6ArKVTOqfH7kvJNpW/6ghihmsEhkEs9XNrUhd4QX3+iNrT/gazL2j/Sy0NBLFlvlZDDt2Bd9tli017rvfRLXdaErgT7F/4PeZy5jP14K/J+Tv1YzuV42lddfcyaujExv1rPdF2hfYv8QrrWORc7KyWWt+R954cTNz1m4NPYWac1rPXW/46YrgViy3VlP78AYU5B7g==
+   eJy9lT0OwjAMhV0h8VOJDVEWbgAscAgu004UVg6EmJjgFtyhOwdgIFax+mTFoT/Ak6KkpfFnWy+BiCgfE2Ux0c7Noi3ZOo2q9eE93wdE04gocWMeVe99Qk5T6bj8fHG8qxu3yI6fxuWcxfVZEkfv4fp99T175cy9EOWBWvG7UL9RyJU9wkWlkHOyIJotagJaytfztWNugIu+aSuJ4atZtPfkUnRHm1zhdfH1JxUG+x/Cuqzzg17uKomF9eY1cviWmMs+myzL5/THPOQyU7goOevif5/HWed+tV5B3o9htca9HE/7qqmPmakHK+RX6zddl+/cSn4+rnWPhu5KlOUtfO/8cOSh1yzxaeiu0wyr3/q/I8S1JLGxr+znFw3YQuw=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -83,6 +83,8 @@
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Abundant Countryside|ECC&quot;, &quot;Runed Stalactite|LRW&quot;, &quot;Taurean Mauler&quot;]}"/>
     <property name="enemy" value="Morophon"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="15"/>
     <property name="threatRange" type="int" value="50"/>
     <property name="waypoints" value=""/>
@@ -142,6 +144,25 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
   <object id="81" template="../../../../common/maps/obj/scroll.tx" x="401" y="29">
    <properties>
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Amoeboid Changeling&quot;, &quot;editions&quot;: [ &quot;lrw&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="84" template="../../../../common/maps/obj/enemy.tx" x="272.433" y="136.713">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Abundant Countryside|ECC&quot;, &quot;Runed Stalactite|LRW&quot;]}"/>
+    <property name="enemy" value="Morophon"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="15"/>
+    <property name="threatRange" type="int" value="50"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="85" template="../../../../common/maps/obj/shop.tx" x="17.317" y="101.887">
+   <properties>
+    <property name="commonShopList" value="Shapeshifter"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
    </properties>
   </object>
  </objectgroup>

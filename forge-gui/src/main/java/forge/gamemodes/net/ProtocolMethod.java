@@ -11,13 +11,13 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gui.GuiBase;
-import org.tinylog.Logger;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.IGameController;
 import forge.localinstance.skin.FSkinProp;
 import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
 import forge.util.FSerializableFunction;
+import forge.util.IHasForgeLog;
 import forge.util.ITriggerEvent;
 import forge.util.ReflectionUtil;
 
@@ -29,9 +29,9 @@ import java.util.Map;
 /**
  * The methods that can be sent through this protocol.
  */
-public enum ProtocolMethod {
+public enum ProtocolMethod implements IHasForgeLog {
     // Server -> Client
-    setGameView         (Mode.SERVER, Void.TYPE, GameView.class),
+    setGameView         (Mode.SERVER, Void.TYPE, GameView.class, Long.TYPE),
     openView            (Mode.SERVER, Void.TYPE, TrackableCollection/*PlayerView*/.class),
     afterGameEnd        (Mode.SERVER, Void.TYPE),
     showCombat          (Mode.SERVER, Void.TYPE),
@@ -74,7 +74,7 @@ public enum ProtocolMethod {
     nextRememberedAction(Mode.SERVER, Void.TYPE),
     showWaitingTimer    (Mode.SERVER, Void.TYPE, PlayerView.class, String.class),
     setHighlighted      (Mode.SERVER, Void.TYPE, GameEntityView.class, Boolean.TYPE),
-    handleGameEvents    (Mode.SERVER, Void.TYPE, List.class),
+    applyDelta          (Mode.SERVER, Void.TYPE, DeltaPacket.class),
 
     // Client -> Server
     // Note: these should all return void, to avoid awkward situations in
@@ -93,7 +93,12 @@ public enum ProtocolMethod {
     getActivateDescription    (Mode.CLIENT, String.class, CardView.class),
     concede                   (Mode.CLIENT, Void.TYPE),
     alphaStrike               (Mode.CLIENT, Void.TYPE),
-    reorderHand               (Mode.CLIENT, Void.TYPE, CardView.class, Integer.TYPE);
+    reorderHand               (Mode.CLIENT, Void.TYPE, CardView.class, Integer.TYPE),
+    requestResync             (Mode.CLIENT, Void.TYPE),
+    setShouldAutoYield        (Mode.CLIENT, Void.TYPE, String.class, Boolean.TYPE, Boolean.TYPE),
+    setShouldAlwaysAcceptTrigger  (Mode.CLIENT, Void.TYPE, Integer.TYPE),
+    setShouldAlwaysDeclineTrigger (Mode.CLIENT, Void.TYPE, Integer.TYPE),
+    setShouldAlwaysAskTrigger     (Mode.CLIENT, Void.TYPE, Integer.TYPE);
 
     private enum Mode {
         SERVER(IGuiGame.class),
@@ -133,7 +138,7 @@ public enum ProtocolMethod {
             }
             return candidate;
         } catch (final NoSuchMethodException | SecurityException e) {
-            Logger.warn("Class contains no accessible method named {}", name());
+            netLog.warn("Class contains no accessible method named {}", name());
             return getMethodNoArgs();
         }
     }
@@ -142,7 +147,7 @@ public enum ProtocolMethod {
         try {
             return mode.toInvoke.getMethod(name(), (Class<?>[]) null);
         } catch (final NoSuchMethodException | SecurityException e) {
-            Logger.warn("Class contains no accessible arg-less method named {}", name());
+            netLog.warn("Class contains no accessible arg-less method named {}", name());
             return null;
         }
     }
@@ -163,11 +168,11 @@ public enum ProtocolMethod {
                 final Class<?> type = this.args[iArg];
                 if (!ReflectionUtil.isInstance(arg, type)) {
                     //throw new InternalError(String.format("Protocol method %s: illegal argument (%d) of type %s, %s expected", name(), iArg, arg.getClass().getName(), type.getName()));
-                    Logger.error("Protocol method {}: illegal argument ({}) of type {}, {} expected", name(), iArg, arg.getClass().getName(), type.getName());
+                    netLog.error("Protocol method {}: illegal argument ({}) of type {}, {} expected", name(), iArg, arg.getClass().getName(), type.getName());
                 }
             }
         } catch (Exception e) {
-            Logger.error(e, "Error checking args for protocol method {}", name());
+            netLog.error(e, "Error checking args for protocol method {}", name());
         }
     }
 
@@ -182,7 +187,7 @@ public enum ProtocolMethod {
         }
         if (!ReflectionUtil.isInstance(value, returnType)) {
             //throw new IllegalStateException(String.format("Protocol method %s: illegal return object type %s returned by client, expected %s", name(), value.getClass().getName(), getReturnType().getName()));
-            Logger.error("Protocol method {}: illegal return type {} from client, expected {}", name(), value.getClass().getName(), getReturnType().getName());
+            netLog.error("Protocol method {}: illegal return type {}, expected {}", name(), value.getClass().getName(), getReturnType().getName());
         }
     }
 }

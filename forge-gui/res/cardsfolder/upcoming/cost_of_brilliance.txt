@@ -1,0 +1,8 @@
+Name:Cost of Brilliance
+ManaCost:2 B
+Types:Sorcery
+A:SP$ Draw | NumCards$ 2 | ValidTgts$ Player | SubAbility$ DBLoseLife | SpellDescription$ Target player draws two cards and loses 2 life. Put a +1/+1 counter on up to one target creature.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ ParentTarget | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature
+DeckHas:Ability$Counters
+Oracle:Target player draws two cards and loses 2 life. Put a +1/+1 counter on up to one target creature.

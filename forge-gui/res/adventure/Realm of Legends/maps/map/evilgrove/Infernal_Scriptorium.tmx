@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="126">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="128">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -130,8 +130,10 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
   </object>
   <object id="90" template="../../../../common/maps/obj/enemy.tx" x="311.75" y="185.25">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Scroll of griselbrand|AVR&quot;, &quot;Mask of Griselbrand|mid&quot;, &quot;Hound of griselbrand|AVR&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Scroll of griselbrand|AVR&quot;, &quot;Mask of Griselbrand|mid&quot;]}"/>
     <property name="enemy" value="Griselbrand"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="40"/>
     <property name="threatRange" type="int" value="60"/>
     <property name="waypoints" value=""/>
@@ -147,7 +149,10 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
   </object>
   <object id="92" template="../../../../common/maps/obj/enemy.tx" x="231" y="125.833">
    <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Oath of Liliana&quot;, &quot;Liliana's Elite&quot;, &quot;Swamp|DOM&quot;, &quot;Liliana's Caress&quot;]}"/>
     <property name="enemy" value="Liliana"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
     <property name="waypoints" value=""/>
    </properties>
@@ -208,5 +213,26 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
    </properties>
   </object>
   <object id="125" template="../../../../common/maps/obj/collision.tx" x="228.774" y="196.378" width="16.1192" height="19.0318"/>
+  <object id="126" template="../../../../common/maps/obj/enemy.tx" x="312.667" y="186.333">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Scroll of griselbrand|AVR&quot;, &quot;Mask of Griselbrand|mid&quot;, &quot;Hound of griselbrand|AVR&quot;]}"/>
+    <property name="enemy" value="Griselbrand"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="60"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="127" template="../../../../common/maps/obj/enemy.tx" x="232.121" y="124.97">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Oath of Liliana&quot;, &quot;Swamp|DOM&quot;, &quot;Liliana's Caress&quot;]}"/>
+    <property name="enemy" value="Liliana"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
