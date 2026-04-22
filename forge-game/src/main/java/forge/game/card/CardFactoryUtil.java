@@ -1341,7 +1341,7 @@ public class CardFactoryUtil {
             }
         } else if (keyword.equals("Increment")) {
             final String trig = "Mode$ SpellCast | ValidActivatingPlayer$ You | TriggerZones$ Battlefield "
-                    + " | TriggerDescription$ Increment (" + inst.getReminderText() + ")";
+                    + " | Secondary$ True | TriggerDescription$ Increment (" + inst.getReminderText() + ")";
 
             final String effect = "DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1";
 
