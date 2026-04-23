@@ -32,7 +32,7 @@ public final class DeltaPacket implements NetEvent {
     private final Map<Integer, Map<TrackableProperty, Object>> newObjects;
     private final int checksum;
     private final int[] checksumProperties;
-    private List<Object> proxiedEvents;
+    private List<Object> events;
 
     public static final int TYPE_CARD_VIEW = 0;
     public static final int TYPE_PLAYER_VIEW = 1;
@@ -114,9 +114,9 @@ public final class DeltaPacket implements NetEvent {
     }
 
     /** Create an events-only DeltaPacket with no state deltas (seq=-1 means no ack needed). */
-    public static DeltaPacket eventsOnly(List<Object> proxiedEvents) {
+    public static DeltaPacket eventsOnly(List<Object> events) {
         DeltaPacket packet = new DeltaPacket(-1L, null, null, 0, null);
-        packet.setProxiedEvents(proxiedEvents);
+        packet.setEvents(events);
         return packet;
     }
 
@@ -159,19 +159,19 @@ public final class DeltaPacket implements NetEvent {
         return objectDeltas.isEmpty() && newObjects.isEmpty() && !hasEvents() && !hasChecksum();
     }
 
-    public void setProxiedEvents(List<Object> events) {
-        this.proxiedEvents = events;
+    public void setEvents(List<Object> events) {
+        this.events = events;
     }
 
-    public List<Object> getProxiedEvents() {
-        return proxiedEvents;
+    public List<Object> getEvents() {
+        return events;
     }
 
     public boolean hasEvents() {
-        return proxiedEvents != null && !proxiedEvents.isEmpty();
+        return events != null && !events.isEmpty();
     }
 
-    /** Return a shallow copy without proxied events, for state-only size measurement. */
+    /** Return a shallow copy without events, for state-only size measurement. */
     public DeltaPacket withoutEvents() {
         return new DeltaPacket(sequenceNumber, objectDeltas, newObjects, checksum, checksumProperties);
     }
