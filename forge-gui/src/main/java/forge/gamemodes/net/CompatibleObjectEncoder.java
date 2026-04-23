@@ -33,12 +33,6 @@ public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> 
         ByteBufOutputStream bout = new ByteBufOutputStream(out);
         ObjectOutputStream oout = null;
 
-        // Replacement modes:
-        // - Server encoder (tracker set by RemoteClientGuiGame.setGameView):
-        //   verified replacement with stale CardView detection.
-        // - Client encoder (no tracker): simple IdRef replacement. No stale
-        //   detection — would create StaleCardRef markers that the server
-        //   resolves as detached CardViews, breaking game object identity.
         boolean replace = shouldReplaceTrackables(msg);
 
         try {

@@ -141,31 +141,15 @@ public final class TrackableSerializer {
     }
 
     /**
-     * Measures LZ4-compressed serialized size with IdRef replacement,
-     * matching the encoder wire format for applyDelta messages.
+     * Measures serialized size matching the encoder wire format
+     * for applyDelta messages with IdRef replacement (when tracker not null).
+     * otherwise for setGameView messages.
      */
-    public static int measureReplacedSize(Object obj, Tracker tracker) {
+    public static int measureSize(Object obj, Tracker tracker) {
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             LZ4BlockOutputStream lz4Out = new LZ4BlockOutputStream(baos);
-            ObjectOutputStream oos = new ReplacingOutputStream(lz4Out, tracker);
-            oos.writeObject(obj);
-            oos.close();
-            return baos.size();
-        } catch (Exception e) {
-            return 0;
-        }
-    }
-
-    /**
-     * Measures LZ4-compressed serialized size without replacement,
-     * matching the encoder wire format for setGameView messages.
-     */
-    public static int measurePlainSize(Object obj) {
-        try {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            LZ4BlockOutputStream lz4Out = new LZ4BlockOutputStream(baos);
-            ObjectOutputStream oos = new ObjectOutputStream(lz4Out);
+            ObjectOutputStream oos = tracker == null ? new ObjectOutputStream(lz4Out) : new ReplacingOutputStream(lz4Out, tracker);
             oos.writeObject(obj);
             oos.close();
             return baos.size();
