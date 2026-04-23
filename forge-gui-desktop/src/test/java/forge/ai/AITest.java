@@ -98,11 +98,9 @@ public class AITest {
         return null;
     }
 
-
     protected SpellAbility findSAWithPrefix(Card c, String prefix) {
         return findSAWithPrefix(c.getSpellAbilities(), prefix);
     }
-
     protected SpellAbility findSAWithPrefix(Iterable<SpellAbility> abilities, String prefix) {
         for (SpellAbility sa : abilities) {
             if (sa.getDescription().startsWith(prefix)) {

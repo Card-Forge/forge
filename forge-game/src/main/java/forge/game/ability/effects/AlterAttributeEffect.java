@@ -74,7 +74,7 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
                             prepared.setGamePieceType(GamePieceType.TOKEN);
                             prepared.setState(CardStateName.PreparedSpell, true);
                             prepared.getOwner().getZone(ZoneType.Exile).add(prepared);
-                            eff = createEffect(sa, activator, gameCard + "'s Prepared Spell", prepared.getImageKey());
+                            eff = createEffect(null, gameCard, activator, gameCard + "'s Prepared Spell", prepared.getImageKey(), game.getNextTimestamp());
                             eff.addRemembered(prepared);
                             eff.setRenderForUI(false);
                             String castTrig = "Mode$ SpellCast | TriggerZones$ Command | Static$ True | ValidSA$ Spell.IsRemembered";
