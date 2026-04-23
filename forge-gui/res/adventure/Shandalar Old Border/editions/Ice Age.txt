@@ -2,4 +2,4 @@
 [metadata]
 Code=ICE
 Date=1995-06-03
-Booster=10 Common, 3 Uncommon, 1 Rare, 1 name("Snow-Covered Plains", "Snow-Covered Island", "Snow-Covered Swamp", "Snow-Covered Mountain", "Snow-Covered Forest"):fromSets("ICE")
+Booster=10 Common, 3 Uncommon, 1 Rare, 1 name("Snow-Covered Plains","Snow-Covered Island","Snow-Covered Swamp","Snow-Covered Mountain","Snow-Covered Forest"):fromSets("ICE")

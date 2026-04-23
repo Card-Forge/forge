@@ -226,7 +226,6 @@ public final class FModel {
         }
 
         ForgePreferences.DEV_MODE = preferences.getPrefBoolean(FPref.DEV_MODE_ENABLED);
-        ForgePreferences.UPLOAD_DRAFT = ForgePreferences.NET_CONN;
 
         getMagicDb().setStandardPredicate(getFormats().getStandard().getFilterRules());
         getMagicDb().setPioneerPredicate(getFormats().getPioneer().getFilterRules());
