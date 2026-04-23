@@ -3440,6 +3440,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public boolean hasRemoveIntrinsic() {
+        if (changedCardTypesByText.isEmpty()
+                && changedCardTypesCharacterDefining.isEmpty()
+                && changedCardTypes.isEmpty()) {
+            return false;
+        }
         return IterableUtil.any(getChangedCardTypes(), ICardChangedType::isRemoveLandTypes);
     }
 
@@ -4988,11 +4993,24 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public Iterable<ICardTraitChanges> getChangedCardTraitsList(CardState state) {
+        if (changedCardTraitsByText.isEmpty() && changedCardTraits.isEmpty()) {
+            return ImmutableList.of(state.getLandTraitChanges());
+        }
         return Iterables.<ICardTraitChanges>concat(
             changedCardTraitsByText.values(), // Layer 3
             ImmutableList.of(state.getLandTraitChanges()), // Layer 4
             changedCardTraits.values() // Layer 6
         );
+    }
+
+    /**
+     * Whether both trait-overlay tables (changedCardTraitsByText, changedCardTraits)
+     * are empty. Used by {@link CardState} fast paths to short-circuit
+     * replacement-effect / trigger / static-ability collection when the
+     * card has no possible overlay-granted source.
+     */
+    public final boolean hasNoTraitOverlays() {
+        return changedCardTraitsByText.isEmpty() && changedCardTraits.isEmpty();
     }
 
     public final Table<Long, Long, ICardTraitChanges> getChangedCardTraits() {
