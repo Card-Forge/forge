@@ -1,11 +1,69 @@
 #Tokens
 
-# Shandalar Old Border: Duelist Magazine #4 token renders hosted on oldborder-shandalar.net
+# Shandalar Old Border: Card Conjurer TokenOld renders hosted on oldborder-shandalar.net
+# TDLS (Duelist Magazine #4, 1995)
 TDLS/1_b_0_1_thrull.jpg https://oldborder-shandalar.net/tokens/TDLS/1_b_0_1_thrull.png
 TDLS/2_g_1_1_saproling.jpg https://oldborder-shandalar.net/tokens/TDLS/2_g_1_1_saproling.png
 TDLS/3_w_1_1_citizen.jpg https://oldborder-shandalar.net/tokens/TDLS/3_w_1_1_citizen.png
 TDLS/4_u_1_1_camarid.jpg https://oldborder-shandalar.net/tokens/TDLS/4_u_1_1_camarid.png
 TDLS/5_r_1_1_goblin.jpg https://oldborder-shandalar.net/tokens/TDLS/5_r_1_1_goblin.png
+# PAST (Astral Cards, MicroProse Shandalar 1997)
+PAST/13_wasp.jpg https://oldborder-shandalar.net/tokens/PAST/13_wasp.png
+PAST/14_c_5_5_a_djinn_flying.jpg https://oldborder-shandalar.net/tokens/PAST/14_c_5_5_a_djinn_flying.png
+PAST/15_c_1_1_a_tetravite_flying_noenchant.jpg https://oldborder-shandalar.net/tokens/PAST/15_c_1_1_a_tetravite_flying_noenchant.png
+PAST/16_c_1_1_a_snake_poison.jpg https://oldborder-shandalar.net/tokens/PAST/16_c_1_1_a_snake_poison.png
+PAST/17_spawn_of_azar.jpg https://oldborder-shandalar.net/tokens/PAST/17_spawn_of_azar.png
+PAST/18_r_4_4_bird_flying.jpg https://oldborder-shandalar.net/tokens/PAST/18_r_4_4_bird_flying.png
+# OBC (Old Border Custom Tokens)
+OBC/1_b_0_1_insect.jpg https://oldborder-shandalar.net/tokens/OBC/1_b_0_1_insect.png
+OBC/2_b_1_1_minion.jpg https://oldborder-shandalar.net/tokens/OBC/2_b_1_1_minion.png
+OBC/3_b_1_1_rat.jpg https://oldborder-shandalar.net/tokens/OBC/3_b_1_1_rat.png
+OBC/4_b_1_1_skeleton_regenerate.jpg https://oldborder-shandalar.net/tokens/OBC/4_b_1_1_skeleton_regenerate.png
+OBC/5_b_2_1_cat.jpg https://oldborder-shandalar.net/tokens/OBC/5_b_2_1_cat.png
+OBC/6_b_3_3_angel_flying.jpg https://oldborder-shandalar.net/tokens/OBC/6_b_3_3_angel_flying.png
+OBC/7_b_3_3_kavu.jpg https://oldborder-shandalar.net/tokens/OBC/7_b_3_3_kavu.png
+OBC/8_b_6_6_wurm_trample.jpg https://oldborder-shandalar.net/tokens/OBC/8_b_6_6_wurm_trample.png
+OBC/9_b_x_x_phyrexian_minion.jpg https://oldborder-shandalar.net/tokens/OBC/9_b_x_x_phyrexian_minion.png
+OBC/10_b_x_x_spirit.jpg https://oldborder-shandalar.net/tokens/OBC/10_b_x_x_spirit.png
+OBC/11_br_3_1_graveborn_haste.jpg https://oldborder-shandalar.net/tokens/OBC/11_br_3_1_graveborn_haste.png
+OBC/12_butterfly.jpg https://oldborder-shandalar.net/tokens/OBC/12_butterfly.png
+OBC/13_c_0_1_a_prism.jpg https://oldborder-shandalar.net/tokens/OBC/13_c_0_1_a_prism.png
+OBC/14_c_0_2_a_wall_defender.jpg https://oldborder-shandalar.net/tokens/OBC/14_c_0_2_a_wall_defender.png
+OBC/15_c_1_1_a_gnome.jpg https://oldborder-shandalar.net/tokens/OBC/15_c_1_1_a_gnome.png
+OBC/16_c_1_1_a_thopter_flying.jpg https://oldborder-shandalar.net/tokens/OBC/16_c_1_1_a_thopter_flying.png
+OBC/17_carnivore.jpg https://oldborder-shandalar.net/tokens/OBC/17_carnivore.png
+OBC/18_g_1_1_cat.jpg https://oldborder-shandalar.net/tokens/OBC/18_g_1_1_cat.png
+OBC/19_g_1_1_dog.jpg https://oldborder-shandalar.net/tokens/OBC/19_g_1_1_dog.png
+OBC/20_g_1_1_hippo.jpg https://oldborder-shandalar.net/tokens/OBC/20_g_1_1_hippo.png
+OBC/21_g_1_1_snake.jpg https://oldborder-shandalar.net/tokens/OBC/21_g_1_1_snake.png
+OBC/22_g_1_1_spike.jpg https://oldborder-shandalar.net/tokens/OBC/22_g_1_1_spike.png
+OBC/23_g_1_1_splinter_flying_cum.jpg https://oldborder-shandalar.net/tokens/OBC/23_g_1_1_splinter_flying_cum.png
+OBC/24_g_2_2_beast.jpg https://oldborder-shandalar.net/tokens/OBC/24_g_2_2_beast.png
+OBC/25_g_2_2_monkey.jpg https://oldborder-shandalar.net/tokens/OBC/25_g_2_2_monkey.png
+OBC/26_g_3_3_beast.jpg https://oldborder-shandalar.net/tokens/OBC/26_g_3_3_beast.png
+OBC/27_g_3_3_centaur.jpg https://oldborder-shandalar.net/tokens/OBC/27_g_3_3_centaur.png
+OBC/28_g_7_7_elemental_trample.jpg https://oldborder-shandalar.net/tokens/OBC/28_g_7_7_elemental_trample.png
+OBC/29_hornet.jpg https://oldborder-shandalar.net/tokens/OBC/29_hornet.png
+OBC/30_kelp.jpg https://oldborder-shandalar.net/tokens/OBC/30_kelp.png
+OBC/31_minor_demon.jpg https://oldborder-shandalar.net/tokens/OBC/31_minor_demon.png
+OBC/32_r_1_1_elemental_cat_haste.jpg https://oldborder-shandalar.net/tokens/OBC/32_r_1_1_elemental_cat_haste.png
+OBC/33_r_1_1_goblin_scout_mountainwalk.jpg https://oldborder-shandalar.net/tokens/OBC/33_r_1_1_goblin_scout_mountainwalk.png
+OBC/34_rgw_1_1_sand_warrior.jpg https://oldborder-shandalar.net/tokens/OBC/34_rgw_1_1_sand_warrior.png
+OBC/35_stangg_twin.jpg https://oldborder-shandalar.net/tokens/OBC/35_stangg_twin.png
+OBC/36_tombspawn.jpg https://oldborder-shandalar.net/tokens/OBC/36_tombspawn.png
+OBC/37_u_0_1_starfish.jpg https://oldborder-shandalar.net/tokens/OBC/37_u_0_1_starfish.png
+OBC/38_u_5_5_wall_defender.jpg https://oldborder-shandalar.net/tokens/OBC/38_u_5_5_wall_defender.png
+OBC/39_u_x_x_orb_flying.jpg https://oldborder-shandalar.net/tokens/OBC/39_u_x_x_orb_flying.png
+OBC/40_w_0_1_caribou.jpg https://oldborder-shandalar.net/tokens/OBC/40_w_0_1_caribou.png
+OBC/41_w_0_1_deserter.jpg https://oldborder-shandalar.net/tokens/OBC/41_w_0_1_deserter.png
+OBC/42_w_1_1_bird_flying.jpg https://oldborder-shandalar.net/tokens/OBC/42_w_1_1_bird_flying.png
+OBC/43_w_1_1_knight_banding.jpg https://oldborder-shandalar.net/tokens/OBC/43_w_1_1_knight_banding.png
+OBC/44_w_2_2_knight.jpg https://oldborder-shandalar.net/tokens/OBC/44_w_2_2_knight.png
+OBC/45_w_2_2_reflection.jpg https://oldborder-shandalar.net/tokens/OBC/45_w_2_2_reflection.png
+OBC/46_w_4_4_angel_flying.jpg https://oldborder-shandalar.net/tokens/OBC/46_w_4_4_angel_flying.png
+OBC/47_w_x_x_reflection.jpg https://oldborder-shandalar.net/tokens/OBC/47_w_x_x_reflection.png
+OBC/48_wolves_of_the_hunt.jpg https://oldborder-shandalar.net/tokens/OBC/48_wolves_of_the_hunt.png
+OBC/49_wood.jpg https://oldborder-shandalar.net/tokens/OBC/49_wood.png
 
 Arco-Flagellant.jpg https://downloads.cardforge.org/images/tokens/Arco-Flagellant.jpg
 On an Adventure.jpg https://downloads.cardforge.org/images/tokens/On an Adventure.jpg
