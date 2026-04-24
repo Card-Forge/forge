@@ -140,15 +140,21 @@ public class Config {
         return configData;
     }
 
-    // Push the plane's allowed/restricted editions into TokenDb.
+    // Push the plane's allowed/restricted editions and restricted token pairs into TokenDb.
     private void applyTokenEditionFilter() {
         if (configData == null) return;
         String[] allowedArr = configData.allowedEditions;
         String[] restrictedArr = configData.restrictedEditions;
+        String[] restrictedTokensArr = configData.restrictedTokens;
         Set<String> allowed = (allowedArr == null || allowedArr.length == 0)
                 ? null : new HashSet<>(Arrays.asList(allowedArr));
         Set<String> restricted = (restrictedArr == null || restrictedArr.length == 0)
                 ? Collections.emptySet() : new HashSet<>(Arrays.asList(restrictedArr));
+        Set<String> restrictedTokens = (restrictedTokensArr == null || restrictedTokensArr.length == 0)
+                ? Collections.emptySet() : new HashSet<>(Arrays.asList(restrictedTokensArr));
+        FModel.getMagicDb().getAllTokens().setRestrictedTokenEntries(restrictedTokens);
+        FModel.getMagicDb().getAllTokens().setPreferEraMatchedArt(
+            settingsData != null && settingsData.preferEraMatchedTokenArt);
         if (allowed == null && restricted.isEmpty()) {
             FModel.getMagicDb().getAllTokens().setDefaultEditionFilter(null);
             return;
