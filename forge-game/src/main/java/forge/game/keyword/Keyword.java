@@ -222,11 +222,11 @@ public enum Keyword {
         type = type0;
         isMultipleRedundant = isMultipleRedundant0;
         displayName = displayName0;
-        this.translationKey = "lblKwAbility" + toCamelCase(name());
+        this.translationKey = getTranslationKey(name());
     }
 
-    private static String toCamelCase(String enumName) {
-        StringBuilder sb = new StringBuilder();
+    private static String getTranslationKey(String enumName) {
+        StringBuilder sb = new StringBuilder("lblKwAbility");
         boolean capitalize = true;
         for (char c : enumName.toCharArray()) {
             if (c == '_') {
@@ -293,7 +293,8 @@ public enum Keyword {
 
     @Override
     public String toString() {
-        return getDisplayName();
+        // English-only: getDisplayName() can NPE before Localizer is initialized.
+        return displayName;
     }
 
     public static List<Keyword> getAllKeywords() {
