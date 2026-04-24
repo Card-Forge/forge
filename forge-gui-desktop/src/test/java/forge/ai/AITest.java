@@ -2,6 +2,7 @@ package forge.ai;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import com.google.common.collect.Lists;
 
@@ -63,18 +64,34 @@ public class AITest {
     }
 
     protected Game initAndCreateThreePlayerGame() {
+        return initAndCreateThreePlayerGame(false);
+    }
+
+    protected Game initAndCreateThreePlayerGame(boolean useSimulation) {
+        return initAndCreateThreePlayerGame(useSimulation, 1, "opponent", "ai", "ally");
+    }
+
+    protected Game initAndCreateThreePlayerGame(boolean useSimulation, int aiPlayerIndex, String... playerNames) {
+        if (playerNames.length != 3) {
+            throw new IllegalArgumentException("Three player tests require exactly three player names.");
+        }
+        if (aiPlayerIndex < 0 || aiPlayerIndex >= playerNames.length) {
+            throw new IllegalArgumentException("AI player index must match one of the three players.");
+        }
+
         initAndCreateGame();
 
         List<RegisteredPlayer> players = Lists.newArrayList();
         Deck d1 = new Deck();
-        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("opponent", null)));
-        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("ai", null)));
-        players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi("ally", null)));
+        for (int i = 0; i < playerNames.length; i++) {
+            players.add(new RegisteredPlayer(d1).setPlayer(new LobbyPlayerAi(playerNames[i],
+                    useSimulation && i == aiPlayerIndex ? Set.of(AIOption.USE_SIMULATION) : null)));
+        }
 
         GameRules rules = new GameRules(GameType.Constructed);
         Match match = new Match(rules, players, "Test");
         Game game = new Game(players, rules, match);
-        Player ai = game.getPlayers().get(1);
+        Player ai = game.getPlayers().get(aiPlayerIndex);
         game.setAge(GameStage.Play);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, ai);
         game.getPhaseHandler().onStackResolved();

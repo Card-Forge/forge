@@ -46,6 +46,7 @@ import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.spellability.TargetChoices;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityMode;
@@ -1671,6 +1672,8 @@ public class ComputerUtil {
 
         final Card source = topStack.getHostCard();
         final ApiType threatApi = topStack.getApi();
+        final SpellAbilityStackInstance si = aiPlayer.getGame().getStack().getInstanceMatchingSpellAbilityID(topStack);
+        final TargetChoices targetChoices = si != null ? si.getTargetChoices() : topStack.getTargets();
 
         // Can only Predict things from AFs
         if (threatApi == null) {
@@ -1688,7 +1691,7 @@ public class ComputerUtil {
             }
         } else {
             final List<GameObject> canBeTargeted = new ArrayList<>();
-            for (GameEntity ge : topStack.getTargets().getTargetEntities()) {
+            for (GameEntity ge : targetChoices.getTargetEntities()) {
                 if (ge.canBeTargetedBy(topStack)) {
                     canBeTargeted.add(ge);
                 }
@@ -1911,14 +1914,22 @@ public class ComputerUtil {
                 }
             }
         }
-        // Exiling => bounce/shroud
+        // Non-battlefield zone change => bounce/shroud
         else if ((threatApi == ApiType.ChangeZone || threatApi == ApiType.ChangeZoneAll)
                 && (saviourApi == ApiType.ChangeZone || saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll
                 || saviourApi == ApiType.Protection || saviourApi == null)
                 && topStack.hasParam("Destination")
-                && topStack.getParam("Destination").equals("Exile")) {
+                && !topStack.getParam("Destination").equals("Battlefield")
+                && !topStack.getParam("Destination").equals("Stack")) {
             for (final Object o : objects) {
                 if (o instanceof Card c) {
+                    if (!c.isInPlay()) {
+                        continue;
+                    }
+                    // Treat only hostile zone changes as threats. This avoids flagging self-blink and similar plays.
+                    if (!source.getController().isOpponentOf(c.getController())) {
+                        continue;
+                    }
                     // give Shroud to targeted creatures
                     if ((saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll) && (!topStack.usesTargeting() || !grantShroud)) {
                         continue;
