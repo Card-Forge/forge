@@ -1,6 +1,7 @@
 package forge.token;
 
 import forge.card.CardDb;
+import forge.card.CardEdition;
 import forge.item.PaperToken;
 
 import java.util.Collection;
@@ -15,6 +16,7 @@ public interface ITokenDatabase extends Iterable<PaperToken> {
     PaperToken getTokenFromEditions(String tokenName, CardDb.CardArtPreference fromSet);
     PaperToken getTokenFromEditions(String tokenName, Date printedBefore, CardDb.CardArtPreference fromSet);
     PaperToken getTokenFromEditions(String tokenName, Date printedBefore, CardDb.CardArtPreference fromSet, int artIndex);
+    PaperToken getTokenFromEditions(String tokenName, Predicate<CardEdition> editionFilter);
 
     PaperToken getFoiled(PaperToken cpi);
 
