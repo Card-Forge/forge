@@ -3,7 +3,7 @@ ManaCost:4
 Types:Artifact
 A:AB$ Mana | SubAbility$ DBEffect | Cost$ T | Produced$ C | Amount$ 2 | SpellDescription$ Add {C}{C}. When you next cast a spell with {X} in its mana cost this turn, you draw a card and gain half X life, rounded down.
 SVar:DBEffect:DB$ Effect | Triggers$ CastTrigger
-SVar:CastTrigger:Mode$ SpellAbilityCast | ValidActivatingPlayer$ You | ValidSA$ Spell | OneOff$ True | Execute$ TrigDraw | HasXManaCost$ True | TriggerDescription$ When you next cast a spell with {X} in its mana cost this turn, you draw a card and gain half X life, rounded down.
+SVar:CastTrigger:Mode$ SpellCast | ValidActivatingPlayer$ You | ValidSA$ Spell | OneOff$ True | Execute$ TrigDraw | HasXManaCost$ True | TriggerDescription$ When you next cast a spell with {X} in its mana cost this turn, you draw a card and gain half X life, rounded down.
 SVar:TrigDraw:DB$ Draw | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ Y
 SVar:X:Count$xPaid
