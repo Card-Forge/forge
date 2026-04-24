@@ -1,5 +1,12 @@
 #Tokens
 
+# Shandalar Old Border: Duelist Magazine #4 token renders hosted on oldborder-shandalar.net
+TDLS/1_b_0_1_thrull.jpg https://oldborder-shandalar.net/tokens/TDLS/1_b_0_1_thrull.png
+TDLS/2_g_1_1_saproling.jpg https://oldborder-shandalar.net/tokens/TDLS/2_g_1_1_saproling.png
+TDLS/3_w_1_1_citizen.jpg https://oldborder-shandalar.net/tokens/TDLS/3_w_1_1_citizen.png
+TDLS/4_u_1_1_camarid.jpg https://oldborder-shandalar.net/tokens/TDLS/4_u_1_1_camarid.png
+TDLS/5_r_1_1_goblin.jpg https://oldborder-shandalar.net/tokens/TDLS/5_r_1_1_goblin.png
+
 Arco-Flagellant.jpg https://downloads.cardforge.org/images/tokens/Arco-Flagellant.jpg
 On an Adventure.jpg https://downloads.cardforge.org/images/tokens/On an Adventure.jpg
 Sicarian Infiltrator.jpg https://downloads.cardforge.org/images/tokens/Sicarian%20Infiltrator.jpg
