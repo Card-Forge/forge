@@ -104,11 +104,6 @@ public class TokenDb implements ITokenDatabase {
         return new PaperToken(rules, edition, name, t.collectorNumber(), t.artistName());
     }
 
-    @Override
-    public PaperToken getTokenFromEditions(String tokenName, Predicate<CardEdition> editionFilter) {
-        return getTokenFromEditions(tokenName, editionFilter, null);
-    }
-
     // Null filter: historical first-alphabetical match. Non-null: random among
     // editions that register the token and pass the filter, or null if none.
     // When preferEraMatchedArt is on and hostDate != null, instead picks the
@@ -147,10 +142,6 @@ public class TokenDb implements ITokenDatabase {
         }
         String fullName = String.format("%s_%s", tokenName, pick.getCode().toLowerCase());
         return Aggregates.random(allTokenByName.get(fullName));
-    }
-
-    protected PaperToken fallbackToken(String name) {
-        return getTokenFromEditions(name, defaultEditionFilter, null);
     }
 
     protected PaperToken fallbackToken(String name, String hostEditionCode) {
