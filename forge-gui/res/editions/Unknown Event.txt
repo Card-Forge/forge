@@ -446,7 +446,7 @@ RB14 R Another Night in Vegas @
 RR14 R Brutal Command @
 UU14a U Tax Draw @
 UU14b U Tax Sweeper @
-CR15a C Fast // Furious @
+# CR15a C Fast // Furious @  -- disabled: collides with MH2 "Fast // Furious"; only rules script is the MH2 legal version, so loading this printing would attach wrong rules to joke art.
 RB15 R Monster Mash-Up @
 RR15 R Force of Rowan @
 RW15 R Crux of Mirrodin @

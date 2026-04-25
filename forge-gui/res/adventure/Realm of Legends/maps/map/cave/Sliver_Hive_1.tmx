@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="87">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="93">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -34,7 +34,7 @@
  </layer>
  <layer id="9" name="Clutter" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJxjYBgF5IAPfghMLbOorZYYc0i1m5p20jPsPjgxMHwE4k9OlNtJir20AANl7ygYBaNgFAxGgK1uIVRO0qouxWcmreq/r074zaS2vehmEqPuk9PA1F3U9jc59o+CUTAUAAACUUzT
+   eJxjYBgF5IAPfghMLbOorZYYc0i1m5p20jPsPjgxMHwE4k9OlNtJir20AANl7ygYBaOAPkBci4FBQguTpjUwBtphooVJD3aArW4hVE7Sqi7FZyat6r+vTvjNpLa96GYSUjeS0/NofT0KhgoAADOfTN0=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -170,6 +170,54 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
     <property name="spawn.Insane" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="87" template="../../../../common/maps/obj/shop.tx" x="103.952" y="389.458">
+   <properties>
+    <property name="commonShopList" value="Sliver4Red"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="88" template="../../../../common/maps/obj/shop.tx" x="135.345" y="388.866">
+   <properties>
+    <property name="commonShopList" value="Sliver"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="89" template="../../../../common/maps/obj/shop.tx" x="135.938" y="294.092">
+   <properties>
+    <property name="commonShopList" value="Sliver4White"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/shop.tx" x="167.332" y="294.092">
+   <properties>
+    <property name="commonShopList" value="Sliver4Blue"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/shop.tx" x="102.767" y="292.907">
+   <properties>
+    <property name="commonShopList" value="Sliver4Green"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/shop.tx" x="166.739" y="387.089">
+   <properties>
+    <property name="commonShopList" value="Sliver4Black"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
    </properties>
   </object>
  </objectgroup>

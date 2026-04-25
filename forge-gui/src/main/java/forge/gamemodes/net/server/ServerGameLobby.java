@@ -47,6 +47,9 @@ public final class ServerGameLobby extends GameLobby {
     }
     public void disconnectPlayer(final int index) {
         final LobbySlot slot = getSlot(index);
+        if (slot == null) {
+            return;
+        }
         slot.setType(LobbySlotType.OPEN);
         slot.setName(StringUtils.EMPTY);
         slot.setIsReady(false);
@@ -81,5 +84,18 @@ public final class ServerGameLobby extends GameLobby {
 
     @Override
     protected void onGameStarted() {
+    }
+
+    @Override
+    protected void onMatchOver() {
+        for (int i = 0; i < getNumberOfSlots(); i++) {
+            final LobbySlot slot = getSlot(i);
+            if (slot != null) {
+                slot.setIsReady(false);
+            }
+        }
+        super.onMatchOver();
+        FServerManager.getInstance().clearPlayerGuis();
+        FServerManager.getInstance().updateLobbyState();
     }
 }

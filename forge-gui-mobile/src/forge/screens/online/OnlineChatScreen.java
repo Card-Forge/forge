@@ -103,6 +103,7 @@ public class OnlineChatScreen extends FScreen implements IOnlineChatInterface {
         private static final FSkinFont FONT = FSkinFont.get(12);
         private static final FSkinColor LOCAL_COLOR = FSkinColor.get(Colors.CLR_ZEBRA);
         private static final FSkinColor REMOTE_COLOR = LOCAL_COLOR.getContrastColor(-20);
+        private static final FSkinColor WARNING_COLOR = FSkinColor.getStandardColor(140, 95, 25);
         private static final FSkinColor MESSAGE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
         private static final FSkinColor SOURCE_COLOR = MESSAGE_COLOR.alphaColor(0.75f);
         private static final FSkinColor TIMESTAMP_COLOR = MESSAGE_COLOR.alphaColor(0.5f);
@@ -142,7 +143,12 @@ public class OnlineChatScreen extends FScreen implements IOnlineChatInterface {
             float y = TEXT_INSET;
             float w = getWidth() - TRIANGLE_WIDTH;
             float h = getHeight() - TEXT_INSET;
-            FSkinColor color = isLocal ? LOCAL_COLOR : REMOTE_COLOR;
+            FSkinColor color;
+            if (message.getType() == ChatMessage.MessageType.WARNING) {
+                color = WARNING_COLOR;
+            } else {
+                color = isLocal ? LOCAL_COLOR : REMOTE_COLOR;
+            }
             int horzAlignment = isLocal ? Align.right : Align.left;
             float timestampHeight = FONT.getCapHeight();
             

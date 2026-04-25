@@ -679,14 +679,12 @@ public class MatchScreen extends FScreen {
                         controller.setShouldAlwaysAskTrigger(triggerID);
                     } else {
                         controller.setShouldAlwaysAcceptTrigger(triggerID);
-                        if (stackInstance.equals(gameView.peekStack())) {
-                            //auto-yes if ability is on top of stack
-                            controller.selectButtonOk();
-                        }
                     }
 
                     final String key = stackInstance.getKey();
-                    controller.setShouldAutoYield(key, true);
+                    boolean abilityScope = !forge.localinstance.properties.ForgeConstants.AUTO_YIELD_PER_CARD.equals(
+                            forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_YIELD_MODE));
+                    controller.setShouldAutoYield(key, true, abilityScope);
                     if (stackInstance.equals(gameView.peekStack())) {
                         //auto-pass priority if ability is on top of stack
                         controller.passPriority();
@@ -711,14 +709,12 @@ public class MatchScreen extends FScreen {
                         controller.setShouldAlwaysAskTrigger(triggerID);
                     } else {
                         controller.setShouldAlwaysDeclineTrigger(triggerID);
-                        if (stackInstance.equals(gameView.peekStack())) {
-                            //auto-no if ability is on top of stack
-                            controller.selectButtonCancel();
-                        }
                     }
 
                     final String key = stackInstance.getKey();
-                    controller.setShouldAutoYield(key, true);
+                    boolean abilityScope2 = !forge.localinstance.properties.ForgeConstants.AUTO_YIELD_PER_CARD.equals(
+                            forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_YIELD_MODE));
+                    controller.setShouldAutoYield(key, true, abilityScope2);
                     if (stackInstance.equals(gameView.peekStack())) {
                         //auto-pass priority if ability is on top of stack
                         controller.passPriority();

@@ -31,6 +31,7 @@ import forge.toolbox.FGroupList;
 import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
+import forge.util.Lang;
 import forge.util.Utils;
 
 import java.util.*;
@@ -63,16 +64,14 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             public void valueChanged(String newValue) {
                 // if the new locale needs to use CJK font, disallow change if UI_CJK_FONT is not set yet
                 ForgePreferences prefs = FModel.getPreferences();
-                if (prefs.getPref(FPref.UI_CJK_FONT).isEmpty() && (newValue.equals("zh-CN") || newValue.equals("ja-JP"))) {
-                    String message = "Please download CJK font (from \"Files\"), and set it before change language.";
-                    if (newValue.equals("zh-CN")) {
-                        message += "\nChinese please use \"SourceHanSansCN\".";
+                if (prefs.getPref(FPref.UI_CJK_FONT).isEmpty()) {
+                    Lang lang = Lang.initInstance(newValue);
+                    if (lang.getFontFile() != null) {
+                        String message = "Please download CJK font (from \"Files\"), and set it before change language.";
+                        message += "\nPlease use \"" + lang.getFontFile() + "\".";
+                        FOptionPane.showMessageDialog(message, "Please set CJK Font");
+                        return;
                     }
-                    if (newValue.equals("ja-JP")) {
-                        message += "\nJapanese please use \"SourceHanSansJP\".";
-                    }
-                    FOptionPane.showMessageDialog(message, "Please set CJK Font");
-                    return;
                 }
 
                 FLanguage.changeLanguage(newValue);
@@ -101,8 +100,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     ForgePreferences prefs = FModel.getPreferences();
                     if (newValue.equals("None")) {
                         // If locale needs to use CJK fonts, disallow change to None
-                        String locale = prefs.getPref(FPref.UI_LANGUAGE);
-                        if (locale.equals("zh-CN") || locale.equals("ja-JP")) {
+                        if (Lang.initInstance(prefs.getPref(FPref.UI_LANGUAGE)).getFontFile() != null) {
                             return;
                         }
                         newValue = "";
@@ -264,7 +262,12 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_AUTO_YIELD_MODE,
             Forge.getLocalizer().getMessage("lblAutoYields"),
             Forge.getLocalizer().getMessage("nlpAutoYieldMode"),
-            new String[] { ForgeConstants.AUTO_YIELD_PER_ABILITY, ForgeConstants.AUTO_YIELD_PER_CARD }), 1);
+            new String[] {
+                ForgeConstants.AUTO_YIELD_PER_CARD,
+                ForgeConstants.AUTO_YIELD_PER_ABILITY,
+                ForgeConstants.AUTO_YIELD_PER_ABILITY_SESSION,
+                ForgeConstants.AUTO_YIELD_PER_ABILITY_INSTALL,
+            }), 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ALLOW_ESC_TO_END_TURN,
             Forge.getLocalizer().getMessage("cbEscapeEndsTurn"),
             Forge.getLocalizer().getMessage("nlEscapeEndsTurn")), 1);

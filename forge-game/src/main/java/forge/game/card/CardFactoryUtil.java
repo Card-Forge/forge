@@ -1341,7 +1341,7 @@ public class CardFactoryUtil {
             }
         } else if (keyword.equals("Increment")) {
             final String trig = "Mode$ SpellCast | ValidActivatingPlayer$ You | TriggerZones$ Battlefield "
-                    + " | TriggerDescription$ Increment (" + inst.getReminderText() + ")";
+                    + " | Secondary$ True | TriggerDescription$ Increment (" + inst.getReminderText() + ")";
 
             final String effect = "DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1";
 
@@ -3272,17 +3272,15 @@ public class CardFactoryUtil {
             newSA.setAlternativeCost(AlternativeCost.Overload);
             inst.addSpellAbility(newSA);
         } else if (keyword.equals("Paradigm")) {
-            // Paradigm does modify existing SA, and does not add new one
-
             // Add the Paradigm effect as a subAbility
             String abExile = "DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile";
             final AbilitySub saExile = (AbilitySub) AbilityFactory.getAbility(abExile, card);
 
-            String dbStr = "DB$ Effect | Triggers$ ParadigmTrigger | Duration$ Permanent | ConditionDefined$ Self | ConditionPresent$ Card.hasKeywordParadigm";
+            String dbStr = "DB$ Effect | Triggers$ ParadigmTrigger | Duration$ Permanent | Unique$ True | Name$ " + card.getName() + "' Paradigm";
             final AbilitySub newSA = (AbilitySub) AbilityFactory.getAbility(dbStr, card);
 
             newSA.setSVar("ParadigmTrigger", "Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | OptionalDecider$ You | Execute$ ParadigmCopy | TriggerDescription$ Paradigm (" + inst.getReminderText() + ")");
-            newSA.setSVar("ParadigmCopy", "DB$ Play | Defined$ EffectSource | ValidSA$ Spell | ZoneRegardless$ True | WithoutManaCost$ True | Optional$ True | CopyCard$ True | Paradigm$ True");
+            newSA.setSVar("ParadigmCopy", "DB$ Play | Defined$ EffectSource | ValidSA$ Spell | ZoneRegardless$ True | WithoutManaCost$ True | Optional$ True | CopyCard$ True");
 
             saExile.setSubAbility(newSA);
 

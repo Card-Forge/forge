@@ -1853,6 +1853,18 @@
     }
   },
   {
+    "name": "Cragflame",
+    "description": "Equip 2, +1/+1 vigilance, trample, and haste.",
+    "equipmentSlot": "Right",
+    "iconName": "Cragflame",
+    "effect": {
+      "lifeModifier": -6,
+      "startBattleWithCard": [
+        "cragflame"
+      ]
+    }
+  },
+  {
     "name": "Spore Skirt",
     "description": "0/1 flying wall, taps down for 4 turns on block.",
     "equipmentSlot": "Boots",
@@ -3625,7 +3637,6 @@
     "equipmentSlot": "Right",
     "iconName": "StriderReins",
     "effect": {
-        "lifeModifier": -3,
         "startBattleWithCard": [
         "Strider Harness|RIX"
      ]
@@ -5064,7 +5075,7 @@
   {
     "name": "Winter Boots",
     "description": "0/4, T, sac: -0/-X where X is snow lands",
-    "equipmentSlot": "Body",
+    "equipmentSlot": "Boots",
     "iconName": "WinterBoots",
     "effect": {
       "startBattleWithCard": [
@@ -5151,7 +5162,7 @@
     "description": "Grants a 1/1 white/black spirit token with flying in a special slot.",
     "equipmentSlot": "Token",
     "iconName": "TokenofSoaringSpirit",
-    "cost": 100000,
+    "cost": 80000,
     "effect": {
       "startBattleWithCard": [
         "wb_1_1_spirit_flying"

@@ -41,7 +41,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
 import forge.ImageCache;
-import forge.LobbyPlayer;
 import forge.Singletons;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
@@ -61,7 +60,6 @@ import forge.localinstance.skin.FSkinProp;
 import forge.menus.ForgeMenu;
 import forge.model.FModel;
 import forge.sound.SoundSystem;
-import forge.player.GamePlayerUtil;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
@@ -477,7 +475,4 @@ public enum FControl implements KeyEventDispatcher {
         return false;
     }
 
-    public final LobbyPlayer getGuiPlayer() {
-        return GamePlayerUtil.getGuiPlayer();
-    }
 }
