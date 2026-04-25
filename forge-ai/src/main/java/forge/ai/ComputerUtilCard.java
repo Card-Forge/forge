@@ -1,17 +1,19 @@
 package forge.ai;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.IdentityHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import forge.StaticData;
-import forge.ai.simulation.GameStateEvaluator;
-import forge.card.mana.ManaCost;
-import forge.game.card.*;
-import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -20,12 +22,15 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
+import forge.StaticData;
+import forge.ai.simulation.GameStateEvaluator;
 import forge.card.CardRules;
 import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.MagicColor.Constant;
+import forge.card.mana.ManaCost;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -33,6 +38,14 @@ import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardCopyService;
+import forge.game.card.CardFactoryUtil;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
+import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
@@ -56,13 +69,19 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.MagicStack;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
+import forge.util.Aggregates;
+import forge.util.Expressions;
+import forge.util.IterableUtil;
+import forge.util.MyRandom;
+import forge.util.TextUtil;
 
 public class ComputerUtilCard {
     private static final List<String> DANGEROUS_LANDS_TO_REMOVE = Arrays.asList(
             "Dark Depths",
             "Glacial Chasm",
             "Valakut, the Molten Pinnacle",
-            "Maze of Ith"
+            "Maze of Ith",
+            ", Shrine to Nyx"
     );
 
     public static Card getMostExpensivePermanentAI(final CardCollectionView list, final SpellAbility spell, final boolean targeted) {
