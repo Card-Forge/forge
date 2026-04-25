@@ -254,6 +254,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_STORM_COUNT_IN_PROMPT,
             Forge.getLocalizer().getMessage("cbShowStormCount"),
             Forge.getLocalizer().getMessage("nlShowStormCount")), 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS,
+            Forge.getLocalizer().getMessage("cbShowActionableHighlights"),
+            Forge.getLocalizer().getMessage("nlShowActionableHighlights")), 1);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_ALLOW_ORDER_GRAVEYARD_WHEN_NEEDED,
             Forge.getLocalizer().getMessage("lblOrderGraveyard"),
             Forge.getLocalizer().getMessage("nlOrderGraveyard"),

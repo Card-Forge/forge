@@ -90,6 +90,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbCloneImgSource = new OptionsCheckBox(localizer.getMessage("cbCloneImgSource"));
     private final JCheckBox cbScaleLarger = new OptionsCheckBox(localizer.getMessage("cbScaleLarger"));
     private final JCheckBox cbRenderBlackCardBorders = new OptionsCheckBox(localizer.getMessage("cbRenderBlackCardBorders"));
+    private final JCheckBox cbShowActionableHighlights = new OptionsCheckBox(localizer.getMessage("cbShowActionableHighlights"));
     private final JCheckBox cbLargeCardViewers = new OptionsCheckBox(localizer.getMessage("cbLargeCardViewers"));
     private final JCheckBox cbSmallDeckViewer = new OptionsCheckBox(localizer.getMessage("cbSmallDeckViewer"));
     private final JCheckBox cbDisplayFoil = new OptionsCheckBox(localizer.getMessage("cbDisplayFoil"));
@@ -406,6 +407,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbRenderBlackCardBorders, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlRenderBlackCardBorders")), descriptionConstraints);
+
+        pnlPrefs.add(cbShowActionableHighlights, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlShowActionableHighlights")), descriptionConstraints);
 
         pnlPrefs.add(cbLargeCardViewers, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlLargeCardViewers")), descriptionConstraints);
@@ -813,6 +817,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbRenderBlackCardBorders() {
         return cbRenderBlackCardBorders;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbShowActionableHighlights() {
+        return cbShowActionableHighlights;
     }
 
     /** @return {@link javax.swing.JCheckBox} */

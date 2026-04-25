@@ -2,11 +2,14 @@ package forge.ai;
 
 import forge.game.card.Card;
 import forge.game.card.CardLists;
+import forge.game.card.CardView;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import org.tinylog.Logger;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 // Heuristic: does the player have any playable action this priority window?
@@ -60,6 +63,83 @@ public final class AvailableActions {
         }
 
         return false;
+    }
+
+    /**
+     * Full-scan variant of {@link #compute} that returns the set of card
+     * views with at least one actionable SA. No early-exit: we walk
+     * every card so downstream highlight code can reuse the same
+     * per-card answers the APINA boolean is derived from.
+     *
+     * Timeout behavior: on expiry, remaining unvisited cards are added
+     * to the set (FP-safe — the player is shown extra highlights rather
+     * than missing some). The APINA boolean can be derived as
+     * {@code !result.isEmpty()}.
+     */
+    public static Set<CardView> collectActionable(Player player, long timeoutMs) {
+        long deadlineNanos = System.nanoTime() + timeoutMs * 1_000_000L;
+        Set<CardView> actionable = new HashSet<>();
+
+        for (Card card : sortedCardsIn(player, ZoneType.Hand)) {
+            if (checkTimeout(deadlineNanos, timeoutMs)) {
+                addAllRemaining(actionable, player);
+                return actionable;
+            }
+            if (cardHasActionableSpell(card, player)) {
+                actionable.add(card.getView());
+            }
+        }
+        for (Card card : player.getCardsIn(ZoneType.Battlefield)) {
+            if (checkTimeout(deadlineNanos, timeoutMs)) {
+                addAllRemaining(actionable, player);
+                return actionable;
+            }
+            if (cardHasActionableActivated(card, player)) {
+                actionable.add(card.getView());
+            }
+        }
+        for (Card card : sortedCardsIn(player, ZoneType.Flashback)) {
+            if (checkTimeout(deadlineNanos, timeoutMs)) {
+                addAllRemaining(actionable, player);
+                return actionable;
+            }
+            if (cardHasActionableActivated(card, player)) {
+                actionable.add(card.getView());
+            }
+        }
+        return actionable;
+    }
+
+    private static boolean cardHasActionableSpell(Card card, Player player) {
+        for (SpellAbility sa : card.getAllPossibleAbilities(player, true)) {
+            if (sa.isSpell()) {
+                if (canAfford(sa, player) && ComputerUtilAbility.isFullyTargetable(sa)) {
+                    return true;
+                }
+            } else if (sa.isLandAbility()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean cardHasActionableActivated(Card card, Player player) {
+        for (SpellAbility sa : card.getAllPossibleAbilities(player, true)) {
+            if (!sa.isManaAbility() && canAfford(sa, player)
+                    && ComputerUtilAbility.isFullyTargetable(sa)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** FP-safe timeout fallback: mark every card in a scannable zone as
+     *  actionable. The player sees extra highlights rather than missing
+     *  playable cards. */
+    private static void addAllRemaining(Set<CardView> actionable, Player player) {
+        for (Card c : player.getCardsIn(ZoneType.Hand)) actionable.add(c.getView());
+        for (Card c : player.getCardsIn(ZoneType.Battlefield)) actionable.add(c.getView());
+        for (Card c : player.getCardsIn(ZoneType.Flashback)) actionable.add(c.getView());
     }
 
     // Sort cheap cards first so cheap-to-validate matches early-exit

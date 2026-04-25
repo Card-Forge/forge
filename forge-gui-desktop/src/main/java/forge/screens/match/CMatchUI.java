@@ -688,6 +688,38 @@ public final class CMatchUI
     }
 
     @Override
+    public void setWeaklySelectable(final Iterable<CardView> cards) {
+        super.setWeaklySelectable(cards);
+        FThreads.invokeInEdtNowOrLater(() -> {
+            for (final PlayerView p : getGameView().getPlayers()) {
+                if (p.getCards(ZoneType.Battlefield) != null) {
+                    updateCards(isNetGame() ? p.getCards(ZoneType.Battlefield).threadSafeIterable() : p.getCards(ZoneType.Battlefield));
+                }
+                if (p.getCards(ZoneType.Hand) != null) {
+                    updateCards(isNetGame() ? p.getCards(ZoneType.Hand).threadSafeIterable() : p.getCards(ZoneType.Hand));
+                }
+            }
+            FloatingZone.refreshAll();
+        });
+    }
+
+    @Override
+    public void clearWeaklySelectable() {
+        super.clearWeaklySelectable();
+        FThreads.invokeInEdtNowOrLater(() -> {
+            for (final PlayerView p : getGameView().getPlayers()) {
+                if (p.getCards(ZoneType.Battlefield) != null) {
+                    updateCards(isNetGame() ? p.getCards(ZoneType.Battlefield).threadSafeIterable() : p.getCards(ZoneType.Battlefield));
+                }
+                if (p.getCards(ZoneType.Hand) != null) {
+                    updateCards(isNetGame() ? p.getCards(ZoneType.Hand).threadSafeIterable() : p.getCards(ZoneType.Hand));
+                }
+            }
+            FloatingZone.refreshAll();
+        });
+    }
+
+    @Override
     public void refreshField() {
         super.refreshField();
         FThreads.invokeInEdtNowOrLater(() -> {

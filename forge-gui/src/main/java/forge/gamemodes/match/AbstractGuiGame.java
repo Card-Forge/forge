@@ -354,6 +354,23 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return selectionMax;
     }
 
+    private final Set<CardView> weaklySelectableCards = Sets.newHashSet();
+
+    public void setWeaklySelectable(final Iterable<CardView> cards) {
+        weaklySelectableCards.clear();
+        for (CardView cv : cards) {
+            weaklySelectableCards.add(cv);
+        }
+    }
+
+    public void clearWeaklySelectable() {
+        weaklySelectableCards.clear();
+    }
+
+    public boolean isWeaklySelectable(final CardView card) {
+        return weaklySelectableCards.contains(card);
+    }
+
     public boolean isGamePaused() {
         return gamePause;
     }

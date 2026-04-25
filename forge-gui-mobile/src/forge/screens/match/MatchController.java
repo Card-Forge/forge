@@ -527,6 +527,36 @@ public class MatchController extends NetworkGuiGame {
     }
 
     @Override
+    public void setWeaklySelectable(final Iterable<CardView> cards) {
+        super.setWeaklySelectable(cards);
+        FThreads.invokeInEdtNowOrLater(() -> {
+            for (final PlayerView p : getGameView().getPlayers()) {
+                if ( p.getCards(ZoneType.Battlefield) != null ) {
+                    updateCards(isNetGame() ? p.getCards(ZoneType.Battlefield).threadSafeIterable() : p.getCards(ZoneType.Battlefield));
+                }
+                if ( p.getCards(ZoneType.Hand) != null ) {
+                    updateCards(isNetGame() ? p.getCards(ZoneType.Hand).threadSafeIterable() : p.getCards(ZoneType.Hand));
+                }
+            }
+        });
+    }
+
+    @Override
+    public void clearWeaklySelectable() {
+        super.clearWeaklySelectable();
+        FThreads.invokeInEdtNowOrLater(() -> {
+            for (final PlayerView p : getGameView().getPlayers()) {
+                if ( p.getCards(ZoneType.Battlefield) != null ) {
+                    updateCards(isNetGame() ? p.getCards(ZoneType.Battlefield).threadSafeIterable() : p.getCards(ZoneType.Battlefield));
+                }
+                if ( p.getCards(ZoneType.Hand) != null ) {
+                    updateCards(isNetGame() ? p.getCards(ZoneType.Hand).threadSafeIterable() : p.getCards(ZoneType.Hand));
+                }
+            }
+        });
+    }
+
+    @Override
     public void afterGameEnd() {
         super.afterGameEnd();
         Forge.back(true);

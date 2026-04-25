@@ -815,6 +815,10 @@ public class CardRenderer {
         //Magenta outline when card is chosen
         if (MatchController.instance.isHighlighted(card)) {
             g.drawRect(BORDER_THICKNESS, Color.MAGENTA, cx, cy, cw, ch);
+        } else if (!unselectable && FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)
+                && MatchController.instance.isWeaklySelectable(card)) {
+            // Light blue soft outline for cards the player can currently act on.
+            g.drawRect(BORDER_THICKNESS, FSkinColor.fromRGB(0x66, 0xCC, 0xFF), cx, cy, cw, ch);
         }
         //Ability Icons
         if (unselectable) {

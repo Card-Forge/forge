@@ -379,6 +379,11 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             g2d.setColor(Color.WHITE);
             final int ins = 1;
             g2d.fillRoundRect(cardXOffset+ins, cardYOffset+ins, cardWidth-ins*2, cardHeight-ins*2, cornerSize-ins, cornerSize-ins);
+        } else if (isPreferenceEnabled(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS) && matchUI.isWeaklySelectable(getCard())) {
+            // Light blue soft outline for cards the player can currently act on.
+            g2d.setColor(new Color(0x66, 0xCC, 0xFF));
+            final int ins = 1;
+            g2d.fillRoundRect(cardXOffset+ins, cardYOffset+ins, cardWidth-ins*2, cardHeight-ins*2, cornerSize-ins, cornerSize-ins);
         }
     }
 

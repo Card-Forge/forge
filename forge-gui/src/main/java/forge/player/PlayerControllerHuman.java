@@ -1551,6 +1551,133 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         getGui().updateAutoPassPrompt();
     }
 
+    private static final ZoneType[] ACTIONABLE_PAYMENT_ZONES = new ZoneType[] {
+        ZoneType.Hand, ZoneType.Battlefield, ZoneType.Graveyard, ZoneType.Exile, ZoneType.Command
+    };
+
+    /** Actionable card set cached from the last {@link AvailableActions#collectActionable}
+     *  call inside {@link #chooseSpellAbilityToPlay}. {@code pushActionableCards}
+     *  reads this in non-payment mode so the highlights and the APINA
+     *  boolean come from the same heuristic pass — no second scan. */
+    private Set<CardView> cachedActionableCards;
+
+    /**
+     * Push the set of actionable cards to the GUI. In non-payment mode,
+     * reuses the set that {@link AvailableActions#collectActionable}
+     * populated during the APINA pass — same AI heuristic, no rerun.
+     * In payment mode (inside a cost payment), the AI check is not
+     * meaningful (you're already paying); we fall back to the simpler
+     * "card has a playable mana ability" predicate.
+     *
+     * Gated on {@link FPref#UI_SHOW_ACTIONABLE_HIGHLIGHTS} — when off,
+     * the highlight set is cleared.
+     */
+    public void pushActionableCards(boolean paymentMode) {
+        if (!FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)) {
+            getGui().clearWeaklySelectable();
+            return;
+        }
+
+        if (paymentMode) {
+            final Set<CardView> result = Sets.newHashSet();
+            for (ZoneType zone : ACTIONABLE_PAYMENT_ZONES) {
+                for (Card c : player.getCardsIn(zone)) {
+                    if (cardHasPlayableManaAbility(c)) {
+                        result.add(c.getView());
+                    }
+                }
+            }
+            getGui().setWeaklySelectable(result);
+            return;
+        }
+
+        // Normal priority: reuse the AI heuristic result that APINA just
+        // computed. If the cache is null (neither APINA nor highlights
+        // was enabled during chooseSpellAbilityToPlay), compute now as
+        // a fallback.
+        Set<CardView> actionable = cachedActionableCards;
+        if (actionable == null) {
+            actionable = AvailableActions.collectActionable(getPlayer(), computeAvailableActionsBudgetMs(getPlayer()));
+        }
+        getGui().setWeaklySelectable(actionable);
+    }
+
+    private boolean cardHasPlayableManaAbility(Card c) {
+        for (SpellAbility sa : c.getAllPossibleAbilities(player, true)) {
+            if (sa.isManaAbility() && sa.canPlay()) return true;
+        }
+        return false;
+    }
+
+    public void clearActionableCards() {
+        getGui().clearWeaklySelectable();
+    }
+
+    /**
+     * Push the set of creatures the player could legally declare as attackers
+     * right now. Called from {@link forge.gamemodes.match.input.InputAttack}
+     * when attack declaration begins — and after every click inside the
+     * attack input — so the blue-outline highlights reflect valid
+     * attacker candidates that haven't been declared yet.
+     *
+     * Gated on {@link FPref#UI_SHOW_ACTIONABLE_HIGHLIGHTS}; clears the
+     * selection when the pref is off.
+     */
+    public void pushAttackerCandidates(final Player attackingPlayer,
+            final forge.game.combat.Combat combat) {
+        if (!FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)) {
+            getGui().clearWeaklySelectable();
+            return;
+        }
+        final Set<CardView> result = Sets.newHashSet();
+        for (final Card c : attackingPlayer.getCreaturesInPlay()) {
+            if (!forge.game.combat.CombatUtil.canAttack(c)) continue;
+            // Skip creatures already declared as attackers — they can't
+            // attack again this turn. Mirrors the blocker side, where
+            // canBlock(blocker, combat) drops blockers that have hit
+            // their per-turn block-count limit.
+            if (combat != null && combat.isAttacking(c)) continue;
+            result.add(c.getView());
+        }
+        getGui().setWeaklySelectable(result);
+    }
+
+    /**
+     * Push the set of creatures the player could legally declare as blockers
+     * right now. Called from {@link forge.gamemodes.match.input.InputBlock}
+     * when block declaration begins. The candidates are the defending
+     * player's untapped creatures that could block at least one attacker.
+     * Gated on {@link FPref#UI_SHOW_ACTIONABLE_HIGHLIGHTS}.
+     */
+    public void pushBlockerCandidates(final Player defendingPlayer,
+            final forge.game.combat.Combat combat) {
+        if (!FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)) {
+            getGui().clearWeaklySelectable();
+            return;
+        }
+        final Set<CardView> result = Sets.newHashSet();
+        if (combat == null) {
+            getGui().setWeaklySelectable(result);
+            return;
+        }
+        final Iterable<Card> attackers = combat.getAttackers();
+        for (final Card blocker : defendingPlayer.getCreaturesInPlay()) {
+            if (!forge.game.combat.CombatUtil.canBlock(blocker)) continue;
+            // Only highlight if the blocker can block at least one live attacker.
+            boolean canBlockSomething = false;
+            for (final Card atk : attackers) {
+                if (forge.game.combat.CombatUtil.canBlock(atk, blocker, combat)) {
+                    canBlockSomething = true;
+                    break;
+                }
+            }
+            if (canBlockSomething) {
+                result.add(blocker.getView());
+            }
+        }
+        getGui().setWeaklySelectable(result);
+    }
+
     @Override
     public List<SpellAbility> chooseSpellAbilityToPlay() {
         netLog.trace("ENTRY for player {}, phase={}, isGameOver={}",
@@ -1558,10 +1685,22 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final MagicStack stack = getGame().getStack();
 
         // Skip when already yielding — yield proceeds regardless of available-actions.
-        // Yield check first: it's a field read, vs needsAvailableActions which does 3 synced FPref reads.
-        if (!yieldController.isYieldActive() && needsAvailableActions()) {
+        // Compute the actionable set when APINA / suggestions / highlights need it.
+        boolean highlightsEnabled = FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS);
+        if (!yieldController.isYieldActive() && (needsAvailableActions() || highlightsEnabled)) {
             long timeoutMs = computeAvailableActionsBudgetMs(getPlayer());
-            getPlayer().getView().setHasAvailableActions(AvailableActions.compute(getPlayer(), timeoutMs));
+            if (highlightsEnabled) {
+                // Highlights need the full set; APINA derives its boolean from the same scan.
+                Set<CardView> actionable = AvailableActions.collectActionable(getPlayer(), timeoutMs);
+                cachedActionableCards = actionable;
+                getPlayer().getView().setHasAvailableActions(!actionable.isEmpty());
+            } else {
+                // APINA only — early-exit boolean scan is cheaper than a full walk.
+                cachedActionableCards = null;
+                getPlayer().getView().setHasAvailableActions(AvailableActions.compute(getPlayer(), timeoutMs));
+            }
+        } else {
+            cachedActionableCards = null;
         }
 
         // yieldJustEndedFlag is read from the EDT (didYieldJustEnd); synchronized writer/reader pair handles visibility.

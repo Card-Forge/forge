@@ -68,6 +68,7 @@ public class InputAttack extends InputSyncronizedBase {
 
     @Override
     public final void showMessage() {
+        getController().pushAttackerCandidates(playerAttacks, combat);
         setCurrentDefender(defenders.getFirst());
 
         if (currentDefender == null) {
@@ -93,6 +94,12 @@ public class InputAttack extends InputSyncronizedBase {
     private void disablePrompt() {
         Localizer localizer = Localizer.getInstance();
         getController().getGui().updateButtons(getOwner(), localizer.getMessage("lblDisabled"), localizer.getMessage("lblDisabled"), false, false, false);
+    }
+
+    @Override
+    protected void onStop() {
+        // Highlights pushed in showMessage would otherwise persist on remote clients through autopass.
+        getController().clearActionableCards();
     }
 
     @Override
@@ -344,6 +351,14 @@ public class InputAttack extends InputSyncronizedBase {
         showMessage(message);
 
         updatePrompt();
+
+        // Refresh the actionable-card highlight set after every click so
+        // declared attackers stop glowing (and call-backs restore the
+        // glow). Mirrors InputBlock's behavior, where its no-arg
+        // showMessage() override re-pushes blocker candidates after each
+        // selection. We can't call our own no-arg showMessage() here
+        // because it also resets currentDefender.
+        getController().pushAttackerCandidates(playerAttacks, combat);
 
         if (combat != null)
             getController().getGame().fireEvent(GameEventCombatUpdate.fromCards(combat.getAttackers(), combat.getAllBlockers()));

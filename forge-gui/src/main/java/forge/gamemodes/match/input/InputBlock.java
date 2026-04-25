@@ -71,6 +71,7 @@ public class InputBlock extends InputSyncronizedBase {
     /** {@inheritDoc} */
     @Override
     protected final void showMessage() {
+        getController().pushBlockerCandidates(defender, combat);
         // could add "Reset Blockers" button
         Localizer localizer = Localizer.getInstance();
         getController().getGui().updateButtons(getOwner(), true, false, true);
@@ -87,6 +88,12 @@ public class InputBlock extends InputSyncronizedBase {
             getController().getGame().fireEvent(GameEventCombatUpdate.fromCards(combat.getAttackers(), combat.getAllBlockers()));
 
         getController().getGui().showCombat();
+    }
+
+    @Override
+    protected void onStop() {
+        // Highlights pushed in showMessage would otherwise persist on remote clients through autopass.
+        getController().clearActionableCards();
     }
 
     /** {@inheritDoc} */
