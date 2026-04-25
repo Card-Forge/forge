@@ -115,6 +115,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     @Override
     public void setGameView(final GameView gameView0) {
         if (gameView == null || gameView0 == null) {
+            if (gameView0 == null && yieldController != null) {
+                yieldController.reset();
+            }
             if (gameView0 != null) {
                 gameView0.updateObjLookup();
             }

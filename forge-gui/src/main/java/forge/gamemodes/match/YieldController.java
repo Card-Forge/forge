@@ -637,4 +637,10 @@ public class YieldController {
         autoPassUntilEndOfTurn.remove(player);
     }
 
+    /** Clears all yield state. Called between games so modes don't carry over. */
+    public void reset() {
+        autoPassUntilEndOfTurn.clear();
+        yieldStates.clear();
+    }
+
 }
