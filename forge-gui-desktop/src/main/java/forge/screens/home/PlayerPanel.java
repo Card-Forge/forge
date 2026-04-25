@@ -22,6 +22,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.collect.ImmutableSet;
 
 import forge.Singletons;
+import forge.TeamColor;
 import forge.ai.AIOption;
 import forge.deck.DeckSection;
 import forge.game.GameType;
@@ -85,6 +86,7 @@ public class PlayerPanel extends FPanel {
 
     private final FComboBoxWrapper<Object> teamComboBox = new FComboBoxWrapper<>();
     private final FComboBoxWrapper<Object> aeTeamComboBox = new FComboBoxWrapper<>();
+    private final FComboBoxWrapper<TeamColor> teamColorComboBox = new FComboBoxWrapper<>();
 
     private final FLabel closeBtn;
     private final FLabel deckBtn = new FLabel.ButtonBuilder().text(localizer.getMessage("lblSelectaDeck")).build();
@@ -173,6 +175,24 @@ public class PlayerPanel extends FPanel {
         aeTeamComboBox.addActionListener(teamListener);
         teamComboBox.addTo(this, variantBtnConstraints + ", cell 2 " + cellY + ", growx, gaptop 5px, wrap");
         aeTeamComboBox.addTo(this, variantBtnConstraints + ", cell 2 " + cellY + ", growx, gaptop 5px, wrap");
+
+        // Team color selector (placed on the next row)
+        int colorCellY = cellY + 1;
+        this.add(lobby.newLabel(localizer.getMessage("lblTeamColor", "Team Color") + ":"),
+                "cell 0 " + colorCellY + ", sx 2, ax right, w 40px, h 30px");
+        populateTeamColorComboBox();
+        this.setTeamColor(slot == null ? TeamColor.NONE : slot.getTeamColor());
+        teamColorComboBox.addActionListener(e -> {
+            @SuppressWarnings("unchecked")
+            final forge.toolbox.FComboBox<TeamColor> cb =
+                    (forge.toolbox.FComboBox<TeamColor>) e.getSource();
+            cb.requestFocusInWindow();
+            if (cb.getSelectedItem() != null) {
+                lobby.changePlayerFocus(index);
+                lobby.firePlayerChangeListener(index);
+            }
+        });
+        teamColorComboBox.addTo(this, variantBtnConstraints + ", cell 2 " + colorCellY + ", growx, gaptop 5px, wrap");
 
         createReadyButton();
         if (allowNetworking) {
@@ -559,6 +579,23 @@ public class PlayerPanel extends FPanel {
         teamComboBox.setEnabled(true);
     }
 
+    private void populateTeamColorComboBox() {
+        for (final TeamColor color : TeamColor.values()) {
+            teamColorComboBox.addItem(color);
+        }
+        teamColorComboBox.setEnabled(true);
+    }
+
+    public TeamColor getTeamColor() {
+        final TeamColor selected = teamColorComboBox.getSelectedItem();
+        return selected == null ? TeamColor.NONE : selected;
+    }
+    public void setTeamColor(final TeamColor color) {
+        teamColorComboBox.suppressActionListeners();
+        teamColorComboBox.setSelectedItem(color == null ? TeamColor.NONE : color);
+        teamColorComboBox.unsuppressActionListeners();
+    }
+
     private final ActionListener teamListener = new ActionListener() {
         @SuppressWarnings("unchecked")
         @Override public void actionPerformed(final ActionEvent e) {
@@ -567,6 +604,12 @@ public class PlayerPanel extends FPanel {
             final Object selection = cb.getSelectedItem();
 
             if (null != selection) {
+                // If another panel already belongs to the selected team, inherit its color.
+                final int newTeam = getTeam();
+                final TeamColor existingColor = lobby.getTeamColor(index, newTeam);
+                if (existingColor != null) {
+                    setTeamColor(existingColor);
+                }
                 lobby.changePlayerFocus(index);
                 lobby.firePlayerChangeListener(index);
             }

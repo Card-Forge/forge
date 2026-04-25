@@ -70,6 +70,9 @@ public class Game {
     private final PlayerCollection ingamePlayers = new PlayerCollection();
     private final PlayerCollection lostPlayers = new PlayerCollection();
 
+    /** Keyed by team number; built once during Game construction. */
+    private final Map<Integer, PlayerTeam> teamMap = Maps.newHashMap();
+
     private List<Card> activePlanes = null;
 
     public final Untap untap;
@@ -354,6 +357,25 @@ public class Game {
             }
 
             pl.setTeam(teamNum);
+        }
+
+        // Build PlayerTeam objects now that all team numbers are finalised
+        for (final Player pl : allPlayers) {
+            final int tNum = pl.getTeam();
+            if (!teamMap.containsKey(tNum)) {
+                // Retrieve the color from the RegisteredPlayer (may be NONE if not set)
+                forge.TeamColor color = forge.TeamColor.NONE;
+                for (final RegisteredPlayer psc2 : players0) {
+                    if (psc2.getTeamNumber() == tNum) {
+                        color = psc2.getTeamColor();
+                        break;
+                    }
+                }
+                teamMap.put(tNum, new PlayerTeam(tNum, color));
+            }
+            final PlayerTeam team = teamMap.get(tNum);
+            team.addMember(pl);
+            pl.setPlayerTeam(team);
         }
 
         action = new GameAction(this);
@@ -771,6 +793,22 @@ public class Game {
 
     public final Match getMatch() {
         return match;
+    }
+
+    /**
+     * Returns an unmodifiable view of all {@link PlayerTeam}s in this game,
+     * keyed by their numeric team ID.
+     */
+    public final Map<Integer, PlayerTeam> getTeams() {
+        return Collections.unmodifiableMap(teamMap);
+    }
+
+    /**
+     * Returns the {@link PlayerTeam} for the given numeric team ID, or
+     * {@code null} if no such team exists.
+     */
+    public final PlayerTeam getTeam(final int teamId) {
+        return teamMap.get(teamId);
     }
 
     /**

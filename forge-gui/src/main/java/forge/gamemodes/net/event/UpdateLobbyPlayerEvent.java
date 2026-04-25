@@ -19,6 +19,8 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
     private int sleeveIndex = -1;
     private int team = -1;
     private Boolean isArchenemy = null;
+    /** Stored as enum name; {@code null} means "no change". */
+    private String teamColorName = null;
     private Boolean isReady = null;
     private Boolean isDevMode = null;
     private Deck deck = null;
@@ -33,7 +35,10 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
 
 
     public static UpdateLobbyPlayerEvent create(final LobbySlotType type, final String name, final int avatarIndex, final int sleeveIndex, final int team, final boolean isArchenemy, final boolean isReady, final boolean isDevMode, final Set<AIOption> aiOptions, final String aiProfile) {
-        return new UpdateLobbyPlayerEvent(type, name, avatarIndex, sleeveIndex, team, isArchenemy, isReady, isDevMode, aiOptions, aiProfile);
+        return new UpdateLobbyPlayerEvent(type, name, avatarIndex, sleeveIndex, team, null, isArchenemy, isReady, isDevMode, aiOptions, aiProfile);
+    }
+    public static UpdateLobbyPlayerEvent create(final LobbySlotType type, final String name, final int avatarIndex, final int sleeveIndex, final int team, final String teamColorName, final boolean isArchenemy, final boolean isReady, final boolean isDevMode, final Set<AIOption> aiOptions, final String aiProfile) {
+        return new UpdateLobbyPlayerEvent(type, name, avatarIndex, sleeveIndex, team, teamColorName, isArchenemy, isReady, isDevMode, aiOptions, aiProfile);
     }
     public static UpdateLobbyPlayerEvent deckUpdate(final Deck deck) {
         return new UpdateLobbyPlayerEvent(deck);
@@ -69,6 +74,11 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
     }
     public static UpdateLobbyPlayerEvent teamUpdate(int team) {
         return new UpdateLobbyPlayerEvent(team);
+    }
+    public static UpdateLobbyPlayerEvent teamColorUpdate(final String teamColorName) {
+        final UpdateLobbyPlayerEvent event = new UpdateLobbyPlayerEvent();
+        event.teamColorName = teamColorName;
+        return event;
     }
     public static UpdateLobbyPlayerEvent setDeckSchemePlaneVanguard(final String DeckName, final String Scheme, final String Plane, final String Vanguard) {
         return new UpdateLobbyPlayerEvent(DeckName, Scheme, Plane, Vanguard);
@@ -108,6 +118,7 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
             final int avatarIndex,
             final int sleeveIndex,
             final int team,
+            final String teamColorName,
             final boolean isArchenemy,
             final boolean isReady,
             final boolean isDevMode,
@@ -118,6 +129,7 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
         this.avatarIndex = avatarIndex;
         this.sleeveIndex = sleeveIndex;
         this.team = team;
+        this.teamColorName = teamColorName;
         this.isArchenemy = isArchenemy;
         this.isReady = isReady;
         this.isDevMode = isDevMode;
@@ -143,6 +155,10 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
     }
     public int getTeam() {
         return team;
+    }
+    /** @return the team color name to apply, or {@code null} if the event carries no color change. */
+    public String getTeamColorName() {
+        return teamColorName;
     }
     public Boolean getArchenemy() {
         return isArchenemy;

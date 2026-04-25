@@ -1,6 +1,7 @@
 package forge.gamemodes.match;
 
 import com.google.common.collect.ImmutableSet;
+import forge.TeamColor;
 import forge.ai.AIOption;
 import forge.deck.Deck;
 import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
@@ -17,6 +18,8 @@ public final class LobbySlot implements Serializable {
     private int sleeveIndex;
     private int team;
     private boolean isArchenemy;
+    /** Stored as the enum name for serialization compatibility; never {@code null} after construction. */
+    private String teamColorName = TeamColor.NONE.name();
     private boolean isReady;
     private boolean isDevMode;
     private Deck deck;
@@ -59,6 +62,10 @@ public final class LobbySlot implements Serializable {
         }
         if (data.getTeam() != -1) {
             setTeam(data.getTeam());
+            changed = true;
+        }
+        if (data.getTeamColorName() != null) {
+            setTeamColorName(data.getTeamColorName());
             changed = true;
         }
         if (data.getArchenemy() != null) {
@@ -137,6 +144,21 @@ public final class LobbySlot implements Serializable {
     }
     public void setTeam(final int team) {
         this.team = team;
+    }
+
+    /** @return the team color chosen in the lobby (never {@code null}) */
+    public TeamColor getTeamColor() {
+        return TeamColor.fromName(teamColorName);
+    }
+    public void setTeamColor(final TeamColor color) {
+        this.teamColorName = (color == null ? TeamColor.NONE : color).name();
+    }
+    /** Raw string accessor used for serialization/network transport. */
+    public String getTeamColorName() {
+        return teamColorName;
+    }
+    public void setTeamColorName(final String name) {
+        this.teamColorName = (name == null || name.isEmpty()) ? TeamColor.NONE.name() : name;
     }
 
     public String getSchemeDeckName() { return SchemeDeckName; }

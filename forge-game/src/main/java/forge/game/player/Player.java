@@ -171,6 +171,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int numManaShards;
 
     private int teamNumber = -1;
+    private PlayerTeam playerTeam = null;
 
     private PlayerController controller;
     private final Game game;
@@ -271,6 +272,14 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final void setTeam(int iTeam) {
         teamNumber = iTeam;
+    }
+
+    /** @return the rich {@link PlayerTeam} object this player belongs to, or {@code null} before game start */
+    public final PlayerTeam getPlayerTeam() {
+        return playerTeam;
+    }
+    public final void setPlayerTeam(final PlayerTeam team) {
+        this.playerTeam = team;
     }
 
     public boolean isArchenemy() {

@@ -3,6 +3,7 @@ package forge.game.player;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.LobbyPlayer;
+import forge.TeamColor;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -36,6 +37,7 @@ public class RegisteredPlayer {
     private List<PaperCard> vanguardAvatars = null;
     private PaperCard planeswalker = null;
     private int teamNumber = -1; // members of teams with negative id will play FFA.
+    private TeamColor teamColor = TeamColor.NONE;
     private Integer id = null;
     private boolean randomFoil = false;
     private boolean enableETBCountersEffect = false;
@@ -129,6 +131,13 @@ public class RegisteredPlayer {
     }
     public void setTeamNumber(int teamNumber0) {
         this.teamNumber = teamNumber0;
+    }
+
+    public TeamColor getTeamColor() {
+        return teamColor;
+    }
+    public void setTeamColor(final TeamColor teamColor0) {
+        this.teamColor = teamColor0 == null ? TeamColor.NONE : teamColor0;
     }
 
     public static RegisteredPlayer forCommander(final Deck deck) {

@@ -510,6 +510,7 @@ public abstract class GameLobby implements IHasGameType {
             }
 
             rp.setTeamNumber(team);
+            rp.setTeamColor(slot.getTeamColor());
             players.add(rp.setPlayer(lobbyPlayer));
 
             if (!isAI) {

@@ -283,6 +283,7 @@ public class VLobby implements ILobbyView {
                 panel.setPlayerName(slot.getName());
                 panel.setAvatarIndex(slot.getAvatarIndex());
                 panel.setTeam(slot.getTeam());
+                panel.setTeamColor(slot.getTeamColor());
                 panel.setIsReady(slot.isReady());
                 panel.setIsDevMode(slot.isDevMode());
                 panel.setIsArchenemy(slot.isArchenemy());
@@ -386,7 +387,8 @@ public class VLobby implements ILobbyView {
         return UpdateLobbyPlayerEvent.create(panel.getType(),
                 panel.getPlayerName(),
                 panel.getAvatarIndex(), -1 /*TODO panel.getSleeveIndex()*/,
-                panel.getTeam(), panel.isArchenemy(),
+                panel.getTeam(), panel.getTeamColor().name(),
+                panel.isArchenemy(),
                 panel.isReady(),
                 panel.isDevMode(),
                 panel.getAiOptions(),
@@ -755,6 +757,29 @@ public class VLobby implements ILobbyView {
             names.add(pp.getPlayerName());
         }
         return names;
+    }
+
+    /**
+     * Returns the {@link forge.TeamColor} currently chosen by any <em>other</em> visible
+     * player panel that is on {@code teamNumber}, or {@code null} if no such panel exists.
+     *
+     * <p>Used by {@link PlayerPanel}'s team-change listener so that joining an existing
+     * team automatically inherits that team's color.</p>
+     *
+     * @param excludeIndex the panel index that is currently changing teams (do not match this one)
+     * @param teamNumber   the team index to look for (as returned by {@link PlayerPanel#getTeam()})
+     */
+    forge.TeamColor getTeamColor(final int excludeIndex, final int teamNumber) {
+        for (int i = 0; i < playerPanels.size(); i++) {
+            if (i == excludeIndex) {
+                continue;
+            }
+            final PlayerPanel other = playerPanels.get(i);
+            if (other.isVisible() && other.getTeam() == teamNumber) {
+                return other.getTeamColor();
+            }
+        }
+        return null;
     }
 
     /////////////////////////////////////////////
