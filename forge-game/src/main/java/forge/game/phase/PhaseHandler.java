@@ -38,16 +38,11 @@ import forge.game.player.PlayerView;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
 
-import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityNoCleanupDamage;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.IHasForgeLog;
-import forge.util.TextUtil;
-
-import org.apache.commons.lang3.time.StopWatch;
 
 import java.util.*;
 
@@ -63,8 +58,6 @@ import java.util.*;
 public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
     private static final long serialVersionUID = 5207222278370963197L;
 
-    // used for debugging phase timing
-    private final StopWatch sw = new StopWatch();
 
     // Start turn at 0, since we start even before first untap
     private PhaseType phase = null;
@@ -83,22 +76,19 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
     private transient Player playerTurn = null;
     private transient Player playerPreviousTurn = null;
 
-    // priority player
+    // priority player - state owned by PlayerPriority, accessed via IPriorityManager
+    private final transient IPriorityManager priorityManager;
 
-    private transient Player pPlayerPriority = null;
-    private transient Player pFirstPriority = null;
     private transient Combat combat = null;
     private boolean skipDamageSteps = false;
     private boolean bRepeatCleanup = false;
-
-    /** The need to next phase. */
-    private boolean givePriorityToPlayer = false;
 
     private final transient Game game;
 
 
     public PhaseHandler(final Game game0) {
         game = game0;
+        priorityManager = new PlayerPriority(this);
     }
 
     public final PhaseType getPhase() {
@@ -133,14 +123,13 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
     }
 
     public final Player getPriorityPlayer() {
-        return pPlayerPriority;
+        return priorityManager.getPriorityPlayer();
     }
     public final void setPriority(final Player p) {
-        pFirstPriority = p;
-        pPlayerPriority = p;
+        priorityManager.setPriority(p);
     }
     public final void resetPriority() {
-        setPriority(playerTurn);
+        priorityManager.resetPriority();
     }
 
     public final boolean inCombat() { return combat != null; }
@@ -243,12 +232,12 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
         game.getTriggerHandler().resetActiveTriggers();
         if (isSkippingPhase(phase)) {
             skipped = true;
-            givePriorityToPlayer = false;
+            priorityManager.setGivingPriority(false);
         } else  {
             // Perform turn-based actions
             switch (phase) {
                 case UNTAP:
-                    givePriorityToPlayer = false;
+                    priorityManager.setGivingPriority(false);
                     game.getUntap().executeUntil(playerTurn);
                     game.getUntap().executeAt();
                     break;
@@ -308,7 +297,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                     declareAttackersTurnBasedAction();
                     game.getStack().unfreezeStack();
 
-                    givePriorityToPlayer = inCombat();
+                    priorityManager.setGivingPriority(inCombat());
                     break;
 
                 case COMBAT_DECLARE_BLOCKERS:
@@ -325,7 +314,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
 
                     // no first strikers, skip this step
                     if (!combat.assignCombatDamage(true)) {
-                        givePriorityToPlayer = false;
+                        priorityManager.setGivingPriority(false);
                     } else {
                         combat.dealAssignedDamage();
                     }
@@ -337,7 +326,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                     }
 
                     if (!combat.assignCombatDamage(false)) {
-                        givePriorityToPlayer = false;
+                        priorityManager.setGivingPriority(false);
                     } else {
                         combat.dealAssignedDamage();
                     }
@@ -422,13 +411,13 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                     nEndOfTurnsThisTurn = 0;
                     game.getStack().resetMaxDistinctSources();
 
-                    // Rule 514.3
-                    givePriorityToPlayer = false;
+                    // Rule 514.3 – no priority during cleanup unless SBAs trigger
+                    priorityManager.setGivingPriority(false);
 
                     // Rule 514.3a - state-based actions
                     if (game.getAction().checkStateEffects(true)) {
                         bRepeatCleanup = true;
-                        givePriorityToPlayer = true;
+                        priorityManager.setGivingPriority(true);
                     }
                     break;
 
@@ -450,7 +439,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
         // Rule 514.3a
         if (phase == PhaseType.CLEANUP && (!game.getStack().isEmpty() || game.getStack().hasSimultaneousStackEntries())) {
             bRepeatCleanup = true;
-            givePriorityToPlayer = true;
+            priorityManager.setGivingPriority(true);
         }
     }
 
@@ -1017,11 +1006,11 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
         onPhaseBegin();
 
         // don't even offer priority, because it's untap of 1st turn now
-        givePriorityToPlayer = false;
+        priorityManager.setGivingPriority(false);
 
         if (startGameHook != null) {
             startGameHook.run();
-            givePriorityToPlayer = true;
+            priorityManager.setGivingPriority(true);
         }
     }
 
@@ -1041,140 +1030,44 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
     }
 
     public void mainLoopStep() {
-        if (givePriorityToPlayer) {
-            if (DEBUG_PHASES) {
-                sw.start();
-            }
+        // Delegate the full priority window + rotation to the priority manager.
+        final PriorityResult result = priorityManager.conductStep();
 
-            game.fireEvent(new GameEventPlayerPriority(PlayerView.get(playerTurn), phase, PlayerView.get(getPriorityPlayer())));
-            List<SpellAbility> chosenSa = null;
-
-            int loopCount = 0;
-            do {
-                if (checkStateBasedEffects()) {
-                    // state-based effects check could lead to game over
-                    return;
-                }
-                game.stashGameState();
-
-                chosenSa = pPlayerPriority.getController().chooseSpellAbilityToPlay();
-
-                // this needs to come after chosenSa so it sees you conceding on own turn
-                if (playerTurn.hasLost() && pPlayerPriority.equals(playerTurn) && pFirstPriority.equals(playerTurn)) {
-                    // If the active player has lost, and they have priority, set the next player to have priority
-                    System.out.println("Active player is no longer in the game...");
-                    pPlayerPriority = game.getNextPlayerAfter(getPriorityPlayer());
-                    pFirstPriority = pPlayerPriority;
-                }
-
-                if (chosenSa == null) {
-                    break; // that means 'I pass'
-                }
-                if (DEBUG_PHASES) {
-                    System.out.print("... " + pPlayerPriority + " plays " + chosenSa);
-                }
-
-                boolean rollback = false;
-                for (SpellAbility sa : chosenSa) {
-                    Card saHost = sa.getHostCard();
-                    final Zone originZone = saHost.getZone();
-                    final CardZoneTable triggerList = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
-
-                    if (pPlayerPriority.getController().playChosenSpellAbility(sa)) {
-                        // 117.3c If a player has priority when they cast a spell, activate an ability, [play a land]
-                        // that player receives priority afterward.
-                        pFirstPriority = pPlayerPriority; // all opponents have to pass before stack is allowed to resolve
-                    } else if (game.EXPERIMENTAL_RESTORE_SNAPSHOT) {
-                        rollback = true;
-                    }
-
-                    saHost = game.getCardState(saHost);
-                    final Zone currentZone = saHost.getZone();
-
-                    // Need to check if Zone did change
-                    if (currentZone != null && originZone != null && !currentZone.equals(originZone) && (sa.isSpell() || sa.isLandAbility())) {
-                        // currently there can be only one Spell put on the Stack at once, or Land Abilities be played
-                        triggerList.put(originZone.getZoneType(), currentZone.getZoneType(), saHost);
-                        triggerList.triggerChangesZoneAll(game, sa);
-                    }
-                }
-                // Don't copy last state if we're in the middle of rolling back a spell...
-                if (!rollback) {
-                    game.copyLastState();
-                }
-                loopCount++;
-            } while (loopCount < 999 || !pPlayerPriority.getController().isAI());
-
-            if (loopCount >= 999 && pPlayerPriority.getController().isAI()) {
-                aiLog.warn("AI looped too much with: " + chosenSa);
-            }
-
-            if (DEBUG_PHASES) {
-                sw.stop();
-                System.out.print("... passed in " + sw.getTime()/1000f + " s\n");
-                System.out.println("\t\tStack: " + game.getStack());
-                sw.reset();
-            }
-        }
-        else if (DEBUG_PHASES) {
-            System.out.print(" >> (no priority given to " + getPriorityPlayer() + ")\n");
+        if (result == PriorityResult.GAME_OVER) {
+            return; // game ended (concede, state-based action, etc.)
         }
 
-        // actingPlayer is the player who may act
-        // the firstAction is the player who gained Priority First in this segment
-        // of Priority
-        Player nextPlayer = game.getNextPlayerAfter(getPriorityPlayer());
-
-        if (game.isGameOver() || nextPlayer == null) { return; } // conceded?
-
-        if (DEBUG_PHASES) {
-            System.out.println(TextUtil.concatWithSpace(playerTurn.toString(),TextUtil.addSuffix(phase.toString(),":"), pPlayerPriority.toString(),"is active, previous was", nextPlayer.toString()));
-        }
-        if (pFirstPriority == nextPlayer) {
+        if (result == PriorityResult.ALL_PASSED) {
             if (game.getStack().isEmpty()) {
-                if (playerTurn.hasLost()) {
-                    setPriority(game.getNextPlayerAfter(playerTurn));
-                } else {
-                    setPriority(playerTurn);
-                }
-
-                // end phase
-                givePriorityToPlayer = true;
+                // All players passed with an empty stack -> end this phase.
                 onPhaseEnd();
                 advanceToNextPhase();
                 onPhaseBegin();
-            }
-            else if (!game.getStack().hasSimultaneousStackEntries()) {
+            } else if (!game.getStack().hasSimultaneousStackEntries()) {
+                // All players passed with stack items -> resolve the top.
                 game.getStack().resolveStack();
             }
-        } else {
-            // pass the priority to other player
-            pPlayerPriority = nextPlayer;
+            // If there are simultaneous stack entries the loop simply continues.
         }
 
-        // If ever the karn's ultimate resolved
+        // Karn's ultimate restarts the game; detect and signal the loop to stop.
         if (game.getAge() == GameStage.RestartedByKarn) {
             setPhase(null);
             game.updatePhaseForView();
             game.fireEvent(new GameEventGameRestarted(PlayerView.get(playerTurn)));
-            return;
-        }
-
-        // update Priority for all players
-        for (final Player p : game.getPlayers()) {
-            p.setHasPriority(getPriorityPlayer() == p);
         }
     }
 
-    private boolean checkStateBasedEffects() {
+    // Package-private so PlayerPriority (same package) can call it directly.
+    boolean checkStateBasedEffects() {
         final Set<Card> allAffectedCards = new HashSet<>();
         do {
-            // Rule 704.3  Whenever a player would get priority, the game checks ... for state-based actions,
+            // Rule 704.3  Whenever a player would get priority, the game checks for state-based actions.
             game.getAction().checkStateEffects(false, allAffectedCards);
             if (game.isGameOver()) {
                 return true; // state-based effects check could lead to game over
             }
-        } while (game.getStack().addAllTriggeredAbilitiesToStack()); //loop so long as something was added to stack
+        } while (game.getStack().addAllTriggeredAbilitiesToStack());
 
         if (!allAffectedCards.isEmpty()) {
             game.fireEvent(new GameEventCardStatsChanged(allAffectedCards));
@@ -1184,6 +1077,11 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
             game.getPlayers().forEach(Player::updateFlashbackForView);
         }
         return false;
+    }
+
+    /** Package-private accessor used by {@link PlayerPriority}. */
+    Game getGame() {
+        return game;
     }
 
     public final boolean devAdvanceToPhase(PhaseType targetPhase) {
@@ -1261,7 +1159,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
 
     // just to avoid exposing variable to outer classes
     public void onStackResolved() {
-        givePriorityToPlayer = true;
+        priorityManager.setGivingPriority(true);
     }
 
     public void endCombat() {
