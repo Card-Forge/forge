@@ -38,6 +38,7 @@ import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayEnergy;
 import forge.game.cost.CostRemoveCounter;
+import forge.game.cost.CostSacrifice;
 import forge.game.cost.CostUntap;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordCollection;
@@ -51,11 +52,19 @@ import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityMode;
 import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.MagicStack;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 
 public class ComputerUtilCard {
+    private static final List<String> DANGEROUS_LANDS_TO_REMOVE = Arrays.asList(
+            "Dark Depths",
+            "Glacial Chasm",
+            "Valakut, the Molten Pinnacle",
+            "Maze of Ith"
+    );
+
     public static Card getMostExpensivePermanentAI(final CardCollectionView list, final SpellAbility spell, final boolean targeted) {
         CardCollectionView all = list;
         if (targeted) {
@@ -256,6 +265,229 @@ public class ComputerUtilCard {
                 .findFirst()
                 // TODO potentially risky if simulation mode currently able to reach this from triggers
                 .orElseGet(() -> Aggregates.random(bLand)); // random tapped land of least represented type
+    }
+
+    public static Card getBestLandToRemoveAI(final Player ai, final Iterable<Card> list, final SpellAbility removal) {
+        final List<Card> lands = CardLists.filter(list, CardPredicates.LANDS);
+        if (lands.isEmpty()) {
+            return null;
+        }
+
+        return lands.stream()
+                .max(Comparator.comparingInt((Card c) -> evaluateLandRemovalPriority(ai, c, removal))
+                        .thenComparingInt(GameStateEvaluator::evaluateLand))
+                .orElse(null);
+    }
+
+    public static int evaluateLandRemovalPriority(final Player ai, final Card land, final SpellAbility removal) {
+        return evaluateLandRemovalPriority(ai, land, removal, true);
+    }
+
+    private static int evaluateLandRemovalPriority(final Player ai, final Card land, final SpellAbility removal,
+            final boolean includeLandDestruction) {
+        if (land == null || !land.isLand()) {
+            return 0;
+        }
+
+        int score = land.isBasicLand() ? 5 : 10;
+
+        // High priority: lands that inherently generate extra mana, such as
+        // Temple of the False God, Nykthos, Shrine to Nyx, Lost Vale, and Three
+        // Tree City. Use unmultipled mana so global effects like Mana Flare do
+        // not make every basic land look like a Strip Mine target.
+        final int netMana = getIntrinsicNetMana(land);
+        if (netMana >= 2) {
+            score += 180 + 45 * (netMana - 2);
+        }
+
+        for (Card aura : land.getEnchantedBy()) {
+            // High priority: an opponent's land enhanced by Wild Growth,
+            // Utopia Sprawl, Overgrowth, or similar mana-boosting Auras.
+            if (aura.getController().equals(land.getController()) && hasManaBoostingText(aura)) {
+                score += 160;
+            }
+            // High priority: remove the land hosting an On Thin Ice-style Aura
+            // when that Aura has removed one of this AI's permanents.
+            if (hasRemovedAiPermanent(ai, aura)) {
+                score += 180;
+            }
+        }
+
+        boolean hasAnimationAbility = false;
+        for (SpellAbility ability : land.getNonManaAbilities()) {
+            if (ability.isLandAbility()) {
+                continue;
+            }
+            Cost cost = ability.getPayCosts();
+            if (includeLandDestruction && isLandDestructionAbility(ability)) {
+                // High priority only when it cannot answer immediately:
+                // a tapped Strip Mine or Wasteland matters if the AI controls
+                // something worth protecting, but an untapped one can respond.
+                if (land.isTapped() && aiHasHighPriorityLand(ai)) {
+                    score += 170;
+                }
+                continue;
+            }
+            if (isHomewardPathAbility(ability)) {
+                // Usually low priority: Homeward Path matters if the AI has
+                // stolen creatures that it could lose, but otherwise it is
+                // mostly just a colorless land with a narrow political button.
+                if (aiControlsStolenCreature(ai)) {
+                    score += 90;
+                }
+                continue;
+            }
+            if (isLandAnimationAbility(ability)) {
+                hasAnimationAbility = true;
+                // Medium priority: manlands like Mishra's Factory and Mutavault.
+                // They become much more urgent while attacking the AI.
+                score += isAttackingAi(land, ai) ? 140 : 70;
+            } else if (cost != null && cost.hasSpecificCostType(CostSacrifice.class)) {
+                // Medium priority: one-shot utility lands such as Scavenger
+                // Grounds or Blast Zone are relevant, but usually not urgent.
+                score += 45;
+            } else if (cost != null && cost.hasTapCost()) {
+                // Medium priority: repeatable utility lands such as Bonders'
+                // Enclave, Kessig Wolf Run, Geode Grotto, or Oran-Rief.
+                score += 55;
+            } else {
+                // Medium-low priority: utility with no tap cost, including
+                // lands that alter play patterns without producing extra mana.
+                score += 45;
+            }
+            if (ability.getApi() == ApiType.Mana || hasManaSubAbility(ability)) {
+                // High priority: non-mana abilities that create mana, such as
+                // Nykthos-style choose-color abilities implemented in a sub-DB.
+                score += 150;
+            }
+        }
+
+        if (land.isCreature() && !hasAnimationAbility) {
+            // Medium priority: already-animated manlands and lands that are
+            // naturally creatures. Manlands with their own animation ability
+            // were already scored above; this catches external animation.
+            score += isAttackingAi(land, ai) ? 140 : 55;
+        }
+
+        if (isKnownDangerousLand(land)) {
+            // High priority: oddball lands whose danger is hard to infer from
+            // their generic ability shape, like Dark Depths or Glacial Chasm.
+            score += 170;
+        }
+
+        // Medium priority: static/triggered utility such as Reliquary Tower,
+        // Valakut-style triggers, or prevention/attack restrictions.
+        score += Math.min(90, land.getStaticAbilities().size() * 45);
+        score += Math.min(90, land.getTriggers().size() * 45);
+
+        return score;
+    }
+
+    private static int getIntrinsicNetMana(final Card land) {
+        int maxProduced = 0;
+        for (SpellAbility mana : land.getManaAbilities()) {
+            mana.setActivatingPlayer(land.getController());
+            int manaCost = mana.getPayCosts().getTotalMana().getCMC();
+            maxProduced = Math.max(maxProduced, mana.amountOfManaGenerated(false) - manaCost);
+        }
+        return maxProduced;
+    }
+
+    private static boolean hasManaBoostingText(final Card aura) {
+        for (String value : aura.getSVars().values()) {
+            if (value.contains("DB$ Mana") || value.contains("TapsForMana") || value.contains("ManaReflected")) {
+                return true;
+            }
+        }
+        for (Trigger trigger : aura.getTriggers()) {
+            if (TriggerType.TapsForMana.equals(trigger.getMode())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean hasRemovedAiPermanent(final Player ai, final Card card) {
+        for (Card exiled : card.getExiledCards()) {
+            if (exiled.getOwner().equals(ai) && exiled.isPermanent()) {
+                return true;
+            }
+        }
+        for (Object remembered : card.getRemembered()) {
+            if (remembered instanceof Card rememberedCard
+                    && rememberedCard.getOwner().equals(ai)
+                    && rememberedCard.isPermanent()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isLandDestructionAbility(final SpellAbility ability) {
+        if (ability.getApi() != ApiType.Destroy && ability.getApi() != ApiType.ChangeZone) {
+            return false;
+        }
+        String valid = ability.getParamOrDefault("ValidTgts", "");
+        if (valid.isEmpty()) {
+            valid = ability.getParamOrDefault("ValidCards", "");
+        }
+        return valid.contains("Land");
+    }
+
+    private static boolean isHomewardPathAbility(final SpellAbility ability) {
+        return ability.getApi() == ApiType.GainControlVariant
+                && "GainControlOwns".equals(ability.getParam("AILogic"));
+    }
+
+    private static boolean aiControlsStolenCreature(final Player ai) {
+        for (Card creature : ai.getCreaturesInPlay()) {
+            if (!creature.getOwner().equals(ai)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean hasManaSubAbility(final SpellAbility ability) {
+        SpellAbility sub = ability.getSubAbility();
+        while (sub != null) {
+            if (sub.getApi() == ApiType.Mana) {
+                return true;
+            }
+            sub = sub.getSubAbility();
+        }
+        return false;
+    }
+
+    private static boolean isLandAnimationAbility(final SpellAbility ability) {
+        if (ability.getApi() == ApiType.Animate) {
+            return true;
+        }
+        String description = ability.getDescription();
+        return description != null && description.contains("becomes") && description.contains("creature");
+    }
+
+    private static boolean isAttackingAi(final Card land, final Player ai) {
+        Combat combat = land.getGame() == null ? null : land.getGame().getCombat();
+        return combat != null && combat.isAttacking(land, ai);
+    }
+
+    private static boolean aiHasHighPriorityLand(final Player ai) {
+        for (Card aiLand : ai.getLandsInPlay()) {
+            if (evaluateLandRemovalPriority(ai, aiLand, null, false) >= 150) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isKnownDangerousLand(final Card land) {
+        for (String landName : DANGEROUS_LANDS_TO_REMOVE) {
+            if (land.getName().equals(landName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
