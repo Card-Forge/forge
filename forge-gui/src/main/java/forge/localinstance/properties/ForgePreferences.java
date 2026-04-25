@@ -237,6 +237,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         LEGACY_ORDER_COMBATANTS("false"),
 
         DEV_MODE_ENABLED ("false"),
+        DEV_SHOW_OWNER_IN_CARD_DETAIL ("false"),
         DEV_WORKSHOP_SYNTAX ("false"),
         DEV_LOG_ENTRY_TYPE (GameLogVerbosity.MEDIUM.name()),
         DEV_LOG_CUSTOM_TYPES (defaultCustomLogTypes()),

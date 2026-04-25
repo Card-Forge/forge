@@ -5567,7 +5567,26 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final boolean isPermanent() {
-        return !isImmutable() && (isInPlay() || getType().isPermanent());
+        if (isImmutable()) {
+            return false;
+        }
+        if (isInPlay()) {
+            return true;
+        }
+        // Face-down uses a generic 2/2 creature type; use original printed types for "permanent card"
+        // (matches SetStateEffect turn-face-up checks and ValidTgts$ Permanent outside the battlefield).
+        if (isFaceDown()) {
+            if (hasMergedCard()) {
+                for (final Card c : getMergedCards()) {
+                    if (!c.getState(CardStateName.Original).getType().isPermanent()) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            return getState(CardStateName.Original).getType().isPermanent();
+        }
+        return getType().isPermanent();
     }
 
     public final boolean isSpell() {

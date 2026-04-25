@@ -86,6 +86,7 @@ public enum CSubmenuPreferences implements ICDoc {
             final boolean toggle = view.getCbDevMode().isSelected();
             prefs.setPref(FPref.DEV_MODE_ENABLED, String.valueOf(toggle));
             ForgePreferences.DEV_MODE = toggle;
+            view.getCbDevShowOwnerInCardDetail().setEnabled(toggle);
             prefs.save();
         });
 
@@ -148,6 +149,7 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbUseSentry(), FPref.USE_SENTRY));
         lstControls.add(Pair.of(view.getCbCheckSnapshot(), FPref.CHECK_SNAPSHOT_AT_STARTUP));
         lstControls.add(Pair.of(view.getCbPauseWhileMinimized(), FPref.UI_PAUSE_WHILE_MINIMIZED));
+        lstControls.add(Pair.of(view.getCbDevShowOwnerInCardDetail(), FPref.DEV_SHOW_OWNER_IN_CARD_DETAIL));
         lstControls.add(Pair.of(view.getCbWorkshopSyntax(), FPref.DEV_WORKSHOP_SYNTAX));
 
         lstControls.add(Pair.of(view.getCbCompactPrompt(), FPref.UI_COMPACT_PROMPT));
@@ -249,6 +251,7 @@ public enum CSubmenuPreferences implements ICDoc {
 
         setPlayerNameButtonText();
         view.getCbDevMode().setSelected(ForgePreferences.DEV_MODE);
+        view.getCbDevShowOwnerInCardDetail().setEnabled(ForgePreferences.DEV_MODE);
         view.getCbEnableMusic().setSelected(prefs.getPrefBoolean(FPref.UI_ENABLE_MUSIC));
         view.getCbUseExperimentalNetworkStream().setSelected(prefs.getPrefBoolean(FPref.UI_NETPLAY_COMPAT));
 

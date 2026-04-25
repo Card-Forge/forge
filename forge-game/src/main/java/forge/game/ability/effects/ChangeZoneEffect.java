@@ -1626,10 +1626,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
     }
 
     private static Player resolveHandRecipientForDanDan(final SpellAbility sa, final Player activator, final Card card) {
-        final GameRules rules = activator != null ? activator.getGame().getRules() : null;
-        if (rules != null && rules.isDanDan() && !sa.hasParam("GainControl")) {
-            return activator;
-        }
         if (shouldUseDanDanSelfRecipientHeuristic(sa)) {
             return activator;
         }

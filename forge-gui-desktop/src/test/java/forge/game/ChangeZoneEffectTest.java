@@ -13,9 +13,34 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
+import java.lang.reflect.Method;
 import java.util.List;
 
 public class ChangeZoneEffectTest extends AITest {
+
+    @Test
+    public void faceDownInstantInExileIsNotPermanent() {
+        final Game game = initAndCreateGame();
+        final Player p = game.getPlayers().get(0);
+        final Card bolt = addCardToZone("Lightning Bolt", p, ZoneType.Exile);
+        bolt.turnFaceDown(true);
+        AssertJUnit.assertTrue("Precondition: instant should be face down in exile", bolt.isFaceDown());
+        AssertJUnit.assertFalse(
+                "Face-down instant in exile must not count as permanent (ValidTgts$ Permanent uses isPermanent)",
+                bolt.isPermanent());
+    }
+
+    @Test
+    public void faceDownCreatureInExileIsPermanent() {
+        final Game game = initAndCreateGame();
+        final Player p = game.getPlayers().get(0);
+        final Card bears = addCardToZone("Grizzly Bears", p, ZoneType.Exile);
+        bears.turnFaceDown(true);
+        AssertJUnit.assertTrue("Precondition: creature should be face down in exile", bears.isFaceDown());
+        AssertJUnit.assertTrue(
+                "Face-down creature card in exile should still count as permanent",
+                bears.isPermanent());
+    }
 
     @Test
     public void mistyRainforestPutsFetchedLandOnActivatingPlayersBattlefield() {
@@ -158,5 +183,45 @@ public class ChangeZoneEffectTest extends AITest {
         AssertJUnit.assertFalse("Moved card should not be in non-activating player's hand", p1.getZone(ZoneType.Hand).contains(moved));
         AssertJUnit.assertEquals("DanDan hand routing should set owner to hand recipient", p2, moved.getOwner());
         AssertJUnit.assertEquals("DanDan hand routing should set controller to hand recipient", p2, moved.getController());
+    }
+
+    @Test
+    public void dandanBoomerangStyleBattlefieldToHandUsesOwnerHand() throws Exception {
+        initAndCreateGame();
+
+        final Deck firstDeck = new Deck("DanDan P1");
+        final Deck secondDeck = new Deck("DanDan P2");
+        final List<RegisteredPlayer> players = Lists.newArrayList();
+        players.add(new RegisteredPlayer(firstDeck).setPlayer(new LobbyPlayerAi("p1", null)));
+        players.add(new RegisteredPlayer(secondDeck).setPlayer(new LobbyPlayerAi("p2", null)));
+
+        final Match match = new Match(new GameRules(GameType.DanDan), players, "DanDan Boomerang owner hand routing");
+        final Game game = match.createGame();
+        match.startGame(game);
+
+        final Player p1 = game.getRegisteredPlayers().get(0);
+        final Player p2 = game.getRegisteredPlayers().get(1);
+
+        final Card target = addCardToZone("Island", p1, ZoneType.Battlefield);
+        target.setOwner(p1);
+        target.setController(p1, 0);
+        final Card boomerang = addCardToZone("Boomerang", p2, ZoneType.Hand);
+        SpellAbility boomerangSa = null;
+        for (final SpellAbility sa : boomerang.getSpellAbilities()) {
+            if (sa.getApi() == ApiType.ChangeZone) {
+                boomerangSa = sa;
+                break;
+            }
+        }
+        AssertJUnit.assertNotNull("Boomerang should provide ChangeZone spell ability", boomerangSa);
+        boomerangSa.setActivatingPlayer(p2);
+
+        final Method resolver = Class.forName("forge.game.ability.effects.ChangeZoneEffect")
+                .getDeclaredMethod("resolveHandRecipientForDanDan", SpellAbility.class, Player.class, Card.class);
+        resolver.setAccessible(true);
+        final Player recipient = (Player) resolver.invoke(null, boomerangSa, p2, target);
+
+        AssertJUnit.assertEquals("DanDan Boomerang should resolve owner-hand recipient, not activating player hand",
+                p1, recipient);
     }
 }

@@ -77,6 +77,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbOrderCombatants = new OptionsCheckBox(localizer.getMessage("cbOrderCombatants"));
     private final JCheckBox cbManaLostPrompt = new OptionsCheckBox(localizer.getMessage("cbManaLostPrompt"));
     private final JCheckBox cbDevMode = new OptionsCheckBox(localizer.getMessage("cbDevMode"));
+    private final JCheckBox cbDevShowOwnerInCardDetail = new OptionsCheckBox(localizer.getMessage("cbDevShowOwnerInCardDetail"));
     private final JCheckBox cbLoadCardsLazily = new OptionsCheckBox(localizer.getMessage("cbLoadCardsLazily"));
     private final JCheckBox cbLoadArchivedFormats = new OptionsCheckBox(localizer.getMessage("cbLoadArchivedFormats"));
     private final JCheckBox cbWorkshopSyntax = new OptionsCheckBox(localizer.getMessage("cbWorkshopSyntax"));
@@ -354,6 +355,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbDevMode, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlDevMode")), descriptionConstraints);
+
+        pnlPrefs.add(cbDevShowOwnerInCardDetail, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlDevShowOwnerInCardDetail")), descriptionConstraints);
 
         pnlPrefs.add(cbWorkshopSyntax, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlWorkshopSyntax")), descriptionConstraints);
@@ -818,6 +822,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbDevMode() {
         return cbDevMode;
+    }
+
+    public JCheckBox getCbDevShowOwnerInCardDetail() {
+        return cbDevShowOwnerInCardDetail;
     }
 
     /** @return {@link javax.swing.JCheckBox} */
