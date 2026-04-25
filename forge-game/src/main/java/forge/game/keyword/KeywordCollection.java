@@ -9,8 +9,13 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
 
 import forge.game.card.Card;
+import forge.game.card.ICardTraitChanges;
+import forge.game.replacement.ReplacementEffect;
+import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbility;
+import forge.game.trigger.Trigger;
 
-public class KeywordCollection implements Iterable<KeywordInterface> {
+public class KeywordCollection implements ICardTraitChanges, Iterable<KeywordInterface> {
     // don't use enumKeys it causes a slow down
     private final Multimap<Keyword, KeywordInterface> map = MultimapBuilder.hashKeys()
             .linkedHashSetValues().build();
@@ -169,6 +174,43 @@ public class KeywordCollection implements Iterable<KeywordInterface> {
 
         sb.append(map.values());
         return sb.toString();
+    }
+
+    @Override
+    public List<SpellAbility> applySpellAbility(List<SpellAbility> list) {
+        for (KeywordInterface k : getValues()) {
+            k.applySpellAbility(list);
+        }
+        return list;
+    }
+    @Override
+    public List<Trigger> applyTrigger(List<Trigger> list) {
+        for (KeywordInterface k : getValues()) {
+            k.applyTrigger(list);
+        }
+        return list;
+    }
+    @Override
+    public List<ReplacementEffect> applyReplacementEffect(List<ReplacementEffect> list) {
+        for (KeywordInterface k : getValues()) {
+            k.applyReplacementEffect(list);
+        }
+        return list;
+    }
+    @Override
+    public List<StaticAbility> applyStaticAbility(List<StaticAbility> list) {
+        for (KeywordInterface k : getValues()) {
+            k.applyStaticAbility(list);
+        }
+        return list;
+    }
+    @Override
+    public KeywordCollection copy(Card host, boolean lki) {
+        KeywordCollection result = new KeywordCollection();
+        for (KeywordInterface ki : getValues()) {
+            result.insert(ki.copy(host, lki));
+        }
+        return result;
     }
 
     public void applyChanges(Iterable<IKeywordsChange> changes) {
