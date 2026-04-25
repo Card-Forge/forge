@@ -316,19 +316,6 @@ public class ComputerUtilCard {
         // Tolarian Academy, Serra's Sanctum, Cabal Coffers, etc.
         int score = Math.max(0, landEvaluator.apply(land) - 100);
 
-        for (Card aura : land.getEnchantedBy()) {
-            // High priority: an opponent's land enhanced by Wild Growth,
-            // Utopia Sprawl, Overgrowth, or similar mana-boosting Auras.
-            if (aura.getController().equals(land.getController()) && hasManaBoostingText(aura)) {
-                score += 160;
-            }
-            // High priority: remove the land hosting an On Thin Ice-style Aura
-            // when that Aura has removed one of this AI's permanents.
-            if (hasRemovedAiPermanent(ai, aura)) {
-                score += 180;
-            }
-        }
-
         boolean hasAnimationAbility = false;
         for (SpellAbility ability : land.getNonManaAbilities()) {
             if (ability.isLandAbility()) {
@@ -386,6 +373,19 @@ public class ComputerUtilCard {
             // Chasm. Do not add here, because some of these also get a good
             // baseline score from LandEvaluator.
             score = Math.max(score, 170);
+        }
+
+        for (Card aura : land.getEnchantedBy()) {
+            // High priority: an opponent's land enhanced by Wild Growth,
+            // Utopia Sprawl, Overgrowth, or similar mana-boosting Auras.
+            if (aura.getController().equals(land.getController()) && hasManaBoostingText(aura)) {
+                score += 160;
+            }
+            // High priority: remove the land hosting an On Thin Ice-style Aura
+            // when that Aura has removed one of this AI's permanents.
+            if (hasRemovedAiPermanent(ai, aura)) {
+                score += 180;
+            }
         }
 
         return score;
