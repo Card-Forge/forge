@@ -210,6 +210,10 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
             .getMessage("lblUseFormatFilter"), false);
     private final FComboBox<GameFormat> formatDropdown = new FComboBox<>();
 
+    private JPanel optionsPanel;
+    private JPanel closedOptsPanel;
+    private boolean formatAutoSelected = false;
+
     private final DeckImportController controller;
     private final CDeckEditor<TModel> host;
 
@@ -301,7 +305,7 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
 
         // == A. (Closed) Option Panel
         // This component will be used as a Placeholder panel to simulate Show/Hide animation
-        JPanel closedOptsPanel = new JPanel(new MigLayout("insets 10, gap 5, left, w 100%"));
+        this.closedOptsPanel = new JPanel(new MigLayout("insets 10, gap 5, left, w 100%"));
         closedOptsPanel.setVisible(true);
         closedOptsPanel.setOpaque(false);
         final TitledBorder showOptsBorder = new TitledBorder(BorderFactory.createEtchedBorder(),
@@ -311,7 +315,7 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
         closedOptsPanel.add(new JSeparator(JSeparator.HORIZONTAL), "w 100%, hidemode 2");
 
         // == B. (Actual) Options Panel
-        JPanel optionsPanel = new JPanel(new MigLayout("insets 10, gap 5, left, h 150!"));
+        this.optionsPanel = new JPanel(new MigLayout("insets 10, gap 5, left, h 150!"));
         final TitledBorder border = new TitledBorder(BorderFactory.createEtchedBorder(),
                 String.format("\u25BC %s", Localizer.getInstance().getMessage("lblHideOptions")));
         border.setTitleColor(foreColor.getColor());
@@ -522,7 +526,16 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
                 else
                     deck.setName(currentDeckName);
             }
-            host.getDeckController().loadDeck(deck, controller.getImportBehavior() != DeckImportController.ImportBehavior.MERGE);
+            // Route to the editor implied by the selected legality format; unticking the format
+            // checkbox bypasses this and loads into the host editor as before
+            final GameType targetGameType = getSelectedFormatGameType();
+            if (targetGameType != null && targetGameType != host.getGameType()) {
+                CDeckEditorUI.SINGLETON_INSTANCE.changeFormat(targetGameType);
+                CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController()
+                        .getDeckController().loadDeck(deck, true);
+            } else {
+                host.getDeckController().loadDeck(deck, controller.getImportBehavior() != DeckImportController.ImportBehavior.MERGE);
+            }
             processWindowEvent(new WindowEvent(DeckImport.this, WindowEvent.WINDOW_CLOSING));
         });
 
@@ -662,6 +675,48 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
             tokens = controller.optimiseCardArtInTokens();
         displayTokens(tokens);
         updateSummaries(tokens);
+
+        // Fires once per detection so user overrides aren't clobbered on every keystroke
+        if (controller.wasCommanderAutoDetected() && controller.hasNoDefaultGameFormat()
+                && !formatAutoSelected) {
+            formatAutoSelected = true;
+            selectCommanderFormat();
+        } else if (!controller.wasCommanderAutoDetected()) {
+            formatAutoSelected = false;
+        }
+    }
+
+    private void selectCommanderFormat() {
+        for (int i = 0; i < formatDropdown.getItemCount(); i++) {
+            GameFormat format = formatDropdown.getItemAt(i);
+            if (format != null && "Commander".equalsIgnoreCase(format.getName())) {
+                formatDropdown.setSelectedIndex(i);
+                break;
+            }
+        }
+        formatSelectionCheck.setSelected(true);
+        formatDropdown.setEnabled(true);
+        GameFormat selected = formatDropdown.getSelectedItem();
+        if (selected != null) {
+            controller.setCurrentGameFormat(selected);
+        }
+        if (optionsPanel != null && closedOptsPanel != null) {
+            optionsPanel.setVisible(true);
+            closedOptsPanel.setVisible(false);
+        }
+    }
+
+    /** Returns null only when the format checkbox is unticked, signalling no routing should happen */
+    private GameType getSelectedFormatGameType() {
+        if (!formatSelectionCheck.isSelected()) {
+            return null;
+        }
+        GameFormat selected = formatDropdown.getSelectedItem();
+        if (selected == null) {
+            return null;
+        }
+        GameType gt = GameType.smartValueOf(selected.getName());
+        return (gt != null && gt.getDeckFormat().hasCommander()) ? gt : GameType.Constructed;
     }
 
     private void displayTokens(final List<DeckRecognizer.Token> tokens) {
