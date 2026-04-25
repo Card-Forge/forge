@@ -309,16 +309,12 @@ public class ComputerUtilCard {
             return 0;
         }
 
-        int score = land.isBasicLand() ? 5 : 10;
-
-        // High priority: lands that inherently generate extra mana, such as
-        // Temple of the False God, Nykthos, Shrine to Nyx, Lost Vale, and Three
-        // Tree City. Use unmultipled mana so global effects like Mana Flare do
-        // not make every basic land look like a Strip Mine target.
-        final int netMana = getIntrinsicNetMana(land);
-        if (netMana >= 2) {
-            score += 180 + 45 * (netMana - 2);
-        }
+        // Start with the existing land valuation and convert it into a
+        // removal priority baseline. A normal one-mana land is worth about 100
+        // in LandEvaluator, so subtract that off to keep basics and simple
+        // MDFC lands low while preserving high scores for Gaea's Cradle,
+        // Tolarian Academy, Serra's Sanctum, Cabal Coffers, etc.
+        int score = Math.max(0, landEvaluator.apply(land) - 100);
 
         for (Card aura : land.getEnchantedBy()) {
             // High priority: an opponent's land enhanced by Wild Growth,
@@ -353,7 +349,9 @@ public class ComputerUtilCard {
                 // stolen creatures that it could lose, but otherwise it is
                 // mostly just a colorless land with a narrow political button.
                 if (aiControlsStolenCreature(ai)) {
-                    score += 90;
+                    score += 100;
+                } else {
+                    score = Math.max(0, score - 50);
                 }
                 continue;
             }
@@ -365,20 +363,13 @@ public class ComputerUtilCard {
             } else if (cost != null && cost.hasSpecificCostType(CostSacrifice.class)) {
                 // Medium priority: one-shot utility lands such as Scavenger
                 // Grounds or Blast Zone are relevant, but usually not urgent.
-                score += 45;
-            } else if (cost != null && cost.hasTapCost()) {
-                // Medium priority: repeatable utility lands such as Bonders'
-                // Enclave, Kessig Wolf Run, Geode Grotto, or Oran-Rief.
-                score += 55;
-            } else {
-                // Medium-low priority: utility with no tap cost, including
-                // lands that alter play patterns without producing extra mana.
-                score += 45;
+                score += 40;
             }
             if (ability.getApi() == ApiType.Mana || hasManaSubAbility(ability)) {
-                // High priority: non-mana abilities that create mana, such as
-                // Nykthos-style choose-color abilities implemented in a sub-DB.
-                score += 150;
+                // High priority: non-mana root abilities that create mana,
+                // such as Nykthos-style choose-color abilities implemented in
+                // a sub-DB. LandEvaluator sees these as utility, not big mana.
+                score += 100;
             }
         }
 
@@ -390,27 +381,14 @@ public class ComputerUtilCard {
         }
 
         if (isKnownDangerousLand(land)) {
-            // High priority: oddball lands whose danger is hard to infer from
-            // their generic ability shape, like Dark Depths or Glacial Chasm.
-            score += 170;
+            // High priority floor: oddball lands whose danger is hard to infer
+            // from their generic ability shape, like Dark Depths or Glacial
+            // Chasm. Do not add here, because some of these also get a good
+            // baseline score from LandEvaluator.
+            score = Math.max(score, 170);
         }
-
-        // Medium priority: static/triggered utility such as Reliquary Tower,
-        // Valakut-style triggers, or prevention/attack restrictions.
-        score += Math.min(90, land.getStaticAbilities().size() * 45);
-        score += Math.min(90, land.getTriggers().size() * 45);
 
         return score;
-    }
-
-    private static int getIntrinsicNetMana(final Card land) {
-        int maxProduced = 0;
-        for (SpellAbility mana : land.getManaAbilities()) {
-            mana.setActivatingPlayer(land.getController());
-            int manaCost = mana.getPayCosts().getTotalMana().getCMC();
-            maxProduced = Math.max(maxProduced, mana.amountOfManaGenerated(false) - manaCost);
-        }
-        return maxProduced;
     }
 
     private static boolean hasManaBoostingText(final Card aura) {
