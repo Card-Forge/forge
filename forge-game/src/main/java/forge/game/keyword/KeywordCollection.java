@@ -11,8 +11,6 @@ import com.google.common.collect.MultimapBuilder;
 import forge.game.card.Card;
 
 public class KeywordCollection implements Iterable<KeywordInterface> {
-
-    private transient KeywordCollectionView view;
     // don't use enumKeys it causes a slow down
     private final Multimap<Keyword, KeywordInterface> map = MultimapBuilder.hashKeys()
             .linkedHashSetValues().build();
@@ -173,50 +171,9 @@ public class KeywordCollection implements Iterable<KeywordInterface> {
         return sb.toString();
     }
 
-    public KeywordCollectionView getView() {
-        if (view == null) {
-            view = new KeywordCollectionView();
-        }
-        return view;
-    }
-
     public void applyChanges(Iterable<IKeywordsChange> changes) {
         for (final IKeywordsChange ck : changes) {
             ck.applyKeywords(this);
-        }
-    }
-
-    public class KeywordCollectionView implements Iterable<KeywordInterface> {
-
-        protected KeywordCollectionView() {
-        }
-
-        public boolean isEmpty() {
-            return KeywordCollection.this.isEmpty();
-        }
-
-        public int size() {
-            return KeywordCollection.this.size();
-        }
-
-        public int getAmount(String keyword) {
-            return KeywordCollection.this.getAmount(keyword);
-        }
-
-        public boolean contains(Keyword keyword) {
-            return KeywordCollection.this.contains(keyword);
-        }
-        public boolean contains(String keyword) {
-            return KeywordCollection.this.contains(keyword);
-        }
-
-        public List<String> asStringList() {
-            return KeywordCollection.this.asStringList();
-        }
-
-        @Override
-        public Iterator<KeywordInterface> iterator() {
-            return KeywordCollection.this.iterator();
         }
     }
 

@@ -15,7 +15,6 @@ import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.card.CounterType;
 import forge.game.combat.CombatView;
-import forge.game.keyword.KeywordCollection.KeywordCollectionView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
 import forge.item.IPaperCard;
@@ -293,12 +292,6 @@ public class TrackableTypes {
     public static final TrackableType<Map<CounterType, Integer>> CounterMapType = new TrackableType<Map<CounterType, Integer>>() {
         @Override
         public Map<CounterType, Integer> getDefaultValue() {
-            return null;
-        }
-    };
-    public static final TrackableType<KeywordCollectionView> KeywordCollectionViewType = new TrackableType<KeywordCollectionView>() {
-        @Override
-        protected KeywordCollectionView getDefaultValue() {
             return null;
         }
     };
