@@ -111,13 +111,12 @@ public class YieldController {
 
     public boolean mayAutoPass(PlayerView player) {
         player = TrackableTypes.PlayerViewType.lookup(player);
-        if (autoPassUntilEndOfTurn.contains(player)) {
+        // Yield modes self-clear when their stop condition fires (end step / your turn / etc).
+        // Must run before isAutoPassingNoActions or that short-circuits and the mode never clears.
+        if (shouldAutoYieldForPlayer(player)) {
             return true;
         }
-        if (isAutoPassingNoActions(player)) {
-            return true;
-        }
-        return shouldAutoYieldForPlayer(player);
+        return isAutoPassingNoActions(player);
     }
 
     /** Persistent preference toggle (YIELD_AUTO_PASS_NO_ACTIONS), not a one-shot yield mode. */
