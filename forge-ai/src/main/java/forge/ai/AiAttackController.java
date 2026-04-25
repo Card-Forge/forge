@@ -30,6 +30,7 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.combat.GlobalAttackRestrictions;
 import forge.game.cost.Cost;
+import forge.game.cost.CostTap;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
@@ -204,14 +205,20 @@ public class AiAttackController {
     public static Player choosePreferredDefenderPlayer(Player ai, boolean forCombatDmg) {
         Player defender = ai.getWeakestOpponent(); //Concentrate on opponent within easy kill range
 
-        // TODO for multiplayer combat avoid players with cantLose or (if not playing infect) cantLoseForZeroOrLessLife and !canLoseLife
-
+        List<Player> opps = Lists.newArrayList(ai.getOpponents());
+        if (opps.size() > 1) {
+            for (Player p : ai.getOpponents()) {
+                if (p.cantLose()) {
+                    // TODO: If not playing infect, add || p.cantLoseForZeroOrLessLife() || !p.canLoseLife())
+                    opps.remove(p);
+                }
+            }
+        }
         if (defender.getLife() > 8) {
-            // TODO connect with evaluateBoardPosition and only fall back to random when no player is the biggest threat by a fair margin
-
-            List<Player> opps = Lists.newArrayList(ai.getOpponents());
+            // More likely prevent spiraling threat
+            opps.add(ComputerUtil.evaluateBoardPosition(opps));
             if (forCombatDmg) {
-                for (Player p : ai.getOpponents()) {
+                for (Player p : opps) {
                     if (p.isMonarch() && ai.canBecomeMonarch()) {
                         // just increase the odds for now instead of being fully predictable
                         // as it could lead to other too complex factors giving this reasoning negative impact
@@ -972,13 +979,14 @@ public class AiAttackController {
                 System.out.println("Assault");
             List<Card> left = new ArrayList<>(attackersLeft);
             CardLists.sortByPowerDesc(left);
+            boolean bLifeInDanger = ComputerUtil.aiLifeInDanger(ai, false, 0);
             for (Card attacker : left) {
                 if (attackMax != null && combat.getAttackers().size() >= attackMax)
                     return aiAggression;
 
-                // TODO if lifeInDanger use chance to hold back some (especially in multiplayer)
                 if (canAttackWrapper(attacker, defender) && isEffectiveAttacker(ai, attacker, combat, defender)) {
-                    combat.addAttacker(attacker, defender);
+                    // hold back some (especially in multiplayer)
+                    if (!bLifeInDanger || MyRandom.percentTrue((int)(chanceToAttackToTrade / ai.getOpponents().size()))) combat.addAttacker(attacker, defender);
                 }
             }
             // no more creatures to attack
@@ -1070,11 +1078,59 @@ public class AiAttackController {
         // get the potential damage and strength of the AI forces
         final List<Card> candidateAttackers = new ArrayList<>();
         int candidateUnblockedDamage = 0;
+        int exaltedCount = countExaltedBonus(ai);
+        // Dethrone bonus
+        int mostLife = ai.getLife();
+        Player mostLifePlayer = ai;
+        for (Player p : ai.getOpponents()) {
+            int life = p.getLife();
+            if (life > mostLife) {
+                mostLife = life;
+                mostLifePlayer = p;
+            }
+        }
+        if (defendingOpponent.getLife() >= mostLife) mostLifePlayer = defendingOpponent;
+
         for (final Card pCard : myList) {
             // if the creature can attack then it's a potential attacker this
             // turn, assume summoning sickness creatures will be able to
-            // TODO: Account for triggered power boosts.
-            if (ComputerUtilCombat.canAttackNextTurn(pCard) && (pCard.getNetCombatDamage() > 0 || "TRUE".equals(pCard.getSVar("HasAttackEffect")))) {
+
+            // TODO: Account for more triggered power boosts, from e.g. Gahiji, Honored One, and
+            // effects like PuPu UFO. Toughness as power is already handles in getNetCombatDamage.
+
+            // Firebreathing etc.
+            boolean canBoostPower = false;
+            for (SpellAbility nma : pCard.getNonManaAbilities()) {
+                if (nma.getApi() != null && Set.of(
+                        ApiType.Pump,
+                        ApiType.PumpAll,
+                        ApiType.PutCounterAll
+                        ).contains(nma.getApi())) {
+                    if (!nma.getParamOrDefault("NumAtt", "").contains("+")) continue;
+                    final Cost cost = nma.getPayCosts();
+                    if (cost.hasSpecificCostType(CostTap.class) && !pCard.hasKeyword(Keyword.VIGILANCE)) {
+                        continue;
+                    }
+                    canBoostPower = cost.canPay(nma, ai, true);
+                    if (canBoostPower) {
+                        break;
+                    }
+                }
+            }
+
+            if (ComputerUtilCombat.canAttackNextTurn(pCard)
+                && (pCard.getNetCombatDamage() > 0
+                    || canBoostPower
+                    || "TRUE".equals(pCard.getSVar("HasAttackEffect"))
+                    || pCard.hasKeyword(Keyword.ANNIHILATOR)
+                    || pCard.hasKeyword(Keyword.FIREBENDING)
+                    || pCard.hasKeyword(Keyword.FRENZY)
+                    || pCard.hasKeyword(Keyword.MELEE)
+                    || pCard.hasKeyword(Keyword.MYRIAD)
+                    || pCard.hasKeyword(Keyword.PROVOKE)
+                    || (computerForces > 0 && pCard.hasKeyword(Keyword.BATTLE_CRY) || pCard.hasKeyword(Keyword.TRAINING))
+                    || (pCard.hasKeyword(Keyword.DETHRONE) && defendingOpponent == mostLifePlayer)
+                    || (computerForces == 0 && exaltedCount > 0))) {
                 candidateAttackers.add(pCard);
                 candidateUnblockedDamage += ComputerUtilCombat.damageIfUnblocked(pCard, defendingOpponent, null, false);
                 computerForces++;
