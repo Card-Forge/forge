@@ -82,16 +82,7 @@ public class ComputerUtilCard {
             "Valakut, the Molten Pinnacle",
             "Maze of Ith",
             "Nykthos, Shrine to Nyx",
-            "Three Tree City",
-            "Gaea's Cradle",
-            "Itlimoc, Cradle of the Sun",
-            "Tolarian Academy",
-            "Vault of Catlacan",
-            "Serra's Sanctum",
-            "Cabal Coffers",
-            "Cabal Stronghold",
-            "Urza's Workshop",
-            "Jurassic Park"
+            "Three Tree City"
     );
 
     public static Card getMostExpensivePermanentAI(final CardCollectionView list, final SpellAbility spell, final boolean targeted) {
