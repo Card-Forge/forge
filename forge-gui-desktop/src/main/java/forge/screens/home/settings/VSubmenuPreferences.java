@@ -76,6 +76,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbManaBurn = new OptionsCheckBox(localizer.getMessage("cbManaBurn"));
     private final JCheckBox cbOrderCombatants = new OptionsCheckBox(localizer.getMessage("cbOrderCombatants"));
     private final JCheckBox cbManaLostPrompt = new OptionsCheckBox(localizer.getMessage("cbManaLostPrompt"));
+    private final JCheckBox cbAutoCallCoinFlip = new OptionsCheckBox(localizer.getMessage("cbAutoCallCoinFlip"));
     private final JCheckBox cbDevMode = new OptionsCheckBox(localizer.getMessage("cbDevMode"));
     private final JCheckBox cbLoadCardsLazily = new OptionsCheckBox(localizer.getMessage("cbLoadCardsLazily"));
     private final JCheckBox cbLoadArchivedFormats = new OptionsCheckBox(localizer.getMessage("cbLoadArchivedFormats"));
@@ -244,6 +245,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbManaLostPrompt, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlManaLostPrompt")), descriptionConstraints);
+
+        pnlPrefs.add(cbAutoCallCoinFlip, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlAutoCallCoinFlip")), descriptionConstraints);
 
         pnlPrefs.add(cbpStackAdditions, comboBoxConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlpStackAdditions")), descriptionConstraints);
@@ -1015,6 +1019,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     public final JCheckBox getCbManaLostPrompt() {
     	return cbManaLostPrompt;
+    }
+
+    public final JCheckBox getCbAutoCallCoinFlip() {
+        return cbAutoCallCoinFlip;
     }
 
     public final JCheckBox getCbDetailedPaymentDesc() {
