@@ -651,13 +651,28 @@ public class GameAction {
             copied.clearControllers();
         }
 
+        if (toBattlefield) {
+            final GameRules dandanEtbRules = game.getRules();
+            if (dandanEtbRules != null && dandanEtbRules.isDanDan() && copied.isPermanent()) {
+                // DanDan format: whoever put the permanent on the battlefield becomes its owner
+                // (shared-deck / shared zones; not CR-accurate for paper Magic).
+                final Player newOwner = (cause != null && cause.getActivatingPlayer() != null)
+                        ? cause.getActivatingPlayer()
+                        : zoneTo.getPlayer();
+                if (copied.getOwner() != newOwner) {
+                    copied.setOwner(newOwner);
+                }
+                if (copied.getController() != newOwner) {
+                    copied.setController(newOwner, game.getNextTimestamp());
+                }
+            }
+        }
+
         if (zoneTo.is(ZoneType.Hand)) {
             final GameRules rules = game.getRules();
             if (rules != null && rules.isDanDan()) {
-                Player handPlayer = zoneTo.getPlayer();
-                if (cause != null && cause.getActivatingPlayer() != null && zoneFrom.is(ZoneType.Library) && !cause.hasParam("GainControl")) {
-                    handPlayer = cause.getActivatingPlayer();
-                }
+                // DanDan: owner is always the hand recipient (not cause.getActivatingPlayer()).
+                final Player handPlayer = zoneTo.getPlayer();
                 if (copied.getOwner() != handPlayer) {
                     copied.setOwner(handPlayer);
                 }

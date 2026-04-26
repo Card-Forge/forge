@@ -10,6 +10,7 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
@@ -183,6 +184,77 @@ public class ChangeZoneEffectTest extends AITest {
         AssertJUnit.assertFalse("Moved card should not be in non-activating player's hand", p1.getZone(ZoneType.Hand).contains(moved));
         AssertJUnit.assertEquals("DanDan hand routing should set owner to hand recipient", p2, moved.getOwner());
         AssertJUnit.assertEquals("DanDan hand routing should set controller to hand recipient", p2, moved.getController());
+    }
+
+    /**
+     * When a non-null cause has a different activator than the hand recipient, owner must still
+     * be the hand recipient (regression: old code used activator, breaking TargetedOwner for
+     * cards P2 drew and cast, e.g. Lost in Space).
+     */
+    @Test
+    public void dandanLibraryToHandWithMismatchedCauseActivatorSetsOwnerToHandRecipient() {
+        initAndCreateGame();
+
+        final Deck firstDeck = new Deck("DanDan P1");
+        final Deck secondDeck = new Deck("DanDan P2");
+        final List<RegisteredPlayer> players = Lists.newArrayList();
+        players.add(new RegisteredPlayer(firstDeck).setPlayer(new LobbyPlayerAi("p1", null)));
+        players.add(new RegisteredPlayer(secondDeck).setPlayer(new LobbyPlayerAi("p2", null)));
+
+        final Match match = new Match(new GameRules(GameType.DanDan), players, "DanDan hand owner vs cause activator");
+        final Game game = match.createGame();
+        match.startGame(game);
+
+        final Player p1 = game.getRegisteredPlayers().get(0);
+        final Player p2 = game.getRegisteredPlayers().get(1);
+
+        final Card island = addCardToZone("Island", p1, ZoneType.Library);
+        final Card hostForCause = addCardToZone("Grizzly Bears", p1, ZoneType.Hand);
+        final SpellAbility causeSa = hostForCause.getFirstSpellAbility();
+        AssertJUnit.assertNotNull("Grizzly Bears should have a spell ability for cause", causeSa);
+        causeSa.setActivatingPlayer(p1);
+
+        final Card moved = game.getAction().moveToHand(island, p2, causeSa, null);
+
+        AssertJUnit.assertTrue("Moved card should be in hand recipient's hand", p2.getZone(ZoneType.Hand).contains(moved));
+        AssertJUnit.assertEquals("Hand recipient should own the card, not the cause's activator", p2, moved.getOwner());
+        AssertJUnit.assertEquals("Hand recipient should control the card", p2, moved.getController());
+    }
+
+    @Test
+    public void dandanGraveyardToBattlefieldReassignsOwnerToActivator() {
+        initAndCreateGame();
+
+        final Deck firstDeck = new Deck("DanDan P1");
+        final Deck secondDeck = new Deck("DanDan P2");
+        final List<RegisteredPlayer> players = Lists.newArrayList();
+        players.add(new RegisteredPlayer(firstDeck).setPlayer(new LobbyPlayerAi("p1", null)));
+        players.add(new RegisteredPlayer(secondDeck).setPlayer(new LobbyPlayerAi("p2", null)));
+
+        final Match match = new Match(new GameRules(GameType.DanDan), players, "DanDan ETB owner to activator");
+        final Game game = match.createGame();
+        match.startGame(game);
+
+        final Player p0 = game.getRegisteredPlayers().get(0);
+        final Player p1 = game.getRegisteredPlayers().get(1);
+
+        final Card bear = addCardToZone("Grizzly Bears", p1, ZoneType.Graveyard);
+        AssertJUnit.assertEquals("Precondition: creature in graveyard should be owned by p1", p1, bear.getOwner());
+
+        final Card causeHost = addCardToZone("Forest", p0, ZoneType.Hand);
+        final SpellAbility reanimateCause = AbilityFactory.getAbility(
+                "DB$ ChangeZone | ValidTgts$ Creature | Origin$ Graveyard | Destination$ Battlefield | Mandatory$ True",
+                causeHost);
+        AssertJUnit.assertNotNull(reanimateCause);
+        reanimateCause.setActivatingPlayer(p0);
+
+        final Zone from = game.getZoneOf(bear);
+        final Card moved = game.getAction().changeZone(from, p0.getZone(ZoneType.Battlefield), bear, 0, reanimateCause);
+
+        AssertJUnit.assertTrue("Grizzly Bears should be on the battlefield", moved.getZone() != null
+                && moved.getZone().is(ZoneType.Battlefield));
+        AssertJUnit.assertEquals("DanDan ETB should reassign owner to the ability's activator", p0, moved.getOwner());
+        AssertJUnit.assertEquals("DanDan ETB should set controller to match", p0, moved.getController());
     }
 
     @Test
