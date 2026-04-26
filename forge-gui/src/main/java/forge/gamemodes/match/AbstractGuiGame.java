@@ -456,6 +456,11 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return getYieldController().isAutoPassingNoActions(player);
     }
 
+    @Override
+    public final boolean shouldAutoYieldForPlayer(final PlayerView player) {
+        return getYieldController().shouldAutoYieldForPlayer(player);
+    }
+
     private Timer awaitNextInputTimer;
     private TimerTask awaitNextInputTask;
 
