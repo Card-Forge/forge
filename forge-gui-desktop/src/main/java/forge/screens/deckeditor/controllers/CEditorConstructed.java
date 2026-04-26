@@ -17,10 +17,12 @@
  */
 package forge.screens.deckeditor.controllers;
 
+import forge.StaticData;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameType;
+import forge.gui.GuiUtils;
 import forge.gui.UiCommand;
 import forge.gui.framework.FScreen;
 import forge.item.PaperCard;
@@ -30,6 +32,8 @@ import forge.itemmanager.ItemManagerConfig;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.deckeditor.AddBasicLandsDialog;
+import forge.screens.deckeditor.CDeckEditorUI;
+import forge.screens.deckeditor.ChangeArtDialog;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FComboBox;
@@ -355,13 +359,16 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         case Main:
             cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblfromdeck"));
             cmb.addMoveAlternateItems(localizer.getMessage("lblMove"), localizer.getMessage("lbltosideboard"));
+            addChangeArtEntryIfApplicable(cmb);
             break;
         case Sideboard:
             cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblfromsideboard"));
             cmb.addMoveAlternateItems("Move", "to deck");
+            addChangeArtEntryIfApplicable(cmb);
             break;
         case Commander:
             cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblascommander"));
+            addChangeArtEntryIfApplicable(cmb);
             break;
         case Avatar:
             cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblasavatar"));
@@ -390,6 +397,26 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         }
         cmb.addKeyCardToggle();
         cmb.addSetColorID();
+    }
+
+    private static void addChangeArtEntryIfApplicable(EditorContextMenuBuilder cmb) {
+        // Hide in finite-pool editors (Quest) where the user could otherwise swap into a printing they don't own.
+        if (!CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getCatalogManager().isInfinite()) {
+            return;
+        }
+        PaperCard card = cmb.getItemManager().getSelectedItem();
+        if (card == null) {
+            return;
+        }
+        if (StaticData.instance().getCommonCards().getAllCardsNoAlt(card.getName()).size() <= 1) {
+            return;
+        }
+        GuiUtils.addMenuItem(cmb.getMenu(),
+                Localizer.getInstance().getMessage("lblChangeArt"),
+                null,
+                () -> ChangeArtDialog.show(card),
+                true,
+                false);
     }
 
     /* (non-Javadoc)
