@@ -76,15 +76,6 @@ import forge.util.MyRandom;
 import forge.util.TextUtil;
 
 public class ComputerUtilCard {
-    private static final List<String> DANGEROUS_LANDS_TO_REMOVE = Arrays.asList(
-            "Dark Depths",
-            "Glacial Chasm",
-            "Valakut, the Molten Pinnacle",
-            "Maze of Ith",
-            "Nykthos, Shrine to Nyx",
-            "Three Tree City"
-    );
-
     public static Card getMostExpensivePermanentAI(final CardCollectionView list, final SpellAbility spell, final boolean targeted) {
         CardCollectionView all = list;
         if (targeted) {
@@ -294,8 +285,7 @@ public class ComputerUtilCard {
         }
 
         return lands.stream()
-                .max(Comparator.comparingInt((Card c) -> evaluateLandRemovalPriority(ai, c, removal))
-                        .thenComparingInt(GameStateEvaluator::evaluateLand))
+                .max(Comparator.comparingInt(c -> evaluateLandRemovalPriority(ai, c, removal)))
                 .orElse(null);
     }
 
@@ -367,12 +357,12 @@ public class ComputerUtilCard {
             score += isAttackingAi(land, ai) ? 140 : 55;
         }
 
-        if (isKnownDangerousLand(land)) {
-            // High priority floor: oddball lands whose danger is hard to infer
-            // from their generic ability shape, like Dark Depths or Glacial
-            // Chasm. Do not add here, because some of these also get a good
-            // baseline score from LandEvaluator.
-            score = Math.max(score, 170);
+        if (land.hasSVar("AILandRemovalMinScore")) {
+            // Card-specific floor for lands whose danger is hard to infer from
+            // their generic ability shape, like Dark Depths or Nykthos. Keep it
+            // removal-specific so regular land play does not overvalue them.
+            score = Math.max(score, AbilityUtils.calculateAmount(land,
+                    land.getSVar("AILandRemovalMinScore"), null));
         }
 
         for (Card aura : land.getEnchantedBy()) {
@@ -473,15 +463,6 @@ public class ComputerUtilCard {
     private static boolean aiHasHighPriorityLand(final Player ai) {
         for (Card aiLand : ai.getLandsInPlay()) {
             if (evaluateLandRemovalPriority(ai, aiLand, null, false) >= 150) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static boolean isKnownDangerousLand(final Card land) {
-        for (String landName : DANGEROUS_LANDS_TO_REMOVE) {
-            if (land.getName().equals(landName)) {
                 return true;
             }
         }
