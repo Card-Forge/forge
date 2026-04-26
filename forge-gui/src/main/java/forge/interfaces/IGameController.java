@@ -3,6 +3,7 @@ package forge.interfaces;
 import java.util.List;
 
 import forge.game.card.CardView;
+import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.gamemodes.match.NextGameDecision;
@@ -71,4 +72,7 @@ public interface IGameController {
     void setShouldAlwaysAcceptTrigger(int trigger);
     void setShouldAlwaysDeclineTrigger(int trigger);
     void setShouldAlwaysAskTrigger(int trigger);
+
+    boolean isUiSetToSkipPhase(PlayerView turnPlayer, PhaseType phase);
+    void setUiShouldSkipPhase(PlayerView turnPlayer, PhaseType phase, boolean shouldSkip);
 }

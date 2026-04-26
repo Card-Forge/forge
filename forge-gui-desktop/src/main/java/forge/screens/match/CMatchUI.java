@@ -68,6 +68,8 @@ import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
 import forge.util.IHasForgeLog;
 import forge.gamemodes.net.NetworkGuiGame;
+import forge.gamemodes.net.client.NetGameController;
+import forge.interfaces.IGameController;
 import forge.gui.FNetOverlay;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -1299,11 +1301,36 @@ public final class CMatchUI
         final PhaseType[] phases = PhaseType.values();
 
         for (int i = 0; i < fieldViews.size(); i++) {
-            final FPref[] keys = isLocalPlayer(sortedPlayers.get(i))
+            final PlayerView player = sortedPlayers.get(i);
+            final FPref[] keys = isLocalPlayer(player)
                     ? FPref.PHASES_HUMAN : FPref.PHASES_AI;
             final PhaseIndicator pi = fieldViews.get(i).getPhaseIndicator();
             for (int p = 1; p < phases.length; p++) {
-                pi.getLabelFor(phases[p]).setEnabled(prefs.getPrefBoolean(keys[p - 1]));
+                final PhaseType phase = phases[p];
+                final PhaseLabel label = pi.getLabelFor(phase);
+                label.setEnabled(prefs.getPrefBoolean(keys[p - 1]));
+                label.setOnToggled(() -> pushSkipPhaseToControllers(player, phase));
+            }
+        }
+
+        // Seed the host cache so isUiSetToSkipPhase reads locally instead of round-tripping
+        for (IGameController c : getOriginalGameControllers()) {
+            if (c instanceof NetGameController) {
+                ((NetGameController) c).replayUiSkipPhases(sortedPlayers, this::isUiSetToSkipPhase);
+            }
+        }
+    }
+
+    private void pushSkipPhaseToControllers(final PlayerView player, final PhaseType phase) {
+        // Mind-slave AND-combines the master's row with the controlled player's row, so a master
+        // toggle invalidates the cache for every player they control — re-push all dependents
+        for (PlayerView p : sortedPlayers) {
+            if (!p.equals(player) && !player.equals(p.getMindSlaveMaster())) continue;
+            final boolean shouldSkip = isUiSetToSkipPhase(p, phase);
+            for (IGameController c : getOriginalGameControllers()) {
+                if (c instanceof NetGameController) {
+                    ((NetGameController) c).setUiShouldSkipPhase(p, phase, shouldSkip);
+                }
             }
         }
     }

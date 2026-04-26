@@ -39,7 +39,9 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.net.NetworkGuiGame;
+import forge.gamemodes.net.client.NetGameController;
 import forge.gamemodes.match.HostedMatch;
+import forge.interfaces.IGameController;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.util.SGuiChoose;
@@ -562,11 +564,33 @@ public class MatchController extends NetworkGuiGame {
         final PhaseType[] phases = PhaseType.values();
 
         for (final VPlayerPanel panel : panels) {
-            final FPref[] keys = instance.isLocalPlayer(panel.getPlayer())
+            final PlayerView player = panel.getPlayer();
+            final FPref[] keys = instance.isLocalPlayer(player)
                     ? FPref.PHASES_HUMAN : FPref.PHASES_AI;
             final VPhaseIndicator pi = panel.getPhaseIndicator();
             for (int p = 1; p < phases.length; p++) {
-                pi.getLabel(phases[p]).setStopAtPhase(prefs.getPrefBoolean(keys[p - 1]));
+                final PhaseType phase = phases[p];
+                final VPhaseIndicator.PhaseLabel label = pi.getLabel(phase);
+                label.setStopAtPhase(prefs.getPrefBoolean(keys[p - 1]));
+                label.setOnToggled(() -> pushSkipPhaseToControllers(player, phase));
+            }
+        }
+
+        // Seed the host cache so isUiSetToSkipPhase reads locally instead of round-tripping
+        final List<PlayerView> allPlayers = new ArrayList<>(panels.size());
+        for (VPlayerPanel panel : panels) allPlayers.add(panel.getPlayer());
+        for (IGameController c : instance.getOriginalGameControllers()) {
+            if (c instanceof NetGameController) {
+                ((NetGameController) c).replayUiSkipPhases(allPlayers, instance::isUiSetToSkipPhase);
+            }
+        }
+    }
+
+    private static void pushSkipPhaseToControllers(final PlayerView player, final PhaseType phase) {
+        final boolean shouldSkip = instance.isUiSetToSkipPhase(player, phase);
+        for (IGameController c : instance.getOriginalGameControllers()) {
+            if (c instanceof NetGameController) {
+                ((NetGameController) c).setUiShouldSkipPhase(player, phase, shouldSkip);
             }
         }
     }

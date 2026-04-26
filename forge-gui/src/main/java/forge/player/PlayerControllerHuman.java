@@ -29,6 +29,7 @@ import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
+import forge.game.phase.PhaseType;
 import forge.game.player.*;
 import forge.game.player.actions.SelectCardAction;
 import forge.game.player.actions.SelectPlayerAction;
@@ -106,6 +107,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     private final Set<String> remoteAbilityYields = Sets.newHashSet();
     private final Map<Integer, Boolean> remoteTriggerDecisions = Maps.newTreeMap();
     private boolean remoteAutoYieldsDisabled;
+    // Empty/missing entry returns false (don't skip), matching a fresh UI's conservative default
+    private final Map<PlayerView, EnumSet<PhaseType>> remoteSkipPhases = Maps.newHashMap();
 
     protected final InputQueue inputQueue;
     protected final InputProxy inputProxy;
@@ -1505,7 +1508,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             int delay = 0;
             if (stack.isEmpty()) {
                 // make sure to briefly pause at phases you're not set up to skip
-                if (!getGui().isUiSetToSkipPhase(getGame().getPhaseHandler().getPlayerTurn().getView(),
+                if (!isUiSetToSkipPhase(getGame().getPhaseHandler().getPlayerTurn().getView(),
                         getGame().getPhaseHandler().getPhase())) {
                     delay = FControlGamePlayback.phasesDelay;
                 }
@@ -1525,7 +1528,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         if (stack.isEmpty()) {
-            if (getGui().isUiSetToSkipPhase(getGame().getPhaseHandler().getPlayerTurn().getView(),
+            if (isUiSetToSkipPhase(getGame().getPhaseHandler().getPlayerTurn().getView(),
                     getGame().getPhaseHandler().getPhase())) {
                 netLog.trace("Returning null (skipPhase) for player {}", player.getName());
                 return null; // avoid prompt for input if stack is empty and
@@ -3593,5 +3596,23 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public void setShouldAlwaysAskTrigger(final int trigger) {
         if (isRemoteClient()) remoteTriggerDecisions.remove(trigger);
         else localStore().setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.ASK);
+    }
+
+    @Override
+    public boolean isUiSetToSkipPhase(final PlayerView turnPlayer, final PhaseType phase) {
+        if (isRemoteClient()) {
+            EnumSet<PhaseType> set = remoteSkipPhases.get(turnPlayer);
+            return set != null && set.contains(phase);
+        }
+        return getGui().isUiSetToSkipPhase(turnPlayer, phase);
+    }
+
+    @Override
+    public void setUiShouldSkipPhase(final PlayerView turnPlayer, final PhaseType phase, final boolean shouldSkip) {
+        if (!isRemoteClient()) return;
+        EnumSet<PhaseType> set = remoteSkipPhases.computeIfAbsent(turnPlayer,
+                k -> EnumSet.noneOf(PhaseType.class));
+        if (shouldSkip) set.add(phase);
+        else set.remove(phase);
     }
 }
