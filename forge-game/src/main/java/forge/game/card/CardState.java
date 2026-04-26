@@ -374,8 +374,8 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         view.updateAttractionLights(this);
     }
 
-    public final Collection<KeywordInterface> getCachedKeywords() {
-        return cachedKeywords.getValues();
+    public final KeywordCollection getCachedKeywords() {
+        return cachedKeywords;
     }
 
     public final Collection<KeywordInterface> getCachedKeyword(final Keyword keyword) {

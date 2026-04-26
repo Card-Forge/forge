@@ -34,7 +34,6 @@ import forge.game.ability.effects.RollDiceEffect;
 import forge.game.card.*;
 import forge.game.event.*;
 import forge.game.keyword.*;
-import forge.game.keyword.KeywordCollection.KeywordCollectionView;
 import forge.game.mana.ManaPool;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -1039,8 +1038,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         updateKeywordCardAbilityText();
     }
 
-    public final KeywordCollectionView getKeywords() {
-        return keywords.getView();
+    public final KeywordCollection getKeywords() {
+        return keywords;
     }
 
     @Override
