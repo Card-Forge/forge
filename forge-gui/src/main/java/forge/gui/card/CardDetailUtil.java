@@ -652,9 +652,11 @@ public class CardDetailUtil {
         final boolean showOwnerInDevCardDetail = ForgePreferences.DEV_MODE
                 && FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.DEV_SHOW_OWNER_IN_CARD_DETAIL);
         // Show owner when control differs (default), or always in dev mode when the dedicated toggle is enabled.
-        if (card.getOwner() != card.getController() || showOwnerInDevCardDetail) {
+        // UI-only cards (e.g. deck editor via Card.getCardForUi) have no owner — skip to avoid NPE.
+        final PlayerView owner = card.getOwner();
+        if (owner != null && (owner != card.getController() || showOwnerInDevCardDetail)) {
             area.append("\n\n");
-            area.append("Owner: ").append(card.getOwner().toString());
+            area.append("Owner: ").append(owner.toString());
         }
         return area.toString().trim();
     }
