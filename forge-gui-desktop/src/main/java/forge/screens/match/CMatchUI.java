@@ -424,6 +424,11 @@ public final class CMatchUI
         }
         cCombat.setModel(combat);
         cCombat.update();
+        FThreads.invokeInEdtNowOrLater(() -> {
+            for (final VField f : getFieldViews()) {
+                f.getTabletop().doLayout();
+            }
+        });
     } // showCombat(CombatView)
 
     @Override

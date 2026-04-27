@@ -19,14 +19,18 @@ package forge.view.arcane;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.IllegalComponentStateException;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.util.*;
 
 import com.google.common.collect.Lists;
 
+import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
+import forge.game.combat.CombatView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gui.FThreads;
@@ -170,7 +174,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                         break;
                     }
 
-                    if (!panel.getAttachedPanels().isEmpty()
+                    if (isBlockedForLayout(panel)
+                            || isBlockedForLayout(firstPanel)
+                            || !panel.getAttachedPanels().isEmpty()
                             || !card.hasSameCounters(firstPanel.getCard())
                             || (card.isSick() != firstCard.isSick())
                             || !card.hasSamePT(firstCard)
@@ -227,7 +233,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                         insertIndex = i;
                         break;
                     }
-                    if (!panel.getAttachedPanels().isEmpty()
+                    if (isBlockedForLayout(panel)
+                            || isBlockedForLayout(firstPanel)
+                            || !panel.getAttachedPanels().isEmpty()
                             || card.isCloned()
                             || !card.hasSameCounters(firstCard)
                             || (card.isSick() != firstCard.isSick())
@@ -254,6 +262,80 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             allCreatures.add(insertIndex == -1 ? allCreatures.size() : insertIndex, stack);
         }
         return allCreatures;
+    }
+
+    private boolean isBlockedForLayout(final CardPanel panel) {
+        final GameView gameView = getMatchUI().getGameView();
+        if (gameView == null) {
+            return false;
+        }
+        final CombatView combat = gameView.getCombat();
+        if (combat == null) {
+            return false;
+        }
+        final CardView card = panel.getCard();
+        return combat.isAttacking(card)
+                && (hasAny(combat.getBlockers(card)) || hasAny(combat.getPlannedBlockers(card)));
+    }
+
+    private static boolean hasAny(final Iterable<CardView> cards) {
+        return cards != null && cards.iterator().hasNext();
+    }
+
+    private void sortBlockedAttackersByBlockerPosition(final CardStackRow row) {
+        row.sort(Comparator.comparingDouble(this::getBlockerPositionSortKey));
+    }
+
+    private double getBlockerPositionSortKey(final CardStack stack) {
+        if (stack.isEmpty()) {
+            return Double.MAX_VALUE;
+        }
+        final Iterable<CardView> blockers = getBlockersForLayout(stack.get(0).getCard());
+        if (blockers == null) {
+            return Double.MAX_VALUE;
+        }
+
+        int blockerCount = 0;
+        double blockerPositionTotal = 0;
+        for (final CardView blocker : blockers) {
+            final CardPanel blockerPanel = getMatchUI().getFieldViews().stream()
+                    .map(field -> field.getTabletop().getCardPanel(blocker.getId()))
+                    .filter(Objects::nonNull)
+                    .findFirst()
+                    .orElse(null);
+            if (blockerPanel == null) {
+                continue;
+            }
+            blockerPositionTotal += getScreenX(blockerPanel);
+            blockerCount++;
+        }
+        return blockerCount == 0 ? Double.MAX_VALUE : blockerPositionTotal / blockerCount;
+    }
+
+    private Iterable<CardView> getBlockersForLayout(final CardView card) {
+        final GameView gameView = getMatchUI().getGameView();
+        if (gameView == null) {
+            return null;
+        }
+        final CombatView combat = gameView.getCombat();
+        if (combat == null || !combat.isAttacking(card)) {
+            return null;
+        }
+        final Iterable<CardView> blockers = combat.getBlockers(card);
+        if (hasAny(blockers)) {
+            return blockers;
+        }
+        final Iterable<CardView> plannedBlockers = combat.getPlannedBlockers(card);
+        return hasAny(plannedBlockers) ? plannedBlockers : null;
+    }
+
+    private static double getScreenX(final CardPanel panel) {
+        try {
+            final Point location = panel.getCardLocationOnScreen();
+            return location.getX() + (panel.getWidth() * CardPanel.TARGET_ORIGIN_FACTOR_X);
+        } catch (final IllegalComponentStateException ex) {
+            return panel.getCardX() + (panel.getCardWidth() * CardPanel.TARGET_ORIGIN_FACTOR_X);
+        }
     }
 
     private CardStackRow collectAllContraptions(List<CardPanel> remainingPanels) {
@@ -394,6 +476,9 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             }
             tokens.clear();
         }
+
+        sortBlockedAttackersByBlockerPosition(tokens);
+        sortBlockedAttackersByBlockerPosition(creatures);
 
         if(!contraptions.isEmpty()) {
             contraptions.stream()
