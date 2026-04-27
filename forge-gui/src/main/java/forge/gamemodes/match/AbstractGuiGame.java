@@ -9,10 +9,8 @@ import forge.game.card.CardView.CardStateView;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
-import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.gamemodes.net.DeltaPacket;
-import forge.gamemodes.net.client.NetGameController;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.control.FControlGameEventHandler;
@@ -140,27 +138,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     public final Collection<IGameController> getOriginalGameControllers() {
         return originalGameControllers.values();
-    }
-
-    protected final void pushSkipPhaseToControllers(final PlayerView player, final PhaseType phase) {
-        // Mind-slave AND-combines master+controlled rows, so a master toggle invalidates dependents
-        for (final PlayerView p : getGameView().getPlayers()) {
-            if (!p.equals(player) && !player.equals(p.getMindSlaveMaster())) continue;
-            final boolean shouldSkip = isUiSetToSkipPhase(p, phase);
-            for (final IGameController c : getOriginalGameControllers()) {
-                if (c instanceof NetGameController nc) {
-                    nc.setUiShouldSkipPhase(p, phase, shouldSkip);
-                }
-            }
-        }
-    }
-
-    protected final void seedSkipPhaseCache() {
-        for (final IGameController c : getOriginalGameControllers()) {
-            if (c instanceof NetGameController nc) {
-                nc.replayUiSkipPhases(getGameView().getPlayers(), this::isUiSetToSkipPhase);
-            }
-        }
     }
 
     @Override

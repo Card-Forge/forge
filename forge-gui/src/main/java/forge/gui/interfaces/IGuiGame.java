@@ -264,7 +264,6 @@ public interface IGuiGame {
     void autoPassUntilEndOfTurn(PlayerView player);
     boolean mayAutoPass(PlayerView player);
     void autoPassCancel(PlayerView player);
-
     void updateAutoPassPrompt();
 
     void setCurrentPlayer(PlayerView player);

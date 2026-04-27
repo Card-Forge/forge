@@ -3487,8 +3487,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     private boolean activeModeIsInstall() {
-        return ForgeConstants.AUTO_YIELD_PER_ABILITY_INSTALL.equals(
-                FModel.getPreferences().getPref(FPref.UI_AUTO_YIELD_MODE));
+        return ForgeConstants.AUTO_YIELD_PER_ABILITY_INSTALL.equals(FModel.getPreferences().getPref(FPref.UI_AUTO_YIELD_MODE));
     }
 
     private AutoYieldStore.Tier activeTier() {
@@ -3518,7 +3517,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public void setShouldAutoYield(final String key, final boolean autoYield, final boolean isAbilityScope) {
         if (isRemoteClient()) {
             Set<String> bucket = isAbilityScope ? remoteAbilityYields : remoteCardYields;
-            if (autoYield) bucket.add(key); else bucket.remove(key);
+            if (autoYield) bucket.add(key);
+            else bucket.remove(key);
             return;
         }
         String storageKey = isAbilityScope ? AutoYieldStore.abilitySuffix(key) : key;
@@ -3532,7 +3532,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public Iterable<String> getAutoYields() {
         if (isRemoteClient()) {
-            return com.google.common.collect.Iterables.concat(remoteCardYields, remoteAbilityYields);
+            return Iterables.concat(remoteCardYields, remoteAbilityYields);
         }
         if (activeModeIsInstall()) return PersistentYieldStore.get().getYields();
         return localStore().getYields(activeTier());
@@ -3598,7 +3598,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         else localStore().setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.ASK);
     }
 
-    @Override
     public boolean isUiSetToSkipPhase(final PlayerView turnPlayer, final PhaseType phase) {
         if (isRemoteClient()) {
             EnumSet<PhaseType> set = remoteSkipPhases.get(turnPlayer);

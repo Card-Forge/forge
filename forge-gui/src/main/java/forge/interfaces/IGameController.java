@@ -73,6 +73,5 @@ public interface IGameController {
     void setShouldAlwaysDeclineTrigger(int trigger);
     void setShouldAlwaysAskTrigger(int trigger);
 
-    boolean isUiSetToSkipPhase(PlayerView turnPlayer, PhaseType phase);
     void setUiShouldSkipPhase(PlayerView turnPlayer, PhaseType phase, boolean shouldSkip);
 }
