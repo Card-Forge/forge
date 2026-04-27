@@ -39,9 +39,7 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.net.NetworkGuiGame;
-import forge.gamemodes.net.client.NetGameController;
 import forge.gamemodes.match.HostedMatch;
-import forge.interfaces.IGameController;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.util.SGuiChoose;
@@ -572,27 +570,11 @@ public class MatchController extends NetworkGuiGame {
                 final PhaseType phase = phases[p];
                 final VPhaseIndicator.PhaseLabel label = pi.getLabel(phase);
                 label.setStopAtPhase(prefs.getPrefBoolean(keys[p - 1]));
-                label.setOnToggled(() -> pushSkipPhaseToControllers(player, phase));
+                label.setOnToggled(() -> instance.pushSkipPhaseToControllers(player, phase));
             }
         }
 
-        // Seed the host cache so isUiSetToSkipPhase reads locally instead of round-tripping
-        final List<PlayerView> allPlayers = new ArrayList<>(panels.size());
-        for (VPlayerPanel panel : panels) allPlayers.add(panel.getPlayer());
-        for (IGameController c : instance.getOriginalGameControllers()) {
-            if (c instanceof NetGameController) {
-                ((NetGameController) c).replayUiSkipPhases(allPlayers, instance::isUiSetToSkipPhase);
-            }
-        }
-    }
-
-    private static void pushSkipPhaseToControllers(final PlayerView player, final PhaseType phase) {
-        final boolean shouldSkip = instance.isUiSetToSkipPhase(player, phase);
-        for (IGameController c : instance.getOriginalGameControllers()) {
-            if (c instanceof NetGameController) {
-                ((NetGameController) c).setUiShouldSkipPhase(player, phase, shouldSkip);
-            }
-        }
+        instance.seedSkipPhaseCache();
     }
 
     public static void writeMatchPreferences() {
@@ -706,6 +688,10 @@ public class MatchController extends NetworkGuiGame {
 
     @Override
     public boolean isUiSetToSkipPhase(final PlayerView playerTurn, final PhaseType phase) {
+        final PlayerView master = playerTurn.getMindSlaveMaster();
+        if (master != null && view.stopAtPhase(master, phase)) {
+            return false;
+        }
         return !view.stopAtPhase(playerTurn, phase);
     }
 

@@ -68,8 +68,6 @@ import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
 import forge.util.IHasForgeLog;
 import forge.gamemodes.net.NetworkGuiGame;
-import forge.gamemodes.net.client.NetGameController;
-import forge.interfaces.IGameController;
 import forge.gui.FNetOverlay;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -1313,26 +1311,7 @@ public final class CMatchUI
             }
         }
 
-        // Seed the host cache so isUiSetToSkipPhase reads locally instead of round-tripping
-        for (IGameController c : getOriginalGameControllers()) {
-            if (c instanceof NetGameController) {
-                ((NetGameController) c).replayUiSkipPhases(sortedPlayers, this::isUiSetToSkipPhase);
-            }
-        }
-    }
-
-    private void pushSkipPhaseToControllers(final PlayerView player, final PhaseType phase) {
-        // Mind-slave AND-combines the master's row with the controlled player's row, so a master
-        // toggle invalidates the cache for every player they control — re-push all dependents
-        for (PlayerView p : sortedPlayers) {
-            if (!p.equals(player) && !player.equals(p.getMindSlaveMaster())) continue;
-            final boolean shouldSkip = isUiSetToSkipPhase(p, phase);
-            for (IGameController c : getOriginalGameControllers()) {
-                if (c instanceof NetGameController) {
-                    ((NetGameController) c).setUiShouldSkipPhase(p, phase, shouldSkip);
-                }
-            }
-        }
+        seedSkipPhaseCache();
     }
 
     @Override
