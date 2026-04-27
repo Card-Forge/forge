@@ -174,8 +174,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                         break;
                     }
 
-                    if (isBlockedForLayout(panel)
-                            || isBlockedForLayout(firstPanel)
+                    if (isInCombatForLayout(panel)
+                            || isInCombatForLayout(firstPanel)
                             || !panel.getAttachedPanels().isEmpty()
                             || !card.hasSameCounters(firstPanel.getCard())
                             || (card.isSick() != firstCard.isSick())
@@ -233,8 +233,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                         insertIndex = i;
                         break;
                     }
-                    if (isBlockedForLayout(panel)
-                            || isBlockedForLayout(firstPanel)
+                    if (isInCombatForLayout(panel)
+                            || isInCombatForLayout(firstPanel)
                             || !panel.getAttachedPanels().isEmpty()
                             || card.isCloned()
                             || !card.hasSameCounters(firstCard)
@@ -264,62 +264,61 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         return allCreatures;
     }
 
-    private boolean isBlockedForLayout(final CardPanel panel) {
-        final GameView gameView = getMatchUI().getGameView();
-        if (gameView == null) {
-            return false;
-        }
-        final CombatView combat = gameView.getCombat();
-        if (combat == null) {
-            return false;
-        }
-        final CardView card = panel.getCard();
-        return combat.isAttacking(card)
-                && (hasAny(combat.getBlockers(card)) || hasAny(combat.getPlannedBlockers(card)));
+    private boolean isInCombatForLayout(final CardPanel panel) {
+        return hasAny(getCombatOpponentsForLayout(panel.getCard()));
     }
 
     private static boolean hasAny(final Iterable<CardView> cards) {
         return cards != null && cards.iterator().hasNext();
     }
 
-    private void sortBlockedAttackersByBlockerPosition(final CardStackRow row) {
-        row.sort(Comparator.comparingDouble(this::getBlockerPositionSortKey));
+    private void sortCombatantsByOpponentPosition(final CardStackRow row) {
+        row.sort(Comparator.comparingDouble(this::getCombatOpponentPositionSortKey));
     }
 
-    private double getBlockerPositionSortKey(final CardStack stack) {
+    private double getCombatOpponentPositionSortKey(final CardStack stack) {
         if (stack.isEmpty()) {
             return Double.MAX_VALUE;
         }
-        final Iterable<CardView> blockers = getBlockersForLayout(stack.get(0).getCard());
-        if (blockers == null) {
+        final Iterable<CardView> opponents = getCombatOpponentsForLayout(stack.get(0).getCard());
+        if (opponents == null) {
             return Double.MAX_VALUE;
         }
 
-        int blockerCount = 0;
-        double blockerPositionTotal = 0;
-        for (final CardView blocker : blockers) {
-            final CardPanel blockerPanel = getMatchUI().getFieldViews().stream()
-                    .map(field -> field.getTabletop().getCardPanel(blocker.getId()))
+        int opponentCount = 0;
+        double opponentPositionTotal = 0;
+        for (final CardView opponent : opponents) {
+            final CardPanel opponentPanel = getMatchUI().getFieldViews().stream()
+                    .map(field -> field.getTabletop().getCardPanel(opponent.getId()))
                     .filter(Objects::nonNull)
                     .findFirst()
                     .orElse(null);
-            if (blockerPanel == null) {
+            if (opponentPanel == null) {
                 continue;
             }
-            blockerPositionTotal += getScreenX(blockerPanel);
-            blockerCount++;
+            opponentPositionTotal += getScreenX(opponentPanel);
+            opponentCount++;
         }
-        return blockerCount == 0 ? Double.MAX_VALUE : blockerPositionTotal / blockerCount;
+        return opponentCount == 0 ? Double.MAX_VALUE : opponentPositionTotal / opponentCount;
     }
 
-    private Iterable<CardView> getBlockersForLayout(final CardView card) {
+    private Iterable<CardView> getCombatOpponentsForLayout(final CardView card) {
         final GameView gameView = getMatchUI().getGameView();
         if (gameView == null) {
             return null;
         }
         final CombatView combat = gameView.getCombat();
-        if (combat == null || !combat.isAttacking(card)) {
+        if (combat == null) {
             return null;
+        }
+        if (!combat.isAttacking(card)) {
+            final List<CardView> attackers = new ArrayList<>();
+            for (final CardView attacker : combat.getAttackers()) {
+                if (containsCard(combat.getBlockers(attacker), card) || containsCard(combat.getPlannedBlockers(attacker), card)) {
+                    attackers.add(attacker);
+                }
+            }
+            return attackers;
         }
         final Iterable<CardView> blockers = combat.getBlockers(card);
         if (hasAny(blockers)) {
@@ -327,6 +326,18 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         }
         final Iterable<CardView> plannedBlockers = combat.getPlannedBlockers(card);
         return hasAny(plannedBlockers) ? plannedBlockers : null;
+    }
+
+    private static boolean containsCard(final Iterable<CardView> cards, final CardView card) {
+        if (cards == null) {
+            return false;
+        }
+        for (final CardView c : cards) {
+            if (c.equals(card)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static double getScreenX(final CardPanel panel) {
@@ -477,8 +488,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             tokens.clear();
         }
 
-        sortBlockedAttackersByBlockerPosition(tokens);
-        sortBlockedAttackersByBlockerPosition(creatures);
+        sortCombatantsByOpponentPosition(tokens);
+        sortCombatantsByOpponentPosition(creatures);
 
         if(!contraptions.isEmpty()) {
             contraptions.stream()
