@@ -342,7 +342,7 @@ public class ComputerUtilCard {
                 // Grounds or Blast Zone are relevant, but usually not urgent.
                 score += 40;
             }
-            if (ability.getApi() == ApiType.Mana || hasManaSubAbility(ability)) {
+            if (ability.getApi() == ApiType.Mana || ability.findSubAbilityByType(ApiType.Mana) != null) {
                 // High priority: non-mana root abilities that create mana,
                 // such as Nykthos-style choose-color abilities implemented in
                 // a sub-DB. LandEvaluator sees these as utility, not big mana.
@@ -432,17 +432,6 @@ public class ComputerUtilCard {
             if (!creature.getOwner().equals(ai)) {
                 return true;
             }
-        }
-        return false;
-    }
-
-    private static boolean hasManaSubAbility(final SpellAbility ability) {
-        SpellAbility sub = ability.getSubAbility();
-        while (sub != null) {
-            if (sub.getApi() == ApiType.Mana) {
-                return true;
-            }
-            sub = sub.getSubAbility();
         }
         return false;
     }

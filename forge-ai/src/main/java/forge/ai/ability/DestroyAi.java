@@ -443,8 +443,7 @@ public class DestroyAi extends SpellAbilityAi {
         // Tectonic Edge, Strip Mine, and Wasteland should not cash in a large
         // share of the AI's own mana base for a merely medium utility target.
         boolean sacrificesSourceLand = sa.getHostCard().isLand()
-                && sa.getPayCosts() != null
-                && sa.getPayCosts().hasSpecificCostType(CostSacrifice.class);
+                && ComputerUtilCost.isSacrificeSelfCost(sa.getPayCosts());
         if (sacrificesSourceLand && !highPriorityTgt && !canManaLock && !canColorLock && numLandsOTB <= 3) {
             return false;
         }
