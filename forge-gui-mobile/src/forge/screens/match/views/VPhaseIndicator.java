@@ -12,6 +12,12 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.game.phase.PhaseType;
+import forge.game.player.PlayerView;
+import forge.gamemodes.match.YieldMarker;
+import forge.interfaces.IGameController;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
+import forge.screens.match.MatchController;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.util.TextBounds;
@@ -22,8 +28,11 @@ public class VPhaseIndicator extends FContainer {
     public static final float PADDING_X = Utils.scale(1);
     public static final float PADDING_Y = Utils.scale(2);
 
+    private static final Color YIELD_MARKER_COLOR = new Color(0xFFA528FF);
+
     private final Map<PhaseType, PhaseLabel> phaseLabels = new HashMap<>();
     private FSkinFont font;
+    private PlayerView owner;
 
     public VPhaseIndicator() {
         addPhaseLabel("UP", PhaseType.UPKEEP);
@@ -46,6 +55,14 @@ public class VPhaseIndicator extends FContainer {
 
     public PhaseLabel getLabel(PhaseType phaseType) {
         return phaseLabels.get(phaseType);
+    }
+
+    public Iterable<PhaseLabel> allLabels() {
+        return phaseLabels.values();
+    }
+
+    public void setOwner(PlayerView player) {
+        this.owner = player;
     }
 
     public void resetPhaseButtons() {
@@ -110,6 +127,7 @@ public class VPhaseIndicator extends FContainer {
         private final PhaseType phaseType;
         private boolean stopAtPhase = false;
         private boolean active = false;
+        private boolean yieldMarked = false;
 
         public PhaseLabel(String caption0, PhaseType phaseType0) {
             caption = caption0;
@@ -134,9 +152,50 @@ public class VPhaseIndicator extends FContainer {
             stopAtPhase = stopAtPhase0;
         }
 
+        public boolean isYieldMarked() {
+            return yieldMarked;
+        }
+        public void setYieldMarked(boolean v) {
+            this.yieldMarked = v;
+        }
+
         @Override
         public boolean tap(float x, float y, int count) {
             stopAtPhase = !stopAtPhase;
+            return true;
+        }
+
+        @Override
+        public boolean longPress(float x, float y) {
+            if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) {
+                return false;
+            }
+            PlayerView phaseOwner = VPhaseIndicator.this.owner;
+            if (phaseOwner == null) {
+                return false;
+            }
+            IGameController ctrl = MatchController.instance.getGameController();
+            if (ctrl == null) {
+                return false;
+            }
+            YieldMarker existing = ctrl.getYieldMarker();
+            boolean clickedSameLabel = existing != null
+                    && phaseOwner.equals(existing.getPhaseOwner())
+                    && phaseType == existing.getPhase();
+            if (clickedSameLabel) {
+                ctrl.clearYieldMarker();
+            } else {
+                // Setting a marker implies we want to stop here — un-skip the cell so the marker can fire.
+                stopAtPhase = true;
+                ctrl.setYieldMarker(phaseOwner, phaseType);
+                // Pass current priority so the marker takes effect immediately.
+                ctrl.selectButtonOk();
+            }
+            // Net controller stores state locally without a UI hook; refresh explicitly so chevron updates.
+            PlayerView local = MatchController.instance.getCurrentPlayer();
+            if (local != null) {
+                MatchController.instance.refreshYieldUi(local);
+            }
             return true;
         }
 
@@ -147,21 +206,36 @@ public class VPhaseIndicator extends FContainer {
             float h = getHeight();
 
             //determine back color according to skip or active state of label
-            FSkinColor backColor;
-            if (active && stopAtPhase) {
-                backColor = Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_PHASE_ACTIVE_ENABLED) : FSkinColor.get(Colors.CLR_PHASE_ACTIVE_ENABLED);
+            if (yieldMarked) {
+                g.fillRect(YIELD_MARKER_COLOR, x, 0, w, h);
+                drawChevron(g, x, w, h);
+                // Skip the caption when marked — chevron replaces the phase abbreviation.
+            } else {
+                FSkinColor backColor;
+                if (active && stopAtPhase) {
+                    backColor = Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_PHASE_ACTIVE_ENABLED) : FSkinColor.get(Colors.CLR_PHASE_ACTIVE_ENABLED);
+                }
+                else if (!active && stopAtPhase) {
+                    backColor = Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_PHASE_INACTIVE_ENABLED) : FSkinColor.get(Colors.CLR_PHASE_INACTIVE_ENABLED);
+                }
+                else if (active && !stopAtPhase) {
+                    backColor = Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_PHASE_ACTIVE_DISABLED) : FSkinColor.get(Colors.CLR_PHASE_ACTIVE_DISABLED);
+                }
+                else {
+                    backColor = Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_PHASE_INACTIVE_DISABLED) : FSkinColor.get(Colors.CLR_PHASE_INACTIVE_DISABLED);
+                }
+                g.fillRect(isHovered() ? backColor.brighter() : backColor, x, 0, w, h);
+                g.drawText(caption, isHovered() && font.canIncrease() ? font.increase() : font, Color.BLACK, x, 0, w, h, false, Align.center, true);
             }
-            else if (!active && stopAtPhase) {
-                backColor = Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_PHASE_INACTIVE_ENABLED) : FSkinColor.get(Colors.CLR_PHASE_INACTIVE_ENABLED);
-            }
-            else if (active && !stopAtPhase) {
-                backColor = Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_PHASE_ACTIVE_DISABLED) : FSkinColor.get(Colors.CLR_PHASE_ACTIVE_DISABLED);
-            }
-            else {
-                backColor = Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_PHASE_INACTIVE_DISABLED) : FSkinColor.get(Colors.CLR_PHASE_INACTIVE_DISABLED);
-            }
-            g.fillRect(isHovered() ? backColor.brighter() : backColor, x, 0, w, h);
-            g.drawText(caption, isHovered() && font.canIncrease() ? font.increase() : font, Color.BLACK, x, 0, w, h, false, Align.center, true);
+        }
+
+        private void drawChevron(final Graphics g, float x, float w, float h) {
+            // Two back-to-back triangles centered in the cell, mirroring desktop.
+            float size = Math.max(Utils.scale(6f), h * 0.55f);
+            float cx = x + (w - size) / 2f;
+            float cy = (h - size) / 2f;
+            g.fillTriangle(Color.BLACK, cx,            cy,            cx + size / 2f, cy + size / 2f, cx,            cy + size);
+            g.fillTriangle(Color.BLACK, cx + size / 2f, cy,            cx + size,      cy + size / 2f, cx + size / 2f, cy + size);
         }
     }
 }

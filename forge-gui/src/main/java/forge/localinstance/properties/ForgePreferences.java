@@ -147,6 +147,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         YIELD_DECLINE_SCOPE_NO_ACTIONS("turn"),
         YIELD_AUTO_PASS_NO_ACTIONS("false"),
         YIELD_AVAILABLE_ACTIONS_BUDGET_MS("0"),
+        YIELD_SKIP_PHASE_DELAY("false"),
+        YIELD_SKIP_RESOLVE_DELAY("false"),
         UI_STACK_EFFECT_NOTIFICATION_POLICY ("Never"),
         UI_LAND_PLAYED_NOTIFICATION_POLICY ("Never"),
         UI_PAUSE_WHILE_MINIMIZED("false"),
@@ -325,13 +327,6 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         SHORTCUT_CARDOVERLAYS("17 79"),
         SHORTCUT_YIELD_OPTIONS("17 89"),                         // Ctrl+Y
         SHORTCUT_YIELD_AUTO_PASS("113"),                         // F2 key
-        SHORTCUT_YIELD_UNTIL_NEXT_PHASE("114"),                  // F3 key
-        SHORTCUT_YIELD_UNTIL_BEFORE_COMBAT("115"),               // F4 key
-        SHORTCUT_YIELD_UNTIL_END_STEP("116"),                    // F5 key
-        SHORTCUT_YIELD_UNTIL_END_OF_TURN("117"),                 // F6 key
-        SHORTCUT_YIELD_UNTIL_END_STEP_BEFORE_YOUR_TURN("118"),   // F7 key (new)
-        SHORTCUT_YIELD_UNTIL_YOUR_NEXT_TURN("119"),              // F8 key
-        SHORTCUT_YIELD_UNTIL_STACK_CLEARS("120"),                // F9 key
         SHORTCUT_YIELD_CANCEL("27"),                             // ESC key
 
         LAST_IMPORTED_CUBE_ID("");

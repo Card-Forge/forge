@@ -43,53 +43,21 @@ public class VYield implements IVDoc<CYield> {
     private final Localizer localizer = Localizer.getInstance();
     private final DragTab tab = new DragTab(localizer.getMessage("lblYieldOptions"));
 
-    // Yield control buttons
-    private final FButton btnNextPhase = new FButton(localizer.getMessage("lblYieldBtnNextPhase"));
-    private final FButton btnClearStack = new FButton(localizer.getMessage("lblYieldBtnClearStack"));
-    private final FButton btnCombat = new FButton(localizer.getMessage("lblYieldBtnCombat"));
-    private final FButton btnEndStep = new FButton(localizer.getMessage("lblYieldBtnEndStep"));
-    private final FButton btnEndTurn = new FButton(localizer.getMessage("lblYieldBtnEndTurn"));
-    private final FButton btnYourTurn = new FButton(localizer.getMessage("lblYieldBtnYourTurn"));
-    private final FButton btnBeforeYourTurn = new FButton(localizer.getMessage("lblYieldBtnBeforeYourTurn"));
     private final FButton btnAutoPass = new FButton(localizer.getMessage("lblYieldBtnAutoPass"));
-    private final FButton btnSettings = new FButton(localizer.getMessage("lblSettings"));
+    private final FButton btnSettings = new FButton("...");
 
     private final CYield controller;
 
     public VYield(final CYield controller) {
         this.controller = controller;
 
-        // Use smaller font to fit button text
         java.awt.Font smallFont = FSkin.getBoldFont(11).getBaseFont();
-        btnNextPhase.setFont(smallFont);
-        btnClearStack.setFont(smallFont);
-        btnCombat.setFont(smallFont);
-        btnEndStep.setFont(smallFont);
-        btnEndTurn.setFont(smallFont);
-        btnYourTurn.setFont(smallFont);
-        btnBeforeYourTurn.setFont(smallFont);
         btnAutoPass.setFont(smallFont);
         btnSettings.setFont(smallFont);
 
-        // Enable highlight mode: blue by default, red when active yield
-        btnNextPhase.setUseHighlightMode(true);
-        btnClearStack.setUseHighlightMode(true);
-        btnCombat.setUseHighlightMode(true);
-        btnEndStep.setUseHighlightMode(true);
-        btnEndTurn.setUseHighlightMode(true);
-        btnYourTurn.setUseHighlightMode(true);
-        btnBeforeYourTurn.setUseHighlightMode(true);
         btnAutoPass.setUseHighlightMode(true);
         btnSettings.setUseHighlightMode(true);
 
-        // Set tooltips on yield buttons
-        btnNextPhase.setToolTipText(localizer.getMessage("lblYieldBtnNextPhaseTooltip"));
-        btnClearStack.setToolTipText(localizer.getMessage("lblYieldBtnClearStackTooltip"));
-        btnCombat.setToolTipText(localizer.getMessage("lblYieldBtnCombatTooltip"));
-        btnEndStep.setToolTipText(localizer.getMessage("lblYieldBtnEndStepTooltip"));
-        btnEndTurn.setToolTipText(localizer.getMessage("lblYieldBtnEndTurnTooltip"));
-        btnYourTurn.setToolTipText(localizer.getMessage("lblYieldBtnYourTurnTooltip"));
-        btnBeforeYourTurn.setToolTipText(localizer.getMessage("lblYieldBtnBeforeYourTurnTooltip"));
         btnAutoPass.setToolTipText(localizer.getMessage("lblYieldBtnAutoPassTooltip"));
         btnSettings.setToolTipText(localizer.getMessage("lblInterruptSettingsTooltip"));
     }
@@ -99,41 +67,12 @@ public class VYield implements IVDoc<CYield> {
         JPanel container = parentCell.getBody();
 
         boolean largerButtons = FModel.getPreferences().getPrefBoolean(FPref.UI_FOR_TOUCHSCREN);
-        String buttonConstraints = largerButtons
-            ? "w 10:50%, h 40px:40px:60px"
-            : "w 10:50%, hmin 20px";
+        String heightConstraint = largerButtons ? "h 40px:40px:60px" : "hmin 20px";
 
-        // 2-column layout
-        container.setLayout(new MigLayout("wrap 2, gap 1px!, insets 2px"));
+        container.setLayout(new MigLayout("gap 1px!, insets 2px, fillx"));
 
-        // Row 1: Auto-Pass toggle (full width, emphasized at top)
-        String fullWidthConstraints = largerButtons
-            ? "span 2, w 10:100%, h 40px:40px:60px"
-            : "span 2, w 10:100%, hmin 20px";
-        container.add(btnAutoPass, "gaptop 2px, " + fullWidthConstraints);
-
-        // Themed separators
-        String sepConstraints = "newline, span 2, growx, gaptop 3px, gapbottom 1px";
-        javax.swing.JSeparator sep1 = new javax.swing.JSeparator();
-        sep1.setForeground(FSkin.getColor(FSkin.Colors.CLR_BORDERS).getColor());
-        container.add(sep1, sepConstraints);
-
-        // Yield buttons in game-flow order (2 columns)
-        container.add(btnNextPhase, buttonConstraints);
-        container.add(btnCombat, buttonConstraints);
-        container.add(btnEndStep, buttonConstraints);
-        container.add(btnEndTurn, buttonConstraints);
-        container.add(btnBeforeYourTurn, buttonConstraints);
-        container.add(btnYourTurn, buttonConstraints);
-        container.add(btnClearStack, buttonConstraints);
-
-        // Separator before settings — newline forces it below Clear Stack
-        javax.swing.JSeparator sep2 = new javax.swing.JSeparator();
-        sep2.setForeground(FSkin.getColor(FSkin.Colors.CLR_BORDERS).getColor());
-        container.add(sep2, sepConstraints);
-
-        // Settings (full width)
-        container.add(btnSettings, fullWidthConstraints);
+        container.add(btnAutoPass, "growx, pushx, w 83%, " + heightConstraint + ", gaptop 2px");
+        container.add(btnSettings, "w 17%, " + heightConstraint + ", gaptop 2px");
     }
 
     @Override
@@ -161,14 +100,6 @@ public class VYield implements IVDoc<CYield> {
         return controller;
     }
 
-    // Button getters
-    public FButton getBtnNextPhase() { return btnNextPhase; }
-    public FButton getBtnClearStack() { return btnClearStack; }
-    public FButton getBtnCombat() { return btnCombat; }
-    public FButton getBtnEndStep() { return btnEndStep; }
-    public FButton getBtnEndTurn() { return btnEndTurn; }
-    public FButton getBtnYourTurn() { return btnYourTurn; }
     public FButton getBtnAutoPass() { return btnAutoPass; }
     public FButton getBtnSettings() { return btnSettings; }
-    public FButton getBtnBeforeYourTurn() { return btnBeforeYourTurn; }
 }

@@ -27,7 +27,7 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
 
-/** Immutable snapshot of a player's yield-related preferences, used for bulk network sync. */
+/** Immutable snapshot of a player's yield-related interrupt preferences, used for bulk network sync. */
 public final class YieldPrefs implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -42,7 +42,6 @@ public final class YieldPrefs implements Serializable {
         FPref.YIELD_AUTO_PASS_NO_ACTIONS,
     };
 
-    private final YieldMode mode;
     private final boolean onAttackers;
     private final boolean onTargeting;
     private final boolean onOpponentSpell;
@@ -51,10 +50,9 @@ public final class YieldPrefs implements Serializable {
     private final boolean onMassRemoval;
     private final boolean autoPassNoActions;
 
-    private YieldPrefs(YieldMode mode, boolean onAttackers, boolean onTargeting,
+    private YieldPrefs(boolean onAttackers, boolean onTargeting,
                        boolean onOpponentSpell, boolean onTriggers,
                        boolean onReveal, boolean onMassRemoval, boolean autoPassNoActions) {
-        this.mode = mode == null ? YieldMode.NONE : mode;
         this.onAttackers = onAttackers;
         this.onTargeting = onTargeting;
         this.onOpponentSpell = onOpponentSpell;
@@ -67,7 +65,6 @@ public final class YieldPrefs implements Serializable {
     /** Snapshot from an IGameController (controller-layer state). */
     public YieldPrefs(IGameController controller) {
         this(
-            controller.getYieldMode(),
             controller.getYieldInterruptPref(FPref.YIELD_INTERRUPT_ON_ATTACKERS),
             controller.getYieldInterruptPref(FPref.YIELD_INTERRUPT_ON_TARGETING),
             controller.getYieldInterruptPref(FPref.YIELD_INTERRUPT_ON_OPPONENT_SPELL),
@@ -82,7 +79,6 @@ public final class YieldPrefs implements Serializable {
     public static YieldPrefs fromCurrentPreferences() {
         ForgePreferences prefs = FModel.getPreferences();
         return new YieldPrefs(
-            YieldMode.NONE,
             prefs.getPrefBoolean(FPref.YIELD_INTERRUPT_ON_ATTACKERS),
             prefs.getPrefBoolean(FPref.YIELD_INTERRUPT_ON_TARGETING),
             prefs.getPrefBoolean(FPref.YIELD_INTERRUPT_ON_OPPONENT_SPELL),
@@ -92,8 +88,6 @@ public final class YieldPrefs implements Serializable {
             prefs.getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS)
         );
     }
-
-    public YieldMode getMode() { return mode; }
 
     /** Returns false if {@code pref} is not a recognized yield interrupt key. */
     public boolean getInterrupt(FPref pref) {

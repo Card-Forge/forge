@@ -3,28 +3,33 @@ The standard priority system in Forge can involve dozens of priority passes ever
 
 **Advanced Yield Options** is an experimental feature that significantly expands the legacy Forge auto-pass system through:
 
-- giving players the ability to automatically yield priority until specific game conditions are met, without needing to respond to priority passes in the meantime.
+- enabling players to automatically yield when there is no available action they can take.
+- giving players the ability to yield until a specific phase is reached, without responding to priority passes in the meantime.
 - configurable yield interrupt conditions, so you'll always get control back when something important happens (e.g. you are attacked or targeted by a spell).
 - smart suggestions for you to enable yield if there are no useful actions you can take (e.g. it is another player's turn and you have no mana or playable cards).
 
-These features are highly configurable through the Yield Settings dialog, and can be set up to suit your own gameplay preferences.
+These features are highly configurable through the **Yield Settings** dialog, and can be set up to suit your own gameplay preferences.
 
 **Note:** This feature is disabled by default and must be explicitly enabled in preferences.
 
-## How to Enable:
-1. In the Forge main menu open Gameplay Settings > Preferences > **Enable Advanced Yield Options**
-2. Alternatively, in a match open Forge > Game > Yield Options > **Enable Advanced Yield Options** or use the hotkey (default CTRL+Y). 
-3. The change takes effect immediately — no restart required.
+## How to Enable
 
-## Once enabled:
-- **Yield Options** will appear as a dockable panel inside the match UI (by default this is a tab in the same panel as prompt). This panel can be re-arranged within the layout at your convenience.
-- The **Yield Settings** dialog is accessible from the **Settings** button on the yield panel or Forge > Game > Yield Options > Yield Settings.
-- Keyboard shortcuts for different yield modes become active.
-- Smart suggestions begin appearing in the prompt area (if enabled).
+- **Anywhere:** open Gameplay Settings > Preferences > **Enable Advanced Yield Options**.
+- **In a match (desktop):** open the Game menu > **Yield Options** > **Enable Advanced Yield Options**, or press the hotkey (default Ctrl+Y).
+- **In a match (mobile):** open the in-match Game menu and toggle the same option from there.
+
+The change takes effect immediately — no restart required.
+
+## Once Enabled
+
+- The **Yield Options** panel (desktop) exposes the persistent **Auto-Pass** toggle and a **Settings** button that opens the Yield Settings dialog.
+- On **mobile**, two equivalent entries appear in the in-match Game menu (below the existing **Auto-Yields** entry): **Yield Options** (opens the dialog) and **Auto-Pass: ON / OFF** (toggle).
+- **Right-click** any phase indicator (desktop) or **long-press** it (mobile) to set a yield marker on that phase — see [Setting Yield Markers](#setting-yield-markers) below.
+- Smart suggestions begin appearing in the prompt area (see [Automatic Yield Suggestions](#automatic-yield-suggestions)).
 
 ## Auto-Pass
 
-**Auto-Pass** is a persistent toggle (F2 or the Auto-Pass button at the top of the yield panel) that automatically passes priority whenever you have no playable actions available. It's the simplest way to speed up games where you often have nothing to do — enable it once and Forge stops asking for input you'd only use to pass.
+**Auto-Pass** is a persistent toggle (F2 on desktop, or the Auto-Pass button) that automatically passes priority whenever you have no playable actions available. It's the simplest way to speed up games where you often have nothing to do — enable it once and Forge stops asking for input you'd only use to pass.
 
 **How it works:**
 - When enabled, Forge scans your hand, battlefield, and external zones (graveyard, exile, command) for castable spells, playable lands, and activatable abilities.
@@ -32,110 +37,112 @@ These features are highly configurable through the Yield Settings dialog, and ca
 - If you have no available action, Forge passes priority on your behalf without prompting.
 - The button label reflects the state (`Auto-Pass: ON` / `Auto-Pass: OFF`).
 
-**Interaction with interrupts:**
-Auto-Pass respects the interrupt settings in the Yield Settings dialog. Even if you have no actions, you will still be prompted when an interrupt condition fires — for example, when creatures attack you or when a mass-removal spell is cast.
+**Interaction with interrupts:** Auto-Pass respects the interrupt settings in the Yield Settings dialog. Even if you have no actions, you will still be prompted when an interrupt condition fires — for example, when creatures attack you or when a mass-removal spell is cast.
 
-**Persistence:**
-Unlike yield modes below, Auto-Pass does not end on a game event. It stays active until you toggle it off by clicking the button again or pressing F2.
+**Persistence:** Unlike yield markers, Auto-Pass does not end on a game event. It stays active until you toggle it off.
 
-**Performance and Timeout:**
-The action-availability scan can affect performance in complex board states, resulting in slow-downs. 
-
-For that reason the scan is subject to the **Auto-pass calculation timeout** setting. On timeout, the system prompts you instead of auto-passing, so a false positive means an extra prompt rather than a long stall.
-
-The default timeout is **Dynamic** — the budget scales with the number of playable cards (approximately 50ms per card, clamped between 50ms and 1500ms). You can set your own preference to override this in the Yield Settings dialog.
+**Performance and timeout:** The action-availability scan can be expensive in complex board states. The scan is subject to the **Auto-pass calculation timeout** setting in the Yield Settings dialog. On timeout the system prompts you instead of auto-passing, so a false positive means an extra prompt rather than a long stall. The default is **Dynamic** — the budget scales with the number of playable cards (approximately 50ms per card, clamped between 50ms and 1500ms). Set your own value in the Yield Settings dialog to override.
 
 > [!NOTE]
-> **The Auto-pass AI is not always perfectly accurate.** It is designed to avoid false negatives (passing priority when there is action you can take), but there may be times it produces a false positive (giving you priority when there is nothing you can do). 
+> **The Auto-pass AI is not perfect.** It is designed to avoid false negatives (passing priority when there is action you can take) as much as possible. There may be times it produces a false positive (giving you priority when there is nothing you can do). Use with appropriate caution.
 
-## Yield Modes
-The Yield Options panel and keyboard shortcuts provide the following yield modes, which run for a single game event before handing priority back:
+## Yield markers
 
-| Mode | Description | Ends When | Default Hotkey |
-|------|-------------|-----------|----------------|
-| **Next Phase** | Auto-pass until phase changes | Any phase transition | F3 |
-| **Until Combat** | Auto-pass until combat begins | Next COMBAT_BEGIN phase | F4 |
-| **End Step** | Auto-pass until end step | Next END_OF_TURN phase | F5 |
-| **End Turn** | Auto-pass until next turn | Turn number changes | F6 |
-| **Before Your Turn** | Auto-pass until end step before your next turn | Next end step before your turn | F7 |
-| **Your Turn** | Auto-pass until you become active player | Your turn starts | F8 |
-| **Until Stack Clears** | Auto-pass while stack has items | Stack becomes empty | F9 |
-| **Cancel yield** | — | — | ESC |
+A **yield marker** tells Forge to auto-pass priority until a specific phase is reached. Markers are set directly on the phase indicator strip in the match UI.
 
-If you engage a yield mode, the button for that mode will be highlighted in the Yield Options panel to signify the yield is active. The prompt area will also describe what event you are yielding to.
+**Setting a marker:**
+- **Desktop:** right-click the phase indicator cell for the phase you want to yield to.
+- **Mobile:** long-press the phase indicator cell.
 
-A yield can be cancelled at any time by pressing the ESC key, or by clicking the highlighted yield button again (toggle behavior). You will then be given priority passes as normal.
+A fast-forward symbol will appear on the targeted cell to show the marker is active. The prompt area also describes what phase you are yielding to. Forge then auto-passes priority on your behalf until that phase is reached, at which point the marker clears automatically and you regain priority.
 
-Yield buttons are disabled during pre-game, mulligan and cleanup/discard phases.
+**Per-(player, phase) precision:** Each phase indicator cell is distinct per player. Right-clicking your own End Step yields to *your* End Step; right-clicking an opponent's End Step yields to *that opponent's* End Step. In multiplayer (e.g. four-player Commander) this lets you express things like "yield until that opponent's End Step" without affecting how you respond to the other opponents' end steps.
 
-All keyboard shortcuts above can be modified from the in-game hotkeys menu (press H by default).
+**Cancelling:**
+- Right-click (or long-press) the marker again to cancel it.
+- Press **ESC** (desktop) to cancel any active marker.
+- An enabled interrupt firing (see [Yield Interrupt Settings](#yield-interrupt-settings)) cancels the marker and hands priority back to you.
 
-## Yield Settings Dialog
+**Re-targeting:** Right-clicking (or long-pressing) a different phase indicator while a marker is active moves the marker to the new cell. Only one marker is active at a time.
 
-The Yield Settings dialog is accessible from Forge > Game > Yield Options > Yield Settings, or from the Settings button on the yield panel. It contains three sections:
+**Setting a marker passes current priority** and starts auto-passing toward the marked phase. If you didn't want to pass priority, cancel with right-click/long-press or ESC.
+
+## Hotkeys (desktop)
+
+| Hotkey | Action |
+|--------|--------|
+| **F2** | Toggle Auto-Pass |
+| **ESC** | Cancel any active yield marker or stack yield |
+| **Ctrl+Y** | Toggle the **Advanced Yield Options** feature flag |
+
+All hotkeys can be modified from the in-game hotkeys menu (press H by default). Mobile uses Game-menu entries instead of hotkeys.
+
+## Yield Settings Menu
+
+The **Yield Settings** menu is the central configuration UI for advanced yield behavior. It's accessible from:
+- **Desktop:** the Settings button on the Yield Options panel, or Game menu > **Yield Options** > **Yield Settings**.
+- **Mobile:** Game menu > **Yield Options**.
+
+The dialog has four sections:
 
 ### Yield Interrupt Settings
 
-Yield modes automatically cancel when important game events occur. Each interrupt can be individually toggled:
+Yield markers and stack-yield automatically cancel when important game events occur. Each interrupt can be individually toggled:
 
 | Interrupt | Default | Description |
 |-----------|---------|-------------|
 | **Attackers declared against you** | ON | Triggers when creatures attack you specifically (not when other players are attacked) |
 | **You or your permanents targeted** | ON | Triggers when a spell/ability targets you or something you control |
-| **Mass removal spell cast** | ON | Triggers when opponent casts a board wipe or mass removal spell |
+| **Mass removal spell cast** | ON | Triggers when an opponent casts a board wipe or mass removal spell |
 | **Opponent casts any spell** | OFF | Triggers on spells and activated abilities (not triggered abilities) |
 | **Triggered abilities on stack** | OFF | Triggers when triggered abilities are on the stack |
 | **Cards revealed or choices made** | OFF | Triggers when opponent reveal dialogs and choices are made |
 
-**Multiplayer Note:** The attackers interrupt is scoped to you specifically. If Player A attacks Player B, your yield will NOT be interrupted.
+**Multiplayer note:** The attackers interrupt is scoped to you specifically. If Player A attacks Player B, your yield will not be interrupted.
 
 ### Automatic Yield Suggestions
 
-When the system detects situations where you likely cannot take action, it prompts you with a yield suggestion. Suggestions appear in the prompt area with Accept/Decline buttons.
+When the system detects situations where you likely cannot take action, it prompts you with a yield suggestion in the prompt area, with Accept/Decline buttons. Each suggestion type has a dropdown controlling its decline behavior:
 
-Each suggestion type has a dropdown controlling its decline behavior:
-
-| Suggestion | When It Appears | Suggested Mode | Decline Scope Options |
-|------------|-----------------|----------------|-----------------------|
-| **Can't respond to stack** | You have no instant-speed responses available | Until Stack Clears | Never / Always / Once per stack (default) / Once per turn |
-| **No actions available** | No playable cards or activatable abilities (not your turn, stack empty) | Default yield mode | Never / Always / Once per turn (default) |
+| Suggestion | When it appears | Suggested action | Decline scope options |
+|------------|-----------------|------------------|-----------------------|
+| **Can't respond to stack** | You have no instant-speed responses available | Stack yield (auto-pass until stack empties) | Never / Always / Once per stack (default) / Once per turn |
+| **No actions available** | No playable cards or activatable abilities (not your turn, stack empty) | Yield to your next turn | Never / Always / Once per turn (default) |
 
 **Decline scope options:**
-- **Never:** Suggestion is disabled entirely (never shown).
-- **Always:** Suggestion always re-appears on the next priority pass, even if you just declined it.
-- **Once per stack:** Declining suppresses the suggestion until the current stack resolves. A new stack will re-prompt. (Only available for "Can't respond to stack".)
-- **Once per turn:** Declining suppresses the suggestion for the rest of the current turn.
+- **Never:** suggestion is disabled entirely (never shown).
+- **Always:** suggestion re-appears on the next priority pass, even if just declined.
+- **Once per stack:** declining suppresses the suggestion until the current stack resolves. A new stack will re-prompt. (Only available for "Can't respond to stack".)
+- **Once per turn:** declining suppresses the suggestion for the rest of the current turn.
 
 ### Suppression Options
 
-- **Suppress on own turn:** By default, suggestions are suppressed on your own turn since you typically want to take actions during your turn. Note: Suggestions are always suppressed on your first turn regardless of this setting, since you won't have any lands or mana yet.
-- **Suppress immediately after yield ends:** By default, suggestions are suppressed for one priority pass when a yield expires or is interrupted. This gives you time to assess the game state before deciding whether to re-yield.
+- **Suppress on own turn:** by default, suggestions are suppressed on your own turn since you typically want to take actions during your turn. Suggestions are always suppressed on your first turn regardless of this setting, since you won't have any lands or mana yet.
+- **Suppress immediately after yield ends:** by default, suggestions are suppressed for one priority pass when a yield expires or is interrupted, giving you time to assess the game state before deciding whether to re-yield.
 
-**Additional suggestion behavior:**
-- Suggestions will not appear if you're already yielding.
-- Clicking a yield button while a suggestion is showing activates the clicked yield mode instead of the suggested one.
+### Speed Options
+
+- **Auto-pass calculation timeout:** The amount of time in milliseconds the AI has to calculate whether you have any available actions and whether you should auto-pass. If the timeout is reached auto-pass will return false and hand you priority as a safeguard. The default is **Dynamic** — the budget scales with the number of playable cards (approximately 50ms per card, clamped between 50ms and 1500ms). 
+- **Skip delay between phases:** skip Forge's default 200ms delay between each phase resolving.
+- **Skip delay when stack resolves:** skip Forge's default 400ms delay between items on the stack resolving.
 
 ## Troubleshooting
 
-### Yield doesn't activate when clicking button
-- Verify **Advanced Yield Options** is enabled in preferences
-- Yield buttons are disabled during mulligan, pre-game, and cleanup phases
+### Yield marker doesn't appear when right-clicking / long-pressing a phase indicator
+- Verify **Advanced Yield Options** is enabled in preferences.
+- Markers cannot be set during pre-game, mulligan, or cleanup phases.
 
 ### Yield clears unexpectedly
-- Check interrupt settings in the Yield Settings dialog
-- If being attacked or targeted, yield will clear (if those interrupts are enabled)
-- Yield modes automatically clear when their end condition is met
+- Check interrupt settings in the Yield Settings dialog.
+- A marker also clears automatically the moment its target phase is reached.
 
 ### Smart suggestions not appearing
-- Verify the suggestion's decline scope is not set to "Never" in the Yield Settings dialog
-- Suggestions don't appear if you're already yielding
-- If you declined a suggestion, check the decline scope to understand when it will re-appear
-- Suggestions only appear when Advanced Yield Options are enabled
+- Verify the suggestion's decline scope is not set to "Never" in the Yield Settings dialog.
+- Suggestions don't appear if you're already yielding.
+- If you declined a suggestion, check the decline scope to understand when it will re-appear.
+- Suggestions only appear when Advanced Yield Options are enabled.
 
-### Network play notes
-- The host must have Advanced Yield Options enabled for clients to use them. If the host does not have the option enabled, a warning will be posted in the chat window and the client's yield buttons will be disabled.
-- Each player controls their own yield preferences. Your yield mode and interrupt settings apply to you only and take effect across the network — they do not affect other players and cannot cause desync.
+## Network Play
 
-## Bugs and suggestions?
-
-Please feel free to provide feedback and bug reports in the Discord.
+- The host must have **Advanced Yield Options** enabled for clients to use them. If the host does not have the option enabled, a warning is posted in the chat window and the client's yield controls are disabled.
+- Each player controls their own yield preferences. Your yield marker, stack-yield state, and interrupt settings apply to you only and take effect across the network — they do not affect other players.

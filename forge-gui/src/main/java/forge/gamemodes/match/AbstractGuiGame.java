@@ -598,32 +598,59 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     @Override
-    public boolean activateYieldMode(PlayerView player, YieldMode mode) {
-        return getYieldController().setYieldMode(player, mode);
+    public void activateYieldMarker(PlayerView player, YieldMarker marker) {
+        getYieldController().setYieldMarker(player, marker);
     }
 
     @Override
-    public void applyRemoteYieldMode(PlayerView player, YieldMode mode) {
+    public void clearYieldMarker(PlayerView player) {
+        getYieldController().clearYieldMarker(player);
+    }
+
+    @Override
+    public void setStackYieldUiState(PlayerView player, boolean active) {
+        getYieldController().setStackYield(player, active);
+    }
+
+    @Override
+    public void applyRemoteYieldMarker(PlayerView player, YieldMarker marker) {
         player = PlayerView.findById(getGameView(), player);
         if (player == null) return;
-        getYieldController().setYieldModeSilent(player, mode);
+        getYieldController().setYieldMarkerSilent(player, marker);
     }
 
     @Override
-    public YieldMode getCurrentYieldMode(PlayerView player) {
-        return getYieldController().getYieldMode(player);
+    public void applyRemoteStackYield(PlayerView player, boolean active) {
+        player = PlayerView.findById(getGameView(), player);
+        if (player == null) return;
+        getYieldController().setStackYieldSilent(player, active);
+    }
+
+    @Override
+    public void syncYieldMarkerCleared(PlayerView player) {
+        player = PlayerView.findById(getGameView(), player);
+        if (player == null) return;
+        getYieldController().clearYieldMarkerSilent(player);
+        // Silent path skipped the UI hook; trigger it here.
+        refreshYieldUi(player);
+    }
+
+    @Override
+    public YieldMarker getCurrentYieldMarker(PlayerView player) {
+        return getYieldController().getYieldMarker(player);
+    }
+
+    @Override
+    public boolean isCurrentStackYieldActive(PlayerView player) {
+        return getYieldController().isStackYieldActive(player);
+    }
+
+    @Override
+    public void refreshYieldUi(PlayerView player) {
     }
 
     @Override
     public void setHostYieldEnabled(boolean enabled) {
-        // No-op default for local games. CMatchUI overrides to store and refresh UI.
-    }
-
-    @Override
-    public void syncYieldMode(PlayerView player, YieldMode mode) {
-        player = PlayerView.findById(getGameView(), player);
-        if (player == null) return;
-        getYieldController().setYieldModeSilent(player, mode);
     }
 
     // End auto-yield/input code

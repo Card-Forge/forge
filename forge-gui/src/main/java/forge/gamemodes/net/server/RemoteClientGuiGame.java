@@ -485,9 +485,8 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     }
 
     @Override
-    public void syncYieldMode(final PlayerView player, final forge.gamemodes.match.YieldMode mode) {
-        // Send yield state to client (when server clears yield due to end condition)
-        send(ProtocolMethod.syncYieldMode, player, mode);
+    public void syncYieldMarkerCleared(final PlayerView player) {
+        send(ProtocolMethod.syncYieldMarkerCleared, player);
     }
 
     @Override

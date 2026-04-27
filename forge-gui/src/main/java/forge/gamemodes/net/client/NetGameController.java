@@ -4,11 +4,13 @@ import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.player.actions.PlayerAction;
 import forge.game.spellability.SpellAbilityView;
+import forge.game.phase.PhaseType;
 import forge.gamemodes.match.NextGameDecision;
-import forge.gamemodes.match.YieldMode;
+import forge.gamemodes.match.YieldMarker;
 import forge.gamemodes.match.YieldPrefs;
 import forge.gamemodes.net.GameProtocolSender;
 import forge.gamemodes.net.ProtocolMethod;
+import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.IDevModeCheats;
 import forge.interfaces.IGameController;
 import forge.interfaces.IMacroSystem;
@@ -25,15 +27,18 @@ import java.util.Map;
 public class NetGameController implements IGameController {
 
     private final GameProtocolSender sender;
+    private final IGuiGame clientGui;
+    private final PlayerView playerView;
 
     private final AutoYieldStore yieldStore = new AutoYieldStore();
 
-    private YieldMode yieldMode = YieldMode.NONE;
     private final java.util.EnumMap<ForgePreferences.FPref, Boolean> yieldInterruptPrefs =
             new java.util.EnumMap<>(ForgePreferences.FPref.class);
 
-    public NetGameController(final IToServer server) {
+    public NetGameController(final IToServer server, final IGuiGame clientGui, final PlayerView playerView) {
         sender = new GameProtocolSender(server);
+        this.clientGui = clientGui;
+        this.playerView = playerView;
     }
 
     private void send(final ProtocolMethod method, final Object... args) {
@@ -267,15 +272,37 @@ public class NetGameController implements IGameController {
         }
     }
 
+    // Delegate to the local YieldController so reads see auto-cleared state from server-driven syncs.
     @Override
-    public YieldMode getYieldMode() {
-        return yieldMode;
+    public YieldMarker getYieldMarker() {
+        return clientGui.getCurrentYieldMarker(playerView);
     }
 
     @Override
-    public void setYieldMode(final YieldMode mode) {
-        this.yieldMode = mode == null ? YieldMode.NONE : mode;
-        send(ProtocolMethod.setYieldMode, this.yieldMode);
+    public void setYieldMarker(final PlayerView phaseOwner, final PhaseType phase) {
+        if (phaseOwner == null || phase == null) {
+            clearYieldMarker();
+            return;
+        }
+        clientGui.activateYieldMarker(playerView, new YieldMarker(phaseOwner, phase));
+        send(ProtocolMethod.setYieldMarker, phaseOwner, phase);
+    }
+
+    @Override
+    public void clearYieldMarker() {
+        clientGui.clearYieldMarker(playerView);
+        send(ProtocolMethod.clearYieldMarker);
+    }
+
+    @Override
+    public boolean isStackYieldActive() {
+        return clientGui.isCurrentStackYieldActive(playerView);
+    }
+
+    @Override
+    public void setStackYield(final boolean active) {
+        clientGui.setStackYieldUiState(playerView, active);
+        send(ProtocolMethod.setStackYield, active);
     }
 
     @Override
@@ -298,7 +325,6 @@ public class NetGameController implements IGameController {
     @Override
     public void setYieldPrefs(final YieldPrefs prefs) {
         if (prefs == null) return;
-        this.yieldMode = prefs.getMode();
         this.yieldInterruptPrefs.clear();
         for (Map.Entry<ForgePreferences.FPref, Boolean> e : prefs.getInterrupts().entrySet()) {
             this.yieldInterruptPrefs.put(e.getKey(), e.getValue());

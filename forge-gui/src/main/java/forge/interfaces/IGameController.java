@@ -5,8 +5,9 @@ import java.util.List;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
+import forge.game.phase.PhaseType;
 import forge.gamemodes.match.NextGameDecision;
-import forge.gamemodes.match.YieldMode;
+import forge.gamemodes.match.YieldMarker;
 import forge.gamemodes.match.YieldPrefs;
 import forge.localinstance.properties.ForgePreferences;
 import forge.util.ITriggerEvent;
@@ -72,9 +73,15 @@ public interface IGameController {
     void setShouldAlwaysDeclineTrigger(int trigger);
     void setShouldAlwaysAskTrigger(int trigger);
 
-    // --- Yield-mode and interrupt preferences (per-player) ---
-    YieldMode getYieldMode();
-    void setYieldMode(YieldMode mode);
+    // --- Yield marker (phase-targeted) and stack-yield state (per-player) ---
+    default YieldMarker getYieldMarker() { return null; }
+    default void setYieldMarker(PlayerView phaseOwner, PhaseType phase) { }
+    default void clearYieldMarker() { }
+
+    default boolean isStackYieldActive() { return false; }
+    default void setStackYield(boolean active) { }
+
+    // --- Interrupt preferences (per-player) ---
     boolean getYieldInterruptPref(ForgePreferences.FPref pref);
     void setYieldInterruptPref(ForgePreferences.FPref pref, boolean value);
     YieldPrefs getYieldPrefs();

@@ -38,8 +38,10 @@ import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.match.YieldMarker;
 import forge.gamemodes.net.NetworkGuiGame;
 import forge.gamemodes.match.HostedMatch;
+import forge.interfaces.IGameController;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.util.SGuiChoose;
@@ -683,6 +685,46 @@ public class MatchController extends NetworkGuiGame {
     @Override
     public boolean isUiSetToSkipPhase(final PlayerView playerTurn, final PhaseType phase) {
         return !view.stopAtPhase(playerTurn, phase);
+    }
+
+    @Override
+    public void refreshYieldUi(final PlayerView player) {
+        FThreads.invokeInEdtNowOrLater(() -> {
+            if (view == null) {
+                return;
+            }
+            // Marker only rendered for the local player's view.
+            PlayerView local = getCurrentPlayer();
+            if (local == null || !local.equals(player)) {
+                return;
+            }
+            for (final VPlayerPanel panel : view.getPlayerPanelsList()) {
+                VPhaseIndicator pi = panel.getPhaseIndicator();
+                if (pi == null) {
+                    continue;
+                }
+                for (VPhaseIndicator.PhaseLabel l : pi.allLabels()) {
+                    l.setYieldMarked(false);
+                }
+            }
+            IGameController controller = getGameController();
+            YieldMarker marker = controller == null ? null : controller.getYieldMarker();
+            if (marker == null) {
+                return;
+            }
+            VPlayerPanel markedPanel = view.getPlayerPanel(marker.getPhaseOwner());
+            if (markedPanel == null) {
+                return;
+            }
+            VPhaseIndicator markedPi = markedPanel.getPhaseIndicator();
+            if (markedPi == null) {
+                return;
+            }
+            VPhaseIndicator.PhaseLabel target = markedPi.getLabel(marker.getPhase());
+            if (target != null) {
+                target.setYieldMarked(true);
+            }
+        });
     }
 
     public static HostedMatch hostMatch() {

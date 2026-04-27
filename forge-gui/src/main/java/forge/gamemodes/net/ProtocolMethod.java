@@ -10,7 +10,6 @@ import forge.game.player.DelayedReveal;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.gamemodes.match.NextGameDecision;
-import forge.gamemodes.match.YieldMode;
 import forge.gamemodes.match.YieldPrefs;
 import forge.gui.GuiBase;
 import forge.gui.interfaces.IGuiGame;
@@ -74,8 +73,8 @@ public enum ProtocolMethod implements IHasForgeLog {
     isUiSetToSkipPhase  (Mode.SERVER, Boolean.TYPE, PlayerView.class, PhaseType.class),
     setRememberedActions(Mode.SERVER, Void.TYPE),
     nextRememberedAction(Mode.SERVER, Void.TYPE),
-    // Server->Client yield state sync (when server clears yield due to end condition)
-    syncYieldMode       (Mode.SERVER, Void.TYPE, PlayerView.class, YieldMode.class),
+    // Server -> client: marker auto-cleared (priority reached the marked phase)
+    syncYieldMarkerCleared(Mode.SERVER, Void.TYPE, PlayerView.class),
     setHostYieldEnabled (Mode.SERVER, Void.TYPE, Boolean.TYPE),
     showWaitingTimer    (Mode.SERVER, Void.TYPE, PlayerView.class, String.class),
     setHighlighted      (Mode.SERVER, Void.TYPE, GameEntityView.class, Boolean.TYPE),
@@ -104,7 +103,9 @@ public enum ProtocolMethod implements IHasForgeLog {
     setShouldAlwaysAcceptTrigger  (Mode.CLIENT, Void.TYPE, Integer.TYPE),
     setShouldAlwaysDeclineTrigger (Mode.CLIENT, Void.TYPE, Integer.TYPE),
     setShouldAlwaysAskTrigger     (Mode.CLIENT, Void.TYPE, Integer.TYPE),
-    setYieldMode             (Mode.CLIENT, Void.TYPE, YieldMode.class),
+    setYieldMarker           (Mode.CLIENT, Void.TYPE, PlayerView.class, PhaseType.class),
+    clearYieldMarker         (Mode.CLIENT, Void.TYPE),
+    setStackYield            (Mode.CLIENT, Void.TYPE, Boolean.TYPE),
     setYieldInterruptPref    (Mode.CLIENT, Void.TYPE, forge.localinstance.properties.ForgePreferences.FPref.class, Boolean.TYPE),
     setYieldPrefs            (Mode.CLIENT, Void.TYPE, YieldPrefs.class);
 

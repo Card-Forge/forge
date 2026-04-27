@@ -1,31 +1,35 @@
 package forge.toolbox.special;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javax.swing.JPanel;
 
 import forge.game.phase.PhaseType;
+import forge.game.player.PlayerView;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
-/** 
+/**
  * TODO: Write javadoc for this type.
  *
  */
 public class PhaseIndicator extends JPanel {
     private static final long serialVersionUID = -863730022835609252L;
-    
+
     // Phase labels
-    private PhaseLabel lblUpkeep = new PhaseLabel("UP");
-    private PhaseLabel lblDraw = new PhaseLabel("DR");
-    private PhaseLabel lblMain1 = new PhaseLabel("M1");
-    private PhaseLabel lblBeginCombat = new PhaseLabel("BC");
-    private PhaseLabel lblDeclareAttackers = new PhaseLabel("DA");
-    private PhaseLabel lblDeclareBlockers = new PhaseLabel("DB");
-    private PhaseLabel lblFirstStrike = new PhaseLabel("FS");
-    private PhaseLabel lblCombatDamage = new PhaseLabel("CD");
-    private PhaseLabel lblEndCombat = new PhaseLabel("EC");
-    private PhaseLabel lblMain2 = new PhaseLabel("M2");
-    private PhaseLabel lblEndTurn = new PhaseLabel("ET");
-    private PhaseLabel lblCleanup = new PhaseLabel("CL");
+    private PhaseLabel lblUpkeep = new PhaseLabel("UP", PhaseType.UPKEEP);
+    private PhaseLabel lblDraw = new PhaseLabel("DR", PhaseType.DRAW);
+    private PhaseLabel lblMain1 = new PhaseLabel("M1", PhaseType.MAIN1);
+    private PhaseLabel lblBeginCombat = new PhaseLabel("BC", PhaseType.COMBAT_BEGIN);
+    private PhaseLabel lblDeclareAttackers = new PhaseLabel("DA", PhaseType.COMBAT_DECLARE_ATTACKERS);
+    private PhaseLabel lblDeclareBlockers = new PhaseLabel("DB", PhaseType.COMBAT_DECLARE_BLOCKERS);
+    private PhaseLabel lblFirstStrike = new PhaseLabel("FS", PhaseType.COMBAT_FIRST_STRIKE_DAMAGE);
+    private PhaseLabel lblCombatDamage = new PhaseLabel("CD", PhaseType.COMBAT_DAMAGE);
+    private PhaseLabel lblEndCombat = new PhaseLabel("EC", PhaseType.COMBAT_END);
+    private PhaseLabel lblMain2 = new PhaseLabel("M2", PhaseType.MAIN2);
+    private PhaseLabel lblEndTurn = new PhaseLabel("ET", PhaseType.END_OF_TURN);
+    private PhaseLabel lblCleanup = new PhaseLabel("CL", PhaseType.CLEANUP);
     
     
     public PhaseIndicator() { 
@@ -108,6 +112,20 @@ public class PhaseIndicator extends JPanel {
             default:
                 return null;
         }
+    }
+
+    /** Push the per-VField player binding to every label so right-click can route to it. */
+    public void setOwner(final PlayerView player) {
+        for (PhaseLabel l : allLabels()) {
+            l.setPhaseOwner(player);
+        }
+    }
+
+    public List<PhaseLabel> allLabels() {
+        return Arrays.asList(
+            lblUpkeep, lblDraw, lblMain1, lblBeginCombat, lblDeclareAttackers,
+            lblDeclareBlockers, lblFirstStrike, lblCombatDamage, lblEndCombat,
+            lblMain2, lblEndTurn, lblCleanup);
     }
 
     /**

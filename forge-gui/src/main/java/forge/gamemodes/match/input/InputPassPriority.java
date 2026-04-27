@@ -21,11 +21,11 @@ import forge.game.Game;
 import forge.game.GameView;
 import forge.game.card.Card;
 import forge.game.player.Player;
+import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.player.actions.PassPriorityAction;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.StackItemView;
-import forge.gamemodes.match.YieldMode;
 import forge.gamemodes.net.server.FServerManager;
 import forge.gamemodes.net.server.FServerManager.AfkTimeout;
 import forge.gui.GuiBase;
@@ -56,9 +56,20 @@ public class InputPassPriority extends InputSyncronizedBase {
 
     private List<SpellAbility> chosenSa;
 
-    // Pending yield suggestion state for prompt integration
-    private YieldMode pendingSuggestion = null;
-    private String pendingSuggestionType = null; // "STACK_YIELD", "NO_ACTIONS"
+    private enum PendingSuggestion {
+        NONE(null, null),
+        STACK_YIELD("STACK_YIELD", FPref.YIELD_DECLINE_SCOPE_STACK_YIELD),
+        NO_ACTIONS("NO_ACTIONS", FPref.YIELD_DECLINE_SCOPE_NO_ACTIONS);
+
+        final String declineKey;
+        final FPref scopePref;
+        PendingSuggestion(String declineKey, FPref scopePref) {
+            this.declineKey = declineKey;
+            this.scopePref = scopePref;
+        }
+    }
+
+    private PendingSuggestion pendingSuggestion = PendingSuggestion.NONE;
     private String pendingSuggestionMessage = null;
 
     public InputPassPriority(final PlayerControllerHuman controller) {
@@ -120,19 +131,17 @@ public class InputPassPriority extends InputSyncronizedBase {
             // Suggestion 1: Stack items but can't respond
             // Check decline state first — short-circuits the expensive
             // hasAvailableActions read when the suggestion is declined.
-            if (!getController().isSuggestionDeclined("STACK_YIELD")
+            if (!getController().isSuggestionDeclined(PendingSuggestion.STACK_YIELD.declineKey)
                 && shouldShowStackYieldPrompt()) {
-                pendingSuggestion = YieldMode.UNTIL_STACK_CLEARS;
-                pendingSuggestionType = "STACK_YIELD";
+                pendingSuggestion = PendingSuggestion.STACK_YIELD;
                 pendingSuggestionMessage = loc.getMessage("lblCannotRespondToStackYieldPrompt");
                 showYieldSuggestionPrompt();
                 return;
             }
             // Suggestion 2: No available actions (empty hand, no abilities)
-            if (!getController().isSuggestionDeclined("NO_ACTIONS")
+            if (!getController().isSuggestionDeclined(PendingSuggestion.NO_ACTIONS.declineKey)
                 && shouldShowNoActionsPrompt()) {
-                pendingSuggestion = getDefaultYieldMode();
-                pendingSuggestionType = "NO_ACTIONS";
+                pendingSuggestion = PendingSuggestion.NO_ACTIONS;
                 pendingSuggestionMessage = loc.getMessage("lblNoActionsAvailableYieldPrompt");
                 showYieldSuggestionPrompt();
                 return;
@@ -143,11 +152,9 @@ public class InputPassPriority extends InputSyncronizedBase {
     }
 
     private void showYieldSuggestionPrompt() {
-        // Double-check yield state right before showing - it may have been set
-        // between the initial check and now (e.g., async button click in multiplayer)
+        // State may have flipped between the initial check and now (e.g. async multiplayer click).
         if (isAlreadyYielding()) {
-            pendingSuggestion = null;
-            pendingSuggestionType = null;
+            pendingSuggestion = PendingSuggestion.NONE;
             pendingSuggestionMessage = null;
             showNormalPrompt();
             return;
@@ -155,11 +162,7 @@ public class InputPassPriority extends InputSyncronizedBase {
 
         Localizer loc = Localizer.getInstance();
         String fullMessage = pendingSuggestionMessage;
-        // Append decline hint based on per-type scope setting
-        FPref scopePref = "STACK_YIELD".equals(pendingSuggestionType)
-            ? FPref.YIELD_DECLINE_SCOPE_STACK_YIELD
-            : FPref.YIELD_DECLINE_SCOPE_NO_ACTIONS;
-        String scope = FModel.getPreferences().getPref(scopePref);
+        String scope = FModel.getPreferences().getPref(pendingSuggestion.scopePref);
         if ("stack".equals(scope)) {
             fullMessage += "\n" + loc.getMessage("lblYieldSuggestionDeclineHintStack");
         } else if ("turn".equals(scope)) {
@@ -175,8 +178,7 @@ public class InputPassPriority extends InputSyncronizedBase {
     }
 
     private void showNormalPrompt() {
-        pendingSuggestion = null;
-        pendingSuggestionType = null;
+        pendingSuggestion = PendingSuggestion.NONE;
         pendingSuggestionMessage = null;
 
         showMessage(getTurnPhasePriorityMessage(getController().getGame()));
@@ -193,48 +195,46 @@ public class InputPassPriority extends InputSyncronizedBase {
     }
 
     private boolean isAlreadyYielding() {
-        YieldMode currentMode = getController().getYieldMode();
-        return currentMode != null && currentMode != YieldMode.NONE;
+        return getController().getYieldMarker() != null
+                || getController().isStackYieldActive();
     }
 
     /** {@inheritDoc} */
     @Override
     protected final void onOk() {
-        // If accepting a yield suggestion (but not if a yield was already set externally)
-        if (pendingSuggestion != null) {
-            // Check if a yield mode was already set (e.g., by clicking a yield button)
-            YieldMode currentMode = getController().getYieldMode();
-            if (currentMode != null && currentMode != YieldMode.NONE) {
-                // A yield mode is already active - clear suggestion and pass through
-                pendingSuggestion = null;
-                pendingSuggestionType = null;
+        if (pendingSuggestion != PendingSuggestion.NONE) {
+            if (isAlreadyYielding()) {
+                pendingSuggestion = PendingSuggestion.NONE;
                 pendingSuggestionMessage = null;
                 stop();
                 return;
             }
-            // CYield.toggleAutoPass enables the pref then calls selectButtonOk to advance
-            // the current input. If we reach onOk with a pending suggestion AND the pref
-            // is now ON, the user just toggled — the suggestion couldn't have appeared
-            // with the pref already on (mayAutoPass would have caught it). Suppress the
-            // accidental suggestion accept and just stop the input.
-            // Skip for remote proxies: the host's local pref doesn't apply to remote
-            // players, who can't toggle it via shortcut anyway, so this guard would
-            // produce a false positive on every Accept click from a remote client.
+            // CYield.toggleAutoPass enables the pref then calls selectButtonOk to advance the input.
+            // If we land here with a pending suggestion AND the pref is on, the user just toggled —
+            // the suggestion couldn't have appeared with the pref already on (mayAutoPass would have
+            // caught it). Suppress the accidental accept. Skip for remote proxies: the host's local
+            // pref doesn't apply to remote players, so this guard would false-positive on every Accept.
             if (!getController().getGui().isRemoteGuiProxy()
                     && FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS)) {
-                pendingSuggestion = null;
-                pendingSuggestionType = null;
+                pendingSuggestion = PendingSuggestion.NONE;
                 pendingSuggestionMessage = null;
                 stop();
                 return;
             }
 
-            YieldMode mode = pendingSuggestion;
-            pendingSuggestion = null;
-            pendingSuggestionType = null;
+            PendingSuggestion accepted = pendingSuggestion;
+            pendingSuggestion = PendingSuggestion.NONE;
             pendingSuggestionMessage = null;
-            getController().setYieldMode(mode);
-            if (getController().getYieldMode() == mode) {
+            if (accepted == PendingSuggestion.STACK_YIELD) {
+                getController().setStackYield(true);
+            } else if (accepted == PendingSuggestion.NO_ACTIONS) {
+                // UPKEEP because UNTAP has no priority pass — a marker on UNTAP could never fire.
+                PlayerView self = getPlayerView();
+                if (self != null) {
+                    getController().setYieldMarker(self, PhaseType.UPKEEP);
+                }
+            }
+            if (isAlreadyYielding()) {
                 stop();
             } else {
                 showNormalPrompt();
@@ -252,28 +252,21 @@ public class InputPassPriority extends InputSyncronizedBase {
     @Override
     protected final void onCancel() {
         // If declining a yield suggestion, track the decline and show normal prompt
-        if (pendingSuggestion != null) {
-            // Track that this suggestion was declined for this turn
-            if (pendingSuggestionType != null) {
-                getController().declineSuggestion(pendingSuggestionType);
+        if (pendingSuggestion != PendingSuggestion.NONE) {
+            if (pendingSuggestion.declineKey != null) {
+                getController().declineSuggestion(pendingSuggestion.declineKey);
             }
-            pendingSuggestion = null;
-            pendingSuggestionType = null;
+            pendingSuggestion = PendingSuggestion.NONE;
             pendingSuggestionMessage = null;
             showNormalPrompt();
             return;
         }
 
-        if (!getController().tryUndoLastAction()) { //undo if possible
-            //otherwise end turn
+        if (!getController().tryUndoLastAction()) {
+            // Phase markers can't express "yield until the current turn ends regardless of player",
+            // so the End-Turn cancel button uses the legacy turn-boundary auto-pass.
             passPriority(() -> {
-                if (isExperimentalYieldEnabled()) {
-                    // Use experimental yield system with smart interrupts
-                    getController().setYieldMode(YieldMode.UNTIL_END_OF_TURN);
-                } else {
-                    // Legacy behavior - cancels on any opponent spell
-                    getController().autoPassUntilEndOfTurn();
-                }
+                getController().autoPassUntilEndOfTurn();
                 stop();
             });
         }
@@ -387,13 +380,6 @@ public class InputPassPriority extends InputSyncronizedBase {
 
     private PlayerView getPlayerView() {
         return PlayerView.findById(getController().getGui().getGameView(), getOwner());
-    }
-
-    private YieldMode getDefaultYieldMode() {
-        GameView gv = getGameView();
-        return gv != null && gv.getPlayers().size() >= 3
-            ? YieldMode.UNTIL_YOUR_NEXT_TURN
-            : YieldMode.UNTIL_END_OF_TURN;
     }
 
     private boolean checkHasAvailableActions() {

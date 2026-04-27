@@ -2,8 +2,10 @@ package forge.screens.match.views;
 
 import forge.Forge;
 import forge.assets.FSkinImage;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
+import forge.model.FModel;
 import forge.screens.match.MatchController;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FEvent;
@@ -12,6 +14,10 @@ import forge.util.ThreadUtil;
 
 public class VGameMenu extends FDropDownMenu {
     public VGameMenu() {
+    }
+
+    private static boolean isExperimentalYieldEnabled() {
+        return FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS);
     }
 
     @Override
@@ -62,6 +68,27 @@ public class VGameMenu extends FDropDownMenu {
                 autoYields.show();
             }
         }));
+
+        if (isExperimentalYieldEnabled()) {
+            addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblYieldOptions"),
+                    Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS,
+                    e -> new VYieldOptions().show()));
+
+            boolean autoPassOn = FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS);
+            String autoPassLabel = Forge.getLocalizer().getMessage(autoPassOn ? "lblYieldBtnAutoPassOn" : "lblYieldBtnAutoPass");
+            addItem(new FMenuItem(autoPassLabel,
+                    Forge.hdbuttons ? FSkinImage.HDYIELD : FSkinImage.WARNING,
+                    e -> {
+                        boolean newVal = !FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS);
+                        FModel.getPreferences().setPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS, newVal);
+                        FModel.getPreferences().save();
+                        MatchController.instance.getGameController().setYieldInterruptPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS, newVal);
+                        if (newVal) {
+                            MatchController.instance.getGameController().selectButtonOk();
+                        }
+                    }));
+        }
+
         if (!Forge.isMobileAdventureMode) {
             addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblSettings"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, e -> {
                 //pause game when spectating AI Match

@@ -22,6 +22,7 @@ import forge.game.card.CardView.CardStateView;
 import forge.game.card.token.TokenInfo;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
+import forge.game.phase.PhaseType;
 import forge.game.cost.*;
 import forge.game.event.GameEventAddLog;
 import forge.game.event.GameEventPlayerStatsChanged;
@@ -48,7 +49,7 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.NextGameDecision;
-import forge.gamemodes.match.YieldMode;
+import forge.gamemodes.match.YieldMarker;
 import forge.gamemodes.match.YieldPrefs;
 import forge.gamemodes.match.input.*;
 import forge.gamemodes.net.event.MessageEvent;
@@ -112,8 +113,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     private final Map<Integer, Boolean> remoteTriggerDecisions = Maps.newTreeMap();
     private boolean remoteAutoYieldsDisabled;
 
-    // Yield prefs: authoritative for remote proxies; local path reads FModel/YieldController.
-    private YieldMode yieldModeField = YieldMode.NONE;
+    // Yield state: authoritative for remote proxies; local path reads YieldController via getGui().
+    private YieldMarker yieldMarker;
+    private boolean stackYieldActive;
     private final EnumMap<FPref, Boolean> yieldInterruptPrefs = new EnumMap<>(FPref.class);
 
     protected final InputQueue inputQueue;
@@ -940,8 +942,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // are unaffected. Read the interrupt pref from the active player's source
         // (host's local prefs vs the remote client's stored snapshot).
         if (isYieldExperimentalEnabled()) {
-            YieldMode yieldMode = getYieldMode();
-            if (yieldMode != null && yieldMode != YieldMode.NONE
+            if (isYieldActive()
                     && !getActivePlayerInterruptPref(FPref.YIELD_INTERRUPT_ON_REVEAL)) {
                 // Still show the cards temporarily but skip the dialog that requires user input
                 if (!cards.isEmpty()) {
@@ -1546,10 +1547,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             if (stack.isEmpty()) {
                 // make sure to briefly pause at phases you're not set up to skip
                 if (!getGui().isUiSetToSkipPhase(getGame().getPhaseHandler().getPlayerTurn().getView(),
-                        getGame().getPhaseHandler().getPhase())) {
+                        getGame().getPhaseHandler().getPhase())
+                        && !FModel.getPreferences().getPrefBoolean(FPref.YIELD_SKIP_PHASE_DELAY)) {
                     delay = FControlGamePlayback.phasesDelay;
                 }
-            } else {
+            } else if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_SKIP_RESOLVE_DELAY)) {
                 // pause slightly longer for spells and abilities on the stack resolving
                 delay = FControlGamePlayback.resolveDelay;
             }
@@ -1579,10 +1581,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             final SpellAbility ability = stack.peekAbility();
             if (ability != null && ability.isAbility() && shouldAutoYield(ability.yieldKey())) {
                 // avoid prompt for input if top ability of stack is set to auto-yield
-                try {
-                    Thread.sleep(FControlGamePlayback.resolveDelay);
-                } catch (final InterruptedException e) {
-                    e.printStackTrace();
+                if (!FModel.getPreferences().getPrefBoolean(FPref.YIELD_SKIP_RESOLVE_DELAY)) {
+                    try {
+                        Thread.sleep(FControlGamePlayback.resolveDelay);
+                    } catch (final InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
                 netLog.trace("Returning null (autoYield) for player {}", player.getName());
                 return null;
@@ -1757,8 +1761,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             // Gate on the host's experimental flag and read the interrupt pref from the
             // active player's source (host's local prefs vs the remote client's stored snapshot).
             if (isYieldExperimentalEnabled()) {
-                YieldMode yieldMode = getYieldMode();
-                if (yieldMode != null && yieldMode != YieldMode.NONE
+                if (isYieldActive()
                         && !getActivePlayerInterruptPref(FPref.YIELD_INTERRUPT_ON_REVEAL)) {
                     // Log the message but don't show a dialog
                     getGame().getGameLog().add(GameLogEntryType.INFORMATION, message);
@@ -3511,41 +3514,83 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public YieldMode getYieldMode() {
+    public YieldMarker getYieldMarker() {
         if (getGui().isRemoteGuiProxy()) {
-            return yieldModeField;
+            return yieldMarker;
         }
-        return getGui().getCurrentYieldMode(getLocalPlayerView());
+        return getGui().getCurrentYieldMarker(getLocalPlayerView());
     }
 
     @Override
-    public void setYieldMode(final YieldMode mode) {
-        YieldMode normalized = mode == null ? YieldMode.NONE : mode;
-        if (getGui().isRemoteGuiProxy()) {
-            // Server-side proxy: check if host has experimental yield enabled before accepting
-            if (normalized != YieldMode.NONE && !isYieldExperimentalEnabled()) {
-                final FServerManager server = FServerManager.getInstance();
-                if (server != null && server.isHosting()) {
-                    server.broadcast(new MessageEvent(
-                        localizer.getMessage("lblYieldHostDisabled", getLocalPlayerView().getName())));
-                }
-                getGui().setHostYieldEnabled(false);
-                if (normalized != YieldMode.UNTIL_END_OF_TURN) {
-                    getGui().syncYieldMode(getLocalPlayerView(), YieldMode.NONE);
-                    return;
-                }
-            }
-            yieldModeField = normalized;
-            getGui().applyRemoteYieldMode(getLocalPlayerView(), normalized);
+    public void setYieldMarker(final PlayerView phaseOwner, final PhaseType phase) {
+        if (phaseOwner == null || phase == null) {
+            clearYieldMarker();
             return;
         }
-        boolean activated = getGui().activateYieldMode(getLocalPlayerView(), normalized);
-        if (activated || normalized == YieldMode.NONE) {
-            yieldModeField = normalized;
+        if (!checkHostYieldEnabled()) {
+            return;
         }
-        if (activated) {
+        YieldMarker marker = new YieldMarker(phaseOwner, phase);
+        if (getGui().isRemoteGuiProxy()) {
+            this.yieldMarker = marker;
+            getGui().applyRemoteYieldMarker(getLocalPlayerView(), marker);
+        } else {
+            getGui().activateYieldMarker(getLocalPlayerView(), marker);
             getGui().updateAutoPassPrompt();
         }
+    }
+
+    @Override
+    public void clearYieldMarker() {
+        if (getGui().isRemoteGuiProxy()) {
+            this.yieldMarker = null;
+            getGui().applyRemoteYieldMarker(getLocalPlayerView(), null);
+        } else {
+            getGui().clearYieldMarker(getLocalPlayerView());
+        }
+    }
+
+    @Override
+    public boolean isStackYieldActive() {
+        if (getGui().isRemoteGuiProxy()) {
+            return stackYieldActive;
+        }
+        return getGui().isCurrentStackYieldActive(getLocalPlayerView());
+    }
+
+    @Override
+    public void setStackYield(final boolean active) {
+        if (active && !checkHostYieldEnabled()) {
+            return;
+        }
+        if (getGui().isRemoteGuiProxy()) {
+            this.stackYieldActive = active;
+            getGui().applyRemoteStackYield(getLocalPlayerView(), active);
+        } else {
+            getGui().setStackYieldUiState(getLocalPlayerView(), active);
+            getGui().updateAutoPassPrompt();
+        }
+    }
+
+    /** True if the host's experimental yield pref is enabled, or this is a host-side controller (no remote gating needed). */
+    private boolean checkHostYieldEnabled() {
+        if (!getGui().isRemoteGuiProxy()) {
+            return true;
+        }
+        if (isYieldExperimentalEnabled()) {
+            return true;
+        }
+        final FServerManager server = FServerManager.getInstance();
+        if (server != null && server.isHosting()) {
+            server.broadcast(new MessageEvent(
+                localizer.getMessage("lblYieldHostDisabled", getLocalPlayerView().getName())));
+        }
+        getGui().setHostYieldEnabled(false);
+        return false;
+    }
+
+    private boolean isYieldActive() {
+        return yieldMarker != null || stackYieldActive;
     }
 
     @Override
@@ -3579,7 +3624,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         for (Map.Entry<FPref, Boolean> e : prefs.getInterrupts().entrySet()) {
             yieldInterruptPrefs.put(e.getKey(), e.getValue());
         }
-        setYieldMode(prefs.getMode());
     }
 
     private boolean isYieldExperimentalEnabled() {

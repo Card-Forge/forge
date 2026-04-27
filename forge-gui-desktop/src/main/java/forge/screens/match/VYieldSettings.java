@@ -108,7 +108,15 @@ public class VYieldSettings extends FDialog {
         add(sep2, x, y, w, 2);
         y += 2 + SECTION_GAP;
 
+        // --- Speed Settings section ---
+        FLabel lblSpeed = new FLabel.Builder().text(localizer.getMessage("lblSpeedSettings"))
+                .fontStyle(java.awt.Font.BOLD).fontSize(14).build();
+        add(lblSpeed, x, y, w, ROW_HEIGHT);
+        y += ROW_HEIGHT + 2;
+
         y = addTimeoutField(x, y, w, prefs);
+        y = addCheckbox(x, y, w, localizer.getMessage("lblSkipPhaseDelay"), FPref.YIELD_SKIP_PHASE_DELAY, prefs);
+        y = addCheckbox(x, y, w, localizer.getMessage("lblSkipResolveDelay"), FPref.YIELD_SKIP_RESOLVE_DELAY, prefs);
 
         y += SECTION_GAP;
 
@@ -176,17 +184,18 @@ public class VYieldSettings extends FDialog {
     }
 
     private int addTimeoutField(int x, int y, int w, ForgePreferences prefs) {
+        final Localizer loc = Localizer.getInstance();
         final int fieldWidth = DROPDOWN_WIDTH;
         int lblWidth = w - fieldWidth - PADDING;
-        String tooltip = "0 = Dynamic (50ms \u00d7 playable cards, clamped to 50-1500ms).";
-        FLabel lbl = new FLabel.Builder().text("Auto-pass calculation timeout (ms)")
+        String tooltip = loc.getMessage("lblAutoPassBudgetDesc");
+        FLabel lbl = new FLabel.Builder().text(loc.getMessage("lblAutoPassBudgetLabel"))
                 .fontAlign(javax.swing.SwingConstants.LEFT).build();
         lbl.setToolTipText(tooltip);
         add(lbl, x, y, lblWidth, ROW_HEIGHT);
 
         int current = prefs.getPrefInt(FPref.YIELD_AVAILABLE_ACTIONS_BUDGET_MS);
         FTextField field = new FTextField.Builder()
-                .ghostText("Dynamic")
+                .ghostText(loc.getMessage("lblDynamic"))
                 .tooltip(tooltip)
                 .text(current > 0 ? String.valueOf(current) : "")
                 .build();

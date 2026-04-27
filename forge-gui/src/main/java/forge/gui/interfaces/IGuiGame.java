@@ -10,7 +10,7 @@ import forge.game.event.GameEvent;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
 import forge.game.phase.PhaseType;
-import forge.gamemodes.match.YieldMode;
+import forge.gamemodes.match.YieldMarker;
 import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
@@ -278,15 +278,20 @@ public interface IGuiGame {
 
     void updateAutoPassPrompt();
 
-    /** Activate YieldController for the local player (no remote feedback loop). Returns true if a mode was activated. */
-    boolean activateYieldMode(PlayerView player, YieldMode mode);
+    void activateYieldMarker(PlayerView player, YieldMarker marker);
+    void clearYieldMarker(PlayerView player);
+    void setStackYieldUiState(PlayerView player, boolean active);
 
-    /** Apply a mode received from a remote client (silent, no callbacks). */
-    void applyRemoteYieldMode(PlayerView player, YieldMode mode);
+    /** Apply remote-client intent without re-broadcasting. */
+    void applyRemoteYieldMarker(PlayerView player, YieldMarker marker);
+    void applyRemoteStackYield(PlayerView player, boolean active);
 
-    YieldMode getCurrentYieldMode(PlayerView player);
+    void syncYieldMarkerCleared(PlayerView player);
 
-    void syncYieldMode(PlayerView player, YieldMode mode);
+    YieldMarker getCurrentYieldMarker(PlayerView player);
+    boolean isCurrentStackYieldActive(PlayerView player);
+
+    void refreshYieldUi(PlayerView player);
 
     void setHostYieldEnabled(boolean enabled);
 

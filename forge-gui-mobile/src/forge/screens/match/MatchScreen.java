@@ -355,20 +355,27 @@ public class MatchScreen extends FScreen {
         }
 
         if (gameMenu != null) {
-            if (gameMenu.getChildCount() > 1) {
+            int n = gameMenu.getChildCount();
+            if (n > 1) {
+                // VGameMenu builds: Concede(0), Auto-Yields(1), [Yield Options, Auto-Pass when experimental yield is on],
+                // then Settings, Show WinLose Overlay (only when !isMobileAdventureMode).
+                // Settings and Show WinLose are therefore the last two entries when present;
+                // any pref-gated items between them shift indices but never push Settings off the tail.
+                int idxShowWinLose = n - 1;
+                int idxSettings = n - 2;
                 if (viewWinLose == null) {
                     gameMenu.getChildAt(0).setEnabled(!game.isMulligan());
                     gameMenu.getChildAt(1).setEnabled(!game.isMulligan());
                     if (!Forge.isMobileAdventureMode) {
-                        gameMenu.getChildAt(2).setEnabled(!game.isMulligan());
-                        gameMenu.getChildAt(3).setEnabled(false);
+                        gameMenu.getChildAt(idxSettings).setEnabled(!game.isMulligan());
+                        gameMenu.getChildAt(idxShowWinLose).setEnabled(false);
                     }
                 } else {
                     gameMenu.getChildAt(0).setEnabled(false);
                     gameMenu.getChildAt(1).setEnabled(false);
                     if (!Forge.isMobileAdventureMode) {
-                        gameMenu.getChildAt(2).setEnabled(false);
-                        gameMenu.getChildAt(3).setEnabled(true);
+                        gameMenu.getChildAt(idxSettings).setEnabled(false);
+                        gameMenu.getChildAt(idxShowWinLose).setEnabled(true);
                     }
                 }
             }

@@ -30,7 +30,6 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
 import forge.game.card.CardView;
-import forge.gamemodes.match.YieldMode;
 import forge.interfaces.IGameController;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -77,20 +76,23 @@ public class VPrompt implements IVDoc<CPrompt> {
         @Override
         public void keyPressed(final KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-                // Try to cancel yield first if experimental options enabled
                 if (FModel.getPreferences().getPrefBoolean(FPref.YIELD_EXPERIMENTAL_OPTIONS)) {
                     if (controller.getMatchUI() != null) {
                         IGameController ctrl = controller.getMatchUI().getGameController();
                         if (ctrl != null) {
-                            YieldMode currentYield = ctrl.getYieldMode();
-                            if (currentYield != null && currentYield != YieldMode.NONE) {
-                                ctrl.setYieldMode(YieldMode.NONE);
-                                return;
+                            boolean cleared = false;
+                            if (ctrl.getYieldMarker() != null) {
+                                ctrl.clearYieldMarker();
+                                cleared = true;
                             }
+                            if (ctrl.isStackYieldActive()) {
+                                ctrl.setStackYield(false);
+                                cleared = true;
+                            }
+                            if (cleared) return;
                         }
                     }
                 }
-                // Existing ESC behavior
                 if (btnCancel.isEnabled()) {
                     if (FModel.getPreferences().getPrefBoolean(FPref.UI_ALLOW_ESC_TO_END_TURN) || !btnCancel.getText().equals("End Turn")) {
                         btnCancel.doClick();
