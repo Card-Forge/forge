@@ -1269,6 +1269,7 @@
       "equipmentSlot": "Boots",
       "iconName": "Witch-MawAnklet",
       "effect": {
+        "changeStartCards": -1,
         "lifeModifier": -8,
         "startBattleWithCard": [
           "Witch-Maw Nephilim|GPT"

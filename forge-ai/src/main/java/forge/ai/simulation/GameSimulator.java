@@ -170,7 +170,9 @@ public class GameSimulator {
         SpellAbility sa;
         if (origSa.isLandAbility()) {
             Card hostCard = (Card) copier.find(origSa.getHostCard());
-            if (!aiPlayer.playLand(hostCard, false, origSa)) {
+            if (origSa.canPlay()) {
+                aiPlayer.playLand(hostCard, origSa);
+            } else {
                 System.err.println("Simulation: Couldn't play land! " + origSa);
             }
             sa = origSa;

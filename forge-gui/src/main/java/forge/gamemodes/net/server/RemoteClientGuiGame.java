@@ -480,8 +480,8 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
 
     @Override
     public boolean isUiSetToSkipPhase(final PlayerView playerTurn, final PhaseType phase) {
-        final Boolean result = sendAndWait(ProtocolMethod.isUiSetToSkipPhase, playerTurn, phase);
-        return Boolean.TRUE.equals(result);
+        // Host reads from PlayerControllerHuman's cache; this gui-side path is unreachable
+        return false;
     }
 
     @Override

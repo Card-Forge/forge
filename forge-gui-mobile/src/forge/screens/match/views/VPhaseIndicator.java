@@ -128,6 +128,7 @@ public class VPhaseIndicator extends FContainer {
         private boolean stopAtPhase = false;
         private boolean active = false;
         private boolean yieldMarked = false;
+        private Runnable onToggled;
 
         public PhaseLabel(String caption0, PhaseType phaseType0) {
             caption = caption0;
@@ -159,9 +160,14 @@ public class VPhaseIndicator extends FContainer {
             this.yieldMarked = v;
         }
 
+        public void setOnToggled(Runnable r) {
+            onToggled = r;
+        }
+
         @Override
         public boolean tap(float x, float y, int count) {
             stopAtPhase = !stopAtPhase;
+            if (onToggled != null) onToggled.run();
             return true;
         }
 

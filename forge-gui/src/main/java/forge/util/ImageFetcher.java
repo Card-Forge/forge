@@ -280,6 +280,15 @@ public abstract class ImageFetcher {
                     || destFile.exists())
                 return;
 
+            // token-images.txt lets mods route specific tokens to hosted URLs.
+            for (org.apache.commons.lang3.tuple.Pair<String, String> pair :
+                    FileUtil.readNameUrlFile(ForgeConstants.IMAGE_LIST_TOKENS_FILE)) {
+                if (filename.equalsIgnoreCase(pair.getLeft())) {
+                    downloadUrls.add(pair.getRight());
+                    break;
+                }
+            }
+
             if (tempdata.length < 2) {
                 if (!"planechase".equals(tempdata[0]))
                     System.err.println("Token image key is malformed: " + imageKey);
@@ -289,9 +298,13 @@ public abstract class ImageFetcher {
 
             // Load the paper token from filename + edition
             CardEdition edition = StaticData.instance().getEditions().get(setCode);
-            if (edition == null || edition.getType() == CardEdition.Type.CUSTOM_SET)
-                return; //Custom set token, skip fetching.
-
+            if (edition == null || edition.getType() == CardEdition.Type.CUSTOM_SET) {
+                // Custom/unknown set (e.g. TDLS/Duelist): rely on the URL map above.
+                if (downloadUrls.isEmpty()) return;
+                ImageKeys.missingCards.add(filename);
+                setupObserver(destFile.getAbsolutePath(), callback, downloadUrls);
+                return;
+            }
             // PaperToken pt = StaticData.instance().getAllTokens().getToken(tokenName, setCode);
             Collection<CardEdition.EditionEntry> allTokens = edition.getTokens().get(tokenName);
 

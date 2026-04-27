@@ -70,7 +70,6 @@ public enum ProtocolMethod implements IHasForgeLog {
     // TODO case "setPlayerAvatar":
     openZones           (Mode.SERVER, PlayerZoneUpdates.class, PlayerView.class, Collection/*ZoneType*/.class, Map/*PlayerView,Object*/.class, Boolean.TYPE),
     restoreOldZones     (Mode.SERVER, Void.TYPE, PlayerView.class, PlayerZoneUpdates.class),
-    isUiSetToSkipPhase  (Mode.SERVER, Boolean.TYPE, PlayerView.class, PhaseType.class),
     setRememberedActions(Mode.SERVER, Void.TYPE),
     nextRememberedAction(Mode.SERVER, Void.TYPE),
     // Server -> client: marker auto-cleared (priority reached the marked phase)
@@ -107,7 +106,8 @@ public enum ProtocolMethod implements IHasForgeLog {
     clearYieldMarker         (Mode.CLIENT, Void.TYPE),
     setStackYield            (Mode.CLIENT, Void.TYPE, Boolean.TYPE),
     setYieldInterruptPref    (Mode.CLIENT, Void.TYPE, forge.localinstance.properties.ForgePreferences.FPref.class, Boolean.TYPE),
-    setYieldPrefs            (Mode.CLIENT, Void.TYPE, YieldPrefs.class);
+    setYieldPrefs            (Mode.CLIENT, Void.TYPE, YieldPrefs.class),
+    setUiShouldSkipPhase     (Mode.CLIENT, Void.TYPE, PlayerView.class, PhaseType.class, Boolean.TYPE);
 
     private enum Mode {
         SERVER(IGuiGame.class),

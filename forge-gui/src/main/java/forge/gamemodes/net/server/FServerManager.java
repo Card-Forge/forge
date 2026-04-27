@@ -62,6 +62,9 @@ import java.util.function.Predicate;
 public final class FServerManager implements IHasForgeLog {
 
     static final int HEARTBEAT_TIMEOUT_SECONDS = Integer.getInteger("forge.net.heartbeatTimeout", 45);
+
+    private static final int OUTBOUND_BUFFER_LOW_WATER = 64 * 1024;
+    private static final int OUTBOUND_BUFFER_HIGH_WATER = 1024 * 1024;
     private static final int RECONNECT_TIMEOUT_SECONDS = 300;
 
     private static FServerManager instance = null;
@@ -141,12 +144,15 @@ public final class FServerManager implements IHasForgeLog {
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         public void initChannel(final SocketChannel ch) throws Exception {
+                            ch.config().setWriteBufferWaterMark(
+                                    new WriteBufferWaterMark(OUTBOUND_BUFFER_LOW_WATER, OUTBOUND_BUFFER_HIGH_WATER));
                             final ChannelPipeline p = ch.pipeline();
                             p.addLast(
                                     new CompatibleObjectEncoder(byteTracker),
                                     new CompatibleObjectDecoder(9766 * 1024, ClassResolvers.cacheDisabled(null)),
                                     new IdleStateHandler(HEARTBEAT_TIMEOUT_SECONDS, 0, 0, TimeUnit.SECONDS),
                                     new MessageHandler(),
+                                    new SaturationLoggingHandler(),
                                     new RegisterClientHandler(),
                                     new LobbyInputHandler(),
                                     new DeregisterClientHandler(),
@@ -890,6 +896,28 @@ public final class FServerManager implements IHasForgeLog {
                 broadcast(new MessageEvent(username, text));
             }
             super.channelRead(ctx, msg);
+        }
+    }
+
+    private class SaturationLoggingHandler extends ChannelInboundHandlerAdapter {
+        @Override
+        public void channelWritabilityChanged(final ChannelHandlerContext ctx) throws Exception {
+            final RemoteClient client = clients.get(ctx.channel());
+            if (client != null) {
+                if (!ctx.channel().isWritable()) {
+                    client.saturationStartMs = System.currentTimeMillis();
+                    client.sendsDuringSaturation.set(0);
+                    netLog.warn("Outbound buffer saturated for {} (pending {} bytes)",
+                            client.getUsername(), ctx.channel().bytesBeforeWritable());
+                } else if (client.saturationStartMs > 0L) {
+                    long durationMs = System.currentTimeMillis() - client.saturationStartMs;
+                    int sends = client.sendsDuringSaturation.get();
+                    client.saturationStartMs = 0L;
+                    netLog.info("{} recovered after {}.{}s outbound buffer saturation ({} server sends)",
+                            client.getUsername(), durationMs / 1000, (durationMs % 1000) / 100, sends);
+                }
+            }
+            super.channelWritabilityChanged(ctx);
         }
     }
 

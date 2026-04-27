@@ -275,7 +275,6 @@ public interface IGuiGame {
     default boolean isRemoteGuiProxy() { return false; }
 
     void autoPassCancel(PlayerView player);
-
     void updateAutoPassPrompt();
 
     void activateYieldMarker(PlayerView player, YieldMarker marker);

@@ -37,6 +37,7 @@ public class PhaseLabel extends JLabel {
     private boolean active = false;
     private boolean hover = false;
     private boolean yieldMarked = false;
+    private Runnable onToggled;
 
 
     public PhaseLabel(final String txt, final PhaseType phaseType) {
@@ -53,6 +54,9 @@ public class PhaseLabel extends JLabel {
                     return;
                 }
                 PhaseLabel.this.enabled = !PhaseLabel.this.enabled;
+                if (PhaseLabel.this.onToggled != null) {
+                    PhaseLabel.this.onToggled.run();
+                }
             }
 
             @Override
@@ -136,6 +140,10 @@ public class PhaseLabel extends JLabel {
 
     public boolean getEnabled() {
         return this.enabled;
+    }
+
+    public void setOnToggled(final Runnable r) {
+        this.onToggled = r;
     }
 
     public void setActive(final boolean b) {

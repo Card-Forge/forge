@@ -1381,13 +1381,19 @@ public final class CMatchUI
         final PhaseType[] phases = PhaseType.values();
 
         for (int i = 0; i < fieldViews.size(); i++) {
-            final FPref[] keys = isLocalPlayer(sortedPlayers.get(i))
+            final PlayerView player = sortedPlayers.get(i);
+            final FPref[] keys = isLocalPlayer(player)
                     ? FPref.PHASES_HUMAN : FPref.PHASES_AI;
             final PhaseIndicator pi = fieldViews.get(i).getPhaseIndicator();
             for (int p = 1; p < phases.length; p++) {
-                pi.getLabelFor(phases[p]).setEnabled(prefs.getPrefBoolean(keys[p - 1]));
+                final PhaseType phase = phases[p];
+                final PhaseLabel label = pi.getLabelFor(phase);
+                label.setEnabled(prefs.getPrefBoolean(keys[p - 1]));
+                label.setOnToggled(() -> pushSkipPhaseToControllers(player, phase));
             }
         }
+
+        seedSkipPhaseCache();
     }
 
     @Override
