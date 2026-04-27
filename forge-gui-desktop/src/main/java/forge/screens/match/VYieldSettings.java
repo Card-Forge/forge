@@ -61,6 +61,7 @@ public class VYieldSettings extends FDialog {
         y = addCheckbox(x, y, w, localizer.getMessage("lblInterruptOnOpponentSpell"), FPref.YIELD_INTERRUPT_ON_OPPONENT_SPELL, prefs);
         y = addCheckbox(x, y, w, localizer.getMessage("lblInterruptOnTriggers"), FPref.YIELD_INTERRUPT_ON_TRIGGERS, prefs);
         y = addCheckbox(x, y, w, localizer.getMessage("lblInterruptOnReveal"), FPref.YIELD_INTERRUPT_ON_REVEAL, prefs);
+        y = addCheckbox(x, y, w, localizer.getMessage("lblAutoPassRespectsInterrupts"), FPref.YIELD_AUTO_PASS_RESPECTS_INTERRUPTS, prefs);
 
         y += SECTION_GAP;
         JSeparator sep = new JSeparator();

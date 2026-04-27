@@ -122,8 +122,10 @@ public class YieldController {
         if (!prefValue) {
             return false;
         }
-        // Interrupt conditions still break through (attackers, targeting, etc.)
-        if (shouldInterruptYield(player)) {
+        // Interrupts only break through when the player has opted in. Without an action to take,
+        // stopping on interrupts becomes a "press OK to continue" ceremony with no decision.
+        if (getInterruptPref(ForgePreferences.FPref.YIELD_AUTO_PASS_RESPECTS_INTERRUPTS)
+                && shouldInterruptYield(player)) {
             return false;
         }
         // Respect phase-skip settings: pass through unmarked phases even if

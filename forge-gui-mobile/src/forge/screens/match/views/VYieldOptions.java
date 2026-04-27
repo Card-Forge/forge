@@ -38,6 +38,7 @@ public class VYieldOptions extends FDialog {
     private final FCheckBox chkInterruptOpponentSpell;
     private final FCheckBox chkInterruptTriggers;
     private final FCheckBox chkInterruptReveal;
+    private final FCheckBox chkAutoPassRespectsInterrupts;
 
     private final FLabel hdrSuggestions;
     private final FLabel lblStackScope;
@@ -74,6 +75,7 @@ public class VYieldOptions extends FDialog {
         chkInterruptOpponentSpell = scroller.add(new FCheckBox(Forge.getLocalizer().getMessage("lblInterruptOnOpponentSpell"), ctrl.getYieldInterruptPref(FPref.YIELD_INTERRUPT_ON_OPPONENT_SPELL)));
         chkInterruptTriggers      = scroller.add(new FCheckBox(Forge.getLocalizer().getMessage("lblInterruptOnTriggers"),      ctrl.getYieldInterruptPref(FPref.YIELD_INTERRUPT_ON_TRIGGERS)));
         chkInterruptReveal        = scroller.add(new FCheckBox(Forge.getLocalizer().getMessage("lblInterruptOnReveal"),        ctrl.getYieldInterruptPref(FPref.YIELD_INTERRUPT_ON_REVEAL)));
+        chkAutoPassRespectsInterrupts = scroller.add(new FCheckBox(Forge.getLocalizer().getMessage("lblAutoPassRespectsInterrupts"), ctrl.getYieldInterruptPref(FPref.YIELD_AUTO_PASS_RESPECTS_INTERRUPTS)));
 
         chkInterruptAttackers.setCommand(e ->     persistInterrupt(ctrl, FPref.YIELD_INTERRUPT_ON_ATTACKERS,     chkInterruptAttackers.isSelected()));
         chkInterruptTargeting.setCommand(e ->     persistInterrupt(ctrl, FPref.YIELD_INTERRUPT_ON_TARGETING,     chkInterruptTargeting.isSelected()));
@@ -81,6 +83,7 @@ public class VYieldOptions extends FDialog {
         chkInterruptOpponentSpell.setCommand(e -> persistInterrupt(ctrl, FPref.YIELD_INTERRUPT_ON_OPPONENT_SPELL, chkInterruptOpponentSpell.isSelected()));
         chkInterruptTriggers.setCommand(e ->      persistInterrupt(ctrl, FPref.YIELD_INTERRUPT_ON_TRIGGERS,      chkInterruptTriggers.isSelected()));
         chkInterruptReveal.setCommand(e ->        persistInterrupt(ctrl, FPref.YIELD_INTERRUPT_ON_REVEAL,        chkInterruptReveal.isSelected()));
+        chkAutoPassRespectsInterrupts.setCommand(e -> persistInterrupt(ctrl, FPref.YIELD_AUTO_PASS_RESPECTS_INTERRUPTS, chkAutoPassRespectsInterrupts.isSelected()));
 
         hdrSuggestions = scroller.add(headerLabel("lblAutomaticSuggestions"));
         lblStackScope = scroller.add(new FLabel.Builder()
@@ -179,7 +182,8 @@ public class VYieldOptions extends FDialog {
         y += headerH;
         FCheckBox[] interrupts = {
                 chkInterruptAttackers, chkInterruptTargeting, chkInterruptMassRemoval,
-                chkInterruptOpponentSpell, chkInterruptTriggers, chkInterruptReveal
+                chkInterruptOpponentSpell, chkInterruptTriggers, chkInterruptReveal,
+                chkAutoPassRespectsInterrupts
         };
         for (FCheckBox cb : interrupts) {
             cb.setBounds(x, y, w, rowH);

@@ -146,6 +146,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         YIELD_DECLINE_SCOPE_STACK_YIELD("stack"),
         YIELD_DECLINE_SCOPE_NO_ACTIONS("turn"),
         YIELD_AUTO_PASS_NO_ACTIONS("false"),
+        YIELD_AUTO_PASS_RESPECTS_INTERRUPTS("false"),
         YIELD_AVAILABLE_ACTIONS_BUDGET_MS("0"),
         YIELD_SKIP_PHASE_DELAY("false"),
         YIELD_SKIP_RESOLVE_DELAY("false"),
