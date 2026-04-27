@@ -562,13 +562,19 @@ public class MatchController extends NetworkGuiGame {
         final PhaseType[] phases = PhaseType.values();
 
         for (final VPlayerPanel panel : panels) {
-            final FPref[] keys = instance.isLocalPlayer(panel.getPlayer())
+            final PlayerView player = panel.getPlayer();
+            final FPref[] keys = instance.isLocalPlayer(player)
                     ? FPref.PHASES_HUMAN : FPref.PHASES_AI;
             final VPhaseIndicator pi = panel.getPhaseIndicator();
             for (int p = 1; p < phases.length; p++) {
-                pi.getLabel(phases[p]).setStopAtPhase(prefs.getPrefBoolean(keys[p - 1]));
+                final PhaseType phase = phases[p];
+                final VPhaseIndicator.PhaseLabel label = pi.getLabel(phase);
+                label.setStopAtPhase(prefs.getPrefBoolean(keys[p - 1]));
+                label.setOnToggled(() -> instance.pushSkipPhaseToControllers(player, phase));
             }
         }
+
+        instance.seedSkipPhaseCache();
     }
 
     public static void writeMatchPreferences() {
@@ -682,6 +688,10 @@ public class MatchController extends NetworkGuiGame {
 
     @Override
     public boolean isUiSetToSkipPhase(final PlayerView playerTurn, final PhaseType phase) {
+        final PlayerView master = playerTurn.getMindSlaveMaster();
+        if (master != null && view.stopAtPhase(master, phase)) {
+            return false;
+        }
         return !view.stopAtPhase(playerTurn, phase);
     }
 
