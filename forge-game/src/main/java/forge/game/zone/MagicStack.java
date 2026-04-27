@@ -17,7 +17,6 @@
  */
 package forge.game.zone;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -1006,7 +1005,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     static protected boolean commitCrimeCheck(Player p, Iterable<TargetChoices> chosenTargets) {
-        List<ZoneType> zoneList = ImmutableList.of(ZoneType.Battlefield, ZoneType.Graveyard, ZoneType.Stack);
+        List<ZoneType> zoneList = List.of(ZoneType.Battlefield, ZoneType.Graveyard, ZoneType.Stack);
 
         for (TargetChoices tc : chosenTargets) {
             if (IterableUtil.any(tc.getTargetPlayers(), PlayerPredicates.isOpponentOf(p))) {

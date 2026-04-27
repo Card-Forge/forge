@@ -7,6 +7,7 @@ import forge.trackable.Tracker;
 import forge.gamemodes.net.event.IdentifiableNetEvent;
 import forge.gamemodes.net.event.NetEvent;
 import forge.util.IHasForgeLog;
+
 import io.netty.channel.Channel;
 
 import java.util.concurrent.atomic.AtomicInteger;

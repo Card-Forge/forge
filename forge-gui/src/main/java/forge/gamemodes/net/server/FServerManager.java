@@ -1,6 +1,5 @@
 package forge.gamemodes.net.server;
 
-import com.google.common.collect.ImmutableList;
 import forge.ai.LobbyPlayerAi;
 import forge.ai.PlayerControllerAi;
 import forge.game.Game;
@@ -185,7 +184,7 @@ public final class FServerManager implements IHasForgeLog {
         switch (SOptionPane.showOptionDialog(localizer.getMessageorUseDefault("lblUPnPQuestion", String.format("Attempt to open port %d automatically?", port), port),
                 localizer.getMessageorUseDefault("lblUPnPTitle", "UPnP option"),
                 null,
-                ImmutableList.of(localizer.getMessageorUseDefault("lblJustOnce", "Just Once"),
+                List.of(localizer.getMessageorUseDefault("lblJustOnce", "Just Once"),
                         localizer.getMessageorUseDefault("lblNotNow", "Not Now"),
                         localizer.getMessageorUseDefault("lblAlways", "Always"),
                         localizer.getMessageorUseDefault("lblNever", "Never")), 0)) {
