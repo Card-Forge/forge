@@ -134,8 +134,10 @@ public class EffectAi extends SpellAbilityAi {
                             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                         }
                     } else {
-                        List<Card> list = game.getCombat().getAttackers();
+                        Combat combat = game.getCombat();
+                        List<Card> list = combat.getAttackers();
                         list = CardLists.getTargetableCards(list, sa);
+                        list = CardLists.filter(list, c -> ai.equals(combat.getDefenderPlayerByAttacker(c)));
                         Card target = ComputerUtilCard.getBestCreatureAI(list);
                         if (target == null) {
                             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);

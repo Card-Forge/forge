@@ -1,6 +1,7 @@
 package forge.gamemodes.net;
 
 import forge.gui.GuiBase;
+import forge.trackable.Tracker;
 import forge.util.IHasForgeLog;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
@@ -15,14 +16,15 @@ import java.io.StreamCorruptedException;
 public class CompatibleObjectDecoder extends LengthFieldBasedFrameDecoder implements IHasForgeLog {
 
     private final ClassResolver classResolver;
-
-    public CompatibleObjectDecoder(ClassResolver classResolver) {
-        this(1048576, classResolver);
-    }
+    private volatile Tracker tracker;
 
     public CompatibleObjectDecoder(int maxObjectSize, ClassResolver classResolver) {
         super(maxObjectSize, 0, 4, 0, 4);
         this.classResolver = classResolver;
+    }
+
+    public void setTracker(Tracker tracker) {
+        this.tracker = tracker;
     }
 
     @Override
@@ -34,9 +36,15 @@ public class CompatibleObjectDecoder extends LengthFieldBasedFrameDecoder implem
         }
         int frameSize = frame.readableBytes();
         long startMs = System.currentTimeMillis();
-        ObjectInputStream ois = GuiBase.hasPropertyConfig() ?
-                new ObjectInputStream(new LZ4BlockInputStream(new ByteBufInputStream(frame, true))):
-                    new CObjectInputStream(new LZ4BlockInputStream(new ByteBufInputStream(frame, true)),this.classResolver);
+
+        ObjectInputStream ois;
+        if (GuiBase.hasPropertyConfig()) {
+            ois = tracker != null
+                    ? new TrackableSerializer.ResolvingInputStream(new LZ4BlockInputStream(new ByteBufInputStream(frame, true)), tracker)
+                    : new ObjectInputStream(new LZ4BlockInputStream(new ByteBufInputStream(frame, true)));
+        } else {
+            ois = new CObjectInputStream(new LZ4BlockInputStream(new ByteBufInputStream(frame, true)), this.classResolver, tracker);
+        }
 
         Object var5 = null;
         try {
@@ -55,4 +63,5 @@ public class CompatibleObjectDecoder extends LengthFieldBasedFrameDecoder implem
 
         return var5;
     }
+
 }
