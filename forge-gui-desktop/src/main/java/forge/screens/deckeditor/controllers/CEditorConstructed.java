@@ -33,7 +33,7 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.deckeditor.AddBasicLandsDialog;
 import forge.screens.deckeditor.CDeckEditorUI;
-import forge.screens.deckeditor.ChangeArtDialog;
+import forge.screens.deckeditor.ChangePrintingDialog;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FComboBox;
@@ -359,16 +359,13 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         case Main:
             cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblfromdeck"));
             cmb.addMoveAlternateItems(localizer.getMessage("lblMove"), localizer.getMessage("lbltosideboard"));
-            addChangeArtEntryIfApplicable(cmb);
             break;
         case Sideboard:
             cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblfromsideboard"));
             cmb.addMoveAlternateItems("Move", "to deck");
-            addChangeArtEntryIfApplicable(cmb);
             break;
         case Commander:
             cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblascommander"));
-            addChangeArtEntryIfApplicable(cmb);
             break;
         case Avatar:
             cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblasavatar"));
@@ -392,6 +389,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
             cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblfromcontraptiondeck"));
             break;
         }
+        addChangePrintingEntryIfApplicable(cmb);
         if (foilAvailable) {
             cmb.addMakeFoils();
         }
@@ -399,7 +397,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         cmb.addSetColorID();
     }
 
-    private static void addChangeArtEntryIfApplicable(EditorContextMenuBuilder cmb) {
+    private static void addChangePrintingEntryIfApplicable(EditorContextMenuBuilder cmb) {
         // Hide in finite-pool editors (Quest) where the user could otherwise swap into a printing they don't own.
         if (!CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getCatalogManager().isInfinite()) {
             return;
@@ -412,9 +410,9 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
             return;
         }
         GuiUtils.addMenuItem(cmb.getMenu(),
-                Localizer.getInstance().getMessage("lblChangeArt"),
+                Localizer.getInstance().getMessage("lblChangePrinting"),
                 null,
-                () -> ChangeArtDialog.show(card),
+                () -> ChangePrintingDialog.show(card),
                 true,
                 false);
     }

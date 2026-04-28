@@ -1862,7 +1862,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 //if card has more than one art option, add item to change user's preferred art
                 final List<PaperCard> artOptions = FModel.getMagicDb().getCommonCards().getAllCardsNoAlt(card.getName());
                 if (artOptions.size() > 1) {
-                    menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblChangePreferredArt"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, e -> {
+                    menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblChangePrinting"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, e -> {
                         //sort options so current option is on top and selected by default
                         List<PaperCard> sortedOptions = new ArrayList<>();
                         sortedOptions.add(card);
@@ -1871,7 +1871,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                                 sortedOptions.add(option);
                             }
                         }
-                        GuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblSelectPreferredArt") + " " + card.getDisplayName(), sortedOptions, result -> {
+                        GuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblSelectPrinting") + " " + card.getDisplayName(), sortedOptions, result -> {
                             if (result != null) {
                                 if (result != card) {
                                     cardManager.replaceAll(card, result);
