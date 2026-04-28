@@ -157,10 +157,6 @@ public class YieldController {
         return triggerDecisions.getOrDefault(trigId, AutoYieldStore.TriggerDecision.ASK);
     }
 
-    public Map<Integer, AutoYieldStore.TriggerDecision> getTriggerDecisions() {
-        return Collections.unmodifiableMap(triggerDecisions);
-    }
-
     public void setSkipPhase(PlayerView turnPlayer, PhaseType phase, boolean skip) {
         if (turnPlayer == null || phase == null) return;
         EnumSet<PhaseType> set = skipPhases.computeIfAbsent(turnPlayer, k -> EnumSet.noneOf(PhaseType.class));
@@ -171,10 +167,6 @@ public class YieldController {
     public boolean isSkippingPhase(PlayerView turnPlayer, PhaseType phase) {
         EnumSet<PhaseType> set = skipPhases.get(turnPlayer);
         return set != null && set.contains(phase);
-    }
-
-    public Map<PlayerView, EnumSet<PhaseType>> getSkipPhases() {
-        return Collections.unmodifiableMap(skipPhases);
     }
 
     public void setMarker(PlayerView phaseOwner, PhaseType phase) {

@@ -3608,12 +3608,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public void setUiShouldSkipPhase(final PlayerView turnPlayer, final PhaseType phase, final boolean shouldSkip) {
-        if (!isRemoteClient()) return;
-        yieldController.setSkipPhase(turnPlayer, phase, shouldSkip);
-    }
-
-    @Override
     public void applyYieldUpdate(final YieldUpdate update) {
         if (update instanceof YieldUpdate.SetMarker u) {
             yieldController.setMarker(u.phaseOwner(), u.phase());
