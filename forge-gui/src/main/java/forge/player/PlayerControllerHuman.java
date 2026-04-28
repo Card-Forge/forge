@@ -1508,8 +1508,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     return;
                 }
             } else {
-                // Yield mode (EOT, next turn, etc.) — intentionally skip attackers
-                return;
+                // Yield mode — skip if empty combat is legal; must-attack effects (Goad, etc.) still need a prompt
+                if (CombatUtil.validateAttackers(combat)) {
+                    return;
+                }
             }
         }
 

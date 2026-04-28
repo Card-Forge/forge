@@ -14,6 +14,7 @@ import forge.gamemodes.match.YieldPrefs;
 import forge.gui.GuiBase;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.IGameController;
+import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.skin.FSkinProp;
 import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
@@ -105,7 +106,7 @@ public enum ProtocolMethod implements IHasForgeLog {
     setYieldMarker           (Mode.CLIENT, Void.TYPE, PlayerView.class, PhaseType.class),
     clearYieldMarker         (Mode.CLIENT, Void.TYPE),
     setStackYield            (Mode.CLIENT, Void.TYPE, Boolean.TYPE),
-    setYieldInterruptPref    (Mode.CLIENT, Void.TYPE, forge.localinstance.properties.ForgePreferences.FPref.class, Boolean.TYPE),
+    setYieldInterruptPref    (Mode.CLIENT, Void.TYPE, ForgePreferences.FPref.class, Boolean.TYPE),
     setYieldPrefs            (Mode.CLIENT, Void.TYPE, YieldPrefs.class),
     setUiShouldSkipPhase     (Mode.CLIENT, Void.TYPE, PlayerView.class, PhaseType.class, Boolean.TYPE);
 
