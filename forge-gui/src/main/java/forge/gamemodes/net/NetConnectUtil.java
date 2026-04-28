@@ -70,8 +70,8 @@ public class NetConnectUtil {
                 // NO-OP, lobby connected directly
             }
             @Override
-            public void message(final String source, final String message) {
-                chatInterface.addMessage(new ChatMessage(source, message));
+            public void message(final String source, final String message, final ChatMessage.MessageType type) {
+                chatInterface.addMessage(new ChatMessage(source, message, type));
             }
             @Override
             public void close() {
@@ -172,8 +172,8 @@ public class NetConnectUtil {
         lobby.setListener(view);
         client.addLobbyListener(new ILobbyListener() {
             @Override
-            public void message(final String source, final String message) {
-                chatInterface.addMessage(new ChatMessage(source, message));
+            public void message(final String source, final String message, final ChatMessage.MessageType type) {
+                chatInterface.addMessage(new ChatMessage(source, message, type));
             }
             @Override
             public void update(final GameLobbyData state, final int slot) {

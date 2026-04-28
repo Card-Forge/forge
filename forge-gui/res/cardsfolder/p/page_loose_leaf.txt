@@ -1,6 +1,6 @@
 Name:Page, Loose Leaf
 ManaCost:2
-Types:Artifact Creature Construct
+Types:Legendary Artifact Creature Construct
 PT:0/2
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ DigUntil | Cost$ Discard<1/Card.namedPage, Loose Leaf> | CostDesc$ Grandeur — Discard another card named Page, Loose Leaf: | Valid$ Instant,Sorcery | ValidDescription$ instant or sorcery | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | FoundDestination$ Hand | SpellDescription$ Reveal cards from the top of your library until you reveal an instant or sorcery card. Put that card into your hand and the rest on the bottom of your library in a random order.

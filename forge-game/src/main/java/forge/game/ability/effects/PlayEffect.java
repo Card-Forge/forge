@@ -11,8 +11,6 @@ import forge.item.PaperCardPredicates;
 import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.collect.ImmutableList;
-
 import forge.StaticData;
 import forge.card.CardRulesPredicates;
 import forge.game.Game;
@@ -104,7 +102,7 @@ public class PlayEffect extends SpellAbilityEffect {
         CardCollectionView showCards = new CardCollection();
 
         if (sa.hasParam("Valid")) {
-            List<ZoneType> zones = sa.hasParam("ValidZone") ? ZoneType.listValueOf(sa.getParam("ValidZone")) : ImmutableList.of(ZoneType.Hand);
+            List<ZoneType> zones = sa.hasParam("ValidZone") ? ZoneType.listValueOf(sa.getParam("ValidZone")) : List.of(ZoneType.Hand);
             tgtCards = new CardCollection(AbilityUtils.filterListByType(game.getCardsIn(zones), sa.getParam("Valid"), sa));
             if (sa.hasParam("ShowCards")) {
                 showCards = AbilityUtils.filterListByType(game.getCardsIn(zones), sa.getParam("ShowCards"), sa);
@@ -263,10 +261,6 @@ public class PlayEffect extends SpellAbilityEffect {
                 final Card original = tgtCard;
                 final Zone zone = tgtCard.getZone();
                 tgtCard = Card.fromPaperCard(tgtCard.getPaperCard(), controller);
-
-                if (sa.hasParam("Paradigm")) {
-                    tgtCard.removeIntrinsicKeyword(Keyword.PARADIGM);
-                }
 
                 tgtCard.setGamePieceType(GamePieceType.TOKEN);
                 tgtCard.setZone(zone);
