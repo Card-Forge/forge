@@ -1012,12 +1012,6 @@ public final class CMatchUI
         cPrompt.setMessage(message, card);
     }
 
-    //  no override for now
-    public void showPromptMessage(final PlayerView playerView, final String message, final CardView card ) {
-        cancelWaitingTimer();
-        cPrompt.setMessage(message,card);
-    }
-
     @Override
     public void showManaPool(final PlayerView player) {
         //not needed since mana pool icons are always visible
