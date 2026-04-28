@@ -169,7 +169,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 gameControllers.put(player, originalGameControllers.get(player));
             } else {
                 gameControllers.remove(player);
-                autoPassUntilEndOfTurn.remove(player);
                 final PlayerView currentPlayer = getCurrentPlayer();
                 if (player.equals(currentPlayer)) {
                     // set current player to a value known to be legal
@@ -418,36 +417,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     // Auto-yield and other input-related code
 
-    private final Set<PlayerView> autoPassUntilEndOfTurn = Sets.newHashSet();
-
-    /**
-     * Automatically pass priority until reaching the Cleanup phase of the
-     * current turn.
-     */
-    @Override
-    public final void autoPassUntilEndOfTurn(final PlayerView player) {
-        autoPassUntilEndOfTurn.add(player);
-        updateAutoPassPrompt();
-    }
-
-    @Override
-    public final void autoPassCancel(final PlayerView player) {
-        if (!autoPassUntilEndOfTurn.remove(player)) {
-            return;
-        }
-
-        //prevent prompt getting stuck on yielding message while actually waiting for next input opportunity
-        final PlayerView playerView = getCurrentPlayer();
-        showPromptMessage(playerView, "");
-        updateButtons(playerView, false, false, false);
-        awaitNextInput();
-    }
-
-    @Override
-    public final boolean mayAutoPass(final PlayerView player) {
-        return autoPassUntilEndOfTurn.contains(player);
-    }
-
     private Timer awaitNextInputTimer;
     private TimerTask awaitNextInputTask;
 
@@ -581,12 +550,29 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public final void updateAutoPassPrompt() {
-        if (!autoPassUntilEndOfTurn.isEmpty()) {
-            //allow user to cancel auto-pass
-            cancelAwaitNextInput(); //don't overwrite prompt with awaiting opponent
-            showPromptMessage(getCurrentPlayer(), Localizer.getInstance().getMessage("lblYieldingUntilEndOfTurn"));
-            updateButtons(getCurrentPlayer(), false, true, false);
+        YieldController yielding = null;
+        for (IGameController c : gameControllers.values()) {
+            YieldController yc = c.getYieldController();
+            if (yc != null && yc.shouldAutoYield()) {
+                yielding = yc;
+                break;
+            }
         }
+        if (yielding == null) {
+            return;
+        }
+        Localizer loc = Localizer.getInstance();
+        final String message;
+        if (yielding.getMarker() != null) {
+            message = loc.getMessage("lblYieldingUntilPhaseFmt", yielding.getMarker().getPhase().nameForUi);
+        } else if (yielding.isStackYieldActive()) {
+            message = loc.getMessage("lblYieldingUntilStackClears");
+        } else {
+            message = loc.getMessage("lblYieldingUntilEndOfTurn");
+        }
+        cancelAwaitNextInput();
+        showPromptMessage(getCurrentPlayer(), message);
+        updateButtons(getCurrentPlayer(), false, true, false);
     }
     // End auto-yield/input code
 
@@ -815,5 +801,16 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     @Override
     public void applyDelta(DeltaPacket packet) {
         // No-op for local games - network implementation is in NetworkGuiGame
+    }
+
+    @Override
+    public void applyYieldUpdate(YieldUpdate update) {
+        // Default: route to current player's controller. Network impl in NetworkGuiGame.
+        PlayerView player = getCurrentPlayer();
+        if (player == null) return;
+        IGameController controller = getGameController(player);
+        if (controller != null) {
+            controller.applyYieldUpdate(update);
+        }
     }
 }

@@ -30,13 +30,19 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
 import forge.game.card.CardView;
+import forge.game.player.PlayerView;
+import forge.gamemodes.match.YieldController;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
+import forge.interfaces.IGameController;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
+import forge.player.PlayerControllerHuman;
+import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CPrompt;
 import forge.toolbox.FButton;
 import forge.toolbox.FHtmlViewer;
@@ -75,6 +81,30 @@ public class VPrompt implements IVDoc<CPrompt> {
         @Override
         public void keyPressed(final KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                CMatchUI ui = CMatchUI.getActive();
+                if (ui != null) {
+                    PlayerView local = ui.getCurrentPlayer();
+                    IGameController ctrl = local != null ? ui.getGameController(local) : null;
+                    if (ctrl != null) {
+                        YieldController yc = ctrl.getYieldController();
+                        boolean hasMarker = yc.getMarker() != null;
+                        boolean hasLegacy = yc.isAutoPassUntilEndOfTurn();
+                        boolean hasStackYield = yc.isStackYieldActive();
+                        if (hasMarker) {
+                            ctrl.sendYieldUpdate(new YieldUpdate.ClearMarker(local));
+                        }
+                        if (hasLegacy && ctrl instanceof PlayerControllerHuman pch) {
+                            pch.autoPassCancel();
+                        }
+                        if (hasStackYield) {
+                            ctrl.sendYieldUpdate(new YieldUpdate.SetStackYield(local, false));
+                        }
+                        if (hasMarker || hasLegacy || hasStackYield) {
+                            ui.refreshYieldUi(local);
+                            return;
+                        }
+                    }
+                }
                 if (btnCancel.isEnabled()) {
                     if (FModel.getPreferences().getPrefBoolean(FPref.UI_ALLOW_ESC_TO_END_TURN) || !btnCancel.getText().equals("End Turn")) {
                         btnCancel.doClick();

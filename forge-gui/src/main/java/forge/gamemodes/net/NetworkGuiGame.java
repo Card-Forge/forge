@@ -9,7 +9,11 @@ import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.AbstractGuiGame;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.net.client.NetGameController;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.Map;
 import forge.interfaces.IGameController;
 import forge.trackable.Tracker;
 import forge.trackable.TrackableCollection;
@@ -603,6 +607,22 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasForg
                 NetworkChecksumUtil.computeChecksumBreakdown(gameView.getTurn(), phaseOrdinal, gameView));
     }
 
+    @Override
+    public void applyYieldUpdate(YieldUpdate update) {
+        PlayerView player = getCurrentPlayer();
+        IGameController controller = (player != null) ? getGameController(player) : null;
+        if (controller != null) {
+            controller.applyYieldUpdate(update);
+        }
+        // Repaint UI if marker/stack-yield state changed.
+        if (player != null
+                && (update instanceof YieldUpdate.SetMarker
+                || update instanceof YieldUpdate.ClearMarker
+                || update instanceof YieldUpdate.SetStackYield)) {
+            refreshYieldUi(player);
+        }
+    }
+
     protected final void pushSkipPhaseToControllers(final PlayerView player, final PhaseType phase) {
         // Mind-slave AND-combines master+controlled rows, so a master toggle invalidates dependents
         for (final PlayerView p : getGameView().getPlayers()) {
@@ -616,18 +636,35 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasForg
         }
     }
 
-    protected final void seedSkipPhaseCache() {
+    /**
+     * Replace the host's persistent yield state for each controlled player
+     * in one atomic message: auto-yields and trigger-disabled flag from the
+     * AutoYieldStore, skip-phase prefs from PhaseLabel state. Per-key edits
+     * during play flow as individual YieldUpdate deltas.
+     */
+    protected final void seedYieldStateOnHost() {
+        Map<PlayerView, EnumSet<PhaseType>> skipPhases = collectSkipPhases();
         for (final IGameController c : getOriginalGameControllers()) {
             if (c instanceof NetGameController nc) {
-                for (PlayerView p : getGameView().getPlayers()) {
-                    for (PhaseType ph : PhaseType.values()) {
-                        if (isUiSetToSkipPhase(p, ph)) {
-                            nc.setUiShouldSkipPhase(p, ph, Boolean.TRUE);
-                        }
-                    }
-                }
+                nc.seedYieldStateOnHost(skipPhases);
             }
         }
+    }
+
+    private Map<PlayerView, EnumSet<PhaseType>> collectSkipPhases() {
+        Map<PlayerView, EnumSet<PhaseType>> out = new HashMap<>();
+        for (PlayerView p : getGameView().getPlayers()) {
+            EnumSet<PhaseType> set = EnumSet.noneOf(PhaseType.class);
+            for (PhaseType ph : PhaseType.values()) {
+                if (isUiSetToSkipPhase(p, ph)) {
+                    set.add(ph);
+                }
+            }
+            if (!set.isEmpty()) {
+                out.put(p, set);
+            }
+        }
+        return out;
     }
 
 }

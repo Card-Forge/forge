@@ -7,6 +7,8 @@ import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.gamemodes.match.NextGameDecision;
+import forge.gamemodes.match.YieldController;
+import forge.gamemodes.match.YieldUpdate;
 import forge.util.ITriggerEvent;
 
 public interface IGameController {
@@ -74,4 +76,18 @@ public interface IGameController {
     void setShouldAlwaysAskTrigger(int trigger);
 
     void setUiShouldSkipPhase(PlayerView turnPlayer, PhaseType phase, boolean shouldSkip);
+
+    /** Apply a unified yield update envelope to this controller's YieldController. */
+    void applyYieldUpdate(YieldUpdate update);
+
+    /**
+     * Wire entry for client->host yield update; receivers route to applyYieldUpdate.
+     * Named to match the {@code sendYieldUpdate} ProtocolMethod (lookup is by name).
+     */
+    default void sendYieldUpdate(YieldUpdate update) {
+        applyYieldUpdate(update);
+    }
+
+    /** Access this controller's YieldController. */
+    YieldController getYieldController();
 }

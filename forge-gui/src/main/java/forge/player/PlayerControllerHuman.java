@@ -48,6 +48,8 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.NextGameDecision;
+import forge.gamemodes.match.YieldController;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.match.input.*;
 import forge.util.IHasForgeLog;
 import forge.gui.FThreads;
@@ -100,16 +102,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     private IGuiGame gui;
 
-    // Inlined server-side mirror used only when this controller serves a remote network
-    // player (gui instanceof RemoteClientGuiGame). Two scope buckets so the host doesn't
-    // need to know the client's UI_AUTO_YIELD_MODE: the client tells us which bucket via
-    // the isAbilityScope flag on setShouldAutoYield.
-    private final Set<String> remoteCardYields = Sets.newHashSet();
-    private final Set<String> remoteAbilityYields = Sets.newHashSet();
-    private final Map<Integer, Boolean> remoteTriggerDecisions = Maps.newTreeMap();
-    private boolean remoteAutoYieldsDisabled;
-    // Empty/missing entry returns false (don't skip), matching a fresh UI's conservative default
-    private final Map<PlayerView, EnumSet<PhaseType>> remoteSkipPhases = Maps.newHashMap();
+    private final YieldController yieldController = new YieldController(this);
 
     protected final InputQueue inputQueue;
     protected final InputProxy inputProxy;
@@ -137,6 +130,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     public final void setGui(final IGuiGame gui) {
         this.gui = gui;
+    }
+
+    public YieldController getYieldController() {
+        return yieldController;
     }
 
     public final InputQueue getInputQueue() {
@@ -3346,20 +3343,28 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     public boolean mayAutoPass() {
-        return getGui().mayAutoPass(getLocalPlayerView());
+        return yieldController.shouldAutoYield();
     }
 
     public void autoPassUntilEndOfTurn() {
-        getGui().autoPassUntilEndOfTurn(getLocalPlayerView());
+        yieldController.setAutoPassUntilEndOfTurn(true);
+        if (getGui() != null) {
+            getGui().updateAutoPassPrompt();
+        }
     }
 
     @Override
     public void autoPassCancel() {
-        if (getGui() == null) {
+        if (!yieldController.shouldAutoYield()) {
             return;
         }
-
-        getGui().autoPassCancel(getLocalPlayerView());
+        yieldController.cancelYield();
+        if (getGui() != null) {
+            PlayerView playerView = getLocalPlayerView();
+            getGui().showPromptMessage(playerView, "");
+            getGui().updateButtons(playerView, false, false, false);
+            getGui().awaitNextInput();
+        }
     }
 
     @Override
@@ -3501,9 +3506,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public boolean shouldAutoYield(final String key) {
         if (isRemoteClient()) {
-            if (remoteAutoYieldsDisabled) return false;
-            if (remoteCardYields.contains(key)) return true;
-            return remoteAbilityYields.contains(AutoYieldStore.abilitySuffix(key));
+            if (yieldController.isAutoYieldsDisabled()) return false;
+            if (yieldController.shouldAutoYieldKey(key, false)) return true;
+            return yieldController.shouldAutoYieldKey(AutoYieldStore.abilitySuffix(key), true);
         }
         if (localStore().isDisabled()) return false;
         if (activeModeIsInstall()) {
@@ -3517,9 +3522,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public void setShouldAutoYield(final String key, final boolean autoYield, final boolean isAbilityScope) {
         if (isRemoteClient()) {
-            Set<String> bucket = isAbilityScope ? remoteAbilityYields : remoteCardYields;
-            if (autoYield) bucket.add(key);
-            else bucket.remove(key);
+            yieldController.setCardAutoYield(key, autoYield, isAbilityScope);
             return;
         }
         String storageKey = isAbilityScope ? AutoYieldStore.abilitySuffix(key) : key;
@@ -3533,7 +3536,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public Iterable<String> getAutoYields() {
         if (isRemoteClient()) {
-            return Iterables.concat(remoteCardYields, remoteAbilityYields);
+            return Iterables.concat(yieldController.getCardYields(), yieldController.getAbilityYields());
         }
         if (activeModeIsInstall()) return PersistentYieldStore.get().getYields();
         return localStore().getYields(activeTier());
@@ -3542,9 +3545,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public void clearAutoYields() {
         if (isRemoteClient()) {
-            remoteCardYields.clear();
-            remoteAbilityYields.clear();
-            remoteTriggerDecisions.clear();
+            yieldController.clearAutoYields();
             return;
         }
         localStore().onGameEnd(getGame() == null || getGame().getView().isMatchOver());
@@ -3552,37 +3553,37 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public boolean getDisableAutoYields() {
-        return isRemoteClient() ? remoteAutoYieldsDisabled : localStore().isDisabled();
+        return isRemoteClient() ? yieldController.isAutoYieldsDisabled() : localStore().isDisabled();
     }
 
     @Override
     public void setDisableAutoYields(final boolean disable) {
-        if (isRemoteClient()) remoteAutoYieldsDisabled = disable;
+        if (isRemoteClient()) yieldController.setAutoYieldsDisabled(disable);
         else localStore().setDisabled(disable);
     }
 
     @Override
     public boolean shouldAlwaysAcceptTrigger(final int trigger) {
-        if (isRemoteClient()) return Boolean.TRUE.equals(remoteTriggerDecisions.get(trigger));
+        if (isRemoteClient()) return yieldController.getTriggerDecision(trigger) == AutoYieldStore.TriggerDecision.ACCEPT;
         return localStore().getTriggerDecision(trigger) == AutoYieldStore.TriggerDecision.ACCEPT;
     }
 
     @Override
     public boolean shouldAlwaysDeclineTrigger(final int trigger) {
-        if (isRemoteClient()) return Boolean.FALSE.equals(remoteTriggerDecisions.get(trigger));
+        if (isRemoteClient()) return yieldController.getTriggerDecision(trigger) == AutoYieldStore.TriggerDecision.DECLINE;
         return localStore().getTriggerDecision(trigger) == AutoYieldStore.TriggerDecision.DECLINE;
     }
 
     @Override
     public void setShouldAlwaysAcceptTrigger(final int trigger) {
-        if (isRemoteClient()) remoteTriggerDecisions.put(trigger, Boolean.TRUE);
+        if (isRemoteClient()) yieldController.setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.ACCEPT);
         else localStore().setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.ACCEPT);
         if (isPromptingForTrigger(trigger)) selectButtonOk();
     }
 
     @Override
     public void setShouldAlwaysDeclineTrigger(final int trigger) {
-        if (isRemoteClient()) remoteTriggerDecisions.put(trigger, Boolean.FALSE);
+        if (isRemoteClient()) yieldController.setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.DECLINE);
         else localStore().setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.DECLINE);
         if (isPromptingForTrigger(trigger)) selectButtonCancel();
     }
@@ -3595,14 +3596,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void setShouldAlwaysAskTrigger(final int trigger) {
-        if (isRemoteClient()) remoteTriggerDecisions.remove(trigger);
+        if (isRemoteClient()) yieldController.setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.ASK);
         else localStore().setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.ASK);
     }
 
     public boolean isUiSetToSkipPhase(final PlayerView turnPlayer, final PhaseType phase) {
         if (isRemoteClient()) {
-            EnumSet<PhaseType> set = remoteSkipPhases.get(turnPlayer);
-            return set != null && set.contains(phase);
+            return yieldController.isSkippingPhase(turnPlayer, phase);
         }
         return getGui().isUiSetToSkipPhase(turnPlayer, phase);
     }
@@ -3610,9 +3610,25 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public void setUiShouldSkipPhase(final PlayerView turnPlayer, final PhaseType phase, final boolean shouldSkip) {
         if (!isRemoteClient()) return;
-        EnumSet<PhaseType> set = remoteSkipPhases.computeIfAbsent(turnPlayer,
-                k -> EnumSet.noneOf(PhaseType.class));
-        if (shouldSkip) set.add(phase);
-        else set.remove(phase);
+        yieldController.setSkipPhase(turnPlayer, phase, shouldSkip);
+    }
+
+    @Override
+    public void applyYieldUpdate(final YieldUpdate update) {
+        if (update instanceof YieldUpdate.SetMarker u) {
+            yieldController.setMarker(u.phaseOwner(), u.phase());
+        } else if (update instanceof YieldUpdate.ClearMarker) {
+            yieldController.clearMarker();
+        } else if (update instanceof YieldUpdate.SetStackYield u) {
+            yieldController.setStackYield(u.active());
+        } else if (update instanceof YieldUpdate.SetTriggerDecision u) {
+            yieldController.setTriggerDecision(u.trigId(), u.decision());
+        } else if (update instanceof YieldUpdate.SetCardAutoYield u) {
+            yieldController.setCardAutoYield(u.cardKey(), u.active(), u.abilityScope());
+        } else if (update instanceof YieldUpdate.SetSkipPhase u) {
+            yieldController.setSkipPhase(u.turnPlayer(), u.phase(), u.skip());
+        } else if (update instanceof YieldUpdate.SeedFromClient u) {
+            yieldController.applyClientSeed(u.snapshot());
+        }
     }
 }

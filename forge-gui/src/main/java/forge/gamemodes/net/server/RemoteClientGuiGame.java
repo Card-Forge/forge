@@ -13,6 +13,7 @@ import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.net.NetworkGuiGame;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.GameProtocolSender;
@@ -117,6 +118,11 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
         if (paused) { return; }
         flushPendingEvents();
         sender.send(method, args);
+    }
+
+    @Override
+    public void applyYieldUpdate(final YieldUpdate update) {
+        send(ProtocolMethod.applyYieldUpdate, update);
     }
 
     private <T> T sendAndWait(final ProtocolMethod method, final Object... args) {

@@ -18,6 +18,7 @@
 package forge.screens.match.views;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -27,6 +28,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
@@ -35,7 +37,9 @@ import javax.swing.border.EmptyBorder;
 import forge.CachedCardImage;
 import forge.game.GameView;
 import forge.game.card.CardView.CardStateView;
+import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gui.card.CardDetailUtil;
 import forge.gui.card.CardDetailUtil.DetailColors;
 import forge.gui.framework.DragCell;
@@ -231,22 +235,30 @@ public class VStack implements IVDoc<CStack> {
                 }
             });
 
-            if (item.isAbility()) {
-                addMouseListener(new FMouseAdapter() {
-                    @Override
-                    public void onLeftClick(final MouseEvent e) {
-                        onClick(e);
+            addMouseListener(new FMouseAdapter() {
+                @Override
+                public void onLeftClick(final MouseEvent e) {
+                    onClick(e);
+                }
+                @Override
+                public void onRightClick(final MouseEvent e) {
+                    onClick(e);
+                }
+                private void onClick(final MouseEvent e) {
+                    abilityMenu.setStackInstance(item);
+                    boolean hasVisibleItem = false;
+                    for (Component c : abilityMenu.getComponents()) {
+                        if (c.isVisible()) {
+                            hasVisibleItem = true;
+                            break;
+                        }
                     }
-                    @Override
-                    public void onRightClick(final MouseEvent e) {
-                        onClick(e);
+                    if (!hasVisibleItem) {
+                        return;
                     }
-                    private void onClick(final MouseEvent e) {
-                        abilityMenu.setStackInstance(item);
-                        abilityMenu.show(e.getComponent(), e.getX(), e.getY());
-                    }
-                });
-            }
+                    abilityMenu.show(e.getComponent(), e.getX(), e.getY());
+                }
+            });
 
             // TODO: A hacky workaround is currently used to make the game not leak the color information for Morph cards.
             final CardStateView curState = item.getSourceCard().getCurrentState();
@@ -284,6 +296,7 @@ public class VStack implements IVDoc<CStack> {
         private final JCheckBoxMenuItem jmiAutoYield;
         private final JCheckBoxMenuItem jmiAlwaysYes;
         private final JCheckBoxMenuItem jmiAlwaysNo;
+        private final JMenuItem jmiYieldToEntireStack;
         private StackItemView item;
 
         private Integer triggerID = 0;
@@ -324,13 +337,24 @@ public class VStack implements IVDoc<CStack> {
                 }
             });
             add(jmiAlwaysNo);
+
+            jmiYieldToEntireStack = new JMenuItem(Localizer.getInstance().getMessage("lblYieldToEntireStack"));
+            jmiYieldToEntireStack.addActionListener(arg0 -> {
+                final PlayerView local = controller.getMatchUI().getCurrentPlayer();
+                if (local == null) return;
+                controller.getMatchUI().getGameController().sendYieldUpdate(new YieldUpdate.SetStackYield(local, true));
+                controller.getMatchUI().getGameController().passPriority();
+            });
+            add(jmiYieldToEntireStack);
         }
 
         public void setStackInstance(final StackItemView item0) {
             item = item0;
             triggerID = item.getSourceTrigger();
 
-            jmiAutoYield.setSelected(controller.getMatchUI().getGameController().shouldAutoYield(item.getKey()));
+            jmiAutoYield.setVisible(item.isAbility());
+            jmiAutoYield.setSelected(item.isAbility()
+                    && controller.getMatchUI().getGameController().shouldAutoYield(item.getKey()));
 
             if (item.isOptionalTrigger() && controller.getMatchUI().isLocalPlayer(item.getActivatingPlayer())) {
                 jmiAlwaysYes.setSelected(controller.getMatchUI().getGameController().shouldAlwaysAcceptTrigger(triggerID));

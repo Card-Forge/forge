@@ -13,6 +13,7 @@ import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
+import forge.assets.FSkinImage;
 import forge.assets.TextRenderer;
 import forge.card.CardRenderer;
 import forge.card.CardRenderer.CardStackPosition;
@@ -22,6 +23,7 @@ import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gui.card.CardDetailUtil;
 import forge.gui.card.CardDetailUtil.DetailColors;
 import forge.interfaces.IGameController;
@@ -284,10 +286,10 @@ public class VStack extends FDropDown {
             final IGameController controller = MatchController.instance.getGameController();
             final PlayerView player = MatchController.instance.getCurrentPlayer();
             if (player != null) { //don't show menu if tapping on art
-                if (stackInstance.isAbility()) {
-                    FPopupMenu menu = new FPopupMenu() {
-                        @Override
-                        protected void buildMenu() {
+                FPopupMenu menu = new FPopupMenu() {
+                    @Override
+                    protected void buildMenu() {
+                        if (stackInstance.isAbility()) {
                             final String key = stackInstance.getKey();
                             final boolean autoYield = controller.shouldAutoYield(key);
                             addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("cbpAutoYieldMode"), autoYield,
@@ -323,13 +325,19 @@ public class VStack extends FDropDown {
                                             }
                                         }));
                             }
-                            addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblZoomOrDetails"), e -> CardZoom.show(stackInstance.getSourceCard())));
                         }
-                    };
+                        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblYieldToEntireStack"),
+                                Forge.hdbuttons ? FSkinImage.HDYIELD : FSkinImage.WARNING,
+                                e -> {
+                                    controller.sendYieldUpdate(new YieldUpdate.SetStackYield(player, true));
+                                    controller.passPriority();
+                                }));
+                        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblZoomOrDetails"), e -> CardZoom.show(stackInstance.getSourceCard())));
+                    }
+                };
 
-                    menu.show(this, x, y);
-                    return true;
-                }
+                menu.show(this, x, y);
+                return true;
             }
             CardZoom.show(stackInstance.getSourceCard());
             return true;

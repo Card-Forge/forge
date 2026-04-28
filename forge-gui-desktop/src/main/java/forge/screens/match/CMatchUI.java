@@ -67,7 +67,9 @@ import forge.game.spellability.SpellAbilityView;
 import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
 import forge.util.IHasForgeLog;
+import forge.gamemodes.match.YieldMarker;
 import forge.gamemodes.net.NetworkGuiGame;
+import forge.interfaces.IGameController;
 import forge.gui.FNetOverlay;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -211,6 +213,15 @@ public final class CMatchUI
         return Singletons.getControl().getCurrentScreen() == this.screen;
     }
 
+    /** Returns the CMatchUI controlling the currently active match screen, or null. */
+    public static CMatchUI getActive() {
+        FScreen current = Singletons.getControl().getCurrentScreen();
+        if (current == null || !current.isMatchScreen()) {
+            return null;
+        }
+        return current.getController() instanceof CMatchUI cm ? cm : null;
+    }
+
     private boolean isInGame() {
         return getGameView() != null;
     }
@@ -233,6 +244,39 @@ public final class CMatchUI
     @Override
     protected void afterDeltaApplied() {
         refreshAllViews();
+    }
+
+    @Override
+    public void refreshYieldUi(final PlayerView player) {
+        FThreads.invokeInEdtNowOrLater(() -> {
+            // Marker is rendered only on the local player's view of the targeted phase indicator.
+            PlayerView local = getCurrentPlayer();
+            if (local == null || !local.equals(player)) {
+                return;
+            }
+            for (final VField f : getFieldViews()) {
+                PhaseIndicator pi = f.getPhaseIndicator();
+                if (pi == null) {
+                    continue;
+                }
+                for (PhaseLabel l : pi.allLabels()) {
+                    l.setYieldMarked(false);
+                }
+            }
+            IGameController controller = getGameController(local);
+            YieldMarker marker = controller != null ? controller.getYieldController().getMarker() : null;
+            if (marker == null) {
+                return;
+            }
+            VField markedField = getFieldViewFor(marker.getPhaseOwner());
+            if (markedField == null) {
+                return;
+            }
+            PhaseLabel target = markedField.getPhaseIndicator().getLabelFor(marker.getPhase());
+            if (target != null) {
+                target.setYieldMarked(true);
+            }
+        });
     }
 
     private void refreshAllViews() {
@@ -1314,7 +1358,7 @@ public final class CMatchUI
             }
         }
 
-        seedSkipPhaseCache();
+        seedYieldStateOnHost();
     }
 
     @Override

@@ -427,7 +427,7 @@ public class HostedMatch {
                 humanController.getGui().updateSingleCard(event.blocker());
                 final PlayerView p = humanController.getPlayer().getView();
                 if (event.attackerBeingBlocked() != null && event.attackerBeingBlocked().getController().equals(p)) {
-                    humanController.getGui().autoPassCancel(p);
+                    humanController.autoPassCancel();
                 }
             }
             return null;
