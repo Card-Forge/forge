@@ -18,7 +18,7 @@ public class VAutoYields extends FDialog {
     public VAutoYields() {
         super(Forge.getLocalizer().getMessage("lblAutoYields"), 2);
         List<String> autoYields = new ArrayList<>();
-        for (String autoYield : MatchController.instance.getAutoYields()) {
+        for (String autoYield : MatchController.instance.getGameController().getAutoYields()) {
             autoYields.add(autoYield);
         }
         lstAutoYields = add(new FChoiceList<String>(autoYields) {
@@ -32,14 +32,16 @@ public class VAutoYields extends FDialog {
                 return true;
             }
         });
-        chkDisableAll = add(new FCheckBox(Forge.getLocalizer().getMessage("lblDisableAllAutoYields"), MatchController.instance.getDisableAutoYields()));
-        chkDisableAll.setCommand(e -> MatchController.instance.setDisableAutoYields(chkDisableAll.isSelected()));
+        chkDisableAll = add(new FCheckBox(Forge.getLocalizer().getMessage("lblDisableAllAutoYields"), MatchController.instance.getGameController().getDisableAutoYields()));
+        chkDisableAll.setCommand(e -> MatchController.instance.getGameController().setDisableAutoYields(chkDisableAll.isSelected()));
         initButton(0, Forge.getLocalizer().getMessage("lblOK"), e -> hide());
         initButton(1, Forge.getLocalizer().getMessage("lblRemoveYield"), e -> {
             String selected = lstAutoYields.getSelectedItem();
             if (selected != null) {
                 lstAutoYields.removeItem(selected);
-                MatchController.instance.setShouldAutoYield(selected, false);
+                boolean abilityScope = !forge.localinstance.properties.ForgeConstants.AUTO_YIELD_PER_CARD.equals(
+                        forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_YIELD_MODE));
+                MatchController.instance.getGameController().setShouldAutoYield(selected, false, abilityScope);
                 setButtonEnabled(1, lstAutoYields.getCount() > 0);
                 lstAutoYields.cleanUpSelections();
                 VAutoYields.this.revalidate();

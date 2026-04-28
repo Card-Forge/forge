@@ -66,7 +66,8 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
-import forge.gamemodes.match.AbstractGuiGame;
+import forge.util.IHasForgeLog;
+import forge.gamemodes.net.NetworkGuiGame;
 import forge.gui.FNetOverlay;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -117,7 +118,9 @@ import forge.toolbox.imaging.FImagePanel.AutoSizeImageMode;
 import forge.toolbox.imaging.FImageUtil;
 import forge.toolbox.special.PhaseIndicator;
 import forge.toolbox.special.PhaseLabel;
+import forge.trackable.Tracker;
 import forge.trackable.TrackableCollection;
+import forge.trackable.TrackableTypes;
 import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
@@ -138,8 +141,8 @@ import net.miginfocom.swing.MigLayout;
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
 public final class CMatchUI
-    extends AbstractGuiGame
-    implements ICDoc, IMenuProvider {
+    extends NetworkGuiGame
+    implements ICDoc, IMenuProvider, IHasForgeLog {
 
     public static final EnumSet<ZoneType> FLOATING_ZONE_TYPES = EnumSet.of(ZoneType.Library, ZoneType.Graveyard, ZoneType.Exile,
             ZoneType.Flashback, ZoneType.Command, ZoneType.Ante, ZoneType.Sideboard, ZoneType.PlanarDeck,
@@ -224,6 +227,15 @@ public final class CMatchUI
 
         cDetailPicture.setGameView(gameView0);
         screen.setTabCaption(gameView0.getTitle());
+        refreshAllViews();
+    }
+
+    @Override
+    protected void afterDeltaApplied() {
+        refreshAllViews();
+    }
+
+    private void refreshAllViews() {
         if (sortedPlayers != null) {
             FThreads.invokeInEdtNowOrLater(() -> {
                 for (final VField f : getFieldViews()) {
@@ -286,6 +298,14 @@ public final class CMatchUI
     private void initMatch(final FCollectionView<PlayerView> sortedPlayers, final Collection<PlayerView> myPlayers) {
         this.sortedPlayers = sortedPlayers;
         allHands = sortedPlayers.size() == getLocalPlayerCount();
+
+        if (isNetGame()) {
+            netLog.debug("sortedPlayers count={}", sortedPlayers.size());
+            for (PlayerView p : sortedPlayers) {
+                netLog.debug("  Player ID={}, hash={}, isLocal={}",
+                        p.getId(), System.identityHashCode(p), (myPlayers != null && myPlayers.contains(p)));
+            }
+        }
 
         final String[] indices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
 
@@ -360,9 +380,12 @@ public final class CMatchUI
         return view.getHands();
     }
     public VHand getHandFor(final PlayerView p) {
-        final int idx = getPlayerIndex(p);
-        final List<VHand> allHands = getHandViews();
-        return idx < 0 || idx >= allHands.size() ? null : allHands.get(idx);
+        for (final VHand hand : getHandViews()) {
+            if (p.equals(hand.getPlayer())) {
+                return hand;
+            }
+        }
+        return null;
     }
 
     @Override
@@ -435,6 +458,11 @@ public final class CMatchUI
         for (final PlayerZoneUpdate update : zonesToUpdate) {
             final PlayerView owner = update.getPlayer();
 
+            if (isNetGame()) {
+                netLog.debug("Processing update for player {}, zones={}, ownerHash={}",
+                        owner.getId(), update.getZones(), System.identityHashCode(owner));
+            }
+
             boolean setupPlayZone = false, updateHand = false, updateAnte = false, updateZones = false;
             for (final ZoneType zone : update.getZones()) {
                 switch (zone) {
@@ -460,13 +488,21 @@ public final class CMatchUI
                 cAntes.update();
             }
             final VField vField = getFieldViewFor(owner);
-            if(vField == null)
+            if(vField == null) {
+                netLog.error("vField is null for player {}, sortedPlayers.indexOf={}",
+                        owner.getId(), sortedPlayers.indexOf(owner));
                 return;
+            }
             if (setupPlayZone) {
                 vField.getTabletop().update();
             }
             if (updateHand) {
                 final VHand vHand = getHandFor(owner);
+                if (isNetGame()) {
+                    netLog.debug("updateHand for player {}, vHand={}, handSize={}",
+                            owner.getId(), (vHand != null ? "exists" : "NULL"),
+                            (owner.getHand() != null ? String.valueOf(owner.getHand().size()) : "null"));
+                }
                 if (vHand != null) {
                     vHand.getLayoutControl().updateHand();
                 }
@@ -1045,6 +1081,21 @@ public final class CMatchUI
 
         // Sort players
         FCollectionView<PlayerView> players = gameView.getPlayers();
+
+        if (isNetGame()) {
+            netLog.info("openView called");
+            netLog.debug("gameView.getPlayers() count={}", players.size());
+            for (PlayerView pv : players) {
+                Tracker t = pv.getTracker();
+                PlayerView inTracker = t != null ? t.getObj(TrackableTypes.PlayerViewType, pv.getId()) : null;
+                netLog.debug("  Player {}: hash={}, tracker={}, inTracker={}, sameInstance={}",
+                        pv.getId(), System.identityHashCode(pv),
+                        t != null ? "exists" : "null",
+                        inTracker != null,
+                        pv == inTracker);
+            }
+        }
+
         if (players.size() == 2 && myPlayers != null && myPlayers.size() == 1 && myPlayers.get(0).equals(players.get(1))) {
             players = new FCollection<>(new PlayerView[]{players.get(1), players.get(0)});
         }
@@ -1257,13 +1308,19 @@ public final class CMatchUI
         final PhaseType[] phases = PhaseType.values();
 
         for (int i = 0; i < fieldViews.size(); i++) {
-            final FPref[] keys = isLocalPlayer(sortedPlayers.get(i))
+            final PlayerView player = sortedPlayers.get(i);
+            final FPref[] keys = isLocalPlayer(player)
                     ? FPref.PHASES_HUMAN : FPref.PHASES_AI;
             final PhaseIndicator pi = fieldViews.get(i).getPhaseIndicator();
             for (int p = 1; p < phases.length; p++) {
-                pi.getLabelFor(phases[p]).setEnabled(prefs.getPrefBoolean(keys[p - 1]));
+                final PhaseType phase = phases[p];
+                final PhaseLabel label = pi.getLabelFor(phase);
+                label.setEnabled(prefs.getPrefBoolean(keys[p - 1]));
+                label.setOnToggled(() -> pushSkipPhaseToControllers(player, phase));
             }
         }
+
+        seedSkipPhaseCache();
     }
 
     @Override

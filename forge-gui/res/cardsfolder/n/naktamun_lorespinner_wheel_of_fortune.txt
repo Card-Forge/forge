@@ -1,0 +1,13 @@
+Name:Naktamun Lorespinner
+ManaCost:2 R
+Types:Creature Jackal Wizard
+PT:3/3
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | Execute$ TrigPrepare | TriggerDescription$At the beginning of your upkeep, if a player has one or fewer cards in hand, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+SVar:TrigPrepare:DB$ AlterAttribute | Attributes$ Prepared
+SVar:X:PlayerCount$HasPropertyHasCardsInHand_Card_LE1
+AlternateMode:Prepare
+Oracle:At the beginning of your upkeep, if a player has one or fewer cards in hand, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+
+ALTERNATE
+
+CopyFaceFrom:Wheel of Fortune

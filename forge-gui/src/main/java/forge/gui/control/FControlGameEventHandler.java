@@ -372,7 +372,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventCombatUpdate event) {
-        if (!GuiBase.isNetworkplay(matchController))
+        if (!GuiBase.isNetPlay(matchController))
             return null; //not needed if single player only...
 
         final List<CardView> cards = new ArrayList<>();

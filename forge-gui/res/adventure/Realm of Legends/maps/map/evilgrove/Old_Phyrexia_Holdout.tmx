@@ -49,7 +49,7 @@
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
   &quot;count&quot;: 4,
-  &quot;subTypes&quot;: [ &quot;phyrexian&quot; ]
+  &quot;subTypes&quot;: [ &quot;Phyrexian&quot; ]
 }]</property>
    </properties>
   </object>

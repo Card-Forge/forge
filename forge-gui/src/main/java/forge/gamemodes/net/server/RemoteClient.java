@@ -1,24 +1,37 @@
 package forge.gamemodes.net.server;
 
+import forge.gamemodes.net.CompatibleObjectDecoder;
+import forge.gamemodes.net.CompatibleObjectEncoder;
 import forge.gamemodes.net.ReplyPool;
+import forge.trackable.Tracker;
 import forge.gamemodes.net.event.IdentifiableNetEvent;
 import forge.gamemodes.net.event.NetEvent;
-import io.netty.channel.Channel;
-import org.tinylog.Logger;
+import forge.util.IHasForgeLog;
 
-import java.util.concurrent.TimeoutException;
+import io.netty.channel.Channel;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
-public final class RemoteClient implements IToClient {
+public final class RemoteClient implements IToClient, IHasForgeLog {
 
     /** Special value indicating the client hasn't been assigned a slot yet. */
     public static final int UNASSIGNED_SLOT = -1;
 
     private volatile Channel channel;
     private String username;
-    private int index = UNASSIGNED_SLOT;  // Initialize to -1 to indicate not yet assigned
+    private int index = UNASSIGNED_SLOT;
     private volatile ReplyPool replies = new ReplyPool();
     private final AtomicInteger sendErrors = new AtomicInteger(0);
+
+    // Package-private: SaturationLoggingHandler reads/resets these on writability transitions
+    volatile long saturationStartMs = 0L;
+    final AtomicInteger sendsDuringSaturation = new AtomicInteger(0);
+
+    private void recordSendIfSaturated(final Channel ch) {
+        if (!ch.isWritable()) {
+            sendsDuringSaturation.incrementAndGet();
+        }
+    }
 
     public RemoteClient(final Channel channel) {
         this.channel = channel;
@@ -43,30 +56,39 @@ public final class RemoteClient implements IToClient {
 
     @Override
     public void send(final NetEvent event) {
-        try {
-            long startMs = System.currentTimeMillis();
-            channel.writeAndFlush(event).sync();
-            long elapsed = System.currentTimeMillis() - startMs;
-            if (elapsed > 50) {
-                Logger.info("send() blocked {} ms for {} (event: {})", elapsed, username, event);
+        final Channel ch = channel;
+        recordSendIfSaturated(ch);
+        ch.writeAndFlush(event).addListener(f -> {
+            if (!f.isSuccess()) {
+                sendErrors.incrementAndGet();
+                Throwable c = f.cause();
+                String causeStr = c == null ? (f.isCancelled() ? "cancelled" : "no cause") : c.getClass().getSimpleName() + ": " + c.getMessage();
+                netLog.error("Network send error for {} (event: {}, cause: {})", username, event, causeStr);
             }
-        } catch (Exception e) {
-            sendErrors.incrementAndGet();
-            Logger.error(e, "Network send error for {} (event: {})", username, event);
-        }
+        });
     }
 
     @Override
     public void write(final NetEvent event) {
-        channel.write(event);
+        final Channel ch = channel;
+        recordSendIfSaturated(ch);
+        ch.write(event);
     }
 
     @Override
-    public Object sendAndWait(final IdentifiableNetEvent event) throws TimeoutException {
+    public Object sendAndWait(final IdentifiableNetEvent event) {
         replies.initialize(event.getId());
-
-        send(event);
-
+        final Channel ch = channel;
+        recordSendIfSaturated(ch);
+        ch.writeAndFlush(event).addListener(f -> {
+            if (!f.isSuccess()) {
+                sendErrors.incrementAndGet();
+                Throwable c = f.cause();
+                String causeStr = c == null ? (f.isCancelled() ? "cancelled" : "no cause") : c.getClass().getSimpleName() + ": " + c.getMessage();
+                netLog.error("sendAndWait write failed for {} (event: {}, cause: {})", username, event, causeStr);
+                replies.complete(event.getId(), null);
+            }
+        });
         return replies.get(event.getId());
     }
 
@@ -82,6 +104,22 @@ public final class RemoteClient implements IToClient {
     }
     public void setIndex(final int index) {
         this.index = index;
+    }
+
+    /**
+     * Set the tracker on the channel's encoder and decoder for IdRef
+     * replacement/resolution. Called when the game starts (before any
+     * client protocol messages arrive).
+     */
+    public void setCodecTracker(Tracker tracker) {
+        CompatibleObjectEncoder encoder = channel.pipeline().get(CompatibleObjectEncoder.class);
+        if (encoder != null) {
+            encoder.setTracker(tracker);
+        }
+        CompatibleObjectDecoder decoder = channel.pipeline().get(CompatibleObjectDecoder.class);
+        if (decoder != null) {
+            decoder.setTracker(tracker);
+        }
     }
 
     public int getSendErrorCount() {

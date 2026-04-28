@@ -1,0 +1,13 @@
+Name:Moseo, Vein's New Dean
+ManaCost:2 B
+Types:Legendary Creature Bird Skeleton Warlock
+PT:2/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When NICKNAME enters, create a 1/1 black and green Pest creature token with "Whenever this token attacks, you gain 1 life.
+SVar:TrigToken:DB$ Token | TokenScript$ bg_1_1_pest_attack_lifegain | TokenOwner$ You
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | Execute$ TrigChangeZone | TriggerDescription$ Infusion — At the beginning of your end step, if you gained life this turn, return up to one target creature card with mana value X or less from your graveyard to the battlefield, where X is the amount of life you gained this turn.
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.cmcLEX+YouOwn | TargetMin$ 0 | TargetMax$ 1 | ValidTgtDesc$ creature card in your graveyard with mana value lessr than or equal to the amount of life you gained this turn | Origin$ Graveyard | Destination$ Battlefield
+SVar:X:Count$LifeYouGainedThisTurn
+DeckHas:Ability$LifeGain
+DeckHints:Ability$LifeGain
+Oracle:Flying\nWhen Moseo enters, create a 1/1 black and green Pest creature token with "Whenever this token attacks, you gain 1 life."\nInfusion — At the beginning of your end step, if you gained life this turn, return up to one target creature card with mana value X or less from your graveyard to the battlefield, where X is the amount of life you gained this turn.

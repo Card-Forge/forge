@@ -374,8 +374,8 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         view.updateAttractionLights(this);
     }
 
-    public final Collection<KeywordInterface> getCachedKeywords() {
-        return cachedKeywords.getValues();
+    public final KeywordCollection getCachedKeywords() {
+        return cachedKeywords;
     }
 
     public final Collection<KeywordInterface> getCachedKeyword(final Keyword keyword) {
@@ -754,6 +754,12 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
             }
             result.add(defenseRep);
         }
+        if (type.isSaga() && !hasKeyword(Keyword.READ_AHEAD)) {
+            if (sagaRep == null) {
+                sagaRep = CardFactoryUtil.makeEtbCounter("etbCounter:LORE:1", this, true);
+            }
+            result.add(sagaRep);
+        }
 
         card.updateReplacementEffects(result, this, rulesHost);
 
@@ -762,12 +768,6 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         }
 
         // below are global rules
-        if (type.hasSubtype("Saga") && !hasKeyword(Keyword.READ_AHEAD)) {
-            if (sagaRep == null) {
-                sagaRep = CardFactoryUtil.makeEtbCounter("etbCounter:LORE:1", this, false);
-            }
-            result.add(sagaRep);
-        }
         if (type.hasSubtype("Adventure")) {
             if (this.adventureRep == null) {
                 adventureRep = CardFactoryUtil.setupAdventureAbility(this);
@@ -1044,7 +1044,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
 
     public void resetOriginalHost(Card oldHost) {
         for (final CardTraitBase ctb : getTraits()) {
-            if (ctb.isIntrinsic() && ctb.getOriginalHost() != null && ctb.getOriginalHost().equals(oldHost)) {
+            if (ctb.isIntrinsic() && oldHost.equals(ctb.getOriginalHost())) {
                 // only update traits with undesired host or SVar lookup would fail
                 ctb.setCardState(this);
             }

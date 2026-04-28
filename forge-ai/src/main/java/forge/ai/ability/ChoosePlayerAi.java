@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import forge.ai.AiAttackController;
 import forge.ai.AiAbilityDecision;
 import forge.ai.AiPlayDecision;
 import forge.ai.ComputerUtil;
@@ -38,11 +39,10 @@ public class ChoosePlayerAi extends SpellAbilityAi {
             chosen = new PlayerCollection(choices).min(PlayerPredicates.compareByLife());
         }
         else if ("Curse".equals(sa.getParam("AILogic"))) {
-            for (Player pc : choices) {
-                if (pc.isOpponentOf(ai)) {
-                    chosen = pc;
-                    break;
-                }
+            PlayerCollection curseChoices = new PlayerCollection(choices).filter(PlayerPredicates.isOpponentOf(ai));
+            if (!curseChoices.isEmpty()) {
+                Player preferredOpponent = AiAttackController.choosePreferredDefenderPlayer(ai);
+                chosen = curseChoices.contains(preferredOpponent) ? preferredOpponent : ComputerUtil.evaluateBoardPosition(curseChoices);
             }
             if (chosen == null) {
                 chosen = Iterables.getFirst(choices, null);

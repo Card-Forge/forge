@@ -21,7 +21,7 @@
  </layer>
  <layer id="2" name="Ground and Walls" width="30" height="18">
   <data encoding="base64" compression="zlib">
-   eJxjYMAPODkZGLiAWFUFgUF8BR4IRhaHyXFzEjCUCLAcasZhFQR+xIiQRxYHYRBYSUV7kQHI3i4zBoaTEhAaHdDKXk5TYHgCMbcpfe3tBNkHxN2mCDFk+2llLyEwau+ovUPJ3gzugbGXEKCGvbB6AQRgZf5FfuzyyGooBej+XYlmL7bwoEU4D3d7XbkYGNyQsDsXqr3o8jA1hAAAF2gzaA==
+   eJxjYMAPODkZGLiAWFUFgUF8BR4IRhaHyXFzEjCUCLAcasZhFQR+xIiQRxYHYRBYSUV7kQHI3i4zBoaTEhAaHdDKXk5TYHgCMbcpfe3tBNkHxN2mCDFk+2llLyEwau+ovUPJ3gzugbGXEKCGvbB6AQRgZf4eZuzyyGooBej+XYlmL7bwoEU4D3d7XbkYGNyQsDsXqr3o8jA1hAAAUREyww==
   </data>
  </layer>
  <layer id="3" name="Clutter" width="30" height="18">

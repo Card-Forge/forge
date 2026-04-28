@@ -18,6 +18,7 @@
 package forge.ai;
 
 import com.google.common.collect.*;
+
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.ProtectAi;
 import forge.ai.ability.TokenAi;
@@ -412,7 +413,7 @@ public class ComputerUtil {
                 int mana = ComputerUtilMana.getAvailableManaEstimate(ai, false);
 
                 boolean cantAffordSoon = activate.getCMC() > mana + 1;
-                boolean wrongColor = !activate.getColor().hasNoColorsExcept(ColorSet.fromNames(ComputerUtilCost.getAvailableManaColors(ai, ImmutableList.of())).getColor());
+                boolean wrongColor = !activate.getColor().hasNoColorsExcept(ColorSet.fromNames(ComputerUtilCost.getAvailableManaColors(ai, List.of())).getColor());
 
                 // Only do this for spells, not activated abilities
                 // We can't pay for this spell even if we play another land, or have wrong colors
@@ -2340,7 +2341,7 @@ public class ComputerUtil {
         final String logic = sa.getParam("AILogic");
 
         if (validTypes == null) {
-            validTypes = ImmutableList.of();
+            validTypes = List.of();
         }
 
         final Game game = ai.getGame();

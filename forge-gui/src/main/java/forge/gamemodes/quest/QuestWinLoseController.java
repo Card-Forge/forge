@@ -1,6 +1,5 @@
 package forge.gamemodes.quest;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import forge.LobbyPlayer;
 import forge.card.CardEdition;
@@ -603,7 +602,7 @@ public class QuestWinLoseController {
     }
 
     private SealedTemplate getBoosterTemplate() {
-        return new SealedTemplate(ImmutableList.of(
+        return new SealedTemplate(List.of(
                 Pair.of(BoosterSlots.COMMON, FModel.getQuestPreferences().getPrefInt(QPref.BOOSTER_COMMONS)),
                 Pair.of(BoosterSlots.UNCOMMON, FModel.getQuestPreferences().getPrefInt(QPref.BOOSTER_UNCOMMONS)),
                 Pair.of(BoosterSlots.RARE_MYTHIC, FModel.getQuestPreferences().getPrefInt(QPref.BOOSTER_RARES))

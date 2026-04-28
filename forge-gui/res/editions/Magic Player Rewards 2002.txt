@@ -1,0 +1,15 @@
+[metadata]
+Code=PR2
+Date=2002-01-01
+Name=Magic Player Rewards 2002
+Type=Promo
+ScryfallCode=PR2
+TokensCode=PR2
+
+[tokens]
+3 g_1_1_squirrel @Ron Spencer
+4 b_2_2_zombie @Dana Knutson
+5 g_3_3_elephant @Arnie Swekel
+6 g_6_6_wurm @Alan Pollack
+7 r_5_5_dragon_flying @Glen Angus
+8 w_1_1_soldier @Ron Spencer

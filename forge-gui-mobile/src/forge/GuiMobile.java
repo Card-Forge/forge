@@ -106,9 +106,15 @@ public class GuiMobile implements IGuiBase {
         }
     }
 
+    private volatile Thread glThread;
+
+    void captureGlThread() {
+        this.glThread = Thread.currentThread();
+    }
+
     @Override
     public boolean isGuiThread() {
-        return !ThreadUtil.isGameThread();
+        return Thread.currentThread() == glThread;
     }
 
     @Override
@@ -125,11 +131,6 @@ public class GuiMobile implements IGuiBase {
 
         //use a delay load image to avoid an error if called from background thread
         return new FDelayLoadImage(path);
-    }
-
-    @Override
-    public ISkinImage getCardArt(final PaperCard card) {
-        return CardRenderer.getCardArt(card);
     }
 
     @Override

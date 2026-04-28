@@ -87,23 +87,6 @@ public class CHand implements ICDoc {
 
         final HandArea p = view.getHandArea();
 
-        final VField vf = matchUI.getFieldViewFor(player);
-        if (vf == null) {
-            return;
-        }
-        final Rectangle rctLibraryLabel = vf.getDetailsPanel().getLblLibrary().getBounds();
-
-        // Animation starts from the library label and runs to the hand panel.
-        // This check prevents animation running if label hasn't been realized yet.
-        if (rctLibraryLabel.isEmpty()) {
-            return;
-        }
-
-        // Don't perform animations if the user's in another tab.
-        if (!matchUI.isCurrentScreen()) {
-            return;
-        }
-
         //update card panels in hand area
         final List<CardView> cards;
         if (player.getHand() == null) {
@@ -147,6 +130,26 @@ public class CHand implements ICDoc {
         p.setCardPanels(cardPanels);
         view.updateTabLabel(ordering.size());
 
+        final VField vf = matchUI.getFieldViewFor(player);
+        if (vf == null) {
+            revealPlaceholders(placeholders);
+            return;
+        }
+        final Rectangle rctLibraryLabel = vf.getDetailsPanel().getLblLibrary().getBounds();
+
+        // Animation starts from the library label and runs to the hand panel.
+        // If that label has not been realized yet, the hand should still update.
+        if (rctLibraryLabel.isEmpty()) {
+            revealPlaceholders(placeholders);
+            return;
+        }
+
+        // Don't perform animations if the user's in another tab.
+        if (!matchUI.isCurrentScreen()) {
+            revealPlaceholders(placeholders);
+            return;
+        }
+
         //animate new cards into positions defined by placeholders
         final JLayeredPane layeredPane = Singletons.getView().getFrame().getLayeredPane();
         int fromZoneX = 0, fromZoneY = 0;
@@ -176,6 +179,12 @@ public class CHand implements ICDoc {
             else {
                 Animation.moveCard(placeholder);
             }
+        }
+    }
+
+    private void revealPlaceholders(final List<CardPanel> placeholders) {
+        for (final CardPanel placeholder : placeholders) {
+            Animation.moveCard(placeholder);
         }
     }
 

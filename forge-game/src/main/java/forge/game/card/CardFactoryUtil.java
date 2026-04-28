@@ -178,7 +178,7 @@ public class CardFactoryUtil {
         }
 
         card.turnFaceDown();
-        card.addMayLookAt(player.getGame().getNextTimestamp(), ImmutableList.of(player));
+        card.addMayLookAt(player.getGame().getNextTimestamp(), List.of(player));
         ki.addSpellAbility(abilityRevealHiddenAgenda(card));
         return true;
     }
@@ -355,7 +355,7 @@ public class CardFactoryUtil {
      */
     public static Iterable<String> getMostProminentCreatureType(final CardCollectionView list) {
         if (list.isEmpty()) {
-            return ImmutableList.of();
+            return List.of();
         }
 
         final Map<String, Integer> map = Maps.newHashMap();
@@ -373,7 +373,7 @@ public class CardFactoryUtil {
             }
         }
         if (max == 0) {
-            return ImmutableList.of();
+            return List.of();
         }
         List<String> result = Lists.newArrayList();
         for (final Entry<String, Integer> entry : map.entrySet()) {
@@ -1341,7 +1341,7 @@ public class CardFactoryUtil {
             }
         } else if (keyword.equals("Increment")) {
             final String trig = "Mode$ SpellCast | ValidActivatingPlayer$ You | TriggerZones$ Battlefield "
-                    + " | TriggerDescription$ Increment (" + inst.getReminderText() + ")";
+                    + " | Secondary$ True | TriggerDescription$ Increment (" + inst.getReminderText() + ")";
 
             final String effect = "DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1";
 
@@ -2846,7 +2846,7 @@ public class CardFactoryUtil {
             // Epic does modify existing SA, and does not add new one
 
             // Add the Epic effect as a subAbility
-            String dbStr = "DB$ Effect | Triggers$ EpicTrigger | StaticAbilities$ EpicCantBeCast | Duration$ Permanent | Epic$ True";
+            String dbStr = "DB$ Effect | Triggers$ EpicTrigger | StaticAbilities$ EpicCantBeCast | Duration$ Permanent | ConditionDefined$ Self | ConditionPresent$ Card.hasKeywordEpic";
 
             final AbilitySub newSA = (AbilitySub) AbilityFactory.getAbility(dbStr, card);
 
@@ -3271,6 +3271,23 @@ public class CardFactoryUtil {
             newSA.setIntrinsic(intrinsic);
             newSA.setAlternativeCost(AlternativeCost.Overload);
             inst.addSpellAbility(newSA);
+        } else if (keyword.equals("Paradigm")) {
+            // Add the Paradigm effect as a subAbility
+            String abExile = "DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Exile";
+            final AbilitySub saExile = (AbilitySub) AbilityFactory.getAbility(abExile, card);
+
+            String dbStr = "DB$ Effect | Triggers$ ParadigmTrigger | Duration$ Permanent | Unique$ True | Name$ " + card.getName() + "' Paradigm";
+            final AbilitySub newSA = (AbilitySub) AbilityFactory.getAbility(dbStr, card);
+
+            newSA.setSVar("ParadigmTrigger", "Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | OptionalDecider$ You | Execute$ ParadigmCopy | TriggerDescription$ Paradigm (" + inst.getReminderText() + ")");
+            newSA.setSVar("ParadigmCopy", "DB$ Play | Defined$ EffectSource | ValidSA$ Spell | ZoneRegardless$ True | WithoutManaCost$ True | Optional$ True | CopyCard$ True");
+
+            saExile.setSubAbility(newSA);
+
+            final SpellAbility origSA = card.getFirstSpellAbility();
+
+            // append to original SA
+            origSA.appendSubAbility(saExile);
         } else if (keyword.startsWith("Plot")) {
             final String[] k = keyword.split(":");
             final String manacost = k[1];

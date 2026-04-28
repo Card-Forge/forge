@@ -1,0 +1,8 @@
+Name:Lorehold Charm
+ManaCost:R W
+Types:Instant
+A:SP$ Charm | Choices$ DBSacrifice,DBChangeZone,DBPumpAll
+SVar:DBSacrifice:DB$ Sacrifice | Defined$ Player.Opponent | SacValid$ Artifact.!token | SpellDescription$ Each opponent sacrifices a nontoken artifact of their choice.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Artifact.cmcLE2+YouOwn,Creature.cmcLE2+YouOwn | ValidTgtDesc$ artifact or creature card with mana value 2 or less in your graveyard | SpellDescription$ Return target artifact or creature card with mana value 2 or less from your graveyard to the battlefield.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Trample | SpellDescription$ Creatures you control get +1/+1 and gain trample until end of turn.
+Oracle:Choose one —\n• Each opponent sacrifices a nontoken artifact of their choice.\n• Return target artifact or creature card with mana value 2 or less from your graveyard to the battlefield.\n• Creatures you control get +1/+1 and gain trample until end of turn.
