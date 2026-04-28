@@ -147,7 +147,6 @@ public class Localizer {
 
         //Don't reload the language if nothing changed
         if (oldLocale == null || !oldLocale.equals(locale)) {
-
             File file = new File(languagesDirectory);
             URL[] urls = null;
 
@@ -171,7 +170,6 @@ public class Localizer {
             System.out.println("Language '" + resourceBundle.getBaseBundleName() + "' loaded successfully.");
 
             notifyObservers();
-
         }
     }
 
