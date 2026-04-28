@@ -1,7 +1,6 @@
 package forge.screens.online;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
@@ -28,7 +27,6 @@ public class OnlineChatScreen extends FScreen implements IOnlineChatInterface {
     private final ChatLog lstLog = add(new ChatLog());
     private final FTextField txtSendMessage = add(new FTextField());
 
-    private final List<ChatMessage> history = new ArrayList<>();
     private final List<IOnlineChatInterface> subscribers = new ArrayList<>();
 
     public OnlineChatScreen() {
@@ -75,7 +73,6 @@ public class OnlineChatScreen extends FScreen implements IOnlineChatInterface {
 
     @Override
     public void addMessage(ChatMessage message) {
-        history.add(message);
         lstLog.addMessage(message);
         Gdx.graphics.requestRendering();
         for (IOnlineChatInterface s : subscribers) {
@@ -83,16 +80,12 @@ public class OnlineChatScreen extends FScreen implements IOnlineChatInterface {
         }
     }
 
-    public List<ChatMessage> getHistory() {
-        return Collections.unmodifiableList(history);
-    }
-
     public void addSubscriber(IOnlineChatInterface subscriber) {
         if (subscriber == null || subscribers.contains(subscriber)) { return; }
         subscribers.add(subscriber);
         subscriber.setGameClient(gameClient);
-        for (ChatMessage msg : history) {
-            subscriber.addMessage(msg);
+        for (FDisplayObject obj : lstLog.getChildren()) {
+            subscriber.addMessage(((ChatMessageBubble) obj).getMessage());
         }
     }
 

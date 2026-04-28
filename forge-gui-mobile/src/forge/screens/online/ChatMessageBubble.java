@@ -29,6 +29,10 @@ public class ChatMessageBubble extends FDisplayObject {
     private final String header;
     private final TextRenderer textRenderer = new TextRenderer();
 
+    public ChatMessage getMessage() {
+        return message;
+    }
+
     public ChatMessageBubble(ChatMessage message0) {
         message = message0;
         isLocal = message.isLocal();
