@@ -57,7 +57,6 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.util.*;
 import forge.util.collect.FCollection;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
@@ -1062,7 +1061,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         final CardCollection topN = getTopXCardsFromLibrary(num);
 
         if (!topN.isEmpty()) {
-            final ImmutablePair<CardCollection, CardCollection> lists = getController().arrangeForSurveil(topN);
+            final Pair<CardCollection, CardCollection> lists = getController().arrangeForSurveil(topN);
             final CardCollection toTop = lists.getLeft();
             final CardCollection toGrave = lists.getRight();
 
@@ -3872,7 +3871,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             return;
         }
 
-        Card c = getController().chooseSingleCardForZoneChange(ZoneType.Hand, ImmutableList.of(ZoneType.Sideboard, ZoneType.Hand),
+        Card c = getController().chooseSingleCardForZoneChange(ZoneType.Hand, List.of(ZoneType.Sideboard, ZoneType.Hand),
                 sa, list, null, Localizer.getInstance().getMessage("lblLearnALesson"), true, this);
         if (c == null) {
             return;
