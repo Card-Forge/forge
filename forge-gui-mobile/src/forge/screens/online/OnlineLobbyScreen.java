@@ -42,7 +42,7 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
         super(null, OnlineMenu.getMenu(), new OfflineLobby());
 
         lblTitle = new FLabel.Builder()
-                .text(Forge.getLocalizer().getMessage("lblOnlineEldraziTitle"))
+                .text("- = *  H E R E   B E   E L D R A Z I  * = -")
                 .font(FSkinFont.get(18)).align(Align.center).build();
         add(lblTitle);
 

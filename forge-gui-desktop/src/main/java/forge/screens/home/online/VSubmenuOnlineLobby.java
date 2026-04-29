@@ -88,7 +88,7 @@ public enum VSubmenuOnlineLobby implements IVSubmenu<CSubmenuOnlineLobby>, IOnli
                     BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
             final FLabel lblTitle = new FLabel.Builder()
-                    .text(localizer.getMessage("lblOnlineEldraziTitle"))
+                    .text("- = *  H E R E   B E   E L D R A Z I  * = -")
                     .fontSize(22).fontAlign(SwingConstants.CENTER).build();
 
             final FLabel lblWarning = new FLabel.Builder()
