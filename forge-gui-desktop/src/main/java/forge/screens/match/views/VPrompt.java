@@ -31,8 +31,6 @@ import javax.swing.SwingConstants;
 
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
-import forge.gamemodes.match.YieldController;
-import forge.gamemodes.match.YieldUpdate;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -41,7 +39,6 @@ import forge.interfaces.IGameController;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.player.PlayerControllerHuman;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CPrompt;
 import forge.toolbox.FButton;
@@ -85,24 +82,9 @@ public class VPrompt implements IVDoc<CPrompt> {
                 if (ui != null) {
                     PlayerView local = ui.getCurrentPlayer();
                     IGameController ctrl = local != null ? ui.getGameController(local) : null;
-                    if (ctrl != null) {
-                        YieldController yc = ctrl.getYieldController();
-                        boolean hasMarker = yc.getMarker() != null;
-                        boolean hasLegacy = yc.isAutoPassUntilEndOfTurn();
-                        boolean hasStackYield = yc.isStackYieldActive();
-                        if (hasMarker) {
-                            ctrl.sendYieldUpdate(new YieldUpdate.ClearMarker(local));
-                        }
-                        if (hasLegacy && ctrl instanceof PlayerControllerHuman pch) {
-                            pch.autoPassCancel();
-                        }
-                        if (hasStackYield) {
-                            ctrl.sendYieldUpdate(new YieldUpdate.SetStackYield(local, false));
-                        }
-                        if (hasMarker || hasLegacy || hasStackYield) {
-                            ui.refreshYieldUi(local);
-                            return;
-                        }
+                    if (ctrl != null && ctrl.getYieldController().clearActiveYields(local, ctrl)) {
+                        ui.refreshYieldUi(local);
+                        return;
                     }
                 }
                 if (btnCancel.isEnabled() &&
