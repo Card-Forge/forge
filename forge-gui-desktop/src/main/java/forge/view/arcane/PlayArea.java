@@ -769,16 +769,16 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 || activateDesc.equals(loc.getMessage("lblAttackWithCard"))
                 || activateDesc.equals(loc.getMessage("lblBlockWithCard"));
         if (alreadyInCombat) {
-            MouseTriggerEvent rightClickTrigger = new MouseTriggerEvent(3, evt.getX(), evt.getY());
-            getMatchUI().getGameController().selectCard(primary, others, rightClickTrigger);
+            getMatchUI().getGameController().selectCard(primary, others, new MouseTriggerEvent(evt));
         } else if (isCombat) {
-            MouseTriggerEvent leftClickTrigger = new MouseTriggerEvent(1, evt.getX(), evt.getY());
-            getMatchUI().getGameController().selectCard(primary, others, leftClickTrigger);
+            // Synthesize a left-click: InputAttack/InputBlock route the right-click button to
+            // their undeclare branch, but here the user wants to declare from the badge prompt.
+            MouseTriggerEvent declareTrigger = new MouseTriggerEvent(MouseEvent.BUTTON1, evt.getX(), evt.getY());
+            getMatchUI().getGameController().selectCard(primary, others, declareTrigger);
         } else {
-            // Non-combat inputs (sacrifice, targeting) ignore otherCardsToSelect
-            MouseTriggerEvent leftClickTrigger = new MouseTriggerEvent(1, evt.getX(), evt.getY());
+            // Non-combat inputs (sacrifice, targeting) ignore otherCardsToSelect and the button.
             for (CardView cv : selected) {
-                getMatchUI().getGameController().selectCard(cv, null, leftClickTrigger);
+                getMatchUI().getGameController().selectCard(cv, null, new MouseTriggerEvent(evt));
             }
         }
         // Update splitCardIds: clear whole stack, then mark the subset that
