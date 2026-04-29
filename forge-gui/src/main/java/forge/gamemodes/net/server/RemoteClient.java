@@ -62,8 +62,12 @@ public final class RemoteClient implements IToClient, IHasForgeLog {
             if (!f.isSuccess()) {
                 sendErrors.incrementAndGet();
                 Throwable c = f.cause();
-                String causeStr = c == null ? (f.isCancelled() ? "cancelled" : "no cause") : c.getClass().getSimpleName() + ": " + c.getMessage();
-                netLog.error("Network send error for {} (event: {}, cause: {})", username, event, causeStr);
+                if (c != null) {
+                    netLog.error(c, "Network send error for {} (event: {})", username, event);
+                } else {
+                    netLog.error("Network send error for {} (event: {}, cause: {})",
+                            username, event, f.isCancelled() ? "cancelled" : "no cause");
+                }
             }
         });
     }
@@ -84,8 +88,12 @@ public final class RemoteClient implements IToClient, IHasForgeLog {
             if (!f.isSuccess()) {
                 sendErrors.incrementAndGet();
                 Throwable c = f.cause();
-                String causeStr = c == null ? (f.isCancelled() ? "cancelled" : "no cause") : c.getClass().getSimpleName() + ": " + c.getMessage();
-                netLog.error("sendAndWait write failed for {} (event: {}, cause: {})", username, event, causeStr);
+                if (c != null) {
+                    netLog.error(c, "sendAndWait write failed for {} (event: {})", username, event);
+                } else {
+                    netLog.error("sendAndWait write failed for {} (event: {}, cause: {})",
+                            username, event, f.isCancelled() ? "cancelled" : "no cause");
+                }
                 replies.complete(event.getId(), null);
             }
         });
