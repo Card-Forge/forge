@@ -18,7 +18,15 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Replaces CardView/PlayerView refs with compact wire markers; resolves on the receiving side. */
+/**
+ * Handles serialization of {@link TrackableObject} references across the network.
+ * Replaces CardView/PlayerView with lightweight {@link IdRef} markers during
+ * encoding and resolves them back from the Tracker during decoding.
+ *
+ * <p>Used by the Netty encoder/decoder pipeline ({@link CompatibleObjectEncoder},
+ * {@link CompatibleObjectDecoder}) and the mobile codec path
+ * ({@link CObjectOutputStream}, {@link CObjectInputStream}).
+ */
 public final class TrackableSerializer {
     private static final TaggedLogger netLog = Logger.tag("NETWORK");
 
@@ -49,6 +57,15 @@ public final class TrackableSerializer {
         }
     }
 
+    /**
+     * Replaces TrackableObject references with {@link IdRef} markers, or
+     * {@link EventCardRef} markers for CardViews inside wrapped events
+     * ({@code eventMode = true}). When the tracker holds a different object
+     * for the CardView's id (zone-change copy), {@code preserveSnapshot} is
+     * set so the receiver decodes a detached CardView from the carried name
+     * and image key. When {@code tracker} is null, the snapshot check is
+     * skipped (used by the client encoder, which has no game-state awareness).
+     */
     static Object replace(Object obj, Tracker tracker, boolean eventMode) {
         if (obj instanceof TrackableObject trackable) {
             byte tag = typeTagFor(trackable);
@@ -76,6 +93,10 @@ public final class TrackableSerializer {
         return obj;
     }
 
+    /**
+     * Resolves {@link IdRef} and {@link EventCardRef} markers back to
+     * TrackableObjects from the given Tracker.
+     */
     static Object resolve(Object obj, Tracker tracker) {
         if (obj instanceof EventCardRef ref) {
             if (!ref.preserveSnapshot()) {
@@ -105,7 +126,11 @@ public final class TrackableSerializer {
         return obj;
     }
 
-    /** Approximate serialized size for telemetry. */
+    /**
+     * Measures serialized size matching the encoder wire format
+     * for applyDelta messages with IdRef replacement (when tracker not null).
+     * otherwise for setGameView messages.
+     */
     public static int measureSize(Object obj, Tracker tracker) {
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -119,12 +144,23 @@ public final class TrackableSerializer {
         }
     }
 
+    /**
+     * Serializable wrapper for a GameEvent whose TrackableObject references
+     * have been replaced with IdRef/EventCardRef markers. Stored in
+     * DeltaPacket.events so events travel as compact byte arrays rather than
+     * full object graphs. Unwrapped after delta state is applied, when the
+     * client tracker is populated.
+     */
     static final class WrappedEvent implements Serializable {
         private static final long serialVersionUID = 1L;
         final byte[] data;
         WrappedEvent(byte[] data) { this.data = data; }
     }
 
+    /**
+     * Wraps GameEvents by serializing each with IdRef replacement.
+     * Events that fail to serialize are dropped (logged).
+     */
     public static List<Object> wrapEvents(List<GameEvent> events, Tracker tracker) {
         List<Object> wrapped = new ArrayList<>(events.size());
         for (GameEvent event : events) {
@@ -141,6 +177,11 @@ public final class TrackableSerializer {
         return wrapped;
     }
 
+    /**
+     * Unwraps events by deserializing with IdRef resolution from the tracker.
+     * Called after delta state is applied so new objects are resolvable.
+     * Events that fail to unwrap are dropped (logged).
+     */
     public static List<GameEvent> unwrapEvents(List<Object> items, Tracker tracker) {
         List<GameEvent> events = new ArrayList<>(items.size());
         for (Object item : items) {
