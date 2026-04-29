@@ -78,14 +78,12 @@ public class VPrompt implements IVDoc<CPrompt> {
         @Override
         public void keyPressed(final KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-                CMatchUI ui = CMatchUI.getActive();
-                if (ui != null) {
-                    PlayerView local = ui.getCurrentPlayer();
-                    IGameController ctrl = local != null ? ui.getGameController(local) : null;
-                    if (ctrl != null && ctrl.getYieldController().clearActiveYields(local, ctrl)) {
-                        ui.refreshYieldUi(local);
-                        return;
-                    }
+                CMatchUI ui = controller.getMatchUI();
+                PlayerView local = ui.getCurrentPlayer();
+                IGameController ctrl = local != null ? ui.getGameController(local) : null;
+                if (ctrl != null && ctrl.getYieldController().clearActiveYields(local, ctrl)) {
+                    ui.refreshYieldUi(local);
+                    return;
                 }
                 if (btnCancel.isEnabled() &&
                         (FModel.getPreferences().getPrefBoolean(FPref.UI_ALLOW_ESC_TO_END_TURN) || !btnCancel.getText().equals(Localizer.getInstance().getMessage("lblEndTurn")))) {
