@@ -71,10 +71,10 @@ public class VPrompt implements IVDoc<CPrompt> {
     private final FScrollPane messageScroller = new FScrollPane(tarMessage, false,
     		ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     private final JLabel lblGames;
-    private CardView card = null ; 
+    private CardView card = null;
 
     public void setCardView(final CardView card) {
-	this.card = card ;
+        this.card = card;
     }
 
     private KeyAdapter buttonKeyAdapter = new KeyAdapter() {
@@ -105,10 +105,9 @@ public class VPrompt implements IVDoc<CPrompt> {
                         }
                     }
                 }
-                if (btnCancel.isEnabled()) {
-                    if (FModel.getPreferences().getPrefBoolean(FPref.UI_ALLOW_ESC_TO_END_TURN) || !btnCancel.getText().equals("End Turn")) {
-                        btnCancel.doClick();
-                    }
+                if (btnCancel.isEnabled() &&
+                        (FModel.getPreferences().getPrefBoolean(FPref.UI_ALLOW_ESC_TO_END_TURN) || !btnCancel.getText().equals(Localizer.getInstance().getMessage("lblEndTurn")))) {
+                    btnCancel.doClick();
                 }
             }
         }
@@ -116,16 +115,15 @@ public class VPrompt implements IVDoc<CPrompt> {
 
     private final CPrompt controller;
 
-    //========= Constructor
     public VPrompt(final CPrompt controller) {
         this.controller = controller;
 
         lblGames = new FLabel.Builder()
-        .fontSize(12)
-        .fontStyle(Font.PLAIN)
-        .fontAlign(SwingConstants.CENTER)
-        .opaque()
-        .build();
+                .fontSize(12)
+                .fontStyle(Font.PLAIN)
+                .fontAlign(SwingConstants.CENTER)
+                .opaque()
+                .build();
 
         btnOK.addKeyListener(buttonKeyAdapter);
         btnCancel.addKeyListener(buttonKeyAdapter);
@@ -137,14 +135,12 @@ public class VPrompt implements IVDoc<CPrompt> {
         messageScroller.getViewport().getView().addMouseListener(new MouseAdapter() {
         	@Override 
         	public void mouseEntered(final MouseEvent e) {
-        		if ( card != null ) {
-			    controller.getMatchUI().setCard(card);
+        		if (card != null) {
+                    controller.getMatchUI().setCard(card);
         		}
         	}
         });
     }
-
-    //========== Overridden methods
 
     /* (non-Javadoc)
      * @see forge.gui.framework.IVDoc#populate()
