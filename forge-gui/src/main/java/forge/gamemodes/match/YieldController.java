@@ -130,9 +130,11 @@ public class YieldController {
             return;
         }
         marker = new YieldMarker(phaseOwner, phase);
-        boolean atMarkerNow = isPriorityAt(marker);
-        hasLeftMarker = !atMarkerNow;
-        activationOnMarker = atMarkerNow;
+        // Activating at-or-past target on the owner's current turn must wait for next turn's
+        // occurrence; otherwise pastTarget would fire and clear the marker on the same turn.
+        boolean atOrPast = isPriorityAtOrPastMarker(marker);
+        hasLeftMarker = !atOrPast;
+        activationOnMarker = atOrPast;
     }
 
     public void clearMarker() {
@@ -150,15 +152,15 @@ public class YieldController {
 
     public boolean isStackYieldActive() { return stackYield; }
 
-    private boolean isPriorityAt(YieldMarker m) {
+    private boolean isPriorityAtOrPastMarker(YieldMarker m) {
         if (m == null || owner == null || owner.getGui() == null) return false;
         GameView gv = owner.getGui().getGameView();
         if (gv == null) return false;
         PlayerView turnPlayer = gv.getPlayerTurn();
         PhaseType phase = gv.getPhase();
-        return turnPlayer != null
-                && turnPlayer.equals(m.getPhaseOwner())
-                && phase == m.getPhase();
+        if (turnPlayer == null || !turnPlayer.equals(m.getPhaseOwner())) return false;
+        if (phase == null || m.getPhase() == null) return false;
+        return phase == m.getPhase() || phase.isAfter(m.getPhase());
     }
 
     public void setSkipPhase(PlayerView turnPlayer, PhaseType phase, boolean skip) {
