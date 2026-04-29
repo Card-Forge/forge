@@ -721,7 +721,8 @@ public class MapStage extends GameStage {
                         Array<Reward> ret = new Array<>();
                         WorldSave.getCurrentSave().getWorld().getRandom().setSeed(changes.getShopSeed(id));
                         // Todo: This is where equipment shops load their rewards. Each reward has a RewardType of "item" and comes pre-defined with an item name.
-                        //  They are defined in Shandalar/Shops.json as <Color>Item and <Color>Equipment. We can dynamically detect those names and replace their items if AP mode is enabled here.
+                        //  They are defined in Shandalar/Shops.json as Equipment, <Color>Item and <Color>Equipment. We can dynamically detect those names and replace their items if AP mode is enabled here.
+                        //  The "Equipment" shop is used generically for all non capital equipment vendors and as such always carries the same items.
                         for (RewardData rdata : new Array.ArrayIterator<>(data.rewards)) {
                             ret.addAll(rdata.generate(false, false));
                         }
