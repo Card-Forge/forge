@@ -81,6 +81,10 @@ public class ComputerUtilCard {
         if (targeted) {
             all = CardLists.filter(all, c -> c.canBeTargetedBy(spell));
         }
+        Card safetyThreat = getKnownSafetyThreatToRemove(spell == null ? null : spell.getActivatingPlayer(), all);
+        if (safetyThreat != null) {
+            return safetyThreat;
+        }
         return getMostExpensivePermanentAI(all);
     }
 
@@ -1221,6 +1225,11 @@ public class ComputerUtilCard {
             return true;
         }
 
+        final int safetyThreatBonus = getSafetyThreatBonus(ai, c);
+        if (safetyThreatBonus >= 150) {
+            return true;
+        }
+
         //Check for cards that profit from spells - for example Prowess or Threshold
         if (phaseType == PhaseType.MAIN1 && ComputerUtil.castSpellInMain1(ai, sa)) {
             return true;
@@ -1413,6 +1422,7 @@ public class ComputerUtilCard {
             }
             //TODO:add threat from triggers and other abilities (ie. Bident of Thassa)
         }
+        threat += safetyThreatBonus / 100.0f;
         if (!c.getManaAbilities().isEmpty()) {
             threat += 0.5f * costTarget / opp.getLandsInPlay().size();   //set back opponent's mana
         }
@@ -1423,6 +1433,29 @@ public class ComputerUtilCard {
         }
         final float chance = MyRandom.getRandom().nextFloat();
         return chance < valueNow;
+    }
+
+    public static Card getKnownSafetyThreatToRemove(final Player ai, final Iterable<Card> cards) {
+        if (ai == null) {
+            return null;
+        }
+        Card best = null;
+        int bestBonus = 0;
+        for (Card card : cards) {
+            int bonus = getSafetyThreatBonus(ai, card);
+            if (bonus > bestBonus) {
+                best = card;
+                bestBonus = bonus;
+            }
+        }
+        return best;
+    }
+
+    private static int getSafetyThreatBonus(final Player ai, final Card card) {
+        if (!(ai.getController() instanceof PlayerControllerAi)) {
+            return 0;
+        }
+        return ((PlayerControllerAi) ai.getController()).getAi().getSafetyThreatBonus(card);
     }
 
     /**

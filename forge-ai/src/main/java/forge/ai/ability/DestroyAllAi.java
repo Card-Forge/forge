@@ -1,8 +1,22 @@
 package forge.ai.ability;
 
-import forge.ai.*;
+import java.util.function.Predicate;
+
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiBlockController;
+import forge.ai.AiPlayDecision;
+import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilCombat;
+import forge.ai.ComputerUtilCost;
+import forge.ai.SpecialCardAi;
+import forge.ai.SpellAbilityAi;
+import forge.ai.simulation.SwingyPlaySimulationEvaluator;
 import forge.card.MagicColor;
-import forge.game.card.*;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
+import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.cost.Cost;
 import forge.game.cost.CostDamage;
@@ -12,8 +26,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollectionView;
-
-import java.util.function.Predicate;
 
 public class DestroyAllAi extends SpellAbilityAi {
 
@@ -64,6 +76,11 @@ public class DestroyAllAi extends SpellAbilityAi {
 
         if (valid.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
             ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
+        }
+
+        AiAbilityDecision simulatedDecision = SwingyPlaySimulationEvaluator.judge(ai, sa);
+        if (simulatedDecision != null) {
+            return simulatedDecision;
         }
 
         // TODO should probably sort results when targeted to use on biggest threat instead of first match

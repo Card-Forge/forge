@@ -30,10 +30,12 @@ public class SpellAbilityPicker {
 
     private Plan plan;
     private int numSimulations;
+    private final OnePlaySafetyChecker safetyChecker;
 
     public SpellAbilityPicker(Game game, Player player) {
         this.game = game;
         this.player = player;
+        this.safetyChecker = new OnePlaySafetyChecker(player);
     }
 
     public void setInterceptor(SpellAbilityChoicesIterator in) {
@@ -333,6 +335,12 @@ public class SpellAbilityPicker {
         }
         if (shouldWaitForLater(sa)) {
             return AiPlayDecision.AnotherTime;
+        }
+        if (!OnePlaySafetyChecker.isChecking()) {
+            AiPlayDecision safety = safetyChecker.checkStatic(sa);
+            if (safety != AiPlayDecision.WillPlay) {
+                return safety;
+            }
         }
 
         return AiPlayDecision.WillPlay;
