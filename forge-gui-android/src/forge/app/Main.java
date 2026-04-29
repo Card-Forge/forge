@@ -33,6 +33,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 import android.text.SpannableString;
 import android.text.TextUtils;
@@ -70,6 +71,8 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.json.JSONObject;
 import org.jupnp.DefaultUpnpServiceConfiguration;
 import org.jupnp.android.AndroidUpnpServiceConfiguration;
+import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -78,6 +81,9 @@ import java.util.Date;
 import java.util.Set;
 
 public class Main extends AndroidApplication {
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+    private static final long HEAP_HEARTBEAT_MS = 30_000L;
+
     private AndroidAdapter Gadapter;
     private ArrayList<String> gamepads;
     private AndroidClipboard androidClipboard;
@@ -89,6 +95,18 @@ public class Main extends AndroidApplication {
     private ProgressBar progressBar;
     private TextView progressText;
     private String versionString;
+    private Handler heapHeartbeatHandler;
+    private final Runnable heapHeartbeat = new Runnable() {
+        @Override public void run() {
+            Runtime r = Runtime.getRuntime();
+            long total = r.totalMemory(), free = r.freeMemory(), max = r.maxMemory();
+            netLog.info("[heap] used={}MB free={}MB total={}MB max={}MB",
+                    (total - free) >> 20, free >> 20, total >> 20, max >> 20);
+            if (heapHeartbeatHandler != null) {
+                heapHeartbeatHandler.postDelayed(this, HEAP_HEARTBEAT_MS);
+            }
+        }
+    };
 
     // The package name the resources are compiled under (stable across dev/prod).
     // If you ever change the base app package, update this constant once.
@@ -148,6 +166,7 @@ public class Main extends AndroidApplication {
 
     @Override
     protected void onResume() {
+        netLog.info("[lifecycle] onResume");
         try {
             super.onResume();
         } catch (Exception ignore) {}
@@ -161,6 +180,19 @@ public class Main extends AndroidApplication {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Capture uncaught exceptions before the JVM dies — without this, the stack trace would only reach Android logcat, not the network log users share
+        final Thread.UncaughtExceptionHandler prior = Thread.getDefaultUncaughtExceptionHandler();
+        Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
+            try {
+                netLog.error(e, "[uncaught] thread={}", t.getName());
+            } catch (Throwable ignore) {}
+            if (prior != null) prior.uncaughtException(t, e);
+        });
+
+        netLog.info("[lifecycle] onCreate");
+        heapHeartbeatHandler = new Handler(Looper.getMainLooper());
+        heapHeartbeatHandler.postDelayed(heapHeartbeat, HEAP_HEARTBEAT_MS);
+
         super.onCreate(savedInstanceState);
         try {
             PackageInfo pInfo = getContext().getPackageManager().getPackageInfo(getContext().getPackageName(), 0);
@@ -542,6 +574,11 @@ public class Main extends AndroidApplication {
 
     @Override
     protected void onDestroy() {
+        netLog.info("[lifecycle] onDestroy");
+        if (heapHeartbeatHandler != null) {
+            heapHeartbeatHandler.removeCallbacks(heapHeartbeat);
+            heapHeartbeatHandler = null;
+        }
         super.onDestroy();
         //ensure app doesn't stick around
         //ActivityManager am = (ActivityManager)getSystemService(Activity.ACTIVITY_SERVICE);
@@ -549,7 +586,26 @@ public class Main extends AndroidApplication {
     }
 
     @Override
+    protected void onStop() {
+        netLog.info("[lifecycle] onStop");
+        super.onStop();
+    }
+
+    @Override
+    public void onLowMemory() {
+        netLog.warn("[lifecycle] onLowMemory");
+        super.onLowMemory();
+    }
+
+    @Override
+    public void onTrimMemory(int level) {
+        netLog.warn("[lifecycle] onTrimMemory level={}", level);
+        super.onTrimMemory(level);
+    }
+
+    @Override
     protected void onPause() {
+        netLog.info("[lifecycle] onPause");
         super.onPause();
 
         /*ForgePreferences prefs = FModel.getPreferences();

@@ -5,9 +5,11 @@ import forge.game.GameView;
 import forge.game.event.GameEvent;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
+import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.AbstractGuiGame;
+import forge.gamemodes.net.client.NetGameController;
 import forge.interfaces.IGameController;
 import forge.trackable.Tracker;
 import forge.trackable.TrackableCollection;
@@ -599,6 +601,33 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasForg
         int phaseOrdinal = gameView.getPhase() != null ? gameView.getPhase().ordinal() : -1;
         netLog.error("[DeltaSync] Client breakdown: {}",
                 NetworkChecksumUtil.computeChecksumBreakdown(gameView.getTurn(), phaseOrdinal, gameView));
+    }
+
+    protected final void pushSkipPhaseToControllers(final PlayerView player, final PhaseType phase) {
+        // Mind-slave AND-combines master+controlled rows, so a master toggle invalidates dependents
+        for (final PlayerView p : getGameView().getPlayers()) {
+            if (!p.equals(player) && !player.equals(p.getMindSlaveMaster())) continue;
+            final boolean shouldSkip = isUiSetToSkipPhase(p, phase);
+            for (final IGameController c : getOriginalGameControllers()) {
+                if (c instanceof NetGameController nc) {
+                    nc.setUiShouldSkipPhase(p, phase, shouldSkip);
+                }
+            }
+        }
+    }
+
+    protected final void seedSkipPhaseCache() {
+        for (final IGameController c : getOriginalGameControllers()) {
+            if (c instanceof NetGameController nc) {
+                for (PlayerView p : getGameView().getPlayers()) {
+                    for (PhaseType ph : PhaseType.values()) {
+                        if (isUiSetToSkipPhase(p, ph)) {
+                            nc.setUiShouldSkipPhase(p, ph, Boolean.TRUE);
+                        }
+                    }
+                }
+            }
+        }
     }
 
 }

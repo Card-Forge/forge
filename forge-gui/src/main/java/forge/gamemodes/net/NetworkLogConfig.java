@@ -255,6 +255,7 @@ public final class NetworkLogConfig implements IHasForgeLog {
     public static void activateNetworkLogging() {
         if (normalModeKey == null) {
             normalModeKey = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
+            cleanupOldLogs();
         }
     }
 

@@ -1,7 +1,5 @@
 package forge.screens.online;
 
-import com.google.common.collect.ImmutableList;
-
 import forge.Forge;
 import forge.gamemodes.match.GameLobby;
 import forge.gamemodes.net.ChatMessage;
@@ -20,6 +18,8 @@ import forge.localinstance.skin.FSkinProp;
 import forge.screens.LoadingOverlay;
 import forge.screens.constructed.LobbyScreen;
 import forge.screens.online.OnlineMenu.OnlineScreen;
+
+import java.util.List;
 
 public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
     public OnlineLobbyScreen() {
@@ -57,7 +57,7 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
         Forge.back();
         if (msg.length() > 0) {
             FThreads.invokeInBackgroundThread(() -> {
-                final boolean callBackAlwaysTrue = SOptionPane.showOptionDialog(msg, Forge.getLocalizer().getMessage("lblError"), FSkinProp.ICO_WARNING, ImmutableList.of(Forge.getLocalizer().getMessage("lblOK")), 1) == 0;
+                final boolean callBackAlwaysTrue = SOptionPane.showOptionDialog(msg, Forge.getLocalizer().getMessage("lblError"), FSkinProp.ICO_WARNING, List.of(Forge.getLocalizer().getMessage("lblOK")), 1) == 0;
                 if (callBackAlwaysTrue) { //to activate online menu popup when player press play online
                     GuiBase.setInterrupted(false);
 

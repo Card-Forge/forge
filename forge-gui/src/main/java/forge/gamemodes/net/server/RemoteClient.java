@@ -7,6 +7,7 @@ import forge.trackable.Tracker;
 import forge.gamemodes.net.event.IdentifiableNetEvent;
 import forge.gamemodes.net.event.NetEvent;
 import forge.util.IHasForgeLog;
+
 import io.netty.channel.Channel;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -21,6 +22,16 @@ public final class RemoteClient implements IToClient, IHasForgeLog {
     private int index = UNASSIGNED_SLOT;
     private volatile ReplyPool replies = new ReplyPool();
     private final AtomicInteger sendErrors = new AtomicInteger(0);
+
+    // Package-private: SaturationLoggingHandler reads/resets these on writability transitions
+    volatile long saturationStartMs = 0L;
+    final AtomicInteger sendsDuringSaturation = new AtomicInteger(0);
+
+    private void recordSendIfSaturated(final Channel ch) {
+        if (!ch.isWritable()) {
+            sendsDuringSaturation.incrementAndGet();
+        }
+    }
 
     public RemoteClient(final Channel channel) {
         this.channel = channel;
@@ -45,28 +56,47 @@ public final class RemoteClient implements IToClient, IHasForgeLog {
 
     @Override
     public void send(final NetEvent event) {
-        try {
-            long startMs = System.currentTimeMillis();
-            channel.writeAndFlush(event).sync();
-            long elapsed = System.currentTimeMillis() - startMs;
-            if (elapsed > 50) {
-                netLog.info("send() blocked {} ms for {} (event: {})", elapsed, username, event);
+        final Channel ch = channel;
+        recordSendIfSaturated(ch);
+        ch.writeAndFlush(event).addListener(f -> {
+            if (!f.isSuccess()) {
+                sendErrors.incrementAndGet();
+                Throwable c = f.cause();
+                if (c != null) {
+                    netLog.error(c, "Network send error for {} (event: {})", username, event);
+                } else {
+                    netLog.error("Network send error for {} (event: {}, cause: {})",
+                            username, event, f.isCancelled() ? "cancelled" : "no cause");
+                }
             }
-        } catch (Exception e) {
-            sendErrors.incrementAndGet();
-            netLog.error("Network send error for {} (event: {})", username, event, e);
-        }
+        });
     }
 
     @Override
     public void write(final NetEvent event) {
-        channel.write(event);
+        final Channel ch = channel;
+        recordSendIfSaturated(ch);
+        ch.write(event);
     }
 
     @Override
     public Object sendAndWait(final IdentifiableNetEvent event) {
         replies.initialize(event.getId());
-        send(event);
+        final Channel ch = channel;
+        recordSendIfSaturated(ch);
+        ch.writeAndFlush(event).addListener(f -> {
+            if (!f.isSuccess()) {
+                sendErrors.incrementAndGet();
+                Throwable c = f.cause();
+                if (c != null) {
+                    netLog.error(c, "sendAndWait write failed for {} (event: {})", username, event);
+                } else {
+                    netLog.error("sendAndWait write failed for {} (event: {}, cause: {})",
+                            username, event, f.isCancelled() ? "cancelled" : "no cause");
+                }
+                replies.complete(event.getId(), null);
+            }
+        });
         return replies.get(event.getId());
     }
 
