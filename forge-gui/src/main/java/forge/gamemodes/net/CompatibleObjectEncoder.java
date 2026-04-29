@@ -5,6 +5,7 @@ import forge.gui.GuiBase;
 import forge.trackable.Tracker;
 import forge.util.IHasForgeLog;
 import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufAllocator;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
@@ -29,6 +30,23 @@ public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> 
 
     @Override
     protected void encode(ChannelHandlerContext ctx, Serializable msg, ByteBuf out) throws Exception {
+        encodeInto(msg, out, this.tracker, this.byteTracker);
+    }
+
+    /** Caller passes the returned buffer to writeAndFlush, which takes ownership. */
+    public ByteBuf encodeToBuf(Serializable msg, ByteBufAllocator alloc) throws Exception {
+        ByteBuf out = alloc.buffer();
+        try {
+            encodeInto(msg, out, this.tracker, this.byteTracker);
+        } catch (Exception e) {
+            out.release();
+            throw e;
+        }
+        return out;
+    }
+
+    private static void encodeInto(Serializable msg, ByteBuf out, Tracker tracker,
+                                   NetworkByteTracker byteTracker) throws Exception {
         int startIdx = out.writerIndex();
         ByteBufOutputStream bout = new ByteBufOutputStream(out);
         ObjectOutputStream oout = null;
@@ -39,7 +57,7 @@ public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> 
             bout.write(LENGTH_PLACEHOLDER);
             if (GuiBase.hasPropertyConfig()) {
                 oout = replace
-                        ? new TrackableSerializer.ReplacingOutputStream(new LZ4BlockOutputStream(bout), tracker)
+                        ? new TrackableSerializer.ReplacingOutputStream(new LZ4BlockOutputStream(bout), tracker, false)
                         : new ObjectOutputStream(new LZ4BlockOutputStream(bout));
             } else {
                 oout = new CObjectOutputStream(new LZ4BlockOutputStream(bout), replace);
@@ -68,16 +86,7 @@ public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> 
         }
     }
 
-    /**
-     * Determines whether TrackableObject references should be replaced with
-     * IdRef markers for this message. Excludes only:
-     * - setGameView/openView: carry full state to populate the client's Tracker
-     *
-     * applyDelta is NOT excluded: its property maps already use Integer IDs
-     * (via DeltaSyncManager.toNetworkValue), and bundled events are wrapped
-     * by TrackableSerializer.wrapEvents before entering the packet, so no
-     * raw TrackableObjects remain in the serialization graph.
-     */
+    // setGameView and openView carry full state to populate the receiver's tracker.
     private static boolean shouldReplaceTrackables(Serializable msg) {
         if (msg instanceof GuiGameEvent event) {
             ProtocolMethod method = event.getMethod();
