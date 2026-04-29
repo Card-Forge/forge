@@ -9,3 +9,6 @@ ScryfallCode=PF26
 1F R Wayfarer's Bauble @Diego Gisbert
 2 R Fyndhorn Elves @Julie Dillon
 3 R Prismatic Ending @Chris Seaman
+4 M Consecrated Sphinx @Mark Zug
+5 R Counterspell @Stephen Daniele
+F6 R In Residence @Mark Rosewater

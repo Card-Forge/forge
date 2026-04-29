@@ -15,7 +15,6 @@ import forge.card.CardImageRenderer;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.game.spellability.StackItemView;
-import forge.gui.interfaces.IGuiGame;
 import forge.screens.match.views.VField;
 import forge.screens.match.views.VReveal;
 import forge.toolbox.FDisplayObject;
@@ -54,6 +53,7 @@ import forge.player.PlayerZoneUpdate;
 import forge.screens.FScreen;
 import forge.screens.match.views.VAvatar;
 import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
+import forge.screens.match.views.VChat;
 import forge.screens.match.views.VDevMenu;
 import forge.screens.match.views.VGameMenu;
 import forge.screens.match.views.VLog;
@@ -82,6 +82,7 @@ public class MatchScreen extends FScreen {
     private final VPlayers players;
     private final VReveal revealed;
     private final VLog log;
+    private final VChat chat;
     private final VStack stack;
     private final VDevMenu devMenu;
     private final FieldScroller scroller;
@@ -126,7 +127,7 @@ public class MatchScreen extends FScreen {
                 e -> getGameController().selectButtonOk(),
                 e -> getGameController().selectButtonCancel()));
 
-        if (humanCount < 2 || MatchController.instance.hotSeatMode() || GuiBase.isNetworkplay(MatchController.instance))
+        if (humanCount < 2 || MatchController.instance.hotSeatMode() || GuiBase.isNetPlay(MatchController.instance))
             topPlayerPrompt = null;
         else {
             //show top prompt if multiple human players and not playing in Hot Seat mode and not in network play
@@ -146,6 +147,12 @@ public class MatchScreen extends FScreen {
         revealed.setDropDownContainer(this);
         log = new VLog(() -> MatchController.instance.getGameView().getGameLog());
         log.setDropDownContainer(this);
+        if (GuiBase.isNetPlay(MatchController.instance)) {
+            chat = new VChat();
+            chat.setDropDownContainer(this);
+        } else {
+            chat = null;
+        }
         devMenu = new VDevMenu();
         devMenu.setDropDownContainer(this);
         stack = new VStack();
@@ -157,6 +164,9 @@ public class MatchScreen extends FScreen {
             menuBar.addTab(Forge.getLocalizer().getMessage("lblGame"), gameMenu);
             menuBar.addTab(Forge.getLocalizer().getMessage("lblPlayers") + " (" + playerPanels.size() + ")", players);
             menuBar.addTab(Forge.getLocalizer().getMessage("lblLog"), log);
+            if (chat != null) {
+                menuBar.addTab(Forge.getLocalizer().getMessage("lblChat"), chat);
+            }
             menuBar.addTab(Forge.getLocalizer().getMessage("lblDev"), devMenu);
             menuBar.addTab(Forge.getLocalizer().getMessage("lblStack") + " (0)", stack);
         } else {
@@ -317,6 +327,9 @@ public class MatchScreen extends FScreen {
     public void onClose(Consumer<Boolean> canCloseCallback) {
         MatchController.writeMatchPreferences();
         SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
+        if (chat != null) {
+            chat.unsubscribe();
+        }
         super.onClose(canCloseCallback);
     }
 
@@ -378,7 +391,7 @@ public class MatchScreen extends FScreen {
             if (devMenu.isVisible()) {
                 try {
                     //rollbackphase enable -- todo limit by gametype?
-                    devMenu.getChildAt(2).setEnabled(game.getPlayers().size() == 2 && game.getStack().size() == 0 && !GuiBase.isNetworkplay(MatchController.instance) && game.getPhase().isMain() && !game.getPlayerTurn().isAI());
+                    devMenu.getChildAt(2).setEnabled(game.getPlayers().size() == 2 && game.getStack().size() == 0 && !GuiBase.isNetPlay(MatchController.instance) && game.getPhase().isMain() && !game.getPlayerTurn().isAI());
                 } catch (Exception e) {/*NPE when the game hasn't started yet and you click dev mode*/}
             }
         }
@@ -664,7 +677,6 @@ public class MatchScreen extends FScreen {
                 break;
             case Keys.Y: //auto-yield, always yes, Ctrl+Y on Android, Y when running on desktop
                 if (KeyInputAdapter.isCtrlKeyDown() || GuiBase.getInterface().isRunningOnDesktop()) {
-                    final IGuiGame gui = MatchController.instance;
                     final IGameController controller = MatchController.instance.getGameController();
                     final GameView gameView = MatchController.instance.getGameView();
                     final FCollectionView<StackItemView> stack = MatchController.instance.getGameView().getStack();
@@ -677,18 +689,16 @@ public class MatchScreen extends FScreen {
                     }
                     final int triggerID = stackInstance.getSourceTrigger();
 
-                    if (gui.shouldAlwaysAcceptTrigger(triggerID)) {
-                        gui.setShouldAlwaysAskTrigger(triggerID);
+                    if (controller.shouldAlwaysAcceptTrigger(triggerID)) {
+                        controller.setShouldAlwaysAskTrigger(triggerID);
                     } else {
-                        gui.setShouldAlwaysAcceptTrigger(triggerID);
-                        if (stackInstance.equals(gameView.peekStack())) {
-                            //auto-yes if ability is on top of stack
-                            controller.selectButtonOk();
-                        }
+                        controller.setShouldAlwaysAcceptTrigger(triggerID);
                     }
 
                     final String key = stackInstance.getKey();
-                    gui.setShouldAutoYield(key, true);
+                    boolean abilityScope = !forge.localinstance.properties.ForgeConstants.AUTO_YIELD_PER_CARD.equals(
+                            forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_YIELD_MODE));
+                    controller.setShouldAutoYield(key, true, abilityScope);
                     if (stackInstance.equals(gameView.peekStack())) {
                         //auto-pass priority if ability is on top of stack
                         controller.passPriority();
@@ -697,7 +707,6 @@ public class MatchScreen extends FScreen {
                 break;
             case Keys.N: //auto-yield, always no, Ctrl+N on Android, N when running on desktop
                 if (KeyInputAdapter.isCtrlKeyDown() || GuiBase.getInterface().isRunningOnDesktop()) {
-                    final IGuiGame gui = MatchController.instance;
                     final IGameController controller = MatchController.instance.getGameController();
                     final GameView gameView = MatchController.instance.getGameView();
                     final FCollectionView<StackItemView> stack = MatchController.instance.getGameView().getStack();
@@ -710,18 +719,16 @@ public class MatchScreen extends FScreen {
                     }
                     final int triggerID = stackInstance.getSourceTrigger();
 
-                    if (gui.shouldAlwaysDeclineTrigger(triggerID)) {
-                        gui.setShouldAlwaysAskTrigger(triggerID);
+                    if (controller.shouldAlwaysDeclineTrigger(triggerID)) {
+                        controller.setShouldAlwaysAskTrigger(triggerID);
                     } else {
-                        gui.setShouldAlwaysDeclineTrigger(triggerID);
-                        if (stackInstance.equals(gameView.peekStack())) {
-                            //auto-no if ability is on top of stack
-                            controller.selectButtonCancel();
-                        }
+                        controller.setShouldAlwaysDeclineTrigger(triggerID);
                     }
 
                     final String key = stackInstance.getKey();
-                    gui.setShouldAutoYield(key, true);
+                    boolean abilityScope2 = !forge.localinstance.properties.ForgeConstants.AUTO_YIELD_PER_CARD.equals(
+                            forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_YIELD_MODE));
+                    controller.setShouldAutoYield(key, true, abilityScope2);
                     if (stackInstance.equals(gameView.peekStack())) {
                         //auto-pass priority if ability is on top of stack
                         controller.passPriority();

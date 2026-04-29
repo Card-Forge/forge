@@ -1,0 +1,7 @@
+Name:Echocasting Symposium
+ManaCost:4 U U
+Types:Sorcery Lesson
+A:SP$ Pump | ValidTgts$ Player | SubAbility$ DBCopy | SpellDescription$ Target player creates a token that's a copy of target creature you control.
+SVar:DBCopy:DB$ CopyPermanent | ValidTgts$ Creature.YouCtrl | ValidTgtDesc$ creature you control | TokenOwner$ ParentTarget
+K:Paradigm
+Oracle:Target player creates a token that's a copy of target creature you control.\nParadigm (Then exile this spell. After you first resolve a spell with this name, you may cast a copy of it from exile without paying its mana cost at the beginning of each of your first main phases.)

@@ -239,6 +239,15 @@ public class SettingsScene extends UIScene {
                 Config.instance().saveSettings();
             }
         });
+        addSettingField(Forge.getLocalizer().getMessage("lblPreferEraMatchedTokenArt"), Config.instance().getSettingData().preferEraMatchedTokenArt, new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                boolean enabled = ((CheckBox) actor).isChecked();
+                Config.instance().getSettingData().preferEraMatchedTokenArt = enabled;
+                forge.model.FModel.getMagicDb().getAllTokens().setPreferEraMatchedArt(enabled);
+                Config.instance().saveSettings();
+            }
+        });
         addSettingField(Forge.getLocalizer().getMessage("lblExcludeAlchemyVariants"), Config.instance().getSettingData().excludeAlchemyVariants, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -267,8 +276,27 @@ public class SettingsScene extends UIScene {
                 Config.instance().saveSettings();
             }
         });
-        addCheckBox(Forge.getLocalizer().getMessage("cbAnte"), ForgePreferences.FPref.UI_ANTE);
-        addCheckBox(Forge.getLocalizer().getMessage("cbAnteMatchRarity"), ForgePreferences.FPref.UI_ANTE_MATCH_RARITY);
+        addSettingField(Forge.getLocalizer().getMessage("lblDrawChevronsToHiddenEnemiesInClearQuest"), Config.instance().getSettingData().drawChevronsToHiddenEnemiesInClearQuest, new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Config.instance().getSettingData().drawChevronsToHiddenEnemiesInClearQuest = ((CheckBox) actor).isChecked();
+                Config.instance().saveSettings();
+            }
+        });
+        CheckBox cbAnte = addCheckBox(Forge.getLocalizer().getMessage("cbAnte"), ForgePreferences.FPref.UI_ANTE);
+        CheckBox cbAnteMatchRarity = addCheckBox(Forge.getLocalizer().getMessage("cbAnteMatchRarity"), ForgePreferences.FPref.UI_ANTE_MATCH_RARITY);
+        CheckBox cbAnteIncludeBasicLands = addCheckBox(Forge.getLocalizer().getMessage("cbAnteIncludeBasicLands"), ForgePreferences.FPref.UI_ANTE_INCLUDE_BASIC_LANDS);
+        boolean anteEnabled = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ANTE);
+        cbAnteMatchRarity.setDisabled(!anteEnabled);
+        cbAnteIncludeBasicLands.setDisabled(!anteEnabled);
+        cbAnte.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                boolean enabled = ((CheckBox) actor).isChecked();
+                cbAnteMatchRarity.setDisabled(!enabled);
+                cbAnteIncludeBasicLands.setDisabled(!enabled);
+            }
+        });
         addCheckBox(Forge.getLocalizer().getMessage("lblPromptAutoSell"), ForgePreferences.FPref.PROMPT_FOR_AUTOSELL);
         addCheckBox(Forge.getLocalizer().getMessage("lblCardName"), ForgePreferences.FPref.UI_OVERLAY_CARD_NAME);
         addSettingSlider(Forge.getLocalizer().getMessage("cbAdjustMusicVolume"), ForgePreferences.FPref.UI_VOL_MUSIC, 0, 100);
@@ -363,11 +391,11 @@ public class SettingsScene extends UIScene {
         settingGroup.add(box).align(Align.right);
     }
 
-    private void addCheckBox(String name, ForgePreferences.FPref pref) {
-        addCheckBox(name, pref, null);
+    private CheckBox addCheckBox(String name, ForgePreferences.FPref pref) {
+        return addCheckBox(name, pref, null);
     }
 
-    private void addCheckBox(String name, ForgePreferences.FPref pref, Runnable runnable) {
+    private CheckBox addCheckBox(String name, ForgePreferences.FPref pref, Runnable runnable) {
         CheckBox box = Controls.newCheckBox("");
         box.setChecked(FModel.getPreferences().getPrefBoolean(pref));
         box.addListener(new ChangeListener() {
@@ -382,6 +410,7 @@ public class SettingsScene extends UIScene {
 
         addLabel(name);
         settingGroup.add(box).align(Align.right);
+        return box;
     }
 
     private void addSettingSlider(String name, ForgePreferences.FPref pref, int min, int max) {

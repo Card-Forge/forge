@@ -267,11 +267,10 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("targetedBy")) {
-            if (!(spellAbility instanceof SpellAbility)) {
+            if (!(spellAbility instanceof SpellAbility sa)) {
                 return false;
             }
-            SpellAbility sp = (SpellAbility)spellAbility;
-            if (!sp.getRootAbility().isTargeting(card)) {
+            if (!sa.getRootAbility().isTargeting(card)) {
                 return false;
             }
         } else if (property.equals("TargetedPlayerCtrl")) {

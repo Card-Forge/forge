@@ -63,6 +63,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     private final FLabel btnPlayerName = new FLabel.Builder().opaque(true).hoverable(true).text("").build();
     private final FLabel btnServerPort = new FLabel.Builder().opaque(true).hoverable(true).text("").build();
+    private final FLabel btnAfkTimeout = new FLabel.Builder().opaque(true).hoverable(true).text("").build();
 
     private final JCheckBox cbRemoveSmall = new OptionsCheckBox(localizer.getMessage("cbRemoveSmall"));
     private final JCheckBox cbCardBased = new OptionsCheckBox(localizer.getMessage("cbCardBased"));
@@ -70,6 +71,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbRemoveArtifacts = new OptionsCheckBox(localizer.getMessage("cbRemoveArtifacts"));
     private final JCheckBox cbAnte = new OptionsCheckBox(localizer.getMessage("cbAnte"));
     private final JCheckBox cbAnteMatchRarity = new OptionsCheckBox(localizer.getMessage("cbAnteMatchRarity"));
+    private final JCheckBox cbAnteIncludeBasicLands = new OptionsCheckBox(localizer.getMessage("cbAnteIncludeBasicLands"));
     private final JCheckBox cbEnableAICheats = new OptionsCheckBox(localizer.getMessage("cbEnableAICheats"));
     private final JCheckBox cbManaBurn = new OptionsCheckBox(localizer.getMessage("cbManaBurn"));
     private final JCheckBox cbOrderCombatants = new OptionsCheckBox(localizer.getMessage("cbOrderCombatants"));
@@ -228,6 +230,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbAnteMatchRarity, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlAnteMatchRarity")), descriptionConstraints);
 
+        pnlPrefs.add(cbAnteIncludeBasicLands, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlAnteIncludeBasicLands")), descriptionConstraints);
+
         pnlPrefs.add(cbEnableAICheats, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlEnableAICheats")), descriptionConstraints);
 
@@ -305,6 +310,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(getServerPortPanel(), titleConstraints + ", h 26px!");
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlServerPort")), descriptionConstraints);
+
+        pnlPrefs.add(getAfkTimeoutPanel(), titleConstraints + ", h 26px!");
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlAfkTimeout")), descriptionConstraints);
 
         // Deck building options
         pnlPrefs.add(new SectionLabel(localizer.getMessage("RandomDeckGeneration")), sectionConstraints);
@@ -664,6 +672,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     public FLabel getBtnServerPort() {
         return btnServerPort;
     }
+
+    public FLabel getBtnAfkTimeout() {
+        return btnAfkTimeout;
+    }
     //###################################################################
 
     public final FComboBoxPanel<String> getCbpAutoUpdater() {
@@ -762,6 +774,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbAnteMatchRarity() {
         return cbAnteMatchRarity;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbAnteIncludeBasicLands() {
+        return cbAnteIncludeBasicLands;
     }
 
     /** @return {@link javax.swing.JCheckBox} */
@@ -1112,6 +1129,15 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         FLabel lbl = new FLabel.Builder().text(localizer.getMessage("lblServerPort") +": ").fontSize(12).fontStyle(Font.BOLD).build();
         p.add(lbl, "aligny top, h 100%, gap 4px 0 0 0");
         p.add(btnServerPort, "aligny top, h 100%, w 200px!");
+        return p;
+    }
+
+    private JPanel getAfkTimeoutPanel() {
+        JPanel p = new JPanel(new MigLayout("insets 0, gap 0!"));
+        p.setOpaque(false);
+        FLabel lbl = new FLabel.Builder().text(localizer.getMessage("lblAfkTimeout") +": ").fontSize(12).fontStyle(Font.BOLD).build();
+        p.add(lbl, "aligny top, h 100%, gap 4px 0 0 0");
+        p.add(btnAfkTimeout, "aligny top, h 100%, w 200px!");
         return p;
     }
 

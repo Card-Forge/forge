@@ -6,4 +6,5 @@ SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Mana | Cost$ 2 T | Produced$ Any | Amount$ X | SpellDescription$ Choose a color. Add an amount of mana of that color equal to the number of creatures you control of the chosen type.
 SVar:X:Count$Valid Creature.ChosenType+YouCtrl
+SVar:AILandRemovalMinScore:170
 Oracle:As Three Tree City enters, choose a creature type.\n{T}: Add {C}.\n{2}, {T}: Choose a color. Add an amount of mana of that color equal to the number of creatures you control of the chosen type.

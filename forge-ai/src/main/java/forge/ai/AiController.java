@@ -1235,11 +1235,6 @@ public class AiController {
     }
 
     public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
-        if (mode == PlayerActionConfirmMode.ChangeZoneToAltDestination) {
-            System.err.printf("Overriding AI confirmAction decision for %s, defaulting to true.\n", mode);
-            return true;
-        }
-
         ApiType api = sa == null ? null : sa.getApi();
 
         // Abilities without api may also use this routine, However they should provide a unique mode value ?? How could this work?
@@ -2172,9 +2167,9 @@ public class AiController {
         String aiLogic = sa.getParamOrDefault("AILogic", "");
 
         if (aiLogic.equals("AlwaysEven")) {
-            return false; // false is Even
+            return false;
         } else if (aiLogic.equals("AlwaysOdd")) {
-            return true; // true is Odd
+            return true;
         } else if (aiLogic.equals("Random")) {
             return MyRandom.getRandom().nextBoolean();
         } else if (aiLogic.equals("CMCInHand")) {

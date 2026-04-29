@@ -19,13 +19,16 @@ package forge.deck;
 
 import forge.deck.generation.DeckGeneratorBase;
 import forge.deck.generation.IDeckGenPool;
+import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
 import forge.util.MyRandom;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -50,7 +53,6 @@ public class DeckGeneratorTheme extends DeckGeneratorBase {
     }
 
     private int basicLandPercentage = 0;
-    private String basicLandSet = null;
     private boolean testing = false;
 
     /**
@@ -61,7 +63,6 @@ public class DeckGeneratorTheme extends DeckGeneratorBase {
     public DeckGeneratorTheme(IDeckGenPool pool0) {
         super(pool0, DeckFormat.Constructed);
         setBasicLandPool(null);
-        this.maxDuplicates = 4;
     }
 
     /**
@@ -131,7 +132,7 @@ public class DeckGeneratorTheme extends DeckGeneratorBase {
                 ss = s.split("\\|");
                 
                 int lc = 0;
-                while ((cardCounts.get(ss[0]) >= g.maxCnt)) {
+                while (cardCounts.get(ss[0]) >= g.maxCnt) {
                     // looping
                     // forever
                     s = g.cardnames.get(MyRandom.getRandom().nextInt(cnSize));
@@ -158,7 +159,23 @@ public class DeckGeneratorTheme extends DeckGeneratorBase {
 
         errorBuilder.append("numBLands:").append(numBLands).append("\n");
 
-        addBasicLand(numBLands,basicLandSet);
+        // Make sure basicLandEdition is set
+        if (basicLandEdition == null) {
+            final List<String> setList = tDeck.toFlatList()
+                                              .stream()
+                                              .map(PaperCard::getEdition)
+                                              .distinct()
+                                              .collect(Collectors.toCollection(ArrayList::new));
+            Collections.shuffle(setList);
+            for (String set : setList) {
+                if (setBasicLandPool(set)) {
+                    basicLandEdition = set;
+                    break;
+                }
+            }
+        }
+
+        addBasicLand(numBLands,basicLandEdition);
 
         errorBuilder.append("DeckSize:").append(tDeck.countAll()).append("\n");
 
@@ -218,7 +235,7 @@ public class DeckGeneratorTheme extends DeckGeneratorBase {
             	final String[] ss = s.split("\\|");
                 basicLandPercentage = Integer.parseInt(ss[0].substring("BasicLandPercentage".length() + 1));
                 if(ss.length > 1)
-                	basicLandSet = ss[1];
+                	basicLandEdition = ss[1];
             }
             else if (s.equals("Testing")) {
                 testing = true;

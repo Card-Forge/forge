@@ -22,6 +22,8 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.player.actions.PassPriorityAction;
 import forge.game.spellability.SpellAbility;
+import forge.gamemodes.net.server.FServerManager;
+import forge.gamemodes.net.server.FServerManager.AfkTimeout;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
@@ -49,6 +51,19 @@ public class InputPassPriority extends InputSyncronizedBase {
 
     public InputPassPriority(final PlayerControllerHuman controller) {
         super(controller);
+    }
+
+    @Override
+    public void showAndWait() {
+        final FServerManager server = FServerManager.getInstance();
+        final AfkTimeout timeout = server != null
+                ? server.armAfkTimeout(getController(), this)
+                : AfkTimeout.NOOP;
+        try {
+            super.showAndWait();
+        } finally {
+            timeout.cancel();
+        }
     }
 
     /** {@inheritDoc} */

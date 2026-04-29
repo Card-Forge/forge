@@ -17,8 +17,8 @@
  */
 package forge.game.card;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.*;
@@ -207,6 +207,9 @@ public class CardFactory {
             } else if (c.hasState(CardStateName.Secondary)) {
                 c.setState(CardStateName.Secondary, false);
                 c.setImageKey(originalPicture);
+            } else if (c.hasState(CardStateName.PreparedSpell)) {
+                c.setState(CardStateName.PreparedSpell, false);
+                c.setImageKey(originalPicture);
             } else if (c.canSpecialize()) {
                 c.setState(CardStateName.SpecializeW, false);
                 c.setImageKey(cp.getImageKey(false) + ImageKeys.SPECFACE_W);
@@ -258,8 +261,6 @@ public class CardFactory {
             card.updateKeywordsCache();
         }
 
-        // ******************************************************************
-        // ************** Link to different CardFactories *******************
         buildBattleAbilities(card);
         CardFactoryUtil.setupKeywordedAbilities(card); // Should happen AFTER setting left/right split abilities to set Fuse ability to both sides
         card.updateStateForView();
@@ -473,7 +474,7 @@ public class CardFactory {
         }
 
         if (cause.hasParam("SetCreatureTypes")) {
-            creatureTypes = ImmutableList.copyOf(cause.getParam("SetCreatureTypes").split(" "));
+            creatureTypes = List.of(cause.getParam("SetCreatureTypes").split(" "));
         }
 
         if (cause.hasParam("AddKeywords")) {
@@ -518,6 +519,9 @@ public class CardFactory {
         } else if (in.hasState(CardStateName.Secondary)) {
             result.add(in.getState(CardStateName.Original).copy(out, cause));
             result.add(in.getState(CardStateName.Secondary).copy(out, cause));
+        } else if (in.hasState(CardStateName.PreparedSpell)) {
+            result.add(in.getState(CardStateName.Original).copy(out, cause));
+            result.add(in.getState(CardStateName.PreparedSpell).copy(out, cause));
         } else if (in.isTransformable() && cause instanceof SpellAbility sa && (
                 ApiType.CopyPermanent.equals(sa.getApi()) ||
                 ApiType.CopySpellAbility.equals(sa.getApi()) ||

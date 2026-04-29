@@ -122,6 +122,42 @@
         "editions": [ "VMA" ]
       },
       {
+        "type": "card",
+        "count": 1,
+        "cardName": "Tolarian Academy",
+        "editions": [ "VMA" ]
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Mox Pearl",
+        "editions": [ "VMA" ]
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Mox Sapphire",
+        "editions": [ "VMA" ]
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Mox Jet",
+        "editions": [ "VMA" ]
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Mox Ruby",
+        "editions": [ "VMA" ]
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Mox Emerald",
+        "editions": [ "VMA" ]
+      },
+      {
         "type": "gold",
         "count": 100000
       },
@@ -255,6 +291,10 @@
     "life": 50,
     "rewards": [
       {
+        "type": "life",
+        "count": 1
+      },
+      {
         "type": "item",
         "count": 1,
         "itemName": "Crystalline Armor"
@@ -333,6 +373,11 @@
         "type": "item",
         "count": 1,
         "itemName": "Bloodsworn Bite"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Vampiric Amulet"
       },
       {
         "type": "card",
@@ -851,13 +896,13 @@
   },
   {
     "name": "Ulamog",
-    "sprite": "sprites/enemy/aberration/phyrexian/drossgrimnarch.atlas",
+    "sprite": "sprites/enemy/aberration/eldrazi/ulamog.atlas",
     "deck": [
       "decks/legends/ulamog.dck"
     ],
     "ai": "",
     "speed": 45,
-    "scale": 6,
+    "scale": 3,
     "life": 70,
     "rewards": [
       {
@@ -1005,7 +1050,7 @@
     ],
     "ai": "",
     "speed": 45,
-    "scale": 3,
+    "scale": 2,
     "life": 70,
     "rewards": [
       {
@@ -1084,14 +1129,13 @@
     "life": 50,
     "rewards": [
       {
-        "type": "item",
-        "count": 1,
-        "itemName": "Ink-Treader Anklet"
+        "type": "life",
+        "count": 1
       },
       {
         "type": "item",
         "count": 1,
-        "itemName": "Jewel of Aggression"
+        "itemName": "Ink-Treader Anklet"
       },
       {
         "type": "item",
@@ -1164,14 +1208,13 @@
     "life": 50,
     "rewards": [
       {
-        "type": "item",
-        "count": 1,
-        "itemName": "Dune-Brood Anklet"
+        "type": "life",
+        "count": 1
       },
       {
         "type": "item",
         "count": 1,
-        "itemName": "Jewel of Winds"
+        "itemName": "Dune-Brood Anklet"
       },
       {
         "type": "item",
@@ -1243,14 +1286,13 @@
     "life": 50,
     "rewards": [
       {
-        "type": "item",
-        "count": 1,
-        "itemName": "Yore-Tiller Anklet"
+        "type": "life",
+        "count": 1
       },
       {
         "type": "item",
         "count": 1,
-        "itemName": "Jewel of Rage"
+        "itemName": "Yore-Tiller Anklet"
       },
       {
         "type": "item",
@@ -1323,14 +1365,13 @@
     "life": 50,
     "rewards": [
       {
-        "type": "item",
-        "count": 1,
-        "itemName": "Witch-Maw Anklet"
+        "type": "life",
+        "count": 1
       },
       {
         "type": "item",
         "count": 1,
-        "itemName": "Jewel of War"
+        "itemName": "Witch-Maw Anklet"
       },
       {
         "type": "item",
@@ -1407,14 +1448,13 @@
     "life": 50,
     "rewards": [
       {
-        "type": "item",
-        "count": 1,
-        "itemName": "Glint-Eye Anklet"
+        "type": "life",
+        "count": 1
       },
       {
         "type": "item",
         "count": 1,
-        "itemName": "Jewel of Blessings"
+        "itemName": "Glint-Eye Anklet"
       },
       {
         "type": "item",
@@ -1575,6 +1615,11 @@
         "itemName": "Courier's Boots"
       },
       {
+        "type": "item",
+        "count": 1,
+        "itemName": "Battle Cry Boots"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Krenko, Mob Boss"
@@ -1718,6 +1763,10 @@
     "scale": 3,
     "life": 50,
     "rewards": [
+      {
+        "type": "life",
+        "count": 1
+      },
       {
         "type": "item",
         "count": 1,
@@ -2006,7 +2055,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Pilgrim's CloakPi"
+        "itemName": "Pilgrim's Cloak"
       },
       {
         "type": "card",
@@ -2076,7 +2125,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Opal Armor"
+        "itemName": "Opal Cloak"
       },
       {
         "type": "item",
@@ -2428,6 +2477,10 @@
     "life": 50,
     "rewards": [
       {
+        "type": "life",
+        "count": 1
+      },
+      {
         "type": "item",
         "count": 1,
         "itemName": "Kaleidostone"
@@ -2507,6 +2560,10 @@
     "scale": 4,
     "life": 50,
     "rewards": [
+      {
+        "type": "life",
+        "count": 1
+      },
       {
         "type": "item",
         "count": 1,
@@ -2742,6 +2799,10 @@
     "life": 50,
     "rewards": [
       {
+        "type": "life",
+        "count": 1
+      },
+      {
         "type": "item",
         "count": 1,
         "itemName": "Soul-Guide Gauntlet"
@@ -2828,6 +2889,11 @@
         "type": "item",
         "count": 1,
         "itemName": "Urza's Bauble"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Urza's Robe"
       },
       {
         "type": "card",
@@ -15910,7 +15976,7 @@
     "ai": "",
     "flying": true,
     "speed": 60,
-    "scale": 0.7,
+    "scale": 1.5,
     "life": 30,
     "rewards": [
       {
@@ -16104,7 +16170,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Sinuous Shoes"
+        "itemName": "Shoes of the Swarm"
       },
       {
         "type": "card",
@@ -23473,9 +23539,14 @@
         "cardName": "Etali, Primal Storm"
       },
       {
+        "type": "card",
+        "count": 1,
+        "cardName": "Etali, Primal Conqueror"
+      },
+      {
         "type": "deckCard",
         "count": 2,
-        "addMaxCount": 4,
+        "addMaxCount": 2,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -23544,9 +23615,14 @@
         "cardName": "Ghalta and Mavren"
       },
       {
+        "type": "card",
+        "count": 1,
+        "cardName": "Ghalta, Stampede Tyrant"
+      },
+      {
         "type": "deckCard",
         "count": 2,
-        "addMaxCount": 4,
+        "addMaxCount": 2,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -27269,8 +27345,13 @@
     "ai": "",
     "speed": 60,
     "scale": 1,
-    "life": 30,
+    "life": 40,
     "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "cardName": "Liliana's Veil"
+      },
       {
         "type": "card",
         "count": 1,
@@ -27278,7 +27359,7 @@
       },
       {
         "type": "deckCard",
-        "count": 2,
+        "count": 4,
         "addMaxCount": 4,
         "rarity": [
           "Rare",
@@ -27286,44 +27367,43 @@
         ]
       },
       {
-        "type": "deckCard",
-        "count": 1,
-        "addMaxCount": 3,
-        "rarity": [
-          "common",
-	        "uncommon"
-        ]
-      },
-      {
         "type": "randomCard",
-        "count": 2,
-        "addMaxCount": 4,
+        "count": 3,
+        "addMaxCount": 6,
         "rarity": [
           "Rare",
           "Mythic Rare"
-	]
-      },
-      {
-        "type": "randomCard",
-        "count": 1,
-        "addMaxCount": 3,
-        "rarity": [
-          "common",
-	        "uncommon"
-	]
+        ]
       },
       {
         "type": "gold",
-        "count": 100,
-        "addMaxCount": 1000
+        "count": 500,
+        "addMaxCount": 2000
       },
       {
         "type": "shards",
-        "count": 5,
-        "addMaxCount": 15
+        "count": 10,
+        "addMaxCount": 30
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.3,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.3,
+        "count": 1
       }
     ],
     "colors": "B",
+    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -33388,8 +33468,13 @@
     "ai": "",
     "speed": 60,
     "scale": 3,
-    "life": 30,
+    "life": 40,
     "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "cardName": "Spidersilk Helm"
+      },
       {
         "type": "card",
         "count": 1,
@@ -33397,7 +33482,7 @@
       },
       {
         "type": "deckCard",
-        "count": 2,
+        "count": 4,
         "addMaxCount": 4,
         "rarity": [
           "Rare",
@@ -33405,44 +33490,43 @@
         ]
       },
       {
-        "type": "deckCard",
-        "count": 1,
-        "addMaxCount": 3,
-        "rarity": [
-          "common",
-	        "uncommon"
-        ]
-      },
-      {
         "type": "randomCard",
-        "count": 2,
-        "addMaxCount": 4,
+        "count": 3,
+        "addMaxCount": 6,
         "rarity": [
           "Rare",
           "Mythic Rare"
-	]
-      },
-      {
-        "type": "randomCard",
-        "count": 1,
-        "addMaxCount": 3,
-        "rarity": [
-          "common",
-	        "uncommon"
-	]
+        ]
       },
       {
         "type": "gold",
-        "count": 100,
-        "addMaxCount": 1000
+        "count": 500,
+        "addMaxCount": 2000
       },
       {
         "type": "shards",
-        "count": 5,
-        "addMaxCount": 15
+        "count": 10,
+        "addMaxCount": 30
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.3,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.3,
+        "count": 1
       }
     ],
     "colors": "G",
+    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -37327,9 +37411,14 @@
         "cardName": "Selvala, Eager Trailblazer"
       },
       {
+        "type": "card",
+        "count": 1,
+        "cardName": "Selvala, Heart of the Wilds"
+      },
+      {
         "type": "deckCard",
         "count": 1,
-        "addMaxCount": 3,
+        "addMaxCount": 1,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -44420,17 +44509,22 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
-     {
+      {
+        "type": "item",
+        "count": 1,
+        "cardName": "Ajani's Amulet"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Ajani, Nacatl Pariah"
       },
       {
         "type": "deckCard",
-        "count": 1,
-        "addMaxCount": 3,
+        "count": 2,
+        "addMaxCount": 4,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -44438,8 +44532,8 @@
       },
       {
         "type": "deckCard",
-        "count": 2,
-        "addMaxCount": 4,
+        "count": 1,
+        "addMaxCount": 3,
         "rarity": [
           "common",
           "uncommon"
@@ -44447,31 +44541,48 @@
       },
       {
         "type": "randomCard",
-        "count": 1,
-        "addMaxCount": 3,
-        "rarity": [
-          "Rare",
-          "Mythic Rare"
-	]
-      },
-      {
-        "type": "randomCard",
         "count": 2,
         "addMaxCount": 4,
         "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
           "common",
           "uncommon"
-	]
+        ]
       },
       {
         "type": "gold",
-        "count": 50,
-        "addMaxCount": 250
+        "count": 100,
+        "addMaxCount": 1000
       },
       {
         "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      },
+      {
+        "type": "card",
+        "probability": 0.1,
         "count": 1,
-        "addMaxCount": 5
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.2,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.1,
+        "count": 1
       }
     ],
     "colors": "WR",
@@ -44625,17 +44736,22 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
-     {
+      {
+        "type": "item",
+        "count": 1,
+        "cardName": "Pack Leader Pants"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Rin and Seri, Inseparable"
       },
       {
         "type": "deckCard",
-        "count": 1,
-        "addMaxCount": 3,
+        "count": 2,
+        "addMaxCount": 4,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -44643,8 +44759,8 @@
       },
       {
         "type": "deckCard",
-        "count": 2,
-        "addMaxCount": 4,
+        "count": 1,
+        "addMaxCount": 3,
         "rarity": [
           "common",
           "uncommon"
@@ -44652,31 +44768,48 @@
       },
       {
         "type": "randomCard",
-        "count": 1,
-        "addMaxCount": 3,
-        "rarity": [
-          "Rare",
-          "Mythic Rare"
-	]
-      },
-      {
-        "type": "randomCard",
         "count": 2,
         "addMaxCount": 4,
         "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
           "common",
           "uncommon"
-	]
+        ]
       },
       {
         "type": "gold",
-        "count": 50,
-        "addMaxCount": 250
+        "count": 100,
+        "addMaxCount": 1000
       },
       {
         "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      },
+      {
+        "type": "card",
+        "probability": 0.1,
         "count": 1,
-        "addMaxCount": 5
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.2,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.1,
+        "count": 1
       }
     ],
     "colors": "WRG",
@@ -45917,9 +46050,14 @@
         "cardName": "Gerrard, Weatherlight Hero"
       },
       {
+        "type": "card",
+        "count": 1,
+        "cardName": "Gerrard Capashen"
+      },
+      {
         "type": "deckCard",
         "count": 1,
-        "addMaxCount": 3,
+        "addMaxCount": 2,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -55001,6 +55139,7 @@
     ],
     "ai": "",
     "speed": 45,
+    "scale": 0.3,
     "life": 20,
     "rewards": [
      {
@@ -59132,17 +59271,22 @@
     "ai": "",
     "scale": 0.5,
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
-     {
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Cragflame"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Mabel, Heir to Cragflame"
       },
       {
         "type": "deckCard",
-        "count": 1,
-        "addMaxCount": 3,
+        "count": 2,
+        "addMaxCount": 4,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -59159,8 +59303,8 @@
       },
       {
         "type": "randomCard",
-        "count": 1,
-        "addMaxCount": 3,
+        "count": 2,
+        "addMaxCount": 4,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -61710,7 +61854,7 @@
     "ai": "",
     "spawnRate": 0,
     "difficulty": 0.1,
-    "scale": 1,
+    "scale": 0.6,
     "speed": 0,
     "life": 1,
     "rewards": [

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="94">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="99">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -51,6 +51,8 @@
     <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Jungle Shrine&quot;, &quot;Waystone's Guidance|YTDM&quot;, &quot;Roar of Resistance&quot;, &quot;Bioengineered Future&quot;, &quot;Team Pennant&quot;
 ]}</property>
     <property name="enemy" value="Gahiji"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -110,6 +112,8 @@
     <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Altar of the Goyf|MH2&quot;, &quot;Urborg Lhurgoyf|DMU&quot;, &quot;Savage Lands|CMM&quot;, &quot;Trailblazer's Boots|ZEN&quot;, &quot;Seal of Primordium|MM3&quot;
 ]}</property>
     <property name="enemy" value="Disa"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -126,6 +130,8 @@
     <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Ancestral Katana|NEO&quot;, &quot;Nomad Outpost|CMM&quot;, &quot;Experimental Synthesizer|NEO&quot;, &quot;Peerless Samurai|NEO&quot;, &quot;Waystone's Guidance|YTDM&quot;
 ]}</property>
     <property name="enemy" value="Isshin"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -139,9 +145,11 @@
     ]
    }
 ]</property>
-    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Sandsteppe Citadel&quot;, &quot;Priest of Fell Rites&quot;, &quot;Hunting Grounds&quot;, &quot;Insidious Roots&quot;
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Sandsteppe Citadel&quot;, &quot;Priest of Fell Rites&quot;, &quot;Insidious Roots&quot;
 ]}</property>
     <property name="enemy" value="Karador"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -158,6 +166,8 @@
     <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Sunlit Marsh&quot;, &quot;Wooded Ridgeline&quot;, &quot;Cindervines&quot;, &quot;Hidden Stockpile&quot;
 ]}</property>
     <property name="enemy" value="Tymna and Tana"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -212,6 +222,96 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
     <property name="mythicShopList" value=""/>
     <property name="rareShopList" value=""/>
     <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="94" template="../../../../../common/maps/obj/enemy.tx" x="83.25" y="602.5">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Altar of the Goyf|MH2&quot;, &quot;Urborg Lhurgoyf|DMU&quot;, &quot;Savage Lands|CMM&quot;
+]}</property>
+    <property name="enemy" value="Disa"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="95" template="../../../../../common/maps/obj/enemy.tx" x="98" y="407.25">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Jungle Shrine&quot;, &quot;Waystone's Guidance|YTDM&quot;, &quot;Bioengineered Future&quot;
+]}</property>
+    <property name="enemy" value="Gahiji"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="96" template="../../../../../common/maps/obj/enemy.tx" x="365.5" y="222">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Command Tower&quot;, &quot;Cindervines&quot;, &quot;Hidden Stockpile&quot;
+]}</property>
+    <property name="enemy" value="Tymna and Tana"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="97" template="../../../../../common/maps/obj/enemy.tx" x="676.75" y="409.75">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Sandsteppe Citadel&quot;, &quot;Priest of Fell Rites&quot;, &quot;Hunting Grounds&quot;, &quot;Insidious Roots&quot;
+]}</property>
+    <property name="enemy" value="Karador"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="98" template="../../../../../common/maps/obj/enemy.tx" x="650" y="601.5">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Nomad Outpost|CMM&quot;, &quot;Experimental Synthesizer|NEO&quot;, &quot;Peerless Samurai|NEO&quot;
+]}</property>
+    <property name="enemy" value="Isshin"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
  </objectgroup>
