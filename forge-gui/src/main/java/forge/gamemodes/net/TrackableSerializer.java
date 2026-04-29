@@ -10,6 +10,7 @@ import forge.trackable.TrackableTypes.TrackableType;
 import forge.trackable.Tracker;
 
 import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
 
 import net.jpountz.lz4.LZ4BlockOutputStream;
 
@@ -27,6 +28,8 @@ import java.util.List;
  * ({@link CObjectOutputStream}, {@link CObjectInputStream}).
  */
 public final class TrackableSerializer {
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+
     static final byte TYPE_CARD_VIEW = 0;
     static final byte TYPE_PLAYER_VIEW = 1;
 
@@ -132,7 +135,7 @@ public final class TrackableSerializer {
             if (type != null) {
                 Object resolved = tracker.getObj(type, ref.id);
                 if (resolved == null) {
-                    Logger.warn("Could not resolve IdRef(tag={}, id={}) from Tracker", ref.typeTag, ref.id);
+                    netLog.warn("Could not resolve IdRef(tag={}, id={}) from Tracker", ref.typeTag, ref.id);
                 }
                 return resolved;
             }
@@ -185,7 +188,7 @@ public final class TrackableSerializer {
                 }
                 wrapped.add(new WrappedEvent(baos.toByteArray()));
             } catch (IOException e) {
-                Logger.warn("Failed to wrap event {}: {}", event.getClass().getSimpleName(), e.getMessage());
+                netLog.warn("Failed to wrap event {}: {}", event.getClass().getSimpleName(), e.getMessage());
             }
         }
         return wrapped;
@@ -207,7 +210,7 @@ public final class TrackableSerializer {
                         if (obj instanceof GameEvent e) events.add(e);
                     }
                 } catch (IOException | ClassNotFoundException e) {
-                    Logger.warn("Failed to unwrap event: {}", e.getMessage());
+                    netLog.warn("Failed to unwrap event: {}", e.getMessage());
                 }
             }
         }
