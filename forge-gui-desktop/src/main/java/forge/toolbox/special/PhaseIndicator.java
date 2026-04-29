@@ -6,7 +6,6 @@ import java.util.List;
 import javax.swing.JPanel;
 
 import forge.game.phase.PhaseType;
-import forge.game.player.PlayerView;
 import forge.util.Localizer;
 import net.miginfocom.swing.MigLayout;
 
@@ -111,13 +110,6 @@ public class PhaseIndicator extends JPanel {
                 return this.getLblCleanup();
             default:
                 return null;
-        }
-    }
-
-    /** Push the per-VField player binding to every label so right-click can route to it. */
-    public void setOwner(final PlayerView player) {
-        for (PhaseLabel l : allLabels()) {
-            l.setPhaseOwner(player);
         }
     }
 

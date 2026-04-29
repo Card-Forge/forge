@@ -94,7 +94,6 @@ public class VPlayerPanel extends FContainer {
     public VPlayerPanel(PlayerView player0, boolean showHand, int playerCount) {
         player = player0;
         phaseIndicator = add(new VPhaseIndicator());
-        phaseIndicator.setOwner(player);
 
         if (playerCount > 2) {
             forMultiPlayer = true;

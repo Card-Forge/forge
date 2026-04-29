@@ -39,6 +39,7 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.YieldMarker;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.net.NetworkGuiGame;
 import forge.gamemodes.match.HostedMatch;
 import forge.interfaces.IGameController;
@@ -573,10 +574,36 @@ public class MatchController extends NetworkGuiGame {
                 final VPhaseIndicator.PhaseLabel label = pi.getLabel(phase);
                 label.setStopAtPhase(prefs.getPrefBoolean(keys[p - 1]));
                 label.setOnToggled(() -> instance.pushSkipPhaseToControllers(player, phase));
+                label.setOnLongPress(() -> instance.handleYieldMarkerToggle(label, player, phase));
             }
         }
 
         instance.seedYieldStateOnHost();
+    }
+
+    private void handleYieldMarkerToggle(final VPhaseIndicator.PhaseLabel label, final PlayerView phaseOwner, final PhaseType phase) {
+        PlayerView local = getCurrentPlayer();
+        if (local == null) {
+            return;
+        }
+        IGameController controller = getGameController(local);
+        if (controller == null) {
+            return;
+        }
+        YieldMarker existing = controller.getYieldController().getMarker();
+        boolean clickedSameLabel = existing != null
+                && phaseOwner.equals(existing.getPhaseOwner())
+                && phase == existing.getPhase();
+        if (clickedSameLabel) {
+            controller.sendYieldUpdate(new YieldUpdate.ClearMarker(local));
+        } else {
+            // Setting a marker implies we want to stop here — un-skip the cell so the marker can fire.
+            label.setStopAtPhase(true);
+            controller.sendYieldUpdate(new YieldUpdate.SetMarker(phaseOwner, phase));
+            // Pass current priority so the marker takes effect immediately.
+            controller.selectButtonOk();
+        }
+        refreshYieldUi(local);
     }
 
     public static void writeMatchPreferences() {

@@ -99,7 +99,6 @@ public class VField implements IVDoc<CField> {
         this.docID = id0;
 
         this.player = p;
-        phaseIndicator.setOwner(p);
         if (p != null) { tab.setText(Localizer.getInstance().getMessage("lblPlayField", p.getName())); }
         else { tab.setText(Localizer.getInstance().getMessage("lblNoPlayerForEDocID", docID.toString())); }
 

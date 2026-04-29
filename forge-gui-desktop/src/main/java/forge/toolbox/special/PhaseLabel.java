@@ -13,11 +13,6 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import forge.game.phase.PhaseType;
-import forge.game.player.PlayerView;
-import forge.gamemodes.match.YieldMarker;
-import forge.gamemodes.match.YieldUpdate;
-import forge.interfaces.IGameController;
-import forge.screens.match.CMatchUI;
 import forge.toolbox.FSkin;
 
 /**
@@ -31,12 +26,12 @@ public class PhaseLabel extends JLabel {
     private static final Color YIELD_MARKER_COLOR = new Color(0xFFA528);
 
     private final PhaseType phaseType;
-    private PlayerView phaseOwner;
     private boolean enabled = true;
     private boolean active = false;
     private boolean hover = false;
     private boolean yieldMarked = false;
     private Runnable onToggled;
+    private Runnable onRightClick;
 
 
     /**
@@ -57,7 +52,9 @@ public class PhaseLabel extends JLabel {
             @Override
             public void mousePressed(final MouseEvent e) {
                 if (SwingUtilities.isRightMouseButton(e)) {
-                    handleRightClick();
+                    if (PhaseLabel.this.onRightClick != null) {
+                        PhaseLabel.this.onRightClick.run();
+                    }
                     return;
                 }
                 PhaseLabel.this.enabled = !PhaseLabel.this.enabled;
@@ -84,14 +81,6 @@ public class PhaseLabel extends JLabel {
         return phaseType;
     }
 
-    public PlayerView getPhaseOwner() {
-        return phaseOwner;
-    }
-
-    public void setPhaseOwner(final PlayerView v) {
-        this.phaseOwner = v;
-    }
-
     public boolean isYieldMarked() {
         return yieldMarked;
     }
@@ -101,40 +90,6 @@ public class PhaseLabel extends JLabel {
             this.yieldMarked = b;
             repaintOnlyThisLabel();
         }
-    }
-
-    private void handleRightClick() {
-        if (phaseOwner == null || phaseType == null) {
-            return;
-        }
-        CMatchUI ui = CMatchUI.getActive();
-        if (ui == null) {
-            return;
-        }
-        PlayerView local = ui.getCurrentPlayer();
-        if (local == null) {
-            return;
-        }
-        IGameController controller = ui.getGameController(local);
-        if (controller == null) {
-            return;
-        }
-        YieldMarker existing = controller.getYieldController().getMarker();
-        boolean clickedSameLabel = existing != null
-                && phaseOwner.equals(existing.getPhaseOwner())
-                && phaseType == existing.getPhase();
-        if (clickedSameLabel) {
-            controller.sendYieldUpdate(new YieldUpdate.ClearMarker(local));
-        } else {
-            // Setting a marker implies we want to stop here — un-skip the cell
-            // so the marker can fire (skip-phase pref + marker would skip past).
-            this.enabled = true;
-            repaintOnlyThisLabel();
-            controller.sendYieldUpdate(new YieldUpdate.SetMarker(phaseOwner, phaseType));
-            // Pass current priority so the marker takes effect immediately.
-            controller.selectButtonOk();
-        }
-        ui.refreshYieldUi(local);
     }
 
     /**
@@ -159,6 +114,11 @@ public class PhaseLabel extends JLabel {
     /** Fires after the user toggles this label by clicking. */
     public void setOnToggled(final Runnable r) {
         this.onToggled = r;
+    }
+
+    /** Fires when the user right-clicks this label. */
+    public void setOnRightClick(final Runnable r) {
+        this.onRightClick = r;
     }
 
     /**

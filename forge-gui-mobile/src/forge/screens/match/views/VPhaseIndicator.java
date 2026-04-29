@@ -12,11 +12,6 @@ import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.game.phase.PhaseType;
-import forge.game.player.PlayerView;
-import forge.gamemodes.match.YieldMarker;
-import forge.gamemodes.match.YieldUpdate;
-import forge.interfaces.IGameController;
-import forge.screens.match.MatchController;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.util.TextBounds;
@@ -31,7 +26,6 @@ public class VPhaseIndicator extends FContainer {
 
     private final Map<PhaseType, PhaseLabel> phaseLabels = new HashMap<>();
     private FSkinFont font;
-    private PlayerView owner;
 
     public VPhaseIndicator() {
         addPhaseLabel("UP", PhaseType.UPKEEP);
@@ -58,10 +52,6 @@ public class VPhaseIndicator extends FContainer {
 
     public Iterable<PhaseLabel> allLabels() {
         return phaseLabels.values();
-    }
-
-    public void setOwner(PlayerView player) {
-        this.owner = player;
     }
 
     public void resetPhaseButtons() {
@@ -128,6 +118,7 @@ public class VPhaseIndicator extends FContainer {
         private boolean active = false;
         private boolean yieldMarked = false;
         private Runnable onToggled;
+        private Runnable onLongPress;
 
         public PhaseLabel(String caption0, PhaseType phaseType0) {
             caption = caption0;
@@ -164,6 +155,11 @@ public class VPhaseIndicator extends FContainer {
             onToggled = r;
         }
 
+        /** Fires when the user long-presses this label. */
+        public void setOnLongPress(Runnable r) {
+            onLongPress = r;
+        }
+
         @Override
         public boolean tap(float x, float y, int count) {
             stopAtPhase = !stopAtPhase;
@@ -173,32 +169,10 @@ public class VPhaseIndicator extends FContainer {
 
         @Override
         public boolean longPress(float x, float y) {
-            PlayerView phaseOwner = VPhaseIndicator.this.owner;
-            if (phaseOwner == null) {
+            if (onLongPress == null) {
                 return false;
             }
-            PlayerView local = MatchController.instance.getCurrentPlayer();
-            if (local == null) {
-                return false;
-            }
-            IGameController ctrl = MatchController.instance.getGameController(local);
-            if (ctrl == null) {
-                return false;
-            }
-            YieldMarker existing = ctrl.getYieldController().getMarker();
-            boolean clickedSameLabel = existing != null
-                    && phaseOwner.equals(existing.getPhaseOwner())
-                    && phaseType == existing.getPhase();
-            if (clickedSameLabel) {
-                ctrl.sendYieldUpdate(new YieldUpdate.ClearMarker(local));
-            } else {
-                // Setting a marker implies we want to stop here — un-skip the cell so the marker can fire.
-                stopAtPhase = true;
-                ctrl.sendYieldUpdate(new YieldUpdate.SetMarker(phaseOwner, phaseType));
-                // Pass current priority so the marker takes effect immediately.
-                ctrl.selectButtonOk();
-            }
-            MatchController.instance.refreshYieldUi(local);
+            onLongPress.run();
             return true;
         }
 
