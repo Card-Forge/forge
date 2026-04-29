@@ -17,7 +17,6 @@ import forge.StaticData;
 import forge.card.CardEdition;
 import forge.gui.FThreads;
 import forge.item.PaperCard;
-import forge.itemmanager.CardManager;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
@@ -38,12 +37,12 @@ public final class ChangePrintingDialog {
 
     private ChangePrintingDialog() {}
 
-    public static void show(final PaperCard current) {
+    public static PaperCard show(final PaperCard current) {
         FThreads.assertExecutedByEdt(true);
 
         final List<PaperCard> printings = StaticData.instance().getCommonCards().getAllCardsNoAlt(current.getName());
         if (printings.size() <= 1) {
-            return;
+            return null;
         }
         printings.sort(printingComparator());
 
@@ -123,14 +122,9 @@ public final class ChangePrintingDialog {
         grid.dispose();
 
         if (result != 0) {
-            return;
+            return null;
         }
-
-        final PaperCard chosen = grid.getSelected();
-        if (chosen == null) {
-            return;
-        }
-        performSwap(current, chosen);
+        return grid.getSelected();
     }
 
     private static Comparator<PaperCard> printingComparator() {
@@ -181,16 +175,4 @@ public final class ChangePrintingDialog {
         }
     }
 
-    private static void performSwap(PaperCard oldCard, PaperCard chosenNonFoil) {
-        final PaperCard newCard = oldCard.isFoil() ? chosenNonFoil.getFoiled() : chosenNonFoil;
-        if (newCard.equals(oldCard)) {
-            return;
-        }
-        final CardManager deckManager = (CardManager) CDeckEditorUI.SINGLETON_INSTANCE
-                .getCurrentEditorController().getDeckManager();
-        deckManager.removeItem(oldCard, 1);
-        deckManager.addItem(newCard, 1);
-        CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController()
-                .getDeckController().notifyModelChanged();
-    }
 }

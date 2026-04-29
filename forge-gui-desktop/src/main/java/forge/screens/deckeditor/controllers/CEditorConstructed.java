@@ -412,7 +412,17 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
         GuiUtils.addMenuItem(cmb.getMenu(),
                 Localizer.getInstance().getMessage("lblChangePrinting"),
                 null,
-                () -> ChangePrintingDialog.show(card),
+                () -> {
+                    PaperCard chosen = ChangePrintingDialog.show(card);
+                    if (chosen == null) { return; }
+                    PaperCard newCard = card.isFoil() ? chosen.getFoiled() : chosen;
+                    if (newCard.equals(card)) { return; }
+                    CardManager deckManager = (CardManager) cmb.getItemManager();
+                    deckManager.removeItem(card, 1);
+                    deckManager.addItem(newCard, 1);
+                    CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController()
+                            .getDeckController().notifyModelChanged();
+                },
                 true,
                 false);
     }
