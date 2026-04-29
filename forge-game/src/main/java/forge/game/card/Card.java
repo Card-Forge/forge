@@ -2590,6 +2590,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
                         || keyword.equals("Ascend") || keyword.equals("Umbra armor")
                         || keyword.equals("Battle cry") || keyword.equals("Devoid")
                         || keyword.equals("Daybound") || keyword.equals("Nightbound")
+                        || keyword.equals("Increment")
                         || keyword.equals("Choose a Background") || keyword.equals("Compleated")
                         || keyword.equals("Space sculptor") || keyword.equals("Doctor's companion")
                         || keyword.equals("Start your engines") || keyword.startsWith("Modular")
@@ -2926,7 +2927,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (isCloaked()) {
             sb.append("Cloaked\r\n");
         }
-        String keywordText = keywordsToText(getUnhiddenKeywords(state));
+        String keywordText = keywordsToText(getUnhiddenKeywords(state).getValues());
         sb.append(keywordText).append(keywordText.length() > 0 ? linebreak : "");
 
         // Process replacement effects first so that "enters the battlefield tapped"
@@ -3496,9 +3497,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
 
         // keywords should already been cleanup by layers
-        for (KeywordInterface kw : getUnhiddenKeywords(state)) {
-            kw.applySpellAbility(list);
-        }
+        getUnhiddenKeywords(state).applySpellAbility(list);
     }
 
     public final FCollectionView<SpellAbility> getAllSpellAbilities() {
@@ -5229,10 +5228,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     // Hidden keywords will be left out
-    public final Collection<KeywordInterface> getUnhiddenKeywords() {
+    public final KeywordCollection getUnhiddenKeywords() {
         return getUnhiddenKeywords(currentState);
     }
-    public final Collection<KeywordInterface> getUnhiddenKeywords(CardState state) {
+    public final KeywordCollection getUnhiddenKeywords(CardState state) {
         return state.getCachedKeywords();
     }
 
@@ -7115,9 +7114,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
 
         // keywords are already sorted by Layer
-        for (KeywordInterface kw : getUnhiddenKeywords(state)) {
-            kw.applyStaticAbility(list);
-        }
+        getUnhiddenKeywords(state).applyStaticAbility(list);
     }
 
     public final FCollectionView<StaticAbility> getHiddenStaticAbilities() {
@@ -7154,9 +7151,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
 
         // Keywords are already sorted by Layer
-        for (KeywordInterface kw : getUnhiddenKeywords(state)) {
-            kw.applyTrigger(list);
-        }
+        getUnhiddenKeywords(state).applyTrigger(list);
     }
 
     public FCollectionView<ReplacementEffect> getReplacementEffects() {
@@ -7174,9 +7169,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
 
         // Keywords are already sorted by Layer
-        for (KeywordInterface kw : getUnhiddenKeywords(state)) {
-            kw.applyReplacementEffect(list);
-        }
+        getUnhiddenKeywords(state).applyReplacementEffect(list);
 
         if (!rulesHost) {
             return;

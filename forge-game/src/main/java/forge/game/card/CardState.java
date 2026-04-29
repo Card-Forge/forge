@@ -374,8 +374,8 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
         view.updateAttractionLights(this);
     }
 
-    public final Collection<KeywordInterface> getCachedKeywords() {
-        return cachedKeywords.getValues();
+    public final KeywordCollection getCachedKeywords() {
+        return cachedKeywords;
     }
 
     public final Collection<KeywordInterface> getCachedKeyword(final Keyword keyword) {
@@ -1044,7 +1044,7 @@ public class CardState implements GameObject, IHasSVars, ITranslatable {
 
     public void resetOriginalHost(Card oldHost) {
         for (final CardTraitBase ctb : getTraits()) {
-            if (ctb.isIntrinsic() && ctb.getOriginalHost() != null && ctb.getOriginalHost().equals(oldHost)) {
+            if (ctb.isIntrinsic() && oldHost.equals(ctb.getOriginalHost())) {
                 // only update traits with undesired host or SVar lookup would fail
                 ctb.setCardState(this);
             }

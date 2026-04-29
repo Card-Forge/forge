@@ -17,8 +17,8 @@
  */
 package forge.game.card;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.*;
@@ -474,7 +474,7 @@ public class CardFactory {
         }
 
         if (cause.hasParam("SetCreatureTypes")) {
-            creatureTypes = ImmutableList.copyOf(cause.getParam("SetCreatureTypes").split(" "));
+            creatureTypes = List.of(cause.getParam("SetCreatureTypes").split(" "));
         }
 
         if (cause.hasParam("AddKeywords")) {

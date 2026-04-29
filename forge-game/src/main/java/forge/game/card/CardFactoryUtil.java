@@ -178,7 +178,7 @@ public class CardFactoryUtil {
         }
 
         card.turnFaceDown();
-        card.addMayLookAt(player.getGame().getNextTimestamp(), ImmutableList.of(player));
+        card.addMayLookAt(player.getGame().getNextTimestamp(), List.of(player));
         ki.addSpellAbility(abilityRevealHiddenAgenda(card));
         return true;
     }
@@ -355,7 +355,7 @@ public class CardFactoryUtil {
      */
     public static Iterable<String> getMostProminentCreatureType(final CardCollectionView list) {
         if (list.isEmpty()) {
-            return ImmutableList.of();
+            return List.of();
         }
 
         final Map<String, Integer> map = Maps.newHashMap();
@@ -373,7 +373,7 @@ public class CardFactoryUtil {
             }
         }
         if (max == 0) {
-            return ImmutableList.of();
+            return List.of();
         }
         List<String> result = Lists.newArrayList();
         for (final Entry<String, Integer> entry : map.entrySet()) {
@@ -1341,7 +1341,7 @@ public class CardFactoryUtil {
             }
         } else if (keyword.equals("Increment")) {
             final String trig = "Mode$ SpellCast | ValidActivatingPlayer$ You | TriggerZones$ Battlefield "
-                    + " | TriggerDescription$ Increment (" + inst.getReminderText() + ")";
+                    + " | Secondary$ True | TriggerDescription$ Increment (" + inst.getReminderText() + ")";
 
             final String effect = "DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1";
 

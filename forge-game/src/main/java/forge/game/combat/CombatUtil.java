@@ -17,7 +17,6 @@
  */
 package forge.game.combat;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
@@ -271,7 +270,7 @@ public class CombatUtil {
     }
 
     public static Cost getAttackCost(final Game game, final Card attacker, final GameEntity defender) {
-        return getAttackCost(game, attacker, defender, ImmutableList.of());
+        return getAttackCost(game, attacker, defender, List.of());
     }
     /**
      * Get the cost that has to be paid for a creature to attack a certain

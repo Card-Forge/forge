@@ -1269,6 +1269,7 @@
       "equipmentSlot": "Boots",
       "iconName": "Witch-MawAnklet",
       "effect": {
+        "changeStartCards": -1,
         "lifeModifier": -8,
         "startBattleWithCard": [
           "Witch-Maw Nephilim|GPT"
@@ -5075,7 +5076,7 @@
   {
     "name": "Winter Boots",
     "description": "0/4, T, sac: -0/-X where X is snow lands",
-    "equipmentSlot": "Body",
+    "equipmentSlot": "Boots",
     "iconName": "WinterBoots",
     "effect": {
       "startBattleWithCard": [
