@@ -29,6 +29,7 @@ import forge.toolbox.FComboBoxPanel;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.util.Localizer;
+import forge.view.arcane.PlayArea;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -227,6 +228,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeSwitchStatesCombobox();
         initializeAutoYieldModeComboBox();
         initializeStackGroupPermanentsComboBox();
+        initializeMaxStackDepthComboBox();
         initializeCounterDisplayTypeComboBox();
         initializeCounterDisplayLocationComboBox();
         initializeGraveyardOrderingComboBox();
@@ -611,6 +613,24 @@ public enum CSubmenuPreferences implements ICDoc {
                 .findFirst()
                 .orElse(labels[0]);
         panel.setComboBox(comboBox, selectedLabel);
+    }
+
+    private void initializeMaxStackDepthComboBox() {
+        final Integer[] elems = new Integer[PlayArea.MAX_STACK_DEPTH - PlayArea.MIN_STACK_DEPTH + 1];
+        for (int i = 0; i < elems.length; i++) {
+            elems[i] = PlayArea.MIN_STACK_DEPTH + i;
+        }
+        final FPref userSetting = FPref.UI_MAX_STACK_DEPTH;
+        final FComboBoxPanel<Integer> panel = this.view.getCbpMaxStackDepth();
+        final FComboBox<Integer> comboBox = createComboBox(elems, userSetting);
+        comboBox.setMaximumRowCount(elems.length);
+        Integer selectedItem;
+        try {
+            selectedItem = Integer.valueOf(this.prefs.getPref(userSetting));
+        } catch (NumberFormatException e) {
+            selectedItem = 4;
+        }
+        panel.setComboBox(comboBox, selectedItem);
     }
 
     private void initializeCounterDisplayTypeComboBox() {
