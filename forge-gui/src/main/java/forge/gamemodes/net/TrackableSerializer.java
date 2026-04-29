@@ -25,46 +25,14 @@ public final class TrackableSerializer {
     static final byte TYPE_CARD_VIEW = 0;
     static final byte TYPE_PLAYER_VIEW = 1;
 
-    /** Marker for tracker-stable refs (top-level protocol method args). */
-    static final class IdRef implements Serializable {
-        private static final long serialVersionUID = 1L;
-        final byte typeTag;
-        final int id;
-
-        IdRef(byte typeTag, int id) {
-            this.typeTag = typeTag;
-            this.id = id;
-        }
+    /** Marker for tracker-stable refs (top-level protocol method args, and PlayerView in events). */
+    record IdRef(byte typeTag, int id) implements Serializable {
+        @Serial private static final long serialVersionUID = 1L;
     }
 
     /** CardView ref inside a wrapped event. {@code preserveSnapshot=true} forces fallback even if the tracker has the id. */
-    static final class EventCardRef implements Serializable {
-        private static final long serialVersionUID = 1L;
-        final int id;
-        final String name;
-        final String imageKey;
-        final boolean preserveSnapshot;
-
-        EventCardRef(int id, String name, String imageKey, boolean preserveSnapshot) {
-            this.id = id;
-            this.name = name;
-            this.imageKey = imageKey;
-            this.preserveSnapshot = preserveSnapshot;
-        }
-    }
-
-    /** PlayerView ref inside a wrapped event. {@code preserveSnapshot=true} forces fallback even if the tracker has the id. */
-    static final class EventPlayerRef implements Serializable {
-        private static final long serialVersionUID = 1L;
-        final int id;
-        final String name;
-        final boolean preserveSnapshot;
-
-        EventPlayerRef(int id, String name, boolean preserveSnapshot) {
-            this.id = id;
-            this.name = name;
-            this.preserveSnapshot = preserveSnapshot;
-        }
+    record EventCardRef(int id, String name, String imageKey, boolean preserveSnapshot) implements Serializable {
+        @Serial private static final long serialVersionUID = 1L;
     }
 
     static byte typeTagFor(TrackableObject obj) {
@@ -86,7 +54,7 @@ public final class TrackableSerializer {
             byte tag = typeTagFor(trackable);
             if (tag < 0) return obj;
 
-            if (!eventMode) {
+            if (!eventMode || tag == TYPE_PLAYER_VIEW) {
                 return new IdRef(tag, trackable.getId());
             }
 
@@ -100,53 +68,36 @@ public final class TrackableSerializer {
                     }
                 }
             }
-            if (tag == TYPE_CARD_VIEW) {
-                CardView cv = (CardView) trackable;
-                String imgKey = cv.getCurrentState() != null
-                        ? cv.getCurrentState().getImageKey(null) : null;
-                return new EventCardRef(trackable.getId(), cv.getName(), imgKey, preserveSnapshot);
-            }
-            if (tag == TYPE_PLAYER_VIEW) {
-                PlayerView pv = (PlayerView) trackable;
-                return new EventPlayerRef(trackable.getId(), pv.getName(), preserveSnapshot);
-            }
+            CardView cv = (CardView) trackable;
+            String imgKey = cv.getCurrentState() != null
+                    ? cv.getCurrentState().getImageKey(null) : null;
+            return new EventCardRef(trackable.getId(), cv.getName(), imgKey, preserveSnapshot);
         }
         return obj;
     }
 
     static Object resolve(Object obj, Tracker tracker) {
         if (obj instanceof EventCardRef ref) {
-            if (!ref.preserveSnapshot) {
-                CardView fromTracker = tracker.getObj(TrackableTypes.CardViewType, ref.id);
+            if (!ref.preserveSnapshot()) {
+                CardView fromTracker = tracker.getObj(TrackableTypes.CardViewType, ref.id());
                 if (fromTracker != null) return fromTracker;
             }
-            CardView detached = new CardView(ref.id, tracker);
-            if (ref.name != null) {
-                detached.set(TrackableProperty.Name, ref.name);
-                detached.getCurrentState().set(TrackableProperty.Name, ref.name);
+            CardView detached = new CardView(ref.id(), tracker);
+            if (ref.name() != null) {
+                detached.set(TrackableProperty.Name, ref.name());
+                detached.getCurrentState().set(TrackableProperty.Name, ref.name());
             }
-            if (ref.imageKey != null) {
-                detached.getCurrentState().set(TrackableProperty.ImageKey, ref.imageKey);
-            }
-            return detached;
-        }
-        if (obj instanceof EventPlayerRef ref) {
-            if (!ref.preserveSnapshot) {
-                PlayerView fromTracker = tracker.getObj(TrackableTypes.PlayerViewType, ref.id);
-                if (fromTracker != null) return fromTracker;
-            }
-            PlayerView detached = new PlayerView(ref.id, tracker);
-            if (ref.name != null) {
-                detached.set(TrackableProperty.Name, ref.name);
+            if (ref.imageKey() != null) {
+                detached.getCurrentState().set(TrackableProperty.ImageKey, ref.imageKey());
             }
             return detached;
         }
         if (obj instanceof IdRef ref) {
-            TrackableType<?> type = trackableTypeFor(ref.typeTag);
+            TrackableType<?> type = trackableTypeFor(ref.typeTag());
             if (type != null) {
-                Object resolved = tracker.getObj(type, ref.id);
+                Object resolved = tracker.getObj(type, ref.id());
                 if (resolved == null) {
-                    netLog.warn("Could not resolve IdRef(tag={}, id={}) from Tracker", ref.typeTag, ref.id);
+                    netLog.warn("Could not resolve IdRef(tag={}, id={}) from Tracker", ref.typeTag(), ref.id());
                 }
                 return resolved;
             }
