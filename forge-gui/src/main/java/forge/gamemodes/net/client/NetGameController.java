@@ -7,34 +7,24 @@ import forge.game.player.actions.PlayerAction;
 import forge.game.spellability.SpellAbilityView;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.match.YieldController;
-import forge.gamemodes.match.YieldStateSnapshot;
 import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.net.GameProtocolSender;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.interfaces.IDevModeCheats;
 import forge.interfaces.IGameController;
 import forge.interfaces.IMacroSystem;
-import forge.localinstance.properties.ForgeConstants;
-import forge.localinstance.properties.ForgePreferences;
-import forge.model.FModel;
 import forge.player.AutoYieldStore;
-import forge.player.PersistentYieldStore;
 import forge.util.ITriggerEvent;
 
 import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class NetGameController implements IGameController {
 
     private final GameProtocolSender sender;
 
-    private final AutoYieldStore yieldStore = new AutoYieldStore();
-
-    /** Local cache mirroring host-side state for client-side UI rendering. */
+    /** Source of truth for this client's yield state (auto-yields, trigger decisions, markers, skip-phase, etc.). */
     private final YieldController yieldController = new YieldController(null);
 
     public NetGameController(final IToServer server) {
@@ -151,51 +141,21 @@ public class NetGameController implements IGameController {
         send(ProtocolMethod.requestResync);
     }
 
-    private boolean activeModeIsInstall() {
-        return ForgeConstants.AUTO_YIELD_PER_ABILITY_INSTALL.equals(
-                FModel.getPreferences().getPref(ForgePreferences.FPref.UI_AUTO_YIELD_MODE));
-    }
-
-    private boolean activeModeIsAbilityScope() {
-        return !ForgeConstants.AUTO_YIELD_PER_CARD.equals(
-                FModel.getPreferences().getPref(ForgePreferences.FPref.UI_AUTO_YIELD_MODE));
-    }
-
-    private AutoYieldStore.Tier activeTier() {
-        String mode = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_AUTO_YIELD_MODE);
-        if (ForgeConstants.AUTO_YIELD_PER_CARD.equals(mode))            return AutoYieldStore.Tier.GAME;
-        if (ForgeConstants.AUTO_YIELD_PER_ABILITY_SESSION.equals(mode)) return AutoYieldStore.Tier.SESSION;
-        return AutoYieldStore.Tier.MATCH;
-    }
-
     @Override
     public boolean shouldAutoYield(final String key) {
-        if (yieldStore.isDisabled()) return false;
-        if (activeModeIsInstall()) {
-            return PersistentYieldStore.get().contains(AutoYieldStore.abilitySuffix(key));
-        }
-        String storageKey = activeModeIsAbilityScope() ? AutoYieldStore.abilitySuffix(key) : key;
-        return yieldStore.shouldYield(activeTier(), storageKey);
+        return yieldController.shouldAutoYield(key);
     }
 
     @Override
     public void setShouldAutoYield(final String key, final boolean autoYield, final boolean isAbilityScope) {
-        String storageKey = isAbilityScope ? AutoYieldStore.abilitySuffix(key) : key;
-        if (activeModeIsInstall()) {
-            PersistentYieldStore.get().setYield(storageKey, autoYield);
-        } else {
-            yieldStore.setYield(activeTier(), storageKey, autoYield);
-        }
-        yieldController.setCardAutoYield(storageKey, autoYield, isAbilityScope);
+        String storageKey = yieldController.setShouldAutoYield(key, autoYield, isAbilityScope);
         send(ProtocolMethod.sendYieldUpdate,
                 new YieldUpdate.SetCardAutoYield(storageKey, autoYield, isAbilityScope));
     }
 
     @Override
     public Iterable<String> getAutoYields() {
-        return activeModeIsInstall()
-                ? PersistentYieldStore.get().getYields()
-                : yieldStore.getYields(activeTier());
+        return yieldController.getAutoYields();
     }
 
     @Override
@@ -204,41 +164,38 @@ public class NetGameController implements IGameController {
     }
 
     @Override
-    public boolean getDisableAutoYields() { return yieldStore.isDisabled(); }
+    public boolean getDisableAutoYields() { return yieldController.getDisableAutoYields(); }
 
     @Override
-    public void setDisableAutoYields(final boolean disable) { yieldStore.setDisabled(disable); }
+    public void setDisableAutoYields(final boolean disable) { yieldController.setDisableAutoYields(disable); }
 
     @Override
     public boolean shouldAlwaysAcceptTrigger(final int trigger) {
-        return yieldStore.getTriggerDecision(trigger) == AutoYieldStore.TriggerDecision.ACCEPT;
+        return yieldController.shouldAlwaysAcceptTrigger(trigger);
     }
 
     @Override
     public boolean shouldAlwaysDeclineTrigger(final int trigger) {
-        return yieldStore.getTriggerDecision(trigger) == AutoYieldStore.TriggerDecision.DECLINE;
+        return yieldController.shouldAlwaysDeclineTrigger(trigger);
     }
 
     @Override
     public void setShouldAlwaysAcceptTrigger(final int trigger) {
-        yieldStore.setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.ACCEPT);
-        yieldController.setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.ACCEPT);
+        yieldController.setAlwaysAcceptTrigger(trigger);
         send(ProtocolMethod.sendYieldUpdate,
                 new YieldUpdate.SetTriggerDecision(trigger, AutoYieldStore.TriggerDecision.ACCEPT));
     }
 
     @Override
     public void setShouldAlwaysDeclineTrigger(final int trigger) {
-        yieldStore.setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.DECLINE);
-        yieldController.setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.DECLINE);
+        yieldController.setAlwaysDeclineTrigger(trigger);
         send(ProtocolMethod.sendYieldUpdate,
                 new YieldUpdate.SetTriggerDecision(trigger, AutoYieldStore.TriggerDecision.DECLINE));
     }
 
     @Override
     public void setShouldAlwaysAskTrigger(final int trigger) {
-        yieldStore.setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.ASK);
-        yieldController.setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.ASK);
+        yieldController.setAlwaysAskTrigger(trigger);
         send(ProtocolMethod.sendYieldUpdate,
                 new YieldUpdate.SetTriggerDecision(trigger, AutoYieldStore.TriggerDecision.ASK));
     }
@@ -248,19 +205,8 @@ public class NetGameController implements IGameController {
      * GUI-loaded skip-phase prefs and ship it to the host in one wire message.
      */
     public void seedYieldStateOnHost(Map<PlayerView, EnumSet<PhaseType>> skipPhases) {
-        Set<String> cardYields = new HashSet<>();
-        Set<String> abilityYields = new HashSet<>();
-        boolean abilityScope = activeModeIsAbilityScope();
-        for (String key : getAutoYields()) {
-            if (abilityScope) abilityYields.add(key);
-            else cardYields.add(key);
-        }
-        // Trigger decisions are per-game; deltas flow during play.
-        Map<Integer, AutoYieldStore.TriggerDecision> triggers = new HashMap<>();
-        YieldStateSnapshot snap = new YieldStateSnapshot(
-                cardYields, abilityYields, triggers, yieldStore.isDisabled(),
-                skipPhases == null ? new HashMap<>() : skipPhases);
-        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.SeedFromClient(snap));
+        send(ProtocolMethod.sendYieldUpdate,
+                new YieldUpdate.SeedFromClient(yieldController.buildClientSnapshot(skipPhases)));
     }
 
     public void setUiShouldSkipPhase(final PlayerView turnPlayer, final PhaseType phase, final boolean shouldSkip) {
@@ -276,14 +222,12 @@ public class NetGameController implements IGameController {
             yieldController.clearMarker();
         } else if (update instanceof YieldUpdate.SetStackYield u) {
             yieldController.setStackYield(u.active());
-        } else if (update instanceof YieldUpdate.SetTriggerDecision u) {
-            yieldController.setTriggerDecision(u.trigId(), u.decision());
-        } else if (update instanceof YieldUpdate.SetCardAutoYield u) {
-            yieldController.setCardAutoYield(u.cardKey(), u.active(), u.abilityScope());
         } else if (update instanceof YieldUpdate.SetSkipPhase u) {
             yieldController.setSkipPhase(u.turnPlayer(), u.phase(), u.skip());
         }
-        // SeedFromClient: no-op on client side; client does not apply its own seed.
+        // SetCardAutoYield/SetTriggerDecision: server never pushes these to the client, and
+        // user-initiated setters write directly to yieldController + send wire — not via
+        // sendYieldUpdate's local-apply path. SeedFromClient: no-op on client side.
     }
 
     /**

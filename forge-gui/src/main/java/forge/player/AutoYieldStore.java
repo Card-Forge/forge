@@ -50,6 +50,13 @@ public class AutoYieldStore {
         }
     }
 
+    /** Wipe all yields, trigger decisions, and the disabled flag — used to reseed the cache from a client snapshot. */
+    public void clear() {
+        for (Set<String> set : yieldsByTier.values()) set.clear();
+        triggerDecisions.clear();
+        disabled = false;
+    }
+
     /** Strips the "Card (id=N): " prefix to derive the ability-scope key, or returns the input unchanged. */
     public static String abilitySuffix(String rawKey) {
         return rawKey.contains("): ") ? rawKey.substring(rawKey.indexOf("): ") + 3) : rawKey;
