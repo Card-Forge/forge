@@ -2,6 +2,7 @@ package forge.ai.simulation;
 
 import com.google.common.collect.Lists;
 import forge.ai.ComputerUtilAbility;
+import forge.ai.PlayerControllerAi;
 import forge.card.CardStateName;
 import forge.card.MagicColor;
 import forge.game.Game;
@@ -59,6 +60,44 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertTrue(warriorToken.isSick());
         AssertJUnit.assertEquals(1, warriorToken.getCurrentPower());
         AssertJUnit.assertEquals(1, warriorToken.getCurrentToughness());
+    }
+
+    @Test
+    public void testResolveStackUsesSimulationControllersForAllNonPreservedPlayers() {
+        Game game = initAndCreateThreePlayerGame();
+
+        Player opponent = game.getPlayers().get(0);
+        Player ai = game.getPlayers().get(1);
+        Player otherOpponent = game.getPlayers().get(2);
+
+        opponent.setTeam(0);
+        ai.setTeam(1);
+        otherOpponent.setTeam(2);
+
+        opponent.setLife(1, null);
+        otherOpponent.setLife(20, null);
+
+        addCard("Runeclaw Bear", opponent);
+        addCard("Runeclaw Bear", ai);
+        Card otherOpponentBear = addCard("Runeclaw Bear", otherOpponent);
+
+        Card spell = addCardToZone("Innocent Blood", opponent, ZoneType.Hand);
+        SpellAbility sa = spell.getFirstSpellAbility();
+        sa.setActivatingPlayer(opponent);
+        game.getStack().addAndUnfreeze(sa);
+
+        PlayerControllerAi throwingController = new PlayerControllerAi(game, otherOpponent, otherOpponent.getLobbyPlayer()) {
+            @Override
+            public CardCollectionView choosePermanentsToSacrifice(SpellAbility ability, int min, int max,
+                    CardCollectionView validTargets, String message) {
+                throw new AssertionError("resolveStack should install a simulation controller for this player");
+            }
+        };
+
+        otherOpponent.runWithController(() -> GameSimulator.resolveStack(game, ai), throwingController);
+
+        AssertJUnit.assertTrue("The non-preserved non-weakest player should have sacrificed during stack resolution",
+                otherOpponent.getZone(ZoneType.Graveyard).contains(otherOpponentBear));
     }
 
     @Test
