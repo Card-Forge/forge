@@ -2,11 +2,16 @@ package forge.ai.ability;
 
 import com.google.common.collect.Lists;
 import forge.ai.*;
+import forge.game.GameActionUtil;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
+import forge.game.cost.Cost;
+import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
+import forge.game.spellability.OptionalCost;
+import forge.game.spellability.OptionalCostValue;
 import forge.game.spellability.SpellAbility;
 import forge.util.Aggregates;
 import forge.util.collect.FCollection;
@@ -94,8 +99,6 @@ public class CharmAi extends SpellAbilityAi {
     private List<AbilitySub> chooseOptionsAi(SpellAbility sa, List<AbilitySub> choices, final Player ai, boolean isTrigger, int num, int min) {
         List<AbilitySub> chosen = Lists.newArrayList();
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
-        // TODO unused for now, the AI doesn't know how to effectively handle repeated choices
-        boolean allowRepeat = sa.hasParam("CanRepeatModes");
 
         final int pawprintLimit = sa.hasParam("Pawprint") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Pawprint"), sa) : 0;
         if (pawprintLimit > 0) {
@@ -109,7 +112,7 @@ public class CharmAi extends SpellAbilityAi {
             handleDependentModes(sa, chosen, sub);
             sub.setActivatingPlayer(ai);
             // TODO refactor to obtain the AiAbilityDecision instead, then we can check all to sort by value
-            if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
+            if (AiPlayDecision.WillPlay == aic.canPlaySa(sub) && canPayForAdditionalMode(sa, chosen, sub, ai)) {
                 if (pawprintLimit > 0) {
                     int curPawprintAmount = AbilityUtils.calculateAmount(sub.getHostCard(), sub.getParamOrDefault("Pawprint", "0"), sub);
                     if (pawprintAmount + curPawprintAmount > pawprintLimit) {
@@ -150,12 +153,82 @@ public class CharmAi extends SpellAbilityAi {
                 }
             }
         }
+        if (!isTrigger && chosen.size() < num && min < num) {
+            choices.removeAll(chosen);
+            for (AbilitySub sub : choices) {
+                handleDependentModes(sa, chosen, sub);
+                if (isModeWorthAdding(aic, ai, sub) && canPayForAdditionalMode(sa, chosen, sub, ai)) {
+                    chosen.add(sub);
+                    if (chosen.size() == num) {
+                        break;
+                    }
+                }
+            }
+        }
         if (chosen.size() < min) {
             // not enough choices
             chosen.clear();
         }
         sa.setSubAbility(null);
         return chosen;
+    }
+
+    private boolean canPayForAdditionalMode(SpellAbility sa, List<AbilitySub> chosen, AbilitySub sub, Player ai) {
+        Card source = sa.getHostCard();
+        if (source.hasStartOfKeyword("Spree") || source.hasStartOfKeyword("Tiered")) {
+            Cost fullCost = sa.getPayCosts().copy();
+            for (AbilitySub mode : chosen) {
+                if (!mode.hasParam("ModeCost")) {
+                    return false;
+                }
+                fullCost.add(new Cost(mode.getParam("ModeCost"), false));
+            }
+            if (!sub.hasParam("ModeCost")) {
+                return false;
+            }
+            fullCost.add(new Cost(sub.getParam("ModeCost"), false));
+            return ComputerUtilCost.canPayCost(sa.copyWithDefinedCost(fullCost), ai, false);
+        }
+
+        if (!source.hasStartOfKeyword("Escalate")) {
+            return true;
+        }
+        String escalateCost = getEscalateCost(source);
+        if (escalateCost == null) {
+            return false;
+        }
+
+        Cost fullCost = sa.getPayCosts().copy();
+        for (int i = 0; i < chosen.size(); i++) {
+            fullCost.add(new Cost(escalateCost, false));
+        }
+        return ComputerUtilCost.canPayCost(sa.copyWithDefinedCost(fullCost), ai, false);
+    }
+
+    private String getEscalateCost(Card source) {
+        for (KeywordInterface inst : source.getKeywords()) {
+            String kw = inst.getOriginal();
+            if (kw.startsWith("Escalate:")) {
+                return kw.substring("Escalate:".length());
+            }
+        }
+        return null;
+    }
+
+    private boolean isModeWorthAdding(AiController aic, Player ai, AbilitySub sub) {
+        sub.setActivatingPlayer(ai);
+        try {
+            if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
+                return true;
+            }
+        } catch (RuntimeException ex) {
+            // Some sub-mode AI assumes full spell timing context; fall back to trigger heuristics.
+        }
+        try {
+            return aic.doTrigger(sub, false);
+        } catch (RuntimeException ex) {
+            return false;
+        }
     }
 
     private List<AbilitySub> chooseTriskaidekaphobia(List<AbilitySub> choices, final Player ai) {
@@ -286,6 +359,53 @@ public class CharmAi extends SpellAbilityAi {
     @Override
     public Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> opponents, Map<String, Object> params) {
         return Aggregates.random(opponents);
+    }
+
+    @Override
+    public List<OptionalCostValue> chooseOptionalCosts(Player payer, SpellAbility chosen, List<OptionalCostValue> optionalCostValues) {
+        OptionalCostValue entwine = null;
+        List<OptionalCostValue> otherCosts = Lists.newArrayList();
+        for (OptionalCostValue opt : optionalCostValues) {
+            if (opt.getType() == OptionalCost.Entwine) {
+                entwine = opt;
+            } else {
+                otherCosts.add(opt);
+            }
+        }
+
+        List<OptionalCostValue> chosenCosts = super.chooseOptionalCosts(payer, chosen, otherCosts);
+        if (entwine == null || !shouldPayEntwine(payer, chosen, chosenCosts, entwine)) {
+            return chosenCosts;
+        }
+
+        chosenCosts.add(entwine);
+        return chosenCosts;
+    }
+
+    private boolean shouldPayEntwine(Player payer, SpellAbility chosen, List<OptionalCostValue> chosenCosts, OptionalCostValue entwine) {
+        List<OptionalCostValue> costsWithEntwine = Lists.newArrayList(chosenCosts);
+        costsWithEntwine.add(entwine);
+
+        SpellAbility entwined = GameActionUtil.addOptionalCosts(chosen, costsWithEntwine);
+        if (!ComputerUtilCost.canPayCost(entwined, payer, false)) {
+            return false;
+        }
+
+        List<AbilitySub> choices = CharmEffect.makePossibleOptions(entwined);
+        if (choices.size() < 2) {
+            return false;
+        }
+
+        AiController aic = ((PlayerControllerAi) payer.getController()).getAi();
+        for (AbilitySub sub : choices) {
+            if (!isModeWorthAdding(aic, payer, sub)) {
+                entwined.setSubAbility(null);
+                return false;
+            }
+        }
+
+        entwined.setSubAbility(null);
+        return true;
     }
 
     @Override

@@ -1,15 +1,21 @@
 package forge.ai;
 
 import forge.card.mana.ManaAtom;
+import forge.game.GameActionUtil;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.mana.Mana;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.spellability.OptionalCost;
+import forge.game.spellability.OptionalCostValue;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 public class AIIntegrationTests extends AITest {
     @Test
@@ -112,5 +118,137 @@ public class AIIntegrationTests extends AITest {
         this.playUntilPhase(game, PhaseType.END_OF_TURN);
 
         AssertJUnit.assertTrue("Repopulate must still be in hand", hand.contains(repopulate));
+    }
+
+    @Test
+    public void testCrushContrabandChoosesBothModes() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+
+        Card crushContraband = addCardToZone("Crush Contraband", p, ZoneType.Hand);
+        SpellAbility sa = crushContraband.getSpellAbilities().get(0);
+        sa.setActivatingPlayer(p);
+
+        Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+        addCard("Sol Ring", opponent);
+        addCard("Honor of the Pure", opponent);
+
+        AiPlayDecision decision = ((PlayerControllerAi) p.getController()).getAi().canPlaySa(sa);
+
+        AssertJUnit.assertEquals(AiPlayDecision.WillPlay, decision);
+        AssertJUnit.assertEquals("AI should choose both available modes", 2, sa.getChosenList().size());
+    }
+
+    @Test
+    public void testEscalateDoesNotChooseUnaffordableExtraMode() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+        addCard("Forest", p);
+        addCard("Wastes", p);
+
+        Card collectiveResistance = addCardToZone("Collective Resistance", p, ZoneType.Hand);
+        SpellAbility sa = collectiveResistance.getSpellAbilities().get(0);
+        sa.setActivatingPlayer(p);
+
+        Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+        addCard("Sol Ring", opponent);
+        addCard("Honor of the Pure", opponent);
+
+        AiPlayDecision decision = ((PlayerControllerAi) p.getController()).getAi().canPlaySa(sa);
+
+        AssertJUnit.assertEquals(AiPlayDecision.WillPlay, decision);
+        AssertJUnit.assertEquals("AI should not choose an extra Escalate mode it cannot pay for", 1, sa.getChosenList().size());
+    }
+
+    @Test
+    public void testEscalateChoosesAffordableExtraMode() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+        addCards("Forest", 3, p);
+
+        Card collectiveResistance = addCardToZone("Collective Resistance", p, ZoneType.Hand);
+        SpellAbility sa = collectiveResistance.getSpellAbilities().get(0);
+        sa.setActivatingPlayer(p);
+
+        Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+        addCard("Sol Ring", opponent);
+        addCard("Honor of the Pure", opponent);
+
+        AiPlayDecision decision = ((PlayerControllerAi) p.getController()).getAi().canPlaySa(sa);
+
+        AssertJUnit.assertEquals(AiPlayDecision.WillPlay, decision);
+        AssertJUnit.assertEquals("AI should choose an extra Escalate mode when it is useful and payable", 2, sa.getChosenList().size());
+    }
+
+    @Test
+    public void testEntwineChoosesCostWhenAllModesAreUseful() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+        addCards("Forest", 6, p);
+        addCardToZone("Forest", p, ZoneType.Library);
+        addCardToZone("Plains", p, ZoneType.Library);
+
+        Card journey = addCardToZone("Journey of Discovery", p, ZoneType.Hand);
+        SpellAbility sa = journey.getSpellAbilities().get(0);
+        sa.setActivatingPlayer(p);
+
+        List<OptionalCostValue> optionalCosts = GameActionUtil.getOptionalCostValues(sa);
+        List<OptionalCostValue> chosenCosts = p.getController().chooseOptionalCosts(sa, optionalCosts);
+
+        AssertJUnit.assertTrue("AI should pay Entwine when both modes are useful",
+                chosenCosts.stream().anyMatch(cost -> cost.getType() == OptionalCost.Entwine));
+    }
+
+    @Test
+    public void testSpreeDoesNotChooseUnaffordableExtraMode() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+        addCard("Plains", p);
+        addCard("Wastes", p);
+
+        Card requisitionRaid = addCardToZone("Requisition Raid", p, ZoneType.Hand);
+        SpellAbility sa = requisitionRaid.getSpellAbilities().get(0);
+        sa.setActivatingPlayer(p);
+
+        Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+        addCard("Sol Ring", opponent);
+        addCard("Honor of the Pure", opponent);
+
+        AiPlayDecision decision = ((PlayerControllerAi) p.getController()).getAi().canPlaySa(sa);
+
+        AssertJUnit.assertEquals(AiPlayDecision.WillPlay, decision);
+        AssertJUnit.assertEquals("AI should not choose a Spree mode it cannot pay for", 1, sa.getChosenList().size());
+    }
+
+    @Test
+    public void testSpreeChoosesAffordableExtraMode() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+        addCard("Plains", p);
+        addCards("Wastes", 2, p);
+
+        Card requisitionRaid = addCardToZone("Requisition Raid", p, ZoneType.Hand);
+        SpellAbility sa = requisitionRaid.getSpellAbilities().get(0);
+        sa.setActivatingPlayer(p);
+
+        Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+        addCard("Sol Ring", opponent);
+        addCard("Honor of the Pure", opponent);
+
+        AiPlayDecision decision = ((PlayerControllerAi) p.getController()).getAi().canPlaySa(sa);
+
+        AssertJUnit.assertEquals(AiPlayDecision.WillPlay, decision);
+        AssertJUnit.assertEquals("AI should choose an extra Spree mode when it is useful and payable", 2, sa.getChosenList().size());
     }
 }
