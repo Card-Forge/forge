@@ -21,6 +21,7 @@ public final class RemoteClient implements IToClient, IHasForgeLog {
     private String username;
     private int index = UNASSIGNED_SLOT;
     private volatile ReplyPool replies = new ReplyPool();
+    private volatile Tracker codecTracker;
     private final AtomicInteger sendErrors = new AtomicInteger(0);
 
     // Package-private: SaturationLoggingHandler reads/resets these on writability transitions
@@ -39,11 +40,13 @@ public final class RemoteClient implements IToClient, IHasForgeLog {
 
     /**
      * Swap the underlying channel for a reconnecting client.
-     * Updates the channel and creates a fresh ReplyPool.
+     * Updates the channel, creates a fresh ReplyPool, and re-applies the codec
+     * tracker to the new channel's pipeline so IdRef resolution keeps working.
      */
     public void swapChannel(final Channel newChannel) {
         this.channel = newChannel;
         this.replies = new ReplyPool();
+        applyCodecTracker(newChannel);
     }
 
     /**
@@ -155,16 +158,25 @@ public final class RemoteClient implements IToClient, IHasForgeLog {
     /**
      * Set the tracker on the channel's encoder and decoder for IdRef
      * replacement/resolution. Called when the game starts (before any
-     * client protocol messages arrive).
+     * client protocol messages arrive). Cached so that {@link #swapChannel}
+     * can re-apply it after a reconnect.
      */
     public void setCodecTracker(Tracker tracker) {
-        CompatibleObjectEncoder encoder = channel.pipeline().get(CompatibleObjectEncoder.class);
-        if (encoder != null) {
-            encoder.setTracker(tracker);
+        this.codecTracker = tracker;
+        applyCodecTracker(channel);
+    }
+
+    private void applyCodecTracker(Channel ch) {
+        if (codecTracker == null || ch == null) {
+            return;
         }
-        CompatibleObjectDecoder decoder = channel.pipeline().get(CompatibleObjectDecoder.class);
+        CompatibleObjectEncoder encoder = ch.pipeline().get(CompatibleObjectEncoder.class);
+        if (encoder != null) {
+            encoder.setTracker(codecTracker);
+        }
+        CompatibleObjectDecoder decoder = ch.pipeline().get(CompatibleObjectDecoder.class);
         if (decoder != null) {
-            decoder.setTracker(tracker);
+            decoder.setTracker(codecTracker);
         }
     }
 

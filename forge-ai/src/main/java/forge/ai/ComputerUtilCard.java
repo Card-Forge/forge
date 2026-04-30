@@ -2107,9 +2107,8 @@ public class ComputerUtilCard {
 
     public static AiPlayDecision checkNeedsToPlayReqs(final Card card, final SpellAbility sa) {
         Game game = card.getGame();
-        boolean isRightSplit = sa != null && sa.getCardState().getStateName() == CardStateName.RightSplit;
-        String needsToPlayName = isRightSplit ? "SplitNeedsToPlay" : "NeedsToPlay";
-        String needsToPlayVarName = isRightSplit ? "SplitNeedsToPlayVar" : "NeedsToPlayVar";
+        String needsToPlayName = "NeedsToPlay";
+        String needsToPlayVarName = "NeedsToPlayVar";
 
         // TODO: if there are ever split cards with Evoke or Kicker, factor in the right split option above
         if (sa != null) {
