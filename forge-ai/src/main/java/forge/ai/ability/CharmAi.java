@@ -100,6 +100,7 @@ public class CharmAi extends SpellAbilityAi {
         List<AbilitySub> chosen = Lists.newArrayList();
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
 
+        // TODO the AI doesn't know how to effectively handle repeated choices from CanRepeatModes yet.
         final int pawprintLimit = sa.hasParam("Pawprint") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Pawprint"), sa) : 0;
         if (pawprintLimit > 0) {
             // try to pay for the more expensive subs first
@@ -154,10 +155,11 @@ public class CharmAi extends SpellAbilityAi {
             }
         }
         if (!isTrigger && chosen.size() < num && min < num) {
+            // Optional extra modes can be worth adding even when canPlaySa() is too strict for a standalone mode.
             choices.removeAll(chosen);
             for (AbilitySub sub : choices) {
                 handleDependentModes(sa, chosen, sub);
-                if (isModeWorthAdding(aic, ai, sub) && canPayForAdditionalMode(sa, chosen, sub, ai)) {
+                if (aic.doTrigger(sub, false) && canPayForAdditionalMode(sa, chosen, sub, ai)) {
                     chosen.add(sub);
                     if (chosen.size() == num) {
                         break;
@@ -213,22 +215,6 @@ public class CharmAi extends SpellAbilityAi {
             }
         }
         return null;
-    }
-
-    private boolean isModeWorthAdding(AiController aic, Player ai, AbilitySub sub) {
-        sub.setActivatingPlayer(ai);
-        try {
-            if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
-                return true;
-            }
-        } catch (RuntimeException ex) {
-            // Some sub-mode AI assumes full spell timing context; fall back to trigger heuristics.
-        }
-        try {
-            return aic.doTrigger(sub, false);
-        } catch (RuntimeException ex) {
-            return false;
-        }
     }
 
     private List<AbilitySub> chooseTriskaidekaphobia(List<AbilitySub> choices, final Player ai) {
@@ -398,7 +384,8 @@ public class CharmAi extends SpellAbilityAi {
 
         AiController aic = ((PlayerControllerAi) payer.getController()).getAi();
         for (AbilitySub sub : choices) {
-            if (!isModeWorthAdding(aic, payer, sub)) {
+            sub.setActivatingPlayer(payer);
+            if (!aic.doTrigger(sub, false)) {
                 entwined.setSubAbility(null);
                 return false;
             }
