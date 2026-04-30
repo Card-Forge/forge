@@ -29,43 +29,42 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.util.Lang;
+import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.WordUtil;
 import forge.util.storage.IStorage;
 
 public class SimulateMatch {
     public static void simulate(String[] args) {
-        FModel.initialize(null, null);
-
-        System.out.println("Simulation mode");
         if (args.length < 4) {
             argumentHelp();
             return;
         }
 
-        final Map<String, List<String>> params = new HashMap<>();
-        List<String> options = null;
+        final Map<String, List<String>> params = tryParseSimParams(args);
+        if (params == null) {
+            return;
+        }
 
-        for (int i = 1; i < args.length; i++) {
-            // "sim" is in the 0th slot
-            final String a = args[i];
-
-            if (a.charAt(0) == '-') {
-                if (a.length() < 2) {
-                    System.err.println("Error at argument " + a);
-                    argumentHelp();
-                    return;
-                }
-
-                options = new ArrayList<>();
-                params.put(a.substring(1), options);
-            } else if (options != null) {
-                options.add(a);
-            } else {
-                System.err.println("Illegal parameter usage");
+        if (params.containsKey("r")) {
+            final List<String> seedOpts = params.get("r");
+            if (seedOpts == null || seedOpts.isEmpty()) {
+                System.err.println("Error: -r requires a numeric seed (e.g. -r 12345)");
+                return;
+            }
+            try {
+                final long seed = Long.parseLong(seedOpts.get(0));
+                MyRandom.setSeed(seed);
+                System.out.println("Using random seed: " + seed);
+            } catch (NumberFormatException e) {
+                System.err.println("Error: -r must be a valid long integer");
                 return;
             }
         }
+
+        FModel.initialize(null, null);
+
+        System.out.println("Simulation mode");
 
         int nGames = 1;
         if (params.containsKey("n")) {
@@ -156,8 +155,39 @@ public class SimulateMatch {
         System.out.flush();
     }
 
+    /**
+     * Parses sim CLI args (indices {@code 1..length-1}; {@code args[0]} is {@code sim}).
+     *
+     * @return the flag map, or {@code null} on parse error
+     */
+    private static Map<String, List<String>> tryParseSimParams(String[] args) {
+        final Map<String, List<String>> params = new HashMap<>();
+        List<String> options = null;
+
+        for (int i = 1; i < args.length; i++) {
+            final String a = args[i];
+
+            if (a.charAt(0) == '-') {
+                if (a.length() < 2) {
+                    System.err.println("Error at argument " + a);
+                    argumentHelp();
+                    return null;
+                }
+
+                options = new ArrayList<>();
+                params.put(a.substring(1), options);
+            } else if (options != null) {
+                options.add(a);
+            } else {
+                System.err.println("Illegal parameter usage");
+                return null;
+            }
+        }
+        return params;
+    }
+
     private static void argumentHelp() {
-        System.out.println("Syntax: forge.exe sim -d <deck1[.dck]> ... <deckX[.dck]> -D [D] -n [N] -m [M] -t [T] -p [P] -f [F] -q");
+        System.out.println("Syntax: forge.exe sim -d <deck1[.dck]> ... <deckX[.dck]> -D [D] -n [N] -m [M] -t [T] -p [P] -f [F] -r [S] -q");
         System.out.println("\tsim - stands for simulation mode");
         System.out.println("\tdeck1 (or deck2,...,X) - constructed deck name or filename (has to be quoted when contains multiple words)");
         System.out.println("\tdeck is treated as file if it ends with a dot followed by three numbers or letters");
@@ -168,6 +198,7 @@ public class SimulateMatch {
         System.out.println("\tP - Amount of players per match (used only with Tournaments, defaults to 2)");
         System.out.println("\tF - format of games, defaults to constructed");
         System.out.println("\tc - Clock flag. Set the maximum time in seconds before calling the match a draw, defaults to 120.");
+        System.out.println("\tr - Random seed (long) for reproducible shuffles and RNG. Uses java.util.Random instead of SecureRandom.");
         System.out.println("\tq - Quiet flag. Output just the game result, not the entire game log.");
     }
 

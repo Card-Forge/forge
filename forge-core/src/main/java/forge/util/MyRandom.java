@@ -63,6 +63,17 @@ public class MyRandom {
         MyRandom.random = random;
     }
 
+    /**
+     * Uses a {@link java.util.Random} with the given seed for all subsequent RNG in this JVM.
+     * Replaces the default {@link SecureRandom} until {@link #setRandom} or {@link #setSeed} is called again.
+     * Call before game setup for reproducible shuffles and random effects (e.g. CLI sim mode).
+     *
+     * @param seed the seed for {@link Random#Random(long)}
+     */
+    public static void setSeed(long seed) {
+        MyRandom.random = new Random(seed);
+    }
+
     public static int[] splitIntoRandomGroups(final int value, final int numGroups) {
         int[] groups = new int[numGroups];
         
