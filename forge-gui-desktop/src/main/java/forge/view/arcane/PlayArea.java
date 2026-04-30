@@ -174,8 +174,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                         break;
                     }
 
-                    if (isInCombatForLayout(panel)
-                            || isInCombatForLayout(firstPanel)
+                    if ((shouldSeparateCombatStacks() && (isInCombatForLayout(panel)
+                            || isInCombatForLayout(firstPanel)))
                             || !panel.getAttachedPanels().isEmpty()
                             || !card.hasSameCounters(firstPanel.getCard())
                             || (card.isSick() != firstCard.isSick())
@@ -233,8 +233,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                         insertIndex = i;
                         break;
                     }
-                    if (isInCombatForLayout(panel)
-                            || isInCombatForLayout(firstPanel)
+                    if ((shouldSeparateCombatStacks() && (isInCombatForLayout(panel)
+                            || isInCombatForLayout(firstPanel)))
                             || !panel.getAttachedPanels().isEmpty()
                             || card.isCloned()
                             || !card.hasSameCounters(firstCard)
@@ -266,6 +266,10 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
 
     private boolean isInCombatForLayout(final CardPanel panel) {
         return hasAny(getCombatOpponentsForLayout(panel.getCard()));
+    }
+
+    private static boolean shouldSeparateCombatStacks() {
+        return FModel.getPreferences().getPrefBoolean(FPref.UI_SEPARATE_COMBAT_STACKS);
     }
 
     private static boolean hasAny(final Iterable<CardView> cards) {
@@ -314,7 +318,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         if (!combat.isAttacking(card)) {
             final List<CardView> attackers = new ArrayList<>();
             for (final CardView attacker : combat.getAttackers()) {
-                if (containsCard(combat.getBlockers(attacker), card) || containsCard(combat.getPlannedBlockers(attacker), card)) {
+                if (combat.getBlockers(attacker).contains(card) || combat.getPlannedBlockers(attacker).contains(card)) {
                     attackers.add(attacker);
                 }
             }
@@ -326,18 +330,6 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         }
         final Iterable<CardView> plannedBlockers = combat.getPlannedBlockers(card);
         return hasAny(plannedBlockers) ? plannedBlockers : null;
-    }
-
-    private static boolean containsCard(final Iterable<CardView> cards, final CardView card) {
-        if (cards == null) {
-            return false;
-        }
-        for (final CardView c : cards) {
-            if (c.equals(card)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private static double getScreenX(final CardPanel panel) {
@@ -488,8 +480,10 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             tokens.clear();
         }
 
-        sortCombatantsByOpponentPosition(tokens);
-        sortCombatantsByOpponentPosition(creatures);
+        if (shouldSeparateCombatStacks()) {
+            sortCombatantsByOpponentPosition(tokens);
+            sortCombatantsByOpponentPosition(creatures);
+        }
 
         if(!contraptions.isEmpty()) {
             contraptions.stream()
