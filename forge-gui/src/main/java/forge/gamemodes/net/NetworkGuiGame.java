@@ -9,7 +9,6 @@ import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.AbstractGuiGame;
-import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.net.client.NetGameController;
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -605,22 +604,6 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasForg
         int phaseOrdinal = gameView.getPhase() != null ? gameView.getPhase().ordinal() : -1;
         netLog.error("[DeltaSync] Client breakdown: {}",
                 NetworkChecksumUtil.computeChecksumBreakdown(gameView.getTurn(), phaseOrdinal, gameView));
-    }
-
-    @Override
-    public void applyYieldUpdate(YieldUpdate update) {
-        PlayerView player = getCurrentPlayer();
-        IGameController controller = player != null ? getGameController(player) : null;
-        if (controller != null) {
-            controller.applyYieldUpdate(update);
-        }
-        // Repaint UI if marker/stack-yield state changed.
-        if (player != null
-                && (update instanceof YieldUpdate.SetMarker
-                || update instanceof YieldUpdate.ClearMarker
-                || update instanceof YieldUpdate.StackYield)) {
-            refreshYieldUi(player);
-        }
     }
 
     protected final void pushSkipPhaseToControllers(final PlayerView player, final PhaseType phase) {

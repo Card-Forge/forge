@@ -281,6 +281,8 @@ public class MatchController extends NetworkGuiGame {
             } catch (Exception e) {
             }
         }
+
+        checkMarkerAutoClear();
     }
 
 

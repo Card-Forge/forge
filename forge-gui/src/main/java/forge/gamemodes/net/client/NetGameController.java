@@ -213,26 +213,22 @@ public class NetGameController implements IGameController {
 
     @Override
     public void applyYieldUpdate(final YieldUpdate update) {
+        // Local self-apply for the three cases that route through sendYieldUpdate
+        // (marker/stack-yield user actions). Other cases write directly via dedicated
+        // setters above (SetCardAutoYield, TriggerDecision, SkipPhase, SeedFromClient).
         if (update instanceof YieldUpdate.SetMarker u) {
             yieldController.setMarker(u.phaseOwner(), u.phase());
         } else if (update instanceof YieldUpdate.ClearMarker) {
             yieldController.clearMarker();
         } else if (update instanceof YieldUpdate.StackYield u) {
             yieldController.setAutoPassUntilStackEmpty(u.active());
-        } else if (update instanceof YieldUpdate.SkipPhase u) {
-            yieldController.setSkipPhase(u.turnPlayer(), u.phase(), u.skip());
         }
-        // SetCardAutoYield/SetTriggerDecision: server never pushes these to the client, and
-        // user-initiated setters write directly to yieldController + send wire — not via
-        // sendYieldUpdate's local-apply path. SeedFromClient: no-op on client side.
     }
 
     /**
-     * User-initiated yield update from local UI: apply to local cache for
-     * immediate UI response AND ship to host so the authoritative YieldController
-     * stays in sync. The default IGameController.sendYieldUpdate just calls
-     * applyYieldUpdate (host-only), which would silently drop the wire send
-     * for remote clients.
+     * Remote client's outbound path for user-initiated yield actions (right-click
+     * marker, ESC, "yield to entire stack" menu): mutate local cache for immediate
+     * UI response and ship to host.
      */
     @Override
     public void sendYieldUpdate(final YieldUpdate update) {

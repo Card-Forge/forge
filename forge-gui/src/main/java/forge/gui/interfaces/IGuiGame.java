@@ -15,7 +15,6 @@ import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
-import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.match.input.InputConfirm;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gui.control.PlaybackSpeed;
@@ -271,9 +270,6 @@ public interface IGuiGame {
      * @param packet the delta packet containing changes
      */
     void applyDelta(DeltaPacket packet);
-
-    /** Apply a yield update envelope (server->client direction). */
-    void applyYieldUpdate(YieldUpdate update);
 
     /** Repaint marker chevron / stack-yield UI for the given player. */
     default void refreshYieldUi(PlayerView player) {}

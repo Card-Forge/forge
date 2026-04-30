@@ -803,14 +803,26 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         // No-op for local games - network implementation is in NetworkGuiGame
     }
 
-    @Override
-    public void applyYieldUpdate(YieldUpdate update) {
-        // Default: route to current player's controller. Network impl in NetworkGuiGame.
-        PlayerView player = getCurrentPlayer();
-        if (player == null) return;
-        IGameController controller = getGameController(player);
-        if (controller != null) {
-            controller.applyYieldUpdate(update);
+    /**
+     * Phase-change derivation: refresh chevron + auto-pass prompt when a controller's marker
+     * has cleared since the last check. The clearing itself may have happened either here
+     * (this listener calling {@link YieldController#checkAndClearMarker}) or in the host's
+     * {@link YieldController#shouldAutoYield} priority loop — we just detect the transition.
+     */
+    public final void checkMarkerAutoClear() {
+        GameView gv = getGameView();
+        if (gv == null) return;
+        boolean any = false;
+        for (Map.Entry<PlayerView, IGameController> e : gameControllers.entrySet()) {
+            YieldController yc = e.getValue().getYieldController();
+            if (yc == null) continue;
+            boolean hadMarker = yc.getAutoPassUntilMarker() != null;
+            yc.checkAndClearMarker(gv);
+            if (hadMarker && yc.getAutoPassUntilMarker() == null) {
+                refreshYieldUi(e.getKey());
+                any = true;
+            }
         }
+        if (any) updateAutoPassPrompt();
     }
 }

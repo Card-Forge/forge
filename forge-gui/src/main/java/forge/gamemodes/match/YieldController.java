@@ -76,7 +76,7 @@ public class YieldController {
         this.autoPassUntilEOT = active;
     }
 
-    public void setMarker(PlayerView phaseOwner, PhaseType phase) {
+    public synchronized void setMarker(PlayerView phaseOwner, PhaseType phase) {
         autoPassUntilEOT = false;
         if (phaseOwner == null || phase == null) {
             clearMarker();
@@ -90,7 +90,7 @@ public class YieldController {
         activationOnMarker = atOrPast;
     }
 
-    public void clearMarker() {
+    public synchronized void clearMarker() {
         autoPassUntilMarker = null;
         hasLeftMarker = false;
         activationOnMarker = false;
@@ -128,43 +128,37 @@ public class YieldController {
 
     public boolean shouldAutoYield() {
         if (autoPassUntilEOT) return true;
-
         GameView gv = owner != null && owner.getGui() != null ? owner.getGui().getGameView() : null;
-
         if (autoPassUntilStackEmpty) {
-            if (gv != null && gv.getStack() != null && !gv.getStack().isEmpty()) {
-                return true;
-            }
+            if (gv != null && gv.getStack() != null && !gv.getStack().isEmpty()) return true;
             autoPassUntilStackEmpty = false;
         }
+        checkAndClearMarker(gv);
+        return autoPassUntilMarker != null;
+    }
 
+    /**
+     * Pure derivation: evaluate fire conditions against the supplied GameView and clear the
+     * marker if it should fire. Both the host's priority loop and the GUI's phase-event
+     * listener call this; whichever runs first wins, the other no-ops on null marker.
+     *
+     * @return true if this call cleared the marker (caller should refresh UI).
+     */
+    public synchronized boolean checkAndClearMarker(GameView gv) {
         if (autoPassUntilMarker == null || gv == null) return false;
-
         PlayerView turnPlayer = gv.getPlayerTurn();
         PhaseType currentPhase = gv.getPhase();
-
         boolean inMarkerOwnerTurn = turnPlayer != null && turnPlayer.equals(autoPassUntilMarker.getPhaseOwner());
         boolean atTarget = inMarkerOwnerTurn && currentPhase == autoPassUntilMarker.getPhase();
         boolean pastTarget = inMarkerOwnerTurn && currentPhase != null
                 && autoPassUntilMarker.getPhase() != null && currentPhase.isAfter(autoPassUntilMarker.getPhase());
-
-        boolean shouldFire = hasLeftMarker
-                && (atTarget || (!activationOnMarker && pastTarget));
-
+        boolean shouldFire = hasLeftMarker && (atTarget || (!activationOnMarker && pastTarget));
         if (shouldFire) {
             clearMarker();
-            if (owner != null && owner.getGui() != null) {
-                PlayerView player = owner.getLocalPlayerView();
-                if (player != null) {
-                    owner.getGui().applyYieldUpdate(new YieldUpdate.ClearMarker(player));
-                }
-            }
-            return false;
+            return true;
         }
-        if (!atTarget && !hasLeftMarker) {
-            hasLeftMarker = true;
-        }
-        return true;
+        if (!atTarget && !hasLeftMarker) hasLeftMarker = true;
+        return false;
     }
 
     // ---- Auto-yield (per-card/ability) and trigger decisions ----

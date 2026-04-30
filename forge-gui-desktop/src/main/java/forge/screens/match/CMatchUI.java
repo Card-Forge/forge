@@ -851,6 +851,8 @@ public final class CMatchUI
         if (openAbilityMenu != null) { //ensure ability menu can't remain open between phases
             openAbilityMenu.setVisible(false);
         }
+
+        checkMarkerAutoClear();
     }
 
     @Override
