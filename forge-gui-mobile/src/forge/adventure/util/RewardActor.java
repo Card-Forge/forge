@@ -49,6 +49,8 @@ import forge.game.card.CardView;
 import forge.gui.GuiBase;
 import forge.item.PaperCard;
 import forge.item.SealedProduct;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 import forge.util.MyRandom;
@@ -240,6 +242,17 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         reward.setAutoSell(!reward.isAutoSell());
         autoSell.setText(reward.isAutoSell() ? "[%85][+Sell]" + priceTag : "[%85][GRAY] " + priceTag);
         autoSell.getColor().a = reward.isAutoSell() ? 1f : 0.7f;
+
+        calcAutoSellWidth();
+    }
+
+    private void calcAutoSellWidth() {
+        float btnHeight = autoSell.getTextraLabel().layout.getHeight() * 1.8f;
+        float width = btnHeight - 2f;
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_DISPLAY_PRICE_IN_REWARD_SCREEN)) {
+            width = Math.max(autoSell.getTextraLabel().layout.getWidth() + 6f, width);
+        };
+        autoSell.setSize(width, btnHeight);
     }
 
     public RewardActor(Reward reward, boolean flippable, RewardScene.Type type, boolean showOverlay) {
@@ -256,7 +269,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             case Card: {
                 if (!reward.isNoSell) {
                     int sellPrice = AdventurePlayer.current().cardSellPrice(reward.getCard());
-                    priceTag = sellPrice > 0 ? " " + sellPrice : "";
+                    priceTag = FModel.getPreferences().getPrefBoolean(FPref.UI_DISPLAY_PRICE_IN_REWARD_SCREEN) && sellPrice > 0 ? String.valueOf(sellPrice) : "";
                     autoSell = Controls.newTextButton("[%85][GRAY] " + priceTag);
                     autoSell.getColor().a = 0.7f; // semi-transparent by default
                     autoSell.addListener(new InputListener() {
@@ -269,8 +282,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                             if (!reward.isAutoSell()) autoSell.getColor().a = 0.7f;
                         }
                     });
-                    float btnHeight = autoSell.getTextraLabel().layout.getHeight() * 1.8f;
-                    autoSell.setSize(autoSell.getWidth(), btnHeight);
+                    calcAutoSellWidth();
                     autoSell.addListener(new ClickListener() {
                         public void clicked(InputEvent event, float x, float y) {
                             updateAutoSell();
