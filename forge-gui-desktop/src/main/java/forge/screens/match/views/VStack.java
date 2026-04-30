@@ -342,7 +342,7 @@ public class VStack implements IVDoc<CStack> {
             jmiYieldToEntireStack.addActionListener(arg0 -> {
                 final PlayerView local = controller.getMatchUI().getCurrentPlayer();
                 if (local == null) return;
-                controller.getMatchUI().getGameController().sendYieldUpdate(new YieldUpdate.SetStackYield(local, true));
+                controller.getMatchUI().getGameController().sendYieldUpdate(new YieldUpdate.StackYield(local, true));
                 controller.getMatchUI().getGameController().passPriority();
             });
             add(jmiYieldToEntireStack);

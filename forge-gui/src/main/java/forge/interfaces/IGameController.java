@@ -26,10 +26,6 @@ public interface IGameController {
 
     void selectButtonCancel();
 
-    void passPriority();
-
-    void passPriorityUntilEndOfTurn();
-
     void selectPlayer(PlayerView playerView, ITriggerEvent triggerEvent);
 
     boolean selectCard(CardView cardView, List<CardView> otherCardViewsToSelect, ITriggerEvent triggerEvent);
@@ -54,7 +50,10 @@ public interface IGameController {
      */
     void requestResync();
 
-    // --- Auto-yield preferences (per-player) ---
+    void passPriority();
+    void passPriorityUntilEndOfTurn();
+
+    // Auto-yield preferences
     boolean shouldAutoYield(String key);
     /**
      * @param isAbilityScope true if {@code key} is an ability suffix (Per Ability * modes);
@@ -67,7 +66,7 @@ public interface IGameController {
     boolean getDisableAutoYields();
     void setDisableAutoYields(boolean disable);
 
-    // --- Trigger accept/decline preferences (per-player) ---
+    // Trigger accept/decline preferences
     boolean shouldAlwaysAcceptTrigger(int trigger);
     boolean shouldAlwaysDeclineTrigger(int trigger);
     void setShouldAlwaysAcceptTrigger(int trigger);
@@ -85,6 +84,5 @@ public interface IGameController {
         applyYieldUpdate(update);
     }
 
-    /** Access this controller's YieldController. */
     YieldController getYieldController();
 }

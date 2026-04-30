@@ -1526,8 +1526,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         if (stack.isEmpty()) {
-            if (isUiSetToSkipPhase(getGame().getPhaseHandler().getPlayerTurn().getView(),
-                    getGame().getPhaseHandler().getPhase())) {
+            if (isUiSetToSkipPhase(getGame().getPhaseHandler().getPlayerTurn().getView(), getGame().getPhaseHandler().getPhase())) {
                 netLog.trace("Returning null (skipPhase) for player {}", player.getName());
                 return null; // avoid prompt for input if stack is empty and
                 // player is set to skip the current phase
@@ -3347,7 +3346,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     public void autoPassUntilEndOfTurn() {
-        yieldController.setAutoPassUntilEndOfTurn(true);
+        yieldController.setAutoPassUntilEOTWithoutInterruptions(true);
         if (getGui() != null) {
             getGui().updateAutoPassPrompt();
         }
@@ -3355,10 +3354,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void autoPassCancel() {
-        if (!yieldController.shouldAutoYield()) {
+        if (!mayAutoPass()) {
             return;
         }
-        yieldController.cancelYield();
+        yieldController.setAutoPassUntilEOTWithoutInterruptions(false);
         if (getGui() != null) {
             PlayerView playerView = getLocalPlayerView();
             getGui().showPromptMessage(playerView, "");
@@ -3492,7 +3491,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public boolean shouldAutoYield(final String key) {
         return yieldController.shouldAutoYield(key);
     }
-
     @Override
     public void setShouldAutoYield(final String key, final boolean autoYield, final boolean isAbilityScope) {
         yieldController.setShouldAutoYield(key, autoYield, isAbilityScope);
@@ -3512,7 +3510,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public boolean getDisableAutoYields() {
         return yieldController.getDisableAutoYields();
     }
-
     @Override
     public void setDisableAutoYields(final boolean disable) {
         yieldController.setDisableAutoYields(disable);
@@ -3522,7 +3519,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public boolean shouldAlwaysAcceptTrigger(final int trigger) {
         return yieldController.shouldAlwaysAcceptTrigger(trigger);
     }
-
     @Override
     public boolean shouldAlwaysDeclineTrigger(final int trigger) {
         return yieldController.shouldAlwaysDeclineTrigger(trigger);
@@ -3533,22 +3529,19 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         yieldController.setAlwaysAcceptTrigger(trigger);
         if (isPromptingForTrigger(trigger)) selectButtonOk();
     }
-
     @Override
     public void setShouldAlwaysDeclineTrigger(final int trigger) {
         yieldController.setAlwaysDeclineTrigger(trigger);
         if (isPromptingForTrigger(trigger)) selectButtonCancel();
     }
-
+    @Override
+    public void setShouldAlwaysAskTrigger(final int trigger) {
+        yieldController.setAlwaysAskTrigger(trigger);
+    }
     private boolean isPromptingForTrigger(final int trigger) {
         if (!(inputQueue.getInput() instanceof InputConfirm)) return false;
         final SpellAbilityStackInstance top = getGame().getStack().peek();
         return top != null && top.isStateTrigger(trigger);
-    }
-
-    @Override
-    public void setShouldAlwaysAskTrigger(final int trigger) {
-        yieldController.setAlwaysAskTrigger(trigger);
     }
 
     public boolean isUiSetToSkipPhase(final PlayerView turnPlayer, final PhaseType phase) {
@@ -3564,13 +3557,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             yieldController.setMarker(u.phaseOwner(), u.phase());
         } else if (update instanceof YieldUpdate.ClearMarker) {
             yieldController.clearMarker();
-        } else if (update instanceof YieldUpdate.SetStackYield u) {
-            yieldController.setStackYield(u.active());
-        } else if (update instanceof YieldUpdate.SetTriggerDecision u) {
+        } else if (update instanceof YieldUpdate.StackYield u) {
+            yieldController.setAutoPassUntilStackEmpty(u.active());
+        } else if (update instanceof YieldUpdate.TriggerDecision u) {
             yieldController.setTriggerDecision(u.trigId(), u.decision());
-        } else if (update instanceof YieldUpdate.SetCardAutoYield u) {
+        } else if (update instanceof YieldUpdate.CardAutoYield u) {
             yieldController.applyAutoYieldFromWire(u.cardKey(), u.active());
-        } else if (update instanceof YieldUpdate.SetSkipPhase u) {
+        } else if (update instanceof YieldUpdate.SkipPhase u) {
             yieldController.setSkipPhase(u.turnPlayer(), u.phase(), u.skip());
         } else if (update instanceof YieldUpdate.SeedFromClient u) {
             yieldController.applyClientSeed(u.snapshot());

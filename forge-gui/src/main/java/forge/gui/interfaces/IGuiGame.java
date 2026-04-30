@@ -275,8 +275,8 @@ public interface IGuiGame {
     /** Apply a yield update envelope (server->client direction). */
     void applyYieldUpdate(YieldUpdate update);
 
-    /** Repaint marker chevron / stack-yield UI for the given player. Default no-op. */
-    default void refreshYieldUi(PlayerView player) { /* impl per platform */ }
+    /** Repaint marker chevron / stack-yield UI for the given player. */
+    default void refreshYieldUi(PlayerView player) {}
 
     /** Returns true if this game instance is a network game. */
     boolean isNetGame();

@@ -25,7 +25,6 @@ import java.util.*;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicReference;
-
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JOptionPane;
@@ -132,6 +131,7 @@ import forge.util.collect.FCollectionView;
 import forge.view.FView;
 import forge.view.arcane.CardPanel;
 import forge.view.arcane.FloatingZone;
+
 import net.miginfocom.layout.LinkHandler;
 import net.miginfocom.swing.MigLayout;
 
@@ -183,7 +183,7 @@ public final class CMatchUI
         this.myDocs.put(EDocID.CARD_PICTURE, cDetailPicture.getCPicture().getView());
         this.myDocs.put(EDocID.CARD_DETAIL, cDetailPicture.getCDetail().getView());
         // only create an ante doc if playing for ante
-        if (isPreferenceEnabled(FPref.UI_ANTE)) {
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE)) {
             this.myDocs.put(EDocID.CARD_ANTES, cAntes.getView());
         } else {
             this.myDocs.put(EDocID.CARD_ANTES, null);
@@ -203,24 +203,11 @@ public final class CMatchUI
         }
     }
 
-    private static boolean isPreferenceEnabled(final ForgePreferences.FPref preferenceName) {
-        return FModel.getPreferences().getPrefBoolean(preferenceName);
-    }
-
     FScreen getScreen() {
         return this.screen;
     }
     public boolean isCurrentScreen() {
         return Singletons.getControl().getCurrentScreen() == this.screen;
-    }
-
-    /** Returns the CMatchUI controlling the currently active match screen, or null. */
-    public static CMatchUI getActive() {
-        FScreen current = Singletons.getControl().getCurrentScreen();
-        if (current == null || !current.isMatchScreen()) {
-            return null;
-        }
-        return current.getController() instanceof CMatchUI cm ? cm : null;
     }
 
     private boolean isInGame() {
@@ -265,7 +252,7 @@ public final class CMatchUI
                 }
             }
             IGameController controller = getGameController(local);
-            YieldMarker marker = controller != null ? controller.getYieldController().getMarker() : null;
+            YieldMarker marker = controller != null ? controller.getYieldController().getAutoPassUntilMarker() : null;
             if (marker == null) {
                 return;
             }
@@ -1372,7 +1359,7 @@ public final class CMatchUI
         if (controller == null) {
             return;
         }
-        YieldMarker existing = controller.getYieldController().getMarker();
+        YieldMarker existing = controller.getYieldController().getAutoPassUntilMarker();
         boolean clickedSameLabel = existing != null
                 && phaseOwner.equals(existing.getPhaseOwner())
                 && phase == existing.getPhase();

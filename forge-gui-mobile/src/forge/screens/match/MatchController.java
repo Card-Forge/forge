@@ -590,7 +590,7 @@ public class MatchController extends NetworkGuiGame {
         if (controller == null) {
             return;
         }
-        YieldMarker existing = controller.getYieldController().getMarker();
+        YieldMarker existing = controller.getYieldController().getAutoPassUntilMarker();
         boolean clickedSameLabel = existing != null
                 && phaseOwner.equals(existing.getPhaseOwner())
                 && phase == existing.getPhase();
@@ -745,7 +745,7 @@ public class MatchController extends NetworkGuiGame {
                 }
             }
             IGameController controller = getGameController(local);
-            YieldMarker marker = controller != null ? controller.getYieldController().getMarker() : null;
+            YieldMarker marker = controller != null ? controller.getYieldController().getAutoPassUntilMarker() : null;
             if (marker == null) {
                 return;
             }

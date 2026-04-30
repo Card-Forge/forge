@@ -631,7 +631,7 @@ public class MatchScreen extends FScreen {
             case Keys.ESCAPE: {
                 PlayerView local = MatchController.instance.getCurrentPlayer();
                 IGameController ctrl = local != null ? MatchController.instance.getGameController(local) : null;
-                if (ctrl != null && ctrl.getYieldController().clearActiveYields(local, ctrl)) {
+                if (ctrl != null && ctrl.getYieldController().cancelGenericYields(local, ctrl)) {
                     MatchController.instance.refreshYieldUi(local);
                     return true;
                 }

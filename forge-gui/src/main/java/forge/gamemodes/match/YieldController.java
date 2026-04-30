@@ -19,10 +19,6 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Per-PlayerControllerHuman yield state holder. Owns markers, stack-yield,
- * autopass-until-end-of-turn, per-card/ability auto-yield, trigger
- * decisions, and skip-phase prefs.
- *
  * <p>Auto-yield state and trigger decisions live in a single {@link AutoYieldStore}
  * resolved by {@link #activeStore()}:
  * <ul>
@@ -38,139 +34,67 @@ public class YieldController {
 
     private final PlayerControllerHuman owner;
 
-    private boolean autoPassUntilEndOfTurn;
+    private boolean autoPassUntilStackEmpty;
+    private boolean autoPassUntilEOT;
+    private YieldMarker autoPassUntilMarker;
 
-    private YieldMarker marker;
     /** Priority has passed through any non-target phase since marker activation. */
     private boolean hasLeftMarker;
     /** Marker was set while priority was already at its target; require a full cycle to fire. */
     private boolean activationOnMarker;
 
-    /** Survives opponent spells; auto-clears only when stack empties, NOT on cancelYield. */
-    private boolean stackYield;
-
-    /**
-     * Backing store used in cache mode (host PCH for remote, NetGameController on
-     * client). For host PCH for a local player, {@link #activeStore()} returns the
-     * LobbyPlayer's persistent store and this field is unused.
-     */
     private final AutoYieldStore localStore = new AutoYieldStore();
-
     private final Map<PlayerView, EnumSet<PhaseType>> skipPhases = new HashMap<>();
 
     public YieldController(PlayerControllerHuman owner) {
         this.owner = owner;
     }
 
-    public boolean isAutoPassUntilEndOfTurn() {
-        return autoPassUntilEndOfTurn;
+    public boolean isSkippingPhase(PlayerView turnPlayer, PhaseType phase) {
+        EnumSet<PhaseType> set = skipPhases.get(turnPlayer);
+        return set != null && set.contains(phase);
+    }
+    public void setSkipPhase(PlayerView turnPlayer, PhaseType phase, boolean skip) {
+        if (turnPlayer == null || phase == null) return;
+        EnumSet<PhaseType> set = skipPhases.computeIfAbsent(turnPlayer, k -> EnumSet.noneOf(PhaseType.class));
+        if (skip) set.add(phase);
+        else set.remove(phase);
     }
 
-    public void setAutoPassUntilEndOfTurn(boolean active) {
-        this.autoPassUntilEndOfTurn = active;
+    public boolean autoPassUntilEOT() {
+        return autoPassUntilStackEmpty;
+    }
+    public YieldMarker getAutoPassUntilMarker() {
+        return autoPassUntilMarker;
     }
 
-    public boolean shouldAutoYield() {
-        if (autoPassUntilEndOfTurn) return true;
-
-        GameView gv = owner != null && owner.getGui() != null ? owner.getGui().getGameView() : null;
-
-        if (stackYield) {
-            if (gv != null && gv.getStack() != null && !gv.getStack().isEmpty()) {
-                return true;
-            }
-            stackYield = false;
-        }
-
-        if (marker == null || gv == null) return false;
-
-        PlayerView turnPlayer = gv.getPlayerTurn();
-        PhaseType currentPhase = gv.getPhase();
-
-        boolean inMarkerOwnerTurn = turnPlayer != null && turnPlayer.equals(marker.getPhaseOwner());
-        boolean atTarget = inMarkerOwnerTurn && currentPhase == marker.getPhase();
-        boolean pastTarget = inMarkerOwnerTurn && currentPhase != null
-                && marker.getPhase() != null && currentPhase.isAfter(marker.getPhase());
-
-        boolean shouldFire = hasLeftMarker
-                && (atTarget || (!activationOnMarker && pastTarget));
-
-        if (shouldFire) {
-            clearMarker();
-            notifyMarkerCleared();
-            return false;
-        }
-        if (!atTarget && !hasLeftMarker) {
-            hasLeftMarker = true;
-        }
-        return true;
+    public void setAutoPassUntilStackEmpty(boolean active) {
+        if (active) autoPassUntilEOT = false;
+        this.autoPassUntilStackEmpty = active;
     }
-
-    private void notifyMarkerCleared() {
-        if (owner == null || owner.getGui() == null) return;
-        PlayerView player = owner.getLocalPlayerView();
-        if (player == null) return;
-        owner.getGui().applyYieldUpdate(new YieldUpdate.ClearMarker(player));
-    }
-
-    /**
-     * Engine-driven cancel matching master's autoPassCancel semantics: clears
-     * legacy autopass-until-end-of-turn only. Markers and stack-yield survive —
-     * markers can target phases on future turns (must outlive turn-boundary
-     * cancellation), and stack-yield must resolve the entire stack including
-     * post-cancel additions. User-initiated ESC clears all three explicitly.
-     */
-    public void cancelYield() {
-        autoPassUntilEndOfTurn = false;
-    }
-
-    /**
-     * User-initiated ESC: clear marker, legacy autopass, and stack-yield (the three "active"
-     * yield forms). Persistent per-card auto-yields are unaffected. Marker and stack-yield go
-     * over the wire via the controller; legacy autopass is local to host PCH.
-     *
-     * @return true if any of the three were active and got cleared (caller should refresh UI
-     *         and suppress the ESC fallthrough); false if nothing was active.
-     */
-    public boolean clearActiveYields(PlayerView local, IGameController controller) {
-        boolean hadMarker = marker != null;
-        boolean hadLegacy = autoPassUntilEndOfTurn;
-        boolean hadStackYield = stackYield;
-        if (!hadMarker && !hadLegacy && !hadStackYield) return false;
-        if (hadMarker) controller.sendYieldUpdate(new YieldUpdate.ClearMarker(local));
-        if (hadLegacy && controller instanceof PlayerControllerHuman pch) pch.autoPassCancel();
-        if (hadStackYield) controller.sendYieldUpdate(new YieldUpdate.SetStackYield(local, false));
-        return true;
+    public void setAutoPassUntilEOTWithoutInterruptions(boolean active) {
+        this.autoPassUntilEOT = active;
     }
 
     public void setMarker(PlayerView phaseOwner, PhaseType phase) {
-        autoPassUntilEndOfTurn = false;
+        autoPassUntilEOT = false;
         if (phaseOwner == null || phase == null) {
             clearMarker();
             return;
         }
-        marker = new YieldMarker(phaseOwner, phase);
+        autoPassUntilMarker = new YieldMarker(phaseOwner, phase);
         // Activating at-or-past target on the owner's current turn must wait for next turn's
         // occurrence; otherwise pastTarget would fire and clear the marker on the same turn.
-        boolean atOrPast = isPriorityAtOrPastMarker(marker);
+        boolean atOrPast = isPriorityAtOrPastMarker(autoPassUntilMarker);
         hasLeftMarker = !atOrPast;
         activationOnMarker = atOrPast;
     }
 
     public void clearMarker() {
-        marker = null;
+        autoPassUntilMarker = null;
         hasLeftMarker = false;
         activationOnMarker = false;
     }
-
-    public YieldMarker getMarker() { return marker; }
-
-    public void setStackYield(boolean active) {
-        if (active) autoPassUntilEndOfTurn = false;
-        this.stackYield = active;
-    }
-
-    public boolean isStackYieldActive() { return stackYield; }
 
     private boolean isPriorityAtOrPastMarker(YieldMarker m) {
         if (m == null || owner == null || owner.getGui() == null) return false;
@@ -183,19 +107,95 @@ public class YieldController {
         return phase == m.getPhase() || phase.isAfter(m.getPhase());
     }
 
-    public void setSkipPhase(PlayerView turnPlayer, PhaseType phase, boolean skip) {
-        if (turnPlayer == null || phase == null) return;
-        EnumSet<PhaseType> set = skipPhases.computeIfAbsent(turnPlayer, k -> EnumSet.noneOf(PhaseType.class));
-        if (skip) set.add(phase);
-        else set.remove(phase);
+    /**
+     * User-initiated ESC: clear marker, legacy autopass, and stack-yield (the three "active"
+     * yield forms). Persistent per-card auto-yields are unaffected. Marker and stack-yield go
+     * over the wire via the controller; legacy autopass is local to host PCH.
+     *
+     * @return true if any of the three were active and got cleared (caller should refresh UI
+     *         and suppress the ESC fallthrough); false if nothing was active.
+     */
+    public boolean cancelGenericYields(PlayerView local, IGameController controller) {
+        boolean hadMarker = autoPassUntilMarker != null;
+        boolean hadLegacy = autoPassUntilEOT;
+        boolean hadStackYield = autoPassUntilStackEmpty;
+        if (!hadMarker && !hadLegacy && !hadStackYield) return false;
+        if (hadMarker) controller.sendYieldUpdate(new YieldUpdate.ClearMarker(local));
+        if (hadLegacy && controller instanceof PlayerControllerHuman pch) pch.autoPassCancel();
+        if (hadStackYield) controller.sendYieldUpdate(new YieldUpdate.StackYield(local, false));
+        return true;
     }
 
-    public boolean isSkippingPhase(PlayerView turnPlayer, PhaseType phase) {
-        EnumSet<PhaseType> set = skipPhases.get(turnPlayer);
-        return set != null && set.contains(phase);
+    public boolean shouldAutoYield() {
+        if (autoPassUntilEOT) return true;
+
+        GameView gv = owner != null && owner.getGui() != null ? owner.getGui().getGameView() : null;
+
+        if (autoPassUntilStackEmpty) {
+            if (gv != null && gv.getStack() != null && !gv.getStack().isEmpty()) {
+                return true;
+            }
+            autoPassUntilStackEmpty = false;
+        }
+
+        if (autoPassUntilMarker == null || gv == null) return false;
+
+        PlayerView turnPlayer = gv.getPlayerTurn();
+        PhaseType currentPhase = gv.getPhase();
+
+        boolean inMarkerOwnerTurn = turnPlayer != null && turnPlayer.equals(autoPassUntilMarker.getPhaseOwner());
+        boolean atTarget = inMarkerOwnerTurn && currentPhase == autoPassUntilMarker.getPhase();
+        boolean pastTarget = inMarkerOwnerTurn && currentPhase != null
+                && autoPassUntilMarker.getPhase() != null && currentPhase.isAfter(autoPassUntilMarker.getPhase());
+
+        boolean shouldFire = hasLeftMarker
+                && (atTarget || (!activationOnMarker && pastTarget));
+
+        if (shouldFire) {
+            clearMarker();
+            if (owner != null && owner.getGui() != null) {
+                PlayerView player = owner.getLocalPlayerView();
+                if (player != null) {
+                    owner.getGui().applyYieldUpdate(new YieldUpdate.ClearMarker(player));
+                }
+            }
+            return false;
+        }
+        if (!atTarget && !hasLeftMarker) {
+            hasLeftMarker = true;
+        }
+        return true;
     }
 
     // ---- Auto-yield (per-card/ability) and trigger decisions ----
+
+    public boolean shouldAutoYield(String key) {
+        AutoYieldStore store = activeStore();
+        if (store.isDisabled()) return false;
+        if (!tierAware()) {
+            // Cache: keys stored at storageKey shape (full or stripped). Check both.
+            return store.shouldYield(AutoYieldStore.Tier.GAME, key)
+                    || store.shouldYield(AutoYieldStore.Tier.GAME, AutoYieldStore.abilitySuffix(key));
+        }
+        if (activeModeIsInstall()) {
+            return PersistentYieldStore.get().contains(AutoYieldStore.abilitySuffix(key));
+        }
+        AutoYieldStore.Tier tier = activeTier();
+        boolean abilityScope = tier != AutoYieldStore.Tier.GAME;
+        String storageKey = abilityScope ? AutoYieldStore.abilitySuffix(key) : key;
+        return store.shouldYield(tier, storageKey);
+    }
+
+    /** Tier-aware user-initiated set. Returns the storage key (stripped if ability-scope) for wire propagation. */
+    public String setShouldAutoYield(String key, boolean autoYield, boolean abilityScope) {
+        String storageKey = abilityScope ? AutoYieldStore.abilitySuffix(key) : key;
+        if (activeModeIsInstall()) {
+            PersistentYieldStore.get().setYield(storageKey, autoYield);
+        } else {
+            activeStore().setYield(activeTier(), storageKey, autoYield);
+        }
+        return storageKey;
+    }
 
     /**
      * Cache mode (host PCH for remote, or NetGameController) → {@link #localStore}.
@@ -225,34 +225,6 @@ public class YieldController {
         return AutoYieldStore.Tier.MATCH;
     }
 
-    public boolean shouldAutoYield(String key) {
-        AutoYieldStore store = activeStore();
-        if (store.isDisabled()) return false;
-        if (!tierAware()) {
-            // Cache: keys stored at storageKey shape (full or stripped). Check both.
-            return store.shouldYield(AutoYieldStore.Tier.GAME, key)
-                || store.shouldYield(AutoYieldStore.Tier.GAME, AutoYieldStore.abilitySuffix(key));
-        }
-        if (activeModeIsInstall()) {
-            return PersistentYieldStore.get().contains(AutoYieldStore.abilitySuffix(key));
-        }
-        AutoYieldStore.Tier tier = activeTier();
-        boolean abilityScope = tier != AutoYieldStore.Tier.GAME;
-        String storageKey = abilityScope ? AutoYieldStore.abilitySuffix(key) : key;
-        return store.shouldYield(tier, storageKey);
-    }
-
-    /** Tier-aware user-initiated set. Returns the storage key (stripped if ability-scope) for wire propagation. */
-    public String setShouldAutoYield(String key, boolean autoYield, boolean abilityScope) {
-        String storageKey = abilityScope ? AutoYieldStore.abilitySuffix(key) : key;
-        if (activeModeIsInstall()) {
-            PersistentYieldStore.get().setYield(storageKey, autoYield);
-        } else {
-            activeStore().setYield(activeTier(), storageKey, autoYield);
-        }
-        return storageKey;
-    }
-
     /** Cache-mode write of a wire-received update. Storage key is already at the right shape. */
     public void applyAutoYieldFromWire(String storageKey, boolean active) {
         activeStore().setYield(AutoYieldStore.Tier.GAME, storageKey, active);
@@ -277,7 +249,6 @@ public class YieldController {
     public boolean getDisableAutoYields() {
         return activeStore().isDisabled();
     }
-
     public void setDisableAutoYields(boolean disable) {
         activeStore().setDisabled(disable);
     }

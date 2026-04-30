@@ -563,9 +563,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         }
         Localizer loc = Localizer.getInstance();
         final String message;
-        if (yielding.getMarker() != null) {
-            message = loc.getMessage("lblYieldingUntilPhaseFmt", yielding.getMarker().getPhase().nameForUi);
-        } else if (yielding.isStackYieldActive()) {
+        if (yielding.getAutoPassUntilMarker() != null) {
+            message = loc.getMessage("lblYieldingUntilPhaseFmt", yielding.getAutoPassUntilMarker().getPhase().nameForUi);
+        } else if (yielding.autoPassUntilEOT()) {
             message = loc.getMessage("lblYieldingUntilStackClears");
         } else {
             message = loc.getMessage("lblYieldingUntilEndOfTurn");

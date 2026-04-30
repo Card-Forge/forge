@@ -610,7 +610,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasForg
     @Override
     public void applyYieldUpdate(YieldUpdate update) {
         PlayerView player = getCurrentPlayer();
-        IGameController controller = (player != null) ? getGameController(player) : null;
+        IGameController controller = player != null ? getGameController(player) : null;
         if (controller != null) {
             controller.applyYieldUpdate(update);
         }
@@ -618,7 +618,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasForg
         if (player != null
                 && (update instanceof YieldUpdate.SetMarker
                 || update instanceof YieldUpdate.ClearMarker
-                || update instanceof YieldUpdate.SetStackYield)) {
+                || update instanceof YieldUpdate.StackYield)) {
             refreshYieldUi(player);
         }
     }
@@ -643,16 +643,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasForg
      * during play flow as individual YieldUpdate deltas.
      */
     protected final void seedYieldStateOnHost() {
-        Map<PlayerView, EnumSet<PhaseType>> skipPhases = collectSkipPhases();
-        for (final IGameController c : getOriginalGameControllers()) {
-            if (c instanceof NetGameController nc) {
-                nc.seedYieldStateOnHost(skipPhases);
-            }
-        }
-    }
-
-    private Map<PlayerView, EnumSet<PhaseType>> collectSkipPhases() {
-        Map<PlayerView, EnumSet<PhaseType>> out = new HashMap<>();
+        Map<PlayerView, EnumSet<PhaseType>> skipPhases = new HashMap<>();
         for (PlayerView p : getGameView().getPlayers()) {
             EnumSet<PhaseType> set = EnumSet.noneOf(PhaseType.class);
             for (PhaseType ph : PhaseType.values()) {
@@ -661,10 +652,14 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasForg
                 }
             }
             if (!set.isEmpty()) {
-                out.put(p, set);
+                skipPhases.put(p, set);
             }
         }
-        return out;
+        for (final IGameController c : getOriginalGameControllers()) {
+            if (c instanceof NetGameController nc) {
+                nc.seedYieldStateOnHost(skipPhases);
+            }
+        }
     }
 
 }

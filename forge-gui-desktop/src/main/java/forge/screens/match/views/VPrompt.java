@@ -81,7 +81,7 @@ public class VPrompt implements IVDoc<CPrompt> {
                 CMatchUI ui = controller.getMatchUI();
                 PlayerView local = ui.getCurrentPlayer();
                 IGameController ctrl = local != null ? ui.getGameController(local) : null;
-                if (ctrl != null && ctrl.getYieldController().clearActiveYields(local, ctrl)) {
+                if (ctrl != null && ctrl.getYieldController().cancelGenericYields(local, ctrl)) {
                     ui.refreshYieldUi(local);
                     return;
                 }

@@ -715,7 +715,7 @@
                 <packaging.type>apk</packaging.type>
             </properties>
             <build>
-                <!-- append generated snapshot-version property  -->
+                <!-- append generated snapshot-version property -->
                 <finalName>forge-dev-android-${snapshot-version}</finalName>
                 <plugins>
                     <plugin>

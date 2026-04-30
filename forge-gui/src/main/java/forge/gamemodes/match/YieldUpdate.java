@@ -17,23 +17,23 @@ import java.io.Serializable;
 public sealed interface YieldUpdate extends Serializable
         permits YieldUpdate.SetMarker,
                 YieldUpdate.ClearMarker,
-                YieldUpdate.SetStackYield,
-                YieldUpdate.SetTriggerDecision,
-                YieldUpdate.SetCardAutoYield,
-                YieldUpdate.SetSkipPhase,
+                YieldUpdate.StackYield,
+                YieldUpdate.TriggerDecision,
+                YieldUpdate.CardAutoYield,
+                YieldUpdate.SkipPhase,
                 YieldUpdate.SeedFromClient {
 
     record SetMarker(PlayerView phaseOwner, PhaseType phase) implements YieldUpdate {}
 
     record ClearMarker(PlayerView player) implements YieldUpdate {}
 
-    record SetStackYield(PlayerView player, boolean active) implements YieldUpdate {}
+    record StackYield(PlayerView player, boolean active) implements YieldUpdate {}
 
-    record SetTriggerDecision(int trigId, AutoYieldStore.TriggerDecision decision) implements YieldUpdate {}
+    record TriggerDecision(int trigId, AutoYieldStore.TriggerDecision decision) implements YieldUpdate {}
 
-    record SetCardAutoYield(String cardKey, boolean active, boolean abilityScope) implements YieldUpdate {}
+    record CardAutoYield(String cardKey, boolean active, boolean abilityScope) implements YieldUpdate {}
 
-    record SetSkipPhase(PlayerView turnPlayer, PhaseType phase, boolean skip) implements YieldUpdate {}
+    record SkipPhase(PlayerView turnPlayer, PhaseType phase, boolean skip) implements YieldUpdate {}
 
     /** Atomic snapshot of client's persistent yield state. Sent by client at game start and reconnection only - not host->client. */
     record SeedFromClient(YieldStateSnapshot snapshot) implements YieldUpdate {}
