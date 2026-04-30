@@ -274,7 +274,7 @@ public class ArchipelagoData implements SaveFileContent {
         remainingEquipmentPool.addAll(equipmentNames);
     }
 
-    // Todo: Create a function that returns & rewards the player a random item from the remainingEquipmentPool and then removes it from the list.
+    // Todo: Create a function that returns & rewards the player a random item from the remainingEquipmentPool and then removes it from the list. If no item is left, the player is instead rewarded with gold/shard/pack etc.
 
     // Todo: Create a function that returns a list of equipment for any given shop to sell based on the previously randomized lists.
 
