@@ -66,6 +66,7 @@ import forge.game.spellability.SpellAbilityView;
 import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
 import forge.util.IHasForgeLog;
+import forge.gamemodes.match.YieldController;
 import forge.gamemodes.match.YieldMarker;
 import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.net.NetworkGuiGame;
@@ -1372,7 +1373,8 @@ public final class CMatchUI
             // so the marker can fire (skip-phase pref + marker would skip past).
             label.setEnabled(true);
             label.repaintOnlyThisLabel();
-            controller.sendYieldUpdate(new YieldUpdate.SetMarker(phaseOwner, phase));
+            boolean atOrPast = YieldController.isPriorityAtOrPastMarker(getGameView(), phaseOwner, phase);
+            controller.sendYieldUpdate(new YieldUpdate.SetMarker(phaseOwner, phase, atOrPast));
             // Pass current priority so the marker takes effect immediately.
             controller.selectButtonOk();
         }

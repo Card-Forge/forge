@@ -76,7 +76,7 @@ public class YieldController {
         this.autoPassUntilEOT = active;
     }
 
-    public synchronized void setMarker(PlayerView phaseOwner, PhaseType phase) {
+    public synchronized void setMarker(PlayerView phaseOwner, PhaseType phase, boolean atOrPastAtClick) {
         autoPassUntilEOT = false;
         if (phaseOwner == null || phase == null) {
             clearMarker();
@@ -85,9 +85,8 @@ public class YieldController {
         autoPassUntilMarker = new YieldMarker(phaseOwner, phase);
         // Activating at-or-past target on the owner's current turn must wait for next turn's
         // occurrence; otherwise pastTarget would fire and clear the marker on the same turn.
-        boolean atOrPast = isPriorityAtOrPastMarker(autoPassUntilMarker);
-        hasLeftMarker = !atOrPast;
-        activationOnMarker = atOrPast;
+        hasLeftMarker = !atOrPastAtClick;
+        activationOnMarker = atOrPastAtClick;
     }
 
     public synchronized void clearMarker() {
@@ -96,15 +95,14 @@ public class YieldController {
         activationOnMarker = false;
     }
 
-    private boolean isPriorityAtOrPastMarker(YieldMarker m) {
-        if (m == null || owner == null || owner.getGui() == null) return false;
-        GameView gv = owner.getGui().getGameView();
-        if (gv == null) return false;
+    /** Click-site helper: true when priority is at or past {@code phase} on {@code phaseOwner}'s current turn. */
+    public static boolean isPriorityAtOrPastMarker(GameView gv, PlayerView phaseOwner, PhaseType phase) {
+        if (gv == null || phaseOwner == null || phase == null) return false;
         PlayerView turnPlayer = gv.getPlayerTurn();
-        PhaseType phase = gv.getPhase();
-        if (turnPlayer == null || !turnPlayer.equals(m.getPhaseOwner())) return false;
-        if (phase == null || m.getPhase() == null) return false;
-        return phase == m.getPhase() || phase.isAfter(m.getPhase());
+        PhaseType currentPhase = gv.getPhase();
+        if (turnPlayer == null || !turnPlayer.equals(phaseOwner)) return false;
+        if (currentPhase == null) return false;
+        return currentPhase == phase || currentPhase.isAfter(phase);
     }
 
     /**
@@ -133,7 +131,13 @@ public class YieldController {
             if (gv != null && gv.getStack() != null && !gv.getStack().isEmpty()) return true;
             autoPassUntilStackEmpty = false;
         }
-        checkAndClearMarker(gv);
+        // Priority-loop fires the marker on the game thread; refresh the chevron here
+        // because the EDT phase-event listener may already have observed the marker as
+        // null (race-loss) and skipped its own refresh.
+        if (checkAndClearMarker(gv) && owner != null && owner.getGui() != null) {
+            PlayerView local = owner.getLocalPlayerView();
+            if (local != null) owner.getGui().refreshYieldUi(local);
+        }
         return autoPassUntilMarker != null;
     }
 

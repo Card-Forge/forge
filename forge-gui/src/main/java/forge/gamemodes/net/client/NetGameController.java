@@ -215,7 +215,7 @@ public class NetGameController implements IGameController {
         // Local self-apply for marker/stack-yield user actions that route through
         // sendYieldUpdate. Other cases dispatch via dedicated setters above.
         if (update instanceof YieldUpdate.SetMarker u) {
-            yieldController.setMarker(u.phaseOwner(), u.phase());
+            yieldController.setMarker(u.phaseOwner(), u.phase(), u.atOrPastAtClick());
         } else if (update instanceof YieldUpdate.ClearMarker) {
             yieldController.clearMarker();
         } else if (update instanceof YieldUpdate.StackYield u) {

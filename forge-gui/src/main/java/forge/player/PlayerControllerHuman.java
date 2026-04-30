@@ -3554,7 +3554,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public void applyYieldUpdate(final YieldUpdate update) {
         if (update instanceof YieldUpdate.SetMarker u) {
-            yieldController.setMarker(u.phaseOwner(), u.phase());
+            yieldController.setMarker(u.phaseOwner(), u.phase(), u.atOrPastAtClick());
         } else if (update instanceof YieldUpdate.ClearMarker) {
             yieldController.clearMarker();
         } else if (update instanceof YieldUpdate.StackYield u) {

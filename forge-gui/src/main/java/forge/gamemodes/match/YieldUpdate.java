@@ -23,7 +23,8 @@ public sealed interface YieldUpdate extends Serializable
                 YieldUpdate.SkipPhase,
                 YieldUpdate.SeedFromClient {
 
-    record SetMarker(PlayerView phaseOwner, PhaseType phase) implements YieldUpdate {}
+    /** {@code atOrPastAtClick}: priority was at-or-past target on owner's turn when the user clicked — computed by the UI so client cache and host PCH initialize identically. */
+    record SetMarker(PlayerView phaseOwner, PhaseType phase, boolean atOrPastAtClick) implements YieldUpdate {}
 
     record ClearMarker(PlayerView player) implements YieldUpdate {}
 

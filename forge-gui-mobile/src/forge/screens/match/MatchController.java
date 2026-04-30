@@ -38,6 +38,7 @@ import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.match.YieldController;
 import forge.gamemodes.match.YieldMarker;
 import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.net.NetworkGuiGame;
@@ -601,7 +602,8 @@ public class MatchController extends NetworkGuiGame {
         } else {
             // Setting a marker implies we want to stop here — un-skip the cell so the marker can fire.
             label.setStopAtPhase(true);
-            controller.sendYieldUpdate(new YieldUpdate.SetMarker(phaseOwner, phase));
+            boolean atOrPast = YieldController.isPriorityAtOrPastMarker(getGameView(), phaseOwner, phase);
+            controller.sendYieldUpdate(new YieldUpdate.SetMarker(phaseOwner, phase, atOrPast));
             // Pass current priority so the marker takes effect immediately.
             controller.selectButtonOk();
         }
