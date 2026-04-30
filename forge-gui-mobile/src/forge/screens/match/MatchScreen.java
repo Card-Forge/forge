@@ -629,18 +629,18 @@ public class MatchScreen extends FScreen {
                 }
                 return getActivePrompt().getBtnCancel().trigger(); //trigger Cancel if can't trigger OK
             case Keys.ESCAPE: {
+                boolean cancelEligible = FModel.getPreferences().getPrefBoolean(FPref.UI_ALLOW_ESC_TO_END_TURN) || Forge.hasGamepad()
+                        || !getActivePrompt().getBtnCancel().getText().equals(Forge.getLocalizer().getMessage("lblEndTurn"));
+                if (cancelEligible) {
+                    return getActivePrompt().getBtnCancel().trigger();
+                }
                 PlayerView local = MatchController.instance.getCurrentPlayer();
                 IGameController ctrl = local != null ? MatchController.instance.getGameController(local) : null;
                 if (ctrl != null && ctrl.getYieldController().cancelGenericYields(local, ctrl)) {
                     MatchController.instance.refreshYieldUi(local);
                     return true;
                 }
-                if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ALLOW_ESC_TO_END_TURN) && !Forge.hasGamepad()) {//bypass check
-                    if (getActivePrompt().getBtnCancel().getText().equals(Forge.getLocalizer().getMessage("lblEndTurn"))) {
-                        return false;
-                    }
-                }
-                return getActivePrompt().getBtnCancel().trigger(); //otherwise trigger Cancel
+                return false;
             }
             case Keys.BACK:
                 return true; //suppress Back button so it's not bumped when trying to press OK or Cancel buttons
