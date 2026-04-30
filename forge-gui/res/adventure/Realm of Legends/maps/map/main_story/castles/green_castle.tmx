@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="89">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="94">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -94,6 +94,8 @@
     <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Crumbling Necropolis&quot;, &quot;Kederekt Parasite&quot;, &quot;Crawlspace&quot;, &quot;Anvil of Bogardan&quot;
 ]}</property>
     <property name="enemy" value="Nekusar"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -110,6 +112,8 @@
     <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Arcane Sanctum&quot;, &quot;Interface Ace&quot;, &quot;Experimental Pilot&quot;, &quot;Deathless Pilot&quot;, &quot;Aradara Express&quot;
 ]}</property>
     <property name="enemy" value="Sydri"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -123,9 +127,11 @@
     ]
    }
 ]</property>
-    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Mystic Monastery&quot;, &quot;Guide of Souls&quot;, &quot;Era of Innovation&quot;, &quot;Phyrexian Ironworks&quot;, &quot;Fabrication Module&quot;
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Mystic Monastery&quot;, &quot;Guide of Souls&quot;, &quot;Era of Innovation&quot;, &quot;Phyrexian Ironworks&quot;
 ]}</property>
     <property name="enemy" value="Satya"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -139,9 +145,11 @@
     ]
    }
 ]</property>
-    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Sacred Peaks&quot;, &quot;Contaminated Aquifer&quot;, &quot;Tidehollow Strix&quot;, &quot;Bladehold War-Whip&quot;
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Command Tower&quot;, &quot;Tidehollow Strix&quot;, &quot;Bladehold War-Whip&quot;
 ]}</property>
     <property name="enemy" value="Akiri and Silas"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -158,6 +166,8 @@
     <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Nomad Outpost&quot;, &quot;Sword of the Chosen&quot;, &quot;Helm of the Host&quot; , &quot;Aether Membrane&quot;, &quot;Souls of the Faultless&quot;
 ]}</property>
     <property name="enemy" value="Dihada"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -212,6 +222,96 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
     <property name="mythicShopList" value=""/>
     <property name="rareShopList" value=""/>
     <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="89" template="../../../../../common/maps/obj/enemy.tx" x="78" y="602.5">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Crumbling Necropolis&quot;, &quot;Kederekt Parasite&quot;, &quot;Anvil of Bogardan&quot;
+]}</property>
+    <property name="enemy" value="Nekusar"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="90" template="../../../../../common/maps/obj/enemy.tx" x="97" y="408.75">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Nomad Outpost&quot;, &quot;Sword of the Chosen&quot;, &quot;Aether Membrane&quot;, &quot;Souls of the Faultless&quot;
+]}</property>
+    <property name="enemy" value="Dihada"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="91" template="../../../../../common/maps/obj/enemy.tx" x="365.5" y="224.25">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Sacred Peaks&quot;, &quot;Contaminated Aquifer&quot;, &quot;Tidehollow Strix&quot;, &quot;Bladehold War-Whip&quot;
+]}</property>
+    <property name="enemy" value="Akiri and Silas"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../../common/maps/obj/enemy.tx" x="662.75" y="408.25">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Mystic Monastery&quot;, &quot;Guide of Souls&quot;, &quot;Era of Innovation&quot;
+]}</property>
+    <property name="enemy" value="Satya"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="93" template="../../../../../common/maps/obj/enemy.tx" x="658.25" y="599.75">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Arcane Sanctum&quot;, &quot;Interface Ace&quot;, &quot;Experimental Pilot&quot;
+]}</property>
+    <property name="enemy" value="Sydri"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
  </objectgroup>

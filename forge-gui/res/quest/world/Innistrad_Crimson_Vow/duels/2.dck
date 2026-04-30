@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Carnage
+Title=Carnage
+Icon=Carnage.jpg
+Difficulty=Easy
+Description=./Standard/Innistrad_Crimson_Vow/Dominik_Konieczny_-_Rakdos_Vampires_(Standard,_#1236785).dck
+Deck Type=constructed
+
+[Main]
+1 Henrika Domnathi
+1 Bloodvial Purveyor
+2 Valentin, Dean of the Vein
+2 Anje, Maid of Dishonor
+3 Voldaren Bloodcaster
+3 Florian, Voldaren Scion
+4 Vampire Socialite
+4 Bloodtithe Harvester
+4 Voldaren Epicure
+4 Falkenrath Pit Fighter
+3 Infernal Grasp
+4 Play with Fire
+1 Agadeem's Awakening
+2 Shatterskull Smashing
+1 Sorin the Mirthless
+2 Den of the Bugbear
+2 Hive of the Eye Tyrant
+2 Mountain
+3 Swamp
+4 Voldaren Estate
+4 Haunted Ridge
+4 Blightstep Pathway
+[Sideboard]
+1 Gift of Fangs
+1 Sorin the Mirthless
+1 Graveyard Trespasser
+1 Falkenrath Forebear
+1 Inscription of Ruin
+2 Power Word Kill
+2 Go Blank
+3 Duress
+3 Vampires' Vengeance

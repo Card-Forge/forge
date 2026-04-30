@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Sabertooth
+Title=Sabertooth
+Icon=Sabertooth.jpg
+Difficulty=Easy
+Description=Zendikar/2010_TCGplayer.com_$5k_Series_-_Atlanta/Derek_Huang_-_Vala_Ramp_(Standard,_#2773).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodbraid Elf
+4 Goblin Ruinblaster
+3 Oracle of Mul Daya
+4 Siege-Gang Commander
+4 Expedition Map
+4 Harrow
+3 Lavaball Trap
+4 Rampant Growth
+4 Khalni Heart Expedition
+3 Forest
+2 Jund Panorama
+12 Mountain
+1 Naya Panorama
+4 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+2 Bogardan Hellkite
+4 Grazing Gladehart
+4 Magma Spray
+2 Pyroclasm
+2 Relic of Progenitus

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="78">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="79">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -8,17 +8,17 @@
  <tileset firstgid="11905" source="../../../../common/maps/tileset/buildings-nocollide.tsx"/>
  <layer id="1" name="Background" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJztmFsOgjAQRRv/QJfgGvxTjAthH/jaqA9cgAuxE5jYIH1R2inSj5smpM2c3pk2dOqMsTrpb7TlKiLgkHG9uJ6R7QNiXXPGznkzyvhg3o7r0s57BOIDz+6C+vhwDzhnz3XKw/PJ4lb824GAreuLKme4j8XSXOJ6m3VdmfK5xHCVrPbEHFPygXR3CzWf7s6g5tOdS2o+kzMfgmO9ahSSTxZziv4lvsTng8/1jMzdP9R78+urakz+qWvS1MOp++cr7lj1R+kdCN6ORcR8un98aj54Q8b8D23a37BRN0ZpEAPeYsf2zY19DXFU1aCNyoF8Iif2BXQ9DhdhHOg9gC82/QfsC8BaZB2bD+MM6Sndsm9PBfPuo78ytLYrTzx9PvjIy1z4QuUpJn0AP0EISQ==
+   eJztmGkOgyAQhUn/aXuEXqO16UG8h90u2sUep0x0IjGyC4OVHy8kBjIfjyXy2oKxNutvdOCqEuCQcX25PonNA2o9SsZuZdfK+KDfkeve93tH4gPPXoKm+HAO2OfEdS3j88nqNvzbmYBt7ItqzXAem625xPE248Yy5fOp4SvZ3hPXmJIPpLtbqPl0dwY1n+5cUvOZnPkYHPtdp5h8sppL9C/zZb4QfL5nZO3+qXxVtdR8Kfun8070cOn+hao71/6j9A4Eb8cqYT7dPz41H7whU/6HNs03bDSuURvUgLfYpX9zY64htqo9aKPakU/kxFxAl3H4COtA9gC+2OQPmAvAWGSdmw/ruGRKz2LIVHDdQ+Qrrnu7CcQz5UOIdVkLX6x1Skk/IDcHRA==
   </data>
  </layer>
  <layer id="2" name="Ground" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer id="6" name="Ground2" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMAqoC2bxUFfdKKAeoHWYH+GE0Ieg9HEofYyTOP3pmgwMGUB8XZf6bsMFYoH2xWkSp7YZqK4FiG/r0NZNMPCIkYGhEmhfFQE7xSTo4x5ygcggcp85L6bYlgFy31YJSNhsGyThgy1sQGC2OgPDHHX6ugUEcLkHHWwHum2HOuF8Sax5owACaowhdDwanWA8MO4ZSiDeGDsfRtfQMQyHalsrAUf6G2lgJo74o6T+mEHDNDENRzmLS3yggIwAhJYTGFh3jALagNH4HQWjYBSgAwCLIyJj
+   eJxjYBgFo2AUjIJRMAqoC2bxUFcdNvBUk4HhmSb5+mkJbuswMDBqMTAwaQ20SzABJWFODDjCCaEPQenjUPoYJ3H604FxmgHE13Wp7zZcIBZoXxyRaakZqK5FExLH9ACPGBkYKoH2VRGwU0yCPu4hF4gMIveZ82KKbRkg922VgITNtkESPtjCBgRmqzMwzFGnr1tAAJd70MF2oNt2qBPOl8SaN1KBHlo5XWMMoePR6ARj+rlpqIJ4Y+x8GF1DxzCkdb1PK5CAI/2NNDATR/xRUn/MoGGamIajnMUlPlBARgBCywkMrDtGAW3AaPyOglEwCtABAI8fJhU=
   </data>
  </layer>
  <layer id="3" name="Walls" width="40" height="40">
@@ -31,7 +31,7 @@
  </layer>
  <layer id="5" name="Overlay" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt1E0KgzAQBeDXZVYeQwPFjfdrewvdt5dol6X7/oKuRb1Ct50SRCtd2EIYhffBkElWL4QJQERERPSb51I7wTj7CDhEri8XrvqGZ1cL3Kzrz7JerJ9c2wTYJZ9nR9PledfJfM9MpO0eAo+w29cyJ42nWZmSXO5Y2PF9qz/Hqfyd2cT+zzZfbLST6Pr3fYeq2F9GorlYBcBaahNoJyEf+L5ENDcvC4Av1w==
+   eJzt1DEKgzAUBuC/o4seQwPSxfvZ3qLd7SXsWLpXrWDn4h26mhKCqXSwhfAU/g8eecn0h/ACEBEREf3mlUonmKdMgHNi+ufGlGt6ViugUaa/6bVSfnIVGXDKPs8uwZjnXdfge2YiafcYaONx3+k5eXialSVx7zmnt9w5Pui/87iw/9PmC0PpJLL+fd+pfusvI9Fa5BGw07WPpJOQD3xfIlqbAYHOL6A=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -145,7 +145,7 @@
     <property name="uncommonShopList" value=""/>
    </properties>
   </object>
-  <object id="69" template="../../../../common/maps/obj/shop.tx" x="464" y="337">
+  <object id="69" template="../../../../common/maps/obj/shop.tx" x="463" y="341.5">
    <properties>
     <property name="commonShopList" value="RedBoosterPackShop"/>
     <property name="mythicShopList" value=""/>
@@ -161,7 +161,7 @@
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
-  <object id="71" template="../../../../common/maps/obj/RotatingShop.tx" x="528.424" y="198.788">
+  <object id="71" template="../../../../common/maps/obj/RotatingShop.tx" x="415.924" y="373.288">
    <properties>
     <property name="rotation" value="Red1,Red2,Red3,Red4,Red5,Red6"/>
     <property name="signYOffset" type="float" value="0"/>
@@ -310,6 +310,46 @@
                 {
 					&quot;name&quot;: &quot;Doesn't sound like that's for me.&quot;,
 					&quot;text&quot;: &quot;'Leave this place then. We will have to find another way to restore our honor.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="78" template="../../../../common/maps/obj/dialog.tx" x="526.5" y="198.5" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;The heat is intense as you approach the massive lava-heated forge. A giant hammering away at a huge sword calls out. 'I need the strongest warrior in the land. If that's not you, leave.'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;The three great threats are ended.&quot;,
+                    &quot;text&quot;: &quot;'I have to say, little one, you've impressed me! You've more than earned these rewards, and the gratitude of all the mountainfolk.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+		      {&quot;type&quot;: &quot;item&quot;, &quot;count&quot;: 1, &quot;itemName&quot;: &quot;War Helm&quot;},
+                        {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Gamble&quot;},
+                        {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Underworld Breach&quot;}
+                      ]
+                    },
+					{&quot;addMapReputation&quot;: 10}  ],
+					&quot;condition&quot;:[{&quot;item&quot;: &quot;Courier's Boots&quot;}, {&quot;item&quot;: &quot;Outlaw's Hat&quot;}, {&quot;item&quot;: &quot;Armor of Urami&quot;}], 
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;Strongest in the land, that's me.&quot;,
+					&quot;text&quot;: &quot;'These mountains are being ravaged by legends of terrifying strength. If you can defeat the three strongest, I will reward you three truly legendary treasures.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;Which three are we speaking of?&quot;,
+					&quot;text&quot;: &quot;'The threefold priestess Kaalia. The mob boss Krenko. The hellspur gang leader, Akul. Show me the relics they once carried and you will get my finest spells and relics.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;I will see what I can do.&quot; } ]
+					 }]
+				},
+                {
+					&quot;name&quot;: &quot;I'm strong but not the strongest.&quot;,
+					&quot;text&quot;: &quot;'Go then. If your confidence improves, come back.'&quot;,
 					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
 				}
 			]

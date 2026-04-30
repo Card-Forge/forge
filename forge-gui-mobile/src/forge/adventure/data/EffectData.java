@@ -14,11 +14,13 @@ import java.util.stream.Collectors;
 
 public class EffectData implements Serializable {
     public String name = null;           //Effect name. Can be checked for.
+
     //Duel effects.
     public int lifeModifier = 0;         //Amount to add to starting Life.
     public int changeStartCards = 0;     //Amount to add to starting hand size.
     public String[] startBattleWithCard; //Cards that start in the Battlefield.
     public String[] startBattleWithCardInCommandZone; //Cards that start in the Command Zone of the Battlefield.
+
     //Map only effects.
     public boolean colorView = false;    //Allows to display enemy colors on the map.
     public float moveSpeed = 1.0f;       //Change of movement speed. Map only.

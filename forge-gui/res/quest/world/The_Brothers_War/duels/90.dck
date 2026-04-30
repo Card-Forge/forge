@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Legolas
+Title=Legolas
+Icon=Legolas.jpg
+Difficulty=Very Hard
+Description=./Modern/The_Brothers_War/Hori_Yuta_-_Hammer_Time_(Modern,_#1544915)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Gingerbrute
+1 The Reality Chip
+1 Steel Seraph
+2 Giver of Runes
+3 Ornithopter
+4 Stoneforge Mystic
+4 Puresteel Paladin
+4 Esper Sentinel
+1 Kaldra Compleat
+1 Shadowspear
+3 Springleaf Drum
+4 Colossus Hammer
+2 Blacksmith's Skill
+2 Spell Pierce
+1 Steelshaper's Gift
+4 Sigarda's Aid
+4 Urza's Saga
+1 Silent Clearing
+1 Eiganjo, Seat of the Empire
+1 Arid Mesa
+2 Seachrome Coast
+2 Hallowed Fountain
+2 Windswept Heath
+3 Snow-Covered Plains
+3 Flooded Strand
+3 Inkmoth Nexus
+[Sideboard]
+1 Pithing Needle
+1 Metallic Rebuke
+1 Mana Leak
+1 Hallowed Moonlight
+1 Dismember
+1 Flusterstorm
+1 Teferi, Time Raveler
+2 March of Otherworldly Light
+2 Containment Priest
+2 Lavinia, Azorius Renegade
+2 Sanctifier en-Vec

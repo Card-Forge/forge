@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Brother Voodoo
+Title=Brother Voodoo
+Icon=Brother Voodoo.jpg
+Difficulty=Very Hard
+Description=./Modern/Duskmourn_House_of_Horror/Maxx_Kominowski_-_Dimir_Murktide_(Modern,_#2250180).dck
+Deck Type=constructed
+
+[Main]
+4 Abhorrent Oculus
+2 Harbinger of the Seas
+2 Murktide Regent
+2 Orcish Bowmasters
+4 Psychic Frog
+4 Consider
+4 Counterspell
+4 Fatal Push
+3 Force of Negation
+2 Sink into Stupor
+3 Spell Snare
+4 Thought Scour
+4 Unearth
+2 Bloodstained Mire
+2 Flooded Strand
+2 Island
+1 Otawara, Soaring City
+4 Polluted Delta
+1 Scalding Tarn
+1 Swamp
+2 Undercity Sewers
+3 Watery Grave
+[Sideboard]
+4 Consign to Memory
+1 Force of Negation
+3 Graveyard Trespasser
+1 Harbinger of the Seas
+2 Mystical Dispute
+3 Thoughtseize
+2 Toxic Deluge

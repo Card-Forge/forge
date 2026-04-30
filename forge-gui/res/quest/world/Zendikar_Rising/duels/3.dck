@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Dr Strangelove
+Title=Dr Strangelove
+Icon=Dr Strangelove.jpg
+Difficulty=Easy
+Description=./Standard/Zendikar_Rising/Adam_Lorincz_-_Naya_Control_(Standard,_#1057617).dck
+Deck Type=constructed
+
+[Main]
+2 Tangled Florahedron
+3 Yasharn, Implacable Earth
+3 Elder Gargaroth
+4 Yidaro, Wandering Monster
+2 Mazemind Tome
+3 Spikefield Hazard
+3 Scorching Dragonfire
+4 Revitalize
+2 Ondu Inversion
+2 Turntimber Symbiosis
+2 Shatterskull Smashing
+2 Bala Ged Recovery
+4 Cultivate
+4 Shatter the Sky
+3 Elspeth Conquers Death
+1 Castle Ardenvale
+1 Cragcrown Pathway
+1 Crawling Barrens
+1 Temple of Plenty
+2 Temple of Abandon
+2 Mountain
+3 Plains
+3 Needleverge Pathway
+3 Forest
+[Sideboard]
+1 Cragplate Baloth
+1 Kaheera, the Orphanguard
+2 Questing Beast
+2 Thrashing Brontodon
+3 Cinderclasm
+3 Glass Casket
+3 Valakut Exploration

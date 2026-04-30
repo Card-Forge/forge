@@ -228,12 +228,7 @@ public class CardStorageReader {
         // Report relevant numbers to progress monitor model.
 
         final Set<CardRules> result;
-        if (loadingTokens) {
-            result = new TreeSet<>(Comparator.comparing(CardRules::getNormalizedName, String.CASE_INSENSITIVE_ORDER));
-        }
-        else {
-            result = new TreeSet<>(Comparator.comparing(CardRules::getName, String.CASE_INSENSITIVE_ORDER));
-        }
+        result = new TreeSet<>(Comparator.comparing(CardRules::getNormalizedName, String.CASE_INSENSITIVE_ORDER));
 
         if (loadCardsLazily) {
             return result;

@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Oreius
+Title=Oreius
+Icon=Oreius.jpg
+Difficulty=Medium
+Description=Rise_of_the_Eldrazi/Montreal_Comicon_Standard/Alan_Ngo_-_UW_Control_(Standard,_#1592).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Baneslayer Angel
+4 Knight of the White Orchid
+4 Fieldmist Borderpost
+4 Negate
+3 Path to Exile
+3 Day of Judgment
+2 Martial Coup
+2 Mind Spring
+2 Oblivion Ring
+4 Spreading Seas
+2 Elspeth, Knight-Errant
+3 Jace, the Mind Sculptor
+4 Celestial Colonnade
+4 Glacial Fortress
+6 Island
+7 Plains
+1 Tectonic Edge
+[Sideboard]
+1 Celestial Purge
+4 Flashfreeze
+2 Gideon Jura
+4 Kor Firewalker
+3 Luminarch Ascension

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Akongo
+Title=Akongo
+Icon=Akongo.jpg
+Difficulty=Easy
+Description=./Standard/The_Brothers_War/Lautaro_Kadar_-_Bant_Aggro_(Standard,_#1524496).dck
+Deck Type=constructed
+
+[Main]
+2 Zephyr Sentinel
+3 King Darien XLVIII
+3 Lagrella, the Magpie
+3 Yotian Frontliner
+4 Recruitment Officer
+4 Brutal Cathar
+4 Valiant Veteran
+4 Resolute Reinforcements
+4 Harbin, Vanguard Aviator
+4 Siege Veteran
+3 Kayla's Reconstruction
+1 Eiganjo, Seat of the Empire
+4 Fortified Beachhead
+4 Secluded Courtyard
+4 Brushland
+4 Adarkar Wastes
+5 Plains
+[Sideboard]
+1 Knockout Blow
+1 Sungold Sentinel
+1 Thalia, Guardian of Thraben
+2 Steel Seraph
+2 Dennick, Pious Apprentice
+2 Spell Pierce
+3 Cathar Commando
+3 Negate

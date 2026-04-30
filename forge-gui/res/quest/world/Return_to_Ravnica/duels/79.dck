@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Sideshow Bob
+Title=Sideshow Bob
+Icon=Sideshow Bob.jpg
+Difficulty=Hard
+Description=../Modern/Return_to_Ravnica/Modern_Daily_#8842412/ACG88_-_GW_Aggro_(Modern,_#329789).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Dryad Arbor
+4 Gladecover Scout
+4 Kor Spiritdancer
+4 Slippery Bogle
+3 Path to Exile
+4 Daybreak Coronet
+4 Ethereal Armor
+4 Hyena Umbra
+2 Keen Sense
+4 Rancor
+3 Spider Umbra
+2 Spirit Link
+3 Spirit Mantle
+1 Flooded Strand
+1 Forest
+4 Horizon Canopy
+2 Plains
+3 Razorverge Thicket
+3 Temple Garden
+4 Windswept Heath
+[Sideboard]
+2 Dismember
+4 Leyline of Sanctity
+2 Rest in Peace
+3 Stony Silence
+3 Suppression Field

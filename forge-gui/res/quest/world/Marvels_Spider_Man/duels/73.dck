@@ -1,0 +1,20 @@
+[duel]
+[metadata]
+Name=Ghost Council
+Title=Ghost Council
+Icon=Ghost Council.jpg
+Difficulty=Very Hard
+Description=./Modern/Marvels_Spider_Man/Magicmalle_-_Acererak_the_Archlich_+_Heartless_Summoning_(Modern,_#2671117).dck
+Deck Type=constructed
+
+[Main]
+1 Acererak the Archlich
+2 Arachne, Psionic Weaver
+4 Myr Retriever
+4 Guide of Souls
+3 Relic of Legends
+4 Heartless Summoning
+2 The Sibsig Ceremony
+4 Tinybones Joins Up
+[Sideboard]
+1 Teshar, Ancestor's Apostle

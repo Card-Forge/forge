@@ -141,6 +141,10 @@ public class VHand implements IVDoc<CHand> {
         return VHand.this.hand;
     }
 
+    public PlayerView getPlayer() {
+        return player;
+    }
+
     private boolean isTabVisible() {
         return parentCell != null && parentCell.getSelected() == this;
     }
@@ -155,13 +159,12 @@ public class VHand implements IVDoc<CHand> {
         String label = Localizer.getInstance().getMessage("lblPlayerHand", player.getName());
 
         final int delta = count - baseCount;
-        if (delta > 0
-                && FModel.getPreferences().getPrefBoolean(FPref.UI_ZONE_TAB_NEW_COUNT)) {
-            label += " (+" + delta + " new)";
+        if (delta != 0 && FModel.getPreferences().getPrefBoolean(FPref.UI_ZONE_TAB_NEW_COUNT)) {
+            label += " (" + delta + " new)";
         }
 
         tab.setText(label);
-        tab.setToolTipText(tab.getText());
+        tab.setToolTipText(label);
     }
 
 }

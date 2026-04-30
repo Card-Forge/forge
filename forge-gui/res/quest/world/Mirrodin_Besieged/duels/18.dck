@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Radioactive Man
+Title=Radioactive Man
+Icon=Radioactive Man.jpg
+Difficulty=Easy
+Description=Mirrodin_Besieged/FNM_Roanoke/Chris_Arnold_-_U-G_Ramp_(Standard,_#9871).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Acidic Slime
+4 Frost Titan
+4 Joraga Treespeaker
+4 Overgrown Battlement
+4 Viridian Emissary
+2 Wurmcoil Engine
+4 Mana Leak
+3 Summoning Trap
+4 Explore
+3 Jace, the Mind Sculptor
+8 Forest
+8 Island
+4 Misty Rainforest
+4 Tectonic Edge
+[Sideboard]
+2 All Is Dust
+1 Gaea's Revenge
+4 Hornet Sting
+4 Obstinate Baloth
+2 Volition Reins

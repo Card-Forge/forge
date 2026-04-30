@@ -2,8 +2,8 @@ Name:Molten Sentry
 ManaCost:3 R
 Types:Creature Elemental
 PT:*/*
-K:ETBReplacement:Other:TrigFlip
-SVar:TrigFlip:DB$ FlipACoin | NoCall$ True | HeadsSubAbility$ DBAttacker | TailsSubAbility$ DBDefender | SpellDescription$ As CARDNAME enters, flip a coin. If the coin comes up heads, CARDNAME enters as a 5/2 creature with haste. If it comes up tails, CARDNAME enters as a 2/5 creature with defender.
-SVar:DBAttacker:DB$ Animate | Defined$ Self | Power$ 5 | Toughness$ 2 | Types$ Creature | Keywords$ Haste | Duration$ Permanent
-SVar:DBDefender:DB$ Animate | Defined$ Self | Power$ 2 | Toughness$ 5 | Types$ Creature | Keywords$ Defender | Duration$ Permanent
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | Layer$ Copy | ReplacementResult$ Updated | ReplaceWith$ TrigFlip | Description$ As CARDNAME enters, flip a coin. If the coin comes up heads, CARDNAME enters as a 5/2 creature with haste. If it comes up tails, CARDNAME enters as a 2/5 creature with defender.
+SVar:TrigFlip:DB$ FlipCoin | NoCall$ True | HeadsSubAbility$ DBAttacker | TailsSubAbility$ DBDefender
+SVar:DBAttacker:DB$ Clone | Defined$ Self | SetPower$ 5 | SetToughness$ 2 | AddTypes$ Creature | AddKeywords$ Haste
+SVar:DBDefender:DB$ Clone | Defined$ Self | SetPower$ 2 | SetToughness$ 5 | AddTypes$ Creature | AddKeywords$ Defender
 Oracle:As Molten Sentry enters, flip a coin. If the coin comes up heads, Molten Sentry enters as a 5/2 creature with haste. If it comes up tails, Molten Sentry enters as a 2/5 creature with defender.

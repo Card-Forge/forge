@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=WitchDoctor
+Title=WitchDoctor
+Icon=WitchDoctor.jpg
+Difficulty=Medium
+Description=Khans_of_Tarkir/2014_Standard_State_Championships_-_Idaho/Nick_Crabbs_-_Mardu_Midrange_(Standard,_#88525).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Brimaz, King of Oreskos
+4 Butcher of the Horde
+4 Goblin Rabblemaster
+3 Stormbreath Dragon
+2 Wingmate Roc
+2 Bile Blight
+3 Hero's Downfall
+3 Lightning Strike
+3 Sign in Blood
+4 Thoughtseize
+2 Elspeth, Sun's Champion
+2 Sorin, Solemn Visitor
+2 Battlefield Forge
+3 Bloodstained Mire
+3 Caves of Koilos
+1 Mana Confluence
+2 Mountain
+3 Plains
+3 Swamp
+2 Temple of Malice
+2 Temple of Silence
+2 Temple of Triumph
+2 Urborg, Tomb of Yawgmoth
+[Sideboard]
+3 Anger of the Gods
+3 Banishing Light
+3 Despise
+2 Magma Spray
+2 Tormod's Crypt

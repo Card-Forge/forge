@@ -100,6 +100,13 @@ public class AlterAttributeAi extends SpellAbilityAi {
                             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                         }
                         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                    case "Prepare":
+                    case "Prepared":
+                        // AI should not try to Prepare creatures that are already Prepared
+                        if (c.isPrepared()) {
+                            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+                        }
+                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                 }
             }
         }

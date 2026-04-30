@@ -6,9 +6,9 @@
  <properties>
   <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [&quot;Orcish Oriflamme|LEA&quot;]}" />
  </properties>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
- <tileset firstgid="11905" source="../../../../../../common/maps/tileset/dungeon/DarkAbbeyTiles.tsx" />
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/DarkAbbeyTiles.tsx" />
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJybxsnAMG0Uj+JRPIpH8SgexSMCAwDOljzS
@@ -28,19 +28,19 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="192" y="268" width="48" height="16">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="268" width="48" height="16">
    <properties>
     <property name="teleport" value="../Shandalar Old Border/maps/map/vampirecastle/vampirecastle_1.tmx" />
    </properties>
   </object>
-  <object id="67" template="../../../../../../common/maps/obj/enemy.tx" x="160" y="140">
+  <object id="67" template="../../../../common/maps/obj/enemy.tx" x="160" y="140">
    <properties>
     <property name="enemy" value="Nightstalker" />
     <property name="threatRange" type="int" value="40" />
    </properties>
   </object>
-  <object id="64" template="../../../../../../common/maps/obj/manashards.tx" x="154.394" y="169.462" />
-  <object id="65" template="../../../../../../common/maps/obj/treasure.tx" x="208.637" y="23.8091">
+  <object id="64" template="../../../../common/maps/obj/manashards.tx" x="154.394" y="169.462" />
+  <object id="65" template="../../../../common/maps/obj/treasure.tx" x="208.637" y="23.8091">
    <properties>
     <property name="reward">[
   {
@@ -118,7 +118,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="66" template="../../../../../../common/maps/obj/booster.tx" x="197.253" y="42.225">
+  <object id="66" template="../../../../common/maps/obj/booster.tx" x="197.253" y="42.225">
    <properties>
     <property name="reward">[
 	{
@@ -208,7 +208,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="68" template="../../../../../../common/maps/obj/enemy.tx" x="193.5" y="80">
+  <object id="68" template="../../../../common/maps/obj/enemy.tx" x="193.5" y="80">
    <properties>
     <property name="enemy" value="Swamp Queen Tojira" />
     <property name="speedModifier" type="float" value="20" />

@@ -1,0 +1,10 @@
+Name:Ribtruss Roaster
+ManaCost:4 G
+Types:Creature Troll Druid
+PT:3/3
+K:Devour:1
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, create a number of 1/1 black and green Pest creature tokens equal to the number of +1/+1 counters on this creature. They have "When this token dies, you gain 1 life."
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ bg_1_1_pest_lifegain | TokenOwner$ You
+SVar:X:Count$CardCounters.P1P1
+DeckHas:Ability$Counters|Token
+Oracle:Devour 1 (As this creature enters, you may sacrifice any number of creatures. This creature enters with that many +1/+1 counters on it.)\nAt the beginning of your end step, create a number of 1/1 black and green Pest creature tokens equal to the number of +1/+1 counters on this creature. They have "When this token dies, you gain 1 life."

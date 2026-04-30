@@ -1,0 +1,6 @@
+Name:Heated Argument
+ManaCost:4 R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature | NumDmg$ 6 | SubAbility$ DBDamage | SpellDescription$ CARDNAME deals 6 damage to target creature. You may exile a card from your graveyard. If you do, CARDNAME also deals 2 damage to that creature's controller.
+SVar:DBDamage:DB$ DealDamage | UnlessCost$ ExileFromGrave<1/Card> | UnlessSwitched$ True | UnlessPayer$ You | Defined$ TargetedController | NumDmg$ 2
+Oracle:Heated Argument deals 6 damage to target creature. You may exile a card from your graveyard. If you do, Heated Argument also deals 2 damage to that creature's controller.

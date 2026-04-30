@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Silver Surfer
+Title=Silver Surfer
+Icon=Silver Surfer.jpg
+Difficulty=Easy
+Description=Scars_of_Mirrodin/States-Champs_Alberta/Chris_Gagnon_-_Eldrazi_Green_(Standard,_#7729).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Emrakul, the Aeons Torn
+4 Joraga Treespeaker
+1 Kozilek, Butcher of Truth
+4 Overgrown Battlement
+4 Primeval Titan
+1 Ulamog, the Infinite Gyre
+3 Wurmcoil Engine
+4 Summoning Trap
+4 All Is Dust
+2 Cultivate
+2 Explore
+4 Growth Spasm
+4 Eldrazi Temple
+1 Eye of Ugin
+12 Forest
+4 Khalni Garden
+1 Mystifying Maze
+4 Tectonic Edge
+[Sideboard]
+3 Acidic Slime
+3 Brittle Effigy
+4 Obstinate Baloth
+2 Pelakka Wurm
+3 Ratchet Bomb

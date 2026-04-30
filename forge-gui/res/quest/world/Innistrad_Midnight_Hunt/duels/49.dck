@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=Brother Voodoo
+Title=Brother Voodoo
+Icon=Brother Voodoo.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Midnight_Hunt/AliEldrazi_-_Mono_Green_(Standard,_#1221222).dck
+Deck Type=constructed
+
+[Main]
+2 Outland Liberator
+4 Briarbridge Tracker
+4 Werewolf Pack Leader
+4 Old-Growth Troll
+4 Jaspera Sentinel
+4 Esika's Chariot
+4 Blizzard Brawl
+4 Ranger Class
+4 Wrenn and Seven
+4 Lair of the Hydra
+4 Faceless Haven
+18 Snow-Covered Forest
+[Sideboard]

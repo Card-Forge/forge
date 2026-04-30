@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Ukulunkulu
+Title=Ukulunkulu
+Icon=Ukulunkulu.jpg
+Difficulty=Easy
+Description=./Standard/Outlaws_of_Thunder_Junction/Daniel_Spiegel_-_Mono-Red_Aggro_(Standard,_#2075529).dck
+Deck Type=constructed
+
+[Main]
+4 Fugitive Codebreaker
+4 Kumano Faces Kakkazan
+2 Squee, Dubious Monarch
+4 Monastery Swiftspear
+4 Slickshot Show-Off
+3 Phoenix Chick
+3 Urabrask's Forge
+4 Lightning Strike
+2 Witchstalker Frenzy
+4 Play with Fire
+4 Monstrous Rage
+1 Chandra, Dressed to Kill
+18 Mountain
+1 Sokenzan, Crucible of Defiance
+2 Mishra's Foundry
+[Sideboard]
+2 Strangle
+3 End the Festivities
+3 Lithomantic Barrage
+2 Koth, Fire of Resistance
+2 Obliterating Bolt
+2 Witchstalker Frenzy
+1 Urabrask's Forge

@@ -3,8 +3,8 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx" />
  </editorsettings>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx" />
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJyL5mVg2MVDXxwFtFMWSNMbSPOM2jtq76i9o/aO2jtqL6q9e4G4npt+dtYC7doDtHMnneteEN4NxAD/oTSv
@@ -34,13 +34,13 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="208.667" y="225.21">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="208.667" y="225.21">
    <properties>
     <property name="direction" value="up" />
     <property name="teleport" value="../Shandalar Old Border/maps/map/djinnpalace/djinnpalace_2.tmx" />
    </properties>
   </object>
-  <object id="73" template="../../../../../../common/maps/obj/enemy.tx" x="206.712" y="152.781">
+  <object id="73" template="../../../../common/maps/obj/enemy.tx" x="206.712" y="152.781">
    <properties>
     <property name="effect">{ "startBattleWithCard": [ "Island|6ED", "Swamp|6ED", "Fledgling Djinn|WTH" ] }</property>
     <property name="enemy" value="Mighty Djinn" />
@@ -48,7 +48,7 @@
     <property name="threatRange" type="int" value="100" />
    <property name="speedModifier" type="float" value="20" /></properties>
   </object>
-  <object id="74" template="../../../../../../common/maps/obj/treasure.tx" x="206.037" y="135.253"><properties><property name="reward">[
+  <object id="74" template="../../../../common/maps/obj/treasure.tx" x="206.037" y="135.253"><properties><property name="reward">[
   {
     "type": "card",
     "sourceDeck": "decks/rewards/tier-S.dck",
@@ -92,7 +92,7 @@
     "addMaxCount": 3
   }
 ]</property></properties></object>
-  <object id="75" template="../../../../../../common/maps/obj/booster.tx" x="189.184" y="118.4">
+  <object id="75" template="../../../../common/maps/obj/booster.tx" x="189.184" y="118.4">
    <properties>
     <property name="reward">[
   {
@@ -117,7 +117,7 @@
 </property>
    </properties>
   </object>
-  <object id="76" template="../../../../../../common/maps/obj/booster.tx" x="219.52" y="118.063">
+  <object id="76" template="../../../../common/maps/obj/booster.tx" x="219.52" y="118.063">
    <properties>
     <property name="reward">[
   {
@@ -142,5 +142,5 @@
 </property>
    </properties>
   </object>
- <object id="77" template="../../../../../../common/maps/obj/enemy.tx" x="250" y="150"><properties><property name="enemy" value="Whim of Shandalar" /><property name="threatRange" type="int" value="100" /><property name="effect">{"startBattleWithCard": ["City of Brass|ARN"]}</property></properties></object></objectgroup>
+ <object id="77" template="../../../../common/maps/obj/enemy.tx" x="250" y="150"><properties><property name="enemy" value="Whim of Shandalar" /><property name="threatRange" type="int" value="100" /><property name="effect">{"startBattleWithCard": ["City of Brass|ARN"]}</property></properties></object></objectgroup>
 </map>

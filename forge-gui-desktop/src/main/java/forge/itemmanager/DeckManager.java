@@ -2,7 +2,9 @@ package forge.itemmanager;
 
 import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.util.*;
 import java.util.Map.Entry;
@@ -27,6 +29,7 @@ import forge.gui.GuiUtils;
 import forge.gui.UiCommand;
 import forge.gui.framework.FScreen;
 import forge.item.InventoryItem;
+import forge.itemmanager.views.DeckNameCommentRenderer;
 import forge.itemmanager.views.ItemCellRenderer;
 import forge.itemmanager.views.ItemListView;
 import forge.itemmanager.views.ItemTableColumn;
@@ -90,11 +93,21 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
 
         Map<ColumnDef, ItemTableColumn> colOverrides = null;
         if (config0.getCols().containsKey(ColumnDef.DECK_ACTIONS)) {
+            colOverrides = new HashMap<>();
             final ItemTableColumn column = new ItemTableColumn(new ItemColumn(config0.getCols().get(ColumnDef.DECK_ACTIONS)));
             column.setCellRenderer(new DeckActionsRenderer());
-            colOverrides = new HashMap<>();
             colOverrides.put(ColumnDef.DECK_ACTIONS, column);
         }
+        
+        if (config0.getCols().containsKey(ColumnDef.NAME)) {
+            if (colOverrides == null) {
+                colOverrides = new HashMap<>();
+            }
+            final ItemTableColumn nameColumn = new ItemTableColumn(new ItemColumn(config0.getCols().get(ColumnDef.NAME)));
+            nameColumn.setCellRenderer(new DeckNameCommentRenderer());
+            colOverrides.put(ColumnDef.NAME, nameColumn);
+        }
+        
         super.setup(config0, colOverrides);
 
         if (isStringOnly != wasStringOnly) {
@@ -479,6 +492,13 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         @Override
         public final void paint(final Graphics g) {
             super.paint(g);
+
+            // Improve scaling quality
+            if (g instanceof Graphics2D g2d) {
+                g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+            }
 
             FSkin.drawImage(g, /*overActionIndex == 0 ? icoDeleteOver : */icoDelete, 0, 0, imgSize, imgSize);
             FSkin.drawImage(g, /*overActionIndex == 0 ? icoDeleteOver : */icoEdit, imgSize - 1, -1, imgSize, imgSize);

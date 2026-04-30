@@ -235,24 +235,7 @@ public class ImageUtil {
 
         if (cp.getRules().getSplitType() == CardSplitType.Meld) {
             if (face.equals("back")) {
-                PaperCard meldBasePc = cp.getMeldBaseCard();
-                cardCollectorNumber = meldBasePc.getCollectorNumber();
-                String collectorNumberSuffix = "";
-
-                if (cardCollectorNumber.endsWith("a")) {
-                    cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 1);
-                } else if (cardCollectorNumber.endsWith("as")) {
-                    cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 2);
-                    collectorNumberSuffix = "s";
-                } else if (cardCollectorNumber.endsWith("ap")) {
-                    cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 2);
-                    collectorNumberSuffix = "p";
-                } else if (cp.getCollectorNumber().endsWith("a")) {
-                    // SIR
-                    cardCollectorNumber = cp.getCollectorNumber().substring(0, cp.getCollectorNumber().length() - 1);
-                }
-
-                cardCollectorNumber += "b" + collectorNumberSuffix;
+                cardCollectorNumber = cp.getMeldBaseCard().getCollectorNumber().replaceAll("(\\d+)([sp]?)", "$1b$2");
             }
 
             faceParam = "&face=front";
@@ -293,7 +276,7 @@ public class ImageUtil {
 
     private static String specFaceToCollectorSuffix(String face) {
         MagicColor.Color color = MagicColor.Color.fromName(face);
-        if (color == MagicColor.Color.COLORLESS) return null;
+        if (color == null) return null;
         return color.getShortName().toLowerCase();
     }
 

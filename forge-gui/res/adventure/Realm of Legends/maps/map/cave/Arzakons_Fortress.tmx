@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="89">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="90">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -50,6 +50,8 @@
 	]</property>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Faerie Dragon&quot;, &quot;Goblin Polka Band&quot;, &quot;Prismatic Dragon&quot;, &quot;Necropolis of Azar&quot;, &quot;Power Struggle&quot;, &quot;Pandora's Box&quot;]}"/>
     <property name="enemy" value="Arzakon"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="0"/>
     <property name="threatRange" type="int" value="80"/>
    </properties>
@@ -90,7 +92,7 @@
   &quot;type&quot;: &quot;card&quot;,
   &quot;count&quot;: 1,
   &quot;cardName&quot;: &quot;Call from the Grave&quot;,
-  &quot;editions&quot;: [ "PAST" ]
+  &quot;editions&quot;: [ &quot;PAST&quot; ]
 },
 {
   &quot;type&quot;: &quot;card&quot;,
@@ -116,11 +118,6 @@
   &quot;type&quot;: &quot;card&quot;,
   &quot;count&quot;: 1,
   &quot;cardName&quot;: &quot;Gem Bazaar&quot;
-},
-{
-  &quot;type&quot;: &quot;card&quot;,
-  &quot;count&quot;: 1,
-  &quot;cardName&quot;: &quot;X&quot;
 }]</property>
    </properties>
   </object>
@@ -149,5 +146,22 @@ Your manasight stone blazes with power, near-blindingly bright.&quot;,
   <object id="86" template="../../../../common/maps/obj/manashards.tx" x="474.333" y="252.667"/>
   <object id="87" template="../../../../common/maps/obj/gold.tx" x="369.333" y="233"/>
   <object id="88" template="../../../../common/maps/obj/gold.tx" x="417" y="234.333"/>
+  <object id="89" template="../../../../common/maps/obj/enemy.tx" x="391.25" y="332.25">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;With a howl, the massive fiend falls for the final time. What the ancients could only seal, you have finally put down for good.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Faerie Dragon&quot;, &quot;Goblin Polka Band&quot;, &quot;Necropolis of Azar&quot;, &quot;Power Struggle&quot;, &quot;Pandora's Box&quot;]}"/>
+    <property name="enemy" value="Arzakon"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="80"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

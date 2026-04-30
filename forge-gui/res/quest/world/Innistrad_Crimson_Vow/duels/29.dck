@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Barroom Brawl
+Title=Barroom Brawl
+Icon=Barroom Brawl.jpg
+Difficulty=Easy
+Description=./Standard/Innistrad_Crimson_Vow/Luiz_Costa_-_Golgari_Planeswalkers_(Standard,_#1285066).dck
+Deck Type=constructed
+
+[Main]
+2 Lotus Cobra
+4 Prosperous Innkeeper
+3 Esika's Chariot
+3 Infernal Grasp
+3 Storm the Festival
+3 Dig Up
+2 The Meathook Massacre
+4 Binding the Old Gods
+2 Sorin the Mirthless
+3 Wrenn and Seven
+3 Lolth, Spider Queen
+1 Woodland Chasm
+2 Lair of the Hydra
+2 Hive of the Eye Tyrant
+2 Field of Ruin
+3 Swamp
+4 Tangled Florahedron
+4 Deathcap Glade
+4 Darkbore Pathway
+6 Forest
+[Sideboard]
+1 The Meathook Massacre
+1 Sorin the Mirthless
+2 Bloodvial Purveyor
+2 Go Blank
+3 Duress
+3 Skyclave Shade
+3 Power Word Kill

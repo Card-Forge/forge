@@ -42,7 +42,6 @@ public class SimulationTest extends AITest {
         return game;
     }
 
-
     protected GameSimulator createSimulator(Game game, Player p) {
         return new GameSimulator(new SimulationController(new Score(0)) {
             @Override

@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Sharee
+Title=Sharee
+Icon=Sharee.jpg
+Difficulty=Easy
+Description=./Standard/Duskmourn_House_of_Horror/Alex_Bianchi_-_Mono-Red_Aggro_(Standard,_#2275776).dck
+Deck Type=constructed
+
+[Main]
+4 Emberheart Challenger
+4 Heartfire Hero
+4 Hired Claw
+3 Manifold Mouse
+4 Monastery Swiftspear
+4 Screaming Nemesis
+4 Burst Lightning
+4 Lightning Strike
+1 Might of the Meek
+4 Monstrous Rage
+3 Witchstalker Frenzy
+17 Mountain
+4 Rockface Village
+[Sideboard]
+3 Case of the Crimson Pulse
+2 Ghost Vacuum
+2 Koth, Fire of Resistance
+3 Lithomantic Barrage
+1 Obliterating Bolt
+1 Scorching Shot
+2 Torch the Tower
+1 Witchstalker Frenzy

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Storm
+Title=Storm
+Icon=Storm.jpg
+Difficulty=Medium
+Description=./Standard/The_Brothers_War/Maeda_Yusuke_-_UBR_Junk_(Standard,_#1535595).dck
+Deck Type=constructed
+
+[Main]
+1 Bladecoil Serpent
+2 Sheoldred, the Apocalypse
+2 Razorlash Transmogrant
+4 Corpse Appraiser
+4 Fable of the Mirror-Breaker
+4 Bloodtithe Harvester
+3 Reckoner Bankbuster
+3 Abrade
+3 Make Disappear
+3 Go for the Throat
+4 Invoke Despair
+1 Takenuma, Abandoned Mire
+1 Otawara, Soaring City
+4 Xander's Lounge
+4 Shipwreck Marsh
+4 Haunted Ridge
+4 Sulfurous Springs
+4 Shivan Reef
+5 Swamp
+[Sideboard]
+1 Defabricate
+1 Soul Transfer
+1 Henrika Domnathi
+1 Go for the Throat
+1 Negate
+1 Liliana of the Veil
+1 Abrade
+2 Duress
+2 Disdainful Stroke
+2 Siphon Insight
+2 Brotherhood's End

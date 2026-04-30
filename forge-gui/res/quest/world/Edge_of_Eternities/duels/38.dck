@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Uncle Owen
+Title=Uncle Owen
+Icon=Uncle Owen.jpg
+Difficulty=Medium
+Description=./Standard/Edge_of_Eternities/AgrusKos93_-_Dimir_Midrange_(Standard,_#2593744).dck
+Deck Type=constructed
+
+[Main]
+2 Cecil, Dark Knight
+4 Deep-Cavern Bat
+4 Enduring Curiosity
+4 Floodpits Drowner
+4 Preacher of the Schism
+4 Spyglass Siren
+1 Tishana's Tidebinder
+3 Bitter Triumph
+2 Shoot the Sheriff
+3 Tragic Trajectory
+4 Kaito, Bane of Nightmares
+1 Fountainport
+4 Gloomlake Verge
+3 Restless Reef
+2 Soulstone Sanctuary
+5 Island
+4 Watery Grave
+6 Swamp
+[Sideboard]
+2 Tishana's Tidebinder
+1 Negate
+2 Faebloom Trick
+1 Ghost Vacuum
+1 Intimidation Tactics
+2 Duress
+1 Stab
+3 Strategic Betrayal
+1 Annul
+1 Tragic Trajectory

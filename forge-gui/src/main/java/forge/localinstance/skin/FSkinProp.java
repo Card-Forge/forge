@@ -26,6 +26,7 @@ import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
 import forge.deck.DeckSection;
+import forge.game.keyword.Keyword;
 import forge.game.zone.ZoneType;
 import forge.localinstance.properties.ForgeConstants;
 
@@ -776,6 +777,44 @@ public enum FSkinProp {
             case RED -> IMG_WATERMARK_R;
             case GREEN -> IMG_WATERMARK_G;
             case COLORLESS -> IMG_WATERMARK_C;
+        };
+    }
+
+    public static FSkinProp iconFromKeyword(Keyword keyword, String original) {
+        if (keyword == Keyword.HEXPROOF) {
+            if (!original.contains(":")) {
+                return IMG_ABILITY_HEXPROOF;
+            }
+            String k[] = original.split(":");
+            if (k.length > 2 && k[2].equals("monocolored")) {
+                return IMG_ABILITY_HEXPROOF_C;
+            }
+            return switch (MagicColor.Color.fromName(k[1])) {
+                case WHITE -> IMG_ABILITY_HEXPROOF_W;
+                case BLUE -> IMG_ABILITY_HEXPROOF_U;
+                case BLACK -> IMG_ABILITY_HEXPROOF_B;
+                case RED -> IMG_ABILITY_HEXPROOF_R;
+                case GREEN -> IMG_ABILITY_HEXPROOF_G;
+                //case COLORLESS -> IMG_ABILITY_HEXPROOF_C; hexproof_c is for "monocolored"
+                default -> IMG_ABILITY_HEXPROOF;
+            };
+        }
+        return switch (keyword) {
+            case FLYING -> IMG_ABILITY_FLYING;
+            case FIRST_STRIKE -> IMG_ABILITY_FIRST_STRIKE;
+            case DOUBLE_STRIKE -> IMG_ABILITY_DOUBLE_STRIKE;
+            case DEATHTOUCH -> IMG_ABILITY_DEATHTOUCH;
+            case DECAYED -> null;
+            case EXALTED -> IMG_ABILITY_EXALTED;
+            case HASTE -> IMG_ABILITY_HASTE;
+            case INDESTRUCTIBLE -> IMG_ABILITY_INDESTRUCTIBLE;
+            case LIFELINK -> IMG_ABILITY_LIFELINK;
+            case MENACE -> IMG_ABILITY_MENACE;
+            case REACH -> IMG_ABILITY_REACH;
+            case SHADOW -> IMG_ABILITY_SHADOW;
+            case TRAMPLE -> IMG_ABILITY_TRAMPLE;
+            case VIGILANCE -> IMG_ABILITY_VIGILANCE;
+            default -> null;
         };
     }
 

@@ -103,7 +103,7 @@ public enum SpellApiToAi {
             .put(ApiType.ExchangeZone, ZoneExchangeAi.class)
             .put(ApiType.Explore, ExploreAi.class)
             .put(ApiType.Fight, FightAi.class)
-            .put(ApiType.FlipACoin, FlipACoinAi.class)
+            .put(ApiType.FlipCoin, FlipCoinAi.class)
             .put(ApiType.FlipOntoBattlefield, FlipOntoBattlefieldAi.class)
             .put(ApiType.Fog, FogAi.class)
             .put(ApiType.GainControl, ControlGainAi.class)

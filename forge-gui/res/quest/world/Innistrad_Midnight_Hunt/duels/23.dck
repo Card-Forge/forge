@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=James T Kirk
+Title=James T Kirk
+Icon=James T Kirk.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Midnight_Hunt/Eugene_Nikiforov_-_Jund_Treasures_(Standard,_#1226635).dck
+Deck Type=constructed
+
+[Main]
+2 Moonveil Regent
+2 Valki, God of Lies
+3 Goldspan Dragon
+4 Jaspera Sentinel
+4 Magda, Brazen Outlaw
+4 Prosperous Innkeeper
+4 Immersturm Predator
+4 Esika's Chariot
+4 Infernal Grasp
+3 Shatterskull Smashing
+3 Ranger Class
+1 Wrenn and Seven
+2 Rockfall Vale
+2 Forest
+2 Lair of the Hydra
+4 Cragcrown Pathway
+4 Darkbore Pathway
+4 Haunted Ridge
+4 Blightstep Pathway
+[Sideboard]
+1 Snakeskin Veil
+2 Reckless Stormseeker
+2 Go Blank
+3 Ray of Enfeeblement
+3 Burning Hands
+4 Duress

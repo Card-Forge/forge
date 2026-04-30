@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Kraj
+Title=Kraj
+Icon=Kraj.jpg
+Difficulty=Easy
+Description=./Standard/Innistrad_Crimson_Vow/Lukas_R_-_Four-color_Ramp_(Standard,_#1235898).dck
+Deck Type=constructed
+
+[Main]
+4 Rootcoil Creeper
+4 Prosperous Innkeeper
+4 Esika's Chariot
+1 Memory Deluge
+2 Infernal Grasp
+3 Alrund's Epiphany
+3 Storm the Festival
+1 Grafted Identity
+1 Felidar Retreat
+2 The Meathook Massacre
+3 Binding the Old Gods
+2 Kaya, Geist Hunter
+4 Wrenn and Seven
+1 Woodland Chasm
+1 Rimewood Falls
+1 Forest
+2 Overgrown Farmland
+2 Deathcap Glade
+2 Deserted Beach
+2 Shattered Sanctum
+2 Shipwreck Marsh
+2 Tangled Florahedron
+2 Hall of Storm Giants
+3 Clearwater Pathway
+3 Barkchannel Pathway
+3 Darkbore Pathway
+[Sideboard]
+1 Grafted Identity
+1 Negate
+1 Koma, Cosmos Serpent
+1 Test of Talents
+1 Ray of Frost
+2 Culling Ritual
+2 Overcharged Amalgam
+2 Malevolent Hermit
+4 Duress

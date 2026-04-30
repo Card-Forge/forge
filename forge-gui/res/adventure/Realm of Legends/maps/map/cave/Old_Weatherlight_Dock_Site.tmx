@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="119">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="120">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -26,7 +26,7 @@
  </layer>
  <layer id="2" name="Walls" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt1E0KwjAQBeBs3XgFD+El2tIfocUexArqXuwFPInXEBW8RdcewMQyNB2SNEnHunHgQVf5eJlQxv4D09SMLY9+GWP+0hV5hO55hvqzi8rOni/8g6fk5myn9tKAsSygN6Grzr1x8x7Q9MURprZvSOPp7ljlZnUX6v3CHcd7s5sRunLXRuF+9hvx/Ub9zqvILXnUnXfZ9LueDmqXcmQTup63tEaetilStQldqV2wwS015pB7NfzrbEZ1vzZuzN/GmqfkScX3wH9VHrmrqyscHJvBe3VxXU1hwWAT79bWNVmvqg22TKbLe5aNIQvfr6tr08cUXVdwVV3GWInBg6jenq9l40F8TR9LzpSWj2t6IxSu3Ckh7Ifz7fNN7hQOzhu4mrKJ
+   eJzt1E0KwjAQBeC4dOMVPISXaEN/BMUexArqXuwFPInXEBW8gcuuPYCJMjQdkjRJR9048KCrfLxMKGP/gakrxia7sPQxf+nKXGP/3GLz2fPSzR6Nw4OnEOZwrfeyiLE8ojehq8k9C/MS0fTFkaaxb0zjme5Y5+ZVE+r9wh0nG7ubE7pq11rjvvbLxX55u/OU+2XGm/OOy3bX/VbvUo5qQtfDita4D5roTOhK7aq2nMJgdrkny7/OZXT36+Im4m0sRAqRTH53/FfVUbv6utLBcRm8Vx/X15QWDDbxbl1dm/Uo38GWzfR5z6rRZeH79XVd+thi6gqurksfK7V4EN3bC7VcPEioGWKp+aYV4treCIWrdkoJ++F8+nyb+w0H5wlLibPR
   </data>
  </layer>
  <layer id="3" name="Clutter" width="30" height="30">
@@ -34,7 +34,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzFlT1PAkEQhofDDyiIWuk/gChUmGCnDR8VmGBvozHRxkIgoRcs9DcY/4Cxs6EwsbSAQg1WNlhpZ4/OZm+8Zbnb27tb9U3eHMMt++zszC4A3sqfetvtfb84PSaMVFw/RxHlMChO5hQkDroG+k2tBLBdCh5HVR/nGKBvC9xB4iiqlXH96MIGd5A4rOoVaQ1nzpMsxqbkxvWzKS71J4li4oix+F6lk5Q/W+5Pin9yFGK38WEl9+d/9PNR52/6+RHvgSfBx8gd4vNFuIP2kLFf9o7DaLELsCS5iexWxxkzQsabzalXJ2OTakhcWYy9U53+3ooDxOL8c0ujn4NyZX1ZnEmKCfzf5Oqc1ajc3Qq3Sv00nrO0We6dxe2lHu7vOzI/DHCvAtTqYQYgZ1sl2jdx72TupjRHA+vZ9KjpwSzPuaexVvk8pvAML3Snx7Ee/ZxXz8W4OrrPAFzeOOurC/OOXGpkueSxnAVYyepxx3ZvvGacfdHZG1Fte6/zyFxXcOW6sD2jXFVclqPYLyofStzzBMBFwol17hO6hzpDnofXPfSc42bakuq/mgRYS/qzRBHjeo5z2ZysPuypsglRH1Ddxoo7w6T8uG2NuznMf1OUfL8BTIXhEA==
+   eJzFlb1OAkEQx4fDDyiIWukbQBQqTLDTho8OEx7ARmOijYVAQi9Y6DMYX8DY2VCYWFpAoUYrE4OVdvbobPbGW5fbvb27Vf/JP3eTW/a3Mzu7AKhVPFLb7/ugPDkminTcIMcR5TAs/8wpTBx2DfSbegVgsxI+jqsBzjFEX5W4w8RxVK/i+tGlNe4wcVQ1atIajr0nWYxtyY8bZFtc6k8SxcQRY/G7ToeZYLbcnxR/5yjEfuOjSu7P/+jn/e7f9PMd3gP3gg+Q+4jPJ+EO2kbGTlUdR9F8D2BBcgvZ7a43ZoSMV5fzkvBsW02JK0vFdZIAiSR/bxv0c1iurE+HM0kJgf+bXJOzGpe7VePWaZDFc5a1y712uFXqY33fkPlugXseYq9upwAKrnWiuom1k7nr0hxN3M+WYk93p3nOfYO1iueTKYNneK43OY716Mesfi7GNdFNDuDs0ltfQ5h35LNHjk8ei3mApbwZd+z2xnPOq4tJbUR13FoXkbmq4cr7wmpGueq4LEexX3Tek7gnKYDTFH8X66IT3UPsTmR5qO6hhwI304a0/8tpgJU0fxfrohMxLmY4l83J9oc9dbYh6gPat7HmzrCpIG7H4G6O8t8UJ98vIS/iCw==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -310,6 +310,14 @@
 	}
 ]</property>
     <property name="enemy" value="Vhati il-Dal"/>
+   </properties>
+  </object>
+  <object id="119" template="../../../../common/maps/obj/shop.tx" x="64.2651" y="438.029">
+   <properties>
+    <property name="commonShopList" value="OldDominariaBoosters"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
    </properties>
   </object>
  </objectgroup>

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Leela
+Title=Leela
+Icon=Leela.jpg
+Difficulty=Easy
+Description=Dark_Ascension/SCG_Invitational_Qualifier_-_Poughkeepsie,_Minnesota/Christopher_Brellochs_-_Tokens_(Standard,_#28756).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Doomed Traveler
+2 Midnight Haunting
+4 Day of Judgment
+4 Gather the Townsfolk
+4 Lingering Souls
+4 Honor of the Pure
+4 Intangible Virtue
+4 Oblivion Ring
+2 Elspeth Tirel
+3 Sorin, Lord of Innistrad
+4 Evolving Wilds
+2 Ghost Quarter
+4 Isolated Chapel
+10 Plains
+2 Swamp
+3 Vault of the Archangel
+[Sideboard]
+2 Celestial Purge
+2 Divine Offering
+2 Doom Blade
+1 Elesh Norn, Grand Cenobite
+2 Hero of Bladehold
+3 Mirran Crusader
+2 Surgical Extraction
+1 White Sun's Zenith

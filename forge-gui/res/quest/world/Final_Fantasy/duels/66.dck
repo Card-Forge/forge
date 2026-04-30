@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Amphibian
+Title=Amphibian
+Icon=Amphibian.jpg
+Difficulty=Very Hard
+Description=./Modern/Final_Fantasy/DemianDesposito10_-_Rakdos_Burn_(Modern,_#2520067).dck
+Deck Type=constructed
+
+[Main]
+4 Goblin Guide
+4 Monastery Swiftspear
+1 Ragavan, Nimble Pilferer
+1 Cecil, Dark Knight
+1 Zurgo Bellstriker
+4 Lightning Bolt
+3 Skullcrack
+3 Searing Blaze
+4 Boltwave
+4 Bump in the Night
+4 Lava Spike
+4 Skewer the Critics
+4 Rift Bolt
+1 Raucous Theater
+3 Barbarian Ring
+2 Blood Crypt
+3 Bloodstained Mire
+3 Blackcleave Cliffs
+2 Sunbaked Canyon
+1 Arid Mesa
+1 Wooded Foothills
+2 Mountain
+1 Fiery Islet
+[Sideboard]
+1 Exquisite Firecraft
+2 Magebane Lizard
+2 Rain of Gore
+3 Rakdos Charm
+1 Pithing Needle
+1 Ensnaring Bridge
+1 Molten Rain
+1 Extirpate
+2 Bontu's Last Reckoning
+1 Feed the Swarm

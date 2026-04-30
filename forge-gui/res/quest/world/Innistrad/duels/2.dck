@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=JuzamGenie
+Title=JuzamGenie
+Icon=JuzamGenie.jpg
+Difficulty=Medium
+Description=Innistrad/GPT_Lille_-_Kaissa_Ilioupolis/Kamarinopoulos_Kostas_-_RDW_(Standard,_#25170).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Chandra's Phoenix
+3 Grim Lavamancer
+3 Hero of Oxid Ridge
+4 Stormblood Berserker
+4 Stromkirk Noble
+2 Dismember
+4 Gut Shot
+4 Incinerate
+4 Volt Charge
+3 Arc Trail
+1 Devil's Play
+2 Koth of the Hammer
+3 Copperline Gorge
+17 Mountain
+3 Rootbound Crag
+[Sideboard]
+2 Act of Aggression
+2 Ancient Grudge
+2 Naturalize
+2 Ratchet Bomb
+3 Shrine of Burning Rage
+3 Vulshok Refugee

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Gollum
+Title=Gollum
+Icon=Gollum.jpg
+Difficulty=Easy
+Description=Kaladesh/PPTQ_El_Nucli/Gerard_Palacios_-_U-W_Flash_(Standard,_#653743).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Archangel Avacyn
+3 Reflector Mage
+4 Selfless Spirit
+4 Spell Queller
+1 Thalia, Heretic Cathar
+4 Thraben Inspector
+4 Smuggler's Copter
+2 Revolutionary Rebuff
+1 Declaration in Stone
+4 Stasis Snare
+4 Gideon, Ally of Zendikar
+6 Island
+9 Plains
+4 Port Town
+4 Prairie Stream
+2 Westvale Abbey
+[Sideboard]
+2 Blessed Alliance
+1 Bruna, the Fading Light
+1 Collective Effort
+2 Declaration in Stone
+1 Fragmentize
+2 Gisela, the Broken Blade
+1 Jace, Unraveler of Secrets
+1 Linvala, the Preserver
+4 Prairie Stream
+1 Spell Shrivel
+1 Thalia's Lancers
+2 Void Shatter

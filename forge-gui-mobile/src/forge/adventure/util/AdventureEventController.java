@@ -5,6 +5,7 @@ import forge.adventure.data.AdventureEventData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.deck.Deck;
+import forge.deck.DeckFormat;
 import forge.item.BoosterPack;
 import forge.item.PaperCard;
 import forge.item.SealedTemplate;
@@ -45,6 +46,10 @@ public class AdventureEventController implements Serializable {
                 case Constructed -> "Constructed";
                 default -> name();
             };
+        }
+
+        public DeckFormat getDeckFormat() {
+            return DeckFormat.Limited;
         }
     }
 
@@ -155,7 +160,11 @@ public class AdventureEventController implements Serializable {
     }
 
     public Deck generateBooster(String setCode) {
-        List<PaperCard> cards = BoosterGenerator.getBoosterPack(StaticData.instance().getBoosters().get(setCode));
+        SealedTemplate template = AdventureOverrides.instance().getBoosterTemplate(setCode);
+        if (template == null) {
+            template = StaticData.instance().getBoosters().get(setCode);
+        }
+        List<PaperCard> cards = BoosterGenerator.getBoosterPack(template);
         Deck output = new Deck();
         output.getMain().add(cards);
         String editionName = FModel.getMagicDb().getEditions().get(setCode).getName();

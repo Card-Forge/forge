@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="91">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="92">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -33,7 +33,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMAooA2f4B8beLk3amn9XnYHhnjrxNLXAT6BZv9SJp0kBAA0ZG0s=
+   eJxjYBgFo2AUjIJRMAooA48YB8beLk3amn9XnYHhnjrxNLXAT6BZv9SJp0kBABqHG1M=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -54,11 +54,13 @@
 	]</property>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Zuran Spellcaster|ICE&quot;, &quot;Reliquary Tower|M13&quot;, &quot;Karmic Justice|ODY&quot;, &quot;Phyrexian Arena|APC&quot;, &quot;Propaganda|TMP&quot;, &quot;Zuran Orb|ICE&quot; ]}"/>
     <property name="enemy" value="Zur"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="60"/>
     <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
-  <object id="80" template="../../../../common/maps/obj/dialog.tx" x="93" y="194" width="226.5" height="23" visible="1">
+  <object id="80" template="../../../../common/maps/obj/dialog.tx" x="94.3333" y="188.667" width="226.5" height="23" visible="1">
    <properties>
     <property name="dialog">[
 {
@@ -115,5 +117,22 @@
   <object id="88" template="../../../../common/maps/obj/collision.tx" x="308.747" y="21.4054" width="23.6151" height="250.36"/>
   <object id="89" template="../../../../common/maps/obj/collision.tx" x="109.542" y="247.634" width="201.88" height="25.7418"/>
   <object id="90" template="../../../../common/maps/obj/collision.tx" x="104.56" y="6.6291" width="201.88" height="25.7418"/>
+  <object id="91" template="../../../../common/maps/obj/enemy.tx" x="212.298" y="90.3946">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;You expect some grand speech from the mad mage as he succumbs to death, but instead he merely laughs wildly until his cackles turn to gurgling blood and then at last fall silent.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Zuran Spellcaster|ICE&quot;, &quot;Reliquary Tower|M13&quot;, &quot;Phyrexian Arena|APC&quot;, &quot;Propaganda|TMP&quot;, &quot;Zuran Orb|ICE&quot; ]}"/>
+    <property name="enemy" value="Zur"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="60"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

@@ -33,7 +33,7 @@ public class KeywordWithType extends KeywordInstance<KeywordWithType> implements
             descType = k[1];
         } else {
             MagicColor.Color color = MagicColor.Color.fromName(details);
-            if (color != MagicColor.Color.COLORLESS) {
+            if (color != null) {
                 type = "Card." + StringUtils.capitalize(color.getName());
                 descType = color.getName();
             } else {

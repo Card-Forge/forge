@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Diablo
+Title=Diablo
+Icon=Diablo.jpg
+Difficulty=Hard
+Description=./Modern/Zendikar_Rising/Charles_Martin_Jr_-_Bant_Spirits_(Modern,_#1042875).dck
+Deck Type=constructed
+
+[Main]
+2 Selfless Spirit
+2 Unsettled Mariner
+3 Rattlechains
+4 Drogskol Captain
+4 Skyclave Apparition
+4 Noble Hierarch
+4 Spell Queller
+4 Supreme Phantom
+4 Mausoleum Wanderer
+4 Aether Vial
+4 Collected Company
+1 Island
+1 Cavern of Souls
+1 Seachrome Coast
+1 Misty Rainforest
+1 Breeding Pool
+1 Temple Garden
+1 Forest
+1 Waterlogged Grove
+2 Windswept Heath
+2 Hallowed Fountain
+2 Horizon Canopy
+2 Botanical Sanctum
+2 Plains
+3 Flooded Strand
+[Sideboard]
+1 Aven Mindcensor
+1 Kozilek, Butcher of Truth
+2 Rest in Peace
+2 Damping Sphere
+3 Auriok Champion
+3 Path to Exile
+3 Force of Negation

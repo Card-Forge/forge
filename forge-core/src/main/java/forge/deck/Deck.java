@@ -51,6 +51,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     // Supports deferring loading a deck until we actually need its contents. This works in conjunction with
     // the lazy card load feature to ensure we don't need to load all cards on start up.
     private final Set<String> aiHints = new TreeSet<>();
+    private final List<String> keyCards = new ArrayList<>();
     private final Map<String, String> draftNotes = new HashMap<>();
     private Map<String, List<String>> deferredSections = null;
     private Map<String, List<String>> loadedSections = null;
@@ -255,6 +256,8 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         //noinspection ConstantValue
         if(tags != null) //Can happen deserializing old Decks.
             result.tags.addAll(this.tags);
+        if(keyCards != null)
+            result.keyCards.addAll(this.keyCards);
     }
 
     /*
@@ -524,13 +527,8 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     }
 
     public CardPool getAllCardsInASinglePool() {
-        return getAllCardsInASinglePool(true);
+        return getAllCardsInASinglePool(true, false);
     }
-
-    public CardPool getAllCardsInASinglePool(final boolean includeCommander) {
-        return getAllCardsInASinglePool(includeCommander, false);
-    }
-
     public CardPool getAllCardsInASinglePool(final boolean includeCommander, boolean includeExtras) {
         final CardPool allCards = new CardPool(); // will count cards in this pool to enforce restricted
         allCards.addAll(this.getMain());
@@ -571,6 +569,50 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         return sum;
     }
 
+    public List<String> getKeyCards() {
+        return new ArrayList<>(keyCards);
+    }
+
+    public void addKeyCard(String cardName) {
+        if (cardName != null && !cardName.trim().isEmpty()) {
+            String trimmed = cardName.trim();
+            if (!keyCards.contains(trimmed)) {
+                keyCards.add(trimmed);
+            }
+        }
+    }
+
+    public void removeKeyCard(String cardName) {
+        if (cardName != null) {
+            keyCards.remove(cardName.trim());
+        }
+    }
+
+    public boolean isKeyCard(String cardName) {
+        if (cardName == null) {
+            return false;
+        }
+        return keyCards.contains(cardName.trim());
+    }
+
+    public void setDraftNotes(Map<String, String> draftNotes) {
+        if (draftNotes == null) {
+            return;
+        }
+
+        for(String key : draftNotes.keySet()) {
+            String notes = draftNotes.get(key);
+            if (notes == null || notes.isEmpty()) {
+                continue;
+            }
+            this.draftNotes.put(key, notes.trim());
+        }
+    }
+
+    public Map<String, String> getDraftNotes() {
+        return draftNotes;
+    }
+
     public void setAiHints(String aiHintsInfo) {
         if (aiHintsInfo == null || aiHintsInfo.trim().isEmpty()) {
             return;
@@ -594,22 +636,16 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         return "";
     }
 
-    public void setDraftNotes(Map<String, String> draftNotes) {
-        if (draftNotes == null) {
+    public void setAiHint(String hintType, String hintValue) {
+        if (hintValue == null || hintValue.trim().isEmpty()) {
             return;
         }
 
-        for(String key : draftNotes.keySet()) {
-            String notes = draftNotes.get(key);
-            if (notes == null || notes.isEmpty()) {
-                continue;
-            }
-            this.draftNotes.put(key, notes.trim());
-        }
-    }
+        // Remove existing hint of the same type, if any
+        aiHints.removeIf(hint -> hint.toLowerCase().startsWith(hintType.toLowerCase() + "$"));
 
-    public Map<String, String> getDraftNotes() {
-        return draftNotes;
+        // Add new hint if it's not empty
+        aiHints.add(hintType + "$" + hintValue.trim());
     }
 
     public UnplayableAICards getUnplayableAICards() {

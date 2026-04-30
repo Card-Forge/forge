@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Kangee
+Title=Kangee
+Icon=Kangee.jpg
+Difficulty=Very Hard
+Description=../Modern/Oath_of_the_Gatewatch/Modern_Constructed_League/30A_-_Eldrazi_(Modern,_#607963).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Drowner of Hope
+4 Eldrazi Displacer
+4 Eldrazi Mimic
+4 Eldrazi Obligator
+3 Eldrazi Skyspawner
+3 Endless One
+4 Reality Smasher
+4 Thought-Knot Seer
+1 World Breaker
+4 Dismember
+4 Cavern of Souls
+4 Corrupted Crossroads
+4 Eldrazi Temple
+4 Eye of Ugin
+2 Ghost Quarter
+1 Island
+4 Tendo Ice Bridge
+1 Urborg, Tomb of Yawgmoth
+1 Wastes
+[Sideboard]
+2 Chalice of the Void
+2 Grafdigger's Cage
+3 Gut Shot
+2 Ratchet Bomb
+3 Relic of Progenitus
+3 Spellskite

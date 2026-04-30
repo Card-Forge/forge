@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Kane
+Title=Kane
+Icon=Kane.jpg
+Difficulty=Hard
+Description=../Modern/Shadows_over_Innistrad/SCG_Invitational_Qualifier_-_Tazewell,_TN/Zackary_Young_-_GW_Auras_(Modern,_#632665).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Dryad Arbor
+4 Gladecover Scout
+3 Silhana Ledgewalker
+4 Slippery Bogle
+4 Path to Exile
+4 Daybreak Coronet
+4 Ethereal Armor
+1 Gryff's Boon
+4 Hyena Umbra
+4 Rancor
+4 Spider Umbra
+1 Spirit Link
+3 Spirit Mantle
+1 Forest
+4 Horizon Canopy
+1 Plains
+4 Razorverge Thicket
+3 Temple Garden
+4 Windswept Heath
+2 Wooded Foothills
+[Sideboard]
+1 Fog
+4 Leyline of Sanctity
+2 Nature's Claim
+1 Pay No Heed
+2 Relic of Progenitus
+1 Seal of Primordium
+1 Stony Silence
+3 Suppression Field

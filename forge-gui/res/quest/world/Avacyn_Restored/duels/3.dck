@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Peregrin Took
+Title=Peregrin Took
+Icon=Peregrin Took.jpg
+Difficulty=Medium
+Description=Avacyn_Restored/SCG_Invitational_Qualifier_-_Kansas_City,_Missouri/Kevin_Dulin_-_Naya_Aggro_(Standard,_#34052).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Avacyn's Pilgrim
+4 Birds of Paradise
+4 Blade Splicer
+2 Borderland Ranger
+4 Huntmaster of the Fells
+4 Restoration Angel
+3 Strangleroot Geist
+2 Thalia, Guardian of Thraben
+2 Zealous Conscripts
+3 Sword of War and Peace
+4 Bonfire of the Damned
+4 Cavern of Souls
+4 Copperline Gorge
+3 Forest
+4 Gavony Township
+2 Mountain
+2 Plains
+4 Razorverge Thicket
+1 Rootbound Crag
+[Sideboard]
+2 Ancient Grudge
+2 Arc Trail
+2 Celestial Purge
+3 Combust
+1 Crushing Vines
+2 Mirran Crusader

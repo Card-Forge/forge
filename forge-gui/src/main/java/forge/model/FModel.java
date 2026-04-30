@@ -115,18 +115,9 @@ public final class FModel {
     private static final Supplier<ConquestController> conquest = Suppliers.memoize(ConquestController::new);
     private static final Supplier<CardCollections> decks = Suppliers.memoize(CardCollections::new);
 
-    private static final Supplier<IStorage<CardBlock>> blocks = Suppliers.memoize(() -> {
-        final IStorage<CardBlock> cb = new StorageBase<>("Block definitions", new CardBlock.Reader(ForgeConstants.BLOCK_DATA_DIR + "blocks.txt", getMagicDb().getEditions()));
-        // SetblockLands
-        for (final CardBlock b : cb) {
-            try {
-                getMagicDb().getBlockLands().add(b.getLandSet().getCode());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return cb;
-    });
+    private static final Supplier<IStorage<CardBlock>> blocks = Suppliers.memoize(
+            () -> (IStorage<CardBlock>) new StorageBase<CardBlock>("Block definitions", new CardBlock.Reader(
+                    ForgeConstants.BLOCK_DATA_DIR + "blocks.txt", getMagicDb().getEditions())));
     private static final Supplier<IStorage<CardBlock>> fantasyBlocks = Suppliers.memoize(() -> new StorageBase<>("Custom blocks", new CardBlock.Reader(ForgeConstants.BLOCK_DATA_DIR + "fantasyblocks.txt", getMagicDb().getEditions())));
     private static final Supplier<IStorage<ThemedChaosDraft>> themedChaosDrafts = Suppliers.memoize(() -> new StorageBase<>("Themed Chaos Drafts", new ThemedChaosDraft.Reader(ForgeConstants.BLOCK_DATA_DIR + "chaosdraftthemes.txt")));
     private static final Supplier<IStorage<ConquestPlane>> planes = Suppliers.memoize(() -> new StorageBase<>("Conquest planes", new ConquestPlane.Reader(ForgeConstants.CONQUEST_PLANES_DIR + "planes.txt")));
@@ -235,7 +226,6 @@ public final class FModel {
         }
 
         ForgePreferences.DEV_MODE = preferences.getPrefBoolean(FPref.DEV_MODE_ENABLED);
-        ForgePreferences.UPLOAD_DRAFT = ForgePreferences.NET_CONN;
 
         getMagicDb().setStandardPredicate(getFormats().getStandard().getFilterRules());
         getMagicDb().setPioneerPredicate(getFormats().getPioneer().getFilterRules());

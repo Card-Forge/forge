@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Havok
+Title=Havok
+Icon=Havok.jpg
+Difficulty=Easy
+Description=./Standard/Duskmourn_House_of_Horror/Asmussen_-_Mono_Black_(Standard,_#2270040).dck
+Deck Type=constructed
+
+[Main]
+4 Forsaken Miner
+2 Gisa, the Hellraiser
+3 Tinybones, the Pickpocket
+3 Unstoppable Slasher
+2 Sheoldred, the Apocalypse
+3 Gix, Yawgmoth Praetor
+3 Deep-Cavern Bat
+3 Cut Down
+4 Go for the Throat
+4 Case of the Stashed Skeleton
+4 Corpses of the Lost
+3 Tinybones Joins Up
+15 Swamp
+1 Fountainport
+2 Demolition Field
+1 Fabled Passage
+3 Cavern of Souls
+[Sideboard]
+1 Cruelclaw's Heist
+3 Ghost Vacuum
+4 Duress
+4 Anoint with Affliction
+1 Unholy Annex // Ritual Chamber
+2 Phyrexian Arena

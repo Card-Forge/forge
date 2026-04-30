@@ -15,3 +15,4 @@ ScryfallCode=PSPL
 7 R Day of Black Sun @Dom Lay
 8 R Vendilion Clique @Jason A. Engle
 9 M Super Shredder @Chris Seaman
+10 M Liliana Vess @Justyna Dura

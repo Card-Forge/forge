@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Momir
+Title=Momir
+Icon=Momir.jpg
+Difficulty=Very Hard
+Description=./Modern/War_of_the_Spark/Cedric_Westcott_-_Azorius_Control_(Modern,_#795884).dck
+Deck Type=constructed
+
+[Main]
+2 Snapcaster Mage
+1 Absorb
+1 Condemn
+4 Cryptic Command
+1 Dovin's Veto
+1 Hieroglyphic Illumination
+1 Logic Knot
+1 Mana Leak
+4 Opt
+4 Path to Exile
+1 Spell Snare
+1 Serum Visions
+1 Supreme Verdict
+4 Terminus
+1 Timely Reinforcements
+1 Detention Sphere
+1 Search for Azcanta
+1 Gideon of the Trials
+2 Jace, the Mind Sculptor
+2 Teferi, Hero of Dominaria
+6 Island
+3 Plains
+4 Celestial Colonnade
+4 Field of Ruin
+4 Flooded Strand
+2 Glacial Fortress
+2 Hallowed Fountain
+[Sideboard]
+2 Cataclysmic Gearhulk
+1 Detention Sphere
+2 Rest in Peace
+1 Celestial Purge
+1 Disdainful Stroke
+1 Dispel
+2 Dovin's Veto
+1 Surgical Extraction
+1 Lyra Dawnbringer
+1 Vendilion Clique
+1 Ancestral Vision
+1 Timely Reinforcements

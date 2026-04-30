@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Gix
+Title=Gix
+Icon=Gix.jpg
+Difficulty=Easy
+Description=./Standard/Wilds_of_Eldraine/Christianhartz_-_Dimir_Faeries_(Standard,_#1747543).dck
+Deck Type=constructed
+
+[Main]
+2 Faerie Vandal
+1 Sheoldred, the Apocalypse
+2 Halo Forager
+4 Faerie Mastermind
+1 Sleep-Cursed Faerie
+3 Sleep-Cursed Faerie
+2 Obyra, Dreaming Duelist
+1 Talion, the Kindly Lord
+2 Make Disappear
+3 Go for the Throat
+4 Spell Stutter
+4 Faerie Fencing
+4 Ego Drain
+1 Invasion of Amonkhet
+2 Kaito Shizuki
+2 Kaito Shizuki
+3 Shipwreck Marsh
+1 Otawara, Soaring City
+1 Takenuma, Abandoned Mire
+4 Underground River
+4 Island
+4 Swamp
+4 Darkslick Shores
+1 Island
+[Sideboard]
+2 Siphon Insight
+3 Disdainful Stroke
+2 Cut Down
+2 Sheoldred, the Apocalypse
+2 Duress
+2 Glistening Deluge
+2 The End

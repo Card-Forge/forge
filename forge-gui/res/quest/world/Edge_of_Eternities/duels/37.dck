@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Scotty
+Title=Scotty
+Icon=Scotty.jpg
+Difficulty=Easy
+Description=./Standard/Edge_of_Eternities/ItsJustSquid_-_Mono_Green_Landfall_(Standard,_#2575385).dck
+Deck Type=constructed
+
+[Main]
+4 Bristly Bill, Spine Sower
+4 Mossborn Hydra
+2 Icetill Explorer
+4 Llanowar Elves
+4 Sazh's Chocobo
+4 Tifa Lockhart
+4 Traveling Chocobo
+4 Snakeskin Veil
+3 Worldsoul's Rage
+1 Eusocial Engineering
+4 Escape Tunnel
+1 Evolving Wilds
+1 Mountain
+14 Forest
+2 Terramorphic Expanse
+4 Fabled Passage
+[Sideboard]
+1 Island
+2 Eusocial Engineering
+2 Icetill Explorer
+4 Dragonback Assault
+3 Repulsive Mutation
+3 Seedship Impact

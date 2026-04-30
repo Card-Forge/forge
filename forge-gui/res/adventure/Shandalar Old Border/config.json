@@ -114,15 +114,21 @@
     "Urza's Science Fair Project"
   ],
   "restrictedEditions": ["8ED", "P8ED", "MRD"],
+  "restrictedBlocks": ["Ice Age"],
+  "restrictedTokens": ["P03/r_4_4_bird_flying", "P03/b_x_x_demon_flying"],
   "allowedEditions": [
     "LEA", "LEB", "2ED", "3ED", "ARN", "ATQ", "LEG", "DRK", "FEM", "4ED",
     "ICE", "CHR", "HML", "ALL", "MIR", "VIS", "5ED", "POR", "WTH", "TMP",
     "STH", "EXO", "PO2", "USG", "ATH", "ULG", "UDS", "6ED", "PTK", "S99",
     "MMQ", "BRB", "NMS", "S00", "PCY", "INV", "BTD", "PLS", "APC", "7ED",
     "ODY", "DKM", "TOR", "JUD", "ONS", "LGN", "SCG", "PHPR", "PAST", "DRC94",
-    "O90P", "PALP", "PELP", "PGRU", "UGL"
+    "O90P", "PALP", "PELP", "PGRU", "UGL", "MPR", "PR2", "P03", "TDLS", "OBC"
   ],
+  "vintageOnlyEditions": true,
   "allowedJumpstart": [],
+  "enableGeneticAI": false,
+  "usePriceListPrices": true,
+  "defaultBasicLandSet": "4ED",
   "difficulties": [
     {
       "name": "Easy",
@@ -136,20 +142,6 @@
       "rewardMaxFactor": 1.5,
       "sellFactor": 0.6,
       "shardSellRatio": 0.95,
-      "starterDecks": {
-        "W": "decks/starter/USG - White.dck",
-        "U": "decks/starter/UDS - BlueWhite.dck",
-        "B": "decks/starter/STH - Black.dck",
-        "R": "decks/starter/UDS - BlueRed.dck",
-        "G": "decks/starter/UDS - GreenBlack.dck"
-      },
-      "constructedStarterDecks": {
-        "W": "decks/starter/ULG - BlueWhite.dck",
-        "U": "decks/starter/EXO - Blue.dck",
-        "B": "decks/starter/EXO - RedBlack.dck",
-        "R": "decks/starter/EXO - RedWhite.dck",
-        "G": "decks/starter/TMP - GreenWhite.dck"
-      },
       "pileDecks": {
         "W": "decks/starter/pile_white_e.json",
         "B": "decks/starter/pile_black_e.json",
@@ -181,20 +173,6 @@
       "lifeLoss": 0.2,
       "sellFactor": 0.5,
       "shardSellRatio": 0.8,
-      "starterDecks": {
-        "W": "decks/starter/TMP - BlueWhite.dck",
-        "U": "decks/starter/TMP - BlueBlack.dck",
-        "B": "decks/starter/UDS - Black.dck",
-        "R": "decks/starter/ULG - RedBlack.dck",
-        "G": "decks/starter/ULG - BlueGreen.dck"
-      },
-      "constructedStarterDecks": {
-        "W": "decks/starter/STH - WhiteBlack.dck",
-        "U": "decks/starter/EXO - BlueBlack.dck",
-        "B": "decks/starter/USG - BlackWhite.dck",
-        "R": "decks/starter/TMP - RedWhite.dck",
-        "G": "decks/starter/ULG - GreenWhite.dck"
-      },
       "pileDecks": {
         "W": "decks/starter/pile_white_n.json",
         "B": "decks/starter/pile_black_n.json",
@@ -224,20 +202,6 @@
       "lifeLoss": 0.3,
       "sellFactor": 0.25,
       "shardSellRatio": 0.6,
-      "starterDecks": {
-        "W": "decks/starter/VIS - White.dck",
-        "U": "decks/starter/MIR - BlueRed.dck",
-        "B": "decks/starter/MIR - Black.dck",
-        "R": "decks/starter/VIS - Red.dck",
-        "G": "decks/starter/MIR - GreenWhite - Jungle_Jam.dck"
-      },
-      "constructedStarterDecks": {
-        "W": "decks/starter/WTH - BlueWhite.dck",
-        "U": "decks/starter/VIS - BlueBlack.dck",
-        "B": "decks/starter/WTH - Black.dck",
-        "R": "decks/starter/WTH - Red.dck",
-        "G": "decks/starter/VIS - GreenRed.dck"
-      },
       "pileDecks": {
         "W": "decks/starter/pile_white_h.json",
         "B": "decks/starter/pile_black_h.json",
@@ -267,20 +231,6 @@
       "lifeLoss": 0.3,
       "sellFactor": 0.05,
       "shardSellRatio": 0.3,
-      "starterDecks": {
-        "W": "decks/starter/Starter 1999 - White.dck",
-        "U": "decks/starter/7ED - Blue.dck",
-        "B": "decks/starter/7ED - Black.dck",
-        "R": "decks/starter/7ED - Red.dck",
-        "G": "decks/starter/7ED - Green.dck"
-      },
-      "constructedStarterDecks": {
-        "W": "decks/starter/7ED - White.dck",
-        "U": "decks/starter/Starter 1999 - Blue.dck",
-        "B": "decks/starter/Starter 1999 - Black.dck",
-        "R": "decks/starter/Starter 1999 - Red.dck",
-        "G": "decks/starter/Starter 1999 - Green.dck"
-      },
       "pileDecks": {
         "W": "decks/starter/pile_white_h.json",
         "B": "decks/starter/pile_black_h.json",

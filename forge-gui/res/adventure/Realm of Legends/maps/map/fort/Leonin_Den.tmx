@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="88">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="89">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -23,7 +23,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJydVTFOAzEQNAkSiqL0+UHyDERzJyWf4BUkAfETKvgNxfEBlHRR0qaEAka+IeNlbSxGOp1vPZ5d7659IZzxNorvo9g6xxbMfNuPN5N07n7yi/7jg/PbWQi7WUY843eRpycoaX982z+dudd5fF8PQni+iA+B8c0g5a37PS57Tutow9bJvm+n6RpgP48+H4fpOuJhGH2Dp3aNgbB1sOA8akGfsO0uo5055zd910DrdZCx1h14r9CDf/KoSx3mwPbCSvbeOHFBD7oa5+kqvpkDaGh8pXzaHr9zuNR7mp5ttobEX3lpHJvV0phU72Ucn6WMW+ExJ+xLzZG3L0LzQz32DHx4gN32O9CNfH4JugbnUvtV94A46ZPntwbouYWMDw5n3+vBN+8NfbhP8jRnrJdX2xo0wb9rrT5QujtXjgbzR402w9Ue1Hst99+w90Euttx62G1PlnLg8QnW04vJQ82Z/y+8s5Tzwzi8vNHWmf8t8QWMTmfV
+   eJydVUtOwzAQNS0SqlD3vUFzDMQmkZpLsIIbUD7iJqzgNl2kF0B0V7XbLmFBnpxHn6fjEPGkKM74+c14ZuyEcMR6Et97sTWOLZj5qhs/TtO5p+kJ/dcH5z/nIWzmGfGM30WenqBP+6u1fztzqyK+r0YhvJ3Fh8D4epTyHro91h2ncrRha2TfN7N0DbAtos+XcbqOeB5H3+CpXWMgbB0sOI9a0Cdsm/NoZ875Td9DoPXayVjrDnwM0IN/8qhLHebA9sJS9l46cUEPuhrn4SK+mQNoaHx9+bQ9fu9wqfc6O9psDYm/8lI6NqulMane+2V8ahlXwmNO2JeaI29fhOaHeuwZ+PAAu+13oJmcchdtz9dF3r+uwbnUftU9IE76XPXoEbct566IPcc+w3jncLedHnzz3tCH+yRPc8Z6ebUdgjL4d63VB/ruzqWjwfxRo8pwtQf1Xsv9N+x9kIsttx5225N9OfD4BOvpxeRhyJn/L7yzlPPDOLy80daY/y3xA71oads=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -83,6 +83,7 @@
   </object>
   <object id="64" template="../../../../common/maps/obj/enemy.tx" x="215.728" y="49.7504">
    <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Ajani's Mantra&quot;, &quot;Oath of Ajani&quot; ] }"/>
     <property name="enemy" value="Ajani"/>
     <property name="pursueRange" type="int" value="0"/>
    </properties>
@@ -105,6 +106,7 @@
   </object>
   <object id="67" template="../../../../common/maps/obj/enemy.tx" x="16.2703" y="150.419">
    <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Pack Leader&quot;, &quot;Animal Sanctuary&quot; ] }"/>
     <property name="enemy" value="Rin and Seri"/>
     <property name="fleeRange" value="30"/>
     <property name="pursueRange" type="int" value="30"/>
@@ -167,5 +169,13 @@
   <object id="85" template="../../../../common/maps/obj/collision.tx" x="128.69" y="32.6667" width="14.6202" height="32"/>
   <object id="86" template="../../../../common/maps/obj/collision.tx" x="33.3566" y="20" width="30.2869" height="27.3333"/>
   <object id="87" template="../../../../common/maps/obj/collision.tx" x="400.857" y="19.3333" width="30.2869" height="27.3333"/>
+  <object id="88" template="../../../../common/maps/obj/shop.tx" x="432.624" y="180.531">
+   <properties>
+    <property name="commonShopList" value="SmallCats"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

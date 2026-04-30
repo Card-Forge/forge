@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Ratbert
+Title=Ratbert
+Icon=Ratbert.jpg
+Difficulty=Very Hard
+Description=./Modern/Aetherdrift/whiterknight_-_Selesnya_Ritual_(Modern,_#2381414).dck
+Deck Type=constructed
+
+[Main]
+1 Eternal Witness
+1 Haywire Mite
+4 Ocelot Pride
+4 White Orchid Phantom
+1 Springheart Nantuko
+4 Guide of Souls
+2 Witch Enchanter
+1 Mockingbird
+2 Brightglass Gearhulk
+1 Noble Hierarch
+1 Phantasmal Image
+1 Skyclave Apparition
+4 Solitude
+4 Ranger-Captain of Eos
+4 Ephemerate
+3 Birthing Ritual
+1 Static Prison
+1 Hallowed Fountain
+3 Temple Garden
+2 Lush Portico
+1 Meticulous Archive
+3 Flooded Strand
+4 Windswept Heath
+4 Flagstones of Trokair
+1 Plains
+1 Forest
+1 Boseiju, Who Endures
+[Sideboard]
+1 Haywire Mite
+1 Elesh Norn, Mother of Machines
+1 Boromir, Warden of the Tower
+1 Stone of Erech
+1 Lavinia, Azorius Renegade
+1 Orim's Chant
+3 Consign to Memory
+1 Tormod's Crypt
+1 Deafening Silence
+3 Sanctifier en-Vec
+1 Endurance

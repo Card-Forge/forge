@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Chewbacca
+Title=Chewbacca
+Icon=Chewbacca.jpg
+Difficulty=Easy
+Description=./Standard/Duskmourn_House_of_Horror/E_Hembree_-_Domain_Zur_Overlords_(Standard,_#2282519).dck
+Deck Type=constructed
+
+[Main]
+3 Overlord of the Floodpits
+4 Overlord of the Hauntwoods
+3 Overlord of the Mistmoors
+4 Zur, Eternal Schemer
+4 Get Lost
+2 Scrollshift
+2 Herd Migration
+2 Split Up
+2 Sunfall
+4 Leyline Binding
+4 Up the Beanstalk
+2 Shadowy Backstreet
+2 Floodfarm Verge
+3 Plains
+2 Hedge Maze
+3 Hushwood Verge
+1 Island
+4 Lush Portico
+2 Meticulous Archive
+2 Forest
+4 Cavern of Souls
+1 Swamp
+[Sideboard]
+2 Rest in Peace
+1 Doppelgang
+3 Elspeth's Smite
+2 Negate
+3 Pawpatch Formation
+4 Authority of the Consuls

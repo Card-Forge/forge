@@ -142,14 +142,14 @@ public class GameLogPanel extends JPanel {
         final boolean showCardImages = FModel.getPreferences().getPrefBoolean(FPref.UI_LOG_SHOW_CARD_IMAGES);
 
         final JTextArea tar;
-        if (card != null && showCardImages && viewers != null) {
+        if (card != null && showCardImages) {
             tar = new LogEntryTextArea(text, useAlternateBackColor, card, viewers);
         } else {
             tar = createNewLogEntryJTextArea(text, useAlternateBackColor);
         }
 
         if (card != null) {
-            ((JComponent) tar).putClientProperty(CARD_VIEW_KEY, card);
+            tar.putClientProperty(CARD_VIEW_KEY, card);
         }
 
         // If the minimum is not specified then the JTextArea will

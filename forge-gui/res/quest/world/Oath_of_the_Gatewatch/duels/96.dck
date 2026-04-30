@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Iblis
+Title=Iblis
+Icon=Iblis.jpg
+Difficulty=Hard
+Description=../Modern/Oath_of_the_Gatewatch/Grand_Prix_Melbourne_2016/Patty_Robertson_-_Eldrazi_(Modern,_#605818).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Drowner of Hope
+4 Eldrazi Displacer
+4 Eldrazi Mimic
+4 Eldrazi Skyspawner
+4 Endless One
+4 Reality Smasher
+4 Thought-Knot Seer
+3 Dismember
+4 Path to Exile
+4 Adarkar Wastes
+3 Cavern of Souls
+4 Eldrazi Temple
+4 Eye of Ugin
+4 Flooded Strand
+2 Hallowed Fountain
+1 Island
+2 Plains
+1 Temple Garden
+[Sideboard]
+1 All Is Dust
+1 Grafdigger's Cage
+1 Hurkyl's Recall
+1 Oblivion Ring
+1 Phyrexian Metamorph
+2 Rest in Peace
+3 Stony Silence
+3 Stubborn Denial
+1 Vesuva
+1 World Breaker

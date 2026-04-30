@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=The Spectre
+Title=The Spectre
+Icon=The Spectre.jpg
+Difficulty=Hard
+Description=./Modern/Aetherdrift/RagingTiltMonster_-_Izzet_Wizards_(Modern,_#2386473).dck
+Deck Type=constructed
+
+[Main]
+3 Snapcaster Mage
+3 Subtlety
+4 Tamiyo, Inquisitive Student
+4 Thundertrap Trainer
+2 Harbinger of the Seas
+4 Force of Negation
+3 Sink into Stupor
+4 Consider
+4 Counterspell
+1 Spell Snare
+4 Lightning Bolt
+4 Flame of Anor
+1 Dismember
+1 Mountain
+1 Polluted Delta
+3 Island
+2 Thundering Falls
+3 Bloodstained Mire
+2 Riverpyre Verge
+1 Otawara, Soaring City
+4 Scalding Tarn
+2 Steam Vents
+[Sideboard]
+4 Consign to Memory
+1 Harbinger of the Seas
+1 Surgical Extraction
+1 Dismember
+1 Mystical Dispute
+1 Dress Down
+3 Pyroclasm
+3 Relic of Progenitus

@@ -553,13 +553,14 @@
 "description":"Plains Perfection",            
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"EquipmentShop",   
-  "rewards": [ 
+  "rewards": [
     { "type": "item","count":1, "itemName": "Vindicator Greaves"  },
-    { "type": "item","count":1, "itemName": "Tome of Dispelling"  },
-    { "type": "item","count":1, "itemName": "Mask of Hypochondria"  },
     { "type": "item","count":1, "itemName": "Ring of Thune"  },
     { "type": "item","count":1, "itemName": "Skyclave Maul"  },
-    { "type": "item","count":1, "itemName": "Plains Outfit"  },
+    { "type": "item","count":1, "itemName": "Meadow Outfit"  },
+    { "type": "item","count":1, "itemName": "Jewel of Blessings"  },
+    { "type": "item","count":1, "itemName": "High Ground Helm"  },
+    { "type": "item","count":1, "itemName": "Token of Shielding"  },
 	{ "type": "item","count":1, "itemName": "Token of Bounty"  }
     
     ]
@@ -573,12 +574,13 @@
   "rewards": [ 
 	{ "type": "item","count":1, "itemName": "Peddler's Shoes"  },
 	{ "type": "item","count":1, "itemName": "Sunbeam Gauntlet"  },
+    { "type": "item","count":1, "itemName": "Tome of Dispelling"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Mirth"  },
+    { "type": "item","count":1, "itemName": "Mask of Hypochondria"  },
 	{ "type": "item","count":1, "itemName": "Jousting Lance"  },
-	{ "type": "item","count":1, "itemName": "Blessed Armor"  },
-	{ "type": "item","count":1, "itemName": "Divinely Blessed Armor"  }
+    { "type": "item","count":1, "itemName": "Greaves of Glare"  },
+	{ "type": "item","count":1, "itemName": "Blessed Armor"  }
 
-    
     ]
 
 },
@@ -589,11 +591,12 @@
 "sprite":"EquipmentShop",   
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Brimstone Boots"  },
-    { "type": "item","count":1, "itemName": "Tome of Fire"  },
-    { "type": "item","count":1, "itemName": "Mask of Pyromania"  },
     { "type": "item","count":1, "itemName": "Ring of Valkas"  },
+    { "type": "item","count":1, "itemName": "Jewel of War"  },
+    { "type": "item","count":1, "itemName": "Helm of Battle"  },
     { "type": "item","count":1, "itemName": "Dire Flail"  },
-    { "type": "item","count":1, "itemName": "Mountain Cloak"  },
+    { "type": "item","count":1, "itemName": "Smoldering Cloak"  },
+    { "type": "item","count":1, "itemName": "Token of Blades"  },
 	{ "type": "item","count":1, "itemName": "Token of Violence"  }
     
     ]
@@ -607,10 +610,12 @@
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Firefrightener Shoes"  },
 	{ "type": "item","count":1, "itemName": "Pyrite Gauntlet"  },
+    { "type": "item","count":1, "itemName": "Tome of Fire"  },
+    { "type": "item","count":1, "itemName": "Mask of Pyromania"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Fury"  },
+    { "type": "item","count":1, "itemName": "Blistering Breeches"  },
 	{ "type": "item","count":1, "itemName": "Chitinous Club"  },
-	{ "type": "item","count":1, "itemName": "Flaming Armor"  },
-	{ "type": "item","count":1, "itemName": "Blazing Armor"  }
+	{ "type": "item","count":1, "itemName": "Flaming Armor"  }
     ]
 
 },
@@ -621,11 +626,12 @@
 "sprite":"EquipmentShop",   
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Cryptologist's Fins"  },
-    { "type": "item","count":1, "itemName": "Tome of Removal"  },
-    { "type": "item","count":1, "itemName": "Mask of Compulsion"  },
     { "type": "item","count":1, "itemName": "Ring of Evos Isle"  },
+    { "type": "item","count":1, "itemName": "Jewel of Winds"  },
+    { "type": "item","count":1, "itemName": "Cunning Mask"  },
     { "type": "item","count":1, "itemName": "Giant's Bracer"  },
-    { "type": "item","count":1, "itemName": "Island Shirt"  },
+    { "type": "item","count":1, "itemName": "Isle Shirt"  },
+    { "type": "item","count":1, "itemName": "Token of Insight"  },
 	{ "type": "item","count":1, "itemName": "Token of Investigation"  }
     
     ]
@@ -639,10 +645,12 @@
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Trickster's Shoes"  },
 	{ "type": "item","count":1, "itemName": "Aether Gauntlet"  },
+    { "type": "item","count":1, "itemName": "Tome of Removal"  },
+    { "type": "item","count":1, "itemName": "Mask of Compulsion"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Mischief"  },
+    { "type": "item","count":1, "itemName": "Barrier Breeches"  },
 	{ "type": "item","count":1, "itemName": "Hoversail Glove"  },
-	{ "type": "item","count":1, "itemName": "Sage's Robes"  },
-	{ "type": "item","count":1, "itemName": "Grand Sage's Robes"  }
+	{ "type": "item","count":1, "itemName": "Sage's Robes"  }
     ]
 
 },
@@ -653,11 +661,12 @@
 "sprite":"EquipmentShop",   
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Cutthroat Skirt"  },
-    { "type": "item","count":1, "itemName": "Tome of the Executioner"  },
-    { "type": "item","count":1, "itemName": "Mask of Mortiphobia"  },
     { "type": "item","count":1, "itemName": "Ring of Xathrid"  },
+    { "type": "item","count":1, "itemName": "Ghoulish Jewel"  },
+    { "type": "item","count":1, "itemName": "Helm of the Fallen"  },
     { "type": "item","count":1, "itemName": "Poet's Quill"  },
-    { "type": "item","count":1, "itemName": "Swamp Leather"  },
+    { "type": "item","count":1, "itemName": "Mire Leather"  },
+    { "type": "item","count":1, "itemName": "Token of Decay"  },
 	{ "type": "item","count":1, "itemName": "Token of Blood"  }
     
     ]
@@ -671,10 +680,12 @@
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Witch's Shoes"  },
 	{ "type": "item","count":1, "itemName": "Necrogen Gauntlet"  },
+    { "type": "item","count":1, "itemName": "Tome of the Executioner"  },
+    { "type": "item","count":1, "itemName": "Mask of Mortiphobia"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Scorn"  },
+    { "type": "item","count":1, "itemName": "Soul Shoes"  },
 	{ "type": "item","count":1, "itemName": "Blight Sickle"  },
-	{ "type": "item","count":1, "itemName": "Forbidden Robes"  },
-	{ "type": "item","count":1, "itemName": "Restricted Robes"  }
+	{ "type": "item","count":1, "itemName": "Forbidden Robes"  }
     ]
 
 },
@@ -685,11 +696,12 @@
 "sprite":"EquipmentShop",   
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Beastbreaker Boots"  },
-    { "type": "item","count":1, "itemName": "Tome of Might"  },
-    { "type": "item","count":1, "itemName": "Mask of Narcissism"  },
     { "type": "item","count":1, "itemName": "Ring of Kalonia"  },
-    { "type": "item","count":1, "itemName": "Spiked Ripsaw"  },
-    { "type": "item","count":1, "itemName": "Forest Shawl"  },
+    { "type": "item","count":1, "itemName": "Colossal Dreadmace"  },
+    { "type": "item","count":1, "itemName": "Jewel of Rage"  },
+    { "type": "item","count":1, "itemName": "Mighty Helm"  },
+    { "type": "item","count":1, "itemName": "Karst Shawl"  },
+    { "type": "item","count":1, "itemName": "Token of Landing"  },
 	{ "type": "item","count":1, "itemName": "Token of Exploration"  }
     
     ]
@@ -703,10 +715,12 @@
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Greenseeker's Shoes"  },
 	{ "type": "item","count":1, "itemName": "Lifespark Gauntlet"  },
+    { "type": "item","count":1, "itemName": "Tome of Might"  },
+    { "type": "item","count":1, "itemName": "Mask of Narcissism"  },
 	{ "type": "item","count":1, "itemName": "Amulet of Favor"  },
+    { "type": "item","count":1, "itemName": "Spore Skirt"  },
 	{ "type": "item","count":1, "itemName": "Brawler's Cestus"  },
-	{ "type": "item","count":1, "itemName": "Heavy Armor"  },
-	{ "type": "item","count":1, "itemName": "Ultra Heavy Armor"  }
+	{ "type": "item","count":1, "itemName": "Heavy Armor"  }
     
     ]
 
@@ -736,6 +750,8 @@
 	"sprite":"ItemShop",   
 	  "rewards": [ 
 		{ "type": "item","count":1, "itemName": "Ghost rune"  },
+        { "type": "item","count":1, "itemName": "Token of Spirit"  },
+        { "type": "item","count":1, "itemName": "Token of Soaring Spirit"  },
 		{ "type": "item","count":1, "itemName": "Captive Soul of a Priest"  },
 		{ "type": "item","count":1, "itemName": "Captive Soul of a Saint"  },
 		{ "type": "item","count":1, "itemName": "Captive Soul of a Knight"  },
@@ -800,10 +816,174 @@
 			{ "type": "item","count":1, "itemName": "Staff of Invisibility"  },
 			{ "type": "item","count":1, "itemName": "Bronze Blessing of Speed"  },
 			{ "type": "item","count":1, "itemName": "Silver Blessing of Speed"  },
-			{ "type": "item","count":1, "itemName": "Gold Blessing of Speed"  }
-			]
+			{ "type": "item","count":1, "itemName": "Gold Blessing of Speed"  },
+            {"type": "cardPackShop", "count": 1, "editions": ["THB"] },
+            {"type": "cardPackShop", "count": 1, "editions": ["THB"] },
+            {"type": "cardPackShop", "count": 1, "editions": ["THB"] },
+            {"type": "cardPackShop", "count": 1, "editions": ["THB"] }
+          ]
 		
 		},
+  {
+    "name":"BloomburrowBoosters",
+    "description":"Bumbleflower's Boosters",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"BoosterShop",
+    "rewards": [
+      {"type": "cardPackShop", "count": 1, "editions": ["BLB"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["BLB"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["BLB"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["BLB"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["BLB"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["BLB"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["BLB"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["BLB"] }
+    ]
+  },
+  {
+    "name":"OutlawBoosters",
+    "description":"Outlaw's Draw",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"BoosterShop",
+    "rewards": [
+      {"type": "cardPackShop", "count": 1, "editions": ["OTJ"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["OTJ"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["OTJ"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["OTJ"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["OTJ"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["OTJ"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["OTJ"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["OTJ"] }
+    ]
+  },
+  {
+    "name":"EdgeBoosters",
+    "description":"Vending Machine of Eternities",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"BoosterShop",
+    "rewards": [
+      {"type": "cardPackShop", "count": 1, "editions": ["EOE"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["EOE"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["EOE"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["EOE"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["EOE"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["EOE"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["EOE"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["EOE"] }
+    ]
+  },
+  {
+    "name":"NewDominariaBoosters",
+    "description":"Packed in Dominaria",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"BoosterShop",
+    "rewards": [
+      {"type": "cardPackShop", "count": 1, "editions": ["DOM"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["DOM"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["DOM"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["DOM"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["DMU"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["DMU"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["DMU"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["DMU"] }
+    ]
+  },
+  {
+    "name":"OldDominariaBoosters",
+    "description":"Dominarian Vintage",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"BoosterShop",
+    "rewards": [
+      {"type": "cardPackShop", "count": 1, "editions": ["WTH"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["TMP"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["STH"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["EXO"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["INV"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["PLS"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["APC"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["MMQ"] }
+    ]
+  },
+  {
+    "name":"ClassicBoosters",
+    "description":"Sealed Core",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"BoosterShop",
+    "rewards": [
+      {"type": "cardPackShop", "count": 1, "editions": ["4ED"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["5ED"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["6ED"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["7ED"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["8ED"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["9ED"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["10E"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["CHR"] }
+    ]
+  },
+  {
+    "name":"ZendikarBoosters",
+    "description":"Hedron Crackers",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"BoosterShop",
+    "rewards": [
+      {"type": "cardPackShop", "count": 1, "editions": ["ZEN"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["WWK"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["ROE"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["BFZ"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["OGW"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["ZNR"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["ZEN"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["ZNR"] }
+    ]
+  },
+  {
+    "name":"AlaraBoosters",
+    "description":"Conflux of Commerce",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"BoosterShop",
+    "rewards": [
+      {"type": "cardPackShop", "count": 1, "editions": ["ALA"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["ALA"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["ALA"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["ALA"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["ARB"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["ARB"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["CON"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["CON"] }
+    ]
+  },
+  {
+    "name":"EldraineBoosters",
+    "description":"Throne of Packs",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"BoosterShop",
+    "rewards": [
+      {"type": "cardPackShop", "count": 1, "editions": ["ELD"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["ELD"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["ELD"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["ELD"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["WOE"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["WOE"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["WOE"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["WOE"] }
+    ]
+  },
+  {
+    "name":"InnistradBoosters",
+    "description":"Packed with Terror",
+    "spriteAtlas":"maps/tileset/buildings.atlas",
+    "sprite":"BoosterShop",
+    "rewards": [
+      {"type": "cardPackShop", "count": 1, "editions": ["ISD"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["ISD"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["DKA"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["AVR"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["SOI"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["EMN"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["MID"] },
+      {"type": "cardPackShop", "count": 1, "editions": ["VOW"] }
+    ]
+  },
 {                                      
 "name":"Swamp",    
 "description":"Swamps For Sale",

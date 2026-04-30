@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Spock
+Title=Spock
+Icon=Spock.jpg
+Difficulty=Hard
+Description=./Modern/Phyrexia_All_Will_Be_One/Pizzapiebob_-_UW_Ephemerate_(Modern,_#1581592).dck
+Deck Type=constructed
+
+[Main]
+3 Wall of Omens
+1 Sun Titan
+4 Thraben Inspector
+1 Walking Ballista
+4 Ranger-Captain of Eos
+2 Skyclave Apparition
+4 Solitude
+2 Ambitious Farmhand
+1 Elesh Norn, Mother of Machines
+4 Ephemerate
+4 March of Otherworldly Light
+2 Supreme Verdict
+4 Teferi, Time Raveler
+3 Hallowed Fountain
+1 Mistveil Plains
+3 Arid Mesa
+2 Emeria, the Sky Ruin
+4 Marsh Flats
+7 Plains
+4 Field of Ruin
+[Sideboard]
+2 Surgical Extraction
+3 Hallowed Moonlight
+2 Dovin's Veto
+2 Sanctifier en-Vec
+1 Dress Down
+2 Unlicensed Hearse
+3 Temporary Lockdown

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Legolas
+Title=Legolas
+Icon=Legolas.jpg
+Difficulty=Hard
+Description=../Modern/Eldritch_Moon/Ovinogeddon_X1_Sunday_Big_Side_Event/Tommaso_Passalacqua_-_UB_Faeries_(Modern,_#640673).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Kalitas, Traitor of Ghet
+3 Mistbind Clique
+4 Spellstutter Sprite
+3 Vendilion Clique
+2 Cryptic Command
+3 Dismember
+3 Smother
+4 Ancestral Vision
+4 Collective Brutality
+4 Thoughtseize
+4 Bitterblossom
+1 Cavern of Souls
+4 Creeping Tar Pit
+1 Darkslick Shores
+5 Island
+4 Mutavault
+1 River of Tears
+4 Secluded Glen
+2 Swamp
+1 Urborg, Tomb of Yawgmoth
+1 Watery Grave
+[Sideboard]
+3 Countersquall
+2 Damnation
+2 Engineered Explosives
+3 Fulminator Mage
+2 Hurkyl's Recall
+3 Relic of Progenitus

@@ -18,7 +18,10 @@
 package forge.screens.match.views;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.IdentityHashMap;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.JPanel;
 
@@ -187,9 +190,10 @@ public class VLog implements IVDoc<CLog> {
     }
 
     private void displayNewGameLogEntries(final GameView model) {
-        final List<GameLogEntry> newLogEntries = Lists.reverse(getNewGameLogEntries(model));
-        if (newLogEntries.size() > 0) {
-            addNewLogEntriesToJPanel(newLogEntries);
+        for (final GameLogEntry logEntry : Lists.reverse(getNewGameLogEntries(model))) {
+            gameLog.setTextFont(getJTextAreaFont(logEntry.type()));
+            gameLog.addLogEntry(logEntry.message(), logEntry.sourceCard(), controller.getMatchUI().getLocalPlayers());
+            this.displayedLogEntries.add(logEntry);
         }
     }
 
@@ -204,19 +208,15 @@ public class VLog implements IVDoc<CLog> {
             } else {
                 logEntries = model.getGameLog().getLogEntriesForVerbosity(verbosity);
             }
-            // Set subtraction - remove all log entries from new list which are already displayed.
-            logEntries.removeAll(this.displayedLogEntries);
+            // Use identity comparison to filter displayed entries. GameLogEntry is a record
+            // (value equality) and CardView.equals() compares by ID, so recasting the same card
+            // produces a value-equal entry that removeAll would incorrectly filter out.
+            Set<GameLogEntry> displayed = Collections.newSetFromMap(new IdentityHashMap<>());
+            displayed.addAll(displayedLogEntries);
+            logEntries.removeIf(displayed::contains);
             return logEntries;
         }
         return new ArrayList<>();
-    }
-
-    private void addNewLogEntriesToJPanel(final List<GameLogEntry> newLogEntries) {
-        for (final GameLogEntry logEntry : newLogEntries) {
-            gameLog.setTextFont(getJTextAreaFont(logEntry.type()));
-            gameLog.addLogEntry(logEntry.message(), logEntry.sourceCard(), controller.getMatchUI().getLocalPlayers());
-            this.displayedLogEntries.add(logEntry);
-        }
     }
 
     private static SkinFont getJTextAreaFont(final GameLogEntryType logEntryType) {

@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Blackbeard
+Title=Blackbeard
+Icon=Blackbeard.jpg
+Difficulty=Easy
+Description=Shadows_over_Innistrad/PPTQ_Sydney_-_Brainstorm_Sabadell/Adri├á_Sole_-_R-W_Eldrazi_(Standard,_#612318).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Archangel Avacyn
+4 Eldrazi Displacer
+4 Hedron Crawler
+4 Knight of the White Orchid
+4 Reality Smasher
+4 Thought-Knot Seer
+2 Secure the Wastes
+1 Warping Wail
+4 Declaration in Stone
+2 Silkwrap
+2 Gideon, Ally of Zendikar
+4 Battlefield Forge
+4 Caves of Koilos
+3 Foundry of the Consuls
+10 Plains
+2 Ruins of Oran-Rief
+3 Westvale Abbey
+[Sideboard]
+2 Always Watching
+3 Archangel of Tithes
+2 Hidden Dragonslayer
+2 Lantern Scout
+3 Stasis Snare

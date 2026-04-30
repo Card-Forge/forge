@@ -71,11 +71,9 @@ public class CopyPermanentAi extends SpellAbilityAi {
             }
         }
 
-        if (sa.costHasManaX() && sa.getSVar("X").equals("Count$xPaid")) {
+        if (sa.costHasManaX()) {
             // Set PayX here to maximum value. (Osgir)
-            final int xPay = ComputerUtilCost.getMaxXValue(sa, aiPlayer, sa.isTrigger());
-
-            sa.setXManaCostPaid(xPay);
+            ComputerUtilCost.setMaxXValue(sa, aiPlayer, sa.isTrigger());
         }
 
         if (sa.usesTargeting() && sa.hasParam("TargetingPlayer")) {
@@ -206,9 +204,8 @@ public class CopyPermanentAi extends SpellAbilityAi {
             if (betterChoices.isEmpty()) {
                 if (mandatory) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                } else {
-                    return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
                 }
+                return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
             }
         }
 

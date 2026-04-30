@@ -1,0 +1,16 @@
+Name:Wildgrowth Archaic
+ManaCost:2G 2G
+Types:Creature Avatar
+PT:0/0
+K:Trample
+K:Reach
+K:etbCounter:P1P1:X:no Condition:Converge — This creature enters with a +1/+1 counter on it for each color of mana spent to cast it.
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ Whenever you cast a creature spell, that creature enters with X additional +1/+1 counters on it, where X is the number of colors of mana spent to cast it.
+SVar:TrigEffect:DB$ Effect | RememberObjects$ TriggeredCard | SetChosenNumber$ Y | ReplacementEffects$ ETBCreat | ExileOnMoved$ Stack
+SVar:ETBCreat:Event$ Moved | ValidCard$ Card.IsRemembered | Destination$ Battlefield | ReplaceWith$ DBPutP1P1 | ReplacementResult$ Updated
+SVar:DBPutP1P1:DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | ETB$ True | CounterNum$ Count$ChosenNumber
+SVar:X:Count$Converge
+SVar:Y:TriggeredCard$Converge
+DeckHas:Ability$Counters
+DeckHints:Type$Instant|Sorcery
+Oracle:Trample, reach\nConverge — This creature enters with a +1/+1 counter on it for each color of mana spent to cast it.\nWhenever you cast a creature spell, that creature enters with X additional +1/+1 counters on it, where X is the number of colors of mana spent to cast it.

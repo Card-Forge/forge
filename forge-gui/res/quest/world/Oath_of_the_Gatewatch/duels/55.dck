@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Rogue
+Title=Rogue
+Icon=Rogue.jpg
+Difficulty=Hard
+Description=../Modern/Oath_of_the_Gatewatch/2016_TCGplayer_Modern_State_Championship_-_KS/Jake_Crowder_-_Zoo_(Modern,_#623930).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Burning-Tree Emissary
+4 Experiment One
+4 Flinthoof Boar
+2 Ghor-Clan Rampager
+4 Goblin Guide
+4 Kird Ape
+4 Reckless Bushwhacker
+4 Wild Nacatl
+4 Atarka's Command
+4 Lightning Bolt
+2 Mutagenic Growth
+2 Rancor
+2 Bloodstained Mire
+1 Forest
+1 Mountain
+1 Sacred Foundry
+2 Stomping Ground
+1 Temple Garden
+2 Verdant Catacombs
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+4 Destructive Revelry
+1 Gaddock Teeg
+2 Gut Shot
+3 Kitchen Finks
+2 Path to Exile
+2 Rest in Peace
+1 Scavenging Ooze

@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Mr Smith
+Title=Mr Smith
+Icon=Mr Smith.jpg
+Difficulty=Medium
+Description=./Standard/Duskmourn_House_of_Horror/Artyom_Arepin_-_Azorius_Caretaker_(Standard,_#2258342).dck
+Deck Type=constructed
+
+[Main]
+4 Beza, the Bounding Spring
+1 Loran of the Third Path
+3 Enduring Innocence
+2 Sanguine Evangelist
+4 Carrot Cake
+4 Get Lost
+1 Soul Partition
+2 Parting Gust
+4 Sunfall
+1 Exorcise
+4 Lay Down Arms
+4 Caretaker's Talent
+2 Archangel Elspeth
+14 Plains
+4 Meticulous Archive
+4 Fountainport
+2 Sunken Citadel
+[Sideboard]
+2 Jace, the Perfected Mind
+3 Exorcise
+3 Elspeth's Smite
+2 Negate
+2 Temporary Lockdown
+3 Rest in Peace

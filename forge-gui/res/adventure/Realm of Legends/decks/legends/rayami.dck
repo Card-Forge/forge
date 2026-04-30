@@ -33,8 +33,8 @@ Name=Rayami
 1 Fight Rigging|snc
 1 Forced Adaptation|gtc
 1 Foreboding Landscape|mh3
-4 Forest|zen
-4 Forest|zen
+5 Forest|zen|[248]
+4 Forest|zen|[249]
 1 Gifted Aetherborn|aer
 1 Gladecover Scout|m14
 1 Gluttonous Slug|mh1
@@ -63,7 +63,6 @@ Name=Rayami
 1 Ravenous Amulet|fdn
 1 Ravine Raider|blb
 1 Ritual of Soot|grn
-1 Rogue's Passage|otc
 1 Sanguine Spy|snc
 1 Search for Tomorrow|ima
 1 Simic Growth Chamber|c20
@@ -83,4 +82,4 @@ Name=Rayami
 1 Village Rites|khm
 1 Sol Ring|c19
 1 Arcane Signet|scd
-1 
+1 Vampire of the Dire Moon|m20

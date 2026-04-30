@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="60">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="61">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx" />
  </editorsettings>
@@ -8,8 +8,8 @@
   "startBattleWithCard": [ "Back to Basics|USG", "Heightened Awareness|PCY", "Future Sight|ONS" ]
 }</property>
  </properties>
- <tileset firstgid="1" source="../../../../../../common/maps/tileset/main.tsx" />
- <tileset firstgid="10113" source="../../../../../../common/maps/tileset/buildings.tsx" />
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx" />
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx" />
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxby8LAsHYUo+CZnBA80O5AxkwiEDxQ9lLLbnMuCCbVv5TGRxIHBBPrV2r5WZUdgXGpaRVkYGgThNjXIkgdu4mxV1mIgUFFCGKXEpQGuUUNyJ7GCcHk2onPXlUhiH83sCPwQaDYLE7a2gsyX0MINX41kPxKjr3JHBCMT91tUQYGdSFU/4LC2JiLPHtB+BMDBONT0y6IiF8Q1hSCuIXSNE0MRg5jNTrai+4Gets5VDAAVFFBAg==
@@ -29,13 +29,13 @@
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../../../../../common/maps/obj/entry_up.tx" x="101.474" y="271.026" width="21.5" height="16">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="101.474" y="271.026" width="21.5" height="16">
    <properties>
     <property name="teleport" value="" />
    </properties>
   </object>
-  <object id="47" template="../../../../../../common/maps/obj/gold.tx" x="345" y="186" />
-  <object id="56" template="../../../../../../common/maps/obj/gold.tx" x="182.5" y="184">
+  <object id="47" template="../../../../common/maps/obj/gold.tx" x="345" y="186" />
+  <object id="56" template="../../../../common/maps/obj/gold.tx" x="182.5" y="184">
    <properties>
     <property name="reward">[
   {
@@ -46,7 +46,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="55" template="../../../../../../common/maps/obj/treasure.tx" x="337.421" y="158.395">
+  <object id="55" template="../../../../common/maps/obj/treasure.tx" x="337.421" y="158.395">
    <properties>
     <property name="reward">[
   {
@@ -112,7 +112,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="49" template="../../../../../../common/maps/obj/gold.tx" x="86" y="185.5">
+  <object id="49" template="../../../../common/maps/obj/gold.tx" x="86" y="185.5">
    <properties>
     <property name="reward">[
   {
@@ -123,19 +123,19 @@
 ]</property>
    </properties>
   </object>
-  <object id="53" template="../../../../../../common/maps/obj/enemy.tx" gid="11419" x="104.079" y="123.763">
+  <object id="53" template="../../../../common/maps/obj/enemy.tx" gid="11419" x="104.079" y="123.763">
    <properties>
     <property name="effect">{ "startBattleWithCard": [ "Sylvan Yeti|PO2", "Library of Leng|LEA" ] }</property>
     <property name="enemy" value="Recaller of Ancestry" />
    </properties>
   </object>
-  <object id="54" template="../../../../../../common/maps/obj/enemy.tx" gid="11419" x="210.079" y="173.263">
+  <object id="54" template="../../../../common/maps/obj/enemy.tx" gid="11419" x="210.079" y="173.263">
    <properties>
     <property name="effect">{ "startBattleWithCard": [ "Underworld Dreams|LEG" ] }</property>
     <property name="enemy" value="Twister of Time" />
    </properties>
   </object>
-  <object id="50" template="../../../../../../common/maps/obj/enemy.tx" gid="11419" x="288.527" y="172.914" rotation="0">
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" gid="11419" x="288.527" y="172.914" rotation="0">
    <properties>
     <property name="dialog">[
     {
@@ -162,8 +162,8 @@
     <property name="enemy" value="Time Walker" />
    </properties>
   </object>
-  <object id="58" template="../../../../../../common/maps/obj/manashards.tx" x="105" y="91.6667" />
-  <object id="59" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="110" y="220" width="120" height="60">
+  <object id="58" template="../../../../common/maps/obj/manashards.tx" x="105" y="91.6667" />
+  <object id="59" template="../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="110" y="220" width="120" height="60">
    <properties>
     <property name="dialog">[
     {
@@ -187,6 +187,11 @@
         ]
     }
 ]</property>
+   </properties>
+  </object>
+   <object id="60" template="../../../../../../common/maps/obj/dialog.tx" type="dialog" gid="11530" x="81.5" y="281" width="60" height="40">
+   <properties>
+    <property name="dialog">[{"condition":[{"item":"Time Walker's Trophy"}],"text":"","options":[],"action":[{"removeItem":"Time Walker's Trophy"},{"addItem":"Time Walker's Trophy"}]}]</property>
    </properties>
   </object>
  </objectgroup>
