@@ -207,15 +207,13 @@ public class NetGameController implements IGameController {
     }
 
     public void setUiShouldSkipPhase(final PlayerView turnPlayer, final PhaseType phase, final boolean shouldSkip) {
-        yieldController.setSkipPhase(turnPlayer, phase, shouldSkip);
         send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.SkipPhase(turnPlayer, phase, shouldSkip));
     }
 
     @Override
     public void applyYieldUpdate(final YieldUpdate update) {
-        // Local self-apply for the three cases that route through sendYieldUpdate
-        // (marker/stack-yield user actions). Other cases write directly via dedicated
-        // setters above (SetCardAutoYield, TriggerDecision, SkipPhase, SeedFromClient).
+        // Local self-apply for marker/stack-yield user actions that route through
+        // sendYieldUpdate. Other cases dispatch via dedicated setters above.
         if (update instanceof YieldUpdate.SetMarker u) {
             yieldController.setMarker(u.phaseOwner(), u.phase());
         } else if (update instanceof YieldUpdate.ClearMarker) {
