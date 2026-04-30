@@ -1,6 +1,8 @@
 package forge.adventure.data;
 
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Json;
 import forge.StaticData;
 import forge.adventure.scene.TileMapScene;
 import forge.adventure.stage.GameHUD;
@@ -52,6 +54,7 @@ public class ArchipelagoData implements SaveFileContent {
     private final Set<String> blackItemShopList = new HashSet<>();
     private final Set<String> redItemShopList = new HashSet<>();
     private final Set<String> greenItemShopList = new HashSet<>();
+    private final Set<String> remainingEquipmentPool = new HashSet<>();
     private int totalGoldEarned = 0;
     private int totalExtraMaxLifeEarned = 0;
     private int totalShardsEarned = 0;
@@ -227,20 +230,29 @@ public class ArchipelagoData implements SaveFileContent {
     //  <Color>Equipment: 6 slots to randomize
     //  <Color>Items: 8 slots to randomize including 1 slot that is not equipment but rather a max health upgrade
     private void randomizeLocalEquipment() {
-        // First we read all the items from `shandalar/shops.json`
+        // First we get the names of all the items in the pool.
         ArrayList<String> equipmentNames = new ArrayList<>();
-        Array<ShopData> shops = WorldData.getShopList();
-        for (int i = 0; i < shops.size; i++) {
-            for (String s : equipmentShops) {
-                if (shops.get(i).name.toLowerCase().contains(s.toLowerCase())) {
-                    // We've found an equipment shop, extract all items and exclude the "life" item.
-                    for (RewardData reward : shops.get(i).rewards.toArray()) {
-                        if (Objects.equals(reward.type, "life")) continue;
-                        equipmentNames.add(reward.itemName);
+        // We also filter out the "overpowered" cards into this separate list, they might be fun to throw in later.
+        ArrayList<String> powerEquipmentNames = new ArrayList<>();
+        FileHandle handle = Config.instance().getFile(Paths.ITEMS);
+        if (handle.exists())
+        {
+            Json json = new Json();
+            Array<ItemData> shopList = json.fromJson(Array.class, ItemData.class, handle);
+
+            // First we read all the items from `adventure/common/world/items.json`
+            for (int i = 0; i < shopList.size; i++) {
+                if (shopList.get(i).equipmentSlot != null && !shopList.get(i).equipmentSlot.isEmpty()) {
+                    // We've found an equipment item, add it to the list but exclude the "overpowered" items.
+                    if (shopList.get(i).name.toLowerCase().contains("mox") || shopList.get(i).name.toLowerCase().contains("black lotus") || shopList.get(i).name.toLowerCase().contains("sol ring")) {
+                        powerEquipmentNames.add(shopList.get(i).name);
+                        continue;
                     }
+                    equipmentNames.add(shopList.get(i).name);
                 }
             }
         }
+
         // Scramble the equipment names
         Collections.shuffle(equipmentNames);
         // Return if we didn't find enough items.
@@ -257,7 +269,14 @@ public class ArchipelagoData implements SaveFileContent {
         blackItemShopList.addAll(equipmentNames.subList(50, 57));
         redItemShopList.addAll(equipmentNames.subList(57, 64));
         greenItemShopList.addAll(equipmentNames.subList(64, 71));
+        // Remove the first 72 items from the equipment list so we can use the remaining ones for future equipment rewards.
+        equipmentNames.removeAll(equipmentNames.subList(0, 71));
+        remainingEquipmentPool.addAll(equipmentNames);
     }
+
+    // Todo: Create a function that returns & rewards the player a random item from the remainingEquipmentPool and then removes it from the list.
+
+    // Todo: Create a function that returns a list of equipment for any given shop to sell based on the previously randomized lists.
 
     public boolean checkCardUnlocked(PaperCard card) {
         if (archipelagoMode == ArchipelagoMode.disabled) return true;
@@ -495,6 +514,7 @@ public class ArchipelagoData implements SaveFileContent {
         loadStringSet(data, "blackEquipmentShop", blackItemShopList);
         loadStringSet(data, "redEquipmentShop", redItemShopList);
         loadStringSet(data, "greenItemShop", greenItemShopList);
+        loadStringSet(data, "remainingEquipment", remainingEquipmentPool);
 
         setUnlockChecksRestAmount = data.containsKey("setUnlocksReceivedRest") ? data.readFloat("setUnlocksReceivedRest") : 0;
         receivedAmountOfSetUnlockChecks = data.containsKey("setUnlocksReceived") ? data.readInt("setUnlocksReceived") : 0;
@@ -537,6 +557,7 @@ public class ArchipelagoData implements SaveFileContent {
         saveStringSet(data, "blackEquipmentShop", blackItemShopList);
         saveStringSet(data, "redEquipmentShop", redItemShopList);
         saveStringSet(data, "greenItemShop", greenItemShopList);
+        saveStringSet(data, "remainingEquipment", remainingEquipmentPool);
 
         data.store("setUnlocksReceivedRest", setUnlockChecksRestAmount);
         data.store("setUnlocksReceived", receivedAmountOfSetUnlockChecks);
