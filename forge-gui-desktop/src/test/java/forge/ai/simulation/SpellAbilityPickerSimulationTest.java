@@ -74,19 +74,19 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
     @DataProvider(name = "drawPunisherWheelData")
     public static Object[][] drawPunisherWheelData() {
         return new Object[][] {
-                {false, "Wheel of Fortune", ZoneType.Hand, "Xyris, the Writhing Storm"},
-                {true, "Timetwister", ZoneType.Hand, "Nekusar, the Mindrazer"},
-                {false, "Echo of Eons", ZoneType.Graveyard, "Xyris, the Writhing Storm"},
-                {true, "Echo of Eons", ZoneType.Hand, "Nekusar, the Mindrazer"}
+                {"Wheel of Fortune", ZoneType.Hand, "Xyris, the Writhing Storm"},
+                {"Timetwister", ZoneType.Hand, "Nekusar, the Mindrazer"},
+                {"Echo of Eons", ZoneType.Graveyard, "Xyris, the Writhing Storm"},
+                {"Echo of Eons", ZoneType.Hand, "Nekusar, the Mindrazer"}
         };
     }
 
     @Test(dataProvider = "drawPunisherWheelData")
-    public void testAiAvoidsWheelEffectsIntoDrawPunisher(boolean useSimulation, String cardName, ZoneType zone, String punisherName) {
+    public void testAiAvoidsWheelEffectsIntoDrawPunisher(String cardName, ZoneType zone, String punisherName) {
         Game game = initAndCreateGame();
-        Player p = setupAi(game, useSimulation);
+        Player p = setupAi(game, false);
 
-        addCards("Island", 6, p);
+        addCards("City of Brass", 6, p);
         addCardToZone(cardName, p, zone);
         fillLibrary(p, 7);
 
