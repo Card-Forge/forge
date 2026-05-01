@@ -295,7 +295,7 @@ public class GameSimulator {
         }
 
         Player player = players.get(index);
-        if (player.equals(preservedPlayer)) {
+        if (player.equals(preservedPlayer) || player.getController().isAI()) {
             runWithSimulationControllers(game, preservedPlayer, players, index + 1, proc);
             return;
         }

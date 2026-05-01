@@ -2,7 +2,6 @@ package forge.ai.simulation;
 
 import com.google.common.collect.Lists;
 import forge.ai.ComputerUtilAbility;
-import forge.ai.PlayerControllerAi;
 import forge.card.CardStateName;
 import forge.card.MagicColor;
 import forge.game.Game;
@@ -16,6 +15,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.gamesimulationtests.util.PlayerControllerForTests;
 import forge.util.StreamUtil;
 
 import org.testng.AssertJUnit;
@@ -63,7 +63,7 @@ public class GameSimulationTest extends SimulationTest {
     }
 
     @Test
-    public void testResolveStackUsesSimulationControllersForAllNonPreservedPlayers() {
+    public void testResolveStackUsesSimulationControllersForNonAiPlayers() {
         Game game = initAndCreateThreePlayerGame();
 
         Player opponent = game.getPlayers().get(0);
@@ -86,17 +86,17 @@ public class GameSimulationTest extends SimulationTest {
         sa.setActivatingPlayer(opponent);
         game.getStack().addAndUnfreeze(sa);
 
-        PlayerControllerAi throwingController = new PlayerControllerAi(game, otherOpponent, otherOpponent.getLobbyPlayer()) {
+        PlayerControllerForTests throwingController = new PlayerControllerForTests(game, otherOpponent, otherOpponent.getLobbyPlayer()) {
             @Override
             public CardCollectionView choosePermanentsToSacrifice(SpellAbility ability, int min, int max,
                     CardCollectionView validTargets, String message) {
-                throw new AssertionError("resolveStack should install a simulation controller for this player");
+                throw new AssertionError("resolveStack should install a simulation controller for non-AI players");
             }
         };
 
         otherOpponent.runWithController(() -> GameSimulator.resolveStack(game, ai), throwingController);
 
-        AssertJUnit.assertTrue("The non-preserved non-weakest player should have sacrificed during stack resolution",
+        AssertJUnit.assertTrue("The non-AI non-weakest player should have sacrificed during stack resolution",
                 otherOpponent.getZone(ZoneType.Graveyard).contains(otherOpponentBear));
     }
 
