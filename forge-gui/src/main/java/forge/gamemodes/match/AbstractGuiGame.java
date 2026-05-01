@@ -415,25 +415,19 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     private boolean forceEndGameForRemainingAIs() {
         final GameView gameView = getGameView();
-        if (gameView == null || gameView.isGameOver()) {
+        if (gameView == null) {
             return false;
         }
 
-        boolean hasRemainingLocalHuman = false;
         boolean hasRemainingAi = false;
         for (PlayerView player : gameView.getPlayers()) {
-            if (!player.getHasLost()) {
-                if (isLocalPlayer(player) && !player.isAI()) {
-                    hasRemainingLocalHuman = true;
-                    break;
-                }
-                if (player.isAI()) {
-                    hasRemainingAi = true;
-                }
+            if (!player.getHasLost() && player.isAI()) {
+                hasRemainingAi = true;
+                break;
             }
         }
 
-        if (hasRemainingLocalHuman || !hasRemainingAi) {
+        if (!hasRemainingAi) {
             return false;
         }
 
