@@ -73,7 +73,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
 
         List<SpellAbility> tgtSpells = getTargetSpells(sa);
 
-        if (tgtSpells.isEmpty() && "TriggeredSpellAbility".equals(sa.getParam("Defined"))) {
+        if (tgtSpells.isEmpty() && "TriggeredSourceSA".equals(sa.getParam("Defined"))) {
             final Object sourceSA = sa.getTriggeringObject(AbilityKey.SourceSA);
             if (sourceSA instanceof SpellAbility) {
                 tgtSpells = Lists.newArrayList((SpellAbility) sourceSA);
