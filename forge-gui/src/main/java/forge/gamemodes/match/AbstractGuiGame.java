@@ -2,6 +2,7 @@ package forge.gamemodes.match;
 
 import com.google.common.collect.*;
 import forge.game.GameEntityView;
+import forge.game.GameEndReason;
 import forge.game.GameLog;
 import forge.game.GameView;
 import forge.game.card.CardView;
@@ -375,6 +376,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                     return false;
                 }
             } else {
+                if (!ignoreConcedeChain && !isNetGame() && forceEndGameForRemainingAIs()) {
+                    return false;
+                }
                 return !ignoreConcedeChain;
             }
             if (isNetGame()) {
@@ -407,6 +411,32 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             }
             return false; //let logic above handle closing current screen
         }
+    }
+
+    private boolean forceEndGameForRemainingAIs() {
+        final GameView gameView = getGameView();
+        if (gameView == null) {
+            return false;
+        }
+
+        boolean hasRemainingAi = false;
+        for (PlayerView player : gameView.getPlayers()) {
+            if (!player.getHasLost() && player.isAI()) {
+                hasRemainingAi = true;
+                break;
+            }
+        }
+
+        if (!hasRemainingAi) {
+            return false;
+        }
+
+        gameView.getGame().getAction().invoke(() -> {
+            if (!gameView.getGame().isGameOver()) {
+                gameView.getGame().setGameOver(GameEndReason.AllHumansLost);
+            }
+        });
+        return true;
     }
 
     public String getConcedeCaption() {
