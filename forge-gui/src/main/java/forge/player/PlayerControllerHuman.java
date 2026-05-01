@@ -3553,12 +3553,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void applyYieldUpdate(final YieldUpdate update) {
+        boolean activatedYield = false;
         if (update instanceof YieldUpdate.SetMarker u) {
             yieldController.setMarker(u.phaseOwner(), u.phase(), u.atOrPastAtClick());
+            activatedYield = true;
         } else if (update instanceof YieldUpdate.ClearMarker) {
             yieldController.clearMarker();
         } else if (update instanceof YieldUpdate.StackYield u) {
             yieldController.setAutoPassUntilStackEmpty(u.active());
+            activatedYield = u.active();
         } else if (update instanceof YieldUpdate.TriggerDecision u) {
             yieldController.setTriggerDecision(u.trigId(), u.decision());
         } else if (update instanceof YieldUpdate.CardAutoYield u) {
@@ -3567,6 +3570,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             yieldController.setSkipPhase(u.turnPlayer(), u.phase(), u.skip());
         } else if (update instanceof YieldUpdate.SeedFromClient u) {
             yieldController.applyClientSeed(u.snapshot());
+        }
+        if (activatedYield && getGui() != null) {
+            // Switch the cancel button + prompt to "Yielding until X" so the user can disarm.
+            // Otherwise the previous InputPassPriority "End Turn" label would persist and ESC
+            // would skip the click on the client.
+            getGui().updateAutoPassPrompt();
         }
     }
 }

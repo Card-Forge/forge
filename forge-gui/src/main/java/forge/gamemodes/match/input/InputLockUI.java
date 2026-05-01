@@ -58,8 +58,15 @@ public class InputLockUI implements Input {
     private final Runnable showMessageFromEdt = new Runnable() {
         @Override
         public void run() {
-            controller.getGui().updateButtons(InputLockUI.this.getOwner(), "", "", false, false, false);
-            showMessage(Localizer.getInstance().getMessage("lblWaitingforActions"));
+            // While auto-yielding, show the yield prompt with cancel enabled so the user can
+            // disarm via the cancel button (which routes back to selectButtonCancel below).
+            // Otherwise show master's "Waiting for actions..." prompt with both buttons disabled.
+            if (controller.getYieldController().shouldAutoYield()) {
+                controller.getGui().updateAutoPassPrompt();
+            } else {
+                controller.getGui().updateButtons(InputLockUI.this.getOwner(), "", "", false, false, false);
+                showMessage(Localizer.getInstance().getMessage("lblWaitingforActions"));
+            }
         }
     };
 
@@ -87,7 +94,9 @@ public class InputLockUI implements Input {
     }
     @Override
     public void selectButtonCancel() {
-        //cancel auto pass for all players
+        // Master pattern: cancel auto-pass for all players. Marker and stack-yield are
+        // cleared client-side via the cancel-button click path's sendYieldUpdate calls
+        // (see VPrompt.clearLocalYieldsForCancel), so they don't need to be handled here.
         for (final Player player : controller.getGame().getPlayers()) {
             player.getController().autoPassCancel();
         }

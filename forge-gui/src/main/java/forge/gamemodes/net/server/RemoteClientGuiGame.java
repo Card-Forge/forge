@@ -270,7 +270,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     }
 
     @Override
-    public void showPromptMessage(final PlayerView playerView, final String message) {
+    protected void doShowPromptMessage(final PlayerView playerView, final String message) {
         updateGameView();
         send(ProtocolMethod.showPromptMessage, playerView, message);
     }

@@ -123,7 +123,7 @@ public class MatchScreen extends FScreen {
 
         bottomPlayerPrompt = add(new VPrompt("", "",
                 e -> getGameController().selectButtonOk(),
-                e -> getGameController().selectButtonCancel()));
+                e -> { MatchController.instance.clearLocalYieldsForCancel(); getGameController().selectButtonCancel(); }));
 
         if (humanCount < 2 || MatchController.instance.hotSeatMode() || GuiBase.isNetPlay(MatchController.instance))
             topPlayerPrompt = null;
@@ -131,7 +131,7 @@ public class MatchScreen extends FScreen {
             //show top prompt if multiple human players and not playing in Hot Seat mode and not in network play
             topPlayerPrompt = add(new VPrompt("", "",
                     e -> getGameController().selectButtonOk(),
-                    e -> getGameController().selectButtonCancel()));
+                    e -> { MatchController.instance.clearLocalYieldsForCancel(); getGameController().selectButtonCancel(); }));
             topPlayerPrompt.setRotate180(true);
             topPlayerPanel.setRotate180(true);
             getHeader().setRotate90(true);
@@ -631,16 +631,7 @@ public class MatchScreen extends FScreen {
             case Keys.ESCAPE: {
                 boolean cancelEligible = FModel.getPreferences().getPrefBoolean(FPref.UI_ALLOW_ESC_TO_END_TURN) || Forge.hasGamepad()
                         || !getActivePrompt().getBtnCancel().getText().equals(Forge.getLocalizer().getMessage("lblEndTurn"));
-                if (cancelEligible) {
-                    return getActivePrompt().getBtnCancel().trigger();
-                }
-                PlayerView local = MatchController.instance.getCurrentPlayer();
-                IGameController ctrl = local != null ? MatchController.instance.getGameController(local) : null;
-                if (ctrl != null && ctrl.getYieldController().cancelGenericYields(local, ctrl)) {
-                    MatchController.instance.refreshYieldUi(local);
-                    return true;
-                }
-                return false;
+                return cancelEligible && getActivePrompt().getBtnCancel().trigger();
             }
             case Keys.BACK:
                 return true; //suppress Back button so it's not bumped when trying to press OK or Cancel buttons

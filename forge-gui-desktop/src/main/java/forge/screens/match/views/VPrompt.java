@@ -30,16 +30,13 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
 import forge.game.card.CardView;
-import forge.game.player.PlayerView;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
-import forge.interfaces.IGameController;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CPrompt;
 import forge.toolbox.FButton;
 import forge.toolbox.FHtmlViewer;
@@ -77,18 +74,11 @@ public class VPrompt implements IVDoc<CPrompt> {
     private KeyAdapter buttonKeyAdapter = new KeyAdapter() {
         @Override
         public void keyPressed(final KeyEvent e) {
-            if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-                if (btnCancel.isEnabled() &&
-                        (FModel.getPreferences().getPrefBoolean(FPref.UI_ALLOW_ESC_TO_END_TURN) || !btnCancel.getText().equals(Localizer.getInstance().getMessage("lblEndTurn")))) {
-                    btnCancel.doClick();
-                    return;
-                }
-                CMatchUI ui = controller.getMatchUI();
-                PlayerView local = ui.getCurrentPlayer();
-                IGameController ctrl = local != null ? ui.getGameController(local) : null;
-                if (ctrl != null && ctrl.getYieldController().cancelGenericYields(local, ctrl)) {
-                    ui.refreshYieldUi(local);
-                }
+            if (e.getKeyCode() == KeyEvent.VK_ESCAPE
+                    && btnCancel.isEnabled()
+                    && (FModel.getPreferences().getPrefBoolean(FPref.UI_ALLOW_ESC_TO_END_TURN)
+                            || !btnCancel.getText().equals(Localizer.getInstance().getMessage("lblEndTurn")))) {
+                btnCancel.doClick();
             }
         }
     };

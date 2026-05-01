@@ -454,8 +454,62 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     protected final void updatePromptForAwait(final PlayerView playerView) {
-        showPromptMessage(playerView, Localizer.getInstance().getMessage("lblWaitingForOpponent"));
-        updateButtons(playerView, false, false, false);
+        // Append "Waiting for opponent..." below the yield prompt so the user keeps the
+        // cancel-yield UI during opponent turns instead of losing it to the await prompt.
+        String waiting = Localizer.getInstance().getMessage("lblWaitingForOpponent");
+        String yieldMsg = currentYieldMessage();
+        if (yieldMsg != null) {
+            cancelAwaitNextInput();
+            showPromptMessage(playerView, yieldMsg + "\n\n" + waiting);
+            updateButtons(playerView, false, true, false);
+        } else {
+            showPromptMessage(playerView, waiting);
+            updateButtons(playerView, false, false, false);
+        }
+    }
+
+    private String currentYieldMessage() {
+        YieldController yielding = null;
+        for (IGameController c : gameControllers.values()) {
+            YieldController yc = c.getYieldController();
+            if (yc != null && yc.shouldAutoYield()) {
+                yielding = yc;
+                break;
+            }
+        }
+        if (yielding == null) return null;
+        Localizer loc = Localizer.getInstance();
+        if (yielding.getAutoPassUntilMarker() != null) {
+            YieldMarker m = yielding.getAutoPassUntilMarker();
+            return loc.getMessage("lblYieldingUntilPhaseFmt", m.getPhaseOwner().getName(), m.getPhase().nameForUi);
+        }
+        if (yielding.autoPassUntilEOT()) {
+            return loc.getMessage("lblYieldingUntilStackClears");
+        }
+        return loc.getMessage("lblYieldingUntilEndOfTurn");
+    }
+
+    private String lastPromptMessage;
+
+    @Override
+    public final void showPromptMessage(PlayerView playerView, String message) {
+        lastPromptMessage = message;
+        doShowPromptMessage(playerView, message);
+    }
+
+    /** Subclass-specific prompt rendering. The {@code final} wrapper above tracks state so
+     *  {@link #isYieldPromptShowing()} can answer "is the user looking at the auto-pass UI?"
+     *  without relying on cancel-button-label heuristics. */
+    protected abstract void doShowPromptMessage(PlayerView playerView, String message);
+
+    /** True when the prompt currently rendered is the auto-pass yield prompt — either alone
+     *  (from {@link #updateAutoPassPrompt}) or with the await line appended (from
+     *  {@link #updatePromptForAwait}). Used by client-side cancel paths to distinguish a
+     *  yield-cancel from an unrelated input cancel that happens to share the cancel button. */
+    public boolean isYieldPromptShowing() {
+        String yieldMsg = currentYieldMessage();
+        if (yieldMsg == null || lastPromptMessage == null) return false;
+        return lastPromptMessage.equals(yieldMsg) || lastPromptMessage.startsWith(yieldMsg + "\n");
     }
 
     @Override
@@ -492,7 +546,15 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         } else {
             timeStr = String.format("%d:%02d", elapsedSec / 60, elapsedSec % 60);
         }
-        showPromptMessageNoCancel(forPlayer, Localizer.getInstance().getMessage("lblWaitingForPlayer", waitingForPlayerName) + " (" + timeStr + ")");
+        String waiting = Localizer.getInstance().getMessage("lblWaitingForPlayer", waitingForPlayerName) + " (" + timeStr + ")";
+        // Preserve the yield prompt above the timer line — otherwise the 1s timer overwrites
+        // the yield-aware text from updatePromptForAwait. Update lastPromptMessage directly so
+        // isYieldPromptShowing() stays accurate; route through showPromptMessageNoCancel so we
+        // don't cancel the timer that's calling us.
+        String yieldMsg = currentYieldMessage();
+        String message = yieldMsg != null ? yieldMsg + "\n\n" + waiting : waiting;
+        lastPromptMessage = message;
+        showPromptMessageNoCancel(forPlayer, message);
     }
 
     protected void cancelWaitingTimer() {
@@ -550,29 +612,40 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public final void updateAutoPassPrompt() {
-        YieldController yielding = null;
-        for (IGameController c : gameControllers.values()) {
-            YieldController yc = c.getYieldController();
-            if (yc != null && yc.shouldAutoYield()) {
-                yielding = yc;
-                break;
-            }
-        }
-        if (yielding == null) {
-            return;
-        }
-        Localizer loc = Localizer.getInstance();
-        final String message;
-        if (yielding.getAutoPassUntilMarker() != null) {
-            message = loc.getMessage("lblYieldingUntilPhaseFmt", yielding.getAutoPassUntilMarker().getPhase().nameForUi);
-        } else if (yielding.autoPassUntilEOT()) {
-            message = loc.getMessage("lblYieldingUntilStackClears");
-        } else {
-            message = loc.getMessage("lblYieldingUntilEndOfTurn");
-        }
+        String message = currentYieldMessage();
+        if (message == null) return;
         cancelAwaitNextInput();
         showPromptMessage(getCurrentPlayer(), message);
         updateButtons(getCurrentPlayer(), false, true, false);
+    }
+
+    /** Called by client-side cancel paths after they've locally cleared yield state and
+     *  shipped the wire update. Drops the stale yield prompt without waiting for the host's
+     *  response so the user sees the correct state immediately. */
+    public final void refreshPromptAfterLocalYieldClear() {
+        updatePromptForAwait(getCurrentPlayer());
+    }
+
+    /** Cancel-button click handler for the auto-pass UI: clear marker and stack-yield via
+     *  sendYieldUpdate so the host's authoritative state clears regardless of which Input is
+     *  active there (e.g. InputPayMana doesn't route cancel through InputLockUI). Self-applies
+     *  on the client so the chevron and prompt update without waiting for the host response. */
+    public final void clearLocalYieldsForCancel() {
+        if (!isYieldPromptShowing()) return;
+        PlayerView local = getCurrentPlayer();
+        if (local == null) return;
+        IGameController ctrl = getGameController(local);
+        if (ctrl == null) return;
+        YieldController yc = ctrl.getYieldController();
+        if (yc == null) return;
+        if (yc.getAutoPassUntilMarker() != null) {
+            ctrl.sendYieldUpdate(new YieldUpdate.ClearMarker(local));
+        }
+        if (yc.autoPassUntilEOT()) {
+            ctrl.sendYieldUpdate(new YieldUpdate.StackYield(local, false));
+        }
+        refreshYieldUi(local);
+        refreshPromptAfterLocalYieldClear();
     }
     // End auto-yield/input code
 
@@ -804,25 +877,28 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     /**
-     * Phase-change derivation: refresh chevron + auto-pass prompt when a controller's marker
-     * has cleared since the last check. The clearing itself may have happened either here
-     * (this listener calling {@link YieldController#checkAndClearMarker}) or in the host's
-     * {@link YieldController#shouldAutoYield} priority loop — we just detect the transition.
+     * Phase-change derivation: clear any marker whose target the current phase has reached and
+     * refresh the chevron + auto-pass prompt. The host's {@link YieldController#shouldAutoYield}
+     * priority loop refreshes its own UI for the race-loss case where it clears the marker
+     * before this listener runs.
      */
     public final void checkMarkerAutoClear() {
         GameView gv = getGameView();
         if (gv == null) return;
+        boolean wasYieldPromptShowing = isYieldPromptShowing();
         boolean any = false;
         for (Map.Entry<PlayerView, IGameController> e : gameControllers.entrySet()) {
             YieldController yc = e.getValue().getYieldController();
-            if (yc == null) continue;
-            boolean hadMarker = yc.getAutoPassUntilMarker() != null;
-            yc.checkAndClearMarker(gv);
-            if (hadMarker && yc.getAutoPassUntilMarker() == null) {
+            if (yc != null && yc.checkAndClearMarker(gv)) {
                 refreshYieldUi(e.getKey());
                 any = true;
             }
         }
-        if (any) updateAutoPassPrompt();
+        if (!any) return;
+        if (currentYieldMessage() != null) {
+            updateAutoPassPrompt();
+        } else if (wasYieldPromptShowing) {
+            updatePromptForAwait(getCurrentPlayer());
+        }
     }
 }

@@ -3,7 +3,6 @@ package forge.gamemodes.match;
 import forge.game.GameView;
 import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
-import forge.interfaces.IGameController;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
@@ -103,25 +102,6 @@ public class YieldController {
         if (turnPlayer == null || !turnPlayer.equals(phaseOwner)) return false;
         if (currentPhase == null) return false;
         return currentPhase == phase || currentPhase.isAfter(phase);
-    }
-
-    /**
-     * User-initiated ESC: clear marker, legacy autopass, and stack-yield (the three "active"
-     * yield forms). Persistent per-card auto-yields are unaffected. Marker and stack-yield go
-     * over the wire via the controller; legacy autopass is local to host PCH.
-     *
-     * @return true if any of the three were active and got cleared (caller should refresh UI
-     *         and suppress the ESC fallthrough); false if nothing was active.
-     */
-    public boolean cancelGenericYields(PlayerView local, IGameController controller) {
-        boolean hadMarker = autoPassUntilMarker != null;
-        boolean hadLegacy = autoPassUntilEOT;
-        boolean hadStackYield = autoPassUntilStackEmpty;
-        if (!hadMarker && !hadLegacy && !hadStackYield) return false;
-        if (hadMarker) controller.sendYieldUpdate(new YieldUpdate.ClearMarker(local));
-        if (hadLegacy && controller instanceof PlayerControllerHuman pch) pch.autoPassCancel();
-        if (hadStackYield) controller.sendYieldUpdate(new YieldUpdate.StackYield(local, false));
-        return true;
     }
 
     public boolean shouldAutoYield() {

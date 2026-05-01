@@ -213,7 +213,7 @@ public class MatchController extends NetworkGuiGame {
     }
 
     @Override
-    public void showPromptMessage(final PlayerView player, final String message) {
+    protected void doShowPromptMessage(final PlayerView player, final String message) {
         cancelWaitingTimer();
         view.getPrompt(player).setMessage(message);
     }
@@ -608,6 +608,9 @@ public class MatchController extends NetworkGuiGame {
             controller.selectButtonOk();
         }
         refreshYieldUi(local);
+        if (clickedSameLabel) {
+            refreshPromptAfterLocalYieldClear();
+        }
     }
 
     public static void writeMatchPreferences() {
