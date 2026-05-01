@@ -19,23 +19,23 @@ public class PhaseIndicator extends JPanel {
     public PhaseIndicator() {
         this.setOpaque(false);
         this.setLayout(new MigLayout("insets 0 0 1% 0, gap 0, wrap"));
-        addPhaseLabel("UP", PhaseType.UPKEEP,                      "htmlPhaseUpkeepTooltip");
-        addPhaseLabel("DR", PhaseType.DRAW,                        "htmlPhaseDrawTooltip");
-        addPhaseLabel("M1", PhaseType.MAIN1,                       "htmlPhaseMain1Tooltip");
-        addPhaseLabel("BC", PhaseType.COMBAT_BEGIN,                "htmlPhaseBeginCombatTooltip");
-        addPhaseLabel("DA", PhaseType.COMBAT_DECLARE_ATTACKERS,    "htmlPhaseDeclareAttackersTooltip");
-        addPhaseLabel("DB", PhaseType.COMBAT_DECLARE_BLOCKERS,     "htmlPhaseDeclareBlockersTooltip");
-        addPhaseLabel("FS", PhaseType.COMBAT_FIRST_STRIKE_DAMAGE,  "htmlPhaseFirstStrikeDamageTooltip");
-        addPhaseLabel("CD", PhaseType.COMBAT_DAMAGE,               "htmlPhaseCombatDamageTooltip");
-        addPhaseLabel("EC", PhaseType.COMBAT_END,                  "htmlPhaseEndCombatTooltip");
-        addPhaseLabel("M2", PhaseType.MAIN2,                       "htmlPhaseMain2Tooltip");
-        addPhaseLabel("ET", PhaseType.END_OF_TURN,                 "htmlPhaseEndTurnTooltip");
-        addPhaseLabel("CL", PhaseType.CLEANUP,                     "htmlPhaseCleanupTooltip");
+        addPhaseLabel("UP", PhaseType.UPKEEP);
+        addPhaseLabel("DR", PhaseType.DRAW);
+        addPhaseLabel("M1", PhaseType.MAIN1);
+        addPhaseLabel("BC", PhaseType.COMBAT_BEGIN);
+        addPhaseLabel("DA", PhaseType.COMBAT_DECLARE_ATTACKERS);
+        addPhaseLabel("DB", PhaseType.COMBAT_DECLARE_BLOCKERS);
+        addPhaseLabel("FS", PhaseType.COMBAT_FIRST_STRIKE_DAMAGE);
+        addPhaseLabel("CD", PhaseType.COMBAT_DAMAGE);
+        addPhaseLabel("EC", PhaseType.COMBAT_END);
+        addPhaseLabel("M2", PhaseType.MAIN2);
+        addPhaseLabel("ET", PhaseType.END_OF_TURN);
+        addPhaseLabel("CL", PhaseType.CLEANUP);
     }
 
-    private void addPhaseLabel(String caption, PhaseType phaseType, String tooltipKey) {
+    private void addPhaseLabel(String caption, PhaseType phaseType) {
         PhaseLabel lbl = new PhaseLabel(caption, phaseType);
-        lbl.setToolTipText(Localizer.getInstance().getMessage(tooltipKey));
+        lbl.setToolTipText(Localizer.getInstance().getMessage("htmlPhaseTooltipFmt", phaseType.nameForUi));
         phaseLabels.put(phaseType, lbl);
         add(lbl, CONSTRAINTS);
     }
