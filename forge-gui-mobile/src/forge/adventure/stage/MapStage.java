@@ -729,10 +729,30 @@ public class MapStage extends GameStage {
                                 for (RewardData rdata : new Array.ArrayIterator<>(data.rewards)) {
                                     ret.addAll(rdata.generate(false, false));
                                 }
+                                break;
                             case solo_randomizer:
                                 // Todo: Get randomized subset from the total list of available items inside ArchipelagoData.
+                                //  Also, there's code duplication here, you should fix that by making a function.
+                                if (data.name.toLowerCase().contains("equipment") || data.name.toLowerCase().contains("items")) {
+                                    // Get list of items for specific shop.
+                                    Object[] randomizedEquipmentList = ArchipelagoData.getInstance().getItemsForEquipmentShop(data.name);
+                                    // Swap the shop's rewards
+                                    if (randomizedEquipmentList != null && randomizedEquipmentList.length >= data.rewards.size) {
+                                        for (int i = 0; i < data.rewards.size; i++) {
+                                            data.rewards.get(i).itemName = randomizedEquipmentList[i].toString();
+                                        }
+                                    }
+                                }
+                                for (RewardData rdata : new Array.ArrayIterator<>(data.rewards)) {
+                                    ret.addAll(rdata.generate(false, false));
+                                }
+                                break;
                             case networked_archipelago:
                                 // Todo: Get randomized subset from networked APWorld via ArchipelagoData.
+                                //  This code is a stub and should be replaced.
+                                for (RewardData rdata : new Array.ArrayIterator<>(data.rewards)) {
+                                    ret.addAll(rdata.generate(false, false));
+                                }
                         }
                         ShopActor actor = new ShopActor(this, id, ret, data);
                         addMapActor(obj, actor);

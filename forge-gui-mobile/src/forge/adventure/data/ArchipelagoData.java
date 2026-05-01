@@ -235,8 +235,7 @@ public class ArchipelagoData implements SaveFileContent {
         // We also filter out the "overpowered" cards into this separate list, they might be fun to throw in later.
         ArrayList<String> powerEquipmentNames = new ArrayList<>();
         FileHandle handle = Config.instance().getFile(Paths.ITEMS);
-        if (handle.exists())
-        {
+        if (handle.exists()) {
             Json json = new Json();
             Array<ItemData> shopList = json.fromJson(Array.class, ItemData.class, handle);
 
@@ -244,6 +243,7 @@ public class ArchipelagoData implements SaveFileContent {
             for (int i = 0; i < shopList.size; i++) {
                 if (shopList.get(i).equipmentSlot != null && !shopList.get(i).equipmentSlot.isEmpty()) {
                     // We've found an equipment item, add it to the list but exclude the "overpowered" items.
+                    if (shopList.get(i).name.toLowerCase().contains("rune")) continue;
                     if (shopList.get(i).name.toLowerCase().contains("mox") || shopList.get(i).name.toLowerCase().contains("black lotus") || shopList.get(i).name.toLowerCase().contains("sol ring")) {
                         powerEquipmentNames.add(shopList.get(i).name);
                         continue;
@@ -277,6 +277,39 @@ public class ArchipelagoData implements SaveFileContent {
     // Todo: Create a function that returns & rewards the player a random item from the remainingEquipmentPool and then removes it from the list. If no item is left, the player is instead rewarded with gold/shard/pack etc.
 
     // Todo: Create a function that returns a list of equipment for any given shop to sell based on the previously randomized lists.
+    public Object[] getItemsForEquipmentShop(String shopName) {
+        Array<String> result = new Array<>();
+        if (shopName.toLowerCase().contains("items")) {
+            // Items shop name
+            if (shopName.toLowerCase().contains("white")) {
+                return whiteItemShopList.toArray();
+            } else if (shopName.toLowerCase().contains("blue")) {
+                return blueItemShopList.toArray();
+            } else if (shopName.toLowerCase().contains("black")) {
+                return blackItemShopList.toArray();
+            } else if (shopName.toLowerCase().contains("red")) {
+                return redItemShopList.toArray();
+            } else if (shopName.toLowerCase().contains("green")) {
+                return greenItemShopList.toArray();
+            }
+        } else {
+            // Equipment shop name
+            if (shopName.toLowerCase().contains("white")) {
+                return whiteItemShopList.toArray();
+            } else if (shopName.toLowerCase().contains("blue")) {
+                return blueItemShopList.toArray();
+            } else if (shopName.toLowerCase().contains("black")) {
+                return blackItemShopList.toArray();
+            } else if (shopName.toLowerCase().contains("red")) {
+                return redItemShopList.toArray();
+            } else if (shopName.toLowerCase().contains("green")) {
+                return greenItemShopList.toArray();
+            } else {
+                return colorlessEquipmentShopList.toArray();
+            }
+        }
+        return null;
+    }
 
     public boolean checkCardUnlocked(PaperCard card) {
         if (archipelagoMode == ArchipelagoMode.disabled) return true;
