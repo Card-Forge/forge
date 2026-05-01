@@ -128,8 +128,10 @@ public class VStack implements IVDoc<CStack> {
         hoveredItem = null;
         scroller.removeAll();
 
+        final Iterable<StackItemView> safeItems = controller.getMatchUI().isNetGame()
+                ? items.threadSafeIterable() : items;
         boolean isFirst = true;
-        for (final StackItemView item : items) {
+        for (final StackItemView item : safeItems) {
             final StackInstanceTextArea tar = new StackInstanceTextArea(item);
 
             scroller.add(tar, "pushx, growx" + (isFirst ? "" : ", gaptop 2px"));
