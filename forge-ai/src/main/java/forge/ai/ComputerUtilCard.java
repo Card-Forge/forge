@@ -918,38 +918,31 @@ public class ComputerUtilCard {
     }
 
     private static int estimateSelfDrawsFromPlay(final Player ai, final SpellAbility sa) {
-        int draws = estimateSelfDrawsFromAbility(ai, sa, ai.getCardsIn(ZoneType.Hand).size());
+        final int handSize = ai.getCardsIn(ZoneType.Hand).size();
+        int draws = estimateSelfDrawsFromAbility(ai, sa, handSize);
 
         if (sa.isSpell()) {
             for (final Card card : ai.getCardsIn(ZoneType.Battlefield)) {
-                draws = Math.max(draws, estimateSelfDrawsFromSpellCastTriggers(ai, card, ai.getCardsIn(ZoneType.Hand).size()));
+                draws = Math.max(draws, estimateSelfDrawsFromTriggers(ai, card, handSize, false));
             }
         }
 
         final Card host = sa.getHostCard();
         if (host != null) {
-            draws = Math.max(draws, estimateSelfDrawsFromCardTriggers(ai, host));
+            draws = Math.max(draws, estimateSelfDrawsFromTriggers(ai, host, handSize, true));
         }
         return draws;
     }
 
-    private static int estimateSelfDrawsFromCardTriggers(final Player ai, final Card card) {
+    private static int estimateSelfDrawsFromTriggers(final Player ai, final Card card,
+            final int fallbackDraws, final boolean includeDrawStepTriggers) {
         int draws = 0;
         for (final Trigger trigger : card.getTriggers()) {
             if (trigger.getMode() == TriggerType.SpellCast && triggerMatchesControllerSpellCast(trigger)) {
-                draws = Math.max(draws, estimateSelfDrawsFromAbility(ai, trigger.ensureAbility(), ai.getCardsIn(ZoneType.Hand).size()));
-            } else if (trigger.getMode() == TriggerType.Phase && "Draw".equals(trigger.getParam("Phase"))
+                draws = Math.max(draws, estimateSelfDrawsFromAbility(ai, trigger.ensureAbility(), fallbackDraws));
+            } else if (includeDrawStepTriggers && trigger.getMode() == TriggerType.Phase
+                    && "Draw".equals(trigger.getParam("Phase"))
                     && triggerMayAffectPlayer(trigger, ai)) {
-                draws = Math.max(draws, estimateSelfDrawsFromAbility(ai, trigger.ensureAbility(), ai.getCardsIn(ZoneType.Hand).size()));
-            }
-        }
-        return draws;
-    }
-
-    private static int estimateSelfDrawsFromSpellCastTriggers(final Player ai, final Card card, final int fallbackDraws) {
-        int draws = 0;
-        for (final Trigger trigger : card.getTriggers()) {
-            if (trigger.getMode() == TriggerType.SpellCast && triggerMatchesControllerSpellCast(trigger)) {
                 draws = Math.max(draws, estimateSelfDrawsFromAbility(ai, trigger.ensureAbility(), fallbackDraws));
             }
         }
@@ -1024,7 +1017,8 @@ public class ComputerUtilCard {
     }
 
     private static boolean isOwnCommanderFromCommandZone(final Player ai, final Card host) {
-        return host.isCommander() && host.isInZone(ZoneType.Command) && host.getOwner().equals(ai);
+        return host.isCommander() && host.isInZone(ZoneType.Command)
+                && (host.getOwner().equals(ai) || ai.getCommanders().contains(host));
     }
 
     private static boolean opponentHasDrawPunisher(final Player ai, final Player opponent, final int estimatedDraws) {

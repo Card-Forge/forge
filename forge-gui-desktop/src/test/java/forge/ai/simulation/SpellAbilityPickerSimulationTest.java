@@ -198,14 +198,6 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         AssertJUnit.assertFalse(ComputerUtilCard.shouldAvoidDrawPunisher(p, sa));
     }
 
-    @DataProvider(name = "aiPickerMode")
-    public static Object[][] aiPickerMode() {
-        return new Object[][] {
-                {false},
-                {true}
-        };
-    }
-
     @Test
     public void testSequenceStartingWithPlayingLand() {
         Game game = initAndCreateGame();
