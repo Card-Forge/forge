@@ -204,6 +204,10 @@ public final class CMatchUI
         }
     }
 
+    private static boolean isPreferenceEnabled(final ForgePreferences.FPref preferenceName) {
+        return FModel.getPreferences().getPrefBoolean(preferenceName);
+    }
+
     FScreen getScreen() {
         return this.screen;
     }
