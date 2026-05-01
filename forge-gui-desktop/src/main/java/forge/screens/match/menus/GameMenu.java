@@ -55,6 +55,7 @@ public final class GameMenu {
         menu.add(new CardOverlaysMenu(matchUI).getMenu());
         menu.add(getSubmenu_StackGroupPermanents());
         menu.add(getMenuItem_TokensSeparateRow());
+        menu.add(getMenuItem_SeparateCombatStacks());
         menu.add(getMenuItem_AutoYields());
         menu.addSeparator();
         menu.add(getMenuItem_ViewDeckList());
@@ -229,6 +230,24 @@ public final class GameMenu {
         menuItem.addActionListener(e -> {
             final boolean enabled = !prefs.getPrefBoolean(FPref.UI_TOKENS_IN_SEPARATE_ROW);
             prefs.setPref(FPref.UI_TOKENS_IN_SEPARATE_ROW, enabled);
+            prefs.save();
+            SwingUtilities.invokeLater(() -> {
+                for (final VField f : matchUI.getFieldViews()) {
+                    f.getTabletop().doLayout();
+                }
+            });
+        });
+        return menuItem;
+    }
+
+    private SkinnedCheckBoxMenuItem getMenuItem_SeparateCombatStacks() {
+        final Localizer localizer = Localizer.getInstance();
+        SkinnedCheckBoxMenuItem menuItem = new SkinnedCheckBoxMenuItem(localizer.getMessage("cbSeparateCombatStacks"));
+        menuItem.setToolTipText(localizer.getMessage("nlSeparateCombatStacks"));
+        menuItem.setState(prefs.getPrefBoolean(FPref.UI_SEPARATE_COMBAT_STACKS));
+        menuItem.addActionListener(e -> {
+            final boolean enabled = !prefs.getPrefBoolean(FPref.UI_SEPARATE_COMBAT_STACKS);
+            prefs.setPref(FPref.UI_SEPARATE_COMBAT_STACKS, enabled);
             prefs.save();
             SwingUtilities.invokeLater(() -> {
                 for (final VField f : matchUI.getFieldViews()) {

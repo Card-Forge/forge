@@ -185,6 +185,10 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         return c.equals(curResolvingCard);
     }
 
+    public int getUndoStackSize() {
+        return undoStack.size();
+    }
+
     public final boolean canUndo(Player player) {
         return undoStackOwner == player;
     }

@@ -427,11 +427,17 @@ public final class CMatchUI
         }
         cCombat.setModel(combat);
         cCombat.update();
-        // Combat pairings changed — rebuild layout so grouping reflects them
-        if (!"default".equals(FModel.getPreferences().getPref(FPref.UI_GROUP_PERMANENTS))) {
-            for (final VField f : getFieldViews()) {
-                f.getTabletop().doLayout();
-            }
+        // Combat pairings changed — rebuild layout so grouping reflects them.
+        // Either tokengroup grouping or PR #10538's combat-stack separation needs the relayout.
+        final boolean shouldRelayout =
+                !"default".equals(FModel.getPreferences().getPref(FPref.UI_GROUP_PERMANENTS))
+                || isPreferenceEnabled(FPref.UI_SEPARATE_COMBAT_STACKS);
+        if (shouldRelayout) {
+            FThreads.invokeInEdtNowOrLater(() -> {
+                for (final VField f : getFieldViews()) {
+                    f.getTabletop().doLayout();
+                }
+            });
         }
     } // showCombat(CombatView)
 
@@ -1019,12 +1025,6 @@ public final class CMatchUI
     public void showCardPromptMessage(PlayerView playerView, String message, CardView card) {
         cancelWaitingTimer();
         cPrompt.setMessage(message, card);
-    }
-
-    //  no override for now
-    public void showPromptMessage(final PlayerView playerView, final String message, final CardView card ) {
-        cancelWaitingTimer();
-        cPrompt.setMessage(message,card);
     }
 
     @Override

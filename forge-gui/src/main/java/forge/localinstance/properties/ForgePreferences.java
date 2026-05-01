@@ -103,6 +103,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_SR_OPTIMIZE ("false"),
         UI_OPEN_PACKS_INDIV ("false"),
         UI_STACK_CREATURES ("false"),
+        UI_SEPARATE_COMBAT_STACKS("false"),
         UI_GROUP_PERMANENTS ("default"),
         UI_MAX_STACK_DEPTH ("4"),
         UI_TOKENS_IN_SEPARATE_ROW("false"),

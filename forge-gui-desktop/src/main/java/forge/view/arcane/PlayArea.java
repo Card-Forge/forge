@@ -19,6 +19,8 @@ package forge.view.arcane;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.IllegalComponentStateException;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.util.*;
@@ -27,10 +29,11 @@ import java.util.function.BiPredicate;
 import com.google.common.collect.Lists;
 
 import forge.game.GameEntityView;
+import forge.game.GameView;
 import forge.game.card.CardView;
+import forge.game.card.CardView.CardStateView;
 import forge.game.combat.CombatView;
 import forge.util.collect.FCollection;
-import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.gui.FThreads;
@@ -121,21 +124,23 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     }
 
     private CardStackRow collectAllLands(List<CardPanel> remainingPanels) {
+        final BiPredicate<CardView, CardView> base = (card, first) -> card.hasSameCounters(first)
+                && (!groupAll || card.isTapped() == first.isTapped())
+                && (!groupAll || card.getDamage() == first.getDamage());
         return collectStacked(remainingPanels, RowType.Land,
-                (card, first) -> card.hasSameCounters(first)
-                        && (!groupAll || card.isTapped() == first.isTapped())
-                        && (!groupAll || card.getDamage() == first.getDamage()),
+                base.and(this::compatibleUnderCombatSeparation),
                 maxStackDepth, groupAll);
     }
 
     private CardStackRow collectAllTokens(List<CardPanel> remainingPanels) {
+        final BiPredicate<CardView, CardView> base = (card, first) -> card.hasSameCounters(first)
+                && card.isSick() == first.isSick()
+                && card.hasSamePT(first)
+                && card.getText().equals(first.getText())
+                && (!groupTokensAndCreatures || card.isTapped() == first.isTapped())
+                && (!groupTokensAndCreatures || card.getDamage() == first.getDamage());
         return collectStacked(remainingPanels, RowType.Token,
-                (card, first) -> card.hasSameCounters(first)
-                        && card.isSick() == first.isSick()
-                        && card.hasSamePT(first)
-                        && card.getText().equals(first.getText())
-                        && (!groupTokensAndCreatures || card.isTapped() == first.isTapped())
-                        && (!groupTokensAndCreatures || card.getDamage() == first.getDamage()),
+                base.and(this::compatibleUnderCombatSeparation),
                 maxStackDepth, groupTokensAndCreatures);
     }
 
@@ -143,14 +148,15 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         if (!this.stackCreatures && !this.groupTokensAndCreatures) {
             return collectUnstacked(remainingPanels, RowType.Creature);
         }
+        final BiPredicate<CardView, CardView> base = (card, first) -> !card.isCloned()
+                && card.hasSameCounters(first)
+                && card.isSick() == first.isSick()
+                && card.hasSamePT(first)
+                && (!groupTokensAndCreatures || card.isTapped() == first.isTapped())
+                && (!groupTokensAndCreatures || card.getDamage() == first.getDamage())
+                && (!groupTokensAndCreatures || card.getText().equals(first.getText()));
         return collectStacked(remainingPanels, RowType.Creature,
-                (card, first) -> !card.isCloned()
-                        && card.hasSameCounters(first)
-                        && card.isSick() == first.isSick()
-                        && card.hasSamePT(first)
-                        && (!groupTokensAndCreatures || card.isTapped() == first.isTapped())
-                        && (!groupTokensAndCreatures || card.getDamage() == first.getDamage())
-                        && (!groupTokensAndCreatures || card.getText().equals(first.getText())),
+                base.and(this::compatibleUnderCombatSeparation),
                 maxStackDepth, groupTokensAndCreatures);
     }
 
@@ -185,14 +191,16 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                         insertIndex = i + 1;
                         continue;
                     }
-                    // Cards with different combat pairings can't group together.
-                    // Must unbox to int — != on boxed Integer compares references,
-                    // not values, for IDs >= 128.
-                    int cardAssign = combatAssignments.getOrDefault(card.getId(), 0);
-                    int firstAssign = combatAssignments.getOrDefault(firstCard.getId(), 0);
-                    if (cardAssign != firstAssign) {
-                        insertIndex = i + 1;
-                        continue;
+                    if (!shouldSeparateCombatStacks()) {
+                        // Cards with different combat pairings can't group together.
+                        // Must unbox to int — != on boxed Integer compares references,
+                        // not values, for IDs >= 128.
+                        int cardAssign = combatAssignments.getOrDefault(card.getId(), 0);
+                        int firstAssign = combatAssignments.getOrDefault(firstCard.getId(), 0);
+                        if (cardAssign != firstAssign) {
+                            insertIndex = i + 1;
+                            continue;
+                        }
                     }
                 }
                 if (!panel.getAttachedPanels().isEmpty()
@@ -211,6 +219,87 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
             out.add(insertIndex == -1 ? out.size() : insertIndex, stack);
         }
         return out;
+    }
+
+    private boolean isInCombatForLayout(final CardView card) {
+        return hasAny(getCombatOpponentsForLayout(card));
+    }
+
+    private boolean compatibleUnderCombatSeparation(final CardView card, final CardView first) {
+        return !shouldSeparateCombatStacks() || (!isInCombatForLayout(card) && !isInCombatForLayout(first));
+    }
+
+    private static boolean shouldSeparateCombatStacks() {
+        return FModel.getPreferences().getPrefBoolean(FPref.UI_SEPARATE_COMBAT_STACKS);
+    }
+
+    private static boolean hasAny(final Iterable<CardView> cards) {
+        return cards != null && cards.iterator().hasNext();
+    }
+
+    private void sortCombatantsByOpponentPosition(final CardStackRow row) {
+        row.sort(Comparator.comparingDouble(this::getCombatOpponentPositionSortKey));
+    }
+
+    private double getCombatOpponentPositionSortKey(final CardStack stack) {
+        if (stack.isEmpty()) {
+            return Double.MAX_VALUE;
+        }
+        final Iterable<CardView> opponents = getCombatOpponentsForLayout(stack.get(0).getCard());
+        if (opponents == null) {
+            return Double.MAX_VALUE;
+        }
+
+        int opponentCount = 0;
+        double opponentPositionTotal = 0;
+        for (final CardView opponent : opponents) {
+            final CardPanel opponentPanel = getMatchUI().getFieldViews().stream()
+                    .map(field -> field.getTabletop().getCardPanel(opponent.getId()))
+                    .filter(Objects::nonNull)
+                    .findFirst()
+                    .orElse(null);
+            if (opponentPanel == null) {
+                continue;
+            }
+            opponentPositionTotal += getScreenX(opponentPanel);
+            opponentCount++;
+        }
+        return opponentCount == 0 ? Double.MAX_VALUE : opponentPositionTotal / opponentCount;
+    }
+
+    private Iterable<CardView> getCombatOpponentsForLayout(final CardView card) {
+        final GameView gameView = getMatchUI().getGameView();
+        if (gameView == null) {
+            return null;
+        }
+        final CombatView combat = gameView.getCombat();
+        if (combat == null) {
+            return null;
+        }
+        if (!combat.isAttacking(card)) {
+            final List<CardView> attackers = new ArrayList<>();
+            for (final CardView attacker : combat.getAttackers()) {
+                if (combat.getBlockers(attacker).contains(card) || combat.getPlannedBlockers(attacker).contains(card)) {
+                    attackers.add(attacker);
+                }
+            }
+            return attackers;
+        }
+        final Iterable<CardView> blockers = combat.getBlockers(card);
+        if (hasAny(blockers)) {
+            return blockers;
+        }
+        final Iterable<CardView> plannedBlockers = combat.getPlannedBlockers(card);
+        return hasAny(plannedBlockers) ? plannedBlockers : null;
+    }
+
+    private static double getScreenX(final CardPanel panel) {
+        try {
+            final Point location = panel.getCardLocationOnScreen();
+            return location.getX() + (panel.getWidth() * CardPanel.TARGET_ORIGIN_FACTOR_X);
+        } catch (final IllegalComponentStateException ex) {
+            return panel.getCardX() + (panel.getCardWidth() * CardPanel.TARGET_ORIGIN_FACTOR_X);
+        }
     }
 
     private CardStackRow collectAllContraptions(List<CardPanel> remainingPanels) {
@@ -278,12 +367,13 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     }
 
     private CardStackRow collectAllOthers(final List<CardPanel> remainingPanels) {
+        final BiPredicate<CardView, CardView> base = (card, first) -> card.hasSameCounters(first)
+                && card.isSick() == first.isSick()
+                && card.isCloned() == first.isCloned()
+                && (!groupAll || card.isTapped() == first.isTapped())
+                && (!groupAll || card.getDamage() == first.getDamage());
         CardStackRow out = collectStacked(remainingPanels, RowType.Other,
-                (card, first) -> card.hasSameCounters(first)
-                        && card.isSick() == first.isSick()
-                        && card.isCloned() == first.isCloned()
-                        && (!groupAll || card.isTapped() == first.isTapped())
-                        && (!groupAll || card.getDamage() == first.getDamage()),
+                base.and(this::compatibleUnderCombatSeparation),
                 maxStackDepth, groupAll);
         for (CardStack stack : out) {
             stack.alignRight = true;
@@ -367,6 +457,11 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 }
             }
             tokens.clear();
+        }
+
+        if (shouldSeparateCombatStacks() || grouping) {
+            sortCombatantsByOpponentPosition(tokens);
+            sortCombatantsByOpponentPosition(creatures);
         }
 
         if(!contraptions.isEmpty()) {
