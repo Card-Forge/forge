@@ -94,7 +94,7 @@ public class GameSimulationTest extends SimulationTest {
             }
         };
 
-        otherOpponent.runWithController(() -> GameSimulator.resolveStack(game, ai), throwingController);
+        otherOpponent.runWithController(() -> GameSimulator.resolveStack(game), throwingController);
 
         AssertJUnit.assertTrue("The non-AI non-weakest player should have sacrificed during stack resolution",
                 otherOpponent.getZone(ZoneType.Graveyard).contains(otherOpponentBear));

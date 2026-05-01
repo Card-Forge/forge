@@ -175,7 +175,7 @@ public class GameCopier {
         // TODO update thisTurnCast
 
         if (advanceToPhase != null) {
-            newGame.getPhaseHandler().devAdvanceToPhase(advanceToPhase, () -> GameSimulator.resolveStack(newGame, aiPlayer));
+            newGame.getPhaseHandler().devAdvanceToPhase(advanceToPhase, () -> GameSimulator.resolveStack(newGame));
         }
 
         return newGame;

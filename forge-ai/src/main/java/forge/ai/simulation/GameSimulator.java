@@ -53,7 +53,7 @@ public class GameSimulator {
             debugLines = origLines;
             Game copyOrigGame = copier.makeCopy();
             Player copyOrigAiPlayer = copyOrigGame.getPlayers().get(1);
-            resolveStack(copyOrigGame, copyOrigAiPlayer);
+            resolveStack(copyOrigGame);
             origScore = eval.getScoreForGameState(copyOrigGame, copyOrigAiPlayer);
         }
 
@@ -225,7 +225,7 @@ public class GameSimulator {
         }
 
         if (resolve) {
-            resolveStack(simGame, aiPlayer);
+            resolveStack(simGame);
         }
 
         // TODO: If this is during combat, before blockers are declared,
@@ -258,9 +258,9 @@ public class GameSimulator {
         return score;
     }
 
-    public static void resolveStack(final Game game, final Player preservedPlayer) {
+    public static void resolveStack(final Game game) {
         List<Player> players = new ArrayList<>(game.getPlayers());
-        runWithSimulationControllers(game, preservedPlayer, players, 0, () -> {
+        runWithSimulationControllers(game, players, () -> {
             final Set<Card> allAffectedCards = new HashSet<>();
             game.getAction().checkStateEffects(false, allAffectedCards);
             game.getStack().addAllTriggeredAbilitiesToStack();
@@ -287,21 +287,20 @@ public class GameSimulator {
         });
     }
 
-    private static void runWithSimulationControllers(final Game game, final Player preservedPlayer,
-            final List<Player> players, final int index, final Runnable proc) {
-        if (index >= players.size()) {
+    private static void runWithSimulationControllers(final Game game, final List<Player> players, final Runnable proc) {
+        if (players.isEmpty()) {
             proc.run();
             return;
         }
 
-        Player player = players.get(index);
-        if (player.equals(preservedPlayer) || player.getController().isAI()) {
-            runWithSimulationControllers(game, preservedPlayer, players, index + 1, proc);
+        Player player = players.remove(0);
+        if (player.getController().isAI()) {
+            runWithSimulationControllers(game, players, proc);
             return;
         }
         PlayerControllerAi sim = new PlayerControllerAi(game, player, player.getLobbyPlayer());
         sim.setUseSimulation(true);
-        player.runWithController(() -> runWithSimulationControllers(game, preservedPlayer, players, index + 1, proc), sim);
+        player.runWithController(() -> runWithSimulationControllers(game, players, proc), sim);
     }
 
     public Game getSimulatedGameState() {
