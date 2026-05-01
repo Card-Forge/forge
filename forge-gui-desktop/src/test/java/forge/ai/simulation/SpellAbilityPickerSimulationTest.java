@@ -3,20 +3,25 @@ package forge.ai.simulation;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.item.PaperCard;
-import forge.model.FModel;
 import org.testng.AssertJUnit;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import forge.ai.AiController;
+import forge.ai.AiPlayDecision;
+import forge.ai.ComputerUtilCard;
+import forge.ai.PlayerControllerAi;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.item.PaperCard;
+import forge.model.FModel;
 
 public class SpellAbilityPickerSimulationTest extends SimulationTest {
     @Test
@@ -64,6 +69,141 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         AssertJUnit.assertNotNull(sa);
         AssertJUnit.assertEquals(bearCard, sa.getTargetCard());
         AssertJUnit.assertNull(sa.getTargets().getFirstTargetedPlayer());
+    }
+
+    @DataProvider(name = "drawPunisherWheelData")
+    public static Object[][] drawPunisherWheelData() {
+        return new Object[][] {
+                {false, "Wheel of Fortune", ZoneType.Hand, "Xyris, the Writhing Storm"},
+                {true, "Timetwister", ZoneType.Hand, "Nekusar, the Mindrazer"},
+                {false, "Echo of Eons", ZoneType.Graveyard, "Xyris, the Writhing Storm"},
+                {true, "Echo of Eons", ZoneType.Hand, "Nekusar, the Mindrazer"}
+        };
+    }
+
+    @Test(dataProvider = "drawPunisherWheelData")
+    public void testAiAvoidsWheelEffectsIntoDrawPunisher(boolean useSimulation, String cardName, ZoneType zone, String punisherName) {
+        Game game = initAndCreateGame();
+        Player p = setupAi(game, useSimulation);
+
+        addCards("Island", 6, p);
+        addCardToZone(cardName, p, zone);
+        fillLibrary(p, 7);
+
+        Player opponent = opponentPlayer(game);
+        addCard(punisherName, opponent);
+        fillLibrary(opponent, 7);
+
+        moveToMainPhase(game, p);
+
+        assertNoPlayableSpell(p);
+    }
+
+    @Test
+    public void testOptionalFreeCastAvoidsWheelIntoXyris() {
+        Game game = initAndCreateGame();
+        Player p = setupAi(game, false);
+
+        Card wheel = addCardToZone("Wheel of Fate", p, ZoneType.Exile);
+        fillLibrary(p, 7);
+
+        Player opponent = opponentPlayer(game);
+        addCard("Xyris, the Writhing Storm", opponent);
+        fillLibrary(opponent, 7);
+
+        moveToMainPhase(game, p);
+
+        AssertJUnit.assertEquals(AiPlayDecision.CurseEffects, optionalFreeCastDecision(p, wheel));
+    }
+
+    @Test
+    public void testOptionalFreeCastAllowsWheelIntoCommandZoneXyris() {
+        Game game = initAndCreateGame();
+        Player p = setupAi(game, false);
+
+        Card wheel = addCardToZone("Wheel of Fortune", p, ZoneType.Exile);
+        fillLibrary(p, 7);
+
+        Card xyris = addCardToZone("Xyris, the Writhing Storm", opponentPlayer(game), ZoneType.Command);
+        opponentPlayer(game).addCommander(xyris);
+        fillLibrary(opponentPlayer(game), 7);
+
+        moveToMainPhase(game, p);
+
+        AssertJUnit.assertFalse(ComputerUtilCard.shouldAvoidDrawPunisher(p, makeOptionalFreeCast(p, wheel)));
+    }
+
+    @DataProvider(name = "drawPunisherPermanentData")
+    public static Object[][] drawPunisherPermanentData() {
+        return new Object[][] {
+                {"Mindmoil", "Nekusar, the Mindrazer"},
+                {"Teferi's Puzzle Box", "Xyris, the Writhing Storm"},
+                {"Arjun, the Shifting Flame", "Kederekt Parasite"}
+        };
+    }
+
+    @Test(dataProvider = "drawPunisherPermanentData")
+    public void testAiAvoidsDrawEnginePermanentIntoDrawPunisher(String cardName, String punisherName) {
+        Game game = initAndCreateGame();
+        Player p = setupAi(game, false);
+
+        addCards("Mountain", 6, p);
+        addCards("Island", 6, p);
+        addCardToZone(cardName, p, ZoneType.Hand);
+        fillHandAndLibrary(p, 6);
+
+        Player opponent = opponentPlayer(game);
+        addCard(punisherName, opponent);
+        addCard("Raging Goblin", opponent);
+
+        moveToMainPhase(game, p);
+
+        assertNoPlayableSpell(p);
+    }
+
+    @Test
+    public void testAiAvoidsCastingSpellWithArjunOutIntoKederektParasite() {
+        Game game = initAndCreateGame();
+        Player p = setupAi(game, false);
+
+        addCard("Arjun, the Shifting Flame", p);
+        addCard("Mountain", p);
+        addCardToZone("Shock", p, ZoneType.Hand);
+        fillHandAndLibrary(p, 6);
+
+        Player opponent = opponentPlayer(game);
+        addCard("Kederekt Parasite", opponent);
+        addCard("Raging Goblin", opponent);
+
+        moveToMainPhase(game, p);
+
+        assertNoPlayableSpell(p);
+    }
+
+    @Test
+    public void testAiAllowsOwnCommanderDespiteDrawPunisher() {
+        Game game = initAndCreateGame();
+        Player p = setupAi(game, false);
+
+        Card commander = addCardToZone("Arjun, the Shifting Flame", p, ZoneType.Command);
+        p.addCommander(commander);
+
+        Player opponent = opponentPlayer(game);
+        addCard("Xyris, the Writhing Storm", opponent);
+
+        moveToMainPhase(game, p);
+
+        SpellAbility sa = commander.getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+        AssertJUnit.assertFalse(ComputerUtilCard.shouldAvoidDrawPunisher(p, sa));
+    }
+
+    @DataProvider(name = "aiPickerMode")
+    public static Object[][] aiPickerMode() {
+        return new Object[][] {
+                {false},
+                {true}
+        };
     }
 
     @Test
@@ -937,6 +1077,60 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
         AssertJUnit.assertNotNull(sa);
         AssertJUnit.assertEquals("Card '%s' was cast with X instead".formatted(cardName), 3, sa.getXManaCostPaid().intValue());
+    }
+
+    private Player setupAi(Game game, boolean useSimulation) {
+        Player player = aiPlayer(game);
+        player.setTeam(0);
+        opponentPlayer(game).setTeam(1);
+        ai(player).setUseSimulation(useSimulation);
+        return player;
+    }
+
+    private Player aiPlayer(Game game) {
+        return game.getPlayers().get(1);
+    }
+
+    private Player opponentPlayer(Game game) {
+        return game.getPlayers().get(0);
+    }
+
+    private AiController ai(Player player) {
+        return ((PlayerControllerAi) player.getController()).getAi();
+    }
+
+    private void fillLibrary(Player player, int count) {
+        for (int i = 0; i < count; i++) {
+            addCardToZone("Runeclaw Bear", player, ZoneType.Library);
+        }
+    }
+
+    private void fillHandAndLibrary(Player player, int count) {
+        for (int i = 0; i < count; i++) {
+            addCardToZone("Runeclaw Bear", player, ZoneType.Hand);
+            addCardToZone("Runeclaw Bear", player, ZoneType.Library);
+        }
+    }
+
+    private void moveToMainPhase(Game game, Player player) {
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, player);
+        game.getAction().checkStateEffects(true);
+    }
+
+    private void assertNoPlayableSpell(Player player) {
+        List<SpellAbility> chosen = ai(player).chooseSpellAbilityToPlay();
+        AssertJUnit.assertNull(chosen == null ? null : chosen.toString(), chosen);
+    }
+
+    private Spell makeOptionalFreeCast(Player player, Card card) {
+        Spell freeCast = (Spell) card.getFirstSpellAbility().copyWithNoManaCost(player);
+        freeCast.setActivatingPlayer(player);
+        freeCast.setCastFromPlayEffect(true);
+        return freeCast;
+    }
+
+    private AiPlayDecision optionalFreeCastDecision(Player player, Card card) {
+        return ai(player).canPlayFromEffectAI(makeOptionalFreeCast(player, card), false, true);
     }
 
 }

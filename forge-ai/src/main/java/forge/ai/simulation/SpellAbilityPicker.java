@@ -334,6 +334,9 @@ public class SpellAbilityPicker {
         if (shouldWaitForLater(sa)) {
             return AiPlayDecision.AnotherTime;
         }
+        if (ComputerUtilCard.shouldAvoidDrawPunisher(player, sa)) {
+            return AiPlayDecision.CurseEffects;
+        }
 
         return AiPlayDecision.WillPlay;
     }
