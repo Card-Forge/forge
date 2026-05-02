@@ -558,7 +558,10 @@ public class MapStage extends GameStage {
                             {
                                 mob.speedModifier = Float.parseFloat(prop.get("speedModifier").toString());
                             }
-
+                            if (ArchipelagoData.getInstance().getArchipelagoMode() != ArchipelagoMode.disabled) {
+                                // Increase base speed of mobs & player to compensate for removal of starting boots.
+                                mob.speedModifier *= 1.15f;
+                            }
                             enemies.add(mob);
                             addMapActor(obj, mob);
                         }

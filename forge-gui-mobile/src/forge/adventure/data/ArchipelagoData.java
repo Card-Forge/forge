@@ -126,6 +126,7 @@ public class ArchipelagoData implements SaveFileContent {
         GameHUD.getInstance().addNotification(setUnlockedText, 0.5f, 3f, 0.5f);
     }
 
+    // This produces a different result each time it's rolled, the RNG isn't seeded.
     public void unlockRandomSet() {
         // Subtract unlocked sets from full list.
         Set<String> lockedSets = new HashSet<>(allCardSets);
@@ -146,23 +147,12 @@ public class ArchipelagoData implements SaveFileContent {
         float amountOfSetsToUnlock = (float) allCardSets.size() / totalAmountOfSetUnlockChecks + setUnlockChecksRestAmount;
         int amountOfSetsToUnlockFloored = (int) Math.floor(amountOfSetsToUnlock);
         setUnlockChecksRestAmount = (amountOfSetsToUnlock - amountOfSetsToUnlockFloored);
-        for (int i = 0; i < amountOfSetsToUnlockFloored; i++) {
-            int targetSetIndex = new Random().nextInt(lockedSets.size());
-            String setToUnlock = null;
+        List<String> lockedList = new ArrayList<>(lockedSets);
+        Random random = new Random();
 
-            int setIndex = 0;
-            for (String set : lockedSets) {
-                if (setIndex++ == targetSetIndex) {
-                    setToUnlock = set;
-                    break;
-                }
-            }
-
-            if (setToUnlock != null) {
-                unlockSetByName(setToUnlock);
-                lockedSets.remove(setToUnlock);
-            }
-        }
+        String setToUnlock = lockedList.get(random.nextInt(lockedList.size()));
+        unlockSetByName(setToUnlock);
+        lockedSets.remove(setToUnlock);
         receivedAmountOfSetUnlockChecks++;
     }
 
@@ -224,7 +214,9 @@ public class ArchipelagoData implements SaveFileContent {
         loadAllAvailableSets();
     }
 
-    // Todo: Each reward has a RewardType of "item" and comes pre-defined with an itemName.
+    // Todo: Make the max life upgrades available through another method (more checks perhaps)
+    // Todo: Figure out what to do with the "overpowered" equipment.
+    // Each reward has a RewardType of "item" and comes pre-defined with an itemName.
     //  They are defined in Shandalar/Shops.json as Equipment, <Color>Item and <Color>Equipment. We can dynamically detect those names and replace their items if AP mode is enabled here.
     //  Equipment: 6 slots to randomize
     //  <Color>Equipment: 6 slots to randomize
@@ -274,7 +266,38 @@ public class ArchipelagoData implements SaveFileContent {
         remainingEquipmentPool.addAll(equipmentNames);
     }
 
-    // Todo: Create a function that returns & rewards the player a random item from the remainingEquipmentPool and then removes it from the list. If no item is left, the player is instead rewarded with gold/shard/pack etc.
+    // Todo: Expand this function to be able to return a list of rewards so that we can award the player gold, shards & a pack in place of their item.
+    // Returns & rewards the player a random item from the remainingEquipmentPool and then removes it from the list. If no item is left, the player is instead rewarded with gold or shards.
+    // This produces a different result each time it's rolled, the RNG isn't seeded.
+    public Reward takeSingleEquipmentOutOfRemainingPool() {
+        RewardData data = new RewardData();
+        Random random = new Random();
+        while (true) {
+            if (!remainingEquipmentPool.isEmpty()) {
+                List<String> remainingEquipmentList = new ArrayList<>(remainingEquipmentPool);
+
+                String equipmentCandidate = remainingEquipmentList.get(random.nextInt(remainingEquipmentList.size()));
+                remainingEquipmentPool.remove(equipmentCandidate);
+
+                data.type = "item";
+                data.count = 1;
+                data.itemName = equipmentCandidate;
+                Array<Reward> replacedAPReward = data.generate(false, true);
+                if (replacedAPReward != null &&  !replacedAPReward.isEmpty()) {
+                    return replacedAPReward.get(0);
+                }
+            } else {
+                // Generate a random standard reward in place of the item.
+                int chosenItemType = random.nextInt(2);
+                switch (chosenItemType) {
+                    case 0:
+                        return new Reward(Reward.Type.Gold, 3000);
+                    case 1:
+                        return new Reward(Reward.Type.Shards, 50);
+                }
+            }
+        }
+    }
 
     // Todo: Create a function that returns a list of equipment for any given shop to sell based on the previously randomized lists.
     public Object[] getItemsForEquipmentShop(String shopName) {

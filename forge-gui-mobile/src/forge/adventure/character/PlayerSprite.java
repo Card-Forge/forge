@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import forge.Forge;
 import forge.adventure.data.ArchipelagoData;
+import forge.adventure.data.ArchipelagoMode;
 import forge.adventure.data.BiomeData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.scene.Scene;
@@ -23,6 +24,7 @@ public class PlayerSprite extends CharacterSprite {
     private final Vector2 lastLegalPosition = new Vector2();
     private float playerSpeedModifier = 1f;
     private float playerSpeedEquipmentModifier = 1f;
+    private float playerSpeedArchipelagoAdjustment = 0f;
     private boolean showLockedRegionOverhead = false;
     private String lastBlockedRegionName = null;
     GameStage gameStage;
@@ -41,6 +43,9 @@ public class PlayerSprite extends CharacterSprite {
 
         // Set initial last legal position
         lastLegalPosition.set(Current.player().getWorldPosX(), Current.player().getWorldPosY());
+
+        // Check if archipelago mode is enabled
+        playerSpeedArchipelagoAdjustment += ArchipelagoData.getInstance().getArchipelagoMode() != ArchipelagoMode.disabled ? 0.15f : 0;
     }
 
     private void updatePlayer() {
@@ -95,7 +100,7 @@ public class PlayerSprite extends CharacterSprite {
         super.act(delta);
         if (Forge.advFreezePlayerControls)
             return;
-        direction.setLength(playerSpeed * delta * playerSpeedModifier*playerSpeedEquipmentModifier);
+        direction.setLength(playerSpeed * delta * playerSpeedModifier * (playerSpeedEquipmentModifier + playerSpeedArchipelagoAdjustment));
         Vector2 previousDirection = getMovementDirection().cpy();
         Scene previousScene = forge.Forge.getCurrentScene();
 
