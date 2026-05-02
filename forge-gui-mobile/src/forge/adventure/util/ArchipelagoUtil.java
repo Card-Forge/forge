@@ -3,7 +3,9 @@ package forge.adventure.util;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Array;
 import forge.Graphics;
+import forge.adventure.data.RewardData;
 import forge.assets.FImage;
 import forge.assets.FSkinImage;
 
@@ -85,5 +87,22 @@ public class ArchipelagoUtil {
         batch.draw(cross, x, y, size / 2, size / 2);
 
         batch.setColor(old);
+    }
+
+    public static RewardData generateRewardData(String type, int count, String itemName) {
+        RewardData data = new RewardData();
+        data.type = type;
+        data.count = count;
+        data.itemName = itemName;
+        return  data;
+    }
+
+    public static Reward generateReward(String type, int count, String itemName) {
+        RewardData data = generateRewardData(type, count, itemName);
+        Array<Reward> replacedAPReward = data.generate(false, true);
+        if (replacedAPReward != null &&  !replacedAPReward.isEmpty()) {
+            return replacedAPReward.get(0);
+        }
+        return null;
     }
 }

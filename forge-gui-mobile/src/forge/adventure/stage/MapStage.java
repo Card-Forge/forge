@@ -740,9 +740,9 @@ public class MapStage extends GameStage {
                                     // Get list of items for specific shop.
                                     Object[] randomizedEquipmentList = ArchipelagoData.getInstance().getItemsForEquipmentShop(data.name);
                                     // Swap the shop's rewards
-                                    if (randomizedEquipmentList != null && randomizedEquipmentList.length >= data.rewards.size) {
-                                        for (int i = 0; i < data.rewards.size; i++) {
-                                            data.rewards.get(i).itemName = randomizedEquipmentList[i].toString();
+                                    if (randomizedEquipmentList != null && randomizedEquipmentList.length <= data.rewards.size) {
+                                        for (int i = 0; i < randomizedEquipmentList.length; i++) {
+                                            data.rewards.set(i, ArchipelagoUtil.generateRewardData("item", 1, randomizedEquipmentList[i].toString()));
                                         }
                                     }
                                 }

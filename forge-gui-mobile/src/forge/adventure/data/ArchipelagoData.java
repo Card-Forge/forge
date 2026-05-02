@@ -43,6 +43,7 @@ public class ArchipelagoData implements SaveFileContent {
     private final Set<String> bossesDefeatedByName = new HashSet<>();
     private final Set<String> miniBossesDefeatedByName = new HashSet<>();
     private final Set<String> lockedWorldRegionsByName = new HashSet<>();
+    // Todo: Replace the String with another serializable object that is compatible with Archipelago i.e. `NetworkItem.java`
     private final Set<String> colorlessEquipmentShopList = new HashSet<>();
     private final Set<String> whiteEquipmentShopList = new HashSet<>();
     private final Set<String> blueEquipmentShopList = new HashSet<>();
@@ -236,7 +237,7 @@ public class ArchipelagoData implements SaveFileContent {
                 if (shopList.get(i).equipmentSlot != null && !shopList.get(i).equipmentSlot.isEmpty()) {
                     // We've found an equipment item, add it to the list but exclude the "overpowered" items.
                     if (shopList.get(i).name.toLowerCase().contains("rune")) continue;
-                    if (shopList.get(i).name.toLowerCase().contains("mox") || shopList.get(i).name.toLowerCase().contains("black lotus") || shopList.get(i).name.toLowerCase().contains("sol ring")) {
+                    if (shopList.get(i).name.toLowerCase().contains("mox") || shopList.get(i).name.toLowerCase().contains("black lotus") || shopList.get(i).name.toLowerCase().contains("sol ring") || shopList.get(i).name.toLowerCase().contains("cheat")) {
                         powerEquipmentNames.add(shopList.get(i).name);
                         continue;
                     }
@@ -270,22 +271,13 @@ public class ArchipelagoData implements SaveFileContent {
     // Returns & rewards the player a random item from the remainingEquipmentPool and then removes it from the list. If no item is left, the player is instead rewarded with gold or shards.
     // This produces a different result each time it's rolled, the RNG isn't seeded.
     public Reward takeSingleEquipmentOutOfRemainingPool() {
-        RewardData data = new RewardData();
         Random random = new Random();
         while (true) {
             if (!remainingEquipmentPool.isEmpty()) {
                 List<String> remainingEquipmentList = new ArrayList<>(remainingEquipmentPool);
-
                 String equipmentCandidate = remainingEquipmentList.get(random.nextInt(remainingEquipmentList.size()));
                 remainingEquipmentPool.remove(equipmentCandidate);
-
-                data.type = "item";
-                data.count = 1;
-                data.itemName = equipmentCandidate;
-                Array<Reward> replacedAPReward = data.generate(false, true);
-                if (replacedAPReward != null &&  !replacedAPReward.isEmpty()) {
-                    return replacedAPReward.get(0);
-                }
+                return ArchipelagoUtil.generateReward("item", 1, equipmentCandidate);
             } else {
                 // Generate a random standard reward in place of the item.
                 int chosenItemType = random.nextInt(2);
@@ -301,7 +293,7 @@ public class ArchipelagoData implements SaveFileContent {
 
     // Todo: Create a function that returns a list of equipment for any given shop to sell based on the previously randomized lists.
     public Object[] getItemsForEquipmentShop(String shopName) {
-        Array<String> result = new Array<>();
+        Array<Reward> result = new Array<>();
         if (shopName.toLowerCase().contains("items")) {
             // Items shop name
             if (shopName.toLowerCase().contains("white")) {
