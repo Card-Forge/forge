@@ -28,6 +28,7 @@ import forge.screens.TransitionScreen;
 import forge.sound.SoundSystem;
 import forge.util.NameGenerator;
 
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -69,6 +70,8 @@ public class NewGameScene extends MenuScene {
     private final Array<AdventureModes> modes = new Array<>();
     private final Array<ArchipelagoMode> archipelagoModes = new Array<>();
 
+    private boolean isShandalar;
+
     private NewGameScene() {
         super(Forge.isLandscapeMode() ? "ui/new_game.json" : "ui/new_game_portrait.json");
 
@@ -79,7 +82,6 @@ public class NewGameScene extends MenuScene {
         avatarImage = ui.findActor("avatarPreview");
         mode = ui.findActor("mode");
         modeHelp = ui.findActor("modeHelp");
-        archipelagoHelp = ui.findActor("archipelagoHelp");
         colorLabel = ui.findActor("colorIdL");
         String colorIdLabel = colorLabel.storedText;
         custom = new Array<>();
@@ -119,8 +121,20 @@ public class NewGameScene extends MenuScene {
             }
             break;
         }
-        // Todo: Implement this so it only works on Shandalar and doesn't crash
+
+        isShandalar = Objects.equals(
+                Config.instance().getSettingData().plane,
+                "Shandalar"
+        );
+
         enableArchipelago = ui.findActor("enableArchipelago");
+        enableArchipelagoLabel = ui.findActor("enableArchipelagoL");
+        archipelagoHelp = ui.findActor("archipelagoHelp");
+
+        enableArchipelago.setVisible(isShandalar);
+        enableArchipelagoLabel.setVisible(isShandalar);
+        archipelagoHelp.setVisible(isShandalar);
+
         starterEdition = ui.findActor("starterEdition");
         starterEditionLabel = ui.findActor("starterEditionL");
         String[] starterEditions = Config.instance().starterEditions();
@@ -235,7 +249,6 @@ public class NewGameScene extends MenuScene {
         genderLabel = ui.findActor("genderL");
         difficultyLabel = ui.findActor("difficultyL");
         modeLabel = ui.findActor("modeL");
-        enableArchipelagoLabel = ui.findActor("enableArchipelagoL");
 
         addSelectorToScrollGroup(raceLabel, race, null);
         addSelectorToScrollGroup(genderLabel, gender, null);
@@ -254,6 +267,9 @@ public class NewGameScene extends MenuScene {
         }
 
         addSelectorToScrollGroup(modeLabel, mode, modeHelp);
+        if (isShandalar) {
+            addSelectorToScrollGroup(enableArchipelagoLabel, enableArchipelago, archipelagoHelp);
+        }
         addSelectorToScrollGroup(starterEditionLabel, starterEdition, null);
 
         scrollPane = ui.findActor("selectorScroll");
@@ -325,13 +341,11 @@ public class NewGameScene extends MenuScene {
         }
         ArchipelagoMode archipelagoMode;
         if (isArchipelagoSupported) {
-            if (enableArchipelago.getCurrentIndex() < ArchipelagoMode.values().length && enableArchipelago.getCurrentIndex() > -1) {
+            if (isShandalar && enableArchipelago.getCurrentIndex() < ArchipelagoMode.values().length && enableArchipelago.getCurrentIndex() > -1) {
                 archipelagoMode = ArchipelagoMode.values()[enableArchipelago.getCurrentIndex()];
             } else {
                 archipelagoMode = ArchipelagoMode.disabled;
             }
-        } else {
-            archipelagoMode = ArchipelagoMode.disabled;
         }
 
         Runnable runnable = () -> {
