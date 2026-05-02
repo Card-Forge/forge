@@ -161,7 +161,7 @@ public class ArchipelagoData implements SaveFileContent {
         }
     }
 
-    public  boolean isSetUnlocked(String setCode) {
+    public boolean isSetUnlocked(String setCode) {
         if (archipelagoMode == ArchipelagoMode.disabled) return true;
         if (setCode == null || !setsUnlockedByCode.contains(setCode)){
             return false;
@@ -452,7 +452,7 @@ public class ArchipelagoData implements SaveFileContent {
     }
     /// --- End ---
 
-    // Helper functions for saving and loading
+    /// --- Helper functions for saving and loading ---
     private static void saveStringSet(SaveFileData parent, String key, Set<String> set) {
         parent.storeObject(key, set.toArray(new String[0]));
     }
@@ -515,9 +515,6 @@ public class ArchipelagoData implements SaveFileContent {
         }
         loadAllAvailableSets();
 
-        // Debug func
-        Current.player().addShards(900000);
-
         // Load save data
         loadStringLongMap(data, "townEvents", completedTownInnEvents);
         loadStringLongMap(data, "townQuests", completedTownQuests);
@@ -573,4 +570,5 @@ public class ArchipelagoData implements SaveFileContent {
 
         return data;
     }
+    ///  --- End ---
 }
