@@ -11,5 +11,5 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | CheckSVar$ Y | TriggerZo
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Any | NumDmg$ X | AILogic$ PowerDmg
 SVar:X:Count$CardPower
 SVar:Y:Count$ThisTurnCast_Card.YouCtrl+!wasCastFromYourHand/Plus.LandsPlayedFromNotHand
-SVar:LandsPlayedFromNotHand:PlayerCountPropertyYou$LandsPlayed Land.!inZoneHand
+SVar:LandsPlayedFromNotHand:PlayerCountPropertyYou$LandsPlayed SpellAbility.!inZoneHand
 Oracle:From the Future — You can't cast Spider-Man 2099 during your first, second, or third turns of the game.\nDouble strike, vigilance\nAt the beginning of your end step, if you've played a land or cast a spell this turn from anywhere other than your hand, Spider-Man 2099 deals damage equal to his power to any target.

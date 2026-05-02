@@ -121,7 +121,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private List<Card> discardedThisTurn = new ArrayList<>();
     private List<Card> sacrificedThisTurn = new ArrayList<>();
-    private List<Card> landsPlayedThisTurn = new ArrayList<>();
+    private List<SpellAbility> landsPlayedThisTurn = new ArrayList<>();
 
     private int simultaneousDamage = 0;
 
@@ -1627,7 +1627,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final Card playLand(final Card land, SpellAbility cause) {
-        Card lki = CardCopyService.getLKICopy(land);
+
         land.setController(this, 0);
         if (land.isFaceDown()) {
             land.turnFaceUp(null);
@@ -1635,6 +1635,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 land.changeToState(cause.getCardStateName());
             }
         }
+        Card lki = CardCopyService.getLKICopy(land);
 
         Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(land);
         runParams.put(AbilityKey.Origin, land.getZone().getZoneType().name());
@@ -1646,12 +1647,14 @@ public class Player extends GameEntity implements Comparable<Player> {
         final Card c = game.getAction().moveTo(getZone(ZoneType.Battlefield), land, cause, moveParams);
         game.updateLastStateForCard(c);
 
+        SpellAbility causeLKI = cause.copy(lki, true);
+
         // Run triggers
         runParams.put(AbilityKey.SpellAbility, cause);
         game.getTriggerHandler().runTrigger(TriggerType.LandPlayed, runParams, false);
 
         game.getStack().unfreezeStack();
-        addLandPlayedThisTurn(lki);
+        addLandPlayedThisTurn(causeLKI);
 
         // play a sound
         game.fireEvent(new GameEventLandPlayed(PlayerView.get(this), CardView.get(c)));
@@ -2233,14 +2236,14 @@ public class Player extends GameEntity implements Comparable<Player> {
         startingHandSize = shs;
     }
 
-    public final List<Card> getLandsPlayedThisTurn() {
+    public final List<SpellAbility> getLandsPlayedThisTurn() {
         return landsPlayedThisTurn;
     }
     public final int getLandsPlayedMyLastTurn() {
         return landsPlayedMyLastTurn;
     }
-    public final void addLandPlayedThisTurn(Card lki) {
-        landsPlayedThisTurn.add(lki);
+    public final void addLandPlayedThisTurn(SpellAbility landLki) {
+        landsPlayedThisTurn.add(landLki);
         achievementTracker.landsPlayed++;
         view.updateNumLandThisTurn(this);
     }
