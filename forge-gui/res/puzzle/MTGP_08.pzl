@@ -12,11 +12,7 @@ turn=1
 activeplayer=p0
 activephase=MAIN1
 p0life=2
-p0landsplayed=0
-p0landsplayedlastturn=0
 p0hand=Scar
 p0battlefield=Dread Shade;Carnifex Demon|Counters:M1M1=2;Dread Shade;Swamp;Swamp;Swamp
 p1life=10
-p1landsplayed=0
-p1landsplayedlastturn=0
 p1battlefield=Ashling the Pilgrim;Cascade Bluffs;Cascade Bluffs;Cascade Bluffs;Shivan Reef;Shivan Reef;Shivan Reef

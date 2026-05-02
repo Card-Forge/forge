@@ -1359,7 +1359,7 @@ public class SpecialCardAi {
             if (ph.getNextTurn().equals(ai) && ph.is(PhaseType.MAIN2)
                     && ai.getSpellsCastLastTurn() == 0
                     && ai.getSpellsCastThisTurn() == 0
-                    && ai.getLandsPlayedLastTurn() == 0) {
+                    && ai.getLandsPlayedMyLastTurn() == 0) {
                 // We're in a situation when we have nothing castable in hand, something needs to be done
                 if (!blackViseOTB) {
                     // exile-loot +1 card when at max hand size, hoping to get a workable spell or land
@@ -2067,7 +2067,7 @@ public class SpecialCardAi {
             if (ph.getNextTurn().equals(ai) && ph.is(PhaseType.END_OF_TURN)
                     && ai.getSpellsCastLastTurn() == 0
                     && ai.getSpellsCastThisTurn() == 0
-                    && ai.getLandsPlayedLastTurn() == 0) {
+                    && ai.getLandsPlayedMyLastTurn() == 0) {
                 // We're in a situation when we have nothing castable in hand, something needs to be done
                 if (!blackViseOTB) {
                     // draw +1 card when at max hand size, hoping to draw a workable spell or land

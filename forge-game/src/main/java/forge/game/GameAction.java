@@ -758,7 +758,7 @@ public class GameAction {
                 case Stack -> moveToStack(c, cause, params);
                 case PlanarDeck, SchemeDeck, AttractionDeck, ContraptionDeck -> moveToVariantDeck(c, name, libPosition, cause, params);
                 case Junkyard -> moveToJunkyard(c, cause, params);
-                default -> moveTo(c.getOwner().getZone(name), c, cause); // sideboard will also get there
+                default -> moveTo(c.getOwner().getZone(name), c, cause, params); // sideboard will also get there
             };
         } catch (Exception e) {
             String msg = "GameAction:moveTo: Exception occurred";
