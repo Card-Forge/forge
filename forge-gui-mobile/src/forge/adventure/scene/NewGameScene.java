@@ -131,10 +131,6 @@ public class NewGameScene extends MenuScene {
         enableArchipelagoLabel = ui.findActor("enableArchipelagoL");
         archipelagoHelp = ui.findActor("archipelagoHelp");
 
-        enableArchipelago.setVisible(isShandalar);
-        enableArchipelagoLabel.setVisible(isShandalar);
-        archipelagoHelp.setVisible(isShandalar);
-
         starterEdition = ui.findActor("starterEdition");
         starterEditionLabel = ui.findActor("starterEditionL");
         String[] starterEditions = Config.instance().starterEditions();
@@ -263,13 +259,15 @@ public class NewGameScene extends MenuScene {
                     archipelagoHelp();
                 }
             });
-            addSelectorToScrollGroup(enableArchipelagoLabel, enableArchipelago, archipelagoHelp);
+            if (isShandalar) {
+                addSelectorToScrollGroup(enableArchipelagoLabel, enableArchipelago, archipelagoHelp);
+            }
+            enableArchipelago.setVisible(isShandalar);
+            enableArchipelagoLabel.setVisible(isShandalar);
+            archipelagoHelp.setVisible(isShandalar);
         }
 
         addSelectorToScrollGroup(modeLabel, mode, modeHelp);
-        if (isShandalar) {
-            addSelectorToScrollGroup(enableArchipelagoLabel, enableArchipelago, archipelagoHelp);
-        }
         addSelectorToScrollGroup(starterEditionLabel, starterEdition, null);
 
         scrollPane = ui.findActor("selectorScroll");
@@ -346,6 +344,8 @@ public class NewGameScene extends MenuScene {
             } else {
                 archipelagoMode = ArchipelagoMode.disabled;
             }
+        } else {
+            archipelagoMode = ArchipelagoMode.disabled;
         }
 
         Runnable runnable = () -> {
