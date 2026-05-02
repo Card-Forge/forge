@@ -1,0 +1,8 @@
+[metadata]
+Code=YSOS
+Date=2026-05-12
+Name=Alchemy: Strixhaven
+Type=Online
+ScryfallCode=YSOS
+
+[cards]
