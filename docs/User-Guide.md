@@ -20,7 +20,7 @@
   - [Shift Key helper](#shift-key-helper)
   - [Full Control](#full-control)
   - [Repeatable Sequences (Macros)](#repeatable-sequences-macros)
-- [User Interface](#user-interface)
+- [Desktop User Interface](#desktop-user-interface)
   - [Layout](#layout)
   - [Viewing Cards in Different Zones](#viewing-cards-in-different-zones)
   - [Auto-Sort Multiplayer Fields](#auto-sort-multiplayer-fields)
@@ -34,8 +34,8 @@
 
 [***CLICK HERE FOR DOWNLOAD LINKS - Forge SNAPSHOT Version (DESKTOP/ANDROID)***](https://github.com/Card-Forge/forge/releases/tag/daily-snapshots)
 
-* For desktop, grab the installer file that ends in .jar
-* For android, grab the android file that ends in .apk
+* For Desktop, grab the installer file that ends in .jar
+* For Android, grab the app file that ends in .apk
   &dash; Watch the screen recording if one of following steps isn't clear for you
 
 <https://github.com/user-attachments/assets/7a0c7bb8-7cf9-4800-8091-bcc30ff2f4d8>

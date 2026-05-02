@@ -401,24 +401,17 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             return false;
         } else if (spectator == null) {
             return true; //if no local players or spectator, just quit
-        } else {
-            if (showConfirmDialog(Localizer.getInstance().getMessage("lblCloseGameSpectator"), Localizer.getInstance().getMessage("lblCloseGame"), Localizer.getInstance().getMessage("lblClose"), Localizer.getInstance().getMessage("lblCancel"))) {
-                IGameController controller = spectator;
-                spectator = null; //ensure we don't prompt again, including when calling nextGameDecision below
-                if (!isGamePaused())
-                    controller.selectButtonOk(); //pause
-                controller.nextGameDecision(NextGameDecision.QUIT);
-            }
-            return false; //let logic above handle closing current screen
+        } else if (showConfirmDialog(Localizer.getInstance().getMessage("lblCloseGameSpectator"), Localizer.getInstance().getMessage("lblCloseGame"), Localizer.getInstance().getMessage("lblClose"), Localizer.getInstance().getMessage("lblCancel"))) {
+            IGameController controller = spectator;
+            spectator = null; //ensure we don't prompt again, including when calling nextGameDecision below
+            if (!isGamePaused())
+                controller.selectButtonOk(); //pause
+            controller.nextGameDecision(NextGameDecision.QUIT);
         }
+        return false; //let logic above handle closing current screen
     }
 
     private boolean forceEndGameForRemainingAIs() {
-        final GameView gameView = getGameView();
-        if (gameView == null) {
-            return false;
-        }
-
         boolean hasRemainingAi = false;
         for (PlayerView player : gameView.getPlayers()) {
             if (!player.getHasLost() && player.isAI()) {

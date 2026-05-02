@@ -29,7 +29,6 @@ public class ChatMessageBubble extends FDisplayObject {
 
     private final ChatMessage message;
     public final boolean isLocal;
-    private final boolean isSystem;
     private final TextRenderer textRenderer = new TextRenderer();
 
     public ChatMessage getMessage() {
@@ -39,7 +38,6 @@ public class ChatMessageBubble extends FDisplayObject {
     public ChatMessageBubble(ChatMessage message0) {
         message = message0;
         isLocal = message.isLocal();
-        isSystem = message.getType() == ChatMessage.MessageType.SYSTEM;
     }
 
     public float getPreferredHeight(float width) {
@@ -122,7 +120,4 @@ public class ChatMessageBubble extends FDisplayObject {
         g.drawText(meta, META_FONT, metaColor, x, y, w, metaHeight, false, horzAlignment, true);
     }
 
-    public boolean isSystem() {
-        return isSystem;
-    }
 }
