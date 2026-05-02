@@ -427,14 +427,17 @@ public final class CMatchUI
         }
         cCombat.setModel(combat);
         cCombat.update();
-        if (isPreferenceEnabled(FPref.UI_SEPARATE_COMBAT_STACKS)) {
+
+        // Combat pairings changed — rebuild layout so grouping reflects them
+        if (!"default".equals(FModel.getPreferences().getPref(FPref.UI_GROUP_PERMANENTS))
+                || isPreferenceEnabled(FPref.UI_SEPARATE_COMBAT_STACKS)) {
             FThreads.invokeInEdtNowOrLater(() -> {
                 for (final VField f : getFieldViews()) {
                     f.getTabletop().doLayout();
                 }
             });
         }
-    } // showCombat(CombatView)
+    }
 
     @Override
     public void updateDependencies() {
