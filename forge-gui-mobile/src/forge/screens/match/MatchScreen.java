@@ -492,8 +492,11 @@ public class MatchScreen extends FScreen {
                 VPlayerPanel playerPanel = getPlayerPanel(p);
                 if (playerPanel != null && playerPanelsList.contains(playerPanel)) {
                     playerViewSet.add(p);
-                    if (p.getBattlefield() != null) {
-                        for (CardView c : p.getBattlefield()) {
+                    FCollectionView<CardView> battlefield = p.getBattlefield();
+                    if (battlefield != null) {
+                        Iterable<CardView> bfIter = MatchController.instance.isNetGame()
+                                ? battlefield.threadSafeIterable() : battlefield;
+                        for (CardView c : bfIter) {
                             CardAreaPanel panel = CardAreaPanel.get(c);
                             Vector2 origin = panel.getTargetingArrowOrigin();
                             //outside left bounds
