@@ -507,7 +507,7 @@ public class RewardScene extends UIScene {
             }
 
             // Todo: Add logic so this works with the networked archipelago as well.
-            if (ArchipelagoData.getInstance().getArchipelagoMode() != ArchipelagoMode.disabled && reward.getType() == Reward.Type.Item && !reward.getItem().equipmentSlot.isEmpty()) {
+            if (ArchipelagoData.getInstance().getArchipelagoMode() != ArchipelagoMode.disabled && type == Type.Loot && reward.getType() == Reward.Type.Item && reward.getItem().equipmentSlot != null && !reward.getItem().equipmentSlot.isEmpty()) {
                 reward = ArchipelagoData.getInstance().takeSingleEquipmentOutOfRemainingPool();
             }
             RewardActor actor = new RewardActor(reward, type == Type.Loot || type == Type.QuestReward, type, type == Type.Shop && (numberOfRows > 2 || numberOfColumns > 2));

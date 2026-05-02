@@ -536,6 +536,7 @@ public class ArchipelagoData implements SaveFileContent {
         if (!newSetCodes.equals(allCardSets)) {
             allCardSets.clear();
             allCardSets.addAll(newSetCodes);
+            setsUnlockedByCode.addAll(allCardSets);
         }
     }
 
