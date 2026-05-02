@@ -439,6 +439,20 @@ public final class CardEdition implements Comparable<CardEdition> {
         return null;
     }
 
+    /** Returns the section name (e.g. "cards", "full art", "borderless") that contains the given collector number, or null. */
+    public String getSectionForCollectorNumber(String collectorNumber) {
+        if (collectorNumber == null || collectorNumber.isEmpty())
+            return null;
+        for (Entry<String, java.util.Collection<EditionEntry>> section : cardMap.asMap().entrySet()) {
+            for (EditionEntry ee : section.getValue()) {
+                if (collectorNumber.equalsIgnoreCase(ee.collectorNumber)) {
+                    return section.getKey();
+                }
+            }
+        }
+        return null;
+    }
+
     public boolean isRebalanced(String cardName) {
         for (EditionEntry cis : getRebalancedCards()) {
             if (cis.name.equals(cardName)) {

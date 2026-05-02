@@ -11,6 +11,7 @@ import forge.gamemodes.net.event.*;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.ILobbyListener;
 import io.netty.bootstrap.Bootstrap;
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
@@ -105,7 +106,19 @@ public class FGameClient implements IToServer, IHasForgeLog {
             return;
         }
         netLog.info("Client sent {}", event);
-        channel.writeAndFlush(event);
+        final CompatibleObjectEncoder encoder = channel.pipeline().get(CompatibleObjectEncoder.class);
+        if (encoder == null) {
+            netLog.error("No encoder in client pipeline for {}", event);
+            return;
+        }
+        final ByteBuf encoded;
+        try {
+            encoded = encoder.encodeToBuf(event, channel.alloc());
+        } catch (Exception e) {
+            netLog.error(e, "Client encode error for {}", event);
+            return;
+        }
+        channel.writeAndFlush(encoded);
     }
 
     /**

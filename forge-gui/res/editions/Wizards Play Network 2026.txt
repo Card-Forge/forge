@@ -15,3 +15,7 @@ ScryfallCode=PW26
 7 R Spicy Oatmeal Pizza @Fajareka Setiawan
 8 R Into the Flood Maw @Danny Schwartz
 9 R Access Tunnel @Alayna Danner
+10 R An Unexpected Party @Tomas Duchek
+11 R Bilbo, Luckwearer @Yigit Koroglu
+13 R Wood Elves @Ramza Psyru
+14 R Tom, Bert, and William @Narendra Bintara Adi
