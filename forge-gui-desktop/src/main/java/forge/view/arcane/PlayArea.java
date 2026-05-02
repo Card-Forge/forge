@@ -97,7 +97,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
     private boolean stackCreatures = false;
     private boolean groupTokensAndCreatures;
     private boolean groupAll;
-    private boolean grouping; // groupTokensAndCreatures || groupAll
+    private boolean grouping;
 
     public PlayArea(final CMatchUI matchUI, final FScrollPane scrollPane, final boolean mirror, final PlayerView player, final ZoneType zone) {
         super(matchUI, scrollPane);
