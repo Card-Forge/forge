@@ -1,5 +1,6 @@
 package forge.menu;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.utils.Align;
 
@@ -38,6 +39,10 @@ public class FMenuTab extends FDisplayObject {
     }
     public static final float PADDING = Utils.scale(2);
     private static final float SEPARATOR_WIDTH = Utils.scale(1);
+    private static final FSkinFont BADGE_FONT = FSkinFont.get(9);
+    private static final FSkinColor BADGE_COLOR = FSkinColor.getStandardColor(192, 50, 50);
+    private static final FSkinColor BADGE_TEXT_COLOR = FSkinColor.getStandardColor(255, 255, 255);
+    private static final long FLASH_DURATION_MS = 900;
 
     private final FMenuBar menuBar;
     private final FDropDown dropDown;
@@ -45,6 +50,8 @@ public class FMenuTab extends FDisplayObject {
     private String text;
     private float minWidth;
     private int index;
+    private int unreadCount;
+    private long flashStartMs;
 
     public FMenuTab(String text0, FMenuBar menuBar0, FDropDown dropDown0, int index0, boolean iconOnly0) {
         menuBar = menuBar0;
@@ -96,6 +103,19 @@ public class FMenuTab extends FDisplayObject {
 
     public void setActiveIcon(boolean value) {
         active = value;
+    }
+
+    public void incrementUnread() {
+        unreadCount++;
+        flashStartMs = System.currentTimeMillis();
+        Gdx.graphics.requestRendering();
+    }
+
+    public void clearUnread() {
+        if (unreadCount == 0 && flashStartMs == 0) { return; }
+        unreadCount = 0;
+        flashStartMs = 0;
+        Gdx.graphics.requestRendering();
     }
 
     @Override
@@ -153,6 +173,19 @@ public class FMenuTab extends FDisplayObject {
         h = getHeight() - 2 * PADDING;
         if (isHovered())
             g.fillRect(getSelBackColor().brighter(), x, y, w, h);
+
+        //flash overlay while a recent unread message highlights the tab
+        if (flashStartMs > 0) {
+            long elapsed = System.currentTimeMillis() - flashStartMs;
+            if (elapsed < FLASH_DURATION_MS) {
+                float alpha = 0.55f * (1f - (float) elapsed / FLASH_DURATION_MS);
+                g.fillRect(BADGE_COLOR.alphaColor(alpha), x, y, w, h);
+                Gdx.graphics.requestRendering();
+            } else {
+                flashStartMs = 0;
+            }
+        }
+
         if (iconOnly) {
             float mod = w * 0.75f;
             FImage icon = active ? FSkinImage.SEE : FSkinImage.UNSEE;
@@ -161,6 +194,17 @@ public class FMenuTab extends FDisplayObject {
             g.drawImage(icon, x + w/2 - scaleW/2, y + h/2 - scaleH/2, scaleW, scaleH);
         } else
             g.drawText(text, FONT, foreColor, x, y, w, h, false, Align.center, true);
+
+        //unread badge in the top-right corner
+        if (unreadCount > 0) {
+            String label = unreadCount > 99 ? "99+" : Integer.toString(unreadCount);
+            float textW = BADGE_FONT.getBounds(label).width;
+            float diameter = Math.max(BADGE_FONT.getLineHeight(), textW + 2 * Utils.scale(4));
+            float bx = getWidth() - diameter - PADDING;
+            float by = PADDING;
+            g.fillRect(BADGE_COLOR, bx, by, diameter, diameter);
+            g.drawText(label, BADGE_FONT, BADGE_TEXT_COLOR, bx, by, diameter, diameter, false, Align.center, true);
+        }
     }
     public boolean isShowingDropdownMenu(boolean any) {
         if (dropDown == null)
