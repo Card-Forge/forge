@@ -53,19 +53,19 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
         //initialize log file
         File logFile = new File(ForgeConstants.LOG_FILE);
 
-        int i = 0;
-        while (logFile.exists() && !logFile.delete()) {
-            String pathname = logFile.getPath().replaceAll("[0-9]{0,2}.log$", i++ + ".log");
-            logFile = new File(pathname);
+        // Rotate the previous forge.log to a timestamped backup so its content
+        // survives the restart. Pruning of old backups happens later in
+        // LogRotation.pruneForgeLogs once preferences are loaded
+        if (logFile.exists()) {
+            File rotated = LogRotation.buildRotatedTarget(logFile);
+            logFile.renameTo(rotated); // best-effort; if it fails we just overwrite below
         }
-        
-        if (!logFile.exists()) {
-            try {
-                logFile.getParentFile().mkdirs();
-                logFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
+        try {
+            logFile.getParentFile().mkdirs();
+            logFile.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         try {

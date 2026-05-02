@@ -199,6 +199,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         AUTO_UPDATE("none"),
         USE_SENTRY("false"), // this controls whether automated bug reporting is done or not
         CHECK_SNAPSHOT_AT_STARTUP("true"),
+        MAX_LOG_FILES("10"), // applied per category: up to N forge.*.log backups AND N network log entries
 
         MATCH_HOT_SEAT_MODE("false"), //this only applies to mobile game
 
