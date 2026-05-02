@@ -6,7 +6,6 @@ Type=Draft
 BoosterSlots=Common,Common-Guest,Uncommon,RareMythic,NewToModern,Common-Land,Wildcard
 Booster=5 Common, 1 Common-Guest, 3 Uncommon, 1 RareMythic, 1 NewToModern, 1 Common-Land, 1 Wildcard, 1 Wildcard+
 BoosterBox=36
-BoosterCovers=3
 ChaosDraftThemes=MASTERS_SET
 ScryfallCode=MH3
 
