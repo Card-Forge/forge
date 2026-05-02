@@ -293,7 +293,7 @@ public class ArchipelagoData implements SaveFileContent {
                     case 0:
                         return new Reward(Reward.Type.Gold, 3000);
                     case 1:
-                        return new Reward(Reward.Type.Shards, 50);
+                        return new Reward(Reward.Type.Shards, 75);
                 }
             }
         }
