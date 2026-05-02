@@ -25,6 +25,14 @@ import forge.util.MultiplexOutputStream;
 
 import java.io.*;
 import java.lang.Thread.UncaughtExceptionHandler;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
+import java.nio.file.StandardOpenOption;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.regex.Pattern;
 
 /**
  * This class handles all exceptions that weren't caught by showing the error to
@@ -41,32 +49,56 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
         System.setProperty("sun.awt.exception.handler", ExceptionHandler.class.getName());
     }
 
+    private static final String ROTATED_PREFIX = "forge.";
+    private static final String ROTATED_SUFFIX = ".log";
+    private static final String TIMESTAMP_FORMAT = "yyyyMMdd-HHmmss";
+    // Matches forge.<ts>.log and collision-fallback forge.<ts>.<N>.log; excludes per-process forge.<ts>-<N>.log
+    private static final Pattern ROTATED_PATTERN = Pattern.compile("forge\\.\\d{8}-\\d{6}(\\.\\d+)?\\.log");
+
     private static PrintStream oldSystemOut;
     private static PrintStream oldSystemErr;
     private static OutputStream logFileStream;
+    private static File activeLogFile;
+    private static FileChannel logLockChannel;
+    private static FileLock logLock;
+
+    /** The log file this JVM is writing to, or null if registration hasn't run. */
+    public static File getActiveLogFile() {
+        return activeLogFile;
+    }
 
     /**
      * Call this at the beginning to make sure that the class is loaded and the
      * static initializer has run.
      */
     public static void registerErrorHandling() {
-        //initialize log file
-        File logFile = new File(ForgeConstants.LOG_FILE);
+        File primaryLog = new File(ForgeConstants.LOG_FILE);
+        primaryLog.getParentFile().mkdirs();
 
-        // Rotate the previous forge.log to a timestamped backup so its content
-        // survives the restart. Pruning of old backups happens later in
-        // LogRotation.pruneForgeLogs once preferences are loaded
-        if (logFile.exists()) {
-            File rotated = LogRotation.buildRotatedTarget(logFile);
-            logFile.renameTo(rotated); // best-effort; if it fails we just overwrite below
-        }
-
+        // Per-JVM advisory lock; first instance owns forge.log, others write to a per-process file.
+        File lockFile = new File(primaryLog.getPath() + ".lock");
         try {
-            logFile.getParentFile().mkdirs();
-            logFile.createNewFile();
+            logLockChannel = FileChannel.open(lockFile.toPath(),
+                    StandardOpenOption.CREATE, StandardOpenOption.WRITE);
+            logLock = logLockChannel.tryLock();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        File logFile;
+        if (logLock != null) {
+            if (primaryLog.exists() && primaryLog.length() > 0) {
+                primaryLog.renameTo(nextAvailable(rotatedTargetFor(primaryLog)));
+            }
+            logFile = primaryLog;
+        } else {
+            if (logLockChannel != null) {
+                try { logLockChannel.close(); } catch (IOException ignored) {}
+                logLockChannel = null;
+            }
+            logFile = claimProcessUniqueLog(primaryLog);
+        }
+        activeLogFile = logFile;
 
         try {
             logFileStream = new FileOutputStream(logFile);
@@ -85,6 +117,52 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
         FTrace.initialize();
     }
 
+    private static File rotatedTargetFor(File previousLog) {
+        String stamp = new SimpleDateFormat(TIMESTAMP_FORMAT).format(new Date(previousLog.lastModified()));
+        return new File(previousLog.getParentFile(), ROTATED_PREFIX + stamp + ROTATED_SUFFIX);
+    }
+
+    // Same-second collisions: append .1, .2, ... until unused; nanoTime as final fallback. Uses dot
+    // (not dash) so collision-rotated files stay distinguishable from per-process forge.<ts>-<N>.log.
+    private static File nextAvailable(File target) {
+        if (!target.exists()) return target;
+        String base = target.getPath().substring(0, target.getPath().length() - ROTATED_SUFFIX.length());
+        for (int i = 1; i < 1000; i++) {
+            File alt = new File(base + "." + i + ROTATED_SUFFIX);
+            if (!alt.exists()) return alt;
+        }
+        return new File(base + "." + System.nanoTime() + ROTATED_SUFFIX);
+    }
+
+    // Atomic slot claim via createNewFile; nanoTime as final fallback to guarantee uniqueness.
+    private static File claimProcessUniqueLog(File primaryLog) {
+        String stamp = new SimpleDateFormat(TIMESTAMP_FORMAT).format(new Date());
+        File parent = primaryLog.getParentFile();
+        for (int i = 1; i < 1000; i++) {
+            File candidate = new File(parent, ROTATED_PREFIX + stamp + "-" + i + ROTATED_SUFFIX);
+            try {
+                if (candidate.createNewFile()) return candidate;
+            } catch (IOException ignored) {}
+        }
+        return new File(parent, ROTATED_PREFIX + stamp + "-" + System.nanoTime() + ROTATED_SUFFIX);
+    }
+
+    /** Delete oldest forge.<ts>.log backups until at most maxFiles remain. Per-process logs are not pruned. */
+    public static void pruneForgeLogs(int maxFiles) {
+        if (maxFiles <= 0) return;
+        try {
+            File dir = new File(ForgeConstants.LOG_FILE).getParentFile();
+            if (dir == null || !dir.isDirectory()) return;
+            File[] rotated = dir.listFiles(f -> f.isFile() && ROTATED_PATTERN.matcher(f.getName()).matches());
+            if (rotated == null || rotated.length <= maxFiles) return;
+            Arrays.sort(rotated, Comparator.comparingLong(File::lastModified));
+            int toDelete = rotated.length - maxFiles;
+            for (int i = 0; i < toDelete; i++) rotated[i].delete();
+        } catch (Exception ignored) {
+            // non-critical — never fail the app over log cleanup
+        }
+    }
+
     /**
      * Finalizer, generally should be avoided, but here closes the log file
      * stream and resets the system output streams.
@@ -93,7 +171,18 @@ public class ExceptionHandler implements UncaughtExceptionHandler {
         FTrace.dump(); //dump trace before unregistering error handling
         System.setOut(oldSystemOut);
         System.setErr(oldSystemErr);
-        logFileStream.close();
+        try {
+            logFileStream.close();
+        } finally {
+            if (logLock != null) {
+                try { logLock.release(); } catch (IOException ignored) {}
+                logLock = null;
+            }
+            if (logLockChannel != null) {
+                try { logLockChannel.close(); } catch (IOException ignored) {}
+                logLockChannel = null;
+            }
+        }
     }
 
     /** {@inheritDoc} */

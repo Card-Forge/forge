@@ -110,7 +110,7 @@ public class FilesPage extends TabPage<SettingsScreen> {
                         Collections.addAll(files, netLogs);
                     }
                 }
-                exportLogs("lblExportLogs", files, "forge-logs");
+                exportLogs(files);
             }
         }, 0);
         //Auditer
@@ -257,12 +257,12 @@ public class FilesPage extends TabPage<SettingsScreen> {
         lstItems.setBounds(0, 0, width, height);
     }
 
-    private void exportLogs(String dialogTitleKey, List<File> files, String outputPrefix) {
+    private void exportLogs(List<File> files) {
         if (Forge.getDeviceAdapter().needFileAccess()) {
             Forge.getDeviceAdapter().requestFileAcces();
             return;
         }
-        final String dialogTitle = Forge.getLocalizer().getMessage(dialogTitleKey);
+        final String dialogTitle = Forge.getLocalizer().getMessage("lblExportLogs");
         FThreads.invokeInEdtLater(() -> LoadingOverlay.show(Forge.getLocalizer().getMessage("lblExporting"), true, () -> {
             try {
                 if (files.isEmpty()) {
@@ -271,7 +271,7 @@ public class FilesPage extends TabPage<SettingsScreen> {
                 }
                 String stamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
                 File downloads = new FileHandle(Forge.getDeviceAdapter().getDownloadsDir()).file();
-                File zipFile = new File(downloads, outputPrefix + "-" + stamp + ".zip");
+                File zipFile = new File(downloads, "forge-logs-" + stamp + ".zip");
                 ZipUtil.zipFiles(files, zipFile);
                 FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblSuccess") + "\n" + zipFile.getAbsolutePath(), dialogTitle, FOptionPane.INFORMATION_ICON);
             } catch (IOException e) {

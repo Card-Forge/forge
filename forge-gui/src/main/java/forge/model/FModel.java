@@ -28,7 +28,7 @@ import forge.card.CardType;
 import forge.deck.CardArchetypeLDAGenerator;
 import forge.deck.CardRelationMatrixGenerator;
 import forge.deck.io.DeckPreferences;
-import forge.error.LogRotation;
+import forge.error.ExceptionHandler;
 import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.game.card.CardUtil;
@@ -166,9 +166,8 @@ public final class FModel {
             throw new RuntimeException(exn);
         }
 
-        // Prune rotated forge.*.log backups left by ExceptionHandler.registerErrorHandling()
         // Runs here because preferences must be loaded before MAX_LOG_FILES is readable
-        LogRotation.pruneForgeLogs(preferences.getPrefInt(FPref.MAX_LOG_FILES));
+        ExceptionHandler.pruneForgeLogs(preferences.getPrefInt(FPref.MAX_LOG_FILES));
 
         Lang.createInstance(getPreferences().getPref(FPref.UI_LANGUAGE));
         Localizer.getInstance().initialize(getPreferences().getPref(FPref.UI_LANGUAGE), ForgeConstants.LANG_DIR);
