@@ -28,6 +28,7 @@ import java.io.IOException;
  */
 public class StartScene extends UIScene {
     private static StartScene object;
+    private boolean isArchipelagoSupported = false;
     Dialog exitDialog, backupDialog, zipDialog, unzipDialog;
     TextraButton saveButton, resumeButton, continueButton, settingsButton, dataButton, apSettingsButton;
     TypingLabel version = Controls.newTypingLabel("{GRADIENT}[%80]v." + Forge.getDeviceAdapter().getVersionString() + "{ENDGRADIENT}");
@@ -54,14 +55,17 @@ public class StartScene extends UIScene {
         dataButton = ui.findActor("Backup");
         apSettingsButton = ui.findActor("ApSettings");
 
-        apSettingsButton.pad(0, 0, 0, 2.5f);
         saveButton.setVisible(false);
         resumeButton.setVisible(false);
         version.setHeight(5);
         version.skipToTheEnd();
         ui.addActor(version);
 
-        updateSettingRow();
+        if (apSettingsButton != null) {
+            isArchipelagoSupported = true;
+            apSettingsButton.pad(0, 0, 0, 2.5f);
+            updateSettingRow();
+        }
     }
 
     public static StartScene instance() {
@@ -260,18 +264,30 @@ public class StartScene extends UIScene {
     private void updateSettingRow() {
         boolean isArchipelagoNetworked = ArchipelagoData.getInstance().getArchipelagoMode() == ArchipelagoMode.networked_archipelago;
 
-        if (isArchipelagoNetworked) {
+        if (isArchipelagoNetworked && Forge.isLandscapeMode()) {
             apSettingsButton.setVisible(true);
             settingsButton.setX(190);
             settingsButton.setWidth(70);
             dataButton.setX(260);
             dataButton.setWidth(60);
-        } else {
+        } else if (!isArchipelagoNetworked && Forge.isLandscapeMode()) {
             apSettingsButton.setVisible(false);
             settingsButton.setX(160);
             settingsButton.setWidth(80);
             dataButton.setX(240);
             dataButton.setWidth(80);
+        } else if (isArchipelagoNetworked) {
+            apSettingsButton.setVisible(true);
+            settingsButton.setX(54);
+            settingsButton.setWidth(100);
+            dataButton.setX(154);
+            dataButton.setWidth(100);
+        } else {
+            apSettingsButton.setVisible(false);
+            settingsButton.setX(16);
+            settingsButton.setWidth(119);
+            dataButton.setX(135);
+            dataButton.setWidth(119);
         }
     }
 
@@ -285,7 +301,9 @@ public class StartScene extends UIScene {
         saveButton.setVisible(hasSaveButton);
         saveButton.setDisabled(TileMapScene.instance().currentMap().isInMap());
         updateResumeContinue();
-        updateSettingRow();
+        if (isArchipelagoSupported) {
+            updateSettingRow();
+        }
 
         GuiBase.setAdventureDirectory(Config.instance().getPrefix());
 
