@@ -143,7 +143,7 @@ Izzet Guildgate
   size: 48,32
 Golgari Guildgate
   xy: 336,400
-  size: 48,48
+  size: 64,48
 Azorius Guildgate
   xy: 224,448
   size: 48,48
@@ -161,4 +161,37 @@ Blood Moon
   size: 32,48
 Idyllic Beachfront
   xy: 240,272
+  size: 48,48
+Shady Merchant
+  xy: 336,264
+  size: 45,56
+Mysterious Merchant
+  xy: 384,282
+  size: 24,38
+Black Market
+  xy: 343,328
+  size: 50,40
+Black Market Stall
+  xy: 400,320
+  size: 48,48
+Edge of Eternities
+  xy: 400,400
+  size: 48,48
+Valvagoth's Lair
+  xy: 144,320
+  size: 48,48
+Tranquil Clearing
+  xy: 192,329
+  size: 41,39
+House
+  xy: 240,323
+  size: 44,45
+Plowshare Farm
+  xy: 288,331
+  size: 54,37
+Great Aurora
+  xy: 288,272
+  size: 48,48
+Imperial Office
+  xy: 384,448
   size: 48,48

@@ -13,6 +13,7 @@ ScryfallCode=MSC
 5 M Captain America, Team Leader @Mark Spears
 6 M Doctor Doom, King of Latveria @Nathaniel Himawan
 7 M T'Challa, the Black Panther @Eli Minaya
+119 R Vision, Synthezoid Avenger @Mark Spears
 0 R Abomination, Irradiated Brute @
 0 R Absorbing Man and Titania @
 0 R Black Widow, Intel Expert @

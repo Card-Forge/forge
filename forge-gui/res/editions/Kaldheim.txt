@@ -433,7 +433,6 @@ ScryfallCode=KHM
 
 [rebalanced]
 A-40 M A-Alrund, God of the Cosmos @Kieran Yanner
-A-41 M A-Alrund's Epiphany @Kieran Yanner
 A-51 R A-Cosmos Charger @Nils Hamm
 A-106 U A-Return Upon the Tide @Martina Fačková
 A-109 R A-Skemfar Avenger @Randy Vargas

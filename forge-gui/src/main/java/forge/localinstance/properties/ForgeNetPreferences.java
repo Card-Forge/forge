@@ -43,8 +43,6 @@ public class ForgeNetPreferences extends PreferencesStore<ForgeNetPreferences.FN
         public String getDefault() {
             return strDefaultVal;
         }
-
-
     }
 
     /** Instantiates a ForgePreferences object. */

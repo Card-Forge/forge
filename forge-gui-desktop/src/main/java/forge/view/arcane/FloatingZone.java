@@ -58,6 +58,7 @@ import forge.toolbox.FSkin;
 import forge.toolbox.special.PlayerDetailsPanel;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
+import forge.util.collect.FCollectionView;
 import forge.view.FView;
 
 public class FloatingZone extends FloatingCardArea {
@@ -528,9 +529,10 @@ public class FloatingZone extends FloatingCardArea {
     };
 
     protected Iterable<CardView> getCards() {
-        Iterable<CardView> zoneCards = player.getCards(zone);
+        FCollectionView<CardView> zoneCards = player.getCards(zone);
         if (zoneCards != null) {
-            cardList = new FCollection<>(zoneCards);
+            Iterable<CardView> safe = getMatchUI().isNetGame() ? zoneCards.threadSafeIterable() : zoneCards;
+            cardList = new FCollection<>(safe);
             if (sortedByName) {
                 cardList.sort(comp);
             } else if (zone == ZoneType.Flashback) {

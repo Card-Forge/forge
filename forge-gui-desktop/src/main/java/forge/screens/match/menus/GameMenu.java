@@ -185,8 +185,7 @@ public final class GameMenu {
 
     private ActionListener getAutoYieldsAction() {
         return e -> {
-            final VAutoYields autoYields = new VAutoYields(matchUI);
-            autoYields.showAutoYields();
+            new VAutoYields(matchUI).showAutoYields();
         };
     }
 

@@ -24,6 +24,7 @@ import forge.screens.match.CMatchUI;
 import forge.screens.match.controllers.CZone;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.MouseTriggerEvent;
+import forge.util.collect.FCollectionView;
 import forge.view.arcane.CardArea;
 import forge.util.Localizer;
 import forge.view.arcane.CardPanel;
@@ -93,10 +94,11 @@ public class VZone implements IVDoc<CZone> {
     /** Refresh card panels from zone data. */
     public void refresh() {
         final List<CardPanel> cardPanels = new ArrayList<>();
-        final Iterable<CardView> cards = player.getCards(zone);
+        final FCollectionView<CardView> cards = player.getCards(zone);
         if (cards != null) {
+            final Iterable<CardView> safeCards = matchUI.isNetGame() ? cards.threadSafeIterable() : cards;
             final List<CardView> cardList = new ArrayList<>();
-            for (final CardView card : cards) {
+            for (final CardView card : safeCards) {
                 cardList.add(card);
             }
             if (sortedByName) {
