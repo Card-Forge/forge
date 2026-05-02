@@ -123,7 +123,7 @@ public class MatchScreen extends FScreen {
 
         bottomPlayerPrompt = add(new VPrompt("", "",
                 e -> getGameController().selectButtonOk(),
-                e -> { MatchController.instance.clearLocalYieldsForCancel(); getGameController().selectButtonCancel(); }));
+                e -> getGameController().selectButtonCancel()));
 
         if (humanCount < 2 || MatchController.instance.hotSeatMode() || GuiBase.isNetPlay(MatchController.instance))
             topPlayerPrompt = null;
@@ -131,7 +131,7 @@ public class MatchScreen extends FScreen {
             //show top prompt if multiple human players and not playing in Hot Seat mode and not in network play
             topPlayerPrompt = add(new VPrompt("", "",
                     e -> getGameController().selectButtonOk(),
-                    e -> { MatchController.instance.clearLocalYieldsForCancel(); getGameController().selectButtonCancel(); }));
+                    e -> getGameController().selectButtonCancel()));
             topPlayerPrompt.setRotate180(true);
             topPlayerPanel.setRotate180(true);
             getHeader().setRotate90(true);

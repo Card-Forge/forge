@@ -856,8 +856,6 @@ public final class CMatchUI
         if (openAbilityMenu != null) { //ensure ability menu can't remain open between phases
             openAbilityMenu.setVisible(false);
         }
-
-        checkMarkerAutoClear();
     }
 
     @Override
@@ -1040,7 +1038,7 @@ public final class CMatchUI
     }
 
     @Override
-    protected void doShowPromptMessage(final PlayerView playerView, final String message) {
+    public void showPromptMessage(final PlayerView playerView, final String message) {
         cancelWaitingTimer();
         cPrompt.setMessage(message);
     }
@@ -1383,9 +1381,6 @@ public final class CMatchUI
             controller.selectButtonOk();
         }
         refreshYieldUi(local);
-        if (clickedSameLabel) {
-            refreshPromptAfterLocalYieldClear();
-        }
     }
 
     @Override

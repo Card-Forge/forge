@@ -15,6 +15,7 @@ import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.match.input.InputConfirm;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gui.control.PlaybackSpeed;
@@ -273,6 +274,9 @@ public interface IGuiGame {
 
     /** Repaint marker chevron / stack-yield UI for the given player. */
     default void refreshYieldUi(PlayerView player) {}
+
+    /** Apply an authoritative yield-state change. {@link forge.gamemodes.match.AbstractGuiGame} routes to the local {@link forge.interfaces.IGameController}; {@link forge.gamemodes.net.server.RemoteClientGuiGame} forwards over the wire. */
+    default void applyYieldUpdate(YieldUpdate update) {}
 
     /** Returns true if this game instance is a network game. */
     boolean isNetGame();

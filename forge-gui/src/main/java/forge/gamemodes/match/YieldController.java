@@ -60,8 +60,11 @@ public class YieldController {
         else set.remove(phase);
     }
 
-    public boolean autoPassUntilEOT() {
+    public boolean autoPassUntilStackEmpty() {
         return autoPassUntilStackEmpty;
+    }
+    public boolean autoPassUntilEndOfTurn() {
+        return autoPassUntilEOT;
     }
     public YieldMarker getAutoPassUntilMarker() {
         return autoPassUntilMarker;
@@ -75,6 +78,7 @@ public class YieldController {
         this.autoPassUntilEOT = active;
     }
 
+    // setMarker/clearMarker are mutated from EDT (right-click), Netty (wire receive), and game thread.
     public synchronized void setMarker(PlayerView phaseOwner, PhaseType phase, boolean atOrPastAtClick) {
         autoPassUntilEOT = false;
         if (phaseOwner == null || phase == null) {
@@ -111,24 +115,15 @@ public class YieldController {
             if (gv != null && gv.getStack() != null && !gv.getStack().isEmpty()) return true;
             autoPassUntilStackEmpty = false;
         }
-        // Priority-loop fires the marker on the game thread; refresh the chevron here
-        // because the EDT phase-event listener may already have observed the marker as
-        // null (race-loss) and skipped its own refresh.
         if (checkAndClearMarker(gv) && owner != null && owner.getGui() != null) {
             PlayerView local = owner.getLocalPlayerView();
-            if (local != null) owner.getGui().refreshYieldUi(local);
+            if (local != null) owner.getGui().applyYieldUpdate(new YieldUpdate.ClearMarker(local));
         }
         return autoPassUntilMarker != null;
     }
 
-    /**
-     * Pure derivation: evaluate fire conditions against the supplied GameView and clear the
-     * marker if it should fire. Both the host's priority loop and the GUI's phase-event
-     * listener call this; whichever runs first wins, the other no-ops on null marker.
-     *
-     * @return true if this call cleared the marker (caller should refresh UI).
-     */
-    public synchronized boolean checkAndClearMarker(GameView gv) {
+    /** Game-thread only via {@link #shouldAutoYield}. */
+    private boolean checkAndClearMarker(GameView gv) {
         if (autoPassUntilMarker == null || gv == null) return false;
         PlayerView turnPlayer = gv.getPlayerTurn();
         PhaseType currentPhase = gv.getPhase();

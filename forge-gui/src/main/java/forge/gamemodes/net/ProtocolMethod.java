@@ -74,6 +74,8 @@ public enum ProtocolMethod implements IHasForgeLog {
     showWaitingTimer    (Mode.SERVER, Void.TYPE, PlayerView.class, String.class),
     setHighlighted      (Mode.SERVER, Void.TYPE, GameEntityView.class, Boolean.TYPE),
     applyDelta          (Mode.SERVER, Void.TYPE, DeltaPacket.class),
+    /** Server→client push of authoritative yield-state changes. */
+    applyYieldUpdate    (Mode.SERVER, Void.TYPE, YieldUpdate.class),
 
     // Client -> Server
     // Note: these should all return void, to avoid awkward situations in
@@ -94,7 +96,7 @@ public enum ProtocolMethod implements IHasForgeLog {
     alphaStrike               (Mode.CLIENT, Void.TYPE),
     reorderHand               (Mode.CLIENT, Void.TYPE, CardView.class, Integer.TYPE),
     requestResync             (Mode.CLIENT, Void.TYPE),
-    sendYieldUpdate               (Mode.CLIENT, Void.TYPE, YieldUpdate.class);
+    sendYieldUpdate           (Mode.CLIENT, Void.TYPE, YieldUpdate.class);
 
     private enum Mode {
         SERVER(IGuiGame.class),

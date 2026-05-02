@@ -64,10 +64,7 @@ public class CPrompt implements ICDoc {
 
     private Component lastFocusedButton = null;
 
-    private final ActionListener actCancel = evt -> {
-        getMatchUI().clearLocalYieldsForCancel();
-        selectButtonCancel();
-    };
+    private final ActionListener actCancel = evt -> selectButtonCancel();
     private final ActionListener actOK = evt -> selectButtonOk();
 
     private final WindowAdapter focusOKButtonOnDialogClose = new WindowAdapter() {

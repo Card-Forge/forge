@@ -74,7 +74,7 @@ public class HeadlessNetworkGuiGame extends NetworkGuiGame {
 
     @Override public void showCombat() { }
     @Override public void finishGame() { }
-    @Override protected void doShowPromptMessage(PlayerView playerView, String message) { }
+    @Override public void showPromptMessage(PlayerView playerView, String message) { }
     @Override public void showCardPromptMessage(PlayerView playerView, String message, CardView card) { }
     @Override public void updateButtons(PlayerView owner, String label1, String label2, boolean enable1, boolean enable2, boolean focus1) { }
     @Override public void flashIncorrectAction() { }

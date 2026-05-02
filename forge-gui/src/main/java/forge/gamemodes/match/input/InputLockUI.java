@@ -4,6 +4,8 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
+import forge.gamemodes.match.YieldController;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gui.FThreads;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
@@ -58,9 +60,6 @@ public class InputLockUI implements Input {
     private final Runnable showMessageFromEdt = new Runnable() {
         @Override
         public void run() {
-            // While auto-yielding, show the yield prompt with cancel enabled so the user can
-            // disarm via the cancel button (which routes back to selectButtonCancel below).
-            // Otherwise show master's "Waiting for actions..." prompt with both buttons disabled.
             if (controller.getYieldController().shouldAutoYield()) {
                 controller.getGui().updateAutoPassPrompt();
             } else {
@@ -94,11 +93,21 @@ public class InputLockUI implements Input {
     }
     @Override
     public void selectButtonCancel() {
-        // Master pattern: cancel auto-pass for all players. Marker and stack-yield are
-        // cleared client-side via the cancel-button click path's sendYieldUpdate calls
-        // (see VPrompt.clearLocalYieldsForCancel), so they don't need to be handled here.
-        for (final Player player : controller.getGame().getPlayers()) {
-            player.getController().autoPassCancel();
+        // autoPassCancel first: its mayAutoPass gate needs at least one mode still active to do UI updates.
+        controller.autoPassCancel();
+        YieldController yc = controller.getYieldController();
+        PlayerView pv = controller.getLocalPlayerView();
+        if (yc.getAutoPassUntilMarker() != null) {
+            yc.clearMarker();
+            if (controller.getGui() != null) {
+                controller.getGui().applyYieldUpdate(new YieldUpdate.ClearMarker(pv));
+            }
+        }
+        if (yc.autoPassUntilStackEmpty()) {
+            yc.setAutoPassUntilStackEmpty(false);
+            if (controller.getGui() != null) {
+                controller.getGui().applyYieldUpdate(new YieldUpdate.StackYield(pv, false));
+            }
         }
     }
 
