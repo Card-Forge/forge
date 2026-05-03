@@ -268,6 +268,15 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 ForgeConstants.AUTO_YIELD_PER_ABILITY_SESSION,
                 ForgeConstants.AUTO_YIELD_PER_ABILITY_INSTALL,
             }), 1);
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_AUTO_TRIGGER_MODE,
+            Forge.getLocalizer().getMessage("lblAutoTriggers"),
+            Forge.getLocalizer().getMessage("nlpAutoTriggerMode"),
+            new String[] {
+                ForgeConstants.AUTO_TRIGGER_PER_CARD,
+                ForgeConstants.AUTO_TRIGGER_PER_ABILITY,
+                ForgeConstants.AUTO_TRIGGER_PER_ABILITY_SESSION,
+                ForgeConstants.AUTO_TRIGGER_PER_ABILITY_INSTALL,
+            }), 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ALLOW_ESC_TO_END_TURN,
             Forge.getLocalizer().getMessage("cbEscapeEndsTurn"),
             Forge.getLocalizer().getMessage("nlEscapeEndsTurn")), 1);

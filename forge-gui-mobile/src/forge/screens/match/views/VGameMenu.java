@@ -62,6 +62,13 @@ public class VGameMenu extends FDropDownMenu {
                 autoYields.show();
             }
         }));
+        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblAutoTriggers"), Forge.hdbuttons ? FSkinImage.HDYIELD : FSkinImage.WARNING, new FEventHandler() {
+            @Override
+            public void handleEvent(FEvent e) {
+                final VAutoTriggers autoTriggers = new VAutoTriggers();
+                autoTriggers.show();
+            }
+        }));
         if (!Forge.isMobileAdventureMode) {
             addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblSettings"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, e -> {
                 //pause game when spectating AI Match

@@ -162,9 +162,11 @@ public class KeyboardShortcuts {
                     boolean abilityScope = !forge.localinstance.properties.ForgeConstants.AUTO_YIELD_PER_CARD.equals(
                             forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_YIELD_MODE));
                     matchUI.getGameController().setShouldAutoYield(si.getKey(), true, abilityScope);
-                    int triggerID = si.getSourceTrigger();
-                    if (si.isOptionalTrigger() && matchUI.isLocalPlayer(si.getActivatingPlayer())) {
-                        matchUI.getGameController().setShouldAlwaysAcceptTrigger(triggerID);
+                    String triggerYieldKey = si.getSourceTriggerYieldKey();
+                    if (si.isOptionalTrigger() && matchUI.isLocalPlayer(si.getActivatingPlayer()) && !triggerYieldKey.isEmpty()) {
+                        boolean triggerAbilityScope = !forge.localinstance.properties.ForgeConstants.AUTO_TRIGGER_PER_CARD.equals(
+                                forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_TRIGGER_MODE));
+                        matchUI.getGameController().setShouldAlwaysAcceptTrigger(triggerYieldKey, triggerAbilityScope);
                     }
                     matchUI.getGameController().passPriority();
                 }
@@ -182,9 +184,11 @@ public class KeyboardShortcuts {
                     boolean abilityScope = !forge.localinstance.properties.ForgeConstants.AUTO_YIELD_PER_CARD.equals(
                             forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_YIELD_MODE));
                     matchUI.getGameController().setShouldAutoYield(si.getKey(), true, abilityScope);
-                    int triggerID = si.getSourceTrigger();
-                    if (si.isOptionalTrigger() && matchUI.isLocalPlayer(si.getActivatingPlayer())) {
-                        matchUI.getGameController().setShouldAlwaysDeclineTrigger(triggerID);
+                    String triggerYieldKey = si.getSourceTriggerYieldKey();
+                    if (si.isOptionalTrigger() && matchUI.isLocalPlayer(si.getActivatingPlayer()) && !triggerYieldKey.isEmpty()) {
+                        boolean triggerAbilityScope = !forge.localinstance.properties.ForgeConstants.AUTO_TRIGGER_PER_CARD.equals(
+                                forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_TRIGGER_MODE));
+                        matchUI.getGameController().setShouldAlwaysDeclineTrigger(triggerYieldKey, triggerAbilityScope);
                     }
                     matchUI.getGameController().passPriority();
                 }

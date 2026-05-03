@@ -257,6 +257,7 @@ public enum TrackableProperty {
     //StackItem
     Key(TrackableTypes.StringType),
     SourceTrigger(TrackableTypes.IntegerType),
+    SourceTriggerYieldKey(TrackableTypes.StringType),
     SourceCard(TrackableTypes.CardViewType),
     ActivatingPlayer(TrackableTypes.PlayerViewType),
     TargetCards(TrackableTypes.CardViewCollectionType),

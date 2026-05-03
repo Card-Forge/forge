@@ -303,27 +303,30 @@ public class VStack extends FDropDown {
                                         }
                                     }));
                             if (stackInstance.isOptionalTrigger() && stackInstance.getActivatingPlayer().equals(player)) {
-                                final int triggerID = stackInstance.getSourceTrigger();
-                                addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblAlwaysYes"),
-                                        controller.shouldAlwaysAcceptTrigger(triggerID),
-                                        e -> {
-                                            if (controller.shouldAlwaysAcceptTrigger(triggerID)) {
-                                                controller.setShouldAlwaysAskTrigger(triggerID);
-                                            }
-                                            else {
-                                                controller.setShouldAlwaysAcceptTrigger(triggerID);
-                                            }
-                                        }));
-                                addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblAlwaysNo"),
-                                        controller.shouldAlwaysDeclineTrigger(triggerID),
-                                        e -> {
-                                            if (controller.shouldAlwaysDeclineTrigger(triggerID)) {
-                                                controller.setShouldAlwaysAskTrigger(triggerID);
-                                            }
-                                            else {
-                                                controller.setShouldAlwaysDeclineTrigger(triggerID);
-                                            }
-                                        }));
+                                final String triggerYieldKey = stackInstance.getSourceTriggerYieldKey();
+                                if (!triggerYieldKey.isEmpty()) {
+                                    final boolean abilityScope = activeTriggerModeIsAbilityScope();
+                                    addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblAlwaysYes"),
+                                            controller.shouldAlwaysAcceptTrigger(triggerYieldKey),
+                                            e -> {
+                                                if (controller.shouldAlwaysAcceptTrigger(triggerYieldKey)) {
+                                                    controller.setShouldAlwaysAskTrigger(triggerYieldKey, abilityScope);
+                                                }
+                                                else {
+                                                    controller.setShouldAlwaysAcceptTrigger(triggerYieldKey, abilityScope);
+                                                }
+                                            }));
+                                    addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblAlwaysNo"),
+                                            controller.shouldAlwaysDeclineTrigger(triggerYieldKey),
+                                            e -> {
+                                                if (controller.shouldAlwaysDeclineTrigger(triggerYieldKey)) {
+                                                    controller.setShouldAlwaysAskTrigger(triggerYieldKey, abilityScope);
+                                                }
+                                                else {
+                                                    controller.setShouldAlwaysDeclineTrigger(triggerYieldKey, abilityScope);
+                                                }
+                                            }));
+                                }
                             }
                         }
                         addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblYieldToEntireStack"),
@@ -347,6 +350,11 @@ public class VStack extends FDropDown {
         public boolean longPress(float x, float y) {
             CardZoom.show(stackInstance.getSourceCard());
             return true;
+        }
+
+        private boolean activeTriggerModeIsAbilityScope() {
+            return !forge.localinstance.properties.ForgeConstants.AUTO_TRIGGER_PER_CARD.equals(
+                    forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_TRIGGER_MODE));
         }
 
         @Override

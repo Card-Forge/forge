@@ -688,12 +688,15 @@ public class MatchScreen extends FScreen {
                     if (!stackInstance.isAbility()) {
                         return false;
                     }
-                    final int triggerID = stackInstance.getSourceTrigger();
-
-                    if (controller.shouldAlwaysAcceptTrigger(triggerID)) {
-                        controller.setShouldAlwaysAskTrigger(triggerID);
-                    } else {
-                        controller.setShouldAlwaysAcceptTrigger(triggerID);
+                    final String triggerYieldKey = stackInstance.getSourceTriggerYieldKey();
+                    if (!triggerYieldKey.isEmpty()) {
+                        boolean trigAbilityScope = !forge.localinstance.properties.ForgeConstants.AUTO_TRIGGER_PER_CARD.equals(
+                                forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_TRIGGER_MODE));
+                        if (controller.shouldAlwaysAcceptTrigger(triggerYieldKey)) {
+                            controller.setShouldAlwaysAskTrigger(triggerYieldKey, trigAbilityScope);
+                        } else {
+                            controller.setShouldAlwaysAcceptTrigger(triggerYieldKey, trigAbilityScope);
+                        }
                     }
 
                     final String key = stackInstance.getKey();
@@ -718,12 +721,15 @@ public class MatchScreen extends FScreen {
                     if (!stackInstance.isAbility()) {
                         return false;
                     }
-                    final int triggerID = stackInstance.getSourceTrigger();
-
-                    if (controller.shouldAlwaysDeclineTrigger(triggerID)) {
-                        controller.setShouldAlwaysAskTrigger(triggerID);
-                    } else {
-                        controller.setShouldAlwaysDeclineTrigger(triggerID);
+                    final String triggerYieldKey = stackInstance.getSourceTriggerYieldKey();
+                    if (!triggerYieldKey.isEmpty()) {
+                        boolean trigAbilityScope = !forge.localinstance.properties.ForgeConstants.AUTO_TRIGGER_PER_CARD.equals(
+                                forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_TRIGGER_MODE));
+                        if (controller.shouldAlwaysDeclineTrigger(triggerYieldKey)) {
+                            controller.setShouldAlwaysAskTrigger(triggerYieldKey, trigAbilityScope);
+                        } else {
+                            controller.setShouldAlwaysDeclineTrigger(triggerYieldKey, trigAbilityScope);
+                        }
                     }
 
                     final String key = stackInstance.getKey();
