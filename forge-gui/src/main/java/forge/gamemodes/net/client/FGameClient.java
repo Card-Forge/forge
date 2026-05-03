@@ -168,7 +168,6 @@ public class FGameClient implements IToServer, IHasForgeLog {
         for (final PlayerView p : myPlayers) {
             NetGameController controller = new NetGameController(this);
             clientGui.setOriginalGameController(p, controller);
-            controller.replayActiveYields();
         }
     }
 

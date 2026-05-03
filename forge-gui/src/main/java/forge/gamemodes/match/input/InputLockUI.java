@@ -4,6 +4,8 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
+import forge.gamemodes.match.YieldController;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gui.FThreads;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
@@ -58,8 +60,12 @@ public class InputLockUI implements Input {
     private final Runnable showMessageFromEdt = new Runnable() {
         @Override
         public void run() {
-            controller.getGui().updateButtons(InputLockUI.this.getOwner(), "", "", false, false, false);
-            showMessage(Localizer.getInstance().getMessage("lblWaitingforActions"));
+            if (controller.mayAutoPass()) {
+                controller.getGui().updateAutoPassPrompt();
+            } else {
+                controller.getGui().updateButtons(InputLockUI.this.getOwner(), "", "", false, false, false);
+                showMessage(Localizer.getInstance().getMessage("lblWaitingforActions"));
+            }
         }
     };
 
@@ -87,9 +93,21 @@ public class InputLockUI implements Input {
     }
     @Override
     public void selectButtonCancel() {
-        //cancel auto pass for all players
-        for (final Player player : controller.getGame().getPlayers()) {
-            player.getController().autoPassCancel();
+        // autoPassCancel first: its mayAutoPass gate needs at least one mode still active to do UI updates.
+        controller.autoPassCancel();
+        YieldController yc = controller.getYieldController();
+        PlayerView pv = controller.getLocalPlayerView();
+        if (yc.getAutoPassUntilMarker() != null) {
+            yc.clearMarker();
+            if (controller.getGui() != null) {
+                controller.getGui().applyYieldUpdate(new YieldUpdate.ClearMarker(pv));
+            }
+        }
+        if (yc.autoPassUntilStackEmpty()) {
+            yc.setAutoPassUntilStackEmpty(false);
+            if (controller.getGui() != null) {
+                controller.getGui().applyYieldUpdate(new YieldUpdate.StackYield(pv, false));
+            }
         }
     }
 
