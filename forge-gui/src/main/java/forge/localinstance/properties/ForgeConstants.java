@@ -352,6 +352,11 @@ public final class ForgeConstants {
     public static final String AUTO_YIELD_PER_ABILITY_SESSION = "Per Ability (Each Session)";
     public static final String AUTO_YIELD_PER_ABILITY_INSTALL = "Per Ability (Each Install)";
 
+    public static final String AUTO_TRIGGER_PER_CARD = "Per Card (Each Game)";
+    public static final String AUTO_TRIGGER_PER_ABILITY = "Per Ability (Each Match)";
+    public static final String AUTO_TRIGGER_PER_ABILITY_SESSION = "Per Ability (Each Session)";
+    public static final String AUTO_TRIGGER_PER_ABILITY_INSTALL = "Per Ability (Each Install)";
+
     // Constants for Graveyard Ordering
     public static final String GRAVEYARD_ORDERING_NEVER = "Never";
     public static final String GRAVEYARD_ORDERING_OWN_CARDS = "With Relevant Cards";

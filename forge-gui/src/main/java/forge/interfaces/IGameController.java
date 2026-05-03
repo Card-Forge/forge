@@ -65,11 +65,13 @@ public interface IGameController {
     void setDisableAutoYields(boolean disable);
 
     // Trigger accept/decline preferences
-    boolean shouldAlwaysAcceptTrigger(int trigger);
-    boolean shouldAlwaysDeclineTrigger(int trigger);
-    void setShouldAlwaysAcceptTrigger(int trigger);
-    void setShouldAlwaysDeclineTrigger(int trigger);
-    void setShouldAlwaysAskTrigger(int trigger);
+    boolean shouldAlwaysAcceptTrigger(String key);
+    boolean shouldAlwaysDeclineTrigger(String key);
+    void setShouldAlwaysAcceptTrigger(String key, boolean isAbilityScope);
+    void setShouldAlwaysDeclineTrigger(String key, boolean isAbilityScope);
+    void setShouldAlwaysAskTrigger(String key, boolean isAbilityScope);
+    boolean getDisableAutoTriggers();
+    void setDisableAutoTriggers(boolean disable);
 
     /** Apply a unified yield update envelope to this controller's YieldController. */
     void applyYieldUpdate(YieldUpdate update);

@@ -779,10 +779,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public boolean confirmTrigger(final WrappedAbility wrapper) {
         final SpellAbility sa = wrapper.getWrappedAbility();
         final Trigger regtrig = wrapper.getTrigger();
-        if (shouldAlwaysAcceptTrigger(regtrig.getId())) {
+        final String key = regtrig.getYieldKey();
+        if (shouldAlwaysAcceptTrigger(key)) {
             return true;
         }
-        if (shouldAlwaysDeclineTrigger(regtrig.getId())) {
+        if (shouldAlwaysDeclineTrigger(key)) {
             return false;
         }
 
@@ -3502,32 +3503,48 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public boolean shouldAlwaysAcceptTrigger(final int trigger) {
-        return yieldController.shouldAlwaysAcceptTrigger(trigger);
+    public boolean shouldAlwaysAcceptTrigger(final String key) {
+        return yieldController.shouldAlwaysAcceptTrigger(key);
     }
     @Override
-    public boolean shouldAlwaysDeclineTrigger(final int trigger) {
-        return yieldController.shouldAlwaysDeclineTrigger(trigger);
+    public boolean shouldAlwaysDeclineTrigger(final String key) {
+        return yieldController.shouldAlwaysDeclineTrigger(key);
     }
 
     @Override
-    public void setShouldAlwaysAcceptTrigger(final int trigger) {
-        yieldController.setAlwaysAcceptTrigger(trigger);
-        if (isPromptingForTrigger(trigger)) selectButtonOk();
+    public void setShouldAlwaysAcceptTrigger(final String key, final boolean isAbilityScope) {
+        yieldController.setAlwaysAcceptTrigger(key, isAbilityScope);
+        if (isPromptingForTrigger(key)) selectButtonOk();
     }
     @Override
-    public void setShouldAlwaysDeclineTrigger(final int trigger) {
-        yieldController.setAlwaysDeclineTrigger(trigger);
-        if (isPromptingForTrigger(trigger)) selectButtonCancel();
+    public void setShouldAlwaysDeclineTrigger(final String key, final boolean isAbilityScope) {
+        yieldController.setAlwaysDeclineTrigger(key, isAbilityScope);
+        if (isPromptingForTrigger(key)) selectButtonCancel();
     }
     @Override
-    public void setShouldAlwaysAskTrigger(final int trigger) {
-        yieldController.setAlwaysAskTrigger(trigger);
+    public void setShouldAlwaysAskTrigger(final String key, final boolean isAbilityScope) {
+        yieldController.setAlwaysAskTrigger(key, isAbilityScope);
     }
-    private boolean isPromptingForTrigger(final int trigger) {
+
+    @Override
+    public boolean getDisableAutoTriggers() {
+        return yieldController.getDisableAutoTriggers();
+    }
+    @Override
+    public void setDisableAutoTriggers(final boolean disable) {
+        yieldController.setDisableAutoTriggers(disable);
+    }
+
+    private boolean isPromptingForTrigger(final String key) {
+        if (key == null || key.isEmpty()) return false;
         if (!(inputQueue.getInput() instanceof InputConfirm)) return false;
         final SpellAbilityStackInstance top = getGame().getStack().peek();
-        return top != null && top.isStateTrigger(trigger);
+        if (top == null) return false;
+        final SpellAbility sa = top.getSpellAbility();
+        if (sa == null || !sa.isTrigger() || sa.getTrigger() == null) return false;
+        final String topKey = sa.getTrigger().getYieldKey();
+        if (key.equals(topKey)) return true;
+        return key.equals(forge.player.AutoYieldStore.abilitySuffix(topKey));
     }
 
     public boolean isUiSetToSkipPhase(final PlayerView turnPlayer, final PhaseType phase) {
@@ -3549,11 +3566,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             yieldController.setAutoPassUntilStackEmpty(u.active());
             activatedYield = u.active();
         } else if (update instanceof YieldUpdate.TriggerDecision u) {
-            yieldController.setTriggerDecision(u.trigId(), u.decision());
+            yieldController.applyTriggerDecisionFromWire(u.storageKey(), u.decision());
         } else if (update instanceof YieldUpdate.CardAutoYield u) {
             yieldController.applyAutoYieldFromWire(u.cardKey(), u.active());
         } else if (update instanceof YieldUpdate.SkipPhase u) {
             yieldController.setSkipPhase(u.turnPlayer(), u.phase(), u.skip());
+        } else if (update instanceof YieldUpdate.SetDisableYields u) {
+            yieldController.setDisableAutoYields(u.disabled());
+        } else if (update instanceof YieldUpdate.SetDisableTriggers u) {
+            yieldController.setDisableAutoTriggers(u.disabled());
         } else if (update instanceof YieldUpdate.SeedFromClient u) {
             yieldController.applyClientSeed(u.snapshot());
         }

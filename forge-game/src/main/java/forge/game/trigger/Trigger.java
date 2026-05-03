@@ -120,6 +120,16 @@ public abstract class Trigger extends TriggerReplacementBase {
     }
 
     public String toString(boolean active) {
+        return toString(active, true);
+    }
+
+    /**
+     * @param includeRemembered append the per-game-state "triggerRemembered" suffix.
+     *     Pass false to obtain a stable key for persisting Always-Yes / Always-No
+     *     decisions across game instances. Staleness across Forge versions or
+     *     card-text edits is acceptable -- stale keys silently fail to match.
+     */
+    public String toString(boolean active, boolean includeRemembered) {
         if (hasParam("TriggerDescription") && !this.isSuppressed()) {
             StringBuilder sb = new StringBuilder();
             ITranslatable nameSource = getHostName(this);
@@ -140,13 +150,20 @@ public abstract class Trigger extends TriggerReplacementBase {
                     desc = TextUtil.fastReplace(desc, "EFFECTSOURCE", getHostCard().getEffectSource().getDisplayName());
             }
             sb.append(desc);
-            if (!this.triggerRemembered.isEmpty()) {
+            if (includeRemembered && !this.triggerRemembered.isEmpty()) {
                 sb.append(" (").append(this.triggerRemembered).append(")");
             }
             return sb.toString();
         } else {
             return "";
         }
+    }
+
+    /** Composed per-card-instance key, mirroring SpellAbility.yieldKey(). Empty if no stable key. */
+    public final String getYieldKey() {
+        String stable = toString(false, false);
+        if (stable.isEmpty()) return "";
+        return getHostCard() != null ? getHostCard().toString() + ": " + stable : stable;
     }
 
     public final String replaceAbilityText(final String desc, final CardState state) {
