@@ -704,21 +704,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
      * Therefore, the single Edition request can be overruled if no image is found
      * for the corresponding requested edition.
      */
-    @Override
-    public PaperCard getCardFromSet(String cardName, CardEdition edition, boolean isFoil) {
-        return getCardFromSet(cardName, edition, IPaperCard.NO_ART_INDEX,
-                IPaperCard.NO_COLLECTOR_NUMBER, isFoil);
-    }
-
-    @Override
-    public PaperCard getCardFromSet(String cardName, CardEdition edition, int artIndex, boolean isFoil) {
-        return getCardFromSet(cardName, edition, artIndex, IPaperCard.NO_COLLECTOR_NUMBER, isFoil);
-    }
-
-    @Override
-    public PaperCard getCardFromSet(String cardName, CardEdition edition, String collectorNumber, boolean isFoil) {
-        return getCardFromSet(cardName, edition, IPaperCard.NO_ART_INDEX, collectorNumber, isFoil);
-    }
 
     @Override
     public PaperCard getCardFromSet(String cardName, CardEdition edition, int artIndex, String collectorNumber, boolean isFoil) {
@@ -767,35 +752,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
      * ====================================================
      */
 
-    /* Get Card from Edition using the default `CardArtPreference`
-    NOTE: this method has NOT been included in the Interface API refactoring as it
-    relies on a specific (new) attribute included in the `CardDB` that sets the
-    default `ArtPreference`. This attribute does not necessarily belongs to any
-    class implementing ICardInterface, and so the not inclusion in the API
-     */
-    public PaperCard getCardFromEditions(final String cardName) {
-        return this.getCardFromEditions(cardName, this.defaultCardArtPreference);
-    }
-
-    public PaperCard getCardFromEditions(final String cardName, Predicate<PaperCard> filter) {
-        return this.getCardFromEditions(cardName, this.defaultCardArtPreference, filter);
-    }
-
-    @Override
-    public PaperCard getCardFromEditions(final String cardName, CardArtPreference artPreference) {
-        return getCardFromEditions(cardName, artPreference, IPaperCard.NO_ART_INDEX);
-    }
-
-    @Override
-    public PaperCard getCardFromEditions(final String cardName, CardArtPreference artPreference, Predicate<PaperCard> filter) {
-        return getCardFromEditions(cardName, artPreference, IPaperCard.NO_ART_INDEX, filter);
-    }
-
-    @Override
-    public PaperCard getCardFromEditions(final String cardInfo, final CardArtPreference artPreference, int artIndex) {
-        return this.tryToGetCardFromEditions(cardInfo, artPreference, artIndex, null);
-    }
-
     @Override
     public PaperCard getCardFromEditions(final String cardInfo, final CardArtPreference artPreference, int artIndex, Predicate<PaperCard> filter) {
         return this.tryToGetCardFromEditions(cardInfo, artPreference, artIndex, filter);
@@ -808,59 +764,9 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
      * ===============================================
      */
 
-    public PaperCard getCardFromEditionsReleasedBefore(String cardName, Date releaseDate){
-        return this.getCardFromEditionsReleasedBefore(cardName, this.defaultCardArtPreference, PaperCard.DEFAULT_ART_INDEX, releaseDate);
-    }
-
-    public PaperCard getCardFromEditionsReleasedBefore(String cardName, int artIndex, Date releaseDate){
-        return this.getCardFromEditionsReleasedBefore(cardName, this.defaultCardArtPreference, artIndex, releaseDate);
-    }
-
-    public PaperCard getCardFromEditionsReleasedBefore(String cardName, Date releaseDate, Predicate<PaperCard> filter){
-        return this.getCardFromEditionsReleasedBefore(cardName, this.defaultCardArtPreference, releaseDate, filter);
-    }
-
-    @Override
-    public PaperCard getCardFromEditionsReleasedBefore(String cardName, CardArtPreference artPreference, Date releaseDate){
-        return this.getCardFromEditionsReleasedBefore(cardName, artPreference, PaperCard.DEFAULT_ART_INDEX, releaseDate);
-    }
-
-    @Override
-    public PaperCard getCardFromEditionsReleasedBefore(String cardName, CardArtPreference artPreference, Date releaseDate, Predicate<PaperCard> filter){
-        return this.getCardFromEditionsReleasedBefore(cardName, artPreference, PaperCard.DEFAULT_ART_INDEX, releaseDate, filter);
-    }
-
-    @Override
-    public PaperCard getCardFromEditionsReleasedBefore(String cardName, CardArtPreference artPreference, int artIndex, Date releaseDate){
-        return this.tryToGetCardFromEditions(cardName, artPreference, artIndex, releaseDate, true, null);
-    }
-
     @Override
     public PaperCard getCardFromEditionsReleasedBefore(String cardName, CardArtPreference artPreference, int artIndex, Date releaseDate, Predicate<PaperCard> filter){
         return this.tryToGetCardFromEditions(cardName, artPreference, artIndex, releaseDate, true, filter);
-    }
-
-    public PaperCard getCardFromEditionsReleasedAfter(String cardName, Date releaseDate){
-        return this.getCardFromEditionsReleasedAfter(cardName, this.defaultCardArtPreference, PaperCard.DEFAULT_ART_INDEX, releaseDate);
-    }
-
-    public PaperCard getCardFromEditionsReleasedAfter(String cardName, int artIndex, Date releaseDate){
-        return this.getCardFromEditionsReleasedAfter(cardName, this.defaultCardArtPreference, artIndex, releaseDate);
-    }
-
-    @Override
-    public PaperCard getCardFromEditionsReleasedAfter(String cardName, CardArtPreference artPreference, Date releaseDate){
-        return this.getCardFromEditionsReleasedAfter(cardName, artPreference, PaperCard.DEFAULT_ART_INDEX, releaseDate);
-    }
-
-    @Override
-    public PaperCard getCardFromEditionsReleasedAfter(String cardName, CardArtPreference artPreference, Date releaseDate, Predicate<PaperCard> filter){
-        return this.getCardFromEditionsReleasedAfter(cardName, artPreference, PaperCard.DEFAULT_ART_INDEX, releaseDate, filter);
-    }
-
-    @Override
-    public PaperCard getCardFromEditionsReleasedAfter(String cardName, CardArtPreference artPreference, int artIndex, Date releaseDate){
-        return this.tryToGetCardFromEditions(cardName, artPreference, artIndex, releaseDate, false, null);
     }
 
     @Override
