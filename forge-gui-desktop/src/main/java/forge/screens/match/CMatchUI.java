@@ -204,10 +204,6 @@ public final class CMatchUI
         }
     }
 
-    private static boolean isPreferenceEnabled(final ForgePreferences.FPref preferenceName) {
-        return FModel.getPreferences().getPrefBoolean(preferenceName);
-    }
-
     FScreen getScreen() {
         return this.screen;
     }
@@ -244,15 +240,11 @@ public final class CMatchUI
         FThreads.invokeInEdtNowOrLater(() -> {
             // Marker is rendered only on the local player's view of the targeted phase indicator.
             PlayerView local = getCurrentPlayer();
-            if (local == null || !local.equals(player)) {
+            if (!player.equals(local)) {
                 return;
             }
             for (final VField f : getFieldViews()) {
-                PhaseIndicator pi = f.getPhaseIndicator();
-                if (pi == null) {
-                    continue;
-                }
-                for (PhaseLabel l : pi.allLabels()) {
+                for (PhaseLabel l : f.getPhaseIndicator().allLabels()) {
                     l.setYieldMarked(false);
                 }
             }
@@ -467,7 +459,7 @@ public final class CMatchUI
 
         // Combat pairings changed — rebuild layout so grouping reflects them
         if (!"default".equals(FModel.getPreferences().getPref(FPref.UI_GROUP_PERMANENTS))
-                || isPreferenceEnabled(FPref.UI_SEPARATE_COMBAT_STACKS)) {
+                || FModel.getPreferences().getPrefBoolean(FPref.UI_SEPARATE_COMBAT_STACKS)) {
             FThreads.invokeInEdtNowOrLater(() -> {
                 for (final VField f : getFieldViews()) {
                     f.getTabletop().doLayout();

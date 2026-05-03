@@ -60,7 +60,7 @@ public class InputLockUI implements Input {
     private final Runnable showMessageFromEdt = new Runnable() {
         @Override
         public void run() {
-            if (controller.getYieldController().shouldAutoYield()) {
+            if (controller.mayAutoPass()) {
                 controller.getGui().updateAutoPassPrompt();
             } else {
                 controller.getGui().updateButtons(InputLockUI.this.getOwner(), "", "", false, false, false);

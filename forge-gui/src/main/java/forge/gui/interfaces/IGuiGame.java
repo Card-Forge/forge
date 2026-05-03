@@ -276,7 +276,7 @@ public interface IGuiGame {
     default void refreshYieldUi(PlayerView player) {}
 
     /** Apply an authoritative yield-state change. {@link forge.gamemodes.match.AbstractGuiGame} routes to the local {@link forge.interfaces.IGameController}; {@link forge.gamemodes.net.server.RemoteClientGuiGame} forwards over the wire. */
-    default void applyYieldUpdate(YieldUpdate update) {}
+    void applyYieldUpdate(YieldUpdate update);
 
     /** Returns true if this game instance is a network game. */
     boolean isNetGame();

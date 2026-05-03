@@ -734,15 +734,11 @@ public class MatchController extends NetworkGuiGame {
             }
             // Marker only rendered for the local player's view.
             PlayerView local = getCurrentPlayer();
-            if (local == null || !local.equals(player)) {
+            if (!player.equals(local)) {
                 return;
             }
             for (final VPlayerPanel panel : view.getPlayerPanelsList()) {
-                VPhaseIndicator pi = panel.getPhaseIndicator();
-                if (pi == null) {
-                    continue;
-                }
-                for (VPhaseIndicator.PhaseLabel l : pi.allLabels()) {
+                for (VPhaseIndicator.PhaseLabel l : panel.getPhaseIndicator().allLabels()) {
                     l.setYieldMarked(false);
                 }
             }

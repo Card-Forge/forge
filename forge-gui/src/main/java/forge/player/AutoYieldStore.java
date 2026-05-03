@@ -29,13 +29,13 @@ public class AutoYieldStore {
     }
 
     public Iterable<String> getYields(Tier tier) { return yieldsByTier.get(tier); }
+
     public boolean isDisabled() { return disabled; }
     public void setDisabled(boolean disabled) { this.disabled = disabled; }
 
     public TriggerDecision getTriggerDecision(int triggerId) {
         return triggerDecisions.getOrDefault(triggerId, TriggerDecision.ASK);
     }
-
     public void setTriggerDecision(int triggerId, TriggerDecision decision) {
         if (decision == TriggerDecision.ASK) triggerDecisions.remove(triggerId);
         else triggerDecisions.put(triggerId, decision);

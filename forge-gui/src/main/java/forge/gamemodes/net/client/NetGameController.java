@@ -149,23 +149,11 @@ public class NetGameController implements IGameController {
     @Override
     public void setShouldAutoYield(final String key, final boolean autoYield, final boolean isAbilityScope) {
         String storageKey = yieldController.setShouldAutoYield(key, autoYield, isAbilityScope);
-        send(ProtocolMethod.sendYieldUpdate,
-                new YieldUpdate.CardAutoYield(storageKey, autoYield, isAbilityScope));
-    }
-
-    @Override
-    public Iterable<String> getAutoYields() {
-        return yieldController.getAutoYields();
-    }
-
-    @Override
-    public void clearAutoYields() {
-        // No-op locally: tier lifecycle is driven separately. Server-side mirror is cleared by HostedMatch.
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.CardAutoYield(storageKey, autoYield, isAbilityScope));
     }
 
     @Override
     public boolean getDisableAutoYields() { return yieldController.getDisableAutoYields(); }
-
     @Override
     public void setDisableAutoYields(final boolean disable) { yieldController.setDisableAutoYields(disable); }
 
@@ -173,7 +161,6 @@ public class NetGameController implements IGameController {
     public boolean shouldAlwaysAcceptTrigger(final int trigger) {
         return yieldController.shouldAlwaysAcceptTrigger(trigger);
     }
-
     @Override
     public boolean shouldAlwaysDeclineTrigger(final int trigger) {
         return yieldController.shouldAlwaysDeclineTrigger(trigger);
@@ -182,28 +169,17 @@ public class NetGameController implements IGameController {
     @Override
     public void setShouldAlwaysAcceptTrigger(final int trigger) {
         yieldController.setAlwaysAcceptTrigger(trigger);
-        send(ProtocolMethod.sendYieldUpdate,
-                new YieldUpdate.TriggerDecision(trigger, AutoYieldStore.TriggerDecision.ACCEPT));
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.TriggerDecision(trigger, AutoYieldStore.TriggerDecision.ACCEPT));
     }
-
     @Override
     public void setShouldAlwaysDeclineTrigger(final int trigger) {
         yieldController.setAlwaysDeclineTrigger(trigger);
         send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.TriggerDecision(trigger, AutoYieldStore.TriggerDecision.DECLINE));
     }
-
     @Override
     public void setShouldAlwaysAskTrigger(final int trigger) {
         yieldController.setAlwaysAskTrigger(trigger);
         send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.TriggerDecision(trigger, AutoYieldStore.TriggerDecision.ASK));
-    }
-
-    /**
-     * Build a YieldStateSnapshot from the local persistent yield state plus the
-     * GUI-loaded skip-phase prefs and ship it to the host in one wire message.
-     */
-    public void seedYieldStateOnHost(Map<PlayerView, EnumSet<PhaseType>> skipPhases) {
-        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.SeedFromClient(yieldController.buildClientSnapshot(skipPhases)));
     }
 
     public void setUiShouldSkipPhase(final PlayerView turnPlayer, final PhaseType phase, final boolean shouldSkip) {
@@ -232,6 +208,14 @@ public class NetGameController implements IGameController {
     public void sendYieldUpdate(final YieldUpdate update) {
         applyYieldUpdate(update);
         send(ProtocolMethod.sendYieldUpdate, update);
+    }
+
+    /**
+     * Build a YieldStateSnapshot from the local persistent yield state plus the
+     * GUI-loaded skip-phase prefs and ship it to the host in one wire message.
+     */
+    public void seedYieldStateOnHost(Map<PlayerView, EnumSet<PhaseType>> skipPhases) {
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.SeedFromClient(yieldController.buildClientSnapshot(skipPhases)));
     }
 
     private IMacroSystem macros;

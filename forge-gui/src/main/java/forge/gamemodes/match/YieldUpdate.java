@@ -8,8 +8,6 @@ import java.io.Serializable;
 
 /**
  * Unified envelope for all yield-related sync between client and host.
- * One sealed type with seven cases replaces eight per-method ProtocolMethod
- * entries. Both directions (CLIENT->HOST, HOST->CLIENT) ride this envelope.
  *
  * Receiver dispatches via exhaustive switch in PlayerControllerHuman
  * (host-side) and NetworkGuiGame (client-side).
@@ -36,6 +34,5 @@ public sealed interface YieldUpdate extends Serializable
 
     record SkipPhase(PlayerView turnPlayer, PhaseType phase, boolean skip) implements YieldUpdate {}
 
-    /** Atomic snapshot of client's persistent yield state. Sent by client at game start and reconnection only - not host->client. */
     record SeedFromClient(YieldStateSnapshot snapshot) implements YieldUpdate {}
 }

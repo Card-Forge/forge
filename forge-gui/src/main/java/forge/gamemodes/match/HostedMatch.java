@@ -387,7 +387,7 @@ public class HostedMatch {
                 ngg.shutdownForwarder();
             }
             humanController.getGui().setGameSpeed(PlaybackSpeed.NORMAL);
-            humanController.clearAutoYields();
+            humanController.getYieldController().clearAutoYields();
 
             if (humanCount > 0) //conceded
                 humanController.getGui().afterGameEnd();

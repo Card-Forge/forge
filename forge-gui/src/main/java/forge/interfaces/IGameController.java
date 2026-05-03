@@ -61,8 +61,6 @@ public interface IGameController {
      *   route storage by this flag instead of consulting the host's own UI_AUTO_YIELD_MODE.
      */
     void setShouldAutoYield(String key, boolean autoYield, boolean isAbilityScope);
-    Iterable<String> getAutoYields();
-    void clearAutoYields();
     boolean getDisableAutoYields();
     void setDisableAutoYields(boolean disable);
 

@@ -33,8 +33,8 @@ public class YieldController {
 
     private final PlayerControllerHuman owner;
 
-    private boolean autoPassUntilStackEmpty;
     private boolean autoPassUntilEOT;
+    private boolean autoPassUntilStackEmpty;
     private YieldMarker autoPassUntilMarker;
 
     /** Priority has passed through any non-target phase since marker activation. */
@@ -91,7 +91,6 @@ public class YieldController {
         hasLeftMarker = !atOrPastAtClick;
         activationOnMarker = atOrPastAtClick;
     }
-
     public synchronized void clearMarker() {
         autoPassUntilMarker = null;
         hasLeftMarker = false;
@@ -100,10 +99,8 @@ public class YieldController {
 
     /** Click-site helper: true when priority is at or past {@code phase} on {@code phaseOwner}'s current turn. */
     public static boolean isPriorityAtOrPastMarker(GameView gv, PlayerView phaseOwner, PhaseType phase) {
-        if (gv == null || phaseOwner == null || phase == null) return false;
-        PlayerView turnPlayer = gv.getPlayerTurn();
         PhaseType currentPhase = gv.getPhase();
-        if (turnPlayer == null || !turnPlayer.equals(phaseOwner)) return false;
+        if (!phaseOwner.equals(gv.getPlayerTurn())) return false;
         if (currentPhase == null) return false;
         return currentPhase == phase || currentPhase.isAfter(phase);
     }
@@ -112,32 +109,23 @@ public class YieldController {
         if (autoPassUntilEOT) return true;
         GameView gv = owner != null && owner.getGui() != null ? owner.getGui().getGameView() : null;
         if (autoPassUntilStackEmpty) {
-            if (gv != null && gv.getStack() != null && !gv.getStack().isEmpty()) return true;
+            if (gv != null && gv.peekStack() != null) return true;
             autoPassUntilStackEmpty = false;
         }
-        if (checkAndClearMarker(gv) && owner != null && owner.getGui() != null) {
-            PlayerView local = owner.getLocalPlayerView();
-            if (local != null) owner.getGui().applyYieldUpdate(new YieldUpdate.ClearMarker(local));
+        if (autoPassUntilMarker != null && gv != null) {
+            PlayerView turnPlayer = gv.getPlayerTurn();
+            PhaseType currentPhase = gv.getPhase();
+            boolean inMarkerOwnerTurn = autoPassUntilMarker.getPhaseOwner().equals(turnPlayer);
+            boolean atTarget = inMarkerOwnerTurn && currentPhase == autoPassUntilMarker.getPhase();
+            boolean pastTarget = inMarkerOwnerTurn && currentPhase != null && currentPhase.isAfter(autoPassUntilMarker.getPhase());
+            if (hasLeftMarker && (atTarget || (!activationOnMarker && pastTarget))) {
+                clearMarker();
+                PlayerView local = owner.getLocalPlayerView();
+                if (local != null) owner.getGui().applyYieldUpdate(new YieldUpdate.ClearMarker(local));
+            }
+            if (!atTarget && !hasLeftMarker) hasLeftMarker = true;
         }
         return autoPassUntilMarker != null;
-    }
-
-    /** Game-thread only via {@link #shouldAutoYield}. */
-    private boolean checkAndClearMarker(GameView gv) {
-        if (autoPassUntilMarker == null || gv == null) return false;
-        PlayerView turnPlayer = gv.getPlayerTurn();
-        PhaseType currentPhase = gv.getPhase();
-        boolean inMarkerOwnerTurn = turnPlayer != null && turnPlayer.equals(autoPassUntilMarker.getPhaseOwner());
-        boolean atTarget = inMarkerOwnerTurn && currentPhase == autoPassUntilMarker.getPhase();
-        boolean pastTarget = inMarkerOwnerTurn && currentPhase != null
-                && autoPassUntilMarker.getPhase() != null && currentPhase.isAfter(autoPassUntilMarker.getPhase());
-        boolean shouldFire = hasLeftMarker && (atTarget || (!activationOnMarker && pastTarget));
-        if (shouldFire) {
-            clearMarker();
-            return true;
-        }
-        if (!atTarget && !hasLeftMarker) hasLeftMarker = true;
-        return false;
     }
 
     // ---- Auto-yield (per-card/ability) and trigger decisions ----
@@ -146,7 +134,7 @@ public class YieldController {
         AutoYieldStore store = activeStore();
         if (store.isDisabled()) return false;
         if (!tierAware()) {
-            // Cache: keys stored at storageKey shape (full or stripped). Check both.
+            // Cache: keys stored at storageKey shape (full or stripped)
             return store.shouldYield(AutoYieldStore.Tier.GAME, key)
                     || store.shouldYield(AutoYieldStore.Tier.GAME, AutoYieldStore.abilitySuffix(key));
         }
@@ -187,8 +175,7 @@ public class YieldController {
     }
 
     private static boolean activeModeIsInstall() {
-        return ForgeConstants.AUTO_YIELD_PER_ABILITY_INSTALL.equals(
-                FModel.getPreferences().getPref(FPref.UI_AUTO_YIELD_MODE));
+        return ForgeConstants.AUTO_YIELD_PER_ABILITY_INSTALL.equals(FModel.getPreferences().getPref(FPref.UI_AUTO_YIELD_MODE));
     }
 
     private static AutoYieldStore.Tier activeTier() {
@@ -229,7 +216,6 @@ public class YieldController {
     public boolean shouldAlwaysAcceptTrigger(int trigger) {
         return activeStore().getTriggerDecision(trigger) == AutoYieldStore.TriggerDecision.ACCEPT;
     }
-
     public boolean shouldAlwaysDeclineTrigger(int trigger) {
         return activeStore().getTriggerDecision(trigger) == AutoYieldStore.TriggerDecision.DECLINE;
     }
@@ -237,11 +223,9 @@ public class YieldController {
     public void setAlwaysAcceptTrigger(int trigger) {
         activeStore().setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.ACCEPT);
     }
-
     public void setAlwaysDeclineTrigger(int trigger) {
         activeStore().setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.DECLINE);
     }
-
     public void setAlwaysAskTrigger(int trigger) {
         activeStore().setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.ASK);
     }
@@ -261,8 +245,7 @@ public class YieldController {
         }
         // Trigger decisions are per-game; deltas flow during play.
         Map<Integer, AutoYieldStore.TriggerDecision> triggers = new HashMap<>();
-        return new YieldStateSnapshot(cardYields, abilityYields, triggers, getDisableAutoYields(),
-                skipPhases == null ? new HashMap<>() : skipPhases);
+        return new YieldStateSnapshot(cardYields, abilityYields, triggers, getDisableAutoYields(), skipPhases);
     }
 
     /** Atomic seed of client-persistent state at game start or reconnection. Cache mode only. */
@@ -274,9 +257,6 @@ public class YieldController {
             localStore.setTriggerDecision(e.getKey(), e.getValue());
         }
         localStore.setDisabled(snap.autoYieldsDisabled());
-        skipPhases.clear();
-        for (Map.Entry<PlayerView, EnumSet<PhaseType>> e : snap.skipPhases().entrySet()) {
-            skipPhases.put(e.getKey(), EnumSet.copyOf(e.getValue()));
-        }
+        skipPhases.putAll(snap.skipPhases());
     }
 }

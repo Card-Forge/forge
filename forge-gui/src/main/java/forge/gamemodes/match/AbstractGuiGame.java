@@ -1,6 +1,7 @@
 package forge.gamemodes.match;
 
 import com.google.common.collect.*;
+
 import forge.game.GameEntityView;
 import forge.game.GameEndReason;
 import forge.game.GameLog;
@@ -25,6 +26,7 @@ import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableTypes;
 import forge.util.FSerializableFunction;
 import forge.util.Localizer;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
@@ -621,17 +623,13 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public void applyYieldUpdate(YieldUpdate update) {
-        PlayerView pv = yieldUpdatePlayer(update);
-        if (pv == null) return;
+        PlayerView pv;
+        if (update instanceof YieldUpdate.ClearMarker u) pv = u.player();
+        else if (update instanceof YieldUpdate.StackYield u) pv = u.player();
+        else return;
         IGameController c = getGameController(pv);
         if (c != null) c.applyYieldUpdate(update);
         refreshYieldUi(pv);
-    }
-
-    private static PlayerView yieldUpdatePlayer(YieldUpdate update) {
-        if (update instanceof YieldUpdate.ClearMarker u) return u.player();
-        if (update instanceof YieldUpdate.StackYield u) return u.player();
-        return null;
     }
 
     // End auto-yield/input code

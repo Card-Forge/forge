@@ -2365,7 +2365,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 // ensure prompt updated if needed
                 currentInput.showMessageInitial();
             }
-            if (gui.isNetGame()) {
+            if (getGui().isNetGame()) {
                 // Flush events to remote clients — the undo modifies game state
                 // (untaps lands, etc.) after the prompt is shown, and without this
                 // the updated state sits in the forwarder buffer until the next action.
@@ -3341,31 +3341,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
     }
 
-    public boolean mayAutoPass() {
-        return yieldController.shouldAutoYield();
-    }
-
-    public void autoPassUntilEndOfTurn() {
-        yieldController.setAutoPassUntilEOTWithoutInterruptions(true);
-        if (getGui() != null) {
-            getGui().updateAutoPassPrompt();
-        }
-    }
-
-    @Override
-    public void autoPassCancel() {
-        if (!mayAutoPass()) {
-            return;
-        }
-        yieldController.setAutoPassUntilEOTWithoutInterruptions(false);
-        if (getGui() != null) {
-            PlayerView playerView = getLocalPlayerView();
-            getGui().showPromptMessage(playerView, "");
-            getGui().updateButtons(playerView, false, false, false);
-            getGui().awaitNextInput();
-        }
-    }
-
     @Override
     public void awaitNextInput() {
         getGui().awaitNextInput();
@@ -3487,6 +3462,27 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return gui instanceof forge.gamemodes.net.server.RemoteClientGuiGame;
     }
 
+    public boolean mayAutoPass() {
+        return yieldController.shouldAutoYield();
+    }
+
+    public void autoPassUntilEndOfTurn() {
+        yieldController.setAutoPassUntilEOTWithoutInterruptions(true);
+        getGui().updateAutoPassPrompt();
+    }
+
+    @Override
+    public void autoPassCancel() {
+        if (!mayAutoPass()) {
+            return;
+        }
+        yieldController.setAutoPassUntilEOTWithoutInterruptions(false);
+        PlayerView playerView = getLocalPlayerView();
+        getGui().showPromptMessage(playerView, "");
+        getGui().updateButtons(playerView, false, false, false);
+        getGui().awaitNextInput();
+    }
+
     @Override
     public boolean shouldAutoYield(final String key) {
         return yieldController.shouldAutoYield(key);
@@ -3494,16 +3490,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public void setShouldAutoYield(final String key, final boolean autoYield, final boolean isAbilityScope) {
         yieldController.setShouldAutoYield(key, autoYield, isAbilityScope);
-    }
-
-    @Override
-    public Iterable<String> getAutoYields() {
-        return yieldController.getAutoYields();
-    }
-
-    @Override
-    public void clearAutoYields() {
-        yieldController.clearAutoYields();
     }
 
     @Override
@@ -3571,7 +3557,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         } else if (update instanceof YieldUpdate.SeedFromClient u) {
             yieldController.applyClientSeed(u.snapshot());
         }
-        if (activatedYield && getGui() != null) {
+        if (activatedYield) {
             // Switch the cancel button + prompt to "Yielding until X" so the user can disarm.
             // Otherwise the previous InputPassPriority "End Turn" label would persist and ESC
             // would skip the click on the client.

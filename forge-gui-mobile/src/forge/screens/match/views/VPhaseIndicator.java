@@ -207,7 +207,7 @@ public class VPhaseIndicator extends FContainer {
         }
 
         private void drawChevron(final Graphics g, float x, float w, float h) {
-            // Two back-to-back triangles centered in the cell, mirroring desktop.
+            // Two back-to-back triangles centered in the cell
             float size = Math.max(Utils.scale(6f), h * 0.55f);
             float cx = x + (w - size) / 2f;
             float cy = (h - size) / 2f;
