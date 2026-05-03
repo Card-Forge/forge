@@ -1,12 +1,11 @@
 package forge.screens.settings;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -93,24 +92,25 @@ public class FilesPage extends TabPage<SettingsScreen> {
                 });
             }
         }, 0);
-        //Export Game Log
-        lstItems.addItem(new Extra(Forge.getLocalizer().getMessage("lblExportGameLog"), Forge.getLocalizer().getMessage("lblExportGameLogDescription")) {
+        lstItems.addItem(new Extra(Forge.getLocalizer().getMessage("lblExportLogs"), Forge.getLocalizer().getMessage("lblExportLogsDescription")) {
             @Override
             public void select() {
-                exportLogs("lblExportGameLog",
-                        new File(ForgeProfileProperties.getUserDir()),
-                        (dir, name) -> name.startsWith("forge") && name.endsWith(".log"),
-                        "forge-logs");
-            }
-        }, 0);
-        //Export Network Logs
-        lstItems.addItem(new Extra(Forge.getLocalizer().getMessage("lblExportNetworkLogs"), Forge.getLocalizer().getMessage("lblExportNetworkLogsDescription")) {
-            @Override
-            public void select() {
-                exportLogs("lblExportNetworkLogs",
-                        new File(ForgeConstants.NETWORK_LOGS_DIR),
-                        (dir, name) -> name.startsWith("network-debug-") && name.endsWith(".log"),
-                        "forge-network-logs");
+                List<File> files = new ArrayList<>();
+                File userDir = new File(ForgeProfileProperties.getUserDir());
+                if (userDir.isDirectory()) {
+                    File[] forgeLogs = userDir.listFiles((d, n) -> n.startsWith("forge") && n.endsWith(".log"));
+                    if (forgeLogs != null) {
+                        Collections.addAll(files, forgeLogs);
+                    }
+                }
+                File netDir = new File(ForgeConstants.NETWORK_LOGS_DIR);
+                if (netDir.isDirectory()) {
+                    File[] netLogs = netDir.listFiles((d, n) -> n.startsWith("network-debug-") && n.endsWith(".log"));
+                    if (netLogs != null) {
+                        Collections.addAll(files, netLogs);
+                    }
+                }
+                exportLogs(files);
             }
         }, 0);
         //Auditer
@@ -257,23 +257,22 @@ public class FilesPage extends TabPage<SettingsScreen> {
         lstItems.setBounds(0, 0, width, height);
     }
 
-    private void exportLogs(String dialogTitleKey, File sourceDir, FilenameFilter filter, String outputPrefix) {
+    private void exportLogs(List<File> files) {
         if (Forge.getDeviceAdapter().needFileAccess()) {
             Forge.getDeviceAdapter().requestFileAcces();
             return;
         }
-        final String dialogTitle = Forge.getLocalizer().getMessage(dialogTitleKey);
+        final String dialogTitle = Forge.getLocalizer().getMessage("lblExportLogs");
         FThreads.invokeInEdtLater(() -> LoadingOverlay.show(Forge.getLocalizer().getMessage("lblExporting"), true, () -> {
             try {
-                File[] matches = sourceDir.isDirectory() ? sourceDir.listFiles(filter) : null;
-                if (matches == null || matches.length == 0) {
+                if (files.isEmpty()) {
                     FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblNoLogFilesFound"), dialogTitle, FOptionPane.INFORMATION_ICON);
                     return;
                 }
                 String stamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
                 File downloads = new FileHandle(Forge.getDeviceAdapter().getDownloadsDir()).file();
-                File zipFile = new File(downloads, outputPrefix + "-" + stamp + ".zip");
-                ZipUtil.zipFiles(Arrays.asList(matches), zipFile);
+                File zipFile = new File(downloads, "forge-logs-" + stamp + ".zip");
+                ZipUtil.zipFiles(files, zipFile);
                 FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblSuccess") + "\n" + zipFile.getAbsolutePath(), dialogTitle, FOptionPane.INFORMATION_ICON);
             } catch (IOException e) {
                 FOptionPane.showMessageDialog(e.toString(), Forge.getLocalizer().getMessage("lblError"), FOptionPane.ERROR_ICON);

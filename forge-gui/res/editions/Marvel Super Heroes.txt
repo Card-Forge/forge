@@ -7,6 +7,7 @@ ScryfallCode=MSH
 
 [cards]
 9 M Captain America, Super-Soldier @Anna Podedworna
+21 M The Mind Stone @Volkan Baǵa
 35 R The Sentry, Golden Guardian @Alexander Skripnikov
 47 U Attuma, Atlantean Warlord @Nanna Marie Steffensen
 49 M Bruce Banner @Tommy Arnold
@@ -20,8 +21,11 @@ ScryfallCode=MSH
 197 R World War Hulk @Serena Malyon
 212 M The Coming of Galactus @Serena Malyon
 223 R Moon Girl and Devil Dinosaur @Zezhou Chen
+255 R The Vision @Carissa Susilo
 304 R World War Hulk @Steve Ellis
 307 M The Coming of Galactus @Veronica Fish
+385 M The Mind Stone @Madeline Boni
+386 M The Mind Stone @Leinil Francis Yu & Sunny Gho
 387 M Captain America, Super-Soldier @Jack Kirby & John Romita Sr.
 390 M Bruce Banner @Jack Kirby & Paul Reinman
 391 M Namor the Sub-Mariner @John Buscema & Sol Brodsky

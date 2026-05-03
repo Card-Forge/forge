@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -131,6 +132,141 @@ public class Controls {
 
     }
 
+    public static class MarqueeButton extends TextButtonFix {
+
+        static protected float MAX_SCROLL_SPEED_DEFAULT = 15f;
+        static protected float MIN_SCROLL_DURATION_DEFAULT = 3f;
+        static protected float SCROLL_START_PAUSE_DEFAULT = 0.7f;
+        static protected float SCROLL_END_PAUSE_DEFAULT = 1f;
+
+        protected Action currentAction;
+        protected float scrollStartPause;
+        protected float scrollEndPause;
+        protected float maxScrollSpeed;
+        protected float minScrollDuration;
+
+        public MarqueeButton(@Null String text) {
+            super(text);
+            scrollStartPause = SCROLL_START_PAUSE_DEFAULT;
+            scrollEndPause = SCROLL_END_PAUSE_DEFAULT;
+            maxScrollSpeed = MAX_SCROLL_SPEED_DEFAULT;
+            minScrollDuration = MIN_SCROLL_DURATION_DEFAULT;
+            this.clip(true);
+            this.getTextraLabel().setWrap(false);
+            this.manageAnimation();
+        }
+
+        // Animation Handling
+        public void manageAnimation() {
+            Cell<TextraLabel> labelCell = this.getTextraLabelCell();
+            TextraLabel label = this.getTextraLabel();
+
+            label.removeAction(this.getCurrentAction());
+            if (this.getClippedLength() > 0) {
+                labelCell.align(Align.left);
+                this.setCurrentAction(this.generateMarqueeAction());
+                label.addAction(this.getCurrentAction());
+            }
+            else {
+                labelCell.align(Align.center);
+            }
+        }
+
+        public Action generateMarqueeAction() {
+            float clippedLength = this.getClippedLength();
+            float scrollDuration = Math.max(clippedLength / maxScrollSpeed, minScrollDuration);
+            return Actions.forever(Actions.sequence(
+                    Actions.delay(scrollStartPause),
+                    Actions.moveBy(-clippedLength, 0, scrollDuration, Interpolation.smooth),
+                    Actions.delay(scrollEndPause),
+                    Actions.moveBy(clippedLength, 0)
+            ));
+        }
+
+        public float getClippedLength() {
+            float cellWidth = this.getWidth() - this.getPadLeft() - this.getPadRight();
+            return Math.max(this.getTextraLabel().getWidth() - cellWidth, 0);
+        }
+
+        // Getters/Setters
+        public Action getCurrentAction(){
+            return this.currentAction;
+        }
+
+        public float getScrollStartPause(){
+            return this.scrollStartPause;
+        }
+
+        public float getScrollEndPause(){
+            return this.scrollEndPause;
+        }
+
+        public float getMaxScrollSpeed(){
+            return this.maxScrollSpeed;
+        }
+
+        public float getMinScrollDuration(){
+            return this.minScrollDuration;
+        }
+
+        public void setScrollStartPause(float pauseSecs) {
+            this.scrollStartPause = pauseSecs;
+            this.manageAnimation();
+        }
+
+        public void setScrollEndPausendPause(float pauseSecs) {
+            this.scrollEndPause = pauseSecs;
+            this.manageAnimation();
+        }
+
+        public void setMaxScrollSpeed(float speed) {
+            this.maxScrollSpeed = speed;
+            this.manageAnimation();
+        }
+
+        public void setMinScrollTime(float scrollSecs) {
+            this.minScrollDuration = scrollSecs;
+            this.manageAnimation();
+        }
+
+        public void setCurrentAction(Action newAction) {
+            if (newAction == null) throw new IllegalArgumentException("action cannot be null.");
+            if (currentAction == newAction) return;
+
+            TextraLabel label = this.getTextraLabel();
+            if (label.getActions().contains(currentAction, true)) {
+                label.removeAction(currentAction);
+                label.addAction(newAction);
+            }
+            currentAction = newAction;
+        }
+
+        // Wrap parent methods to ensure manageAnimation() is called each time the label or layout is changed
+        @Override
+        public void setTextraLabel(TextraLabel label) {
+            super.setTextraLabel(label);
+            this.manageAnimation();
+        }
+
+        @Override
+        public void setText(@Null String text) {
+            super.setText(text);
+            this.manageAnimation();
+        }
+
+        @Override
+        public void setStyle(Button.ButtonStyle style, boolean makeGridGlyphs) {
+            super.setStyle(style, makeGridGlyphs);
+            this.manageAnimation();
+        }
+
+        @Override
+        public void layout() {
+            super.layout();
+            this.manageAnimation();
+        }
+    }
+
     static public TextraButton newTextButton(String text) {
         TextraButton button = new TextButtonFix(text);
         button.getTextraLabel().setWrap(false);
@@ -141,6 +277,10 @@ public class Controls {
         TypingButton button = new TypingButtonFix(text);
         button.getTextraLabel().setWrap(false);
         return button;
+    }
+
+    static public MarqueeButton newMarqueeButton(String text) {
+        return new MarqueeButton(text);
     }
 
     static public Rectangle getBoundingRect(Actor actor) {

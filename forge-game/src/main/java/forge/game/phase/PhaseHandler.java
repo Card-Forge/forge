@@ -125,7 +125,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
         if (playerTurn == playerTurn0) { return; }
         playerTurn = playerTurn0;
         game.updatePlayerTurnForView();
-        setPriority(playerTurn);
+        resetPriority();
     }
 
     public final Player getPreviousPlayerTurn() {

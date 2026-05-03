@@ -29,14 +29,13 @@ public class AutoYieldStore {
     }
 
     public Iterable<String> getYields(Tier tier) { return yieldsByTier.get(tier); }
+
     public boolean isDisabled() { return disabled; }
     public void setDisabled(boolean disabled) { this.disabled = disabled; }
 
     public TriggerDecision getTriggerDecision(int triggerId) {
-        TriggerDecision d = triggerDecisions.get(triggerId);
-        return d == null ? TriggerDecision.ASK : d;
+        return triggerDecisions.getOrDefault(triggerId, TriggerDecision.ASK);
     }
-
     public void setTriggerDecision(int triggerId, TriggerDecision decision) {
         if (decision == TriggerDecision.ASK) triggerDecisions.remove(triggerId);
         else triggerDecisions.put(triggerId, decision);
@@ -48,6 +47,13 @@ public class AutoYieldStore {
         if (matchOver) {
             yieldsByTier.get(Tier.MATCH).clear();
         }
+    }
+
+    /** Wipe all yields, trigger decisions, and the disabled flag — used to reseed the cache from a client snapshot. */
+    public void clear() {
+        for (Set<String> set : yieldsByTier.values()) set.clear();
+        triggerDecisions.clear();
+        disabled = false;
     }
 
     /** Strips the "Card (id=N): " prefix to derive the ability-scope key, or returns the input unchanged. */

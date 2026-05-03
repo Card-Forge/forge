@@ -51,6 +51,8 @@ import forge.trackable.Tracker;
 import forge.util.*;
 import forge.util.collect.FCollection;
 import org.apache.commons.lang3.tuple.Pair;
+import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
 
 import java.util.*;
 import java.util.function.Predicate;
@@ -59,6 +61,8 @@ import java.util.function.Predicate;
  * Represents the state of a <i>single game</i>, a new instance is created for each game.
  */
 public class Game {
+
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
 
     private static int maxId = 0;
     private static int nextId() { return ++maxId; }
@@ -707,7 +711,12 @@ public class Game {
         if (visit.getFound() == null) {
             forEachCardInGame(visit);
         }
-        return visit.getFound();
+        Card found = visit.getFound();
+        if (found == null) {
+            netLog.error("findByView: id={} (zone={}, controller={}) not found in any zone — returning null",
+                    view.getId(), view.getZone(), view.getController());
+        }
+        return found;
     }
 
     public Card findById(int id) {
