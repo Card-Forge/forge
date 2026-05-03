@@ -61,7 +61,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
     private Set<StaticAbilityLayer> layers;
     private CardCollectionView ignoreEffectCards = new CardCollection();
     private final List<Player> ignoreEffectPlayers = Lists.newArrayList();
-    private int mayPlayTurn = 0;
 
     private SpellAbility payingTrigSA;
     private StaticAbilityView view = null;
@@ -552,15 +551,12 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
     }
 
     public int getMayPlayTurn() {
-        return mayPlayTurn;
-    }
-
-    public void incMayPlayTurn() {
-        this.mayPlayTurn++;
-    }
-
-    public void resetMayPlayTurn() {
-        this.mayPlayTurn = 0;
+        final Player controller = this.getHostCard().getController();
+        int castSpells = (int) this.getHostCard().getGame().getStack().getSpellsCastThisTurn().stream()
+            .map(Card::getCastSA).filter(s -> s != null && s.getActivatingPlayer().equals(controller) && this.equals(s.getMayPlay()))
+            .count();
+        int landPlayed = (int) controller.getLandsPlayedThisTurn().stream().filter(s -> this.equals(s.getMayPlay())).count();
+        return castSpells + landPlayed;
     }
 
     @Override
@@ -599,10 +595,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
 
             // reset to force refresh if needed
             clone.payingTrigSA = null;
-
-            if (!lki) {
-                clone.mayPlayTurn = 0;
-            }
 
             clone.layers = this.generateLayer();
             if (validHostZones != null) {
