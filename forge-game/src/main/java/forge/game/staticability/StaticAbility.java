@@ -550,12 +550,11 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         return layers;
     }
 
-    public int getMayPlayTurn() {
-        final Player controller = this.getHostCard().getController();
+    public int getMayPlayTurn(final Player player) {
         int castSpells = (int) this.getHostCard().getGame().getStack().getSpellsCastThisTurn().stream()
-            .map(Card::getCastSA).filter(s -> s != null && s.getActivatingPlayer().equals(controller) && this.equals(s.getMayPlay()))
+            .map(Card::getCastSA).filter(s -> s != null && s.getActivatingPlayer().equals(player) && this.equals(s.getMayPlay()))
             .count();
-        int landPlayed = (int) controller.getLandsPlayedThisTurn().stream().filter(s -> this.equals(s.getMayPlay())).count();
+        int landPlayed = (int) player.getLandsPlayedThisTurn().stream().filter(s -> this.equals(s.getMayPlay())).count();
         return castSpells + landPlayed;
     }
 
