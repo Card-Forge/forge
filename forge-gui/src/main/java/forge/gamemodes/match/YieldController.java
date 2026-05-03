@@ -257,6 +257,7 @@ public class YieldController {
             localStore.setTriggerDecision(e.getKey(), e.getValue());
         }
         localStore.setDisabled(snap.autoYieldsDisabled());
+        skipPhases.clear();
         skipPhases.putAll(snap.skipPhases());
     }
 }
