@@ -41,11 +41,13 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     public final static char NameSetSeparator = '|';
     public final static String FlagPrefix = "#";
     public static final String FlagSeparator = "\t";
+    public static final Comparator<CardRules> CARD_RULES_NAME_COMPARATOR = Comparator.comparing(CardRules::getPreInitName, String.CASE_INSENSITIVE_ORDER);
 
     // need this to obtain cardReference by name+set+artindex
     private final ListMultimap<String, PaperCard> allCardsByName = Multimaps.newListMultimap(new TreeMap<>(String.CASE_INSENSITIVE_ORDER), Lists::newArrayList);
     private final Map<String, PaperCard> uniqueCardsByName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
     private final Map<String, CardRules> rulesByName;
+    private final ListMultimap<CardRules, PaperCard> allCardsByRules = Multimaps.newListMultimap(new TreeMap<>(CARD_RULES_NAME_COMPARATOR), Lists::newArrayList);
     private final Map<String, ICardFace> facesByName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
     private final Map<String, String> normalizedNames = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
     private static Map<String, String> artPrefs = Maps.newHashMap();
@@ -538,6 +540,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         allCardsByName.put(mainName, paperCard);
 
         CardRules rules = paperCard.getRules();
+        allCardsByRules.put(rules, paperCard);
         if (rules.getSplitType() == CardSplitType.None && !rules.hasFunctionalVariants()) {
             return;
         }
@@ -1056,17 +1059,11 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     @Override
     public Stream<PaperCard> streamAllCards() {
-        return allCardsByName.values().stream();
+        return allCardsByRules.values().stream();
     }
     @Override
     public Stream<PaperCard> streamUniqueCards() {
         return uniqueCardsByName.values().stream();
-    }
-    public Stream<PaperCard> streamAllCardsNoAlt() {
-        return allCardsByName.entries().stream().filter(e -> e.getKey().equals(e.getValue().getName())).map(Entry::getValue);
-    }
-    public Stream<PaperCard> streamUniqueCardsNoAlt() {
-        return uniqueCardsByName.entrySet().stream().filter(e -> e.getKey().equals(e.getValue().getName())).map(Entry::getValue);
     }
 
     public Stream<ICardFace> streamAllFaces() {
@@ -1090,7 +1087,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     };
 
     public Collection<PaperCard> getAllNonPromosNonReprintsNoAlt() {
-        return streamAllCardsNoAlt().filter(EDITION_NON_REPRINT).collect(Collectors.toList());
+        return streamAllCards().filter(EDITION_NON_REPRINT).collect(Collectors.toList());
     }
 
     public String getNormalizedName(final String cardName) {
@@ -1132,6 +1129,14 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return Lists.newArrayList(Multimaps.filterEntries(allCardsByName, entry -> entry.getKey().equals(entry.getValue().getName())).get(getNormalizedName(cardName)));
     }
 
+    public List<PaperCard> getAllCards(CardRules rules) {
+        return allCardsByRules.get(rules);
+    }
+
+    public List<PaperCard> getAllCards(PaperCard card) {
+        return getAllCards(card.getRules());
+    }
+
     /**
      * Returns a modifiable list of cards matching the given predicate
      */
@@ -1145,11 +1150,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return getAllCards(cardName).stream().filter(predicate).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    /**
-     * Returns a modifiable list of cards matching the given predicate
-     */
-    public List<PaperCard> getAllCardsNoAlt(Predicate<PaperCard> predicate) {
-        return streamAllCardsNoAlt().filter(predicate).collect(Collectors.toCollection(ArrayList::new));
+    public List<PaperCard> getAllCards(PaperCard card, Predicate<PaperCard> predicate){
+        return getAllCards(card).stream().filter(predicate).collect(Collectors.toCollection(ArrayList::new));
     }
 
     public List<PaperCard> getAllCardsNoAlt(final String cardName, Predicate<PaperCard> predicate){
@@ -1186,7 +1188,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     @Override
     public Predicate<? super PaperCard> wasPrintedInSets(Collection<String> setCodes) {
         Set<String> sets = new HashSet<>(setCodes);
-        return paperCard -> getAllCardsNoAlt(paperCard.getName()).stream()
+        return paperCard -> getAllCards(paperCard).stream()
                 .map(PaperCard::getEdition).anyMatch(editionCode ->
                     sets.contains(editionCode) &&
                         StaticData.instance().getCardEdition(editionCode).isCardObtainable(paperCard.getName())
@@ -1203,7 +1205,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     // This Predicate validates if a card was printed at [rarity], on any of its printings
     @Override
     public Predicate<? super PaperCard> wasPrintedAtRarity(CardRarity rarity) {
-        return paperCard -> getAllCardsNoAlt(paperCard.getName()).stream()
+        return paperCard -> getAllCards(paperCard).stream()
                 .map(PaperCard::getRarity)
                 .anyMatch(rarity::equals);
     }
