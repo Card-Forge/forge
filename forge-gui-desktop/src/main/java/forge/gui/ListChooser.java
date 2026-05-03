@@ -28,14 +28,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Function;
 
 import javax.swing.AbstractListModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
+import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
@@ -50,6 +53,7 @@ import com.google.common.collect.Lists;
 
 import forge.card.CardType;
 import forge.card.MagicColor;
+import forge.game.card.CardView;
 import forge.game.card.CounterKeywordType;
 import forge.game.card.CounterType;
 import forge.localinstance.skin.FSkinProp;
@@ -59,6 +63,7 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FTextField;
+import forge.toolbox.special.CardImageGrid;
 import forge.util.ITranslatable;
 import forge.util.Localizer;
 import org.apache.commons.lang3.StringUtils;
@@ -88,6 +93,11 @@ import org.apache.commons.lang3.StringUtils;
  * @version $Id: ListChooser.java 25183 2014-03-14 23:09:45Z drdev $
  */
 public class ListChooser<T> {
+    private static final int GRID_THUMB_W = 200;
+    private static final int GRID_THUMB_H = 280;
+    private static final int GRID_MAX_COLUMNS = 4;
+    private static final int GRID_MAX_VISIBLE_ROWS = 3;
+
     // Data and number of choices for the list
     private final List<T> allItems;
     private List<T> displayedItems;
@@ -101,6 +111,8 @@ public class ListChooser<T> {
     private final FList<T> lstChoices;
     private final FOptionPane optionPane;
     private final ChooserListModel listModel;
+    // Non-null only in card-grid mode; keeps a typed handle for selection-restore in show()
+    private final CardImageGrid<CardView> cardGrid;
 
     public ListChooser(final String title, final int minChoices, final int maxChoices, final Collection<T> list, final Function<T, String> display) {
         FThreads.assertExecutedByEdt(true);
@@ -110,7 +122,6 @@ public class ListChooser<T> {
         this.allItems = list.getClass().isInstance(List.class) ? (List<T>)list : Lists.newArrayList(list);
         this.displayedItems = new ArrayList<>(this.allItems);
         this.listModel = new ChooserListModel();
-        this.lstChoices = new FList<>(this.listModel);
 
         final ImmutableList<String> options;
         if (minChoices == 0) {
@@ -119,54 +130,74 @@ public class ListChooser<T> {
             options = ImmutableList.of(Localizer.getInstance().getMessage("lblOK"));
         }
 
-        if (maxChoices == 1 || minChoices == -1) {
-            this.lstChoices.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        }
-
-        this.lstChoices.setCellRenderer(new TransformedCellRenderer(display));
-
-        final FScrollPane listScroller = new FScrollPane(this.lstChoices, true);
-        int minWidth = this.lstChoices.getAutoSizeWidth();
-        if (this.lstChoices.getModel().getSize() > this.lstChoices.getVisibleRowCount()) {
-            minWidth += listScroller.getVerticalScrollBar().getPreferredSize().width;
-        }
-        listScroller.setMinimumSize(new Dimension(minWidth, listScroller.getMinimumSize().height));
-
-        // Add search field for large lists (same threshold as mobile)
-        if (allItems.size() > 25) {
-            final FTextField searchField = new FTextField.Builder()
-                    .ghostText(Localizer.getInstance().getMessage("lblSearch"))
-                    .showGhostTextWithFocus()
-                    .build();
-            searchField.getDocument().addDocumentListener(new DocumentListener() {
-                @Override public void insertUpdate(DocumentEvent e) { applyFilter(searchField); }
-                @Override public void removeUpdate(DocumentEvent e) { applyFilter(searchField); }
-                @Override public void changedUpdate(DocumentEvent e) { applyFilter(searchField); }
-            });
-            searchField.addKeyListener(new KeyAdapter() {
-                @Override public void keyPressed(final KeyEvent e) {
-                    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                        ListChooser.this.commit();
-                    } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                        lstChoices.requestFocusInWindow();
-                    }
-                }
-            });
-
-            final JPanel panel = new JPanel(new BorderLayout(0, 4));
-            panel.setOpaque(false);
-            panel.add(searchField, BorderLayout.NORTH);
-            panel.add(listScroller, BorderLayout.CENTER);
-
-            this.optionPane = new FOptionPane(null, title, null, panel, options, minChoices < 0 ? 0 : -1);
-            if (minChoices != -1) {
-                this.optionPane.setDefaultFocus(searchField);
-            }
+        final JComponent body;
+        // Tracks the focus target for setDefaultFocus below. Text-mode large lists focus the search
+        // field so the user can start typing immediately; otherwise focus the list / grid itself.
+        final JComponent defaultFocus;
+        if (isCardChoiceView(allItems, maxChoices)) {
+            final int cols = Math.max(1, Math.min(allItems.size(), GRID_MAX_COLUMNS));
+            this.cardGrid = CardImageGrid.forCardViews(cols, GRID_THUMB_W, GRID_THUMB_H);
+            @SuppressWarnings("unchecked")
+            final List<CardView> cardItems = (List<CardView>) allItems;
+            this.cardGrid.setItems(cardItems);
+            @SuppressWarnings("unchecked")
+            final FList<T> gridList = (FList<T>) (FList<?>) this.cardGrid.getList();
+            this.lstChoices = gridList;
+            body = cardGrid.makeFixedSizeContainer(GRID_MAX_VISIBLE_ROWS);
+            defaultFocus = this.lstChoices;
         } else {
-            this.optionPane = new FOptionPane(null, title, null, listScroller, options, minChoices < 0 ? 0 : -1);
-            if (minChoices != -1) {
-                this.optionPane.setDefaultFocus(this.lstChoices);
+            this.cardGrid = null;
+            this.lstChoices = new FList<>(this.listModel);
+
+            if (maxChoices == 1 || minChoices == -1) {
+                this.lstChoices.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             }
+
+            this.lstChoices.setCellRenderer(new TransformedCellRenderer(display));
+
+            final FScrollPane listScroller = new FScrollPane(this.lstChoices, true);
+            int minWidth = this.lstChoices.getAutoSizeWidth();
+            if (this.lstChoices.getModel().getSize() > this.lstChoices.getVisibleRowCount()) {
+                minWidth += listScroller.getVerticalScrollBar().getPreferredSize().width;
+            }
+            listScroller.setMinimumSize(new Dimension(minWidth, listScroller.getMinimumSize().height));
+
+            // Add search field for large lists (same threshold as mobile)
+            if (allItems.size() > 25) {
+                final FTextField searchField = new FTextField.Builder()
+                        .ghostText(Localizer.getInstance().getMessage("lblSearch"))
+                        .showGhostTextWithFocus()
+                        .build();
+                searchField.getDocument().addDocumentListener(new DocumentListener() {
+                    @Override public void insertUpdate(DocumentEvent e) { applyFilter(searchField); }
+                    @Override public void removeUpdate(DocumentEvent e) { applyFilter(searchField); }
+                    @Override public void changedUpdate(DocumentEvent e) { applyFilter(searchField); }
+                });
+                searchField.addKeyListener(new KeyAdapter() {
+                    @Override public void keyPressed(final KeyEvent e) {
+                        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                            ListChooser.this.commit();
+                        } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                            lstChoices.requestFocusInWindow();
+                        }
+                    }
+                });
+
+                final JPanel panel = new JPanel(new BorderLayout(0, 4));
+                panel.setOpaque(false);
+                panel.add(searchField, BorderLayout.NORTH);
+                panel.add(listScroller, BorderLayout.CENTER);
+                body = panel;
+                defaultFocus = searchField;
+            } else {
+                body = listScroller;
+                defaultFocus = this.lstChoices;
+            }
+        }
+
+        this.optionPane = new FOptionPane(null, title, null, body, options, minChoices < 0 ? 0 : -1);
+        if (minChoices != -1) {
+            this.optionPane.setDefaultFocus(defaultFocus);
         }
 
         this.optionPane.setButtonEnabled(0, minChoices <= 0);
@@ -191,6 +222,18 @@ public class ListChooser<T> {
                     ListChooser.this.commit();
             }
         });
+    }
+
+    private static boolean isCardChoiceView(Collection<?> list, int maxChoices) {
+        if (list.isEmpty() || maxChoices > 1) {
+            return false;
+        }
+        for (Object o : list) {
+            if (!(o instanceof CardView)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private void applyFilter(final FTextField searchField) {
@@ -236,6 +279,16 @@ public class ListChooser<T> {
         return value != null ? value.toString() : "";
     }
 
+    private int indexOfInModel(final T t) {
+        final ListModel<T> m = lstChoices.getModel();
+        for (int i = 0; i < m.getSize(); i++) {
+            if (Objects.equals(m.getElementAt(i), t)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     /**
      * Returns the FList used in the list chooser. this is useful for
      * registering listeners before showing the dialog.
@@ -263,11 +316,14 @@ public class ListChooser<T> {
             //invoke later so selected item not set until dialog open
             SwingUtilities.invokeLater(() -> {
                 if (item != null) {
-                    int[] indices = item.stream()
-                            .mapToInt(displayedItems::indexOf)
+                    final int[] indices = item.stream()
+                            .mapToInt(this::indexOfInModel)
                             .filter(i -> i >= 0)
                             .toArray();
                     lstChoices.setSelectedIndices(indices);
+                    if (indices.length > 0) {
+                        lstChoices.ensureIndexIsVisible(indices[0]);
+                    }
                 }
                 else {
                     lstChoices.setSelectedIndex(0);

@@ -32,7 +32,9 @@ public final class ChangePrintingDialog {
     private static final int SCROLLBAR_W = 16;
     // Empirical buffer: FScrollPane's themed border eats ~4px; without this, 4*cellW+SCROLLBAR_W rounds down to 3 cols.
     private static final int VIEWPORT_BUFFER = 12;
-    private static final int CONTAINER_H = 736;          // 700 grid + 28 search bar + 8 gap
+    private static final int VISIBLE_ROWS = 2;
+    private static final int TOPBAR_H = 28;
+    private static final int TOPBAR_GAP = 8;
     private static final int SEARCH_DEBOUNCE_MS = 200;
 
     private ChangePrintingDialog() {}
@@ -52,7 +54,7 @@ public final class ChangePrintingDialog {
             printings.add(0, currentNonFoil);
         }
 
-        final CardImageGrid grid = new CardImageGrid(COLUMNS, THUMB_W, THUMB_H);
+        final CardImageGrid<PaperCard> grid = CardImageGrid.forPaperCards(COLUMNS, THUMB_W, THUMB_H);
         grid.setItems(printings);
         grid.setSelected(currentNonFoil);
 
@@ -97,7 +99,8 @@ public final class ChangePrintingDialog {
         topBar.add(cbStyle, BorderLayout.EAST);
 
         final int containerW = COLUMNS * grid.getCellWidth() + SCROLLBAR_W + VIEWPORT_BUFFER;
-        final Dimension fixedSize = new Dimension(containerW, CONTAINER_H);
+        final int containerH = VISIBLE_ROWS * grid.getCellHeight() + TOPBAR_H + TOPBAR_GAP;
+        final Dimension fixedSize = new Dimension(containerW, containerH);
         final JPanel container = new JPanel(new BorderLayout(0, 8)) {
             private static final long serialVersionUID = 1L;
             @Override public Dimension getPreferredSize() { return fixedSize; }
