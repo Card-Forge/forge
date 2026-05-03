@@ -243,6 +243,7 @@ public final class CMatchUI
                     f.updateZones();
                     f.updateManaPool();
                     f.getTabletop().update();
+                    f.updateTabLabel(f.getTabletop().getCardPanels().size());
                 }
                 for (final VHand h : getHandViews()) {
                     h.getLayoutControl().updateHand();
