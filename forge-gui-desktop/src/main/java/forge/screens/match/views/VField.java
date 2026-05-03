@@ -221,11 +221,11 @@ public class VField implements IVDoc<CField> {
         detailsPanel.updateZones();
     }
 
-    public void updateTabLabel(final int count) {
+    public void updateTabLabel() {
         if (player == null) {
             return;
         }
-        final int delta = tabDiff.update(count, tab);
+        final int delta = tabDiff.update(tabletop.getCardPanels().size(), tab);
         String label = Localizer.getInstance().getMessage("lblPlayField", player.getName());
         if (delta != 0) {
             label += " (" + delta + " new)";

@@ -243,7 +243,7 @@ public final class CMatchUI
                     f.updateZones();
                     f.updateManaPool();
                     f.getTabletop().update();
-                    f.updateTabLabel(f.getTabletop().getCardPanels().size());
+                    f.updateTabLabel();
                 }
                 for (final VHand h : getHandViews()) {
                     h.getLayoutControl().updateHand();
@@ -500,6 +500,7 @@ public final class CMatchUI
             }
             if (setupPlayZone) {
                 vField.getTabletop().update();
+                vField.updateTabLabel();
             }
             if (updateHand) {
                 final VHand vHand = getHandFor(owner);

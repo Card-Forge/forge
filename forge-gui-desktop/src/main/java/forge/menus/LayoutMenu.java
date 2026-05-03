@@ -264,7 +264,7 @@ public final class LayoutMenu {
             final IVTopLevelUI view = screen.getView();
             if (view instanceof VMatchUI vmu) {
                 for (final VField f : vmu.getControl().getFieldViews()) {
-                    f.updateTabLabel(f.getTabletop().getCardPanels().size());
+                    f.updateTabLabel();
                 }
             }
         }
