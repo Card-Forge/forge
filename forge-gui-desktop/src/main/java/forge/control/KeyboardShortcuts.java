@@ -159,14 +159,11 @@ public class KeyboardShortcuts {
                 if (matchUI == null) { return; }
                 StackItemView si = matchUI.getGameView().peekStack();
                 if (si != null && si.isAbility()) {
-                    boolean abilityScope = !forge.localinstance.properties.ForgeConstants.AUTO_YIELD_PER_CARD.equals(
-                            forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_YIELD_MODE));
+                    boolean abilityScope = matchUI.getGameController().getYieldController().isAbilityScope();
                     matchUI.getGameController().setShouldAutoYield(si.getKey(), true, abilityScope);
                     String triggerYieldKey = si.getSourceTriggerYieldKey();
                     if (si.isOptionalTrigger() && matchUI.isLocalPlayer(si.getActivatingPlayer()) && !triggerYieldKey.isEmpty()) {
-                        boolean triggerAbilityScope = !forge.localinstance.properties.ForgeConstants.AUTO_TRIGGER_PER_CARD.equals(
-                                forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_TRIGGER_MODE));
-                        matchUI.getGameController().setShouldAlwaysAcceptTrigger(triggerYieldKey, triggerAbilityScope);
+                        matchUI.getGameController().setShouldAlwaysAcceptTrigger(triggerYieldKey, abilityScope);
                     }
                     matchUI.getGameController().passPriority();
                 }
@@ -181,14 +178,11 @@ public class KeyboardShortcuts {
                 if (matchUI == null) { return; }
                 StackItemView si = matchUI.getGameView().peekStack();
                 if (si != null && si.isAbility()) {
-                    boolean abilityScope = !forge.localinstance.properties.ForgeConstants.AUTO_YIELD_PER_CARD.equals(
-                            forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_YIELD_MODE));
+                    boolean abilityScope = matchUI.getGameController().getYieldController().isAbilityScope();
                     matchUI.getGameController().setShouldAutoYield(si.getKey(), true, abilityScope);
                     String triggerYieldKey = si.getSourceTriggerYieldKey();
                     if (si.isOptionalTrigger() && matchUI.isLocalPlayer(si.getActivatingPlayer()) && !triggerYieldKey.isEmpty()) {
-                        boolean triggerAbilityScope = !forge.localinstance.properties.ForgeConstants.AUTO_TRIGGER_PER_CARD.equals(
-                                forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_TRIGGER_MODE));
-                        matchUI.getGameController().setShouldAlwaysDeclineTrigger(triggerYieldKey, triggerAbilityScope);
+                        matchUI.getGameController().setShouldAlwaysDeclineTrigger(triggerYieldKey, abilityScope);
                     }
                     matchUI.getGameController().passPriority();
                 }

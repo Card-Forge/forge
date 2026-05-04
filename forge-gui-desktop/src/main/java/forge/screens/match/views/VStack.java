@@ -309,8 +309,7 @@ public class VStack implements IVDoc<CStack> {
             jmiAutoYield.addActionListener(arg0 -> {
                 final String key = item.getKey();
                 final boolean autoYield = controller.getMatchUI().getGameController().shouldAutoYield(key);
-                boolean abilityScope = !forge.localinstance.properties.ForgeConstants.AUTO_YIELD_PER_CARD.equals(
-                        forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_YIELD_MODE));
+                boolean abilityScope = controller.getMatchUI().getGameController().getYieldController().isAbilityScope();
                 controller.getMatchUI().getGameController().setShouldAutoYield(key, !autoYield, abilityScope);
                 if (!autoYield && controller.getMatchUI().getGameView().peekStack() == item) {
                     //auto-pass priority if ability is on top of stack
@@ -356,8 +355,7 @@ public class VStack implements IVDoc<CStack> {
         public void setStackInstance(final StackItemView item0) {
             item = item0;
             triggerYieldKey = item.getSourceTriggerYieldKey();
-            triggerAbilityScope = !forge.localinstance.properties.ForgeConstants.AUTO_TRIGGER_PER_CARD.equals(
-                    forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_TRIGGER_MODE));
+            triggerAbilityScope = controller.getMatchUI().getGameController().getYieldController().isAbilityScope();
 
             jmiAutoYield.setVisible(item.isAbility());
             jmiAutoYield.setSelected(item.isAbility()

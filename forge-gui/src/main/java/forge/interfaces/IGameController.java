@@ -58,7 +58,7 @@ public interface IGameController {
     /**
      * @param isAbilityScope true if {@code key} is an ability suffix (Per Ability * modes);
      *   false if {@code key} is the full raw key (Per Card mode). Server-side handlers
-     *   route storage by this flag instead of consulting the host's own UI_AUTO_YIELD_MODE.
+     *   route storage by this flag instead of consulting the host's own UI_AUTO_DECISION_MODE.
      */
     void setShouldAutoYield(String key, boolean autoYield, boolean isAbilityScope);
     boolean getDisableAutoYields();

@@ -154,7 +154,7 @@ public class WrappedAbility extends Ability {
     public String yieldKey() {
         if (getTrigger() != null) {
             if (getHostCard() != null) {
-                return getHostCard().toString() + ": " + getTrigger().toString();
+                return getHostCard().getName() + ": " + getTrigger().toString();
             } else {
                 return getTrigger().toString();
             }

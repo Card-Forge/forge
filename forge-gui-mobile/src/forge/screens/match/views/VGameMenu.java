@@ -33,11 +33,11 @@ public class VGameMenu extends FDropDownMenu {
                 GameStateDeserializer.loadGameState(MatchUtil.getGame(), ForgeConstants.USER_GAMES_DIR + "GameSave.txt");
             }
         }));*/
-        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblAutoYields"), Forge.hdbuttons ? FSkinImage.HDYIELD : FSkinImage.WARNING, new FEventHandler() {
+        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblAutoYieldsAndTriggers"), Forge.hdbuttons ? FSkinImage.HDYIELD : FSkinImage.WARNING, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 final boolean autoYieldsDisabled = MatchController.instance.getGameController().getDisableAutoYields();
-                final VAutoYields autoYields = new VAutoYields() {
+                final VAutoYieldsAndTriggers dialog = new VAutoYieldsAndTriggers() {
                     @Override
                     public void setVisible(boolean b0) {
                         super.setVisible(b0);
@@ -47,8 +47,7 @@ public class VGameMenu extends FDropDownMenu {
                                 if (MatchController.instance.getGameView().peekStack() != null) {
                                     final String key = MatchController.instance.getGameView().peekStack().getKey();
                                     final boolean autoYield = MatchController.instance.getGameController().shouldAutoYield(key);
-                                    boolean abilityScope = !forge.localinstance.properties.ForgeConstants.AUTO_YIELD_PER_CARD.equals(
-                                            forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_YIELD_MODE));
+                                    boolean abilityScope = MatchController.instance.getGameController().getYieldController().isAbilityScope();
                                     MatchController.instance.getGameController().setShouldAutoYield(key, !autoYield, abilityScope);
                                     if (!autoYield && MatchController.instance.getGameController().shouldAutoYield(key)) {
                                         //auto-pass priority if ability is on top of stack
@@ -59,14 +58,7 @@ public class VGameMenu extends FDropDownMenu {
                         }
                     }
                 };
-                autoYields.show();
-            }
-        }));
-        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblAutoTriggers"), Forge.hdbuttons ? FSkinImage.HDYIELD : FSkinImage.WARNING, new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                final VAutoTriggers autoTriggers = new VAutoTriggers();
-                autoTriggers.show();
+                dialog.show();
             }
         }));
         if (!Forge.isMobileAdventureMode) {

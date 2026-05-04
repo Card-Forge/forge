@@ -18,8 +18,7 @@ import forge.localinstance.skin.FSkinProp;
 import forge.menus.MenuUtil;
 import forge.model.FModel;
 import forge.screens.match.CMatchUI;
-import forge.screens.match.VAutoTriggers;
-import forge.screens.match.VAutoYields;
+import forge.screens.match.VAutoYieldsAndTriggers;
 import forge.screens.match.views.VField;
 import forge.screens.match.controllers.CDock.ArcState;
 import forge.toolbox.FSkin.SkinIcon;
@@ -57,8 +56,7 @@ public final class GameMenu {
         menu.add(getSubmenu_StackGroupPermanents());
         menu.add(getMenuItem_TokensSeparateRow());
         menu.add(getMenuItem_SeparateCombatStacks());
-        menu.add(getMenuItem_AutoYields());
-        menu.add(getMenuItem_AutoTriggers());
+        menu.add(getMenuItem_AutoYieldsAndTriggers());
         menu.addSeparator();
         menu.add(getMenuItem_ViewDeckList());
         return menu;
@@ -177,30 +175,12 @@ public final class GameMenu {
         menu.setIcon(item.getIcon());
     }
 
-    private SkinnedMenuItem getMenuItem_AutoYields() {
+    private SkinnedMenuItem getMenuItem_AutoYieldsAndTriggers() {
         final Localizer localizer = Localizer.getInstance();
-        final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblAutoYields"));
+        final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblAutoYieldsAndTriggers"));
         menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_WARNING) : null));
-        menuItem.addActionListener(getAutoYieldsAction());
+        menuItem.addActionListener(e -> new VAutoYieldsAndTriggers(matchUI).showDialog());
         return menuItem;
-    }
-
-    private ActionListener getAutoYieldsAction() {
-        return e -> {
-            new VAutoYields(matchUI).showAutoYields();
-        };
-    }
-
-    private SkinnedMenuItem getMenuItem_AutoTriggers() {
-        final Localizer localizer = Localizer.getInstance();
-        final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblAutoTriggers"));
-        menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_WARNING) : null));
-        menuItem.addActionListener(getAutoTriggersAction());
-        return menuItem;
-    }
-
-    private ActionListener getAutoTriggersAction() {
-        return e -> new VAutoTriggers(matchUI).showAutoTriggers();
     }
 
     private SkinnedMenuItem getMenuItem_ViewDeckList() {

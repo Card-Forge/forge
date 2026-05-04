@@ -294,8 +294,7 @@ public class VStack extends FDropDown {
                             final boolean autoYield = controller.shouldAutoYield(key);
                             addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("cbpAutoYieldMode"), autoYield,
                                     e -> {
-                                        boolean abilityScope = !forge.localinstance.properties.ForgeConstants.AUTO_YIELD_PER_CARD.equals(
-                                                forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_YIELD_MODE));
+                                        boolean abilityScope = controller.getYieldController().isAbilityScope();
                                         controller.setShouldAutoYield(key, !autoYield, abilityScope);
                                         if (!autoYield && stackInstance.equals(gameView.peekStack())) {
                                             //auto-pass priority if ability is on top of stack
@@ -305,7 +304,7 @@ public class VStack extends FDropDown {
                             if (stackInstance.isOptionalTrigger() && stackInstance.getActivatingPlayer().equals(player)) {
                                 final String triggerYieldKey = stackInstance.getSourceTriggerYieldKey();
                                 if (!triggerYieldKey.isEmpty()) {
-                                    final boolean abilityScope = activeTriggerModeIsAbilityScope();
+                                    final boolean abilityScope = controller.getYieldController().isAbilityScope();
                                     addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblAlwaysYes"),
                                             controller.shouldAlwaysAcceptTrigger(triggerYieldKey),
                                             e -> {
@@ -350,11 +349,6 @@ public class VStack extends FDropDown {
         public boolean longPress(float x, float y) {
             CardZoom.show(stackInstance.getSourceCard());
             return true;
-        }
-
-        private boolean activeTriggerModeIsAbilityScope() {
-            return !forge.localinstance.properties.ForgeConstants.AUTO_TRIGGER_PER_CARD.equals(
-                    forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_TRIGGER_MODE));
         }
 
         @Override

@@ -159,11 +159,11 @@ public abstract class Trigger extends TriggerReplacementBase {
         }
     }
 
-    /** Composed per-card-instance key, mirroring SpellAbility.yieldKey(). Empty if no stable key. */
+    /** Composed key for persisting auto-decisions, mirroring SpellAbility.yieldKey(). Empty if no stable key. */
     public final String getYieldKey() {
         String stable = toString(false, false);
         if (stable.isEmpty()) return "";
-        return getHostCard() != null ? getHostCard().toString() + ": " + stable : stable;
+        return getHostCard() != null ? getHostCard().getName() + ": " + stable : stable;
     }
 
     public final String replaceAbilityText(final String desc, final CardState state) {
