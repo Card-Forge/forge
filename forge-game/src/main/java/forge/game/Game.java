@@ -702,8 +702,6 @@ public class Game {
             if (p != null) {
                 visit.visitAll(p.getZone(view.getZone()));
             }
-        } else {
-            forEachCardInGame(visit);
         }
         // Zone-specific search may miss if the view has stale zone info
         // (e.g. IdRef resolved from a tracker that wasn't updated after a
