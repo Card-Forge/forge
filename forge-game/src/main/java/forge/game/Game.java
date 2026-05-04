@@ -555,6 +555,11 @@ public class Game {
     }
 
     public synchronized void setGameOver(GameEndReason reason) {
+        // early exit in case many events causing a game over have fired
+        if (age == GameStage.GameOver) {
+            return;
+        }
+
         for (Player p : allPlayers) {
             p.clearController();
         }
