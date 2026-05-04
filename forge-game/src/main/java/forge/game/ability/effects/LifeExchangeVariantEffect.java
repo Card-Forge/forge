@@ -70,8 +70,7 @@ public class LifeExchangeVariantEffect extends SpellAbilityEffect {
             return;
         }
 
-        // Likewise, we still need to do this even if the life total doesn't change
-        if (pLife >= num && p.canLoseLife()) {
+        if (pLife > num && p.canLoseLife()) {
             final int diff = pLife - num;
             final int lost = p.loseLife(diff, false, false);
             source.addNewPT(power, toughness, timestamp, 0);
@@ -88,7 +87,13 @@ public class LifeExchangeVariantEffect extends SpellAbilityEffect {
             p.gainLife(diff, source, sa);
             source.addNewPT(power, toughness, timestamp, 0);
             game.fireEvent(new GameEventCardStatsChanged(source));
-        } else {
+        }
+        // We still need to do this if the life total doesn't change because the creature's base power/toughness might
+        else if(pLife == num){
+            source.addNewPT(power, toughness, timestamp, 0);
+            game.fireEvent(new GameEventCardStatsChanged(source));
+        }
+        else {
             // do nothing if they cannot lose/gain this amount of life
         }
     }
