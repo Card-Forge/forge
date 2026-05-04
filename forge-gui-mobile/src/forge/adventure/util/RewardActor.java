@@ -1001,17 +1001,24 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             if (autoSell != null && !autoSell.isVisible() && flipProcess == 1) {
                 autoSell.setVisible(true);
 
+                
+
                 PaperCard pc = reward.getCard();
+
                 if (pc != null &&
-                    !pc.getRules().getType().isBasic() &&
-                    !DeckFormat.canHaveAnyNumberOf(pc)
+                    !pc.getRules().getType().isBasic()
                 ) {
+                    DeckFormat deckFormat = AdventurePlayer.current().isCommanderMode() 
+                        ? DeckFormat.Commander
+                        : DeckFormat.Adventure;
+                    int maxCopies = deckFormat.getMaxCardCopies(pc);
+
                     if (AdventurePlayer.current().isCommanderMode()) {
-                        setAutoSell(inCollectionLike(pc));
+                        setAutoSell(maxCopies == 1 && inCollectionLike(pc));
                     } else {
                         int ownedCount = AdventurePlayer.current().getCollectionCards(true).count(pc);
-                        
-                        setAutoSell(ownedCount >= 4);
+
+                        setAutoSell(ownedCount >= maxCopies);
                     }
                 }
             }
