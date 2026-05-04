@@ -62,15 +62,16 @@ public class LifeExchangeVariantEffect extends SpellAbilityEffect {
         } else if ("Toughness".equals(mode)) {
             num = source.getNetToughness();
             toughness = pLife;
-        } else {
-            return;
         }
+        // We cannot safely return early here as no net change in life total might
+        // not mean no net change in power or toughness if they are modified.
 
         if (!source.isInPlay()) {
             return;
         }
 
-        if (pLife > num && p.canLoseLife()) {
+        // Likewise, we still need to do this even if the life total doesn't change
+        if (p.canLoseLife()) {
             final int diff = pLife - num;
             final int lost = p.loseLife(diff, false, false);
             source.addNewPT(power, toughness, timestamp, 0);
@@ -82,7 +83,7 @@ public class LifeExchangeVariantEffect extends SpellAbilityEffect {
                 final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPIMap(lossMap);
                 source.getGame().getTriggerHandler().runTrigger(TriggerType.LifeLostAll, runParams, false);
             }
-        } else if (num > pLife && p.canGainLife()) {
+        } else if (p.canGainLife()) {
             final int diff = num - pLife;
             p.gainLife(diff, source, sa);
             source.addNewPT(power, toughness, timestamp, 0);
