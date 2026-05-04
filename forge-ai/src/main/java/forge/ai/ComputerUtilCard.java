@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.IdentityHashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -1122,6 +1123,7 @@ public class ComputerUtilCard {
         Player opp = ai.getStrongestOpponent();
         if (sa.hasParam("AILogic")) {
             final String logic = sa.getParam("AILogic");
+            Iterator<Player> rememberedPlayers = IterableUtil.filter(sa.getHostCard().getRemembered(), Player.class).iterator();
 
             if (logic.equals("MostProminentInHumanDeck")) {
                 chosen.add(getMostProminentColor(CardLists.filterControlledBy(game.getCardsInGame(), opp), colorChoices));
@@ -1143,6 +1145,9 @@ public class ComputerUtilCard {
                 chosen.add(getMostProminentColor(ai.getCardsIn(ZoneType.Battlefield), colorChoices));
             } else if (logic.equals("MostProminentHumanControls")) {
                 chosen.add(getMostProminentColor(opp.getCardsIn(ZoneType.Battlefield), colorChoices));
+            } else if (logic.equals("MostProminentRememberedControls") && rememberedPlayers.hasNext()) {
+                Player rememberedPlayer = rememberedPlayers.next();
+                chosen.add(getMostProminentColor(rememberedPlayer.getCardsIn(ZoneType.Battlefield), colorChoices));
             } else if (logic.equals("MostProminentPermanent")) {
                 chosen.add(getMostProminentColor(game.getCardsIn(ZoneType.Battlefield), colorChoices));
             } else if (logic.equals("MostProminentAttackers") && game.getPhaseHandler().inCombat()) {
