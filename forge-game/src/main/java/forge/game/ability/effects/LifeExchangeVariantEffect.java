@@ -71,7 +71,7 @@ public class LifeExchangeVariantEffect extends SpellAbilityEffect {
         }
 
         // Likewise, we still need to do this even if the life total doesn't change
-        if (p.canLoseLife()) {
+        if (pLife >= num && p.canLoseLife()) {
             final int diff = pLife - num;
             final int lost = p.loseLife(diff, false, false);
             source.addNewPT(power, toughness, timestamp, 0);
@@ -83,13 +83,13 @@ public class LifeExchangeVariantEffect extends SpellAbilityEffect {
                 final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPIMap(lossMap);
                 source.getGame().getTriggerHandler().runTrigger(TriggerType.LifeLostAll, runParams, false);
             }
-        } else if (p.canGainLife()) {
+        } else if (num > pLife && p.canGainLife()) {
             final int diff = num - pLife;
             p.gainLife(diff, source, sa);
             source.addNewPT(power, toughness, timestamp, 0);
             game.fireEvent(new GameEventCardStatsChanged(source));
         } else {
-            // do nothing if they are equal
+            // do nothing if they cannot lose/gain this amount of life
         }
     }
 
