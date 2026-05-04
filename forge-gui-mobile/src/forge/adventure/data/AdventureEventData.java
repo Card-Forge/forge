@@ -3,7 +3,6 @@ package forge.adventure.data;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
 import forge.Forge;
-import forge.StaticData;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.RewardScene;
@@ -333,7 +332,7 @@ public class AdventureEventData implements Serializable {
                 if (isMetaSet) {
                     booster = cardBlock.getBooster(setCode);
                 } else {
-                    SealedTemplate template = StaticData.instance().getBoosters().get(setCode);
+                    SealedTemplate template = AdventureOverrides.instance().getBoosterTemplate(setCode);
                     if (template == null) continue;
                     booster = new UnOpenedProduct(template);
                 }
@@ -371,7 +370,7 @@ public class AdventureEventData implements Serializable {
                     if (isMetaSet) {
                         booster = cardBlock.getBooster(setCode);
                     } else {
-                        SealedTemplate template = StaticData.instance().getBoosters().get(setCode);
+                        SealedTemplate template = AdventureOverrides.instance().getBoosterTemplate(setCode);
                         if (template == null) continue;
                         booster = new UnOpenedProduct(template);
                     }
