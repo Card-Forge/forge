@@ -89,7 +89,7 @@ public class LifeExchangeVariantEffect extends SpellAbilityEffect {
             game.fireEvent(new GameEventCardStatsChanged(source));
         }
         // We still need to do this if the life total doesn't change because the creature's base power/toughness might
-        else if(pLife == num){
+        else if (pLife == num){
             source.addNewPT(power, toughness, timestamp, 0);
             game.fireEvent(new GameEventCardStatsChanged(source));
         }
