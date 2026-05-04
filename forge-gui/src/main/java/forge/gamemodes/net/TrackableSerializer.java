@@ -226,6 +226,23 @@ public final class TrackableSerializer {
             enableResolveObject(true);
         }
 
+        // Android desugars records to classes with computed serialVersionUID; the JVM keeps records at 0L.
+        // Fall through to the local descriptor when UIDs mismatch.
+        @Override
+        protected ObjectStreamClass readClassDescriptor() throws IOException, ClassNotFoundException {
+            ObjectStreamClass streamDesc = super.readClassDescriptor();
+            try {
+                Class<?> localClass = Class.forName(streamDesc.getName());
+                ObjectStreamClass localDesc = ObjectStreamClass.lookup(localClass);
+                if (localDesc != null && streamDesc.getSerialVersionUID() != localDesc.getSerialVersionUID()) {
+                    return localDesc;
+                }
+            } catch (ClassNotFoundException ignored) {
+                // Class not found locally — fall through to stream descriptor.
+            }
+            return streamDesc;
+        }
+
         @Override
         protected Object resolveObject(Object obj) {
             return resolve(obj, tracker);
