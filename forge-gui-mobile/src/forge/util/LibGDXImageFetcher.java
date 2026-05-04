@@ -102,8 +102,13 @@ public class LibGDXImageFetcher extends ImageFetcher {
             System.out.println(newdespath);
             destFile.parent().mkdirs();
             try(OutputStream out = Files.newOutputStream(destFile.file().toPath())) {
-                // Conversion to JPEG will be handled differently depending on the platform
-                Forge.getDeviceAdapter().convertToJPEG(is, out);
+                // Conversion to JPEG/PNG will be handled differently depending on the platform
+                if (newdespath.endsWith(".png")) {
+                    Forge.getDeviceAdapter().convertToPNG(is, out);
+                } else {
+                    Forge.getDeviceAdapter().convertToJPEG(is, out);
+                }
+
                 is.close();
             }
             destFile.moveTo(new FileHandle(newdespath));
