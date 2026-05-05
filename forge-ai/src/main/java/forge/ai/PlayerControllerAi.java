@@ -1065,7 +1065,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public ColorSet chooseColors(String message, SpellAbility sa, int min, int max, ColorSet options) {
-        return ColorSet.fromNames(ComputerUtilCard.chooseColor(sa, min, max, options.stream().map(MagicColor.Color::getName).collect(Collectors.toList())));
+        return ColorSet.fromNames(ComputerUtilCard.chooseColor(player, sa, options.stream().map(MagicColor.Color::getName).collect(Collectors.toList())));
     }
 
     /*
