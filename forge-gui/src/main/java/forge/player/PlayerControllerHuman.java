@@ -2342,11 +2342,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     public boolean canUndoLastAction() {
-        if (!getGame().stack.canUndo(player)) {
-            return false;
-        }
         final Player priorityPlayer = getGame().getPhaseHandler().getPriorityPlayer();
-        return priorityPlayer != null && priorityPlayer == player;
+        if (priorityPlayer == null || priorityPlayer != player) return false;
+        return getGame().stack.canUndo(player) || getGame().canUndoToSnapshot();
     }
 
     @Override
@@ -2355,14 +2353,22 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     public boolean tryUndoLastAction() {
-        if (!canUndoLastAction()) {
-            return false;
+        // First try existing stack undo (undo spell before resolution)
+        final Player priorityPlayer = getGame().getPhaseHandler().getPriorityPlayer();
+        if (priorityPlayer != null && priorityPlayer == player && getGame().stack.canUndo(player)) {
+            if (getGame().getStack().undo()) {
+                final Input currentInput = inputQueue.getInput();
+                if (currentInput instanceof InputPassPriority) {
+                    currentInput.showMessageInitial();
+                }
+                return true;
+            }
         }
 
-        if (getGame().getStack().undo()) {
+        // Fall through to full game state undo via snapshot
+        if (getGame().undoToLastSnapshot()) {
             final Input currentInput = inputQueue.getInput();
             if (currentInput instanceof InputPassPriority) {
-                // ensure prompt updated if needed
                 currentInput.showMessageInitial();
             }
             if (getGui().isNetGame()) {

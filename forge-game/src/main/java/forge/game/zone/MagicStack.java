@@ -936,8 +936,15 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     public final List<Card> getSpellsCastThisTurn() {
         return thisTurnCast;
     }
+    public final void setSpellsCastThisTurn(List<Card> cards) {
+        thisTurnCast.clear();
+        thisTurnCast.addAll(cards);
+    }
     public final List<Card> getSpellsCastLastTurn() {
         return lastTurnCast;
+    }
+    public final void setSpellsCastLastTurn(List<Card> cards) {
+        lastTurnCast = Lists.newArrayList(cards);
     }
 
     public final void onNextTurn() {
@@ -964,6 +971,10 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
     public List<SpellAbility> getAbilityActivatedThisTurn() {
         return thisTurnActivated;
+    }
+    public void setAbilityActivatedThisTurn(List<SpellAbility> abilities) {
+        thisTurnActivated.clear();
+        thisTurnActivated.addAll(abilities);
     }
 
     public final boolean hasSourceOnStack(final Card source, final Predicate<SpellAbility> pred) {
