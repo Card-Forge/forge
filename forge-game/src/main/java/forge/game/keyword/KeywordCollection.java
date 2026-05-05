@@ -20,8 +20,52 @@ public class KeywordCollection implements ICardTraitChanges, Iterable<KeywordInt
     private final Multimap<Keyword, KeywordInterface> map = MultimapBuilder.hashKeys()
             .linkedHashSetValues().build();
 
+    // Lazily-computed trait bitmask: whether any contained keyword contributes a
+    // replacement effect / trigger / static ability. Invalidated on insert/remove/clear;
+    // recomputed on first query. CAVEAT: if a caller mutates a contained
+    // KeywordInstance's trait lists in place (e.g. a second createTraits call on
+    // an already-inserted instance, as CardFactoryUtil.setupKeywordedAbilities does),
+    // the flag is NOT invalidated — rebuild the collection via Card.updateKeywordsCache
+    // in that case.
+    private transient boolean traitFlagsDirty = true;
+    private transient boolean hasReplacementKw;
+    private transient boolean hasTriggerKw;
+    private transient boolean hasStaticKw;
+
     public KeywordCollection() {
         super();
+    }
+
+    private void invalidateTraitFlags() { traitFlagsDirty = true; }
+
+    private void computeTraitFlagsIfDirty() {
+        if (!traitFlagsDirty) return;
+        boolean hRE = false, hTr = false, hSA = false;
+        for (KeywordInterface kw : map.values()) {
+            if (!hRE && !kw.getReplacements().isEmpty()) hRE = true;
+            if (!hTr && !kw.getTriggers().isEmpty()) hTr = true;
+            if (!hSA && !kw.getStaticAbilities().isEmpty()) hSA = true;
+            if (hRE && hTr && hSA) break;
+        }
+        hasReplacementKw = hRE;
+        hasTriggerKw = hTr;
+        hasStaticKw = hSA;
+        traitFlagsDirty = false;
+    }
+
+    public boolean hasReplacementEffectKeyword() {
+        computeTraitFlagsIfDirty();
+        return hasReplacementKw;
+    }
+
+    public boolean hasTriggerKeyword() {
+        computeTraitFlagsIfDirty();
+        return hasTriggerKw;
+    }
+
+    public boolean hasStaticAbilityKeyword() {
+        computeTraitFlagsIfDirty();
+        return hasStaticKw;
     }
 
     public boolean contains(Keyword keyword) {
@@ -56,6 +100,7 @@ public class KeywordCollection implements ICardTraitChanges, Iterable<KeywordInt
         Collection<KeywordInterface> list = map.get(keyword);
         if (list.isEmpty() || !inst.redundant(list)) {
             list.add(inst);
+            invalidateTraitFlags();
             return true;
         }
         return false;
@@ -89,15 +134,20 @@ public class KeywordCollection implements ICardTraitChanges, Iterable<KeywordInt
             }
         }
 
+        if (result) invalidateTraitFlags();
         return result;
     }
 
     public boolean remove(KeywordInterface keyword) {
-        return map.remove(keyword.getKeyword(), keyword);
+        boolean r = map.remove(keyword.getKeyword(), keyword);
+        if (r) invalidateTraitFlags();
+        return r;
     }
 
     public boolean removeAll(Keyword kenum) {
-        return !map.removeAll(kenum).isEmpty();
+        boolean r = !map.removeAll(kenum).isEmpty();
+        if (r) invalidateTraitFlags();
+        return r;
     }
 
     public boolean removeAll(Iterable<String> keywords) {
@@ -117,11 +167,13 @@ public class KeywordCollection implements ICardTraitChanges, Iterable<KeywordInt
                 result = true;
             }
         }
+        if (result) invalidateTraitFlags();
         return result;
     }
 
     public void clear() {
         map.clear();
+        invalidateTraitFlags();
     }
 
     public boolean contains(String keyword) {
