@@ -28,6 +28,7 @@ import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FButton;
+import forge.toolbox.FCheckBox;
 import forge.toolbox.FLabel;
 import forge.toolbox.FList;
 import forge.toolbox.FPanel;
@@ -59,6 +60,7 @@ public class DualListBox<T> extends FDialog {
     private final FButton removeAllButton;
     private final FButton okButton;
     private final FButton autoButton;
+    private final FCheckBox rememberDecisionCheckBox;
 
     private final FLabel orderedLabel;
     private final FLabel selectOrder;
@@ -151,6 +153,8 @@ public class DualListBox<T> extends FDialog {
         okButton.addActionListener(e -> _finish());
         autoButton = new FButton(Localizer.getInstance().getMessage("lblAuto"));
         autoButton.addActionListener(e -> { _addAll(); _finish(); });
+        rememberDecisionCheckBox = new FCheckBox(Localizer.getInstance().getMessage("lblRememberThisDecision"));
+        rememberDecisionCheckBox.setVisible(false);
 
         final FPanel leftPanel = new FPanel(new BorderLayout());
         selectOrder = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblSelectOrder") + ":").build();
@@ -195,6 +199,7 @@ public class DualListBox<T> extends FDialog {
         add(leftPanel, listConstraints);
         add(centerPanel, "w 100, h 300");
         add(rightPanel, listConstraints);
+        add(rememberDecisionCheckBox, "newline, span 3, growx, gaptop 5");
 
         _setButtonState();
 
@@ -250,6 +255,14 @@ public class DualListBox<T> extends FDialog {
             selectOrder.setText(Localizer.getInstance().getMessage("lblSideboard") + String.format(" (%d):", sourceListModel.getSize()));
             orderedLabel.setText(Localizer.getInstance().getMessage("ttMain") + String.format(" (%d):", destListModel.getSize()));
         }
+    }
+
+    public void setRememberDecisionVisible(final boolean visible) {
+        rememberDecisionCheckBox.setVisible(visible);
+    }
+
+    public boolean isRememberDecisionSelected() {
+        return rememberDecisionCheckBox.isSelected();
     }
 
     private void _handleListKey(KeyEvent e, Runnable onSpace, FList<T> arrowFocusTarget) {

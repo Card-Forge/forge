@@ -34,6 +34,8 @@ import java.util.List;
 import java.util.Map;
 
 public interface IGuiGame {
+    record OrderResult<T>(List<T> ordered, boolean rememberDecision) {}
+
     void setGameView(GameView gameView);
 
     /**
@@ -207,6 +209,11 @@ public interface IGuiGame {
 
     <T> List<T> order(String title, String top, List<T> sourceChoices, CardView c);
     <T> List<T> order(String title, String top, int remainingObjectsMin, int remainingObjectsMax, List<T> sourceChoices, List<T> destChoices, CardView referenceCard, boolean sideboardingMode);
+
+    default <T> OrderResult<T> orderWithRememberDecision(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
+            final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode) {
+        return new OrderResult<>(order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode), false);
+    }
 
     /**
      * Ask the user to insert an object into a list of other objects. The

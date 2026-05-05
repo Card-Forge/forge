@@ -22,6 +22,7 @@ import forge.game.card.CardView.CardStateView;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.model.FModel;
+import forge.gui.interfaces.IGuiGame;
 import forge.screens.match.CMatchUI;
 import forge.toolbox.FOptionPane;
 import forge.util.FSerializableFunction;
@@ -232,11 +233,17 @@ public class GuiChoose {
     }
     public static <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
             final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode, final CMatchUI matchUI) {
+        return orderWithRememberDecision(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode, matchUI, false).ordered();
+    }
+
+    public static <T> IGuiGame.OrderResult<T> orderWithRememberDecision(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
+            final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode, final CMatchUI matchUI, final boolean showRememberDecision) {
         // An input box for handling the order of choices.
 
-        final Callable<List<T>> callable = () -> {
+        final Callable<IGuiGame.OrderResult<T>> callable = () -> {
             final DualListBox<T> dual = new DualListBox<>(remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, matchUI);
             dual.setSecondColumnLabelText(top);
+            dual.setRememberDecisionVisible(showRememberDecision);
 
             dual.setSideboardMode(sideboardingMode);
 
@@ -250,22 +257,23 @@ public class GuiChoose {
             dual.setVisible(true);
 
             final List<T> objects = dual.getOrderedList();
+            final boolean rememberDecision = dual.isRememberDecisionSelected();
 
             dual.dispose();
             if (matchUI != null) {
                 matchUI.clearPanelSelections();
             }
-            return objects;
+            return new IGuiGame.OrderResult<>(objects, rememberDecision);
         };
 
-        final FutureTask<List<T>> ft = new FutureTask<>(callable);
+        final FutureTask<IGuiGame.OrderResult<T>> ft = new FutureTask<>(callable);
         FThreads.invokeInEdtAndWait(ft);
         try {
             return ft.get();
         } catch (final Exception e) { // we have waited enough
             e.printStackTrace();
         }
-        return null;
+        return new IGuiGame.OrderResult<>(null, false);
     }
 
     public static List<CardView> manipulateCardList(final CMatchUI gui, final String title, final Iterable<CardView> cards, final Iterable<CardView> manipulable, 
@@ -295,4 +303,3 @@ public class GuiChoose {
     }
 
 }
-
