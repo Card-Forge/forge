@@ -2,6 +2,7 @@ package forge.gamemodes.match;
 
 import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.player.AutoYieldStore;
 
 import java.io.Serializable;
@@ -16,9 +17,12 @@ public sealed interface YieldUpdate extends Serializable
         permits YieldUpdate.SetMarker,
                 YieldUpdate.ClearMarker,
                 YieldUpdate.StackYield,
+                YieldUpdate.SetAutoPassUntilEndOfTurn,
                 YieldUpdate.TriggerDecision,
                 YieldUpdate.CardAutoYield,
                 YieldUpdate.SkipPhase,
+                YieldUpdate.SetYieldBoolPref,
+                YieldUpdate.SetYieldStringPref,
                 YieldUpdate.SeedFromClient {
 
     /** {@code atOrPastAtClick}: priority was at-or-past target on owner's turn when the user clicked — computed by the UI so client cache and host PCH initialize identically. */
@@ -28,11 +32,17 @@ public sealed interface YieldUpdate extends Serializable
 
     record StackYield(PlayerView player, boolean active) implements YieldUpdate {}
 
+    record SetAutoPassUntilEndOfTurn(PlayerView player, boolean active) implements YieldUpdate {}
+
     record TriggerDecision(int trigId, AutoYieldStore.TriggerDecision decision) implements YieldUpdate {}
 
     record CardAutoYield(String cardKey, boolean active, boolean abilityScope) implements YieldUpdate {}
 
     record SkipPhase(PlayerView turnPlayer, PhaseType phase, boolean skip) implements YieldUpdate {}
+
+    record SetYieldBoolPref(FPref pref, boolean value) implements YieldUpdate {}
+
+    record SetYieldStringPref(FPref pref, String value) implements YieldUpdate {}
 
     record SeedFromClient(YieldStateSnapshot snapshot) implements YieldUpdate {}
 }

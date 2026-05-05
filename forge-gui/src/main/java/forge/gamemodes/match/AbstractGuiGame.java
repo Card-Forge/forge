@@ -622,6 +622,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         PlayerView pv;
         if (update instanceof YieldUpdate.ClearMarker u) pv = u.player();
         else if (update instanceof YieldUpdate.StackYield u) pv = u.player();
+        else if (update instanceof YieldUpdate.SetAutoPassUntilEndOfTurn u) pv = u.player();
         else return;
         IGameController c = getGameController(pv);
         if (c != null) c.applyYieldUpdate(update);

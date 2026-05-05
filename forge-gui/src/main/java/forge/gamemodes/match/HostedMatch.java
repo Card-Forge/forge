@@ -388,6 +388,7 @@ public class HostedMatch {
             }
             humanController.getGui().setGameSpeed(PlaybackSpeed.NORMAL);
             humanController.getYieldController().clearAutoYields();
+            humanController.getYieldController().resetForNewGame();
 
             if (humanCount > 0) //conceded
                 humanController.getGui().afterGameEnd();
@@ -425,10 +426,6 @@ public class HostedMatch {
         public Void visit(final UiEventBlockerAssigned event) {
             for (final PlayerControllerHuman humanController : humanControllers) {
                 humanController.getGui().updateSingleCard(event.blocker());
-                final PlayerView p = humanController.getPlayer().getView();
-                if (event.attackerBeingBlocked() != null && event.attackerBeingBlocked().getController().equals(p)) {
-                    humanController.autoPassCancel();
-                }
             }
             return null;
         }

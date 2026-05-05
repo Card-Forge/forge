@@ -30,9 +30,13 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
 import forge.game.card.CardView;
+import forge.game.player.PlayerView;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
+import forge.interfaces.IGameController;
+import forge.screens.match.CMatchUI;
 import forge.gui.framework.IVDoc;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -74,8 +78,21 @@ public class VPrompt implements IVDoc<CPrompt> {
     private KeyAdapter buttonKeyAdapter = new KeyAdapter() {
         @Override
         public void keyPressed(final KeyEvent e) {
-            if (e.getKeyCode() == KeyEvent.VK_ESCAPE
-                    && btnCancel.isEnabled()
+            if (e.getKeyCode() != KeyEvent.VK_ESCAPE) return;
+
+            // sendYieldUpdate (not applyYieldUpdate) so the clear reaches the host's PCH proxy
+            CMatchUI matchUI = controller.getMatchUI();
+            IGameController ctrl = matchUI == null ? null : matchUI.getGameController();
+            PlayerView local = matchUI == null ? null : matchUI.getCurrentPlayer();
+            if (ctrl != null && local != null && ctrl.getYieldController() != null
+                    && ctrl.getYieldController().isYieldActive()) {
+                ctrl.sendYieldUpdate(new YieldUpdate.ClearMarker(local));
+                ctrl.sendYieldUpdate(new YieldUpdate.StackYield(local, false));
+                ctrl.sendYieldUpdate(new YieldUpdate.SetAutoPassUntilEndOfTurn(local, false));
+                return;
+            }
+
+            if (btnCancel.isEnabled()
                     && (FModel.getPreferences().getPrefBoolean(FPref.UI_ALLOW_ESC_TO_END_TURN)
                             || !btnCancel.getText().equals(Localizer.getInstance().getMessage("lblEndTurn")))) {
                 btnCancel.doClick();

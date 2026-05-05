@@ -3,8 +3,10 @@ package forge.player;
 import com.google.common.collect.*;
 import forge.LobbyPlayer;
 import forge.StaticData;
+import forge.ai.AvailableActions;
 import forge.ai.GameState;
 import forge.ai.PlayerControllerAi;
+import forge.gamemodes.net.server.RemoteClientGuiGame;
 import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
@@ -47,6 +49,7 @@ import forge.game.zone.MagicStack;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.match.DeclineScope;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.match.YieldController;
 import forge.gamemodes.match.YieldUpdate;
@@ -927,6 +930,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     protected void reveal(final CardCollectionView cards, final ZoneType zone, final PlayerView owner, String message, boolean addSuffix) {
+        yieldController.maybeInterruptOnReveal();
         if (StringUtils.isBlank(message)) {
             message = localizer.getMessage("lblLookCardInPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase());
         } else if (addSuffix) {
@@ -1476,8 +1480,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 return; // don't prompt to declare attackers if user chose to
                 // end the turn and not attacking is legal
             }
-            // otherwise: cancel auto pass because of this unexpected attack
-            autoPassCancel();
         }
 
         // This input should not modify combat object itself, but should return user choice
@@ -1499,7 +1501,19 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 player.getName(), getGame().getPhaseHandler().getPhase(), getGame().isGameOver());
         final MagicStack stack = getGame().getStack();
 
-        if (mayAutoPass()) {
+        // Skip when already yielding — yield proceeds regardless of available-actions.
+        // Yield check first: it's a field read, vs needsAvailableActions which does 3 synced FPref reads.
+        if (!yieldController.isYieldActive() && needsAvailableActions()) {
+            long timeoutMs = computeAvailableActionsBudgetMs(getPlayer());
+            boolean result = AvailableActions.compute(getPlayer(), timeoutMs);
+            getPlayer().getView().setHasAvailableActions(result);
+        }
+
+        // Game-thread only; no cross-thread races on the YIELD_SUPPRESS_AFTER_END flag
+        boolean nowMayAutoPass = mayAutoPass();
+        yieldController.noteMayAutoPassResult(nowMayAutoPass);
+
+        if (nowMayAutoPass) {
             // avoid prompting for input if current phase is set to be
             // auto-passed instead posing a short delay if needed to
             // prevent the game jumping ahead too quick
@@ -1507,10 +1521,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             if (stack.isEmpty()) {
                 // make sure to briefly pause at phases you're not set up to skip
                 if (!isUiSetToSkipPhase(getGame().getPhaseHandler().getPlayerTurn().getView(),
-                        getGame().getPhaseHandler().getPhase())) {
+                        getGame().getPhaseHandler().getPhase())
+                        && !yieldController.getBoolPref(FPref.YIELD_SKIP_PHASE_DELAY)) {
                     delay = FControlGamePlayback.phasesDelay;
                 }
-            } else {
+            } else if (!yieldController.getBoolPref(FPref.YIELD_SKIP_RESOLVE_DELAY)) {
                 // pause slightly longer for spells and abilities on the stack resolving
                 delay = FControlGamePlayback.resolveDelay;
             }
@@ -1705,6 +1720,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void notifyOfValue(final SpellAbility sa, final GameObject realtedTarget, final String value) {
+        yieldController.maybeInterruptOnReveal();
         final String message = MessageUtil.formatNotificationMessage(sa, player, realtedTarget, value);
         if (sa != null && sa.isManaAbility()) {
             getGame().fireEvent(new GameEventAddLog(GameLogEntryType.LAND, message));
@@ -3459,15 +3475,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     public boolean isRemoteClient() {
-        return gui instanceof forge.gamemodes.net.server.RemoteClientGuiGame;
+        return gui instanceof RemoteClientGuiGame;
     }
 
     public boolean mayAutoPass() {
-        return yieldController.shouldAutoYield();
+        return yieldController.shouldAutoYield()
+                || yieldController.isAutoPassingNoActions(getLocalPlayerView());
     }
 
     public void autoPassUntilEndOfTurn() {
-        yieldController.setAutoPassUntilEOTWithoutInterruptions(true);
+        yieldController.setAutoPassUntilEndOfTurn(true);
         getGui().updateAutoPassPrompt();
     }
 
@@ -3476,7 +3493,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (!mayAutoPass()) {
             return;
         }
-        yieldController.setAutoPassUntilEOTWithoutInterruptions(false);
+        yieldController.setAutoPassUntilEndOfTurn(false);
         PlayerView playerView = getLocalPlayerView();
         getGui().showPromptMessage(playerView, "");
         getGui().updateButtons(playerView, false, false, false);
@@ -3539,29 +3556,55 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void applyYieldUpdate(final YieldUpdate update) {
-        boolean activatedYield = false;
-        if (update instanceof YieldUpdate.SetMarker u) {
-            yieldController.setMarker(u.phaseOwner(), u.phase(), u.atOrPastAtClick());
-            activatedYield = true;
-        } else if (update instanceof YieldUpdate.ClearMarker) {
-            yieldController.clearMarker();
-        } else if (update instanceof YieldUpdate.StackYield u) {
-            yieldController.setAutoPassUntilStackEmpty(u.active());
-            activatedYield = u.active();
-        } else if (update instanceof YieldUpdate.TriggerDecision u) {
-            yieldController.setTriggerDecision(u.trigId(), u.decision());
-        } else if (update instanceof YieldUpdate.CardAutoYield u) {
-            yieldController.applyAutoYieldFromWire(u.cardKey(), u.active());
-        } else if (update instanceof YieldUpdate.SkipPhase u) {
-            yieldController.setSkipPhase(u.turnPlayer(), u.phase(), u.skip());
-        } else if (update instanceof YieldUpdate.SeedFromClient u) {
-            yieldController.applyClientSeed(u.snapshot());
-        }
-        if (activatedYield) {
-            // Switch the cancel button + prompt to "Yielding until X" so the user can disarm.
-            // Otherwise the previous InputPassPriority "End Turn" label would persist and ESC
-            // would skip the click on the client.
+        if (yieldController.apply(update)) {
+            // Refresh prompt so cancel button reflects "Yielding until X" instead of stale "End Turn".
             getGui().updateAutoPassPrompt();
         }
+        tryAutoPassNow();
+    }
+
+    @Override
+    public void setYieldBoolPref(final FPref pref, final boolean value) {
+        yieldController.setBoolPref(pref, value);
+        tryAutoPassNow();
+    }
+
+    @Override
+    public void setYieldStringPref(final FPref pref, final String value) {
+        yieldController.setStringPref(pref, value);
+    }
+
+    /** Re-evaluate mayAutoPass at the current prompt; click OK if it would now fire.
+     *  Same compute gating as {@link #chooseSpellAbilityToPlay} so the actions field is fresh. */
+    private void tryAutoPassNow() {
+        if (!(inputQueue.getInput() instanceof InputPassPriority)) return;
+        if (yieldController.isYieldActive()) return;
+        if (needsAvailableActions()) {
+            long timeoutMs = computeAvailableActionsBudgetMs(getPlayer());
+            getPlayer().getView().setHasAvailableActions(AvailableActions.compute(getPlayer(), timeoutMs));
+        }
+        if (mayAutoPass()) {
+            selectButtonOk();
+        }
+    }
+
+    /** True iff some yield consumer needs the synced wire field. */
+    private boolean needsAvailableActions() {
+        if (yieldController.getBoolPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS)) return true;
+        if (yieldController.getDeclineScope(FPref.YIELD_DECLINE_SCOPE_NO_ACTIONS) != DeclineScope.NEVER) return true;
+        if (yieldController.getDeclineScope(FPref.YIELD_DECLINE_SCOPE_STACK_YIELD) != DeclineScope.NEVER) return true;
+        return false;
+    }
+
+    /** Pref &gt; 0 = explicit override; 0 = Dynamic = 50ms × playable cards, clamped to [50, 1500]. */
+    private long computeAvailableActionsBudgetMs(Player p) {
+        String prefStr = yieldController.getStringPref(FPref.YIELD_AVAILABLE_ACTIONS_BUDGET_MS);
+        int prefMs;
+        try { prefMs = Integer.parseInt(prefStr); } catch (NumberFormatException e) { prefMs = 0; }
+        if (prefMs > 0) return prefMs;
+        int cardCount = p.getCardsIn(ZoneType.Hand).size()
+                + p.getCardsIn(ZoneType.Battlefield).size()
+                + p.getCardsIn(ZoneType.Flashback).size();
+        return Math.min(1500L, Math.max(50L, 50L * cardCount));
     }
 }

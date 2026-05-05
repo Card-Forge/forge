@@ -8,6 +8,7 @@
 	</cell>
 	<cell x="0.0" y="0.643" w="0.2" h="0.357">
 		<doc>REPORT_MESSAGE</doc>
+		<doc>REPORT_YIELD</doc>
 		<doc>DEV_MODE</doc>
 		<doc>CARD_ANTES</doc>
 		<doc>BUTTON_DOCK</doc>

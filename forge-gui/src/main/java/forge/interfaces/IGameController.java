@@ -8,6 +8,7 @@ import forge.game.spellability.SpellAbilityView;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.match.YieldController;
 import forge.gamemodes.match.YieldUpdate;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.util.ITriggerEvent;
 
 public interface IGameController {
@@ -83,4 +84,8 @@ public interface IGameController {
     }
 
     YieldController getYieldController();
+
+    /** Setter dispatches the per-PCH envelope; reads go via getYieldController(). */
+    void setYieldBoolPref(FPref pref, boolean value);
+    void setYieldStringPref(FPref pref, String value);
 }

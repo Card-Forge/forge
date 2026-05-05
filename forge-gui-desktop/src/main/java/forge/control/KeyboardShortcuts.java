@@ -18,14 +18,18 @@ import javax.swing.SwingUtilities;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Singletons;
+import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gui.framework.EDocID;
+import forge.interfaces.IGameController;
 import forge.gui.framework.SDisplayUtil;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.home.settings.VSubmenuPreferences.KeyboardShortcutField;
 import forge.screens.match.CMatchUI;
+import forge.screens.match.VYieldSettings;
 import forge.toolbox.special.CardZoomer;
 import forge.util.Localizer;
 import forge.view.KeyboardShortcutsDialog;
@@ -261,6 +265,39 @@ public class KeyboardShortcuts {
             }
         };
 
+        final Action actYieldOptions = new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
+                if (matchUI == null) { return; }
+                SwingUtilities.invokeLater(() -> new VYieldSettings(matchUI).showDialog());
+            }
+        };
+
+        final Action actAutoPassNoActions = new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
+                if (matchUI == null || matchUI.getCYield() == null) { return; }
+                matchUI.getCYield().toggleAutoPass();
+            }
+        };
+
+        final Action actCancelYield = new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
+                if (matchUI == null) { return; }
+                IGameController ctrl = matchUI.getGameController();
+                PlayerView local = matchUI.getCurrentPlayer();
+                if (ctrl == null || local == null || ctrl.getYieldController() == null) { return; }
+                if (!ctrl.getYieldController().isYieldActive()) { return; }
+                ctrl.sendYieldUpdate(new YieldUpdate.ClearMarker(local));
+                ctrl.sendYieldUpdate(new YieldUpdate.StackYield(local, false));
+                ctrl.sendYieldUpdate(new YieldUpdate.SetAutoPassUntilEndOfTurn(local, false));
+            }
+        };
+
         final Localizer localizer = Localizer.getInstance();
         //========== Instantiate shortcut objects and add to list.
         list.add(new Shortcut(FPref.SHORTCUT_SHOWSTACK, localizer.getMessage("lblSHORTCUT_SHOWSTACK"), actShowStack, am, im));
@@ -274,6 +311,9 @@ public class KeyboardShortcuts {
         list.add(new Shortcut(FPref.SHORTCUT_SHOWTARGETING, localizer.getMessage("lblSHORTCUT_SHOWTARGETING"), actTgtOverlay, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_AUTOYIELD_ALWAYS_YES, localizer.getMessage("lblSHORTCUT_AUTOYIELD_ALWAYS_YES"), actAutoYieldAndYes, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_AUTOYIELD_ALWAYS_NO, localizer.getMessage("lblSHORTCUT_AUTOYIELD_ALWAYS_NO"), actAutoYieldAndNo, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_YIELD_OPTIONS, localizer.getMessage("lblSHORTCUT_YIELD_OPTIONS"), actYieldOptions, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_YIELD_AUTO_PASS, localizer.getMessage("lblSHORTCUT_YIELD_AUTO_PASS"), actAutoPassNoActions, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_YIELD_CANCEL, localizer.getMessage("lblSHORTCUT_YIELD_CANCEL"), actCancelYield, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_MACRO_RECORD, localizer.getMessage("lblSHORTCUT_MACRO_RECORD"), actMacroRecord, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_MACRO_NEXT_ACTION, localizer.getMessage("lblSHORTCUT_MACRO_NEXT_ACTION"), actMacroNextAction, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_CARD_ZOOM, localizer.getMessage("lblSHORTCUT_CARD_ZOOM"), actZoomCard, am, im));

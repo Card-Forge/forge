@@ -19,6 +19,7 @@ import forge.menus.MenuUtil;
 import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.VAutoYields;
+import forge.screens.match.VYieldSettings;
 import forge.screens.match.views.VField;
 import forge.screens.match.controllers.CDock.ArcState;
 import forge.toolbox.FSkin.SkinIcon;
@@ -57,6 +58,7 @@ public final class GameMenu {
         menu.add(getMenuItem_TokensSeparateRow());
         menu.add(getMenuItem_SeparateCombatStacks());
         menu.add(getMenuItem_AutoYields());
+        menu.add(getMenuItem_YieldSettings());
         menu.addSeparator();
         menu.add(getMenuItem_ViewDeckList());
         return menu;
@@ -187,6 +189,14 @@ public final class GameMenu {
         return e -> {
             new VAutoYields(matchUI).showAutoYields();
         };
+    }
+
+    private SkinnedMenuItem getMenuItem_YieldSettings() {
+        final Localizer localizer = Localizer.getInstance();
+        final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblYieldSettings"));
+        menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_SETTINGS) : null));
+        menuItem.addActionListener(e -> new VYieldSettings(matchUI).showDialog());
+        return menuItem;
     }
 
     private SkinnedMenuItem getMenuItem_ViewDeckList() {
