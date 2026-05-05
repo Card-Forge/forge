@@ -307,10 +307,8 @@ public class VStack implements IVDoc<CStack> {
         public AbilityMenu(){
             jmiAutoYield = new JCheckBoxMenuItem(Localizer.getInstance().getMessage("cbpAutoYieldMode"));
             jmiAutoYield.addActionListener(arg0 -> {
-                final String key = item.getKey();
-                final boolean autoYield = controller.getMatchUI().getGameController().shouldAutoYield(key);
-                boolean abilityScope = controller.getMatchUI().getGameController().getYieldController().isAbilityScope();
-                controller.getMatchUI().getGameController().setShouldAutoYield(key, !autoYield, abilityScope);
+                final boolean autoYield = controller.getMatchUI().getGameController().shouldAutoYield(triggerYieldKey);
+                controller.getMatchUI().getGameController().setShouldAutoYield(triggerYieldKey, !autoYield, triggerAbilityScope);
                 if (!autoYield && controller.getMatchUI().getGameView().peekStack() == item) {
                     //auto-pass priority if ability is on top of stack
                     controller.getMatchUI().getGameController().passPriority();
