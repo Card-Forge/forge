@@ -74,6 +74,10 @@ public class BoosterDraft implements IBoosterDraft {
     static final List<CustomLimited> customs = new ArrayList<>();
     protected LimitedPoolType draftFormat;
 
+    // Surplus cube cards left over after boosters are distributed; used by Lore Seeker
+    private UnOpenedProduct cubeProduct = null;
+    private List<PaperCard> cubeSurplus = null;
+
     protected final List<IUnOpenedProduct> product = new ArrayList<>();
     public static void initializeCustomDrafts() {
         loadCustomDrafts();
@@ -407,6 +411,7 @@ public class BoosterDraft implements IBoosterDraft {
 
         final UnOpenedProduct toAdd = new UnOpenedProduct(tpl, dPool);
         toAdd.setLimitedPool(draft.isSingleton());
+        this.cubeProduct = toAdd; // retain reference to capture surplus after initialization
         for (int i = 0; i < draft.getNumPacks(); i++) {
             this.product.add(toAdd);
         }
@@ -501,7 +506,26 @@ public class BoosterDraft implements IBoosterDraft {
                 this.players.get(i).receiveUnopenedPack(pack);
             }
         }
+        // Capture surplus cube cards left over after all packs are distributed.
+        // These are used by Lore Seeker to add a cube booster mid-draft.
+        if (cubeProduct != null) {
+            cubeSurplus = new ArrayList<>(cubeProduct.getRemainingCards());
+            Collections.shuffle(cubeSurplus);
+        }
         startRound();
+    }
+
+    /** Returns a DraftPack drawn from cube surplus cards (for Lore Seeker in cube drafts).
+     *  Returns null if this is not a cube draft or surplus is exhausted. */
+    @Override
+    public DraftPack addBooster() {
+        if (cubeSurplus == null || cubeSurplus.isEmpty()) {
+            return null;
+        }
+        int packSize = Math.min(currentBoosterSize > 0 ? currentBoosterSize : 15, cubeSurplus.size());
+        List<PaperCard> cards = new ArrayList<>(cubeSurplus.subList(0, packSize));
+        cubeSurplus.subList(0, packSize).clear();
+        return new DraftPack(cards, nextId++);
     }
 
     public boolean startRound() {

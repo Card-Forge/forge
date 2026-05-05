@@ -49,6 +49,9 @@ public interface IBoosterDraft {
     boolean hasNextChoice();
     boolean isRoundOver();
     DraftPack addBooster(CardEdition edition);
+
+    /** Returns a booster from cube surplus (Lore Seeker in cube drafts). Null if not a cube draft or surplus exhausted. */
+    default DraftPack addBooster() { return null; }
     Deck[] getComputerDecks(); // size 7, all the computers decks
     LimitedPlayer[] getOpposingPlayers(); // size 7, all the computers
     LimitedPlayer getHumanPlayer();
