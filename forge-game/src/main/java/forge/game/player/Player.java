@@ -3709,11 +3709,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             return true;
         }
 
-        if (hasKeyword("CantSearchLibrary")) {
-            return false;
-        }
-        return targetPlayer == null || !targetPlayer.equals(sa.getActivatingPlayer())
-                || !hasKeyword("Spells and abilities you control can't cause you to search your library.");
+        return !StaticAbilitySearchLibrary.cantSearchLibrary(this, sa);
     }
 
     public void addAdditionalVote(long timestamp, int value) {

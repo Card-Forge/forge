@@ -144,7 +144,6 @@ CARDNAME is replaced by the card's name ingame.
 - CARDNAME must be blocked if able.
 - Remove CARDNAME from your deck before playing if you're not playing for ante.
 - You may choose not to untap CARDNAME during your untap step.
-- CantSearchLibrary
 
 # General SVars
 * `SoundEffect:<file.mp3>`
