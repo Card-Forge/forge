@@ -1,0 +1,47 @@
+[metadata]
+Code=HOB
+Date=2026-08-14
+Name=The Hobbit
+Type=Expansion
+ScryfallCode=HOB
+
+[cards]
+29 R An Unexpected Party @Matt Stewart
+32 U Bilbo, Luckwearer @Anna Steinbauer
+33 M Bilbo, Thief in the Night @Nia Kovalevski
+53 R Riddles in the Dark @Lorenzo Mastroianni
+110 M Smaug the Magnificent @Francisco Miyara
+114 M Thorin, Mountain-king @Javier Charro
+142 C Wood Elves @Andreia Ugrai
+169 R Tom, Bert, and William @Leonardo Borazio
+170 M The Arkenstone @Gaboleps
+176 R My Precious @Valera Lutfullina
+194 L Plains @WFlemming Illustration
+195 L Island @WFlemming Illustration
+196 L Swamp @WFlemming Illustration
+197 L Mountain @WFlemming Illustration
+198 L Forest @WFlemming Illustration
+219 M Bilbo, Thief in the Night @Ashley Mackenzie
+229 M Smaug the Magnificent @John Tedrick
+234 M The Arkenstone @Francisco Badilla
+235 R My Precious @Barbara Rosiak
+243 M Thorin, Mountain-king @James Bousema
+247 M The Arkenstone @Tyler Jacobson
+249 M Smaug the Magnificent @Ted Nasmith
+255 M Bilbo, Thief in the Night @Ashley Mackenzie
+265 M Smaug the Magnificent @John Tedrick
+270 M The Arkenstone @Francisco Badilla
+271 R My Precious @Barbara Rosiak
+279 M Thorin, Mountain-king @James Bousema
+283 M The Arkenstone @Tyler Jacobson
+289 R An Unexpected Party @Matt Stewart
+292 R Riddles in the Dark @Lorenzo Mastroianni
+312 R Tom, Bert, and William @Leonardo Borazio
+313 L Plains @David Petersen
+314 L Plains @David Petersen
+315 L Plains @David Petersen
+316 L Plains @David Petersen
+317 L Plains @David Petersen
+318 L Plains @David Petersen
+319 L Plains @David Petersen
+320 L Plains @David Petersen

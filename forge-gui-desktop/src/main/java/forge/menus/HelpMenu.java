@@ -10,6 +10,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
+import forge.error.ExceptionHandler;
 import forge.localinstance.properties.ForgeConstants;
 import forge.toolbox.FOptionPane;
 import forge.util.BuildInfo;
@@ -86,7 +87,7 @@ public final class HelpMenu {
     private static JMenuItem getMenuItem_OpenLogFile() {
         final Localizer localizer = Localizer.getInstance();
         JMenuItem menuItem = new JMenuItem(localizer.getMessage("lblOpenLogFile"));
-        menuItem.addActionListener(getOpenFileAction(getAbsoluteFile(ForgeConstants.LOG_FILE)));
+        menuItem.addActionListener(getOpenFileAction(ExceptionHandler.getActiveLogFile()));
         return menuItem;
     }
 

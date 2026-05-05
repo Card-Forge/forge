@@ -10,6 +10,7 @@ import forge.trackable.TrackableTypes.TrackableType;
 import forge.trackable.Tracker;
 
 import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
 
 import net.jpountz.lz4.LZ4BlockOutputStream;
 
@@ -27,41 +28,19 @@ import java.util.List;
  * ({@link CObjectOutputStream}, {@link CObjectInputStream}).
  */
 public final class TrackableSerializer {
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+
     static final byte TYPE_CARD_VIEW = 0;
     static final byte TYPE_PLAYER_VIEW = 1;
 
-    /**
-     * Lightweight serializable marker that replaces a TrackableObject reference.
-     */
-    static final class IdRef implements Serializable {
-        private static final long serialVersionUID = 1L;
-        final byte typeTag;
-        final int id;
-
-        IdRef(byte typeTag, int id) {
-            this.typeTag = typeTag;
-            this.id = id;
-        }
+    /** Marker for tracker-stable refs (top-level protocol method args, and PlayerView in events). */
+    record IdRef(byte typeTag, int id) implements Serializable {
+        @Serial private static final long serialVersionUID = 1L;
     }
 
-    /**
-     * Marker for a stale CardView reference — the object holds a previous
-     * incarnation of a card (same ID, different Java object) that has since
-     * been replaced in the tracker by a zone-change copy. Carries the
-     * image key and name so the decoder can construct a detached CardView
-     * with the correct display data.
-     */
-    static final class StaleCardRef implements Serializable {
-        private static final long serialVersionUID = 1L;
-        final int id;
-        final String imageKey;
-        final String name;
-
-        StaleCardRef(int id, String imageKey, String name) {
-            this.id = id;
-            this.imageKey = imageKey;
-            this.name = name;
-        }
+    /** CardView ref inside a wrapped event. {@code preserveSnapshot=true} forces fallback even if the tracker has the id. */
+    record EventCardRef(int id, String name, String imageKey, boolean preserveSnapshot) implements Serializable {
+        @Serial private static final long serialVersionUID = 1L;
     }
 
     static byte typeTagFor(TrackableObject obj) {
@@ -80,59 +59,66 @@ public final class TrackableSerializer {
 
     /**
      * Replaces TrackableObject references with {@link IdRef} markers, or
-     * {@link StaleCardRef} markers for CardViews whose tracker entry has
-     * been replaced by a zone-change copy. When {@code tracker} is null,
-     * stale detection is skipped (used by the client encoder, which has
-     * no game-state awareness).
+     * {@link EventCardRef} markers for CardViews inside wrapped events
+     * ({@code eventMode = true}). When the tracker holds a different object
+     * for the CardView's id (zone-change copy), {@code preserveSnapshot} is
+     * set so the receiver decodes a detached CardView from the carried name
+     * and image key. When {@code tracker} is null, the snapshot check is
+     * skipped (used by the client encoder, which has no game-state awareness).
      */
-    static Object replace(Object obj, Tracker tracker) {
+    static Object replace(Object obj, Tracker tracker, boolean eventMode) {
         if (obj instanceof TrackableObject trackable) {
             byte tag = typeTagFor(trackable);
-            if (tag >= 0) {
-                if (tracker != null) {
-                    TrackableType<?> type = trackableTypeFor(tag);
-                    if (type != null) {
-                        Object tracked = tracker.getObj(type, trackable.getId());
-                        if (tracked != trackable && tag == TYPE_CARD_VIEW && tracked != null) {
-                            // Stale reference: previous incarnation of this card
-                            CardView cv = (CardView) trackable;
-                            String imgKey = cv.getCurrentState() != null
-                                    ? cv.getCurrentState().getImageKey(null) : null;
-                            return new StaleCardRef(cv.getId(), imgKey, cv.getName());
-                        }
-                    }
-                }
+            if (tag < 0) return obj;
+
+            if (!eventMode || tag == TYPE_PLAYER_VIEW) {
                 return new IdRef(tag, trackable.getId());
             }
+
+            boolean preserveSnapshot = false;
+            if (tracker != null) {
+                TrackableType<?> type = trackableTypeFor(tag);
+                if (type != null) {
+                    Object tracked = tracker.getObj(type, trackable.getId());
+                    if (tracked != null && tracked != trackable) {
+                        preserveSnapshot = true;
+                    }
+                }
+            }
+            CardView cv = (CardView) trackable;
+            String imgKey = cv.getCurrentState() != null
+                    ? cv.getCurrentState().getImageKey(null) : null;
+            return new EventCardRef(trackable.getId(), cv.getName(), imgKey, preserveSnapshot);
         }
         return obj;
     }
 
     /**
-     * Resolves {@link IdRef} and {@link StaleCardRef} markers back to
+     * Resolves {@link IdRef} and {@link EventCardRef} markers back to
      * TrackableObjects from the given Tracker.
      */
     static Object resolve(Object obj, Tracker tracker) {
-        if (obj instanceof StaleCardRef ref) {
-            // Create a detached CardView with the correct image key.
-            // Not registered in the tracker — used only for display
-            // (game log thumbnail) so it won't affect live game state.
-            CardView detached = new CardView(ref.id, tracker);
-            if (ref.name != null) {
-                detached.set(TrackableProperty.Name, ref.name);
-                detached.getCurrentState().set(TrackableProperty.Name, ref.name);
+        if (obj instanceof EventCardRef ref) {
+            if (!ref.preserveSnapshot()) {
+                CardView fromTracker = tracker.getObj(TrackableTypes.CardViewType, ref.id());
+                if (fromTracker != null) return fromTracker;
             }
-            if (ref.imageKey != null) {
-                detached.getCurrentState().set(TrackableProperty.ImageKey, ref.imageKey);
+            CardView detached = new CardView(ref.id(), tracker);
+            if (ref.name() != null) {
+                detached.set(TrackableProperty.Name, ref.name());
+                detached.getCurrentState().set(TrackableProperty.Name, ref.name());
+            }
+            if (ref.imageKey() != null) {
+                detached.getCurrentState().set(TrackableProperty.ImageKey, ref.imageKey());
             }
             return detached;
         }
         if (obj instanceof IdRef ref) {
-            TrackableType<?> type = trackableTypeFor(ref.typeTag);
+            TrackableType<?> type = trackableTypeFor(ref.typeTag());
             if (type != null) {
-                Object resolved = tracker.getObj(type, ref.id);
+                Object resolved = tracker.getObj(type, ref.id());
                 if (resolved == null) {
-                    Logger.warn("Could not resolve IdRef(tag={}, id={}) from Tracker", ref.typeTag, ref.id);
+                    netLog.warn("Could not resolve IdRef(tag={}, id={}) from Tracker", ref.typeTag(), ref.id());
                 }
                 return resolved;
             }
@@ -149,7 +135,7 @@ public final class TrackableSerializer {
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             LZ4BlockOutputStream lz4Out = new LZ4BlockOutputStream(baos);
-            ObjectOutputStream oos = tracker == null ? new ObjectOutputStream(lz4Out) : new ReplacingOutputStream(lz4Out, tracker);
+            ObjectOutputStream oos = tracker == null ? new ObjectOutputStream(lz4Out) : new ReplacingOutputStream(lz4Out, tracker, false);
             oos.writeObject(obj);
             oos.close();
             return baos.size();
@@ -160,7 +146,7 @@ public final class TrackableSerializer {
 
     /**
      * Serializable wrapper for a GameEvent whose TrackableObject references
-     * have been replaced with IdRef/StaleCardRef markers. Stored in
+     * have been replaced with IdRef/EventCardRef markers. Stored in
      * DeltaPacket.events so events travel as compact byte arrays rather than
      * full object graphs. Unwrapped after delta state is applied, when the
      * client tracker is populated.
@@ -180,12 +166,12 @@ public final class TrackableSerializer {
         for (GameEvent event : events) {
             try {
                 ByteArrayOutputStream baos = new ByteArrayOutputStream(256);
-                try (ReplacingOutputStream out = new ReplacingOutputStream(baos, tracker)) {
+                try (ReplacingOutputStream out = new ReplacingOutputStream(baos, tracker, true)) {
                     out.writeObject(event);
                 }
                 wrapped.add(new WrappedEvent(baos.toByteArray()));
             } catch (IOException e) {
-                Logger.warn("Failed to wrap event {}: {}", event.getClass().getSimpleName(), e.getMessage());
+                netLog.warn("Failed to wrap event {}: {}", event.getClass().getSimpleName(), e.getMessage());
             }
         }
         return wrapped;
@@ -207,7 +193,7 @@ public final class TrackableSerializer {
                         if (obj instanceof GameEvent e) events.add(e);
                     }
                 } catch (IOException | ClassNotFoundException e) {
-                    Logger.warn("Failed to unwrap event: {}", e.getMessage());
+                    netLog.warn("Failed to unwrap event: {}", e.getMessage());
                 }
             }
         }
@@ -216,16 +202,18 @@ public final class TrackableSerializer {
 
     static class ReplacingOutputStream extends ObjectOutputStream {
         private final Tracker tracker;
+        private final boolean eventMode;
 
-        ReplacingOutputStream(OutputStream out, Tracker tracker) throws IOException {
+        ReplacingOutputStream(OutputStream out, Tracker tracker, boolean eventMode) throws IOException {
             super(out);
             this.tracker = tracker;
+            this.eventMode = eventMode;
             enableReplaceObject(true);
         }
 
         @Override
         protected Object replaceObject(Object obj) {
-            return replace(obj, tracker);
+            return replace(obj, tracker, eventMode);
         }
     }
 
@@ -236,6 +224,23 @@ public final class TrackableSerializer {
             super(in);
             this.tracker = tracker;
             enableResolveObject(true);
+        }
+
+        // Android desugars records to classes with computed serialVersionUID; the JVM keeps records at 0L.
+        // Fall through to the local descriptor when UIDs mismatch.
+        @Override
+        protected ObjectStreamClass readClassDescriptor() throws IOException, ClassNotFoundException {
+            ObjectStreamClass streamDesc = super.readClassDescriptor();
+            try {
+                Class<?> localClass = Class.forName(streamDesc.getName());
+                ObjectStreamClass localDesc = ObjectStreamClass.lookup(localClass);
+                if (localDesc != null && streamDesc.getSerialVersionUID() != localDesc.getSerialVersionUID()) {
+                    return localDesc;
+                }
+            } catch (ClassNotFoundException ignored) {
+                // Class not found locally — fall through to stream descriptor.
+            }
+            return streamDesc;
         }
 
         @Override

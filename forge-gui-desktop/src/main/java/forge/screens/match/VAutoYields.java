@@ -34,7 +34,7 @@ public class VAutoYields extends FDialog {
         setTitle(Localizer.getInstance().getMessage("lblAutoYields"));
 
         autoYields = new ArrayList<>();
-        for (final String autoYield : matchUI.getGameController().getAutoYields()) {
+        for (final String autoYield : matchUI.getGameController().getYieldController().getAutoYields()) {
             autoYields.add(autoYield);
         }
         lstAutoYields = new FList<>(new AutoYieldsListModel());

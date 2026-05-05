@@ -51,6 +51,8 @@ import forge.trackable.Tracker;
 import forge.util.*;
 import forge.util.collect.FCollection;
 import org.apache.commons.lang3.tuple.Pair;
+import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
 
 import java.util.*;
 import java.util.function.Predicate;
@@ -59,6 +61,8 @@ import java.util.function.Predicate;
  * Represents the state of a <i>single game</i>, a new instance is created for each game.
  */
 public class Game {
+
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
 
     private static int maxId = 0;
     private static int nextId() { return ++maxId; }
@@ -551,6 +555,11 @@ public class Game {
     }
 
     public synchronized void setGameOver(GameEndReason reason) {
+        // early exit in case many events causing a game over have fired
+        if (age == GameStage.GameOver) {
+            return;
+        }
+
         for (Player p : allPlayers) {
             p.clearController();
         }
@@ -698,8 +707,6 @@ public class Game {
             if (p != null) {
                 visit.visitAll(p.getZone(view.getZone()));
             }
-        } else {
-            forEachCardInGame(visit);
         }
         // Zone-specific search may miss if the view has stale zone info
         // (e.g. IdRef resolved from a tracker that wasn't updated after a
@@ -707,7 +714,12 @@ public class Game {
         if (visit.getFound() == null) {
             forEachCardInGame(visit);
         }
-        return visit.getFound();
+        Card found = visit.getFound();
+        if (found == null) {
+            netLog.error("findByView: id={} (zone={}, controller={}) not found in any zone — returning null",
+                    view.getId(), view.getZone(), view.getController());
+        }
+        return found;
     }
 
     public Card findById(int id) {

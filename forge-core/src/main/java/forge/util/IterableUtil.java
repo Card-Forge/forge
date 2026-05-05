@@ -14,7 +14,6 @@ import java.util.stream.StreamSupport;
  */
 public class IterableUtil {
 
-
     /**
      * Merges a collection of predicates into a single predicate,
      * which requires the subject to match each of the component predicates.

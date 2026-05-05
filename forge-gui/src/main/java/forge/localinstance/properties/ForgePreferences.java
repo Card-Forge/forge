@@ -103,6 +103,9 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_SR_OPTIMIZE ("false"),
         UI_OPEN_PACKS_INDIV ("false"),
         UI_STACK_CREATURES ("false"),
+        UI_SEPARATE_COMBAT_STACKS("false"),
+        UI_GROUP_PERMANENTS ("default"),
+        UI_MAX_STACK_DEPTH ("4"),
         UI_TOKENS_IN_SEPARATE_ROW("false"),
         UI_SCALE_LARGER ("true"),
         UI_RENDER_BLACK_BORDERS ("true"),
@@ -198,6 +201,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         AUTO_UPDATE("none"),
         USE_SENTRY("false"), // this controls whether automated bug reporting is done or not
         CHECK_SNAPSHOT_AT_STARTUP("true"),
+        MAX_LOG_FILES("10"), // applied per category: up to N forge.*.log backups AND N network log entries
 
         MATCH_HOT_SEAT_MODE("false"), //this only applies to mobile game
 
