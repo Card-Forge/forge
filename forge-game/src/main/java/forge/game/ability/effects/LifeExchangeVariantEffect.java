@@ -62,9 +62,9 @@ public class LifeExchangeVariantEffect extends SpellAbilityEffect {
         } else if ("Toughness".equals(mode)) {
             num = source.getNetToughness();
             toughness = pLife;
+        } else {
+            return;
         }
-        // We cannot safely return early here as no net change in life total might
-        // not mean no net change in power or toughness if they are modified.
 
         if (!source.isInPlay()) {
             return;
