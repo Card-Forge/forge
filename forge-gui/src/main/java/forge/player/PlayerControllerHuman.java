@@ -48,6 +48,8 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.NextGameDecision;
+import forge.gamemodes.match.YieldController;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.match.input.*;
 import forge.util.IHasForgeLog;
 import forge.gui.FThreads;
@@ -100,16 +102,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     private IGuiGame gui;
 
-    // Inlined server-side mirror used only when this controller serves a remote network
-    // player (gui instanceof RemoteClientGuiGame). Two scope buckets so the host doesn't
-    // need to know the client's UI_AUTO_YIELD_MODE: the client tells us which bucket via
-    // the isAbilityScope flag on setShouldAutoYield.
-    private final Set<String> remoteCardYields = Sets.newHashSet();
-    private final Set<String> remoteAbilityYields = Sets.newHashSet();
-    private final Map<Integer, Boolean> remoteTriggerDecisions = Maps.newTreeMap();
-    private boolean remoteAutoYieldsDisabled;
-    // Empty/missing entry returns false (don't skip), matching a fresh UI's conservative default
-    private final Map<PlayerView, EnumSet<PhaseType>> remoteSkipPhases = Maps.newHashMap();
+    private final YieldController yieldController = new YieldController(this);
 
     protected final InputQueue inputQueue;
     protected final InputProxy inputProxy;
@@ -137,6 +130,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     public final void setGui(final IGuiGame gui) {
         this.gui = gui;
+    }
+
+    public YieldController getYieldController() {
+        return yieldController;
     }
 
     public final InputQueue getInputQueue() {
@@ -1529,8 +1526,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         if (stack.isEmpty()) {
-            if (isUiSetToSkipPhase(getGame().getPhaseHandler().getPlayerTurn().getView(),
-                    getGame().getPhaseHandler().getPhase())) {
+            if (isUiSetToSkipPhase(getGame().getPhaseHandler().getPlayerTurn().getView(), getGame().getPhaseHandler().getPhase())) {
                 netLog.trace("Returning null (skipPhase) for player {}", player.getName());
                 return null; // avoid prompt for input if stack is empty and
                 // player is set to skip the current phase
@@ -2369,7 +2365,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 // ensure prompt updated if needed
                 currentInput.showMessageInitial();
             }
-            if (gui.isNetGame()) {
+            if (getGui().isNetGame()) {
                 // Flush events to remote clients — the undo modifies game state
                 // (untaps lands, etc.) after the prompt is shown, and without this
                 // the updated state sits in the forwarder buffer until the next action.
@@ -3345,23 +3341,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
     }
 
-    public boolean mayAutoPass() {
-        return getGui().mayAutoPass(getLocalPlayerView());
-    }
-
-    public void autoPassUntilEndOfTurn() {
-        getGui().autoPassUntilEndOfTurn(getLocalPlayerView());
-    }
-
-    @Override
-    public void autoPassCancel() {
-        if (getGui() == null) {
-            return;
-        }
-
-        getGui().autoPassCancel(getLocalPlayerView());
-    }
-
     @Override
     public void awaitNextInput() {
         getGui().awaitNextInput();
@@ -3479,140 +3458,110 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // No-op for local games - resync is only used for network play
     }
 
-    private boolean isRemoteClient() {
+    public boolean isRemoteClient() {
         return gui instanceof forge.gamemodes.net.server.RemoteClientGuiGame;
     }
 
-    private AutoYieldStore localStore() {
-        return ((LobbyPlayerHuman) getLobbyPlayer()).getYieldStore();
+    public boolean mayAutoPass() {
+        return yieldController.shouldAutoYield();
     }
 
-    private boolean activeModeIsInstall() {
-        return ForgeConstants.AUTO_YIELD_PER_ABILITY_INSTALL.equals(FModel.getPreferences().getPref(FPref.UI_AUTO_YIELD_MODE));
+    public void autoPassUntilEndOfTurn() {
+        yieldController.setAutoPassUntilEOTWithoutInterruptions(true);
+        getGui().updateAutoPassPrompt();
     }
 
-    private AutoYieldStore.Tier activeTier() {
-        String mode = FModel.getPreferences().getPref(FPref.UI_AUTO_YIELD_MODE);
-        if (ForgeConstants.AUTO_YIELD_PER_CARD.equals(mode))            return AutoYieldStore.Tier.GAME;
-        if (ForgeConstants.AUTO_YIELD_PER_ABILITY_SESSION.equals(mode)) return AutoYieldStore.Tier.SESSION;
-        return AutoYieldStore.Tier.MATCH;
+    @Override
+    public void autoPassCancel() {
+        if (!mayAutoPass()) {
+            return;
+        }
+        yieldController.setAutoPassUntilEOTWithoutInterruptions(false);
+        PlayerView playerView = getLocalPlayerView();
+        getGui().showPromptMessage(playerView, "");
+        getGui().updateButtons(playerView, false, false, false);
+        getGui().awaitNextInput();
     }
 
     @Override
     public boolean shouldAutoYield(final String key) {
-        if (isRemoteClient()) {
-            if (remoteAutoYieldsDisabled) return false;
-            if (remoteCardYields.contains(key)) return true;
-            return remoteAbilityYields.contains(AutoYieldStore.abilitySuffix(key));
-        }
-        if (localStore().isDisabled()) return false;
-        if (activeModeIsInstall()) {
-            return PersistentYieldStore.get().contains(AutoYieldStore.abilitySuffix(key));
-        }
-        boolean abilityScope = activeTier() != AutoYieldStore.Tier.GAME;
-        String storageKey = abilityScope ? AutoYieldStore.abilitySuffix(key) : key;
-        return localStore().shouldYield(activeTier(), storageKey);
+        return yieldController.shouldAutoYield(key);
     }
-
     @Override
     public void setShouldAutoYield(final String key, final boolean autoYield, final boolean isAbilityScope) {
-        if (isRemoteClient()) {
-            Set<String> bucket = isAbilityScope ? remoteAbilityYields : remoteCardYields;
-            if (autoYield) bucket.add(key);
-            else bucket.remove(key);
-            return;
-        }
-        String storageKey = isAbilityScope ? AutoYieldStore.abilitySuffix(key) : key;
-        if (activeModeIsInstall()) {
-            PersistentYieldStore.get().setYield(storageKey, autoYield);
-            return;
-        }
-        localStore().setYield(activeTier(), storageKey, autoYield);
-    }
-
-    @Override
-    public Iterable<String> getAutoYields() {
-        if (isRemoteClient()) {
-            return Iterables.concat(remoteCardYields, remoteAbilityYields);
-        }
-        if (activeModeIsInstall()) return PersistentYieldStore.get().getYields();
-        return localStore().getYields(activeTier());
-    }
-
-    @Override
-    public void clearAutoYields() {
-        if (isRemoteClient()) {
-            remoteCardYields.clear();
-            remoteAbilityYields.clear();
-            remoteTriggerDecisions.clear();
-            return;
-        }
-        localStore().onGameEnd(getGame() == null || getGame().getView().isMatchOver());
+        yieldController.setShouldAutoYield(key, autoYield, isAbilityScope);
     }
 
     @Override
     public boolean getDisableAutoYields() {
-        return isRemoteClient() ? remoteAutoYieldsDisabled : localStore().isDisabled();
+        return yieldController.getDisableAutoYields();
     }
-
     @Override
     public void setDisableAutoYields(final boolean disable) {
-        if (isRemoteClient()) remoteAutoYieldsDisabled = disable;
-        else localStore().setDisabled(disable);
+        yieldController.setDisableAutoYields(disable);
     }
 
     @Override
     public boolean shouldAlwaysAcceptTrigger(final int trigger) {
-        if (isRemoteClient()) return Boolean.TRUE.equals(remoteTriggerDecisions.get(trigger));
-        return localStore().getTriggerDecision(trigger) == AutoYieldStore.TriggerDecision.ACCEPT;
+        return yieldController.shouldAlwaysAcceptTrigger(trigger);
     }
-
     @Override
     public boolean shouldAlwaysDeclineTrigger(final int trigger) {
-        if (isRemoteClient()) return Boolean.FALSE.equals(remoteTriggerDecisions.get(trigger));
-        return localStore().getTriggerDecision(trigger) == AutoYieldStore.TriggerDecision.DECLINE;
+        return yieldController.shouldAlwaysDeclineTrigger(trigger);
     }
 
     @Override
     public void setShouldAlwaysAcceptTrigger(final int trigger) {
-        if (isRemoteClient()) remoteTriggerDecisions.put(trigger, Boolean.TRUE);
-        else localStore().setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.ACCEPT);
+        yieldController.setAlwaysAcceptTrigger(trigger);
         if (isPromptingForTrigger(trigger)) selectButtonOk();
     }
-
     @Override
     public void setShouldAlwaysDeclineTrigger(final int trigger) {
-        if (isRemoteClient()) remoteTriggerDecisions.put(trigger, Boolean.FALSE);
-        else localStore().setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.DECLINE);
+        yieldController.setAlwaysDeclineTrigger(trigger);
         if (isPromptingForTrigger(trigger)) selectButtonCancel();
     }
-
+    @Override
+    public void setShouldAlwaysAskTrigger(final int trigger) {
+        yieldController.setAlwaysAskTrigger(trigger);
+    }
     private boolean isPromptingForTrigger(final int trigger) {
         if (!(inputQueue.getInput() instanceof InputConfirm)) return false;
         final SpellAbilityStackInstance top = getGame().getStack().peek();
         return top != null && top.isStateTrigger(trigger);
     }
 
-    @Override
-    public void setShouldAlwaysAskTrigger(final int trigger) {
-        if (isRemoteClient()) remoteTriggerDecisions.remove(trigger);
-        else localStore().setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.ASK);
-    }
-
     public boolean isUiSetToSkipPhase(final PlayerView turnPlayer, final PhaseType phase) {
         if (isRemoteClient()) {
-            EnumSet<PhaseType> set = remoteSkipPhases.get(turnPlayer);
-            return set != null && set.contains(phase);
+            return yieldController.isSkippingPhase(turnPlayer, phase);
         }
         return getGui().isUiSetToSkipPhase(turnPlayer, phase);
     }
 
     @Override
-    public void setUiShouldSkipPhase(final PlayerView turnPlayer, final PhaseType phase, final boolean shouldSkip) {
-        if (!isRemoteClient()) return;
-        EnumSet<PhaseType> set = remoteSkipPhases.computeIfAbsent(turnPlayer,
-                k -> EnumSet.noneOf(PhaseType.class));
-        if (shouldSkip) set.add(phase);
-        else set.remove(phase);
+    public void applyYieldUpdate(final YieldUpdate update) {
+        boolean activatedYield = false;
+        if (update instanceof YieldUpdate.SetMarker u) {
+            yieldController.setMarker(u.phaseOwner(), u.phase(), u.atOrPastAtClick());
+            activatedYield = true;
+        } else if (update instanceof YieldUpdate.ClearMarker) {
+            yieldController.clearMarker();
+        } else if (update instanceof YieldUpdate.StackYield u) {
+            yieldController.setAutoPassUntilStackEmpty(u.active());
+            activatedYield = u.active();
+        } else if (update instanceof YieldUpdate.TriggerDecision u) {
+            yieldController.setTriggerDecision(u.trigId(), u.decision());
+        } else if (update instanceof YieldUpdate.CardAutoYield u) {
+            yieldController.applyAutoYieldFromWire(u.cardKey(), u.active());
+        } else if (update instanceof YieldUpdate.SkipPhase u) {
+            yieldController.setSkipPhase(u.turnPlayer(), u.phase(), u.skip());
+        } else if (update instanceof YieldUpdate.SeedFromClient u) {
+            yieldController.applyClientSeed(u.snapshot());
+        }
+        if (activatedYield) {
+            // Switch the cancel button + prompt to "Yielding until X" so the user can disarm.
+            // Otherwise the previous InputPassPriority "End Turn" label would persist and ESC
+            // would skip the click on the client.
+            getGui().updateAutoPassPrompt();
+        }
     }
 }

@@ -5,11 +5,11 @@ import forge.game.GameEntityView;
 import forge.game.GameView;
 
 import forge.game.card.CardView;
-import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.gamemodes.match.NextGameDecision;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gui.GuiBase;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.IGameController;
@@ -74,6 +74,8 @@ public enum ProtocolMethod implements IHasForgeLog {
     showWaitingTimer    (Mode.SERVER, Void.TYPE, PlayerView.class, String.class),
     setHighlighted      (Mode.SERVER, Void.TYPE, GameEntityView.class, Boolean.TYPE),
     applyDelta          (Mode.SERVER, Void.TYPE, DeltaPacket.class),
+    /** Server→client push of authoritative yield-state changes. */
+    applyYieldUpdate    (Mode.SERVER, Void.TYPE, YieldUpdate.class),
 
     // Client -> Server
     // Note: these should all return void, to avoid awkward situations in
@@ -94,11 +96,7 @@ public enum ProtocolMethod implements IHasForgeLog {
     alphaStrike               (Mode.CLIENT, Void.TYPE),
     reorderHand               (Mode.CLIENT, Void.TYPE, CardView.class, Integer.TYPE),
     requestResync             (Mode.CLIENT, Void.TYPE),
-    setShouldAutoYield        (Mode.CLIENT, Void.TYPE, String.class, Boolean.TYPE, Boolean.TYPE),
-    setShouldAlwaysAcceptTrigger  (Mode.CLIENT, Void.TYPE, Integer.TYPE),
-    setShouldAlwaysDeclineTrigger (Mode.CLIENT, Void.TYPE, Integer.TYPE),
-    setShouldAlwaysAskTrigger     (Mode.CLIENT, Void.TYPE, Integer.TYPE),
-    setUiShouldSkipPhase          (Mode.CLIENT, Void.TYPE, PlayerView.class, PhaseType.class, Boolean.TYPE);
+    sendYieldUpdate           (Mode.CLIENT, Void.TYPE, YieldUpdate.class);
 
     private enum Mode {
         SERVER(IGuiGame.class),

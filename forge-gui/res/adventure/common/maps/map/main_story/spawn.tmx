@@ -276,7 +276,7 @@
     &quot;text&quot;: &quot;Hello again&quot;,
     &quot;options&quot;: [
       {
-       &quot;name&quot;: &quot;I want to trade in the five colored keys for a mox of my choice&quot;,
+       &quot;name&quot;: &quot;I want to trade in the five colored keys for a mox of my choice and the key to Emrakul's room&quot;,
        &quot;action&quot;: [
           {
         &quot;grantRewardsChoice&quot;: [

@@ -44,6 +44,7 @@ import forge.assets.ImageCache;
 import forge.card.CardImageRenderer;
 import forge.card.CardRenderer;
 import forge.card.CardSplitType;
+import forge.deck.DeckFormat;
 import forge.deck.DeckSection;
 import forge.game.card.CardView;
 import forge.gui.GuiBase;
@@ -1000,10 +1001,20 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             if (autoSell != null && !autoSell.isVisible() && flipProcess == 1) {
                 autoSell.setVisible(true);
 
-                if (AdventurePlayer.current().isCommanderMode()) {
-                    PaperCard pc = reward.getCard();
-                    if (pc != null) {
-                        setAutoSell(inCollectionLike(pc));
+                PaperCard pc = reward.getCard();
+
+                if (pc != null) {
+                    DeckFormat deckFormat = AdventurePlayer.current().isCommanderMode() 
+                        ? DeckFormat.Commander
+                        : DeckFormat.Adventure;
+                    int maxCopies = deckFormat.getMaxCardCopies(pc);
+
+                    if (AdventurePlayer.current().isCommanderMode()) {
+                        setAutoSell(maxCopies == 1 && inCollectionLike(pc));
+                    } else {
+                        int ownedCount = AdventurePlayer.current().getCollectionCards(true).count(pc);
+
+                        setAutoSell(ownedCount >= maxCopies);
                     }
                 }
             }

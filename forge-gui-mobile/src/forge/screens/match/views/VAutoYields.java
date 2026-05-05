@@ -18,7 +18,7 @@ public class VAutoYields extends FDialog {
     public VAutoYields() {
         super(Forge.getLocalizer().getMessage("lblAutoYields"), 2);
         List<String> autoYields = new ArrayList<>();
-        for (String autoYield : MatchController.instance.getGameController().getAutoYields()) {
+        for (String autoYield : MatchController.instance.getGameController().getYieldController().getAutoYields()) {
             autoYields.add(autoYield);
         }
         lstAutoYields = add(new FChoiceList<String>(autoYields) {
