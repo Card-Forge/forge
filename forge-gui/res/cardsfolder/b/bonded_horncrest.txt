@@ -2,5 +2,5 @@ Name:Bonded Horncrest
 ManaCost:3 R
 Types:Creature Dinosaur
 PT:5/5
-K:CARDNAME can't attack or block alone.
+S:Mode$ AttackRestrict,BlockRestrict | ValidCard$ Card.Self | Description$ CARDNAME can't attack or block alone.
 Oracle:Bonded Horncrest can't attack or block alone.
