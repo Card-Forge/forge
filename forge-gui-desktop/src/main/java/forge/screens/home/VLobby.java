@@ -813,7 +813,7 @@ public class VLobby implements ILobbyView {
             final GameType gameType = forCommander ? type : GameType.Constructed;
             final FDeckChooser fdc = new FDeckChooser(null, ai, gameType, forCommander);
             fdc.initialize(prefKey, deckType);
-            fdc.getLstDecks().setSelectCommand(() -> selectMainDeck(fdc, iSlot, forCommander));
+            fdc.setDeckSelectionCommand(() -> selectMainDeck(fdc, iSlot, forCommander));
             return fdc;
         });
     }
