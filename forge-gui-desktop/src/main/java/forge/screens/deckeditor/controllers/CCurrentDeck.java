@@ -15,6 +15,7 @@ import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.io.DeckSerializer;
 import forge.deck.io.DeckStorage;
+import forge.game.GameType;
 import forge.gui.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.localinstance.properties.ForgeConstants;
@@ -80,6 +81,12 @@ public enum CCurrentDeck implements ICDoc {
                 if (Character.isLetterOrDigit(e.getKeyChar())) {
                     CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController().notifyModelChanged();
                 }
+            }
+        });
+        VCurrentDeck.SINGLETON_INSTANCE.getCbFormat().addActionListener(e -> {
+            final GameType selected = VCurrentDeck.SINGLETON_INSTANCE.getCbFormat().getSelectedItem();
+            if (selected != null) {
+                CDeckEditorUI.SINGLETON_INSTANCE.changeFormat(selected);
             }
         });
     }

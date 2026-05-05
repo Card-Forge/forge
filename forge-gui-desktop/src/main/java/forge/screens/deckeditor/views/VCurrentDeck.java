@@ -3,6 +3,7 @@ package forge.screens.deckeditor.views;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import forge.game.GameType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -12,6 +13,7 @@ import forge.itemmanager.ItemManager;
 import forge.itemmanager.ItemManagerContainer;
 import forge.localinstance.skin.FSkinProp;
 import forge.screens.deckeditor.controllers.CCurrentDeck;
+import forge.toolbox.FComboBox;
 import forge.toolbox.FLabel;
 import forge.toolbox.FSkin;
 import forge.toolbox.FTextField;
@@ -85,6 +87,22 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
 
     private final FLabel lblTitle = new FLabel.Builder().text(localizer.getMessage("lblTitle")).fontSize(14).build();
 
+    private final FLabel lblFormat = new FLabel.Builder().text(localizer.getMessage("lblFormat") + ":").fontSize(12).build();
+
+    private final FComboBox<GameType> cbFormat = createFormatCombo();
+
+    private static FComboBox<GameType> createFormatCombo() {
+        FComboBox<GameType> cb = new FComboBox<>(new GameType[] {
+                GameType.Constructed,
+                GameType.Commander,
+                GameType.Oathbreaker,
+                GameType.Brawl,
+                GameType.TinyLeaders,
+        });
+        cb.setFont(FSkin.getRelativeFont(12));
+        return cb;
+    }
+
     private final ItemManagerContainer itemManagerContainer = new ItemManagerContainer();
     private ItemManager<? extends InventoryItem> itemManager;
 
@@ -103,7 +121,10 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
         pnlHeader.add(btnLoad, "w 26px!, h 26px!");
         pnlHeader.add(btnSaveAs, "w 26px!, h 26px!");
         pnlHeader.add(btnPrintProxies, "w 26px!, h 26px!");
-        pnlHeader.add(btnImport, "w 61px!, h 26px!");
+        pnlHeader.add(btnImport, "w 61px!, h 26px!, wrap");
+
+        pnlHeader.add(lblFormat, "h 26px!");
+        pnlHeader.add(cbFormat, "h 26px!");
     }
 
     //========== Overridden from IVDoc
@@ -213,5 +234,9 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck> {
      */
     public FLabel getBtnImport() {
         return btnImport;
+    }
+
+    public FComboBox<GameType> getCbFormat() {
+        return cbFormat;
     }
 }
