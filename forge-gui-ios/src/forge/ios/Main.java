@@ -131,6 +131,11 @@ public class Main extends IOSApplication.Delegate {
         }
 
         @Override
+        public void convertToPNG(InputStream input, OutputStream output) throws IOException {
+
+        }
+
+        @Override
         public Pair<Integer, Integer> getRealScreenSize(boolean real) {
             return Pair.of(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         }
