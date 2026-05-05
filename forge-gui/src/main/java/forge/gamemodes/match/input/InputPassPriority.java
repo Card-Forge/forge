@@ -18,13 +18,22 @@
 package forge.gamemodes.match.input;
 
 import forge.game.Game;
+import forge.game.GameView;
 import forge.game.card.Card;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.game.player.actions.PassPriorityAction;
 import forge.game.spellability.SpellAbility;
+import forge.game.spellability.StackItemView;
+import forge.gamemodes.match.DeclineScope;
+import forge.gamemodes.match.SuggestionType;
+import forge.gamemodes.match.YieldController;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.net.server.FServerManager;
 import forge.gamemodes.net.server.FServerManager.AfkTimeout;
 import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.util.collect.FCollectionView;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.player.PlayerControllerHuman;
@@ -49,6 +58,9 @@ public class InputPassPriority extends InputSyncronizedBase {
 
     private List<SpellAbility> chosenSa;
 
+    private SuggestionType pendingSuggestion = null;
+    private String pendingSuggestionMessage = null;
+
     public InputPassPriority(final PlayerControllerHuman controller) {
         super(controller);
     }
@@ -69,6 +81,83 @@ public class InputPassPriority extends InputSyncronizedBase {
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
+        if (!isAlreadyYielding()) {
+            // Suppress one prompt after a yield ends — avoids "yielded → ended → yield again?" loop
+            if (getController().getYieldController().getBoolPref(FPref.YIELD_SUPPRESS_AFTER_END)
+                    && getController().getYieldController().didYieldJustEnd()) {
+                showNormalPrompt();
+                return;
+            }
+
+            if (getController().getYieldController().getBoolPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS)) {
+                showNormalPrompt();
+                return;
+            }
+
+            // Both scopes NEVER → skip including stack-transition tracking (no decline state to maintain)
+            DeclineScope stackScope = getController().getYieldController().getDeclineScope(FPref.YIELD_DECLINE_SCOPE_STACK_YIELD);
+            DeclineScope noActionsScope = getController().getYieldController().getDeclineScope(FPref.YIELD_DECLINE_SCOPE_NO_ACTIONS);
+            if (stackScope == DeclineScope.NEVER && noActionsScope == DeclineScope.NEVER) {
+                showNormalPrompt();
+                return;
+            }
+
+            GameView gvForStack = getGameView();
+            boolean stackNonEmpty = gvForStack != null && gvForStack.getStack() != null
+                    && !gvForStack.getStack().isEmpty();
+            getController().getYieldController().onPriorityReceived(stackNonEmpty);
+
+            Localizer loc = Localizer.getInstance();
+
+            if (!getController().getYieldController().isSuggestionDeclined(SuggestionType.STACK_YIELD)
+                    && shouldShowStackYieldPrompt()) {
+                pendingSuggestion = SuggestionType.STACK_YIELD;
+                pendingSuggestionMessage = loc.getMessage("lblCannotRespondToStackYieldPrompt");
+                showYieldSuggestionPrompt();
+                return;
+            }
+            if (!getController().getYieldController().isSuggestionDeclined(SuggestionType.NO_ACTIONS)
+                    && shouldShowNoActionsPrompt()) {
+                pendingSuggestion = SuggestionType.NO_ACTIONS;
+                pendingSuggestionMessage = loc.getMessage("lblNoActionsAvailableYieldPrompt");
+                showYieldSuggestionPrompt();
+                return;
+            }
+        }
+
+        showNormalPrompt();
+    }
+
+    private void showYieldSuggestionPrompt() {
+        // State may have flipped between the initial check and now (e.g. async multiplayer click).
+        if (isAlreadyYielding()) {
+            pendingSuggestion = null;
+            pendingSuggestionMessage = null;
+            showNormalPrompt();
+            return;
+        }
+
+        Localizer loc = Localizer.getInstance();
+        String fullMessage = pendingSuggestionMessage;
+        DeclineScope scope = getController().getYieldController().getDeclineScope(pendingSuggestion.scopePref());
+        if (scope == DeclineScope.STACK) {
+            fullMessage += "\n" + loc.getMessage("lblYieldSuggestionDeclineHintStack");
+        } else if (scope == DeclineScope.TURN) {
+            fullMessage += "\n" + loc.getMessage("lblYieldSuggestionDeclineHint");
+        }
+        showMessage(fullMessage);
+        chosenSa = null;
+        getController().getGui().updateButtons(getOwner(),
+                loc.getMessage("lblAccept"),
+                loc.getMessage("lblDecline"),
+                true, true, true);
+        getController().getGui().alertUser();
+    }
+
+    private void showNormalPrompt() {
+        pendingSuggestion = null;
+        pendingSuggestionMessage = null;
+
         showMessage(getTurnPhasePriorityMessage(getController().getGame()));
         chosenSa = null;
         Localizer localizer = Localizer.getInstance();
@@ -82,9 +171,102 @@ public class InputPassPriority extends InputSyncronizedBase {
         getController().getGui().alertUser();
     }
 
+    private boolean isAlreadyYielding() {
+        return getController().getYieldController().isYieldActive();
+    }
+
+    private GameView getGameView() {
+        return getController().getGui().getGameView();
+    }
+
+    private PlayerView getPlayerView() {
+        return getOwner();
+    }
+
+    private boolean checkHasAvailableActions() {
+        Player player = getController().getPlayer();
+        if (player == null) return false;
+        // Freshened upstream in chooseSpellAbilityToPlay; don't recompute
+        return player.getView().hasAvailableActions();
+    }
+
+    private boolean shouldShowStackYieldPrompt() {
+        GameView gv = getGameView();
+        if (gv == null) return false;
+        FCollectionView<StackItemView> stack = gv.getStack();
+        if (stack == null || stack.isEmpty()) return false;
+        return !checkHasAvailableActions();
+    }
+
+    /** Stack non-empty disqualifies; SUPPRESS_ON_OWN_TURN suppresses on own turn (after first round). */
+    private boolean isValidSuggestionContext(GameView gv, PlayerView pv) {
+        FCollectionView<StackItemView> stack = gv.getStack();
+        if (stack != null && !stack.isEmpty()) return false;
+        PlayerView currentTurn = gv.getPlayerTurn();
+        if (currentTurn != null && currentTurn.equals(pv)) {
+            // Always suppress on player's first turn (no lands/mana yet)
+            int numPlayers = gv.getPlayers().size();
+            if (gv.getTurn() <= numPlayers) return false;
+            if (getController().getYieldController().getBoolPref(FPref.YIELD_SUPPRESS_ON_OWN_TURN)) return false;
+        }
+        return true;
+    }
+
+    private boolean shouldShowNoActionsPrompt() {
+        GameView gv = getGameView();
+        PlayerView pv = getPlayerView();
+        if (gv == null || pv == null) return false;
+        if (!isValidSuggestionContext(gv, pv)) return false;
+        return !checkHasAvailableActions();
+    }
+
     /** {@inheritDoc} */
     @Override
     protected final void onOk() {
+        if (pendingSuggestion != null) {
+            // Defensive: state may have flipped (e.g. async multiplayer click).
+            if (isAlreadyYielding()) {
+                pendingSuggestion = null;
+                pendingSuggestionMessage = null;
+                stop();
+                return;
+            }
+            // APINA flipped on between display and accept — drop the now-redundant accept (host-local only)
+            if (!getController().isRemoteClient()
+                    && getController().getYieldController().getBoolPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS)) {
+                pendingSuggestion = null;
+                pendingSuggestionMessage = null;
+                stop();
+                return;
+            }
+            SuggestionType accepted = pendingSuggestion;
+            pendingSuggestion = null;
+            pendingSuggestionMessage = null;
+
+            PlayerView self = getPlayerView();
+            YieldController yc = getController().getYieldController();
+            if (accepted == SuggestionType.STACK_YIELD) {
+                yc.setAutoPassUntilStackEmpty(true);
+                if (self != null) getController().getGui().applyYieldUpdate(
+                        new YieldUpdate.StackYield(self, true));
+            } else if (accepted == SuggestionType.NO_ACTIONS) {
+                // UPKEEP because UNTAP has no priority pass — a marker on UNTAP could never fire.
+                if (self != null) {
+                    boolean atOrPast = YieldController.isPriorityAtOrPastMarker(
+                            getGameView(), self, PhaseType.UPKEEP);
+                    yc.setMarker(self, PhaseType.UPKEEP, atOrPast);
+                    getController().getGui().applyYieldUpdate(
+                            new YieldUpdate.SetMarker(self, PhaseType.UPKEEP, atOrPast));
+                }
+            }
+            if (isAlreadyYielding()) {
+                stop();
+            } else {
+                showNormalPrompt();
+            }
+            return;
+        }
+
         passPriority(() -> {
             getController().macros().addRememberedAction(new PassPriorityAction());
             stop();
@@ -94,6 +276,14 @@ public class InputPassPriority extends InputSyncronizedBase {
     /** {@inheritDoc} */
     @Override
     protected final void onCancel() {
+        if (pendingSuggestion != null) {
+            getController().getYieldController().declineSuggestion(pendingSuggestion);
+            pendingSuggestion = null;
+            pendingSuggestionMessage = null;
+            showNormalPrompt();
+            return;
+        }
+
         if (!getController().tryUndoLastAction()) { //undo if possible
             //otherwise end turn
             passPriority(() -> {

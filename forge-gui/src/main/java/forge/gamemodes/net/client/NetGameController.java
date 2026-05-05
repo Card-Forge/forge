@@ -13,6 +13,7 @@ import forge.gamemodes.net.ProtocolMethod;
 import forge.interfaces.IDevModeCheats;
 import forge.interfaces.IGameController;
 import forge.interfaces.IMacroSystem;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.player.AutoYieldStore;
 import forge.util.ITriggerEvent;
 
@@ -188,15 +189,7 @@ public class NetGameController implements IGameController {
 
     @Override
     public void applyYieldUpdate(final YieldUpdate update) {
-        // Local self-apply for marker/stack-yield user actions that route through
-        // sendYieldUpdate. Other cases dispatch via dedicated setters above.
-        if (update instanceof YieldUpdate.SetMarker u) {
-            yieldController.setMarker(u.phaseOwner(), u.phase(), u.atOrPastAtClick());
-        } else if (update instanceof YieldUpdate.ClearMarker) {
-            yieldController.clearMarker();
-        } else if (update instanceof YieldUpdate.StackYield u) {
-            yieldController.setAutoPassUntilStackEmpty(u.active());
-        }
+        yieldController.apply(update);
     }
 
     /**
@@ -216,6 +209,18 @@ public class NetGameController implements IGameController {
      */
     public void seedYieldStateOnHost(Map<PlayerView, EnumSet<PhaseType>> skipPhases) {
         send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.SeedFromClient(yieldController.buildClientSnapshot(skipPhases)));
+    }
+
+    @Override
+    public void setYieldBoolPref(final FPref pref, final boolean value) {
+        yieldController.setBoolPref(pref, value);
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.SetYieldBoolPref(pref, value));
+    }
+
+    @Override
+    public void setYieldStringPref(final FPref pref, final String value) {
+        yieldController.setStringPref(pref, value);
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.SetYieldStringPref(pref, value));
     }
 
     private IMacroSystem macros;

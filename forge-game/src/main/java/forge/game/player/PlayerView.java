@@ -212,6 +212,14 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.HasLost, val);
     }
 
+    public boolean hasAvailableActions() {
+        return get(TrackableProperty.HasAvailableActions);
+    }
+
+    public void setHasAvailableActions(boolean value) {
+        set(TrackableProperty.HasAvailableActions, value);
+    }
+
     public int getAvatarLifeDifference() {
         return (int)get(TrackableProperty.AvatarLifeDifference);
     }

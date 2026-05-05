@@ -369,20 +369,26 @@ public class MatchScreen extends FScreen {
         }
 
         if (gameMenu != null) {
-            if (gameMenu.getChildCount() > 1) {
+            // Index trailing items from end — entries inserted before Settings don't shift them
+            int n = gameMenu.getChildCount();
+            if (n > 1) {
+                int idxConcede = 0;
+                int idxAutoYields = 1;
+                int idxSettings = !Forge.isMobileAdventureMode ? n - 2 : -1;   // Settings is second-from-last
+                int idxShowWinLose = !Forge.isMobileAdventureMode ? n - 1 : -1; // Show Win/Lose is last
                 if (viewWinLose == null) {
-                    gameMenu.getChildAt(0).setEnabled(!game.isMulligan());
-                    gameMenu.getChildAt(1).setEnabled(!game.isMulligan());
+                    gameMenu.getChildAt(idxConcede).setEnabled(!game.isMulligan());
+                    gameMenu.getChildAt(idxAutoYields).setEnabled(!game.isMulligan());
                     if (!Forge.isMobileAdventureMode) {
-                        gameMenu.getChildAt(2).setEnabled(!game.isMulligan());
-                        gameMenu.getChildAt(3).setEnabled(false);
+                        gameMenu.getChildAt(idxSettings).setEnabled(!game.isMulligan());
+                        gameMenu.getChildAt(idxShowWinLose).setEnabled(false);
                     }
                 } else {
-                    gameMenu.getChildAt(0).setEnabled(false);
-                    gameMenu.getChildAt(1).setEnabled(false);
+                    gameMenu.getChildAt(idxConcede).setEnabled(false);
+                    gameMenu.getChildAt(idxAutoYields).setEnabled(false);
                     if (!Forge.isMobileAdventureMode) {
-                        gameMenu.getChildAt(2).setEnabled(false);
-                        gameMenu.getChildAt(3).setEnabled(true);
+                        gameMenu.getChildAt(idxSettings).setEnabled(false);
+                        gameMenu.getChildAt(idxShowWinLose).setEnabled(true);
                     }
                 }
             }

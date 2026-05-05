@@ -2,8 +2,11 @@ package forge.screens.match.views;
 
 import forge.Forge;
 import forge.assets.FSkinImage;
+import forge.gamemodes.match.YieldController;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
+import forge.model.FModel;
 import forge.screens.match.MatchController;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FEvent;
@@ -61,6 +64,14 @@ public class VGameMenu extends FDropDownMenu {
                 };
                 autoYields.show();
             }
+        }));
+        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblYieldOptions"), Forge.hdbuttons ? FSkinImage.HDYIELD : FSkinImage.WARNING, e -> {
+            new VYieldOptions().show();
+        }));
+        boolean autoPassOn = FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS);
+        String autoPassLabel = Forge.getLocalizer().getMessage(autoPassOn ? "lblYieldBtnAutoPassOn" : "lblYieldBtnAutoPass");
+        addItem(new FMenuItem(autoPassLabel, Forge.hdbuttons ? FSkinImage.HDYIELD : FSkinImage.WARNING, e -> {
+            YieldController.toggleAutoPassNoActions(MatchController.instance.getGameController());
         }));
         if (!Forge.isMobileAdventureMode) {
             addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblSettings"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, e -> {

@@ -105,6 +105,7 @@ import forge.screens.match.controllers.CDetailPicture;
 import forge.screens.match.controllers.CDev;
 import forge.screens.match.controllers.CDock;
 import forge.screens.match.controllers.CLog;
+import forge.screens.match.controllers.CYield;
 import forge.screens.match.controllers.CPrompt;
 import forge.screens.match.controllers.CStack;
 import forge.screens.match.menus.CMatchUIMenus;
@@ -175,6 +176,8 @@ public final class CMatchUI
     private final CLog cLog = new CLog(this);
     private final CPrompt cPrompt = new CPrompt(this);
     private final CStack cStack = new CStack(this);
+    private final CYield cYield = new CYield(this);
+    public CYield getCYield() { return cYield; }
     private int nextNotifiableStackIndex = 0;
 
     public CMatchUI() {
@@ -194,6 +197,7 @@ public final class CMatchUI
         this.myDocs.put(EDocID.REPORT_COMBAT, cCombat.getView());
         this.myDocs.put(EDocID.REPORT_DEPENDENCIES, cDependencies.getView());
         this.myDocs.put(EDocID.REPORT_LOG, cLog.getView());
+        this.myDocs.put(EDocID.REPORT_YIELD, cYield.getView());
         this.myDocs.put(EDocID.DEV_MODE, getCDev().getView());
         this.myDocs.put(EDocID.BUTTON_DOCK, getCDock().getView());
     }
@@ -874,12 +878,29 @@ public final class CMatchUI
         FloatingZone.registerZoneDocs(this, getLocalPlayers());
         SLayoutIO.loadLayout(null);
         FloatingZone.pruneUnparentedDocks();
+        ensureNewDocsVisible();
         view.populate();
         final PlayerZoneUpdates zones = new PlayerZoneUpdates();
         for (final PlayerView p : sortedPlayers) {
         	zones.add(new PlayerZoneUpdate(p, ZoneType.Hand));
         }
         updateZones(zones);
+    }
+
+    /**
+     * Adds new EDocIDs introduced after the user's saved layout was created
+     * so existing users see them without resetting their layout. Currently:
+     * REPORT_YIELD → prompt cell (the cell hosting REPORT_MESSAGE).
+     */
+    private void ensureNewDocsVisible() {
+        final IVDoc<? extends ICDoc> yieldDoc = EDocID.REPORT_YIELD.getDoc();
+        if (yieldDoc != null && yieldDoc.getParentCell() == null) {
+            final IVDoc<? extends ICDoc> promptDoc = EDocID.REPORT_MESSAGE.getDoc();
+            final DragCell promptCell = promptDoc == null ? null : promptDoc.getParentCell();
+            if (promptCell != null) {
+                promptCell.addDoc(yieldDoc);
+            }
+        }
     }
 
     @Override

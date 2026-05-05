@@ -1,16 +1,29 @@
 package forge.gamemodes.match;
 
 import forge.game.GameView;
+import forge.game.ability.ApiType;
+import forge.game.card.CardView;
+import forge.game.combat.CombatView;
 import forge.game.phase.PhaseType;
+import forge.game.player.Player;
 import forge.game.player.PlayerView;
+import forge.game.spellability.SpellAbility;
+import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.spellability.StackItemView;
+import forge.gui.interfaces.IGuiGame;
+import forge.interfaces.IGameController;
 import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.AutoYieldStore;
 import forge.player.LobbyPlayerHuman;
 import forge.player.PersistentYieldStore;
 import forge.player.PlayerControllerHuman;
+import forge.util.collect.FCollection;
+import forge.util.collect.FCollectionView;
 
+import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -45,6 +58,10 @@ public class YieldController {
     private final AutoYieldStore localStore = new AutoYieldStore();
     private final Map<PlayerView, EnumSet<PhaseType>> skipPhases = new HashMap<>();
 
+    /** Override wins, FModel is fallback. Synced per-PCH so each client's prefs govern their proxy. */
+    private final EnumMap<FPref, Boolean> boolPrefOverrides = new EnumMap<>(FPref.class);
+    private final EnumMap<FPref, String>  stringPrefOverrides = new EnumMap<>(FPref.class);
+
     public YieldController(PlayerControllerHuman owner) {
         this.owner = owner;
     }
@@ -70,17 +87,54 @@ public class YieldController {
         return autoPassUntilMarker;
     }
 
-    public void setAutoPassUntilStackEmpty(boolean active) {
-        if (active) autoPassUntilEOT = false;
+    // All mutators synchronized — fields touched from EDT, Netty, game thread.
+    // Activating any yield type clears the others — only one yield type may be active at a time (APINA is orthogonal).
+    public synchronized void setAutoPassUntilStackEmpty(boolean active) {
+        if (active) {
+            autoPassUntilEOT = false;
+            clearMarker();
+        }
         this.autoPassUntilStackEmpty = active;
     }
-    public void setAutoPassUntilEOTWithoutInterruptions(boolean active) {
+    public synchronized void setAutoPassUntilEndOfTurn(boolean active) {
+        if (active) {
+            autoPassUntilStackEmpty = false;
+            clearMarker();
+        }
         this.autoPassUntilEOT = active;
+    }
+
+    public synchronized boolean getBoolPref(FPref pref) {
+        Boolean override = boolPrefOverrides.get(pref);
+        return override != null ? override : FModel.getPreferences().getPrefBoolean(pref);
+    }
+    public synchronized void setBoolPref(FPref pref, boolean value) {
+        boolPrefOverrides.put(pref, value);
+    }
+
+    public synchronized String getStringPref(FPref pref) {
+        String override = stringPrefOverrides.get(pref);
+        return override != null ? override : FModel.getPreferences().getPref(pref);
+    }
+    public synchronized void setStringPref(FPref pref, String value) {
+        stringPrefOverrides.put(pref, value);
+    }
+
+    public DeclineScope getDeclineScope(FPref pref) {
+        return DeclineScope.fromPref(getStringPref(pref));
+    }
+
+    public Map<FPref, Boolean> snapshotBoolPrefs() {
+        return new EnumMap<>(boolPrefOverrides);
+    }
+    public Map<FPref, String> snapshotStringPrefs() {
+        return new EnumMap<>(stringPrefOverrides);
     }
 
     // setMarker/clearMarker are mutated from EDT (right-click), Netty (wire receive), and game thread.
     public synchronized void setMarker(PlayerView phaseOwner, PhaseType phase, boolean atOrPastAtClick) {
         autoPassUntilEOT = false;
+        autoPassUntilStackEmpty = false;
         if (phaseOwner == null || phase == null) {
             clearMarker();
             return;
@@ -206,6 +260,20 @@ public class YieldController {
         activeStore().onGameEnd(matchOver);
     }
 
+    /** Clear all transient yield state so it doesn't carry into the next game of the match. */
+    public synchronized void resetForNewGame() {
+        autoPassUntilEOT = false;
+        autoPassUntilStackEmpty = false;
+        autoPassUntilMarker = null;
+        hasLeftMarker = false;
+        activationOnMarker = false;
+        declinedSuggestionTurn.clear();
+        lastSeenStackNonEmpty = false;
+        wasAutoPassingLastTick = false;
+        yieldJustEndedFlag = false;
+        // boolPrefOverrides / stringPrefOverrides intentionally kept — per-match, not per-game
+    }
+
     public boolean getDisableAutoYields() {
         return activeStore().isDisabled();
     }
@@ -245,7 +313,8 @@ public class YieldController {
         }
         // Trigger decisions are per-game; deltas flow during play.
         Map<Integer, AutoYieldStore.TriggerDecision> triggers = new HashMap<>();
-        return new YieldStateSnapshot(cardYields, abilityYields, triggers, getDisableAutoYields(), skipPhases);
+        return new YieldStateSnapshot(cardYields, abilityYields, triggers, getDisableAutoYields(), skipPhases,
+                snapshotBoolPrefs(), snapshotStringPrefs());
     }
 
     /** Atomic seed of client-persistent state at game start or reconnection. Cache mode only. */
@@ -259,5 +328,294 @@ public class YieldController {
         localStore.setDisabled(snap.autoYieldsDisabled());
         skipPhases.clear();
         skipPhases.putAll(snap.skipPhases());
+        boolPrefOverrides.clear();
+        if (snap.boolPrefOverrides() != null) boolPrefOverrides.putAll(snap.boolPrefOverrides());
+        stringPrefOverrides.clear();
+        if (snap.stringPrefOverrides() != null) stringPrefOverrides.putAll(snap.stringPrefOverrides());
+    }
+
+    /**
+     * Apply a wire envelope variant to local state. Returns true if a yield was
+     * activated (caller may want to refresh the prompt UI). Per-method locking is
+     * provided by the delegated setters. Unhandled variants no-op — wire routing
+     * is responsible for ensuring only valid variants reach each side.
+     */
+    public boolean apply(YieldUpdate update) {
+        if (update instanceof YieldUpdate.SetMarker u) {
+            setMarker(u.phaseOwner(), u.phase(), u.atOrPastAtClick());
+            return true;
+        } else if (update instanceof YieldUpdate.ClearMarker) {
+            clearMarker();
+        } else if (update instanceof YieldUpdate.StackYield u) {
+            setAutoPassUntilStackEmpty(u.active());
+            return u.active();
+        } else if (update instanceof YieldUpdate.SetAutoPassUntilEndOfTurn u) {
+            setAutoPassUntilEndOfTurn(u.active());
+            return u.active();
+        } else if (update instanceof YieldUpdate.TriggerDecision u) {
+            setTriggerDecision(u.trigId(), u.decision());
+        } else if (update instanceof YieldUpdate.CardAutoYield u) {
+            applyAutoYieldFromWire(u.cardKey(), u.active());
+        } else if (update instanceof YieldUpdate.SkipPhase u) {
+            setSkipPhase(u.turnPlayer(), u.phase(), u.skip());
+        } else if (update instanceof YieldUpdate.SetYieldBoolPref u) {
+            setBoolPref(u.pref(), u.value());
+        } else if (update instanceof YieldUpdate.SetYieldStringPref u) {
+            setStringPref(u.pref(), u.value());
+        } else if (update instanceof YieldUpdate.SeedFromClient u) {
+            applyClientSeed(u.snapshot());
+        }
+        return false;
+    }
+
+    public boolean isYieldActive() {
+        return autoPassUntilEOT || autoPassUntilStackEmpty || autoPassUntilMarker != null;
+    }
+
+    /** EOT and marker yields can be interrupted. Stack-yield is fire and forget — only stack-empty turns it off. */
+    public boolean isInterruptibleYieldActive() {
+        return autoPassUntilEOT || autoPassUntilMarker != null;
+    }
+
+    public synchronized void clearActiveYieldAndDispatch() {
+        PlayerView local = owner != null ? owner.getLocalPlayerView() : null;
+        if (local == null) return;
+        IGuiGame gui = owner.getGui();
+        boolean anyCleared = false;
+        if (autoPassUntilMarker != null) {
+            clearMarker();
+            if (gui != null) gui.applyYieldUpdate(new YieldUpdate.ClearMarker(local));
+            anyCleared = true;
+        }
+        if (autoPassUntilStackEmpty) {
+            autoPassUntilStackEmpty = false;
+            if (gui != null) gui.applyYieldUpdate(new YieldUpdate.StackYield(local, false));
+            anyCleared = true;
+        }
+        if (autoPassUntilEOT) {
+            autoPassUntilEOT = false;
+            if (gui != null) gui.applyYieldUpdate(new YieldUpdate.SetAutoPassUntilEndOfTurn(local, false));
+            anyCleared = true;
+        }
+        if (anyCleared && gui != null) gui.updateAutoPassPrompt();
+    }
+
+    /** Toggle APINA: flip pref, persist, push to controller. Returns new value. */
+    public static boolean toggleAutoPassNoActions(IGameController ctrl) {
+        if (ctrl == null) return false;
+        ForgePreferences prefs = FModel.getPreferences();
+        boolean newVal = !prefs.getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS);
+        prefs.setPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS, newVal);
+        prefs.save();
+        ctrl.setYieldBoolPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS, newVal);
+        return newVal;
+    }
+
+    /** Eager check at REVEAL/notifyOfValue call sites — no GameEventReveal exists. */
+    public void maybeInterruptOnReveal() {
+        if (isInterruptibleYieldActive() && getBoolPref(FPref.YIELD_INTERRUPT_ON_REVEAL)) {
+            clearActiveYieldAndDispatch();
+        }
+    }
+
+    public void onSpellAbilityCast(SpellAbilityStackInstance si, GameView gameView) {
+        if (!isInterruptibleYieldActive()) return;
+        if (si == null) return;
+        PlayerView local = owner != null ? owner.getLocalPlayerView() : null;
+        if (local == null) return;
+        Player activator = si.getActivatingPlayer();
+        boolean isOpponent = activator != null && !activator.getView().equals(local);
+
+        if (isOpponent && getBoolPref(FPref.YIELD_INTERRUPT_ON_OPPONENT_SPELL)) {
+            clearActiveYieldAndDispatch();
+            return;
+        }
+        StackItemView siv = StackItemView.get(si);
+        if (siv != null && getBoolPref(FPref.YIELD_INTERRUPT_ON_TARGETING)
+                && targetsPlayerOrPermanents(siv, local)) {
+            clearActiveYieldAndDispatch();
+            return;
+        }
+        if (isOpponent && getBoolPref(FPref.YIELD_INTERRUPT_ON_MASS_REMOVAL)
+                && isMassRemovalInstance(si)) {
+            clearActiveYieldAndDispatch();
+            return;
+        }
+        if (si.isTrigger() && getBoolPref(FPref.YIELD_INTERRUPT_ON_TRIGGERS)) {
+            clearActiveYieldAndDispatch();
+        }
+    }
+
+    public void onAttackersDeclared(CombatView combat) {
+        if (!isInterruptibleYieldActive()) return;
+        PlayerView local = owner != null ? owner.getLocalPlayerView() : null;
+        if (local == null) return;
+        if (getBoolPref(FPref.YIELD_INTERRUPT_ON_ATTACKERS) && isBeingAttacked(combat, local)) {
+            clearActiveYieldAndDispatch();
+        }
+    }
+
+    private final EnumMap<SuggestionType, Integer> declinedSuggestionTurn = new EnumMap<>(SuggestionType.class);
+    private boolean lastSeenStackNonEmpty = false;
+    private boolean wasAutoPassingLastTick = false;
+    private boolean yieldJustEndedFlag = false;
+
+    public synchronized void onPriorityReceived(boolean stackNonEmpty) {
+        if (lastSeenStackNonEmpty && !stackNonEmpty) {
+            if (getDeclineScope(FPref.YIELD_DECLINE_SCOPE_STACK_YIELD) == DeclineScope.STACK) {
+                declinedSuggestionTurn.remove(SuggestionType.STACK_YIELD);
+            }
+        }
+        lastSeenStackNonEmpty = stackNonEmpty;
+    }
+
+    public synchronized void declineSuggestion(SuggestionType type) {
+        GameView gv = owner != null && owner.getGui() != null ? owner.getGui().getGameView() : null;
+        if (gv == null) return;
+        declinedSuggestionTurn.put(type, gv.getTurn());
+    }
+
+    /**
+     * NEVER disables the suggestion entirely; ALWAYS never suppresses;
+     * STACK/TURN suppress if declined this turn (STACK also self-clears on stack-empty
+     * transition via {@link #onPriorityReceived}).
+     */
+    public synchronized boolean isSuggestionDeclined(SuggestionType type) {
+        DeclineScope scope = getDeclineScope(type.scopePref());
+        if (scope == DeclineScope.NEVER) return true;
+        if (scope == DeclineScope.ALWAYS) return false;
+        GameView gv = owner != null && owner.getGui() != null ? owner.getGui().getGameView() : null;
+        if (gv == null) return false;
+        Integer turnDeclined = declinedSuggestionTurn.get(type);
+        return turnDeclined != null && turnDeclined == gv.getTurn();
+    }
+
+    public synchronized void noteMayAutoPassResult(boolean nowMayAutoPass) {
+        if (wasAutoPassingLastTick && !nowMayAutoPass) yieldJustEndedFlag = true;
+        wasAutoPassingLastTick = nowMayAutoPass;
+    }
+
+    /** Self-clearing read of the mayAutoPass true→false edge. */
+    public synchronized boolean didYieldJustEnd() {
+        boolean f = yieldJustEndedFlag;
+        yieldJustEndedFlag = false;
+        return f;
+    }
+
+    /** Per-tick predicate (distinct from one-shot yields). Used by mayAutoPass. */
+    public boolean isAutoPassingNoActions(PlayerView player) {
+        if (!getBoolPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS)) return false;
+        if (getBoolPref(FPref.YIELD_AUTO_PASS_RESPECTS_INTERRUPTS) && shouldInterruptYield(player)) {
+            return false;
+        }
+        GameView gv = owner != null && owner.getGui() != null ? owner.getGui().getGameView() : null;
+        if (gv != null && gv.getStack() != null && gv.getStack().isEmpty()) {
+            PlayerView turnPlayer = gv.getPlayerTurn();
+            PhaseType phase = gv.getPhase();
+            if (turnPlayer != null && phase != null
+                    && owner.getGui().isUiSetToSkipPhase(turnPlayer, phase)) {
+                return true;
+            }
+        }
+        return player != null && !player.hasAvailableActions();
+    }
+
+    /** State-scanner for APINA's RESPECTS_INTERRUPTS only — event-driven flow uses classifiers directly. */
+    public boolean shouldInterruptYield(PlayerView player) {
+        if (player == null) return false;
+        GameView gv = owner != null && owner.getGui() != null ? owner.getGui().getGameView() : null;
+        if (gv == null) return false;
+        PhaseType phase = gv.getPhase();
+        CombatView combat = gv.getCombat();
+
+        if (getBoolPref(FPref.YIELD_INTERRUPT_ON_ATTACKERS)
+                && phase == PhaseType.COMBAT_DECLARE_ATTACKERS
+                && combat != null && isBeingAttacked(combat, player)) {
+            return true;
+        }
+        FCollectionView<StackItemView> stack = gv.getStack();
+        if (getBoolPref(FPref.YIELD_INTERRUPT_ON_TARGETING) && stack != null) {
+            for (StackItemView si : stack) {
+                if (targetsPlayerOrPermanents(si, player)) return true;
+            }
+        }
+        if (getBoolPref(FPref.YIELD_INTERRUPT_ON_OPPONENT_SPELL)) {
+            StackItemView top = gv.peekStack();
+            if (top != null) {
+                PlayerView act = top.getActivatingPlayer();
+                if (act != null && !act.equals(player)) return true;
+            }
+        }
+        if (getBoolPref(FPref.YIELD_INTERRUPT_ON_MASS_REMOVAL) && hasMassRemovalOnStack(gv, player)) {
+            return true;
+        }
+        if (getBoolPref(FPref.YIELD_INTERRUPT_ON_TRIGGERS) && stack != null) {
+            for (StackItemView si : stack) {
+                if (si.isTrigger()) return true;
+            }
+        }
+        return false;
+    }
+
+    /** Host-only: walks live engine stack via gameView.getGame(). Opponent spells only. */
+    private static boolean hasMassRemovalOnStack(GameView gameView, PlayerView player) {
+        forge.game.Game game = gameView.getGame();
+        if (game == null) return false; // host-only path; defensive on the client
+        for (SpellAbilityStackInstance si : game.getStack()) {
+            Player activator = si.getActivatingPlayer();
+            if (activator == null || activator.getView().equals(player)) continue;
+            if (isMassRemovalInstance(si)) return true;
+        }
+        return false;
+    }
+
+    private static boolean isBeingAttacked(CombatView combatView, PlayerView player) {
+        if (combatView == null) return false;
+        FCollection<CardView> attackersOfPlayer = combatView.getAttackersOf(player);
+        if (attackersOfPlayer != null && !attackersOfPlayer.isEmpty()) return true;
+        for (forge.game.GameEntityView defender : combatView.getDefenders()) {
+            if (defender instanceof CardView cardDefender) {
+                PlayerView controller = cardDefender.getController();
+                if (controller != null && controller.equals(player)) {
+                    FCollection<CardView> attackers = combatView.getAttackersOf(defender);
+                    if (attackers != null && !attackers.isEmpty()) return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /** Recurses into sub-instances (e.g. Oona, where targeting is in a sub-ability). */
+    private static boolean targetsPlayerOrPermanents(StackItemView si, PlayerView player) {
+        FCollectionView<PlayerView> targetPlayers = si.getTargetPlayers();
+        if (targetPlayers != null) {
+            for (PlayerView target : targetPlayers) {
+                if (target.equals(player)) return true;
+            }
+        }
+        FCollectionView<CardView> targetCards = si.getTargetCards();
+        if (targetCards != null) {
+            for (CardView target : targetCards) {
+                if (target.getController() != null && target.getController().equals(player)) return true;
+            }
+        }
+        StackItemView subInstance = si.getSubInstance();
+        if (subInstance != null && targetsPlayerOrPermanents(subInstance, player)) return true;
+        return false;
+    }
+
+    /** Recurses into sub-instances for modal spells like Farewell. */
+    private static boolean isMassRemovalInstance(SpellAbilityStackInstance si) {
+        SpellAbility sa = si.getSpellAbility();
+        if (sa != null && isMassRemovalApi(sa.getApi())) return true;
+        SpellAbilityStackInstance subInstance = si.getSubInstance();
+        return subInstance != null && isMassRemovalInstance(subInstance);
+    }
+
+    private static boolean isMassRemovalApi(ApiType api) {
+        return api == ApiType.DestroyAll
+            || api == ApiType.DamageAll
+            || api == ApiType.SacrificeAll
+            || api == ApiType.ChangeZoneAll;
     }
 }
