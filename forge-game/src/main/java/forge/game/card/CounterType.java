@@ -16,12 +16,17 @@ public interface CounterType extends Serializable, ITranslatable {
         try {
             return CounterEnumType.getType(name);
         } catch (final IllegalArgumentException ex) {
+            CounterType result = CounterListType.get(name);
+            if (result != null) {
+                return result;
+            }
             return CounterKeywordType.get(name);
         }
     }
     static List<CounterType> getValues() {
         List<CounterType> result = Lists.newArrayList();
         result.addAll(List.of(CounterEnumType.values()));
+        result.addAll(CounterListType.getValues());
         result.addAll(CounterKeywordType.getValues());
         return result;
     }
