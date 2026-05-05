@@ -92,6 +92,10 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
                         updateTrackers(new Object[]{gameView});
                     }
                 }
+                if (client.isActiveChannel(ctx.channel())
+                        && client.getReconnectState() == FGameClient.ReconnectState.RECONNECTING) {
+                    client.onResumeResponseReceived();
+                }
                 break;
             case openView:
                 gui.setNetGame();

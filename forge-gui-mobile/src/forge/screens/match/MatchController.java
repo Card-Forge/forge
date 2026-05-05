@@ -21,6 +21,8 @@ import com.google.common.collect.Maps;
 import forge.Forge;
 import forge.Graphics;
 import forge.LobbyPlayer;
+import forge.gamemodes.net.client.FGameClient;
+import forge.screens.online.OnlineLobbyScreen;
 import forge.assets.FImage;
 import forge.assets.FSkin;
 import forge.assets.FSkinImage;
@@ -801,5 +803,59 @@ public class MatchController extends NetworkGuiGame {
                         controlFlags.add(flag);
                     }
                 });
+    }
+
+    private ReconnectModals.ReconnectingHandle reconnectingHandle;
+    private boolean userDismissedReconnectDialog;
+
+    @Override
+    public void onReconnectStateChanged(final FGameClient.ReconnectState state, final int attemptIndex, final int nextDelaySeconds) {
+        FThreads.invokeInEdtLater(() -> {
+            final FGameClient client = OnlineLobbyScreen.getfGameClient();
+            switch (state) {
+                case RECONNECTING:
+                    if (userDismissedReconnectDialog) break;
+                    if (reconnectingHandle == null && client != null) {
+                        reconnectingHandle = ReconnectModals.showReconnecting(client,
+                                () -> {
+                                    userDismissedReconnectDialog = true;
+                                    reconnectingHandle = null;
+                                },
+                                MatchController::returnToMainMenu);
+                    }
+                    if (reconnectingHandle != null) {
+                        reconnectingHandle.update(attemptIndex, FGameClient.getTotalReconnectAttempts(), nextDelaySeconds);
+                    }
+                    break;
+                case CONNECTED:
+                    if (reconnectingHandle != null) {
+                        reconnectingHandle.dismiss();
+                        reconnectingHandle = null;
+                    }
+                    if (userDismissedReconnectDialog) {
+                        FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblReconnectedToast"));
+                    }
+                    userDismissedReconnectDialog = false;
+                    break;
+                case FAILED:
+                    if (reconnectingHandle != null) { reconnectingHandle.dismiss(); reconnectingHandle = null; }
+                    userDismissedReconnectDialog = false;
+                    if (client != null) ReconnectModals.showFailed(client, MatchController::returnToMainMenu);
+                    break;
+                case SEAT_LOST:
+                    if (reconnectingHandle != null) { reconnectingHandle.dismiss(); reconnectingHandle = null; }
+                    userDismissedReconnectDialog = false;
+                    if (client != null) ReconnectModals.showSeatLost(client, MatchController::returnToMainMenu);
+                    break;
+            }
+        });
+    }
+
+    private static void returnToMainMenu() {
+        OnlineLobbyScreen.clearGameLobby();
+        if (OnlineLobbyScreen.getfGameClient() != null) {
+            OnlineLobbyScreen.closeClient();
+        }
+        Forge.openHomeScreen(Forge.lastButtonIndex, Forge.getCurrentScreen());
     }
 }
