@@ -1116,9 +1116,8 @@ public class ComputerUtilCard {
         return true;
     };
 
-    public static List<String> chooseColor(SpellAbility sa, int min, int max, List<String> colorChoices) {
+    public static List<String> chooseColor(Player ai, SpellAbility sa, int min, int max, List<String> colorChoices) {
         List<String> chosen = new ArrayList<>();
-        Player ai = sa.getActivatingPlayer();
         final Game game = ai.getGame();
         Player opp = ai.getStrongestOpponent();
         if (sa.hasParam("AILogic")) {
@@ -1145,9 +1144,6 @@ public class ComputerUtilCard {
                 chosen.add(getMostProminentColor(ai.getCardsIn(ZoneType.Battlefield), colorChoices));
             } else if (logic.equals("MostProminentHumanControls")) {
                 chosen.add(getMostProminentColor(opp.getCardsIn(ZoneType.Battlefield), colorChoices));
-            } else if (logic.equals("MostProminentRememberedControls") && rememberedPlayers.hasNext()) {
-                Player rememberedPlayer = rememberedPlayers.next();
-                chosen.add(getMostProminentColor(rememberedPlayer.getCardsIn(ZoneType.Battlefield), colorChoices));
             } else if (logic.equals("MostProminentPermanent")) {
                 chosen.add(getMostProminentColor(game.getCardsIn(ZoneType.Battlefield), colorChoices));
             } else if (logic.equals("MostProminentAttackers") && game.getPhaseHandler().inCombat()) {
