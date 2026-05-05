@@ -6,4 +6,5 @@ S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Hexproof | Condition$ Pla
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigEarthbend | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, earthbend 8, then untap that land. (Target land you control becomes a 0/0 creature with haste that's still a land. Put eight +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)
 SVar:TrigEarthbend:DB$ Earthbend | Num$ 8 | SubAbility$ DBUntap
 SVar:DBUntap:DB$ Untap | Defined$ Targeted
+SVar:PlayMain1:TRUE
 Oracle:During your turn, Avatar Kyoshi has hexproof.\nAt the beginning of combat on your turn, earthbend 8, then untap that land. (Target land you control becomes a 0/0 creature with haste that's still a land. Put eight +1/+1 counters on it. When it dies or is exiled, return it to the battlefield tapped.)
