@@ -180,6 +180,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_HAND_NO_OVERLAP("false"),
         UI_ZONE_TAB_NEW_COUNT("true"),
         UI_ENABLE_AI_PICKER("false"),
+        UI_DISPLAY_PRICE_IN_REWARD_SCREEN("true"),
 
         UI_ENABLE_SOUNDS ("true"),
         UI_ENABLE_MUSIC ("true"),
