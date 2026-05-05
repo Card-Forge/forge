@@ -279,7 +279,7 @@ public class PlayerView extends GameEntityView {
         return get(TrackableProperty.NumLandThisTurn);
     }
     void updateNumLandThisTurn(Player p) {
-        set(TrackableProperty.NumLandThisTurn, p.getLandsPlayedThisTurn());
+        set(TrackableProperty.NumLandThisTurn, p.getLandsPlayedThisTurn().size());
     }
 
     public int getNumManaShards() {

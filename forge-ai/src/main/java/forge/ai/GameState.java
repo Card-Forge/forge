@@ -59,8 +59,6 @@ public abstract class GameState {
         private String counters = "";
         private String manaPool = "";
         private String persistentMana = "";
-        private int landsPlayed = 0;
-        private int landsPlayedLastTurn = 0;
         private int numRingTemptedYou = 0;
         private int speed = 0;
         private String precast = null;
@@ -136,8 +134,6 @@ public abstract class GameState {
         for (PlayerState p : playerStates) {
             String prefix = "p" + playerIndex++;
             sb.append(TextUtil.concatNoSpace(prefix + "life=", String.valueOf(p.life), "\n"));
-            sb.append(TextUtil.concatNoSpace(prefix + "landsplayed=", String.valueOf(p.landsPlayed), "\n"));
-            sb.append(TextUtil.concatNoSpace(prefix + "landsplayedlastturn=", String.valueOf(p.landsPlayedLastTurn), "\n"));
             sb.append(TextUtil.concatNoSpace(prefix + "numringtemptedyou=", String.valueOf(p.numRingTemptedYou), "\n"));
             sb.append(TextUtil.concatNoSpace(prefix + "speed=", String.valueOf(p.speed), "\n"));
             if (!p.counters.isEmpty()) {
@@ -165,8 +161,6 @@ public abstract class GameState {
         for (Player player : game.getPlayers()) {
             PlayerState p = new PlayerState();
             p.life = player.getLife();
-            p.landsPlayed = player.getLandsPlayedThisTurn();
-            p.landsPlayedLastTurn = player.getLandsPlayedLastTurn();
             p.counters = countersToString(player.getCounters());
             p.manaPool = processManaPool(player.getManaPool());
             p.numRingTemptedYou = player.getNumRingTemptedYou();
@@ -545,10 +539,6 @@ public abstract class GameState {
             getPlayerState(categoryName).life = Integer.parseInt(categoryValue);
         } else if (categoryName.endsWith("counters")) {
             getPlayerState(categoryName).counters = categoryValue;
-        } else if (categoryName.endsWith("landsplayed")) {
-            getPlayerState(categoryName).landsPlayed = Integer.parseInt(categoryValue);
-        } else if (categoryName.endsWith("landsplayedlastturn")) {
-            getPlayerState(categoryName).landsPlayedLastTurn = Integer.parseInt(categoryValue);
         } else if (categoryName.endsWith("numringtemptedyou")) {
             getPlayerState(categoryName).numRingTemptedYou = Integer.parseInt(categoryValue);
         } else if (categoryName.endsWith("speed")) {
@@ -1156,8 +1146,6 @@ public abstract class GameState {
         }
 
         if (state.life >= 0) p.setLife(state.life, null);
-        p.setLandsPlayedThisTurn(state.landsPlayed);
-        p.setLandsPlayedLastTurn(state.landsPlayedLastTurn);
         p.setNumRingTemptedYou(state.numRingTemptedYou);
         p.setSpeed(state.speed);
 

@@ -3897,12 +3897,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         return mayPlay = mp;
     }
 
-    public void resetMayPlayTurn() {
-        for (StaticAbility sta : getStaticAbilities()) {
-            sta.resetMayPlayTurn();
-        }
-    }
-
     public final CardCollectionView getEquippedBy() {
         return CardLists.filter(getAttachedCards(), Card::isEquipment);
     }
@@ -7317,7 +7311,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         resetCrewed();
         resetSaddled();
         visitedThisTurn = false;
-        resetMayPlayTurn();
         resetChosenModeTurn();
         resetAbilityResolvedThisTurn();
     }

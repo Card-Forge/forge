@@ -537,7 +537,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         if (sp.isSpell() && sp.getMayPlay() != null) {
-            sp.getMayPlay().incMayPlayTurn();
             if (sp.getMayPlay().hasParam("ReplaceGraveyard")) {
                 PlayEffect.addReplaceGraveyardEffect(sp.getHostCard(), sp.getMayPlay().getHostCard(), sp, sp, sp.getMayPlay().getParam("ReplaceGraveyard"));
             }

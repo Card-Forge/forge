@@ -3523,8 +3523,16 @@ public class AbilityUtils {
             return doXMath(Aggregates.sum(player.getCardsIn(ZoneType.Library, 1), Card::getCMC), m, source, ctb);
         }
 
-        if (value.contains("LandsPlayed")) {
-            return doXMath(player.getLandsPlayedThisTurn(), m, source, ctb);
+        if (value.startsWith("LandsPlayed")) {
+            List<SpellAbility> list = player.getLandsPlayedThisTurn();
+            if (l[0].contains(" ")) {
+                String[] lparts = l[0].split(" ", 2);
+                String restrictions = TextUtil.fastReplace(l[0], TextUtil.addSuffix(lparts[0]," "), "");
+                list = list.stream()
+                        .filter(SpellAbilityPredicates.isValid(restrictions.split(","), player, source, ctb))
+                        .collect(Collectors.toList());
+            }
+            return doXMath(list.size(), m, source, ctb);
         }
 
         if (value.contains("SpellsCastThisTurn")) {
