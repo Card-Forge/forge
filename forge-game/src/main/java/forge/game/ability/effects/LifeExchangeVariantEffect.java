@@ -44,18 +44,15 @@ public class LifeExchangeVariantEffect extends SpellAbilityEffect {
         if (tgtPlayers.isEmpty()) {
             return;
         }
+        if (!source.isInPlay() || !source.isCreature()) {
+            return;
+        }
 
         Player p = tgtPlayers.get(0);
-
         Integer power = null;
         Integer toughness = null;
-
-        final Game game = p.getGame();
-        final long timestamp = game.getNextTimestamp();
-
         final int pLife = p.getLife();
-        int num = 0;
-
+        int num;
         if ("Power".equals(mode)) {
             num = source.getNetPower();
             power = pLife;
@@ -66,10 +63,8 @@ public class LifeExchangeVariantEffect extends SpellAbilityEffect {
             return;
         }
 
-        if (!source.isInPlay()) {
-            return;
-        }
-
+        final Game game = p.getGame();
+        final long timestamp = game.getNextTimestamp();
         if (pLife > num && p.canLoseLife()) {
             final int diff = pLife - num;
             final int lost = p.loseLife(diff, false, false);
@@ -80,7 +75,7 @@ public class LifeExchangeVariantEffect extends SpellAbilityEffect {
                 final Map<Player, Integer> lossMap = Maps.newHashMap();
                 lossMap.put(p, lost);
                 final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPIMap(lossMap);
-                source.getGame().getTriggerHandler().runTrigger(TriggerType.LifeLostAll, runParams, false);
+                game.getTriggerHandler().runTrigger(TriggerType.LifeLostAll, runParams, false);
             }
         } else if (num > pLife && p.canGainLife()) {
             final int diff = num - pLife;

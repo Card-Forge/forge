@@ -373,14 +373,16 @@ public class VMatchUI implements IVTopLevelUI {
         return this.control;
     }
 
+    public List<VField> getFieldViews() {
+        return lstFields;
+    }
     public void setFieldViews(final List<VField> lst0) {
         this.lstFields = lst0;
     }
 
-    public List<VField> getFieldViews() {
-        return lstFields;
+    public List<VHand> getHands() {
+        return lstHands;
     }
-
     public void setHandViews(final List<VHand> lst0) {
         this.lstHands = lst0;
     }
@@ -388,13 +390,8 @@ public class VMatchUI implements IVTopLevelUI {
     public FButton getBtnCancel() {
         return getControl().getCPrompt().getView().getBtnCancel();
     }
-
     public FButton getBtnOK() {
         return getControl().getCPrompt().getView().getBtnOK();
-    }
-
-    public List<VHand> getHands() {
-        return lstHands;
     }
 
     @Override
