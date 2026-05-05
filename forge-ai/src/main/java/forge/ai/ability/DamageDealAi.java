@@ -360,7 +360,7 @@ public class DamageDealAi extends DamageAiBase {
                 targetCard = ComputerUtilCard.getBestPlaneswalkerAI(killables);
             }
             if (targetCard == null) {
-                targetCard = ComputerUtilCard.getBestCreatureAI(killables);
+                targetCard = ComputerUtilCard.getBestCreatureRemovalTargetAI(ai, killables);
             }
 
             return targetCard;
@@ -380,7 +380,7 @@ public class DamageDealAi extends DamageAiBase {
                     targetCard = ComputerUtilCard.getBestPlaneswalkerAI(controlledByOpps);
                 }
                 if (targetCard == null) {
-                    targetCard = ComputerUtilCard.getBestCreatureAI(controlledByOpps);
+                    targetCard = ComputerUtilCard.getBestCreatureRemovalTargetAI(ai, controlledByOpps);
                 }
             }
             if (targetCard == null) {

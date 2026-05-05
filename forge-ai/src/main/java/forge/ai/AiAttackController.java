@@ -202,33 +202,31 @@ public class AiAttackController {
         return choosePreferredDefenderPlayer(ai, false);
     }
     public static Player choosePreferredDefenderPlayer(Player ai, boolean forCombatDmg) {
-        Player defender = ai.getWeakestOpponent(); //Concentrate on opponent within easy kill range
-
         // TODO for multiplayer combat avoid players with cantLose or (if not playing infect) cantLoseForZeroOrLessLife and !canLoseLife
 
-        if (defender.getLife() > 8) {
-            // TODO connect with evaluateBoardPosition and only fall back to random when no player is the biggest threat by a fair margin
-
-            List<Player> opps = Lists.newArrayList(ai.getOpponents());
+        Player bestDefender = ai.getWeakestOpponent();
+        int bestScore = Integer.MIN_VALUE;
+        for (Player opp : ai.getOpponents()) {
+            final int life = opp.getLife();
+            int score = ComputerUtil.evaluateOpponentThreatTo(ai, opp);
+            score += Math.max(0, 40 - life) * 10;
+            if (life <= 8) {
+                score += (9 - life) * 100;
+            }
             if (forCombatDmg) {
-                for (Player p : ai.getOpponents()) {
-                    if (p.isMonarch() && ai.canBecomeMonarch()) {
-                        // just increase the odds for now instead of being fully predictable
-                        // as it could lead to other too complex factors giving this reasoning negative impact
-                        opps.add(p);
-                    }
-                    if (p.hasInitiative()) {
-                        opps.add(p);
-                    }
+                if (opp.isMonarch() && ai.canBecomeMonarch()) {
+                    score += 80;
+                }
+                if (opp.hasInitiative()) {
+                    score += 80;
                 }
             }
-
-            // TODO should we cache the random for each turn? some functions like shouldPumpCard base their decisions on the assumption who will be attacked
-
-            //Otherwise choose a random opponent to ensure no ganging up on players
-            return Aggregates.random(opps);
+            if (score > bestScore) {
+                bestScore = score;
+                bestDefender = opp;
+            }
         }
-        return defender;
+        return bestDefender;
     }
 
     /**
