@@ -14,6 +14,7 @@ import forge.game.GameView;
 import forge.game.IHasGameType;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
+import forge.gamemodes.net.NetworkEventView;
 import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
 import forge.gui.GuiBase;
 import forge.gui.interfaces.IGuiGame;
@@ -94,6 +95,16 @@ public abstract class GameLobby implements IHasGameType {
             return null;
         }
         return data.slots.get(index);
+    }
+
+    /** First non-OPEN slot that isn't ready, or null if every filled slot is ready. */
+    public LobbySlot findFirstUnreadySlot() {
+        for (int i = 0; i < getNumberOfSlots(); i++) {
+            LobbySlot slot = getSlot(i);
+            if (slot == null || slot.getType() == LobbySlotType.OPEN) continue;
+            if (!slot.isReady()) return slot;
+        }
+        return null;
     }
     public void applyToSlot(final int index, final UpdateLobbyPlayerEvent event) {
         final LobbySlot slot = getSlot(index);
@@ -330,7 +341,7 @@ public abstract class GameLobby implements IHasGameType {
         return false;
     }
 
-    protected final void updateView(final boolean fullUpdate) {
+    protected void updateView(final boolean fullUpdate) {
         if (listener != null) {
             listener.update(fullUpdate);
         }
@@ -399,9 +410,10 @@ public abstract class GameLobby implements IHasGameType {
         //Auto-generated decks don't need to be checked here
         //Commander deck replaces regular deck and is checked later
         if (checkLegality && autoGenerateVariant == null && !isCommanderMatch) {
+            final DeckFormat deckFormat = data.isLimitedMode() ? DeckFormat.Limited : GameType.Constructed.getDeckFormat();
             for (final LobbySlot slot : activeSlots) {
                 final String name = slot.getName();
-                final String errMsg = GameType.Constructed.getDeckFormat().getDeckConformanceProblem(slot.getDeck());
+                final String errMsg = deckFormat.getDeckConformanceProblem(slot.getDeck());
                 if (null != errMsg) {
                     SOptionPane.showErrorDialog(Localizer.getInstance().getMessage("lblPlayerDeckError", name, errMsg), Localizer.getInstance().getMessage("lblInvalidDeck"));
                     return null;
@@ -554,8 +566,37 @@ public abstract class GameLobby implements IHasGameType {
 
         private final Set<GameType> appliedVariants = EnumSet.noneOf(GameType.class);
         private final List<LobbySlot> slots = Lists.newArrayList();
+        private NetworkEventView eventView;
+        private boolean limitedMode;
+        private String activeEventId;
+        private boolean activeConformance;
 
         public GameLobbyData() {
+        }
+
+        public NetworkEventView getEventView() {
+            return eventView;
+        }
+        public void setEventView(final NetworkEventView view) {
+            this.eventView = view;
+        }
+        public boolean isLimitedMode() {
+            return limitedMode;
+        }
+        public void setLimitedMode(final boolean limited) {
+            this.limitedMode = limited;
+        }
+        public String getActiveEventId() {
+            return activeEventId;
+        }
+        public void setActiveEventId(final String id) {
+            this.activeEventId = id;
+        }
+        public boolean isActiveConformance() {
+            return activeConformance;
+        }
+        public void setActiveConformance(final boolean conformance) {
+            this.activeConformance = conformance;
         }
     }
 }

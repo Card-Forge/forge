@@ -139,7 +139,7 @@ public class DeckController<T extends DeckBase> {
         // Getting Latest among the earliest editions in catalog!
         CardEdition referenceEdition = StaticData.instance().getEditions().getTheLatestOfAllTheOriginalEditionsOfCardsIn(catalog);
         Date referenceReleaseDate = referenceEdition.getDate();
-        Deck result = new Deck();
+        Deck result = new Deck(deck.getName());
         for (DeckSection section: DeckSection.values()) {
             if (view.isSectionImportable(section)) {
                 CardPool cards = pickSectionFromCatalog(catalog, deck.getOrCreate(section), referenceReleaseDate);
