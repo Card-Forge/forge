@@ -26,6 +26,7 @@ import forge.game.zone.ZoneType;
 import forge.player.PlayerControllerHuman;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
+import forge.ai.ComputerUtil;
 
 import java.util.List;
 
@@ -81,18 +82,27 @@ public class InputLondonMulligan extends InputSyncronizedBase {
 
     @Override
     protected final void onCancel() {
-        int cardsLeft = toReturn - selected.size();
-        int count = 0;
-        for(Card c : player.getZone(ZoneType.Hand).getCards()) {
+        // Despite its name, onCancel is triggered by the "Auto" button.
+        // This button will select additional cards to reach the toReturn value for this mulligan, respecting cards
+        // already selected by the player.
+        CardCollectionView hand = player.getCardsIn(ZoneType.Hand);
+        CardCollection unselectedCards = new CardCollection();
+        for (Card c : hand) {
+            if (!selected.contains(c)) {
+                unselectedCards.add(c);
+            }
+        }
+
+        // Pick the remaining cards using AI.
+        int remainingToReturn = toReturn - selected.size();
+        CardCollectionView aiSelected = ComputerUtil.chooseBestCardsToReturn(player, unselectedCards, remainingToReturn);
+
+        // Highlight and add the AI's picks to the current selection
+        for (Card c : aiSelected ) {
             if (selected.contains(c)) { continue; }
 
             selected.add(c);
-            setCardHighlight(c, selected.contains(c));
-            count++;
-
-            if (cardsLeft == count) {
-                break;
-            }
+            setCardHighlight(c, true);
         }
 
         onOk();
