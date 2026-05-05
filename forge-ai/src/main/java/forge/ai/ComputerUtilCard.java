@@ -1115,7 +1115,7 @@ public class ComputerUtilCard {
         return true;
     };
 
-    public static List<String> chooseColor(Player ai, SpellAbility sa, int min, int max, List<String> colorChoices) {
+    public static List<String> chooseColor(Player ai, SpellAbility sa, List<String> colorChoices) {
         List<String> chosen = new ArrayList<>();
         final Game game = ai.getGame();
         Player opp = ai.getStrongestOpponent();
