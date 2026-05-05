@@ -271,6 +271,7 @@ public class YieldController {
         lastSeenStackNonEmpty = false;
         wasAutoPassingLastTick = false;
         yieldJustEndedFlag = false;
+        autoPassInterrupted = false;
         // boolPrefOverrides / stringPrefOverrides intentionally kept — per-match, not per-game
     }
 
@@ -413,13 +414,12 @@ public class YieldController {
 
     /** Eager check at REVEAL/notifyOfValue call sites — no GameEventReveal exists. */
     public void maybeInterruptOnReveal() {
-        if (isInterruptibleYieldActive() && getBoolPref(FPref.YIELD_INTERRUPT_ON_REVEAL)) {
-            clearActiveYieldAndDispatch();
-        }
+        if (!getBoolPref(FPref.YIELD_INTERRUPT_ON_REVEAL)) return;
+        applyInterrupt();
     }
 
     public void onSpellAbilityCast(SpellAbilityStackInstance si, GameView gameView) {
-        if (!isInterruptibleYieldActive()) return;
+        if (!shouldEvaluateInterrupts()) return;
         if (si == null) return;
         PlayerView local = owner != null ? owner.getLocalPlayerView() : null;
         if (local == null) return;
@@ -427,31 +427,47 @@ public class YieldController {
         boolean isOpponent = activator != null && !activator.getView().equals(local);
 
         if (isOpponent && getBoolPref(FPref.YIELD_INTERRUPT_ON_OPPONENT_SPELL)) {
-            clearActiveYieldAndDispatch();
+            applyInterrupt();
             return;
         }
         StackItemView siv = StackItemView.get(si);
         if (siv != null && getBoolPref(FPref.YIELD_INTERRUPT_ON_TARGETING)
                 && targetsPlayerOrPermanents(siv, local)) {
-            clearActiveYieldAndDispatch();
+            applyInterrupt();
             return;
         }
         if (isOpponent && getBoolPref(FPref.YIELD_INTERRUPT_ON_MASS_REMOVAL)
                 && isMassRemovalInstance(si)) {
-            clearActiveYieldAndDispatch();
+            applyInterrupt();
             return;
         }
         if (si.isTrigger() && getBoolPref(FPref.YIELD_INTERRUPT_ON_TRIGGERS)) {
-            clearActiveYieldAndDispatch();
+            applyInterrupt();
         }
     }
 
     public void onAttackersDeclared(CombatView combat) {
-        if (!isInterruptibleYieldActive()) return;
+        if (!shouldEvaluateInterrupts()) return;
         PlayerView local = owner != null ? owner.getLocalPlayerView() : null;
         if (local == null) return;
         if (getBoolPref(FPref.YIELD_INTERRUPT_ON_ATTACKERS) && isBeingAttacked(combat, local)) {
-            clearActiveYieldAndDispatch();
+            applyInterrupt();
+        }
+    }
+
+    /** True when interrupt classifiers should run — an interruptible yield is active, or APINA is active with respects-interrupts on. */
+    private boolean shouldEvaluateInterrupts() {
+        if (isInterruptibleYieldActive()) return true;
+        return getBoolPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS)
+                && getBoolPref(FPref.YIELD_AUTO_PASS_RESPECTS_INTERRUPTS);
+    }
+
+    /** Apply an interrupt: clear any interruptible yield and pause APINA for one prompt. Either, both, or neither may apply. */
+    public synchronized void applyInterrupt() {
+        if (isInterruptibleYieldActive()) clearActiveYieldAndDispatch();
+        if (getBoolPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS)
+                && getBoolPref(FPref.YIELD_AUTO_PASS_RESPECTS_INTERRUPTS)) {
+            autoPassInterrupted = true;
         }
     }
 
@@ -459,6 +475,7 @@ public class YieldController {
     private boolean lastSeenStackNonEmpty = false;
     private boolean wasAutoPassingLastTick = false;
     private boolean yieldJustEndedFlag = false;
+    private boolean autoPassInterrupted = false;
 
     public synchronized void onPriorityReceived(boolean stackNonEmpty) {
         if (lastSeenStackNonEmpty && !stackNonEmpty) {
@@ -493,6 +510,7 @@ public class YieldController {
     public synchronized void noteMayAutoPassResult(boolean nowMayAutoPass) {
         if (wasAutoPassingLastTick && !nowMayAutoPass) yieldJustEndedFlag = true;
         wasAutoPassingLastTick = nowMayAutoPass;
+        if (!nowMayAutoPass) autoPassInterrupted = false;
     }
 
     /** Self-clearing read of the mayAutoPass true→false edge. */
@@ -505,9 +523,7 @@ public class YieldController {
     /** Per-tick predicate (distinct from one-shot yields). Used by mayAutoPass. */
     public boolean isAutoPassingNoActions(PlayerView player) {
         if (!getBoolPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS)) return false;
-        if (getBoolPref(FPref.YIELD_AUTO_PASS_RESPECTS_INTERRUPTS) && shouldInterruptYield(player)) {
-            return false;
-        }
+        if (autoPassInterrupted) return false;
         GameView gv = owner != null && owner.getGui() != null ? owner.getGui().getGameView() : null;
         if (gv != null && gv.getStack() != null && gv.getStack().isEmpty()) {
             PlayerView turnPlayer = gv.getPlayerTurn();
@@ -518,55 +534,6 @@ public class YieldController {
             }
         }
         return player != null && !player.hasAvailableActions();
-    }
-
-    /** State-scanner for APINA's RESPECTS_INTERRUPTS only — event-driven flow uses classifiers directly. */
-    public boolean shouldInterruptYield(PlayerView player) {
-        if (player == null) return false;
-        GameView gv = owner != null && owner.getGui() != null ? owner.getGui().getGameView() : null;
-        if (gv == null) return false;
-        PhaseType phase = gv.getPhase();
-        CombatView combat = gv.getCombat();
-
-        if (getBoolPref(FPref.YIELD_INTERRUPT_ON_ATTACKERS)
-                && phase == PhaseType.COMBAT_DECLARE_ATTACKERS
-                && combat != null && isBeingAttacked(combat, player)) {
-            return true;
-        }
-        FCollectionView<StackItemView> stack = gv.getStack();
-        if (getBoolPref(FPref.YIELD_INTERRUPT_ON_TARGETING) && stack != null) {
-            for (StackItemView si : stack) {
-                if (targetsPlayerOrPermanents(si, player)) return true;
-            }
-        }
-        if (getBoolPref(FPref.YIELD_INTERRUPT_ON_OPPONENT_SPELL)) {
-            StackItemView top = gv.peekStack();
-            if (top != null) {
-                PlayerView act = top.getActivatingPlayer();
-                if (act != null && !act.equals(player)) return true;
-            }
-        }
-        if (getBoolPref(FPref.YIELD_INTERRUPT_ON_MASS_REMOVAL) && hasMassRemovalOnStack(gv, player)) {
-            return true;
-        }
-        if (getBoolPref(FPref.YIELD_INTERRUPT_ON_TRIGGERS) && stack != null) {
-            for (StackItemView si : stack) {
-                if (si.isTrigger()) return true;
-            }
-        }
-        return false;
-    }
-
-    /** Host-only: walks live engine stack via gameView.getGame(). Opponent spells only. */
-    private static boolean hasMassRemovalOnStack(GameView gameView, PlayerView player) {
-        forge.game.Game game = gameView.getGame();
-        if (game == null) return false; // host-only path; defensive on the client
-        for (SpellAbilityStackInstance si : game.getStack()) {
-            Player activator = si.getActivatingPlayer();
-            if (activator == null || activator.getView().equals(player)) continue;
-            if (isMassRemovalInstance(si)) return true;
-        }
-        return false;
     }
 
     private static boolean isBeingAttacked(CombatView combatView, PlayerView player) {
