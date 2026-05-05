@@ -6954,6 +6954,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         if (currentZone == zone) { return; }
         currentZone = zone;
         view.updateZone(this);
+        if (isCommander()) {
+            updateManaCostForView();
+        }
     }
 
     public boolean isInZone(final ZoneType zone) {
