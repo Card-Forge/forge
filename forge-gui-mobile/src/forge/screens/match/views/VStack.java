@@ -32,6 +32,7 @@ import forge.menu.FDropDown;
 import forge.menu.FMenuItem;
 import forge.menu.FMenuTab;
 import forge.menu.FPopupMenu;
+import forge.player.AutoYieldStore.TriggerDecision;
 import forge.player.PlayerZoneUpdates;
 import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
@@ -294,8 +295,7 @@ public class VStack extends FDropDown {
                             final boolean autoYield = controller.shouldAutoYield(key);
                             addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("cbpAutoYieldMode"), autoYield,
                                     e -> {
-                                        boolean abilityScope = !forge.localinstance.properties.ForgeConstants.AUTO_YIELD_PER_CARD.equals(
-                                                forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_YIELD_MODE));
+                                        boolean abilityScope = controller.getYieldController().isAbilityScope();
                                         controller.setShouldAutoYield(key, !autoYield, abilityScope);
                                         if (!autoYield && stackInstance.equals(gameView.peekStack())) {
                                             //auto-pass priority if ability is on top of stack
@@ -303,27 +303,19 @@ public class VStack extends FDropDown {
                                         }
                                     }));
                             if (stackInstance.isOptionalTrigger() && stackInstance.getActivatingPlayer().equals(player)) {
-                                final int triggerID = stackInstance.getSourceTrigger();
-                                addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblAlwaysYes"),
-                                        controller.shouldAlwaysAcceptTrigger(triggerID),
-                                        e -> {
-                                            if (controller.shouldAlwaysAcceptTrigger(triggerID)) {
-                                                controller.setShouldAlwaysAskTrigger(triggerID);
-                                            }
-                                            else {
-                                                controller.setShouldAlwaysAcceptTrigger(triggerID);
-                                            }
-                                        }));
-                                addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblAlwaysNo"),
-                                        controller.shouldAlwaysDeclineTrigger(triggerID),
-                                        e -> {
-                                            if (controller.shouldAlwaysDeclineTrigger(triggerID)) {
-                                                controller.setShouldAlwaysAskTrigger(triggerID);
-                                            }
-                                            else {
-                                                controller.setShouldAlwaysDeclineTrigger(triggerID);
-                                            }
-                                        }));
+                                if (!key.isEmpty()) {
+                                    final boolean abilityScope = controller.getYieldController().isAbilityScope();
+                                    addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblAlwaysYes"),
+                                            controller.getTriggerDecision(key) == TriggerDecision.ACCEPT,
+                                            e -> controller.setTriggerDecision(key,
+                                                    controller.getTriggerDecision(key) == TriggerDecision.ACCEPT ? TriggerDecision.ASK : TriggerDecision.ACCEPT,
+                                                    abilityScope)));
+                                    addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblAlwaysNo"),
+                                            controller.getTriggerDecision(key) == TriggerDecision.DECLINE,
+                                            e -> controller.setTriggerDecision(key,
+                                                    controller.getTriggerDecision(key) == TriggerDecision.DECLINE ? TriggerDecision.ASK : TriggerDecision.DECLINE,
+                                                    abilityScope)));
+                                }
                             }
                         }
                         addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblYieldToEntireStack"),

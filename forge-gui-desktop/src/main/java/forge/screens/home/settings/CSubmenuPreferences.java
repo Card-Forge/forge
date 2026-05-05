@@ -227,7 +227,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeLandPlayedComboBox();
         initializeColorIdentityCombobox();
         initializeSwitchStatesCombobox();
-        initializeAutoYieldModeComboBox();
+        initializeAutoDecisionModeComboBox();
         initializeStackGroupPermanentsComboBox();
         initializeMaxStackDepthComboBox();
         initializeCounterDisplayTypeComboBox();
@@ -571,15 +571,15 @@ public enum CSubmenuPreferences implements ICDoc {
         panel.setComboBox(comboBox, selectedItem);
     }
 
-    private void initializeAutoYieldModeComboBox() {
+    private void initializeAutoDecisionModeComboBox() {
         final String[] elems = {
-            ForgeConstants.AUTO_YIELD_PER_CARD,
-            ForgeConstants.AUTO_YIELD_PER_ABILITY,
-            ForgeConstants.AUTO_YIELD_PER_ABILITY_SESSION,
-            ForgeConstants.AUTO_YIELD_PER_ABILITY_INSTALL,
+            ForgeConstants.AUTO_DECISION_PER_CARD,
+            ForgeConstants.AUTO_DECISION_PER_ABILITY,
+            ForgeConstants.AUTO_DECISION_PER_ABILITY_SESSION,
+            ForgeConstants.AUTO_DECISION_PER_ABILITY_INSTALL,
         };
-        final FPref userSetting = FPref.UI_AUTO_YIELD_MODE;
-        final FComboBoxPanel<String> panel = this.view.getAutoYieldModeComboBoxPanel();
+        final FPref userSetting = FPref.UI_AUTO_DECISION_MODE;
+        final FComboBoxPanel<String> panel = this.view.getAutoDecisionModeComboBoxPanel();
         final FComboBox<String> comboBox = createComboBox(elems, userSetting);
         final String selectedItem = this.prefs.getPref(userSetting);
         panel.setComboBox(comboBox, selectedItem);

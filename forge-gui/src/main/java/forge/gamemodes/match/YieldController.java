@@ -8,7 +8,7 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.AutoYieldStore;
 import forge.player.LobbyPlayerHuman;
-import forge.player.PersistentYieldStore;
+import forge.player.PersistentAutoDecisionStore;
 import forge.player.PlayerControllerHuman;
 
 import java.util.EnumSet;
@@ -139,7 +139,7 @@ public class YieldController {
                     || store.shouldYield(AutoYieldStore.Tier.GAME, AutoYieldStore.abilitySuffix(key));
         }
         if (activeModeIsInstall()) {
-            return PersistentYieldStore.get().contains(AutoYieldStore.abilitySuffix(key));
+            return PersistentAutoDecisionStore.get().contains(AutoYieldStore.abilitySuffix(key));
         }
         AutoYieldStore.Tier tier = activeTier();
         boolean abilityScope = tier != AutoYieldStore.Tier.GAME;
@@ -147,11 +147,17 @@ public class YieldController {
         return store.shouldYield(tier, storageKey);
     }
 
+    /** True when the active auto-decision scope is per-ability (any tier above per-card/per-game). */
+    public boolean isAbilityScope() {
+        return !ForgeConstants.AUTO_DECISION_PER_CARD.equals(
+                FModel.getPreferences().getPref(FPref.UI_AUTO_DECISION_MODE));
+    }
+
     /** Tier-aware user-initiated set. Returns the storage key (stripped if ability-scope) for wire propagation. */
     public String setShouldAutoYield(String key, boolean autoYield, boolean abilityScope) {
         String storageKey = abilityScope ? AutoYieldStore.abilitySuffix(key) : key;
         if (activeModeIsInstall()) {
-            PersistentYieldStore.get().setYield(storageKey, autoYield);
+            PersistentAutoDecisionStore.get().setYield(storageKey, autoYield);
         } else {
             activeStore().setYield(activeTier(), storageKey, autoYield);
         }
@@ -175,13 +181,13 @@ public class YieldController {
     }
 
     private static boolean activeModeIsInstall() {
-        return ForgeConstants.AUTO_YIELD_PER_ABILITY_INSTALL.equals(FModel.getPreferences().getPref(FPref.UI_AUTO_YIELD_MODE));
+        return ForgeConstants.AUTO_DECISION_PER_ABILITY_INSTALL.equals(FModel.getPreferences().getPref(FPref.UI_AUTO_DECISION_MODE));
     }
 
     private static AutoYieldStore.Tier activeTier() {
-        String mode = FModel.getPreferences().getPref(FPref.UI_AUTO_YIELD_MODE);
-        if (ForgeConstants.AUTO_YIELD_PER_CARD.equals(mode))            return AutoYieldStore.Tier.GAME;
-        if (ForgeConstants.AUTO_YIELD_PER_ABILITY_SESSION.equals(mode)) return AutoYieldStore.Tier.SESSION;
+        String mode = FModel.getPreferences().getPref(FPref.UI_AUTO_DECISION_MODE);
+        if (ForgeConstants.AUTO_DECISION_PER_CARD.equals(mode))            return AutoYieldStore.Tier.GAME;
+        if (ForgeConstants.AUTO_DECISION_PER_ABILITY_SESSION.equals(mode)) return AutoYieldStore.Tier.SESSION;
         return AutoYieldStore.Tier.MATCH;
     }
 
@@ -193,7 +199,7 @@ public class YieldController {
     public Iterable<String> getAutoYields() {
         AutoYieldStore store = activeStore();
         if (!tierAware()) return store.getYields(AutoYieldStore.Tier.GAME);
-        if (activeModeIsInstall()) return PersistentYieldStore.get().getYields();
+        if (activeModeIsInstall()) return PersistentAutoDecisionStore.get().getYields();
         return store.getYields(activeTier());
     }
 
@@ -213,39 +219,74 @@ public class YieldController {
         activeStore().setDisabled(disable);
     }
 
-    public boolean shouldAlwaysAcceptTrigger(int trigger) {
-        return activeStore().getTriggerDecision(trigger) == AutoYieldStore.TriggerDecision.ACCEPT;
-    }
-    public boolean shouldAlwaysDeclineTrigger(int trigger) {
-        return activeStore().getTriggerDecision(trigger) == AutoYieldStore.TriggerDecision.DECLINE;
+    public AutoYieldStore.TriggerDecision getTriggerDecision(String key) {
+        if (key == null || key.isEmpty()) return AutoYieldStore.TriggerDecision.ASK;
+        AutoYieldStore store = activeStore();
+        if (store.isTriggerDecisionsDisabled()) return AutoYieldStore.TriggerDecision.ASK;
+        if (!tierAware()) {
+            // Cache mode: keys stored at storageKey shape (full or stripped).
+            AutoYieldStore.TriggerDecision d = store.getTriggerDecision(AutoYieldStore.Tier.GAME, key);
+            if (d != AutoYieldStore.TriggerDecision.ASK) return d;
+            return store.getTriggerDecision(AutoYieldStore.Tier.GAME, AutoYieldStore.abilitySuffix(key));
+        }
+        if (activeModeIsInstall()) {
+            return PersistentAutoDecisionStore.get().getTriggerDecision(AutoYieldStore.abilitySuffix(key));
+        }
+        AutoYieldStore.Tier tier = activeTier();
+        boolean abilityScope = tier != AutoYieldStore.Tier.GAME;
+        String storageKey = abilityScope ? AutoYieldStore.abilitySuffix(key) : key;
+        return store.getTriggerDecision(tier, storageKey);
     }
 
-    public void setAlwaysAcceptTrigger(int trigger) {
-        activeStore().setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.ACCEPT);
-    }
-    public void setAlwaysDeclineTrigger(int trigger) {
-        activeStore().setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.DECLINE);
-    }
-    public void setAlwaysAskTrigger(int trigger) {
-        activeStore().setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.ASK);
+    /** Tier-aware user-initiated set. Returns the storage key (stripped if ability-scope) for wire propagation. */
+    public String setTriggerDecision(String key, AutoYieldStore.TriggerDecision decision, boolean abilityScope) {
+        String storageKey = abilityScope ? AutoYieldStore.abilitySuffix(key) : key;
+        if (activeModeIsInstall()) {
+            PersistentAutoDecisionStore.get().setTriggerDecision(storageKey, decision);
+        } else {
+            activeStore().setTriggerDecision(activeTier(), storageKey, decision);
+        }
+        return storageKey;
     }
 
-    public void setTriggerDecision(int trigger, AutoYieldStore.TriggerDecision decision) {
-        activeStore().setTriggerDecision(trigger, decision);
+    /** Cache-mode write of a wire-received trigger decision. Storage key is already at the right shape. */
+    public void applyTriggerDecisionFromWire(String storageKey, AutoYieldStore.TriggerDecision decision) {
+        activeStore().setTriggerDecision(AutoYieldStore.Tier.GAME, storageKey, decision);
     }
+
+    public Iterable<java.util.Map.Entry<String, AutoYieldStore.TriggerDecision>> getAutoTriggers() {
+        if (!tierAware()) return activeStore().getAutoTriggers(AutoYieldStore.Tier.GAME);
+        if (activeModeIsInstall()) return PersistentAutoDecisionStore.get().getAutoTriggers();
+        return activeStore().getAutoTriggers(activeTier());
+    }
+
+    public boolean getDisableAutoTriggers() { return activeStore().isTriggerDecisionsDisabled(); }
+    public void setDisableAutoTriggers(boolean disable) { activeStore().setTriggerDecisionsDisabled(disable); }
+
 
     /** Build the seed payload from this controller's authoritative store. */
     public YieldStateSnapshot buildClientSnapshot(Map<PlayerView, EnumSet<PhaseType>> skipPhases) {
+        boolean abilityScope = activeModeIsInstall() || activeTier() != AutoYieldStore.Tier.GAME;
+
         Set<String> cardYields = new HashSet<>();
         Set<String> abilityYields = new HashSet<>();
-        boolean abilityScope = activeModeIsInstall() || activeTier() != AutoYieldStore.Tier.GAME;
         for (String key : getAutoYields()) {
             if (abilityScope) abilityYields.add(key);
             else cardYields.add(key);
         }
-        // Trigger decisions are per-game; deltas flow during play.
-        Map<Integer, AutoYieldStore.TriggerDecision> triggers = new HashMap<>();
-        return new YieldStateSnapshot(cardYields, abilityYields, triggers, getDisableAutoYields(), skipPhases);
+
+        Map<String, AutoYieldStore.TriggerDecision> cardTriggers = new HashMap<>();
+        Map<String, AutoYieldStore.TriggerDecision> abilityTriggers = new HashMap<>();
+        for (Map.Entry<String, AutoYieldStore.TriggerDecision> e : getAutoTriggers()) {
+            if (abilityScope) abilityTriggers.put(e.getKey(), e.getValue());
+            else cardTriggers.put(e.getKey(), e.getValue());
+        }
+
+        return new YieldStateSnapshot(
+                cardYields, abilityYields,
+                cardTriggers, abilityTriggers,
+                getDisableAutoYields(), getDisableAutoTriggers(),
+                skipPhases);
     }
 
     /** Atomic seed of client-persistent state at game start or reconnection. Cache mode only. */
@@ -253,10 +294,14 @@ public class YieldController {
         localStore.clear();
         for (String k : snap.cardYields()) localStore.setYield(AutoYieldStore.Tier.GAME, k, true);
         for (String k : snap.abilityYields()) localStore.setYield(AutoYieldStore.Tier.GAME, k, true);
-        for (Map.Entry<Integer, AutoYieldStore.TriggerDecision> e : snap.triggerDecisions().entrySet()) {
-            localStore.setTriggerDecision(e.getKey(), e.getValue());
+        for (Map.Entry<String, AutoYieldStore.TriggerDecision> e : snap.cardTriggerDecisions().entrySet()) {
+            localStore.setTriggerDecision(AutoYieldStore.Tier.GAME, e.getKey(), e.getValue());
+        }
+        for (Map.Entry<String, AutoYieldStore.TriggerDecision> e : snap.abilityTriggerDecisions().entrySet()) {
+            localStore.setTriggerDecision(AutoYieldStore.Tier.GAME, e.getKey(), e.getValue());
         }
         localStore.setDisabled(snap.autoYieldsDisabled());
+        localStore.setTriggerDecisionsDisabled(snap.autoTriggersDisabled());
         skipPhases.clear();
         skipPhases.putAll(snap.skipPhases());
     }

@@ -18,12 +18,14 @@
 package forge.localinstance.properties;
 
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Set;
 import java.util.StringJoiner;
 
 import forge.MulliganDefs;
 import forge.game.GameLogEntryType;
 import forge.game.GameLogVerbosity;
+import forge.util.FileUtil;
 
 public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
 
@@ -144,7 +146,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_ALT_PLAYERINFOLAYOUT ("false"),
         UI_ALT_PLAYERZONETABS ("false"),
         UI_PRESELECT_PREVIOUS_ABILITY_ORDER ("false"),
-        UI_AUTO_YIELD_MODE (ForgeConstants.AUTO_YIELD_PER_ABILITY),
+        UI_AUTO_DECISION_MODE (ForgeConstants.AUTO_DECISION_PER_ABILITY),
         UI_SHOW_STORM_COUNT_IN_PROMPT ("false"),
         UI_REMIND_ON_PRIORITY ("false"),
         UI_CARD_COUNTER_DISPLAY_TYPE(ForgeConstants.CounterDisplayType.TEXT.getName()),
@@ -383,6 +385,27 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
     /** Instantiates a ForgePreferences object. */
     public ForgePreferences() {
         super(ForgeConstants.MAIN_PREFS_FILE, FPref.class);
+        migrateAutoDecisionMode();
+    }
+
+    /**
+     * One-shot migration: copy legacy {@code UI_AUTO_YIELD_MODE} value into
+     * {@code UI_AUTO_DECISION_MODE} on first load after the auto-yield/trigger
+     * consolidation. Old keys silently drop on next save (not in enum).
+     */
+    private void migrateAutoDecisionMode() {
+        final List<String> lines = FileUtil.readFile(ForgeConstants.MAIN_PREFS_FILE);
+        for (String raw : lines) {
+            String line = raw.trim();
+            if (line.startsWith("UI_AUTO_YIELD_MODE=")) {
+                String value = line.substring("UI_AUTO_YIELD_MODE=".length()).trim();
+                if (!value.isEmpty()) {
+                    setPref(FPref.UI_AUTO_DECISION_MODE, value);
+                    save();
+                }
+                return;
+            }
+        }
     }
 
     /** Parse the custom log types preference into a Set. */

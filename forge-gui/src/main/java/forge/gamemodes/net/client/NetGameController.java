@@ -155,31 +155,29 @@ public class NetGameController implements IGameController {
     @Override
     public boolean getDisableAutoYields() { return yieldController.getDisableAutoYields(); }
     @Override
-    public void setDisableAutoYields(final boolean disable) { yieldController.setDisableAutoYields(disable); }
-
-    @Override
-    public boolean shouldAlwaysAcceptTrigger(final int trigger) {
-        return yieldController.shouldAlwaysAcceptTrigger(trigger);
-    }
-    @Override
-    public boolean shouldAlwaysDeclineTrigger(final int trigger) {
-        return yieldController.shouldAlwaysDeclineTrigger(trigger);
+    public void setDisableAutoYields(final boolean disable) {
+        yieldController.setDisableAutoYields(disable);
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.SetDisableYields(disable));
     }
 
     @Override
-    public void setShouldAlwaysAcceptTrigger(final int trigger) {
-        yieldController.setAlwaysAcceptTrigger(trigger);
-        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.TriggerDecision(trigger, AutoYieldStore.TriggerDecision.ACCEPT));
+    public AutoYieldStore.TriggerDecision getTriggerDecision(final String key) {
+        return yieldController.getTriggerDecision(key);
     }
+
     @Override
-    public void setShouldAlwaysDeclineTrigger(final int trigger) {
-        yieldController.setAlwaysDeclineTrigger(trigger);
-        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.TriggerDecision(trigger, AutoYieldStore.TriggerDecision.DECLINE));
+    public void setTriggerDecision(final String key, final AutoYieldStore.TriggerDecision decision, final boolean isAbilityScope) {
+        String storageKey = yieldController.setTriggerDecision(key, decision, isAbilityScope);
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.TriggerDecision(storageKey, decision, isAbilityScope));
     }
+
     @Override
-    public void setShouldAlwaysAskTrigger(final int trigger) {
-        yieldController.setAlwaysAskTrigger(trigger);
-        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.TriggerDecision(trigger, AutoYieldStore.TriggerDecision.ASK));
+    public boolean getDisableAutoTriggers() { return yieldController.getDisableAutoTriggers(); }
+
+    @Override
+    public void setDisableAutoTriggers(final boolean disable) {
+        yieldController.setDisableAutoTriggers(disable);
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.SetDisableTriggers(disable));
     }
 
     public void setUiShouldSkipPhase(final PlayerView turnPlayer, final PhaseType phase, final boolean shouldSkip) {

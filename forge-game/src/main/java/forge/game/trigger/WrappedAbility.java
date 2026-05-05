@@ -185,6 +185,9 @@ public class WrappedAbility extends Ability {
         if (regtrig == null) return "";
         final StringBuilder sb =
                 new StringBuilder(regtrig.replaceAbilityText(regtrig.toString(true), this, true));
+        if (!regtrig.getTriggerRemembered().isEmpty()) {
+            sb.append(" (").append(regtrig.getTriggerRemembered()).append(")");
+        }
 
         // prevent text growing too long when SA target other in a chain and also potential StackOverflow
         if (withTargets) {

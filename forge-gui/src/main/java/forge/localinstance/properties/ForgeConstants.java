@@ -346,11 +346,11 @@ public final class ForgeConstants {
     public static final String DISP_CURRENT_COLORS_MULTI_OR_CHANGED = "Multi+Changed";
     public static final String DISP_CURRENT_COLORS_NEVER = "Never";
 
-    // Constants for Auto-Yield Mode
-    public static final String AUTO_YIELD_PER_CARD = "Per Card (Each Game)";
-    public static final String AUTO_YIELD_PER_ABILITY = "Per Ability (Each Match)";
-    public static final String AUTO_YIELD_PER_ABILITY_SESSION = "Per Ability (Each Session)";
-    public static final String AUTO_YIELD_PER_ABILITY_INSTALL = "Per Ability (Each Install)";
+    // Constants for Auto-Decision Mode (auto-yield + auto-trigger persistence scope)
+    public static final String AUTO_DECISION_PER_CARD = "Per Card (Each Game)";
+    public static final String AUTO_DECISION_PER_ABILITY = "Per Ability (Each Match)";
+    public static final String AUTO_DECISION_PER_ABILITY_SESSION = "Per Ability (Each Session)";
+    public static final String AUTO_DECISION_PER_ABILITY_INSTALL = "Per Ability (Each Install)";
 
     // Constants for Graveyard Ordering
     public static final String GRAVEYARD_ORDERING_NEVER = "Never";

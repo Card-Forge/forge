@@ -49,6 +49,7 @@ import forge.menu.FMenuBar;
 import forge.menu.FMenuItem;
 import forge.menu.FMenuTab;
 import forge.model.FModel;
+import forge.player.AutoYieldStore.TriggerDecision;
 import forge.player.PlayerZoneUpdate;
 import forge.screens.FScreen;
 import forge.screens.match.views.VAvatar;
@@ -688,17 +689,13 @@ public class MatchScreen extends FScreen {
                     if (!stackInstance.isAbility()) {
                         return false;
                     }
-                    final int triggerID = stackInstance.getSourceTrigger();
-
-                    if (controller.shouldAlwaysAcceptTrigger(triggerID)) {
-                        controller.setShouldAlwaysAskTrigger(triggerID);
-                    } else {
-                        controller.setShouldAlwaysAcceptTrigger(triggerID);
+                    final boolean abilityScope = controller.getYieldController().isAbilityScope();
+                    final String key = stackInstance.getKey();
+                    if (!key.isEmpty()) {
+                        TriggerDecision next = controller.getTriggerDecision(key) == TriggerDecision.ACCEPT ? TriggerDecision.ASK : TriggerDecision.ACCEPT;
+                        controller.setTriggerDecision(key, next, abilityScope);
                     }
 
-                    final String key = stackInstance.getKey();
-                    boolean abilityScope = !forge.localinstance.properties.ForgeConstants.AUTO_YIELD_PER_CARD.equals(
-                            forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_YIELD_MODE));
                     controller.setShouldAutoYield(key, true, abilityScope);
                     if (stackInstance.equals(gameView.peekStack())) {
                         //auto-pass priority if ability is on top of stack
@@ -718,18 +715,14 @@ public class MatchScreen extends FScreen {
                     if (!stackInstance.isAbility()) {
                         return false;
                     }
-                    final int triggerID = stackInstance.getSourceTrigger();
-
-                    if (controller.shouldAlwaysDeclineTrigger(triggerID)) {
-                        controller.setShouldAlwaysAskTrigger(triggerID);
-                    } else {
-                        controller.setShouldAlwaysDeclineTrigger(triggerID);
+                    final boolean abilityScope = controller.getYieldController().isAbilityScope();
+                    final String key = stackInstance.getKey();
+                    if (!key.isEmpty()) {
+                        TriggerDecision next = controller.getTriggerDecision(key) == TriggerDecision.DECLINE ? TriggerDecision.ASK : TriggerDecision.DECLINE;
+                        controller.setTriggerDecision(key, next, abilityScope);
                     }
 
-                    final String key = stackInstance.getKey();
-                    boolean abilityScope2 = !forge.localinstance.properties.ForgeConstants.AUTO_YIELD_PER_CARD.equals(
-                            forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_YIELD_MODE));
-                    controller.setShouldAutoYield(key, true, abilityScope2);
+                    controller.setShouldAutoYield(key, true, abilityScope);
                     if (stackInstance.equals(gameView.peekStack())) {
                         //auto-pass priority if ability is on top of stack
                         controller.passPriority();

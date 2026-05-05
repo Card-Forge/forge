@@ -140,9 +140,6 @@ public abstract class Trigger extends TriggerReplacementBase {
                     desc = TextUtil.fastReplace(desc, "EFFECTSOURCE", getHostCard().getEffectSource().getDisplayName());
             }
             sb.append(desc);
-            if (!this.triggerRemembered.isEmpty()) {
-                sb.append(" (").append(this.triggerRemembered).append(")");
-            }
             return sb.toString();
         } else {
             return "";
