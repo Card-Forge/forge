@@ -685,7 +685,8 @@ public abstract class Trigger extends TriggerReplacementBase {
                 TriggerType.Destroyed.equals(getMode()) ||
                 TriggerType.Sacrificed.equals(getMode()) || TriggerType.SacrificedOnce.equals(getMode()) ||
                 ((TriggerType.ChangesZone.equals(getMode()) || TriggerType.ChangesZoneAll.equals(getMode()))
-                        && (StringUtils.containsAny(getParam("Origin"), "Battlefield", "Graveyard") ||
+                        && (StringUtils.contains(getParam("Origin"), "Battlefield") ||
+                        (StringUtils.contains(getParam("Origin"), "Graveyard") && !"Battlefield".equals(getParam("Destination"))) ||
                         StringUtils.containsAny(getParam("Destination"), "Library", "Hand")));
     }
 }
