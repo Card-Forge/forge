@@ -65,6 +65,7 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
+import forge.gui.interfaces.IGuiGame;
 import forge.util.IHasForgeLog;
 import forge.gamemodes.match.YieldController;
 import forge.gamemodes.match.YieldMarker;
@@ -1237,6 +1238,12 @@ public final class CMatchUI
             Thread.dumpStack();
         }*/
         return GuiChoose.order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode, this);
+    }
+
+    @Override
+    public <T> IGuiGame.OrderResult<T> orderWithRememberDecision(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
+            final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode) {
+        return GuiChoose.orderWithRememberDecision(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode, this, true);
     }
 
     @Override
