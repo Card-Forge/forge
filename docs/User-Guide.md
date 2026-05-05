@@ -20,8 +20,9 @@
   - [Shift Key helper](#shift-key-helper)
   - [Full Control](#full-control)
   - [Repeatable Sequences (Macros)](#repeatable-sequences-macros)
-- [User Interface](#user-interface)
+- [Desktop User Interface](#desktop-user-interface)
   - [Layout](#layout)
+  - [Viewing Cards in Different Zones](#viewing-cards-in-different-zones)
   - [Auto-Sort Multiplayer Fields](#auto-sort-multiplayer-fields)
 
 # Downloads
@@ -33,8 +34,8 @@
 
 [***CLICK HERE FOR DOWNLOAD LINKS - Forge SNAPSHOT Version (DESKTOP/ANDROID)***](https://github.com/Card-Forge/forge/releases/tag/daily-snapshots)
 
-* For desktop, grab the installer file that ends in .jar
-* For android, grab the android file that ends in .apk
+* For Desktop, grab the installer file that ends in .jar
+* For Android, grab the app file that ends in .apk
   &dash; Watch the screen recording if one of following steps isn't clear for you
 
 <https://github.com/user-attachments/assets/7a0c7bb8-7cf9-4800-8091-bcc30ff2f4d8>
@@ -213,14 +214,10 @@ A feature for advanced users: during a match, you can use the default shortcut s
 
 The macro will dutifully execute your click sequence without regard to changes in game state (so if an opponent kills your specified creature mid-macro, and you continue to execute it, you will be essentially clicking on the creature in the graveyard, which may or may not be what you want).
 
-# User Interface
-
-> [!TIP]
-> The features described in this section apply to the **desktop GUI** only.
+# Desktop User Interface
 
 ## Layout
-
-The desktop match UI is built from draggable, resizable cells. Each cell contains one or more tabbed panels (e.g. battlefield, hand, log, stack, card detail, etc). 
+The match screen is built from draggable, resizable cells. Each cell contains one or more tabbed panels (e.g. battlefield, hand, log, stack, card detail, etc). 
 
 The layout is highly customisable and can be re-arranged to suit your preferences.
 
@@ -229,14 +226,27 @@ The layout is highly customisable and can be re-arranged to suit your preference
 - **Drop zones:** Dragging to the left, right, top, or bottom edge of a target cell splits it in that direction. Dragging to the centre adds the panel as a tab. A visual preview shows where the panel will land.
 
 Layouts are saved as XML files and  adapt to different window sizes and resolutions.
-
 - **Save/Load:** Use **Layout > File** in the menu bar to save, open, or revert layouts.
 - **Default layouts** ship with Forge and are restored when you select **Revert to Default Layout**.
 - **User layouts** are stored in your Forge user data directory under `preferences/` (e.g., `%APPDATA%/Forge/preferences/match.xml` on Windows).
 - **Tab visibility:** Toggle panel tabs on or off via **Layout > View > Show Panel Tabs**.
 
-## Auto-Sort Multiplayer Fields
+## Viewing cards in different zones
+Underneath each player's battlefield portrait are zone buttons (hand, library, graveyard, exile, flashback, command, sideboard) with card counts. Clicking a zone button opens that zone's contents for viewing.
 
+**Display modes:** Right-click a zone button to toggle how it opens:
+
+- **Open in Window** — Opens a floating window that can be moved and resized independently. Right-click the window's title bar to toggle alphabetical sorting.
+- **Add Tab to Hand Panel** — Docks the zone as a tab alongside your hand panel, integrated into the main layout.
+
+Your preference is saved per zone and remembered separately for your own zones and opponent zones.
+
+**Drag-to-dock:** A floating zone window can also be docked by dragging its title bar over any cell's tab bar — a blue highlight shows where it will land. Once docked, right-click the tab for an option to undock it back to a floating window.
+
+> [!TIP]
+> Enable the Layout->View->New card count menu option to display a delta number in the tab header which may help you more quickly identify changes in complex boardstates.
+
+## Auto-Sort Multiplayer Fields
 In multiplayer games (3+ players), Forge can automatically arrange opponent battlefield panels in turn order. This is controlled via the **Layout > View** menu during a match.
 
 **Enabling the feature:**

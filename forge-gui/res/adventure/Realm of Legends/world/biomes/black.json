@@ -33,15 +33,28 @@
 	],
 	"enemies": [
 		"Anowon",
+		"Atogatog",
 		"Chainer",
 		"Coram",
-		"Ratadrabik",
 		"Braids",
 		"Endrek",
-		"Grismold",
-		"The Raven Man",
 		"Gorex",
-		"Nemesis"
+		"Grismold",
+		"Licia",
+		"Nefarox",
+		"Ratadrabik",
+		"Rayami",
+		"Skullbriar",
+		"Sol'Kanar",
+		"Syrix",
+		"Tevesh Szat",
+		"The Necrobloom",
+		"The Raven Man",
+		"Varina",
+		"Vish Kal",
+		"Yuriko",
+		"Nemesis",
+		"Grand Nemesis"
 	],
 	"pointsOfInterest": [
 		"Black Castle",
@@ -50,6 +63,7 @@
 		"Swamp Town Identity",
 		"Swamp Town",
         "Swamp Town Tribal",
+		"Ancient Jet Hill",
 		"Black Tower of Worship",
 		"Castle Sengir",
 		"Castle Voldaren",
@@ -60,11 +74,14 @@
 		"Haunted Fengraf",
 		"Hidden Dimir Base",
 		"Infernal Scriptorium",
+		"Mycotyrant's Mire",
+		"Old Phyrexia Holdout",
 		"Rat Cave",
 		"Sheoldred's Stronghold",
+		"Silverquill Classroom",
 		"Sphinx of Riddles Black",
-		"Sultai War Camp"
-
+		"Sultai War Camp",
+		"Xander's Lounge"
 	],
 	"structures": [
 		{

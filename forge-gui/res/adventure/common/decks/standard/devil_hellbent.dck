@@ -5,7 +5,7 @@ Difficulty=hard
 Description=BR Hellbent deck
 Icon=Diablo.jpg
 Deck Type=constructed
-[main]
+[Main]
 4 Badlands
 4 Bloodstained Mire
 3 Blackcleave Cliffs
@@ -31,4 +31,4 @@ Deck Type=constructed
 1 Dark Suspicions
 2 Grafted Skullcap
 2 Bottled Cloister
-[sideboard]
+[Sideboard]

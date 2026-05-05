@@ -30,15 +30,29 @@
 		"Wood"
 	],
 	"enemies": [
+		"Archelos",
+		"Azusa",
+		"Baru",
+		"Bess",
+		"Colfenor",
+		"Doc Aurlock",
 		"Ellivere",
+		"Gallia",
+		"Gimbal",
+		"Halana and Alena",
+		"Hapatra",
+		"Jenson",
 		"Jyoti",
 		"Kamahl",
-		"Baru",
-		"Gimbal",
 		"Kaust",
 		"Kestia",
-		"Jenson",
-		"Nemesis"
+		"Nemata",
+		"Rishkar",
+		"Six",
+		"Yeva",
+		"Yurlok",
+		"Nemesis",
+		"Grand Nemesis"
 	],
 	"pointsOfInterest": [
 		"Green Castle",
@@ -47,6 +61,7 @@
 		"Forest Town Identity",
 		"Forest Town",
         "Forest Town Tribal",
+		"Ancient Emerald Clearing",
 		"Dinosaur Crater",
 		"Green Tower of Worship",
 		"Honey Cove",
@@ -56,9 +71,14 @@
 		"Sacred Elven Grove",
 		"Selesnya Garden",
 		"Simian City",
+		"Simic Breeding Pool",
 		"Slimy Sewers",
+		"Sphinx of Riddles Green",
+		"Squirrel Farm",
 		"Temur War Camp",
-		"Vorinclex's Maze"
+		"Vorinclex's Maze",
+		"Witherbloom Classroom",
+		"Wolf Den"
 	],
 	"structures": [
 		{

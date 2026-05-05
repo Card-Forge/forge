@@ -33,6 +33,7 @@ import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.event.Event;
 import forge.game.event.GameEventDayTimeChanged;
+import forge.game.event.GameEventAddLog;
 import forge.game.event.GameEventGameOutcome;
 import forge.game.phase.Phase;
 import forge.game.phase.PhaseHandler;
@@ -50,6 +51,8 @@ import forge.trackable.Tracker;
 import forge.util.*;
 import forge.util.collect.FCollection;
 import org.apache.commons.lang3.tuple.Pair;
+import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
 
 import java.util.*;
 import java.util.function.Predicate;
@@ -58,6 +61,8 @@ import java.util.function.Predicate;
  * Represents the state of a <i>single game</i>, a new instance is created for each game.
  */
 public class Game {
+
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
 
     private static int maxId = 0;
     private static int nextId() { return ++maxId; }
@@ -489,9 +494,6 @@ public class Game {
     public final GameLog getGameLog() {
         return gameLog;
     }
-    public final void updateGameLogForView() {
-        view.updateGameLog(gameLog);
-    }
 
     public final Zone getStackZone() {
         return stackZone;
@@ -553,6 +555,11 @@ public class Game {
     }
 
     public synchronized void setGameOver(GameEndReason reason) {
+        // early exit in case many events causing a game over have fired
+        if (isGameOver()) {
+            return;
+        }
+
         for (Player p : allPlayers) {
             p.clearController();
         }
@@ -696,11 +703,23 @@ public class Game {
         if (ZoneType.Stack.equals(view.getZone())) {
             visit.visitAll(getStackZone());
         } else if (view.getController() != null && view.getZone() != null) {
-            visit.visitAll(getPlayer(view.getController()).getZone(view.getZone()));
-        } else { // fallback if view doesn't has controller or zone set for some reason
+            Player p = getPlayer(view.getController());
+            if (p != null) {
+                visit.visitAll(p.getZone(view.getZone()));
+            }
+        }
+        // Zone-specific search may miss if the view has stale zone info
+        // (e.g. IdRef resolved from a tracker that wasn't updated after a
+        // zone change). Fall back to global search.
+        if (visit.getFound() == null) {
             forEachCardInGame(visit);
         }
-        return visit.getFound();
+        Card found = visit.getFound();
+        if (found == null) {
+            netLog.error("findByView: id={} (zone={}, controller={}) not found in any zone — returning null",
+                    view.getId(), view.getZone(), view.getController());
+        }
+        return found;
     }
 
     public Card findById(int id) {
@@ -872,9 +891,10 @@ public class Game {
                 // unattach all "Enchant Player"
                 c.removeAttachedTo(p);
                 if (c.getOwner().equals(p)) {
-                    if (c.getEffectSource() != null && !c.isEmblem()) {
-                        // move effect to another player so they continue to work
+                    // check that it wasn't cleaned up already
+                    if (c.getEffectSource() != null && !c.isEmblem() && p.getZone(ZoneType.Command).contains(c)) {
                         c.getZone().remove(c);
+                        // move effect to another player so they continue to work
                         getNextPlayerAfter(p).getZone(ZoneType.Command).add(c);
                     } else {
                         for (Card cc : cards) {
@@ -1013,7 +1033,7 @@ public class Game {
         return ++hiddenCardIdCounter;
     }
 
-    public Multimap<Player, Card> chooseCardsForAnte(final boolean matchRarity) {
+    public Multimap<Player, Card> chooseCardsForAnte(final boolean matchRarity, final boolean includeBasicLands) {
         Multimap<Player, Card> anteed = ArrayListMultimap.create();
 
         if (matchRarity) {
@@ -1030,14 +1050,21 @@ public class Game {
 
             if (validRarities.size() == 0) { //If no possible rarity matches were found, use the original method to choose antes
                 for (Player player : getPlayers()) {
-                    chooseRandomCardsForAnte(player, anteed);
+                    chooseRandomCardsForAnte(player, anteed, includeBasicLands);
                 }
                 return anteed;
             }
 
-            //If possible, don't ante basic lands
-            if (validRarities.size() > 1) {
-                validRarities.remove(CardRarity.BasicLand);
+            //If possible, don't ante basic lands (unless the option to include them is enabled)
+            if (!includeBasicLands) {
+                if (validRarities.size() > 1) {
+                    validRarities.remove(CardRarity.BasicLand);
+                } else if (validRarities.size() == 1 && validRarities.get(0) == CardRarity.BasicLand) {
+                    for (Player player : getPlayers()) {
+                        chooseRandomCardsForAnte(player, anteed, includeBasicLands);
+                    }
+                    return anteed;
+                }
             }
 
             if (validRarities.contains(CardRarity.Special)) {
@@ -1077,24 +1104,31 @@ public class Game {
                     Card ante = library.get(MyRandom.getRandom().nextInt(library.size()));
                     anteed.put(player, ante);
                 } else {
-                    chooseRandomCardsForAnte(player, anteed);
+                    chooseRandomCardsForAnte(player, anteed, includeBasicLands);
                 }
             }
         }
         else {
             for (Player player : getPlayers()) {
-                chooseRandomCardsForAnte(player, anteed);
+                chooseRandomCardsForAnte(player, anteed, includeBasicLands);
             }
         }
         return anteed;
     }
 
-    private void chooseRandomCardsForAnte(final Player player, final Multimap<Player, Card> anteed) {
+    private void chooseRandomCardsForAnte(final Player player, final Multimap<Player, Card> anteed, final boolean includeBasicLands) {
         final CardCollectionView lib = player.getCardsIn(ZoneType.Library);
+        if (includeBasicLands) {
+            Card ante = Aggregates.random(lib);
+            if (ante != null) {
+                anteed.put(player, ante);
+            }
+            return;
+        }
         Predicate<Card> goodForAnte = CardPredicates.BASIC_LANDS.negate();
         Card ante = Aggregates.random(IterableUtil.filter(lib, goodForAnte));
         if (ante == null) {
-            getGameLog().add(GameLogEntryType.ANTE, "Only basic lands found. Will ante one of them");
+            fireEvent(new GameEventAddLog(GameLogEntryType.ANTE, "Only basic lands found. Will ante one of them"));
             ante = Aggregates.random(lib);
         }
         anteed.put(player, ante);

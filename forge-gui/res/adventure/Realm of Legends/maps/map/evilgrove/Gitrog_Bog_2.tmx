@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="21" nextobjectid="221">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="21" nextobjectid="222">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -98,9 +98,9 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Thalia and The Gitrog Monster|MOM&quot;, &quot;Sinister Concoction|SOI&quot;, &quot;Foul orchard|SOI&quot;, &quot;drownyard temple|SOI&quot;, &quot;Crawling sensation|SOI&quot;]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Crawling Infestation&quot;, &quot;Sinister Concoction|SOI&quot;, &quot;Foul Orchard|SOI&quot;, &quot;Crawling Sensation|SOI&quot;]
 }</property>
-    <property name="enemy" value="Gitrog"/>
+    <property name="enemy" value="The Gitrog Monster"/>
     <property name="reward">[
   {
     &quot;type&quot;: &quot;item&quot;,
@@ -110,6 +110,8 @@
   }
 ]
 </property>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -123,12 +125,6 @@
    <properties>
     <property name="enemy" value="Ishkanah"/>
     <property name="threatRange" type="int" value="0"/>
-   </properties>
-  </object>
-  <object id="192" template="../../../../common/maps/obj/enemy.tx" x="142" y="790.497" width="16" height="21.0057">
-   <properties>
-    <property name="enemy" value="Frog"/>
-    <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
   <object id="195" template="../../../../common/maps/obj/manashards.tx" x="158.333" y="486.5"/>
@@ -233,6 +229,32 @@
     }
     ]
 }]</property>
+   </properties>
+  </object>
+  <object id="221" template="../../../../common/maps/obj/enemy.tx" x="247.901" y="148.046" width="16" height="17.6724">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;The great frog-horror lets out a final, echoing croak as it staggers back, its corpse plunging into the pool of horrid muck behind it. A great splash of filth erupts from the pool, but you quickly cast a simple spell and deflect it, leaving you clean and fresh to celebrate your victory.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Crawling Infestation&quot;, &quot;Sinister Concoction|SOI&quot;, &quot;Foul Orchard|SOI&quot;]
+}</property>
+    <property name="enemy" value="The Gitrog Monster"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Gitrog's Key&quot;
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
  </objectgroup>

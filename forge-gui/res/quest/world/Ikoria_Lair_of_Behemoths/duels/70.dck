@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Severus Snape
+Title=Severus Snape
+Icon=Severus Snape.jpg
+Difficulty=Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/Fabrice_K_-_Faerie_Ninjas_(Modern,_#986404).dck
+Deck Type=constructed
+
+[Main]
+1 Snapcaster Mage
+2 Spellstutter Sprite
+3 Spectral Sailor
+3 Mist-Syndicate Naga
+4 Faerie Seer
+4 Ingenious Infiltrator
+4 Ninja of the Deep Hours
+4 Changeling Outcast
+1 Heartless Act
+1 Logic Knot
+2 Mana Leak
+2 Dismember
+3 Force of Negation
+4 Fatal Push
+1 Scalding Tarn
+2 Watery Grave
+2 Snow-Covered Swamp
+3 Darkslick Shores
+4 Polluted Delta
+4 Drowned Catacomb
+6 Snow-Covered Island
+[Sideboard]
+1 Countersquall
+1 Engineered Explosives
+1 Heartless Act
+2 Aether Gust
+2 Collective Brutality
+2 Flusterstorm
+3 Ceremonious Rejection
+3 Relic of Progenitus

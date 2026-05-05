@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="33" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="163">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="33" height="24" tilewidth="16" tileheight="16" infinite="0" nextlayerid="12" nextobjectid="166">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Nut Collector&quot;, &quot;Squirrel mob&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Nut Collector&quot;, &quot;Squirrel Sanctuary&quot; ]}"/>
   <property name="spriteLayer" type="bool" value="true"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
@@ -22,7 +22,7 @@
  </layer>
  <layer id="8" name="Tilelaag 3" width="33" height="24">
   <data encoding="base64" compression="zlib">
-   eJxjYCAOLGMlUiEZYD8U08MNy5gIu6GYBb8bQFiZh3K3YHMDMj1QYD8axgVyOUkz9ysb+W6ihhvQ7f+iiBsTA7axIjAMFGoyMKwVxW0nOiDVDTC7QPRdZoR4tjIDw0SgnizinE4VAHPDNrR8+YiRdLOapRkYWnBgQm4AYS8xCF+XnYGhnw2Bz7DT1g3IaQAWDukcCHn0sCAUP+SGAzo4hGSvChuCVkFKj7jcQqkb9qOxQ9ggGAT0OPCXKdjclEVAHhm0ceMWR5YLhrqJVLfgAsSW2djcp8sBCRcYJgcQsn8yATcgA1CZpUuiW3DZDzILhKeguYOQG5BBHgllPDZzYW6AYRjYAa3npYD0Ljx1Psh+Qm6ApS/0dEYIhLJiZ2NzAyFArhu+AO2VZoFgfADmBhD9nkrtQeSymhiA7AZcYfJNgXJMKRgMbvg6CNwAAOJvoiU=
+   eJxjYCAOLGMlUiEZYD8U08MNy5gIu6GYBb8bQFiZh3K3YHMDMj1QYD8axgVyOUkz9ysb+W6ihhvQ7f+iiBsTA7axIjAMFGoyMKwVxW0nOiDVDTC7QPRdZoR4tjIDw0SgnizinE4VAHPDNrR8+YiRdLOapRkYWnBgQm4AYS8xCF+XnYGhnw2Bz7DT1g3IaQAWDukcCHn0sCAUP+SGAzo4hGSvChuCVkFKj7jcQqkb9qOxQ9ggGAT0OPCXKdjclEVAHhm0ceMWR5YLhrqJVLfgAsSW2djcp8sBCRcYJgcQst9bg4HBRwO3G5ABqMzSJdEtuOwHmQXCU4DsdKD9GUS6ARnkkVDGYzMX5gYYhoEd0HpeCkjvwlPng+wn5AZY+kJPZ4RAKCt2NjY3EALkuuEL0F5pFgjGB2BuANHvqdQeRC6riQHIbsAVJt8UKMeUgsHghq+DwA0AgRejBQ==
   </data>
  </layer>
  <layer id="7" name="water" width="33" height="24">
@@ -74,8 +74,10 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Oakhollow Village|BLB&quot;,&quot;Mudflat Village|BLB&quot;, &quot;Sword of the Squeak|BLC&quot;, &quot;Squirrel Sovereign|MH2&quot;, &quot;Chittering Illuminator&quot;, &quot;Squirrel Sanctuary|MH2&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Oakhollow Village|BLB&quot;,&quot;Mudflat Village|BLB&quot;, &quot;Sword of the Squeak|BLC&quot;, &quot;Squirrel Sovereign|MH2&quot;]}"/>
     <property name="enemy" value="Chatterfang"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="10"/>
    </properties>
@@ -90,8 +92,10 @@
   </object>
   <object id="69" template="../../../../common/maps/obj/enemy.tx" x="78.5" y="364.75">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Heap Doll|SHM&quot;, &quot;Scarecrone|EVE&quot;, &quot;Scythe of the Wretched|MRD&quot;, &quot;Raking Canopy|SHM&quot;, &quot;Springjack Pasture|EVE&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Scarecrow Guide&quot;, &quot;Scythe of the Wretched|MRD&quot;, &quot;Raking Canopy|SHM&quot;, &quot;Springjack Pasture|EVE&quot;]}"/>
     <property name="enemy" value="Reaper King"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="40"/>
     <property name="threatRange" type="int" value="60"/>
    </properties>
@@ -229,7 +233,7 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
   </object>
   <object id="141" template="../../../../common/maps/obj/scroll.tx" x="244.5" y="302">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Chicken à la King&quot;, &quot;editions&quot;: [ &quot;UGL&quot; ], &quot;count&quot;: 1 } ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Chicken Egg&quot;, &quot;editions&quot;: [ &quot;UGL&quot; ], &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
   <object id="142" template="../../../../common/maps/obj/scroll.tx" x="506.5" y="127.5">
@@ -363,6 +367,41 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
   }
 ]
 </property>
+   </properties>
+  </object>
+  <object id="163" template="../../../../common/maps/obj/enemy.tx" x="81.2472" y="364.517">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Scarecrow Guide&quot;, &quot;Scythe of the Wretched|MRD&quot;, &quot;Raking Canopy|SHM&quot;]}"/>
+    <property name="enemy" value="Reaper King"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="164" template="../../../../common/maps/obj/enemy.tx" x="357.75" y="58.25">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;After a fierce battle, the small but mighty squirrel finally falls. Despite their strength, you do feel a bit bad about picking on something so much smaller than you.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Oakhollow Village|BLB&quot;, &quot;Mudflat Village|BLB&quot;, &quot;Sword of the Squeak|BLC&quot;]}"/>
+    <property name="enemy" value="Chatterfang"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="165" template="../../../../common/maps/obj/shop.tx" x="175.683" y="278.783">
+   <properties>
+    <property name="commonShopList" value="Squirrel"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
    </properties>
   </object>
  </objectgroup>

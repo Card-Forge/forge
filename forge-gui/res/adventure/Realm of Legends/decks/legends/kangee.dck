@@ -1,76 +1,76 @@
 [metadata]
 Name=Kangee, Sky Warden
 [Commander]
-1 Kangee, Sky Warden|cmr
+1 Kangee, Sky Warden|CMR
 [Main]
-1 Absorb|rna
-1 Adarkar Wastes|dmu
-1 Aerial Assault|jmp
-1 Aetherize|znc
-1 Aetherspouts|mic
-1 Animal Sanctuary|m21
-1 Arcane Signet|scd
-1 Archon of Redemption|jmp
-1 Austere Command|moc
-1 Aven Gagglemaster|m21
-1 Aven Skirmisher|frf
-1 Azorius Signet|ncc
-1 Battlefield Raptor|khm
-1 Cloud Sprite|mmq
-1 Coldsteel Heart|2x2
-1 Command Tower|c14
-1 Demolition Field|bro
-1 Disdainful Stroke|snc
-1 Donal, Herald of Wings|voc
-1 Empyrean Eagle|khc
-1 Faerie Seer|mh1
-1 Favorable Winds|gnt
-1 Fell the Mighty|moc
-1 Flying Men|tsb
-1 Frantic Search|ncc
-1 Generous Gift|moc
-1 Gravitational Shift|roe
-1 Gust of Wind|iko
-1 Healer's Hawk|jmp
-1 Imprisoned in the Moon|moc
+1 Absorb|RNA
+1 Adarkar Wastes|DMU
+1 Aerial Assault|JMP
+1 Aetherize|ZNC
+1 Aetherspouts|MIC
+1 Animal Sanctuary|M21
+1 Arcane Signet|SCD
+1 Archon of Redemption|JMP
+1 Austere Command|MOC
+1 Aven Gagglemaster|M21
+1 Aven Skirmisher|FRF
+1 Azorius Signet|NCC
+1 Battlefield Raptor|KHM
+1 Cloud Sprite|MMQ
+1 Coldsteel Heart|2X2
+1 Command Tower|C14
+1 Demolition Field|BRO
+1 Disdainful Stroke|SNC
+1 Donal, Herald of Wings|VOC
+1 Empyrean Eagle|KHC
+1 Faerie Seer|MH1
+1 Favorable Winds|GNT
+1 Fell the Mighty|MOC
+1 Flying Men|TSB
+1 Frantic Search|NCC
+1 Generous Gift|MOC
+1 Gravitational Shift|ROE
+1 Gust of Wind|IKO
+1 Healer's Hawk|JMP
+1 Imprisoned in the Moon|MOC
 15 Island|JMP|3
-1 Jace's Phantasm|ima
-1 Jubilant Skybonder|iko
-1 Judge's Familiar|rtr
-1 Lofty Denial|m21
-1 Mana Leak|2x2
-1 Marble Diamond|clb
-1 Mind Stone|moc
-1 Mothrider Patrol|neo
-1 Nevinyrral's Disk|mh2
-1 Ornithopter of Paradise|mh2
-1 Path to Exile|moc
+1 Jace's Phantasm|IMA
+1 Jubilant Skybonder|IKO
+1 Judge's Familiar|RTR
+1 Lofty Denial|M21
+1 Mana Leak|2X2
+1 Marble Diamond|CLB
+1 Mind Stone|MOC
+1 Mothrider Patrol|NEO
+1 Nevinyrral's Disk|MH2
+1 Ornithopter of Paradise|MH2
+1 Path to Exile|MOC
 15 Plains|JMP|3
-1 Prismatic Lens|tsr
-1 Radiant, Archangel|ulg
-1 Radiant, Serra Archangel|cmr
-1 Rustwing Falcon|m19
-1 Seaside Haven|ons
-1 Segovian Angel|mh1
-1 Sephara, Sky's Blade|m20
-1 Serra Aviary|hml
-1 Siani, Eye of the Storm|cmr
-1 Siren Stormtamer|cmr
-1 Sky Diamond|clb
-1 Sol Ring|scd
-1 Soulcatcher|ema
-1 Spectral Sailor|voc
-1 Spirit of the Spires|rna
-1 Sprite Noble|ema
-1 Star Compass|ima
-1 Steel-Plume Marshal|jmp
-1 Swooping Lookout|one
-1 Swords to Plowshares|moc
-1 Thunderclap Wyvern|khc
-1 Tide Skimmer|m21
-1 Unbreakable Formation|moc
-1 Warden of Evos Isle|cmr
-1 Watcher of the Spheres|m21
-1 Windreader Sphinx|jmp
-1 Windstorm Drake|jmp
-1 Winged Words|jmp
+1 Prismatic Lens|TSR
+1 Radiant, Archangel|ULG
+1 Radiant, Serra Archangel|CMR
+1 Rustwing Falcon|M19
+1 Seaside Haven|ONS
+1 Segovian Angel|MH1
+1 Sephara, Sky's Blade|M20
+1 Serra Aviary|HML
+1 Siani, Eye of the Storm|CMR
+1 Siren Stormtamer|CMR
+1 Sky Diamond|CLB
+1 Sol Ring|SCD
+1 Soulcatcher|EMA
+1 Spectral Sailor|VOC
+1 Spirit of the Spires|RNA
+1 Sprite Noble|EMA
+1 Star Compass|IMA
+1 Steel-Plume Marshal|JMP
+1 Swooping Lookout|ONE
+1 Swords to Plowshares|MOC
+1 Thunderclap Wyvern|KHC
+1 Tide Skimmer|M21
+1 Unbreakable Formation|MOC
+1 Warden of Evos Isle|CMR
+1 Watcher of the Spheres|M21
+1 Windreader Sphinx|JMP
+1 Windstorm Drake|JMP
+1 Winged Words|JMP

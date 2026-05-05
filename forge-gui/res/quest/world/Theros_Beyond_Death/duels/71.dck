@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=The Great Gazoo
+Title=The Great Gazoo
+Icon=The Great Gazoo.jpg
+Difficulty=Very Hard
+Description=./Modern/Theros_Beyond_Death/Albyz_-_Sultai_Control_(Modern,_#1010787).dck
+Deck Type=constructed
+
+[Main]
+3 Uro, Titan of Nature's Wrath
+4 Ice-Fang Coatl
+4 Snapcaster Mage
+1 Pulse of Murasa
+2 Abrupt Decay
+2 Assassin's Trophy
+3 Archmage's Charm
+3 Cling to Dust
+3 Drown in the Loch
+3 Fatal Push
+4 Thought Scour
+2 Dead of Winter
+1 Jace, the Mind Sculptor
+1 Liliana, the Last Hope
+1 Overgrown Tomb
+1 Snow-Covered Swamp
+1 Watery Grave
+1 Creeping Tar Pit
+2 Snow-Covered Forest
+2 Mystic Sanctuary
+2 Field of Ruin
+2 Breeding Pool
+4 Misty Rainforest
+4 Snow-Covered Island
+4 Polluted Delta
+[Sideboard]
+1 Pulse of Murasa
+1 Bitterblossom
+1 Engineered Explosives
+2 Aether Gust
+2 Surgical Extraction
+2 Veil of Summer
+3 Plague Engineer
+3 Ashiok, Dream Render

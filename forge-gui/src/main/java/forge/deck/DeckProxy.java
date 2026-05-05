@@ -415,7 +415,7 @@ public class DeckProxy implements InventoryItem {
 
     public Integer getAverageCMC() {
         if (avgCMC == null) {
-            avgCMC = Deck.getAverageCMC(getDeck());
+            avgCMC = getDeck().getAverageCMC();
         }
         return avgCMC;
     }
@@ -568,9 +568,9 @@ public class DeckProxy implements InventoryItem {
         @Override
         public Deck getDeck() {
             final DeckGeneratorTheme gen = new DeckGeneratorTheme(FModel.getMagicDb().getCommonCards());
-            final Deck deck = new Deck();
             gen.setSingleton(FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_SINGLETONS));
             gen.setUseArtifacts(!FModel.getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS));
+            final Deck deck = new Deck();
             final StringBuilder errorBuilder = new StringBuilder();
             deck.getMain().addAll(gen.getThemeDeck(this.getName(), 60, errorBuilder));
             if (errorBuilder.length() > 0) {
@@ -656,7 +656,6 @@ public class DeckProxy implements InventoryItem {
         return decks;
     }
 
-    //todo custom starter decks in adventure
     public static List<DeckProxy> getAllCustomStarterDecks() {
         final List<DeckProxy> decks = new ArrayList<>();
         final IStorage<Deck> easy = FModel.getDecks().getCustomStarterDecks();

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="153">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="154">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -41,8 +41,10 @@
    ] }
 
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Command Tower|CM1&quot;, &quot;Command Beacon|C15&quot;, &quot;Opal Palace|CMM&quot;, &quot;Path of Ancestry|C17&quot;, &quot;Plaza of Heroes|DMU&quot;, &quot;Swiftfoot Boots|C13&quot;, &quot;Helm of the Host|DOM&quot;, &quot;Platinum Angel|MRD&quot;, &quot;Chimil, the Inner Sun|LCI&quot;, &quot;Jodah's Codex|DMU&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Command Tower|CM1&quot;, &quot;Command Beacon|C15&quot;, &quot;Plaza of Heroes|DMU&quot;, &quot;Helm of the Host|DOM&quot;, &quot;Platinum Angel|MRD&quot;, &quot;Jodah's Codex|DMU&quot;]}"/>
     <property name="enemy" value="Jodah"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
    </properties>
   </object>
   <object id="70" template="../../../../common/maps/obj/entry_down.tx" x="216.333" y="156.666">
@@ -180,5 +182,24 @@
   </object>
   <object id="151" template="../../../../common/maps/obj/collision.tx" x="109.623" y="99.0039" width="17.4208" height="221.992"/>
   <object id="152" template="../../../../common/maps/obj/collision.tx" x="319.623" y="99.0039" width="17.4208" height="221.992"/>
+  <object id="153" template="../../../../common/maps/obj/enemy.tx" gid="11419" x="215.636" y="258.182">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;After a battle of unrivaled intensity, Jodah finally falls. A smile crosses his face as his blood pools on the ground. 'Excellent... Well done {var=player_name}. I am truly sorry for all the trouble...' With that he collapses, dead despite his immortality.&quot;,
+	   &quot;options&quot;: [{
+		  &quot;name&quot;: &quot;(Continue)&quot;,
+&quot;text&quot;: &quot;Congratulations on completing the Realm of Legends! You can now continue exploring this world if you wish - the Mirror Gallery you can now access contains difficult post-game challenges. You can also use new game plus to experience the adventure again. You'll keep your cards and non-key items, but lose all life upgrades and all enemies will respawn. You can also choose a new difficulty. More content may be added in the future, but just dungeons here and there; this is the only planned 'main story'.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]}
+   ] }
+
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Command Tower|CM1&quot;, &quot;Plaza of Heroes|DMU&quot;, &quot;Platinum Angel|MRD&quot;, &quot;Jodah's Codex|DMU&quot;]}"/>
+    <property name="enemy" value="Jodah"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

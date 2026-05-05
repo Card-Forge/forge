@@ -87,6 +87,10 @@ ScryfallCode=PMEI
 2025-23 M Spider-Man, Miles Morales @InHyuk Lee
 2025-24 R Iroh, Grand Lotus @Jo Cordisco
 2025-25 R Aang, Air Nomad @Jinho Bae
-2026-01 R Command Tower @Constantin Marin
-2026-02 R Crop Rotation @DiTerlizzi
-2026-03 R Zack Fair @Tetsuya Nomura
+2026-1 R Command Tower @Constantin Marin
+2026-2 R Crop Rotation @DiTerlizzi
+2026-3 R Zack Fair @Tetsuya Nomura
+2026-4 R Swords to Plowshares @Billy Christian
+2026-5 M Gishath, Sun's Avatar @Zack Stella
+2026-6 R Warstorm Surge @Ryan Stegman & Arthur Hesli
+2026-7 R Counterspell @Hannibal King

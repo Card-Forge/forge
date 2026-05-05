@@ -20,18 +20,19 @@ package forge.game.zone;
 import java.util.*;
 import java.util.function.Predicate;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.MultimapBuilder;
 
+import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameType;
 import forge.game.card.*;
 import forge.game.event.EventValueChangeType;
 import forge.game.event.GameEventZone;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.util.MyRandom;
 
 /**
@@ -73,6 +74,10 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
 
     public Player getPlayer() { // generic zones like stack have no player associated
         return null;
+    }
+
+    public ZoneView getView() {
+        return new ZoneView(PlayerView.get(getPlayer()), zoneType);
     }
 
     public final void reorder(final Card c, final int index) {
@@ -134,7 +139,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
 
         c.setZone(this);
 
-        if ((zoneType == ZoneType.Battlefield || !c.isToken()) || (zoneType == ZoneType.Stack && c.getCopiedPermanent() != null)) {
+        if ((zoneType == ZoneType.Battlefield || !c.isToken() || c.getCurrentStateName() == CardStateName.PreparedSpell) || (zoneType == ZoneType.Stack && c.getCopiedPermanent() != null)) {
             if (index == null) {
                 cardList.add(c);
             } else {
@@ -234,7 +239,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         }
 
         if (cardsAdded.isEmpty()) {
-            return ImmutableList.of();
+            return List.of();
         }
 
         // all cards if key == null

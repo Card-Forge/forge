@@ -146,7 +146,8 @@ public final class CardEdition implements Comparable<CardEdition> {
         REBALANCED("rebalanced"),
         ETERNAL("eternal"),
         CONJURED("conjured"),
-        SCHEME("scheme");
+        SCHEME("scheme"),
+        PRINTSHEETS("printsheets");
 
         private final String name;
 
@@ -434,6 +435,20 @@ public final class CardEdition implements Comparable<CardEdition> {
             //Could build a map for this one too if it's used for more than one-offs.
             if (c.collectorNumber.equalsIgnoreCase(collectorNumber))
                 return c;
+        }
+        return null;
+    }
+
+    /** Returns the section name (e.g. "cards", "full art", "borderless") that contains the given collector number, or null. */
+    public String getSectionForCollectorNumber(String collectorNumber) {
+        if (collectorNumber == null || collectorNumber.isEmpty())
+            return null;
+        for (Entry<String, java.util.Collection<EditionEntry>> section : cardMap.asMap().entrySet()) {
+            for (EditionEntry ee : section.getValue()) {
+                if (collectorNumber.equalsIgnoreCase(ee.collectorNumber)) {
+                    return section.getKey();
+                }
+            }
         }
         return null;
     }

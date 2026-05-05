@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="93">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="94">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -54,7 +54,7 @@
     <property name="spawn.Hard" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="57" template="../../../../common/maps/obj/enemy.tx" x="207.184" y="80.9197">
+  <object id="57" template="../../../../common/maps/obj/enemy.tx" x="210.955" y="80.9197">
    <properties>
     <property name="defeatDialog">[
    {
@@ -64,8 +64,10 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Scroll of avacyn|AVR&quot;, &quot;Mask of avacyn|ISD&quot;, &quot;Angel of Jubilation&quot;, &quot;Ghost Quarter|ISD&quot;, &quot;helvault|DKA&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Scroll of Avacyn|AVR&quot;, &quot;Mask of Avacyn|ISD&quot;, &quot;Angel of Jubilation&quot;, &quot;Helvault|DKA&quot;]}"/>
     <property name="enemy" value="Avacyn"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="40"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value=""/>
@@ -229,6 +231,25 @@ The demon's small size undercuts his attempted bluster.&quot;,
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 }
 ]</property>
+   </properties>
+  </object>
+  <object id="93" template="../../../../common/maps/obj/enemy.tx" x="212.851" y="80.3403">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Scroll of Avacyn|AVR&quot;, &quot;Mask of Avacyn|ISD&quot;, &quot;Helvault|DKA&quot;]}"/>
+    <property name="enemy" value="Avacyn"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value=""/>
    </properties>
   </object>
  </objectgroup>

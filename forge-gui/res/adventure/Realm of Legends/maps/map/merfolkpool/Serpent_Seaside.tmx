@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="34" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="86">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="34" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="88">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -11,7 +11,7 @@
  <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
  <layer id="6" name="Collision" width="30" height="34">
   <data encoding="base64" compression="zlib">
-   eJztlU0OgjAQhbt1AYIKN9Bb6MIQd3gbr+EBDIks1FO54SZmUhvqMFOnRWL8eclb1NL5ZqaDKPXXN2sz4k1pNw53aD6gWRJW3zIOO2f0a9xr3HUV6b1DRO8bS8TNxjTpep2352BdZ7Ql4vrp4ha5XveZZ+k9UlwQrnOSaL+KK5WE2ZcLNR5XrWHtwz1ntG3hvQkzV1KufTf2ebhDc58UA8eHes2zPlxszMXsvlxOFNfOlYs/JNcVn/v9XCp1KYflZsTefKvUYkvkQ8yzi5s6+unT6xPx7nBxXExfLtRWrbRdcZ4xX8ktcp4Je/i7IMnNMO1vnI+4/y2p3sGt77PbWHbJ7q20pxzXJ1/ghvT0mQpUc4N6kSbDcPejx3h95saX+9dn6QbVnIAr
+   eJztlc0NwjAMhSNx4tDSFtoNYAs4oIpbuw1rMABCggMwBaNwYRNkhajBtYOTghA/T3qHNMSf7ZhWqb++WYs+b0rLQbhD8wGNkrD6pnHYOaNf457jtjeR3ltH9L6xRNxsDJO250VzDta7nLZEXD9d3LLQ6y7zLL1HigvCdWaJ9rO4UkmYXblQ43bWGNY+3ENO2xbey5i5knLtu7HPwx2a+6QYOD7Ua37rw8XGXMzuyuVEce1cufiv4J562q743PNDpdSxCuNK4sPznNgb10pNaiIfYp5d3NTRT59e74n/DhfHxfTlQm2bmbYrziPmM7llwTNhD38XJLkZpv2N8xH33pLqHdzdbXYvll2yeyvtKcf1yRe4IT19pBLVfEG9SJPXcFf9+3hd5saX+9dn6Qqex4Gp
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="34">
@@ -37,7 +37,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztVs1OAjEQ7s2D4QW8Kf8/YiQBTurJsLAsB6OJ8go+gInP4oUf+QeDb6LRRH0ALr6EM6l1h7rdbRfk5Jd8oe20/WamZbqM/SMMnkqMOcXN66Lmc+lvNbI1xvo2/0UKbEc4xTidl6up99NB/nt9su6O7Zws62JfEOfh78GadPt1V9OP/RV03+Ds3oEfRa4bdRiLAeOOv2YS7CknvO4l3JcrYBM4gvVjifs1vnfawyY4WTHPQ/B/JBFzMLN5TGPHpbBje+Lo7Z8n/rUst51uMJaRSHWxn22480U/R8aCkLKW+23Lex7q5uvLZxgDP+LAhK2vJxCt+Nu74Me9whdEr/p7rA/5HmjmXBciHynJX9pPQr5TBjkXmJMY0h53FO0D0BkCZ8Bxhfd1MVTkQv4fjgJyFnQWMtKKXMi6mRA5C4NV66wJzk458Y310j20OeX3t2uQXz9dhJ+ujBjcsbtj3n4wfAsLhnWW2lGT0hS0TqpqlkqzY5nfaYFd2G8P3z+PWMW3DdUUvqFutMrzHfeoXTLoe4towZ5tYEfau1BdzxsnQN/bH53qciybgI5W2DPUwVzjjCiaR+AL1NGew9vaOlv+dp08xKGOJhr6ui9wtq9AG+bfRvgY3qNHEnPB5z7R7wuTWM/LjF2UuW4deL3NSetVXtJFrWlAjhA3EX+70ESgJmJItKYe8dI1YSDWL5gbqwp4DpaBpurJluMM0pXXBPn3qbDT89TR1Y1zQdpfBhKvig==
+   eJztljlOAzEUhi1RUESpQXSQTNYhSGFJBVQok2VSIJAgV+AASJyFJmzZg0LNJUAgAQdIwyV4T46ZN2YWexKo+KVfGY+X7/nZsYexf0XR0w5j9vbfc5H5vPO7jHyVsXaN/6KFYnFu8Z62M6v+46moMO2frjvvVvbdXCwLYzv83ZgTt113mEFuz8B9g7V7B39sc27CZiwJNuxgZhrqM3Z07gnsl1NwE9yD/n3J61U+dtajTngwY567EH9PMuZgVONz6tuORT0+D2y18QskvpblPGcbjOUkUy6W8w2nvSib5F2YMpa7fGV5t0Nuoe5ewyTEYYBTNXWeUKIcXH8Dcdz6xIK6q/x814Z8dxRzriqRj4wULy2nId8ZjZwLjckcsh57FOs7wOmCR+B+mZdV1fXJhfw/7IXkLGwtZGV9ciFzcxFyFkWznrM6OjzgxjvWi/u4wC3fvzca+Q3iooK4spKwxy73+PO95l1Y1DxnaT0yqXVFz0m/M8uPeW3p72mhVRhvDe8/j7mKbxvKFLEhN1Hh+TY8zi5Z9L5FtWDMK/C1NHaxMp87Tojet9+cinsufyEVVtQ1VNFYYY2omrsQC5yjdzZ/VuYsBter5MGAczTVUOe+wNq+gmvQfslkbNnk++iBzLkYsJ/o94XOXI9KjB2XOHcTmFvgs5j7vCpIXGQNQ3KEOo8H1yOzPo0VmaguYQ095kv7RJHoP5kyBddLFxC/pcH0u7LleYZx5T5h8X361GN/ygvjqs5zQp6/AMthsFY=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -47,7 +47,7 @@
    </properties>
   </object>
   <object id="52" template="../../../../common/maps/obj/gold.tx" x="338.371" y="263.481"/>
-  <object id="54" template="../../../../common/maps/obj/enemy.tx" x="296.638" y="55.2568">
+  <object id="54" template="../../../../common/maps/obj/enemy.tx" x="297.138" y="69.7568">
    <properties>
     <property name="defeatDialog">[
    {
@@ -57,10 +57,12 @@
     ]
    }
 ]</property>
-    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Koma's Coil|TKHM&quot;, &quot;Koma's Coil|TKHM&quot;,  &quot;Koma's Coil|TKHM&quot; ]
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;komas_coil&quot;, &quot;komas_coil&quot;,  &quot;komas_coil&quot; ]
 }</property>
     <property name="enemy" value="Koma"/>
     <property name="hidden" type="bool" value="true"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="60"/>
     <property name="threatRange" type="int" value="80"/>
    </properties>
@@ -228,6 +230,34 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
     <property name="enemy" value="Llawan"/>
     <property name="speedModifier" type="float" value="0"/>
     <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="86" template="../../../../common/maps/obj/enemy.tx" x="297.078" y="69.1036">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;komas_coil&quot;, &quot;komas_coil&quot; ]
+}</property>
+    <property name="enemy" value="Koma"/>
+    <property name="hidden" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="60"/>
+    <property name="threatRange" type="int" value="80"/>
+   </properties>
+  </object>
+  <object id="87" template="../../../../common/maps/obj/shop.tx" x="144.333" y="484.667">
+   <properties>
+    <property name="commonShopList" value="LargeSeaCreatures"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
    </properties>
   </object>
  </objectgroup>

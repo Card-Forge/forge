@@ -6,7 +6,7 @@ import forge.StaticData;
 import forge.ai.AiProfileUtil;
 import forge.control.FControl.CloseAction;
 import forge.download.AutoUpdater;
-import forge.game.GameLogEntryType;
+import forge.game.GameLogVerbosity;
 import forge.gamemodes.net.server.FServerManager;
 import forge.gui.GuiBase;
 import forge.gui.UiCommand;
@@ -17,6 +17,7 @@ import forge.localinstance.properties.ForgeNetPreferences;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.properties.PreferencesStore;
+import forge.menus.LayoutMenu;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
 import forge.screens.deckeditor.CDeckEditorUI;
@@ -28,6 +29,7 @@ import forge.toolbox.FComboBoxPanel;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.util.Localizer;
+import forge.view.arcane.PlayArea;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -36,6 +38,7 @@ import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -111,6 +114,7 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.clear(); // just in case
         lstControls.add(Pair.of(view.getCbAnte(), FPref.UI_ANTE));
         lstControls.add(Pair.of(view.getCbAnteMatchRarity(), FPref.UI_ANTE_MATCH_RARITY));
+        lstControls.add(Pair.of(view.getCbAnteIncludeBasicLands(), FPref.UI_ANTE_INCLUDE_BASIC_LANDS));
         lstControls.add(Pair.of(view.getCbManaBurn(), FPref.UI_MANABURN));
         lstControls.add(Pair.of(view.getCbOrderCombatants(), FPref.LEGACY_ORDER_COMBATANTS));
         lstControls.add(Pair.of(view.getCbScaleLarger(), FPref.UI_SCALE_LARGER));
@@ -154,7 +158,7 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbCardTextHideReminder(), FPref.UI_CARD_IMAGE_RENDER_HIDE_REMINDER_TEXT));
         lstControls.add(Pair.of(view.getCbOpenPacksIndiv(), FPref.UI_OPEN_PACKS_INDIV));
         lstControls.add(Pair.of(view.getCbTokensInSeparateRow(), FPref.UI_TOKENS_IN_SEPARATE_ROW));
-        lstControls.add(Pair.of(view.getCbStackCreatures(), FPref.UI_STACK_CREATURES));
+        lstControls.add(Pair.of(view.getCbSeparateCombatStacks(), FPref.UI_SEPARATE_COMBAT_STACKS));
         lstControls.add(Pair.of(view.getCbManaLostPrompt(), FPref.UI_MANA_LOST_PROMPT));
         lstControls.add(Pair.of(view.getCbEscapeEndsTurn(), FPref.UI_ALLOW_ESC_TO_END_TURN));
         lstControls.add(Pair.of(view.getCbDetailedPaymentDesc(), FPref.UI_DETAILED_SPELLDESC_IN_PROMPT));
@@ -224,11 +228,14 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeColorIdentityCombobox();
         initializeSwitchStatesCombobox();
         initializeAutoYieldModeComboBox();
+        initializeStackGroupPermanentsComboBox();
+        initializeMaxStackDepthComboBox();
         initializeCounterDisplayTypeComboBox();
         initializeCounterDisplayLocationComboBox();
         initializeGraveyardOrderingComboBox();
         initializePlayerNameButton();
         initializeServerPortButton();
+        initializeAfkTimeoutButton();
         initializeDefaultLanguageComboBox();
 
         disableLazyLoading();
@@ -335,10 +342,18 @@ public enum CSubmenuPreferences implements ICDoc {
 
     private void initializeGameLogVerbosityComboBox() {
         final FPref userSetting = FPref.DEV_LOG_ENTRY_TYPE;
-        final FComboBoxPanel<GameLogEntryType> panel = this.view.getGameLogVerbosityComboBoxPanel();
-        final FComboBox<GameLogEntryType> comboBox = createComboBox(GameLogEntryType.values(), userSetting);
-        final GameLogEntryType selectedItem = GameLogEntryType.valueOf(this.prefs.getPref(userSetting));
+        final FComboBoxPanel<GameLogVerbosity> panel = this.view.getGameLogVerbosityComboBoxPanel();
+        final FComboBox<GameLogVerbosity> comboBox = createComboBox(GameLogVerbosity.values(), userSetting);
+        final GameLogVerbosity selectedItem = GameLogVerbosity.fromString(this.prefs.getPref(userSetting));
         panel.setComboBox(comboBox, selectedItem);
+
+        view.getBtnCustomLogSettings().setCommand(
+                (UiCommand) LayoutMenu::showCustomLogCategoriesDialog);
+        view.getBtnCustomLogSettings().setEnabled(selectedItem == GameLogVerbosity.CUSTOM);
+        comboBox.addItemListener(e -> {
+            view.getBtnCustomLogSettings().setEnabled(
+                    comboBox.getSelectedItem() == GameLogVerbosity.CUSTOM);
+        });
     }
 
     private void initializeCloseActionComboBox() {
@@ -557,7 +572,12 @@ public enum CSubmenuPreferences implements ICDoc {
     }
 
     private void initializeAutoYieldModeComboBox() {
-        final String[] elems = {ForgeConstants.AUTO_YIELD_PER_ABILITY, ForgeConstants.AUTO_YIELD_PER_CARD};
+        final String[] elems = {
+            ForgeConstants.AUTO_YIELD_PER_CARD,
+            ForgeConstants.AUTO_YIELD_PER_ABILITY,
+            ForgeConstants.AUTO_YIELD_PER_ABILITY_SESSION,
+            ForgeConstants.AUTO_YIELD_PER_ABILITY_INSTALL,
+        };
         final FPref userSetting = FPref.UI_AUTO_YIELD_MODE;
         final FComboBoxPanel<String> panel = this.view.getAutoYieldModeComboBoxPanel();
         final FComboBox<String> comboBox = createComboBox(elems, userSetting);
@@ -572,6 +592,45 @@ public enum CSubmenuPreferences implements ICDoc {
         final FComboBoxPanel<String> panel = this.view.getCbpGraveyardOrdering();
         final FComboBox<String> comboBox = createComboBox(elems, userSetting);
         final String selectedItem = this.prefs.getPref(userSetting);
+        panel.setComboBox(comboBox, selectedItem);
+    }
+
+    private void initializeStackGroupPermanentsComboBox() {
+        final Localizer localizer = Localizer.getInstance();
+        final String[] keys = {"default", "stack", "group_creatures", "group_all"};
+        final String[] labelKeys = {"lblGroupDefault", "lblGroupStack", "lblGroupCreatures", "lblGroupAll"};
+        final Map<String, String> mapping = new LinkedHashMap<>();
+        final String[] labels = new String[keys.length];
+        for (int i = 0; i < keys.length; i++) {
+            labels[i] = localizer.getMessage(labelKeys[i]);
+            mapping.put(labels[i], keys[i]);
+        }
+        final FComboBoxPanel<String> panel = this.view.getCbpStackGroupPermanents();
+        final FComboBox<String> comboBox = createLocalizedComboBox(labels, FPref.UI_GROUP_PERMANENTS, mapping);
+        final String savedValue = this.prefs.getPref(FPref.UI_GROUP_PERMANENTS);
+        final String selectedLabel = mapping.entrySet().stream()
+                .filter(e -> e.getValue().equals(savedValue))
+                .map(Map.Entry::getKey)
+                .findFirst()
+                .orElse(labels[0]);
+        panel.setComboBox(comboBox, selectedLabel);
+    }
+
+    private void initializeMaxStackDepthComboBox() {
+        final Integer[] elems = new Integer[PlayArea.MAX_STACK_DEPTH - PlayArea.MIN_STACK_DEPTH + 1];
+        for (int i = 0; i < elems.length; i++) {
+            elems[i] = PlayArea.MIN_STACK_DEPTH + i;
+        }
+        final FPref userSetting = FPref.UI_MAX_STACK_DEPTH;
+        final FComboBoxPanel<Integer> panel = this.view.getCbpMaxStackDepth();
+        final FComboBox<Integer> comboBox = createComboBox(elems, userSetting);
+        comboBox.setMaximumRowCount(elems.length);
+        Integer selectedItem;
+        try {
+            selectedItem = Integer.valueOf(this.prefs.getPref(userSetting));
+        } catch (NumberFormatException e) {
+            selectedItem = 4;
+        }
         panel.setComboBox(comboBox, selectedItem);
     }
 
@@ -711,6 +770,27 @@ public enum CSubmenuPreferences implements ICDoc {
         return () -> {
             GamePlayerUtil.setServerPort();
             setServerPortButtonText();
+        };
+    }
+
+    private void initializeAfkTimeoutButton() {
+        final FLabel btn = view.getBtnAfkTimeout();
+        setAfkTimeoutButtonText();
+        btn.setCommand(getAfkTimeoutButtonCommand());
+    }
+    private void setAfkTimeoutButtonText() {
+        final FLabel btn = view.getBtnAfkTimeout();
+        final int minutes = netPrefs.getPrefInt(ForgeNetPreferences.FNetPref.NET_AFK_TIMEOUT);
+        if (minutes <= 0) {
+            btn.setText(localizer.getMessage("lblAfkTimeoutDisabled"));
+        } else {
+            btn.setText(minutes + ":00");
+        }
+    }
+    private UiCommand getAfkTimeoutButtonCommand() {
+        return () -> {
+            GamePlayerUtil.setAfkTimeout();
+            setAfkTimeoutButtonText();
         };
     }
 }

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Shrek
+Title=Shrek
+Icon=Shrek.jpg
+Difficulty=Very Hard
+Description=./Modern/The_Lost_Caverns_of_Ixalan/Levi_Stephens_-_Rakdos_Unearth_(Modern,_#2003380).dck
+Deck Type=constructed
+
+[Main]
+4 Ovalchase Daredevil
+4 Goblin Engineer
+3 Inti, Seneschal of the Sun
+4 Academy Manufactor
+3 Insolent Neonate
+4 Street Wraith
+4 Asmoranomardicadaistinaculdacar
+1 Pithing Needle
+4 The Underworld Cookbook
+1 Shadowspear
+2 Lightning Axe
+4 Unearth
+2 Call of the Death-Dweller
+4 Urza's Saga
+4 Blackcleave Cliffs
+4 Blood Crypt
+2 Verdant Catacombs
+1 Takenuma, Abandoned Mire
+2 Swamp
+3 Marsh Flats
+[Sideboard]
+1 Magus of the Moon
+2 Fulminator Mage
+2 Molten Collapse
+2 Fatal Push
+2 By Force
+2 Lightning Axe
+1 Silent Gravestone
+1 Stone of Erech
+2 Tormod's Crypt

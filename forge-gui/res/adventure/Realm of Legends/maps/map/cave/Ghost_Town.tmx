@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="148">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="149">
  <editorsettings>
   <export target="waste_town.abandoned.tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Ghost town&quot;, &quot;Ghost quarter&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Ghost Town&quot;, &quot;Ghostly Prison&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -38,8 +38,10 @@
   <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="364" y="624" width="56" height="16"/>
   <object id="100" template="../../../../common/maps/obj/enemy.tx" x="384.333" y="516.667">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ghostfire Blade|KTK&quot;, &quot;Mastery of the Unseen|FRF&quot;, &quot;Jeskai Infiltrator|FRF&quot;, &quot;Scroll of Fate|C19&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ghostfire Blade|KTK&quot;, &quot;Mastery of the Unseen|FRF&quot;, &quot;Secret Plans&quot;, &quot;Scroll of Fate|C19&quot;]}"/>
     <property name="enemy" value="Omarthis"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="40"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
@@ -139,26 +141,17 @@
   </object>
   <object id="133" template="../../../../common/maps/obj/shop.tx" x="416" y="371.333">
    <properties>
-    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
-    <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black,FlipShop,Saga"/>
-    <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature,Battle"/>
+    <property name="commonShopList" value="Spirit"/>
    </properties>
   </object>
   <object id="134" template="../../../../common/maps/obj/shop.tx" x="464" y="370.667">
    <properties>
-    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
-    <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black,FlipShop,Saga"/>
-    <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature,Battle"/>
+    <property name="commonShopList" value="Zombie"/>
    </properties>
   </object>
   <object id="135" template="../../../../common/maps/obj/shop.tx" x="514" y="369.333">
    <properties>
-    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
-    <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black,FlipShop,Saga"/>
-    <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature,Battle"/>
+    <property name="commonShopList" value="Creature2Eldrazi"/>
    </properties>
   </object>
   <object id="136" template="../../../../common/maps/obj/shop.tx" x="513.333" y="434">
@@ -248,6 +241,16 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 }
 ]</property>
+   </properties>
+  </object>
+  <object id="148" template="../../../../common/maps/obj/enemy.tx" x="385.636" y="517.818">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ghostfire Blade|KTK&quot;, &quot;Secret Plans&quot;]}"/>
+    <property name="enemy" value="Omarthis"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
  </objectgroup>

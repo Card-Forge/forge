@@ -34,6 +34,7 @@ import forge.game.cost.CostEnlist;
 import forge.game.cost.CostExert;
 import forge.game.event.*;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
 
@@ -43,6 +44,7 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.util.IHasForgeLog;
 import forge.util.TextUtil;
 
 import org.apache.commons.lang3.time.StopWatch;
@@ -58,7 +60,7 @@ import java.util.*;
  * @author Forge
  * @version $Id: PhaseHandler.java 13001 2012-01-08 12:25:25Z Sloth $
  */
-public class PhaseHandler implements java.io.Serializable {
+public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
     private static final long serialVersionUID = 5207222278370963197L;
 
     // used for debugging phase timing
@@ -123,7 +125,7 @@ public class PhaseHandler implements java.io.Serializable {
         if (playerTurn == playerTurn0) { return; }
         playerTurn = playerTurn0;
         game.updatePlayerTurnForView();
-        setPriority(playerTurn);
+        resetPriority();
     }
 
     public final Player getPreviousPlayerTurn() {
@@ -175,7 +177,7 @@ public class PhaseHandler implements java.io.Serializable {
                 turn++;
                 extraPhases.clear();
                 game.updateTurnForView();
-                game.fireEvent(new GameEventTurnBegan(playerTurn, turn));
+                game.fireEvent(new GameEventTurnBegan(PlayerView.get(playerTurn), turn));
 
                 // Tokens starting game in play should suffer from Sum. Sickness
                 for (final Card c : playerTurn.getCardsIn(ZoneType.Battlefield, false)) {
@@ -284,7 +286,7 @@ public class PhaseHandler implements java.io.Serializable {
                             c.addCounter(CounterEnumType.LORE, 1, playerTurn, table);
                         }
                     }
-                    table.replaceCounterEffect(game, null, false);
+                    table.replaceCounterEffect(game, null);
 
                     // roll for attractions if we have any
                     if (playerTurn.getCardsIn(ZoneType.Battlefield).anyMatch(Card::isAttraction)) {
@@ -497,7 +499,7 @@ public class PhaseHandler implements java.io.Serializable {
                 if (inCombat()) {
                     List<Card> attackers = combat.getAttackers();
                     List<Card> blockers = combat.getAllBlockers();
-                    eventEndCombat = new GameEventCombatEnded(attackers, blockers);
+                    eventEndCombat = GameEventCombatEnded.fromCards(attackers, blockers);
                 }
                 endCombat();
 
@@ -596,7 +598,6 @@ public class PhaseHandler implements java.io.Serializable {
                         }
                     }
                 }
-
             } while (!success);
 
             CardCollection tapped = new CardCollection();
@@ -1045,7 +1046,7 @@ public class PhaseHandler implements java.io.Serializable {
                 sw.start();
             }
 
-            game.fireEvent(new GameEventPlayerPriority(playerTurn, phase, getPriorityPlayer()));
+            game.fireEvent(new GameEventPlayerPriority(PlayerView.get(playerTurn), phase, PlayerView.get(getPriorityPlayer())));
             List<SpellAbility> chosenSa = null;
 
             int loopCount = 0;
@@ -1105,7 +1106,7 @@ public class PhaseHandler implements java.io.Serializable {
             } while (loopCount < 999 || !pPlayerPriority.getController().isAI());
 
             if (loopCount >= 999 && pPlayerPriority.getController().isAI()) {
-                System.out.print("AI looped too much with: " + chosenSa);
+                aiLog.warn("AI looped too much with: " + chosenSa);
             }
 
             if (DEBUG_PHASES) {
@@ -1155,7 +1156,7 @@ public class PhaseHandler implements java.io.Serializable {
         if (game.getAge() == GameStage.RestartedByKarn) {
             setPhase(null);
             game.updatePhaseForView();
-            game.fireEvent(new GameEventGameRestarted(playerTurn));
+            game.fireEvent(new GameEventGameRestarted(PlayerView.get(playerTurn)));
             return;
         }
 
@@ -1178,6 +1179,9 @@ public class PhaseHandler implements java.io.Serializable {
         if (!allAffectedCards.isEmpty()) {
             game.fireEvent(new GameEventCardStatsChanged(allAffectedCards));
             allAffectedCards.clear();
+            // Update flashback views after static abilities have been recalculated,
+            // so play-from-zone abilities (e.g. Bolas's Citadel) are reflected
+            game.getPlayers().forEach(Player::updateFlashbackForView);
         }
         return false;
     }

@@ -4,7 +4,7 @@ URL:https://pauperpuzzles.wordpress.com/2017/02/11/13-a-tap-dance/
 Goal:Survive
 Turns:2
 Description:Survive until your next turn.
-Difficulty:Hard
+Difficulty:Rare
 [state]
 ActivePlayer=Human
 ActivePhase=Main1

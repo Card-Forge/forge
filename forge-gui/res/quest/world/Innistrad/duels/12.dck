@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Kang
+Title=Kang
+Icon=Kang.jpg
+Difficulty=Easy
+Description=Innistrad/Dominaria_Open_Series_#8/Ceistian_Ramirez_-_Red_Deck_Wins_(Standard,_#23695).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Chandra's Phoenix
+4 Goblin Fireslinger
+2 Grim Lavamancer
+2 Spikeshot Elder
+4 Stormblood Berserker
+4 Stromkirk Noble
+4 Shrine of Burning Rage
+3 Galvanic Blast
+4 Gut Shot
+2 Incinerate
+4 Volt Charge
+2 Arc Trail
+18 Mountain
+3 Rootbound Crag
+[Sideboard]
+2 Ancient Grudge
+4 Dismember
+2 Hero of Oxid Ridge
+4 Traitorous Blood
+3 Vulshok Refugee

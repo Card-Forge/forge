@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Spike Spiegel
+Title=Spike Spiegel
+Icon=Spike Spiegel.jpg
+Difficulty=Very Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/BSK_hercules_-_GW_Toolbox_(Modern,_#967524).dck
+Deck Type=constructed
+
+[Main]
+1 Walking Ballista
+1 Joraga Treespeaker
+1 Spike Feeder
+1 Hexdrinker
+1 Heliod, Sun-Crowned
+1 Shalai, Voice of Plenty
+1 Scavenging Ooze
+1 Burrenton Forge-Tender
+1 Knight of the Reliquary
+1 Loxodon Hierarch
+4 Giver of Runes
+4 Stoneforge Mystic
+4 Noble Hierarch
+4 Ranger-Captain of Eos
+4 Birds of Paradise
+1 Batterskull
+1 Sword of Light and Shadow
+1 Umbral Mantle
+4 Aether Vial
+4 Eladamri's Call
+1 Gavony Township
+1 Horizon Canopy
+1 Plains
+2 Forest
+3 Wooded Foothills
+3 Temple Garden
+4 Windswept Heath
+4 Razorverge Thicket
+[Sideboard]
+1 Zirda, the Dawnwaker
+1 Giant Killer
+1 Qasali Pridemage
+1 Remorseful Cleric
+1 Selfless Spirit
+1 Sword of Fire and Ice
+2 Burrenton Forge-Tender
+2 Veil of Summer
+2 Path to Exile
+3 Tormod's Crypt

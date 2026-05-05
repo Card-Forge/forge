@@ -4,7 +4,7 @@ import forge.control.FControl;
 import forge.control.FControl.CloseAction;
 import forge.control.KeyboardShortcuts;
 import forge.control.KeyboardShortcuts.Shortcut;
-import forge.game.GameLogEntryType;
+import forge.game.GameLogVerbosity;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -59,9 +59,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final FLabel btnContentDirectoryUI = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnContentDirectoryUI")).build();
     private final FLabel btnClearImageCache = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnClearImageCache")).build();
     private final FLabel btnTokenPreviewer = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("btnTokenPreviewer")).build();
+    private final FLabel btnCustomLogSettings = new FLabel.Builder().opaque(true).hoverable(true).text(localizer.getMessage("lblCustomLogSettings")).build();
 
     private final FLabel btnPlayerName = new FLabel.Builder().opaque(true).hoverable(true).text("").build();
     private final FLabel btnServerPort = new FLabel.Builder().opaque(true).hoverable(true).text("").build();
+    private final FLabel btnAfkTimeout = new FLabel.Builder().opaque(true).hoverable(true).text("").build();
 
     private final JCheckBox cbRemoveSmall = new OptionsCheckBox(localizer.getMessage("cbRemoveSmall"));
     private final JCheckBox cbCardBased = new OptionsCheckBox(localizer.getMessage("cbCardBased"));
@@ -69,6 +71,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbRemoveArtifacts = new OptionsCheckBox(localizer.getMessage("cbRemoveArtifacts"));
     private final JCheckBox cbAnte = new OptionsCheckBox(localizer.getMessage("cbAnte"));
     private final JCheckBox cbAnteMatchRarity = new OptionsCheckBox(localizer.getMessage("cbAnteMatchRarity"));
+    private final JCheckBox cbAnteIncludeBasicLands = new OptionsCheckBox(localizer.getMessage("cbAnteIncludeBasicLands"));
     private final JCheckBox cbEnableAICheats = new OptionsCheckBox(localizer.getMessage("cbEnableAICheats"));
     private final JCheckBox cbManaBurn = new OptionsCheckBox(localizer.getMessage("cbManaBurn"));
     private final JCheckBox cbOrderCombatants = new OptionsCheckBox(localizer.getMessage("cbOrderCombatants"));
@@ -109,7 +112,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbCardTextHideReminder = new OptionsCheckBox(localizer.getMessage("cbCardTextHideReminder"));
     private final JCheckBox cbOpenPacksIndiv = new OptionsCheckBox(localizer.getMessage("cbOpenPacksIndiv"));
     private final JCheckBox cbTokensInSeparateRow = new OptionsCheckBox(localizer.getMessage("cbTokensInSeparateRow"));
-    private final JCheckBox cbStackCreatures = new OptionsCheckBox(localizer.getMessage("cbStackCreatures"));
+    private final JCheckBox cbSeparateCombatStacks = new OptionsCheckBox(localizer.getMessage("cbSeparateCombatStacks"));
     private final JCheckBox cbFilterLandsByColorId = new OptionsCheckBox(localizer.getMessage("cbFilterLandsByColorId"));
     private final JCheckBox cbShowStormCount = new OptionsCheckBox(localizer.getMessage("cbShowStormCount"));
     private final JCheckBox cbRemindOnPriority = new OptionsCheckBox(localizer.getMessage("cbRemindOnPriority"));
@@ -135,7 +138,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private Timer searchTimer;
 
     // ComboBox items are added in CSubmenuPreferences since this is just the View.
-    private final FComboBoxPanel<GameLogEntryType> cbpGameLogEntryType = new FComboBoxPanel<>(localizer.getMessage("cbpGameLogEntryType")+":");
+    private final FComboBoxPanel<GameLogVerbosity> cbpGameLogEntryType = new FComboBoxPanel<>(localizer.getMessage("cbpGameLogEntryType")+":");
     private final FComboBoxPanel<CloseAction> cbpCloseAction = new FComboBoxPanel<>(localizer.getMessage("cbpCloseAction")+":");
     private final FComboBoxPanel<String> cbpDefaultFontSize = new FComboBoxPanel<>(localizer.getMessage("cbpDefaultFontSize")+":");
     private final FComboBoxPanel<String> cbpCardArtFormat = new FComboBoxPanel<>(localizer.getMessage("cbpCardArtFormat")+":");
@@ -150,6 +153,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final FComboBoxPanel<String> cbpLandPlayed = new FComboBoxPanel<>(localizer.getMessage("cbpLandPlayed")+":");
     private final FComboBoxPanel<String> cbpDisplayCurrentCardColors = new FComboBoxPanel<>(localizer.getMessage("cbpDisplayCurrentCardColors")+":");
     private final FComboBoxPanel<String> cbpAutoYieldMode = new FComboBoxPanel<>(localizer.getMessage("cbpAutoYieldMode")+":");
+    private final FComboBoxPanel<String> cbpStackGroupPermanents = new FComboBoxPanel<>(localizer.getMessage("cbpStackGroupPermanents")+":");
+    private final FComboBoxPanel<Integer> cbpMaxStackDepth = new FComboBoxPanel<>(localizer.getMessage("cbpMaxStackDepth")+":");
     private final FComboBoxPanel<String> cbpCounterDisplayType = new FComboBoxPanel<>(localizer.getMessage("cbpCounterDisplayType")+":");
     private final FComboBoxPanel<String> cbpCounterDisplayLocation =new FComboBoxPanel<>(localizer.getMessage("cbpCounterDisplayLocation")+":");
     private final FComboBoxPanel<String> cbpGraveyardOrdering = new FComboBoxPanel<>(localizer.getMessage("cbpGraveyardOrdering")+":");
@@ -170,7 +175,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         final String sectionConstraints = "w 80%!, h 42px!, gap 25px 0 80px 20px, span 2 1";
         final String titleConstraints = "w 80%!, h 22px!, gap 25px 0 0 0px, span 2 1";
         final String comboBoxConstraints = "w 80%!, h 25px!, gap 25px 0 0 0px, span 2 1";
-        final String descriptionConstraints = "w 80%!, h 22px!, gap 28px 0 0 20px, span 2 1";
+        final String descriptionConstraints = "w 80%!, h pref!, gap 28px 0 0 20px, span 2 1";
 
         pnlPrefs.add(new SectionLabel(localizer.getMessage("Troubleshooting")), sectionConstraints);
 
@@ -226,6 +231,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbAnteMatchRarity, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlAnteMatchRarity")), descriptionConstraints);
+
+        pnlPrefs.add(cbAnteIncludeBasicLands, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlAnteIncludeBasicLands")), descriptionConstraints);
 
         pnlPrefs.add(cbEnableAICheats, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlEnableAICheats")), descriptionConstraints);
@@ -305,6 +313,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(getServerPortPanel(), titleConstraints + ", h 26px!");
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlServerPort")), descriptionConstraints);
 
+        pnlPrefs.add(getAfkTimeoutPanel(), titleConstraints + ", h 26px!");
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlAfkTimeout")), descriptionConstraints);
+
         // Deck building options
         pnlPrefs.add(new SectionLabel(localizer.getMessage("RandomDeckGeneration")), sectionConstraints);
 
@@ -333,7 +344,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlPrefArtExpansionOnly")), descriptionConstraints);
 
         pnlPrefs.add(cbSmartCardArtSelectionOpt, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSmartCardArtOpt")), "w 80%!, h 22px!, gap 28px 0 0 0, span 2 1");
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSmartCardArtOpt")), "w 80%!, h pref!, gap 28px 0 0 0, span 2 1");
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSmartCardArtOptNote")), descriptionConstraints);
 
         //Draft Ranking Overlay
@@ -351,6 +362,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbpGameLogEntryType, comboBoxConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlGameLogEntryType")), descriptionConstraints);
+        pnlPrefs.add(btnCustomLogSettings, "w 25%!, h 30px!, gap 25px 0 0 20px, span 2 1, al left");
 
         pnlPrefs.add(cbpCloseAction, comboBoxConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlCloseAction")), descriptionConstraints);
@@ -436,8 +448,14 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbTokensInSeparateRow, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlTokensInSeparateRow")), descriptionConstraints);
 
-        pnlPrefs.add(cbStackCreatures, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlStackCreatures")), descriptionConstraints);
+        pnlPrefs.add(cbpStackGroupPermanents, comboBoxConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlGroupPermanents")), descriptionConstraints);
+
+        pnlPrefs.add(cbpMaxStackDepth, comboBoxConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlMaxStackDepth")), descriptionConstraints);
+
+        pnlPrefs.add(cbSeparateCombatStacks, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSeparateCombatStacks")), descriptionConstraints);
 
         pnlPrefs.add(cbTimedTargOverlay, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlTimedTargOverlay")), descriptionConstraints);
@@ -561,7 +579,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     @SuppressWarnings("serial")
     private final class NoteLabel extends SkinnedLabel {
         private NoteLabel(final String txt0) {
-            super(txt0);
+            super("<html>" + txt0 + "</html>");
             this.setFont(FSkin.getItalicFont());
             this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         }
@@ -573,7 +591,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
      * into characters and (dis)assembly of keycode stack.
      */
     @SuppressWarnings("serial")
-    public class KeyboardShortcutField extends SkinnedTextField {
+    public static class KeyboardShortcutField extends SkinnedTextField {
         private String codeString;
 
         /**
@@ -608,6 +626,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
                     FModel.getPreferences().setPref(prefKey, getCodeString());
                     FModel.getPreferences().save();
                     shortcut0.attach();
+                    FControl.instance.getForgeMenu().refresh();
                     KeyboardShortcutField.this.setBackground(Color.white);
                 }
             });
@@ -648,7 +667,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
                 }
             }
 
-            this.setText(StringUtils.join(displayText, ' '));
+            this.setText(StringUtils.join(displayText, '+'));
         }
     }
 
@@ -660,6 +679,10 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     public FLabel getBtnServerPort() {
         return btnServerPort;
+    }
+
+    public FLabel getBtnAfkTimeout() {
+        return btnAfkTimeout;
     }
     //###################################################################
 
@@ -762,6 +785,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     }
 
     /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbAnteIncludeBasicLands() {
+        return cbAnteIncludeBasicLands;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbManaBurn() {
         return cbManaBurn;
     }
@@ -846,7 +874,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         return cbpLandPlayed;
     }
 
-    public FComboBoxPanel<GameLogEntryType> getGameLogVerbosityComboBoxPanel() {
+    public FComboBoxPanel<GameLogVerbosity> getGameLogVerbosityComboBoxPanel() {
         return cbpGameLogEntryType;
     }
 
@@ -877,6 +905,14 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     public FComboBoxPanel<String> getAutoYieldModeComboBoxPanel() {
         return cbpAutoYieldMode;
+    }
+
+    public FComboBoxPanel<String> getCbpStackGroupPermanents() {
+        return cbpStackGroupPermanents;
+    }
+
+    public FComboBoxPanel<Integer> getCbpMaxStackDepth() {
+        return cbpMaxStackDepth;
     }
 
     public FComboBoxPanel<String> getCounterDisplayTypeComboBoxPanel() {
@@ -989,8 +1025,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         return cbTokensInSeparateRow;
     }
 
-    public final JCheckBox getCbStackCreatures() {
-        return cbStackCreatures;
+    public final JCheckBox getCbSeparateCombatStacks() {
+        return cbSeparateCombatStacks;
     }
 
     public final JCheckBox getCbManaLostPrompt() {
@@ -1052,6 +1088,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
     public final FLabel getBtnClearImageCache() { return btnClearImageCache; }
     public final FLabel getBtnTokenPreviewer() { return btnTokenPreviewer; }
+    public FLabel getBtnCustomLogSettings() { return btnCustomLogSettings; }
 
     /* (non-Javadoc)
 		 * @see forge.gui.framework.IVDoc#getDocumentID()
@@ -1108,6 +1145,15 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         FLabel lbl = new FLabel.Builder().text(localizer.getMessage("lblServerPort") +": ").fontSize(12).fontStyle(Font.BOLD).build();
         p.add(lbl, "aligny top, h 100%, gap 4px 0 0 0");
         p.add(btnServerPort, "aligny top, h 100%, w 200px!");
+        return p;
+    }
+
+    private JPanel getAfkTimeoutPanel() {
+        JPanel p = new JPanel(new MigLayout("insets 0, gap 0!"));
+        p.setOpaque(false);
+        FLabel lbl = new FLabel.Builder().text(localizer.getMessage("lblAfkTimeout") +": ").fontSize(12).fontStyle(Font.BOLD).build();
+        p.add(lbl, "aligny top, h 100%, gap 4px 0 0 0");
+        p.add(btnAfkTimeout, "aligny top, h 100%, w 200px!");
         return p;
     }
 

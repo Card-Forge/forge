@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-
 import forge.ai.AiAbilityDecision;
 import forge.ai.AiPlayDecision;
 import forge.ai.SpellAbilityAi;
@@ -17,11 +16,8 @@ public class RemoveFromCombatAi extends SpellAbilityAi {
 
     @Override
     public AiAbilityDecision chkDrawback(Player aiPlayer, SpellAbility sa) {
-        // AI should only activate this during Human's turn
-
         if ("RemoveBestAttacker".equals(sa.getParam("AILogic"))) {
-            boolean result = aiPlayer.getGame().getCombat() != null && aiPlayer.getGame().getCombat().getDefenders().contains(aiPlayer);
-            return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 
         // TODO - implement AI

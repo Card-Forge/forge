@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Wilhelm Grimm
+Title=Wilhelm Grimm
+Icon=Wilhelm Grimm.jpg
+Difficulty=Medium
+Description=Aether_Revolt/yamakiller_-_RW_Aggro_(Standard,_#666758).dck
+Deck Type=constructed
+
+[Main]
+3 Expedition Envoy
+1 Hanweir Garrison
+4 Inventor's Apprentice
+2 Kari Zev, Skyship Raider
+4 Metallic Mimic
+2 Pia Nalaar
+4 Thalia's Lieutenant
+3 Thalia, Heretic Cathar
+4 Thraben Inspector
+4 Town Gossipmonger
+4 Outnumber
+2 Incendiary Flow
+2 Always Watching
+4 Inspiring Vantage
+5 Mountain
+4 Needle Spires
+8 Plains
+[Sideboard]
+3 Fragmentize
+4 Gideon, Ally of Zendikar
+1 Hanweir Battlements
+1 Hanweir Garrison
+3 Reckless Bushwhacker
+3 Selfless Spirit

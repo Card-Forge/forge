@@ -4,4 +4,5 @@ Singleton:True
 LandSetCode:M11
 
 Booster: 16 Any
-NumPacks:3
+NumPacks: 3
+NumPlayers: 8

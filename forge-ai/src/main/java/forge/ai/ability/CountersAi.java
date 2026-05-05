@@ -17,7 +17,6 @@
  */
 package forge.ai.ability;
 
-import com.google.common.collect.Iterables;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.*;
@@ -89,8 +88,12 @@ public abstract class CountersAi extends SpellAbilityAi {
      */
     public static Card chooseBoonTarget(final CardCollectionView list, final String type) {
         Card choice;
+        CounterType counterType = CounterType.getType(type);
+        if (counterType == null) {
+            return Aggregates.random(list);
+        }
 
-        if (type.equals("P1P1")) {
+        if (counterType.is(CounterEnumType.P1P1)) {
             // TODO look for modified
             choice = ComputerUtilCard.getBestCreatureAI(list);
 
@@ -98,16 +101,13 @@ public abstract class CountersAi extends SpellAbilityAi {
                 // We'd only get here if list isn't empty, maybe we're trying to animate a land?
                 choice = ComputerUtilCard.getBestLandToAnimate(list);
             }
-        } else if (type.equals("CHARGE")) {
+        } else if (counterType.is(CounterEnumType.CHARGE)) {
             final CardCollection boon = CardLists.filter(list, c -> c.getCounters(CounterEnumType.CHARGE) < c.getKeywordMagnitude(Keyword.STATION) || c.getOracleText().matches(".*(for|number|emove) \\w+ (?:charge )counter.*"));
             choice = ComputerUtilCard.getMostExpensivePermanentAI(boon);
-        } else if (CounterType.getType(type).isKeywordCounter()) {
+        } else if (counterType.isKeywordCounter()) {
             choice = ComputerUtilCard.getBestCreatureAI(CardLists.getNotKeyword(list, type));
         } else {
-            CardCollectionView pref = list;
-            if (Iterables.any(CounterEnumType.values, ct -> ct.toString().equals(type))) {
-                pref = CardLists.filter(list, c -> c.getCounters(CounterEnumType.getType(type)) == 0);
-            }
+            CardCollectionView pref = CardLists.filter(list, c -> c.getCounters(counterType) == 0);
             if (type.equals("DIVINITY") || type.equals("SHIELD")) {
                 choice = ComputerUtilCard.getMostExpensivePermanentAI(CardLists.filter(pref, Card::canBeDestroyed));
             } else if (pref.isEmpty()) {

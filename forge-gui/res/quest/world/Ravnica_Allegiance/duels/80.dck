@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Selesnya-precon
+Title=Selesnya-precon
+Icon=Selesnya-precon.jpg
+Difficulty=Hard
+Description=./Modern/Ravnica_Allegiance/Dan_Albright_-_Jund_Midrange_(Modern,_#779959).dck
+Deck Type=constructed
+
+[Main]
+3 Bloodbraid Elf
+3 Dark Confidant
+1 Kalitas, Traitor of Ghet
+1 Olivia Voldaren
+2 Scavenging Ooze
+4 Tarmogoyf
+1 Abrupt Decay
+2 Assassin's Trophy
+2 Fatal Push
+1 Kolaghan's Command
+4 Lightning Bolt
+1 Collective Brutality
+4 Inquisition of Kozilek
+1 Maelstrom Pulse
+2 Thoughtseize
+3 Liliana of the Veil
+1 Liliana, the Last Hope
+3 Blackcleave Cliffs
+1 Blood Crypt
+3 Bloodstained Mire
+2 Blooming Marsh
+2 Forest
+2 Overgrown Tomb
+3 Raging Ravine
+1 Stomping Ground
+2 Swamp
+1 Treetop Village
+4 Verdant Catacombs
+[Sideboard]
+1 Ancient Grudge
+2 Anger of the Gods
+1 Collective Brutality
+1 Damnation
+2 Feed the Clan
+3 Fulminator Mage
+1 Ishkanah, Grafwidow
+3 Leyline of the Void
+1 Rhythm of the Wild

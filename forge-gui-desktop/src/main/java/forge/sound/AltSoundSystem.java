@@ -26,17 +26,13 @@ class AsyncSoundRegistry {
     static Map<String, Integer> soundsPlayed = new HashMap<>();
 
     public synchronized static void registerSound(String soundName) {
-        if (soundsPlayed.containsKey(soundName)) {
-            soundsPlayed.put(soundName, soundsPlayed.get(soundName) + 1);
-        } else {
-            soundsPlayed.put(soundName, 1);
-        }
+        soundsPlayed.merge(soundName, 1, Integer::sum);
         //System.out.println("Register: Count for " + soundName + " = " + soundsPlayed.get(soundName));
     }
 
     public synchronized static void unregisterSound(String soundName) {
         if (soundsPlayed.containsKey(soundName) && soundsPlayed.get(soundName) > 1) {
-            soundsPlayed.put(soundName, soundsPlayed.get(soundName) - 1);
+            soundsPlayed.merge(soundName, -1, Integer::sum);
         } else {
             soundsPlayed.remove(soundName);
         }

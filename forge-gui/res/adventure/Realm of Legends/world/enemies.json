@@ -24,7 +24,8 @@
       {
         "type": "card",
         "count": 1,
-        "cardName": "Mana Crypt"
+        "cardName": "Mana Crypt",
+        "editions": [ "PHPR" ]
       },
       {
         "type": "card",
@@ -33,18 +34,23 @@
         "editions": [ "DMU" ]
       },
       {
-        "type": "deckCard",
+        "type": "card",
+        "count": 1,
+        "cardName": "Jodah, Archmage Eternal",
+        "editions": [ "DMU" ]
+      },
+      {
+        "type": "randomCard",
         "count": 6,
-        "addMaxCount": 10, 
+        "addMaxCount": 10,
         "rarity": [
-          "Rare",
           "Mythic Rare"
         ]
       },
       {
         "type": "gold",
-        "count": 10000,
-        "addMaxCount": 20000
+        "count": 30000,
+        "addMaxCount": 30000
       },
       {
         "type": "shards",
@@ -95,6 +101,11 @@
       {
         "type": "card",
         "count": 1,
+        "cardName": "1996 World Champion"
+      },
+      {
+        "type": "card",
+        "count": 1,
         "cardName": "Ancestral Recall",
         "editions": [ "VMA" ]
       },
@@ -111,6 +122,42 @@
         "editions": [ "VMA" ]
       },
       {
+        "type": "card",
+        "count": 1,
+        "cardName": "Tolarian Academy",
+        "editions": [ "VMA" ]
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Mox Pearl",
+        "editions": [ "VMA" ]
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Mox Sapphire",
+        "editions": [ "VMA" ]
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Mox Jet",
+        "editions": [ "VMA" ]
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Mox Ruby",
+        "editions": [ "VMA" ]
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Mox Emerald",
+        "editions": [ "VMA" ]
+      },
+      {
         "type": "gold",
         "count": 100000
       },
@@ -121,6 +168,40 @@
     ],
     "colors": "U",
     "gamesPerMatch": 3,
+    "spawnRate": 0
+  },
+  {
+    "name": "Arzakon",
+    "sprite": "sprites/enemy/fiend/scourgemaster.atlas",
+    "deck": [
+      "decks/legends/arzakon.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "scale": 3,
+    "life": 200,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Mad Hat"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Faerie Anklet"
+      },
+      {
+        "type": "gold",
+        "count": 20000
+      },
+      {
+        "type": "shards",
+        "count": 200
+      }
+    ],
+    "colors": "WUBRG",
+    "gamesPerMatch": 1,
     "spawnRate": 0
   },
   {
@@ -221,6 +302,11 @@
       {
         "type": "item",
         "count": 1,
+        "itemName": "Tome of Blight"
+      },
+      {
+        "type": "item",
+        "count": 1,
         "itemName": "Eldrazi Pentakey Shard 1"
       },
       {
@@ -287,6 +373,11 @@
         "type": "item",
         "count": 1,
         "itemName": "Bloodsworn Bite"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Vampiric Amulet"
       },
       {
         "type": "card",
@@ -589,8 +680,8 @@
     ],
     "ai": "",
     "speed": 45,
-    "scale": 1,
-    "life": 50,
+    "scale": 2,
+    "life": 70,
     "rewards": [
       {
         "type": "item",
@@ -619,9 +710,9 @@
         "editions": [ "EMN" ]
       },
       {
-        "type": "deckCard",
-        "count": 6,
-        "addMaxCount": 8, 
+        "type": "randomCard",
+        "count": 12,
+        "addMaxCount": 12,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -629,23 +720,23 @@
       },
       {
         "type": "gold",
-        "count": 2000,
-        "addMaxCount": 6000
+        "count": 4000,
+        "addMaxCount": 12000
       },
       {
         "type": "shards",
-        "count": 20,
-        "addMaxCount": 80
+        "count": 40,
+        "addMaxCount": 160
       },
       {
         "type": "card",
-        "count": 1,
+        "count": 2,
         "addMaxCount": 2, 
         "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
       },
       {
         "type": "card",
-        "count": 1,
+        "count": 2,
         "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
       },
       {
@@ -659,7 +750,7 @@
   },
   {
     "name": "Azlask",
-    "sprite": "sprites/enemy/aberration/gitaxianscientist.atlas",
+    "sprite": "sprites/enemy/aberration/eldrazi/eldrazi_2.atlas",
     "deck": [
       "decks/legends/azlask.dck"
     ],
@@ -728,7 +819,6 @@
       }
     ],
     "colors": "WUBRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -739,7 +829,7 @@
     ],
     "ai": "",
     "speed": 45,
-    "scale": 2,
+    "scale": 6,
     "life": 50,
     "rewards": [
       {
@@ -802,19 +892,18 @@
       }
     ],
     "colors": "WUBRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
     "name": "Ulamog",
-    "sprite": "sprites/enemy/aberration/drossgrimnarch.atlas",
+    "sprite": "sprites/enemy/aberration/eldrazi/ulamog.atlas",
     "deck": [
       "decks/legends/ulamog.dck"
     ],
     "ai": "",
     "speed": 45,
-    "scale": 6,
-    "life": 50,
+    "scale": 3,
+    "life": 70,
     "rewards": [
       {
         "type": "item",
@@ -842,9 +931,9 @@
         "cardName": "Ulamog, the Ceaseless Hunger"
       },
       {
-        "type": "deckCard",
-        "count": 6,
-        "addMaxCount": 7, 
+        "type": "randomCard",
+        "count": 12,
+        "addMaxCount": 12,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -852,23 +941,23 @@
       },
       {
         "type": "gold",
-        "count": 2000,
-        "addMaxCount": 6000
+        "count": 4000,
+        "addMaxCount": 12000
       },
       {
         "type": "shards",
-        "count": 20,
-        "addMaxCount": 80
+        "count": 40,
+        "addMaxCount": 160
       },
       {
         "type": "card",
-        "count": 1,
-        "addMaxCount": 2, 
+        "count": 2,
+        "addMaxCount": 2,
         "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
       },
       {
         "type": "card",
-        "count": 1,
+        "count": 2,
         "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
       },
       {
@@ -888,7 +977,7 @@
     ],
     "ai": "",
     "speed": 45,
-    "scale": 1,
+    "scale": 3,
     "life": 50,
     "rewards": [
       {
@@ -951,19 +1040,18 @@
       }
     ],
     "colors": "C",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
     "name": "Kozilek",
-    "sprite": "sprites/enemy/aberration/phyrexianangel.atlas",
+    "sprite": "sprites/enemy/aberration/eldrazi/kozilek.atlas",
     "deck": [
       "decks/legends/kozilek.dck"
     ],
     "ai": "",
     "speed": 45,
-    "scale": 6,
-    "life": 50,
+    "scale": 2,
+    "life": 70,
     "rewards": [
       {
         "type": "item",
@@ -991,9 +1079,9 @@
         "cardName": "Kozilek, the Broken Reality"
       },
       {
-        "type": "deckCard",
-        "count": 6,
-        "addMaxCount": 8, 
+        "type": "randomCard",
+        "count": 12,
+        "addMaxCount": 12,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -1001,23 +1089,23 @@
       },
       {
         "type": "gold",
-        "count": 2000,
-        "addMaxCount": 6000
+        "count": 4000,
+        "addMaxCount": 12000
       },
       {
         "type": "shards",
-        "count": 20,
-        "addMaxCount": 80
+        "count": 40,
+        "addMaxCount": 160
       },
       {
         "type": "card",
-        "count": 1,
-        "addMaxCount": 2, 
+        "count": 2,
+        "addMaxCount": 2,
         "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
       },
       {
         "type": "card",
-        "count": 1,
+        "count": 2,
         "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
       },
       {
@@ -1266,7 +1354,7 @@
   },
   {
     "name": "Atraxa",
-    "sprite": "sprites/enemy/aberration/phyrexianangel.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/phyrexianangel.atlas",
     "deck": [
       "decks/legends/atraxa.dck"
     ],
@@ -1445,7 +1533,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Sinister Concotion"
+        "itemName": "Sinister Concoction"
       },
       {
         "type": "card",
@@ -1527,6 +1615,11 @@
         "itemName": "Courier's Boots"
       },
       {
+        "type": "item",
+        "count": 1,
+        "itemName": "Battle Cry Boots"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Krenko, Mob Boss"
@@ -1601,7 +1694,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Segovian Shoes"
+        "itemName": "Angelic Ring"
       },
       {
         "type": "card",
@@ -1678,6 +1771,11 @@
         "type": "item",
         "count": 1,
         "itemName": "Ramosian Greatsword"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Hengestrider Boots"
       },
       {
         "type": "item",
@@ -1829,7 +1927,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Silvergill Tailband"
+        "itemName": "Ominous Amulet"
       },
       {
         "type": "card",
@@ -1906,18 +2004,9 @@
         "cardName": "Garth One-Eye"
       },
       {
-        "type": "deckCard",
-        "count": 6,
-        "addMaxCount": 8, 
-        "rarity": [
-          "Rare",
-          "Mythic Rare"
-        ]
-      },
-      {
         "type": "randomCard",
-        "count": 1,
-        "addMaxCount": 2, 
+        "count": 7,
+        "addMaxCount": 10,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -1950,7 +2039,6 @@
       }
     ],
     "colors": "WUBRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -1961,13 +2049,13 @@
     ],
     "ai": "",
     "speed": 45,
-    "scale": 1,
+    "scale": 0.3,
     "life": 50,
     "rewards": [
       {
         "type": "item",
         "count": 1,
-        "itemName": "Evolving Robes"
+        "itemName": "Pilgrim's Cloak"
       },
       {
         "type": "card",
@@ -2020,7 +2108,6 @@
       }
     ],
     "colors": "WUBRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -2033,12 +2120,12 @@
     "flying": true,
     "speed": 45,
     "scale": 3,
-    "life": 50,
+    "life": 70,
     "rewards": [
       {
         "type": "item",
         "count": 1,
-        "itemName": "Opal Armor"
+        "itemName": "Opal Cloak"
       },
       {
         "type": "item",
@@ -2062,8 +2149,8 @@
       },
       {
         "type": "randomCard",
-        "count": 1,
-        "addMaxCount": 2, 
+        "count": 8,
+        "addMaxCount": 10,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -2071,23 +2158,23 @@
       },
       {
         "type": "gold",
-        "count": 2000,
-        "addMaxCount": 6000
+        "count": 4000,
+        "addMaxCount": 12000
       },
       {
         "type": "shards",
-        "count": 20,
-        "addMaxCount": 80
+        "count": 40,
+        "addMaxCount": 160
       },
       {
         "type": "card",
-        "count": 1,
+        "count": 2,
         "addMaxCount": 2, 
         "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
       },
       {
         "type": "card",
-        "count": 1,
+        "count": 2,
         "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
       },
       {
@@ -2165,7 +2252,6 @@
       }
     ],
     "colors": "WUBRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -2236,7 +2322,6 @@
       }
     ],
     "colors": "WUBRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -2253,7 +2338,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Utopia Markings"
+        "itemName": "Utopia Anklet"
       },
       {
         "type": "card",
@@ -2305,7 +2390,6 @@
       }
     ],
     "colors": "WUBRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -2404,6 +2488,11 @@
       {
         "type": "item",
         "count": 1,
+        "itemName": "Manaforce Mace"
+      },
+      {
+        "type": "item",
+        "count": 1,
         "itemName": "Eldrazi Pentakey Shard 3"
       },
       {
@@ -2483,6 +2572,11 @@
       {
         "type": "item",
         "count": 1,
+        "itemName": "Heirloom Blade"
+      },
+      {
+        "type": "item",
+        "count": 1,
         "itemName": "Eldrazi Pentakey Shard 4"
       },
       {
@@ -2541,7 +2635,7 @@
   },
   {
     "name": "Chatterfang",
-    "sprite": "sprites/enemy/beast/squirrel.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/squirrel.atlas",
     "deck": [
       "decks/legends/chatterfang.dck"
     ],
@@ -2635,6 +2729,11 @@
         "itemName": "Diamond Belt"
       },
       {
+        "type": "item",
+        "count": 1,
+        "itemName": "Outlaw's Hat"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Akul the Unrepentant"
@@ -2706,7 +2805,12 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Soulguide Gauntlet"
+        "itemName": "Soul-Guide Gauntlet"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Shadowspear"
       },
       {
         "type": "item",
@@ -2785,6 +2889,11 @@
         "type": "item",
         "count": 1,
         "itemName": "Urza's Bauble"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Urza's Robe"
       },
       {
         "type": "card",
@@ -4086,7 +4195,7 @@
   },
   {
     "name": "Ygra",
-    "sprite": "sprites/enemy/beast/lion.atlas",
+    "sprite": "sprites/enemy/beast/cat/lion.atlas",
     "deck": [
       "decks/legends/ygra.dck"
     ],
@@ -4604,7 +4713,7 @@
   },
   {
     "name": "The Scarab God",
-    "sprite": "sprites/enemy/beast/scarab.atlas",
+    "sprite": "sprites/enemy/beast/insect/scarab.atlas",
     "deck": [
       "decks/legends/the_scarab_god.dck"
     ],
@@ -4675,7 +4784,7 @@
   },
   {
     "name": "The Locust God",
-    "sprite": "sprites/enemy/beast/giantfly.atlas",
+    "sprite": "sprites/enemy/beast/insect/giantfly.atlas",
     "deck": [
       "decks/legends/the_locust_god.dck"
     ],
@@ -4745,7 +4854,7 @@
   },
   {
     "name": "The Scorpion God",
-    "sprite": "sprites/enemy/beast/scorpion.atlas",
+    "sprite": "sprites/enemy/beast/arachnid/scorpion.atlas",
     "deck": [
       "decks/legends/the_scorpion_god.dck"
     ],
@@ -4815,7 +4924,7 @@
   },
   {
     "name": "Gishath",
-    "sprite": "sprites/enemy/beast/ancient_2.atlas",
+    "sprite": "sprites/enemy/beast/dinosaur/ancient_2.atlas",
     "deck": [
       "decks/legends/gishath.dck"
     ],
@@ -5032,13 +5141,13 @@
   },
   {
     "name": "Elesh Norn",
-    "sprite": "sprites/enemy/aberration/phyrexianangel.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/eleshnorn.atlas",
     "deck": [
       "decks/legends/elesh_norn.dck"
     ],
     "ai": "",
     "speed": 45,
-    "scale": 1,
+    "scale": 0.4,
     "life": 40,
     "rewards": [
       {
@@ -5177,7 +5286,6 @@
       }
     ],
     "colors": "WUG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -5243,12 +5351,11 @@
       }
     ],
     "colors": "WUR",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
     "name": "Marath",
-    "sprite": "sprites/enemy/beast/deer_2.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/deer_2.atlas",
     "deck": [
       "decks/legends/marath.dck"
     ],
@@ -5309,7 +5416,6 @@
       }
     ],
     "colors": "WRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -5394,7 +5500,6 @@
       }
     ],
     "colors": "WURG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -5465,7 +5570,6 @@
       }
     ],
     "colors": "URG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -5531,12 +5635,11 @@
       }
     ],
     "colors": "BRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
     "name": "Gahiji",
-    "sprite": "sprites/enemy/beast/ancient_2.atlas",
+    "sprite": "sprites/enemy/beast/dinosaur/ancient_2.atlas",
     "deck": [
       "decks/legends/gahiji.dck"
     ],
@@ -5596,7 +5699,6 @@
       }
     ],
     "colors": "WRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -5661,7 +5763,6 @@
       }
     ],
     "colors": "WBG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -5726,7 +5827,6 @@
       }
     ],
     "colors": "WBR",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -5798,7 +5898,6 @@
       }
     ],
     "colors": "WBRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -5873,7 +5972,6 @@
       }
     ],
     "colors": "WUBR",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -5893,6 +5991,11 @@
         "cardName": "Dihada, Binder of Wills"
       },
       {
+        "type": "card",
+        "count": 1,
+        "cardName": "Geyadrone Dihada"
+      },
+      {
         "type": "deckCard",
         "count": 4,
         "addMaxCount": 4, 
@@ -5904,7 +6007,7 @@
       {
         "type": "randomCard",
         "count": 3,
-        "addMaxCount": 6, 
+        "addMaxCount": 4, 
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -5938,7 +6041,6 @@
       }
     ],
     "colors": "WBR",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -6003,7 +6105,6 @@
       }
     ],
     "colors": "UBR",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -6068,7 +6169,6 @@
       }
     ],
     "colors": "WUR",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -6133,12 +6233,11 @@
       }
     ],
     "colors": "WUB",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
     "name": "Estrid",
-    "sprite": "sprites/enemy/humanoid/human/cleric.atlas",
+    "sprite": "sprites/enemy/humanoid/human/cleric/cleric.atlas",
     "deck": [
       "decks/legends/estrid.dck"
     ],
@@ -6198,12 +6297,11 @@
       }
     ],
     "colors": "WUG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
     "name": "Ixhel",
-    "sprite": "sprites/enemy/aberration/phyrexianangel.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/phyrexianangel.atlas",
     "deck": [
       "decks/legends/ixhel.dck"
     ],
@@ -6264,7 +6362,6 @@
       }
     ],
     "colors": "WBG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -6329,7 +6426,6 @@
       }
     ],
     "colors": "WUB",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -6402,12 +6498,11 @@
       }
     ],
     "colors": "WUBG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
     "name": "Volrath",
-    "sprite": "sprites/enemy/aberration/gitaxianunderling.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/gitaxianunderling.atlas",
     "deck": [
       "decks/legends/volrath.dck"
     ],
@@ -6472,7 +6567,6 @@
       }
     ],
     "colors": "UBG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -6537,7 +6631,6 @@
       }
     ],
     "colors": "URG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -6602,7 +6695,6 @@
       }
     ],
     "colors": "UBG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -6668,7 +6760,6 @@
       }
     ],
     "colors": "UBR",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -6738,7 +6829,6 @@
       }
     ],
     "colors": "BRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -6808,7 +6898,6 @@
       }
     ],
     "colors": "UBRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -8238,7 +8327,7 @@
   },
   {
     "name": "Jin-Gitaxias",
-    "sprite": "sprites/enemy/aberration/gitaxianscientist.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/gitaxianscientist.atlas",
     "deck": [
       "decks/legends/jin-gitaxias.dck"
     ],
@@ -8583,7 +8672,7 @@
   },
   {
     "name": "Gix",
-    "sprite": "sprites/enemy/aberration/drossgladiator.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/drossgladiator.atlas",
     "deck": [
       "decks/legends/gix.dck"
     ],
@@ -8665,7 +8754,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Vile Songbook"
+        "itemName": "Amulet of Compleation"
       },
       {
         "type": "card",
@@ -8788,7 +8877,6 @@
       }
     ],
     "colors": "R",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -9151,7 +9239,7 @@
   },
   {
     "name": "Koma",
-    "sprite": "sprites/enemy/beast/big_snake.atlas",
+    "sprite": "sprites/enemy/beast/reptile/big_snake.atlas",
     "deck": [
       "decks/legends/koma.dck"
     ],
@@ -9609,7 +9697,7 @@
   },
   {
     "name": "Sheoldred",
-    "sprite": "sprites/enemy/aberration/drossgrimnarch.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/drossgrimnarch.atlas",
     "deck": [
       "decks/legends/sheoldred.dck"
     ],
@@ -9696,7 +9784,7 @@
     "name": "The Mimeoplasm",
     "sprite": "sprites/enemy/ooze/giant_slime.atlas",
     "deck": [
-      "decks/legends/the_mimeoplasm .dck"
+      "decks/legends/the_mimeoplasm.dck"
     ],
     "ai": "",
     "speed": 45,
@@ -9830,7 +9918,6 @@
       }
     ],
     "colors": "WUBRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -9901,7 +9988,6 @@
       }
     ],
     "colors": "WUBRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -9972,7 +10058,6 @@
       }
     ],
     "colors": "WUBRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -9989,7 +10074,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Mistform Sliverband"
+        "itemName": "Imposter's Sliverband"
       },
       {
         "type": "card",
@@ -10042,7 +10127,6 @@
       }
     ],
     "colors": "WUBRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -10112,7 +10196,6 @@
       }
     ],
     "colors": "WUBRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -10182,7 +10265,6 @@
       }
     ],
     "colors": "WUBRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -10253,7 +10335,6 @@
       }
     ],
     "colors": "WUBRG",
-    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -10270,7 +10351,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Heap Socks"
+        "itemName": "Scarecrow Socks"
       },
       {
         "type": "card",
@@ -10832,7 +10913,7 @@
   },
   {
     "name": "Urabrask",
-    "sprite": "sprites/enemy/aberration/furnacetormentor.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/furnacetormentor.atlas",
     "deck": [
       "decks/legends/urabrask.dck"
     ],
@@ -10917,7 +10998,7 @@
   },
   {
     "name": "Vorinclex",
-    "sprite": "sprites/enemy/aberration/phyrexianangel.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/phyrexianangel.atlas",
     "deck": [
       "decks/legends/vorinclex.dck"
     ],
@@ -11014,7 +11095,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Water of Vigor"
+        "itemName": "Prayerbook of Vigor"
       },
       {
         "type": "card",
@@ -11154,13 +11235,13 @@
     "name": "Santa",
     "sprite": "sprites/enemy/humanoid/human/wizard/red_wiz2.atlas",
     "deck": [
-      "decks/legends/santa.dck"
+      "decks/legends/feldon.dck"
     ],
     "ai": "",
     "flying": true,
     "speed": 45,
     "scale": 1,
-    "life": 60,
+    "life": 40,
     "rewards": [
       {
         "type": "item",
@@ -11170,7 +11251,12 @@
       {
         "type": "card",
         "count": 1,
-        "cardName": "Jorn, God of Winter"
+        "cardName": "Feldon of the Third Path"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Feldon, Ronom Excavator"
       },
       {
         "type": "card",
@@ -11227,8 +11313,96 @@
         "count": 1
       }
     ],
-    "colors": "UBG",
+    "colors": "R",
     "gamesPerMatch": 3,
+    "spawnRate": 0
+  },
+  {
+    "name": "Jorn",
+    "sprite": "sprites/enemy/humanoid/human/wizard/blue_wiz2.atlas",
+    "deck": [
+      "decks/legends/jorn.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "scale": 1,
+    "life": 30,
+    "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Winter Boots"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Jorn, God of Winter"
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 100,
+        "addMaxCount": 1000
+      },
+      {
+        "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      },
+      {
+        "type": "card",
+        "probability": 0.1,
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.2,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.1,
+        "count": 1
+      }
+    ],
+    "colors": "UBG",
     "spawnRate": 0
   },
   {
@@ -12843,7 +13017,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Pocket Thopter"
+        "itemName": "Sky Skiff Turnkey"
       },
       {
         "type": "card",
@@ -13401,7 +13575,7 @@
   },
   {
     "name": "Goreclaw",
-    "sprite": "sprites/enemy/beast/bear_large.atlas",
+    "sprite": "sprites/enemy/beast/bear/bear_large.atlas",
     "deck": [
       "decks/legends/goreclaw.dck"
     ],
@@ -14169,6 +14343,12 @@
         "itemName": "Glimmerbell Bondband"
       },
       {
+        "type": "item",
+        "count": 1,
+        "probability": 0.6,
+        "itemName": "Kill Trophy"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Illuna, Apex of Wishes"
@@ -14242,7 +14422,7 @@
   },
   {
     "name": "Brokkos",
-    "sprite": "sprites/enemy/beast/rhino.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/rhino.atlas",
     "deck": [
       "decks/legends/brokkos.dck"
     ],
@@ -14255,6 +14435,12 @@
         "type": "item",
         "count": 1,
         "itemName": "Mamba Bondband"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.6,
+        "itemName": "Kill Trophy"
       },
       {
         "type": "card",
@@ -14346,6 +14532,12 @@
         "itemName": "Raptor Bondband"
       },
       {
+        "type": "item",
+        "count": 1,
+        "probability": 0.6,
+        "itemName": "Kill Trophy"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Vadrok, Apex of Thunder"
@@ -14419,7 +14611,7 @@
   },
   {
     "name": "Snapdax",
-    "sprite": "sprites/enemy/beast/tiger.atlas",
+    "sprite": "sprites/enemy/beast/cat/tiger.atlas",
     "deck": [
       "decks/legends/snapdax.dck"
     ],
@@ -14432,6 +14624,12 @@
         "type": "item",
         "count": 1,
         "itemName": "Sabertooth Bondband"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.6,
+        "itemName": "Kill Trophy"
       },
       {
         "type": "card",
@@ -14507,7 +14705,7 @@
   },
   {
     "name": "Nethroi",
-    "sprite": "sprites/enemy/beast/lion.atlas",
+    "sprite": "sprites/enemy/beast/cat/lion.atlas",
     "deck": [
       "decks/legends/nethroi.dck"
     ],
@@ -14520,6 +14718,12 @@
         "type": "item",
         "count": 1,
         "itemName": "Symbiote Bondband"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.6,
+        "itemName": "Kill Trophy"
       },
       {
         "type": "card",
@@ -14706,7 +14910,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Explorer's Robes"
+        "itemName": "Explorer's Cloak"
       },
       {
         "type": "card",
@@ -14881,7 +15085,7 @@
   },
   {
     "name": "Phelddagrif",
-    "sprite": "sprites/enemy/beast/hippo.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/hippo.atlas",
     "deck": [
       "decks/legends/phelddagrif.dck"
     ],
@@ -15772,7 +15976,7 @@
     "ai": "",
     "flying": true,
     "speed": 60,
-    "scale": 0.7,
+    "scale": 1.5,
     "life": 30,
     "rewards": [
       {
@@ -15966,7 +16170,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Miser's Shoes"
+        "itemName": "Shoes of the Swarm"
       },
       {
         "type": "card",
@@ -16042,7 +16246,7 @@
   },
   {
     "name": "Horde of Notions",
-    "sprite": "sprites/enemy/beast/cerodon.atlas",
+    "sprite": "sprites/enemy/monstrosity/cerodon.atlas",
     "deck": [
       "decks/legends/horde_of_notions.dck"
     ],
@@ -16317,7 +16521,7 @@
   },
   {
     "name": "Kogla",
-    "sprite": "sprites/enemy/beast/gorilla.atlas",
+    "sprite": "sprites/enemy/beast/ape/gorilla.atlas",
     "deck": [
       "decks/legends/kogla.dck"
     ],
@@ -16867,7 +17071,7 @@
   },
   {
     "name": "Bello",
-    "sprite": "sprites/enemy/beast/raccoon.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/raccoon.atlas",
     "deck": [
       "decks/legends/bello.dck"
     ],
@@ -17948,7 +18152,7 @@
   },
   {
     "name": "Voja",
-    "sprite": "sprites/enemy/beast/wolf.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/wolf.atlas",
     "deck": [
       "decks/legends/voja.dck"
     ],
@@ -18048,7 +18252,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Wolfhunter's Quiver"
+        "itemName": "Full Moon Necklace"
       },
       {
         "type": "card",
@@ -18390,7 +18594,7 @@
   },
   {
     "name": "Albiorix",
-    "sprite": "sprites/enemy/beast/chicken.atlas",
+    "sprite": "sprites/enemy/beast/barn/chicken.atlas",
     "deck": [
       "decks/legends/albiorix.dck"
     ],
@@ -18457,7 +18661,7 @@
   },
   {
     "name": "Balmor",
-    "sprite": "sprites/enemy/beast/owl.atlas",
+    "sprite": "sprites/enemy/beast/bird/owl.atlas",
     "deck": [
       "decks/legends/balmor.dck"
     ],
@@ -18596,7 +18800,7 @@
   },
   {
     "name": "Commander Eesha",
-    "sprite": "sprites/enemy/beast/falcon.atlas",
+    "sprite": "sprites/enemy/beast/bird/falcon.atlas",
     "deck": [
       "decks/legends/commander_eesha.dck"
     ],
@@ -18663,7 +18867,7 @@
   },
   {
     "name": "Kastral",
-    "sprite": "sprites/enemy/beast/raven.atlas",
+    "sprite": "sprites/enemy/beast/bird/raven.atlas",
     "deck": [
       "decks/legends/kastral.dck"
     ],
@@ -18869,7 +19073,7 @@
   },
   {
     "name": "Vega",
-    "sprite": "sprites/enemy/beast/owl.atlas",
+    "sprite": "sprites/enemy/beast/bird/owl.atlas",
     "deck": [
       "decks/legends/vega.dck"
     ],
@@ -19003,7 +19207,7 @@
   },
   {
     "name": "Zinnia",
-    "sprite": "sprites/enemy/beast/parrot.atlas",
+    "sprite": "sprites/enemy/beast/bird/parrot.atlas",
     "deck": [
       "decks/legends/zinnia.dck"
     ],
@@ -19070,7 +19274,7 @@
   },
   {
     "name": "Zoraline",
-    "sprite": "sprites/enemy/beast/bat.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/bat.atlas",
     "deck": [
       "decks/legends/zoraline.dck"
     ],
@@ -19377,7 +19581,7 @@
   },
   {
     "name": "Jugan",
-    "sprite": "sprites/enemy/beast/big_snake.atlas",
+    "sprite": "sprites/enemy/beast/reptile/big_snake.atlas",
     "deck": [
       "decks/legends/jugan.dck"
     ],
@@ -19712,7 +19916,7 @@
   },
   {
     "name": "Aclazotz",
-    "sprite": "sprites/enemy/beast/bat.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/bat.atlas",
     "deck": [
       "decks/legends/aclazotz.dck"
     ],
@@ -21550,7 +21754,7 @@
   },
   {
     "name": "Beza",
-    "sprite": "sprites/enemy/beast/deer_2.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/deer_2.atlas",
     "deck": [
       "decks/legends/beza.dck"
     ],
@@ -21750,7 +21954,7 @@
   },
   {
     "name": "Lumra",
-    "sprite": "sprites/enemy/beast/bear.atlas",
+    "sprite": "sprites/enemy/beast/bear/bear.atlas",
     "deck": [
       "decks/legends/lumra.dck"
     ],
@@ -21816,7 +22020,7 @@
   },
   {
     "name": "Maha",
-    "sprite": "sprites/enemy/beast/owl.atlas",
+    "sprite": "sprites/enemy/beast/bird/owl.atlas",
     "deck": [
       "decks/legends/maha.dck"
     ],
@@ -21883,7 +22087,7 @@
   },
   {
     "name": "Wildsear",
-    "sprite": "sprites/enemy/beast/wolf.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/wolf.atlas",
     "deck": [
       "decks/legends/wildsear.dck"
     ],
@@ -23335,9 +23539,14 @@
         "cardName": "Etali, Primal Storm"
       },
       {
+        "type": "card",
+        "count": 1,
+        "cardName": "Etali, Primal Conqueror"
+      },
+      {
         "type": "deckCard",
         "count": 2,
-        "addMaxCount": 4,
+        "addMaxCount": 2,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -23386,7 +23595,7 @@
   },
   {
     "name": "Ghalta",
-    "sprite": "sprites/enemy/beast/ghalta.atlas",
+    "sprite": "sprites/enemy/beast/dinosaur/ghalta.atlas",
     "deck": [
       "decks/legends/ghalta.dck"
     ],
@@ -23406,9 +23615,14 @@
         "cardName": "Ghalta and Mavren"
       },
       {
+        "type": "card",
+        "count": 1,
+        "cardName": "Ghalta, Stampede Tyrant"
+      },
+      {
         "type": "deckCard",
         "count": 2,
-        "addMaxCount": 4,
+        "addMaxCount": 2,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -23656,7 +23870,7 @@
   },
   {
     "name": "Zilortha",
-    "sprite": "sprites/enemy/beast/ancient.atlas",
+    "sprite": "sprites/enemy/beast/dinosaur/ancient.atlas",
     "deck": [
       "decks/legends/zilortha.dck"
     ],
@@ -24414,7 +24628,7 @@
   },
   {
     "name": "Mondrak",
-    "sprite": "sprites/enemy/aberration/phyrexianduelist.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/phyrexianduelist.atlas",
     "deck": [
       "decks/legends/mondrak.dck"
     ],
@@ -24480,7 +24694,7 @@
   },
   {
     "name": "Skrelv",
-    "sprite": "sprites/enemy/beast/spider_cave.atlas",
+    "sprite": "sprites/enemy/beast/arachnid/spider_cave.atlas",
     "deck": [
       "decks/legends/skrelv.dck"
     ],
@@ -24609,72 +24823,6 @@
       }
     ],
     "colors": "UG",
-    "spawnRate": 0
-  },
-  {
-    "name": "Flubs",
-    "sprite": "sprites/enemy/humanoid/viashino/pikelizard.atlas",
-    "deck": [
-      "decks/legends/flubs.dck"
-    ],
-    "ai": "",
-    "speed": 60,
-    "scale": 1,
-    "life": 30,
-    "rewards": [
-      {
-        "type": "card",
-        "count": 1,
-        "cardName": "Flubs, the Fool"
-      },
-      {
-        "type": "deckCard",
-        "count": 2,
-        "addMaxCount": 4,
-        "rarity": [
-          "Rare",
-          "Mythic Rare"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "count": 1,
-        "addMaxCount": 3,
-        "rarity": [
-          "common",
-	        "uncommon"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "count": 2,
-        "addMaxCount": 4,
-        "rarity": [
-          "Rare",
-          "Mythic Rare"
-	]
-      },
-      {
-        "type": "randomCard",
-        "count": 1,
-        "addMaxCount": 3,
-        "rarity": [
-          "common",
-	        "uncommon"
-	]
-      },
-      {
-        "type": "gold",
-        "count": 100,
-        "addMaxCount": 1000
-      },
-      {
-        "type": "shards",
-        "count": 5,
-        "addMaxCount": 15
-      }
-    ],
-    "colors": "URG",
     "spawnRate": 0
   },
   {
@@ -24811,7 +24959,7 @@
   },
   {
     "name": "Helga",
-    "sprite": "sprites/enemy/beast/frog.atlas",
+    "sprite": "sprites/enemy/beast/amphibian/frog.atlas",
     "deck": [
       "decks/legends/helga.dck"
     ],
@@ -24877,7 +25025,7 @@
   },
   {
     "name": "Ishkanah",
-    "sprite": "sprites/enemy/beast/spider_purple.atlas",
+    "sprite": "sprites/enemy/beast/arachnid/spider_purple.atlas",
     "deck": [
       "decks/legends/ishkanah.dck"
     ],
@@ -25146,7 +25294,7 @@
   },
   {
     "name": "Tatsunari",
-    "sprite": "sprites/enemy/beast/frog.atlas",
+    "sprite": "sprites/enemy/beast/amphibian/frog.atlas",
     "deck": [
       "decks/legends/tatsunari.dck"
     ],
@@ -25970,7 +26118,7 @@
       {
         "type": "item",
         "count": 1,
-        "itemName": "Gisa's Favorite Shovel"
+        "itemName": "Thirsting Axe"
       },
       {
         "type": "item",
@@ -27197,8 +27345,13 @@
     "ai": "",
     "speed": 60,
     "scale": 1,
-    "life": 30,
+    "life": 40,
     "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "cardName": "Liliana's Veil"
+      },
       {
         "type": "card",
         "count": 1,
@@ -27206,7 +27359,7 @@
       },
       {
         "type": "deckCard",
-        "count": 2,
+        "count": 4,
         "addMaxCount": 4,
         "rarity": [
           "Rare",
@@ -27214,44 +27367,43 @@
         ]
       },
       {
-        "type": "deckCard",
-        "count": 1,
-        "addMaxCount": 3,
-        "rarity": [
-          "common",
-	        "uncommon"
-        ]
-      },
-      {
         "type": "randomCard",
-        "count": 2,
-        "addMaxCount": 4,
+        "count": 3,
+        "addMaxCount": 6,
         "rarity": [
           "Rare",
           "Mythic Rare"
-	]
-      },
-      {
-        "type": "randomCard",
-        "count": 1,
-        "addMaxCount": 3,
-        "rarity": [
-          "common",
-	        "uncommon"
-	]
+        ]
       },
       {
         "type": "gold",
-        "count": 100,
-        "addMaxCount": 1000
+        "count": 500,
+        "addMaxCount": 2000
       },
       {
         "type": "shards",
-        "count": 5,
-        "addMaxCount": 15
+        "count": 10,
+        "addMaxCount": 30
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.3,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.3,
+        "count": 1
       }
     ],
     "colors": "B",
+    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -28337,8 +28489,13 @@
     "ai": "",
     "speed": 60,
     "scale": 1,
-    "life": 30,
+    "life": 40,
     "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "itemName": "Silvergill Tailband"
+      },
       {
         "type": "card",
         "count": 1,
@@ -28346,52 +28503,51 @@
       },
       {
         "type": "deckCard",
-        "count": 2,
-        "addMaxCount": 4,
+        "count": 4,
+        "addMaxCount": 4, 
         "rarity": [
           "Rare",
           "Mythic Rare"
         ]
       },
       {
-        "type": "deckCard",
-        "count": 1,
-        "addMaxCount": 3,
-        "rarity": [
-          "common",
-	        "uncommon"
-        ]
-      },
-      {
         "type": "randomCard",
-        "count": 2,
-        "addMaxCount": 4,
+        "count": 3,
+        "addMaxCount": 6, 
         "rarity": [
           "Rare",
           "Mythic Rare"
-	]
-      },
-      {
-        "type": "randomCard",
-        "count": 1,
-        "addMaxCount": 3,
-        "rarity": [
-          "common",
-	        "uncommon"
 	]
       },
       {
         "type": "gold",
-        "count": 100,
-        "addMaxCount": 1000
+        "count": 500,
+        "addMaxCount": 2000
       },
       {
         "type": "shards",
-        "count": 5,
-        "addMaxCount": 15
+        "count": 10,
+        "addMaxCount": 30
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.3,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.3,
+        "count": 1
       }
     ],
     "colors": "U",
+    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -28742,7 +28898,7 @@
   },
   {
     "name": "Unctus",
-    "sprite": "sprites/enemy/aberration/gitaxianunderling.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/gitaxianunderling.atlas",
     "deck": [
       "decks/legends/unctus.dck"
     ],
@@ -29284,7 +29440,7 @@
   },
   {
     "name": "Kura",
-    "sprite": "sprites/enemy/beast/big_snake.atlas",
+    "sprite": "sprites/enemy/beast/reptile/big_snake.atlas",
     "deck": [
       "decks/legends/kura.dck"
     ],
@@ -29351,7 +29507,7 @@
   },
   {
     "name": "Ertai",
-    "sprite": "sprites/enemy/aberration/gitaxianscientist.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/gitaxianscientist.atlas",
     "deck": [
       "decks/legends/ertai.dck"
     ],
@@ -29427,7 +29583,7 @@
   },
   {
     "name": "Greven",
-    "sprite": "sprites/enemy/aberration/furnacetormentor.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/furnacetormentor.atlas",
     "deck": [
       "decks/legends/greven.dck"
     ],
@@ -29498,7 +29654,7 @@
   },
   {
     "name": "Tsabo Tavoc",
-    "sprite": "sprites/enemy/aberration/drossgrimnarch.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/drossgrimnarch.atlas",
     "deck": [
       "decks/legends/tsabo_tavoc.dck"
     ],
@@ -29706,7 +29862,7 @@
   },
   {
     "name": "Ilharg",
-    "sprite": "sprites/enemy/beast/boar.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/boar.atlas",
     "deck": [
       "decks/legends/ilharg.dck"
     ],
@@ -29839,6 +29995,7 @@
       }
     ],
     "colors": "R",
+    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -30264,7 +30421,7 @@
   },
   {
     "name": "Aesi",
-    "sprite": "sprites/enemy/beast/big_snake.atlas",
+    "sprite": "sprites/enemy/beast/reptile/big_snake.atlas",
     "deck": [
       "decks/legends/aesi.dck"
     ],
@@ -30331,7 +30488,7 @@
   },
   {
     "name": "Arixmethes",
-    "sprite": "sprites/enemy/beast/turtle.atlas",
+    "sprite": "sprites/enemy/beast/reptile/turtle.atlas",
     "deck": [
       "decks/legends/arixmethes.dck"
     ],
@@ -30398,7 +30555,7 @@
   },
   {
     "name": "Charix",
-    "sprite": "sprites/enemy/beast/crab.atlas",
+    "sprite": "sprites/enemy/beast/ocean/crab.atlas",
     "deck": [
       "decks/legends/charix.dck"
     ],
@@ -30466,7 +30623,7 @@
   },
   {
     "name": "Plagon",
-    "sprite": "sprites/enemy/beast/octopus.atlas",
+    "sprite": "sprites/enemy/beast/ocean/octopus.atlas",
     "deck": [
       "decks/legends/plagon.dck"
     ],
@@ -30931,7 +31088,7 @@
   },
   {
     "name": "Drivnod",
-    "sprite": "sprites/enemy/aberration/drossgrimnarch.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/drossgrimnarch.atlas",
     "deck": [
       "decks/legends/drivnod.dck"
     ],
@@ -30997,7 +31154,7 @@
   },
   {
     "name": "Vraan",
-    "sprite": "sprites/enemy/aberration/drossgladiator.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/drossgladiator.atlas",
     "deck": [
       "decks/legends/vraan.dck"
     ],
@@ -31526,7 +31683,7 @@
   },
   {
     "name": "Toxrill",
-    "sprite": "sprites/enemy/beast/scarab.atlas",
+    "sprite": "sprites/enemy/beast/insect/scarab.atlas",
     "deck": [
       "decks/legends/toxrill.dck"
     ],
@@ -31592,10 +31749,10 @@
     "spawnRate": 0
   },
   {
-    "name": "Yennet",
+    "name": "Yennett",
     "sprite": "sprites/enemy/monstrosity/criosphinx.atlas",
     "deck": [
-      "decks/legends/yennet.dck"
+      "decks/legends/yennett.dck"
     ],
     "ai": "",
     "flying": true,
@@ -31933,7 +32090,7 @@
   },
   {
     "name": "Camellia",
-    "sprite": "sprites/enemy/beast/squirrel.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/squirrel.atlas",
     "deck": [
       "decks/legends/camellia.dck"
     ],
@@ -31999,7 +32156,7 @@
   },
   {
     "name": "Hazel",
-    "sprite": "sprites/enemy/beast/squirrel.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/squirrel.atlas",
     "deck": [
       "decks/legends/hazel.dck"
     ],
@@ -32065,7 +32222,7 @@
   },
   {
     "name": "Euru",
-    "sprite": "sprites/enemy/beast/squirrel.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/squirrel.atlas",
     "deck": [
       "decks/legends/euru.dck"
     ],
@@ -32131,7 +32288,7 @@
   },
   {
     "name": "Toski",
-    "sprite": "sprites/enemy/beast/squirrel.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/squirrel.atlas",
     "deck": [
       "decks/legends/toski.dck"
     ],
@@ -32197,7 +32354,7 @@
   },
   {
     "name": "Calamity",
-    "sprite": "sprites/enemy/beast/horseblack.atlas",
+    "sprite": "sprites/enemy/beast/horse/horseblack.atlas",
     "deck": [
       "decks/legends/calamity.dck"
     ],
@@ -32691,11 +32848,6 @@
       {
         "type": "card",
         "count": 1,
-        "cardName": "Goro-Goro and Satoru"
-      },
-      {
-        "type": "card",
-        "count": 1,
         "cardName": "Satoru Umezawa"
       },
       {
@@ -32709,7 +32861,7 @@
       },
       {
         "type": "deckCard",
-        "count": 1,
+        "count": 2,
         "addMaxCount": 3,
         "rarity": [
           "common",
@@ -33309,15 +33461,20 @@
   },
   {
     "name": "Arasta",
-    "sprite": "sprites/enemy/beast/spider_black.atlas",
+    "sprite": "sprites/enemy/beast/arachnid/spider_black.atlas",
     "deck": [
       "decks/legends/arasta.dck"
     ],
     "ai": "",
     "speed": 60,
     "scale": 3,
-    "life": 30,
+    "life": 40,
     "rewards": [
+      {
+        "type": "item",
+        "count": 1,
+        "cardName": "Spidersilk Helm"
+      },
       {
         "type": "card",
         "count": 1,
@@ -33325,7 +33482,7 @@
       },
       {
         "type": "deckCard",
-        "count": 2,
+        "count": 4,
         "addMaxCount": 4,
         "rarity": [
           "Rare",
@@ -33333,44 +33490,43 @@
         ]
       },
       {
-        "type": "deckCard",
-        "count": 1,
-        "addMaxCount": 3,
-        "rarity": [
-          "common",
-	        "uncommon"
-        ]
-      },
-      {
         "type": "randomCard",
-        "count": 2,
-        "addMaxCount": 4,
+        "count": 3,
+        "addMaxCount": 6,
         "rarity": [
           "Rare",
           "Mythic Rare"
-	]
-      },
-      {
-        "type": "randomCard",
-        "count": 1,
-        "addMaxCount": 3,
-        "rarity": [
-          "common",
-	        "uncommon"
-	]
+        ]
       },
       {
         "type": "gold",
-        "count": 100,
-        "addMaxCount": 1000
+        "count": 500,
+        "addMaxCount": 2000
       },
       {
         "type": "shards",
-        "count": 5,
-        "addMaxCount": 15
+        "count": 10,
+        "addMaxCount": 30
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.3,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.3,
+        "count": 1
       }
     ],
     "colors": "G",
+    "gamesPerMatch": 3,
     "spawnRate": 0
   },
   {
@@ -33639,7 +33795,7 @@
   },
   {
     "name": "Ovika",
-    "sprite": "sprites/enemy/aberration/furnacegoblin.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/furnacegoblin.atlas",
     "deck": [
       "decks/legends/ovika.dck"
     ],
@@ -33777,7 +33933,7 @@
   },
   {
     "name": "Solphim",
-    "sprite": "sprites/enemy/aberration/drossgrimnarch.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/drossgrimnarch.atlas",
     "deck": [
       "decks/legends/solphim.dck"
     ],
@@ -34183,74 +34339,8 @@
     "spawnRate": 0
   },
   {
-    "name": "Xantcha",
-    "sprite": "sprites/enemy/humanoid/human/wizard/black_wiz3.atlas",
-    "deck": [
-      "decks/legends/xantcha.dck"
-    ],
-    "ai": "",
-    "speed": 60,
-    "scale": 1,
-    "life": 30,
-    "rewards": [
-      {
-        "type": "card",
-        "count": 1,
-        "cardName": "Xantcha, Sleeper Agent"
-      },
-      {
-        "type": "deckCard",
-        "count": 2,
-        "addMaxCount": 4,
-        "rarity": [
-          "Rare",
-          "Mythic Rare"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "count": 1,
-        "addMaxCount": 3,
-        "rarity": [
-          "common",
-	        "uncommon"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "count": 2,
-        "addMaxCount": 4,
-        "rarity": [
-          "Rare",
-          "Mythic Rare"
-	]
-      },
-      {
-        "type": "randomCard",
-        "count": 1,
-        "addMaxCount": 3,
-        "rarity": [
-          "common",
-	        "uncommon"
-	]
-      },
-      {
-        "type": "gold",
-        "count": 100,
-        "addMaxCount": 1000
-      },
-      {
-        "type": "shards",
-        "count": 5,
-        "addMaxCount": 15
-      }
-    ],
-    "colors": "BR",
-    "spawnRate": 0
-  },
-  {
     "name": "Glissa",
-    "sprite": "sprites/enemy/aberration/copperhostinfector.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/copperhostinfector.atlas",
     "deck": [
       "decks/legends/glissa.dck"
     ],
@@ -34331,7 +34421,7 @@
   },
   {
     "name": "Rothga",
-    "sprite": "sprites/enemy/aberration/copperhostbrutalizer.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/copperhostbrutalizer.atlas",
     "deck": [
       "decks/legends/rothga.dck"
     ],
@@ -34397,7 +34487,7 @@
   },
   {
     "name": "Vexyr",
-    "sprite": "sprites/enemy/aberration/phyrexianduelist.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/phyrexianduelist.atlas",
     "deck": [
       "decks/legends/vexyr.dck"
     ],
@@ -34468,7 +34558,7 @@
   },
   {
     "name": "Zopandrel",
-    "sprite": "sprites/enemy/aberration/copperhostbrutalizer.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/copperhostbrutalizer.atlas",
     "deck": [
       "decks/legends/zopandrel.dck"
     ],
@@ -35945,7 +36035,7 @@
     ],
     "ai": "",
     "speed": 60,
-    "scale": 3,
+    "scale": 2,
     "life": 30,
     "rewards": [
       {
@@ -36330,7 +36420,7 @@
   },
   {
     "name": "Hamza",
-    "sprite": "sprites/enemy/beast/elephant.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/elephant.atlas",
     "deck": [
       "decks/legends/hamza.dck"
     ],
@@ -37321,9 +37411,14 @@
         "cardName": "Selvala, Eager Trailblazer"
       },
       {
+        "type": "card",
+        "count": 1,
+        "cardName": "Selvala, Heart of the Wilds"
+      },
+      {
         "type": "deckCard",
         "count": 1,
-        "addMaxCount": 3,
+        "addMaxCount": 1,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -37892,7 +37987,7 @@
   },
   {
     "name": "Migloz",
-    "sprite": "sprites/enemy/aberration/copperhostbrutalizer.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/copperhostbrutalizer.atlas",
     "deck": [
       "decks/legends/migloz.dck"
     ],
@@ -38620,7 +38715,7 @@
   },
   {
     "name": "Hope of Ghirapur",
-    "sprite": "sprites/enemy/beast/dragonfly.atlas",
+    "sprite": "sprites/enemy/beast/insect/dragonfly.atlas",
     "deck": [
       "decks/legends/hope_of_ghirapur.dck"
     ],
@@ -39440,7 +39535,7 @@
   },
   {
     "name": "Anzrag",
-    "sprite": "sprites/enemy/beast/nakedmolerat.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/nakedmolerat.atlas",
     "deck": [
       "decks/legends/anzrag.dck"
     ],
@@ -40518,7 +40613,7 @@
   },
   {
     "name": "Kari Zev",
-    "sprite": "sprites/enemy/beast/monkey_small.atlas",
+    "sprite": "sprites/enemy/beast/ape/monkey_small.atlas",
     "deck": [
       "decks/legends/kari_zev.dck"
     ],
@@ -40879,7 +40974,7 @@
   },
   {
     "name": "Ayula",
-    "sprite": "sprites/enemy/beast/bear.atlas",
+    "sprite": "sprites/enemy/beast/bear/bear.atlas",
     "deck": [
       "decks/legends/ayula.dck"
     ],
@@ -40944,7 +41039,7 @@
   },
   {
     "name": "Duskana",
-    "sprite": "sprites/enemy/beast/polarbear.atlas",
+    "sprite": "sprites/enemy/beast/polar/polarbear.atlas",
     "deck": [
       "decks/legends/duskana.dck"
     ],
@@ -41009,7 +41104,7 @@
   },
   {
     "name": "Hurska",
-    "sprite": "sprites/enemy/beast/bear.atlas",
+    "sprite": "sprites/enemy/beast/bear/bear.atlas",
     "deck": [
       "decks/legends/hurska.dck"
     ],
@@ -41074,7 +41169,7 @@
   },
   {
     "name": "Kudo",
-    "sprite": "sprites/enemy/beast/bear.atlas",
+    "sprite": "sprites/enemy/beast/bear/bear.atlas",
     "deck": [
       "decks/legends/kudo.dck"
     ],
@@ -41139,7 +41234,7 @@
   },
   {
     "name": "Ruxa",
-    "sprite": "sprites/enemy/beast/bear_large.atlas",
+    "sprite": "sprites/enemy/beast/bear/bear_large.atlas",
     "deck": [
       "decks/legends/ruxa.dck"
     ],
@@ -41205,7 +41300,7 @@
   },
   {
     "name": "Aatchik",
-    "sprite": "sprites/enemy/aberration/copperhostinfector.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/copperhostinfector.atlas",
     "deck": [
       "decks/legends/aatchik.dck"
     ],
@@ -41336,7 +41431,7 @@
   },
   {
     "name": "Fumulus",
-    "sprite": "sprites/enemy/beast/giantfly.atlas",
+    "sprite": "sprites/enemy/beast/insect/giantfly.atlas",
     "deck": [
       "decks/legends/fumulus.dck"
     ],
@@ -41473,7 +41568,7 @@
   },
   {
     "name": "Vishgraz",
-    "sprite": "sprites/enemy/aberration/copperhostbrutalizer.atlas",
+    "sprite": "sprites/enemy/aberration/phyrexian/copperhostbrutalizer.atlas",
     "deck": [
       "decks/legends/vishgraz.dck"
     ],
@@ -41538,7 +41633,7 @@
   },
   {
     "name": "Zabaz",
-    "sprite": "sprites/enemy/beast/wasp.atlas",
+    "sprite": "sprites/enemy/beast/insect/wasp.atlas",
     "deck": [
       "decks/legends/zabaz.dck"
     ],
@@ -41604,7 +41699,7 @@
   },
   {
     "name": "Zask",
-    "sprite": "sprites/enemy/beast/scarab.atlas",
+    "sprite": "sprites/enemy/beast/insect/scarab.atlas",
     "deck": [
       "decks/legends/zask.dck"
     ],
@@ -43350,6 +43445,12 @@
         "cardName": "Akim, the Soaring Wind"
       },
       {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
+      },
+      {
         "type": "deckCard",
         "count": 1,
         "addMaxCount": 3,
@@ -43415,6 +43516,12 @@
         "cardName": "Gyruda, Doom of Depths"
       },
       {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
+      },
+      {
         "type": "deckCard",
         "count": 1,
         "addMaxCount": 3,
@@ -43466,7 +43573,7 @@
   },
   {
     "name": "Kaheera",
-    "sprite": "sprites/enemy/beast/deer.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/deer.atlas",
     "deck": [
       "decks/legends/kaheera.dck"
     ],
@@ -43478,6 +43585,12 @@
         "type": "card",
         "count": 1,
         "cardName": "Kaheera, the Orphanguard"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
       },
       {
         "type": "deckCard",
@@ -43546,6 +43659,12 @@
         "cardName": "Kalamax, the Stormsire"
       },
       {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
+      },
+      {
         "type": "deckCard",
         "count": 1,
         "addMaxCount": 3,
@@ -43597,7 +43716,7 @@
   },
   {
     "name": "Kathril",
-    "sprite": "sprites/enemy/beast/ladybug.atlas",
+    "sprite": "sprites/enemy/beast/insect/ladybug.atlas",
     "deck": [
       "decks/legends/kathril.dck"
     ],
@@ -43611,6 +43730,12 @@
         "type": "card",
         "count": 1,
         "cardName": "Kathril, Aspect Warper"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
       },
       {
         "type": "deckCard",
@@ -43664,7 +43789,7 @@
   },
   {
     "name": "Keruga",
-    "sprite": "sprites/enemy/beast/hippo.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/hippo.atlas",
     "deck": [
       "decks/legends/keruga.dck"
     ],
@@ -43676,6 +43801,12 @@
         "type": "card",
         "count": 1,
         "cardName": "Keruga, the Macrosage"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
       },
       {
         "type": "deckCard",
@@ -43729,7 +43860,7 @@
   },
   {
     "name": "Lurrus",
-    "sprite": "sprites/enemy/beast/caracal.atlas",
+    "sprite": "sprites/enemy/beast/cat/caracal.atlas",
     "deck": [
       "decks/legends/lurrus.dck"
     ],
@@ -43741,6 +43872,12 @@
         "type": "card",
         "count": 1,
         "cardName": "Lurrus of the Dream-Den"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
       },
       {
         "type": "deckCard",
@@ -43806,6 +43943,12 @@
         "type": "card",
         "count": 1,
         "cardName": "Obosh, the Preypiercer"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
       },
       {
         "type": "deckCard",
@@ -43874,6 +44017,12 @@
         "cardName": "Umori, the Collector"
       },
       {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
+      },
+      {
         "type": "deckCard",
         "count": 1,
         "addMaxCount": 3,
@@ -43925,7 +44074,7 @@
   },
   {
     "name": "Otrimi",
-    "sprite": "sprites/enemy/beast/monkey_small.atlas",
+    "sprite": "sprites/enemy/beast/ape/monkey_small.atlas",
     "deck": [
       "decks/legends/otrimi.dck"
     ],
@@ -43937,6 +44086,12 @@
         "type": "card",
         "count": 1,
         "cardName": "Otrimi, the Ever-Playful"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
       },
       {
         "type": "deckCard",
@@ -43990,7 +44145,7 @@
   },
   {
     "name": "Tayam",
-    "sprite": "sprites/enemy/beast/wolf.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/wolf.atlas",
     "deck": [
       "decks/legends/tayam.dck"
     ],
@@ -44002,6 +44157,12 @@
         "type": "card",
         "count": 1,
         "cardName": "Tayam, Luminous Enigma"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
       },
       {
         "type": "deckCard",
@@ -44055,7 +44216,7 @@
   },
   {
     "name": "Xyris",
-    "sprite": "sprites/enemy/beast/snake_green.atlas",
+    "sprite": "sprites/enemy/beast/reptile/snake_green.atlas",
     "deck": [
       "decks/legends/xyris.dck"
     ],
@@ -44069,6 +44230,12 @@
         "type": "card",
         "count": 1,
         "cardName": "Xyris, the Writhing Storm"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
       },
       {
         "type": "deckCard",
@@ -44137,6 +44304,12 @@
         "cardName": "Yorion, Sky Nomad"
       },
       {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
+      },
+      {
         "type": "deckCard",
         "count": 1,
         "addMaxCount": 3,
@@ -44188,7 +44361,7 @@
   },
   {
     "name": "Zirda",
-    "sprite": "sprites/enemy/beast/fox.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/fox.atlas",
     "deck": [
       "decks/legends/zirda.dck"
     ],
@@ -44200,6 +44373,12 @@
         "type": "card",
         "count": 1,
         "cardName": "Zirda, the Dawnwaker"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.3,
+        "itemName": "Kill Trophy"
       },
       {
         "type": "deckCard",
@@ -44253,7 +44432,7 @@
   },
   {
     "name": "Arahbo",
-    "sprite": "sprites/enemy/beast/cat.atlas",
+    "sprite": "sprites/enemy/beast/cat/cat.atlas",
     "deck": [
       "decks/legends/arahbo.dck"
     ],
@@ -44330,17 +44509,22 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
-     {
+      {
+        "type": "item",
+        "count": 1,
+        "cardName": "Ajani's Amulet"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Ajani, Nacatl Pariah"
       },
       {
         "type": "deckCard",
-        "count": 1,
-        "addMaxCount": 3,
+        "count": 2,
+        "addMaxCount": 4,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -44348,8 +44532,8 @@
       },
       {
         "type": "deckCard",
-        "count": 2,
-        "addMaxCount": 4,
+        "count": 1,
+        "addMaxCount": 3,
         "rarity": [
           "common",
           "uncommon"
@@ -44357,31 +44541,48 @@
       },
       {
         "type": "randomCard",
-        "count": 1,
-        "addMaxCount": 3,
-        "rarity": [
-          "Rare",
-          "Mythic Rare"
-	]
-      },
-      {
-        "type": "randomCard",
         "count": 2,
         "addMaxCount": 4,
         "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
           "common",
           "uncommon"
-	]
+        ]
       },
       {
         "type": "gold",
-        "count": 50,
-        "addMaxCount": 250
+        "count": 100,
+        "addMaxCount": 1000
       },
       {
         "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      },
+      {
+        "type": "card",
+        "probability": 0.1,
         "count": 1,
-        "addMaxCount": 5
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.2,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.1,
+        "count": 1
       }
     ],
     "colors": "WR",
@@ -44389,7 +44590,7 @@
   },
   {
     "name": "Jedit",
-    "sprite": "sprites/enemy/beast/tiger.atlas",
+    "sprite": "sprites/enemy/beast/cat/tiger.atlas",
     "deck": [
       "decks/legends/jedit_ojanen.dck"
     ],
@@ -44529,23 +44730,28 @@
   },
   {
     "name": "Rin and Seri",
-    "sprite": "sprites/enemy/beast/dog.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/dog.atlas",
     "deck": [
       "decks/legends/rin_and_seri.dck"
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
-     {
+      {
+        "type": "item",
+        "count": 1,
+        "cardName": "Pack Leader Pants"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Rin and Seri, Inseparable"
       },
       {
         "type": "deckCard",
-        "count": 1,
-        "addMaxCount": 3,
+        "count": 2,
+        "addMaxCount": 4,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -44553,8 +44759,8 @@
       },
       {
         "type": "deckCard",
-        "count": 2,
-        "addMaxCount": 4,
+        "count": 1,
+        "addMaxCount": 3,
         "rarity": [
           "common",
           "uncommon"
@@ -44562,31 +44768,48 @@
       },
       {
         "type": "randomCard",
-        "count": 1,
-        "addMaxCount": 3,
-        "rarity": [
-          "Rare",
-          "Mythic Rare"
-	]
-      },
-      {
-        "type": "randomCard",
         "count": 2,
         "addMaxCount": 4,
         "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
           "common",
           "uncommon"
-	]
+        ]
       },
       {
         "type": "gold",
-        "count": 50,
-        "addMaxCount": 250
+        "count": 100,
+        "addMaxCount": 1000
       },
       {
         "type": "shards",
+        "count": 5,
+        "addMaxCount": 15
+      },
+      {
+        "type": "card",
+        "probability": 0.1,
         "count": 1,
-        "addMaxCount": 5
+        "sourceDeck": "decks/rewards/High_End_Alt-Art.dck"
+      },
+      {
+        "type": "card",
+        "count": 1,
+        "probability": 0.2,
+        "sourceDeck": "decks/rewards/Alt-Art_Staples.dck"
+      },
+      {
+        "type": "landSketchbookShop",
+        "probability": 0.1,
+        "count": 1
       }
     ],
     "colors": "WRG",
@@ -44790,7 +45013,7 @@
   },
   {
     "name": "Quintorius",
-    "sprite": "sprites/enemy/beast/elephant.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/elephant.atlas",
     "deck": [
       "decks/legends/quintorius.dck"
     ],
@@ -45259,6 +45482,71 @@
       }
     ],
     "colors": "WBG",
+    "spawnRate": 0
+  },
+  {
+    "name": "Shroofus",
+    "sprite": "sprites/enemy/plant/fungus.atlas",
+    "deck": [
+      "decks/legends/shroofus.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "life": 20,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Shroofus Sproutsire"
+      },
+      {
+        "type": "deckCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "deckCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 1,
+        "addMaxCount": 3,
+        "rarity": [
+          "Rare",
+          "Mythic Rare"
+        ]
+      },
+      {
+        "type": "randomCard",
+        "count": 2,
+        "addMaxCount": 4,
+        "rarity": [
+          "common",
+          "uncommon"
+        ]
+      },
+      {
+        "type": "gold",
+        "count": 50,
+        "addMaxCount": 250
+      },
+      {
+        "type": "shards",
+        "count": 1,
+        "addMaxCount": 5
+      }
+    ],
+    "colors": "G",
     "spawnRate": 0
   },
   {
@@ -45762,9 +46050,14 @@
         "cardName": "Gerrard, Weatherlight Hero"
       },
       {
+        "type": "card",
+        "count": 1,
+        "cardName": "Gerrard Capashen"
+      },
+      {
         "type": "deckCard",
         "count": 1,
-        "addMaxCount": 3,
+        "addMaxCount": 2,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -46231,7 +46524,7 @@
   },
   {
     "name": "Bruse Tarl",
-    "sprite": "sprites/enemy/beast/bull.atlas",
+    "sprite": "sprites/enemy/beast/barn/bull.atlas",
     "deck": [
       "decks/legends/bruse_tarl.dck"
     ],
@@ -47113,12 +47406,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Azusa, Lost but Seeking"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Heavy Armor", "Greenseeker's Shoes", "Lifespark Gauntlet", "Amulet of Favor", "Brawler's Cestus"]
       },
       {
         "type": "deckCard",
@@ -47309,12 +47608,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Gallia of the Endless Dance"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Heavy Armor", "Greenseeker's Shoes", "Lifespark Gauntlet", "Amulet of Favor", "Brawler's Cestus"]
       },
       {
         "type": "deckCard",
@@ -47657,7 +47962,7 @@
     "ai": "",
     "scale": 2,
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
@@ -47668,6 +47973,12 @@
         "type": "card",
         "count": 1,
         "cardName": "Nemata, Grove Guardian"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Heavy Armor", "Greenseeker's Shoes", "Lifespark Gauntlet", "Amulet of Favor", "Brawler's Cestus"]
       },
       {
         "type": "deckCard",
@@ -47721,7 +48032,7 @@
   },
   {
     "name": "Doc Aurlock",
-    "sprite": "sprites/enemy/beast/bear_large.atlas",
+    "sprite": "sprites/enemy/beast/bear/bear_large.atlas",
     "deck": [
       "decks/legends/doc_aurlock.dck"
     ],
@@ -48321,12 +48632,18 @@
     "ai": "",
     "scale": 1,
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Jace, Vryn's Prodigy"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Sage's Robes", "Trickster's Shoes", "Aether Gauntlet", "Amulet of Mischief", "Hoversail Glove"]
       },
       {
         "type": "deckCard",
@@ -48719,12 +49036,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Shorikai, Genesis Engine"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Sage's Robes", "Trickster's Shoes", "Aether Gauntlet", "Amulet of Mischief", "Hoversail Glove"]
       },
       {
         "type": "deckCard",
@@ -48785,12 +49108,18 @@
     "ai": "",
     "flying": true,
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Tamiyo, Inquisitive Student"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Sage's Robes", "Trickster's Shoes", "Aether Gauntlet", "Amulet of Mischief", "Hoversail Glove"]
       },
       {
         "type": "deckCard",
@@ -48980,12 +49309,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Chandra, Fire of Kaladesh"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Flaming Armor", "Firefrightener Shoes", "Pyrite Gauntlet", "Amulet of Fury", "Chitinous Club"]
       },
       {
         "type": "deckCard",
@@ -49640,12 +49975,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Rivaz of the Claw"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Flaming Armor", "Firefrightener Shoes", "Pyrite Gauntlet", "Amulet of Fury", "Chitinous Club"]
       },
       {
         "type": "deckCard",
@@ -49705,7 +50046,7 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
@@ -49716,6 +50057,12 @@
         "type": "card",
         "count": 1,
         "cardName": "Sarkhan, Dragon Ascendant"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Flaming Armor", "Firefrightener Shoes", "Pyrite Gauntlet", "Amulet of Fury", "Chitinous Club"]
       },
       {
         "type": "deckCard",
@@ -50308,12 +50655,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Kyler, Sigardian Emissary"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Blessed Armor", "Peddler's Shoes", "Sunbeam Gauntlet", "Amulet of Mirth", "Jousting Lance"]
       },
       {
         "type": "deckCard",
@@ -50374,12 +50727,18 @@
     "ai": "",
     "scale": 1,
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Kytheon, Hero of Akros"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Blessed Armor", "Peddler's Shoes", "Sunbeam Gauntlet", "Amulet of Mirth", "Jousting Lance"]
       },
       {
         "type": "deckCard",
@@ -50709,12 +51068,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Wyleth, Soul of Steel"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Blessed Armor", "Peddler's Shoes", "Sunbeam Gauntlet", "Amulet of Mirth", "Jousting Lance"]
       },
       {
         "type": "deckCard",
@@ -50768,7 +51133,7 @@
   },
   {
     "name": "Yoshimaru",
-    "sprite": "sprites/enemy/beast/dog.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/dog.atlas",
     "deck": [
       "decks/legends/yoshimaru.dck"
     ],
@@ -50909,12 +51274,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Ratadrabik of Urborg"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Forbidden Robes", "Witch's Shoes", "Necrogen Gauntlet", "Amulet of Scorn", "Blight Sickle"]
       },
       {
         "type": "deckCard",
@@ -50974,7 +51345,7 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
@@ -50990,6 +51361,12 @@
         "type": "card",
         "count": 1,
         "cardName": "Braids, Conjurer Adept"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Forbidden Robes", "Witch's Shoes", "Necrogen Gauntlet", "Amulet of Scorn", "Blight Sickle"]
       },
       {
         "type": "deckCard",
@@ -51308,7 +51685,7 @@
   },
   {
     "name": "Gorex",
-    "sprite": "sprites/enemy/beast/turtle.atlas",
+    "sprite": "sprites/enemy/beast/reptile/turtle.atlas",
     "deck": [
       "decks/legends/gorex.dck"
     ],
@@ -51707,12 +52084,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Yuriko, the Tiger's Shadow"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Forbidden Robes", "Witch's Shoes", "Necrogen Gauntlet", "Amulet of Scorn", "Blight Sickle"]
       },
       {
         "type": "deckCard",
@@ -51805,7 +52188,7 @@
         "addMaxCount": 15
       }
     ],
-    "spawnRate": 0.5
+    "spawnRate": 0.4
   },   
   {
     "name": "Grand Nemesis",
@@ -51865,11 +52248,11 @@
         "count": 1
       }
     ],
-    "spawnRate": 0.5
+    "spawnRate": 0.2
   },   
   {
     "name": "Archelos",
-    "sprite": "sprites/enemy/beast/turtle.atlas",
+    "sprite": "sprites/enemy/beast/reptile/turtle.atlas",
     "deck": [
       "decks/legends/archelos.dck"
     ],
@@ -52265,12 +52648,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Jenson Carthalion, Druid Exile"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Steel Boots", "Caravaneer's Greaves", "Echo Shield", "Spidersilk Gloves", "Mithril Armor"]
       },
       {
         "type": "deckCard",
@@ -52455,7 +52844,7 @@
   },
   {
     "name": "Loot",
-    "sprite": "sprites/enemy/beast/fox.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/fox.atlas",
     "deck": [
       "decks/legends/loot.dck"
     ],
@@ -52661,7 +53050,7 @@
   },
   {
     "name": "Arna",
-    "sprite": "sprites/enemy/beast/falcon.atlas",
+    "sprite": "sprites/enemy/beast/bird/falcon.atlas",
     "deck": [
       "decks/legends/arna.dck"
     ],
@@ -52734,12 +53123,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Codie, Vociferous Codex"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Steel Boots", "Caravaneer's Greaves", "Echo Shield", "Spidersilk Gloves", "Mithril Armor"]
       },
       {
         "type": "deckCard",
@@ -53196,12 +53591,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Karona, False God"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Steel Boots", "Caravaneer's Greaves", "Echo Shield", "Spidersilk Gloves", "Mithril Armor"]
       },
       {
         "type": "deckCard",
@@ -53588,7 +53989,7 @@
   },
   {
     "name": "Roon",
-    "sprite": "sprites/enemy/beast/elephant.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/elephant.atlas",
     "deck": [
       "decks/legends/roon.dck"
     ],
@@ -53661,12 +54062,18 @@
     "scale": 2,
     "flying": true,
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Kyodai, Soul of Kamigawa"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Steel Boots", "Caravaneer's Greaves", "Echo Shield", "Spidersilk Gloves", "Mithril Armor"]
       },
       {
         "type": "deckCard",
@@ -53782,71 +54189,6 @@
       }
     ],
     "colors": "BRG",
-    "spawnRate": 1
-  },
-  {
-    "name": "Kethis",
-    "sprite": "sprites/enemy/humanoid/elf/green_wiz3.atlas",
-    "deck": [
-      "decks/legends/kethis.dck"
-    ],
-    "ai": "",
-    "speed": 45,
-    "life": 20,
-    "rewards": [
-     {
-        "type": "card",
-        "count": 1,
-        "cardName": "Kethis, the Hidden Hand"
-      },
-      {
-        "type": "deckCard",
-        "count": 1,
-        "addMaxCount": 3,
-        "rarity": [
-          "Rare",
-          "Mythic Rare"
-        ]
-      },
-      {
-        "type": "deckCard",
-        "count": 2,
-        "addMaxCount": 4,
-        "rarity": [
-          "common",
-          "uncommon"
-        ]
-      },
-      {
-        "type": "randomCard",
-        "count": 1,
-        "addMaxCount": 3,
-        "rarity": [
-          "Rare",
-          "Mythic Rare"
-	]
-      },
-      {
-        "type": "randomCard",
-        "count": 2,
-        "addMaxCount": 4,
-        "rarity": [
-          "common",
-          "uncommon"
-	]
-      },
-      {
-        "type": "gold",
-        "count": 50,
-        "addMaxCount": 250
-      },
-      {
-        "type": "shards",
-        "count": 1,
-        "addMaxCount": 5
-      }
-    ],
-    "colors": "WBG",
     "spawnRate": 1
   },
   {
@@ -54123,12 +54465,18 @@
     ],
     "ai": "",
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
      {
         "type": "card",
         "count": 1,
         "cardName": "Atogatog"
+      },
+      {
+        "type": "item",
+        "count": 1,
+        "probability": 0.5,
+        "itemNames": ["Steel Boots", "Caravaneer's Greaves", "Echo Shield", "Spidersilk Gloves", "Mithril Armor"]
       },
       {
         "type": "deckCard",
@@ -54791,6 +55139,7 @@
     ],
     "ai": "",
     "speed": 45,
+    "scale": 0.3,
     "life": 20,
     "rewards": [
      {
@@ -55446,7 +55795,7 @@
   },
   {
     "name": "Karumonix",
-    "sprite": "sprites/enemy/beast/wildratpoison.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/wildratpoison.atlas",
     "deck": [
       "decks/legends/karumonix.dck"
     ],
@@ -56331,7 +56680,7 @@
   },
   {
     "name": "Tolsimir",
-    "sprite": "sprites/enemy/beast/wolf.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/wolf.atlas",
     "deck": [
       "decks/legends/tolsimir.dck"
     ],
@@ -56407,7 +56756,7 @@
   },
   {
     "name": "Breena",
-    "sprite": "sprites/enemy/beast/owl.atlas",
+    "sprite": "sprites/enemy/beast/bird/owl.atlas",
     "deck": [
       "decks/legends/breena.dck"
     ],
@@ -56669,7 +57018,7 @@
   },
   {
     "name": "Grunn",
-    "sprite": "sprites/enemy/beast/gorilla.atlas",
+    "sprite": "sprites/enemy/beast/ape/gorilla.atlas",
     "deck": [
       "decks/legends/grunn.dck"
     ],
@@ -56734,7 +57083,7 @@
   },
   {
     "name": "Kibo",
-    "sprite": "sprites/enemy/beast/monkey_small.atlas",
+    "sprite": "sprites/enemy/beast/ape/monkey_small.atlas",
     "deck": [
       "decks/legends/kibo.dck"
     ],
@@ -56799,7 +57148,7 @@
   },
   {
     "name": "Ragavan",
-    "sprite": "sprites/enemy/beast/monkey_small.atlas",
+    "sprite": "sprites/enemy/beast/ape/monkey_small.atlas",
     "deck": [
       "decks/legends/ragavan.dck"
     ],
@@ -57070,7 +57419,7 @@
   },
   {
     "name": "The Pride of Hull Clade",
-    "sprite": "sprites/enemy/beast/turtle.atlas",
+    "sprite": "sprites/enemy/beast/reptile/turtle.atlas",
     "deck": [
       "decks/legends/the_pride_of_hull_clade.dck"
     ],
@@ -57481,7 +57830,7 @@
   },
   {
     "name": "Mm'menon",
-    "sprite": "sprites/enemy/beast/jellyfish.atlas",
+    "sprite": "sprites/enemy/beast/ocean/jellyfish.atlas",
     "deck": [
       "decks/legends/mm'menon.dck"
     ],
@@ -57965,7 +58314,7 @@
   },
   {
     "name": "Perrie",
-    "sprite": "sprites/enemy/beast/rhino.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/rhino.atlas",
     "deck": [
       "decks/legends/perrie.dck"
     ],
@@ -58784,7 +59133,7 @@
   },
   {
     "name": "Hugs",
-    "sprite": "sprites/enemy/beast/badger.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/badger.atlas",
     "deck": [
       "decks/legends/hugs.dck"
     ],
@@ -58922,17 +59271,22 @@
     "ai": "",
     "scale": 0.5,
     "speed": 45,
-    "life": 20,
+    "life": 30,
     "rewards": [
-     {
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Cragflame"
+      },
+      {
         "type": "card",
         "count": 1,
         "cardName": "Mabel, Heir to Cragflame"
       },
       {
         "type": "deckCard",
-        "count": 1,
-        "addMaxCount": 3,
+        "count": 2,
+        "addMaxCount": 4,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -58949,8 +59303,8 @@
       },
       {
         "type": "randomCard",
-        "count": 1,
-        "addMaxCount": 3,
+        "count": 2,
+        "addMaxCount": 4,
         "rarity": [
           "Rare",
           "Mythic Rare"
@@ -58981,7 +59335,7 @@
   },
   {
     "name": "Mr. Foxglove",
-    "sprite": "sprites/enemy/beast/fox.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/fox.atlas",
     "deck": [
       "decks/legends/mr_foxglove.dck"
     ],
@@ -60268,7 +60622,7 @@
   },
   {
     "name": "Sarulf",
-    "sprite": "sprites/enemy/beast/wolf.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/wolf.atlas",
     "deck": [
       "decks/legends/sarulf.dck"
     ],
@@ -60804,7 +61158,7 @@
   },
   {
     "name": "Rudolph",
-    "sprite": "sprites/enemy/beast/deer_2.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/deer_2.atlas",
     "deck": [
       "decks/legends/rudolph.dck"
     ],
@@ -61288,7 +61642,7 @@
   },
   {
     "name": "Mr. Orfeo",
-    "sprite": "sprites/enemy/beast/rhino.atlas",
+    "sprite": "sprites/enemy/beast/largemammals/rhino.atlas",
     "deck": [
       "decks/legends/mr_orfeo.dck"
     ],
@@ -61433,7 +61787,7 @@
   },
   {
     "name": "Alania",
-    "sprite": "sprites/enemy/beast/raccoon.atlas",
+    "sprite": "sprites/enemy/beast/smallmammals/raccoon.atlas",
     "deck": [
       "decks/legends/mystery_list.dck"
     ],
@@ -61500,7 +61854,7 @@
     "ai": "",
     "spawnRate": 0,
     "difficulty": 0.1,
-    "scale": 1,
+    "scale": 0.6,
     "speed": 0,
     "life": 1,
     "rewards": [
@@ -61568,7 +61922,7 @@
   },
   {
     "name": "Ashiok",
-    "sprite": "sprites/enemy/beast/penguin.atlas",
+    "sprite": "sprites/enemy/beast/polar/penguin.atlas",
     "deck": [
       "decks/legends/mystery_list.dck"
     ],
@@ -61640,6 +61994,261 @@
     "life": 1,
     "rewards": [
     ]
+  },
+  {
+    "name": "Jacob Hauken",
+    "sprite": "sprites/enemy/humanoid/human/soldier/cathar.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Ruby",
+    "sprite": "sprites/enemy/humanoid/elf/deftsorceress.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Whisper",
+    "sprite": "sprites/enemy/humanoid/human/warlock/witch.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Vhati il-Dal",
+    "sprite": "sprites/enemy/humanoid/human/bandit/banditleader.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Xantcha",
+    "sprite": "sprites/enemy/humanoid/human/wizard/black_wiz3.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Vadmir",
+    "sprite": "sprites/enemy/humanoid/human/artificer/archaeologist.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "Chevill",
+    "sprite": "sprites/enemy/humanoid/human/bandit/banditleader.atlas",
+    "deck": [
+      "decks/legends/mystery_list.dck"
+    ],
+    "ai": "",
+    "spawnRate": 0,
+    "difficulty": 0.1,
+    "scale": 1,
+    "speed": 0,
+    "life": 1,
+    "rewards": [
+    ]
+  },
+  {
+    "name": "General Jarkeld",
+    "sprite": "sprites/enemy/humanoid/human/soldier/pikeman.atlas",
+    "deck": [
+      "decks/legends/general_jarkeld.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "scale": 1,
+    "life": 50,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Mox Pearl",
+        "editions": [ "LEA" ]
+      },
+      {
+        "type": "shards",
+        "count": 100
+      },
+      {
+        "type": "landSketchbookShop",
+        "count": 1
+      }
+    ],
+    "colors": "W",
+    "gamesPerMatch": 3,
+    "spawnRate": 0
+  },
+  {
+    "name": "Hakim",
+    "sprite": "sprites/enemy/humanoid/human/wizard/mage_2.atlas",
+    "deck": [
+      "decks/legends/hakim.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "scale": 1,
+    "life": 50,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Mox Sapphire",
+        "editions": [ "LEA" ]
+      },
+      {
+        "type": "shards",
+        "count": 100
+      },
+      {
+        "type": "landSketchbookShop",
+        "count": 1
+      }
+    ],
+    "colors": "U",
+    "gamesPerMatch": 3,
+    "spawnRate": 0
+  },
+  {
+    "name": "Ihsan's Shade",
+    "sprite": "sprites/enemy/undead/deathknightidle.atlas",
+    "deck": [
+      "decks/legends/ihsans_shade.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "scale": 1,
+    "life": 50,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Mox Jet",
+        "editions": [ "LEA" ]
+      },
+      {
+        "type": "shards",
+        "count": 100
+      },
+      {
+        "type": "landSketchbookShop",
+        "count": 1
+      }
+    ],
+    "colors": "B",
+    "gamesPerMatch": 3,
+    "spawnRate": 0
+  },
+  {
+    "name": "Márton Stromgald",
+    "sprite": "sprites/enemy/humanoid/human/knight/cavalier.atlas",
+    "deck": [
+      "decks/legends/márton_stromgald.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "scale": 1,
+    "life": 50,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Mox Ruby",
+        "editions": [ "LEA" ]
+      },
+      {
+        "type": "shards",
+        "count": 100
+      },
+      {
+        "type": "landSketchbookShop",
+        "count": 1
+      }
+    ],
+    "colors": "R",
+    "gamesPerMatch": 3,
+    "spawnRate": 0
+  },
+  {
+    "name": "Autumn Willow",
+    "sprite": "sprites/enemy/humanoid/elf/druid.atlas",
+    "deck": [
+      "decks/legends/autumn_willow.dck"
+    ],
+    "ai": "",
+    "speed": 45,
+    "scale": 1,
+    "life": 50,
+    "rewards": [
+      {
+        "type": "card",
+        "count": 1,
+        "cardName": "Mox Emerald",
+        "editions": [ "LEA" ]
+      },
+      {
+        "type": "shards",
+        "count": 100
+      },
+      {
+        "type": "landSketchbookShop",
+        "count": 1
+      }
+    ],
+    "colors": "G",
+    "gamesPerMatch": 3,
+    "spawnRate": 0
   },
   {
     "name": "Mysterious Mage",

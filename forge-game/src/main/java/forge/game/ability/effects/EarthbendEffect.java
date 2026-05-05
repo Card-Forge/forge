@@ -38,6 +38,7 @@ public class EarthbendEffect extends SpellAbilityEffect {
 
     @Override
     public void buildSpellAbility(final SpellAbility sa) {
+        super.buildSpellAbility(sa);
         TargetRestrictions abTgt = new TargetRestrictions(Map.of("ValidTgtsDesc", "land you control", "ValidTgts", "Land.YouCtrl"));
         sa.setTargetRestrictions(abTgt);
     }
@@ -63,7 +64,7 @@ public class EarthbendEffect extends SpellAbilityEffect {
 
             GameEntityCounterTable table = new GameEntityCounterTable();
             c.addCounter(CounterEnumType.P1P1, num, pl, table);
-            table.replaceCounterEffect(game, sa, true);
+            table.replaceCounterEffect(game, sa);
 
             buildTrigger(sa, c, sbTrigA, "Graveyard");
             buildTrigger(sa, c, sbTrigB, "Exile");

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="140">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="25" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="141">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Untaidake, the Cloud Keeper&quot;, &quot;Tatsumasa, the Dragon's Fang&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Jade Idol&quot;, &quot;Heartbeat of Spring&quot;, &quot;Tatsumasa, the Dragon's Fang&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -101,6 +101,8 @@
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;That Which Was Taken|SOK&quot;, &quot;Gods' Eye, Gate to the Reikai|BOK&quot;, &quot;petalmane baku|BOK&quot;, &quot;Long-Forgotten Gohei|chk&quot;, &quot;Elder Pine of Jukai|SOK&quot;]}"/>
     <property name="enemy" value="O-Kagachi"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
@@ -213,5 +215,14 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
   <object id="135" template="../../../../common/maps/obj/collision.tx" x="31" y="199.2" width="18" height="32.2671"/>
   <object id="136" template="../../../../common/maps/obj/collision.tx" x="95.1818" y="37.6846" width="18" height="32.2671"/>
   <object id="139" template="../../../../common/maps/obj/collision.tx" x="-0.5" y="126.366" width="18" height="80.7671"/>
+  <object id="140" template="../../../../common/maps/obj/enemy.tx" x="208.369" y="167.137">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;That Which Was Taken|SOK&quot;, &quot;petalmane baku|BOK&quot;, &quot;Long-Forgotten Gohei|chk&quot;]}"/>
+    <property name="enemy" value="O-Kagachi"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

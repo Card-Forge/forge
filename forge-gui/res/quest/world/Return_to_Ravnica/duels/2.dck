@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Yewa
+Title=Yewa
+Icon=Yewa.jpg
+Difficulty=Medium
+Description=Return_to_Ravnica/SCG_Invitational_Qualifier_Tallahassee,_Florida,_United_States/Kadmiel_Beauvais_-_Red_Deck_Wins_(Standard,_#40733).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Archwing Dragon
+4 Ash Zealot
+2 Hellrider
+4 Rakdos Cackler
+4 Stromkirk Noble
+4 Brimstone Volley
+4 Searing Spear
+3 Thunderbolt
+4 Pillar of Flame
+1 Hellion Crucible
+20 Mountain
+[Sideboard]
+3 Electrickery
+3 Flames of the Firebrand
+3 Mizzium Mortars
+2 Pithing Needle
+4 Traitorous Blood

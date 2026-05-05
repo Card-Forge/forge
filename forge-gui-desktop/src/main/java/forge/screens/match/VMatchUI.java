@@ -165,7 +165,6 @@ public class VMatchUI implements IVTopLevelUI {
             getBtnCancel().requestFocusInWindow();
         }
 
-
         final boolean sortFieldsEnabled = lstFields.size() > 2
                 && !"OFF".equals(FModel.getPreferences().getPref(FPref.UI_MULTIPLAYER_FIELD_LAYOUT));
 
@@ -204,16 +203,26 @@ public class VMatchUI implements IVTopLevelUI {
 
         // Determine (an) existing hand panel
         DragCell cellWithHands = null;
+        DragCell cellWithHandsFallback = null;
         for (final EDocID handId : EDocID.Hands) {
-            cellWithHands = handId.getDoc().getParentCell();
-            if (cellWithHands != null && cellWithHands.isShowing()) {
-                break;
+            final DragCell c = handId.getDoc().getParentCell();
+            if (c != null) {
+                if (cellWithHandsFallback == null) {
+                    cellWithHandsFallback = c;
+                }
+                if (c.isShowing()) {
+                    cellWithHands = c;
+                    break;
+                }
             }
-            cellWithHands = null;
         }
         if (cellWithHands == null) {
-            // Default to a cell we know exists
             cellWithHands = EDocID.REPORT_LOG.getDoc().getParentCell();
+        }
+        // Last resort: use any hand cell even if not yet showing (e.g. during
+        // initial game load before Swing has realized the components).
+        if (cellWithHands == null) {
+            cellWithHands = cellWithHandsFallback;
         }
         for (int iHandId = 0; iHandId < EDocID.Hands.length; iHandId++) {
             final EDocID handId = EDocID.Hands[iHandId];
@@ -237,11 +246,13 @@ public class VMatchUI implements IVTopLevelUI {
                 if (parentCell == null || !parentCell.isShowing()) {
                     final EDocID fieldDoc = EDocID.Fields[iHandId];
                     DragCell fieldCell = fieldDoc.getDoc().getParentCell();
-                    if (fieldCell != null && fieldCell.isShowing()) {
+                    if (fieldCell != null && (fieldCell.isShowing() || cellWithHands == null)) {
                         fieldCell.addDoc(myVHand);
                         continue;
                     }
-                    cellWithHands.addDoc(myVHand);
+                    if (cellWithHands != null) {
+                        cellWithHands.addDoc(myVHand);
+                    }
                 }
             }
         }
@@ -362,14 +373,16 @@ public class VMatchUI implements IVTopLevelUI {
         return this.control;
     }
 
+    public List<VField> getFieldViews() {
+        return lstFields;
+    }
     public void setFieldViews(final List<VField> lst0) {
         this.lstFields = lst0;
     }
 
-    public List<VField> getFieldViews() {
-        return lstFields;
+    public List<VHand> getHands() {
+        return lstHands;
     }
-
     public void setHandViews(final List<VHand> lst0) {
         this.lstHands = lst0;
     }
@@ -377,13 +390,8 @@ public class VMatchUI implements IVTopLevelUI {
     public FButton getBtnCancel() {
         return getControl().getCPrompt().getView().getBtnCancel();
     }
-
     public FButton getBtnOK() {
         return getControl().getCPrompt().getView().getBtnOK();
-    }
-
-    public List<VHand> getHands() {
-        return lstHands;
     }
 
     @Override

@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Kojak
+Title=Kojak
+Icon=Kojak.jpg
+Difficulty=Hard
+Description=./Modern/Murders_at_Karlov_Manor/Boulderer_-_Grixis_Control_(Modern,_#2007246).dck
+Deck Type=constructed
+
+[Main]
+4 Orcish Bowmasters
+3 Tishana's Tidebinder
+4 Snapcaster Mage
+2 Sheoldred's Edict
+1 Stern Scolding
+4 Flame of Anor
+4 Counterspell
+1 Spell Pierce
+3 Fatal Push
+2 Archmage's Charm
+1 Drown in the Loch
+1 Cling to Dust
+3 Lightning Bolt
+3 Consider
+2 Lórien Revealed
+1 Thundering Falls
+1 Undercity Sewers
+2 Watery Grave
+1 Steam Vents
+3 Island
+1 Swamp
+4 Scalding Tarn
+1 Misty Rainforest
+4 Polluted Delta
+1 Castle Vantress
+1 Hall of Storm Giants
+1 Otawara, Soaring City
+1 Xander's Lounge
+[Sideboard]
+1 Sheoldred's Edict
+1 Stern Scolding
+2 Thoughtseize
+1 Spell Pierce
+1 Spreading Seas
+1 Flusterstorm
+3 Aether Gust
+2 Mystical Dispute
+2 Dress Down
+1 Subtlety

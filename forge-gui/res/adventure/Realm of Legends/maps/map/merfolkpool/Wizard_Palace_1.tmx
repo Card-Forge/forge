@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="34" height="37" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="142">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="34" height="37" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="145">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Relic Amulet&quot;, &quot;Academy Loremaster&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Tome of the Infinite&quot;, &quot;Wizard Class|BLC&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -34,7 +34,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -63,8 +63,8 @@
   &quot;type&quot;: &quot;card&quot;,
   &quot;count&quot;: 3,
   &quot;colors&quot;: [ &quot;blue&quot; ],
-  &quot;subTypes&quot;: [ &quot;Instant&quot;, &quot;Sorcery&quot; ], 
-  &quot;rarity&quot; [ &quot;rare&quot;, &quot;mythic rare&quot;]
+  &quot;cardTypes&quot;: [ &quot;Instant&quot;, &quot;Sorcery&quot; ],
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot;]
 }]</property>
    </properties>
   </object>
@@ -183,8 +183,7 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
   <object id="137" template="../../../../common/maps/obj/scroll.tx" x="18.5" y="519.5">
    <properties>
     <property name="reward">[ { &quot;type&quot;: &quot;card&quot;, 
-&quot;cardName&quot;: &quot;A-Base Camp &quot;, 
-&quot;editions&quot;: [ &quot;ZNR&quot; ],
+&quot;cardName&quot;: &quot;Umara Wizard&quot;,
 &quot;count&quot;: 1 } ]</property>
    </properties>
   </object>
@@ -218,6 +217,22 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
   <object id="141" template="../../../../common/maps/obj/shop.tx" x="81.5" y="359.5">
    <properties>
     <property name="commonShopList" value="WanderingMerchantBlue"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="143" template="../../../../common/maps/obj/shop.tx" x="448" y="323">
+   <properties>
+    <property name="commonShopList" value="Instant"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="144" template="../../../../common/maps/obj/shop.tx" x="399.667" y="324">
+   <properties>
+    <property name="commonShopList" value="Wizard"/>
     <property name="mythicShopList" value=""/>
     <property name="rareShopList" value=""/>
     <property name="uncommonShopList" value=""/>

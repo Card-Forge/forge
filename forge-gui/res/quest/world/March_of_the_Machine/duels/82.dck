@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=White Knight
+Title=White Knight
+Icon=White Knight.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine/yungdingo_-_Domain_Aggro_(Modern,_#1623745).dck
+Deck Type=constructed
+
+[Main]
+4 Nishoba Brawler
+4 Ragavan, Nimble Pilferer
+4 Scion of Draco
+4 Territorial Kavu
+4 Wild Nacatl
+4 Lightning Bolt
+4 Stubborn Denial
+4 Tribal Flames
+4 Leyline Binding
+3 Invasion of Tarkir
+1 Breeding Pool
+4 Flooded Strand
+1 Forest
+1 Overgrown Tomb
+1 Plains
+1 Sacred Foundry
+1 Savai Triome
+1 Steam Vents
+1 Temple Garden
+4 Windswept Heath
+4 Wooded Foothills
+1 Zagoth Triome
+[Sideboard]
+2 Dromoka's Command
+2 Flusterstorm
+1 Hidetsugu Consumes All
+1 Jegantha, the Wellspring
+2 Lavinia, Azorius Renegade
+2 Natural State
+1 Orvar, the All-Form
+2 Rest in Peace
+2 Teferi, Time Raveler

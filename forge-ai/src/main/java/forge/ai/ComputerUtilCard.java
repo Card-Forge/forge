@@ -1,16 +1,19 @@
 package forge.ai;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.IdentityHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import forge.StaticData;
-import forge.ai.simulation.GameStateEvaluator;
-import forge.card.mana.ManaCost;
-import forge.game.card.*;
-import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -19,12 +22,15 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
+import forge.StaticData;
+import forge.ai.simulation.GameStateEvaluator;
 import forge.card.CardRules;
 import forge.card.CardStateName;
 import forge.card.CardType;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.MagicColor.Constant;
+import forge.card.mana.ManaCost;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -32,11 +38,20 @@ import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
+import forge.game.card.Card;
+import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardCopyService;
+import forge.game.card.CardFactoryUtil;
+import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
+import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayEnergy;
 import forge.game.cost.CostRemoveCounter;
+import forge.game.cost.CostSacrifice;
 import forge.game.cost.CostUntap;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordCollection;
@@ -50,9 +65,15 @@ import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityMode;
 import forge.game.trigger.Trigger;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.MagicStack;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
+import forge.util.Aggregates;
+import forge.util.Expressions;
+import forge.util.IterableUtil;
+import forge.util.MyRandom;
+import forge.util.TextUtil;
 
 public class ComputerUtilCard {
     public static Card getMostExpensivePermanentAI(final CardCollectionView list, final SpellAbility spell, final boolean targeted) {
@@ -255,6 +276,186 @@ public class ComputerUtilCard {
                 .findFirst()
                 // TODO potentially risky if simulation mode currently able to reach this from triggers
                 .orElseGet(() -> Aggregates.random(bLand)); // random tapped land of least represented type
+    }
+
+    public static Card getBestLandToRemoveAI(final Player ai, final Iterable<Card> list, final SpellAbility removal) {
+        final List<Card> lands = CardLists.filter(list, CardPredicates.LANDS);
+        if (lands.isEmpty()) {
+            return null;
+        }
+
+        return lands.stream()
+                .max(Comparator.comparingInt(c -> evaluateLandRemovalPriority(ai, c, removal)))
+                .orElse(null);
+    }
+
+    public static int evaluateLandRemovalPriority(final Player ai, final Card land, final SpellAbility removal) {
+        return evaluateLandRemovalPriority(ai, land, removal, true);
+    }
+
+    private static int evaluateLandRemovalPriority(final Player ai, final Card land, final SpellAbility removal,
+            final boolean includeLandDestruction) {
+        if (land == null || !land.isLand()) {
+            return 0;
+        }
+
+        // Start with the existing land valuation and convert it into a
+        // removal priority baseline. A normal one-mana land is worth about 100
+        // in LandEvaluator, so subtract that off to keep basics and simple
+        // MDFC lands low while preserving high scores for Gaea's Cradle,
+        // Tolarian Academy, Serra's Sanctum, Cabal Coffers, etc.
+        int score = Math.max(0, landEvaluator.apply(land) - 100);
+
+        boolean hasAnimationAbility = false;
+        for (SpellAbility ability : land.getNonManaAbilities()) {
+            if (ability.isLandAbility()) {
+                continue;
+            }
+            Cost cost = ability.getPayCosts();
+            if (includeLandDestruction && isLandDestructionAbility(ability)) {
+                // High priority only when it cannot answer immediately:
+                // a tapped Strip Mine or Wasteland matters if the AI controls
+                // something worth protecting, but an untapped one can respond.
+                if (land.isTapped() && aiHasHighPriorityLand(ai)) {
+                    score += 170;
+                }
+                continue;
+            }
+            if (isHomewardPathAbility(ability)) {
+                // Usually low priority: Homeward Path matters if the AI has
+                // stolen creatures that it could lose, but otherwise it is
+                // mostly just a colorless land with a narrow political button.
+                if (aiControlsStolenCreature(ai)) {
+                    score += 100;
+                } else {
+                    score = Math.max(0, score - 50);
+                }
+                continue;
+            }
+            if (isLandAnimationAbility(ability)) {
+                hasAnimationAbility = true;
+                // Medium priority: manlands like Mishra's Factory and Mutavault.
+                // They become much more urgent while attacking the AI.
+                score += isAttackingAi(land, ai) ? 140 : 70;
+            } else if (cost != null && cost.hasSpecificCostType(CostSacrifice.class)) {
+                // Medium priority: one-shot utility lands such as Scavenger
+                // Grounds or Blast Zone are relevant, but usually not urgent.
+                score += 40;
+            }
+            if (ability.getApi() == ApiType.Mana || ability.findSubAbilityByType(ApiType.Mana) != null) {
+                // High priority: non-mana root abilities that create mana,
+                // such as Nykthos-style choose-color abilities implemented in
+                // a sub-DB. LandEvaluator sees these as utility, not big mana.
+                score += 100;
+            }
+        }
+
+        if (land.isCreature() && !hasAnimationAbility) {
+            // Medium priority: already-animated manlands and lands that are
+            // naturally creatures. Manlands with their own animation ability
+            // were already scored above; this catches external animation.
+            score += isAttackingAi(land, ai) ? 140 : 55;
+        }
+
+        if (land.hasSVar("AILandRemovalMinScore")) {
+            // Card-specific floor for lands whose danger is hard to infer from
+            // their generic ability shape, like Dark Depths or Nykthos. Keep it
+            // removal-specific so regular land play does not overvalue them.
+            score = Math.max(score, AbilityUtils.calculateAmount(land,
+                    land.getSVar("AILandRemovalMinScore"), null));
+        }
+
+        for (Card aura : land.getEnchantedBy()) {
+            // High priority: an opponent's land enhanced by Wild Growth,
+            // Utopia Sprawl, Overgrowth, or similar mana-boosting Auras.
+            if (aura.getController().equals(land.getController()) && hasManaBoostingText(aura)) {
+                score += 160;
+            }
+            // High priority: remove the land hosting an On Thin Ice-style Aura
+            // when that Aura has removed one of this AI's permanents.
+            if (hasRemovedAiPermanent(ai, aura)) {
+                score += 180;
+            }
+        }
+
+        return score;
+    }
+
+    private static boolean hasManaBoostingText(final Card aura) {
+        for (String value : aura.getSVars().values()) {
+            if (value.contains("DB$ Mana") || value.contains("TapsForMana") || value.contains("ManaReflected")) {
+                return true;
+            }
+        }
+        for (Trigger trigger : aura.getTriggers()) {
+            if (TriggerType.TapsForMana.equals(trigger.getMode())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean hasRemovedAiPermanent(final Player ai, final Card card) {
+        for (Card exiled : card.getExiledCards()) {
+            if (exiled.getOwner().equals(ai) && exiled.isPermanent()) {
+                return true;
+            }
+        }
+        for (Object remembered : card.getRemembered()) {
+            if (remembered instanceof Card rememberedCard
+                    && rememberedCard.getOwner().equals(ai)
+                    && rememberedCard.isPermanent()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isLandDestructionAbility(final SpellAbility ability) {
+        if (ability.getApi() != ApiType.Destroy && ability.getApi() != ApiType.ChangeZone) {
+            return false;
+        }
+        String valid = ability.getParamOrDefault("ValidTgts", "");
+        if (valid.isEmpty()) {
+            valid = ability.getParamOrDefault("ValidCards", "");
+        }
+        return valid.contains("Land");
+    }
+
+    private static boolean isHomewardPathAbility(final SpellAbility ability) {
+        return ability.getApi() == ApiType.GainControlVariant
+                && "GainControlOwns".equals(ability.getParam("AILogic"));
+    }
+
+    private static boolean aiControlsStolenCreature(final Player ai) {
+        for (Card creature : ai.getCreaturesInPlay()) {
+            if (!creature.getOwner().equals(ai)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isLandAnimationAbility(final SpellAbility ability) {
+        if (ability.getApi() == ApiType.Animate) {
+            return true;
+        }
+        String description = ability.getDescription();
+        return description != null && description.contains("becomes") && description.contains("creature");
+    }
+
+    private static boolean isAttackingAi(final Card land, final Player ai) {
+        Combat combat = land.getGame() == null ? null : land.getGame().getCombat();
+        return combat != null && combat.isAttacking(land, ai);
+    }
+
+    private static boolean aiHasHighPriorityLand(final Player ai) {
+        for (Card aiLand : ai.getLandsInPlay()) {
+            if (evaluateLandRemovalPriority(ai, aiLand, null, false) >= 150) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -607,17 +808,7 @@ public class ComputerUtilCard {
 
     public static Map<String, Integer> evaluateCreatureListByName(final CardCollectionView list) {
         // Compute value for each possible target
-        Map<String, Integer> values = Maps.newHashMap();
-        for (Card c : list) {
-            String name = c.getName();
-            int val = evaluateCreature(c);
-            if (values.containsKey(name)) {
-                values.put(name, values.get(name) + val);
-            } else {
-                values.put(name, val);
-            }
-        }
-        return values;
+        return list.stream().collect(Collectors.groupingBy(Card::getName, Collectors.summingInt(c -> evaluateCreature(c))));
     }
 
     public static boolean doesCreatureAttackAI(final Player aiPlayer, final Card card) {
@@ -764,26 +955,9 @@ public class ComputerUtilCard {
             return "";
         }
 
-        final Map<String, Integer> map = Maps.newHashMap();
-
-        for (final Card c : list) {
-            final String name = c.getName();
-            Integer currentCnt = map.get(name);
-            map.put(name, currentCnt == null ? Integer.valueOf(1) : Integer.valueOf(1 + currentCnt));
-        }
-
-        int max = 0;
-        String maxName = "";
-
-        for (final Entry<String, Integer> entry : map.entrySet()) {
-            final String type = entry.getKey();
-
-            if (max < entry.getValue()) {
-                max = entry.getValue();
-                maxName = type;
-            }
-        }
-        return maxName;
+        return list.stream()
+                .collect(Collectors.groupingBy(Card::getName, Collectors.counting()))
+                .entrySet().stream().max(Entry.comparingByValue()).orElse(Map.entry("", 0l)).getKey();
     }
 
     public static String getMostProminentType(final CardCollectionView list, final Collection<String> valid) {
@@ -825,8 +999,7 @@ public class ComputerUtilCard {
 
             Set<String> cardCreatureTypes = c.getType().getCreatureTypes();
             for (String type : cardCreatureTypes) {
-                Integer count = typesInDeck.getOrDefault(type, 0);
-                typesInDeck.put(type, count + weight);
+                typesInDeck.merge(type, weight, Integer::sum);
             }
 
             //also take into account abilities that generate tokens
@@ -837,16 +1010,14 @@ public class ComputerUtilCard {
                         if (tokenCR == null)
                             continue;
                         for (String type : tokenCR.getType().getCreatureTypes()) {
-                            Integer count = typesInDeck.getOrDefault(type, 0);
-                            typesInDeck.put(type, count + 1);
+                            typesInDeck.merge(type, 1, Integer::sum);
                         }
                     }
                 }
 
                 // special rule for Fabricate and Servo
                 if (c.hasKeyword(Keyword.FABRICATE)) {
-                    Integer count = typesInDeck.getOrDefault("Servo", 0);
-                    typesInDeck.put("Servo", count + weight);
+                    typesInDeck.merge("Servo", weight, Integer::sum);
                 }
             }
         }
@@ -868,39 +1039,16 @@ public class ComputerUtilCard {
         return maxType;
     }
 
-    public static String getMostProminentCardType(final CardCollectionView list, final Collection<String> valid) {
+    public static CardType.CoreType getMostProminentCardType(final CardCollectionView list, final Collection<CardType.CoreType> valid) {
         if (list.isEmpty() || valid.isEmpty()) {
-            return "";
+            return null;
         }
 
-        final Map<String, Integer> typesInDeck = Maps.newHashMap();
-        for (String type : valid) {
-            typesInDeck.put(type, 0);
-        }
-
-        for (final Card c : list) {
-            Iterable<CardType.CoreType> cardTypes = c.getType().getCoreTypes();
-            for (CardType.CoreType type : cardTypes) {
-                Integer count = typesInDeck.get(type.toString());
-                if (count != null) {
-                    typesInDeck.put(type.toString(), count + 1);
-                }
-            }
-        }
-
-        int max = 0;
-        String maxType = "";
-
-        for (final Entry<String, Integer> entry : typesInDeck.entrySet()) {
-            final String type = entry.getKey();
-
-            if (max < entry.getValue()) {
-                max = entry.getValue();
-                maxType = type;
-            }
-        }
-
-        return maxType;
+        Map.Entry<CardType.CoreType, Long> result = list.stream().flatMap(c -> c.getType().getCoreTypes().stream())
+                .filter(valid::contains)
+                .collect(Collectors.groupingBy(s -> s, Collectors.counting()))
+                .entrySet().stream().max(Entry.comparingByValue()).orElse(null);
+        return result == null ? null : result.getKey(); // Map.entry doesn't like null key
     }
 
     /**
@@ -1355,10 +1503,8 @@ public class ComputerUtilCard {
                 if (CombatUtil.canAttack(c) || (phase.inCombat() && c.isAttacking())) {
                     return true;
                 }
-            } else {
-                if (CombatUtil.canBlock(c)) {
-                    return true;
-                }
+            } else if (CombatUtil.canBlock(c)) {
+                return true;
             }
         }
 
@@ -1961,9 +2107,8 @@ public class ComputerUtilCard {
 
     public static AiPlayDecision checkNeedsToPlayReqs(final Card card, final SpellAbility sa) {
         Game game = card.getGame();
-        boolean isRightSplit = sa != null && sa.getCardState().getStateName() == CardStateName.RightSplit;
-        String needsToPlayName = isRightSplit ? "SplitNeedsToPlay" : "NeedsToPlay";
-        String needsToPlayVarName = isRightSplit ? "SplitNeedsToPlayVar" : "NeedsToPlayVar";
+        String needsToPlayName = "NeedsToPlay";
+        String needsToPlayVarName = "NeedsToPlayVar";
 
         // TODO: if there are ever split cards with Evoke or Kicker, factor in the right split option above
         if (sa != null) {

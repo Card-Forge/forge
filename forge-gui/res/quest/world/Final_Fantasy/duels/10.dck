@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=MahamotiGenie
+Title=MahamotiGenie
+Icon=MahamotiGenie.jpg
+Difficulty=Medium
+Description=./Standard/Final_Fantasy/HiraiKento_-_Izzet_Cauldron_(Standard,_#2533928).dck
+Deck Type=constructed
+
+[Main]
+4 Fear of Missing Out
+4 Marauding Mako
+4 Vivi Ornitier
+3 Tersa Lightshatter
+3 Voldaren Thrillseeker
+4 Agatha's Soul Cauldron
+3 Into the Flood Maw
+2 Abrade
+1 Spell Pierce
+4 Winternight Stories
+2 Glacial Dragonhunt
+4 Proft's Eidetic Memory
+4 Riverpyre Verge
+4 Shivan Reef
+4 Spirebluff Canal
+3 Mountain
+3 Thundering Falls
+2 Island
+2 Soulstone Sanctuary
+[Sideboard]
+3 Lithomantic Barrage
+3 Unable to Scream
+2 Draconautics Engineer
+2 Enduring Curiosity
+2 Negate
+1 Abrade
+1 Scorching Shot
+1 Spell Pierce

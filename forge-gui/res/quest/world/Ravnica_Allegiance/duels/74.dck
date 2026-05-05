@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Jesse James
+Title=Jesse James
+Icon=Jesse James.jpg
+Difficulty=Hard
+Description=./Modern/Ravnica_Allegiance/DirtyxDishes_-_Goblins_(Modern,_#784357).dck
+Deck Type=constructed
+
+[Main]
+4 Burning-Tree Emissary
+4 Fanatical Firebrand
+4 Foundry Street Denizen
+4 Goblin Bushwhacker
+4 Goblin Guide
+4 Legion Loyalist
+3 Mogg War Marshal
+3 Reckless Bushwhacker
+1 Simian Spirit Guide
+4 Lightning Bolt
+1 Risk Factor
+4 Goblin Grenade
+2 Light Up the Stage
+4 Inspiring Vantage
+6 Mountain
+2 Ramunap Ruins
+2 Sacred Foundry
+4 Wooded Foothills
+[Sideboard]
+1 Risk Factor
+3 Blood Moon
+2 Goblin Chainwhirler
+3 Rest in Peace
+2 Searing Blood
+2 Smash to Smithereens
+2 Wear // Tear

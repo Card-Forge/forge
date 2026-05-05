@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="61">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="62">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -59,9 +59,11 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Swamp|C16|[344]&quot;, &quot;Forest|C16|[350]&quot;, &quot;Island|C16|[341]&quot;, &quot;Mountain|C16|[347]&quot;, &quot;Glint-Eye Nephilim|GPT&quot;, &quot;Audacious Knuckleblade|YTDM&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Command Tower&quot;, &quot;Exotic Orchard&quot;, &quot;Flamekin Herald&quot;, &quot;Leyline Axe&quot;, &quot;Glint-Eye Nephilim|GPT&quot;]}"/>
     <property name="enemy" value="Yidris"/>
     <property name="pursueRange" type="int" value="0"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="50"/>
     <property name="threatRange" type="int" value="100"/>
    </properties>
@@ -104,6 +106,24 @@
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
   &quot;colors&quot;: [ &quot;blue&quot; ]
 }]</property>
+   </properties>
+  </object>
+  <object id="61" template="../../../../../common/maps/obj/enemy.tx" x="210.757" y="270.801">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;As you land your final blow, Yidris begins to glow in with a pulsing radiant light. Seconds later, he is ripped apart from the inside by a chaotic explosion of magical energy. You manage to shield yourself from the worst of it, but you have discovered that the inside of an ogre smells even worse than the outside.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Command Tower&quot;, &quot;Flamekin Herald&quot;, &quot;Leyline Axe&quot;, &quot;Glint-Eye Nephilim|GPT&quot;]}"/>
+    <property name="enemy" value="Yidris"/>
+    <property name="pursueRange" type="int" value="0"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="100"/>
    </properties>
   </object>
  </objectgroup>

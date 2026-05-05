@@ -10,6 +10,7 @@ import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.card.Card;
 import forge.game.mana.ManaCostBeingPaid;
+import forge.game.player.PlaySpellAbility;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.FullControlFlag;
 import forge.game.player.PlayerView;
@@ -19,7 +20,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityView;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
-import forge.player.HumanPlay;
 import forge.player.PlayerControllerHuman;
 import forge.util.Evaluator;
 import forge.util.ITriggerEvent;
@@ -331,7 +331,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
         locked = true;
         game.getAction().invoke(() -> {
-            if (HumanPlay.playSpellAbility(getController(), chosen.getActivatingPlayer(), chosen)) {
+            if (PlaySpellAbility.playSpellAbility(getController(), chosen.getActivatingPlayer(), chosen)) {
                 final List<AbilityManaPart> manaAbilities = chosen.getAllManaParts();
                 boolean restrictionsMet = true;
 

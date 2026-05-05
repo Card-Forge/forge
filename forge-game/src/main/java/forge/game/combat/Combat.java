@@ -27,6 +27,7 @@ import com.google.common.collect.Multimaps;
 import com.google.common.collect.Table;
 import forge.game.*;
 import forge.game.ability.AbilityKey;
+import forge.game.event.GameEventAddLog;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.keyword.Keyword;
@@ -288,13 +289,12 @@ public class Combat {
     public final Player getDefenderPlayerByAttacker(final Card c) {
         GameEntity defender = getDefenderByAttacker(c);
 
-        if (defender instanceof Player) {
-            return (Player) defender;
+        if (defender instanceof Player def) {
+            return def;
         }
 
         // maybe attack on a controlled planeswalker?
-        if (defender instanceof Card) {
-            Card def = (Card)defender;
+        if (defender instanceof Card def) {
             if (def.isBattle()) {
                 return def.getProtectingPlayer();
             } else {
@@ -513,7 +513,7 @@ public class Combat {
                 sb.append(", ");
             }
         }
-        playerWhoAttacks.getGame().getGameLog().add(GameLogEntryType.COMBAT, sb.toString());
+        playerWhoAttacks.getGame().fireEvent(new GameEventAddLog(GameLogEntryType.COMBAT, sb.toString()));
     }
 
     /**

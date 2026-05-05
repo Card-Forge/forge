@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Rogue
+Title=Rogue
+Icon=Rogue.jpg
+Difficulty=Hard
+Description=./Modern/Strixhaven_School_of_Mages/Brasatore_-_Red_Deck_Wins_(Modern,_#1145717)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Leonin Lightscribe
+4 Monastery Swiftspear
+4 Soul-Scar Mage
+4 Clever Lumimancer
+2 Boros Charm
+4 Manamorphose
+4 Lava Dart
+4 Lightning Bolt
+4 Crash Through
+4 Lava Spike
+4 Light Up the Stage
+1 Bloodstained Mire
+2 Sacred Foundry
+3 Snow-Covered Mountain
+4 Inspiring Vantage
+4 Sunbaked Canyon
+4 Arid Mesa
+[Sideboard]
+1 Lurrus of the Dream-Den
+2 Tormod's Crypt
+4 Kor Firewalker
+4 Path to Exile
+4 Rip Apart

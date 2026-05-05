@@ -71,26 +71,19 @@ public class CopyPermanentAi extends SpellAbilityAi {
             }
         }
 
-        if (sa.costHasManaX() && sa.getSVar("X").equals("Count$xPaid")) {
+        if (sa.costHasManaX()) {
             // Set PayX here to maximum value. (Osgir)
-            final int xPay = ComputerUtilCost.getMaxXValue(sa, aiPlayer, sa.isTrigger());
-
-            sa.setXManaCostPaid(xPay);
+            ComputerUtilCost.setMaxXValue(sa, aiPlayer, sa.isTrigger());
         }
 
         if (sa.usesTargeting() && sa.hasParam("TargetingPlayer")) {
             sa.resetTargets();
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
             sa.setTargetingPlayer(targetingPlayer);
-            if (targetingPlayer.getController().chooseTargetsFor(sa)) {
-                if (sa.isTargetNumberValid()) {
-                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                } else {
-                    return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
-                }
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            if (CardLists.getTargetableCards(aiPlayer.getGame().getCardsIn(sa.getTargetRestrictions().getZone()), sa).isEmpty()) {
+                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         } else if (sa.usesTargeting() && sa.getTargetRestrictions().canTgtPlayer()) {
                 if (!sa.isCurse()) {
                     if (sa.canTarget(aiPlayer)) {
@@ -211,9 +204,8 @@ public class CopyPermanentAi extends SpellAbilityAi {
             if (betterChoices.isEmpty()) {
                 if (mandatory) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                } else {
-                    return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
                 }
+                return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
             }
         }
 

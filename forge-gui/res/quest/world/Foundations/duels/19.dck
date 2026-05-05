@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Oreius
+Title=Oreius
+Icon=Oreius.jpg
+Difficulty=Medium
+Description=./Standard/Foundations/Robert_Taylor_-_Mono-black_Vampires_(Standard,_#2275946).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodletter of Aclazotz
+3 Gatekeeper of Malakir
+4 Kalastria Highborn
+4 Nullpriest of Oblivion
+3 Preacher of the Schism
+3 Unstoppable Slasher
+4 Vampire Nighthawk
+2 Anoint with Affliction
+4 Cut Down
+4 Go for the Throat
+1 Gix's Command
+2 Cavern of Souls
+2 Soulstone Sanctuary
+20 Swamp
+[Sideboard]
+1 Cruelclaw's Heist
+2 Disfigure
+4 Duress
+3 Ghost Vacuum
+1 Gix's Command
+2 Liliana of the Veil
+1 Sheoldred's Edict
+1 The End

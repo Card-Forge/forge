@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Grumpy
+Title=Grumpy
+Icon=Grumpy.jpg
+Difficulty=Very Hard
+Description=./Modern/Murders_at_Karlov_Manor/Aiwu_-_Dimir_Death's_Shadow_(Modern,_#1999539).dck
+Deck Type=constructed
+
+[Main]
+4 Death's Shadow
+3 Murktide Regent
+1 Brazen Borrower
+2 Street Wraith
+3 Orcish Bowmasters
+2 Dismember
+2 Stubborn Denial
+4 Fatal Push
+4 Counterspell
+3 Drown in the Loch
+3 Consider
+4 Thoughtseize
+4 Preordain
+2 Dress Down
+3 Island
+4 Watery Grave
+4 Flooded Strand
+3 Polluted Delta
+3 Misty Rainforest
+1 Otawara, Soaring City
+1 Undercity Sewers
+[Sideboard]
+1 Pithing Needle
+2 Spreading Seas
+2 Surgical Extraction
+2 Dauthi Voidwalker
+2 Tourach, Dread Cantor
+1 Cursed Totem
+2 Sheoldred's Edict
+2 Stern Scolding
+1 Tishana's Tidebinder

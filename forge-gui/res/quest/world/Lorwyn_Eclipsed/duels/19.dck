@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Dino
+Title=Dino
+Icon=Dino.jpg
+Difficulty=Medium
+Description=./Standard/Lorwyn_Eclipsed/DamianPhyrexian_-_Azorius_Tempo_(Standard,_#2819173).dck
+Deck Type=constructed
+
+[Main]
+4 Aang, Swift Savior
+4 Aven Interrupter
+4 Floodpits Drowner
+4 Voice of Victory
+2 Enduring Curiosity
+2 No More Lies
+2 Spell Snare
+1 Get Lost
+2 Avatar's Wrath
+4 High Noon
+3 Seam Rip
+2 Ajani, Outland Chaperone
+1 Elspeth, Storm Slayer
+4 Floodfarm Verge
+4 Hallowed Fountain
+4 Plains
+3 Island
+3 Starting Town
+2 Abandoned Air Temple
+2 Multiversal Passage
+1 Agna Qel'a
+1 Fountainport
+1 Restless Anchorage
+[Sideboard]
+2 Avatar's Wrath
+2 Disdainful Stroke
+2 Glen Elendra Guardian
+2 Soul-Guide Lantern
+2 Tishana's Tidebinder
+1 Clarion Conqueror
+1 Requisition Raid
+1 Rest in Peace
+1 Seam Rip
+1 Wan Shi Tong, Librarian

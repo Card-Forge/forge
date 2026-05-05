@@ -1,7 +1,5 @@
 package forge.game.staticability;
 
-import com.google.common.collect.ImmutableList;
-
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
@@ -40,8 +38,7 @@ public class StaticAbilityPanharmonicon {
 
         CardCollectionView cardList = null;
         // if LTB look back
-        if (t.getMode() == TriggerType.Exploited || t.getMode() == TriggerType.Sacrificed || t.getMode() == TriggerType.Destroyed ||
-                (t.getMode() == TriggerType.ChangesZone || t.getMode() == TriggerType.ChangesZoneAll) && "Battlefield".equals(t.getParam("Origin"))) {
+        if (t.looksBackInTime()) {
             if (runParams.containsKey(AbilityKey.LastStateBattlefield)) {
                 cardList = (CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield);
             }
@@ -133,7 +130,7 @@ public class StaticAbilityPanharmonicon {
             }
             CardCollection causesForTrigger = table.filterCards(trigOrigin, trigDestination, trigger.getParam("ValidCards"), trigger.getHostCard(), trigger);
 
-            CardCollection causesForStatic = table.filterCards(origin == null ? null : ImmutableList.of(ZoneType.smartValueOf(origin)), destination == null ? null : ZoneType.listValueOf(destination), stAb.getParam("ValidCause"), host, stAb);
+            CardCollection causesForStatic = table.filterCards(origin == null ? null : List.of(ZoneType.smartValueOf(origin)), destination == null ? null : ZoneType.listValueOf(destination), stAb.getParam("ValidCause"), host, stAb);
 
             // check that whatever caused the trigger to fire is also a cause the static applies for
             if (Collections.disjoint(causesForTrigger, causesForStatic)) {

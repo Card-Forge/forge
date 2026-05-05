@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Gambit
+Title=Gambit
+Icon=Gambit.jpg
+Difficulty=Medium
+Description=Mirrodin_Besieged/2011_TCGplayer.com_TCQ_-_Brooklyn,_NY_(2-13)/RobertKofsky_-_Boros_(Standard,_#10135).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+4 Plated Geopede
+2 Spikeshot Elder
+4 Squadron Hawk
+4 Steppe Lynx
+4 Stoneforge Mystic
+2 Adventuring Gear
+1 Basilisk Collar
+1 Bonehoard
+1 Sword of Body and Mind
+4 Lightning Bolt
+2 Journey to Nowhere
+2 Koth of the Hammer
+4 Arid Mesa
+4 Marsh Flats
+5 Mountain
+5 Plains
+4 Scalding Tarn
+3 Terramorphic Expanse
+[Sideboard]
+4 Arc Trail
+3 Kor Firewalker
+1 Leonin Relic-Warder
+3 Mark of Mutiny
+2 Shatter

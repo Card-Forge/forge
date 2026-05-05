@@ -1,0 +1,45 @@
+[metadata]
+Name=Dimir
+Deck Type=constructed
+Title=Dimir
+Description=Dimir
+Difficulty=Easy
+Icon=Riptide
+[Main]
+4 Aether Hub
+1 Canyon Slough
+4 Champion of Wits
+2 Commit // Memory
+4 Drowned Catacomb
+3 Dusk Legion Zealot
+1 Essence Scatter
+4 Fatal Push
+4 Fetid Pools
+3 Field of Ruin
+4 Glint-Sleeve Siphoner
+2 Gonti, Lord of Luxury
+1 Island
+1 Island
+1 Island
+1 Island
+2 Liliana, Death's Majesty
+1 Supreme Will
+1 Swamp
+1 Swamp
+3 Swamp
+1 Swamp
+3 The Scarab God
+2 Torrential Gearhulk
+4 Vraska's Contempt
+2 Walking Ballista
+[Sideboard]
+2 Aethersphere Harvester
+2 Arguel's Blood Fast
+1 Commit // Memory
+1 Doomfall
+2 Duress
+1 Glimmer of Genius
+1 Jace's Defeat
+2 Moment of Craving
+2 Negate
+1 River's Rebuke

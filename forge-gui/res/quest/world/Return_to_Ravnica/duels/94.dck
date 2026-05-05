@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Eomer
+Title=Eomer
+Icon=Eomer.jpg
+Difficulty=Very Hard
+Description=../Modern/Return_to_Ravnica/III_Torneo_Modern_Foromagic/Jes├║s_Leon_-_Zoo_(Modern,_#48483).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Birds of Paradise
+2 Huntmaster of the Fells
+4 Knight of the Reliquary
+4 Loxodon Smiter
+4 Noble Hierarch
+4 Tarmogoyf
+4 Woolly Thoctar
+4 Lightning Bolt
+4 Lightning Helix
+4 Path to Exile
+2 Ajani, Caller of the Pride
+4 Arid Mesa
+2 Forest
+2 Horizon Canopy
+4 Misty Rainforest
+1 Mountain
+1 Plains
+1 Rootbound Crag
+2 Sacred Foundry
+1 Sejiri Steppe
+1 Stomping Ground
+1 Tectonic Edge
+2 Temple Garden
+[Sideboard]
+2 Ancient Grudge
+2 Aven Mindcensor
+2 Back to Nature
+1 Bojuka Bog
+1 Ethersworn Canonist
+1 Gaddock Teeg
+2 Relic of Progenitus
+2 Stony Silence
+2 Thalia, Guardian of Thraben

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="34" height="59" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="73">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="34" height="59" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="74">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -31,8 +31,10 @@
  <objectgroup id="4" name="Objects">
   <object id="50" template="../../../../common/maps/obj/enemy.tx" x="240.561" y="404.87" width="64" height="64">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Eye of Ugin|WWK&quot;, &quot;Emrakul's Influence|EMN&quot;, &quot;Vestige of Emrakul|BFZ&quot;, &quot;Emrakul's Messenger|MH3&quot;, &quot;Mutated Cultist|M3C&quot;, &quot;Gisela, the Broken Blade&quot;, &quot;Ugin's Nexus|KTK&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Eye of Ugin|WWK&quot;, &quot;Emrakul's Influence|EMN&quot;, &quot;Emrakul's Messenger|MH3&quot;]}"/>
     <property name="enemy" value="Emrakul"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="50"/>
     <property name="threatRange" type="int" value="100"/>
    </properties>
@@ -63,6 +65,16 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 }
 ]</property>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/enemy.tx" x="242.923" y="404.848" width="64" height="64">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Sanctum of Ugin&quot;, &quot;Emrakul's Influence|EMN&quot;, &quot;Emrakul's Messenger|MH3&quot;]}"/>
+    <property name="enemy" value="Emrakul"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="100"/>
    </properties>
   </object>
  </objectgroup>

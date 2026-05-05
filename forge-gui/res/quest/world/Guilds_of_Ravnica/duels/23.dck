@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Neo
+Title=Neo
+Icon=Neo.jpg
+Difficulty=Medium
+Description=./Standard/Guilds_of_Ravnica/Adachi_Ryousuke_-_Mono_Black_(Standard,_#784560).dck
+Deck Type=constructed
+
+[Main]
+3 Dread Shade
+4 Dusk Legion Zealot
+2 Josu Vess, Lich Knight
+3 Plaguecrafter
+3 Ravenous Chupacabra
+1 Tetzimoc, Primal Death
+3 Treasure Map
+4 Cast Down
+4 Vraska's Contempt
+1 Find // Finality
+3 Ritual of Soot
+4 Karn, Scion of Urza
+4 Cabal Stronghold
+1 Field of Ruin
+20 Swamp
+[Sideboard]
+4 Kitesail Freebooter
+2 Moment of Craving
+4 Duress
+1 Golden Demise
+1 Ritual of Soot
+2 Arguel's Blood Fast
+1 Treasure Map

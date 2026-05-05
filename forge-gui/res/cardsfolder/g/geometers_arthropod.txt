@@ -1,0 +1,8 @@
+Name:Geometer's Arthropod
+ManaCost:G U
+Types:Creature Fractal Crab
+PT:1/4
+T:Mode$ SpellCast | ValidCard$ Card.hasXCost | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ Whenever you cast a spell with {X} in its mana cost, look at the top X cards of your library. Put one of them into your hand and the rest of the bottom of your library in a random order.
+SVar:TrigDig:DB$ Dig | DigNum$ X | ChangeNum$ 1 | NoReveal$ True | RestRandomOrder$ True
+SVar:X:Count$xPaid
+Oracle:Whenever you cast a spell with {X} in its mana cost, look at the top X cards of your library. Put one of them into your hand and the rest of the bottom of your library in a random order.

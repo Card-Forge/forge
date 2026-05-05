@@ -67,7 +67,7 @@ public abstract class PaperCardPredicates {
     public static Predicate<PaperCard> printedInAnyEditions(final String[] editionCodes) {
         Set<String> editions = new HashSet<>(Arrays.asList(editionCodes));
 
-        return card -> StaticData.instance().getCommonCards().getAllCards(card.getName()).stream()
+        return card -> StaticData.instance().getCommonCards().getAllCardsNoAlt(card.getName()).stream()
             .map(PaperCard::getEdition).anyMatch(editionCode ->
                 editions.contains(editionCode) &&
                     StaticData.instance().getCardEdition(editionCode).isCardObtainable(card.getName())
@@ -80,7 +80,7 @@ public abstract class PaperCardPredicates {
     public static Predicate<PaperCard> onlyPrintedInEditions(final String[] editionCodes) {
         Set<String> editions = new HashSet<>(Arrays.asList(editionCodes));
 
-        return card -> StaticData.instance().getCommonCards().getAllCards(card.getName()).stream()
+        return card -> StaticData.instance().getCommonCards().getAllCardsNoAlt(card.getName()).stream()
             .map(PaperCard::getEdition).allMatch(editionCode ->
                 editions.contains(editionCode) &&
                     StaticData.instance().getCardEdition(editionCode).isCardObtainable(card.getName())
@@ -91,7 +91,7 @@ public abstract class PaperCardPredicates {
      * Filters cards that are obtainable in any edition.
      */
     public static Predicate<PaperCard> isObtainableAnyEdition() {
-        return card -> StaticData.instance().getCommonCards().getAllCards(card.getName()).stream()
+        return card -> StaticData.instance().getCommonCards().getAllCardsNoAlt(card.getName()).stream()
             .map(PaperCard::getEdition).anyMatch(editionCode ->
                 StaticData.instance().getCardEdition(editionCode).isCardObtainable(card.getName())
             );
@@ -107,7 +107,7 @@ public abstract class PaperCardPredicates {
         Set<String> restrictedEditions = new HashSet<>(Arrays.asList(restrictedEditionCodes));
 
         return card -> StaticData.instance().getCommonCards()
-            .getAllCards(card.getName()).stream()
+            .getAllCardsNoAlt(card.getName()).stream()
             .map(PaperCard::getEdition)
             .anyMatch(editionCode ->
                 !restrictedEditions.contains(editionCode) &&

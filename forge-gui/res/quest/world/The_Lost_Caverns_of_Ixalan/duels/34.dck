@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Dino
+Title=Dino
+Icon=Dino.jpg
+Difficulty=Easy
+Description=./Standard/The_Lost_Caverns_of_Ixalan/ElkVinci_-_Rakdos_Midrange_(Standard,_#1993113).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodtithe Harvester
+4 Deep-Cavern Bat
+2 Gix, Yawgmoth Praetor
+1 Sheoldred, the Apocalypse
+4 Preacher of the Schism
+2 Archfiend of the Dross
+2 Tenacious Underdog
+4 Inti, Seneschal of the Sun
+2 Bitter Triumph
+3 Cut Down
+2 Go for the Throat
+1 The End
+1 Gix's Command
+2 Ob Nixilis, the Adversary
+2 Liliana of the Veil
+6 Swamp
+4 Haunted Ridge
+2 Mountain
+4 Sulfurous Springs
+4 Blackcleave Cliffs
+1 Takenuma, Abandoned Mire
+1 Sokenzan, Crucible of Defiance
+2 Restless Vents
+[Sideboard]
+1 The Stone Brain
+3 Hidetsugu Consumes All
+2 Ob Nixilis, the Adversary
+2 Gix's Command
+1 Aclazotz, Deepest Betrayal
+4 Duress
+1 Extract the Truth
+1 Urabrask's Forge

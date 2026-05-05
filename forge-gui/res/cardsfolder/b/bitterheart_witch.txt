@@ -3,6 +3,7 @@ ManaCost:4 B
 Types:Creature Human Shaman
 PT:1/2
 K:Deathtouch
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you may search your library for a Curse card, put it onto the battlefield attached to target player, then shuffle.
-SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.Curse | ChangeNum$ 1 | ShuffleNonMandatory$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPump | OptionalDecider$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you may search your library for a Curse card, put it onto the battlefield attached to target player, then shuffle.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Player | SubAbility$ DBChange
+SVar:DBChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.Curse | ChangeNum$ 1 | ShuffleNonMandatory$ True | AttachedTo$ Targeted
 Oracle:Deathtouch\nWhen Bitterheart Witch dies, you may search your library for a Curse card, put it onto the battlefield attached to target player, then shuffle.

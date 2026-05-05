@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling Red
+Title=Dungeon Crawling Red
+Icon=Dungeon Crawling Red.jpg
+Difficulty=Easy
+Description=./Standard/Theros_Beyond_Death/Aaron_Gondo_-_Mono-R_Aggro_(Standard,_#948267).dck
+Deck Type=constructed
+
+[Main]
+2 Anax, Hardened in the Forge
+2 Torbran, Thane of Red Fell
+2 Bonecrusher Giant
+2 Scampering Scorcher
+2 Spear Spewer
+3 Legion Warboss
+4 Scorch Spitter
+4 Chandra's Spitfire
+4 Torch Courier
+4 Grim Initiate
+4 Shock
+4 Cavalcade of Calamity
+2 Chandra, Acolyte of Flame
+21 Mountain
+[Sideboard]
+1 Dreadhorde Arcanist
+2 Infuriate
+2 Repeated Reverberation
+2 Chandra's Triumph
+2 Chandra's Embercat
+2 Chandra's Pyrohelix
+4 Light Up the Stage

@@ -3,7 +3,6 @@ package forge.deck;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
-import com.google.common.collect.ImmutableList;
 import forge.Forge;
 import forge.Forge.KeyInputAdapter;
 import forge.Graphics;
@@ -463,12 +462,15 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         tabPages.stream().map(DeckEditorPage.class::cast).forEach(DeckEditorPage::initialize);
         tabsInitialized = true;
 
-        //Pick an initial page to show. Test for catalog page so we don't switch off a draft screen.
-        if(!tabPages.isEmpty() && tabPages.get(0) instanceof CatalogPage) { //DraftPackPage is also a CatalogPage
-            if(mainDeckPage != null && mainDeckPage.cardManager.getItemCount() > 0)
+        //Pick an initial page to show.
+        if(!tabPages.isEmpty()) {
+            if(isDraftEditor() && isDrafting() && catalogPage != null)
+                setSelectedPage(catalogPage);
+            else if(mainDeckPage != null && mainDeckPage.cardManager.getItemCount() > 0)
                 setSelectedPage(mainDeckPage);
             else if(sideboardPage != null && sideboardPage.cardManager.getItemCount() > 0)
                 setSelectedPage(sideboardPage);
+            //Otherwise we just show whatever tab is first.
         }
 
         //Show any extra sections that are currently in use.
@@ -979,7 +981,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         save(null);
     }
 
-    private final static ImmutableList<String> onCloseOptions = ImmutableList.of(
+    private final static List<String> onCloseOptions = List.of(
         Localizer.getInstance().getMessage("lblSave"),
         Localizer.getInstance().getMessage("lblDontSave"),
         Localizer.getInstance().getMessage("lblCancel")
@@ -1550,6 +1552,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 return false;
             if(parentScreen.getCommanderPage().cardManager.getPool().contains(card))
                 return false; //Don't let it be the commander if it already is one.
+            if(!parentScreen.shouldEnforceConformity())
+                return card.getRules().canBeCreature();
             DeckFormat format = parentScreen.editorConfig.getDeckFormat();
             if(format == null)
                 format = DeckFormat.Commander;
@@ -2055,6 +2059,17 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         protected void addPerCardItems(FDropDownMenu menu, PaperCard card) {
+            Deck currentDeck = parentScreen.getDeck();
+            if (currentDeck != null) {
+                // Add key card toggle option
+                boolean isKeyCard = currentDeck.getKeyCards().stream().anyMatch(name -> name.equalsIgnoreCase(card.getName()));
+                String keyCardLabel = isKeyCard ? Forge.getLocalizer().getMessage("lblRemoveKeyCard") : Forge.getLocalizer().getMessage("lblAddKeyCard");
+                
+                menu.addItem(new FMenuItem(keyCardLabel, Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, e -> {
+                    toggleCardKeyCard(currentDeck, card, isKeyCard);
+                }));
+            }
+
             int markedColorCount = card.getRules().getSetColorID();
             if (markedColorCount > 0) {
                 menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblColorIdentity"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, e -> {
@@ -2138,6 +2153,24 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             }).handleEvent(e);
         }
 
+        private void toggleCardKeyCard(final Deck deck, final PaperCard card, boolean isCurrentlyKeyCard) {
+            String cardName = card.getName();
+            
+            if (isCurrentlyKeyCard) {
+                // Remove from key cards
+                deck.removeKeyCard(cardName);
+            } else {
+                // Add to key cards
+                deck.addKeyCard(cardName);
+            }
+            
+            // Mark deck as modified so it will be saved
+            parentScreen.getDeckController().notifyModelChanged();
+            
+            // Refresh the view to show updated status
+            cardManager.refresh();
+        }
+
         private boolean isPartnerCommander(final PaperCard card) {
             if (!parentScreen.isCommanderEditor() || parentScreen.getDeck().getCommanders().isEmpty()) {
                 return false;
@@ -2191,6 +2224,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 draft.postDraftActions();
                 hideTab(); //hide this tab page when finished drafting
                 parentScreen.completeDraft();
+                return; // pool is null; do not fall through to cardManager.setPool(pool) below
             }
 
             this.draftingFaceDown = getDraftPlayer().hasArchdemonCurse();

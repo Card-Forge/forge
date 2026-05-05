@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="145">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="158">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -34,6 +34,8 @@
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;nomad stadium|ody&quot;, &quot;true believer|ONS&quot;, &quot;divine sacrament|ody&quot;, &quot;seal of cleansing|nem&quot;, &quot;sword of the chosen|sth&quot;]}"/>
     <property name="enemy" value="Jareth"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
@@ -42,6 +44,8 @@
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Barbarian Ring|ODY&quot;, &quot;desert drake|POR&quot;, &quot;dragon roost|ONS&quot;, &quot;seal of fire|nem&quot;, &quot;dragon mask|VIS&quot;]}"/>
     <property name="enemy" value="Rorix"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
@@ -55,40 +59,50 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Plains|PGRU&quot;, &quot;Island|PGRU&quot;, &quot;Swamp|PGRU&quot;, &quot;Mountain|PGRU&quot;, &quot;Forest|PGRU&quot;, &quot;Urza's Filter|INV&quot;, &quot;Howling Mine|7ED&quot;, &quot;Diamond Kaleidoscope|VIS&quot;, &quot;Rewards of Diversity|INV&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Crystal Quarry|ODY&quot;, &quot;City of Brass|ARN&quot;, &quot;Reflecting Pool|TMP&quot;, &quot;Urza's Filter|INV&quot;, &quot;Howling Mine|7ED&quot;, &quot;Diamond Kaleidoscope|VIS&quot;, &quot;Rewards of Diversity|INV&quot;]}"/>
     <property name="enemy" value="Cromat"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
   <object id="96" template="../../../../common/maps/obj/enemy.tx" x="388" y="128.667">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Tolaria|LEG&quot;, &quot;Plains|LEA&quot;, &quot;Urborg|LEG&quot;, &quot;Tawnos's Wand|ATQ&quot;, &quot;Wall of Vapor|LEG&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Tolaria|LEG&quot;, &quot;Plains|LEA&quot;, &quot;Urborg|LEG&quot;, &quot;Wall of Vapor|LEG&quot;]}"/>
     <property name="enemy" value="Chromium"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
   <object id="97" template="../../../../common/maps/obj/enemy.tx" x="338.333" y="318.333">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Hammerheim|LEG&quot;, &quot;Urborg|LEG&quot;, &quot;Pendelhaven|LEG&quot;, &quot;Celestial Sword|ICE&quot;, &quot;Wall of Dust|LEG&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Hammerheim|LEG&quot;, &quot;Urborg|LEG&quot;, &quot;Pendelhaven|LEG&quot;, &quot;Wall of Dust|LEG&quot;]}"/>
     <property name="enemy" value="Vaevictis"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
   <object id="98" template="../../../../common/maps/obj/enemy.tx" x="287" y="366.333">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Hammerheim|LEG&quot;, &quot;Plains|LEA&quot;, &quot;Pendelhaven|LEG&quot;, &quot;Dragon Blood|USG&quot;, &quot;Wall of Earth|LEG&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Hammerheim|LEG&quot;, &quot;Plains|LEA&quot;, &quot;Pendelhaven|LEG&quot;, &quot;Wall of Earth|LEG&quot;]}"/>
     <property name="enemy" value="Palladia-Mors"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
   <object id="99" template="../../../../common/maps/obj/enemy.tx" x="327.334" y="246">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Tolaria|LEG&quot;, &quot;Plains|LEA&quot;, &quot;Pendelhaven|LEG&quot;, &quot;Aegis of the Meek|ICE&quot;, &quot;Wall of Light|LEG&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Tolaria|LEG&quot;, &quot;Plains|LEA&quot;, &quot;Pendelhaven|LEG&quot;, &quot;Wall of Light|LEG&quot;]}"/>
     <property name="enemy" value="Arcades"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
@@ -132,6 +146,8 @@
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Cabal Pit|ODY&quot;, &quot;infernal medusa|LEG&quot;, &quot;no rest for the wicked|USG&quot;, &quot;bad moon|5ed&quot;, &quot;phyrexian splicer|tmp&quot;]}"/>
     <property name="enemy" value="Visara"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
@@ -140,6 +156,8 @@
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Cephalid Coliseum|ODY&quot;, &quot;jandor's saddlebags|7ed&quot;, &quot;ghosthelm courier|ONS&quot;, &quot;rhystic deluge|pcy&quot;, &quot;second chance|ULG&quot;]}"/>
     <property name="enemy" value="Arcanis"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
@@ -148,14 +166,18 @@
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Centaur garden|ODY&quot;, &quot;storm front|TMP&quot;, &quot;floral spuzzem|LEG&quot;, &quot;seal of strength|nem&quot;, &quot;triangle of war|VIS&quot;]}"/>
     <property name="enemy" value="Silvos"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
-  <object id="108" template="../../../../common/maps/obj/enemy.tx" x="243" y="210">
+  <object id="108" template="../../../../common/maps/obj/enemy.tx" x="243.364" y="209.455">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Tolaria|LEG&quot;, &quot;Hammerheim|LEG&quot;, &quot;Urborg|LEG&quot;, &quot;Draconian Cylix|FEM&quot;, &quot;Wall of Putrid Flesh|LEG&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Tolaria|LEG&quot;, &quot;Hammerheim|LEG&quot;, &quot;Urborg|LEG&quot;, &quot;Wall of Putrid Flesh|LEG&quot;]}"/>
     <property name="enemy" value="Nicol Bolas"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="50"/>
    </properties>
@@ -629,6 +651,123 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
   }
 ]
 </property>
+   </properties>
+  </object>
+  <object id="145" template="../../../../common/maps/obj/enemy.tx" x="176.25" y="575.75">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;infernal medusa|LEG&quot;, &quot;no rest for the wicked|USG&quot;, &quot;bad moon|5ed&quot;, &quot;phyrexian splicer|tmp&quot;]}"/>
+    <property name="enemy" value="Visara"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="146" template="../../../../common/maps/obj/enemy.tx" x="96" y="499.5">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;storm front|TMP&quot;, &quot;floral spuzzem|LEG&quot;, &quot;seal of strength|nem&quot;, &quot;triangle of war|VIS&quot;]}"/>
+    <property name="enemy" value="Silvos"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="147" template="../../../../common/maps/obj/enemy.tx" x="113.5" y="433.25">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;desert drake|POR&quot;, &quot;dragon roost|ONS&quot;, &quot;seal of fire|nem&quot;, &quot;dragon mask|VIS&quot;]}"/>
+    <property name="enemy" value="Rorix"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="148" template="../../../../common/maps/obj/enemy.tx" x="401" y="575.25">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;true believer|ONS&quot;, &quot;divine sacrament|ody&quot;, &quot;seal of cleansing|nem&quot;, &quot;sword of the chosen|sth&quot;]}"/>
+    <property name="enemy" value="Jareth"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="149" template="../../../../common/maps/obj/enemy.tx" x="415.25" y="409.75">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;jandor's saddlebags|7ed&quot;, &quot;ghosthelm courier|ONS&quot;, &quot;rhystic deluge|pcy&quot;, &quot;second chance|ULG&quot;]}"/>
+    <property name="enemy" value="Arcanis"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="150" template="../../../../common/maps/obj/enemy.tx" x="286.917" y="365">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Hammerheim|LEG&quot;, &quot;Plains|LEA&quot;, &quot;Wall of Earth|LEG&quot;]}"/>
+    <property name="enemy" value="Palladia-Mors"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="153" template="../../../../common/maps/obj/enemy.tx" x="337.75" y="317.75">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Urborg|LEG&quot;, &quot;Pendelhaven|LEG&quot;, &quot;Wall of Dust|LEG&quot;]}"/>
+    <property name="enemy" value="Vaevictis"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="154" template="../../../../common/maps/obj/enemy.tx" x="327.227" y="245.636">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Tolaria|LEG&quot;, &quot;Pendelhaven|LEG&quot;, &quot;Wall of Light|LEG&quot;]}"/>
+    <property name="enemy" value="Arcades"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="155" template="../../../../common/maps/obj/enemy.tx" x="387.636" y="128.182">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Plains|LEA&quot;, &quot;Urborg|LEG&quot;, &quot;Wall of Vapor|LEG&quot;]}"/>
+    <property name="enemy" value="Chromium"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="156" template="../../../../common/maps/obj/enemy.tx" x="242.727" y="208.545">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Tolaria|LEG&quot;, &quot;Hammerheim|LEG&quot;, &quot;Wall of Putrid Flesh|LEG&quot;]}"/>
+    <property name="enemy" value="Nicol Bolas"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="50"/>
+   </properties>
+  </object>
+  <object id="157" template="../../../../common/maps/obj/enemy.tx" x="139.818" y="96.1818">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;With a warbling death cry, the strange creature shimmers and then explodes in a flash of light, leaving nothing behind to indicate it ever existed.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Crystal Quarry|ODY&quot;, &quot;City of Brass|ARN&quot;, &quot;Urza's Filter|INV&quot;, &quot;Howling Mine|7ED&quot;, &quot;Diamond Kaleidoscope|VIS&quot;, &quot;Rewards of Diversity|INV&quot;]}"/>
+    <property name="enemy" value="Cromat"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="50"/>
    </properties>
   </object>
  </objectgroup>

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Regigigas
+Title=Regigigas
+Icon=Regigigas.jpg
+Difficulty=Easy
+Description=./Standard/Ikoria_Lair_of_Behemoths/Akazaki_Daigo_-_WUG_Control_(Standard,_#1001033).dck
+Deck Type=constructed
+
+[Main]
+4 Brazen Borrower
+2 Aether Gust
+2 Absorb
+4 Mystical Dispute
+4 Shatter the Sky
+2 The Birth of Meletis
+3 Shark Typhoon
+3 Omen of the Sea
+3 Elspeth Conquers Death
+3 Narset, Parter of Veils
+4 Teferi, Time Raveler
+1 Castle Vantress
+2 Castle Ardenvale
+2 Fabled Passage
+3 Temple of Enlightenment
+4 Hallowed Fountain
+5 Plains
+9 Island
+[Sideboard]
+1 Heliod's Intervention
+1 Dream Trawler
+1 Elspeth Conquers Death
+1 Narset's Reversal
+1 Commence the Endgame
+2 Disdainful Stroke
+2 Dovin's Veto
+3 Giant Killer
+3 Glass Casket

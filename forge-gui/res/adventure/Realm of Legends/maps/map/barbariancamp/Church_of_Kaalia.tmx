@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="95">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="99">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -55,19 +55,20 @@ With that, she finally collapses, dead.&quot;,
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Tariel, Reckoner of Souls|CMD&quot;, &quot;Nomad Outpost|TDM&quot;, &quot;Lightning Greaves|C19&quot;, &quot;Scroll of griselbrand|AVR&quot;, &quot;Scroll of avacyn|AVR&quot;, &quot;Vial of Dragonfire|DTK&quot; ] }"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Tariel, Reckoner of Souls|CMD&quot;, &quot;Nomad Outpost|TDM&quot;, &quot;Swiftfoot Boots&quot;, &quot;Scroll of griselbrand|AVR&quot;, &quot;Scroll of avacyn|AVR&quot;, &quot;Vial of Dragonfire|DTK&quot; ] }"/>
     <property name="enemy" value="Kaalia"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
-  <object id="66" template="../../obj/treasure.tx" x="207.833" y="49.8333">
+  <object id="66" template="../../obj/treasure.tx" x="207.833" y="50.0833">
    <properties>
     <property name="reward">{
 &quot;type&quot;: &quot;card&quot;,
-&quot;probability&quot;: 1,
 &quot;count&quot;: 3,
-&quot;subTypes&quot;: &quot;dragon&quot;,
-&quot;rarity&quot;: &quot;mythic rare&quot;
+&quot;subTypes&quot;: &quot;Dragon&quot;,
+&quot;rarity&quot;: [&quot;mythic rare&quot;]
 }</property>
    </properties>
   </object>
@@ -93,6 +94,8 @@ With that, she finally collapses, dead.&quot;,
    <properties>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Tombstalker|TSR&quot;, &quot;Swamp|JMP|[54]&quot;, &quot;Unholy Annex|DSK&quot; ] }"/>
     <property name="enemy" value="Vilis"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="10"/>
    </properties>
   </object>
@@ -100,6 +103,8 @@ With that, she finally collapses, dead.&quot;,
    <properties>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Great Hall of Starnheim|KHM&quot;, &quot;Starnheim Memento|J25&quot;, &quot;youthful valkyrie|kld&quot;, &quot;angelic armaments|avr&quot; ] }"/>
     <property name="enemy" value="Firja"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="10"/>
    </properties>
   </object>
@@ -107,6 +112,8 @@ With that, she finally collapses, dead.&quot;,
    <properties>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Dragon Whelp|LEA&quot;, &quot;Mountain|JMP|[62]&quot;, &quot;awaken the sky tyrant|C15&quot; ] }"/>
     <property name="enemy" value="Drakuseth"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="60"/>
    </properties>
   </object>
@@ -115,10 +122,9 @@ With that, she finally collapses, dead.&quot;,
    <properties>
     <property name="reward">{
 &quot;type&quot;: &quot;card&quot;,
-&quot;probability&quot;: 1,
 &quot;count&quot;: 3,
-&quot;subTypes&quot;: &quot;angel&quot;,
-&quot;rarity&quot;: &quot;mythic rare&quot;
+&quot;subTypes&quot;: &quot;Angel&quot;,
+&quot;rarity&quot;: [&quot;mythic rare&quot;]
 }</property>
    </properties>
   </object>
@@ -126,10 +132,9 @@ With that, she finally collapses, dead.&quot;,
    <properties>
     <property name="reward">{
 &quot;type&quot;: &quot;card&quot;,
-&quot;probability&quot;: 1,
 &quot;count&quot;: 3,
-&quot;subTypes&quot;: &quot;demon&quot;,
-&quot;rarity&quot;: &quot;mythic rare&quot;
+&quot;subTypes&quot;: &quot;Demon&quot;,
+&quot;rarity&quot;: [&quot;mythic rare&quot;]
 }</property>
    </properties>
   </object>
@@ -149,7 +154,7 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
 ]</property>
    </properties>
   </object>
-  <object id="94" template="../../../../common/maps/obj/dialog.tx" x="161.058" y="110.777" width="111.273" height="62.5172" visible="1">
+  <object id="94" template="../../../../common/maps/obj/dialog.tx" x="160.141" y="101.027" width="111.273" height="62.5172" visible="1">
    <properties>
     <property name="dialog">[
 {
@@ -160,6 +165,61 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 }
 ]</property>
+   </properties>
+  </object>
+  <object id="95" template="../../../../common/maps/obj/enemy.tx" x="208.667" y="163.333">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Mountain|JMP|[62]&quot;, &quot;awaken the sky tyrant|C15&quot; ] }"/>
+    <property name="enemy" value="Drakuseth"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="96" template="../../../../common/maps/obj/enemy.tx" gid="2147495067" x="277" y="89">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Great Hall of Starnheim|KHM&quot;, &quot;youthful valkyrie|kld&quot;, &quot;angelic armaments|avr&quot; ] }"/>
+    <property name="enemy" value="Firja"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="97" template="../../../../common/maps/obj/enemy.tx" x="134.667" y="88.3333">
+   <properties>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Tombstalker|TSR&quot;, &quot;Swamp|JMP|[54]&quot; ] }"/>
+    <property name="enemy" value="Vilis"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="98" template="../../../../common/maps/obj/enemy.tx" x="207.583" y="64.0833">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;The mighty priestess finally crumples under the weight of her injuries, a spiteful rage in her eyes as her body clings to its last embers of strength.
+
+'Someday I'll have my revenge on you... even if I have to claw my way out of hell... I have lots of friends there... it'll be... easy.' 
+
+With that, she finally collapses, dead.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Nomad Outpost|TDM&quot;, &quot;Swiftfoot Boots&quot;, &quot;Scroll of griselbrand|AVR&quot;, &quot;Scroll of avacyn|AVR&quot;, &quot;Vial of Dragonfire|DTK&quot; ] }"/>
+    <property name="enemy" value="Kaalia"/>
+    <property name="spawn.Easy" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="true"/>
+    <property name="threatRange" type="int" value="30"/>
    </properties>
   </object>
  </objectgroup>

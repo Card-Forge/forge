@@ -25,7 +25,6 @@ import java.util.*;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicReference;
-
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JOptionPane;
@@ -49,10 +48,8 @@ import forge.control.KeyboardShortcuts;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deckchooser.FDeckViewer;
-import forge.game.GameEntity;
 import forge.game.GameEntityView;
 import forge.game.GameView;
-import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
@@ -63,16 +60,17 @@ import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
-import forge.game.player.Player;
 import forge.game.player.PlayerController.FullControlFlag;
 import forge.game.player.PlayerView;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.spellability.StackItemView;
-import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
-import forge.gamemodes.match.AbstractGuiGame;
+import forge.util.IHasForgeLog;
+import forge.gamemodes.match.YieldController;
+import forge.gamemodes.match.YieldMarker;
+import forge.gamemodes.match.YieldUpdate;
+import forge.gamemodes.net.NetworkGuiGame;
+import forge.interfaces.IGameController;
 import forge.gui.FNetOverlay;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -123,7 +121,9 @@ import forge.toolbox.imaging.FImagePanel.AutoSizeImageMode;
 import forge.toolbox.imaging.FImageUtil;
 import forge.toolbox.special.PhaseIndicator;
 import forge.toolbox.special.PhaseLabel;
+import forge.trackable.Tracker;
 import forge.trackable.TrackableCollection;
+import forge.trackable.TrackableTypes;
 import forge.util.FSerializableFunction;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
@@ -132,6 +132,7 @@ import forge.util.collect.FCollectionView;
 import forge.view.FView;
 import forge.view.arcane.CardPanel;
 import forge.view.arcane.FloatingZone;
+
 import net.miginfocom.layout.LinkHandler;
 import net.miginfocom.swing.MigLayout;
 
@@ -144,8 +145,8 @@ import net.miginfocom.swing.MigLayout;
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  */
 public final class CMatchUI
-    extends AbstractGuiGame
-    implements ICDoc, IMenuProvider {
+    extends NetworkGuiGame
+    implements ICDoc, IMenuProvider, IHasForgeLog {
 
     public static final EnumSet<ZoneType> FLOATING_ZONE_TYPES = EnumSet.of(ZoneType.Library, ZoneType.Graveyard, ZoneType.Exile,
             ZoneType.Flashback, ZoneType.Command, ZoneType.Ante, ZoneType.Sideboard, ZoneType.PlanarDeck,
@@ -183,7 +184,7 @@ public final class CMatchUI
         this.myDocs.put(EDocID.CARD_PICTURE, cDetailPicture.getCPicture().getView());
         this.myDocs.put(EDocID.CARD_DETAIL, cDetailPicture.getCDetail().getView());
         // only create an ante doc if playing for ante
-        if (isPreferenceEnabled(FPref.UI_ANTE)) {
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE)) {
             this.myDocs.put(EDocID.CARD_ANTES, cAntes.getView());
         } else {
             this.myDocs.put(EDocID.CARD_ANTES, null);
@@ -201,10 +202,6 @@ public final class CMatchUI
         for (final Entry<EDocID, IVDoc<? extends ICDoc>> doc : myDocs.entrySet()) {
             doc.getKey().setDoc(doc.getValue());
         }
-    }
-
-    private static boolean isPreferenceEnabled(final ForgePreferences.FPref preferenceName) {
-        return FModel.getPreferences().getPrefBoolean(preferenceName);
     }
 
     FScreen getScreen() {
@@ -230,6 +227,44 @@ public final class CMatchUI
 
         cDetailPicture.setGameView(gameView0);
         screen.setTabCaption(gameView0.getTitle());
+        refreshAllViews();
+    }
+
+    @Override
+    protected void afterDeltaApplied() {
+        refreshAllViews();
+    }
+
+    @Override
+    public void refreshYieldUi(final PlayerView player) {
+        FThreads.invokeInEdtNowOrLater(() -> {
+            // Marker is rendered only on the local player's view of the targeted phase indicator.
+            PlayerView local = getCurrentPlayer();
+            if (!player.equals(local)) {
+                return;
+            }
+            for (final VField f : getFieldViews()) {
+                for (PhaseLabel l : f.getPhaseIndicator().allLabels()) {
+                    l.setYieldMarked(false);
+                }
+            }
+            IGameController controller = getGameController(local);
+            YieldMarker marker = controller != null ? controller.getYieldController().getAutoPassUntilMarker() : null;
+            if (marker == null) {
+                return;
+            }
+            VField markedField = getFieldViewFor(marker.getPhaseOwner());
+            if (markedField == null) {
+                return;
+            }
+            PhaseLabel target = markedField.getPhaseIndicator().getLabelFor(marker.getPhase());
+            if (target != null) {
+                target.setYieldMarked(true);
+            }
+        });
+    }
+
+    private void refreshAllViews() {
         if (sortedPlayers != null) {
             FThreads.invokeInEdtNowOrLater(() -> {
                 for (final VField f : getFieldViews()) {
@@ -292,6 +327,14 @@ public final class CMatchUI
     private void initMatch(final FCollectionView<PlayerView> sortedPlayers, final Collection<PlayerView> myPlayers) {
         this.sortedPlayers = sortedPlayers;
         allHands = sortedPlayers.size() == getLocalPlayerCount();
+
+        if (isNetGame()) {
+            netLog.debug("sortedPlayers count={}", sortedPlayers.size());
+            for (PlayerView p : sortedPlayers) {
+                netLog.debug("  Player ID={}, hash={}, isLocal={}",
+                        p.getId(), System.identityHashCode(p), (myPlayers != null && myPlayers.contains(p)));
+            }
+        }
 
         final String[] indices = FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",");
 
@@ -366,9 +409,12 @@ public final class CMatchUI
         return view.getHands();
     }
     public VHand getHandFor(final PlayerView p) {
-        final int idx = getPlayerIndex(p);
-        final List<VHand> allHands = getHandViews();
-        return idx < 0 || idx >= allHands.size() ? null : allHands.get(idx);
+        for (final VHand hand : getHandViews()) {
+            if (p.equals(hand.getPlayer())) {
+                return hand;
+            }
+        }
+        return null;
     }
 
     @Override
@@ -410,7 +456,17 @@ public final class CMatchUI
         }
         cCombat.setModel(combat);
         cCombat.update();
-    } // showCombat(CombatView)
+
+        // Combat pairings changed — rebuild layout so grouping reflects them
+        if (!"default".equals(FModel.getPreferences().getPref(FPref.UI_GROUP_PERMANENTS))
+                || FModel.getPreferences().getPrefBoolean(FPref.UI_SEPARATE_COMBAT_STACKS)) {
+            FThreads.invokeInEdtNowOrLater(() -> {
+                for (final VField f : getFieldViews()) {
+                    f.getTabletop().doLayout();
+                }
+            });
+        }
+    }
 
     @Override
     public void updateDependencies() {
@@ -434,6 +490,11 @@ public final class CMatchUI
     public void updateZones(final Iterable<PlayerZoneUpdate> zonesToUpdate) {
         for (final PlayerZoneUpdate update : zonesToUpdate) {
             final PlayerView owner = update.getPlayer();
+
+            if (isNetGame()) {
+                netLog.debug("Processing update for player {}, zones={}, ownerHash={}",
+                        owner.getId(), update.getZones(), System.identityHashCode(owner));
+            }
 
             boolean setupPlayZone = false, updateHand = false, updateAnte = false, updateZones = false;
             for (final ZoneType zone : update.getZones()) {
@@ -460,13 +521,21 @@ public final class CMatchUI
                 cAntes.update();
             }
             final VField vField = getFieldViewFor(owner);
-            if(vField == null)
+            if(vField == null) {
+                netLog.error("vField is null for player {}, sortedPlayers.indexOf={}",
+                        owner.getId(), sortedPlayers.indexOf(owner));
                 return;
+            }
             if (setupPlayZone) {
                 vField.getTabletop().update();
             }
             if (updateHand) {
                 final VHand vHand = getHandFor(owner);
+                if (isNetGame()) {
+                    netLog.debug("updateHand for player {}, vHand={}, handSize={}",
+                            owner.getId(), (vHand != null ? "exists" : "NULL"),
+                            (owner.getHand() != null ? String.valueOf(owner.getHand().size()) : "null"));
+                }
                 if (vHand != null) {
                     vHand.getLayoutControl().updateHand();
                 }
@@ -580,10 +649,10 @@ public final class CMatchUI
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
                 if (p.getCards(ZoneType.Battlefield) != null) {
-                    updateCards(p.getCards(ZoneType.Battlefield));
+                    updateCards(isNetGame() ? p.getCards(ZoneType.Battlefield).threadSafeIterable() : p.getCards(ZoneType.Battlefield));
                 }
                 if (p.getCards(ZoneType.Hand) != null) {
-                    updateCards(p.getCards(ZoneType.Hand));
+                    updateCards(isNetGame() ? p.getCards(ZoneType.Hand).threadSafeIterable() : p.getCards(ZoneType.Hand));
                 }
             }
             FloatingZone.refreshAll();
@@ -597,10 +666,10 @@ public final class CMatchUI
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
                 if (p.getCards(ZoneType.Battlefield) != null) {
-                    updateCards(p.getCards(ZoneType.Battlefield));
+                    updateCards(isNetGame() ? p.getCards(ZoneType.Battlefield).threadSafeIterable() : p.getCards(ZoneType.Battlefield));
                 }
                 if (p.getCards(ZoneType.Hand) != null) {
-                    updateCards(p.getCards(ZoneType.Hand));
+                    updateCards(isNetGame() ? p.getCards(ZoneType.Hand).threadSafeIterable() : p.getCards(ZoneType.Hand));
                 }
             }
             FloatingZone.refreshAll();
@@ -613,7 +682,7 @@ public final class CMatchUI
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
                 if (p.getCards(ZoneType.Battlefield) != null) {
-                    updateCards(p.getCards(ZoneType.Battlefield));
+                    updateCards(isNetGame() ? p.getCards(ZoneType.Battlefield).threadSafeIterable() : p.getCards(ZoneType.Battlefield));
                 }
             }
             FloatingZone.refreshAll();
@@ -649,6 +718,7 @@ public final class CMatchUI
     @Override
     public void initialize() {
         Singletons.getControl().getForgeMenu().setProvider(this);
+        FloatingZone.closeAll();
         updatePlayerControl();
         KeyboardShortcuts.attachKeyboardShortcuts(this);
         for (final IVDoc<? extends ICDoc> view : myDocs.values()) {
@@ -659,11 +729,14 @@ public final class CMatchUI
             layoutControl.initialize();
             layoutControl.update();
         }
-        FloatingZone.closeAll();
     }
 
     @Override
     public void update() {
+    }
+
+    public void refreshLog() {
+        cLog.getView().refreshDisplay();
     }
 
     public void repaintCardOverlays() {
@@ -798,7 +871,9 @@ public final class CMatchUI
     @Override
     public void updatePlayerControl() {
         initHandViews();
+        FloatingZone.registerZoneDocs(this, getLocalPlayers());
         SLayoutIO.loadLayout(null);
+        FloatingZone.pruneUnparentedDocks();
         view.populate();
         final PlayerZoneUpdates zones = new PlayerZoneUpdates();
         for (final PlayerView p : sortedPlayers) {
@@ -820,6 +895,9 @@ public final class CMatchUI
     @Override
     public void finishGame() {
         FloatingZone.closeAll(); //ensure floating card areas cleared and closed after the game
+        if (isNetGame()) {
+            writeMatchPreferences();
+        }
         final GameView gameView = getGameView();
         if (hasLocalPlayers() || gameView.isMatchOver()) {
             new ViewWinLose(gameView, this).show();
@@ -976,12 +1054,6 @@ public final class CMatchUI
         cPrompt.setMessage(message, card);
     }
 
-    //  no override for now
-    public void showPromptMessage(final PlayerView playerView, final String message, final CardView card ) {
-        cancelWaitingTimer();
-        cPrompt.setMessage(message,card);
-    }
-
     @Override
     public void showManaPool(final PlayerView player) {
         //not needed since mana pool icons are always visible
@@ -1036,6 +1108,21 @@ public final class CMatchUI
 
         // Sort players
         FCollectionView<PlayerView> players = gameView.getPlayers();
+
+        if (isNetGame()) {
+            netLog.info("openView called");
+            netLog.debug("gameView.getPlayers() count={}", players.size());
+            for (PlayerView pv : players) {
+                Tracker t = pv.getTracker();
+                PlayerView inTracker = t != null ? t.getObj(TrackableTypes.PlayerViewType, pv.getId()) : null;
+                netLog.debug("  Player {}: hash={}, tracker={}, inTracker={}, sameInstance={}",
+                        pv.getId(), System.identityHashCode(pv),
+                        t != null ? "exists" : "null",
+                        inTracker != null,
+                        pv == inTracker);
+            }
+        }
+
         if (players.size() == 2 && myPlayers != null && myPlayers.size() == 1 && myPlayers.get(0).equals(players.get(1))) {
             players = new FCollection<>(new PlayerView[]{players.get(1), players.get(0)});
         }
@@ -1226,85 +1313,70 @@ public final class CMatchUI
         return skippedPhase && label != null && !label.getEnabled();
     }
 
-    /**
-     * TODO: Needs to be reworked for efficiency with rest of prefs saves in codebase.
-     */
     public void writeMatchPreferences() {
         final ForgePreferences prefs = FModel.getPreferences();
         final List<VField> fieldViews = getFieldViews();
+        final PhaseType[] phases = PhaseType.values();
 
-        // AI field is at index [1]
-        final PhaseIndicator fvAi = fieldViews.get(1).getPhaseIndicator();
-        prefs.setPref(FPref.PHASE_AI_UPKEEP,           fvAi.getLblUpkeep().getEnabled());
-        prefs.setPref(FPref.PHASE_AI_DRAW,             fvAi.getLblDraw().getEnabled());
-        prefs.setPref(FPref.PHASE_AI_MAIN1,            fvAi.getLblMain1().getEnabled());
-        prefs.setPref(FPref.PHASE_AI_BEGINCOMBAT,      fvAi.getLblBeginCombat().getEnabled());
-        prefs.setPref(FPref.PHASE_AI_DECLAREATTACKERS, fvAi.getLblDeclareAttackers().getEnabled());
-        prefs.setPref(FPref.PHASE_AI_DECLAREBLOCKERS,  fvAi.getLblDeclareBlockers().getEnabled());
-        prefs.setPref(FPref.PHASE_AI_FIRSTSTRIKE,      fvAi.getLblFirstStrike().getEnabled());
-        prefs.setPref(FPref.PHASE_AI_COMBATDAMAGE,     fvAi.getLblCombatDamage().getEnabled());
-        prefs.setPref(FPref.PHASE_AI_ENDCOMBAT,        fvAi.getLblEndCombat().getEnabled());
-        prefs.setPref(FPref.PHASE_AI_MAIN2,            fvAi.getLblMain2().getEnabled());
-        prefs.setPref(FPref.PHASE_AI_EOT,              fvAi.getLblEndTurn().getEnabled());
-        prefs.setPref(FPref.PHASE_AI_CLEANUP,          fvAi.getLblCleanup().getEnabled());
-
-        // Human field is at index [0]
-        final PhaseIndicator fvHuman = fieldViews.get(0).getPhaseIndicator();
-        prefs.setPref(FPref.PHASE_HUMAN_UPKEEP,           fvHuman.getLblUpkeep().getEnabled());
-        prefs.setPref(FPref.PHASE_HUMAN_DRAW,             fvHuman.getLblDraw().getEnabled());
-        prefs.setPref(FPref.PHASE_HUMAN_MAIN1,            fvHuman.getLblMain1().getEnabled());
-        prefs.setPref(FPref.PHASE_HUMAN_BEGINCOMBAT,      fvHuman.getLblBeginCombat().getEnabled());
-        prefs.setPref(FPref.PHASE_HUMAN_DECLAREATTACKERS, fvHuman.getLblDeclareAttackers().getEnabled());
-        prefs.setPref(FPref.PHASE_HUMAN_DECLAREBLOCKERS,  fvHuman.getLblDeclareBlockers().getEnabled());
-        prefs.setPref(FPref.PHASE_HUMAN_FIRSTSTRIKE,      fvHuman.getLblFirstStrike().getEnabled());
-        prefs.setPref(FPref.PHASE_HUMAN_COMBATDAMAGE,     fvHuman.getLblCombatDamage().getEnabled());
-        prefs.setPref(FPref.PHASE_HUMAN_ENDCOMBAT,        fvHuman.getLblEndCombat().getEnabled());
-        prefs.setPref(FPref.PHASE_HUMAN_MAIN2,            fvHuman.getLblMain2().getEnabled());
-        prefs.setPref(FPref.PHASE_HUMAN_EOT,              fvHuman.getLblEndTurn().getEnabled());
-        prefs.setPref(FPref.PHASE_HUMAN_CLEANUP,          fvHuman.getLblCleanup().getEnabled());
-
+        for (int i = 0; i < fieldViews.size(); i++) {
+            final FPref[] keys = isLocalPlayer(sortedPlayers.get(i))
+                    ? FPref.PHASES_HUMAN : FPref.PHASES_AI;
+            final PhaseIndicator pi = fieldViews.get(i).getPhaseIndicator();
+            for (int p = 1; p < phases.length; p++) {
+                prefs.setPref(keys[p - 1], pi.getLabelFor(phases[p]).getEnabled());
+            }
+        }
         prefs.save();
     }
 
-    /**
-     * TODO: Needs to be reworked for efficiency with rest of prefs saves in codebase.
-     */
     private void actuateMatchPreferences() {
         final ForgePreferences prefs = FModel.getPreferences();
         final List<VField> fieldViews = getFieldViews();
+        final PhaseType[] phases = PhaseType.values();
 
-        // Human field is at index [0]
-        //TODO: Rework without that assumption; not true in 4 AI game or hotseat game.
-        final PhaseIndicator fvHuman = fieldViews.get(0).getPhaseIndicator();
-        fvHuman.getLblUpkeep().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_UPKEEP));
-        fvHuman.getLblDraw().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_DRAW));
-        fvHuman.getLblMain1().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_MAIN1));
-        fvHuman.getLblBeginCombat().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_BEGINCOMBAT));
-        fvHuman.getLblDeclareAttackers().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_DECLAREATTACKERS));
-        fvHuman.getLblDeclareBlockers().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_DECLAREBLOCKERS));
-        fvHuman.getLblFirstStrike().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_FIRSTSTRIKE));
-        fvHuman.getLblCombatDamage().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_COMBATDAMAGE));
-        fvHuman.getLblEndCombat().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_ENDCOMBAT));
-        fvHuman.getLblMain2().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_MAIN2));
-        fvHuman.getLblEndTurn().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_EOT));
-        fvHuman.getLblCleanup().setEnabled(prefs.getPrefBoolean(FPref.PHASE_HUMAN_CLEANUP));
-
-        // AI field is at index [1], ...
-        for (int i = 1; i < fieldViews.size(); i++) {
-            final PhaseIndicator fvAi = fieldViews.get(i).getPhaseIndicator();
-            fvAi.getLblUpkeep().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_UPKEEP));
-            fvAi.getLblDraw().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_DRAW));
-            fvAi.getLblMain1().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_MAIN1));
-            fvAi.getLblBeginCombat().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_BEGINCOMBAT));
-            fvAi.getLblDeclareAttackers().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_DECLAREATTACKERS));
-            fvAi.getLblDeclareBlockers().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_DECLAREBLOCKERS));
-            fvAi.getLblFirstStrike().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_FIRSTSTRIKE));
-            fvAi.getLblCombatDamage().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_COMBATDAMAGE));
-            fvAi.getLblEndCombat().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_ENDCOMBAT));
-            fvAi.getLblMain2().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_MAIN2));
-            fvAi.getLblEndTurn().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_EOT));
-            fvAi.getLblCleanup().setEnabled(prefs.getPrefBoolean(FPref.PHASE_AI_CLEANUP));
+        for (int i = 0; i < fieldViews.size(); i++) {
+            final PlayerView player = sortedPlayers.get(i);
+            final FPref[] keys = isLocalPlayer(player)
+                    ? FPref.PHASES_HUMAN : FPref.PHASES_AI;
+            final PhaseIndicator pi = fieldViews.get(i).getPhaseIndicator();
+            for (int p = 1; p < phases.length; p++) {
+                final PhaseType phase = phases[p];
+                final PhaseLabel label = pi.getLabelFor(phase);
+                label.setEnabled(prefs.getPrefBoolean(keys[p - 1]));
+                label.setOnToggled(() -> pushSkipPhaseToControllers(player, phase));
+                label.setOnRightClick(() -> handleYieldMarkerToggle(label, player, phase));
+            }
         }
+
+        seedYieldStateOnHost();
+    }
+
+    private void handleYieldMarkerToggle(final PhaseLabel label, final PlayerView phaseOwner, final PhaseType phase) {
+        PlayerView local = getCurrentPlayer();
+        if (local == null) {
+            return;
+        }
+        IGameController controller = getGameController(local);
+        if (controller == null) {
+            return;
+        }
+        YieldMarker existing = controller.getYieldController().getAutoPassUntilMarker();
+        boolean clickedSameLabel = existing != null
+                && phaseOwner.equals(existing.getPhaseOwner())
+                && phase == existing.getPhase();
+        if (clickedSameLabel) {
+            controller.sendYieldUpdate(new YieldUpdate.ClearMarker(local));
+        } else {
+            // Setting a marker implies we want to stop here — un-skip the cell
+            // so the marker can fire (skip-phase pref + marker would skip past).
+            label.setEnabled(true);
+            label.repaintOnlyThisLabel();
+            boolean atOrPast = YieldController.isPriorityAtOrPastMarker(getGameView(), phaseOwner, phase);
+            controller.sendYieldUpdate(new YieldUpdate.SetMarker(phaseOwner, phase, atOrPast));
+            // Pass current priority so the marker takes effect immediately.
+            controller.selectButtonOk();
+        }
+        refreshYieldUi(local);
     }
 
     @Override
@@ -1331,15 +1403,15 @@ public final class CMatchUI
 
     @Override
     public void notifyStackAddition(GameEventSpellAbilityCast event) {
-        SpellAbility sa = event.sa();
+        SpellAbilityView sa = event.sa();
         String stackNotificationPolicy = FModel.getPreferences().getPref(FPref.UI_STACK_EFFECT_NOTIFICATION_POLICY);
-        boolean isAi = sa.getActivatingPlayer().isAI();
-        boolean isTrigger = sa.isTrigger();
+        boolean isAi = event.si().getActivatingPlayer().isAI();
+        boolean isTrigger = event.si().isTrigger();
         int stackIndex = event.stackIndex();
         if (stackIndex == nextNotifiableStackIndex) {
             if (ForgeConstants.STACK_EFFECT_NOTIFICATION_ALWAYS.equals(stackNotificationPolicy) || (ForgeConstants.STACK_EFFECT_NOTIFICATION_AI_AND_TRIGGERED.equals(stackNotificationPolicy) && (isAi || isTrigger))) {
                 // We can go and show the modal
-                SpellAbilityStackInstance si = event.si();
+                StackItemView si = event.si();
 
                 MigLayout migLayout = new MigLayout("insets 15, left, gap 30, fill");
                 JPanel mainPanel = new JPanel(migLayout);
@@ -1357,32 +1429,14 @@ public final class CMatchUI
                 // Small images
                 int numSmallImages = 0;
 
-                // If current effect is a triggered/activated ability of an enchantment card, I want to show the enchanted card
+                // If current effect is a triggered/activated ability of an enchantment card, show the enchanted card
                 GameEntityView enchantedEntityView = null;
-                Card hostCard = sa.getHostCard();
-                if (hostCard.isEnchantment()) {
-                    GameEntity enchantedEntity = hostCard.getEntityAttachedTo();
-                    if (enchantedEntity != null) {
-                        enchantedEntityView = enchantedEntity.getView();
+                CardView hostCard = sa.getHostCard();
+                if (hostCard != null && hostCard.getCurrentState().isEnchantment()) {
+                    enchantedEntityView = hostCard.getEntityAttachedTo();
+                    if (enchantedEntityView != null) {
                         numSmallImages++;
-                    } else if ((sa.getRootAbility() != null)
-                            && (sa.getRootAbility().getPaidList("Sacrificed", true) != null)
-                            && !sa.getRootAbility().getPaidList("Sacrificed", true).isEmpty()) {
-                        // If the player activated its ability by sacrificing the enchantment, the enchantment has not anything attached anymore and the ex-enchanted card has to be searched in other ways.. for example, the green enchantment "Carapace"
-                        enchantedEntity = sa.getRootAbility().getPaidList("Sacrificed", true).get(0).getEnchantingCard();
-                        if (enchantedEntity != null) {
-                            enchantedEntityView = enchantedEntity.getView();
-                            numSmallImages++;
-                        }
                     }
-                }
-
-                // If current effect is a triggered ability, I want to show the triggering card if present
-                SpellAbility sourceSA = (SpellAbility) si.getTriggeringObject(AbilityKey.SourceSA);
-                CardView sourceCardView = null;
-                if (sourceSA != null) {
-                    sourceCardView = sourceSA.getHostCard().getView();
-                    numSmallImages++;
                 }
 
                 // I also want to show each type of targets (both cards and players)
@@ -1393,16 +1447,12 @@ public final class CMatchUI
                 if (enchantedEntityView != null) {
                     addSmallImageToStackModalPanel(enchantedEntityView,mainPanel,numSmallImages);
                 }
-                if (sourceCardView != null) {
-                    addSmallImageToStackModalPanel(sourceCardView,mainPanel,numSmallImages);
-                }
                 for (GameEntityView gev : targets) {
                     addSmallImageToStackModalPanel(gev, mainPanel, numSmallImages);
                 }
 
                 FOptionPane.showOptionDialog(null, "Forge", null, mainPanel, ImmutableList.of(Localizer.getInstance().getMessage("lblOK")));
                 // here the user closed the modal - time to update the next notifiable stack index
-
             }
             // In any case, I have to increase the counter
             nextNotifiableStackIndex++;
@@ -1410,38 +1460,35 @@ public final class CMatchUI
             // Not yet time to show the modal - schedule the method again, and try again later
             Runnable tryAgainThread = () -> notifyStackAddition(event);
             GuiBase.getInterface().invokeInEdtLater(tryAgainThread);
-
         }
     }
 
-    private List<GameEntityView> getTargets(SpellAbilityStackInstance si, List<GameEntityView> result){
+    private List<GameEntityView> getTargets(StackItemView si, List<GameEntityView> result){
         if (si == null) {
             return result;
         }
-        FCollectionView<CardView> targetCards = CardView.getCollection(si.getTargetChoices().getTargetCards());
-        for (CardView currCardView: targetCards) {
-            result.add(currCardView);
+        FCollectionView<CardView> targetCards = si.getTargetCards();
+        if (targetCards != null) {
+            for (CardView currCardView : targetCards) {
+                result.add(currCardView);
+            }
         }
 
-        for (SpellAbility currSA : si.getTargetChoices().getTargetSpells()) {
-            CardView currCardView = currSA.getCardView();
-            result.add(currCardView);
-        }
-
-        FCollectionView<PlayerView> targetPlayers = PlayerView.getCollection(si.getTargetChoices().getTargetPlayers());
-        for (PlayerView currPlayerView : targetPlayers) {
-            result.add(currPlayerView);
+        FCollectionView<PlayerView> targetPlayers = si.getTargetPlayers();
+        if (targetPlayers != null) {
+            for (PlayerView currPlayerView : targetPlayers) {
+                result.add(currPlayerView);
+            }
         }
 
         return getTargets(si.getSubInstance(),result);
     }
 
-    private void addBigImageToStackModalPanel(JPanel mainPanel, SpellAbilityStackInstance si) {
-        StackItemView siv = si.getView();
-        int rotation = getRotation(si.getCardView());
+    private void addBigImageToStackModalPanel(JPanel mainPanel, StackItemView si) {
+        int rotation = getRotation(si.getSourceCard());
 
         FImagePanel imagePanel = new FImagePanel();
-        BufferedImage bufferedImage = FImageUtil.getImage(siv.getSourceCard().getCurrentState());
+        BufferedImage bufferedImage = FImageUtil.getImage(si.getSourceCard().getCurrentState());
         imagePanel.setImage(bufferedImage, rotation, AutoSizeImageMode.SOURCE);
         int imageWidth = 433;
         int imageHeight = 600;
@@ -1451,22 +1498,32 @@ public final class CMatchUI
         mainPanel.add(imagePanel, "cell 0 0, spany 3");
     }
 
-    private void addTextToStackModalPanel(JPanel mainPanel, SpellAbility sa, SpellAbilityStackInstance si) {
-        String who = sa.getActivatingPlayer().getName();
-        String action = sa.isSpell() ? " cast " : sa.isTrigger() ? " triggered " : " activated ";
-        String what = sa.getStackDescription().startsWith("Morph ") ? "Morph" : sa.getHostCard().toString();
+    private void addTextToStackModalPanel(JPanel mainPanel, SpellAbilityView sa, StackItemView si) {
+        String who = si.getActivatingPlayer().getName();
+        String action = sa.isSpell() ? " cast " : si.isTrigger() ? " triggered " : " activated ";
+        String desc = sa.getDescription();
+        String what = (desc != null && desc.startsWith("Morph ")) ? "Morph" : sa.getHostCard().toString();
 
         StringBuilder sb = new StringBuilder();
         sb.append(who).append(action).append(what);
 
-        if (sa.getTargetRestrictions() != null) {
+        FCollectionView<CardView> targetCards = si.getTargetCards();
+        FCollectionView<PlayerView> targetPlayers = si.getTargetPlayers();
+        boolean hasTargets = (targetCards != null && !targetCards.isEmpty()) || (targetPlayers != null && !targetPlayers.isEmpty());
+        if (hasTargets) {
             sb.append(" targeting ");
-            TargetChoices targets = si.getTargetChoices();
-            sb.append(targets);
+            List<String> targetNames = new ArrayList<>();
+            if (targetCards != null) {
+                for (CardView cv : targetCards) { targetNames.add(cv.toString()); }
+            }
+            if (targetPlayers != null) {
+                for (PlayerView pv : targetPlayers) { targetNames.add(pv.toString()); }
+            }
+            sb.append(String.join(", ", targetNames));
         }
         sb.append(".");
         String message1 = sb.toString();
-        String message2 = si.getStackDescription();
+        String message2 = si.getText();
         String messageTotal = message1 + "\n\n" + message2;
 
         final FTextArea prompt1 = new FTextArea(messageTotal);
@@ -1522,19 +1579,22 @@ public final class CMatchUI
     }
 
     @Override
-    public void handleLandPlayed(Card land) {
+    public void handleLandPlayed(CardView land) {
+        if (ForgeConstants.LAND_PLAYED_NOTIFICATION_NEVER.equals(FModel.getPreferences().getPref(FPref.UI_LAND_PLAYED_NOTIFICATION_POLICY))) {
+            return;
+        }
         Runnable createPopupThread = () -> createLandPopupPanel(land);
         GuiBase.getInterface().invokeInEdtAndWait(createPopupThread);
     }
 
-    private void createLandPopupPanel(Card land) {
+    private void createLandPopupPanel(CardView land) {
         String landPlayedNotificationPolicy = FModel.getPreferences().getPref(FPref.UI_LAND_PLAYED_NOTIFICATION_POLICY);
-        Player cardController = land.getController();
+        PlayerView cardController = land.getController();
         boolean isAi = cardController.isAI();
         if (ForgeConstants.LAND_PLAYED_NOTIFICATION_ALWAYS.equals(landPlayedNotificationPolicy)
                 || (ForgeConstants.LAND_PLAYED_NOTIFICATION_AI.equals(landPlayedNotificationPolicy) && (isAi))
-                || (ForgeConstants.LAND_PLAYED_NOTIFICATION_ALWAYS_FOR_NONBASIC_LANDS.equals(landPlayedNotificationPolicy) && !land.isBasicLand())
-                || (ForgeConstants.LAND_PLAYED_NOTIFICATION_AI_FOR_NONBASIC_LANDS.equals(landPlayedNotificationPolicy) && !land.isBasicLand()) && (isAi)) {
+                || (ForgeConstants.LAND_PLAYED_NOTIFICATION_ALWAYS_FOR_NONBASIC_LANDS.equals(landPlayedNotificationPolicy) && !land.getCurrentState().isBasicLand())
+                || (ForgeConstants.LAND_PLAYED_NOTIFICATION_AI_FOR_NONBASIC_LANDS.equals(landPlayedNotificationPolicy) && !land.getCurrentState().isBasicLand()) && (isAi)) {
             String title = "Forge";
             List<String> options = ImmutableList.of(Localizer.getInstance().getMessage("lblOK"));
 
@@ -1545,10 +1605,10 @@ public final class CMatchUI
             mainPanel.setMaximumSize(maxSize);
             mainPanel.setOpaque(false);
 
-            int rotation = getRotation(land.getView());
+            int rotation = getRotation(land);
 
             FImagePanel imagePanel = new FImagePanel();
-            BufferedImage bufferedImage = FImageUtil.getImage(land.getCurrentState().getView());
+            BufferedImage bufferedImage = FImageUtil.getImage(land.getCurrentState());
             imagePanel.setImage(bufferedImage, rotation, AutoSizeImageMode.SOURCE);
             int imageWidth = 433;
             int imageHeight = 600;
@@ -1557,7 +1617,7 @@ public final class CMatchUI
 
             mainPanel.add(imagePanel, "cell 0 0, spany 3");
 
-            String msg = cardController.toString() + " puts " + land.toString() + " into play into " + ZoneType.Battlefield.toString() + ".";
+            String msg = cardController.toString() + " puts " + land.getName() + " into play into " + ZoneType.Battlefield.toString() + ".";
 
             final FTextArea prompt1 = new FTextArea(msg);
             prompt1.setFont(FSkin.getFont(21));

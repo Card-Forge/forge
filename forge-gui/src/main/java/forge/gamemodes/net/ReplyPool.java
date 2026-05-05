@@ -5,8 +5,6 @@ import com.google.common.collect.Maps;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 public class ReplyPool {
 
@@ -27,13 +25,13 @@ public class ReplyPool {
         }
     }
 
-    public Object get(final int index) throws TimeoutException {
+    public Object get(final int index) {
         final CompletableFuture future;
         synchronized (pool) {
             future = pool.get(index);
         }
         try {
-            return future.get(5, TimeUnit.MINUTES);
+            return future.get();
         } catch (final InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }

@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Morpheus
+Title=Morpheus
+Icon=Morpheus.jpg
+Difficulty=Very Hard
+Description=./Modern/Ravnica_Allegiance/Anthony_"bobby"_Fernandez_-_Rakdos_Burn_(Modern,_#781014).dck
+Deck Type=constructed
+
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+2 Grim Lavamancer
+4 Monastery Swiftspear
+4 Lightning Bolt
+3 Searing Blaze
+4 Bump in the Night
+4 Lava Spike
+4 Light Up the Stage
+4 Rift Bolt
+4 Skewer the Critics
+3 Arid Mesa
+4 Blackcleave Cliffs
+2 Blood Crypt
+4 Bloodstained Mire
+3 Mountain
+3 Wooded Foothills
+[Sideboard]
+2 Collective Brutality
+2 Fatal Push
+4 Searing Blood
+3 Smash to Smithereens
+3 Surgical Extraction
+1 Thoughtseize

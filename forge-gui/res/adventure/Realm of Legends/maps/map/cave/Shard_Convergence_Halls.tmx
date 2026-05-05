@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="90">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="101">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Obelisk of Alara&quot;, &quot;Terramorphic expanse&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Obelisk of Alara&quot;, &quot;Armillary Sphere&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -13,17 +13,17 @@
  <tileset firstgid="28319" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
  <layer id="8" name="toggle" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFgwE480EwpWootRfGxyZGS4DN3sEIpnHS1vzB7v9RQD54rMnA8EST/vb+B9mphV1OlZ1+7njESNheWruHnv4dDPaOglEwnMA01oF2wSgYBcMXAABymAsk
+   eJxjYBgFgwE480EwpWootRfGRxbbwwzBtATY7B2MYBonbc2ndTgPR5BG4zihFnisycDwRJP+9v4H2amFXU6VnX7ueMRI2F5au4ee/h0M9o6CUTCcwDTWgXbBKBgFwxcAADvZDN0=
   </data>
  </layer>
  <layer id="6" name="Collision" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJzdlzsOwjAMhiuWErEgIaRegIWRQ3SFU/QA0HuwIMSU43AedhaUwcJx/jyaBAnVkkWUUH92bBfTNPOWxSr/2V7FlXOklvBS/EDx5XB37VeNPI72Hqlmfr2WZVzJNNKd3DPJ3ba2nZJ4Qz5JLslV4fxSPlD+kP2pXK1sJq1RXaDcIZVsrdwzzeLtxTqXi+JF+8Srxb2ruJrvoV5GvTmwdYyF7t4n6B2Swg3xUtixdxdxQ7HW4sp4kX3aQz6lsGV+Odd8Dp54npt4rCH2r/rIp2TXV8//xE3JZS6X7p73Mc8PytsUbqieZV0j+z4/cnoqJqiHYzG/zy5z6qzj61/EPYwub18wY3Guzyd5r2PF+UpyJft2qculOu/W7hn6jUPzaw0u6k3UozVmaCOImyol/xfmIB982Gtw
+   eJzdlzEOwjAMRSuWErEgIaRegIWRQ3SFU/QA0HuwIMSU43AedhbUwcJ1fuI0CRKqJUtR0vrZsV1MVc1bFqv0d1ujK+dIzeHF+IHiS+Hu6q8O8jiO90gt8+u1zONK5iDNyT2T3G09tpMTb8gnySW5GpxfygfKH7I/lWvNmElrVBcod0gl2xr3zLJ4W7FO5aJ40T7xNG4Xyb4bXYfnUC+j3uzYWmOhu/cJ+obEcEO8GLb27SJuKNZSXBkvsk97yKcYtswv54bq6rnRYw2xf9VHPiW7vnr+J25MLlO5dPe8j3l+UN6mcEP1LOsa2ff5kdJTmqAe1mJ+n13m1FnH17+Ie+hd3j5jxuJcn0/yXvuC85XkSvbtUpZLdd6s3TP0G4fm1xJc1JuoR0vM0IMgbqzk/F+Yg3wA69hrsw==
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJztlrFqAkEQhodt9IxgQso0NqmDQezS5lFsD3I2tnmAEA1cGdLmISz1AUydvIKFZZrsoMuN687dzJ4EDvzh42B3me9mD9c1FwDmTKN5TAo0azFfpgCT78dxns4hmzbAXQfgw9b5TOp5/eTMOGZu5172aL0Ire17pF7H0Mi/S5mnzPse8L4Ke0VGhq+NXs5N+8VQL6aOt6zn0D5rvOOEx+93cXPMslPMt7o6byjjwB6HvHlyiPT7ntIr6VPrvW39r9fV47yYWG+IdfvwPTgvjtN9iTk3qsJ5XWLOq+deQWy03tU1wNa+d/8y3hnrpU+asjM6FKn3p7/zOTT5Tu0eTW2NtJ43FO6/YZYB3E8Afp8ABva5tswzuZf26rv9M8EPOh/S3RO56sqc9I5Q5fXdzuU45T2nqmfnfMvivdwa6vXvdm7NRFhLA94L8EzS/Dab7G0yf7Ekrcw=
+   eJztlrFOwzAQhk9e2pRKgBhZujAjEGJj5VGyRiJdWHkARIuUserKQzDCA5QZXoGBkQX/aq1cjS85OxVSJH7pkyXb8pdzWsdmj8j802uus5qYucibqUGqTT/G+Rj4HBKdjoiWdp2nrJvXTyX0I3M7dr8h1gv42r5H63VcGP17afI0eRcB74OyVnBp5LXhldy8XoR7kS7epppD+xzjxW8zz8L49T4f/+ZlVI8PxnpvLtSTB/Y45K2ybbTvd5deTZ2x3pPB33rdepIXSfWGWA23n0Pyop/vS8q50RbJ65JyXt3t16Qm1vt6RPRln3tykO5M9fKWp+mMDkXr/ZisfY6YvBd2j27tGkU3byjSt2FWEp1Pib5viM5su7LMS72X1+q7/TPBD5xXxboFh2Odk98R2ry+27kcu7zntNXsnI9luleaw73+3c7NmSrXigH3ApxJMf/NPnv7zA9lr64y
   </data>
  </layer>
  <layer id="2" name="Walls" width="30" height="30">
@@ -36,7 +36,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJy9lkFO3TAQhv1CpQpIsgBV4vUAhSCVBUK9QA/QskagJx5HYIm6LbS0u1Ku0Rs8Ib0egNd9JWCJ2CDBEmZk/8owySRxgf7SyJZj+5tx7LGdc+4ydW4xd+4wc7Vaom9Fgx3QuP3Ml9YcdfoSxi3n3cdov3gsyi5qi/W5VBfr735ZP+t5a5LVZ/t1M1fGyn0HZDtk75LqnDObzh1/8KXmcv9JsLWkGoOU/ifD4ONY9X+1Hvwk3sJHX0qtJp4LMXcQ5tppiFtqklTbFjZ8mRIvI8sN7g3Vb8lORewxWjX6HxLvG9n3lnjTF97WIrmW0i2Klyzfqn5j7qhfMp+C+4P+76/ZartsY+77lZLJ9Riu3JcT9Z/03qnrhz67U1UufLK4rK9z9D/nfP1t+MYxsIH7uXDunOyi8HUti6vXjs8bc0+oXszTGZu3fcWcd8xbLtvhF/oMxTmSXBjyC+KdzryxTsQ4zf2UPSzr4h2r/QYmfBqEPMXraq2znHNPsCyuzB/gXqUlG0K8cp1HIX/9UfuK9bcozYqXBSbfRW/ykq25Wrq97oywf3JNpMBcDHc22JauX9ZzT41zZIm5uP+WcvudAB5krUNXgQuWvgstvrV+MZL3n/U+0fG2Sfv1GD9j2RDOeUx+/tnzdqzeLm3+j8Rb4ahXztNF2yp/SLXtq2mxR2S+sN46WkOVL1mjftx+xvp2feNAY8Gx7sKmf8ff9BsNumzIFU8t5Ffkq/8t5CuI/WjKlVKT5GEZy5U5Crkjhv8vAucea76UYQ==
+   eJy9ls9OFEEQxntHE4POzAFiYH0AYAgbEtz4GsLZSDYsj8CRcAUBvam8hm+wIVkfgOVuohwJFxI9alW6v3RRMzV/DPolle70dPevqnu6up1z7iZ1biV37ixzlVqlb0WNvaNxx5kvrTmqdBLGreXtx2i/eCzKNmqK9V+pKtav/Vj/3vNWJ6vP7ot6royV+47I9sheJeU5n7517vy1LzWX+8+CDZNyDFJ6T8bBx6nq/3w7+Em8pS1fSm0mngsxdxTm2quJW2qWlNuW3vgyJV5Glhvcn1T/RXYpYu+iTaP/GfHek31oiDd97G3YkWsp3aF4yfKd8jfmTvqR+RDcj7S/X56V22UbczcGkcn1Llz5X87UPul/p6of+uw/KnPhk8Vlnc7Tfs77+iB84xg2BpF7VDj3g+y68HUti6vXjs8bcy+oXizQGVuwfcWcv5m3FtvhF/qMxTmSXBjyC+Kdy7yxLsQ4zT3M7pdV8U7V/wYmfBqFPMUuW+ss5zwQLIsr8we4t2lkQ4hXrvMk5K8r9V+xvhXRrHhZYPJdtJxHtuZq6faqM8L+yTWRAnMl3NlgW7p7Us29NM6RJebi/lvN7XcCeJDmLq5T3l63ORYXLH0XWny9fi+JOezAZcn7z3qf6HibpP2y9rmNurIhnPMu+flzz9u5ers0+T8Rb4VPvThPG+2q/CFlnS9oTvwjMl9Ybx2tscqXrEm/mSuF9W37xoGmgmPdhXV7x9/0Gw26qckVDy3kV+Sr/y3kK4j9qMuVUrPkftmVK3MUckcX/t8InD+9eZTA
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -58,6 +58,8 @@
 ]</property>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Crumbling Necropolis|ALA&quot;, &quot;Demon's Herald|ALA&quot;, &quot;Executioner's Capsule|ALA&quot;, &quot;Unscythe, Killer of Kings|ARB&quot;, &quot;Grixis Grimblade|ARB&quot;]}"/>
     <property name="enemy" value="Sedris"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -79,6 +81,8 @@
 ]</property>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Seaside Citadel|ALA&quot;, &quot;Angel's Herald|ALA&quot;, &quot;Angelic Benediction|ALA&quot;, &quot;Dispeller's Capsule|ALA&quot;, &quot;Bant Sureblade|ARB&quot;]}"/>
     <property name="enemy" value="Rafiq"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -126,9 +130,11 @@
   <object id="65" template="../../../../common/maps/obj/gold.tx" x="319.75" y="182"/>
   <object id="72" template="../../../../common/maps/obj/enemy.tx" x="208.203" y="125.343">
    <properties>
-    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Kaleidostone|CON&quot;, &quot;Armillary Sphere|CON&quot;, &quot;Manaforce Mace|CON&quot;, &quot;Maelstrom Nexus|ARB&quot;, &quot;Exotic Orchard|CON&quot; 
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Kaleidostone|CON&quot;, &quot;Manaforce Mace|CON&quot;, &quot;Maelstrom Nexus|ARB&quot;, &quot;Exotic Orchard|CON&quot; 
 ]}</property>
     <property name="enemy" value="Child of Alara"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="20"/>
    </properties>
@@ -187,6 +193,8 @@
 ]</property>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Arcane Sanctum|ALA&quot;, &quot;Sphinx's Herald|ALA&quot;, &quot;Courier's Capsule|ALA&quot;, &quot;Etherwrought Page|ARB&quot;, &quot;Esper Stormblade|ARB&quot;]}"/>
     <property name="enemy" value="Sharuum"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -202,6 +210,8 @@
 ]</property>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Savage Lands|ALA&quot;, &quot;Dragon's Herald|ALA&quot;, &quot;Where Ancients Tread|ALA&quot;, &quot;Jund Hackblade|ARB&quot;]}"/>
     <property name="enemy" value="Karrthus"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -215,8 +225,10 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Jungle Shrine|ALA&quot;, &quot;Behemoth's Herald|ALA&quot;, &quot;Mayael's Aria|ARB&quot;, &quot;Armillary Sphere|CON&quot;, &quot;Naya Hushblade|ARB&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Jungle Shrine|ALA&quot;, &quot;Behemoth's Herald|ALA&quot;, &quot;Mayael's Aria|ARB&quot;, &quot;Behemoth Sledge&quot;, &quot;Naya Hushblade|ARB&quot;]}"/>
     <property name="enemy" value="Uril"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -368,6 +380,111 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 }
 ]</property>
+   </properties>
+  </object>
+  <object id="90" template="../../../../common/maps/obj/enemy.tx" x="93.2152" y="322.974" width="16" height="20">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Savage Lands|ALA&quot;, &quot;Dragon's Herald|ALA&quot;, &quot;Jund Hackblade|ARB&quot;]}"/>
+    <property name="enemy" value="Karrthus"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="93" template="../../../../common/maps/obj/enemy.tx" x="92" y="226" width="16" height="20">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Jungle Shrine|ALA&quot;, &quot;Behemoth's Herald|ALA&quot;, &quot;Behemoth Sledge&quot;, &quot;Naya Hushblade|ARB&quot;]}"/>
+    <property name="enemy" value="Uril"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="94" template="../../../../common/maps/obj/enemy.tx" x="325.333" y="388.667" width="16" height="20">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Arcane Sanctum|ALA&quot;, &quot;Sphinx's Herald|ALA&quot;, &quot;Courier's Capsule|ALA&quot;, &quot;Esper Stormblade|ARB&quot;]}"/>
+    <property name="enemy" value="Sharuum"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="97" template="../../../../common/maps/obj/enemy.tx" x="280.333" y="214">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Crumbling Necropolis|ALA&quot;, &quot;Demon's Herald|ALA&quot;, &quot;Executioner's Capsule|ALA&quot;, &quot;Grixis Grimblade|ARB&quot;]}"/>
+    <property name="enemy" value="Sedris"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="98" template="../../../../common/maps/obj/enemy.tx" x="349.667" y="129">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Seaside Citadel|ALA&quot;, &quot;Angel's Herald|ALA&quot;, &quot;Dispeller's Capsule|ALA&quot;, &quot;Bant Sureblade|ARB&quot;]}"/>
+    <property name="enemy" value="Rafiq"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="99" template="../../../../common/maps/obj/enemy.tx" x="208.667" y="124.667">
+   <properties>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Kaleidostone|CON&quot;, &quot;Manaforce Mace|CON&quot;, &quot;Maelstrom Nexus|ARB&quot; 
+]}</property>
+    <property name="enemy" value="Child of Alara"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="20"/>
+   </properties>
+  </object>
+  <object id="100" template="../../../../common/maps/obj/shop.tx" x="240.5" y="325">
+   <properties>
+    <property name="commonShopList" value="AlaraBoosters"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="signYOffset" type="float" value="-2"/>
+    <property name="uncommonShopList" value=""/>
    </properties>
   </object>
  </objectgroup>

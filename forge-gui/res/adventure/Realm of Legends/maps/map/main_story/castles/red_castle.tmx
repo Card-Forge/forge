@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="91">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="98">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -91,8 +91,11 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Opulent Palace&quot;, &quot;Blood Pet|TMP&quot;, &quot;Puppet Strings|TMP&quot;, &quot;Volrath's Shapeshifter|STH&quot;, &quot;Flourishing Defenses|ECC&quot;
+]}</property>
     <property name="enemy" value="Volrath"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -106,8 +109,11 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Arcane Sanctum&quot;, &quot;Syndicate Heavy&quot;, &quot;Diviner Spirit&quot;
+]}</property>
     <property name="enemy" value="Oloro"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -121,8 +127,11 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Seaside Citadel&quot;, &quot;Herald of the Pantheon&quot;, &quot;Soul Snare&quot;, &quot;Shoal Kraken&quot;
+]}</property>
     <property name="enemy" value="Estrid"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -136,8 +145,11 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Haunted Mire&quot;, &quot;Idyllic Beachfront&quot;, &quot;Cursed Wombat&quot;, &quot;Metropolis Angel&quot;
+]}</property>
     <property name="enemy" value="Reyhan and Ishai"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -151,8 +163,11 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Forest|THB&quot;, &quot;Mountain|THB&quot;, &quot;Soulguide Lantern|THB&quot;, &quot;Traveler's Amulet|THB&quot;, &quot;Shadowspear|THB&quot;, &quot;Mirror Shield|THB&quot;, &quot;Warden of the Chained|THB&quot;, &quot;Gold-Forged Sentinel|JOU&quot;, &quot;Furious Rise|THB&quot;, &quot;The Binding of the Titans|THB&quot;]}"/>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Sandsteppe Citadel&quot;, &quot;Slaughter Singer&quot;, &quot;Sculpted Perfection&quot;, &quot;Phyrexian Awakening&quot;, &quot;Gift of Compleation&quot;
+]}</property>
     <property name="enemy" value="Ixhel"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
@@ -207,6 +222,96 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
     <property name="mythicShopList" value=""/>
     <property name="rareShopList" value=""/>
     <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="91" template="../../../../../common/maps/obj/enemy.tx" x="82.5" y="607.25">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Opulent Palace&quot;, &quot;Puppet Strings|TMP&quot;, &quot;Volrath's Shapeshifter|STH&quot;
+]}</property>
+    <property name="enemy" value="Volrath"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../../common/maps/obj/enemy.tx" x="78" y="405.25">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Sandsteppe Citadel&quot;, &quot;Sculpted Perfection&quot;, &quot;Phyrexian Awakening&quot;, &quot;Gift of Compleation&quot;
+]}</property>
+    <property name="enemy" value="Ixhel"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="93" template="../../../../../common/maps/obj/enemy.tx" x="369.25" y="227">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Command Tower&quot;, &quot;Cursed Wombat&quot;, &quot;Metropolis Angel&quot;
+]}</property>
+    <property name="enemy" value="Reyhan and Ishai"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="94" template="../../../../../common/maps/obj/enemy.tx" x="659.75" y="408.5">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Seaside Citadel&quot;, &quot;Herald of the Pantheon&quot;, &quot;Soul Snare&quot;
+]}</property>
+    <property name="enemy" value="Estrid"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="97" template="../../../../../common/maps/obj/enemy.tx" x="650" y="598.25">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Arcane Sanctum&quot;, &quot;Diviner Spirit&quot;
+]}</property>
+    <property name="enemy" value="Oloro"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
  </objectgroup>

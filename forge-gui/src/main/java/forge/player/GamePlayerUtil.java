@@ -90,7 +90,6 @@ public final class GamePlayerUtil {
 
         assert (!profile.isEmpty()); // TODO test instead of assert
 
-        System.out.println("[AI Preferences] using profile " + profile);
         player.setAiProfile(profile);
         player.setAvatarIndex(avatarIndex);
         player.setSleeveIndex(sleeveIndex);
@@ -107,7 +106,7 @@ public final class GamePlayerUtil {
             } else {
                 newPlayerName = getVerifiedPlayerName(getPlayerNameUsingStandardPrompt(oldPlayerName), oldPlayerName);
             }
-        } catch (final IllegalStateException ise){
+        } catch (final IllegalStateException ise) {
             //now is not a good time for this...
             newPlayerName = StringUtils.isBlank(oldPlayerName) ? "Human" : oldPlayerName;
         }
@@ -118,13 +117,6 @@ public final class GamePlayerUtil {
         if (StringUtils.isBlank(oldPlayerName) && !newPlayerName.equals("Human")) {
             showThankYouPrompt(newPlayerName);
         }
-    }
-
-    public static void setServerPort() {
-        final int oldPort = FModel.getNetPreferences().getPrefInt(ForgeNetPreferences.FNetPref.NET_PORT);
-        int newPort = getServerPortPrompt(oldPort);
-        FModel.getNetPreferences().setPref(ForgeNetPreferences.FNetPref.NET_PORT, String.valueOf(newPort));
-        FModel.getNetPreferences().save();
     }
 
     private static void showThankYouPrompt(final String playerName) {
@@ -150,6 +142,23 @@ public final class GamePlayerUtil {
                 playerName);
     }
 
+    private static String getVerifiedPlayerName(String newName, final String oldName) {
+        if (newName == null || !StringUtils.isAlphanumericSpace(newName)) {
+            newName = (StringUtils.isBlank(oldName) ? "Human" : oldName);
+        } else if (StringUtils.isWhitespace(newName)) {
+            newName = "Human";
+        } else {
+            newName = newName.trim();
+        }
+        return newName;
+    }
+
+    public static void setServerPort() {
+        final int oldPort = FModel.getNetPreferences().getPrefInt(ForgeNetPreferences.FNetPref.NET_PORT);
+        int newPort = getServerPortPrompt(oldPort);
+        FModel.getNetPreferences().setPref(ForgeNetPreferences.FNetPref.NET_PORT, String.valueOf(newPort));
+        FModel.getNetPreferences().save();
+    }
     private static Integer getServerPortPrompt(final Integer serverPort) {
         String input = SOptionPane.showInputDialog(
                 localizer.getMessage("sOPServerPromptMessage"),
@@ -166,23 +175,42 @@ public final class GamePlayerUtil {
             SOptionPane.showErrorDialog(localizer.getMessage("sOPServerPromptError", input));
             return serverPort;
         }
-        if(port < 0 || port > 65535) {
+        if (port < 0 || port > 65535) {
             SOptionPane.showErrorDialog(localizer.getMessage("sOPServerPromptError", input));
             return serverPort;
         }
-        return  port;
+        return port;
     }
 
-    private static String getVerifiedPlayerName(String newName, final String oldName) {
-        if (newName == null || !StringUtils.isAlphanumericSpace(newName)) {
-            newName = (StringUtils.isBlank(oldName) ? "Human" : oldName);
-        } else if (StringUtils.isWhitespace(newName)) {
-            newName = "Human";
-        } else {
-            newName = newName.trim();
+    public static void setAfkTimeout() {
+        final int oldVal = FModel.getNetPreferences().getPrefInt(ForgeNetPreferences.FNetPref.NET_AFK_TIMEOUT);
+        int newVal = getAfkTimeoutPrompt(oldVal);
+        FModel.getNetPreferences().setPref(ForgeNetPreferences.FNetPref.NET_AFK_TIMEOUT, String.valueOf(newVal));
+        FModel.getNetPreferences().save();
+    }
+
+    private static Integer getAfkTimeoutPrompt(final Integer current) {
+        String input = SOptionPane.showInputDialog(
+                localizer.getMessage("sOPAfkTimeoutPromptMessage"),
+                localizer.getMessage("sOPAfkTimeoutPromptTitle"),
+                null,
+                current.toString(),
+                null,
+                true
+        );
+        if (input == null) { return current; }
+        int value;
+        try {
+            value = Integer.parseInt(input);
+        } catch (NumberFormatException nfe) {
+            SOptionPane.showErrorDialog(localizer.getMessage("sOPAfkTimeoutPromptError", input));
+            return current;
         }
-        return newName;
+        if (value < 0 || value > 60) {
+            SOptionPane.showErrorDialog(localizer.getMessage("sOPAfkTimeoutPromptError", input));
+            return current;
+        }
+        return value;
     }
-
 
 }

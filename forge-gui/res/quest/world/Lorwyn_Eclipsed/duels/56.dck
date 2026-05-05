@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Tutankhamon
+Title=Tutankhamon
+Icon=Tutankhamon.jpg
+Difficulty=Very Hard
+Description=./Modern/Lorwyn_Eclipsed/Higuchi_Yuma_-_Living_End_(Modern,_#2796801).dck
+Deck Type=constructed
+
+[Main]
+4 Curator of Mysteries
+2 Striped Riverwinder
+4 Street Wraith
+4 Shardless Agent
+4 Subtlety
+4 Endurance
+1 Colossal Skyturtle
+4 Generous Ent
+3 Wistfulness
+4 Force of Negation
+1 Press the Enemy
+1 Flare of Denial
+2 Sink into Stupor
+3 Living End
+4 Ardent Plea
+1 Island
+1 Forest
+1 Breeding Pool
+1 Hallowed Fountain
+4 Misty Rainforest
+1 Temple Garden
+1 Boseiju, Who Endures
+1 Otawara, Soaring City
+1 Hedge Maze
+1 Lush Portico
+1 Meticulous Archive
+1 Mistrise Village
+[Sideboard]
+1 Commandeer
+2 Teferi, Time Raveler
+2 Force of Vigor
+1 Deafening Silence
+3 Mystical Dispute
+2 Inevitable Betrayal
+1 Foundation Breaker
+3 Clarion Conqueror

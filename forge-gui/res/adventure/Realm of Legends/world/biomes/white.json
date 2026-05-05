@@ -26,14 +26,29 @@
 		"DarkGras"
 	],
 	"enemies": [
-		"Leinore",
-		"Wyleth",
+		"Abuelo",
+		"Adeline",
 		"Aminatou",
+		"Anya",
+		"Danitha",
+		"Delney",
+		"Denry Klin",
+		"Ghen",
 		"Kasla",
+		"Kyler",
+		"Kyodai",
+		"Kytheon",
+		"Leinore",
 		"Narci",
 		"Obuun",
+		"Odric",
+		"Orah",
 		"Roon",
-		"Nemesis"
+		"Thalisse",
+		"Wyleth",
+		"Yoshimaru",
+		"Nemesis",
+		"Grand Nemesis"
 	],
 	"pointsOfInterest": [
 		"White Castle",
@@ -44,15 +59,21 @@
         "Plains Town Tribal",
 		"Abzan War Camp",
 		"Aerie",
+		"Ancient Pearl Mesa",
 		"Boros Fortress",
 		"Church of Avacyn",
 		"Dusk Legion Fortress",
 		"Elesh Norn's Basilica",
 		"Heavenly Sky",
+		"Kenrith's Court",
 		"Leonin Den",
-		"Orxhov Basilica",
+		"Lorehold Classroom",
+		"Omenport",
+		"Orzhov Basilica",
+		"Spara's Headquarters",
 		"Sphinx of Riddles White",
-		"Three Tree City"
+		"Three Tree City",
+		"White Tower of Worship"
 	],
 	"structures": [
 		{

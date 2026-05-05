@@ -121,8 +121,6 @@ public enum TrackableProperty {
     Name(TrackableTypes.StringType),
     Colors(TrackableTypes.ColorSetType),
     OriginalColors(TrackableTypes.ColorSetType),
-    LeftSplitColors(TrackableTypes.ColorSetType),
-    RightSplitColors(TrackableTypes.ColorSetType),
     ImageKey(TrackableTypes.StringType),
     Type(TrackableTypes.CardTypeViewType),
     ManaCost(TrackableTypes.ManaCostType),
@@ -186,7 +184,7 @@ public enum TrackableProperty {
     NonAbilityText(TrackableTypes.StringType),
     FoilIndex(TrackableTypes.IntegerType),
 
-    CantHaveKeyword(TrackableTypes.StringListType),
+    CantHaveKeyword(TrackableTypes.StringSetType),
 
     //Player
     IsAI(TrackableTypes.BooleanType),
@@ -196,7 +194,6 @@ public enum TrackableProperty {
     SleeveIndex(TrackableTypes.IntegerType),
     Opponents(TrackableTypes.PlayerViewCollectionType),
     Life(TrackableTypes.IntegerType),
-    PoisonCounters(TrackableTypes.IntegerType),
     MaxHandSize(TrackableTypes.IntegerType),
     HasUnlimitedHandSize(TrackableTypes.BooleanType),
     MaxLandPlay(TrackableTypes.IntegerType),
@@ -209,7 +206,7 @@ public enum TrackableProperty {
     OptionalAdditionalVote(TrackableTypes.IntegerType),
     ControlVotes(TrackableTypes.BooleanType),
     AdditionalVillainousChoices(TrackableTypes.IntegerType),
-    Keywords(TrackableTypes.KeywordCollectionViewType, FreezeMode.IgnoresFreeze),
+    Keywords(TrackableTypes.StringListType, FreezeMode.IgnoresFreeze),
     Commander(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
     CommanderCast(TrackableTypes.IntegerMapType),
     CommanderDamage(TrackableTypes.IntegerMapType),
@@ -235,7 +232,6 @@ public enum TrackableProperty {
     IsExtraTurn(TrackableTypes.BooleanType),
     ExtraTurnCount(TrackableTypes.IntegerType),
     HasPriority(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
-    HasDelirium(TrackableTypes.BooleanType),
     AvatarLifeDifference(TrackableTypes.IntegerType, FreezeMode.IgnoresFreeze),
     HasLost(TrackableTypes.BooleanType),
 
@@ -244,6 +240,7 @@ public enum TrackableProperty {
     Description(TrackableTypes.StringType),
     CanPlay(TrackableTypes.BooleanType),
     PromptIfOnlyPossibleAbility(TrackableTypes.BooleanType),
+    SA_IsSpell(TrackableTypes.BooleanType),
 
     //ReplacementEffectView
     RE_HostCard(TrackableTypes.CardViewType),
@@ -293,8 +290,6 @@ public enum TrackableProperty {
     StormCount(TrackableTypes.IntegerType),
     GameOver(TrackableTypes.BooleanType),
     PoisonCountersToLose(TrackableTypes.IntegerType),
-    GameLog(TrackableTypes.StringType),
-    NeedsPhaseRedrawn(TrackableTypes.BooleanType),
     PlayerTurn(TrackableTypes.PlayerViewType, FreezeMode.IgnoresFreeze),
     Phase(TrackableTypes.EnumType(PhaseType.class), FreezeMode.IgnoresFreeze),
     Dependencies(TrackableTypes.StringType);
@@ -339,27 +334,4 @@ public enum TrackableProperty {
         return ((TrackableType<T>) type).getDefaultValue();
     }
 
-    @SuppressWarnings("unchecked")
-    public <T> T deserialize(TrackableDeserializer td, T oldValue) {
-        return ((TrackableType<T>) type).deserialize(td, oldValue);
-    }
-
-    @SuppressWarnings("unchecked")
-    public <T> void serialize(TrackableSerializer ts, T value) {
-        ((TrackableType<T>) type).serialize(ts, value);
-    }
-
-    //cache array of all properties to allow quick lookup by ordinal,
-    //which reduces the size and improves performance of serialization
-    //we don't need to worry about the values changing since we will ensure
-    //both players are on the same version of Forge before allowing them to connect
-    private static TrackableProperty[] props = values();
-
-    public static int serialize(TrackableProperty prop) {
-        return prop.ordinal();
-    }
-
-    public static TrackableProperty deserialize(int ordinal) {
-        return props[ordinal];
-    }
 }

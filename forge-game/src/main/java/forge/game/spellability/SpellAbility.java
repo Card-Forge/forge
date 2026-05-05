@@ -377,7 +377,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public final List<AbilityManaPart> getAllManaParts() {
         AbilityManaPart mp = getManaPart();
         if (mp == null && subAbility == null) {
-            return ImmutableList.of();
+            return List.of();
         }
         List<AbilityManaPart> result = Lists.newArrayList();
         if (mp != null) {
@@ -609,14 +609,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return hasParam("CumulativeUpkeep");
     }
 
-    public boolean isEpic() {
-        AbilitySub sub = this.getSubAbility();
-        while (sub != null && !sub.hasParam("Epic")) {
-            sub = sub.getSubAbility();
-        }
-        return sub != null && sub.hasParam("Epic");
-    }
-
     public boolean isBargained() {
         return isOptionalCostPaid(OptionalCost.Bargain);
     }
@@ -677,7 +669,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public final boolean isMadness() {
         return isAlternativeCost(AlternativeCost.Madness);
     }
-    
+
     public final boolean isMayhem() {
         return isAlternativeCost(AlternativeCost.Mayhem);
     }
@@ -992,7 +984,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         //resetPaidHash(); // FIXME: if uncommented, breaks Dragon Presence, e.g. Orator of Ojutai + revealing a Dragon from hand.
         // Is it truly necessary at this point? The paid hash seems to be reset on all SA instance operations.
         // Epic spell keeps original targets
-        if (!isEpic()) {
+        if (!this.getHostCard().hasKeyword(Keyword.EPIC)) {
             resetTargets();
         }
         resetTriggeringObjects();
@@ -1070,12 +1062,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 if (payCosts.isOnlyManaCost() && !altOnlyMana) {
                     sb.append("Pay ");
                 }
-                sb.append(payCosts.toString());
+                sb.append(payCosts);
                 sb.append(" or ").append(altOnlyMana ? alternateCost.toString() :
                         StringUtils.uncapitalize(alternateCost.toString()));
                 sb.append(equip && !altOnlyMana ? "." : "");
             } else {
-                sb.append(payCosts.toString());
+                sb.append(payCosts);
             }
 
             if (payCosts.isAbility() && !equip) {
@@ -1171,9 +1163,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public List<AbilitySub> getAdditionalAbilityList(final String name) {
         if (additionalAbilityLists.containsKey(name)) {
             return additionalAbilityLists.get(name);
-        } else {
-            return ImmutableList.of();
         }
+        return List.of();
     }
 
     public void setAdditionalAbilityList(final String name, final List<AbilitySub> list) {
@@ -2366,6 +2357,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         view.updateHostCard(this);
         view.updateDescription(this);
         view.updatePromptIfOnlyPossibleAbility(this);
+        view.updateIsSpell(this);
         return view;
     }
 

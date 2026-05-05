@@ -3,6 +3,7 @@ package forge.game;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.google.common.collect.ForwardingTable;
 import com.google.common.collect.HashBasedTable;
@@ -14,6 +15,7 @@ import forge.game.card.Card;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementType;
+import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 
@@ -44,7 +46,7 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
             map = Maps.newHashMap();
             put(o, object, map);
         }
-        return map.put(type, Objects.requireNonNullElse(map.get(type), 0) + value);
+        return map.merge(type, value, Integer::sum);
     }
 
     public int get(Player putter, GameEntity object, CounterType type) {
@@ -86,20 +88,10 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
     }
 
     public Map<GameEntity, Integer> filterTable(CounterType type, String valid, Card host, CardTraitBase sa) {
-        Map<GameEntity, Integer> result = Maps.newHashMap();
-
-        for (Map.Entry<GameEntity, Map<Optional<Player>, Map<CounterType, Integer>>> gm : columnMap().entrySet()) {
-            if (gm.getKey().isValid(valid, host.getController(), host, sa)) {
-                for (Map<CounterType, Integer> cm : gm.getValue().values()) {
-                    Integer old = Objects.requireNonNullElse(result.get(gm.getKey()), 0);
-                    Integer v = Objects.requireNonNullElse(cm.get(type), 0);
-                    if (old + v > 0) {
-                        result.put(gm.getKey(), old + v);
-                    }
-                }
-            }
-        }
-        return result;
+        return columnMap().entrySet().stream().filter(gm -> gm.getKey().isValid(valid, host.getController(), host, sa))
+            .collect(Collectors.groupingBy(gm -> gm.getKey(),
+                    Collectors.flatMapping(gm -> gm.getValue().values().stream(),
+                            Collectors.filtering(m -> m.containsKey(type), Collectors.summingInt(m -> m.getOrDefault(type, 0))))));
     }
 
     public void triggerCountersPutAll(final Game game) {
@@ -121,10 +113,9 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
         game.getTriggerHandler().runTrigger(TriggerType.CounterAddedAll, runParams, false);
     }
 
-    public void replaceCounterEffect(final Game game, final SpellAbility cause, final boolean effect) {
-        replaceCounterEffect(game, cause, effect, false, null);
+    public void replaceCounterEffect(final Game game, final SpellAbility cause) {
+        replaceCounterEffect(game, cause, cause != null && !(cause instanceof AbilityStatic), false, null);
     }
-
     @SuppressWarnings("unchecked")
     public boolean replaceCounterEffect(final Game game, final SpellAbility cause, final boolean effect, final boolean etb, Map<AbilityKey, Object> params) {
         if (isEmpty()) {

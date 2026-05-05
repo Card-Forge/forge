@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Flandre Scarlet
+Title=Flandre Scarlet
+Icon=Flandre Scarlet.jpg
+Difficulty=Medium
+Description=./Standard/War_of_the_Spark/Andrew_Boncher_-_Monored_Aggro_(Standard,_#800065).dck
+Deck Type=constructed
+
+[Main]
+4 Ghitu Lavarunner
+4 Fanatical Firebrand
+4 Runaway Steam-Kin
+4 Viashino Pyromancer
+4 Goblin Chainwhirler
+4 Shock
+4 Lightning Strike
+3 Wizard's Lightning
+4 Light Up the Stage
+3 Experimental Frenzy
+2 Chandra, Fire Artisan
+20 Mountain
+[Sideboard]
+4 Lava Coil
+2 Dire Fleet Daredevil
+3 Legion Warboss
+1 Rekindling Phoenix
+1 Fight with Fire
+1 Experimental Frenzy
+3 Tibalt, Rakish Instigator

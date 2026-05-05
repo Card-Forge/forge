@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Hermes Conrad
+Title=Hermes Conrad
+Icon=Hermes Conrad.jpg
+Difficulty=Easy
+Description=Aether_Revolt/Lee_Shi_Tian_-_Mardu_Vehicles_(Standard,_#667088).dck
+Deck Type=constructed
+
+[Main]
+2 Depala, Pilot Exemplar
+2 Inventor's Apprentice
+4 Scrapheap Scrounger
+4 Thraben Inspector
+4 Toolcraft Exemplar
+4 Veteran Motorist
+3 Cultivator's Caravan
+4 Heart of Kiran
+1 Implement of Combustion
+4 Fatal Push
+4 Unlicensed Disintegration
+2 Gideon, Ally of Zendikar
+3 Aether Hub
+4 Concealed Courtyard
+4 Inspiring Vantage
+3 Plains
+4 Spire of Industry
+4 Spirebluff Canal
+[Sideboard]
+2 Fragmentize
+1 Fumigate
+2 Gideon, Ally of Zendikar
+2 Harnessed Lightning
+3 Metallic Rebuke
+1 Painful Truths
+1 Release the Gremlins
+1 Shock
+2 Skywhaler's Shot

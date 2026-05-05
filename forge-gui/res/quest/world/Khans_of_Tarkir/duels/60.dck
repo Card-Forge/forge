@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Pointy Haired Boss
+Title=Pointy Haired Boss
+Icon=Pointy Haired Boss.jpg
+Difficulty=Hard
+Description=../Modern/Khans_of_Tarkir/SCG_Invitational_Qualifier_Glen_Burnie/Kurt_Campbell_-_R-B_Burn_(Modern,_#92624).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+4 Monastery Swiftspear
+1 Gut Shot
+4 Lightning Bolt
+4 Searing Blaze
+2 Shard Volley
+4 Skullcrack
+4 Bump in the Night
+4 Lava Spike
+2 Molten Rain
+4 Rift Bolt
+4 Arid Mesa
+4 Blackcleave Cliffs
+2 Blood Crypt
+4 Bloodstained Mire
+3 Mountain
+1 Scalding Tarn
+1 Stomping Ground
+[Sideboard]
+4 Destructive Revelry
+1 Dragon's Claw
+3 Rakdos Charm
+4 Searing Blood

@@ -1,0 +1,10 @@
+Name:Rat King, Pale Piper
+ManaCost:3 B
+Types:Legendary Creature Rat Avatar
+PT:3/3
+K:Menace
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | TriggerZones$ Battlefield | ValidCard$ Card.Self,Creature.!token+YouCtrl | Execute$ TrigToken | TriggerDescription$ Whenever NICKNAME or another nontoken creature you control leaves the battlefield, create a 1/1 black Rat creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ b_1_1_rat | TokenOwner$ You
+A:AB$ Draw | Cost$ 2 Sac<1/Permanent.token/token> | SpellDescription$ Draw a card.
+DeckHas:Ability$Token|Sacrifice
+Oracle:Menace\nWhenever Rat King or another nontoken creature you control leaves the battlefield, create a 1/1 black Rat creature token.\n{2}, Sacrifice a token: Draw a card.

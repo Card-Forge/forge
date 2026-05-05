@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Elegua
+Title=Elegua
+Icon=Elegua.jpg
+Difficulty=Medium
+Description=./Standard/Lorwyn_Eclipsed/Ben_Rosen_-_Superior_Reanimator_(Standard,_#2796002).dck
+Deck Type=constructed
+
+[Main]
+2 Ardyn, the Usurper
+4 Bringer of the Last Gift
+4 Deceit
+4 Formidable Speaker
+1 Glarb, Calamity's Augur
+1 Harvester of Misery
+4 Oblivious Bookworm
+2 Overlord of the Balemurk
+4 Superior Spider-Man
+1 Town Greeter
+3 Wistfulness
+4 Bitter Triumph
+1 Zero Point Ballad
+2 Blooming Marsh
+3 Breeding Pool
+3 Cavern of Souls
+2 Gloomlake Verge
+1 Island
+2 Overgrown Tomb
+1 Starting Town
+1 Undercity Sewers
+1 Underground Mortuary
+3 Wastewood Verge
+4 Watery Grave
+2 Willowrush Verge
+[Sideboard]
+1 Ghost Vacuum
+1 Icetill Explorer
+3 Intimidation Tactics
+1 Oko, Lorwyn Liege
+1 Overlord of the Balemurk
+1 Quantum Riddler
+1 Soul-Guide Lantern
+1 Spell Snare
+1 Spider-Sense
+1 Strategic Betrayal
+1 Wistfulness
+2 Zero Point Ballad

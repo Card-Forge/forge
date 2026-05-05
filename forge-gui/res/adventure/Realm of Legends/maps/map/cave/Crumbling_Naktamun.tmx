@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="36" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="99">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="36" height="26" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="102">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -90,8 +90,10 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ipnu Rivulet|HOU&quot;, &quot;ifnir deadlands|HOU&quot;, &quot;dagger of the worthy|HOU&quot;, &quot;accursed horde|HOU&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ipnu Rivulet|HOU&quot;, &quot;ifnir deadlands|HOU&quot;, &quot;accursed horde|HOU&quot;]}"/>
     <property name="enemy" value="The Scarab God"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="60"/>
    </properties>
@@ -106,9 +108,11 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ipnu Rivulet|HOU&quot;, &quot;ramunap ruins|HOU&quot;, &quot;crook of condemnation|HOU&quot;, &quot;bloodwater entity|HOU&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ipnu Rivulet|HOU&quot;, &quot;ramunap ruins|HOU&quot;, &quot;bloodwater entity|HOU&quot;]}"/>
     <property name="enemy" value="The Locust God"/>
     <property name="hidden" type="bool" value="false"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="60"/>
    </properties>
@@ -140,8 +144,11 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;ramunap ruins|HOU&quot;, &quot;ifnir deadlands|HOU&quot;, &quot;everlasting torment|C16&quot;, &quot;Moaning Wall|HOU&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;ramunap ruins|HOU&quot;, &quot;ifnir deadlands|HOU&quot;, &quot;Moaning Wall|HOU&quot;]}"/>
     <property name="enemy" value="The Scorpion God"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="40"/>
     <property name="waypoints" value=""/>
@@ -270,6 +277,62 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
 	}
 ]</property>
     <property name="enemy" value="Anep"/>
+   </properties>
+  </object>
+  <object id="99" template="../../../../common/maps/obj/enemy.tx" x="274.75" y="221.5">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;ifnir deadlands|HOU&quot;, &quot;accursed horde|HOU&quot;]}"/>
+    <property name="enemy" value="The Scarab God"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="100" template="../../../../common/maps/obj/enemy.tx" gid="2147495067" x="421.25" y="363">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ipnu Rivulet|HOU&quot;, &quot;bloodwater entity|HOU&quot;]}"/>
+    <property name="enemy" value="The Locust God"/>
+    <property name="hidden" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="101" template="../../../../common/maps/obj/enemy.tx" x="174.5" y="352.25">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;ramunap ruins|HOU&quot;, &quot;Moaning Wall|HOU&quot;]}"/>
+    <property name="enemy" value="The Scorpion God"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value=""/>
    </properties>
   </object>
  </objectgroup>

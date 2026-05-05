@@ -117,7 +117,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
             int amount;
             boolean xPay = false;
             if (amountStr.equals("X") && sa.getSVar("X").equals("Count$xPaid")) {
-                final int manaLeft = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
+                final int manaLeft = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
 
                 if (manaLeft == 0) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
@@ -271,7 +271,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
             boolean xPay = false;
             // Timecrafting has X R
             if (amountStr.equals("X") && sa.getSVar("X").equals("Count$xPaid")) {
-                final int manaLeft = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
+                final int manaLeft = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
 
                 if (manaLeft == 0) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantAffordX);
@@ -298,7 +298,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
         if (mandatory) {
             if (type.equals("P1P1")) {
                 // Try to target creatures with Adapt or similar
-                CardCollection adaptCreats = CardLists.filter(list, CardPredicates.hasKeyword(Keyword.ADAPT));
+                CardCollection adaptCreats = CardLists.filter(list, c -> c.getNonManaAbilities().anyMatch(ab -> ab.hasParam("Adapt")));
                 if (!adaptCreats.isEmpty()) {
                     sa.getTargets().add(ComputerUtilCard.getWorstAI(adaptCreats));
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);

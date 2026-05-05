@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="145">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="146">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -60,9 +60,11 @@
   </object>
   <object id="86" template="../../../../common/maps/obj/enemy.tx" x="197.666" y="87.6667">
    <properties>
-    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Font of Return|JOU&quot;, &quot;Eradicator Valkyrie&quot;, &quot;Elvish Doomsayer&quot;, &quot;Draugr's Helm&quot;
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Font of Return|JOU&quot;, &quot;Waste Not&quot;, &quot;Elvish Doomsayer&quot;, &quot;Draugr's Helm&quot;
 ]}</property>
     <property name="enemy" value="Tergrid"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="10"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
@@ -163,5 +165,16 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
   <object id="142" template="../../../../common/maps/obj/collision.tx" x="259.315" y="51.1997" width="41.9377" height="10.3586"/>
   <object id="143" template="../../../../common/maps/obj/collision.tx" x="277.571" y="195.637" width="41.9377" height="10.3586"/>
   <object id="144" template="../../../../common/maps/obj/collision.tx" x="113.267" y="194.563" width="41.9377" height="10.3586"/>
+  <object id="145" template="../../../../common/maps/obj/enemy.tx" x="198.545" y="87.0909">
+   <properties>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Font of Return|JOU&quot;, &quot;Elvish Doomsayer&quot;, &quot;Draugr's Helm&quot;
+]}</property>
+    <property name="enemy" value="Tergrid"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

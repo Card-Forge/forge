@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="118">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="120">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -15,17 +15,17 @@
  <tileset firstgid="38401" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
  <layer id="6" name="Collision" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFIxmIlZCPqWEvOfpGmr2U2D1Q9sLMGGn2wsygZ17C5xZ62jkKRsEoGAWjYBSMgqEJAKEgH0U=
+   eJxjYBgFIxmIlZCPqWEvOfpGmr2U2D1Q9sLMGGn2wsygZ17C5xZ62okPPGKEYHqDgbJ3FIyCUTAKRsEoGEoAAO6aItE=
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt1UEKgzAQBdBZtbsuvZOuCh7EFl14AvE4PYrQW3iK0kUhhMxkfjIJIl38VYKP7yTaTETNP6fM66rbt7V43i1vat1hIRrBPJe8rpYu0tXaRc7BkdxHhnuZ6/V1Zyu5v33f7CvRvcPSd7wZcy3ufsgs7fr3Jmb679kN6vqmdrapLte1dF9/XWNqniW5qV1T3NA7KeVyM7AyufnGZuyaiKvpIzmSKd0Z7TdJ8rie6L9YayJnJbVP7nnNcWtZNbqU6HWb47GcWciV1q3dD/t/HZE=
+   eJzt1bENwjAQBdCjCR1ldkoqJAaBKBSeIMo4jILEBpRMgSgiWZHvfN8+WxFK8Stbefo5O2nvRO2ev8zjqNv37PC8Ot7UuteJaAQzTHldLV2kq7WLnIMtubcMt3H1+vqzldxl3y+fmejcY7n0vBlzLe5+yLR23wf53sTM9Xv2g/QNmdrZprpc19J91+saU/MsyU3tmuKG3kkpl5uBlcnNNzZj30RcTR/JkUzpzmi/SZLH9UT/xVoTOSupfXLPa45by6rRpUSvk4vHcmYhV1q3dr+m6x3q
   </data>
  </layer>
  <layer id="2" name="Walls" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt1E0OgjAQBeBuPYWH8BJgoCwkcgwXYqLuVS7gMVx5DYP3YO0BbEMm1mY69A/cOMlLDAs+XzuBsf/AdA1ji5NfQsxfujK3uX+wKWv8eYgz5FbCnO1xlyeMFck4fUvCbYX5jOCauhr7pnHu18Utmk9iu3DG2YF2wd6cw121a4e4ctqluN9leGeY+/a76+WIuzFHNaHrdRfXWPE+JcdN6BrbBRvcymAOuY807D9g52vjZmK31iKVCJe/Dd9VbNSurq509NiMfq8urqspLRjd1O/W1qWsV91HtyjTZZ9VY8jSz9fVtelDxdQVXKxLiJUTHgTbPV/LxoP4mj6WmiktH5fakRiu2imP2E/P2O+n3CkcPW/kj+sO
+   eJzt1LsNwjAUBVBTUDAFQ7AEifJpEBmDgiABPZAFYAsq1kBhB8rUDICt6AljPb/4l9BwpSuhFBxubMHYP5CmYmx2cKuP+UtX9Dp1L5ZFiT/3cbrcgpuTLe5mc8byeT97F4Rbc/MRwNVt1e6NwpyvjZtXn4Z24R0nO9oFe3X0d+WtDeKK1DE/39h/M+S2/t562uNuyMgmbD1vwhqXMWPPUVvMhK2hXRHZLTRml3uP/H4D9n5N3ITfrSVvwZuJz5r/VSzyVltXOGpNop6rjWtrCguimurZmrqU9SrbqhZl2txn2eiy1Pdr65rsoarbCi62xcdKCQ+K3T1Xy8SDupoultwhLReXuiMhXHlTGnCf2r6/n3KHcNS+AU787A4=
   </data>
  </layer>
  <layer id="3" name="Clutter" width="30" height="30">
@@ -33,7 +33,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzFlb9PAjEUxx+HP2Ag6qSrGBOjMGGCm3HgxwQm5+6iMdHFQSBhFxz0byDo4mSUxdXdAQZNdNe/wB19Ta9eKb32enfoN/nmeNDrp6/vtQB4K3fubdnv/cL4mCBScXUOI5bDoDCak0lsugb2TrUIsFs0j8Oqj3MM0I95apM4jKolXD86v0VtEgeVXRbWcOE+mfk4Ksm4OkfFZf3JxGLG4WP+d5XOUnq22J8s/s2Ri2Xjg0rsz//o55PW3/TzC94Dr5xPkfuGz3fuDjpAxmHJOw6i+TbAguA6shstd8wHMj4djl0ZjaNUTeCKIuy9yvj3VhwgFqefGz762ZQr6tuiTKYYx58k189ZDcvdL1OrdPsQPffJovbS6j3AWg9gJQBb5HYNavU8BZB1rBLbN37vRO62MEcN61n3qOnRNM2ZWCfxPKbwDM+1x8eRHv2aVc9FuH7VwbWlnXrYmnktyZ4vZgCWMv64Q8udp4vMa/SNYS80nb3OIXNTwRXrQvaM5LqM/ZcmPdiTz0/WxveLyscC9zIBcJVwYz/3CX8PkTzIO0PJGepkqYl2hDqtJwE2knoWL7a2uxnKJXMSLnmqHIVYfqxusnwnIR236eNuDvLfFCbfH1GI3pg=
+   eJzFlT1PAkEQhofDDyiIWmkrxsQoVJhgZyz46DDhB9hoTLSxEEjoBQv9DQRtrIzS2NpbQKGJtkZ/gT06m731luF27/bu0Dd5c0xub5+dndkFQK3cmdpu7/uF8TFBpON6OYxEDoPCaE4msekaxDeVIsBu0TwOqz7OMUA/5LlN4jCqlHD96PwWt0kcVNUyWcO58xSW46jkxvVyVFzRn0IiFhw5lt/rdJryZtP+FPFvjlLsNj6oaH/+Rz8ft/6mn5/xHniRfILcV3y+SXfQPjIOSuo4iObbAAvEdWQ3Ws6YD2R82pz32GgcpWqES8XYzFRWHCAW578bPvrZlEv1bXGmUEziT5Lr56yG5e6VuXW6uY+e+2hxq7R6B7DWA1gJwKbcrkGtnqYAsrZ1Evsm7x3lbpM5aljPuqKmh9M8Z2Yv0fOYwjM81x4fx3r0a1Y/F+P6VQfXlrbrUfWY13LZ88UMwFLGH3doOfN0kXmFvjbshaa91zlkbmq4tC5sz1iuy9h/adaDPff52drkftH5iHAvEgCXCSeW90Yl+R5iebD6Dl3OUCfLzbRD6rSeBNhIOrG8NyqJu+52hnPZnIzLnjpHIZGfqJtbvpOQF7fp424O8t8UJt8fdo7gnw==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -46,6 +46,14 @@
   <object id="52" template="../../../../common/maps/obj/gold.tx" x="252.333" y="96.333"/>
   <object id="54" template="../../../../common/maps/obj/enemy.tx" x="176.334" y="135.916">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Raff"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="30"/>
@@ -53,6 +61,14 @@
   </object>
   <object id="55" template="../../../../common/maps/obj/enemy.tx" x="175.833" y="214.834">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Arvad"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="40"/>
@@ -65,6 +81,14 @@
   <object id="76" template="../../../../common/maps/obj/manashards.tx" x="190" y="101.333"/>
   <object id="79" template="../../../../common/maps/obj/enemy.tx" x="312" y="133.5">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;Jhoira's Familiar&quot;, &quot;Jhoira's Timebug|TSP&quot;]
 }</property>
     <property name="enemy" value="Jhoira"/>
@@ -74,12 +98,28 @@
   </object>
   <object id="80" template="../../../../common/maps/obj/enemy.tx" x="199.333" y="334.667">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Shanna"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
   <object id="81" template="../../../../common/maps/obj/enemy.tx" x="250" y="155">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Slimefoot"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="30"/>
@@ -88,6 +128,14 @@
   <object id="82" template="../../../../common/maps/obj/gold.tx" x="317" y="96.5"/>
   <object id="83" template="../../../../common/maps/obj/enemy.tx" x="249.5" y="124">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Tiana"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="30"/>
@@ -182,7 +230,7 @@
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Weatherlight&quot;, &quot;editions&quot;: [ &quot;DOM&quot; ], &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
-  <object id="100" template="../../../../common/maps/obj/enemy.tx" x="334.088" y="385.574">
+  <object id="100" template="../../../../common/maps/obj/enemy.tx" x="417.588" y="383.574">
    <properties>
     <property name="dialog">[
 	{
@@ -219,5 +267,57 @@
   <object id="114" template="../../../../common/maps/obj/collision.tx" x="137.886" y="58.1667" width="8.22732" height="137"/>
   <object id="115" template="../../../../common/maps/obj/collision.tx" x="145.311" y="172" width="32.0455" height="22"/>
   <object id="116" template="../../../../common/maps/obj/collision.tx" x="306.144" y="417.553" width="15.0455" height="60.5606"/>
+  <object id="118" template="../../../../common/maps/obj/enemy.tx" x="323" y="350">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'Come, child. The darkness calls to you and I am its mouthpiece.'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;The ship has been sunk.&quot;,
+					&quot;text&quot;: &quot;'The forces of darkness commend your efforts.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Whisper, Blood Liturgist&quot;, &quot;count&quot;: 1 },
+                        {&quot;type&quot;: &quot;shards&quot;, &quot;count&quot;: 60}                
+                      ]
+                    } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 6
+							}
+						}
+					],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;What does the darkness have to say?&quot;,
+					&quot;text&quot;: &quot;'The residents of the skyship ahead have greatly offended the dark powers I serve. They have asked me to find a worthy vessel for their revenge, and I believe this to be you. Kill them all and power shall be yours.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;I don't answer calls from the darkness.&quot;,
+					&quot;text&quot;: &quot;'You may not listen, but the darkness still speaks.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Whisper"/>
+   </properties>
+  </object>
+  <object id="119" template="../../../../common/maps/obj/shop.tx" x="79.5" y="437.5">
+   <properties>
+    <property name="commonShopList" value="NewDominariaBoosters"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

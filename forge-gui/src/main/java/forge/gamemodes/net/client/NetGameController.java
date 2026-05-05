@@ -1,24 +1,39 @@
 package forge.gamemodes.net.client;
 
 import forge.game.card.CardView;
+import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.player.actions.PlayerAction;
 import forge.game.spellability.SpellAbilityView;
 import forge.gamemodes.match.NextGameDecision;
+import forge.gamemodes.match.YieldController;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.net.GameProtocolSender;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.interfaces.IDevModeCheats;
 import forge.interfaces.IGameController;
 import forge.interfaces.IMacroSystem;
+import forge.player.AutoYieldStore;
 import forge.util.ITriggerEvent;
 
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Map;
 
 public class NetGameController implements IGameController {
 
     private final GameProtocolSender sender;
+
+    /** Source of truth for this client's yield state (auto-yields, trigger decisions, markers, skip-phase, etc.). */
+    private final YieldController yieldController = new YieldController(null);
+
     public NetGameController(final IToServer server) {
-        this.sender = new GameProtocolSender(server);
+        sender = new GameProtocolSender(server);
+    }
+
+    @Override
+    public YieldController getYieldController() {
+        return yieldController;
     }
 
     private void send(final ProtocolMethod method, final Object... args) {
@@ -119,6 +134,88 @@ public class NetGameController implements IGameController {
     @Override
     public void reorderHand(final CardView card, final int index) {
         send(ProtocolMethod.reorderHand, card, index);
+    }
+
+    @Override
+    public void requestResync() {
+        send(ProtocolMethod.requestResync);
+    }
+
+    @Override
+    public boolean shouldAutoYield(final String key) {
+        return yieldController.shouldAutoYield(key);
+    }
+
+    @Override
+    public void setShouldAutoYield(final String key, final boolean autoYield, final boolean isAbilityScope) {
+        String storageKey = yieldController.setShouldAutoYield(key, autoYield, isAbilityScope);
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.CardAutoYield(storageKey, autoYield, isAbilityScope));
+    }
+
+    @Override
+    public boolean getDisableAutoYields() { return yieldController.getDisableAutoYields(); }
+    @Override
+    public void setDisableAutoYields(final boolean disable) { yieldController.setDisableAutoYields(disable); }
+
+    @Override
+    public boolean shouldAlwaysAcceptTrigger(final int trigger) {
+        return yieldController.shouldAlwaysAcceptTrigger(trigger);
+    }
+    @Override
+    public boolean shouldAlwaysDeclineTrigger(final int trigger) {
+        return yieldController.shouldAlwaysDeclineTrigger(trigger);
+    }
+
+    @Override
+    public void setShouldAlwaysAcceptTrigger(final int trigger) {
+        yieldController.setAlwaysAcceptTrigger(trigger);
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.TriggerDecision(trigger, AutoYieldStore.TriggerDecision.ACCEPT));
+    }
+    @Override
+    public void setShouldAlwaysDeclineTrigger(final int trigger) {
+        yieldController.setAlwaysDeclineTrigger(trigger);
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.TriggerDecision(trigger, AutoYieldStore.TriggerDecision.DECLINE));
+    }
+    @Override
+    public void setShouldAlwaysAskTrigger(final int trigger) {
+        yieldController.setAlwaysAskTrigger(trigger);
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.TriggerDecision(trigger, AutoYieldStore.TriggerDecision.ASK));
+    }
+
+    public void setUiShouldSkipPhase(final PlayerView turnPlayer, final PhaseType phase, final boolean shouldSkip) {
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.SkipPhase(turnPlayer, phase, shouldSkip));
+    }
+
+    @Override
+    public void applyYieldUpdate(final YieldUpdate update) {
+        // Local self-apply for marker/stack-yield user actions that route through
+        // sendYieldUpdate. Other cases dispatch via dedicated setters above.
+        if (update instanceof YieldUpdate.SetMarker u) {
+            yieldController.setMarker(u.phaseOwner(), u.phase(), u.atOrPastAtClick());
+        } else if (update instanceof YieldUpdate.ClearMarker) {
+            yieldController.clearMarker();
+        } else if (update instanceof YieldUpdate.StackYield u) {
+            yieldController.setAutoPassUntilStackEmpty(u.active());
+        }
+    }
+
+    /**
+     * Remote client's outbound path for user-initiated yield actions (right-click
+     * marker, ESC, "yield to entire stack" menu): mutate local cache for immediate
+     * UI response and ship to host.
+     */
+    @Override
+    public void sendYieldUpdate(final YieldUpdate update) {
+        applyYieldUpdate(update);
+        send(ProtocolMethod.sendYieldUpdate, update);
+    }
+
+    /**
+     * Build a YieldStateSnapshot from the local persistent yield state plus the
+     * GUI-loaded skip-phase prefs and ship it to the host in one wire message.
+     */
+    public void seedYieldStateOnHost(Map<PlayerView, EnumSet<PhaseType>> skipPhases) {
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.SeedFromClient(yieldController.buildClientSnapshot(skipPhases)));
     }
 
     private IMacroSystem macros;

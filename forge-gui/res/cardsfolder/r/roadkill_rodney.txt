@@ -1,0 +1,10 @@
+Name:Roadkill Rodney
+ManaCost:2
+Types:Artifact Creature Robot
+PT:2/1
+K:Squad:3
+K:Deathtouch
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ Whenever this creature deals combat damage to a player, create a Mutagen token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_mutagen_sac
+DeckHas:Ability$Token|Sacrifice
+Oracle:Squad {3} (As an additional cost to cast this spell, you may pay {3} any number of times. When this creature enters, create that many tokens that are copies of it.)\nDeathtouch\nWhenever this creature deals combat damage to a player, create a Mutagen token.

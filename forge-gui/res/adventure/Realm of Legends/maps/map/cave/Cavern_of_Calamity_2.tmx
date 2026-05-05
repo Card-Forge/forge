@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="108">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="109">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -41,8 +41,10 @@
  <objectgroup id="4" name="Objects">
   <object id="71" template="../../../../common/maps/obj/enemy.tx" x="149.981" y="169.866">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Horned Helm|5DN&quot;, &quot;Sinister Monolith|BLB&quot;, &quot;Restless Cottage|WOE&quot;, &quot;Trail of Crumbs|ELD&quot;, &quot;Caustic caterpillar|ORI&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Sinister Monolith|BLB&quot;, &quot;Restless Cottage|WOE&quot;, &quot;Trail of Crumbs|ELD&quot;, &quot;Caustic caterpillar|ORI&quot;]}"/>
     <property name="enemy" value="Ygra"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="100"/>
    </properties>
@@ -71,7 +73,7 @@
   {
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 4,
-    &quot;rarity&quot;: [ &quot;Rare, Mythic Rare&quot; ]
+    &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ]
   }
 ]
 </property>
@@ -84,7 +86,7 @@
   {
     &quot;type&quot;: &quot;card&quot;,
     &quot;count&quot;: 4,
-    &quot;rarity&quot;: [ &quot;Rare, Mythic Rare&quot; ]
+    &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ]
   }
 ]
 </property>
@@ -143,5 +145,15 @@
   <object id="105" template="../../../../common/maps/obj/collision.tx" x="46.6364" y="68.5259" width="30.4054" height="28.2431"/>
   <object id="106" template="../../../../common/maps/obj/collision.tx" x="14.9841" y="161.724" width="84.3314" height="62.2399"/>
   <object id="107" template="../../../../common/maps/obj/collision.tx" x="91.1839" y="186.929" width="20.4408" height="28.2431"/>
+  <object id="108" template="../../../../common/maps/obj/enemy.tx" x="150.6" y="169.327">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Sinister Monolith|BLB&quot;, &quot;Caustic caterpillar|ORI&quot;]}"/>
+    <property name="enemy" value="Ygra"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="100"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

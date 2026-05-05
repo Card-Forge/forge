@@ -39,13 +39,13 @@ Name=Jodah, the Unifier
 1 Mox Amber|DOM
 1 Chromatic Orrery|LCC
 1 Black Lotus|VMA
-1 Timeless lotus|DOM
+1 Timeless Lotus|DOM
 1 Relic of Legends|DMU
 1 Esika, God of the Tree|KHM|[314]
-1 Bloom Tender|2x2|[366]
+1 Bloom Tender|2X2|[366]
 1 Mirari's Wake|MH2|[320]
 1 Garth One-Eye|MH2|[365]
-1 Golos, Tireless Pilgrim|[M20]
+1 Golos, Tireless Pilgrim|M20|[226]
 1 Jared Carthalion|DMC
 1 Progenitus|V11
 1 Scion of the Ur-Dragon|SLD|[1531]
@@ -60,7 +60,7 @@ Name=Jodah, the Unifier
 1 Ulamog, the Ceaseless Hunger|CMM|[670]
 1 Ulamog, the Defiler|MH3|[383]
 1 Zhulodok, Void Gorger|CMM|[752]
-1 Kynaios and Tiro of Meletis|[C16]
+1 Kynaios and Tiro of Meletis|C16|[36]
 1 Saskia the Unyielding|SLD|[55]
 1 Atraxa, Praetors' Voice|2XM|[2]
 1 Atraxa, Grand Unifier|ONE|[2]
@@ -77,9 +77,9 @@ Name=Jodah, the Unifier
 1 Timetwister|VMA
 1 Ancestral Recall|VMA
 1 Time Walk|VMA
-1 Time Warp|STA
 1 Echo of Eons|MB2
-1 Time Stretch|DMR|[422]
+1 Champion's Helm|MPS|[7]
+1 Blackblade Reforged|SS2|[8]
 1 Mana Drain|J16
 1 The Great Henge|ELD|[370]
 1 Teferi's Protection|SLD|[1691]
@@ -87,7 +87,7 @@ Name=Jodah, the Unifier
 1 Avacyn's Memorial|MIC
 1 Annie Joins Up|OTJ|[347]
 1 Rakdos Joins Up|OTJ|[360]
-1 Slash the Ranks|CMR|[625]
+1 Coalition Victory|INV
 1 Vindicate|G07
 1 Void Rend|SNC|[338]
 1 Casualties of War|TDC

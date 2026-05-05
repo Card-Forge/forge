@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=The Zombie
+Title=The Zombie
+Icon=The Zombie.jpg
+Difficulty=Very Hard
+Description=./Modern/The_Lost_Caverns_of_Ixalan/Bugsy69_-_Rakdos_Evoke_(Modern,_#1992398).dck
+Deck Type=constructed
+
+[Main]
+4 Ragavan, Nimble Pilferer
+4 Fable of the Mirror-Breaker
+2 Sheoldred, the Apocalypse
+4 Grief
+4 Dauthi Voidwalker
+4 Orcish Bowmasters
+1 Kroxa, Titan of Death's Hunger
+1 Terminate
+4 Not Dead After All
+1 Lightning Bolt
+3 Fatal Push
+2 Molten Collapse
+4 Thoughtseize
+1 Blood Moon
+2 Polluted Delta
+1 Takenuma, Abandoned Mire
+4 Blood Crypt
+4 Blackcleave Cliffs
+2 Marsh Flats
+3 Swamp
+2 Bloodstained Mire
+3 Verdant Catacombs
+[Sideboard]
+2 Engineered Explosives
+1 Chalice of the Void
+2 Leyline of the Void
+1 Magus of the Moon
+2 Blood Moon
+2 Kolaghan's Command
+2 Surgical Extraction
+2 Angrath's Rampage
+1 Legion's End

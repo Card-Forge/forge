@@ -4,6 +4,6 @@ Types:Artifact Creature Salamander Drake
 PT:1/1
 K:Flying
 S:Mode$ CantBlockBy | ValidAttacker$ Creature.withoutFlying | ValidBlocker$ Creature.Self | Description$ CARDNAME can block only creatures with flying.
-K:Adapt:4:6 B:X:other artifact you control
+A:AB$ PutCounter | Cost$ 6 B | Adapt$ 4 | ReduceCost$ X | SpellDescription$ Adapt 4. This ability costs {1} less to activate for each other artifact you control. (If this creature has no +1/+1 counters on it, put four +1/+1 counters on it.)
 SVar:X:Count$Valid Artifact.YouCtrl+Other
-Oracle:Flying\n{6}{B}: Adapt 4. This ability costs {1} less to activate for each other artifact you control. (If this creature has no +1/+1 counters on it, put four +1/+1 counters on it.)
+Oracle:Flying\nThis creature can block only creatures with flying.\n{6}{B}: Adapt 4. This ability costs {1} less to activate for each other artifact you control. (If this creature has no +1/+1 counters on it, put four +1/+1 counters on it.)

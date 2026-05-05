@@ -1,6 +1,8 @@
 package forge.gamemodes.net;
 
 import forge.gui.GuiBase;
+import forge.trackable.Tracker;
+import forge.util.IHasForgeLog;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 import io.netty.channel.ChannelHandlerContext;
@@ -11,37 +13,55 @@ import net.jpountz.lz4.LZ4BlockInputStream;
 import java.io.ObjectInputStream;
 import java.io.StreamCorruptedException;
 
-public class CompatibleObjectDecoder extends LengthFieldBasedFrameDecoder {
-    private final ClassResolver classResolver;
+public class CompatibleObjectDecoder extends LengthFieldBasedFrameDecoder implements IHasForgeLog {
 
-    public CompatibleObjectDecoder(ClassResolver classResolver) {
-        this(1048576, classResolver);
-    }
+    private final ClassResolver classResolver;
+    private volatile Tracker tracker;
 
     public CompatibleObjectDecoder(int maxObjectSize, ClassResolver classResolver) {
         super(maxObjectSize, 0, 4, 0, 4);
         this.classResolver = classResolver;
     }
 
+    public void setTracker(Tracker tracker) {
+        this.tracker = tracker;
+    }
+
     @Override
     protected Object decode(ChannelHandlerContext ctx, ByteBuf in) throws Exception {
+        int frameStart = in.readerIndex();
         ByteBuf frame = (ByteBuf)super.decode(ctx, in);
         if (frame == null) {
             return null;
         }
-        ObjectInputStream ois = GuiBase.hasPropertyConfig() ?
-                new ObjectInputStream(new LZ4BlockInputStream(new ByteBufInputStream(frame, true))):
-                    new CObjectInputStream(new LZ4BlockInputStream(new ByteBufInputStream(frame, true)),this.classResolver);
+        int frameSize = frame.readableBytes();
+        long startMs = System.currentTimeMillis();
+
+        ObjectInputStream ois;
+        if (GuiBase.hasPropertyConfig()) {
+            ois = tracker != null
+                    ? new TrackableSerializer.ResolvingInputStream(new LZ4BlockInputStream(new ByteBufInputStream(frame, true)), tracker)
+                    : new ObjectInputStream(new LZ4BlockInputStream(new ByteBufInputStream(frame, true)));
+        } else {
+            ois = new CObjectInputStream(new LZ4BlockInputStream(new ByteBufInputStream(frame, true)), this.classResolver, tracker);
+        }
 
         Object var5 = null;
         try {
             var5 = ois.readObject();
         } catch (StreamCorruptedException e) {
-            System.err.printf("Version Mismatch: %s%n", e.getMessage());
+            netLog.error("Version Mismatch: {}", e.getMessage());
         } finally {
             ois.close();
         }
 
+        long elapsed = System.currentTimeMillis() - startMs;
+        if (elapsed > 50 || frameSize > 20_000) {
+            netLog.info("Decoded {} in {} ms ({} bytes compressed)",
+                    var5 != null ? var5.getClass().getSimpleName() : "null", elapsed, frameSize);
+        }
+
         return var5;
     }
+
 }

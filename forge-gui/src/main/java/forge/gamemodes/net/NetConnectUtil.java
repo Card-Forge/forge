@@ -24,20 +24,31 @@ import forge.util.Localizer;
 import forge.util.URLValidator;
 import org.apache.commons.lang3.StringUtils;
 
-import static forge.util.URLValidator.parseURL;
+import java.util.List;
 
 public class NetConnectUtil {
     private NetConnectUtil() { }
 
-    public static String getServerUrl() {
-        final String url = SOptionPane.showInputDialog(Localizer.getInstance().getMessage("lblOnlineMultiplayerDest"), Localizer.getInstance().getMessage("lblConnectToServer"));
-        if (url == null) { return null; }
+    /**
+     * Prompt for the server address to join. Returns null if cancelled, or the address string.
+     */
+    public static String getJoinServerUrl() {
+        final String url = SOptionPane.showInputDialog(
+                Localizer.getInstance().getMessage("lblEnterServerAddress"),
+                Localizer.getInstance().getMessage("lblJoinGame"));
+        if (url == null || url.isEmpty()) { return null; }
 
-        //prompt user for player one name if needed
+        ensurePlayerName();
+        return url;
+    }
+
+    /**
+     * Ensure the player name is set before connecting.
+     */
+    public static void ensurePlayerName() {
         if (StringUtils.isBlank(FModel.getPreferences().getPref(FPref.PLAYER_NAME))) {
             GamePlayerUtil.setPlayerName();
         }
-        return url;
     }
 
     public static ChatMessage host(final IOnlineLobby onlineLobby, final IOnlineChatInterface chatInterface) {
@@ -46,6 +57,7 @@ public class NetConnectUtil {
         final ServerGameLobby lobby = new ServerGameLobby();
         final ILobbyView view = onlineLobby.setLobby(lobby);
 
+        NetworkLogConfig.activateNetworkLogging();
         server.startServer(port);
         server.setLobby(lobby);
 
@@ -69,8 +81,8 @@ public class NetConnectUtil {
                 // NO-OP, lobby connected directly
             }
             @Override
-            public void message(final String source, final String message) {
-                chatInterface.addMessage(new ChatMessage(source, message));
+            public void message(final String source, final String message, final ChatMessage.MessageType type) {
+                chatInterface.addMessage(new ChatMessage(source, message, type));
             }
             @Override
             public void close() {
@@ -84,12 +96,10 @@ public class NetConnectUtil {
         chatInterface.setGameClient(new IRemote() {
             @Override
             public void send(final NetEvent event) {
-                if (event instanceof MessageEvent) {
-                    final MessageEvent message = (MessageEvent) event;
+                if (event instanceof MessageEvent message) {
                     if (server.handleCommand(message.getMessage())) {
                         return;
                     }
-                    chatInterface.addMessage(new ChatMessage(message.getSource(), message.getMessage()));
                     server.broadcast(event);
                 }
             }
@@ -102,10 +112,13 @@ public class NetConnectUtil {
 
         view.update(true);
 
+        server.broadcast(new MessageEvent(server.formatAfkTimeoutMessage()));
+
         return new ChatMessage(null, Localizer.getInstance().getMessage("lblHostingPortOnN", String.valueOf(port)));
     }
 
     public static void copyHostedServerUrl() {
+        final Localizer localizer = Localizer.getInstance();
         String internalAddress = FServerManager.getLocalAddress();
         String externalAddress = FServerManager.getExternalAddress();
         String internalUrl = internalAddress + ":" + FModel.getNetPreferences().getPrefInt(ForgeNetPreferences.FNetPref.NET_PORT);
@@ -114,16 +127,38 @@ public class NetConnectUtil {
             externalUrl = externalAddress + ":" + FModel.getNetPreferences().getPrefInt(ForgeNetPreferences.FNetPref.NET_PORT);
             GuiBase.getInterface().copyToClipboard(externalUrl);
         } else {
-            GuiBase.getInterface().copyToClipboard(internalAddress);
+            GuiBase.getInterface().copyToClipboard(internalUrl);
         }
 
-        String message = "";
+        String message;
+        String title = localizer.getMessage("lblServerURL");
+        List<String> options;
+        int closeIndex;
+        int localCopyIndex;
+
         if (externalUrl != null) {
-            message = Localizer.getInstance().getMessage("lblShareURLToMakePlayerJoinServer", externalUrl, internalUrl);
+            message = localizer.getMessage("lblShareURLToMakePlayerJoinServer", externalUrl, internalUrl);
+            options = List.of(
+                    localizer.getMessage("lblCopyExternalURL"),
+                    localizer.getMessage("lblCopyLocalURL"),
+                    localizer.getMessage("lblClose"));
+            closeIndex = 2;
+            localCopyIndex = 1;
         } else {
-            message = Localizer.getInstance().getMessage("lblForgeUnableDetermineYourExternalIP", message + internalUrl);
+            message = localizer.getMessage("lblForgeUnableDetermineYourExternalIP", internalUrl);
+            options = List.of(
+                    localizer.getMessage("lblCopyLocalURL"),
+                    localizer.getMessage("lblClose"));
+            closeIndex = 1;
+            localCopyIndex = 0;
         }
-        SOptionPane.showMessageDialog(message, Localizer.getInstance().getMessage("lblServerURL"), SOptionPane.INFORMATION_ICON);
+
+        int result = SOptionPane.showOptionDialog(message, title, SOptionPane.INFORMATION_ICON, options, closeIndex);
+        if (externalUrl != null && result == 0) {
+            GuiBase.getInterface().copyToClipboard(externalUrl);
+        } else if (result == localCopyIndex) {
+            GuiBase.getInterface().copyToClipboard(internalUrl);
+        }
     }
 
     public static ChatMessage join(final String url, final IOnlineLobby onlineLobby, final IOnlineChatInterface chatInterface) {
@@ -131,15 +166,14 @@ public class NetConnectUtil {
         String hostname;
         int port;
 
-        URLValidator.HostPort hostPort = parseURL(url);
-        if(hostPort == null) {
+        URLValidator.HostPort hostPort = URLValidator.parseURL(url);
+        if (hostPort == null) {
             return new ChatMessage(null, ForgeConstants.INVALID_HOST_COMMAND);
         }
 
         hostname = hostPort.host();
         port = hostPort.port();
-        if(port == -1) port = ForgeConstants.DEFAULT_SERVER_CONNECTION_PORT;
-
+        if (port == -1) port = Integer.valueOf(ForgeNetPreferences.FNetPref.NET_PORT.getDefault());
 
         final FGameClient client = new FGameClient(FModel.getPreferences().getPref(FPref.PLAYER_NAME), "0", gui, hostname, port);
         onlineLobby.setClient(client);
@@ -149,8 +183,8 @@ public class NetConnectUtil {
         lobby.setListener(view);
         client.addLobbyListener(new ILobbyListener() {
             @Override
-            public void message(final String source, final String message) {
-                chatInterface.addMessage(new ChatMessage(source, message));
+            public void message(final String source, final String message, final ChatMessage.MessageType type) {
+                chatInterface.addMessage(new ChatMessage(source, message, type));
             }
             @Override
             public void update(final GameLobbyData state, final int slot) {
@@ -169,8 +203,7 @@ public class NetConnectUtil {
         });
         view.setPlayerChangeListener((index, event) -> client.send(event));
 
-
-
+        NetworkLogConfig.activateNetworkLogging();
         try {
             client.connect();
         }
@@ -194,7 +227,7 @@ public class NetConnectUtil {
         Throwable cause = ex.getCause() != null ? ex.getCause() : ex;
         String causeName = cause.getClass().getSimpleName();
 
-        sb.append(localizer.getMessage("lblConnectionFailedTo", hostname, String.valueOf(port)));
+        sb.append(localizer.getMessage("lblConnectionFailedTo", hostname, port));
         sb.append("\n\n");
 
         // Provide specific messages for common error types

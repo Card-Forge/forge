@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="159">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="165">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -90,7 +90,7 @@
                                                                                                                 &quot;options&quot;: [
                                                                                                                     {
                                                                                                                         &quot;name&quot;: &quot;(Continue)&quot;,
-                                                                                                                        &quot;text&quot;: &quot;Be sure to open the chest behind me. It contains a rune to return here, staves of speed, flight, and healing to ease your travels, and a manasight stone to detect enemy magic. You will also have some challenge coins on you to enter free contests of strength at inns in towns known as drafts.&quot;,                      &quot;options&quot;: [
+                                                                                                                        &quot;text&quot;: &quot;Be sure to open the chest behind me. It contains a rune to return here, one to travel to each of the five capitols, staves of speed, flight, and healing to ease your travels, and a manasight stone to detect enemy magic. You will also have some challenge coins on you to enter free contests of strength at inns in towns known as drafts.&quot;,                      &quot;options&quot;: [
                                                                                                                             {          
                                                                                                                             &quot;name&quot;: &quot;(Continue)&quot;,
                                                                                                                             &quot;text&quot;: &quot;Now go. And may your library always contain the spells you need. &quot;,
@@ -186,7 +186,7 @@
   }
 ]
 </property>
-    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
     <property name="spawn.Normal" type="bool" value="true"/>
    </properties>
   </object>
@@ -213,7 +213,7 @@
   }
 ]
 </property>
-    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
    </properties>
   </object>
   <object id="115" template="../../../../common/maps/obj/booster.tx" type="reward" x="257" y="255">
@@ -239,7 +239,7 @@
   }
 ]
 </property>
-    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
    </properties>
   </object>
   <object id="117" template="../../../../common/maps/obj/booster.tx" type="reward" x="257" y="287">
@@ -265,48 +265,7 @@
   }
 ]
 </property>
-    <property name="spawn.Hard" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="124" template="../../../../common/maps/obj/booster.tx" type="reward" x="287.333" y="160">
-   <properties>
-    <property name="reward">[
-  {
-    &quot;editions&quot;: [ &quot;CMM&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 12,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;CMM&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 4,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;CMM&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 2,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ],
-    &quot;superTypes&quot; :[&quot;Legendary&quot;]
-  },
-  {
-    &quot;editions&quot;: [ &quot;CMM&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;CMM&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ],
-    &quot;superTypes&quot; :[&quot;Legendary&quot;]
-  }
-]
-</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
-    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
    </properties>
   </object>
   <object id="125" template="../../../../common/maps/obj/booster.tx" type="reward" x="176" y="159.667">
@@ -350,47 +309,6 @@
     <property name="spawn.Normal" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="126" template="../../../../common/maps/obj/booster.tx" type="reward" x="287.333" y="190.667">
-   <properties>
-    <property name="reward">[
-  {
-    &quot;editions&quot;: [ &quot;CMR&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 12,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;CMR&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 5,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;CMR&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ],
-    &quot;superTypes&quot; :[&quot;Legendary&quot;]
-  },
-  {
-    &quot;editions&quot;: [ &quot;CMR&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;CMR&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ],
-    &quot;superTypes&quot; :[&quot;Legendary&quot;]
-  }
-]
-</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
-    <property name="spawn.Normal" type="bool" value="false"/>
-   </properties>
-  </object>
   <object id="127" template="../../../../common/maps/obj/booster.tx" type="reward" x="257" y="191.667">
    <properties>
     <property name="reward">[
@@ -428,7 +346,7 @@
   }
 ]
 </property>
-    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
     <property name="spawn.Normal" type="bool" value="true"/>
    </properties>
   </object>
@@ -473,33 +391,6 @@
     <property name="spawn.Normal" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="129" template="../../../../common/maps/obj/booster.tx" type="reward" x="290" y="222">
-   <properties>
-    <property name="reward">[
-  {
-    &quot;editions&quot;: [ &quot;FDN&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 9,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;FDN&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;FDN&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 2,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
-  }
-]
-</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
-    <property name="spawn.Normal" type="bool" value="false"/>
-   </properties>
-  </object>
   <object id="130" template="../../../../common/maps/obj/booster.tx" type="reward" x="176" y="222">
    <properties>
     <property name="reward">[
@@ -524,33 +415,6 @@
 ]
 </property>
     <property name="spawn.Hard" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="131" template="../../../../common/maps/obj/booster.tx" type="reward" x="290" y="255">
-   <properties>
-    <property name="reward">[
-  {
-    &quot;editions&quot;: [ &quot;M13&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 11,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;M13&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;M13&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
-  }
-]
-</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
-    <property name="spawn.Normal" type="bool" value="false"/>
    </properties>
   </object>
   <object id="132" template="../../../../common/maps/obj/booster.tx" type="reward" x="176" y="255">
@@ -579,33 +443,6 @@
     <property name="spawn.Hard" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="135" template="../../../../common/maps/obj/booster.tx" type="reward" x="290" y="287">
-   <properties>
-    <property name="reward">[
-  {
-    &quot;editions&quot;: [ &quot;10E&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 11,
-    &quot;rarity&quot;: [ &quot;Common&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;10E&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 3,
-    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
-  },
-  {
-    &quot;editions&quot;: [ &quot;10E&quot; ],
-    &quot;type&quot;: &quot;card&quot;,
-    &quot;count&quot;: 1,
-    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
-  }
-]
-</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
-    <property name="spawn.Normal" type="bool" value="false"/>
-   </properties>
-  </object>
   <object id="136" template="../../../../common/maps/obj/booster.tx" type="reward" x="176" y="287">
    <properties>
     <property name="reward">[
@@ -632,771 +469,44 @@
     <property name="spawn.Hard" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="137" template="../../../../common/maps/obj/treasure.tx" x="214.5" y="287">
-   <properties>
-    <property name="reward">[{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Atogatog|ODY&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-         &quot;colors&quot;: [&quot;red&quot;,&quot;blue&quot;],
-         &quot;cardTypes&quot;: [&quot;Creature&quot;],
-         &quot;rarity&quot;: [&quot;uncommon&quot;],
-         &quot;colorType&quot;: &quot;MultiColor&quot;,
-         &quot;superTypes&quot; :[&quot;Legendary&quot;]
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-         &quot;colors&quot;: [&quot;black&quot;, &quot;green&quot;],
-         &quot;cardTypes&quot;: [&quot;Creature&quot;],
-         &quot;rarity&quot;: [&quot;uncommon&quot;],
-         &quot;colorType&quot;: &quot;MultiColor&quot;,
-         &quot;superTypes&quot; :[&quot;Legendary&quot;]
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-         &quot;colors&quot;: [&quot;red&quot;,&quot;white&quot;],
-         &quot;cardTypes&quot;: [&quot;Creature&quot;],
-         &quot;rarity&quot;: [&quot;uncommon&quot;],
-         &quot;colorType&quot;: &quot;MultiColor&quot;,
-         &quot;superTypes&quot; :[&quot;Legendary&quot;]
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-         &quot;colors&quot;: [&quot;green&quot;,&quot;blue&quot;],
-         &quot;cardTypes&quot;: [&quot;Creature&quot;],
-         &quot;rarity&quot;: [&quot;uncommon&quot;],
-         &quot;colorType&quot;: &quot;MultiColor&quot;,
-         &quot;superTypes&quot; :[&quot;Legendary&quot;]
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-         &quot;colors&quot;: [&quot;black&quot;,&quot;white&quot;],
-         &quot;cardTypes&quot;: [&quot;Creature&quot;],
-         &quot;rarity&quot;: [&quot;uncommon&quot;],
-         &quot;colorType&quot;: &quot;MultiColor&quot;,
-         &quot;superTypes&quot; :[&quot;Legendary&quot;]
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-         &quot;colors&quot;: [&quot;red&quot;,&quot;green&quot;],
-         &quot;cardTypes&quot;: [&quot;Creature&quot;],
-         &quot;rarity&quot;: [&quot;uncommon&quot;],
-         &quot;colorType&quot;: &quot;MultiColor&quot;,
-         &quot;superTypes&quot; :[&quot;Legendary&quot;]
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-         &quot;colors&quot;: [&quot;red&quot;,&quot;black&quot;],
-         &quot;cardTypes&quot;: [&quot;Creature&quot;],
-         &quot;rarity&quot;: [&quot;uncommon&quot;],
-         &quot;colorType&quot;: &quot;MultiColor&quot;,
-         &quot;superTypes&quot; :[&quot;Legendary&quot;]
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-         &quot;colors&quot;: [&quot;black&quot;,&quot;blue&quot;],
-         &quot;cardTypes&quot;: [&quot;Creature&quot;],
-         &quot;rarity&quot;: [&quot;uncommon&quot;],
-         &quot;colorType&quot;: &quot;MultiColor&quot;,
-         &quot;superTypes&quot; :[&quot;Legendary&quot;]
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-         &quot;colors&quot;: [&quot;white&quot;,&quot;blue&quot;],
-         &quot;cardTypes&quot;: [&quot;Creature&quot;],
-         &quot;rarity&quot;: [&quot;uncommon&quot;],
-         &quot;colorType&quot;: &quot;MultiColor&quot;,
-         &quot;superTypes&quot; :[&quot;Legendary&quot;]
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-         &quot;colors&quot;: [&quot;green&quot;,&quot;white&quot;],
-         &quot;cardTypes&quot;: [&quot;Creature&quot;],
-         &quot;rarity&quot;: [&quot;uncommon&quot;],
-         &quot;colorType&quot;: &quot;MultiColor&quot;,
-         &quot;superTypes&quot; :[&quot;Legendary&quot;]
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Haunted Mire|DMU&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Foul Orchard|M19&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Jungle Hollow|M20&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Geothermal Bog|DMU&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Bloodfell Caves|M20&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Cinder Barrens|M19&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Thornwood Falls|M20&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Tangled Islet|DMU&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Woodland Stream|M19&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Timber Gorge|M19&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Wooded Ridgeline|DMU&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Rugged Highlands|M20&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Sacred Peaks|DMU&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Stone Quarry|M19&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Wind-Scarred Crag|M20&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Contaminated Aquifer|DMU&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Dismal Backwater|M20&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Submerged Boneyard|M19&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Highland Lake|M19&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Swiftwater Cliffs|M20&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Molten Tributary|DMU&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Idyllic Beachfront|DMU&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Meandering River|M19&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Tranquil Cove|M20&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Forsaken Sanctuary|M19&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Scoured Barrens|M20&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Sunlit Marsh|DMU&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Radiant Grove|DMU&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Blossoming Sands|M20&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Tranquil Expanse|M19&quot;
- }
-]
-</property>
-   </properties>
-  </object>
-  <object id="138" template="../../../../common/maps/obj/treasure.tx" x="198" y="305">
-   <properties>
-    <property name="reward">[{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 2,
-         &quot;colors&quot;: [&quot;red&quot;,&quot;blue&quot;],
-         &quot;cardTypes&quot;: [&quot;Creature&quot;],
-         &quot;colorType&quot;: &quot;MultiColor&quot;,
-         &quot;superTypes&quot; :[&quot;Legendary&quot;]
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 2,
-         &quot;colors&quot;: [&quot;black&quot;, &quot;green&quot;],
-         &quot;cardTypes&quot;: [&quot;Creature&quot;],
-         &quot;colorType&quot;: &quot;MultiColor&quot;,
-         &quot;superTypes&quot; :[&quot;Legendary&quot;]
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 2,
-         &quot;colors&quot;: [&quot;red&quot;,&quot;white&quot;],
-         &quot;cardTypes&quot;: [&quot;Creature&quot;],
-         &quot;colorType&quot;: &quot;MultiColor&quot;,
-         &quot;superTypes&quot; :[&quot;Legendary&quot;]
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 2,
-         &quot;colors&quot;: [&quot;green&quot;,&quot;blue&quot;],
-         &quot;cardTypes&quot;: [&quot;Creature&quot;],
-         &quot;colorType&quot;: &quot;MultiColor&quot;,
-         &quot;superTypes&quot; :[&quot;Legendary&quot;]
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 2,
-         &quot;colors&quot;: [&quot;black&quot;,&quot;white&quot;],
-         &quot;cardTypes&quot;: [&quot;Creature&quot;],
-         &quot;colorType&quot;: &quot;MultiColor&quot;,
-         &quot;superTypes&quot; :[&quot;Legendary&quot;]
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 2,
-         &quot;colors&quot;: [&quot;red&quot;,&quot;green&quot;],
-         &quot;cardTypes&quot;: [&quot;Creature&quot;],
-         &quot;colorType&quot;: &quot;MultiColor&quot;,
-         &quot;superTypes&quot; :[&quot;Legendary&quot;]
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 2,
-         &quot;colors&quot;: [&quot;red&quot;,&quot;black&quot;],
-         &quot;cardTypes&quot;: [&quot;Creature&quot;],
-         &quot;colorType&quot;: &quot;MultiColor&quot;,
-         &quot;superTypes&quot; :[&quot;Legendary&quot;]
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 2,
-         &quot;colors&quot;: [&quot;black&quot;,&quot;blue&quot;],
-         &quot;cardTypes&quot;: [&quot;Creature&quot;],
-         &quot;colorType&quot;: &quot;MultiColor&quot;,
-         &quot;superTypes&quot; :[&quot;Legendary&quot;]
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 2,
-         &quot;colors&quot;: [&quot;white&quot;,&quot;blue&quot;],
-         &quot;cardTypes&quot;: [&quot;Creature&quot;],
-         &quot;colorType&quot;: &quot;MultiColor&quot;,
-         &quot;superTypes&quot; :[&quot;Legendary&quot;]
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 2,
-         &quot;colors&quot;: [&quot;green&quot;,&quot;white&quot;],
-         &quot;cardTypes&quot;: [&quot;Creature&quot;],
-         &quot;colorType&quot;: &quot;MultiColor&quot;,
-         &quot;superTypes&quot; :[&quot;Legendary&quot;]
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Temple of Malady|FDN&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Temple of Epiphany|FDN&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Temple of Silence|FDN&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Temple of Triumph|FDN&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Temple of Mystery|FDN&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Temple of Plenty|FDN&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Temple of Malice|FDN&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Temple of Deceit|FDN&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Temple of Abandon|FDN&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Temple of Enlightenment|FDN&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Dragonskull Summit|M10&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Drowned Catacomb|M10&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Glacial Fortress|M10&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Rootbound Crag|M10&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Sunpetal Grove|M10&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Clifftop Retreat|ISD&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Hinterland Harbor|ISD&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Isolated Chapel|ISD&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Sulfur Falls|ISD&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Woodland Cemetery|ISD&quot;
- }
-]
-</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="139" template="../../../../common/maps/obj/treasure.tx" x="233" y="305">
+  <object id="140" template="../../../../common/maps/obj/treasure.tx" x="215" y="255">
    <properties>
     <property name="reward">[
 {
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Putrefy|C19&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Golgari Charm|UMA&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Grisly Salvage|C18&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Deathreap Ritual|C18&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Grave Upheaval|C16&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Mayhem Devil|WAR&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Blightning|ALA&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Rakdos Charm|C17&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Plasm Capture|OTC&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Biomass Mutation|C21&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Simic Charm|CMR&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Decisive Denial|STX&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Rhythm of the Wild|RNA&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Treacherous Terrain|C16&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Hull Breach|C13&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Gruul Charm|GTC&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Boros Charm|FDN&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Rip Apart|STX&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Assemble the Legion|NCC&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Reconstruct History|STX&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Ancient Excavation|C16&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Extract from Darkness|2X2&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Memory Plunder|C17&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Drown in the Loch|ELD&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Expressive Iteration|STX&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Izzet Charm|RVR&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Galvanic Iteration|INR&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Electrolyze|IMA&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Migratory Route|C16&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Dovin's Veto|WAR&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Azorius Charm|IMA&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Sphinx's Revelation|RVR&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Mortify|FDN&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Despark|C20&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Etchings of the Chosen|MH1&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Debtors' Knell|C21&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Sylvan Reclamation|C16&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Armadillo Cloak|EMA&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Camaraderie|NCC&quot;
- },
-{
-        &quot;type&quot;: &quot;card&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;cardName&quot;: &quot;Collective Blessing|RTR&quot;
- }
-]
-</property>
-    <property name="spawn.Hard" type="bool" value="false"/>
-    <property name="spawn.Normal" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="140" template="../../../../common/maps/obj/treasure.tx" x="214.667" y="248.333">
-   <properties>
-    <property name="reward">[{
         &quot;type&quot;: &quot;item&quot;,
         &quot;probability&quot;: 1,
         &quot;count&quot;: 1,
         &quot;itemName&quot;: &quot;Colorless rune&quot;
+ },
+{
+        &quot;type&quot;: &quot;item&quot;,
+        &quot;probability&quot;: 1,
+        &quot;count&quot;: 1,
+        &quot;itemName&quot;: &quot;White Rune&quot;
+ },
+{
+        &quot;type&quot;: &quot;item&quot;,
+        &quot;probability&quot;: 1,
+        &quot;count&quot;: 1,
+        &quot;itemName&quot;: &quot;Blue Rune&quot;
+ },
+{
+        &quot;type&quot;: &quot;item&quot;,
+        &quot;probability&quot;: 1,
+        &quot;count&quot;: 1,
+        &quot;itemName&quot;: &quot;Black Rune&quot;
+ },
+{
+        &quot;type&quot;: &quot;item&quot;,
+        &quot;probability&quot;: 1,
+        &quot;count&quot;: 1,
+        &quot;itemName&quot;: &quot;Red Rune&quot;
+ },
+{
+        &quot;type&quot;: &quot;item&quot;,
+        &quot;probability&quot;: 1,
+        &quot;count&quot;: 1,
+        &quot;itemName&quot;: &quot;Green Rune&quot;
  },
 {
         &quot;type&quot;: &quot;item&quot;,
@@ -1442,7 +552,7 @@
    <properties>
     <property name="dialog">[
   {
-    &quot;text&quot;:&quot;Did you know? Each of the capitol cities in the five colored biomes sells a cheap life boost and a cheap teleport rune to help get across the map faster. Capitols also have a smith where you can craft cards according to specific criteria, as well as quests that grant additional permanent life bonuses and other rewards. Perhaps make visiting the capitols a first priority.&quot;,
+    &quot;text&quot;:&quot;Did you know? Each of the capitol cities in the five colored biomes has shops with unique player items. Capitols also have a smith where you can craft cards according to specific criteria, as well as quests that grant additional permanent life bonuses and other rewards. Perhaps make visiting the capitols a first priority.&quot;,
     &quot;options&quot;:[
       { &quot;name&quot;:&quot;Continue&quot; }
 ]
@@ -1505,58 +615,9 @@ A rare few items are also slotless or use a custom slot. They won't show up on y
 ]</property>
    </properties>
   </object>
-  <object id="156" template="../../../../common/maps/obj/treasure.tx" x="107.333" y="272">
+  <object id="164" template="../../../../common/maps/obj/scroll.tx" x="215" y="287">
    <properties>
-    <property name="reward">[
-{
-        &quot;type&quot;: &quot;item&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;itemName&quot;: &quot;Silver Blessing of Speed&quot;
- },
-{
-        &quot;type&quot;: &quot;item&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;itemName&quot;: &quot;White Rune&quot;
- },
-{
-        &quot;type&quot;: &quot;item&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;itemName&quot;: &quot;Blue Rune&quot;
- },
-{
-        &quot;type&quot;: &quot;item&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;itemName&quot;: &quot;Black Rune&quot;
- },
-{
-        &quot;type&quot;: &quot;item&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;itemName&quot;: &quot;Red Rune&quot;
- },
-{
-        &quot;type&quot;: &quot;item&quot;,
-        &quot;probability&quot;: 1,
-        &quot;count&quot;: 1,
-        &quot;itemName&quot;: &quot;Green Rune&quot;
- }
-]
-</property>
-   </properties>
-  </object>
-  <object id="158" template="../../../../common/maps/obj/dialog.tx" x="97.6667" y="283.417" width="37.3333" height="39.8333" visible="1">
-   <properties>
-    <property name="dialog">[
-{
-   &quot;text&quot;: &quot;Thanks for being a playtester! Since the game is currently only around half-finished, the map is going to be very empty. Take a speed boost and all the capitol runes as a courtesy.&quot;,
-   &quot;options&quot;: [{
-      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
-}
-]</property>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Atogatog&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
  </objectgroup>

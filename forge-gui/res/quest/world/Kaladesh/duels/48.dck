@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Ezio
+Title=Ezio
+Icon=Ezio.jpg
+Difficulty=Easy
+Description=Kaladesh/Showdown_(Caslav,_Czech_Republic)/Michal_Michal_-_Mono_U_Engulf_the_Shore_(Standard,_#658130).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Consulate Skygate
+3 Filigree Familiar
+4 Manic Scribe
+4 Minister of Inquiries
+3 Pilgrim's Eye
+4 Engulf the Shore
+2 Epiphany at the Drownyard
+4 Glimmer of Genius
+4 Startled Awake
+4 Take Inventory
+4 Evolving Wilds
+20 Island
+[Sideboard]
+4 Ceremonious Rejection
+2 Confiscation Coup
+4 Negate
+1 Shrewd Negotiation
+4 Summary Dismissal

@@ -22,6 +22,8 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.player.actions.PassPriorityAction;
 import forge.game.spellability.SpellAbility;
+import forge.gamemodes.net.server.FServerManager;
+import forge.gamemodes.net.server.FServerManager.AfkTimeout;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
@@ -51,6 +53,19 @@ public class InputPassPriority extends InputSyncronizedBase {
         super(controller);
     }
 
+    @Override
+    public void showAndWait() {
+        final FServerManager server = FServerManager.getInstance();
+        final AfkTimeout timeout = server != null
+                ? server.armAfkTimeout(getController(), this)
+                : AfkTimeout.NOOP;
+        try {
+            super.showAndWait();
+        } finally {
+            timeout.cancel();
+        }
+    }
+
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
@@ -58,7 +73,7 @@ public class InputPassPriority extends InputSyncronizedBase {
         chosenSa = null;
         Localizer localizer = Localizer.getInstance();
         if (getController().canUndoLastAction()) { //allow undoing with cancel button if can undo last action
-            getController().getGui().updateButtons(getOwner(), localizer.getMessage("lblOK"), localizer.getMessage("lblUndo"), true, true, true);
+            getController().getGui().updateButtons(getOwner(), localizer.getMessage("lblOK"), localizer.getMessage("lblUndo") + " (" + getController().getGame().getStack().getUndoStackSize() + ")", true, true, true);
         }
         else { //otherwise allow ending turn with cancel button
             getController().getGui().updateButtons(getOwner(), localizer.getMessage("lblOK"), localizer.getMessage("lblEndTurn"), true, true, true);

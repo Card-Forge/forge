@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="44" height="23" tilewidth="16" tileheight="16" infinite="0" nextlayerid="33" nextobjectid="348">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="44" height="23" tilewidth="16" tileheight="16" infinite="0" nextlayerid="33" nextobjectid="349">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -11,7 +11,7 @@
  <tileset firstgid="11905" source="../../../../common/maps/tileset/FarmFood.tsx"/>
  <layer id="28" name="Collision" width="44" height="23">
   <data encoding="base64" compression="zlib">
-   eJztl18KwjAMxvvYIXgRXz3DHB61equxe0jQYIjtmqZJ2YMfhLH++fiRphmbpxBmFlx8fi9qWj5r7pW1KYbwjDqWRcCxKngf8R2cK5F3PifJj4SXekl4qVbCDrGxNZRZcpZSXvRr5ZUImWusKVNDeyp5wXirFxXWO/LS88DQqHRfe1hB9H5Cri+n39CI81qwgiiv5F5LpelxEnnxclnzWubAU9DzoG69eS28r+dvoKcXtxVvju/ovD3eI2veIr9/3rKOyJvjwX7Qy+DRS0q8e8wSDo/ex7/ft0nGS/eOYqXe+GzhpXtz4173rJe3559Sy8vrgY9rfUcpl6sXKqBHEw==
+   eJzt11sKwjAQBdCAPxXBjfjrGmpxqdEluJviPmSwQy9jHtNkEvrhhQH7YDikyYDj0blRlIx8nqpcpuWde+ZdPzj3HMosk8IxF3gfw7eky8O1fKZZH40Xe2m8mBnsVG/xDpo131Lr5X5bvZqwOWf1gT2USqwX3d/aC8P7nb34PbhKEjuvNVYKnk9a68vpt0oivRZWCno151qbkhmnSSuvjLXXcg1ahmYe7dvWXove1/Na3LOV28ob8u3dW9O75563WN+/N569eV+HtTA8D2oN1rMk5U2ZNY4Wsw+96M550dPLil7+fVv6a7zsit1vcc4svDX/KWvM6JWWkvScY6G1+gBsblEO
   </data>
  </layer>
  <layer id="24" name="Background" width="44" height="23">
@@ -26,12 +26,12 @@
  </layer>
  <layer id="26" name="Clutter" width="44" height="23">
   <data encoding="base64" compression="zlib">
-   eJzVlstKAzEUhtNpp0WhXXnZ1LWdloI6XkAEH8CVbnwIsboV30KlVnBTwQdw6ULBy0LBlS5FFyJ9AFetIpiYxCZpMjmZdhb+8JN2cpL55kxyJgiZ1fYjOgXte/YYda6PFDVEreGuxbnahvGtLELvk3rb+FbLCK2V9TGc2YX9b34cf4Dz1AwQOgl6eeNqE7PWDLxxpL6nC8x6Gehj+5lX1ViB2ta/k+9e4+vhd372PsIMQrPMT5n4vDbZeE0xe3gNLE1Ejzsd19sm6H51VdS8W3433zrr3gHkWXQaLfRaJ5Jf036vWXJk639LUbvw2hSHdySI7udSec+n9Yy2nKq8Jtl48ll5fTwq62UugT3bD6+oZprG3w/R/8dpuV/MbUfJM0SfjOUZ83pFfL9ibwyEt1Kh7XKGxt8x3kVAbm9ChG5DGC/Rl8N+gtSxFZy3qxJC1yU4wyDlsh6INjDvC2Z9TZjXlGco7+7M4FggWsjR1kvLJrzqtUGo49P9w/NEvlmioQqVerTtJ1ef6rgWNrCP2Pmv7sF5+XPyPcW/HyS//Df03ADVocIrMsfRQ9V9v7loNifzVqdo2885KUleIpH3jF37L7xcUbyNrGxxrMvZKq7IPb99uZ5y3vWU7HlWw0jLzeuayJw0r8rcVlpRP0htjFs=
+   eJy9lstKAzEUQNNpp0WhXfnY1LWdloI6PkAEP8CVbvwIsboV/0KlVnBTwQ9w6ULBx0LBlS5FFyL9AFetIpiYxCZpMrmZdjxwSTu5kzlzJ8kMQmbafkSnwL5nz1HH+kjRgNAa7oY4VttwfiuL0PukPmx+q2WE1sr6HO7s4v43Ps4/wHVqBgidBL2+cdnErjWDbxzU53SBXS8DfW4/46qMFWjY+nfy3WN8PvyOz55HmEFolsVTJr6vDZuvKWcPz4GliejzTsf1YQO6Xl2JGnfL79ZbF7pnALkXHaOF3tBB6mta7zVLjWz9bykaLr424viOBNH9HNX3fFrvaKup6mvC5pPPyvPjUZkvcwms2X58RZppmn8/RP8fp+V+sbYdpc4QPpnLM/b1ivh6xd4ciG+lQtvlDM2/Y76LgNrehAjdhjBfwpfDeoLsYyu4blclhK5LcIdB4jIfCBvY9wW7vibsa6oz1Hd3ZnAuEBZytPXSchBf9dgg6Ph0/fA6kXeWGFBCZT/a9pPbn+p4L2zgOGLff3UP7svvk68p/v4g9eW/od8NUA4VX9E5Dg9V9/XmwmxO9q1O0Rb6/taRpC9B9D1jx/r5rvtPX06UbyMrh3iuy7dVXMg1v315P+W+6yk55tkeRloefF8TnZP2VZ3bSivyA/4KjEE=
   </data>
  </layer>
  <layer id="27" name="ClutterBis" width="44" height="23">
   <data encoding="base64" compression="zlib">
-   eJy1l89rE0EUxyeb7m40WLEHvbR60ENS20BoUz14EEGl3vRPUAperHoXsWmhd1uaevHS9uS/Ii3qTShIK6IHLyKSqKDvMfPYN28nu7Np+oUv+yO7M599892ZjVJ++hopdbem1L1aso3BFXbsqx8l7bz+vkV6vxUrNQe+EqevWwuUWo5t47kV2D4CpsVasr0IvsSOs/hcvNySFftrx5q5Fyr1G/wntK9bD+zjel2pSfAX85wzI0rNCr8329aIHy+yyHpIr7A6InMH7tkEv4qS87+gzSnWLu7fBNZbhnfnnNuLYbLvq7OjxczzgPXGZ94qu9umscnjfTOlfRy8PA8vHXnl4/LBjPMwed85ctXPmDOehy70d/JUfz8Os/t+Etptk7Lygc8YNWF+yXGlqa/neUDe1+N2fWif+uT1w/37MCYPAr2Vv2dpp+rPi6zT8O406nYeumGaMY+XWBccvO1JOAHvQmB8bcJm3a76884D6516Og8o11yF5uMt5zD0KJtjXHK1iff45hffH5kH1MPL2qiFILE8RmN9SlC7f4F2lqi+29Wkztfhnq2SbZQ8d8P05coDSdbZVd+nhtdHxMuZ94Fj1WTte9N9X3tWX4e8lIdNx1hSnc/A+jpm1lieXZrDfHQI7X+cSJ/fZ2PCeVfZnFKUdxpYG4K3caIYLzFLPSvrsUbtAe9bh3ebfry+eSgiztw1GURmmVfp5+V8Xh8VqS/pINL+ZOaknmlDfnORaA08HR2Nl9oYVC9izdyK7Xe9A2O/wXLN54W/YT5v1np3VBFzz8xRP9l3ITLjc8gcDMI7LF2oaNarcZoXhd+2ebzz8Fy3xdx/ULK3w9CSyQFfYwfh/Ry4mY9Dhya/xIvftD3G7MO7BHNHG7zsuW4Ng7nD/uNwZuKl74a5uP//TSmeBbl2D6LzFW3MMOclZvxvu27WCczJuOj3PyGkKPo=
+   eJy1l89rE0EUxyeb7m40WLGHemn1oIektoFgUz14EEGl3vRPUAperHoXsWmh91pMe+ml7cl/RRT1JhSkFdGDF5GSqKDvMfPYN28nu7Np+oUv+yO7M599892ZjVJ++hYpdbem1L1aso3BFXbsq58l7bz+vkd6vxUrNQe+EqevexkotRzbxnMrsH0ETIu1ZHsBfJEdZ/G5eLklK/bXjjVzL1TqN/hPaF+3HtjH9bpSU+Cv5jkvjyg1K/zBbFsjfrzIIushvcLqiMwduGcDvBkl5w+hzWnWLu7fBNZbhnf3rNuLYbLvq/HRYuZ5wHrjM2+X3W3T2OTxvp7WPg5enoc1R175uHw04zxM3veOXPUz5oznoQv9nTzV34/D7L6fhHbbpKx84DNGTZhfclxp6ut5HpB3a8KuD+1Tn7x+uH8fxuRBoLfy9yztVv15kXUG3p1G3c5DN0wz5vES64KDtz0FJ+BdCIyvTdqsO1V/3nlgvVNP5wHlmqvQfLzlHIYeZXOMS6428R7f/OL7I/OAenhJG7UQJJbHaKxPCWr3L9DOEtV3p5rU+Trcs12yjZLnbpi+XHkgyTq76vvU8PqIeDnzHnCsmqz9aLrva8/q65CX8rDhGEuq8xlYX8fMGsuzS3OYjw6g/U+T6fN7bEw47yqbU4ryzgBrQ/A2ThTjJWapZ2U91qh3wPvG4bdNP17fPBQRZ+6aDCKzzKv083I+r4+K1Je0H2l/NnNSz7Qhv7lItAaejo7GS20MqhexZm7F9rvegbF/xXLN54W/YT5v1np3VBFzz8xRv9h3ITLjc8gcDMI7LJ2vaNarcZoXtV/K552H57odpO/j22FoyeSAr7GS99CD90vgZj4OHZj8Ei9+0/YYsw/vEswdbfCy57o1DOYO+4/DmYmXvhvm4v7/N6V4FuTaPYjOVbQxw5yXmPG/7bpZJzAnE6Lf/+hlKOY=
   </data>
  </layer>
  <layer id="30" name="Ground" width="44" height="23">
@@ -44,12 +44,20 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYCAerNbBjnEBKQLm/WAlTu0zLgRGBvkaDAwFQFyoQR33ooNHjKgYn/uJcW830J09QNyLw72UgNnqDAxz1MnXj829y4HuXAHEK2ng3u1At+6Aurecl4Ghkpd4Gpd78YH/ILs0MGl0eXSALVwreEnDMECKe6WBbpHRwKTR5dHdiByulAJS3EsKoKYbkQGye5HjE1vc4opvYuWpAZDdixyf6HGNS4wY+VuylLtzFOAG82QG2gWDH2hrMjDoaFJmBqX1GynAHehWDwrdS6sybhTgB7+AbbLfONplwxkQqu+oDQK1GBiCtMjXT6i+ozbIBbo1jwL3gsAZXeq4hV5gKLoXV19rMIPB5F4AWCxcCQ==
+   eJxjYCAerNbBjnEBKQLm/WAlTu0zLgRGBvkaDAwFQFyoQR33ooNHjKgYn/uJcW830J09QNyLw72UgNnqDAxz1MnXj829y4HuXAHEK2ng3u1At+6Aurecl4Ghkpd4Gpd78YH/ILs0MGl0eXSALVwreEnDMECKe6WBbpHRwKTR5dHdiByulAJS3EsKoKYbkQGye5HjE1vc4opvYuWpAZDdixyf6HGNS4wY+VuylLtzFOAG82QG2gWDH2hrMjDoaFJmBqX1GynAHehWDwrdS6sybhTgB7+AbbLfONplwxkQqu+oDXC1iYkFhOo7agNK3QsCZ3Sp4xZ6gaHoXmrEE73BYHIvAPUEXW8=
   </data>
  </layer>
  <objectgroup id="12" name="Objects" opacity="0.9" offsetx="3.15789" offsety="7.89474">
   <object id="119" template="../../../../common/maps/obj/enemy.tx" x="79.0765" y="73.6979">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Thunder Lasso|OTJ&quot;, &quot;Sterling Keykeeper|OTJ&quot; ] }"/>
     <property name="enemy" value="Baron Bertram"/>
     <property name="spawn.Hard" type="bool" value="true"/>
@@ -59,6 +67,14 @@
   </object>
   <object id="122" template="../../../../common/maps/obj/enemy.tx" x="140.709" y="184.104">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Lilah"/>
     <property name="speedModifier" type="float" value="10"/>
     <property name="threatRange" type="int" value="20"/>
@@ -68,6 +84,14 @@
   <object id="173" template="../../../../common/maps/obj/waypoint.tx" x="81.1753" y="181.105" width="13" height="11.6667"/>
   <object id="178" template="../../../../common/maps/obj/enemy.tx" x="542.342" y="177.105">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Bruse Tarl"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
@@ -77,6 +101,14 @@
   <object id="195" template="../../../../common/maps/obj/collision.tx" x="-17.158" y="-30.4362" width="16" height="413.083"/>
   <object id="206" template="../../../../common/maps/obj/enemy.tx" x="605.676" y="246.105">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Kellan"/>
     <property name="threatRange" type="int" value="0"/>
     <property name="waypoints" value=""/>
@@ -84,6 +116,14 @@
   </object>
   <object id="211" template="../../../../common/maps/obj/enemy.tx" x="252.675" y="86.271">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Taii Wakeen"/>
     <property name="speedModifier" type="float" value="10"/>
     <property name="threatRange" type="int" value="40"/>
@@ -92,6 +132,14 @@
   </object>
   <object id="214" template="../../../../common/maps/obj/enemy.tx" x="389.342" y="151.772">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Annie Flash"/>
     <property name="spawn.Hard" type="bool" value="true"/>
     <property name="threatRange" type="int" value="0"/>
@@ -100,6 +148,14 @@
   <object id="235" template="../../../../common/maps/obj/gold.tx" x="44.0088" y="71.7717"/>
   <object id="240" template="../../../../common/maps/obj/enemy.tx" x="554.842" y="86.6053">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Kirri"/>
     <property name="speedModifier" type="float" value="10"/>
     <property name="threatRange" type="int" value="40"/>
@@ -108,6 +164,14 @@
   </object>
   <object id="254" template="../../../../common/maps/obj/enemy.tx" x="204.009" y="205.939">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Stella Lee"/>
     <property name="speedModifier" type="float" value="10"/>
     <property name="threatRange" type="int" value="40"/>
@@ -119,7 +183,7 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="267" template="../../../../common/maps/obj/dialog.tx" x="587.342" y="307.355" width="49.5" height="15.5" visible="1">
+  <object id="267" template="../../../../common/maps/obj/dialog.tx" x="584.842" y="324.355" width="49.5" height="15.5" visible="1">
    <properties>
     <property name="dialog">[
 {
@@ -159,6 +223,14 @@
   <object id="270" template="../../../../common/maps/obj/waypoint.tx" x="480.342" y="87.1053"/>
   <object id="271" template="../../../../common/maps/obj/enemy.tx" x="460.925" y="117.522">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Bucolic Ranch|OTJ&quot;, &quot;Bristlepack Sentry|OTJ&quot; ] }"/>
     <property name="enemy" value="Yuma"/>
     <property name="speedModifier" type="float" value="10"/>
@@ -189,6 +261,14 @@
   <object id="301" template="../../../../common/maps/obj/collision.tx" x="621.217" y="105.105" width="32.25" height="30.6663"/>
   <object id="302" template="../../../../common/maps/obj/enemy.tx" x="544.509" y="151.772">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Bristly Bill"/>
     <property name="speedModifier" type="float" value="10"/>
     <property name="threatRange" type="int" value="50"/>
@@ -197,6 +277,14 @@
   </object>
   <object id="305" template="../../../../common/maps/obj/enemy.tx" x="636.175" y="154.772">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Miriam"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
@@ -247,6 +335,14 @@
   <object id="316" template="../../../../common/maps/obj/waypoint.tx" x="87.3421" y="230.772" width="13" height="11.6667"/>
   <object id="319" template="../../../../common/maps/obj/enemy.tx" x="126.66" y="229.923">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Ertha Jo"/>
     <property name="speedModifier" type="float" value="10"/>
     <property name="threatRange" type="int" value="20"/>
@@ -257,6 +353,14 @@
   <object id="321" template="../../../../common/maps/obj/waypoint.tx" x="144.509" y="101.939" width="13" height="11.6667"/>
   <object id="322" template="../../../../common/maps/obj/enemy.tx" x="186.175" y="103.439">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Vihaan"/>
     <property name="speedModifier" type="float" value="10"/>
     <property name="threatRange" type="int" value="40"/>
@@ -265,6 +369,14 @@
   </object>
   <object id="323" template="../../../../common/maps/obj/enemy.tx" x="124.092" y="272.772">
    <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
     <property name="enemy" value="Bonny Pall"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="20"/>
@@ -310,7 +422,7 @@
   </object>
   <object id="335" template="../../../../common/maps/obj/shop.tx" x="31.0921" y="140.855" width="16" height="16">
    <properties>
-    <property name="commonShopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop"/>
+    <property name="commonShopList" value="OutlawBoosters"/>
     <property name="mythicShopList" value=""/>
     <property name="rareShopList" value=""/>
     <property name="uncommonShopList" value=""/>
@@ -398,5 +510,51 @@
   </object>
   <object id="345" template="../../../../common/maps/obj/inn.tx" x="148.842" y="220.689" width="16" height="16"/>
   <object id="347" template="../../../../common/maps/obj/manashards.tx" x="157.842" y="39.7719"/>
+  <object id="348" template="../../../../common/maps/obj/enemy.tx" x="548.175" y="284.772">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'Howdy. How do ya feel about causing a real ruckus in this town?'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;This town wasn't big enough to handle me.&quot;,
+					&quot;text&quot;: &quot;'Excellent. You know, some say slaughtering an entire town is too big a crime for a fashion violation but I say they just don't understand style.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Vadmir, New Blood&quot;, &quot;count&quot;: 1 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 3000}                
+                      ]
+                    } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 14
+							}
+						}
+					],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;Sure, I like a good ruckus&quot;,
+					&quot;text&quot;: &quot;'This place's called Omenport. Built around a bunch'a portals. Real boomtown. But all these would-be cowpokes and outlaws have stolen from me the one thing that can never be replaced - my fashion! Yes, they're all wearing cowboy hats and I want them dead for stealing my style. There's a whole mess of em' around, but take out all 14 and there'll be a fat stack of coin for ya.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;I'm not much for ruckus raising.&quot;,
+					&quot;text&quot;: &quot;'Sayonara.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Vadmir"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

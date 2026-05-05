@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=C3PO
+Title=C3PO
+Icon=C3PO.jpg
+Difficulty=Easy
+Description=Dragons_of_Tarkir/Pro_Tour_Dragons_of_Tarkir_-_24_Points_or_Better/Christiano_Christo_-_Red_Deck_Wins_(Standard,_#222906).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Foundry Street Denizen
+2 Goblin Heelcutter
+4 Goblin Rabblemaster
+3 Lightning Berserker
+4 Monastery Swiftspear
+2 Zurgo Bellstriker
+4 Lightning Strike
+4 Searing Blood
+4 Stoke the Flames
+4 Wild Slash
+4 Dragon Fodder
+21 Mountain
+[Sideboard]
+3 Arc Lightning
+2 Eidolon of the Great Revel
+4 Roast
+4 Thunderbreak Regent

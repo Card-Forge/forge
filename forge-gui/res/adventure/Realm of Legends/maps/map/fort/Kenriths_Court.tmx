@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="35" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="157">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="35" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="167">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Virtue of Loyalty&quot;, &quot;Youthful Knight&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Virtue of Loyalty|WOE&quot;, &quot;Mace of the Valiant|ELD&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -35,7 +35,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzNmMtOwkAUhrtCli6wUCAacCPBGN3rM3CJL8DOuDA+hxuNcocHgJ36BsS4MC7EJ9K/KZMex7m1M034ky8tdDrzz+mcmWk9T62venQstDxvD/igCEogAGVQAdWWpiLou64vk0Yr0Ef7AzAEIzAGEzAFMzA38Nc0aGeVwltIoY34AR8UQQkEoAwqoNpOWLFDb6H6aH8AhmAExmACpmAG5ht/uhhlpUIH8QM+KIISCEAZVEC18/+ex5rnPdXkdequJ1Ef7Q/AEIzAGEzAFMzAfOOPPqNT5MOZIidU15M+60IX8QM+KIISCEAZVEC1G5V7T1gvr7vArBwf+8W5uvxSc92VWP/52B9dqO9rKK4/+573Al59a3tSLTT+ltz1pOMnjWznCpv8XG+eXbh+MVxLlJ+sz6K1TpRbWfgyER+Ty0Z8pOfbord6fKTntvOVK/H+VuS/pHK1xtL8oZ5s/fFK65fmD++P/WczB/QM1yJeojZl40+3hqv0k9KfqE2Zv22Ryt/tfkQWe0vT8aPKX+YvC5mOH9384nIvm0Y6fzZ5otPuQYRKvcP4SM9PduIyWa0lJv5k6+9V/q/HrJVmX0g9sn0Fy2XTcXljkF9p3nFFHqlsxyXztK7b76k/NM9Z1v8md59qHj1G2ftcxEMufjeRvZ/QusIYhveJ4sjKiTzq+kV9Xef1ZUOpviWpfFKPzKfMH42VyJftfMF8Uqhnmb+ksRKJz0vTPBXFlvkT+XKxNxT9ltXL+kFj+0l8qfopyi3X3yz5foQxo/FyvU7+AmTWxEU=
+   eJzNmLtOwzAUhj0BI0NJm7YCUZYiEIIdngAkLuIFmKgYEM/BAoLe2weADXiDCjEgBuCJ4I9SK6fGt9iOxC99Spo49u8TH9spY3p9NtJj6ZCxJRCBMqiAGFRBDdQPDRVB3w1zGRdNQBvtd0AX9EAfDMAQjMDYwt+GRTsTB28JpSPED0SgDCogBlVQA/WjnBUH9JaojfY7oAt6oA8GYAhGYDz1Z4pRUSodI34gAmVQATGoghqoH/995m6VsftVdZ2m+3nURvsd0AU90AcDMAQjMJ76o+9oG/mwo8kJ3f2877p0gviBCJRBBcSgCmqgfpKWe8tZr6jr2K6cGPuHXX35R8P9UOL9F2Pf3NM/t665/xQx9gxeIm97Sj0Y/D0K9/OOHxf5zhU++fk1fXfJ+sUJLVl+8j7L1jpZbhXhy0ZiTE7XsyM9/y96bWRHeu47X4WS6G9CruVVqDWW5g/15OtPlKtfmj+iP37NZw44s1yLRMnaVI0/0xqu04+jP1mbKn//RTp/V8spRewtbcePLn+5vyJkO35M80vIvayLTP588sSkxZUUnc7WsiM935rPyhS1ltj4U62/rYVZj0XLZV9IPfJ9Bc9l23F5aZFfLt+4osf9JmMHzey677jknsR6XfQOf+eoo6WoR9X/DWF88NhTT7zeTZS9mUu5ncu+TVTfJ3ROTmKYPEfHI2+Dl5N5fFeMX9pX7utiQV5WlO6/JOpTFs8Jm/Wp8kdjJfPlO19wnxQaW5W/vLGSScxL2zyVjQHuT+YrxN5Q9ltVL+8Hje0H8aXrpyy3Qv9nKfYjiRmNV+h18hd55Mqq
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -75,6 +75,8 @@
    <properties>
     <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Rowan's Battleguard|ELD&quot;, &quot;Bespoke Battlegarb|WOE&quot;, &quot;Dark Tutelage|WOT&quot;]}"/>
     <property name="enemy" value="Rowan"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="10"/>
    </properties>
@@ -84,6 +86,8 @@
     <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Shield of the Righteous|ARB&quot;, &quot;Knight of the Keep|ELD&quot;, &quot;Honden of Cleaning Fire|EMA&quot;
 ]}</property>
     <property name="enemy" value="Will"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="10"/>
    </properties>
@@ -111,8 +115,10 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Venerable Knight|ELD&quot;, &quot;Court of Ardenvale|WOC&quot;, &quot;Court of Vantress|WOC&quot;, &quot;Court of Locthwain|WOC&quot;, &quot;Court of Embereth|WOC&quot;, &quot;Court of Garenbrig|WOC&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Court of Ardenvale|WOC&quot;, &quot;Court of Vantress|WOC&quot;, &quot;Court of Locthwain|WOC&quot;, &quot;Court of Embereth|WOC&quot;, &quot;Court of Garenbrig|WOC&quot;]}"/>
     <property name="enemy" value="Kenrith"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="40"/>
    </properties>
@@ -157,6 +163,8 @@
   }
 ]
 </property>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="50"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
@@ -375,5 +383,94 @@ Your manasight stone glows brightly, sensing a truly mighty legend in this place
   <object id="153" template="../../../../common/maps/obj/collision.tx" x="494.819" y="239.93" width="33.3621" height="32.141"/>
   <object id="154" template="../../../../common/maps/obj/collision.tx" x="532.319" y="441.263" width="23.0288" height="9.47433"/>
   <object id="155" template="../../../../common/maps/obj/collision.tx" x="533.152" y="463.263" width="23.0288" height="9.47433"/>
+  <object id="157" template="../../../../common/maps/obj/enemy.tx" x="589.75" y="165.75">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Steelclaw Lance|ELD&quot;, &quot;Tournament Grounds|ELD&quot;, &quot;Shining Armor|ELD&quot;]}"/>
+    <property name="enemy" value="Syr Gwyn"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;item&quot;,
+    &quot;probability&quot;: 1,
+    &quot;count&quot;: 1,
+    &quot;itemName&quot;: &quot;Key to the Castle&quot;
+  }
+]
+</property>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="158" template="../../../../common/maps/obj/enemy.tx" x="263.25" y="176">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Bespoke Battlegarb|WOE&quot;, &quot;Dark Tutelage|WOT&quot;]}"/>
+    <property name="enemy" value="Rowan"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="159" template="../../../../common/maps/obj/enemy.tx" x="182.75" y="177.75">
+   <properties>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Shield of the Righteous|ARB&quot;, &quot;Honden of Cleaning Fire|EMA&quot;
+]}</property>
+    <property name="enemy" value="Will"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="10"/>
+   </properties>
+  </object>
+  <object id="162" template="../../../../common/maps/obj/enemy.tx" x="224.25" y="75.25">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;Eldraine... I have failed you...&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Court of Ardenvale|WOC&quot;, &quot;Court of Vantress|WOC&quot;, &quot;Court of Locthwain|WOC&quot;, &quot;Court of Garenbrig|WOC&quot;]}"/>
+    <property name="enemy" value="Kenrith"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="163" template="../../../../common/maps/obj/shop.tx" x="416.667" y="469.667">
+   <properties>
+    <property name="commonShopList" value="Knight"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="164" template="../../../../common/maps/obj/shop.tx" x="368.667" y="484.667">
+   <properties>
+    <property name="commonShopList" value="Nobles"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="165" template="../../../../common/maps/obj/shop.tx" x="128.667" y="502">
+   <properties>
+    <property name="commonShopList" value="EldrainePacks"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+  <object id="166" template="../../../../common/maps/obj/shop.tx" x="65" y="471">
+   <properties>
+    <property name="commonShopList" value="Equip"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

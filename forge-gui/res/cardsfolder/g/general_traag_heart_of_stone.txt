@@ -1,0 +1,9 @@
+Name:General Traag, Heart of Stone
+ManaCost:3 R R
+Types:Legendary Artifact Creature Elemental Soldier
+PT:4/3
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerDescription$ When NICKNAME enters, you may sacrifice another artifact. When you do, NICKNAME deals 4 damage to target creature.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ Sac<1/Artifact.Other/another artifact> | Execute$ TrigDealDamage | TriggerDescription$ When you do, NICKNAME deals 4 damage to target creature.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature | NumDmg$ 4
+Oracle:Trample\nWhen General Traag enters, you may sacrifice another artifact. When you do, General Traag deals 4 damage to target creature.

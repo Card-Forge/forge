@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Shango
+Title=Shango
+Icon=Shango.jpg
+Difficulty=Medium
+Description=./Standard/Tarkir_Dragonstorm/Kinoshita_Kiyoto_-_Rogue_(Standard,_#2444015).dck
+Deck Type=constructed
+
+[Main]
+2 Felidar Cub
+3 Elas il-Kor, Sadistic Pilgrim
+3 Amalia Benavides Aguirre
+2 Bartolomé del Presidio
+4 Snarling Gorehound
+4 Hinterland Sanctifier
+4 Nesting Bot
+2 Zahur, Glory's Past
+4 Voice of Victory
+2 Shocking Sharpshooter
+1 Song of Totentanz
+4 Raise the Past
+4 Thunder of Unity
+2 Plains
+1 Swamp
+1 Mountain
+4 Concealed Courtyard
+1 Nomad Outpost
+2 Elegant Parlor
+2 Shadowy Backstreet
+4 Bleachbone Verge
+4 Sunbillow Verge
+1 Dalkovan Encampment
+[Sideboard]
+2 Felidar Cub
+2 Day of Judgment
+2 Temporary Lockdown
+2 The Stone Brain
+3 Deep-Cavern Bat
+2 Warleader's Call
+2 Darkstar Augur

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Radioactive Man
+Title=Radioactive Man
+Icon=Radioactive Man.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Crimson_Vow/Fabien_Rigoulet_-_Jund_Werewolves_(Standard,_#1244296).dck
+Deck Type=constructed
+
+[Main]
+1 Cemetery Prowler
+1 Avabruck Caretaker
+2 Howlpack Piper
+3 Tovolar, Dire Overlord
+3 Volatile Arsonist
+3 Reckless Stormseeker
+4 Kessig Naturalist
+4 Werewolf Pack Leader
+2 Esika's Chariot
+1 Cinderclasm
+4 Infernal Grasp
+3 Shatterskull Smashing
+3 Ranger Class
+3 Arlinn, the Pack's Hope
+1 Lair of the Hydra
+2 Deathcap Glade
+2 Forest
+2 Den of the Bugbear
+4 Darkbore Pathway
+4 Blightstep Pathway
+4 Cragcrown Pathway
+4 Rockfall Vale
+[Sideboard]
+1 Culling Ritual
+1 Avabruck Caretaker
+2 Go Blank
+2 Snakeskin Veil
+2 Outland Liberator
+2 Duress
+2 Cinderclasm
+3 Burning Hands

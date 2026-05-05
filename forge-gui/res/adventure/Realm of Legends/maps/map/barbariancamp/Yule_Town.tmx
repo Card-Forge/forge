@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="125">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="126">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Rites of Flourishing&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Rites of Flourishing&quot;, &quot;Abominable Treefolk&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -127,8 +127,10 @@
     ]
    }
 ]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Arcum's Sleigh|ICE&quot;, &quot;tinder wall|ICE&quot;, &quot;Jack-in-the-Mox|UGL&quot;, &quot;Jolly Gerbils|BLB&quot;, &quot;Rimefur Reindeer|WOE&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Arcum's Sleigh|ICE&quot;, &quot;Tinder Wall|ICE&quot;, &quot;Jack-in-the-Mox|UGL&quot;, &quot;Jolly Gerbils|BLB&quot;, &quot;Rimefur Reindeer|WOE&quot;]}"/>
     <property name="enemy" value="Santa"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="10"/>
    </properties>
@@ -162,7 +164,7 @@
     <property name="threatRange" type="int" value="0"/>
    </properties>
   </object>
-  <object id="86" template="../../obj/treasure.tx" x="279.89" y="143.591">
+  <object id="86" template="../../obj/treasure.tx" x="278.435" y="145.227">
    <properties>
     <property name="reward">[{
   &quot;type&quot;: &quot;randomCard&quot;,
@@ -251,7 +253,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="102" template="../../../../common/maps/obj/dialog.tx" x="248.417" y="173" width="79.1667" height="53.25" visible="1">
+  <object id="102" template="../../../../common/maps/obj/dialog.tx" x="250.053" y="177.364" width="79.1667" height="53.25" visible="1">
    <properties>
     <property name="dialog">[
 {
@@ -519,6 +521,24 @@ With that, he vanishes in a cloud of smoke. Almost immediately after, another be
 ]</property>
     <property name="enemy" value="Hidetsugu"/>
     <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="125" template="../../../../common/maps/obj/enemy.tx" x="279.636" y="157.091">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Arcum's Sleigh|ICE&quot;, &quot;Tinder Wall|ICE&quot;, &quot;Jack-in-the-Mox|UGL&quot;, &quot;Rimefur Reindeer|WOE&quot;]}"/>
+    <property name="enemy" value="Santa"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="10"/>
    </properties>
   </object>
  </objectgroup>

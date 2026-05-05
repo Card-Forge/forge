@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Sun Quan
+Title=Sun Quan
+Icon=Sun Quan.jpg
+Difficulty=Hard
+Description=../Modern/Dark_Ascension/GP_Lincoln_-_Day_1_Undefeated_Decks/Owen_Turtenwald_-_Zoo_(Modern,_#26252).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Geist of Saint Traft
+3 Grim Lavamancer
+4 Kird Ape
+4 Loam Lion
+4 Steppe Lynx
+4 Tarmogoyf
+2 Thalia, Guardian of Thraben
+4 Lightning Bolt
+4 Lightning Helix
+4 Path to Exile
+4 Tribal Flames
+4 Arid Mesa
+1 Blood Crypt
+1 Hallowed Fountain
+2 Marsh Flats
+4 Misty Rainforest
+1 Plains
+1 Sacred Foundry
+4 Scalding Tarn
+1 Steam Vents
+1 Stomping Ground
+1 Temple Garden
+[Sideboard]
+3 Ancient Grudge
+3 Mana Leak
+2 Mindbreak Trap
+2 Oblivion Ring
+2 Sulfur Elemental
+2 Thrun, the Last Troll
+1 Torpor Orb

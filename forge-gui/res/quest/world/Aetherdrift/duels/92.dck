@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Hagrid
+Title=Hagrid
+Icon=Hagrid.jpg
+Difficulty=Very Hard
+Description=./Modern/Aetherdrift/Topher_Wallace_-_Esper_Control_(Modern,_#2368651).dck
+Deck Type=constructed
+
+[Main]
+4 Abhorrent Oculus
+2 Ketramose, the New Dawn
+2 Murktide Regent
+4 Psychic Frog
+2 Nihil Spellbomb
+2 Consider
+3 Counterspell
+4 Fatal Push
+3 Force of Negation
+2 Shoot the Sheriff
+2 Sink into Stupor
+3 Spell Snare
+3 Thought Scour
+2 Pest Control
+4 Unearth
+1 Gloomlake Verge
+2 Hallowed Fountain
+1 Island
+3 Marsh Flats
+1 Otawara, Soaring City
+4 Polluted Delta
+1 Swamp
+2 Undercity Sewers
+3 Watery Grave
+[Sideboard]
+2 Brazen Borrower
+3 Consign to Memory
+3 Harbinger of the Seas
+2 Mystical Dispute
+1 Path to Exile
+2 Stony Silence
+2 Surgical Extraction

@@ -1,0 +1,13 @@
+Name:Vanguard of the Restless
+ManaCost:2 W
+Types:Creature Spirit Knight
+PT:2/2
+K:Flying
+S:Mode$ Continuous | Affected$ Spirit.YouCtrl | AddPower$ X | AddToughness$ X | Description$ Spirits you control get +1/+1 for each time you've cast your commander from the command zone this game.
+T:Mode$ ChangesZone | ValidCard$ Spirit.YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Graveyard | Execute$ TrigReturn | TriggerDescription$ Whenever a Spirit you control enters, you may pay {2}{W}. If you do, return this card from your graveyard to the battlefield.
+SVar:TrigReturn:AB$ ChangeZone | Cost$ 2 W | Origin$ Graveyard | Destination$ Battlefield
+SVar:X:Count$TotalCommanderCastFromCommandZone
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Graveyard
+DeckHints:Type$Spirit
+Oracle:Flying\nSpirits you control get +1/+1 for each time you've cast your commander from the command zone this game.\nWhenever a Spirit you control enters, you may pay {2}{W}. If you do, return this card from your graveyard to the battlefield.

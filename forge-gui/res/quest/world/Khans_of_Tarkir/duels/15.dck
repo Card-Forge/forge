@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Optimus Prime
+Title=Optimus Prime
+Icon=Optimus Prime.jpg
+Difficulty=Medium
+Description=Khans_of_Tarkir/States_Manchester/Ben_Chapman_-_Mono-Green_Devotion_(Standard,_#89474).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Arbor Colossus
+4 Courser of Kruphix
+4 Elvish Mystic
+4 Genesis Hydra
+4 Hornet Queen
+3 Karametra's Acolyte
+1 Nylea, God of the Hunt
+4 Polukranos, World Eater
+4 Sylvan Caryatid
+4 Voyaging Satyr
+16 Forest
+4 Nykthos, Shrine to Nyx
+3 Windswept Heath
+1 Wooded Foothills
+[Sideboard]
+2 Hooded Hydra
+2 Hornet Nest
+2 Hunt the Hunter
+1 Naturalize
+2 Nissa, Worldwaker
+4 Nylea's Disciple
+2 Unravel the AEther

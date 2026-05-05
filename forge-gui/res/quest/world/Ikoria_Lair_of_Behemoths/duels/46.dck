@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Vanellope von Schweetz
+Title=Vanellope von Schweetz
+Icon=Vanellope von Schweetz.jpg
+Difficulty=Easy
+Description=./Standard/Ikoria_Lair_of_Behemoths/Abby_Rose_Gibson_-_Mardu_Aristocrats_(Standard,_#947149).dck
+Deck Type=constructed
+
+[Main]
+3 Midnight Reaper
+3 Woe Strider
+4 Luminous Broodmoth
+4 Cauldron Familiar
+4 Cruel Celebrant
+4 Mayhem Devil
+4 Hunted Witness
+4 Priest of Forgotten Gods
+4 Witch's Oven
+2 Bastion of Remembrance
+1 Castle Locthwain
+1 Castle Ardenvale
+1 Mountain
+2 Swamp
+2 Plains
+2 Savai Triome
+3 Blood Crypt
+4 Fabled Passage
+4 Sacred Foundry
+4 Godless Shrine
+[Sideboard]
+1 Midnight Reaper
+2 Dire Tactics
+2 Noxious Grasp
+2 Devout Decree
+2 Kaya, Orzhov Usurper
+3 Agonizing Remorse
+3 Mythos of Snapdax

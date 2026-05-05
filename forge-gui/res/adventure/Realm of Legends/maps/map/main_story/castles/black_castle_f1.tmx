@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="65">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="66">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -46,9 +46,11 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Plains|C16|[337]&quot;, &quot;Island|C16|[340]&quot;, &quot;Mountain|C16|[346]&quot;, &quot;Forest|C16|[349]&quot;, &quot;Ink-Treader Nephilim|GPT&quot;, &quot;Guardians of Meletis|THS&quot;, &quot;daxos of meletis|THS&quot;]}"/>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Command Tower&quot;, &quot;Exotic Orchard&quot;, &quot;Ink-Treader Nephilim&quot;, &quot;Guardians of Meletis&quot;, &quot;Powerstone Minefield&quot;, &quot;Fisher's Talent&quot; ] }"/>
     <property name="enemy" value="Kynaios and Tiro"/>
     <property name="pursueRange" type="int" value="0"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="50"/>
     <property name="threatRange" type="int" value="100"/>
    </properties>
@@ -104,6 +106,24 @@
   &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
   &quot;colors&quot;: [ &quot;white&quot; ]
 }]</property>
+   </properties>
+  </object>
+  <object id="65" template="../../../../../common/maps/obj/enemy.tx" x="210.143" y="271.709">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;Both your foes fall to the ground fatally wounded as you strike your final blow. They stare into each others eyes and clasp hands, saying no words as they both meet their deaths together.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Command Tower&quot;, &quot;Ink-Treader Nephilim&quot;, &quot;Guardians of Meletis&quot;, &quot;Powerstone Minefield&quot;, &quot;Fisher's Talent&quot; ] }"/>
+    <property name="enemy" value="Kynaios and Tiro"/>
+    <property name="pursueRange" type="int" value="0"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="100"/>
    </properties>
   </object>
  </objectgroup>

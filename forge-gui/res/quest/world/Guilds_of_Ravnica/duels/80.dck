@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Prince Valiant
+Title=Prince Valiant
+Icon=Prince Valiant.jpg
+Difficulty=Hard
+Description=./Modern/Guilds_of_Ravnica/Aedan_Simons-Rud_-_Burn_(Modern,_#765509).dck
+Deck Type=constructed
+
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+1 Grim Lavamancer
+4 Monastery Swiftspear
+4 Boros Charm
+4 Lightning Bolt
+3 Lightning Helix
+4 Searing Blaze
+2 Shard Volley
+2 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+4 Bloodstained Mire
+4 Inspiring Vantage
+5 Mountain
+2 Sacred Foundry
+1 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+2 Destructive Revelry
+2 Kor Firewalker
+1 Lightning Helix
+2 Path to Exile
+2 Rest in Peace
+1 Risk Factor
+2 Searing Blood
+1 Skullcrack
+2 Smash to Smithereens

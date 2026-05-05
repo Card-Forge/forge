@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="132">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="134">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <properties>
-  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Three Tree City&quot; ]}"/>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Three Tree Mascot&quot; ]}"/>
  </properties>
  <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
  <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
@@ -186,6 +186,7 @@
     ]
    }
 ]</property>
+    <property name="effect" value="{ &quot;startBattleWithCard&quot;: [ &quot;Short Bow&quot;, &quot;Rockface Village&quot; ] }"/>
     <property name="enemy" value="Mabel"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="50"/>
@@ -363,14 +364,6 @@
     <property name="uncommonShopList" value="Artifact,Merfolk,Wizard,Bird4Blue,Pirate4Blue,Spirit4Blue,Sliver2Blue,Rogue4Blue,Wand,Equip,Multicolor"/>
    </properties>
   </object>
-  <object id="118" template="../../../../common/maps/obj/shop.tx" x="298" y="341.333">
-   <properties>
-    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Wand,Enchantment,Instant,Creature"/>
-    <property name="mythicShopList" value="Planeswalker,WUBRG,PhyrexianColorless"/>
-    <property name="rareShopList" value="Land4Colorless,Vehicle,White,Blue,Red,Green,Black,FlipShop,Saga"/>
-    <property name="uncommonShopList" value="Artifact,Land,Assembly,Golem,Sliver,Wall,Equip,Enchantment,Instant,Creature,Battle"/>
-   </properties>
-  </object>
   <object id="119" template="../../../../common/maps/obj/shop.tx" x="393.091" y="148">
    <properties>
     <property name="commonShopList" value="GenerousShop"/>
@@ -386,14 +379,6 @@
    <properties>
     <property name="rotation" value="White,Blue,Black,Green,Red,Colorless"/>
     <property name="signYOffset" type="float" value="-2"/>
-   </properties>
-  </object>
-  <object id="122" template="../../../../common/maps/obj/shop.tx" x="153.5" y="246">
-   <properties>
-    <property name="commonShopList" value="BoosterPackShop,AlphaBoosterPackShop,BetaBoosterPackShop,GammaBoosterPackShop,DeltaBoosterPackShop"/>
-    <property name="mythicShopList" value=""/>
-    <property name="rareShopList" value=""/>
-    <property name="uncommonShopList" value=""/>
    </properties>
   </object>
   <object id="123" template="../../../../common/maps/obj/dialog.tx" x="269.916" y="428.25" width="36.8333" height="15.5" visible="1">
@@ -487,6 +472,19 @@ Though uprooted from our home in Valley, still we stand together.&quot;,
     <property name="enemy" value="Ashiok"/>
     <property name="speedModifier" type="float" value="0"/>
     <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="132" template="../../../../common/maps/obj/shop.tx" x="297.333" y="339.333">
+   <properties>
+    <property name="commonShopList" value="BloomburrowBoosters"/>
+   </properties>
+  </object>
+  <object id="133" template="../../../../common/maps/obj/shop.tx" x="153.045" y="244.727">
+   <properties>
+    <property name="commonShopList" value="White,White,Enchantment4White,Creature2White,Instant4White"/>
+    <property name="mythicShopList" value="Planeswalker,WUBRG,RWG,RWU,RWB,UWG,UWB,GWB,PhyrexianWhite"/>
+    <property name="rareShopList" value="Land4White,Azorius,Boros,Selesnya,Orzhov,Vehicle,Colorless"/>
+    <property name="uncommonShopList" value="Artifact,Knight4White,Bird4White,Soldier4White,Angel,Sliver2White,Spirit4White,Wand,Equip,Multicolor"/>
    </properties>
   </object>
  </objectgroup>

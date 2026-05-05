@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=MamanBrigitte
+Title=MamanBrigitte
+Icon=MamanBrigitte.jpg
+Difficulty=Medium
+Description=./Standard/Aetherdrift/Brian_Glenn_-_Boros_Enchantments_(Standard,_#2366809).dck
+Deck Type=constructed
+
+[Main]
+2 Callous Sell-Sword
+4 Emberheart Challenger
+4 Heartfire Hero
+4 Manifold Mouse
+4 Optimistic Scavenger
+4 Monstrous Rage
+2 Demonic Ruckus
+4 Ethereal Armor
+4 Feather of Flight
+4 Shardmage's Rescue
+4 Sheltered by Ghosts
+4 Battlefield Forge
+4 Inspiring Vantage
+4 Mountain
+2 Plains
+2 Restless Bivouac
+4 Sunbillow Verge
+[Sideboard]
+3 Elspeth's Smite
+3 Get Lost
+3 Knight of Grace
+2 Rest in Peace
+4 Urabrask's Forge

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Akongo
+Title=Akongo
+Icon=Akongo.jpg
+Difficulty=Very Hard
+Description=./Modern/Marvels_Spider_Man/David_Dufour_-_W-U-R-G_Domain_(Modern,_#2635197).dck
+Deck Type=constructed
+
+[Main]
+4 Doorkeeper Thrull
+4 Phlage, Titan of Fire's Fury
+4 Ragavan, Nimble Pilferer
+4 Scion of Draco
+4 Territorial Kavu
+2 Kraven, Proud Predator
+4 Lightning Bolt
+3 Stubborn Denial
+1 Consign to Memory
+4 Leyline Binding
+4 Leyline of the Guildpact
+4 Arid Mesa
+4 Flooded Strand
+4 Wooded Foothills
+2 Arena of Glory
+2 Steam Vents
+1 Godless Shrine
+1 Indatha Triome
+1 Mountain
+1 Plains
+1 Temple Garden
+1 Thundering Falls
+[Sideboard]
+3 Consign to Memory
+2 Damping Sphere
+2 Mystical Dispute
+2 Wrath of the Skies
+1 Clarion Conqueror
+1 Containment Priest
+1 Nihil Spellbomb
+1 Rough
+1 Surgical Extraction
+1 Wear

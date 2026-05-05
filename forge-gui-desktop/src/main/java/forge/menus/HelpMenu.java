@@ -10,11 +10,13 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
+import forge.error.ExceptionHandler;
 import forge.localinstance.properties.ForgeConstants;
 import forge.toolbox.FOptionPane;
 import forge.util.BuildInfo;
 import forge.util.FileUtil;
 import forge.util.Localizer;
+import forge.view.KeyboardShortcutsDialog;
 
 import static forge.localinstance.properties.ForgeConstants.GITHUB_FORGE_URL;
 
@@ -27,6 +29,7 @@ public final class HelpMenu {
         menu.setMnemonic(KeyEvent.VK_H);
         menu.add(getMenu_GettingStarted());
         menu.add(getMenu_Troubleshooting());
+        menu.add(getMenuItem_KeyboardShortcuts());
         menu.addSeparator();
         menu.add(getMenuItem_ReleaseNotes());
         menu.add(getMenuItem_License());
@@ -67,6 +70,13 @@ public final class HelpMenu {
         return mnu;
     }
 
+    private static JMenuItem getMenuItem_KeyboardShortcuts() {
+        final Localizer localizer = Localizer.getInstance();
+        JMenuItem menuItem = new JMenuItem(localizer.getMessage("lblKeyboardShortcuts"));
+        menuItem.addActionListener(e -> new KeyboardShortcutsDialog().setVisible(true));
+        return menuItem;
+    }
+
     private static JMenuItem getMenuItem_HowToPlayFile() {
         final Localizer localizer = Localizer.getInstance();
         JMenuItem menuItem = new JMenuItem(localizer.getMessage("lblHowtoPlay"));
@@ -77,7 +87,7 @@ public final class HelpMenu {
     private static JMenuItem getMenuItem_OpenLogFile() {
         final Localizer localizer = Localizer.getInstance();
         JMenuItem menuItem = new JMenuItem(localizer.getMessage("lblOpenLogFile"));
-        menuItem.addActionListener(getOpenFileAction(getAbsoluteFile(ForgeConstants.LOG_FILE)));
+        menuItem.addActionListener(getOpenFileAction(ExceptionHandler.getActiveLogFile()));
         return menuItem;
     }
 

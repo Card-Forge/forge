@@ -1,13 +1,17 @@
 package forge.game.card;
 
 import java.util.Map;
+import java.util.Set;
+import java.util.LinkedHashSet;
+import java.util.stream.Collectors;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 
 import forge.game.keyword.Keyword;
+import forge.game.keyword.KeywordInterface;
 
-public record CounterKeywordType(String keyword, String desc) implements CounterType {
+public record CounterKeywordType(String keyword, Keyword type, String desc) implements CounterType {
 
     // Rule 122.1b
     static ImmutableList<String> keywordCounter = ImmutableList.of(
@@ -17,9 +21,18 @@ public record CounterKeywordType(String keyword, String desc) implements Counter
 
     public static CounterKeywordType get(String s) {
         if (!sMap.containsKey(s)) {
-            sMap.put(s, new CounterKeywordType(s, isKeywordCounter(s) ? Keyword.getInstance(s).getTitle() : null));
+            KeywordInterface ki = isKeywordCounter(s) ? Keyword.getInstance(s) : null;
+            sMap.put(s, new CounterKeywordType(s, ki != null ? ki.getKeyword() : null, ki != null ? ki.getTitle() : null));
         }
         return sMap.get(s);
+    }
+
+    public static Set<CounterType> getValues() {
+        // add fixed first
+        Set<CounterType> result = keywordCounter.stream().map(CounterKeywordType::get).collect(Collectors.toCollection(LinkedHashSet::new));
+        // add variable ones later
+        result.addAll(sMap.values());
+        return result;
     }
     
     @Override

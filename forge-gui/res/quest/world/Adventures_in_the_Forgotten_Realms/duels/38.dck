@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=Bridge Troll
+Title=Bridge Troll
+Icon=Bridge Troll.jpg
+Difficulty=Easy
+Description=./Standard/Adventures_in_the_Forgotten_Realms/Brackmeister_-_Mono_Green_Stompy_(Standard,_#1219390).dck
+Deck Type=constructed
+
+[Main]
+4 Werewolf Pack Leader
+4 Old-Growth Troll
+4 Jaspera Sentinel
+4 Swarm Shambler
+4 Esika's Chariot
+4 Blizzard Brawl
+4 Ranger Class
+4 Lair of the Hydra
+4 Faceless Haven
+4 Tangled Florahedron
+4 Kazandu Mammoth
+16 Snow-Covered Forest
+[Sideboard]

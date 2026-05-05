@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Wolverine
+Title=Wolverine
+Icon=Wolverine.jpg
+Difficulty=Medium
+Description=./Standard/Streets_of_New_Capenna/Marcin_Majzner_-_Grixis_Midrange_(Standard,_#1417357).dck
+Deck Type=constructed
+
+[Main]
+1 Tenacious Underdog
+2 Evelyn, the Covetous
+3 Bloodthirsty Adversary
+4 Corpse Appraiser
+4 Bloodtithe Harvester
+4 Fable of the Mirror-Breaker
+1 Ray of Enfeeblement
+1 Spell Pierce
+2 Infernal Grasp
+4 Voltage Surge
+1 Soul Transfer
+1 Duress
+2 The Meathook Massacre
+1 Sorin the Mirthless
+3 Kaito Shizuki
+1 Takenuma, Abandoned Mire
+1 Shipwreck Marsh
+1 Swamp
+1 Mountain
+2 Hive of the Eye Tyrant
+2 Haunted Ridge
+3 Stormcarved Coast
+3 Clearwater Pathway
+4 Xander's Lounge
+4 Riverglide Pathway
+4 Blightstep Pathway
+[Sideboard]
+1 Mind Flayer
+1 Abrade
+1 Disdainful Stroke
+1 Duress
+1 Evelyn, the Covetous
+2 Go Blank
+2 Make Disappear
+2 Ray of Enfeeblement
+3 Annul

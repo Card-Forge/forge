@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="94">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="96">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -84,8 +84,10 @@
   </object>
   <object id="65" template="../../../../common/maps/obj/enemy.tx" x="423.499" y="134.099">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Maned Serval|IKO&quot;, &quot;Weaponize the monsters|IKO&quot;, &quot;sanctuary lockdown|IKO&quot;, &quot;bonders' enclave|IKO&quot;, &quot;ferocity of the wilds|ELD&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Maned Serval|IKO&quot;, &quot;Weaponize the monsters|IKO&quot;, &quot;sanctuary lockdown|IKO&quot;, &quot;ferocity of the wilds|ELD&quot;]}"/>
     <property name="enemy" value="Winota"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="20"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
@@ -96,8 +98,12 @@
   <object id="72" template="../../../../common/maps/obj/waypoint.tx" x="311.792" y="133.372"/>
   <object id="75" template="../../../../common/maps/obj/enemy.tx" x="215" y="68.6667">
    <properties>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Bonder's Ornament|C20&quot;, &quot;Humble Naturalist|IKO&quot;, &quot;Aegis Turtle|IKO&quot;, &quot;Almighty Brushwagg|IKO&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Bonder's Ornament|C20&quot;, &quot;Aegis Turtle|IKO&quot;, &quot;Almighty Brushwagg|IKO&quot;]}"/>
     <property name="enemy" value="Kinnan"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Hard" type="bool" value="true"/>
+    <property name="spawn.Insane" type="bool" value="true"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="10"/>
     <property name="threatRange" type="int" value="30"/>
     <property name="waypoints" value=""/>
@@ -203,5 +209,26 @@ Your manasight stone glows, sensing the power of the legends here.&quot;,
    </properties>
   </object>
   <object id="93" template="../../../../common/maps/obj/manashards.tx" x="241" y="45"/>
+  <object id="94" template="../../../../common/maps/obj/enemy.tx" x="215.636" y="68.9091">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Aegis Turtle|IKO&quot;, &quot;Almighty Brushwagg|IKO&quot;]}"/>
+    <property name="enemy" value="Kinnan"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="10"/>
+    <property name="threatRange" type="int" value="30"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="95" template="../../../../common/maps/obj/enemy.tx" x="422.909" y="133.636">
+   <properties>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Maned Serval|IKO&quot;, &quot;Weaponize the monsters|IKO&quot;]}"/>
+    <property name="enemy" value="Winota"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

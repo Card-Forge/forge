@@ -13,6 +13,7 @@ import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
+import forge.assets.FSkinImage;
 import forge.assets.TextRenderer;
 import forge.card.CardRenderer;
 import forge.card.CardRenderer.CardStackPosition;
@@ -22,9 +23,9 @@ import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gui.card.CardDetailUtil;
 import forge.gui.card.CardDetailUtil.DetailColors;
-import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.IGameController;
 import forge.menu.FCheckBoxMenuItem;
 import forge.menu.FDropDown;
@@ -282,19 +283,20 @@ public class VStack extends FDropDown {
                 return true;
             }
             final GameView gameView = MatchController.instance.getGameView();
-            final IGuiGame gui = MatchController.instance;
             final IGameController controller = MatchController.instance.getGameController();
             final PlayerView player = MatchController.instance.getCurrentPlayer();
             if (player != null) { //don't show menu if tapping on art
-                if (stackInstance.isAbility()) {
-                    FPopupMenu menu = new FPopupMenu() {
-                        @Override
-                        protected void buildMenu() {
+                FPopupMenu menu = new FPopupMenu() {
+                    @Override
+                    protected void buildMenu() {
+                        if (stackInstance.isAbility()) {
                             final String key = stackInstance.getKey();
-                            final boolean autoYield = gui.shouldAutoYield(key);
+                            final boolean autoYield = controller.shouldAutoYield(key);
                             addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("cbpAutoYieldMode"), autoYield,
                                     e -> {
-                                        gui.setShouldAutoYield(key, !autoYield);
+                                        boolean abilityScope = !forge.localinstance.properties.ForgeConstants.AUTO_YIELD_PER_CARD.equals(
+                                                forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_YIELD_MODE));
+                                        controller.setShouldAutoYield(key, !autoYield, abilityScope);
                                         if (!autoYield && stackInstance.equals(gameView.peekStack())) {
                                             //auto-pass priority if ability is on top of stack
                                             controller.passPriority();
@@ -303,41 +305,39 @@ public class VStack extends FDropDown {
                             if (stackInstance.isOptionalTrigger() && stackInstance.getActivatingPlayer().equals(player)) {
                                 final int triggerID = stackInstance.getSourceTrigger();
                                 addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblAlwaysYes"),
-                                        gui.shouldAlwaysAcceptTrigger(triggerID),
+                                        controller.shouldAlwaysAcceptTrigger(triggerID),
                                         e -> {
-                                            if (gui.shouldAlwaysAcceptTrigger(triggerID)) {
-                                                gui.setShouldAlwaysAskTrigger(triggerID);
+                                            if (controller.shouldAlwaysAcceptTrigger(triggerID)) {
+                                                controller.setShouldAlwaysAskTrigger(triggerID);
                                             }
                                             else {
-                                                gui.setShouldAlwaysAcceptTrigger(triggerID);
-                                                if (stackInstance.equals(gameView.peekStack())) {
-                                                    //auto-yes if ability is on top of stack
-                                                    controller.selectButtonOk();
-                                                }
+                                                controller.setShouldAlwaysAcceptTrigger(triggerID);
                                             }
                                         }));
                                 addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblAlwaysNo"),
-                                        gui.shouldAlwaysDeclineTrigger(triggerID),
+                                        controller.shouldAlwaysDeclineTrigger(triggerID),
                                         e -> {
-                                            if (gui.shouldAlwaysDeclineTrigger(triggerID)) {
-                                                gui.setShouldAlwaysAskTrigger(triggerID);
+                                            if (controller.shouldAlwaysDeclineTrigger(triggerID)) {
+                                                controller.setShouldAlwaysAskTrigger(triggerID);
                                             }
                                             else {
-                                                gui.setShouldAlwaysDeclineTrigger(triggerID);
-                                                if (stackInstance.equals(gameView.peekStack())) {
-                                                    //auto-no if ability is on top of stack
-                                                    controller.selectButtonCancel();
-                                                }
+                                                controller.setShouldAlwaysDeclineTrigger(triggerID);
                                             }
                                         }));
                             }
-                            addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblZoomOrDetails"), e -> CardZoom.show(stackInstance.getSourceCard())));
                         }
-                    };
+                        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblYieldToEntireStack"),
+                                Forge.hdbuttons ? FSkinImage.HDYIELD : FSkinImage.WARNING,
+                                e -> {
+                                    controller.sendYieldUpdate(new YieldUpdate.StackYield(player, true));
+                                    controller.passPriority();
+                                }));
+                        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblZoomOrDetails"), e -> CardZoom.show(stackInstance.getSourceCard())));
+                    }
+                };
 
-                    menu.show(this, x, y);
-                    return true;
-                }
+                menu.show(this, x, y);
+                return true;
             }
             CardZoom.show(stackInstance.getSourceCard());
             return true;

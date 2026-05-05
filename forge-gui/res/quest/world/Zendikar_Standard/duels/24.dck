@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Ghost Council
+Title=Ghost Council
+Icon=Ghost Council.jpg
+Difficulty=Easy
+Description=Zendikar/Zendikar_Game_Day_-_Foyer_des_vieux_amis_-_France/Martial_Moreau_-_Bant_Control_(Standard,_#3588).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Baneslayer Angel
+4 Deft Duelist
+2 Jenara, Asura of War
+4 Rhox War Monk
+2 Sphinx of Jwar Isle
+2 Wall of Denial
+3 Bant Charm
+2 Hindering Light
+2 Negate
+4 Path to Exile
+2 Day of Judgment
+1 Mind Spring
+3 Elspeth, Knight-Errant
+3 Forest
+3 Glacial Fortress
+4 Island
+4 Misty Rainforest
+4 Plains
+4 Seaside Citadel
+3 Sunpetal Grove
+[Sideboard]
+2 Celestial Purge
+2 Jace Beleren
+3 Luminarch Ascension
+1 Mind Control
+2 Pithing Needle
+1 Wall of Reverence
