@@ -1146,6 +1146,12 @@ public class CardView extends GameEntityView {
         if (c.isDoubleFaced() && isFaceDown()) //fixes facedown cards with backside...
             alternateState = c.getState(CardStateName.Original);
 
+        // When a card is cloned as an Adventure creature, getAlternateState() returns null
+        // because it only checks original states. Fall back to the Secondary clone state.
+        if (alternateState == null && c.hasState(CardStateName.Secondary)) {
+            alternateState = c.getState(CardStateName.Secondary);
+        }
+
         if (alternateState == null) {
             set(TrackableProperty.AlternateState, null);
         } else {
