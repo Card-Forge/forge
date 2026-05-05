@@ -145,6 +145,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_ALT_PLAYERZONETABS ("false"),
         UI_PRESELECT_PREVIOUS_ABILITY_ORDER ("false"),
         UI_AUTO_YIELD_MODE (ForgeConstants.AUTO_YIELD_PER_ABILITY),
+        UI_AUTO_CALL_COIN_FLIP ("true"),
         UI_SHOW_STORM_COUNT_IN_PROMPT ("false"),
         UI_REMIND_ON_PRIORITY ("false"),
         UI_CARD_COUNTER_DISPLAY_TYPE(ForgeConstants.CounterDisplayType.TEXT.getName()),
