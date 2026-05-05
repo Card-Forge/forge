@@ -74,6 +74,8 @@ public class CustomLimited extends DeckBase {
 
     private boolean singleton;
 
+    private boolean pickTwo;
+
     /** Name of the file containing custom card rankings. */
     private String customRankingsFile = "";
 
@@ -119,6 +121,7 @@ public class CustomLimited extends DeckBase {
         cd.numPacks = data.getInt("NumPacks");
         cd.singleton = data.getBoolean("Singleton");
         cd.numPlayers = data.getInt("NumPlayers");
+        cd.pickTwo = data.getBoolean("PickTwo");
         cd.customRankingsFile = data.get("CustomRankings", "rankings_cubecobra.txt");
         final Deck deckCube = cubes.get(data.get("DeckFile"));
         cd.cardPool = deckCube == null ? ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getUniqueCards(), PaperCard.class) : deckCube.getMain();
@@ -213,6 +216,12 @@ public class CustomLimited extends DeckBase {
     }
 
     public void setSingleton(boolean bIn) { this.singleton = bIn; }
+
+    public boolean isPickTwo() {
+        return pickTwo;
+    }
+
+    public void setPickTwo(boolean bIn) { this.pickTwo = bIn; }
 
     public String getCustomRankingsFileName() {
         return customRankingsFile;

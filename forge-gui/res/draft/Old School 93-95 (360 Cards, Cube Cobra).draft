@@ -5,3 +5,4 @@ Singleton:True
 Booster: 15 Any
 NumPacks: 3
 NumPlayers: 8
+PickTwo: False

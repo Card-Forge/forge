@@ -395,6 +395,8 @@ public class BoosterDraft implements IBoosterDraft {
         final int minPlayers = 2;
         final int maxPlayers = 8;
 
+        boolean pickTwo = draft.isPickTwo();
+
         // Check if numPlayers is set in draft file, if not default to 8.
         if (players == 0) {
             players = N_PLAYERS;
@@ -404,6 +406,12 @@ public class BoosterDraft implements IBoosterDraft {
         }
 
         setPodSize(players);
+
+        if (pickTwo) {
+            this.doublePickDuringDraft = DraftOptions.DoublePick.ALWAYS;
+        } else {
+            this.doublePickDuringDraft = DraftOptions.DoublePick.NEVER;
+        }
 
         final UnOpenedProduct toAdd = new UnOpenedProduct(tpl, dPool);
         toAdd.setLimitedPool(draft.isSingleton());
