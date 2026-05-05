@@ -15,7 +15,6 @@ import forge.trackable.TrackableTypes;
 import forge.trackable.TrackableTypes.TrackableType;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.List;
@@ -494,12 +493,6 @@ public final class NetworkChecksumUtil {
         }
         if (value instanceof Enum<?> e) {
             return e.ordinal();
-        }
-        // KeywordCollectionView has no hashCode or content-based toString — hash by keyword strings
-        if (value instanceof forge.game.keyword.KeywordCollection.KeywordCollectionView kcv) {
-            List<String> kws = kcv.asStringList();
-            Collections.sort(kws);
-            return kws.hashCode();
         }
         // Fallback: use toString() for content-based hashing. Covers types like CardType
         // and ManaCost that have content-based toString() but no hashCode() override.

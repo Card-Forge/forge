@@ -1,8 +1,11 @@
 package forge.screens.online;
 
-import com.google.common.collect.ImmutableList;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
+import forge.assets.FSkinColor;
+import forge.assets.FSkinFont;
 import forge.gamemodes.match.GameLobby;
 import forge.gamemodes.net.ChatMessage;
 import forge.gamemodes.net.IOnlineChatInterface;
@@ -20,10 +23,53 @@ import forge.localinstance.skin.FSkinProp;
 import forge.screens.LoadingOverlay;
 import forge.screens.constructed.LobbyScreen;
 import forge.screens.online.OnlineMenu.OnlineScreen;
+import forge.toolbox.FButton;
+import forge.toolbox.FLabel;
+import forge.util.Utils;
+
+import java.util.List;
 
 public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
+
+    private final FLabel lblTitle;
+    private final FLabel lblWarning;
+    private final FLabel lblGuideText;
+    private final FLabel lblGuideLink;
+    private final FButton btnHost;
+    private final FButton btnJoin;
+
     public OnlineLobbyScreen() {
         super(null, OnlineMenu.getMenu(), new OfflineLobby());
+
+        lblTitle = new FLabel.Builder()
+                .text("- = *  H E R E   B E   E L D R A Z I  * = -")
+                .font(FSkinFont.get(18)).align(Align.center).build();
+        add(lblTitle);
+
+        lblWarning = new FLabel.Builder()
+                .text(Forge.getLocalizer().getMessage("lblOnlineWarning"))
+                .font(FSkinFont.get(14)).align(Align.center).build();
+        add(lblWarning);
+
+        lblGuideText = new FLabel.Builder()
+                .text(Forge.getLocalizer().getMessage("lblOnlineGuideText"))
+                .font(FSkinFont.get(14)).align(Align.center).build();
+        add(lblGuideText);
+
+        lblGuideLink = new FLabel.Builder()
+                .text(Forge.getLocalizer().getMessage("lblNetworkPlayGuide"))
+                .font(FSkinFont.get(14)).align(Align.center)
+                .textColor(FSkinColor.get(FSkinColor.Colors.CLR_ACTIVE))
+                .command(e -> Gdx.net.openURI(ForgeConstants.NETWORK_PLAY_WIKI_URL)).build();
+        add(lblGuideLink);
+
+        btnHost = new FButton(Forge.getLocalizer().getMessage("lblHostGame"));
+        btnHost.setCommand(e -> activateHost());
+        add(btnHost);
+
+        btnJoin = new FButton(Forge.getLocalizer().getMessage("lblJoinGame"));
+        btnJoin.setCommand(e -> activateJoin());
+        add(btnJoin);
     }
 
     private static GameLobby gameLobby;
@@ -57,7 +103,7 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
         Forge.back();
         if (msg.length() > 0) {
             FThreads.invokeInBackgroundThread(() -> {
-                final boolean callBackAlwaysTrue = SOptionPane.showOptionDialog(msg, Forge.getLocalizer().getMessage("lblError"), FSkinProp.ICO_WARNING, ImmutableList.of(Forge.getLocalizer().getMessage("lblOK")), 1) == 0;
+                final boolean callBackAlwaysTrue = SOptionPane.showOptionDialog(msg, Forge.getLocalizer().getMessage("lblError"), FSkinProp.ICO_WARNING, List.of(Forge.getLocalizer().getMessage("lblOK")), 1) == 0;
                 if (callBackAlwaysTrue) { //to activate online menu popup when player press play online
                     GuiBase.setInterrupted(false);
 
@@ -88,54 +134,112 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
             return;
         }
         if (getGameLobby() == null) {
-            setGameLobby(getLobby());
-            //prompt to connect to server when offline lobby activated
+            revalidate();
+        } else {
+            super.onActivate();
+        }
+    }
+
+    @Override
+    protected void doLayoutAboveBtnStart(float startY, float width, float height) {
+        if (getGameLobby() == null) {
+            btnStart.setVisible(false);
+            setLobbyControlsVisible(false);
+
+            float padding = Utils.scale(10);
+            float y = startY + height * 0.15f;
+
+            float labelHeight = lblTitle.getAutoSizeBounds().height + padding;
+            lblTitle.setBounds(padding, y, width - 2 * padding, labelHeight);
+            lblTitle.setVisible(true);
+            y += labelHeight + padding * 2;
+
+            labelHeight = lblWarning.getAutoSizeBounds().height + padding;
+            lblWarning.setBounds(padding, y, width - 2 * padding, labelHeight);
+            lblWarning.setVisible(true);
+            y += labelHeight + padding;
+
+            labelHeight = lblGuideText.getAutoSizeBounds().height + padding;
+            lblGuideText.setBounds(padding, y, width - 2 * padding, labelHeight);
+            lblGuideText.setVisible(true);
+            y += labelHeight;
+
+            labelHeight = lblGuideLink.getAutoSizeBounds().height + padding;
+            lblGuideLink.setBounds(padding, y, width - 2 * padding, labelHeight);
+            lblGuideLink.setVisible(true);
+            y += labelHeight + padding * 4;
+
+            float buttonGap = padding * 2;
+            float buttonWidth = width * 0.35f;
+            float totalButtonWidth = buttonWidth * 2 + buttonGap;
+            float buttonX = (width - totalButtonWidth) / 2;
+            float buttonHeight = Utils.AVG_FINGER_HEIGHT;
+            btnHost.setBounds(buttonX, y, buttonWidth, buttonHeight);
+            btnHost.setVisible(true);
+            btnJoin.setBounds(buttonX + buttonWidth + buttonGap, y, buttonWidth, buttonHeight);
+            btnJoin.setVisible(true);
+        } else {
+            lblTitle.setVisible(false);
+            lblWarning.setVisible(false);
+            lblGuideText.setVisible(false);
+            lblGuideLink.setVisible(false);
+            btnHost.setVisible(false);
+            btnJoin.setVisible(false);
+            setLobbyControlsVisible(true);
+            btnStart.setVisible(true);
+
+            super.doLayoutAboveBtnStart(startY, width, height);
+        }
+    }
+
+    private void activateHost() {
+        setGameLobby(getLobby());
+        revalidate();
+        NetConnectUtil.ensurePlayerName();
+        final String caption = Forge.getLocalizer().getMessage("lblStartingServer");
+        LoadingOverlay.show(caption, true, () -> {
+            final ChatMessage[] result = new ChatMessage[1];
+            final IOnlineChatInterface chatInterface = (IOnlineChatInterface) OnlineScreen.Chat.getScreen();
             FThreads.invokeInBackgroundThread(() -> {
-                //Not in gui thread
-                final String url = NetConnectUtil.getServerUrl();
-                FThreads.invokeInEdtLater(() -> {
-                    //In GUI thread
-                    if (url == null) {
-                        closeConn(""); //go back to previous screen if user cancels connection
+                result[0] = NetConnectUtil.host(OnlineLobbyScreen.this, chatInterface);
+                chatInterface.addMessage(result[0]);
+                NetConnectUtil.copyHostedServerUrl();
+            });
+            OnlineScreen.Lobby.update();
+        });
+    }
+
+    private void activateJoin() {
+        setGameLobby(getLobby());
+        revalidate();
+        FThreads.invokeInBackgroundThread(() -> {
+            final String url = NetConnectUtil.getJoinServerUrl();
+            FThreads.invokeInEdtLater(() -> {
+                if (url == null) {
+                    closeConn("");
+                    return;
+                }
+                final String caption = Forge.getLocalizer().getMessage("lblConnectingToServer");
+                LoadingOverlay.show(caption, true, () -> {
+                    final ChatMessage[] result = new ChatMessage[1];
+                    final IOnlineChatInterface chatInterface = (IOnlineChatInterface) OnlineScreen.Chat.getScreen();
+                    result[0] = NetConnectUtil.join(url, OnlineLobbyScreen.this, chatInterface);
+                    String message = result[0].getMessage();
+                    if (ForgeConstants.CLOSE_CONN_COMMAND.equals(message)) {
+                        closeConn(Forge.getLocalizer().getMessage("UnableConnectToServer", url));
+                        return;
+                    } else if (message != null && message.startsWith(ForgeConstants.CONN_ERROR_PREFIX)) {
+                        String errorDetail = message.substring(ForgeConstants.CONN_ERROR_PREFIX.length());
+                        closeConn(errorDetail);
+                        return;
+                    } else if (ForgeConstants.INVALID_HOST_COMMAND.equals(message)) {
+                        closeConn(Forge.getLocalizer().getMessage("lblDetectedInvalidHostAddress", url));
                         return;
                     }
-                    final boolean joinServer = url.length() > 0;
-                    final String caption = joinServer ?  Forge.getLocalizer().getMessage("lblConnectingToServer") : Forge.getLocalizer().getMessage("lblStartingServer");
-                    LoadingOverlay.show(caption, true, () -> {
-                        //in GUI thread due to above LoadingOverlay.show call executing ThreadUtil.invokeInGameThread(() -> FThreads.invokeInEdtLater(() -> { runnable.run(); ...
-                        final ChatMessage[] result = new ChatMessage[1];
-                        final IOnlineChatInterface chatInterface = (IOnlineChatInterface)OnlineScreen.Chat.getScreen();
-                        if (joinServer) {
-                            result[0] = NetConnectUtil.join(url, OnlineLobbyScreen.this, chatInterface);
-                            String message = result[0].getMessage();
-                            if (ForgeConstants.CLOSE_CONN_COMMAND.equals(message)) { //this message is returned via netconnectutil on exception
-                                closeConn(Forge.getLocalizer().getMessage("UnableConnectToServer", url));
-                                return;
-                            } else if (message != null && message.startsWith(ForgeConstants.CONN_ERROR_PREFIX)) {
-                                // Show detailed connection error
-                                String errorDetail = message.substring(ForgeConstants.CONN_ERROR_PREFIX.length());
-                                closeConn(errorDetail);
-                                return;
-                            } else if (ForgeConstants.INVALID_HOST_COMMAND.equals(message)) {
-                                closeConn(Forge.getLocalizer().getMessage("lblDetectedInvalidHostAddress", url));
-                                return;
-                            }
-                            chatInterface.addMessage(result[0]);
-                        }
-                        else {
-                            FThreads.invokeInBackgroundThread(
-                                    () -> {
-                                        result[0] = NetConnectUtil.host(OnlineLobbyScreen.this, chatInterface);
-                                        chatInterface.addMessage(result[0]);
-                                        NetConnectUtil.copyHostedServerUrl();
-                                    }
-                            );
-                        }
-                        //update menu buttons
-                        OnlineScreen.Lobby.update();
-                    });
+                    chatInterface.addMessage(result[0]);
+                    OnlineScreen.Lobby.update();
                 });
             });
-        }
+        });
     }
 }

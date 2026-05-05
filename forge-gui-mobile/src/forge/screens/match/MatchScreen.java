@@ -53,6 +53,7 @@ import forge.player.PlayerZoneUpdate;
 import forge.screens.FScreen;
 import forge.screens.match.views.VAvatar;
 import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
+import forge.screens.match.views.VChat;
 import forge.screens.match.views.VDevMenu;
 import forge.screens.match.views.VGameMenu;
 import forge.screens.match.views.VLog;
@@ -81,6 +82,7 @@ public class MatchScreen extends FScreen {
     private final VPlayers players;
     private final VReveal revealed;
     private final VLog log;
+    private final VChat chat;
     private final VStack stack;
     private final VDevMenu devMenu;
     private final FieldScroller scroller;
@@ -145,6 +147,12 @@ public class MatchScreen extends FScreen {
         revealed.setDropDownContainer(this);
         log = new VLog(() -> MatchController.instance.getGameView().getGameLog());
         log.setDropDownContainer(this);
+        if (GuiBase.isNetPlay(MatchController.instance)) {
+            chat = new VChat();
+            chat.setDropDownContainer(this);
+        } else {
+            chat = null;
+        }
         devMenu = new VDevMenu();
         devMenu.setDropDownContainer(this);
         stack = new VStack();
@@ -156,6 +164,9 @@ public class MatchScreen extends FScreen {
             menuBar.addTab(Forge.getLocalizer().getMessage("lblGame"), gameMenu);
             menuBar.addTab(Forge.getLocalizer().getMessage("lblPlayers") + " (" + playerPanels.size() + ")", players);
             menuBar.addTab(Forge.getLocalizer().getMessage("lblLog"), log);
+            if (chat != null) {
+                menuBar.addTab(Forge.getLocalizer().getMessage("lblChat"), chat);
+            }
             menuBar.addTab(Forge.getLocalizer().getMessage("lblDev"), devMenu);
             menuBar.addTab(Forge.getLocalizer().getMessage("lblStack") + " (0)", stack);
         } else {
@@ -316,6 +327,9 @@ public class MatchScreen extends FScreen {
     public void onClose(Consumer<Boolean> canCloseCallback) {
         MatchController.writeMatchPreferences();
         SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
+        if (chat != null) {
+            chat.unsubscribe();
+        }
         super.onClose(canCloseCallback);
     }
 
@@ -478,8 +492,11 @@ public class MatchScreen extends FScreen {
                 VPlayerPanel playerPanel = getPlayerPanel(p);
                 if (playerPanel != null && playerPanelsList.contains(playerPanel)) {
                     playerViewSet.add(p);
-                    if (p.getBattlefield() != null) {
-                        for (CardView c : p.getBattlefield()) {
+                    FCollectionView<CardView> battlefield = p.getBattlefield();
+                    if (battlefield != null) {
+                        Iterable<CardView> bfIter = MatchController.instance.isNetGame()
+                                ? battlefield.threadSafeIterable() : battlefield;
+                        for (CardView c : bfIter) {
                             CardAreaPanel panel = CardAreaPanel.get(c);
                             Vector2 origin = panel.getTargetingArrowOrigin();
                             //outside left bounds

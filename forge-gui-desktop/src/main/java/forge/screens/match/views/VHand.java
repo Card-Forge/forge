@@ -141,6 +141,10 @@ public class VHand implements IVDoc<CHand> {
         return VHand.this.hand;
     }
 
+    public PlayerView getPlayer() {
+        return player;
+    }
+
     private boolean isTabVisible() {
         return parentCell != null && parentCell.getSelected() == this;
     }

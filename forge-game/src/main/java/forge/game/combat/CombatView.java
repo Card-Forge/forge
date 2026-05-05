@@ -157,7 +157,7 @@ public class CombatView extends TrackableObject {
         }
         final List<FCollection<CardView>> views = new ArrayList<>();
         for (final Entry<FCollection<CardView>, GameEntityView> entry : bandsWithDefenders) {
-            if (defender != null && defender.equals(entry.getValue())) {
+            if (entry.getValue().equals(defender)) {
                 views.add(entry.getKey());
             }
         }

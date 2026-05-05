@@ -197,6 +197,9 @@ public abstract class ImageFetcher {
                 filename = TextUtil.fastReplace(filename, ".full", ".artcrop");
             }
 
+            if (ImageKeys.missingCards.contains(filename))
+                return;
+
             boolean updateLink = false;
             if ("back".equals(face)) { // Seems getimage relative path don't process variants for back faces.
                 try {
@@ -234,13 +237,14 @@ public abstract class ImageFetcher {
                 }
             }
             final String cardCollectorNumber = paperCard.getCollectorNumber();
-            if (!cardCollectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER) && !cardCollectorNumber.equals("0")) {
-                this.getScryfallDownloadURL(paperCard, face, useArtCrop, hasSetLookup, filename, downloadUrls);
-            } else {
+ 
+            if (cardCollectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER)) {
                 System.out.println("Card " + paperCard.getName() + " does not have a collector number, skipping scryfall download.");
                 ImageKeys.missingCards.add(filename);
                 return;
             }
+
+            this.getScryfallDownloadURL(paperCard, face, useArtCrop, hasSetLookup, filename, downloadUrls);
         } else if (ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD).equals(imageKey)) {
             // Extra logic for hidden card to not clog the other logic
             final String filename = "hidden.png";
@@ -280,6 +284,15 @@ public abstract class ImageFetcher {
                     || destFile.exists())
                 return;
 
+            // token-images.txt lets mods route specific tokens to hosted URLs.
+            for (org.apache.commons.lang3.tuple.Pair<String, String> pair :
+                    FileUtil.readNameUrlFile(ForgeConstants.IMAGE_LIST_TOKENS_FILE)) {
+                if (filename.equalsIgnoreCase(pair.getLeft())) {
+                    downloadUrls.add(pair.getRight());
+                    break;
+                }
+            }
+
             if (tempdata.length < 2) {
                 if (!"planechase".equals(tempdata[0]))
                     System.err.println("Token image key is malformed: " + imageKey);
@@ -289,9 +302,13 @@ public abstract class ImageFetcher {
 
             // Load the paper token from filename + edition
             CardEdition edition = StaticData.instance().getEditions().get(setCode);
-            if (edition == null || edition.getType() == CardEdition.Type.CUSTOM_SET)
-                return; //Custom set token, skip fetching.
-
+            if (edition == null || edition.getType() == CardEdition.Type.CUSTOM_SET) {
+                // Custom/unknown set (e.g. TDLS/Duelist): rely on the URL map above.
+                if (downloadUrls.isEmpty()) return;
+                ImageKeys.missingCards.add(filename);
+                setupObserver(destFile.getAbsolutePath(), callback, downloadUrls);
+                return;
+            }
             // PaperToken pt = StaticData.instance().getAllTokens().getToken(tokenName, setCode);
             Collection<CardEdition.EditionEntry> allTokens = edition.getTokens().get(tokenName);
 

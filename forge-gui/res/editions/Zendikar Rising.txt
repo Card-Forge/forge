@@ -430,7 +430,6 @@ A-198 R A-Oran-Rief Ooze @Daarken
 A-224 U A-Kargan Warleader @Colin Boyer
 A-228 U A-Moss-Pit Skeleton @Bryan Sola
 A-230 M A-Nahiri, Heir of the Ancients @Anna Steinbauer
-A-232 M A-Omnath, Locus of Creation @Chris Rahn
 A-234 R A-Phylath, World Sculptor @Victor Adame Minguez
 A-238 U A-Umara Mystic @Bryan Sola
 A-257 U A-Base Camp @Jokubas Uogintas

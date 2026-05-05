@@ -227,7 +227,7 @@ public class DestroyAi extends SpellAbilityAi {
                         }
                     }
                 } else if (CardLists.getNotType(list, "Land").isEmpty()) {
-                    choice = ComputerUtilCard.getBestLandAI(list);
+                    choice = ComputerUtilCard.getBestLandToRemoveAI(ai, list, sa);
 
                     if ("LandForLand".equals(logic) || "GhostQuarter".equals(logic)) {
                         // Strip Mine, Wasteland - cut short if the relevant logic fails
@@ -425,22 +425,32 @@ public class DestroyAi extends SpellAbilityAi {
         boolean canColorLock = (oppSkippedLandDrop || oppLands.size() > 3)
                 && tgtLand.isBasicLand() && CardLists.count(oppLands, CardPredicates.nameEquals(tgtLand.getName())) == 1;
 
-        // Non-basic lands are currently not ranked in any way in ComputerUtilCard#getBestLandAI, so if a non-basic land is best target,
-        // consider killing it off unless there's too much potential tempo loss.
-        // TODO: actually rank non-basics in that method and then kill off the potentially dangerous (manlands, Valakut) or lucrative
-        // (dual/triple mana that opens access to a certain color) lands
-        boolean nonBasicTgt = !tgtLand.isBasicLand();
+        int targetPriority = ComputerUtilCard.evaluateLandRemovalPriority(ai, tgtLand, sa);
+        boolean mediumPriorityTgt = targetPriority >= 50;
+        boolean highPriorityTgt = targetPriority >= 150;
 
         // Try not to lose tempo too much and not to mana-screw yourself when considering this logic
         int numLandsInHand = CardLists.count(ai.getCardsIn(ZoneType.Hand), CardPredicates.LANDS_PRODUCING_MANA);
         int numLandsOTB = CardLists.count(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS_PRODUCING_MANA);
 
         // If the opponent skipped a land drop, consider not looking at having the extra land in hand if the profile allows it
-        boolean isHighPriority = highPriorityIfNoLandDrop && oppSkippedLandDrop;
+        boolean isHighPriority = highPriorityTgt || (highPriorityIfNoLandDrop && oppSkippedLandDrop);
 
-        boolean timingCheck = canManaLock || canColorLock || nonBasicTgt;
+        boolean timingCheck = canManaLock || canColorLock || mediumPriorityTgt;
         boolean tempoCheck = numLandsOTB >= amountNoTempoCheck
                 || ((numLandsInHand >= amountLandsInHand || isHighPriority) && ((numLandsInHand + numLandsOTB >= amountNoTimingCheck) || timingCheck));
+
+        // Tectonic Edge, Strip Mine, and Wasteland should not cash in a large
+        // share of the AI's own mana base for a merely medium utility target.
+        boolean sacrificesSourceLand = sa.getHostCard().isLand()
+                && ComputerUtilCost.isSacrificeSelfCost(sa.getPayCosts());
+        if (sacrificesSourceLand && !highPriorityTgt && !canManaLock && !canColorLock && numLandsOTB <= 3) {
+            return false;
+        }
+
+        if (!mediumPriorityTgt && ai.getGame().getPlayers().size() > 2 && !canManaLock && !canColorLock) {
+            return false;
+        }
 
         // For Ghost Quarter, only use it if you have either more lands in play than your opponent
         // or the same number of lands but an extra land in hand (otherwise the AI plays too suboptimally)

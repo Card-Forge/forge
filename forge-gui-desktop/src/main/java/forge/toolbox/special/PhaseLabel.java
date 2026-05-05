@@ -20,13 +20,14 @@ public class PhaseLabel extends JLabel {
     private boolean enabled = true;
     private boolean active = false;
     private boolean hover = false;
+    private Runnable onToggled;
 
 
     /**
      * Shows phase labels, handles repainting and on/off states. A
      * PhaseLabel has "skip" and "active" states, meaning
      * "this phase is (not) skipped" and "this is the current phase".
-     * 
+     *
      * @param txt
      *            &emsp; Label text
      */
@@ -39,6 +40,9 @@ public class PhaseLabel extends JLabel {
             @Override
             public void mousePressed(final MouseEvent e) {
                 PhaseLabel.this.enabled = !PhaseLabel.this.enabled;
+                if (PhaseLabel.this.onToggled != null) {
+                    PhaseLabel.this.onToggled.run();
+                }
             }
 
             @Override
@@ -68,11 +72,16 @@ public class PhaseLabel extends JLabel {
 
     /**
      * Determines whether play pauses at this phase or not.
-     * 
+     *
      * @return boolean
      */
     public boolean getEnabled() {
         return this.enabled;
+    }
+
+    /** Fires after the user toggles this label by clicking. */
+    public void setOnToggled(final Runnable r) {
+        this.onToggled = r;
     }
 
     /**

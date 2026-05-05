@@ -552,7 +552,6 @@ public class DeckImport<TModel extends DeckBase> extends FDialog {
             });
         }
 
-
         // === ASSEMBLING ALL PANELS TOGETHER
         // ==================================
         this.add(this.scrollInput, "cell 0 0, w 40%, growy, pushy, spany 2");
