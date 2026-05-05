@@ -87,6 +87,8 @@ public class VField implements IVDoc<CField> {
     private final Border borderAvatarSimple = new LineBorder(new Color(0, 0, 0, 0), 1);
     private final Border borderAvatarHighlighted = new LineBorder(Color.red, 2);
 
+    private final TabDiffTracker tabDiff = new TabDiffTracker();
+
 
     //========= Constructor
     /**
@@ -217,6 +219,19 @@ public class VField implements IVDoc<CField> {
     }
     public void updateZones() {
         detailsPanel.updateZones();
+    }
+
+    public void updateTabLabel() {
+        if (player == null) {
+            return;
+        }
+        final int delta = tabDiff.update(tabletop.getCardPanels().size(), tab);
+        String label = Localizer.getInstance().getMessage("lblPlayField", player.getName());
+        if (delta != 0) {
+            label += " (" + delta + " new)";
+        }
+        tab.setText(label);
+        tab.setToolTipText(label);
     }
 
     private void addLblTicket() {
