@@ -2899,6 +2899,48 @@ public class ComputerUtil {
         return bestBoardPosition;
     }
 
+    public static int evaluateOpponentThreatTo(final Player ai, final Player opponent) {
+        if (ai == null || opponent == null || !opponent.isOpponentOf(ai)) {
+            return 0;
+        }
+
+        int rating = 0;
+        int attackPower = 0;
+
+        rating += opponent.getCardsIn(ZoneType.Hand).size() * 15;
+        rating += opponent.getLandsInPlay().size() * 8;
+
+        for (final Card c : opponent.getCardsIn(ZoneType.Battlefield)) {
+            if (c.isCreature()) {
+                rating += ComputerUtilCard.evaluateCreature(c) / 2;
+                if (CombatUtil.canAttackNextTurn(c, ai)) {
+                    int power = Math.max(0, c.getNetPower());
+                    attackPower += power;
+                    rating += power * 15;
+                }
+            } else if (c.isPlaneswalker()) {
+                rating += 50 + c.getCMC() * 20 + c.getCounters(CounterEnumType.LOYALTY) * 10;
+            } else if (!c.isLand()) {
+                rating += 25 + c.getCMC() * 15;
+            }
+        }
+
+        if (attackPower >= ai.getLife()) {
+            rating += 250;
+        } else if (attackPower >= ai.getLife() / 2) {
+            rating += 100;
+        }
+
+        if (opponent.isMonarch()) {
+            rating += 40;
+        }
+        if (opponent.hasInitiative()) {
+            rating += 40;
+        }
+
+        return rating;
+    }
+
     public static boolean hasReasonToPlayCardThisTurn(final Player ai, final Card c) {
         if (ai == null || c == null) {
             return false;

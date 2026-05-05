@@ -567,6 +567,43 @@ public class ComputerUtilCard {
         return getMostExpensivePermanentAI(list);
     }
 
+    public static Card getBestRemovalTargetAI(final Player ai, final Iterable<Card> list) {
+        if (Iterables.isEmpty(list)) {
+            return null;
+        }
+        final Map<Player, Integer> threatCache = new IdentityHashMap<>();
+        return Aggregates.itemWithMax(list, c -> evaluateRemovalTargetPriority(ai, c, threatCache));
+    }
+
+    public static Card getBestCreatureRemovalTargetAI(final Player ai, final Iterable<Card> list) {
+        if (Iterables.size(list) == 1) {
+            return Iterables.get(list, 0);
+        }
+        final Map<Player, Integer> threatCache = new IdentityHashMap<>();
+        return Aggregates.itemWithMax(IterableUtil.filter(list, CardPredicates.CREATURES),
+                c -> evaluateRemovalTargetPriority(ai, c, threatCache));
+    }
+
+    private static int evaluateRemovalTargetPriority(final Player ai, final Card c, final Map<Player, Integer> threatCache) {
+        int value;
+        if (c.isCreature()) {
+            value = evaluateCreature(c);
+        } else if (c.isLand()) {
+            value = evaluateLandRemovalPriority(ai, c, null, false);
+        } else {
+            value = 50 + 30 * c.getCMC();
+            if (c.isPlaneswalker()) {
+                value += c.getCounters(CounterEnumType.LOYALTY) * 10;
+            }
+        }
+
+        if (ai != null && c.getController().isOpponentOf(ai)) {
+            value += threatCache.computeIfAbsent(c.getController(),
+                    p -> ComputerUtil.evaluateOpponentThreatTo(ai, p)) / 4;
+        }
+        return value;
+    }
+
     /**
      * getBestCreatureAI.
      *
