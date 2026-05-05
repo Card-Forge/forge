@@ -190,9 +190,7 @@ public class SimulateMatch {
             if (sw.isStarted()) {
                 sw.stop();
             }
-            if (!g1.isGameOver()) {
-                g1.setGameOver(GameEndReason.Draw);
-            }
+            g1.setGameOver(GameEndReason.Draw);
         }
 
         List<GameLogEntry> log;
