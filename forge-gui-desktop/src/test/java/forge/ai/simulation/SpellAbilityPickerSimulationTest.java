@@ -9,12 +9,19 @@ import org.testng.AssertJUnit;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import forge.ai.AiPlayDecision;
+import forge.ai.AiController;
+import forge.ai.ComputerUtilCard;
+import forge.ai.PlayerControllerAi;
+import forge.ai.simulation.GameStateEvaluator.Score;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
@@ -64,6 +71,876 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         AssertJUnit.assertNotNull(sa);
         AssertJUnit.assertEquals(bearCard, sa.getTargetCard());
         AssertJUnit.assertNull(sa.getTargets().getFirstTargetedPlayer());
+    }
+
+    @Test
+    public void testOnePlaySafetyLearnsLethalDrawTriggerDamage() {
+        Game game = initAndCreateGame();
+        Player p = setupAi(game, false);
+        p.setLife(2, null);
+
+        addCards("Island", 3, p);
+        Card divination = addCardToZone("Divination", p, ZoneType.Hand);
+        fillLibrary(p, 2);
+
+        Player opponent = opponentPlayer(game);
+        Card xyris = addCard("Xyris, the Writhing Storm", opponent);
+        Card impactTremors = addCard("Impact Tremors", opponent);
+
+        moveToMainPhase(game, p);
+
+        AiController ai = ai(p);
+        SpellAbility drawSa = firstAbility(divination, p);
+        AssertJUnit.assertEquals(AiPlayDecision.CurseEffects, ai.checkOnePlaySafety(drawSa));
+        AssertJUnit.assertNull(ai.chooseSpellAbilityToPlay());
+        AssertJUnit.assertNull(ai.chooseSpellAbilityToPlay());
+        AssertJUnit.assertTrue("Safety checker should remember Xyris as a removal threat",
+                ai.getSafetyThreatBonus(xyris) > 0);
+        AssertJUnit.assertTrue("Safety checker should remember Impact Tremors as a removal threat",
+                ai.getSafetyThreatBonus(impactTremors) > 0);
+    }
+
+    @Test
+    public void testSafetyFactRaisesRemovalPriority() {
+        Game game = initAndCreateGame();
+        Player p = setupAi(game, false);
+        p.setLife(2, null);
+
+        addCards("Island", 3, p);
+        Card divination = addCardToZone("Divination", p, ZoneType.Hand);
+        fillLibrary(p, 2);
+
+        Player opponent = opponentPlayer(game);
+        addCard("Xyris, the Writhing Storm", opponent);
+        Card impactTremors = addCard("Impact Tremors", opponent);
+        Card serraAngel = addCard("Serra Angel", opponent);
+
+        moveToMainPhase(game, p);
+
+        AiController ai = ai(p);
+        SpellAbility drawSa = firstAbility(divination, p);
+        AssertJUnit.assertEquals(AiPlayDecision.CurseEffects, ai.checkOnePlaySafety(drawSa));
+        Card beastWithin = addCardToZone("Beast Within", p, ZoneType.Hand);
+
+        CardCollection possibleTargets = new CardCollection();
+        possibleTargets.add(serraAngel);
+        possibleTargets.add(impactTremors);
+        AssertJUnit.assertEquals("Learned safety facts should make Impact Tremors the preferred removal target",
+                impactTremors, ComputerUtilCard.getKnownSafetyThreatToRemove(p, possibleTargets));
+
+        SpellAbility removalSa = firstAbility(beastWithin, p);
+        AssertJUnit.assertTrue("Learned safety facts should make the AI willing to spend removal now",
+                ComputerUtilCard.useRemovalNow(removalSa, impactTremors, 0, ZoneType.Graveyard));
+    }
+
+    @Test
+    public void testSafetyFactLearnsGravePactAsRemovalPriority() {
+        Game game = initAndCreateGame();
+        Player p = setupAi(game, false);
+
+        addCards("Swamp", 3, p);
+        addCard("Blightsteel Colossus", p);
+        Card murder = addCardToZone("Murder", p, ZoneType.Hand);
+
+        Player opponent = opponentPlayer(game);
+        Card gravePact = addCard("Grave Pact", opponent);
+        Card angel = addCard("Serra Angel", opponent);
+
+        moveToMainPhase(game, p);
+
+        AiController ai = ai(p);
+        SpellAbility murderSa = firstAbility(murder, p);
+        murderSa.getTargets().add(angel);
+
+        AssertJUnit.assertEquals(AiPlayDecision.CurseEffects, ai.checkOnePlaySafety(murderSa));
+        AssertJUnit.assertTrue("Safety checker should remember Grave Pact as a removal threat",
+                ai.getSafetyThreatBonus(gravePact) > 0);
+        AssertJUnit.assertEquals("A plain creature should not be blamed for the unsafe result",
+                0, ai.getSafetyThreatBonus(angel));
+
+        CardCollection possibleTargets = new CardCollection();
+        possibleTargets.add(angel);
+        possibleTargets.add(gravePact);
+        AssertJUnit.assertEquals("Learned safety facts should make Grave Pact the preferred removal target",
+                gravePact, ComputerUtilCard.getKnownSafetyThreatToRemove(p, possibleTargets));
+    }
+
+    @Test
+    public void testOnePlaySafetyAvoidsWheelIntoXyris() {
+        Game game = initAndCreateGame();
+        Player p = setupAi(game, false);
+
+        addCards("Mountain", 3, p);
+        addCardToZone("Wheel of Fortune", p, ZoneType.Hand);
+        fillLibrary(p, 7);
+
+        Player opponent = opponentPlayer(game);
+        addCard("Xyris, the Writhing Storm", opponent);
+        fillLibrary(opponent, 7);
+
+        moveToMainPhase(game, p);
+
+        assertNoPlayableSpell(p);
+    }
+
+    @DataProvider(name = "optionalWheelIntoXyrisData")
+    public static Object[][] optionalWheelIntoXyrisData() {
+        return new Object[][] {
+                {"Wheel of Fate"},
+                {"Wheel of Fortune"}
+        };
+    }
+
+    @Test(dataProvider = "optionalWheelIntoXyrisData")
+    public void testOptionalEffectCastAvoidsWheelIntoXyris(String wheelName) {
+        Game game = initAndCreateGame();
+        Player p = setupAi(game, false);
+
+        Card wheel = addCardToZone(wheelName, p, ZoneType.Exile);
+        fillLibrary(p, 7);
+
+        Player opponent = opponentPlayer(game);
+        addCard("Xyris, the Writhing Storm", opponent);
+        fillLibrary(opponent, 7);
+
+        moveToMainPhase(game, p);
+
+        AssertJUnit.assertEquals(AiPlayDecision.CurseEffects, optionalFreeCastDecision(p, wheel));
+    }
+
+    @Test
+    public void testOptionalEffectCastAllowsWheelOfFortuneIntoCommandZoneXyris() {
+        Game game = initAndCreateGame();
+        Player p = setupAi(game, false);
+
+        Card wheel = addCardToZone("Wheel of Fortune", p, ZoneType.Exile);
+        fillLibrary(p, 7);
+
+        Player opponent = opponentPlayer(game);
+        addCardToZone("Xyris, the Writhing Storm", opponent, ZoneType.Command);
+        fillLibrary(opponent, 7);
+
+        moveToMainPhase(game, p);
+
+        Spell freeCast = makeOptionalFreeCast(p, wheel);
+        AiPlayDecision decision = new OnePlaySafetyChecker(p).checkStatic(freeCast);
+
+        AssertJUnit.assertEquals(AiPlayDecision.WillPlay, decision);
+    }
+
+    @Test
+    public void testOnePlaySafetyAvoidsArjunKederektPain() {
+        Game game = initAndCreateGame();
+        Player p = setupAi(game, false);
+        p.setLife(20, null);
+
+        addCard("Arjun, the Shifting Flame", p);
+        addCard("Mountain", p);
+        addCardToZone("Shock", p, ZoneType.Hand);
+        for (int i = 0; i < 6; i++) {
+            addCardToZone("Runeclaw Bear", p, ZoneType.Hand);
+            addCardToZone("Runeclaw Bear", p, ZoneType.Library);
+        }
+
+        Player opponent = opponentPlayer(game);
+        addCard("Kederekt Parasite", opponent);
+        addCard("Raging Goblin", opponent);
+
+        moveToMainPhase(game, p);
+
+        assertNoPlayableSpell(p);
+    }
+
+    private Spell makeOptionalFreeCast(Player player, Card card) {
+        Spell freeCast = (Spell) card.getFirstSpellAbility().copyWithNoManaCost(player);
+        freeCast.setActivatingPlayer(player);
+        freeCast.setCastFromPlayEffect(true);
+        return freeCast;
+    }
+
+    private AiPlayDecision optionalFreeCastDecision(Player player, Card card) {
+        return ai(player).canPlayFromEffectAI(makeOptionalFreeCast(player, card), false, true);
+    }
+
+    private Player setupAi(Game game, boolean useSimulation) {
+        Player player = aiPlayer(game);
+        player.setTeam(0);
+        opponentPlayer(game).setTeam(1);
+        ai(player).setUseSimulation(useSimulation);
+        return player;
+    }
+
+    private Player aiPlayer(Game game) {
+        return game.getPlayers().get(1);
+    }
+
+    private Player opponentPlayer(Game game) {
+        return game.getPlayers().get(0);
+    }
+
+    private AiController ai(Player player) {
+        return ((PlayerControllerAi) player.getController()).getAi();
+    }
+
+    private SpellAbility firstAbility(Card card, Player player) {
+        SpellAbility sa = card.getFirstSpellAbility();
+        sa.setActivatingPlayer(player);
+        return sa;
+    }
+
+    private void fillLibrary(Player player, int count) {
+        for (int i = 0; i < count; i++) {
+            addCardToZone("Runeclaw Bear", player, ZoneType.Library);
+        }
+    }
+
+    private void moveToMainPhase(Game game, Player player) {
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, player);
+        game.getAction().checkStateEffects(true);
+    }
+
+    private void assertNoPlayableSpell(Player player) {
+        AssertJUnit.assertNull(ai(player).chooseSpellAbilityToPlay());
+    }
+
+    @Test
+    public void testOnePlaySafetyAvoidsMindmoilWithDrawPunisherInPlayOrCommand() {
+        Game game = initAndCreateGame();
+        Player p = setupAi(game, false);
+
+        addCards("Mountain", 5, p);
+        addCardToZone("Mindmoil", p, ZoneType.Hand);
+        fillLibrary(p, 7);
+
+        Player opponent = opponentPlayer(game);
+        addCard("Kederekt Parasite", opponent);
+        addCard("Raging Goblin", opponent);
+        addCardToZone("Nekusar, the Mindrazer", opponent, ZoneType.Command);
+
+        moveToMainPhase(game, p);
+
+        assertNoPlayableSpell(p);
+    }
+
+    @Test
+    public void testOnePlaySafetyAvoidsPuzzleBoxIntoXyris() {
+        Game game = initAndCreateGame();
+        Player p = setupAi(game, false);
+
+        addCards("Island", 4, p);
+        addCardToZone("Teferi's Puzzle Box", p, ZoneType.Hand);
+        fillLibrary(p, 7);
+
+        addCard("Xyris, the Writhing Storm", opponentPlayer(game));
+
+        moveToMainPhase(game, p);
+
+        assertNoPlayableSpell(p);
+    }
+
+    @Test
+    public void testOnePlaySafetyAvoidsPuzzleBoxIntoNekusarInCommand() {
+        Game game = initAndCreateGame();
+        Player p = setupAi(game, false);
+
+        addCards("Island", 4, p);
+        addCardToZone("Teferi's Puzzle Box", p, ZoneType.Hand);
+        fillLibrary(p, 7);
+
+        addCardToZone("Nekusar, the Mindrazer", opponentPlayer(game), ZoneType.Command);
+
+        moveToMainPhase(game, p);
+
+        assertNoPlayableSpell(p);
+    }
+
+    @Test
+    public void testOnePlaySafetyAvoidsPuzzleBoxIntoKederektParasiteWithRedPermanent() {
+        Game game = initAndCreateGame();
+        Player p = setupAi(game, false);
+
+        addCards("Island", 4, p);
+        addCardToZone("Teferi's Puzzle Box", p, ZoneType.Hand);
+        fillLibrary(p, 7);
+
+        Player opponent = opponentPlayer(game);
+        addCard("Kederekt Parasite", opponent);
+        addCard("Raging Goblin", opponent);
+
+        moveToMainPhase(game, p);
+
+        assertNoPlayableSpell(p);
+    }
+
+    @Test
+    public void testSimulationAiAvoidsMindmoilWithDrawPunisherInPlayOrCommand() {
+        Game game = initAndCreateGame();
+        Player p = setupAi(game, true);
+
+        addCards("Mountain", 5, p);
+        addCardToZone("Mindmoil", p, ZoneType.Hand);
+        fillLibrary(p, 7);
+
+        Player opponent = opponentPlayer(game);
+        addCard("Xyris, the Writhing Storm", opponent);
+        addCardToZone("Nekusar, the Mindrazer", opponent, ZoneType.Command);
+
+        moveToMainPhase(game, p);
+
+        assertNoPlayableSpell(p);
+    }
+
+    @DataProvider(name = "simulationModes")
+    public static Object[][] simulationModes() {
+        return new Object[][] {
+                {false},
+                {true}
+        };
+    }
+
+    @Test(dataProvider = "simulationModes")
+    public void testAiAvoidsTimetwisterIntoDrawPunisherInPlayOrCommand(boolean useSimulation) {
+        Game game = initAndCreateGame();
+        Player p = setupAi(game, useSimulation);
+
+        addCards("Island", 3, p);
+        addCardToZone("Timetwister", p, ZoneType.Hand);
+        fillLibrary(p, 7);
+
+        Player opponent = opponentPlayer(game);
+        addCard("Xyris, the Writhing Storm", opponent);
+        addCardToZone("Nekusar, the Mindrazer", opponent, ZoneType.Command);
+        fillLibrary(opponent, 7);
+
+        moveToMainPhase(game, p);
+
+        assertNoPlayableSpell(p);
+    }
+
+    @DataProvider(name = "echoIntoXyrisImpactTremorsData")
+    public static Object[][] echoIntoXyrisImpactTremorsData() {
+        return new Object[][] {
+                {false, ZoneType.Hand, 6},
+                {false, ZoneType.Graveyard, 3},
+                {true, ZoneType.Hand, 6},
+                {true, ZoneType.Graveyard, 3}
+        };
+    }
+
+    @Test(dataProvider = "echoIntoXyrisImpactTremorsData")
+    public void testAiAvoidsEchoOfEonsIntoXyrisImpactTremors(boolean useSimulation, ZoneType echoZone, int islandCount) {
+        Game game = initAndCreateGame();
+        Player p = setupAi(game, useSimulation);
+        p.setLife(6, null);
+
+        addCards("Island", islandCount, p);
+        addCardToZone("Echo of Eons", p, echoZone);
+        fillLibrary(p, 7);
+
+        Player opponent = opponentPlayer(game);
+        addCard("Xyris, the Writhing Storm", opponent);
+        addCard("Impact Tremors", opponent);
+        fillLibrary(opponent, 7);
+
+        moveToMainPhase(game, p);
+
+        assertNoPlayableSpell(p);
+    }
+
+    @Test
+    public void testOnePlaySafetyAvoidsBadRemovalIntoGravePact() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+        ((PlayerControllerAi) p.getController()).getAi().setUseSimulation(false);
+
+        addCards("Swamp", 3, p);
+        addCard("Blightsteel Colossus", p);
+        Card murder = addCardToZone("Murder", p, ZoneType.Hand);
+
+        Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+        addCard("Grave Pact", opponent);
+        Card angel = addCard("Serra Angel", opponent);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = murder.getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+        sa.getTargets().add(angel);
+
+        AssertJUnit.assertEquals(AiPlayDecision.CurseEffects, new OnePlaySafetyChecker(p).check(sa));
+    }
+
+    @Test
+    public void testOnePlaySafetyAllowsGoodRemovalIntoGravePact() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+        ((PlayerControllerAi) p.getController()).getAi().setUseSimulation(false);
+
+        addCards("Swamp", 3, p);
+        addCard("Runeclaw Bear", p);
+        Card murder = addCardToZone("Murder", p, ZoneType.Hand);
+
+        Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+        addCard("Grave Pact", opponent);
+        Card dragon = addCard("Shivan Dragon", opponent);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = murder.getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+        sa.getTargets().add(dragon);
+
+        AssertJUnit.assertEquals(AiPlayDecision.WillPlay, new OnePlaySafetyChecker(p).check(sa));
+    }
+
+    @Test
+    public void testSimulationScorePenalizesBadRemovalIntoGravePact() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+
+        addCards("Swamp", 3, p);
+        addCard("Blightsteel Colossus", p);
+        Card murder = addCardToZone("Murder", p, ZoneType.Hand);
+
+        Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+        addCard("Grave Pact", opponent);
+        Card angel = addCard("Serra Angel", opponent);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = murder.getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+        sa.getTargets().add(angel);
+
+        GameSimulator simulator = createSimulator(game, p);
+        Score origScore = simulator.getScoreForOrigGame();
+        Score resultScore = simulator.simulateSpellAbility(sa);
+
+        AssertJUnit.assertTrue(resultScore.value < origScore.value);
+    }
+
+    @Test
+    public void testSimulationScoreRewardsGoodRemovalIntoGravePact() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+
+        addCards("Swamp", 3, p);
+        addCard("Runeclaw Bear", p);
+        Card murder = addCardToZone("Murder", p, ZoneType.Hand);
+
+        Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+        addCard("Grave Pact", opponent);
+        Card dragon = addCard("Shivan Dragon", opponent);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = murder.getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+        sa.getTargets().add(dragon);
+
+        GameSimulator simulator = createSimulator(game, p);
+        Score origScore = simulator.getScoreForOrigGame();
+        Score resultScore = simulator.simulateSpellAbility(sa);
+
+        AssertJUnit.assertTrue(resultScore.value > origScore.value);
+    }
+
+    @Test
+    public void testSimulationScorePenalizesBadRemovalIntoDictateOfErebos() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+
+        addCards("Swamp", 3, p);
+        addCard("Blightsteel Colossus", p);
+        Card murder = addCardToZone("Murder", p, ZoneType.Hand);
+
+        Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+        addCard("Dictate of Erebos", opponent);
+        Card angel = addCard("Serra Angel", opponent);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = murder.getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+        sa.getTargets().add(angel);
+
+        assertSimulationScoreDecreases(game, p, sa);
+    }
+
+    @Test
+    public void testSimulationScorePenalizesBadRemovalIntoButcherOfMalakir() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+
+        addCards("Swamp", 3, p);
+        addCard("Blightsteel Colossus", p);
+        Card murder = addCardToZone("Murder", p, ZoneType.Hand);
+
+        Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+        addCard("Butcher of Malakir", opponent);
+        Card angel = addCard("Serra Angel", opponent);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = murder.getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+        sa.getTargets().add(angel);
+
+        assertSimulationScoreDecreases(game, p, sa);
+    }
+
+    @Test
+    public void testSimulationScoreRewardsBloodArtistLethalWrath() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+        p.setLife(5, null);
+
+        addCard("Blood Artist", p);
+        addCard("Runeclaw Bear", p);
+        addCard("Runeclaw Bear", p);
+        addCards("Plains", 4, p);
+        Card wrath = addCardToZone("Wrath of God", p, ZoneType.Hand);
+
+        Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+        opponent.setLife(3, null);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = wrath.getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+
+        GameSimulator simulator = createSimulator(game, p);
+        Score resultScore = simulator.simulateSpellAbility(sa);
+
+        AssertJUnit.assertEquals(Integer.MAX_VALUE, resultScore.value);
+    }
+
+    @Test
+    public void testSimulationScoreRewardsZulaportCutthroatLethalWrath() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+        p.setLife(5, null);
+
+        addCard("Zulaport Cutthroat", p);
+        addCard("Runeclaw Bear", p);
+        addCard("Runeclaw Bear", p);
+        addCards("Plains", 4, p);
+        Card wrath = addCardToZone("Wrath of God", p, ZoneType.Hand);
+
+        Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+        opponent.setLife(3, null);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = wrath.getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+
+        GameSimulator simulator = createSimulator(game, p);
+        Score resultScore = simulator.simulateSpellAbility(sa);
+
+        AssertJUnit.assertEquals(Integer.MAX_VALUE, resultScore.value);
+    }
+
+    @Test
+    public void testSimulationScorePenalizesRampantGrowthIntoZoZu() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+        p.setLife(2, null);
+
+        addCards("Forest", 2, p);
+        addCardToZone("Forest", p, ZoneType.Library);
+        Card growth = addCardToZone("Rampant Growth", p, ZoneType.Hand);
+
+        Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+        addCard("Zo-Zu the Punisher", opponent);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = growth.getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+
+        GameSimulator simulator = createSimulator(game, p);
+        Score resultScore = simulator.simulateSpellAbility(sa);
+
+        AssertJUnit.assertEquals(Integer.MIN_VALUE, resultScore.value);
+    }
+
+    @Test
+    public void testSimulationScorePenalizesRampantGrowthIntoPollutedBonds() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+        p.setLife(2, null);
+
+        addCards("Forest", 2, p);
+        addCardToZone("Forest", p, ZoneType.Library);
+        Card growth = addCardToZone("Rampant Growth", p, ZoneType.Hand);
+
+        Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+        addCard("Polluted Bonds", opponent);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = growth.getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+
+        GameSimulator simulator = createSimulator(game, p);
+        Score resultScore = simulator.simulateSpellAbility(sa);
+
+        AssertJUnit.assertEquals(Integer.MIN_VALUE, resultScore.value);
+    }
+
+    @Test
+    public void testOnePlaySafetyAvoidsTriggeringMindmoilIntoLethalDrawPunishment() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+        p.setLife(10, null);
+        ((PlayerControllerAi) p.getController()).getAi().setUseSimulation(false);
+
+        addCard("Mindmoil", p);
+        addCard("Mountain", p);
+        addCardToZone("Shock", p, ZoneType.Hand);
+        for (int i = 0; i < 6; i++) {
+            addCardToZone("Runeclaw Bear", p, ZoneType.Hand);
+            addCardToZone("Runeclaw Bear", p, ZoneType.Library);
+        }
+
+        Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+        addCard("Kederekt Parasite", opponent);
+        addCard("Nekusar, the Mindrazer", opponent);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        AssertJUnit.assertNull(((PlayerControllerAi) p.getController()).getAi().chooseSpellAbilityToPlay());
+    }
+
+    @Test
+    public void testOnePlaySafetyAvoidsMindmoilGivingXyrisTokens() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+        ((PlayerControllerAi) p.getController()).getAi().setUseSimulation(false);
+
+        addCards("Mountain", 5, p);
+        addCardToZone("Mindmoil", p, ZoneType.Hand);
+        for (int i = 0; i < 7; i++) {
+            addCardToZone("Runeclaw Bear", p, ZoneType.Library);
+        }
+
+        Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+        addCard("Xyris, the Writhing Storm", opponent);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        AssertJUnit.assertNull(((PlayerControllerAi) p.getController()).getAi().chooseSpellAbilityToPlay());
+    }
+
+    @Test
+    public void testOnePlaySafetyAllowsCreatureDespiteDrawPunisher() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+        ((PlayerControllerAi) p.getController()).getAi().setUseSimulation(false);
+
+        addCards("Forest", 2, p);
+        Card bear = addCardToZone("Runeclaw Bear", p, ZoneType.Hand);
+
+        Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+        addCard("Xyris, the Writhing Storm", opponent);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = bear.getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+
+        AssertJUnit.assertEquals(AiPlayDecision.WillPlay, new OnePlaySafetyChecker(p).check(sa));
+    }
+
+    @Test
+    public void testOnePlaySafetyAllowsJhoiraCommanderDespiteDrawPunisher() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+        ((PlayerControllerAi) p.getController()).getAi().setUseSimulation(false);
+
+        Card jhoira = addCommanderToCommandZone("Jhoira, Weatherlight Captain", p);
+
+        Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+        addCard("Xyris, the Writhing Storm", opponent);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = jhoira.getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+
+        AssertJUnit.assertEquals(AiPlayDecision.WillPlay, new OnePlaySafetyChecker(p).check(sa));
+    }
+
+    @Test
+    public void testOnePlaySafetyAllowsKamiCommanderDespiteDrawPunisher() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+        ((PlayerControllerAi) p.getController()).getAi().setUseSimulation(false);
+
+        Card kami = addCommanderToCommandZone("Kami of the Crescent Moon", p);
+
+        Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+        addCard("Xyris, the Writhing Storm", opponent);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = kami.getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+
+        AssertJUnit.assertEquals(AiPlayDecision.WillPlay, new OnePlaySafetyChecker(p).check(sa));
+    }
+
+    @Test
+    public void testOnePlaySafetyAllowsNekusarCommanderDespiteDrawPunisher() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+        ((PlayerControllerAi) p.getController()).getAi().setUseSimulation(false);
+
+        Card nekusar = addCommanderToCommandZone("Nekusar, the Mindrazer", p);
+
+        Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+        addCard("Xyris, the Writhing Storm", opponent);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = nekusar.getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+
+        AssertJUnit.assertEquals(AiPlayDecision.WillPlay, new OnePlaySafetyChecker(p).check(sa));
+    }
+
+    @Test
+    public void testOnePlaySafetyAllowsRemovingDrawPunisher() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+        ((PlayerControllerAi) p.getController()).getAi().setUseSimulation(false);
+
+        addCards("Forest", 3, p);
+        Card beastWithin = addCardToZone("Beast Within", p, ZoneType.Hand);
+
+        Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+        Card xyris = addCard("Xyris, the Writhing Storm", opponent);
+        addCardToZone("Nekusar, the Mindrazer", opponent, ZoneType.Command);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility sa = beastWithin.getFirstSpellAbility();
+        sa.setActivatingPlayer(p);
+        sa.getTargets().add(xyris);
+
+        AssertJUnit.assertEquals(AiPlayDecision.WillPlay, new OnePlaySafetyChecker(p).check(sa));
+    }
+
+    private Card addCommanderToCommandZone(String name, Player player) {
+        Card commander = addCardToZone(name, player, ZoneType.Command);
+        player.addCommander(commander);
+        return commander;
+    }
+
+    private void assertSimulationScoreDecreases(Game game, Player player, SpellAbility sa) {
+        GameSimulator simulator = createSimulator(game, player);
+        Score origScore = simulator.getScoreForOrigGame();
+        Score resultScore = simulator.simulateSpellAbility(sa);
+
+        AssertJUnit.assertTrue(resultScore.value < origScore.value);
+    }
+
+    @Test
+    public void testOnePlaySimulationAllowsWrathWithFavorableDeathTriggers() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+        ((PlayerControllerAi) p.getController()).getAi().setUseSimulation(false);
+
+        addCard("Teysa Karlov", p);
+        addCard("Xathrid Necromancer", p);
+        addCards("Plains", 4, p);
+        Card wrath = addCardToZone("Wrath of God", p, ZoneType.Hand);
+
+        Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        List<SpellAbility> chosen = ((PlayerControllerAi) p.getController()).getAi().chooseSpellAbilityToPlay();
+
+        AssertJUnit.assertNotNull(chosen);
+        AssertJUnit.assertEquals(1, chosen.size());
+        AssertJUnit.assertEquals(wrath, chosen.get(0).getHostCard());
+    }
+
+    @Test
+    public void testOnePlaySimulationRejectsBadWrath() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        p.setTeam(0);
+        ((PlayerControllerAi) p.getController()).getAi().setUseSimulation(false);
+
+        addCard("Shivan Dragon", p);
+        addCards("Plains", 4, p);
+        addCardToZone("Wrath of God", p, ZoneType.Hand);
+
+        Player opponent = game.getPlayers().get(0);
+        opponent.setTeam(1);
+        addCard("Runeclaw Bear", opponent);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        AssertJUnit.assertNull(((PlayerControllerAi) p.getController()).getAi().chooseSpellAbilityToPlay());
     }
 
     @Test

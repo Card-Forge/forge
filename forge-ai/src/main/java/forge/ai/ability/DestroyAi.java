@@ -216,9 +216,9 @@ public class DestroyAi extends SpellAbilityAi {
                     }
                 }
 
-                Card choice = null;
+                Card choice = ComputerUtilCard.getKnownSafetyThreatToRemove(ai, list);
                 // If the targets are only of one type, take the best
-                if (CardLists.getNotType(list, "Creature").isEmpty()) {
+                if (choice == null && CardLists.getNotType(list, "Creature").isEmpty()) {
                     choice = ComputerUtilCard.getBestCreatureAI(list);
                     if ("OppDestroyYours".equals(logic)) {
                         Card aiBest = ComputerUtilCard.getBestCreatureAI(ai.getCreaturesInPlay());
@@ -226,7 +226,7 @@ public class DestroyAi extends SpellAbilityAi {
                             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                         }
                     }
-                } else if (CardLists.getNotType(list, "Land").isEmpty()) {
+                } else if (choice == null && CardLists.getNotType(list, "Land").isEmpty()) {
                     choice = ComputerUtilCard.getBestLandToRemoveAI(ai, list, sa);
 
                     if ("LandForLand".equals(logic) || "GhostQuarter".equals(logic)) {
@@ -235,7 +235,7 @@ public class DestroyAi extends SpellAbilityAi {
                             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                         }
                     }
-                } else {
+                } else if (choice == null) {
                     // TODO look for "exiled until leaves" of own stuff
                     choice = ComputerUtilCard.getMostExpensivePermanentAI(list);
                 }

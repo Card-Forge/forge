@@ -53,7 +53,7 @@ public class GameSimulator {
             debugLines = origLines;
             Game copyOrigGame = copier.makeCopy();
             Player copyOrigAiPlayer = copyOrigGame.getPlayers().get(1);
-            resolveStack(copyOrigGame, copyOrigGame.getPlayers().get(0));
+            resolveStack(copyOrigGame, copyOrigAiPlayer);
             origScore = eval.getScoreForGameState(copyOrigGame, copyOrigAiPlayer);
         }
 
@@ -225,9 +225,7 @@ public class GameSimulator {
         }
 
         if (resolve) {
-            // TODO: Support multiple opponents.
-            Player opponent = aiPlayer.getWeakestOpponent();
-            resolveStack(simGame, opponent);
+            resolveStack(simGame, aiPlayer);
         }
 
         // TODO: If this is during combat, before blockers are declared,
@@ -260,11 +258,9 @@ public class GameSimulator {
         return score;
     }
 
-    public static void resolveStack(final Game game, final Player opponent) {
-        // TODO: This needs to set an AI controller for all opponents, in case of multiplayer.
-        PlayerControllerAi sim = new PlayerControllerAi(game, opponent, opponent.getLobbyPlayer());
-        sim.setUseSimulation(true);
-        opponent.runWithController(() -> {
+    public static void resolveStack(final Game game, final Player preservedPlayer) {
+        List<Player> players = new ArrayList<>(game.getPlayers());
+        runWithSimulationControllers(game, preservedPlayer, players, 0, () -> {
             final Set<Card> allAffectedCards = new HashSet<>();
             game.getAction().checkStateEffects(false, allAffectedCards);
             game.getStack().addAllTriggeredAbilitiesToStack();
@@ -288,7 +284,24 @@ public class GameSimulator {
 
                 // Continue until stack is empty.
             }
-        }, sim);
+        });
+    }
+
+    private static void runWithSimulationControllers(final Game game, final Player preservedPlayer,
+            final List<Player> players, final int index, final Runnable proc) {
+        if (index >= players.size()) {
+            proc.run();
+            return;
+        }
+
+        Player player = players.get(index);
+        if (player.equals(preservedPlayer)) {
+            runWithSimulationControllers(game, preservedPlayer, players, index + 1, proc);
+            return;
+        }
+        PlayerControllerAi sim = new PlayerControllerAi(game, player, player.getLobbyPlayer());
+        sim.setUseSimulation(true);
+        player.runWithController(() -> runWithSimulationControllers(game, preservedPlayer, players, index + 1, proc), sim);
     }
 
     public Game getSimulatedGameState() {

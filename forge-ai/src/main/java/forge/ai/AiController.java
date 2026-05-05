@@ -24,6 +24,7 @@ import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.LearnAi;
 import forge.ai.simulation.GameStateEvaluator;
+import forge.ai.simulation.OnePlaySafetyChecker;
 import forge.ai.simulation.SpellAbilityPicker;
 import forge.card.CardStateName;
 import forge.card.CardType;
@@ -95,6 +96,7 @@ public class AiController {
     private Combat predictedCombatNextTurn;
     private boolean useSimulation;
     private SpellAbilityPicker simPicker;
+    private OnePlaySafetyChecker safetyChecker;
     private int lastAttackAggression;
     private boolean useLivingEnd;
     private List<SpellAbility> skipped;
@@ -105,6 +107,7 @@ public class AiController {
         game = game0;
         memory = new AiCardMemory();
         simPicker = new SpellAbilityPicker(game, player);
+        safetyChecker = new OnePlaySafetyChecker(player);
     }
 
     public boolean usesSimulation() {
@@ -129,6 +132,14 @@ public class AiController {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public int getSafetyThreatBonus(Card card) {
+        return safetyChecker.getThreatAssessmentBonus(card);
+    }
+
+    public AiPlayDecision checkOnePlaySafety(SpellAbility sa) {
+        return safetyChecker.check(sa);
     }
 
     public AiCardMemory getCardMemory() {
@@ -879,6 +890,13 @@ public class AiController {
             return AiPlayDecision.CantAfford;
         }
 
+        if (!useSimulation && !OnePlaySafetyChecker.isChecking()) {
+            AiPlayDecision safety = safetyChecker.checkDuringSpellSelection(sa);
+            if (safety != AiPlayDecision.WillPlay) {
+                return safety;
+            }
+        }
+
         return AiPlayDecision.WillPlay;
     }
 
@@ -1274,6 +1292,13 @@ public class AiController {
     }
 
     public AiPlayDecision canPlayFromEffectAI(Spell spell, boolean mandatory, boolean withoutPayingManaCost) {
+        if (!mandatory && !OnePlaySafetyChecker.isChecking()) {
+            AiPlayDecision safety = safetyChecker.checkStatic(spell);
+            if (safety != AiPlayDecision.WillPlay) {
+                return safety;
+            }
+        }
+
         if (spell instanceof SpellApiBased) {
             boolean chance;
             if (withoutPayingManaCost) {
