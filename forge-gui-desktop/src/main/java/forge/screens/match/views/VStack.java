@@ -354,12 +354,12 @@ public class VStack implements IVDoc<CStack> {
 
         public void setStackInstance(final StackItemView item0) {
             item = item0;
-            triggerYieldKey = item.getSourceTriggerYieldKey();
+            triggerYieldKey = item.getKey();
             triggerAbilityScope = controller.getMatchUI().getGameController().getYieldController().isAbilityScope();
 
             jmiAutoYield.setVisible(item.isAbility());
             jmiAutoYield.setSelected(item.isAbility()
-                    && controller.getMatchUI().getGameController().shouldAutoYield(item.getKey()));
+                    && controller.getMatchUI().getGameController().shouldAutoYield(triggerYieldKey));
 
             if (item.isOptionalTrigger() && controller.getMatchUI().isLocalPlayer(item.getActivatingPlayer()) && !triggerYieldKey.isEmpty()) {
                 jmiAlwaysYes.setSelected(controller.getMatchUI().getGameController().shouldAlwaysAcceptTrigger(triggerYieldKey));

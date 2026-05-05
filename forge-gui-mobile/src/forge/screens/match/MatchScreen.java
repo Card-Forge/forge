@@ -689,16 +689,15 @@ public class MatchScreen extends FScreen {
                         return false;
                     }
                     final boolean abilityScope = controller.getYieldController().isAbilityScope();
-                    final String triggerYieldKey = stackInstance.getSourceTriggerYieldKey();
-                    if (!triggerYieldKey.isEmpty()) {
-                        if (controller.shouldAlwaysAcceptTrigger(triggerYieldKey)) {
-                            controller.setShouldAlwaysAskTrigger(triggerYieldKey, abilityScope);
+                    final String key = stackInstance.getKey();
+                    if (!key.isEmpty()) {
+                        if (controller.shouldAlwaysAcceptTrigger(key)) {
+                            controller.setShouldAlwaysAskTrigger(key, abilityScope);
                         } else {
-                            controller.setShouldAlwaysAcceptTrigger(triggerYieldKey, abilityScope);
+                            controller.setShouldAlwaysAcceptTrigger(key, abilityScope);
                         }
                     }
 
-                    final String key = stackInstance.getKey();
                     controller.setShouldAutoYield(key, true, abilityScope);
                     if (stackInstance.equals(gameView.peekStack())) {
                         //auto-pass priority if ability is on top of stack
@@ -719,16 +718,15 @@ public class MatchScreen extends FScreen {
                         return false;
                     }
                     final boolean abilityScope = controller.getYieldController().isAbilityScope();
-                    final String triggerYieldKey = stackInstance.getSourceTriggerYieldKey();
-                    if (!triggerYieldKey.isEmpty()) {
-                        if (controller.shouldAlwaysDeclineTrigger(triggerYieldKey)) {
-                            controller.setShouldAlwaysAskTrigger(triggerYieldKey, abilityScope);
+                    final String key = stackInstance.getKey();
+                    if (!key.isEmpty()) {
+                        if (controller.shouldAlwaysDeclineTrigger(key)) {
+                            controller.setShouldAlwaysAskTrigger(key, abilityScope);
                         } else {
-                            controller.setShouldAlwaysDeclineTrigger(triggerYieldKey, abilityScope);
+                            controller.setShouldAlwaysDeclineTrigger(key, abilityScope);
                         }
                     }
 
-                    final String key = stackInstance.getKey();
                     controller.setShouldAutoYield(key, true, abilityScope);
                     if (stackInstance.equals(gameView.peekStack())) {
                         //auto-pass priority if ability is on top of stack

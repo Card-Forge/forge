@@ -779,7 +779,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public boolean confirmTrigger(final WrappedAbility wrapper) {
         final SpellAbility sa = wrapper.getWrappedAbility();
         final Trigger regtrig = wrapper.getTrigger();
-        final String key = regtrig.getYieldKey();
+        final String key = wrapper.yieldKey();
         if (shouldAlwaysAcceptTrigger(key)) {
             return true;
         }
@@ -3542,7 +3542,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (top == null) return false;
         final SpellAbility sa = top.getSpellAbility();
         if (sa == null || !sa.isTrigger() || sa.getTrigger() == null) return false;
-        final String topKey = sa.getTrigger().getYieldKey();
+        final String topKey = sa.yieldKey();
         if (key.equals(topKey)) return true;
         return key.equals(forge.player.AutoYieldStore.abilitySuffix(topKey));
     }

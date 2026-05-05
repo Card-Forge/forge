@@ -3,7 +3,6 @@ package forge.game.spellability;
 import forge.game.card.CardView;
 import forge.game.card.IHasCardView;
 import forge.game.player.PlayerView;
-import forge.game.trigger.Trigger;
 import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.Tracker;
@@ -114,14 +113,8 @@ public class StackItemView extends TrackableObject implements IHasCardView {
     public int getSourceTrigger() {
         return get(TrackableProperty.SourceTrigger);
     }
-    public String getSourceTriggerYieldKey() {
-        String s = get(TrackableProperty.SourceTriggerYieldKey);
-        return s == null ? "" : s;
-    }
     void updateSourceTrigger(SpellAbilityStackInstance si) {
         set(TrackableProperty.SourceTrigger, si.getSpellAbility().getSourceTrigger());
-        Trigger t = si.getSpellAbility().getTrigger();
-        set(TrackableProperty.SourceTriggerYieldKey, t == null ? "" : t.getYieldKey());
     }
 
     public String getText() {

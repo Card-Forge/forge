@@ -160,10 +160,10 @@ public class KeyboardShortcuts {
                 StackItemView si = matchUI.getGameView().peekStack();
                 if (si != null && si.isAbility()) {
                     boolean abilityScope = matchUI.getGameController().getYieldController().isAbilityScope();
-                    matchUI.getGameController().setShouldAutoYield(si.getKey(), true, abilityScope);
-                    String triggerYieldKey = si.getSourceTriggerYieldKey();
-                    if (si.isOptionalTrigger() && matchUI.isLocalPlayer(si.getActivatingPlayer()) && !triggerYieldKey.isEmpty()) {
-                        matchUI.getGameController().setShouldAlwaysAcceptTrigger(triggerYieldKey, abilityScope);
+                    String key = si.getKey();
+                    matchUI.getGameController().setShouldAutoYield(key, true, abilityScope);
+                    if (si.isOptionalTrigger() && matchUI.isLocalPlayer(si.getActivatingPlayer()) && !key.isEmpty()) {
+                        matchUI.getGameController().setShouldAlwaysAcceptTrigger(key, abilityScope);
                     }
                     matchUI.getGameController().passPriority();
                 }
@@ -179,10 +179,10 @@ public class KeyboardShortcuts {
                 StackItemView si = matchUI.getGameView().peekStack();
                 if (si != null && si.isAbility()) {
                     boolean abilityScope = matchUI.getGameController().getYieldController().isAbilityScope();
-                    matchUI.getGameController().setShouldAutoYield(si.getKey(), true, abilityScope);
-                    String triggerYieldKey = si.getSourceTriggerYieldKey();
-                    if (si.isOptionalTrigger() && matchUI.isLocalPlayer(si.getActivatingPlayer()) && !triggerYieldKey.isEmpty()) {
-                        matchUI.getGameController().setShouldAlwaysDeclineTrigger(triggerYieldKey, abilityScope);
+                    String key = si.getKey();
+                    matchUI.getGameController().setShouldAutoYield(key, true, abilityScope);
+                    if (si.isOptionalTrigger() && matchUI.isLocalPlayer(si.getActivatingPlayer()) && !key.isEmpty()) {
+                        matchUI.getGameController().setShouldAlwaysDeclineTrigger(key, abilityScope);
                     }
                     matchUI.getGameController().passPriority();
                 }

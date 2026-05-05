@@ -21,10 +21,10 @@ import java.util.Set;
  * File-backed singleton for INSTALL-tier auto-yield keys and trigger decisions.
  * Shared across all local controllers on this install of Forge.
  *
- * Key stability: entries are keyed by SpellAbility.toUnsuppressedString() (yields)
- * or Trigger.toString(false, false) (trigger decisions) and are not guaranteed
- * stable across Forge versions or card text edits. Stale entries silently fail
- * to match — acceptable; users can re-add as needed.
+ * Key stability: entries are keyed by SpellAbility.yieldKey() (which for
+ * triggered abilities is host-name + ": " + Trigger.toString()) and are not
+ * guaranteed stable across Forge versions or card text edits. Stale entries
+ * silently fail to match — acceptable; users can re-add as needed.
  *
  * File schema (auto-yields.dat) — additive, backwards-compatible with old yield-only files:
  *   yield.<urlencoded-key>=true

@@ -302,27 +302,26 @@ public class VStack extends FDropDown {
                                         }
                                     }));
                             if (stackInstance.isOptionalTrigger() && stackInstance.getActivatingPlayer().equals(player)) {
-                                final String triggerYieldKey = stackInstance.getSourceTriggerYieldKey();
-                                if (!triggerYieldKey.isEmpty()) {
+                                if (!key.isEmpty()) {
                                     final boolean abilityScope = controller.getYieldController().isAbilityScope();
                                     addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblAlwaysYes"),
-                                            controller.shouldAlwaysAcceptTrigger(triggerYieldKey),
+                                            controller.shouldAlwaysAcceptTrigger(key),
                                             e -> {
-                                                if (controller.shouldAlwaysAcceptTrigger(triggerYieldKey)) {
-                                                    controller.setShouldAlwaysAskTrigger(triggerYieldKey, abilityScope);
+                                                if (controller.shouldAlwaysAcceptTrigger(key)) {
+                                                    controller.setShouldAlwaysAskTrigger(key, abilityScope);
                                                 }
                                                 else {
-                                                    controller.setShouldAlwaysAcceptTrigger(triggerYieldKey, abilityScope);
+                                                    controller.setShouldAlwaysAcceptTrigger(key, abilityScope);
                                                 }
                                             }));
                                     addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblAlwaysNo"),
-                                            controller.shouldAlwaysDeclineTrigger(triggerYieldKey),
+                                            controller.shouldAlwaysDeclineTrigger(key),
                                             e -> {
-                                                if (controller.shouldAlwaysDeclineTrigger(triggerYieldKey)) {
-                                                    controller.setShouldAlwaysAskTrigger(triggerYieldKey, abilityScope);
+                                                if (controller.shouldAlwaysDeclineTrigger(key)) {
+                                                    controller.setShouldAlwaysAskTrigger(key, abilityScope);
                                                 }
                                                 else {
-                                                    controller.setShouldAlwaysDeclineTrigger(triggerYieldKey, abilityScope);
+                                                    controller.setShouldAlwaysDeclineTrigger(key, abilityScope);
                                                 }
                                             }));
                                 }
