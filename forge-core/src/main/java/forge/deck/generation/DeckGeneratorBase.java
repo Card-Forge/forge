@@ -63,13 +63,25 @@ public abstract class DeckGeneratorBase {
     protected abstract float getSpellPercentage();
 
     public DeckGeneratorBase(IDeckGenPool pool0, DeckFormat format0, Predicate<PaperCard> formatFilter0) {
-        pool = new DeckGenPool(format0.getCardPool(pool0).getAllCards(formatFilter0));
+        final Iterable<PaperCard> allCardsFiltered = format0.getCardPool(pool0).getAllCards(formatFilter0);
+        final List<PaperCard> allCardsPreferredEditions = new ArrayList<>();
+        for (PaperCard c : allCardsFiltered) {
+            PaperCard paperCard = pool0.getCard(c.getName());
+            allCardsPreferredEditions.add(paperCard);
+        }
+        pool = new DeckGenPool(allCardsPreferredEditions);
         format = format0;
         fullCardDB = pool0;
     }
 
     public DeckGeneratorBase(IDeckGenPool pool0, DeckFormat format0) {
-        pool = new DeckGenPool(format0.getCardPool(pool0).getAllCards());
+        final Iterable<PaperCard> allCards = format0.getCardPool(pool0).getAllCards();
+        final List<PaperCard> allCardsPreferredEditions = new ArrayList<>();
+        for (PaperCard c : allCards) {
+            PaperCard paperCard = pool0.getCard(c.getName());
+            allCardsPreferredEditions.add(paperCard);
+        }
+        pool = new DeckGenPool(allCardsPreferredEditions);
         format = format0;
         fullCardDB = pool0;
     }
