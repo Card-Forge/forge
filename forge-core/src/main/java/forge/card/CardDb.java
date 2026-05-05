@@ -672,12 +672,28 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             CardEdition edition = editions.get(reqEditionCode.toUpperCase());
 
             PaperCard cardFromSet = this.getCardFromSet(request.cardName, edition, request.artIndex, request.collectorNumber, request.isFoil);
-            if(cardFromSet != null && request.flags != null)
+            if (cardFromSet != null && request.flags != null) {
                 cardFromSet = cardFromSet.copyWithFlags(request.flags);
+            }
 
-            if (cardFromSet != null)
+            if (cardFromSet != null) {
                 return cardFromSet;
+            }
+
+            if (request.artIndex > 0
+                    || (request.collectorNumber != null && !request.collectorNumber.isEmpty() && !request.collectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER))) {
+                // If request failed, try again without artIndex and collectorNumber to attempt to find from same set first
+                cardFromSet = this.getCardFromSet(request.cardName, edition, -1, IPaperCard.NO_COLLECTOR_NUMBER, request.isFoil);
+                if(cardFromSet != null && request.flags != null)
+                    cardFromSet = cardFromSet.copyWithFlags(request.flags);
+
+                if (cardFromSet != null) {
+                    return cardFromSet;
+                }
+            }
+
         }
+
 
         // 2. Card lookup in edition with specified filter didn't work.
         // So now check whether the cards exist in the DB first,
