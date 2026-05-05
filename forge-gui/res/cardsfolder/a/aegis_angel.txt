@@ -3,7 +3,7 @@ ManaCost:4 W W
 Types:Creature Angel
 PT:5/5
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters, another target permanent gains indestructible for as long as you control CARDNAME.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When this creature enters, another target permanent gains indestructible for as long as you control this creature.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Permanent.Other | TgtPrompt$ Select another target permanent | KW$ Indestructible | Duration$ AsLongAsControl
 SVar:PlayMain1:TRUE
-Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhen Aegis Angel enters, another target permanent gains indestructible for as long as you control Aegis Angel. (Effects that say "destroy" don't destroy it. A creature with indestructible can't be destroyed by damage.)
+Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhen this creature enters, another target permanent gains indestructible for as long as you control this creature. (Effects that say "destroy" don't destroy it. A creature with indestructible can't be destroyed by damage.)

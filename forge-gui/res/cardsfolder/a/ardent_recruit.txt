@@ -2,6 +2,6 @@ Name:Ardent Recruit
 ManaCost:W
 Types:Creature Human Soldier
 PT:1/1
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | Condition$ Metalcraft | Description$ Metalcraft — CARDNAME gets +2/+2 as long as you control three or more artifacts.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | Condition$ Metalcraft | Description$ Metalcraft - This creature gets +2/+2 as long as you control three or more artifacts.
 SVar:BuffedBy:Artifact
-Oracle:Metalcraft — Ardent Recruit gets +2/+2 as long as you control three or more artifacts.
+Oracle:Metalcraft - This creature gets +2/+2 as long as you control three or more artifacts.
