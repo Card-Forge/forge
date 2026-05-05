@@ -83,10 +83,10 @@ public class VAutoYieldsAndTriggers extends FDialog {
                 MatchController.instance.getGameController().setShouldAutoYield(key, false, abilityScope);
             } else if (selected.startsWith(ACCEPT_PREFIX)) {
                 String key = selected.substring(ACCEPT_PREFIX.length());
-                MatchController.instance.getGameController().setShouldAlwaysAskTrigger(key, abilityScope);
+                MatchController.instance.getGameController().setTriggerDecision(key, AutoYieldStore.TriggerDecision.ASK, abilityScope);
             } else if (selected.startsWith(DECLINE_PREFIX)) {
                 String key = selected.substring(DECLINE_PREFIX.length());
-                MatchController.instance.getGameController().setShouldAlwaysAskTrigger(key, abilityScope);
+                MatchController.instance.getGameController().setTriggerDecision(key, AutoYieldStore.TriggerDecision.ASK, abilityScope);
             }
             setButtonEnabled(1, !allEntries.isEmpty());
             lstEntries.cleanUpSelections();

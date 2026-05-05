@@ -49,6 +49,7 @@ import forge.menu.FMenuBar;
 import forge.menu.FMenuItem;
 import forge.menu.FMenuTab;
 import forge.model.FModel;
+import forge.player.AutoYieldStore.TriggerDecision;
 import forge.player.PlayerZoneUpdate;
 import forge.screens.FScreen;
 import forge.screens.match.views.VAvatar;
@@ -691,11 +692,8 @@ public class MatchScreen extends FScreen {
                     final boolean abilityScope = controller.getYieldController().isAbilityScope();
                     final String key = stackInstance.getKey();
                     if (!key.isEmpty()) {
-                        if (controller.shouldAlwaysAcceptTrigger(key)) {
-                            controller.setShouldAlwaysAskTrigger(key, abilityScope);
-                        } else {
-                            controller.setShouldAlwaysAcceptTrigger(key, abilityScope);
-                        }
+                        TriggerDecision next = controller.getTriggerDecision(key) == TriggerDecision.ACCEPT ? TriggerDecision.ASK : TriggerDecision.ACCEPT;
+                        controller.setTriggerDecision(key, next, abilityScope);
                     }
 
                     controller.setShouldAutoYield(key, true, abilityScope);
@@ -720,11 +718,8 @@ public class MatchScreen extends FScreen {
                     final boolean abilityScope = controller.getYieldController().isAbilityScope();
                     final String key = stackInstance.getKey();
                     if (!key.isEmpty()) {
-                        if (controller.shouldAlwaysDeclineTrigger(key)) {
-                            controller.setShouldAlwaysAskTrigger(key, abilityScope);
-                        } else {
-                            controller.setShouldAlwaysDeclineTrigger(key, abilityScope);
-                        }
+                        TriggerDecision next = controller.getTriggerDecision(key) == TriggerDecision.DECLINE ? TriggerDecision.ASK : TriggerDecision.DECLINE;
+                        controller.setTriggerDecision(key, next, abilityScope);
                     }
 
                     controller.setShouldAutoYield(key, true, abilityScope);

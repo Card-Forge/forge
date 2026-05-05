@@ -8,6 +8,7 @@ import forge.game.spellability.SpellAbilityView;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.match.YieldController;
 import forge.gamemodes.match.YieldUpdate;
+import forge.player.AutoYieldStore.TriggerDecision;
 import forge.util.ITriggerEvent;
 
 public interface IGameController {
@@ -65,11 +66,8 @@ public interface IGameController {
     void setDisableAutoYields(boolean disable);
 
     // Trigger accept/decline preferences
-    boolean shouldAlwaysAcceptTrigger(String key);
-    boolean shouldAlwaysDeclineTrigger(String key);
-    void setShouldAlwaysAcceptTrigger(String key, boolean isAbilityScope);
-    void setShouldAlwaysDeclineTrigger(String key, boolean isAbilityScope);
-    void setShouldAlwaysAskTrigger(String key, boolean isAbilityScope);
+    TriggerDecision getTriggerDecision(String key);
+    void setTriggerDecision(String key, TriggerDecision decision, boolean isAbilityScope);
     boolean getDisableAutoTriggers();
     void setDisableAutoTriggers(boolean disable);
 

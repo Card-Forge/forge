@@ -32,6 +32,7 @@ import forge.menu.FDropDown;
 import forge.menu.FMenuItem;
 import forge.menu.FMenuTab;
 import forge.menu.FPopupMenu;
+import forge.player.AutoYieldStore.TriggerDecision;
 import forge.player.PlayerZoneUpdates;
 import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
@@ -305,25 +306,15 @@ public class VStack extends FDropDown {
                                 if (!key.isEmpty()) {
                                     final boolean abilityScope = controller.getYieldController().isAbilityScope();
                                     addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblAlwaysYes"),
-                                            controller.shouldAlwaysAcceptTrigger(key),
-                                            e -> {
-                                                if (controller.shouldAlwaysAcceptTrigger(key)) {
-                                                    controller.setShouldAlwaysAskTrigger(key, abilityScope);
-                                                }
-                                                else {
-                                                    controller.setShouldAlwaysAcceptTrigger(key, abilityScope);
-                                                }
-                                            }));
+                                            controller.getTriggerDecision(key) == TriggerDecision.ACCEPT,
+                                            e -> controller.setTriggerDecision(key,
+                                                    controller.getTriggerDecision(key) == TriggerDecision.ACCEPT ? TriggerDecision.ASK : TriggerDecision.ACCEPT,
+                                                    abilityScope)));
                                     addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblAlwaysNo"),
-                                            controller.shouldAlwaysDeclineTrigger(key),
-                                            e -> {
-                                                if (controller.shouldAlwaysDeclineTrigger(key)) {
-                                                    controller.setShouldAlwaysAskTrigger(key, abilityScope);
-                                                }
-                                                else {
-                                                    controller.setShouldAlwaysDeclineTrigger(key, abilityScope);
-                                                }
-                                            }));
+                                            controller.getTriggerDecision(key) == TriggerDecision.DECLINE,
+                                            e -> controller.setTriggerDecision(key,
+                                                    controller.getTriggerDecision(key) == TriggerDecision.DECLINE ? TriggerDecision.ASK : TriggerDecision.DECLINE,
+                                                    abilityScope)));
                                 }
                             }
                         }

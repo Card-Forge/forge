@@ -780,12 +780,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final SpellAbility sa = wrapper.getWrappedAbility();
         final Trigger regtrig = wrapper.getTrigger();
         final String key = wrapper.yieldKey();
-        if (shouldAlwaysAcceptTrigger(key)) {
-            return true;
-        }
-        if (shouldAlwaysDeclineTrigger(key)) {
-            return false;
-        }
+        AutoYieldStore.TriggerDecision decision = getTriggerDecision(key);
+        if (decision == AutoYieldStore.TriggerDecision.ACCEPT) return true;
+        if (decision == AutoYieldStore.TriggerDecision.DECLINE) return false;
 
         // triggers with costs can always be declined by not paying the cost
         if (sa.hasParam("Cost") && !sa.getParam("Cost").equals("0")) {
@@ -3503,27 +3500,17 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public boolean shouldAlwaysAcceptTrigger(final String key) {
-        return yieldController.shouldAlwaysAcceptTrigger(key);
-    }
-    @Override
-    public boolean shouldAlwaysDeclineTrigger(final String key) {
-        return yieldController.shouldAlwaysDeclineTrigger(key);
+    public AutoYieldStore.TriggerDecision getTriggerDecision(final String key) {
+        return yieldController.getTriggerDecision(key);
     }
 
     @Override
-    public void setShouldAlwaysAcceptTrigger(final String key, final boolean isAbilityScope) {
-        yieldController.setAlwaysAcceptTrigger(key, isAbilityScope);
-        if (isPromptingForTrigger(key)) selectButtonOk();
-    }
-    @Override
-    public void setShouldAlwaysDeclineTrigger(final String key, final boolean isAbilityScope) {
-        yieldController.setAlwaysDeclineTrigger(key, isAbilityScope);
-        if (isPromptingForTrigger(key)) selectButtonCancel();
-    }
-    @Override
-    public void setShouldAlwaysAskTrigger(final String key, final boolean isAbilityScope) {
-        yieldController.setAlwaysAskTrigger(key, isAbilityScope);
+    public void setTriggerDecision(final String key, final AutoYieldStore.TriggerDecision decision, final boolean isAbilityScope) {
+        yieldController.setTriggerDecision(key, decision, isAbilityScope);
+        if (isPromptingForTrigger(key)) {
+            if (decision == AutoYieldStore.TriggerDecision.ACCEPT) selectButtonOk();
+            else if (decision == AutoYieldStore.TriggerDecision.DECLINE) selectButtonCancel();
+        }
     }
 
     @Override

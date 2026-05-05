@@ -161,28 +161,14 @@ public class NetGameController implements IGameController {
     }
 
     @Override
-    public boolean shouldAlwaysAcceptTrigger(final String key) {
-        return yieldController.shouldAlwaysAcceptTrigger(key);
-    }
-    @Override
-    public boolean shouldAlwaysDeclineTrigger(final String key) {
-        return yieldController.shouldAlwaysDeclineTrigger(key);
+    public AutoYieldStore.TriggerDecision getTriggerDecision(final String key) {
+        return yieldController.getTriggerDecision(key);
     }
 
     @Override
-    public void setShouldAlwaysAcceptTrigger(final String key, final boolean isAbilityScope) {
-        String storageKey = yieldController.setAlwaysAcceptTrigger(key, isAbilityScope);
-        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.TriggerDecision(storageKey, AutoYieldStore.TriggerDecision.ACCEPT, isAbilityScope));
-    }
-    @Override
-    public void setShouldAlwaysDeclineTrigger(final String key, final boolean isAbilityScope) {
-        String storageKey = yieldController.setAlwaysDeclineTrigger(key, isAbilityScope);
-        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.TriggerDecision(storageKey, AutoYieldStore.TriggerDecision.DECLINE, isAbilityScope));
-    }
-    @Override
-    public void setShouldAlwaysAskTrigger(final String key, final boolean isAbilityScope) {
-        String storageKey = yieldController.setAlwaysAskTrigger(key, isAbilityScope);
-        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.TriggerDecision(storageKey, AutoYieldStore.TriggerDecision.ASK, isAbilityScope));
+    public void setTriggerDecision(final String key, final AutoYieldStore.TriggerDecision decision, final boolean isAbilityScope) {
+        String storageKey = yieldController.setTriggerDecision(key, decision, isAbilityScope);
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.TriggerDecision(storageKey, decision, isAbilityScope));
     }
 
     @Override

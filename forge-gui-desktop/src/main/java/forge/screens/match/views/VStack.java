@@ -46,6 +46,8 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
+import forge.interfaces.IGameController;
+import forge.player.AutoYieldStore.TriggerDecision;
 import forge.screens.match.controllers.CDock.ArcState;
 import forge.screens.match.controllers.CStack;
 import forge.toolbox.FMouseAdapter;
@@ -319,24 +321,18 @@ public class VStack implements IVDoc<CStack> {
             jmiAlwaysYes = new JCheckBoxMenuItem(Localizer.getInstance().getMessage("lblAlwaysYes"));
             jmiAlwaysYes.addActionListener(arg0 -> {
                 if (triggerYieldKey.isEmpty()) return;
-                if (controller.getMatchUI().getGameController().shouldAlwaysAcceptTrigger(triggerYieldKey)) {
-                    controller.getMatchUI().getGameController().setShouldAlwaysAskTrigger(triggerYieldKey, triggerAbilityScope);
-                }
-                else {
-                    controller.getMatchUI().getGameController().setShouldAlwaysAcceptTrigger(triggerYieldKey, triggerAbilityScope);
-                }
+                IGameController gc = controller.getMatchUI().getGameController();
+                TriggerDecision next = gc.getTriggerDecision(triggerYieldKey) == TriggerDecision.ACCEPT ? TriggerDecision.ASK : TriggerDecision.ACCEPT;
+                gc.setTriggerDecision(triggerYieldKey, next, triggerAbilityScope);
             });
             add(jmiAlwaysYes);
 
             jmiAlwaysNo = new JCheckBoxMenuItem(Localizer.getInstance().getMessage("lblAlwaysNo"));
             jmiAlwaysNo.addActionListener(arg0 -> {
                 if (triggerYieldKey.isEmpty()) return;
-                if (controller.getMatchUI().getGameController().shouldAlwaysDeclineTrigger(triggerYieldKey)) {
-                    controller.getMatchUI().getGameController().setShouldAlwaysAskTrigger(triggerYieldKey, triggerAbilityScope);
-                }
-                else {
-                    controller.getMatchUI().getGameController().setShouldAlwaysDeclineTrigger(triggerYieldKey, triggerAbilityScope);
-                }
+                IGameController gc = controller.getMatchUI().getGameController();
+                TriggerDecision next = gc.getTriggerDecision(triggerYieldKey) == TriggerDecision.DECLINE ? TriggerDecision.ASK : TriggerDecision.DECLINE;
+                gc.setTriggerDecision(triggerYieldKey, next, triggerAbilityScope);
             });
             add(jmiAlwaysNo);
 
@@ -360,8 +356,9 @@ public class VStack implements IVDoc<CStack> {
                     && controller.getMatchUI().getGameController().shouldAutoYield(triggerYieldKey));
 
             if (item.isOptionalTrigger() && controller.getMatchUI().isLocalPlayer(item.getActivatingPlayer()) && !triggerYieldKey.isEmpty()) {
-                jmiAlwaysYes.setSelected(controller.getMatchUI().getGameController().shouldAlwaysAcceptTrigger(triggerYieldKey));
-                jmiAlwaysNo.setSelected(controller.getMatchUI().getGameController().shouldAlwaysDeclineTrigger(triggerYieldKey));
+                TriggerDecision decision = controller.getMatchUI().getGameController().getTriggerDecision(triggerYieldKey);
+                jmiAlwaysYes.setSelected(decision == TriggerDecision.ACCEPT);
+                jmiAlwaysNo.setSelected(decision == TriggerDecision.DECLINE);
                 jmiAlwaysYes.setVisible(true);
                 jmiAlwaysNo.setVisible(true);
             } else {

@@ -219,39 +219,7 @@ public class YieldController {
         activeStore().setDisabled(disable);
     }
 
-    public boolean shouldAlwaysAcceptTrigger(String key) {
-        return readTriggerDecision(key) == AutoYieldStore.TriggerDecision.ACCEPT;
-    }
-    public boolean shouldAlwaysDeclineTrigger(String key) {
-        return readTriggerDecision(key) == AutoYieldStore.TriggerDecision.DECLINE;
-    }
-
-    /** Tier-aware user-initiated set. Returns the storage key (stripped if ability-scope) for wire propagation. */
-    public String setAlwaysAcceptTrigger(String key, boolean abilityScope) {
-        return writeTriggerDecision(key, abilityScope, AutoYieldStore.TriggerDecision.ACCEPT);
-    }
-    public String setAlwaysDeclineTrigger(String key, boolean abilityScope) {
-        return writeTriggerDecision(key, abilityScope, AutoYieldStore.TriggerDecision.DECLINE);
-    }
-    public String setAlwaysAskTrigger(String key, boolean abilityScope) {
-        return writeTriggerDecision(key, abilityScope, AutoYieldStore.TriggerDecision.ASK);
-    }
-
-    /** Cache-mode write of a wire-received trigger decision. Storage key is already at the right shape. */
-    public void applyTriggerDecisionFromWire(String storageKey, AutoYieldStore.TriggerDecision decision) {
-        activeStore().setTriggerDecision(AutoYieldStore.Tier.GAME, storageKey, decision);
-    }
-
-    public Iterable<java.util.Map.Entry<String, AutoYieldStore.TriggerDecision>> getAutoTriggers() {
-        if (!tierAware()) return activeStore().getAutoTriggers(AutoYieldStore.Tier.GAME);
-        if (activeModeIsInstall()) return PersistentAutoDecisionStore.get().getAutoTriggers();
-        return activeStore().getAutoTriggers(activeTier());
-    }
-
-    public boolean getDisableAutoTriggers() { return activeStore().isTriggerDecisionsDisabled(); }
-    public void setDisableAutoTriggers(boolean disable) { activeStore().setTriggerDecisionsDisabled(disable); }
-
-    private AutoYieldStore.TriggerDecision readTriggerDecision(String key) {
+    public AutoYieldStore.TriggerDecision getTriggerDecision(String key) {
         if (key == null || key.isEmpty()) return AutoYieldStore.TriggerDecision.ASK;
         AutoYieldStore store = activeStore();
         if (store.isTriggerDecisionsDisabled()) return AutoYieldStore.TriggerDecision.ASK;
@@ -270,7 +238,8 @@ public class YieldController {
         return store.getTriggerDecision(tier, storageKey);
     }
 
-    private String writeTriggerDecision(String key, boolean abilityScope, AutoYieldStore.TriggerDecision decision) {
+    /** Tier-aware user-initiated set. Returns the storage key (stripped if ability-scope) for wire propagation. */
+    public String setTriggerDecision(String key, AutoYieldStore.TriggerDecision decision, boolean abilityScope) {
         String storageKey = abilityScope ? AutoYieldStore.abilitySuffix(key) : key;
         if (activeModeIsInstall()) {
             PersistentAutoDecisionStore.get().setTriggerDecision(storageKey, decision);
@@ -279,6 +248,21 @@ public class YieldController {
         }
         return storageKey;
     }
+
+    /** Cache-mode write of a wire-received trigger decision. Storage key is already at the right shape. */
+    public void applyTriggerDecisionFromWire(String storageKey, AutoYieldStore.TriggerDecision decision) {
+        activeStore().setTriggerDecision(AutoYieldStore.Tier.GAME, storageKey, decision);
+    }
+
+    public Iterable<java.util.Map.Entry<String, AutoYieldStore.TriggerDecision>> getAutoTriggers() {
+        if (!tierAware()) return activeStore().getAutoTriggers(AutoYieldStore.Tier.GAME);
+        if (activeModeIsInstall()) return PersistentAutoDecisionStore.get().getAutoTriggers();
+        return activeStore().getAutoTriggers(activeTier());
+    }
+
+    public boolean getDisableAutoTriggers() { return activeStore().isTriggerDecisionsDisabled(); }
+    public void setDisableAutoTriggers(boolean disable) { activeStore().setTriggerDecisionsDisabled(disable); }
+
 
     /** Build the seed payload from this controller's authoritative store. */
     public YieldStateSnapshot buildClientSnapshot(Map<PlayerView, EnumSet<PhaseType>> skipPhases) {
