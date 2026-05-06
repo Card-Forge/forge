@@ -20,6 +20,7 @@ public final class RemoteClient implements IToClient, IHasForgeLog {
     private volatile Channel channel;
     private String username;
     private int index = UNASSIGNED_SLOT;
+    private boolean libgdx;
     private volatile ReplyPool replies = new ReplyPool();
     private volatile Tracker codecTracker;
     private final AtomicInteger sendErrors = new AtomicInteger(0);
@@ -153,6 +154,13 @@ public final class RemoteClient implements IToClient, IHasForgeLog {
     }
     public void setIndex(final int index) {
         this.index = index;
+    }
+
+    public boolean isLibgdx() {
+        return libgdx;
+    }
+    public void setLibgdx(final boolean libgdx) {
+        this.libgdx = libgdx;
     }
 
     /**

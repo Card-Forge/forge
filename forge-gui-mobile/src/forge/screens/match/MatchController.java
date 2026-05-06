@@ -94,6 +94,11 @@ public class MatchController extends NetworkGuiGame {
     }
 
     @Override
+    public boolean isLibgdxPort() {
+        return true;
+    }
+
+    @Override
     protected void updateCurrentPlayer(final PlayerView player) {
         for (final PlayerView other : getLocalPlayers()) {
             if (!other.equals(player)) {

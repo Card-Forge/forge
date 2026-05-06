@@ -456,7 +456,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
 
             final boolean useUiPointAtCard =
-                    FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) && !GuiBase.getInterface().isLibgdxPort() ?
+                    FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) && !getGui().isLibgdxPort() ?
                             (cz.is(ZoneType.Battlefield) || cz.is(ZoneType.Hand) || cz.is(ZoneType.Library) ||
                                     cz.is(ZoneType.Graveyard) || cz.is(ZoneType.Exile) || cz.is(ZoneType.Flashback) ||
                                     cz.is(ZoneType.Command) || cz.is(ZoneType.Sideboard)) :
@@ -811,7 +811,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 buildQuestion.append("\n").append(localizer.getMessage("lblTriggeredby")).append(": ").append(tos.get(AbilityKey.Card));
             }
         }
-        if (GuiBase.getInterface().isLibgdxPort()) {
+        if (getGui().isLibgdxPort()) {
             CardView cardView;
             SpellAbilityView spellAbilityView = wrapper.getView();
             if (spellAbilityView != null) //updated view
@@ -973,8 +973,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         CardCollection toTop = null;
 
         tempShowCards(topN);
-        if (FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) &&
-                (!GuiBase.getInterface().isLibgdxPort()) && (!GuiBase.isNetPlay(getGui()))) { //prevent crash for desktop vs mobile port it will crash the netplay since mobile doesnt have manipulatecardlist, send the alternate below
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) && !getGui().isLibgdxPort()) {
             CardCollectionView cardList = player.getCardsIn(ZoneType.Library);
             ImmutablePair<CardCollection, CardCollection> result =
                     arrangeForMove(localizer.getMessage("lblMoveCardstoToporBbottomofLibrary"), cardList, topN, true, true);
@@ -1441,7 +1440,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public boolean confirmReplacementEffect(final ReplacementEffect replacementEffect, final SpellAbility effectSA,
                                             GameEntity affected, final String question) {
-        if (GuiBase.getInterface().isLibgdxPort()) {
+        if (getGui().isLibgdxPort()) {
             CardView cardView;
             SpellAbilityView spellAbilityView = effectSA == null ? null : effectSA.getView();
             if (spellAbilityView != null) //updated view
@@ -1561,7 +1560,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public CardCollection chooseCardsToDiscardToMaximumHandSize(final int nDiscard) {
         final int max = player.getMaxHandSize();
 
-        if (GuiBase.getInterface().isLibgdxPort()) {
+        if (getGui().isLibgdxPort()) {
             tempShowCards(player.getCardsIn(ZoneType.Hand));
             GameEntityViewMap<Card, CardView> gameCacheDiscard = GameEntityView.getMap(player.getCardsIn(ZoneType.Hand));
             List<CardView> views = getGui().many(String.format(localizer.getMessage("lblChooseMinCardToDiscard"), nDiscard),
@@ -1709,7 +1708,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (sa != null && sa.isManaAbility()) {
             getGame().fireEvent(new GameEventAddLog(GameLogEntryType.LAND, message));
         } else {
-            if (sa != null && sa.getHostCard() != null && GuiBase.getInterface().isLibgdxPort()) {
+            if (sa != null && sa.getHostCard() != null && getGui().isLibgdxPort()) {
                 CardView cardView;
                 IPaperCard iPaperCard = sa.getHostCard().getPaperCard();
                 if (iPaperCard != null)
@@ -1868,7 +1867,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public boolean confirmPayment(final CostPart costPart, final String question, SpellAbility sa) {
-        if (GuiBase.getInterface().isLibgdxPort()) {
+        if (getGui().isLibgdxPort()) {
             CardView cardView;
             try {
                 cardView = CardView.getCardForUi(ImageUtil.getPaperCardFromImageKey(sa.getView().getHostCard().getCurrentState().getTrackableImageKey()));
@@ -2218,7 +2217,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void revealAISkipCards(final String message, final Map<Player, Map<DeckSection, List<? extends PaperCard>>> unplayable) {
-        if (GuiBase.getInterface().isLibgdxPort()) {
+        if (getGui().isLibgdxPort()) {
             //restore old functionality for mobile version since list of card names can't be zoomed to display the cards
             for (Player p : unplayable.keySet()) {
                 final Map<DeckSection, List<? extends PaperCard>> removedUnplayableCards = unplayable.get(p);

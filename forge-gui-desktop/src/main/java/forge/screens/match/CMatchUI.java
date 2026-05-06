@@ -220,6 +220,11 @@ public final class CMatchUI
     }
 
     @Override
+    public boolean isLibgdxPort() {
+        return false;
+    }
+
+    @Override
     public void setGameView(GameView gameView0) {
         super.setGameView(gameView0);
         gameView0 = getGameView(); //ensure updated game view used for below logic
