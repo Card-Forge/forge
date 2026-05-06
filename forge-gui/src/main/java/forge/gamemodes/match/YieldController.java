@@ -7,7 +7,6 @@ import forge.game.combat.CombatView;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
-import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.StackItemView;
 import forge.gui.interfaces.IGuiGame;
@@ -20,7 +19,6 @@ import forge.player.AutoYieldStore;
 import forge.player.LobbyPlayerHuman;
 import forge.player.PersistentAutoDecisionStore;
 import forge.player.PlayerControllerHuman;
-import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 
 import java.util.EnumMap;
