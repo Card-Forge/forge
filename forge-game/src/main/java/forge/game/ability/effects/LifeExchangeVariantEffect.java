@@ -63,34 +63,28 @@ public class LifeExchangeVariantEffect extends SpellAbilityEffect {
             return;
         }
 
+        if (pLife > num && !p.canLoseLife()) {
+            return;
+        }
+        if (num > pLife && !p.canGainLife()) {
+            return;
+        }
+
         final Game game = p.getGame();
         final long timestamp = game.getNextTimestamp();
-        if (pLife > num && p.canLoseLife()) {
-            final int diff = pLife - num;
-            final int lost = p.loseLife(diff, false, false);
-            source.addNewPT(power, toughness, timestamp, 0);
-            game.fireEvent(new GameEventCardStatsChanged(source));
-
-            if (lost > 0) { // Run triggers if player actually lost life
-                final Map<Player, Integer> lossMap = Maps.newHashMap();
-                lossMap.put(p, lost);
-                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPIMap(lossMap);
-                game.getTriggerHandler().runTrigger(TriggerType.LifeLostAll, runParams, false);
-            }
-        } else if (num > pLife && p.canGainLife()) {
-            final int diff = num - pLife;
-            p.gainLife(diff, source, sa);
-            source.addNewPT(power, toughness, timestamp, 0);
-            game.fireEvent(new GameEventCardStatsChanged(source));
+        int lost = 0;
+        if (pLife > num) {
+            lost = p.loseLife(pLife - num, false, false);
+        } else if (num > pLife) {
+            p.gainLife(num - pLife, source, sa);
         }
-        // We still need to do this if the life total doesn't change because the creature's base power/toughness might
-        else if (pLife == num){
-            source.addNewPT(power, toughness, timestamp, 0);
-            game.fireEvent(new GameEventCardStatsChanged(source));
-        }
-        else {
-            // do nothing if they cannot lose/gain this amount of life
+        source.addNewPT(power, toughness, timestamp, 0);
+        game.fireEvent(new GameEventCardStatsChanged(source));
+        if (lost > 0) { // Run triggers if player actually lost life
+            final Map<Player, Integer> lossMap = Maps.newHashMap();
+            lossMap.put(p, lost);
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPIMap(lossMap);
+            game.getTriggerHandler().runTrigger(TriggerType.LifeLostAll, runParams, false);
         }
     }
-
 }
