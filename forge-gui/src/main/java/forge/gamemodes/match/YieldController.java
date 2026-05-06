@@ -250,11 +250,6 @@ public class YieldController {
         return AutoYieldStore.Tier.MATCH;
     }
 
-    /** Cache-mode write of a wire-received update. Storage key is already at the right shape. */
-    public void applyAutoYieldFromWire(String storageKey, boolean active) {
-        activeStore().setYield(AutoYieldStore.Tier.GAME, storageKey, active);
-    }
-
     public Iterable<String> getAutoYields() {
         AutoYieldStore store = activeStore();
         if (!tierAware()) return store.getYields(AutoYieldStore.Tier.GAME);
@@ -321,11 +316,6 @@ public class YieldController {
             activeStore().setTriggerDecision(activeTier(), storageKey, decision);
         }
         return storageKey;
-    }
-
-    /** Cache-mode write of a wire-received trigger decision. Storage key is already at the right shape. */
-    public void applyTriggerDecisionFromWire(String storageKey, AutoYieldStore.TriggerDecision decision) {
-        activeStore().setTriggerDecision(AutoYieldStore.Tier.GAME, storageKey, decision);
     }
 
     public Iterable<Map.Entry<String, AutoYieldStore.TriggerDecision>> getAutoTriggers() {
@@ -402,9 +392,9 @@ public class YieldController {
             setAutoPassUntilEndOfTurn(u.active());
             return u.active();
         } else if (update instanceof YieldUpdate.CardAutoYield u) {
-            applyAutoYieldFromWire(u.cardKey(), u.active());
+            activeStore().setYield(AutoYieldStore.Tier.GAME, u.cardKey(), u.active());
         } else if (update instanceof YieldUpdate.TriggerDecision u) {
-            setTriggerDecision(u.storageKey(), u.decision(), u.abilityScope());
+            activeStore().setTriggerDecision(AutoYieldStore.Tier.GAME, u.storageKey(), u.decision());
         } else if (update instanceof YieldUpdate.SetDisableYields u) {
             setDisableAutoYields(u.disabled());
         } else if (update instanceof YieldUpdate.SetDisableTriggers u) {
@@ -473,9 +463,8 @@ public class YieldController {
         applyInterrupt();
     }
 
-    public void onSpellAbilityCast(SpellAbilityStackInstance si, GameView gameView) {
+    public void onSpellAbilityCast(SpellAbilityStackInstance si) {
         if (!shouldEvaluateInterrupts()) return;
-        if (si == null) return;
         PlayerView local = owner != null ? owner.getLocalPlayerView() : null;
         if (local == null) return;
         Player activator = si.getActivatingPlayer();
@@ -492,7 +481,7 @@ public class YieldController {
             return;
         }
         if (isOpponent && getBoolPref(FPref.YIELD_INTERRUPT_ON_MASS_REMOVAL)
-                && isMassRemovalInstance(si)) {
+                && isMassRemoval(si)) {
             applyInterrupt();
             return;
         }
@@ -593,14 +582,12 @@ public class YieldController {
 
     private static boolean isBeingAttacked(CombatView combatView, PlayerView player) {
         if (combatView == null) return false;
-        FCollection<CardView> attackersOfPlayer = combatView.getAttackersOf(player);
-        if (attackersOfPlayer != null && !attackersOfPlayer.isEmpty()) return true;
+        if (!combatView.getAttackersOf(player).isEmpty()) return true;
         for (forge.game.GameEntityView defender : combatView.getDefenders()) {
             if (defender instanceof CardView cardDefender) {
                 PlayerView controller = cardDefender.getController();
                 if (controller != null && controller.equals(player)) {
-                    FCollection<CardView> attackers = combatView.getAttackersOf(defender);
-                    if (attackers != null && !attackers.isEmpty()) return true;
+                    if (!combatView.getAttackersOf(defender).isEmpty()) return true;
                 }
             }
         }
@@ -618,7 +605,7 @@ public class YieldController {
         FCollectionView<CardView> targetCards = si.getTargetCards();
         if (targetCards != null) {
             for (CardView target : targetCards) {
-                if (target.getController() != null && target.getController().equals(player)) return true;
+                if (player.equals(target.getController())) return true;
             }
         }
         StackItemView subInstance = si.getSubInstance();
@@ -627,17 +614,14 @@ public class YieldController {
     }
 
     /** Recurses into sub-instances for modal spells like Farewell. */
-    private static boolean isMassRemovalInstance(SpellAbilityStackInstance si) {
-        SpellAbility sa = si.getSpellAbility();
-        if (sa != null && isMassRemovalApi(sa.getApi())) return true;
+    private static boolean isMassRemoval(SpellAbilityStackInstance si) {
+        ApiType api = si.getSpellAbility().getApi();
+        if (api == ApiType.DestroyAll
+                || api == ApiType.DamageAll
+                || api == ApiType.SacrificeAll
+                || api == ApiType.ChangeZoneAll) return true;
         SpellAbilityStackInstance subInstance = si.getSubInstance();
-        return subInstance != null && isMassRemovalInstance(subInstance);
+        return subInstance != null && isMassRemoval(subInstance);
     }
 
-    private static boolean isMassRemovalApi(ApiType api) {
-        return api == ApiType.DestroyAll
-            || api == ApiType.DamageAll
-            || api == ApiType.SacrificeAll
-            || api == ApiType.ChangeZoneAll;
-    }
 }

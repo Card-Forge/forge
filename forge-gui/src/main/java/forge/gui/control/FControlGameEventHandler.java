@@ -291,7 +291,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         for (SpellAbilityStackInstance candidate : gv.getGame().getStack()) {
             if (candidate.getId() == targetId) { si = candidate; break; }
         }
-        if (si != null) yc.onSpellAbilityCast(si, gv);
+        if (si != null) yc.onSpellAbilityCast(si);
     }
 
     @Override
