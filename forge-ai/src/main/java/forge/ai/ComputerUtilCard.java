@@ -571,20 +571,18 @@ public class ComputerUtilCard {
         if (Iterables.isEmpty(list)) {
             return null;
         }
-        final Map<Player, Integer> threatCache = new IdentityHashMap<>();
-        return Aggregates.itemWithMax(list, c -> evaluateRemovalTargetPriority(ai, c, threatCache));
+        return Aggregates.itemWithMax(list, c -> evaluateRemovalTargetPriority(ai, c));
     }
 
     public static Card getBestCreatureRemovalTargetAI(final Player ai, final Iterable<Card> list) {
         if (Iterables.size(list) == 1) {
             return Iterables.get(list, 0);
         }
-        final Map<Player, Integer> threatCache = new IdentityHashMap<>();
         return Aggregates.itemWithMax(IterableUtil.filter(list, CardPredicates.CREATURES),
-                c -> evaluateRemovalTargetPriority(ai, c, threatCache));
+                c -> evaluateRemovalTargetPriority(ai, c));
     }
 
-    private static int evaluateRemovalTargetPriority(final Player ai, final Card c, final Map<Player, Integer> threatCache) {
+    private static int evaluateRemovalTargetPriority(final Player ai, final Card c) {
         int value;
         if (c.isCreature()) {
             value = evaluateCreature(c);
@@ -598,8 +596,7 @@ public class ComputerUtilCard {
         }
 
         if (ai != null && c.getController().isOpponentOf(ai)) {
-            value += threatCache.computeIfAbsent(c.getController(),
-                    p -> ComputerUtil.evaluateOpponentThreatTo(ai, p)) / 4;
+            value += ComputerUtil.evaluateBoardPosition(ai, c.getController()) / 4;
         }
         return value;
     }

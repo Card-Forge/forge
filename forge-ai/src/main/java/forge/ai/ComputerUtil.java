@@ -2899,11 +2899,16 @@ public class ComputerUtil {
         return bestBoardPosition;
     }
 
-    public static int evaluateOpponentThreatTo(final Player ai, final Player opponent) {
+    public static int evaluateBoardPosition(final Player ai, final Player opponent) {
         if (ai == null || opponent == null || !opponent.isOpponentOf(ai)) {
             return 0;
         }
+        return AiCache.getCached("evaluateBoardPositionOpponent",
+                () -> evaluateBoardPositionOpponent(ai, opponent),
+                List.of(AiCache::identity, AiCache::identity), ai, opponent);
+    }
 
+    private static int evaluateBoardPositionOpponent(final Player ai, final Player opponent) {
         int rating = 0;
         int attackPower = 0;
 
@@ -2914,6 +2919,8 @@ public class ComputerUtil {
             if (c.isCreature()) {
                 rating += ComputerUtilCard.evaluateCreature(c) / 2;
                 if (CombatUtil.canAttackNextTurn(c, ai)) {
+                    // TODO: Consider whether the opponent is likely to attack this AI specifically.
+                    // This is hard to predict for human players and multiplayer politics.
                     int power = Math.max(0, c.getNetPower());
                     attackPower += power;
                     rating += power * 15;

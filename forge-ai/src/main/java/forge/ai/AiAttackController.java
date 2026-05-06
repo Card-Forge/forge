@@ -202,13 +202,18 @@ public class AiAttackController {
         return choosePreferredDefenderPlayer(ai, false);
     }
     public static Player choosePreferredDefenderPlayer(Player ai, boolean forCombatDmg) {
+        PlayerCollection opponents = ai.getOpponents();
+        if (opponents.size() == 1) {
+            return opponents.get(0);
+        }
+
         // TODO for multiplayer combat avoid players with cantLose or (if not playing infect) cantLoseForZeroOrLessLife and !canLoseLife
 
         Player bestDefender = ai.getWeakestOpponent();
         int bestScore = Integer.MIN_VALUE;
-        for (Player opp : ai.getOpponents()) {
+        for (Player opp : opponents) {
             final int life = opp.getLife();
-            int score = ComputerUtil.evaluateOpponentThreatTo(ai, opp);
+            int score = ComputerUtil.evaluateBoardPosition(ai, opp);
             score += Math.max(0, 40 - life) * 10;
             if (life <= 8) {
                 score += (9 - life) * 100;
