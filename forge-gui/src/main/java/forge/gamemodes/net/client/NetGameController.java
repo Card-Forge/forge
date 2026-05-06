@@ -207,13 +207,11 @@ public class NetGameController implements IGameController {
 
     @Override
     public void setYieldBoolPref(final FPref pref, final boolean value) {
-        yieldController.setBoolPref(pref, value);
         send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.SetYieldBoolPref(pref, value));
     }
 
     @Override
     public void setYieldStringPref(final FPref pref, final String value) {
-        yieldController.setStringPref(pref, value);
         send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.SetYieldStringPref(pref, value));
     }
 

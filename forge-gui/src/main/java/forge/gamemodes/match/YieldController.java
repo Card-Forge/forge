@@ -41,6 +41,25 @@ import java.util.Set;
  */
 public class YieldController {
 
+    /** Yield FPrefs synced per-PCH; enumerated here so the client snapshot includes every value, not just touched overrides. */
+    private static final EnumSet<FPref> SYNCED_BOOL_PREFS = EnumSet.of(
+            FPref.YIELD_INTERRUPT_ON_ATTACKERS,
+            FPref.YIELD_INTERRUPT_ON_OPPONENT_SPELL,
+            FPref.YIELD_INTERRUPT_ON_TARGETING,
+            FPref.YIELD_INTERRUPT_ON_TRIGGERS,
+            FPref.YIELD_INTERRUPT_ON_REVEAL,
+            FPref.YIELD_INTERRUPT_ON_MASS_REMOVAL,
+            FPref.YIELD_AUTO_PASS_NO_ACTIONS,
+            FPref.YIELD_AUTO_PASS_RESPECTS_INTERRUPTS,
+            FPref.YIELD_SKIP_PHASE_DELAY,
+            FPref.YIELD_SKIP_RESOLVE_DELAY,
+            FPref.YIELD_SUPPRESS_ON_OWN_TURN,
+            FPref.YIELD_SUPPRESS_AFTER_END);
+    private static final EnumSet<FPref> SYNCED_STRING_PREFS = EnumSet.of(
+            FPref.YIELD_AVAILABLE_ACTIONS_BUDGET_MS,
+            FPref.YIELD_DECLINE_SCOPE_STACK_YIELD,
+            FPref.YIELD_DECLINE_SCOPE_NO_ACTIONS);
+
     private final PlayerControllerHuman owner;
 
     private boolean autoPassUntilEOT;
@@ -57,7 +76,7 @@ public class YieldController {
     private final AutoYieldStore localStore = new AutoYieldStore();
     private final Map<PlayerView, EnumSet<PhaseType>> skipPhases = new HashMap<>();
 
-    /** Override wins, FModel is fallback. Synced per-PCH so each client's prefs govern their proxy. */
+    /** Populated only on the host's proxy of a remote player (via {@link #applyClientSeed} and {@link YieldUpdate.SetYieldBoolPref}/{@link YieldUpdate.SetYieldStringPref} envelopes); local controllers always defer to FModel. Override wins, FModel is fallback. */
     private final EnumMap<FPref, Boolean> boolPrefOverrides = new EnumMap<>(FPref.class);
     private final EnumMap<FPref, String>  stringPrefOverrides = new EnumMap<>(FPref.class);
 
@@ -125,11 +144,18 @@ public class YieldController {
         return DeclineScope.fromPref(getStringPref(pref));
     }
 
+    /** Read effective values from FModel for every synced yield FPref so the host's proxy can be seeded with the full set, not just prefs the user has touched this session. */
     public Map<FPref, Boolean> snapshotBoolPrefs() {
-        return new EnumMap<>(boolPrefOverrides);
+        ForgePreferences prefs = FModel.getPreferences();
+        EnumMap<FPref, Boolean> out = new EnumMap<>(FPref.class);
+        for (FPref pref : SYNCED_BOOL_PREFS) out.put(pref, prefs.getPrefBoolean(pref));
+        return out;
     }
     public Map<FPref, String> snapshotStringPrefs() {
-        return new EnumMap<>(stringPrefOverrides);
+        ForgePreferences prefs = FModel.getPreferences();
+        EnumMap<FPref, String> out = new EnumMap<>(FPref.class);
+        for (FPref pref : SYNCED_STRING_PREFS) out.put(pref, prefs.getPref(pref));
+        return out;
     }
 
     // setMarker/clearMarker are mutated from EDT (right-click), Netty (wire receive), and game thread.
