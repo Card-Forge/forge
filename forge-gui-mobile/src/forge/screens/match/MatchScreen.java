@@ -39,6 +39,7 @@ import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.match.YieldController;
 import forge.gui.GuiBase;
 import forge.interfaces.IGameController;
 import forge.localinstance.properties.ForgePreferences;
@@ -667,7 +668,7 @@ public class MatchScreen extends FScreen {
                 break;
             case Keys.E: //end turn on Ctrl+E on Android, E when running on desktop
                 if (KeyInputAdapter.isCtrlKeyDown() || GuiBase.getInterface().isRunningOnDesktop()) {
-                    getGameController().passPriorityUntilEndOfTurn();
+                    YieldController.endTurn(getGameController(), MatchController.instance.getCurrentPlayer());
                     return true;
                 }
                 break;

@@ -454,6 +454,12 @@ public class YieldController {
         return newVal;
     }
 
+    /** Activate auto-pass-until-end-of-turn for {@code local} via the unified envelope path. */
+    public static void endTurn(IGameController ctrl, PlayerView local) {
+        if (ctrl == null || local == null) return;
+        ctrl.sendYieldUpdate(new YieldUpdate.SetAutoPassUntilEndOfTurn(local, true));
+    }
+
     /** Eager check at REVEAL/notifyOfValue call sites — no GameEventReveal exists. */
     public void maybeInterruptOnReveal() {
         if (!getBoolPref(FPref.YIELD_INTERRUPT_ON_REVEAL)) return;

@@ -2398,25 +2398,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void passPriority() {
-        passPriority(false);
-    }
-
-    @Override
-    public void passPriorityUntilEndOfTurn() {
-        passPriority(true);
-    }
-
-    private void passPriority(final boolean passUntilEndOfTurn) {
         final Input inp = inputProxy.getInput();
         if (inp instanceof InputPassPriority) {
-            if (passUntilEndOfTurn) {
-                autoPassUntilEndOfTurn();
-            }
             inp.selectButtonOK();
-        } else {
-            FThreads.invokeInEdtNowOrLater(() -> {
-                // getGui().message("Cannot pass priority at this time.");
-            });
         }
     }
 
@@ -3571,7 +3555,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      *  Same compute gating as {@link #chooseSpellAbilityToPlay} so the actions field is fresh. */
     private void tryAutoPassNow() {
         if (!(inputQueue.getInput() instanceof InputPassPriority)) return;
-        if (yieldController.isYieldActive()) return;
         if (needsAvailableActions()) {
             long timeoutMs = computeAvailableActionsBudgetMs(getPlayer());
             getPlayer().getView().setHasAvailableActions(AvailableActions.compute(getPlayer(), timeoutMs));

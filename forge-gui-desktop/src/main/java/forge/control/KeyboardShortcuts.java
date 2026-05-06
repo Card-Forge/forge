@@ -133,7 +133,7 @@ public class KeyboardShortcuts {
             public void actionPerformed(final ActionEvent e) {
                 if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
                 if (matchUI == null) { return; }
-                matchUI.getGameController().passPriorityUntilEndOfTurn();
+                YieldController.endTurn(matchUI.getGameController(), matchUI.getCurrentPlayer());
             }
         };
 

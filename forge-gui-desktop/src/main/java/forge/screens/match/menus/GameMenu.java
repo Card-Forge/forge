@@ -12,6 +12,7 @@ import javax.swing.SwingUtilities;
 import com.google.common.primitives.Ints;
 
 import forge.control.KeyboardShortcuts;
+import forge.gamemodes.match.YieldController;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
@@ -111,7 +112,7 @@ public final class GameMenu {
     }
 
     private ActionListener getEndTurnAction() {
-        return e -> matchUI.getGameController().passPriorityUntilEndOfTurn();
+        return e -> YieldController.endTurn(matchUI.getGameController(), matchUI.getCurrentPlayer());
     }
 
     /** Sets a menu item's accelerator display from a shortcut preference. */

@@ -85,11 +85,6 @@ public class NetGameController implements IGameController {
     }
 
     @Override
-    public void passPriorityUntilEndOfTurn() {
-        send(ProtocolMethod.passPriorityUntilEndOfTurn);
-    }
-
-    @Override
     public void passPriority() {
         send(ProtocolMethod.passPriority);
     }

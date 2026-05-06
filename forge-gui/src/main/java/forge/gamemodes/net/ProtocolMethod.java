@@ -88,7 +88,6 @@ public enum ProtocolMethod implements IHasForgeLog {
     selectButtonOk            (Mode.CLIENT, Void.TYPE),
     selectButtonCancel        (Mode.CLIENT, Void.TYPE),
     selectAbility             (Mode.CLIENT, Void.TYPE, SpellAbilityView.class),
-    passPriorityUntilEndOfTurn(Mode.CLIENT, Void.TYPE),
     passPriority              (Mode.CLIENT, Void.TYPE),
     nextGameDecision          (Mode.CLIENT, Void.TYPE, NextGameDecision.class),
     getActivateDescription    (Mode.CLIENT, String.class, CardView.class),

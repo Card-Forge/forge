@@ -53,7 +53,6 @@ public interface IGameController {
     void requestResync();
 
     void passPriority();
-    void passPriorityUntilEndOfTurn();
 
     // Auto-yield preferences
     boolean shouldAutoYield(String key);
