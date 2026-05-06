@@ -459,7 +459,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
 
             final boolean useUiPointAtCard =
-                    FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) && !GuiBase.getInterface().isLibgdxPort() ?
+                    FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) && !getGui().isLibgdxPort() ?
                             (cz.is(ZoneType.Battlefield) || cz.is(ZoneType.Hand) || cz.is(ZoneType.Library) ||
                                     cz.is(ZoneType.Graveyard) || cz.is(ZoneType.Exile) || cz.is(ZoneType.Flashback) ||
                                     cz.is(ZoneType.Command) || cz.is(ZoneType.Sideboard)) :
@@ -782,12 +782,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public boolean confirmTrigger(final WrappedAbility wrapper) {
         final SpellAbility sa = wrapper.getWrappedAbility();
         final Trigger regtrig = wrapper.getTrigger();
-        if (shouldAlwaysAcceptTrigger(regtrig.getId())) {
-            return true;
-        }
-        if (shouldAlwaysDeclineTrigger(regtrig.getId())) {
-            return false;
-        }
+        AutoYieldStore.TriggerDecision decision = getTriggerDecision(wrapper.yieldKey());
+        if (decision == AutoYieldStore.TriggerDecision.ACCEPT) return true;
+        if (decision == AutoYieldStore.TriggerDecision.DECLINE) return false;
 
         // triggers with costs can always be declined by not paying the cost
         if (sa.hasParam("Cost") && !sa.getParam("Cost").equals("0")) {
@@ -814,7 +811,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 buildQuestion.append("\n").append(localizer.getMessage("lblTriggeredby")).append(": ").append(tos.get(AbilityKey.Card));
             }
         }
-        if (GuiBase.getInterface().isLibgdxPort()) {
+        if (getGui().isLibgdxPort()) {
             CardView cardView;
             SpellAbilityView spellAbilityView = wrapper.getView();
             if (spellAbilityView != null) //updated view
@@ -822,9 +819,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             else
                 cardView = wrapper.getCardView();
             return this.getGui().confirm(cardView, buildQuestion.toString().replaceAll("\n", " "));
-        } else {
-            return InputConfirm.confirm(this, wrapper, buildQuestion.toString());
         }
+        return InputConfirm.confirm(this, wrapper, buildQuestion.toString());
     }
 
     @Override
@@ -977,8 +973,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         CardCollection toTop = null;
 
         tempShowCards(topN);
-        if (FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) &&
-                (!GuiBase.getInterface().isLibgdxPort()) && (!GuiBase.isNetPlay(getGui()))) { //prevent crash for desktop vs mobile port it will crash the netplay since mobile doesnt have manipulatecardlist, send the alternate below
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) && !getGui().isLibgdxPort()) {
             CardCollectionView cardList = player.getCardsIn(ZoneType.Library);
             ImmutablePair<CardCollection, CardCollection> result =
                     arrangeForMove(localizer.getMessage("lblMoveCardstoToporBbottomofLibrary"), cardList, topN, true, true);
@@ -1445,7 +1440,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public boolean confirmReplacementEffect(final ReplacementEffect replacementEffect, final SpellAbility effectSA,
                                             GameEntity affected, final String question) {
-        if (GuiBase.getInterface().isLibgdxPort()) {
+        if (getGui().isLibgdxPort()) {
             CardView cardView;
             SpellAbilityView spellAbilityView = effectSA == null ? null : effectSA.getView();
             if (spellAbilityView != null) //updated view
@@ -1576,7 +1571,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public CardCollection chooseCardsToDiscardToMaximumHandSize(final int nDiscard) {
         final int max = player.getMaxHandSize();
 
-        if (GuiBase.getInterface().isLibgdxPort()) {
+        if (getGui().isLibgdxPort()) {
             tempShowCards(player.getCardsIn(ZoneType.Hand));
             GameEntityViewMap<Card, CardView> gameCacheDiscard = GameEntityView.getMap(player.getCardsIn(ZoneType.Hand));
             List<CardView> views = getGui().many(String.format(localizer.getMessage("lblChooseMinCardToDiscard"), nDiscard),
@@ -1725,7 +1720,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (sa != null && sa.isManaAbility()) {
             getGame().fireEvent(new GameEventAddLog(GameLogEntryType.LAND, message));
         } else {
-            if (sa != null && sa.getHostCard() != null && GuiBase.getInterface().isLibgdxPort()) {
+            if (sa != null && sa.getHostCard() != null && getGui().isLibgdxPort()) {
                 CardView cardView;
                 IPaperCard iPaperCard = sa.getHostCard().getPaperCard();
                 if (iPaperCard != null)
@@ -1884,7 +1879,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public boolean confirmPayment(final CostPart costPart, final String question, SpellAbility sa) {
-        if (GuiBase.getInterface().isLibgdxPort()) {
+        if (getGui().isLibgdxPort()) {
             CardView cardView;
             try {
                 cardView = CardView.getCardForUi(ImageUtil.getPaperCardFromImageKey(sa.getView().getHostCard().getCurrentState().getTrackableImageKey()));
@@ -2234,7 +2229,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void revealAISkipCards(final String message, final Map<Player, Map<DeckSection, List<? extends PaperCard>>> unplayable) {
-        if (GuiBase.getInterface().isLibgdxPort()) {
+        if (getGui().isLibgdxPort()) {
             //restore old functionality for mobile version since list of card names can't be zoomed to display the cards
             for (Player p : unplayable.keySet()) {
                 final Map<DeckSection, List<? extends PaperCard>> removedUnplayableCards = unplayable.get(p);
@@ -3519,32 +3514,31 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public boolean shouldAlwaysAcceptTrigger(final int trigger) {
-        return yieldController.shouldAlwaysAcceptTrigger(trigger);
-    }
-    @Override
-    public boolean shouldAlwaysDeclineTrigger(final int trigger) {
-        return yieldController.shouldAlwaysDeclineTrigger(trigger);
+    public AutoYieldStore.TriggerDecision getTriggerDecision(final String key) {
+        return yieldController.getTriggerDecision(key);
     }
 
     @Override
-    public void setShouldAlwaysAcceptTrigger(final int trigger) {
-        yieldController.setAlwaysAcceptTrigger(trigger);
-        if (isPromptingForTrigger(trigger)) selectButtonOk();
-    }
-    @Override
-    public void setShouldAlwaysDeclineTrigger(final int trigger) {
-        yieldController.setAlwaysDeclineTrigger(trigger);
-        if (isPromptingForTrigger(trigger)) selectButtonCancel();
-    }
-    @Override
-    public void setShouldAlwaysAskTrigger(final int trigger) {
-        yieldController.setAlwaysAskTrigger(trigger);
-    }
-    private boolean isPromptingForTrigger(final int trigger) {
-        if (!(inputQueue.getInput() instanceof InputConfirm)) return false;
+    public void setTriggerDecision(final String key, final AutoYieldStore.TriggerDecision decision, final boolean isAbilityScope) {
+        yieldController.setTriggerDecision(key, decision, isAbilityScope);
+
+        if (!(inputQueue.getInput() instanceof InputConfirm)) return;
         final SpellAbilityStackInstance top = getGame().getStack().peek();
-        return top != null && top.isStateTrigger(trigger);
+        if (top == null || !top.isTrigger()) return;
+        final String topKey = top.getSpellAbility().yieldKey();
+        if (key.equals(topKey) || key.equals(forge.player.AutoYieldStore.abilitySuffix(topKey))) {
+            if (decision == AutoYieldStore.TriggerDecision.ACCEPT) selectButtonOk();
+            else if (decision == AutoYieldStore.TriggerDecision.DECLINE) selectButtonCancel();
+        }
+    }
+
+    @Override
+    public boolean getDisableAutoTriggers() {
+        return yieldController.getDisableAutoTriggers();
+    }
+    @Override
+    public void setDisableAutoTriggers(final boolean disable) {
+        yieldController.setDisableAutoTriggers(disable);
     }
 
     public boolean isUiSetToSkipPhase(final PlayerView turnPlayer, final PhaseType phase) {

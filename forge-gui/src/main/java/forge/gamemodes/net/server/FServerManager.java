@@ -978,6 +978,7 @@ public final class FServerManager implements IHasForgeLog {
                         ctx.close();
                     } else {
                         client.setIndex(index);
+                        client.setLibgdx(event.isLibgdx());
                         if (index > 0) {
                             broadcast(new MessageEvent(String.format("%s joined the lobby.", event.getUsername())));
                             broadcastTo(new MessageEvent(formatAfkTimeoutMessage()),

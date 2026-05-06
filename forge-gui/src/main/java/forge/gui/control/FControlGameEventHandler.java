@@ -265,7 +265,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         evaluateYieldInterruptForSpellCast(event);
 
         needStackUpdate = true;
-        if (GuiBase.getInterface().isLibgdxPort() ||
+        if (matchController.isLibgdxPort() ||
                 ForgeConstants.STACK_EFFECT_NOTIFICATION_NEVER.equals(FModel.getPreferences().getPref(FPref.UI_STACK_EFFECT_NOTIFICATION_POLICY))) {
             // mobile port don't have notify stack addition like the desktop
             return processEvent();
@@ -303,7 +303,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     @Override
     public Void visit(final GameEventSpellRemovedFromStack event) {
         needStackUpdate = true;
-        if (GuiBase.getInterface().isLibgdxPort() ||
+        if (matchController.isLibgdxPort() ||
                 ForgeConstants.STACK_EFFECT_NOTIFICATION_NEVER.equals(FModel.getPreferences().getPref(FPref.UI_STACK_EFFECT_NOTIFICATION_POLICY))) {
         } else {
             processEvent();
@@ -415,7 +415,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventCardChangeZone event) {
-        if (GuiBase.getInterface().isLibgdxPort()) {
+        if (matchController.isLibgdxPort()) {
             if (event.from() != null) {
                 updateZone(event.from().player(), event.from().zoneType());
             }
@@ -473,7 +473,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
 
     @Override
     public Void visit(final GameEventShuffle event) {
-        if (GuiBase.getInterface().isLibgdxPort()) {
+        if (matchController.isLibgdxPort()) {
             return updateZone(event.player(), ZoneType.Library);
         } else {
             return processEvent();

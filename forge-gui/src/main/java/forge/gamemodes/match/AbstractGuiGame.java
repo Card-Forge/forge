@@ -425,11 +425,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             return false;
         }
 
-        gameView.getGame().getAction().invoke(() -> {
-            if (!gameView.getGame().isGameOver()) {
-                gameView.getGame().setGameOver(GameEndReason.AllHumansLost);
-            }
-        });
+        gameView.getGame().getAction().invoke(() -> gameView.getGame().setGameOver(GameEndReason.AllHumansLost));
         return true;
     }
 
