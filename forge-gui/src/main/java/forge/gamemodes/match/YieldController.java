@@ -404,11 +404,11 @@ public class YieldController {
         } else if (update instanceof YieldUpdate.CardAutoYield u) {
             applyAutoYieldFromWire(u.cardKey(), u.active());
         } else if (update instanceof YieldUpdate.TriggerDecision u) {
-            setTriggerDecision(u.trigId(), u.decision());
+            setTriggerDecision(u.storageKey(), u.decision(), u.abilityScope());
         } else if (update instanceof YieldUpdate.SetDisableYields u) {
-            yieldController.setDisableAutoYields(u.disabled());
+            setDisableAutoYields(u.disabled());
         } else if (update instanceof YieldUpdate.SetDisableTriggers u) {
-            yieldController.setDisableAutoTriggers(u.disabled());
+            setDisableAutoTriggers(u.disabled());
         } else if (update instanceof YieldUpdate.SkipPhase u) {
             setSkipPhase(u.turnPlayer(), u.phase(), u.skip());
         } else if (update instanceof YieldUpdate.SetYieldBoolPref u) {
