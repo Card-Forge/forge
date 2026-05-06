@@ -197,17 +197,13 @@ public class PlayerView extends GameEntityView {
     public boolean getIsExtraTurn() {
         return get(TrackableProperty.IsExtraTurn);
     }
-
     public void setIsExtraTurn(final boolean val) {
         set(TrackableProperty.IsExtraTurn, val);
     }
 
     public boolean getHasLost() {
-        if (get(TrackableProperty.HasLost) == null)
-            return false;
         return get(TrackableProperty.HasLost);
     }
-
     public void setHasLost(final boolean val) {
         set(TrackableProperty.HasLost, val);
     }
@@ -215,18 +211,12 @@ public class PlayerView extends GameEntityView {
     public boolean hasAvailableActions() {
         return get(TrackableProperty.HasAvailableActions);
     }
-
     public void setHasAvailableActions(boolean value) {
         set(TrackableProperty.HasAvailableActions, value);
     }
 
     public int getAvatarLifeDifference() {
-        return (int)get(TrackableProperty.AvatarLifeDifference);
-    }
-    public boolean wasAvatarLifeChanged() {
-        if ((int)get(TrackableProperty.AvatarLifeDifference) == 0)
-            return false;
-        return (int)get(TrackableProperty.AvatarLifeDifference) != 0;
+        return get(TrackableProperty.AvatarLifeDifference);
     }
     public void setAvatarLifeDifference(final int val) {
         set(TrackableProperty.AvatarLifeDifference, val);
@@ -235,7 +225,6 @@ public class PlayerView extends GameEntityView {
     public int getExtraTurnCount() {
         return get(TrackableProperty.ExtraTurnCount);
     }
-
     public void setExtraTurnCount(final int val) {
         set(TrackableProperty.ExtraTurnCount, val);
     }

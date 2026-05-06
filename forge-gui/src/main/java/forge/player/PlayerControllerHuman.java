@@ -1500,8 +1500,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // Yield check first: it's a field read, vs needsAvailableActions which does 3 synced FPref reads.
         if (!yieldController.isYieldActive() && needsAvailableActions()) {
             long timeoutMs = computeAvailableActionsBudgetMs(getPlayer());
-            boolean result = AvailableActions.compute(getPlayer(), timeoutMs);
-            getPlayer().getView().setHasAvailableActions(result);
+            getPlayer().getView().setHasAvailableActions(AvailableActions.compute(getPlayer(), timeoutMs));
         }
 
         // Game-thread only; no cross-thread races on the YIELD_SUPPRESS_AFTER_END flag
@@ -3582,7 +3581,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
     }
 
-    /** True iff some yield consumer needs the synced wire field. */
+    /** True if yield consumer needs the synced wire field. */
     private boolean needsAvailableActions() {
         if (yieldController.getBoolPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS)) return true;
         if (yieldController.getDeclineScope(FPref.YIELD_DECLINE_SCOPE_NO_ACTIONS) != DeclineScope.NEVER) return true;
