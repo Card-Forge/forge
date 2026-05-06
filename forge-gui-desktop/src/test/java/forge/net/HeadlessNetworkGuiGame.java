@@ -82,7 +82,6 @@ public class HeadlessNetworkGuiGame extends NetworkGuiGame {
     @Override public void updatePhase(boolean saveState) { }
     @Override public void updateTurn(PlayerView player) { }
     @Override public void updatePlayerControl() { }
-    @Override public boolean isLibgdxPort() { return false; }
     @Override public void enableOverlay() { }
     @Override public void disableOverlay() { }
     @Override public void showManaPool(PlayerView player) { }

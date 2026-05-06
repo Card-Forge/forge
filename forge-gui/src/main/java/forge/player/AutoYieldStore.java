@@ -26,13 +26,11 @@ public class AutoYieldStore {
     public boolean shouldYield(Tier tier, String key) {
         return !disabled && yieldsByTier.get(tier).contains(key);
     }
-
     public void setYield(Tier tier, String key, boolean autoYield) {
         if (autoYield) yieldsByTier.get(tier).add(key);
         else yieldsByTier.get(tier).remove(key);
     }
 
-    public Iterable<String> getYields(Tier tier) { return yieldsByTier.get(tier); }
     public boolean isDisabled() { return disabled; }
     public void setDisabled(boolean disabled) { this.disabled = disabled; }
     public boolean isTriggerDecisionsDisabled() { return triggerDecisionsDisabled; }
@@ -42,12 +40,14 @@ public class AutoYieldStore {
         TriggerDecision d = triggerDecisionsByTier.get(tier).get(key);
         return d == null ? TriggerDecision.ASK : d;
     }
-
     public void setTriggerDecision(Tier tier, String key, TriggerDecision decision) {
         if (decision == TriggerDecision.ASK) triggerDecisionsByTier.get(tier).remove(key);
         else triggerDecisionsByTier.get(tier).put(key, decision);
     }
 
+    public Iterable<String> getYields(Tier tier) {
+        return yieldsByTier.get(tier);
+    }
     public Iterable<Map.Entry<String, TriggerDecision>> getAutoTriggers(Tier tier) {
         return triggerDecisionsByTier.get(tier).entrySet();
     }

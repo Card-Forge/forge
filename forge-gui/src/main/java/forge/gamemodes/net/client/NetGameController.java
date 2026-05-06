@@ -145,7 +145,6 @@ public class NetGameController implements IGameController {
     public boolean shouldAutoYield(final String key) {
         return yieldController.shouldAutoYield(key);
     }
-
     @Override
     public void setShouldAutoYield(final String key, final boolean autoYield, final boolean isAbilityScope) {
         String storageKey = yieldController.setShouldAutoYield(key, autoYield, isAbilityScope);
@@ -153,7 +152,9 @@ public class NetGameController implements IGameController {
     }
 
     @Override
-    public boolean getDisableAutoYields() { return yieldController.getDisableAutoYields(); }
+    public boolean getDisableAutoYields() {
+        return yieldController.getDisableAutoYields();
+    }
     @Override
     public void setDisableAutoYields(final boolean disable) {
         yieldController.setDisableAutoYields(disable);
@@ -164,7 +165,6 @@ public class NetGameController implements IGameController {
     public AutoYieldStore.TriggerDecision getTriggerDecision(final String key) {
         return yieldController.getTriggerDecision(key);
     }
-
     @Override
     public void setTriggerDecision(final String key, final AutoYieldStore.TriggerDecision decision, final boolean isAbilityScope) {
         String storageKey = yieldController.setTriggerDecision(key, decision, isAbilityScope);
@@ -172,8 +172,9 @@ public class NetGameController implements IGameController {
     }
 
     @Override
-    public boolean getDisableAutoTriggers() { return yieldController.getDisableAutoTriggers(); }
-
+    public boolean getDisableAutoTriggers() {
+        return yieldController.getDisableAutoTriggers();
+    }
     @Override
     public void setDisableAutoTriggers(final boolean disable) {
         yieldController.setDisableAutoTriggers(disable);

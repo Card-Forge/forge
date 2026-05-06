@@ -18,6 +18,7 @@ import forge.game.zone.ZoneType;
 import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.match.input.InputConfirm;
 import forge.gamemodes.net.DeltaPacket;
+import forge.gui.GuiBase;
 import forge.gui.control.PlaybackSpeed;
 import forge.interfaces.IGameController;
 import forge.item.PaperCard;
@@ -35,13 +36,14 @@ import java.util.Map;
 
 public interface IGuiGame {
     /**
-     * Whether the renderer for this GUI is the libgdx (mobile) port.
-     * For local GUIs this matches GuiBase.getInterface().isLibgdxPort();
-     * for RemoteClientGuiGame it reflects the connected client's renderer
+     * Whether the renderer for this GUI is the mobile port.
+     * For non-local GUIs this reflects the connected client's renderer
      * (learned at lobby handshake), letting the host pick code paths that
      * are actually implemented on the target.
      */
-    boolean isLibgdxPort();
+    default boolean isLibgdxPort() {
+        return GuiBase.getInterface().isLibgdxPort();
+    }
 
     void setGameView(GameView gameView);
 

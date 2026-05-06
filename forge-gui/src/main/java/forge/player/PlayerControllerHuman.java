@@ -779,8 +779,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public boolean confirmTrigger(final WrappedAbility wrapper) {
         final SpellAbility sa = wrapper.getWrappedAbility();
         final Trigger regtrig = wrapper.getTrigger();
-        final String key = wrapper.yieldKey();
-        AutoYieldStore.TriggerDecision decision = getTriggerDecision(key);
+        AutoYieldStore.TriggerDecision decision = getTriggerDecision(wrapper.yieldKey());
         if (decision == AutoYieldStore.TriggerDecision.ACCEPT) return true;
         if (decision == AutoYieldStore.TriggerDecision.DECLINE) return false;
 
@@ -817,9 +816,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             else
                 cardView = wrapper.getCardView();
             return this.getGui().confirm(cardView, buildQuestion.toString().replaceAll("\n", " "));
-        } else {
-            return InputConfirm.confirm(this, wrapper, buildQuestion.toString());
         }
+        return InputConfirm.confirm(this, wrapper, buildQuestion.toString());
     }
 
     @Override
@@ -3506,7 +3504,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public void setTriggerDecision(final String key, final AutoYieldStore.TriggerDecision decision, final boolean isAbilityScope) {
         yieldController.setTriggerDecision(key, decision, isAbilityScope);
-        if (isPromptingForTrigger(key)) {
+
+        if (!(inputQueue.getInput() instanceof InputConfirm)) return;
+        final SpellAbilityStackInstance top = getGame().getStack().peek();
+        if (top == null || !top.isTrigger()) return;
+        final String topKey = top.getSpellAbility().yieldKey();
+        if (key.equals(topKey) || key.equals(forge.player.AutoYieldStore.abilitySuffix(topKey))) {
             if (decision == AutoYieldStore.TriggerDecision.ACCEPT) selectButtonOk();
             else if (decision == AutoYieldStore.TriggerDecision.DECLINE) selectButtonCancel();
         }
@@ -3519,18 +3522,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public void setDisableAutoTriggers(final boolean disable) {
         yieldController.setDisableAutoTriggers(disable);
-    }
-
-    private boolean isPromptingForTrigger(final String key) {
-        if (key == null || key.isEmpty()) return false;
-        if (!(inputQueue.getInput() instanceof InputConfirm)) return false;
-        final SpellAbilityStackInstance top = getGame().getStack().peek();
-        if (top == null) return false;
-        final SpellAbility sa = top.getSpellAbility();
-        if (sa == null || !sa.isTrigger() || sa.getTrigger() == null) return false;
-        final String topKey = sa.yieldKey();
-        if (key.equals(topKey)) return true;
-        return key.equals(forge.player.AutoYieldStore.abilitySuffix(topKey));
     }
 
     public boolean isUiSetToSkipPhase(final PlayerView turnPlayer, final PhaseType phase) {

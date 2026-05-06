@@ -303,14 +303,14 @@ public class VStack implements IVDoc<CStack> {
         private final JMenuItem jmiYieldToEntireStack;
         private StackItemView item;
 
-        private String triggerYieldKey = "";
-        private boolean triggerAbilityScope;
+        private String yieldKey = "";
+        private boolean abilityScope;
 
         public AbilityMenu(){
             jmiAutoYield = new JCheckBoxMenuItem(Localizer.getInstance().getMessage("cbpAutoYieldMode"));
             jmiAutoYield.addActionListener(arg0 -> {
-                final boolean autoYield = controller.getMatchUI().getGameController().shouldAutoYield(triggerYieldKey);
-                controller.getMatchUI().getGameController().setShouldAutoYield(triggerYieldKey, !autoYield, triggerAbilityScope);
+                final boolean autoYield = controller.getMatchUI().getGameController().shouldAutoYield(yieldKey);
+                controller.getMatchUI().getGameController().setShouldAutoYield(yieldKey, !autoYield, abilityScope);
                 if (!autoYield && controller.getMatchUI().getGameView().peekStack() == item) {
                     //auto-pass priority if ability is on top of stack
                     controller.getMatchUI().getGameController().passPriority();
@@ -320,19 +320,19 @@ public class VStack implements IVDoc<CStack> {
 
             jmiAlwaysYes = new JCheckBoxMenuItem(Localizer.getInstance().getMessage("lblAlwaysYes"));
             jmiAlwaysYes.addActionListener(arg0 -> {
-                if (triggerYieldKey.isEmpty()) return;
+                if (yieldKey.isEmpty()) return;
                 IGameController gc = controller.getMatchUI().getGameController();
-                TriggerDecision next = gc.getTriggerDecision(triggerYieldKey) == TriggerDecision.ACCEPT ? TriggerDecision.ASK : TriggerDecision.ACCEPT;
-                gc.setTriggerDecision(triggerYieldKey, next, triggerAbilityScope);
+                TriggerDecision next = gc.getTriggerDecision(yieldKey) == TriggerDecision.ACCEPT ? TriggerDecision.ASK : TriggerDecision.ACCEPT;
+                gc.setTriggerDecision(yieldKey, next, abilityScope);
             });
             add(jmiAlwaysYes);
 
             jmiAlwaysNo = new JCheckBoxMenuItem(Localizer.getInstance().getMessage("lblAlwaysNo"));
             jmiAlwaysNo.addActionListener(arg0 -> {
-                if (triggerYieldKey.isEmpty()) return;
+                if (yieldKey.isEmpty()) return;
                 IGameController gc = controller.getMatchUI().getGameController();
-                TriggerDecision next = gc.getTriggerDecision(triggerYieldKey) == TriggerDecision.DECLINE ? TriggerDecision.ASK : TriggerDecision.DECLINE;
-                gc.setTriggerDecision(triggerYieldKey, next, triggerAbilityScope);
+                TriggerDecision next = gc.getTriggerDecision(yieldKey) == TriggerDecision.DECLINE ? TriggerDecision.ASK : TriggerDecision.DECLINE;
+                gc.setTriggerDecision(yieldKey, next, abilityScope);
             });
             add(jmiAlwaysNo);
 
@@ -348,15 +348,15 @@ public class VStack implements IVDoc<CStack> {
 
         public void setStackInstance(final StackItemView item0) {
             item = item0;
-            triggerYieldKey = item.getKey();
-            triggerAbilityScope = controller.getMatchUI().getGameController().getYieldController().isAbilityScope();
+            yieldKey = item.getKey();
+            abilityScope = controller.getMatchUI().getGameController().getYieldController().isAbilityScope();
 
             jmiAutoYield.setVisible(item.isAbility());
             jmiAutoYield.setSelected(item.isAbility()
-                    && controller.getMatchUI().getGameController().shouldAutoYield(triggerYieldKey));
+                    && controller.getMatchUI().getGameController().shouldAutoYield(yieldKey));
 
-            if (item.isOptionalTrigger() && controller.getMatchUI().isLocalPlayer(item.getActivatingPlayer()) && !triggerYieldKey.isEmpty()) {
-                TriggerDecision decision = controller.getMatchUI().getGameController().getTriggerDecision(triggerYieldKey);
+            if (item.isOptionalTrigger() && controller.getMatchUI().isLocalPlayer(item.getActivatingPlayer()) && !yieldKey.isEmpty()) {
+                TriggerDecision decision = controller.getMatchUI().getGameController().getTriggerDecision(yieldKey);
                 jmiAlwaysYes.setSelected(decision == TriggerDecision.ACCEPT);
                 jmiAlwaysNo.setSelected(decision == TriggerDecision.DECLINE);
                 jmiAlwaysYes.setVisible(true);

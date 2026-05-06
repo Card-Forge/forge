@@ -16,11 +16,11 @@ public sealed interface YieldUpdate extends Serializable
         permits YieldUpdate.SetMarker,
                 YieldUpdate.ClearMarker,
                 YieldUpdate.StackYield,
-                YieldUpdate.TriggerDecision,
                 YieldUpdate.CardAutoYield,
-                YieldUpdate.SkipPhase,
+                YieldUpdate.TriggerDecision,
                 YieldUpdate.SetDisableYields,
                 YieldUpdate.SetDisableTriggers,
+                YieldUpdate.SkipPhase,
                 YieldUpdate.SeedFromClient {
 
     /** {@code atOrPastAtClick}: priority was at-or-past target on owner's turn when the user clicked — computed by the UI so client cache and host PCH initialize identically. */
@@ -30,18 +30,18 @@ public sealed interface YieldUpdate extends Serializable
 
     record StackYield(PlayerView player, boolean active) implements YieldUpdate {}
 
-    /** Param order mirrors {@link CardAutoYield} (key, value, scope). */
-    record TriggerDecision(String storageKey, AutoYieldStore.TriggerDecision decision, boolean abilityScope) implements YieldUpdate {}
-
     record CardAutoYield(String cardKey, boolean active, boolean abilityScope) implements YieldUpdate {}
 
-    record SkipPhase(PlayerView turnPlayer, PhaseType phase, boolean skip) implements YieldUpdate {}
+    /** Param order mirrors {@link CardAutoYield} (key, value, scope). */
+    record TriggerDecision(String storageKey, AutoYieldStore.TriggerDecision decision, boolean abilityScope) implements YieldUpdate {}
 
     /** Runtime toggle of the global auto-yield disable flag — host applies to its remote-cache, client to its local controller. */
     record SetDisableYields(boolean disabled) implements YieldUpdate {}
 
     /** Runtime toggle of the global auto-trigger disable flag — host applies to its remote-cache, client to its local controller. */
     record SetDisableTriggers(boolean disabled) implements YieldUpdate {}
+
+    record SkipPhase(PlayerView turnPlayer, PhaseType phase, boolean skip) implements YieldUpdate {}
 
     record SeedFromClient(YieldStateSnapshot snapshot) implements YieldUpdate {}
 }

@@ -902,7 +902,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         return cbpDefaultLanguage;
     }
 
-
     public FComboBoxPanel<String> getAutoDecisionModeComboBoxPanel() {
         return cbpAutoDecisionMode;
     }

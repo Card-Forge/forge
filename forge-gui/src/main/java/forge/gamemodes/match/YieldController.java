@@ -149,8 +149,7 @@ public class YieldController {
 
     /** True when the active auto-decision scope is per-ability (any tier above per-card/per-game). */
     public boolean isAbilityScope() {
-        return !ForgeConstants.AUTO_DECISION_PER_CARD.equals(
-                FModel.getPreferences().getPref(FPref.UI_AUTO_DECISION_MODE));
+        return !ForgeConstants.AUTO_DECISION_PER_CARD.equals(FModel.getPreferences().getPref(FPref.UI_AUTO_DECISION_MODE));
     }
 
     /** Tier-aware user-initiated set. Returns the storage key (stripped if ability-scope) for wire propagation. */
@@ -220,9 +219,8 @@ public class YieldController {
     }
 
     public AutoYieldStore.TriggerDecision getTriggerDecision(String key) {
-        if (key == null || key.isEmpty()) return AutoYieldStore.TriggerDecision.ASK;
         AutoYieldStore store = activeStore();
-        if (store.isTriggerDecisionsDisabled()) return AutoYieldStore.TriggerDecision.ASK;
+        if (key == null || key.isEmpty() || store.isTriggerDecisionsDisabled()) return AutoYieldStore.TriggerDecision.ASK;
         if (!tierAware()) {
             // Cache mode: keys stored at storageKey shape (full or stripped).
             AutoYieldStore.TriggerDecision d = store.getTriggerDecision(AutoYieldStore.Tier.GAME, key);
@@ -254,7 +252,7 @@ public class YieldController {
         activeStore().setTriggerDecision(AutoYieldStore.Tier.GAME, storageKey, decision);
     }
 
-    public Iterable<java.util.Map.Entry<String, AutoYieldStore.TriggerDecision>> getAutoTriggers() {
+    public Iterable<Map.Entry<String, AutoYieldStore.TriggerDecision>> getAutoTriggers() {
         if (!tierAware()) return activeStore().getAutoTriggers(AutoYieldStore.Tier.GAME);
         if (activeModeIsInstall()) return PersistentAutoDecisionStore.get().getAutoTriggers();
         return activeStore().getAutoTriggers(activeTier());
@@ -262,7 +260,6 @@ public class YieldController {
 
     public boolean getDisableAutoTriggers() { return activeStore().isTriggerDecisionsDisabled(); }
     public void setDisableAutoTriggers(boolean disable) { activeStore().setTriggerDecisionsDisabled(disable); }
-
 
     /** Build the seed payload from this controller's authoritative store. */
     public YieldStateSnapshot buildClientSnapshot(Map<PlayerView, EnumSet<PhaseType>> skipPhases) {

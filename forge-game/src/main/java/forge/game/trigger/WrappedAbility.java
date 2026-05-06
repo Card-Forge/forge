@@ -155,12 +155,10 @@ public class WrappedAbility extends Ability {
         if (getTrigger() != null) {
             if (getHostCard() != null) {
                 return getHostCard().toString() + ": " + getTrigger().toString();
-            } else {
-                return getTrigger().toString();
             }
-        } else {
-            return super.yieldKey();
+            return getTrigger().toString();
         }
+        return super.yieldKey();
     }
 
     // include triggering information so that different effects look different
