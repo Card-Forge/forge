@@ -48,6 +48,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     private final Map<String, CardRules> rulesByPrimaryName;
     private final Map<String, CardRules> rulesByAltName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
     private final ListMultimap<CardRules, PaperCard> allCardsByRules = Multimaps.newListMultimap(new TreeMap<>(CARD_RULES_NAME_COMPARATOR), Lists::newArrayList);
+    private final Map<CardRules, PaperCard> uniqueCardsByRules = Maps.newTreeMap(CARD_RULES_NAME_COMPARATOR);
     private final Map<String, ICardFace> facesByName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
     private final Map<String, String> normalizedNames = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
     private static final Map<String, String> artPrefs = Maps.newHashMap();
@@ -555,14 +556,14 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     private void reIndex() {
-        uniqueCardsByName.clear();
-        for (Entry<String, Collection<PaperCard>> kv : allCardsByName.asMap().entrySet()) {
-            PaperCard pc = getFirstNonSpeicalWithImage(kv.getValue());
-            uniqueCardsByName.put(kv.getKey(), pc);
+        uniqueCardsByRules.clear();
+        for (Entry<CardRules, Collection<PaperCard>> kv : allCardsByRules.asMap().entrySet()) {
+            PaperCard pc = getFirstNonSpecialWithImage(kv.getValue());
+            uniqueCardsByRules.put(kv.getKey(), pc);
         }
     }
 
-    private static PaperCard getFirstNonSpeicalWithImage(final Collection<PaperCard> cards) {
+    private static PaperCard getFirstNonSpecialWithImage(final Collection<PaperCard> cards) {
         //NOTE: this is written this way to avoid checking final card in list
         final Iterator<PaperCard> iterator = cards.iterator();
         PaperCard pc = iterator.next();
@@ -580,7 +581,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         PaperCard pc = this.getCard(cardRequestForPreferredArt);
         if (pc != null) {
             artPrefs.put(cardName, cardRequestForPreferredArt);
-            uniqueCardsByName.put(cardName, pc);
+            uniqueCardsByRules.put(pc.getRules(), pc);
             return true;
         }
         return false;
@@ -928,23 +929,21 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     // returns a list of all cards from their respective latest (or preferred) editions
     @Override
     public Collection<PaperCard> getUniqueCards() {
-        return uniqueCardsByName.values();
-    }
-
-    public Collection<PaperCard> getUniqueCardsNoAlt() {
-        return Maps.filterEntries(this.uniqueCardsByName, e -> {
-            if (e == null)
-                return false;
-            return e.getKey().equals(e.getValue().getName());
-        }).values();
-    }
-
-    public List<PaperCard> getUniqueCardsNoAlt(String cardName) {
-        return Lists.newArrayList(Maps.filterEntries(uniqueCardsByName, entry -> entry.getKey().equals(entry.getValue().getName())).get(getNormalizedName(cardName)));
+        return uniqueCardsByRules.values();
     }
 
     public PaperCard getUniqueByName(final String name) {
-        return uniqueCardsByName.get(getNormalizedName(name));
+        CardRules rules = getRules(name, true);
+        if(rules == null)
+            return null;
+        return uniqueCardsByRules.get(rules);
+    }
+
+    public PaperCard getUniqueByNameNoAlt(String cardName) {
+        CardRules rules = getRules(cardName, false);
+        if(rules == null)
+            return null;
+        return uniqueCardsByRules.get(rules);
     }
 
     public Collection<ICardFace> getAllFaces() {
@@ -980,17 +979,13 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return Collections.unmodifiableCollection(allCardsByName.values());
     }
 
-    public Collection<PaperCard> getAllCardsNoAlt() {
-        return Multimaps.filterEntries(allCardsByName, entry -> entry.getKey().equals(entry.getValue().getName())).values();
-    }
-
     @Override
     public Stream<PaperCard> streamAllCards() {
         return allCardsByRules.values().stream();
     }
     @Override
     public Stream<PaperCard> streamUniqueCards() {
-        return uniqueCardsByName.values().stream();
+        return uniqueCardsByRules.values().stream();
     }
 
     public Stream<ICardFace> streamAllFaces() {
