@@ -465,8 +465,7 @@ public class YieldController {
         if (!shouldEvaluateInterrupts()) return;
         PlayerView local = owner != null ? owner.getLocalPlayerView() : null;
         if (local == null) return;
-        Player activator = si.getActivatingPlayer();
-        boolean isOpponent = activator != null && !activator.getView().equals(local);
+        boolean isOpponent = !si.getActivatingPlayer().getView().equals(local);
 
         if (isOpponent && getBoolPref(FPref.YIELD_INTERRUPT_ON_OPPONENT_SPELL)) {
             applyInterrupt();
@@ -607,8 +606,7 @@ public class YieldController {
             }
         }
         StackItemView subInstance = si.getSubInstance();
-        if (subInstance != null && targetsPlayerOrPermanents(subInstance, player)) return true;
-        return false;
+        return subInstance != null && targetsPlayerOrPermanents(subInstance, player);
     }
 
     /** Recurses into sub-instances for modal spells like Farewell. */
