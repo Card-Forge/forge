@@ -87,7 +87,7 @@ public class VPrompt implements IVDoc<CPrompt> {
             if (ctrl != null && local != null && ctrl.getYieldController() != null
                     && ctrl.getYieldController().isYieldActive()) {
                 ctrl.sendYieldUpdate(new YieldUpdate.ClearMarker(local));
-                ctrl.sendYieldUpdate(new YieldUpdate.StackYield(local, false));
+                ctrl.sendYieldUpdate(new YieldUpdate.StackYield(local, false, false));
                 ctrl.sendYieldUpdate(new YieldUpdate.SetAutoPassUntilEndOfTurn(local, false));
                 return;
             }

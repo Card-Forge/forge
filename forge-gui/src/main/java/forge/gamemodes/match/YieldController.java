@@ -48,6 +48,8 @@ public class YieldController {
 
     private boolean autoPassUntilEOT;
     private boolean autoPassUntilStackEmpty;
+    /** When true, an active stack-yield is cleared by interrupt classifiers; when false, only stack-empty turns it off. */
+    private boolean stackYieldRespectsInterrupts;
     private YieldMarker autoPassUntilMarker;
 
     /** Priority has passed through any non-target phase since marker activation. */
@@ -89,16 +91,18 @@ public class YieldController {
 
     // All mutators synchronized — fields touched from EDT, Netty, game thread.
     // Activating any yield type clears the others — only one yield type may be active at a time (APINA is orthogonal).
-    public synchronized void setAutoPassUntilStackEmpty(boolean active) {
+    public synchronized void setAutoPassUntilStackEmpty(boolean active, boolean respectsInterrupts) {
         if (active) {
             autoPassUntilEOT = false;
             clearMarker();
         }
         this.autoPassUntilStackEmpty = active;
+        this.stackYieldRespectsInterrupts = active && respectsInterrupts;
     }
     public synchronized void setAutoPassUntilEndOfTurn(boolean active) {
         if (active) {
             autoPassUntilStackEmpty = false;
+            stackYieldRespectsInterrupts = false;
             clearMarker();
         }
         this.autoPassUntilEOT = active;
@@ -135,6 +139,7 @@ public class YieldController {
     public synchronized void setMarker(PlayerView phaseOwner, PhaseType phase, boolean atOrPastAtClick) {
         autoPassUntilEOT = false;
         autoPassUntilStackEmpty = false;
+        stackYieldRespectsInterrupts = false;
         if (phaseOwner == null || phase == null) {
             clearMarker();
             return;
@@ -165,6 +170,7 @@ public class YieldController {
         if (autoPassUntilStackEmpty) {
             if (gv != null && gv.peekStack() != null) return true;
             autoPassUntilStackEmpty = false;
+            stackYieldRespectsInterrupts = false;
         }
         if (autoPassUntilMarker != null && gv != null) {
             PlayerView turnPlayer = gv.getPlayerTurn();
@@ -264,6 +270,7 @@ public class YieldController {
     public synchronized void resetForNewGame() {
         autoPassUntilEOT = false;
         autoPassUntilStackEmpty = false;
+        stackYieldRespectsInterrupts = false;
         autoPassUntilMarker = null;
         hasLeftMarker = false;
         activationOnMarker = false;
@@ -348,7 +355,7 @@ public class YieldController {
         } else if (update instanceof YieldUpdate.ClearMarker) {
             clearMarker();
         } else if (update instanceof YieldUpdate.StackYield u) {
-            setAutoPassUntilStackEmpty(u.active());
+            setAutoPassUntilStackEmpty(u.active(), u.respectsInterrupts());
             return u.active();
         } else if (update instanceof YieldUpdate.SetAutoPassUntilEndOfTurn u) {
             setAutoPassUntilEndOfTurn(u.active());
@@ -373,9 +380,11 @@ public class YieldController {
         return autoPassUntilEOT || autoPassUntilStackEmpty || autoPassUntilMarker != null;
     }
 
-    /** EOT and marker yields can be interrupted. Stack-yield is fire and forget — only stack-empty turns it off. */
+    /** EOT, marker, and interruptible stack-yields back off via {@link #applyInterrupt()}. The non-interruptible stack-yield is fire-and-forget — only stack-empty turns it off. */
     public boolean isInterruptibleYieldActive() {
-        return autoPassUntilEOT || autoPassUntilMarker != null;
+        return autoPassUntilEOT
+                || autoPassUntilMarker != null
+                || (autoPassUntilStackEmpty && stackYieldRespectsInterrupts);
     }
 
     public synchronized void clearActiveYieldAndDispatch() {
@@ -390,7 +399,8 @@ public class YieldController {
         }
         if (autoPassUntilStackEmpty) {
             autoPassUntilStackEmpty = false;
-            if (gui != null) gui.applyYieldUpdate(new YieldUpdate.StackYield(local, false));
+            stackYieldRespectsInterrupts = false;
+            if (gui != null) gui.applyYieldUpdate(new YieldUpdate.StackYield(local, false, false));
             anyCleared = true;
         }
         if (autoPassUntilEOT) {

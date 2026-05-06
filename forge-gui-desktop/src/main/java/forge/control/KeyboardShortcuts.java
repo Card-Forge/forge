@@ -294,7 +294,7 @@ public class KeyboardShortcuts {
                 if (ctrl == null || local == null || ctrl.getYieldController() == null) { return; }
                 if (!ctrl.getYieldController().isYieldActive()) { return; }
                 ctrl.sendYieldUpdate(new YieldUpdate.ClearMarker(local));
-                ctrl.sendYieldUpdate(new YieldUpdate.StackYield(local, false));
+                ctrl.sendYieldUpdate(new YieldUpdate.StackYield(local, false, false));
                 ctrl.sendYieldUpdate(new YieldUpdate.SetAutoPassUntilEndOfTurn(local, false));
             }
         };

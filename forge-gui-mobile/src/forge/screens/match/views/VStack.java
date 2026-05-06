@@ -326,10 +326,16 @@ public class VStack extends FDropDown {
                                         }));
                             }
                         }
+                        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblYieldToStack"),
+                                Forge.hdbuttons ? FSkinImage.HDYIELD : FSkinImage.WARNING,
+                                e -> {
+                                    controller.sendYieldUpdate(new YieldUpdate.StackYield(player, true, true));
+                                    controller.passPriority();
+                                }));
                         addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblYieldToEntireStack"),
                                 Forge.hdbuttons ? FSkinImage.HDYIELD : FSkinImage.WARNING,
                                 e -> {
-                                    controller.sendYieldUpdate(new YieldUpdate.StackYield(player, true));
+                                    controller.sendYieldUpdate(new YieldUpdate.StackYield(player, true, false));
                                     controller.passPriority();
                                 }));
                         addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblZoomOrDetails"), e -> CardZoom.show(stackInstance.getSourceCard())));

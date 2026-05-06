@@ -246,9 +246,9 @@ public class InputPassPriority extends InputSyncronizedBase {
             PlayerView self = getPlayerView();
             YieldController yc = getController().getYieldController();
             if (accepted == SuggestionType.STACK_YIELD) {
-                yc.setAutoPassUntilStackEmpty(true);
+                yc.setAutoPassUntilStackEmpty(true, true);
                 if (self != null) getController().getGui().applyYieldUpdate(
-                        new YieldUpdate.StackYield(self, true));
+                        new YieldUpdate.StackYield(self, true, true));
             } else if (accepted == SuggestionType.NO_ACTIONS) {
                 // UPKEEP because UNTAP has no priority pass — a marker on UNTAP could never fire.
                 if (self != null) {

@@ -74,7 +74,7 @@ The dialog has three sections:
 
 ### Yield Interrupt Settings
 
-Yield markers and end-of-turn yield automatically cancel when important game events occur. (Stack-yield is exempt — its purpose is to watch the stack resolve, so opponent spells hitting the stack do not cancel it.) 
+Yield markers, end-of-turn yield, and the interruptible **Yield to stack** automatically cancel when important game events occur. The non-interruptible **Resolve entire stack** is exempt — its purpose is to watch the stack resolve to completion, so opponent spells hitting the stack do not cancel it.
 
 You can decide which game events interrupt a yield:
 
@@ -99,7 +99,7 @@ When the system detects situations where you likely cannot take action, it can p
 
 | Suggestion | When it appears | Suggested action | Decline scope options |
 |------------|-----------------|------------------|-----------------------|
-| **Can't respond to stack** | You have no instant-speed responses available | Stack yield (auto-pass until stack empties) | Never (default) / Always / Once per stack / Once per turn |
+| **Can't respond to stack** | You have no instant-speed responses available | Yield to stack (interruptible — auto-pass until stack empties or an interrupt fires) | Never (default) / Always / Once per stack / Once per turn |
 | **No actions available** | No playable cards or activatable abilities (not your turn, stack empty) | Yield to your next turn | Never (default) / Always / Once per turn |
 
 **Decline scope options:**

@@ -30,7 +30,7 @@ public sealed interface YieldUpdate extends Serializable
 
     record ClearMarker(PlayerView player) implements YieldUpdate {}
 
-    record StackYield(PlayerView player, boolean active) implements YieldUpdate {}
+    record StackYield(PlayerView player, boolean active, boolean respectsInterrupts) implements YieldUpdate {}
 
     record SetAutoPassUntilEndOfTurn(PlayerView player, boolean active) implements YieldUpdate {}
 
