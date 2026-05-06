@@ -2,8 +2,8 @@ Name:Ajani's Pridemate
 ManaCost:1 W
 Types:Creature Cat Soldier
 PT:2/2
-T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you gain life, put a +1/+1 counter on CARDNAME.
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you gain life, put a +1/+1 counter on this creature.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 DeckHas:Ability$Counters
 DeckHints:Ability$LifeGain
-Oracle:Whenever you gain life, put a +1/+1 counter on Ajani's Pridemate.
+Oracle:Whenever you gain life, put a +1/+1 counter on this creature.

@@ -4,7 +4,7 @@ Types:Legendary Creature Dragon Spirit
 PT:4/4
 K:Flying
 K:Trample
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME dies, ABILITY
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When NICKNAME dies, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ ExileTwo,CreateTreasure
 SVar:ExileTwo:DB$ Dig | Defined$ You | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top two cards of your library. Until the end of your next turn, you may play those cards.
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | Duration$ UntilTheEndOfYourNextTurn
@@ -12,4 +12,4 @@ SVar:STPlay:Mode$ Continuous | MayPlay$ True | Affected$ Card.IsRemembered | Aff
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:CreateTreasure:DB$ Token | TokenAmount$ 3 | TokenScript$ c_a_treasure_sac | SpellDescription$ Create three Treasure tokens.
 DeckHas:Ability$Token|Sacrifice
-Oracle:Flying, trample\nWhen Atsushi, the Blazing Sky dies, choose one —\n• Exile the top two cards of your library. Until the end of your next turn, you may play those cards.\n• Create three Treasure tokens.
+Oracle:Flying, trample\nWhen Atsushi dies, choose one —\n• Exile the top two cards of your library. Until the end of your next turn, you may play those cards.\n• Create three Treasure tokens.

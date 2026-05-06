@@ -1,7 +1,7 @@
 Name:Azorius Guildgate
 ManaCost:no cost
 Types:Land Gate
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ CARDNAME enters tapped.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
 A:AB$ Mana | Cost$ T | Produced$ Combo W U | SpellDescription$ Add {W} or {U}.
-Oracle:Azorius Guildgate enters tapped.\n{T}: Add {W} or {U}.
+Oracle:This land enters tapped.\n{T}: Add {W} or {U}.

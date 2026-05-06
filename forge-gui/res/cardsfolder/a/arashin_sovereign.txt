@@ -3,6 +3,6 @@ ManaCost:5 G W
 Types:Creature Dragon
 PT:6/6
 K:Flying
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | OptionalDecider$ TriggeredCardController | Execute$ TrigChange | TriggerDescription$ When CARDNAME dies, you may put it on the top or bottom of its owner's library.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | OptionalDecider$ TriggeredCardController | Execute$ TrigChange | TriggerDescription$ When this creature dies, you may put it on your choice of the top or bottom of its owner's library.
 SVar:TrigChange:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Library | DestinationAlternative$ Library | LibraryPositionAlternative$ -1
-Oracle:Flying\nWhen Arashin Sovereign dies, you may put it on the top or bottom of its owner's library.
+Oracle:Flying\nWhen this creature dies, you may put it on your choice of the top or bottom of its owner's library.

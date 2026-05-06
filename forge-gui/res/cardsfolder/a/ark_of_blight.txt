@@ -2,4 +2,4 @@ Name:Ark of Blight
 ManaCost:2
 Types:Artifact
 A:AB$ Destroy | Cost$ 3 T Sac<1/CARDNAME> | ValidTgts$ Land | SpellDescription$ Destroy target land.
-Oracle:{3}, {T}, Sacrifice Ark of Blight: Destroy target land.
+Oracle:{3}, {T}, Sacrifice this artifact: Destroy target land.

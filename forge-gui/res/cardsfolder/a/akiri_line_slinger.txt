@@ -4,9 +4,9 @@ Types:Legendary Creature Kor Soldier Ally
 PT:0/3
 K:First Strike
 K:Vigilance
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME gets +1/+0 for each artifact you control.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ NICKNAME gets +1/+0 for each artifact you control.
 SVar:X:Count$Valid Artifact.YouCtrl
 K:Partner
 SVar:BuffedBy:Artifact
 AI:RemoveDeck:Random
-Oracle:First strike, vigilance\nAkiri, Line-Slinger gets +1/+0 for each artifact you control.\nPartner (You can have two commanders if both have partner.)
+Oracle:First strike, vigilance\nAkiri gets +1/+0 for each artifact you control.\nPartner (You can have two commanders if both have partner.)

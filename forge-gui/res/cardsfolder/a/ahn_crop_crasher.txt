@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Creature Minotaur Warrior
 PT:3/2
 K:Haste
-S:Mode$ OptionalAttackCost | ValidCard$ Card.Self | Trigger$ TrigCanNotBlock | Cost$ Exert<1/CARDNAME> | Description$ You may exert CARDNAME as it attacks. When you do, target creature can't block this turn.
-SVar:TrigCanNotBlock:DB$ Effect | ValidTgts$ Creature | RememberObjects$ Targeted | StaticAbilities$ CantBlock | ExileOnMoved$ Battlefield | IsCurse$ True | SpellDescription$ When you do, target creature can't block this turn.
+S:Mode$ OptionalAttackCost | ValidCard$ Card.Self | Trigger$ TrigCanNotBlock | Cost$ Exert<1/CARDNAME> | Description$ You may exert this creature as it attacks. When you do, target creature can't block this turn.
+SVar:TrigCanNotBlock:DB$ Effect | ValidTgts$ Creature | RememberObjects$ Targeted | StaticAbilities$ CantBlock | ExileOnMoved$ Battlefield | TgtPrompt$ Select target creature. | IsCurse$ True | SpellDescription$ When you do, target creature can't block this turn.
 SVar:CantBlock:Mode$ CantBlock | ValidCard$ Creature.IsRemembered | Description$ This creature can't block this turn.
-Oracle:Haste\nYou may exert Ahn-Crop Crasher as it attacks. When you do, target creature can't block this turn. (An exerted creature won't untap during your next untap step.)
+Oracle:Haste (This creature can attack and {T} as soon as it comes under your control.)\nYou may exert this creature as it attacks. When you do, target creature can't block this turn. (An exerted creature won't untap during your next untap step.)

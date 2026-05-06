@@ -7,4 +7,4 @@ A:AB$ ChangeZone | Cost$ 3 T Exile<1/CARDNAME> | Origin$ Graveyard | Destination
 SVar:ExileAll:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card
 DeckHas:Ability$Mana.Colorless
 DeckHints:Color$Colorless & Keyword$Devoid
-Oracle:{T}: Add {C}.\n{1}, {T}: Add one mana of any color.\n{3}, {T}, Exile Abstergo Entertainment: Return up to one target historic card from your graveyard to your hand, then exile all graveyards.
+Oracle:{T}: Add {C}.\n{1}, {T}: Add one mana of any color.\n{3}, {T}, Exile Abstergo Entertainment: Return up to one target historic card from your graveyard to your hand, then exile all graveyards. (Artifacts, legendaries, and Sagas are historic.)

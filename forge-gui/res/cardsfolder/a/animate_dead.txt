@@ -4,15 +4,15 @@ Types:Enchantment Aura
 K:Enchant:Creature.inZoneGraveyard:creature card in a graveyard
 SVar:AttachAILogic:Reanimate
 SVar:AttachAITgts:Creature.!namedWorldgorger Dragon
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Card.StrictlySelf | Execute$ TrigReanimate | TriggerDescription$ When CARDNAME enters, if it's on the battlefield, it loses "enchant creature card in a graveyard" and gains "enchant creature put onto the battlefield with CARDNAME." Return enchanted creature card to the battlefield under your control and attach CARDNAME to it. When CARDNAME leaves the battlefield, that creature's controller sacrifices it.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Card.StrictlySelf | Execute$ TrigReanimate | TriggerDescription$ When this Aura enters, if it's on the battlefield, it loses "enchant creature card in a graveyard" and gains "enchant creature put onto the battlefield with this Aura." Return enchanted creature card to the battlefield under your control and attach this Aura to it. When this Aura leaves the battlefield, that creature's controller sacrifices it.
 SVar:TrigReanimate:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ Enchanted | RememberChanged$ True | GainControl$ True | SubAbility$ DBAnimate
 SVar:DBAnimate:DB$ Animate | Defined$ Self | Keywords$ Enchant:Creature.IsRemembered:creature put onto the battlefield with CARDNAME | RemoveKeywords$ Enchant:Creature.inZoneGraveyard:creature card in a graveyard | Duration$ Permanent | SubAbility$ DBAttach
 SVar:DBAttach:DB$ Attach | Defined$ Remembered | SubAbility$ DBDelay
-SVar:DBDelay:DB$ DelayedTrigger | Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Execute$ TrigSacrifice | RememberObjects$ RememberedLKI | TriggerDescription$ When CARDNAME leaves the battlefield, that creature's controller sacrifices it.
+SVar:DBDelay:DB$ DelayedTrigger | Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Execute$ TrigSacrifice | RememberObjects$ RememberedLKI | TriggerDescription$ When this Aura leaves the battlefield, that creature's controller sacrifices it.
 SVar:TrigSacrifice:DB$ SacrificeAll | Defined$ DelayTriggerRememberedLKI
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -1 | Description$ Enchanted creature gets -1/-0.
 DeckHas:Ability$Graveyard
 DeckHints:Ability$Mill|Discard & Keyword$Dredge
-Oracle:Enchant creature card in a graveyard\nWhen Animate Dead enters, if it's on the battlefield, it loses "enchant creature card in a graveyard" and gains "enchant creature put onto the battlefield with Animate Dead." Return enchanted creature card to the battlefield under your control and attach Animate Dead to it. When Animate Dead leaves the battlefield, that creature's controller sacrifices it.\nEnchanted creature gets -1/-0.
+Oracle:Enchant creature card in a graveyard\nWhen this Aura enters, if it's on the battlefield, it loses "enchant creature card in a graveyard" and gains "enchant creature put onto the battlefield with this Aura." Return enchanted creature card to the battlefield under your control and attach this Aura to it. When this Aura leaves the battlefield, that creature's controller sacrifices it.\nEnchanted creature gets -1/-0.

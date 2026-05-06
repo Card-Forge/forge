@@ -3,9 +3,9 @@ ManaCost:2 U U
 Types:Creature Shapeshifter
 PT:0/0
 K:etbCounter:P1P1:2
-A:AB$ RemoveCounter | Cost$ X T | CounterType$ P1P1 | CounterNum$ All | SpellDescription$ Remove all +1/+1 counters from CARDNAME and put X +1/+1 counters on it. | SubAbility$ DBPutCounter
+A:AB$ RemoveCounter | Cost$ X T | CounterType$ P1P1 | CounterNum$ All | SpellDescription$ Remove all +1/+1 counters from this creature and put X +1/+1 counters on it. | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ X
 SVar:X:Count$xPaid
 SVar:All:Count$CardCounters.P1P1
 AI:RemoveDeck:All
-Oracle:Anthroplasm enters with two +1/+1 counters on it.\n{X}, {T}: Remove all +1/+1 counters from Anthroplasm and put X +1/+1 counters on it.
+Oracle:This creature enters with two +1/+1 counters on it.\n{X}, {T}: Remove all +1/+1 counters from this creature and put X +1/+1 counters on it.
