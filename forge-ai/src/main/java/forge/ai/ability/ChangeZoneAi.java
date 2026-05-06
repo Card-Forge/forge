@@ -32,7 +32,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 import java.util.Map.Entry;
-import java.util.stream.Collectors;
 
 public class ChangeZoneAi extends SpellAbilityAi {
     /*
@@ -1007,10 +1006,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 list = CardLists.filterControlledBy(list, ai.getOpponents());
                 if (!game.getStack().isEmpty()) {
                     // Avoid "saving" an opponent's permanent that another stack effect is already removing.
-                    list.removeAll(ComputerUtil.predictThreatenedObjects(ai, null).stream()
-                            .filter(Card.class::isInstance)
-                            .map(Card.class::cast)
-                            .collect(Collectors.toList()));
+                    list.removeAll(ComputerUtil.predictThreatenedCards(ai, null));
                 }
                 if (!CardLists.getNotType(list, "Land").isEmpty()) {
                     // When bouncing opponents stuff other than lands, don't bounce cards with CMC 0

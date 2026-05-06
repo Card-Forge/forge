@@ -1611,6 +1611,10 @@ public class ComputerUtil {
         return predictThreatenedObjects(ai, sa, false);
     }
 
+    public static List<Card> predictThreatenedCards(final Player ai, final SpellAbility sa) {
+        return predictThreatenedCards(ai, sa, false);
+    }
+
     /**
      * Returns list of objects threatened by effects on the stack
      *
@@ -1655,6 +1659,24 @@ public class ComputerUtil {
         // matters if stack contains multiple activations (e.g. Temur Sabertooth)
         Collections.reverse(objects);
         return objects;
+    }
+
+    /**
+     * Returns cards threatened by effects on the stack.
+     *
+     * @param ai
+     *            calling player
+     * @param sa
+     *            SpellAbility to exclude
+     * @param top
+     *            only evaluate the top of the stack for threatening effects
+     * @return list of threatened cards
+     */
+    public static List<Card> predictThreatenedCards(final Player ai, final SpellAbility sa, boolean top) {
+        return predictThreatenedObjects(ai, sa, top).stream()
+                .filter(Card.class::isInstance)
+                .map(Card.class::cast)
+                .collect(Collectors.toList());
     }
 
     private static Iterable<? extends GameObject> predictThreatenedObjects(final Player aiPlayer, final SpellAbility saviour,
