@@ -34,6 +34,15 @@ import java.util.List;
 import java.util.Map;
 
 public interface IGuiGame {
+    /**
+     * Whether the renderer for this GUI is the libgdx (mobile) port.
+     * For local GUIs this matches GuiBase.getInterface().isLibgdxPort();
+     * for RemoteClientGuiGame it reflects the connected client's renderer
+     * (learned at lobby handshake), letting the host pick code paths that
+     * are actually implemented on the target.
+     */
+    boolean isLibgdxPort();
+
     void setGameView(GameView gameView);
 
     /**

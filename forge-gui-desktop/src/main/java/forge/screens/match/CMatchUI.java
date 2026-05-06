@@ -220,6 +220,11 @@ public final class CMatchUI
     }
 
     @Override
+    public boolean isLibgdxPort() {
+        return false;
+    }
+
+    @Override
     public void setGameView(GameView gameView0) {
         super.setGameView(gameView0);
         gameView0 = getGameView(); //ensure updated game view used for below logic
@@ -272,6 +277,7 @@ public final class CMatchUI
                     f.updateZones();
                     f.updateManaPool();
                     f.getTabletop().update();
+                    f.updateTabLabel();
                 }
                 for (final VHand h : getHandViews()) {
                     h.getLayoutControl().updateHand();
@@ -528,6 +534,7 @@ public final class CMatchUI
             }
             if (setupPlayZone) {
                 vField.getTabletop().update();
+                vField.updateTabLabel();
             }
             if (updateHand) {
                 final VHand vHand = getHandFor(owner);

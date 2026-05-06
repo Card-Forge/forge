@@ -197,9 +197,6 @@ public abstract class ImageFetcher {
                 filename = TextUtil.fastReplace(filename, ".full", ".artcrop");
             }
 
-            if (ImageKeys.missingCards.contains(filename))
-                return;
-
             boolean updateLink = false;
             if ("back".equals(face)) { // Seems getimage relative path don't process variants for back faces.
                 try {
@@ -239,8 +236,11 @@ public abstract class ImageFetcher {
             final String cardCollectorNumber = paperCard.getCollectorNumber();
  
             if (cardCollectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER)) {
-                System.out.println("Card " + paperCard.getName() + " does not have a collector number, skipping scryfall download.");
-                ImageKeys.missingCards.add(filename);
+                if (!ImageKeys.missingCards.contains(filename)) {
+                    System.out.println("Card " + paperCard.getName() + " does not have a collector number, skipping scryfall download.");
+                    ImageKeys.missingCards.add(filename);
+                }
+                
                 return;
             }
 
