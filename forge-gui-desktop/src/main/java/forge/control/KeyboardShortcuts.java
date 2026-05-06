@@ -25,6 +25,7 @@ import forge.gui.framework.EDocID;
 import forge.interfaces.IGameController;
 import forge.gui.framework.SDisplayUtil;
 import forge.localinstance.properties.ForgePreferences;
+import forge.gamemodes.match.YieldController;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.home.settings.VSubmenuPreferences.KeyboardShortcutField;
@@ -278,8 +279,8 @@ public class KeyboardShortcuts {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
-                if (matchUI == null || matchUI.getCYield() == null) { return; }
-                matchUI.getCYield().toggleAutoPass();
+                if (matchUI == null) { return; }
+                YieldController.toggleAutoPassNoActions(matchUI.getGameController());
             }
         };
 

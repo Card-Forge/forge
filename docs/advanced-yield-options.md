@@ -23,18 +23,18 @@ These features are highly configurable through the **Yield Settings** dialog, an
 
 ## How to Access
 
-- **Desktop:** The **Yield Options** tab appears in your match UI in the prompt panel. You can also open the Game menu > **Yield Settings**, or press Ctrl+Y.
+- **Desktop:** The Auto-Pass icon and a yield-settings cog appear on the dock panel above the prompt area. Click the cog, open the Game menu > **Yield Settings**, or press Ctrl+Y to bring up the full settings dialog. Click the Auto-Pass icon (or press F2) to toggle Auto-Pass — its background lights up gold while active.
 - **Mobile:** open the in-match Game menu > **Yield Options**.
 
 ## Auto-Pass
 
-**Auto-Pass** is a persistent toggle (F2 on desktop, or the Auto-Pass button) that automatically passes priority whenever you have no playable actions available. It's the simplest way to speed up games where you often have nothing to do — enable it once and Forge stops asking for input you'd only use to pass.
+**Auto-Pass** is a persistent toggle (F2 on desktop, or the Auto-Pass icon on the dock) that automatically passes priority whenever you have no playable actions available. It's the simplest way to speed up games where you often have nothing to do — enable it once and Forge stops asking for input you'd only use to pass.
 
 **How it works:**
 - When enabled, Forge scans your hand, battlefield, and external zones (graveyard, exile, command) for castable spells, playable lands, and activatable abilities.
 - If you have any available action, you keep priority as usual.
 - If you have no available action, Forge passes priority on your behalf without prompting.
-- The button label reflects the state (`Auto-Pass: ON` / `Auto-Pass: OFF`).
+- On desktop, the Auto-Pass dock icon's background lights up gold while active. On mobile, the menu entry text reads `Auto-Pass: ON` / `Auto-Pass: OFF`.
 
 **Interaction with interrupts:** By default, Auto-Pass ignores your interrupt settings — it keeps passing as long as you have no actions, regardless of attackers, opponent spells, mass-removal, etc. Enable **Auto-pass respects interrupts** in the Yield Interrupt Settings section if you want interrupts to break Auto-Pass too.
 
@@ -67,7 +67,7 @@ A fast-forward symbol will appear on the targeted cell to show the marker is act
 ## Yield Settings Menu
 
 The **Yield Settings** dialog is the central configuration UI for yield behavior. It's accessible from:
-- **Desktop:** the **...** button on the Yield Options panel, the Game menu > **Yield Settings** entry, or Ctrl+Y.
+- **Desktop:** the cog button on the dock, the Game menu > **Yield Settings** entry, or Ctrl+Y.
 - **Mobile:** Game menu > **Yield Options**.
 
 The dialog has three sections:

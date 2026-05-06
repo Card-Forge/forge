@@ -23,14 +23,14 @@ import com.google.common.collect.Iterators;
 import com.google.common.primitives.Ints;
 
 import forge.Singletons;
-import forge.gui.SOverlayUtils;
+import forge.gamemodes.match.YieldController;
 import forge.gui.UiCommand;
 import forge.gui.framework.ICDoc;
-import forge.gui.framework.SLayoutIO;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.screens.match.CMatchUI;
+import forge.screens.match.VYieldSettings;
 import forge.screens.match.views.VDock;
 import forge.toolbox.FSkin;
 import forge.util.Localizer;
@@ -129,14 +129,23 @@ public class CDock implements ICDoc {
         refreshArcStateDisplay();
 
         view.getBtnConcede().setCommand((UiCommand) matchUI::concede);
-        view.getBtnSettings().setCommand((UiCommand) SOverlayUtils::showOverlay);
+        view.getBtnSettings().setCommand((UiCommand) () -> new VYieldSettings(matchUI).showDialog());
         view.getBtnEndTurn().setCommand((UiCommand) this::endTurn);
+        view.getBtnAutoPass().setCommand((UiCommand) this::toggleAutoPass);
         view.getBtnViewDeckList().setCommand((UiCommand) matchUI::viewDeckList);
-        view.getBtnRevertLayout().setCommand((UiCommand) SLayoutIO::revertLayout);
-        view.getBtnOpenLayout().setCommand((UiCommand) SLayoutIO::openLayout);
-        view.getBtnSaveLayout().setCommand((UiCommand) SLayoutIO::saveLayout);
         view.getBtnAlphaStrike().setCommand((UiCommand) () -> matchUI.getGameController().alphaStrike());
         view.getBtnTargeting().setCommand((UiCommand) this::toggleTargeting);
+
+        refreshAutoPassToggled();
+    }
+
+    private void toggleAutoPass() {
+        YieldController.toggleAutoPassNoActions(matchUI.getGameController());
+        refreshAutoPassToggled();
+    }
+
+    private void refreshAutoPassToggled() {
+        view.getBtnAutoPass().setToggled(FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS));
     }
 
     /* (non-Javadoc)
@@ -144,6 +153,7 @@ public class CDock implements ICDoc {
      */
     @Override
     public void update() {
+        refreshAutoPassToggled();
     }
 
 }
