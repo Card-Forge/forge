@@ -2907,7 +2907,8 @@ public class ComputerUtil {
             // This is hard to predict for human players and multiplayer politics.
             int remainingLife = predictNextCombatsRemainingLife(ai, true, true, 0 , null, List.of(opponent));
             if (remainingLife < ai.getLife()) {
-                rating += Math.abs(ai.getLife() - Math.max(-20, remainingLife))^2;
+                int lifeLoss = Math.abs(ai.getLife() - Math.max(-20, remainingLife));
+                rating += lifeLoss * lifeLoss;
             }
         }
 

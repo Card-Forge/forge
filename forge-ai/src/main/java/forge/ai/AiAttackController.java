@@ -214,10 +214,11 @@ public class AiAttackController {
             int score = ComputerUtil.evaluateBoardPosition(ai, opp);
             // round away slightly so a single land drop doesn't mean players with earlier turn order are predictably attacked
             score = (int) Math.ceil(score / 10) * 10;
-            if (life > 0 && life < 20) {
+            int lowLifeThreshold = Math.min(20, opp.getStartingLife());
+            if (life > 0 && life < lowLifeThreshold) {
                 // TODO commander damage
-                score += Math.max(0, (20 - life)^2);
-
+                int lifeDeficit = lowLifeThreshold - life;
+                score += lifeDeficit * lifeDeficit;
             }
             if (forCombatDmg) {
                 if (opp.isMonarch() && ai.canBecomeMonarch()) {
