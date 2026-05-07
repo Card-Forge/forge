@@ -1,20 +1,17 @@
 package forge.ai;
 
 import forge.game.card.Card;
+import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import org.tinylog.Logger;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.stream.Collectors;
 
 // Heuristic: does the player have any playable action this priority window?
 // Bounded by timeoutMs; returns true on expiry (false-positive — player is prompted).
 public final class AvailableActions {
-
-    private static final Comparator<Card> BY_CMC_ASC = Comparator.comparingInt(Card::getCMC);
 
     private AvailableActions() {}
 
@@ -58,12 +55,7 @@ public final class AvailableActions {
 
     // Sort cheap cards first so cheap-to-validate matches early-exit
     private static Iterable<Card> sortedCardsIn(Player player, ZoneType zone) {
-        Iterable<Card> cards = player.getCardsIn(zone);
-        List<Card> copy = new ArrayList<>();
-        cards.forEach(copy::add);
-        if (copy.size() < 2) return copy;
-        copy.sort(BY_CMC_ASC);
-        return copy;
+        return player.getCardsIn(zone).stream().sorted(CardLists.CmcComparator).collect(Collectors.toList());
     }
 
     private static boolean canAfford(SpellAbility sa, Player player) {

@@ -214,8 +214,7 @@ public class ChooseCardAi extends SpellAbilityAi {
             if (creats.isEmpty()) {
                 choice = ComputerUtilCard.getWorstAI(options);
             } else {
-                CardLists.sortByCmcDesc(creats);
-                Collections.reverse(creats);
+                creats.sort(CardLists.CmcComparator);
                 choice = creats.get(0);
             }
         } else if ("NegativePowerFirst".equals(logic)) {

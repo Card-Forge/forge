@@ -23,7 +23,7 @@ These features are highly configurable through the **Yield Settings** dialog, an
 
 ## How to Access
 
-- **Desktop:** The Auto-Pass icon and a yield-settings cog appear on the dock panel above the prompt area. Click the cog, open the Game menu > **Yield Settings**, or press Ctrl+Y to bring up the full settings dialog. Click the Auto-Pass icon (or press F2) to toggle Auto-Pass — its background lights up gold while active.
+- **Desktop:** The Auto-Pass icon and a yield-settings cog appear on the dock panel above the prompt area. Click the cog, open the Game menu > **Yield Settings**, or press Ctrl+Y to bring up the full settings dialog.
 - **Mobile:** open the in-match Game menu > **Yield Options**.
 
 ## Auto-Pass
