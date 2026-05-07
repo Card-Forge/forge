@@ -81,6 +81,9 @@ public class PumpAi extends PumpAiBase {
                 return false;
             }
         }
+        if (hasCounterBoonSubAbility(sa)) {
+            return ph.is(PhaseType.MAIN2, ai) || isSorcerySpeed(sa, ai);
+        }
         return super.checkPhaseRestrictions(ai, sa, ph);
     }
 
@@ -88,6 +91,9 @@ public class PumpAi extends PumpAiBase {
     protected boolean checkPhaseRestrictions(final Player ai, final SpellAbility sa, final PhaseHandler ph) {
         final Game game = ai.getGame();
         boolean main1Preferred = "Main1IfAble".equals(sa.getParam("AILogic")) && ph.is(PhaseType.MAIN1, ai);
+        if (hasCounterBoonSubAbility(sa)) {
+            return ph.is(PhaseType.MAIN2, ai) || isSorcerySpeed(sa, ai);
+        }
         if (game.getStack().isEmpty() && sa.getPayCosts().hasTapCost()) {
             if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && ph.isPlayerTurn(ai)) {
                 return false;
@@ -352,6 +358,7 @@ public class PumpAi extends PumpAiBase {
         final Game game = ai.getGame();
         final Card source = sa.getHostCard();
         final boolean isFight = "Fight".equals(sa.getParam("AILogic")) || "PowerDmg".equals(sa.getParam("AILogic"));
+        final boolean counterBoon = hasCounterBoonSubAbility(sa);
 
         immediately = immediately || ComputerUtil.playImmediately(ai, sa);
 
@@ -362,7 +369,8 @@ public class PumpAi extends PumpAiBase {
                 && !containsNonCombatKeyword(keywords)
                 && !"UntilYourNextTurn".equals(sa.getParam("Duration"))
                 && !"ReplaySpell".equals(sa.getParam("AILogic"))
-                && !isFight) {
+                && !isFight
+                && !counterBoon) {
             return false;
         }
 
@@ -379,6 +387,16 @@ public class PumpAi extends PumpAiBase {
             if (CardLists.getTargetableCards(ai.getGame().getCardsIn(sa.getTargetRestrictions().getZone()), sa).isEmpty()) {
                 return false;
             }
+            return true;
+        }
+
+        if (counterBoon) {
+            CardCollection counterBoonTargets = getCounterBoonTargets(ai, sa);
+            if (counterBoonTargets.isEmpty()) {
+                return false;
+            }
+
+            sa.getTargets().add(ComputerUtilCard.getBestAI(counterBoonTargets));
             return true;
         }
 
@@ -544,6 +562,67 @@ public class PumpAi extends PumpAiBase {
         }
 
         return true;
+    }
+
+    private CardCollection getCounterBoonTargets(final Player ai, final SpellAbility sa) {
+        List<CounterType> counterTypes = getCounterBoonTypes(sa);
+        CardCollection list = new CardCollection(CardUtil.getValidCardsToTarget(sa));
+        list = CardLists.filterControlledBy(list, ai.getYourTeam());
+        return CardLists.filter(list, c -> canUseCounterBoon(c, counterTypes));
+    }
+
+    private boolean hasCounterBoonSubAbility(final SpellAbility sa) {
+        return !getCounterBoonTypes(sa).isEmpty();
+    }
+
+    private List<CounterType> getCounterBoonTypes(final SpellAbility sa) {
+        List<CounterType> counterTypes = Lists.newArrayList();
+        if (sa.isCurse() || sa.hasParam("TargetingPlayer")) {
+            return counterTypes;
+        }
+
+        SpellAbility sub = sa.getSubAbility();
+        while (sub != null) {
+            if (!ApiType.PutCounter.equals(sub.getApi()) || !isCounterAddedToPumpTarget(sub)) {
+                sub = sub.getSubAbility();
+                continue;
+            }
+            CounterType type = CounterType.getType(sub.getParam("CounterType"));
+            if (isCounterBoonType(type)) {
+                counterTypes.add(type);
+            }
+            sub = sub.getSubAbility();
+        }
+        return counterTypes;
+    }
+
+    private boolean isCounterAddedToPumpTarget(final SpellAbility sub) {
+        String defined = sub.getParam("Defined");
+        return "ParentTarget".equals(defined) || "Targeted".equals(defined) || "ThisTargetedCard".equals(defined);
+    }
+
+    private boolean canUseCounterBoon(final Card card, final List<CounterType> counterTypes) {
+        for (CounterType type : counterTypes) {
+            if (!card.canReceiveCounters(type)) {
+                continue;
+            }
+            if (ComputerUtil.isNegativeCounter(type, card) || ComputerUtil.isUselessCounter(type, card)) {
+                continue;
+            }
+            if (type.is(CounterEnumType.P1P1) && !card.isCreature()) {
+                continue;
+            }
+            if (type.is(CounterEnumType.LOYALTY) && !card.isPlaneswalker()) {
+                continue;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isCounterBoonType(final CounterType type) {
+        return type != null && (type.is(CounterEnumType.P1P1) || type.is(CounterEnumType.LOYALTY)
+                || type.isKeywordCounter());
     }
 
     private boolean pumpMandatoryTarget(final Player ai, final SpellAbility sa) {

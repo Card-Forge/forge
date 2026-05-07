@@ -259,6 +259,13 @@ public abstract class SpellAbilityAi {
      */
     public AiAbilityDecision chkDrawbackWithSubs(Player aiPlayer, AbilitySub ab) {
         final AbilitySub subAb = ab.getSubAbility();
+        if (!ab.metConditions() || isDefinedByParentTarget(ab)) {
+            if (subAb == null) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
+            return chkDrawbackWithSubs(aiPlayer, subAb);
+        }
+
         AiAbilityDecision decision = SpellApiToAi.Converter.get(ab).chkDrawback(aiPlayer, ab);
         if (!decision.willingToPlay()) {
             return decision;
@@ -269,6 +276,11 @@ public abstract class SpellAbilityAi {
         }
 
         return chkDrawbackWithSubs(aiPlayer, subAb);
+    }
+
+    private static boolean isDefinedByParentTarget(AbilitySub ab) {
+        final String defined = ab.getParam("Defined");
+        return "ParentTarget".equals(defined) || "Targeted".equals(defined) || "ThisTargetedCard".equals(defined);
     }
 
     /**
