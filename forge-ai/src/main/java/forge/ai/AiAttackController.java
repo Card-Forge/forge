@@ -207,16 +207,17 @@ public class AiAttackController {
             return opponents.get(0);
         }
 
-        // TODO for multiplayer combat avoid players with cantLose or (if not playing infect) cantLoseForZeroOrLessLife and !canLoseLife
-
         Player bestDefender = ai.getWeakestOpponent();
         int bestScore = Integer.MIN_VALUE;
         for (Player opp : opponents) {
             final int life = opp.getLife();
             int score = ComputerUtil.evaluateBoardPosition(ai, opp);
-            score += Math.max(0, 40 - life) * 10;
-            if (life <= 8) {
-                score += (9 - life) * 100;
+            // round away slightly so a single land drop doesn't mean players with earlier turn order are predictably attacked
+            score = (int) Math.ceil(score / 10) * 10;
+            if (life > 0 && life < 20) {
+                // TODO commander damage
+                score += Math.max(0, (20 - life)^2);
+
             }
             if (forCombatDmg) {
                 if (opp.isMonarch() && ai.canBecomeMonarch()) {
@@ -225,8 +226,14 @@ public class AiAttackController {
                 if (opp.hasInitiative()) {
                     score += 80;
                 }
+                if (!opp.canLoseLife()) {
+                    score -= 100;
+                }
+                if (opp.cantLoseForZeroOrLessLife()) {
+                    score -= 50;
+                }
             }
-            if (score > bestScore) {
+            if (score > bestScore || (score == bestScore && MyRandom.percentTrue(50))) {
                 bestScore = score;
                 bestDefender = opp;
             }

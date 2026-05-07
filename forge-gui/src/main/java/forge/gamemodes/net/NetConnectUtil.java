@@ -68,7 +68,7 @@ public class NetConnectUtil {
                 server.updateLobbyState();
             }
             @Override
-            public void update(final int slot, final LobbySlotType type) {return;}
+            public void update(final int slot, final LobbySlotType type) {}
         });
         view.setPlayerChangeListener((index, event) -> {
             server.updateSlot(index, event);

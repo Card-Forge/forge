@@ -126,7 +126,7 @@ public abstract class GameLobby implements IHasGameType {
 
         if (event.getType() != null) {
             //refresh decklist for slot
-            listener.update(index,event.getType());
+            listener.update(index, event.getType());
         }
 
         if (changed) {
