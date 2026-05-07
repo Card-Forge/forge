@@ -48,4 +48,34 @@ public class PumpAiTest extends AITest {
         AssertJUnit.assertEquals("AI should not put a beneficial commander counter on an opponent's commander",
                 aiCommander, forgeSa.getTargetCard());
     }
+
+    @Test
+    public void testForgeOfHeroesDoesNotTargetOpponentCommander() {
+        Game game = initAndCreateGame();
+        Player ai = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+        ai.setTeam(0);
+        opponent.setTeam(1);
+
+        Card forge = addCard("Forge of Heroes", ai);
+        Card opponentCommander = addCard("Emrakul, the Aeons Torn", opponent);
+        opponentCommander.setCommander(true);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, ai);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbility forgeSa = findSAWithPrefix(forge, "{T}: Choose target commander");
+        AssertJUnit.assertNotNull(forgeSa);
+        forgeSa.setActivatingPlayer(ai);
+        AssertJUnit.assertTrue("Opponent commander should be a legal Forge of Heroes target",
+                forgeSa.canTarget(opponentCommander));
+
+        SpellAbilityAi pumpAi = SpellApiToAi.Converter.get(ApiType.Pump);
+        AiPlayDecision decision = pumpAi.canPlayWithSubs(ai, forgeSa).decision();
+
+        AssertJUnit.assertFalse("AI should not activate Forge of Heroes only to benefit an opponent's commander",
+                AiPlayDecision.WillPlay.equals(decision));
+        AssertJUnit.assertNull("AI should leave Forge of Heroes untargeted when only opponent commanders are valid",
+                forgeSa.getTargetCard());
+    }
 }
