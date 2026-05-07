@@ -162,7 +162,7 @@ public class ImageUtil {
                     return card.getOtherPart().getName();
                 } else if (!card.getMeldWith().isEmpty()) {
                     final CardDb db = StaticData.instance().getCommonCards();
-                    return db.getRules(card.getMeldWith()).getOtherPart().getName();
+                    return db.getRulesOrElseUnsupported(card.getMeldWith()).getOtherPart().getName();
                 } else {
                     return null;
                 }

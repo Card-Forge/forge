@@ -607,10 +607,10 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         List<PaperCard> possibleList = Lists.newArrayList(pool.getAllCards(possibleFromFullPool));
         //ensure we do not add more keycards in case they are commanders
         if (keyCard != null) {
-            possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(keyCard.getName()));
+            possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(keyCard));
         }
         if (secondKeyCard != null) {
-            possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(secondKeyCard.getName()));
+            possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(secondKeyCard));
         }
         //Iterator<PaperCard> iRandomPool = CardRanker.rankCardsInDeck(possibleList.subList(0, targetSize <= possibleList.size() ? targetSize : possibleList.size())).iterator();
         Collections.shuffle(possibleList);
@@ -833,10 +833,10 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         List<PaperCard> possibleList = Lists.newArrayList(pool.getAllCards(possibleFromFullPool));
         //ensure we do not add more keycards in case they are commanders
         if (keyCard != null) {
-            possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(keyCard.getName()));
+            possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(keyCard));
         }
         if (secondKeyCard != null) {
-            possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(secondKeyCard.getName()));
+            possibleList.removeAll(StaticData.instance().getCommonCards().getAllCards(secondKeyCard));
         }
         Collections.shuffle(possibleList);
         //addManaCurveCards(CardRanker.rankCardsInDeck(possibleList.subList(0, targetSize*3 <= possibleList.size() ? targetSize*3 : possibleList.size())),
