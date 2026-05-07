@@ -20,7 +20,6 @@ import forge.util.collect.FCollectionView;
 
 public class DestroyAi extends SpellAbilityAi {
     private static final String LOGIC_GHOST_QUARTER = "GhostQuarter";
-    private static final String LOGIC_LAND_FOR_LAND = "LandForLand";
 
     @Override
     public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
@@ -310,7 +309,6 @@ public class DestroyAi extends SpellAbilityAi {
     private boolean isLandDestroyAbilityFromLand(SpellAbility sa) {
         Cost cost = sa.getPayCosts();
         return sa.isActivatedAbility()
-                && !sa.isSpell()
                 && sa.getHostCard().getOriginalType().isLand()
                 && cost != null
                 && (cost.hasTapCost() || cost.hasManaCost()
