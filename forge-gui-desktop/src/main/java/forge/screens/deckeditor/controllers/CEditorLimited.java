@@ -60,7 +60,7 @@ import forge.util.storage.IStorage;
  * @author Forge
  * @version $Id: DeckEditorCommon.java 12850 2011-12-26 14:55:09Z slapshot5 $
  */
-public final class CEditorLimited<T extends DeckBase> extends CDeckEditor<T> {
+public class CEditorLimited<T extends DeckBase> extends CDeckEditor<T> {
 
     private final DeckController<T> controller;
     private DragCell constructedDecksParent = null;
@@ -69,7 +69,7 @@ public final class CEditorLimited<T extends DeckBase> extends CDeckEditor<T> {
     private DragCell brawlDecksParent = null;
     private DragCell tinyLeadersDecksParent = null;
     private DragCell deckGenParent = null;
-    private final List<DeckSection> allSections = new ArrayList<>();
+    protected final List<DeckSection> allSections = new ArrayList<>();
 
     //========== Constructor
 
