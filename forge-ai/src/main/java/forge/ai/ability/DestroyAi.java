@@ -210,16 +210,15 @@ public class DestroyAi extends SpellAbilityAi {
                     if (!sa.isMinTargetChosen() || sa.isZeroTargets()) {
                         sa.resetTargets();
                         return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
-                    } else {
-                        // TODO is this good enough? for up to amounts?
-                        break;
                     }
+                    // TODO is this good enough? for up to amounts?
+                    break;
                 }
 
-                Card choice = null;
+                Card choice;
                 // If the targets are only of one type, take the best
                 if (CardLists.getNotType(list, "Creature").isEmpty()) {
-                    choice = ComputerUtilCard.getBestCreatureRemovalTargetAI(ai, list);
+                    choice = ComputerUtilCard.getBestRemovalTargetAI(ai, list);
                     if ("OppDestroyYours".equals(logic)) {
                         Card aiBest = ComputerUtilCard.getBestCreatureAI(ai.getCreaturesInPlay());
                         if (ComputerUtilCard.evaluateCreature(aiBest) > ComputerUtilCard.evaluateCreature(choice) - 40) {

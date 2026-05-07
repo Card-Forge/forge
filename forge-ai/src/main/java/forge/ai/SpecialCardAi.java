@@ -369,7 +369,7 @@ public class SpecialCardAi {
                     } else {
                         Integer convertedAmount = ab.getPayCosts().getCostMana().convertAmount();
                         if (convertedAmount != null) {
-                            score += Math.max(0, 20 - convertedAmount ^ 2);
+                            score += Math.max(0, 20 - Math.pow(convertedAmount, 2));
                         }
                     }
                 }
