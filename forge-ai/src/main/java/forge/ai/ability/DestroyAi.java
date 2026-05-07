@@ -19,6 +19,9 @@ import forge.game.zone.ZoneType;
 import forge.util.collect.FCollectionView;
 
 public class DestroyAi extends SpellAbilityAi {
+    private static final String LOGIC_GHOST_QUARTER = "GhostQuarter";
+    private static final String LOGIC_LAND_FOR_LAND = "LandForLand";
+
     @Override
     public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
         return checkApiLogic(ai, sa);
@@ -229,9 +232,10 @@ public class DestroyAi extends SpellAbilityAi {
                 } else if (CardLists.getNotType(list, "Land").isEmpty()) {
                     choice = ComputerUtilCard.getBestLandToRemoveAI(ai, list, sa);
 
-                    if ("LandForLand".equals(logic) || "GhostQuarter".equals(logic)) {
-                        // Strip Mine, Wasteland - cut short if the relevant logic fails
-                        if (!doLandForLandRemovalLogic(sa, ai, choice, logic)) {
+                    String landRemovalLogic = getLandRemovalLogic(sa, logic);
+                    if (landRemovalLogic != null) {
+                        // Strip Mine, Wasteland, Dust Bowl, and similar lands.
+                        if (!doLandForLandRemovalLogic(sa, ai, choice, landRemovalLogic)) {
                             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                         }
                     }
@@ -298,6 +302,40 @@ public class DestroyAi extends SpellAbilityAi {
             }
         }
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+    }
+
+    private String getLandRemovalLogic(SpellAbility sa, String logic) {
+        if (LOGIC_GHOST_QUARTER.equals(logic)) {
+            return LOGIC_GHOST_QUARTER;
+        }
+        if (LOGIC_LAND_FOR_LAND.equals(logic) || isLandDestroyAbilityFromLand(sa)) {
+            return LOGIC_LAND_FOR_LAND;
+        }
+        return null;
+    }
+
+    private boolean isLandDestroyAbilityFromLand(SpellAbility sa) {
+        Cost cost = sa.getPayCosts();
+        return sa.isActivatedAbility()
+                && !sa.isSpell()
+                && sa.getHostCard().isLand()
+                && cost != null
+                && (cost.hasTapCost() || cost.hasManaCost()
+                        || cost.hasSpecificCostType(CostSacrifice.class));
+    }
+
+    private boolean hasNonSourceLandSacrificeCost(SpellAbility sa) {
+        Cost cost = sa.getPayCosts();
+        if (cost == null) {
+            return false;
+        }
+        for (CostPart part : cost.getCostParts()) {
+            if (part instanceof CostSacrifice && !part.payCostFromSource()
+                    && part.getType().contains("Land")) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -440,6 +478,15 @@ public class DestroyAi extends SpellAbilityAi {
         boolean tempoCheck = numLandsOTB >= amountNoTempoCheck
                 || ((numLandsInHand >= amountLandsInHand || isHighPriority) && ((numLandsInHand + numLandsOTB >= amountNoTimingCheck) || timingCheck));
 
+        // Dust Bowl-style costs are not a simple land-for-land exchange: the
+        // AI spends mana, taps a mana source, and sacrifices another land. Only
+        // accept that rate for a real lock or a high-priority land.
+        int manaCost = sa.getPayCosts() == null ? 0 : sa.getPayCosts().getTotalMana().getCMC();
+        if ((hasNonSourceLandSacrificeCost(sa) || manaCost >= 2)
+                && !highPriorityTgt && !canManaLock && !canColorLock) {
+            return false;
+        }
+
         // Tectonic Edge, Strip Mine, and Wasteland should not cash in a large
         // share of the AI's own mana base for a merely medium utility target.
         boolean sacrificesSourceLand = sa.getHostCard().isLand()
@@ -454,7 +501,7 @@ public class DestroyAi extends SpellAbilityAi {
 
         // For Ghost Quarter, only use it if you have either more lands in play than your opponent
         // or the same number of lands but an extra land in hand (otherwise the AI plays too suboptimally)
-        if ("GhostQuarter".equals(logic)) {
+        if (LOGIC_GHOST_QUARTER.equals(logic)) {
             return tempoCheck && (numLandsOTB > oppLands.size() || (numLandsOTB == oppLands.size() && numLandsInHand > 0));
         } else {
             return tempoCheck;
