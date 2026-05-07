@@ -3555,7 +3555,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      *  Same compute gating as {@link #chooseSpellAbilityToPlay} so the actions field is fresh. */
     private void tryAutoPassNow() {
         if (!(inputQueue.getInput() instanceof InputPassPriority)) return;
-        if (needsAvailableActions()) {
+        if (!yieldController.isYieldActive() && needsAvailableActions()) {
             long timeoutMs = computeAvailableActionsBudgetMs(getPlayer());
             getPlayer().getView().setHasAvailableActions(AvailableActions.compute(getPlayer(), timeoutMs));
         }
