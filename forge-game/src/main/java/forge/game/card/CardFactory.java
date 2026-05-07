@@ -318,7 +318,7 @@ public class CardFactory {
             if (rules.getOtherPart() != null) {
                 readCardFace(card, rules.getOtherPart());
             } else if (!rules.getMeldWith().isEmpty()) {
-                readCardFace(card, StaticData.instance().getCommonCards().getRules(rules.getMeldWith()).getOtherPart());
+                readCardFace(card, StaticData.instance().getCommonCards().getRulesOrElseUnsupported(rules.getMeldWith()).getOtherPart());
             }
         }
 

@@ -120,33 +120,29 @@ public abstract class Trigger extends TriggerReplacementBase {
     }
 
     public String toString(boolean active) {
-        if (hasParam("TriggerDescription") && !this.isSuppressed()) {
-            StringBuilder sb = new StringBuilder();
-            ITranslatable nameSource = getHostName(this);
-            String desc = getParam("TriggerDescription");
-            if (!desc.contains("ABILITY")) {
-                desc = CardTranslation.translateSingleDescriptionText(getParam("TriggerDescription"), nameSource);
-                String translatedName = nameSource.getTranslatedName();
-                desc = TextUtil.fastReplace(desc,"CARDNAME", translatedName);
-                desc = TextUtil.fastReplace(desc,"NICKNAME", Lang.getInstance().getNickName(translatedName));
-                if (desc.contains("ORIGINALHOST") && this.getOriginalHost() != null) {
-                    desc = TextUtil.fastReplace(desc, "ORIGINALHOST", this.getOriginalHost().getDisplayName());
-                }
-            }
-            if (getHostCard().getEffectSource() != null) {
-                if (active)
-                    desc = TextUtil.fastReplace(desc, "EFFECTSOURCE", getHostCard().getEffectSource().toString());
-                else
-                    desc = TextUtil.fastReplace(desc, "EFFECTSOURCE", getHostCard().getEffectSource().getDisplayName());
-            }
-            sb.append(desc);
-            if (!this.triggerRemembered.isEmpty()) {
-                sb.append(" (").append(this.triggerRemembered).append(")");
-            }
-            return sb.toString();
-        } else {
+        if (!hasParam("TriggerDescription") || isSuppressed()) {
             return "";
         }
+        StringBuilder sb = new StringBuilder();
+        ITranslatable nameSource = getHostName(this);
+        String desc = getParam("TriggerDescription");
+        if (!desc.contains("ABILITY")) {
+            desc = CardTranslation.translateSingleDescriptionText(getParam("TriggerDescription"), nameSource);
+            String translatedName = nameSource.getTranslatedName();
+            desc = TextUtil.fastReplace(desc,"CARDNAME", translatedName);
+            desc = TextUtil.fastReplace(desc,"NICKNAME", Lang.getInstance().getNickName(translatedName));
+            if (desc.contains("ORIGINALHOST") && this.getOriginalHost() != null) {
+                desc = TextUtil.fastReplace(desc, "ORIGINALHOST", this.getOriginalHost().getDisplayName());
+            }
+        }
+        if (getHostCard().getEffectSource() != null) {
+            if (active)
+                desc = TextUtil.fastReplace(desc, "EFFECTSOURCE", getHostCard().getEffectSource().toString());
+            else
+                desc = TextUtil.fastReplace(desc, "EFFECTSOURCE", getHostCard().getEffectSource().getDisplayName());
+        }
+        sb.append(desc);
+        return sb.toString();
     }
 
     public final String replaceAbilityText(final String desc, final CardState state) {

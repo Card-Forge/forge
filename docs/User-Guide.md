@@ -21,9 +21,11 @@
   - [Full Control](#full-control)
   - [Repeatable Sequences (Macros)](#repeatable-sequences-macros)
 - [Desktop User Interface](#desktop-user-interface)
+  - [Interface Overview](#interface-overview)
   - [Layout](#layout)
   - [Viewing Cards in Different Zones](#viewing-cards-in-different-zones)
-  - [Auto-Sort Multiplayer Fields](#auto-sort-multiplayer-fields)
+  - [Battlefield Display](#battlefield-display)
+  - [Sort Player Fields in Turn Order](#sort-player-fields-in-turn-order)
 
 # Downloads
 
@@ -216,6 +218,26 @@ The macro will dutifully execute your click sequence without regard to changes i
 
 # Desktop User Interface
 
+## Interface Overview
+
+The match screen is divided into resizable panels. The numbers below identify each major component in the default layout.
+
+![Interface overview](interface-overview.png)
+
+1. **Forge menu** — application menu including layout, theme, gameplay, and audio options.
+2. **Game state tabs** — pending stack, combat assignments, action log, and effect dependencies.
+3. **Player field tabs** — switch between opponents' fields in multiplayer; the (N new) indicator highlights cards that have changed since you last viewed that field. See [Sort Player Fields in Turn Order](#sort-player-fields-in-turn-order) for ordering options.
+4. **Card Detail** — selected card's text and metadata.
+5. **Opponent's field** — same layout as your own field (items 6-10 describe its components).
+6. **Avatar and life total** — left-click to target the player, hover to see more info including Commander damage.
+7. **Zone buttons** — hand, library, graveyard, exile, command, and sideboard with live counts; click to view, right-click for display options. See [Viewing cards in different zones](#viewing-cards-in-different-zones) for details.
+8. **Turn Phases** — click any pip to toggle a priority stop in that phase; right-click to yield to that phase.
+9. **Mana pool** — floating mana; click a symbol to spend it during cost payment.
+10. **Battlefield** — see [Battlefield Display](#battlefield-display) for stacking and grouping options. (In this example, **Group all permanents** is enabled).
+11. **Card Picture** — selected card's full art.
+12. **Player Hand** — click a card to play it, right click for other options.
+13. **Prompt panel** — respond to the current priority prompt or skip to end of turn.
+
 ## Layout
 The match screen is built from draggable, resizable cells. Each cell contains one or more tabbed panels (e.g. battlefield, hand, log, stack, card detail, etc). 
 
@@ -246,11 +268,45 @@ Your preference is saved per zone and remembered separately for your own zones a
 > [!TIP]
 > Enable the Layout->View->New card count menu option to display a delta number in the tab header which may help you more quickly identify changes in complex boardstates.
 
-## Auto-Sort Multiplayer Fields
-In multiplayer games (3+ players), Forge can automatically arrange opponent battlefield panels in turn order. This is controlled via the **Layout > View** menu during a match.
+## Battlefield Display
 
-**Enabling the feature:**
-- **Layout > View > Sort Multiplayer Fields** — Toggle the feature on or off. When off, extra player fields are simply added as tabs to existing panels (the default behaviour) without regard to turn order.
+### Stacking and Grouping Cards
+
+You can customise how identical cards are displayed on the battlefield through the **Game > Stack/Group Permanents** submenu.
+
+| Mode                                                                                                                                                                                                                                 | Example                                      |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------|
+| **Default** <br> Identical creatures are shown individually. Lands, tokens, artifacts, and enchantments are stacked with a fan-out.                                                                                                  | <img src="stacking-default.png" width="450"> |
+| **Stack Creatures** <br> Same as Default, but identical creatures are also stacked.                                                                                                                                                  | <img src="stacking-stack.png" width="450">   |
+| **Group Creatures/Tokens**<br> Identical creatures and tokens collapse into a single compact pile with a count badge on top. <br><br> **Group All Permanents** <br> Every kind of identical permanent is grouped with a count badge. | <img src="stacking-group.png" width="450">  |
+
+You can control the maximum number of cards included in a stack through the **Max stack depth** preference in the Preferences menu (default 4).
+
+**What counts as identical for grouping:** name, power/toughness, counters, abilities, tapped state, damage, and the absence of attachments must all match. The moment any of these change for one card — it gets tapped, takes damage, gains a counter — that card splits out into its own pile. During combat, attackers and blockers with different combat assignments are also kept in separate piles so the targeting arrows are easier to follow.
+
+**Interacting with a group:** the count badge and individual cards in a group respond to the following inputs.
+
+| Action                                       | Effect                                                                                                        |
+|----------------------------------------------|---------------------------------------------------------------------------------------------------------------|
+| Left-click the badge                         | Selects every card in the group (e.g. tap all lands for mana)                                                 |
+| Left-click the badge on a tapped group       | Undoes the last action for each card (e.g. reverse a batched mana tap)                                        |
+| Left-click an individual card in a group     | Splits it out for individual selection or targeting; click again to merge it back                             |
+| Right-click the badge                        | Prompts for a count — declare N attackers/blockers, remove N from combat, or select N for targeting |
+
+> [!NOTE]
+> Grouping is a display feature only. The game engine still processes each permanent individually, so prompts that require per-card decisions (such as picking a mana colour when sacrificing a stack of Treasure tokens) will still appear one card at a time.
+
+### Tokens in Separate Row
+Toggle **Game > Tokens in Separate Row** to render tokens in a dedicated row below your non-token creatures, so a wide token board doesn't crowd out your other creatures.
+
+### Separating Combatants
+Toggle **Game > Separate Combatants from Stacks** to spread stacked creatures apart while they are attacking or blocking, so combat arrows stay easy to follow.
+
+## Sort Player Fields in Turn Order
+
+By default additional player fields in 3+ player games are added as tabs to existing panels without regard to turn order.
+
+Forge can automatically arrange opponent battlefield panels in turn order via *Layout > View > Sort Multiplayer Fields** during a match.
 
 **When enabled, two additional settings become available in the Layout > View menu:**
 
@@ -259,4 +315,4 @@ In multiplayer games (3+ players), Forge can automatically arrange opponent batt
 | **Multiplayer Field Layout** | Grid, Rows | **Grid** distributes opponents across both top and bottom rows. **Rows** stacks all opponents in the top row above the player. |
 | **Multiplayer Field Panels** | Tabbed, Split | **Tabbed** groups multiple fields as tabs in the same panel. **Split** gives each field its own side-by-side panel.            |
 
-All three settings can be changed mid-game and take effect immediately. The feature only activates when three or more players are in the match — standard two-player games are unaffected.
+All settings can be changed mid-game and take effect immediately. The feature only activates when 3+ players are in the match — standard two-player games are unaffected.
