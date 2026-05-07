@@ -232,10 +232,9 @@ public class DestroyAi extends SpellAbilityAi {
                 } else if (CardLists.getNotType(list, "Land").isEmpty()) {
                     choice = ComputerUtilCard.getBestLandToRemoveAI(ai, list, sa);
 
-                    String landRemovalLogic = getLandRemovalLogic(sa, logic);
-                    if (landRemovalLogic != null) {
+                    if (shouldApplyLandRemovalLogic(sa, logic)) {
                         // Strip Mine, Wasteland, Dust Bowl, and similar lands.
-                        if (!doLandForLandRemovalLogic(sa, ai, choice, landRemovalLogic)) {
+                        if (!doLandForLandRemovalLogic(sa, ai, choice, logic)) {
                             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                         }
                     }
@@ -304,21 +303,15 @@ public class DestroyAi extends SpellAbilityAi {
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 
-    private String getLandRemovalLogic(SpellAbility sa, String logic) {
-        if (LOGIC_GHOST_QUARTER.equals(logic)) {
-            return LOGIC_GHOST_QUARTER;
-        }
-        if (LOGIC_LAND_FOR_LAND.equals(logic) || isLandDestroyAbilityFromLand(sa)) {
-            return LOGIC_LAND_FOR_LAND;
-        }
-        return null;
+    private boolean shouldApplyLandRemovalLogic(SpellAbility sa, String logic) {
+        return LOGIC_GHOST_QUARTER.equals(logic) || isLandDestroyAbilityFromLand(sa);
     }
 
     private boolean isLandDestroyAbilityFromLand(SpellAbility sa) {
         Cost cost = sa.getPayCosts();
         return sa.isActivatedAbility()
                 && !sa.isSpell()
-                && sa.getHostCard().isLand()
+                && sa.getHostCard().getOriginalType().isLand()
                 && cost != null
                 && (cost.hasTapCost() || cost.hasManaCost()
                         || cost.hasSpecificCostType(CostSacrifice.class));
