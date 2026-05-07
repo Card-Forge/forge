@@ -621,7 +621,7 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasForg
 
     /**
      * Replace the host's persistent yield state for each controlled player
-     * in one atomic message: auto-yields from theAutoYieldStore,
+     * in one atomic message: auto-yields from the AutoYieldStore,
      * skip-phase prefs from PhaseLabel state. Per-key edits
      * during play flow as individual YieldUpdate deltas.
      */

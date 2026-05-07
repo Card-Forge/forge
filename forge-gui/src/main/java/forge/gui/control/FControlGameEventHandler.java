@@ -281,17 +281,17 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     private void evaluateYieldInterruptForSpellCast(GameEventSpellAbilityCast event) {
         if (humanController == null) return;
         YieldController yc = humanController.getYieldController();
-        if (yc == null || !yc.isYieldActive()) return;
+        if (!yc.isYieldActive()) return;
         GameView gv = matchController.getGameView();
         if (gv == null || gv.getGame() == null) return;
         // Look up the actual SpellAbilityStackInstance by id (host-side; client gv.getGame() is null).
-        int targetId = event.si() != null ? event.si().getId() : -1;
-        if (targetId < 0) return;
-        SpellAbilityStackInstance si = null;
+        int targetId = event.si().getId();
         for (SpellAbilityStackInstance candidate : gv.getGame().getStack()) {
-            if (candidate.getId() == targetId) { si = candidate; break; }
+            if (candidate.getId() == targetId) {
+                yc.onSpellAbilityCast(candidate);
+                return;
+            }
         }
-        if (si != null) yc.onSpellAbilityCast(si);
     }
 
     @Override
@@ -374,7 +374,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
     public Void visit(final GameEventAttackersDeclared event) {
         if (humanController != null) {
             YieldController yc = humanController.getYieldController();
-            if (yc != null && yc.isYieldActive()) {
+            if (yc.isYieldActive()) {
                 GameView gv = matchController.getGameView();
                 if (gv != null && gv.getCombat() != null) yc.onAttackersDeclared(gv.getCombat());
             }
