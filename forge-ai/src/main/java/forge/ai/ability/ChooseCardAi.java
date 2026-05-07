@@ -15,7 +15,6 @@ import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.IterableUtil;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
