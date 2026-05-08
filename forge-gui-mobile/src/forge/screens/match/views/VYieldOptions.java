@@ -267,7 +267,7 @@ public class VYieldOptions extends FDialog {
     private static void persistBool(IGameController ctrl, FPref pref, boolean value) {
         FModel.getPreferences().setPref(pref, value);
         FModel.getPreferences().save();
-        if (ctrl != null) ctrl.setYieldBoolPref(pref, value);
+        if (ctrl != null) ctrl.setYieldPref(pref, String.valueOf(value));
     }
 
     private static void persistScope(IGameController ctrl, FPref pref, DeclineScope[] options, int index) {
@@ -275,13 +275,13 @@ public class VYieldOptions extends FDialog {
         String value = options[index].name();
         FModel.getPreferences().setPref(pref, value);
         FModel.getPreferences().save();
-        if (ctrl != null) ctrl.setYieldStringPref(pref, value);
+        if (ctrl != null) ctrl.setYieldPref(pref, value);
     }
 
     private static void persistString(IGameController ctrl, FPref pref, String value) {
         FModel.getPreferences().setPref(pref, value);
         FModel.getPreferences().save();
-        if (ctrl != null) ctrl.setYieldStringPref(pref, value);
+        if (ctrl != null) ctrl.setYieldPref(pref, value);
     }
 
     @Override

@@ -206,13 +206,8 @@ public class NetGameController implements IGameController {
     }
 
     @Override
-    public void setYieldBoolPref(final FPref pref, final boolean value) {
-        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.SetYieldBoolPref(pref, value));
-    }
-
-    @Override
-    public void setYieldStringPref(final FPref pref, final String value) {
-        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.SetYieldStringPref(pref, value));
+    public void setYieldPref(final FPref pref, final String value) {
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.SetYieldPref(pref, value));
     }
 
     private IMacroSystem macros;

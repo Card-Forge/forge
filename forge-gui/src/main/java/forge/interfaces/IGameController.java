@@ -84,7 +84,6 @@ public interface IGameController {
 
     YieldController getYieldController();
 
-    /** Setter dispatches the per-PCH envelope; reads go via getYieldController(). */
-    void setYieldBoolPref(FPref pref, boolean value);
-    void setYieldStringPref(FPref pref, String value);
+    /** Setter dispatches the per-PCH envelope; reads go via getYieldController(). Pref values are String-typed in {@link forge.localinstance.properties.PreferencesStore}, so callers wrap booleans with {@code String.valueOf}. */
+    void setYieldPref(FPref pref, String value);
 }

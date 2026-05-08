@@ -26,6 +26,5 @@ public record YieldStateSnapshot(
         boolean autoYieldsDisabled,
         boolean autoTriggersDisabled,
         Map<PlayerView, EnumSet<PhaseType>> skipPhases,
-        Map<FPref, Boolean> boolPrefOverrides,
-        Map<FPref, String> stringPrefOverrides
+        Map<FPref, String> prefOverrides
 ) implements Serializable {}

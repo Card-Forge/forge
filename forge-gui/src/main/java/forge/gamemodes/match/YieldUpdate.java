@@ -23,8 +23,7 @@ public sealed interface YieldUpdate extends Serializable
                 YieldUpdate.SetDisableYields,
                 YieldUpdate.SetDisableTriggers,
                 YieldUpdate.SkipPhase,
-                YieldUpdate.SetYieldBoolPref,
-                YieldUpdate.SetYieldStringPref,
+                YieldUpdate.SetYieldPref,
                 YieldUpdate.SeedFromClient {
 
     /** {@code atOrPastAtClick}: priority was at-or-past target on owner's turn when the user clicked — computed by the UI so client cache and host PCH initialize identically. */
@@ -49,9 +48,8 @@ public sealed interface YieldUpdate extends Serializable
 
     record SkipPhase(PlayerView turnPlayer, PhaseType phase, boolean skip) implements YieldUpdate {}
 
-    record SetYieldBoolPref(FPref pref, boolean value) implements YieldUpdate {}
-
-    record SetYieldStringPref(FPref pref, String value) implements YieldUpdate {}
+    /** Pref values are stored String-typed in {@link forge.localinstance.properties.PreferencesStore}; callers wrap booleans with {@code String.valueOf} at the call site. */
+    record SetYieldPref(FPref pref, String value) implements YieldUpdate {}
 
     record SeedFromClient(YieldStateSnapshot snapshot) implements YieldUpdate {}
 }

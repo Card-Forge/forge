@@ -147,7 +147,7 @@ public class VYieldSettings extends FDialog {
             prefs.save();
             IGameController controller = matchUI == null ? null : matchUI.getGameController();
             if (controller != null) {
-                controller.setYieldBoolPref(pref, value);
+                controller.setYieldPref(pref, String.valueOf(value));
             }
         });
         add(cb, x, y, w, ROW_HEIGHT);
@@ -186,7 +186,7 @@ public class VYieldSettings extends FDialog {
                 prefs.setPref(scopePref, value);
                 prefs.save();
                 IGameController controller = matchUI == null ? null : matchUI.getGameController();
-                if (controller != null) controller.setYieldStringPref(scopePref, value);
+                if (controller != null) controller.setYieldPref(scopePref, value);
             }
         });
         add(combo, x + w - DROPDOWN_WIDTH, y, DROPDOWN_WIDTH, ROW_HEIGHT);
@@ -225,7 +225,7 @@ public class VYieldSettings extends FDialog {
                 prefs.setPref(FPref.YIELD_AVAILABLE_ACTIONS_BUDGET_MS, str);
                 prefs.save();
                 IGameController controller = matchUI == null ? null : matchUI.getGameController();
-                if (controller != null) controller.setYieldStringPref(FPref.YIELD_AVAILABLE_ACTIONS_BUDGET_MS, str);
+                if (controller != null) controller.setYieldPref(FPref.YIELD_AVAILABLE_ACTIONS_BUDGET_MS, str);
             }
             @Override public void insertUpdate(DocumentEvent e)  { save(); }
             @Override public void removeUpdate(DocumentEvent e)  { save(); }

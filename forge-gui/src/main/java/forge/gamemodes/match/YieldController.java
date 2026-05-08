@@ -41,8 +41,8 @@ import java.util.Set;
  */
 public class YieldController {
 
-    /** Yield FPrefs synced per-PCH; enumerated here so the client snapshot includes every value, not just touched overrides. */
-    private static final EnumSet<FPref> SYNCED_BOOL_PREFS = EnumSet.of(
+    /** Yield FPrefs synced per-PCH; enumerated here so the client snapshot includes every value, not just touched overrides. Stored String-typed (see {@link forge.localinstance.properties.PreferencesStore}); consumers parse via {@link #getBoolPref}/{@link #getStringPref} according to the pref's expected type. */
+    private static final EnumSet<FPref> SYNCED_PREFS = EnumSet.of(
             FPref.YIELD_INTERRUPT_ON_ATTACKERS,
             FPref.YIELD_INTERRUPT_ON_OPPONENT_SPELL,
             FPref.YIELD_INTERRUPT_ON_TARGETING,
@@ -54,8 +54,7 @@ public class YieldController {
             FPref.YIELD_SKIP_PHASE_DELAY,
             FPref.YIELD_SKIP_RESOLVE_DELAY,
             FPref.YIELD_SUPPRESS_ON_OWN_TURN,
-            FPref.YIELD_SUPPRESS_AFTER_END);
-    private static final EnumSet<FPref> SYNCED_STRING_PREFS = EnumSet.of(
+            FPref.YIELD_SUPPRESS_AFTER_END,
             FPref.YIELD_AVAILABLE_ACTIONS_BUDGET_MS,
             FPref.YIELD_DECLINE_SCOPE_STACK_YIELD,
             FPref.YIELD_DECLINE_SCOPE_NO_ACTIONS);
@@ -76,9 +75,8 @@ public class YieldController {
     private final AutoYieldStore localStore = new AutoYieldStore();
     private final Map<PlayerView, EnumSet<PhaseType>> skipPhases = new HashMap<>();
 
-    /** Populated only on the host's proxy of a remote player (via {@link #applyClientSeed} and {@link YieldUpdate.SetYieldBoolPref}/{@link YieldUpdate.SetYieldStringPref} envelopes); local controllers always defer to FModel. Override wins, FModel is fallback. */
-    private final EnumMap<FPref, Boolean> boolPrefOverrides = new EnumMap<>(FPref.class);
-    private final EnumMap<FPref, String>  stringPrefOverrides = new EnumMap<>(FPref.class);
+    /** Populated only on the host's proxy of a remote player (via {@link #applyClientSeed} and {@link YieldUpdate.SetYieldPref} envelopes); local controllers always defer to FModel. Override wins, FModel is fallback. */
+    private final EnumMap<FPref, String> prefOverrides = new EnumMap<>(FPref.class);
 
     public YieldController(PlayerControllerHuman owner) {
         this.owner = owner;
@@ -124,20 +122,15 @@ public class YieldController {
         this.autoPassUntilEOT = active;
     }
 
-    public synchronized boolean getBoolPref(FPref pref) {
-        Boolean override = boolPrefOverrides.get(pref);
-        return override != null ? override : FModel.getPreferences().getPrefBoolean(pref);
-    }
-    public synchronized void setBoolPref(FPref pref, boolean value) {
-        boolPrefOverrides.put(pref, value);
-    }
-
     public synchronized String getStringPref(FPref pref) {
-        String override = stringPrefOverrides.get(pref);
+        String override = prefOverrides.get(pref);
         return override != null ? override : FModel.getPreferences().getPref(pref);
     }
-    public synchronized void setStringPref(FPref pref, String value) {
-        stringPrefOverrides.put(pref, value);
+    public boolean getBoolPref(FPref pref) {
+        return Boolean.parseBoolean(getStringPref(pref));
+    }
+    public synchronized void setPref(FPref pref, String value) {
+        prefOverrides.put(pref, value);
     }
 
     public DeclineScope getDeclineScope(FPref pref) {
@@ -145,16 +138,10 @@ public class YieldController {
     }
 
     /** Read effective values from FModel for every synced yield FPref so the host's proxy can be seeded with the full set, not just prefs the user has touched this session. */
-    public Map<FPref, Boolean> snapshotBoolPrefs() {
-        ForgePreferences prefs = FModel.getPreferences();
-        EnumMap<FPref, Boolean> out = new EnumMap<>(FPref.class);
-        for (FPref pref : SYNCED_BOOL_PREFS) out.put(pref, prefs.getPrefBoolean(pref));
-        return out;
-    }
-    public Map<FPref, String> snapshotStringPrefs() {
+    public Map<FPref, String> snapshotPrefs() {
         ForgePreferences prefs = FModel.getPreferences();
         EnumMap<FPref, String> out = new EnumMap<>(FPref.class);
-        for (FPref pref : SYNCED_STRING_PREFS) out.put(pref, prefs.getPref(pref));
+        for (FPref pref : SYNCED_PREFS) out.put(pref, prefs.getPref(pref));
         return out;
     }
 
@@ -302,7 +289,7 @@ public class YieldController {
         wasAutoPassingLastTick = false;
         yieldJustEndedFlag = false;
         autoPassInterrupted = false;
-        // boolPrefOverrides / stringPrefOverrides intentionally kept — per-match, not per-game
+        // prefOverrides intentionally kept — per-match, not per-game
     }
 
     public boolean getDisableAutoYields() {
@@ -372,7 +359,7 @@ public class YieldController {
                 cardYields, abilityYields,
                 cardTriggers, abilityTriggers,
                 getDisableAutoYields(), getDisableAutoTriggers(),
-                skipPhases, snapshotBoolPrefs(), snapshotStringPrefs());
+                skipPhases, snapshotPrefs());
     }
 
     /** Atomic seed of client-persistent state at game start or reconnection. Cache mode only. */
@@ -390,10 +377,8 @@ public class YieldController {
         localStore.setTriggerDecisionsDisabled(snap.autoTriggersDisabled());
         skipPhases.clear();
         skipPhases.putAll(snap.skipPhases());
-        boolPrefOverrides.clear();
-        if (snap.boolPrefOverrides() != null) boolPrefOverrides.putAll(snap.boolPrefOverrides());
-        stringPrefOverrides.clear();
-        if (snap.stringPrefOverrides() != null) stringPrefOverrides.putAll(snap.stringPrefOverrides());
+        prefOverrides.clear();
+        if (snap.prefOverrides() != null) prefOverrides.putAll(snap.prefOverrides());
     }
 
     /**
@@ -424,10 +409,8 @@ public class YieldController {
             setDisableAutoTriggers(u.disabled());
         } else if (update instanceof YieldUpdate.SkipPhase u) {
             setSkipPhase(u.turnPlayer(), u.phase(), u.skip());
-        } else if (update instanceof YieldUpdate.SetYieldBoolPref u) {
-            setBoolPref(u.pref(), u.value());
-        } else if (update instanceof YieldUpdate.SetYieldStringPref u) {
-            setStringPref(u.pref(), u.value());
+        } else if (update instanceof YieldUpdate.SetYieldPref u) {
+            setPref(u.pref(), u.value());
         } else if (update instanceof YieldUpdate.SeedFromClient u) {
             applyClientSeed(u.snapshot());
         }
@@ -476,7 +459,7 @@ public class YieldController {
         boolean newVal = !prefs.getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS);
         prefs.setPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS, newVal);
         prefs.save();
-        ctrl.setYieldBoolPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS, newVal);
+        ctrl.setYieldPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS, String.valueOf(newVal));
         return newVal;
     }
 

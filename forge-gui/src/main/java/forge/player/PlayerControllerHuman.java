@@ -3545,14 +3545,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public void setYieldBoolPref(final FPref pref, final boolean value) {
-        // Dialog already wrote to FModel; APINA toggles may flip mayAutoPass
-        tryAutoPassNow();
-    }
-
-    @Override
-    public void setYieldStringPref(final FPref pref, final String value) {
-        // Dialog already wrote to FModel; nothing else to do for the local player
+    public void setYieldPref(final FPref pref, final String value) {
+        // Dialog already wrote to FModel; APINA is the only pref whose toggle can flip mayAutoPass for a sitting prompt
+        if (pref == FPref.YIELD_AUTO_PASS_NO_ACTIONS) tryAutoPassNow();
     }
 
     /** Re-evaluate mayAutoPass at the current prompt; click OK if it would now fire.
