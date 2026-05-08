@@ -21,8 +21,8 @@ public record CounterKeywordType(String keyword, Keyword type, String desc) impl
 
     public static CounterKeywordType get(String s) {
         if (!sMap.containsKey(s)) {
-            KeywordInterface ki = isKeywordCounter(s) ? Keyword.getInstance(s) : null;
-            sMap.put(s, new CounterKeywordType(s, ki != null ? ki.getKeyword() : null, ki != null ? ki.getTitle() : null));
+            KeywordInterface ki = Keyword.getInstance(s);
+            sMap.put(s, new CounterKeywordType(s, ki.getKeyword(), ki.getTitle()));
         }
         return sMap.get(s);
     }
@@ -49,16 +49,14 @@ public record CounterKeywordType(String keyword, Keyword type, String desc) impl
     }
 
     private String getKeywordDescription() {
-        return desc != null ? desc : keyword;
+        return desc;
     }
 
-    public boolean is(CounterEnumType eType) {
-        return false;
-    }
-
+    @Override
     public boolean isKeywordCounter() {
-        return isKeywordCounter(keyword);
+        return true;
     }
+
     public static boolean isKeywordCounter(String keyword) {
         if (keyword.startsWith("Hexproof:")) {
             return true;
@@ -67,17 +65,5 @@ public record CounterKeywordType(String keyword, Keyword type, String desc) impl
             return true;
         }
         return keywordCounter.contains(keyword);
-    }
-
-    public int getRed() {
-        return 255;
-    }
-
-    public int getGreen() {
-        return 255;
-    }
-
-    public int getBlue() {
-        return 255;
     }
 }

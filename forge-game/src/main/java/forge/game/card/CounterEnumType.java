@@ -511,14 +511,17 @@ public enum CounterEnumType implements CounterType {
         return this.name;
     }
 
+    @Override
     public int getRed() {
         return red;
     }
 
+    @Override
     public int getGreen() {
         return green;
     }
 
+    @Override
     public int getBlue() {
         return blue;
     }
@@ -535,10 +538,5 @@ public enum CounterEnumType implements CounterType {
     @Override
     public boolean is(CounterEnumType eType) {
         return this == eType;
-    }
-
-    @Override
-    public boolean isKeywordCounter() {
-        return false;
     }
 }
