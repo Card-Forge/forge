@@ -25,7 +25,6 @@ import forge.util.Utils;
 
 public class VYieldOptions extends FDialog {
 
-
     private static final FSkinFont DESC_FONT = FSkinFont.get(12);
     private static final FSkinFont BODY_FONT = FSkinFont.get(11);
     private static final FSkinColor DESC_COLOR = FSkinColor.get(Colors.CLR_TEXT).alphaColor(0.55f);
@@ -264,20 +263,14 @@ public class VYieldOptions extends FDialog {
         return 0;
     }
 
-    private static void persistBool(IGameController ctrl, FPref pref, boolean value) {
-        FModel.getPreferences().setPref(pref, value);
-        FModel.getPreferences().save();
-        if (ctrl != null) ctrl.setYieldPref(pref, String.valueOf(value));
-    }
-
     private static void persistScope(IGameController ctrl, FPref pref, DeclineScope[] options, int index) {
         if (index < 0 || index >= options.length) return;
         String value = options[index].name();
-        FModel.getPreferences().setPref(pref, value);
-        FModel.getPreferences().save();
-        if (ctrl != null) ctrl.setYieldPref(pref, value);
+        persistString(ctrl, pref, value);
     }
-
+    private static void persistBool(IGameController ctrl, FPref pref, boolean value) {
+        persistString(ctrl, pref, String.valueOf(value));
+    }
     private static void persistString(IGameController ctrl, FPref pref, String value) {
         FModel.getPreferences().setPref(pref, value);
         FModel.getPreferences().save();

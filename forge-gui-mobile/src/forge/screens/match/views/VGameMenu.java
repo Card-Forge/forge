@@ -19,7 +19,6 @@ public class VGameMenu extends FDropDownMenu {
 
     @Override
     protected void buildMenu() {
-
         addItem(new FMenuItem(MatchController.instance.getConcedeCaption(), FSkinImage.CONCEDE, e ->
                 ThreadUtil.invokeInGameThread(MatchController.instance::concede)
         ));
@@ -39,13 +38,13 @@ public class VGameMenu extends FDropDownMenu {
         addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblAutoYieldsAndTriggers"), Forge.hdbuttons ? FSkinImage.HDYIELD : FSkinImage.WARNING, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                final boolean autoYieldsDisabled = MatchController.instance.getGameController().getDisableAutoYields();
+                final boolean autoYieldsDisabled = MatchController.instance.getGameController().getYieldController().getDisableAutoYields();
                 final VAutoYieldsAndTriggers dialog = new VAutoYieldsAndTriggers() {
                     @Override
                     public void setVisible(boolean b0) {
                         super.setVisible(b0);
                         if (!b0) {
-                            if (autoYieldsDisabled && !MatchController.instance.getGameController().getDisableAutoYields()) {
+                            if (autoYieldsDisabled && !MatchController.instance.getGameController().getYieldController().getDisableAutoYields()) {
                                 //if re-enabling auto-yields, auto-yield to current ability on stack if applicable
                                 if (MatchController.instance.getGameView().peekStack() != null) {
                                     final String key = MatchController.instance.getGameView().peekStack().getKey();

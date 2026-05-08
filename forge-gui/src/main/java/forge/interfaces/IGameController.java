@@ -55,20 +55,22 @@ public interface IGameController {
     void passPriority();
 
     // Auto-yield preferences
-    boolean shouldAutoYield(String key);
+    default boolean shouldAutoYield(String key) {
+        return getYieldController().shouldAutoYield(key);
+    }
     /**
      * @param isAbilityScope true if {@code key} is an ability suffix (Per Ability * modes);
      *   false if {@code key} is the full raw key (Per Card mode). Server-side handlers
      *   route storage by this flag instead of consulting the host's own UI_AUTO_DECISION_MODE.
      */
     void setShouldAutoYield(String key, boolean autoYield, boolean isAbilityScope);
-    boolean getDisableAutoYields();
     void setDisableAutoYields(boolean disable);
 
     // Trigger accept/decline preferences
-    TriggerDecision getTriggerDecision(String key);
+    default TriggerDecision getTriggerDecision(String key) {
+        return getYieldController().getTriggerDecision(key);
+    }
     void setTriggerDecision(String key, TriggerDecision decision, boolean isAbilityScope);
-    boolean getDisableAutoTriggers();
     void setDisableAutoTriggers(boolean disable);
 
     /** Apply a unified yield update envelope to this controller's YieldController. */
