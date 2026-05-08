@@ -4504,6 +4504,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final int getPowerBonusFromCounters() {
+        if (!hasCounters()) {
+            return 0;
+        }
         return getCounters(CounterEnumType.P1P1) + getCounters(CounterEnumType.P1P2) + getCounters(CounterEnumType.P1P0)
                 - getCounters(CounterEnumType.M1M1) + 2 * getCounters(CounterEnumType.P2P2) - 2 * getCounters(CounterEnumType.M2M1)
                 - 2 * getCounters(CounterEnumType.M2M2) - getCounters(CounterEnumType.M1M0) + 2 * getCounters(CounterEnumType.P2P0);
@@ -4567,6 +4570,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
 
     public final int getToughnessBonusFromCounters() {
+        if (!hasCounters()) {
+            return 0;
+        }
         return getCounters(CounterEnumType.P1P1) + 2 * getCounters(CounterEnumType.P1P2) - getCounters(CounterEnumType.M1M1)
                 + getCounters(CounterEnumType.P0P1) - 2 * getCounters(CounterEnumType.M0M2) + 2 * getCounters(CounterEnumType.P2P2)
                 - getCounters(CounterEnumType.M0M1) - getCounters(CounterEnumType.M2M1) - 2 * getCounters(CounterEnumType.M2M2)
@@ -4598,26 +4604,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
 
     // for cards like Giant Growth, etc.
     public final int getTempPowerBoost() {
-        int result = 0;
-        for (Pair<Integer, Integer> pair : boostPT.values()) {
-            if (pair.getLeft() != null) {
-                result += pair.getLeft();
-            }
-        }
-        return result;
+        return boostPT.values().stream().mapToInt(Pair::getLeft).sum();
     }
 
     public final int getTempToughnessBoost() {
-        int result = 0;
-        for (Pair<Integer, Integer> pair : boostPT.values()) {
-            if (pair.getRight() != null) {
-                result += pair.getRight();
-            }
-        }
-        return result;
+        return boostPT.values().stream().mapToInt(Pair::getRight).sum();
     }
 
-    public void addPTBoost(final Integer power, final Integer toughness, final long timestamp, final long staticId) {
+    public void addPTBoost(final int power, final int toughness, final long timestamp, final long staticId) {
         boostPT.put(timestamp, staticId, Pair.of(power, toughness));
     }
 
