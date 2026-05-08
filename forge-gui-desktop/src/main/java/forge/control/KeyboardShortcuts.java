@@ -18,9 +18,7 @@ import javax.swing.SwingUtilities;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Singletons;
-import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
-import forge.gamemodes.match.YieldUpdate;
 import forge.gui.framework.EDocID;
 import forge.interfaces.IGameController;
 import forge.gui.framework.SDisplayUtil;
@@ -289,12 +287,10 @@ public class KeyboardShortcuts {
                 if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
                 if (matchUI == null) { return; }
                 IGameController ctrl = matchUI.getGameController();
-                PlayerView local = matchUI.getCurrentPlayer();
-                if (ctrl == null || local == null || ctrl.getYieldController() == null) { return; }
+                if (ctrl == null || ctrl.getYieldController() == null) { return; }
                 if (!ctrl.getYieldController().isYieldActive()) { return; }
-                ctrl.sendYieldUpdate(new YieldUpdate.ClearMarker(local));
-                ctrl.sendYieldUpdate(new YieldUpdate.StackYield(local, false, false));
-                ctrl.sendYieldUpdate(new YieldUpdate.SetAutoPassUntilEndOfTurn(local, false));
+                // InputLockUI.selectButtonCancel calls clearActiveYieldAndDispatch as a side effect.
+                ctrl.selectButtonCancel();
             }
         };
 
