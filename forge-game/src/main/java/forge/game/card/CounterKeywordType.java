@@ -44,6 +44,7 @@ public record CounterKeywordType(String keyword, Keyword type, String desc) impl
         return getKeywordDescription();
     }
 
+    @Override
     public String getCounterOnCardDisplayName() {
         return getKeywordDescription();
     }

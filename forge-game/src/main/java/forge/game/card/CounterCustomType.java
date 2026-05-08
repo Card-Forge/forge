@@ -19,4 +19,9 @@ public record CounterCustomType(String keyword) implements CounterType {
     public static Set<CounterType> getValues() {
         return new LinkedHashSet<CounterType>(sMap.values());
     }
+
+
+    public String getName() {
+        return keyword;
+    }
 }

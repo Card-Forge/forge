@@ -526,6 +526,7 @@ public enum CounterEnumType implements CounterType {
         return blue;
     }
 
+    @Override
     public String getCounterOnCardDisplayName() {
         return counterOnCardDisplayName;
     }

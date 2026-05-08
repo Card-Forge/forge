@@ -32,7 +32,9 @@ public interface CounterType extends Serializable, ITranslatable {
 
     String getName();
 
-    String getCounterOnCardDisplayName();
+    default String getCounterOnCardDisplayName() {
+        return getName();
+    }
 
     default boolean is(CounterEnumType eType) {
         return false;
