@@ -376,32 +376,24 @@ public class MatchScreen extends FScreen {
             if (n > 1) {
                 int idxConcede = 0;
                 int idxAutoYields = 1;
-                int idxSettings = !Forge.isMobileAdventureMode ? n - 2 : -1;   // Settings is second-from-last
-                int idxShowWinLose = !Forge.isMobileAdventureMode ? n - 1 : -1; // Show Win/Lose is last
-                if (viewWinLose == null) {
-                    gameMenu.getChildAt(idxConcede).setEnabled(!game.isMulligan());
-                    gameMenu.getChildAt(idxAutoYields).setEnabled(!game.isMulligan());
-                    if (!Forge.isMobileAdventureMode) {
-                        gameMenu.getChildAt(idxSettings).setEnabled(!game.isMulligan());
-                        gameMenu.getChildAt(idxShowWinLose).setEnabled(false);
-                    }
-                } else {
-                    gameMenu.getChildAt(idxConcede).setEnabled(false);
-                    gameMenu.getChildAt(idxAutoYields).setEnabled(false);
-                    if (!Forge.isMobileAdventureMode) {
-                        gameMenu.getChildAt(idxSettings).setEnabled(false);
-                        gameMenu.getChildAt(idxShowWinLose).setEnabled(true);
-                    }
+                int idxSettings = n - 2; // Settings is second-from-last
+                int idxShowWinLose = n - 1; // Show Win/Lose is last
+                boolean gameOver = viewWinLose != null;
+                boolean canSwitch = !gameOver && !game.isMulligan();
+                gameMenu.getChildAt(idxConcede).setEnabled(canSwitch);
+                gameMenu.getChildAt(idxAutoYields).setEnabled(canSwitch);
+                if (!Forge.isMobileAdventureMode) {
+                    gameMenu.getChildAt(idxSettings).setEnabled(canSwitch);
+                    gameMenu.getChildAt(idxShowWinLose).setEnabled(gameOver);
                 }
             }
         }
-        if (devMenu != null) {
-            if (devMenu.isVisible()) {
-                try {
-                    //rollbackphase enable -- todo limit by gametype?
-                    devMenu.getChildAt(2).setEnabled(game.getPlayers().size() == 2 && game.getStack().size() == 0 && !GuiBase.isNetPlay(MatchController.instance) && game.getPhase().isMain() && !game.getPlayerTurn().isAI());
-                } catch (Exception e) {/*NPE when the game hasn't started yet and you click dev mode*/}
-            }
+
+        if (devMenu != null && devMenu.isVisible()) {
+            try {
+                //rollbackphase enable -- todo limit by gametype?
+                devMenu.getChildAt(2).setEnabled(game.getPlayers().size() == 2 && game.getStack().size() == 0 && !GuiBase.isNetPlay(MatchController.instance) && game.getPhase().isMain() && !game.getPlayerTurn().isAI());
+            } catch (Exception e) {/*NPE when the game hasn't started yet and you click dev mode*/}
         }
 
         if (activeEffect != null) {
