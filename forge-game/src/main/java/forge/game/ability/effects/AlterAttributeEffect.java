@@ -70,8 +70,7 @@ public class AlterAttributeEffect extends SpellAbilityEffect {
                             if (gameCard.isPrepared() || !gameCard.hasState(CardStateName.PreparedSpell)) {
                                 continue;
                             }
-                            Card prepared = new CardCopyService(gameCard).copyCard(true, activator);
-                            prepared.setGamePieceType(GamePieceType.TOKEN);
+                            Card prepared = CopyPermanentEffect.getProtoType(sa, gameCard, activator);
                             prepared.setState(CardStateName.PreparedSpell, true);
                             prepared.getOwner().getZone(ZoneType.Exile).add(prepared);
                             eff = createEffect(null, gameCard, activator, gameCard + "'s Prepared Spell", prepared.getImageKey(), game.getNextTimestamp());

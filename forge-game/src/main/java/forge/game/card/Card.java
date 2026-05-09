@@ -6615,7 +6615,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
     }
     public void setPrepared(final Card eff) {
         if (eff == null && preparedEffect != null) {
-            game.getAction().exile((Card) preparedEffect.getFirstRemembered(), null , null);
+            Card prepared = (Card) preparedEffect.getFirstRemembered();
+            if (prepared.isInZone(ZoneType.Exile)) {
+                game.getAction().ceaseToExist(prepared, true);
+            }
             game.getAction().exileEffect(preparedEffect);
         }
         preparedEffect = eff;
