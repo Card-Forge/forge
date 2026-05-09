@@ -144,7 +144,7 @@ public class CDock implements ICDoc {
         refreshAutoPassToggled();
     }
 
-    private void refreshAutoPassToggled() {
+    public void refreshAutoPassToggled() {
         view.getBtnAutoPass().setToggled(FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS));
     }
 

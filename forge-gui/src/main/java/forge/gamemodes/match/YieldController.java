@@ -463,12 +463,20 @@ public class YieldController {
         return newVal;
     }
 
-    /** Clear all transient yield state and turn APINA off if it's on — single unified stop action. */
-    public static void stopAllYields(IGameController ctrl) {
+    /**
+     * Single unified yield-key action. If any yield is currently active (transient
+     * yield state or APINA on), clears everything. Otherwise turns APINA on. So one
+     * key acts as both "stop any yielding" and "start auto-passing" depending on state.
+     */
+    public static void toggleAutoPassOrStopAll(IGameController ctrl) {
         if (ctrl == null) return;
         YieldController yc = ctrl.getYieldController();
-        if (yc != null) yc.clearActiveYieldAndDispatch();
-        if (FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS)) {
+        boolean transientActive = yc != null && yc.isYieldActive();
+        boolean apinaOn = FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS);
+        if (transientActive || apinaOn) {
+            if (yc != null) yc.clearActiveYieldAndDispatch();
+            if (apinaOn) toggleAutoPassNoActions(ctrl);
+        } else {
             toggleAutoPassNoActions(ctrl);
         }
     }

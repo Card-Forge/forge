@@ -198,12 +198,12 @@ When paying mana costs, you can press Enter/Spacebar or click the Auto button in
 
 Forge offers several yield options depending on how long you want to skip prompts:
 
-- **Auto-Pass** — a persistent toggle that automatically yields priority when you have no playable actions. Available on **Desktop** via the Auto-Pass dock icon or F3 hotkey, or on **Mobile** from the in-match Game menu.
+- **Auto-Pass** — a persistent toggle that automatically yields priority when you have no playable actions. Available on **Desktop** via the Auto-Pass dock icon or the **P** hotkey, or on **Mobile** from the in-match Game menu.
 - **End Turn** — auto-pass through the rest of the current turn, bypassing any phase stops. Triggered by the End Turn dock button.
 - **Yield markers** — auto-pass until a specific phase is reached. Right-click (or long-press) a phase indicator to set one; a fast-forward symbol marks the active cell. Each (player, phase) cell is independent, so in multiplayer you can yield to a specific opponent's end step.
 - **Yield to stack / Resolve entire stack** — auto-pass while the stack resolves. Right-click a stack item to choose: **Yield to stack** auto-passes until the stack empties or an interrupt fires (for example, an opponent casts another spell); **Resolve entire stack** keeps auto-passing until the whole stack is empty even if opponents cast more spells.
 
-By default, every yield except **Resolve entire stack** cancels automatically when an opponent casts a spell or declares attackers against you, so you can respond or block. You can also press Escape or click Cancel at any time to break out of a yield. Press **F2** to clear every active yield in one shot — including the Auto-Pass toggle — useful when a prompt is up and you want to abandon all yielding without dismissing the prompt.
+By default, every yield except **Resolve entire stack** cancels automatically when an opponent casts a spell or declares attackers against you, so you can respond or block. You can also press Escape or click Cancel at any time to break out of a yield. The **P** hotkey acts as a single yield switch: if any yield is currently active (including Auto-Pass), it clears them all without dismissing any open prompt; otherwise it turns Auto-Pass on.
 
 ## Auto-Yield and Trigger Decisions
 - When a spell or an ability appears on the stack you can right-click it to decide if you want to always accept it (Always Yes) or always decline it (Always No). For abilities marked "(OPTIONAL)" the same right-click lets you set an auto-yield so you don't get prompted on subsequent activations.
