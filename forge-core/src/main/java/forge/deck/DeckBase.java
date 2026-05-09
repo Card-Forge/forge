@@ -29,6 +29,7 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase>, In
 
     private String name;
     private transient String directory;
+    private transient String sourceFileName;
     private String comment = null;
 
     /**
@@ -84,6 +85,14 @@ public abstract class DeckBase implements Serializable, Comparable<DeckBase>, In
 
     public void setDirectory(String directory0) {
         directory = directory0;
+    }
+
+    public String getSourceFileName() {
+        return sourceFileName;
+    }
+
+    public void setSourceFileName(final String sourceFileName0) {
+        sourceFileName = sourceFileName0;
     }
 
     public String getUniqueKey() {

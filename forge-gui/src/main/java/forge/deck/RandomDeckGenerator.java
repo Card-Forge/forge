@@ -13,7 +13,7 @@ import forge.util.IterableUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomDeckGenerator> {
+public class RandomDeckGenerator extends GeneratedDeckProxy implements Comparable<RandomDeckGenerator> {
     private enum RandomDeckType {
         Generated,
         User,
@@ -35,27 +35,15 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
         return generator.getDeck();
     }
 
-    private final String name;
     private final RandomDeckType type;
     private final IHasGameType lstDecks;
     private final boolean isAi;
 
     private RandomDeckGenerator(final String name0, final RandomDeckType type0, final IHasGameType lstDecks0, final boolean isAi0) {
-        super();
-        name = name0;
+        super(name0);
         type = type0;
         lstDecks = lstDecks0;
         isAi = isAi0;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public String toString() {
-        return name;
     }
 
     @Override
@@ -184,7 +172,16 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
     }
 
     @Override
-    public boolean isGeneratedDeck() {
-        return true;
+    public int getMainSize() {
+        if (type != RandomDeckType.Generated) {
+            return -1;
+        }
+        return switch (lstDecks.getGameType()) {
+            case CommanderGauntlet, Commander -> 100;
+            case Oathbreaker -> 60;
+            case TinyLeaders -> 50;
+            case Brawl -> 60;
+            default -> 60;
+        };
     }
 }

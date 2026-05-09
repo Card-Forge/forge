@@ -536,6 +536,8 @@ public enum FSkinProp {
     IMG_FAV4    (new int[] {300, 0, 100, 100}, PropType.FAVICON),
     IMG_FAV5    (new int[] {400, 0, 100, 100}, PropType.FAVICON),
     IMG_FAVNONE (new int[] {500, 0, 100, 100}, PropType.FAVICON),
+    IMG_GENERATED_DECK (new int[] {0, 0, 32, 32}, PropType.GEAR),
+    IMG_GENERATED_FOLDER (new int[] {32, 0, 32, 32}, PropType.GEAR),
 
     IMG_QUEST_DRAFT_DECK (new int[] {0, 0, 680, 475}, PropType.IMAGE),
     //COMMANDER
@@ -842,7 +844,8 @@ public enum FSkinProp {
         WATERMARKS(ForgeConstants.SPRITE_WATERMARK_FILE),
         ZONES(ForgeConstants.SPRITE_ZONE_FILE),
         DRAFTRANKS(ForgeConstants.SPRITE_DRAFTRANKS_FILE),
-        FAVICON(ForgeConstants.SPRITE_FAVICONS_FILE);
+        FAVICON(ForgeConstants.SPRITE_FAVICONS_FILE),
+        GEAR(ForgeConstants.SPRITE_GEAR_FILE);
 
         private final String filename;
 

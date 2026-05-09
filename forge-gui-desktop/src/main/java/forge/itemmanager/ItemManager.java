@@ -112,6 +112,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         .build();
 
     private final List<ItemView<T>> views = new ArrayList<>();
+    private final List<FLabel> extraViewButtons = new ArrayList<>();
     private final ItemListView<T> listView;
     private final ImageView<T> imageView;
     private ItemView<T> currentView;
@@ -176,6 +177,9 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         for (final ItemView<T> view : this.views) {
             this.add(view.getButton());
             view.getButton().setSelected(view == this.currentView);
+        }
+        for (final FLabel button : this.extraViewButtons) {
+            this.add(button);
         }
         this.add(this.btnViewOptions);
         this.btnViewOptions.setSelected(this.currentView.getPnlOptions().isVisible());
@@ -309,6 +313,18 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         this.views.get(viewIndex).getPnlOptions().setVisible(!hideViewOptions);
     }
 
+    public void addViewButton(final FLabel button) {
+        if (button == null || extraViewButtons.contains(button)) {
+            return;
+        }
+        extraViewButtons.add(button);
+        if (initialized) {
+            this.add(button);
+            this.revalidate();
+            this.repaint();
+        }
+    }
+
     @Override
     public void doLayout() {
         final int buttonPanelHeight = 32;
@@ -344,7 +360,7 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         final int ratioWidth = this.lblRatio.getAutoSizeWidth();
         int captionWidth = this.lblCaption.getAutoSizeWidth();
         final int cbxSectionWidth = this.cbxSection.isVisible() ? this.cbxSection.getAutoSizeWidth() : 0;
-        final int viewButtonCount = this.views.size() + 1; // +1 is for the options button
+        final int viewButtonCount = this.views.size() + this.extraViewButtons.size() + 1; // +1 is for the options button
         final int widthViewButtons = viewButtonCount * viewButtonWidth + helper.getGapX() * (viewButtonCount);
 
         // remove the space needed by all components that will be displayed
@@ -371,6 +387,10 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         helper.fillLine(this.lblEmpty, FTextField.HEIGHT, widthViewButtons);
         for (final ItemView<T> view : this.views) {
             helper.include(view.getButton(), viewButtonWidth, FTextField.HEIGHT);
+            helper.offset(-1, 0);
+        }
+        for (final FLabel button : this.extraViewButtons) {
+            helper.include(button, viewButtonWidth, FTextField.HEIGHT);
             helper.offset(-1, 0);
         }
         helper.include(this.btnViewOptions, viewButtonWidth, FTextField.HEIGHT);

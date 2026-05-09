@@ -89,6 +89,8 @@ public enum ItemManagerConfig {
             GroupDef.DEFAULT, ColumnDef.CMC, 4, 1),
     CONSTRUCTED_DECKS(SColumnUtil.getDecksDefaultColumns(true, true), false, false, false,
             null, null, 3, 0),
+    DECK_BROWSER(SColumnUtil.getDeckBrowserDefaultColumns(), false, false, false,
+            null, null, 3, 0),
     COMMANDER_DECKS(SColumnUtil.getDecksDefaultColumns(true, false), false, false, false,
             null, null, 3, 0),
     PLANAR_DECKS(SColumnUtil.getDecksDefaultColumns(true, false), false, false, false,

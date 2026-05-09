@@ -126,6 +126,9 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                 if (e.isConsumed()) { return; } //don't activate if inline button double clicked
 
                 final int clickedIndex = table.rowAtPoint(e.getPoint());
+                if (clickedIndex >= 0 && clickedIndex < table.getRowCount()) {
+                    table.setRowSelectionInterval(clickedIndex, clickedIndex);
+                }
 
                 itemManager.activateSelectedItems();
 
@@ -434,12 +437,8 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             }
 
             final Object val = getValueAt(row, col);
-            if (val == null) {
-                return;
-            }
-
             final ItemCellRenderer renderer = (ItemCellRenderer)getCellRenderer(row, col);
-            if (renderer != null) {
+            if (val != null && renderer != null) {
                 renderer.processMouseEvent(e, ItemListView.this, val, row, col); //give renderer a chance to process the mouse event
             }
             try {
@@ -464,9 +463,9 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
 
             // if we're conditionally showing the tooltip, check to see
             // if we shouldn't show it
-            if (val == null) { return ""; }
+            if (val == null) { return null; }
             final String text = val.toString();
-            if (text.isEmpty()) { return ""; }
+            if (text.isEmpty()) { return null; }
 
             if (!(renderer instanceof ItemCellRenderer) || !((ItemCellRenderer)renderer).alwaysShowTooltip()) {
                 // if there's enough room (or there's no value), no tooltip
@@ -476,7 +475,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                 final int requiredWidth = cell.getPreferredSize().width;
                 final TableColumn tableColumn = this.getColumnModel().getColumn(col);
                 if (tableColumn.getWidth() > requiredWidth) {
-                    return "";
+                    return null;
                 }
             }
 
@@ -490,13 +489,13 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             final int row = rowAtPoint(p);
             final int col = columnAtPoint(p);
 
-            if (col >= getColumnCount() || row >= getRowCount()) {
-                return "";
+            if (col < 0 || col >= getColumnCount() || row < 0 || row >= getRowCount()) {
+                return null;
             }
 
             final Object val = getValueAt(row, col);
             if (val == null) {
-                return "";
+                return null;
             }
 
             return getCellTooltip(getCellRenderer(row, col), row, col, val);

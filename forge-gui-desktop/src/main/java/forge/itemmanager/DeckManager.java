@@ -8,6 +8,7 @@ import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Consumer;
 
 import javax.swing.JMenu;
 import javax.swing.JTable;
@@ -19,6 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
+import forge.deck.DeckBrowserEntry;
 import forge.deck.DeckProxy;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameFormat;
@@ -61,6 +63,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
 
     private final GameType gameType;
     private UiCommand cmdDelete, cmdSelect;
+    private Consumer<String> searchChangeListener;
 
     /**
      * Creates deck list for selected decks for quick deleting, editing, and
@@ -73,6 +76,10 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         this.gameType = gt;
 
         this.addSelectionListener(e -> {
+            final DeckProxy selected = getSelectedItem();
+            if (selected instanceof DeckBrowserEntry && !((DeckBrowserEntry) selected).isDeck()) {
+                return;
+            }
             if (cmdSelect != null) {
                 cmdSelect.run();
             }
@@ -146,6 +153,24 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     @Override
     protected ItemFilter<DeckProxy> createSearchFilter() {
         return new DeckSearchFilter(this);
+    }
+
+    public void setSearchChangeListener(final Consumer<String> listener) {
+        searchChangeListener = listener;
+    }
+
+    public void notifySearchChanged(final String searchText) {
+        if (searchChangeListener != null) {
+            searchChangeListener.accept(searchText);
+        }
+    }
+
+    @Override
+    public void applyNewOrModifiedFilter(final ItemFilter<? extends DeckProxy> filter) {
+        if (filter instanceof DeckSearchFilter) {
+            notifySearchChanged(((DeckSearchFilter) filter).getSearchText());
+        }
+        super.applyNewOrModifiedFilter(filter);
     }
 
     private Map<String, HashMap> buildHierarchy(String path) {
@@ -315,6 +340,10 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     }
 
     public void editDeck(final DeckProxy deck) {
+        if (deck instanceof DeckBrowserEntry && !((DeckBrowserEntry) deck).isDeck()) {
+            return;
+        }
+
         ACEditorBase<? extends InventoryItem, ? extends DeckBase> editorCtrl = null;
         FScreen screen = null;
 

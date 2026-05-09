@@ -69,6 +69,27 @@ public class DecksComboBox extends FComboBoxWrapper<DeckType> {
         setSelectedItem(selectedDeckType);
     }
 
+    public void setDisplayedDeckType(final DeckType deckType) {
+        selectedDeckType = deckType;
+        suppressActionListeners();
+        try {
+            boolean isInModel = false;
+            for (int i = 0; i < getItemCount(); i++) {
+                if (getItemAt(i) == deckType) {
+                    isInModel = true;
+                    break;
+                }
+            }
+            if (isInModel) {
+                setSelectedItem(deckType);
+            } else {
+                super.setText(deckType.toString());
+            }
+        } finally {
+            unsuppressActionListeners();
+        }
+    }
+
     @Override
     public void setText(final String text0) {
         selectedDeckType = null; //ensure selecting current deck type again raises event

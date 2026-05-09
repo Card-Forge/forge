@@ -1,6 +1,5 @@
 package forge.deck;
 
-import forge.card.CardEdition;
 import forge.deck.io.Archetype;
 import forge.game.GameFormat;
 import forge.item.PaperCard;
@@ -13,7 +12,7 @@ import java.util.List;
 /**
  * Created by maustin on 09/05/2017.
  */
-public class ArchetypeDeckGenerator extends DeckProxy implements Comparable<ArchetypeDeckGenerator> {
+public class ArchetypeDeckGenerator extends GeneratedDeckProxy implements Comparable<ArchetypeDeckGenerator> {
     public static List<DeckProxy> getMatrixDecks(GameFormat format, boolean isForAi){
         final List<DeckProxy> decks = new ArrayList<>();
         for(Archetype archetype: CardArchetypeLDAGenerator.ldaArchetypes.get(format.getName())) {
@@ -23,16 +22,14 @@ public class ArchetypeDeckGenerator extends DeckProxy implements Comparable<Arch
         return decks;
     }
     private final Archetype archetype;
-    private final int index;
     private final GameFormat format;
     private final boolean isForAi;
     private PaperCard card;
 
 
     private ArchetypeDeckGenerator(Archetype archetype0, GameFormat format0, boolean isForAi0) {
-        super();
+        super(archetype0.getName(), 60);
         archetype = archetype0;
-        index = 0;
         format=format0;
         isForAi=isForAi0;
         for(Pair<String, Double> cardPair : archetype.getCardProbabilities()){
@@ -42,21 +39,6 @@ public class ArchetypeDeckGenerator extends DeckProxy implements Comparable<Arch
                 break;
             }
         }
-    }
-
-    public CardEdition getEdition() {
-        return CardEdition.UNKNOWN;
-    }
-
-
-    @Override
-    public String getName() {
-        return archetype.getName();
-    }
-
-    @Override
-    public String toString() {
-        return archetype.getName();
     }
 
     public Archetype getArchetype() {
@@ -71,11 +53,6 @@ public class ArchetypeDeckGenerator extends DeckProxy implements Comparable<Arch
     @Override
     public Deck getDeck() {
         return DeckgenUtil.buildLDACArchetypeDeck(archetype,format,isForAi);
-    }
-
-    @Override
-    public boolean isGeneratedDeck() {
-        return true;
     }
 
     public String getImageKey(boolean altState) {

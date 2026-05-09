@@ -78,7 +78,7 @@ public class ItemCellRenderer extends DefaultTableCellRenderer {
 
     @Override
     public Component getTableCellRendererComponent(final JTable table, final Object value, final boolean isSelected, final boolean hasFocus, final int row, final int column) {
-        final JLabel lbl = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+        final JLabel lbl = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, false, row, column);
         lbl.setBorder(DEFAULT_BORDER); //prevent selected cell having inner border
         if (isSelected) {
             lbl.setBackground(table.getSelectionBackground());

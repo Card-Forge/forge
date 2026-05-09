@@ -23,6 +23,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map.Entry;
 
+import forge.deck.DeckBrowserEntry;
 import forge.item.InventoryItem;
 import forge.itemmanager.ItemColumnConfig.SortState;
 import forge.util.ItemPool;
@@ -209,6 +210,11 @@ public final class ItemManagerModel<T extends InventoryItem> {
             @Override
             public final int compare(final Entry<InventoryItem, Integer> arg0, final Entry<InventoryItem, Integer> arg1) {
                 int lastCompare = 0;
+                if (arg0.getKey() instanceof DeckBrowserEntry || arg1.getKey() instanceof DeckBrowserEntry) {
+                    final int sortGroup0 = arg0.getKey() instanceof DeckBrowserEntry ? ((DeckBrowserEntry) arg0.getKey()).getSortGroup() : 3;
+                    final int sortGroup1 = arg1.getKey() instanceof DeckBrowserEntry ? ((DeckBrowserEntry) arg1.getKey()).getSortGroup() : 3;
+                    lastCompare = Integer.compare(sortGroup0, sortGroup1);
+                }
                 int iField = -1;
                 while ((++iField < cntFields) && (lastCompare == 0)) { // reverse
                                                                             // iteration

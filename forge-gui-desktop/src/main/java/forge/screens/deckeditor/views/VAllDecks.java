@@ -3,14 +3,14 @@ package forge.screens.deckeditor.views;
 import javax.swing.JPanel;
 
 import forge.deck.DeckProxy;
-import forge.deck.io.DeckPreferences;
+import forge.deck.DeckType;
 import forge.game.GameType;
+import forge.deckchooser.FDeckChooser;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.itemmanager.DeckManager;
-import forge.itemmanager.ItemManagerContainer;
 import forge.screens.deckeditor.controllers.CAllDecks;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.util.Localizer;
@@ -28,9 +28,9 @@ public enum VAllDecks implements IVDoc<CAllDecks> {
     // Fields used with interface IVDoc
     private DragCell parentCell;
     final Localizer localizer = Localizer.getInstance();
-    private final DragTab tab = new DragTab(localizer.getMessage("lblConstructed"));
+    private final DragTab tab = new DragTab("Deck Browser");
 
-    private DeckManager lstDecks;
+    private FDeckChooser deckBrowser;
 
     //========== Overridden methods
 
@@ -79,12 +79,10 @@ public enum VAllDecks implements IVDoc<CAllDecks> {
      */
     @Override
     public void populate() {
-        CAllDecks.SINGLETON_INSTANCE.refresh(); //ensure decks refreshed in case any deleted or added since last loaded
-        String preferredDeck = DeckPreferences.getCurrentDeck();
         JPanel parentBody = parentCell.getBody();
         parentBody.setLayout(new MigLayout("insets 5, gap 0, wrap, hidemode 3"));
-        parentBody.add(new ItemManagerContainer(lstDecks), "push, grow");
-        editPreferredDeck(lstDecks, preferredDeck);
+        deckBrowser.populate();
+        parentBody.add(deckBrowser, "push, grow");
     }
 
     public static void editPreferredDeck(DeckManager lstDecks, String preferredDeck) {
@@ -97,11 +95,15 @@ public enum VAllDecks implements IVDoc<CAllDecks> {
     //========== Retrieval methods
     /** @return {@link javax.swing.JPanel} */
     public DeckManager getLstDecks() {
-        return lstDecks;
+        return deckBrowser.getLstDecks();
+    }
+
+    public void refreshBrowser() {
+        deckBrowser.refreshEditorBrowser();
     }
 
     public void setCDetailPicture(final CDetailPicture cDetailPicture) {
-        this.lstDecks = new DeckManager(GameType.Constructed, cDetailPicture);
-        this.lstDecks.setCaption(localizer.getMessage("lblConstructedDecks"));
+        this.deckBrowser = new FDeckChooser(cDetailPicture, false, GameType.Constructed, false, true);
+        this.deckBrowser.initialize(DeckType.CUSTOM_DECK);
     }
 }

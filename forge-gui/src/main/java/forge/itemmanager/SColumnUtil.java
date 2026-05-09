@@ -263,4 +263,20 @@ public final class SColumnUtil {
         }
         return columns;
     }
+
+    public static Map<ColumnDef, ItemColumnConfig> getDeckBrowserDefaultColumns() {
+        List<ColumnDef> colDefs = new ArrayList<>();
+        colDefs.add(ColumnDef.DECK_FAVORITE);
+        colDefs.add(ColumnDef.NAME);
+        colDefs.add(ColumnDef.DECK_COLOR);
+        colDefs.add(ColumnDef.DECK_FORMAT);
+        colDefs.add(ColumnDef.DECK_EDITION);
+        colDefs.add(ColumnDef.DECK_MAIN);
+        colDefs.add(ColumnDef.DECK_SIDE);
+        colDefs.add(ColumnDef.DECK_AI);
+
+        Map<ColumnDef, ItemColumnConfig> columns = getColumns(colDefs);
+        columns.get(ColumnDef.NAME).setSortPriority(1);
+        return columns;
+    }
 }

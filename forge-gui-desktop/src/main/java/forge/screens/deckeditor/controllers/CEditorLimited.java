@@ -40,12 +40,8 @@ import forge.model.FModel;
 import forge.screens.deckeditor.AddBasicLandsDialog;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.deckeditor.views.VAllDecks;
-import forge.screens.deckeditor.views.VBrawlDecks;
-import forge.screens.deckeditor.views.VCommanderDecks;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.screens.deckeditor.views.VDeckgen;
-import forge.screens.deckeditor.views.VOathbreakerDecks;
-import forge.screens.deckeditor.views.VTinyLeadersDecks;
 import forge.screens.home.sanctioned.CSubmenuDraft;
 import forge.screens.home.sanctioned.CSubmenuSealed;
 import forge.screens.match.controllers.CDetailPicture;
@@ -64,10 +60,6 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
 
     private final DeckController<DeckGroup> controller;
     private DragCell constructedDecksParent = null;
-    private DragCell commanderDecksParent = null;
-    private DragCell oathbreakerDecksParent = null;
-    private DragCell brawlDecksParent = null;
-    private DragCell tinyLeadersDecksParent = null;
     private DragCell deckGenParent = null;
     private final List<DeckSection> allSections = new ArrayList<>();
 
@@ -245,10 +237,6 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
 
         deckGenParent = removeTab(VDeckgen.SINGLETON_INSTANCE);
         constructedDecksParent = removeTab(VAllDecks.SINGLETON_INSTANCE);
-        commanderDecksParent = removeTab(VCommanderDecks.SINGLETON_INSTANCE);
-        oathbreakerDecksParent = removeTab(VOathbreakerDecks.SINGLETON_INSTANCE);
-        brawlDecksParent = removeTab(VBrawlDecks.SINGLETON_INSTANCE);
-        tinyLeadersDecksParent = removeTab(VTinyLeadersDecks.SINGLETON_INSTANCE);
     }
 
     /* (non-Javadoc)
@@ -273,18 +261,6 @@ public final class CEditorLimited extends CDeckEditor<DeckGroup> {
         }
         if (constructedDecksParent != null) {
             constructedDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
-        }
-        if (commanderDecksParent != null) {
-            commanderDecksParent.addDoc(VCommanderDecks.SINGLETON_INSTANCE);
-        }
-        if (oathbreakerDecksParent != null) {
-            oathbreakerDecksParent.addDoc(VOathbreakerDecks.SINGLETON_INSTANCE);
-        }
-        if (brawlDecksParent!= null) {
-            brawlDecksParent.addDoc(VBrawlDecks.SINGLETON_INSTANCE);
-        }
-        if (tinyLeadersDecksParent != null) {
-            tinyLeadersDecksParent.addDoc(VTinyLeadersDecks.SINGLETON_INSTANCE);
         }
     }
 }
