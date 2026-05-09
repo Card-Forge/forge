@@ -82,8 +82,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
             float y = 0;
             float height;
-            // Bound by panels.size() — panel.setMayEdit can call revalidate
-            // mid-loop in LobbyScreen.update() before all slots have panels.
+            // setMayEdit can revalidate while update() is still adding panels.
             int count = Math.min(getNumPlayers(), playerPanels.size());
             for (int i = 0; i < count; i++) {
                 height = playerPanels.get(i).getPreferredHeight();
@@ -116,9 +115,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         }
         cbPlayerCount.setSelectedItem(2);
         cbPlayerCount.setChangedHandler(event -> {
-            // Use the dropdown's selected value as the target slot count.
-            // getNumPlayers() now derives from lobby.getNumberOfSlots(), so
-            // using it here would make the while loops degenerate.
+            // The dropdown is the user's target; getNumPlayers() reads from the lobby and would loop forever.
             int target = cbPlayerCount.getSelectedItem();
             while(lobby.getNumberOfSlots() < target){
                 lobby.addSlot();
@@ -321,9 +318,6 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     }
 
     public int getNumPlayers() {
-        // Mirror desktop's VLobby.activePlayersNum: the lobby is the source of
-        // truth. The dropdown is only a host-side control for editing this
-        // count — for clients, the server dictates it via setData.
         return lobby != null ? lobby.getNumberOfSlots() : cbPlayerCount.getSelectedItem();
     }
     public void setNumPlayers(int numPlayers) {
@@ -626,10 +620,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 }
                 else {
                     panel = new PlayerPanel(this, allowNetworking, i, slot, lobby.mayEdit(i), lobby.hasControl());
-                    // Register the panel before initialize: deck-chooser
-                    // population fires selection callbacks synchronously,
-                    // some of which call back into updateDeck(i) -> playerPanels.get(i).
-                    // (Mirrors desktop's VLobby.update at lines 272-277.)
+                    // Register before initialize: deck-chooser populate fires onSelectionChange synchronously, which can recurse into updateDeck(i).
                     playerPanels.add(panel);
                     playersScroll.add(panel);
                     if (i == 2) {
@@ -698,19 +689,12 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             }
         }
 
-        // Sync the displayed dropdown value to the lobby for clients (the
-        // server dictates the slot count, so the host-style dropdown should
-        // mirror it cosmetically). Skipped on hosts to avoid re-firing the
-        // changedHandler's addSlot/removeSlot path.
+        // Cosmetic-only sync for clients; skipped on hosts to avoid re-firing the changedHandler's add/remove path.
         if (!lobby.hasControl() && playerCount >= 2 && playerCount <= MAX_PLAYERS) {
             cbPlayerCount.setSelectedItem(playerCount);
         }
 
-        // Force the scroll pane to lay out newly added panels. Mid-loop
-        // panel.setMayEdit() only revalidates when getHeight() > 0, which is
-        // false for freshly created panels — so without this, slots added by
-        // a server-driven update (client receiving a larger lobby) stay
-        // invisible until some other event triggers layout.
+        // setMayEdit's revalidate is gated on getHeight() > 0, which fresh panels don't satisfy.
         playersScroll.revalidate();
     }
 
@@ -720,9 +704,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     }
 
     private void updateDeck(final int playerIndex) {
-        // Bound by panels.size() too — chooser-population callbacks during
-        // update() can fire updateDeck before the corresponding panel is
-        // registered, and the lobby's slot count may be ahead of the panel list.
+        // Chooser-populate callbacks can fire before the panel is registered.
         if (playerIndex >= getNumPlayers() || playerIndex >= playerPanels.size()) { return; }
 
         PlayerPanel playerPanel = playerPanels.get(playerIndex);
