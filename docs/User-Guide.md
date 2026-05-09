@@ -191,33 +191,31 @@ When paying mana costs, you can press Enter/Spacebar or click the Auto button in
 - you'll still be prompted when paying Sunburst or cards that care what colors are spent to cast it (ex. Firespout).
 
 ## Auto-Pass and Yield Options
-> [!NOTE]
-> For more information and configuration options — including interrupt conditions, automatic yield suggestions, and speed settings — see [Advanced Yield Options](advanced-yield-options.md).
-
 **Yielding** lets you hand priority to Forge so it passes on your behalf instead of you needing to click through every priority pass. This helps you get to your desired phase of action quickly.
 
 Forge offers several yield options depending on how long you want to skip prompts:
 
-- **Auto-Pass** — a persistent toggle that automatically yields priority when you have no playable actions. Available on **Desktop** via the Auto-Pass dock icon or the **P** hotkey, or on **Mobile** from the in-match Game menu.
+- **Auto-Pass** — a persistent toggle that automatically yields priority when you have no playable actions. Available on **Desktop** via the Auto-Pass dock icon and the **P** hotkey, or on **Mobile** from the in-match Game menu.
 - **End Turn** — auto-pass through the rest of the current turn, bypassing any phase stops. Triggered by the End Turn dock button.
 - **Yield markers** — auto-pass until a specific phase is reached. Right-click (or long-press) a phase indicator to set one; a fast-forward symbol marks the active cell. Each (player, phase) cell is independent, so in multiplayer you can yield to a specific opponent's end step.
 - **Yield to stack / Resolve entire stack** — auto-pass while the stack resolves. Right-click a stack item to choose: **Yield to stack** auto-passes until the stack empties or an interrupt fires (for example, an opponent casts another spell); **Resolve entire stack** keeps auto-passing until the whole stack is empty even if opponents cast more spells.
 
-By default, every yield except **Resolve entire stack** cancels automatically when an opponent casts a spell or declares attackers against you, so you can respond or block. You can also press Escape or click Cancel at any time to break out of a yield. The **P** hotkey acts as a single yield switch: if any yield is currently active (including Auto-Pass), it clears them all without dismissing any open prompt; otherwise it turns Auto-Pass on.
+> [!NOTE]
+> For more information and configuration options — including interrupt conditions, automatic yield suggestions, and speed settings — see [Advanced Yield Options](advanced-yield-options.md).
 
-## Auto-Yield and Trigger Decisions
-- When a spell or an ability appears on the stack you can right-click it to decide if you want to always accept it (Always Yes) or always decline it (Always No). For abilities marked "(OPTIONAL)" the same right-click lets you set an auto-yield so you don't get prompted on subsequent activations.
+## Individual Yields and Trigger Decisions
+When a spell or an ability appears on the stack you can right-click it to decide if you want to always accept (Always Yes) or always decline it (Always No). For abilities marked "(OPTIONAL)" the same right-click lets you set an auto-yield so you don't get prompted on subsequent activations.
 
-- The granularity and lifetime of these decisions are controlled by the **Auto Yield/Trigger Mode** setting under Settings → Preferences:
+The granularity and lifetime of these decisions are controlled by the **Auto Yield/Trigger Mode** setting under Settings → Preferences:
 
-  - **Per Card (Each Game)** — decisions are tied to a specific card instance and cleared at the end of each game. You'll need to set them again in the next game of the match. (For example, auto-yielding one Hellrider does not affect another copy of Hellrider.)
-  - **Per Ability (Each Match)** — decisions apply to every copy of the ability and persist across games within the current match, then clear when you start a new match.
-  - **Per Ability (Each Session)** — decisions persist across matches until you close Forge.
-  - **Per Ability (Each Install)** — decisions are saved to disk and persist across Forge restarts.
+- **Per Card (Each Game)** — decisions are tied to a specific card instance and cleared at the end of each game. You'll need to set them again in the next game of the match. (For example, auto-yielding one Hellrider does not affect another copy of Hellrider.)
+- **Per Ability (Each Match)** — decisions apply to every copy of the ability and persist across games within the current match, then clear when you start a new match.
+- **Per Ability (Each Session)** — decisions persist across matches until you close Forge.
+- **Per Ability (Each Install)** — decisions are saved to disk and persist across Forge restarts.
 
-- Pick a longer-lived scope when you want recurring triggers (e.g. routine ETBs, upkeep optional triggers) to stay yielded across many games; pick a shorter scope when you want a clean slate each game.
+Pick a longer-lived scope when you want recurring triggers (e.g. routine ETBs, upkeep optional triggers) to stay yielded across many games; pick a shorter scope when you want a clean slate each game.
 
-- The current list of active auto-yields and Always Yes / Always No trigger decisions is visible from Game → Auto-Yields and Triggers, where individual entries can be cleared.
+The current list of active auto-yields and Always Yes / Always No trigger decisions is visible from Game → Auto-Yields and Triggers, where individual entries can be cleared.
 
 ## Shift Key helper
 * When you mouse over a flip, transform or Morph (controlled by you) card in battlefield, hold SHIFT to see other state of that card at the side panel that displays card picture and details.

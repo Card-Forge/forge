@@ -8,9 +8,7 @@ import forge.trackable.TrackableProperty;
 import forge.trackable.TrackableTypes;
 import forge.trackable.TrackableTypes.TrackableType;
 import forge.trackable.Tracker;
-
-import org.tinylog.Logger;
-import org.tinylog.TaggedLogger;
+import forge.util.IHasForgeLog;
 
 import net.jpountz.lz4.LZ4BlockOutputStream;
 
@@ -27,8 +25,7 @@ import java.util.List;
  * {@link CompatibleObjectDecoder}) and the mobile codec path
  * ({@link CObjectOutputStream}, {@link CObjectInputStream}).
  */
-public final class TrackableSerializer {
-    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+public final class TrackableSerializer implements IHasForgeLog {
 
     static final byte TYPE_CARD_VIEW = 0;
     static final byte TYPE_PLAYER_VIEW = 1;
@@ -151,10 +148,8 @@ public final class TrackableSerializer {
      * full object graphs. Unwrapped after delta state is applied, when the
      * client tracker is populated.
      */
-    static final class WrappedEvent implements Serializable {
+    record WrappedEvent(byte[] data) implements Serializable {
         private static final long serialVersionUID = 1L;
-        final byte[] data;
-        WrappedEvent(byte[] data) { this.data = data; }
     }
 
     /**
