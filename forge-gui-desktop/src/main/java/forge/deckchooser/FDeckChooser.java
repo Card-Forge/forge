@@ -1119,6 +1119,11 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         browserRootType = deckType;
         browserGeneratedFolder = false;
         browserFolder = getStorageForDeckType(deckType);
+        final DeckType folderShortcut = browserFolder == null ? null : getShortcutDeckTypeForFolder(browserFolder);
+        if (folderShortcut != null) {
+            browserRootType = folderShortcut;
+            setShortcutDeckType(folderShortcut);
+        }
         browserParentFolder = null;
         browserPath = "";
         browserHasDecksHomeParent = true;
