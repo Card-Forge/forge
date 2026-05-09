@@ -108,10 +108,13 @@ public class CEditorLimited<T extends DeckBase> extends CDeckEditor<T> {
         for (DeckSection section : allSections) {
             this.getCbxSection().addItem(section);
         }
+
         this.getCbxSection().addActionListener(actionEvent -> {
             FComboBox cb = (FComboBox)actionEvent.getSource();
             DeckSection ds = (DeckSection)cb.getSelectedItem();
-            setEditorMode(ds);
+            if (ds != null) {
+                setEditorMode(ds);
+            }
         });
     }
 

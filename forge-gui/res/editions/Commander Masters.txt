@@ -2,8 +2,11 @@
 Code=CMM
 Date=2023-08-04
 Name=Commander Masters
-Type=Commander
+Type=Draft
+Booster=13 Common:fromSheet("CMM cards"), 3 Uncommon:fromSheet("CMM cards"), 1 RareMythic:!fromSheet("CMM legends"):fromSheet("CMM cards"), 1 fromSheet("CMM foils"), 1 fromSheet("CMM backgrounds"), 1 fromSheet("CMM legends")
 ScryfallCode=CMM
+DraftType=Commander
+DoublePick=Always
 
 [cards]
 1 S The Prismatic Piper @Seb McKinnon

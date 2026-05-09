@@ -6,6 +6,7 @@ Type=Draft
 Booster=13 Common:fromSheet("CLB cards"), 3 Uncommon:fromSheet("CLB cards"), 1 RareMythic:!fromSheet("CLB legends"):fromSheet("CLB cards"), 1 fromSheet("CLB foils"), 1 fromSheet("CLB backgrounds"), 1 fromSheet("CLB legends")
 Foil=NotSupported
 DoublePick=Always
+DraftType=Commander
 ScryfallCode=CLB
 
 [cards]

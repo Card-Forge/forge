@@ -284,6 +284,9 @@ public class CEditorDraftingProcess extends ACEditorBase<PaperCard, DeckGroup> i
         }
 
         humanDeck.setDraftNotes(player.getSerializedDraftNotes());
+        if (((BoosterDraft) boosterDraft).isCommanderDraft()) {
+            humanDeck.getTags().add("CommanderDraft");
+        }
         finishedDraft.setHumanDeck(humanDeck);
         finishedDraft.addAiDecks(computer);
 

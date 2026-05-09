@@ -199,7 +199,7 @@ public class BoosterDraft implements IBoosterDraft {
                             setPodSize(edition.getDraftOptions().getRecommendedPodSize());
                         }
                         doublePickDuringDraft = edition.getDraftOptions().isDoublePick(this.getPodSize());
-                        if (edition.getDraftOptions().getDeckType() == DraftOptions.DeckType.Commander) {
+                        if (edition.getDraftType() == CardEdition.DraftType.Commander) {
                             activateCommanderDraft(edition.getDraftOptions().getFreeCommander());
                         }
                     }
@@ -330,7 +330,7 @@ public class BoosterDraft implements IBoosterDraft {
                 draft.setPodSize(edition.getDraftOptions().getRecommendedPodSize());
             }
             draft.doublePickDuringDraft = edition.getDraftOptions().isDoublePick(draft.getPodSize());
-            if (edition.getDraftOptions().getDeckType() == DraftOptions.DeckType.Commander) {
+            if (edition.getDraftType() == CardEdition.DraftType.Commander) {
                 draft.activateCommanderDraft(edition.getDraftOptions().getFreeCommander());
             }
         }

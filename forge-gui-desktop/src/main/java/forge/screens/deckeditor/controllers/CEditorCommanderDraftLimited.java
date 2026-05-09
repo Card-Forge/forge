@@ -32,6 +32,7 @@ import forge.util.ItemPool;
 import forge.util.Localizer;
 import forge.util.storage.IStorage;
 
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -70,10 +71,23 @@ public final class CEditorCommanderDraftLimited extends CEditorLimited {
         // Insert the Commander section at position 0 so it appears first
         allSections.add(0, DeckSection.Commander);
 
+        // Detach any action listeners registered by the parent constructor so that
+        // removeAllItems() and addItem() below do not trigger setEditorMode() before
+        // a deck has been loaded (getDeckController().getModel() would be null).
+        final ActionListener[] savedListeners = this.getCbxSection().getActionListeners();
+        for (final ActionListener al : savedListeners) {
+            this.getCbxSection().removeActionListener(al);
+        }
+
         // Rebuild the section combo box to include Commander
         this.getCbxSection().removeAllItems();
         for (DeckSection section : allSections) {
             this.getCbxSection().addItem(section);
+        }
+
+        // Restore the listeners now that the combo box is in its final state
+        for (final ActionListener al : savedListeners) {
+            this.getCbxSection().addActionListener(al);
         }
     }
 
@@ -83,6 +97,7 @@ public final class CEditorCommanderDraftLimited extends CEditorLimited {
 
     @Override
     public void setEditorMode(final DeckSection sectionMode) {
+        if (sectionMode == null) { return; }
         switch (sectionMode) {
             case Commander:
                 setupCommanderSection();
@@ -152,9 +167,9 @@ public final class CEditorCommanderDraftLimited extends CEditorLimited {
         if (sectionMode == DeckSection.Commander) {
             for (final Map.Entry<PaperCard, Integer> entry : items) {
                 this.getDeckManager().removeItem(entry.getKey(), entry.getValue());
-                if (!isFreeOption(entry.getKey())) {
-                    this.getCatalogManager().addItem(entry.getKey(), entry.getValue());
-                }
+//                if (!isFreeOption(entry.getKey())) {
+//                    this.getCatalogManager().addItem(entry.getKey(), entry.getValue())
+//                }
             }
             this.getDeckController().notifyModelChanged();
         } else {
@@ -224,6 +239,8 @@ public final class CEditorCommanderDraftLimited extends CEditorLimited {
         this.getDeckManager().addItem(newCard, 1);
         if (!isFreeOption(newCard)) {
             this.getCatalogManager().removeItem(newCard, 1);
+            // Also remove from the actual sideboard so it doesn't reappear in the Main section catalog
+            getHumanDeck().getOrCreate(DeckSection.Sideboard).remove(newCard);
         }
         this.getDeckController().notifyModelChanged();
     }
@@ -232,6 +249,8 @@ public final class CEditorCommanderDraftLimited extends CEditorLimited {
         for (final PaperCard cmd : commanders) {
             if (!isFreeOption(cmd)) {
                 this.getCatalogManager().addItem(cmd, 1);
+                // Also restore to the actual sideboard so it reappears in the Main section catalog
+                getHumanDeck().getOrCreate(DeckSection.Sideboard).add(cmd);
             }
         }
     }
