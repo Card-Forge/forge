@@ -50,6 +50,7 @@
   - [Ownership](Development/ownership.md)
   - [Docker Container](docker-setup.md)
   - [Network Testing](Development/Network-Testing.md)
+  - [UI Guidelines](Development/UI-Guidelines.md)
 
 - Customization & Themes
   - [Skins](Skins.md)

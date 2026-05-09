@@ -1506,7 +1506,7 @@ public class FSkin {
         return mySkins;
     }
 
-    public static Iterable<String> getAllSkins() {
+    public static List<String> getAllSkins() {
         return allSkins;
     }
 
