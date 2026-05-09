@@ -20,7 +20,6 @@ import org.apache.commons.lang3.StringUtils;
 import forge.Singletons;
 import forge.game.spellability.StackItemView;
 import forge.gui.framework.EDocID;
-import forge.interfaces.IGameController;
 import forge.gui.framework.SDisplayUtil;
 import forge.localinstance.properties.ForgePreferences;
 import forge.gamemodes.match.YieldController;
@@ -272,25 +271,21 @@ public class KeyboardShortcuts {
             }
         };
 
-        final Action actAutoPassNoActions = new AbstractAction() {
+        final Action actStopAllYields = new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
+                if (matchUI == null) { return; }
+                YieldController.stopAllYields(matchUI.getGameController());
+            }
+        };
+
+        final Action actToggleApina = new AbstractAction() {
             @Override
             public void actionPerformed(final ActionEvent e) {
                 if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
                 if (matchUI == null) { return; }
                 YieldController.toggleAutoPassNoActions(matchUI.getGameController());
-            }
-        };
-
-        final Action actCancelYield = new AbstractAction() {
-            @Override
-            public void actionPerformed(final ActionEvent e) {
-                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
-                if (matchUI == null) { return; }
-                IGameController ctrl = matchUI.getGameController();
-                if (ctrl == null || ctrl.getYieldController() == null) { return; }
-                if (!ctrl.getYieldController().isYieldActive()) { return; }
-                // InputLockUI.selectButtonCancel calls clearActiveYieldAndDispatch as a side effect.
-                ctrl.selectButtonCancel();
             }
         };
 
@@ -308,8 +303,8 @@ public class KeyboardShortcuts {
         list.add(new Shortcut(FPref.SHORTCUT_AUTOYIELD_ALWAYS_YES, localizer.getMessage("lblSHORTCUT_AUTOYIELD_ALWAYS_YES"), actAutoYieldAndYes, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_AUTOYIELD_ALWAYS_NO, localizer.getMessage("lblSHORTCUT_AUTOYIELD_ALWAYS_NO"), actAutoYieldAndNo, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_YIELD_OPTIONS, localizer.getMessage("lblSHORTCUT_YIELD_OPTIONS"), actYieldOptions, am, im));
-        list.add(new Shortcut(FPref.SHORTCUT_YIELD_AUTO_PASS, localizer.getMessage("lblSHORTCUT_YIELD_AUTO_PASS"), actAutoPassNoActions, am, im));
-        list.add(new Shortcut(FPref.SHORTCUT_YIELD_CANCEL, localizer.getMessage("lblSHORTCUT_YIELD_CANCEL"), actCancelYield, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_YIELD_STOP_ALL, localizer.getMessage("lblSHORTCUT_YIELD_STOP_ALL"), actStopAllYields, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_YIELD_TOGGLE_APINA, localizer.getMessage("lblSHORTCUT_YIELD_TOGGLE_APINA"), actToggleApina, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_MACRO_RECORD, localizer.getMessage("lblSHORTCUT_MACRO_RECORD"), actMacroRecord, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_MACRO_NEXT_ACTION, localizer.getMessage("lblSHORTCUT_MACRO_NEXT_ACTION"), actMacroNextAction, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_CARD_ZOOM, localizer.getMessage("lblSHORTCUT_CARD_ZOOM"), actZoomCard, am, im));

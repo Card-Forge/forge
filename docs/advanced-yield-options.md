@@ -28,7 +28,7 @@ These features are highly configurable through the **Yield Settings** dialog, an
 
 ## Auto-Pass
 
-**Auto-Pass** is a persistent toggle (F2 on desktop, or the Auto-Pass icon on the dock) that automatically passes priority whenever you have no playable actions available. It's the simplest way to speed up games where you often have nothing to do — enable it once and Forge stops asking for input you'd only use to pass.
+**Auto-Pass** is a persistent toggle (F3 on desktop, or the Auto-Pass icon on the dock) that automatically passes priority whenever you have no playable actions available. It's the simplest way to speed up games where you often have nothing to do — enable it once and Forge stops asking for input you'd only use to pass.
 
 **How it works:**
 - When enabled, Forge scans your hand, battlefield, and external zones (graveyard, exile, command) for castable spells, playable lands, and activatable abilities.

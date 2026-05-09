@@ -463,6 +463,16 @@ public class YieldController {
         return newVal;
     }
 
+    /** Clear all transient yield state and turn APINA off if it's on — single unified stop action. */
+    public static void stopAllYields(IGameController ctrl) {
+        if (ctrl == null) return;
+        YieldController yc = ctrl.getYieldController();
+        if (yc != null) yc.clearActiveYieldAndDispatch();
+        if (FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS)) {
+            toggleAutoPassNoActions(ctrl);
+        }
+    }
+
     /** Activate auto-pass-until-end-of-turn for {@code local} via the unified envelope path. */
     public static void endTurn(IGameController ctrl, PlayerView local) {
         if (ctrl == null || local == null) return;
