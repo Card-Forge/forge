@@ -63,7 +63,7 @@ public class VGameMenu extends FDropDownMenu {
                 dialog.show();
             }
         }));
-        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblYieldOptions"), Forge.hdbuttons ? FSkinImage.HDYIELD : FSkinImage.WARNING, e -> {
+        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblYieldSettings"), Forge.hdbuttons ? FSkinImage.HDYIELD : FSkinImage.WARNING, e -> {
             new VYieldOptions().show();
         }));
         boolean autoPassOn = FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS);
