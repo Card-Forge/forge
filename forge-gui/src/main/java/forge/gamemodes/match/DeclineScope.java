@@ -2,8 +2,8 @@ package forge.gamemodes.match;
 
 /** How long a smart-suggestion decline suppresses the suggestion. Persisted via {@link Enum#name()}. */
 public enum DeclineScope {
-    NEVER("lblDeclScopeNever"),
-    ALWAYS("lblDeclScopeAlways"),
+    NEVER("lblNever"),
+    ALWAYS("lblAlways"),
     STACK("lblDeclScopeStack"),
     TURN("lblDeclScopeTurn");
 
