@@ -82,7 +82,10 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
             float y = 0;
             float height;
-            for (int i = 0; i < getNumPlayers(); i++) {
+            // Bound by panels.size() — panel.setMayEdit can call revalidate
+            // mid-loop in LobbyScreen.update() before all slots have panels.
+            int count = Math.min(getNumPlayers(), playerPanels.size());
+            for (int i = 0; i < count; i++) {
                 height = playerPanels.get(i).getPreferredHeight();
                 playerPanels.get(i).setBounds(0, y, visibleWidth, height);
                 y += height;
@@ -113,16 +116,19 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         }
         cbPlayerCount.setSelectedItem(2);
         cbPlayerCount.setChangedHandler(event -> {
-            int numPlayers = getNumPlayers();
-            while(lobby.getNumberOfSlots() < getNumPlayers()){
+            // Use the dropdown's selected value as the target slot count.
+            // getNumPlayers() now derives from lobby.getNumberOfSlots(), so
+            // using it here would make the while loops degenerate.
+            int target = cbPlayerCount.getSelectedItem();
+            while(lobby.getNumberOfSlots() < target){
                 lobby.addSlot();
             }
-            while(lobby.getNumberOfSlots() > getNumPlayers()){
+            while(lobby.getNumberOfSlots() > target){
                 lobby.removeSlot(lobby.getNumberOfSlots()-1);
             }
             for (int i = 0; i < MAX_PLAYERS; i++) {
                 if(i<playerPanels.size()) {
-                    playerPanels.get(i).setVisible(i < numPlayers);
+                    playerPanels.get(i).setVisible(i < target);
                 }
             }
             playersScroll.revalidate();
@@ -264,7 +270,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     }
 
     void updateLayoutForVariants() {
-        for (int i = 0; i < cbPlayerCount.getSelectedItem(); i++) {
+        for (int i = 0; i < getNumPlayers(); i++) {
             playerPanels.get(i).updateVariantControlsVisibility();
         }
         playersScroll.revalidate();
@@ -315,7 +321,10 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     }
 
     public int getNumPlayers() {
-        return cbPlayerCount.getSelectedItem();
+        // Mirror desktop's VLobby.activePlayersNum: the lobby is the source of
+        // truth. The dropdown is only a host-side control for editing this
+        // count — for clients, the server dictates it via setData.
+        return lobby != null ? lobby.getNumberOfSlots() : cbPlayerCount.getSelectedItem();
     }
     public void setNumPlayers(int numPlayers) {
         cbPlayerCount.setSelectedItem(numPlayers);
@@ -604,7 +613,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
         setStartButtonAvailability();
 
-        for (int i = 0; i < cbPlayerCount.getSelectedItem(); i++) {
+        for (int i = 0; i < MAX_PLAYERS; i++) {
             final boolean hasPanel = i < playerPanels.size();
             if (i < playerCount) {
                 // visible panels
@@ -617,13 +626,17 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 }
                 else {
                     panel = new PlayerPanel(this, allowNetworking, i, slot, lobby.mayEdit(i), lobby.hasControl());
+                    // Register the panel before initialize: deck-chooser
+                    // population fires selection callbacks synchronously,
+                    // some of which call back into updateDeck(i) -> playerPanels.get(i).
+                    // (Mirrors desktop's VLobby.update at lines 272-277.)
+                    playerPanels.add(panel);
+                    playersScroll.add(panel);
                     if (i == 2) {
                         panel.initialize(FPref.CONSTRUCTED_P3_DECK_STATE, FPref.COMMANDER_P3_DECK_STATE, FPref.OATHBREAKER_P3_DECK_STATE, FPref.TINY_LEADER_P3_DECK_STATE, FPref.BRAWL_P3_DECK_STATE, DeckType.COLOR_DECK);
                     } else if (i == 3) {
                         panel.initialize(FPref.CONSTRUCTED_P4_DECK_STATE, FPref.COMMANDER_P4_DECK_STATE, FPref.OATHBREAKER_P4_DECK_STATE, FPref.TINY_LEADER_P4_DECK_STATE, FPref.BRAWL_P4_DECK_STATE, DeckType.COLOR_DECK);
                     }
-                    playerPanels.add(panel);
-                    playersScroll.add(panel);
                     isNewPanel = true;
                 }
 
@@ -684,6 +697,21 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 playerPanels.get(i).setVisible(false);
             }
         }
+
+        // Sync the displayed dropdown value to the lobby for clients (the
+        // server dictates the slot count, so the host-style dropdown should
+        // mirror it cosmetically). Skipped on hosts to avoid re-firing the
+        // changedHandler's addSlot/removeSlot path.
+        if (!lobby.hasControl() && playerCount >= 2 && playerCount <= MAX_PLAYERS) {
+            cbPlayerCount.setSelectedItem(playerCount);
+        }
+
+        // Force the scroll pane to lay out newly added panels. Mid-loop
+        // panel.setMayEdit() only revalidates when getHeight() > 0, which is
+        // false for freshly created panels — so without this, slots added by
+        // a server-driven update (client receiving a larger lobby) stay
+        // invisible until some other event triggers layout.
+        playersScroll.revalidate();
     }
 
     @Override
@@ -692,7 +720,10 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     }
 
     private void updateDeck(final int playerIndex) {
-        if (playerIndex >= getNumPlayers()) { return; }
+        // Bound by panels.size() too — chooser-population callbacks during
+        // update() can fire updateDeck before the corresponding panel is
+        // registered, and the lobby's slot count may be ahead of the panel list.
+        if (playerIndex >= getNumPlayers() || playerIndex >= playerPanels.size()) { return; }
 
         PlayerPanel playerPanel = playerPanels.get(playerIndex);
         String deckName = "";
