@@ -653,7 +653,7 @@ public class FDeckChooser extends FScreen {
                         if (gameType == GameType.DeckManager) {
                             gameType = GameType.Constructed;
                         }
-                        final NetDeckArchiveStandard category = NetDeckArchiveStandard.selectAndLoad(gameType, null);
+                        final NetDeckArchiveStandard category = NetDeckArchiveStandard.selectAndLoad(gameType);
 
                         FThreads.invokeInEdtLater(() -> {
                             if (category == null) {
@@ -677,7 +677,7 @@ public class FDeckChooser extends FScreen {
                         if (gameType == GameType.DeckManager) {
                             gameType = GameType.Constructed;
                         }
-                        final NetDeckArchivePioneer category = NetDeckArchivePioneer.selectAndLoad(gameType, null);
+                        final NetDeckArchivePioneer category = NetDeckArchivePioneer.selectAndLoad(gameType);
 
                         FThreads.invokeInEdtLater(() -> {
                             if (category == null) {
@@ -701,7 +701,7 @@ public class FDeckChooser extends FScreen {
                         if (gameType == GameType.DeckManager) {
                             gameType = GameType.Constructed;
                         }
-                        final NetDeckArchiveModern category = NetDeckArchiveModern.selectAndLoad(gameType, null);
+                        final NetDeckArchiveModern category = NetDeckArchiveModern.selectAndLoad(gameType);
 
                         FThreads.invokeInEdtLater(() -> {
                             if (category == null) {
@@ -725,7 +725,7 @@ public class FDeckChooser extends FScreen {
                         if (gameType == GameType.DeckManager) {
                             gameType = GameType.Constructed;
                         }
-                        final NetDeckArchivePauper category = NetDeckArchivePauper.selectAndLoad(gameType, null);
+                        final NetDeckArchivePauper category = NetDeckArchivePauper.selectAndLoad(gameType);
 
                         FThreads.invokeInEdtLater(() -> {
                             if (category == null) {
@@ -749,7 +749,7 @@ public class FDeckChooser extends FScreen {
                         if (gameType == GameType.DeckManager) {
                             gameType = GameType.Constructed;
                         }
-                        final NetDeckArchiveLegacy category = NetDeckArchiveLegacy.selectAndLoad(gameType, null);
+                        final NetDeckArchiveLegacy category = NetDeckArchiveLegacy.selectAndLoad(gameType);
 
                         FThreads.invokeInEdtLater(() -> {
                             if (category == null) {
@@ -773,7 +773,7 @@ public class FDeckChooser extends FScreen {
                         if (gameType == GameType.DeckManager) {
                             gameType = GameType.Constructed;
                         }
-                        final NetDeckArchiveVintage category = NetDeckArchiveVintage.selectAndLoad(gameType, null);
+                        final NetDeckArchiveVintage category = NetDeckArchiveVintage.selectAndLoad(gameType);
 
                         FThreads.invokeInEdtLater(() -> {
                             if (category == null) {
@@ -797,7 +797,7 @@ public class FDeckChooser extends FScreen {
                         if (gameType == GameType.DeckManager) {
                             gameType = GameType.Constructed;
                         }
-                        final NetDeckArchiveBlock category = NetDeckArchiveBlock.selectAndLoad(gameType, null);
+                        final NetDeckArchiveBlock category = NetDeckArchiveBlock.selectAndLoad(gameType);
 
                         FThreads.invokeInEdtLater(() -> {
                             if (category == null) {

@@ -347,7 +347,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                 return;
             //needed for loading net decks
             FThreads.invokeInBackgroundThread(() -> {
-                final NetDeckArchiveStandard category = NetDeckArchiveStandard.selectAndLoad(lstDecks.getGameType(), null);
+                final NetDeckArchiveStandard category = NetDeckArchiveStandard.selectAndLoad(lstDecks.getGameType());
                 FThreads.invokeInEdtLater(() -> {
                     if (category == null) {
                         decksComboBox.setDeckType(selectedDeckType); //restore old selection if user cancels
@@ -369,7 +369,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                 return;
             //needed for loading net decks
             FThreads.invokeInBackgroundThread(() -> {
-                final NetDeckArchivePioneer category = NetDeckArchivePioneer.selectAndLoad(lstDecks.getGameType(), null);
+                final NetDeckArchivePioneer category = NetDeckArchivePioneer.selectAndLoad(lstDecks.getGameType());
                 FThreads.invokeInEdtLater(() -> {
                     if (category == null) {
                         decksComboBox.setDeckType(selectedDeckType); //restore old selection if user cancels
@@ -390,7 +390,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                 return;
             //needed for loading net decks
             FThreads.invokeInBackgroundThread(() -> {
-                final NetDeckArchiveModern category = NetDeckArchiveModern.selectAndLoad(lstDecks.getGameType(), null);
+                final NetDeckArchiveModern category = NetDeckArchiveModern.selectAndLoad(lstDecks.getGameType());
                 FThreads.invokeInEdtLater(() -> {
                     if (category == null) {
                         decksComboBox.setDeckType(selectedDeckType); //restore old selection if user cancels
@@ -411,7 +411,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                 return;
             //needed for loading net decks
             FThreads.invokeInBackgroundThread(() -> {
-                final NetDeckArchivePauper category = NetDeckArchivePauper.selectAndLoad(lstDecks.getGameType(), null);
+                final NetDeckArchivePauper category = NetDeckArchivePauper.selectAndLoad(lstDecks.getGameType());
                 FThreads.invokeInEdtLater(() -> {
                     if (category == null) {
                         decksComboBox.setDeckType(selectedDeckType); //restore old selection if user cancels
@@ -432,7 +432,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                 return;
             //needed for loading net decks
             FThreads.invokeInBackgroundThread(() -> {
-                final NetDeckArchiveLegacy category = NetDeckArchiveLegacy.selectAndLoad(lstDecks.getGameType(), null);
+                final NetDeckArchiveLegacy category = NetDeckArchiveLegacy.selectAndLoad(lstDecks.getGameType());
                 FThreads.invokeInEdtLater(() -> {
                     if (category == null) {
                         decksComboBox.setDeckType(selectedDeckType); //restore old selection if user cancels
@@ -453,7 +453,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                 return;
             //needed for loading net decks
             FThreads.invokeInBackgroundThread(() -> {
-                final NetDeckArchiveVintage category = NetDeckArchiveVintage.selectAndLoad(lstDecks.getGameType(), null);
+                final NetDeckArchiveVintage category = NetDeckArchiveVintage.selectAndLoad(lstDecks.getGameType());
                 FThreads.invokeInEdtLater(() -> {
                     if (category == null) {
                         decksComboBox.setDeckType(selectedDeckType); //restore old selection if user cancels
@@ -474,7 +474,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                 return;
             //needed for loading net decks
             FThreads.invokeInBackgroundThread(() -> {
-                final NetDeckArchiveBlock category = NetDeckArchiveBlock.selectAndLoad(lstDecks.getGameType(), null);
+                final NetDeckArchiveBlock category = NetDeckArchiveBlock.selectAndLoad(lstDecks.getGameType());
                 FThreads.invokeInEdtLater(() -> {
                     if (category == null) {
                         decksComboBox.setDeckType(selectedDeckType); //restore old selection if user cancels

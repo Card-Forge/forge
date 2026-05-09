@@ -6,6 +6,10 @@ import forge.localinstance.properties.ForgeConstants;
 public class NetDeckArchiveLegacy extends NetDeckStorageBase {
     public static final String PREFIX = "NET_ARCHIVE_LEGACY_DECK";
 
+    public static NetDeckArchiveLegacy selectAndLoad(GameType gameType) {
+        return selectAndLoad(gameType, null);
+    }
+
     public static NetDeckArchiveLegacy selectAndLoad(GameType gameType, String name) {
         return selectAndLoadArchive(gameType, name,
                 ForgeConstants.NET_ARCHIVE_LEGACY_DECKS_LIST_FILE, "Legacy", NetDeckArchiveLegacy::new);
