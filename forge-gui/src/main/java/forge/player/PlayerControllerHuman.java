@@ -1507,7 +1507,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             getPlayer().getView().setHasAvailableActions(AvailableActions.compute(getPlayer(), timeoutMs));
         }
 
-        // Game-thread only; no cross-thread races on the YIELD_SUPPRESS_AFTER_END flag
+        // yieldJustEndedFlag is read from the EDT (didYieldJustEnd); synchronized writer/reader pair handles visibility.
         boolean nowMayAutoPass = mayAutoPass();
         yieldController.noteMayAutoPassResult(nowMayAutoPass);
 

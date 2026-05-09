@@ -388,7 +388,6 @@ public class HostedMatch {
             }
             humanController.getGui().setGameSpeed(PlaybackSpeed.NORMAL);
             humanController.getYieldController().clearAutoYields();
-            humanController.getYieldController().resetForNewGame();
 
             //conceded
             if (humanCount > 0 || !GuiBase.getInterface().isLibgdxPort() || !isMatchOver) {

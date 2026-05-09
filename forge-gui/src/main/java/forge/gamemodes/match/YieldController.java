@@ -265,22 +265,6 @@ public class YieldController {
         activeStore().onGameEnd(owner.getGame() == null || owner.getGame().getView().isMatchOver());
     }
 
-    /** Clear all transient yield state so it doesn't carry into the next game of the match. */
-    public synchronized void resetForNewGame() {
-        autoPassUntilEOT = false;
-        autoPassUntilStackEmpty = false;
-        stackYieldRespectsInterrupts = false;
-        autoPassUntilMarker = null;
-        hasLeftMarker = false;
-        activationOnMarker = false;
-        declinedSuggestionTurn.clear();
-        lastSeenStackNonEmpty = false;
-        wasAutoPassingLastTick = false;
-        yieldJustEndedFlag = false;
-        autoPassInterrupted = false;
-        // prefOverrides intentionally kept — per-match, not per-game
-    }
-
     public boolean getDisableAutoYields() {
         return activeStore().isDisabled();
     }
