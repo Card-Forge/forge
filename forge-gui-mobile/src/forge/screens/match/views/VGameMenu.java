@@ -66,8 +66,7 @@ public class VGameMenu extends FDropDownMenu {
         addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblYieldSettings"), Forge.hdbuttons ? FSkinImage.HDYIELD : FSkinImage.WARNING, e -> {
             new VYieldOptions().show();
         }));
-        boolean autoPassOn = FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS);
-        String autoPassLabel = Forge.getLocalizer().getMessage(autoPassOn ? "lblYieldBtnAutoPassOn" : "lblYieldBtnAutoPass");
+        String autoPassLabel = Forge.getLocalizer().getMessage(FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS) ? "lblYieldBtnAutoPassOn" : "lblYieldBtnAutoPass");
         addItem(new FMenuItem(autoPassLabel, Forge.hdbuttons ? FSkinImage.HDYIELD : FSkinImage.WARNING, e -> {
             YieldController.toggleAutoPassNoActions(MatchController.instance.getGameController());
         }));

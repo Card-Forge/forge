@@ -390,10 +390,10 @@ public class HostedMatch {
             humanController.getYieldController().clearAutoYields();
             humanController.getYieldController().resetForNewGame();
 
-            if (humanCount > 0) //conceded
+            //conceded
+            if (humanCount > 0 || !GuiBase.getInterface().isLibgdxPort() || !isMatchOver) {
                 humanController.getGui().afterGameEnd();
-            else if (!GuiBase.getInterface().isLibgdxPort()||!isMatchOver)
-                humanController.getGui().afterGameEnd();
+            }
             humanController.getGui().updateDayTime(null);
         }
         humanControllers.clear();

@@ -83,12 +83,26 @@ public class YieldController {
         this.owner = owner;
     }
 
+    public synchronized String getStringPref(FPref pref) {
+        String override = prefOverrides.get(pref);
+        return override != null ? override : FModel.getPreferences().getPref(pref);
+    }
+    public boolean getBoolPref(FPref pref) {
+        return Boolean.parseBoolean(getStringPref(pref));
+    }
+    public synchronized void setPref(FPref pref, String value) {
+        prefOverrides.put(pref, value);
+    }
+
+    public DeclineScope getDeclineScope(FPref pref) {
+        return DeclineScope.fromPref(getStringPref(pref));
+    }
+
     public boolean isSkippingPhase(PlayerView turnPlayer, PhaseType phase) {
         EnumSet<PhaseType> set = skipPhases.get(turnPlayer);
         return set != null && set.contains(phase);
     }
     public void setSkipPhase(PlayerView turnPlayer, PhaseType phase, boolean skip) {
-        if (turnPlayer == null || phase == null) return;
         EnumSet<PhaseType> set = skipPhases.computeIfAbsent(turnPlayer, k -> EnumSet.noneOf(PhaseType.class));
         if (skip) set.add(phase);
         else set.remove(phase);
@@ -122,31 +136,6 @@ public class YieldController {
         }
         this.autoPassUntilEOT = active;
     }
-
-    public synchronized String getStringPref(FPref pref) {
-        String override = prefOverrides.get(pref);
-        return override != null ? override : FModel.getPreferences().getPref(pref);
-    }
-    public boolean getBoolPref(FPref pref) {
-        return Boolean.parseBoolean(getStringPref(pref));
-    }
-    public synchronized void setPref(FPref pref, String value) {
-        prefOverrides.put(pref, value);
-    }
-
-    public DeclineScope getDeclineScope(FPref pref) {
-        return DeclineScope.fromPref(getStringPref(pref));
-    }
-
-    /** Read effective values from FModel for every synced yield FPref so the host's proxy can be seeded with the full set, not just prefs the user has touched this session. */
-    public Map<FPref, String> snapshotPrefs() {
-        ForgePreferences prefs = FModel.getPreferences();
-        EnumMap<FPref, String> out = new EnumMap<>(FPref.class);
-        for (FPref pref : SYNCED_PREFS) out.put(pref, prefs.getPref(pref));
-        return out;
-    }
-
-    // setMarker/clearMarker are mutated from EDT (right-click), Netty (wire receive), and game thread.
     public synchronized void setMarker(PlayerView phaseOwner, PhaseType phase, boolean atOrPastAtClick) {
         autoPassUntilEOT = false;
         autoPassUntilStackEmpty = false;
@@ -273,8 +262,7 @@ public class YieldController {
             localStore.clear();
             return;
         }
-        boolean matchOver = owner.getGame() == null || owner.getGame().getView().isMatchOver();
-        activeStore().onGameEnd(matchOver);
+        activeStore().onGameEnd(owner.getGame() == null || owner.getGame().getView().isMatchOver());
     }
 
     /** Clear all transient yield state so it doesn't carry into the next game of the match. */
@@ -356,11 +344,14 @@ public class YieldController {
             else cardTriggers.put(e.getKey(), e.getValue());
         }
 
+        EnumMap<FPref, String> prefs = new EnumMap<>(FPref.class);
+        for (FPref pref : SYNCED_PREFS) prefs.put(pref, FModel.getPreferences().getPref(pref));
+
         return new YieldStateSnapshot(
                 cardYields, abilityYields,
                 cardTriggers, abilityTriggers,
                 getDisableAutoYields(), getDisableAutoTriggers(),
-                skipPhases, snapshotPrefs());
+                skipPhases, prefs);
     }
 
     /** Atomic seed of client-persistent state at game start or reconnection. Cache mode only. */
@@ -379,7 +370,7 @@ public class YieldController {
         skipPhases.clear();
         skipPhases.putAll(snap.skipPhases());
         prefOverrides.clear();
-        if (snap.prefOverrides() != null) prefOverrides.putAll(snap.prefOverrides());
+        prefOverrides.putAll(snap.prefOverrides());
     }
 
     /**
@@ -472,10 +463,9 @@ public class YieldController {
     public static void toggleAutoPassOrStopAll(IGameController ctrl) {
         if (ctrl == null) return;
         YieldController yc = ctrl.getYieldController();
-        boolean transientActive = yc != null && yc.isYieldActive();
         boolean apinaOn = FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS);
-        if (transientActive || apinaOn) {
-            if (yc != null) yc.clearActiveYieldAndDispatch();
+        if (yc.isYieldActive() || apinaOn) {
+            yc.clearActiveYieldAndDispatch();
             if (apinaOn) toggleAutoPassNoActions(ctrl);
         } else {
             toggleAutoPassNoActions(ctrl);
@@ -529,18 +519,15 @@ public class YieldController {
         }
     }
 
-    /** True when interrupt classifiers should run — an interruptible yield is active, or APINA is active with respects-interrupts on. */
     private boolean shouldEvaluateInterrupts() {
         if (isInterruptibleYieldActive()) return true;
-        return getBoolPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS)
-                && getBoolPref(FPref.YIELD_AUTO_PASS_RESPECTS_INTERRUPTS);
+        return getBoolPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS) && getBoolPref(FPref.YIELD_AUTO_PASS_RESPECTS_INTERRUPTS);
     }
 
     /** Apply an interrupt: clear any interruptible yield and pause APINA for one prompt. Either, both, or neither may apply. */
     public synchronized void applyInterrupt() {
         if (isInterruptibleYieldActive()) clearActiveYieldAndDispatch();
-        if (getBoolPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS)
-                && getBoolPref(FPref.YIELD_AUTO_PASS_RESPECTS_INTERRUPTS)) {
+        if (getBoolPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS) && getBoolPref(FPref.YIELD_AUTO_PASS_RESPECTS_INTERRUPTS)) {
             autoPassInterrupted = true;
         }
     }
@@ -552,10 +539,9 @@ public class YieldController {
     private boolean autoPassInterrupted = false;
 
     public synchronized void onPriorityReceived(boolean stackNonEmpty) {
-        if (lastSeenStackNonEmpty && !stackNonEmpty) {
-            if (getDeclineScope(FPref.YIELD_DECLINE_SCOPE_STACK_YIELD) == DeclineScope.STACK) {
-                declinedSuggestionTurn.remove(SuggestionType.STACK_YIELD);
-            }
+        if (lastSeenStackNonEmpty && !stackNonEmpty &&
+                getDeclineScope(FPref.YIELD_DECLINE_SCOPE_STACK_YIELD) == DeclineScope.STACK) {
+            declinedSuggestionTurn.remove(SuggestionType.STACK_YIELD);
         }
         lastSeenStackNonEmpty = stackNonEmpty;
     }

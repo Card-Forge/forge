@@ -493,7 +493,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         YieldController yielding = null;
         for (IGameController c : gameControllers.values()) {
             YieldController yc = c.getYieldController();
-            if (yc != null && yc.shouldAutoYield()) {
+            if (yc.shouldAutoYield()) {
                 yielding = yc;
                 break;
             }

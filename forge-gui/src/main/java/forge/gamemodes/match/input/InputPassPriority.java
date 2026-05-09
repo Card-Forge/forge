@@ -179,10 +179,6 @@ public class InputPassPriority extends InputSyncronizedBase {
         return getController().getGui().getGameView();
     }
 
-    private PlayerView getPlayerView() {
-        return getOwner();
-    }
-
     private boolean checkHasAvailableActions() {
         Player player = getController().getPlayer();
         if (player == null) return false;
@@ -198,25 +194,18 @@ public class InputPassPriority extends InputSyncronizedBase {
         return !checkHasAvailableActions();
     }
 
-    /** Stack non-empty disqualifies; SUPPRESS_ON_OWN_TURN suppresses on own turn (after first round). */
-    private boolean isValidSuggestionContext(GameView gv, PlayerView pv) {
+    private boolean shouldShowNoActionsPrompt() {
+        GameView gv = getGameView();
+        PlayerView pv = getOwner();
+        if (gv == null || pv == null) return false;
         FCollectionView<StackItemView> stack = gv.getStack();
         if (stack != null && !stack.isEmpty()) return false;
         PlayerView currentTurn = gv.getPlayerTurn();
         if (currentTurn != null && currentTurn.equals(pv)) {
             // Always suppress on player's first turn (no lands/mana yet)
-            int numPlayers = gv.getPlayers().size();
-            if (gv.getTurn() <= numPlayers) return false;
+            if (gv.getTurn() <= gv.getPlayers().size()) return false;
             if (getController().getYieldController().getBoolPref(FPref.YIELD_SUPPRESS_ON_OWN_TURN)) return false;
         }
-        return true;
-    }
-
-    private boolean shouldShowNoActionsPrompt() {
-        GameView gv = getGameView();
-        PlayerView pv = getPlayerView();
-        if (gv == null || pv == null) return false;
-        if (!isValidSuggestionContext(gv, pv)) return false;
         return !checkHasAvailableActions();
     }
 
@@ -243,7 +232,7 @@ public class InputPassPriority extends InputSyncronizedBase {
             pendingSuggestion = null;
             pendingSuggestionMessage = null;
 
-            PlayerView self = getPlayerView();
+            PlayerView self = getOwner();
             YieldController yc = getController().getYieldController();
             if (accepted == SuggestionType.STACK_YIELD) {
                 yc.setAutoPassUntilStackEmpty(true, true);
