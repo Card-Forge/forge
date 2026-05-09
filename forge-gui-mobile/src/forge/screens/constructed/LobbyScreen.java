@@ -82,7 +82,9 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         protected ScrollBounds layoutAndGetScrollBounds(float visibleWidth, float visibleHeight) {
             float y = 0;
             float height;
-            for (int i = 0; i < getNumPlayers(); i++) {
+            // setMayEdit can revalidate while update() is still adding panels.
+            int count = Math.min(getNumPlayers(), playerPanels.size());
+            for (int i = 0; i < count; i++) {
                 height = playerPanels.get(i).getPreferredHeight();
                 playerPanels.get(i).setBounds(0, y, visibleWidth, height);
                 y += height;
@@ -113,16 +115,17 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         }
         cbPlayerCount.setSelectedItem(2);
         cbPlayerCount.setChangedHandler(event -> {
-            int numPlayers = getNumPlayers();
-            while(lobby.getNumberOfSlots() < getNumPlayers()){
+            // The dropdown is the user's target; getNumPlayers() reads from the lobby and would loop forever.
+            int target = cbPlayerCount.getSelectedItem();
+            while(lobby.getNumberOfSlots() < target){
                 lobby.addSlot();
             }
-            while(lobby.getNumberOfSlots() > getNumPlayers()){
+            while(lobby.getNumberOfSlots() > target){
                 lobby.removeSlot(lobby.getNumberOfSlots()-1);
             }
             for (int i = 0; i < MAX_PLAYERS; i++) {
                 if(i<playerPanels.size()) {
-                    playerPanels.get(i).setVisible(i < numPlayers);
+                    playerPanels.get(i).setVisible(i < target);
                 }
             }
             playersScroll.revalidate();
@@ -264,7 +267,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     }
 
     void updateLayoutForVariants() {
-        for (int i = 0; i < cbPlayerCount.getSelectedItem(); i++) {
+        for (int i = 0; i < getNumPlayers(); i++) {
             playerPanels.get(i).updateVariantControlsVisibility();
         }
         playersScroll.revalidate();
@@ -315,7 +318,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     }
 
     public int getNumPlayers() {
-        return cbPlayerCount.getSelectedItem();
+        return lobby != null ? lobby.getNumberOfSlots() : cbPlayerCount.getSelectedItem();
     }
     public void setNumPlayers(int numPlayers) {
         cbPlayerCount.setSelectedItem(numPlayers);
@@ -604,7 +607,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
         setStartButtonAvailability();
 
-        for (int i = 0; i < cbPlayerCount.getSelectedItem(); i++) {
+        for (int i = 0; i < MAX_PLAYERS; i++) {
             final boolean hasPanel = i < playerPanels.size();
             if (i < playerCount) {
                 // visible panels
@@ -617,13 +620,14 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 }
                 else {
                     panel = new PlayerPanel(this, allowNetworking, i, slot, lobby.mayEdit(i), lobby.hasControl());
+                    // Register before initialize: deck-chooser populate fires onSelectionChange synchronously, which can recurse into updateDeck(i).
+                    playerPanels.add(panel);
+                    playersScroll.add(panel);
                     if (i == 2) {
                         panel.initialize(FPref.CONSTRUCTED_P3_DECK_STATE, FPref.COMMANDER_P3_DECK_STATE, FPref.OATHBREAKER_P3_DECK_STATE, FPref.TINY_LEADER_P3_DECK_STATE, FPref.BRAWL_P3_DECK_STATE, DeckType.COLOR_DECK);
                     } else if (i == 3) {
                         panel.initialize(FPref.CONSTRUCTED_P4_DECK_STATE, FPref.COMMANDER_P4_DECK_STATE, FPref.OATHBREAKER_P4_DECK_STATE, FPref.TINY_LEADER_P4_DECK_STATE, FPref.BRAWL_P4_DECK_STATE, DeckType.COLOR_DECK);
                     }
-                    playerPanels.add(panel);
-                    playersScroll.add(panel);
                     isNewPanel = true;
                 }
 
@@ -684,6 +688,14 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 playerPanels.get(i).setVisible(false);
             }
         }
+
+        // Cosmetic-only sync for clients; skipped on hosts to avoid re-firing the changedHandler's add/remove path.
+        if (!lobby.hasControl() && playerCount >= 2 && playerCount <= MAX_PLAYERS) {
+            cbPlayerCount.setSelectedItem(playerCount);
+        }
+
+        // setMayEdit's revalidate is gated on getHeight() > 0, which fresh panels don't satisfy.
+        playersScroll.revalidate();
     }
 
     @Override
@@ -692,7 +704,8 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     }
 
     private void updateDeck(final int playerIndex) {
-        if (playerIndex >= getNumPlayers()) { return; }
+        // Chooser-populate callbacks can fire before the panel is registered.
+        if (playerIndex >= getNumPlayers() || playerIndex >= playerPanels.size()) { return; }
 
         PlayerPanel playerPanel = playerPanels.get(playerIndex);
         String deckName = "";
