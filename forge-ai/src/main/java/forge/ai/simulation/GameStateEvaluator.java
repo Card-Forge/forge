@@ -13,7 +13,8 @@ import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.zone.ZoneType;
-
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,6 +25,7 @@ import static java.lang.Math.min;
 public class GameStateEvaluator {
     private boolean debugging = false;
     private SimulationCreatureEvaluator eval = new SimulationCreatureEvaluator();
+    private Map<Integer, CombatSimResult> combatCache = new HashMap<>();
 
     public void setDebugging(boolean debugging) {
         this.debugging = debugging;
@@ -50,6 +52,12 @@ public class GameStateEvaluator {
             return null;
         }
 
+        int gameHash = evalGame.hashCode();
+        CombatSimResult cached = combatCache.get(gameHash);
+        if (cached != null) {
+            return cached;
+        }
+
         GameCopier copier = new GameCopier(evalGame);
         Game gameCopy = copier.makeCopy(null, aiPlayer);
 
@@ -57,6 +65,7 @@ public class GameStateEvaluator {
         CombatSimResult result = new CombatSimResult();
         result.copier = copier;
         result.gameCopy = gameCopy;
+        combatCache.put(gameHash, result);
         return result;
     }
 

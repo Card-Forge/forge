@@ -11,8 +11,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.MutablePair;
@@ -105,11 +104,15 @@ public class ComputerUtilCard {
      * @return a {@link forge.game.card.Card} object.
      */
     public static Card getBestArtifactAI(final List<Card> list) {
-        // get biggest Artifact
-        return list.stream()
-                .filter(CardPredicates.ARTIFACTS)
-                .max(Comparator.comparing(Card::getCMC))
-                .orElse(null);
+        Card best = null;
+        for (Card c : list) {
+            if (c.isArtifact()) {
+                if (best == null || c.getCMC() > best.getCMC()) {
+                    best = c;
+                }
+            }
+        }
+        return best;
     }
 
     /**
@@ -119,11 +122,15 @@ public class ComputerUtilCard {
      * @return best Planeswalker
      */
     public static Card getBestPlaneswalkerAI(final List<Card> list) {
-        // no AI logic, just return most expensive
-        return list.stream()
-                .filter(CardPredicates.PLANESWALKERS)
-                .max(Comparator.comparing(Card::getCMC))
-                .orElse(null);
+        Card best = null;
+        for (Card c : list) {
+            if (c.isPlaneswalker()) {
+                if (best == null || c.getCMC() > best.getCMC()) {
+                    best = c;
+                }
+            }
+        }
+        return best;
     }
 
     /**
@@ -133,11 +140,15 @@ public class ComputerUtilCard {
      * @return best Planeswalker
      */
     public static Card getWorstPlaneswalkerAI(final List<Card> list) {
-        // no AI logic, just return least expensive
-        return list.stream()
-                .filter(CardPredicates.PLANESWALKERS)
-                .min(Comparator.comparing(Card::getCMC))
-                .orElse(null);
+        Card worst = null;
+        for (Card c : list) {
+            if (c.isPlaneswalker()) {
+                if (worst == null || c.getCMC() < worst.getCMC()) {
+                    worst = c;
+                }
+            }
+        }
+        return worst;
     }
 
     public static Card getBestPlaneswalkerToDamage(final List<Card> pws) {
@@ -203,13 +214,17 @@ public class ComputerUtilCard {
      * @return a {@link forge.game.card.Card} object.
      */
     public static Card getBestEnchantmentAI(final List<Card> list, final SpellAbility spell, final boolean targeted) {
-        Stream<Card> cardStream = list.stream().filter(CardPredicates.ENCHANTMENTS);
-        if (targeted) {
-            cardStream = cardStream.filter(c -> c.canBeTargetedBy(spell));
+        Card best = null;
+        for (Card c : list) {
+            if (c.isEnchantment()) {
+                if (!targeted || c.canBeTargetedBy(spell)) {
+                    if (best == null || c.getCMC() > best.getCMC()) {
+                        best = c;
+                    }
+                }
+            }
         }
-
-        // get biggest Enchantment
-        return cardStream.max(Comparator.comparing(Card::getCMC)).orElse(null);
+        return best;
     }
 
     /**
@@ -266,16 +281,23 @@ public class ComputerUtilCard {
         }
         if (iminBL == Integer.MAX_VALUE) {
             // All basic lands have no basic land type. Just return something
-            return land.stream().filter(CardPredicates.UNTAPPED).findFirst().orElse(land.get(0));
+            for (Card l : land) {
+                if (l.isUntapped()) return l;
+            }
+            return land.get(0);
         }
 
         final List<Card> bLand = CardLists.getType(land, sminBL);
 
-        return bLand.stream()
-                .filter(CardPredicates.UNTAPPED)
-                .findFirst()
-                // TODO potentially risky if simulation mode currently able to reach this from triggers
-                .orElseGet(() -> Aggregates.random(bLand)); // random tapped land of least represented type
+        Card untapped = null;
+        for (Card l : bLand) {
+            if (l.isUntapped()) {
+                untapped = l;
+                break;
+            }
+        }
+        // TODO potentially risky if simulation mode currently able to reach this from triggers
+        return untapped != null ? untapped : Aggregates.random(bLand);
     }
 
     public static Card getBestLandToRemoveAI(final Player ai, final Iterable<Card> list, final SpellAbility removal) {
@@ -284,9 +306,16 @@ public class ComputerUtilCard {
             return null;
         }
 
-        return lands.stream()
-                .max(Comparator.comparingInt(c -> evaluateLandRemovalPriority(ai, c, removal)))
-                .orElse(null);
+        Card best = null;
+        int maxScore = Integer.MIN_VALUE;
+        for (Card c : lands) {
+            int score = evaluateLandRemovalPriority(ai, c, removal);
+            if (score > maxScore) {
+                maxScore = score;
+                best = c;
+            }
+        }
+        return best;
     }
 
     public static int evaluateLandRemovalPriority(final Player ai, final Card land, final SpellAbility removal) {
@@ -808,8 +837,11 @@ public class ComputerUtilCard {
     }
 
     public static Map<String, Integer> evaluateCreatureListByName(final CardCollectionView list) {
-        // Compute value for each possible target
-        return list.stream().collect(Collectors.groupingBy(Card::getName, Collectors.summingInt(c -> evaluateCreature(c))));
+        Map<String, Integer> map = new java.util.HashMap<>();
+        for (Card c : list) {
+            map.merge(c.getName(), evaluateCreature(c), Integer::sum);
+        }
+        return map;
     }
 
     public static boolean doesCreatureAttackAI(final Player aiPlayer, final Card card) {
@@ -956,9 +988,19 @@ public class ComputerUtilCard {
             return "";
         }
 
-        return list.stream()
-                .collect(Collectors.groupingBy(Card::getName, Collectors.counting()))
-                .entrySet().stream().max(Entry.comparingByValue()).orElse(Map.entry("", 0l)).getKey();
+        java.util.Map<String, Long> counts = new java.util.HashMap<>();
+        for (Card c : list) {
+            counts.put(c.getName(), counts.getOrDefault(c.getName(), 0L) + 1L);
+        }
+        String bestName = "";
+        long maxCount = 0;
+        for (java.util.Map.Entry<String, Long> entry : counts.entrySet()) {
+            if (entry.getValue() > maxCount) {
+                maxCount = entry.getValue();
+                bestName = entry.getKey();
+            }
+        }
+        return bestName;
     }
 
     public static String getMostProminentType(final CardCollectionView list, final Collection<String> valid) {
@@ -1045,11 +1087,25 @@ public class ComputerUtilCard {
             return null;
         }
 
-        Map.Entry<CardType.CoreType, Long> result = list.stream().flatMap(c -> c.getType().getCoreTypes().stream())
-                .filter(valid::contains)
-                .collect(Collectors.groupingBy(s -> s, Collectors.counting()))
-                .entrySet().stream().max(Entry.comparingByValue()).orElse(null);
-        return result == null ? null : result.getKey(); // Map.entry doesn't like null key
+        java.util.Map<CardType.CoreType, Long> counts = new java.util.HashMap<>();
+        for (Card c : list) {
+            for (CardType.CoreType ct : c.getType().getCoreTypes()) {
+                if (valid.contains(ct)) {
+                    counts.put(ct, counts.getOrDefault(ct, 0L) + 1L);
+                }
+            }
+        }
+        
+        CardType.CoreType maxType = null;
+        long maxCount = 0;
+        for (java.util.Map.Entry<CardType.CoreType, Long> entry : counts.entrySet()) {
+            if (entry.getValue() > maxCount) {
+                maxCount = entry.getValue();
+                maxType = entry.getKey();
+            }
+        }
+        
+        return maxType;
     }
 
     /**
@@ -1552,7 +1608,15 @@ public class ComputerUtilCard {
             //1. become attacker for whatever reason
             if (!doesCreatureAttackAI(ai, c) && doesSpecifiedCreatureAttackAI(ai, pumped)) {
                 float threat = 1.0f * ComputerUtilCombat.damageIfUnblocked(pumped, opp, combat, true) / opp.getLife();
-                if (oppCreatures.stream().noneMatch(CardPredicates.possibleBlockers(pumped))) {
+                boolean noneCanBlockPumped = true;
+                Predicate<Card> pumpedBlocker = CardPredicates.possibleBlockers(pumped);
+                for (Card oppC : oppCreatures) {
+                    if (pumpedBlocker.test(oppC)) {
+                        noneCanBlockPumped = false;
+                        break;
+                    }
+                }
+                if (noneCanBlockPumped) {
                     threat *= 2;
                 }
                 if (c.getNetPower() == 0 && c == sa.getHostCard() && power > 0) {
@@ -1604,9 +1668,24 @@ public class ComputerUtilCard {
             }
 
             //3. grant evasive
-            if (oppCreatures.stream().anyMatch(CardPredicates.possibleBlockers(c))) {
-                if (oppCreatures.stream().noneMatch(CardPredicates.possibleBlockers(pumped))
-                        && doesSpecifiedCreatureAttackAI(ai, pumped)) {
+            boolean anyCanBlockC = false;
+            Predicate<Card> blockerForC = CardPredicates.possibleBlockers(c);
+            for (Card oppC : oppCreatures) {
+                if (blockerForC.test(oppC)) {
+                    anyCanBlockC = true;
+                    break;
+                }
+            }
+            if (anyCanBlockC) {
+                boolean noneCanBlockPumped2 = true;
+                Predicate<Card> pumpedBlocker2 = CardPredicates.possibleBlockers(pumped);
+                for (Card oppC : oppCreatures) {
+                    if (pumpedBlocker2.test(oppC)) {
+                        noneCanBlockPumped2 = false;
+                        break;
+                    }
+                }
+                if (noneCanBlockPumped2 && doesSpecifiedCreatureAttackAI(ai, pumped)) {
                     chance += 0.5f * ComputerUtilCombat.damageIfUnblocked(pumped, opp, combat, true) / opp.getLife();
                 }
             }

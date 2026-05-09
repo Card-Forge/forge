@@ -45,7 +45,7 @@ import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
-import java.util.stream.Collectors;
+
 
 public class ComputerUtilMana {
     private final static boolean DEBUG_MANA_PAYMENT = false;
@@ -144,7 +144,14 @@ public class ComputerUtilMana {
         }
 
         String[] colorsMostCommon;
-        if (manaAbilityMap.keySet().stream().anyMatch(ManaCostShard::isGeneric)) {
+        boolean hasGeneric = false;
+        for (ManaCostShard shard : manaAbilityMap.keySet()) {
+            if (shard.isGeneric()) {
+                hasGeneric = true;
+                break;
+            }
+        }
+        if (hasGeneric) {
             // early tempo is more important so we only look at hand here
             CardCollection hand = new CardCollection(sa.getActivatingPlayer().getCardsIn(ZoneType.Hand));
             hand.remove(sa.getHostCard());
@@ -152,10 +159,13 @@ public class ComputerUtilMana {
             Integer[] orderedColorsIdx = {0, 1, 2, 3, 4};
             // order common colors to the front, increases chance AI can play a second spell after
             Arrays.sort(orderedColorsIdx, Comparator.comparingInt(o -> stats.maxPips[(int) o]).reversed());
-            colorsMostCommon = Arrays.stream(orderedColorsIdx)
-                    .filter(idx -> stats.maxPips[idx] > 0)
-                    .map(idx -> MagicColor.toShortString(MagicColor.WUBRG[idx]))
-                    .toArray(String[]::new);
+            List<String> mostCommonList = new ArrayList<>();
+            for (Integer idx : orderedColorsIdx) {
+                if (stats.maxPips[idx] > 0) {
+                    mostCommonList.add(MagicColor.toShortString(MagicColor.WUBRG[idx]));
+                }
+            }
+            colorsMostCommon = mostCommonList.toArray(new String[0]);
         } else {
             colorsMostCommon = null;
         }
@@ -302,9 +312,12 @@ public class ComputerUtilMana {
                     break;
                 case "NotSameCard":
                     String hostName = sa.getHostCard().getName();
-                    maList = filteredList.stream()
-                            .filter(saPay -> !saPay.getHostCard().getName().equals(hostName))
-                            .collect(Collectors.toList());
+                    maList = new ArrayList<>();
+                    for (SpellAbility saPay : filteredList) {
+                        if (!saPay.getHostCard().getName().equals(hostName)) {
+                            maList.add(saPay);
+                        }
+                    }
                     break;
                 default:
                     break;
@@ -799,7 +812,14 @@ public class ComputerUtilMana {
                         break; // unwise to pay
                     } else if (sa.getParam("AIPhyrexianPayment").startsWith("OnFatalDamage.")) {
                         int dmg = Integer.parseInt(sa.getParam("AIPhyrexianPayment").substring(14));
-                        if (ai.getOpponents().stream().noneMatch(PlayerPredicates.lifeLessOrEqualTo(dmg))) {
+                        boolean noneCanBeFinished = true;
+                        for (Player p : ai.getOpponents()) {
+                            if (PlayerPredicates.lifeLessOrEqualTo(dmg).test(p)) {
+                                noneCanBeFinished = false;
+                                break;
+                            }
+                        }
+                        if (noneCanBeFinished) {
                             break; // no one to finish with the gut shot
                         }
                     }

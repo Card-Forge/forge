@@ -15,6 +15,7 @@ import forge.game.spellability.TargetChoices;
 import forge.util.collect.FCollectionView;
 
 import java.util.*;
+import java.util.IdentityHashMap;
 
 public class GameSimulator {
     public static boolean COPY_STACK = false;
@@ -26,6 +27,7 @@ public class GameSimulator {
     private List<String> origLines;
     private Score origScore;
     private SpellAbilityChoicesIterator interceptor;
+    private IdentityHashMap<SpellAbility, Score[]> saCache = new IdentityHashMap<>();
 
     public GameSimulator(SimulationController controller, Game origGame, Player origAiPlayer, PhaseType advanceToPhase) {
         this.controller = controller;
@@ -128,6 +130,10 @@ public class GameSimulator {
         if (sa.getHostCard().getGame().equals(this.simGame)) {
             return sa;
         }
+        SpellAbility mapped = copier.find(sa);
+        if (mapped != null) {
+            return mapped;
+        }
         Card origHostCard = sa.getHostCard();
         Card hostCard = (Card) copier.find(origHostCard);
         String desc = sa.getDescription();
@@ -167,6 +173,11 @@ public class GameSimulator {
         return simulateSpellAbility(origSa, this.eval, resolve);
     }
     public Score simulateSpellAbility(SpellAbility origSa, GameStateEvaluator eval, boolean resolve) {
+        Score[] cached = saCache.get(origSa);
+        int idx = resolve ? 1 : 0;
+        if (cached != null && cached[idx] != null) {
+            return cached[idx];
+        }
         SpellAbility sa;
         if (origSa.isLandAbility()) {
             Card hostCard = (Card) copier.find(origSa.getHostCard());
@@ -247,6 +258,8 @@ public class GameSimulator {
             printDiff(origLines, simLines);
         }
         controller.possiblyCacheResult(score, origSa);
+        Score[] cacheEntry = saCache.computeIfAbsent(origSa, k -> new Score[2]);
+        cacheEntry[idx] = score;
         if (controller.shouldRecurse() && !simGame.isGameOver()) {
             controller.push(sa, score, this);
             SpellAbilityPicker sim = new SpellAbilityPicker(simGame, aiPlayer);

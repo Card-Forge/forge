@@ -162,17 +162,41 @@ public class SpellAbilityPicker {
         plan = bestPlan;
     }
 
+    private String getSaSignature(SpellAbility sa) {
+        Card c = sa.getHostCard();
+        return sa.getApi() + "|" + c.getName() + "|" + sa.getDescription() + "|" + 
+               (c.getZone() != null ? c.getZone().getZoneType() : "null") + "|" + 
+               c.isTapped() + "|" + c.isSick() + "|" + c.getCounters().isEmpty() + "|" + c.getEnchantedBy().isEmpty();
+    }
+
     private SpellAbility chooseSpellAbilityToPlayImpl(SimulationController controller, List<SpellAbility> candidateSAs, Score origGameScore, PhaseType phase) {
         long startTime = System.currentTimeMillis();
 
         SpellAbility bestSa = null;
         Score bestSaValue = origGameScore;
         print("Evaluating... (orig score = " + origGameScore +  ")");
+        
+        java.util.Map<String, Score> evaluatedSemanticSAs = new java.util.HashMap<>();
+
         for (int i = 0; i < candidateSAs.size(); i++) {
-            Score value = evaluateSa(controller, phase, candidateSAs, i);
+            SpellAbility sa = candidateSAs.get(i);
+            String signature = getSaSignature(sa);
+            
+            Score value;
+            if (evaluatedSemanticSAs.containsKey(signature)) {
+                value = evaluatedSemanticSAs.get(signature);
+                // We still need to record that this SA was evaluated (with the cached score) 
+                // but we skip the actual deep simulation.
+                controller.evaluateSpellAbility(candidateSAs, i);
+                controller.doneEvaluating(value);
+            } else {
+                value = evaluateSa(controller, phase, candidateSAs, i);
+                evaluatedSemanticSAs.put(signature, value);
+            }
+            
             if (value.value > bestSaValue.value) {
                 bestSaValue = value;
-                bestSa = candidateSAs.get(i);
+                bestSa = sa;
             }
         }
 

@@ -93,6 +93,70 @@ public class CardCopyService {
         return out;
     }
 
+    public final Card fastGameCopy(boolean assignNewId, Player owner) {
+        Card out = copyStats(copyFrom, owner, assignNewId);
+        out.setEffectSource(copyFrom.getEffectSource());
+        out.setBoon(copyFrom.isBoon());
+        out.dangerouslySetGame(toGame);
+
+        // need to copy this values for the tokens
+        out.setTokenSpawningAbility(copyFrom.getTokenSpawningAbility());
+        out.setCopiedPermanent(copyFrom.getCopiedPermanent());
+
+        out.setZone(copyFrom.getZone());
+        out.setState(copyFrom.getFaceupCardStateName(), true);
+        out.setBackSide(copyFrom.isBackSide());
+        out.setGamePieceType(copyFrom.getGamePieceType());
+        out.setTokenCard(copyFrom.isTokenCard());
+
+        if (toGame == copyFrom.getGame()) {
+            // Only copy these things if we're not copying them into a new game
+            out.setCollectible(copyFrom.isCollectible());
+
+            if (copyFrom.hasCardAttachments()) {
+                out.setAttachedCards(copyFrom.getAttachedCards());
+            }
+            if (copyFrom.isAttachedToEntity()) {
+                out.setEntityAttachedTo(copyFrom.getEntityAttachedTo());
+            }
+            if (copyFrom.hasMergedCard()) {
+                out.setMergedCards(copyFrom.getMergedCards());
+            }
+
+            out.setLeavesPlayCommands(copyFrom.getLeavesPlayCommands());
+
+            out.setSpecialized(copyFrom.isSpecialized());
+            out.addRemembered(copyFrom.getRemembered());
+            out.addImprintedCards(copyFrom.getImprintedCards());
+            out.setCommander(copyFrom.isRealCommander());
+        }
+
+        int foil = copyFrom.getCurrentState().getFoil();
+        if (foil > 0) {
+            out.setFoil(foil);
+        }
+
+        if (copyFrom.getCastSA() != null) {
+            SpellAbility castSA = copyFrom.getCastSA().copy(out, false);
+            castSA.setLastStateBattlefield(CardCollection.EMPTY);
+            castSA.setLastStateGraveyard(CardCollection.EMPTY);
+            out.setCastSA(castSA);
+        }
+        out.setCastFrom(copyFrom.getCastFrom());
+
+        for (forge.game.staticability.StaticAbility stAb : copyFrom.getStaticAbilities()) {
+            out.addStaticAbility(stAb.copy(out, true));
+        }
+        for (SpellAbility sa : copyFrom.getSpellAbilities()) {
+            SpellAbility saCopy = sa.copy(out, true);
+            if (saCopy != null) {
+                out.addSpellAbility(saCopy);
+            }
+        }
+
+        return out;
+    }
+
     private static void copyState(final Card from, final CardStateName fromState, final Card to,
                                  final CardStateName toState) {
         copyState(from, fromState, to, toState, true);

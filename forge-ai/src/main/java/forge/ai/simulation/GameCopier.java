@@ -6,7 +6,6 @@ import forge.ai.AIOption;
 import forge.ai.LobbyPlayerAi;
 import forge.card.CardRarity;
 import forge.card.CardRules;
-import forge.card.CardType;
 import forge.game.*;
 import forge.game.ability.effects.DetachedCardEffect;
 import forge.game.card.Card;
@@ -22,7 +21,6 @@ import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
-import forge.game.staticability.StaticAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.ZoneType;
@@ -46,6 +44,7 @@ public class GameCopier {
     private Game origGame;
     private BiMap<Player, Player> playerMap = HashBiMap.create();
     private BiMap<Card, Card> cardMap = HashBiMap.create();
+    private Map<SpellAbility, SpellAbility> saMap = Maps.newIdentityHashMap();
     private CopiedGameObjectMap gameObjectMap;
     private GameSnapshot snapshot = null;
 
@@ -284,51 +283,32 @@ public class GameCopier {
 
     private static PaperCard hidden_info_card = new PaperCard(CardRules.fromScript(Lists.newArrayList("Name:hidden", "Types:Artifact", "Oracle:")), "", CardRarity.Common);
     private static final boolean PRUNE_HIDDEN_INFO = false;
-    private static final boolean USE_FROM_PAPER_CARD = true;
     private Card createCardCopy(Game newGame, Player newOwner, Card c, Player aiPlayer) {
         if (c.isToken() && !c.isImmutable()) {
             Card result = new TokenInfo(c).makeOneToken(newOwner);
             new CardCopyService(c).copyCopiableCharacteristics(result, null, null);
             return result;
         }
-        if (USE_FROM_PAPER_CARD && !c.isImmutable() && c.getPaperCard() != null) {
-            Card newCard;
-            if (PRUNE_HIDDEN_INFO && !c.getView().canBeShownTo(aiPlayer.getView())) {
-                // TODO also check REVEALED_CARDS memory
-                newCard = new Card(newGame.nextCardId(), hidden_info_card, newGame);
-                newCard.setOwner(newOwner);
-            } else {
-                newCard = Card.fromPaperCard(c.getPaperCard(), newOwner);
-            }
+        if (PRUNE_HIDDEN_INFO && !c.getView().canBeShownTo(aiPlayer.getView())) {
+            Card newCard = new Card(newGame.nextCardId(), hidden_info_card, newGame);
+            newCard.setOwner(newOwner);
             newCard.setCommander(c.isCommander());
             return newCard;
         }
 
-        // TODO: The above is very expensive and accounts for the vast majority of GameCopier execution time.
-        // The issue is that it requires parsing the original card from scratch from the paper card. We should
-        // improve the copier to accurately copy the card from its actual state, so that the paper card shouldn't
-        // be needed. Once the below code accurately copies the card, remove the USE_FROM_PAPER_CARD code path.
         Card newCard;
-        if (c instanceof DetachedCardEffect)
+        if (c instanceof DetachedCardEffect) {
             newCard = new DetachedCardEffect((DetachedCardEffect) c, newGame, true);
-        else
-            newCard = new Card(newGame.nextCardId(), c.getPaperCard(), newGame);
-        newCard.setOwner(newOwner);
-        newCard.setName(c.getName());
-        newCard.setCommander(c.isCommander());
-        newCard.setType(new CardType(c.getType()));
-        for (StaticAbility stAb : c.getStaticAbilities()) {
-            newCard.addStaticAbility(stAb.copy(newCard, true));
-        }
-        for (SpellAbility sa : c.getSpellAbilities()) {
-            SpellAbility saCopy = sa.copy(newCard, true);
-            if (saCopy != null) {
-                newCard.addSpellAbility(saCopy);
-            } else {
-                System.err.println(sa.toString());
+        } else {
+            newCard = new CardCopyService(c, newGame).fastGameCopy(true, newOwner);
+            List<SpellAbility> origSAs = Lists.newArrayList(c.getAllSpellAbilities());
+            List<SpellAbility> newSAs = Lists.newArrayList(newCard.getAllSpellAbilities());
+            for (int i = 0; i < Math.min(origSAs.size(), newSAs.size()); i++) {
+                saMap.put(origSAs.get(i), newSAs.get(i));
             }
         }
-
+        newCard.setOwner(newOwner);
+        newCard.setCommander(c.isCommander());
         return newCard;
     }
 
@@ -496,6 +476,14 @@ public class GameCopier {
             throw new RuntimeException("Couldn't map " + o + "/" + System.identityHashCode(o));
         return result;
     }
+
+    public SpellAbility find(SpellAbility sa) {
+        if (origGame.EXPERIMENTAL_RESTORE_SNAPSHOT) {
+            return (SpellAbility) snapshot.find(sa);
+        }
+        return saMap.get(sa);
+    }
+
     public GameObject reverseFind(GameObject o) {
         if (origGame.EXPERIMENTAL_RESTORE_SNAPSHOT) {
             return snapshot.reverseFind(o);

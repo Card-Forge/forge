@@ -57,14 +57,14 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
-import forge.util.StreamUtil;
+
 import forge.util.collect.FCollection;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
+
 
 /**
  * <p>
@@ -2313,10 +2313,14 @@ public class ComputerUtil {
         // not enough good choices, need to fill the rest
         int minDiff = min - goodChoices.size();
         if (minDiff > 0) {
-            List<Card> choices = validCards.stream()
-                    .filter(Predicate.not(goodChoices::contains))
-                    .collect(StreamUtil.random(minDiff));
-            goodChoices.addAll(choices);
+            List<Card> choices = new ArrayList<>();
+            for (Card c : validCards) {
+                if (!goodChoices.contains(c)) {
+                    choices.add(c);
+                }
+            }
+            java.util.Collections.shuffle(choices);
+            goodChoices.addAll(choices.subList(0, Math.min(minDiff, choices.size())));
             return goodChoices;
         }
 
@@ -2379,7 +2383,10 @@ public class ComputerUtil {
                 }
 
                 if (reducingCost) {
-                    List<CardType.CoreType> valid = validTypes.stream().map(s -> CardType.CoreType.valueOf(s)).collect(Collectors.toList());
+                    List<CardType.CoreType> valid = new ArrayList<>();
+                    for (String s : validTypes) {
+                        valid.add(CardType.CoreType.valueOf(s));
+                    }
                     valid.remove(CardType.CoreType.Land); // Lands don't have costs to reduce
                     CardType.CoreType chosenCore = ComputerUtilCard.getMostProminentCardType(ai.getAllCards(), valid);
                     // if in doubt, choose Creature, I guess
@@ -2950,12 +2957,14 @@ public class ComputerUtil {
                 repParams,
                 ReplacementLayer.Other);
 
-        if (list.stream().anyMatch(CardTraitPredicates.hasParam("AILogic", "NoLife"))) {
-            return false;
-        } else if (list.stream().anyMatch(CardTraitPredicates.hasParam("AILogic", "LoseLife"))) {
-            return false;
-        } else if (list.stream().anyMatch(CardTraitPredicates.hasParam("AILogic", "LichDraw"))) {
-            return false;
+        for (ReplacementEffect re : list) {
+            if (CardTraitPredicates.hasParam("AILogic", "NoLife").test(re)) {
+                return false;
+            } else if (CardTraitPredicates.hasParam("AILogic", "LoseLife").test(re)) {
+                return false;
+            } else if (CardTraitPredicates.hasParam("AILogic", "LichDraw").test(re)) {
+                return false;
+            }
         }
         return true;
     }
@@ -2979,15 +2988,14 @@ public class ComputerUtil {
             ReplacementLayer.Other
         );
 
-        if (list.stream().anyMatch(CardTraitPredicates.hasParam("AILogic", "NoLife"))) {
-            // no life gain is not negative
-            return false;
-        } else if (list.stream().anyMatch(CardTraitPredicates.hasParam("AILogic", "LoseLife"))) {
-            // lose life is only negative is the player can lose life
-            return player.canLoseLife();
-        } else if (list.stream().anyMatch(CardTraitPredicates.hasParam("AILogic", "LichDraw"))) {
-            // if it would draw more cards than player has, then its negative
-            return player.getCardsIn(ZoneType.Library).size() <= n;
+        for (ReplacementEffect re : list) {
+            if (CardTraitPredicates.hasParam("AILogic", "NoLife").test(re)) {
+                return false;
+            } else if (CardTraitPredicates.hasParam("AILogic", "LoseLife").test(re)) {
+                return player.canLoseLife();
+            } else if (CardTraitPredicates.hasParam("AILogic", "LichDraw").test(re)) {
+                return player.getCardsIn(ZoneType.Library).size() <= n;
+            }
         }
 
         return false;
