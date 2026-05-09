@@ -65,14 +65,28 @@ public final class TrackableSerializer {
      * set so the receiver decodes a detached CardView from the carried name
      * and image key. When {@code tracker} is null, the snapshot check is
      * skipped (used by the client encoder, which has no game-state awareness).
+     *
+     * <p>In non-event mode, CardViews missing from the tracker pass through
+     * unchanged so Java serializes the full object inline (covers ephemeral
+     * choice copies that never enter a tracked zone).
      */
     static Object replace(Object obj, Tracker tracker, boolean eventMode) {
         if (obj instanceof TrackableObject trackable) {
             byte tag = typeTagFor(trackable);
             if (tag < 0) return obj;
 
-            if (!eventMode || tag == TYPE_PLAYER_VIEW) {
+            if (tag == TYPE_PLAYER_VIEW) {
                 return new IdRef(tag, trackable.getId());
+            }
+
+            if (!eventMode) {
+                if (tracker != null) {
+                    TrackableType<?> type = trackableTypeFor(tag);
+                    if (type != null && tracker.getObj(type, trackable.getId()) != null) {
+                        return new IdRef(tag, trackable.getId());
+                    }
+                }
+                return obj; // ephemeral or tracker-less encoder — serialize the full object
             }
 
             boolean preserveSnapshot = false;

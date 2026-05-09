@@ -126,7 +126,9 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
 
     /**
      * This method is used to recursively update the <b>tracker</b>
-     * references on all objects and their props.
+     * references on all objects and their props, and register them in the
+     * id lookup so inline-serialized CardViews are findable by IdRef
+     * in subsequent messages.
      *
      * @param objs
      */
@@ -135,6 +137,7 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
             if (obj instanceof TrackableObject trackableObject) {
                 if (trackableObject.getTracker() == null) {
                     trackableObject.setTracker(this.tracker);
+                    registerInTracker(trackableObject);
                     // walk the props
                     EnumMap props = trackableObject.getProps();
                     if (props != null) {
@@ -149,6 +152,18 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
                     Object objCollection = itrCollection.next();
                     updateTrackers(new Object[]{objCollection});
                 }
+            }
+        }
+    }
+
+    private void registerInTracker(final TrackableObject obj) {
+        if (obj instanceof CardView cv) {
+            if (tracker.getObj(TrackableTypes.CardViewType, cv.getId()) == null) {
+                tracker.putObj(TrackableTypes.CardViewType, cv.getId(), cv);
+            }
+        } else if (obj instanceof PlayerView pv) {
+            if (tracker.getObj(TrackableTypes.PlayerViewType, pv.getId()) == null) {
+                tracker.putObj(TrackableTypes.PlayerViewType, pv.getId(), pv);
             }
         }
     }
