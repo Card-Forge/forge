@@ -22,6 +22,7 @@ public class EffectData implements Serializable {
     //Map only effects.
     public boolean colorView = false;    //Allows to display enemy colors on the map.
     public float moveSpeed = 1.0f;       //Change of movement speed. Map only.
+    // Todo: The interaction between changing the base mod inside the Archipelago settings yaml and items like "FortuneCoin" might not stack as expected. Make sure they do (See AdventurePlayer.java).
     public float goldModifier = -1.0f;   //Modifier for shop discounts.
     public int cardRewardBonus = 0;    //Bonus "DeckCard" drops. Max 3.
     public int extraManaShards = 0; //Mana Shard tokens available to spend in battle
