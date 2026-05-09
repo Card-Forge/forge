@@ -21,11 +21,6 @@ Forge offers a range of **Advanced Yield Options** to:
 
 These features are highly configurable through the **Yield Settings** dialog, and can be set up to suit your own gameplay preferences.
 
-## How to Access
-
-- **Desktop:** The Auto-Pass icon and a yield-settings cog appear on the dock panel above the prompt area. Click the cog, open the Game menu > **Yield Settings**, or press Ctrl+Y to bring up the full settings dialog.
-- **Mobile:** open the in-match Game menu > **Yield Options**.
-
 ## Auto-Pass
 
 **Auto-Pass** is a persistent toggle (**P** on desktop, or the Auto-Pass icon on the dock) that automatically passes priority whenever you have no playable actions available. It's the simplest way to speed up games where you often have nothing to do — enable it once and Forge stops asking for input you'd only use to pass. The same **P** key also doubles as a "stop everything" shortcut: if any yield is currently active (transient yield or Auto-Pass itself), pressing P clears them all in one shot without dismissing any prompt that's up.
@@ -87,12 +82,6 @@ You can decide which game events interrupt a yield:
 | **Triggered abilities on stack** | OFF | Triggers when triggered abilities are on the stack. |
 | **Cards revealed or choices made** | OFF | Triggers when reveal dialogs / non-trivial value notifications fire. |
 
-In addition to the six interrupt toggles, this section contains:
-
-- **Auto-pass respects interrupts** (default OFF). When OFF, Auto-Pass keeps running through every interrupt condition — useful since the whole point of Auto-Pass is to skip prompts when you have no actions. When ON, the same interrupts that cancel yield markers will also cancel Auto-Pass and hand priority back to you.
-
-**Multiplayer note:** The attackers interrupt is scoped to you specifically. If Player A attacks Player B, your yield will not be interrupted.
-
 ### Automatic Yield Suggestions
 
 When the system detects situations where you likely cannot take action, it can prompt you with a yield suggestion. Each suggestion type has a dropdown controlling its decline behavior:
@@ -115,7 +104,6 @@ In addition to the per-suggestion dropdowns, this section contains two global su
 
 ### Speed Options
 
-- **Auto-pass calculation timeout:** The amount of time in milliseconds the AI has to calculate whether you have any available actions and whether you should auto-pass. If the timeout is reached auto-pass will return false and hand you priority as a safeguard. The default is **Dynamic** — the budget scales with the number of playable cards (approximately 50ms per card, clamped between 50ms and 1500ms). 
 - **Skip delay between phases:** skip Forge's default 200ms delay between each phase resolving.
 - **Skip delay when stack resolves:** skip Forge's default 400ms delay between items on the stack resolving.
 
