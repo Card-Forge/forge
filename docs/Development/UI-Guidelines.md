@@ -57,7 +57,7 @@ Conventions:
 #### Preferences Menu
 
 - **Purpose:** comprehensive access to all available user preferences and options.
-- The search filter makes this menu cheap to add to — don't be overly concerned about bloat.
+- The search filter makes this menu cheap to add to — don't be overly concerned about menu length.
 
 ### Mobile
 
