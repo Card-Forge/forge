@@ -80,8 +80,11 @@ public abstract class NetDeckStorageBase extends StorageBase<Deck> {
         final T c = SGuiChoose.oneOrNone(chooserTitle, category);
         if (c == null) { return null; }
 
-        if (c.map.isEmpty() && !download(c)) { //only download decks once per session
-            return null;
+        if (c.map.isEmpty()) { //only load/download decks once per session
+            c.loadCachedDecks();
+            if (c.map.isEmpty() && !download(c)) {
+                return null;
+            }
         }
         return c;
     }
@@ -137,7 +140,8 @@ public abstract class NetDeckStorageBase extends StorageBase<Deck> {
                 }, this);
             }
         };
-        return callback.invokeAndWait(); //wait for download to finish
+        final Boolean downloaded = callback.invokeAndWait(); //wait for download to finish
+        return Boolean.TRUE.equals(downloaded) && !c.map.isEmpty();
     }
 
     public String getUrl() {
