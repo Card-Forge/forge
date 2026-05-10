@@ -87,7 +87,7 @@ public final class TrackableSerializer {
             }
             CardView cv = (CardView) trackable;
             String imgKey = cv.getCurrentState() != null
-                    ? cv.getCurrentState().getImageKey(null) : null;
+                    ? cv.getCurrentState().getImageKey() : null;
             return new EventCardRef(trackable.getId(), cv.getName(), imgKey, preserveSnapshot);
         }
         return obj;

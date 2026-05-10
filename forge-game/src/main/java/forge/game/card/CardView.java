@@ -1101,7 +1101,6 @@ public class CardView extends GameEntityView {
         }
         updateMergeCollections(mergedCollection);
 
-        CardState currentState = c.getCurrentState();
         if (isSplitCard) {
             set(TrackableProperty.LeftSplitState, c.getState(CardStateName.LeftSplit).getView());
             set(TrackableProperty.RightSplitState, c.getState(CardStateName.RightSplit).getView());
@@ -1111,6 +1110,7 @@ public class CardView extends GameEntityView {
             getRightSplitState().updateAbilityText(c, c.getState(CardStateName.RightSplit));
         }
 
+        CardState currentState = c.getCurrentState();
         CardStateView currentStateView = currentState.getView();
         if (getCurrentState() != currentStateView || c.hasPerpetual()) {
             set(TrackableProperty.CurrentState, currentStateView);
@@ -1138,13 +1138,10 @@ public class CardView extends GameEntityView {
 
         CardState alternateState = isSplitCard && isFaceDown() ? c.getState(CardStateName.RightSplit) : c.getAlternateState();
 
-        if (isSplitCard && isFaceDown()) {
+        if ((isSplitCard || c.isDoubleFaced()) && isFaceDown()) {
             // face-down (e.g. manifested) split cards should show the original face on their flip side
             alternateState = c.getState(CardStateName.Original);
         }
-
-        if (c.isDoubleFaced() && isFaceDown()) //fixes facedown cards with backside...
-            alternateState = c.getState(CardStateName.Original);
 
         if (alternateState == null) {
             set(TrackableProperty.AlternateState, null);
@@ -1326,7 +1323,6 @@ public class CardView extends GameEntityView {
         public String getOracleName() {
             return get(TrackableProperty.OracleName);
         }
-
         private void setOracleName(String name) {
             set(TrackableProperty.OracleName, name);
         }
@@ -1350,6 +1346,7 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.HasChangedColors, hasChangeColor);
         }
         public boolean hasChangeColors() { return get(TrackableProperty.HasChangedColors); }
+
         public String getImageKey() {
             return getImageKey(null);
         }

@@ -3559,7 +3559,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             // Switch the cancel button + prompt to "Yielding until X" so the user can disarm.
             // Otherwise the previous InputPassPriority "End Turn" label would persist and ESC
             // would skip the click on the client.
-            getGui().updateAutoPassPrompt();
+            // Skip when a forced input is active: it deliberately disables Cancel, and repainting
+            // would re-enable it as a "cancel yield" button that actually drops the input.
+            Input currentInput = inputProxy.getInput();
+            if (currentInput == null
+                    || currentInput instanceof InputPassPriority
+                    || currentInput instanceof InputLockUI) {
+                getGui().updateAutoPassPrompt();
+            }
         }
     }
 }

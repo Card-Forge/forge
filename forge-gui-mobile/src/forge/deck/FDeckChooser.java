@@ -1013,49 +1013,49 @@ public class FDeckChooser extends FScreen {
                 if (NetDeckArchiveStandard != null) {
                     cmbDeckTypes.setText(NetDeckArchiveStandard.getDeckType());
                 }
-                pool = DeckProxy.getNetArchiveStandardDecks(NetDeckArchiveStandard);
+                pool = DeckProxy.getNetArchiveDecks(NetDeckArchiveStandard);
                 config = ItemManagerConfig.NET_ARCHIVE_STANDARD_DECKS;
                 break;
             case NET_ARCHIVE_PIONEER_DECK:
                 if (NetDeckArchivePioneer != null) {
                     cmbDeckTypes.setText(NetDeckArchivePioneer.getDeckType());
                 }
-                pool = DeckProxy.getNetArchivePioneerDecks(NetDeckArchivePioneer);
+                pool = DeckProxy.getNetArchiveDecks(NetDeckArchivePioneer);
                 config = ItemManagerConfig.NET_ARCHIVE_PIONEER_DECKS;
                 break;
             case NET_ARCHIVE_MODERN_DECK:
                 if (NetDeckArchiveModern != null) {
                     cmbDeckTypes.setText(NetDeckArchiveModern.getDeckType());
                 }
-                pool = DeckProxy.getNetArchiveModernDecks(NetDeckArchiveModern);
+                pool = DeckProxy.getNetArchiveDecks(NetDeckArchiveModern);
                 config = ItemManagerConfig.NET_ARCHIVE_MODERN_DECKS;
                 break;
             case NET_ARCHIVE_PAUPER_DECK:
                 if (NetDeckArchivePauper!= null) {
                     cmbDeckTypes.setText(NetDeckArchivePauper.getDeckType());
                 }
-                pool = DeckProxy.getNetArchivePauperDecks(NetDeckArchivePauper);
+                pool = DeckProxy.getNetArchiveDecks(NetDeckArchivePauper);
                 config = ItemManagerConfig.NET_ARCHIVE_PAUPER_DECKS;
                 break;
             case NET_ARCHIVE_LEGACY_DECK:
                 if (NetDeckArchiveLegacy != null) {
                     cmbDeckTypes.setText(NetDeckArchiveLegacy.getDeckType());
                 }
-                pool = DeckProxy.getNetArchiveLegacyDecks(NetDeckArchiveLegacy);
+                pool = DeckProxy.getNetArchiveDecks(NetDeckArchiveLegacy);
                 config = ItemManagerConfig.NET_ARCHIVE_LEGACY_DECKS;
                 break;
             case NET_ARCHIVE_VINTAGE_DECK:
                 if (NetDeckArchiveVintage!= null) {
                     cmbDeckTypes.setText(NetDeckArchiveVintage.getDeckType());
                 }
-                pool = DeckProxy.getNetArchiveVintageDecks(NetDeckArchiveVintage);
+                pool = DeckProxy.getNetArchiveDecks(NetDeckArchiveVintage);
                 config = ItemManagerConfig.NET_ARCHIVE_VINTAGE_DECKS;
                 break;
             case NET_ARCHIVE_BLOCK_DECK:
                 if (NetDeckArchiveBlock!= null) {
                     cmbDeckTypes.setText(NetDeckArchiveBlock.getDeckType());
                 }
-                pool = DeckProxy.getNetArchiveBlockDecks(NetDeckArchiveBlock);
+                pool = DeckProxy.getNetArchiveDecks(NetDeckArchiveBlock);
                 config = ItemManagerConfig.NET_ARCHIVE_BLOCK_DECKS;
                 break;
         case NET_DECK:

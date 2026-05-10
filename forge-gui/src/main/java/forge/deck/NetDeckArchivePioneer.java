@@ -6,6 +6,10 @@ import forge.localinstance.properties.ForgeConstants;
 public class NetDeckArchivePioneer extends NetDeckStorageBase {
     public static final String PREFIX = "NET_ARCHIVE_PIONEER_DECK";
 
+    public static NetDeckArchivePioneer selectAndLoad(GameType gameType) {
+        return selectAndLoad(gameType, null);
+    }
+
     public static NetDeckArchivePioneer selectAndLoad(GameType gameType, String name) {
         return selectAndLoadArchive(gameType, name,
                 ForgeConstants.NET_ARCHIVE_PIONEER_DECKS_LIST_FILE, "Pioneer", NetDeckArchivePioneer::new);

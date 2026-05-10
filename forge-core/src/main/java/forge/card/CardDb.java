@@ -314,6 +314,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 continue;
             for (ICardFace face : rule.getAllFaces()) {
                 addFaceToDbNames(face);
+                rulesByAltName.put(face.getName(), rule);
             }
             if (rule.hasFunctionalVariants()) {
                 cacheFlavorNames(rule);
@@ -627,8 +628,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return rules;
     }
 
-
-    public void setCardArtPreference(String artPreference){
+    public void setCardArtPreference(String artPreference) {
         artPreference = artPreference.toLowerCase().trim();
         boolean isLatest = artPreference.contains("latest");
         // additional check in case of unrecognised values wrt. to legacy opts
@@ -637,7 +637,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         boolean hasFilter = artPreference.contains("core");
         this.setCardArtPreference(isLatest, hasFilter);
     }
-
 
     /*
      * ======================
