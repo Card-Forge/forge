@@ -364,23 +364,6 @@ public class CardFactory {
 
         c.getCurrentState().setFlavorName(face.getFlavorName());
 
-        // Negative card Id's are for view purposes only
-        if (c.getId() >= 0) {
-            // Build English oracle and translated oracle mapping
-            CardTranslation.buildOracleMapping(face.getName(), face.getOracleText(), variantName);
-
-            for (Entry<String, String> v : face.getVariables())
-                c.setSVar(v.getKey(), v.getValue());
-            for (String r : face.getReplacements())
-                c.addReplacementEffect(ReplacementHandler.parseReplacement(r, c, true, c.getCurrentState()));
-            for (String s : face.getStaticAbilities())
-                c.addStaticAbility(s);
-            for (String t : face.getTriggers())
-                c.addTrigger(TriggerHandler.parseTrigger(t, c, true, c.getCurrentState()));
-
-            // keywords not before variables
-            c.addIntrinsicKeywords(face.getKeywords(), false);
-        }
         if (face.getDraftActions() != null) {
             face.getDraftActions().forEach(c::addDraftAction);
         }
@@ -409,8 +392,25 @@ public class CardFactory {
 
         c.setAttractionLights(face.getAttractionLights());
 
-        if (c.getId() > 0) // Set FactoryAbilities if not for view
+        // Negative card Id's are for view purposes only
+        if (c.getId() >= 0) {
+            // Build English oracle and translated oracle mapping
+            CardTranslation.buildOracleMapping(face.getName(), face.getOracleText(), variantName);
+
+            for (Entry<String, String> v : face.getVariables())
+                c.setSVar(v.getKey(), v.getValue());
+            for (String r : face.getReplacements())
+                c.addReplacementEffect(ReplacementHandler.parseReplacement(r, c, true, c.getCurrentState()));
+            for (String s : face.getStaticAbilities())
+                c.addStaticAbility(s);
+            for (String t : face.getTriggers())
+                c.addTrigger(TriggerHandler.parseTrigger(t, c, true, c.getCurrentState()));
+
+            // keywords not before variables
+            c.addIntrinsicKeywords(face.getKeywords(), false);
+
             CardFactoryUtil.addAbilityFactoryAbilities(c, face.getAbilities());
+        }
     }
 
     public static void copySpellAbility(SpellAbility from, SpellAbility to, final Card host, final Player p, final boolean lki, final boolean keepTextChanges) {
@@ -777,4 +777,4 @@ public class CardFactory {
         return result;
     }
 
-} // end class AbstractCardFactory
+}
