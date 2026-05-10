@@ -13,32 +13,48 @@ public interface CounterType extends Serializable, ITranslatable {
         if ("Any".equalsIgnoreCase(name)) {
             return null;
         }
+        if (CounterKeywordType.isKeywordCounter(name)) {
+            return CounterKeywordType.get(name);
+        }
         try {
             return CounterEnumType.getType(name);
         } catch (final IllegalArgumentException ex) {
-            return CounterKeywordType.get(name);
+            return CounterCustomType.get(name);
         }
     }
     static List<CounterType> getValues() {
         List<CounterType> result = Lists.newArrayList();
         result.addAll(List.of(CounterEnumType.values()));
         result.addAll(CounterKeywordType.getValues());
+        result.addAll(CounterCustomType.getValues());
         return result;
     }
 
     String getName();
 
-    String getCounterOnCardDisplayName();
+    default String getCounterOnCardDisplayName() {
+        return getName();
+    }
 
-    boolean is(CounterEnumType eType);
+    default boolean is(CounterEnumType eType) {
+        return false;
+    }
 
-    boolean isKeywordCounter();
+    default boolean isKeywordCounter() {
+        return false;
+    }
 
-    int getRed();
+    default int getRed() {
+        return 255;
+    }
 
-    int getGreen();
+    default int getGreen() {
+        return 255;
+    }
 
-    int getBlue();
+    default int getBlue() {
+        return 255;
+    }
 
     @Override
     default String getTranslationKey() {

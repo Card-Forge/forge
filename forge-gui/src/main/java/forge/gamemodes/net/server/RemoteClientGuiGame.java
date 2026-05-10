@@ -38,7 +38,7 @@ import java.util.stream.Collectors;
 public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog {
 
     // New objects are sent with full property data, existing objects only send changed properties
-    public static boolean useDeltaSync = false;
+    public static boolean useDeltaSync = true;
 
     private final RemoteClient client;
     private final GameProtocolSender sender;
