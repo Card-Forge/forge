@@ -85,15 +85,6 @@ public final class DeltaPacket implements NetEvent {
         return id;
     }
 
-    public static TrackableType<?> trackableTypeFor(int typeTag) {
-        switch (typeTag) {
-            case TYPE_CARD_VIEW: return TrackableTypes.CardViewType;
-            case TYPE_PLAYER_VIEW: return TrackableTypes.PlayerViewType;
-            case TYPE_STACK_ITEM_VIEW: return TrackableTypes.StackItemViewType;
-            default: return null;
-        }
-    }
-
     /** Each entry represents one attacking band with its defender, blockers, and planned blockers. */
     public static class CombatData implements Serializable {
         private static final long serialVersionUID = 1L;
