@@ -247,7 +247,7 @@ The layout is highly customisable and can be re-arranged to suit your preference
 - **Move an entire cell:** Click and drag the handle on the left side of a cell's header to move all its tabs as a unit.
 - **Drop zones:** Dragging to the left, right, top, or bottom edge of a target cell splits it in that direction. Dragging to the centre adds the panel as a tab. A visual preview shows where the panel will land.
 
-Layouts are saved as XML files and  adapt to different window sizes and resolutions.
+Layouts are saved as XML files and adapt to different window sizes and resolutions.
 - **Save/Load:** Use **Layout > File** in the menu bar to save, open, or revert layouts.
 - **Default layouts** ship with Forge and are restored when you select **Revert to Default Layout**.
 - **User layouts** are stored in your Forge user data directory under `preferences/` (e.g., `%APPDATA%/Forge/preferences/match.xml` on Windows).
