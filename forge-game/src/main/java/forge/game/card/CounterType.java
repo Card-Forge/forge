@@ -56,6 +56,10 @@ public interface CounterType extends Serializable, ITranslatable {
         return 255;
     }
 
+    default CounterAiCategory getAiCategory() {
+        return CounterAiCategory.Positive;
+    }
+
     @Override
     default String getTranslationKey() {
         return toString();
