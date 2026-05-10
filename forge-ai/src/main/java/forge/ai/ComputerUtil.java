@@ -2841,7 +2841,7 @@ public class ComputerUtil {
         }
         // keyword counters
         if (type.isKeywordCounter() && c.hasKeyword(type.toString())) {
-            return CounterAiCategory.Negative;
+            return CounterAiCategory.Neutral;
         }
         if (type.is(CounterEnumType.BLAZE) && c.isLand()) {
             return CounterAiCategory.Negative;
