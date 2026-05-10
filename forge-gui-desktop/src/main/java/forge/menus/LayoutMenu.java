@@ -67,13 +67,10 @@ public final class LayoutMenu {
             menu.add(getMenuItem_RevertLayout());
             menu.add(getMenuItem_ResetMatchLayout());
         }
-        final boolean hasThemeOrBackground = FSkin.getAllSkins().size() > 1 || isMatch;
-        if (!isHome && hasThemeOrBackground) {
+        if (!isHome) {
             menu.addSeparator();
         }
-        if (FSkin.getAllSkins().size() > 1) {
-            menu.add(getMenu_ThemeOptions());
-        }
+        menu.add(getMenu_ThemeOptions());
         if (isMatch) {
             menu.add(getMenuItem_ShowBackgroundImage());
         }
