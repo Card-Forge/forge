@@ -363,8 +363,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                 clearBrowserListParent();
                 if (entry.getDeckType() != null) {
                     browserRootType = entry.getDeckType();
-                    browserParentFolder = null;
-                    browserPath = "";
+                    browserPath = getPathRelativeToShortcutRoot(entry.getPath(), browserRootType);
                     browserHasDecksHomeParent = true;
                     setShortcutDeckType(entry.getDeckType());
                 } else {
@@ -377,6 +376,8 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
                 if (browserRootType != null) {
                     setShortcutDeckType(browserRootType);
                 }
+                final IStorage<Deck> folderRoot = browserRootType == null ? getDecksHomeStorage() : getStorageForDeckType(browserRootType);
+                browserParentFolder = StringUtils.isBlank(browserPath) || folderRoot == null ? null : folderRoot.tryGetFolder(parentPath(browserPath));
                 updateBrowserFolder();
                 return;
             case PARENT_FOLDER:
@@ -887,6 +888,19 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         return StringUtils.isBlank(base) ? name : base + "/" + name;
     }
 
+    private String getPathRelativeToShortcutRoot(final String path, final DeckType rootType) {
+        final IStorage<Deck> rootFolder = getStorageForDeckType(rootType);
+        if (rootFolder == null || StringUtils.isBlank(path)) {
+            return "";
+        }
+
+        final String rootName = rootFolder.getName();
+        if (path.equals(rootName)) {
+            return "";
+        }
+        return StringUtils.removeStart(path, rootName + "/");
+    }
+
     private List<DeckProxy> wrapGeneratedOptions(final Iterable<DeckProxy> decks) {
         final List<DeckProxy> entries = new ArrayList<>();
         for (final DeckProxy deck : decks) {
@@ -980,7 +994,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         }
         for (final IStorage<Deck> subFolder : folder.getFolders()) {
             final String subPath = childPath(path, subFolder.getName());
-            rows.add(DeckBrowserEntry.folder(subFolder.getName(), subPath, subFolder, getShortcutDeckTypeForFolder(subFolder)));
+            rows.add(DeckBrowserEntry.folder(subFolder.getName(), subPath, subFolder, getFolderDeckTypeForBrowserRow(subFolder, rootType)));
             addFolderRowsRecursively(rows, subFolder, subPath, rootType);
             addVirtualRowsForFolderRecursively(rows, subPath, rootType, subFolder);
         }
@@ -1244,6 +1258,11 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         return null;
     }
 
+    private DeckType getFolderDeckTypeForBrowserRow(final IStorage<Deck> folder, final DeckType rootType) {
+        final DeckType shortcutType = getShortcutDeckTypeForFolder(folder);
+        return shortcutType == null ? rootType : shortcutType;
+    }
+
     private void setShortcutDeckType(final DeckType deckType) {
         if (deckType == null || decksComboBox == null) {
             return;
@@ -1382,7 +1401,8 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             final GameType gameType = getGameTypeForDeckType(browserRootType);
             for (final IStorage<Deck> folder : browserFolder.getFolders()) {
                 realFolderNames.add(folder.getName());
-                rows.add(DeckBrowserEntry.folder(folder.getName(), childPath(browserPath, folder.getName()), folder));
+                rows.add(DeckBrowserEntry.folder(folder.getName(), childPath(browserPath, folder.getName()), folder,
+                        getFolderDeckTypeForBrowserRow(folder, browserRootType)));
             }
             for (final Deck deck : browserFolder) {
                 rows.add(DeckBrowserEntry.deck(new DeckProxy(deck, gameType.toString(), gameType, browserPath, browserFolder, null)));
