@@ -10,8 +10,6 @@ import forge.gamemodes.net.server.RemoteClient;
 import forge.gamemodes.net.event.NetEvent;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
-import forge.trackable.TrackableTypes;
-import forge.trackable.TrackableTypes.TrackableType;
 
 import java.io.Serializable;
 import java.util.Collections;
