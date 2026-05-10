@@ -25,6 +25,7 @@ import forge.gamemodes.tournament.system.TournamentPairing;
 import forge.gamemodes.tournament.system.TournamentPlayer;
 import forge.gamemodes.tournament.system.TournamentRoundRobin;
 import forge.gamemodes.tournament.system.TournamentSwiss;
+import forge.gui.GameStateEvalVariantBootstrap;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
@@ -61,6 +62,8 @@ public class SimulateMatch {
                 return;
             }
         }
+
+        GameStateEvalVariantBootstrap.apply();
 
         FModel.initialize(null, null);
 

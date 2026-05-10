@@ -86,6 +86,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_COMPACT_MAIN_MENU ("false"),
         UI_USE_OLD ("false"),
         UI_RANDOM_FOIL ("false"),
+        /** A or B; empty defaults to A. See {@code forge.eval.variant} system property (overrides this). */
+        UI_GAME_STATE_EVAL_VARIANT(""),
         UI_ENABLE_AI_CHEATS ("false"),
         UI_AVATARS ("0,1"),
         UI_SLEEVES ("0,1"),
