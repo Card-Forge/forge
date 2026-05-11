@@ -174,6 +174,19 @@ public class GameStateEvaluator {
             }
         }
 
+        if (DanDanEvalSupport.applies(game)) {
+            final Card top = DanDanEvalSupport.sharedLibraryTop(game);
+            if (top != null) {
+                final int raw = evalCard(game, aiPlayer, top);
+                final Player recipient = DanDanEvalSupport.nextLibraryDrawRecipient(game);
+                final int sign = recipient == aiPlayer ? 1 : -1;
+                final int dandanTerm = sign * w.getDanDanSharedTopCoefficient() * raw;
+                debugPrint("  DanDan shared top: " + cardToString(top) + " raw=" + raw + " recipient="
+                        + recipient.getName() + " term=" + dandanTerm);
+                score += dandanTerm;
+            }
+        }
+
         debugPrint("Score = " + score);
         return new Score(score, summonSickScore);
     }

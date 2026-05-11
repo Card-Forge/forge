@@ -7,12 +7,14 @@ public final class GameStateEvalWeights {
 
     public static final GameStateEvalWeights VARIANT_A = new GameStateEvalWeights(
             1, 5, 4, 2, 2,
-            100, 100, 5);
+            100, 100, 5,
+            1);
 
     /** Experimental bundle; initially matches A so behavior is unchanged until tuned. */
     public static final GameStateEvalWeights VARIANT_B = new GameStateEvalWeights(
             1, 5, 4, 2, 2,
-            100, 100, 5);
+            100, 100, 5,
+            1);
 
     private static volatile GameStateEvalWeights current = VARIANT_A;
 
@@ -24,6 +26,8 @@ public final class GameStateEvalWeights {
     private final int manaColorPipUnit;
     private final int manaMaxCostUnit;
     private final int manaExcessUnit;
+    /** Two-player DanDan: scales {@link GameStateEvaluator} bonus for who draws shared library top next. */
+    private final int danDanSharedTopCoefficient;
 
     private GameStateEvalWeights(
             final int excessHandPenaltyPerCard,
@@ -33,7 +37,8 @@ public final class GameStateEvalWeights {
             final int lifeOppCoefficient,
             final int manaColorPipUnit,
             final int manaMaxCostUnit,
-            final int manaExcessUnit) {
+            final int manaExcessUnit,
+            final int danDanSharedTopCoefficient) {
         this.excessHandPenaltyPerCard = excessHandPenaltyPerCard;
         this.handMyCoefficient = handMyCoefficient;
         this.handTheirCoefficient = handTheirCoefficient;
@@ -42,6 +47,7 @@ public final class GameStateEvalWeights {
         this.manaColorPipUnit = manaColorPipUnit;
         this.manaMaxCostUnit = manaMaxCostUnit;
         this.manaExcessUnit = manaExcessUnit;
+        this.danDanSharedTopCoefficient = danDanSharedTopCoefficient;
     }
 
     /**
@@ -85,5 +91,9 @@ public final class GameStateEvalWeights {
 
     public int getManaExcessUnit() {
         return manaExcessUnit;
+    }
+
+    public int getDanDanSharedTopCoefficient() {
+        return danDanSharedTopCoefficient;
     }
 }
