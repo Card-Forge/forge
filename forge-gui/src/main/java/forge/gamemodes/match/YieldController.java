@@ -140,10 +140,6 @@ public class YieldController {
         autoPassUntilEOT = false;
         autoPassUntilStackEmpty = false;
         stackYieldRespectsInterrupts = false;
-        if (phaseOwner == null || phase == null) {
-            clearMarker();
-            return;
-        }
         autoPassUntilMarker = new YieldMarker(phaseOwner, phase);
         // Activating at-or-past target on the owner's current turn must wait for next turn's
         // occurrence; otherwise pastTarget would fire and clear the marker on the same turn.
@@ -584,17 +580,14 @@ public class YieldController {
         if (combatView == null) return false;
         if (!combatView.getAttackersOf(player).isEmpty()) return true;
         for (forge.game.GameEntityView defender : combatView.getDefenders()) {
-            if (defender instanceof CardView cardDefender) {
-                PlayerView controller = cardDefender.getController();
-                if (controller != null && controller.equals(player)) {
-                    if (!combatView.getAttackersOf(defender).isEmpty()) return true;
-                }
+            if (defender instanceof CardView cardDefender && player.equals(cardDefender.getController()) &&
+                    !combatView.getAttackersOf(defender).isEmpty()) {
+                return true;
             }
         }
         return false;
     }
 
-    /** Recurses into sub-instances (e.g. Oona, where targeting is in a sub-ability). */
     private static boolean targetsPlayerOrPermanents(StackItemView si, PlayerView player) {
         FCollectionView<PlayerView> targetPlayers = si.getTargetPlayers();
         if (targetPlayers != null) {
