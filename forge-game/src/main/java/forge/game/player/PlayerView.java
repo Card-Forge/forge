@@ -217,8 +217,6 @@ public class PlayerView extends GameEntityView {
 
     public int getAvatarLifeDifference() {
         return get(TrackableProperty.AvatarLifeDifference);
-    public boolean wasAvatarLifeChanged() {
-        return (int)get(TrackableProperty.AvatarLifeDifference) != 0;
     }
     public void setAvatarLifeDifference(final int val) {
         set(TrackableProperty.AvatarLifeDifference, val);
