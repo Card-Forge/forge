@@ -63,10 +63,9 @@ public final class TrackableSerializer {
      * ({@code eventMode = true}). When the tracker holds a different object
      * for the CardView's id (zone-change copy), {@code preserveSnapshot} is
      * set so the receiver decodes a detached CardView from the carried name
-     * and image key. When {@code tracker} is null, the snapshot check is
-     * skipped (used by the client encoder, which has no game-state awareness).
-     *
-     * <p>In non-event mode, CardViews missing from the tracker pass through
+     * and image key.
+     * <p>
+     * In non-event mode, CardViews missing from the tracker pass through
      * unchanged so Java serializes the full object inline (covers ephemeral
      * choice copies that never enter a tracked zone).
      */
@@ -80,23 +79,17 @@ public final class TrackableSerializer {
             }
 
             if (!eventMode) {
-                if (tracker != null) {
-                    TrackableType<?> type = trackableTypeFor(tag);
-                    if (type != null && tracker.getObj(type, trackable.getId()) != null) {
-                        return new IdRef(tag, trackable.getId());
-                    }
+                if (tracker != null && tracker.getObj(trackableTypeFor(tag), trackable.getId()) != null) {
+                    return new IdRef(tag, trackable.getId());
                 }
-                return obj; // ephemeral or tracker-less encoder — serialize the full object
+                return obj;
             }
 
             boolean preserveSnapshot = false;
             if (tracker != null) {
-                TrackableType<?> type = trackableTypeFor(tag);
-                if (type != null) {
-                    Object tracked = tracker.getObj(type, trackable.getId());
-                    if (tracked != null && tracked != trackable) {
-                        preserveSnapshot = true;
-                    }
+                Object tracked = tracker.getObj(trackableTypeFor(tag), trackable.getId());
+                if (tracked != null && tracked != trackable) {
+                    preserveSnapshot = true;
                 }
             }
             CardView cv = (CardView) trackable;
@@ -129,13 +122,11 @@ public final class TrackableSerializer {
         }
         if (obj instanceof IdRef ref) {
             TrackableType<?> type = trackableTypeFor(ref.typeTag());
-            if (type != null) {
-                Object resolved = tracker.getObj(type, ref.id());
-                if (resolved == null) {
-                    netLog.warn("Could not resolve IdRef(tag={}, id={}) from Tracker", ref.typeTag(), ref.id());
-                }
-                return resolved;
+            Object resolved = tracker.getObj(type, ref.id());
+            if (resolved == null) {
+                netLog.warn("Could not resolve IdRef(tag={}, id={}) from Tracker", ref.typeTag(), ref.id());
             }
+            return resolved;
         }
         return obj;
     }

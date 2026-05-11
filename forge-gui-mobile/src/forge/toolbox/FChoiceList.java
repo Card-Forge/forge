@@ -604,14 +604,12 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
                         else
                             CardRenderer.drawCard(g, cv, x, y, VStack.CARD_WIDTH, VStack.CARD_HEIGHT, CardStackPosition.Top, false, showAlternate, true, false);
                     }
-                } else {
-                    if (cv != null) {
-                        boolean showAlternate = CardRendererUtils.canShowAlternate(cv, value.toString());
-                        if (!cv.isFaceDown())
-                            CardRenderer.drawCardWithOverlays(g, cv, x, y, VStack.CARD_WIDTH, VStack.CARD_HEIGHT, CardStackPosition.Top, false, showAlternate, true);
-                        else
-                            CardRenderer.drawCard(g, cv, x, y, VStack.CARD_WIDTH, VStack.CARD_HEIGHT, CardStackPosition.Top, false, showAlternate, true, false);
-                    }
+                } else if (cv != null) {
+                    boolean showAlternate = CardRendererUtils.canShowAlternate(cv, value.toString());
+                    if (!cv.isFaceDown())
+                        CardRenderer.drawCardWithOverlays(g, cv, x, y, VStack.CARD_WIDTH, VStack.CARD_HEIGHT, CardStackPosition.Top, false, showAlternate, true);
+                    else
+                        CardRenderer.drawCard(g, cv, x, y, VStack.CARD_WIDTH, VStack.CARD_HEIGHT, CardStackPosition.Top, false, showAlternate, true, false);
                 }
             } catch (Exception ignored) {
                 //fixme: java.lang.ClassCastException for cards like Subtlety which should be cancelable instead...
