@@ -1,6 +1,7 @@
 package forge.player;
 
 import com.google.common.collect.*;
+import forge.ai.ComputerUtilMana;
 import forge.LobbyPlayer;
 import forge.StaticData;
 import forge.ai.GameState;
@@ -29,6 +30,7 @@ import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
+import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.*;
 import forge.game.player.actions.SelectCardAction;
@@ -93,6 +95,9 @@ import java.util.stream.Collectors;
  * Handles phase skips for now.
  */
 public class PlayerControllerHuman extends PlayerController implements IGameController, IHasForgeLog {
+    private static final ZoneType[] AUTOPASS_INTERRUPT_ZONES = {
+            ZoneType.Hand, ZoneType.Battlefield, ZoneType.Graveyard, ZoneType.Exile, ZoneType.Flashback, ZoneType.Command
+    };
 
     /**
      * Cards this player may look at right now, for example when searching a
@@ -1495,29 +1500,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final MagicStack stack = getGame().getStack();
 
         if (mayAutoPass()) {
-            // avoid prompting for input if current phase is set to be
-            // auto-passed instead posing a short delay if needed to
-            // prevent the game jumping ahead too quick
-            int delay = 0;
-            if (stack.isEmpty()) {
-                // make sure to briefly pause at phases you're not set up to skip
-                if (!isUiSetToSkipPhase(getGame().getPhaseHandler().getPlayerTurn().getView(),
-                        getGame().getPhaseHandler().getPhase())) {
-                    delay = FControlGamePlayback.phasesDelay;
-                }
+            if (shouldInterruptDeclareBlockersAutoPass(stack)) {
+                autoPassCancel();
             } else {
-                // pause slightly longer for spells and abilities on the stack resolving
-                delay = FControlGamePlayback.resolveDelay;
+                pauseForAutoPass(stack);
+                netLog.trace("Returning null (mayAutoPass) for player {}", player.getName());
+                return null;
             }
-            if (delay > 0) {
-                try {
-                    Thread.sleep(delay);
-                } catch (final InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            netLog.trace("Returning null (mayAutoPass) for player {}", player.getName());
-            return null;
         }
 
         if (stack.isEmpty()) {
@@ -1545,6 +1534,58 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         defaultInput.showAndWait();
         netLog.trace("InputPassPriority returned for player {}, chosenSa={}", player.getName(), defaultInput.getChosenSa());
         return defaultInput.getChosenSa();
+    }
+
+    private void pauseForAutoPass(final MagicStack stack) {
+        final int delay;
+        if (stack.isEmpty()) {
+            delay = isUiSetToSkipPhase(getGame().getPhaseHandler().getPlayerTurn().getView(),
+                    getGame().getPhaseHandler().getPhase()) ? 0 : FControlGamePlayback.phasesDelay;
+        } else {
+            delay = FControlGamePlayback.resolveDelay;
+        }
+        if (delay <= 0) {
+            return;
+        }
+        try {
+            Thread.sleep(delay);
+        } catch (final InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private boolean shouldInterruptDeclareBlockersAutoPass(final MagicStack stack) {
+        return yieldController.autoPassUntilEndOfTurn() && stack.isEmpty()
+                && shouldInterruptDeclareBlockersAutoPass(player);
+    }
+
+    static boolean shouldInterruptDeclareBlockersAutoPass(final Player player) {
+        final Game game = player.getGame();
+        final PhaseHandler phaseHandler = game.getPhaseHandler();
+        if (!phaseHandler.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+            return false;
+        }
+        if (phaseHandler.getPriorityPlayer() != player) {
+            return false;
+        }
+        final Combat combat = phaseHandler.getCombat();
+        if (combat == null || !combat.isPlayerAttacked(player)) {
+            return false;
+        }
+        return hasPlayableNonManaAbility(player);
+    }
+
+    static boolean hasPlayableNonManaAbility(final Player player) {
+        for (final ZoneType zone : AUTOPASS_INTERRUPT_ZONES) {
+            for (final Card card : player.getCardsIn(zone)) {
+                for (final SpellAbility sa : card.getAllPossibleAbilities(player, true)) {
+                    if (!sa.isManaAbility() && ComputerUtilMana.canPayManaCost(sa.getPayCosts(), sa, player, 0, false)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     @Override
