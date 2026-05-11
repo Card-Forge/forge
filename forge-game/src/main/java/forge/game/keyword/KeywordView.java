@@ -1,6 +1,8 @@
 package forge.game.keyword;
 
-public interface KeywordView {
+import java.io.Serializable;
+
+public interface KeywordView extends Serializable {
     Keyword keyword();
 
     String title();

@@ -41,4 +41,12 @@ public class KeywordCollectionView implements Iterable<KeywordView> {
     public Iterator<KeywordView> iterator() {
         return this.map.values().iterator();
     }
+
+    @Override 
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        return o instanceof KeywordCollectionView other && map.equals(other.map);
+    }
+    @Override
+    public int hashCode() { return map.hashCode(); }
 }
