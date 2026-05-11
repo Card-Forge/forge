@@ -485,6 +485,10 @@ public enum ColumnDef {
     }
 
     private static DeckProxy toDeckProxy(final InventoryItem i) {
+        if (i instanceof DeckBrowserEntry) {
+            final DeckBrowserEntry entry = (DeckBrowserEntry) i;
+            return entry.getDeckRowProxy();
+        }
         return i instanceof DeckProxy ? (DeckProxy) i : null;
     }
 

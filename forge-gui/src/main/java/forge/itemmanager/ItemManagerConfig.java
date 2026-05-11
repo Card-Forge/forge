@@ -91,6 +91,8 @@ public enum ItemManagerConfig {
             null, null, 3, 0),
     DECK_BROWSER(SColumnUtil.getDeckBrowserDefaultColumns(), false, false, false,
             null, null, 3, 0),
+    DECK_EDITOR_BROWSER(SColumnUtil.getDeckBrowserDefaultColumns(true), false, false, false,
+            null, null, 3, 0),
     COMMANDER_DECKS(SColumnUtil.getDecksDefaultColumns(true, false), false, false, false,
             null, null, 3, 0),
     PLANAR_DECKS(SColumnUtil.getDecksDefaultColumns(true, false), false, false, false,

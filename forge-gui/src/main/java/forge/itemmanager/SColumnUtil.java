@@ -265,8 +265,15 @@ public final class SColumnUtil {
     }
 
     public static Map<ColumnDef, ItemColumnConfig> getDeckBrowserDefaultColumns() {
+        return getDeckBrowserDefaultColumns(false);
+    }
+
+    public static Map<ColumnDef, ItemColumnConfig> getDeckBrowserDefaultColumns(boolean allowEdit) {
         List<ColumnDef> colDefs = new ArrayList<>();
         colDefs.add(ColumnDef.DECK_FAVORITE);
+        if (allowEdit) {
+            colDefs.add(ColumnDef.DECK_ACTIONS);
+        }
         colDefs.add(ColumnDef.NAME);
         colDefs.add(ColumnDef.DECK_COLOR);
         colDefs.add(ColumnDef.DECK_FORMAT);

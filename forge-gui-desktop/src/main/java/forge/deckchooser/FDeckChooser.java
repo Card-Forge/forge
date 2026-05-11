@@ -15,7 +15,9 @@ import forge.gamemodes.quest.QuestUtil;
 import forge.gui.FThreads;
 import forge.gui.UiCommand;
 import forge.item.PaperCard;
+import forge.itemmanager.ColumnDef;
 import forge.itemmanager.DeckManager;
+import forge.itemmanager.ItemColumnConfig;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.ItemManagerContainer;
 import forge.localinstance.skin.FSkinProp;
@@ -84,6 +86,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
     private String pendingBrowserSelectionName;
     private DeckType pendingBrowserSelectionDeckType;
     private boolean browserSearchActive;
+    private boolean browserHasDeckRows;
     private static final String GENERATED_HOME_PATH = "";
     private static final String GENERATED_RANDOM_PATH = "random";
     private static final String GENERATED_RANDOM_COLORS_PATH = "random/colors";
@@ -208,6 +211,10 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         btnViewDeck.setCommand(cmdViewDeck);
         btnRefresh.setCommand(this::refreshBrowserFromButton);
         lstDecks.setSearchChangeListener(this::setBrowserSearchText);
+        if (editorOnlyBrowser) {
+            lstDecks.setDeleteCommand(this::refreshCurrentEditorBrowserLocation);
+            lstDecks.setEditCommand(this::loadEditorDeck);
+        }
         lstDecks.addViewButton(btnRefresh);
     }
 
@@ -450,7 +457,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
     private DeckProxy getDeckProxy(final DeckProxy selected) {
         if (selected instanceof DeckBrowserEntry entry) {
-            return entry.isDeck() ? entry.getDeckProxy() : null;
+            return entry.getDeckRowProxy();
         }
         return selected;
     }
@@ -680,8 +687,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
             rows.add(0, DeckBrowserEntry.parentFolder("", null));
             leadingRows = 1;
         }
-        final List<DeckProxy> displayedRows = setBrowserPool(rows);
-        lstDecks.setup(ItemManagerConfig.DECK_BROWSER);
+        final List<DeckProxy> displayedRows = setBrowserPoolAndSetup(rows);
 
         btnRandom.setText(randomText);
         btnRandom.setCommand(randomCommand);
@@ -916,10 +922,25 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         return entries;
     }
 
-    private List<DeckProxy> setBrowserPool(final List<DeckProxy> rows) {
+    private List<DeckProxy> setBrowserPoolAndSetup(final List<DeckProxy> rows) {
         final List<DeckProxy> displayedRows = browserSearchActive ? buildRecursiveSearchRows() : rows;
+        browserHasDeckRows = containsDeckRows(displayedRows);
         lstDecks.setPool(displayedRows);
+        lstDecks.setup(getBrowserItemManagerConfig());
         return displayedRows;
+    }
+
+    private boolean containsDeckRows(final Iterable<DeckProxy> rows) {
+        for (final DeckProxy row : rows) {
+            if (row instanceof DeckBrowserEntry) {
+                if (((DeckBrowserEntry) row).isDeck()) {
+                    return true;
+                }
+            } else {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void setBrowserSearchText(final String searchText) {
@@ -1162,8 +1183,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         clearBrowserListParent();
         sortBrowserRows(rows);
         lstDecks.setAllowMultipleSelections(false);
-        final List<DeckProxy> displayedRows = setBrowserPool(rows);
-        lstDecks.setup(ItemManagerConfig.DECK_BROWSER);
+        final List<DeckProxy> displayedRows = setBrowserPoolAndSetup(rows);
         btnRandom.setText(localizer.getMessage("lblRandomDeck"));
         btnRandom.setCommand(this::randomSelectBrowserDeck);
         if (!selectPendingBrowserRow(displayedRows) && !displayedRows.isEmpty()) {
@@ -1199,8 +1219,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         clearBrowserListParent();
         sortBrowserRows(rows);
         lstDecks.setAllowMultipleSelections(false);
-        final List<DeckProxy> displayedRows = setBrowserPool(rows);
-        lstDecks.setup(ItemManagerConfig.DECK_BROWSER);
+        final List<DeckProxy> displayedRows = setBrowserPoolAndSetup(rows);
         btnRandom.setText(localizer.getMessage("lblRandomDeck"));
         btnRandom.setCommand(this::randomSelectBrowserDeck);
         if (!selectPendingBrowserRow(displayedRows) && !displayedRows.isEmpty()) {
@@ -1436,8 +1455,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         }
         sortBrowserRows(rows);
         lstDecks.setAllowMultipleSelections(false);
-        final List<DeckProxy> displayedRows = setBrowserPool(rows);
-        lstDecks.setup(ItemManagerConfig.DECK_BROWSER);
+        final List<DeckProxy> displayedRows = setBrowserPoolAndSetup(rows);
         btnRandom.setText(localizer.getMessage("lblRandomDeck"));
         btnRandom.setCommand(this::randomSelectBrowserDeck);
         if (!selectPendingBrowserRow(displayedRows) && !displayedRows.isEmpty()) {
@@ -1470,6 +1488,20 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
 
     private boolean isEditorOnlyBrowser() {
         return editorOnlyBrowser;
+    }
+
+    private ItemManagerConfig getBrowserItemManagerConfig() {
+        final ItemManagerConfig config = editorOnlyBrowser ? ItemManagerConfig.DECK_EDITOR_BROWSER : ItemManagerConfig.DECK_BROWSER;
+        setBrowserColumnVisible(config, ColumnDef.DECK_FAVORITE, browserHasDeckRows);
+        setBrowserColumnVisible(config, ColumnDef.DECK_ACTIONS, browserHasDeckRows);
+        return config;
+    }
+
+    private void setBrowserColumnVisible(final ItemManagerConfig config, final ColumnDef columnDef, final boolean visible) {
+        final ItemColumnConfig column = config.getCols().get(columnDef);
+        if (column != null) {
+            column.setVisible(visible);
+        }
     }
 
     private boolean isNetBrowserRoot() {

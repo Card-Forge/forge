@@ -125,6 +125,10 @@ public class DeckBrowserEntry extends DeckProxy {
         return deckProxy;
     }
 
+    public DeckProxy getDeckRowProxy() {
+        return isDeck() ? deckProxy : null;
+    }
+
     @Override
     public String getName() {
         return name;

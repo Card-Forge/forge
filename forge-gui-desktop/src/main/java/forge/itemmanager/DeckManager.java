@@ -63,6 +63,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
 
     private final GameType gameType;
     private UiCommand cmdDelete, cmdSelect;
+    private Consumer<DeckProxy> editCommand;
     private Consumer<String> searchChangeListener;
 
     /**
@@ -141,6 +142,10 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     }
     public UiCommand getSelectCommand() {
         return this.cmdSelect;
+    }
+
+    public void setEditCommand(final Consumer<DeckProxy> editCommand0) {
+        editCommand = editCommand0;
     }
 
     @Override
@@ -343,6 +348,10 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         if (deck instanceof DeckBrowserEntry && !((DeckBrowserEntry) deck).isDeck()) {
             return;
         }
+        if (editCommand != null) {
+            editCommand.accept(deck);
+            return;
+        }
 
         ACEditorBase<? extends InventoryItem, ? extends DeckBase> editorCtrl = null;
         FScreen screen = null;
@@ -452,10 +461,11 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     public class DeckActionsRenderer extends ItemCellRenderer {
         //private final int overActionIndex = -1;
         private static final int imgSize = 20;
+        private boolean showActions;
 
         @Override
         public boolean alwaysShowTooltip() {
-            return false;
+            return true;
         }
 
         /*
@@ -467,7 +477,9 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
          */
         @Override
         public final Component getTableCellRendererComponent(final JTable table, final Object value,
-                final boolean isSelected, final boolean hasFocus, final int row, final int column) {
+            final boolean isSelected, final boolean hasFocus, final int row, final int column) {
+            final DeckProxy deck = getActionDeck(value);
+            showActions = deck != null;
             setToolTipText(null);
             return super.getTableCellRendererComponent(table, "", isSelected, hasFocus, row, column);
         }
@@ -478,7 +490,10 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
             final int x = e.getX() - cellBounds.x;
 
             if (e.getID() == MouseEvent.MOUSE_PRESSED && e.getButton() == 1) {
-                final DeckProxy deck = (DeckProxy) value;
+                final DeckProxy deck = getActionDeck(value);
+                if (deck == null) {
+                    return;
+                }
 
                 if (x >= 0 && x < imgSize) { //delete button
                     if (DeckManager.this.deleteDeck(deck)) {
@@ -494,6 +509,36 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
                 listView.getTable().repaint();
                 e.consume();
             }
+        }
+
+        @Override
+        protected <T extends InventoryItem> String getToolTipText(final MouseEvent e, final ItemListView<T> listView,
+                final Object value, final int row, final int column) {
+            if (getActionDeck(value) == null) {
+                return null;
+            }
+
+            final Rectangle cellBounds = listView.getTable().getCellRect(row, column, false);
+            final int x = e.getX() - cellBounds.x;
+            if (x >= 0 && x < imgSize) {
+                return "Click to delete this deck";
+            }
+            if (x >= imgSize && x < imgSize * 2) {
+                return "Click to edit this deck";
+            }
+            return null;
+        }
+
+        private DeckProxy getActionDeck(final Object value) {
+            if (!(value instanceof DeckProxy)) {
+                return null;
+            }
+            final DeckProxy deck = (DeckProxy) value;
+            if (deck instanceof DeckBrowserEntry) {
+                final DeckBrowserEntry entry = (DeckBrowserEntry) deck;
+                return entry.getDeckRowProxy();
+            }
+            return deck;
         }
 
         /*private void setOverActionIndex(final ItemListView<?> listView, int overActionIndex0) {
@@ -521,6 +566,9 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         @Override
         public final void paint(final Graphics g) {
             super.paint(g);
+            if (!showActions) {
+                return;
+            }
 
             // Improve scaling quality
             if (g instanceof Graphics2D g2d) {

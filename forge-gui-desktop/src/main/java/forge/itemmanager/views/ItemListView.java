@@ -449,7 +449,14 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
             }
         }
 
-        private String getCellTooltip(final TableCellRenderer renderer, final int row, final int col, final Object val) {
+        private String getCellTooltip(final TableCellRenderer renderer, final int row, final int col, final Object val, final MouseEvent e) {
+            if (renderer instanceof ItemCellRenderer) {
+                final String tip = ((ItemCellRenderer) renderer).getToolTipText(e, ItemListView.this, val, row, col);
+                if (tip != null && !tip.isEmpty()) {
+                    return tip;
+                }
+            }
+
             final Component cell = renderer.getTableCellRendererComponent(this, val, false, false, row, col);
 
             // use a pre-set tooltip if it exists
@@ -498,7 +505,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                 return null;
             }
 
-            return getCellTooltip(getCellRenderer(row, col), row, col, val);
+            return getCellTooltip(getCellRenderer(row, col), row, col, val, e);
         }
 
         private int   lastTooltipRow = -1;
