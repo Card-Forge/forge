@@ -217,6 +217,8 @@ public class PlayerView extends GameEntityView {
 
     public int getAvatarLifeDifference() {
         return get(TrackableProperty.AvatarLifeDifference);
+    public boolean wasAvatarLifeChanged() {
+        return (int)get(TrackableProperty.AvatarLifeDifference) != 0;
     }
     public void setAvatarLifeDifference(final int val) {
         set(TrackableProperty.AvatarLifeDifference, val);
@@ -494,19 +496,8 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.Flashback, CardView.getCollection(p.getCardsIn(ZoneType.Flashback)));
     }
 
-    public int getMana(final int manaAtom) {
-        return getMana((byte) manaAtom);
-    }
     public int getMana(final byte color) {
-        Integer count = null;
-        try {
-            count = getMana().get(color);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            count = null;
-        }
-        return count != null ? count : 0;
+        return getMana().getOrDefault(color, 0);
     }
     private Map<Byte, Integer> getMana() {
         return get(TrackableProperty.Mana);

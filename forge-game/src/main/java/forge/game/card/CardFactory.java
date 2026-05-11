@@ -406,10 +406,10 @@ public class CardFactory {
             for (String t : face.getTriggers())
                 c.addTrigger(TriggerHandler.parseTrigger(t, c, true, c.getCurrentState()));
 
-            // keywords not before variables
-            c.addIntrinsicKeywords(face.getKeywords(), false);
-
             CardFactoryUtil.addAbilityFactoryAbilities(c, face.getAbilities());
+
+            // keywords not before variables and spells
+            c.addIntrinsicKeywords(face.getKeywords(), false);
         }
     }
 
