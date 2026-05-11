@@ -33,6 +33,7 @@ import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
 import forge.gamemodes.net.event.UpdateLobbyPlayerEvent;
 import forge.gui.CardDetailPanel;
+import forge.gui.framework.EDocID;
 import forge.gui.SwingPrefBinders;
 import forge.gui.interfaces.ILobbyView;
 import forge.gui.util.SOptionPane;
@@ -61,19 +62,26 @@ import net.miginfocom.swing.MigLayout;
  */
 public class VLobby implements ILobbyView {
 
+    /** {@link #DANDAN_ONLY} hides variant pickers and adds lobby shortcuts for the local DanDan lobby. */
+    public enum LobbyChrome {
+        FULL,
+        DANDAN_ONLY
+    }
+
     static final int MAX_PLAYERS = 8;
     final Localizer localizer = Localizer.getInstance();
     private static final ForgePreferences prefs = FModel.getPreferences();
 
     // General variables
     private final GameLobby lobby;
+    private final LobbyChrome lobbyChrome;
     private IPlayerChangeListener playerChangeListener = null;
     private final LblHeader lblTitle = new LblHeader(localizer.getMessage("lblHeaderConstructedMode"));
     private int activePlayersNum = 0;
     private int playerWithFocus = 0; // index of the player that currently has focus
 
     private final StartButton btnStart  = new StartButton();
-    private final JPanel pnlStart = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
+    private final JPanel pnlStart = new JPanel();
     private final JComboBox<String> gamesInMatch = new JComboBox<String>(new String[] {"1","3","5"});
     private final SwingPrefBinders.ComboBox gamesInMatchBinder =
       new SwingPrefBinders.ComboBox(FPref.UI_MATCHES_PER_GAME, gamesInMatch);
@@ -131,29 +139,36 @@ public class VLobby implements ILobbyView {
 
     // CTR
     public VLobby(final GameLobby lobby) {
+        this(lobby, LobbyChrome.FULL);
+    }
+
+    public VLobby(final GameLobby lobby, final LobbyChrome lobbyChrome) {
         this.lobby = lobby;
+        this.lobbyChrome = lobbyChrome;
 
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         ////////////////////////////////////////////////////////
         //////////////////// Variants Panel ////////////////////
-        ImmutableList<VariantCheckBox> vntBoxes = null;
-        if (lobby.isAllowNetworking()) {
-            vntBoxes = vntBoxesNetwork;
-        } else {
-            vntBoxes = vntBoxesLocal;
-        }
+        if (lobbyChrome == LobbyChrome.FULL) {
+            ImmutableList<VariantCheckBox> vntBoxes = null;
+            if (lobby.isAllowNetworking()) {
+                vntBoxes = vntBoxesNetwork;
+            } else {
+                vntBoxes = vntBoxesLocal;
+            }
 
-        variantsPanel.setOpaque(false);
-        variantsPanel.add(newLabel(localizer.getMessage("lblVariants")));
-        for (final VariantCheckBox vcb : vntBoxes) {
-            variantsPanel.add(vcb);
-        }
+            variantsPanel.setOpaque(false);
+            variantsPanel.add(newLabel(localizer.getMessage("lblVariants")));
+            for (final VariantCheckBox vcb : vntBoxes) {
+                variantsPanel.add(vcb);
+            }
 
-        constructedFrame.add(new FScrollPane(variantsPanel, false, true,
-                ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER,
-                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED),
-                "w 100%, h 45px!, gapbottom 10px, spanx 2, wrap");
+            constructedFrame.add(new FScrollPane(variantsPanel, false, true,
+                    ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER,
+                    ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED),
+                    "w 100%, h 45px!, gapbottom 10px, spanx 2, wrap");
+        }
 
         playersFrame.setOpaque(false);
         playersFrame.add(playersScroll, "w 100%, h 100%-35px");
@@ -177,11 +192,20 @@ public class VLobby implements ILobbyView {
         constructedFrame.setOpaque(false);
         decksFrame.setOpaque(false);
 
-        // Start Button
+        // Start Button (and Preferences in DanDan-only local lobby)
         if (lobby.hasControl()) {
             pnlStart.setOpaque(false);
-            pnlStart.add(btnStart, "align center");
-            // Start button event handling
+            if (lobbyChrome == LobbyChrome.DANDAN_ONLY) {
+                pnlStart.setLayout(new MigLayout("insets 0, gap 12 12, wrap 2"));
+                final FLabel btnPreferences = new FLabel.ButtonBuilder().fontSize(14)
+                        .text(localizer.getMessage("Preferences")).build();
+                btnPreferences.setCommand(() -> CHomeUI.SINGLETON_INSTANCE.itemClick(EDocID.HOME_PREFERENCES));
+                pnlStart.add(btnPreferences, "align center");
+                pnlStart.add(btnStart, "align center");
+            } else {
+                pnlStart.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
+                pnlStart.add(btnStart, "align center");
+            }
             btnStart.addActionListener(arg0 -> {
                 Runnable startGame = lobby.startGame();
                 if (startGame != null) {
@@ -198,7 +222,17 @@ public class VLobby implements ILobbyView {
         gamesInMatchFrame.add(gamesInMatch, "w 50px!, h 30px!");
         gamesInMatchFrame.setOpaque(false);
 
-        pnlStart.add(gamesInMatchFrame);
+        if (lobby.hasControl()) {
+            if (lobbyChrome == LobbyChrome.DANDAN_ONLY) {
+                pnlStart.add(gamesInMatchFrame, "span 2, growx");
+            } else {
+                pnlStart.add(gamesInMatchFrame);
+            }
+        } else {
+            pnlStart.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
+            pnlStart.setOpaque(false);
+            pnlStart.add(gamesInMatchFrame);
+        }
     }
 
     public void updateDeckPanel() {
@@ -208,6 +242,9 @@ public class VLobby implements ILobbyView {
     }
 
     public void focusOnAvatar() {
+        if (playerPanels.isEmpty() || playerWithFocus < 0 || playerWithFocus >= playerPanels.size()) {
+            return;
+        }
         getPlayerPanelWithFocus().focusOnAvatar();
     }
 
@@ -247,15 +284,17 @@ public class VLobby implements ILobbyView {
 
         final boolean allowNetworking = lobby.isAllowNetworking();
 
-        ImmutableList<VariantCheckBox> vntBoxes = null;
-        if (allowNetworking) {
-            vntBoxes = vntBoxesNetwork;
-        } else {
-            vntBoxes = vntBoxesLocal;
-        }
-        for (final VariantCheckBox vcb : vntBoxes) {
-            vcb.setSelected(hasVariant(vcb.variant));
-            vcb.setEnabled(lobby.hasControl());
+        if (lobbyChrome == LobbyChrome.FULL) {
+            ImmutableList<VariantCheckBox> vntBoxes = null;
+            if (allowNetworking) {
+                vntBoxes = vntBoxesNetwork;
+            } else {
+                vntBoxes = vntBoxesLocal;
+            }
+            for (final VariantCheckBox vcb : vntBoxes) {
+                vcb.setSelected(hasVariant(vcb.variant));
+                vcb.setEnabled(lobby.hasControl());
+            }
         }
 
         for (int i = 0; i < MAX_PLAYERS; i++) {
@@ -336,7 +375,9 @@ public class VLobby implements ILobbyView {
             }
         }
 
-        if (playerWithFocus >= activePlayersNum) {
+        if (activePlayersNum <= 0) {
+            // nothing to focus or deck-populate
+        } else if (playerWithFocus >= activePlayersNum) {
             changePlayerFocus(activePlayersNum - 1);
         } else {
             populateDeckPanel(lobby.getGameType());
@@ -462,7 +503,9 @@ public class VLobby implements ILobbyView {
             final String text = type.toString() + ": " + Lang.joinHomogenous(selectedDecks, DeckProxy::getName);
             if (!isCommanderDeck && hasVariant(GameType.DanDan)) {
                 // DanDan uses one shared library, so apply the same deck to all active players.
-                for (int i = 0; i < activePlayersNum; i++) {
+                // During lobby construction, selection callbacks can run before every PlayerPanel exists.
+                final int n = Math.min(activePlayersNum, playerPanels.size());
+                for (int i = 0; i < n; i++) {
                     getPlayerPanel(i).setDeckSelectorButtonText(text);
                     fireDeckChangeListener(i, deck);
                 }
@@ -691,12 +734,17 @@ public class VLobby implements ILobbyView {
     }
 
     void changePlayerFocus(final int newFocusOwner, final GameType gType) {
-        final PlayerPanel oldFocus = getPlayerPanelWithFocus();
+        if (playerPanels.isEmpty() || activePlayersNum <= 0) {
+            return;
+        }
+        final int safeFocus = Math.max(0, Math.min(newFocusOwner, activePlayersNum - 1));
+        final PlayerPanel oldFocus = (playerWithFocus >= 0 && playerWithFocus < playerPanels.size())
+                ? playerPanels.get(playerWithFocus) : null;
         if (oldFocus != null) {
             oldFocus.setFocused(false);
         }
-        playerWithFocus = newFocusOwner;
-        final PlayerPanel newFocus = getPlayerPanelWithFocus();
+        playerWithFocus = safeFocus;
+        final PlayerPanel newFocus = playerPanels.get(playerWithFocus);
         newFocus.setFocused(true);
 
         playersScroll.getViewport().scrollRectToVisible(newFocus.getBounds());

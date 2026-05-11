@@ -432,9 +432,10 @@ public class PlayerPanel extends FPanel {
         // Commander deck building replaces normal one, so hide it
         final boolean isDeckBuildingAllowed = mayEdit && !isCommanderApplied && !lobby.hasVariant(GameType.MomirBasic)
                 && !lobby.hasVariant(GameType.MoJhoSto);
+        final boolean hideDeckForDanDanAi = type == LobbySlotType.AI && lobby.hasVariant(GameType.DanDan);
 
-        deckLabel.setVisible(isDeckBuildingAllowed);
-        deckBtn.setVisible(isDeckBuildingAllowed);
+        deckLabel.setVisible(isDeckBuildingAllowed && !hideDeckForDanDanAi);
+        deckBtn.setVisible(isDeckBuildingAllowed && !hideDeckForDanDanAi);
         cmdDeckSelectorBtn.setVisible(isCommanderApplied);
         cmdLabel.setVisible(isCommanderApplied);
 
