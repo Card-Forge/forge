@@ -935,8 +935,26 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         } else {
             tempShowCards(cards);
             TrackableCollection<CardView> collection = CardView.getCollection(cards);
-            getGui().reveal(fm, collection);
-            getGui().updateRevealedCards(collection);
+            // Show opponent's hand as a FloatingZone with a minimal OK dialog instead of a names list
+            final boolean useFloatingHandReveal = zone == ZoneType.Hand
+                    && owner != getLocalPlayerView()
+                    && FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS)
+                    && !getGui().isLibgdxPort();
+            if (useFloatingHandReveal) {
+                final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
+                zonesToUpdate.add(new PlayerZoneUpdate(owner, zone));
+                final Iterable<PlayerZoneUpdate>[] zonesShown = new Iterable[1];
+                FThreads.invokeInEdtNowOrLater(() -> {
+                    getGui().updateZones(zonesToUpdate);
+                    zonesShown[0] = getGui().tempShowZones(getLocalPlayerView(), zonesToUpdate);
+                });
+                getGui().message(fm);
+                getGui().updateRevealedCards(collection);
+                FThreads.invokeInEdtNowOrLater(() -> getGui().hideZones(getLocalPlayerView(), zonesShown[0]));
+            } else {
+                getGui().reveal(fm, collection);
+                getGui().updateRevealedCards(collection);
+            }
             endTempShowCards();
         }
     }
@@ -1144,7 +1162,20 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         boolean optional = min == 0;
 
         if (p != player) {
-            tempShowCards(valid);
+            // Reveal/Look modes (no RevealNumber) publicly disclose the full hand — keep non-selectable revealed cards visible
+            final String discardMode = sa.getParam("Mode");
+            final boolean fullHandRevealedToChooser = discardMode != null
+                    && !sa.hasParam("RevealNumber")
+                    && (discardMode.startsWith("Reveal") || discardMode.startsWith("Look"));
+            tempShowCards(fullHandRevealedToChooser ? p.getCardsIn(ZoneType.Hand) : valid);
+            if (useSelectCardsInput(valid)) {
+                final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, min, max, valid, sa);
+                inp.setMessage(String.format(localizer.getMessage("lblChooseMinCardToDiscard"), optional ? max : min));
+                inp.setCancelAllowed(optional);
+                inp.showAndWait();
+                endTempShowCards();
+                return new CardCollection(inp.getSelected());
+            }
             GameEntityViewMap<Card, CardView> gameCacheDiscard = GameEntityView.getMap(valid);
             List<CardView> views = getGui().many(String.format(localizer.getMessage("lblChooseMinCardToDiscard"), optional ? max : min),
                     localizer.getMessage("lblDiscarded"), min, max, gameCacheDiscard.getTrackableKeys(), null);
