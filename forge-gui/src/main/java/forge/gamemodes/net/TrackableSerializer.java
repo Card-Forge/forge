@@ -121,8 +121,7 @@ public final class TrackableSerializer {
             return detached;
         }
         if (obj instanceof IdRef ref) {
-            TrackableType<?> type = trackableTypeFor(ref.typeTag());
-            Object resolved = tracker.getObj(type, ref.id());
+            Object resolved = tracker.getObj(trackableTypeFor(ref.typeTag()), ref.id());
             if (resolved == null) {
                 netLog.warn("Could not resolve IdRef(tag={}, id={}) from Tracker", ref.typeTag(), ref.id());
             }
