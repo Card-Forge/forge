@@ -939,36 +939,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return cardsInSet.size();
     }
 
-    // returns a list of all cards from their respective latest (or preferred) editions
-    @Override
-    public Collection<PaperCard> getUniqueCards() {
-        return uniqueCardsByRules.values();
-    }
-
-    public PaperCard getUniqueByName(String cardName) {
-        if (uniqueCardsByFlavorName.containsKey(cardName))
-            return uniqueCardsByFlavorName.get(cardName);
-        CardRules rules = getRules(cardName, true);
-        if(rules == null)
-            return null;
-        return uniqueCardsByRules.get(rules);
-    }
-
-    public PaperCard getUniqueByNameNoAlt(String cardName) {
-        CardRules rules = getRules(cardName, false);
-        if(rules == null)
-            return null;
-        return uniqueCardsByRules.get(rules);
-    }
-
-    public Collection<ICardFace> getAllFaces() {
-        return facesByName.values();
-    }
-
-    public ICardFace getFaceByName(final String name) {
-        return facesByName.get(getNormalizedName(name));
-    }
-
     public boolean isNonLegendaryCreatureName(final String name) {
         Boolean bool = nonLegendaryCreatureNames.get(name);
         if (bool != null) {
@@ -994,6 +964,16 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return Collections.unmodifiableCollection(allCardsByName.values());
     }
 
+    // returns a list of all cards from their respective latest (or preferred) editions
+    @Override
+    public Collection<PaperCard> getUniqueCards() {
+        return uniqueCardsByRules.values();
+    }
+    @Override
+    public Collection<ICardFace> getAllFaces() {
+        return facesByName.values();
+    }
+
     @Override
     public Stream<PaperCard> streamAllCards() {
         return allCardsByRules.values().stream();
@@ -1002,7 +982,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     public Stream<PaperCard> streamUniqueCards() {
         return uniqueCardsByRules.values().stream();
     }
-
+    @Override
     public Stream<ICardFace> streamAllFaces() {
         return facesByName.values().stream();
     }
@@ -1062,8 +1042,11 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
      * </ul>
      * @see #getAllCards(String)
      */
-    public List<PaperCard> getAllCardsNoAlt(String cardName) {
-        return Lists.newArrayList(Multimaps.filterEntries(allCardsByName, entry -> entry.getKey().equals(entry.getValue().getName())).get(getNormalizedName(cardName)));
+    public List<PaperCard> getAllCardsNoAlt(String rulesName) {
+        CardRules rules = getRules(rulesName, false);
+        if(rules == null)
+            return null;
+        return allCardsByRules.get(rules);
     }
 
     public List<PaperCard> getAllCards(CardRules rules) {
@@ -1091,8 +1074,13 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return getAllCards(card).stream().filter(predicate).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public List<PaperCard> getAllCardsNoAlt(final String cardName, Predicate<PaperCard> predicate){
-        return getAllCardsNoAlt(cardName).stream().filter(predicate).collect(Collectors.toCollection(ArrayList::new));
+    public List<PaperCard> getAllCards(CardRules card, Predicate<PaperCard> predicate){
+        return getAllCards(card).stream().filter(predicate).collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    @Override
+    public List<PaperCard> getAllCardsNoAlt(final String rulesName, Predicate<PaperCard> predicate){
+        return getAllCardsNoAlt(rulesName).stream().filter(predicate).collect(Collectors.toCollection(ArrayList::new));
     }
 
     // Do I want a foiled version of these cards?
@@ -1110,6 +1098,29 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             cards.add(card);
         }
         return cards;
+    }
+
+    @Override
+    public PaperCard getUniqueByName(String cardName) {
+        if (uniqueCardsByFlavorName.containsKey(cardName))
+            return uniqueCardsByFlavorName.get(cardName);
+        CardRules rules = getRules(cardName, true);
+        if(rules == null)
+            return null;
+        return uniqueCardsByRules.get(rules);
+    }
+
+    @Override
+    public PaperCard getUniqueByNameNoAlt(String rulesName) {
+        CardRules rules = getRules(rulesName, false);
+        if(rules == null)
+            return null;
+        return uniqueCardsByRules.get(rules);
+    }
+
+    @Override
+    public ICardFace getFaceByName(String faceName) {
+        return facesByName.get(getNormalizedName(faceName));
     }
 
     @Override
