@@ -74,7 +74,7 @@ public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> 
 
         try {
             byteOut.write(LENGTH_PLACEHOLDER);
-            objectOut = new CObjectOutputStream(new LZ4BlockOutputStream(byteOut), replace, tracker, consumerId);
+            objectOut = new CObjectOutputStream(new LZ4BlockOutputStream(byteOut), replace, tracker, consumerId, false);
             objectOut.writeObject(msg);
             objectOut.flush();
         } finally {

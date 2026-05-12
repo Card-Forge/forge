@@ -9,6 +9,9 @@ import forge.trackable.TrackableTypes;
 import forge.trackable.TrackableTypes.TrackableType;
 import forge.trackable.Tracker;
 
+import io.netty.handler.codec.serialization.ClassResolver;
+import io.netty.handler.codec.serialization.ClassResolvers;
+
 import org.tinylog.Logger;
 import org.tinylog.TaggedLogger;
 
@@ -29,6 +32,8 @@ import java.util.List;
  */
 public final class TrackableSerializer {
     private static final TaggedLogger netLog = Logger.tag("NETWORK");
+
+    private static final ClassResolver INNER_CLASS_RESOLVER = ClassResolvers.cacheDisabled(null);
 
     static final byte TYPE_CARD_VIEW = 0;
     static final byte TYPE_PLAYER_VIEW = 1;
@@ -150,9 +155,9 @@ public final class TrackableSerializer {
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             LZ4BlockOutputStream lz4Out = new LZ4BlockOutputStream(baos);
-            ObjectOutputStream oos = tracker == null ? new ObjectOutputStream(lz4Out) : new ReplacingOutputStream(lz4Out, tracker, false);
-            oos.writeObject(obj);
-            oos.close();
+            try (CObjectOutputStream oos = new CObjectOutputStream(lz4Out, tracker != null, tracker, -1, false)) {
+                oos.writeObject(obj);
+            }
             return baos.size();
         } catch (Exception e) {
             return 0;
@@ -181,7 +186,7 @@ public final class TrackableSerializer {
         for (GameEvent event : events) {
             try {
                 ByteArrayOutputStream baos = new ByteArrayOutputStream(256);
-                try (ReplacingOutputStream out = new ReplacingOutputStream(baos, tracker, true)) {
+                try (CObjectOutputStream out = new CObjectOutputStream(baos, true, tracker, -1, true)) {
                     out.writeObject(event);
                 }
                 wrapped.add(new WrappedEvent(baos.toByteArray()));
@@ -203,7 +208,7 @@ public final class TrackableSerializer {
             if (item instanceof WrappedEvent we) {
                 try {
                     ByteArrayInputStream bais = new ByteArrayInputStream(we.data);
-                    try (ResolvingInputStream in = new ResolvingInputStream(bais, tracker)) {
+                    try (CObjectInputStream in = new CObjectInputStream(bais, INNER_CLASS_RESOLVER, tracker)) {
                         Object obj = in.readObject();
                         if (obj instanceof GameEvent e) events.add(e);
                     }
@@ -213,60 +218,6 @@ public final class TrackableSerializer {
             }
         }
         return events;
-    }
-
-    static class ReplacingOutputStream extends ObjectOutputStream {
-        private final Tracker tracker;
-        private final boolean eventMode;
-
-        ReplacingOutputStream(OutputStream out, Tracker tracker, boolean eventMode) throws IOException {
-            super(out);
-            this.tracker = tracker;
-            this.eventMode = eventMode;
-            enableReplaceObject(true);
-        }
-
-        @Override
-        protected Object replaceObject(Object obj) {
-            // Inner-layer stream (events / size measurement). No per-client
-            // consumer here — eventMode=true uses EventCardRef which carries
-            // its own snapshot, and DeltaPacket property maps already use
-            // Integer IDs via toNetworkValue, so the !eventMode path has
-            // nothing to replace.
-            return replace(obj, tracker, -1, eventMode);
-        }
-    }
-
-    static class ResolvingInputStream extends ObjectInputStream {
-        private final Tracker tracker;
-
-        ResolvingInputStream(InputStream in, Tracker tracker) throws IOException {
-            super(in);
-            this.tracker = tracker;
-            enableResolveObject(true);
-        }
-
-        // Android desugars records to classes with computed serialVersionUID; the JVM keeps records at 0L.
-        // Fall through to the local descriptor when UIDs mismatch.
-        @Override
-        protected ObjectStreamClass readClassDescriptor() throws IOException, ClassNotFoundException {
-            ObjectStreamClass streamDesc = super.readClassDescriptor();
-            try {
-                Class<?> localClass = Class.forName(streamDesc.getName());
-                ObjectStreamClass localDesc = ObjectStreamClass.lookup(localClass);
-                if (localDesc != null && streamDesc.getSerialVersionUID() != localDesc.getSerialVersionUID()) {
-                    return localDesc;
-                }
-            } catch (ClassNotFoundException ignored) {
-                // Class not found locally — fall through to stream descriptor.
-            }
-            return streamDesc;
-        }
-
-        @Override
-        protected Object resolveObject(Object obj) {
-            return resolve(obj, tracker);
-        }
     }
 
     private TrackableSerializer() {}

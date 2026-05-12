@@ -9,8 +9,10 @@ import java.io.OutputStream;
 
 /**
  * {@link ObjectOutputStream} subclass used by {@link CompatibleObjectEncoder}
- * for the payload of every network message. Two differences from the JDK
- * default:
+ * for the payload of every network message, and by
+ * {@link TrackableSerializer#wrapEvents}/{@link TrackableSerializer#measureSize}
+ * for inner-layer event serialization and size instrumentation. Two
+ * differences from the JDK default:
  *
  * <ul>
  *   <li>Writes a <b>thin class descriptor</b>: a one-byte type tag plus the
@@ -20,8 +22,9 @@ import java.io.OutputStream;
  *       the wire.</li>
  *   <li>When replacement is enabled (per-message, by the encoder), delegates
  *       {@code replaceObject} to {@link TrackableSerializer#replace} with the
- *       supplied Tracker, turning tracked CardView/PlayerView references into
- *       compact {@link TrackableSerializer.IdRef} markers.</li>
+ *       supplied Tracker / consumerId / eventMode, turning tracked
+ *       CardView/PlayerView references into compact {@link TrackableSerializer.IdRef}
+ *       (or {@link TrackableSerializer.EventCardRef} when {@code eventMode}) markers.</li>
  * </ul>
  */
 public class CObjectOutputStream extends ObjectOutputStream {
@@ -29,11 +32,13 @@ public class CObjectOutputStream extends ObjectOutputStream {
 
     private final Tracker tracker;
     private final int consumerId;
+    private final boolean eventMode;
 
-    CObjectOutputStream(OutputStream out, boolean replaceTrackables, Tracker tracker, int consumerId) throws IOException {
+    CObjectOutputStream(OutputStream out, boolean replaceTrackables, Tracker tracker, int consumerId, boolean eventMode) throws IOException {
         super(out);
         this.tracker = tracker;
         this.consumerId = consumerId;
+        this.eventMode = eventMode;
         if (replaceTrackables) {
             enableReplaceObject(true);
         }
@@ -47,6 +52,6 @@ public class CObjectOutputStream extends ObjectOutputStream {
 
     @Override
     protected Object replaceObject(Object obj) throws IOException {
-        return TrackableSerializer.replace(obj, tracker, consumerId, false);
+        return TrackableSerializer.replace(obj, tracker, consumerId, eventMode);
     }
 }
