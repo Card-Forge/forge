@@ -427,13 +427,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     private boolean useSelectCardsInput(final FCollectionView<? extends GameEntity> sourceList, final SpellAbility sa) {
-        //this can be used to stop zone select GUI when certain APIs would reveal illegal zone information
-        //initially created for HeistEffect which showed library placement
+        // would reveal illegal zone information
         if (sa != null && ApiType.Heist.equals(sa.getApi())) return false;
-        return useSelectCardsInput(sourceList);
-    }
 
-    private boolean useSelectCardsInput(final FCollectionView<? extends GameEntity> sourceList) {
         // can't use InputSelect from GUI thread (e.g., DevMode Tutor)
         if (FThreads.isGuiThread()) {
             return false;
@@ -486,7 +482,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         getGui().setPanelSelection(CardView.get(sa.getHostCard()));
 
-        if (useSelectCardsInput(sourceList)) {
+        if (useSelectCardsInput(sourceList, sa)) {
             tempShowCards(sourceList);
             final InputSelectCardsFromList sc = new InputSelectCardsFromList(this, min, max, sourceList, sa);
             sc.setMessage(title);
@@ -645,7 +641,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         tempShow(optionList);
-        if (useSelectCardsInput(optionList)) {
+        if (useSelectCardsInput(optionList, sa)) {
             final InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<>(this, min, max, optionList, sa);
             input.setCancelAllowed(min == 0);
             input.setMessage(MessageUtil.formatMessage(title, player, targetedPlayer));
@@ -1168,7 +1164,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     && !sa.hasParam("RevealNumber")
                     && (discardMode.startsWith("Reveal") || discardMode.startsWith("Look"));
             tempShowCards(fullHandRevealedToChooser ? p.getCardsIn(ZoneType.Hand) : valid);
-            if (useSelectCardsInput(valid)) {
+            if (useSelectCardsInput(valid, sa)) {
                 final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, min, max, valid, sa);
                 inp.setMessage(String.format(localizer.getMessage("lblChooseMinCardToDiscard"), optional ? max : min));
                 inp.setCancelAllowed(optional);

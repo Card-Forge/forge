@@ -586,11 +586,7 @@ public final class CMatchUI
             for (final PlayerZoneUpdate update : zonesToUpdate) {
                 final PlayerView player = update.getPlayer();
                 for (final ZoneType zone : update.getZones()) {
-                    if (zone == ZoneType.Hand) {
-                        if (controller != player) {
-                            FloatingZone.hide(this, player, zone);
-                        }
-                    } else if (FLOATING_ZONE_TYPES.contains(zone)) {
+                    if (FLOATING_ZONE_TYPES.contains(zone) || (zone == ZoneType.Hand && controller != player)) {
                         FloatingZone.hide(this, player, zone);
                     }
                 }
