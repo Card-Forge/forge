@@ -62,7 +62,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     private final CardEdition.Collection editions;
     private final Set<String> filtered;
 
-    private Map<String, Boolean> nonLegendaryCreatureNames = Maps.newHashMap();
+    private final Map<String, Boolean> nonLegendaryCreatureNames = Maps.newHashMap();
 
     public enum CardArtPreference {
         LATEST_ART_ALL_EDITIONS(false, true),
@@ -96,10 +96,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         public boolean isFoil;
         public String collectorNumber;
         public Map<String, String> flags;
-
-        private CardRequest(String name, String edition, int artIndex, boolean isFoil, String collectorNumber) {
-            this(name, edition, artIndex, isFoil, collectorNumber, null);
-        }
 
         private CardRequest(String name, String edition, int artIndex, boolean isFoil, String collectorNumber, Map<String, String> flags) {
             cardName = name;
@@ -313,11 +309,10 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             if (filteredCards.contains(rule.getPreInitName()))
                 continue;
             for (ICardFace face : rule.getAllFaces()) {
-                addFaceToDbNames(face);
-                rulesByAltName.put(face.getName(), rule);
+                addFaceToDbNames(face, rule);
             }
             if (rule.hasFunctionalVariants()) {
-                cacheFlavorNames(rule);
+                cacheRuleFlavorNames(rule);
             }
         }
 
@@ -327,12 +322,15 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
     }
 
-    private void addFaceToDbNames(ICardFace face) {
+    private void addFaceToDbNames(ICardFace face, CardRules rules) {
         if (face == null) {
             return;
         }
         final String name = face.getName();
         facesByName.put(name, face);
+        //Stash names of alternate faces for loose name-to-rules lookups. Technically ambiguous; first come, first served.
+        if (!rulesByPrimaryName.containsKey(name))
+            rulesByAltName.putIfAbsent(name, rules);
         final String normalName = StringUtils.stripAccents(name);
         if (!normalName.equals(name)) {
             normalizedNames.put(normalName, name);
@@ -340,13 +338,13 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
         if (face.hasFunctionalVariants()) {
             for (ICardFace varFace : face.getFunctionalVariants().values())
-                cacheFlavorName(varFace);
+                cacheFaceFlavorName(varFace);
         }
         if (face.getFlavorName() != null) //Probably shouldn't be putting a flavor name on the main print?
-            cacheFlavorName(face);
+            cacheFaceFlavorName(face);
     }
 
-    private void cacheFlavorName(ICardFace face) {
+    private void cacheFaceFlavorName(ICardFace face) {
         String altName = face.getFlavorName();
         if(altName == null)
             return;
@@ -357,7 +355,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
     }
 
-    private void cacheFlavorNames(CardRules rules) {
+    private void cacheRuleFlavorNames(CardRules rules) {
         if (rules.getSupportedFunctionalVariants() == null)
             return;
         boolean hasFlavorName = false;
@@ -401,9 +399,9 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
                 flavorNameMappings.put(normalizedFlavorName, variantName);
                 flavorNameMappings.put(cr.getName(), IPaperCard.NO_FUNCTIONAL_VARIANT);
                 rulesByAltName.put(normalizedFlavorName, cr);
-                cacheFlavorName(cr.getMainPart().getFunctionalVariant(variantName));
+                cacheFaceFlavorName(cr.getMainPart().getFunctionalVariant(variantName));
                 if(cr.getOtherPart() != null)
-                    cacheFlavorName(cr.getOtherPart().getFunctionalVariant(variantName));
+                    cacheFaceFlavorName(cr.getOtherPart().getFunctionalVariant(variantName));
             }
         }
 
@@ -931,8 +929,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         return uniqueCardsByRules.values();
     }
 
-    public PaperCard getUniqueByName(final String name) {
-        CardRules rules = getRules(name, true);
+    public PaperCard getUniqueByName(String cardName) {
+        CardRules rules = getRules(cardName, true);
         if(rules == null)
             return null;
         return uniqueCardsByRules.get(rules);
