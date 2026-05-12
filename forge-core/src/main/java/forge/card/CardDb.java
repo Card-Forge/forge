@@ -56,6 +56,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
      * Map of flavor names to the identifier of the functional variant on which they appear in their respective card rules.
      */
     private final Map<String, String> flavorNameMappings = Maps.newHashMap();
+    private final Map<String, PaperCard> uniqueCardsByFlavorName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
 
     private final Map<String, Integer> artIds = Maps.newHashMap();
 
@@ -556,9 +557,17 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     private void reIndex() {
         uniqueCardsByRules.clear();
+        uniqueCardsByFlavorName.clear();
         for (Entry<CardRules, Collection<PaperCard>> kv : allCardsByRules.asMap().entrySet()) {
             PaperCard pc = getFirstNonSpecialWithImage(kv.getValue());
             uniqueCardsByRules.put(kv.getKey(), pc);
+        }
+        for (Entry<String, String> kv : flavorNameMappings.entrySet()) {
+            if (kv.getValue().equals(IPaperCard.NO_FUNCTIONAL_VARIANT))
+                continue;
+            String flavorName = kv.getKey();
+            PaperCard pc = getFirstNonSpecialWithImage(allCardsByName.get(flavorName));
+            uniqueCardsByFlavorName.put(flavorName, pc);
         }
     }
 
@@ -930,6 +939,8 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     public PaperCard getUniqueByName(String cardName) {
+        if (uniqueCardsByFlavorName.containsKey(cardName))
+            return uniqueCardsByFlavorName.get(cardName);
         CardRules rules = getRules(cardName, true);
         if(rules == null)
             return null;
