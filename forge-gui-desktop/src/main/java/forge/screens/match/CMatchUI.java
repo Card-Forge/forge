@@ -641,6 +641,8 @@ public final class CMatchUI
                         cp.repaintOverlays();
                     }
                 }
+                // VHand only covers the local hand; opponent hands shown in a FloatingZone need an explicit refresh.
+                FloatingZone.refresh(c.getController(), zone);
                 break;
             default:
                 FloatingZone.refresh(c.getController(),zone); // in case the card is visible in the zone
