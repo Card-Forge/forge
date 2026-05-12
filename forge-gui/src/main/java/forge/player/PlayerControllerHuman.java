@@ -1154,16 +1154,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public CardCollectionView chooseCardsToDiscardFrom(final Player p, final SpellAbility sa,
-                                                       final CardCollection valid, final int min, final int max) {
+                                                       final CardCollection valid, final int min, final int max,
+                                                       final CardCollectionView visibleToChooser) {
         boolean optional = min == 0;
 
         if (p != player) {
-            // Reveal/Look modes (no RevealNumber) publicly disclose the full hand — keep non-selectable revealed cards visible
-            final String discardMode = sa.getParam("Mode");
-            final boolean fullHandRevealedToChooser = discardMode != null
-                    && !sa.hasParam("RevealNumber")
-                    && (discardMode.startsWith("Reveal") || discardMode.startsWith("Look"));
-            tempShowCards(fullHandRevealedToChooser ? p.getCardsIn(ZoneType.Hand) : valid);
+            tempShowCards(visibleToChooser);
             if (useSelectCardsInput(valid, sa)) {
                 final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, min, max, valid, sa);
                 inp.setMessage(String.format(localizer.getMessage("lblChooseMinCardToDiscard"), optional ? max : min));
