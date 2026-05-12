@@ -176,6 +176,7 @@ public final class CMatchUI
     private final CPrompt cPrompt = new CPrompt(this);
     private final CStack cStack = new CStack(this);
     private int nextNotifiableStackIndex = 0;
+    private String lastPromptMessage = "";
 
     public CMatchUI() {
         this.view = new VMatchUI(this);
@@ -1048,15 +1049,29 @@ public final class CMatchUI
     public void showPromptMessage(final PlayerView playerView, final String message) {
         cancelWaitingTimer();
         cPrompt.setMessage(message);
+        notePromptMessage(message);
     }
     public void showPromptMessageNoCancel(final PlayerView playerView, final String message) {
         cPrompt.setMessage(message);
+        notePromptMessage(message);
     }
 
     @Override
     public void showCardPromptMessage(PlayerView playerView, String message, CardView card) {
         cancelWaitingTimer();
         cPrompt.setMessage(message, card);
+        notePromptMessage(message);
+    }
+
+    private void notePromptMessage(final String message) {
+        lastPromptMessage = message != null ? message : "";
+        if (isSelecting()) {
+            FloatingZone.refreshSelectionPrompts();
+        }
+    }
+
+    public String getPromptMessage() {
+        return lastPromptMessage;
     }
 
     @Override

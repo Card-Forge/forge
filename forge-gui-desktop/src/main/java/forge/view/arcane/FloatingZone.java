@@ -58,6 +58,7 @@ import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.views.VHand;
 import forge.screens.match.views.VZone;
+import forge.toolbox.FHtmlViewer;
 import forge.toolbox.FLabel;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FScrollPane;
@@ -316,6 +317,13 @@ public class FloatingZone extends FloatingCardArea {
         }
     }
 
+    /** Lightweight refresh path for mid-selection prompt changes — avoids rebuilding card panels. */
+    public static void refreshSelectionPrompts() {
+        for (final FloatingZone fz : floatingAreas.values()) {
+            if (fz.isVisible()) fz.updatePromptVisibility();
+        }
+    }
+
     /** Returns the docked VZone for a player/zone, or null. */
     public static VZone getDockedZone(final PlayerView player, final ZoneType zone) {
         return dockedZones.get(getKey(player, zone));
@@ -530,6 +538,7 @@ public class FloatingZone extends FloatingCardArea {
     private final FTextField searchField = new FTextField.Builder()
             .ghostText(Localizer.getInstance().getMessage("lblFilterByName"))
             .build();
+    private final FHtmlViewer promptLabel = new FHtmlViewer();
     private final FLabel hotkeyHint = new FLabel.Builder()
             .text(Localizer.getInstance().getMessage("lblHotkeySelectHint"))
             .fontSize(11)
@@ -575,6 +584,9 @@ public class FloatingZone extends FloatingCardArea {
             @Override public void removeUpdate(final DocumentEvent e) { onFilterChanged(); }
             @Override public void changedUpdate(final DocumentEvent e) { onFilterChanged(); }
         });
+        promptLabel.setBorder(BorderFactory.createEmptyBorder(3, 6, 3, 6));
+        promptLabel.setVisible(false);
+        window.add(promptLabel, "growx, wmin 10, gapbottom 4, wrap");
         window.add(searchField, "growx, wrap");
         window.add(getScrollPane(), "grow, push, wrap");
         hotkeyHint.setVisible(false);
@@ -650,7 +662,20 @@ public class FloatingZone extends FloatingCardArea {
         } else {
             getWindow().setTitle(String.format(title, shown));
         }
+        updatePromptVisibility();
         assignOwnHotkeyDigits();
+    }
+
+    private void updatePromptVisibility() {
+        final boolean show = getMatchUI().isSelecting();
+        final String prompt = show ? getMatchUI().getPromptMessage() : null;
+        if (prompt != null && !prompt.isEmpty()) {
+            promptLabel.setText(FSkin.encodeSymbols(prompt, false));
+            promptLabel.setVisible(true);
+        } else {
+            promptLabel.setVisible(false);
+        }
+        window.revalidate();
     }
 
     private void toggleSorted() {
