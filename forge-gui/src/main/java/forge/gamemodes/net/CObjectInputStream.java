@@ -44,14 +44,12 @@ public class CObjectInputStream extends ObjectInputStream {
     @Override
     protected ObjectStreamClass readClassDescriptor() throws IOException, ClassNotFoundException {
         int type = read();
-        if (type < 0) {
+        if (type < 0)
             throw new EOFException();
-        } else {
-            if (type == CObjectOutputStream.TYPE_THIN_DESCRIPTOR)
-                return ObjectStreamClass.lookupAny(classResolver.resolve(readUTF()));
-            else
-                return super.readClassDescriptor();
-        }
+        else if (type == CObjectOutputStream.TYPE_THIN_DESCRIPTOR)
+            return ObjectStreamClass.lookupAny(classResolver.resolve(readUTF()));
+        else
+            return super.readClassDescriptor();
     }
 
     @Override
