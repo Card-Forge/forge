@@ -162,7 +162,6 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_ENABLE_MATCH_SCROLL_INDICATOR("false"),
         UI_ENABLE_MAGNIFIER("true"),
         UI_SHOW_FPS("false"),
-        UI_NETPLAY_COMPAT("false"),
         UI_ENABLE_DISPOSE_TEXTURES("false"),
         UI_LOAD_UNKNOWN_CARDS("true"),
         UI_LOAD_NONLEGAL_CARDS("true"),

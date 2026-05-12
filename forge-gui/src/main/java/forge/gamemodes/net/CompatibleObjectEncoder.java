@@ -1,7 +1,6 @@
 package forge.gamemodes.net;
 
 import forge.gamemodes.net.event.GuiGameEvent;
-import forge.gui.GuiBase;
 import forge.trackable.Tracker;
 import forge.util.IHasForgeLog;
 import io.netty.buffer.ByteBuf;
@@ -14,11 +13,27 @@ import net.jpountz.lz4.LZ4BlockOutputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+/**
+ * Netty outbound handler that frames and serializes one network message per
+ * call. The wire format for each message is a 4-byte big-endian length followed
+ * by an LZ4-compressed Java serialization stream produced by
+ * {@link CObjectOutputStream}. Tracker-aware reference compression (CardView/
+ * PlayerView → {@link TrackableSerializer.IdRef}) is delegated to that stream
+ * via {@code replaceObject}, gated per-message by {@link #shouldReplaceTrackables}.
+ */
 public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> implements IHasForgeLog {
+
+    static final int LARGE_MESSAGE_LOG_THRESHOLD_BYTES = 20_000;
 
     private static final byte[] LENGTH_PLACEHOLDER = new byte[4];
     private final NetworkByteTracker byteTracker;
     private volatile Tracker tracker;
+    /**
+     * Per-client {@code DeltaSyncManager.consumerId} for IdRef gating on the
+     * server side. {@code -1} = use tracker presence instead (client-side
+     * encoders never set this; server-side wires it via {@link #setTracker}).
+     */
+    private volatile int consumerId = -1;
 
     public CompatibleObjectEncoder(NetworkByteTracker byteTracker) {
         this.byteTracker = byteTracker;
@@ -28,16 +43,20 @@ public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> 
         this.tracker = tracker;
     }
 
+    public void setConsumerId(int consumerId) {
+        this.consumerId = consumerId;
+    }
+
     @Override
     protected void encode(ChannelHandlerContext ctx, Serializable msg, ByteBuf out) throws Exception {
-        encodeInto(msg, out, this.tracker, this.byteTracker);
+        encodeInto(msg, out, this.tracker, this.consumerId, this.byteTracker);
     }
 
     /** Caller passes the returned buffer to writeAndFlush, which takes ownership. */
     public ByteBuf encodeToBuf(Serializable msg, ByteBufAllocator alloc) throws Exception {
         ByteBuf out = alloc.buffer();
         try {
-            encodeInto(msg, out, this.tracker, this.byteTracker);
+            encodeInto(msg, out, this.tracker, this.consumerId, this.byteTracker);
         } catch (Exception e) {
             out.release();
             throw e;
@@ -45,30 +64,24 @@ public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> 
         return out;
     }
 
-    private static void encodeInto(Serializable msg, ByteBuf out, Tracker tracker,
+    private static void encodeInto(Serializable msg, ByteBuf out, Tracker tracker, int consumerId,
                                    NetworkByteTracker byteTracker) throws Exception {
         int startIdx = out.writerIndex();
-        ByteBufOutputStream bout = new ByteBufOutputStream(out);
-        ObjectOutputStream oout = null;
+        ByteBufOutputStream byteOut = new ByteBufOutputStream(out);
+        ObjectOutputStream objectOut = null;
 
         boolean replace = shouldReplaceTrackables(msg);
 
         try {
-            bout.write(LENGTH_PLACEHOLDER);
-            if (GuiBase.hasPropertyConfig()) {
-                oout = replace
-                        ? new TrackableSerializer.ReplacingOutputStream(new LZ4BlockOutputStream(bout), tracker, false)
-                        : new ObjectOutputStream(new LZ4BlockOutputStream(bout));
-            } else {
-                oout = new CObjectOutputStream(new LZ4BlockOutputStream(bout), replace);
-            }
-            oout.writeObject(msg);
-            oout.flush();
+            byteOut.write(LENGTH_PLACEHOLDER);
+            objectOut = new CObjectOutputStream(new LZ4BlockOutputStream(byteOut), replace, tracker, consumerId);
+            objectOut.writeObject(msg);
+            objectOut.flush();
         } finally {
-            if (oout != null) {
-                oout.close();
+            if (objectOut != null) {
+                objectOut.close();
             } else {
-                bout.close();
+                byteOut.close();
             }
         }
 
@@ -81,7 +94,7 @@ public class CompatibleObjectEncoder extends MessageToByteEncoder<Serializable> 
             String messageType = msg.getClass().getSimpleName();
             byteTracker.recordBytesSent(bytesSent, messageType);
         }
-        if (msgSize > 20_000) {
+        if (msgSize > LARGE_MESSAGE_LOG_THRESHOLD_BYTES) {
             netLog.info("Encoded {} bytes (compressed) for {}", msgSize, msg.getClass().getSimpleName());
         }
     }

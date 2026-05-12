@@ -24,7 +24,7 @@ import java.util.List;
  * encoding and resolves them back from the Tracker during decoding.
  *
  * <p>Used by the Netty encoder/decoder pipeline ({@link CompatibleObjectEncoder},
- * {@link CompatibleObjectDecoder}) and the mobile codec path
+ * {@link CompatibleObjectDecoder}) via the underlying object streams
  * ({@link CObjectOutputStream}, {@link CObjectInputStream}).
  */
 public final class TrackableSerializer {
@@ -65,11 +65,19 @@ public final class TrackableSerializer {
      * set so the receiver decodes a detached CardView from the carried name
      * and image key.
      * <p>
-     * In non-event mode, CardViews missing from the tracker pass through
-     * unchanged so Java serializes the full object inline (covers ephemeral
-     * choice copies that never enter a tracked zone).
+     * In non-event mode, a CardView is substituted with an IdRef only when
+     * the receiver is known to have it: server-side (consumerId &ge; 0) that
+     * means {@code DeltaSyncManager} has registered this consumer on the
+     * object (i.e. its properties have been included in a delta for that
+     * client); client-side (consumerId &lt; 0) the encoder falls back to
+     * tracker presence, which is sound there because the client's tracker
+     * <em>is</em> exactly what the client knows.
+     * <p>
+     * CardViews that fail the gate pass through unchanged so Java serializes
+     * the full object inline (covers Jhoira-style ephemeral choice copies
+     * that never enter a tracked zone and are never broadcast).
      */
-    static Object replace(Object obj, Tracker tracker, boolean eventMode) {
+    static Object replace(Object obj, Tracker tracker, int consumerId, boolean eventMode) {
         if (obj instanceof TrackableObject trackable) {
             byte tag = typeTagFor(trackable);
             if (tag < 0) return obj;
@@ -79,7 +87,10 @@ public final class TrackableSerializer {
             }
 
             if (!eventMode) {
-                if (tracker != null && tracker.getObj(trackableTypeFor(tag), trackable.getId()) != null) {
+                boolean receiverKnows = consumerId >= 0
+                        ? trackable.hasConsumer(consumerId)
+                        : tracker != null && tracker.getObj(trackableTypeFor(tag), trackable.getId()) != null;
+                if (receiverKnows) {
                     return new IdRef(tag, trackable.getId());
                 }
                 return obj;
@@ -217,7 +228,12 @@ public final class TrackableSerializer {
 
         @Override
         protected Object replaceObject(Object obj) {
-            return replace(obj, tracker, eventMode);
+            // Inner-layer stream (events / size measurement). No per-client
+            // consumer here — eventMode=true uses EventCardRef which carries
+            // its own snapshot, and DeltaPacket property maps already use
+            // Integer IDs via toNetworkValue, so the !eventMode path has
+            // nothing to replace.
+            return replace(obj, tracker, -1, eventMode);
         }
     }
 
