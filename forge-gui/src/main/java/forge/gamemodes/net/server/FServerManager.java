@@ -86,7 +86,6 @@ public final class FServerManager implements IHasForgeLog {
     });
 
     private final Map<Integer, RemoteClientGuiGame> playerGuis = new ConcurrentHashMap<>(); // Store RemoteClientGuiGame instances for reuse
-    private final Map<Integer, Boolean> lastBroadcastReadyState = new ConcurrentHashMap<>(); // dedupe ready-state chat broadcasts
 
     // Network byte tracking for monitoring actual bandwidth usage
     private final forge.gamemodes.net.NetworkByteTracker byteTracker =
@@ -401,15 +400,11 @@ public final class FServerManager implements IHasForgeLog {
         localLobby.applyToSlot(index, event);
 
         if (event.getReady() != null) {
-            broadcastReadyState(index, localLobby.getSlot(index).getName(), event.getReady());
+            broadcastReadyState(localLobby.getSlot(index).getName(), event.getReady());
         }
     }
 
-    private void broadcastReadyState(int index, String playerName, boolean isReady) {
-        Boolean prev = lastBroadcastReadyState.put(index, isReady);
-        if (prev != null && prev == isReady) {
-            return; // no transition; skip duplicate broadcast
-        }
+    private void broadcastReadyState(String playerName, boolean isReady) {
         int readyCount = 0;
         int totalPlayers = 0;
         for (int i = 0; i < localLobby.getNumberOfSlots(); i++) {
@@ -936,7 +931,7 @@ public final class FServerManager implements IHasForgeLog {
                     }
                 }
                 if (event.getReady() != null) {
-                    broadcastReadyState(client.getIndex(), client.getUsername(), event.getReady());
+                    broadcastReadyState(client.getUsername(), event.getReady());
                 }
                 // Return to prevent duplicate processing by LobbyInputHandler
                 return;

@@ -838,8 +838,11 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         // clear ready for everyone
         for (int i = 0; i < playerCount; i++) {
             final PlayerPanel panel = playerPanels.get(i);
+            final boolean wasReady = panel.isReady();
             panel.setIsReady(false);
-            firePlayerChangeListener(i);
+            if (wasReady && playerChangeListener != null) {
+                playerChangeListener.update(i, UpdateLobbyPlayerEvent.isReadyUpdate(false));
+            }
         }
     }
     void firePlayerChangeListener(final int index) {
@@ -884,7 +887,6 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 panel.getSleeveIndex(),
                 panel.getTeam(),
                 panel.isArchenemy(),
-                panel.isReady(),
                 panel.isDevMode(),
                 panel.getAiOptions(),
                 null); // TODO implement AI profile support for mobile
