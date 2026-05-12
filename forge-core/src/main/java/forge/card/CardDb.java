@@ -755,11 +755,18 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             filter = filter.and((c) -> collectorNumber.equals(c.getCollectorNumber()));
 
         List<PaperCard> candidates = getAllCards(cardName, filter);
-        // Weird quirk here. If a set contains both "Ancestral Recall" and "Emeritus of Ideation // Ancestral Recall", a
-        // card request for Ancestral Recall with no collector number could find either. Could use getAllCardsNoAlt, but
-        // then a request for "Fire" wouldn't find "Fire // Ice".
         if (candidates.isEmpty())
             return null;
+
+        if (candidates.stream().map(PaperCard::getRules).distinct().count() > 1)
+        {
+            //We've run into either an ambiguous alt-face or an Emeritus situation. Can't do anything for the former,
+            //but we can bias towards the main face if it's the latter.
+            String finalCardName = cardName;
+            if (candidates.stream().map(PaperCard::getName).anyMatch(n -> n.equalsIgnoreCase(finalCardName))) {
+                candidates.removeIf(c -> !c.getName().equalsIgnoreCase(finalCardName));
+            }
+        }
 
         Iterator<PaperCard> candidatesIterator = candidates.iterator();
         PaperCard candidate = candidatesIterator.next();
