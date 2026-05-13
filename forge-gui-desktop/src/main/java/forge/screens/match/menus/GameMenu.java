@@ -5,9 +5,12 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 
 import com.google.common.primitives.Ints;
 
@@ -60,8 +63,17 @@ public final class GameMenu {
         menu.add(getMenuItem_SeparateCombatStacks());
         menu.add(getMenuItem_AutoYieldsAndTriggers());
         menu.add(getMenuItem_YieldSettings());
+        final SkinnedCheckBoxMenuItem autoPassItem = getMenuItem_AutoPass();
+        menu.add(autoPassItem);
         menu.addSeparator();
         menu.add(getMenuItem_ViewDeckList());
+        menu.addMenuListener(new MenuListener() {
+            @Override public void menuSelected(final MenuEvent e) {
+                autoPassItem.setState(prefs.getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS));
+            }
+            @Override public void menuDeselected(final MenuEvent e) {}
+            @Override public void menuCanceled(final MenuEvent e) {}
+        });
         return menu;
     }
 
@@ -116,7 +128,7 @@ public final class GameMenu {
     }
 
     /** Sets a menu item's accelerator display from a shortcut preference. */
-    private static void setAcceleratorFromPref(final SkinnedMenuItem menuItem, final FPref pref) {
+    private static void setAcceleratorFromPref(final JMenuItem menuItem, final FPref pref) {
         final KeyStroke ks = KeyboardShortcuts.getKeyStrokeForPref(pref);
         if (ks != null) {
             menuItem.setAccelerator(ks);
@@ -191,6 +203,19 @@ public final class GameMenu {
         final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblYieldSettings"));
         menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_SETTINGS) : null));
         menuItem.addActionListener(e -> new VYieldSettings(matchUI).showDialog());
+        return menuItem;
+    }
+
+    private SkinnedCheckBoxMenuItem getMenuItem_AutoPass() {
+        final Localizer localizer = Localizer.getInstance();
+        final SkinnedCheckBoxMenuItem menuItem = new SkinnedCheckBoxMenuItem(localizer.getMessage("lblEnableAutoPass"));
+        setAcceleratorFromPref(menuItem, FPref.SHORTCUT_YIELD_AUTO_PASS);
+        menuItem.setState(prefs.getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS));
+        menuItem.addActionListener(e -> {
+            YieldController.toggleAutoPassNoActions(matchUI.getGameController());
+            matchUI.getCDock().refreshAutoPassToggled();
+            menuItem.setState(prefs.getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS));
+        });
         return menuItem;
     }
 
