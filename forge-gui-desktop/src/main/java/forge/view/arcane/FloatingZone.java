@@ -664,7 +664,6 @@ public class FloatingZone extends FloatingCardArea {
             getWindow().setTitle(String.format(title, shown));
         }
         updatePromptVisibility();
-        assignOwnHotkeyDigits();
     }
 
     private void updatePromptVisibility() {
@@ -755,6 +754,16 @@ public class FloatingZone extends FloatingCardArea {
     }
 
     private static boolean dispatchHotkey(final KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_CONTROL) {
+            for (final FloatingZone fz : floatingAreas.values()) {
+                if (!fz.isVisible()) continue;
+                if (e.getID() == KeyEvent.KEY_RELEASED) {
+                    fz.assignOwnHotkeyDigits(true);
+                } else if (e.getID() == KeyEvent.KEY_PRESSED) {
+                    fz.assignOwnHotkeyDigits(false);
+                }
+            }
+        }
         if (e.getID() != KeyEvent.KEY_PRESSED) return false;
         // Esc with focused, non-empty search field clears the filter instead of closing the window.
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE && !e.isControlDown() && !e.isAltDown() && !e.isMetaDown()) {
@@ -788,17 +797,19 @@ public class FloatingZone extends FloatingCardArea {
         return null;
     }
 
-    private void assignOwnHotkeyDigits() {
+    private void assignOwnHotkeyDigits(boolean clear) {
         final boolean selecting = getMatchUI().isSelecting();
         int next = 1;
         for (final CardPanel panel : getCardPanels()) {
-            if (selecting && next <= 9 && getMatchUI().isSelectable(panel.getCard())) {
+            if (!clear && selecting && next <= 9 && getMatchUI().isSelectable(panel.getCard())) {
                 panel.setHotkeyDigit(next++);
             } else {
                 panel.setHotkeyDigit(0);
             }
         }
-        hotkeyHint.setVisible(next > 1);
+        if (!clear) {
+            hotkeyHint.setVisible(next > 1);
+        }
     }
 
 }
