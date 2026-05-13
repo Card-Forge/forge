@@ -799,10 +799,9 @@ public class FloatingZone extends FloatingCardArea {
     }
 
     private void assignOwnHotkeyDigits(boolean clear) {
-        final boolean selecting = getMatchUI().isSelecting();
         int next = 1;
         for (final CardPanel panel : getCardPanels()) {
-            if (!clear && selecting && next <= 9 && getMatchUI().isSelectable(panel.getCard())) {
+            if (!clear && next <= 9 && getMatchUI().isSelectable(panel.getCard())) {
                 panel.setHotkeyDigit(next++);
             } else {
                 panel.setHotkeyDigit(0);
