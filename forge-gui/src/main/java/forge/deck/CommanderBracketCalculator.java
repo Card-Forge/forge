@@ -44,7 +44,10 @@ public final class CommanderBracketCalculator {
         if (!chainedExtraTurns.isEmpty()) {
             bracket = Math.max(bracket, 4);
         }
-        if (extraTurns.size() >= 3) {
+        if (extraTurns.size() >= 4) {
+            bracket = Math.max(bracket, 4);
+        }
+        else if (extraTurns.size() >= 3) {
             bracket = Math.max(bracket, 3);
         }
         else if (extraTurns.size() >= 2) {
@@ -220,17 +223,16 @@ public final class CommanderBracketCalculator {
             appendCards(sb, localizer, localizer.getMessage("lblCommanderBracketGameChangers"), gamechangers,
                     gamechangers.size() >= 4 ? localizer.getMessage("lblCommanderBracketReasonGameChangersFour")
                             : !gamechangers.isEmpty() ? localizer.getMessage("lblCommanderBracketReasonGameChangersOne")
-                            : localizer.getMessage("lblCommanderBracketReasonGameChangersNone"));
+                            : null);
             appendCards(sb, localizer, localizer.getMessage("lblCommanderBracketMassLandDenial"), massLandDenial,
-                    massLandDenial.isEmpty() ? localizer.getMessage("lblCommanderBracketReasonMassLandDenialNone")
-                            : localizer.getMessage("lblCommanderBracketReasonMassLandDenial"));
+                    massLandDenial.isEmpty() ? null : localizer.getMessage("lblCommanderBracketReasonMassLandDenial"));
             appendCards(sb, localizer, localizer.getMessage("lblCommanderBracketExtraTurns"), extraTurns,
-                    extraTurns.size() >= 3 ? localizer.getMessage("lblCommanderBracketReasonExtraTurnsThree")
+                    extraTurns.size() >= 4 ? localizer.getMessage("lblCommanderBracketReasonExtraTurnsFour")
+                            : extraTurns.size() >= 3 ? localizer.getMessage("lblCommanderBracketReasonExtraTurnsThree")
                             : extraTurns.size() >= 2 ? localizer.getMessage("lblCommanderBracketReasonExtraTurnsTwo")
-                            : localizer.getMessage("lblCommanderBracketReasonExtraTurnsFew"));
+                            : extraTurns.isEmpty() ? null : localizer.getMessage("lblCommanderBracketReasonExtraTurnsFew"));
             appendCards(sb, localizer, localizer.getMessage("lblCommanderBracketChainedExtraTurns"), chainedExtraTurns,
-                    chainedExtraTurns.isEmpty() ? localizer.getMessage("lblCommanderBracketReasonChainedExtraTurnsNone")
-                            : localizer.getMessage("lblCommanderBracketReasonChainedExtraTurn"));
+                    chainedExtraTurns.isEmpty() ? null : localizer.getMessage("lblCommanderBracketReasonChainedExtraTurn"));
             appendCombos(sb, localizer, lateGameCombos, earlyGameCombos);
             return sb.toString();
         }
@@ -246,14 +248,17 @@ public final class CommanderBracketCalculator {
                     sb.append("  ").append(card).append("\n");
                 }
             }
-            sb.append("  ").append(reason).append("\n\n");
+            if (reason != null) {
+                sb.append("  ").append(reason).append("\n");
+            }
+            sb.append("\n");
         }
 
         private static void appendCombos(final StringBuilder sb, final Localizer localizer,
                                          final List<Combo> lateGameCombos, final List<Combo> earlyGameCombos) {
             sb.append(localizer.getMessage("lblCommanderBracketTwoCardCombos")).append("\n");
             if (lateGameCombos.isEmpty() && earlyGameCombos.isEmpty()) {
-                sb.append("  ").append(localizer.getMessage("lblCommanderBracketReasonTwoCardCombosNone")).append("\n");
+                sb.append("  ").append(localizer.getMessage("lblNone")).append("\n");
             }
             else {
                 for (final Combo combo : lateGameCombos) {
