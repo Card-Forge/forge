@@ -65,7 +65,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     private final Map<String, Boolean> nonLegendaryCreatureNames = Maps.newHashMap();
 
-    public enum CardArtPreference {
+    public enum CardArtPreference implements Comparator<CardEdition> {
         LATEST_ART_ALL_EDITIONS(false, true),
         LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY(true, true),
         ORIGINAL_ART_ALL_EDITIONS(false, false),
@@ -84,6 +84,15 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         public boolean accept(CardEdition ed) {
             if (ed == null) return false;
             return !filterSets || ALLOWED_SET_TYPES.contains(ed.getType());
+        }
+
+        @Override
+        public int compare(CardEdition o1, CardEdition o2) {
+            if (o1 == o2)
+                return 0;
+            if(filterSets && (ALLOWED_SET_TYPES.contains(o1.getType()) != ALLOWED_SET_TYPES.contains(o2.getType())))
+                return ALLOWED_SET_TYPES.contains(o1.getType()) ? -1 : 1;
+            return (latestFirst ? -1 : 1) * o1.getDate().compareTo(o2.getDate());
         }
     }
 
@@ -559,29 +568,24 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         uniqueCardsByRules.clear();
         uniqueCardsByFlavorName.clear();
         for (Entry<CardRules, Collection<PaperCard>> kv : allCardsByRules.asMap().entrySet()) {
-            PaperCard pc = getFirstNonSpecialWithImage(kv.getValue());
+            PaperCard pc = getBestUniquePrint(kv.getValue());
             uniqueCardsByRules.put(kv.getKey(), pc);
         }
         for (Entry<String, String> kv : flavorNameMappings.entrySet()) {
             if (kv.getValue().equals(IPaperCard.NO_FUNCTIONAL_VARIANT))
                 continue;
             String flavorName = kv.getKey();
-            PaperCard pc = getFirstNonSpecialWithImage(allCardsByName.get(flavorName));
+            PaperCard pc = getBestUniquePrint(allCardsByName.get(flavorName));
             uniqueCardsByFlavorName.put(flavorName, pc);
         }
     }
 
-    private static PaperCard getFirstNonSpecialWithImage(final Collection<PaperCard> cards) {
-        //NOTE: this is written this way to avoid checking final card in list
-        final Iterator<PaperCard> iterator = cards.iterator();
-        PaperCard pc = iterator.next();
-        while (iterator.hasNext()) {
-            if (pc.hasImage() && !pc.getRarity().equals(CardRarity.Special)) {
-                return pc;
-            }
-            pc = iterator.next();
-        }
-        return pc;
+    private PaperCard getBestUniquePrint(final Collection<PaperCard> cards) {
+        return cards.stream()
+                .filter(pc -> !pc.getRarity().equals(CardRarity.Special))
+                .min(Comparator.comparing((PaperCard pc) -> editions.get(pc.getEdition()), defaultCardArtPreference)
+                        .thenComparing(PaperCard::getCollectorNumber))
+                .orElseGet(() -> cards.iterator().next());
     }
 
     public boolean setPreferredArt(String cardName, String setCode, int artIndex) {
