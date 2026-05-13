@@ -1063,8 +1063,18 @@ public final class CMatchUI
         notePromptMessage(message);
     }
 
-    private void notePromptMessage(final String message) {
-        lastPromptMessage = message != null ? message : "";
+    private void notePromptMessage(String message) {
+        if (message != null) {
+            int lastBreak = message.lastIndexOf("\n");
+            if (lastBreak != -1) {
+                // try to only use the specific message of the input
+                // not fully accurate but ok for now
+                message = message.substring(lastBreak + 1);
+            }
+        } else {
+            message = "";
+        }
+        lastPromptMessage = message;
         if (isSelecting()) {
             FloatingZone.refreshSelectionPrompts();
         }
