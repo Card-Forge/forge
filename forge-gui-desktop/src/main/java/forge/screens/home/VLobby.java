@@ -357,6 +357,9 @@ public class VLobby implements ILobbyView {
                 playerChangeListener.update(i, UpdateLobbyPlayerEvent.isReadyUpdate(false));
             }
         }
+        if (playerChangeListener != null) {
+            playerChangeListener.update(index, UpdateLobbyPlayerEvent.devModeUpdate(getPlayerPanel(index).isDevMode()));
+        }
         changePlayerFocus(index);
     }
     void firePlayerChangeListener(final int index) {

@@ -67,6 +67,11 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
     public static UpdateLobbyPlayerEvent isReadyUpdate(final boolean isReady) {
         return new UpdateLobbyPlayerEvent(isReady);
     }
+    public static UpdateLobbyPlayerEvent devModeUpdate(final boolean isDevMode) {
+        final UpdateLobbyPlayerEvent event = new UpdateLobbyPlayerEvent();
+        event.isDevMode = isDevMode;
+        return event;
+    }
     public static UpdateLobbyPlayerEvent teamUpdate(int team) {
         return new UpdateLobbyPlayerEvent(team);
     }

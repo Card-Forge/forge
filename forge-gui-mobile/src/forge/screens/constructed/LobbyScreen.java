@@ -844,6 +844,9 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 playerChangeListener.update(i, UpdateLobbyPlayerEvent.isReadyUpdate(false));
             }
         }
+        if (playerChangeListener != null) {
+            playerChangeListener.update(index, UpdateLobbyPlayerEvent.devModeUpdate(playerPanels.get(index).isDevMode()));
+        }
     }
     void firePlayerChangeListener(final int index) {
         if (playerChangeListener != null) {
