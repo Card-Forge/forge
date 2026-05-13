@@ -65,7 +65,7 @@ public record CounterKeywordType(KeywordView keyword) implements CounterType {
 
     @Override
     public CounterAiCategory getAiCategory() {
-        if (Keyword.DECAYED.equals(type)) {
+        if (Keyword.DECAYED.equals(keyword.keyword())) {
             return CounterAiCategory.Negative;
         }
         return CounterAiCategory.Positive;
