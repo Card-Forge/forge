@@ -250,7 +250,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
         // setGameView is called before openView, and the client can't respond
         // until after openView — so the encoder/decoder are ready in time.
         if (!codecTrackerSet && gameView != null && gameView.getTracker() != null) {
-            client.setCodecTracker(gameView.getTracker());
+            client.setCodecTracker(gameView.getTracker(), syncManager.getConsumerId());
             codecTrackerSet = true;
         }
         updateGameView();
