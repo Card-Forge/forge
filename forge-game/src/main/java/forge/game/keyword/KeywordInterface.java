@@ -72,6 +72,6 @@ public interface KeywordInterface extends Cloneable, IHasSVars, ICardTraitChange
     boolean redundant(final Collection<KeywordInterface> list);
 
     default KeywordView getView() {
-        return new DefaultKeywordView(this.getKeyword(), this.getTitle(), this.getReminderText());
+        return new DefaultKeywordView(getOriginal(), getKeyword(), getTitle(), getReminderText());
     }
 }

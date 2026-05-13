@@ -145,6 +145,7 @@ public enum TrackableProperty {
     OrigProduceMana(TrackableTypes.ColorSetType),
     OrigProduceAnyMana(TrackableTypes.BooleanType),
 
+    Keywords(TrackableTypes.KeywordCollectionViewType, FreezeMode.IgnoresFreeze),
     KeywordKey(TrackableTypes.StringType),
     HasAnnihilator(TrackableTypes.BooleanType),
     HasDeathtouch(TrackableTypes.BooleanType),
@@ -206,7 +207,6 @@ public enum TrackableProperty {
     OptionalAdditionalVote(TrackableTypes.IntegerType),
     ControlVotes(TrackableTypes.BooleanType),
     AdditionalVillainousChoices(TrackableTypes.IntegerType),
-    Keywords(TrackableTypes.StringListType, FreezeMode.IgnoresFreeze),
     Commander(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
     CommanderCast(TrackableTypes.IntegerMapType),
     CommanderDamage(TrackableTypes.IntegerMapType),

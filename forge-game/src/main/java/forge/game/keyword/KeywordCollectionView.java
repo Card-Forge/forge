@@ -1,12 +1,16 @@
 package forge.game.keyword;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
 
-public class KeywordCollectionView implements Iterable<KeywordView> {
+public class KeywordCollectionView implements Iterable<KeywordView>, Serializable {
+    private static final long serialVersionUID = 1L;
+    public static KeywordCollectionView EMPTY = new KeywordCollectionView(List.of());
     // don't use enumKeys it causes a slow down
     private final Multimap<Keyword, KeywordView> map = MultimapBuilder.hashKeys()
             .linkedHashSetValues().build();

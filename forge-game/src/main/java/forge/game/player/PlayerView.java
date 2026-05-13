@@ -11,6 +11,7 @@ import forge.game.GameEntityView;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CounterType;
+import forge.game.keyword.KeywordCollectionView;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.trackable.TrackableCollection;
@@ -328,14 +329,11 @@ public class PlayerView extends GameEntityView {
         set(TrackableProperty.AdditionalVillainousChoices, p.getAdditionalVotesAmount());
     }
 
-    public List<String> getKeywords() {
+    public KeywordCollectionView getKeywords() {
         return get(TrackableProperty.Keywords);
     }
-    public boolean hasKeyword(String keyword) {
-        return getKeywords().contains(keyword);
-    }
     void updateKeywords(Player p) {
-        set(TrackableProperty.Keywords, p.getKeywords().asStringList());
+        set(TrackableProperty.Keywords, p.getKeywords().getView());
     }
 
     public List<CardView> getCommanders() {
