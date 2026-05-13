@@ -1049,7 +1049,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     public List<PaperCard> getAllCardsNoAlt(String rulesName) {
         CardRules rules = getRules(rulesName, false);
         if(rules == null)
-            return null;
+            return List.of();
         return allCardsByRules.get(rules);
     }
 
