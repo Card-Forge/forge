@@ -11,6 +11,7 @@ import forge.game.GameEntityView;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.card.CounterType;
+import forge.game.keyword.KeywordView;
 import forge.game.keyword.KeywordCollectionView;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -542,7 +543,7 @@ public class PlayerView extends GameEntityView {
         }
         details.add(Localizer.getInstance().getMessage("lblExtraTurnCountHas", getExtraTurnCount()));
 
-        final String keywords = Lang.joinHomogenous(getKeywords());
+        final String keywords = Lang.joinHomogenous(getKeywords(), KeywordView::title);
         if (!keywords.isEmpty()) {
             details.add(keywords);
         }
