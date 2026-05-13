@@ -225,8 +225,7 @@ public final class CommanderBracketCalculator {
                     massLandDenial.isEmpty() ? localizer.getMessage("lblCommanderBracketReasonMassLandDenialNone")
                             : localizer.getMessage("lblCommanderBracketReasonMassLandDenial"));
             appendCards(sb, localizer, localizer.getMessage("lblCommanderBracketExtraTurns"), extraTurns,
-                    !chainedExtraTurns.isEmpty() ? localizer.getMessage("lblCommanderBracketReasonChainedExtraTurn")
-                            : extraTurns.size() >= 3 ? localizer.getMessage("lblCommanderBracketReasonExtraTurnsThree")
+                    extraTurns.size() >= 3 ? localizer.getMessage("lblCommanderBracketReasonExtraTurnsThree")
                             : extraTurns.size() >= 2 ? localizer.getMessage("lblCommanderBracketReasonExtraTurnsTwo")
                             : localizer.getMessage("lblCommanderBracketReasonExtraTurnsFew"));
             appendCards(sb, localizer, localizer.getMessage("lblCommanderBracketChainedExtraTurns"), chainedExtraTurns,
@@ -254,7 +253,6 @@ public final class CommanderBracketCalculator {
                                          final List<Combo> lateGameCombos, final List<Combo> earlyGameCombos) {
             sb.append(localizer.getMessage("lblCommanderBracketTwoCardCombos")).append("\n");
             if (lateGameCombos.isEmpty() && earlyGameCombos.isEmpty()) {
-                sb.append("  ").append(localizer.getMessage("lblNone")).append("\n");
                 sb.append("  ").append(localizer.getMessage("lblCommanderBracketReasonTwoCardCombosNone")).append("\n");
             }
             else {
