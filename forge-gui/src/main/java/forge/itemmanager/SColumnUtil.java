@@ -236,6 +236,10 @@ public final class SColumnUtil {
     }
 
     public static Map<ColumnDef, ItemColumnConfig> getDecksDefaultColumns(boolean allowEdit, boolean includeFolder) {
+        return getDecksDefaultColumns(allowEdit, includeFolder, false);
+    }
+
+    public static Map<ColumnDef, ItemColumnConfig> getDecksDefaultColumns(boolean allowEdit, boolean includeFolder, boolean includeBracket) {
         List<ColumnDef> colDefs = new ArrayList<>();
         colDefs.add(ColumnDef.DECK_FAVORITE);
         if (allowEdit) {
@@ -248,6 +252,9 @@ public final class SColumnUtil {
         colDefs.add(ColumnDef.DECK_COLOR);
         colDefs.add(ColumnDef.DECK_FORMAT);
         colDefs.add(ColumnDef.DECK_EDITION);
+        if (includeBracket) {
+            colDefs.add(ColumnDef.DECK_BRACKET);
+        }
         colDefs.add(ColumnDef.DECK_MAIN);
         colDefs.add(ColumnDef.DECK_SIDE);
         colDefs.add(ColumnDef.DECK_AI);
