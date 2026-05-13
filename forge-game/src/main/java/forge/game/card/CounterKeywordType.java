@@ -9,9 +9,9 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 
 import forge.game.keyword.Keyword;
-import forge.game.keyword.KeywordInterface;
+import forge.game.keyword.KeywordView;
 
-public record CounterKeywordType(String keyword, Keyword type, String desc) implements CounterType {
+public record CounterKeywordType(KeywordView keyword) implements CounterType {
 
     // Rule 122.1b
     static ImmutableList<String> keywordCounter = ImmutableList.of(
@@ -21,8 +21,7 @@ public record CounterKeywordType(String keyword, Keyword type, String desc) impl
 
     public static CounterKeywordType get(String s) {
         if (!sMap.containsKey(s)) {
-            KeywordInterface ki = Keyword.getInstance(s);
-            sMap.put(s, new CounterKeywordType(s, ki.getKeyword(), ki.getTitle()));
+            sMap.put(s, new CounterKeywordType(Keyword.getInstance(s).getView()));
         }
         return sMap.get(s);
     }
@@ -37,20 +36,16 @@ public record CounterKeywordType(String keyword, Keyword type, String desc) impl
     
     @Override
     public String toString() {
-        return keyword;
+        return keyword.original();
     }
 
     public String getName() {
-        return getKeywordDescription();
+        return keyword.title();
     }
 
     @Override
     public String getCounterOnCardDisplayName() {
-        return getKeywordDescription();
-    }
-
-    private String getKeywordDescription() {
-        return desc;
+        return keyword.title();
     }
 
     @Override

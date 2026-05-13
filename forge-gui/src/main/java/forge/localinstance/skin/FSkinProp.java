@@ -27,6 +27,7 @@ import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
 import forge.deck.DeckSection;
 import forge.game.keyword.Keyword;
+import forge.game.keyword.KeywordView;
 import forge.game.zone.ZoneType;
 import forge.localinstance.properties.ForgeConstants;
 
@@ -782,8 +783,10 @@ public enum FSkinProp {
         };
     }
 
-    public static FSkinProp iconFromKeyword(Keyword keyword, String original) {
-        if (keyword == Keyword.HEXPROOF) {
+    public static FSkinProp iconFromKeyword(KeywordView keyword) {
+        Keyword type = keyword.keyword();
+        String original = keyword.original();
+        if (type == Keyword.HEXPROOF) {
             if (!original.contains(":")) {
                 return IMG_ABILITY_HEXPROOF;
             }
@@ -801,21 +804,32 @@ public enum FSkinProp {
                 default -> IMG_ABILITY_HEXPROOF;
             };
         }
-        return switch (keyword) {
+        return switch (type) {
+            case ANNIHILATOR -> IMG_ABILITY_ANNIHILATOR;
             case FLYING -> IMG_ABILITY_FLYING;
             case FIRST_STRIKE -> IMG_ABILITY_FIRST_STRIKE;
             case DOUBLE_STRIKE -> IMG_ABILITY_DOUBLE_STRIKE;
             case DEATHTOUCH -> IMG_ABILITY_DEATHTOUCH;
             case DECAYED -> null;
+            case DEFENDER -> IMG_ABILITY_DEFENDER;
             case EXALTED -> IMG_ABILITY_EXALTED;
+            case FEAR -> IMG_ABILITY_FEAR;
+            case FLASH -> IMG_ABILITY_FLASH;
             case HASTE -> IMG_ABILITY_HASTE;
+            case HORSEMANSHIP -> IMG_ABILITY_HORSEMANSHIP;
             case INDESTRUCTIBLE -> IMG_ABILITY_INDESTRUCTIBLE;
+            case INTIMIDATE -> IMG_ABILITY_INTIMIDATE;
+            case LANDWALK -> IMG_ABILITY_LANDWALK; // TODO add more different versions
             case LIFELINK -> IMG_ABILITY_LIFELINK;
             case MENACE -> IMG_ABILITY_MENACE;
             case REACH -> IMG_ABILITY_REACH;
             case SHADOW -> IMG_ABILITY_SHADOW;
+            case SHROUD -> IMG_ABILITY_SHROUD;
+            case TOXIC -> IMG_ABILITY_TOXIC;
             case TRAMPLE -> IMG_ABILITY_TRAMPLE;
             case VIGILANCE -> IMG_ABILITY_VIGILANCE;
+            case WARD -> IMG_ABILITY_WARD; // TODO add more different versions
+            case WITHER -> IMG_ABILITY_WITHER;
             default -> null;
         };
     }
