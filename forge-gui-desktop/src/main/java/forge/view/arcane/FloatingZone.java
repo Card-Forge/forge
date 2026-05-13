@@ -587,7 +587,7 @@ public class FloatingZone extends FloatingCardArea {
         });
         promptLabel.setBorder(BorderFactory.createEmptyBorder(3, 6, 3, 6));
         promptLabel.setVisible(false);
-        window.add(promptLabel, "growx, wmin 10, gapbottom 4, wrap");
+        window.add(promptLabel, "growx, wmin 10, gapbottom 4, wrap, hidemode 3");
         window.add(searchField, "growx, wrap");
         window.add(getScrollPane(), "grow, push, wrap");
         hotkeyHint.setVisible(false);
