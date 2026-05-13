@@ -617,8 +617,10 @@ public final class CMatchUI
     @Override
     public void updateCards(final Iterable<CardView> cards) {
         for (final CardView c : cards) {
+            // Null can flow in from a remote-side event whose IdRef failed to resolve in the tracker.
+            if (c == null) { continue; }
             final ZoneType zone = c.getZone();
-            if (zone == null) { return; }
+            if (zone == null) { continue; }
 
             switch (zone) {
             case Battlefield:
