@@ -834,6 +834,12 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         firePlayerChangeListener(index);
     }
     void setDevMode(final int index) {
+        // Push dev mode first: subsequent ready-clear broadcasts trigger view.update,
+        // which re-syncs panel.isDevMode from slot.isDevMode. If the slot is stale
+        // at that point the dev mode switch flips back visually.
+        if (playerChangeListener != null) {
+            playerChangeListener.update(index, UpdateLobbyPlayerEvent.devModeUpdate(playerPanels.get(index).isDevMode()));
+        }
         int playerCount = lobby.getNumberOfSlots();
         // clear ready for everyone
         for (int i = 0; i < playerCount; i++) {
@@ -843,9 +849,6 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             if (wasReady && playerChangeListener != null) {
                 playerChangeListener.update(i, UpdateLobbyPlayerEvent.isReadyUpdate(false));
             }
-        }
-        if (playerChangeListener != null) {
-            playerChangeListener.update(index, UpdateLobbyPlayerEvent.devModeUpdate(playerPanels.get(index).isDevMode()));
         }
     }
     void firePlayerChangeListener(final int index) {

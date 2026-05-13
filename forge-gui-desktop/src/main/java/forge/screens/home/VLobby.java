@@ -348,6 +348,12 @@ public class VLobby implements ILobbyView {
         changePlayerFocus(index);
     }
     void setDevMode(final int index) {
+        // Push dev mode first: subsequent ready-clear broadcasts trigger view.update,
+        // which re-syncs panel.isDevMode from slot.isDevMode. If the slot is stale
+        // at that point the dev mode checkbox flips back visually.
+        if (playerChangeListener != null) {
+            playerChangeListener.update(index, UpdateLobbyPlayerEvent.devModeUpdate(getPlayerPanel(index).isDevMode()));
+        }
         // clear ready for everyone
         for (int i = 0; i < activePlayersNum; i++) {
             final PlayerPanel panel = getPlayerPanel(i);
@@ -356,9 +362,6 @@ public class VLobby implements ILobbyView {
             if (wasReady && playerChangeListener != null) {
                 playerChangeListener.update(i, UpdateLobbyPlayerEvent.isReadyUpdate(false));
             }
-        }
-        if (playerChangeListener != null) {
-            playerChangeListener.update(index, UpdateLobbyPlayerEvent.devModeUpdate(getPlayerPanel(index).isDevMode()));
         }
         changePlayerFocus(index);
     }
