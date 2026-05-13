@@ -673,6 +673,7 @@ public class FloatingZone extends FloatingCardArea {
             promptLabel.setText(FSkin.encodeSymbols(prompt, false));
             promptLabel.setVisible(true);
         } else {
+            promptLabel.setText("");
             promptLabel.setVisible(false);
         }
         window.revalidate();
