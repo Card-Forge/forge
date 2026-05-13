@@ -88,12 +88,10 @@ public abstract class InputSelectManyBase<T extends GameEntity> extends InputSyn
             }
             sb.append("\n").append(getMessage());
             showMessage(sb.toString(), card);
+        } else if (card != null) {
+            showMessage(getMessage(), card);
         } else {
-            if (card != null) { 
-                showMessage(getMessage(), card);
-            } else {
-                showMessage(getMessage());
-            }
+            showMessage(getMessage());
         }
         getController().getGui().updateButtons(getOwner(), hasEnoughTargets(), allowCancel, true);
     }

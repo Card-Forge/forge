@@ -67,6 +67,7 @@ import forge.toolbox.FTextField;
 import forge.toolbox.MouseTriggerEvent;
 import forge.toolbox.special.PlayerDetailsPanel;
 import forge.util.Localizer;
+import forge.util.StreamUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import forge.view.FView;
@@ -667,7 +668,7 @@ public class FloatingZone extends FloatingCardArea {
     }
 
     private void updatePromptVisibility() {
-        final boolean show = getMatchUI().isSelecting();
+        final boolean show = getCards() != null && StreamUtil.stream(getCards()).anyMatch(c -> getMatchUI().isSelectable(c));
         final String prompt = show ? getMatchUI().getPromptMessage() : null;
         if (prompt != null && !prompt.isEmpty()) {
             promptLabel.setText(FSkin.encodeSymbols(prompt, false));
