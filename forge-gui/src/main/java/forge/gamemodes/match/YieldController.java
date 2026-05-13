@@ -605,7 +605,6 @@ public class YieldController {
         return subInstance != null && targetsPlayerOrPermanents(subInstance, player);
     }
 
-    /** Recurses into sub-instances for modal spells like Farewell. */
     private static boolean isMassRemoval(SpellAbilityStackInstance si) {
         ApiType api = si.getSpellAbility().getApi();
         if (api == ApiType.DestroyAll
