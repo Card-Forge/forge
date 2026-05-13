@@ -53,7 +53,7 @@ late_game | Approach of the Second Sun | Solve the Equation
 late_game | Brine Elemental | Vesuvan Shapeshifter
 late_game | Mikaeus, the Unhallowed | Triskelion
 late_game | Riverchurn Monument | Singularity Rupture
-late_game | Approach of the Second Sun | De"monic Tutor
+late_game | Approach of the Second Sun | Demonic Tutor
 late_game | Vito, Thorn of the Dusk Rose | Shard of the Nightbringer
 late_game | Shard of the Nightbringer | Sanguine Bond
 late_game | Jumbo Cactuar | Selvala, Heart of the Wilds
@@ -1644,7 +1644,8 @@ early_game | Mighty Mutanimals | Basking Broodscale
 early_game | Mornsong Aria | Stranglehold
 early_game | Sunstrike Legionnaire | Presence of Gond
 early_game | Teferi, Mage of Zhalfir | Possibility Storm
-early_game | Abdel Adrian, Gorion's Ward | Last Voyage of the _____
+# Last Voyage of the _____ has edition metadata but no card script.
+# early_game | Abdel Adrian, Gorion's Ward | Last Voyage of the _____
 early_game | Tooth and Claw | Primal Vigor
 early_game | All Will Be One | Talon of Pain
 early_game | Staff of Domination | Deathbloom Ritualist
@@ -1705,7 +1706,7 @@ early_game | Timestream Navigator | Endless Evil
 early_game | Acrobatic Maneuver | Naru Meha, Master Wizard
 early_game | Hyalopterous Lemure | Jaws of Defeat
 early_game | Sandstorm Crasher | Aurelia, the Warleader
-early_game | Last Voyage of the _____ | Worldgorger Dragon
+# early_game | Last Voyage of the _____ | Worldgorger Dragon
 early_game | Kiki-Jiki, Mirror Breaker | Gemrazer
 early_game | Chain of Smog | Deekah, Fractal Theorist
 early_game | Mephidross Vampire | Triskelion
@@ -2136,7 +2137,7 @@ early_game | Jon Irenicus, Shattered One | Gorilla Pack
 early_game | Black Carriage | Presence of Gond
 early_game | Godhead of Awe | Ascendant Evincar
 early_game | Saffi Eriksdotter | Crypt Champion
-early_game | Kederekt Leviathan | Last Voyage of the _____
+# early_game | Kederekt Leviathan | Last Voyage of the _____
 early_game | Ertha Jo, Frontier Mentor | Tidewater Minion
 early_game | Kiki-Jiki, Mirror Breaker | Janjeet Sentry
 early_game | Mayael's Aria | Willowdusk, Essence Seer

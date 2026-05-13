@@ -22,7 +22,7 @@ Nexus of Fate
 Notorious Throng
 Part the Waterveil
 Perch Protection
-Phone a Friend
+# Phone a Friend has edition metadata but no card script.
 Piece It Together
 Plea for Power
 Ral Zarek
