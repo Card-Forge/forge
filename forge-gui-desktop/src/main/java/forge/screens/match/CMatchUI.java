@@ -176,6 +176,7 @@ public final class CMatchUI
     private final CPrompt cPrompt = new CPrompt(this);
     private final CStack cStack = new CStack(this);
     private int nextNotifiableStackIndex = 0;
+    private String lastPromptMessage = "";
 
     public CMatchUI() {
         this.view = new VMatchUI(this);
@@ -586,8 +587,9 @@ public final class CMatchUI
             for (final PlayerZoneUpdate update : zonesToUpdate) {
                 final PlayerView player = update.getPlayer();
                 for (final ZoneType zone : update.getZones()) {
-                    if(FLOATING_ZONE_TYPES.contains(zone))
-                        FloatingZone.hide(this,player,zone);
+                    if (FLOATING_ZONE_TYPES.contains(zone) || (zone == ZoneType.Hand && controller != player)) {
+                        FloatingZone.hide(this, player, zone);
+                    }
                 }
             }
         }
@@ -638,6 +640,8 @@ public final class CMatchUI
                         cp.repaintOverlays();
                     }
                 }
+                // VHand only covers the local hand; opponent hands shown in a FloatingZone need an explicit refresh.
+                FloatingZone.refresh(c.getController(), zone);
                 break;
             default:
                 FloatingZone.refresh(c.getController(),zone); // in case the card is visible in the zone
@@ -1047,15 +1051,39 @@ public final class CMatchUI
     public void showPromptMessage(final PlayerView playerView, final String message) {
         cancelWaitingTimer();
         cPrompt.setMessage(message);
+        notePromptMessage(message);
     }
     public void showPromptMessageNoCancel(final PlayerView playerView, final String message) {
         cPrompt.setMessage(message);
+        notePromptMessage(message);
     }
 
     @Override
     public void showCardPromptMessage(PlayerView playerView, String message, CardView card) {
         cancelWaitingTimer();
         cPrompt.setMessage(message, card);
+        notePromptMessage(message);
+    }
+
+    private void notePromptMessage(String message) {
+        if (message != null) {
+            int lastBreak = message.lastIndexOf("\n");
+            if (lastBreak != -1) {
+                // try to only use the specific message of the input
+                // not fully accurate but ok for now
+                message = message.substring(lastBreak + 1);
+            }
+        } else {
+            message = "";
+        }
+        lastPromptMessage = message;
+        if (isSelecting()) {
+            FloatingZone.refreshSelectionPrompts();
+        }
+    }
+
+    public String getPromptMessage() {
+        return lastPromptMessage;
     }
 
     @Override
