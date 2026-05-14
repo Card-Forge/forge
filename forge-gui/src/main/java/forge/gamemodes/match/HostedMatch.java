@@ -387,7 +387,7 @@ public class HostedMatch {
                 ngg.shutdownForwarder();
             }
             humanController.getGui().setGameSpeed(PlaybackSpeed.NORMAL);
-            humanController.clearAutoYields();
+            humanController.getYieldController().clearAutoYields();
 
             if (humanCount > 0) //conceded
                 humanController.getGui().afterGameEnd();
@@ -427,7 +427,7 @@ public class HostedMatch {
                 humanController.getGui().updateSingleCard(event.blocker());
                 final PlayerView p = humanController.getPlayer().getView();
                 if (event.attackerBeingBlocked() != null && event.attackerBeingBlocked().getController().equals(p)) {
-                    humanController.getGui().autoPassCancel(p);
+                    humanController.autoPassCancel();
                 }
             }
             return null;

@@ -66,7 +66,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         public ItemPool<PaperCard> getCardPool() {
-            return FModel.getAllCardsNoAlt();
+            return FModel.getAllCards();
         }
         protected Predicate<PaperCard> getCardFilter() { return null; }
 

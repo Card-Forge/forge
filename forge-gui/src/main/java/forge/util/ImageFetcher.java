@@ -50,7 +50,7 @@ public abstract class ImageFetcher {
             // the wrong frame.
             addScryfallUrl(c, face, useArtCrop, downloadUrls);
 
-            List<PaperCard> clones = StaticData.instance().getCommonCards().getAllCardsNoAlt(c.getName());
+            List<PaperCard> clones = StaticData.instance().getCommonCards().getAllCards(c);
             for (PaperCard pc : clones) {
                 if (c.getEdition().equalsIgnoreCase(pc.getEdition())) {
                     continue;
@@ -221,7 +221,7 @@ public abstract class ImageFetcher {
                     }
                     downloadUrls.add(setDownload.toString());
                 } else {
-                    List<PaperCard> clones = StaticData.instance().getCommonCards().getAllCardsNoAlt(paperCard.getName());
+                    List<PaperCard> clones = StaticData.instance().getCommonCards().getAllCards(paperCard);
                     for (PaperCard pc : clones) {
                         if (clones.size() > 1) {//clones only
                             if (!paperCard.getEdition().equalsIgnoreCase(pc.getEdition())) {
@@ -234,13 +234,17 @@ public abstract class ImageFetcher {
                 }
             }
             final String cardCollectorNumber = paperCard.getCollectorNumber();
-            if (!cardCollectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER) && !cardCollectorNumber.equals("0")) {
-                this.getScryfallDownloadURL(paperCard, face, useArtCrop, hasSetLookup, filename, downloadUrls);
-            } else {
-                System.out.println("Card " + paperCard.getName() + " does not have a collector number, skipping scryfall download.");
-                ImageKeys.missingCards.add(filename);
+ 
+            if (cardCollectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER)) {
+                if (!ImageKeys.missingCards.contains(filename)) {
+                    System.out.println("Card " + paperCard.getName() + " does not have a collector number, skipping scryfall download.");
+                    ImageKeys.missingCards.add(filename);
+                }
+                
                 return;
             }
+
+            this.getScryfallDownloadURL(paperCard, face, useArtCrop, hasSetLookup, filename, downloadUrls);
         } else if (ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD).equals(imageKey)) {
             // Extra logic for hidden card to not clog the other logic
             final String filename = "hidden.png";

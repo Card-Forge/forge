@@ -49,6 +49,7 @@ import forge.menu.FMenuBar;
 import forge.menu.FMenuItem;
 import forge.menu.FMenuTab;
 import forge.model.FModel;
+import forge.player.AutoYieldStore.TriggerDecision;
 import forge.player.PlayerZoneUpdate;
 import forge.screens.FScreen;
 import forge.screens.match.views.VAvatar;
@@ -492,8 +493,11 @@ public class MatchScreen extends FScreen {
                 VPlayerPanel playerPanel = getPlayerPanel(p);
                 if (playerPanel != null && playerPanelsList.contains(playerPanel)) {
                     playerViewSet.add(p);
-                    if (p.getBattlefield() != null) {
-                        for (CardView c : p.getBattlefield()) {
+                    FCollectionView<CardView> battlefield = p.getBattlefield();
+                    if (battlefield != null) {
+                        Iterable<CardView> bfIter = MatchController.instance.isNetGame()
+                                ? battlefield.threadSafeIterable() : battlefield;
+                        for (CardView c : bfIter) {
                             CardAreaPanel panel = CardAreaPanel.get(c);
                             Vector2 origin = panel.getTargetingArrowOrigin();
                             //outside left bounds
@@ -642,13 +646,11 @@ public class MatchScreen extends FScreen {
                     return true;
                 }
                 return getActivePrompt().getBtnCancel().trigger(); //trigger Cancel if can't trigger OK
-            case Keys.ESCAPE:
-                if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ALLOW_ESC_TO_END_TURN) && !Forge.hasGamepad()) {//bypass check
-                    if (getActivePrompt().getBtnCancel().getText().equals(Forge.getLocalizer().getMessage("lblEndTurn"))) {
-                        return false;
-                    }
-                }
-                return getActivePrompt().getBtnCancel().trigger(); //otherwise trigger Cancel
+            case Keys.ESCAPE: {
+                boolean cancelEligible = FModel.getPreferences().getPrefBoolean(FPref.UI_ALLOW_ESC_TO_END_TURN) || Forge.hasGamepad()
+                        || !getActivePrompt().getBtnCancel().getText().equals(Forge.getLocalizer().getMessage("lblEndTurn"));
+                return cancelEligible && getActivePrompt().getBtnCancel().trigger();
+            }
             case Keys.BACK:
                 return true; //suppress Back button so it's not bumped when trying to press OK or Cancel buttons
             case Keys.A: //alpha strike on Ctrl+A on Android, A when running on desktop
@@ -687,17 +689,13 @@ public class MatchScreen extends FScreen {
                     if (!stackInstance.isAbility()) {
                         return false;
                     }
-                    final int triggerID = stackInstance.getSourceTrigger();
-
-                    if (controller.shouldAlwaysAcceptTrigger(triggerID)) {
-                        controller.setShouldAlwaysAskTrigger(triggerID);
-                    } else {
-                        controller.setShouldAlwaysAcceptTrigger(triggerID);
+                    final boolean abilityScope = controller.getYieldController().isAbilityScope();
+                    final String key = stackInstance.getKey();
+                    if (!key.isEmpty()) {
+                        TriggerDecision next = controller.getTriggerDecision(key) == TriggerDecision.ACCEPT ? TriggerDecision.ASK : TriggerDecision.ACCEPT;
+                        controller.setTriggerDecision(key, next, abilityScope);
                     }
 
-                    final String key = stackInstance.getKey();
-                    boolean abilityScope = !forge.localinstance.properties.ForgeConstants.AUTO_YIELD_PER_CARD.equals(
-                            forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_YIELD_MODE));
                     controller.setShouldAutoYield(key, true, abilityScope);
                     if (stackInstance.equals(gameView.peekStack())) {
                         //auto-pass priority if ability is on top of stack
@@ -717,18 +715,14 @@ public class MatchScreen extends FScreen {
                     if (!stackInstance.isAbility()) {
                         return false;
                     }
-                    final int triggerID = stackInstance.getSourceTrigger();
-
-                    if (controller.shouldAlwaysDeclineTrigger(triggerID)) {
-                        controller.setShouldAlwaysAskTrigger(triggerID);
-                    } else {
-                        controller.setShouldAlwaysDeclineTrigger(triggerID);
+                    final boolean abilityScope = controller.getYieldController().isAbilityScope();
+                    final String key = stackInstance.getKey();
+                    if (!key.isEmpty()) {
+                        TriggerDecision next = controller.getTriggerDecision(key) == TriggerDecision.DECLINE ? TriggerDecision.ASK : TriggerDecision.DECLINE;
+                        controller.setTriggerDecision(key, next, abilityScope);
                     }
 
-                    final String key = stackInstance.getKey();
-                    boolean abilityScope2 = !forge.localinstance.properties.ForgeConstants.AUTO_YIELD_PER_CARD.equals(
-                            forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_YIELD_MODE));
-                    controller.setShouldAutoYield(key, true, abilityScope2);
+                    controller.setShouldAutoYield(key, true, abilityScope);
                     if (stackInstance.equals(gameView.peekStack())) {
                         //auto-pass priority if ability is on top of stack
                         controller.passPriority();

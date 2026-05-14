@@ -260,17 +260,12 @@ public class CardLists {
         return result;
     }
 
-    public static CardCollection canSubsequentlyTarget(Iterable<Card> list, SpellAbility source) {
+    public static CardCollection canSubsequentlyTarget(CardCollection list, SpellAbility source) {
         if (source.getTargets().isEmpty()) {
-            return (CardCollection) list;
+            return list;
         }
 
-        return CardLists.filter(list, new Predicate<Card>() {
-            @Override
-            public boolean test(Card card) {
-                return source.canTarget(card);
-            }
-        });
+        return CardLists.filter(list, source::canTarget);
     }
 
     public static CardCollection getKeyword(Iterable<Card> cardList, final String keyword) {

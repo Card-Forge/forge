@@ -137,10 +137,6 @@ public class GameView extends TrackableObject {
         set(TrackableProperty.StormCount, stack.getSpellsCastThisTurn().size());
     }
 
-    public boolean isFirstGameInMatch() {
-        return getNumPlayedGamesInMatch() == 0;
-    }
-
     public int getNumPlayedGamesInMatch() {
         return get(TrackableProperty.NumPlayedGamesInMatch);
     }
@@ -154,8 +150,6 @@ public class GameView extends TrackableObject {
     }
 
     public boolean isMulligan() {
-        if (get(TrackableProperty.Mulligan) == null)
-            return false;
         return get(TrackableProperty.Mulligan);
     }
 

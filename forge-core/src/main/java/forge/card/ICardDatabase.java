@@ -1,6 +1,7 @@
 package forge.card;
 
 import forge.card.CardDb.CardArtPreference;
+import forge.item.IPaperCard;
 import forge.item.PaperCard;
 
 import java.util.Collection;
@@ -53,26 +54,70 @@ public interface ICardDatabase extends Iterable<PaperCard> {
     PaperCard getCard(String cardName, String edition, String collectorNumber, Map<String, String> flags);
 
     // 2. Card Lookup from a single Expansion Set
-    PaperCard getCardFromSet(String cardName, CardEdition edition, boolean isFoil);  // NOT yet used, included for API symmetry
-    PaperCard getCardFromSet(String cardName, CardEdition edition, String collectorNumber, boolean isFoil);
-    PaperCard getCardFromSet(String cardName, CardEdition edition, int artIndex, boolean isFoil);
+    default PaperCard getCardFromSet(String cardName, CardEdition edition, boolean isFoil) {
+        return getCardFromSet(cardName, edition, IPaperCard.NO_ART_INDEX, IPaperCard.NO_COLLECTOR_NUMBER, isFoil);
+    }  // NOT yet used, included for API symmetry
+
+    default PaperCard getCardFromSet(String cardName, CardEdition edition, String collectorNumber, boolean isFoil) {
+        return getCardFromSet(cardName, edition, IPaperCard.NO_ART_INDEX, collectorNumber, isFoil);
+    }
+
+    default PaperCard getCardFromSet(String cardName, CardEdition edition, int artIndex, boolean isFoil) {
+        return getCardFromSet(cardName, edition, artIndex, IPaperCard.NO_COLLECTOR_NUMBER, isFoil);
+    }
     PaperCard getCardFromSet(String cardName, CardEdition edition, int artIndex, String collectorNumber, boolean isFoil);
 
     // 3. Card lookup based on CardArtPreference Selection Policy
-    PaperCard getCardFromEditions(String cardName, CardArtPreference artPreference);
-    PaperCard getCardFromEditions(String cardName, CardArtPreference artPreference, Predicate<PaperCard> filter);
-    PaperCard getCardFromEditions(String cardName, CardArtPreference artPreference, int artIndex);
+    default PaperCard getCardFromEditions(String cardName)  {
+        return getCardFromEditions(cardName, getCardArtPreference(), IPaperCard.NO_ART_INDEX, null);
+    }
+    default PaperCard getCardFromEditions(String cardName, Predicate<PaperCard> filter) {
+        return getCardFromEditions(cardName, getCardArtPreference(), IPaperCard.NO_ART_INDEX, filter);
+    }
+    default PaperCard getCardFromEditions(String cardName, CardArtPreference artPreference)  {
+        return getCardFromEditions(cardName, artPreference, IPaperCard.NO_ART_INDEX, null);
+    }
+    default PaperCard getCardFromEditions(String cardName, CardArtPreference artPreference, Predicate<PaperCard> filter) {
+        return getCardFromEditions(cardName, artPreference, IPaperCard.NO_ART_INDEX, filter);
+    }
+    default PaperCard getCardFromEditions(String cardName, CardArtPreference artPreference, int artIndex)  {
+        return getCardFromEditions(cardName, artPreference, artIndex, null);
+    }
     PaperCard getCardFromEditions(String cardName, CardArtPreference artPreference, int artIndex, Predicate<PaperCard> filter);
 
     // 4. Specialised Card Lookup on CardArtPreference Selection and Release Date
-    PaperCard getCardFromEditionsReleasedBefore(String cardName, CardArtPreference artPreference, Date releaseDate);
-    PaperCard getCardFromEditionsReleasedBefore(String cardName, CardArtPreference artPreference, Date releaseDate, Predicate<PaperCard> filter);
-    PaperCard getCardFromEditionsReleasedBefore(String cardName, CardArtPreference artPreference, int artIndex, Date releaseDate);
+    default PaperCard getCardFromEditionsReleasedBefore(String cardName, Date releaseDate) {
+        return this.getCardFromEditionsReleasedBefore(cardName, getCardArtPreference(), PaperCard.DEFAULT_ART_INDEX, releaseDate, null);
+    }
+    default PaperCard getCardFromEditionsReleasedBefore(String cardName, int artIndex, Date releaseDate) {
+        return this.getCardFromEditionsReleasedBefore(cardName, getCardArtPreference(), artIndex, releaseDate, null);
+    }
+    default PaperCard getCardFromEditionsReleasedBefore(String cardName, CardArtPreference artPreference, Date releaseDate) {
+        return this.getCardFromEditionsReleasedBefore(cardName, artPreference, PaperCard.DEFAULT_ART_INDEX, releaseDate, null);
+    }
+    default PaperCard getCardFromEditionsReleasedBefore(String cardName, CardArtPreference artPreference, Date releaseDate, Predicate<PaperCard> filter) {
+        return this.getCardFromEditionsReleasedBefore(cardName, artPreference, PaperCard.DEFAULT_ART_INDEX, releaseDate, filter);
+    }
+    default PaperCard getCardFromEditionsReleasedBefore(String cardName, CardArtPreference artPreference, int artIndex, Date releaseDate) {
+        return this.getCardFromEditionsReleasedBefore(cardName, artPreference, artIndex, releaseDate, null);
+    }
     PaperCard getCardFromEditionsReleasedBefore(String cardName, CardArtPreference artPreference, int artIndex, Date releaseDate, Predicate<PaperCard> filter);
 
-    PaperCard getCardFromEditionsReleasedAfter(String cardName, CardArtPreference artPreference, Date releaseDate);
-    PaperCard getCardFromEditionsReleasedAfter(String cardName, CardArtPreference artPreference, Date releaseDate, Predicate<PaperCard> filter);
-    PaperCard getCardFromEditionsReleasedAfter(String cardName, CardArtPreference artPreference, int artIndex, Date releaseDate);
+    default PaperCard getCardFromEditionsReleasedAfter(String cardName, Date releaseDate) {
+        return this.getCardFromEditionsReleasedAfter(cardName, getCardArtPreference(), PaperCard.DEFAULT_ART_INDEX, releaseDate, null);
+    }
+    default PaperCard getCardFromEditionsReleasedAfter(String cardName, int artIndex, Date releaseDate) {
+        return this.getCardFromEditionsReleasedAfter(cardName, getCardArtPreference(), artIndex, releaseDate, null);
+    }
+    default PaperCard getCardFromEditionsReleasedAfter(String cardName, CardArtPreference artPreference, Date releaseDate)  {
+        return this.getCardFromEditionsReleasedAfter(cardName, artPreference, PaperCard.DEFAULT_ART_INDEX, releaseDate, null);
+    }
+    default PaperCard getCardFromEditionsReleasedAfter(String cardName, CardArtPreference artPreference, Date releaseDate, Predicate<PaperCard> filter) {
+        return this.getCardFromEditionsReleasedAfter(cardName, artPreference, PaperCard.DEFAULT_ART_INDEX, releaseDate, filter);
+    }
+    default PaperCard getCardFromEditionsReleasedAfter(String cardName, CardArtPreference artPreference, int artIndex, Date releaseDate) {
+        return this.getCardFromEditionsReleasedAfter(cardName, artPreference, artIndex, releaseDate, null);
+    }
     PaperCard getCardFromEditionsReleasedAfter(String cardName, CardArtPreference artPreference, int artIndex, Date releaseDate, Predicate<PaperCard> filter);
 
     /* CARDS COLLECTION RETRIEVAL METHODS
@@ -95,4 +140,6 @@ public interface ICardDatabase extends Iterable<PaperCard> {
     Predicate<? super PaperCard> wasPrintedInSets(Collection<String> allowedSetCodes);
     Predicate<? super PaperCard> isLegal(Collection<String> allowedSetCodes);
     Predicate<? super PaperCard> wasPrintedAtRarity(CardRarity rarity);
+
+    CardArtPreference getCardArtPreference();
 }

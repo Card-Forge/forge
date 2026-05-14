@@ -193,23 +193,21 @@ public class InputAttack extends InputSyncronizedBase {
                 else if (activeBand.getAttackers().contains(card)) {
                     activateBand(null);
                 }
-                else { // Join a band by selecting a non-active band member after activating a band
-                    if (activeBand.canJoinBand(card)) {
-                        declareAttacker(card);
-                        if (otherCardsToSelect != null) {
-                            for (Card c : otherCardsToSelect) {
-                                if (activeBand.canJoinBand(c)) {
-                                    declareAttacker(c);
-                                }
+                else if (activeBand.canJoinBand(card)) {
+                    // Join a band by selecting a non-active band member after activating a band
+                    declareAttacker(card);
+                    if (otherCardsToSelect != null) {
+                        for (Card c : otherCardsToSelect) {
+                            if (activeBand.canJoinBand(c)) {
+                                declareAttacker(c);
                             }
                         }
                     }
-                    else {
-                        validAction = false;
-                    }
                 }
-            }
-            else {
+                else {
+                    validAction = false;
+                }
+            } else {
                 //if banding not possible, just undeclare attacker
                 undeclareAttacker(card);
                 if (otherCardsToSelect != null) {
@@ -280,9 +278,7 @@ public class InputAttack extends InputSyncronizedBase {
         combat.addAttacker(card, currentDefender, activeBand);
         activateBand(activeBand);
 
-        card.getGame().getMatch().fireEvent(new UiEventAttackerDeclared(
-                CardView.get(card),
-                GameEntityView.get(currentDefender)));
+        card.getGame().getMatch().fireEvent(new UiEventAttackerDeclared(CardView.get(card), GameEntityView.get(currentDefender)));
     }
 
     private boolean undeclareAttacker(final Card card) {
@@ -291,8 +287,7 @@ public class InputAttack extends InputSyncronizedBase {
         // When removing an attacker clear the attacking band
         activateBand(null);
 
-        card.getGame().getMatch().fireEvent(new UiEventAttackerDeclared(
-                CardView.get(card), null));
+        card.getGame().getMatch().fireEvent(new UiEventAttackerDeclared(CardView.get(card), null));
         return true;
     }
 

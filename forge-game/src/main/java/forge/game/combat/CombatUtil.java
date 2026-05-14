@@ -204,8 +204,8 @@ public class CombatUtil {
         }
 
         // Basic checks (unless is for next turn)
-        if (!forNextTurn && (
-                   !attacker.isCreature()
+        if (!forNextTurn &&
+                (!attacker.isCreature()
                 || attacker.isTapped() || attacker.isPhasedOut()
                 || isAttackerSick(attacker, defender)
                 || game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS))) {

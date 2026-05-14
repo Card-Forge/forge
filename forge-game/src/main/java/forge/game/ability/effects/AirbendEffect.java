@@ -50,6 +50,7 @@ public class AirbendEffect extends SpellAbilityEffect {
 
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
         CardZoneTable zoneMovements = AbilityKey.addCardZoneTableParams(moveParams, sa);
+        CardCollection moved = new CardCollection();
 
         for (Card c : getCardsfromTargets(sa)) {
             final Card gameCard = game.getCardState(c, null);
@@ -79,10 +80,11 @@ public class AirbendEffect extends SpellAbilityEffect {
 
             CardCollection exiled = zoneMovements.filterCards(null, List.of(ZoneType.Exile), null, null, null);
             exiled.removeIf(Card::isToken);
-
+            exiled.removeAll(moved);
             if (exiled.isEmpty()) {
                 continue;
             }
+            moved.addAll(exiled);
 
             // Effect to cast for 2 from exile
             Card eff = createEffect(sa, movedCard.getOwner(), "Airbend " + movedCard, hostCard.getImageKey());

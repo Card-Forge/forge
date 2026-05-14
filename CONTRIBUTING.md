@@ -62,6 +62,12 @@ Card scripting resources are found in the forge-gui/res/ path.
 
 Art files need to be copyright-free and they should be in the public domain.
 
+## Using AI coding agents
+
+If you use an AI agent (e.g. Claude Code, OpenAI Codex) to substantially code a contribution to Forge please identify this when you make a pull request, either by including the coding agent as a co-author or by noting in the body of the request.
+
+Agents have a tendency to add unnecessary new unit or wiring tests to the CI suite. This should be avoided unless necessary to catch potential future integration regressions.
+
 ### Project Hierarchy
 
 Forge is divided into 4 primary projects with additional projects that target specific platform releases. The primary projects are:
