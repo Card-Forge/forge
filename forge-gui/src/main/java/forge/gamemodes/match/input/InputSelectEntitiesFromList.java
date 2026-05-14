@@ -73,6 +73,11 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
         if (!selectEntity(c)) {
             return false;
         }
+        if (otherCardsToSelect != null) {
+            for (final Card other : otherCardsToSelect) {
+                selectEntity(other);
+            }
+        }
         refresh();
         return true;
     }

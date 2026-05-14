@@ -790,21 +790,24 @@ public class FloatingZone extends FloatingCardArea {
         final int digit = e.getKeyCode() - KeyEvent.VK_0;
         if (digit < 0 || digit > 9) return false;
         if (digit == 0) {
-            // Ctrl+0: auto-pick the first N selectables; no-op when min == 0
-            // Snapshot the panel list — selectCard() mutates it via re-render side-effects
+            // Ctrl+0: auto-pick the first N selectables. Batched into one selectCard so the
+            // server processes atomically — separate messages race (a thread spawned per message).
             for (final FloatingZone fz : new ArrayList<>(floatingAreas.values())) {
                 if (!fz.isVisible()) continue;
                 final int need = fz.getMatchUI().getSelectionMin();
                 if (need < 1) continue;
-                int picked = 0;
+                final List<CardView> picks = new ArrayList<>(need);
                 for (final CardPanel panel : new ArrayList<>(fz.getCardPanels())) {
-                    if (picked >= need) break;
+                    if (picks.size() >= need) break;
                     if (!fz.getMatchUI().isSelectable(panel.getCard())) continue;
-                    fz.getMatchUI().getGameController().selectCard(panel.getCard(), null,
-                            new MouseTriggerEvent(MouseEvent.BUTTON1, 0, 0));
-                    picked++;
+                    picks.add(panel.getCard());
                 }
-                if (picked > 0) return true;
+                if (picks.isEmpty()) continue;
+                // Wire-serializable: ArrayList.subList() returns a SubList view that's not Serializable.
+                final List<CardView> others = picks.size() > 1 ? new ArrayList<>(picks.subList(1, picks.size())) : null;
+                fz.getMatchUI().getGameController().selectCard(picks.get(0), others,
+                        new MouseTriggerEvent(MouseEvent.BUTTON1, 0, 0));
+                return true;
             }
             return false;
         }
