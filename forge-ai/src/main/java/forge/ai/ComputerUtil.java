@@ -2835,43 +2835,37 @@ public class ComputerUtil {
         return damage;
     }
 
+    public static CounterAiCategory getCounterCategory(CounterType type, Card c) {
+        if (c.hasSVar("AICounterOverride" + type.toString())) {
+            return CounterAiCategory.valueOf(c.getSVar("AICounterOverride" + type.toString()));
+        }
+        // keyword counters
+        if (type.isKeywordCounter() && c.hasKeyword(type.toString())) {
+            return CounterAiCategory.Neutral;
+        }
+        if (type.is(CounterEnumType.BLAZE) && c.isLand()) {
+            return CounterAiCategory.Negative;
+        }
+        if (type.is(CounterEnumType.TIME) && !c.isInPlay()) {
+            return CounterAiCategory.Negative;
+        }
+        // Quest counter on a card without MaxQuestEffect are useless
+        // this checks for over max quest to mark them negative
+        if (type.is(CounterEnumType.QUEST) && c.hasSVar("MaxQuestEffect")) {
+            if (c.getCounters(type) > Integer.parseInt(c.getSVar("MaxQuestEffect"))) {
+                return CounterAiCategory.Negative;
+            }
+        }
+        return type.getAiCategory();
+    }
+
     public static boolean isNegativeCounter(CounterType type, Card c) {
-        return type.is(CounterEnumType.AGE) || type.is(CounterEnumType.BRIBERY) || type.is(CounterEnumType.DOOM)
-                || type.is(CounterEnumType.M1M1) || type.is(CounterEnumType.M0M2) || type.is(CounterEnumType.M0M1)
-                || type.is(CounterEnumType.M1M0) || type.is(CounterEnumType.M2M1) || type.is(CounterEnumType.M2M2)
-                // Blaze only hurts Lands
-                || (type.is(CounterEnumType.BLAZE) && c.isLand())
-                // Iceberg does use Ice as Storage
-                || (type.is(CounterEnumType.ICE) && !"Iceberg".equals(c.getName()))
-                // some lands does use Depletion as Storage Counter
-                || (type.is(CounterEnumType.DEPLETION) && c.getReplacementEffects().anyMatch(r -> r.getMode().equals(ReplacementType.Untap) && r.getLayer().equals(ReplacementLayer.CantHappen)))
-                // treat Time Counters on suspended Cards as Bad,
-                // and also on Chronozoa
-                || (type.is(CounterEnumType.TIME) && (!c.isInPlay() || "Chronozoa".equals(c.getName())))
-                || type.is(CounterEnumType.GOLD) || type.is(CounterEnumType.MUSIC) || type.is(CounterEnumType.PUPA)
-                || type.is(CounterEnumType.PARALYZATION) || type.is(CounterEnumType.SHELL) || type.is(CounterEnumType.SLEEP)
-                || type.is(CounterEnumType.SLUMBER) || type.is(CounterEnumType.SLEIGHT) || type.is(CounterEnumType.WAGE)
-                || type.is(CounterEnumType.INCARNATION) || type.is(CounterEnumType.RUST) || type.is(CounterEnumType.STUN)
-                || type.is(CounterEnumType.FINALITY);
+        return getCounterCategory(type, c) == CounterAiCategory.Negative;
     }
 
     // this countertypes has no effect
     public static boolean isUselessCounter(CounterType type, Card c) {
-        // Quest counter on a card without MaxQuestEffect are useless
-        if (type.is(CounterEnumType.QUEST)) {
-            int e = 0;
-            if (c.hasSVar("MaxQuestEffect")) {
-                e = Integer.parseInt(c.getSVar("MaxQuestEffect"));
-            }
-            return c.getCounters(type) > e;
-        }
-        // keyword counters
-        if (type.isKeywordCounter() && c.hasKeyword(type.toString())) {
-            return true;
-        }
-
-        return type.is(CounterEnumType.AWAKENING) || type.is(CounterEnumType.MANIFESTATION) || type.is(CounterEnumType.PETRIFICATION)
-                || type.is(CounterEnumType.TRAINING) || type.is(CounterEnumType.GHOSTFORM);
+        return getCounterCategory(type, c) == CounterAiCategory.Neutral;
     }
 
     public static int evaluateBoardPosition(final Player ai, final Player opponent) {

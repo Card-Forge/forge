@@ -453,12 +453,14 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.ChosenColors, c.getChosenColors());
         flagAsChanged(TrackableProperty.ChosenColors);
     }
+
     public boolean hasPaperFoil() {
         return get(TrackableProperty.PaperFoil);
     }
     void updatePaperFoil(boolean v) {
         set(TrackableProperty.PaperFoil, v);
     }
+
     public ColorSet getMarkedColors() {
         return get(TrackableProperty.MarkedColors);
     }
@@ -527,15 +529,6 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Intensity, c.getIntensity(true));
     }
 
-    public boolean wasDestroyed() {
-        if (get(TrackableProperty.WasDestroyed) == null)
-            return false;
-        return get(TrackableProperty.WasDestroyed);
-    }
-    void updateWasDestroyed(boolean value) {
-        set(TrackableProperty.WasDestroyed, value);
-    }
-
     public int getClassLevel() {
         return get(TrackableProperty.ClassLevel);
     }
@@ -600,7 +593,7 @@ public class CardView extends GameEntityView {
         sb.append("\r\nRemembered: \r\n");
         for (final Object o : c.getRemembered()) {
             if (o != null) {
-                sb.append(o.toString());
+                sb.append(o);
                 sb.append("\r\n");
             }
         }
@@ -727,7 +720,6 @@ public class CardView extends GameEntityView {
 
     public boolean canFaceDownBeShownToAny(final Iterable<PlayerView> viewers) {
         if (viewers == null || Iterables.isEmpty(viewers)) { return true; }
-
         return IterableUtil.any(viewers, this::canFaceDownBeShownTo);
     }
 
@@ -1011,25 +1003,26 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.HasBackSide, hasBackSide);
         set(TrackableProperty.BackSideName, stateName);
     }
+
+    public boolean wasDestroyed() {
+        return get(TrackableProperty.WasDestroyed);
+    }
+    void updateWasDestroyed(boolean value) {
+        set(TrackableProperty.WasDestroyed, value);
+    }
     public boolean needsUntapAnimation() {
-        if (get(TrackableProperty.NeedsUntapAnimation) == null)
-            return false;
         return get(TrackableProperty.NeedsUntapAnimation);
     }
     public void updateNeedsUntapAnimation(boolean value) {
         set(TrackableProperty.NeedsUntapAnimation, value);
     }
     public boolean needsTapAnimation() {
-        if (get(TrackableProperty.NeedsTapAnimation) == null)
-            return false;
         return get(TrackableProperty.NeedsTapAnimation);
     }
     public void updateNeedsTapAnimation(boolean value) {
         set(TrackableProperty.NeedsTapAnimation, value);
     }
     public boolean needsTransformAnimation() {
-        if (get(TrackableProperty.NeedsTransformAnimation) == null)
-            return false;
         return get(TrackableProperty.NeedsTransformAnimation);
     }
     public void updateNeedsTransformAnimation(boolean value) {
@@ -1070,8 +1063,6 @@ public class CardView extends GameEntityView {
             updateBackSide(c.getAlternateState().getName(), c.isDoubleFaced());
 
         final Card cloner = c.getCloner();
-
-        //CardStateView cloner = CardView.getState(c, CardStateName.Cloner);
         set(TrackableProperty.Cloner, cloner == null ? null : cloner.getName() + " (" + cloner.getId() + ")");
 
         CardCollection mergedCollection = new CardCollection();
@@ -1194,7 +1185,6 @@ public class CardView extends GameEntityView {
     public boolean isRingBearer() {
         return get(TrackableProperty.IsRingBearer);
     }
-
     void updateRingBearer(Card c) {
         set(TrackableProperty.IsRingBearer, c.isRingBearer());
     }

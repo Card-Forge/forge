@@ -10,7 +10,6 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.match.YieldUpdate;
-import forge.gui.GuiBase;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.IGameController;
 import forge.localinstance.skin.FSkinProp;
@@ -157,9 +156,6 @@ public enum ProtocolMethod implements IHasForgeLog {
     }
 
     public void checkArgs(final Object[] args) {
-        if(!GuiBase.hasPropertyConfig())
-            return; //if the experimental network option is enabled, then check the args, else let the default decoder handle it
-
         try {
             for (int iArg = 0; iArg < args.length; iArg++) {
                 final Object arg = args[iArg];

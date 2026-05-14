@@ -834,12 +834,21 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         firePlayerChangeListener(index);
     }
     void setDevMode(final int index) {
+        // Push dev mode first: subsequent ready-clear broadcasts trigger view.update,
+        // which re-syncs panel.isDevMode from slot.isDevMode. If the slot is stale
+        // at that point the dev mode switch flips back visually.
+        if (playerChangeListener != null) {
+            playerChangeListener.update(index, UpdateLobbyPlayerEvent.devModeUpdate(playerPanels.get(index).isDevMode()));
+        }
         int playerCount = lobby.getNumberOfSlots();
         // clear ready for everyone
         for (int i = 0; i < playerCount; i++) {
             final PlayerPanel panel = playerPanels.get(i);
+            final boolean wasReady = panel.isReady();
             panel.setIsReady(false);
-            firePlayerChangeListener(i);
+            if (wasReady && playerChangeListener != null) {
+                playerChangeListener.update(i, UpdateLobbyPlayerEvent.isReadyUpdate(false));
+            }
         }
     }
     void firePlayerChangeListener(final int index) {
@@ -884,7 +893,6 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 panel.getSleeveIndex(),
                 panel.getTeam(),
                 panel.isArchenemy(),
-                panel.isReady(),
                 panel.isDevMode(),
                 panel.getAiOptions(),
                 null); // TODO implement AI profile support for mobile

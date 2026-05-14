@@ -30,3 +30,6 @@ Some of the sprites and tiles that are used in Adventure mode come from external
 1. Plains biome = Cobblestone Village - Brandon Fiechter //  Camelot - Brandon Fiechter
 1. Mountain biome = Goblin Tinker - Brandon Fiechter // Goblin King's Tavern - Brandon Fiechter
 1. Castle = Horus - Brandon Fiechter & Derek Fiechter
+
+## Other sprites and icons
+1. Clipboard icon by Dimitry Miroliubov at [Flaticon](https://www.flaticon.com/free-icon/clipboard_340068)

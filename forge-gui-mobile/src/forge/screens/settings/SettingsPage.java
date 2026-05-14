@@ -448,15 +448,6 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     );
                }
             }, 3);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_NETPLAY_COMPAT,
-            Forge.getLocalizer().getMessage("lblExperimentalNetworkCompatibility"),
-            Forge.getLocalizer().getMessage("nlExperimentalNetworkCompatibility")) {
-                @Override
-                public void select() {
-                    super.select();
-                    GuiBase.enablePropertyConfig(FModel.getPreferences().getPrefBoolean(FPref.UI_NETPLAY_COMPAT));
-                }
-            }, 3);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_DISPOSE_TEXTURES,
             Forge.getLocalizer().getMessage("lblDisposeTextures"),
             Forge.getLocalizer().getMessage("nlDisposeTextures")) {

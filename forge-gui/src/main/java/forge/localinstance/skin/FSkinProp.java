@@ -367,6 +367,7 @@ public enum FSkinProp {
 
     ICO_CLOSE           (new int[] {640, 640, 20, 20}, PropType.ICON),
     ICO_LIST            (new int[] {640, 660, 20, 20}, PropType.ICON),
+    ICO_CLIPBOARD       (new int[] {640, 700, 20, 20}, PropType.ICON),
     ICO_CARD_IMAGE      (new int[] {660, 660, 20, 20}, PropType.ICON),
 
     ICO_FOLDER          (new int[] {640, 680, 20, 20}, PropType.ICON),

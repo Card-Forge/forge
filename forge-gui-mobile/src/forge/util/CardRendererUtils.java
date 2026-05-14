@@ -64,7 +64,6 @@ public class CardRendererUtils {
         return false;
     }
 
-
     public static boolean isPreferenceEnabled(final ForgePreferences.FPref preferenceName) {
         return FModel.getPreferences().getPrefBoolean(preferenceName);
     }

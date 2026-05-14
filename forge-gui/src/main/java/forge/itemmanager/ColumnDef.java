@@ -42,6 +42,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.function.Function;
 
+import forge.deck.CommanderBracketCalculator;
+
 public enum ColumnDef {
     /**
      * The column containing the inventory item name.
@@ -333,6 +335,15 @@ public enum ColumnDef {
                 DeckProxy deck = toDeck(from.getKey());
                 return deck == null ? null : deck.getAI();
             }),
+    DECK_BRACKET("lblBracket", "ttCommanderBracket", 55, true, SortState.ASC,
+            from -> {
+                DeckProxy deck = toDeckProxy(from.getKey());
+                return isCommanderDeck(deck) ? CommanderBracketCalculator.getBracket(deck.getDeck()) : 1;
+            },
+            from -> {
+                DeckProxy deck = toDeckProxy(from.getKey());
+                return isCommanderDeck(deck) ? CommanderBracketCalculator.getDisplayBracket(deck.getDeck()) : "-";
+            }),
     /**
      * The main library size column.
      */
@@ -490,6 +501,10 @@ public enum ColumnDef {
             return entry.getDeckRowProxy();
         }
         return i instanceof DeckProxy ? (DeckProxy) i : null;
+    }
+
+    private static boolean isCommanderDeck(final DeckProxy deck) {
+        return deck != null && deck.hasCommanderSection();
     }
 
     private static ColorSet toDeckColor(final InventoryItem i) {

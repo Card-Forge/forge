@@ -42,6 +42,8 @@ public class DeckProxy implements InventoryItem {
     private Integer mainSize = null;
     private Integer sbSize = null;
     private Integer avgCMC = null;
+    private Boolean hasCommanderSection = null;
+    private Deck cachedDeck = null;
     private final String path;
     private final Function<IHasName, Deck> fnGetDeck;
     private CardEdition edition;
@@ -80,7 +82,16 @@ public class DeckProxy implements InventoryItem {
     }
 
     public Deck getDeck() {
-        return deck instanceof Deck && fnGetDeck == null ? (Deck) deck : fnGetDeck.apply(deck);
+        if (deck instanceof Deck && fnGetDeck == null) {
+            return (Deck) deck;
+        }
+        if (fnGetDeck == null) {
+            return null;
+        }
+        if (cachedDeck == null) {
+            cachedDeck = fnGetDeck.apply(deck);
+        }
+        return cachedDeck;
     }
 
     public String getPath() {
@@ -143,6 +154,16 @@ public class DeckProxy implements InventoryItem {
         edition = null;
         mainSize = null;
         sbSize = null;
+        hasCommanderSection = null;
+        cachedDeck = null;
+    }
+
+    public boolean hasCommanderSection() {
+        if (hasCommanderSection == null) {
+            final Deck loadedDeck = isGeneratedDeck() ? null : getDeck();
+            hasCommanderSection = loadedDeck != null && !loadedDeck.getCommanders().isEmpty();
+        }
+        return hasCommanderSection;
     }
 
     public ColorSet getColor() {

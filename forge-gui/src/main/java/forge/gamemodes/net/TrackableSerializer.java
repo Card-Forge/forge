@@ -9,6 +9,9 @@ import forge.trackable.TrackableTypes;
 import forge.trackable.TrackableTypes.TrackableType;
 import forge.trackable.Tracker;
 
+import io.netty.handler.codec.serialization.ClassResolver;
+import io.netty.handler.codec.serialization.ClassResolvers;
+
 import org.tinylog.Logger;
 import org.tinylog.TaggedLogger;
 
@@ -24,11 +27,13 @@ import java.util.List;
  * encoding and resolves them back from the Tracker during decoding.
  *
  * <p>Used by the Netty encoder/decoder pipeline ({@link CompatibleObjectEncoder},
- * {@link CompatibleObjectDecoder}) and the mobile codec path
+ * {@link CompatibleObjectDecoder}) via the underlying object streams
  * ({@link CObjectOutputStream}, {@link CObjectInputStream}).
  */
 public final class TrackableSerializer {
     private static final TaggedLogger netLog = Logger.tag("NETWORK");
+
+    private static final ClassResolver INNER_CLASS_RESOLVER = ClassResolvers.cacheDisabled(null);
 
     static final byte TYPE_CARD_VIEW = 0;
     static final byte TYPE_PLAYER_VIEW = 1;
@@ -63,26 +68,44 @@ public final class TrackableSerializer {
      * ({@code eventMode = true}). When the tracker holds a different object
      * for the CardView's id (zone-change copy), {@code preserveSnapshot} is
      * set so the receiver decodes a detached CardView from the carried name
-     * and image key. When {@code tracker} is null, the snapshot check is
-     * skipped (used by the client encoder, which has no game-state awareness).
+     * and image key.
+     * <p>
+     * In non-event mode, a CardView is substituted with an IdRef only when
+     * the receiver is known to have it: server-side (consumerId &ge; 0) that
+     * means {@code DeltaSyncManager} has registered this consumer on the
+     * object (i.e. its properties have been included in a delta for that
+     * client); client-side (consumerId &lt; 0) the encoder falls back to
+     * tracker presence, which is sound there because the client's tracker
+     * <em>is</em> exactly what the client knows.
+     * <p>
+     * CardViews that fail the gate pass through unchanged so Java serializes
+     * the full object inline (covers Jhoira-style ephemeral choice copies
+     * that never enter a tracked zone and are never broadcast).
      */
-    static Object replace(Object obj, Tracker tracker, boolean eventMode) {
+    static Object replace(Object obj, Tracker tracker, int consumerId, boolean eventMode) {
         if (obj instanceof TrackableObject trackable) {
             byte tag = typeTagFor(trackable);
             if (tag < 0) return obj;
 
-            if (!eventMode || tag == TYPE_PLAYER_VIEW) {
+            if (tag == TYPE_PLAYER_VIEW) {
                 return new IdRef(tag, trackable.getId());
+            }
+
+            if (!eventMode) {
+                boolean receiverKnows = consumerId >= 0
+                        ? trackable.hasConsumer(consumerId)
+                        : tracker != null && tracker.getObj(trackableTypeFor(tag), trackable.getId()) != null;
+                if (receiverKnows) {
+                    return new IdRef(tag, trackable.getId());
+                }
+                return obj;
             }
 
             boolean preserveSnapshot = false;
             if (tracker != null) {
-                TrackableType<?> type = trackableTypeFor(tag);
-                if (type != null) {
-                    Object tracked = tracker.getObj(type, trackable.getId());
-                    if (tracked != null && tracked != trackable) {
-                        preserveSnapshot = true;
-                    }
+                Object tracked = tracker.getObj(trackableTypeFor(tag), trackable.getId());
+                if (tracked != null && tracked != trackable) {
+                    preserveSnapshot = true;
                 }
             }
             CardView cv = (CardView) trackable;
@@ -114,14 +137,11 @@ public final class TrackableSerializer {
             return detached;
         }
         if (obj instanceof IdRef ref) {
-            TrackableType<?> type = trackableTypeFor(ref.typeTag());
-            if (type != null) {
-                Object resolved = tracker.getObj(type, ref.id());
-                if (resolved == null) {
-                    netLog.warn("Could not resolve IdRef(tag={}, id={}) from Tracker", ref.typeTag(), ref.id());
-                }
-                return resolved;
+            Object resolved = tracker.getObj(trackableTypeFor(ref.typeTag()), ref.id());
+            if (resolved == null) {
+                netLog.warn("Could not resolve IdRef(tag={}, id={}) from Tracker", ref.typeTag(), ref.id());
             }
+            return resolved;
         }
         return obj;
     }
@@ -135,9 +155,9 @@ public final class TrackableSerializer {
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             LZ4BlockOutputStream lz4Out = new LZ4BlockOutputStream(baos);
-            ObjectOutputStream oos = tracker == null ? new ObjectOutputStream(lz4Out) : new ReplacingOutputStream(lz4Out, tracker, false);
-            oos.writeObject(obj);
-            oos.close();
+            try (CObjectOutputStream oos = new CObjectOutputStream(lz4Out, tracker != null, tracker, -1, false)) {
+                oos.writeObject(obj);
+            }
             return baos.size();
         } catch (Exception e) {
             return 0;
@@ -166,7 +186,7 @@ public final class TrackableSerializer {
         for (GameEvent event : events) {
             try {
                 ByteArrayOutputStream baos = new ByteArrayOutputStream(256);
-                try (ReplacingOutputStream out = new ReplacingOutputStream(baos, tracker, true)) {
+                try (CObjectOutputStream out = new CObjectOutputStream(baos, true, tracker, -1, true)) {
                     out.writeObject(event);
                 }
                 wrapped.add(new WrappedEvent(baos.toByteArray()));
@@ -188,7 +208,7 @@ public final class TrackableSerializer {
             if (item instanceof WrappedEvent we) {
                 try {
                     ByteArrayInputStream bais = new ByteArrayInputStream(we.data);
-                    try (ResolvingInputStream in = new ResolvingInputStream(bais, tracker)) {
+                    try (CObjectInputStream in = new CObjectInputStream(bais, INNER_CLASS_RESOLVER, tracker)) {
                         Object obj = in.readObject();
                         if (obj instanceof GameEvent e) events.add(e);
                     }
@@ -198,55 +218,6 @@ public final class TrackableSerializer {
             }
         }
         return events;
-    }
-
-    static class ReplacingOutputStream extends ObjectOutputStream {
-        private final Tracker tracker;
-        private final boolean eventMode;
-
-        ReplacingOutputStream(OutputStream out, Tracker tracker, boolean eventMode) throws IOException {
-            super(out);
-            this.tracker = tracker;
-            this.eventMode = eventMode;
-            enableReplaceObject(true);
-        }
-
-        @Override
-        protected Object replaceObject(Object obj) {
-            return replace(obj, tracker, eventMode);
-        }
-    }
-
-    static class ResolvingInputStream extends ObjectInputStream {
-        private final Tracker tracker;
-
-        ResolvingInputStream(InputStream in, Tracker tracker) throws IOException {
-            super(in);
-            this.tracker = tracker;
-            enableResolveObject(true);
-        }
-
-        // Android desugars records to classes with computed serialVersionUID; the JVM keeps records at 0L.
-        // Fall through to the local descriptor when UIDs mismatch.
-        @Override
-        protected ObjectStreamClass readClassDescriptor() throws IOException, ClassNotFoundException {
-            ObjectStreamClass streamDesc = super.readClassDescriptor();
-            try {
-                Class<?> localClass = Class.forName(streamDesc.getName());
-                ObjectStreamClass localDesc = ObjectStreamClass.lookup(localClass);
-                if (localDesc != null && streamDesc.getSerialVersionUID() != localDesc.getSerialVersionUID()) {
-                    return localDesc;
-                }
-            } catch (ClassNotFoundException ignored) {
-                // Class not found locally — fall through to stream descriptor.
-            }
-            return streamDesc;
-        }
-
-        @Override
-        protected Object resolveObject(Object obj) {
-            return resolve(obj, tracker);
-        }
     }
 
     private TrackableSerializer() {}

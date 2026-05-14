@@ -14,6 +14,7 @@ import javax.swing.JMenu;
 import javax.swing.JTable;
 
 import forge.itemmanager.filters.*;
+import forge.itemmanager.views.CommanderBracketView;
 import forge.localinstance.properties.ForgePreferences;
 import org.apache.commons.lang3.StringUtils;
 
@@ -48,6 +49,7 @@ import forge.screens.home.quest.DialogChooseSets;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
+import forge.util.ItemPool;
 import forge.util.Localizer;
 
 /**
@@ -62,6 +64,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     //private static final FSkin.SkinIcon icoEditOver = FSkin.getIcon(FSkinProp.ICO_EDIT_OVER);
 
     private final GameType gameType;
+    private final CommanderBracketView commanderBracketView;
     private UiCommand cmdDelete, cmdSelect;
     private Consumer<DeckProxy> editCommand;
     private Consumer<String> searchChangeListener;
@@ -76,8 +79,13 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         super(DeckProxy.class, cDetailPicture, true, false);
         this.gameType = gt;
 
+        commanderBracketView = new CommanderBracketView(this);
+        commanderBracketView.getButton().setVisible(false);
+        this.addView(commanderBracketView);
+
         this.addSelectionListener(e -> {
             final DeckProxy selected = getSelectedItem();
+            updateCommanderBracketViewVisibility(selected);
             if (selected instanceof DeckBrowserEntry && !((DeckBrowserEntry) selected).isDeck()) {
                 return;
             }
@@ -90,8 +98,53 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     }
 
     @Override
+    public void setPool(final Iterable<DeckProxy> items) {
+        super.setPool(items);
+        updateCommanderBracketViewVisibility(getSelectedItem());
+    }
+
+    @Override
+    public void setPool(final ItemPool<DeckProxy> pool0) {
+        super.setPool(pool0);
+        updateCommanderBracketViewVisibility(getSelectedItem());
+    }
+
+    @Override
+    public void setPool(final ItemPool<DeckProxy> poolView, final boolean infinite) {
+        super.setPool(poolView, infinite);
+        updateCommanderBracketViewVisibility(getSelectedItem());
+    }
+
+    private void updateCommanderBracketViewVisibility(final DeckProxy selected) {
+        final boolean visible = isCommanderDeck(selected);
+        commanderBracketView.getButton().setVisible(visible);
+        if (!visible && getCurrentView() == commanderBracketView && isInitialized()) {
+            setViewIndex(0);
+        }
+        revalidate();
+        repaint();
+    }
+
+    private boolean isCommanderDeck(final DeckProxy deck) {
+        final DeckProxy realDeck = getRealDeckProxy(deck);
+        return realDeck != null && realDeck.hasCommanderSection();
+    }
+
+    private DeckProxy getRealDeckProxy(final DeckProxy deck) {
+        if (deck instanceof DeckBrowserEntry) {
+            return ((DeckBrowserEntry) deck).getDeckRowProxy();
+        }
+        return deck;
+    }
+
+    @Override
     public GameType getGameType() {
         return gameType;
+    }
+
+    @Override
+    public ItemManagerModel<DeckProxy> getModel() {
+        return super.getModel();
     }
 
     @Override

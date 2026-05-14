@@ -140,8 +140,19 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         this.currentView = this.listView;
     }
 
+    protected void addView(final ItemView<T> view) {
+        if (this.initialized) {
+            throw new IllegalStateException("Views must be added before ItemManager initialization");
+        }
+        this.views.add(view);
+    }
+
     protected ImageView<T> createImageView(final ItemManagerModel<T> model0) {
         return new ImageView<>(this, model0, this.showRanking);
+    }
+
+    protected ItemManagerModel<T> getModel() {
+        return this.model;
     }
 
     public final CDetailPicture getCDetailPicture() {
@@ -360,7 +371,19 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         final int ratioWidth = this.lblRatio.getAutoSizeWidth();
         int captionWidth = this.lblCaption.getAutoSizeWidth();
         final int cbxSectionWidth = this.cbxSection.isVisible() ? this.cbxSection.getAutoSizeWidth() : 0;
-        final int viewButtonCount = this.views.size() + this.extraViewButtons.size() + 1; // +1 is for the options button
+        int visibleViewButtonCount = 0;
+        for (final ItemView<T> view : this.views) {
+            if (view.getButton().isVisible()) {
+                visibleViewButtonCount++;
+            }
+        }
+        int visibleExtraViewButtonCount = 0;
+        for (final FLabel button : this.extraViewButtons) {
+            if (button.isVisible()) {
+                visibleExtraViewButtonCount++;
+            }
+        }
+        final int viewButtonCount = visibleViewButtonCount + visibleExtraViewButtonCount + 1; // +1 is for the options button
         final int widthViewButtons = viewButtonCount * viewButtonWidth + helper.getGapX() * (viewButtonCount);
 
         // remove the space needed by all components that will be displayed
@@ -386,10 +409,16 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
         helper.include(this.lblRatio, ratioWidth, FTextField.HEIGHT);
         helper.fillLine(this.lblEmpty, FTextField.HEIGHT, widthViewButtons);
         for (final ItemView<T> view : this.views) {
+            if (!view.getButton().isVisible()) {
+                continue;
+            }
             helper.include(view.getButton(), viewButtonWidth, FTextField.HEIGHT);
             helper.offset(-1, 0);
         }
         for (final FLabel button : this.extraViewButtons) {
+            if (!button.isVisible()) {
+                continue;
+            }
             helper.include(button, viewButtonWidth, FTextField.HEIGHT);
             helper.offset(-1, 0);
         }
@@ -492,6 +521,10 @@ public abstract class ItemManager<T extends InventoryItem> extends JPanel implem
 
     public ItemView<T> getCurrentView() {
         return this.currentView;
+    }
+
+    protected boolean isInitialized() {
+        return this.initialized;
     }
 
     /**

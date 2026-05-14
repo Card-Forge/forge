@@ -10,4 +10,5 @@ SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.YouCtrl | TargetMin$ 0 
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:BuffedBy:Creature
+SVar:MaxQuestEffect:4
 Oracle:When this enchantment enters, airbend up to one target creature.\nWhenever a creature you control enters, put a quest counter on this enchantment.\nAt the beginning of your end step, if this enchantment has four or more quest counters on it, exile up to one target creature you control, then return it to the battlefield under its owner's control.

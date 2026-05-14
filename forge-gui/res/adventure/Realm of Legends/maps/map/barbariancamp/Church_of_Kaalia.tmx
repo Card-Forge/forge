@@ -67,8 +67,8 @@ With that, she finally collapses, dead.&quot;,
     <property name="reward">{
 &quot;type&quot;: &quot;card&quot;,
 &quot;count&quot;: 3,
-&quot;subTypes&quot;: &quot;Dragon&quot;,
-&quot;rarity&quot;: [&quot;mythic rare&quot;]
+&quot;subTypes&quot;: [&quot;Dragon&quot;],
+&quot;rarity&quot;: [&quot;rare&quot;]
 }</property>
    </properties>
   </object>
@@ -123,8 +123,8 @@ With that, she finally collapses, dead.&quot;,
     <property name="reward">{
 &quot;type&quot;: &quot;card&quot;,
 &quot;count&quot;: 3,
-&quot;subTypes&quot;: &quot;Angel&quot;,
-&quot;rarity&quot;: [&quot;mythic rare&quot;]
+&quot;subTypes&quot;: [ &quot;Angel&quot; ],
+&quot;rarity&quot;: [&quot;rare&quot;]
 }</property>
    </properties>
   </object>
@@ -133,8 +133,8 @@ With that, she finally collapses, dead.&quot;,
     <property name="reward">{
 &quot;type&quot;: &quot;card&quot;,
 &quot;count&quot;: 3,
-&quot;subTypes&quot;: &quot;Demon&quot;,
-&quot;rarity&quot;: [&quot;mythic rare&quot;]
+&quot;subTypes&quot;: [&quot;Demon&quot;],
+&quot;rarity&quot;: [&quot;rare&quot;]
 }</property>
    </properties>
   </object>

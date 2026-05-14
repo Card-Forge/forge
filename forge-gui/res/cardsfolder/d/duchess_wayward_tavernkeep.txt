@@ -6,4 +6,5 @@ T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | Comba
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredSourceLKICopy | CounterType$ QUEST | CounterNum$ 1
 A:AB$ Token | Cost$ 1 RemoveAnyCounter<1/QUEST/Permanent> | TokenScript$ c_a_junk_sac_exileplay | SpellDescription$ Create a Junk token. (It's an artifact with "{T}, Sacrifice this artifact: Exile the top card of your library. You may play that card this turn. Activate only as a sorcery.")
 DeckHas:Ability$Counters|Token & Type$Junk|Artifact
+SVar:AICounterOverrideQUEST:Positive
 Oracle:Hunters for Hire — Whenever a creature you control deals combat damage to a player, put a quest counter on it.\n{1}, Remove a quest counter from a permanent you control: Create a Junk token. (It's an artifact with "{T}, Sacrifice this artifact: Exile the top card of your library. You may play that card this turn. Activate only as a sorcery.")

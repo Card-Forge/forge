@@ -342,14 +342,26 @@ public class VLobby implements ILobbyView {
             return;
         }
 
-        firePlayerChangeListener(index);
+        if (playerChangeListener != null) {
+            playerChangeListener.update(index, UpdateLobbyPlayerEvent.isReadyUpdate(ready));
+        }
         changePlayerFocus(index);
     }
     void setDevMode(final int index) {
+        // Push dev mode first: subsequent ready-clear broadcasts trigger view.update,
+        // which re-syncs panel.isDevMode from slot.isDevMode. If the slot is stale
+        // at that point the dev mode checkbox flips back visually.
+        if (playerChangeListener != null) {
+            playerChangeListener.update(index, UpdateLobbyPlayerEvent.devModeUpdate(getPlayerPanel(index).isDevMode()));
+        }
         // clear ready for everyone
         for (int i = 0; i < activePlayersNum; i++) {
-            getPlayerPanel(i).setIsReady(false);
-            firePlayerChangeListener(i);
+            final PlayerPanel panel = getPlayerPanel(i);
+            final boolean wasReady = panel.isReady();
+            panel.setIsReady(false);
+            if (wasReady && playerChangeListener != null) {
+                playerChangeListener.update(i, UpdateLobbyPlayerEvent.isReadyUpdate(false));
+            }
         }
         changePlayerFocus(index);
     }
@@ -387,7 +399,6 @@ public class VLobby implements ILobbyView {
                 panel.getPlayerName(),
                 panel.getAvatarIndex(), -1 /*TODO panel.getSleeveIndex()*/,
                 panel.getTeam(), panel.isArchenemy(),
-                panel.isReady(),
                 panel.isDevMode(),
                 panel.getAiOptions(),
                 panel.getAiProfile());
