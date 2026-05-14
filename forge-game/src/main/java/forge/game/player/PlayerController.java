@@ -201,8 +201,14 @@ public abstract class PlayerController {
      */
     public abstract CardCollectionView orderMoveToZoneList(CardCollectionView cards, ZoneType destinationZone, SpellAbility source);
 
-    /** p = target player, validCards - possible discards, min cards to discard */
-    public abstract CardCollectionView chooseCardsToDiscardFrom(Player playerDiscard, SpellAbility sa, CardCollection validCards, int min, int max);
+    /** p = target player, validCards - possible discards, min cards to discard. */
+    public CardCollectionView chooseCardsToDiscardFrom(Player playerDiscard, SpellAbility sa, CardCollection validCards, int min, int max) {
+        return chooseCardsToDiscardFrom(playerDiscard, sa, validCards, min, max, validCards);
+    }
+
+    /** visibleToChooser - all cards the chooser is allowed to see during the choice (a superset of validCards
+     *  when an effect has revealed extra cards, e.g. Reveal/Look modes). */
+    public abstract CardCollectionView chooseCardsToDiscardFrom(Player playerDiscard, SpellAbility sa, CardCollection validCards, int min, int max, CardCollectionView visibleToChooser);
     public abstract CardCollectionView chooseCardsToDiscardUnlessType(int min, CardCollectionView hand, String[] unlessTypes, SpellAbility sa);
     public abstract CardCollection chooseCardsToDiscardToMaximumHandSize(int numDiscard);
 

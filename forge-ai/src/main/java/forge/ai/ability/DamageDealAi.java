@@ -356,14 +356,7 @@ public class DamageDealAi extends DamageAiBase {
 
         Card targetCard = null;
         if (pl.isOpponentOf(ai) && activator.equals(ai) && !killables.isEmpty()) {
-            if (sa.getTargetRestrictions().canTgtPlaneswalker()) {
-                targetCard = ComputerUtilCard.getBestPlaneswalkerAI(killables);
-            }
-            if (targetCard == null) {
-                targetCard = ComputerUtilCard.getBestCreatureAI(killables);
-            }
-
-            return targetCard;
+            return ComputerUtilCard.getBestRemovalTargetAI(ai, killables);
         }
 
         if (!mandatory) {
@@ -376,12 +369,7 @@ public class DamageDealAi extends DamageAiBase {
 
         if (!hPlay.isEmpty()) {
             if (pl.isOpponentOf(ai) && activator.equals(ai)) {
-                if (sa.getTargetRestrictions().canTgtPlaneswalker()) {
-                    targetCard = ComputerUtilCard.getBestPlaneswalkerAI(controlledByOpps);
-                }
-                if (targetCard == null) {
-                    targetCard = ComputerUtilCard.getBestCreatureAI(controlledByOpps);
-                }
+                targetCard = ComputerUtilCard.getBestRemovalTargetAI(ai, controlledByOpps);
             }
             if (targetCard == null) {
                 targetCard = ComputerUtilCard.getWorstCreatureAI(hPlay);

@@ -15,8 +15,10 @@ import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.match.input.InputConfirm;
 import forge.gamemodes.net.DeltaPacket;
+import forge.gui.GuiBase;
 import forge.gui.control.PlaybackSpeed;
 import forge.interfaces.IGameController;
 import forge.item.PaperCard;
@@ -33,6 +35,16 @@ import java.util.List;
 import java.util.Map;
 
 public interface IGuiGame {
+    /**
+     * Whether the renderer for this GUI is the mobile port.
+     * For non-local GUIs this reflects the connected client's renderer
+     * (learned at lobby handshake), letting the host pick code paths that
+     * are actually implemented on the target.
+     */
+    default boolean isLibgdxPort() {
+        return GuiBase.getInterface().isLibgdxPort();
+    }
+
     void setGameView(GameView gameView);
 
     /**
@@ -261,9 +273,6 @@ public interface IGuiGame {
 
     boolean isUiSetToSkipPhase(PlayerView playerTurn, PhaseType phase);
 
-    void autoPassUntilEndOfTurn(PlayerView player);
-    boolean mayAutoPass(PlayerView player);
-    void autoPassCancel(PlayerView player);
     void updateAutoPassPrompt();
 
     void setCurrentPlayer(PlayerView player);
@@ -273,6 +282,12 @@ public interface IGuiGame {
      * @param packet the delta packet containing changes
      */
     void applyDelta(DeltaPacket packet);
+
+    /** Repaint marker chevron / stack-yield UI for the given player. */
+    default void refreshYieldUi(PlayerView player) {}
+
+    /** Apply an authoritative yield-state change. {@link forge.gamemodes.match.AbstractGuiGame} routes to the local {@link forge.interfaces.IGameController}; {@link forge.gamemodes.net.server.RemoteClientGuiGame} forwards over the wire. */
+    void applyYieldUpdate(YieldUpdate update);
 
     /** Returns true if this game instance is a network game. */
     boolean isNetGame();

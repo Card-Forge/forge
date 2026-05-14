@@ -91,7 +91,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 allSections.add(DeckSection.Avatar);
                 allSections.add(DeckSection.Conspiracy);
 
-                normalPool = FModel.getAllCardsNoAlt();
+                normalPool = FModel.getAllCards();
                 avatarPool = FModel.getAvatarPool();
                 conspiracyPool = FModel.getConspiracyPool();
 
@@ -100,7 +100,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 allSections.add(DeckSection.Commander);
 
                 commanderPool = FModel.getCommanderPool();
-                normalPool = FModel.getAllCardsNoAlt();
+                normalPool = FModel.getAllCards();
 
                 wantUnique = true;
                 break;
@@ -108,7 +108,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 allSections.add(DeckSection.Commander);
 
                 commanderPool = FModel.getTinyLeadersCommander();
-                normalPool = FModel.getAllCardsNoAlt();
+                normalPool = FModel.getAllCards();
 
                 wantUnique = true;
                 break;
@@ -116,7 +116,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 allSections.add(DeckSection.Commander);
 
                 commanderPool = FModel.getOathbreakerCommander();
-                normalPool = FModel.getAllCardsNoAlt();
+                normalPool = FModel.getAllCards();
 
                 wantUnique = true;
                 break;

@@ -259,14 +259,14 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 ForgeConstants.GRAVEYARD_ORDERING_NEVER, ForgeConstants.GRAVEYARD_ORDERING_OWN_CARDS,
                 ForgeConstants.GRAVEYARD_ORDERING_ALWAYS
             }), 1);
-        lstSettings.addItem(new CustomSelectSetting(FPref.UI_AUTO_YIELD_MODE,
-            Forge.getLocalizer().getMessage("lblAutoYields"),
-            Forge.getLocalizer().getMessage("nlpAutoYieldMode"),
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_AUTO_DECISION_MODE,
+            Forge.getLocalizer().getMessage("lblAutoYieldsAndTriggers"),
+            Forge.getLocalizer().getMessage("nlpAutoDecisionMode"),
             new String[] {
-                ForgeConstants.AUTO_YIELD_PER_CARD,
-                ForgeConstants.AUTO_YIELD_PER_ABILITY,
-                ForgeConstants.AUTO_YIELD_PER_ABILITY_SESSION,
-                ForgeConstants.AUTO_YIELD_PER_ABILITY_INSTALL,
+                ForgeConstants.AUTO_DECISION_PER_CARD,
+                ForgeConstants.AUTO_DECISION_PER_ABILITY,
+                ForgeConstants.AUTO_DECISION_PER_ABILITY_SESSION,
+                ForgeConstants.AUTO_DECISION_PER_ABILITY_INSTALL,
             }), 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ALLOW_ESC_TO_END_TURN,
             Forge.getLocalizer().getMessage("cbEscapeEndsTurn"),
@@ -447,15 +447,6 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         }
                     );
                }
-            }, 3);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_NETPLAY_COMPAT,
-            Forge.getLocalizer().getMessage("lblExperimentalNetworkCompatibility"),
-            Forge.getLocalizer().getMessage("nlExperimentalNetworkCompatibility")) {
-                @Override
-                public void select() {
-                    super.select();
-                    GuiBase.enablePropertyConfig(FModel.getPreferences().getPrefBoolean(FPref.UI_NETPLAY_COMPAT));
-                }
             }, 3);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_DISPOSE_TEXTURES,
             Forge.getLocalizer().getMessage("lblDisposeTextures"),

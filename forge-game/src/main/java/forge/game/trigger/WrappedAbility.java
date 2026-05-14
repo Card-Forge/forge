@@ -155,12 +155,10 @@ public class WrappedAbility extends Ability {
         if (getTrigger() != null) {
             if (getHostCard() != null) {
                 return getHostCard().toString() + ": " + getTrigger().toString();
-            } else {
-                return getTrigger().toString();
             }
-        } else {
-            return super.yieldKey();
+            return getTrigger().toString();
         }
+        return super.yieldKey();
     }
 
     // include triggering information so that different effects look different
@@ -185,6 +183,9 @@ public class WrappedAbility extends Ability {
         if (regtrig == null) return "";
         final StringBuilder sb =
                 new StringBuilder(regtrig.replaceAbilityText(regtrig.toString(true), this, true));
+        if (!regtrig.getTriggerRemembered().isEmpty()) {
+            sb.append(" (").append(regtrig.getTriggerRemembered()).append(")");
+        }
 
         // prevent text growing too long when SA target other in a chain and also potential StackOverflow
         if (withTargets) {

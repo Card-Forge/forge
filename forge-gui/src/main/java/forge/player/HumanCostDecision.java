@@ -17,7 +17,6 @@ import forge.game.zone.ZoneType;
 import forge.gamemodes.match.input.InputConfirm;
 import forge.gamemodes.match.input.InputSelectCardsFromList;
 import forge.gamemodes.match.input.InputSelectManyBase;
-import forge.gui.GuiBase;
 import forge.gui.util.SGuiChoose;
 import forge.util.*;
 import forge.util.collect.FCollectionView;
@@ -1504,7 +1503,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
     private boolean confirmAction(CostPart costPart, String message) {
         CardView cardView = ability.getCardView();
-        if (GuiBase.getInterface().isLibgdxPort()) {
+        if (controller.getGui().isLibgdxPort()) {
             try {
                 //for cards like Sword-Point Diplomacy and others that uses imprinted as container for their ability
                 if (cardView != null && cardView.getImprintedCards() != null && cardView.getImprintedCards().size() == 1)

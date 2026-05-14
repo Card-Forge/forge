@@ -16,6 +16,7 @@ import forge.deck.DeckBase;
 import forge.deck.io.DeckSerializer;
 import forge.deck.io.DeckStorage;
 import forge.game.GameType;
+import forge.gui.GuiBase;
 import forge.gui.UiCommand;
 import forge.gui.framework.ICDoc;
 import forge.localinstance.properties.ForgeConstants;
@@ -24,6 +25,7 @@ import forge.screens.deckeditor.DeckImport;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.toolbox.FOptionPane;
+import forge.util.Localizer;
 
 /**
  * Controls the "current deck" panel in the deck editor UI.
@@ -71,6 +73,7 @@ public enum CCurrentDeck implements ICDoc {
         VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setCommand((UiCommand) SEditorIO::saveDeck);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnSaveAs().setCommand((UiCommand) this::exportDeck);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().setCommand((UiCommand) this::printProxies);
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnCopyToClipboard().setCommand((UiCommand) this::copyDeckToClipboard);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnOpen().setCommand((UiCommand) this::openDeck);
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnNew().setCommand((UiCommand) this::newDeck);
@@ -188,6 +191,20 @@ public enum CCurrentDeck implements ICDoc {
             //BugReporter.reportException(ex);
             throw new RuntimeException("Error exporting deck." + ex);
         }
+    }
+
+    private void copyDeckToClipboard() {
+        if (CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController() == null) {
+            return;
+        }
+        Object model = CDeckEditorUI.SINGLETON_INSTANCE
+                .getCurrentEditorController().getDeckController().getModel();
+        if (!(model instanceof Deck deck)) {
+            return;
+        }
+        GuiBase.getInterface().copyToClipboard(deck.generateTextExport());
+        FOptionPane.showMessageDialog(
+                Localizer.getInstance().getMessage("lblDeckListCopiedClipboard", deck.getName()));
     }
 
     /** */

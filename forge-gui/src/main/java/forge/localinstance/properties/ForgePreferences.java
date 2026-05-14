@@ -144,7 +144,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_ALT_PLAYERINFOLAYOUT ("false"),
         UI_ALT_PLAYERZONETABS ("false"),
         UI_PRESELECT_PREVIOUS_ABILITY_ORDER ("false"),
-        UI_AUTO_YIELD_MODE (ForgeConstants.AUTO_YIELD_PER_ABILITY),
+        UI_AUTO_DECISION_MODE (ForgeConstants.AUTO_DECISION_PER_ABILITY),
         UI_SHOW_STORM_COUNT_IN_PROMPT ("false"),
         UI_REMIND_ON_PRIORITY ("false"),
         UI_CARD_COUNTER_DISPLAY_TYPE(ForgeConstants.CounterDisplayType.TEXT.getName()),
@@ -162,7 +162,6 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_ENABLE_MATCH_SCROLL_INDICATOR("false"),
         UI_ENABLE_MAGNIFIER("true"),
         UI_SHOW_FPS("false"),
-        UI_NETPLAY_COMPAT("false"),
         UI_ENABLE_DISPOSE_TEXTURES("false"),
         UI_LOAD_UNKNOWN_CARDS("true"),
         UI_LOAD_NONLEGAL_CARDS("true"),
@@ -178,7 +177,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_ORDER_HAND("false"),
         UI_HAND_MAX_CARDS_PER_ROW("0"),
         UI_HAND_NO_OVERLAP("false"),
-        UI_ZONE_TAB_NEW_COUNT("false"),
+        UI_ZONE_TAB_NEW_COUNT("true"),
         UI_ENABLE_AI_PICKER("false"),
 
         UI_ENABLE_SOUNDS ("true"),
@@ -201,6 +200,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         AUTO_UPDATE("none"),
         USE_SENTRY("false"), // this controls whether automated bug reporting is done or not
         CHECK_SNAPSHOT_AT_STARTUP("true"),
+        MAX_LOG_FILES("10"), // applied per category: up to N forge.*.log backups AND N network log entries
 
         MATCH_HOT_SEAT_MODE("false"), //this only applies to mobile game
 

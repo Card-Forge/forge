@@ -2,6 +2,7 @@ package forge.gamemodes.net;
 
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgeNetPreferences.FNetPref;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.util.FileUtil;
 import forge.util.IHasForgeLog;
@@ -304,7 +305,7 @@ public final class NetworkLogConfig implements IHasForgeLog {
      * Delete old log subdirectories from the network logs directory, respecting:
      * - Grace period: skip directories modified within the last 5 minutes
      * - Current batch protection: skip the current batchId subdirectory
-     * - Max directory limit from NET_MAX_LOG_FILES preference
+     * - Max directory limit from MAX_LOG_FILES preference (shared with forge.log rotation)
      * - Cleanup can be disabled via NET_LOG_CLEANUP_ENABLED preference
      * - Also cleans up legacy flat log files (network-debug-*.log)
      */
@@ -316,7 +317,7 @@ public final class NetworkLogConfig implements IHasForgeLog {
             if (!FModel.getNetPreferences().getPrefBoolean(FNetPref.NET_LOG_CLEANUP_ENABLED)) {
                 return;
             }
-            int maxEntries = FModel.getNetPreferences().getPrefInt(FNetPref.NET_MAX_LOG_FILES);
+            int maxEntries = FModel.getPreferences().getPrefInt(FPref.MAX_LOG_FILES);
             if (maxEntries <= 0) {
                 return;
             }

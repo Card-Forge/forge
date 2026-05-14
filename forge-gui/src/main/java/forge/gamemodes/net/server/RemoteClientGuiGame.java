@@ -13,6 +13,7 @@ import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.net.NetworkGuiGame;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gamemodes.net.GameProtocolSender;
@@ -37,7 +38,7 @@ import java.util.stream.Collectors;
 public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog {
 
     // New objects are sent with full property data, existing objects only send changed properties
-    public static boolean useDeltaSync = false;
+    public static boolean useDeltaSync = true;
 
     private final RemoteClient client;
     private final GameProtocolSender sender;
@@ -61,6 +62,11 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
 
     public RemoteClient getClient() {
         return client;
+    }
+
+    @Override
+    public boolean isLibgdxPort() {
+        return client.isLibgdx();
     }
 
     public void pause() {
@@ -244,7 +250,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
         // setGameView is called before openView, and the client can't respond
         // until after openView — so the encoder/decoder are ready in time.
         if (!codecTrackerSet && gameView != null && gameView.getTracker() != null) {
-            client.setCodecTracker(gameView.getTracker());
+            client.setCodecTracker(gameView.getTracker(), syncManager.getConsumerId());
             codecTrackerSet = true;
         }
         updateGameView();
@@ -273,6 +279,11 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     public void showPromptMessage(final PlayerView playerView, final String message) {
         updateGameView();
         send(ProtocolMethod.showPromptMessage, playerView, message);
+    }
+
+    @Override
+    public void applyYieldUpdate(final YieldUpdate update) {
+        send(ProtocolMethod.applyYieldUpdate, update);
     }
 
     @Override
