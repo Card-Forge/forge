@@ -6935,14 +6935,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
         return hexproofKey;
     }
-    public String getKeywordKey() {
-        List<String> ability = new ArrayList<>();
-        for (final KeywordInterface inst : getKeywords()) {
-            ability.add(inst.getOriginal());
-        }
-        Collections.sort(ability);
-        return StringUtils.join(ability.toArray(), ","); //fix nosuchmethod on some android devices...
-    }
 
     public Zone getZone() {
         return currentZone;

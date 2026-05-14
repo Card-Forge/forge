@@ -46,6 +46,7 @@ import forge.card.mana.ManaCost;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.card.CounterType;
+import forge.game.keyword.Keyword;
 import forge.game.zone.ZoneType;
 import forge.gui.FThreads;
 import forge.gui.card.CardDetailUtil;
@@ -826,12 +827,10 @@ public class CardRenderer {
             drawAbilityIcons(g, card, cx, cy, cw, ch, cx + ((cw * 2) / 2.3f), cy, cw / 5.5f, cw / 5.7f, CardRendererUtils.showAbilityIcons(card));
         } else if (canShow && !ZoneType.Battlefield.equals(card.getZone()) && CardRendererUtils.showAbilityIcons(card)) {
             //draw indicator for flash or can be cast at instant speed, enabled if show ability icons is enabled
-            String keywordKey = card.getCurrentState().getKeywordKey();
             String abilityText = card.getCurrentState().getAbilityText();
-            if ((keywordKey.contains("Flash"))
+            if ((card.getCurrentState().hasKeyword(Keyword.FLASH))
                     || ((abilityText.contains("May be played by"))
                     && (abilityText.contains("and as though it has flash")))) {
-                if (!keywordKey.contains("Flashback"))
                     CardFaceSymbols.drawSymbol("flash", g, cx + ((cw * 2) / 2.3f), cy, cw / 5.5f, cw / 5.5f);
             }
         }

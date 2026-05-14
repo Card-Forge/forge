@@ -10,6 +10,7 @@ import forge.card.mana.ManaCost;
 import forge.game.*;
 import forge.game.combat.Combat;
 import forge.game.keyword.Keyword;
+import forge.game.keyword.KeywordCollectionView;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.AbilityManaPart;
@@ -1578,50 +1579,43 @@ public class CardView extends GameEntityView {
             foilIndexOverride = index0;
         }
 
-        public String getKeywordKey() { return get(TrackableProperty.KeywordKey); }
+        public KeywordCollectionView getKeywords()  { return get(TrackableProperty.Keywords); }
+        public boolean hasKeyword(Keyword keyword) { return getKeywords().contains(keyword); }
+
         public String getProtectionKey() { return get(TrackableProperty.ProtectionKey); }
         public String getHexproofKey() { return get(TrackableProperty.HexproofKey); }
         public boolean hasAnnihilator() { return get(TrackableProperty.HasAnnihilator); }
-        public boolean hasDeathtouch() { return get(TrackableProperty.HasDeathtouch); }
-        public boolean hasToxic() { return get(TrackableProperty.HasToxic); }
-        public boolean hasDevoid() { return get(TrackableProperty.HasDevoid); }
-        public boolean hasDefender() { return get(TrackableProperty.HasDefender); }
-        public boolean hasDivideDamage() { return get(TrackableProperty.HasDivideDamage); }
-        public boolean hasDoubleStrike() { return get(TrackableProperty.HasDoubleStrike); }
-        public boolean hasDoubleTeam() { return get(TrackableProperty.HasDoubleTeam); }
-        public boolean hasExalted() { return get(TrackableProperty.HasExalted); }
-        public boolean hasFirstStrike() { return get(TrackableProperty.HasFirstStrike); }
-        public boolean hasFlying() { return get(TrackableProperty.HasFlying); }
-        public boolean hasFear() { return get(TrackableProperty.HasFear); }
-        public boolean hasHexproof() { return get(TrackableProperty.HasHexproof); }
-        public boolean hasHorsemanship() { return get(TrackableProperty.HasHorsemanship); }
         public boolean hasWard() { return get(TrackableProperty.HasWard); }
-        public boolean hasWither() { return get(TrackableProperty.HasWither); }
-        public boolean hasIndestructible() { return get(TrackableProperty.HasIndestructible); }
-        public boolean hasIntimidate() { return get(TrackableProperty.HasIntimidate); }
-        public boolean hasLifelink() { return get(TrackableProperty.HasLifelink); }
-        public boolean hasMenace() { return get(TrackableProperty.HasMenace); }
-        public boolean hasReach() { return get(TrackableProperty.HasReach); }
-        public boolean hasShadow() { return get(TrackableProperty.HasShadow); }
-        public boolean hasShroud() { return get(TrackableProperty.HasShroud); }
-        public boolean hasTrample() { return get(TrackableProperty.HasTrample); }
-        public boolean hasVigilance() { return get(TrackableProperty.HasVigilance); }
 
-        public boolean hasHaste() {
-            return get(TrackableProperty.HasHaste);
-        }
-        public boolean hasInfect() {
-            return get(TrackableProperty.HasInfect);
-        }
-        public boolean hasStorm() {
-            return get(TrackableProperty.HasStorm);
-        }
-        public boolean hasLandwalk() {
-            return get(TrackableProperty.HasLandwalk);
-        }
-        public boolean hasAftermath() {
-            return get(TrackableProperty.HasAftermath);
-        }
+        public boolean hasDeathtouch() { return hasKeyword(Keyword.DEATHTOUCH); }
+        public boolean hasToxic() { return hasKeyword(Keyword.TOXIC); }
+        public boolean hasDevoid() { return hasKeyword(Keyword.DEVOID); }
+        public boolean hasDefender() { return hasKeyword(Keyword.DEFENDER); }
+        public boolean hasDoubleStrike() { return hasKeyword(Keyword.DOUBLE_STRIKE); }
+        public boolean hasDoubleTeam() { return hasKeyword(Keyword.DOUBLE_TEAM); }
+        public boolean hasExalted() { return hasKeyword(Keyword.EXALTED); }
+        public boolean hasFirstStrike() { return hasKeyword(Keyword.FIRST_STRIKE); }
+        public boolean hasFlying() { return hasKeyword(Keyword.FLYING); }
+        public boolean hasFear() { return hasKeyword(Keyword.FEAR); }
+        public boolean hasHexproof() { return hasKeyword(Keyword.HEXPROOF); }
+        public boolean hasHorsemanship() { return hasKeyword(Keyword.HORSEMANSHIP); }
+        public boolean hasWither() { return hasKeyword(Keyword.WITHER); }
+        public boolean hasIndestructible() { return hasKeyword(Keyword.INDESTRUCTIBLE); }
+        public boolean hasIntimidate() { return hasKeyword(Keyword.INTIMIDATE); }
+        public boolean hasLifelink() { return hasKeyword(Keyword.LIFELINK); }
+        public boolean hasMenace() { return hasKeyword(Keyword.MENACE); }
+        public boolean hasReach() { return hasKeyword(Keyword.REACH); }
+        public boolean hasShadow() { return hasKeyword(Keyword.SHADOW); }
+        public boolean hasShroud() { return hasKeyword(Keyword.SHROUD); }
+        public boolean hasTrample() { return hasKeyword(Keyword.TRAMPLE); }
+        public boolean hasVigilance() { return hasKeyword(Keyword.VIGILANCE); }
+        public boolean hasHaste() { return hasKeyword(Keyword.HASTE); }
+        public boolean hasInfect() { return hasKeyword(Keyword.INFECT); }
+        public boolean hasStorm() { return hasKeyword(Keyword.STORM); }
+        public boolean hasLandwalk() { return hasKeyword(Keyword.LANDWALK); }
+        public boolean hasAftermath() { return hasKeyword(Keyword.AFTERMATH); }
+
+        public boolean hasDivideDamage() { return get(TrackableProperty.HasDivideDamage); }
 
         public boolean origProduceAnyMana() {
             return get(TrackableProperty.OrigProduceAnyMana);
@@ -1638,46 +1632,20 @@ public class CardView extends GameEntityView {
         }
         void updateKeywords(Card c, CardState state) {
             c.updateKeywordsCache(state);
+            set(TrackableProperty.Keywords, state.getCachedKeywords().getView());
             // deeper check for Idris
             set(TrackableProperty.HasAnnihilator, c.hasKeyword(Keyword.ANNIHILATOR, state) || state.getTriggers().anyMatch(t -> t.isKeyword(Keyword.ANNIHILATOR)));
             set(TrackableProperty.HasWard, c.hasKeyword(Keyword.WARD, state) || state.getTriggers().anyMatch(t -> t.isKeyword(Keyword.WARD)));
-            set(TrackableProperty.HasDeathtouch, c.hasKeyword(Keyword.DEATHTOUCH, state));
-            set(TrackableProperty.HasToxic, c.hasKeyword(Keyword.TOXIC, state));
-            set(TrackableProperty.HasDevoid, c.hasKeyword(Keyword.DEVOID, state));
-            set(TrackableProperty.HasDefender, c.hasKeyword(Keyword.DEFENDER, state));
-            set(TrackableProperty.HasDivideDamage, c.hasKeyword("You may assign CARDNAME's combat damage divided as " +
-                    "you choose among defending player and/or any number of creatures they control."));
-            set(TrackableProperty.HasDoubleStrike, c.hasKeyword(Keyword.DOUBLE_STRIKE, state));
-            set(TrackableProperty.HasExalted, c.hasKeyword(Keyword.EXALTED, state));
-            set(TrackableProperty.HasFirstStrike, c.hasKeyword(Keyword.FIRST_STRIKE, state));
-            set(TrackableProperty.HasFlying, c.hasKeyword(Keyword.FLYING, state));
-            set(TrackableProperty.HasFear, c.hasKeyword(Keyword.FEAR, state));
-            set(TrackableProperty.HasHexproof, c.hasKeyword(Keyword.HEXPROOF, state));
-            set(TrackableProperty.HasHorsemanship, c.hasKeyword(Keyword.HORSEMANSHIP, state));
-            set(TrackableProperty.HasWither, c.hasKeyword(Keyword.WITHER, state));
-            set(TrackableProperty.HasIndestructible, c.hasKeyword(Keyword.INDESTRUCTIBLE, state));
-            set(TrackableProperty.HasIntimidate, c.hasKeyword(Keyword.INTIMIDATE, state));
-            set(TrackableProperty.HasLifelink, c.hasKeyword(Keyword.LIFELINK, state));
-            set(TrackableProperty.HasMenace, c.hasKeyword(Keyword.MENACE, state));
-            set(TrackableProperty.HasReach, c.hasKeyword(Keyword.REACH, state));
-            set(TrackableProperty.HasShadow, c.hasKeyword(Keyword.SHADOW, state));
-            set(TrackableProperty.HasShroud, c.hasKeyword(Keyword.SHROUD, state));
-            set(TrackableProperty.HasTrample, c.hasKeyword(Keyword.TRAMPLE, state));
-            set(TrackableProperty.HasVigilance, c.hasKeyword(Keyword.VIGILANCE, state));
-            set(TrackableProperty.HasHaste, c.hasKeyword(Keyword.HASTE, state));
-            set(TrackableProperty.HasInfect, c.hasKeyword(Keyword.INFECT, state));
-            set(TrackableProperty.HasStorm, c.hasKeyword(Keyword.STORM, state));
-            set(TrackableProperty.HasLandwalk, c.hasKeyword(Keyword.LANDWALK, state));
-            set(TrackableProperty.HasAftermath, c.hasKeyword(Keyword.AFTERMATH, state));
             updateAbilityText(c, state);
             //set protectionKey for Icons
             set(TrackableProperty.ProtectionKey, c.getProtectionKey());
             //set hexproofKeys for Icons
             set(TrackableProperty.HexproofKey, c.getHexproofKey());
-            //keywordkey
-            set(TrackableProperty.KeywordKey, c.getKeywordKey());
             //update Trackable Mana Color for BG Colors
             updateManaColorBG(state);
+
+            set(TrackableProperty.HasDivideDamage, c.hasKeyword("You may assign CARDNAME's combat damage divided as " +
+                    "you choose among defending player and/or any number of creatures they control."));
         }
         void updateManaColorBG(CardState state) {
             boolean anyMana = false;

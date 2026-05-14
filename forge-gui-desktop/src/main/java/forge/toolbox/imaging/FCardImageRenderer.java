@@ -32,6 +32,7 @@ import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
+import forge.game.keyword.Keyword;
 import forge.gui.GuiBase;
 import forge.gui.card.CardDetailUtil;
 import forge.gui.card.CardDetailUtil.DetailColors;
@@ -190,7 +191,7 @@ public class FCardImageRenderer {
             boolean hasPTBox = false;
             if (!card.isSplitCard() && !card.isFlipCard()) {
                 final CardStateView state = card.getState(card.hasSecondaryState() ? false : altState);
-                if ((state.isCreature() && !state.getKeywordKey().contains("Level up"))
+                if ((state.isCreature() && !state.hasKeyword(Keyword.LEVEL_UP))
                         || state.isPlaneswalker() || state.isBattle() || state.isVehicle())
                     hasPTBox = true;
             }
@@ -342,8 +343,7 @@ public class FCardImageRenderer {
         }
 
         //handle leveler cards
-        boolean isLevelup = (state.getKeywordKey().contains("Level up"));
-        if (isLevelup) {
+        if (state.hasKeyword(Keyword.LEVEL_UP)) {
             int textBoxHeightDiv3 = Math.round(textBoxHeight / 3f);
             String [] paragraphs = linebreakPattern.split(text);
             StringBuilder sb = new StringBuilder();

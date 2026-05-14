@@ -912,10 +912,8 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
                     }
                 }
             } else {
-                String keywordKey = card.getCurrentState().getKeywordKey();
                 String abilityText = card.getCurrentState().getAbilityText();
-                if (((!keywordKey.contains("Flashback"))
-                    && (keywordKey.contains("Flash")))
+                if (card.getCurrentState().hasKeyword(Keyword.FLASH)
                         || ((abilityText.contains("May be played by"))
                                 && (abilityText.contains("and as though it has flash")))) {
                         hasFlash = !card.isFaceDown() && ((!ZoneType.Library.equals(card.getZone()) && !ZoneType.Hand.equals(card.getZone())) || matchUI.mayView(card));
