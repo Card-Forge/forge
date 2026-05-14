@@ -18,6 +18,7 @@
 package forge.view.arcane;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -545,6 +546,14 @@ public class FloatingZone extends FloatingCardArea {
             .fontSize(11)
             .fontAlign(SwingConstants.CENTER)
             .build();
+
+    /** HTML enables FLabel auto-wrap; inline CSS pins the configured font (Swing's HTMLEditorKit otherwise reverts to its default). */
+    private String htmlHint(final String text) {
+        final Font f = hotkeyHint.getFont();
+        return "<html><div style='font-family:" + f.getFamily()
+                + ";font-size:" + f.getSize() + "pt;text-align:center;'>"
+                + text + "</div></html>";
+    }
     private String filter = "";
 
     private final Comparator<CardView> comp = (lhs, rhs) -> {
@@ -591,7 +600,7 @@ public class FloatingZone extends FloatingCardArea {
         window.add(searchField, "growx, wrap");
         window.add(getScrollPane(), "grow, push, wrap");
         hotkeyHint.setVisible(false);
-        window.add(hotkeyHint, "growx");
+        window.add(hotkeyHint, "growx, hidemode 3");
         window.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE); //pfps so that old content does not reappear?
         getScrollPane().setViewportView(this);
         setOpaque(false);
@@ -779,7 +788,26 @@ public class FloatingZone extends FloatingCardArea {
         }
         if (!e.isControlDown() || e.isAltDown() || e.isMetaDown()) return false;
         final int digit = e.getKeyCode() - KeyEvent.VK_0;
-        if (digit < 1 || digit > 9) return false;
+        if (digit < 0 || digit > 9) return false;
+        if (digit == 0) {
+            // Ctrl+0: auto-pick the first N selectables; no-op when min == 0
+            // Snapshot the panel list — selectCard() mutates it via re-render side-effects
+            for (final FloatingZone fz : new ArrayList<>(floatingAreas.values())) {
+                if (!fz.isVisible()) continue;
+                final int need = fz.getMatchUI().getSelectionMin();
+                if (need < 1) continue;
+                int picked = 0;
+                for (final CardPanel panel : new ArrayList<>(fz.getCardPanels())) {
+                    if (picked >= need) break;
+                    if (!fz.getMatchUI().isSelectable(panel.getCard())) continue;
+                    fz.getMatchUI().getGameController().selectCard(panel.getCard(), null,
+                            new MouseTriggerEvent(MouseEvent.BUTTON1, 0, 0));
+                    picked++;
+                }
+                if (picked > 0) return true;
+            }
+            return false;
+        }
         for (final FloatingZone fz : floatingAreas.values()) {
             if (!fz.isVisible()) continue;
             final CardPanel target = fz.findPanelByHotkeyDigit(digit);
@@ -807,8 +835,21 @@ public class FloatingZone extends FloatingCardArea {
                 panel.setHotkeyDigit(0);
             }
         }
-        if (!clear) {
+        if (clear) {
+            hotkeyHint.setVisible(false);
+        } else {
+            final int min = getMatchUI().getSelectionMin();
+            hotkeyHint.setText(htmlHint(min >= 1
+                    ? Localizer.getInstance().getMessage("lblHotkeySelectHintWithMin", min)
+                    : Localizer.getInstance().getMessage("lblHotkeySelectHint")));
             hotkeyHint.setVisible(next > 1);
+        }
+    }
+
+    /** Clear hotkey badges and hide the hint label on every visible floating zone. */
+    public static void clearAllHotkeyAffordance() {
+        for (final FloatingZone fz : new ArrayList<>(floatingAreas.values())) {
+            if (fz.isVisible()) fz.assignOwnHotkeyDigits(true);
         }
     }
 

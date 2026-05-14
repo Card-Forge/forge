@@ -457,9 +457,9 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     }
 
     @Override
-    public void setSelectables(final Iterable<CardView> cards) {
+    public void setSelectables(final Iterable<CardView> cards, final int min, final int max) {
         updateGameView();
-        send(ProtocolMethod.setSelectables, cards);
+        send(ProtocolMethod.setSelectables, cards, min, max);
     }
 
     @Override

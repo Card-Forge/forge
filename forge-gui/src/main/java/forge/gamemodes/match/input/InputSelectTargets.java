@@ -63,7 +63,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             lastTarget = card;
         }
 
-        controller.getGui().setSelectables(CardView.getCollection(choices));
+        publishSelectables();
         final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
         for (final Card c : choices) {
             zonesToUpdate.add(new PlayerZoneUpdate(c.getZone().getPlayer().getView(), c.getZone().getZoneType()));
@@ -396,6 +396,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             if (ge instanceof Card && mustTargetFiltered) {
                 this.done();
             } else {
+                publishSelectables();
                 this.showMessage();
             }
         }
@@ -413,7 +414,23 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         }
         getController().getGui().setHighlighted(GameEntityView.get(ge), false);
 
+        publishSelectables();
         this.showMessage();
+    }
+
+    /**
+     * Push the current selectables and the remaining min/max target count
+     * to the GUI so client-side hotkeys (e.g. Ctrl+0 select-min) reflect
+     * the live remaining target requirement, not a stale snapshot from
+     * the constructor.
+     */
+    private void publishSelectables() {
+        final int effMin = numTargets != null ? numTargets : sa.getMinTargets();
+        final int effMax = numTargets != null ? numTargets : sa.getMaxTargets();
+        final int taken = sa.getTargets().size();
+        final int remainMin = Math.max(0, effMin - taken);
+        final int remainMax = Math.max(0, effMax - taken);
+        getController().getGui().setSelectables(CardView.getCollection(choices), remainMin, remainMax);
     }
 
     private void done() {
