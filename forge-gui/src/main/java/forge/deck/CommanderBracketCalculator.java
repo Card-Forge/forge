@@ -84,7 +84,7 @@ public final class CommanderBracketCalculator {
     private static Set<String> getDeckCardNames(final Deck deck) {
         final Set<String> result = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
         for (final Entry<PaperCard, Integer> cardEntry : deck.getAllCardsInASinglePool()) {
-            result.add(cardEntry.getKey().getName());
+            result.addAll(cardEntry.getKey().getAllSearchableNames());
         }
         return result;
     }
