@@ -48,7 +48,7 @@ public final class SResizingUtil {
     /** Minimum cell width. */
     public static final int W_MIN = 100;
     /** Minimum cell height. */
-    public static final int H_MIN = 75;
+    public static final int H_MIN = 50;
 
     private static final MouseListener MAD_RESIZE_X = new MouseAdapter() {
         @Override

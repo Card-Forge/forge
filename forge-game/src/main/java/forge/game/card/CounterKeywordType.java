@@ -67,4 +67,12 @@ public record CounterKeywordType(String keyword, Keyword type, String desc) impl
         }
         return keywordCounter.contains(keyword);
     }
+
+    @Override
+    public CounterAiCategory getAiCategory() {
+        if (Keyword.DECAYED.equals(type)) {
+            return CounterAiCategory.Negative;
+        }
+        return CounterAiCategory.Positive;
+    }
 }

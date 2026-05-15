@@ -3,12 +3,20 @@ package forge.screens.match.menus;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 
 import forge.control.KeyboardShortcuts;
+import forge.gamemodes.match.YieldController;
+import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.VAutoYieldsAndTriggers;
+import forge.screens.match.VYieldSettings;
+import forge.toolbox.FSkin.SkinnedCheckBoxMenuItem;
 import forge.toolbox.FSkin.SkinnedMenuItem;
 import forge.util.Localizer;
 
@@ -16,6 +24,7 @@ import forge.util.Localizer;
  * Returns a JMenu containing core in-game actions for the current match.
  */
 public final class GameMenu {
+    private static final ForgePreferences prefs = FModel.getPreferences();
     private final CMatchUI matchUI;
     public GameMenu(final CMatchUI matchUI) {
         this.matchUI = matchUI;
@@ -33,6 +42,16 @@ public final class GameMenu {
         menu.add(getMenuItem_ViewDeckList());
         menu.addSeparator();
         menu.add(getMenuItem_AutoYieldsAndTriggers());
+        menu.add(getMenuItem_YieldSettings());
+        final SkinnedCheckBoxMenuItem autoPassItem = getMenuItem_AutoPass();
+        menu.add(autoPassItem);
+        menu.addMenuListener(new MenuListener() {
+            @Override public void menuSelected(final MenuEvent e) {
+                autoPassItem.setState(prefs.getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS));
+            }
+            @Override public void menuDeselected(final MenuEvent e) {}
+            @Override public void menuCanceled(final MenuEvent e) {}
+        });
         return menu;
     }
 
@@ -55,7 +74,7 @@ public final class GameMenu {
         final Localizer localizer = Localizer.getInstance();
         final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblEndTurn"));
         setAcceleratorFromPref(menuItem, FPref.SHORTCUT_ENDTURN);
-        menuItem.addActionListener(e -> matchUI.getGameController().passPriorityUntilEndOfTurn());
+        menuItem.addActionListener(e -> YieldController.endTurn(matchUI.getGameController(), matchUI.getCurrentPlayer()));
         return menuItem;
     }
 
@@ -81,8 +100,28 @@ public final class GameMenu {
         return menuItem;
     }
 
+    private SkinnedMenuItem getMenuItem_YieldSettings() {
+        final Localizer localizer = Localizer.getInstance();
+        final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblYieldSettings"));
+        menuItem.addActionListener(e -> new VYieldSettings(matchUI).showDialog());
+        return menuItem;
+    }
+
+    private SkinnedCheckBoxMenuItem getMenuItem_AutoPass() {
+        final Localizer localizer = Localizer.getInstance();
+        final SkinnedCheckBoxMenuItem menuItem = new SkinnedCheckBoxMenuItem(localizer.getMessage("lblEnableAutoPass"));
+        setAcceleratorFromPref(menuItem, FPref.SHORTCUT_YIELD_AUTO_PASS);
+        menuItem.setState(prefs.getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS));
+        menuItem.addActionListener(e -> {
+            YieldController.toggleAutoPassNoActions(matchUI.getGameController());
+            matchUI.getCDock().refreshAutoPassToggled();
+            menuItem.setState(prefs.getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS));
+        });
+        return menuItem;
+    }
+
     /** Sets a menu item's accelerator display from a shortcut preference. */
-    private static void setAcceleratorFromPref(final SkinnedMenuItem menuItem, final FPref pref) {
+    private static void setAcceleratorFromPref(final JMenuItem menuItem, final FPref pref) {
         final KeyStroke ks = KeyboardShortcuts.getKeyStrokeForPref(pref);
         if (ks != null) {
             menuItem.setAccelerator(ks);

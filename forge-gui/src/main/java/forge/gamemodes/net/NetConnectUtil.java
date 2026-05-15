@@ -70,10 +70,9 @@ public class NetConnectUtil {
             @Override
             public void update(final int slot, final LobbySlotType type) {}
         });
-        view.setPlayerChangeListener((index, event) -> {
-            server.updateSlot(index, event);
-            server.updateLobbyState();
-        });
+        // updateSlot already routes through the IUpdateable listener above, which calls
+        // updateLobbyState; calling it again here would broadcast a duplicate LobbyUpdateEvent.
+        view.setPlayerChangeListener(server::updateSlot);
 
         server.setLobbyListener(new ILobbyListener() {
             @Override

@@ -385,7 +385,7 @@ public class Main extends AndroidApplication {
             forgeLogo = findViewById(resId("id", "logo_id"));
             activeView = findViewById(resId("id", "mainview"));
             activeView.setBackgroundColor(Color.WHITE);
-            forgeView = initializeForView(Forge.getApp(hwInfo, getAndroidClipboard(), adapter, ASSETS_DIR, false, !isLandscape, isTabletDevice, Build.VERSION.SDK_INT), config);
+            forgeView = initializeForView(Forge.getApp(hwInfo, getAndroidClipboard(), adapter, ASSETS_DIR, !isLandscape, isTabletDevice, Build.VERSION.SDK_INT), config);
 
             getAnimator(ObjectAnimator.ofFloat(forgeLogo, "alpha", 1f, 1f).setDuration(800), ObjectAnimator.ofObject(activeView, "backgroundColor", new ArgbEvaluator(), Color.WHITE, Color.BLACK).setDuration(1600), new AnimatorListenerAdapter() {
                 @Override

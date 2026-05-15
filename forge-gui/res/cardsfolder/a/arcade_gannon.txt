@@ -9,4 +9,5 @@ S:Mode$ Continuous | Affected$ Artifact.nonLand+YouOwn+cmcLEX,Human.nonLand+YouO
 SVar:X:Count$CardCounters.QUEST
 DeckHas:Ability$Counters|Discard|Graveyard
 DeckHints:Ability$Graveyard|Mill & Type$Artifact|Human
+SVar:AICounterOverrideQUEST:Positive
 Oracle:{T}: Draw a card, then discard a card. Put a quest counter on Arcade Gannon.\nFor Auld Lang Syne — Once during each of your turns, you may cast an artifact or Human spell from your graveyard with mana value less than or equal to the number of quest counters on Arcade Gannon.
