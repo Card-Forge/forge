@@ -546,6 +546,7 @@ public class FloatingZone extends FloatingCardArea {
             .fontAlign(SwingConstants.CENTER)
             .build();
     private final FLabel hotkeyHintMin = new FLabel.Builder()
+            .text(Localizer.getInstance().getMessage("lblHotkeySelectHintMin"))
             .fontSize(10)
             .fontAlign(SwingConstants.CENTER)
             .build();
@@ -683,20 +684,7 @@ public class FloatingZone extends FloatingCardArea {
             promptLabel.setVisible(false);
         }
         hotkeyHintBase.setVisible(show);
-        if (show) {
-            final int remaining = Math.max(0, getMatchUI().getSelectionMin() - getMatchUI().countPickedSelectables());
-            if (remaining >= 1) {
-                final String desired = Localizer.getInstance().getMessage("lblHotkeySelectHintMinLine", remaining);
-                if (!desired.equals(hotkeyHintMin.getText())) {
-                    hotkeyHintMin.setText(desired);
-                }
-                hotkeyHintMin.setVisible(true);
-            } else {
-                hotkeyHintMin.setVisible(false);
-            }
-        } else {
-            hotkeyHintMin.setVisible(false);
-        }
+        hotkeyHintMin.setVisible(show && getMatchUI().getSelectionMin() > 1);
         window.revalidate();
     }
 
