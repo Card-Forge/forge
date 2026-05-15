@@ -1986,84 +1986,100 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return PlaySpellAbility.payCostDuringAbilityResolve(this, player, cost, sa, null);
     }
 
-    // stores saved order for different sets of SpellAbilities
-    private final Map<String, List<Integer>> orderedSALookup = Maps.newHashMap();
+    // Mutated from game thread on order prompt; cleared from Netty thread via YieldUpdate.ClearAbilityOrders.
+    private final Map<String, List<Integer>> orderedSALookup = Maps.newConcurrentMap();
+    private final Set<String> rememberedKeys = Sets.newConcurrentHashSet();
 
     @Override
     public List<SpellAbility> orderSimultaneousSa(List<SpellAbility> activePlayerSAs) {
         if (activePlayerSAs.size() < 2)
             return activePlayerSAs;
-        final String firstStr = activePlayerSAs.get(0).toString();
         boolean needPrompt = !activePlayerSAs.get(0).isTrigger();
 
-        // for the purpose of pre-ordering, no need for extra granularity
-        int idxAdditionalInfo = firstStr.indexOf(" [");
-        StringBuilder saLookupKey = new StringBuilder(idxAdditionalInfo > 0 ? firstStr.substring(0, idxAdditionalInfo - 1) : firstStr);
+        final String firstStr = activePlayerSAs.get(0).toString();
+        final int firstBracket = firstStr.indexOf(" [");
+        final String firstLookup = firstBracket > 0 ? firstStr.substring(0, firstBracket) : firstStr;
+        final StringBuilder saLookupKey = new StringBuilder(firstLookup);
 
-        char delim = (char) 5;
+        final char delim = (char) 5;
         for (int i = 1; i < activePlayerSAs.size(); i++) {
-            SpellAbility currentSa = activePlayerSAs.get(i);
-            String saStr = currentSa.toString();
+            final SpellAbility currentSa = activePlayerSAs.get(i);
+            final String saStr = currentSa.toString();
+            final int bracket = saStr.indexOf(" [");
+            final String saLookup = bracket > 0 ? saStr.substring(0, bracket) : saStr;
 
-            // if current SA isn't a trigger and it uses Targeting, try to show prompt
             if (currentSa.isTrigger()) {
                 needPrompt |= currentSa.getTrigger().hasParam("OrderDuplicates");
             } else if (currentSa.usesTargeting()) {
                 needPrompt = true;
             }
-            if (!needPrompt && !saStr.equals(firstStr)) {
-                // prompt by default unless all abilities are the same
+            if (!needPrompt && !saLookup.equals(firstLookup)) {
                 needPrompt = true;
             }
 
-            saLookupKey.append(delim).append(saStr);
-            idxAdditionalInfo = saLookupKey.indexOf(" [");
-            if (idxAdditionalInfo > 0) {
-                saLookupKey = new StringBuilder(saLookupKey.substring(0, idxAdditionalInfo - 1));
-            }
+            saLookupKey.append(delim).append(saLookup);
         }
-        if (needPrompt) {
-            List<Integer> savedOrder = orderedSALookup.get(saLookupKey.toString());
-            List<SpellAbilityView> orderedSAVs = Lists.newArrayList();
+        if (!needPrompt) {
+            return activePlayerSAs;
+        }
 
-            // create a mapping between a spell's view and the spell itself
-            Map<SpellAbilityView, SpellAbility> spellViewCache = SpellAbilityView.getMap(activePlayerSAs);
-
-            if (savedOrder != null) {
-                orderedSAVs = Lists.newArrayList();
-                for (Integer index : savedOrder) {
-                    orderedSAVs.add(activePlayerSAs.get(index).getView());
-                }
-            } else {
-                for (SpellAbility spellAbility : activePlayerSAs) {
-                    orderedSAVs.add(spellAbility.getView());
-                }
+        final String saLookupKeyString = saLookupKey.toString();
+        List<Integer> savedOrder = orderedSALookup.get(saLookupKeyString);
+        if (savedOrder != null && savedOrder.size() != activePlayerSAs.size()) {
+            orderedSALookup.remove(saLookupKeyString);
+            rememberedKeys.remove(saLookupKeyString);
+            savedOrder = null;
+        }
+        if (savedOrder != null && rememberedKeys.contains(saLookupKeyString)) {
+            final List<SpellAbility> orderedSAs = Lists.newArrayListWithCapacity(savedOrder.size());
+            for (final int index : savedOrder) {
+                orderedSAs.add(activePlayerSAs.get(index));
             }
-            if (savedOrder != null) {
-                boolean preselect = FModel.getPreferences()
-                        .getPrefBoolean(FPref.UI_PRESELECT_PREVIOUS_ABILITY_ORDER);
-                orderedSAVs = getGui().order(localizer.getMessage("lblReorderSimultaneousAbilities"), localizer.getMessage("lblResolveFirst"), 0, 0,
-                        preselect ? Lists.newArrayList() : orderedSAVs,
-                        preselect ? orderedSAVs : Lists.newArrayList(), null, false);
-            } else {
-                orderedSAVs = getGui().order(localizer.getMessage("lblSelectOrderForSimultaneousAbilities"), localizer.getMessage("lblResolveFirst"), orderedSAVs,
-                        null);
-            }
-            List<SpellAbility> orderedSAs = Lists.newArrayList();
-            for (SpellAbilityView spellAbilityView : orderedSAVs) {
-                orderedSAs.add(spellViewCache.get(spellAbilityView));
-            }
-            // save order to avoid needing to prompt a second time to order
-            // the same abilities
-            savedOrder = Lists.newArrayListWithCapacity(activePlayerSAs.size());
-            for (SpellAbility sa : orderedSAs) {
-                savedOrder.add(activePlayerSAs.indexOf(sa));
-            }
-            orderedSALookup.put(saLookupKey.toString(), savedOrder);
             return orderedSAs;
         }
-        else
+
+        final Map<SpellAbilityView, SpellAbility> spellViewCache = SpellAbilityView.getMap(activePlayerSAs);
+        final List<SpellAbilityView> orderedSAVs = Lists.newArrayList();
+        if (savedOrder != null) {
+            for (final int index : savedOrder) {
+                orderedSAVs.add(activePlayerSAs.get(index).getView());
+            }
+        } else {
+            for (final SpellAbility spellAbility : activePlayerSAs) {
+                orderedSAVs.add(spellAbility.getView());
+            }
+        }
+
+        final IGuiGame.OrderResult<SpellAbilityView> orderResult;
+        if (savedOrder != null) {
+            orderResult = getGui().order(localizer.getMessage("lblReorderSimultaneousAbilities"),
+                    localizer.getMessage("lblResolveFirst"), 0, 0,
+                    Lists.newArrayList(), orderedSAVs, null, false, true);
+        } else {
+            orderResult = getGui().order(localizer.getMessage("lblSelectOrderForSimultaneousAbilities"),
+                    localizer.getMessage("lblResolveFirst"), 0, 0,
+                    orderedSAVs, Lists.newArrayList(), null, false, true);
+        }
+        final List<SpellAbilityView> chosen = orderResult.ordered();
+        if (chosen == null) {
             return activePlayerSAs;
+        }
+        final List<SpellAbility> orderedSAs = Lists.newArrayList();
+        for (final SpellAbilityView spellAbilityView : chosen) {
+            orderedSAs.add(spellViewCache.get(spellAbilityView));
+        }
+
+        final List<Integer> newOrder = Lists.newArrayListWithCapacity(activePlayerSAs.size());
+        for (final SpellAbility sa : orderedSAs) {
+            newOrder.add(activePlayerSAs.indexOf(sa));
+        }
+        orderedSALookup.put(saLookupKeyString, newOrder);
+        if (orderResult.rememberDecision()) {
+            rememberedKeys.add(saLookupKeyString);
+        } else {
+            rememberedKeys.remove(saLookupKeyString);
+        }
+        return orderedSAs;
     }
 
     @Override
@@ -3546,6 +3562,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void applyYieldUpdate(final YieldUpdate update) {
+        if (update instanceof YieldUpdate.ClearAbilityOrders) {
+            orderedSALookup.clear();
+            rememberedKeys.clear();
+            return;
+        }
         if (yieldController.apply(update)) {
             // Switch the cancel button + prompt to "Yielding until X" so the user can disarm.
             // Otherwise the previous InputPassPriority "End Turn" label would persist and ESC

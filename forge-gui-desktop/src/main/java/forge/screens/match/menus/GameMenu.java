@@ -16,6 +16,7 @@ import com.google.common.primitives.Ints;
 
 import forge.control.KeyboardShortcuts;
 import forge.gamemodes.match.YieldController;
+import forge.gamemodes.match.YieldUpdate;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
@@ -65,6 +66,7 @@ public final class GameMenu {
         menu.add(getMenuItem_YieldSettings());
         final SkinnedCheckBoxMenuItem autoPassItem = getMenuItem_AutoPass();
         menu.add(autoPassItem);
+        menu.add(getMenuItem_ClearRememberedAbilityOrders());
         menu.addSeparator();
         menu.add(getMenuItem_ViewDeckList());
         menu.addMenuListener(new MenuListener() {
@@ -75,6 +77,13 @@ public final class GameMenu {
             @Override public void menuCanceled(final MenuEvent e) {}
         });
         return menu;
+    }
+
+    private SkinnedMenuItem getMenuItem_ClearRememberedAbilityOrders() {
+        final Localizer localizer = Localizer.getInstance();
+        final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblResetSavedAbilityOrders"));
+        menuItem.addActionListener(e -> matchUI.getGameController().sendYieldUpdate(new YieldUpdate.ClearAbilityOrders()));
+        return menuItem;
     }
 
     private SkinnedMenuItem getMenuItem_Undo() {

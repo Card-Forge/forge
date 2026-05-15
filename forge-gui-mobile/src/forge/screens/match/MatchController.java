@@ -20,6 +20,7 @@ import com.google.common.collect.Maps;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.GuiMobile;
 import forge.LobbyPlayer;
 import forge.assets.FImage;
 import forge.assets.FSkin;
@@ -46,6 +47,7 @@ import forge.gamemodes.match.HostedMatch;
 import forge.interfaces.IGameController;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
+import forge.gui.interfaces.IGuiGame.OrderResult;
 import forge.gui.util.SGuiChoose;
 import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
@@ -660,8 +662,8 @@ public class MatchController extends NetworkGuiGame {
     }
 
     @Override
-    public <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax, final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode) {
-        return GuiBase.getInterface().order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices);
+    public <T> OrderResult<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax, final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode, final boolean showRememberCheckbox) {
+        return ((GuiMobile) GuiBase.getInterface()).order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, showRememberCheckbox);
     }
 
     @Override
