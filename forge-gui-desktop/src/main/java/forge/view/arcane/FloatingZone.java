@@ -686,9 +686,9 @@ public class FloatingZone extends FloatingCardArea {
             promptLabel.setVisible(false);
         }
         if (show) {
-            final int min = getMatchUI().getSelectionMin();
-            hotkeyHint.setText(htmlHint(min >= 1
-                    ? Localizer.getInstance().getMessage("lblHotkeySelectHintWithMin", min)
+            final int remaining = Math.max(0, getMatchUI().getSelectionMin() - getMatchUI().countPickedSelectables());
+            hotkeyHint.setText(htmlHint(remaining >= 1
+                    ? Localizer.getInstance().getMessage("lblHotkeySelectHintWithMin", remaining)
                     : Localizer.getInstance().getMessage("lblHotkeySelectHint")));
             hotkeyHint.setVisible(true);
         } else {
@@ -799,17 +799,25 @@ public class FloatingZone extends FloatingCardArea {
         final int digit = e.getKeyCode() - KeyEvent.VK_0;
         if (digit < 0 || digit > 9) return false;
         if (digit == 0) {
-            // Ctrl+0: auto-pick the first N selectables. Batched into one selectCard so the
-            // server processes atomically — separate messages race (a thread spawned per message).
+            // Ctrl+0: auto-pick the first N selectables that haven't been picked yet.
+            // Selection progress is tracked client-side via the highlighted set — both
+            // InputSelectTargets and InputSelectManyBase call setHighlighted(true/false)
+            // on add/remove, so highlighted ∩ selectable == cards picked so far.
+            // Batched into one selectCard so the server processes atomically — separate
+            // messages race (a thread spawned per message).
             for (final FloatingZone fz : new ArrayList<>(floatingAreas.values())) {
                 if (!fz.isVisible()) continue;
-                final int need = fz.getMatchUI().getSelectionMin();
+                final int min = fz.getMatchUI().getSelectionMin();
+                if (min < 1) continue;
+                final int need = Math.max(0, min - fz.getMatchUI().countPickedSelectables());
                 if (need < 1) continue;
                 final List<CardView> picks = new ArrayList<>(need);
                 for (final CardPanel panel : new ArrayList<>(fz.getCardPanels())) {
                     if (picks.size() >= need) break;
-                    if (!fz.getMatchUI().isSelectable(panel.getCard())) continue;
-                    picks.add(panel.getCard());
+                    final CardView cv = panel.getCard();
+                    if (!fz.getMatchUI().isSelectable(cv)) continue;
+                    if (fz.getMatchUI().isHighlighted(cv)) continue;
+                    picks.add(cv);
                 }
                 if (picks.isEmpty()) continue;
                 // Wire-serializable: ArrayList.subList() returns a SubList view that's not Serializable.
@@ -849,7 +857,6 @@ public class FloatingZone extends FloatingCardArea {
         }
     }
 
-    /** Clear hotkey badges on every visible floating zone. */
     public static void clearAllHotkeyAffordance() {
         for (final FloatingZone fz : new ArrayList<>(floatingAreas.values())) {
             if (fz.isVisible()) fz.assignOwnHotkeyDigits(true);
