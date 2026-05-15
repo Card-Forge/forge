@@ -685,6 +685,15 @@ public class FloatingZone extends FloatingCardArea {
             promptLabel.setText("");
             promptLabel.setVisible(false);
         }
+        if (show) {
+            final int min = getMatchUI().getSelectionMin();
+            hotkeyHint.setText(htmlHint(min >= 1
+                    ? Localizer.getInstance().getMessage("lblHotkeySelectHintWithMin", min)
+                    : Localizer.getInstance().getMessage("lblHotkeySelectHint")));
+            hotkeyHint.setVisible(true);
+        } else {
+            hotkeyHint.setVisible(false);
+        }
         window.revalidate();
     }
 
@@ -838,18 +847,9 @@ public class FloatingZone extends FloatingCardArea {
                 panel.setHotkeyDigit(0);
             }
         }
-        if (clear) {
-            hotkeyHint.setVisible(false);
-        } else {
-            final int min = getMatchUI().getSelectionMin();
-            hotkeyHint.setText(htmlHint(min >= 1
-                    ? Localizer.getInstance().getMessage("lblHotkeySelectHintWithMin", min)
-                    : Localizer.getInstance().getMessage("lblHotkeySelectHint")));
-            hotkeyHint.setVisible(next > 1);
-        }
     }
 
-    /** Clear hotkey badges and hide the hint label on every visible floating zone. */
+    /** Clear hotkey badges on every visible floating zone. */
     public static void clearAllHotkeyAffordance() {
         for (final FloatingZone fz : new ArrayList<>(floatingAreas.values())) {
             if (fz.isVisible()) fz.assignOwnHotkeyDigits(true);
