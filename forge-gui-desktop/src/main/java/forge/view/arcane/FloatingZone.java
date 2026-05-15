@@ -18,7 +18,6 @@
 package forge.view.arcane;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -541,19 +540,15 @@ public class FloatingZone extends FloatingCardArea {
             .ghostText(Localizer.getInstance().getMessage("lblFilterByName"))
             .build();
     private final FHtmlViewer promptLabel = new FHtmlViewer();
-    private final FLabel hotkeyHint = new FLabel.Builder()
+    private final FLabel hotkeyHintBase = new FLabel.Builder()
             .text(Localizer.getInstance().getMessage("lblHotkeySelectHint"))
-            .fontSize(11)
+            .fontSize(10)
             .fontAlign(SwingConstants.CENTER)
             .build();
-
-    /** HTML enables FLabel auto-wrap; inline CSS pins the configured font (Swing's HTMLEditorKit otherwise reverts to its default). */
-    private String htmlHint(final String text) {
-        final Font f = hotkeyHint.getFont();
-        return "<html><div style='font-family:" + f.getFamily()
-                + ";font-size:" + f.getSize() + "pt;text-align:center;'>"
-                + text + "</div></html>";
-    }
+    private final FLabel hotkeyHintMin = new FLabel.Builder()
+            .fontSize(10)
+            .fontAlign(SwingConstants.CENTER)
+            .build();
     private String filter = "";
 
     private final Comparator<CardView> comp = (lhs, rhs) -> {
@@ -599,8 +594,10 @@ public class FloatingZone extends FloatingCardArea {
         window.add(promptLabel, "growx, wmin 10, gapbottom 4, wrap, hidemode 3");
         window.add(searchField, "growx, wrap");
         window.add(getScrollPane(), "grow, push, wrap");
-        hotkeyHint.setVisible(false);
-        window.add(hotkeyHint, "growx, hidemode 3");
+        hotkeyHintBase.setVisible(false);
+        hotkeyHintMin.setVisible(false);
+        window.add(hotkeyHintBase, "growx, wrap, hidemode 3");
+        window.add(hotkeyHintMin, "growx, hidemode 3");
         window.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE); //pfps so that old content does not reappear?
         getScrollPane().setViewportView(this);
         setOpaque(false);
@@ -685,14 +682,20 @@ public class FloatingZone extends FloatingCardArea {
             promptLabel.setText("");
             promptLabel.setVisible(false);
         }
+        hotkeyHintBase.setVisible(show);
         if (show) {
             final int remaining = Math.max(0, getMatchUI().getSelectionMin() - getMatchUI().countPickedSelectables());
-            hotkeyHint.setText(htmlHint(remaining >= 1
-                    ? Localizer.getInstance().getMessage("lblHotkeySelectHintWithMin", remaining)
-                    : Localizer.getInstance().getMessage("lblHotkeySelectHint")));
-            hotkeyHint.setVisible(true);
+            if (remaining >= 1) {
+                final String desired = Localizer.getInstance().getMessage("lblHotkeySelectHintMinLine", remaining);
+                if (!desired.equals(hotkeyHintMin.getText())) {
+                    hotkeyHintMin.setText(desired);
+                }
+                hotkeyHintMin.setVisible(true);
+            } else {
+                hotkeyHintMin.setVisible(false);
+            }
         } else {
-            hotkeyHint.setVisible(false);
+            hotkeyHintMin.setVisible(false);
         }
         window.revalidate();
     }
