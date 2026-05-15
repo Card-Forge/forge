@@ -85,8 +85,6 @@ public class CardFaceSymbols {
         MANA_IMAGES.put("foil20", FSkin.getImage(FSkinProp.FOIL_20));
 
         //ability icons
-        MANA_IMAGES.put("commander", FSkin.getImage(FSkinProp.IMG_ABILITY_COMMANDER));
-        MANA_IMAGES.put("ringbearer", FSkin.getImage(FSkinProp.IMG_ABILITY_RINGBEARER));
         MANA_IMAGES.put("annihilator", FSkin.getImage(FSkinProp.IMG_ABILITY_ANNIHILATOR));
         MANA_IMAGES.put("toxic", FSkin.getImage(FSkinProp.IMG_ABILITY_TOXIC));
         MANA_IMAGES.put("deathtouch", FSkin.getImage(FSkinProp.IMG_ABILITY_DEATHTOUCH));

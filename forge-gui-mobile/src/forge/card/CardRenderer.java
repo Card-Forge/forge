@@ -909,12 +909,12 @@ public class CardRenderer {
         if (!showAbilityIcons)
             return;
         if (card.isCommander()) {
-            CardFaceSymbols.drawSymbol("commander", g, abiX, abiY, abiScale, abiScale);
+            g.drawImage(FSkinImage.IMG_ABILITY_COMMANDER, abiX, abiY, abiScale, abiScale);
             abiY += abiSpace;
             abiCount += 1;
         }
         if (card.isRingBearer()) {
-            CardFaceSymbols.drawSymbol("ringbearer", g, abiX, abiY, abiScale, abiScale);
+            g.drawImage(FSkinImage.IMG_ABILITY_RINGBEARER, abiX, abiY, abiScale, abiScale);
             abiY += abiSpace;
             abiCount += 1;
         }

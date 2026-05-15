@@ -704,11 +704,11 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         if (showAbilityIcons()) {
             if (ZoneType.Battlefield.equals(card.getZone())) {
                 if (card.isCommander()) {
-                    CardFaceSymbols.drawAbilitySymbol("commander", g, abiX, abiY, abiScale, abiScale);
+                    FSkin.drawImage(g, FSkin.getImage(FSkinProp.IMG_ABILITY_COMMANDER), abiX, abiY, abiScale, abiScale);
                     abiY += abiSpace;
                 }
                 if (card.isRingBearer()) {
-                    CardFaceSymbols.drawAbilitySymbol("ringbearer", g, abiX, abiY, abiScale, abiScale);
+                    FSkin.drawImage(g, FSkin.getImage(FSkinProp.IMG_ABILITY_RINGBEARER), abiX, abiY, abiScale, abiScale);
                     abiY += abiSpace;
                 }
                 if (card.getCurrentState().hasFlying()) {
