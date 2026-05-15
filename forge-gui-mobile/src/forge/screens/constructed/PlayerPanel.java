@@ -1000,7 +1000,9 @@ public class PlayerPanel extends FContainer {
     public void setIsReady(boolean isReady0) {
         if (isReady == isReady0) { return; }
         isReady = isReady0;
-        if (allowNetworking) {
+        // humanAiSwitch doubles as the Open/AI selector for host-controlled opponent slots;
+        // only drive it from the ready field when the switch is actually showing Ready/NotReady.
+        if (allowNetworking && !isOpenAiSlotToggle()) {
             humanAiSwitch.setToggled(isReady);
         }
     }

@@ -4,6 +4,7 @@ import forge.game.*;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.gamemodes.net.CompatibleObjectDecoder;
+import forge.gamemodes.net.CompatibleObjectEncoder;
 import forge.gamemodes.net.GameProtocolHandler;
 import forge.gui.GuiBase;
 import forge.util.IHasForgeLog;
@@ -74,12 +75,13 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
                 if (args.length > 0 && args[0] instanceof GameView gameView) {
                     if (this.tracker == null) {
                         this.tracker = new Tracker();
-                        // Set tracker on decoder for IdRef resolution in server messages.
-                        // The client encoder does NOT get a tracker — it uses simple
-                        // IdRef replacement without stale detection. Stale detection
-                        // on the client would create StaleCardRef markers for cards
-                        // updated by delta sync, causing the server to create detached
-                        // CardViews that don't match real game objects.
+                        // Encoder uses the tracker to emit IdRef for client→server CardView args
+                        // (presence check only — stale detection is server-only).
+                        // Ephemerals absent from the tracker serialize as full objects in both directions.
+                        CompatibleObjectEncoder encoder = ctx.pipeline().get(CompatibleObjectEncoder.class);
+                        if (encoder != null) {
+                            encoder.setTracker(this.tracker);
+                        }
                         CompatibleObjectDecoder decoder = ctx.pipeline().get(CompatibleObjectDecoder.class);
                         if (decoder != null) {
                             decoder.setTracker(this.tracker);
@@ -127,6 +129,10 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
     /**
      * This method is used to recursively update the <b>tracker</b>
      * references on all objects and their props.
+     *
+     * <p>Inline-serialized CardViews are intentionally NOT registered in the
+     * tracker's id lookup: a tracker miss is the symmetric signal that a
+     * CardView is ephemeral, mirroring the host's encoder check.
      *
      * @param objs
      */

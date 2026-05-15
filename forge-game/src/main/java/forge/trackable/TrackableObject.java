@@ -145,6 +145,20 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
     }
 
     /**
+     * Check whether a consumer is currently registered on this object.
+     * <p>
+     * Used by network serialization to gate IdRef substitution: the server
+     * registers a consumer on every TrackableObject it has included in a
+     * delta packet for a given client. An object without that consumer is
+     * one the client hasn't been told about (typically an ephemeral such as
+     * a {@code Card.fromPaperCard} choice copy that never enters a tracked
+     * zone), and protocol-method args holding it must serialize inline.
+     */
+    public boolean hasConsumer(int consumerId) {
+        return consumers != null && consumers.containsKey(consumerId);
+    }
+
+    /**
      * Register a consumer for per-consumer dirty tracking.
      */
     public void registerConsumer(int consumerId) {

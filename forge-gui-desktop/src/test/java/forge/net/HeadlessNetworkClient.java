@@ -465,8 +465,8 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasForgeLog {
         }
 
         @Override
-        public void setSelectables(Iterable<forge.game.card.CardView> cards) {
-            super.setSelectables(cards);
+        public void setSelectables(Iterable<forge.game.card.CardView> cards, int min, int max) {
+            super.setSelectables(cards, min, max);
             synchronized (pendingSelectables) {
                 // Track selectable cards for multi-selection prompts
                 pendingSelectables.clear();

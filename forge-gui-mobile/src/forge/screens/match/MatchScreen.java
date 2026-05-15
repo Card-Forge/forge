@@ -39,6 +39,7 @@ import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.match.YieldController;
 import forge.gui.GuiBase;
 import forge.interfaces.IGameController;
 import forge.localinstance.properties.ForgePreferences;
@@ -370,31 +371,29 @@ public class MatchScreen extends FScreen {
         }
 
         if (gameMenu != null) {
-            if (gameMenu.getChildCount() > 1) {
-                if (viewWinLose == null) {
-                    gameMenu.getChildAt(0).setEnabled(!game.isMulligan());
-                    gameMenu.getChildAt(1).setEnabled(!game.isMulligan());
-                    if (!Forge.isMobileAdventureMode) {
-                        gameMenu.getChildAt(2).setEnabled(!game.isMulligan());
-                        gameMenu.getChildAt(3).setEnabled(false);
-                    }
-                } else {
-                    gameMenu.getChildAt(0).setEnabled(false);
-                    gameMenu.getChildAt(1).setEnabled(false);
-                    if (!Forge.isMobileAdventureMode) {
-                        gameMenu.getChildAt(2).setEnabled(false);
-                        gameMenu.getChildAt(3).setEnabled(true);
-                    }
+            // Index trailing items from end — entries inserted before Settings don't shift them
+            int n = gameMenu.getChildCount();
+            if (n > 1) {
+                int idxConcede = 0;
+                int idxAutoYields = 1;
+                int idxSettings = n - 2; // Settings is second-from-last
+                int idxShowWinLose = n - 1; // Show Win/Lose is last
+                boolean gameOver = viewWinLose != null;
+                boolean canSwitch = !gameOver && !game.isMulligan();
+                gameMenu.getChildAt(idxConcede).setEnabled(canSwitch);
+                gameMenu.getChildAt(idxAutoYields).setEnabled(canSwitch);
+                if (!Forge.isMobileAdventureMode) {
+                    gameMenu.getChildAt(idxSettings).setEnabled(canSwitch);
+                    gameMenu.getChildAt(idxShowWinLose).setEnabled(gameOver);
                 }
             }
         }
-        if (devMenu != null) {
-            if (devMenu.isVisible()) {
-                try {
-                    //rollbackphase enable -- todo limit by gametype?
-                    devMenu.getChildAt(2).setEnabled(game.getPlayers().size() == 2 && game.getStack().size() == 0 && !GuiBase.isNetPlay(MatchController.instance) && game.getPhase().isMain() && !game.getPlayerTurn().isAI());
-                } catch (Exception e) {/*NPE when the game hasn't started yet and you click dev mode*/}
-            }
+
+        if (devMenu != null && devMenu.isVisible()) {
+            try {
+                //rollbackphase enable -- todo limit by gametype?
+                devMenu.getChildAt(2).setEnabled(game.getPlayers().size() == 2 && game.getStack().size() == 0 && !GuiBase.isNetPlay(MatchController.instance) && game.getPhase().isMain() && !game.getPlayerTurn().isAI());
+            } catch (Exception e) {/*NPE when the game hasn't started yet and you click dev mode*/}
         }
 
         if (activeEffect != null) {
@@ -661,7 +660,7 @@ public class MatchScreen extends FScreen {
                 break;
             case Keys.E: //end turn on Ctrl+E on Android, E when running on desktop
                 if (KeyInputAdapter.isCtrlKeyDown() || GuiBase.getInterface().isRunningOnDesktop()) {
-                    getGameController().passPriorityUntilEndOfTurn();
+                    YieldController.endTurn(getGameController(), MatchController.instance.getCurrentPlayer());
                     return true;
                 }
                 break;

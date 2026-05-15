@@ -199,8 +199,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             CardCollection valid = CardLists.getValidCards(player.getGame().getCardsIn(cost.getFrom().get(0)), typeCleaned, player, source, ability);
             CardCollection chosen = new CardCollection();
 
-            CardLists.sortByCmcDesc(valid);
-            Collections.reverse(valid);
+            valid.sort(CardLists.CmcComparator);
 
             int totalCMC = 0;
             for (Card card : valid) {

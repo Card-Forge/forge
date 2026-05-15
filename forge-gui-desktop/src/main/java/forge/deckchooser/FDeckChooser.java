@@ -92,7 +92,7 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         isForCommander = forCommander;
         final UiCommand cmdViewDeck = () -> {
             if (selectedDeckType != DeckType.COLOR_DECK && selectedDeckType != DeckType.THEME_DECK) {
-                FDeckViewer.show(getDeck());
+                FDeckViewer.show(getDeck(), gameType.getDeckFormat() == DeckFormat.Commander);
             }
         };
         lstDecks.setItemActivateCommand(cmdViewDeck);
@@ -234,7 +234,10 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         if (netDeckCategory != null) {
             decksComboBox.setText(netDeckCategory.getDeckType());
         }
-        updateDecks(DeckProxy.getNetDecks(netDeckCategory), ItemManagerConfig.NET_DECKS);
+        final ItemManagerConfig config = selectedDeckType == DeckType.NET_COMMANDER_DECK
+                ? ItemManagerConfig.NET_COMMANDER_DECKS
+                : ItemManagerConfig.NET_DECKS;
+        updateDecks(DeckProxy.getNetDecks(netDeckCategory), config);
     }
 
     private void updateNetArchiveStandardDecks() {

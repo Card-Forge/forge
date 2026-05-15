@@ -23,6 +23,7 @@ public final class RemoteClient implements IToClient, IHasForgeLog {
     private boolean libgdx;
     private volatile ReplyPool replies = new ReplyPool();
     private volatile Tracker codecTracker;
+    private volatile int codecConsumerId = -1;
     private final AtomicInteger sendErrors = new AtomicInteger(0);
 
     // Package-private: SaturationLoggingHandler reads/resets these on writability transitions
@@ -164,13 +165,16 @@ public final class RemoteClient implements IToClient, IHasForgeLog {
     }
 
     /**
-     * Set the tracker on the channel's encoder and decoder for IdRef
-     * replacement/resolution. Called when the game starts (before any
-     * client protocol messages arrive). Cached so that {@link #swapChannel}
-     * can re-apply it after a reconnect.
+     * Set the tracker and per-client consumerId on the channel's encoder and
+     * decoder. Called when the game starts (before any client protocol
+     * messages arrive). Cached so that {@link #swapChannel} can re-apply
+     * after a reconnect. The consumerId is the {@code DeltaSyncManager} id
+     * for this client; the encoder uses it to gate IdRef substitution to
+     * objects this client has actually been told about.
      */
-    public void setCodecTracker(Tracker tracker) {
+    public void setCodecTracker(Tracker tracker, int consumerId) {
         this.codecTracker = tracker;
+        this.codecConsumerId = consumerId;
         applyCodecTracker(channel);
     }
 
@@ -181,6 +185,7 @@ public final class RemoteClient implements IToClient, IHasForgeLog {
         CompatibleObjectEncoder encoder = ch.pipeline().get(CompatibleObjectEncoder.class);
         if (encoder != null) {
             encoder.setTracker(codecTracker);
+            encoder.setConsumerId(codecConsumerId);
         }
         CompatibleObjectDecoder decoder = ch.pipeline().get(CompatibleObjectDecoder.class);
         if (decoder != null) {

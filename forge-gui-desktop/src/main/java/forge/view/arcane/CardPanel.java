@@ -127,10 +127,15 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private Color zoneBannerColor;
     private CachedCardImage cachedImage;
     private int groupCount;
+    private int hotkeyDigit; // 1..9 paints a numbered badge for Ctrl+digit selection; 0 hides
     private Font badgeFont;
     private int badgeFontCardWidth; // cardWidth when badgeFont was last computed
 
     private static final Color BADGE_BG_COLOR = new Color(0, 0, 0, 180);
+    private static final Color HOTKEY_BADGE_BG = new Color(20, 20, 20, 220);
+    private static final Color HOTKEY_BADGE_RING = new Color(220, 220, 220);
+    private static final int HOTKEY_BADGE_MIN_CARD_WIDTH = 80;
+    private static final int HOTKEY_BADGE_MAX_DIAMETER = 28;
     private static Font smallCounterFont;
     private static Font largeCounterFont;
 
@@ -414,6 +419,9 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         if (groupCount >= 2) {
             drawGroupCountBadge(g);
         }
+        if (hotkeyDigit > 0 && cardWidth >= HOTKEY_BADGE_MIN_CARD_WIDTH) {
+            drawHotkeyDigitBadge(g);
+        }
         if (zoneBannerText != null) {
             drawZoneBanner(g);
         }
@@ -556,6 +564,38 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         g2d.setColor(Color.WHITE);
         g2d.setFont(badgeFont);
         g2d.drawString(text, badgeX + padX, badgeY + padY + textHeight);
+    }
+
+    public int getHotkeyDigit() {
+        return hotkeyDigit;
+    }
+
+    public void setHotkeyDigit(final int digit) {
+        if (hotkeyDigit == digit) return;
+        hotkeyDigit = digit;
+        repaint();
+    }
+
+    private void drawHotkeyDigitBadge(final Graphics g) {
+        final Graphics2D g2d = (Graphics2D) g.create();
+        try {
+            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            final int diameter = Math.min(HOTKEY_BADGE_MAX_DIAMETER, cardWidth / 5);
+            final int bx = cardXOffset + cardWidth - diameter - 2;
+            final int by = cardYOffset + 2;
+            g2d.setColor(HOTKEY_BADGE_BG);
+            g2d.fillOval(bx, by, diameter, diameter);
+            g2d.setColor(HOTKEY_BADGE_RING);
+            g2d.drawOval(bx, by, diameter, diameter);
+            g2d.setColor(Color.WHITE);
+            g2d.setFont(new Font("Dialog", Font.BOLD, Math.max(11, diameter * 2 / 3)));
+            final String text = String.valueOf(hotkeyDigit);
+            final FontMetrics fm = g2d.getFontMetrics();
+            g2d.drawString(text, bx + (diameter - fm.stringWidth(text)) / 2,
+                    by + (diameter + fm.getAscent()) / 2 - 2);
+        } finally {
+            g2d.dispose();
+        }
     }
 
     public boolean isBadgeHit(int mouseX, int mouseY) {
