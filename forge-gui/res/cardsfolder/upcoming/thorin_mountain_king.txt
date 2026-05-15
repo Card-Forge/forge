@@ -10,6 +10,6 @@ SVar:DBImmediateTrigger:DB$ ImmediateTrigger | ConditionDefined$ Remembered | Co
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | DamageSource$ DelayTriggerRemembered | NumDmg$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:MaxTargets:Count$Valid Equipment.YouCtrl
-SVar:X:DelayTriggerRemembered$CardPower
+SVar:X:TriggerRemembered$CardPower
 DeckHints:Type$Equipment
 Oracle:Trample\nWhen Thorin enters, attach any number of target Equipment you control to target creature you control. When one or more Equipment become attached to that creature this way, that creature deals damage equal to its power to up to one target creature.
