@@ -267,7 +267,18 @@ public enum FSkinProp {
     ICO_ARCSOFF      (new int[] {240, 800, 80, 80}, PropType.ICON),
     ICO_ARCSON       (new int[] {320, 800, 80, 80}, PropType.ICON),
     ICO_ARCSHOVER    (new int[] {400, 800, 80, 80}, PropType.ICON),
+    ICO_AUTOYIELDS   (new int[] {480, 640, 80, 80}, PropType.ICON),
     ICO_AUTOPASS     (new int[] {400, 720, 80, 80}, PropType.ICON),
+
+    // Dock-button variants — white glyph on transparent, drawn on a runtime
+    // tile by DockButton. Kept separate from the icons above so changes to the
+    // dock aesthetic don't leak into mobile menus / deck-editor tabs that
+    // reuse the originals.
+    ICO_DOCK_CONCEDE     (new int[] {160, 720, 80, 80}, PropType.ICON),
+    ICO_DOCK_ENDTURN     (new int[] {240, 720, 80, 80}, PropType.ICON),
+    ICO_DOCK_DECKLIST    (new int[] {320, 720, 80, 80}, PropType.ICON),
+    ICO_DOCK_ALPHASTRIKE (new int[] {560, 720, 80, 80}, PropType.ICON),
+    ICO_DOCK_SETTINGS    (new int[] {560, 1520, 80, 80}, PropType.ICON),
 
     //choice-search-misc
     ICO_HDCHOICE     (new int[] {2, 1792, 128, 128}, PropType.BUTTONS),

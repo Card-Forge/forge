@@ -33,3 +33,4 @@ Some of the sprites and tiles that are used in Adventure mode come from external
 
 ## Other sprites and icons
 1. Clipboard icon by Dimitry Miroliubov at [Flaticon](https://www.flaticon.com/free-icon/clipboard_340068)
+1. Dock-bar icons by [Lorc](https://lorcblog.blogspot.com/), [Delapouite](https://delapouite.com/), and Skoll, sourced from [game-icons.net](https://game-icons.net/), licensed under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/).
