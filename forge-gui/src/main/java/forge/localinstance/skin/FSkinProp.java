@@ -17,15 +17,19 @@
  */
 package forge.localinstance.skin;
 
+import java.util.Collection;
 import java.util.Map;
+import java.util.Set;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
 import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
 import forge.deck.DeckSection;
+import forge.game.card.CardView.CardStateView;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordView;
 import forge.game.zone.ZoneType;
@@ -781,6 +785,44 @@ public enum FSkinProp {
             case GREEN -> IMG_WATERMARK_G;
             case COLORLESS -> IMG_WATERMARK_C;
         };
+    }
+
+    public static Collection<FSkinProp> iconsFromCardState(CardStateView state) {
+        Set<FSkinProp> result = Sets.newLinkedHashSet();
+        if (ZoneType.Battlefield.equals(state.getCard().getZone())) {
+            //if (state.getCard().isToken()) {
+            //    result.add(IMG_ABILITY_TOKEN);
+            //}
+            if (state.getCard().isCommander()) {
+                result.add(IMG_ABILITY_COMMANDER);
+            }
+            if (state.getCard().isRingBearer()) {
+                result.add(IMG_ABILITY_RINGBEARER);
+            }
+            for (KeywordView keyword : state.getKeywords()) {
+                if (Keyword.FLASH == keyword.keyword()) {
+                    continue;
+                }
+                if (Keyword.HEXPROOF == keyword.keyword()) {
+                    continue;
+                }
+                if (Keyword.PROTECTION == keyword.keyword()) {
+                    continue;
+                }
+                FSkinProp prop = iconFromKeyword(keyword);
+                if (prop != null) {
+                    result.add(prop);
+                }
+            }
+            if (result.contains(IMG_ABILITY_DOUBLE_STRIKE)) {
+                result.remove(IMG_ABILITY_FIRST_STRIKE);
+            }
+        } else if (state.hasKeyword(Keyword.FLASH) || (state.getAbilityText().contains("May be played by")
+                && state.getAbilityText().contains("and as though it has flash"))) {
+            result.add(IMG_ABILITY_FLASH);
+        }
+
+        return result;
     }
 
     public static FSkinProp iconFromKeyword(KeywordView keyword) {

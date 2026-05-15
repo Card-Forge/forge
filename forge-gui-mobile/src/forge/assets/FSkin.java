@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import forge.Forge;
 import forge.card.CardFaceSymbols;
-import forge.card.MagicColor;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
@@ -368,6 +367,15 @@ public class FSkin {
             }
 
             //load images
+            for (FSkinProp prop : FSkinProp.values()) {
+                if (FSkinProp.PropType.ABILITY == prop.getType()
+                        || FSkinProp.PropType.WATERMARKS == prop.getType()
+                        ) {
+                    FSkinImageImpl image = new FSkinImageImpl(prop);
+                    image.load(preferredIcons);
+                    FSkin.getImages().put(prop, image);
+                }
+            }
             for (FSkinImage image : FSkinImage.values()) {
                 if (GuiBase.isAndroid()) {
                     if (Forge.allowCardBG)
@@ -381,12 +389,6 @@ public class FSkin {
                 }
             }
             for (FSkinProp prop : FSkinProp.MANA_IMG.values()) {
-                FSkinImageImpl image = new FSkinImageImpl(prop);
-                image.load(preferredIcons);
-                FSkin.getImages().put(prop, image);
-            }
-            for (MagicColor.Color c : MagicColor.Color.values()) {
-                FSkinProp prop = FSkinProp.watermarkFromColor(c);
                 FSkinImageImpl image = new FSkinImageImpl(prop);
                 image.load(preferredIcons);
                 FSkin.getImages().put(prop, image);

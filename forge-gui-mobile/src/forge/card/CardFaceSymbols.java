@@ -75,31 +75,6 @@ public class CardFaceSymbols {
         Forge.getAssets().manaImages().put("foil19", FSkinImage.FOIL_19);
         Forge.getAssets().manaImages().put("foil20", FSkinImage.FOIL_20);
 
-        Forge.getAssets().manaImages().put("annihilator", FSkinImage.IMG_ABILITY_ANNIHILATOR);
-        Forge.getAssets().manaImages().put("toxic", FSkinImage.IMG_ABILITY_TOXIC);
-        Forge.getAssets().manaImages().put("deathtouch", FSkinImage.IMG_ABILITY_DEATHTOUCH);
-        Forge.getAssets().manaImages().put("defender", FSkinImage.IMG_ABILITY_DEFENDER);
-        Forge.getAssets().manaImages().put("doublestrike", FSkinImage.IMG_ABILITY_DOUBLE_STRIKE);
-        Forge.getAssets().manaImages().put("exalted", FSkinImage.IMG_ABILITY_EXALTED);
-        Forge.getAssets().manaImages().put("firststrike", FSkinImage.IMG_ABILITY_FIRST_STRIKE);
-        Forge.getAssets().manaImages().put("fear", FSkinImage.IMG_ABILITY_FEAR);
-        Forge.getAssets().manaImages().put("flash", FSkinImage.IMG_ABILITY_FLASH);
-        Forge.getAssets().manaImages().put("flying", FSkinImage.IMG_ABILITY_FLYING);
-        Forge.getAssets().manaImages().put("haste", FSkinImage.IMG_ABILITY_HASTE);
-        Forge.getAssets().manaImages().put("hexproof", FSkinImage.IMG_ABILITY_HEXPROOF);
-        Forge.getAssets().manaImages().put("horsemanship", FSkinImage.IMG_ABILITY_HORSEMANSHIP);
-        Forge.getAssets().manaImages().put("indestructible", FSkinImage.IMG_ABILITY_INDESTRUCTIBLE);
-        Forge.getAssets().manaImages().put("intimidate", FSkinImage.IMG_ABILITY_INTIMIDATE);
-        Forge.getAssets().manaImages().put("landwalk", FSkinImage.IMG_ABILITY_LANDWALK);
-        Forge.getAssets().manaImages().put("lifelink", FSkinImage.IMG_ABILITY_LIFELINK);
-        Forge.getAssets().manaImages().put("menace", FSkinImage.IMG_ABILITY_MENACE);
-        Forge.getAssets().manaImages().put("reach", FSkinImage.IMG_ABILITY_REACH);
-        Forge.getAssets().manaImages().put("shadow", FSkinImage.IMG_ABILITY_SHADOW);
-        Forge.getAssets().manaImages().put("shroud", FSkinImage.IMG_ABILITY_SHROUD);
-        Forge.getAssets().manaImages().put("trample", FSkinImage.IMG_ABILITY_TRAMPLE);
-        Forge.getAssets().manaImages().put("ward", FSkinImage.IMG_ABILITY_WARD);
-        Forge.getAssets().manaImages().put("wither", FSkinImage.IMG_ABILITY_WITHER);
-        Forge.getAssets().manaImages().put("vigilance", FSkinImage.IMG_ABILITY_VIGILANCE);
         //hexproof from
         Forge.getAssets().manaImages().put("hexproofR", FSkinImage.IMG_ABILITY_HEXPROOF_R);
         Forge.getAssets().manaImages().put("hexproofG", FSkinImage.IMG_ABILITY_HEXPROOF_G);

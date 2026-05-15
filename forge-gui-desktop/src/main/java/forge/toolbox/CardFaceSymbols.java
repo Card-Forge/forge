@@ -84,31 +84,6 @@ public class CardFaceSymbols {
         MANA_IMAGES.put("foil19", FSkin.getImage(FSkinProp.FOIL_19));
         MANA_IMAGES.put("foil20", FSkin.getImage(FSkinProp.FOIL_20));
 
-        //ability icons
-        MANA_IMAGES.put("annihilator", FSkin.getImage(FSkinProp.IMG_ABILITY_ANNIHILATOR));
-        MANA_IMAGES.put("toxic", FSkin.getImage(FSkinProp.IMG_ABILITY_TOXIC));
-        MANA_IMAGES.put("deathtouch", FSkin.getImage(FSkinProp.IMG_ABILITY_DEATHTOUCH));
-        MANA_IMAGES.put("defender", FSkin.getImage(FSkinProp.IMG_ABILITY_DEFENDER));
-        MANA_IMAGES.put("doublestrike", FSkin.getImage(FSkinProp.IMG_ABILITY_DOUBLE_STRIKE));
-        MANA_IMAGES.put("exalted", FSkin.getImage(FSkinProp.IMG_ABILITY_EXALTED));
-        MANA_IMAGES.put("firststrike", FSkin.getImage(FSkinProp.IMG_ABILITY_FIRST_STRIKE));
-        MANA_IMAGES.put("fear", FSkin.getImage(FSkinProp.IMG_ABILITY_FEAR));
-        MANA_IMAGES.put("flash", FSkin.getImage(FSkinProp.IMG_ABILITY_FLASH));
-        MANA_IMAGES.put("flying", FSkin.getImage(FSkinProp.IMG_ABILITY_FLYING));
-        MANA_IMAGES.put("haste", FSkin.getImage(FSkinProp.IMG_ABILITY_HASTE));
-        MANA_IMAGES.put("horsemanship", FSkin.getImage(FSkinProp.IMG_ABILITY_HORSEMANSHIP));
-        MANA_IMAGES.put("hexproof", FSkin.getImage(FSkinProp.IMG_ABILITY_HEXPROOF));
-        MANA_IMAGES.put("indestructible", FSkin.getImage(FSkinProp.IMG_ABILITY_INDESTRUCTIBLE));
-        MANA_IMAGES.put("intimidate", FSkin.getImage(FSkinProp.IMG_ABILITY_INTIMIDATE));
-        MANA_IMAGES.put("lifelink", FSkin.getImage(FSkinProp.IMG_ABILITY_LIFELINK));
-        MANA_IMAGES.put("menace", FSkin.getImage(FSkinProp.IMG_ABILITY_MENACE));
-        MANA_IMAGES.put("reach", FSkin.getImage(FSkinProp.IMG_ABILITY_REACH));
-        MANA_IMAGES.put("shadow", FSkin.getImage(FSkinProp.IMG_ABILITY_SHADOW));
-        MANA_IMAGES.put("shroud", FSkin.getImage(FSkinProp.IMG_ABILITY_SHROUD));
-        MANA_IMAGES.put("trample", FSkin.getImage(FSkinProp.IMG_ABILITY_TRAMPLE));
-        MANA_IMAGES.put("ward", FSkin.getImage(FSkinProp.IMG_ABILITY_WARD));
-        MANA_IMAGES.put("wither", FSkin.getImage(FSkinProp.IMG_ABILITY_WITHER));
-        MANA_IMAGES.put("vigilance", FSkin.getImage(FSkinProp.IMG_ABILITY_VIGILANCE));
         //hexproof from
         MANA_IMAGES.put("hexproofR", FSkin.getImage(FSkinProp.IMG_ABILITY_HEXPROOF_R));
         MANA_IMAGES.put("hexproofG", FSkin.getImage(FSkinProp.IMG_ABILITY_HEXPROOF_G));
