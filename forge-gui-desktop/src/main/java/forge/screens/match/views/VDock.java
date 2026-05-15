@@ -71,11 +71,8 @@ public class VDock implements IVDoc<CDock> {
     private final DragTab tab = new DragTab(localizer.getMessage("lblDock"));
     private final CDock controller;
 
-    // Buttons keyed by id. Built once from the DockButtonId enum table; the
-    // user-facing name shown in the right-click menu is read directly from
-    // each button's tooltip.
     private final EnumMap<DockButtonId, DockButton> buttons = new EnumMap<>(DockButtonId.class);
-    // id → visible; entry order is the on-screen left→right order
+    // entry order is the on-screen left→right order
     private LinkedHashMap<DockButtonId, Boolean> state;
 
     public VDock(final CDock controller) {
@@ -85,11 +82,6 @@ public class VDock implements IVDoc<CDock> {
         }
     }
 
-    //========= Overridden methods
-
-    /* (non-Javadoc)
-     * @see forge.gui.framework.IVDoc#populate()
-     */
     @Override
     public void populate() {
         final JPanel pnl = parentCell.getBody();
@@ -101,10 +93,6 @@ public class VDock implements IVDoc<CDock> {
     }
 
     private void installInteractionHandlers(final JPanel pnl) {
-        // Right-click on each button shows the full menu targeted at that
-        // button; right-click on bare panel background shows the menu minus
-        // the button-specific Hide entry, so the user can still reach
-        // Show / Reset when no button is convenient to click.
         for (Map.Entry<DockButtonId, DockButton> e : buttons.entrySet()) {
             final DockButtonId id = e.getKey();
             final DockButton btn = e.getValue();
@@ -266,41 +254,26 @@ public class VDock implements IVDoc<CDock> {
         relayout();
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.IVDoc#setParentCell()
-     */
     @Override
     public void setParentCell(final DragCell cell0) {
         this.parentCell = cell0;
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.IVDoc#getParentCell()
-     */
     @Override
     public DragCell getParentCell() {
         return this.parentCell;
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.IVDoc#getDocumentID()
-     */
     @Override
     public EDocID getDocumentID() {
         return EDocID.BUTTON_DOCK;
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.IVDoc#getTabLabel()
-     */
     @Override
     public DragTab getTabLabel() {
         return tab;
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.IVDoc#getLayoutControl()
-     */
     @Override
     public CDock getLayoutControl() {
         return controller;
@@ -393,15 +366,12 @@ public class VDock implements IVDoc<CDock> {
     private static LinkedHashMap<DockButtonId, Boolean> mergeFromShipped(
             final LinkedHashMap<DockButtonId, Boolean> user,
             final LinkedHashMap<DockButtonId, Boolean> shipped) {
-        // Drop user entries the current build no longer recognizes
         LinkedHashMap<DockButtonId, Boolean> result = new LinkedHashMap<>();
         for (Map.Entry<DockButtonId, Boolean> e : user.entrySet()) {
             if (shipped.containsKey(e.getKey())) {
                 result.put(e.getKey(), e.getValue());
             }
         }
-        // Insert shipped-only ids right after their predecessor in shipped order
-        // (or at the front if they have no predecessor)
         DockButtonId prev = null;
         for (Map.Entry<DockButtonId, Boolean> e : shipped.entrySet()) {
             if (!result.containsKey(e.getKey())) {
@@ -436,8 +406,7 @@ public class VDock implements IVDoc<CDock> {
      */
     @SuppressWarnings("serial")
     public class DockButton extends SkinnedLabel implements ILocalRepaint {
-        /** Shared highlight tile colour for any dock button whose state is
-         *  "active" (auto-pass on, targeting arcs on, etc.). Slightly darker
+        /** Shared highlight tile colour for active dock buttons. Slightly darker
          *  than goldenrod so it reads as an accent rather than a UI element. */
         private static final Color HIGHLIGHT_BG = new Color(0xB8860B);
         private static final int TILE_CORNER_RADIUS = 6;
@@ -450,10 +419,8 @@ public class VDock implements IVDoc<CDock> {
         private Consumer<MouseEvent> dragOverAction;
         private boolean dragging;
         private boolean active;
-        // While dragging, an absolutely-positioned overlay component on the
-        // root layered pane that follows the cursor at 65% alpha. The slot
-        // the button normally occupies stays in place but renders empty
-        // (just the dotted outline) so it's clear the icon is "in flight".
+        // Translucent overlay on the root layered pane that follows the cursor
+        // while dragging; the slot itself renders empty (dotted outline).
         private JComponent dragGhost;
         private int dragOffsetX, dragOffsetY;
 
@@ -469,8 +436,7 @@ public class VDock implements IVDoc<CDock> {
             this.setMaximumSize(size);
             this.setPreferredSize(size);
 
-            // isCompDraggable=true: a drag past 3px clears the click state, so
-            // dragging the button to reorder it does NOT also trigger its action.
+            // FMouseAdapter(true): drag past 3px suppresses the click action
             final FMouseAdapter adapter = new FMouseAdapter(true) {
                 @Override
                 public void onLeftClick(final MouseEvent e) {
@@ -493,9 +459,7 @@ public class VDock implements IVDoc<CDock> {
                     }
                 }
 
-                // onLeftMouseDragDrop only fires past FMouseAdapter's 3px drag
-                // threshold; onLeftMouseUp always fires. Clear drag state here so
-                // a sub-3px twitch doesn't leave the visuals stuck on
+                // onLeftMouseDragDrop needs >3px; mouseUp always fires — clear here so sub-3px twitches don't stick
                 @Override
                 public void onLeftMouseUp(final MouseEvent e) {
                     if (DockButton.this.dragging) {
@@ -523,9 +487,7 @@ public class VDock implements IVDoc<CDock> {
                 }
             };
             this.addMouseListener(adapter);
-            // Required so onLeftMouseDragging fires (FMouseAdapter only raises
-            // it when the adapter is a permanent motion listener, not when it
-            // installed itself temporarily for click-vs-drag detection).
+            // Permanent motion listener — required for onLeftMouseDragging to fire
             this.addMouseMotionListener(adapter);
         }
 
@@ -606,11 +568,6 @@ public class VDock implements IVDoc<CDock> {
             repaint(0, 0, d.width, d.height);
         }
 
-        /*
-         * (non-Javadoc)
-         * 
-         * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
-         */
         @Override
         public void paintComponent(final Graphics g) {
             final int w = getWidth();
@@ -619,9 +576,7 @@ public class VDock implements IVDoc<CDock> {
             g.fillRect(0, 0, w, h);
 
             if (this.dragging) {
-                // Slot is empty visually — the icon is following the cursor as
-                // a ghost on the layered pane. Outline the slot so the user
-                // can see where the button will land if dropped here.
+                // Icon flies as a ghost on the layered pane — outline the empty slot to show the drop target
                 FSkin.setGraphicsColor(g, this.dragBorderColor);
                 g.drawRect(0, 0, w - 1, h - 1);
                 g.drawRect(1, 1, w - 3, h - 3);
@@ -642,10 +597,7 @@ public class VDock implements IVDoc<CDock> {
          * stay visually consistent.
          */
         private void paintTileAndGlyph(final Graphics g, final int width, final int height) {
-            // FSkin.drawImage routes to Graphics.drawImage, which defaults to
-            // nearest-neighbor scaling. The dock icons are 80x80 sprite slots
-            // scaled down to 30x30 here — bilinear keeps the glyph edges smooth
-            // instead of jagged. Antialiasing is for the tile rectangle.
+            // Bilinear keeps the 80→30 sprite downscale smooth; antialiasing softens the tile edges
             if (g instanceof Graphics2D g2) {
                 if (this.active) {
                     g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,

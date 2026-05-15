@@ -270,10 +270,8 @@ public enum FSkinProp {
     ICO_AUTOYIELDS   (new int[] {480, 640, 80, 80}, PropType.ICON),
     ICO_AUTOPASS     (new int[] {400, 720, 80, 80}, PropType.ICON),
 
-    // Dock-button variants — white glyph on transparent, drawn on a runtime
-    // tile by DockButton. Kept separate from the icons above so changes to the
-    // dock aesthetic don't leak into mobile menus / deck-editor tabs that
-    // reuse the originals.
+    // Dock-button glyph variants — kept separate so the dock's white-on-transparent
+    // aesthetic doesn't leak into non-dock callers (mobile menus, deck editor, etc.)
     ICO_DOCK_CONCEDE     (new int[] {160, 720, 80, 80}, PropType.ICON),
     ICO_DOCK_ENDTURN     (new int[] {240, 720, 80, 80}, PropType.ICON),
     ICO_DOCK_DECKLIST    (new int[] {320, 720, 80, 80}, PropType.ICON),

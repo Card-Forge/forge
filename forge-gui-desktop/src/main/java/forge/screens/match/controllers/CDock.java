@@ -66,9 +66,8 @@ public class CDock implements ICDoc {
         YieldController.endTurn(matchUI.getGameController(), matchUI.getCurrentPlayer());
     }
 
-    /** Read the current targeting-arc state from preferences. Single source of
-     *  truth — both the dock toggle and the Game-menu radio buttons go through
-     *  this. Falls back to OFF for an unparseable / unset pref. */
+    /** Reads UI_TARGETING_OVERLAY on demand. Falls back to OFF for an
+     *  unparseable / unset pref. */
     public ArcState getArcState() {
         final Integer ord = Ints.tryParse(FModel.getPreferences().getPref(FPref.UI_TARGETING_OVERLAY));
         return ArcState.values()[ord == null ? 0 : ord];
@@ -107,12 +106,8 @@ public class CDock implements ICDoc {
         refresh();
     }
 
-    /**
-     * Sync each stateful dock button's active highlight (and any state-derived
-     * tooltips) with the current preference values. Called on initialize, after
-     * this controller mutates state, and from external paths that change a
-     * backing preference (keyboard shortcut, Game-menu radio buttons).
-     */
+    /** Syncs each stateful dock button's active highlight and any
+     *  state-derived tooltips with the current preference values. */
     public void refresh() {
         final ArcState arcs = getArcState();
         view.getButton(DockButtonId.AUTO_PASS).setActive(
