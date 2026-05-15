@@ -63,7 +63,7 @@ public enum ProtocolMethod implements IHasForgeLog {
     chooseEntitiesForEffect(Mode.SERVER, List.class, String.class, List.class, Integer.TYPE, Integer.TYPE, DelayedReveal.class),
     manipulateCardList   (Mode.SERVER, List.class, String.class, Iterable.class, Iterable.class, Boolean.TYPE, Boolean.TYPE, Boolean.TYPE),
     setCard             (Mode.SERVER, Void.TYPE, CardView.class),
-    setSelectables      (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class),
+    setSelectables      (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class, Integer.TYPE, Integer.TYPE),
     clearSelectables    (Mode.SERVER, Void.TYPE),
     // TODO case "setPlayerAvatar":
     openZones           (Mode.SERVER, PlayerZoneUpdates.class, PlayerView.class, Collection/*ZoneType*/.class, Map/*PlayerView,Object*/.class, Boolean.TYPE),

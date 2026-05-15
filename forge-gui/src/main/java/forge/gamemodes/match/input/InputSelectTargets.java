@@ -63,7 +63,9 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             lastTarget = card;
         }
 
-        controller.getGui().setSelectables(CardView.getCollection(choices));
+        final int initialMin = numTargets != null ? numTargets : sa.getMinTargets();
+        final int initialMax = numTargets != null ? numTargets : sa.getMaxTargets();
+        controller.getGui().setSelectables(CardView.getCollection(choices), initialMin, initialMax);
         final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
         for (final Card c : choices) {
             zonesToUpdate.add(new PlayerZoneUpdate(c.getZone().getPlayer().getView(), c.getZone().getZoneType()));
@@ -308,6 +310,12 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             }
         }
         addTarget(card);
+        if (otherCardsToSelect != null) {
+            for (final Card other : otherCardsToSelect) {
+                if (isFinished() || hasAllTargets()) break;
+                onCardSelected(other, null, triggerEvent);
+            }
+        }
         return true;
     }
 

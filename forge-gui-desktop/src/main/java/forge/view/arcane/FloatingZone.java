@@ -540,9 +540,14 @@ public class FloatingZone extends FloatingCardArea {
             .ghostText(Localizer.getInstance().getMessage("lblFilterByName"))
             .build();
     private final FHtmlViewer promptLabel = new FHtmlViewer();
-    private final FLabel hotkeyHint = new FLabel.Builder()
+    private final FLabel hotkeyHintBase = new FLabel.Builder()
             .text(Localizer.getInstance().getMessage("lblHotkeySelectHint"))
-            .fontSize(11)
+            .fontSize(10)
+            .fontAlign(SwingConstants.CENTER)
+            .build();
+    private final FLabel hotkeyHintMin = new FLabel.Builder()
+            .text(Localizer.getInstance().getMessage("lblHotkeySelectHintMin"))
+            .fontSize(10)
             .fontAlign(SwingConstants.CENTER)
             .build();
     private String filter = "";
@@ -590,8 +595,10 @@ public class FloatingZone extends FloatingCardArea {
         window.add(promptLabel, "growx, wmin 10, gapbottom 4, wrap, hidemode 3");
         window.add(searchField, "growx, wrap");
         window.add(getScrollPane(), "grow, push, wrap");
-        hotkeyHint.setVisible(false);
-        window.add(hotkeyHint, "growx");
+        hotkeyHintBase.setVisible(false);
+        hotkeyHintMin.setVisible(false);
+        window.add(hotkeyHintBase, "growx, wrap, hidemode 3");
+        window.add(hotkeyHintMin, "growx, hidemode 3");
         window.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE); //pfps so that old content does not reappear?
         getScrollPane().setViewportView(this);
         setOpaque(false);
@@ -676,6 +683,8 @@ public class FloatingZone extends FloatingCardArea {
             promptLabel.setText("");
             promptLabel.setVisible(false);
         }
+        hotkeyHintBase.setVisible(show);
+        hotkeyHintMin.setVisible(show && getMatchUI().getSelectionMin() > 1);
         window.revalidate();
     }
 
@@ -779,7 +788,37 @@ public class FloatingZone extends FloatingCardArea {
         }
         if (!e.isControlDown() || e.isAltDown() || e.isMetaDown()) return false;
         final int digit = e.getKeyCode() - KeyEvent.VK_0;
-        if (digit < 1 || digit > 9) return false;
+        if (digit < 0 || digit > 9) return false;
+        if (digit == 0) {
+            // Ctrl+0: auto-pick the first N selectables that haven't been picked yet.
+            // Selection progress is tracked client-side via the highlighted set — both
+            // InputSelectTargets and InputSelectManyBase call setHighlighted(true/false)
+            // on add/remove, so highlighted ∩ selectable == cards picked so far.
+            // Batched into one selectCard so the server processes atomically — separate
+            // messages race (a thread spawned per message).
+            for (final FloatingZone fz : new ArrayList<>(floatingAreas.values())) {
+                if (!fz.isVisible()) continue;
+                final int min = fz.getMatchUI().getSelectionMin();
+                if (min < 1) continue;
+                final int need = Math.max(0, min - fz.getMatchUI().countPickedSelectables());
+                if (need < 1) continue;
+                final List<CardView> picks = new ArrayList<>(need);
+                for (final CardPanel panel : new ArrayList<>(fz.getCardPanels())) {
+                    if (picks.size() >= need) break;
+                    final CardView cv = panel.getCard();
+                    if (!fz.getMatchUI().isSelectable(cv)) continue;
+                    if (fz.getMatchUI().isHighlighted(cv)) continue;
+                    picks.add(cv);
+                }
+                if (picks.isEmpty()) continue;
+                // Wire-serializable: ArrayList.subList() returns a SubList view that's not Serializable.
+                final List<CardView> others = picks.size() > 1 ? new ArrayList<>(picks.subList(1, picks.size())) : null;
+                fz.getMatchUI().getGameController().selectCard(picks.get(0), others,
+                        new MouseTriggerEvent(MouseEvent.BUTTON1, 0, 0));
+                return true;
+            }
+            return false;
+        }
         for (final FloatingZone fz : floatingAreas.values()) {
             if (!fz.isVisible()) continue;
             final CardPanel target = fz.findPanelByHotkeyDigit(digit);
@@ -807,8 +846,11 @@ public class FloatingZone extends FloatingCardArea {
                 panel.setHotkeyDigit(0);
             }
         }
-        if (!clear) {
-            hotkeyHint.setVisible(next > 1);
+    }
+
+    public static void clearAllHotkeyAffordance() {
+        for (final FloatingZone fz : new ArrayList<>(floatingAreas.values())) {
+            if (fz.isVisible()) fz.assignOwnHotkeyDigits(true);
         }
     }
 

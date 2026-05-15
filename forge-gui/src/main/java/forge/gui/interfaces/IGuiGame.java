@@ -250,7 +250,12 @@ public interface IGuiGame {
 
     void setHighlighted(GameEntityView pv, boolean b);
 
-    void setSelectables(final Iterable<CardView> cards);
+    /**
+     * Mark {@code cards} as selectable and publish the active selection's
+     * minimum / maximum required count for client-side use (e.g.,
+     * select-min hotkeys). Callers without a known range pass {@code (0, 0)}.
+     */
+    void setSelectables(Iterable<CardView> cards, int min, int max);
 
     void clearSelectables();
 
