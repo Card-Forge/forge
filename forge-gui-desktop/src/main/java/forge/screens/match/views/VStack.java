@@ -300,6 +300,7 @@ public class VStack implements IVDoc<CStack> {
         private final JCheckBoxMenuItem jmiAutoYield;
         private final JCheckBoxMenuItem jmiAlwaysYes;
         private final JCheckBoxMenuItem jmiAlwaysNo;
+        private final JMenuItem jmiYieldToStack;
         private final JMenuItem jmiYieldToEntireStack;
         private StackItemView item;
 
@@ -336,11 +337,20 @@ public class VStack implements IVDoc<CStack> {
             });
             add(jmiAlwaysNo);
 
+            jmiYieldToStack = new JMenuItem(Localizer.getInstance().getMessage("lblYieldToStack"));
+            jmiYieldToStack.addActionListener(arg0 -> {
+                final PlayerView local = controller.getMatchUI().getCurrentPlayer();
+                if (local == null) return;
+                controller.getMatchUI().getGameController().sendYieldUpdate(new YieldUpdate.StackYield(local, true, true));
+                controller.getMatchUI().getGameController().passPriority();
+            });
+            add(jmiYieldToStack);
+
             jmiYieldToEntireStack = new JMenuItem(Localizer.getInstance().getMessage("lblYieldToEntireStack"));
             jmiYieldToEntireStack.addActionListener(arg0 -> {
                 final PlayerView local = controller.getMatchUI().getCurrentPlayer();
                 if (local == null) return;
-                controller.getMatchUI().getGameController().sendYieldUpdate(new YieldUpdate.StackYield(local, true));
+                controller.getMatchUI().getGameController().sendYieldUpdate(new YieldUpdate.StackYield(local, true, false));
                 controller.getMatchUI().getGameController().passPriority();
             });
             add(jmiYieldToEntireStack);

@@ -818,7 +818,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     }
 
     void setReady(final int index, final boolean ready) {
-        if (lobby.isAllowNetworking()){
+        if (lobby.isAllowNetworking()) {
             updateDeck(index);
             fireReady(index, ready);
             return;
@@ -843,11 +843,8 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         int playerCount = lobby.getNumberOfSlots();
         // clear ready for everyone
         for (int i = 0; i < playerCount; i++) {
-            final PlayerPanel panel = playerPanels.get(i);
-            final boolean wasReady = panel.isReady();
-            panel.setIsReady(false);
-            if (wasReady && playerChangeListener != null) {
-                playerChangeListener.update(i, UpdateLobbyPlayerEvent.isReadyUpdate(false));
+            if (playerPanels.get(i).isReady()) {
+                fireReady(i, false);
             }
         }
     }
@@ -856,7 +853,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             playerChangeListener.update(index, getSlot(index));
         }
     }
-    void fireReady(final int index, boolean ready){
+    void fireReady(final int index, boolean ready) {
         playerPanels.get(index).setIsReady(ready);
         if (playerChangeListener != null) {
             playerChangeListener.update(index, UpdateLobbyPlayerEvent.isReadyUpdate(ready));

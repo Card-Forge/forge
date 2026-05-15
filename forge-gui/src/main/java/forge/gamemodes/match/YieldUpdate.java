@@ -2,6 +2,7 @@ package forge.gamemodes.match;
 
 import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.player.AutoYieldStore;
 
 import java.io.Serializable;
@@ -16,11 +17,13 @@ public sealed interface YieldUpdate extends Serializable
         permits YieldUpdate.SetMarker,
                 YieldUpdate.ClearMarker,
                 YieldUpdate.StackYield,
+                YieldUpdate.SetAutoPassUntilEndOfTurn,
                 YieldUpdate.CardAutoYield,
                 YieldUpdate.TriggerDecision,
                 YieldUpdate.SetDisableYields,
                 YieldUpdate.SetDisableTriggers,
                 YieldUpdate.SkipPhase,
+                YieldUpdate.SetYieldPref,
                 YieldUpdate.SeedFromClient {
 
     /** {@code atOrPastAtClick}: priority was at-or-past target on owner's turn when the user clicked — computed by the UI so client cache and host PCH initialize identically. */
@@ -28,7 +31,9 @@ public sealed interface YieldUpdate extends Serializable
 
     record ClearMarker(PlayerView player) implements YieldUpdate {}
 
-    record StackYield(PlayerView player, boolean active) implements YieldUpdate {}
+    record StackYield(PlayerView player, boolean active, boolean respectsInterrupts) implements YieldUpdate {}
+
+    record SetAutoPassUntilEndOfTurn(PlayerView player, boolean active) implements YieldUpdate {}
 
     record CardAutoYield(String cardKey, boolean active, boolean abilityScope) implements YieldUpdate {}
 
@@ -42,6 +47,9 @@ public sealed interface YieldUpdate extends Serializable
     record SetDisableTriggers(boolean disabled) implements YieldUpdate {}
 
     record SkipPhase(PlayerView turnPlayer, PhaseType phase, boolean skip) implements YieldUpdate {}
+
+    /** Pref values are stored String-typed in {@link forge.localinstance.properties.PreferencesStore}; callers wrap booleans with {@code String.valueOf} at the call site. */
+    record SetYieldPref(FPref pref, String value) implements YieldUpdate {}
 
     record SeedFromClient(YieldStateSnapshot snapshot) implements YieldUpdate {}
 }

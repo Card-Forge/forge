@@ -1556,7 +1556,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
 
             // Tutor for the first key card in the list, since the list should be in priority order
-            for(String keyName : keyCards) {
+            for (String keyName : keyCards) {
                 CardCollection withKeyCard = CardLists.filter(fetchList, CardPredicates.nameEquals(keyName));
                 if (withKeyCard.isEmpty()) {
                     continue;
@@ -1567,14 +1567,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
             // Does AI need a land?
             // The logic here seems wrong if the decider isn't the same as the player
             CardCollectionView hand = decider.getCardsIn(ZoneType.Hand);
-            if (!hand.anyMatch(CardPredicates.LANDS) && CardLists.count(decider.getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS) < 4) {
-                boolean canCastSomething = false;
-                for (Card cardInHand : hand) {
-                    canCastSomething = canCastSomething || ComputerUtilMana.hasEnoughManaSourcesToCast(cardInHand.getFirstSpellAbility(), decider);
-                }
-                if (!canCastSomething) {
-                    c = basicManaFixing(decider, fetchList);
-                }
+            if (!hand.anyMatch(CardPredicates.LANDS) && CardLists.count(decider.getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS) < 4 &&
+                    !hand.anyMatch(crd -> ComputerUtilMana.hasEnoughManaSourcesToCast(crd.getFirstSpellAbility(), decider))) {
+                c = basicManaFixing(decider, fetchList);
             }
             if (c == null) {
                 if (fetchList.allMatch(CardPredicates.LANDS)) {
@@ -1698,7 +1693,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         String definedSac = StringUtils.split(source.getSVar("AIPreference"), "$")[1];
 
         CardCollection listToSac = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), definedSac, ai, source, sa);
-        listToSac.sort(Collections.reverseOrder(CardLists.CmcComparatorInv));
+        listToSac.sort(CardLists.CmcComparator);
 
         CardCollection listToRet = CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.CREATURES);
         listToRet.sort(CardLists.CmcComparatorInv);
@@ -1735,7 +1730,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         boolean anyCMC = !definedGoal.contains(".cmc");
 
         CardCollection listToSac = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), definedSac, ai, source, sa);
-        listToSac.sort(!sacWorst ? CardLists.CmcComparatorInv : Collections.reverseOrder(CardLists.CmcComparatorInv));
+        listToSac.sort(!sacWorst ? CardLists.CmcComparatorInv : CardLists.CmcComparator);
 
         for (Card sacCandidate : listToSac) {
             int sacCMC = sacCandidate.getCMC();
