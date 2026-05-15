@@ -1042,7 +1042,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         }
     }
 
-    /** Text input that accepts an RGB hex with optional # or 0x prefix and persists the 6-char uppercase form. */
+    /** Text input that accepts a 6-char RGB hex and persists the uppercase form. */
     private class HexColorSetting extends Setting {
         private final String defaultValue;
 

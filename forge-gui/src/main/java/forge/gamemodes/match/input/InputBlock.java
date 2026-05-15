@@ -92,7 +92,7 @@ public class InputBlock extends InputSyncronizedBase {
 
     @Override
     protected void onStop() {
-        // Highlights pushed in showMessage would otherwise persist on remote clients through autopass.
+        // Clear so highlights don't survive autopass.
         getController().clearActionableCards();
     }
 

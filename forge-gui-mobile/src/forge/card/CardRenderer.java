@@ -833,7 +833,6 @@ public class CardRenderer {
             g.drawRect(BORDER_THICKNESS, Color.MAGENTA, cx, cy, cw, ch);
         } else if (!unselectable && FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)
                 && MatchController.instance.isWeaklySelectable(card)) {
-            // User-configurable RGB hex outline for cards the player can currently act on; defaults to 66CCFF.
             g.drawRect(BORDER_THICKNESS, parseActionableHighlightColor(), cx, cy, cw, ch);
         }
         //Ability Icons

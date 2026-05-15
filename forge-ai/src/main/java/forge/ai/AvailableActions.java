@@ -65,17 +65,8 @@ public final class AvailableActions {
         return false;
     }
 
-    /**
-     * Full-scan variant of {@link #compute} that returns the set of card
-     * views with at least one actionable SA. No early-exit: we walk
-     * every card so downstream highlight code can reuse the same
-     * per-card answers the APINA boolean is derived from.
-     *
-     * Timeout behavior: on expiry, remaining unvisited cards are added
-     * to the set (FP-safe — the player is shown extra highlights rather
-     * than missing some). The APINA boolean can be derived as
-     * {@code !result.isEmpty()}.
-     */
+    /** Full-scan sibling of {@link #compute}. On timeout, remaining cards are
+     *  marked actionable so the user sees extra highlights rather than missing some. */
     public static Set<CardView> collectActionable(Player player, long timeoutMs) {
         long deadlineNanos = System.nanoTime() + timeoutMs * 1_000_000L;
         Set<CardView> actionable = new HashSet<>();
@@ -133,9 +124,7 @@ public final class AvailableActions {
         return false;
     }
 
-    /** FP-safe timeout fallback: mark every card in a scannable zone as
-     *  actionable. The player sees extra highlights rather than missing
-     *  playable cards. */
+    /** Timeout fallback: mark every scannable card so the user doesn't miss highlights. */
     private static void addAllRemaining(Set<CardView> actionable, Player player) {
         for (Card c : player.getCardsIn(ZoneType.Hand)) actionable.add(c.getView());
         for (Card c : player.getCardsIn(ZoneType.Battlefield)) actionable.add(c.getView());

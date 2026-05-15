@@ -98,7 +98,7 @@ public class InputAttack extends InputSyncronizedBase {
 
     @Override
     protected void onStop() {
-        // Highlights pushed in showMessage would otherwise persist on remote clients through autopass.
+        // Clear so highlights don't survive autopass.
         getController().clearActionableCards();
     }
 
@@ -352,12 +352,8 @@ public class InputAttack extends InputSyncronizedBase {
 
         updatePrompt();
 
-        // Refresh the actionable-card highlight set after every click so
-        // declared attackers stop glowing (and call-backs restore the
-        // glow). Mirrors InputBlock's behavior, where its no-arg
-        // showMessage() override re-pushes blocker candidates after each
-        // selection. We can't call our own no-arg showMessage() here
-        // because it also resets currentDefender.
+        // Re-push after each click so declared attackers stop glowing.
+        // Can't reuse showMessage() — it also resets currentDefender.
         getController().pushAttackerCandidates(playerAttacks, combat);
 
         if (combat != null)
