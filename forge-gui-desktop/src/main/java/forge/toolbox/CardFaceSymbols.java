@@ -84,14 +84,6 @@ public class CardFaceSymbols {
         MANA_IMAGES.put("foil19", FSkin.getImage(FSkinProp.FOIL_19));
         MANA_IMAGES.put("foil20", FSkin.getImage(FSkinProp.FOIL_20));
 
-        //hexproof from
-        MANA_IMAGES.put("hexproofR", FSkin.getImage(FSkinProp.IMG_ABILITY_HEXPROOF_R));
-        MANA_IMAGES.put("hexproofG", FSkin.getImage(FSkinProp.IMG_ABILITY_HEXPROOF_G));
-        MANA_IMAGES.put("hexproofB", FSkin.getImage(FSkinProp.IMG_ABILITY_HEXPROOF_B));
-        MANA_IMAGES.put("hexproofU", FSkin.getImage(FSkinProp.IMG_ABILITY_HEXPROOF_U));
-        MANA_IMAGES.put("hexproofW", FSkin.getImage(FSkinProp.IMG_ABILITY_HEXPROOF_W));
-        MANA_IMAGES.put("hexproofC", FSkin.getImage(FSkinProp.IMG_ABILITY_HEXPROOF_C));
-        MANA_IMAGES.put("hexproofUB", FSkin.getImage(FSkinProp.IMG_ABILITY_HEXPROOF_UB));
         //token icon
         MANA_IMAGES.put("token", FSkin.getImage(FSkinProp.IMG_ABILITY_TOKEN));
         //protection from

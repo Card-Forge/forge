@@ -150,7 +150,6 @@ public enum TrackableProperty {
     HasWard(TrackableTypes.BooleanType),
 
     ProtectionKey(TrackableTypes.StringType),
-    HexproofKey(TrackableTypes.StringType),
 
     BlockAdditional(TrackableTypes.IntegerType),
     BlockAny(TrackableTypes.BooleanType),

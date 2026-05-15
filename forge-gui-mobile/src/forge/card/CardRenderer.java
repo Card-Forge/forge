@@ -1,7 +1,6 @@
 package forge.card;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
@@ -919,55 +918,6 @@ public class CardRenderer {
             abiCount += 1;
         }
 
-        if (card.getCurrentState().hasHexproof()) {
-            if (abiCount > 5) {
-                abiY = cy + (abiSpace * (abiCount - 6));
-                abiX = cx + ((cw * 2) / 1.92f);
-            }
-            if (!card.getCurrentState().getHexproofKey().isEmpty()) {
-                String[] splitK = card.getCurrentState().getHexproofKey().split(":");
-                List<String> listHK = Arrays.asList(splitK);
-                if (listHK.contains("generic")) {
-                    CardFaceSymbols.drawSymbol("hexproof", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                    abiCount += 1;
-                }
-                if (listHK.contains("R")) {
-                    CardFaceSymbols.drawSymbol("hexproofR", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                    abiCount += 1;
-                }
-                if (listHK.contains("B")) {
-                    CardFaceSymbols.drawSymbol("hexproofB", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                    abiCount += 1;
-                }
-                if (listHK.contains("U")) {
-                    CardFaceSymbols.drawSymbol("hexproofU", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                    abiCount += 1;
-                }
-                if (listHK.contains("G")) {
-                    CardFaceSymbols.drawSymbol("hexproofG", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                    abiCount += 1;
-                }
-                if (listHK.contains("W")) {
-                    CardFaceSymbols.drawSymbol("hexproofW", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                    abiCount += 1;
-                }
-                if (listHK.contains("monocolored")) {
-                    CardFaceSymbols.drawSymbol("hexproofC", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                    abiCount += 1;
-                }
-            } else {
-                CardFaceSymbols.drawSymbol("hexproof", g, abiX, abiY, abiScale, abiScale);
-                abiY += abiSpace;
-                abiCount += 1;
-            }
-        }
         //Protection Icons
         if (!card.getCurrentState().getProtectionKey().isEmpty()) {
             if (abiCount > 5) {

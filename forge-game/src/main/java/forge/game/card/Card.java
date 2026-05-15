@@ -6890,51 +6890,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
         return protectKey;
     }
-    public String getHexproofKey() {
-        String hexproofKey = "";
-        boolean generic = false;
-        Set<MagicColor.Color> colors = EnumSet.noneOf(MagicColor.Color.class);
-        for (final KeywordInterface inst : getKeywords(Keyword.HEXPROOF)) {
-            String kw = inst.getOriginal();
-            if (kw.equals("Hexproof")) {
-                generic = true;
-            }
-            if (kw.startsWith("Hexproof:")) {
-                String[] k = kw.split(":");
-                if (k[1].equals("Red")) {
-                    colors.add(MagicColor.Color.RED);
-                } else if (k[1].equals("Green")) {
-                    colors.add(MagicColor.Color.GREEN);
-                } else if (k[1].equals("Black")) {
-                    colors.add(MagicColor.Color.BLACK);
-                } else if (k[1].equals("Blue")) {
-                    colors.add(MagicColor.Color.BLUE);
-                } else if (k[1].equals("White")) {
-                    colors.add(MagicColor.Color.WHITE);
-                } else if (k.length > 2 && k[2].equals("monocolored")) {
-                    hexproofKey += "monocolored:";
-                } else if (k.length > 2 && k[2].equals("multicolored")) {
-                    generic = true; // no multicolored icon yet
-                } else if (k.length > 2 && k[2].equals("each color")) {
-                    colors.add(MagicColor.Color.RED);
-                    colors.add(MagicColor.Color.GREEN);
-                    colors.add(MagicColor.Color.BLACK);
-                    colors.add(MagicColor.Color.BLUE);
-                    colors.add(MagicColor.Color.WHITE);
-                } else {
-                    // no extra icon
-                    generic = true;
-                }
-            }
-        }
-        if (generic) {
-            hexproofKey += "generic:";
-        }
-        for (MagicColor.Color c : colors) {
-            hexproofKey += c.getShortName() + ":";
-        }
-        return hexproofKey;
-    }
 
     public Zone getZone() {
         return currentZone;

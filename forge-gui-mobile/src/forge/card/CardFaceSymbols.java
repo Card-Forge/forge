@@ -75,14 +75,6 @@ public class CardFaceSymbols {
         Forge.getAssets().manaImages().put("foil19", FSkinImage.FOIL_19);
         Forge.getAssets().manaImages().put("foil20", FSkinImage.FOIL_20);
 
-        //hexproof from
-        Forge.getAssets().manaImages().put("hexproofR", FSkinImage.IMG_ABILITY_HEXPROOF_R);
-        Forge.getAssets().manaImages().put("hexproofG", FSkinImage.IMG_ABILITY_HEXPROOF_G);
-        Forge.getAssets().manaImages().put("hexproofB", FSkinImage.IMG_ABILITY_HEXPROOF_B);
-        Forge.getAssets().manaImages().put("hexproofU", FSkinImage.IMG_ABILITY_HEXPROOF_U);
-        Forge.getAssets().manaImages().put("hexproofW", FSkinImage.IMG_ABILITY_HEXPROOF_W);
-        Forge.getAssets().manaImages().put("hexproofC", FSkinImage.IMG_ABILITY_HEXPROOF_C);
-        Forge.getAssets().manaImages().put("hexproofUB", FSkinImage.IMG_ABILITY_HEXPROOF_UB);
         //token icon
         Forge.getAssets().manaImages().put("token", FSkinImage.IMG_ABILITY_TOKEN);
         //protection from

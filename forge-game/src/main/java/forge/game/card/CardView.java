@@ -1583,36 +1583,15 @@ public class CardView extends GameEntityView {
         public boolean hasKeyword(Keyword keyword) { return getKeywords().contains(keyword); }
 
         public String getProtectionKey() { return get(TrackableProperty.ProtectionKey); }
-        public String getHexproofKey() { return get(TrackableProperty.HexproofKey); }
         public boolean hasAnnihilator() { return get(TrackableProperty.HasAnnihilator); }
         public boolean hasWard() { return get(TrackableProperty.HasWard); }
 
         public boolean hasDeathtouch() { return hasKeyword(Keyword.DEATHTOUCH); }
-        public boolean hasToxic() { return hasKeyword(Keyword.TOXIC); }
         public boolean hasDevoid() { return hasKeyword(Keyword.DEVOID); }
-        public boolean hasDefender() { return hasKeyword(Keyword.DEFENDER); }
-        public boolean hasDoubleStrike() { return hasKeyword(Keyword.DOUBLE_STRIKE); }
-        public boolean hasDoubleTeam() { return hasKeyword(Keyword.DOUBLE_TEAM); }
-        public boolean hasExalted() { return hasKeyword(Keyword.EXALTED); }
-        public boolean hasFirstStrike() { return hasKeyword(Keyword.FIRST_STRIKE); }
-        public boolean hasFlying() { return hasKeyword(Keyword.FLYING); }
-        public boolean hasFear() { return hasKeyword(Keyword.FEAR); }
-        public boolean hasHexproof() { return hasKeyword(Keyword.HEXPROOF); }
-        public boolean hasHorsemanship() { return hasKeyword(Keyword.HORSEMANSHIP); }
-        public boolean hasWither() { return hasKeyword(Keyword.WITHER); }
-        public boolean hasIndestructible() { return hasKeyword(Keyword.INDESTRUCTIBLE); }
-        public boolean hasIntimidate() { return hasKeyword(Keyword.INTIMIDATE); }
-        public boolean hasLifelink() { return hasKeyword(Keyword.LIFELINK); }
-        public boolean hasMenace() { return hasKeyword(Keyword.MENACE); }
-        public boolean hasReach() { return hasKeyword(Keyword.REACH); }
-        public boolean hasShadow() { return hasKeyword(Keyword.SHADOW); }
-        public boolean hasShroud() { return hasKeyword(Keyword.SHROUD); }
         public boolean hasTrample() { return hasKeyword(Keyword.TRAMPLE); }
-        public boolean hasVigilance() { return hasKeyword(Keyword.VIGILANCE); }
         public boolean hasHaste() { return hasKeyword(Keyword.HASTE); }
         public boolean hasInfect() { return hasKeyword(Keyword.INFECT); }
         public boolean hasStorm() { return hasKeyword(Keyword.STORM); }
-        public boolean hasLandwalk() { return hasKeyword(Keyword.LANDWALK); }
         public boolean hasAftermath() { return hasKeyword(Keyword.AFTERMATH); }
 
         public boolean hasDivideDamage() { return get(TrackableProperty.HasDivideDamage); }
@@ -1639,8 +1618,6 @@ public class CardView extends GameEntityView {
             updateAbilityText(c, state);
             //set protectionKey for Icons
             set(TrackableProperty.ProtectionKey, c.getProtectionKey());
-            //set hexproofKeys for Icons
-            set(TrackableProperty.HexproofKey, c.getHexproofKey());
             //update Trackable Mana Color for BG Colors
             updateManaColorBG(state);
 

@@ -18,6 +18,7 @@
 package forge.localinstance.skin;
 
 import java.util.Collection;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -799,23 +800,70 @@ public enum FSkinProp {
             if (state.getCard().isRingBearer()) {
                 result.add(IMG_ABILITY_RINGBEARER);
             }
+            // deeper check for Idris
+            if (state.hasAnnihilator()) {
+                result.add(IMG_ABILITY_ANNIHILATOR);
+            }
+            if (state.hasWard()) {
+                result.add(IMG_ABILITY_WARD);
+            }
+            boolean hexproofGeneric = false;
+            Set<FSkinProp> hexproofTypes = Sets.newLinkedHashSet();
             for (KeywordView keyword : state.getKeywords()) {
+                // no effect on the battlefield
                 if (Keyword.FLASH == keyword.keyword()) {
                     continue;
                 }
                 if (Keyword.HEXPROOF == keyword.keyword()) {
+                    String kw = keyword.original();
+                    if (!kw.contains(":")) {
+                        hexproofGeneric = true;
+                        continue;
+                    }
+                    String[] k = kw.split(":");
+                    // it doesn't like double switch, so do not call MagicColor.Color.fromName
+                    FSkinProp hexproofColor = switch (k[1].toLowerCase(Locale.ROOT)) {
+                        case MagicColor.Constant.WHITE -> IMG_ABILITY_HEXPROOF_W;
+                        case MagicColor.Constant.BLUE -> IMG_ABILITY_HEXPROOF_U;
+                        case MagicColor.Constant.BLACK -> IMG_ABILITY_HEXPROOF_B;
+                        case MagicColor.Constant.RED -> IMG_ABILITY_HEXPROOF_R;
+                        case MagicColor.Constant.GREEN -> IMG_ABILITY_HEXPROOF_G;
+                        //case COLORLESS -> IMG_ABILITY_HEXPROOF_C; hexproof_c is for "monocolored"
+                        default -> null;
+                    };
+                    if (hexproofColor != null) {
+                        hexproofTypes.add(hexproofColor);
+                    } else if (k.length > 2 && k[2].equals("monocolored")) {
+                        hexproofTypes.add(IMG_ABILITY_HEXPROOF_C); // might need better icon
+                    } else if (k.length > 2 && k[2].equals("multicolored")) {
+                        hexproofGeneric = true; // no multicolored icon yet
+                    } else if (k.length > 2 && k[2].equals("each color")) {
+                        hexproofTypes.add(IMG_ABILITY_HEXPROOF_W);
+                        hexproofTypes.add(IMG_ABILITY_HEXPROOF_U);
+                        hexproofTypes.add(IMG_ABILITY_HEXPROOF_B);
+                        hexproofTypes.add(IMG_ABILITY_HEXPROOF_R);
+                        hexproofTypes.add(IMG_ABILITY_HEXPROOF_G);
+                    } else {
+                        // no extra icon
+                        hexproofGeneric = true;
+                    }
+                } else if (Keyword.PROTECTION == keyword.keyword()) {
                     continue;
-                }
-                if (Keyword.PROTECTION == keyword.keyword()) {
-                    continue;
-                }
-                FSkinProp prop = iconFromKeyword(keyword);
-                if (prop != null) {
-                    result.add(prop);
+                } else {
+                    FSkinProp prop = iconFromKeyword(keyword);
+                    if (prop != null) {
+                        result.add(prop);
+                    }
                 }
             }
+            // Double Strike overshadows First Strike
             if (result.contains(IMG_ABILITY_DOUBLE_STRIKE)) {
                 result.remove(IMG_ABILITY_FIRST_STRIKE);
+            }
+            if (hexproofGeneric) {
+                result.add(IMG_ABILITY_HEXPROOF);
+            } else {
+                result.addAll(hexproofTypes);
             }
         } else if (state.hasKeyword(Keyword.FLASH) || (state.getAbilityText().contains("May be played by")
                 && state.getAbilityText().contains("and as though it has flash"))) {
