@@ -17,6 +17,7 @@
  */
 package forge.adventure.util;
 
+import forge.StaticData;
 import forge.adventure.data.ConfigData;
 import forge.card.CardEdition;
 import forge.item.SealedTemplate;
@@ -137,8 +138,13 @@ public final class AdventureOverrides {
         return Collections.unmodifiableList(merged);
     }
 
-    /** @return the overlay booster template for the given set code, or {@code null} if none. */
+    /**
+     * @return the overlay booster template for the given set code, or the
+     * upstream template if no overlay exists, or {@code null} if neither has one.
+     */
     public SealedTemplate getBoosterTemplate(String setCode) {
-        return boosters.get(setCode);
+        SealedTemplate overlay = boosters.get(setCode);
+        if (overlay != null) return overlay;
+        return StaticData.instance().getBoosters().get(setCode);
     }
 }

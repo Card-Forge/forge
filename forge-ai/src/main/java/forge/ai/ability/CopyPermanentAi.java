@@ -124,7 +124,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             sa.resetTargets();
 
-            List<Card> list = CardUtil.getValidCardsToTarget(sa);
+            CardCollection list = CardUtil.getValidCardsToTarget(sa);
 
             if (aiLogic.equals("Different")) {
                 // TODO: possibly improve the check, currently only checks if the name is the same

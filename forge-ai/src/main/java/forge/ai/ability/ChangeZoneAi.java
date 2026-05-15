@@ -1107,44 +1107,31 @@ public class ChangeZoneAi extends SpellAbilityAi {
             return false;
         }
 
-        // target loop
         while (sa.canAddMoreTarget()) {
-            // AI Targeting
             Card choice = null;
 
             if (!list.isEmpty()) {
                 if (destination.equals(ZoneType.Battlefield) || origin.contains(ZoneType.Battlefield)) {
-                    // filter by MustTarget requirement
                     CardCollection originalList = new CardCollection(list);
                     boolean mustTargetFiltered = StaticAbilityMustTarget.filterMustTargetCards(ai, list, sa);
 
-                    final Card mostExpensive = ComputerUtilCard.getMostExpensivePermanentAI(list);
-                    if (mostExpensive.isCreature()) {
-                        // if a creature is most expensive take the best one
-                        if (destination.equals(ZoneType.Exile)) {
-                            // If Exiling things, don't give bonus to Tokens
-                            choice = ComputerUtilCard.getBestCreatureAI(list);
-                        } else if (origin.contains(ZoneType.Graveyard)) {
-                            choice = mostExpensive;
-                            // Karmic Guide can chain another creature
-                            for (Card c : list) {
-                                if ("Karmic Guide".equals(c.getName())) {
-                                    choice = c;
-                                    break;
-                                }
+                    choice = origin.contains(ZoneType.Battlefield)
+                            ? ComputerUtilCard.getBestRemovalTargetAI(ai, list)
+                            : ComputerUtilCard.getMostExpensivePermanentAI(list);
+                    if (choice.isCreature() && origin.contains(ZoneType.Graveyard)) {
+                        // Karmic Guide can chain another creature
+                        for (Card c : list) {
+                            if ("Karmic Guide".equals(c.getName())) {
+                                choice = c;
+                                break;
                             }
-                        } else {
-                            choice = ComputerUtilCard.getBestCreatureToBounceAI(list);
                         }
-                    } else {
-                        choice = mostExpensive;
                     }
 
                     //option to hold removal instead only applies for single targeted removal
-                    if (!immediately && sa.getMaxTargets() == 1) {
-                        if (!ComputerUtilCard.useRemovalNow(sa, choice, 0, destination)) {
-                            return false;
-                        }
+                    if (!immediately && sa.getMaxTargets() == 1
+                            && !ComputerUtilCard.useRemovalNow(sa, choice, 0, destination)) {
+                        return false;
                     }
 
                     // Restore original list for next loop if filtered by MustTarget requirement
@@ -1338,28 +1325,27 @@ public class ChangeZoneAi extends SpellAbilityAi {
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
-        List<Card> list = CardUtil.getValidCardsToTarget(sa);
+        CardCollection list = CardUtil.getValidCardsToTarget(sa);
 
         if (list.isEmpty()) {
             return false;
         }
 
-        // target loop
         while (!sa.isMinTargetChosen()) {
-            // AI Targeting
             Card choice = null;
 
             // Filter out cards TargetsForEachPlayer
             list = CardLists.canSubsequentlyTarget(list, sa);
 
             if (!list.isEmpty()) {
-                Card mostExpensivePermanent = ComputerUtilCard.getMostExpensivePermanentAI(list);
-                if (mostExpensivePermanent.isCreature()
-                        && (destination.equals(ZoneType.Battlefield) || tgt.getZone().contains(ZoneType.Battlefield))) {
-                    // if a creature is most expensive take the best
-                    choice = ComputerUtilCard.getBestCreatureToBounceAI(list);
-                } else if (destination.equals(ZoneType.Battlefield) || tgt.getZone().contains(ZoneType.Battlefield)) {
-                    choice = mostExpensivePermanent;
+                if (tgt.getZone().contains(ZoneType.Battlefield)) {
+                    choice = ComputerUtilCard.getBestRemovalTargetAI(ai, list);
+                } else if (destination.equals(ZoneType.Battlefield)) {
+                    choice = ComputerUtilCard.getMostExpensivePermanentAI(list);
+                    if (choice.isCreature()) {
+                        // if a creature is most expensive take the best
+                        choice = ComputerUtilCard.getBestCreatureAI(list);
+                    }
                 } else if (destination.equals(ZoneType.Hand) || destination.equals(ZoneType.Library)) {
                     List<Card> nonLands = CardLists.getNotType(list, "Land");
                     // Prefer to pull a creature, generally more useful for AI.
@@ -1570,7 +1556,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
 
             // Tutor for the first key card in the list, since the list should be in priority order
-            for(String keyName : keyCards) {
+            for (String keyName : keyCards) {
                 CardCollection withKeyCard = CardLists.filter(fetchList, CardPredicates.nameEquals(keyName));
                 if (withKeyCard.isEmpty()) {
                     continue;
@@ -1581,14 +1567,9 @@ public class ChangeZoneAi extends SpellAbilityAi {
             // Does AI need a land?
             // The logic here seems wrong if the decider isn't the same as the player
             CardCollectionView hand = decider.getCardsIn(ZoneType.Hand);
-            if (!hand.anyMatch(CardPredicates.LANDS) && CardLists.count(decider.getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS) < 4) {
-                boolean canCastSomething = false;
-                for (Card cardInHand : hand) {
-                    canCastSomething = canCastSomething || ComputerUtilMana.hasEnoughManaSourcesToCast(cardInHand.getFirstSpellAbility(), decider);
-                }
-                if (!canCastSomething) {
-                    c = basicManaFixing(decider, fetchList);
-                }
+            if (!hand.anyMatch(CardPredicates.LANDS) && CardLists.count(decider.getCardsIn(ZoneType.Battlefield), CardPredicates.LANDS) < 4 &&
+                    !hand.anyMatch(crd -> ComputerUtilMana.hasEnoughManaSourcesToCast(crd.getFirstSpellAbility(), decider))) {
+                c = basicManaFixing(decider, fetchList);
             }
             if (c == null) {
                 if (fetchList.allMatch(CardPredicates.LANDS)) {
@@ -1712,7 +1693,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         String definedSac = StringUtils.split(source.getSVar("AIPreference"), "$")[1];
 
         CardCollection listToSac = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), definedSac, ai, source, sa);
-        listToSac.sort(Collections.reverseOrder(CardLists.CmcComparatorInv));
+        listToSac.sort(CardLists.CmcComparator);
 
         CardCollection listToRet = CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.CREATURES);
         listToRet.sort(CardLists.CmcComparatorInv);
@@ -1749,7 +1730,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
         boolean anyCMC = !definedGoal.contains(".cmc");
 
         CardCollection listToSac = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), definedSac, ai, source, sa);
-        listToSac.sort(!sacWorst ? CardLists.CmcComparatorInv : Collections.reverseOrder(CardLists.CmcComparatorInv));
+        listToSac.sort(!sacWorst ? CardLists.CmcComparatorInv : CardLists.CmcComparator);
 
         for (Card sacCandidate : listToSac) {
             int sacCMC = sacCandidate.getCMC();

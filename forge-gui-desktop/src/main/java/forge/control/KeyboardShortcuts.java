@@ -22,10 +22,13 @@ import forge.game.spellability.StackItemView;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
 import forge.localinstance.properties.ForgePreferences;
+import forge.gamemodes.match.YieldController;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
+import forge.player.AutoYieldStore.TriggerDecision;
 import forge.screens.home.settings.VSubmenuPreferences.KeyboardShortcutField;
 import forge.screens.match.CMatchUI;
+import forge.screens.match.VYieldSettings;
 import forge.toolbox.special.CardZoomer;
 import forge.util.Localizer;
 import forge.view.KeyboardShortcutsDialog;
@@ -127,7 +130,7 @@ public class KeyboardShortcuts {
             public void actionPerformed(final ActionEvent e) {
                 if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
                 if (matchUI == null) { return; }
-                matchUI.getGameController().passPriorityUntilEndOfTurn();
+                YieldController.endTurn(matchUI.getGameController(), matchUI.getCurrentPlayer());
             }
         };
 
@@ -159,12 +162,11 @@ public class KeyboardShortcuts {
                 if (matchUI == null) { return; }
                 StackItemView si = matchUI.getGameView().peekStack();
                 if (si != null && si.isAbility()) {
-                    boolean abilityScope = !forge.localinstance.properties.ForgeConstants.AUTO_YIELD_PER_CARD.equals(
-                            forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_YIELD_MODE));
-                    matchUI.getGameController().setShouldAutoYield(si.getKey(), true, abilityScope);
-                    int triggerID = si.getSourceTrigger();
-                    if (si.isOptionalTrigger() && matchUI.isLocalPlayer(si.getActivatingPlayer())) {
-                        matchUI.getGameController().setShouldAlwaysAcceptTrigger(triggerID);
+                    boolean abilityScope = matchUI.getGameController().getYieldController().isAbilityScope();
+                    String key = si.getKey();
+                    matchUI.getGameController().setShouldAutoYield(key, true, abilityScope);
+                    if (si.isOptionalTrigger() && matchUI.isLocalPlayer(si.getActivatingPlayer()) && !key.isEmpty()) {
+                        matchUI.getGameController().setTriggerDecision(key, TriggerDecision.ACCEPT, abilityScope);
                     }
                     matchUI.getGameController().passPriority();
                 }
@@ -179,12 +181,11 @@ public class KeyboardShortcuts {
                 if (matchUI == null) { return; }
                 StackItemView si = matchUI.getGameView().peekStack();
                 if (si != null && si.isAbility()) {
-                    boolean abilityScope = !forge.localinstance.properties.ForgeConstants.AUTO_YIELD_PER_CARD.equals(
-                            forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_YIELD_MODE));
-                    matchUI.getGameController().setShouldAutoYield(si.getKey(), true, abilityScope);
-                    int triggerID = si.getSourceTrigger();
-                    if (si.isOptionalTrigger() && matchUI.isLocalPlayer(si.getActivatingPlayer())) {
-                        matchUI.getGameController().setShouldAlwaysDeclineTrigger(triggerID);
+                    boolean abilityScope = matchUI.getGameController().getYieldController().isAbilityScope();
+                    String key = si.getKey();
+                    matchUI.getGameController().setShouldAutoYield(key, true, abilityScope);
+                    if (si.isOptionalTrigger() && matchUI.isLocalPlayer(si.getActivatingPlayer()) && !key.isEmpty()) {
+                        matchUI.getGameController().setTriggerDecision(key, TriggerDecision.DECLINE, abilityScope);
                     }
                     matchUI.getGameController().passPriority();
                 }
@@ -261,6 +262,25 @@ public class KeyboardShortcuts {
             }
         };
 
+        final Action actYieldOptions = new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
+                if (matchUI == null) { return; }
+                SwingUtilities.invokeLater(() -> new VYieldSettings(matchUI).showDialog());
+            }
+        };
+
+        final Action actYieldAutoPass = new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
+                if (matchUI == null) { return; }
+                YieldController.toggleAutoPassOrStopAll(matchUI.getGameController());
+                matchUI.getCDock().refreshAutoPassToggled();
+            }
+        };
+
         final Localizer localizer = Localizer.getInstance();
         //========== Instantiate shortcut objects and add to list.
         list.add(new Shortcut(FPref.SHORTCUT_SHOWSTACK, localizer.getMessage("lblSHORTCUT_SHOWSTACK"), actShowStack, am, im));
@@ -274,6 +294,8 @@ public class KeyboardShortcuts {
         list.add(new Shortcut(FPref.SHORTCUT_SHOWTARGETING, localizer.getMessage("lblSHORTCUT_SHOWTARGETING"), actTgtOverlay, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_AUTOYIELD_ALWAYS_YES, localizer.getMessage("lblSHORTCUT_AUTOYIELD_ALWAYS_YES"), actAutoYieldAndYes, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_AUTOYIELD_ALWAYS_NO, localizer.getMessage("lblSHORTCUT_AUTOYIELD_ALWAYS_NO"), actAutoYieldAndNo, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_YIELD_OPTIONS, localizer.getMessage("lblSHORTCUT_YIELD_OPTIONS"), actYieldOptions, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_YIELD_AUTO_PASS, localizer.getMessage("lblSHORTCUT_YIELD_AUTO_PASS"), actYieldAutoPass, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_MACRO_RECORD, localizer.getMessage("lblSHORTCUT_MACRO_RECORD"), actMacroRecord, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_MACRO_NEXT_ACTION, localizer.getMessage("lblSHORTCUT_MACRO_NEXT_ACTION"), actMacroNextAction, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_CARD_ZOOM, localizer.getMessage("lblSHORTCUT_CARD_ZOOM"), actZoomCard, am, im));

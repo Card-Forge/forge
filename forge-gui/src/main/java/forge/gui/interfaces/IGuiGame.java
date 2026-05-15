@@ -18,6 +18,7 @@ import forge.game.zone.ZoneType;
 import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.match.input.InputConfirm;
 import forge.gamemodes.net.DeltaPacket;
+import forge.gui.GuiBase;
 import forge.gui.control.PlaybackSpeed;
 import forge.interfaces.IGameController;
 import forge.item.PaperCard;
@@ -34,6 +35,16 @@ import java.util.List;
 import java.util.Map;
 
 public interface IGuiGame {
+    /**
+     * Whether the renderer for this GUI is the mobile port.
+     * For non-local GUIs this reflects the connected client's renderer
+     * (learned at lobby handshake), letting the host pick code paths that
+     * are actually implemented on the target.
+     */
+    default boolean isLibgdxPort() {
+        return GuiBase.getInterface().isLibgdxPort();
+    }
+
     void setGameView(GameView gameView);
 
     /**
@@ -239,7 +250,12 @@ public interface IGuiGame {
 
     void setHighlighted(GameEntityView pv, boolean b);
 
-    void setSelectables(final Iterable<CardView> cards);
+    /**
+     * Mark {@code cards} as selectable and publish the active selection's
+     * minimum / maximum required count for client-side use (e.g.,
+     * select-min hotkeys). Callers without a known range pass {@code (0, 0)}.
+     */
+    void setSelectables(Iterable<CardView> cards, int min, int max);
 
     void clearSelectables();
 

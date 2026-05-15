@@ -101,16 +101,6 @@ public enum CSubmenuPreferences implements ICDoc {
             SoundSystem.instance.changeBackgroundTrack();
         });
 
-        // This updates Experimental Network Option
-        view.getCbUseExperimentalNetworkStream().addItemListener(arg0 -> {
-            if (updating) { return; }
-
-            final boolean toggle = view.getCbUseExperimentalNetworkStream().isSelected();
-            GuiBase.enablePropertyConfig(toggle);
-            prefs.setPref(FPref.UI_NETPLAY_COMPAT, String.valueOf(toggle));
-            prefs.save();
-        });
-
         lstControls.clear(); // just in case
         lstControls.add(Pair.of(view.getCbAnte(), FPref.UI_ANTE));
         lstControls.add(Pair.of(view.getCbAnteMatchRarity(), FPref.UI_ANTE_MATCH_RARITY));
@@ -136,7 +126,6 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbEnableUnknownCards(), FPref.UI_LOAD_UNKNOWN_CARDS));
         lstControls.add(Pair.of(view.getCbEnableNonLegalCards(), FPref.UI_LOAD_NONLEGAL_CARDS));
         lstControls.add(Pair.of(view.getCbAllowCustomCardsDeckConformance(), FPref.ALLOW_CUSTOM_CARDS_IN_DECKS_CONFORMANCE));
-        lstControls.add(Pair.of(view.getCbUseExperimentalNetworkStream(), FPref.UI_NETPLAY_COMPAT));
         lstControls.add(Pair.of(view.getCbImageFetcher(), FPref.UI_ENABLE_ONLINE_IMAGE_FETCHER));
         lstControls.add(Pair.of(view.getCbDisableCardImages(), FPref.UI_DISABLE_CARD_IMAGES));
         lstControls.add(Pair.of(view.getCbDisplayFoil(), FPref.UI_OVERLAY_FOIL_EFFECT));
@@ -227,7 +216,7 @@ public enum CSubmenuPreferences implements ICDoc {
         initializeLandPlayedComboBox();
         initializeColorIdentityCombobox();
         initializeSwitchStatesCombobox();
-        initializeAutoYieldModeComboBox();
+        initializeAutoDecisionModeComboBox();
         initializeStackGroupPermanentsComboBox();
         initializeMaxStackDepthComboBox();
         initializeCounterDisplayTypeComboBox();
@@ -254,7 +243,6 @@ public enum CSubmenuPreferences implements ICDoc {
         setPlayerNameButtonText();
         view.getCbDevMode().setSelected(ForgePreferences.DEV_MODE);
         view.getCbEnableMusic().setSelected(prefs.getPrefBoolean(FPref.UI_ENABLE_MUSIC));
-        view.getCbUseExperimentalNetworkStream().setSelected(prefs.getPrefBoolean(FPref.UI_NETPLAY_COMPAT));
 
         for(final Pair<JCheckBox, FPref> kv: lstControls) {
             kv.getKey().setSelected(prefs.getPrefBoolean(kv.getValue()));
@@ -571,15 +559,15 @@ public enum CSubmenuPreferences implements ICDoc {
         panel.setComboBox(comboBox, selectedItem);
     }
 
-    private void initializeAutoYieldModeComboBox() {
+    private void initializeAutoDecisionModeComboBox() {
         final String[] elems = {
-            ForgeConstants.AUTO_YIELD_PER_CARD,
-            ForgeConstants.AUTO_YIELD_PER_ABILITY,
-            ForgeConstants.AUTO_YIELD_PER_ABILITY_SESSION,
-            ForgeConstants.AUTO_YIELD_PER_ABILITY_INSTALL,
+            ForgeConstants.AUTO_DECISION_PER_CARD,
+            ForgeConstants.AUTO_DECISION_PER_ABILITY,
+            ForgeConstants.AUTO_DECISION_PER_ABILITY_SESSION,
+            ForgeConstants.AUTO_DECISION_PER_ABILITY_INSTALL,
         };
-        final FPref userSetting = FPref.UI_AUTO_YIELD_MODE;
-        final FComboBoxPanel<String> panel = this.view.getAutoYieldModeComboBoxPanel();
+        final FPref userSetting = FPref.UI_AUTO_DECISION_MODE;
+        final FComboBoxPanel<String> panel = this.view.getAutoDecisionModeComboBoxPanel();
         final FComboBox<String> comboBox = createComboBox(elems, userSetting);
         final String selectedItem = this.prefs.getPref(userSetting);
         panel.setComboBox(comboBox, selectedItem);

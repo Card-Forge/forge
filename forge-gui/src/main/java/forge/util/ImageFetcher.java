@@ -50,7 +50,7 @@ public abstract class ImageFetcher {
             // the wrong frame.
             addScryfallUrl(c, face, useArtCrop, downloadUrls);
 
-            List<PaperCard> clones = StaticData.instance().getCommonCards().getAllCardsNoAlt(c.getName());
+            List<PaperCard> clones = StaticData.instance().getCommonCards().getAllCards(c);
             for (PaperCard pc : clones) {
                 if (c.getEdition().equalsIgnoreCase(pc.getEdition())) {
                     continue;
@@ -197,9 +197,6 @@ public abstract class ImageFetcher {
                 filename = TextUtil.fastReplace(filename, ".full", ".artcrop");
             }
 
-            if (ImageKeys.missingCards.contains(filename))
-                return;
-
             boolean updateLink = false;
             if ("back".equals(face)) { // Seems getimage relative path don't process variants for back faces.
                 try {
@@ -224,7 +221,7 @@ public abstract class ImageFetcher {
                     }
                     downloadUrls.add(setDownload.toString());
                 } else {
-                    List<PaperCard> clones = StaticData.instance().getCommonCards().getAllCardsNoAlt(paperCard.getName());
+                    List<PaperCard> clones = StaticData.instance().getCommonCards().getAllCards(paperCard);
                     for (PaperCard pc : clones) {
                         if (clones.size() > 1) {//clones only
                             if (!paperCard.getEdition().equalsIgnoreCase(pc.getEdition())) {
@@ -239,8 +236,11 @@ public abstract class ImageFetcher {
             final String cardCollectorNumber = paperCard.getCollectorNumber();
  
             if (cardCollectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER)) {
-                System.out.println("Card " + paperCard.getName() + " does not have a collector number, skipping scryfall download.");
-                ImageKeys.missingCards.add(filename);
+                if (!ImageKeys.missingCards.contains(filename)) {
+                    System.out.println("Card " + paperCard.getName() + " does not have a collector number, skipping scryfall download.");
+                    ImageKeys.missingCards.add(filename);
+                }
+                
                 return;
             }
 

@@ -567,6 +567,37 @@ public class ComputerUtilCard {
         return getMostExpensivePermanentAI(list);
     }
 
+    public static Card getBestRemovalTargetAI(final Player ai, final Iterable<Card> list) {
+        if (Iterables.isEmpty(list)) {
+            return null;
+        }
+        return Aggregates.itemWithMax(list, c -> evaluateRemovalTargetPriority(ai, c));
+    }
+
+    private static int evaluateRemovalTargetPriority(final Player ai, final Card c) {
+        int value;
+        if (c.isCreature()) {
+            value = evaluateCreature(c);
+        } else if (c.isLand()) {
+            value = evaluateLandRemovalPriority(ai, c, null, false);
+        } else {
+            value = 50 + 30 * c.getCMC();
+            if (c.isPlaneswalker()) {
+                value += c.getCounters(CounterEnumType.LOYALTY) * 10;
+            }
+        }
+
+        // tokens are slightly better since they'll be gone forever
+        if (c.isToken()) {
+            value += 30;
+        }
+
+        if (c.getController().isOpponentOf(ai)) {
+            value += ComputerUtil.evaluateBoardPosition(ai, c.getController()) / 4;
+        }
+        return value;
+    }
+
     /**
      * getBestCreatureAI.
      *
@@ -606,36 +637,6 @@ public class ComputerUtilCard {
             return Iterables.get(list, 0);
         }
         return Aggregates.itemWithMin(IterableUtil.filter(list, CardPredicates.CREATURES), ComputerUtilCard.creatureEvaluator);
-    }
-
-    // This selection rates tokens higher
-
-    /**
-     * <p>
-     * getBestCreatureToBounceAI.
-     * </p>
-     *
-     * @param list
-     * @return a {@link forge.game.card.Card} object.
-     */
-    public static Card getBestCreatureToBounceAI(final Iterable<Card> list) {
-        if (Iterables.size(list) == 1) {
-            return Iterables.get(list, 0);
-        }
-        final int tokenBonus = 60;
-        Card biggest = null;
-        int biggestvalue = -1;
-
-        for (Card card : CardLists.filter(list, CardPredicates.CREATURES)) {
-            int newvalue = evaluateCreature(card);
-            newvalue += card.isToken() ? tokenBonus : 0; // raise the value of tokens
-
-            if (biggestvalue < newvalue) {
-                biggest = card;
-                biggestvalue = newvalue;
-            }
-        }
-        return biggest;
     }
 
     // For ability of Oracle en-Vec, return the first card that are going to attack next turn

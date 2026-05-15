@@ -53,12 +53,10 @@ public class VDock implements IVDoc<CDock> {
     private final DragTab tab = new DragTab(localizer.getMessage("lblDock"));
     // Dock button instances
     private final DockButton btnConcede = new DockButton(FSkin.getIcon(FSkinProp.ICO_CONCEDE), localizer.getMessage("lblConcedeGame"));
-    private final DockButton btnSettings = new DockButton(FSkin.getIcon(FSkinProp.ICO_SETTINGS), localizer.getMessage("lblGameSettings"));
+    private final DockButton btnSettings = new DockButton(FSkin.getIcon(FSkinProp.ICO_SETTINGS), localizer.getMessage("lblYieldSettings"));
     private final DockButton btnEndTurn = new DockButton(FSkin.getIcon(FSkinProp.ICO_ENDTURN), localizer.getMessage("lblEndTurn"));
     private final DockButton btnViewDeckList = new DockButton(FSkin.getIcon(FSkinProp.ICO_DECKLIST), localizer.getMessage("lblViewDeckList"));
-    private final DockButton btnRevertLayout = new DockButton(FSkin.getIcon(FSkinProp.ICO_REVERTLAYOUT), localizer.getMessage("lblRevertLayout"));
-    private final DockButton btnOpenLayout = new DockButton(FSkin.getIcon(FSkinProp.ICO_OPENLAYOUT), localizer.getMessage("lblOpenLayout"));
-    private final DockButton btnSaveLayout = new DockButton(FSkin.getIcon(FSkinProp.ICO_SAVELAYOUT), localizer.getMessage("lblSaveLayout"));
+    private final DockButton btnAutoPass = new DockButton(FSkin.getIcon(FSkinProp.ICO_AUTOPASS), localizer.getMessage("lblYieldBtnAutoPassTooltip"));
     private final DockButton btnAlphaStrike = new DockButton(FSkin.getIcon(FSkinProp.ICO_ALPHASTRIKE), localizer.getMessage("lblAlphaStrike"));
     private final FLabel btnTargeting = new FLabel.Builder().icon(FSkin.getIcon(FSkinProp.ICO_ARCSOFF))
                 .hoverable(true).iconInBackground(true).iconScaleFactor(1.0).build();
@@ -82,19 +80,15 @@ public class VDock implements IVDoc<CDock> {
     public void populate() {
         btnTargeting.setFocusable(false); // don't let the targeting arc switcher get focus
         final JPanel pnl = parentCell.getBody();
-        // Mig layout does not support wrapping!
-        // http://stackoverflow.com/questions/5715833/how-do-you-make-miglayout-behave-like-wrap-layout
         pnl.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 
-        pnl.add(btnConcede);
-        //pnl.add(btnSettings);
+        pnl.add(btnAutoPass);
+        pnl.add(btnSettings);
         pnl.add(btnEndTurn);
-        pnl.add(btnViewDeckList);
-        pnl.add(btnRevertLayout);
-        pnl.add(btnOpenLayout);
-        pnl.add(btnSaveLayout);
         pnl.add(btnAlphaStrike);
         pnl.add(btnTargeting);
+        pnl.add(btnViewDeckList);
+        pnl.add(btnConcede);
     }
 
     /* (non-Javadoc)
@@ -155,16 +149,8 @@ public class VDock implements IVDoc<CDock> {
         return btnViewDeckList;
     }
 
-    public DockButton getBtnRevertLayout() {
-        return btnRevertLayout;
-    }
-
-    public DockButton getBtnOpenLayout() {
-        return btnOpenLayout;
-    }
-
-    public DockButton getBtnSaveLayout() {
-        return btnSaveLayout;
+    public DockButton getBtnAutoPass() {
+        return btnAutoPass;
     }
 
     public DockButton getBtnAlphaStrike() {
@@ -184,9 +170,11 @@ public class VDock implements IVDoc<CDock> {
     public class DockButton extends SkinnedLabel implements ILocalRepaint {
         private final SkinImage img;
         private final SkinColor hoverBG = FSkin.getColor(FSkin.Colors.CLR_HOVER);
+        private final Color toggledBG = new Color(218, 165, 32);
         private final Color defaultBG = new Color(0, 0, 0, 0);
         private final Color defaultBorderColor = new Color(0, 0, 0, 0);
         private UiCommand command;
+        private boolean toggled;
         private int w, h;
 
         /**
@@ -233,6 +221,11 @@ public class VDock implements IVDoc<CDock> {
             this.command = command0;
         }
 
+        public void setToggled(final boolean t) {
+            this.toggled = t;
+            repaintSelf();
+        }
+
         @Override
         public void repaintSelf() {
             final Dimension d = getSize();
@@ -248,10 +241,15 @@ public class VDock implements IVDoc<CDock> {
         public void paintComponent(final Graphics g) {
             this.w = this.getWidth();
             this.h = this.getHeight();
-            g.setColor(this.getBackground());
+            final boolean highlighted = this.toggled || this.getSkin().getBackground() == this.hoverBG;
+            if (this.toggled) {
+                g.setColor(this.toggledBG);
+            } else {
+                g.setColor(this.getBackground());
+            }
             g.fillRect(0, 0, this.w, this.h);
 
-            if (this.getSkin().getBackground() == this.hoverBG) {
+            if (highlighted) {
                 FSkin.setGraphicsColor(g, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
             }
             else {

@@ -267,6 +267,7 @@ public enum FSkinProp {
     ICO_ARCSOFF      (new int[] {240, 800, 80, 80}, PropType.ICON),
     ICO_ARCSON       (new int[] {320, 800, 80, 80}, PropType.ICON),
     ICO_ARCSHOVER    (new int[] {400, 800, 80, 80}, PropType.ICON),
+    ICO_AUTOPASS     (new int[] {400, 720, 80, 80}, PropType.ICON),
 
     //choice-search-misc
     ICO_HDCHOICE     (new int[] {2, 1792, 128, 128}, PropType.BUTTONS),
@@ -367,6 +368,7 @@ public enum FSkinProp {
 
     ICO_CLOSE           (new int[] {640, 640, 20, 20}, PropType.ICON),
     ICO_LIST            (new int[] {640, 660, 20, 20}, PropType.ICON),
+    ICO_CLIPBOARD       (new int[] {640, 700, 20, 20}, PropType.ICON),
     ICO_CARD_IMAGE      (new int[] {660, 660, 20, 20}, PropType.ICON),
 
     ICO_FOLDER          (new int[] {640, 680, 20, 20}, PropType.ICON),

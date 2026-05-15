@@ -1630,7 +1630,7 @@
   },
     {
     "name": "Gingerboots",
-    "description": "1/1 artifact with hate, pay 1 to give semi-unblockable, pay 2 to eat food for 3 life",
+    "description": "1/1 artifact with haste, pay 1 to give semi-unblockable, pay 2 to eat food for 3 life",
     "equipmentSlot": "Boots",
     "iconName": "Gingerboots",
     "effect": {

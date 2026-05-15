@@ -10,7 +10,6 @@ import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.match.YieldUpdate;
-import forge.gui.GuiBase;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.IGameController;
 import forge.localinstance.skin.FSkinProp;
@@ -64,7 +63,7 @@ public enum ProtocolMethod implements IHasForgeLog {
     chooseEntitiesForEffect(Mode.SERVER, List.class, String.class, List.class, Integer.TYPE, Integer.TYPE, DelayedReveal.class),
     manipulateCardList   (Mode.SERVER, List.class, String.class, Iterable.class, Iterable.class, Boolean.TYPE, Boolean.TYPE, Boolean.TYPE),
     setCard             (Mode.SERVER, Void.TYPE, CardView.class),
-    setSelectables      (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class),
+    setSelectables      (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class, Integer.TYPE, Integer.TYPE),
     clearSelectables    (Mode.SERVER, Void.TYPE),
     // TODO case "setPlayerAvatar":
     openZones           (Mode.SERVER, PlayerZoneUpdates.class, PlayerView.class, Collection/*ZoneType*/.class, Map/*PlayerView,Object*/.class, Boolean.TYPE),
@@ -88,7 +87,6 @@ public enum ProtocolMethod implements IHasForgeLog {
     selectButtonOk            (Mode.CLIENT, Void.TYPE),
     selectButtonCancel        (Mode.CLIENT, Void.TYPE),
     selectAbility             (Mode.CLIENT, Void.TYPE, SpellAbilityView.class),
-    passPriorityUntilEndOfTurn(Mode.CLIENT, Void.TYPE),
     passPriority              (Mode.CLIENT, Void.TYPE),
     nextGameDecision          (Mode.CLIENT, Void.TYPE, NextGameDecision.class),
     getActivateDescription    (Mode.CLIENT, String.class, CardView.class),
@@ -157,9 +155,6 @@ public enum ProtocolMethod implements IHasForgeLog {
     }
 
     public void checkArgs(final Object[] args) {
-        if(!GuiBase.hasPropertyConfig())
-            return; //if the experimental network option is enabled, then check the args, else let the default decoder handle it
-
         try {
             for (int iArg = 0; iArg < args.length; iArg++) {
                 final Object arg = args[iArg];
