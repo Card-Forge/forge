@@ -68,6 +68,22 @@ public class CardRenderer {
         BehindVert
     }
 
+    private static final Color DEFAULT_ACTIONABLE_HIGHLIGHT_COLOR = FSkinColor.fromRGB(0x66, 0xCC, 0xFF);
+
+    /** Pref is normalized to 6 hex chars on the write side; this just parses. */
+    private static Color parseActionableHighlightColor() {
+        String s = FModel.getPreferences().getPref(FPref.UI_ACTIONABLE_HIGHLIGHT_COLOR);
+        if (s == null || s.length() != 6) return DEFAULT_ACTIONABLE_HIGHLIGHT_COLOR;
+        try {
+            int r = Integer.parseInt(s.substring(0, 2), 16);
+            int gr = Integer.parseInt(s.substring(2, 4), 16);
+            int b = Integer.parseInt(s.substring(4, 6), 16);
+            return FSkinColor.fromRGB(r, gr, b);
+        } catch (NumberFormatException e) {
+            return DEFAULT_ACTIONABLE_HIGHLIGHT_COLOR;
+        }
+    }
+
     // class that simplifies the callback logic of CachedCardImage
     static class RendererCachedCardImage extends CachedCardImage {
         boolean clearcardArtCache = false;
@@ -817,8 +833,8 @@ public class CardRenderer {
             g.drawRect(BORDER_THICKNESS, Color.MAGENTA, cx, cy, cw, ch);
         } else if (!unselectable && FModel.getPreferences().getPrefBoolean(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS)
                 && MatchController.instance.isWeaklySelectable(card)) {
-            // Light blue soft outline for cards the player can currently act on.
-            g.drawRect(BORDER_THICKNESS, FSkinColor.fromRGB(0x66, 0xCC, 0xFF), cx, cy, cw, ch);
+            // User-configurable RGB hex outline for cards the player can currently act on; defaults to 66CCFF.
+            g.drawRect(BORDER_THICKNESS, parseActionableHighlightColor(), cx, cy, cw, ch);
         }
         //Ability Icons
         if (unselectable) {

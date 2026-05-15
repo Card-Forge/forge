@@ -91,6 +91,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbScaleLarger = new OptionsCheckBox(localizer.getMessage("cbScaleLarger"));
     private final JCheckBox cbRenderBlackCardBorders = new OptionsCheckBox(localizer.getMessage("cbRenderBlackCardBorders"));
     private final JCheckBox cbShowActionableHighlights = new OptionsCheckBox(localizer.getMessage("cbShowActionableHighlights"));
+    private final FTextField txtActionableHighlightColor = new FTextField.Builder().ghostText("66CCFF").maxLength(8).build();
     private final JCheckBox cbLargeCardViewers = new OptionsCheckBox(localizer.getMessage("cbLargeCardViewers"));
     private final JCheckBox cbSmallDeckViewer = new OptionsCheckBox(localizer.getMessage("cbSmallDeckViewer"));
     private final JCheckBox cbDisplayFoil = new OptionsCheckBox(localizer.getMessage("cbDisplayFoil"));
@@ -410,6 +411,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbShowActionableHighlights, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlShowActionableHighlights")), descriptionConstraints);
+
+        pnlPrefs.add(getActionableHighlightColorPanel(), titleConstraints + ", h 26px!");
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlActionableHighlightColor")), descriptionConstraints);
 
         pnlPrefs.add(cbLargeCardViewers, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlLargeCardViewers")), descriptionConstraints);
@@ -824,6 +828,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         return cbShowActionableHighlights;
     }
 
+    /** @return text field holding the hex color for actionable highlights */
+    public FTextField getTxtActionableHighlightColor() {
+        return txtActionableHighlightColor;
+    }
+
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbLargeCardViewers() {
         return cbLargeCardViewers;
@@ -1147,6 +1156,15 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         FLabel lbl = new FLabel.Builder().text(localizer.getMessage("lblPlayerName") +": ").fontSize(12).fontStyle(Font.BOLD).build();
         p.add(lbl, "aligny top, h 100%, gap 4px 0 0 0");
         p.add(btnPlayerName, "aligny top, h 100%, w 200px!");
+        return p;
+    }
+
+    private JPanel getActionableHighlightColorPanel() {
+        JPanel p = new JPanel(new MigLayout("insets 0, gap 0!"));
+        p.setOpaque(false);
+        FLabel lbl = new FLabel.Builder().text(localizer.getMessage("lblActionableHighlightColor") + ": ").fontSize(12).fontStyle(Font.BOLD).build();
+        p.add(lbl, "aligny top, h 100%, gap 4px 0 0 0");
+        p.add(txtActionableHighlightColor, "aligny top, h 100%, w 120px!");
         return p;
     }
 

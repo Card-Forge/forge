@@ -257,6 +257,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.UI_SHOW_ACTIONABLE_HIGHLIGHTS,
             Forge.getLocalizer().getMessage("cbShowActionableHighlights"),
             Forge.getLocalizer().getMessage("nlShowActionableHighlights")), 1);
+        lstSettings.addItem(new HexColorSetting(FPref.UI_ACTIONABLE_HIGHLIGHT_COLOR,
+            Forge.getLocalizer().getMessage("lblActionableHighlightColor"),
+            Forge.getLocalizer().getMessage("nlActionableHighlightColor"),
+            "66CCFF"), 1);
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_ALLOW_ORDER_GRAVEYARD_WHEN_NEEDED,
             Forge.getLocalizer().getMessage("lblOrderGraveyard"),
             Forge.getLocalizer().getMessage("nlOrderGraveyard"),
@@ -1035,6 +1039,52 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 value = "";
             }
             g.drawText(value, font, color, x, y, w, h, false, Align.right, false);
+        }
+    }
+
+    /** Text input that accepts an RGB hex with optional # or 0x prefix and persists the 6-char uppercase form. */
+    private class HexColorSetting extends Setting {
+        private final String defaultValue;
+
+        public HexColorSetting(FPref pref0, String label0, String description0, String defaultValue0) {
+            super(pref0, label0 + ":", description0);
+            this.defaultValue = defaultValue0;
+        }
+
+        @Override
+        public void select() {
+            String currentValue = FModel.getPreferences().getPref((FPref) pref);
+            if (currentValue == null || currentValue.isEmpty()) currentValue = defaultValue;
+            FOptionPane.showInputDialog(
+                    label,
+                    description,
+                    currentValue,
+                    null,
+                    input -> {
+                        if (input == null) return;
+                        String normalized = normalizeHexColor(input);
+                        if (normalized == null) {
+                            FOptionPane.showMessageDialog("Please enter a 6-digit RGB hex (e.g. 66CCFF).", "Invalid Color");
+                            return;
+                        }
+                        FModel.getPreferences().setPref((FPref) pref, normalized);
+                        FModel.getPreferences().save();
+                    },
+                    false
+            );
+        }
+
+        @Override
+        public void drawPrefValue(Graphics g, FSkinFont font, FSkinColor color, float x, float y, float w, float h) {
+            String value = FModel.getPreferences().getPref((FPref) pref);
+            g.drawText(value, font, color, x, y, w, h, false, Align.right, false);
+        }
+
+        private String normalizeHexColor(String raw) {
+            if (raw == null) return null;
+            String s = raw.trim();
+            if (s.length() != 6 || !s.matches("[0-9A-Fa-f]{6}")) return null;
+            return s.toUpperCase();
         }
     }
 
