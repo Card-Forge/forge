@@ -112,3 +112,57 @@ In an AI profile (`.ai` file) or via system property, enable the feature:
 - `DECK_RECOGNITION_SIDECAR_URL=http://localhost:8000`
 
 or launch Forge with `-Dforge.ai.deckRecognition=true`.
+
+The feature is **off by default** and **fail-soft**: if the sidecar is not
+running, Forge logs one debug line and plays normally.
+
+## Project layout
+
+```
+forge-llm-sidecar/
+├─ app/
+│  ├─ main.py                 FastAPI app: /health, /recognize, /metagame
+│  ├─ config.py               Environment-driven configuration
+│  ├─ schema.py               Request/response models + GraphState
+│  ├─ graph.py                LangGraph graph definition
+│  ├─ ollama_client.py        Local LLM client
+│  ├─ nodes/
+│  │  └─ deck_recognition.py  The deck-recognition graph node
+│  └─ knowledge/
+│     ├─ metagame.py          Runtime loader for scraped metagame data
+│     ├─ scraper.py           MTGGoldfish scraper (CI only)
+│     ├─ format_detect.py     Scryfall-based format detection
+│     ├─ loader.py            Curated archetype knowledge base
+│     ├─ archetypes/          Hand-curated archetype detail (strategy/tells)
+│     └─ metagame_data/       Scraped metagame JSON (refreshed weekly by CI)
+├─ scripts/
+│  └─ scrape_metagame.py      CLI run by the update-metagame GitHub Action
+├─ tests/
+└─ docs/
+```
+
+## Documentation
+
+- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — components, request flow, the
+  graph, the metagame pipeline, failure behavior.
+- [docs/API.md](docs/API.md) — full HTTP contract for every endpoint.
+- [docs/EXTENDING.md](docs/EXTENDING.md) — how to add a new graph node.
+
+## Tests
+
+```sh
+pip install -e ".[dev]"
+pytest
+```
+
+Tests stub the LLM and Scryfall calls, so they run fully offline.
+
+## Troubleshooting
+
+| Symptom | Likely cause / fix |
+|---|---|
+| No deck guesses appear in Forge's game log | Feature not enabled, or sidecar unreachable — check `GET /health`. |
+| `/health` shows `"ollama_reachable": false` | Ollama is not running, or `OLLAMA_URL` is wrong. |
+| Guesses are always `"Unknown"` | The model call is failing — check the sidecar log and that `MODEL_NAME` is pulled (`ollama list`). |
+| `/metagame` returns `count: 0` | Metagame data missing — run `python scripts/scrape_metagame.py`. |
+| Wrong format detected | Scryfall lookup failed or the deck is off-meta — falls back to `DEFAULT_META_FORMAT`. |
