@@ -1,4 +1,5 @@
 """Graph + knowledge tests. Network calls (LLM, Scryfall) are stubbed out."""
+
 import pytest
 
 from app.graph import get_graph
@@ -23,10 +24,22 @@ def sample_state():
         "format": "Constructed",
         "turn": 3,
         "observations": [
-            {"turn": 1, "event": "land", "card": "Steam Vents", "cmc": 0,
-             "colors": ["U", "R"], "types": ["Land"]},
-            {"turn": 2, "event": "spell", "card": "Monastery Swiftspear",
-             "cmc": 1, "colors": ["R"], "types": ["Creature"]},
+            {
+                "turn": 1,
+                "event": "land",
+                "card": "Steam Vents",
+                "cmc": 0,
+                "colors": ["U", "R"],
+                "types": ["Land"],
+            },
+            {
+                "turn": 2,
+                "event": "spell",
+                "card": "Monastery Swiftspear",
+                "cmc": 1,
+                "colors": ["R"],
+                "types": ["Creature"],
+            },
         ],
         "deck_cards": ["Lightning Bolt", "Ragavan, Nimble Pilferer"],
         "alternatives": [],
@@ -36,8 +49,12 @@ def sample_state():
 @pytest.mark.asyncio
 async def test_graph_returns_archetype(monkeypatch, sample_state):
     async def fake_generate_json(prompt, system=None):
-        return {"archetype": "Boros Energy", "confidence": 0.8,
-                "reasoning": "Aggressive red cards.", "alternatives": []}
+        return {
+            "archetype": "Boros Energy",
+            "confidence": 0.8,
+            "reasoning": "Aggressive red cards.",
+            "alternatives": [],
+        }
 
     monkeypatch.setattr(deck_recognition, "generate_json", fake_generate_json)
     result = await get_graph().ainvoke(sample_state)
@@ -49,8 +66,7 @@ async def test_graph_returns_archetype(monkeypatch, sample_state):
 @pytest.mark.asyncio
 async def test_confidence_is_clamped(monkeypatch, sample_state):
     async def fake_generate_json(prompt, system=None):
-        return {"archetype": "Boros Energy", "confidence": 5,
-                "reasoning": "", "alternatives": []}
+        return {"archetype": "Boros Energy", "confidence": 5, "reasoning": "", "alternatives": []}
 
     monkeypatch.setattr(deck_recognition, "generate_json", fake_generate_json)
     result = await get_graph().ainvoke(sample_state)
@@ -60,8 +76,12 @@ async def test_confidence_is_clamped(monkeypatch, sample_state):
 @pytest.mark.asyncio
 async def test_unknown_archetype_confidence_capped(monkeypatch, sample_state):
     async def fake_generate_json(prompt, system=None):
-        return {"archetype": "Totally Made Up Brew", "confidence": 0.9,
-                "reasoning": "", "alternatives": []}
+        return {
+            "archetype": "Totally Made Up Brew",
+            "confidence": 0.9,
+            "reasoning": "",
+            "alternatives": [],
+        }
 
     monkeypatch.setattr(deck_recognition, "generate_json", fake_generate_json)
     result = await get_graph().ainvoke(sample_state)
@@ -75,8 +95,7 @@ async def test_metagame_reaches_the_prompt(monkeypatch, sample_state):
 
     async def fake_generate_json(prompt, system=None):
         captured["prompt"] = prompt
-        return {"archetype": "Boros Energy", "confidence": 0.7,
-                "reasoning": "", "alternatives": []}
+        return {"archetype": "Boros Energy", "confidence": 0.7, "reasoning": "", "alternatives": []}
 
     monkeypatch.setattr(deck_recognition, "generate_json", fake_generate_json)
     await get_graph().ainvoke(sample_state)
@@ -101,12 +120,24 @@ def test_resolve_meta_format():
 @pytest.mark.asyncio
 async def test_format_detect_narrowest(monkeypatch):
     """A card pool legal only in Legacy should resolve to 'legacy'."""
-    format_detect._legalities_cache.update({
-        "Brainstorm": {"standard": "not_legal", "pioneer": "not_legal",
-                       "modern": "not_legal", "legacy": "legal", "vintage": "legal"},
-        "Ponder": {"standard": "not_legal", "pioneer": "not_legal",
-                   "modern": "not_legal", "legacy": "legal", "vintage": "legal"},
-    })
+    format_detect._legalities_cache.update(
+        {
+            "Brainstorm": {
+                "standard": "not_legal",
+                "pioneer": "not_legal",
+                "modern": "not_legal",
+                "legacy": "legal",
+                "vintage": "legal",
+            },
+            "Ponder": {
+                "standard": "not_legal",
+                "pioneer": "not_legal",
+                "modern": "not_legal",
+                "legacy": "legal",
+                "vintage": "legal",
+            },
+        }
+    )
 
     async def no_fetch(names):
         return None
@@ -116,8 +147,14 @@ async def test_format_detect_narrowest(monkeypatch):
 
 
 def test_merge_keeps_unmatched_curated():
-    live = [{"name": "Boros Energy", "meta_share": 18.2, "colors": ["W", "R"],
-             "signature_cards": ["Ragavan, Nimble Pilferer"]}]
+    live = [
+        {
+            "name": "Boros Energy",
+            "meta_share": 18.2,
+            "colors": ["W", "R"],
+            "signature_cards": ["Ragavan, Nimble Pilferer"],
+        }
+    ]
     curated = loader.get_archetypes("modern")
     merged = loader.merge_with_curated(live, curated)
     names = {a["name"] for a in merged}

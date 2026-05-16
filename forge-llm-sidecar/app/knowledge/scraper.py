@@ -8,6 +8,7 @@ runtime (see :mod:`app.knowledge.metagame`).
 The parser (:func:`parse_metagame_page`) is isolated so it can be adjusted if
 MTGGoldfish changes its markup.
 """
+
 from __future__ import annotations
 
 import logging
@@ -33,8 +34,9 @@ _COLOR_ICONS = {"ms-w": "W", "ms-u": "U", "ms-b": "B", "ms-r": "R", "ms-g": "G"}
 def fetch_format(slug: str, *, timeout: float = 20.0) -> list[dict]:
     """Scrape one format's metagame page. Raises httpx.HTTPError on failure."""
     url = _URL_TEMPLATE.format(slug=slug)
-    with httpx.Client(timeout=timeout, headers={"User-Agent": _USER_AGENT},
-                      follow_redirects=True) as client:
+    with httpx.Client(
+        timeout=timeout, headers={"User-Agent": _USER_AGENT}, follow_redirects=True
+    ) as client:
         resp = client.get(url)
         resp.raise_for_status()
     archetypes = parse_metagame_page(resp.text)
@@ -64,12 +66,14 @@ def parse_metagame_page(html: str) -> list[dict]:
             continue
         seen.add(key)
 
-        results.append({
-            "name": name,
-            "meta_share": _parse_share(tile),
-            "colors": _parse_colors(tile),
-            "signature_cards": _parse_signature_cards(tile),
-        })
+        results.append(
+            {
+                "name": name,
+                "meta_share": _parse_share(tile),
+                "colors": _parse_colors(tile),
+                "signature_cards": _parse_signature_cards(tile),
+            }
+        )
 
     return results
 

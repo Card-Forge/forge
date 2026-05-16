@@ -4,6 +4,7 @@ There is no live metagame feed for an offline simulator, so these bundled JSON
 files *are* the "current metagame" knowledge. They are keyed by Forge's
 ``GameType`` name (lower-cased); ``_default.json`` is the fallback.
 """
+
 from __future__ import annotations
 
 import functools
@@ -17,7 +18,7 @@ _ARCHETYPE_DIR = Path(__file__).parent / "archetypes"
 _DEFAULT_KEY = "_default"
 
 
-@functools.lru_cache(maxsize=None)
+@functools.cache
 def _load_file(key: str) -> list[dict]:
     path = _ARCHETYPE_DIR / f"{key}.json"
     if not path.exists():
@@ -40,9 +41,7 @@ def get_archetypes(game_format: str) -> list[dict]:
 
 
 def available_formats() -> list[str]:
-    return sorted(
-        p.stem for p in _ARCHETYPE_DIR.glob("*.json") if p.stem != _DEFAULT_KEY
-    )
+    return sorted(p.stem for p in _ARCHETYPE_DIR.glob("*.json") if p.stem != _DEFAULT_KEY)
 
 
 def _norm(name: str) -> str:

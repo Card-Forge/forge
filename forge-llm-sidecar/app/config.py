@@ -1,4 +1,5 @@
 """Environment-driven configuration for the sidecar."""
+
 from __future__ import annotations
 
 import os
@@ -22,7 +23,7 @@ class Config:
     format_detect_enable: bool
 
     @staticmethod
-    def from_env() -> "Config":
+    def from_env() -> Config:
         return Config(
             ollama_url=os.environ.get("OLLAMA_URL", "http://localhost:11434"),
             model_name=os.environ.get("MODEL_NAME", "llama3.1:8b"),

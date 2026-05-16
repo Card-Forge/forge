@@ -9,6 +9,7 @@ Run weekly by the ``update-metagame`` GitHub Action; can also be run by hand:
 Output: ``app/knowledge/metagame_data/<format>.json``. The sidecar loads these
 committed files at startup — it never scrapes at request time.
 """
+
 from __future__ import annotations
 
 import datetime as dt

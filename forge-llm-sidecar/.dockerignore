@@ -1,0 +1,16 @@
+# Only the package itself is needed in the image.
+.git/
+.github/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+tests/
+docs/
+scripts/
+*.md

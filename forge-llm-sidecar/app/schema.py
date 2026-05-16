@@ -1,7 +1,8 @@
 """Request/response models and the LangGraph state schema."""
+
 from __future__ import annotations
 
-from typing import Optional, TypedDict
+from typing import TypedDict
 
 from pydantic import BaseModel, Field
 
@@ -51,10 +52,10 @@ class GraphState(TypedDict, total=False):
     observations: list[dict]
     deck_cards: list[str]
     # resolved by the deck_recognition node
-    resolved_format: Optional[str]
+    resolved_format: str | None
     candidate_archetypes: list[dict]
     # outputs of the deck_recognition node
-    archetype: Optional[str]
-    confidence: Optional[float]
-    reasoning: Optional[str]
+    archetype: str | None
+    confidence: float | None
+    reasoning: str | None
     alternatives: list[str]

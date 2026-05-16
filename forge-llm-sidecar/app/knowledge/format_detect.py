@@ -8,6 +8,7 @@ Fully fail-soft: any network/parse error returns ``None`` and callers fall back
 to a default format. Per-card legalities are cached for the process lifetime,
 so repeated cards across calls cost nothing.
 """
+
 from __future__ import annotations
 
 import asyncio
@@ -34,7 +35,7 @@ _legalities_cache: dict[str, dict] = {}
 
 def _chunks(items: list[str], size: int):
     for i in range(0, len(items), size):
-        yield items[i:i + size]
+        yield items[i : i + size]
 
 
 async def _fetch_legalities(names: list[str]) -> None:

@@ -3,6 +3,7 @@
 Given the game format and the opponent's observed plays, ask the local LLM to
 identify the most likely deck archetype, scored against the current metagame.
 """
+
 from __future__ import annotations
 
 import json
@@ -121,10 +122,7 @@ async def deck_recognition_node(state: GraphState) -> GraphState:
 
     curated = loader.get_archetypes(slug) or loader.get_archetypes(state.get("format", ""))
     live = metagame.get_metagame(slug) if CONFIG.metagame_enable else []
-    if live:
-        archetypes = loader.merge_with_curated(live, curated)
-    else:
-        archetypes = curated
+    archetypes = loader.merge_with_curated(live, curated) if live else curated
     state["candidate_archetypes"] = archetypes
     known_names = {a.get("name", "") for a in archetypes}
 

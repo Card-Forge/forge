@@ -1,4 +1,5 @@
 """Thin async wrapper around a local Ollama server."""
+
 from __future__ import annotations
 
 import json

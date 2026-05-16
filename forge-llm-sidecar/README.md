@@ -37,6 +37,18 @@ pip install -e .
 uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
 
+### Run with Docker
+
+```sh
+docker build -t forge-llm-sidecar .
+docker run -p 8000:8000 \
+  -e OLLAMA_URL=http://host.docker.internal:11434 \
+  forge-llm-sidecar
+```
+
+The image is also published to GHCR by CI on every push to `master`:
+`ghcr.io/<owner>/forge/forge-llm-sidecar:latest`.
+
 ## Configuration (environment variables)
 
 | Variable               | Default                  | Meaning                                               |
@@ -148,14 +160,28 @@ forge-llm-sidecar/
 - [docs/API.md](docs/API.md) — full HTTP contract for every endpoint.
 - [docs/EXTENDING.md](docs/EXTENDING.md) — how to add a new graph node.
 
-## Tests
+## Development
 
 ```sh
 pip install -e ".[dev]"
-pytest
+
+ruff check .        # lint
+black --check .     # formatting check  (drop --check to auto-format)
+pytest              # tests (LLM + Scryfall calls are stubbed — fully offline)
 ```
 
-Tests stub the LLM and Scryfall calls, so they run fully offline.
+Lint, formatting, and tooling config live in `pyproject.toml`
+(`[tool.ruff]`, `[tool.black]`, `[tool.pytest.ini_options]`).
+
+## CI/CD
+
+Two GitHub Actions workflows cover the sidecar:
+
+- **`sidecar-ci.yml`** — on every push / PR touching `forge-llm-sidecar/**`:
+  runs ruff, `black --check`, and pytest, then builds the Docker image.
+  On `master` the image is published to GHCR. (PR/branch builds do not push.)
+- **`update-metagame.yml`** — weekly: re-scrapes the metagame and commits
+  refreshed `metagame_data/*.json`.
 
 ## Troubleshooting
 

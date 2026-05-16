@@ -8,6 +8,7 @@ NO network scraping on the request path.
 Each ``metagame_data/<slug>.json`` holds the current archetype breakdown for a
 format (name, meta share %, colors, signature cards).
 """
+
 from __future__ import annotations
 
 import functools
@@ -43,7 +44,7 @@ def resolve_meta_format(game_format: str) -> str | None:
     return key if (_DATA_DIR / f"{key}.json").exists() else None
 
 
-@functools.lru_cache(maxsize=None)
+@functools.cache
 def _load(slug: str) -> dict:
     path = _DATA_DIR / f"{slug}.json"
     if not path.exists():

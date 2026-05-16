@@ -1,4 +1,5 @@
 """FastAPI entrypoint for the Forge LLM sidecar."""
+
 from __future__ import annotations
 
 import logging

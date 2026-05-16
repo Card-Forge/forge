@@ -5,6 +5,7 @@ Currently a single node: START -> deck_recognition -> END. Additional nodes
 ``add_edge`` without changing the HTTP contract, because :class:`GraphState`
 is a superset TypedDict.
 """
+
 from __future__ import annotations
 
 import functools
