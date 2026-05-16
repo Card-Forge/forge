@@ -1,0 +1,795 @@
+{
+  "format": "legacy",
+  "source": "mtggoldfish",
+  "updated_at": "2026-05-16T21:39:28+00:00",
+  "archetype_count": 59,
+  "archetypes": [
+    {
+      "name": "Dimir Tempo",
+      "meta_share": 12.9,
+      "colors": [
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Orcish Bowmasters",
+        "Tamiyo, Inquisitive Student",
+        "Thoughtseize"
+      ]
+    },
+    {
+      "name": "Tron",
+      "meta_share": 8.4,
+      "colors": [],
+      "signature_cards": [
+        "Candelabra of Tawnos",
+        "Grim Monolith",
+        "The One Ring"
+      ]
+    },
+    {
+      "name": "Sneak and Show",
+      "meta_share": 8.0,
+      "colors": [
+        "U",
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Sneak Attack",
+        "Lotus Petal",
+        "Show and Tell"
+      ]
+    },
+    {
+      "name": "Izzet Delver",
+      "meta_share": 7.7,
+      "colors": [
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Delver of Secrets",
+        "Cori-Steel Cutter",
+        "Flow State"
+      ]
+    },
+    {
+      "name": "Ocelot Pride Midrange",
+      "meta_share": 6.9,
+      "colors": [
+        "W",
+        "R"
+      ],
+      "signature_cards": [
+        "Ocelot Pride",
+        "Voice of Victory",
+        "Ajani, Nacatl Pariah"
+      ]
+    },
+    {
+      "name": "Oops! All Spells",
+      "meta_share": 6.2,
+      "colors": [
+        "U",
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Balustrade Spy",
+        "Lotus Petal",
+        "Agadeem's Awakening"
+      ]
+    },
+    {
+      "name": "Eldrazi",
+      "meta_share": 4.0,
+      "colors": [
+        "W",
+        "R"
+      ],
+      "signature_cards": [
+        "Lotus Petal",
+        "Chalice of the Void",
+        "Kozilek's Command"
+      ]
+    },
+    {
+      "name": "Lands",
+      "meta_share": 3.6,
+      "colors": [
+        "G"
+      ],
+      "signature_cards": [
+        "Exploration",
+        "Mox Diamond",
+        "Life from the Loam"
+      ]
+    },
+    {
+      "name": "Doomsday",
+      "meta_share": 2.9,
+      "colors": [
+        "U",
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Doomsday",
+        "Tamiyo, Inquisitive Student",
+        "Flow State"
+      ]
+    },
+    {
+      "name": "The EPIC Storm",
+      "meta_share": 2.8,
+      "colors": [
+        "W",
+        "U",
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Burning Wish",
+        "Lion's Eye Diamond",
+        "Mox Opal"
+      ]
+    },
+    {
+      "name": "Painter",
+      "meta_share": 2.4,
+      "colors": [
+        "R"
+      ],
+      "signature_cards": [
+        "Painter's Servant",
+        "Goblin Welder",
+        "Pyroblast"
+      ]
+    },
+    {
+      "name": "Death and Taxes (Yorion) - Black/White",
+      "meta_share": 1.9,
+      "colors": [
+        "W",
+        "B"
+      ],
+      "signature_cards": [
+        "Yorion, Sky Nomad",
+        "Solitude",
+        "Stoneforge Mystic"
+      ]
+    },
+    {
+      "name": "Cradle Control",
+      "meta_share": 1.8,
+      "colors": [
+        "W",
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Badgermole Cub",
+        "Green Sun's Zenith",
+        "Ignoble Hierarch"
+      ]
+    },
+    {
+      "name": "Omni-Tell",
+      "meta_share": 1.6,
+      "colors": [
+        "W",
+        "U",
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Omniscience",
+        "Show and Tell",
+        "Flow State"
+      ]
+    },
+    {
+      "name": "Jeskai Control",
+      "meta_share": 1.6,
+      "colors": [
+        "W",
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Jace, the Mind Sculptor",
+        "Flow State",
+        "Ponder"
+      ]
+    },
+    {
+      "name": "Aluren",
+      "meta_share": 1.6,
+      "colors": [
+        "U",
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Aluren",
+        "Lotus Petal",
+        "Show and Tell"
+      ]
+    },
+    {
+      "name": "Azorius Tempo",
+      "meta_share": 1.5,
+      "colors": [
+        "W",
+        "U"
+      ],
+      "signature_cards": [
+        "Flow State",
+        "Ponder",
+        "Brainstorm"
+      ]
+    },
+    {
+      "name": "Affinity Stompy",
+      "meta_share": 1.5,
+      "colors": [
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Mox Opal",
+        "Lotus Petal",
+        "Urza's Bauble"
+      ]
+    },
+    {
+      "name": "Blue Artifacts",
+      "meta_share": 1.5,
+      "colors": [
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Mox Opal",
+        "Lotus Petal",
+        "Goblin Welder"
+      ]
+    },
+    {
+      "name": "Red Stompy",
+      "meta_share": 1.4,
+      "colors": [
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Chrome Mox",
+        "Chalice of the Void",
+        "Broadside Bombardiers"
+      ]
+    },
+    {
+      "name": "Loam Pox",
+      "meta_share": 0.8,
+      "colors": [
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Mox Diamond",
+        "Orcish Bowmasters",
+        "Thoughtseize"
+      ]
+    },
+    {
+      "name": "LED Dredge",
+      "meta_share": 0.7,
+      "colors": [
+        "U",
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Lion's Eye Diamond",
+        "Cabal Therapy",
+        "Stinkweed Imp"
+      ]
+    },
+    {
+      "name": "Mono Black Midrange",
+      "meta_share": 0.7,
+      "colors": [
+        "W",
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Moonshadow",
+        "Nethergoyf",
+        "Dauthi Voidwalker"
+      ]
+    },
+    {
+      "name": "Selesnya Depths",
+      "meta_share": 0.6,
+      "colors": [
+        "W",
+        "G"
+      ],
+      "signature_cards": [
+        "Dark Depths",
+        "Mox Diamond",
+        "Green Sun's Zenith"
+      ]
+    },
+    {
+      "name": "Esper Control",
+      "meta_share": 0.6,
+      "colors": [
+        "W",
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Ajani, Nacatl Pariah",
+        "Cabal Therapy",
+        "Ponder"
+      ]
+    },
+    {
+      "name": "Creative Technique",
+      "meta_share": 0.6,
+      "colors": [
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Etali, Primal Conqueror",
+        "Trumpeting Carnosaur",
+        "Creative Technique"
+      ]
+    },
+    {
+      "name": "Goblins",
+      "meta_share": 0.6,
+      "colors": [
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Food Chain",
+        "Goblin Lackey",
+        "Hexing Squelcher"
+      ]
+    },
+    {
+      "name": "Cephalid Breakfast",
+      "meta_share": 0.5,
+      "colors": [
+        "W",
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Cephalid Illusionist",
+        "Flow State",
+        "Ponder"
+      ]
+    },
+    {
+      "name": "Azorius Stoneblade",
+      "meta_share": 0.5,
+      "colors": [
+        "W",
+        "U"
+      ],
+      "signature_cards": [
+        "Stoneforge Mystic",
+        "Tamiyo, Inquisitive Student",
+        "Stifle"
+      ]
+    },
+    {
+      "name": "Ruby Storm",
+      "meta_share": 0.5,
+      "colors": [
+        "R"
+      ],
+      "signature_cards": [
+        "Jeska's Will",
+        "Ruby Medallion",
+        "Seething Song"
+      ]
+    },
+    {
+      "name": "Sultai Tempo",
+      "meta_share": 0.5,
+      "colors": [
+        "U",
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Ponder",
+        "Brainstorm",
+        "Fatal Push"
+      ]
+    },
+    {
+      "name": "Ninjas",
+      "meta_share": 0.5,
+      "colors": [
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Yuriko, the Tiger's Shadow",
+        "Orcish Bowmasters",
+        "Tamiyo, Inquisitive Student"
+      ]
+    },
+    {
+      "name": "Stiflenought",
+      "meta_share": 0.5,
+      "colors": [
+        "W",
+        "U"
+      ],
+      "signature_cards": [
+        "Phyrexian Dreadnought",
+        "Daze",
+        "Nulldrifter"
+      ]
+    },
+    {
+      "name": "Death's Shadow",
+      "meta_share": 0.5,
+      "colors": [
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Death's Shadow",
+        "Moonshadow",
+        "Thoughtseize"
+      ]
+    },
+    {
+      "name": "Nic Fit",
+      "meta_share": 0.5,
+      "colors": [
+        "U",
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Veteran Explorer",
+        "Green Sun's Zenith",
+        "Cabal Therapy"
+      ]
+    },
+    {
+      "name": "Dimir Control",
+      "meta_share": 0.4,
+      "colors": [
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Thoughtseize",
+        "Flow State",
+        "Brainstorm"
+      ]
+    },
+    {
+      "name": "Merfolk",
+      "meta_share": 0.4,
+      "colors": [
+        "U"
+      ],
+      "signature_cards": [
+        "Lord of Atlantis",
+        "Aether Vial",
+        "Vodalian Hexcatcher"
+      ]
+    },
+    {
+      "name": "Mystic Forge Combo",
+      "meta_share": 0.4,
+      "colors": [
+        "W"
+      ],
+      "signature_cards": [
+        "Grim Monolith",
+        "The One Ring",
+        "Kozilek's Command"
+      ]
+    },
+    {
+      "name": "8-Cast",
+      "meta_share": 0.4,
+      "colors": [
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Thoughtcast",
+        "Mox Opal",
+        "Lotus Petal"
+      ]
+    },
+    {
+      "name": "Mono-White Stax",
+      "meta_share": 0.4,
+      "colors": [],
+      "signature_cards": [
+        "Mox Diamond",
+        "Grim Monolith",
+        "Trinisphere"
+      ]
+    },
+    {
+      "name": "Jund",
+      "meta_share": 0.4,
+      "colors": [
+        "W",
+        "U",
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Scythecat Cub",
+        "Green Sun's Zenith",
+        "Ignoble Hierarch"
+      ]
+    },
+    {
+      "name": "Beanstalk Control (Non-Yorion)",
+      "meta_share": 0.4,
+      "colors": [
+        "U",
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Brainstorm",
+        "Orcish Bowmasters",
+        "Up the Beanstalk"
+      ]
+    },
+    {
+      "name": "Beanstalk Control (Yorion)",
+      "meta_share": 0.4,
+      "colors": [
+        "W",
+        "U",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Yorion, Sky Nomad",
+        "Force of Negation",
+        "Flow State"
+      ]
+    },
+    {
+      "name": "Necrodominance Combo",
+      "meta_share": 0.3,
+      "colors": [
+        "U",
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Chrome Mox",
+        "Lotus Petal",
+        "Beseech the Mirror"
+      ]
+    },
+    {
+      "name": "Jeskai Tempo",
+      "meta_share": 0.3,
+      "colors": [
+        "W",
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Tamiyo, Inquisitive Student",
+        "Flow State",
+        "Ponder"
+      ]
+    },
+    {
+      "name": "Coveted Jewel Combo",
+      "meta_share": 0.3,
+      "colors": [
+        "U",
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Grim Monolith",
+        "Transmute Artifact",
+        "The One Ring"
+      ]
+    },
+    {
+      "name": "Dimir Reanimator",
+      "meta_share": 0.3,
+      "colors": [
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Atraxa, Grand Unifier",
+        "Reanimate",
+        "Thoughtseize"
+      ]
+    },
+    {
+      "name": "Esper Vial",
+      "meta_share": 0.3,
+      "colors": [
+        "W",
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Aether Vial",
+        "Yorion, Sky Nomad",
+        "Quantum Riddler"
+      ]
+    },
+    {
+      "name": "Grixis Tempo",
+      "meta_share": 0.3,
+      "colors": [
+        "U",
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Delver of Secrets",
+        "Flow State",
+        "Ponder"
+      ]
+    },
+    {
+      "name": "Sultai Depths",
+      "meta_share": 0.3,
+      "colors": [
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Lotus Petal",
+        "Crop Rotation",
+        "Elvish Spirit Guide"
+      ]
+    },
+    {
+      "name": "Death and Taxes (Yorion) - Mono White",
+      "meta_share": 0.3,
+      "colors": [
+        "W"
+      ],
+      "signature_cards": [
+        "Yorion, Sky Nomad",
+        "Solitude",
+        "Stoneforge Mystic"
+      ]
+    },
+    {
+      "name": "Orzhov Stoneblade",
+      "meta_share": 0.3,
+      "colors": [
+        "W",
+        "B"
+      ],
+      "signature_cards": [
+        "Yorion, Sky Nomad",
+        "Solitude",
+        "Stoneforge Mystic"
+      ]
+    },
+    {
+      "name": "4c Depths",
+      "meta_share": 0.2,
+      "colors": [
+        "W",
+        "U",
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Brainstorm",
+        "Swords to Plowshares",
+        "Orcish Bowmasters"
+      ]
+    },
+    {
+      "name": "Infect",
+      "meta_share": 0.2,
+      "colors": [
+        "W",
+        "U",
+        "G"
+      ],
+      "signature_cards": [
+        "Glistener Elf",
+        "Legolas's Quick Reflexes",
+        "Noble Hierarch"
+      ]
+    },
+    {
+      "name": "Jeskai Stoneblade",
+      "meta_share": 0.2,
+      "colors": [
+        "W",
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Stoneforge Mystic",
+        "Ponder",
+        "Brainstorm"
+      ]
+    },
+    {
+      "name": "Blue Cloudpost",
+      "meta_share": 0.2,
+      "colors": [
+        "U"
+      ],
+      "signature_cards": [
+        "Kozilek's Command",
+        "Karn, the Great Creator",
+        "Thundertrap Trainer"
+      ]
+    },
+    {
+      "name": "Boros Initiative",
+      "meta_share": 0.2,
+      "colors": [
+        "W",
+        "R"
+      ],
+      "signature_cards": [
+        "Chrome Mox",
+        "Lotus Petal",
+        "Trinisphere"
+      ]
+    },
+    {
+      "name": "Mono-Black Pox",
+      "meta_share": 0.2,
+      "colors": [
+        "B"
+      ],
+      "signature_cards": [
+        "Orcish Bowmasters",
+        "Sinkhole",
+        "Thoughtseize"
+      ]
+    },
+    {
+      "name": "Temur Delver",
+      "meta_share": 0.2,
+      "colors": [
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Delver of Secrets",
+        "Flow State",
+        "Mishra's Bauble"
+      ]
+    }
+  ]
+}

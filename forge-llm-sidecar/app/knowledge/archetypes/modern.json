@@ -1,0 +1,41 @@
+{
+  "format": "Modern",
+  "note": "Sample Modern archetypes. Edit freely to reflect the current metagame.",
+  "archetypes": [
+    {
+      "name": "Izzet Murktide",
+      "colors": ["U", "R"],
+      "strategy": "Tempo: cheap interaction and cantrips fuel a huge Murktide Regent.",
+      "signature_cards": ["Murktide Regent", "Dragon's Rage Channeler", "Expressive Iteration", "Counterspell"],
+      "tells": ["UR lands", "early cantrips", "delve threats", "cheap counterspells"]
+    },
+    {
+      "name": "Amulet Titan",
+      "colors": ["G", "U"],
+      "strategy": "Combo-ramp: Amulet of Vigor and bounce lands power out Primeval Titan.",
+      "signature_cards": ["Amulet of Vigor", "Primeval Titan", "Azusa, Lost but Seeking", "Urza's Saga"],
+      "tells": ["unusual lands", "Amulet of Vigor turn 1", "extra land drops"]
+    },
+    {
+      "name": "Living End",
+      "colors": ["B", "R", "G"],
+      "strategy": "Cycle creatures into the graveyard, then cascade into Living End.",
+      "signature_cards": ["Living End", "Street Wraith", "Violent Outburst", "Grief"],
+      "tells": ["cycling creatures into graveyard", "no normal early plays", "cascade spells"]
+    },
+    {
+      "name": "Rakdos Scam",
+      "colors": ["B", "R"],
+      "strategy": "Midrange tempo using evoke elementals reanimated for free, plus removal.",
+      "signature_cards": ["Grief", "Fury", "Orcish Bowmasters", "Bloodtithe Harvester"],
+      "tells": ["turn-1 discard via evoke", "efficient removal", "BR lands"]
+    },
+    {
+      "name": "Hammer Time",
+      "colors": ["W"],
+      "strategy": "Aggro: cheaply equip Colossus Hammer onto an evasive creature.",
+      "signature_cards": ["Colossus Hammer", "Sigarda's Aid", "Puresteel Paladin", "Ornithopter"],
+      "tells": ["zero-cost artifact creatures", "equipment", "turn-2 lethal threats"]
+    }
+  ]
+}

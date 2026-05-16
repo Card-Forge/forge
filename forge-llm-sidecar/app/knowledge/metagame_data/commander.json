@@ -1,0 +1,827 @@
+{
+  "format": "commander",
+  "source": "mtggoldfish",
+  "updated_at": "2026-05-16T21:39:36+00:00",
+  "archetype_count": 60,
+  "archetypes": [
+    {
+      "name": "Krenko, Mob Boss",
+      "meta_share": 1.0,
+      "colors": [
+        "R"
+      ],
+      "signature_cards": [
+        "Krenko, Mob Boss",
+        "Skirk Prospector",
+        "Impact Tremors"
+      ]
+    },
+    {
+      "name": "Blech, Loafing Pest",
+      "meta_share": 1.0,
+      "colors": [
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Blech, Loafing Pest",
+        "Beledros Witherbloom",
+        "Pest Infestation"
+      ]
+    },
+    {
+      "name": "Prismari, the Inspiration",
+      "meta_share": 1.0,
+      "colors": [
+        "R",
+        "U"
+      ],
+      "signature_cards": [
+        "Prismari, the Inspiration",
+        "Arcane Signet",
+        "Sol Ring"
+      ]
+    },
+    {
+      "name": "Y'shtola, Night's Blessed",
+      "meta_share": 0.8,
+      "colors": [
+        "B",
+        "U",
+        "W"
+      ],
+      "signature_cards": [
+        "Y'shtola, Night's Blessed",
+        "Sol Ring",
+        "Arcane Signet"
+      ]
+    },
+    {
+      "name": "The Ur-Dragon",
+      "meta_share": 0.8,
+      "colors": [
+        "B",
+        "G",
+        "R",
+        "U",
+        "W"
+      ],
+      "signature_cards": [
+        "The Ur-Dragon",
+        "Sol Ring",
+        "Arcane Signet"
+      ]
+    },
+    {
+      "name": "Witherbloom, the Balancer",
+      "meta_share": 0.8,
+      "colors": [
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Witherbloom, the Balancer",
+        "Llanowar Elves",
+        "Elvish Mystic"
+      ]
+    },
+    {
+      "name": "Dina, Essence Brewer",
+      "meta_share": 0.7,
+      "colors": [
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Dina, Essence Brewer",
+        "Zulaport Cutthroat",
+        "Sakura-Tribe Elder"
+      ]
+    },
+    {
+      "name": "Kaalia of the Vast",
+      "meta_share": 0.7,
+      "colors": [
+        "B",
+        "R",
+        "W"
+      ],
+      "signature_cards": [
+        "Kaalia of the Vast",
+        "Sol Ring",
+        "Arcane Signet"
+      ]
+    },
+    {
+      "name": "Hearthhull, the Worldseed",
+      "meta_share": 0.7,
+      "colors": [
+        "B",
+        "G",
+        "R"
+      ],
+      "signature_cards": [
+        "Hearthhull, the Worldseed",
+        "Farseek",
+        "Braids, Arisen Nightmare"
+      ]
+    },
+    {
+      "name": "Lorehold, the Historian",
+      "meta_share": 0.7,
+      "colors": [
+        "R",
+        "W"
+      ],
+      "signature_cards": [
+        "Lorehold, the Historian",
+        "Sol Ring",
+        "Hit the Mother Lode"
+      ]
+    },
+    {
+      "name": "Zada, Hedron Grinder",
+      "meta_share": 0.6,
+      "colors": [
+        "R"
+      ],
+      "signature_cards": [
+        "Zada, Hedron Grinder",
+        "Fists of Flame",
+        "Ancestors' Aid"
+      ]
+    },
+    {
+      "name": "Vivi Ornitier",
+      "meta_share": 0.6,
+      "colors": [
+        "R",
+        "U"
+      ],
+      "signature_cards": [
+        "Vivi Ornitier",
+        "Sol Ring",
+        "Curiosity"
+      ]
+    },
+    {
+      "name": "Silverquill, the Disputant",
+      "meta_share": 0.6,
+      "colors": [
+        "B",
+        "W"
+      ],
+      "signature_cards": [
+        "Silverquill, the Disputant",
+        "Arcane Signet",
+        "Sol Ring"
+      ]
+    },
+    {
+      "name": "Edgar Markov",
+      "meta_share": 0.6,
+      "colors": [
+        "B",
+        "R",
+        "W"
+      ],
+      "signature_cards": [
+        "Edgar Markov",
+        "Sol Ring",
+        "Swords to Plowshares"
+      ]
+    },
+    {
+      "name": "Ashling, the Limitless",
+      "meta_share": 0.6,
+      "colors": [
+        "B",
+        "G",
+        "R",
+        "U",
+        "W"
+      ],
+      "signature_cards": [
+        "Ashling, the Limitless",
+        "Sol Ring",
+        "Risen Reef"
+      ]
+    },
+    {
+      "name": "Giada, Font of Hope",
+      "meta_share": 0.6,
+      "colors": [
+        "W"
+      ],
+      "signature_cards": [
+        "Giada, Font of Hope",
+        "Lyra Dawnbringer",
+        "Sol Ring"
+      ]
+    },
+    {
+      "name": "Killian, Decisive Mentor",
+      "meta_share": 0.6,
+      "colors": [
+        "B",
+        "W"
+      ],
+      "signature_cards": [
+        "Killian, Decisive Mentor",
+        "Arcane Signet",
+        "Sol Ring"
+      ]
+    },
+    {
+      "name": "Vnwxt, Verbose Host",
+      "meta_share": 0.5,
+      "colors": [
+        "U"
+      ],
+      "signature_cards": [
+        "Vnwxt, Verbose Host",
+        "Arcane Denial",
+        "Homunculus Horde"
+      ]
+    },
+    {
+      "name": "Toph, the First Metalbender",
+      "meta_share": 0.5,
+      "colors": [
+        "G",
+        "R",
+        "W"
+      ],
+      "signature_cards": [
+        "Toph, the First Metalbender",
+        "Sol Ring",
+        "Arcane Signet"
+      ]
+    },
+    {
+      "name": "Avatar Aang",
+      "meta_share": 0.5,
+      "colors": [
+        "B",
+        "G",
+        "R",
+        "U",
+        "W"
+      ],
+      "signature_cards": [
+        "Avatar Aang",
+        "Airbender's Reversal",
+        "Toph, the First Metalbender"
+      ]
+    },
+    {
+      "name": "Zimone, Infinite Analyst",
+      "meta_share": 0.5,
+      "colors": [
+        "G",
+        "U"
+      ],
+      "signature_cards": [
+        "Zimone, Infinite Analyst",
+        "Hydroid Krasis",
+        "Elementalist's Palette"
+      ]
+    },
+    {
+      "name": "Queza, Augur of Agonies",
+      "meta_share": 0.5,
+      "colors": [
+        "B",
+        "U",
+        "W"
+      ],
+      "signature_cards": [
+        "Queza, Augur of Agonies",
+        "Marauding Blight-Priest",
+        "Psychosis Crawler"
+      ]
+    },
+    {
+      "name": "Hope Estheim",
+      "meta_share": 0.5,
+      "colors": [
+        "U",
+        "W"
+      ],
+      "signature_cards": [
+        "Hope Estheim",
+        "Arcane Signet",
+        "Rhox Faithmender"
+      ]
+    },
+    {
+      "name": "Auntie Ool, Cursewretch",
+      "meta_share": 0.4,
+      "colors": [
+        "B",
+        "G",
+        "R"
+      ],
+      "signature_cards": [
+        "Auntie Ool, Cursewretch",
+        "Massacre Girl, Known Killer",
+        "Ignoble Hierarch"
+      ]
+    },
+    {
+      "name": "Chatterfang, Squirrel General",
+      "meta_share": 0.4,
+      "colors": [
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Chatterfang, Squirrel General",
+        "Sol Ring",
+        "Deadly Dispute"
+      ]
+    },
+    {
+      "name": "Ulalek, Fused Atrocity",
+      "meta_share": 0.4,
+      "colors": [
+        "B",
+        "G",
+        "R",
+        "U",
+        "W"
+      ],
+      "signature_cards": [
+        "Ulalek, Fused Atrocity",
+        "Arcane Signet",
+        "Sol Ring"
+      ]
+    },
+    {
+      "name": "Omnath, Locus of Creation",
+      "meta_share": 0.4,
+      "colors": [
+        "G",
+        "R",
+        "U",
+        "W"
+      ],
+      "signature_cards": [
+        "Omnath, Locus of Creation",
+        "Growth Spiral",
+        "Swords to Plowshares"
+      ]
+    },
+    {
+      "name": "Flubs, the Fool",
+      "meta_share": 0.4,
+      "colors": [
+        "G",
+        "R",
+        "U"
+      ],
+      "signature_cards": [
+        "Flubs, the Fool",
+        "Song of Creation",
+        "Arcane Signet"
+      ]
+    },
+    {
+      "name": "Muddle, the Ever-Changing",
+      "meta_share": 0.4,
+      "colors": [
+        "R",
+        "U"
+      ],
+      "signature_cards": [
+        "Muddle, the Ever-Changing",
+        "Curiosity Crafter",
+        "Enter the Enigma"
+      ]
+    },
+    {
+      "name": "Sanar, Innovative First-Year",
+      "meta_share": 0.4,
+      "colors": [
+        "R",
+        "U"
+      ],
+      "signature_cards": [
+        "Sanar, Innovative First-Year",
+        "Treasure Hunt",
+        "Magmakin Artillerist"
+      ]
+    },
+    {
+      "name": "High Perfect Morcant",
+      "meta_share": 0.4,
+      "colors": [
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "High Perfect Morcant",
+        "Elvish Archdruid",
+        "Imperious Perfect"
+      ]
+    },
+    {
+      "name": "Licia, Sanguine Tribune",
+      "meta_share": 0.4,
+      "colors": [
+        "B",
+        "R",
+        "W"
+      ],
+      "signature_cards": [
+        "Licia, Sanguine Tribune",
+        "Enduring Tenacity",
+        "Indulging Patrician"
+      ]
+    },
+    {
+      "name": "Shelob, Child of Ungoliant",
+      "meta_share": 0.4,
+      "colors": [
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Shelob, Child of Ungoliant",
+        "Shelob, Dread Weaver",
+        "Arasta of the Endless Web"
+      ]
+    },
+    {
+      "name": "Sephiroth, Fabled SOLDIER",
+      "meta_share": 0.4,
+      "colors": [
+        "B"
+      ],
+      "signature_cards": [
+        "Sephiroth, Fabled SOLDIER",
+        "Sol Ring",
+        "The Masamune"
+      ]
+    },
+    {
+      "name": "Wilhelt, the Rotcleaver",
+      "meta_share": 0.4,
+      "colors": [
+        "B",
+        "U"
+      ],
+      "signature_cards": [
+        "Wilhelt, the Rotcleaver",
+        "Rooftop Storm",
+        "Arcane Signet"
+      ]
+    },
+    {
+      "name": "Atraxa, Praetors' Voice",
+      "meta_share": 0.4,
+      "colors": [
+        "B",
+        "G",
+        "U",
+        "W"
+      ],
+      "signature_cards": [
+        "Atraxa, Praetors' Voice",
+        "Sol Ring",
+        "Arcane Signet"
+      ]
+    },
+    {
+      "name": "Kinnan, Bonder Prodigy",
+      "meta_share": 0.4,
+      "colors": [
+        "G",
+        "U"
+      ],
+      "signature_cards": [
+        "Kinnan, Bonder Prodigy",
+        "Sol Ring",
+        "Llanowar Elves"
+      ]
+    },
+    {
+      "name": "Kykar, Wind's Fury",
+      "meta_share": 0.4,
+      "colors": [
+        "R",
+        "U",
+        "W"
+      ],
+      "signature_cards": [
+        "Kykar, Wind's Fury",
+        "Arcane Signet",
+        "Sol Ring"
+      ]
+    },
+    {
+      "name": "Derevi, Empyrial Tactician",
+      "meta_share": 0.3,
+      "colors": [
+        "G",
+        "U",
+        "W"
+      ],
+      "signature_cards": [
+        "Derevi, Empyrial Tactician",
+        "Sol Ring",
+        "Arcane Signet"
+      ]
+    },
+    {
+      "name": "Atarka, World Render",
+      "meta_share": 0.3,
+      "colors": [
+        "G",
+        "R"
+      ],
+      "signature_cards": [
+        "Atarka, World Render",
+        "Dragonspeaker Shaman",
+        "Savage Ventmaw"
+      ]
+    },
+    {
+      "name": "Mishra, Eminent One",
+      "meta_share": 0.3,
+      "colors": [
+        "B",
+        "R",
+        "U"
+      ],
+      "signature_cards": [
+        "Mishra, Eminent One",
+        "Arcane Signet",
+        "Emry, Lurker of the Loch"
+      ]
+    },
+    {
+      "name": "Jodah, the Unifier",
+      "meta_share": 0.3,
+      "colors": [
+        "B",
+        "G",
+        "R",
+        "U",
+        "W"
+      ],
+      "signature_cards": [
+        "Jodah, the Unifier",
+        "Arcane Signet",
+        "Farseek"
+      ]
+    },
+    {
+      "name": "Skullbriar, the Walking Grave",
+      "meta_share": 0.3,
+      "colors": [
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Skullbriar, the Walking Grave",
+        "Invigorating Surge",
+        "Corpsejack Menace"
+      ]
+    },
+    {
+      "name": "Abigale, Poet Laureate",
+      "meta_share": 0.3,
+      "colors": [
+        "B",
+        "W"
+      ],
+      "signature_cards": [
+        "Abigale, Poet Laureate",
+        "Lecturing Scornmage",
+        "Scolding Administrator"
+      ]
+    },
+    {
+      "name": "Ms. Bumbleflower",
+      "meta_share": 0.3,
+      "colors": [
+        "G",
+        "U",
+        "W"
+      ],
+      "signature_cards": [
+        "Ms. Bumbleflower",
+        "Arcane Signet",
+        "Swords to Plowshares"
+      ]
+    },
+    {
+      "name": "Terra, Herald of Hope",
+      "meta_share": 0.3,
+      "colors": [
+        "B",
+        "R",
+        "W"
+      ],
+      "signature_cards": [
+        "Terra, Herald of Hope",
+        "Reanimate",
+        "Arcane Signet"
+      ]
+    },
+    {
+      "name": "Eriette of the Charmed Apple",
+      "meta_share": 0.3,
+      "colors": [
+        "B",
+        "W"
+      ],
+      "signature_cards": [
+        "Eriette of the Charmed Apple",
+        "Sram, Senior Edificer",
+        "All That Glitters"
+      ]
+    },
+    {
+      "name": "Breya, Etherium Shaper",
+      "meta_share": 0.3,
+      "colors": [
+        "B",
+        "R",
+        "U",
+        "W"
+      ],
+      "signature_cards": [
+        "Breya, Etherium Shaper",
+        "Sol Ring",
+        "Arcane Signet"
+      ]
+    },
+    {
+      "name": "Morophon, the Boundless",
+      "meta_share": 0.3,
+      "colors": [
+        "B",
+        "G",
+        "R",
+        "U",
+        "W"
+      ],
+      "signature_cards": [
+        "Morophon, the Boundless",
+        "Arcane Signet",
+        "Kindred Discovery"
+      ]
+    },
+    {
+      "name": "The Gitrog Monster",
+      "meta_share": 0.3,
+      "colors": [
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "The Gitrog Monster",
+        "Icetill Explorer",
+        "Golgari Grave-Troll"
+      ]
+    },
+    {
+      "name": "Strefan, Maurer Progenitor",
+      "meta_share": 0.3,
+      "colors": [
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Strefan, Maurer Progenitor",
+        "Patron of the Vein",
+        "Sanctum Seeker"
+      ]
+    },
+    {
+      "name": "Narci, Fable Singer",
+      "meta_share": 0.3,
+      "colors": [
+        "B",
+        "G",
+        "W"
+      ],
+      "signature_cards": [
+        "Narci, Fable Singer",
+        "Anikthea, Hand of Erebos",
+        "Archon of Sun's Grace"
+      ]
+    },
+    {
+      "name": "Etali, Primal Conqueror",
+      "meta_share": 0.3,
+      "colors": [
+        "G",
+        "R"
+      ],
+      "signature_cards": [
+        "Etali, Primal Conqueror",
+        "Arcane Signet",
+        "Sol Ring"
+      ]
+    },
+    {
+      "name": "Fire Lord Azula",
+      "meta_share": 0.3,
+      "colors": [
+        "B",
+        "R",
+        "U"
+      ],
+      "signature_cards": [
+        "Fire Lord Azula",
+        "Arcane Signet",
+        "Sol Ring"
+      ]
+    },
+    {
+      "name": "Ayula, Queen Among Bears",
+      "meta_share": 0.3,
+      "colors": [
+        "G"
+      ],
+      "signature_cards": [
+        "Ayula, Queen Among Bears",
+        "Wilson, Refined Grizzly",
+        "Werebear"
+      ]
+    },
+    {
+      "name": "Rograkh, Son of Rohgahh // Silas Renn, Seeker Adept",
+      "meta_share": 0.3,
+      "colors": [
+        "B",
+        "R",
+        "U"
+      ],
+      "signature_cards": [
+        "Silas Renn, Seeker Adept",
+        "Rograkh, Son of Rohgahh",
+        "Springleaf Drum"
+      ]
+    },
+    {
+      "name": "Codie, Vociferous Codex",
+      "meta_share": 0.3,
+      "colors": [
+        "B",
+        "G",
+        "R",
+        "U",
+        "W"
+      ],
+      "signature_cards": [
+        "Codie, Vociferous Codex",
+        "Mizzix's Mastery",
+        "Increasing Vengeance"
+      ]
+    },
+    {
+      "name": "Disa the Restless",
+      "meta_share": 0.3,
+      "colors": [
+        "B",
+        "G",
+        "R"
+      ],
+      "signature_cards": [
+        "Disa the Restless",
+        "Ignoble Hierarch",
+        "Barrowgoyf"
+      ]
+    },
+    {
+      "name": "Sheoldred, the Apocalypse",
+      "meta_share": 0.3,
+      "colors": [
+        "B"
+      ],
+      "signature_cards": [
+        "Sheoldred, the Apocalypse",
+        "K'rrik, Son of Yawgmoth",
+        "Dark Ritual"
+      ]
+    },
+    {
+      "name": "Atreus, Impulsive Son // Kratos, Stoic Father",
+      "meta_share": 0.3,
+      "colors": [
+        "R",
+        "U",
+        "W"
+      ],
+      "signature_cards": [
+        "Kratos, Stoic Father",
+        "Arcane Signet",
+        "Iroas, God of Victory"
+      ]
+    }
+  ]
+}

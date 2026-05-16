@@ -1,0 +1,41 @@
+{
+  "format": "Default",
+  "note": "Generic archetype templates used when the specific format is unknown.",
+  "archetypes": [
+    {
+      "name": "Aggro",
+      "colors": ["any"],
+      "strategy": "Win fast with cheap, efficient creatures and burn before the opponent stabilizes.",
+      "signature_cards": [],
+      "tells": ["turn-1 and turn-2 creatures", "low average mana value", "few lands", "direct-damage spells"]
+    },
+    {
+      "name": "Midrange",
+      "colors": ["any"],
+      "strategy": "Trade resources efficiently, then win with individually powerful threats.",
+      "signature_cards": [],
+      "tells": ["removal mixed with mid-cost creatures", "average mana value 2-4", "card-advantage engines"]
+    },
+    {
+      "name": "Control",
+      "colors": ["any"],
+      "strategy": "Neutralize the opponent's threats, then win late with a small number of finishers.",
+      "signature_cards": [],
+      "tells": ["counterspells and board wipes", "few early creatures", "card draw", "high land count"]
+    },
+    {
+      "name": "Combo",
+      "colors": ["any"],
+      "strategy": "Assemble a specific set of cards that wins the game immediately.",
+      "signature_cards": [],
+      "tells": ["tutors and card selection", "cheap interaction to protect the combo", "non-board-oriented plays"]
+    },
+    {
+      "name": "Ramp",
+      "colors": ["any"],
+      "strategy": "Accelerate mana to deploy expensive, game-ending threats ahead of schedule.",
+      "signature_cards": [],
+      "tells": ["mana dorks and land ramp on turns 1-2", "few cheap threats", "expensive payoffs"]
+    }
+  ]
+}

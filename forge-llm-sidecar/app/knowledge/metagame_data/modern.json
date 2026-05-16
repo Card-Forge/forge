@@ -1,0 +1,820 @@
+{
+  "format": "modern",
+  "source": "mtggoldfish",
+  "updated_at": "2026-05-16T21:39:26+00:00",
+  "archetype_count": 60,
+  "archetypes": [
+    {
+      "name": "Boros Energy",
+      "meta_share": 18.2,
+      "colors": [
+        "W",
+        "R"
+      ],
+      "signature_cards": [
+        "Phlage, Titan of Fire's Fury",
+        "Ragavan, Nimble Pilferer",
+        "Ocelot Pride"
+      ]
+    },
+    {
+      "name": "Affinity",
+      "meta_share": 10.4,
+      "colors": [
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Mox Opal",
+        "Engineered Explosives",
+        "Weapons Manufacturing"
+      ]
+    },
+    {
+      "name": "Ruby Storm",
+      "meta_share": 5.6,
+      "colors": [
+        "W",
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Ruby Medallion",
+        "Pyretic Ritual",
+        "Ral, Monsoon Mage"
+      ]
+    },
+    {
+      "name": "Amulet Titan",
+      "meta_share": 5.3,
+      "colors": [
+        "U",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Primeval Titan",
+        "Scapeshift",
+        "Amulet of Vigor"
+      ]
+    },
+    {
+      "name": "Jeskai Blink",
+      "meta_share": 5.2,
+      "colors": [
+        "W",
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Quantum Riddler",
+        "Solitude",
+        "Phlage, Titan of Fire's Fury"
+      ]
+    },
+    {
+      "name": "Goryo's Vengeance",
+      "meta_share": 5.2,
+      "colors": [
+        "W",
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Goryo's Vengeance",
+        "Solitude",
+        "Atraxa, Grand Unifier"
+      ]
+    },
+    {
+      "name": "Domain Zoo",
+      "meta_share": 4.3,
+      "colors": [
+        "W",
+        "U",
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Tribal Flames",
+        "Archon of Cruelty",
+        "Leyline of the Guildpact"
+      ]
+    },
+    {
+      "name": "Belcher",
+      "meta_share": 4.0,
+      "colors": [
+        "U"
+      ],
+      "signature_cards": [
+        "Goblin Charbelcher",
+        "Sea Gate Restoration",
+        "Disrupting Shoal"
+      ]
+    },
+    {
+      "name": "Neobrand",
+      "meta_share": 3.4,
+      "colors": [
+        "W",
+        "U",
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Griselbrand",
+        "Summoner's Pact",
+        "Allosaurus Rider"
+      ]
+    },
+    {
+      "name": "Living End",
+      "meta_share": 3.1,
+      "colors": [
+        "W",
+        "U",
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Living End",
+        "Force of Negation",
+        "Subtlety"
+      ]
+    },
+    {
+      "name": "Izzet Prowess",
+      "meta_share": 3.0,
+      "colors": [
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Cori-Steel Cutter",
+        "Slickshot Show-Off",
+        "Mishra's Bauble"
+      ]
+    },
+    {
+      "name": "Eldrazi Ramp",
+      "meta_share": 2.7,
+      "colors": [
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Eldrazi Temple",
+        "Kozilek's Command",
+        "Sowing Mycospawn"
+      ]
+    },
+    {
+      "name": "Eldrazi Tron",
+      "meta_share": 2.7,
+      "colors": [
+        "G"
+      ],
+      "signature_cards": [
+        "Thought-Knot Seer",
+        "Ugin, Eye of the Storms",
+        "Kozilek's Command"
+      ]
+    },
+    {
+      "name": "Jeskai Control",
+      "meta_share": 2.4,
+      "colors": [
+        "W",
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Teferi, Time Raveler",
+        "Orim's Chant",
+        "Narset, Parter of Veils"
+      ]
+    },
+    {
+      "name": "Grixis Reanimator",
+      "meta_share": 2.1,
+      "colors": [
+        "U",
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Abhorrent Oculus",
+        "Archon of Cruelty",
+        "Thoughtseize"
+      ]
+    },
+    {
+      "name": "Dimir Midrange",
+      "meta_share": 2.0,
+      "colors": [
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Agatha's Soul Cauldron",
+        "Abhorrent Oculus",
+        "Thoughtseize"
+      ]
+    },
+    {
+      "name": "Esper GenericBlink",
+      "meta_share": 1.9,
+      "colors": [
+        "W",
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Quantum Riddler",
+        "Solitude",
+        "Overlord of the Balemurk"
+      ]
+    },
+    {
+      "name": "Sultai Midrange",
+      "meta_share": 1.4,
+      "colors": [
+        "U",
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Abhorrent Oculus",
+        "Subtlety",
+        "Sink into Stupor"
+      ]
+    },
+    {
+      "name": "Yawgmoth",
+      "meta_share": 1.4,
+      "colors": [
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Yawgmoth, Thran Physician",
+        "Badgermole Cub",
+        "Agatha's Soul Cauldron"
+      ]
+    },
+    {
+      "name": "Temur Prowess",
+      "meta_share": 1.3,
+      "colors": [
+        "U",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Slickshot Show-Off",
+        "Cori-Steel Cutter",
+        "Mishra's Bauble"
+      ]
+    },
+    {
+      "name": "Mardu GenericBlink",
+      "meta_share": 1.0,
+      "colors": [
+        "W",
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Solitude",
+        "Overlord of the Balemurk",
+        "Thoughtseize"
+      ]
+    },
+    {
+      "name": "Izzet Steel-Cutter",
+      "meta_share": 0.9,
+      "colors": [
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Mox Opal",
+        "Tamiyo, Inquisitive Student",
+        "Cori-Steel Cutter"
+      ]
+    },
+    {
+      "name": "Jeskai Energy",
+      "meta_share": 0.8,
+      "colors": [
+        "W",
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Phlage, Titan of Fire's Fury",
+        "Nulldrifter",
+        "Doorkeeper Thrull"
+      ]
+    },
+    {
+      "name": "Grixis Midrange",
+      "meta_share": 0.7,
+      "colors": [
+        "U",
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Orcish Bowmasters",
+        "Tamiyo, Inquisitive Student",
+        "Counterspell"
+      ]
+    },
+    {
+      "name": "Mono-Black Midrange",
+      "meta_share": 0.7,
+      "colors": [
+        "B"
+      ],
+      "signature_cards": [
+        "Thoughtseize",
+        "Thought-Knot Seer",
+        "Kozilek's Command"
+      ]
+    },
+    {
+      "name": "Mill",
+      "meta_share": 0.6,
+      "colors": [
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Hedron Crab",
+        "Tasha's Hideous Laughter",
+        "Fractured Sanity"
+      ]
+    },
+    {
+      "name": "Mono-Green Basking Broodscale Combo",
+      "meta_share": 0.6,
+      "colors": [
+        "G"
+      ],
+      "signature_cards": [
+        "Kozilek's Command",
+        "Blade of the Bloodchief",
+        "Devourer of Destiny"
+      ]
+    },
+    {
+      "name": "Eldrazi",
+      "meta_share": 0.6,
+      "colors": [
+        "G"
+      ],
+      "signature_cards": [
+        "Thought-Knot Seer",
+        "Kozilek's Command",
+        "Glaring Fleshraker"
+      ]
+    },
+    {
+      "name": "Esper Midrange",
+      "meta_share": 0.6,
+      "colors": [
+        "W",
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Thoughtseize",
+        "Psychic Frog",
+        "Counterspell"
+      ]
+    },
+    {
+      "name": "Lantern",
+      "meta_share": 0.6,
+      "colors": [
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Ensnaring Bridge",
+        "Thoughtseize",
+        "Whir of Invention"
+      ]
+    },
+    {
+      "name": "Dimir Murktide",
+      "meta_share": 0.5,
+      "colors": [
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Orcish Bowmasters",
+        "Flow State",
+        "Psychic Frog"
+      ]
+    },
+    {
+      "name": "Rakdos Delirium",
+      "meta_share": 0.5,
+      "colors": [
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Moonshadow",
+        "Nethergoyf",
+        "Cori-Steel Cutter"
+      ]
+    },
+    {
+      "name": "Grixis Murktide",
+      "meta_share": 0.4,
+      "colors": [
+        "U",
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Agatha's Soul Cauldron",
+        "Abhorrent Oculus",
+        "Thoughtseize"
+      ]
+    },
+    {
+      "name": "The Rock",
+      "meta_share": 0.4,
+      "colors": [
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Archon of Cruelty",
+        "Stitcher's Supplier",
+        "Street Wraith"
+      ]
+    },
+    {
+      "name": "Gruul Basking Broodscale Combo",
+      "meta_share": 0.4,
+      "colors": [
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Kozilek's Command",
+        "Glaring Fleshraker",
+        "Malevolent Rumble"
+      ]
+    },
+    {
+      "name": "Sam Combo",
+      "meta_share": 0.4,
+      "colors": [
+        "W",
+        "U",
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Chord of Calling",
+        "Birthing Ritual",
+        "Cauldron Familiar"
+      ]
+    },
+    {
+      "name": "Hammer Time",
+      "meta_share": 0.3,
+      "colors": [
+        "W",
+        "U"
+      ],
+      "signature_cards": [
+        "Colossus Hammer",
+        "Mox Opal",
+        "Esper Sentinel"
+      ]
+    },
+    {
+      "name": "Death's Shadow",
+      "meta_share": 0.3,
+      "colors": [
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Death's Shadow",
+        "Thoughtseize",
+        "Flow State"
+      ]
+    },
+    {
+      "name": "Indomitable Creativity",
+      "meta_share": 0.3,
+      "colors": [
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Indomitable Creativity",
+        "Wrenn and Six",
+        "Archon of Cruelty"
+      ]
+    },
+    {
+      "name": "Esper Reanimator",
+      "meta_share": 0.2,
+      "colors": [
+        "W",
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Emeritus of Ideation",
+        "Archon of Cruelty",
+        "Thoughtseize"
+      ]
+    },
+    {
+      "name": "Through the Breach",
+      "meta_share": 0.2,
+      "colors": [
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Through the Breach",
+        "Emrakul, the Aeons Torn",
+        "Ulamog, the Defiler"
+      ]
+    },
+    {
+      "name": "Esper Murktide",
+      "meta_share": 0.2,
+      "colors": [
+        "W",
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Psychic Frog",
+        "Counterspell",
+        "Fatal Push"
+      ]
+    },
+    {
+      "name": "Jeskai Prowess",
+      "meta_share": 0.2,
+      "colors": [
+        "W",
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Slickshot Show-Off",
+        "Cori-Steel Cutter",
+        "Mishra's Bauble"
+      ]
+    },
+    {
+      "name": "4/5c Omnath",
+      "meta_share": 0.2,
+      "colors": [
+        "W",
+        "U",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Omnath, Locus of Creation",
+        "Solitude",
+        "Teferi, Time Raveler"
+      ]
+    },
+    {
+      "name": "Naya Energy",
+      "meta_share": 0.2,
+      "colors": [
+        "W",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Ocelot Pride",
+        "Ajani, Nacatl Pariah",
+        "Guide of Souls"
+      ]
+    },
+    {
+      "name": "Goblins",
+      "meta_share": 0.2,
+      "colors": [
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Birthing Ritual",
+        "Conspicuous Snoop",
+        "Boggart Trawler"
+      ]
+    },
+    {
+      "name": "4c GenericBlink",
+      "meta_share": 0.1,
+      "colors": [
+        "W",
+        "U",
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Quantum Riddler",
+        "Overlord of the Balemurk",
+        "Phlage, Titan of Fire's Fury"
+      ]
+    },
+    {
+      "name": "Tron",
+      "meta_share": 0.1,
+      "colors": [
+        "U"
+      ],
+      "signature_cards": [
+        "Karn, the Great Creator",
+        "Force of Negation",
+        "Ugin, Eye of the Storms"
+      ]
+    },
+    {
+      "name": "Mono-Green Midrange",
+      "meta_share": 0.1,
+      "colors": [
+        "G"
+      ],
+      "signature_cards": [
+        "Badgermole Cub",
+        "Green Sun's Zenith",
+        "Noble Hierarch"
+      ]
+    },
+    {
+      "name": "Jeskai Steel-Cutter",
+      "meta_share": 0.1,
+      "colors": [
+        "W",
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Mox Opal",
+        "Tamiyo, Inquisitive Student",
+        "Cori-Steel Cutter"
+      ]
+    },
+    {
+      "name": "Mardu Energy",
+      "meta_share": 0.1,
+      "colors": [
+        "W",
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Guide of Souls",
+        "Orcish Bowmasters",
+        "Ragavan, Nimble Pilferer"
+      ]
+    },
+    {
+      "name": "Izzet Splinter Twin",
+      "meta_share": 0.1,
+      "colors": [
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Tamiyo, Inquisitive Student",
+        "Flow State",
+        "Fear of Missing Out"
+      ]
+    },
+    {
+      "name": "Izzet Phoenix",
+      "meta_share": 0.1,
+      "colors": [
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Manamorphose",
+        "Gut Shot",
+        "Demilich"
+      ]
+    },
+    {
+      "name": "Devoted Combo",
+      "meta_share": 0.1,
+      "colors": [
+        "W",
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Devoted Druid",
+        "Delighted Halfling",
+        "Green Sun's Zenith"
+      ]
+    },
+    {
+      "name": "Azorius Control",
+      "meta_share": 0.1,
+      "colors": [
+        "W",
+        "U"
+      ],
+      "signature_cards": [
+        "Supreme Verdict",
+        "Kaheera, the Orphanguard",
+        "Solitude"
+      ]
+    },
+    {
+      "name": "Rakdos Midrange",
+      "meta_share": 0.1,
+      "colors": [
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Orcish Bowmasters",
+        "Moonshadow",
+        "Burning Inquiry"
+      ]
+    },
+    {
+      "name": "Asmo Food",
+      "meta_share": 0.1,
+      "colors": [
+        "W",
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Asmoranomardicadaistinaculdacar",
+        "Archon of Cruelty",
+        "Persist"
+      ]
+    },
+    {
+      "name": "Generic Ragavan",
+      "meta_share": 0.1,
+      "colors": [
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Super Shredder",
+        "Moonshadow",
+        "Thoughtseize"
+      ]
+    },
+    {
+      "name": "Green Devotion",
+      "meta_share": 0.1,
+      "colors": [
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Green Sun's Zenith",
+        "Noble Hierarch",
+        "Frenzied Baloth"
+      ]
+    },
+    {
+      "name": "Boros Midrange",
+      "meta_share": 0.1,
+      "colors": [
+        "W",
+        "R"
+      ],
+      "signature_cards": [
+        "Ragavan, Nimble Pilferer",
+        "Ocelot Pride",
+        "Phlage, Titan of Fire's Fury"
+      ]
+    }
+  ]
+}

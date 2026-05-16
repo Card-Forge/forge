@@ -1,0 +1,41 @@
+{
+  "format": "Commander",
+  "note": "Sample Commander archetypes by play pattern. Edit freely.",
+  "archetypes": [
+    {
+      "name": "Voltron",
+      "colors": ["any"],
+      "strategy": "Suit up the commander with auras/equipment and win with commander damage.",
+      "signature_cards": ["Swiftfoot Boots", "Lightning Greaves", "auras", "equipment"],
+      "tells": ["repeatedly recasting the commander", "protection pieces", "few other creatures"]
+    },
+    {
+      "name": "Tokens / Go-Wide",
+      "colors": ["G", "W"],
+      "strategy": "Generate a wide board of tokens and overrun with anthems.",
+      "signature_cards": ["token generators", "anthem effects", "overrun effects"],
+      "tells": ["many creature tokens", "board-wide pump"]
+    },
+    {
+      "name": "Spellslinger",
+      "colors": ["U", "R"],
+      "strategy": "Cast many instants/sorceries with magecraft and storm-like payoffs.",
+      "signature_cards": ["cantrips", "copy effects", "magecraft payoffs"],
+      "tells": ["lots of cheap spells", "few creatures", "instant/sorcery payoffs"]
+    },
+    {
+      "name": "Aristocrats",
+      "colors": ["B"],
+      "strategy": "Sacrifice creatures for value and drain opponents with death triggers.",
+      "signature_cards": ["sacrifice outlets", "Blood Artist effects", "token fodder"],
+      "tells": ["sacrifice synergies", "life drain", "recursion"]
+    },
+    {
+      "name": "Ramp / Big Mana",
+      "colors": ["G"],
+      "strategy": "Accelerate mana to deploy oversized threats far ahead of curve.",
+      "signature_cards": ["mana rocks", "land ramp", "expensive bombs"],
+      "tells": ["turn 1-3 ramp", "high-cost payoffs", "Eldrazi or large creatures"]
+    }
+  ]
+}

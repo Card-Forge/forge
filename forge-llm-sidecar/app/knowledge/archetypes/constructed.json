@@ -1,0 +1,48 @@
+{
+  "format": "Constructed",
+  "note": "Broad constructed archetypes. Edit freely to reflect the current metagame.",
+  "archetypes": [
+    {
+      "name": "Mono-Red Aggro",
+      "colors": ["R"],
+      "strategy": "Apply pressure with one-drop creatures and finish with burn.",
+      "signature_cards": ["Monastery Swiftspear", "Lightning Bolt", "Kumano Faces Kakkazan", "Play with Fire"],
+      "tells": ["turn-1 red creature", "multiple burn spells", "almost all Mountains"]
+    },
+    {
+      "name": "Izzet Prowess",
+      "colors": ["U", "R"],
+      "strategy": "Aggro-tempo: cheap spells trigger prowess creatures while interacting.",
+      "signature_cards": ["Monastery Swiftspear", "Slickshot Show-Off", "Lightning Bolt", "Spell Pierce"],
+      "tells": ["UR dual lands", "low-cost instants and sorceries", "one-power prowess creatures"]
+    },
+    {
+      "name": "Azorius Control",
+      "colors": ["W", "U"],
+      "strategy": "Counter and sweep threats, then win with a planeswalker or a single finisher.",
+      "signature_cards": ["Wrath of God", "Counterspell", "Supreme Verdict", "The Wandering Emperor"],
+      "tells": ["WU lands", "no early creatures", "counterspells held up", "board wipes"]
+    },
+    {
+      "name": "Golgari Midrange",
+      "colors": ["B", "G"],
+      "strategy": "Grind with efficient removal and resilient, value-laden creatures.",
+      "signature_cards": ["Llanowar Elves", "Sheoldred, the Apocalypse", "Cut Down", "Glissa Sunslayer"],
+      "tells": ["BG lands", "spot removal", "mid-cost creatures with abilities"]
+    },
+    {
+      "name": "Mono-Green Devotion",
+      "colors": ["G"],
+      "strategy": "Ramp with mana creatures into powerful midrange and combo payoffs.",
+      "signature_cards": ["Llanowar Elves", "Cavalier of Thorns", "Nykthos, Shrine to Nyx", "Storm the Festival"],
+      "tells": ["turn-1 mana dork", "Forests and Nykthos", "expensive green payoffs"]
+    },
+    {
+      "name": "Selesnya Tokens",
+      "colors": ["G", "W"],
+      "strategy": "Flood the board with tokens and pump them with anthems.",
+      "signature_cards": ["Wedding Announcement", "Intrepid Adversary", "Scute Swarm"],
+      "tells": ["token generators", "anthem effects", "wide boards"]
+    }
+  ]
+}

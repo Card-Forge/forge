@@ -1,0 +1,817 @@
+{
+  "format": "pauper",
+  "source": "mtggoldfish",
+  "updated_at": "2026-05-16T21:39:33+00:00",
+  "archetype_count": 60,
+  "archetypes": [
+    {
+      "name": "Blue Terror",
+      "meta_share": 10.0,
+      "colors": [
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Mental Note",
+        "Lorien Revealed",
+        "Counterspell"
+      ]
+    },
+    {
+      "name": "Mono Red Madness",
+      "meta_share": 9.4,
+      "colors": [
+        "U",
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Kessig Flamebreather",
+        "Lightning Bolt",
+        "Lava Dart"
+      ]
+    },
+    {
+      "name": "Jund Wildfire",
+      "meta_share": 7.0,
+      "colors": [
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Fanatical Offering",
+        "Ichor Wellspring",
+        "Cast Down"
+      ]
+    },
+    {
+      "name": "Elves",
+      "meta_share": 7.0,
+      "colors": [
+        "G"
+      ],
+      "signature_cards": [
+        "Llanowar Elves",
+        "Avenging Hunter",
+        "Fyndhorn Elves"
+      ]
+    },
+    {
+      "name": "Grixis Affinity",
+      "meta_share": 6.5,
+      "colors": [
+        "U",
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Galvanic Blast",
+        "Thoughtcast",
+        "Reckoner's Bargain"
+      ]
+    },
+    {
+      "name": "Mono Red Rally",
+      "meta_share": 5.0,
+      "colors": [
+        "R"
+      ],
+      "signature_cards": [
+        "Goblin Bushwhacker",
+        "Galvanic Blast",
+        "Wrenn's Resolve"
+      ]
+    },
+    {
+      "name": "Tron",
+      "meta_share": 4.0,
+      "colors": [
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Relic of Progenitus",
+        "Lembas",
+        "Candy Trail"
+      ]
+    },
+    {
+      "name": "Golgari Gardens",
+      "meta_share": 3.6,
+      "colors": [
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Avenging Hunter",
+        "Fanatical Offering",
+        "Defile"
+      ]
+    },
+    {
+      "name": "Dimir Faeries",
+      "meta_share": 2.8,
+      "colors": [
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Spellstutter Sprite",
+        "Snuff Out",
+        "Lorien Revealed"
+      ]
+    },
+    {
+      "name": "Madness Burn",
+      "meta_share": 2.8,
+      "colors": [
+        "U",
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Alms of the Vein",
+        "Vampire's Kiss",
+        "Grab the Prize"
+      ]
+    },
+    {
+      "name": "White Aggro",
+      "meta_share": 2.6,
+      "colors": [
+        "W"
+      ],
+      "signature_cards": [
+        "Kor Skyfisher",
+        "Thraben Charm",
+        "Novice Inspector"
+      ]
+    },
+    {
+      "name": "Spy Combo",
+      "meta_share": 2.6,
+      "colors": [
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Land Grant",
+        "Masked Vandal",
+        "Generous Ent"
+      ]
+    },
+    {
+      "name": "Gruul Ponza",
+      "meta_share": 2.5,
+      "colors": [
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Mwonvuli Acid-Moss",
+        "Thermokarst",
+        "Utopia Sprawl"
+      ]
+    },
+    {
+      "name": "Jeskai Ephemerate",
+      "meta_share": 2.4,
+      "colors": [
+        "W",
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Lorien Revealed",
+        "Counterspell",
+        "Skred"
+      ]
+    },
+    {
+      "name": "Caw-Gates",
+      "meta_share": 2.2,
+      "colors": [
+        "W",
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Squadron Hawk",
+        "Prismatic Strands",
+        "Lorien Revealed"
+      ]
+    },
+    {
+      "name": "Inside Out Combo",
+      "meta_share": 2.2,
+      "colors": [
+        "W",
+        "U",
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Tireless Tribe",
+        "Faithless Looting",
+        "Sneaky Snacker"
+      ]
+    },
+    {
+      "name": "Gruul Ramp",
+      "meta_share": 2.0,
+      "colors": [
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Annoyed Altisaur",
+        "Avenging Hunter",
+        "Utopia Sprawl"
+      ]
+    },
+    {
+      "name": "Food Gardens",
+      "meta_share": 2.0,
+      "colors": [
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Fanatical Offering",
+        "Lembas",
+        "Eviscerator's Insight"
+      ]
+    },
+    {
+      "name": "Familiars",
+      "meta_share": 2.0,
+      "colors": [
+        "W",
+        "U"
+      ],
+      "signature_cards": [
+        "Snap",
+        "Lorien Revealed",
+        "Sunscape Familiar"
+      ]
+    },
+    {
+      "name": "Glintblade",
+      "meta_share": 1.6,
+      "colors": [
+        "W",
+        "B"
+      ],
+      "signature_cards": [
+        "Lembas",
+        "Glint Hawk",
+        "Cast Down"
+      ]
+    },
+    {
+      "name": "Boros Moxite",
+      "meta_share": 1.5,
+      "colors": [
+        "W",
+        "U",
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Galvanic Blast",
+        "Glint Hawk",
+        "Lembas"
+      ]
+    },
+    {
+      "name": "Turbo Fog",
+      "meta_share": 1.5,
+      "colors": [
+        "U",
+        "G"
+      ],
+      "signature_cards": [
+        "Moment's Peace",
+        "Tangle",
+        "Lorien Revealed"
+      ]
+    },
+    {
+      "name": "Black Sacrifice",
+      "meta_share": 1.4,
+      "colors": [
+        "B"
+      ],
+      "signature_cards": [
+        "Carrion Feeder",
+        "Mortician Beetle",
+        "Village Rites"
+      ]
+    },
+    {
+      "name": "Dimir Terror",
+      "meta_share": 1.4,
+      "colors": [
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Snuff Out",
+        "Lorien Revealed",
+        "Counterspell"
+      ]
+    },
+    {
+      "name": "Ruby Storm",
+      "meta_share": 1.2,
+      "colors": [
+        "U",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Seething Song",
+        "Desperate Ritual",
+        "Manamorphose"
+      ]
+    },
+    {
+      "name": "Mono-Blue Faeries",
+      "meta_share": 1.2,
+      "colors": [
+        "U"
+      ],
+      "signature_cards": [
+        "Spellstutter Sprite",
+        "Snap",
+        "Counterspell"
+      ]
+    },
+    {
+      "name": "Burn",
+      "meta_share": 1.2,
+      "colors": [
+        "R"
+      ],
+      "signature_cards": [
+        "Galvanic Blast",
+        "Lightning Bolt",
+        "Experimental Synthesizer"
+      ]
+    },
+    {
+      "name": "Cycle Storm",
+      "meta_share": 1.0,
+      "colors": [
+        "W",
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Cabal Ritual",
+        "Dark Ritual",
+        "Songs of the Damned"
+      ]
+    },
+    {
+      "name": "Boros Bully",
+      "meta_share": 0.9,
+      "colors": [
+        "W",
+        "R"
+      ],
+      "signature_cards": [
+        "Faithless Looting",
+        "Kor Skyfisher",
+        "Thraben Charm"
+      ]
+    },
+    {
+      "name": "Bogles",
+      "meta_share": 0.9,
+      "colors": [
+        "W",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Slippery Bogle",
+        "Utopia Sprawl",
+        "Malevolent Rumble"
+      ]
+    },
+    {
+      "name": "Walls Combo",
+      "meta_share": 0.8,
+      "colors": [
+        "U",
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Axebane Guardian",
+        "Quirion Ranger",
+        "Winding Way"
+      ]
+    },
+    {
+      "name": "Izzet Terror",
+      "meta_share": 0.7,
+      "colors": [
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Lorien Revealed",
+        "Counterspell",
+        "Skred"
+      ]
+    },
+    {
+      "name": "Ephemerate Tron",
+      "meta_share": 0.5,
+      "colors": [
+        "W",
+        "U",
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Urza's Power Plant",
+        "Expedition Map",
+        "Mulldrifter"
+      ]
+    },
+    {
+      "name": "Boros Synthesizer",
+      "meta_share": 0.5,
+      "colors": [
+        "W",
+        "R"
+      ],
+      "signature_cards": [
+        "Galvanic Blast",
+        "Lembas",
+        "Glint Hawk"
+      ]
+    },
+    {
+      "name": "Mono-White Aggro",
+      "meta_share": 0.4,
+      "colors": [
+        "W"
+      ],
+      "signature_cards": [
+        "Kor Skyfisher",
+        "Hinterland Sanctifier",
+        "Novice Inspector"
+      ]
+    },
+    {
+      "name": "Dredge",
+      "meta_share": 0.4,
+      "colors": [
+        "W",
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Generous Ent",
+        "Stinkweed Imp",
+        "Dread Return"
+      ]
+    },
+    {
+      "name": "Kiln Fiend",
+      "meta_share": 0.4,
+      "colors": [
+        "R"
+      ],
+      "signature_cards": [
+        "Kiln Fiend",
+        "Rite of Flame",
+        "Manamorphose"
+      ]
+    },
+    {
+      "name": "Poison Storm",
+      "meta_share": 0.3,
+      "colors": [
+        "U",
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Manamorphose",
+        "Weather the Storm",
+        "Thirsting Roots"
+      ]
+    },
+    {
+      "name": "Mono-White Heroic",
+      "meta_share": 0.3,
+      "colors": [
+        "W"
+      ],
+      "signature_cards": [
+        "Ethereal Armor",
+        "Emerge Unscathed",
+        "Hyena Umbra"
+      ]
+    },
+    {
+      "name": "Dimir Control",
+      "meta_share": 0.3,
+      "colors": [
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Tolarian Terror",
+        "Snuff Out",
+        "Lorien Revealed"
+      ]
+    },
+    {
+      "name": "Jund Gardens",
+      "meta_share": 0.2,
+      "colors": [
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Fanatical Offering",
+        "Lembas",
+        "Defile"
+      ]
+    },
+    {
+      "name": "Slivers",
+      "meta_share": 0.2,
+      "colors": [
+        "W",
+        "U",
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Muscle Sliver",
+        "Predatory Sliver",
+        "Plated Sliver"
+      ]
+    },
+    {
+      "name": "Mono Red Pingers",
+      "meta_share": 0.2,
+      "colors": [
+        "R"
+      ],
+      "signature_cards": [
+        "Kessig Flamebreather",
+        "Wrenn's Resolve",
+        "Lava Spike"
+      ]
+    },
+    {
+      "name": "Azorius Ephemerate",
+      "meta_share": 0.2,
+      "colors": [
+        "W",
+        "U"
+      ],
+      "signature_cards": [
+        "Ephemerate",
+        "Counterspell",
+        "Preordain"
+      ]
+    },
+    {
+      "name": "Esper Affinity",
+      "meta_share": 0.2,
+      "colors": [
+        "W",
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Thoughtcast",
+        "Myr Enforcer",
+        "Thraben Charm"
+      ]
+    },
+    {
+      "name": "Jeskai Affinity",
+      "meta_share": 0.2,
+      "colors": [
+        "W",
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Thoughtcast",
+        "Galvanic Blast",
+        "Glint Hawk"
+      ]
+    },
+    {
+      "name": "Rakdos Affinity",
+      "meta_share": 0.1,
+      "colors": [
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Galvanic Blast",
+        "Fanatical Offering",
+        "Reckoner's Bargain"
+      ]
+    },
+    {
+      "name": "Storm",
+      "meta_share": 0.1,
+      "colors": [
+        "U",
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Dark Ritual",
+        "Exhume",
+        "Not Dead After All"
+      ]
+    },
+    {
+      "name": "Naya Ramp",
+      "meta_share": 0.1,
+      "colors": [
+        "W",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Avenging Hunter",
+        "Generous Ent",
+        "Utopia Sprawl"
+      ]
+    },
+    {
+      "name": "Infect",
+      "meta_share": 0.1,
+      "colors": [
+        "G"
+      ],
+      "signature_cards": [
+        "Mutagenic Growth",
+        "Rancor",
+        "Ichorclaw Myr"
+      ]
+    },
+    {
+      "name": "Mono-Black",
+      "meta_share": 0.1,
+      "colors": [
+        "B"
+      ],
+      "signature_cards": [
+        "Defile",
+        "Troll of Khazad-dum",
+        "Cast Down"
+      ]
+    },
+    {
+      "name": "Naya Ephemerate",
+      "meta_share": 0.1,
+      "colors": [
+        "W",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Sacred Cat",
+        "Malevolent Rumble",
+        "Writhing Chrysalis"
+      ]
+    },
+    {
+      "name": "Serpentine Curve",
+      "meta_share": 0.1,
+      "colors": [
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Serpentine Curve",
+        "Lorien Revealed",
+        "Counterspell"
+      ]
+    },
+    {
+      "name": "Goblins",
+      "meta_share": 0.1,
+      "colors": [
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Goblin Matron",
+        "Ichor Wellspring",
+        "Unearth"
+      ]
+    },
+    {
+      "name": "4c Control",
+      "meta_share": 0.1,
+      "colors": [
+        "U",
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Lorien Revealed",
+        "Counterspell",
+        "Skred"
+      ]
+    },
+    {
+      "name": "Food Retriever Combo",
+      "meta_share": 0.1,
+      "colors": [
+        "U",
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Myr Retriever",
+        "Cauldron Familiar",
+        "Lembas"
+      ]
+    },
+    {
+      "name": "4c Synthesizer",
+      "meta_share": 0.1,
+      "colors": [
+        "W",
+        "U",
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Galvanic Blast",
+        "Glint Hawk",
+        "Kor Skyfisher"
+      ]
+    },
+    {
+      "name": "Orzhov Ephemerate",
+      "meta_share": 0.1,
+      "colors": [
+        "W",
+        "B"
+      ],
+      "signature_cards": [
+        "Kor Skyfisher",
+        "Thraben Charm",
+        "Refurbished Familiar"
+      ]
+    },
+    {
+      "name": "4c Ponza",
+      "meta_share": 0.1,
+      "colors": [
+        "W",
+        "U",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Thermokarst",
+        "Avenging Hunter",
+        "Utopia Sprawl"
+      ]
+    },
+    {
+      "name": "Izzet Control",
+      "meta_share": 0.1,
+      "colors": [
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Lorien Revealed",
+        "Counterspell",
+        "Force Spike"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,806 @@
+{
+  "format": "standard",
+  "source": "mtggoldfish",
+  "updated_at": "2026-05-16T21:39:21+00:00",
+  "archetype_count": 59,
+  "archetypes": [
+    {
+      "name": "Izzet Spells",
+      "meta_share": 10.4,
+      "colors": [
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Stormchaser's Talent",
+        "Slickshot Show-Off",
+        "Flow State"
+      ]
+    },
+    {
+      "name": "Selesnya Landfall",
+      "meta_share": 10.2,
+      "colors": [
+        "W",
+        "G"
+      ],
+      "signature_cards": [
+        "Mightform Harmonizer",
+        "Badgermole Cub",
+        "Erode"
+      ]
+    },
+    {
+      "name": "Izzet Spellementals",
+      "meta_share": 9.9,
+      "colors": [
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Traumatic Critique",
+        "Eddymurk Crab",
+        "Hearth Elemental"
+      ]
+    },
+    {
+      "name": "Izzet Prowess",
+      "meta_share": 9.2,
+      "colors": [
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Astrologian's Planisphere",
+        "Stormchaser's Talent",
+        "Flow State"
+      ]
+    },
+    {
+      "name": "Mono-Green Landfall",
+      "meta_share": 8.2,
+      "colors": [
+        "G"
+      ],
+      "signature_cards": [
+        "Badgermole Cub",
+        "Icetill Explorer",
+        "Mightform Harmonizer"
+      ]
+    },
+    {
+      "name": "Izzet Lessons",
+      "meta_share": 6.2,
+      "colors": [
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Gran-Gran",
+        "Monument to Endurance",
+        "Artist's Talent"
+      ]
+    },
+    {
+      "name": "Dimir Excruciator",
+      "meta_share": 5.9,
+      "colors": [
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Deceit",
+        "Superior Spider-Man",
+        "Stock Up"
+      ]
+    },
+    {
+      "name": "4c Control",
+      "meta_share": 4.3,
+      "colors": [
+        "W",
+        "U",
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Inevitable Defeat",
+        "Stock Up",
+        "Jeskai Revelation"
+      ]
+    },
+    {
+      "name": "Izzet Self-Bounce",
+      "meta_share": 3.9,
+      "colors": [
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Stormchaser's Talent",
+        "Flow State",
+        "Slickshot Show-Off"
+      ]
+    },
+    {
+      "name": "Selesnya Gearhulk",
+      "meta_share": 3.3,
+      "colors": [
+        "W",
+        "G"
+      ],
+      "signature_cards": [
+        "Badgermole Cub",
+        "Ouroboroid",
+        "Keen-Eyed Curator"
+      ]
+    },
+    {
+      "name": "Jeskai Control",
+      "meta_share": 3.2,
+      "colors": [
+        "W",
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Consult the Star Charts",
+        "Stock Up",
+        "Jeskai Revelation"
+      ]
+    },
+    {
+      "name": "Golgari Midrange",
+      "meta_share": 3.1,
+      "colors": [
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Professor Dellian Fel",
+        "Ancient Cornucopia",
+        "Deadly Cover-Up"
+      ]
+    },
+    {
+      "name": "4c Kona",
+      "meta_share": 1.5,
+      "colors": [
+        "W",
+        "U",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Formidable Speaker",
+        "Omniscience",
+        "Ashling, Rekindled"
+      ]
+    },
+    {
+      "name": "Bant Ouroboroid",
+      "meta_share": 1.4,
+      "colors": [
+        "W",
+        "U",
+        "G"
+      ],
+      "signature_cards": [
+        "Badgermole Cub",
+        "Quantum Riddler",
+        "Nature's Rhythm"
+      ]
+    },
+    {
+      "name": "Azorius Tempo",
+      "meta_share": 1.4,
+      "colors": [
+        "W",
+        "U"
+      ],
+      "signature_cards": [
+        "Voice of Victory",
+        "Aven Interrupter",
+        "Avatar's Wrath"
+      ]
+    },
+    {
+      "name": "Dimir Midrange",
+      "meta_share": 1.3,
+      "colors": [
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Kaito, Bane of Nightmares",
+        "Enduring Curiosity",
+        "Qarsi Revenant"
+      ]
+    },
+    {
+      "name": "5c Elementals",
+      "meta_share": 1.3,
+      "colors": [
+        "W",
+        "U",
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Wistfulness",
+        "Vibrance",
+        "Ashling, Rekindled"
+      ]
+    },
+    {
+      "name": "Izzet Aggro",
+      "meta_share": 1.2,
+      "colors": [
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Hexing Squelcher",
+        "Scalding Viper",
+        "Burst Lightning"
+      ]
+    },
+    {
+      "name": "Boros Tokens",
+      "meta_share": 1.0,
+      "colors": [
+        "W",
+        "R"
+      ],
+      "signature_cards": [
+        "Voice of Victory",
+        "Warleader's Call",
+        "Howlsquad Heavy"
+      ]
+    },
+    {
+      "name": "Temur Prowess",
+      "meta_share": 0.9,
+      "colors": [
+        "U",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Stormchaser's Talent",
+        "Slickshot Show-Off",
+        "Elusive Otter"
+      ]
+    },
+    {
+      "name": "Mono-Red Aggro",
+      "meta_share": 0.8,
+      "colors": [
+        "R"
+      ],
+      "signature_cards": [
+        "Razorkin Needlehead",
+        "Hired Claw",
+        "Hearthborn Battler"
+      ]
+    },
+    {
+      "name": "Selesnya Ouroboroid",
+      "meta_share": 0.8,
+      "colors": [
+        "W",
+        "G"
+      ],
+      "signature_cards": [
+        "Badgermole Cub",
+        "Ouroboroid",
+        "Brightglass Gearhulk"
+      ]
+    },
+    {
+      "name": "Boros Dragons",
+      "meta_share": 0.7,
+      "colors": [
+        "W",
+        "R"
+      ],
+      "signature_cards": [
+        "Voice of Victory",
+        "Clarion Conqueror",
+        "Nova Hellkite"
+      ]
+    },
+    {
+      "name": "4c Elementals",
+      "meta_share": 0.5,
+      "colors": [
+        "U",
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Wistfulness",
+        "Deceit",
+        "Vibrance"
+      ]
+    },
+    {
+      "name": "Azorius Control",
+      "meta_share": 0.5,
+      "colors": [
+        "W",
+        "U"
+      ],
+      "signature_cards": [
+        "Three Steps Ahead",
+        "Consult the Star Charts",
+        "Day of Judgment"
+      ]
+    },
+    {
+      "name": "4c Reanimator",
+      "meta_share": 0.4,
+      "colors": [
+        "U",
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Overlord of the Balemurk",
+        "Formidable Speaker",
+        "Deceit"
+      ]
+    },
+    {
+      "name": "Simic Ouroboroid",
+      "meta_share": 0.4,
+      "colors": [
+        "U",
+        "G"
+      ],
+      "signature_cards": [
+        "Ouroboroid",
+        "Badgermole Cub",
+        "Nature's Rhythm"
+      ]
+    },
+    {
+      "name": "Bant Airbending Combo",
+      "meta_share": 0.3,
+      "colors": [
+        "W",
+        "U",
+        "G"
+      ],
+      "signature_cards": [
+        "Appa, Steadfast Guardian",
+        "Aang, Swift Savior",
+        "Bramble Familiar"
+      ]
+    },
+    {
+      "name": "Jeskai Elementals",
+      "meta_share": 0.3,
+      "colors": [
+        "W",
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Roaming Throne",
+        "Wistfulness",
+        "Deceit"
+      ]
+    },
+    {
+      "name": "Sultai Control",
+      "meta_share": 0.3,
+      "colors": [
+        "U",
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Flow State",
+        "Ancient Cornucopia",
+        "Rakshasa's Bargain"
+      ]
+    },
+    {
+      "name": "Izzet Control",
+      "meta_share": 0.3,
+      "colors": [
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Colorstorm Stallion",
+        "Ashling's Command",
+        "Tablet of Discovery"
+      ]
+    },
+    {
+      "name": "Mono-Blue Spellementals",
+      "meta_share": 0.3,
+      "colors": [
+        "U"
+      ],
+      "signature_cards": [
+        "Three Steps Ahead",
+        "Sunderflock",
+        "Eddymurk Crab"
+      ]
+    },
+    {
+      "name": "5c Control",
+      "meta_share": 0.2,
+      "colors": [
+        "W",
+        "U",
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Stock Up",
+        "Jeskai Revelation",
+        "Day of Judgment"
+      ]
+    },
+    {
+      "name": "Rakdos Monument",
+      "meta_share": 0.2,
+      "colors": [
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Monument to Endurance",
+        "Moonshadow",
+        "Cool but Rude"
+      ]
+    },
+    {
+      "name": "Sultai Ouroboroid",
+      "meta_share": 0.2,
+      "colors": [
+        "U",
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Badgermole Cub",
+        "Nature's Rhythm",
+        "Llanowar Elves"
+      ]
+    },
+    {
+      "name": "Mono-Black Midrange",
+      "meta_share": 0.2,
+      "colors": [
+        "B"
+      ],
+      "signature_cards": [
+        "Bloodletter of Aclazotz",
+        "Unstoppable Slasher",
+        "Requiting Hex"
+      ]
+    },
+    {
+      "name": "Temur Kona",
+      "meta_share": 0.2,
+      "colors": [
+        "U",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Formidable Speaker",
+        "Omniscience",
+        "North Wind Avatar"
+      ]
+    },
+    {
+      "name": "Boros Burn",
+      "meta_share": 0.2,
+      "colors": [
+        "W",
+        "R"
+      ],
+      "signature_cards": [
+        "Hexing Squelcher",
+        "Slickshot Show-Off",
+        "Boros Charm"
+      ]
+    },
+    {
+      "name": "Izzet Elementals",
+      "meta_share": 0.2,
+      "colors": [
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Wistfulness",
+        "Vibrance",
+        "Ashling, Rekindled"
+      ]
+    },
+    {
+      "name": "Temur Harmonizer Combo",
+      "meta_share": 0.2,
+      "colors": [
+        "U",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Consult the Star Charts",
+        "Mightform Harmonizer",
+        "Full Bore"
+      ]
+    },
+    {
+      "name": "Simic Landfall",
+      "meta_share": 0.2,
+      "colors": [
+        "U",
+        "G"
+      ],
+      "signature_cards": [
+        "Badgermole Cub",
+        "Earthbender Ascension",
+        "Mightform Harmonizer"
+      ]
+    },
+    {
+      "name": "Temur Control",
+      "meta_share": 0.2,
+      "colors": [
+        "U",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Flashback",
+        "Consult the Star Charts",
+        "Stock Up"
+      ]
+    },
+    {
+      "name": "Bant Gearhulk",
+      "meta_share": 0.2,
+      "colors": [
+        "W",
+        "U",
+        "G"
+      ],
+      "signature_cards": [
+        "Badgermole Cub",
+        "Quantum Riddler",
+        "Nature's Rhythm"
+      ]
+    },
+    {
+      "name": "4c Ouroboroid",
+      "meta_share": 0.2,
+      "colors": [
+        "W",
+        "U",
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Badgermole Cub",
+        "Quantum Riddler",
+        "Nature's Rhythm"
+      ]
+    },
+    {
+      "name": "Orzhov Midrange",
+      "meta_share": 0.2,
+      "colors": [
+        "W",
+        "B"
+      ],
+      "signature_cards": [
+        "Bloodletter of Aclazotz",
+        "Unstoppable Slasher",
+        "Requiting Hex"
+      ]
+    },
+    {
+      "name": "Lifegain",
+      "meta_share": 0.2,
+      "colors": [
+        "W"
+      ],
+      "signature_cards": [
+        "Sheltered by Ghosts",
+        "Leyline Axe",
+        "Leonardo, Cutting Edge"
+      ]
+    },
+    {
+      "name": "Sultai Reanimator",
+      "meta_share": 0.2,
+      "colors": [
+        "U",
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Deceit",
+        "Superior Spider-Man",
+        "Overlord of the Balemurk"
+      ]
+    },
+    {
+      "name": "Gruul Leyline Aggro",
+      "meta_share": 0.2,
+      "colors": [
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Leyline of Resonance",
+        "Slickshot Show-Off",
+        "Emberheart Challenger"
+      ]
+    },
+    {
+      "name": "4c Artifacts",
+      "meta_share": 0.2,
+      "colors": [
+        "W",
+        "U",
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Simulacrum Synthesizer",
+        "Repurposing Bay",
+        "United Battlefront"
+      ]
+    },
+    {
+      "name": "Mardu Monument",
+      "meta_share": 0.2,
+      "colors": [
+        "W",
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Monument to Endurance",
+        "Moonshadow",
+        "Cool but Rude"
+      ]
+    },
+    {
+      "name": "Jeskai Artifacts",
+      "meta_share": 0.1,
+      "colors": [
+        "W",
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Simulacrum Synthesizer",
+        "Repurposing Bay",
+        "United Battlefront"
+      ]
+    },
+    {
+      "name": "Boros Leyline Aggro",
+      "meta_share": 0.1,
+      "colors": [
+        "W",
+        "R"
+      ],
+      "signature_cards": [
+        "Voice of Victory",
+        "Slickshot Show-Off",
+        "Emberheart Challenger"
+      ]
+    },
+    {
+      "name": "Golgari Ouroboroid",
+      "meta_share": 0.1,
+      "colors": [
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Badgermole Cub",
+        "Ouroboroid",
+        "Nature's Rhythm"
+      ]
+    },
+    {
+      "name": "Jeskai Lessons",
+      "meta_share": 0.1,
+      "colors": [
+        "W",
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Stormchaser's Talent",
+        "Accumulate Wisdom",
+        "Gran-Gran"
+      ]
+    },
+    {
+      "name": "Sultai Excruciator",
+      "meta_share": 0.1,
+      "colors": [
+        "U",
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Deceit",
+        "Rakshasa's Bargain",
+        "Emeritus of Ideation"
+      ]
+    },
+    {
+      "name": "Temur Leyline Aggro",
+      "meta_share": 0.1,
+      "colors": [
+        "U",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Slickshot Show-Off",
+        "Hired Claw",
+        "Elusive Otter"
+      ]
+    },
+    {
+      "name": "Esper Self-Bounce",
+      "meta_share": 0.1,
+      "colors": [
+        "W",
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Kaito, Bane of Nightmares",
+        "Stormchaser's Talent",
+        "Boomerang Basics"
+      ]
+    },
+    {
+      "name": "Dimir Control",
+      "meta_share": 0.1,
+      "colors": [
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Deceit",
+        "Superior Spider-Man",
+        "Perigee Beckoner"
+      ]
+    },
+    {
+      "name": "Dimir Reanimator",
+      "meta_share": 0.1,
+      "colors": [
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Deceit",
+        "Superior Spider-Man",
+        "Winternight Stories"
+      ]
+    }
+  ]
+}

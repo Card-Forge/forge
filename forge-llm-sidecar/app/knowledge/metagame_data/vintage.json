@@ -1,0 +1,324 @@
+{
+  "format": "vintage",
+  "source": "mtggoldfish",
+  "updated_at": "2026-05-16T21:39:31+00:00",
+  "archetype_count": 24,
+  "archetypes": [
+    {
+      "name": "Esper Lurrus Control",
+      "meta_share": 11.4,
+      "colors": [
+        "W",
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Lurrus of the Dream-Den",
+        "Orcish Bowmasters",
+        "Psychic Frog"
+      ]
+    },
+    {
+      "name": "Jewel Shops",
+      "meta_share": 10.6,
+      "colors": [
+        "U"
+      ],
+      "signature_cards": [
+        "Coveted Jewel",
+        "The One Ring",
+        "Displacer Kitten"
+      ]
+    },
+    {
+      "name": "Dredge",
+      "meta_share": 10.0,
+      "colors": [
+        "U",
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Bazaar of Baghdad",
+        "Force of Negation",
+        "Grief"
+      ]
+    },
+    {
+      "name": "Oath of Druids",
+      "meta_share": 9.8,
+      "colors": [
+        "W",
+        "U",
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Oath of Druids",
+        "Atraxa, Grand Unifier",
+        "Show and Tell"
+      ]
+    },
+    {
+      "name": "Mono-White Initiative",
+      "meta_share": 9.2,
+      "colors": [
+        "W"
+      ],
+      "signature_cards": [
+        "White Plume Adventurer",
+        "Chrome Mox",
+        "Seasoned Dungeoneer"
+      ]
+    },
+    {
+      "name": "Raker Shops",
+      "meta_share": 8.2,
+      "colors": [],
+      "signature_cards": [
+        "The One Ring",
+        "Sensei's Divining Top",
+        "Tezzeret, Cruel Captain"
+      ]
+    },
+    {
+      "name": "Lurrus PO",
+      "meta_share": 7.4,
+      "colors": [
+        "W",
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Lurrus of the Dream-Den",
+        "Stock Up",
+        "Thundertrap Trainer"
+      ]
+    },
+    {
+      "name": "Dimir Lurrus Control",
+      "meta_share": 6.8,
+      "colors": [
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Lurrus of the Dream-Den",
+        "Orcish Bowmasters",
+        "Psychic Frog"
+      ]
+    },
+    {
+      "name": "Sphere Shops",
+      "meta_share": 6.4,
+      "colors": [],
+      "signature_cards": [
+        "Null Rod",
+        "Sphere of Resistance",
+        "Patchwork Automaton"
+      ]
+    },
+    {
+      "name": "Doomsday",
+      "meta_share": 5.9,
+      "colors": [
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Doomsday",
+        "Lurrus of the Dream-Den",
+        "Psychic Frog"
+      ]
+    },
+    {
+      "name": "Lurrus Breach",
+      "meta_share": 5.4,
+      "colors": [
+        "U",
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Lurrus of the Dream-Den",
+        "Flow State",
+        "Psychic Frog"
+      ]
+    },
+    {
+      "name": "Paradoxical Outcome",
+      "meta_share": 2.4,
+      "colors": [
+        "U",
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Paradoxical Outcome",
+        "Stock Up",
+        "Thundertrap Trainer"
+      ]
+    },
+    {
+      "name": "Blue Tinker",
+      "meta_share": 2.3,
+      "colors": [
+        "W",
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Tinker",
+        "Flow State",
+        "Stock Up"
+      ]
+    },
+    {
+      "name": "Lurrus DRS",
+      "meta_share": 0.9,
+      "colors": [
+        "U",
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Lurrus of the Dream-Den",
+        "Psychic Frog",
+        "Collector Ouphe"
+      ]
+    },
+    {
+      "name": "Counter Vine",
+      "meta_share": 0.6,
+      "colors": [
+        "U",
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Squee, Goblin Nabob",
+        "Force of Negation",
+        "Noxious Revival"
+      ]
+    },
+    {
+      "name": "Azorius Initiative",
+      "meta_share": 0.4,
+      "colors": [
+        "W",
+        "U"
+      ],
+      "signature_cards": [
+        "Quantum Riddler",
+        "White Plume Adventurer",
+        "Lorien Revealed"
+      ]
+    },
+    {
+      "name": "Beseech Storm",
+      "meta_share": 0.4,
+      "colors": [
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Dark Ritual",
+        "Beseech the Mirror",
+        "Flow State"
+      ]
+    },
+    {
+      "name": "Lurrus Vault Key",
+      "meta_share": 0.4,
+      "colors": [
+        "W",
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Lurrus of the Dream-Den",
+        "Goblin Welder",
+        "Goblin Engineer"
+      ]
+    },
+    {
+      "name": "Fastbond Lands",
+      "meta_share": 0.3,
+      "colors": [
+        "G"
+      ],
+      "signature_cards": [
+        "Kaheera, the Orphanguard",
+        "Crucible of Worlds",
+        "Fastbond"
+      ]
+    },
+    {
+      "name": "Blue Tempo",
+      "meta_share": 0.3,
+      "colors": [
+        "U",
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Psychic Frog",
+        "Collector Ouphe",
+        "Flusterstorm"
+      ]
+    },
+    {
+      "name": "Prison Shops",
+      "meta_share": 0.3,
+      "colors": [
+        "U"
+      ],
+      "signature_cards": [
+        "Lodestone Golem",
+        "Sphere of Resistance",
+        "Golos, Tireless Pilgrim"
+      ]
+    },
+    {
+      "name": "Blue Control",
+      "meta_share": 0.2,
+      "colors": [
+        "W",
+        "U"
+      ],
+      "signature_cards": [
+        "Thing in the Ice",
+        "Lurrus of the Dream-Den",
+        "Swords to Plowshares"
+      ]
+    },
+    {
+      "name": "Oops! All Spells",
+      "meta_share": 0.2,
+      "colors": [
+        "W",
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Chrome Mox",
+        "Beseech the Mirror",
+        "Pact of Negation"
+      ]
+    },
+    {
+      "name": "Stiflenought",
+      "meta_share": 0.2,
+      "colors": [
+        "W",
+        "U"
+      ],
+      "signature_cards": [
+        "Lurrus of the Dream-Den",
+        "Stock Up",
+        "Phyrexian Dreadnought"
+      ]
+    }
+  ]
+}

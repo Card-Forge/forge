@@ -1,0 +1,815 @@
+{
+  "format": "pioneer",
+  "source": "mtggoldfish",
+  "updated_at": "2026-05-16T21:39:24+00:00",
+  "archetype_count": 59,
+  "archetypes": [
+    {
+      "name": "Golgari Midrange",
+      "meta_share": 24.6,
+      "colors": [
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Badgermole Cub",
+        "Thoughtseize",
+        "Sentinel of the Nameless City"
+      ]
+    },
+    {
+      "name": "Selesnya Company",
+      "meta_share": 15.3,
+      "colors": [
+        "W",
+        "G"
+      ],
+      "signature_cards": [
+        "Badgermole Cub",
+        "Ouroboroid",
+        "Enduring Innocence"
+      ]
+    },
+    {
+      "name": "Orzhov Greasefang",
+      "meta_share": 10.7,
+      "colors": [
+        "W",
+        "B"
+      ],
+      "signature_cards": [
+        "Monument to Endurance",
+        "Thoughtseize",
+        "Parhelion II"
+      ]
+    },
+    {
+      "name": "Niv to Light",
+      "meta_share": 8.0,
+      "colors": [
+        "W",
+        "U",
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Niv-Mizzet Reborn",
+        "Yorion, Sky Nomad",
+        "Ancient Cornucopia"
+      ]
+    },
+    {
+      "name": "Izzet Prowess",
+      "meta_share": 7.2,
+      "colors": [
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Stormchaser's Talent",
+        "Cori-Steel Cutter",
+        "Emberheart Challenger"
+      ]
+    },
+    {
+      "name": "Azorius Control",
+      "meta_share": 5.7,
+      "colors": [
+        "W",
+        "U"
+      ],
+      "signature_cards": [
+        "Teferi, Hero of Dominaria",
+        "Kaheera, the Orphanguard",
+        "Consult the Star Charts"
+      ]
+    },
+    {
+      "name": "Abzan Greasefang",
+      "meta_share": 3.7,
+      "colors": [
+        "W",
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Greasefang, Okiba Boss",
+        "Thoughtseize",
+        "Parhelion II"
+      ]
+    },
+    {
+      "name": "Izzet Phoenix",
+      "meta_share": 3.5,
+      "colors": [
+        "U",
+        "R"
+      ],
+      "signature_cards": [
+        "Arclight Phoenix",
+        "Artist's Talent",
+        "Treasure Cruise"
+      ]
+    },
+    {
+      "name": "Mono-Red Prowess",
+      "meta_share": 2.7,
+      "colors": [
+        "R"
+      ],
+      "signature_cards": [
+        "Emberheart Challenger",
+        "Soul-Scar Mage",
+        "Monastery Swiftspear"
+      ]
+    },
+    {
+      "name": "Rakdos Midrange",
+      "meta_share": 2.2,
+      "colors": [
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Bloodtithe Harvester",
+        "Sheoldred, the Apocalypse",
+        "Thoughtseize"
+      ]
+    },
+    {
+      "name": "Hidden Strings",
+      "meta_share": 2.2,
+      "colors": [
+        "W",
+        "U",
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Lotus Field",
+        "Vibrance",
+        "Fatal Push"
+      ]
+    },
+    {
+      "name": "Golgari Food",
+      "meta_share": 1.2,
+      "colors": [
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Badgermole Cub",
+        "Cauldron Familiar",
+        "Witch's Oven"
+      ]
+    },
+    {
+      "name": "Jund Sacrifice",
+      "meta_share": 1.1,
+      "colors": [
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Mayhem Devil",
+        "Cauldron Familiar",
+        "Witch's Oven"
+      ]
+    },
+    {
+      "name": "Sultai Scapeshift",
+      "meta_share": 1.0,
+      "colors": [
+        "U",
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Yorion, Sky Nomad",
+        "Scapeshift",
+        "Lumra, Bellow of the Woods"
+      ]
+    },
+    {
+      "name": "Selesnya Angels",
+      "meta_share": 1.0,
+      "colors": [
+        "W",
+        "G"
+      ],
+      "signature_cards": [
+        "Righteous Valkyrie",
+        "Resplendent Angel",
+        "Bishop of Wings"
+      ]
+    },
+    {
+      "name": "4c Scapeshift",
+      "meta_share": 0.7,
+      "colors": [
+        "W",
+        "U",
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Scapeshift",
+        "Lumra, Bellow of the Woods",
+        "Formidable Speaker"
+      ]
+    },
+    {
+      "name": "Boros Prowess",
+      "meta_share": 0.6,
+      "colors": [
+        "W",
+        "R"
+      ],
+      "signature_cards": [
+        "Screaming Nemesis",
+        "Emberheart Challenger",
+        "Soul-Scar Mage"
+      ]
+    },
+    {
+      "name": "Gruul Prowess",
+      "meta_share": 0.6,
+      "colors": [
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Screaming Nemesis",
+        "Emberheart Challenger",
+        "Soul-Scar Mage"
+      ]
+    },
+    {
+      "name": "5c Scapeshift",
+      "meta_share": 0.6,
+      "colors": [
+        "W",
+        "U",
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Scapeshift",
+        "Lumra, Bellow of the Woods",
+        "Formidable Speaker"
+      ]
+    },
+    {
+      "name": "Nykthos Ramp",
+      "meta_share": 0.5,
+      "colors": [
+        "W",
+        "G"
+      ],
+      "signature_cards": [
+        "Nykthos, Shrine to Nyx",
+        "Vibrance",
+        "Leyline of the Guildpact"
+      ]
+    },
+    {
+      "name": "Mono-Red Aggro",
+      "meta_share": 0.5,
+      "colors": [
+        "R"
+      ],
+      "signature_cards": [
+        "Monastery Swiftspear",
+        "Screaming Nemesis",
+        "Eidolon of the Great Revel"
+      ]
+    },
+    {
+      "name": "Mono-Black Midrange",
+      "meta_share": 0.4,
+      "colors": [
+        "B"
+      ],
+      "signature_cards": [
+        "Thoughtseize",
+        "Sheoldred, the Apocalypse",
+        "Graveyard Trespasser"
+      ]
+    },
+    {
+      "name": "Grixis Midrange",
+      "meta_share": 0.4,
+      "colors": [
+        "U",
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Thoughtseize",
+        "Flow State",
+        "Fatal Push"
+      ]
+    },
+    {
+      "name": "Esper Midrange",
+      "meta_share": 0.3,
+      "colors": [
+        "W",
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Thoughtseize",
+        "Fatal Push",
+        "Quantum Riddler"
+      ]
+    },
+    {
+      "name": "Mardu Greasefang",
+      "meta_share": 0.3,
+      "colors": [
+        "W",
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Thoughtseize",
+        "Fear of Missing Out",
+        "Parhelion II"
+      ]
+    },
+    {
+      "name": "4c Legends",
+      "meta_share": 0.3,
+      "colors": [
+        "W",
+        "U",
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Glasspool Mimic",
+        "Carnage, Crimson Chaos",
+        "Tinybones Joins Up"
+      ]
+    },
+    {
+      "name": "Esper Control",
+      "meta_share": 0.3,
+      "colors": [
+        "W",
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Kaheera, the Orphanguard",
+        "Consult the Star Charts",
+        "Thoughtseize"
+      ]
+    },
+    {
+      "name": "Orzhov Midrange",
+      "meta_share": 0.3,
+      "colors": [
+        "W",
+        "B"
+      ],
+      "signature_cards": [
+        "Thoughtseize",
+        "Fatal Push",
+        "Gifted Aetherborn"
+      ]
+    },
+    {
+      "name": "Azorius Flash",
+      "meta_share": 0.2,
+      "colors": [
+        "W",
+        "U"
+      ],
+      "signature_cards": [
+        "Drannith Magistrate",
+        "Consult the Star Charts",
+        "Aven Interrupter"
+      ]
+    },
+    {
+      "name": "Mardu Transmogrify",
+      "meta_share": 0.2,
+      "colors": [
+        "W",
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Thoughtseize",
+        "Case of the Stashed Skeleton",
+        "Transmogrify"
+      ]
+    },
+    {
+      "name": "4c Elementals",
+      "meta_share": 0.2,
+      "colors": [
+        "W",
+        "U",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Collected Company",
+        "Llanowar Elves",
+        "Risen Reef"
+      ]
+    },
+    {
+      "name": "4c Midrange",
+      "meta_share": 0.2,
+      "colors": [
+        "W",
+        "U",
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Quantum Riddler",
+        "Thoughtseize",
+        "Fatal Push"
+      ]
+    },
+    {
+      "name": "5c Indomitable Creativity",
+      "meta_share": 0.2,
+      "colors": [
+        "W",
+        "U",
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Indomitable Creativity",
+        "Prismari Command",
+        "Spell Pierce"
+      ]
+    },
+    {
+      "name": "Dimir Midrange",
+      "meta_share": 0.2,
+      "colors": [
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Yorion, Sky Nomad",
+        "Stormchaser's Talent",
+        "Thoughtseize"
+      ]
+    },
+    {
+      "name": "Sultai Midrange",
+      "meta_share": 0.2,
+      "colors": [
+        "U",
+        "B",
+        "G"
+      ],
+      "signature_cards": [
+        "Consult the Star Charts",
+        "Shark Typhoon",
+        "Fatal Push"
+      ]
+    },
+    {
+      "name": "Simic Scapeshift",
+      "meta_share": 0.1,
+      "colors": [
+        "U",
+        "G"
+      ],
+      "signature_cards": [
+        "Scapeshift",
+        "Lumra, Bellow of the Woods",
+        "Spelunking"
+      ]
+    },
+    {
+      "name": "Rakdos Tree",
+      "meta_share": 0.1,
+      "colors": [
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Tree of Perdition",
+        "Agatha's Soul Cauldron",
+        "Thoughtseize"
+      ]
+    },
+    {
+      "name": "Mono-Blue Rona Combo",
+      "meta_share": 0.1,
+      "colors": [
+        "U"
+      ],
+      "signature_cards": [
+        "Mox Amber",
+        "Stormchaser's Talent",
+        "Valley Floodcaller"
+      ]
+    },
+    {
+      "name": "Mono-Red Goblins",
+      "meta_share": 0.1,
+      "colors": [
+        "R"
+      ],
+      "signature_cards": [
+        "Legion Loyalist",
+        "Rundvelt Hordemaster",
+        "Goblin Warchief"
+      ]
+    },
+    {
+      "name": "5c Heroic",
+      "meta_share": 0.1,
+      "colors": [
+        "W",
+        "U",
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Sheltered by Ghosts",
+        "Practiced Offense",
+        "Illuminator Virtuoso"
+      ]
+    },
+    {
+      "name": "Boros Heroic",
+      "meta_share": 0.1,
+      "colors": [
+        "W",
+        "R"
+      ],
+      "signature_cards": [
+        "Leyline of Resonance",
+        "Monastery Swiftspear",
+        "Honor"
+      ]
+    },
+    {
+      "name": "Mono-White Token Control",
+      "meta_share": 0.1,
+      "colors": [
+        "W"
+      ],
+      "signature_cards": [
+        "Yorion, Sky Nomad",
+        "Caretaker's Talent",
+        "Enduring Innocence"
+      ]
+    },
+    {
+      "name": "Dimir Aggro",
+      "meta_share": 0.1,
+      "colors": [
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Kaito, Bane of Nightmares",
+        "Thoughtseize",
+        "Mockingbird"
+      ]
+    },
+    {
+      "name": "Quintorius Combo",
+      "meta_share": 0.1,
+      "colors": [
+        "W",
+        "U",
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Quintorius Kand",
+        "Yorion, Sky Nomad",
+        "Sea Gate Restoration"
+      ]
+    },
+    {
+      "name": "Soulflayer",
+      "meta_share": 0.1,
+      "colors": [
+        "W",
+        "U",
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Ketramose, the New Dawn",
+        "Soulflayer",
+        "Zetalpa, Primal Dawn"
+      ]
+    },
+    {
+      "name": "Rakdos Prowess",
+      "meta_share": 0.1,
+      "colors": [
+        "B",
+        "R"
+      ],
+      "signature_cards": [
+        "Monastery Swiftspear",
+        "Slickshot Show-Off",
+        "Emberheart Challenger"
+      ]
+    },
+    {
+      "name": "Gruul Midrange",
+      "meta_share": 0.1,
+      "colors": [
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Badgermole Cub",
+        "Reckless Stormseeker",
+        "Elvish Mystic"
+      ]
+    },
+    {
+      "name": "Dredgeless Dredge",
+      "meta_share": 0.1,
+      "colors": [
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Bloodghast",
+        "Prized Amalgam",
+        "Narcomoeba"
+      ]
+    },
+    {
+      "name": "Jeskai Ascendancy",
+      "meta_share": 0.1,
+      "colors": [
+        "W",
+        "U",
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Badgermole Cub",
+        "Stormchaser's Talent",
+        "Jeskai Ascendancy"
+      ]
+    },
+    {
+      "name": "Mono-White Humans",
+      "meta_share": 0.1,
+      "colors": [
+        "W"
+      ],
+      "signature_cards": [
+        "Adeline, Resplendent Cathar",
+        "Thalia's Lieutenant",
+        "Thalia, Guardian of Thraben"
+      ]
+    },
+    {
+      "name": "Dimir Control",
+      "meta_share": 0.1,
+      "colors": [
+        "U",
+        "B"
+      ],
+      "signature_cards": [
+        "Fae of Wishes",
+        "Ashiok, Nightmare Muse",
+        "Drown in the Loch"
+      ]
+    },
+    {
+      "name": "Bant Spirits",
+      "meta_share": 0.1,
+      "colors": [
+        "W",
+        "U",
+        "G"
+      ],
+      "signature_cards": [
+        "Supreme Phantom",
+        "Mausoleum Wanderer",
+        "Skyclave Apparition"
+      ]
+    },
+    {
+      "name": "Orzhov Humans",
+      "meta_share": 0.1,
+      "colors": [
+        "W",
+        "B"
+      ],
+      "signature_cards": [
+        "Dark Confidant",
+        "Adeline, Resplendent Cathar",
+        "Thalia's Lieutenant"
+      ]
+    },
+    {
+      "name": "Azorius Spirits",
+      "meta_share": 0.1,
+      "colors": [
+        "W",
+        "U"
+      ],
+      "signature_cards": [
+        "Rattlechains",
+        "No More Lies",
+        "Supreme Phantom"
+      ]
+    },
+    {
+      "name": "Boros Burn",
+      "meta_share": 0.1,
+      "colors": [
+        "W",
+        "R"
+      ],
+      "signature_cards": [
+        "Screaming Nemesis",
+        "Boros Charm",
+        "Boltwave"
+      ]
+    },
+    {
+      "name": "Song of Creation",
+      "meta_share": 0.1,
+      "colors": [
+        "W",
+        "U",
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Song of Creation",
+        "Mox Amber",
+        "Beseech the Mirror"
+      ]
+    },
+    {
+      "name": "Boros Humans",
+      "meta_share": 0.1,
+      "colors": [
+        "W",
+        "R"
+      ],
+      "signature_cards": [
+        "Thalia's Lieutenant",
+        "Thalia, Guardian of Thraben",
+        "Warden of the Inner Sky"
+      ]
+    },
+    {
+      "name": "5c Humans",
+      "meta_share": 0.1,
+      "colors": [
+        "W",
+        "U",
+        "B",
+        "R",
+        "G"
+      ],
+      "signature_cards": [
+        "Collected Company",
+        "Thalia's Lieutenant",
+        "Reflector Mage"
+      ]
+    },
+    {
+      "name": "Metalwork Colossus",
+      "meta_share": 0.1,
+      "colors": [
+        "W",
+        "U"
+      ],
+      "signature_cards": [
+        "Simulacrum Synthesizer",
+        "Metalwork Colossus",
+        "Leyline Axe"
+      ]
+    }
+  ]
+}

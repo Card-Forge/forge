@@ -23,6 +23,7 @@ import com.google.common.collect.Lists;
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.LearnAi;
+import forge.ai.llm.DeckRecognitionManager;
 import forge.ai.simulation.GameStateEvaluator;
 import forge.ai.simulation.SpellAbilityPicker;
 import forge.card.CardStateName;
@@ -104,6 +105,8 @@ public class AiController {
         game = game0;
         memory = new AiCardMemory();
         simPicker = new SpellAbilityPicker(game, player);
+        // Optional LLM deck-recognition feature; off by default and fail-soft.
+        DeckRecognitionManager.attach(this, player, game);
     }
 
     public boolean canCheatShuffle() {

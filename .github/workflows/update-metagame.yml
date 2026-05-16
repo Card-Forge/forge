@@ -1,0 +1,46 @@
+name: Update metagame
+
+# Refreshes the scraped metagame data the LLM sidecar uses for deck
+# recognition. Runs weekly; can also be triggered manually.
+
+on:
+  schedule:
+    # Mondays at 08:00 UTC
+    - cron: "0 8 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: forge-llm-sidecar
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install scraper dependencies
+        run: pip install httpx beautifulsoup4
+
+      - name: Scrape metagame
+        run: python scripts/scrape_metagame.py
+
+      - name: Commit updated metagame data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add app/knowledge/metagame_data/*.json
+          if git diff --cached --quiet; then
+            echo "No metagame changes."
+          else
+            git commit -m "chore: refresh metagame data [skip ci]"
+            git push
+          fi
