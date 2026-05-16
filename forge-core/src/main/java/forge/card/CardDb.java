@@ -965,7 +965,7 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     @Override
     public Collection<PaperCard> getAllCards() {
-        return Collections.unmodifiableCollection(allCardsByName.values());
+        return Collections.unmodifiableCollection(allCardsByRules.values());
     }
 
     // returns a list of all cards from their respective latest (or preferred) editions
