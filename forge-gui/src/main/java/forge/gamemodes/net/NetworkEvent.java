@@ -184,8 +184,8 @@ public final class NetworkEvent {
         if (tags != null) {
             if (tags[0] != null) {
                 formatText = EventFormat.BOOSTER_DRAFT.name().equals(tags[0])
-                        ? localizer.getMessage("lblNetworkModeDraft")
-                        : localizer.getMessage("lblNetworkModeSealed");
+                        ? localizer.getMessage("lblDraft")
+                        : localizer.getMessage("lblSealed");
             }
             if (tags[1] != null && !tags[1].isEmpty()) productText = tags[1];
             if (tags[2] != null && !tags[2].isEmpty()) dateText = tags[2];
@@ -212,8 +212,8 @@ public final class NetworkEvent {
             desc = lastEventView.getProductDescription();
         }
         String formatText = (evFormat == EventFormat.BOOSTER_DRAFT)
-                ? localizer.getMessage("lblNetworkModeDraft")
-                : localizer.getMessage("lblNetworkModeSealed");
+                ? localizer.getMessage("lblDraft")
+                : localizer.getMessage("lblSealed");
         String productText = "—";
         if (desc != null && !desc.isEmpty()) {
             productText = desc;

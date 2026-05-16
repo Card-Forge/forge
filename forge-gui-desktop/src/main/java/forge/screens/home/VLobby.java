@@ -118,9 +118,9 @@ public class VLobby implements ILobbyView {
     private final Vector<Object> aiListData = new Vector<>();
 
     // Mode selector (network only). Mode state lives in CLobby; this combo is the widget.
-    private final FComboBoxPanel<String> cboModePanel = new FComboBoxPanel<>(Localizer.getInstance().getMessage("lblNetworkLobbyMode"),
-            ImmutableList.of(Localizer.getInstance().getMessage("lblNetworkModeConstructed"),
-                    Localizer.getInstance().getMessage("lblNetworkModeLimited")));
+    private final FComboBoxPanel<String> cboModePanel = new FComboBoxPanel<>(Localizer.getInstance().getMessage("lblMode"),
+            ImmutableList.of(Localizer.getInstance().getMessage("lblConstructed"),
+                    Localizer.getInstance().getMessage("lblLimited")));
 
     // Event config panel (top of right panel in Draft/Sealed mode)
     private final FPanel eventConfigPanel = new FPanel(new MigLayout("insets 5 10 15 10, gap 2, wrap"));
@@ -128,10 +128,10 @@ public class VLobby implements ILobbyView {
     private final FLabel lblEventProduct = new FLabel.Builder().text("\u2014").fontSize(14).fontStyle(Font.BOLD).fontAlign(javax.swing.SwingConstants.LEFT).build();
     private final FLabel lblEventPanelTitle = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblNetworkEventDetailsTitle")).fontSize(15).fontStyle(Font.BOLD).build();
     private final FLabel lblEventStatus = new FLabel.Builder().fontSize(12).fontStyle(Font.ITALIC).build();
-    private final FLabel lblEventFormatCaption = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblNetworkFormatCaption")).fontSize(13).build();
-    private final FLabel lblEventProductCaption = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblNetworkProductCaption")).fontSize(13).build();
+    private final FLabel lblEventFormatCaption = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblFormat")).fontSize(13).build();
+    private final FLabel lblEventProductCaption = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblProduct")).fontSize(13).build();
     private final FLabel lblEventPickTimerCaption = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblNetworkPickTimerCaption")).fontSize(13).build();
-    private final FLabel lblEventDateCaption = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblNetworkDateCaption")).fontSize(13).build();
+    private final FLabel lblEventDateCaption = new FLabel.Builder().text(Localizer.getInstance().getMessage("lblEventDate")).fontSize(13).build();
     private final FLabel lblEventDate = new FLabel.Builder().text("\u2014").fontSize(14).fontStyle(Font.BOLD).fontAlign(javax.swing.SwingConstants.LEFT).build();
     private final FLabel lblEventPickTimer = new FLabel.Builder().text("\u2014").fontSize(14).fontStyle(Font.BOLD).fontAlign(javax.swing.SwingConstants.LEFT).build();
     private final FButton btnNewEvent = new FButton(Localizer.getInstance().getMessage("lblNetworkNewEventButton"));

@@ -473,10 +473,10 @@ public enum ColumnDef {
         if (rawFormat.isEmpty()) return "";
         Localizer localizer = Localizer.getInstance();
         if (EventFormat.BOOSTER_DRAFT.name().equals(rawFormat)) {
-            return localizer.getMessage("lblNetworkModeDraft");
+            return localizer.getMessage("lblDraft");
         }
         if (EventFormat.SEALED.name().equals(rawFormat)) {
-            return localizer.getMessage("lblNetworkModeSealed");
+            return localizer.getMessage("lblSealed");
         }
         return rawFormat;
     }

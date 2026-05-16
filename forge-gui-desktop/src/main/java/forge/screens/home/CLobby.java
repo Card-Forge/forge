@@ -119,7 +119,7 @@ public class CLobby {
         }
 
         final String selected = view.getCurrentModeSelection();
-        if (Localizer.getInstance().getMessage("lblNetworkModeLimited").equals(selected)) {
+        if (Localizer.getInstance().getMessage("lblLimited").equals(selected)) {
             currentMode = LobbyMode.LIMITED;
         } else {
             currentMode = LobbyMode.CONSTRUCTED;
@@ -282,7 +282,7 @@ public class CLobby {
         }
 
         // Step 1: Choose event type (Draft / Sealed)
-        String[] formatNames = { localizer.getMessage("lblNetworkModeDraft"), localizer.getMessage("lblNetworkModeSealed") };
+        String[] formatNames = { localizer.getMessage("lblDraft"), localizer.getMessage("lblSealed") };
         String chosenFormatName = GuiChoose.oneOrNone(
                 localizer.getMessage("lblNetworkChooseEventType"), formatNames);
         if (chosenFormatName == null) return;
