@@ -445,9 +445,9 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     }
 
     @Override
-    public void setHighlighted(final GameEntityView ge, final boolean value) {
-        super.setHighlighted(ge, value);
-        send(ProtocolMethod.setHighlighted, ge, value);
+    public void setHighlighted(final Iterable<GameEntityView> entities, final boolean value) {
+        super.setHighlighted(entities, value);
+        send(ProtocolMethod.setHighlighted, entities, value);
     }
 
     @Override
