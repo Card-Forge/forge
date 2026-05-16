@@ -110,8 +110,12 @@ public abstract class ImageFetcher {
             final List<String> boosterFileContent = FileUtil.readFile(ForgeConstants.IMAGE_LIST_QUEST_BOOSTERS_FILE);
 
             for (String line : boosterFileContent) {
-                if (line.startsWith(filename)) {
-                    downloadUrls.add(ForgeConstants.GITHUB_ASSETS_BASE + "/images/boosters/" + filename);
+                if (line.endsWith(filename)) {
+                    if (line.startsWith("http")) {
+                        downloadUrls.add(line);
+                    } else {
+                        downloadUrls.add(ForgeConstants.GITHUB_ASSETS_BASE + "images/boosters/" + filename);
+                    }
                     break;
                 }
             }
