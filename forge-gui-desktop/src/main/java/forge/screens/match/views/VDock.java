@@ -294,7 +294,7 @@ public class VDock implements IVDoc<CDock> {
         YIELD_SETTINGS (FSkinProp.ICO_DOCK_SETTINGS,    "lblYieldSettings",           true),
         END_TURN       (FSkinProp.ICO_DOCK_ENDTURN,     "lblEndTurn",                 true),
         ALPHA_STRIKE   (FSkinProp.ICO_DOCK_ALPHASTRIKE, "lblAlphaStrike",             true),
-        TARGETING      (FSkinProp.ICO_ARCSOFF,          "lblTargetingArcsOff",        true),
+        TARGETING      (FSkinProp.ICO_ARCSOFF,          "lblTargetingArcs",           true),
         AUTO_YIELDS    (FSkinProp.ICO_AUTOYIELDS,       "lblAutoYieldsAndTriggers",   true),
         VIEW_DECK_LIST (FSkinProp.ICO_DOCK_DECKLIST,    "lblViewDeckList",            true),
         CONCEDE        (FSkinProp.ICO_DOCK_CONCEDE,     "lblConcedeGame",             false);

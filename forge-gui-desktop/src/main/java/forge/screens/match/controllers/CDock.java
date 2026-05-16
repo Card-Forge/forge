@@ -115,15 +115,13 @@ public class CDock implements ICDoc {
         final VDock.DockButton targeting = view.getButton(DockButtonId.TARGETING);
         targeting.setActive(arcs != ArcState.OFF);
         targeting.setImage(FSkin.getIcon(arcs == ArcState.ON ? FSkinProp.ICO_ARCSON : FSkinProp.ICO_ARCSOFF));
-        targeting.setToolTipText(Localizer.getInstance().getMessage(targetingTooltipKey(arcs)));
-    }
-
-    private static String targetingTooltipKey(final ArcState arcs) {
-        return switch (arcs) {
-            case OFF -> "lblTargetingArcsOff";
-            case MOUSEOVER -> "lblTargetingArcsCardMouseover";
-            case ON -> "lblTargetingArcsAlwaysOn";
+        final Localizer loc = Localizer.getInstance();
+        final String stateKey = switch (arcs) {
+            case OFF -> "lblOff";
+            case MOUSEOVER -> "lblCardMouseOver";
+            case ON -> "lblAlwaysOn";
         };
+        targeting.setToolTipText(loc.getMessage("lblTargetingArcs") + ": " + loc.getMessage(stateKey));
     }
 
     @Override
