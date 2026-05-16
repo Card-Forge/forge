@@ -13,6 +13,7 @@ import forge.model.FModel;
 import java.io.File;
 import java.util.*;
 import java.util.concurrent.RejectedExecutionException;
+import java.util.regex.Pattern;
 
 public abstract class ImageFetcher {
     // see https://scryfall.com/docs/api/languages and
@@ -110,11 +111,15 @@ public abstract class ImageFetcher {
             final List<String> boosterFileContent = FileUtil.readFile(ForgeConstants.IMAGE_LIST_QUEST_BOOSTERS_FILE);
 
             for (String line : boosterFileContent) {
-                if (line.endsWith(filename)) {
+                boolean exactMatch = line.endsWith(filename);
+                boolean filenameHasNoExtension = filename.lastIndexOf('.') == -1;
+                boolean matchesWithExtension = line.matches(".*" + Pattern.quote(filename) + "\\.[^.]+$");
+
+                if (exactMatch || (filenameHasNoExtension && matchesWithExtension)) {
                     if (line.startsWith("http")) {
                         downloadUrls.add(line);
                     } else {
-                        downloadUrls.add(ForgeConstants.GITHUB_ASSETS_BASE + "images/boosters/" + filename);
+                        downloadUrls.add(ForgeConstants.GITHUB_ASSETS_BASE + "images/boosters/" + line);
                     }
                     break;
                 }
