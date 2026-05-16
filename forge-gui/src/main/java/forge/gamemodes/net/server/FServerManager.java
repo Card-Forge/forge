@@ -1002,11 +1002,9 @@ public final class FServerManager implements IHasForgeLog {
                         updateLobbyState();
                     }
                 }
-            } else if (msg instanceof UpdateLobbyPlayerEvent event) {
-                updateSlot(client.getIndex(), event);
             }
-            // Note: MessageEvent is handled by MessageHandler, not here
-            // to avoid duplicate display on host's chat
+            // Note: UpdateLobbyPlayerEvent is intercepted by RegisterClientHandler
+            // (early return), and MessageEvent is handled by MessageHandler.
             super.channelRead(ctx, msg);
         }
     }
