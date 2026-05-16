@@ -444,7 +444,12 @@ public final class FServerManager implements IHasForgeLog {
         return null;
     }
 
-    private RemoteClient findClientByIndex(final int index) {
+    /**
+     * Look up a connected client by lobby slot index. Public for test harnesses
+     * that have a slot index but not a RemoteClient; production code typically
+     * receives the client via channel callbacks or reconnect-map lookups.
+     */
+    public RemoteClient findClientByIndex(final int index) {
         for (final RemoteClient client : clients.values()) {
             if (client.getIndex() == index) {
                 return client;
@@ -719,7 +724,7 @@ public final class FServerManager implements IHasForgeLog {
         final Timer timer = reconnectTimers.remove(target);
         if (timer != null) { timer.cancel(); }
         if (isMatchActive()) {
-            convertToAI(client.getIndex(), target);
+            convertToAI(client);
         }
         localLobby.disconnectPlayer(client.getIndex());
         broadcast(new MessageEvent(String.format("Host forced AI takeover for %s.", target)));
@@ -771,54 +776,35 @@ public final class FServerManager implements IHasForgeLog {
         return null;
     }
 
-    private void pauseRemoteClientGuiGame(final int slotIndex) {
-        final HostedMatch hostedMatch = localLobby.getHostedMatch();
-        if (hostedMatch == null) { return; }
-        final Game game = hostedMatch.getGame();
-        if (game == null) { return; }
-
-        for (final Player p : game.getPlayers()) {
-            final IGuiGame gui = hostedMatch.getGuiForPlayer(p);
-            if (gui instanceof RemoteClientGuiGame ngg && ngg.getClient().getIndex() == slotIndex) {
-                ngg.pause();
-                netLog.info("[Reconnect] Paused RemoteClientGuiGame for slot {} ({})", slotIndex, p.getName());
-                return;
-            }
-        }
+    private void pauseRemoteClientGuiGame(final RemoteClient client) {
+        final RemoteClientGuiGame gui = client.getGui();
+        if (gui == null) { return; }
+        gui.pause();
+        netLog.info("[Reconnect] Paused RemoteClientGuiGame for slot {} ({})", client.getIndex(), client.getUsername());
     }
 
     private void resumeAndResync(final RemoteClient client) {
         final int slotIndex = client.getIndex();
-        final HostedMatch hostedMatch = localLobby.getHostedMatch();
-        if (hostedMatch == null) { return; }
-        final Game game = hostedMatch.getGame();
-        if (game == null) { return; }
+        final RemoteClientGuiGame netGui = client.getGui();
+        if (netGui == null) { return; }
 
-        // Match by slot index — player names may be deduped by the game engine
-        // so name matching is unreliable
-        for (final Player p : game.getPlayers()) {
-            final IGuiGame gui = hostedMatch.getGuiForPlayer(p);
-            if (gui instanceof RemoteClientGuiGame netGui && netGui.getClient().getIndex() == slotIndex) {
-                netLog.info("[Reconnect] Resuming RemoteClientGuiGame for slot {} ({})", slotIndex, p.getName());
-                netGui.resume();
+        netLog.info("[Reconnect] Resuming RemoteClientGuiGame for slot {} ({})", slotIndex, client.getUsername());
+        netGui.resume();
 
-                // Reset delta sync state — reconnecting client has no prior baseline
-                netGui.resetForReconnect();
-                netLog.info("[Reconnect] Delta sync state reset for slot {}", slotIndex);
+        // Reset delta sync state — reconnecting client has no prior baseline
+        netGui.resetForReconnect();
+        netLog.info("[Reconnect] Delta sync state reset for slot {}", slotIndex);
 
-                // Send game state via setGameView protocol (client needs gameView set before openView)
-                netGui.updateGameView();
-                netGui.openView(new forge.trackable.TrackableCollection<>(netGui.getLocalPlayers()));
-                netLog.info("[Reconnect] Sent game state and openView to slot {}", slotIndex);
+        // Send game state via setGameView protocol (client needs gameView set before openView)
+        netGui.updateGameView();
+        netGui.openView(new forge.trackable.TrackableCollection<>(netGui.getLocalPlayers()));
+        netLog.info("[Reconnect] Sent game state and openView to slot {}", slotIndex);
 
-                // Replay current prompt
-                final PlayerControllerHuman pch = findRemoteController(slotIndex);
-                if (pch != null) {
-                    pch.getInputQueue().updateObservers();
-                    netLog.info("[Reconnect] Replayed current prompt for slot {}", slotIndex);
-                }
-                return;
-            }
+        // Replay current prompt
+        final PlayerControllerHuman pch = findRemoteController(slotIndex);
+        if (pch != null) {
+            pch.getInputQueue().updateObservers();
+            netLog.info("[Reconnect] Replayed current prompt for slot {}", slotIndex);
         }
     }
 
@@ -834,7 +820,7 @@ public final class FServerManager implements IHasForgeLog {
         }
 
         netLog.info("[Reconnect] Timeout for {}. Converting to AI.", username);
-        convertToAI(client.getIndex(), username);
+        convertToAI(client);
 
         // Reset lobby slot
         localLobby.disconnectPlayer(client.getIndex());
@@ -842,29 +828,25 @@ public final class FServerManager implements IHasForgeLog {
         broadcast(MessageEvent.warning(String.format("%s did not reconnect in time. AI has taken over.", username)));
     }
 
-    public void convertToAI(final int slotIndex, final String username) {
+    public void convertToAI(final RemoteClient client) {
+        final int slotIndex = client.getIndex();
+        final PlayerControllerHuman pch = findRemoteController(slotIndex);
+        // The instanceof check filters out LOCAL host slots — only convert remote players
+        if (pch == null || !(pch.getGui() instanceof RemoteClientGuiGame)) { return; }
         final HostedMatch hostedMatch = localLobby.getHostedMatch();
         if (hostedMatch == null) { return; }
         final Game game = hostedMatch.getGame();
         if (game == null) { return; }
+        final Player p = pch.getPlayer();
 
-        for (final Player p : game.getPlayers()) {
-            final IGuiGame gui = hostedMatch.getGuiForPlayer(p);
-            if (gui instanceof RemoteClientGuiGame rgc && rgc.getClient().getIndex() == slotIndex) {
-                final LobbyPlayerAi aiLobbyPlayer = new LobbyPlayerAi(p.getName(), null);
-                final PlayerControllerAi aiCtrl = new PlayerControllerAi(game, p, aiLobbyPlayer);
-                p.dangerouslySetController(aiCtrl);
-                netLog.info("[Reconnect] Converted slot {} ({}) to AI controller", slotIndex, p.getName());
+        final LobbyPlayerAi aiLobbyPlayer = new LobbyPlayerAi(p.getName(), null);
+        final PlayerControllerAi aiCtrl = new PlayerControllerAi(game, p, aiLobbyPlayer);
+        p.dangerouslySetController(aiCtrl);
+        netLog.info("[Reconnect] Converted slot {} ({}) to AI controller", slotIndex, p.getName());
 
-                // Clear InputQueue to unblock the game thread (waiting on cdlDone)
-                final PlayerControllerHuman pch = findRemoteController(slotIndex);
-                if (pch != null) {
-                    pch.getInputQueue().clearInputs();
-                    netLog.info("[Reconnect] Cleared input queue for slot {}", slotIndex);
-                }
-                return;
-            }
-        }
+        // Clear InputQueue to unblock the game thread (waiting on cdlDone)
+        pch.getInputQueue().clearInputs();
+        netLog.info("[Reconnect] Cleared input queue for slot {}", slotIndex);
     }
 
     private class MessageHandler extends ChannelInboundHandlerAdapter {
@@ -1054,7 +1036,7 @@ public final class FServerManager implements IHasForgeLog {
             if (isMatchActive() && client.hasValidSlot()) {
                 // Game is active — enter reconnection mode
                 // Pause the RemoteClientGuiGame so sends become no-ops
-                pauseRemoteClientGuiGame(playerIndex);
+                pauseRemoteClientGuiGame(client);
 
                 // Store for reconnection lookup
                 disconnectedClients.put(username, client);
