@@ -35,8 +35,8 @@ public enum FDraftOverlay {
 
     private boolean hasBeenShown;
 
-    private final FSkin.SkinnedLabel lblPackInfo  = new FSkin.SkinnedLabel("");
-    private final FSkin.SkinnedLabel lblTimer     = new FSkin.SkinnedLabel("");
+    private final FSkin.SkinnedLabel lblPackInfo  = makeTextLabel("");
+    private final FSkin.SkinnedLabel lblTimer     = makeTextLabel("");
     private final JPanel pnlNeighbors = new JPanel(new FlowLayout(FlowLayout.CENTER, 4, 0));
 
     private static ImageIcon cardBackIcon;
@@ -67,22 +67,9 @@ public enum FDraftOverlay {
         // centers between the info row and the bottom of the window
         window.setLayout(new MigLayout("insets 4, gap 0, wrap 2", "", "[][grow]"));
 
-        // Apply bold skin font and text color to all labels
-        FSkin.SkinColor textColor = FSkin.getColor(FSkin.Colors.CLR_TEXT);
-
-        lblPackInfo.setFont(FSkin.getBoldFont(14));
-        lblTimer.setFont(FSkin.getBoldFont(14));
-
-        if (textColor != null) {
-            lblPackInfo.setForeground(textColor);
-            lblTimer.setForeground(textColor);
-        }
-
         lblPackInfo.setHorizontalAlignment(SwingConstants.LEFT);
         lblTimer.setHorizontalAlignment(SwingConstants.RIGHT);
 
-        lblPackInfo.setOpaque(false);
-        lblTimer.setOpaque(false);
         pnlNeighbors.setOpaque(false);
 
         // Row 1: pack info on the left, timer on the right
@@ -391,7 +378,7 @@ public enum FDraftOverlay {
         }
     }
 
-    private JLabel makeTextLabel(String text) {
+    private FSkin.SkinnedLabel makeTextLabel(String text) {
         FSkin.SkinnedLabel lbl = new FSkin.SkinnedLabel(text);
         lbl.setFont(FSkin.getBoldFont(14));
         FSkin.SkinColor color = FSkin.getColor(FSkin.Colors.CLR_TEXT);
