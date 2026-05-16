@@ -85,8 +85,6 @@ public final class FServerManager implements IHasForgeLog {
         }
     });
 
-    private final Map<Integer, RemoteClientGuiGame> playerGuis = new ConcurrentHashMap<>(); // Store RemoteClientGuiGame instances for reuse
-
     // Network byte tracking for monitoring actual bandwidth usage
     private final forge.gamemodes.net.NetworkByteTracker byteTracker =
             FModel.getNetPreferences().getPrefBoolean(forge.localinstance.properties.ForgeNetPreferences.FNetPref.NET_BANDWIDTH_LOGGING) ? new forge.gamemodes.net.NetworkByteTracker() : null;
@@ -433,25 +431,35 @@ public final class FServerManager implements IHasForgeLog {
             gui.setNetGame();
             return gui;
         } else if (type == LobbySlotType.REMOTE) {
-            // Check if we already have a stored RemoteClientGuiGame for this player
-            RemoteClientGuiGame existingGui = playerGuis.get(index);
-            if (existingGui != null) {
-                return existingGui;
-            }
-            // Create a new RemoteClientGuiGame and store it
-            for (final RemoteClient client : clients.values()) {
-                if (client.getIndex() == index) {
-                    RemoteClientGuiGame newGui = new RemoteClientGuiGame(client);
-                    playerGuis.put(index, newGui);
-                    return newGui;
+            final RemoteClient client = findClientByIndex(index);
+            if (client != null) {
+                RemoteClientGuiGame gui = client.getGui();
+                if (gui == null) {
+                    gui = new RemoteClientGuiGame(client);
+                    client.setGui(gui);
                 }
+                return gui;
+            }
+        }
+        return null;
+    }
+
+    private RemoteClient findClientByIndex(final int index) {
+        for (final RemoteClient client : clients.values()) {
+            if (client.getIndex() == index) {
+                return client;
             }
         }
         return null;
     }
 
     public void clearPlayerGuis() {
-        playerGuis.clear();
+        for (final RemoteClient client : clients.values()) {
+            client.clearGui();
+        }
+        for (final RemoteClient client : disconnectedClients.values()) {
+            client.clearGui();
+        }
     }
 
     // inspired by:

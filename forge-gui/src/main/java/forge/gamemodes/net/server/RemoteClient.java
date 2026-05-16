@@ -25,6 +25,7 @@ public final class RemoteClient implements IToClient, IHasForgeLog {
     private volatile Tracker codecTracker;
     private volatile int codecConsumerId = -1;
     private final AtomicInteger sendErrors = new AtomicInteger(0);
+    private RemoteClientGuiGame gui;
 
     // Package-private: SaturationLoggingHandler reads/resets these on writability transitions
     volatile long saturationStartMs = 0L;
@@ -162,6 +163,16 @@ public final class RemoteClient implements IToClient, IHasForgeLog {
     }
     public void setLibgdx(final boolean libgdx) {
         this.libgdx = libgdx;
+    }
+
+    public RemoteClientGuiGame getGui() {
+        return gui;
+    }
+    public void setGui(final RemoteClientGuiGame gui) {
+        this.gui = gui;
+    }
+    public void clearGui() {
+        this.gui = null;
     }
 
     /**
