@@ -35,7 +35,9 @@ RL01b R The Magical City, New @
 RL01c R ______ @
 RL01d R Blustering Barnyard @
 RL01e R A-Town @
+RL01f R The Goblin Sparring Grounds @
 RU01 R Lord of Atlanta @
+RU01a R The Whiteboarder @
 RZ01a R Anax and Cymede & Kynaios and Tiro @
 RZ01b R The Water Maro @
 RZ01c R Valko Indorian, Researcher @
@@ -45,21 +47,25 @@ UA01c U Moth Herb Elixir @
 UB01 U Devoted Abzan @
 UB01a U Bloodspatter Vampire @
 UB01b U Nim Mongoose @
+UL01 U Artist Alley @
 UL01a U Mana Conference @
 UL01b U Urza's Hot Dog Stand @
 UU01 U Dialogue Tree @
 UW01 U Good Knight @
 UW01a U Unstickerify @
+CA02 C A Container of Booster Packs @
 CA02a C Leisure Bicycle @
 CA02b C Your Mana Rock @
 CA02c C Item Crate @
 CB02 C Reverse Ninja @
 CB02a C Demon Detective @
 CB02b C Syr Konrad's Squire @
+CB02c C Fear (Not the Alpha One) @
 CG02a C Naturalize the Phyresis @
 CG02b C That's No Moonmist @
 CR02 C Fear of Going 0-2 Drop @
 CW02 C Unclaimed Cat @
+CZ02 C Spare Changeling @
 MW02 M You, Magic Playtester @
 MW02a M You, Iterative Playtester @
 MZ02 M Delphia, Undecided @
@@ -74,7 +80,10 @@ RG02a R Bringer of Green Zenith's Twilight @
 RG02b R Locus Cobra @
 RG02c R Lona, Tracker of the Known @
 RG02d R Questing Cosplayer @
+RG02e R Land Station @
 RR02 R Norin and Feldon @
+RR02a R The Bringer of the Red Beard @
+RR02b R Occupation of Kulrath @
 RU02 R Memnarchitect @
 RU02a R Disguise Agent @
 RU02c R Phyrexian Adapter @
@@ -91,9 +100,13 @@ RZ02c R The Chaos Keeper @
 RZ02d R The Multiplayer Nitpickers @
 RZ02e R Jiffy, Vehicle Repairer @
 RZ02f R Syx, Robot Overlord @
+RZ02g R The Bearded Teakeeper @
+RZ02h R Uh, Squen & Cragg Made a Card @
+UA02 U Crow Scarer @
 UA02a U Cat Oven @
 UA02b U Deep Dish Pizza @
 UA02c U Aetherflux Car @
+UA02d U Tinfoil Helm @
 UB02a U Bad Knight @
 UB02b U Incubob @
 UB02c U Innistrad Charm @
@@ -125,6 +138,7 @@ CR03c C Aggressive Detective @
 CR03d C Join the Winning Team @
 CU03 C Drake with Set's Mechanic @
 CW03 C Incisor Steed @
+CZ03 C Blended Twistling @
 MU03 M Barce, Friend Finder @
 MZ03 M Gen, Confider of Ages @
 MZ03a M The Faction Dragon @
@@ -147,10 +161,12 @@ RG03f R The Paradise Bird @
 RR03 R The Wiley Speedster @
 RR03a R Char-Dog @
 RR03b R Mijo, the Bull @
+RU03 R The Karfell Rocker @
 RU03a R Dockbreacher @
 RU03b R Wrath of Oko @
 RU03c R The Covert Blue Mage @
 RU03d R Second Stage of Magic Design @
+RU03e R Yeah Nah @
 RW03a R Azorius Traffic Enforcement @
 RW03b R Fioran Reformist @
 RW03c R Ratatwotwo @
@@ -175,6 +191,12 @@ RZ03l R Efteekay, Flame of the Kav @
 RZ03m R Frie, Displaced in Time @
 RZ03n R Pirk, Heroic Captain @
 RZ03o R The Policy Maker @
+RZ03p R The Cookout Creator @
+RZ03q R The Good Gamers @
+RZ03r R The Wizardly Barge @
+RZ03s R Evy, Fang Keeper @
+RZ03t R The Ice Dancer @
+RZ03u R The Sad Creaturez @
 UA03 U Twenty Lessons @
 UA03a U Bag of Stroopwafels @
 UA03b U Famous Museum @
@@ -205,6 +227,7 @@ CU04 C Unclaimed Bird @
 CU04a C Educated Detective @
 CU04b C Shadowmoor Draw Spell @
 CU04d C Wistful Puppeteer @
+MA04 M The Strixhaven-Lorwyn Rover @
 RB04 R The Gunky Runner @
 RB04a R Hidetsugu's Poison Rite @
 RB04b R Invasion Specialist @
@@ -213,6 +236,7 @@ RB04d R Quest Compleated Beast @
 RB04e R Rankle, Master of Pranksters @
 RB04f R The Magic Bandit @
 RB04g R Yet Another Night in Vegas @
+RB04h R A Chaotic Night in Vegas @
 RG04 R Phyrexian Cytoshaper @
 RR04 R Need for Speed (Not the Odyssey One) @
 RR04a R Mzed, Mercenary Leader @
@@ -256,6 +280,10 @@ RZ04r R The Sprinkler of Stardust @
 RZ04s R Falko, Showoff Pilot @
 RZ04t R The Traveling Postman @
 RZ04u R The Vast Scrier @
+RZ04v R The Ancient Dingus @
+RZ04w R The Goblin Mastermind @
+RZ04x R The Salubrious Philosopher @
+RZ04y R Welcome to Australia @
 UG04 U Arcbound Mamba @
 UG04a U You and Ooze Army? @
 UR04a U Guess Who it Is! @
@@ -279,17 +307,22 @@ RA05d R Chandra's Dragonmech @
 RB05 R The Keeper of Dark Pacts @
 RB05a R Mister Cheddar, Cheese Sliver @
 RB05b R Surprise, Nerd! @
+RB05c R Bin Chicken @
+RB05d R Rat of God @
+RC05 R The Five Stages of Grief @
 RC05a R Mysterious Confluence @
 RC05b R The Companion of the Wilds @
 RC05c R Your Favorite Character @
 RG05a R Grek the Ogre @
 RG05b R Oozeavite @
 RR05 R Snapsail Rider @
+RR05a R Auntie Ant, Ant Auntie @
 RU05 R Welcome to Mini-apolis @
 RU05a R The Cosplayzer @
 RU05b R The Countering Runner @
 RU05c R The Misty Stepper @
 RU05d R The Commander Recommender @
+RU05e R The Playful Winners @
 RW05a R Agoraphobic Phyrexian @
 RW05b R Form of the Stax Player @
 RW05c R The Sixth Seraph @
@@ -310,6 +343,7 @@ RZ05j R The Game-Changing Host @
 RZ05k R Tarkiran Towelsbane @
 RZ05l R The Convention Enthusiast @
 RZ05m R Saga of Krark Losing His Thumb @
+RZ05n R Drop Bear @
 UA05a U Compleated Clone Shell @
 UA05b U Guilded Lotus @
 UA05c U Power Level Analyzer @
@@ -352,11 +386,13 @@ RZ06e R Sue, Everlasting Dinosaur @
 RZ06f R Blue Screen of Death @
 RZ06g R Monet, Sensei of the Sewers @
 RZ06h R The Snapstone Wielder @
+RZ06i R The Bird Champion @
 UA06a U Gingerbehemoth @
 UA06b U Sawtooth Avenger @
 UB06 U Soul Drainer @
 UZ06 U Trash Panda @
 CG07 C Unclaimed Tanadon @
+RA07 R Colorless Ultimatum @
 RA07a R Battle Myrsphere @
 RA07b R Chancellor of the Mulligan @
 RC07a R Call Up Emrakul to Help @
@@ -380,6 +416,8 @@ RZ08a R Avacyn and Griselbrand @
 RZ08b R Koma and Toski, Compleated @
 RZ08c R Riven Turnbull and Princess Lucrezia @
 RZ08d R Simic, Value Engine @
+RA09 R Wurmcoil Broodmother @
+RC09 R Everyone's an Imposter @
 RZ09 R Daxiver, Izzet Electromancer @
 RG10 R Emrakul and Chatterfang @
 RR10 R The Crimson Avenger @
@@ -433,6 +471,7 @@ CU13 C More of That Strange Oil... @
 RA13 R Sort of _____ and _____ @
 RB13 R The Archenemy's Charm @
 RB13a R Davvol's Birthdaymobile @
+RB13b R The Underworld Fantasy Queen @
 RR13b R Triple Threat @
 RW13 R Life Cloud @
 UR13 U Furnace Oriflamme @

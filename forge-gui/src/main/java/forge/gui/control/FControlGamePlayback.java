@@ -185,6 +185,9 @@ public class FControlGamePlayback extends IGameEventVisitor.Base<Void> {
         releaseGameThread();
     }
 
+    public PlaybackSpeed getSpeed() {
+        return playbackSpeed;
+    }
     public void setSpeed(final PlaybackSpeed speed) {
         playbackSpeed = speed;
     }
