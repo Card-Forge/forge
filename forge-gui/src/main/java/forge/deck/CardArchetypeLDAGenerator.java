@@ -84,7 +84,7 @@ public final class CardArchetypeLDAGenerator {
             int i = 0;
             while (topic.size()<=40&&i<highRankVocabs.size()) {
                 String cardName = highRankVocabs.get(i).getLeft();
-                if(!StaticData.instance().getCommonCards().getUniqueByName(cardName).getRules().getType().isBasicLand()){
+                if(!StaticData.instance().getCommonCards().getRules(cardName, true).getType().isBasicLand()){
                     if(highRankVocabs.get(i).getRight()>=0.005d) {
                         topicCards.add(cardName);
                     }
