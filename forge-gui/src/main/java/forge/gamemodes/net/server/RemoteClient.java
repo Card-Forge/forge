@@ -2,6 +2,7 @@ package forge.gamemodes.net.server;
 
 import forge.gamemodes.net.CompatibleObjectDecoder;
 import forge.gamemodes.net.CompatibleObjectEncoder;
+import forge.gamemodes.net.IRemote;
 import forge.gamemodes.net.ReplyPool;
 import forge.trackable.Tracker;
 import forge.gamemodes.net.event.IdentifiableNetEvent;
@@ -12,7 +13,7 @@ import io.netty.channel.Channel;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public final class RemoteClient implements IToClient, IHasForgeLog {
+public final class RemoteClient implements IRemote, IHasForgeLog {
 
     /** Special value indicating the client hasn't been assigned a slot yet. */
     public static final int UNASSIGNED_SLOT = -1;

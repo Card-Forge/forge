@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import forge.game.player.PlayerView;
 import forge.gamemodes.net.CompatibleObjectDecoder;
 import forge.gamemodes.net.CompatibleObjectEncoder;
+import forge.gamemodes.net.IRemote;
 import forge.gamemodes.net.NetworkLogConfig;
 import forge.util.IHasForgeLog;
 import forge.gamemodes.net.ReplyPool;
@@ -26,7 +27,7 @@ import io.netty.handler.timeout.IdleStateHandler;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class FGameClient implements IToServer, IHasForgeLog {
+public class FGameClient implements IRemote, IHasForgeLog {
 
     static final int HEARTBEAT_INTERVAL_SECONDS = Integer.getInteger("forge.net.heartbeatInterval", 15);
     private final IGuiGame clientGui;

@@ -9,6 +9,7 @@ import forge.gamemodes.match.NextGameDecision;
 import forge.gamemodes.match.YieldController;
 import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.net.GameProtocolSender;
+import forge.gamemodes.net.IRemote;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.interfaces.IDevModeCheats;
 import forge.interfaces.IGameController;
@@ -28,7 +29,7 @@ public class NetGameController implements IGameController {
     /** Source of truth for this client's yield state (auto-yields, trigger decisions, markers, skip-phase, etc.). */
     private final YieldController yieldController = new YieldController(null);
 
-    public NetGameController(final IToServer server) {
+    public NetGameController(final IRemote server) {
         sender = new GameProtocolSender(server);
     }
 
