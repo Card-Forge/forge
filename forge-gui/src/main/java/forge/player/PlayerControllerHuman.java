@@ -2013,7 +2013,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             } else if (currentSa.usesTargeting()) {
                 needPrompt = true;
             }
-            if (!needPrompt && !saLookup.equals(firstLookup)) {
+            if (!needPrompt && !saStr.equals(firstStr)) {
                 needPrompt = true;
             }
 
