@@ -65,7 +65,7 @@ public class ArchipelagoData implements SaveFileContent {
     private int receivedAmountOfSetUnlockChecks = 0;
     private float setUnlockChecksRestAmount = 0;
 
-    private final int totalAmountOfSetUnlockChecks = 100; // Todo: This should be set based on the value we receive in the APWorld
+    private int totalAmountOfSetUnlockChecks = 100; // Todo: This should be set based on the value we receive in the APWorld
     private final int totalBattlesWonBreakpoint = 3; // Reward for every 3 battles won.
     private final int totalTownQuestsAndEventsBreakpoint = 2; // Reward for every 2 town events or quests done.
     private final int totalCardsEarnedBreakPoint = 80; // Reward for every 80 unique cards gained.
@@ -248,6 +248,10 @@ public class ArchipelagoData implements SaveFileContent {
 
     public ArchipelagoMode getArchipelagoMode() {
         return archipelagoMode;
+    }
+
+    public void setTotalAmountOfSetUnlockChecks(int newTotalAmountOfSetUnlockChecks) {
+        totalAmountOfSetUnlockChecks = newTotalAmountOfSetUnlockChecks;
     }
 
     public boolean checkCardUnlocked(PaperCard card) {
@@ -667,6 +671,7 @@ public class ArchipelagoData implements SaveFileContent {
         totalShardsEarned = data.containsKey("shards") ? data.readInt("shards") : 0;
         lastArchipelagoRewardIndex = data.containsKey("lastArchipelagoRewardIndex") ? data.readInt("lastArchipelagoRewardIndex") : 0;
         archipelagoMode = ArchipelagoMode.values()[data.containsKey("archipelagoMode") ? data.readInt("archipelagoMode") : 0];
+        setTotalAmountOfSetUnlockChecks(data.containsKey("totalSetUnlockChecks") ? data.readInt("totalSetUnlockChecks") : 100);
         GameHUD.getInstance().setApButtonVisibility(archipelagoMode == ArchipelagoMode.networked_archipelago);
         if (archipelagoMode == ArchipelagoMode.networked_archipelago) {
             // 1. Init APWorld
@@ -711,6 +716,7 @@ public class ArchipelagoData implements SaveFileContent {
         data.store("shards", totalShardsEarned);
         data.store("lastArchipelagoRewardIndex", lastArchipelagoRewardIndex);
         data.store("archipelagoMode", archipelagoMode.ordinal());
+        data.store("totalSetUnlockChecks", totalAmountOfSetUnlockChecks);
 
         return data;
     }
