@@ -203,10 +203,12 @@ public final class NetworkChecksumUtil {
     /**
      * Compute a diagnostic breakdown of the stable checksum, showing the hash
      * after each component. Used to identify exactly where server/client diverge.
+     * Returns null when stableChecksum is off or gameView is null — callers
+     * should skip logging in that case.
      */
     public static String computeChecksumBreakdown(int turn, int phaseOrdinal, GameView gameView) {
         if (gameView == null || !stableChecksum) {
-            return "stable checksum disabled or gameView null";
+            return null;
         }
         // This must mirror computeStateChecksum exactly so that
         // breakdown final == actual checksum, enabling accurate mismatch diagnosis
