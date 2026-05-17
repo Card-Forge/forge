@@ -4,6 +4,7 @@ import forge.LobbyPlayer;
 import forge.ai.AIOption;
 import forge.ai.AiProfileUtil;
 import forge.ai.LobbyPlayerAi;
+import forge.ai.llm.DeckRecognitionFeature;
 import forge.gui.GuiBase;
 import forge.gui.util.SOptionPane;
 import forge.localinstance.properties.ForgeNetPreferences;
@@ -68,6 +69,11 @@ public final class GamePlayerUtil {
     }
     public static LobbyPlayer createAiPlayer(final String name, final int avatarIndex, final int sleeveIndex, final Set<AIOption> options, final String profileOverride) {
         final LobbyPlayerAi player = new LobbyPlayerAi(name, options);
+
+        // Bridge the global user preference to the system property that
+        // DeckRecognitionFeature reads, so the toggle applies to every AI profile.
+        System.setProperty(DeckRecognitionFeature.SYS_PROP,
+                String.valueOf(FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_DECK_RECOGNITION)));
 
         // TODO: implement specific AI profiles for quest mode.
         String profile = "";

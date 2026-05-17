@@ -129,6 +129,7 @@ public enum CSubmenuPreferences implements ICDoc {
         lstControls.add(Pair.of(view.getCbRemoveArtifacts(), FPref.DECKGEN_ARTIFACTS));
         lstControls.add(Pair.of(view.getCbSingletons(), FPref.DECKGEN_SINGLETONS));
         lstControls.add(Pair.of(view.getCbEnableAICheats(), FPref.UI_ENABLE_AI_CHEATS));
+        lstControls.add(Pair.of(view.getCbEnableDeckRecognition(), FPref.UI_ENABLE_DECK_RECOGNITION));
         lstControls.add(Pair.of(view.getCbEnableUnknownCards(), FPref.UI_LOAD_UNKNOWN_CARDS));
         lstControls.add(Pair.of(view.getCbEnableNonLegalCards(), FPref.UI_LOAD_NONLEGAL_CARDS));
         lstControls.add(Pair.of(view.getCbAllowCustomCardsDeckConformance(), FPref.ALLOW_CUSTOM_CARDS_IN_DECKS_CONFORMANCE));

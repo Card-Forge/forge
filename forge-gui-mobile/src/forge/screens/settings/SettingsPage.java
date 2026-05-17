@@ -196,6 +196,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_AI_CHEATS,
             Forge.getLocalizer().getMessage("cbEnableAICheats"),
             Forge.getLocalizer().getMessage("nlEnableAICheats")), 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_DECK_RECOGNITION,
+            Forge.getLocalizer().getMessage("cbEnableDeckRecognition"),
+            Forge.getLocalizer().getMessage("nlEnableDeckRecognition")), 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_MANABURN,
             Forge.getLocalizer().getMessage("cbManaBurn"),
             Forge.getLocalizer().getMessage("nlManaBurn")), 1);
