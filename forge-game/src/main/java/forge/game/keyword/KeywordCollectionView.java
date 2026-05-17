@@ -53,4 +53,7 @@ public class KeywordCollectionView implements Iterable<KeywordView>, Serializabl
     }
     @Override
     public int hashCode() { return map.hashCode(); }
+
+    @Override
+    public String toString() { return getValues().toString(); }
 }
