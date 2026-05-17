@@ -41,6 +41,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.function.Function;
 
+import forge.deck.CommanderBracketCalculator;
+
 public enum ColumnDef {
     /**
      * The column containing the inventory item name.
@@ -312,6 +314,15 @@ public enum ColumnDef {
     DECK_AI("lblAI", "lblAIStatus", 38, true, SortState.DESC,
             from -> toDeck(from.getKey()).getAI().inMainDeck,
             from -> toDeck(from.getKey()).getAI()),
+    DECK_BRACKET("lblBracket", "ttCommanderBracket", 55, true, SortState.ASC,
+            from -> {
+                DeckProxy deck = toDeck(from.getKey());
+                return deck == null ? 1 : CommanderBracketCalculator.getBracket(deck.getDeck());
+            },
+            from -> {
+                DeckProxy deck = toDeck(from.getKey());
+                return deck == null ? "" : CommanderBracketCalculator.getDisplayBracket(deck.getDeck());
+            }),
     /**
      * The main library size column.
      */

@@ -26933,6 +26933,7 @@
     "spawnRate": 0.5,
     "difficulty": 0.2,
     "scale":0.8,
+    "speed": 25,
     "life": 12,
     "rewards": [
       {
@@ -30616,6 +30617,7 @@
     "ai": "",
     "spawnRate": 0.5,
     "difficulty": 0.2,
+    "speed": 25,
     "life": 12,
     "rewards": [
       {
@@ -31137,7 +31139,7 @@
     "name": "Worm",
     "sprite": "sprites/enemy/beast/insect/smallworm.atlas",
     "deck": [
-      "decks/standard/smallworm.dck"
+      "decks/standard/worm.dck"
     ],
     "ai": "",
     "spawnRate": 1,

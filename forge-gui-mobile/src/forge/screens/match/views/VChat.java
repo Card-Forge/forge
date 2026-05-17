@@ -9,6 +9,7 @@ import forge.gamemodes.net.IRemote;
 import forge.gamemodes.net.event.MessageEvent;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.menu.FDropDown;
+import forge.menu.FMenuTab;
 import forge.model.FModel;
 import forge.screens.online.ChatMessageBubble;
 import forge.screens.online.OnlineChatScreen;
@@ -55,8 +56,25 @@ public class VChat extends FDropDown implements IOnlineChatInterface {
         add(new ChatMessageBubble(message));
         if (isVisible()) {
             updateSizeAndPosition();
+        } else {
+            FMenuTab tab = getMenuTab();
+            if (tab != null) {
+                tab.incrementUnread();
+            }
         }
         Gdx.graphics.requestRendering();
+    }
+
+    @Override
+    public void setVisible(boolean visible0) {
+        boolean wasVisible = isVisible();
+        super.setVisible(visible0);
+        if (visible0 && !wasVisible) {
+            FMenuTab tab = getMenuTab();
+            if (tab != null) {
+                tab.clearUnread();
+            }
+        }
     }
 
     private void sendMessage() {

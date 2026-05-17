@@ -583,6 +583,11 @@ public class Game {
     }
 
     public synchronized void setGameOver(GameEndReason reason) {
+        // early exit in case many events causing a game over have fired
+        if (isGameOver()) {
+            return;
+        }
+
         for (Player p : allPlayers) {
             p.clearController();
         }
@@ -730,8 +735,6 @@ public class Game {
             if (p != null) {
                 visit.visitAll(p.getZone(view.getZone()));
             }
-        } else {
-            forEachCardInGame(visit);
         }
         // Zone-specific search may miss if the view has stale zone info
         // (e.g. IdRef resolved from a tracker that wasn't updated after a

@@ -1,0 +1,13 @@
+Name:The Vision
+ManaCost:4
+Types:Legendary Artifact Creature Robot Hero
+PT:2/5
+K:Flying
+K:Vigilance
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBSolarBeam,DBDensityControlPump,DBTechnopathy | ChoiceRestriction$ ThisTurn
+SVar:DBSolarBeam:DB$ Pump | Defined$ Self | KW$ Double Strike | SpellDescription$ Solar Beam — CARDNAME gains double strike until end of turn.
+SVar:DBDensityControl:DB$ Pump | Defined$ Self | KW$ Indestructible | SpellDescription$ Density Control — CARDNAME gains indestructible until end of turn.
+SVar:DBTechnopathy:DB$ Draw | SpellDescription$ Technopathy — Draw a card.
+SVar:BuffedBy:Card.nonLand+nonCreature
+Oracle:Flying, vigilance\nWhenever you cast a noncreature spell, choose one that hasn't been chosen this turn —\n• Solar Beam — The Vision gains double strike until end of turn.\n• Density Control — The Vision gains indestructible until end of turn.\n• Technopathy — Draw a card.

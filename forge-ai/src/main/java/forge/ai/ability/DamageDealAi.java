@@ -356,14 +356,7 @@ public class DamageDealAi extends DamageAiBase {
 
         Card targetCard = null;
         if (pl.isOpponentOf(ai) && activator.equals(ai) && !killables.isEmpty()) {
-            if (sa.getTargetRestrictions().canTgtPlaneswalker()) {
-                targetCard = ComputerUtilCard.getBestPlaneswalkerAI(killables);
-            }
-            if (targetCard == null) {
-                targetCard = ComputerUtilCard.getBestCreatureAI(killables);
-            }
-
-            return targetCard;
+            return ComputerUtilCard.getBestRemovalTargetAI(ai, killables);
         }
 
         if (!mandatory) {
@@ -376,12 +369,7 @@ public class DamageDealAi extends DamageAiBase {
 
         if (!hPlay.isEmpty()) {
             if (pl.isOpponentOf(ai) && activator.equals(ai)) {
-                if (sa.getTargetRestrictions().canTgtPlaneswalker()) {
-                    targetCard = ComputerUtilCard.getBestPlaneswalkerAI(controlledByOpps);
-                }
-                if (targetCard == null) {
-                    targetCard = ComputerUtilCard.getBestCreatureAI(controlledByOpps);
-                }
+                targetCard = ComputerUtilCard.getBestRemovalTargetAI(ai, controlledByOpps);
             }
             if (targetCard == null) {
                 targetCard = ComputerUtilCard.getWorstCreatureAI(hPlay);
@@ -525,7 +513,7 @@ public class DamageDealAi extends DamageAiBase {
 
         // AssumeAtLeastOneTarget is used for cards with funky targeting implementation like Fight with Fire which would
         // otherwise confuse the AI by returning 0 unexpectedly during SA "AI can play" tests.
-        if (tgt.getMaxTargets(source, sa) <= 0 && !logic.equals("AssumeAtLeastOneTarget")) {
+        if (sa.getMaxTargets() <= 0 && !logic.equals("AssumeAtLeastOneTarget")) {
             return false;
         }
 
@@ -634,7 +622,7 @@ public class DamageDealAi extends DamageAiBase {
                 Card c = dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, false);
                 if (c != null) {
                     //option to hold removal instead only applies for single targeted removal
-                    if (sa.isSpell() && !divided && !immediately && tgt.getMaxTargets(source, sa) == 1) {
+                    if (sa.isSpell() && !divided && !immediately && sa.getMaxTargets() == 1) {
                         if (!ComputerUtilCard.useRemovalNow(sa, c, dmg, ZoneType.Graveyard)) {
                             return false;
                         }
@@ -662,7 +650,7 @@ public class DamageDealAi extends DamageAiBase {
                 final Card c = dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, mandatory);
                 if (c != null) {
                     //option to hold removal instead only applies for single targeted removal
-                    if (!immediately && tgt.getMaxTargets(source, sa) == 1 && !divided) {
+                    if (!immediately && sa.getMaxTargets() == 1 && !divided) {
                         if (!ComputerUtilCard.useRemovalNow(sa, c, dmg, ZoneType.Graveyard)) {
                             return false;
                         }
@@ -723,7 +711,7 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         // fell through all the choices, no targets left?
-        int minTgts = tgt.getMinTargets(source, sa);
+        int minTgts = sa.getMinTargets();
         if (tcs.size() < minTgts || tcs.size() == 0) {
             if (mandatory) {
                 // Sanity check: if there are any legal non-owned targets after the check (which may happen for complex cards like Rift Bolt),

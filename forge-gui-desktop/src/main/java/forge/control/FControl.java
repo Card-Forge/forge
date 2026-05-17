@@ -45,7 +45,6 @@ import forge.Singletons;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
 import forge.gamemodes.quest.io.QuestDataIO;
-import forge.gui.GuiBase;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.FScreen;
 import forge.gui.framework.InvalidLayoutFileException;
@@ -260,10 +259,6 @@ public enum FControl implements KeyEventDispatcher {
         FSkin.loadFull(true);
 
         display = FView.SINGLETON_INSTANCE.getLpnDocument();
-
-        //set ExperimentalNetworkOption from preference
-        boolean propertyConfig = prefs != null && prefs.getPrefBoolean(ForgePreferences.FPref.UI_NETPLAY_COMPAT);
-        GuiBase.enablePropertyConfig(propertyConfig);
 
         closeAction = CloseAction.valueOf(prefs.getPref(FPref.UI_CLOSE_ACTION));
 

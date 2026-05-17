@@ -6,4 +6,5 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigSubCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ DEPLETION | CounterNum$ 1
 A:AB$ Mana | Cost$ T | Produced$ Combo R G | Amount$ 1 | SubAbility$ AddCounter | SpellDescription$ Add {R} or {G}. Put a depletion counter on CARDNAME.
 SVar:AddCounter:DB$ PutCounter | Defined$ Self | CounterType$ DEPLETION | CounterNum$ 1
+SVar:AICounterOverrideDEPLETION:Negative
 Oracle:Timberline Ridge doesn't untap during your untap step if it has a depletion counter on it.\nAt the beginning of your upkeep, remove a depletion counter from Timberline Ridge.\n{T}: Add {R} or {G}. Put a depletion counter on Timberline Ridge.

@@ -54,7 +54,7 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
                 vCards.add(c.getView());
             }
         }
-        getController().getGui().setSelectables(vCards);
+        getController().getGui().setSelectables(vCards, this.min, this.max);
         final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
         for (final GameEntity ge : validChoices) {
             final Zone cz = ge instanceof Card c ? c.getLastKnownZone() : null;
@@ -72,6 +72,11 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
     protected boolean onCardSelected(final Card c, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
         if (!selectEntity(c)) {
             return false;
+        }
+        if (otherCardsToSelect != null) {
+            for (final Card other : otherCardsToSelect) {
+                selectEntity(other);
+            }
         }
         refresh();
         return true;

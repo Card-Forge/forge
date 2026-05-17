@@ -18,7 +18,6 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
     private final Map<TrackableProperty, Object> props;
     private int version;
     // Per-consumer dirty tracking. Lazy-init: null until first registerConsumer.
-    // In offline games (no consumers), set() does no tracking work at all.
     private transient Map<Integer, EnumSet<TrackableProperty>> consumers;
     private boolean copyingProps;
 
@@ -142,6 +141,20 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
      */
     public int getVersion() {
         return version;
+    }
+
+    /**
+     * Check whether a consumer is currently registered on this object.
+     * <p>
+     * Used by network serialization to gate IdRef substitution: the server
+     * registers a consumer on every TrackableObject it has included in a
+     * delta packet for a given client. An object without that consumer is
+     * one the client hasn't been told about (typically an ephemeral such as
+     * a {@code Card.fromPaperCard} choice copy that never enters a tracked
+     * zone), and protocol-method args holding it must serialize inline.
+     */
+    public boolean hasConsumer(int consumerId) {
+        return consumers != null && consumers.containsKey(consumerId);
     }
 
     /**

@@ -17,10 +17,12 @@
  */
 package forge.screens.deckeditor.controllers;
 
+import forge.StaticData;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.game.GameType;
+import forge.gui.GuiUtils;
 import forge.gui.UiCommand;
 import forge.gui.framework.FScreen;
 import forge.item.PaperCard;
@@ -30,6 +32,8 @@ import forge.itemmanager.ItemManagerConfig;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.deckeditor.AddBasicLandsDialog;
+import forge.screens.deckeditor.CDeckEditorUI;
+import forge.screens.deckeditor.ChangePrintingDialog;
 import forge.screens.deckeditor.SEditorIO;
 import forge.screens.match.controllers.CDetailPicture;
 import forge.toolbox.FComboBox;
@@ -84,7 +88,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 allSections.add(DeckSection.Avatar);
                 allSections.add(DeckSection.Conspiracy);
 
-                normalPool = FModel.getAllCardsNoAlt();
+                normalPool = FModel.getAllCards();
                 avatarPool = FModel.getAvatarPool();
                 conspiracyPool = FModel.getConspiracyPool();
 
@@ -93,7 +97,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 allSections.add(DeckSection.Commander);
 
                 commanderPool = FModel.getCommanderPool();
-                normalPool = FModel.getAllCardsNoAlt();
+                normalPool = FModel.getAllCards();
 
                 wantUnique = true;
                 break;
@@ -101,7 +105,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 allSections.add(DeckSection.Commander);
 
                 commanderPool = FModel.getTinyLeadersCommander();
-                normalPool = FModel.getAllCardsNoAlt();
+                normalPool = FModel.getAllCards();
 
                 wantUnique = true;
                 break;
@@ -109,7 +113,7 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
                 allSections.add(DeckSection.Commander);
 
                 commanderPool = FModel.getOathbreakerCommander();
-                normalPool = FModel.getAllCardsNoAlt();
+                normalPool = FModel.getAllCards();
 
                 wantUnique = true;
                 break;
@@ -385,11 +389,42 @@ public final class CEditorConstructed extends CDeckEditor<Deck> {
             cmb.addMoveItems(localizer.getMessage("lblRemove"), localizer.getMessage("lblfromcontraptiondeck"));
             break;
         }
+        addChangePrintingEntryIfApplicable(cmb);
         if (foilAvailable) {
             cmb.addMakeFoils();
         }
         cmb.addKeyCardToggle();
         cmb.addSetColorID();
+    }
+
+    private static void addChangePrintingEntryIfApplicable(EditorContextMenuBuilder cmb) {
+        // Hide in finite-pool editors (Quest) where the user could otherwise swap into a printing they don't own.
+        if (!CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getCatalogManager().isInfinite()) {
+            return;
+        }
+        PaperCard card = cmb.getItemManager().getSelectedItem();
+        if (card == null) {
+            return;
+        }
+        if (StaticData.instance().getCommonCards().getAllCardsNoAlt(card.getName()).size() <= 1) {
+            return;
+        }
+        GuiUtils.addMenuItem(cmb.getMenu(),
+                Localizer.getInstance().getMessage("lblChangePrinting"),
+                null,
+                () -> {
+                    PaperCard chosen = ChangePrintingDialog.show(card);
+                    if (chosen == null) { return; }
+                    PaperCard newCard = card.isFoil() ? chosen.getFoiled() : chosen;
+                    if (newCard.equals(card)) { return; }
+                    CardManager deckManager = (CardManager) cmb.getItemManager();
+                    deckManager.removeItem(card, 1);
+                    deckManager.addItem(newCard, 1);
+                    CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController()
+                            .getDeckController().notifyModelChanged();
+                },
+                true,
+                false);
     }
 
     /* (non-Javadoc)

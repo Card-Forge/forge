@@ -112,7 +112,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbCardTextHideReminder = new OptionsCheckBox(localizer.getMessage("cbCardTextHideReminder"));
     private final JCheckBox cbOpenPacksIndiv = new OptionsCheckBox(localizer.getMessage("cbOpenPacksIndiv"));
     private final JCheckBox cbTokensInSeparateRow = new OptionsCheckBox(localizer.getMessage("cbTokensInSeparateRow"));
-    private final JCheckBox cbStackCreatures = new OptionsCheckBox(localizer.getMessage("cbStackCreatures"));
+    private final JCheckBox cbSeparateCombatStacks = new OptionsCheckBox(localizer.getMessage("cbSeparateCombatStacks"));
     private final JCheckBox cbFilterLandsByColorId = new OptionsCheckBox(localizer.getMessage("cbFilterLandsByColorId"));
     private final JCheckBox cbShowStormCount = new OptionsCheckBox(localizer.getMessage("cbShowStormCount"));
     private final JCheckBox cbRemindOnPriority = new OptionsCheckBox(localizer.getMessage("cbRemindOnPriority"));
@@ -121,7 +121,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbEnableUnknownCards = new OptionsCheckBox(localizer.getMessage("lblEnableUnknownCards"));
     private final JCheckBox cbEnableNonLegalCards = new OptionsCheckBox(localizer.getMessage("lblEnableNonLegalCards"));
     private final JCheckBox cbAllowCustomCardsDeckConformance = new OptionsCheckBox(localizer.getMessage("lblAllowCustomCardsInDecks"));
-    private final JCheckBox cbUseExperimentalNetworkStream = new OptionsCheckBox(localizer.getMessage("lblExperimentalNetworkCompatibility"));
     private final JCheckBox cbAiPicker = new OptionsCheckBox(localizer.getMessage("lblAiPickerSettings"));
     private final JCheckBox cbCardArtCoreExpansionsOnlyOpt = new OptionsCheckBox(localizer.getMessage("lblPrefArtExpansionOnly"));
     private final JCheckBox cbSmartCardArtSelectionOpt = new OptionsCheckBox(localizer.getMessage("lblSmartCardArtOpt"));
@@ -152,7 +151,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final FComboBoxPanel<String> cbpStackAdditions = new FComboBoxPanel<>(localizer.getMessage("cbpStackAdditions")+":");
     private final FComboBoxPanel<String> cbpLandPlayed = new FComboBoxPanel<>(localizer.getMessage("cbpLandPlayed")+":");
     private final FComboBoxPanel<String> cbpDisplayCurrentCardColors = new FComboBoxPanel<>(localizer.getMessage("cbpDisplayCurrentCardColors")+":");
-    private final FComboBoxPanel<String> cbpAutoYieldMode = new FComboBoxPanel<>(localizer.getMessage("cbpAutoYieldMode")+":");
+    private final FComboBoxPanel<String> cbpAutoDecisionMode = new FComboBoxPanel<>(localizer.getMessage("cbpAutoDecisionMode")+":");
+    private final FComboBoxPanel<String> cbpStackGroupPermanents = new FComboBoxPanel<>(localizer.getMessage("cbpStackGroupPermanents")+":");
+    private final FComboBoxPanel<Integer> cbpMaxStackDepth = new FComboBoxPanel<>(localizer.getMessage("cbpMaxStackDepth")+":");
     private final FComboBoxPanel<String> cbpCounterDisplayType = new FComboBoxPanel<>(localizer.getMessage("cbpCounterDisplayType")+":");
     private final FComboBoxPanel<String> cbpCounterDisplayLocation =new FComboBoxPanel<>(localizer.getMessage("cbpCounterDisplayLocation")+":");
     private final FComboBoxPanel<String> cbpGraveyardOrdering = new FComboBoxPanel<>(localizer.getMessage("cbpGraveyardOrdering")+":");
@@ -299,8 +300,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbpGraveyardOrdering, comboBoxConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlpGraveyardOrdering")), descriptionConstraints);
 
-        pnlPrefs.add(cbpAutoYieldMode, comboBoxConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlpAutoYieldMode")), descriptionConstraints);
+        pnlPrefs.add(cbpAutoDecisionMode, comboBoxConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlpAutoDecisionMode")), descriptionConstraints);
 
         //Server Preferences
         pnlPrefs.add(new SectionLabel(localizer.getMessage("ServerPreferences")), sectionConstraints);
@@ -380,9 +381,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbAllowCustomCardsDeckConformance, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlAllowCustomCardsInDecks")), descriptionConstraints);
 
-        pnlPrefs.add(cbUseExperimentalNetworkStream, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlExperimentalNetworkCompatibility")), descriptionConstraints);
-
         pnlPrefs.add(cbAiPicker, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlAiPickerSettings")), descriptionConstraints);
 
@@ -446,8 +444,14 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbTokensInSeparateRow, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlTokensInSeparateRow")), descriptionConstraints);
 
-        pnlPrefs.add(cbStackCreatures, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlStackCreatures")), descriptionConstraints);
+        pnlPrefs.add(cbpStackGroupPermanents, comboBoxConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlGroupPermanents")), descriptionConstraints);
+
+        pnlPrefs.add(cbpMaxStackDepth, comboBoxConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlMaxStackDepth")), descriptionConstraints);
+
+        pnlPrefs.add(cbSeparateCombatStacks, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlSeparateCombatStacks")), descriptionConstraints);
 
         pnlPrefs.add(cbTimedTargOverlay, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlTimedTargOverlay")), descriptionConstraints);
@@ -742,11 +746,6 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     }
 
     /** @return {@link javax.swing.JCheckBox} */
-    public JCheckBox getCbUseExperimentalNetworkStream() {
-        return cbUseExperimentalNetworkStream;
-    }
-
-    /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbImageFetcher() {
         return cbImageFetcher;
     }
@@ -894,9 +893,16 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         return cbpDefaultLanguage;
     }
 
+    public FComboBoxPanel<String> getAutoDecisionModeComboBoxPanel() {
+        return cbpAutoDecisionMode;
+    }
 
-    public FComboBoxPanel<String> getAutoYieldModeComboBoxPanel() {
-        return cbpAutoYieldMode;
+    public FComboBoxPanel<String> getCbpStackGroupPermanents() {
+        return cbpStackGroupPermanents;
+    }
+
+    public FComboBoxPanel<Integer> getCbpMaxStackDepth() {
+        return cbpMaxStackDepth;
     }
 
     public FComboBoxPanel<String> getCounterDisplayTypeComboBoxPanel() {
@@ -1009,8 +1015,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         return cbTokensInSeparateRow;
     }
 
-    public final JCheckBox getCbStackCreatures() {
-        return cbStackCreatures;
+    public final JCheckBox getCbSeparateCombatStacks() {
+        return cbSeparateCombatStacks;
     }
 
     public final JCheckBox getCbManaLostPrompt() {

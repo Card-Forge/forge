@@ -998,9 +998,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public String yieldKey() {
         if (getHostCard() != null) {
             return getHostCard().toString() + ": " + toUnsuppressedString();
-        } else {
-            return toUnsuppressedString();
         }
+        return toUnsuppressedString();
     }
 
     public String getStackDescription() {
@@ -1868,7 +1867,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public int getMinTargets() {
         return getTargetRestrictions().getMinTargets(getHostCard(), this);
     }
-
     public int getMaxTargets() {
         return getTargetRestrictions().getMaxTargets(getHostCard(), this);
     }

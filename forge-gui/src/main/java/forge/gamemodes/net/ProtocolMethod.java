@@ -5,12 +5,11 @@ import forge.game.GameEntityView;
 import forge.game.GameView;
 
 import forge.game.card.CardView;
-import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.gamemodes.match.NextGameDecision;
-import forge.gui.GuiBase;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.IGameController;
 import forge.localinstance.skin.FSkinProp;
@@ -64,7 +63,7 @@ public enum ProtocolMethod implements IHasForgeLog {
     chooseEntitiesForEffect(Mode.SERVER, List.class, String.class, List.class, Integer.TYPE, Integer.TYPE, DelayedReveal.class),
     manipulateCardList   (Mode.SERVER, List.class, String.class, Iterable.class, Iterable.class, Boolean.TYPE, Boolean.TYPE, Boolean.TYPE),
     setCard             (Mode.SERVER, Void.TYPE, CardView.class),
-    setSelectables      (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class),
+    setSelectables      (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class, Integer.TYPE, Integer.TYPE),
     clearSelectables    (Mode.SERVER, Void.TYPE),
     // TODO case "setPlayerAvatar":
     openZones           (Mode.SERVER, PlayerZoneUpdates.class, PlayerView.class, Collection/*ZoneType*/.class, Map/*PlayerView,Object*/.class, Boolean.TYPE),
@@ -74,6 +73,8 @@ public enum ProtocolMethod implements IHasForgeLog {
     showWaitingTimer    (Mode.SERVER, Void.TYPE, PlayerView.class, String.class),
     setHighlighted      (Mode.SERVER, Void.TYPE, GameEntityView.class, Boolean.TYPE),
     applyDelta          (Mode.SERVER, Void.TYPE, DeltaPacket.class),
+    /** Server→client push of authoritative yield-state changes. */
+    applyYieldUpdate    (Mode.SERVER, Void.TYPE, YieldUpdate.class),
 
     // Client -> Server
     // Note: these should all return void, to avoid awkward situations in
@@ -86,7 +87,6 @@ public enum ProtocolMethod implements IHasForgeLog {
     selectButtonOk            (Mode.CLIENT, Void.TYPE),
     selectButtonCancel        (Mode.CLIENT, Void.TYPE),
     selectAbility             (Mode.CLIENT, Void.TYPE, SpellAbilityView.class),
-    passPriorityUntilEndOfTurn(Mode.CLIENT, Void.TYPE),
     passPriority              (Mode.CLIENT, Void.TYPE),
     nextGameDecision          (Mode.CLIENT, Void.TYPE, NextGameDecision.class),
     getActivateDescription    (Mode.CLIENT, String.class, CardView.class),
@@ -94,11 +94,7 @@ public enum ProtocolMethod implements IHasForgeLog {
     alphaStrike               (Mode.CLIENT, Void.TYPE),
     reorderHand               (Mode.CLIENT, Void.TYPE, CardView.class, Integer.TYPE),
     requestResync             (Mode.CLIENT, Void.TYPE),
-    setShouldAutoYield        (Mode.CLIENT, Void.TYPE, String.class, Boolean.TYPE, Boolean.TYPE),
-    setShouldAlwaysAcceptTrigger  (Mode.CLIENT, Void.TYPE, Integer.TYPE),
-    setShouldAlwaysDeclineTrigger (Mode.CLIENT, Void.TYPE, Integer.TYPE),
-    setShouldAlwaysAskTrigger     (Mode.CLIENT, Void.TYPE, Integer.TYPE),
-    setUiShouldSkipPhase          (Mode.CLIENT, Void.TYPE, PlayerView.class, PhaseType.class, Boolean.TYPE);
+    sendYieldUpdate           (Mode.CLIENT, Void.TYPE, YieldUpdate.class);
 
     private enum Mode {
         SERVER(IGuiGame.class),
@@ -159,9 +155,6 @@ public enum ProtocolMethod implements IHasForgeLog {
     }
 
     public void checkArgs(final Object[] args) {
-        if(!GuiBase.hasPropertyConfig())
-            return; //if the experimental network option is enabled, then check the args, else let the default decoder handle it
-
         try {
             for (int iArg = 0; iArg < args.length; iArg++) {
                 final Object arg = args[iArg];

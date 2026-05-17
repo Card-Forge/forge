@@ -369,7 +369,7 @@ public class SpecialCardAi {
                     } else {
                         Integer convertedAmount = ab.getPayCosts().getCostMana().convertAmount();
                         if (convertedAmount != null) {
-                            score += Math.max(0, 20 - convertedAmount ^ 2);
+                            score += Math.max(0, 20 - Math.pow(convertedAmount, 2));
                         }
                     }
                 }
@@ -1680,11 +1680,12 @@ public class SpecialCardAi {
                                 return copy.getNetToughness() > 0;
                             })
             );
-            CardLists.sortByCmcDesc(creaturesToGet);
 
             if (creaturesToGet.isEmpty()) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+
+            CardLists.sortByCmcDesc(creaturesToGet);
 
             // pick the best creature that will stay on the battlefield
             Card best = creaturesToGet.getFirst();
@@ -1742,7 +1743,7 @@ public class SpecialCardAi {
 
             // Cards in hand that are below the max CMC affordable by the AI
             CardCollection belowMaxCMC = CardLists.filter(creatsInHand, CardPredicates.lessCMC(numManaSrcs - 1));
-            belowMaxCMC.sort(Collections.reverseOrder(CardLists.CmcComparatorInv));
+            belowMaxCMC.sort(CardLists.CmcComparator);
 
             // Cards in hand that are above the max CMC affordable by the AI
             CardCollection aboveMaxCMC = CardLists.filter(creatsInHand, CardPredicates.greaterCMC(numManaSrcs + 1));
@@ -1788,7 +1789,7 @@ public class SpecialCardAi {
         }
 
         public static Card considerCardToGet(final Player ai, final SpellAbility sa) {
-            CardCollectionView creatsInLib = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.CREATURES);
+            CardCollection creatsInLib = CardLists.filter(ai.getCardsIn(ZoneType.Library), CardPredicates.CREATURES);
             if (creatsInLib.isEmpty()) {
                 return null;
             }
@@ -1805,13 +1806,12 @@ public class SpecialCardAi {
             }
             atTargetCMCInLib.sort(CardLists.CmcComparatorInv);
 
-            Card bestInLib = atTargetCMCInLib != null ? atTargetCMCInLib.getFirst() : null;
+            Card bestInLib = atTargetCMCInLib.getFirst();
 
             if (bestInLib == null && ComputerUtil.isPlayingReanimator(ai)) {
                 // For Reanimator, we don't mind grabbing the biggest thing possible to recycle it again with SotF later.
-                CardCollection creatsInLibByCMC = new CardCollection(creatsInLib);
-                creatsInLibByCMC.sort(CardLists.CmcComparatorInv);
-                return creatsInLibByCMC.getFirst();
+                creatsInLib.sort(CardLists.CmcComparatorInv);
+                return creatsInLib.getFirst();
             }
 
             return bestInLib;

@@ -16,14 +16,17 @@
   - [Easier creature type selection](#easier-creature-type-selection)
   - [Auto-Target](#auto-target)
   - [Auto-Pay](#auto-pay)
-  - [Auto-Yield](#auto-yield)
+  - [Auto-Pass and Yield Options](#auto-pass-and-yield-options)
+  - [Auto-Yield and Trigger Decisions](#auto-yield-and-trigger-decisions)
   - [Shift Key helper](#shift-key-helper)
   - [Full Control](#full-control)
   - [Repeatable Sequences (Macros)](#repeatable-sequences-macros)
-- [User Interface](#user-interface)
+- [Desktop User Interface](#desktop-user-interface)
+  - [Interface Overview](#interface-overview)
   - [Layout](#layout)
   - [Viewing Cards in Different Zones](#viewing-cards-in-different-zones)
-  - [Auto-Sort Multiplayer Fields](#auto-sort-multiplayer-fields)
+  - [Battlefield Display](#battlefield-display)
+  - [Sort Player Fields in Turn Order](#sort-player-fields-in-turn-order)
 
 # Downloads
 
@@ -34,8 +37,8 @@
 
 [***CLICK HERE FOR DOWNLOAD LINKS - Forge SNAPSHOT Version (DESKTOP/ANDROID)***](https://github.com/Card-Forge/forge/releases/tag/daily-snapshots)
 
-* For desktop, grab the installer file that ends in .jar
-* For android, grab the android file that ends in .apk
+* For Desktop, grab the installer file that ends in .jar
+* For Android, grab the app file that ends in .apk
   &dash; Watch the screen recording if one of following steps isn't clear for you
 
 <https://github.com/user-attachments/assets/7a0c7bb8-7cf9-4800-8091-bcc30ff2f4d8>
@@ -187,16 +190,32 @@ When paying mana costs, you can press Enter/Spacebar or click the Auto button in
 - You can still manually pay the cost by clicking mana sources in play (e.g. lands) or clicking symbols in your mana pool, which might be a good idea if you want to save specific mana sources for a later play that turn.
 - you'll still be prompted when paying Sunburst or cards that care what colors are spent to cast it (ex. Firespout).
 
-## Auto-Yield
-- When a spell or an ability appears on the stack and it says "(OPTIONAL)" you can right-click it to decide if you want to always accept or to decline it.
+## Auto-Pass and Yield Options
+**Yielding** lets you hand priority to Forge so it passes on your behalf instead of you needing to click through every priority pass. This helps you get to your desired phase of action quickly.
 
-  It is possible to specify the granularity level for auto-yields: the difference is that, for example, when choosing per ability if you auto-yield to Hellrider's triggered ability once, all triggers from other Hellrider cards will be automatically yielded to as well. When choosing per card, you will need to auto-yield to each Hellrider separately.
+Forge offers several yield options depending on how long you want to skip prompts:
 
-  Note that in when auto-yielding per ability, yields will NOT be automatically cleared between games in a match, which should speed the game up. When auto-yielding per card, yields WILL be automatically cleared between games because they are dependent on card IDs which change from game to game, thus you will need to auto-yield to each card again in each game of the match.
+- **Auto-Pass** — a persistent toggle that automatically yields priority when you have no playable actions. Available on **Desktop** via the Auto-Pass dock icon and the **P** hotkey, or on **Mobile** from the in-match Game menu.
+- **End Turn** — auto-pass through the rest of the current turn, bypassing any phase stops. Triggered by the End Turn dock button.
+- **Yield markers** — auto-pass until a specific phase is reached. Right-click (or long-press) a phase indicator to set one; a fast-forward symbol marks the active cell. Each (player, phase) cell is independent, so in multiplayer you can yield to a specific opponent's end step.
+- **Yield to stack / Resolve entire stack** — auto-pass while the stack resolves. Right-click a stack item to choose: **Yield to stack** auto-passes until the stack empties or an interrupt fires (for example, an opponent casts another spell); **Resolve entire stack** keeps auto-passing until the whole stack is empty even if opponents cast more spells.
 
-- Pressing "End Turn" skips your attack phase and doesn't get cancelled automatically if a spell or ability is put on the stack. You'll still be given a chance to declare blockers if your opponent attacks, but after that the rest of your opponent's turn will then progress without you receiving priority.
+> [!NOTE]
+> For more information and configuration options — including interrupt conditions, automatic yield suggestions, and speed settings — see [Advanced Yield Options](advanced-yield-options.md).
 
-  To alleviate pressing this accidentally, as long as you're passing this way, you'll be able to press Escape or the Cancel button to be given the chance to act again. Phases with stops and spells/abilities resolving will be given a slight delay to allow you to see what's going on.
+## Individual Yields and Trigger Decisions
+When a spell or an ability appears on the stack you can right-click it to decide if you want to always accept (Always Yes) or always decline it (Always No). For abilities marked "(OPTIONAL)" the same right-click lets you set an auto-yield so you don't get prompted on subsequent activations.
+
+The granularity and lifetime of these decisions are controlled by the **Auto Yield/Trigger Mode** setting under Settings → Preferences:
+
+- **Per Card (Each Game)** — decisions are tied to a specific card instance and cleared at the end of each game. You'll need to set them again in the next game of the match. (For example, auto-yielding one Hellrider does not affect another copy of Hellrider.)
+- **Per Ability (Each Match)** — decisions apply to every copy of the ability and persist across games within the current match, then clear when you start a new match.
+- **Per Ability (Each Session)** — decisions persist across matches until you close Forge.
+- **Per Ability (Each Install)** — decisions are saved to disk and persist across Forge restarts.
+
+Pick a longer-lived scope when you want recurring triggers (e.g. routine ETBs, upkeep optional triggers) to stay yielded across many games; pick a shorter scope when you want a clean slate each game.
+
+The current list of active auto-yields and Always Yes / Always No trigger decisions is visible from Game → Auto-Yields and Triggers, where individual entries can be cleared.
 
 ## Shift Key helper
 * When you mouse over a flip, transform or Morph (controlled by you) card in battlefield, hold SHIFT to see other state of that card at the side panel that displays card picture and details.
@@ -216,6 +235,26 @@ The macro will dutifully execute your click sequence without regard to changes i
 
 # Desktop User Interface
 
+## Interface Overview
+
+The match screen is divided into resizable panels. The numbers below identify each major component in the default layout.
+
+![Interface overview](interface-overview.png)
+
+1. **Forge menu** — application menu including layout, theme, gameplay, and audio options.
+2. **Game state tabs** — pending stack, combat assignments, action log, and effect dependencies.
+3. **Player field tabs** — switch between opponents' fields in multiplayer; the (N new) indicator highlights cards that have changed since you last viewed that field. See [Sort Player Fields in Turn Order](#sort-player-fields-in-turn-order) for ordering options.
+4. **Card Detail** — selected card's text and metadata.
+5. **Opponent's field** — same layout as your own field (items 6-10 describe its components).
+6. **Avatar and life total** — left-click to target the player, hover to see more info including Commander damage.
+7. **Zone buttons** — hand, library, graveyard, exile, command, and sideboard with live counts; click to view, right-click for display options. See [Viewing cards in different zones](#viewing-cards-in-different-zones) for details.
+8. **Turn Phases** — click any pip to toggle a priority stop in that phase; right-click to yield to that phase.
+9. **Mana pool** — floating mana; click a symbol to spend it during cost payment.
+10. **Battlefield** — see [Battlefield Display](#battlefield-display) for stacking and grouping options. (In this example, **Group all permanents** is enabled).
+11. **Card Picture** — selected card's full art.
+12. **Player Hand** — click a card to play it, right click for other options.
+13. **Prompt panel** — respond to the current priority prompt or skip to end of turn.
+
 ## Layout
 The match screen is built from draggable, resizable cells. Each cell contains one or more tabbed panels (e.g. battlefield, hand, log, stack, card detail, etc). 
 
@@ -225,7 +264,7 @@ The layout is highly customisable and can be re-arranged to suit your preference
 - **Move an entire cell:** Click and drag the handle on the left side of a cell's header to move all its tabs as a unit.
 - **Drop zones:** Dragging to the left, right, top, or bottom edge of a target cell splits it in that direction. Dragging to the centre adds the panel as a tab. A visual preview shows where the panel will land.
 
-Layouts are saved as XML files and  adapt to different window sizes and resolutions.
+Layouts are saved as XML files and adapt to different window sizes and resolutions.
 - **Save/Load:** Use **Layout > File** in the menu bar to save, open, or revert layouts.
 - **Default layouts** ship with Forge and are restored when you select **Revert to Default Layout**.
 - **User layouts** are stored in your Forge user data directory under `preferences/` (e.g., `%APPDATA%/Forge/preferences/match.xml` on Windows).
@@ -246,11 +285,45 @@ Your preference is saved per zone and remembered separately for your own zones a
 > [!TIP]
 > Enable the Layout->View->New card count menu option to display a delta number in the tab header which may help you more quickly identify changes in complex boardstates.
 
-## Auto-Sort Multiplayer Fields
-In multiplayer games (3+ players), Forge can automatically arrange opponent battlefield panels in turn order. This is controlled via the **Layout > View** menu during a match.
+## Battlefield Display
 
-**Enabling the feature:**
-- **Layout > View > Sort Multiplayer Fields** — Toggle the feature on or off. When off, extra player fields are simply added as tabs to existing panels (the default behaviour) without regard to turn order.
+### Stacking and Grouping Cards
+
+You can customise how identical cards are displayed on the battlefield through the **Game > Stack/Group Permanents** submenu.
+
+| Mode                                                                                                                                                                                                                                 | Example                                      |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------|
+| **Default** <br> Identical creatures are shown individually. Lands, tokens, artifacts, and enchantments are stacked with a fan-out.                                                                                                  | <img src="stacking-default.png" width="450"> |
+| **Stack Creatures** <br> Same as Default, but identical creatures are also stacked.                                                                                                                                                  | <img src="stacking-stack.png" width="450">   |
+| **Group Creatures/Tokens**<br> Identical creatures and tokens collapse into a single compact pile with a count badge on top. <br><br> **Group All Permanents** <br> Every kind of identical permanent is grouped with a count badge. | <img src="stacking-group.png" width="450">  |
+
+You can control the maximum number of cards included in a stack through the **Max stack depth** preference in the Preferences menu (default 4).
+
+**What counts as identical for grouping:** name, power/toughness, counters, abilities, tapped state, damage, and the absence of attachments must all match. The moment any of these change for one card — it gets tapped, takes damage, gains a counter — that card splits out into its own pile. During combat, attackers and blockers with different combat assignments are also kept in separate piles so the targeting arrows are easier to follow.
+
+**Interacting with a group:** the count badge and individual cards in a group respond to the following inputs.
+
+| Action                                       | Effect                                                                                                        |
+|----------------------------------------------|---------------------------------------------------------------------------------------------------------------|
+| Left-click the badge                         | Selects every card in the group (e.g. tap all lands for mana)                                                 |
+| Left-click the badge on a tapped group       | Undoes the last action for each card (e.g. reverse a batched mana tap)                                        |
+| Left-click an individual card in a group     | Splits it out for individual selection or targeting; click again to merge it back                             |
+| Right-click the badge                        | Prompts for a count — declare N attackers/blockers, remove N from combat, or select N for targeting |
+
+> [!NOTE]
+> Grouping is a display feature only. The game engine still processes each permanent individually, so prompts that require per-card decisions (such as picking a mana colour when sacrificing a stack of Treasure tokens) will still appear one card at a time.
+
+### Tokens in Separate Row
+Toggle **Game > Tokens in Separate Row** to render tokens in a dedicated row below your non-token creatures, so a wide token board doesn't crowd out your other creatures.
+
+### Separating Combatants
+Toggle **Game > Separate Combatants from Stacks** to spread stacked creatures apart while they are attacking or blocking, so combat arrows stay easy to follow.
+
+## Sort Player Fields in Turn Order
+
+By default additional player fields in 3+ player games are added as tabs to existing panels without regard to turn order.
+
+Forge can automatically arrange opponent battlefield panels in turn order via *Layout > View > Sort Multiplayer Fields** during a match.
 
 **When enabled, two additional settings become available in the Layout > View menu:**
 
@@ -259,4 +332,4 @@ In multiplayer games (3+ players), Forge can automatically arrange opponent batt
 | **Multiplayer Field Layout** | Grid, Rows | **Grid** distributes opponents across both top and bottom rows. **Rows** stacks all opponents in the top row above the player. |
 | **Multiplayer Field Panels** | Tabbed, Split | **Tabbed** groups multiple fields as tabs in the same panel. **Split** gives each field its own side-by-side panel.            |
 
-All three settings can be changed mid-game and take effect immediately. The feature only activates when three or more players are in the match — standard two-player games are unaffected.
+All settings can be changed mid-game and take effect immediately. The feature only activates when 3+ players are in the match — standard two-player games are unaffected.

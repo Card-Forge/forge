@@ -244,7 +244,7 @@ public class GameAction {
                         }
                     }
                 }
-            } else {
+            } else if (copied.getCurrentStateName() != CardStateName.PreparedSpell) {
                 // when a card leaves the battlefield, ensure it's in its original state
                 copied.setState(CardStateName.Original, false);
                 copied.setBackSide(false);

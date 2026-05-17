@@ -6,28 +6,35 @@ import forge.game.player.PlayerView;
 import forge.game.player.actions.PlayerAction;
 import forge.game.spellability.SpellAbilityView;
 import forge.gamemodes.match.NextGameDecision;
+import forge.gamemodes.match.YieldController;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.net.GameProtocolSender;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.interfaces.IDevModeCheats;
 import forge.interfaces.IGameController;
 import forge.interfaces.IMacroSystem;
-import forge.localinstance.properties.ForgeConstants;
-import forge.localinstance.properties.ForgePreferences;
-import forge.model.FModel;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.player.AutoYieldStore;
-import forge.player.PersistentYieldStore;
 import forge.util.ITriggerEvent;
 
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Map;
 
 public class NetGameController implements IGameController {
 
     private final GameProtocolSender sender;
 
-    private final AutoYieldStore yieldStore = new AutoYieldStore();
+    /** Source of truth for this client's yield state (auto-yields, trigger decisions, markers, skip-phase, etc.). */
+    private final YieldController yieldController = new YieldController(null);
 
     public NetGameController(final IToServer server) {
         sender = new GameProtocolSender(server);
+    }
+
+    @Override
+    public YieldController getYieldController() {
+        return yieldController;
     }
 
     private void send(final ProtocolMethod method, final Object... args) {
@@ -75,11 +82,6 @@ public class NetGameController implements IGameController {
     @Override
     public void selectAbility(final SpellAbilityView sa) {
         send(ProtocolMethod.selectAbility, sa);
-    }
-
-    @Override
-    public void passPriorityUntilEndOfTurn() {
-        send(ProtocolMethod.passPriorityUntilEndOfTurn);
     }
 
     @Override
@@ -135,100 +137,61 @@ public class NetGameController implements IGameController {
         send(ProtocolMethod.requestResync);
     }
 
-    private boolean activeModeIsInstall() {
-        return ForgeConstants.AUTO_YIELD_PER_ABILITY_INSTALL.equals(
-                FModel.getPreferences().getPref(ForgePreferences.FPref.UI_AUTO_YIELD_MODE));
-    }
-
-    private boolean activeModeIsAbilityScope() {
-        return !ForgeConstants.AUTO_YIELD_PER_CARD.equals(
-                FModel.getPreferences().getPref(ForgePreferences.FPref.UI_AUTO_YIELD_MODE));
-    }
-
-    private AutoYieldStore.Tier activeTier() {
-        String mode = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_AUTO_YIELD_MODE);
-        if (ForgeConstants.AUTO_YIELD_PER_CARD.equals(mode))            return AutoYieldStore.Tier.GAME;
-        if (ForgeConstants.AUTO_YIELD_PER_ABILITY_SESSION.equals(mode)) return AutoYieldStore.Tier.SESSION;
-        return AutoYieldStore.Tier.MATCH;
-    }
-
-    @Override
-    public boolean shouldAutoYield(final String key) {
-        if (yieldStore.isDisabled()) return false;
-        if (activeModeIsInstall()) {
-            return PersistentYieldStore.get().contains(AutoYieldStore.abilitySuffix(key));
-        }
-        String storageKey = activeModeIsAbilityScope() ? AutoYieldStore.abilitySuffix(key) : key;
-        return yieldStore.shouldYield(activeTier(), storageKey);
-    }
-
     @Override
     public void setShouldAutoYield(final String key, final boolean autoYield, final boolean isAbilityScope) {
-        String storageKey = isAbilityScope ? AutoYieldStore.abilitySuffix(key) : key;
-        if (activeModeIsInstall()) {
-            PersistentYieldStore.get().setYield(storageKey, autoYield);
-        } else {
-            yieldStore.setYield(activeTier(), storageKey, autoYield);
-        }
-        send(ProtocolMethod.setShouldAutoYield, storageKey, autoYield, isAbilityScope);
+        String storageKey = yieldController.setShouldAutoYield(key, autoYield, isAbilityScope);
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.CardAutoYield(storageKey, autoYield, isAbilityScope));
     }
 
     @Override
-    public Iterable<String> getAutoYields() {
-        return activeModeIsInstall()
-                ? PersistentYieldStore.get().getYields()
-                : yieldStore.getYields(activeTier());
+    public void setDisableAutoYields(final boolean disable) {
+        yieldController.setDisableAutoYields(disable);
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.SetDisableYields(disable));
     }
 
     @Override
-    public void clearAutoYields() {
-        // No-op locally: tier lifecycle is driven separately. Server-side mirror is cleared by HostedMatch.
+    public void setTriggerDecision(final String key, final AutoYieldStore.TriggerDecision decision, final boolean isAbilityScope) {
+        String storageKey = yieldController.setTriggerDecision(key, decision, isAbilityScope);
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.TriggerDecision(storageKey, decision, isAbilityScope));
     }
 
     @Override
-    public boolean getDisableAutoYields() { return yieldStore.isDisabled(); }
-
-    @Override
-    public void setDisableAutoYields(final boolean disable) { yieldStore.setDisabled(disable); }
-
-    @Override
-    public boolean shouldAlwaysAcceptTrigger(final int trigger) {
-        return yieldStore.getTriggerDecision(trigger) == AutoYieldStore.TriggerDecision.ACCEPT;
+    public void setDisableAutoTriggers(final boolean disable) {
+        yieldController.setDisableAutoTriggers(disable);
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.SetDisableTriggers(disable));
     }
 
-    @Override
-    public boolean shouldAlwaysDeclineTrigger(final int trigger) {
-        return yieldStore.getTriggerDecision(trigger) == AutoYieldStore.TriggerDecision.DECLINE;
-    }
-
-    @Override
-    public void setShouldAlwaysAcceptTrigger(final int trigger) {
-        yieldStore.setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.ACCEPT);
-        send(ProtocolMethod.setShouldAlwaysAcceptTrigger, trigger);
-    }
-
-    @Override
-    public void setShouldAlwaysDeclineTrigger(final int trigger) {
-        yieldStore.setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.DECLINE);
-        send(ProtocolMethod.setShouldAlwaysDeclineTrigger, trigger);
-    }
-
-    @Override
-    public void setShouldAlwaysAskTrigger(final int trigger) {
-        yieldStore.setTriggerDecision(trigger, AutoYieldStore.TriggerDecision.ASK);
-        send(ProtocolMethod.setShouldAlwaysAskTrigger, trigger);
-    }
-
-    public void replayActiveYields() {
-        boolean abilityScope = activeModeIsAbilityScope();
-        for (String key : getAutoYields()) {
-            send(ProtocolMethod.setShouldAutoYield, key, Boolean.TRUE, abilityScope);
-        }
-    }
-
-    @Override
     public void setUiShouldSkipPhase(final PlayerView turnPlayer, final PhaseType phase, final boolean shouldSkip) {
-        send(ProtocolMethod.setUiShouldSkipPhase, turnPlayer, phase, shouldSkip);
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.SkipPhase(turnPlayer, phase, shouldSkip));
+    }
+
+    @Override
+    public void applyYieldUpdate(final YieldUpdate update) {
+        yieldController.apply(update);
+    }
+
+    /**
+     * Remote client's outbound path for user-initiated yield actions (right-click
+     * marker, ESC, "yield to entire stack" menu): mutate local cache for immediate
+     * UI response and ship to host.
+     */
+    @Override
+    public void sendYieldUpdate(final YieldUpdate update) {
+        applyYieldUpdate(update);
+        send(ProtocolMethod.sendYieldUpdate, update);
+    }
+
+    /**
+     * Build a YieldStateSnapshot from the local persistent yield state plus the
+     * GUI-loaded skip-phase prefs and ship it to the host in one wire message.
+     */
+    public void seedYieldStateOnHost(Map<PlayerView, EnumSet<PhaseType>> skipPhases) {
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.SeedFromClient(yieldController.buildClientSnapshot(skipPhases)));
+    }
+
+    @Override
+    public void setYieldPref(final FPref pref, final String value) {
+        send(ProtocolMethod.sendYieldUpdate, new YieldUpdate.SetYieldPref(pref, value));
     }
 
     private IMacroSystem macros;

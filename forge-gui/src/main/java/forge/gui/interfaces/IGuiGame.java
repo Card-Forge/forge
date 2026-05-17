@@ -15,8 +15,10 @@ import forge.game.player.IHasIcon;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.match.input.InputConfirm;
 import forge.gamemodes.net.DeltaPacket;
+import forge.gui.GuiBase;
 import forge.gui.control.PlaybackSpeed;
 import forge.interfaces.IGameController;
 import forge.item.PaperCard;
@@ -33,6 +35,16 @@ import java.util.List;
 import java.util.Map;
 
 public interface IGuiGame {
+    /**
+     * Whether the renderer for this GUI is the mobile port.
+     * For non-local GUIs this reflects the connected client's renderer
+     * (learned at lobby handshake), letting the host pick code paths that
+     * are actually implemented on the target.
+     */
+    default boolean isLibgdxPort() {
+        return GuiBase.getInterface().isLibgdxPort();
+    }
+
     void setGameView(GameView gameView);
 
     /**
@@ -204,7 +216,9 @@ public interface IGuiGame {
     }
     <T> List<T> many(String title, String topCaption, int min, int max, List<T> sourceChoices, List<T> destChoices, CardView c);
 
-    <T> List<T> order(String title, String top, List<T> sourceChoices, CardView c);
+    default <T> List<T> order(final String title, final String top, final List<T> sourceChoices, final CardView c) {
+        return order(title, top, 0, 0, sourceChoices, null, c, false);
+    }
     <T> List<T> order(String title, String top, int remainingObjectsMin, int remainingObjectsMax, List<T> sourceChoices, List<T> destChoices, CardView referenceCard, boolean sideboardingMode);
 
     /**
@@ -238,7 +252,12 @@ public interface IGuiGame {
 
     void setHighlighted(GameEntityView pv, boolean b);
 
-    void setSelectables(final Iterable<CardView> cards);
+    /**
+     * Mark {@code cards} as selectable and publish the active selection's
+     * minimum / maximum required count for client-side use (e.g.,
+     * select-min hotkeys). Callers without a known range pass {@code (0, 0)}.
+     */
+    void setSelectables(Iterable<CardView> cards, int min, int max);
 
     void clearSelectables();
 
@@ -261,9 +280,6 @@ public interface IGuiGame {
 
     boolean isUiSetToSkipPhase(PlayerView playerTurn, PhaseType phase);
 
-    void autoPassUntilEndOfTurn(PlayerView player);
-    boolean mayAutoPass(PlayerView player);
-    void autoPassCancel(PlayerView player);
     void updateAutoPassPrompt();
 
     void setCurrentPlayer(PlayerView player);
@@ -273,6 +289,12 @@ public interface IGuiGame {
      * @param packet the delta packet containing changes
      */
     void applyDelta(DeltaPacket packet);
+
+    /** Repaint marker chevron / stack-yield UI for the given player. */
+    default void refreshYieldUi(PlayerView player) {}
+
+    /** Apply an authoritative yield-state change. {@link forge.gamemodes.match.AbstractGuiGame} routes to the local {@link forge.interfaces.IGameController}; {@link forge.gamemodes.net.server.RemoteClientGuiGame} forwards over the wire. */
+    void applyYieldUpdate(YieldUpdate update);
 
     /** Returns true if this game instance is a network game. */
     boolean isNetGame();

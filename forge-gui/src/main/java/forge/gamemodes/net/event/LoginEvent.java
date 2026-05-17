@@ -8,11 +8,13 @@ public class LoginEvent implements NetEvent {
     private final String username;
     private final int avatarIndex, sleeveIndex;
     private final String version;
-    public LoginEvent(final String username, final int avatarIndex, final int sleeveIndex, final String version) {
+    private final boolean libgdx;
+    public LoginEvent(final String username, final int avatarIndex, final int sleeveIndex, final String version, final boolean libgdx) {
         this.username = username;
         this.avatarIndex = avatarIndex;
         this.sleeveIndex = sleeveIndex;
         this.version = version;
+        this.libgdx = libgdx;
     }
 
     @Override
@@ -33,5 +35,9 @@ public class LoginEvent implements NetEvent {
 
     public String getVersion() {
         return version;
+    }
+
+    public boolean isLibgdx() {
+        return libgdx;
     }
 }
