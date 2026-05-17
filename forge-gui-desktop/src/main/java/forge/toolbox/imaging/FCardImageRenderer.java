@@ -32,7 +32,6 @@ import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
-import forge.game.keyword.Keyword;
 import forge.gui.GuiBase;
 import forge.gui.card.CardDetailUtil;
 import forge.gui.card.CardDetailUtil.DetailColors;
