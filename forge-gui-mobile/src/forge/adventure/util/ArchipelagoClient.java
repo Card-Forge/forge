@@ -10,6 +10,7 @@ import forge.adventure.archipelago.events.ReceiveItem;
 import forge.adventure.data.ArchipelagoData;
 import forge.card.CardEdition;
 import io.github.archipelagomw.Client;
+import io.github.archipelagomw.flags.ItemsHandling;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -23,6 +24,7 @@ public class ArchipelagoClient extends Client {
         super();
 
         this.setGame("ForgeAP");
+        this.setItemsHandlingFlags(ItemsHandling.SEND_ITEMS | ItemsHandling.SEND_OWN_ITEMS | ItemsHandling.SEND_STARTING_INVENTORY);
         this.getEventManager().registerListener(new ConnectResult(this, connectStatusLabel));
         this.getEventManager().registerListener(new ReceiveItem());
         this.getEventManager().registerListener(new LocationChecked());
@@ -36,7 +38,7 @@ public class ArchipelagoClient extends Client {
 
     @Override
     public void onError(Exception ex) {
-
+        ex.getLocalizedMessage();
     }
 
     @Override
