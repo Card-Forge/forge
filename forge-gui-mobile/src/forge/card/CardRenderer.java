@@ -830,7 +830,7 @@ public class CardRenderer {
             if ((card.getCurrentState().hasKeyword(Keyword.FLASH))
                     || ((abilityText.contains("May be played by"))
                     && (abilityText.contains("and as though it has flash")))) {
-                    CardFaceSymbols.drawSymbol("flash", g, cx + ((cw * 2) / 2.3f), cy, cw / 5.5f, cw / 5.5f);
+                g.drawImage(FSkin.getImages().get(FSkinProp.IMG_ABILITY_FLASH), cx + ((cw * 2) / 2.3f), cy, cw / 5.5f, cw / 5.5f);
             }
         }
         //draw name and mana cost overlays if card is small or default card image being used
