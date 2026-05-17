@@ -573,15 +573,12 @@ public class MatchController extends NetworkGuiGame {
                 final VPhaseIndicator.PhaseLabel label = pi.getLabel(phase);
                 label.setStopAtPhase(prefs.getPrefBoolean(keys[p - 1]));
                 label.setOnToggled(() -> instance.pushSkipPhaseToControllers(player, phase));
-                label.setOnLongPress(() -> instance.handleYieldMarkerToggle(label, player, phase));
+                label.setOnLongPress(() -> instance.handleYieldMarkerToggle(player, phase,
+                        () -> label.setStopAtPhase(true)));
             }
         }
 
         instance.seedYieldStateOnHost();
-    }
-
-    private void handleYieldMarkerToggle(final VPhaseIndicator.PhaseLabel label, final PlayerView phaseOwner, final PhaseType phase) {
-        handleYieldMarkerToggle(phaseOwner, phase, () -> label.setStopAtPhase(true));
     }
 
     public static void writeMatchPreferences() {

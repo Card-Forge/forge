@@ -1383,18 +1383,14 @@ public final class CMatchUI
                 final PhaseLabel label = pi.getLabelFor(phase);
                 label.setEnabled(prefs.getPrefBoolean(keys[p - 1]));
                 label.setOnToggled(() -> pushSkipPhaseToControllers(player, phase));
-                label.setOnRightClick(() -> handleYieldMarkerToggle(label, player, phase));
+                label.setOnRightClick(() -> handleYieldMarkerToggle(player, phase, () -> {
+                    label.setEnabled(true);
+                    label.repaintOnlyThisLabel();
+                }));
             }
         }
 
         seedYieldStateOnHost();
-    }
-
-    private void handleYieldMarkerToggle(final PhaseLabel label, final PlayerView phaseOwner, final PhaseType phase) {
-        handleYieldMarkerToggle(phaseOwner, phase, () -> {
-            label.setEnabled(true);
-            label.repaintOnlyThisLabel();
-        });
     }
 
     @Override
