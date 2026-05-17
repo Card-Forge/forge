@@ -15,8 +15,8 @@ game.
 ```json
 {
   "status": "ok",
-  "model": "llama3.1:8b",
-  "ollama_reachable": true,
+  "model": "local-model",
+  "llm_reachable": true,
   "metagame_enabled": true
 }
 ```
@@ -24,8 +24,8 @@ game.
 | Field | Meaning |
 |---|---|
 | `status` | Always `"ok"` when the service is up. |
-| `model` | The Ollama model the sidecar is configured to use. |
-| `ollama_reachable` | Whether the Ollama server responded to a probe. |
+| `model` | The model name the sidecar is configured to use. |
+| `llm_reachable` | Whether the LLM server responded to a probe. |
 | `metagame_enabled` | Whether scraped metagame data is being used. |
 
 ## `POST /recognize`
@@ -36,6 +36,7 @@ Run the deck-recognition graph for one opponent.
 
 ```json
 {
+  "client": "forge",
   "game_id": "12345",
   "format": "Constructed",
   "opponent_seat": 1,
@@ -51,12 +52,13 @@ Run the deck-recognition graph for one opponent.
 
 | Field | Type | Notes |
 |---|---|---|
+| `client` | string | Identifies the calling client/adapter (e.g. `"forge"`). See [ADAPTERS.md](ADAPTERS.md). |
 | `game_id` | string | Identifies the game; used to cache the detected format. |
-| `format` | string | Forge's game type (e.g. `Constructed`, `Commander`). Often generic. |
+| `format` | string | The client's game type (e.g. `Constructed`, `Commander`). Often generic. |
 | `opponent_seat` | int | The opponent's seat/id. Informational. |
 | `turn` | int | Current game turn. |
 | `observations` | array | The opponent's public plays so far, chronological. |
-| `deck_cards` | array of string | The **AI's own** decklist (card names). Used to detect the precise format. Optional. |
+| `deck_cards` | array of string | The controlled player's decklist (card names). Used to detect the precise format. Optional. |
 
 **`Observation` object**
 

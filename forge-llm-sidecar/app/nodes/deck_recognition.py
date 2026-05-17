@@ -11,7 +11,7 @@ import logging
 
 from app.config import CONFIG
 from app.knowledge import format_detect, loader, metagame
-from app.ollama_client import OllamaError, generate_json
+from app.llm_client import LLMError, generate_json
 from app.schema import GraphState
 
 log = logging.getLogger(__name__)
@@ -128,7 +128,7 @@ async def deck_recognition_node(state: GraphState) -> GraphState:
 
     try:
         result = await generate_json(_build_prompt(state), system=_SYSTEM_PROMPT)
-    except OllamaError as exc:
+    except LLMError as exc:
         log.warning("deck_recognition: model call failed: %s", exc)
         return {
             **state,

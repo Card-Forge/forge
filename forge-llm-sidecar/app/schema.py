@@ -21,6 +21,9 @@ class Observation(BaseModel):
 
 
 class RecognitionRequest(BaseModel):
+    # Identifies the calling client/adapter (e.g. "forge"). Any MTG client can
+    # be an adapter by producing this request shape — see docs/ADAPTERS.md.
+    client: str = "unknown"
     game_id: str
     format: str
     opponent_seat: int = 0

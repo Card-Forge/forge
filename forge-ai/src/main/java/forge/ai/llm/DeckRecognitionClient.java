@@ -1,10 +1,13 @@
 package forge.ai.llm;
 
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.time.Duration;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
@@ -17,20 +20,24 @@ import com.google.gson.GsonBuilder;
 /**
  * HTTP client for the LLM sidecar service.
  *
+ * <p>Uses {@link HttpURLConnection} (rather than the JDK 11
+ * {@code java.net.http} client) so the feature works on Android — Forge's
+ * mobile build targets API levels below 34, where {@code java.net.http} is
+ * unavailable.</p>
+ *
  * <p>Calls are asynchronous and fail-soft: any transport, status or parsing
  * error is swallowed (logged at debug level) and surfaced as an empty
  * {@link Optional}, so the game loop is never disrupted by the LLM.</p>
  */
 public final class DeckRecognitionClient {
 
-    private static final Duration CONNECT_TIMEOUT = Duration.ofSeconds(3);
-    private static final Duration HEALTH_TIMEOUT = Duration.ofSeconds(2);
-    private static final Duration RECOGNIZE_TIMEOUT = Duration.ofSeconds(90);
+    private static final int CONNECT_TIMEOUT_MS = 3_000;
+    private static final int HEALTH_TIMEOUT_MS = 2_000;
+    private static final int RECOGNIZE_TIMEOUT_MS = 90_000;
 
     private final String baseUrl;
     private final Gson gson = new GsonBuilder().create();
     private final ExecutorService executor;
-    private final HttpClient httpClient;
 
     public DeckRecognitionClient(final String baseUrl) {
         this.baseUrl = baseUrl.endsWith("/") ? baseUrl.substring(0, baseUrl.length() - 1) : baseUrl;
@@ -39,10 +46,6 @@ public final class DeckRecognitionClient {
             t.setDaemon(true);
             return t;
         });
-        this.httpClient = HttpClient.newBuilder()
-                .connectTimeout(CONNECT_TIMEOUT)
-                .executor(executor)
-                .build();
     }
 
     /**
@@ -52,17 +55,15 @@ public final class DeckRecognitionClient {
      * @return true if the sidecar responded 200
      */
     public boolean isSidecarHealthy() {
+        HttpURLConnection conn = null;
         try {
-            final HttpRequest req = HttpRequest.newBuilder()
-                    .uri(URI.create(baseUrl + "/health"))
-                    .timeout(HEALTH_TIMEOUT)
-                    .GET()
-                    .build();
-            final HttpResponse<String> resp = httpClient.send(req, HttpResponse.BodyHandlers.ofString());
-            return resp.statusCode() == 200;
+            conn = open("/health", "GET", HEALTH_TIMEOUT_MS);
+            return conn.getResponseCode() == 200;
         } catch (final Exception ex) {
             Log.debug("DeckRecognition: sidecar health check failed: " + ex.getMessage());
             return false;
+        } finally {
+            disconnect(conn);
         }
     }
 
@@ -71,36 +72,51 @@ public final class DeckRecognitionClient {
      * failures resolve to an empty {@link Optional}.
      */
     public CompletableFuture<Optional<RecognitionResult>> recognizeAsync(final RecognitionRequest request) {
-        final HttpRequest httpRequest;
-        try {
-            httpRequest = HttpRequest.newBuilder()
-                    .uri(URI.create(baseUrl + "/recognize"))
-                    .timeout(RECOGNIZE_TIMEOUT)
-                    .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(gson.toJson(request)))
-                    .build();
-        } catch (final RuntimeException ex) {
-            Log.debug("DeckRecognition: failed to build request: " + ex.getMessage());
-            return CompletableFuture.completedFuture(Optional.empty());
-        }
+        return CompletableFuture.supplyAsync(() -> doRecognize(request), executor);
+    }
 
-        return httpClient.sendAsync(httpRequest, HttpResponse.BodyHandlers.ofString())
-                .handle((resp, err) -> {
-                    if (err != null) {
-                        Log.debug("DeckRecognition: request failed: " + err.getMessage());
-                        return Optional.<RecognitionResult>empty();
-                    }
-                    if (resp.statusCode() != 200) {
-                        Log.debug("DeckRecognition: sidecar returned HTTP " + resp.statusCode());
-                        return Optional.<RecognitionResult>empty();
-                    }
-                    try {
-                        return Optional.ofNullable(gson.fromJson(resp.body(), RecognitionResult.class));
-                    } catch (final RuntimeException ex) {
-                        Log.debug("DeckRecognition: failed to parse response: " + ex.getMessage());
-                        return Optional.<RecognitionResult>empty();
-                    }
-                });
+    private Optional<RecognitionResult> doRecognize(final RecognitionRequest request) {
+        HttpURLConnection conn = null;
+        try {
+            conn = open("/recognize", "POST", RECOGNIZE_TIMEOUT_MS);
+            conn.setDoOutput(true);
+            conn.setRequestProperty("Content-Type", "application/json");
+            final byte[] body = gson.toJson(request).getBytes(StandardCharsets.UTF_8);
+            try (OutputStream os = conn.getOutputStream()) {
+                os.write(body);
+            }
+            final int status = conn.getResponseCode();
+            if (status != 200) {
+                Log.debug("DeckRecognition: sidecar returned HTTP " + status);
+                return Optional.empty();
+            }
+            try (InputStream is = conn.getInputStream();
+                 BufferedReader reader = new BufferedReader(
+                         new InputStreamReader(is, StandardCharsets.UTF_8))) {
+                return Optional.ofNullable(gson.fromJson(reader, RecognitionResult.class));
+            }
+        } catch (final IOException | RuntimeException ex) {
+            Log.debug("DeckRecognition: request failed: " + ex.getMessage());
+            return Optional.empty();
+        } finally {
+            disconnect(conn);
+        }
+    }
+
+    private HttpURLConnection open(final String path, final String method, final int readTimeout)
+            throws IOException {
+        final HttpURLConnection conn = (HttpURLConnection) new URL(baseUrl + path).openConnection();
+        conn.setRequestMethod(method);
+        conn.setConnectTimeout(CONNECT_TIMEOUT_MS);
+        conn.setReadTimeout(readTimeout);
+        conn.setRequestProperty("Accept", "application/json");
+        return conn;
+    }
+
+    private static void disconnect(final HttpURLConnection conn) {
+        if (conn != null) {
+            conn.disconnect();
+        }
     }
 
     /** Release the background executor. Safe to call multiple times. */

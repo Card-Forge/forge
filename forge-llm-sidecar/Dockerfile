@@ -1,6 +1,6 @@
 # Container image for the Forge LLM sidecar.
-# The local LLM (Ollama) and Scryfall are reached over the network at runtime;
-# this image only contains the FastAPI service.
+# The LLM server (OpenAI-compatible, e.g. llama.cpp) and Scryfall are reached
+# over the network at runtime; this image only contains the FastAPI service.
 FROM python:3.12-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \

@@ -12,7 +12,9 @@ def _env_bool(name: str, default: bool) -> bool:
 
 @dataclass(frozen=True)
 class Config:
-    ollama_url: str
+    # LLM backend: any OpenAI-compatible server (default: a local llama.cpp server)
+    llm_base_url: str
+    llm_api_key: str
     model_name: str
     port: int
     request_timeout: float
@@ -25,10 +27,11 @@ class Config:
     @staticmethod
     def from_env() -> Config:
         return Config(
-            ollama_url=os.environ.get("OLLAMA_URL", "http://localhost:11434"),
-            model_name=os.environ.get("MODEL_NAME", "llama3.1:8b"),
+            llm_base_url=os.environ.get("LLM_BASE_URL", "http://localhost:8080/v1"),
+            llm_api_key=os.environ.get("LLM_API_KEY", "not-needed"),
+            model_name=os.environ.get("MODEL_NAME", "local-model"),
             port=int(os.environ.get("PORT", "8000")),
-            request_timeout=float(os.environ.get("OLLAMA_TIMEOUT", "60")),
+            request_timeout=float(os.environ.get("LLM_TIMEOUT", "60")),
             metagame_enable=_env_bool("METAGAME_ENABLE", True),
             default_meta_format=os.environ.get("DEFAULT_META_FORMAT", "standard"),
             format_detect_enable=_env_bool("FORMAT_DETECT_ENABLE", True),

@@ -9,7 +9,7 @@ from fastapi import FastAPI
 from app.config import CONFIG
 from app.graph import get_graph
 from app.knowledge import metagame
-from app.ollama_client import is_reachable
+from app.llm_client import is_reachable
 from app.schema import RecognitionRequest, RecognitionResponse
 
 logging.basicConfig(level=logging.INFO)
@@ -22,7 +22,7 @@ app = FastAPI(title="Forge LLM Sidecar", version="0.1.0")
 async def _warm_graph() -> None:
     # Compile the graph eagerly so the first /recognize call is not slow.
     get_graph()
-    log.info("Graph compiled. Model=%s Ollama=%s", CONFIG.model_name, CONFIG.ollama_url)
+    log.info("Graph compiled. Model=%s LLM=%s", CONFIG.model_name, CONFIG.llm_base_url)
 
 
 @app.get("/health")
@@ -31,7 +31,7 @@ async def health() -> dict:
     return {
         "status": "ok",
         "model": CONFIG.model_name,
-        "ollama_reachable": await is_reachable(),
+        "llm_reachable": await is_reachable(),
         "metagame_enabled": CONFIG.metagame_enable,
     }
 
@@ -57,6 +57,7 @@ async def get_metagame(format: str = "modern") -> dict:
 @app.post("/recognize", response_model=RecognitionResponse)
 async def recognize(req: RecognitionRequest) -> RecognitionResponse:
     """Run the deck-recognition graph for one opponent."""
+    log.info("recognize: client=%s game=%s turn=%s", req.client, req.game_id, req.turn)
     graph = get_graph()
     initial = {
         "game_id": req.game_id,

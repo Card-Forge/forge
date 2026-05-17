@@ -12,7 +12,7 @@ without embedding a Python runtime in the game.
             │  AiController                                                    │
             │    └─ DeckRecognitionManager  (attaches the feature, fail-soft)   │
             │         ├─ DeckRecognitionObserver  (Guava EventBus subscriber)   │
-            │         └─ DeckRecognitionClient    (java.net.http, async)        │
+            │         └─ DeckRecognitionClient    (HttpURLConnection, async)    │
             └───────────────────────────────┬──────────────────────────────────┘
                                             │  HTTP  (POST /recognize)
                                             ▼
@@ -23,12 +23,12 @@ without embedding a Python runtime in the game.
             │              ├─ metagame loader   (app/knowledge/metagame.py)    │
             │              ├─ curated KB        (app/knowledge/loader.py)      │
             │              ├─ format detector   (app/knowledge/format_detect)  │
-            │              └─ Ollama client     (app/ollama_client.py)         │
+            │              └─ LLM client        (app/llm_client.py)            │
             └────────┬─────────────────────┬────────────────────┬──────────────┘
                      │ HTTP                │ HTTP               │ files
                      ▼                     ▼                    ▼
-                Ollama (local LLM)   Scryfall API        metagame_data/*.json
-                                  (card legalities)   (refreshed weekly by CI)
+              llama.cpp (local LLM,   Scryfall API        metagame_data/*.json
+              OpenAI-compatible)   (card legalities)   (refreshed weekly by CI)
 ```
 
 ## Why a separate process
@@ -47,7 +47,7 @@ sidecar can be restarted, scaled, or developed independently of the game.
 | `app/schema.py` | Pydantic request/response models + the `GraphState` TypedDict. |
 | `app/graph.py` | Builds and caches the LangGraph `StateGraph`. |
 | `app/nodes/deck_recognition.py` | The single graph node: resolve format → gather candidates → prompt the LLM → parse. |
-| `app/ollama_client.py` | Async wrapper for a local Ollama server (JSON mode). |
+| `app/llm_client.py` | Async client for an OpenAI-compatible LLM server (JSON mode). |
 | `app/knowledge/metagame.py` | Runtime loader for the committed metagame JSON. |
 | `app/knowledge/loader.py` | Curated archetype knowledge base + merge logic. |
 | `app/knowledge/format_detect.py` | Scryfall-backed format inference. |
@@ -66,7 +66,7 @@ sidecar can be restarted, scaled, or developed independently of the game.
       and merges in curated `strategy`/`tells` detail (`loader.merge_with_curated`).
    3. Builds a structured prompt (format, candidate archetypes with metagame
       shares, the opponent's chronological plays).
-   4. Calls the local LLM via Ollama in JSON mode.
+   4. Calls the local LLM via the OpenAI-compatible API in JSON mode.
    5. Parses the result, clamps `confidence` to `[0, 1]`, and caps confidence
       for any archetype outside the known set.
 4. **`main.py`** returns a `RecognitionResponse`.
@@ -101,7 +101,7 @@ and reviewable, and isolates the brittle scraping logic in CI.
 
 Every external dependency is treated as optional:
 
-- **Ollama down** → the node returns `archetype: "Unknown", confidence: 0.0`.
+- **LLM server down** → the node returns `archetype: "Unknown", confidence: 0.0`.
 - **Scryfall down** → format detection returns `None`; the node falls back to
   `DEFAULT_META_FORMAT`.
 - **Metagame file missing** → the node falls back to the curated knowledge base.

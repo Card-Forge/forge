@@ -38,7 +38,7 @@ Create `app/nodes/strategy_classification.py`. A node is an `async` function
 `GraphState -> GraphState`:
 
 ```python
-from app.ollama_client import OllamaError, generate_json
+from app.llm_client import LLMError, generate_json
 from app.schema import GraphState
 
 _SYSTEM = "You are an MTG strategist. Answer with a single JSON object."
@@ -51,7 +51,7 @@ async def strategy_classification_node(state: GraphState) -> GraphState:
     prompt = _build_prompt(archetype, observations)
     try:
         result = await generate_json(prompt, system=_SYSTEM)
-    except OllamaError:
+    except LLMError:
         return {**state, "strategy": "unknown", "strategy_scores": {}}
 
     scores = _normalise(result.get("scores", {}))

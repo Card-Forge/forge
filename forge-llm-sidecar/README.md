@@ -11,22 +11,26 @@ game log only — it does not change how the heuristic AI plays.
 ## Architecture
 
 ```
-Forge (Java) --HTTP--> this sidecar (FastAPI + LangGraph) --HTTP--> Ollama (local LLM)
-                              |                          \--HTTP--> Scryfall (format detect)
-                              \-- metagame_data/*.json (refreshed weekly by a GitHub Action)
+client + adapter --HTTP--> this sidecar (FastAPI + LangGraph) --HTTP--> llama.cpp (local LLM)
+                                  |                          \--HTTP--> Scryfall (format detect)
+                                  \-- metagame_data/*.json (refreshed weekly by a GitHub Action)
 ```
 
 The LangGraph graph is `START -> deck_recognition -> END`. New nodes can be
-added later without changing the HTTP contract.
+added later without changing the HTTP contract. The sidecar is client-agnostic;
+Forge is the reference *adapter* — see [docs/ADAPTERS.md](docs/ADAPTERS.md).
 
 ## Requirements
 
 - Python 3.10+
-- A running [Ollama](https://ollama.com/) instance with a model pulled:
+- An OpenAI-compatible LLM server. The default is a local
+  [llama.cpp](https://github.com/ggml-org/llama.cpp) server:
 
   ```sh
-  ollama pull llama3.1:8b
+  llama-server -m model.gguf --host 0.0.0.0 --port 8080
   ```
+
+  Any OpenAI-compatible endpoint works — point `LLM_BASE_URL` at it.
 
 ## Install & run
 
@@ -42,7 +46,7 @@ uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```sh
 docker build -t forge-llm-sidecar .
 docker run -p 8000:8000 \
-  -e OLLAMA_URL=http://host.docker.internal:11434 \
+  -e LLM_BASE_URL=http://host.docker.internal:8080/v1 \
   forge-llm-sidecar
 ```
 
@@ -51,14 +55,16 @@ The image is also published to GHCR by CI on every push to `master`:
 
 ## Configuration (environment variables)
 
-| Variable               | Default                  | Meaning                                               |
-|------------------------|--------------------------|-------------------------------------------------------|
-| `OLLAMA_URL`           | `http://localhost:11434` | Base URL of the Ollama server                         |
-| `MODEL_NAME`           | `llama3.1:8b`            | Ollama model to use                                   |
-| `PORT`                 | `8000`                   | Port the sidecar listens on                           |
-| `METAGAME_ENABLE`      | `true`                   | Score guesses against the scraped metagame data       |
-| `FORMAT_DETECT_ENABLE` | `true`                   | Detect the precise format via Scryfall when ambiguous |
-| `DEFAULT_META_FORMAT`  | `standard`               | Fallback format when detection fails                  |
+| Variable               | Default                       | Meaning                                               |
+|------------------------|-------------------------------|-------------------------------------------------------|
+| `LLM_BASE_URL`         | `http://localhost:8080/v1`    | OpenAI-compatible API base URL (llama.cpp server)     |
+| `LLM_API_KEY`          | `not-needed`                  | Bearer token; llama.cpp ignores it                    |
+| `MODEL_NAME`           | `local-model`                 | Model name sent in the request                        |
+| `LLM_TIMEOUT`          | `60`                          | LLM request timeout (seconds)                         |
+| `PORT`                 | `8000`                        | Port the sidecar listens on                           |
+| `METAGAME_ENABLE`      | `true`                        | Score guesses against the scraped metagame data       |
+| `FORMAT_DETECT_ENABLE` | `true`                        | Detect the precise format via Scryfall when ambiguous |
+| `DEFAULT_META_FORMAT`  | `standard`                    | Fallback format when detection fails                  |
 
 ### Metagame knowledge (offline at runtime)
 
@@ -103,6 +109,7 @@ curl http://localhost:8000/health
 curl -X POST http://localhost:8000/recognize \
   -H 'Content-Type: application/json' \
   -d '{
+    "client": "forge",
     "game_id": "test",
     "format": "Constructed",
     "opponent_seat": 1,
@@ -137,7 +144,7 @@ forge-llm-sidecar/
 │  ├─ config.py               Environment-driven configuration
 │  ├─ schema.py               Request/response models + GraphState
 │  ├─ graph.py                LangGraph graph definition
-│  ├─ ollama_client.py        Local LLM client
+│  ├─ llm_client.py           OpenAI-compatible LLM client (llama.cpp)
 │  ├─ nodes/
 │  │  └─ deck_recognition.py  The deck-recognition graph node
 │  └─ knowledge/
@@ -158,6 +165,7 @@ forge-llm-sidecar/
 - [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — components, request flow, the
   graph, the metagame pipeline, failure behavior.
 - [docs/API.md](docs/API.md) — full HTTP contract for every endpoint.
+- [docs/ADAPTERS.md](docs/ADAPTERS.md) — the client-agnostic adapter model.
 - [docs/EXTENDING.md](docs/EXTENDING.md) — how to add a new graph node.
 
 ## Development
@@ -188,7 +196,7 @@ Two GitHub Actions workflows cover the sidecar:
 | Symptom | Likely cause / fix |
 |---|---|
 | No deck guesses appear in Forge's game log | Feature not enabled, or sidecar unreachable — check `GET /health`. |
-| `/health` shows `"ollama_reachable": false` | Ollama is not running, or `OLLAMA_URL` is wrong. |
-| Guesses are always `"Unknown"` | The model call is failing — check the sidecar log and that `MODEL_NAME` is pulled (`ollama list`). |
+| `/health` shows `"llm_reachable": false` | The LLM server is not running, or `LLM_BASE_URL` is wrong. |
+| Guesses are always `"Unknown"` | The model call is failing — check the sidecar log and that the LLM server has a model loaded. |
 | `/metagame` returns `count: 0` | Metagame data missing — run `python scripts/scrape_metagame.py`. |
 | Wrong format detected | Scryfall lookup failed or the deck is off-meta — falls back to `DEFAULT_META_FORMAT`. |

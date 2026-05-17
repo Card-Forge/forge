@@ -144,6 +144,7 @@ public final class DeckRecognitionObserver {
     /** Send one request; on completion, post the guess and honor any rerun. */
     private void fireCall() {
         final RecognitionRequest request = new RecognitionRequest(
+                RecognitionRequest.CLIENT,
                 String.valueOf(game.getId()),
                 game.getRules().getGameType().name(),
                 aiPlayer.getId(),
