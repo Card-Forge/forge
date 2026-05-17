@@ -50,6 +50,7 @@ public class NewGameScene extends MenuScene {
     private final Selector difficulty;
     private final Selector starterEdition;
     private final Selector enableArchipelago;
+    private boolean isArchipelagoSupported = false;
     private final Array<String> custom;
     private final TextraLabel starterEditionLabel;
     private final TextraLabel raceLabel;
@@ -130,10 +131,6 @@ public class NewGameScene extends MenuScene {
         enableArchipelagoLabel = ui.findActor("enableArchipelagoL");
         archipelagoHelp = ui.findActor("archipelagoHelp");
 
-        enableArchipelago.setVisible(isShandalar);
-        enableArchipelagoLabel.setVisible(isShandalar);
-        archipelagoHelp.setVisible(isShandalar);
-
         starterEdition = ui.findActor("starterEdition");
         starterEditionLabel = ui.findActor("starterEditionL");
         String[] starterEditions = Config.instance().starterEditions();
@@ -174,8 +171,6 @@ public class NewGameScene extends MenuScene {
 
         mode.setTextList(modeNames);
         mode.setCurrentIndex(constructedIndex != -1 ? constructedIndex : 0);
-
-        enableArchipelago.setTextList(new String[]{"Disabled", "Enabled", "Archipelago"});
 
         AdventureModes initialMode = modes.get(mode.getCurrentIndex());
         starterEdition.setVisible(initialMode == AdventureModes.Standard);
@@ -245,11 +240,6 @@ public class NewGameScene extends MenuScene {
                 showModeHelp();
             }
         });
-        archipelagoHelp.addListener(new ClickListener() {
-            public void clicked(InputEvent e, float x, float y) {
-                archipelagoHelp();
-            }
-        });
 
         raceLabel = ui.findActor("raceL");
         genderLabel = ui.findActor("genderL");
@@ -260,10 +250,24 @@ public class NewGameScene extends MenuScene {
         addSelectorToScrollGroup(genderLabel, gender, null);
         addSelectorToScrollGroup(difficultyLabel, difficulty, difficultyHelp);
         addSelectorToScrollGroup(colorLabel, colorId, null);
-        addSelectorToScrollGroup(modeLabel, mode, modeHelp);
-        if (isShandalar) {
-            addSelectorToScrollGroup(enableArchipelagoLabel, enableArchipelago, archipelagoHelp);
+
+        if (enableArchipelago != null) {
+            isArchipelagoSupported = true;
+            enableArchipelago.setTextList(new String[]{"Disabled", "Enabled", "Archipelago"});
+            archipelagoHelp.addListener(new ClickListener() {
+                public void clicked(InputEvent e, float x, float y) {
+                    archipelagoHelp();
+                }
+            });
+            if (isShandalar) {
+                addSelectorToScrollGroup(enableArchipelagoLabel, enableArchipelago, archipelagoHelp);
+            }
+            enableArchipelago.setVisible(isShandalar);
+            enableArchipelagoLabel.setVisible(isShandalar);
+            archipelagoHelp.setVisible(isShandalar);
         }
+
+        addSelectorToScrollGroup(modeLabel, mode, modeHelp);
         addSelectorToScrollGroup(starterEditionLabel, starterEdition, null);
 
         scrollPane = ui.findActor("selectorScroll");
@@ -334,11 +338,16 @@ public class NewGameScene extends MenuScene {
             generateName();
         }
         ArchipelagoMode archipelagoMode;
-        if (isShandalar && enableArchipelago.getCurrentIndex() < ArchipelagoMode.values().length && enableArchipelago.getCurrentIndex() > -1) {
-            archipelagoMode = ArchipelagoMode.values()[enableArchipelago.getCurrentIndex()];
+        if (isArchipelagoSupported) {
+            if (isShandalar && enableArchipelago.getCurrentIndex() < ArchipelagoMode.values().length && enableArchipelago.getCurrentIndex() > -1) {
+                archipelagoMode = ArchipelagoMode.values()[enableArchipelago.getCurrentIndex()];
+            } else {
+                archipelagoMode = ArchipelagoMode.disabled;
+            }
         } else {
             archipelagoMode = ArchipelagoMode.disabled;
         }
+
         Runnable runnable = () -> {
             started = false;
             //FModel.getPreferences().setPref(ForgePreferences.FPref.UI_ENABLE_MUSIC, false);
@@ -477,7 +486,7 @@ public class NewGameScene extends MenuScene {
                 summaryText.append("Randomizer: Solo Randomizer\n\nAll cards outside of your starting deck will be locked by default. Biomes, cards and equipment unlocks are randomized and can be unlocked by completing various objectives in the game.\nThe Leather Boots in your starting equipment are removed regardless of difficulty, all entities' base speed is increased to compensate.\n\n");
                 break;
             case networked_archipelago:
-                summaryText.append("Randomizer: Networked Archipelago\n\nAs 'Solo Randomizer' except that unlocks will be distributed through an online Archipelago server. More info at https://archipelago.gg.\nPlease ensure your Archipelago client is configured and connected.\nWARNING: Archipelago support is currently unavailable.\n\n");
+                summaryText.append("Randomizer: Networked Archipelago\n\nAs 'Solo Randomizer' except that unlocks will be distributed through an online Archipelago server. More info at https://multiworld.gg/\nPlease ensure your Archipelago client is configured and connected.\nWARNING: Archipelago support is currently unavailable.\n\n");
                 break;
             default:
                 summaryText.append("No summary available for this randomizer.");
