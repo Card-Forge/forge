@@ -448,6 +448,10 @@ public class ArchipelagoData implements SaveFileContent {
         lastArchipelagoRewardIndex++;
     }
 
+    public int getLastArchipelagoRewardIndex() {
+        return lastArchipelagoRewardIndex;
+    }
+
     public void generateGameNotification(String message) {
         GameHUD.getInstance().addNotification(message, 0.5f, 3f, 0.5f);
     }
