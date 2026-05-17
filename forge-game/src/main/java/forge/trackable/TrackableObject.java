@@ -18,7 +18,6 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
     private final Map<TrackableProperty, Object> props;
     private int version;
     // Per-consumer dirty tracking. Lazy-init: null until first registerConsumer.
-    // In offline games (no consumers), set() does no tracking work at all.
     private transient Map<Integer, EnumSet<TrackableProperty>> consumers;
     private boolean copyingProps;
 

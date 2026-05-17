@@ -12,7 +12,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 
-import com.google.common.primitives.Ints;
 
 import forge.control.KeyboardShortcuts;
 import forge.gamemodes.match.YieldController;
@@ -142,19 +141,13 @@ public final class GameMenu {
 
         SkinIcon menuIcon = MenuUtil.getMenuIcon(FSkinProp.ICO_ARCSOFF);
 
-        if (matchUI.getCDock().getArcState() == null) {
-            final String arcStateStr = FModel.getPreferences().getPref(FPref.UI_TARGETING_OVERLAY);
-            final Integer arcState = Ints.tryParse(arcStateStr);
-            matchUI.getCDock().setArcState(ArcState.values()[arcState == null ? 0 : arcState]);
-        }
-
         SkinnedRadioButtonMenuItem menuItem;
         menuItem = getTargetingArcRadioButton(localizer.getMessage("lblOff"), FSkinProp.ICO_ARCSOFF, ArcState.OFF);
         if (menuItem.isSelected()) { menuIcon = MenuUtil.getMenuIcon(FSkinProp.ICO_ARCSOFF); }
         group.add(menuItem);
         menu.add(menuItem);
-        menuItem = getTargetingArcRadioButton(localizer.getMessage("lblCardMouseOver"), FSkinProp.ICO_ARCSHOVER, ArcState.MOUSEOVER);
-        if (menuItem.isSelected()) { menuIcon = MenuUtil.getMenuIcon(FSkinProp.ICO_ARCSHOVER); }
+        menuItem = getTargetingArcRadioButton(localizer.getMessage("lblCardMouseOver"), FSkinProp.ICO_ARCSOFF, ArcState.MOUSEOVER);
+        if (menuItem.isSelected()) { menuIcon = MenuUtil.getMenuIcon(FSkinProp.ICO_ARCSOFF); }
         group.add(menuItem);
         menu.add(menuItem);
         menuItem = getTargetingArcRadioButton(localizer.getMessage("lblAlwaysOn"), FSkinProp.ICO_ARCSON, ArcState.ON);
@@ -179,7 +172,7 @@ public final class GameMenu {
         return e -> {
             prefs.setPref(FPref.UI_TARGETING_OVERLAY, String.valueOf(arcState.ordinal()));
             prefs.save();
-            matchUI.getCDock().setArcState(arcState);
+            matchUI.getCDock().refresh();
             setTargetingArcMenuIcon((SkinnedRadioButtonMenuItem)e.getSource());
         };
     }
@@ -213,7 +206,7 @@ public final class GameMenu {
         menuItem.setState(prefs.getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS));
         menuItem.addActionListener(e -> {
             YieldController.toggleAutoPassNoActions(matchUI.getGameController());
-            matchUI.getCDock().refreshAutoPassToggled();
+            matchUI.getCDock().refresh();
             menuItem.setState(prefs.getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS));
         });
         return menuItem;
