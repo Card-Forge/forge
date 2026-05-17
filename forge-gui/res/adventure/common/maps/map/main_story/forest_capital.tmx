@@ -193,7 +193,8 @@
             &quot;count&quot;: 1,
             &quot;rarity&quot;: [
                 &quot;Rare&quot;
-            ]
+            ],
+            &quot;colors&quot;: [&quot;green&quot;]
         }
     ],[
         {
@@ -213,7 +214,8 @@
             &quot;count&quot;: 2,
             &quot;rarity&quot;: [
                 &quot;Mythic Rare&quot;
-            ]
+            ],
+            &quot;colors&quot;: [&quot;green&quot;]
         }
     ]
     ]

@@ -138,11 +138,6 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public ISkinImage getCardArt(final PaperCard card) {
-        return null; //TODO
-    }
-
-    @Override
     public ISkinImage getCardArt(final PaperCard card, final boolean backFace) {
         return null; //TODO
     }

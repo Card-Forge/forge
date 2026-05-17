@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Nyarvirazi
+Title=Nyarvirazi
+Icon=Nyarvirazi.jpg
+Difficulty=Very Hard
+Description=../Modern/Innistrad/Tappa31CCBo_-_Bologna_-_Dragon_Store/Ivan_Lanese_-_Red_Deck_Wins_(Modern,_#23067).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+3 Keldon Marauders
+3 Flame Javelin
+4 Incinerate
+4 Lightning Bolt
+1 Magma Jet
+3 Searing Blaze
+4 Shard Volley
+4 Bump in the Night
+4 Lava Spike
+4 Rift Bolt
+2 Volcanic Hammer
+4 Arid Mesa
+2 Blackcleave Cliffs
+2 Blood Crypt
+8 Mountain
+4 Scalding Tarn
+[Sideboard]
+2 Ball Lightning
+2 Combust
+2 Flamebreak
+1 Rain of Gore
+4 Smash to Smithereens
+3 Torpor Orb

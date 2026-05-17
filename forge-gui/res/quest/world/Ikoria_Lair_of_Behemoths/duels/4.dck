@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Blackbeard
+Title=Blackbeard
+Icon=Blackbeard.jpg
+Difficulty=Medium
+Description=./Standard/Ikoria_Lair_of_Behemoths/Adam_Bajerowicz_-_Mardu_Knights_(Standard,_#971015).dck
+Deck Type=constructed
+
+[Main]
+2 Stormfist Crusader
+2 Blacklance Paragon
+3 Corpse Knight
+4 Worthy Knight
+4 Venerable Knight
+4 Fervent Champion
+4 Skyknight Vanguard
+4 Inspiring Veteran
+4 Knight of the Ebon Legion
+2 Unbreakable Formation
+4 Fight as One
+1 Savai Triome
+2 Swamp
+4 Blood Crypt
+4 Tournament Grounds
+4 Godless Shrine
+4 Sacred Foundry
+4 Plains
+[Sideboard]
+1 Lurrus of the Dream-Den
+2 Embereth Shieldbreaker
+2 Despark
+3 Dire Tactics
+3 Cry of the Carnarium
+4 Duress

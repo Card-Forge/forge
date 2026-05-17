@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="91">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="93">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -42,6 +42,8 @@
     <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Mindwrack Harpy|THB&quot;, &quot;Ripples of Undeath|MH3&quot;, &quot;Siren Song Lyre|BNG&quot;, &quot;Field of Ruin|THB&quot;
 ]}</property>
     <property name="enemy" value="Aphemia"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="50"/>
     <property name="threatRange" type="int" value="30"/>
    </properties>
@@ -60,7 +62,11 @@
   </object>
   <object id="81" template="../../../../common/maps/obj/enemy.tx" x="219" y="53">
    <properties>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Chainweb Aracnir&quot;, &quot;Forest|THB&quot;, &quot;Field of Ruin|THB&quot;, &quot;Spidersilk Armor|DDG&quot;
+]}</property>
     <property name="enemy" value="Arasta"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="30"/>
     <property name="threatRange" type="int" value="20"/>
    </properties>
@@ -112,6 +118,28 @@ YE WHO ENTER HERE&quot;,
 ]
 }
 ]</property>
+   </properties>
+  </object>
+  <object id="91" template="../../../../common/maps/obj/enemy.tx" x="121.091" y="489.273">
+   <properties>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Mindwrack Harpy|THB&quot;, &quot;Siren Song Lyre|BNG&quot;, &quot;Field of Ruin|THB&quot;
+]}</property>
+    <property name="enemy" value="Aphemia"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="50"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="92" template="../../../../common/maps/obj/enemy.tx" x="217.333" y="53.6667">
+   <properties>
+    <property name="effect">{&quot;startBattleWithCard&quot;: [&quot;Chainweb Aracnir&quot;, &quot;Forest|THB&quot;, &quot;Spidersilk Armor|DDG&quot;
+]}</property>
+    <property name="enemy" value="Arasta"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="30"/>
+    <property name="threatRange" type="int" value="20"/>
    </properties>
   </object>
  </objectgroup>

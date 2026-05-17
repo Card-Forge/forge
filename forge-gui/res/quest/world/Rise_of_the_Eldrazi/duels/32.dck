@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Riptide
+Title=Riptide
+Icon=Riptide.jpg
+Difficulty=Medium
+Description=Rise_of_the_Eldrazi/National_Qualifier_2010_-_Kansai_-_Japan/Hiroshi_Murase_-_BLightning_(Standard,_#1444).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ball Lightning
+4 Hell's Thunder
+4 Kargan Dragonlord
+4 Plated Geopede
+4 Burst Lightning
+4 Lightning Bolt
+4 Searing Blaze
+4 Staggershock
+3 Earthquake
+4 Arid Mesa
+4 Dragonskull Summit
+4 Lavaclaw Reaches
+8 Mountain
+4 Scalding Tarn
+1 Swamp
+[Sideboard]
+3 Banefire
+3 Deathmark
+4 Doom Blade
+4 Goblin Ruinblaster

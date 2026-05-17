@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Solaire
+Title=Solaire
+Icon=Solaire.jpg
+Difficulty=Easy
+Description=./Standard/Adventures_in_the_Forgotten_Realms/Brackmeister_-_White_Aggro_(Standard,_#1219389).dck
+Deck Type=constructed
+
+[Main]
+1 Legion Angel
+3 Reidane, God of the Worthy
+4 Monk of the Open Hand
+4 Elite Spellbinder
+4 Codespell Cleric
+4 Clarion Spirit
+4 Battlefield Raptor
+4 Skyclave Apparition
+4 Luminarch Aspirant
+2 Portable Hole
+2 Kabira Takedown
+2 Paladin Class
+4 Faceless Haven
+18 Snow-Covered Plains
+[Sideboard]
+3 Legion Angel
+4 Usher of the Fallen

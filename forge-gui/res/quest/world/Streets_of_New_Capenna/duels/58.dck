@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Gunnery Sergeant Hartman
+Title=Gunnery Sergeant Hartman
+Icon=Gunnery Sergeant Hartman.jpg
+Difficulty=Very Hard
+Description=./Modern/Streets_of_New_Capenna/Austin_Fuster_-_Bant_Spirits_(Modern,_#1433361).dck
+Deck Type=constructed
+
+[Main]
+1 Cemetery Illuminator
+1 Geist of Saint Traft
+2 Skyclave Apparition
+2 Shacklegeist
+2 Selfless Spirit
+4 Spell Queller
+4 Supreme Phantom
+4 Rattlechains
+4 Noble Hierarch
+4 Mausoleum Wanderer
+4 Drogskol Captain
+3 Aether Vial
+4 Collected Company
+1 Breeding Pool
+1 Temple Garden
+1 Plains
+1 Otawara, Soaring City
+1 Eiganjo, Seat of the Empire
+1 Waterlogged Grove
+1 Hallowed Fountain
+1 Horizon Canopy
+1 Island
+1 Windswept Heath
+1 Misty Rainforest
+1 Moorland Haunt
+2 Botanical Sanctum
+3 Cavern of Souls
+4 Flooded Strand
+[Sideboard]
+2 Unlicensed Hearse
+2 Eidolon of Rhetoric
+2 Force of Negation
+2 Kira, Great Glass-Spinner
+2 Lavinia, Azorius Renegade
+2 Suspend
+3 Burrenton Forge-Tender

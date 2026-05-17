@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=The Court Jester
+Title=The Court Jester
+Icon=The Court Jester.jpg
+Difficulty=Medium
+Description=Dark_Ascension/Cool_Stuff_Games_-_FNM/Mark_Eilers_-_Thrundying_(Standard,_#28749).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Acidic Slime
+3 Avacyn's Pilgrim
+4 Birds of Paradise
+4 Blade Splicer
+1 Fiend Hunter
+1 Hellrider
+4 Huntmaster of the Fells
+1 Llanowar Elves
+2 Phyrexian Metamorph
+4 Strangleroot Geist
+3 Thalia, Guardian of Thraben
+1 Thrun, the Last Troll
+3 Birthing Pod
+1 Dismember
+1 Green Sun's Zenith
+2 Oblivion Ring
+1 Garruk Relentless
+4 Copperline Gorge
+6 Forest
+3 Gavony Township
+1 Mountain
+4 Razorverge Thicket
+2 Rootbound Crag
+3 Sunpetal Grove
+[Sideboard]
+2 Ancient Grudge
+1 Batterskull
+2 Celestial Purge
+2 Manabarbs
+2 Ratchet Bomb
+2 Ray of Revelation
+3 Wrack with Madness

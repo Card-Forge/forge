@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Lyzolda
+Title=Lyzolda
+Icon=Lyzolda.jpg
+Difficulty=Easy
+Description=Scars_of_Mirrodin/Miscellaneous_New_York_City/Jack_Vargas_-_R-G_Valakut_Ramp_(Standard,_#7766).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Avenger of Zendikar
+4 Oracle of Mul Daya
+4 Primeval Titan
+4 Harrow
+4 Lightning Bolt
+4 Summoning Trap
+4 Cultivate
+4 Khalni Heart Expedition
+2 Koth of the Hammer
+8 Forest
+12 Mountain
+1 Raging Ravine
+1 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+2 Acidic Slime
+2 All Is Dust
+4 Fog
+2 Leyline of Punishment
+4 Naturalize
+1 Ulamog, the Infinite Gyre

@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Preacher
+Title=Preacher
+Icon=Preacher.jpg
+Difficulty=Very Hard
+Description=./Modern/Foundations/NotCorazon_-_deck_(Modern,_#2281317).dck
+Deck Type=constructed
+
+[Main]
+4 Devourer of Destiny
+4 It That Heralds the End
+4 Glaring Fleshraker
+4 Sire of Seven Deaths
+4 Expedition Map
+4 Mind Stone
+4 The One Ring
+4 Kozilek's Command
+3 All Is Dust
+3 Echoes of Eternity
+4 Eldrazi Temple
+4 Urza's Tower
+4 Ugin's Labyrinth
+1 Sanctum of Ugin
+4 Urza's Power Plant
+4 Urza's Mine
+1 Wastes
+[Sideboard]
+3 Chalice of the Void
+1 Disruptor Flute
+3 Relic of Progenitus
+1 Kozilek, Butcher of Truth
+3 Trinisphere
+1 Gemstone Caverns
+3 Karn's Sylex

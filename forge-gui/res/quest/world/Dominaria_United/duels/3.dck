@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Newton
+Title=Newton
+Icon=Newton.jpg
+Difficulty=Medium
+Description=./Standard/Dominaria_United/Hisashi_Kako_-_Orzhov_Midrange_(Standard,_#1452316).dck
+Deck Type=constructed
+
+[Main]
+1 Sheoldred, the Apocalypse
+1 Sanctuary Warden
+2 Spirited Companion
+4 Tenacious Underdog
+4 Graveyard Trespasser
+3 Reckoner Bankbuster
+2 Infernal Grasp
+2 Cut Down
+2 Farewell
+2 Soul Transfer
+4 Invoke Despair
+1 The Cruelty of Gix
+1 Touch the Spirit Realm
+2 The Meathook Massacre
+1 Elspeth Resplendent
+3 The Wandering Emperor
+1 Takenuma, Abandoned Mire
+1 Eiganjo, Seat of the Empire
+3 Plains
+4 Shattered Sanctum
+4 Raffine's Tower
+4 Caves of Koilos
+8 Swamp
+[Sideboard]
+1 The Wandering Emperor
+1 Cut Down
+1 Fateful Absence
+2 Unlicensed Hearse
+2 Farewell
+4 Knockout Blow
+4 Pilfer

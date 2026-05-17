@@ -12,6 +12,7 @@ public class GameRules {
     private int gamesToWinMatch = 2;
     private boolean playForAnte = false;
     private boolean matchAnteRarity = false;
+    private boolean anteIncludeBasicLands = false;
     private boolean AISideboardingEnabled = false;
     private boolean sideboardForAI = false;
     private boolean allowCheatShuffle = false;
@@ -73,6 +74,13 @@ public class GameRules {
     }
     public void setMatchAnteRarity(final boolean matchRarity) {
         matchAnteRarity = matchRarity;
+    }
+
+    public boolean getAnteIncludeBasicLands() {
+        return anteIncludeBasicLands;
+    }
+    public void setAnteIncludeBasicLands(final boolean includeBasicLands) {
+        anteIncludeBasicLands = includeBasicLands;
     }
 
     public boolean getSideboardForAI() {

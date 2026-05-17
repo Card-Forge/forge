@@ -31,11 +31,14 @@ import forge.toolbox.FGroupList;
 import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
+import forge.toolbox.FTextField;
+import forge.util.Lang;
 import forge.util.Utils;
 
 import java.util.*;
 
 public class SettingsPage extends TabPage<SettingsScreen> {
+    private final FTextField txtSearch = add(new FTextField());
     private final FGroupList<Setting> lstSettings = add(new FGroupList<>());
     private final CustomSelectSetting settingSkins;
     private final CustomSelectSetting settingCJKFonts;
@@ -44,6 +47,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         super(Forge.getLocalizer().getMessage("lblSettings"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS);
 
         lstSettings.setListItemRenderer(new SettingRenderer());
+        txtSearch.setFont(FSkinFont.get(12));
+        txtSearch.setGhostText(Forge.getLocalizer().getMessage("lblSearch"));
+        txtSearch.setChangedHandler(e -> applySearch());
 
         lstSettings.addGroup(Forge.getLocalizer().getMessage("lblGeneralSettings"));
         lstSettings.addGroup(Forge.getLocalizer().getMessage("lblGameplayOptions"));
@@ -63,16 +69,14 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             public void valueChanged(String newValue) {
                 // if the new locale needs to use CJK font, disallow change if UI_CJK_FONT is not set yet
                 ForgePreferences prefs = FModel.getPreferences();
-                if (prefs.getPref(FPref.UI_CJK_FONT).isEmpty() && (newValue.equals("zh-CN") || newValue.equals("ja-JP"))) {
-                    String message = "Please download CJK font (from \"Files\"), and set it before change language.";
-                    if (newValue.equals("zh-CN")) {
-                        message += "\nChinese please use \"SourceHanSansCN\".";
+                if (prefs.getPref(FPref.UI_CJK_FONT).isEmpty()) {
+                    Lang lang = Lang.initInstance(newValue);
+                    if (lang.getFontFile() != null) {
+                        String message = "Please download CJK font (from \"Files\"), and set it before change language.";
+                        message += "\nPlease use \"" + lang.getFontFile() + "\".";
+                        FOptionPane.showMessageDialog(message, "Please set CJK Font");
+                        return;
                     }
-                    if (newValue.equals("ja-JP")) {
-                        message += "\nJapanese please use \"SourceHanSansJP\".";
-                    }
-                    FOptionPane.showMessageDialog(message, "Please set CJK Font");
-                    return;
                 }
 
                 FLanguage.changeLanguage(newValue);
@@ -101,8 +105,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     ForgePreferences prefs = FModel.getPreferences();
                     if (newValue.equals("None")) {
                         // If locale needs to use CJK fonts, disallow change to None
-                        String locale = prefs.getPref(FPref.UI_LANGUAGE);
-                        if (locale.equals("zh-CN") || locale.equals("ja-JP")) {
+                        if (Lang.initInstance(prefs.getPref(FPref.UI_LANGUAGE)).getFontFile() != null) {
                             return;
                         }
                         newValue = "";
@@ -193,6 +196,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         lstSettings.addItem(new BooleanSetting(FPref.UI_ANTE_MATCH_RARITY,
             Forge.getLocalizer().getMessage("cbAnteMatchRarity"),
             Forge.getLocalizer().getMessage("nlAnteMatchRarity")), 1);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_ANTE_INCLUDE_BASIC_LANDS,
+            Forge.getLocalizer().getMessage("cbAnteIncludeBasicLands"),
+            Forge.getLocalizer().getMessage("nlAnteIncludeBasicLands")), 1);
         lstSettings.addItem(new BooleanSetting(FPref.MATCH_HOT_SEAT_MODE,
             Forge.getLocalizer().getMessage("lblHotSeatMode"),
             Forge.getLocalizer().getMessage("nlHotSeatMode")), 1);
@@ -258,10 +264,15 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 ForgeConstants.GRAVEYARD_ORDERING_NEVER, ForgeConstants.GRAVEYARD_ORDERING_OWN_CARDS,
                 ForgeConstants.GRAVEYARD_ORDERING_ALWAYS
             }), 1);
-        lstSettings.addItem(new CustomSelectSetting(FPref.UI_AUTO_YIELD_MODE,
-            Forge.getLocalizer().getMessage("lblAutoYields"),
-            Forge.getLocalizer().getMessage("nlpAutoYieldMode"),
-            new String[] { ForgeConstants.AUTO_YIELD_PER_ABILITY, ForgeConstants.AUTO_YIELD_PER_CARD }), 1);
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_AUTO_DECISION_MODE,
+            Forge.getLocalizer().getMessage("lblAutoYieldsAndTriggers"),
+            Forge.getLocalizer().getMessage("nlpAutoDecisionMode"),
+            new String[] {
+                ForgeConstants.AUTO_DECISION_PER_CARD,
+                ForgeConstants.AUTO_DECISION_PER_ABILITY,
+                ForgeConstants.AUTO_DECISION_PER_ABILITY_SESSION,
+                ForgeConstants.AUTO_DECISION_PER_ABILITY_INSTALL,
+            }), 1);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ALLOW_ESC_TO_END_TURN,
             Forge.getLocalizer().getMessage("cbEscapeEndsTurn"),
             Forge.getLocalizer().getMessage("nlEscapeEndsTurn")), 1);
@@ -441,15 +452,6 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                         }
                     );
                }
-            }, 3);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_NETPLAY_COMPAT,
-            Forge.getLocalizer().getMessage("lblExperimentalNetworkCompatibility"),
-            Forge.getLocalizer().getMessage("nlExperimentalNetworkCompatibility")) {
-                @Override
-                public void select() {
-                    super.select();
-                    GuiBase.enablePropertyConfig(FModel.getPreferences().getPrefBoolean(FPref.UI_NETPLAY_COMPAT));
-                }
             }, 3);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_DISPOSE_TEXTURES,
             Forge.getLocalizer().getMessage("lblDisposeTextures"),
@@ -641,12 +643,31 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             Forge.getLocalizer().getMessage("nlUseLaserArrows")), 5);
 
         // VIBRATION OPTIONS TAB
-        lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_LIFE_LOSS,
-            Forge.getLocalizer().getMessage("lblVibrateWhenLosingLife"),
-            Forge.getLocalizer().getMessage("nlVibrateWhenLosingLife")), 6);
+        Map<String, String> intensityOptions = new LinkedHashMap<>();
+        intensityOptions.put("Off (0%)", "0");
+        intensityOptions.put("Low (25%)", "25");
+        intensityOptions.put("Medium (50%)", "50");
+        intensityOptions.put("High (75%)", "75");
+        intensityOptions.put("Full (100%)", "100");
+        lstSettings.addItem(new LocalizedSelectSetting(FPref.UI_VIBRATE_INTENSITY,
+            Forge.getLocalizer().getMessage("lblVibrationIntensity"),
+            Forge.getLocalizer().getMessage("nlVibrationIntensity"),
+            intensityOptions), 6);
         lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_LONG_PRESS,
             Forge.getLocalizer().getMessage("lblVibrateAfterLongPress"),
             Forge.getLocalizer().getMessage("nlVibrateAfterLongPress")), 6);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_LIFE_LOSS,
+            Forge.getLocalizer().getMessage("lblVibrateWhenLosingLife"),
+            Forge.getLocalizer().getMessage("nlVibrateWhenLosingLife")), 6);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_ENEMY_ENCOUNTER,
+            Forge.getLocalizer().getMessage("lblVibrateOnEnemyEncounter"),
+            Forge.getLocalizer().getMessage("nlVibrateOnEnemyEncounter")), 6);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_ADVENTURE_REWARD,
+            Forge.getLocalizer().getMessage("lblVibrateOnAdventureReward"),
+            Forge.getLocalizer().getMessage("nlVibrateOnAdventureReward")), 6);
+        lstSettings.addItem(new BooleanSetting(FPref.UI_VIBRATE_ON_SHOP_ACTION,
+            Forge.getLocalizer().getMessage("lblVibrateOnShopAction"),
+            Forge.getLocalizer().getMessage("nlVibrateOnShopAction")), 6);
 
         // SOUND OPTIONS TAB
         lstSettings.addItem(new CustomSelectSetting(FPref.UI_CURRENT_SOUND_SET,
@@ -697,6 +718,10 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             Forge.getLocalizer().getMessage("lblUPnPTitle"),
             Forge.getLocalizer().getMessage("nlServerUPnPOptions"),
             ForgeConstants.getUPnPPreferenceMapping()), 8);
+        lstSettings.addItem(new IntegerSelectSetting(
+            ForgeNetPreferences.FNetPref.NET_AFK_TIMEOUT,
+            Forge.getLocalizer().getMessage("lblAfkTimeout"),
+            Forge.getLocalizer().getMessage("nlAfkTimeout"), 0, 60), 8);
     }
 
     public void refreshSkinsList() {
@@ -707,9 +732,22 @@ public class SettingsPage extends TabPage<SettingsScreen> {
         settingCJKFonts.updateOptions(FSkinFont.getAllCJKFonts());
     }
 
+    private void applySearch() {
+        final String query = txtSearch.getText().toLowerCase().trim();
+        if (query.isEmpty()) {
+            lstSettings.setItemFilter(null);
+            return;
+        }
+        lstSettings.setItemFilter(setting ->
+            (setting.label != null && setting.label.toLowerCase().contains(query))
+            || (setting.description != null && setting.description.toLowerCase().contains(query)));
+    }
+
     @Override
     protected void doLayout(float width, float height) {
-        lstSettings.setBounds(0, 0, width, height);
+        float searchHeight = FTextField.getDefaultHeight(txtSearch.getFont());
+        txtSearch.setBounds(0, 0, width, searchHeight);
+        lstSettings.setBounds(0, searchHeight, width, height - searchHeight);
     }
 
     private abstract class Setting {

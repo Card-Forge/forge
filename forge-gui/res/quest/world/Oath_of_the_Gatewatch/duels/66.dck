@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=SantaMuerte
+Title=SantaMuerte
+Icon=SantaMuerte.jpg
+Difficulty=Very Hard
+Description=../Modern/Oath_of_the_Gatewatch/SCG_Invitational_Qualifier_Albany/Nick_Loiacano_-_Eldrazi_(Modern,_#611273).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Drowner of Hope
+4 Eldrazi Displacer
+4 Eldrazi Mimic
+4 Eldrazi Skyspawner
+4 Endless One
+4 Reality Smasher
+4 Thought-Knot Seer
+4 Dismember
+3 Path to Exile
+4 Adarkar Wastes
+2 Cavern of Souls
+2 Caves of Koilos
+4 Eldrazi Temple
+4 Eye of Ugin
+4 Flooded Strand
+2 Hallowed Fountain
+1 Island
+1 Plains
+1 Urborg, Tomb of Yawgmoth
+[Sideboard]
+1 Cyclonic Rift
+2 Disenchant
+2 Grafdigger's Cage
+2 Gut Shot
+2 Rest in Peace
+2 Stony Silence
+3 Stubborn Denial

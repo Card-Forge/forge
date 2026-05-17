@@ -1,7 +1,5 @@
 package forge.adventure.stage;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
@@ -36,6 +34,8 @@ import forge.adventure.util.pathfinding.NavigationVertex;
 import forge.adventure.util.pathfinding.ProgressableGraphPath;
 import forge.adventure.world.WorldSave;
 import forge.gui.FThreads;
+import forge.haptic.HapticEngine;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.screens.TransitionScreen;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
@@ -916,6 +916,16 @@ public class MapStage extends GameStage {
         return null;
     }
 
+    public int getRemainingEnemyCount() {
+        int count = 0;
+        for (EnemySprite enemy : enemies) {
+            if (enemy.getStage() != null && enemy.defeatDialog == null) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     public Actor getByID(int id) { //Search actor by ID.
         for (MapActor A : new Array.ArrayIterator<>(actors)) {
             if (A.getId() == id)
@@ -1046,9 +1056,7 @@ public class MapStage extends GameStage {
                     break;
                 } else if (actor instanceof RewardSprite) {
                     freezeAllEnemyBehaviors = true;
-                    Gdx.input.vibrate(50);
-                    if (Controllers.getCurrent() != null && Controllers.getCurrent().canVibrate())
-                        Controllers.getCurrent().startVibration(100, 1);
+                    HapticEngine.vibrate(FPref.UI_VIBRATE_ON_ADVENTURE_REWARD, 100);
                     RewardSprite RS = (RewardSprite) actor;
                     Array<Reward> rewards = RS.getRewards();
 
@@ -1095,10 +1103,7 @@ public class MapStage extends GameStage {
         player.playEffect(Paths.EFFECT_SPARKS, 0.5f);
         mob.setAnimation(CharacterSprite.AnimationTypes.Attack);
         SoundSystem.instance.play(SoundEffectType.Block, false);
-        Gdx.input.vibrate(50);
-        int duration = mob.getData().boss ? 400 : 200;
-        if (Controllers.getCurrent() != null && Controllers.getCurrent().canVibrate())
-            Controllers.getCurrent().startVibration(duration, 1);
+        HapticEngine.vibrate(FPref.UI_VIBRATE_ON_ENEMY_ENCOUNTER, mob.getData().boss ? 400 : 200);
         Forge.advFreezePlayerControls = true;
         player.clearCollisionHeight();
         startPause(0.8f, () -> {

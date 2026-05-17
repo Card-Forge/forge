@@ -30,6 +30,7 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.screens.match.VMatchUI;
+import forge.screens.match.views.VField;
 import forge.screens.match.views.VHand;
 import forge.view.arcane.FloatingZone;
 import forge.toolbox.FButton;
@@ -86,12 +87,14 @@ public final class LayoutMenu {
 
         final JCheckBoxMenuItem newCountItem = createStayOpenCheckBox(
                 localizer.getMessage("lblNewCardCountInTab"));
+        newCountItem.setToolTipText(localizer.getMessage("lblNewCardCountInTabTooltip"));
         newCountItem.setState(prefs.getPrefBoolean(FPref.UI_ZONE_TAB_NEW_COUNT));
         newCountItem.addActionListener(e -> {
             prefs.setPref(FPref.UI_ZONE_TAB_NEW_COUNT, newCountItem.getState());
             prefs.save();
             FloatingZone.refreshAll();
             refreshHandCards();
+            refreshFieldTabLabels();
         });
         menu.add(newCountItem);
 
@@ -250,6 +253,18 @@ public final class LayoutMenu {
             if (view instanceof VMatchUI vmu) {
                 for (final VHand h : vmu.getControl().getHandViews()) {
                     h.getLayoutControl().updateHand();
+                }
+            }
+        }
+    }
+
+    private static void refreshFieldTabLabels() {
+        final FScreen screen = Singletons.getControl().getCurrentScreen();
+        if (screen != null && screen.isMatchScreen()) {
+            final IVTopLevelUI view = screen.getView();
+            if (view instanceof VMatchUI vmu) {
+                for (final VField f : vmu.getControl().getFieldViews()) {
+                    f.updateTabLabel();
                 }
             }
         }

@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Scotty
+Title=Scotty
+Icon=Scotty.jpg
+Difficulty=Hard
+Description=./Modern/The_Brothers_War/William_Pizzi_-_Jund_Creativity_(Modern,_#1541052).dck
+Deck Type=constructed
+
+[Main]
+4 Archon of Cruelty
+4 Fable of the Mirror-Breaker
+2 Terminate
+2 Prismari Command
+2 Fatal Push
+4 Lightning Bolt
+3 Persist
+4 Indomitable Creativity
+4 Thoughtseize
+3 Bitter Reunion
+4 Wrenn and Six
+1 Stomping Ground
+1 Steam Vents
+1 Ketria Triome
+1 Ziatora's Proving Ground
+1 Boseiju, Who Endures
+1 Mountain
+2 Wooded Foothills
+2 Arid Mesa
+2 Blood Crypt
+4 Dwarven Mine
+4 Scalding Tarn
+4 Bloodstained Mire
+[Sideboard]
+1 Unmoored Ego
+1 Emrakul, the Aeons Torn
+1 Sundering Titan
+2 Hidetsugu Consumes All
+2 Nature's Claim
+2 Boseiju, Who Endures
+3 Flusterstorm
+3 Veil of Summer

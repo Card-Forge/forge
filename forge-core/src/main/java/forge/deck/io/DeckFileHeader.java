@@ -21,7 +21,9 @@ import forge.deck.DeckFormat;
 import forge.util.FileSection;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -40,6 +42,7 @@ public class DeckFileHeader {
 
     public static final String TAGS_SEPARATOR = ",";
     public static final String DRAFT_NOTES = "DraftNotes";
+    public static final String KEY_CARDS = "KeyCards";
 
     /** The Constant COMMENT. */
     public static final String COMMENT = "Comment";
@@ -56,6 +59,7 @@ public class DeckFileHeader {
 
     private final Set<String> tags;
     private final HashMap<String, String> draftNotes;
+    private final List<String> keyCards;
 
     private final boolean intendedForAi;
     private final String aiHints;
@@ -86,6 +90,14 @@ public class DeckFileHeader {
         }
         this.draftNotes = new HashMap<>();
         extractDraftNotes(kvPairs.get(DeckFileHeader.DRAFT_NOTES));
+
+        this.keyCards = new ArrayList<>();
+        String rawKeyCards = kvPairs.get(DeckFileHeader.KEY_CARDS);
+        if( StringUtils.isNotBlank(rawKeyCards) ) {
+            for( String k: rawKeyCards.split(";"))
+                if ( StringUtils.isNotBlank(k))
+                    keyCards.add(k.trim());
+        }
     }
 
     private void extractDraftNotes(String rawNotes) {
@@ -130,5 +142,9 @@ public class DeckFileHeader {
 
     public final HashMap<String, String> getDraftNotes() {
         return draftNotes;
+    }
+
+    public final List<String> getKeyCards() {
+        return keyCards;
     }
 }

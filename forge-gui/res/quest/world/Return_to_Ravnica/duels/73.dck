@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Surtr
+Title=Surtr
+Icon=Surtr.jpg
+Difficulty=Very Hard
+Description=../Modern/Return_to_Ravnica/SCG_Invitational_Qualifier_Denton/Michael_Morrill_-_GW_Auras_(Modern,_#615257).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Dryad Arbor
+4 Gladecover Scout
+4 Kor Spiritdancer
+4 Noble Hierarch
+4 Slippery Bogle
+3 Path to Exile
+4 Daybreak Coronet
+4 Ethereal Armor
+2 Hyena Umbra
+1 Keen Sense
+4 Rancor
+4 Spider Umbra
+2 Spirit Mantle
+1 Forest
+3 Horizon Canopy
+2 Plains
+3 Razorverge Thicket
+4 Temple Garden
+3 Windswept Heath
+3 Wooded Foothills
+[Sideboard]
+2 Choke
+4 Leyline of Sanctity
+2 Naturalize
+2 Relic of Progenitus
+2 Spellskite
+2 Stony Silence

@@ -1,0 +1,7 @@
+Name:Splatter Technique
+ManaCost:1 U U R R
+Types:Sorcery
+A:SP$ Charm | Choices$ DBDraw,DBDamageAll
+SVar:DBDraw:DB$ Draw | NumCards$ 4 | SpellDescription$ Draw four cards.
+SVar:DBDamageAll:DB$ DamageAll | NumDmg$ 4 | ValidCards$ Creature,Planeswalker | SpellDescription$ CARDNAME deals 4 damage to each creature and planeswalker.
+Oracle:Choose one —\n• Draw four cards.\n• Splatter Technique deals 4 damage to each creature and planeswalker.

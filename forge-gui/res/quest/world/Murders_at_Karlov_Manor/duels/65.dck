@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Odin
+Title=Odin
+Icon=Odin.jpg
+Difficulty=Very Hard
+Description=./Modern/Murders_at_Karlov_Manor/ArgentinaPowerBomb_-_Urza_ThopterSword_(Modern,_#1967491).dck
+Deck Type=constructed
+
+[Main]
+1 Lavinia, Azorius Renegade
+3 Urza, Lord High Artificer
+3 Tribute Mage
+3 Grand Architect
+3 Time Sieve
+4 Thopter Foundry
+4 Sword of the Meek
+1 Kaya's Guile
+2 Force of Negation
+2 No More Lies
+3 Counterspell
+2 Virtue of Persistence
+3 Supreme Verdict
+3 Damn
+3 Urza's Saga
+3 Karn, Scion of Urza
+3 Spire of Industry
+4 Glimmervoid
+2 Island
+2 Swamp
+2 Plains
+2 Polluted Delta
+2 Raffine's Tower
+2 Razortide Bridge
+1 Goldmire Bridge
+1 Watery Grave
+1 Godless Shrine
+1 Hallowed Fountain
+1 Marsh Flats
+[Sideboard]
+3 Teferi, Time Raveler
+3 Thoughtseize
+3 Lavinia, Azorius Renegade
+3 Inquisition of Kozilek
+3 Sunset Revelry

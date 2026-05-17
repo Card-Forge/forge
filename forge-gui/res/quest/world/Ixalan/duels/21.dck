@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Robot21
+Title=Robot21
+Icon=Sidisi.jpg
+Difficulty=Easy
+Description=Esper Gift 
+Deck Type=constructed
+
+[Main]
+4 Angel of Invention
+4 Champion of Wits
+4 Hostage Taker
+2 Kitesail Freebooter
+4 Minister of Inquiries
+4 Seekers' Squire
+4 Walking Ballista
+4 Gate to the Afterlife
+2 God-Pharaoh's Gift
+2 Fatal Push
+3 Search for Azcanta
+4 Aether Hub
+4 Concealed Courtyard
+4 Drowned Catacomb
+1 Fetid Pools
+1 Glacial Fortress
+6 Island
+3 Swamp
+[Sideboard]
+1 Deadeye Tracker
+4 Duress
+2 Fatal Push
+2 Negate
+2 Sunscourge Champion
+2 The Scarab God
+2 Vraska's Contempt

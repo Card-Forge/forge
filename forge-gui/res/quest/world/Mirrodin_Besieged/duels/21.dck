@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Leela
+Title=Leela
+Icon=Leela.jpg
+Difficulty=Easy
+Description=Mirrodin_Besieged/National_Qualifier_2011_-_Frankfurt_-_Germany/Valentino_Bruno_-_Valakut_(Standard,_#11130).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Avenger of Zendikar
+2 Oracle of Mul Daya
+3 Overgrown Battlement
+4 Primeval Titan
+4 Lightning Bolt
+3 Summoning Trap
+4 Explore
+3 Green Sun's Zenith
+4 Growth Spasm
+3 Khalni Heart Expedition
+2 Evolving Wilds
+6 Forest
+1 Misty Rainforest
+11 Mountain
+3 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+1 Verdant Catacombs
+[Sideboard]
+2 Mark of Mutiny
+3 Nature's Claim
+3 Obstinate Baloth
+3 Slagstorm
+2 Tumble Magnet
+2 Wall of Tanglecord

@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Electro
+Title=Electro
+Icon=Electro.jpg
+Difficulty=Hard
+Description=./Modern/Innistrad_Crimson_Vow/Ueda_Hikaru_-_Tribal_Zoo_(Modern,_#1269442)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Dorothea, Vengeful Victim
+1 Anafenza, the Foremost
+1 Savage Knuckleblade
+1 Grakmaw, Skyclave Ravager
+4 Scion of Draco
+4 Bloodbraid Elf
+4 Shardless Agent
+4 General Ferrous Rokiric
+4 Territorial Kavu
+4 Lightning Helix
+4 Manamorphose
+4 Tribal Flames
+2 Wrenn and Six
+1 Indatha Triome
+1 Savai Triome
+1 Steam Vents
+1 Stomping Ground
+1 Sacred Foundry
+1 Temple Garden
+1 Plains
+1 Island
+1 Forest
+2 Breeding Pool
+3 Windswept Heath
+4 Wooded Foothills
+4 Bloodstained Mire
+[Sideboard]
+1 Jegantha, the Wellspring
+1 Lavinia, Azorius Renegade
+2 Rest in Peace
+2 Alpine Moon
+2 Wear // Tear
+2 Deputy of Detention
+2 Damping Sphere
+3 Teferi, Time Raveler

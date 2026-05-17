@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Waylon Smithers
+Title=Waylon Smithers
+Icon=Waylon Smithers.jpg
+Difficulty=Hard
+Description=../Modern/Kaladesh/Rayton_Espiritu_-_Burn_(Modern,_#668501).dck
+Deck Type=constructed
+
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+1 Grim Lavamancer
+4 Monastery Swiftspear
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+2 Lightning Helix
+4 Searing Blaze
+1 Shard Volley
+4 Lava Spike
+4 Rift Bolt
+4 Bloodstained Mire
+1 Copperline Gorge
+3 Inspiring Vantage
+2 Mountain
+2 Sacred Foundry
+2 Stomping Ground
+2 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+2 Deflecting Palm
+4 Destructive Revelry
+1 Grim Lavamancer
+2 Lightning Helix
+3 Path to Exile
+3 Skullcrack

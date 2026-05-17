@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Pinky and the Brain
+Title=Pinky and the Brain
+Icon=Pinky and the Brain.jpg
+Difficulty=Medium
+Description=./Standard/Foundations/Clinton_Endicott_-_Azorius_Tempo_(Standard,_#2275738).dck
+Deck Type=constructed
+
+[Main]
+4 Picklock Prankster
+4 Abhorrent Oculus
+4 Haughty Djinn
+2 Kiora, the Rising Tide
+3 Into the Flood Maw
+3 Opt
+3 Three Steps Ahead
+2 Get Lost
+2 Soul Partition
+4 Helping Hand
+3 Sleight of Hand
+4 Chart a Course
+2 Recommission
+3 Adarkar Wastes
+4 Floodfarm Verge
+6 Island
+3 Meticulous Archive
+4 Seachrome Coast
+[Sideboard]
+3 Monastery Mentor
+3 Elspeth's Smite
+3 Negate
+2 Exorcise
+2 Split Up
+2 Temporary Lockdown

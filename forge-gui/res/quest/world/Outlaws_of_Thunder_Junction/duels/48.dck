@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Wolverine
+Title=Wolverine
+Icon=Wolverine.jpg
+Difficulty=Medium
+Description=./Standard/Outlaws_of_Thunder_Junction/Akira_Tsuzaki_-_Mono-Black_Midrange_(Standard,_#2062405).dck
+Deck Type=constructed
+
+[Main]
+4 Caustic Bronco
+4 Deep-Cavern Bat
+2 Kaervek, the Punisher
+3 Graveyard Trespasser
+3 Preacher of the Schism
+3 Hostile Investigator
+2 Sheoldred, the Apocalypse
+3 Cut Down
+4 Go for the Throat
+2 Long Goodbye
+3 Duress
+3 Liliana of the Veil
+19 Swamp
+4 Cavern of Souls
+1 Takenuma, Abandoned Mire
+[Sideboard]
+3 Phyrexian Obliterator
+1 Duress
+3 Unlicensed Hearse
+3 Parasitic Grasp
+3 Path of Peril
+2 Glistening Deluge

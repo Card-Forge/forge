@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=MahamotiGenie
+Title=MahamotiGenie
+Icon=MahamotiGenie.jpg
+Difficulty=Easy
+Description=./Standard/Outlaws_of_Thunder_Junction/4LukeDaGoof4_-_Golgari_Midrange_(Standard,_#2075657).dck
+Deck Type=constructed
+
+[Main]
+3 Caustic Bronco
+2 Freestrider Lookout
+3 Glissa Sunslayer
+2 Graveyard Trespasser
+3 Hostile Investigator
+4 Mosswood Dreadknight
+2 Sheoldred, the Apocalypse
+1 Tranquil Frillback
+1 The Gitrog, Ravenous Ride
+3 Cut Down
+4 Go for the Throat
+1 Bitter Triumph
+2 Duress
+1 Gix's Command
+1 Pillage the Bog
+2 Liliana of the Veil
+4 Blooming Marsh
+1 Boseiju, Who Endures
+2 Cavern of Souls
+4 Deathcap Glade
+1 Field of Ruin
+1 Forest
+3 Llanowar Wastes
+4 Restless Cottage
+4 Swamp
+1 Takenuma, Abandoned Mire
+[Sideboard]
+1 Gix's Command
+2 Liliana of the Veil
+1 Nissa, Ascended Animist
+2 Tear Asunder
+1 Tranquil Frillback
+3 Path of Peril
+1 Binding Negotiation
+2 Unlicensed Hearse
+1 Duress
+1 Aclazotz, Deepest Betrayal

@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Quicksilver
+Title=Quicksilver
+Icon=Quicksilver.jpg
+Difficulty=Hard
+Description=./Modern/Final_Fantasy/Samuel_Weir_-_Black_Zoo_(Modern,_#2530048).dck
+Deck Type=constructed
+
+[Main]
+3 Cecil, Dark Knight
+1 Lightning, Army of One
+3 Phlage, Titan of Fire's Fury
+4 Ragavan, Nimble Pilferer
+4 Scion of Draco
+4 Territorial Kavu
+4 Lightning Bolt
+4 Thoughtseize
+3 Tribal Flames
+4 Leyline Binding
+4 Leyline of the Guildpact
+2 Arena of Glory
+4 Arid Mesa
+1 Blood Crypt
+1 Lush Portico
+1 Mountain
+1 Overgrown Tomb
+1 Plains
+1 Raucous Theater
+1 Spara's Headquarters
+1 Steam Vents
+1 Temple Garden
+3 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+2 Clarion Conqueror
+3 Consign to Memory
+2 High Noon
+2 Stubborn Denial
+2 Surgical Extraction
+2 Wear // Tear
+2 Wrath of the Skies

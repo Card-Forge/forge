@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Shanna
+Title=Shanna
+Icon=Shanna.jpg
+Difficulty=Medium
+Description=Khans_of_Tarkir/SCG_Invitational_Qualifier_New_Holland/Nathaniel_Hoffman_-_Mardu_Midrange_(Standard,_#173202).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Brimaz, King of Oreskos
+4 Butcher of the Horde
+4 Goblin Rabblemaster
+3 Stormbreath Dragon
+4 Crackling Doom
+2 Hero's Downfall
+4 Lightning Strike
+1 Despise
+4 Thoughtseize
+2 Chained to the Rocks
+2 Sarkhan, the Dragonspeaker
+2 Sorin, Solemn Visitor
+2 Battlefield Forge
+3 Bloodstained Mire
+3 Caves of Koilos
+4 Mountain
+4 Nomad Outpost
+1 Plains
+2 Swamp
+2 Temple of Malice
+2 Temple of Silence
+1 Temple of Triumph
+1 Urborg, Tomb of Yawgmoth
+[Sideboard]
+4 Anger of the Gods
+2 Chandra, Pyromaster
+1 End Hostilities
+1 Glare of Heresy
+3 Hushwing Gryff
+3 Seeker of the Way

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Samwise Gamgee
+Title=Samwise Gamgee
+Icon=Samwise Gamgee.jpg
+Difficulty=Easy
+Description=Battle_for_Zendikar/SCG_Super_IQ_San_Diego/Andrea_Biaggi_-_Bant_Tokens_(Standard,_#335518).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Elvish Visionary
+4 Hangarback Walker
+4 Nissa, Vastwood Seer
+3 Wingmate Roc
+1 Dispel
+3 Secure the Wastes
+2 Treasure Cruise
+1 Quarantine Field
+4 Retreat to Emeria
+4 Silkwrap
+2 Stasis Snare
+4 Gideon, Ally of Zendikar
+1 Blighted Woodland
+2 Canopy Vista
+4 Flooded Strand
+4 Forest
+2 Lumbering Falls
+4 Plains
+2 Prairie Stream
+4 Windswept Heath
+2 Wooded Foothills
+[Sideboard]
+2 Den Protector
+2 Erase
+2 Evolutionary Leap
+1 Negate
+1 Planar Outburst
+4 Surge of Righteousness
+2 Valorous Stance

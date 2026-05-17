@@ -752,7 +752,7 @@ public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVa
         if (this instanceof Trigger trig) {
             return trig.getTriggerRemembered();
         }
-        return ImmutableList.of();
+        return List.of();
     }
 
 }

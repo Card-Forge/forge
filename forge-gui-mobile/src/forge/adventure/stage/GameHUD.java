@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -18,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -34,6 +36,7 @@ import com.github.tommyettinger.textra.TypingLabel;
 import java.util.EnumSet;
 
 import forge.Forge;
+import forge.adventure.character.EnemySprite;
 import forge.adventure.character.CharacterSprite;
 import forge.adventure.data.AdventureQuestData;
 import forge.adventure.data.ItemData;
@@ -50,6 +53,7 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
 import forge.adventure.util.KeyBinding;
+import forge.adventure.util.NavArrowActor;
 import forge.adventure.util.UIActor;
 import forge.adventure.world.WorldSave;
 import forge.deck.Deck;
@@ -69,6 +73,8 @@ public class GameHUD extends Stage {
     private final TypingLabel lifePoints;
     private final TypingLabel money;
     private final TypingLabel shards;
+    private final TypingLabel enemyCounterText;
+    private final Image enemyCounterBackground;
     private final TextraLabel notificationText = Controls.newTextraLabel("");
     private final Image miniMap, gamehud, mapborder, avatarborder, blank;
     private final InputEvent eventTouchDown, eventTouchUp;
@@ -84,6 +90,9 @@ public class GameHUD extends Stage {
     private boolean dialogOnlyInput;
     private final Array<TextraButton> dialogButtonMap = new Array<>();
     private final Array<TextraButton> abilityButtonMap = new Array<>();
+    private final Array<NavArrowActor> hiddenEnemyChevrons = new Array<>();
+    private final Vector2 chevronStageCoordinates = new Vector2();
+    private final Vector3 playerProjectedCoordinates = new Vector3();
     private String lifepointsTextColor = "";
     private final ScrollPane notificationPane;
     private final Group mapGroup = new Group();
@@ -159,6 +168,14 @@ public class GameHUD extends Stage {
         shards.setText("[%95][+Shards]");
         money.setText("[%95][+Gold]");
         lifePoints.setText("[%95][+Life]");
+        enemyCounterText = Controls.newTypingLabel(Forge.getLocalizer().getMessage("lblRemainingEnemies", String.valueOf(0)));
+        enemyCounterText.setColor(Color.BLACK);
+        enemyCounterText.skipToTheEnd();
+        enemyCounterText.setVisible(false);
+
+        ScrollPaneStyle paperStyle = Controls.getSkin().get("paper", ScrollPaneStyle.class);
+        enemyCounterBackground = new Image(paperStyle.background);
+        enemyCounterBackground.setVisible(false);
         AdventurePlayer.current().onLifeChange(() -> {
             String effect = "{EMERGE}";
             String effectEnd = "{ENDEMERGE}";
@@ -183,6 +200,8 @@ public class GameHUD extends Stage {
         AdventurePlayer.current().onEquipmentChanged(this::updateAbility);
         addActor(ui);
         addActor(miniMapPlayer);
+        addActor(enemyCounterBackground);
+        addActor(enemyCounterText);
         console = new Console();
         console.setBounds(0, GuiBase.isAndroid() ? getHeight() : 0, getWidth(), getHeight() / 2);
         console.setVisible(false);
@@ -338,6 +357,7 @@ public class GameHUD extends Stage {
         int yPos = (int) gameStage.player.getY();
         int xPos = (int) gameStage.player.getX();
         act(Gdx.graphics.getDeltaTime()); //act the Hud
+        updateHiddenEnemyChevrons();
         super.draw(); //draw the Hud
         int xPosMini = (int) (((float) xPos / (float) WorldSave.getCurrentSave().getWorld().getTileSize() / (float) WorldSave.getCurrentSave().getWorld().getWidthInTiles()) * miniMap.getWidth());
         int yPosMini = (int) (((float) yPos / (float) WorldSave.getCurrentSave().getWorld().getTileSize() / (float) WorldSave.getCurrentSave().getWorld().getHeightInTiles()) * miniMap.getHeight());
@@ -416,6 +436,7 @@ public class GameHUD extends Stage {
         }
         if (MapStage.getInstance().isInMap())
             updateBookmarkActor(MapStage.getInstance().getChanges().isBookmarked());
+        updateEnemyCounter();
         avatarGroup.setZIndex(ui.getChildren().size);
     }
 
@@ -428,6 +449,100 @@ public class GameHUD extends Stage {
         keys += AdventurePlayer.current().hasItem("White Key") ? "[+WhiteKey]\n" : "[+Dot]\n";
         keys += AdventurePlayer.current().hasItem("Strange Key") ? "[+StrangeKey]" : "[+Dot]";
         keyCollection.setText(keys);
+    }
+
+    public void updateEnemyCounter() {
+        if (MapStage.getInstance().isInMap() && AdventureQuestController.instance().hasClearQuestActive()) {
+            int remaining = MapStage.getInstance().getRemainingEnemyCount();
+            enemyCounterText.setText(Forge.getLocalizer().getMessage("lblRemainingEnemies", String.valueOf(remaining)));
+            enemyCounterText.setVisible(true);
+            enemyCounterBackground.setVisible(true);
+
+            float paddingX = 4f;
+            float paddingY = 1.5f;
+            float margin = 2f;
+            float textWidth = enemyCounterText.getPrefWidth();
+            float textHeight = Math.max(enemyCounterText.getPrefHeight(), 12f);
+            float bgWidth = textWidth + paddingX * 2f;
+            float bgHeight = textHeight + paddingY * 2f;
+
+            float bgX = getWidth() - bgWidth - margin;
+            float bgY = margin;
+
+            enemyCounterBackground.setBounds(bgX, bgY, bgWidth, bgHeight);
+            enemyCounterText.setBounds(bgX + paddingX, bgY + paddingY, textWidth, textHeight);
+        } else {
+            enemyCounterText.setVisible(false);
+            enemyCounterBackground.setVisible(false);
+        }
+    }
+
+    private void hideHiddenEnemyChevrons() {
+        for (NavArrowActor chevron : hiddenEnemyChevrons) {
+            chevron.setVisible(false);
+        }
+    }
+
+    private NavArrowActor getChevronActor(int index) {
+        while (hiddenEnemyChevrons.size <= index) {
+            NavArrowActor chevron = new NavArrowActor();
+            chevron.setTouchable(Touchable.disabled);
+            chevron.setVisible(false);
+            hiddenEnemyChevrons.add(chevron);
+            addActor(chevron);
+        }
+        return hiddenEnemyChevrons.get(index);
+    }
+
+    private void positionChevron(NavArrowActor chevron, EnemySprite enemy, int index) {
+        playerProjectedCoordinates.set(MapStage.getInstance().player.getX() + MapStage.getInstance().player.getWidth() * 0.5f,
+                MapStage.getInstance().player.getY() + MapStage.getInstance().player.getHeight() * 0.5f, 0f);
+        MapStage.getInstance().getCamera().project(playerProjectedCoordinates, 0f, 0f, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        chevronStageCoordinates.set(playerProjectedCoordinates.x, playerProjectedCoordinates.y);
+        screenToStageCoordinates(chevronStageCoordinates);
+
+        Vector2 navDirection = new Vector2(enemy.pos()).sub(MapStage.getInstance().player.pos());
+        if (navDirection.isZero(0.01f)) {
+            navDirection.set(1f, 0f);
+        } else {
+            navDirection.nor();
+        }
+
+        Vector2 side = new Vector2(-navDirection.y, navDirection.x);
+        int lane = index / 2;
+        float spread = (index % 2 == 0 ? 1f : -1f) * lane * 9f;
+        float offsetFromPlayer = 18f;
+        float pointerX = chevronStageCoordinates.x + navDirection.x * offsetFromPlayer + side.x * spread;
+        float pointerY = chevronStageCoordinates.y + navDirection.y * offsetFromPlayer + side.y * spread;
+
+        chevron.navTargetAngle = navDirection.angleDeg();
+        chevron.setPosition(pointerX, pointerY);
+        chevron.setVisible(true);
+    }
+
+    private void updateHiddenEnemyChevrons() {
+        if (!Config.instance().getSettingData().drawChevronsToHiddenEnemiesInClearQuest
+                || hidden
+                || !MapStage.getInstance().isInMap()
+                || !AdventureQuestController.instance().hasClearQuestActive()
+                || MapStage.getInstance().getRemainingEnemyCount() <= 0) {
+            hideHiddenEnemyChevrons();
+            return;
+        }
+
+        int chevronIndex = 0;
+        for (EnemySprite enemy : MapStage.getInstance().enemies) {
+            if (!enemy.hidden || enemy.getStage() == null || enemy.defeatDialog != null) {
+                continue;
+            }
+            NavArrowActor chevron = getChevronActor(chevronIndex);
+            positionChevron(chevron, enemy, chevronIndex);
+            chevronIndex++;
+        }
+
+        while (chevronIndex < hiddenEnemyChevrons.size) {
+            hiddenEnemyChevrons.get(chevronIndex++).setVisible(false);
+        }
     }
 
     void clearAbility() {

@@ -482,7 +482,7 @@ public class DigEffect extends SpellAbilityEffect {
         }
 
         zoneMovements.triggerChangesZoneAll(game, sa);
-        counterTable.replaceCounterEffect(game, sa, true);
+        counterTable.replaceCounterEffect(game, sa);
     }
 
 }

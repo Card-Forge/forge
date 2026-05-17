@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=BlackPanther
+Title=BlackPanther
+Icon=BlackPanther.jpg
+Difficulty=Easy
+Description=Worldwake/National_Qualifier_2010_-_Novosibirsk_-_Russia/Wasia_Kholopenko_-_Vampires_(Standard,_#2010).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Bloodghast
+4 Gatekeeper of Malakir
+2 Kalastria Highborn
+3 Malakir Bloodwitch
+3 Vampire Hexmage
+4 Vampire Nighthawk
+4 Vampire Nocturnus
+3 Disfigure
+4 Tendrils of Corruption
+2 Grim Discovery
+2 Mind Sludge
+4 Sign in Blood
+4 Marsh Flats
+17 Swamp
+1 Tectonic Edge
+[Sideboard]
+4 Deathmark
+1 Doom Blade
+3 Duress
+2 Fleshbag Marauder
+2 Marsh Casualties

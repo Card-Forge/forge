@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Abiku
+Title=Abiku
+Icon=Abiku.jpg
+Difficulty=Very Hard
+Description=../Modern/Magic_Origins/SCG_Classic_Las_Vegas/Chris_Cooper_-_Red_Deck_Wins_(Modern,_#459697).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+3 Grim Lavamancer
+4 Monastery Swiftspear
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+3 Searing Blood
+2 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+3 Arid Mesa
+3 Bloodstained Mire
+3 Mountain
+3 Sacred Foundry
+3 Scalding Tarn
+2 Stomping Ground
+3 Wooded Foothills
+[Sideboard]
+3 Deflecting Palm
+2 Destructive Revelry
+2 Ensnaring Bridge
+1 Ethersworn Canonist
+1 Kataki, War's Wage
+2 Kor Firewalker
+2 Pyrite Spellbomb
+2 Scab-Clan Berserker

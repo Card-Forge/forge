@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Regigigas
+Title=Regigigas
+Icon=Regigigas.jpg
+Difficulty=Very Hard
+Description=../Modern/Gatecrash/Magic-League_Modern_Trial_05-04-2013/Torre_-_Boros_(Modern,_#50247).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Figure of Destiny
+4 Goblin Guide
+2 Hell's Thunder
+1 Hero of Bladehold
+4 Plated Geopede
+4 Steppe Lynx
+4 Boros Charm
+4 Lightning Bolt
+4 Searing Blaze
+3 Shard Volley
+4 Zektar Shrine Expedition
+4 Arid Mesa
+4 Flagstones of Trokair
+3 Ghost Quarter
+1 Marsh Flats
+3 Mountain
+1 Plains
+4 Sacred Foundry
+4 Scalding Tarn
+[Sideboard]
+3 Blood Moon
+3 Ghostly Prison
+3 Jotun Grunt
+3 Path to Exile
+3 Stony Silence

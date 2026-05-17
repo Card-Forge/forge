@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=LeChuck
+Title=LeChuck
+Icon=LeChuck.jpg
+Difficulty=Medium
+Description=Scars_of_Mirrodin/StarCityGames.com_Standard_Open_Nashville/Steve_Tuchek_-_Valakut_Ramp_(Standard,_#7924).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Avenger of Zendikar
+3 Oracle of Mul Daya
+4 Primeval Titan
+2 Wurmcoil Engine
+4 Harrow
+4 Lightning Bolt
+3 Summoning Trap
+4 Cultivate
+4 Explore
+3 Khalni Heart Expedition
+2 Evolving Wilds
+5 Forest
+12 Mountain
+3 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+1 Verdant Catacombs
+[Sideboard]
+1 Comet Storm
+3 Gaea's Revenge
+3 Memoricide
+3 Nature's Claim
+3 Pyroclasm
+1 Swamp

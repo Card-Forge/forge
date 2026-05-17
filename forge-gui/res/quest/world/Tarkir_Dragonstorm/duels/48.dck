@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Conan the Barbarian
+Title=Conan the Barbarian
+Icon=Conan the Barbarian.jpg
+Difficulty=Easy
+Description=./Standard/Tarkir_Dragonstorm/DragonBall_-_Jeskai_Convoke_(Standard,_#2441489).dck
+Deck Type=constructed
+
+[Main]
+1 Nesting Bot
+2 The Wandering Rescuer
+2 Regal Bunnicorn
+4 Novice Inspector
+4 Spyglass Siren
+4 Warden of the Inner Sky
+4 Knight-Errant of Eos
+2 Imodane's Recruiter
+3 Resolute Reinforcements
+3 Frontline Rush
+4 Gleeful Demolition
+2 Sheltered by Ghosts
+3 Case of the Gateway Express
+4 Adarkar Wastes
+3 Spirebluff Canal
+4 Seachrome Coast
+4 Battlefield Forge
+2 Shivan Reef
+1 Plains
+4 Inspiring Vantage
+[Sideboard]
+2 Wilt-Leaf Liege
+2 Destroy Evil
+4 Protect the Negotiators
+1 Surge of Salvation
+2 Torch the Tower
+1 Regal Bunnicorn
+1 Sheltered by Ghosts
+1 Spell Pierce
+1 Break the Spell

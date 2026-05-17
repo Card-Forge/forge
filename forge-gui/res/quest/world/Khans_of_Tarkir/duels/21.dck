@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Crocodile Dundee
+Title=Crocodile Dundee
+Icon=Crocodile Dundee.jpg
+Difficulty=Medium
+Description=Khans_of_Tarkir/SCG_Invitational_Qualifier_Stockbridge/Andrew_Hoang_-_Abzan_Midrange_(Standard,_#140815).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Courser of Kruphix
+2 Doomwake Giant
+3 Fleecemane Lion
+4 Siege Rhino
+4 Sylvan Caryatid
+2 Wingmate Roc
+4 Abzan Charm
+4 Hero's Downfall
+1 Murderous Cut
+4 Thoughtseize
+2 Elspeth, Sun's Champion
+2 Sorin, Solemn Visitor
+2 Caves of Koilos
+2 Forest
+2 Llanowar Wastes
+1 Mana Confluence
+2 Plains
+3 Sandsteppe Citadel
+4 Temple of Malady
+1 Temple of Plenty
+2 Temple of Silence
+1 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+3 Bile Blight
+3 Drown in Sorrow
+2 End Hostilities
+1 Erase
+2 Glare of Heresy
+2 Unravel the AEther
+2 Whip of Erebos

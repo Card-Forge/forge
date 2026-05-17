@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Szadek
+Title=Szadek
+Icon=Szadek.jpg
+Difficulty=Easy
+Description=./Standard/Kamigawa_Neon_Dynasty/Berbor_-_Orzhov_superfriends_(Standard,_#1363992).dck
+Deck Type=constructed
+
+[Main]
+2 The Restoration of Eiganjo
+2 Professor of Symbology
+4 Spirited Companion
+2 March of Wretched Sorrow
+2 March of Otherworldly Light
+4 Vanishing Verse
+2 Emeria's Call
+4 Farewell
+4 Doomskar
+2 Sorin the Mirthless
+2 Professor Onyx
+2 Kaya the Inexorable
+4 The Wandering Emperor
+1 Eiganjo, Seat of the Empire
+1 Takenuma, Abandoned Mire
+1 Hive of the Eye Tyrant
+2 Cave of the Frost Dragon
+2 Shineshadow Snarl
+2 Field of Ruin
+3 Swamp
+4 Shattered Sanctum
+4 Brightclimb Pathway
+4 Plains
+[Sideboard]
+1 Inkling Summoning
+1 Confront the Past
+1 Reduce to Memory
+1 Environmental Sciences
+1 Introduction to Prophecy
+2 Mascot Exhibition

@@ -59,9 +59,8 @@ public class ScryAi extends SpellAbilityAi {
 
             if (sa.isTargetNumberValid()) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Redwall
+Title=Redwall
+Icon=Redwall.jpg
+Difficulty=Easy
+Description=./Standard/Bloomburrow/MCScards_-_Naya_Rabbits_(Standard,_#2159882).dck
+Deck Type=constructed
+
+[Main]
+4 Valley Questcaller
+4 Seasoned Warrenguard
+4 Pawpatch Recruit
+4 Valley Mightcaller
+4 Burrowguard Mentor
+2 Finneas, Ace Archer
+3 Knight-Errant of Eos
+4 Imodane's Recruiter
+1 Sanguine Evangelist
+2 Get Lost
+4 Hop to It
+2 Case of the Gateway Express
+1 Plains
+4 Razorverge Thicket
+2 Cavern of Souls
+4 Brushland
+1 Oakhollow Village
+4 Copperline Gorge
+1 Mirrex
+1 Battlefield Forge
+4 Inspiring Vantage
+[Sideboard]
+2 Elspeth's Smite
+2 Pick Your Poison
+2 Invasion of Gobakhan
+1 Requisition Raid
+2 Dewdrop Cure
+1 Aven Interrupter
+1 Sunder the Gateway
+2 Tectonic Hazard
+2 Rest in Peace

@@ -5,19 +5,18 @@ import forge.game.GameEntityView;
 import forge.game.GameView;
 
 import forge.game.card.CardView;
-import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.gamemodes.match.NextGameDecision;
-import forge.gui.GuiBase;
-import org.tinylog.Logger;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.IGameController;
 import forge.localinstance.skin.FSkinProp;
 import forge.player.PlayerZoneUpdates;
 import forge.trackable.TrackableCollection;
 import forge.util.FSerializableFunction;
+import forge.util.IHasForgeLog;
 import forge.util.ITriggerEvent;
 import forge.util.ReflectionUtil;
 
@@ -29,9 +28,9 @@ import java.util.Map;
 /**
  * The methods that can be sent through this protocol.
  */
-public enum ProtocolMethod {
+public enum ProtocolMethod implements IHasForgeLog {
     // Server -> Client
-    setGameView         (Mode.SERVER, Void.TYPE, GameView.class),
+    setGameView         (Mode.SERVER, Void.TYPE, GameView.class, Long.TYPE),
     openView            (Mode.SERVER, Void.TYPE, TrackableCollection/*PlayerView*/.class),
     afterGameEnd        (Mode.SERVER, Void.TYPE),
     showCombat          (Mode.SERVER, Void.TYPE),
@@ -64,16 +63,18 @@ public enum ProtocolMethod {
     chooseEntitiesForEffect(Mode.SERVER, List.class, String.class, List.class, Integer.TYPE, Integer.TYPE, DelayedReveal.class),
     manipulateCardList   (Mode.SERVER, List.class, String.class, Iterable.class, Iterable.class, Boolean.TYPE, Boolean.TYPE, Boolean.TYPE),
     setCard             (Mode.SERVER, Void.TYPE, CardView.class),
-    setSelectables      (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class),
+    setSelectables      (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class, Integer.TYPE, Integer.TYPE),
     clearSelectables    (Mode.SERVER, Void.TYPE),
     // TODO case "setPlayerAvatar":
     openZones           (Mode.SERVER, PlayerZoneUpdates.class, PlayerView.class, Collection/*ZoneType*/.class, Map/*PlayerView,Object*/.class, Boolean.TYPE),
     restoreOldZones     (Mode.SERVER, Void.TYPE, PlayerView.class, PlayerZoneUpdates.class),
-    isUiSetToSkipPhase  (Mode.SERVER, Boolean.TYPE, PlayerView.class, PhaseType.class),
     setRememberedActions(Mode.SERVER, Void.TYPE),
     nextRememberedAction(Mode.SERVER, Void.TYPE),
     showWaitingTimer    (Mode.SERVER, Void.TYPE, PlayerView.class, String.class),
-    handleGameEvents    (Mode.SERVER, Void.TYPE, List.class),
+    setHighlighted      (Mode.SERVER, Void.TYPE, GameEntityView.class, Boolean.TYPE),
+    applyDelta          (Mode.SERVER, Void.TYPE, DeltaPacket.class),
+    /** Server→client push of authoritative yield-state changes. */
+    applyYieldUpdate    (Mode.SERVER, Void.TYPE, YieldUpdate.class),
 
     // Client -> Server
     // Note: these should all return void, to avoid awkward situations in
@@ -86,13 +87,14 @@ public enum ProtocolMethod {
     selectButtonOk            (Mode.CLIENT, Void.TYPE),
     selectButtonCancel        (Mode.CLIENT, Void.TYPE),
     selectAbility             (Mode.CLIENT, Void.TYPE, SpellAbilityView.class),
-    passPriorityUntilEndOfTurn(Mode.CLIENT, Void.TYPE),
     passPriority              (Mode.CLIENT, Void.TYPE),
     nextGameDecision          (Mode.CLIENT, Void.TYPE, NextGameDecision.class),
     getActivateDescription    (Mode.CLIENT, String.class, CardView.class),
     concede                   (Mode.CLIENT, Void.TYPE),
     alphaStrike               (Mode.CLIENT, Void.TYPE),
-    reorderHand               (Mode.CLIENT, Void.TYPE, CardView.class, Integer.TYPE);
+    reorderHand               (Mode.CLIENT, Void.TYPE, CardView.class, Integer.TYPE),
+    requestResync             (Mode.CLIENT, Void.TYPE),
+    sendYieldUpdate           (Mode.CLIENT, Void.TYPE, YieldUpdate.class);
 
     private enum Mode {
         SERVER(IGuiGame.class),
@@ -132,7 +134,7 @@ public enum ProtocolMethod {
             }
             return candidate;
         } catch (final NoSuchMethodException | SecurityException e) {
-            Logger.warn("Class contains no accessible method named {}", name());
+            netLog.warn("Class contains no accessible method named {}", name());
             return getMethodNoArgs();
         }
     }
@@ -141,7 +143,7 @@ public enum ProtocolMethod {
         try {
             return mode.toInvoke.getMethod(name(), (Class<?>[]) null);
         } catch (final NoSuchMethodException | SecurityException e) {
-            Logger.warn("Class contains no accessible arg-less method named {}", name());
+            netLog.warn("Class contains no accessible arg-less method named {}", name());
             return null;
         }
     }
@@ -153,20 +155,17 @@ public enum ProtocolMethod {
     }
 
     public void checkArgs(final Object[] args) {
-        if(!GuiBase.hasPropertyConfig())
-            return; //if the experimental network option is enabled, then check the args, else let the default decoder handle it
-
         try {
             for (int iArg = 0; iArg < args.length; iArg++) {
                 final Object arg = args[iArg];
                 final Class<?> type = this.args[iArg];
                 if (!ReflectionUtil.isInstance(arg, type)) {
                     //throw new InternalError(String.format("Protocol method %s: illegal argument (%d) of type %s, %s expected", name(), iArg, arg.getClass().getName(), type.getName()));
-                    Logger.error("Protocol method {}: illegal argument ({}) of type {}, {} expected", name(), iArg, arg.getClass().getName(), type.getName());
+                    netLog.error("Protocol method {}: illegal argument ({}) of type {}, {} expected", name(), iArg, arg.getClass().getName(), type.getName());
                 }
             }
         } catch (Exception e) {
-            Logger.error(e, "Error checking args for protocol method {}", name());
+            netLog.error(e, "Error checking args for protocol method {}", name());
         }
     }
 
@@ -181,7 +180,7 @@ public enum ProtocolMethod {
         }
         if (!ReflectionUtil.isInstance(value, returnType)) {
             //throw new IllegalStateException(String.format("Protocol method %s: illegal return object type %s returned by client, expected %s", name(), value.getClass().getName(), getReturnType().getName()));
-            Logger.error("Protocol method {}: illegal return type {} from client, expected {}", name(), value.getClass().getName(), getReturnType().getName());
+            netLog.error("Protocol method {}: illegal return type {}, expected {}", name(), value.getClass().getName(), getReturnType().getName());
         }
     }
 }

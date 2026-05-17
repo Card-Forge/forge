@@ -69,6 +69,7 @@ public class GameWrapper {
 		GameRules rules = new GameRules(GameType.Constructed);
 		rules.setPlayForAnte(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE));
 		rules.setMatchAnteRarity(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE_MATCH_RARITY));
+		rules.setAnteIncludeBasicLands(FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE_INCLUDE_BASIC_LANDS));
 		rules.setManaBurn(FModel.getPreferences().getPrefBoolean(FPref.UI_MANABURN));
 		rules.setOrderCombatants(FModel.getPreferences().getPrefBoolean(FPref.LEGACY_ORDER_COMBATANTS));
 		rules.setUseGrayText(FModel.getPreferences().getPrefBoolean(FPref.UI_GRAY_INACTIVE_TEXT));

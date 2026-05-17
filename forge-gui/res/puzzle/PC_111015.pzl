@@ -3,7 +3,7 @@ Name:Perplexing Chimera (GatheringMagic.com) 111015 - Indigestion
 URL:http://www.gatheringmagic.com/seanuy-111015-indigestion/
 Goal:Win
 Turns:2
-Difficulty:Hard
+Difficulty:Rare
 Description: Win on your next turn.
 [state]
 ActivePlayer=AI

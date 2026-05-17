@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Treebeard
+Title=Treebeard
+Icon=Treebeard.jpg
+Difficulty=Easy
+Description=Aether_Revolt/Tsumagari_Shuhei_-_WU_Aggro_(Standard,_#664700).dck
+Deck Type=constructed
+
+[Main]
+4 Expedition Envoy
+3 Kari Zev, Skyship Raider
+4 Reckless Bushwhacker
+4 Thalia's Lieutenant
+3 Thalia, Heretic Cathar
+4 Thraben Inspector
+4 Town Gossipmonger
+4 Invigorated Rampage
+2 Declaration in Stone
+3 Always Watching
+4 Gryff's Boon
+4 Inspiring Vantage
+4 Mountain
+3 Needle Spires
+10 Plains
+[Sideboard]
+2 Declaration in Stone
+2 Destructive Tampering
+4 Gideon, Ally of Zendikar
+4 Lathnu Hellion
+1 Needle Spires
+2 Shock

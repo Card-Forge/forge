@@ -1,6 +1,6 @@
 Name:Mangara's Tome
 ManaCost:5
-Types:Artifact
+Types:Artifact Book
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | TriggerDescription$ When CARDNAME enters, search your library for five cards, exile them in a face-down pile, and shuffle that pile. Then shuffle your library.
 SVar:TrigSearch:DB$ ChangeZone | ChangeNum$ 5 | Mandatory$ True | ChangeType$ Card | Origin$ Library | Destination$ Exile | ShuffleChangedPile$ True | ExileFaceDown$ True | RememberChanged$ True
 T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Exile | Destination$ Any | Static$ True | Execute$ TrigForget

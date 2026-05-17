@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Hobbes
+Title=Hobbes
+Icon=Hobbes.jpg
+Difficulty=Easy
+Description=./Standard/Ravnica_Allegiance/Adam_Fisher_-_Selesnya_Tokens_(Standard,_#792655).dck
+Deck Type=constructed
+
+[Main]
+3 Emmara, Soul of the Accord
+4 Tithe Taker
+1 Shalai, Voice of Plenty
+3 Trostani Discordant
+4 Venerated Loxodon
+1 The Immortal Sun
+2 Unbreakable Formation
+4 March of the Multitudes
+4 Flower // Flourish
+4 Saproling Migration
+3 Legion's Landing
+4 History of Benalia
+3 Conclave Tribunal
+4 Temple Garden
+4 Sunpetal Grove
+4 Forest
+9 Plains
+[Sideboard]
+2 Demystify
+3 Baffling End
+2 Kraul Harpooner
+3 Tocatli Honor Guard
+2 Knight of Autumn
+2 Ajani, Adversary of Tyrants
+1 Huatli, Radiant Champion

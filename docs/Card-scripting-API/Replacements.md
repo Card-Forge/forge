@@ -1,7 +1,7 @@
 This page covers how to create replacement effects.  
 The base syntax looks like this:
 
-`R:Event$ <ReplacementType> | <Type-specific parameters> | [Description$ {String}]`
+`R:Event$ {ReplacementType} | <Type-specific parameters> | [Description$ {String}]`
 
 - `ReplacementType` - the event being replaced
 - `ReplaceWith$ <SVar>` - most replacements will point to a subability that should replace the event

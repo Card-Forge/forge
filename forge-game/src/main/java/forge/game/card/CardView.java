@@ -341,6 +341,7 @@ public class CardView extends GameEntityView {
     }
     void updateCounters(Card c) {
         set(TrackableProperty.Counters, c.getCounters());
+        flagAsChanged(TrackableProperty.Counters);
         updateLethalDamage(c);
         CardStateView state = getCurrentState();
         state.updatePower(c);
@@ -425,6 +426,7 @@ public class CardView extends GameEntityView {
     }
     void updateNotedTypes(Card c) {
         set(TrackableProperty.NotedTypes, c.getNotedTypes());
+        flagAsChanged(TrackableProperty.NotedTypes);
     }
 
     public String getChosenNumber() {
@@ -449,13 +451,16 @@ public class CardView extends GameEntityView {
     }
     void updateChosenColors(Card c) {
         set(TrackableProperty.ChosenColors, c.getChosenColors());
+        flagAsChanged(TrackableProperty.ChosenColors);
     }
+
     public boolean hasPaperFoil() {
         return get(TrackableProperty.PaperFoil);
     }
     void updatePaperFoil(boolean v) {
         set(TrackableProperty.PaperFoil, v);
     }
+
     public ColorSet getMarkedColors() {
         return get(TrackableProperty.MarkedColors);
     }
@@ -524,15 +529,6 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Intensity, c.getIntensity(true));
     }
 
-    public boolean wasDestroyed() {
-        if (get(TrackableProperty.WasDestroyed) == null)
-            return false;
-        return get(TrackableProperty.WasDestroyed);
-    }
-    void updateWasDestroyed(boolean value) {
-        set(TrackableProperty.WasDestroyed, value);
-    }
-
     public int getClassLevel() {
         return get(TrackableProperty.ClassLevel);
     }
@@ -597,7 +593,7 @@ public class CardView extends GameEntityView {
         sb.append("\r\nRemembered: \r\n");
         for (final Object o : c.getRemembered()) {
             if (o != null) {
-                sb.append(o.toString());
+                sb.append(o);
                 sb.append("\r\n");
             }
         }
@@ -621,6 +617,7 @@ public class CardView extends GameEntityView {
     public List<String> getDraftAction() { return get(TrackableProperty.DraftAction); }
     void updateDraftAction(Card c) {
         set(TrackableProperty.DraftAction, c.getDraftActions());
+        flagAsChanged(TrackableProperty.DraftAction);
     }
 
     public List<String> getNamedCard() {
@@ -628,6 +625,7 @@ public class CardView extends GameEntityView {
     }
     void updateNamedCard(Card c) {
         set(TrackableProperty.NamedCard, c.getNamedCards());
+        flagAsChanged(TrackableProperty.NamedCard);
     }
     public boolean getMayPlayPlayers(PlayerView pv) {
         TrackableCollection<PlayerView> col = get(TrackableProperty.MayPlayPlayers);
@@ -722,7 +720,6 @@ public class CardView extends GameEntityView {
 
     public boolean canFaceDownBeShownToAny(final Iterable<PlayerView> viewers) {
         if (viewers == null || Iterables.isEmpty(viewers)) { return true; }
-
         return IterableUtil.any(viewers, this::canFaceDownBeShownTo);
     }
 
@@ -995,7 +992,7 @@ public class CardView extends GameEntityView {
     }
     public String getBackSideName() { return get(TrackableProperty.BackSideName); }
 
-    CardStateView createAlternateState(final CardStateName state0) {
+    public CardStateView createAlternateState(final CardStateName state0) {
         return new CardStateView(getId(), state0, tracker);
     }
 
@@ -1006,30 +1003,32 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.HasBackSide, hasBackSide);
         set(TrackableProperty.BackSideName, stateName);
     }
+
+    public boolean wasDestroyed() {
+        return get(TrackableProperty.WasDestroyed);
+    }
+    void updateWasDestroyed(boolean value) {
+        set(TrackableProperty.WasDestroyed, value);
+    }
     public boolean needsUntapAnimation() {
-        if (get(TrackableProperty.NeedsUntapAnimation) == null)
-            return false;
         return get(TrackableProperty.NeedsUntapAnimation);
     }
     public void updateNeedsUntapAnimation(boolean value) {
         set(TrackableProperty.NeedsUntapAnimation, value);
     }
     public boolean needsTapAnimation() {
-        if (get(TrackableProperty.NeedsTapAnimation) == null)
-            return false;
         return get(TrackableProperty.NeedsTapAnimation);
     }
     public void updateNeedsTapAnimation(boolean value) {
         set(TrackableProperty.NeedsTapAnimation, value);
     }
     public boolean needsTransformAnimation() {
-        if (get(TrackableProperty.NeedsTransformAnimation) == null)
-            return false;
         return get(TrackableProperty.NeedsTransformAnimation);
     }
     public void updateNeedsTransformAnimation(boolean value) {
         set(TrackableProperty.NeedsTransformAnimation, value);
     }
+
     void updateState(Card c) {
         updateName(c);
         updateZoneText(c);
@@ -1064,8 +1063,6 @@ public class CardView extends GameEntityView {
             updateBackSide(c.getAlternateState().getName(), c.isDoubleFaced());
 
         final Card cloner = c.getCloner();
-
-        //CardStateView cloner = CardView.getState(c, CardStateName.Cloner);
         set(TrackableProperty.Cloner, cloner == null ? null : cloner.getName() + " (" + cloner.getId() + ")");
 
         CardCollection mergedCollection = new CardCollection();
@@ -1095,7 +1092,6 @@ public class CardView extends GameEntityView {
         }
         updateMergeCollections(mergedCollection);
 
-        CardState currentState = c.getCurrentState();
         if (isSplitCard) {
             set(TrackableProperty.LeftSplitState, c.getState(CardStateName.LeftSplit).getView());
             set(TrackableProperty.RightSplitState, c.getState(CardStateName.RightSplit).getView());
@@ -1105,6 +1101,7 @@ public class CardView extends GameEntityView {
             getRightSplitState().updateAbilityText(c, c.getState(CardStateName.RightSplit));
         }
 
+        CardState currentState = c.getCurrentState();
         CardStateView currentStateView = currentState.getView();
         if (getCurrentState() != currentStateView || c.hasPerpetual()) {
             set(TrackableProperty.CurrentState, currentStateView);
@@ -1132,13 +1129,10 @@ public class CardView extends GameEntityView {
 
         CardState alternateState = isSplitCard && isFaceDown() ? c.getState(CardStateName.RightSplit) : c.getAlternateState();
 
-        if (isSplitCard && isFaceDown()) {
+        if ((isSplitCard || c.isDoubleFaced()) && isFaceDown()) {
             // face-down (e.g. manifested) split cards should show the original face on their flip side
             alternateState = c.getState(CardStateName.Original);
         }
-
-        if (c.isDoubleFaced() && isFaceDown()) //fixes facedown cards with backside...
-            alternateState = c.getState(CardStateName.Original);
 
         if (alternateState == null) {
             set(TrackableProperty.AlternateState, null);
@@ -1191,7 +1185,6 @@ public class CardView extends GameEntityView {
     public boolean isRingBearer() {
         return get(TrackableProperty.IsRingBearer);
     }
-
     void updateRingBearer(Card c) {
         set(TrackableProperty.IsRingBearer, c.isRingBearer());
     }
@@ -1320,7 +1313,6 @@ public class CardView extends GameEntityView {
         public String getOracleName() {
             return get(TrackableProperty.OracleName);
         }
-
         private void setOracleName(String name) {
             set(TrackableProperty.OracleName, name);
         }
@@ -1344,6 +1336,7 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.HasChangedColors, hasChangeColor);
         }
         public boolean hasChangeColors() { return get(TrackableProperty.HasChangedColors); }
+
         public String getImageKey() {
             return getImageKey(null);
         }

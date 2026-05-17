@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Conan the Barbarian
+Title=Conan the Barbarian
+Icon=Conan the Barbarian.jpg
+Difficulty=Very Hard
+Description=./Modern/Avatar_The_Last_Airbender/Matteo_Soli_-_Dimir_Control_(Modern,_#2793615).dck
+Deck Type=constructed
+
+[Main]
+4 Orcish Bowmasters
+4 Subtlety
+4 Wan Shi Tong, Librarian
+4 Consult the Star Charts
+4 Counterspell
+4 Fatal Push
+3 Cling to Dust
+3 Sheoldred's Edict
+3 Spell Snare
+1 Spell Pierce
+2 Kaito, Bane of Nightmares
+4 Field of Ruin
+4 Flooded Strand
+4 Island
+4 Polluted Delta
+3 Undercity Sewers
+3 Watery Grave
+1 Scalding Tarn
+1 Swamp
+[Sideboard]
+4 Break the Ice
+4 Consign to Memory
+3 Mystical Dispute
+1 Damnation
+1 Harbinger of the Seas
+1 Nihil Spellbomb
+1 Toxic Deluge

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Agrus
+Title=Agrus
+Icon=Agrus.jpg
+Difficulty=Very Hard
+Description=../Modern/Rise_of_the_Eldrazi/TCGplayer_Modern_2k/Brian_David_Marshall_-_Red_Deck_Wins_(Modern,_#18688).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Countryside Crusher
+4 Goblin Guide
+4 Grim Lavamancer
+4 Hellspark Elemental
+4 Kird Ape
+4 Wild Nacatl
+4 Lightning Bolt
+4 Lightning Helix
+4 Magma Jet
+4 Searing Blaze
+4 Arid Mesa
+8 Mountain
+2 Sacred Foundry
+4 Scalding Tarn
+4 Stomping Ground
+[Sideboard]
+3 Ajani Vengeant
+2 Ancient Grudge
+3 Flame Slash
+2 Gaddock Teeg
+3 Path to Exile
+2 Qasali Pridemage

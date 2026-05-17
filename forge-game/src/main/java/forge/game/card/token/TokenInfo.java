@@ -25,8 +25,18 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.WeakHashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class TokenInfo {
+    // Per-game pin so same-type tokens share art. Weak keys GC finished games.
+    private static final Map<Game, Map<String, String>> TOKEN_EDITION_PINS =
+            java.util.Collections.synchronizedMap(new WeakHashMap<>());
+
+    private static Map<String, String> getPinsFor(Game game) {
+        return TOKEN_EDITION_PINS.computeIfAbsent(game, g -> new ConcurrentHashMap<>());
+    }
+
     final String name;
     final String imageName;
     final String manaCost;
@@ -289,7 +299,13 @@ public class TokenInfo {
         }
         String edition = Objects.requireNonNullElse(editionHost, host).getSetCode();
         edition = Objects.requireNonNullElse(StaticData.instance().getCardEdition(edition).getTokenSet(script), edition);
+        Map<String, String> pins = getPinsFor(game);
+        String pinned = pins.get(script);
+        if (pinned != null) edition = pinned;
         PaperToken token = StaticData.instance().getAllTokens().getToken(script, edition);
+        if (token != null && pinned == null) {
+            pins.put(script, token.getEdition());
+        }
 
         if (token == null) {
             return null;

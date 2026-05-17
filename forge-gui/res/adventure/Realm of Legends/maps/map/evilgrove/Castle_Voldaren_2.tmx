@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="99">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="100">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -44,8 +44,10 @@
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 	}
 	]</property>
-    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ceremonial Knife|VOW&quot;, &quot;Groom's Finery|VOW&quot;, &quot;Markov Patrician|ISD&quot;, &quot;Glass-Cast Heart|VOC&quot;, &quot;Blood Fountain|VOW&quot;, &quot;Wedding Invitation|VOW&quot;]}"/>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ceremonial Knife|VOW&quot;, &quot;Groom's Finery|VOW&quot;, &quot;Glass-Cast Heart|VOC&quot;, &quot;Blood Fountain|VOW&quot;, &quot;Wedding Invitation|VOW&quot;]}"/>
     <property name="enemy" value="Edgar Markov"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
     <property name="speedModifier" type="float" value="0"/>
     <property name="threatRange" type="int" value="0"/>
    </properties>
@@ -195,5 +197,24 @@
   <object id="96" template="../../../../common/maps/obj/gold.tx" x="742.545" y="77.4545"/>
   <object id="97" template="../../../../common/maps/obj/gold.tx" x="720" y="77.6364"/>
   <object id="98" template="../../../../common/maps/obj/gold.tx" x="769.636" y="78.9091"/>
+  <object id="99" template="../../../../common/maps/obj/enemy.tx" x="744" y="166.75">
+   <properties>
+    <property name="defeatDialog">[
+	{
+	   &quot;text&quot;: &quot;The great vampire staggers back, your final blow already causing his body to begin dissolving into dust.
+
+'Slain by one such as you... What an ignoble fate...'&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+	}
+	]</property>
+    <property name="effect" value="{&quot;startBattleWithCard&quot;: [&quot;Ceremonial Knife|VOW&quot;, &quot;markov patrician&quot;, &quot;Groom's Finery|VOW&quot;, &quot;Glass-Cast Heart|VOC&quot;, &quot;Blood Fountain|VOW&quot;, &quot;Wedding Invitation|VOW&quot;]}"/>
+    <property name="enemy" value="Edgar Markov"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

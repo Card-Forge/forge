@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Galadriel
+Title=Galadriel
+Icon=Galadriel.jpg
+Difficulty=Easy
+Description=Return_to_Ravnica/SCG_Standard_Open_Indianapolis,_Indiana/Nick_Edgerle_-_Bant_Control_(Standard,_#39216).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Angel of Serenity
+3 Restoration Angel
+4 Thragtusk
+3 Azorius Charm
+2 Sphinx's Revelation
+2 Syncopate
+2 Think Twice
+4 Farseek
+1 Supreme Verdict
+4 Terminus
+3 Detention Sphere
+2 Garruk, Primal Hunter
+3 Jace, Architect of Thought
+2 Forest
+1 Ghost Quarter
+4 Glacial Fortress
+3 Hallowed Fountain
+4 Hinterland Harbor
+2 Island
+1 Plains
+4 Sunpetal Grove
+4 Temple Garden
+[Sideboard]
+3 Centaur Healer
+2 Dissipate
+2 Jace, Memory Adept
+2 Negate
+1 Ray of Revelation
+3 Rest in Peace
+1 Sundering Growth

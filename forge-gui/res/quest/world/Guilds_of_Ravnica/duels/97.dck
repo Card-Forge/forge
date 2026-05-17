@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Redwall
+Title=Redwall
+Icon=Redwall.jpg
+Difficulty=Very Hard
+Description=./Modern/Guilds_of_Ravnica/Anna_Madison_-_Bant_Spirits_(Modern,_#780393).dck
+Deck Type=constructed
+
+[Main]
+1 Birds of Paradise
+4 Drogskol Captain
+2 Geist of Saint Traft
+4 Mausoleum Wanderer
+4 Noble Hierarch
+3 Phantasmal Image
+3 Reflector Mage
+2 Selfless Spirit
+4 Spell Queller
+4 Supreme Phantom
+3 Aether Vial
+4 Collected Company
+2 Path to Exile
+3 Botanical Sanctum
+1 Breeding Pool
+3 Flooded Strand
+1 Forest
+1 Hallowed Fountain
+3 Horizon Canopy
+1 Island
+2 Misty Rainforest
+1 Moorland Haunt
+1 Plains
+1 Temple Garden
+2 Windswept Heath
+[Sideboard]
+2 Damping Sphere
+1 Disdainful Stroke
+1 Eidolon of Rhetoric
+2 Knight of Autumn
+1 Negate
+3 Rest in Peace
+3 Stony Silence
+2 Thalia, Guardian of Thraben

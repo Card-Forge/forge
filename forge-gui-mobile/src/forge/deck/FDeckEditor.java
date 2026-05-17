@@ -3,7 +3,6 @@ package forge.deck;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
-import com.google.common.collect.ImmutableList;
 import forge.Forge;
 import forge.Forge.KeyInputAdapter;
 import forge.Graphics;
@@ -67,7 +66,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         public ItemPool<PaperCard> getCardPool() {
-            return FModel.getAllCardsNoAlt();
+            return FModel.getAllCards();
         }
         protected Predicate<PaperCard> getCardFilter() { return null; }
 
@@ -982,7 +981,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         save(null);
     }
 
-    private final static ImmutableList<String> onCloseOptions = ImmutableList.of(
+    private final static List<String> onCloseOptions = List.of(
         Localizer.getInstance().getMessage("lblSave"),
         Localizer.getInstance().getMessage("lblDontSave"),
         Localizer.getInstance().getMessage("lblCancel")
@@ -2060,6 +2059,17 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         protected void addPerCardItems(FDropDownMenu menu, PaperCard card) {
+            Deck currentDeck = parentScreen.getDeck();
+            if (currentDeck != null) {
+                // Add key card toggle option
+                boolean isKeyCard = currentDeck.getKeyCards().stream().anyMatch(name -> name.equalsIgnoreCase(card.getName()));
+                String keyCardLabel = isKeyCard ? Forge.getLocalizer().getMessage("lblRemoveKeyCard") : Forge.getLocalizer().getMessage("lblAddKeyCard");
+                
+                menu.addItem(new FMenuItem(keyCardLabel, Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, e -> {
+                    toggleCardKeyCard(currentDeck, card, isKeyCard);
+                }));
+            }
+
             int markedColorCount = card.getRules().getSetColorID();
             if (markedColorCount > 0) {
                 menu.addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblColorIdentity"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, e -> {
@@ -2143,6 +2153,24 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
             }).handleEvent(e);
         }
 
+        private void toggleCardKeyCard(final Deck deck, final PaperCard card, boolean isCurrentlyKeyCard) {
+            String cardName = card.getName();
+            
+            if (isCurrentlyKeyCard) {
+                // Remove from key cards
+                deck.removeKeyCard(cardName);
+            } else {
+                // Add to key cards
+                deck.addKeyCard(cardName);
+            }
+            
+            // Mark deck as modified so it will be saved
+            parentScreen.getDeckController().notifyModelChanged();
+            
+            // Refresh the view to show updated status
+            cardManager.refresh();
+        }
+
         private boolean isPartnerCommander(final PaperCard card) {
             if (!parentScreen.isCommanderEditor() || parentScreen.getDeck().getCommanders().isEmpty()) {
                 return false;
@@ -2196,6 +2224,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
                 draft.postDraftActions();
                 hideTab(); //hide this tab page when finished drafting
                 parentScreen.completeDraft();
+                return; // pool is null; do not fall through to cardManager.setPool(pool) below
             }
 
             this.draftingFaceDown = getDraftPlayer().hasArchdemonCurse();

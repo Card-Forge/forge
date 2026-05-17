@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="70" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="188">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="70" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="189">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -128,13 +128,13 @@
 {
       &quot;type&quot;: &quot;card&quot;,
       &quot;count&quot;:1, 
-      &quot;cardName&quot;: &quot;champion's helm&quot;,
+      &quot;cardName&quot;: &quot;Champion's Helm&quot;,
       &quot;editions&quot;: [&quot;CMM&quot;]
 },
 {
       &quot;type&quot;: &quot;card&quot;,
       &quot;count&quot;:1, 
-      &quot;cardName&quot;: &quot;last one standing&quot;,
+      &quot;cardName&quot;: &quot;Last One Standing&quot;,
       &quot;editions&quot;: [&quot;BBD&quot;]
 },
 {
@@ -585,5 +585,50 @@
   <object id="182" template="../../../../common/maps/obj/collision.tx" x="367.054" y="463.424" width="16.8925" height="31.9011"/>
   <object id="183" template="../../../../common/maps/obj/gold.tx" x="841.25" y="249"/>
   <object id="186" template="../../../../common/maps/obj/gold.tx" x="897.5" y="249.25"/>
+  <object id="188" template="../../../../common/maps/obj/enemy.tx" x="341.5" y="1091">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;: &quot;'Welcome, customer, to Gwafa Hazid's emporium of spells!'&quot;,
+    &quot;options&quot;: [
+      {
+        &quot;name&quot;: &quot;I'll buy some spells. (Spend 4000 gold)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasGold&quot;: 4000 }
+        ],
+        &quot;text&quot;: &quot;'See you next time, valued customer! There's always more in stock!'&quot;,
+        &quot;action&quot;: [
+          {
+            &quot;addGold&quot;: -4000,
+            &quot;grantRewards&quot;: [
+              { &quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 50 }
+            ]
+          }
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;I'll buy some spells. (Spend 4000 gold)&quot;,
+        &quot;condition&quot;: [
+          { &quot;hasGold&quot;: 4000, &quot;not&quot;: true }
+        ],
+        &quot;text&quot;: &quot;No cash, no cards. Come back when you've won some more fights!&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+      },
+				{
+					&quot;name&quot;: &quot;What are you selling?&quot;,
+					&quot;text&quot;: &quot;'Spells at a great discount! Why, for just a few times the price of a 'spell pack' that other merchants sell, I give you FIFTY spells! And far more importantly, the spells I sell can be ANYTHING! Why, you might get 50 rare spells! Of course, I can't guarantee that, but I CAN guarantee my mystery boxes haven't been searched or seeded, they're one hundred percent genuine random. Straight from falling off the back of a caravan to your pocket, my friend!'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;I'll think on it.&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;No spells for me today, thanks.&quot;,
+					&quot;text&quot;: &quot;'See you next time.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+    ]
+  }
+]</property>
+    <property name="enemy" value="Gwafa Hazid"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

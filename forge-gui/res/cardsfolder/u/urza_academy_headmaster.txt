@@ -106,7 +106,7 @@ SVar:Token16U:DB$ Token | TokenAmount$ 3 | TokenScript$ b_1_1_assassin_lose_con 
 SVar:Raise17U:DB$ ChangeZoneAll | ChangeType$ Creature | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | SpellDescription$ Put all creature cards in all graveyards onto the battlefield under your control.
 SVar:LifeDraw18U:DB$ GainLife | LifeAmount$ Lands | SubAbility$ DBDraw18U | SpellDescription$ You gain X life and draw X cards, where X is the number of lands you control.
 SVar:DBDraw18U:DB$ Draw | NumCards$ Lands
-SVar:FlipTurns19U:DB$ FlipACoin | Amount$ 5 | NoCall$ True | HeadsSubAbility$ DBAddTurn19U | StackDescription$ SpellDescription | SpellDescription$ Flip 5 coins. Take an extra turn after this one for each coin that comes up heads.
+SVar:FlipTurns19U:DB$ FlipCoin | Amount$ 5 | NoCall$ True | HeadsSubAbility$ DBAddTurn19U | StackDescription$ SpellDescription | SpellDescription$ Flip 5 coins. Take an extra turn after this one for each coin that comes up heads.
 SVar:DBAddTurn19U:DB$ AddTurn | Defined$ You | NumTurns$ 1
 SVar:LifeDrawPut20U:DB$ GainLife | LifeAmount$ 7 | SubAbility$ DBDraw20U | SpellDescription$ You gain 7 life, draw seven cards, then put up to seven permanent cards from your hand onto the battlefield.
 SVar:DBDraw20U:DB$ Draw | NumCards$ 7 | SubAbility$ DBChangeZone20U

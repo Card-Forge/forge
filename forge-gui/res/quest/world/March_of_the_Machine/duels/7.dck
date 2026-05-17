@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Dont Play With Matches
+Title=Dont Play With Matches
+Icon=Dont Play With Matches.jpg
+Difficulty=Easy
+Description=./Standard/March_of_the_Machine/Murata_Yosei_-_Mono_White_(Standard,_#1635373).dck
+Deck Type=constructed
+
+[Main]
+1 Cathar Commando
+3 The Restoration of Eiganjo
+2 Spirited Companion
+1 Sanctuary Warden
+2 Serra Paragon
+2 Loran of the Third Path
+1 Steel Seraph
+4 Reckoner Bankbuster
+2 Farewell
+4 Lay Down Arms
+4 Wedding Announcement
+4 Ossification
+3 The Wandering Emperor
+1 Elspeth Resplendent
+2 The Eternal Wanderer
+16 Plains
+1 Field of Ruin
+1 Eiganjo, Seat of the Empire
+4 Roadside Reliquary
+2 Mirrex
+[Sideboard]
+1 Fateful Absence
+2 Depopulate
+3 Knockout Blow
+1 Unlicensed Hearse
+1 Destroy Evil
+1 The Stone Brain
+2 Skrelv's Hive
+2 Boon-Bringer Valkyrie
+2 Surge of Salvation

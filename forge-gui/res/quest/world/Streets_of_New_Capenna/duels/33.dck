@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Saruman
+Title=Saruman
+Icon=Saruman.jpg
+Difficulty=Easy
+Description=./Standard/Streets_of_New_Capenna/Pedro_Urquisa_Barbosa_-_Esper_Tempo_(Standard,_#1381904).dck
+Deck Type=constructed
+
+[Main]
+1 Tenacious Underdog
+2 Zareth San, the Trickster
+4 Raffine, Scheming Seer
+4 Obscura Interceptor
+4 Soaring Thought-Thief
+4 Nimble Larcenist
+2 Siphon Insight
+2 Infernal Grasp
+2 Negate
+3 Obscura Charm
+4 Void Rend
+4 Tainted Indulgence
+1 Otawara, Soaring City
+1 Swamp
+1 Hive of the Eye Tyrant
+2 Deserted Beach
+3 Shipwreck Marsh
+4 Raffine's Tower
+4 Clearwater Pathway
+4 Hengegate Pathway
+4 Brightclimb Pathway
+[Sideboard]
+2 The Wandering Emperor
+2 Memory Deluge
+2 The Meathook Massacre
+2 Nighthawk Scavenger
+2 Vanishing Verse
+2 Disdainful Stroke
+3 Ray of Enfeeblement

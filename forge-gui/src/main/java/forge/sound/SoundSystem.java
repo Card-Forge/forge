@@ -53,10 +53,8 @@ public class SoundSystem {
             if (FModel.getPreferences().getPrefInt(FPref.UI_VOL_SOUNDS)<1) {
                 return emptySound;
             }
-        } else {
-            if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_SOUNDS)) {
-                return emptySound;
-            }
+        } else if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_SOUNDS)) {
+            return emptySound;
         }
 
         IAudioClip clip = loadedClips.get(type);
@@ -82,10 +80,8 @@ public class SoundSystem {
             if (FModel.getPreferences().getPrefInt(FPref.UI_VOL_SOUNDS)<1) {
                 return emptySound;
             }
-        } else {
-            if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_SOUNDS)) {
-                return emptySound;
-            }
+        } else if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ENABLE_SOUNDS)) {
+            return emptySound;
         }
 
         IAudioClip clip = loadedScriptClips.get(fileName);

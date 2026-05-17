@@ -43,6 +43,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -987,6 +988,9 @@ public class AbilityUtils {
             addPlayer(card.getImprintedCards(), defined, players);
         } else if (defined.startsWith("EffectSource")) {
             Card root = findEffectRoot(card);
+            if (root == null) {
+                root = findEffectRoot(sa.getHostCard());
+            }
             if (root != null) {
                 addPlayer(Lists.newArrayList(root), defined, players);
             }
@@ -1829,18 +1833,13 @@ public class AbilityUtils {
                 }
 
                 if (sq[0].startsWith("TotalManaSpent ")) {
-                    final String[] k = sq[0].split(" ");
-                    int v = 0;
-                    if (sa.getRootAbility().getPayingMana() != null) {
-                        for (Mana m : sa.getRootAbility().getPayingMana()) {
-                            Card source = m.getSourceCard();
-                            if (source != null) {
-                                if (source.isValid(k[1].split(","), player, c, sa)) {
-                                    v += 1;
-                                }
-                            }
-                        }
+                    if (sa.getRootAbility().getPayingMana() == null) {
+                        return doXMath(0, expr, c, ctb);
                     }
+                    final String[] k = sq[0].split(" ");
+                    int v = (int) sa.getRootAbility().getPayingMana().stream().map(Mana::getSourceCard)
+                            .filter(Predicate.<Card>not(Objects::isNull).and(CardPredicates.restriction(k[1].split(","), player, c, ctb)))
+                            .count();
                     return doXMath(v, expr, c, ctb);
                 }
 
@@ -1878,17 +1877,12 @@ public class AbilityUtils {
             }
             if (sq[0].startsWith("CastTotalManaSpent ")) {
                 final String[] k = sq[0].split(" ");
-                int v = 0;
-                if (c.getCastSA() != null) {
-                    for (Mana m : c.getCastSA().getPayingMana()) {
-                        Card source = m.getSourceCard();
-                        if (source != null) {
-                            if (source.isValid(k[1].split(","), player, c, ctb)) {
-                                v += 1;
-                            }
-                        }
-                    }
+                if (c.getCastSA() == null) {
+                    return doXMath(0, expr, c, ctb);
                 }
+                int v = (int) c.getCastSA().getPayingMana().stream().map(Mana::getSourceCard)
+                        .filter(Predicate.<Card>not(Objects::isNull).and(CardPredicates.restriction(k[1].split(","), player, c, ctb)))
+                        .count();
                 return doXMath(v, expr, c, ctb);
             }
 
@@ -2207,8 +2201,8 @@ public class AbilityUtils {
             int cmc = c.getCMC();
 
             if (sq[0].contains("LKI") && !c.isInZone(ZoneType.Stack) && c.getManaCost() != null) {
-                if (ctb instanceof SpellAbility && ((SpellAbility) ctb).getXManaCostPaid() != null) {
-                    cmc += ((SpellAbility) ctb).getXManaCostPaid() * c.getManaCost().countX();
+                if (ctb instanceof SpellAbility sa && sa.getXManaCostPaid() != null) {
+                    cmc += sa.getXManaCostPaid() * c.getManaCost().countX();
                 } else {
                     cmc += c.getXManaCostPaid() * c.getManaCost().countX();
                 }

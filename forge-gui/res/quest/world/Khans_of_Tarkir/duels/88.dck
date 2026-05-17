@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Edna Krabappel
+Title=Edna Krabappel
+Icon=Edna Krabappel.jpg
+Difficulty=Hard
+Description=../Modern/Khans_of_Tarkir/PPTQ_Gaeta_(LT)/Angelo_Macaione_-_Red_Deck_Wins_(Modern,_#175402).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+4 Monastery Swiftspear
+4 Boros Charm
+4 Lightning Bolt
+2 Lightning Helix
+4 Searing Blaze
+2 Shard Volley
+4 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+2 Arid Mesa
+4 Bloodstained Mire
+2 Sacred Foundry
+2 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+4 Destructive Revelry
+1 Hushwing Gryff
+4 Molten Rain
+2 Torpor Orb
+2 Volcanic Fallout

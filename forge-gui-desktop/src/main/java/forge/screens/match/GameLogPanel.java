@@ -142,7 +142,7 @@ public class GameLogPanel extends JPanel {
         final boolean showCardImages = FModel.getPreferences().getPrefBoolean(FPref.UI_LOG_SHOW_CARD_IMAGES);
 
         final JTextArea tar;
-        if (card != null && showCardImages && viewers != null) {
+        if (card != null && showCardImages) {
             tar = new LogEntryTextArea(text, useAlternateBackColor, card, viewers);
         } else {
             tar = createNewLogEntryJTextArea(text, useAlternateBackColor);

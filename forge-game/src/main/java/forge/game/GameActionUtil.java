@@ -20,6 +20,7 @@ package forge.game;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
+import forge.card.CardStateName;
 import forge.card.ColorSet;
 import forge.card.GamePieceType;
 import forge.card.mana.ManaCost;
@@ -947,7 +948,9 @@ public final class GameActionUtil {
             oldCard.getZone().remove(oldCard);
 
             // might have been an alternative lki host
-            oldCard = ability.getCardState().getCard();
+            if (oldCard.getCurrentStateName() != CardStateName.PreparedSpell) {
+                oldCard = ability.getCardState().getCard();
+            }
 
             oldCard.setCastSA(null);
             oldCard.setCastFrom(null);

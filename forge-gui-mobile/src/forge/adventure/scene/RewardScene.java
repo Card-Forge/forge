@@ -14,6 +14,8 @@ import com.github.tommyettinger.textra.TextraLabel;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
 import forge.adventure.character.ShopActor;
+import forge.haptic.HapticEngine;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.adventure.data.RewardData;
 import forge.adventure.data.ShopData;
 import forge.adventure.player.AdventurePlayer;
@@ -270,7 +272,7 @@ public class RewardScene extends UIScene {
 
         Current.player().takeShards(price);
 
-        Gdx.input.vibrate(5);
+        HapticEngine.vibrate(FPref.UI_VIBRATE_ON_SHOP_ACTION, 5);
         SoundSystem.instance.play(SoundEffectType.Shuffle, false);
 
         updateBuyButtons();
@@ -634,7 +636,7 @@ public class RewardScene extends UIScene {
                         Current.player().takeGold(price);
                         Current.player().addReward(rewardActor.getReward());
 
-                        Gdx.input.vibrate(5);
+                        HapticEngine.vibrate(FPref.UI_VIBRATE_ON_SHOP_ACTION, 5);
                         SoundSystem.instance.play(SoundEffectType.FlipCoin, false);
 
                         if (changes == null)
@@ -699,7 +701,7 @@ public class RewardScene extends UIScene {
                         headerLabel.setText("Select " + remainingSelections + " rewards");
                         doneButton.setDisabled(remainingSelections > 0);
 
-                        Gdx.input.vibrate(5);
+                        HapticEngine.vibrate(FPref.UI_VIBRATE_ON_ADVENTURE_REWARD, 5);
                         //SoundSystem.instance.play(SoundEffectType.FlipCoin, false);
 
                         isSold = true;

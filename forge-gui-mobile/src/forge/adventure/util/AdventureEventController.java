@@ -160,7 +160,8 @@ public class AdventureEventController implements Serializable {
     }
 
     public Deck generateBooster(String setCode) {
-        List<PaperCard> cards = BoosterGenerator.getBoosterPack(StaticData.instance().getBoosters().get(setCode));
+        SealedTemplate template = AdventureOverrides.instance().getBoosterTemplate(setCode);
+        List<PaperCard> cards = BoosterGenerator.getBoosterPack(template);
         Deck output = new Deck();
         output.getMain().add(cards);
         String editionName = FModel.getMagicDb().getEditions().get(setCode).getName();

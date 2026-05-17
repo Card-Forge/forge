@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Hagrid
+Title=Hagrid
+Icon=Hagrid.jpg
+Difficulty=Easy
+Description=Shadows_over_Innistrad/Standard_Champs_#9719293/WhiteStripe_-_GW_Tokens_(Standard,_#621365).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Archangel Avacyn
+3 Hangarback Walker
+4 Lambholt Pacifist
+4 Sylvan Advocate
+4 Dromoka's Command
+2 Secure the Wastes
+3 Declaration in Stone
+3 Oath of Nissa
+4 Gideon, Ally of Zendikar
+4 Nissa, Voice of Zendikar
+4 Canopy Vista
+7 Forest
+4 Fortified Village
+7 Plains
+3 Westvale Abbey
+[Sideboard]
+2 Clip Wings
+1 Den Protector
+1 Dragonlord Dromoka
+2 Hallowed Moonlight
+1 Linvala, the Preserver
+1 Surrak, the Hunt Caller
+3 Tireless Tracker
+3 Tragic Arrogance

@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Token
+Title=Token
+Icon=Token.jpg
+Difficulty=Easy
+Description=Born_of_the_Gods/Pop-a-Lot_#1_(2014)/Tey_Phokmanee_-_Black_Devotion_(Standard,_#66147).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Desecration Demon
+1 Erebos, God of the Dead
+4 Gray Merchant of Asphodel
+4 Nightveil Specter
+4 Pack Rat
+4 Bile Blight
+2 Devour Flesh
+4 Hero's Downfall
+4 Thoughtseize
+4 Underworld Connections
+4 Mutavault
+17 Swamp
+4 Temple of Deceit
+[Sideboard]
+2 Dark Betrayal
+2 Doom Blade
+3 Drown in Sorrow
+3 Duress
+3 Lifebane Zombie

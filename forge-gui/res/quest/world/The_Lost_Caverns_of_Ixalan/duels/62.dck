@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Catwoman
+Title=Catwoman
+Icon=Catwoman.jpg
+Difficulty=Very Hard
+Description=./Modern/The_Lost_Caverns_of_Ixalan/Sam_Marquardt_-_Azorius_Merfolk_(Modern,_#1967246).dck
+Deck Type=constructed
+
+[Main]
+4 Lord of Atlantis
+2 Subtlety
+4 Master of the Pearl Trident
+4 Merfolk Trickster
+3 Svyelun of Sea and Sky
+4 Tide Shaper
+4 Tishana's Tidebinder
+4 Vodalian Hexcatcher
+4 Aether Vial
+3 Spell Pierce
+1 Stern Scolding
+2 Dismember
+3 Cavern of Souls
+4 Mutavault
+1 Otawara, Soaring City
+13 Island
+[Sideboard]
+2 Counterspell
+1 Sword of Fire and Ice
+1 Dismember
+1 Chalice of the Void
+2 Unlicensed Hearse
+1 Spell Pierce
+3 Stern Scolding
+4 Spreading Seas

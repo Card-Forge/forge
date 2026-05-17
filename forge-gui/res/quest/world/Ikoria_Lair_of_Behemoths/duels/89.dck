@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Saladin
+Title=Saladin
+Icon=Saladin.jpg
+Difficulty=Hard
+Description=./Modern/Ikoria_Lair_of_Behemoths/Draccon136_-_GW_Auras_(Modern,_#1045258).dck
+Deck Type=constructed
+
+[Main]
+1 Dryad Arbor
+4 Kor Spiritdancer
+4 Slippery Bogle
+4 Gladecover Scout
+2 Path to Exile
+2 Spirit Mantle
+2 Spirit Link
+3 Spider Umbra
+3 Gryff's Boon
+4 Daybreak Coronet
+4 Ethereal Armor
+4 Hyena Umbra
+4 Rancor
+1 Forest
+2 Snow-Covered Plains
+4 Windswept Heath
+4 Temple Garden
+4 Horizon Canopy
+4 Razorverge Thicket
+[Sideboard]
+1 Soul-Guide Lantern
+1 Grafdigger's Cage
+1 Path to Exile
+1 Rest in Peace
+1 Lurrus of the Dream-Den
+2 Force of Vigor
+2 Gaddock Teeg
+2 Hushbringer
+4 Leyline of Sanctity

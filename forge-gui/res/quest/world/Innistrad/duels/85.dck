@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=MamanBrigitte
+Title=MamanBrigitte
+Icon=MamanBrigitte.jpg
+Difficulty=Hard
+Description=../Modern/Innistrad/Les_Hordes_de_Maltus_from_Ottersthal/Maximilien_ETTLINGER_-_Vampires_(Modern,_#23391).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodghast
+4 Bloodline Keeper
+1 Bloodlord of Vaasgoth
+3 Captivating Vampire
+4 Gatekeeper of Malakir
+4 Guul Draz Vampire
+4 Kalastria Highborn
+4 Vampire Nighthawk
+3 Vampire Nocturnus
+4 Doom Blade
+3 Go for the Throat
+22 Swamp
+[Sideboard]
+3 Dismember
+3 Duress
+1 Emrakul, the Aeons Torn
+2 Malakir Bloodwitch
+1 Memoricide
+2 Ratchet Bomb
+1 Relic of Progenitus
+2 Vampire Hexmage

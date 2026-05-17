@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Abassi
+Title=Abassi
+Icon=Abassi.jpg
+Difficulty=Hard
+Description=./Modern/Adventures_in_the_Forgotten_Realms/twinlesstwin_-_Golgari_Evolution_(Modern,_#1191901)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Zulaport Cutthroat
+1 Hapatra, Vizier of Poisons
+2 Prosperous Innkeeper
+2 Birds of Paradise
+3 Geralf's Messenger
+4 Ignoble Hierarch
+4 Young Wolf
+4 Yawgmoth, Thran Physician
+4 Wall of Roots
+4 Strangleroot Geist
+4 Chord of Calling
+4 Eldritch Evolution
+1 Grist, the Hunger Tide
+1 Dryad Arbor
+1 Forest
+1 Khalni Garden
+1 Swamp
+1 Urborg, Tomb of Yawgmoth
+1 Yavimaya, Cradle of Growth
+1 Darkbore Pathway
+2 Overgrown Tomb
+2 Nurturing Peatland
+3 Twilight Mire
+4 Blooming Marsh
+4 Verdant Catacombs
+[Sideboard]
+1 Grist, the Hunger Tide
+1 Doom Blade
+2 Veil of Summer
+2 Crime // Punishment
+3 Endurance
+3 Force of Vigor
+3 Chalice of the Void

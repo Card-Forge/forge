@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=The Desert Caravan
+Title=The Desert Caravan
+Icon=The Desert Caravan.jpg
+Difficulty=Hard
+Description=./Modern/Zendikar_Rising/Cheeseinat0r_-_Rakdos_Aggro_(Modern,_#1054843).dck
+Deck Type=constructed
+
+[Main]
+3 Kroxa, Titan of Death's Hunger
+4 Dark Confidant
+4 Lightning Skelemental
+4 Seasoned Pyromancer
+2 Lightning Bolt
+2 Cling to Dust
+3 Fatal Push
+1 Bloodchief's Thirst
+1 Ransack the Lab
+1 Dreadbore
+3 Unearth
+3 Thoughtseize
+4 Inquisition of Kozilek
+3 Liliana of the Veil
+1 Castle Locthwain
+1 Verdant Catacombs
+2 Wooded Foothills
+2 Mountain
+2 Marsh Flats
+3 Swamp
+3 Blood Crypt
+4 Blackcleave Cliffs
+4 Bloodstained Mire
+[Sideboard]
+1 Boil
+2 Plague Engineer
+2 Ashiok, Dream Render
+2 Blood Moon
+2 Cleansing Wildfire
+2 Feed the Swarm
+2 Kolaghan's Command
+2 Nihil Spellbomb

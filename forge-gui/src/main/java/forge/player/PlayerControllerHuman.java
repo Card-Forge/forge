@@ -3,8 +3,10 @@ package forge.player;
 import com.google.common.collect.*;
 import forge.LobbyPlayer;
 import forge.StaticData;
+import forge.ai.AvailableActions;
 import forge.ai.GameState;
 import forge.ai.PlayerControllerAi;
+import forge.gamemodes.net.server.RemoteClientGuiGame;
 import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
@@ -29,6 +31,7 @@ import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
+import forge.game.phase.PhaseType;
 import forge.game.player.*;
 import forge.game.player.actions.SelectCardAction;
 import forge.game.player.actions.SelectPlayerAction;
@@ -46,8 +49,12 @@ import forge.game.zone.MagicStack;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.gamemodes.match.DeclineScope;
 import forge.gamemodes.match.NextGameDecision;
+import forge.gamemodes.match.YieldController;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.match.input.*;
+import forge.util.IHasForgeLog;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.control.FControlGamePlayback;
@@ -69,6 +76,7 @@ import forge.trackable.TrackableCollection;
 import forge.util.*;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+
 import io.sentry.Sentry;
 import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.StringUtils;
@@ -87,15 +95,17 @@ import java.util.stream.Collectors;
  * <p>
  * Handles phase skips for now.
  */
-public class PlayerControllerHuman extends PlayerController implements IGameController {
+public class PlayerControllerHuman extends PlayerController implements IGameController, IHasForgeLog {
+
     /**
      * Cards this player may look at right now, for example when searching a
      * library.
      */
     private boolean mayLookAtAllCards = false;
-    private boolean disableAutoYields = false;
 
     private IGuiGame gui;
+
+    private final YieldController yieldController = new YieldController(this);
 
     protected final InputQueue inputQueue;
     protected final InputProxy inputProxy;
@@ -125,6 +135,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         this.gui = gui;
     }
 
+    public YieldController getYieldController() {
+        return yieldController;
+    }
+
     public final InputQueue getInputQueue() {
         return inputQueue;
     }
@@ -137,25 +151,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return player == null ? null : player.getView();
     }
 
-    public boolean getDisableAutoYields() {
-        return disableAutoYields;
-    }
-    public void setDisableAutoYields(final boolean disableAutoYields0) {
-        disableAutoYields = disableAutoYields0;
-    }
-
     @Override
     public boolean mayLookAtAllCards() {
         return mayLookAtAllCards;
-    }
-    /**
-     * Set this to {@code true} to enable this player to see all cards any other
-     * player can see.
-     *
-     * @param mayLookAtAllCards the mayLookAtAllCards to set
-     */
-    public void setMayLookAtAllCards(final boolean mayLookAtAllCards) {
-        this.mayLookAtAllCards = mayLookAtAllCards;
     }
 
     private final ArrayList<Card> tempShownCards = new ArrayList<>();
@@ -163,10 +161,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public <T> void tempShow(final Iterable<T> objects) {
         for (final T t : objects) {
             // assume you may see any card passed through here
-            if (t instanceof Card) {
-                tempShowCard((Card) t);
-            } else if (t instanceof CardView) {
-                tempShowCard(getCard((CardView) t));
+            if (t instanceof Card c) {
+                tempShowCard(c);
+            } else if (t instanceof CardView c) {
+                tempShowCard(getCard(c));
             }
         }
     }
@@ -432,13 +430,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     private boolean useSelectCardsInput(final FCollectionView<? extends GameEntity> sourceList, final SpellAbility sa) {
-        //this can be used to stop zone select GUI when certain APIs would reveal illegal zone information
-        //initially created for HeistEffect which showed library placement
+        // would reveal illegal zone information
         if (sa != null && ApiType.Heist.equals(sa.getApi())) return false;
-        return useSelectCardsInput(sourceList);
-    }
 
-    private boolean useSelectCardsInput(final FCollectionView<? extends GameEntity> sourceList) {
         // can't use InputSelect from GUI thread (e.g., DevMode Tutor)
         if (FThreads.isGuiThread()) {
             return false;
@@ -461,7 +455,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
 
             final boolean useUiPointAtCard =
-                    FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) && !GuiBase.getInterface().isLibgdxPort() ?
+                    FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) && !getGui().isLibgdxPort() ?
                             (cz.is(ZoneType.Battlefield) || cz.is(ZoneType.Hand) || cz.is(ZoneType.Library) ||
                                     cz.is(ZoneType.Graveyard) || cz.is(ZoneType.Exile) || cz.is(ZoneType.Flashback) ||
                                     cz.is(ZoneType.Command) || cz.is(ZoneType.Sideboard)) :
@@ -491,7 +485,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         getGui().setPanelSelection(CardView.get(sa.getHostCard()));
 
-        if (useSelectCardsInput(sourceList)) {
+        if (useSelectCardsInput(sourceList, sa)) {
             tempShowCards(sourceList);
             final InputSelectCardsFromList sc = new InputSelectCardsFromList(this, min, max, sourceList, sa);
             sc.setMessage(title);
@@ -650,7 +644,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
 
         tempShow(optionList);
-        if (useSelectCardsInput(optionList)) {
+        if (useSelectCardsInput(optionList, sa)) {
             final InputSelectEntitiesFromList<T> input = new InputSelectEntitiesFromList<>(this, min, max, optionList, sa);
             input.setCancelAllowed(min == 0);
             input.setMessage(MessageUtil.formatMessage(title, player, targetedPlayer));
@@ -784,12 +778,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public boolean confirmTrigger(final WrappedAbility wrapper) {
         final SpellAbility sa = wrapper.getWrappedAbility();
         final Trigger regtrig = wrapper.getTrigger();
-        if (getGui().shouldAlwaysAcceptTrigger(regtrig.getId())) {
-            return true;
-        }
-        if (getGui().shouldAlwaysDeclineTrigger(regtrig.getId())) {
-            return false;
-        }
+        AutoYieldStore.TriggerDecision decision = getTriggerDecision(wrapper.yieldKey());
+        if (decision == AutoYieldStore.TriggerDecision.ACCEPT) return true;
+        if (decision == AutoYieldStore.TriggerDecision.DECLINE) return false;
 
         // triggers with costs can always be declined by not paying the cost
         if (sa.hasParam("Cost") && !sa.getParam("Cost").equals("0")) {
@@ -816,7 +807,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 buildQuestion.append("\n").append(localizer.getMessage("lblTriggeredby")).append(": ").append(tos.get(AbilityKey.Card));
             }
         }
-        if (GuiBase.getInterface().isLibgdxPort()) {
+        if (getGui().isLibgdxPort()) {
             CardView cardView;
             SpellAbilityView spellAbilityView = wrapper.getView();
             if (spellAbilityView != null) //updated view
@@ -824,16 +815,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             else
                 cardView = wrapper.getCardView();
             return this.getGui().confirm(cardView, buildQuestion.toString().replaceAll("\n", " "));
-        } else {
-            final InputConfirm inp = new InputConfirm(this, buildQuestion.toString(), wrapper);
-            inp.showAndWait();
-            return inp.getResult();
         }
+        return InputConfirm.confirm(this, wrapper, buildQuestion.toString());
     }
 
     @Override
     public Player chooseStartingPlayer(final boolean isFirstGame) {
-        String prompt = null;
+        String prompt;
         if (isFirstGame) {
             prompt = localizer.getMessage("lblYouHaveWonTheCoinToss", player.getName());
         } else {
@@ -842,7 +830,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         if (getGame().getPlayers().size() == 2) {
             prompt += "\n\n" + localizer.getMessage("lblWouldYouLiketoPlayorDraw");
-            final InputConfirm inp = new InputConfirm(this, prompt, localizer.getMessage("lblPlay"), localizer.getMessage("lblDraw"));
+            final InputConfirm inp = new InputConfirm(this, prompt, localizer.getMessage("lblPlay"), localizer.getMessage("lblDraw"), true);
             inp.showAndWait();
             return inp.getResult() ? this.player : this.player.getOpponents().get(0);
         }
@@ -934,6 +922,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     protected void reveal(final CardCollectionView cards, final ZoneType zone, final PlayerView owner, String message, boolean addSuffix) {
+        yieldController.maybeInterruptOnReveal();
         if (StringUtils.isBlank(message)) {
             message = localizer.getMessage("lblLookCardInPlayerZone", "{player's}", zone.getTranslatedName().toLowerCase());
         } else if (addSuffix) {
@@ -946,8 +935,26 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         } else {
             tempShowCards(cards);
             TrackableCollection<CardView> collection = CardView.getCollection(cards);
-            getGui().reveal(fm, collection);
-            getGui().updateRevealedCards(collection);
+            // Show opponent's hand as a FloatingZone with a minimal OK dialog instead of a names list
+            final boolean useFloatingHandReveal = zone == ZoneType.Hand
+                    && owner != getLocalPlayerView()
+                    && FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS)
+                    && !getGui().isLibgdxPort();
+            if (useFloatingHandReveal) {
+                final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
+                zonesToUpdate.add(new PlayerZoneUpdate(owner, zone));
+                final Iterable<PlayerZoneUpdate>[] zonesShown = new Iterable[1];
+                FThreads.invokeInEdtNowOrLater(() -> {
+                    getGui().updateZones(zonesToUpdate);
+                    zonesShown[0] = getGui().tempShowZones(getLocalPlayerView(), zonesToUpdate);
+                });
+                getGui().message(fm);
+                getGui().updateRevealedCards(collection);
+                FThreads.invokeInEdtNowOrLater(() -> getGui().hideZones(getLocalPlayerView(), zonesShown[0]));
+            } else {
+                getGui().reveal(fm, collection);
+                getGui().updateRevealedCards(collection);
+            }
             endTempShowCards();
         }
     }
@@ -980,8 +987,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         CardCollection toTop = null;
 
         tempShowCards(topN);
-        if (FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) &&
-                (!GuiBase.getInterface().isLibgdxPort()) && (!GuiBase.isNetworkplay(getGui()))) { //prevent crash for desktop vs mobile port it will crash the netplay since mobile doesnt have manipulatecardlist, send the alternate below
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS) && !getGui().isLibgdxPort()) {
             CardCollectionView cardList = player.getCardsIn(ZoneType.Library);
             ImmutablePair<CardCollection, CardCollection> result =
                     arrangeForMove(localizer.getMessage("lblMoveCardstoToporBbottomofLibrary"), cardList, topN, true, true);
@@ -1032,8 +1038,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
             tempShowCard(c);
             getGui().setCard(view);
-            boolean result = false;
-            result = InputConfirm.confirm(this, view, localizer.getMessage("lblPutCardsOnTheTopLibraryOrGraveyard", CardTranslation.getTranslatedName(view.getName())),
+            boolean result = InputConfirm.confirm(this, view, localizer.getMessage("lblPutCardsOnTheTopLibraryOrGraveyard", CardTranslation.getTranslatedName(view.getName())),
                     true, ImmutableList.of(localizer.getMessage("lblLibrary"), localizer.getMessage("lblGraveyard")));
             if (result) {
                 toTop = topN;
@@ -1070,8 +1075,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         tempShowCard(c);
         getGui().setCard(c.getView());
 
-        boolean result = false;
-        result = InputConfirm.confirm(this, view, localizer.getMessage("lblPutCardOnTopOrBottomLibrary", CardTranslation.getTranslatedName(view.getName())),
+        boolean result = InputConfirm.confirm(this, view, localizer.getMessage("lblPutCardOnTopOrBottomLibrary", CardTranslation.getTranslatedName(view.getName())),
                 true, ImmutableList.of(localizer.getMessage("lblTop"), localizer.getMessage("lblBottom")));
 
         endTempShowCards();
@@ -1154,11 +1158,20 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public CardCollectionView chooseCardsToDiscardFrom(final Player p, final SpellAbility sa,
-                                                       final CardCollection valid, final int min, final int max) {
+                                                       final CardCollection valid, final int min, final int max,
+                                                       final CardCollectionView visibleToChooser) {
         boolean optional = min == 0;
 
         if (p != player) {
-            tempShowCards(valid);
+            tempShowCards(visibleToChooser);
+            if (useSelectCardsInput(valid, sa)) {
+                final InputSelectCardsFromList inp = new InputSelectCardsFromList(this, min, max, valid, sa);
+                inp.setMessage(String.format(localizer.getMessage("lblChooseMinCardToDiscard"), optional ? max : min));
+                inp.setCancelAllowed(optional);
+                inp.showAndWait();
+                endTempShowCards();
+                return new CardCollection(inp.getSelected());
+            }
             GameEntityViewMap<Card, CardView> gameCacheDiscard = GameEntityView.getMap(valid);
             List<CardView> views = getGui().many(String.format(localizer.getMessage("lblChooseMinCardToDiscard"), optional ? max : min),
                     localizer.getMessage("lblDiscarded"), min, max, gameCacheDiscard.getTrackableKeys(), null);
@@ -1450,7 +1463,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public boolean confirmReplacementEffect(final ReplacementEffect replacementEffect, final SpellAbility effectSA,
                                             GameEntity affected, final String question) {
-        if (GuiBase.getInterface().isLibgdxPort()) {
+        if (getGui().isLibgdxPort()) {
             CardView cardView;
             SpellAbilityView spellAbilityView = effectSA == null ? null : effectSA.getView();
             if (spellAbilityView != null) //updated view
@@ -1459,9 +1472,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 cardView = effectSA == null ? null : effectSA.getCardView();
             return this.getGui().confirm(cardView, question.replaceAll("\n", " "));
         } else {
-            final InputConfirm inp = new InputConfirm(this, question, effectSA);
-            inp.showAndWait();
-            return inp.getResult();
+            return InputConfirm.confirm(this, effectSA, question);
         }
     }
 
@@ -1482,13 +1493,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void declareAttackers(final Player attackingPlayer, final Combat combat) {
-        if (mayAutoPass()) {
+        // CombatUtil.canAttack ensures we only get here when the player has a legal attacker
+        // so APINA must never skip - the invocation itself is the available action. User
+        // initiated yields (pass until end of turn) still skip when not-attacking is legal.
+        if (yieldController.shouldAutoYield()) {
             if (CombatUtil.validateAttackers(combat)) {
-                return; // don't prompt to declare attackers if user chose to
-                // end the turn and not attacking is legal
+                return;
             }
-            // otherwise: cancel auto pass because of this unexpected attack
-            autoPassCancel();
+            // if forced to prompt (must-attack/goad) clear the yield like any other interrupt
+            yieldController.applyInterrupt();
         }
 
         // This input should not modify combat object itself, but should return user choice
@@ -1506,20 +1519,34 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public List<SpellAbility> chooseSpellAbilityToPlay() {
+        netLog.trace("ENTRY for player {}, phase={}, isGameOver={}",
+                player.getName(), getGame().getPhaseHandler().getPhase(), getGame().isGameOver());
         final MagicStack stack = getGame().getStack();
 
-        if (mayAutoPass()) {
+        // Skip when already yielding — yield proceeds regardless of available-actions.
+        // Yield check first: it's a field read, vs needsAvailableActions which does 3 synced FPref reads.
+        if (!yieldController.isYieldActive() && needsAvailableActions()) {
+            long timeoutMs = computeAvailableActionsBudgetMs(getPlayer());
+            getPlayer().getView().setHasAvailableActions(AvailableActions.compute(getPlayer(), timeoutMs));
+        }
+
+        // yieldJustEndedFlag is read from the EDT (didYieldJustEnd); synchronized writer/reader pair handles visibility.
+        boolean nowMayAutoPass = mayAutoPass();
+        yieldController.noteMayAutoPassResult(nowMayAutoPass);
+
+        if (nowMayAutoPass) {
             // avoid prompting for input if current phase is set to be
             // auto-passed instead posing a short delay if needed to
             // prevent the game jumping ahead too quick
             int delay = 0;
             if (stack.isEmpty()) {
                 // make sure to briefly pause at phases you're not set up to skip
-                if (!getGui().isUiSetToSkipPhase(getGame().getPhaseHandler().getPlayerTurn().getView(),
-                        getGame().getPhaseHandler().getPhase())) {
+                if (!isUiSetToSkipPhase(getGame().getPhaseHandler().getPlayerTurn().getView(),
+                        getGame().getPhaseHandler().getPhase())
+                        && !yieldController.getBoolPref(FPref.YIELD_SKIP_PHASE_DELAY)) {
                     delay = FControlGamePlayback.phasesDelay;
                 }
-            } else {
+            } else if (!yieldController.getBoolPref(FPref.YIELD_SKIP_RESOLVE_DELAY)) {
                 // pause slightly longer for spells and abilities on the stack resolving
                 delay = FControlGamePlayback.resolveDelay;
             }
@@ -1530,30 +1557,37 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     e.printStackTrace();
                 }
             }
+            getGui().awaitNextInput();
+            netLog.trace("Returning null (mayAutoPass) for player {}", player.getName());
             return null;
         }
 
         if (stack.isEmpty()) {
-            if (getGui().isUiSetToSkipPhase(getGame().getPhaseHandler().getPlayerTurn().getView(),
-                    getGame().getPhaseHandler().getPhase())) {
+            if (isUiSetToSkipPhase(getGame().getPhaseHandler().getPlayerTurn().getView(), getGame().getPhaseHandler().getPhase())) {
+                getGui().awaitNextInput();
+                netLog.trace("Returning null (skipPhase) for player {}", player.getName());
                 return null; // avoid prompt for input if stack is empty and
                 // player is set to skip the current phase
             }
         } else {
             final SpellAbility ability = stack.peekAbility();
-            if (ability != null && ability.isAbility() && getGui().shouldAutoYield(ability.yieldKey())) {
+            if (ability != null && ability.isAbility() && shouldAutoYield(ability.yieldKey())) {
                 // avoid prompt for input if top ability of stack is set to auto-yield
                 try {
                     Thread.sleep(FControlGamePlayback.resolveDelay);
                 } catch (final InterruptedException e) {
                     e.printStackTrace();
                 }
+                getGui().awaitNextInput();
+                netLog.trace("Returning null (autoYield) for player {}", player.getName());
                 return null;
             }
         }
 
+        netLog.trace("Creating InputPassPriority for player {}", player.getName());
         final InputPassPriority defaultInput = new InputPassPriority(this);
         defaultInput.showAndWait();
+        netLog.trace("InputPassPriority returned for player {}, chosenSa={}", player.getName(), defaultInput.getChosenSa());
         return defaultInput.getChosenSa();
     }
 
@@ -1566,7 +1600,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public CardCollection chooseCardsToDiscardToMaximumHandSize(final int nDiscard) {
         final int max = player.getMaxHandSize();
 
-        if (GuiBase.getInterface().isLibgdxPort()) {
+        if (getGui().isLibgdxPort()) {
             tempShowCards(player.getCardsIn(ZoneType.Hand));
             GameEntityViewMap<Card, CardView> gameCacheDiscard = GameEntityView.getMap(player.getCardsIn(ZoneType.Hand));
             List<CardView> views = getGui().many(String.format(localizer.getMessage("lblChooseMinCardToDiscard"), nDiscard),
@@ -1710,25 +1744,24 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void notifyOfValue(final SpellAbility sa, final GameObject realtedTarget, final String value) {
+        yieldController.maybeInterruptOnReveal();
         final String message = MessageUtil.formatNotificationMessage(sa, player, realtedTarget, value);
         if (sa != null && sa.isManaAbility()) {
             getGame().fireEvent(new GameEventAddLog(GameLogEntryType.LAND, message));
         } else {
-            if (sa != null && sa.getHostCard() != null && GuiBase.getInterface().isLibgdxPort()) {
+            if (sa != null && sa.getHostCard() != null && getGui().isLibgdxPort()) {
                 CardView cardView;
                 IPaperCard iPaperCard = sa.getHostCard().getPaperCard();
                 if (iPaperCard != null)
                     cardView = CardView.getCardForUi(iPaperCard);
                 else
                     cardView = sa.getHostCard().getView();
-                getGui().confirm(cardView, message, ImmutableList.of(localizer.getMessage("lblOK")));
+                getGui().confirm(cardView, message, true, ImmutableList.of(localizer.getMessage("lblOK")));
             } else {
                 getGui().message(message, sa == null || sa.getHostCard() == null ? "" : CardView.get(sa.getHostCard()).toString());
             }
         }
     }
-
-    // end of not related candidates for move.
 
     /*
      * (non-Javadoc)
@@ -1875,7 +1908,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public boolean confirmPayment(final CostPart costPart, final String question, SpellAbility sa) {
-        if (GuiBase.getInterface().isLibgdxPort()) {
+        if (getGui().isLibgdxPort()) {
             CardView cardView;
             try {
                 cardView = CardView.getCardForUi(ImageUtil.getPaperCardFromImageKey(sa.getView().getHostCard().getCurrentState().getTrackableImageKey()));
@@ -1888,9 +1921,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
             return this.getGui().confirm(cardView, question.replaceAll("\n", " "));
         } else {
-            final InputConfirm inp = new InputConfirm(this, question, sa);
-            inp.showAndWait();
-            return inp.getResult();
+            return InputConfirm.confirm(this, sa, question);
         }
     }
 
@@ -1906,7 +1937,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         for (int i = 1; i < res.size(); i++) {
             // prompt user if there are multiple different options
             if (!res.get(i).equals(firstStr)) {
-                if (!GuiBase.isNetworkplay(getGui())) //non network game don't need serialization
+                if (!GuiBase.isNetPlay(getGui())) //non network game don't need serialization
                     return getGui().one(prompt, possibleReplacers);
                 ReplacementEffectView rev = getGui().one(prompt, possibleReplacers.stream().map(ReplacementEffect::getView).collect(Collectors.toList()));
                 return possibleReplacers.stream().filter(re -> re.getId() == rev.getId()).findAny().orElse(first);
@@ -1926,7 +1957,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return first;
         }
         String prompt = Localizer.getInstance().getMessage(isCostReduction ? "lblChooseCostReduction" : "lblChooseAbilityToPlay");
-        if (!GuiBase.isNetworkplay(getGui())) //non network game don't need serialization
+        if (!GuiBase.isNetPlay(getGui())) //non network game don't need serialization
             return getGui().one(prompt, possibleStatics);
         StaticAbilityView stv = getGui().one(prompt, possibleStatics.stream().map(StaticAbility::getView).collect(Collectors.toList()));
         return possibleStatics.stream().filter(st -> st.getId() == stv.getId()).findAny().orElse(first);
@@ -2227,7 +2258,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void revealAISkipCards(final String message, final Map<Player, Map<DeckSection, List<? extends PaperCard>>> unplayable) {
-        if (GuiBase.getInterface().isLibgdxPort()) {
+        if (getGui().isLibgdxPort()) {
             //restore old functionality for mobile version since list of card names can't be zoomed to display the cards
             for (Player p : unplayable.keySet()) {
                 final Map<DeckSection, List<? extends PaperCard>> removedUnplayableCards = unplayable.get(p);
@@ -2374,6 +2405,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 // ensure prompt updated if needed
                 currentInput.showMessageInitial();
             }
+            if (getGui().isNetGame()) {
+                // Flush events to remote clients — the undo modifies game state
+                // (untaps lands, etc.) after the prompt is shown, and without this
+                // the updated state sits in the forwarder buffer until the next action.
+                inputQueue.updateObservers();
+            }
             return true;
         }
         return false;
@@ -2389,33 +2426,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         inputProxy.selectButtonCancel();
     }
 
-    public void confirm() {
-        if (inputQueue.getInput() instanceof InputConfirm) {
-            selectButtonOk();
-        }
-    }
-
     @Override
     public void passPriority() {
-        passPriority(false);
-    }
-
-    @Override
-    public void passPriorityUntilEndOfTurn() {
-        passPriority(true);
-    }
-
-    private void passPriority(final boolean passUntilEndOfTurn) {
         final Input inp = inputProxy.getInput();
         if (inp instanceof InputPassPriority) {
-            if (passUntilEndOfTurn) {
-                autoPassUntilEndOfTurn();
-            }
             inp.selectButtonOK();
-        } else {
-            FThreads.invokeInEdtNowOrLater(() -> {
-                // getGui().message("Cannot pass priority at this time.");
-            });
         }
     }
 
@@ -2453,11 +2468,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public void alphaStrike() {
         inputProxy.alphaStrike();
-    }
-
-    @Override
-    public void resetAtEndOfTurn() {
-        // Not used by the human controller
     }
 
     // Dev Mode cheat functions
@@ -2804,7 +2814,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
             final Player player = gameCachePlayer.get(pv);
 
-            final Integer life = getGui().getInteger(localizer.getMessage("lblSetLifetoWhat"), 0);
+            final Integer life = getGui().getInteger(localizer.getMessage("lblSetLifetoWhat"), 0, Integer.MAX_VALUE, false);
             if (life == null) {
                 return;
             }
@@ -3019,7 +3029,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 f = lastAdded;
                 quantity = 1;
             } else {
-                List<CardFaceView> choices = carddb.getAllFaces().stream().map(CardFaceView::new).collect(Collectors.toList());
+                List<CardFaceView> choices = carddb.streamAllFaces().map(CardFaceView::new).collect(Collectors.toList());
                 Collections.sort(choices);
                 f = getGui().oneOrNone(localizer.getMessage("lblNameTheCard"), choices);
                 if (f != null) {
@@ -3338,42 +3348,25 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (player != null) {
             player.concede();
             getGame().getAction().checkGameOverCondition();
+            if (getGame().isGameOver()) {
+                // Remote-client controllers on the server have no FControlGameEventHandler,
+                // so their input queues won't be released by the normal event path
+                for (Player p : getGame().getPlayers()) {
+                    if (p.getController() instanceof PlayerControllerHuman pch) {
+                        pch.getInputQueue().onGameOver(true);
+                    }
+                }
+            }
         }
-    }
-
-    public boolean mayAutoPass() {
-        return getGui().mayAutoPass(getLocalPlayerView());
-    }
-
-    public void autoPassUntilEndOfTurn() {
-        getGui().autoPassUntilEndOfTurn(getLocalPlayerView());
-    }
-
-    @Override
-    public void autoPassCancel() {
-        if (getGui() == null) {
-            return;
-        }
-
-        getGui().autoPassCancel(getLocalPlayerView());
     }
 
     @Override
     public void awaitNextInput() {
         getGui().awaitNextInput();
     }
-
     @Override
     public void cancelAwaitNextInput() {
         getGui().cancelAwaitNextInput();
-    }
-
-    @Override
-    public void resetInputs() {
-        final Input inp = inputProxy.getInput();
-        if (inp != null) {
-            inp.selectButtonCancel();
-        }
     }
 
     @Override
@@ -3479,4 +3472,127 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return FModel.getPreferences().getPrefBoolean(FPref.UI_ORDER_HAND);
     }
 
+    @Override
+    public void requestResync() {
+        // No-op for local games - resync is only used for network play
+    }
+
+    public boolean isRemoteClient() {
+        return gui instanceof RemoteClientGuiGame;
+    }
+
+    public boolean mayAutoPass() {
+        return yieldController.shouldAutoYield()
+                || yieldController.isAutoPassingNoActions(getLocalPlayerView());
+    }
+
+    public void autoPassUntilEndOfTurn() {
+        yieldController.setAutoPassUntilEndOfTurn(true);
+        getGui().updateAutoPassPrompt();
+    }
+
+    @Override
+    public void autoPassCancel() {
+        if (!mayAutoPass()) {
+            return;
+        }
+        yieldController.setAutoPassUntilEndOfTurn(false);
+        PlayerView playerView = getLocalPlayerView();
+        getGui().showPromptMessage(playerView, "");
+        getGui().updateButtons(playerView, false, false, false);
+        getGui().awaitNextInput();
+    }
+
+    @Override
+    public void setShouldAutoYield(final String key, final boolean autoYield, final boolean isAbilityScope) {
+        yieldController.setShouldAutoYield(key, autoYield, isAbilityScope);
+    }
+
+    @Override
+    public void setDisableAutoYields(final boolean disable) {
+        yieldController.setDisableAutoYields(disable);
+    }
+
+    @Override
+    public void setTriggerDecision(final String key, final AutoYieldStore.TriggerDecision decision, final boolean isAbilityScope) {
+        yieldController.setTriggerDecision(key, decision, isAbilityScope);
+
+        if (!(inputQueue.getInput() instanceof InputConfirm)) return;
+        final SpellAbilityStackInstance top = getGame().getStack().peek();
+        if (top == null || !top.isTrigger()) return;
+        final String topKey = top.getSpellAbility().yieldKey();
+        if (key.equals(topKey) || key.equals(forge.player.AutoYieldStore.abilitySuffix(topKey))) {
+            if (decision == AutoYieldStore.TriggerDecision.ACCEPT) selectButtonOk();
+            else if (decision == AutoYieldStore.TriggerDecision.DECLINE) selectButtonCancel();
+        }
+    }
+
+    @Override
+    public void setDisableAutoTriggers(final boolean disable) {
+        yieldController.setDisableAutoTriggers(disable);
+    }
+
+    public boolean isUiSetToSkipPhase(final PlayerView turnPlayer, final PhaseType phase) {
+        if (isRemoteClient()) {
+            return yieldController.isSkippingPhase(turnPlayer, phase);
+        }
+        return getGui().isUiSetToSkipPhase(turnPlayer, phase);
+    }
+
+    @Override
+    public void applyYieldUpdate(final YieldUpdate update) {
+        if (yieldController.apply(update)) {
+            // Switch the cancel button + prompt to "Yielding until X" so the user can disarm.
+            // Otherwise the previous InputPassPriority "End Turn" label would persist and ESC
+            // would skip the click on the client.
+            // Skip when a forced input is active: it deliberately disables Cancel, and repainting
+            // would re-enable it as a "cancel yield" button that actually drops the input.
+            Input currentInput = inputProxy.getInput();
+            if (currentInput == null
+                    || currentInput instanceof InputPassPriority
+                    || currentInput instanceof InputLockUI) {
+                getGui().updateAutoPassPrompt();
+            }
+        }
+        tryAutoPassNow();
+    }
+
+    @Override
+    public void setYieldPref(final FPref pref, final String value) {
+        // Dialog already wrote to FModel; APINA is the only pref whose toggle can flip mayAutoPass for a sitting prompt
+        if (pref == FPref.YIELD_AUTO_PASS_NO_ACTIONS) tryAutoPassNow();
+    }
+
+    /** Re-evaluate mayAutoPass at the current prompt; click OK if it would now fire.
+     *  Same compute gating as {@link #chooseSpellAbilityToPlay} so the actions field is fresh. */
+    private void tryAutoPassNow() {
+        if (!(inputQueue.getInput() instanceof InputPassPriority)) return;
+        if (!yieldController.isYieldActive() && needsAvailableActions()) {
+            long timeoutMs = computeAvailableActionsBudgetMs(getPlayer());
+            getPlayer().getView().setHasAvailableActions(AvailableActions.compute(getPlayer(), timeoutMs));
+        }
+        if (mayAutoPass()) {
+            selectButtonOk();
+        }
+    }
+
+    /** True if yield consumer needs the synced wire field. */
+    private boolean needsAvailableActions() {
+        if (yieldController.getBoolPref(FPref.YIELD_AUTO_PASS_NO_ACTIONS)) return true;
+        if (yieldController.getDeclineScope(FPref.YIELD_DECLINE_SCOPE_NO_ACTIONS) != DeclineScope.NEVER) return true;
+        if (yieldController.getDeclineScope(FPref.YIELD_DECLINE_SCOPE_STACK_YIELD) != DeclineScope.NEVER) return true;
+        return false;
+    }
+
+    /** Pref &gt; 0 = explicit override; 0 = Dynamic = 50ms × playable cards, clamped to [50, 1500]. */
+    private long computeAvailableActionsBudgetMs(Player p) {
+        String prefStr = yieldController.getStringPref(FPref.YIELD_AVAILABLE_ACTIONS_BUDGET_MS);
+        int prefMs;
+        try { prefMs = Integer.parseInt(prefStr); } catch (NumberFormatException e) { prefMs = 0; }
+        if (prefMs > 0) return prefMs;
+        int cardCount = p.getCardsIn(ZoneType.Hand).size()
+                + p.getCardsIn(ZoneType.Battlefield).size()
+                + p.getCardsIn(ZoneType.Flashback).size();
+        return Math.min(1500L, Math.max(50L, 50L * cardCount));
+    }
 }

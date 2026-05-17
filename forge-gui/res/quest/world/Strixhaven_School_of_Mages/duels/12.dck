@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Dream
+Title=Dream
+Icon=Dream.jpg
+Difficulty=Easy
+Description=./Standard/Strixhaven_School_of_Mages/AndryRules_-_Esper_Control_(Standard,_#1145089).dck
+Deck Type=constructed
+
+[Main]
+2 Midnight Clock
+2 Saw It Coming
+2 Mystical Dispute
+2 Behold the Multiverse
+2 Heartless Act
+2 Test of Talents
+2 Disdainful Stroke
+4 Frantic Inventory
+4 Vanishing Verse
+2 Emeria's Call
+2 Go Blank
+2 Shadows' Verdict
+2 Extinction Event
+4 Shark Typhoon
+2 Ashiok, Nightmare Muse
+2 Temple of Silence
+2 Temple of Enlightenment
+2 Island
+2 Swamp
+4 Hengegate Pathway
+4 Brightclimb Pathway
+4 Clearwater Pathway
+4 Temple of Deceit
+[Sideboard]
+1 Mystical Dispute
+1 Extinction Event
+1 Kaheera, the Orphanguard
+2 Soul Shatter
+2 Duress
+2 Mazemind Tome
+2 Negate
+2 Eliminate
+2 Baneslayer Angel

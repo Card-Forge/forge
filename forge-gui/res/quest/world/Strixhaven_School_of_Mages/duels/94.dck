@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Silver Samurai
+Title=Silver Samurai
+Icon=Silver Samurai.jpg
+Difficulty=Very Hard
+Description=./Modern/Strixhaven_School_of_Mages/Edser_Matute_-_Ur_Aggro_(Modern,_#1166051)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Soul-Scar Mage
+4 Sprite Dragon
+4 Stormwing Entity
+4 Monastery Swiftspear
+2 Wild Slash
+2 Vapor Snag
+3 Opt
+3 Mutagenic Growth
+4 Lava Dart
+4 Lightning Bolt
+4 Manamorphose
+3 Expressive Iteration
+1 Wooded Foothills
+2 Steam Vents
+4 Spirebluff Canal
+4 Fiery Islet
+4 Mountain
+4 Scalding Tarn
+[Sideboard]
+1 Bedlam Reveler
+1 Cleansing Wildfire
+1 Vapor Snag
+1 Surgical Extraction
+1 Dispel
+2 Alpine Moon
+2 Soul-Guide Lantern
+2 Spell Pierce
+2 Abrade
+2 Disdainful Stroke

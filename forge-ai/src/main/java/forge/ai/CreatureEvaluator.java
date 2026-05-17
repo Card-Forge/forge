@@ -37,6 +37,8 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         int power = c.getNetCombatDamage();
         final int toughness = c.getNetToughness();
 
+        // TODO getKeyCards
+
         // TODO replace with ReplacementEffect checks
         if (c.hasKeyword("Prevent all combat damage that would be dealt by CARDNAME.")
                 || c.hasKeyword("Prevent all damage that would be dealt by CARDNAME.")

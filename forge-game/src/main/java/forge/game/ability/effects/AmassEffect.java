@@ -95,7 +95,7 @@ public class AmassEffect extends TokenEffectBase {
 
         GameEntityCounterTable table = new GameEntityCounterTable();
         tgt.addCounter(CounterEnumType.P1P1, amount, activator, table);
-        table.replaceCounterEffect(game, sa, true);
+        table.replaceCounterEffect(game, sa);
         // 01.44a If it isn’t a [subtype], it becomes a [subtype] in addition to its other types.
         if (!tgt.getType().hasCreatureType(type)) {
             final Card eff = createEffect(sa, activator, "Amass Effect", source.getImageKey());

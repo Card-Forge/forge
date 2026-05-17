@@ -1,0 +1,40 @@
+[metadata]
+Name=Sultai
+Deck Type=constructed
+Title=Sultai
+Description=Sultai
+Difficulty=Easy
+Icon=Asanbosam
+[Main]
+4 Aether Hub
+4 Blooming Marsh
+4 Botanical Sanctum
+1 Drowned Catacomb
+1 Evolving Wilds
+4 Fatal Push
+2 Fetid Pools
+1 Forest
+2 Forest
+1 Forest
+3 Glint-Sleeve Siphoner
+1 Hostage Taker
+1 Island
+3 Jadelight Ranger
+1 Liliana, Death's Majesty
+4 Merfolk Branchwalker
+2 Rishkar, Peema Renegade
+4 Swamp
+1 The Scarab God
+3 Verdurous Gearhulk
+4 Vraska's Contempt
+1 Vraska, Relic Seeker
+4 Walking Ballista
+4 Winding Constrictor
+[Sideboard]
+3 Cartouche of Ambition
+2 Deathgorge Scavenger
+2 Duress
+1 Gonti, Lord of Luxury
+2 Lifecrafter's Bestiary
+2 Moment of Craving
+3 Negate

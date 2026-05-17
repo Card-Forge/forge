@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Radagast
+Title=Radagast
+Icon=Radagast.jpg
+Difficulty=Very Hard
+Description=./Modern/Kamigawa_Neon_Dynasty/Bob49_-_UW_Blink_(Modern,_#1340995).dck
+Deck Type=constructed
+
+[Main]
+1 Spirited Companion
+1 Thraben Inspector
+2 Esper Sentinel
+3 Skyclave Apparition
+3 Flickerwisp
+4 Wall of Omens
+4 Sun Titan
+4 Solitude
+4 Ranger-Captain of Eos
+4 Charming Prince
+4 March of Otherworldly Light
+4 Ephemerate
+4 Supreme Verdict
+4 Spreading Seas
+4 Teferi, Time Raveler
+1 Idyllic Grange
+1 Arid Mesa
+2 Marsh Flats
+3 Emeria, the Sky Ruin
+3 Flooded Strand
+4 Field of Ruin
+4 Hallowed Fountain
+4 Windswept Heath
+8 Snow-Covered Plains
+[Sideboard]
+1 Yorion, Sky Nomad
+1 Martyr of Sands
+1 Giant Killer
+2 Stony Silence
+2 Remorseful Cleric
+2 Lavinia, Azorius Renegade
+3 Sanctifier en-Vec
+3 Meddling Mage

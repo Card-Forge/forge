@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Atomic Robo
+Title=Atomic Robo
+Icon=Atomic Robo.jpg
+Difficulty=Hard
+Description=./Modern/Ravnica_Allegiance/Aje8_-_Humans_(Modern,_#790498).dck
+Deck Type=constructed
+
+[Main]
+4 Champion of the Parish
+2 Deputy of Detention
+3 Kitesail Freebooter
+4 Mantis Rider
+4 Meddling Mage
+4 Noble Hierarch
+4 Phantasmal Image
+4 Reflector Mage
+4 Thalia, Guardian of Thraben
+4 Thalia's Lieutenant
+4 Aether Vial
+4 Ancient Ziggurat
+4 Cavern of Souls
+4 Horizon Canopy
+1 Plains
+2 Seachrome Coast
+4 Unclaimed Territory
+[Sideboard]
+1 Deputy of Detention
+4 Auriok Champion
+2 Damping Sphere
+2 Dismember
+2 Grafdigger's Cage
+2 Izzet Staticaster
+2 Militia Bugler

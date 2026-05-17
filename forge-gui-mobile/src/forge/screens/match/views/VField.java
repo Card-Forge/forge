@@ -9,11 +9,13 @@ import forge.game.player.PlayerView;
 import forge.gui.FThreads;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
+import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
 import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
+import forge.util.collect.FCollectionView;
 
 public class VField extends FContainer {
     private final PlayerView player;
@@ -62,10 +64,12 @@ public class VField extends FContainer {
         public void run() {
             clear();
 
-            Iterable<CardView> model = player.getBattlefield();
-            if (model == null) {
+            FCollectionView<CardView> battlefield = player.getBattlefield();
+            if (battlefield == null) {
                 return;
             }
+            Iterable<CardView> model = MatchController.instance.isNetGame()
+                    ? battlefield.threadSafeIterable() : battlefield;
 
             for (CardView card : model) {
                 CardAreaPanel cardPanel = CardAreaPanel.get(card);

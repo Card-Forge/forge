@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Kraj
+Title=Kraj
+Icon=Kraj.jpg
+Difficulty=Medium
+Description=./Standard/Bloomburrow/Abe_Kenichi_-_WR_Control_(Standard,_#2162464).dck
+Deck Type=constructed
+
+[Main]
+4 Urabrask's Forge
+4 Carrot Cake
+4 Lightning Helix
+3 Virtue of Loyalty
+4 Torch the Tower
+3 Get Lost
+4 Sunfall
+2 Temporary Lockdown
+4 Caretaker's Talent
+2 Archangel Elspeth
+4 Plains
+1 Mountain
+4 Inspiring Vantage
+3 Battlefield Forge
+3 Demolition Field
+1 Mirrex
+1 Restless Bivouac
+4 Sunken Citadel
+2 Elegant Parlor
+3 Fountainport
+[Sideboard]
+2 Abrade
+2 Rest in Peace
+2 Destroy Evil
+2 Serra Paragon
+1 Temporary Lockdown
+2 Loran of the Third Path
+1 Brotherhood's End
+1 Bonehoard Dracosaur
+2 Beza, the Bounding Spring

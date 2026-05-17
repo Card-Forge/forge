@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=White Knight
+Title=White Knight
+Icon=White Knight.jpg
+Difficulty=Easy
+Description=Mirrodin_Besieged/2011_TopDeckOpen_$2K_TCQ_-_3-12/CortAyers_-_Valakut_Ramp_(Standard,_#11267).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Avenger of Zendikar
+1 Oracle of Mul Daya
+4 Overgrown Battlement
+4 Primeval Titan
+4 Harrow
+4 Lightning Bolt
+2 Summoning Trap
+2 Cultivate
+4 Explore
+2 Green Sun's Zenith
+2 Slagstorm
+3 Khalni Heart Expedition
+1 Evolving Wilds
+8 Forest
+12 Mountain
+4 Valakut, the Molten Pinnacle
+1 Verdant Catacombs
+[Sideboard]
+2 Acidic Slime
+2 Gaea's Revenge
+3 Nature's Claim
+2 Obstinate Baloth
+3 Pyroclasm
+1 Ulamog, the Infinite Gyre

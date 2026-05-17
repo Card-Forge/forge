@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="73">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="74">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -20,7 +20,7 @@
  </layer>
  <layer id="6" name="Clutter" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFIFDNC6F1dQfWHTAgA8RVvMSrN+GDYGqAXdQxBgz6dahoGBqIo5I5NUjhLMbCwCCOhCVYsOsx5kOEuSkf+f78AaUv8UNoaQLqLwLtugTFl5Himxz7GQnIb8bh90BW0u0iBLYghfknHOa/p4K9sPjdBvUbsl9+EqH/B5obHLCoeYQnYD+w4vcjPjv3YLEfH6hDSteg8o1QfBPrDhibkFtIKb9w2YduJ7o7YHbA/LaTMivxugUZMKLR9ALUshcAE/YkqQ==
+   eJxjYBgFIFDNC6F1dQfWHTAgA8RVvMSrN+GDYGqAXdQxBgz6dahoGBqIo5I54kA3SkDdKcYC5CNhCRbseoz5EGFuykeeP42Bekyg+q5D0500AT0XgXZdguLLSPFNjv2MBOQ34/B7ICvpdhECW5DC/BMO899TwV5Y/G6D+g3ZLz+J0P8DzQ0OWNQ8whOwH1jx+xGfnXuw2I8P1CGVH6DyjVB8E+sOGJuQW0gpv3DZh24nujtgdsD8tpMyK/G6BRkwotH0AtSyFwCmQiSR
   </data>
  </layer>
  <layer id="3" name="Foreground" width="30" height="17">
@@ -28,7 +28,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzNlUtOw0AMhp0Fk24alPQUrECiwIKKJSDYsgdxAA7R8lryUHmIh8SBKtFyBVQeJ0AICrbGJu50JgjIgl/61WQmnc927QagWC9j3zzwR7UNQCMe5URlnF0FOGGfVkeZrh5xvYXrT+Z3DPEZup5Ynyu2zlNY5G2OpRkX8yPl6SRnkNcmrPXaTMJfNDmTWBH43WR2aB8c7hy6x571cKXGfeZfZQDrqfVGOnwuqaX4roh7mNkc5Xy3DrQuTNrb51zfkPXO/mD+debPXXRQsZ9dleOdw6VYKKavOjv10twQn3SP3N64J2nUpOrTyBOP9BPtPZswVzxIc+6OMwNTeH9srLcqw1yfiE17febO1wAuMK/NAq5maJav19qe2dUx7eJZyya/F752o2b3OvjsQ6C3wbmW31b/rq6EHZoVyZVy883VAGv3qkwz2nX6rIi9ZIZNsRxxPW+57xfxes+Z90snjpvAvGkVvQMollWT13iFmVqUa12tLcT+/9+fSnLoxOW8L/47V9hlcD8BTzl45Q==
+   eJzNlUtOw0AMhp0Fk24aKekpWCCQKLCgYgkItuxBHIBD9AEseag8xEPiQJUoLLgAKo8TIASFscYmnulMEJAFv/SryUw6n+3aDUCxXsa+eeCP6iqARjzKico4uwpwRD6ujjJdPer1ll5/Ur9jsE+064nxqWDLPJmFblMszbiYHwlPJzkDvTZuLNdmEvqiypnIisDvJrFD++Bw57RvyLMeLtd4QPyLDGA9Nd5I7XNRLcF3hdz9zOTI57t1wHVm4t4u5fqmWe/kD+JfZnZudxN23fcq5rMvcrx1uBgLxvRVZ6dekhvio+6V4fs0Kfo08sTD/YR7zyrMZQ/TnNuJbe6Uvj9UxlsVm+sTsnFvQNz5GsCZzmuzgCsZkuXrta5ndmVM2/qsZZXfM1+6UTN7Pf3sQ6C3wbnm31b+rq6YHZoVzhVz883VUNfuVRhntO/0WRF7SdnGWA6ontfU94v6eseZ93MnjqvAvEkVvQMwllWV13iFmFKYa12sLcT+/9+finPoxeW8L/47l9llcD8BUbF6hw==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -82,7 +82,7 @@
 ]</property>
    </properties>
   </object>
-  <object id="55" template="../../../../common/maps/obj/enemy.tx" x="158.688" y="197.246">
+  <object id="55" template="../../../../common/maps/obj/enemy.tx" x="82.688" y="182.746">
    <properties>
     <property name="enemy" value="Nogi"/>
     <property name="threatRange" type="int" value="0"/>
@@ -109,7 +109,7 @@
   <object id="61" template="../../../../common/maps/obj/collision.tx" x="-1.33275" y="-16.8734" width="480.943" height="16"/>
   <object id="62" template="../../../../common/maps/obj/collision.tx" x="-15.6903" y="-0.236625" width="16" height="272"/>
   <object id="63" template="../../../../common/maps/obj/collision.tx" x="479.447" y="-1.41975" width="16" height="272"/>
-  <object id="64" template="../../../../common/maps/obj/enemy.tx" x="212.948" y="118.89">
+  <object id="64" template="../../../../common/maps/obj/enemy.tx" x="139.073" y="196.89">
    <properties>
     <property name="enemy" value="Rosnakht"/>
     <property name="threatRange" type="int" value="0"/>
@@ -158,6 +158,14 @@ POPULATION: 2 to 24 million, depending on how hungry Prossh has been lately.&quo
   <object id="72" template="../../../../common/maps/obj/scroll.tx" x="378" y="96">
    <properties>
     <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Kher Keep&quot;, &quot;editions&quot;: [ &quot;ONC&quot; ], &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="73" template="../../../../common/maps/obj/shop.tx" x="208" y="135">
+   <properties>
+    <property name="commonShopList" value="Dragon"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
    </properties>
   </object>
  </objectgroup>

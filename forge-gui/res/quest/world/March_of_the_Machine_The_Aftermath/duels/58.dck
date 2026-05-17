@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Sly Cooper
+Title=Sly Cooper
+Icon=Sly Cooper.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine_The_Aftermath/BigD_1992_-_Jund_Scam_(Modern,_#1651831).dck
+Deck Type=constructed
+
+[Main]
+3 Seasoned Pyromancer
+4 Grief
+4 Fury
+4 Ragavan, Nimble Pilferer
+1 Seasoned Pyromancer
+3 Nissa, Resurgent Animist
+2 Terminate
+2 Terminate
+3 Lightning Bolt
+3 Feign Death
+3 Undying Malice
+3 Thoughtseize
+1 Thoughtseize
+4 Wrenn and Six
+4 Bloodstained Mire
+1 Overgrown Tomb
+4 Verdant Catacombs
+2 Blackcleave Cliffs
+1 Mountain
+1 Wooded Foothills
+2 Swamp
+3 Blood Crypt
+1 Stomping Ground
+1 Boseiju, Who Endures
+[Sideboard]
+2 Chalice of the Void
+4 Leyline of the Void
+3 Engineered Explosives
+3 Blood Moon
+1 Kolaghan's Command
+2 Collective Brutality

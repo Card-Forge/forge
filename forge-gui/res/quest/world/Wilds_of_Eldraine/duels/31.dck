@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=KingKong
+Title=KingKong
+Icon=KingKong.jpg
+Difficulty=Easy
+Description=./Standard/Wilds_of_Eldraine/420dragon_-_Jund_Adventures_(Standard,_#1745941).dck
+Deck Type=constructed
+
+[Main]
+2 Bloodtithe Harvester
+2 Sheoldred, the Apocalypse
+4 Decadent Dragon
+4 Mosswood Dreadknight
+4 Questing Druid
+4 Go for the Throat
+2 Cut Down
+1 Duress
+1 Duress
+1 Light Up the Night
+3 Virtue of Persistence
+1 Liliana of the Veil
+3 Liliana of the Veil
+2 Chandra, Hope's Beacon
+1 Karplusan Forest
+2 Sulfurous Springs
+2 Llanowar Wastes
+1 Swamp
+3 Blackcleave Cliffs
+4 Copperline Gorge
+2 Haunted Ridge
+3 Deathcap Glade
+4 Ziatora's Proving Ground
+4 Restless Cottage
+[Sideboard]
+2 Duress
+2 Choking Miasma
+2 Cut Down
+3 Tear Asunder
+2 Razorlash Transmogrant
+3 Lithomantic Barrage
+1 Virtue of Persistence

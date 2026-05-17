@@ -16,3 +16,4 @@ ScryfallCode=PSPL
 8 R Vendilion Clique @Jason A. Engle
 9 M Super Shredder @Chris Seaman
 10 M Liliana Vess @Justyna Dura
+11 R Riddles in the Dark @Tomas Duchek

@@ -5,21 +5,28 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 
-import com.google.common.primitives.Ints;
 
 import forge.control.KeyboardShortcuts;
+import forge.gamemodes.match.YieldController;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.menus.MenuUtil;
 import forge.model.FModel;
 import forge.screens.match.CMatchUI;
-import forge.screens.match.VAutoYields;
+import forge.screens.match.VAutoYieldsAndTriggers;
+import forge.screens.match.VYieldSettings;
+import forge.screens.match.views.VField;
 import forge.screens.match.controllers.CDock.ArcState;
 import forge.toolbox.FSkin.SkinIcon;
+import forge.toolbox.FSkin.SkinnedCheckBoxMenuItem;
 import forge.toolbox.FSkin.SkinnedMenu;
 import forge.toolbox.FSkin.SkinnedMenuItem;
 import forge.toolbox.FSkin.SkinnedRadioButtonMenuItem;
@@ -50,9 +57,22 @@ public final class GameMenu {
         menu.addSeparator();
         menu.add(getMenuItem_TargetingArcs());
         menu.add(new CardOverlaysMenu(matchUI).getMenu());
-        menu.add(getMenuItem_AutoYields());
+        menu.add(getSubmenu_StackGroupPermanents());
+        menu.add(getMenuItem_TokensSeparateRow());
+        menu.add(getMenuItem_SeparateCombatStacks());
+        menu.add(getMenuItem_AutoYieldsAndTriggers());
+        menu.add(getMenuItem_YieldSettings());
+        final SkinnedCheckBoxMenuItem autoPassItem = getMenuItem_AutoPass();
+        menu.add(autoPassItem);
         menu.addSeparator();
         menu.add(getMenuItem_ViewDeckList());
+        menu.addMenuListener(new MenuListener() {
+            @Override public void menuSelected(final MenuEvent e) {
+                autoPassItem.setState(prefs.getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS));
+            }
+            @Override public void menuDeselected(final MenuEvent e) {}
+            @Override public void menuCanceled(final MenuEvent e) {}
+        });
         return menu;
     }
 
@@ -103,11 +123,11 @@ public final class GameMenu {
     }
 
     private ActionListener getEndTurnAction() {
-        return e -> matchUI.getGameController().passPriorityUntilEndOfTurn();
+        return e -> YieldController.endTurn(matchUI.getGameController(), matchUI.getCurrentPlayer());
     }
 
     /** Sets a menu item's accelerator display from a shortcut preference. */
-    private static void setAcceleratorFromPref(final SkinnedMenuItem menuItem, final FPref pref) {
+    private static void setAcceleratorFromPref(final JMenuItem menuItem, final FPref pref) {
         final KeyStroke ks = KeyboardShortcuts.getKeyStrokeForPref(pref);
         if (ks != null) {
             menuItem.setAccelerator(ks);
@@ -121,19 +141,13 @@ public final class GameMenu {
 
         SkinIcon menuIcon = MenuUtil.getMenuIcon(FSkinProp.ICO_ARCSOFF);
 
-        if (matchUI.getCDock().getArcState() == null) {
-            final String arcStateStr = FModel.getPreferences().getPref(FPref.UI_TARGETING_OVERLAY);
-            final Integer arcState = Ints.tryParse(arcStateStr);
-            matchUI.getCDock().setArcState(ArcState.values()[arcState == null ? 0 : arcState]);
-        }
-
         SkinnedRadioButtonMenuItem menuItem;
         menuItem = getTargetingArcRadioButton(localizer.getMessage("lblOff"), FSkinProp.ICO_ARCSOFF, ArcState.OFF);
         if (menuItem.isSelected()) { menuIcon = MenuUtil.getMenuIcon(FSkinProp.ICO_ARCSOFF); }
         group.add(menuItem);
         menu.add(menuItem);
-        menuItem = getTargetingArcRadioButton(localizer.getMessage("lblCardMouseOver"), FSkinProp.ICO_ARCSHOVER, ArcState.MOUSEOVER);
-        if (menuItem.isSelected()) { menuIcon = MenuUtil.getMenuIcon(FSkinProp.ICO_ARCSHOVER); }
+        menuItem = getTargetingArcRadioButton(localizer.getMessage("lblCardMouseOver"), FSkinProp.ICO_ARCSOFF, ArcState.MOUSEOVER);
+        if (menuItem.isSelected()) { menuIcon = MenuUtil.getMenuIcon(FSkinProp.ICO_ARCSOFF); }
         group.add(menuItem);
         menu.add(menuItem);
         menuItem = getTargetingArcRadioButton(localizer.getMessage("lblAlwaysOn"), FSkinProp.ICO_ARCSON, ArcState.ON);
@@ -158,7 +172,7 @@ public final class GameMenu {
         return e -> {
             prefs.setPref(FPref.UI_TARGETING_OVERLAY, String.valueOf(arcState.ordinal()));
             prefs.save();
-            matchUI.getCDock().setArcState(arcState);
+            matchUI.getCDock().refresh();
             setTargetingArcMenuIcon((SkinnedRadioButtonMenuItem)e.getSource());
         };
     }
@@ -169,19 +183,33 @@ public final class GameMenu {
         menu.setIcon(item.getIcon());
     }
 
-    private SkinnedMenuItem getMenuItem_AutoYields() {
+    private SkinnedMenuItem getMenuItem_AutoYieldsAndTriggers() {
         final Localizer localizer = Localizer.getInstance();
-        final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblAutoYields"));
+        final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblAutoYieldsAndTriggers"));
         menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_WARNING) : null));
-        menuItem.addActionListener(getAutoYieldsAction());
+        menuItem.addActionListener(e -> new VAutoYieldsAndTriggers(matchUI).showDialog());
         return menuItem;
     }
 
-    private ActionListener getAutoYieldsAction() {
-        return e -> {
-            final VAutoYields autoYields = new VAutoYields(matchUI);
-            autoYields.showAutoYields();
-        };
+    private SkinnedMenuItem getMenuItem_YieldSettings() {
+        final Localizer localizer = Localizer.getInstance();
+        final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblYieldSettings"));
+        menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_SETTINGS) : null));
+        menuItem.addActionListener(e -> new VYieldSettings(matchUI).showDialog());
+        return menuItem;
+    }
+
+    private SkinnedCheckBoxMenuItem getMenuItem_AutoPass() {
+        final Localizer localizer = Localizer.getInstance();
+        final SkinnedCheckBoxMenuItem menuItem = new SkinnedCheckBoxMenuItem(localizer.getMessage("lblEnableAutoPass"));
+        setAcceleratorFromPref(menuItem, FPref.SHORTCUT_YIELD_AUTO_PASS);
+        menuItem.setState(prefs.getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS));
+        menuItem.addActionListener(e -> {
+            YieldController.toggleAutoPassNoActions(matchUI.getGameController());
+            matchUI.getCDock().refresh();
+            menuItem.setState(prefs.getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS));
+        });
+        return menuItem;
     }
 
     private SkinnedMenuItem getMenuItem_ViewDeckList() {
@@ -194,5 +222,73 @@ public final class GameMenu {
 
     private ActionListener getViewDeckListAction() {
         return e -> matchUI.viewDeckList();
+    }
+
+    private SkinnedMenu getSubmenu_StackGroupPermanents() {
+        final Localizer localizer = Localizer.getInstance();
+        final SkinnedMenu submenu = new SkinnedMenu(localizer.getMessage("cbpStackGroupPermanents"));
+        final ButtonGroup group = new ButtonGroup();
+        final String current = prefs.getPref(FPref.UI_GROUP_PERMANENTS);
+
+        final String[] keys = {"default", "stack", "group_creatures", "group_all"};
+        final String[] labelKeys = {"lblGroupDefault", "lblGroupStack", "lblGroupCreatures", "lblGroupAll"};
+        final String[] tooltipKeys = {"nlGroupDefault", "nlGroupStack", "nlGroupCreatures", "nlGroupAll"};
+        for (int i = 0; i < keys.length; i++) {
+            SkinnedRadioButtonMenuItem item = new SkinnedRadioButtonMenuItem(localizer.getMessage(labelKeys[i]));
+            item.setToolTipText(localizer.getMessage(tooltipKeys[i]));
+            item.setSelected(keys[i].equals(current));
+            item.addActionListener(getGroupPermanentsAction(keys[i]));
+            group.add(item);
+            submenu.add(item);
+        }
+        return submenu;
+    }
+
+    private SkinnedCheckBoxMenuItem getMenuItem_TokensSeparateRow() {
+        final Localizer localizer = Localizer.getInstance();
+        SkinnedCheckBoxMenuItem menuItem = new SkinnedCheckBoxMenuItem(localizer.getMessage("cbpTokensSeparateRow"));
+        menuItem.setToolTipText(localizer.getMessage("nlTokensSeparateRow"));
+        menuItem.setState(prefs.getPrefBoolean(FPref.UI_TOKENS_IN_SEPARATE_ROW));
+        menuItem.addActionListener(e -> {
+            final boolean enabled = !prefs.getPrefBoolean(FPref.UI_TOKENS_IN_SEPARATE_ROW);
+            prefs.setPref(FPref.UI_TOKENS_IN_SEPARATE_ROW, enabled);
+            prefs.save();
+            SwingUtilities.invokeLater(() -> {
+                for (final VField f : matchUI.getFieldViews()) {
+                    f.getTabletop().doLayout();
+                }
+            });
+        });
+        return menuItem;
+    }
+
+    private SkinnedCheckBoxMenuItem getMenuItem_SeparateCombatStacks() {
+        final Localizer localizer = Localizer.getInstance();
+        SkinnedCheckBoxMenuItem menuItem = new SkinnedCheckBoxMenuItem(localizer.getMessage("cbSeparateCombatStacks"));
+        menuItem.setToolTipText(localizer.getMessage("nlSeparateCombatStacks"));
+        menuItem.setState(prefs.getPrefBoolean(FPref.UI_SEPARATE_COMBAT_STACKS));
+        menuItem.addActionListener(e -> {
+            final boolean enabled = !prefs.getPrefBoolean(FPref.UI_SEPARATE_COMBAT_STACKS);
+            prefs.setPref(FPref.UI_SEPARATE_COMBAT_STACKS, enabled);
+            prefs.save();
+            SwingUtilities.invokeLater(() -> {
+                for (final VField f : matchUI.getFieldViews()) {
+                    f.getTabletop().doLayout();
+                }
+            });
+        });
+        return menuItem;
+    }
+
+    private ActionListener getGroupPermanentsAction(final String value) {
+        return e -> {
+            prefs.setPref(FPref.UI_GROUP_PERMANENTS, value);
+            prefs.save();
+            SwingUtilities.invokeLater(() -> {
+                for (final VField f : matchUI.getFieldViews()) {
+                    f.getTabletop().doLayout();
+                }
+            });
+        };
     }
 }

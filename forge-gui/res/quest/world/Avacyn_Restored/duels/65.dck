@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Dream
+Title=Dream
+Icon=Dream.jpg
+Difficulty=Hard
+Description=../Modern/Avacyn_Restored/SCG_Invitational_Qualifier_San_Diego/John_Rians_-_Infect_(Modern,_#87275).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blighted Agent
+1 Dryad Arbor
+4 Glistener Elf
+2 Ichorclaw Myr
+4 Noble Hierarch
+4 Apostle's Blessing
+4 Groundswell
+4 Might of Old Krosa
+4 Mutagenic Growth
+4 Vines of Vastwood
+1 Distortion Strike
+3 Rancor
+2 Wild Defiance
+2 Breeding Pool
+2 Forest
+4 Inkmoth Nexus
+1 Island
+4 Misty Rainforest
+2 Pendelhaven
+4 Verdant Catacombs
+[Sideboard]
+2 Dismember
+2 Dispel
+2 Grafdigger's Cage
+2 Nature's Claim
+2 Pithing Needle
+2 Spell Pierce
+2 Spellskite
+1 Torpor Orb

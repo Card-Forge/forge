@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Professor X
+Title=Professor X
+Icon=Professor X.jpg
+Difficulty=Very Hard
+Description=./Modern/Lorwyn_Eclipsed/Gabriele_Del_tempora_-_Golgari_Yawgmoth_(Modern,_#2793508).dck
+Deck Type=constructed
+
+[Main]
+4 Badgermole Cub
+4 Delighted Halfling
+4 Young Wolf
+3 Yawgmoth, Thran Physician
+2 Formidable Speaker
+2 Icetill Explorer
+2 Walking Ballista
+1 Endurance
+4 Agatha's Soul Cauldron
+2 Fatal Push
+3 Green Sun's Zenith
+2 Malevolent Rumble
+4 Dredger's Insight
+1 Grist, the Hunger Tide
+1 Dryad Arbor
+4 Verdant Catacombs
+3 Overgrown Tomb
+3 Windswept Heath
+2 Boseiju, Who Endures
+2 Forest
+2 Shifting Woodland
+2 Spymaster's Vault
+1 Ghost Quarter
+1 Swamp
+1 Underground Mortuary
+[Sideboard]
+3 Force of Vigor
+3 Thoughtseize
+2 Binding the Old Gods
+2 Vexing Bauble
+1 Abrupt Decay
+1 Culling Ritual
+1 Endurance
+1 Fatal Push
+1 Ghost Quarter

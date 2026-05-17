@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Galadriel
+Title=Galadriel
+Icon=Galadriel.jpg
+Difficulty=Hard
+Description=./Modern/Strixhaven_School_of_Mages/GrandDrou_-_Izzet_Spells_(Modern,_#1153883)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Soul-Scar Mage
+4 Sprite Dragon
+4 Stormwing Entity
+4 Monastery Swiftspear
+1 Burst Lightning
+2 Vapor Snag
+3 Mutagenic Growth
+3 Opt
+4 Lava Dart
+4 Lightning Bolt
+4 Manamorphose
+4 Expressive Iteration
+2 Steam Vents
+2 Scalding Tarn
+3 Bloodstained Mire
+4 Spirebluff Canal
+4 Mountain
+4 Fiery Islet
+[Sideboard]
+1 Dispel
+1 Bedlam Reveler
+2 Spell Pierce
+2 Abrade
+2 Dragon's Claw
+2 Kozilek's Return
+2 Soul-Guide Lantern
+3 Cleansing Wildfire

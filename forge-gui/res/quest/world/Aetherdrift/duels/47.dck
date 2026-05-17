@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=King Kong
+Title=King Kong
+Icon=King Kong.jpg
+Difficulty=Medium
+Description=./Standard/Aetherdrift/Sasaki_Takashi_-_BR_Midrange_(Standard,_#2381866).dck
+Deck Type=constructed
+
+[Main]
+2 Phyrexian Fleshgorger
+2 Cityscape Leveler
+4 Charming Scoundrel
+4 Daretti, Rocketeer Engineer
+1 The Mightstone and Weakstone
+3 Portal to Phyrexia
+3 Mephitic Draught
+3 Tithing Blade
+3 Legion Extruder
+2 Chainsaw
+3 Demonic Junker
+3 Grim Bauble
+3 Fanatical Offering
+5 Swamp
+4 Mountain
+4 Temple of Malice
+4 Raucous Theater
+3 Fomori Vault
+4 Blazemire Verge
+[Sideboard]
+4 Abrade
+2 Immersturm Predator
+1 Cityscape Leveler
+4 Withering Torment
+3 Ghost Vacuum
+1 Grim Bauble

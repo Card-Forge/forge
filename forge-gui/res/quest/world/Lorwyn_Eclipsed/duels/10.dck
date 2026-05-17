@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Bamm Bamm Rubble
+Title=Bamm Bamm Rubble
+Icon=Bamm Bamm Rubble.jpg
+Difficulty=Medium
+Description=./Standard/Lorwyn_Eclipsed/Bisman_Walia_-_Gruul_Midrange_(Standard,_#2785171).dck
+Deck Type=constructed
+
+[Main]
+4 Ashling, Rekindled
+4 Llanowar Elves
+4 Ouroboroid
+4 Stingerback Terror
+4 Vibrance
+3 Bedrock Tortoise
+3 Great Divide Guide
+2 Molt Tender
+4 Burst Lightning
+4 Soul Immolation
+4 Breeding Pool
+4 Riverpyre Verge
+4 Starting Town
+4 Stomping Ground
+2 Botanical Sanctum
+1 Balamb Garden, SeeD Academy
+1 Cavern of Souls
+1 Cori Mountain Monastery
+1 Forest
+1 Pit of Offerings
+1 Spirebluff Canal
+[Sideboard]
+4 Wistfulness
+2 Ghost Vacuum
+2 Oko, Lorwyn Liege
+2 Pyroclasm
+1 Adventurer's Inn
+1 Mistrise Village
+1 Sab-Sunen, Luxa Embodied
+1 Sanar, Innovative First-Year
+1 Soul-Guide Lantern

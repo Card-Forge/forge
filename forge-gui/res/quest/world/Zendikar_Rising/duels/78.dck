@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Spock
+Title=Spock
+Icon=Spock.jpg
+Difficulty=Hard
+Description=./Modern/Zendikar_Rising/ACG88_-_Burn_(Modern,_#1079795).dck
+Deck Type=constructed
+
+[Main]
+4 Goblin Guide
+4 Monastery Swiftspear
+4 Eidolon of the Great Revel
+1 Shard Volley
+3 Skullcrack
+3 Searing Blaze
+3 Lightning Helix
+4 Boros Charm
+4 Lightning Bolt
+4 Lava Spike
+4 Rift Bolt
+4 Skewer the Critics
+2 Sacred Foundry
+3 Mountain
+3 Wooded Foothills
+3 Bloodstained Mire
+4 Sunbaked Canyon
+4 Inspiring Vantage
+[Sideboard]
+1 Skullcrack
+1 Searing Blood
+2 Roiling Vortex
+2 Rest in Peace
+3 Smash to Smithereens
+3 Kor Firewalker
+3 Path to Exile

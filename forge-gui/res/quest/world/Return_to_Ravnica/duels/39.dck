@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Dino
+Title=Dino
+Icon=Dino.jpg
+Difficulty=Easy
+Description=Return_to_Ravnica/2012_States_-_Vermont/HaleBronson_-_Rakdos_Aggro_(Standard,_#38823).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Diregraf Ghoul
+4 Falkenrath Aristocrat
+4 Geralf's Messenger
+4 Gravecrawler
+4 Rakdos Cackler
+2 Brimstone Volley
+2 Ultimate Price
+2 Bonfire of the Damned
+2 Dreadbore
+2 Flames of the Firebrand
+2 Pillar of Flame
+4 Sign in Blood
+2 Dead Weight
+4 Blood Crypt
+3 Cavern of Souls
+4 Dragonskull Summit
+12 Swamp
+[Sideboard]
+2 Blood Artist
+2 Liliana of the Veil
+3 Pithing Needle
+3 Rakdos Charm
+2 Rakdos Keyrune
+1 Rakdos, Lord of Riots
+1 Underworld Connections
+1 Zealous Conscripts

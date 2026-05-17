@@ -3,11 +3,11 @@ package forge.adventure.data;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Array;
 import forge.Forge;
-import forge.StaticData;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.scene.RewardScene;
 import forge.adventure.util.AdventureEventController;
+import forge.adventure.util.AdventureOverrides;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.adventure.util.Reward;
@@ -146,7 +146,7 @@ public class AdventureEventData implements Serializable {
 
     public CardBlock getCardBlock() {
         if (cardBlock == null) {
-            cardBlock = FModel.getBlocks().get(cardBlockName);
+            cardBlock = AdventureOverrides.instance().getBlock(cardBlockName);
         }
         return cardBlock;
     }
@@ -249,7 +249,7 @@ public class AdventureEventData implements Serializable {
 
     public static List<CardBlock> getValidDraftBlocks(List<CardEdition> validEditions) {
         List<CardBlock> legalBlocks = new ArrayList<>();
-        for (CardBlock b : FModel.getBlocks()) { // for each block
+        for (CardBlock b : AdventureOverrides.instance().allBlocks()) { // for each block
             if (b.getSets().isEmpty() || (b.getCntBoostersDraft() < 1))
                 continue;
             if (!isValidDraftBlock(b, validEditions))
@@ -277,7 +277,7 @@ public class AdventureEventData implements Serializable {
     }
 
     private static CardBlock pickJumpstartCardBlock() {
-        Iterable<CardBlock> src = FModel.getBlocks(); //all blocks
+        Iterable<CardBlock> src = AdventureOverrides.instance().allBlocks(); //all blocks
         List<CardBlock> legalBlocks = new ArrayList<>();
         ConfigData configData = Config.instance().getConfigData();
         if (configData.allowedJumpstart != null) {
@@ -332,7 +332,7 @@ public class AdventureEventData implements Serializable {
                 if (isMetaSet) {
                     booster = cardBlock.getBooster(setCode);
                 } else {
-                    SealedTemplate template = StaticData.instance().getBoosters().get(setCode);
+                    SealedTemplate template = AdventureOverrides.instance().getBoosterTemplate(setCode);
                     if (template == null) continue;
                     booster = new UnOpenedProduct(template);
                 }
@@ -370,7 +370,7 @@ public class AdventureEventData implements Serializable {
                     if (isMetaSet) {
                         booster = cardBlock.getBooster(setCode);
                     } else {
-                        SealedTemplate template = StaticData.instance().getBoosters().get(setCode);
+                        SealedTemplate template = AdventureOverrides.instance().getBoosterTemplate(setCode);
                         if (template == null) continue;
                         booster = new UnOpenedProduct(template);
                     }

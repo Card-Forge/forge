@@ -13,7 +13,8 @@ public class ChatMessage {
 
     public enum MessageType {
         PLAYER,   // Regular player chat message
-        SYSTEM    // System notification (displayed in blue)
+        SYSTEM,   // System notification (displayed in blue)
+        WARNING   // Significant server warning (displayed in amber)
     }
 
     private final String source, message, timestamp;
@@ -39,10 +40,6 @@ public class ChatMessage {
 
     public boolean isLocal() {
         return source == null || source.equals(prefs.getPref(FPref.PLAYER_NAME));
-    }
-
-    public boolean isSystemMessage() {
-        return type == MessageType.SYSTEM;
     }
 
     public MessageType getType() {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="110">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="111">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -18,7 +18,7 @@
  </layer>
  <layer id="6" name="Ground2" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJztV0tOwzAQNWLlpOkVCruSJUeoaBHdc4Ryj5YTcAdK0zuw4rvlAqBShR03YINH6ZCpZcf2BLVVlSc92bHczOs8j+0I0aBBg33BbSLEdEu8S9z6em0hBoqfG2Zf8aztpw/mjVIeEQ9SiEfFJ8VnxRfFV2kf7wXquz+szxCE6lse8AjYlD6MY9Niyxn235XfH2l1PJO+q4rf4LxJXHAQlfQdC+VXFJ6/SPIZK0qPefC/oD1uheurU79zFfM6dseakDm6PpvHdB63bkHfTPL1DVO7xrr5Q31182fDX32kJXW48jdWcftqzeekBnKNWFu2+hg6/K2z/kCfqT6OWut9fObUhw0+Z4avvyFx9Xk03k9SMJPFGLQ66XyTv7rPtM/Z/zBeJss92EWs2Q7xTt8Lqa/4zPHX5p8pd0Cbp/r4W9fchuq7kQV9gZ7qXp5H63vhd9fchuo7jQoC0D+A7W4yJz5S/7A+L0/84vrqQ025dgeg4/QZ8hRas1x9WVKuY9OeZRqPV2ca9/tllvjpWwR+N+RwV2yXZ+5iNcb5Bll66KO4SNfbKkB92PzV3+PzvlBtI8c7x3H1neU/tXFQlb9dAOfM3SRc/m4bvnfmbWHX119ndQ9p0GCf8AvMX0zS
+   eJztV0tOwzAQNWLlpMkVCruSJUeoaBHdc4Ryj5YTcAdK2zuwofy2XABUqrDjBmzwKB0ytezEnqCmqvKkJyeW63md53FsIRo0aLAvuI2EmNTEu6hcXzcWoq/4uWX2FM9iN30wbpjwiFhIIR4VnxSfFV8UX6W9v+up7/6wOn3gq291wCNgW/owjk2LLWf4/K78/kiK45n0XRX8BseNw4z9IKdrny+/Av/8BZLPUFE6jIP/Be1xy19flfqdq5jXYXmsMRmj67N5TMdx6xb0TSVf3yCxa6yaP9RXNX82/NVHklNHWf5GKm5PrfmU1ECqEWvLVh+DEn+rrD/QZ6qPo9bmM75z6uNBxVowcgdw9dcU13Uc3Vt/oowzmWmAVifVZ/JX95k+c/Y/3Hd9iDXbJt7peyH1Fd85/tr8M+UOaPNU73/rmFtffTcyoyvQU93L82BzL/zumFtffadBRgD6B7CdTebER+of1ufliVtcV32oKdXOALSfvkOefGuWq28W5evYtGeZ+sP1N417f5lGbvqWnveGFM6Kcf7NXa77OHeQlYM+iotksy0C1IfNX30el/l8tQ1L5hyFxWeW/9TGQVH+dgGcb+42UeZv3XA9M9eFXV9/7fU5pEGDfcIviJZOsg==
   </data>
  </layer>
  <layer id="3" name="Walls" width="40" height="40">
@@ -26,12 +26,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMAqoB45rMTCc0EIVe6jJwPBIE1XsIpB/CYgbtSCYXuAx0K4nQHxbByH2F+iOf5qoYm+B/HdQMWLcBzMXBr4D9f7QxK1+FIyC4QqQ0z4x7FEwMEBbjzDGBugVv8zA8pRFCzsfXW4UDA3wHJgmXhCRLvClP1qBiZy40xi+tDgKEGApL2kYBpaQqA9dPy2AjACCLSeAW90oGAWjYBSMglEwCoYGAABJIEN1
+   eJxjYBgFo2AUjIJRMAqoB45rMTCc0EIVe6jJwPBIE1XsIpB/CYgbtSCYXuAx0K4nQHxbByH2F+iOf5qoYm+B/HdQMWLcBzMXBr4D9f7QxK1+FIyC4QqQ0z4x7FFAf/BZl4HhCxBr6+HH2AA94hdU7oLcxwwsU1mg5Sou9igYOuA5ME28ICJd4Et/tAITOYlPb6PpDztYyksahoElJOpD108LICOAYMsJ4FY3CkbBKBgFo2AUjIKhAQC5iEeF
   </data>
  </layer>
  <layer id="5" name="Overlay" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJztlksKwjAQhkdcueoxQmLpEVW8ii48hBvd6B10owh6DBNiYIxJbWPzQOaDH5o+P2ampQAEQRAE5joKi2EzcSelXy5Ca2c77wTAXrzvO8j1Ee07cYAzH86v7bylcN9vVQOs634OoX5dMvSs+RxVPVz5Vt/Ybsbvl/rFxvd9aIvdWzz7Xbb7+uHn+XxyzB72881XqX4uF1dvFbH7a3KX1z/451phHyuB7VgHk9Iv5N21/S5M9pyV56hoEtTxxnQUrnkz2OtUYD+MPXvTRic1sf4rczCrAOavLKrcNgRBEARB/DtPSaDXbQ==
+   eJztlkEKwjAQRUdcueoxQmPtEVW8ii48hBvd6B10owi61wOYEANjSGoam6TIPPjQDCV9TKalAARBEATmMgiLZj2yJ6VfLkJ7ZzpvOcCOf9b2Yn1AtWMJcCq782u6b8Ht+y0rgFXVziHUzyddz5rLUfbDlm/9je2m/X7pX2xc34emmGeLZ9/nuq0ffp7LJ8fsYT/XfPXVz+ZiO1tJ7POVeUwAniI3sce9VDV9LcH1FH3zYTNUwaT0C3l3Tb8zE2fO+ucoqRP08cpUJLZ505jrVGA/jDl741olNbH+K3MwLQBm78yL3DYEQRAEQfw7L5hB2Ew=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -167,7 +167,7 @@
     <property name="signYOffset" type="float" value="-8"/>
    </properties>
   </object>
-  <object id="93" template="../../../../common/maps/obj/shardtrader.tx" x="152" y="339">
+  <object id="93" template="../../../../common/maps/obj/shardtrader.tx" x="168" y="340.875">
    <properties>
     <property name="signYOffset" type="float" value="-8"/>
    </properties>
@@ -321,6 +321,46 @@
                 {
 					&quot;name&quot;: &quot;You've got the wrong adventurer, I'm afraid.&quot;,
 					&quot;text&quot;: &quot;'Anotha unkind soul. I knew I shoulda moved to the forest capitol.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+   </properties>
+  </object>
+  <object id="110" template="../../../../common/maps/obj/dialog.tx" x="104.5" y="339.5" width="16" height="16" visible="1">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;You enter what looks to be a temple to some dark god. A black-robed priestess, pale but beautiful turns towards you and speaks. 'The dark ones require a champion. Can you answer their call?'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;The three great threats are ended.&quot;,
+                    &quot;text&quot;: &quot;'The dark ones are pleased! Their worshippers are now free to continue their supplication! You have the city's gratitude.'&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+	               {&quot;type&quot;: &quot;item&quot;, &quot;count&quot;: 1, &quot;itemName&quot;: &quot;Massacre Helm&quot;},
+                        {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Vampiric Tutor&quot;},
+                        {&quot;type&quot;: &quot;card&quot;, &quot;count&quot;: 1, &quot;cardName&quot;: &quot;Yawgmoth's Bargain&quot;}          
+                      ]
+                    },
+					{&quot;addMapReputation&quot;: 10}  ],
+					&quot;condition&quot;:[{&quot;item&quot;: &quot;Bloodsworn Bite&quot;}, {&quot;item&quot;: &quot;Sinister Concoction&quot;}, {&quot;item&quot;: &quot;Mask of Valgavoth&quot;}], 
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;I don't know about the dark ones, but I can be a champion.&quot;,
+					&quot;text&quot;: &quot;'There are many horrifically powerful legends that threaten the swamps. I offer three sacred treasures to any who can defeat the three worst.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;Which three are we speaking of?&quot;,
+					&quot;text&quot;: &quot;'The vampiric progenitor, Edgar Markov. The terror eater Valgavoth. And the horror of Zhava, the Gitrog Monster. Slay them all and show me the relics they once possessed to receive the blessings of my dark god.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;I will see what I can do.&quot; } ]
+					 }]
+				},
+                {
+					&quot;name&quot;: &quot;Sounds a little sketchy.&quot;,
+					&quot;text&quot;: &quot;'Well, if you acheive great feats, return and perhaps my prayers will be answered then.'&quot;,
 					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
 				}
 			]

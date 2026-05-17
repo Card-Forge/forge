@@ -588,6 +588,12 @@ public class CountersPutEffect extends SpellAbilityEffect {
             placer = AbilityUtils.getDefinedPlayers(card, sa.getParam("Placer"), sa).get(0);
         }
 
+        SpellAbility cause = sa;
+        if (sa.isReplacementAbility()) {
+            cause = (SpellAbility) sa.getReplacingObject(AbilityKey.Cause);
+        }
+
+
         GameEntityCounterTable table = new GameEntityCounterTable();
 
         if (sa.hasParam("TriggeredCounterMap")) {
@@ -642,7 +648,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             }
         }
 
-        table.replaceCounterEffect(game, sa, true);
+        table.replaceCounterEffect(game, cause);
 
         if (sa.hasParam("RemovePhase")) {
             for (Map.Entry<GameEntity, Map<CounterType, Integer>> e : table.row(Optional.of(placer)).entrySet()) {
@@ -780,15 +786,15 @@ public class CountersPutEffect extends SpellAbilityEffect {
             sa.putParam("TargetMax", n);
             sa.putParam("CounterType", "P1P1");
             sa.putParam("CounterNum", "1");
-            // 701.41a
+            // CR 701.41a
             String desc;
-            if (!sa.getHostCard().isPermanent()) {
-                sa.putParam("ValidTgts", "Creature");
-                desc = "target creature";
-            } else {
+            if (sa.getHostCard().isPermanent()) {
                 sa.putParam("ValidTgts", "Creature.Other");
                 sa.putParam("ValidTgtsDesc", "other creature");
                 desc = "other target creature";
+            } else {
+                sa.putParam("ValidTgts", "Creature");
+                desc = "target creature";
             }
             sa.setTargetRestrictions(new TargetRestrictions(sa.getMapParams()));
             if (!sa.hasParam("SpellDescription")) {

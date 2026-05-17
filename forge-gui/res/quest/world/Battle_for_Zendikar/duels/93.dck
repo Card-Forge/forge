@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=AidoHwedo
+Title=AidoHwedo
+Icon=AidoHwedo.jpg
+Difficulty=Hard
+Description=../Modern/Battle_for_Zendikar/Standard_Daily_#9286310/Mutucao_-_Mutucao_(4-0)_(Modern,_#518905).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Abbot of Keral Keep
+4 Flamewake Phoenix
+3 Kolaghan, the Storm's Fury
+2 Pia and Kiran Nalaar
+4 Thunderbreak Regent
+4 Draconic Roar
+4 Fiery Impulse
+1 Kolaghan's Command
+3 Murderous Cut
+4 Hordeling Outburst
+2 Transgress the Mind
+4 Bloodstained Mire
+2 Haven of the Spirit Dragon
+7 Mountain
+4 Polluted Delta
+3 Smoldering Marsh
+1 Swamp
+4 Wooded Foothills
+[Sideboard]
+3 Duress
+2 Outpost Siege
+2 Pitiless Horde
+1 Roast
+3 Self-Inflicted Wound
+2 Ultimate Price

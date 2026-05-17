@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling Red
+Title=Dungeon Crawling Red
+Icon=Dungeon Crawling Red.jpg
+Difficulty=Medium
+Description=Oath_of_the_Gatewatch/Standard_Constructed_League/Reflex33_-_Abzan_Aggro_(Standard,_#541561).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Anafenza, the Foremost
+2 Ayli, Eternal Pilgrim
+4 Deathmist Raptor
+4 Den Protector
+4 Reflector Mage
+4 Sylvan Advocate
+3 Warden of the First Tree
+4 Collected Company
+3 Dromoka's Command
+3 Murderous Cut
+2 Canopy Vista
+4 Flooded Strand
+2 Forest
+2 Hissing Quagmire
+1 Lumbering Falls
+2 Plains
+1 Polluted Delta
+1 Prairie Stream
+1 Shambling Vent
+1 Smoldering Marsh
+1 Sunken Hollow
+4 Windswept Heath
+3 Wooded Foothills
+[Sideboard]
+4 Arashin Cleric
+2 Duress
+1 Felidar Cub
+3 Hallowed Moonlight
+1 Kalitas, Traitor of Ghet
+2 Silkwrap
+2 Transgress the Mind

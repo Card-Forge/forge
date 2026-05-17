@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Joe Kidd
+Title=Joe Kidd
+Icon=Joe Kidd.jpg
+Difficulty=Very Hard
+Description=./Modern/Phyrexia_All_Will_Be_One/David_Chen_-_Rakdos_Midrange_(Modern,_#1620904).dck
+Deck Type=constructed
+
+[Main]
+3 Bloodtithe Harvester
+2 Dauthi Voidwalker
+1 Fable of the Mirror-Breaker
+4 Fury
+4 Grief
+4 Ragavan, Nimble Pilferer
+4 Seasoned Pyromancer
+2 Fatal Push
+4 Feign Death
+1 Lightning Bolt
+1 Sheoldred's Edict
+2 Terminate
+3 Undying Malice
+3 Thoughtseize
+2 Blood Moon
+3 Blackcleave Cliffs
+1 Blightstep Pathway
+3 Blood Crypt
+4 Bloodstained Mire
+3 Marsh Flats
+1 Mountain
+3 Swamp
+1 Takenuma, Abandoned Mire
+1 Verdant Catacombs
+[Sideboard]
+2 Blood Moon
+1 Engineered Explosives
+1 Kolaghan's Command
+1 Nihil Spellbomb
+1 Path of Peril
+1 Sheoldred, the Apocalypse
+1 The Filigree Sylex
+1 Thoughtseize
+1 Fable of the Mirror-Breaker
+1 Ratchet Bomb
+1 Tourach, Dread Cantor
+2 Unlicensed Hearse
+1 Hidetsugu Consumes All

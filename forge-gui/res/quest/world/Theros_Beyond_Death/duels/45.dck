@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Pebbles Flintstone
+Title=Pebbles Flintstone
+Icon=Pebbles Flintstone.jpg
+Difficulty=Easy
+Description=./Standard/Theros_Beyond_Death/Abdul_Mahaydi_Panggabean_-_Mono_White_Devotion_(Standard,_#920979).dck
+Deck Type=constructed
+
+[Main]
+3 Linden, the Steadfast Queen
+3 Law-Rune Enforcer
+3 Giant Killer
+4 Heliod, Sun-Crowned
+4 Alseid of Life's Bounty
+4 Daxos, Blessed by the Sun
+4 Faerie Guidemother
+4 Venerated Loxodon
+4 Healer's Hawk
+4 Ajani's Pridemate
+2 Conclave Tribunal
+3 Castle Ardenvale
+18 Plains
+[Sideboard]
+1 Conclave Tribunal
+2 Tomik, Distinguished Advokist
+2 Citywide Bust
+3 Glass Casket
+3 Gideon Blackblade
+4 Hushbringer

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Piper
+Title=Piper
+Icon=Piper.jpg
+Difficulty=Hard
+Description=../Modern/Eldritch_Moon/PPTQ_@_Enlightening_Minds_Gaming/Steve_Henning_-_Naya_Burn_(Modern,_#639809).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+1 Grim Lavamancer
+4 Monastery Swiftspear
+4 Wild Nacatl
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+3 Searing Blaze
+4 Lava Spike
+4 Rift Bolt
+1 Arid Mesa
+4 Bloodstained Mire
+2 Copperline Gorge
+2 Mountain
+3 Sacred Foundry
+2 Scalding Tarn
+2 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+2 Bedlam Reveler
+3 Deflecting Palm
+2 Destructive Revelry
+3 Lightning Helix
+2 Path to Exile
+2 Skullcrack

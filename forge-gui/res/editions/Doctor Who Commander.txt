@@ -1176,9 +1176,9 @@ ScryfallCode=WHO
 2 w_2_2_alien @John Tedrick
 3 w_4_4_alien_rhino @Svetlin Velinov
 4 w_2_2_horse_horsemanship @Anton Solovianchyk
-6 w_1_1_human_doctor_reduce @Ekaterina Burmak
+5 w_1_1_human_doctor_reduce @Tyukina Tatiana
+6 w_1_1_human_ward @Ekaterina Burmak
 7 w_1_1_human_noble_vanishing_prevention @Ekaterina Burmak
-8 w_1_1_human_ward @Ekaterina Burmak
 8 w_1_1_soldier @Thanh Tuấn
 9 w_1_1_warrior @Kieran Yanner
 10 u_1_1_fish @Svetlin Velinov

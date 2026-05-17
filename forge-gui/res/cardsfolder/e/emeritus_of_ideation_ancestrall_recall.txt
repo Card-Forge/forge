@@ -1,0 +1,17 @@
+Name:Emeritus of Ideation
+ManaCost:3 U U
+Types:Creature Human Wizard
+PT:5/5
+K:Flying
+K:Ward:2
+K:ETBReplacement:Other:DBPrepare
+SVar:DBPrepare:DB$ AlterAttribute | Attributes$ Prepared | SpellDescription$ This creature enters prepared.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPrepare | TriggerDescription$ Whenever this creature attacks, you may exile eight cards from your graveyard. If you do, this creature becomes prepared.
+SVar:TrigPrepare:AB$ AlterAttribute | Cost$ ExileFromGrave<8/Card> | Attributes$ Prepared
+AlternateMode:Prepare
+SVar:HasAttackEffect:TRUE
+Oracle:Flying, ward {2}\nThis creature enters prepared.\nWhenever this creature attacks, you may exile eight cards from your graveyard. If you do, this creature becomes prepared.
+
+ALTERNATE
+
+CopyFaceFrom:Ancestral Recall

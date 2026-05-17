@@ -246,14 +246,14 @@ public class AdventureDeckEditor extends FDeckEditor {
                     case Ready:
                         return new DeckEditorPage[]{
                                 new AdventureDeckSectionPage(DeckSection.Main, ItemManagerConfig.DRAFT_POOL),
-                                new AdventureDeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.SIDEBOARD)
+                                new AdventureDeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.DRAFT_POOL)
                         };
                     case Entered:
                         if (event.getDraft() != null)
                             return new DeckEditorPage[]{
                                     new DraftPackPage(new AdventureCardManager()),
                                     new AdventureDeckSectionPage(DeckSection.Main, ItemManagerConfig.DRAFT_POOL),
-                                    new AdventureDeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.SIDEBOARD)
+                                    new AdventureDeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.DRAFT_POOL)
                             };
                     default:
                         return new DeckEditorPage[]{
@@ -264,8 +264,8 @@ public class AdventureDeckEditor extends FDeckEditor {
                 }
             } else if (event.format == AdventureEventController.EventFormat.Jumpstart || event.format == AdventureEventController.EventFormat.Sealed) {
                 return new DeckEditorPage[]{
-                        new AdventureDeckSectionPage(DeckSection.Main, ItemManagerConfig.DRAFT_POOL),
-                        new AdventureDeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.SIDEBOARD)};
+                        new AdventureDeckSectionPage(DeckSection.Main, ItemManagerConfig.SEALED_POOL),
+                        new AdventureDeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.SEALED_POOL)};
             }
             return new DeckEditorPage[]{};
         }

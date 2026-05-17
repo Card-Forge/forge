@@ -3248,7 +3248,7 @@
 	{
 		"name": "Nahiri Encampment",
 		"displayName": "Nahiri's Encampment",
-		"type": "dungeon",
+		"type": "sidebossmoderate",
 		"count": 1,
 		"spriteAtlas": "../common/maps/tileset/buildingsbosses.atlas",
 		"sprite": "Nahiri",

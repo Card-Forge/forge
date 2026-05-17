@@ -1,0 +1,52 @@
+[duel]
+[metadata]
+Name=Ancient Battlefield
+Title=Ancient Battlefield
+Icon=Ancient Battlefield.jpg
+Difficulty=Very Hard
+Description=./Modern/The_Brothers_War/Hosokawa_Yuya_-_Tameshi_Bloom_(Modern,_#1542586).dck
+Deck Type=constructed
+
+[Main]
+1 Goblin Engineer
+1 Omnath, Locus of Creation
+1 Tireless Tracker
+3 Cultivator Colossus
+4 Tameshi, Reality Architect
+4 Lotus Bloom
+4 Eladamri's Call
+2 Finale of Devastation
+4 Wargate
+4 Leyline Binding
+4 Teferi, Time Raveler
+4 Wrenn and Six
+1 Plains
+1 Raugrin Triome
+1 Boseiju, Who Endures
+1 Otawara, Soaring City
+1 Indatha Triome
+1 Island
+1 Forest
+1 Hallowed Fountain
+1 Sacred Foundry
+1 Stomping Ground
+1 Temple Garden
+1 Steam Vents
+2 Wooded Foothills
+2 Windswept Heath
+4 Misty Rainforest
+4 Flooded Strand
+[Sideboard]
+1 Grand Abolisher
+1 Tormod's Crypt
+1 Engineered Explosives
+1 Chalice of the Void
+1 Seal of Cleansing
+1 Kataki, War's Wage
+1 Lavinia, Azorius Renegade
+1 Orvar, the All-Form
+1 Endurance
+1 Portable Hole
+1 Haywire Mite
+2 Veil of Summer
+2 Burrenton Forge-Tender

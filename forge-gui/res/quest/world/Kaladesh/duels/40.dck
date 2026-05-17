@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Amadioha
+Title=Amadioha
+Icon=Amadioha.jpg
+Difficulty=Easy
+Description=Kaladesh/Grand_Prix_Warsaw_2016_-_Top_64_Decklists/Ricard_Tuduri_-_U-W_Flash_(Standard,_#644327).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Archangel Avacyn
+2 Rattlechains
+4 Reflector Mage
+4 Selfless Spirit
+4 Spell Queller
+4 Thraben Inspector
+4 Smuggler's Copter
+1 Declaration in Stone
+4 Stasis Snare
+4 Gideon, Ally of Zendikar
+6 Island
+10 Plains
+4 Port Town
+4 Prairie Stream
+1 Westvale Abbey
+[Sideboard]
+2 Blessed Alliance
+1 Declaration in Stone
+1 Fragmentize
+1 Fumigate
+2 Gisela, the Broken Blade
+1 Negate
+2 Spell Shrivel
+1 Summary Dismissal

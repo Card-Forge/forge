@@ -126,7 +126,16 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
     private String zoneBannerText;
     private Color zoneBannerColor;
     private CachedCardImage cachedImage;
+    private int groupCount;
+    private int hotkeyDigit; // 1..9 paints a numbered badge for Ctrl+digit selection; 0 hides
+    private Font badgeFont;
+    private int badgeFontCardWidth; // cardWidth when badgeFont was last computed
 
+    private static final Color BADGE_BG_COLOR = new Color(0, 0, 0, 180);
+    private static final Color HOTKEY_BADGE_BG = new Color(20, 20, 20, 220);
+    private static final Color HOTKEY_BADGE_RING = new Color(220, 220, 220);
+    private static final int HOTKEY_BADGE_MIN_CARD_WIDTH = 80;
+    private static final int HOTKEY_BADGE_MAX_DIAMETER = 28;
     private static Font smallCounterFont;
     private static Font largeCounterFont;
 
@@ -261,6 +270,13 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         displayEnabled = displayEnabled0;
     }
 
+    public int getGroupCount() {
+        return groupCount;
+    }
+    public void setGroupCount(int count) {
+        this.groupCount = count;
+    }
+
     public final void setAnimationPanel(final boolean isAnimationPanel0) {
         isAnimationPanel = isAnimationPanel0;
     }
@@ -304,7 +320,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         final int offset = isTapped() && (!noBorderPref || cardImgHasAlpha) ? 1 : 0;
 
         // Magenta outline for when card is chosen
-        if (matchUI.isUsedToPay(getCard())) {
+        if (matchUI.isHighlighted(getCard())) {
             g2d.setColor(Color.magenta);
             final int n2 = Math.max(1, Math.round(2 * cardWidth * CardPanel.SELECTED_BORDER_SIZE));
             g2d.fillRoundRect(cardXOffset - n2, (cardYOffset - n2) + offset, cardWidth + (n2 * 2), cardHeight + (n2 * 2), cornerSize + n2, cornerSize + n2);
@@ -400,6 +416,12 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
 
         }
         displayIconOverlay(g, canShow);
+        if (groupCount >= 2) {
+            drawGroupCountBadge(g);
+        }
+        if (hotkeyDigit > 0 && cardWidth >= HOTKEY_BADGE_MIN_CARD_WIDTH) {
+            drawHotkeyDigitBadge(g);
+        }
         if (zoneBannerText != null) {
             drawZoneBanner(g);
         }
@@ -514,6 +536,96 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         titleText.setVisible(isVisible);
     }
 
+    private void drawGroupCountBadge(final Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        if (badgeFont == null || badgeFontCardWidth != cardWidth) {
+            badgeFont = new Font("Dialog", Font.BOLD, Math.max(10, cardWidth / 5));
+            badgeFontCardWidth = cardWidth;
+        }
+
+        String text = "\u00D7" + groupCount;
+        FontMetrics fm = g2d.getFontMetrics(badgeFont);
+
+        int textWidth = fm.stringWidth(text);
+        int textHeight = fm.getAscent();
+        int padX = Math.max(4, cardWidth / 20);
+        int padY = Math.max(2, cardHeight / 30);
+        int badgeWidth = textWidth + padX * 2;
+        int badgeHeight = textHeight + padY * 2;
+        int badgeX = cardXOffset + 2;
+        int badgeY = cardYOffset + 2;
+        int cornerRadius = Math.max(4, cardWidth / 16);
+
+        g2d.setColor(BADGE_BG_COLOR);
+        g2d.fillRoundRect(badgeX, badgeY, badgeWidth, badgeHeight, cornerRadius, cornerRadius);
+
+        g2d.setColor(Color.WHITE);
+        g2d.setFont(badgeFont);
+        g2d.drawString(text, badgeX + padX, badgeY + padY + textHeight);
+    }
+
+    public int getHotkeyDigit() {
+        return hotkeyDigit;
+    }
+
+    public void setHotkeyDigit(final int digit) {
+        if (hotkeyDigit == digit) return;
+        hotkeyDigit = digit;
+        repaint();
+    }
+
+    private void drawHotkeyDigitBadge(final Graphics g) {
+        final Graphics2D g2d = (Graphics2D) g.create();
+        try {
+            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            final int diameter = Math.min(HOTKEY_BADGE_MAX_DIAMETER, cardWidth / 5);
+            final int bx = cardXOffset + cardWidth - diameter - 2;
+            final int by = cardYOffset + 2;
+            g2d.setColor(HOTKEY_BADGE_BG);
+            g2d.fillOval(bx, by, diameter, diameter);
+            g2d.setColor(HOTKEY_BADGE_RING);
+            g2d.drawOval(bx, by, diameter, diameter);
+            g2d.setColor(Color.WHITE);
+            g2d.setFont(new Font("Dialog", Font.BOLD, Math.max(11, diameter * 2 / 3)));
+            final String text = String.valueOf(hotkeyDigit);
+            final FontMetrics fm = g2d.getFontMetrics();
+            g2d.drawString(text, bx + (diameter - fm.stringWidth(text)) / 2,
+                    by + (diameter + fm.getAscent()) / 2 - 2);
+        } finally {
+            g2d.dispose();
+        }
+    }
+
+    public boolean isBadgeHit(int mouseX, int mouseY) {
+        if (groupCount < 2) {
+            return false;
+        }
+        // Badge is drawn at (cardXOffset+2, cardYOffset+2) in the card's local
+        // coordinate space. Mouse coordinates are container-relative. When the
+        // card is tapped, the graphics are rotated but mouse events are not, so
+        // we must inverse-rotate the mouse point into the card's local frame.
+        int localX = mouseX - getX();
+        int localY = mouseY - getY();
+        if (tappedAngle > 0) {
+            float pivotX = cardXOffset + cardWidth / 2f;
+            float pivotY = cardYOffset + cardHeight - cardWidth / 2f;
+            double cos = Math.cos(-tappedAngle);
+            double sin = Math.sin(-tappedAngle);
+            float dx = localX - pivotX;
+            float dy = localY - pivotY;
+            localX = (int) Math.round(cos * dx - sin * dy + pivotX);
+            localY = (int) Math.round(sin * dx + cos * dy + pivotY);
+        }
+        int badgeX = cardXOffset + 2;
+        int badgeY = cardYOffset + 2;
+        int badgeWidth = Math.max(30, cardWidth / 3);
+        int badgeHeight = Math.max(20, cardHeight / 6);
+        return localX >= badgeX && localX <= badgeX + badgeWidth
+            && localY >= badgeY && localY <= badgeY + badgeHeight;
+    }
+
     private void displayIconOverlay(final Graphics g, final boolean canShow) {
         if (canShow && showCardManaCostOverlay() && cardWidth < 200) {
             final boolean showSplitMana = card.isSplitCard() && card.getZone() != ZoneType.Battlefield;
@@ -577,7 +689,7 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             CardFaceSymbols.drawSymbol("phasing", g, stateXSymbols, ySymbols);
         }
 
-        if (matchUI.isUsedToPay(card)) {
+        if (matchUI.isHighlighted(card)) {
             CardFaceSymbols.drawSymbol("sacrifice", g, (cardXOffset + (cardWidth / 2)) - 20,
                     (cardYOffset + (cardHeight / 2)) - 20);
         }

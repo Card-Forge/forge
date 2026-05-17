@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Iblis
+Title=Iblis
+Icon=Iblis.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine/Brady_Huff_-_Azorius_Hammer_(Modern,_#1620858)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Puresteel Paladin
+4 Stoneforge Mystic
+4 Esper Sentinel
+1 Gingerbrute
+2 Memnite
+2 Ornithopter
+3 Giver of Runes
+4 Colossus Hammer
+1 Kaldra Compleat
+1 Nettlecyst
+1 Shadowspear
+3 Springleaf Drum
+2 Blacksmith's Skill
+2 Spell Pierce
+4 Sigarda's Aid
+4 Urza's Saga
+2 Flooded Strand
+1 Marsh Flats
+2 Windswept Heath
+2 Hallowed Fountain
+4 Plains
+2 Seachrome Coast
+2 Horizon Canopy
+3 Inkmoth Nexus
+[Sideboard]
+2 Teferi, Time Raveler
+1 Lavinia, Azorius Renegade
+1 Spell Pierce
+1 Hallowed Moonlight
+1 Rest in Peace
+2 Sanctifier en-Vec
+2 March of Otherworldly Light
+1 Path to Exile
+2 Surge of Salvation
+1 Pithing Needle
+1 Soul-Guide Lantern

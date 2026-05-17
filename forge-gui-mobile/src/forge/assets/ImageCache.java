@@ -450,7 +450,7 @@ public class ImageCache {
     }
 
     public TextureRegion croppedBorderImage(Texture image) {
-        if (!image.toString().contains(".fullborder."))
+        if (!image.toString().contains(".fullborder.") && !image.toString().contains("tokens"))
             return new TextureRegion(image);
         float rscale = 0.96f;
         int rw = Math.round(image.getWidth() * rscale);

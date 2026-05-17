@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Robot Santa
+Title=Robot Santa
+Icon=Robot Santa.jpg
+Difficulty=Easy
+Description=./Standard/Streets_of_New_Capenna/Ironic_Velvet_-_Grixis_Midrange_(Standard,_#1386101).dck
+Deck Type=constructed
+
+[Main]
+1 Galazeth Prismari
+1 Evelyn, the Covetous
+3 Corpse Appraiser
+4 Fable of the Mirror-Breaker
+4 Bloodtithe Harvester
+2 Reckoner Bankbuster
+1 Soul Shatter
+1 Abrade
+1 Disdainful Stroke
+1 Spell Pierce
+2 Make Disappear
+2 Negate
+2 Infernal Grasp
+4 Voltage Surge
+4 Expressive Iteration
+1 The Meathook Massacre
+1 Haunted Ridge
+1 Hive of the Eye Tyrant
+1 Island
+2 Stormcarved Coast
+2 Den of the Bugbear
+3 Shipwreck Marsh
+4 Xander's Lounge
+4 Blightstep Pathway
+4 Riverglide Pathway
+4 Clearwater Pathway
+[Sideboard]
+1 The Meathook Massacre
+1 Corpse Appraiser
+1 Negate
+1 Soul Shatter
+1 Go Blank
+1 Reckoner Bankbuster
+1 Unlicensed Hearse
+2 Annul
+2 Ray of Enfeeblement
+2 Disdainful Stroke
+2 Duress

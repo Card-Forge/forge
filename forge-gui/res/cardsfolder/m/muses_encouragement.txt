@@ -1,0 +1,7 @@
+Name:Muse's Encouragement
+ManaCost:4 U
+Types:Instant
+A:SP$ Token | TokenScript$ ur_3_3_elemental_flying | TokenOwner$ You | SubAbility$ DBSurveil | SpellDescription$ Create a 3/3 blue and red Elemental creature token with flying.
+SVar:DBSurveil:DB$ Surveil | Amount$ 2 | SpellDescription$ Surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
+DeckHas:Ability$Token
+Oracle:Create a 3/3 blue and red Elemental creature token with flying.\nSurveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)

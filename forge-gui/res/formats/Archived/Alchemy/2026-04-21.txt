@@ -1,0 +1,6 @@
+[format]
+Name:Alchemy (SOS)
+Type:Archived
+Subtype:Arena
+Effective:2026-04-21
+Sets:ANA, ANB, BLB, YBLB, DSK, YDSK, FDN, DFT, YDFT, TDM, YTDM, FIN, EOE, YEOE, OM1, TLA, ECL, TMT, SOS

@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Frankenstein
+Title=Frankenstein
+Icon=Frankenstein.jpg
+Difficulty=Medium
+Description=./Standard/Foundations/Adam_Saba_-_Orzhov_Reanimator_(Standard,_#2275953).dck
+Deck Type=constructed
+
+[Main]
+4 Atraxa, Grand Unifier
+1 Beza, the Bounding Spring
+1 Elenda, Saint of Dusk
+2 Overlord of the Balemurk
+4 Scrapwork Mutt
+4 Splitskin Doll
+3 Valgavoth, Terror Eater
+2 Bitter Triumph
+3 Cut Down
+3 Beseech the Mirror
+2 Day of Judgment
+1 Legions to Ashes
+1 Rite of the Moth
+4 Zombify
+1 Virtue of Persistence
+3 Blazemire Verge
+4 Caves of Koilos
+4 Concealed Courtyard
+2 Fabled Passage
+1 Fountainport
+2 Plains
+3 Shadowy Backstreet
+5 Swamp
+[Sideboard]
+1 Aclazotz, Deepest Betrayal
+1 Anoint with Affliction
+1 Cut Down
+2 Deadly Cover-Up
+3 Duress
+2 Exorcise
+2 Ghost Vacuum
+1 Sheoldred, the Apocalypse
+2 Temporary Lockdown

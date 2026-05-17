@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Indiana Jones
+Title=Indiana Jones
+Icon=Indiana Jones.jpg
+Difficulty=Very Hard
+Description=./Modern/Adventures_in_the_Forgotten_Realms/CrusherBotBG_-_Puresteel_Combo_(Modern,_#1200176).dck
+Deck Type=constructed
+
+[Main]
+4 Esper Sentinel
+4 Memnite
+4 Ornithopter
+4 Puresteel Paladin
+4 Stoneforge Mystic
+1 Sword of Fire and Ice
+1 Shadowspear
+1 Nettlecyst
+1 Cranial Plating
+2 Paradise Mantle
+4 Colossus Hammer
+4 Steelshaper's Gift
+4 Urza's Saga
+4 Sigarda's Aid
+4 Inkmoth Nexus
+4 Silent Clearing
+10 Snow-Covered Plains
+[Sideboard]
+1 Welding Jar
+1 Emrakul, the Aeons Torn
+1 Pithing Needle
+1 Portable Hole
+1 Relic of Progenitus
+1 Seal of Cleansing
+1 Sword of Sinew and Steel
+2 Rest in Peace
+2 Sanctifier en-Vec
+2 On Thin Ice
+2 Defense Grid

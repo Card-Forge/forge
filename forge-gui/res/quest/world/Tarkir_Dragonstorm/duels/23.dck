@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Yewa
+Title=Yewa
+Icon=Yewa.jpg
+Difficulty=Easy
+Description=./Standard/Tarkir_Dragonstorm/Takahashi_Naoya_-_RG_Midrange_(Standard,_#2452243).dck
+Deck Type=constructed
+
+[Main]
+3 Gingerbrute
+4 Quirion Beastcaller
+4 Voldaren Thrillseeker
+4 Heartfire Hero
+4 Pawpatch Recruit
+3 Marketback Walker
+2 Surrak, Elusive Hunter
+4 Warden of the Grove
+4 Ozolith, the Shattered Spire
+3 Agatha's Soul Cauldron
+4 Innkeeper's Talent
+3 Mountain
+4 Forest
+4 Karplusan Forest
+4 Copperline Gorge
+2 Mishra's Foundry
+4 Thornspire Verge
+[Sideboard]
+2 Obliterating Bolt
+3 Haywire Mite
+3 Urabrask's Forge
+2 Case of the Crimson Pulse
+3 Pawpatch Formation
+2 Untimely Malfunction

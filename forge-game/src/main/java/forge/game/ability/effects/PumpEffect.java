@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
 import forge.GameCommand;
@@ -130,7 +129,7 @@ public class PumpEffect extends SpellAbilityEffect {
         final String duration = sa.getParam("Duration");
 
         if (!keywords.isEmpty()) {
-            p.addChangedKeywords(keywords, ImmutableList.of(), timestamp, 0);
+            p.addChangedKeywords(keywords, List.of(), timestamp, 0);
         }
 
         if (!"Permanent".equals(duration)) {

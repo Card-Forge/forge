@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Trostani
+Title=Trostani
+Icon=Trostani.jpg
+Difficulty=Very Hard
+Description=./Modern/The_Lost_Caverns_of_Ixalan/Jimmy_Bowman_-_Mono-Blue_Merfolk_(Modern,_#2005139).dck
+Deck Type=constructed
+
+[Main]
+4 Rishadan Dockhand
+4 Tide Shaper
+4 Vodalian Hexcatcher
+4 Lord of Atlantis
+4 Master of the Pearl Trident
+4 Merfolk Trickster
+4 Tishana's Tidebinder
+2 Svyelun of Sea and Sky
+2 Subtlety
+4 Aether Vial
+2 Force of Negation
+2 Dismember
+3 Hibernation
+1 Minamo, School at Water's Edge
+4 Mutavault
+4 Cavern of Souls
+2 Otawara, Soaring City
+1 Waterlogged Grove
+8 Island
+[Sideboard]
+1 Grafdigger's Cage
+2 Hurkyl's Recall
+2 Cursed Totem
+4 Stern Scolding
+2 Force of Negation
+2 Subtlety

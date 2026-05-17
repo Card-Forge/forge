@@ -94,7 +94,7 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
                 gameCard.addCounter(ctype, counterAmount, pl, table);
             }
         }
-        table.replaceCounterEffect(game, sa, true);
+        table.replaceCounterEffect(game, sa);
     }
 
     private void addOrRemoveCounter(final SpellAbility sa, final Card tgtCard, CounterType ctype,

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Grumpy
+Title=Grumpy
+Icon=Grumpy.jpg
+Difficulty=Medium
+Description=Kaladesh/SCG_Standard_Open_Indianapolis/Ross_Merriam_-_G-W_Aggro_(Standard,_#652646).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Fairgrounds Warden
+4 Servant of the Conduit
+3 Sylvan Advocate
+4 Thraben Inspector
+2 Tireless Tracker
+4 Verdurous Gearhulk
+4 Smuggler's Copter
+3 Blossoming Defense
+2 Declaration in Stone
+1 Always Watching
+4 Gideon, Ally of Zendikar
+3 Aether Hub
+4 Canopy Vista
+6 Forest
+4 Fortified Village
+7 Plains
+1 Westvale Abbey
+[Sideboard]
+1 Blessed Alliance
+2 Fumigate
+2 Linvala, the Preserver
+3 Natural State
+2 Nissa, Vital Force
+2 Quarantine Field
+2 Stasis Snare
+1 Tireless Tracker

@@ -93,3 +93,105 @@ FortBlue
 FortGreen
   xy: 155,267
   size: 46,44
+Aetherflux Resevoir
+  xy: 6,368
+  size: 20,32
+Black Circus
+  xy: 32,371
+  size: 48,29
+Aether Garage
+  xy: 80,368
+  size: 48,32
+Circus
+  xy: 128,371
+  size: 48,29
+Neo Kamigawa
+  xy: 176,368
+  size: 48,48
+Eldraine
+  xy: 224,368
+  size: 64,48
+Fair Basilica
+  xy: 0,400
+  size: 64,64
+Tolarian Academy
+  xy: 64,400
+  size: 48,48
+Bolas's Citadel
+  xy: 112,400
+  size: 64,48
+Wheel of Luck
+  xy: 336,368
+  size: 23,29
+Selesnya Guildgate
+  xy: 288,360
+  size: 48,46
+Dimir Guildgate
+  xy: 176,416
+  size: 64,32
+Rakdos Guildgate
+  xy: 64,448
+  size: 64,32
+Orzhov Guildgate
+  xy: 176,448
+  size: 48,48
+Gruul Guildgate
+  xy: 240,422
+  size: 48,26
+Izzet Guildgate
+  xy: 128,448
+  size: 48,32
+Golgari Guildgate
+  xy: 336,400
+  size: 64,48
+Azorius Guildgate
+  xy: 224,448
+  size: 48,48
+Simic Guildgate
+  xy: 288,416
+  size: 48,32
+Boros Guildgate
+  xy: 272,448
+  size: 48,48
+Mystical Bog
+  xy: 320,448
+  size: 64,48
+Blood Moon
+  xy: 208,272
+  size: 32,48
+Idyllic Beachfront
+  xy: 240,272
+  size: 48,48
+Shady Merchant
+  xy: 336,264
+  size: 45,56
+Mysterious Merchant
+  xy: 384,282
+  size: 24,38
+Black Market
+  xy: 343,328
+  size: 50,40
+Black Market Stall
+  xy: 400,320
+  size: 48,48
+Edge of Eternities
+  xy: 400,400
+  size: 48,48
+Valvagoth's Lair
+  xy: 144,320
+  size: 48,48
+Tranquil Clearing
+  xy: 192,329
+  size: 41,39
+House
+  xy: 240,323
+  size: 44,45
+Plowshare Farm
+  xy: 288,331
+  size: 54,37
+Great Aurora
+  xy: 288,272
+  size: 48,48
+Imperial Office
+  xy: 384,448
+  size: 48,48

@@ -13,7 +13,7 @@
  </layer>
  <layer id="2" name="Ground" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFQwHosw+MvWeB9pby0s78SWwMDJOxYCOgvZ2cEDXIfqc0HMp4IebCMAggs88imY+LTQ5AtgOb2Dl2hN9zORDsPA6Eu8m1E5vdMHCWHbcculmkgFKkcIaFHbIZZ7HEKTpNKTCAhul1FoT92OIUnabUfpg5OUjxeB5H/CLzYXFNLsjGoh893SKneWqDEl4ETWl+IReM2kscAAC6GzCp
+   eJxjYBgFQwHsYR44e0t5aWf+JDYGhslYsBE7A0MnJ0SNPjtCPTKbHFDGCzEXhkEAmX0WyXxcbHIAsh3YxM6xI/yey4Fg53Eg3E2undjshoGz7Ljl0M0iBZQihTMs7SKbcRZLnMLUURrHMGAADdPrLAj7scUpzF4Yn1L7YebkIMXjeRzxi8yHxTW5IBuLfvR0i5zmqQ1KeBE0pfmFXDBqL3EAAOwnMXw=
   </data>
  </layer>
  <layer id="3" name="Foreground" width="30" height="17">
@@ -26,7 +26,7 @@
  </layer>
  <layer id="5" name="AboveSprites" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFpIA9zBBMKzBVnYFhmjqE3anFwNClBWEzstDOTnwA2V5xHQYGCR1MNq3AJjbamg8DnhoMDF4a9LELln5AOBVoZxod7D0PTE8X1BH2C/BBMAw48UBoWJzC3EdpHL8G2vlGHZGGxAjEJ63SuCDUryI47B+ovEVLcJZO6RkdvBwge0cBaQAAwIkUuw==
+   eJxjYBgFpIA9zBBMKzBVnYFhmjqE3anFwNClhbB3IACyveI6DAwSOphsWoFNbLQ1HwY8NRgYvDToYxcs/YBwKtDONDrYex6Yni6oI+wX4INgGHDigdCwOIW5j9I4fg208406Ig2JEYhPWqVxQahfRXDYP1B5i5bgLJ3SMzp4OUD2jgLSAADR1hhd
   </data>
  </layer>
  <objectgroup id="4" name="Objects">

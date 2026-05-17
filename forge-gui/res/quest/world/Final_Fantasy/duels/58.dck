@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Riptide
+Title=Riptide
+Icon=Riptide.jpg
+Difficulty=Hard
+Description=./Modern/Final_Fantasy/moriwaki_yuuya_-_Dimir_Murktide_(Modern,_#2536182).dck
+Deck Type=constructed
+
+[Main]
+3 Murktide Regent
+2 Subtlety
+4 Orcish Bowmasters
+4 Psychic Frog
+2 Tamiyo, Inquisitive Student
+1 Astrologian's Planisphere
+4 Fatal Push
+4 Counterspell
+3 Spell Snare
+2 Force of Negation
+1 Cling to Dust
+1 Sheoldred's Edict
+1 Sauron's Ransom
+1 Sink into Stupor
+3 Thoughtseize
+3 Preordain
+1 Pest Control
+1 Kaito, Bane of Nightmares
+2 Island
+1 Swamp
+1 Hallowed Fountain
+2 Watery Grave
+1 Flooded Strand
+4 Polluted Delta
+1 Misty Rainforest
+3 Scalding Tarn
+1 Otawara, Soaring City
+2 Undercity Sewers
+1 Gloomlake Verge
+[Sideboard]
+1 Thoughtseize
+1 Spreading Seas
+1 Surgical Extraction
+2 Nihil Spellbomb
+2 Stern Scolding
+2 Pest Control
+4 Consign to Memory
+2 Harbinger of the Seas

@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Reverend Lovejoy
+Title=Reverend Lovejoy
+Icon=Reverend Lovejoy.jpg
+Difficulty=Medium
+Description=Born_of_the_Gods/SCG_Invitational_Qualifier_-_Rockville,_MD/David_Gardner_-_Orzhov_Midrange_(Standard,_#71801).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blood Baron of Vizkopa
+4 Desecration Demon
+3 Lifebane Zombie
+4 Pack Rat
+4 Bile Blight
+4 Hero's Downfall
+2 Ultimate Price
+4 Thoughtseize
+3 Underworld Connections
+2 Elspeth, Sun's Champion
+4 Godless Shrine
+4 Mutavault
+2 Orzhov Guildgate
+2 Plains
+10 Swamp
+4 Temple of Silence
+[Sideboard]
+2 Dark Betrayal
+3 Doom Blade
+3 Duress
+2 Obzedat, Ghost Council
+2 Revoke Existence
+2 Sin Collector

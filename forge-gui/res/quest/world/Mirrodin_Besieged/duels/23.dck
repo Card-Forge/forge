@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Brother Voodoo
+Title=Brother Voodoo
+Icon=Brother Voodoo.jpg
+Difficulty=Easy
+Description=Mirrodin_Besieged/Starcitygames_Open_Series__Edison,_NJ/Robert_Thornburg_-_Valakut_Ramp_(Standard,_#10891).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Inferno Titan
+2 Oracle of Mul Daya
+4 Primeval Titan
+1 Viridian Corrupter
+4 Viridian Emissary
+4 Lightning Bolt
+4 Cultivate
+4 Explore
+3 Green Sun's Zenith
+3 Slagstorm
+3 Khalni Heart Expedition
+2 Evolving Wilds
+4 Forest
+13 Mountain
+1 Raging Ravine
+1 Rootbound Crag
+4 Terramorphic Expanse
+4 Valakut, the Molten Pinnacle
+[Sideboard]
+1 Acidic Slime
+2 Crush
+1 Gaea's Revenge
+1 Lavaball Trap
+3 Naturalize
+1 Nature's Claim
+1 Plummet
+1 Pyroclasm
+2 Wall of Tanglecord
+1 Wurmcoil Engine

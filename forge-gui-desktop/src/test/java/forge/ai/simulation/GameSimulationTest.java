@@ -327,7 +327,7 @@ public class GameSimulationTest extends SimulationTest {
         Card manifestedCreature = findCardWithName(simGame, "");
         AssertJUnit.assertNotNull(manifestedCreature);
 
-        SpellAbility unmanifestSA = findSAWithPrefix(manifestedCreature.getAllPossibleAbilities(p, false),
+        SpellAbility unmanifestSA = findSAWithPrefix(manifestedCreature.getAllPossibleAbilities(simGame.getPlayers().get(1), false),
                 "Unmanifest");
         AssertJUnit.assertNotNull(unmanifestSA);
         AssertJUnit.assertEquals(2, manifestedCreature.getNetPower());

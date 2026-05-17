@@ -1,0 +1,8 @@
+Name:Witherbloom Charm
+ManaCost:B G
+Types:Instant
+A:SP$ Charm | Choices$ DBDraw,DBGainLife,DBDestroy
+SVar:DBDraw:DB$ Draw | NumCards$ 2 | UnlessCost$ Sac<1/Permanent> | UnlessPayer$ You | UnlessSwitched$ True | SpellDescription$ You may sacrifice a permanent. If you do, draw two cards.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 5 | SpellDescription$ You gain 5 life.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Permanent.nonLand+cmcLE2 | ValidTgtDesc$ nonland permanent with mana value 2 or less | SpellDescription$ Destroy target nonland permanent with mana value 2 or less.
+Oracle:Choose one —\n• You may sacrifice a permanent. If you do, draw two cards.\n• You gain 5 life.\n• Destroy target nonland permanent with mana value 2 or less.

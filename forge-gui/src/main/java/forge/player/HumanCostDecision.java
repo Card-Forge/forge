@@ -17,7 +17,6 @@ import forge.game.zone.ZoneType;
 import forge.gamemodes.match.input.InputConfirm;
 import forge.gamemodes.match.input.InputSelectCardsFromList;
 import forge.gamemodes.match.input.InputSelectManyBase;
-import forge.gui.GuiBase;
 import forge.gui.util.SGuiChoose;
 import forge.util.*;
 import forge.util.collect.FCollectionView;
@@ -468,18 +467,54 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return null;
         }
 
-        final List<ZoneType> origin = Lists.newArrayList(cost.from);
-        final String required = sharedType ? " (must share a card type)" : "";
+        if (!sharedType) {
+            final List<ZoneType> origin = Lists.newArrayList(cost.from);
+            final List<Card> chosen = controller.chooseCardsForZoneChange(
+                    ZoneType.Exile,
+                    origin,
+                    ability,
+                    typeList,
+                    mandatory ? nNeeded : 0,
+                    nNeeded,
+                    null,
+                    cost.toString(nNeeded),
+                    null
+            );
 
-        final List<Card> chosen = controller.chooseCardsForZoneChange(ZoneType.Exile, origin, ability, typeList,
-                mandatory ? nNeeded : 0, nNeeded, null, cost.toString(nNeeded) + required,
-                null);
+            if (chosen.size() < nNeeded) {
+                return null;
+            }
+            return PaymentDecision.card(chosen);
+        }
 
-        if (chosen.size() < nNeeded) {
+        if (typeList.size() < nNeeded) {
             return null;
         }
-        if (sharedType) {
-            if (!chosen.get(1).sharesCardTypeWith(chosen.get(0))) return null;
+
+        final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, mandatory ? nNeeded : 0, nNeeded, typeList, ability) {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            protected boolean onCardSelected(final Card c, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
+                final Card firstSelected = Iterables.getFirst(this.selected, null);
+                if (firstSelected != null && !firstSelected.sharesCardTypeWith(c)) {
+                    return false;
+                }
+                return super.onCardSelected(c, otherCardsToSelect, triggerEvent);
+            }
+        };
+
+        inp.setMessage(cost.toString(nNeeded) + " (must share a card type)");
+        inp.setCancelAllowed(!mandatory);
+        inp.showAndWait();
+
+        if (inp.hasCancelled()) {
+            return null;
+        }
+
+        final CardCollection chosen = new CardCollection(inp.getSelected());
+        if (chosen.size() < nNeeded) {
+            return null;
         }
 
         return PaymentDecision.card(chosen);
@@ -833,7 +868,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
         if (cost.payCostFromSource()) {
             // UnlessCost so player might not want to pay (Fabricate)
-            if (ability.hasParam("UnlessCost") && !confirmAction(cost, Localizer.getInstance().getMessage("lblPutNTypeCounterOnTarget", c, cost.getCounter().getName(), ability.getHostCard().getDisplayName()))) {
+            if (isEffect() && ability.hasParam("UnlessCost") && !confirmAction(cost, Localizer.getInstance().getMessage("lblPutNTypeCounterOnTarget", c, cost.getCounter().getName(), ability.getHostCard().getDisplayName()))) {
                 return null;
             }
             return PaymentDecision.card(source);
@@ -1468,7 +1503,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
 
     private boolean confirmAction(CostPart costPart, String message) {
         CardView cardView = ability.getCardView();
-        if (GuiBase.getInterface().isLibgdxPort()) {
+        if (controller.getGui().isLibgdxPort()) {
             try {
                 //for cards like Sword-Point Diplomacy and others that uses imprinted as container for their ability
                 if (cardView != null && cardView.getImprintedCards() != null && cardView.getImprintedCards().size() == 1)

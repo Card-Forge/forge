@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=The Torpor Orb
+Title=The Torpor Orb
+Icon=The Torpor Orb.jpg
+Difficulty=Easy
+Description=./Standard/March_of_the_Machine/Jannik_Palm_-_Selesnya_Enchantments_(Standard,_#1625258).dck
+Deck Type=constructed
+
+[Main]
+4 Generous Visitor
+4 Spirited Companion
+4 Teachings of the Kirin
+1 Weaver of Harmony
+4 Jukai Naturalist
+4 The Restoration of Eiganjo
+4 Katilda, Dawnhart Martyr
+2 Rite of Harmony
+4 Commune with Spirits
+4 Ossification
+1 Wedding Announcement
+4 Hallowed Haunting
+1 Boseiju, Who Endures
+4 Brushland
+4 Forest
+1 Overgrown Farmland
+6 Plains
+4 Razorverge Thicket
+[Sideboard]
+2 Wedding Announcement
+2 Borrowed Time
+4 Surge of Salvation
+2 Circle of Confinement
+3 Nissa, Ascended Animist
+1 Rite of Harmony
+1 The Stone Brain

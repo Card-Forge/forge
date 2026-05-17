@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Aladdin
+Title=Aladdin
+Icon=Aladdin.jpg
+Difficulty=Very Hard
+Description=../Modern/Dark_Ascension/Bari,_Italy/Mauro_Petruzzella_in_PTQ_Barcelona_-_UR_Faeries_(Modern,_#27063).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Mistbind Clique
+3 Scion of Oona
+2 Spellskite
+4 Spellstutter Sprite
+3 Vendilion Clique
+2 Vedalken Shackles
+4 Cryptic Command
+4 Lightning Bolt
+3 Mana Leak
+3 Remand
+3 Spell Snare
+1 Academy Ruins
+1 Breeding Pool
+10 Island
+1 Mountain
+4 Mutavault
+4 Scalding Tarn
+4 Steam Vents
+[Sideboard]
+3 Blood Moon
+3 Firespout
+2 Glen Elendra Archmage
+2 Grafdigger's Cage
+3 Hurkyl's Recall
+1 Relic of Progenitus

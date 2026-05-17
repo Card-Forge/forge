@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Ras Al Ghul
+Title=Ras Al Ghul
+Icon=Ras Al Ghul.jpg
+Difficulty=Hard
+Description=../Modern/Khans_of_Tarkir/Modern_Frankfurt_2014/Hiller_Purhof_-_WUR_Midrange_(Modern,_#105389).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Delver of Secrets
+3 Geist of Saint Traft
+1 Vendilion Clique
+2 Young Pyromancer
+1 Boros Charm
+2 Electrolyze
+2 Jeskai Charm
+4 Lightning Bolt
+4 Lightning Helix
+4 Path to Exile
+4 Remand
+2 Spell Snare
+4 Serum Visions
+3 Treasure Cruise
+3 Arid Mesa
+1 Flooded Strand
+1 Glacial Fortress
+2 Hallowed Fountain
+2 Island
+1 Mountain
+1 Plains
+1 Sacred Foundry
+4 Scalding Tarn
+1 Seachrome Coast
+3 Steam Vents
+[Sideboard]
+2 Combust
+1 Counterflux
+1 Dispel
+1 Grim Lavamancer
+1 Hibernation
+2 Hurkyl's Recall
+1 Izzet Staticaster
+2 Molten Rain
+2 Spellskite
+1 Timely Reinforcements

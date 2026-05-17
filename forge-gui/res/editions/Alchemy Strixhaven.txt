@@ -1,0 +1,17 @@
+[metadata]
+Code=YSOS
+Date=2026-05-12
+Name=Alchemy: Strixhaven
+Type=Online
+ScryfallCode=YSOS
+
+[cards]
+N.A. R Advanced Floral Invocations @Filip Burburan
+N.A. R Blood Age Muster @Antonio José Manzanedo
+N.A. M Corpseweaver Prodigy @Filip Burburan
+N.A. R Distracted Botanist @Michele Giorgi
+N.A. U Scalar Scholar @Craig J Spearing
+N.A. R Summitfest Closing Ceremony @Anastasia Ovchinnikova
+N.A. M The Mystical Archive @Pascal Quidault
+N.A. M Ursine Guide @Tomas Duchek
+N.A. R Variable Solutions @Anastasia Ovchinnikova

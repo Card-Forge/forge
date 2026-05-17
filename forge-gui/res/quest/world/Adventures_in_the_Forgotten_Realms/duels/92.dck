@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Shaitan
+Title=Shaitan
+Icon=Shaitan.jpg
+Difficulty=Very Hard
+Description=./Modern/Adventures_in_the_Forgotten_Realms/DrPP_-_Izzet_Phoenix_(Modern,_#1182409)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Demilich
+4 Dragon's Rage Channeler
+4 Arclight Phoenix
+3 Gut Shot
+4 Faithless Salvaging
+4 Thought Scour
+4 Lava Dart
+4 Lightning Bolt
+4 Manamorphose
+4 Chart a Course
+4 Serum Visions
+1 Arid Mesa
+1 Island
+2 Steam Vents
+2 Fiery Islet
+3 Mountain
+4 Spirebluff Canal
+4 Scalding Tarn
+[Sideboard]
+1 Crackling Drake
+2 Alpine Moon
+2 Flusterstorm
+2 Kozilek's Return
+2 Lightning Axe
+3 Chalice of the Void
+3 Shattering Spree

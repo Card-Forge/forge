@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Sauron
+Title=Sauron
+Icon=Sauron.jpg
+Difficulty=Hard
+Description=./Modern/Bloomburrow/Brett_Girvan_-_Boros_Energy_(Modern,_#2194329).dck
+Deck Type=constructed
+
+[Main]
+4 Ajani, Nacatl Pariah
+4 Amped Raptor
+4 Guide of Souls
+4 Ocelot Pride
+4 Phlage, Titan of Fire's Fury
+3 The One Ring
+4 Galvanic Discharge
+3 Lightning Bolt
+3 Blood Moon
+4 Static Prison
+3 Aether Hub
+2 Arena of Glory
+4 Arid Mesa
+2 Elegant Parlor
+4 Marsh Flats
+1 Mountain
+3 Plains
+4 Sacred Foundry
+[Sideboard]
+1 Jegantha, the Wellspring
+1 Blood Moon
+2 Chained to the Rocks
+1 Containment Priest
+1 Damping Sphere
+2 Suncleanser
+4 Sunspine Lynx
+2 Surgical Extraction
+1 Wear // Tear

@@ -26,6 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class ForgeScript {
@@ -265,6 +266,11 @@ public class ForgeScript {
             return sa.isKeyword(Keyword.WARD);
         } else if (property.equals("CumulativeUpkeep")) {
             return sa.isCumulativeUpkeep();
+        } else if (property.equals("SameKeyword")) {
+            if (sa.getKeyword() == null || spellAbility == null) {
+                return false;
+            }
+            return Objects.equals(sa.getKeyword(), spellAbility.getKeyword());
         } else if (property.equals("ChapterNotLore")) {
             if (!sa.isChapter()) {
                 return false;

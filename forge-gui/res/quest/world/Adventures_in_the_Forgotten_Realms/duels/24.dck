@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Robot Santa
+Title=Robot Santa
+Icon=Robot Santa.jpg
+Difficulty=Easy
+Description=./Standard/Adventures_in_the_Forgotten_Realms/Adam_Hernandez_-_Jeskai_Mutate_(Standard,_#1187058).dck
+Deck Type=constructed
+
+[Main]
+4 Lore Drakkis
+4 Goldspan Dragon
+4 Vadrok, Apex of Thunder
+1 Mazemind Tome
+1 Essence Scatter
+1 Burning Hands
+1 Mystical Dispute
+1 Disdainful Stroke
+1 Negate
+2 Sejiri Shelter
+2 Dragon's Fire
+4 Unsubstantiate
+4 Prismari Command
+4 Spikefield Hazard
+1 Seize the Spoils
+4 Expressive Iteration
+2 Mountain
+3 Island
+4 Needleverge Pathway
+4 Raugrin Triome
+4 Hengegate Pathway
+4 Riverglide Pathway
+[Sideboard]
+1 Burning Hands
+1 Test of Talents
+1 Mystical Dispute
+1 Phoenix of Ash
+1 Redcap Melee
+1 Light of Hope
+1 Negate
+2 Soul Sear
+3 Mazemind Tome
+3 Cinderclasm

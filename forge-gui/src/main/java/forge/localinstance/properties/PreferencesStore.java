@@ -113,9 +113,9 @@ public abstract class PreferencesStore<T extends Enum<T> & PreferencesStore.IPre
     }
 
     public final int getPrefInt(final T fp0) {
-        try{
+        try {
             return Integer.parseInt(getPref(fp0));
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             return Integer.parseInt(getPrefDefault(fp0));
         }
     }
@@ -127,6 +127,7 @@ public abstract class PreferencesStore<T extends Enum<T> & PreferencesStore.IPre
     public final double getPrefDouble(final T fp0) {
         return Double.parseDouble(getPref(fp0));        
     }
+
     public void setGameType(final T q0, final Set<GameType> gameTypes) {
         String s0 = "";
         Set<String> e = new HashSet<>();

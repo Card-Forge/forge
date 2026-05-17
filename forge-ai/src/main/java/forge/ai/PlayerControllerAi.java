@@ -340,7 +340,7 @@ public class PlayerControllerAi extends PlayerController {
         if (delayedReveal != null) {
             reveal(delayedReveal);
         }
-        return SpellApiToAi.Converter.get(sa).chooseSingleEntity(player, sa, (FCollection<T>)optionList, isOptional, targetedPlayer, params);
+        return SpellApiToAi.Converter.get(sa).chooseSingleEntity(player, sa, optionList, isOptional, targetedPlayer, params);
     }
 
     @Override
@@ -659,7 +659,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public CardCollection chooseCardsToDiscardFrom(Player p, SpellAbility sa, CardCollection validCards, int min, int max) {
+    public CardCollection chooseCardsToDiscardFrom(Player p, SpellAbility sa, CardCollection validCards, int min, int max, CardCollectionView visibleToChooser) {
         if (p == player) {
             return brains.getCardsToDiscard(min, max, validCards, sa);
         }
@@ -931,10 +931,9 @@ public class PlayerControllerAi extends PlayerController {
         if (call) {
             // Win if possible
             return true;
-        } else {
-            // heads or tails, AI doesn't know which is better now
-            return MyRandom.getRandom().nextBoolean();
         }
+        // heads or tails, AI doesn't know which is better now
+        return MyRandom.getRandom().nextBoolean();
     }
 
     @Override
@@ -993,7 +992,10 @@ public class PlayerControllerAi extends PlayerController {
                 }
                 return defaultVal != null && defaultVal;
             case LeftOrRight: return brains.chooseDirection(sa);
-            case OddsOrEvens: return brains.chooseEvenOdd(sa); // false is Odd, true is Even
+            case OddsOrEvens: return brains.chooseEvenOdd(sa);
+            case HeadsOrTails:
+                // this is the result if AI gets to choose after
+                return true;
             default:
                 return MyRandom.getRandom().nextBoolean();
         }

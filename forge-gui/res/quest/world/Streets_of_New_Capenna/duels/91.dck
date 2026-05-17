@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Legolas
+Title=Legolas
+Icon=Legolas.jpg
+Difficulty=Hard
+Description=./Modern/Streets_of_New_Capenna/Jay_becker_-_Jund_(Modern,_#1362607).dck
+Deck Type=constructed
+
+[Main]
+1 Dauthi Voidwalker
+1 Dark Confidant
+2 Kroxa, Titan of Death's Hunger
+3 Seasoned Pyromancer
+4 Tarmogoyf
+2 Terminate
+2 Riveteers Charm
+3 Fatal Push
+4 Lightning Bolt
+3 Inquisition of Kozilek
+4 Thoughtseize
+1 Grist, the Hunger Tide
+3 Liliana of the Veil
+4 Wrenn and Six
+1 Swamp
+1 Overgrown Tomb
+1 Stomping Ground
+1 Mountain
+1 Ziatora's Proving Ground
+1 Wooded Foothills
+1 Blooming Marsh
+1 Boseiju, Who Endures
+2 Takenuma, Abandoned Mire
+2 Nurturing Peatland
+2 Blood Crypt
+2 Blackcleave Cliffs
+3 Verdant Catacombs
+4 Bloodstained Mire
+[Sideboard]
+1 Endurance
+1 Fury
+1 Boil
+1 Void Mirror
+1 Force of Vigor
+1 Ancient Grudge
+1 Engineered Explosives
+2 Collective Brutality
+3 Ashiok, Dream Render
+3 Alpine Moon

@@ -8,7 +8,6 @@ import org.tinylog.Logger;
 
 public class GuiBase {
     private static IGuiBase guiInterface;
-    private static boolean propertyConfig = true;
     private static boolean isAndroidport = false;
     private static String adventureDirectory = null;
     private static boolean interrupted = false;
@@ -74,7 +73,7 @@ public class GuiBase {
     }
     public static int getAndroidAPILevel() { return androidAPI; }
 
-    public static boolean isNetworkplay(IGuiGame game) {
+    public static boolean isNetPlay(IGuiGame game) {
         if (game != null) {
             // query AbstractGuiGame implementation if provided
             return game.isNetGame();
@@ -83,9 +82,6 @@ public class GuiBase {
         // to check all available IGuiGame
         return getInterface().hasNetGame();
     }
-
-    public static boolean hasPropertyConfig() { return propertyConfig; }
-    public static void enablePropertyConfig(boolean value) { propertyConfig = value; }
 
     public static void setInterrupted(boolean value) { interrupted = value; }
     public static boolean isInterrupted() { return interrupted; }

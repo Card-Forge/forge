@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Sauron
+Title=Sauron
+Icon=Sauron.jpg
+Difficulty=Hard
+Description=../Modern/Kaladesh/SCG_Invitational_Qualifier_Springfield/Sam_Walker_-_Burn_(Modern,_#653006).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+1 Grim Lavamancer
+4 Monastery Swiftspear
+4 Boros Charm
+4 Lightning Bolt
+2 Lightning Helix
+4 Searing Blaze
+2 Shard Volley
+4 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+2 Arid Mesa
+4 Inspiring Vantage
+4 Mountain
+3 Sacred Foundry
+2 Scalding Tarn
+4 Wooded Foothills
+[Sideboard]
+2 Deflecting Palm
+2 Ensnaring Bridge
+1 Flames of the Blood Hand
+2 Fragmentize
+3 Kor Firewalker
+1 Lightning Helix
+2 Path to Exile
+2 Smash to Smithereens

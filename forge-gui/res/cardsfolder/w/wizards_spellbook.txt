@@ -1,6 +1,6 @@
 Name:Wizard's Spellbook
 ManaCost:5 U U
-Types:Artifact
+Types:Artifact Book
 A:AB$ ChangeZone | Cost$ T | SorcerySpeed$ True | Origin$ Graveyard | Destination$ Exile | Mandatory$ True | ValidTgts$ Instant,Sorcery | TgtPrompt$ Select target instant or sorcery card in a graveyard | RememberChanged$ True | SubAbility$ DBRollDice | SpellDescription$ Exile target instant or sorcery card from a graveyard. Roll a d20. Activate only as a sorcery.
 SVar:DBRollDice:DB$ RollDice | Sides$ 20 | ResultSubAbilities$ 1-9:PlayCopy,10-19:PlayCost1,20:PlayAny
 SVar:PlayCopy:DB$ Play | Valid$ Card.IsRemembered | ValidSA$ Spell | ValidZone$ Exile | Amount$ All | CopyCard$ True | Optional$ True | SubAbility$ DBCleanup | SpellDescription$ 1—9 VERT Copy that card. You may cast the copy.
