@@ -151,7 +151,6 @@ public final class FServerManager implements IHasForgeLog {
                                     new MessageHandler(),
                                     new SaturationLoggingHandler(),
                                     new RegisterClientHandler(),
-                                    new LobbyInputHandler(),
                                     new DeregisterClientHandler(),
                                     new GameServerHandler());
                         }
@@ -910,32 +909,6 @@ public final class FServerManager implements IHasForgeLog {
             if (msg instanceof LoginEvent event) {
                 final String username = event.getUsername();
                 client.setUsername(username);
-            } else if (msg instanceof UpdateLobbyPlayerEvent event) {
-                localLobby.applyToSlot(client.getIndex(), event);
-                if (event.getName() != null) {
-                    String oldName = client.getUsername();
-                    String newName = event.getName();
-                    if (!newName.equals(oldName)) {
-                        client.setUsername(newName);
-                        broadcast(new MessageEvent(String.format("%s changed their name to %s", oldName, newName)));
-                    }
-                }
-                if (event.getReady() != null) {
-                    broadcastReadyState(client.getUsername(), event.getReady());
-                }
-                // Return to prevent duplicate processing by LobbyInputHandler
-                return;
-            }
-            super.channelRead(ctx, msg);
-        }
-    }
-
-    private class LobbyInputHandler extends ChannelInboundHandlerAdapter {
-        @Override
-        public void channelRead(final ChannelHandlerContext ctx, final Object msg) throws Exception {
-            final RemoteClient client = clients.get(ctx.channel());
-            if (msg instanceof LoginEvent event) {
-                final String username = event.getUsername();
 
                 // Check if this is a reconnecting player
                 final RemoteClient disconnected = disconnectedClients.remove(username);
@@ -992,9 +965,21 @@ public final class FServerManager implements IHasForgeLog {
                         updateLobbyState();
                     }
                 }
+            } else if (msg instanceof UpdateLobbyPlayerEvent event) {
+                localLobby.applyToSlot(client.getIndex(), event);
+                if (event.getName() != null) {
+                    String oldName = client.getUsername();
+                    String newName = event.getName();
+                    if (!newName.equals(oldName)) {
+                        client.setUsername(newName);
+                        broadcast(new MessageEvent(String.format("%s changed their name to %s", oldName, newName)));
+                    }
+                }
+                if (event.getReady() != null) {
+                    broadcastReadyState(client.getUsername(), event.getReady());
+                }
+                return;
             }
-            // Note: UpdateLobbyPlayerEvent is intercepted by RegisterClientHandler
-            // (early return), and MessageEvent is handled by MessageHandler.
             super.channelRead(ctx, msg);
         }
     }
