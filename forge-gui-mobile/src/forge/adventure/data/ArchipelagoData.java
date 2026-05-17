@@ -29,8 +29,6 @@ public class ArchipelagoData implements SaveFileContent {
     private final Set<String> regionTeleportingRunes = new HashSet<>(Arrays.asList("White rune","Black rune","Blue rune","Red rune","Green rune"));
     // List of known main bosses that contribute to APWorld completion
     private final Set<String> mainBosses = new HashSet<>(Arrays.asList("Lorthos","Emrakul","Lathliss","Ghalta","Griselbrand","Akroma","Sliver Queen"));
-    // List of known equipment shop names
-    private final Set<String> equipmentShops = new HashSet<>(Arrays.asList("equipment","whiteitems","blueitems","blackitems","reditems","greenitems"));
 
     // Actual user data we want to store
     private final Map<String, Long> completedTownInnEvents = new HashMap<>();
@@ -67,7 +65,6 @@ public class ArchipelagoData implements SaveFileContent {
     private int receivedAmountOfSetUnlockChecks = 0;
     private float setUnlockChecksRestAmount = 0;
 
-    private final Set<String> listOfUnlockableItems = new HashSet<>();
     private final int totalAmountOfSetUnlockChecks = 100; // Todo: This should be set based on the value we receive in the APWorld
     private final int totalBattlesWonBreakpoint = 3; // Reward for every 3 battles won.
     private final int totalTownQuestsAndEventsBreakpoint = 2; // Reward for every 2 town events or quests done.
@@ -363,7 +360,6 @@ public class ArchipelagoData implements SaveFileContent {
 
     // Todo: Create a function that returns a list of equipment for any given shop to sell based on the previously randomized lists.
     public Object[] getItemsForEquipmentShop(String shopName) {
-        Array<Reward> result = new Array<>();
         if (shopName.toLowerCase().contains("items")) {
             // Items shop name
             if (shopName.toLowerCase().contains("white")) {
