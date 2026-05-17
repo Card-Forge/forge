@@ -48,7 +48,6 @@ public final class GameMenu {
         menu.add(autoPassItem);
         menu.add(getMenuItem_ClearRememberedAbilityOrders());
         menu.addSeparator();
-        menu.add(getMenuItem_ViewDeckList());
         menu.addMenuListener(new MenuListener() {
             @Override public void menuSelected(final MenuEvent e) {
                 autoPassItem.setState(prefs.getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS));
