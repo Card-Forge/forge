@@ -558,7 +558,10 @@ public class MapStage extends GameStage {
                             {
                                 mob.speedModifier = Float.parseFloat(prop.get("speedModifier").toString());
                             }
-
+                            if (ArchipelagoData.getInstance().getArchipelagoMode() != ArchipelagoMode.disabled) {
+                                // Increase base speed of mobs & player to compensate for removal of starting boots.
+                                mob.speedModifier *= 1.15f;
+                            }
                             enemies.add(mob);
                             addMapActor(obj, mob);
                         }
@@ -720,8 +723,39 @@ public class MapStage extends GameStage {
                         shopsAlreadyPresent.add(data.name);
                         Array<Reward> ret = new Array<>();
                         WorldSave.getCurrentSave().getWorld().getRandom().setSeed(changes.getShopSeed(id));
-                        for (RewardData rdata : new Array.ArrayIterator<>(data.rewards)) {
-                            ret.addAll(rdata.generate(false, false));
+                        // Todo: This is where equipment shops load their rewards. Each reward has a RewardType of "item" and comes pre-defined with an item name.
+                        //  They are defined in Shandalar/Shops.json as Equipment, <Color>Item and <Color>Equipment. We can dynamically detect those names and replace their items if AP mode is enabled here.
+                        //  The "Equipment" shop is used generically for all non capital equipment vendors and as such always carries the same items.
+                        //  Some equipment doesn't have a cost so we'll need to make up a number for how much it will cost to buy.
+                        switch (ArchipelagoData.getInstance().getArchipelagoMode()) {
+                            case disabled:
+                                for (RewardData rdata : new Array.ArrayIterator<>(data.rewards)) {
+                                    ret.addAll(rdata.generate(false, false));
+                                }
+                                break;
+                            case solo_randomizer:
+                                // Todo: Get randomized subset from the total list of available items inside ArchipelagoData.
+                                //  Also, there's code duplication here, you should fix that by making a function.
+                                if (data.name.toLowerCase().contains("equipment") || data.name.toLowerCase().contains("items")) {
+                                    // Get list of items for specific shop.
+                                    Object[] randomizedEquipmentList = ArchipelagoData.getInstance().getItemsForEquipmentShop(data.name);
+                                    // Swap the shop's rewards
+                                    if (randomizedEquipmentList != null && randomizedEquipmentList.length <= data.rewards.size) {
+                                        for (int i = 0; i < randomizedEquipmentList.length; i++) {
+                                            data.rewards.set(i, ArchipelagoUtil.generateRewardData("item", 1, randomizedEquipmentList[i].toString()));
+                                        }
+                                    }
+                                }
+                                for (RewardData rdata : new Array.ArrayIterator<>(data.rewards)) {
+                                    ret.addAll(rdata.generate(false, false));
+                                }
+                                break;
+                            case networked_archipelago:
+                                // Todo: Get randomized subset from networked APWorld via ArchipelagoData.
+                                //  This code is a stub and should be replaced.
+                                for (RewardData rdata : new Array.ArrayIterator<>(data.rewards)) {
+                                    ret.addAll(rdata.generate(false, false));
+                                }
                         }
                         ShopActor actor = new ShopActor(this, id, ret, data);
                         addMapActor(obj, actor);

@@ -80,6 +80,7 @@ public class EnemySprite extends CharacterSprite implements Steerable<Vector2> {
     public float threatRange = 0.0f; //If range < threatRange, begin pursuit
     public float pursueRange = 0.0f; //If range > pursueRange, abandon pursuit
     public float fleeRange = 0.0f; //If range < fleeRange, attempt to move away to fleeRange
+    // Todo: Modify this by 1.15x when AP is enabled.
     public float speedModifier = 0.0f; // Increase or decrease default speed
     public boolean aggro = false;
     public boolean ignoreDungeonEffect = false;

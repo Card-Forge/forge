@@ -14,6 +14,8 @@ import com.github.tommyettinger.textra.TextraLabel;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
 import forge.adventure.character.ShopActor;
+import forge.adventure.data.ArchipelagoData;
+import forge.adventure.data.ArchipelagoMode;
 import forge.adventure.data.RewardData;
 import forge.adventure.data.ShopData;
 import forge.adventure.player.AdventurePlayer;
@@ -504,6 +506,10 @@ public class RewardScene extends UIScene {
                     lastRowXAdjust = ((numberOfColumns * cardWidth) - (lastRowCount * cardWidth)) / 2;
             }
 
+            // Todo: Add logic so this works with the networked archipelago as well.
+            if (ArchipelagoData.getInstance().getArchipelagoMode() != ArchipelagoMode.disabled && type == Type.Loot && reward.getType() == Reward.Type.Item && reward.getItem().equipmentSlot != null && !reward.getItem().equipmentSlot.isEmpty()) {
+                reward = ArchipelagoData.getInstance().takeSingleEquipmentOutOfRemainingPool();
+            }
             RewardActor actor = new RewardActor(reward, type == Type.Loot || type == Type.QuestReward, type, type == Type.Shop && (numberOfRows > 2 || numberOfColumns > 2));
 
             actor.setBounds(lastRowXAdjust + xOff + cardWidth * (i % numberOfColumns) + spacing, yOff + cardHeight * currentRow + spacing, cardWidth - spacing * 2, cardHeight - spacing * 2);

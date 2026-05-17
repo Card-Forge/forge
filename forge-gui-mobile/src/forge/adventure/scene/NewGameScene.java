@@ -365,6 +365,9 @@ public class NewGameScene extends MenuScene {
             if (AdventurePlayer.current().getQuests().stream().noneMatch(q -> q.getID() == 28)) {
                 AdventurePlayer.current().addQuest("28", true); //Temporary link to Shandalar main questline
             }
+            if (archipelagoMode != ArchipelagoMode.disabled) {
+                AdventurePlayer.current().removeItem("Leather Boots");
+            }
             Forge.switchScene(GameScene.instance());
         };
         Forge.setTransitionScreen(new TransitionScreen(runnable, null, false, true, Forge.getLocalizer().getMessage("lblGeneratingWorld")));
@@ -480,7 +483,7 @@ public class NewGameScene extends MenuScene {
                 summaryText.append("Randomizer: Disabled\n\nNo changes, the regular Adventure mode experience.\n\n");
                 break;
             case solo_randomizer:
-                summaryText.append("Randomizer: Solo Randomizer\n\nAll cards outside of your starting deck will be locked by default. Biomes, cards and equipment unlocks are randomized and can be unlocked by completing various objectives in the game.\n\n");
+                summaryText.append("Randomizer: Solo Randomizer\n\nAll cards outside of your starting deck will be locked by default. Biomes, cards and equipment unlocks are randomized and can be unlocked by completing various objectives in the game.\nThe Leather Boots in your starting equipment are removed regardless of difficulty, all entities' base speed is increased to compensate.\n\n");
                 break;
             case networked_archipelago:
                 summaryText.append("Randomizer: Networked Archipelago\n\nAs 'Solo Randomizer' except that unlocks will be distributed through an online Archipelago server. More info at https://multiworld.gg/\nPlease ensure your Archipelago client is configured and connected.\nWARNING: Archipelago support is currently unavailable.\n\n");

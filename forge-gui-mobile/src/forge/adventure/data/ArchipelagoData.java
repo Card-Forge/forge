@@ -1,5 +1,8 @@
 package forge.adventure.data;
 
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Json;
 import forge.StaticData;
 import forge.adventure.scene.TileMapScene;
 import forge.adventure.stage.GameHUD;
@@ -38,6 +41,19 @@ public class ArchipelagoData implements SaveFileContent {
     private final Set<String> bossesDefeatedByName = new HashSet<>();
     private final Set<String> miniBossesDefeatedByName = new HashSet<>();
     private final Set<String> lockedWorldRegionsByName = new HashSet<>();
+    // Todo: Replace the String with another serializable object that is compatible with Archipelago i.e. `NetworkItem.java`
+    private final Set<String> colorlessEquipmentShopList = new HashSet<>();
+    private final Set<String> whiteEquipmentShopList = new HashSet<>();
+    private final Set<String> blueEquipmentShopList = new HashSet<>();
+    private final Set<String> blackEquipmentShopList = new HashSet<>();
+    private final Set<String> redEquipmentShopList = new HashSet<>();
+    private final Set<String> greenEquipmentShopList = new HashSet<>();
+    private final Set<String> whiteItemShopList = new HashSet<>();
+    private final Set<String> blueItemShopList = new HashSet<>();
+    private final Set<String> blackItemShopList = new HashSet<>();
+    private final Set<String> redItemShopList = new HashSet<>();
+    private final Set<String> greenItemShopList = new HashSet<>();
+    private final Set<String> remainingEquipmentPool = new HashSet<>();
     private int lastArchipelagoRewardIndex = 0;
     private int totalGoldEarned = 0;
     private int totalExtraMaxLifeEarned = 0;
@@ -49,7 +65,6 @@ public class ArchipelagoData implements SaveFileContent {
     private int receivedAmountOfSetUnlockChecks = 0;
     private float setUnlockChecksRestAmount = 0;
 
-    private final Set<String> listOfUnlockableItems = new HashSet<>();
     private final int totalAmountOfSetUnlockChecks = 100; // Todo: This should be set based on the value we receive in the APWorld
     private final int totalBattlesWonBreakpoint = 3; // Reward for every 3 battles won.
     private final int totalTownQuestsAndEventsBreakpoint = 2; // Reward for every 2 town events or quests done.
@@ -99,7 +114,60 @@ public class ArchipelagoData implements SaveFileContent {
 
         this.archipelagoMode = archipelagoMode;
 
+        randomizeLocalEquipment();
         loadAllAvailableSets();
+    }
+
+    // Todo: Make the max life upgrades available through another method (more checks perhaps)
+    // Todo: Figure out what to do with the "overpowered" equipment.
+    // Each reward has a RewardType of "item" and comes pre-defined with an itemName.
+    //  They are defined in Shandalar/Shops.json as Equipment, <Color>Item and <Color>Equipment. We can dynamically detect those names and replace their items if AP mode is enabled here.
+    //  Equipment: 6 slots to randomize
+    //  <Color>Equipment: 6 slots to randomize
+    //  <Color>Items: 8 slots to randomize including 1 slot that is not equipment but rather a max health upgrade
+    private void randomizeLocalEquipment() {
+        // First we get the names of all the items in the pool.
+        ArrayList<String> equipmentNames = new ArrayList<>();
+        // We also filter out the "overpowered" cards into this separate list, they might be fun to throw in later.
+        ArrayList<String> powerEquipmentNames = new ArrayList<>();
+        FileHandle handle = Config.instance().getFile(Paths.ITEMS);
+        if (handle.exists()) {
+            Json json = new Json();
+            Array<ItemData> shopList = json.fromJson(Array.class, ItemData.class, handle);
+
+            // First we read all the items from `adventure/common/world/items.json`
+            for (int i = 0; i < shopList.size; i++) {
+                if (shopList.get(i).equipmentSlot != null && !shopList.get(i).equipmentSlot.isEmpty()) {
+                    // We've found an equipment item, add it to the list but exclude the "overpowered" items.
+                    if (shopList.get(i).name.toLowerCase().contains("rune")) continue;
+                    if (shopList.get(i).name.toLowerCase().contains("mox") || shopList.get(i).name.toLowerCase().contains("black lotus") || shopList.get(i).name.toLowerCase().contains("sol ring") || shopList.get(i).name.toLowerCase().contains("cheat")) {
+                        powerEquipmentNames.add(shopList.get(i).name);
+                        continue;
+                    }
+                    equipmentNames.add(shopList.get(i).name);
+                }
+            }
+        }
+
+        // Scramble the equipment names
+        Collections.shuffle(equipmentNames);
+        // Return if we didn't find enough items.
+        if (equipmentNames.size() < 72) return;
+        // Redistribute the items over each list.
+        colorlessEquipmentShopList.addAll(equipmentNames.subList(0, 6));
+        whiteEquipmentShopList.addAll(equipmentNames.subList(6, 12));
+        blueEquipmentShopList.addAll(equipmentNames.subList(12, 18));
+        blackEquipmentShopList.addAll(equipmentNames.subList(18, 24));
+        redEquipmentShopList.addAll(equipmentNames.subList(24, 30));
+        greenEquipmentShopList.addAll(equipmentNames.subList(30, 36));
+        whiteItemShopList.addAll(equipmentNames.subList(36, 43));
+        blueItemShopList.addAll(equipmentNames.subList(43, 50));
+        blackItemShopList.addAll(equipmentNames.subList(50, 57));
+        redItemShopList.addAll(equipmentNames.subList(57, 64));
+        greenItemShopList.addAll(equipmentNames.subList(64, 71));
+        // Remove the first 72 items from the equipment list so we can use the remaining ones for future equipment rewards.
+        equipmentNames.removeAll(equipmentNames.subList(0, 71));
+        remainingEquipmentPool.addAll(equipmentNames);
     }
 
     private void updatePlayerChecks(ARCHIPELAGO_CHECK_TYPES type) {
@@ -236,6 +304,7 @@ public class ArchipelagoData implements SaveFileContent {
         }
     }
 
+    // This produces a different result each time it's rolled, the RNG isn't seeded.
     public void unlockRandomSet() {
         // Subtract unlocked sets from full list.
         Set<String> lockedSets = new HashSet<>(allCardSets);
@@ -256,24 +325,71 @@ public class ArchipelagoData implements SaveFileContent {
         float amountOfSetsToUnlock = (float) allCardSets.size() / totalAmountOfSetUnlockChecks + setUnlockChecksRestAmount;
         int amountOfSetsToUnlockFloored = (int) Math.floor(amountOfSetsToUnlock);
         setUnlockChecksRestAmount = (amountOfSetsToUnlock - amountOfSetsToUnlockFloored);
-        for (int i = 0; i < amountOfSetsToUnlockFloored; i++) {
-            int targetSetIndex = new Random().nextInt(lockedSets.size());
-            String setToUnlock = null;
+        List<String> lockedList = new ArrayList<>(lockedSets);
+        Random random = new Random();
 
-            int setIndex = 0;
-            for (String set : lockedSets) {
-                if (setIndex++ == targetSetIndex) {
-                    setToUnlock = set;
-                    break;
+        String setToUnlock = lockedList.get(random.nextInt(lockedList.size()));
+        unlockSetByName(setToUnlock);
+        lockedSets.remove(setToUnlock);
+        receivedAmountOfSetUnlockChecks++;
+    }
+
+    // Todo: Expand this function to be able to return a list of rewards so that we can award the player gold, shards & a pack in place of their item.
+    // Returns & rewards the player a random item from the remainingEquipmentPool and then removes it from the list. If no item is left, the player is instead rewarded with gold or shards.
+    // This produces a different result each time it's rolled, the RNG isn't seeded.
+    public Reward takeSingleEquipmentOutOfRemainingPool() {
+        Random random = new Random();
+        while (true) {
+            if (!remainingEquipmentPool.isEmpty()) {
+                List<String> remainingEquipmentList = new ArrayList<>(remainingEquipmentPool);
+                String equipmentCandidate = remainingEquipmentList.get(random.nextInt(remainingEquipmentList.size()));
+                remainingEquipmentPool.remove(equipmentCandidate);
+                return ArchipelagoUtil.generateReward("item", 1, equipmentCandidate);
+            } else {
+                // Generate a random standard reward in place of the item.
+                int chosenItemType = random.nextInt(2);
+                switch (chosenItemType) {
+                    case 0:
+                        return new Reward(Reward.Type.Gold, 3000);
+                    case 1:
+                        return new Reward(Reward.Type.Shards, 75);
                 }
             }
+        }
+    }
 
-            if (setToUnlock != null) {
-                unlockSetByName(setToUnlock);
-                lockedSets.remove(setToUnlock);
+    // Todo: Create a function that returns a list of equipment for any given shop to sell based on the previously randomized lists.
+    public Object[] getItemsForEquipmentShop(String shopName) {
+        if (shopName.toLowerCase().contains("items")) {
+            // Items shop name
+            if (shopName.toLowerCase().contains("white")) {
+                return whiteItemShopList.toArray();
+            } else if (shopName.toLowerCase().contains("blue")) {
+                return blueItemShopList.toArray();
+            } else if (shopName.toLowerCase().contains("black")) {
+                return blackItemShopList.toArray();
+            } else if (shopName.toLowerCase().contains("red")) {
+                return redItemShopList.toArray();
+            } else if (shopName.toLowerCase().contains("green")) {
+                return greenItemShopList.toArray();
+            }
+        } else {
+            // Equipment shop name
+            if (shopName.toLowerCase().contains("white")) {
+                return whiteItemShopList.toArray();
+            } else if (shopName.toLowerCase().contains("blue")) {
+                return blueItemShopList.toArray();
+            } else if (shopName.toLowerCase().contains("black")) {
+                return blackItemShopList.toArray();
+            } else if (shopName.toLowerCase().contains("red")) {
+                return redItemShopList.toArray();
+            } else if (shopName.toLowerCase().contains("green")) {
+                return greenItemShopList.toArray();
+            } else {
+                return colorlessEquipmentShopList.toArray();
             }
         }
-        receivedAmountOfSetUnlockChecks++;
+        return null;
     }
 
     public void unlockRegionByName(String regionName) {
@@ -330,6 +446,10 @@ public class ArchipelagoData implements SaveFileContent {
     // Todo: This should be called by the networked part of the AP implementation when we receive a reward.
     public void incrementLastArchipelagoRewardIndex() {
         lastArchipelagoRewardIndex++;
+    }
+
+    public int getLastArchipelagoRewardIndex() {
+        return lastArchipelagoRewardIndex;
     }
 
     public void generateGameNotification(String message) {
@@ -526,6 +646,18 @@ public class ArchipelagoData implements SaveFileContent {
         loadStringSet(data, "cardsUnlocked", cardsUnlockedByName);
         loadStringSet(data, "setsUnlocked", setsUnlockedByCode);
         loadStringSet(data, "lockedRegions", lockedWorldRegionsByName);
+        loadStringSet(data, "colorlessEquipmentShop", colorlessEquipmentShopList);
+        loadStringSet(data, "whiteEquipmentShop", whiteEquipmentShopList);
+        loadStringSet(data, "blueEquipmentShop", blueEquipmentShopList);
+        loadStringSet(data, "blackEquipmentShop", blackEquipmentShopList);
+        loadStringSet(data, "redEquipmentShop", redEquipmentShopList);
+        loadStringSet(data, "greenEquipmentShop", greenEquipmentShopList);
+        loadStringSet(data, "whiteItemShop", whiteItemShopList);
+        loadStringSet(data, "blueEquipmentShop", blueItemShopList);
+        loadStringSet(data, "blackEquipmentShop", blackItemShopList);
+        loadStringSet(data, "redEquipmentShop", redItemShopList);
+        loadStringSet(data, "greenItemShop", greenItemShopList);
+        loadStringSet(data, "remainingEquipment", remainingEquipmentPool);
 
         setUnlockChecksRestAmount = data.containsKey("setUnlocksReceivedRest") ? data.readFloat("setUnlocksReceivedRest") : 0;
         receivedAmountOfSetUnlockChecks = data.containsKey("setUnlocksReceived") ? data.readInt("setUnlocksReceived") : 0;
@@ -558,6 +690,18 @@ public class ArchipelagoData implements SaveFileContent {
         saveStringSet(data, "cardsUnlocked", cardsUnlockedByName);
         saveStringSet(data, "setsUnlocked", setsUnlockedByCode);
         saveStringSet(data, "lockedRegions", lockedWorldRegionsByName);
+        saveStringSet(data, "colorlessEquipmentShop", colorlessEquipmentShopList);
+        saveStringSet(data, "whiteEquipmentShop", whiteEquipmentShopList);
+        saveStringSet(data, "blueEquipmentShop", blueEquipmentShopList);
+        saveStringSet(data, "blackEquipmentShop", blackEquipmentShopList);
+        saveStringSet(data, "redEquipmentShop", redEquipmentShopList);
+        saveStringSet(data, "greenEquipmentShop", greenEquipmentShopList);
+        saveStringSet(data, "whiteItemShop", whiteItemShopList);
+        saveStringSet(data, "blueEquipmentShop", blueItemShopList);
+        saveStringSet(data, "blackEquipmentShop", blackItemShopList);
+        saveStringSet(data, "redEquipmentShop", redItemShopList);
+        saveStringSet(data, "greenItemShop", greenItemShopList);
+        saveStringSet(data, "remainingEquipment", remainingEquipmentPool);
 
         data.store("setUnlocksReceivedRest", setUnlockChecksRestAmount);
         data.store("setUnlocksReceived", receivedAmountOfSetUnlockChecks);
