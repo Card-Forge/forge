@@ -149,8 +149,6 @@ public enum TrackableProperty {
     HasAnnihilator(TrackableTypes.BooleanType),
     HasWard(TrackableTypes.BooleanType),
 
-    ProtectionKey(TrackableTypes.StringType),
-
     BlockAdditional(TrackableTypes.IntegerType),
     BlockAny(TrackableTypes.BooleanType),
     AbilityText(TrackableTypes.StringType),
