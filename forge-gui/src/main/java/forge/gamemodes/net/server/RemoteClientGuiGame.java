@@ -125,6 +125,16 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
         sender.send(method, args);
     }
 
+    /**
+     * Send a protocol command without flushing pending state events.
+     * Use for commands reachable from non-game threads — the flush walks
+     * the trackable graph, which only the game thread may safely read.
+     */
+    private void forward(final ProtocolMethod method, final Object... args) {
+        if (paused) { return; }
+        sender.send(method, args);
+    }
+
     private <T> T sendAndWait(final ProtocolMethod method, final Object... args) {
         if (paused) { return null; }
         flushPendingEvents();
@@ -277,8 +287,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
 
     @Override
     public void showPromptMessage(final PlayerView playerView, final String message) {
-        updateGameView();
-        send(ProtocolMethod.showPromptMessage, playerView, message);
+        forward(ProtocolMethod.showPromptMessage, playerView, message);
     }
 
     @Override
@@ -294,7 +303,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
 
     @Override
     public void updateButtons(final PlayerView owner, final String label1, final String label2, final boolean enable1, final boolean enable2, final boolean focus1) {
-        send(ProtocolMethod.updateButtons, owner, label1, label2, enable1, enable2, focus1);
+        forward(ProtocolMethod.updateButtons, owner, label1, label2, enable1, enable2, focus1);
     }
 
     @Override
@@ -492,7 +501,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
 
     @Override
     public void showWaitingTimer(final PlayerView forPlayer, final String waitingForPlayerName) {
-        send(ProtocolMethod.showWaitingTimer, forPlayer, waitingForPlayerName);
+        forward(ProtocolMethod.showWaitingTimer, forPlayer, waitingForPlayerName);
     }
 
     @Override
