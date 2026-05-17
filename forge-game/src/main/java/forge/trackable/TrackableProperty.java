@@ -145,7 +145,7 @@ public enum TrackableProperty {
     OrigProduceMana(TrackableTypes.ColorSetType),
     OrigProduceAnyMana(TrackableTypes.BooleanType),
 
-    Keywords(TrackableTypes.KeywordCollectionViewType, FreezeMode.IgnoresFreeze),
+    Keywords(TrackableTypes.KeywordCollectionViewType),
     HasAnnihilator(TrackableTypes.BooleanType),
     HasWard(TrackableTypes.BooleanType),
 
