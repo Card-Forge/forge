@@ -77,25 +77,6 @@ public class CardFaceSymbols {
 
         //token icon
         Forge.getAssets().manaImages().put("token", FSkinImage.IMG_ABILITY_TOKEN);
-        //protection from
-        Forge.getAssets().manaImages().put("protectAll", FSkinImage.IMG_ABILITY_PROTECT_ALL);
-        Forge.getAssets().manaImages().put("protectB", FSkinImage.IMG_ABILITY_PROTECT_B);
-        Forge.getAssets().manaImages().put("protectBU", FSkinImage.IMG_ABILITY_PROTECT_BU);
-        Forge.getAssets().manaImages().put("protectBW", FSkinImage.IMG_ABILITY_PROTECT_BW);
-        Forge.getAssets().manaImages().put("protectColoredSpells", FSkinImage.IMG_ABILITY_PROTECT_COLOREDSPELLS);
-        Forge.getAssets().manaImages().put("protectG", FSkinImage.IMG_ABILITY_PROTECT_G);
-        Forge.getAssets().manaImages().put("protectGB", FSkinImage.IMG_ABILITY_PROTECT_GB);
-        Forge.getAssets().manaImages().put("protectGU", FSkinImage.IMG_ABILITY_PROTECT_GU);
-        Forge.getAssets().manaImages().put("protectGW", FSkinImage.IMG_ABILITY_PROTECT_GW);
-        Forge.getAssets().manaImages().put("protectGeneric", FSkinImage.IMG_ABILITY_PROTECT_GENERIC);
-        Forge.getAssets().manaImages().put("protectR", FSkinImage.IMG_ABILITY_PROTECT_R);
-        Forge.getAssets().manaImages().put("protectRB", FSkinImage.IMG_ABILITY_PROTECT_RB);
-        Forge.getAssets().manaImages().put("protectRG", FSkinImage.IMG_ABILITY_PROTECT_RG);
-        Forge.getAssets().manaImages().put("protectRU", FSkinImage.IMG_ABILITY_PROTECT_RU);
-        Forge.getAssets().manaImages().put("protectRW", FSkinImage.IMG_ABILITY_PROTECT_RW);
-        Forge.getAssets().manaImages().put("protectU", FSkinImage.IMG_ABILITY_PROTECT_U);
-        Forge.getAssets().manaImages().put("protectUW", FSkinImage.IMG_ABILITY_PROTECT_UW);
-        Forge.getAssets().manaImages().put("protectW", FSkinImage.IMG_ABILITY_PROTECT_W);
 
         // symbol lookup for text render
         for (Map.Entry<String, FSkinProp> e : FSkinProp.MANA_IMG.entrySet()) {

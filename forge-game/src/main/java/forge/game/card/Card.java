@@ -6848,49 +6848,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars, ITr
         }
     }
 
-    public String getProtectionKey() {
-        String protectKey = "";
-        boolean pR = false; boolean pG = false; boolean pB = false; boolean pU = false; boolean pW = false;
-        for (final KeywordInterface inst : getKeywords(Keyword.PROTECTION)) {
-            String kw = inst.getOriginal();
-            if (kw.equals("Protection from red") || kw.contains(":red")) {
-                if (!pR) {
-                    pR = true;
-                    protectKey += "R";
-                }
-            } else if (kw.equals("Protection from green") || kw.contains(":green")) {
-                if (!pG) {
-                    pG = true;
-                    protectKey += "G";
-                }
-            } else if (kw.equals("Protection from black") || kw.contains(":black")) {
-                if (!pB) {
-                    pB = true;
-                    protectKey += "B";
-                }
-            } else if (kw.equals("Protection from blue") || kw.contains(":blue")) {
-                if (!pU) {
-                    pU = true;
-                    protectKey += "U";
-                }
-            } else if (kw.equals("Protection from white") || kw.contains(":white")) {
-                if (!pW) {
-                    pW = true;
-                    protectKey += "W";
-                }
-            } else if (kw.contains("each color")) {
-                protectKey += "allcolors:";
-            } else if (kw.equals("Protection from everything")) {
-                protectKey += "everything:";
-            } else if (kw.contains("colored spells")) {
-                protectKey += "coloredspells:";
-            } else {
-                protectKey += "generic";
-            }
-        }
-        return protectKey;
-    }
-
     public Zone getZone() {
         return currentZone;
     }

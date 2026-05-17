@@ -27,6 +27,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 import forge.card.CardType;
+import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
 import forge.deck.DeckSection;
@@ -809,12 +810,18 @@ public enum FSkinProp {
             }
             boolean hexproofGeneric = false;
             Set<FSkinProp> hexproofTypes = Sets.newLinkedHashSet();
+            boolean protectionEverything = false;
+            Set<MagicColor.Color> protectionColors = Sets.newHashSet();
+            Set<FSkinProp> protectionTypes = Sets.newLinkedHashSet();
             for (KeywordView keyword : state.getKeywords()) {
                 // no effect on the battlefield
                 if (Keyword.FLASH == keyword.keyword()) {
                     continue;
                 }
                 if (Keyword.HEXPROOF == keyword.keyword()) {
+                    if (hexproofGeneric) {
+                        continue;
+                    }
                     String kw = keyword.original();
                     if (!kw.contains(":")) {
                         hexproofGeneric = true;
@@ -848,6 +855,31 @@ public enum FSkinProp {
                         hexproofGeneric = true;
                     }
                 } else if (Keyword.PROTECTION == keyword.keyword()) {
+                    if (protectionEverything) {
+                        continue;
+                    }
+
+                    String kw = keyword.original();
+                    if (kw.equals("Protection from everything")) {
+                        protectionEverything = true;
+                        continue;
+                    } else if (kw.equals("Protection from red") || kw.contains(":red")) {
+                        protectionColors.add(MagicColor.Color.RED);
+                    } else if (kw.equals("Protection from green") || kw.contains(":green")) {
+                        protectionColors.add(MagicColor.Color.GREEN);
+                    } else if (kw.equals("Protection from black") || kw.contains(":black")) {
+                        protectionColors.add(MagicColor.Color.BLACK);
+                    } else if (kw.equals("Protection from blue") || kw.contains(":blue")) {
+                        protectionColors.add(MagicColor.Color.BLUE);
+                    } else if (kw.equals("Protection from white") || kw.contains(":white")) {
+                        protectionColors.add(MagicColor.Color.WHITE);
+                    } else if (kw.contains("each color")) {
+                        protectionColors.addAll(ColorSet.WUBRG.toEnumSet());
+                    } else if (kw.contains("colored spells")) {
+                        protectionTypes.add(IMG_ABILITY_PROTECT_COLOREDSPELLS);
+                    } else {
+                        protectionTypes.add(IMG_ABILITY_PROTECT_GENERIC);
+                    }
                     continue;
                 } else {
                     FSkinProp prop = iconFromKeyword(keyword);
@@ -864,6 +896,33 @@ public enum FSkinProp {
                 result.add(IMG_ABILITY_HEXPROOF);
             } else {
                 result.addAll(hexproofTypes);
+            }
+            if (protectionEverything) {
+                result.add(IMG_ABILITY_PROTECT_ALL);
+            } else {
+                if (!protectionColors.isEmpty()) {
+                    result.add(switch (ColorSet.fromEnums(protectionColors)) {
+                        case W -> IMG_ABILITY_PROTECT_W;
+                        case U -> IMG_ABILITY_PROTECT_U;
+                        case B -> IMG_ABILITY_PROTECT_B;
+                        case R -> IMG_ABILITY_PROTECT_R;
+                        case G -> IMG_ABILITY_PROTECT_G;
+
+                        case WU -> IMG_ABILITY_PROTECT_UW;
+                        case WB -> IMG_ABILITY_PROTECT_BW;
+                        case UB -> IMG_ABILITY_PROTECT_BU;
+                        case RW -> IMG_ABILITY_PROTECT_RW;
+                        case UR -> IMG_ABILITY_PROTECT_RU;
+                        case BR -> IMG_ABILITY_PROTECT_RB;
+                        case GW -> IMG_ABILITY_PROTECT_GW;
+                        case GU -> IMG_ABILITY_PROTECT_GU;
+                        case BG -> IMG_ABILITY_PROTECT_GB;
+                        case RG -> IMG_ABILITY_PROTECT_RG;
+                        case WUBRG -> IMG_ABILITY_PROTECT_ALL;
+                        default -> IMG_ABILITY_PROTECT_GENERIC;
+                    });
+                }
+                result.addAll(protectionTypes);
             }
         } else if (state.hasKeyword(Keyword.FLASH) || (state.getAbilityText().contains("May be played by")
                 && state.getAbilityText().contains("and as though it has flash"))) {

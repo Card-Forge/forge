@@ -1582,7 +1582,6 @@ public class CardView extends GameEntityView {
         public KeywordCollectionView getKeywords()  { return get(TrackableProperty.Keywords); }
         public boolean hasKeyword(Keyword keyword) { return getKeywords().contains(keyword); }
 
-        public String getProtectionKey() { return get(TrackableProperty.ProtectionKey); }
         public boolean hasAnnihilator() { return get(TrackableProperty.HasAnnihilator); }
         public boolean hasWard() { return get(TrackableProperty.HasWard); }
 
@@ -1616,8 +1615,6 @@ public class CardView extends GameEntityView {
             set(TrackableProperty.HasAnnihilator, c.hasKeyword(Keyword.ANNIHILATOR, state) || state.getTriggers().anyMatch(t -> t.isKeyword(Keyword.ANNIHILATOR)));
             set(TrackableProperty.HasWard, c.hasKeyword(Keyword.WARD, state) || state.getTriggers().anyMatch(t -> t.isKeyword(Keyword.WARD)));
             updateAbilityText(c, state);
-            //set protectionKey for Icons
-            set(TrackableProperty.ProtectionKey, c.getProtectionKey());
             //update Trackable Mana Color for BG Colors
             updateManaColorBG(state);
 

@@ -86,25 +86,6 @@ public class CardFaceSymbols {
 
         //token icon
         MANA_IMAGES.put("token", FSkin.getImage(FSkinProp.IMG_ABILITY_TOKEN));
-        //protection from
-        MANA_IMAGES.put("protectAll", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_ALL));
-        MANA_IMAGES.put("protectB", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_B));
-        MANA_IMAGES.put("protectBU", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_BU));
-        MANA_IMAGES.put("protectBW", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_BW));
-        MANA_IMAGES.put("protectColoredSpells", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_COLOREDSPELLS));
-        MANA_IMAGES.put("protectG", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_G));
-        MANA_IMAGES.put("protectGB", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_GB));
-        MANA_IMAGES.put("protectGU", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_GU));
-        MANA_IMAGES.put("protectGW", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_GW));
-        MANA_IMAGES.put("protectGeneric", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_GENERIC));
-        MANA_IMAGES.put("protectR", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_R));
-        MANA_IMAGES.put("protectRB", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_RB));
-        MANA_IMAGES.put("protectRG", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_RG));
-        MANA_IMAGES.put("protectRU", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_RU));
-        MANA_IMAGES.put("protectRW", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_RW));
-        MANA_IMAGES.put("protectU", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_U));
-        MANA_IMAGES.put("protectUW", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_UW));
-        MANA_IMAGES.put("protectW", FSkin.getImage(FSkinProp.IMG_ABILITY_PROTECT_W));
     }
 
     /**
