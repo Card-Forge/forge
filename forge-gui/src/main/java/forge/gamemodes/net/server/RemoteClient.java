@@ -168,7 +168,13 @@ public final class RemoteClient implements IToClient, IHasForgeLog {
     public RemoteClientGuiGame getGui() {
         return gui;
     }
-    public void setGui(final RemoteClientGuiGame gui) {
+    public RemoteClientGuiGame getOrCreateGui() {
+        if (gui == null) {
+            gui = new RemoteClientGuiGame(this);
+        }
+        return gui;
+    }
+    void setGui(final RemoteClientGuiGame gui) {
         this.gui = gui;
     }
     public void clearGui() {

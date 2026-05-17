@@ -75,6 +75,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
         this.client = client;
         sender = new GameProtocolSender(client);
         syncManager = new DeltaSyncManager();
+        client.setGui(this);
     }
 
     public RemoteClient getClient() {
