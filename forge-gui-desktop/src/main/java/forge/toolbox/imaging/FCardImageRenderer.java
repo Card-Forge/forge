@@ -191,7 +191,7 @@ public class FCardImageRenderer {
             boolean hasPTBox = false;
             if (!card.isSplitCard() && !card.isFlipCard()) {
                 final CardStateView state = card.getState(card.hasSecondaryState() ? false : altState);
-                if ((state.isCreature() && !state.hasKeyword(Keyword.LEVEL_UP))
+                if ((state.isCreature() && !state.getOracleText().startsWith("Level up"))
                         || state.isPlaneswalker() || state.isBattle() || state.isVehicle())
                     hasPTBox = true;
             }
@@ -343,7 +343,7 @@ public class FCardImageRenderer {
         }
 
         //handle leveler cards
-        if (state.hasKeyword(Keyword.LEVEL_UP)) {
+        if (state.getOracleText().startsWith("Level up")) {
             int textBoxHeightDiv3 = Math.round(textBoxHeight / 3f);
             String [] paragraphs = linebreakPattern.split(text);
             StringBuilder sb = new StringBuilder();
