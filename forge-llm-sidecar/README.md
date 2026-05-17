@@ -162,6 +162,8 @@ forge-llm-sidecar/
 
 ## Documentation
 
+- [docs/DECK_IDENTIFICATION.md](docs/DECK_IDENTIFICATION.md) — a guided
+  walkthrough of how the AI identifies a deck, including the LLM prompt.
 - [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — components, request flow, the
   graph, the metagame pipeline, failure behavior.
 - [docs/API.md](docs/API.md) — full HTTP contract for every endpoint.
