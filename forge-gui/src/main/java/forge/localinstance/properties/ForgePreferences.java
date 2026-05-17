@@ -126,6 +126,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_CJK_FONT (""),
         UI_TARGETING_OVERLAY ("2"),
         UI_TIMED_TARGETING_OVERLAY_UPDATES ("true"),
+        UI_DOCK_LAYOUT (""),
         UI_CURRENT_AI_PROFILE ("Default"),
         UI_CLONE_MODE_SOURCE ("false"),
         UI_MATCH_IMAGE_VISIBLE ("true"),
