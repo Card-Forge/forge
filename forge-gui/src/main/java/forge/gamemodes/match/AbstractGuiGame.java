@@ -115,6 +115,23 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return gameView;
     }
 
+    /**
+     * Receives a {@link GameView} snapshot and installs it as the GUI's view of game state.
+     * Called at game lifecycle boundaries (start, restart, recovery) and when a remote
+     * client receives a {@code setGameView} protocol message.
+     *
+     * <p>Two paths: if either {@code gameView} or {@code gameView0} is null, the field is
+     * reassigned directly. If both are non-null, the incoming view's properties are merged
+     * into the existing view via {@link GameView#copyChangedProps} rather than swapping
+     * the reference.
+     *
+     * <p>The merge path preserves object identity of the GameView and every nested
+     * {@link forge.trackable.TrackableObject}. GUI components hold direct references to
+     * those instances (UI panels store {@code PlayerView}/{@code CardView} fields;
+     * delta-sync consumers also register per-consumer dirty bits on them). Swapping the
+     * GameView reference would leave those references pointing at an orphaned graph;
+     * merging keeps them valid as the data underneath changes.
+     */
     @Override
     public void setGameView(final GameView gameView0) {
         if (gameView == null || gameView0 == null) {
@@ -124,9 +141,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             gameView = gameView0;
             return;
         }
-
-        //if game view set to another instance without being first cleared,
-        //update existing game view object instead of overwriting it
         gameView.copyChangedProps(gameView0);
     }
 
