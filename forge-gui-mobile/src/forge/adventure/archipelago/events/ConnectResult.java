@@ -2,6 +2,7 @@ package forge.adventure.archipelago.events;
 
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.adventure.archipelago.SlotData;
+import forge.adventure.data.ArchipelagoData;
 import forge.adventure.util.ArchipelagoClient;
 import io.github.archipelagomw.Utils;
 import io.github.archipelagomw.events.ArchipelagoEventListener;
@@ -27,7 +28,8 @@ public class ConnectResult {
             try {
                 connectStatusLabel.setText("");
                 connectStatusLabel.setText("{FADE=GREEN;GREEN;0.1}Connected!");
-//                APClient.slotData = event.getSlotData(SlotData.class);
+                APClient.slotData = event.getSlotData(SlotData.class);
+
 //                APClient.slotData.parseStartingItems(registries);
             } catch (Exception e) {
                 if (APClient.slotData != null) {

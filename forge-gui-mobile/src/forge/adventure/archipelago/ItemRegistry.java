@@ -6,12 +6,12 @@ import java.util.Map;
 
 public class ItemRegistry {
     private static final Map<Long, String> DEFAULT_ITEMS = ImmutableMap.<Long, String>builder()
-            .put(1L, "White Rune")
-            .put(2L, "Blue Rune")
-            .put(3L, "Black Rune")
-            .put(4L, "Red Rune")
-            .put(5L, "Green Rune")
-            .put(6L, "Mana Crystals")
+            .put(1L, "White rune")
+            .put(2L, "Blue rune")
+            .put(3L, "Black rune")
+            .put(4L, "Red rune")
+            .put(5L, "Green rune")
+            .put(6L, "Mana crystals")
             .put(7L, "Gold")
             .put(8L, "Gold Challenge Coin")
             .put(9L, "Silver Challenge Coin")

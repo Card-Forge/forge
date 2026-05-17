@@ -59,7 +59,7 @@ public class GameHUD extends Stage {
     private final TypingLabel lifePoints;
     private final TypingLabel money;
     private final TypingLabel shards;
-    private final TextraLabel notificationText = Controls.newTextraLabel("");
+    private final TypingLabel notificationText = Controls.newTypingLabel("");
     private final Image miniMap, gamehud, mapborder, avatarborder, blank;
     private final InputEvent eventTouchDown, eventTouchUp;
     private final TextraButton deckActor, openMapActor, menuActor, logbookActor, inventoryActor, exitToWorldMapActor, bookmarkActor, apSettingsActor;
@@ -987,8 +987,8 @@ public class GameHUD extends Stage {
             @Override
             public boolean act(float delta) {
                 notificationText.setWrap(false);
+                notificationText.setDefaultToken("{COLOR=BLACK}");
                 notificationText.setText(text);
-                notificationText.setColor(Color.BLACK);
                 notificationText.setWidth(Math.min(notificationText.getPrefWidth(), Forge.isLandscapeMode() ? getWidth() * 0.25f : getWidth() - 25));
                 notificationText.setWrap(true);
                 notificationText.layout();
