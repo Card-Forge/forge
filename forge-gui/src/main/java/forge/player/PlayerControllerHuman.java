@@ -2486,11 +2486,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         inputProxy.alphaStrike();
     }
 
-    @Override
-    public void resetAtEndOfTurn() {
-        // Not used by the human controller
-    }
-
     // Dev Mode cheat functions
     private boolean canPlayUnlimitedLands;
 
