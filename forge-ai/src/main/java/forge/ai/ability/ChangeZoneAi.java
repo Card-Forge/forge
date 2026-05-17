@@ -1471,6 +1471,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 continue;
             }
             keycardFound = withKeyCard.getFirst();
+            break;
         }
 
         if (sa.hasParam("AILogic")) {
