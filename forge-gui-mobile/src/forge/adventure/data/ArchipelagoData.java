@@ -65,7 +65,7 @@ public class ArchipelagoData implements SaveFileContent {
     private int receivedAmountOfSetUnlockChecks = 0;
     private float setUnlockChecksRestAmount = 0;
 
-    private int totalAmountOfSetUnlockChecks = 100; // Todo: This should be set based on the value we receive in the APWorld
+    private int totalAmountOfSetUnlockChecks = 100; // This is set based on the value we receive in the APWorld
     private final int totalBattlesWonBreakpoint = 3; // Reward for every 3 battles won.
     private final int totalTownQuestsAndEventsBreakpoint = 2; // Reward for every 2 town events or quests done.
     private final int totalCardsEarnedBreakPoint = 80; // Reward for every 80 unique cards gained.
