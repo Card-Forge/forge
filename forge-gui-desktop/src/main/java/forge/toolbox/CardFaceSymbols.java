@@ -232,9 +232,6 @@ public class CardFaceSymbols {
         FSkin.drawImage(g, FSkin.getImage(skinProp).resize(imageSize, imageSize),
             x, y, x + size, y + size, 0, 0, imageSize, imageSize);
     }
-    public static void drawAbilitySymbol(final String imageName, final Graphics g, final int x, final int y, final int w, final int h) {
-        FSkin.drawImage(g, MANA_IMAGES.get(imageName), x, y, w, h);
-    }
 
     /**
      * <p>
