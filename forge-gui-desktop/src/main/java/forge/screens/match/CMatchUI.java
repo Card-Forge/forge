@@ -66,9 +66,7 @@ import forge.game.spellability.SpellAbilityView;
 import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
 import forge.util.IHasForgeLog;
-import forge.gamemodes.match.YieldController;
 import forge.gamemodes.match.YieldMarker;
-import forge.gamemodes.match.YieldUpdate;
 import forge.gamemodes.net.NetworkGuiGame;
 import forge.interfaces.IGameController;
 import forge.gui.FNetOverlay;
@@ -1393,31 +1391,10 @@ public final class CMatchUI
     }
 
     private void handleYieldMarkerToggle(final PhaseLabel label, final PlayerView phaseOwner, final PhaseType phase) {
-        PlayerView local = getCurrentPlayer();
-        if (local == null) {
-            return;
-        }
-        IGameController controller = getGameController(local);
-        if (controller == null) {
-            return;
-        }
-        YieldMarker existing = controller.getYieldController().getAutoPassUntilMarker();
-        boolean clickedSameLabel = existing != null
-                && phaseOwner.equals(existing.getPhaseOwner())
-                && phase == existing.getPhase();
-        if (clickedSameLabel) {
-            controller.sendYieldUpdate(new YieldUpdate.ClearMarker(local));
-        } else {
-            // Setting a marker implies we want to stop here — un-skip the cell
-            // so the marker can fire (skip-phase pref + marker would skip past).
+        handleYieldMarkerToggle(phaseOwner, phase, () -> {
             label.setEnabled(true);
             label.repaintOnlyThisLabel();
-            boolean atOrPast = YieldController.isPriorityAtOrPastMarker(getGameView(), phaseOwner, phase);
-            controller.sendYieldUpdate(new YieldUpdate.SetMarker(phaseOwner, phase, atOrPast));
-            // Pass current priority so the marker takes effect immediately.
-            controller.selectButtonOk();
-        }
-        refreshYieldUi(local);
+        });
     }
 
     @Override

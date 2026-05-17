@@ -11,6 +11,7 @@ import forge.game.card.CardView.CardStateView;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
+import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gui.FThreads;
@@ -651,6 +652,29 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         IGameController c = getGameController(pv);
         if (c != null) c.applyYieldUpdate(update);
         refreshYieldUi(pv);
+    }
+
+    /** Toggle the auto-pass marker for {@code phase} on {@code phaseOwner}'s turn. The
+     *  caller's {@code markLabelStopsAtPhase} runs when setting a marker, to un-skip
+     *  the cell on the platform-specific phase indicator so the marker can fire. */
+    protected final void handleYieldMarkerToggle(PlayerView phaseOwner, PhaseType phase, Runnable markLabelStopsAtPhase) {
+        PlayerView local = getCurrentPlayer();
+        if (local == null) return;
+        IGameController controller = getGameController(local);
+        if (controller == null) return;
+        YieldMarker existing = controller.getYieldController().getAutoPassUntilMarker();
+        boolean clickedSameLabel = existing != null
+                && phaseOwner.equals(existing.getPhaseOwner())
+                && phase == existing.getPhase();
+        if (clickedSameLabel) {
+            controller.sendYieldUpdate(new YieldUpdate.ClearMarker(local));
+        } else {
+            markLabelStopsAtPhase.run();
+            boolean atOrPast = YieldController.isPriorityAtOrPastMarker(getGameView(), phaseOwner, phase);
+            controller.sendYieldUpdate(new YieldUpdate.SetMarker(phaseOwner, phase, atOrPast));
+            controller.selectButtonOk();   // Pass current priority so the marker takes effect immediately.
+        }
+        refreshYieldUi(local);
     }
 
     // End auto-yield/input code
