@@ -1867,7 +1867,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     public int getMinTargets() {
         return getTargetRestrictions().getMinTargets(getHostCard(), this);
     }
-
     public int getMaxTargets() {
         return getTargetRestrictions().getMaxTargets(getHostCard(), this);
     }

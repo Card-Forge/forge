@@ -63,7 +63,7 @@ public enum Keyword {
     ECHO("Echo", KeywordWithCost.class, false, "At the beginning of your upkeep, if this permanent came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost."),
     EMBALM("Embalm", KeywordWithCost.class, false, "%s, Exile this card from your graveyard: Create a token that's a copy of this card, except it's white, it has no mana cost, and it's a Zombie in addition to its other types. Embalm only as a sorcery."),
     EMERGE("Emerge", Emerge.class, false, "You may cast this spell by sacrificing {1:%2$s} and paying the emerge cost reduced by that %2$s's mana value."),
-    ENCHANT("Enchant", KeywordWithType.class, false, "Target a %s as you cast this. This card enters attached to that %s."),
+    ENCHANT("Enchant", KeywordWithType.class, false, "Target a %1$s as you cast this. This card enters attached to that %1$s."),
     ENCORE("Encore", KeywordWithCost.class, false, "%s, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery."),
     ENLIST("Enlist", SimpleKeyword.class, false, "As this creature attacks, you may tap a nonattacking creature you control without summoning sickness. When you do, add its power to this creature’s until end of turn."),
     ENTWINE("Entwine", KeywordWithCost.class, true, "Choose both if you pay the entwine cost."),

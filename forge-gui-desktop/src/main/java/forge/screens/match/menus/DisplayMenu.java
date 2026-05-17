@@ -6,8 +6,6 @@ import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
 import javax.swing.SwingUtilities;
 
-import com.google.common.primitives.Ints;
-
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.menus.MenuUtil;
@@ -47,11 +45,6 @@ public final class DisplayMenu {
         final SkinnedMenu menu = new SkinnedMenu(localizer.getMessage("lblTargetingArcs"));
         final ButtonGroup group = new ButtonGroup();
 
-        if (matchUI.getCDock().getArcState() == null) {
-            final Integer arcState = Ints.tryParse(prefs.getPref(FPref.UI_TARGETING_OVERLAY));
-            matchUI.getCDock().setArcState(ArcState.values()[arcState == null ? 0 : arcState]);
-        }
-
         addArcRadio(menu, group, localizer.getMessage("lblOff"), ArcState.OFF);
         addArcRadio(menu, group, localizer.getMessage("lblCardMouseOver"), ArcState.MOUSEOVER);
         addArcRadio(menu, group, localizer.getMessage("lblAlwaysOn"), ArcState.ON);
@@ -64,7 +57,7 @@ public final class DisplayMenu {
         item.addActionListener(e -> {
             prefs.setPref(FPref.UI_TARGETING_OVERLAY, String.valueOf(arcState.ordinal()));
             prefs.save();
-            matchUI.getCDock().setArcState(arcState);
+            matchUI.getCDock().refresh();
         });
         group.add(item);
         menu.add(item);

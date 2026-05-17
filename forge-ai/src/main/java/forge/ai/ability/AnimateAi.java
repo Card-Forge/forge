@@ -282,8 +282,7 @@ public class AnimateAi extends SpellAbilityAi {
         final String logic = sa.getParamOrDefault("AILogic", "");
         final boolean alwaysActivatePWAbility = sa.isPwAbility()
                 && sa.getPayCosts().hasSpecificCostType(CostPutCounter.class)
-                && sa.usesTargeting()
-                && sa.getTargetRestrictions().getMinTargets(sa.getHostCard(), sa) == 0;
+                && sa.usesTargeting() && sa.getMinTargets() == 0;
 
         final CardType types = new CardType(true);
         if (sa.hasParam("Types")) {

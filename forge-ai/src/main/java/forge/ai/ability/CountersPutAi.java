@@ -489,7 +489,7 @@ public class CountersPutAi extends CountersAi {
                 list.remove(sacTarget);
             }
 
-            if (list.size() < sa.getTargetRestrictions().getMinTargets(source, sa)) {
+            if (list.size() < sa.getMinTargets()) {
                 return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
 
