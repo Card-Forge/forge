@@ -154,9 +154,8 @@ public class YieldController {
 
     /** Click-site helper: true when priority is at or past {@code phase} on {@code phaseOwner}'s current turn. */
     public static boolean isPriorityAtOrPastMarker(GameView gv, PlayerView phaseOwner, PhaseType phase) {
-        PhaseType currentPhase = gv.getPhase();
         if (!phaseOwner.equals(gv.getPlayerTurn())) return false;
-        if (currentPhase == null) return false;
+        PhaseType currentPhase = gv.getPhase();
         return currentPhase == phase || currentPhase.isAfter(phase);
     }
 
@@ -466,7 +465,7 @@ public class YieldController {
 
     public void onSpellAbilityCast(SpellAbilityStackInstance si) {
         if (!shouldEvaluateInterrupts()) return;
-        PlayerView local = owner != null ? owner.getLocalPlayerView() : null;
+        PlayerView local = owner.getLocalPlayerView();
         if (local == null) return;
         boolean isOpponent = !si.getActivatingPlayer().getView().equals(local);
 
@@ -492,7 +491,7 @@ public class YieldController {
 
     public void onAttackersDeclared(CombatView combat) {
         if (!shouldEvaluateInterrupts()) return;
-        PlayerView local = owner != null ? owner.getLocalPlayerView() : null;
+        PlayerView local = owner.getLocalPlayerView();
         if (local == null) return;
         if (getBoolPref(FPref.YIELD_INTERRUPT_ON_ATTACKERS) && isBeingAttacked(combat, local)) {
             applyInterrupt();

@@ -182,11 +182,11 @@ public class InputBlock extends InputSyncronizedBase {
 
     private void setCurrentAttacker(final Card card) {
         if (currentAttacker != null) {
-            getController().getGui().setHighlighted(CardView.get(currentAttacker), false);
+            getController().getGui().setHighlighted(List.of(CardView.get(currentAttacker)), false);
         }
         currentAttacker = card;
         if (card != null) {
-            getController().getGui().setHighlighted(CardView.get(card), true);
+            getController().getGui().setHighlighted(List.of(CardView.get(card)), true);
         }
     }
 }

@@ -57,7 +57,7 @@ public final class DisplayMenu {
         item.addActionListener(e -> {
             prefs.setPref(FPref.UI_TARGETING_OVERLAY, String.valueOf(arcState.ordinal()));
             prefs.save();
-            matchUI.getCDock().refresh();
+            matchUI.getCDock().update();
         });
         group.add(item);
         menu.add(item);

@@ -71,7 +71,7 @@ public enum ProtocolMethod implements IHasForgeLog {
     setRememberedActions(Mode.SERVER, Void.TYPE),
     nextRememberedAction(Mode.SERVER, Void.TYPE),
     showWaitingTimer    (Mode.SERVER, Void.TYPE, PlayerView.class, String.class),
-    setHighlighted      (Mode.SERVER, Void.TYPE, GameEntityView.class, Boolean.TYPE),
+    setHighlighted      (Mode.SERVER, Void.TYPE, Iterable/*GameEntityView*/.class, Boolean.TYPE),
     applyDelta          (Mode.SERVER, Void.TYPE, DeltaPacket.class),
     /** Server→client push of authoritative yield-state changes. */
     applyYieldUpdate    (Mode.SERVER, Void.TYPE, YieldUpdate.class),

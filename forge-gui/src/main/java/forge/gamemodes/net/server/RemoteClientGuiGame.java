@@ -35,6 +35,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Server-side proxy for one remote client's GUI. One instance per connected remote player,
+ * constructed at lobby time and reused across the match (and across reconnects, via
+ * {@link #resetForReconnect}).
+ *
+ * <p>Most IGuiGame overrides forward as {@code send(ProtocolMethod.X, args)} alone.
+ * State-dependent sends are preceded by {@link #updateGameView()} so the remote's tracker
+ * sees a consistent snapshot before consuming the message. A small number of overrides
+ * additionally call {@code super.X(args)} when host-side bookkeeping needs to mirror the
+ * state — e.g. {@code setHighlighted} feeds {@code countPickedSelectables} on the host.
+ * Return-typed methods use {@code sendAndWait(...)} and block the game thread until the
+ * remote replies.
+ *
+ * <p>Method bodies run on the game thread. Encoding happens synchronously inside
+ * {@link RemoteClient#send}; the Netty write is async; {@code sendAndWait} blocks on
+ * the reply pool.
+ */
 public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog {
 
     // New objects are sent with full property data, existing objects only send changed properties
@@ -58,6 +75,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
         this.client = client;
         sender = new GameProtocolSender(client);
         syncManager = new DeltaSyncManager();
+        client.setGui(this);
     }
 
     public RemoteClient getClient() {
@@ -470,10 +488,9 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
         return flushAndSendAndWait(ProtocolMethod.manipulateCardList, title, cards, manipulable, toTop, toBottom, toAnywhere);
     }
 
-    @Override
-    public void setHighlighted(final GameEntityView ge, final boolean value) {
-        super.setHighlighted(ge, value);
-        flushAndSend(ProtocolMethod.setHighlighted, ge, value);
+    public void setHighlighted(final Iterable<GameEntityView> entities, final boolean value) {
+        super.setHighlighted(entities, value);
+        flushAndSend(ProtocolMethod.setHighlighted, entities, value);
     }
 
     @Override

@@ -1,7 +1,5 @@
 package forge.gamemodes.net.event;
 
-import forge.gamemodes.net.server.RemoteClient;
-
 public class LoginEvent implements NetEvent {
     private static final long serialVersionUID = -8865183377417377938L;
 
@@ -15,10 +13,6 @@ public class LoginEvent implements NetEvent {
         this.sleeveIndex = sleeveIndex;
         this.version = version;
         this.libgdx = libgdx;
-    }
-
-    @Override
-    public void updateForClient(final RemoteClient client) {
     }
 
     public String getUsername() {
