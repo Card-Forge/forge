@@ -328,7 +328,7 @@ public final class CMatchUI
 
     private void initMatch(final FCollectionView<PlayerView> sortedPlayers, final Collection<PlayerView> myPlayers) {
         this.sortedPlayers = sortedPlayers;
-        allHands = sortedPlayers.size() == getLocalPlayerCount() || !hasLocalPlayers();
+        allHands = sortedPlayers.size() == getLocalPlayerCount();
 
         if (isNetGame()) {
             netLog.debug("sortedPlayers count={}", sortedPlayers.size());
