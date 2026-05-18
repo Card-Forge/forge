@@ -948,7 +948,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     getGui().updateZones(zonesToUpdate);
                     zonesShown[0] = getGui().tempShowZones(getLocalPlayerView(), zonesToUpdate);
                 });
-                getGui().message(fm);
+                final InputConfirm inp = new InputConfirm(this, fm,
+                        localizer.getMessage("lblOK"), localizer.getMessage("lblEndTurn"), true);
+                inp.showAndWait();
+                if (!inp.getResult()) {
+                    FThreads.invokeInEdtLater(this::autoPassUntilEndOfTurn);
+                }
                 getGui().updateRevealedCards(collection);
                 FThreads.invokeInEdtNowOrLater(() -> getGui().hideZones(getLocalPlayerView(), zonesShown[0]));
             } else {
