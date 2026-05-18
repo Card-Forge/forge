@@ -114,7 +114,9 @@
     "Urza's Science Fair Project"
   ],
   "restrictedEditions": ["8ED", "P8ED", "MRD"],
-  "restrictedBlocks": ["Ice Age"],
+  "restrictedBlocks": ["Arabian Knights", "Antiquities", "Legends", "The Dark",
+    "Fallen Empires", "Homelands", "Ice Age"
+  ],
   "restrictedTokens": ["P03/r_4_4_bird_flying", "P03/b_x_x_demon_flying"],
   "allowedEditions": [
     "LEA", "LEB", "2ED", "3ED", "ARN", "ATQ", "LEG", "DRK", "FEM", "4ED",

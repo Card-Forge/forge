@@ -1,2 +1,9 @@
+# Customized draft formats for better balance in Old Border Shandalar; upstream versions hidden via restrictedBlocks.
+Arabian Nights (Old Border), 4/8/2ED, ARN ARN ARN 3ED
+Antiquities (Old Border), 4/8/2ED, ATQ ATQ ATQ 3ED
+Legends (Old Border), 3/6/3ED, LEG 3ED
+The Dark (Old Border), 4/8/3ED, DRK DRK DRK 3ED
+Fallen Empires, 4/8/3ED, FEM FEM FEM 3ED
+Homelands, 4/8/4ED, HML HML HML 4ED
 # 1995-style ICE/ICE/ALL draft; upstream "Ice Age" hidden via restrictedBlocks.
 Ice Age (Old Border), 3/6/ICE, ICE ICE ALL
