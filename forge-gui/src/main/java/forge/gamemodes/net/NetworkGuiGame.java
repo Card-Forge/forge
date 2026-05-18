@@ -602,8 +602,10 @@ public abstract class NetworkGuiGame extends AbstractGuiGame implements IHasForg
         }
         netLog.error("[DeltaSync] Compare with server state in host log at seq={}", packet.getSequenceNumber());
         int phaseOrdinal = gameView.getPhase() != null ? gameView.getPhase().ordinal() : -1;
-        netLog.error("[DeltaSync] Client breakdown: {}",
-                NetworkChecksumUtil.computeChecksumBreakdown(gameView.getTurn(), phaseOrdinal, gameView));
+        String breakdown = NetworkChecksumUtil.computeChecksumBreakdown(gameView.getTurn(), phaseOrdinal, gameView);
+        if (breakdown != null) {
+            netLog.error("[DeltaSync] Client breakdown: {}", breakdown);
+        }
     }
 
     protected final void pushSkipPhaseToControllers(final PlayerView player, final PhaseType phase) {

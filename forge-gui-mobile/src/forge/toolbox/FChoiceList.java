@@ -717,7 +717,7 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
         public CounterTypeRenderer() {
             super(v -> ((CounterType)v).getTranslatedName(), v -> {
                 if (v instanceof CounterKeywordType ck) {
-                    return FSkinProp.iconFromKeyword(ck.type(), ck.keyword());
+                    return FSkinProp.iconFromKeyword(ck.keyword());
                 } else {
                     return null;
                 }

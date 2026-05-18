@@ -414,7 +414,7 @@ public class ListChooser<T> {
                 defRenderer.setIcon(fromSkinProp(FSkinProp.iconFromCoreType(c)));
             } else if (value instanceof CounterType) {
                 if (value instanceof CounterKeywordType c) {
-                    defRenderer.setIcon(fromSkinProp(FSkinProp.iconFromKeyword(c.type(), c.keyword())));
+                    defRenderer.setIcon(fromSkinProp(FSkinProp.iconFromKeyword(c.keyword())));
                 } else {
                     defRenderer.setIcon(fromSkinProp(null));
                 }

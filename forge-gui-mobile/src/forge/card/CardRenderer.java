@@ -1,7 +1,6 @@
 package forge.card;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
@@ -46,6 +45,7 @@ import forge.card.mana.ManaCost;
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.card.CounterType;
+import forge.game.keyword.Keyword;
 import forge.game.zone.ZoneType;
 import forge.gui.FThreads;
 import forge.gui.card.CardDetailUtil;
@@ -766,7 +766,6 @@ public class CardRenderer {
         }
 
         if (card.getCounters() != null && !card.getCounters().isEmpty()) {
-
             switch (CounterDisplayType.from(FModel.getPreferences().getPref(FPref.UI_CARD_COUNTER_DISPLAY_TYPE))) {
                 case OLD_WHEN_SMALL:
                 case TEXT:
@@ -780,7 +779,6 @@ public class CardRenderer {
                     drawCounterTabs(card, g, x, y, w, h);
                     break;
             }
-
         }
 
         if(card.getMarkerText() != null) {
@@ -826,13 +824,11 @@ public class CardRenderer {
             drawAbilityIcons(g, card, cx, cy, cw, ch, cx + ((cw * 2) / 2.3f), cy, cw / 5.5f, cw / 5.7f, CardRendererUtils.showAbilityIcons(card));
         } else if (canShow && !ZoneType.Battlefield.equals(card.getZone()) && CardRendererUtils.showAbilityIcons(card)) {
             //draw indicator for flash or can be cast at instant speed, enabled if show ability icons is enabled
-            String keywordKey = card.getCurrentState().getKeywordKey();
             String abilityText = card.getCurrentState().getAbilityText();
-            if ((keywordKey.contains("Flash"))
+            if ((card.getCurrentState().hasKeyword(Keyword.FLASH))
                     || ((abilityText.contains("May be played by"))
                     && (abilityText.contains("and as though it has flash")))) {
-                if (!keywordKey.contains("Flashback"))
-                    CardFaceSymbols.drawSymbol("flash", g, cx + ((cw * 2) / 2.3f), cy, cw / 5.5f, cw / 5.5f);
+                g.drawImage(FSkin.getImages().get(FSkinProp.IMG_ABILITY_FLASH), cx + ((cw * 2) / 2.3f), cy, cw / 5.5f, cw / 5.5f);
             }
         }
         //draw name and mana cost overlays if card is small or default card image being used
@@ -909,329 +905,15 @@ public class CardRenderer {
         }
         if (!showAbilityIcons)
             return;
-        if (card.isCommander()) {
-            CardFaceSymbols.drawSymbol("commander", g, abiX, abiY, abiScale, abiScale);
-            abiY += abiSpace;
-            abiCount += 1;
-        }
-        if (card.isRingBearer()) {
-            CardFaceSymbols.drawSymbol("ringbearer", g, abiX, abiY, abiScale, abiScale);
-            abiY += abiSpace;
-            abiCount += 1;
-        }
-        if (card.getCurrentState().hasFlying()) {
-            CardFaceSymbols.drawSymbol("flying", g, abiX, abiY, abiScale, abiScale);
-            abiY += abiSpace;
-            abiCount += 1;
-        }
-        if (card.getCurrentState().hasHaste()) {
-            CardFaceSymbols.drawSymbol("haste", g, abiX, abiY, abiScale, abiScale);
-            abiY += abiSpace;
-            abiCount += 1;
-        }
-        if (card.getCurrentState().hasDoubleStrike()) {
-            CardFaceSymbols.drawSymbol("doublestrike", g, abiX, abiY, abiScale, abiScale);
-            abiY += abiSpace;
-            abiCount += 1;
-        } else if (card.getCurrentState().hasFirstStrike()) {
-            CardFaceSymbols.drawSymbol("firststrike", g, abiX, abiY, abiScale, abiScale);
-            abiY += abiSpace;
-            abiCount += 1;
-        }
-        if (card.getCurrentState().hasAnnihilator()) {
+
+        for (FSkinProp prop : FSkinProp.iconsFromCardState(card.getCurrentState())) {
             if (abiCount > 5) {
                 abiY = cy + (abiSpace * (abiCount - 6));
                 abiX = cx + ((cw * 2) / 1.92f);
             }
-            CardFaceSymbols.drawSymbol("annihilator", g, abiX, abiY, abiScale, abiScale);
+            g.drawImage(FSkin.getImages().get(prop), abiX, abiY, abiScale, abiScale);
             abiY += abiSpace;
             abiCount += 1;
-        }
-        if (card.getCurrentState().hasExalted()) {
-            if (abiCount > 5) {
-                abiY = cy + (abiSpace * (abiCount - 6));
-                abiX = cx + ((cw * 2) / 1.92f);
-            }
-            CardFaceSymbols.drawSymbol("exalted", g, abiX, abiY, abiScale, abiScale);
-            abiY += abiSpace;
-            abiCount += 1;
-        }
-        if (card.getCurrentState().hasDeathtouch()) {
-            if (abiCount > 5) {
-                abiY = cy + (abiSpace * (abiCount - 6));
-                abiX = cx + ((cw * 2) / 1.92f);
-            }
-            CardFaceSymbols.drawSymbol("deathtouch", g, abiX, abiY, abiScale, abiScale);
-            abiY += abiSpace;
-            abiCount += 1;
-        }
-        if (card.getCurrentState().hasToxic()) {
-            if (abiCount > 5) {
-                abiY = cy + (abiSpace * (abiCount - 6));
-                abiX = cx + ((cw * 2) / 1.92f);
-            }
-            CardFaceSymbols.drawSymbol("toxic", g, abiX, abiY, abiScale, abiScale);
-            abiY += abiSpace;
-            abiCount += 1;
-        }
-        if (card.getCurrentState().hasIndestructible()) {
-            if (abiCount > 5) {
-                abiY = cy + (abiSpace * (abiCount - 6));
-                abiX = cx + ((cw * 2) / 1.92f);
-            }
-            CardFaceSymbols.drawSymbol("indestructible", g, abiX, abiY, abiScale, abiScale);
-            abiY += abiSpace;
-            abiCount += 1;
-        }
-        if (card.getCurrentState().hasMenace()) {
-            if (abiCount > 5) {
-                abiY = cy + (abiSpace * (abiCount - 6));
-                abiX = cx + ((cw * 2) / 1.92f);
-            }
-            CardFaceSymbols.drawSymbol("menace", g, abiX, abiY, abiScale, abiScale);
-            abiY += abiSpace;
-            abiCount += 1;
-        }
-        if (card.getCurrentState().hasFear()) {
-            if (abiCount > 5) {
-                abiY = cy + (abiSpace * (abiCount - 6));
-                abiX = cx + ((cw * 2) / 1.92f);
-            }
-            CardFaceSymbols.drawSymbol("fear", g, abiX, abiY, abiScale, abiScale);
-            abiY += abiSpace;
-            abiCount += 1;
-        }
-        if (card.getCurrentState().hasIntimidate()) {
-            if (abiCount > 5) {
-                abiY = cy + (abiSpace * (abiCount - 6));
-                abiX = cx + ((cw * 2) / 1.92f);
-            }
-            CardFaceSymbols.drawSymbol("intimidate", g, abiX, abiY, abiScale, abiScale);
-            abiY += abiSpace;
-            abiCount += 1;
-        }
-        if (card.getCurrentState().hasShadow()) {
-            if (abiCount > 5) {
-                abiY = cy + (abiSpace * (abiCount - 6));
-                abiX = cx + ((cw * 2) / 1.92f);
-            }
-            CardFaceSymbols.drawSymbol("shadow", g, abiX, abiY, abiScale, abiScale);
-            abiY += abiSpace;
-            abiCount += 1;
-        }
-        if (card.getCurrentState().hasHorsemanship()) {
-            if (abiCount > 5) {
-                abiY = cy + (abiSpace * (abiCount - 6));
-                abiX = cx + ((cw * 2) / 1.92f);
-            }
-            CardFaceSymbols.drawSymbol("horsemanship", g, abiX, abiY, abiScale, abiScale);
-            abiY += abiSpace;
-            abiCount += 1;
-        }
-        if (card.getCurrentState().hasLandwalk()) {
-            CardFaceSymbols.drawSymbol("landwalk", g, abiX, abiY, abiScale, abiScale);
-            abiY += abiSpace;
-            abiCount += 1;
-        }
-        if (card.getCurrentState().hasHexproof()) {
-            if (abiCount > 5) {
-                abiY = cy + (abiSpace * (abiCount - 6));
-                abiX = cx + ((cw * 2) / 1.92f);
-            }
-            if (!card.getCurrentState().getHexproofKey().isEmpty()) {
-                String[] splitK = card.getCurrentState().getHexproofKey().split(":");
-                List<String> listHK = Arrays.asList(splitK);
-                if (listHK.contains("generic")) {
-                    CardFaceSymbols.drawSymbol("hexproof", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                    abiCount += 1;
-                }
-                if (listHK.contains("R")) {
-                    CardFaceSymbols.drawSymbol("hexproofR", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                    abiCount += 1;
-                }
-                if (listHK.contains("B")) {
-                    CardFaceSymbols.drawSymbol("hexproofB", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                    abiCount += 1;
-                }
-                if (listHK.contains("U")) {
-                    CardFaceSymbols.drawSymbol("hexproofU", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                    abiCount += 1;
-                }
-                if (listHK.contains("G")) {
-                    CardFaceSymbols.drawSymbol("hexproofG", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                    abiCount += 1;
-                }
-                if (listHK.contains("W")) {
-                    CardFaceSymbols.drawSymbol("hexproofW", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                    abiCount += 1;
-                }
-                if (listHK.contains("monocolored")) {
-                    CardFaceSymbols.drawSymbol("hexproofC", g, abiX, abiY, abiScale, abiScale);
-                    abiY += abiSpace;
-                    abiCount += 1;
-                }
-            } else {
-                CardFaceSymbols.drawSymbol("hexproof", g, abiX, abiY, abiScale, abiScale);
-                abiY += abiSpace;
-                abiCount += 1;
-            }
-        } else if (card.getCurrentState().hasShroud()) {
-            if (abiCount > 5) {
-                abiY = cy + (abiSpace * (abiCount - 6));
-                abiX = cx + ((cw * 2) / 1.92f);
-            }
-            CardFaceSymbols.drawSymbol("shroud", g, abiX, abiY, abiScale, abiScale);
-            abiY += abiSpace;
-            abiCount += 1;
-        }
-        if (card.getCurrentState().hasVigilance()) {
-            if (abiCount > 5) {
-                abiY = cy + (abiSpace * (abiCount - 6));
-                abiX = cx + ((cw * 2) / 1.92f);
-            }
-            CardFaceSymbols.drawSymbol("vigilance", g, abiX, abiY, abiScale, abiScale);
-            abiY += abiSpace;
-            abiCount += 1;
-        }
-        if (card.getCurrentState().hasTrample()) {
-            if (abiCount > 5) {
-                abiY = cy + (abiSpace * (abiCount - 6));
-                abiX = cx + ((cw * 2) / 1.92f);
-            }
-            CardFaceSymbols.drawSymbol("trample", g, abiX, abiY, abiScale, abiScale);
-            abiY += abiSpace;
-            abiCount += 1;
-        }
-        if (card.getCurrentState().hasReach()) {
-            if (abiCount > 5) {
-                abiY = cy + (abiSpace * (abiCount - 6));
-                abiX = cx + ((cw * 2) / 1.92f);
-            }
-            CardFaceSymbols.drawSymbol("reach", g, abiX, abiY, abiScale, abiScale);
-            abiY += abiSpace;
-            abiCount += 1;
-        }
-        if (card.getCurrentState().hasLifelink()) {
-            if (abiCount > 5) {
-                abiY = cy + (abiSpace * (abiCount - 6));
-                abiX = cx + ((cw * 2) / 1.92f);
-            }
-            CardFaceSymbols.drawSymbol("lifelink", g, abiX, abiY, abiScale, abiScale);
-            abiY += abiSpace;
-            abiCount += 1;
-        }
-        if (card.getCurrentState().hasWard()) {
-            if (abiCount > 5) {
-                abiY = cy + (abiSpace * (abiCount - 6));
-                abiX = cx + ((cw * 2) / 1.92f);
-            }
-            CardFaceSymbols.drawSymbol("ward", g, abiX, abiY, abiScale, abiScale);
-            abiY += abiSpace;
-            abiCount += 1;
-        }
-        if (card.getCurrentState().hasWither()) {
-            if (abiCount > 5) {
-                abiY = cy + (abiSpace * (abiCount - 6));
-                abiX = cx + ((cw * 2) / 1.92f);
-            }
-            CardFaceSymbols.drawSymbol("wither", g, abiX, abiY, abiScale, abiScale);
-            abiY += abiSpace;
-            abiCount += 1;
-        }
-        if (card.getCurrentState().hasDefender()) {
-            if (abiCount > 5) {
-                abiY = cy + (abiSpace * (abiCount - 6));
-                abiX = cx + ((cw * 2) / 1.92f);
-            }
-            CardFaceSymbols.drawSymbol("defender", g, abiX, abiY, abiScale, abiScale);
-            abiY += abiSpace;
-            abiCount += 1;
-        }
-        //Protection Icons
-        if (!card.getCurrentState().getProtectionKey().isEmpty()) {
-            if (abiCount > 5) {
-                abiY = cy + (abiSpace * (abiCount - 6));
-                abiX = cx + ((cw * 2) / 1.92f);
-            }
-            if (card.getCurrentState().getProtectionKey().contains("everything") || card.getCurrentState().getProtectionKey().contains("allcolors")) {
-                CardFaceSymbols.drawSymbol("protectAll", g, abiX, abiY, abiScale, abiScale);
-                abiY += abiSpace;
-                abiCount += 1;
-            } else if (card.getCurrentState().getProtectionKey().contains("coloredspells")) {
-                CardFaceSymbols.drawSymbol("protectColoredSpells", g, abiX, abiY, abiScale, abiScale);
-                abiY += abiSpace;
-                abiCount += 1;
-            } else if (card.getCurrentState().getProtectionKey().equals("R")) {
-                CardFaceSymbols.drawSymbol("protectR", g, abiX, abiY, abiScale, abiScale);
-                abiY += abiSpace;
-                abiCount += 1;
-            } else if (card.getCurrentState().getProtectionKey().equals("G")) {
-                CardFaceSymbols.drawSymbol("protectG", g, abiX, abiY, abiScale, abiScale);
-                abiY += abiSpace;
-                abiCount += 1;
-            } else if (card.getCurrentState().getProtectionKey().equals("B")) {
-                CardFaceSymbols.drawSymbol("protectB", g, abiX, abiY, abiScale, abiScale);
-                abiY += abiSpace;
-                abiCount += 1;
-            } else if (card.getCurrentState().getProtectionKey().equals("U")) {
-                CardFaceSymbols.drawSymbol("protectU", g, abiX, abiY, abiScale, abiScale);
-                abiY += abiSpace;
-                abiCount += 1;
-            } else if (card.getCurrentState().getProtectionKey().equals("W")) {
-                CardFaceSymbols.drawSymbol("protectW", g, abiX, abiY, abiScale, abiScale);
-                abiY += abiSpace;
-                abiCount += 1;
-            } else if (card.getCurrentState().getProtectionKey().equals("RG") || card.getCurrentState().getProtectionKey().equals("GR")) {
-                CardFaceSymbols.drawSymbol("protectRG", g, abiX, abiY, abiScale, abiScale);
-                abiY += abiSpace;
-                abiCount += 1;
-            } else if (card.getCurrentState().getProtectionKey().equals("RB") || card.getCurrentState().getProtectionKey().equals("BR")) {
-                CardFaceSymbols.drawSymbol("protectRB", g, abiX, abiY, abiScale, abiScale);
-                abiY += abiSpace;
-                abiCount += 1;
-            } else if (card.getCurrentState().getProtectionKey().equals("RU") || card.getCurrentState().getProtectionKey().equals("UR")) {
-                CardFaceSymbols.drawSymbol("protectRU", g, abiX, abiY, abiScale, abiScale);
-                abiY += abiSpace;
-                abiCount += 1;
-            } else if (card.getCurrentState().getProtectionKey().equals("RW") || card.getCurrentState().getProtectionKey().equals("WR")) {
-                CardFaceSymbols.drawSymbol("protectRW", g, abiX, abiY, abiScale, abiScale);
-                abiY += abiSpace;
-                abiCount += 1;
-            } else if (card.getCurrentState().getProtectionKey().equals("GB") || card.getCurrentState().getProtectionKey().equals("BG")) {
-                CardFaceSymbols.drawSymbol("protectGB", g, abiX, abiY, abiScale, abiScale);
-                abiY += abiSpace;
-                abiCount += 1;
-            } else if (card.getCurrentState().getProtectionKey().equals("GU") || card.getCurrentState().getProtectionKey().equals("UG")) {
-                CardFaceSymbols.drawSymbol("protectGU", g, abiX, abiY, abiScale, abiScale);
-                abiY += abiSpace;
-                abiCount += 1;
-            } else if (card.getCurrentState().getProtectionKey().equals("GW") || card.getCurrentState().getProtectionKey().equals("WG")) {
-                CardFaceSymbols.drawSymbol("protectGW", g, abiX, abiY, abiScale, abiScale);
-                abiY += abiSpace;
-                abiCount += 1;
-            } else if (card.getCurrentState().getProtectionKey().equals("BU") || card.getCurrentState().getProtectionKey().equals("UB")) {
-                CardFaceSymbols.drawSymbol("protectBU", g, abiX, abiY, abiScale, abiScale);
-                abiY += abiSpace;
-                abiCount += 1;
-            } else if (card.getCurrentState().getProtectionKey().equals("BW") || card.getCurrentState().getProtectionKey().equals("WB")) {
-                CardFaceSymbols.drawSymbol("protectBW", g, abiX, abiY, abiScale, abiScale);
-                abiY += abiSpace;
-                abiCount += 1;
-            } else if (card.getCurrentState().getProtectionKey().equals("UW") || card.getCurrentState().getProtectionKey().equals("WU")) {
-                CardFaceSymbols.drawSymbol("protectUW", g, abiX, abiY, abiScale, abiScale);
-                abiY += abiSpace;
-                abiCount += 1;
-            } else if (card.getCurrentState().getProtectionKey().contains("generic") || card.getCurrentState().getProtectionKey().length() > 2) {
-                CardFaceSymbols.drawSymbol("protectGeneric", g, abiX, abiY, abiScale, abiScale);
-                abiY += abiSpace;
-                abiCount += 1;
-            }
         }
     }
 
