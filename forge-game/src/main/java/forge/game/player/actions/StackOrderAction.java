@@ -14,4 +14,9 @@ public class StackOrderAction extends PlayerAction {
     public List<String> getAbilityDescriptions() {
         return abilityDescriptions;
     }
+
+    @Override
+    protected void appendDetails(final StringBuilder sb) {
+        sb.append(" order=").append(abilityDescriptions);
+    }
 }

@@ -35,4 +35,10 @@ public class ScryAction extends PlayerAction {
     public List<String> getBottomCardNames() {
         return bottomCardNames;
     }
+
+    @Override
+    protected void appendDetails(final StringBuilder sb) {
+        sb.append(" top=").append(topCardNames);
+        sb.append(" bottom=").append(bottomCardNames);
+    }
 }

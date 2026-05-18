@@ -36,7 +36,6 @@ import forge.gamemodes.match.input.InputSelectEntitiesFromList;
 import forge.gamemodes.match.input.InputSelectTargets;
 import forge.gui.FThreads;
 import forge.interfaces.IMacroSystem;
-import forge.sound.SoundSystem;
 import forge.util.ITriggerEvent;
 import forge.util.Localizer;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -69,7 +68,6 @@ public class RecordActionsMacroSystem implements IMacroSystem {
     private int repeatIteration;
     private int repeatIterations;
     private int playbackRetries;
-    private boolean suppressingSnapshotSoundForPlayback;
     private ManaComboAction pendingRecordedManaCombo;
 
     public RecordActionsMacroSystem(final PlayerControllerHuman playerControllerHuman) {
@@ -183,13 +181,13 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         final A action = actionClass.cast(playbackActions.get(actionIndex));
         final R result = replay.apply(action);
         if (result != null) {
-            debug("accepted " + describeAction(action));
+            debug("accepted " + action.describe());
             playbackActions.remove(actionIndex);
             playbackRetries = 0;
             playerControllerHuman.getInputQueue().updateObservers();
             return result;
         }
-        debug("rejected " + describeAction(action));
+        debug("rejected " + action.describe());
         return null;
     }
 
@@ -411,7 +409,6 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         playbackRetries = 0;
         restartPlaybackActions();
         debug("start loops=" + loops + " actions=" + describeActions(playbackActions));
-        suppressSnapshotSoundForPlayback();
         playerControllerHuman.getInputQueue().updateObservers();
         FThreads.delayInEDT(50, this::continuePlayback);
     }
@@ -566,7 +563,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
                 continue;
             }
             if (shouldSkipPassPriorityAction(i)) {
-                debug("skipped obsolete " + describeAction(action));
+                debug("skipped obsolete " + action.describe());
                 return i;
             }
             if (!(inp instanceof InputSelectTargets) && isTargetSelectionAction(action)) {
@@ -595,7 +592,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
             return NO_ACTION_ACCEPTED;
         }
         if (shouldSkipPassPriorityAction(actionIndex)) {
-            debug("skipped obsolete " + describeAction(playbackActions.get(actionIndex)));
+            debug("skipped obsolete " + playbackActions.get(actionIndex).describe());
             return actionIndex;
         }
         return processActionAt(actionIndex);
@@ -710,13 +707,13 @@ public class RecordActionsMacroSystem implements IMacroSystem {
     private int waitForPendingCardAction(final Input input, final int actionIndex) {
         final PlayerAction action = playbackActions.get(actionIndex);
         if (!isStackEmpty()) {
-            return waitForInput(input, "waiting for stack before " + describeAction(action));
+            return waitForInput(input, "waiting for stack before " + action.describe());
         }
         if (isWaitingForPostCombatMainAction(actionIndex)) {
-            return waitForInput(input, "waiting for postcombat main before " + describeAction(action));
+            return waitForInput(input, "waiting for postcombat main before " + action.describe());
         }
         if (isWaitingForAttackDeclaration(actionIndex)) {
-            return waitForInput(input, "waiting for attack declaration before " + describeAction(action));
+            return waitForInput(input, "waiting for attack declaration before " + action.describe());
         }
         return NO_ACTION_ACCEPTED;
     }
@@ -875,7 +872,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
                 || !playerControllerHuman.selectCard(card.getView(), null, replayTriggerEvent)) {
             return false;
         }
-        debug("using future mana source " + describeAction(action));
+        debug("using future mana source " + action.describe());
         return true;
     }
 
@@ -915,7 +912,6 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         repeatIterations = 0;
         playbackRetries = 0;
         playbackActions.clear();
-        unsuppressSnapshotSoundForPlayback();
         playerControllerHuman.getInputQueue().updateObservers();
     }
 
@@ -932,7 +928,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
     }
 
     public boolean processAction(PlayerAction action) {
-        debug("try " + describeAction(action));
+        debug("try " + action.describe());
         final Input inp = playerControllerHuman.getInputProxy().getInput();
         if (action instanceof ActivateAbilityAction activateAbilityAction) {
             if (inp instanceof InputPassPriority passPriorityInput) {
@@ -1129,21 +1125,8 @@ public class RecordActionsMacroSystem implements IMacroSystem {
     }
 
     private boolean debugResult(final PlayerAction action, final boolean result) {
-        debug((result ? "accepted " : "rejected ") + describeAction(action));
+        debug((result ? "accepted " : "rejected ") + action.describe());
         return result;
-    }
-
-    private void suppressSnapshotSoundForPlayback() {
-        suppressingSnapshotSoundForPlayback = true;
-        SoundSystem.instance.setSuppressSnapshotRestoredSound(true);
-    }
-
-    private void unsuppressSnapshotSoundForPlayback() {
-        if (!suppressingSnapshotSoundForPlayback) {
-            return;
-        }
-        suppressingSnapshotSoundForPlayback = false;
-        SoundSystem.instance.setSuppressSnapshotRestoredSound(false);
     }
 
     private void debug(final String message) {
@@ -1163,49 +1146,9 @@ public class RecordActionsMacroSystem implements IMacroSystem {
             if (i > 0) {
                 sb.append(", ");
             }
-            sb.append(describeAction(actionList.get(i)));
+            sb.append(actionList.get(i).describe());
         }
         sb.append("]");
-        return sb.toString();
-    }
-
-    private String describeAction(final PlayerAction action) {
-        final StringBuilder sb = new StringBuilder(action.getClass().getSimpleName());
-        final GameEntityView view = action.getGameEntityView();
-        if (view != null) {
-            sb.append("(").append(view).append(")");
-        }
-        if (action instanceof ActivateAbilityAction activateAbilityAction) {
-            sb.append(" ability=\"").append(activateAbilityAction.getAbilityDescription()).append("\"");
-        }
-        if (action instanceof PayManaFromPoolAction payManaFromPoolAction) {
-            sb.append(" mana=").append(payManaFromPoolAction.getSelectedColor());
-        }
-        if (action instanceof PassPriorityAction passPriorityAction) {
-            sb.append(" stackWasEmpty=").append(passPriorityAction.wasStackEmpty());
-            if (passPriorityAction.getPhase() != null) {
-                sb.append(" phase=").append(passPriorityAction.getPhase());
-            }
-        }
-        if (action instanceof ManaComboAction manaComboAction) {
-            sb.append(" manaCombo=").append(manaComboAction.getManaCombo());
-        }
-        if (action instanceof ModeChoiceAction modeChoiceAction) {
-            sb.append(" modes=").append(modeChoiceAction.getModeDescriptions());
-        }
-        if (action instanceof StackOrderAction stackOrderAction) {
-            sb.append(" order=").append(stackOrderAction.getAbilityDescriptions());
-        }
-        if (action instanceof ScryAction scryAction) {
-            sb.append(" top=").append(scryAction.getTopCardNames());
-            sb.append(" bottom=").append(scryAction.getBottomCardNames());
-        }
-        if (action instanceof ConfirmAction confirmAction) {
-            sb.append(" confirmed=").append(confirmAction.isConfirmed());
-        }
-        if (action instanceof ColorChoiceAction colorChoiceAction) {
-            sb.append(" color=").append(MagicColor.toShortString(colorChoiceAction.getColor()));
-        }
         return sb.toString();
     }
 

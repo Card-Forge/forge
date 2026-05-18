@@ -14,4 +14,9 @@ public class ModeChoiceAction extends PlayerAction {
     public List<String> getModeDescriptions() {
         return modeDescriptions;
     }
+
+    @Override
+    protected void appendDetails(final StringBuilder sb) {
+        sb.append(" modes=").append(modeDescriptions);
+    }
 }

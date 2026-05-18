@@ -13,4 +13,9 @@ public class ActivateAbilityAction extends PlayerAction {
     public String getAbilityDescription() {
         return abilityDescription;
     }
+
+    @Override
+    protected void appendDetails(final StringBuilder sb) {
+        sb.append(" ability=\"").append(abilityDescription).append("\"");
+    }
 }

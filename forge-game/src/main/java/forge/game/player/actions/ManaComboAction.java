@@ -14,4 +14,9 @@ public class ManaComboAction extends PlayerAction {
     public Map<Byte, Integer> getManaCombo() {
         return manaCombo;
     }
+
+    @Override
+    protected void appendDetails(final StringBuilder sb) {
+        sb.append(" manaCombo=").append(manaCombo);
+    }
 }

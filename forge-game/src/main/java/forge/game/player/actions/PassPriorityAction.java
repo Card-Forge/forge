@@ -23,4 +23,12 @@ public class PassPriorityAction extends PlayerAction {
     public PhaseType getPhase() {
         return phase;
     }
+
+    @Override
+    protected void appendDetails(final StringBuilder sb) {
+        sb.append(" stackWasEmpty=").append(stackWasEmpty);
+        if (phase != null) {
+            sb.append(" phase=").append(phase);
+        }
+    }
 }

@@ -28,9 +28,6 @@ import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.LinkedHashMap;
@@ -38,7 +35,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
-import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JLayeredPane;
 import javax.swing.JMenuItem;
@@ -53,7 +49,6 @@ import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ILocalRepaint;
 import forge.gui.framework.IVDoc;
-import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
@@ -107,8 +102,7 @@ public class VDock implements IVDoc<CDock> {
 
     private DockButton createButton(final DockButtonId id) {
         return switch (id) {
-            case MACRO_RECORD -> new MacroDockButton(0, localizer.getMessage(id.labelKey));
-            case MACRO_PLAY -> new MacroDockButton(1, localizer.getMessage(id.labelKey));
+            case MACRO_RECORD, MACRO_PLAY -> new MacroDockButton(FSkin.getIcon(id.icon), localizer.getMessage(id.labelKey));
             default -> new DockButton(FSkin.getIcon(id.icon), localizer.getMessage(id.labelKey));
         };
     }
@@ -316,8 +310,8 @@ public class VDock implements IVDoc<CDock> {
      */
     public enum DockButtonId {
         AUTO_PASS      (FSkinProp.ICO_AUTOPASS,         "lblYieldBtnAutoPassTooltip", true),
-        MACRO_RECORD   (FSkinProp.ICO_BLANK,            "lblMacroRecordStartTooltip", true),
-        MACRO_PLAY     (FSkinProp.ICO_BLANK,            "lblMacroPlayUnavailableTooltip", true),
+        MACRO_RECORD   (FSkinProp.ICO_DOCK_MACRO_RECORD, "lblMacroRecordStartTooltip", true),
+        MACRO_PLAY     (FSkinProp.ICO_DOCK_MACRO_PLAY,  "lblMacroPlayUnavailableTooltip", true),
         YIELD_SETTINGS (FSkinProp.ICO_DOCK_SETTINGS,    "lblYieldSettings",           true),
         END_TURN       (FSkinProp.ICO_DOCK_ENDTURN,     "lblEndTurn",                 true),
         ALPHA_STRIKE   (FSkinProp.ICO_DOCK_ALPHASTRIKE, "lblAlphaStrike",             true),
@@ -652,17 +646,14 @@ public class VDock implements IVDoc<CDock> {
 
     @SuppressWarnings("serial")
     public class MacroDockButton extends DockButton {
-        private static final String MACRO_IMAGE_FILE = "rec-play.png";
-        private final int frameIndex;
         private DisplayState displayState = DisplayState.RAISED;
 
         public enum DisplayState {
             FLAT, RAISED, PRESSED
         }
 
-        public MacroDockButton(final int frameIndex0, final String tooltip) {
-            super(FSkin.getIcon(FSkinProp.ICO_BLANK), tooltip);
-            this.frameIndex = frameIndex0;
+        public MacroDockButton(final SkinImage image, final String tooltip) {
+            super(image, tooltip);
         }
 
         public void setDisplayState(final DisplayState displayState0) {
@@ -701,16 +692,8 @@ public class VDock implements IVDoc<CDock> {
                 g.drawRect(0, 0, w - 1, h - 1);
             }
 
-            final BufferedImage macroImage = getMacroButtonImage();
             final int offset = pressed ? 1 : 0;
-            if (macroImage != null) {
-                final int srcX1 = frameIndex * 64;
-                final int srcX2 = srcX1 + 64;
-                g.drawImage(macroImage, offset + 3, offset + 3, offset + w - 3, offset + h - 3,
-                        srcX1, 0, srcX2, 64, null);
-            } else {
-                FSkin.drawImage(g, img, offset, offset, w, h);
-            }
+            FSkin.drawImage(g, img, offset, offset, w, h);
 
             if (!isEnabled()) {
                 paintDisabledOverlay(g, w, h);
@@ -729,18 +712,4 @@ public class VDock implements IVDoc<CDock> {
         g.fillRect(0, 0, w, h);
     }
 
-    private static BufferedImage macroButtonImage;
-    private static boolean macroButtonImageLoaded;
-
-    private static BufferedImage getMacroButtonImage() {
-        if (!macroButtonImageLoaded) {
-            macroButtonImageLoaded = true;
-            try {
-                macroButtonImage = ImageIO.read(new File(ForgeConstants.DEFAULT_SKINS_DIR + MacroDockButton.MACRO_IMAGE_FILE));
-            } catch (final IOException ignored) {
-                macroButtonImage = null;
-            }
-        }
-        return macroButtonImage;
-    }
 }

@@ -13,4 +13,9 @@ public class ConfirmAction extends PlayerAction {
     public boolean isConfirmed() {
         return confirmed;
     }
+
+    @Override
+    protected void appendDetails(final StringBuilder sb) {
+        sb.append(" confirmed=").append(confirmed);
+    }
 }

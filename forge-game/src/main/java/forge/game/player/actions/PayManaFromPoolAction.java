@@ -11,4 +11,9 @@ public class PayManaFromPoolAction extends PlayerAction{
     public byte getSelectedColor() {
         return colorSelected;
     }
+
+    @Override
+    protected void appendDetails(final StringBuilder sb) {
+        sb.append(" mana=").append(colorSelected);
+    }
 }
