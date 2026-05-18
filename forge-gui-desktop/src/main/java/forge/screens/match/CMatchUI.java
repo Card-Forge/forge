@@ -810,10 +810,14 @@ public final class CMatchUI
     @Override
     public void updateButtons(final PlayerView owner, final String label1, final String label2, final boolean enable1, final boolean enable2, final boolean focus1) {
         final FButton btn1 = view.getBtnOK(), btn2 = view.getBtnCancel();
-        btn1.setText(label1);
-        btn2.setText(label2);
+        final boolean macroReplaying = getGameController() != null && getGameController().macros().isReplaying();
+        final boolean actualEnable1 = macroReplaying ? false : enable1;
+        final boolean actualEnable2 = macroReplaying ? true : enable2;
+        final boolean actualFocus1 = macroReplaying ? false : focus1;
+        btn1.setText(macroReplaying ? "" : label1);
+        btn2.setText(macroReplaying ? Localizer.getInstance().getMessage("lblCancel") : label2);
 
-        final FButton toFocus = enable1 && focus1 ? btn1 : (enable2 ? btn2 : null);
+        final FButton toFocus = actualEnable1 && actualFocus1 ? btn1 : (actualEnable2 ? btn2 : null);
 
         //pfps This seems wrong so I've commented it out for now and put a replacement in the runnable
         // Remove focusable so the right button grabs focus properly
@@ -826,10 +830,10 @@ public final class CMatchUI
             // The only button that is focusable is the enabled default button
             // This prevents the user from somehow focusing on on some other button
             // and then using the keyboard to try to select it
-            btn1.setEnabled(enable1);
-            btn2.setEnabled(enable2);
-            btn1.setFocusable(enable1 && focus1);
-            btn2.setFocusable(enable2 && !focus1);
+            btn1.setEnabled(actualEnable1);
+            btn2.setEnabled(actualEnable2);
+            btn1.setFocusable(actualEnable1 && actualFocus1);
+            btn2.setFocusable(actualEnable2 && !actualFocus1);
             // ensure we don't steal focus from an overlay
             if (toFocus != null && !FNetOverlay.SINGLETON_INSTANCE.getTxtInput().hasFocus() ) {
                 toFocus.requestFocus(); // focus here even if another window has focus - shouldn't have to do it this way but some popups grab window focus
@@ -841,6 +845,7 @@ public final class CMatchUI
         } else {
             FThreads.invokeInEdtAndWait(focusRoutine);
         }
+        getCDock().refreshMacroButtons();
     }
 
     @Override

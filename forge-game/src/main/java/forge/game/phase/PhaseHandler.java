@@ -968,6 +968,11 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
         return extraPhases.get(afterPhase).push(new ExtraPhase(extraPhaseList.get(0)));
     }
 
+    public final boolean hasExtraPhaseAfter(final PhaseType afterPhase, final PhaseType extraPhase) {
+        final Stack<ExtraPhase> phases = extraPhases.get(afterPhase);
+        return phases != null && !phases.isEmpty() && phases.peek().getPhase() == extraPhase;
+    }
+
     public final boolean isFirstCombat() {
         return nCombatsThisTurn == 1;
     }

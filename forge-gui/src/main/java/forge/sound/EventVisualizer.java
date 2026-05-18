@@ -313,6 +313,9 @@ public class EventVisualizer extends IGameEventVisitor.Base<SoundEffectType> imp
 
     @Override
     public SoundEffectType visit(final GameEventSnapshotRestored gameEventSnapshotRestored) {
+        if (SoundSystem.instance.isSuppressSnapshotRestoredSound()) {
+            return null;
+        }
         SoundSystem.instance.setIgnorePlayRequests(gameEventSnapshotRestored.start());
 
         // How often do people cancel/undo is a rewind noise too repetitive?

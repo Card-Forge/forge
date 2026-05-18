@@ -33,6 +33,7 @@ public class SoundSystem {
     private boolean shouldPlayMusic = true;
     private boolean hasWindowFocus = true;
     private boolean ignorePlayRequests = false;
+    private boolean suppressSnapshotRestoredSound = false;
 
     private SoundSystem() {
         this.visualizer = new EventVisualizer(GamePlayerUtil.getGuiPlayer());
@@ -480,5 +481,13 @@ public class SoundSystem {
 
     public void setIgnorePlayRequests(boolean ignorePlayRequests) {
         this.ignorePlayRequests = ignorePlayRequests;
+    }
+
+    public boolean isSuppressSnapshotRestoredSound() {
+        return suppressSnapshotRestoredSound;
+    }
+
+    public void setSuppressSnapshotRestoredSound(boolean suppressSnapshotRestoredSound) {
+        this.suppressSnapshotRestoredSound = suppressSnapshotRestoredSound;
     }
 }

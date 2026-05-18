@@ -11,6 +11,11 @@ public abstract class PlayerAction {
         gameEntityView = cardView;
     }
 
+    public PlayerAction(final GameEntityView cardView, final String actionName) {
+        this(cardView);
+        name = actionName;
+    }
+
     public void run(PlayerController controller) {
         // Turn this abstract soon
         // This should try to replicate the recorded macro action

@@ -2,9 +2,15 @@ package forge.game.player.actions;
 
 import forge.game.GameEntityView;
 
-public class ActivateAbilityAction extends PlayerAction{
-    public ActivateAbilityAction(GameEntityView cardView) {
-        super(cardView);
-        name = "Activate ability";
+public class ActivateAbilityAction extends PlayerAction {
+    private final String abilityDescription;
+
+    public ActivateAbilityAction(GameEntityView cardView, String abilityDescription) {
+        super(cardView, "Activate ability");
+        this.abilityDescription = abilityDescription;
+    }
+
+    public String getAbilityDescription() {
+        return abilityDescription;
     }
 }

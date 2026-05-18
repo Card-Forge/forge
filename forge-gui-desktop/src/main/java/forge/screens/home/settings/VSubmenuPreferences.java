@@ -603,7 +603,22 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
             this.addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(final KeyEvent evt) {
+                    if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                        reload(prefKey);
+                        KeyboardFocusManager.getCurrentKeyboardFocusManager().clearGlobalFocusOwner();
+                        evt.consume();
+                        return;
+                    }
+                    if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                        KeyboardFocusManager.getCurrentKeyboardFocusManager().clearGlobalFocusOwner();
+                        evt.consume();
+                        return;
+                    }
+
                     KeyboardShortcuts.addKeyCode(evt);
+                    if (!isModifierKey(evt.getKeyCode()) && evt.getKeyCode() != KeyEvent.VK_BACK_SPACE) {
+                        KeyboardFocusManager.getCurrentKeyboardFocusManager().clearGlobalFocusOwner();
+                    }
                 }
             });
 
@@ -660,6 +675,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
             }
 
             this.setText(StringUtils.join(displayText, '+'));
+        }
+
+        private static boolean isModifierKey(final int keyCode) {
+            return keyCode == KeyEvent.VK_SHIFT || keyCode == KeyEvent.VK_CONTROL
+                    || keyCode == KeyEvent.VK_ALT || keyCode == KeyEvent.VK_META;
         }
     }
 

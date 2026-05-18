@@ -131,6 +131,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             if (gameOver) {
                 gameOver = false;
                 if (humanController != null) {
+                    humanController.macros().cancelCurrentMacro();
                     // this will unlock any game threads waiting for inputs to complete
                     humanController.getInputQueue().onGameOver(true);
                 }
@@ -138,6 +139,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             if (gameFinished) {
                 gameFinished = false;
                 if (humanController != null) {
+                    humanController.macros().cancelCurrentMacro();
                     final PlayerView localPlayer = humanController.getLocalPlayerView();
                     humanController.cancelAwaitNextInput(); //ensure "Waiting for opponent..." doesn't appear behind WinLo
                     matchController.showPromptMessage(localPlayer, ""); //clear prompt behind WinLose overlay

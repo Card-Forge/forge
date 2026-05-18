@@ -106,6 +106,10 @@ public class InputSelectEntitiesFromList<T extends GameEntity> extends InputSele
         return selected;
     }
 
+    public final FCollectionView<T> getValidChoices() {
+        return validChoices;
+    }
+
     @SuppressWarnings("unchecked")
     protected boolean selectEntity(final GameEntity c) {
         if (!validChoices.contains(c)) {

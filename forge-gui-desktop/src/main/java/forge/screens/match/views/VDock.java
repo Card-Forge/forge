@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -28,6 +28,9 @@ import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.LinkedHashMap;
@@ -35,6 +38,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
+import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JLayeredPane;
 import javax.swing.JMenuItem;
@@ -49,6 +53,7 @@ import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ILocalRepaint;
 import forge.gui.framework.IVDoc;
+import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
@@ -62,23 +67,31 @@ import forge.util.Localizer;
 
 /**
  * Assembles Swing components of button dock area.
- * 
+ *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
 public class VDock implements IVDoc<CDock> {
+    private static final Color TRANSPARENT = new Color(0, 0, 0, 0);
+    private static final Color DISABLED_OVERLAY = new Color(0, 0, 0, 120);
+    private static final Color FLAT_BORDER = new Color(0, 0, 0, 45);
+    private static final Color PRESSED_BG = new Color(24, 24, 24);
+    private static final Color EDGE_LIGHT = new Color(255, 255, 255, 150);
+    private static final Color EDGE_DARK = new Color(0, 0, 0, 170);
+    private static final Dimension BUTTON_SIZE = new Dimension(30, 30);
+
     final Localizer localizer = Localizer.getInstance();
     private DragCell parentCell;
     private final DragTab tab = new DragTab(localizer.getMessage("lblDock"));
     private final CDock controller;
 
     private final EnumMap<DockButtonId, DockButton> buttons = new EnumMap<>(DockButtonId.class);
-    // entry order is the on-screen left→right order
+    // entry order is the on-screen left-to-right order
     private LinkedHashMap<DockButtonId, Boolean> state;
 
     public VDock(final CDock controller) {
         this.controller = controller;
         for (DockButtonId id : DockButtonId.values()) {
-            buttons.put(id, new DockButton(FSkin.getIcon(id.icon), localizer.getMessage(id.labelKey)));
+            buttons.put(id, createButton(id));
         }
     }
 
@@ -90,6 +103,14 @@ public class VDock implements IVDoc<CDock> {
         state = loadLayout();
         installInteractionHandlers(pnl);
         relayout();
+    }
+
+    private DockButton createButton(final DockButtonId id) {
+        return switch (id) {
+            case MACRO_RECORD -> new MacroDockButton(0, localizer.getMessage(id.labelKey));
+            case MACRO_PLAY -> new MacroDockButton(1, localizer.getMessage(id.labelKey));
+            default -> new DockButton(FSkin.getIcon(id.icon), localizer.getMessage(id.labelKey));
+        };
     }
 
     private void installInteractionHandlers(final JPanel pnl) {
@@ -125,7 +146,7 @@ public class VDock implements IVDoc<CDock> {
         pnl.removeAll();
         for (Map.Entry<DockButtonId, Boolean> e : state.entrySet()) {
             if (Boolean.TRUE.equals(e.getValue())) {
-                DockButton b = buttons.get(e.getKey());
+                final DockButton b = buttons.get(e.getKey());
                 if (b != null) {
                     pnl.add(b);
                 }
@@ -214,7 +235,7 @@ public class VDock implements IVDoc<CDock> {
     }
 
     /**
-     * Walk the other visible buttons left→right; the target index is the
+     * Walk the other visible buttons left-to-right; the target index is the
      * number of those whose midpoint lies left of the cursor.
      */
     private int computeTargetIdx(final List<DockButtonId> visible, final int currentIdx, final int cursorPanelX) {
@@ -283,6 +304,10 @@ public class VDock implements IVDoc<CDock> {
         return buttons.get(id);
     }
 
+    public MacroDockButton getMacroButton(final DockButtonId id) {
+        return (MacroDockButton) buttons.get(id);
+    }
+
     /**
      * Declarative table of dock buttons. Enum order is the default presentation
      * order; {@code defaultVisible} is the per-button visibility seed. New
@@ -291,6 +316,8 @@ public class VDock implements IVDoc<CDock> {
      */
     public enum DockButtonId {
         AUTO_PASS      (FSkinProp.ICO_AUTOPASS,         "lblYieldBtnAutoPassTooltip", true),
+        MACRO_RECORD   (FSkinProp.ICO_BLANK,            "lblMacroRecordStartTooltip", true),
+        MACRO_PLAY     (FSkinProp.ICO_BLANK,            "lblMacroPlayUnavailableTooltip", true),
         YIELD_SETTINGS (FSkinProp.ICO_DOCK_SETTINGS,    "lblYieldSettings",           true),
         END_TURN       (FSkinProp.ICO_DOCK_ENDTURN,     "lblEndTurn",                 true),
         ALPHA_STRIKE   (FSkinProp.ICO_DOCK_ALPHASTRIKE, "lblAlphaStrike",             true),
@@ -303,7 +330,7 @@ public class VDock implements IVDoc<CDock> {
         final String labelKey;
         final boolean defaultVisible;
 
-        DockButtonId(FSkinProp icon, String labelKey, boolean defaultVisible) {
+        DockButtonId(final FSkinProp icon, final String labelKey, final boolean defaultVisible) {
             this.icon = icon;
             this.labelKey = labelKey;
             this.defaultVisible = defaultVisible;
@@ -311,7 +338,7 @@ public class VDock implements IVDoc<CDock> {
     }
 
     private static LinkedHashMap<DockButtonId, Boolean> defaultLayout() {
-        LinkedHashMap<DockButtonId, Boolean> out = new LinkedHashMap<>();
+        final LinkedHashMap<DockButtonId, Boolean> out = new LinkedHashMap<>();
         for (DockButtonId id : DockButtonId.values()) {
             out.put(id, id.defaultVisible);
         }
@@ -319,15 +346,15 @@ public class VDock implements IVDoc<CDock> {
     }
 
     private static LinkedHashMap<DockButtonId, Boolean> loadLayout() {
-        LinkedHashMap<DockButtonId, Boolean> shipped = defaultLayout();
-        LinkedHashMap<DockButtonId, Boolean> user = parseLayout(
+        final LinkedHashMap<DockButtonId, Boolean> shipped = defaultLayout();
+        final LinkedHashMap<DockButtonId, Boolean> user = parseLayout(
                 FModel.getPreferences().getPref(FPref.UI_DOCK_LAYOUT));
         if (user.isEmpty()) return shipped;
         return mergeFromShipped(user, shipped);
     }
 
     private static LinkedHashMap<DockButtonId, Boolean> resetLayoutToDefaults() {
-        LinkedHashMap<DockButtonId, Boolean> defaults = defaultLayout();
+        final LinkedHashMap<DockButtonId, Boolean> defaults = defaultLayout();
         FModel.getPreferences().setPref(FPref.UI_DOCK_LAYOUT, serializeLayout(defaults));
         FModel.getPreferences().save();
         return defaults;
@@ -339,23 +366,23 @@ public class VDock implements IVDoc<CDock> {
     }
 
     private static LinkedHashMap<DockButtonId, Boolean> parseLayout(final String s) {
-        LinkedHashMap<DockButtonId, Boolean> out = new LinkedHashMap<>();
+        final LinkedHashMap<DockButtonId, Boolean> out = new LinkedHashMap<>();
         if (s == null || s.isEmpty()) return out;
         for (String entry : s.split(",")) {
-            int colon = entry.indexOf(':');
+            final int colon = entry.indexOf(':');
             if (colon < 0) continue;
             try {
                 out.put(DockButtonId.valueOf(entry.substring(0, colon).trim()),
                         !"0".equals(entry.substring(colon + 1).trim()));
             } catch (IllegalArgumentException ignored) {
-                // Unknown id — likely from a newer build; skip
+                // Unknown id - likely from a newer build; skip
             }
         }
         return out;
     }
 
     private static String serializeLayout(final LinkedHashMap<DockButtonId, Boolean> state) {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         for (Map.Entry<DockButtonId, Boolean> e : state.entrySet()) {
             if (sb.length() > 0) sb.append(',');
             sb.append(e.getKey().name()).append(':').append(Boolean.TRUE.equals(e.getValue()) ? '1' : '0');
@@ -387,7 +414,7 @@ public class VDock implements IVDoc<CDock> {
             final DockButtonId predecessor,
             final DockButtonId newId,
             final boolean newVisible) {
-        LinkedHashMap<DockButtonId, Boolean> rebuilt = new LinkedHashMap<>();
+        final LinkedHashMap<DockButtonId, Boolean> rebuilt = new LinkedHashMap<>();
         boolean inserted = predecessor == null;
         if (inserted) rebuilt.put(newId, newVisible);
         for (Map.Entry<DockButtonId, Boolean> r : source.entrySet()) {
@@ -410,9 +437,8 @@ public class VDock implements IVDoc<CDock> {
          *  than goldenrod so it reads as an accent rather than a UI element. */
         private static final Color HIGHLIGHT_BG = new Color(0xB8860B);
         private static final int TILE_CORNER_RADIUS = 6;
-        private SkinImage img;
+        protected SkinImage img;
         private final SkinColor hoverBG = FSkin.getColor(FSkin.Colors.CLR_HOVER);
-        private final Color defaultBG = new Color(0, 0, 0, 0);
         private final SkinColor dragBorderColor = FSkin.getColor(FSkin.Colors.CLR_BORDERS);
         private UiCommand command;
         private Consumer<MouseEvent> dropAction;
@@ -428,19 +454,16 @@ public class VDock implements IVDoc<CDock> {
             super();
             this.setToolTipText(s0);
             this.setOpaque(false);
-            this.setBackground(this.defaultBG);
+            this.setBackground(TRANSPARENT);
             this.img = i0;
 
-            Dimension size = new Dimension(30, 30);
-            this.setMinimumSize(size);
-            this.setMaximumSize(size);
-            this.setPreferredSize(size);
+            setButtonSize(this);
 
             // FMouseAdapter(true): drag past 3px suppresses the click action
             final FMouseAdapter adapter = new FMouseAdapter(true) {
                 @Override
                 public void onLeftClick(final MouseEvent e) {
-                    if (DockButton.this.command != null) {
+                    if (DockButton.this.isEnabled() && DockButton.this.command != null) {
                         DockButton.this.command.run();
                     }
                 }
@@ -459,7 +482,7 @@ public class VDock implements IVDoc<CDock> {
                     }
                 }
 
-                // onLeftMouseDragDrop needs >3px; mouseUp always fires — clear here so sub-3px twitches don't stick
+                // onLeftMouseDragDrop needs >3px; mouseUp always fires - clear here so sub-3px twitches don't stick
                 @Override
                 public void onLeftMouseUp(final MouseEvent e) {
                     if (DockButton.this.dragging) {
@@ -478,28 +501,30 @@ public class VDock implements IVDoc<CDock> {
 
                 @Override
                 public void onMouseEnter(final MouseEvent e) {
-                    DockButton.this.setBackground(DockButton.this.hoverBG);
+                    if (DockButton.this.isEnabled()) {
+                        DockButton.this.setBackground(DockButton.this.hoverBG);
+                    }
                 }
 
                 @Override
                 public void onMouseExit(final MouseEvent e) {
-                    DockButton.this.setBackground(DockButton.this.defaultBG);
+                    DockButton.this.setBackground(TRANSPARENT);
                 }
             };
             this.addMouseListener(adapter);
-            // Permanent motion listener — required for onLeftMouseDragging to fire
+            // Permanent motion listener - required for onLeftMouseDragging to fire
             this.addMouseMotionListener(adapter);
         }
 
-        public void setCommand(UiCommand command0) {
+        public void setCommand(final UiCommand command0) {
             this.command = command0;
         }
 
-        public void setDropAction(Consumer<MouseEvent> dropAction0) {
+        public void setDropAction(final Consumer<MouseEvent> dropAction0) {
             this.dropAction = dropAction0;
         }
 
-        public void setDragOverAction(Consumer<MouseEvent> dragOverAction0) {
+        public void setDragOverAction(final Consumer<MouseEvent> dragOverAction0) {
             this.dragOverAction = dragOverAction0;
         }
 
@@ -520,9 +545,9 @@ public class VDock implements IVDoc<CDock> {
         }
 
         private void startDragGhost(final MouseEvent e) {
-            JRootPane root = SwingUtilities.getRootPane(this);
+            final JRootPane root = SwingUtilities.getRootPane(this);
             if (root == null) return;
-            JLayeredPane layered = root.getLayeredPane();
+            final JLayeredPane layered = root.getLayeredPane();
 
             this.dragOffsetX = e.getX();
             this.dragOffsetY = e.getY();
@@ -530,7 +555,7 @@ public class VDock implements IVDoc<CDock> {
             this.dragGhost = new JComponent() {
                 @Override
                 protected void paintComponent(final Graphics g) {
-                    Graphics2D g2 = (Graphics2D) g.create();
+                    final Graphics2D g2 = (Graphics2D) g.create();
                     g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.65f));
                     DockButton.this.paintTileAndGlyph(g2, getWidth(), getHeight());
                     g2.dispose();
@@ -544,22 +569,31 @@ public class VDock implements IVDoc<CDock> {
 
         private void updateDragGhost(final MouseEvent e) {
             if (this.dragGhost == null) return;
-            Container layered = this.dragGhost.getParent();
+            final Container layered = this.dragGhost.getParent();
             if (layered == null) return;
-            Point inLayered = SwingUtilities.convertPoint(e.getComponent(), e.getPoint(), layered);
+            final Point inLayered = SwingUtilities.convertPoint(e.getComponent(), e.getPoint(), layered);
             this.dragGhost.setLocation(inLayered.x - this.dragOffsetX, inLayered.y - this.dragOffsetY);
             layered.repaint();
         }
 
         private void endDragGhost() {
             if (this.dragGhost != null) {
-                Container layered = this.dragGhost.getParent();
+                final Container layered = this.dragGhost.getParent();
                 if (layered != null) {
                     layered.remove(this.dragGhost);
                     layered.repaint();
                 }
                 this.dragGhost = null;
             }
+        }
+
+        @Override
+        public void setEnabled(final boolean enabled) {
+            super.setEnabled(enabled);
+            if (!enabled) {
+                setBackground(TRANSPARENT);
+            }
+            repaintSelf();
         }
 
         @Override
@@ -576,17 +610,19 @@ public class VDock implements IVDoc<CDock> {
             g.fillRect(0, 0, w, h);
 
             if (this.dragging) {
-                // Icon flies as a ghost on the layered pane — outline the empty slot to show the drop target
+                // Icon flies as a ghost on the layered pane - outline the empty slot to show the drop target
                 FSkin.setGraphicsColor(g, this.dragBorderColor);
                 g.drawRect(0, 0, w - 1, h - 1);
                 g.drawRect(1, 1, w - 3, h - 3);
-            }
-            else {
+            } else {
                 if (!this.active && this.getSkin().getBackground() == this.hoverBG) {
                     FSkin.setGraphicsColor(g, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
                     g.drawRect(0, 0, w - 1, h - 1);
                 }
                 paintTileAndGlyph(g, w, h);
+            }
+            if (!isEnabled()) {
+                paintDisabledOverlay(g, w, h);
             }
             super.paintComponent(g);
         }
@@ -597,7 +633,7 @@ public class VDock implements IVDoc<CDock> {
          * stay visually consistent.
          */
         private void paintTileAndGlyph(final Graphics g, final int width, final int height) {
-            // Bilinear keeps the 80→30 sprite downscale smooth; antialiasing softens the tile edges
+            // Bilinear keeps the 80->30 sprite downscale smooth; antialiasing softens the tile edges
             if (g instanceof Graphics2D g2) {
                 if (this.active) {
                     g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
@@ -612,5 +648,99 @@ public class VDock implements IVDoc<CDock> {
             }
             FSkin.drawImage(g, this.img, 0, 0, width, height);
         }
+    }
+
+    @SuppressWarnings("serial")
+    public class MacroDockButton extends DockButton {
+        private static final String MACRO_IMAGE_FILE = "rec-play.png";
+        private final int frameIndex;
+        private DisplayState displayState = DisplayState.RAISED;
+
+        public enum DisplayState {
+            FLAT, RAISED, PRESSED
+        }
+
+        public MacroDockButton(final int frameIndex0, final String tooltip) {
+            super(FSkin.getIcon(FSkinProp.ICO_BLANK), tooltip);
+            this.frameIndex = frameIndex0;
+        }
+
+        public void setDisplayState(final DisplayState displayState0) {
+            if (this.displayState == displayState0) {
+                return;
+            }
+            this.displayState = displayState0;
+            repaintSelf();
+        }
+
+        @Override
+        public void paintComponent(final Graphics g) {
+            final int w = getWidth();
+            final int h = getHeight();
+            final boolean pressed = displayState == DisplayState.PRESSED;
+            final boolean raised = displayState == DisplayState.RAISED && isEnabled();
+
+            if (pressed) {
+                g.setColor(PRESSED_BG);
+            } else if (getSkin().getBackground() == FSkin.getColor(FSkin.Colors.CLR_HOVER)) {
+                FSkin.setGraphicsColor(g, FSkin.getColor(FSkin.Colors.CLR_HOVER));
+            } else {
+                g.setColor(TRANSPARENT);
+            }
+            g.fillRect(0, 0, w, h);
+
+            if (raised || pressed) {
+                g.setColor(pressed ? EDGE_DARK : EDGE_LIGHT);
+                g.drawLine(0, 0, w - 1, 0);
+                g.drawLine(0, 0, 0, h - 1);
+                g.setColor(pressed ? EDGE_LIGHT : EDGE_DARK);
+                g.drawLine(0, h - 1, w - 1, h - 1);
+                g.drawLine(w - 1, 0, w - 1, h - 1);
+            } else {
+                g.setColor(FLAT_BORDER);
+                g.drawRect(0, 0, w - 1, h - 1);
+            }
+
+            final BufferedImage macroImage = getMacroButtonImage();
+            final int offset = pressed ? 1 : 0;
+            if (macroImage != null) {
+                final int srcX1 = frameIndex * 64;
+                final int srcX2 = srcX1 + 64;
+                g.drawImage(macroImage, offset + 3, offset + 3, offset + w - 3, offset + h - 3,
+                        srcX1, 0, srcX2, 64, null);
+            } else {
+                FSkin.drawImage(g, img, offset, offset, w, h);
+            }
+
+            if (!isEnabled()) {
+                paintDisabledOverlay(g, w, h);
+            }
+        }
+    }
+
+    private static void setButtonSize(final javax.swing.JComponent component) {
+        component.setPreferredSize(BUTTON_SIZE);
+        component.setMinimumSize(BUTTON_SIZE);
+        component.setMaximumSize(BUTTON_SIZE);
+    }
+
+    private static void paintDisabledOverlay(final Graphics g, final int w, final int h) {
+        g.setColor(DISABLED_OVERLAY);
+        g.fillRect(0, 0, w, h);
+    }
+
+    private static BufferedImage macroButtonImage;
+    private static boolean macroButtonImageLoaded;
+
+    private static BufferedImage getMacroButtonImage() {
+        if (!macroButtonImageLoaded) {
+            macroButtonImageLoaded = true;
+            try {
+                macroButtonImage = ImageIO.read(new File(ForgeConstants.DEFAULT_SKINS_DIR + MacroDockButton.MACRO_IMAGE_FILE));
+            } catch (final IOException ignored) {
+                macroButtonImage = null;
+            }
+        }
+        return macroButtonImage;
     }
 }

@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -192,23 +193,12 @@ public class KeyboardShortcuts {
             }
         };
 
-        final Action actMacroRecord = new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
-                if (matchUI == null) { return; }
-                matchUI.getGameController().macros().setRememberedActions();
-            }
-        };
+        final Action actMacroRecord = macroAction(matchUI, ui -> ui.getGameController().macros().setRememberedActions());
         
-        final Action actMacroNextAction = new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
-                if (matchUI == null) { return; }
-                matchUI.getGameController().macros().nextRememberedAction();
-            }
-        };
+        final Action actMacroNextAction = macroAction(matchUI, ui -> ui.getGameController().macros().nextRememberedAction());
+
+        final Action actMacroRepeatActions = macroAction(matchUI,
+                ui -> ui.getGameController().macros().repeatRememberedActions());
 
         final Action actZoomCard = new AbstractAction() {
             @Override
@@ -298,6 +288,7 @@ public class KeyboardShortcuts {
         list.add(new Shortcut(FPref.SHORTCUT_YIELD_AUTO_PASS, localizer.getMessage("lblSHORTCUT_YIELD_AUTO_PASS"), actYieldAutoPass, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_MACRO_RECORD, localizer.getMessage("lblSHORTCUT_MACRO_RECORD"), actMacroRecord, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_MACRO_NEXT_ACTION, localizer.getMessage("lblSHORTCUT_MACRO_NEXT_ACTION"), actMacroNextAction, am, im));
+        list.add(new Shortcut(FPref.SHORTCUT_MACRO_REPEAT_ACTIONS, localizer.getMessage("lblSHORTCUT_MACRO_REPEAT_ACTIONS"), actMacroRepeatActions, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_CARD_ZOOM, localizer.getMessage("lblSHORTCUT_CARD_ZOOM"), actZoomCard, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_SHOWHOTKEYS, localizer.getMessage("lblSHORTCUT_SHOWHOTKEYS"), actShowHotkeys, am, im));
         list.add(new Shortcut(FPref.SHORTCUT_PANELTABS, localizer.getMessage("lblSHORTCUT_PANELTABS"), actPanelTabs, am, im));
@@ -305,6 +296,19 @@ public class KeyboardShortcuts {
         cachedShortcuts = list;
         return list;
     } // End initMatchShortcuts()
+
+    private static Action macroAction(final CMatchUI matchUI, final Consumer<CMatchUI> command) {
+        return new AbstractAction() {
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (!Singletons.getControl().getCurrentScreen().isMatchScreen() || matchUI == null) {
+                    return;
+                }
+                command.accept(matchUI);
+                matchUI.getCDock().refreshMacroButtons();
+            }
+        };
+    }
 
     /**
      * 
@@ -397,6 +401,25 @@ public class KeyboardShortcuts {
         return assembleKeystrokes(str.split(" "));
     }
 
+    /**
+     * Returns display text for the currently assigned shortcut preference,
+     * or an empty string if the shortcut is unassigned.
+     */
+    public static String getShortcutDisplayText(final FPref pref) {
+        final String str = FModel.getPreferences().getPref(pref);
+        if (str == null || str.isEmpty()) {
+            return "";
+        }
+
+        final List<String> displayText = new ArrayList<>();
+        for (final String code : str.split(" ")) {
+            if (!code.isEmpty()) {
+                displayText.add(KeyEvent.getKeyText(Integer.parseInt(code)));
+            }
+        }
+        return StringUtils.join(displayText, '+');
+    }
+
     private static KeyStroke assembleKeystrokes(final String[] keys0) {
         int[] inputEvents = new int[2];
         int modifier = 0;
@@ -446,13 +469,16 @@ public class KeyboardShortcuts {
 
         if (codestring != null) {
             existingCodes = new ArrayList<>(Arrays.asList(codestring.split(" ")));
+            existingCodes.removeIf(String::isEmpty);
         } else {
             existingCodes = new ArrayList<>();
         }
 
         // Backspace (8) will remove last code from list.
         if (e.getKeyCode() == 8) {
-            existingCodes.remove(existingCodes.size() - 1);
+            if (!existingCodes.isEmpty()) {
+                existingCodes.remove(existingCodes.size() - 1);
+            }
         } else if (!existingCodes.contains(newCode)) {
             existingCodes.add(newCode);
         }

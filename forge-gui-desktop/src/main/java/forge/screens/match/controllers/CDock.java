@@ -22,9 +22,13 @@ import java.util.Map;
 import com.google.common.primitives.Ints;
 
 import forge.Singletons;
+import forge.control.KeyboardShortcuts;
 import forge.gamemodes.match.YieldController;
 import forge.gui.UiCommand;
+import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
+import forge.gui.framework.SDisplayUtil;
+import forge.interfaces.IMacroSystem;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
@@ -45,6 +49,8 @@ public class CDock implements ICDoc {
 
     private final CMatchUI matchUI;
     private final VDock view;
+    private final Localizer localizer = Localizer.getInstance();
+
     public CDock(final CMatchUI matchUI) {
         this.matchUI = matchUI;
         this.view = new VDock(this);
@@ -88,6 +94,8 @@ public class CDock implements ICDoc {
                 DockButtonId.YIELD_SETTINGS, () -> new VYieldSettings(matchUI).showDialog(),
                 DockButtonId.END_TURN,       () -> YieldController.endTurn(matchUI.getGameController(), matchUI.getCurrentPlayer()),
                 DockButtonId.AUTO_PASS,      this::toggleAutoPass,
+                DockButtonId.MACRO_RECORD,   this::toggleMacroRecording,
+                DockButtonId.MACRO_PLAY,     this::playMacro,
                 DockButtonId.VIEW_DECK_LIST, matchUI::viewDeckList,
                 DockButtonId.ALPHA_STRIKE,   () -> matchUI.getGameController().alphaStrike(),
                 DockButtonId.TARGETING,      this::toggleTargeting,
@@ -102,6 +110,61 @@ public class CDock implements ICDoc {
         update();
     }
 
+    private void toggleMacroRecording() {
+        matchUI.getGameController().macros().setRememberedActions();
+        refreshMacroButtons();
+        showPromptTab();
+    }
+
+    private void playMacro() {
+        matchUI.getGameController().macros().repeatRememberedActions();
+        refreshMacroButtons();
+        showPromptTab();
+    }
+
+    public void refreshMacroButtons() {
+        final VDock.MacroDockButton recordButton = view.getMacroButton(DockButtonId.MACRO_RECORD);
+        final VDock.MacroDockButton playButton = view.getMacroButton(DockButtonId.MACRO_PLAY);
+        if (matchUI.getGameController() == null) {
+            recordButton.setEnabled(false);
+            playButton.setEnabled(false);
+            return;
+        }
+
+        final IMacroSystem macros = matchUI.getGameController().macros();
+        final boolean recording = macros.isRecording();
+        final boolean replaying = macros.isReplaying();
+        final boolean hasMacro = macros.hasRememberedActions();
+
+        configureMacroButton(recordButton, !replaying, recording
+                ? VDock.MacroDockButton.DisplayState.PRESSED : VDock.MacroDockButton.DisplayState.RAISED,
+                recording ? "lblMacroRecordStopTooltip" : "lblMacroRecordStartTooltip", FPref.SHORTCUT_MACRO_RECORD);
+        configureMacroButton(playButton, hasMacro && !recording && !replaying,
+                replaying ? VDock.MacroDockButton.DisplayState.PRESSED
+                        : hasMacro && !recording ? VDock.MacroDockButton.DisplayState.RAISED : VDock.MacroDockButton.DisplayState.FLAT,
+                replaying ? "lblMacroPlaybackActiveTooltip"
+                        : hasMacro ? "lblMacroPlayTooltip" : "lblMacroPlayUnavailableTooltip",
+                FPref.SHORTCUT_MACRO_REPEAT_ACTIONS);
+    }
+
+    private void configureMacroButton(final VDock.MacroDockButton button, final boolean enabled,
+                                      final VDock.MacroDockButton.DisplayState displayState, final String tooltipKey,
+                                      final FPref shortcutPref) {
+        button.setEnabled(enabled);
+        button.setDisplayState(displayState);
+        button.setToolTipText(macroTooltip(tooltipKey, shortcutPref));
+    }
+
+    private String macroTooltip(final String labelKey, final FPref shortcutPref) {
+        final String label = localizer.getMessage(labelKey);
+        final String shortcutText = KeyboardShortcuts.getShortcutDisplayText(shortcutPref);
+        return shortcutText.isEmpty() ? label : label + " (" + shortcutText + ")";
+    }
+
+    private void showPromptTab() {
+        SDisplayUtil.showTab(EDocID.REPORT_MESSAGE.getDoc());
+    }
+
     @Override
     public void update() {
         final ArcState arcs = getArcState();
@@ -114,13 +177,13 @@ public class CDock implements ICDoc {
             case OFF -> FSkinProp.ICO_ARCSOFF;
         };
         targeting.setImage(FSkin.getIcon(arcIcon));
-        final Localizer loc = Localizer.getInstance();
         final String stateKey = switch (arcs) {
             case OFF -> "lblOff";
             case MOUSEOVER -> "lblCardMouseOver";
             case ON -> "lblAlwaysOn";
         };
-        targeting.setToolTipText(loc.getMessage("lblTargetingArcs") + ": " + loc.getMessage(stateKey));
+        targeting.setToolTipText(localizer.getMessage("lblTargetingArcs") + ": " + localizer.getMessage(stateKey));
+        refreshMacroButtons();
     }
 
 }
