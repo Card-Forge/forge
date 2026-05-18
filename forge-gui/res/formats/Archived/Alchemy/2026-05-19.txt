@@ -1,0 +1,7 @@
+[format]
+Name:Alchemy (YSOS)
+Type:Archived
+Subtype:Arena
+Effective:2026-05-19
+Sets:ANA, ANB, BLB, YBLB, DSK, YDSK, FDN, DFT, YDFT, TDM, YTDM, FIN, EOE, YEOE, OM1, TLA, ECL, YECL, TMT, SOS, YSOS
+Banned:Sewer-veillance Cam

@@ -3,4 +3,4 @@ Name:Alchemy (TMT)
 Type:Archived
 Subtype:Arena
 Effective:2026-03-03
-Sets:ANA, ANB, BLB, YBLB, DSK, YDSK, FDN, DFT, YDFT, TDM, YTDM, FIN, EOE, YEOE, OM1, TLA, ECL, TMT
+Sets:ANA, ANB, BLB, YBLB, DSK, YDSK, FDN, DFT, YDFT, TDM, YTDM, FIN, EOE, YEOE, OM1, TLA, ECL, YECL, TMT
