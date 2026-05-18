@@ -979,6 +979,8 @@ public final class FServerManager implements IHasForgeLog {
                 }
                 return;
             }
+            // Note: MessageEvent is handled by MessageHandler, not here
+            // to avoid duplicate display on host's chat
             super.channelRead(ctx, msg);
         }
     }
