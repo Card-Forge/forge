@@ -74,6 +74,7 @@ import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
+import forge.gui.interfaces.IGuiGame.OrderResult;
 import forge.gui.GuiUtils;
 import forge.gui.MenuScroller;
 import forge.gui.SOverlayUtils;
@@ -1268,14 +1269,9 @@ public final class CMatchUI
     }
 
     @Override
-    public <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
-            final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode) {
-        /*if ((sourceChoices != null && !sourceChoices.isEmpty() && sourceChoices.iterator().next() instanceof GameObject)
-                || (destChoices != null && !destChoices.isEmpty() && destChoices.iterator().next() instanceof GameObject)) {
-            System.err.println("Warning: GameObject passed to GUI! Printing stack trace.");
-            Thread.dumpStack();
-        }*/
-        return GuiChoose.order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode, this);
+    public <T> OrderResult<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
+            final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode, final boolean showRememberCheckbox) {
+        return GuiChoose.order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode, showRememberCheckbox, this);
     }
 
     @Override

@@ -144,7 +144,6 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_ALLOW_ESC_TO_END_TURN ("false"),
         UI_ALT_PLAYERINFOLAYOUT ("false"),
         UI_ALT_PLAYERZONETABS ("false"),
-        UI_PRESELECT_PREVIOUS_ABILITY_ORDER ("false"),
         YIELD_INTERRUPT_ON_ATTACKERS ("true"),
         YIELD_INTERRUPT_ON_OPPONENT_SPELL ("true"),
         YIELD_INTERRUPT_ON_TARGETING ("false"),

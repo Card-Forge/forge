@@ -21,6 +21,7 @@ import forge.util.IHasForgeLog;
 import forge.gamemodes.net.ProtocolMethod;
 import forge.gamemodes.net.TrackableSerializer;
 import forge.gui.control.GameEventForwarder;
+import forge.gui.interfaces.IGuiGame;
 import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
@@ -460,9 +461,9 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     }
 
     @Override
-    public <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax, final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode) {
+    public <T> IGuiGame.OrderResult<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax, final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode, final boolean showRememberCheckbox) {
         updateGameView(); // Ensure game state is synced before asking for input
-        return flushAndSendAndWait(ProtocolMethod.order, title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode);
+        return flushAndSendAndWait(ProtocolMethod.order, title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode, showRememberCheckbox);
     }
 
     @Override
