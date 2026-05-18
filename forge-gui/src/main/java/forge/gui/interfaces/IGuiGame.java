@@ -256,7 +256,7 @@ public interface IGuiGame {
 
     void restoreOldZones(PlayerView playerView, PlayerZoneUpdates playerZoneUpdates);
 
-    void setHighlighted(GameEntityView pv, boolean b);
+    void setHighlighted(Iterable<GameEntityView> entities, boolean b);
 
     /**
      * Mark {@code cards} as selectable and publish the active selection's

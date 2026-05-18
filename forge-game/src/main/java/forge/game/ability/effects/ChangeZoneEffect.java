@@ -1140,8 +1140,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                 }
                 // ensure that selection is within maximum allowed changeNum
+                final int multiMin = sa.hasParam("Mandatory") ? Math.min(changeNum, fetchList.size()) : 0;
                 do {
-                    selectedCards = decider.getController().chooseCardsForZoneChange(destination, origin, sa, fetchList, 0, changeNum, delayedReveal, selectPrompt, decider);
+                    selectedCards = decider.getController().chooseCardsForZoneChange(destination, origin, sa, fetchList, multiMin, changeNum, delayedReveal, selectPrompt, decider);
                 } while (selectedCards != null && selectedCards.size() > changeNum);
                 if (selectedCards != null) {
                     chosenCards.addAll(selectedCards);
@@ -1561,7 +1562,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
     private static boolean allowMultiSelect(Player decider, SpellAbility sa) {
         return decider.getController().isGuiPlayer()        // limit mass selection to human players for now
-                && !sa.hasParam("Mandatory")                // only handle optional decisions, for now
                 && !sa.hasParam("ShareLandType")
                 && !sa.hasParam("DifferentNames")
                 && !sa.hasParam("DifferentPower")

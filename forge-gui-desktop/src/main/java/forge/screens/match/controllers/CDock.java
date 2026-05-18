@@ -62,10 +62,6 @@ public class CDock implements ICDoc {
         return view;
     }
 
-    public void endTurn() {
-        YieldController.endTurn(matchUI.getGameController(), matchUI.getCurrentPlayer());
-    }
-
     /** Reads UI_TARGETING_OVERLAY on demand. Falls back to OFF for an
      *  unparseable / unset pref. */
     public ArcState getArcState() {
@@ -77,7 +73,7 @@ public class CDock implements ICDoc {
         final ArcState next = getArcState().next();
         FModel.getPreferences().setPref(FPref.UI_TARGETING_OVERLAY, String.valueOf(next.ordinal()));
         FModel.getPreferences().save();
-        refresh();
+        update();
         Singletons.getView().getFrame().repaint();
     }
 
@@ -90,7 +86,7 @@ public class CDock implements ICDoc {
         final Map<DockButtonId, UiCommand> commands = Map.of(
                 DockButtonId.CONCEDE,        matchUI::concede,
                 DockButtonId.YIELD_SETTINGS, () -> new VYieldSettings(matchUI).showDialog(),
-                DockButtonId.END_TURN,       this::endTurn,
+                DockButtonId.END_TURN,       () -> YieldController.endTurn(matchUI.getGameController(), matchUI.getCurrentPlayer()),
                 DockButtonId.AUTO_PASS,      this::toggleAutoPass,
                 DockButtonId.VIEW_DECK_LIST, matchUI::viewDeckList,
                 DockButtonId.ALPHA_STRIKE,   () -> matchUI.getGameController().alphaStrike(),
@@ -98,20 +94,18 @@ public class CDock implements ICDoc {
                 DockButtonId.AUTO_YIELDS,    () -> new VAutoYieldsAndTriggers(matchUI).showDialog());
         commands.forEach((id, cmd) -> view.getButton(id).setCommand(cmd));
 
-        refresh();
+        update();
     }
 
     private void toggleAutoPass() {
         YieldController.toggleAutoPassNoActions(matchUI.getGameController());
-        refresh();
+        update();
     }
 
-    /** Syncs each stateful dock button's active highlight and any
-     *  state-derived tooltips with the current preference values. */
-    public void refresh() {
+    @Override
+    public void update() {
         final ArcState arcs = getArcState();
-        view.getButton(DockButtonId.AUTO_PASS).setActive(
-                FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS));
+        view.getButton(DockButtonId.AUTO_PASS).setActive(FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS));
         final VDock.DockButton targeting = view.getButton(DockButtonId.TARGETING);
         targeting.setActive(arcs != ArcState.OFF);
         targeting.setImage(FSkin.getIcon(arcs == ArcState.ON ? FSkinProp.ICO_ARCSON : FSkinProp.ICO_ARCSOFF));
@@ -122,11 +116,6 @@ public class CDock implements ICDoc {
             case ON -> "lblAlwaysOn";
         };
         targeting.setToolTipText(loc.getMessage("lblTargetingArcs") + ": " + loc.getMessage(stateKey));
-    }
-
-    @Override
-    public void update() {
-        refresh();
     }
 
 }

@@ -124,7 +124,7 @@ public final class GameMenu {
         menuItem.setState(prefs.getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS));
         menuItem.addActionListener(e -> {
             YieldController.toggleAutoPassNoActions(matchUI.getGameController());
-            matchUI.getCDock().refresh();
+            matchUI.getCDock().update();
             menuItem.setState(prefs.getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS));
         });
         return menuItem;

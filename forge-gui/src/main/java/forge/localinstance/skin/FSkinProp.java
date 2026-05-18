@@ -261,7 +261,7 @@ public enum FSkinProp {
     FOIL_19     (new int[] {0, 2280, 400, 570}, PropType.OLD_FOIL),
     FOIL_20     (new int[] {400, 2280, 400, 570}, PropType.OLD_FOIL),
 
-    //dock icons
+    //menu icons
     ICO_SHORTCUTS    (new int[] {160, 640, 80, 80}, PropType.ICON),
     ICO_SETTINGS     (new int[] {80, 640, 80, 80}, PropType.ICON),
     ICO_ENDTURN      (new int[] {320, 640, 80, 80}, PropType.ICON),
