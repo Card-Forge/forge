@@ -766,7 +766,6 @@ public class CardRenderer {
         }
 
         if (card.getCounters() != null && !card.getCounters().isEmpty()) {
-
             switch (CounterDisplayType.from(FModel.getPreferences().getPref(FPref.UI_CARD_COUNTER_DISPLAY_TYPE))) {
                 case OLD_WHEN_SMALL:
                 case TEXT:
@@ -780,7 +779,6 @@ public class CardRenderer {
                     drawCounterTabs(card, g, x, y, w, h);
                     break;
             }
-
         }
 
         if(card.getMarkerText() != null) {

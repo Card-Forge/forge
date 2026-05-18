@@ -432,7 +432,11 @@ public final class FServerManager implements IHasForgeLog {
         } else if (type == LobbySlotType.REMOTE) {
             final RemoteClient client = findClientByIndex(index);
             if (client != null) {
-                return client.getOrCreateGui();
+                RemoteClientGuiGame gui = client.getGui();
+                if (gui == null) {
+                    return new RemoteClientGuiGame(client);
+                }
+                return gui;
             }
         }
         return null;
@@ -454,10 +458,10 @@ public final class FServerManager implements IHasForgeLog {
 
     public void clearPlayerGuis() {
         for (final RemoteClient client : clients.values()) {
-            client.clearGui();
+            client.setGui(null);
         }
         for (final RemoteClient client : disconnectedClients.values()) {
-            client.clearGui();
+            client.setGui(null);
         }
     }
 

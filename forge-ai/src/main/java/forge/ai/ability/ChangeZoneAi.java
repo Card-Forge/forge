@@ -535,7 +535,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
      *            a List<Card> object.
      * @return a {@link forge.game.card.Card} object.
      */
-    private static Card basicManaFixing(final Player ai, final List<Card> list) { // Search for a Basic Land
+    private static Card basicManaFixing(final Player ai, List<Card> list) { // Search for a Basic Land
         final CardCollectionView combined = CardCollection.combine(ai.getCardsIn(ZoneType.Battlefield), ai.getCardsIn(ZoneType.Hand));
         final List<String> basics = new ArrayList<>();
 
@@ -559,17 +559,16 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
         }
 
-        List<Card> result = list;
         if (minType != null) {
-            result = CardLists.getType(list, minType);
+            list = CardLists.getType(list, minType);
         }
 
         // pick dual lands if available
-        if (result.stream().anyMatch(CardPredicates.NONBASIC_LANDS)) {
-            result = CardLists.filter(result, CardPredicates.NONBASIC_LANDS);
+        if (list.stream().anyMatch(CardPredicates.NONBASIC_LANDS)) {
+            list = CardLists.filter(list, CardPredicates.NONBASIC_LANDS);
         }
 
-        return result.get(0);
+        return list.get(0);
     }
 
     /**
@@ -1455,17 +1454,17 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
         List<String> keyCards = player.getRegisteredPlayer().getDeck().getKeyCards();
         String position = sa.getParamOrDefault("LibraryPosition", null);
-        // FOcus on the keycards I don't already have access to
+        // Focus on the keycards I don't already have access to
         if (destination.equals(ZoneType.Battlefield) || destination.equals(ZoneType.Hand) ||
-            (destination.equals(ZoneType.Library) && "0".equals(position))) {
-            for(Card c : player.getCardsIn(Lists.newArrayList(ZoneType.Hand, ZoneType.Battlefield))) {
+                (destination.equals(ZoneType.Library) && "0".equals(position))) {
+            for (Card c : player.getCardsIn(Lists.newArrayList(ZoneType.Hand, ZoneType.Battlefield))) {
                 keyCards.remove(c.getName());
             }
         }
 
         // Can we extract this up to SPellAbilityAi for everything to have access to?
         Card keycardFound = null;
-        for(String keyName : keyCards) {
+        for (String keyName : keyCards) {
             CardCollection withKeyCard = CardLists.filter(fetchList, CardPredicates.nameEquals(keyName));
             if (withKeyCard.isEmpty()) {
                 continue;
@@ -1795,14 +1794,14 @@ public class ChangeZoneAi extends SpellAbilityAi {
         SpellAbility causeSub = null;
         ZoneType destination = (ZoneType)originalParams.get(AbilityKey.Destination);
 
-        if (Objects.equals(ZoneType.Hand, destination)) {
-            // If the commander is being moved to your hand, don't replace since its easier to cast it again
+        if (ZoneType.Hand.equals(destination)) {
+            // don't replace since its easier to cast it again
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
-        // Squee, the Immortal: easier to recast it (the call below has to be "contains" since SA is an intrinsic effect)
-        if (sa.getHostCard().getName().contains("Squee, the Immortal") &&
-                (destination == ZoneType.Graveyard || destination == ZoneType.Exile)) {
+        if (originalParams.get(AbilityKey.Affected) instanceof Card c &&
+                c.getName().equals("Squee, the Immortal") && (destination == ZoneType.Graveyard || destination == ZoneType.Exile)) {
+            // easier to recast it
             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
@@ -1813,25 +1812,22 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     && "Battlefield".equals(causeSub.getParam("Destination"))) {
                 // A blink effect implemented using ChangeZone API
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-            } else // This is an intrinsic effect that blinks the card (e.g. Obzedat, Ghost Council), no need to
-                // return the commander to the Command zone.
-                if (subApi == ApiType.DelayedTrigger) {
-                    SpellAbility exec = causeSub.getAdditionalAbility("Execute");
+            } else if (subApi == ApiType.DelayedTrigger) {
+                SpellAbility exec = causeSub.getAdditionalAbility("Execute");
                 if (exec != null && exec.getApi() == ApiType.ChangeZone) {
                     // A blink effect implemented using a delayed trigger
                     if (!"Exile".equals(exec.getParam("Origin")) || !"Battlefield".equals(exec.getParam("Destination"))) {
                         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                    } else {
-                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-                    }
-                }
-            } else {
-                    if (causeSa.getHostCard() == null || !causeSa.getHostCard().equals(sa.getReplacingObject(AbilityKey.Card))
-                            || !causeSa.getActivatingPlayer().equals(aiPlayer)) {
-                        return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
                     }
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
+            } else {
+                if (causeSa.getHostCard() == null || !causeSa.getHostCard().equals(sa.getReplacingObject(AbilityKey.Card))
+                        || !causeSa.getActivatingPlayer().equals(aiPlayer)) {
+                    return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+                }
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
         }
 
         // Normally we want the commander back in Command zone to recast it later
