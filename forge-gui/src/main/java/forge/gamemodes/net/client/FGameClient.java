@@ -38,7 +38,7 @@ public class FGameClient implements IToServer, IHasForgeLog {
     private volatile boolean disconnectSimulated;
     private Channel channel;
 
-    public FGameClient(String username, String roomKey, IGuiGame clientGui, String hostname, int port) {
+    public FGameClient(String username, IGuiGame clientGui, String hostname, int port) {
         this.username = username;
         this.clientGui = clientGui;
         this.hostname = hostname;

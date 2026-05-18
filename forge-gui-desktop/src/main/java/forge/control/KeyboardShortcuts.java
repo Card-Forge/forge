@@ -277,7 +277,7 @@ public class KeyboardShortcuts {
                 if (!Singletons.getControl().getCurrentScreen().isMatchScreen()) { return; }
                 if (matchUI == null) { return; }
                 YieldController.toggleAutoPassOrStopAll(matchUI.getGameController());
-                matchUI.getCDock().refresh();
+                matchUI.getCDock().update();
             }
         };
 

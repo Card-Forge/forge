@@ -11,6 +11,7 @@ import forge.game.card.CardView.CardStateView;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventSpellRemovedFromStack;
+import forge.game.phase.PhaseType;
 import forge.game.player.PlayerView;
 import forge.gamemodes.net.DeltaPacket;
 import forge.gui.FThreads;
@@ -114,6 +115,23 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         return gameView;
     }
 
+    /**
+     * Receives a {@link GameView} snapshot and installs it as the GUI's view of game state.
+     * Called at game lifecycle boundaries (start, restart, recovery) and when a remote
+     * client receives a {@code setGameView} protocol message.
+     *
+     * <p>Two paths: if either {@code gameView} or {@code gameView0} is null, the field is
+     * reassigned directly. If both are non-null, the incoming view's properties are merged
+     * into the existing view via {@link GameView#copyChangedProps} rather than swapping
+     * the reference.
+     *
+     * <p>The merge path preserves object identity of the GameView and every nested
+     * {@link forge.trackable.TrackableObject}. GUI components hold direct references to
+     * those instances (UI panels store {@code PlayerView}/{@code CardView} fields;
+     * delta-sync consumers also register per-consumer dirty bits on them). Swapping the
+     * GameView reference would leave those references pointing at an orphaned graph;
+     * merging keeps them valid as the data underneath changes.
+     */
     @Override
     public void setGameView(final GameView gameView0) {
         if (gameView == null || gameView0 == null) {
@@ -123,9 +141,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             gameView = gameView0;
             return;
         }
-
-        //if game view set to another instance without being first cleared,
-        //update existing game view object instead of overwriting it
         gameView.copyChangedProps(gameView0);
     }
 
@@ -279,9 +294,10 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private final Set<GameEntityView> highlighted = Sets.newHashSet();
 
     @Override
-    public void setHighlighted(final GameEntityView gv, final boolean b) {
-        final boolean hasChanged = b ? highlighted.add(gv) : highlighted.remove(gv);
-        if (hasChanged) {
+    public void setHighlighted(final Iterable<GameEntityView> entities, final boolean b) {
+        for (final GameEntityView gv : entities) {
+            final boolean hasChanged = b ? highlighted.add(gv) : highlighted.remove(gv);
+            if (!hasChanged) continue;
             if (gv instanceof PlayerView pv) {
                 updateLives(Collections.singleton(pv));
             }
@@ -649,6 +665,29 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         IGameController c = getGameController(pv);
         if (c != null) c.applyYieldUpdate(update);
         refreshYieldUi(pv);
+    }
+
+    /** Toggle the auto-pass marker for {@code phase} on {@code phaseOwner}'s turn. The
+     *  caller's {@code markLabelStopsAtPhase} runs when setting a marker, to un-skip
+     *  the cell on the platform-specific phase indicator so the marker can fire. */
+    protected final void handleYieldMarkerToggle(PlayerView phaseOwner, PhaseType phase, Runnable markLabelStopsAtPhase) {
+        PlayerView local = getCurrentPlayer();
+        if (local == null) return;
+        IGameController controller = getGameController(local);
+        if (controller == null) return;
+        YieldMarker existing = controller.getYieldController().getAutoPassUntilMarker();
+        boolean clickedSameLabel = existing != null
+                && phaseOwner.equals(existing.getPhaseOwner())
+                && phase == existing.getPhase();
+        if (clickedSameLabel) {
+            controller.sendYieldUpdate(new YieldUpdate.ClearMarker(local));
+        } else {
+            markLabelStopsAtPhase.run();
+            boolean atOrPast = YieldController.isPriorityAtOrPastMarker(getGameView(), phaseOwner, phase);
+            controller.sendYieldUpdate(new YieldUpdate.SetMarker(phaseOwner, phase, atOrPast));
+            controller.selectButtonOk();   // Pass current priority so the marker takes effect immediately.
+        }
+        refreshYieldUi(local);
     }
 
     // End auto-yield/input code
