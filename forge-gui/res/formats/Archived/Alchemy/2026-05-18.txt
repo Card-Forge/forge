@@ -1,0 +1,7 @@
+[format]
+Name:Alchemy (2026-05-18)
+Type:Archived
+Subtype:Arena
+Effective:2026-05-18
+Sets:ANA, ANB, BLB, YBLB, DSK, YDSK, FDN, DFT, YDFT, TDM, YTDM, FIN, EOE, YEOE, OM1, TLA, ECL, TMT, SOS
+Banned:Sewer-veillance Cam
