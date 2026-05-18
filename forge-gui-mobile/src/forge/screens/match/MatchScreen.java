@@ -664,6 +664,12 @@ public class MatchScreen extends FScreen {
                     return true;
                 }
                 break;
+            case Keys.P: //auto-pass toggle on Ctrl+P on Android, P when running on desktop
+                if (KeyInputAdapter.isCtrlKeyDown() || GuiBase.getInterface().isRunningOnDesktop()) {
+                    YieldController.toggleAutoPassOrStopAll(getGameController());
+                    return true;
+                }
+                break;
             case Keys.Q: //concede game on Ctrl+Q
                 if (KeyInputAdapter.isCtrlKeyDown()) {
                     confirmUserConcedes();

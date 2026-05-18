@@ -303,7 +303,9 @@ public abstract class PlayerController {
     public CardCollectionView cheatShuffle(CardCollectionView list) { return list; }
     public Map<DeckSection, List<? extends PaperCard>> complainCardsCantPlayWell(Deck myDeck) { return null; }
 
-    public abstract void resetAtEndOfTurn(); // currently used by the AI to perform card memory cleanup
+    public void resetAtEndOfTurn() {
+        // currently used by the AI to perform card memory cleanup
+    }
 
     public abstract List<OptionalCostValue> chooseOptionalCosts(SpellAbility choosen, List<OptionalCostValue> optionalCostValues);
 

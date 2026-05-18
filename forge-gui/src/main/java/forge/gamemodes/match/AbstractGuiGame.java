@@ -350,7 +350,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public int getSelectionMin() {
         return selectionMin;
     }
-
     public int getSelectionMax() {
         return selectionMax;
     }
@@ -818,11 +817,6 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         final int m2 = min >= 0 ? sourceChoices.size() - min : -1;
         final int m1 = max >= 0 ? sourceChoices.size() - max : -1;
         return order(title, topCaption, m1, m2, sourceChoices, destChoices, c, false);
-    }
-
-    @Override
-    public <T> List<T> order(final String title, final String top, final List<T> sourceChoices, final CardView c) {
-        return order(title, top, 0, 0, sourceChoices, null, c, false);
     }
 
     /**

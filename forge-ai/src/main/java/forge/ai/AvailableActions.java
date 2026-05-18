@@ -18,6 +18,15 @@ public final class AvailableActions {
     public static boolean compute(Player player, long timeoutMs) {
         long deadlineNanos = System.nanoTime() + timeoutMs * 1_000_000L;
 
+        // Run the predictive sweep under an AI controller so cost-adjustment chooseX dispatches don't prompt (mirrors InputPayMana auto-pay).
+        boolean[] result = {false};
+        player.runWithController(
+                () -> result[0] = scan(player, deadlineNanos, timeoutMs),
+                new PlayerControllerAi(player.getGame(), player, player.getOriginalLobbyPlayer()));
+        return result[0];
+    }
+
+    private static boolean scan(Player player, long deadlineNanos, long timeoutMs) {
         for (Card card : sortedCardsIn(player, ZoneType.Hand)) {
             for (SpellAbility sa : card.getAllPossibleAbilities(player, true)) {
                 if (checkTimeout(deadlineNanos, timeoutMs)) return true;

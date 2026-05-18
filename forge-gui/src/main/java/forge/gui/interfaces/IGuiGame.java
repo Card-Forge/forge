@@ -216,7 +216,9 @@ public interface IGuiGame {
     }
     <T> List<T> many(String title, String topCaption, int min, int max, List<T> sourceChoices, List<T> destChoices, CardView c);
 
-    <T> List<T> order(String title, String top, List<T> sourceChoices, CardView c);
+    default <T> List<T> order(final String title, final String top, final List<T> sourceChoices, final CardView c) {
+        return order(title, top, 0, 0, sourceChoices, null, c, false);
+    }
     <T> List<T> order(String title, String top, int remainingObjectsMin, int remainingObjectsMax, List<T> sourceChoices, List<T> destChoices, CardView referenceCard, boolean sideboardingMode);
 
     /**
