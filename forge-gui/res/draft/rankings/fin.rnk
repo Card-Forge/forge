@@ -6,7 +6,7 @@
 #5|Smuggler's Copter|R|FCA
 #6|Urza, Lord High Artificer|M|FCA
 #7|Winota, Joiner of Forces|R|FCA
-#8|Summon Primal Odin|R|FIN
+#8|Summon: Primal Odin|R|FIN
 #9|Esper Origins|R|FIN
 #10|Sazh Katzroy|R|FIN
 #11|Akroma's Will|M|FCA
@@ -21,11 +21,11 @@
 #20|Dragoon's Lance|U|FIN
 #21|Choco-Comet|U|FIN
 #22|Buster Sword|M|FIN
-#23|Summon Fenrir|U|FIN
+#23|Summon: Fenrir|U|FIN
 #24|Jenova, Ancient Calamity|R|FIN
 #25|Yuna, Hope of Spira|M|FIN
 #26|Ranger-Captain of Eos|M|FCA
-#27|Sidequest Hunt the Mark|U|FIN
+#27|Sidequest: Hunt the Mark|U|FIN
 #28|Samurai's Katana|U|FIN
 #29|Cloud of Darkness|U|FIN
 #30|Primeval Titan|R|FCA
@@ -36,24 +36,24 @@
 #35|Sram, Senior Edificer|R|FCA
 #36|Loran of the Third Path|R|FCA
 #37|Moogles' Valor|R|FIN
-#38|Sidequest Card Collection|U|FIN
+#38|Sidequest: Card Collection|U|FIN
 #39|Swallowed by Leviathan|U|FIN
 #40|Dark Confidant|M|FIN
 #41|Overkill|U|FIN
-#42|Summon Titan|R|FIN
+#42|Summon: Titan|R|FIN
 #43|The Emperor of Palamecia|U|FIN
 #44|Sin, Spira's Punishment|R|FIN
 #45|Fatal Push|U|FCA
 #46|Kenrith, the Returned King|R|FCA
 #47|Lightning Bolt|U|FCA
 #48|Machinist's Arsenal|R|FIN
-#49|Summon Knights of Round|M|FIN
+#49|Summon: Knights of Round|M|FIN
 #50|White Auracite|C|FIN
 #51|Combat Tutorial|C|FIN
 #52|Dragoon's Wyvern|C|FIN
 #53|Eject|U|FIN
 #54|The Lunar Whale|R|FIN
-#55|Summon Leviathan|R|FIN
+#55|Summon: Leviathan|R|FIN
 #56|Cecil, Dark Knight|R|FIN
 #57|Sephiroth's Intervention|C|FIN
 #58|Seifer Almasy|R|FIN
@@ -109,15 +109,15 @@
 #108|Shinra Reinforcements|C|FIN
 #109|Call the Mountain Chocobo|C|FIN
 #110|Chocobo Kick|C|FIN
-#111|Summon Fat Chocobo|C|FIN
+#111|Summon: Fat Chocobo|C|FIN
 #112|Gladiolus Amicitia|U|FIN
 #113|Locke Cole|U|FIN
 #114|The Regalia|R|FIN
 #115|Wall of Omens|U|FCA
-#116|Summon Bahamut|M|FIN
+#116|Summon: Bahamut|M|FIN
 #117|Magitek Armor|U|FIN
 #118|Restoration Magic|U|FIN
-#119|Summon Shiva|U|FIN
+#119|Summon: Shiva|U|FIN
 #120|Travel the Overworld|U|FIN
 #121|Blazing Bomb|C|FIN
 #122|Fire Magic|U|FIN
@@ -144,7 +144,7 @@
 #143|Vial Smasher the Fierce|M|FCA
 #144|Aerith Gainsborough|R|FIN
 #145|Paladin's Arms|C|FIN
-#146|Summon Primal Garuda|U|FIN
+#146|Summon: Primal Garuda|U|FIN
 #147|You're Not Alone|C|FIN
 #148|Magic Damper|C|FIN
 #149|Relm's Sketching|U|FIN
@@ -218,7 +218,7 @@
 #217|Clash of the Eikons|U|FIN
 #218|Commune with Beavers|C|FIN
 #219|Gysahl Greens|C|FIN
-#220|Sidequest Raise a Chocobo|U|FIN
+#220|Sidequest: Raise a Chocobo|U|FIN
 #221|Midgar, City of Mako|R|FIN
 #222|Sharlayan, Nation of Scholars|C|FIN
 #223|Windurst, Federation Center|C|FIN
@@ -228,7 +228,7 @@
 #227|Ultima, Origin of Oblivion|R|FIN
 #228|Coeurl|C|FIN
 #229|G'raha Tia|U|FIN
-#230|Summon Choco Mog|C|FIN
+#230|Summon: Choco Mog|C|FIN
 #231|Edgar, King of Figaro|R|FIN
 #232|Ice Flan|C|FIN
 #233|Poison the Waters|U|FIN
@@ -246,7 +246,7 @@
 #245|Sage's Nouliths|C|FIN
 #246|Thief's Knife|U|FIN
 #247|Valkyrie Aerial Unit|U|FIN
-#248|Summon Anima|U|FIN
+#248|Summon: Anima|U|FIN
 #249|Item Shopkeep|C|FIN
 #250|Light of Judgment|C|FIN
 #251|Opera Love Song|U|FIN
@@ -271,8 +271,8 @@
 #270|Rook Turret|C|FIN
 #271|Shambling Cie'th|U|FIN
 #272|Raubahn, Bull of Ala Mhigo|R|FIN
-#273|Summon Brynhildr|R|FIN
-#274|Summon Esper Ramuh|U|FIN
+#273|Summon: Brynhildr|R|FIN
+#274|Summon: Esper Ramuh|U|FIN
 #275|Quina, Qu Gourmet|U|FIN
 #276|Relentless X-ATM092|U|FIN
 #277|Cloudbound Moogle|C|FIN
@@ -286,7 +286,7 @@
 #285|Mysidian Elder|C|FIN
 #286|Sabotender|C|FIN
 #287|Sandworm|U|FIN
-#288|Summon GF Cerberus|R|FIN
+#288|Summon: GF Cerberus|R|FIN
 #289|Chocobo Racetrack|U|FIN
 #290|Black Waltz No. 3|U|FIN
 #291|Vincent's Limit Break|C|FIN
@@ -303,10 +303,10 @@
 #302|Red Mage's Rapier|C|FIN
 #303|Triple Triad|R|FIN
 #304|Tidus, Blitzball Star|U|FIN
-#305|Summon GF Ifrit|C|FIN
+#305|Summon: GF Ifrit|C|FIN
 #306|Blitzball|C|FIN
 #307|Purphoros, God of the Forge|M|FCA
-#308|Sidequest Catch a Fish|U|FIN
+#308|Sidequest: Catch a Fish|U|FIN
 #309|Haste Magic|C|FIN
 #310|Self-Destruct|U|FIN
 #311|Golbez, Crystal Collector|R|FIN
@@ -317,7 +317,7 @@
 #316|The Water Crystal|R|FIN
 #317|The Fire Crystal|R|FIN
 #318|Random Encounter|U|FIN
-#319|Sidequest Play Blitzball|U|FIN
+#319|Sidequest: Play Blitzball|U|FIN
 #320|Vaan, Street Thief|R|FIN
 #321|The Earth Crystal|R|FIN
 #322|Galuf's Final Act|U|FIN
