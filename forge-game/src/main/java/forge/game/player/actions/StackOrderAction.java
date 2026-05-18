@@ -1,6 +1,5 @@
 package forge.game.player.actions;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class StackOrderAction extends PlayerAction {
@@ -8,7 +7,7 @@ public class StackOrderAction extends PlayerAction {
 
     public StackOrderAction(final List<String> abilityDescriptions) {
         super(null, "Order simultaneous abilities");
-        this.abilityDescriptions = new ArrayList<>(abilityDescriptions);
+        this.abilityDescriptions = abilityDescriptions;
     }
 
     public List<String> getAbilityDescriptions() {

@@ -1,6 +1,5 @@
 package forge.game.player.actions;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ModeChoiceAction extends PlayerAction {
@@ -8,7 +7,7 @@ public class ModeChoiceAction extends PlayerAction {
 
     public ModeChoiceAction(final List<String> modeDescriptions) {
         super(null, "Choose mode");
-        this.modeDescriptions = new ArrayList<>(modeDescriptions);
+        this.modeDescriptions = modeDescriptions;
     }
 
     public List<String> getModeDescriptions() {
