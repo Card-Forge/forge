@@ -4,6 +4,7 @@
   "archetypes": [
     {
       "name": "Voltron",
+      "strategy_type": "midrange",
       "colors": ["any"],
       "strategy": "Suit up the commander with auras/equipment and win with commander damage.",
       "signature_cards": ["Swiftfoot Boots", "Lightning Greaves", "auras", "equipment"],
@@ -11,6 +12,7 @@
     },
     {
       "name": "Tokens / Go-Wide",
+      "strategy_type": "aggro",
       "colors": ["G", "W"],
       "strategy": "Generate a wide board of tokens and overrun with anthems.",
       "signature_cards": ["token generators", "anthem effects", "overrun effects"],
@@ -18,6 +20,7 @@
     },
     {
       "name": "Spellslinger",
+      "strategy_type": "combo",
       "colors": ["U", "R"],
       "strategy": "Cast many instants/sorceries with magecraft and storm-like payoffs.",
       "signature_cards": ["cantrips", "copy effects", "magecraft payoffs"],
@@ -25,6 +28,7 @@
     },
     {
       "name": "Aristocrats",
+      "strategy_type": "midrange",
       "colors": ["B"],
       "strategy": "Sacrifice creatures for value and drain opponents with death triggers.",
       "signature_cards": ["sacrifice outlets", "Blood Artist effects", "token fodder"],
@@ -32,6 +36,7 @@
     },
     {
       "name": "Ramp / Big Mana",
+      "strategy_type": "ramp",
       "colors": ["G"],
       "strategy": "Accelerate mana to deploy oversized threats far ahead of curve.",
       "signature_cards": ["mana rocks", "land ramp", "expensive bombs"],

@@ -1,0 +1,83 @@
+{
+  "archetype": "Generic Ramp",
+  "format": "",
+  "strategy_type": "ramp",
+  "overview": "Accelerate your mana ahead of the curve, then deploy powerful expensive cards before the opponent can answer them. Survive the early turns, hit your mana milestones, and overwhelm the board with payoffs the opponent's deck is not built to handle.",
+  "win_conditions": [
+    "Cast a game-ending threat or payoff well ahead of schedule",
+    "Bury the opponent under permanents they cannot match on mana"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Lands plus mana acceleration to power out your payoffs early",
+      "A curve that ramps on turns one to three into a real payoff",
+      "Enough early interaction or blockers to survive to your big turns"
+    ],
+    "mulligan_criteria": [
+      "All payoffs and no acceleration — you are simply too slow",
+      "All ramp and no payoff — you accelerate into nothing",
+      "Land-light hands that cannot get the ramp engine started"
+    ],
+    "examples": [
+      {
+        "hand": [],
+        "decision": "keep",
+        "reason": "Lands, a turn-two ramp spell, and a strong payoff is a clean curve-out."
+      },
+      {
+        "hand": [],
+        "decision": "mulligan",
+        "reason": "Four expensive payoffs with no acceleration will die before they come online."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Prioritize mana acceleration — every ramp spell moves your payoff up a turn",
+      "Use cheap interaction or blockers only to survive, not to develop a board",
+      "Sequence lands and ramp to hit your key mana number on time"
+    ],
+    "mid_game": [
+      "Deploy your first big payoff and force the opponent to answer it",
+      "Keep a second threat in reserve so a single removal spell does not reset you",
+      "Stabilize the board with payoffs that also defend"
+    ],
+    "late_game": [
+      "Your mana advantage should be decisive — out-resource and overwhelm",
+      "Close quickly once ahead; do not give an aggressive opponent extra draws"
+    ]
+  },
+  "key_cards": [
+    {"name": "Mana acceleration", "role": "ramp", "notes": "Ramp spells and mana creatures that move your payoffs ahead of the curve."},
+    {"name": "Payoffs", "role": "win condition", "notes": "Expensive, high-impact cards the opponent is not prepared to answer early."},
+    {"name": "Early interaction", "role": "survival", "notes": "Cheap removal or blockers to reach the turn your payoffs take over."}
+  ],
+  "sequencing_tips": [
+    "Always play ramp before payoffs — count the mana you will have next turn",
+    "Hold a backup threat against decks with efficient removal",
+    "Use removal to survive, not to develop; your payoffs are the real plan"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize survival: cheap blockers and removal, then stabilize with a payoff.",
+      "watch_for": ["fast clocks", "reach / burn", "punishing your slow start"]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Ramp into threats faster than they can answer; bait removal before the key payoff.",
+      "watch_for": ["counterspells", "board wipes", "spot removal on your mana creatures"]
+    }
+  ],
+  "common_threats": [
+    "Fast aggro that kills you before the ramp pays off",
+    "Removal aimed at your mana creatures that sets you back a full turn",
+    "Counterspells that answer your payoff after you have tapped out"
+  ],
+  "metadata": {
+    "source": "hand-authored",
+    "generated_at": "",
+    "model": "",
+    "schema_version": 1
+  }
+}

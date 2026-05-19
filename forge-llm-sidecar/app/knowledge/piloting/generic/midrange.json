@@ -1,0 +1,83 @@
+{
+  "archetype": "Generic Midrange",
+  "format": "",
+  "strategy_type": "midrange",
+  "overview": "Win on card quality and flexibility. Trade one-for-one with aggro until their threats run out, then pull ahead with resilient, high-value cards; against control, become the aggressor with hard-to-answer threats. Adapt your role to the opponent.",
+  "win_conditions": [
+    "Grind the opponent out of resources, then close with efficient threats",
+    "Resolve a powerful must-answer permanent the opponent cannot deal with"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Three or four lands with a mix of interaction and threats",
+      "A functional curve and at least one card-advantage or high-value card",
+      "Enough flexibility to play either the beatdown or the control role"
+    ],
+    "mulligan_criteria": [
+      "Two or fewer lands with mostly expensive cards",
+      "No interaction at all against an unknown field",
+      "A hand that cannot meaningfully act before turn 4"
+    ],
+    "examples": [
+      {
+        "hand": [],
+        "decision": "keep",
+        "reason": "Lands, a removal spell, and two solid threats can adapt to any opponent."
+      },
+      {
+        "hand": [],
+        "decision": "mulligan",
+        "reason": "Two lands and four cards that all cost four-plus mana will fall hopelessly behind."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Use removal on the opponent's most dangerous early threats",
+      "Develop lands and hold up interaction; do not waste answers on filler",
+      "Decide early whether you are the beatdown or the control deck this game"
+    ],
+    "mid_game": [
+      "Deploy your highest-value threats and force the opponent to have answers",
+      "Trade efficiently — every clean one-for-one favors the better deck",
+      "Keep a card-advantage engine or threat in reserve against sweepers"
+    ],
+    "late_game": [
+      "Win the long game on card quality; rebuild faster than the opponent",
+      "Close once ahead — do not give a stabilizing opponent free turns"
+    ]
+  },
+  "key_cards": [
+    {"name": "Efficient removal", "role": "interaction", "notes": "Spend it on threats that actually pressure you, not on every creature."},
+    {"name": "Value threats", "role": "advantage", "notes": "Creatures and planeswalkers that generate card advantage as they survive."},
+    {"name": "Card advantage", "role": "engine", "notes": "Refills that let you out-grind the opponent in the long game."}
+  ],
+  "sequencing_tips": [
+    "Identify your role each game and sequence accordingly",
+    "Hold threats around suspected board wipes; do not overcommit",
+    "Use removal reactively unless proactively removing it wins the race"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Be the control deck: trade, stabilize the board, then win with card quality.",
+      "watch_for": ["going wide", "reach / burn", "haste threats"]
+    },
+    {
+      "opponent_archetype": "Control",
+      "advice": "Be the aggressor: deploy threats and force answers before they stabilize.",
+      "watch_for": ["board wipes", "counterspells", "card-advantage engines"]
+    }
+  ],
+  "common_threats": [
+    "Faster aggro decks that kill before card quality matters",
+    "Combo decks that ignore your board entirely",
+    "Resource engines that out-grind your value plan"
+  ],
+  "metadata": {
+    "source": "hand-authored",
+    "generated_at": "",
+    "model": "",
+    "schema_version": 1
+  }
+}

@@ -1,0 +1,3109 @@
+╭─── Claude Code v2.1.143 ─────────────────────────────────────────────────────╮
+│                                                    │ Tips for getting        │
+│                  Welcome back Lou!                 │ started                 │
+│                                                    │ Run /init to create a … │
+│                       ▐▛███▜▌                      │ ─────────────────────── │
+│                      ▝▜█████▛▘                     │ What's new              │
+│                        ▘▘ ▝▝                       │ Added plugin dependenc… │
+│    Opus 4.7 · Claude Pro · loud1990@gmail.com's    │ Added projected contex… │
+│    Organization                                    │ Added `worktree.bgIsol… │
+│                ~/Development/forge-1               │ /release-notes for more │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+❯ /usage 
+  ⎿  Settings dialog dismissed
+
+❯ I'd like to add to the forge-llm-sidecar pipeline. I want to add guidance to  
+  the llm on how to pilot each deck. This guidance file will mainly be used by  
+  the AI player to determine what they will play next, in combination with      
+  other things, like what they think the opponent is playing, what they think   
+  is in the opponent's hand, what is in their own hand, what the current board  
+  state is, what is in each player's graveyard, and more. I'd like to take an   
+  approach that use JSON for the guidance file for each deck archetype that is  
+  popular in the current metagame, with fallbacks to generic deck types, like   
+  aggro, midrange, control, or combo. We could use pydantic for schema          
+  validation. There should be information like what are good hands to keep or   
+  mulligan, what to play early game, what are your win conditions, etc. Maybe   
+  things to look out for in common meta decks your opponents may be playing.    
+  These files could get pretty long. It would be nice if we could extract this  
+  type of information from some online knowledge base in some way, because it   
+  will be a lot to populate. Do some research on that as well. Come up with a   
+  playn to implement this system.                                               
+
+  Searched for 1 pattern, read 1 file (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1/forge-llm-sidecar && find . -type f -not
+       -path './.git/*' -not -path '*/node_modules/*' -not -path
+      '*/__pycache__/*' -not -path…)
+  ⎿  ./app/config.py
+     ./app/graph.py
+     ./app/__init__.py
+     … +26 lines (ctrl+o to expand)
+
+  Read 15 files (ctrl+o to expand)
+
+● Web Search("MTG deck archetype primer mulligan guide structured data API")
+  ⎿  Did 1 search in 6s
+
+● Web Search("MTGGoldfish archetype primer "how to play" deck guide page")
+  ⎿  Did 2 searches in 9s
+
+● I've explored the sidecar thoroughly. Before finalizing the plan, I need to
+  clarify a few scope decisions.
+
+● User answered Claude's questions:
+  ⎿  · How far should this iteration go? The guidance files describe how to 
+     pilot YOUR deck, but the sidecar today only does opponent recognition — it 
+     has no request fields for your hand/board/graveyard, and adding those means
+      a sizeable Forge Java-side change. → Full system incl. advisor node
+     · These files will be long and tedious to populate. How should we generate 
+     them? → LLM-assisted offline script
+     · The offline extraction script needs an LLM. Which should it target? → 
+     Configurable, default local
+
+● Bash(cd /home/lou/Development/forge-1 && grep -rl
+      "DeckRecognition\|RecognitionResult\|recognize" --include=*.java forge-ai
+      forge-game forge-core 2>/dev/null | head…)
+  ⎿  forge-ai/src/main/java/forge/ai/ability/DamageAiBase.java
+     forge-ai/src/main/java/forge/ai/AiController.java
+     forge-ai/src/main/java/forge/ai/llm/DeckRecognitionManager.java
+     … +9 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1/forge-ai/src/main/java/forge/ai/llm &&
+      wc -l *.java && echo "---REQUEST---" && cat RecognitionRequest.java &&
+      echo "---RESULT--…)
+  ⎿    126 DeckRecognitionClient.java
+        48 DeckRecognitionFeature.java
+        50 DeckRecognitionManager.java
+     … +28 lines (ctrl+o to expand)
+
+  Read 1 file (ctrl+o to expand)
+
+● Updated plan
+  ⎿  /plan to preview
+  ⎿  User rejected Claude's plan:
+     ╭─────────────────────────────────────────────────────────────────────────╮
+     │ Deck Piloting Guidance for the Forge LLM Sidecar                        │
+     │                                                                         │
+     │ Context                                                                 │
+     │                                                                         │
+     │ The forge-llm-sidecar today runs a single LangGraph node — deck         │
+     │ recognition —                                                           │
+     │ which guesses the opponent's archetype and writes it to the game log.   │
+     │ It does                                                                 │
+     │ not advise the AI on how to play its own deck.                          │
+     │                                                                         │
+     │ This change adds a piloting guidance layer: per-archetype JSON          │
+     │ knowledge                                                               │
+     │ files (mulligan rules, game plan, win conditions, key cards, matchup    │
+     │ notes,                                                                  │
+     │ meta threats) validated by Pydantic, plus a new piloting_advice graph   │
+     │ node                                                                    │
+     │ that combines a guide with live game state (hand, board, graveyards,    │
+     │ opponent                                                                │
+     │ guess) to recommend what to play next.                                  │
+     │                                                                         │
+     │ Because hand-authoring ~60 guides per format is infeasible, an offline  │
+     │ LLM-assisted extraction script generates schema-valid guides from       │
+     │ MTGGoldfish                                                             │
+     │ decklists/primers — mirroring the existing scrape_metagame.py pattern.  │
+     │ The                                                                     │
+     │ runtime sidecar stays fully offline.                                    │
+     │                                                                         │
+     │ Scope decisions confirmed with the user:                                │
+     │ - Full system: knowledge layer + piloting_advice node + expanded        │
+     │ contract.                                                               │
+     │ - Extraction: LLM-assisted offline script.                              │
+     │ - Builder LLM: configurable, defaults to the existing local llama.cpp   │
+     │ client.                                                                 │
+     │ - Forge's Java adapter changes that capture hand/board state are a      │
+     │ larger,                                                                 │
+     │ separate effort — this plan ships the sidecar end-to-end and updates    │
+     │ the Java                                                                │
+     │ request/result records + docs, but defers the in-game state-capture     │
+     │ wiring.                                                                 │
+     │                                                                         │
+     │ Knowledge layer                                                         │
+     │                                                                         │
+     │ 1. Pydantic schema — app/knowledge/piloting_schema.py (new)             │
+     │                                                                         │
+     │ PILOTING_SCHEMA_VERSION = 1. Models:                                    │
+     │ - StrategyType(str, Enum) — aggro | tempo | midrange | control | combo  │
+     │ | ramp                                                                  │
+     │ - MulliganHandExample — hand: list[str], decision:                      │
+     │ Literal["keep","mulligan"], reason: str                                 │
+     │ - MulliganGuidance — keep_criteria: list[str], mulligan_criteria:       │
+     │ list[str], examples: list[MulliganHandExample]                          │
+     │ - GamePlan — early_game / mid_game / late_game: list[str]               │
+     │ - KeyCard — name: str, role: str, notes: str = ""                       │
+     │ - MatchupNote — opponent_archetype: str, advice: str, watch_for:        │
+     │ list[str]                                                               │
+     │ - PilotingGuide — archetype, format, strategy_type: StrategyType,       │
+     │ overview, win_conditions: list[str], mulligan: MulliganGuidance,        │
+     │ game_plan: GamePlan, key_cards: list[KeyCard], sequencing_tips:         │
+     │ list[str],                                                              │
+     │ matchups: list[MatchupNote], common_threats: list[str],                 │
+     │ metadata: GuideMetadata (source, generated_at, model, schema_version).  │
+     │                                                                         │
+     │ 2. Guide files — app/knowledge/piloting/ (new)                          │
+     │                                                                         │
+     │ - piloting/<format>/<slug>.json — archetype-specific (e.g.              │
+     │ modern/boros-energy.json).                                              │
+     │ Slug = lowercased alphanumerics + hyphens (helper alongside             │
+     │ loader._norm).                                                          │
+     │ - piloting/generic/{aggro,tempo,midrange,control,combo,ramp}.json — six │
+     │ hand-authored, committed fallbacks.                                     │
+     │ - Initial archetype guides: generate the Modern set via the builder     │
+     │ script                                                                  │
+     │ (below) and commit after human review; other formats follow later.      │
+     │                                                                         │
+     │ 3. Loader — app/knowledge/piloting.py (new)                             │
+     │                                                                         │
+     │ - get_piloting_guide(archetype, game_format, strategy_type=None) ->     │
+     │ PilotingGuide | None                                                    │
+     │ - functools.cache per-file load; parse JSON, validate with              │
+     │ PilotingGuide;                                                          │
+     │ on pydantic.ValidationError log a warning and skip (fail-soft, like     │
+     │ loader._load_file / metagame._load).                                    │
+     │ - Fallback chain: format/<slug> → generic/<strategy_type> →             │
+     │ generic/midrange.                                                       │
+     │ - available_guides() debug helper.                                      │
+     │                                                                         │
+     │ 4. Own-archetype identification                                         │
+     │                                                                         │
+     │ Add identify_own_archetype(deck_cards, game_format) -> tuple[str|None,  │
+     │ StrategyType]                                                           │
+     │ to app/knowledge/piloting.py. Deterministic, no LLM: score each         │
+     │ metagame /                                                              │
+     │ curated archetype by signature-card overlap with deck_cards; return the │
+     │  best                                                                   │
+     │ match. If the request supplies own_archetype, use it directly.          │
+     │                                                                         │
+     │ Extend curated app/knowledge/archetypes/*.json entries with an optional │
+     │ strategy_type field so the generic fallback can be chosen; default      │
+     │ midrange                                                                │
+     │ when absent. Existing merge_with_curated carries it through unchanged.  │
+     │                                                                         │
+     │ Offline extraction — scripts/build_piloting_guides.py (new)             │
+     │                                                                         │
+     │ CLI mirroring scripts/scrape_metagame.py:                               │
+     │ python scripts/build_piloting_guides.py                 # all formats   │
+     │ python scripts/build_piloting_guides.py modern          # one format    │
+     │ python scripts/build_piloting_guides.py modern --archetype "Boros       │
+     │ Energy"                                                                 │
+     │ python scripts/build_piloting_guides.py modern --force  # regenerate    │
+     │ existing                                                                │
+     │ Per archetype: read metagame_data/<format>.json → fetch a               │
+     │ representative                                                          │
+     │ decklist (and primer text when present) via new helpers in              │
+     │ app/knowledge/scraper.py (fetch_archetype_decklist / fetch_primer_text) │
+     │ → build prompt → builder LLM → parse JSON → validate PilotingGuide →    │
+     │ write piloting/<format>/<slug>.json. Skips files that already exist     │
+     │ unless                                                                  │
+     │ --force; polite time.sleep; succeeds if ≥1 guide written. Generic       │
+     │ guides                                                                  │
+     │ are NOT generated here (hand-authored).                                 │
+     │                                                                         │
+     │ Builder LLM — app/knowledge/builder_llm.py (new): a thin wrapper over   │
+     │ the                                                                     │
+     │ same OpenAI-compatible chat API as llm_client.py, configured by         │
+     │ BUILDER_LLM_BASE_URL / BUILDER_LLM_API_KEY / BUILDER_MODEL_NAME, each   │
+     │ falling back to the existing LLM_* values in app/config.py. This lets a │
+     │ stronger cloud model generate guides offline while runtime stays local. │
+     │                                                                         │
+     │ Runtime: expanded contract + piloting_advice node                       │
+     │                                                                         │
+     │ 5. Schema — app/schema.py                                               │
+     │                                                                         │
+     │ - RecognitionRequest: add optional fields (defaults keep old clients    │
+     │ valid):                                                                 │
+     │ hand: list[str], own_board: list[str], opponent_board: list[str],       │
+     │ your_graveyard: list[str], opponent_graveyard: list[str],               │
+     │ life_totals: dict[str,int], own_archetype: str | None.                  │
+     │ - RecognitionResponse: add a piloting: PilotingAdvice | None sub-model  │
+     │ (recommended_play, reasoning, alternatives, mulligan_advice,            │
+     │ own_archetype, guide_source). Bump SCHEMA_VERSION to 2.                 │
+     │ - GraphState: add input keys (hand/board/graveyards/own_archetype) and  │
+     │ output                                                                  │
+     │ keys (own_archetype, piloting_guide, recommended_play, play_reasoning,  │
+     │ play_alternatives, mulligan_advice).                                    │
+     │                                                                         │
+     │ 6. Node — app/nodes/piloting_advice.py (new)                            │
+     │                                                                         │
+     │ async def piloting_advice_node(state) -> GraphState. Runs after         │
+     │ deck_recognition, so the opponent guess (state["archetype"]) is         │
+     │ available.                                                              │
+     │ 1. Resolve own archetype via identify_own_archetype (or request         │
+     │ override).                                                              │
+     │ 2. Load the PilotingGuide (fallback chain handles missing guides).      │
+     │ 3. Build a focused prompt: guide                                        │
+     │ overview/game-plan/key-cards/matchup-note for                           │
+     │ the recognized opponent + current hand/board/graveyards/turn/life. On   │
+     │ turn 0                                                                  │
+     │ ask for mulligan advice instead of a play.                              │
+     │ 4. generate_json → {recommended_play, reasoning, alternatives};         │
+     │ clamp/coerce                                                            │
+     │ like deck_recognition. Fail-soft: on LLMError return neutral values.    │
+     │ Follows all docs/EXTENDING.md conventions (always returns valid         │
+     │ GraphState).                                                            │
+     │                                                                         │
+     │ 7. Graph — app/graph.py                                                 │
+     │                                                                         │
+     │ Add piloting_advice node; edges START → deck_recognition →              │
+     │ piloting_advice → END.                                                  │
+     │                                                                         │
+     │ 8. API — app/main.py                                                    │
+     │                                                                         │
+     │ - Map the new piloting block into RecognitionResponse in /recognize.    │
+     │ - Add GET /piloting?format=modern&archetype=Boros%20Energy debug        │
+     │ endpoint                                                                │
+     │ returning the resolved guide (parallels GET /metagame).                 │
+     │                                                                         │
+     │ Forge Java adapter (records + docs only; capture wiring deferred)       │
+     │                                                                         │
+     │ - RecognitionRequest.java — add the new optional fields with            │
+     │ @SerializedName.                                                        │
+     │ - RecognitionResult.java — add a nested PilotingAdvice record + log     │
+     │ helper.                                                                 │
+     │ - DeckRecognitionObserver.java already extracts deckCards; capturing    │
+     │ live                                                                    │
+     │ hand/board/graveyard state is the larger follow-up (note in             │
+     │ docs/ADAPTERS.md                                                        │
+     │   - docs/API.md). Until then Forge sends only deck_cards; the node      │
+     │ still                                                                   │
+     │ produces archetype-level advice from the guide.                         │
+     │                                                                         │
+     │ Tests — tests/                                                          │
+     │                                                                         │
+     │ - tests/test_piloting.py (new): PilotingGuide validation accepts good / │
+     │ rejects bad JSON; loader fallback chain (specific → generic →           │
+     │ midrange);                                                              │
+     │ identify_own_archetype signature-card scoring; piloting_advice_node     │
+     │ with a                                                                  │
+     │ stubbed generate_json (offline); generic-guide fallback path.           │
+     │ - Extend tests/test_graph.py: assert the compiled graph runs both nodes │
+     │  and                                                                    │
+     │ the result carries recommended_play / own_archetype.                    │
+     │ - All six committed generic guides must load and validate (parametrized │
+     │  test).                                                                 │
+     │                                                                         │
+     │ Docs                                                                    │
+     │                                                                         │
+     │ - New docs/PILOTING.md — schema, fallback chain, the builder script,    │
+     │ prompt.                                                                 │
+     │ - Update README.md (project layout, endpoints, env vars table for       │
+     │ BUILDER_*),                                                             │
+     │ docs/API.md (new fields + /piloting), docs/ARCHITECTURE.md (second      │
+     │ node),                                                                  │
+     │ docs/ADAPTERS.md (expanded contract + deferred capture note).           │
+     │                                                                         │
+     │ Files                                                                   │
+     │                                                                         │
+     │ ┌───────────────────────────────────────────────┬────────────────────── │
+     │ ───┐                                                                    │
+     │ │                     File                      │         Change        │
+     │    │                                                                    │
+     │ ├───────────────────────────────────────────────┼────────────────────── │
+     │ ───┤                                                                    │
+     │ │ app/knowledge/piloting_schema.py              │ new — Pydantic models │
+     │    │                                                                    │
+     │ ├───────────────────────────────────────────────┼────────────────────── │
+     │ ───┤                                                                    │
+     │ │ app/knowledge/piloting.py                     │ new — loader +        │
+     │    │                                                                    │
+     │ │                                               │ own-archetype id      │
+     │    │                                                                    │
+     │ ├───────────────────────────────────────────────┼────────────────────── │
+     │ ───┤                                                                    │
+     │ │ app/knowledge/builder_llm.py                  │ new — configurable    │
+     │    │                                                                    │
+     │ │                                               │ builder LLM client    │
+     │    │                                                                    │
+     │ ├───────────────────────────────────────────────┼────────────────────── │
+     │ ───┤                                                                    │
+     │ │ app/knowledge/piloting/generic/*.json         │ new — 6 hand-authored │
+     │    │                                                                    │
+     │ │                                               │ guides                │
+     │    │                                                                    │
+     │ ├───────────────────────────────────────────────┼────────────────────── │
+     │ ───┤                                                                    │
+     │ │ app/knowledge/piloting/modern/*.json          │ new — generated,      │
+     │    │                                                                    │
+     │ │                                               │ reviewed              │
+     │    │                                                                    │
+     │ ├───────────────────────────────────────────────┼────────────────────── │
+     │ ───┤                                                                    │
+     │ │ app/knowledge/scraper.py                      │ add decklist/primer   │
+     │    │                                                                    │
+     │ │                                               │ fetch helpers         │
+     │    │                                                                    │
+     │ ├───────────────────────────────────────────────┼────────────────────── │
+     │ ───┤                                                                    │
+     │ │ app/knowledge/archetypes/*.json               │ add optional          │
+     │    │                                                                    │
+     │ │                                               │ strategy_type         │
+     │    │                                                                    │
+     │ ├───────────────────────────────────────────────┼────────────────────── │
+     │ ───┤                                                                    │
+     │ │                                               │ new request/response  │
+     │    │                                                                    │
+     │ │ app/schema.py                                 │ fields,               │
+     │    │                                                                    │
+     │ │                                               │ SCHEMA_VERSION=2,     │
+     │ state │                                                                 │
+     │ │                                               │  keys                 │
+     │    │                                                                    │
+     │ ├───────────────────────────────────────────────┼────────────────────── │
+     │ ───┤                                                                    │
+     │ │ app/nodes/piloting_advice.py                  │ new — graph node      │
+     │    │                                                                    │
+     │ ├───────────────────────────────────────────────┼────────────────────── │
+     │ ───┤                                                                    │
+     │ │ app/graph.py                                  │ wire the new node     │
+     │    │                                                                    │
+     │ ├───────────────────────────────────────────────┼────────────────────── │
+     │ ───┤                                                                    │
+     │ │ app/main.py                                   │ response mapping +    │
+     │ GET  │                                                                  │
+     │ │                                               │ /piloting             │
+     │    │                                                                    │
+     │ ├───────────────────────────────────────────────┼────────────────────── │
+     │ ───┤                                                                    │
+     │ │ scripts/build_piloting_guides.py              │ new — offline         │
+     │    │                                                                    │
+     │ │                                               │ extraction CLI        │
+     │    │                                                                    │
+     │ ├───────────────────────────────────────────────┼────────────────────── │
+     │ ───┤                                                                    │
+     │ │ tests/test_piloting.py, tests/test_graph.py   │ tests                 │
+     │    │                                                                    │
+     │ ├───────────────────────────────────────────────┼────────────────────── │
+     │ ───┤                                                                    │
+     │ │ forge-ai/.../llm/RecognitionRequest.java,     │ new fields            │
+     │    │                                                                    │
+     │ │ RecognitionResult.java                        │                       │
+     │    │                                                                    │
+     │ ├───────────────────────────────────────────────┼────────────────────── │
+     │ ───┤                                                                    │
+     │ │ docs/PILOTING.md +                            │ docs                  │
+     │    │                                                                    │
+     │ │ README/API/ARCHITECTURE/ADAPTERS              │                       │
+     │    │                                                                    │
+     │ └───────────────────────────────────────────────┴────────────────────── │
+     │ ───┘                                                                    │
+     │                                                                         │
+     │ Research note (extraction source)                                       │
+     │                                                                         │
+     │ No site exposes structured piloting data via an API. MTGJSON/Scryfall   │
+     │ cover                                                                   │
+     │ cards only; primers (MTGGoldfish articles, Mystical Teachings,          │
+     │ Draftsim) are                                                           │
+     │ free prose with patchy archetype coverage. Hence the chosen approach:   │
+     │ feed a                                                                  │
+     │ representative decklist (always available from MTGGoldfish archetype    │
+     │ pages) plus                                                             │
+     │ any primer prose to an LLM and have it emit schema-valid JSON — the     │
+     │ only option                                                             │
+     │ that scales to every metagame archetype. Generated files are committed  │
+     │ and                                                                     │
+     │ human-reviewable, so quality stays inspectable.                         │
+     │                                                                         │
+     │ Verification                                                            │
+     │                                                                         │
+     │ 1. cd forge-llm-sidecar && pip install -e ".[dev]"                      │
+     │ 2. ruff check . && black --check . && pytest — all green (LLM stubbed   │
+     │ offline).                                                               │
+     │ 3. Schema/loader: python -c "from app.knowledge.piloting import         │
+     │ get_piloting_guide; print(get_piloting_guide('Boros                     │
+     │ Energy','modern'))".                                                    │
+     │ 4. Builder (needs an LLM running):                                      │
+     │ python scripts/build_piloting_guides.py modern --archetype "Boros       │
+     │ Energy"                                                                 │
+     │ → writes a valid piloting/modern/boros-energy.json.                     │
+     │ 5. Start the sidecar; GET                                               │
+     │ /piloting?format=modern&archetype=Boros%20Energy                        │
+     │ returns the guide.                                                      │
+     │ 6. POST /recognize with a synthetic body including hand / own_board /   │
+     │ deck_cards → response contains a piloting block with recommended_play   │
+     │ and own_archetype; omitting the new fields still returns a valid        │
+     │ response                                                                │
+     │ (back-compat).                                                          │
+     │ 7. Stop the LLM server and repeat (6): both nodes degrade fail-soft     │
+     │ (Unknown                                                                │
+     │ guess, neutral piloting advice) — the request still succeeds.           │
+     ╰─────────────────────────────────────────────────────────────────────────╯
+
+  Wrote 1 memory (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1 && ls
+      /home/lou/.claude/projects/-home-lou-Development-forge-1/memory/ && echo
+      "---" && cat /home/lou/.claude/projects/-home-lo…)
+  ⎿  Error: Exit code 1
+     sidecar-llm-latency.md
+     ---
+
+  Wrote 1 memory (ctrl+o to expand)
+● You're right on both points. Let me respond and lock down one design detail.
+
+  Combining the nodes — yes. Two LLM calls per AI action is the wrong tradeoff
+  here. I'll merge deck recognition and piloting advice into a single node with 
+  one LLM call whose JSON response carries both the opponent archetype guess and
+   the play recommendation. This overrides the "one concern per node" convention
+   in EXTENDING.md — latency wins, and I've saved that as a standing preference.
+   The graph becomes START → game_advisor → END.
+
+  Own-archetype identification — agreed it shouldn't be per-request. It's a
+  static fact about the AI's decklist. One open question on where it gets
+  computed:
+
+● User answered Claude's questions:
+  ⎿  · The AI's own archetype is identified by matching its decklist against 
+     known archetypes (signature-card overlap). That metagame/archetype data 
+     lives in the sidecar, not in Forge. Where should the identification run? → 
+     Sidecar, cached per game
+
+● Updated plan
+  ⎿  /plan to preview
+
+● User approved Claude's plan
+  ⎿  Plan saved to: ~/.claude/plans/i-d-like-to-add-mellow-meadow.md · /plan to 
+     edit
+     Deck Piloting Guidance for the Forge LLM Sidecar
+
+     Context
+
+     The forge-llm-sidecar today runs a single LangGraph node — deck recognition
+     — which guesses the opponent's archetype and writes it to the game log. It
+     does not advise the AI on how to play its own deck.
+
+     This change adds a piloting guidance layer: per-archetype JSON knowledge
+     files (mulligan rules, game plan, win conditions, key cards, matchup notes,
+     meta threats) validated by Pydantic, used by the LLM to recommend what the
+     AI
+     should play next.
+
+     Because hand-authoring ~60 guides per format is infeasible, an offline
+     LLM-assisted extraction script generates schema-valid guides from
+     MTGGoldfish
+     decklists/primers — mirroring the existing scrape_metagame.py pattern. The
+     runtime sidecar stays fully offline.
+
+     Design decisions (confirmed with the user)
+
+     - One node, one LLM call. Deck recognition and piloting advice are merged
+     into a single game_advisor node. The AI re-runs the graph on every action,
+     and a second LLM call would add noticeable lag — so a single prompt returns
+     both the opponent guess and the play recommendation. This deliberately
+     overrides the "one concern per node" convention in docs/EXTENDING.md;
+     latency is the priority.
+     - Own archetype is identified once per game, no LLM. On the first
+     /recognize call for a game_id, the sidecar matches the AI's deck_cards
+     (already sent today) against known archetypes by signature-card overlap and
+     caches the result per game_id — reusing the existing _resolved_format
+     cache pattern. No Forge-side change.
+     - Extraction: offline LLM-assisted script; builder LLM is configurable,
+     defaulting to the existing local llama.cpp client.
+     - Forge's Java adapter changes that capture live hand/board state are a
+     larger, separate effort — this plan ships the sidecar end-to-end and
+     updates
+     the Java request/result records + docs, but defers the state-capture
+     wiring.
+
+     Knowledge layer
+
+     1. Pydantic schema — app/knowledge/piloting_schema.py (new)
+
+     PILOTING_SCHEMA_VERSION = 1. Models:
+     - StrategyType(str, Enum) — aggro | tempo | midrange | control | combo | 
+     ramp
+     - MulliganHandExample — hand: list[str], decision: 
+     Literal["keep","mulligan"], reason: str
+     - MulliganGuidance — keep_criteria: list[str], mulligan_criteria: 
+     list[str], examples: list[MulliganHandExample]
+     - GamePlan — early_game / mid_game / late_game: list[str]
+     - KeyCard — name: str, role: str, notes: str = ""
+     - MatchupNote — opponent_archetype: str, advice: str, watch_for: list[str]
+     - GuideMetadata — source, generated_at, model, schema_version
+     - PilotingGuide — archetype, format, strategy_type: StrategyType,
+     overview, win_conditions: list[str], mulligan: MulliganGuidance,
+     game_plan: GamePlan, key_cards: list[KeyCard], sequencing_tips: list[str],
+     matchups: list[MatchupNote], common_threats: list[str], metadata.
+
+     2. Guide files — app/knowledge/piloting/ (new)
+
+     - piloting/<format>/<slug>.json — archetype-specific (e.g.
+     modern/boros-energy.json).
+     Slug = lowercased alphanumerics joined by hyphens (helper alongside
+     loader._norm).
+     - piloting/generic/{aggro,tempo,midrange,control,combo,ramp}.json — six
+     hand-authored, committed fallbacks.
+     - Initial archetype guides: generate the Modern set via the builder script
+     and commit after human review; other formats follow later.
+
+     3. Loader — app/knowledge/piloting.py (new)
+
+     - get_piloting_guide(archetype, game_format, strategy_type=None) -> 
+     PilotingGuide | None
+     — functools.cache per-file load; parse JSON, validate with PilotingGuide;
+     on pydantic.ValidationError log a warning and skip (fail-soft, like
+     loader._load_file / metagame._load). Fallback chain:
+     format/<slug> → generic/<strategy_type> → generic/midrange.
+     - identify_own_archetype(deck_cards, game_format) -> tuple[str|None, 
+     StrategyType]
+     — deterministic, no LLM: score each metagame / curated archetype by
+     signature-card overlap with deck_cards; return the best match (name +
+     strategy type). Used once per game (cached by the node, see §5).
+     - available_guides() — debug helper.
+
+     Extend curated app/knowledge/archetypes/*.json entries with an optional
+     strategy_type field so the generic fallback can be chosen; default midrange
+     when absent. merge_with_curated carries it through unchanged.
+
+     Offline extraction — scripts/build_piloting_guides.py (new)
+
+     CLI mirroring scripts/scrape_metagame.py:
+     python scripts/build_piloting_guides.py                 # all formats
+     python scripts/build_piloting_guides.py modern          # one format
+     python scripts/build_piloting_guides.py modern --archetype "Boros Energy"
+     python scripts/build_piloting_guides.py modern --force  # regenerate
+     existing
+     Per archetype: read metagame_data/<format>.json → fetch a representative
+     decklist (and primer text when present) via new helpers in
+     app/knowledge/scraper.py (fetch_archetype_decklist / fetch_primer_text)
+     → build prompt → builder LLM → parse JSON → validate PilotingGuide →
+     write piloting/<format>/<slug>.json. Skips existing files unless --force;
+     polite time.sleep; succeeds if ≥1 guide written. Generic guides are NOT
+     generated here (hand-authored).
+
+     Builder LLM — app/knowledge/builder_llm.py (new): a thin wrapper over the
+     same OpenAI-compatible chat API as llm_client.py, configured by
+     BUILDER_LLM_BASE_URL / BUILDER_LLM_API_KEY / BUILDER_MODEL_NAME, each
+     falling back to the existing LLM_* values in app/config.py. This lets a
+     stronger cloud model generate guides offline while runtime stays local.
+
+     Runtime: merged game_advisor node
+
+     4. Schema — app/schema.py
+
+     - RecognitionRequest: add optional fields (defaults keep old clients
+     valid):
+     hand: list[str], own_board: list[str], opponent_board: list[str],
+     your_graveyard: list[str], opponent_graveyard: list[str],
+     life_totals: dict[str,int].
+     - RecognitionResponse: keep the existing recognition fields; add a
+     piloting: PilotingAdvice | None sub-model (recommended_play, reasoning,
+     alternatives, mulligan_advice, own_archetype, guide_source). Bump
+     SCHEMA_VERSION to 2.
+     - GraphState: add input keys (hand/board/graveyards) and output keys
+     (own_archetype, piloting_guide, recommended_play, play_reasoning,
+     play_alternatives, mulligan_advice) on top of the existing recognition
+     keys.
+
+     5. Node — rename deck_recognition → game_advisor
+
+     Rename app/nodes/deck_recognition.py → app/nodes/game_advisor.py and evolve
+     its single node:
+     1. Own archetype — _own_archetype: dict[str,tuple[str,StrategyType]] cache
+     keyed by game_id (mirrors _resolved_format). First call:
+     identify_own_archetype(deck_cards, format); later calls hit the cache.
+     2. Resolve metagame slug + candidate opponent archetypes (unchanged logic).
+     3. Load the AI's own PilotingGuide via the fallback chain.
+     4. One prompt, one generate_json call asking for a single JSON object with
+     both concerns: archetype / confidence / reasoning / alternatives
+     (opponent recognition, as today) and recommended_play / play_reasoning
+     / play_alternatives (piloting). On turn 0, ask for mulligan_advice
+     instead of a play. The prompt includes the candidate archetype list, the
+     opponent's observations, the AI's own guide (overview / game plan / key
+     cards
+     / matchup note for the suspected opponent), and the live
+     hand/board/graveyard
+     state.
+     5. Coerce/clamp every field as deck_recognition does today; fail-soft on
+     LLMError — return neutral recognition and neutral piloting values.
+     Always returns a valid GraphState (per docs/EXTENDING.md).
+
+     6. Graph — app/graph.py
+
+     START → game_advisor → END (single node; constant renamed).
+
+     7. API — app/main.py
+
+     - Map both the recognition fields and the new piloting block into
+     RecognitionResponse in /recognize.
+     - Add GET /piloting?format=modern&archetype=Boros%20Energy debug endpoint
+     returning the resolved guide (parallels GET /metagame).
+
+     Forge Java adapter (records + docs only; capture wiring deferred)
+
+     - RecognitionRequest.java — add the new optional fields with
+     @SerializedName.
+     - RecognitionResult.java — add a nested PilotingAdvice record + a log
+     helper.
+     - DeckRecognitionObserver.java already extracts deckCards; capturing live
+     hand/board/graveyard state is the larger follow-up (noted in
+     docs/ADAPTERS.md
+       - docs/API.md). Until then Forge sends only deck_cards; the node still
+     produces archetype-level piloting advice from the guide.
+
+     Tests — tests/
+
+     - tests/test_piloting.py (new): PilotingGuide validation accepts good /
+     rejects bad JSON; loader fallback chain (specific → generic → midrange);
+     identify_own_archetype signature-card scoring; all six committed generic
+     guides load and validate (parametrized).
+     - tests/test_graph.py: update for the renamed node/module; assert one graph
+     run with a stubbed generate_json returns both archetype and
+     recommended_play / own_archetype; own-archetype cache is populated once.
+
+     Docs
+
+     - New docs/PILOTING.md — schema, fallback chain, the builder script, the
+     merged prompt, and the rationale for one combined LLM call.
+     - Update README.md (project layout, endpoints, BUILDER_* env vars),
+     docs/API.md (new fields + /piloting), docs/ARCHITECTURE.md (the merged
+     node), docs/ADAPTERS.md (expanded contract + deferred capture note),
+     docs/EXTENDING.md (note the deliberate single-node merge for latency),
+     docs/DECK_IDENTIFICATION.md (node rename).
+
+     Files
+
+     File: app/knowledge/piloting_schema.py
+     Change: new — Pydantic models
+     ────────────────────────────────────────
+     File: app/knowledge/piloting.py
+     Change: new — loader + identify_own_archetype
+     ────────────────────────────────────────
+     File: app/knowledge/builder_llm.py
+     Change: new — configurable builder LLM client
+     ────────────────────────────────────────
+     File: app/knowledge/piloting/generic/*.json
+     Change: new — 6 hand-authored guides
+     ────────────────────────────────────────
+     File: app/knowledge/piloting/modern/*.json
+     Change: new — generated, reviewed
+     ────────────────────────────────────────
+     File: app/knowledge/scraper.py
+     Change: add decklist/primer fetch helpers
+     ────────────────────────────────────────
+     File: app/knowledge/archetypes/*.json
+     Change: add optional strategy_type
+     ────────────────────────────────────────
+     File: app/nodes/game_advisor.py
+     Change: renamed from deck_recognition.py; merged logic
+     ────────────────────────────────────────
+     File: app/schema.py
+     Change: new request/response fields, SCHEMA_VERSION=2, state keys
+     ────────────────────────────────────────
+     File: app/graph.py
+     Change: rename node constant/import
+     ────────────────────────────────────────
+     File: app/main.py
+     Change: response mapping + GET /piloting
+     ────────────────────────────────────────
+     File: scripts/build_piloting_guides.py
+     Change: new — offline extraction CLI
+     ────────────────────────────────────────
+     File: tests/test_piloting.py, tests/test_graph.py
+     Change: tests
+     ────────────────────────────────────────
+     File: forge-ai/.../llm/RecognitionRequest.java, RecognitionResult.java
+     Change: new fields
+     ────────────────────────────────────────
+     File: docs/PILOTING.md +
+       README/API/ARCHITECTURE/ADAPTERS/EXTENDING/DECK_IDENTIFICATION
+     Change: docs
+
+     Research note (extraction source)
+
+     No site exposes structured piloting data via an API. MTGJSON/Scryfall cover
+     cards only; primers (MTGGoldfish articles, Mystical Teachings, Draftsim)
+     are
+     free prose with patchy archetype coverage. Hence the chosen approach: feed
+     a
+     representative decklist (always available from MTGGoldfish archetype pages)
+      plus
+     any primer prose to an LLM and have it emit schema-valid JSON — the only
+     option
+     that scales to every metagame archetype. Generated files are committed and
+     human-reviewable, so quality stays inspectable.
+
+     Verification
+
+     1. cd forge-llm-sidecar && pip install -e ".[dev]"
+     2. ruff check . && black --check . && pytest — all green (LLM stubbed
+     offline).
+     3. Schema/loader: python -c "from app.knowledge.piloting import 
+     get_piloting_guide; print(get_piloting_guide('Boros Energy','modern'))".
+     4. Builder (needs an LLM running):
+     python scripts/build_piloting_guides.py modern --archetype "Boros Energy"
+     → writes a valid piloting/modern/boros-energy.json.
+     5. Start the sidecar; GET /piloting?format=modern&archetype=Boros%20Energy
+     returns the guide.
+     6. POST /recognize with a synthetic body including hand / own_board /
+     deck_cards → one response carries both an opponent archetype guess and
+     a piloting block (recommended_play, own_archetype); a second call for
+     the same game_id reuses the cached own archetype. Omitting the new fields
+     still returns a valid response (back-compat).
+     7. Stop the LLM server and repeat (6): the single node degrades fail-soft
+     (Unknown guess, neutral piloting advice) — the request still succeeds.
+
+❯ /usage 
+  ⎿  Settings dialog dismissed
+
+  Read 1 file (ctrl+o to expand)
+
+● Write(forge-llm-sidecar/app/knowledge/piloting_schema.py)
+  ⎿  Wrote 94 lines to forge-llm-sidecar/app/knowledge/piloting_schema.py
+       2 """Pydantic models for deck *piloting* guidance.
+       3 A piloting guide tells the LLM how to play a given deck archetyp
+       4 mulligan, what the game plan is, the win conditions, key cards, 
+         matchup notes,
+       5 and meta threats to watch for. Guides live as JSON under
+         lotingGuide`dge/piloting/`` and are validated against :class:`Pi
+       7 both when the offline builder writes them and when the loader re
+       8 """ them.
+       9 
+      10 from __future__ import annotations
+     … +92 lines (ctrl+o to expand)
+
+  Read 1 file (ctrl+o to expand)
+● Write(forge-llm-sidecar/app/knowledge/piloting.py)
+  ⎿  Wrote 140 lines to forge-llm-sidecar/app/knowledge/piloting.py
+       2 """Loads piloting guides and identifies the AI's own archetype.
+         on`` withguides live as JSON under ``piloting/<format>/<slug>.js
+       4 hand-authored fallbacks under ``piloting/generic/<strategy>.json
+       5 is validated against :class:`~app.knowledge.piloting_schema.Pilo
+         tingGuide` on
+          metagame andlid file is logged and skipped (fail-soft, like the
+       8 archetype loaders).
+       9 ``identify_own_archetype`` matches a decklist to a known archety
+      10 signature-card overlap — a deterministic, no-LLM lookup the game
+         _advisor node
+     … +155 lines (ctrl+o to expand)
+
+● Write(forge-llm-sidecar/app/knowledge/piloting/generic/aggro.json)
+  ⎿  Wrote 82 lines to
+     forge-llm-sidecar/app/knowledge/piloting/generic/aggro.json
+       2   "archetype": "Generic Aggro",
+       3   "format": "",
+       5   "overview": "Win quickly by deploying cheap threats and attack
+         ing every turn. The clock is the plan: race the opponent's life 
+         total down before their more powerful cards take over. Time work
+       6   "win_conditions": [de resources for tempo and damage.",
+       7     "Reduce the opponent to 0 life with repeated combat damage",
+         ttackers"sh a stalled board with reach: burn spells or evasive a
+       9   ],
+      10   "mulligan": {
+     … +93 lines (ctrl+o to expand)
+
+● Write(forge-llm-sidecar/app/knowledge/piloting/generic/tempo.json)
+  ⎿  Wrote 83 lines to
+     forge-llm-sidecar/app/knowledge/piloting/generic/tempo.json
+       2   "archetype": "Generic Tempo",
+       3   "format": "",
+       5   "overview": "Land an efficient threat early, then use cheap in
+         teraction to defend it and deny the opponent the time to stabili
+         your clock, and win the race on resources as well as life.",ect 
+       6   "win_conditions": [
+         turns",protected evasive threat that ends the game over several 
+       8     "Out-tempoing the opponent until they cannot deploy meaningf
+       9   ],lockers"
+      10   "mulligan": {
+     … +95 lines (ctrl+o to expand)
+
+● Write(forge-llm-sidecar/app/knowledge/piloting/generic/midrange.json)
+  ⎿  Wrote 83 lines to
+     forge-llm-sidecar/app/knowledge/piloting/generic/midrange.json
+       2   "archetype": "Generic Midrange",
+       4   "strategy_type": "midrange",
+       5   "overview": "Win on card quality and flexibility. Trade one-fo
+         th resilient, high-value cards; against control, become the aggr
+         essor with hard-to-answer threats. Adapt your role to the oppone
+       6   "win_conditions": [
+         ent threats",e opponent out of resources, then close with effici
+       8     "Resolve a powerful must-answer permanent the opponent canno
+       9   ],al with"
+      10   "mulligan": {
+     … +98 lines (ctrl+o to expand)
+
+● Write(forge-llm-sidecar/app/knowledge/piloting/generic/control.json)
+  ⎿  Wrote 84 lines to
+     forge-llm-sidecar/app/knowledge/piloting/generic/control.json
+       2   "archetype": "Generic Control",
+       4   "strategy_type": "control",
+       5   "overview": "Survive the early game by answering every threat,
+         l number of hard-to-kill finishers. Time is your ally — trade ef
+         ficiently, do not panic, and only commit a threat once the board
+       6   "win_conditions": [
+         pressure",ilient finisher deployed after the opponent is out of 
+       8     "Decking or grinding the opponent out once you control the g
+       9   ],
+      10   "mulligan": {
+     … +97 lines (ctrl+o to expand)
+
+● Write(forge-llm-sidecar/app/knowledge/piloting/generic/combo.json)
+  ⎿  Wrote 83 lines to
+     forge-llm-sidecar/app/knowledge/piloting/generic/combo.json
+       2   "archetype": "Generic Combo",
+       3   "format": "",
+       5   "overview": "Assemble a specific set of cards that wins the ga
+         me on the spot or generates an insurmountable advantage. The dec
+         ts, and play around interaction against decks that can disrupt y
+         ou.",
+       7     "Execute the combo to win immediately or near-immediately",
+       8     "Generate an unbeatable engine the opponent cannot interact 
+       9   ], in time"
+      10   "mulligan": {
+     … +98 lines (ctrl+o to expand)
+
+● Write(forge-llm-sidecar/app/knowledge/piloting/generic/ramp.json)
+  ⎿  Wrote 83 lines to
+     forge-llm-sidecar/app/knowledge/piloting/generic/ramp.json
+       2   "archetype": "Generic Ramp",
+       4   "strategy_type": "ramp",
+       5   "overview": "Accelerate your mana ahead of the curve, then dep
+         . Survive the early turns, hit your mana milestones, and overwhe
+         lm the board with payoffs the opponent's deck is not built to ha
+       6   "win_conditions": [
+         ,   "Cast a game-ending threat or payoff well ahead of schedule"
+       8     "Bury the opponent under permanents they cannot match on man
+       9   ],
+      10   "mulligan": {
+     … +97 lines (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/app/knowledge/scraper.py)
+  ⎿  Added 72 lines
+      103  
+      104  def _parse_signature_cards(tile) -> list[str]:
+      105      return [li.get_text(strip=True) for li in tile.select("ul 
+           li") if li.get_text(strip=True)]
+      106 +                                                              
+      107 +                                                              
+      108 +# ------------------------------------------------------------
+          +---------------                                               
+      109 +# Decklist enrichment for the piloting-guide builder (scripts/
+          +build_piloting_guides.py).                                    
+      110 +# Best-effort and fully fail-soft: any failure returns an empt
+          +y result so the                                               
+      111 +# builder degrades to signature-card context rather than abort
+          +ing.                                                          
+      112 +# ------------------------------------------------------------
+          +---------------                                               
+      113 +_SITE = "https://www.mtggoldfish.com"                         
+      114 +                                                              
+      115 +                                                              
+      116 +def archetype_links(slug: str, *, timeout: float = 20.0) -> di
+          +ct[str, str]:                                                 
+      117 +    """Map archetype name -> MTGGoldfish archetype page URL fo
+          +r a format."""                                                
+      118 +    from bs4 import BeautifulSoup                             
+      119 +                                                              
+      120 +    url = _URL_TEMPLATE.format(slug=slug)                     
+      121 +    try:                                                      
+      122 +        with httpx.Client(                                    
+      123 +            timeout=timeout, headers={"User-Agent": _USER_AGEN
+          +T}, follow_redirects=True                                     
+      124 +        ) as client:                                          
+      125 +            resp = client.get(url)                            
+      126 +            resp.raise_for_status()                           
+      127 +    except httpx.HTTPError as exc:                            
+      128 +        log.warning("scraper: archetype_links(%s) failed: %s",
+          + slug, exc)                                                   
+      129 +        return {}                                             
+      130 +                                                              
+      131 +    links: dict[str, str] = {}                                
+      132 +    soup = BeautifulSoup(resp.text, "html.parser")            
+      133 +    for tile in soup.select(".archetype-tile"):               
+      134 +        a = tile.select_one(".archetype-tile-title a")        
+      135 +        href = a.get("href") if a else None                   
+      136 +        if a and href:                                        
+      137 +            links[a.get_text(strip=True)] = href if href.start
+          +swith("http") else _SITE + href                               
+      138 +    return links                                              
+      139 +                                                              
+      140 +                                                              
+      141 +def fetch_archetype_decklist(page_url: str, *, timeout: float 
+          += 20.0) -> list[str]:                                         
+      142 +    """Fetch a representative decklist (card names) from an ar
+          +chetype page.                                                 
+      143 +                                                              
+      144 +    Returns ``[]`` on any failure — the builder then relies on
+          + signature cards.                                             
+      145 +    """                                                       
+      146 +    from bs4 import BeautifulSoup                             
+      147 +                                                              
+      148 +    try:                                                      
+      149 +        with httpx.Client(                                    
+      150 +            timeout=timeout, headers={"User-Agent": _USER_AGEN
+          +T}, follow_redirects=True                                     
+      151 +        ) as client:                                          
+      152 +            resp = client.get(page_url)                       
+      153 +            resp.raise_for_status()                           
+      154 +    except httpx.HTTPError as exc:                            
+      155 +        log.warning("scraper: fetch_archetype_decklist(%s) fai
+          +led: %s", page_url, exc)                                      
+      156 +        return []                                             
+      157 +                                                              
+      158 +    soup = BeautifulSoup(resp.text, "html.parser")            
+      159 +    cards: list[str] = []                                     
+      160 +    seen: set[str] = set()                                    
+      161 +    for el in soup.select(".deck-col-card a, table.deck-view-d
+          +eck-table a"):                                                
+      162 +        name = el.get_text(strip=True)                        
+      163 +        if name and name.lower() not in seen:                 
+      164 +            seen.add(name.lower())                            
+      165 +            cards.append(name)                                
+      166 +    return cards                                              
+      167 +                                                              
+      168 +                                                              
+      169 +def fetch_primer_text(page_url: str) -> str:                  
+      170 +    """Placeholder hook for primer prose.                     
+      171 +                                                              
+      172 +    MTGGoldfish archetype pages do not carry structured primer
+          +s and free-text                                               
+      173 +    primer articles have patchy, unreliable coverage, so this 
+          +returns an empty                                              
+      174 +    string today. The builder treats primer text as optional e
+          +nrichment; wire a                                             
+      175 +    real source in here later without changing the builder.   
+      176 +    """                                                       
+      177 +    return ""                                                 
+
+● Write(forge-llm-sidecar/app/knowledge/builder_llm.py)
+  ⎿  Wrote 67 lines to forge-llm-sidecar/app/knowledge/builder_llm.py
+       2 """Offline LLM client for the piloting-guide builder.
+       3 Separate from :mod:`app.llm_client` (which serves requests at ru
+       4 guide generation runs *offline* — in CI or on demand — and may w
+         ant a stronger
+         t and is never local llama.cpp server. It is a synchronous clien
+       6 imported on the request path.
+       8 Configured by ``BUILDER_LLM_BASE_URL`` / ``BUILDER_LLM_API_KEY``
+          /
+          config so theL_NAME``; each falls back to the runtime ``LLM_*``
+      10 default behaviour is "use the same local model".
+     … +69 lines (ctrl+o to expand)
+
+● Write(forge-llm-sidecar/scripts/build_piloting_guides.py)
+  ⎿  Wrote 168 lines to forge-llm-sidecar/scripts/build_piloting_guides.py
+       2 """Generate piloting guides for metagame archetypes with an LLM.
+       3 
+         type inFLINE — never on the sidecar request path. For each arche
+       5 ``app/knowledge/metagame_data/<format>.json`` it gathers context
+       6 signature cards, a representative decklist when reachable), asks
+          the builder LLM
+         Guide`, andpiloting guide, validates it against :class:`Piloting
+       8 writes ``app/knowledge/piloting/<format>/<slug>.json``.
+      10     python scripts/build_piloting_guides.py                 # al
+         l formats
+     … +202 lines (ctrl+o to expand)
+
+● Write(forge-llm-sidecar/app/schema.py)
+  ⎿  Added 41 lines, removed 7 lines
+       6  
+       7  from pydantic import BaseModel, Field
+       8  
+       9 -SCHEMA_VERSION = 1                                             
+       9 +# v2 adds the piloting advice block to the response (see Piloti
+         +ngAdvice).                                                     
+      10 +SCHEMA_VERSION = 2                                             
+      11  
+      12  
+      13  class Observation(BaseModel):
+     ...
+      31      turn: int = 0
+      32      observations: list[Observation] = Field(default_factory=lis
+          t)
+      33      # The AI's own deck (card names). Forge knows this exactly;
+           used to detect
+      33 -    # the precise Constructed format when ``format`` is generic
+         -.                                                              
+      34 +    # the precise Constructed format and to identify the AI's o
+         +wn archetype.                                                  
+      35      deck_cards: list[str] = Field(default_factory=list)
+      36 +    # Live game state for piloting advice. All optional: client
+         +s that do not                                                  
+      37 +    # send them still get archetype-level advice from the guide
+         +.                                                              
+      38 +    hand: list[str] = Field(default_factory=list)              
+      39 +    own_board: list[str] = Field(default_factory=list)         
+      40 +    opponent_board: list[str] = Field(default_factory=list)    
+      41 +    your_graveyard: list[str] = Field(default_factory=list)    
+      42 +    opponent_graveyard: list[str] = Field(default_factory=list)
+      43 +    life_totals: dict[str, int] = Field(default_factory=dict)  
+      44  
+      45  
+      46 +class PilotingAdvice(BaseModel):                               
+      47 +    """Advice on how the AI should play its own deck this turn.
+         +"""                                                            
+      48 +                                                               
+      49 +    own_archetype: str = "Unknown"                             
+      50 +    guide_source: str = ""  # which guide answered: "<format>/<
+         +slug>" or "generic/<strategy>"                                 
+      51 +    recommended_play: str = ""                                 
+      52 +    reasoning: str = ""                                        
+      53 +    alternatives: list[str] = Field(default_factory=list)      
+      54 +    mulligan_advice: str = ""  # populated on turn 0 instead of
+         + recommended_play                                              
+      55 +                                                               
+      56 +                                                               
+      57  class RecognitionResponse(BaseModel):
+      58      archetype: str
+      59      confidence: float
+      60      reasoning: str
+      61      alternatives: list[str] = Field(default_factory=list)
+      62 +    piloting: PilotingAdvice | None = None                     
+      63      schema_version: int = SCHEMA_VERSION
+      64  
+      65  
+      66  # -------------------------------------------------------------
+          --------------
+      46 -# LangGraph state. Kept as a superset TypedDict: extra keys are
+         - reserved for                                                  
+      47 -# future nodes (play advisor, threat assessment, ...) so the HT
+         -TP contract and                                                
+      48 -# the graph state can evolve independently.                    
+      67 +# LangGraph state. Kept as a superset TypedDict so the HTTP con
+         +tract and the                                                  
+      68 +# graph state can evolve independently.                        
+      69  # -------------------------------------------------------------
+          --------------
+      70  class GraphState(TypedDict, total=False):
+      71      # inputs
+     ...
+      74      turn: int
+      75      observations: list[dict]
+      76      deck_cards: list[str]
+      57 -    # resolved by the deck_recognition node                    
+      77 +    hand: list[str]                                            
+      78 +    own_board: list[str]                                       
+      79 +    opponent_board: list[str]                                  
+      80 +    your_graveyard: list[str]                                  
+      81 +    opponent_graveyard: list[str]                              
+      82 +    life_totals: dict[str, int]                                
+      83 +    # resolved by the game_advisor node                        
+      84      resolved_format: str | None
+      85      candidate_archetypes: list[dict]
+      60 -    # outputs of the deck_recognition node                     
+      86 +    own_archetype: str | None                                  
+      87 +    piloting_guide: dict | None                                
+      88 +    # opponent-recognition outputs of the game_advisor node    
+      89      archetype: str | None
+      90      confidence: float | None
+      91      reasoning: str | None
+      92      alternatives: list[str]
+      93 +    # piloting outputs of the game_advisor node                
+      94 +    recommended_play: str | None                               
+      95 +    play_reasoning: str | None                                 
+      96 +    play_alternatives: list[str]                               
+      97 +    mulligan_advice: str | None                                
+      98 +    guide_source: str | None                                   
+● Bash(cd /home/lou/Development/forge-1/forge-llm-sidecar && git mv
+      app/nodes/deck_recognition.py app/nodes/game_advisor.py && echo done)
+  ⎿  done
+
+● Write(forge-llm-sidecar/app/nodes/game_advisor.py)
+  ⎿  Error writing file
+
+  Read 1 file (ctrl+o to expand)
+
+● Write(forge-llm-sidecar/app/nodes/game_advisor.py)
+  ⎿  Added 144 lines, removed 35 lines
+       1 -"""The deck_recognition LangGraph node.                        
+       1 +"""The game_advisor LangGraph node.                            
+       2  
+       3 -Given the game format and the opponent's observed plays, ask th
+         -e local LLM to                                                 
+       4 -identify the most likely deck archetype, scored against the cur
+         -rent metagame.                                                 
+       3 +A single node, a single LLM call, two concerns:                
+       4 +                                                               
+       5 +1. **Deck recognition** — guess which archetype the *opponent* 
+         +is playing.                                                    
+       6 +2. **Piloting advice** — recommend what the *AI* should play ne
+         +xt, using a                                                    
+       7 +   piloting guide for the AI's own deck.                       
+       8 +                                                               
+       9 +These are deliberately merged into one prompt/call: the AI re-r
+         +uns the graph on                                               
+      10 +every action, and a second LLM call would add noticeable lag. S
+         +ee                                                             
+      11 +``docs/EXTENDING.md`` — latency wins over the "one concern per 
+         +node" rule here.                                               
+      12  """
+      13  
+      14  from __future__ import annotations
+     ...
+      17  import logging
+      18  
+      19  from app.config import CONFIG
+      13 -from app.knowledge import format_detect, loader, metagame      
+      20 +from app.knowledge import format_detect, loader, metagame, pilo
+         +ting                                                           
+      21 +from app.knowledge.piloting_schema import StrategyType         
+      22  from app.llm_client import LLMError, generate_json
+      23  from app.schema import GraphState
+      24  
+      25  log = logging.getLogger(__name__)
+      26  
+      19 -# Resolved metagame slug per game_id, so Scryfall format detect
+         -ion runs at most                                               
+      20 -# once per game rather than on every (per-action) recognition c
+         -all.                                                           
+      27 +# Per-game caches so per-action calls do not redo one-time work
+         +.                                                              
+      28  _resolved_format: dict[str, str] = {}
+      29 +_own_archetype: dict[str, tuple[str | None, StrategyType]] = {}
+      30  
+      31  _SYSTEM_PROMPT = (
+      24 -    "You are an expert Magic: The Gathering analyst. You identi
+         -fy which deck "                                                
+      25 -    "archetype an opponent is playing from the cards they have 
+         -revealed. "                                                    
+      32 +    "You are an expert Magic: The Gathering analyst and coach. 
+         +You identify the "                                             
+      33 +    "opponent's deck archetype and advise the AI on how to pilo
+         +t its own deck. "                                              
+      34      "Always answer with a single JSON object and nothing else."
+      35  )
+      36  
+     ...
+       65      return "\n".join(lines)
+       66  
+       67  
+       68 +def _format_guide(guide: dict | None) -> str:                 
+       69 +    """Render the AI's own piloting guide as compact prompt te
+          +xt."""                                                        
+       70 +    if not guide:                                             
+       71 +        return "(no piloting guide available)"                
+       72 +    gp = guide.get("game_plan", {})                           
+       73 +    mull = guide.get("mulligan", {})                          
+       74 +    parts = [                                                 
+       75 +        f"Your deck: {guide.get('archetype', '?')} "          
+       76 +        f"(strategy: {guide.get('strategy_type', '?')})",     
+       77 +        f"Overview: {guide.get('overview', '')}",             
+       78 +    ]                                                         
+       79 +    if guide.get("win_conditions"):                           
+       80 +        parts.append("Win conditions: " + "; ".join(guide["win
+          +_conditions"]))                                               
+       81 +    if mull.get("keep_criteria"):                             
+       82 +        parts.append("Keep hands that: " + "; ".join(mull["kee
+          +p_criteria"]))                                                
+       83 +    if mull.get("mulligan_criteria"):                         
+       84 +        parts.append("Mulligan hands that: " + "; ".join(mull[
+          +"mulligan_criteria"]))                                        
+       85 +    for phase in ("early_game", "mid_game", "late_game"):     
+       86 +        if gp.get(phase):                                     
+       87 +            parts.append(f"{phase.replace('_', ' ').title()}: 
+          +" + "; ".join(gp[phase]))                                     
+       88 +    if guide.get("key_cards"):                                
+       89 +        kc = "; ".join(f"{c.get('name')} ({c.get('role')})" fo
+          +r c in guide["key_cards"])                                    
+       90 +        parts.append("Key cards: " + kc)                      
+       91 +    if guide.get("sequencing_tips"):                          
+       92 +        parts.append("Sequencing tips: " + "; ".join(guide["se
+          +quencing_tips"]))                                             
+       93 +    if guide.get("matchups"):                                 
+       94 +        mu = "; ".join(                                       
+       95 +            f"vs {m.get('opponent_archetype')}: {m.get('advice
+          +')}" for m in guide["matchups"]                               
+       96 +        )                                                     
+       97 +        parts.append("Matchup notes: " + mu)                  
+       98 +    if guide.get("common_threats"):                           
+       99 +        parts.append("Threats to watch for: " + "; ".join(guid
+          +e["common_threats"]))                                         
+      100 +    return "\n".join(parts)                                   
+      101 +                                                              
+      102 +                                                              
+      103 +def _format_zone(name: str, cards: list[str]) -> str:         
+      104 +    return f"{name}: {', '.join(cards)}" if cards else f"{name
+          +}: (empty/unknown)"                                           
+      105 +                                                              
+      106 +                                                              
+      107  def _build_prompt(state: GraphState) -> str:
+      108      archetypes = state.get("candidate_archetypes", [])
+      109      names = [a.get("name", "?") for a in archetypes]
+     ...
+      115          else ""
+      116      )
+      117      fmt = state.get("resolved_format") or state.get("format", 
+           "Unknown")
+      118 +    turn = state.get("turn", 0)                               
+      119 +                                                              
+      120 +    play_block = (                                            
+      121 +        '  "mulligan_advice": string — keep or mulligan the op
+          +ening hand, and why,\n'                                       
+      122 +        if turn <= 0                                          
+      123 +        else (                                                
+      124 +            '  "recommended_play": string — the single best pl
+          +ay for the AI now,\n'                                         
+      125 +            '  "play_reasoning": string — one or two sentences
+          +,\n'                                                          
+      126 +            '  "play_alternatives": array of up to 3 other rea
+          +sonable plays,\n'                                             
+      127 +        )                                                     
+      128 +    )                                                         
+      129 +                                                              
+      130      return (
+      131          f"Game format: {fmt}\n"
+       73 -        f"Current turn: {state.get('turn', 0)}\n\n"           
+      132 +        f"Current turn: {turn}\n\n"                           
+      133          f"Archetypes in the current metagame:\n{_format_archet
+           ypes(archetypes)}\n\n"
+      134          f"{meta_note}"
+      135          f"Opponent's observed plays so far (chronological):\n"
+      136          f"{_format_observations(state.get('observations', []))
+           }\n\n"
+       78 -        "Identify the single most likely archetype the opponen
+          -t is playing.\n"                                              
+       79 -        "Prefer a name from the archetype list above; only inv
+          -ent a name "                                                  
+       80 -        "if none fit, and lower your confidence if you do.\n" 
+       81 -        "Respond with a JSON object with exactly these keys:\n
+          -"                                                             
+      137 +        f"--- The AI's own deck guidance ---\n{_format_guide(s
+          +tate.get('piloting_guide'))}\n\n"                             
+      138 +        f"--- Current board state ---\n"                      
+      139 +        f"{_format_zone('Your hand', state.get('hand', []))}\n
+          +"                                                             
+      140 +        f"{_format_zone('Your battlefield', state.get('own_boa
+          +rd', []))}\n"                                                 
+      141 +        f"{_format_zone('Opponent battlefield', state.get('opp
+          +onent_board', []))}\n"                                        
+      142 +        f"{_format_zone('Your graveyard', state.get('your_grav
+          +eyard', []))}\n"                                              
+      143 +        f"{_format_zone('Opponent graveyard', state.get('oppon
+          +ent_graveyard', []))}\n"                                      
+      144 +        f"Life totals: {state.get('life_totals', {}) or '(unkn
+          +own)'}\n\n"                                                   
+      145 +        "Do two things and respond with a single JSON object w
+          +ith exactly these keys:\n"                                    
+      146 +        "1. Identify the opponent's most likely archetype:\n" 
+      147          '  "archetype": string (the deck name),\n'
+      148          '  "confidence": number between 0 and 1,\n'
+      149          '  "reasoning": string (one or two sentences),\n'
+       85 -        '  "alternatives": array of up to 3 other plausible ar
+          -chetype names.\n'                                             
+       86 -        f"Valid archetype names: {json.dumps(names)}"         
+      150 +        '  "alternatives": array of up to 3 other plausible ar
+          +chetype names,\n'                                             
+      151 +        "2. Advise the AI on piloting its own deck:\n"        
+      152 +        f"{play_block}"                                       
+      153 +        "Prefer an opponent archetype name from the list above
+          +; only invent a name "                                        
+      154 +        "if none fit, and lower confidence if you do. Base the
+          + piloting advice on "                                         
+      155 +        "the AI's own deck guidance and the current board stat
+          +e.\n"                                                         
+      156 +        f"Valid opponent archetype names: {json.dumps(names)}"
+      157      )
+      158  
+      159  
+      160  async def _resolve_meta_slug(state: GraphState) -> str:
+       91 -    """Decide which metagame to score against.                
+       92 -                                                              
+       93 -    Uses the format Forge reported; if that is generic ("Const
+          -ructed"), detects                                             
+       94 -    the precise format from the AI's own deck via Scryfall. Th
+          -e result is                                                   
+       95 -    cached per game so detection runs at most once per game.  
+       96 -    """                                                       
+      161 +    """Decide which metagame to score against (cached per game
+          +)."""                                                         
+      162      game_id = state.get("game_id", "")
+      163      if game_id in _resolved_format:
+      164          return _resolved_format[game_id]
+     ...
+      171  
+      172      if game_id:
+      173          _resolved_format[game_id] = slug
+      109 -    log.info("deck_recognition: game %s -> metagame '%s'", gam
+          -e_id, slug)                                                   
+      174 +    log.info("game_advisor: game %s -> metagame '%s'", game_id
+          +, slug)                                                       
+      175      return slug
+      176  
+      177  
+      113 -async def deck_recognition_node(state: GraphState) -> GraphSta
+          -te:                                                           
+      114 -    """LangGraph node: produce an archetype guess from observa
+          -tions.                                                        
+      178 +def _resolve_own_archetype(state: GraphState, slug: str) -> tu
+          +ple[str | None, StrategyType]:                                
+      179 +    """Identify the AI's own archetype once per game (determin
+          +istic, no LLM)."""                                            
+      180 +    game_id = state.get("game_id", "")                        
+      181 +    if game_id in _own_archetype:                             
+      182 +        return _own_archetype[game_id]                        
+      183  
+      116 -    Candidate archetypes come from the current metagame for th
+          -e detected                                                    
+      117 -    format, enriched with curated card details and falling bac
+          -k to the curated                                              
+      118 -    knowledge base when no metagame data is available.        
+      184 +    result = piloting.identify_own_archetype(state.get("deck_c
+          +ards", []), slug)                                             
+      185 +    if game_id:                                               
+      186 +        _own_archetype[game_id] = result                      
+      187 +    log.info("game_advisor: game %s -> own archetype %s", game
+          +_id, result[0])                                               
+      188 +    return result                                             
+      189 +                                                              
+      190 +                                                              
+      191 +def _fail_soft(state: GraphState, exc: Exception) -> GraphStat
+          +e:                                                            
+      192 +    return {                                                  
+      193 +        **state,                                              
+      194 +        "archetype": "Unknown",                               
+      195 +        "confidence": 0.0,                                    
+      196 +        "reasoning": f"Model unavailable: {exc}",             
+      197 +        "alternatives": [],                                   
+      198 +        "recommended_play": "",                               
+      199 +        "play_reasoning": "",                                 
+      200 +        "play_alternatives": [],                              
+      201 +        "mulligan_advice": "",                                
+      202 +    }                                                         
+      203 +                                                              
+      204 +                                                              
+      205 +async def game_advisor_node(state: GraphState) -> GraphState: 
+      206 +    """LangGraph node: opponent recognition + own-deck pilotin
+          +g advice.                                                     
+      207 +                                                              
+      208 +    One LLM call returns both. Candidate (opponent) archetypes
+          + come from the                                                
+      209 +    current metagame; the AI's own archetype is identified det
+          +erministically and                                            
+      210 +    drives which piloting guide is loaded.                    
+      211      """
+      212      slug = await _resolve_meta_slug(state)
+      213      state["resolved_format"] = slug
+     ...
+      218      state["candidate_archetypes"] = archetypes
+      219      known_names = {a.get("name", "") for a in archetypes}
+      220  
+      221 +    own_name, own_strategy = _resolve_own_archetype(state, slu
+          +g)                                                            
+      222 +    state["own_archetype"] = own_name                         
+      223 +    guide = piloting.get_piloting_guide(own_name or "", slug, 
+          +own_strategy)                                                 
+      224 +    state["piloting_guide"] = guide.model_dump() if guide else
+          + None                                                         
+      225 +    guide_source = ""                                         
+      226 +    if guide:                                                 
+      227 +        is_specific = own_name and piloting.slugify(guide.arch
+          +etype) == piloting.slugify(own_name)                          
+      228 +        guide_source = (                                      
+      229 +            f"{slug}/{piloting.slugify(own_name)}"            
+      230 +            if is_specific                                    
+      231 +            else f"generic/{guide.strategy_type.value}"       
+      232 +        )                                                     
+      233 +    state["guide_source"] = guide_source                      
+      234 +                                                              
+      235      try:
+      236          result = await generate_json(_build_prompt(state), sys
+           tem=_SYSTEM_PROMPT)
+      237      except LLMError as exc:
+      132 -        log.warning("deck_recognition: model call failed: %s",
+          - exc)                                                         
+      133 -        return {                                              
+      134 -            **state,                                          
+      135 -            "archetype": "Unknown",                           
+      136 -            "confidence": 0.0,                                
+      137 -            "reasoning": f"Model unavailable: {exc}",         
+      138 -            "alternatives": [],                               
+      139 -        }                                                     
+      238 +        log.warning("game_advisor: model call failed: %s", exc
+          +)                                                             
+      239 +        return _fail_soft(state, exc)                         
+      240  
+      241      archetype = str(result.get("archetype", "Unknown")).strip(
+           ) or "Unknown"
+      242      try:
+     ...
+      255          alternatives = []
+      256      alternatives = [str(x) for x in alternatives][:3]
+      257  
+      258 +    play_alternatives = result.get("play_alternatives", [])   
+      259 +    if not isinstance(play_alternatives, list):               
+      260 +        play_alternatives = []                                
+      261 +    play_alternatives = [str(x) for x in play_alternatives][:3
+          +]                                                             
+      262 +                                                              
+      263      return {
+      264          **state,
+      265          "archetype": archetype,
+      266          "confidence": confidence,
+      267          "reasoning": str(result.get("reasoning", "")).strip(),
+      268          "alternatives": alternatives,
+      269 +        "recommended_play": str(result.get("recommended_play",
+          + "")).strip(),                                                
+      270 +        "play_reasoning": str(result.get("play_reasoning", "")
+          +).strip(),                                                    
+      271 +        "play_alternatives": play_alternatives,               
+      272 +        "mulligan_advice": str(result.get("mulligan_advice", "
+          +")).strip(),                                                  
+      273      }
+
+● Write(forge-llm-sidecar/app/graph.py)
+  ⎿  Added 11 lines, removed 9 lines
+       1  """The LangGraph agent graph.
+       2  
+       3 -Currently a single node: START -> deck_recognition -> END. Addi
+         -tional nodes                                                   
+       4 -(play advisor, threat assessment, ...) can be added with ``add_
+         -node`` /                                                       
+       5 -``add_edge`` without changing the HTTP contract, because :class
+         -:`GraphState`                                                  
+       6 -is a superset TypedDict.                                       
+       3 +A single node: START -> game_advisor -> END. The ``game_advisor
+         +`` node does                                                   
+       4 +opponent deck recognition *and* own-deck piloting advice in one
+         + LLM call —                                                    
+       5 +these are merged (rather than split into two nodes) to keep per
+         +-action latency                                                
+       6 +low; see ``docs/EXTENDING.md``. Further nodes can still be adde
+         +d with                                                         
+       7 +``add_node`` / ``add_edge`` without changing the HTTP contract,
+         + because                                                       
+       8 +:class:`GraphState` is a superset TypedDict.                   
+       9  """
+      10  
+      11  from __future__ import annotations
+     ...
+      14  
+      15  from langgraph.graph import END, START, StateGraph
+      16  
+      15 -from app.nodes.deck_recognition import deck_recognition_node   
+      17 +from app.nodes.game_advisor import game_advisor_node           
+      18  from app.schema import GraphState
+      19  
+      18 -_DECK_RECOGNITION = "deck_recognition"                         
+      20 +_GAME_ADVISOR = "game_advisor"                                 
+      21  
+      22  
+      23  @functools.lru_cache(maxsize=1)
+      24  def get_graph():
+      25      """Build and compile the graph once (cached for the process
+           lifetime)."""
+      26      builder = StateGraph(GraphState)
+      25 -    builder.add_node(_DECK_RECOGNITION, deck_recognition_node) 
+      26 -    builder.add_edge(START, _DECK_RECOGNITION)                 
+      27 -    builder.add_edge(_DECK_RECOGNITION, END)                   
+      27 +    builder.add_node(_GAME_ADVISOR, game_advisor_node)         
+      28 +    builder.add_edge(START, _GAME_ADVISOR)                     
+      29 +    builder.add_edge(_GAME_ADVISOR, END)                       
+      30      return builder.compile()
+
+● Update(forge-llm-sidecar/app/main.py)
+  ⎿  Added 2 lines, removed 2 lines
+       8  
+       9  from app.config import CONFIG
+      10  from app.graph import get_graph
+      11 -from app.knowledge import metagame                             
+      11 +from app.knowledge import metagame, piloting                   
+      12  from app.llm_client import is_reachable
+      13 -from app.schema import RecognitionRequest, RecognitionResponse 
+      13 +from app.schema import PilotingAdvice, RecognitionRequest, Reco
+         +gnitionResponse                                                
+      14  
+      15  logging.basicConfig(level=logging.INFO)
+      16  log = logging.getLogger("forge-llm-sidecar")
+
+● Update(forge-llm-sidecar/app/main.py)
+  ⎿  Added 35 lines, removed 1 line
+      54      }
+      55  
+      56  
+      57 +@app.get("/piloting")                                          
+      58 +async def get_piloting(format: str = "modern", archetype: str =
+         + "") -> dict:                                                  
+      59 +    """Debug endpoint: show the piloting guide resolved for an 
+         +archetype.                                                     
+      60 +                                                               
+      61 +    ``format`` may be a Forge format name or a metagame slug. W
+         +ith no                                                         
+      62 +    ``archetype`` it lists the available guides instead.       
+      63 +    """                                                        
+      64 +    slug = metagame.resolve_meta_format(format) or format.strip
+         +().lower()                                                     
+      65 +    if not archetype:                                          
+      66 +        return {"requested": format, "meta_slug": slug, "guides
+         +": piloting.available_guides()}                                
+      67 +    guide = piloting.get_piloting_guide(archetype, slug)       
+      68 +    return {                                                   
+      69 +        "requested": format,                                   
+      70 +        "meta_slug": slug,                                     
+      71 +        "archetype": archetype,                                
+      72 +        "guide": guide.model_dump() if guide else None,        
+      73 +    }                                                          
+      74 +                                                               
+      75 +                                                               
+      76  @app.post("/recognize", response_model=RecognitionResponse)
+      77  async def recognize(req: RecognitionRequest) -> RecognitionResp
+          onse:
+      59 -    """Run the deck-recognition graph for one opponent."""     
+      78 +    """Run the game-advisor graph: opponent recognition + own-d
+         +eck piloting advice."""                                        
+      79      log.info("recognize: client=%s game=%s turn=%s", req.client
+          , req.game_id, req.turn)
+      80      graph = get_graph()
+      81      initial = {
+     ...
+       84          "turn": req.turn,
+       85          "observations": [o.model_dump() for o in req.observati
+           ons],
+       86          "deck_cards": req.deck_cards,
+       87 +        "hand": req.hand,                                     
+       88 +        "own_board": req.own_board,                           
+       89 +        "opponent_board": req.opponent_board,                 
+       90 +        "your_graveyard": req.your_graveyard,                 
+       91 +        "opponent_graveyard": req.opponent_graveyard,         
+       92 +        "life_totals": req.life_totals,                       
+       93          "alternatives": [],
+       94      }
+       95      final = await graph.ainvoke(initial)
+       96 +    piloting_advice = PilotingAdvice(                         
+       97 +        own_archetype=final.get("own_archetype") or "Unknown",
+       98 +        guide_source=final.get("guide_source") or "",         
+       99 +        recommended_play=final.get("recommended_play") or "", 
+      100 +        reasoning=final.get("play_reasoning") or "",          
+      101 +        alternatives=final.get("play_alternatives") or [],    
+      102 +        mulligan_advice=final.get("mulligan_advice") or "",   
+      103 +    )                                                         
+      104      return RecognitionResponse(
+      105          archetype=final.get("archetype") or "Unknown",
+      106          confidence=final.get("confidence") or 0.0,
+      107          reasoning=final.get("reasoning") or "",
+      108          alternatives=final.get("alternatives") or [],
+      109 +        piloting=piloting_advice,                             
+      110      )
+      111  
+      112  
+
+● Update(forge-llm-sidecar/pyproject.toml)
+  ⎿  Added 1 line, removed 1 line
+      45  packages = ["app", "app.nodes", "app.knowledge"]
+      46  
+      47  [tool.setuptools.package-data]
+      48 -"app.knowledge" = ["archetypes/*.json", "metagame_data/*.json"]
+      48 +"app.knowledge" = ["archetypes/*.json", "metagame_data/*.json",
+         + "piloting/*/*.json"]                                          
+
+● Bash(cd
+      /home/lou/Development/forge-1/forge-llm-sidecar/app/knowledge/archetypes
+      && for f in _default.json constructed.json commander.json; do echo "=== $f
+       ==="; cat…)
+  ⎿  === _default.json ===
+     {
+       "format": "Default",
+     … +78 lines (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/app/knowledge/archetypes/modern.json)
+  ⎿  Added 1 line
+       4    "archetypes": [
+       5      {
+       6        "name": "Izzet Murktide",
+       7 +      "strategy_type": "tempo",                                
+       8        "colors": ["U", "R"],
+       9        "strategy": "Tempo: cheap interaction and cantrips fuel a
+           huge Murktide Regent.",
+      10        "signature_cards": ["Murktide Regent", "Dragon's Rage Cha
+          nneler", "Expressive Iteration", "Counterspell"],
+
+● Update(forge-llm-sidecar/app/knowledge/archetypes/modern.json)
+  ⎿  Added 1 line
+      12      },
+      13      {
+      14        "name": "Amulet Titan",
+      15 +      "strategy_type": "combo",                                
+      16        "colors": ["G", "U"],
+      17        "strategy": "Combo-ramp: Amulet of Vigor and bounce lands
+           power out Primeval Titan.",
+      18        "signature_cards": ["Amulet of Vigor", "Primeval Titan", 
+          "Azusa, Lost but Seeking", "Urza's Saga"],
+
+● Update(forge-llm-sidecar/app/knowledge/archetypes/modern.json)
+  ⎿  Added 1 line
+      20      },
+      21      {
+      22        "name": "Living End",
+      23 +      "strategy_type": "combo",                                
+      24        "colors": ["B", "R", "G"],
+      25        "strategy": "Cycle creatures into the graveyard, then cas
+          cade into Living End.",
+      26        "signature_cards": ["Living End", "Street Wraith", "Viole
+          nt Outburst", "Grief"],
+
+● Update(forge-llm-sidecar/app/knowledge/archetypes/modern.json)
+  ⎿  Added 1 line
+      28      },
+      29      {
+      30        "name": "Rakdos Scam",
+      31 +      "strategy_type": "midrange",                             
+      32        "colors": ["B", "R"],
+      33        "strategy": "Midrange tempo using evoke elementals reanim
+          ated for free, plus removal.",
+      34        "signature_cards": ["Grief", "Fury", "Orcish Bowmasters",
+           "Bloodtithe Harvester"],
+
+● Update(forge-llm-sidecar/app/knowledge/archetypes/modern.json)
+  ⎿  Added 1 line
+      36      },
+      37      {
+      38        "name": "Hammer Time",
+      39 +      "strategy_type": "aggro",                                
+      40        "colors": ["W"],
+      41        "strategy": "Aggro: cheaply equip Colossus Hammer onto an
+           evasive creature.",
+      42        "signature_cards": ["Colossus Hammer", "Sigarda's Aid", "
+          Puresteel Paladin", "Ornithopter"],
+
+● Update(forge-llm-sidecar/app/knowledge/archetypes/_default.json)
+  ⎿  File must be read first
+
+● Update(forge-llm-sidecar/app/knowledge/archetypes/_default.json)
+  ⎿  File must be read first
+
+● Update(forge-llm-sidecar/app/knowledge/archetypes/_default.json)
+  ⎿  File must be read first
+
+● Update(forge-llm-sidecar/app/knowledge/archetypes/_default.json)
+  ⎿  File must be read first
+● Update(forge-llm-sidecar/app/knowledge/archetypes/_default.json)
+  ⎿  File must be read first
+
+  Read 1 file (ctrl+o to expand)
+
+● Write(forge-llm-sidecar/app/knowledge/archetypes/_default.json)
+  ⎿  Added 5 lines
+       4    "archetypes": [
+       5      {
+       6        "name": "Aggro",
+       7 +      "strategy_type": "aggro",                                
+       8        "colors": ["any"],
+       9        "strategy": "Win fast with cheap, efficient creatures and
+           burn before the opponent stabilizes.",
+      10        "signature_cards": [],
+     ...
+      12      },
+      13      {
+      14        "name": "Midrange",
+      15 +      "strategy_type": "midrange",                             
+      16        "colors": ["any"],
+      17        "strategy": "Trade resources efficiently, then win with i
+          ndividually powerful threats.",
+      18        "signature_cards": [],
+     ...
+      20      },
+      21      {
+      22        "name": "Control",
+      23 +      "strategy_type": "control",                              
+      24        "colors": ["any"],
+      25        "strategy": "Neutralize the opponent's threats, then win 
+          late with a small number of finishers.",
+      26        "signature_cards": [],
+     ...
+      28      },
+      29      {
+      30        "name": "Combo",
+      31 +      "strategy_type": "combo",                                
+      32        "colors": ["any"],
+      33        "strategy": "Assemble a specific set of cards that wins t
+          he game immediately.",
+      34        "signature_cards": [],
+     ...
+      36      },
+      37      {
+      38        "name": "Ramp",
+      39 +      "strategy_type": "ramp",                                 
+      40        "colors": ["any"],
+      41        "strategy": "Accelerate mana to deploy expensive, game-en
+          ding threats ahead of schedule.",
+      42        "signature_cards": [],
+
+  Read 1 file (ctrl+o to expand)
+
+● Write(forge-llm-sidecar/app/knowledge/archetypes/constructed.json)
+  ⎿  Added 6 lines
+       4    "archetypes": [
+       5      {
+       6        "name": "Mono-Red Aggro",
+       7 +      "strategy_type": "aggro",                                
+       8        "colors": ["R"],
+       9        "strategy": "Apply pressure with one-drop creatures and f
+          inish with burn.",
+      10        "signature_cards": ["Monastery Swiftspear", "Lightning Bo
+          lt", "Kumano Faces Kakkazan", "Play with Fire"],
+     ...
+      12      },
+      13      {
+      14        "name": "Izzet Prowess",
+      15 +      "strategy_type": "tempo",                                
+      16        "colors": ["U", "R"],
+      17        "strategy": "Aggro-tempo: cheap spells trigger prowess cr
+          eatures while interacting.",
+      18        "signature_cards": ["Monastery Swiftspear", "Slickshot Sh
+          ow-Off", "Lightning Bolt", "Spell Pierce"],
+     ...
+      20      },
+      21      {
+      22        "name": "Azorius Control",
+      23 +      "strategy_type": "control",                              
+      24        "colors": ["W", "U"],
+      25        "strategy": "Counter and sweep threats, then win with a p
+          laneswalker or a single finisher.",
+      26        "signature_cards": ["Wrath of God", "Counterspell", "Supr
+          eme Verdict", "The Wandering Emperor"],
+     ...
+      28      },
+      29      {
+      30        "name": "Golgari Midrange",
+      31 +      "strategy_type": "midrange",                             
+      32        "colors": ["B", "G"],
+      33        "strategy": "Grind with efficient removal and resilient, 
+          value-laden creatures.",
+      34        "signature_cards": ["Llanowar Elves", "Sheoldred, the Apo
+          calypse", "Cut Down", "Glissa Sunslayer"],
+     ...
+      36      },
+      37      {
+      38        "name": "Mono-Green Devotion",
+      39 +      "strategy_type": "ramp",                                 
+      40        "colors": ["G"],
+      41        "strategy": "Ramp with mana creatures into powerful midra
+          nge and combo payoffs.",
+      42        "signature_cards": ["Llanowar Elves", "Cavalier of Thorns
+          ", "Nykthos, Shrine to Nyx", "Storm the Festival"],
+     ...
+      44      },
+      45      {
+      46        "name": "Selesnya Tokens",
+      47 +      "strategy_type": "aggro",                                
+      48        "colors": ["G", "W"],
+      49        "strategy": "Flood the board with tokens and pump them wi
+          th anthems.",
+      50        "signature_cards": ["Wedding Announcement", "Intrepid Adv
+          ersary", "Scute Swarm"],
+
+  Read 1 file (ctrl+o to expand)
+
+● Write(forge-llm-sidecar/app/knowledge/archetypes/commander.json)
+  ⎿  Added 5 lines
+       4    "archetypes": [
+       5      {
+       6        "name": "Voltron",
+       7 +      "strategy_type": "midrange",                             
+       8        "colors": ["any"],
+       9        "strategy": "Suit up the commander with auras/equipment a
+          nd win with commander damage.",
+      10        "signature_cards": ["Swiftfoot Boots", "Lightning Greaves
+          ", "auras", "equipment"],
+     ...
+      12      },
+      13      {
+      14        "name": "Tokens / Go-Wide",
+      15 +      "strategy_type": "aggro",                                
+      16        "colors": ["G", "W"],
+      17        "strategy": "Generate a wide board of tokens and overrun 
+          with anthems.",
+      18        "signature_cards": ["token generators", "anthem effects",
+           "overrun effects"],
+     ...
+      20      },
+      21      {
+      22        "name": "Spellslinger",
+      23 +      "strategy_type": "combo",                                
+      24        "colors": ["U", "R"],
+      25        "strategy": "Cast many instants/sorceries with magecraft 
+          and storm-like payoffs.",
+      26        "signature_cards": ["cantrips", "copy effects", "magecraf
+          t payoffs"],
+     ...
+      28      },
+      29      {
+      30        "name": "Aristocrats",
+      31 +      "strategy_type": "midrange",                             
+      32        "colors": ["B"],
+      33        "strategy": "Sacrifice creatures for value and drain oppo
+          nents with death triggers.",
+      34        "signature_cards": ["sacrifice outlets", "Blood Artist ef
+          fects", "token fodder"],
+     ...
+      36      },
+      37      {
+      38        "name": "Ramp / Big Mana",
+      39 +      "strategy_type": "ramp",                                 
+      40        "colors": ["G"],
+      41        "strategy": "Accelerate mana to deploy oversized threats 
+          far ahead of curve.",
+      42        "signature_cards": ["mana rocks", "land ramp", "expensive
+           bombs"],
+
+● Write(forge-llm-sidecar/tests/test_graph.py)
+  ⎿  Added 45 lines, removed 9 lines
+       4  
+       5  from app.graph import get_graph
+       6  from app.knowledge import format_detect, loader, metagame
+       7 -from app.nodes import deck_recognition                         
+       7 +from app.nodes import game_advisor                             
+       8  
+       9  
+      10  @pytest.fixture(autouse=True)
+      11  def _offline():
+      12      """Keep graph tests offline: pre-seed the per-game format c
+          ache for the
+      13      sample game so the node never makes a network call to detec
+          t the format."""
+      14 -    deck_recognition._resolved_format.clear()                  
+      15 -    deck_recognition._resolved_format["t"] = "modern"          
+      14 +    game_advisor._resolved_format.clear()                      
+      15 +    game_advisor._own_archetype.clear()                        
+      16 +    game_advisor._resolved_format["t"] = "modern"              
+      17      yield
+      17 -    deck_recognition._resolved_format.clear()                  
+      18 +    game_advisor._resolved_format.clear()                      
+      19 +    game_advisor._own_archetype.clear()                        
+      20  
+      21  
+      22  @pytest.fixture
+     ...
+      44              },
+      45          ],
+      46          "deck_cards": ["Lightning Bolt", "Ragavan, Nimble Pilfe
+          rer"],
+      47 +        "hand": ["Mountain", "Lightning Bolt"],                
+      48 +        "own_board": ["Mountain"],                             
+      49          "alternatives": [],
+      50      }
+      51  
+      52  
+      53  @pytest.mark.asyncio
+      50 -async def test_graph_returns_archetype(monkeypatch, sample_stat
+         -e):                                                            
+      54 +async def test_graph_returns_archetype_and_piloting(monkeypatch
+         +, sample_state):                                               
+      55      async def fake_generate_json(prompt, system=None):
+      56          return {
+      57              "archetype": "Boros Energy",
+      58              "confidence": 0.8,
+      59              "reasoning": "Aggressive red cards.",
+      60              "alternatives": [],
+      61 +            "recommended_play": "Cast Lightning Bolt at their c
+         +reature.",                                                     
+      62 +            "play_reasoning": "Removing their threat keeps the 
+         +race in our favor.",                                           
+      63 +            "play_alternatives": ["Play a land and pass"],     
+      64          }
+      65  
+      59 -    monkeypatch.setattr(deck_recognition, "generate_json", fake
+         -_generate_json)                                                
+      66 +    monkeypatch.setattr(game_advisor, "generate_json", fake_gen
+         +erate_json)                                                    
+      67      result = await get_graph().ainvoke(sample_state)
+      68      assert result["archetype"] == "Boros Energy"
+      69      assert result["resolved_format"] == "modern"
+      70      assert 0.0 <= result["confidence"] <= 1.0
+      71 +    # piloting outputs are present alongside recognition output
+         +s                                                              
+      72 +    assert result["recommended_play"].startswith("Cast Lightnin
+         +g Bolt")                                                       
+      73 +    assert result["own_archetype"]  # identified deterministica
+         +lly from deck_cards                                            
+      74  
+      75  
+      76  @pytest.mark.asyncio
+      77 +async def test_own_archetype_identified_and_cached(monkeypatch,
+         + sample_state):                                                
+      78 +    async def fake_generate_json(prompt, system=None):         
+      79 +        return {"archetype": "Boros Energy", "confidence": 0.7,
+         + "reasoning": "", "alternatives": []}                          
+      80 +                                                               
+      81 +    monkeypatch.setattr(game_advisor, "generate_json", fake_gen
+         +erate_json)                                                    
+      82 +    await get_graph().ainvoke(sample_state)                    
+      83 +    # Ragavan is a Boros Energy signature card -> deterministic
+         + match, cached.                                                
+      84 +    assert "t" in game_advisor._own_archetype                  
+      85 +    assert game_advisor._own_archetype["t"][0] == "Boros Energy
+         +"                                                              
+      86 +                                                               
+      87 +                                                               
+      88 +@pytest.mark.asyncio                                           
+      89  async def test_confidence_is_clamped(monkeypatch, sample_state)
+          :
+      90      async def fake_generate_json(prompt, system=None):
+      91          return {"archetype": "Boros Energy", "confidence": 5, "
+          reasoning": "", "alternatives": []}
+      92  
+      71 -    monkeypatch.setattr(deck_recognition, "generate_json", fake
+         -_generate_json)                                                
+      93 +    monkeypatch.setattr(game_advisor, "generate_json", fake_gen
+         +erate_json)                                                    
+      94      result = await get_graph().ainvoke(sample_state)
+      95      assert result["confidence"] == 1.0
+      96  
+     ...
+      105              "alternatives": [],
+      106          }
+      107  
+       86 -    monkeypatch.setattr(deck_recognition, "generate_json", fak
+          -e_generate_json)                                              
+      108 +    monkeypatch.setattr(game_advisor, "generate_json", fake_ge
+          +nerate_json)                                                  
+      109      result = await get_graph().ainvoke(sample_state)
+      110      assert result["confidence"] <= 0.4
+      111  
+      112  
+      113  @pytest.mark.asyncio
+      114 +async def test_llm_failure_is_fail_soft(monkeypatch, sample_st
+          +ate):                                                         
+      115 +    async def boom(prompt, system=None):                      
+      116 +        raise game_advisor.LLMError("server down")            
+      117 +                                                              
+      118 +    monkeypatch.setattr(game_advisor, "generate_json", boom)  
+      119 +    result = await get_graph().ainvoke(sample_state)          
+      120 +    assert result["archetype"] == "Unknown"                   
+      121 +    assert result["confidence"] == 0.0                        
+      122 +    assert result["recommended_play"] == ""                   
+      123 +                                                              
+      124 +                                                              
+      125 +@pytest.mark.asyncio                                          
+      126  async def test_metagame_reaches_the_prompt(monkeypatch, sample
+           _state):
+      127      """Scraped metagame archetypes + shares should be in the L
+           LM prompt."""
+      128      captured = {}
+     ...
+      131          captured["prompt"] = prompt
+      132          return {"archetype": "Boros Energy", "confidence": 0.7
+           , "reasoning": "", "alternatives": []}
+      133  
+      100 -    monkeypatch.setattr(deck_recognition, "generate_json", fak
+          -e_generate_json)                                              
+      134 +    monkeypatch.setattr(game_advisor, "generate_json", fake_ge
+          +nerate_json)                                                  
+      135      await get_graph().ainvoke(sample_state)
+      136      assert "%" in captured["prompt"]
+      137      assert "metagame" in captured["prompt"].lower()
+      138 +    # the AI's own piloting guide is included in the prompt to
+          +o                                                             
+      139 +    assert "deck guidance" in captured["prompt"].lower()      
+      140  
+      141  
+      142  def test_metagame_data_files_load():
+
+● Write(forge-llm-sidecar/tests/test_piloting.py)
+  ⎿  Wrote 78 lines to forge-llm-sidecar/tests/test_piloting.py
+        hetype id)."""he piloting-guidance layer (schema, loader, own-arc
+      2 
+      3 import pytest
+      4 from pydantic import ValidationError
+      5 
+      7 from app.knowledge.piloting_schema import PilotingGuide, Strategy
+        Type
+      8 
+      9 GENERIC_STRATEGIES = ["aggro", "tempo", "midrange", "control", "c
+        ombo", "ramp"]
+     … +77 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1/forge-llm-sidecar && ls .venv/bin/python
+       2>/dev/null && (.venv/bin/python -c "import pytest, fastapi, pydantic,
+      langgraph" 2>&1…)
+  ⎿  NO VENV
+
+● Bash(python3 -m venv .venv && .venv/bin/pip install -q -e ".[dev]" 2>&1 | tail
+       -5 && echo "INSTALL DONE")
+  ⎿  INSTALL DONE
+  ⎿  (timeout 5m)
+
+● Bash(.venv/bin/ruff check . 2>&1 | tail -15 && echo "---BLACK---" &&
+      .venv/bin/black --check . 2>&1 | tail -8 && echo "---PYTEST---" &&
+      .venv/bin/pytest -q 2>&1 | ta…)
+  ⎿  F401 [*] `json` imported but unused
+       --> app/knowledge/piloting.py:17:8
+        |
+     … +20 lines (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/app/knowledge/piloting.py)
+  ⎿  Removed 1 line
+      14  from __future__ import annotations
+      15  
+      16  import functools
+      17 -import json                                                    
+      17  import logging
+      18  from pathlib import Path
+      19  
+
+● Bash(.venv/bin/black -q . 2>&1 | tail -3 && .venv/bin/ruff check . 2>&1 | tail
+       -3 && echo "---" && .venv/bin/pytest -q 2>&1 | tail -4)
+  ⎿  All checks passed!
+     ---
+     .........................
+     … +2 lines (ctrl+o to expand)
+
+● Bash(.venv/bin/python -c "
+      from app.knowledge.piloting import get_piloting_guide,
+      identify_own_archetype…)
+  ⎿  guide: Generic Midrange StrategyType.MIDRANGE
+     own: ('Boros Energy', <StrategyType.MIDRANGE: 'midrange'>)
+
+● Write(forge-ai/src/main/java/forge/ai/llm/RecognitionRequest.java)
+  ⎿  Error writing file
+  Read 1 file (ctrl+o to expand)
+
+● Write(forge-ai/src/main/java/forge/ai/llm/RecognitionRequest.java)
+  ⎿  Added 32 lines, removed 3 lines
+      1  package forge.ai.llm;
+      2  
+      3  import java.util.List;
+      4 +import java.util.Map;                                           
+      5  
+      6  import com.google.gson.annotations.SerializedName;
+      7  
+     ...
+      12   * <p>This record is the Forge adapter's view of the client-agn
+          ostic
+      13   * recognition contract (see {@code docs/ADAPTERS.md} in the si
+          decar). Any MTG
+      14   * client can act as an adapter by producing this same JSON sha
+          pe.</p>
+      15 + *                                                             
+      16 + * <p>The live-state fields ({@code hand}, {@code ownBoard}, ..
+         +.) feed the                                                    
+      17 + * sidecar's piloting advice. They are optional: the sidecar st
+         +ill returns                                                    
+      18 + * archetype-level advice when they are empty. Capturing real b
+         +oard state is a                                                
+      19 + * follow-up — see {@code docs/ADAPTERS.md}.</p>               
+      20   */
+      21  public record RecognitionRequest(
+      22          /** Identifies the calling client/adapter — always {@co
+          de "forge"} here. */
+     ...
+      26          @SerializedName("opponent_seat") int opponentSeat,
+      27          int turn,
+      28          List<Observation> observations,
+      23 -        /** The AI's own deck (card names) — lets the sidecar d
+         -etect the                                                      
+      24 -         *  precise format when Forge only reports a generic ga
+         -me type. */                                                    
+      25 -        @SerializedName("deck_cards") List<String> deckCards) {
+      29 +        /** The AI's own deck (card names) — lets the sidecar d
+         +etect the precise                                              
+      30 +         *  format and identify the AI's own archetype for pilo
+         +ting advice. */                                                
+      31 +        @SerializedName("deck_cards") List<String> deckCards,  
+      32 +        /** Cards in the AI's hand. */                         
+      33 +        List<String> hand,                                     
+      34 +        /** Card names on the AI's battlefield. */             
+      35 +        @SerializedName("own_board") List<String> ownBoard,    
+      36 +        /** Card names on the opponent's battlefield. */       
+      37 +        @SerializedName("opponent_board") List<String> opponent
+         +Board,                                                         
+      38 +        /** Card names in the AI's graveyard. */               
+      39 +        @SerializedName("your_graveyard") List<String> yourGrav
+         +eyard,                                                         
+      40 +        /** Card names in the opponent's graveyard. */         
+      41 +        @SerializedName("opponent_graveyard") List<String> oppo
+         +nentGraveyard,                                                 
+      42 +        /** Player name/seat -> life total. */                 
+      43 +        @SerializedName("life_totals") Map<String, Integer> lif
+         +eTotals) {                                                     
+      44  
+      45      /** Identifier this (Forge) adapter sends as the {@code cli
+          ent} field. */
+      46      public static final String CLIENT = "forge";
+      47 +                                                               
+      48 +    /**                                                        
+      49 +     * Convenience constructor for the recognition-only payload
+         +: the live-state                                               
+      50 +     * fields default to empty until board-state capture is wir
+         +ed up.                                                         
+      51 +     */                                                        
+      52 +    public RecognitionRequest(final String client, final String
+         + gameId, final String format,                                  
+      53 +                              final int opponentSeat, final int
+         + turn,                                                         
+      54 +                              final List<Observation> observati
+         +ons, final List<String> deckCards) {                           
+      55 +        this(client, gameId, format, opponentSeat, turn, observ
+         +ations, deckCards,                                             
+      56 +                List.of(), List.of(), List.of(), List.of(), Lis
+         +t.of(), Map.of());                                             
+      57 +    }                                                          
+      58  }
+
+● Write(forge-ai/src/main/java/forge/ai/llm/RecognitionResult.java)
+  ⎿  Error writing file
+
+  Read 1 file (ctrl+o to expand)
+
+● Write(forge-ai/src/main/java/forge/ai/llm/RecognitionResult.java)
+  ⎿  Added 35 lines, removed 2 lines
+       5  import com.google.gson.annotations.SerializedName;
+       6  
+       7  /**
+       8 - * Response payload returned by the sidecar's {@code /recognize
+         -} endpoint:                                                    
+       9 - * the LLM's guess at the opponent's deck archetype.           
+       8 + * Response payload returned by the sidecar's {@code /recognize
+         +} endpoint: the                                                
+       9 + * LLM's guess at the opponent's deck archetype, plus piloting 
+         +advice for the                                                 
+      10 + * AI's own deck.                                              
+      11   */
+      12  public record RecognitionResult(
+      13          String archetype,
+      14          double confidence,
+      15          String reasoning,
+      16          List<String> alternatives,
+      17 +        /** Advice on how the AI should pilot its own deck; {@c
+         +ode null} on old sidecars. */                                  
+      18 +        PilotingAdvice piloting,                               
+      19          @SerializedName("schema_version") int schemaVersion) {
+      20  
+      21 +    /**                                                        
+      22 +     * Piloting advice for the AI's own deck. Nested in the {@c
+         +ode /recognize}                                                
+      23 +     * response under the {@code piloting} key.                
+      24 +     */                                                        
+      25 +    public record PilotingAdvice(                              
+      26 +            @SerializedName("own_archetype") String ownArchetyp
+         +e,                                                             
+      27 +            @SerializedName("guide_source") String guideSource,
+      28 +            @SerializedName("recommended_play") String recommen
+         +dedPlay,                                                       
+      29 +            String reasoning,                                  
+      30 +            List<String> alternatives,                         
+      31 +            @SerializedName("mulligan_advice") String mulliganA
+         +dvice) {                                                       
+      32 +    }                                                          
+      33 +                                                               
+      34      /** Human-readable one-liner suitable for the game log. */
+      35      public String toLogMessage() {
+      36          return String.format("LLM deck guess: opponent is playi
+          ng '%s' (confidence %.0f%%)",
+      37                  archetype, confidence * 100.0);
+      38      }
+      39 +                                                               
+      40 +    /**                                                        
+      41 +     * Human-readable piloting advice for the game log, or {@co
+         +de null} if the                                                
+      42 +     * sidecar returned no usable advice.                      
+      43 +     */                                                        
+      44 +    public String toPilotingLogMessage() {                     
+      45 +        if (piloting == null) {                                
+      46 +            return null;                                       
+      47 +        }                                                      
+      48 +        final boolean hasMulligan = piloting.mulliganAdvice() !
+         += null                                                         
+      49 +                && !piloting.mulliganAdvice().isEmpty();       
+      50 +        final String advice = hasMulligan ? piloting.mulliganAd
+         +vice() : piloting.recommendedPlay();                           
+      51 +        if (advice == null || advice.isEmpty()) {              
+      52 +            return null;                                       
+      53 +        }                                                      
+      54 +        return String.format("LLM piloting advice (%s): %s", pi
+         +loting.ownArchetype(), advice);                                
+      55 +    }                                                          
+      56  }
+
+  Read 1 file (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1/forge-llm-sidecar/docs && wc -l *.md &&
+      echo "===API===" && cat API.md)
+  ⎿     55 ADAPTERS.md
+       120 API.md
+       110 ARCHITECTURE.md
+     … +55 lines (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/docs/API.md)
+  ⎿  File must be read first
+
+  Read 1 file (ctrl+o to expand)
+
+● Write(forge-llm-sidecar/docs/API.md)
+  ⎿  Added 83 lines, removed 9 lines
+      30  
+      31  ## `POST /recognize`
+      32  
+      33 -Run the deck-recognition graph for one opponent.               
+      33 +Run the game-advisor graph for one opponent: it identifies the 
+         +opponent's                                                     
+      34 +archetype **and** advises the AI on piloting its own deck — bot
+         +h in a single                                                  
+      35 +LLM call.                                                      
+      36  
+      37  **Request** — `RecognitionRequest`
+      38  
+     ...
+      48      {"turn": 2, "event": "spell", "card": "Monastery Swiftspear
+          ",  "cmc": 1, "colors": ["R"],     "types": ["Creature"]},
+      49      {"turn": 3, "event": "spell", "card": "Lightning Bolt",    
+              "cmc": 1, "colors": ["R"],     "types": ["Instant"]}
+      50    ],
+      49 -  "deck_cards": ["Ragavan, Nimble Pilferer", "Lightning Bolt", 
+         -"Monastery Swiftspear"]                                        
+      51 +  "deck_cards": ["Ragavan, Nimble Pilferer", "Lightning Bolt", 
+         +"Monastery Swiftspear"],                                       
+      52 +  "hand": ["Lightning Bolt", "Mountain"],                      
+      53 +  "own_board": ["Ragavan, Nimble Pilferer", "Mountain", "Mounta
+         +in"],                                                          
+      54 +  "opponent_board": ["Monastery Swiftspear"],                  
+      55 +  "your_graveyard": [],                                        
+      56 +  "opponent_graveyard": ["Lightning Bolt"],                    
+      57 +  "life_totals": {"ai": 18, "opponent": 14}                    
+      58  }
+      59  ```
+      60  
+      61  | Field | Type | Notes |
+      62  |---|---|---|
+      63  | `client` | string | Identifies the calling client/adapter (e.
+          g. `"forge"`). See [ADAPTERS.md](ADAPTERS.md). |
+      56 -| `game_id` | string | Identifies the game; used to cache the d
+         -etected format. |                                              
+      64 +| `game_id` | string | Identifies the game; caches the detected
+         + format and the AI's own archetype. |                          
+      65  | `format` | string | The client's game type (e.g. `Constructed
+          `, `Commander`). Often generic. |
+      66  | `opponent_seat` | int | The opponent's seat/id. Informational
+          . |
+      59 -| `turn` | int | Current game turn. |                          
+      67 +| `turn` | int | Current game turn. `0` requests mulligan advic
+         +e instead of a play. |                                         
+      68  | `observations` | array | The opponent's public plays so far, 
+          chronological. |
+      61 -| `deck_cards` | array of string | The controlled player's deck
+         -list (card names). Used to detect the precise format. Optional.
+         - |                                                             
+      69 +| `deck_cards` | array of string | The AI's own decklist (card 
+         +names). Detects the precise format and identifies the AI's own 
+         +archetype. Optional. |                                         
+      70 +| `hand` | array of string | The AI's current hand. Optional — 
+         +feeds piloting advice. |                                       
+      71 +| `own_board` / `opponent_board` | array of string | Battlefiel
+         +d card names. Optional. |                                      
+      72 +| `your_graveyard` / `opponent_graveyard` | array of string | G
+         +raveyard card names. Optional. |                               
+      73 +| `life_totals` | object | Player name/seat → life total. Optio
+         +nal. |                                                         
+      74  
+      75 +The `hand` / board / graveyard / `life_totals` fields are optio
+         +nal: when                                                      
+      76 +omitted the sidecar still returns archetype-level piloting advi
+         +ce from the                                                    
+      77 +guide. See [ADAPTERS.md](ADAPTERS.md) on capturing them.       
+      78 +                                                               
+      79  **`Observation` object**
+      80  
+      81  | Field | Type | Notes |
+     ...
+       95    "confidence": 0.72,
+       96    "reasoning": "Low-curve red spells plus a prowess one-drop a
+           nd a UR dual land.",
+       97    "alternatives": ["Mono-Red Aggro", "Izzet Murktide"],
+       82 -  "schema_version": 1                                         
+       98 +  "piloting": {                                               
+       99 +    "own_archetype": "Boros Energy",                          
+      100 +    "guide_source": "modern/boros-energy",                    
+      101 +    "recommended_play": "Cast Lightning Bolt on Monastery Swif
+          +tspear to keep the race ahead.",                              
+      102 +    "reasoning": "Removing their only threat preserves our clo
+          +ck; we are the beatdown here.",                               
+      103 +    "alternatives": ["Attack with Ragavan, then pass"],       
+      104 +    "mulligan_advice": ""                                     
+      105 +  },                                                          
+      106 +  "schema_version": 2                                         
+      107  }
+      108  ```
+      109  
+      110  | Field | Type | Notes |
+      111  |---|---|---|
+       88 -| `archetype` | string | Best-guess archetype, or `"Unknown"`.
+          - |                                                            
+      112 +| `archetype` | string | Best-guess opponent archetype, or `"U
+          +nknown"`. |                                                   
+      113  | `confidence` | number | `0.0`–`1.0`. Capped low for off-meta
+           game guesses. |
+      114  | `reasoning` | string | One or two sentences explaining the g
+           uess. |
+      115  | `alternatives` | array of string | Up to three other plausib
+           le archetypes. |
+       92 -| `schema_version` | int | Response contract version (currentl
+          -y `1`). |                                                     
+      116 +| `piloting` | object | Advice on piloting the AI's own deck (
+          +see below). May be `null`. |                                  
+      117 +| `schema_version` | int | Response contract version (currentl
+          +y `2`). |                                                     
+      118  
+      119 +**`piloting` object** — `PilotingAdvice`                      
+      120 +                                                              
+      121 +| Field | Type | Notes |                                      
+      122 +|---|---|---|                                                 
+      123 +| `own_archetype` | string | The AI's own archetype, identifie
+          +d from `deck_cards`. |                                        
+      124 +| `guide_source` | string | Which guide answered: `<format>/<s
+          +lug>` or `generic/<strategy>`. |                              
+      125 +| `recommended_play` | string | The single best play this turn
+          + (empty on turn `0`). |                                       
+      126 +| `reasoning` | string | One or two sentences explaining the r
+          +ecommendation. |                                              
+      127 +| `alternatives` | array of string | Up to three other reasona
+          +ble plays. |                                                  
+      128 +| `mulligan_advice` | string | Keep/mulligan advice; populated
+          + instead of `recommended_play` on turn `0`. |                 
+      129 +                                                              
+      130  The endpoint never returns a 5xx for a model/data failure — it
+            degrades to
+       95 -`archetype: "Unknown", confidence: 0.0`.                      
+      131 +`archetype: "Unknown", confidence: 0.0` and empty piloting adv
+          +ice.                                                          
+      132  
+      133  ## `GET /metagame`
+      134  
+     ...
+      154    ]
+      155  }
+      156  ```
+      157 +                                                              
+      158 +## `GET /piloting`                                            
+      159 +                                                              
+      160 +Debug endpoint: shows the piloting guide resolved for an arche
+          +type.                                                         
+      161 +                                                              
+      162 +**Query parameters**                                          
+      163 +                                                              
+      164 +| Param | Default | Notes |                                   
+      165 +|---|---|---|                                                 
+      166 +| `format` | `modern` | A Forge format name or a metagame slug
+          +. |                                                           
+      167 +| `archetype` | `""` | Archetype name. When empty, lists the a
+          +vailable guides instead. |                                    
+      168 +                                                              
+      169 +**Response** (with `archetype`)                               
+      170 +                                                              
+      171 +```json                                                       
+      172 +{                                                             
+      173 +  "requested": "modern",                                      
+      174 +  "meta_slug": "modern",                                      
+      175 +  "archetype": "Boros Energy",                                
+      176 +  "guide": {                                                  
+      177 +    "archetype": "Boros Energy",                              
+      178 +    "strategy_type": "aggro",                                 
+      179 +    "overview": "...",                                        
+      180 +    "win_conditions": ["..."],                                
+      181 +    "mulligan": {"keep_criteria": ["..."], "mulligan_criteria"
+          +: ["..."], "examples": []},                                   
+      182 +    "game_plan": {"early_game": ["..."], "mid_game": ["..."], 
+          +"late_game": ["..."]},                                        
+      183 +    "key_cards": [{"name": "...", "role": "...", "notes": "...
+          +"}],                                                          
+      184 +    "sequencing_tips": ["..."],                               
+      185 +    "matchups": [{"opponent_archetype": "...", "advice": "..."
+          +, "watch_for": ["..."]}],                                     
+      186 +    "common_threats": ["..."],                                
+      187 +    "metadata": {"source": "...", "generated_at": "...", "mode
+          +l": "...", "schema_version": 1}                               
+      188 +  }                                                           
+      189 +}                                                             
+      190 +```                                                           
+      191 +                                                              
+      192 +When the archetype has no specific guide, the loader falls bac
+          +k to a generic                                                
+      193 +guide (`generic/<strategy>` → `generic/midrange`). See        
+      194 +[PILOTING.md](PILOTING.md).                                   
+
+● Write(forge-llm-sidecar/docs/PILOTING.md)
+  ⎿  Wrote 100 lines to forge-llm-sidecar/docs/PILOTING.md
+      2 # Deck piloting guidance
+      3 The sidecar advises the AI on how to play *its own* deck. Per-arc
+        hetype JSON
+        ions, keyg guides** carry mulligan rules, a game plan, win condit
+      5 cards, matchup notes, and meta threats. The `game_advisor` node f
+        eeds the
+        tion ist guide into the LLM prompt so the model's play recommenda
+      7 grounded in archetype-specific strategy.
+      8 
+      9 ## Where guides live
+     … +127 lines (ctrl+o to expand)
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/docs/ARCHITECTURE.md)
+  ⎿  Added 2 lines, removed 1 line
+      19              ┌──────────────────── forge-llm-sidecar (this app) 
+          ────────────────┐
+      20              │  FastAPI  (app/main.py)                          
+                          │
+      21              │    └─ LangGraph graph  (app/graph.py)            
+                          │
+      22 -            │         └─ deck_recognition node  (app/nodes/deck
+         -_recognition.py)│                                              
+      22 +            │         └─ game_advisor node  (app/nodes/game_adv
+         +isor.py)        │                                              
+      23              │              ├─ metagame loader   (app/knowledge/
+          metagame.py)    │
+      24              │              ├─ curated KB        (app/knowledge/
+          loader.py)      │
+      25 +            │              ├─ piloting guides   (app/knowledge/
+         +piloting.py)    │                                              
+      26              │              ├─ format detector   (app/knowledge/
+          format_detect)  │
+      27              │              └─ LLM client        (app/llm_client
+          .py)            │
+      28              └────────┬─────────────────────┬───────────────────
+          ─┬──────────────┘
+
+● Update(forge-llm-sidecar/docs/ARCHITECTURE.md)
+  ⎿  Added 7 lines, removed 3 lines
+      43  
+      44  | Module | Responsibility |
+      45  |---|---|
+      46 -| `app/main.py` | FastAPI app; `/health`, `/recognize`, `/metag
+         -ame`; compiles the graph at startup. |                         
+      46 +| `app/main.py` | FastAPI app; `/health`, `/recognize`, `/metag
+         +ame`, `/piloting`; compiles the graph at startup. |            
+      47  | `app/config.py` | Immutable `Config` built from environment v
+          ariables. |
+      48  | `app/schema.py` | Pydantic request/response models + the `Gra
+          phState` TypedDict. |
+      49  | `app/graph.py` | Builds and caches the LangGraph `StateGraph`
+          . |
+      50 -| `app/nodes/deck_recognition.py` | The single graph node: reso
+         -lve format → gather candidates → prompt the LLM → parse. |     
+      50 +| `app/nodes/game_advisor.py` | The single graph node: opponent
+         + recognition + own-deck piloting advice, in one LLM call. |    
+      51  | `app/llm_client.py` | Async client for an OpenAI-compatible L
+          LM server (JSON mode). |
+      52  | `app/knowledge/metagame.py` | Runtime loader for the committe
+          d metagame JSON. |
+      53  | `app/knowledge/loader.py` | Curated archetype knowledge base 
+          + merge logic. |
+      54 +| `app/knowledge/piloting.py` | Piloting-guide loader + determi
+         +nistic own-archetype identification. |                         
+      55 +| `app/knowledge/piloting_schema.py` | Pydantic models for pilo
+         +ting guides. |                                                 
+      56  | `app/knowledge/format_detect.py` | Scryfall-backed format inf
+          erence. |
+      55 -| `app/knowledge/scraper.py` | MTGGoldfish scraper — used only 
+         -by the CI script, never at request time. |                     
+      57 +| `app/knowledge/scraper.py` | MTGGoldfish scraper — used only 
+         +by the CI/builder scripts, never at request time. |            
+      58 +| `app/knowledge/builder_llm.py` | Offline LLM client for the p
+         +iloting-guide builder. |                                       
+      59  | `scripts/scrape_metagame.py` | CLI run weekly by the GitHub A
+          ction. |
+      60 +| `scripts/build_piloting_guides.py` | Offline CLI that generat
+         +es piloting guides with an LLM. |                              
+      61  
+      62  ## Request flow (`POST /recognize`)
+      63  
+
+● Update(forge-llm-sidecar/docs/ARCHITECTURE.md)
+  ⎿  Added 19 lines, removed 12 lines
+       63  
+       64  1. **Forge** observes the opponent's public plays and POSTs a 
+           `RecognitionRequest`.
+       65  2. **`main.py`** builds the initial `GraphState` and calls `gr
+           aph.ainvoke(...)`.
+       66 -3. **`deck_recognition` node**:                               
+       66 +3. **`game_advisor` node**:                                   
+       67     1. `_resolve_meta_slug` — uses the format Forge reported; i
+           f it is generic
+       68        (`Constructed`), infers the precise format from the AI's
+            own decklist via
+       69        Scryfall. Cached per `game_id` so detection runs once pe
+           r game.
+       70     2. Loads the metagame archetypes for that format (`metagame
+           .get_metagame`)
+       71        and merges in curated `strategy`/`tells` detail (`loader
+           .merge_with_curated`).
+       72 -   3. Builds a structured prompt (format, candidate archetypes
+          - with metagame                                                
+       73 -      shares, the opponent's chronological plays).            
+       74 -   4. Calls the local LLM via the OpenAI-compatible API in JSO
+          -N mode.                                                       
+       75 -   5. Parses the result, clamps `confidence` to `[0, 1]`, and 
+          -caps confidence                                               
+       72 +   3. Identifies the AI's *own* archetype from `deck_cards`   
+       73 +      (`piloting.identify_own_archetype` — deterministic, no L
+          +LM; cached per                                                
+       74 +      `game_id`) and loads the matching piloting guide.       
+       75 +   4. Builds one structured prompt (candidate archetypes with 
+          +metagame shares,                                              
+       76 +      the opponent's plays, the AI's own piloting guide, the l
+          +ive board state).                                             
+       77 +   5. Makes a **single** LLM call that returns both the oppone
+          +nt guess and the                                              
+       78 +      piloting advice.                                        
+       79 +   6. Parses the result, clamps `confidence` to `[0, 1]`, and 
+          +caps confidence                                               
+       80        for any archetype outside the known set.
+       77 -4. **`main.py`** returns a `RecognitionResponse`.             
+       81 +4. **`main.py`** returns a `RecognitionResponse` carrying both
+          +.                                                             
+       82  
+       79 -See [API.md](API.md) for the exact wire contract.             
+       83 +See [API.md](API.md) for the exact wire contract and [PILOTING
+          +.md](PILOTING.md)                                             
+       84 +for the piloting layer.                                       
+       85  
+       86  ## The LangGraph graph
+       87  
+       88  ```
+       84 -START ──▶ deck_recognition ──▶ END                            
+       89 +START ──▶ game_advisor ──▶ END                                
+       90  ```
+       91  
+       87 -Currently one node. `GraphState` (in `app/schema.py`) is a `Ty
+          -pedDict` with                                                 
+       88 -`total=False` and deliberately holds more keys than this node 
+          -uses, so future                                               
+       89 -nodes can read/write their own state without changing the HTTP
+          - contract. See                                                
+       90 -[EXTENDING.md](EXTENDING.md) for how to add a node.           
+       92 +One node, by design. Deck recognition and piloting advice are 
+          +merged into a                                                 
+       93 +single node and a single LLM call because the AI re-runs the g
+          +raph on every                                                 
+       94 +action — a second call would add per-action lag. `GraphState` 
+          +(in                                                           
+       95 +`app/schema.py`) is a `TypedDict` with `total=False` and holds
+          + more keys than                                               
+       96 +this node strictly needs, so future nodes can read/write their
+          + own state                                                    
+       97 +without changing the HTTP contract. See [EXTENDING.md](EXTENDI
+          +NG.md).                                                       
+       98  
+       99  ## Metagame data pipeline
+      100  
+
+● Update(forge-llm-sidecar/docs/ARCHITECTURE.md)
+  ⎿  Added 4 lines, removed 1 line
+      113  
+      114  Every external dependency is treated as optional:
+      115  
+      116 -- **LLM server down** → the node returns `archetype: "Unknown"
+          -, confidence: 0.0`.                                           
+      116 +- **LLM server down** → the node returns `archetype: "Unknown"
+          +, confidence: 0.0`                                            
+      117 +  and empty piloting advice.                                  
+      118  - **Scryfall down** → format detection returns `None`; the nod
+           e falls back to
+      119    `DEFAULT_META_FORMAT`.
+      120  - **Metagame file missing** → the node falls back to the curat
+           ed knowledge base.
+      121 +- **Piloting guide missing/invalid** → the loader falls back t
+          +o a generic guide                                             
+      122 +  for the strategy, then to `generic/midrange`.               
+      123  - **Sidecar down entirely** → Forge's client fails soft; the g
+           ame is unaffected.
+      124  
+      125  Nothing in this service is on the game's critical path.
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/docs/ADAPTERS.md)
+  ⎿  Added 2 lines, removed 2 lines
+      2  
+      3  The sidecar is **client-agnostic**. It knows nothing about Forge
+          specifically —
+      4  it accepts a normalized `RecognitionRequest` describing an oppon
+         ent's plays and
+      5 -returns an archetype guess. Anything that can produce that reque
+        -st is an                                                        
+      6 -**adapter**.                                                    
+      5 +the AI's own game state, and returns an archetype guess plus pil
+        +oting advice.                                                   
+      6 +Anything that can produce that request is an **adapter**.       
+      7  
+      8  ```
+      9  ┌──────────────┐   RecognitionRequest    ┌──────────────────────
+         ───┐
+
+● Update(forge-llm-sidecar/docs/ADAPTERS.md)
+  ⎿  Added 14 lines, removed 1 line
+      46  
+      47  - Set the `client` field to a stable identifier for your client
+          .
+      48  - Populate `deck_cards` if you know the controlled player's dec
+          klist — it makes
+      49 -  format detection reliable from turn one. Omit it otherwise; t
+         -he sidecar will                                                
+      49 +  format detection reliable from turn one and lets the sidecar 
+         +identify the                                                   
+      50 +  AI's own archetype for piloting advice. Omit it otherwise; th
+         +e sidecar will                                                 
+      51    fall back to detecting the format from observed cards.
+      52 +- Populate the live-state fields (`hand`, `own_board`, `opponen
+         +t_board`,                                                      
+      53 +  `your_graveyard`, `opponent_graveyard`, `life_totals`) if you
+         + can — they make                                               
+      54 +  the piloting advice concrete. They are optional: with them om
+         +itted the                                                      
+      55 +  sidecar still returns archetype-level advice from the guide. 
+      56  - Treat the sidecar as optional. Calls should be asynchronous a
+          nd fail-soft so
+      57    a missing or slow sidecar never disrupts the game.
+      58  
+      59 +### Forge: live-state capture is a follow-up                   
+      60 +                                                               
+      61 +The Forge adapter's `RecognitionRequest`/`RecognitionResult` re
+         +cords already                                                  
+      62 +carry the piloting fields, but `DeckRecognitionObserver` does n
+         +ot yet *capture*                                               
+      63 +the AI's hand/board/graveyard — it sends only `deck_cards`. Wir
+         +ing that capture                                               
+      64 +(and surfacing piloting advice in the game log) is a separate, 
+         +larger change.                                                 
+      65 +Until then Forge gets archetype-level piloting advice from the 
+         +guide.                                                         
+      66 +                                                               
+      67  The sidecar itself needs **no changes** to support a new adapte
+          r — that is the
+      68  point of the normalized contract.
+  Read 1 file (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/docs/EXTENDING.md)
+  ⎿  Added 1 line, removed 1 line
+      11  some nodes use. Today:
+      12  
+      13  ```
+      14 -START ──▶ deck_recognition ──▶ END                             
+      14 +START ──▶ game_advisor ──▶ END                                 
+      15  ```
+      16  
+      17  Adding a node is three steps: extend the state, write the node,
+           wire it in.
+
+● Update(forge-llm-sidecar/docs/EXTENDING.md)
+  ⎿  Added 1 line, removed 1 line
+      44  _SYSTEM = "You are an MTG strategist. Answer with a single JSON
+           object."
+      45  
+      46  async def strategy_classification_node(state: GraphState) -> Gr
+          aphState:
+      47 -    # The deck_recognition node has already run, so its output 
+         -is available:                                                  
+      47 +    # The game_advisor node has already run, so its output is a
+         +vailable:                                                      
+      48      archetype = state.get("archetype", "Unknown")
+      49      observations = state.get("observations", [])
+      50  
+
+● Update(forge-llm-sidecar/docs/EXTENDING.md)
+  ⎿  Added 4 lines, removed 4 lines
+      77  @functools.lru_cache(maxsize=1)
+      78  def get_graph():
+      79      builder = StateGraph(GraphState)
+      80 -    builder.add_node(_DECK_RECOGNITION, deck_recognition_node) 
+      80 +    builder.add_node(_GAME_ADVISOR, game_advisor_node)         
+      81      builder.add_node(_STRATEGY, strategy_classification_node)
+      82 -    builder.add_edge(START, _DECK_RECOGNITION)                 
+      83 -    builder.add_edge(_DECK_RECOGNITION, _STRATEGY)   # runs aft
+         -er recognition                                                 
+      82 +    builder.add_edge(START, _GAME_ADVISOR)                     
+      83 +    builder.add_edge(_GAME_ADVISOR, _STRATEGY)   # runs after t
+         +he advisor                                                     
+      84      builder.add_edge(_STRATEGY, END)
+      85      return builder.compile()
+      86  ```
+      87  
+      88  Because nodes run in sequence and share `GraphState`, `strategy
+          _classification`
+      89 -sees everything `deck_recognition` produced (`archetype`, `cand
+         -idate_archetypes`,                                             
+      89 +sees everything `game_advisor` produced (`archetype`, `candidat
+         +e_archetypes`,                                                 
+      90  `resolved_format`, …).
+      91  
+      92  ## 4. Surface the result
+
+● Update(forge-llm-sidecar/docs/EXTENDING.md)
+  ⎿  Added 8 lines, removed 4 lines
+      105  
+      106  - **Fail-soft.** A node must always return a valid `GraphState
+           `; never raise
+      107    into the graph. Degrade to a neutral value on any error.
+      108 -- **One LLM concern per node.** Keep prompts focused — separat
+          -e nodes beat one                                              
+      109 -  mega-prompt.                                                
+      108 +- **One LLM concern per node — unless latency says otherwise.*
+          +* Focused prompts                                             
+      109 +  in separate nodes are the default. The `game_advisor` node d
+          +eliberately                                                   
+      110 +  breaks this rule: it does opponent recognition *and* pilotin
+          +g advice in one                                               
+      111 +  call, because the AI re-runs the graph on every action and a
+          + second LLM call                                              
+      112 +  would add noticeable lag. Merge concerns only when per-actio
+          +n latency                                                     
+      113 +  justifies it.                                               
+      114  - **Keep the HTTP contract stable.** Add response fields addit
+           ively and bump
+      115    `SCHEMA_VERSION`; the Java client tolerates unknown fields.
+      112 -- **Cache expensive lookups.** See the per-game format cache (
+          -`_resolved_format`                                            
+      113 -  in `deck_recognition.py`) for the pattern.                  
+      116 +- **Cache expensive lookups.** See the per-game caches (`_reso
+          +lved_format`,                                                 
+      117 +  `_own_archetype` in `game_advisor.py`) for the pattern.     
+
+  Read 1 file (ctrl+o to expand)
+
+● Update(forge-llm-sidecar/docs/DECK_IDENTIFICATION.md)
+  ⎿  Added 6 lines, removed 1 line
+      10  DeckRecognitionObserver  ──POST──▶ FastAPI
+      11  (subscribes to game events)        │
+      12                                   LangGraph graph
+      13 -                                 └─ deck_recognition node      
+      13 +                                 └─ game_advisor node          
+      14                                        └─ LLM call -> JSON respo
+          nse
+      15  ```
+      16  
+      17 +The `game_advisor` node does two things in **one** LLM call: it
+         + identifies the                                                
+      18 +opponent's archetype (covered below) and advises the AI on pilo
+         +ting its own                                                   
+      19 +deck. This document focuses on the recognition half; see       
+      20 +[PILOTING.md](PILOTING.md) for the piloting half.              
+      21 +                                                               
+      22  ### Triggering (Java side: `DeckRecognitionObserver.java`)
+      23  
+      24  - Subscribes to Forge's **Guava EventBus** for game events
+
+● Update(forge-llm-sidecar/docs/DECK_IDENTIFICATION.md)
+  ⎿  Added 2 lines, removed 1 line
+      81  
+      82  - **Read-only / fail-soft**: The sidecar never affects gameplay
+          . If the LLM server is down, Scryfall is down, or the sidecar i
+          tself is offline, the AI just plays normally.
+      83  - **No runtime scraping**: Metagame data is scraped weekly by C
+          I and committed as JSON. The sidecar has no network dependencie
+          s at request time.
+      84 -- **Extensible graph**: The LangGraph currently has one node, b
+         -ut the `GraphState` TypedDict is designed to let future nodes b
+         -e added (play advisor, threat assessment, etc.) without changin
+         -g the HTTP contract.                                           
+      84 +- **Extensible graph**: The LangGraph has one node (`game_advis
+         +or`), but the `GraphState` TypedDict is designed to let future 
+         +nodes be added (threat assessment, etc.) without changing the H
+         +TTP contract.                                                  
+      85 +- **One call, two jobs**: Recognition and piloting advice share
+         + a single LLM call because the AI re-runs the graph on every ac
+         +tion — a second call would add per-action lag.                 
+
+● Update(forge-llm-sidecar/README.md)
+  ⎿  Added 10 lines, removed 5 lines
+       1  # Forge LLM Sidecar
+       2  
+       3  A standalone Python service that runs the LangGraph agent power
+          ing Forge's
+       4 -LLM-assisted AI. The first (and currently only) node is **deck 
+         -recognition**:                                                 
+       5 -given the game format and the opponent's observed plays, it gue
+         -sses which                                                     
+       6 -deck/archetype the opponent is playing.                        
+       4 +LLM-assisted AI. The single node — **`game_advisor`** — does tw
+         +o things in one                                                
+       5 +LLM call:                                                      
+       6  
+       8 -Forge's Java AI calls this service over local HTTP. The guess i
+         -s shown in the                                                 
+       9 -game log only — it does not change how the heuristic AI plays. 
+       7 +- **Deck recognition** — given the game format and the opponent
+         +'s observed                                                    
+       8 +  plays, it guesses which deck/archetype the opponent is playin
+         +g.                                                             
+       9 +- **Piloting advice** — using a per-archetype piloting guide fo
+         +r the AI's own                                                 
+      10 +  deck, it recommends what the AI should play next (see        
+      11 +  [docs/PILOTING.md](docs/PILOTING.md)).                       
+      12  
+      13 +Forge's Java AI calls this service over local HTTP. The recogni
+         +tion guess is                                                  
+      14 +shown in the game log only — it does not change how the heurist
+         +ic AI plays.                                                   
+      15 +                                                               
+      16  ## Architecture
+      17  
+      18  ```
+
+● Update(forge-llm-sidecar/README.md)
+  ⎿  Added 4 lines, removed 3 lines
+      18  ```
+      19  client + adapter --HTTP--> this sidecar (FastAPI + LangGraph) -
+          -HTTP--> llama.cpp (local LLM)
+      20                                    |                          \-
+          -HTTP--> Scryfall (format detect)
+      21 -                                  \-- metagame_data/*.json (ref
+         -reshed weekly by a GitHub Action)                              
+      21 +                                  ├─ metagame_data/*.json (refr
+         +eshed weekly by a GitHub Action)                               
+      22 +                                  \─ piloting/*.json      (deck
+         +-piloting guides)                                              
+      23  ```
+      24  
+      24 -The LangGraph graph is `START -> deck_recognition -> END`. New 
+         -nodes can be                                                   
+      25 -added later without changing the HTTP contract. The sidecar is 
+         -client-agnostic;                                               
+      25 +The LangGraph graph is `START -> game_advisor -> END`. New node
+         +s can be added                                                 
+      26 +later without changing the HTTP contract. The sidecar is client
+         +-agnostic;                                                     
+      27  Forge is the reference *adapter* — see [docs/ADAPTERS.md](docs/
+          ADAPTERS.md).
+      28  
+      29  ## Requirements
+
+● Update(forge-llm-sidecar/README.md)
+  ⎿  Added 6 lines
+      72  | `FORMAT_DETECT_ENABLE` | `true`                        | Dete
+          ct the precise format via Scryfall when ambiguous |
+      73  | `DEFAULT_META_FORMAT`  | `standard`                    | Fall
+          back format when detection fails                  |
+      74  
+      75 +The offline piloting-guide builder (`scripts/build_piloting_gui
+         +des.py`) has its                                               
+      76 +own optional LLM config — `BUILDER_LLM_BASE_URL`, `BUILDER_LLM_
+         +API_KEY`,                                                      
+      77 +`BUILDER_MODEL_NAME`, `BUILDER_LLM_TIMEOUT` — each defaulting t
+         +o the matching                                                 
+      78 +`LLM_*` value. See [docs/PILOTING.md](docs/PILOTING.md). The ru
+         +ntime sidecar                                                  
+      79 +never uses these.                                              
+      80 +                                                               
+      81  ### Metagame knowledge (offline at runtime)
+      82  
+      83  The sidecar does **not** scrape the internet on the request pat
+          h. The metagame
+
+● Update(forge-llm-sidecar/README.md)
+  ⎿  Added 4 lines, removed 1 line
+      110  
+      111  - `GET /health` — `{"status":"ok","model":"...","metagame_enab
+           led":...}`. Used
+      112    by Forge for a fail-soft availability check.
+      113 -- `POST /recognize` — see `app/schema.py` for the request/resp
+          -onse models.                                                  
+      113 +- `POST /recognize` — opponent recognition + own-deck piloting
+          + advice. See                                                  
+      114 +  `app/schema.py` for the request/response models.            
+      115  - `GET /metagame?format=modern` — debug: shows the loaded meta
+           game breakdown.
+      116 +- `GET /piloting?format=modern&archetype=...` — debug: shows t
+          +he resolved                                                   
+      117 +  piloting guide (omit `archetype` to list available guides). 
+      118  
+      119  ### Quick manual test
+      120  
+
+● Update(forge-llm-sidecar/README.md)
+  ⎿  Added 9 lines
+       97  if the site's markup changes, only that module needs adjusting
+           . Curated detail
+       98  files in `app/knowledge/archetypes/` still supply `strategy`/`
+           tells` enrichment.
+       99  
+      100 +### Piloting guides (offline at runtime)                      
+      101 +                                                              
+      102 +Per-archetype JSON **piloting guides** (`app/knowledge/pilotin
+          +g/`) tell the LLM                                             
+      103 +how to play the AI's own deck — mulligan rules, game plan, win
+          + conditions, key                                              
+      104 +cards, matchup notes. Specific guides fall back to hand-author
+          +ed generic guides                                             
+      105 +(`piloting/generic/<strategy>.json`). They are generated offli
+          +ne by                                                         
+      106 +`scripts/build_piloting_guides.py` and validated against a Pyd
+          +antic schema. See                                             
+      107 +[docs/PILOTING.md](docs/PILOTING.md).                         
+      108 +                                                              
+      109  ### Format detection
+      110  
+      111  Forge reports a generic `Constructed` game type without naming
+            the format. The
+
+● Update(forge-llm-sidecar/README.md)
+  ⎿  Added 10 lines, removed 5 lines
+      164  ```
+      165  forge-llm-sidecar/
+      166  ├─ app/
+      167 -│  ├─ main.py                 FastAPI app: /health, /recognize
+          -, /metagame                                                   
+      167 +│  ├─ main.py                 FastAPI app: /health, /recognize
+          +, /metagame, /piloting                                        
+      168  │  ├─ config.py               Environment-driven configuration
+      169  │  ├─ schema.py               Request/response models + GraphS
+           tate
+      170  │  ├─ graph.py                LangGraph graph definition
+      171  │  ├─ llm_client.py           OpenAI-compatible LLM client (ll
+           ama.cpp)
+      172  │  ├─ nodes/
+      173 -│  │  └─ deck_recognition.py  The deck-recognition graph node 
+      173 +│  │  └─ game_advisor.py      The graph node: recognition + pi
+          +loting advice                                                 
+      174  │  └─ knowledge/
+      175  │     ├─ metagame.py          Runtime loader for scraped metag
+           ame data
+      176 -│     ├─ scraper.py           MTGGoldfish scraper (CI only)   
+      176 +│     ├─ scraper.py           MTGGoldfish scraper (CI/builder 
+          +only)                                                         
+      177  │     ├─ format_detect.py     Scryfall-based format detection
+      178  │     ├─ loader.py            Curated archetype knowledge base
+      179 +│     ├─ piloting.py          Piloting-guide loader + own-arch
+          +etype id                                                      
+      180 +│     ├─ piloting_schema.py   Pydantic models for piloting gui
+          +des                                                           
+      181 +│     ├─ builder_llm.py       Offline LLM client for the guide
+          + builder                                                      
+      182  │     ├─ archetypes/          Hand-curated archetype detail (s
+           trategy/tells)
+      180 -│     └─ metagame_data/       Scraped metagame JSON (refreshed
+          - weekly by CI)                                                
+      183 +│     ├─ metagame_data/       Scraped metagame JSON (refreshed
+          + weekly by CI)                                                
+      184 +│     └─ piloting/            Piloting guides (generic/ + per-
+          +format/)                                                      
+      185  ├─ scripts/
+      182 -│  └─ scrape_metagame.py      CLI run by the update-metagame G
+          -itHub Action                                                  
+      186 +│  ├─ scrape_metagame.py      CLI run by the update-metagame G
+          +itHub Action                                                  
+      187 +│  └─ build_piloting_guides.py  Offline CLI that generates pil
+          +oting guides                                                  
+      188  ├─ tests/
+      189  └─ docs/
+      190  ```
+
+● Update(forge-llm-sidecar/README.md)
+  ⎿  Added 2 lines
+      193  
+      194  - [docs/DECK_IDENTIFICATION.md](docs/DECK_IDENTIFICATION.md) —
+            a guided
+      195    walkthrough of how the AI identifies a deck, including the L
+           LM prompt.
+      196 +- [docs/PILOTING.md](docs/PILOTING.md) — the piloting-guidance
+          + layer: the                                                   
+      197 +  guide schema, the fallback chain, and the offline builder sc
+          +ript.                                                         
+      198  - [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — components, r
+           equest flow, the
+      199    graph, the metagame pipeline, failure behavior.
+      200  - [docs/API.md](docs/API.md) — full HTTP contract for every en
+           dpoint.
+
+● Update(forge-llm-sidecar/README.md)
+  ⎿  Added 1 line
+      232  | `/health` shows `"llm_reachable": false` | The LLM server is
+            not running, or `LLM_BASE_URL` is wrong. |
+      233  | Guesses are always `"Unknown"` | The model call is failing —
+            check the sidecar log and that the LLM server has a model loa
+           ded. |
+      234  | `/metagame` returns `count: 0` | Metagame data missing — run
+            `python scripts/scrape_metagame.py`. |
+      235 +| `/piloting` always returns a `generic/*` guide | No specific
+          + guide for that archetype yet — run `python scripts/build_pilo
+          +ting_guides.py <format>`. |                                   
+      236  | Wrong format detected | Scryfall lookup failed or the deck i
+           s off-meta — falls back to `DEFAULT_META_FORMAT`. |
+
+● Bash(.venv/bin/ruff check . 2>&1 | tail -5 && echo "---BLACK---" &&
+      .venv/bin/black --check . 2>&1 | tail -3 && echo "---PYTEST---" &&
+      .venv/bin/pytest -q 2>&1 | tai…)
+  ⎿  /bin/bash: line 1: .venv/bin/ruff: No such file or directory
+     ---BLACK---
+     /bin/bash: line 1: .venv/bin/black: No such file or directory
+     … +2 lines (ctrl+o to expand)
+
+● Bash(cd /home/lou/Development/forge-1/forge-llm-sidecar && .venv/bin/ruff
+      check . 2>&1 | tail -5 && echo "---BLACK---" && .venv/bin/black --check .
+      2>&1 | tail -3 &&…)
+  ⎿  All checks passed!
+     ---BLACK---
+     All done! ✨ 🍰 ✨
+     … +5 lines (ctrl+o to expand)
+● Bash((.venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8765
+      >/tmp/sidecar.log 2>&1 &) && sleep 4 && echo "=== /health ===" && curl -s
+      http://127.0.0.1:8765/hea…)
+  ⎿  === /health ===
+     {
+       "status": "ok",
+     … +25 lines (ctrl+o to expand)
+  ⎿  (timeout 30s)
+
+● Bash(curl -s -X POST http://127.0.0.1:8765/recognize -H 'Content-Type:
+      application/json' -d '{
+        "client":"forge","game_id":"vtest","format":"Modern","turn":3,…)
+  ⎿  {
+         "archetype": "Izzet Prowess",
+         "confidence": 0.65,
+     … +28 lines (ctrl+o to expand)
+  ⎿  (timeout 1m 40s)
+
+● Bash(pkill -f "uvicorn app.main:app" 2>/dev/null; git status --short && echo
+      "--- staged check ---" && git diff --stat | tail -5)
+  ⎿  Error: Exit code 144
+
+● Bash(cd /home/lou/Development/forge-1 && git status --short)
+  ⎿   M forge-ai/src/main/java/forge/ai/llm/RecognitionRequest.java
+      M forge-ai/src/main/java/forge/ai/llm/RecognitionResult.java
+      M forge-llm-sidecar/README.md
+     … +16 lines (ctrl+o to expand)
+
+● Done. The deck-piloting guidance system is implemented and verified
+  end-to-end.
+
+  What was built
+
+  Knowledge layer
+  - app/knowledge/piloting_schema.py — Pydantic PilotingGuide model (mulligan
+  rules, game plan, win conditions, key cards, matchup notes, meta threats).
+  - app/knowledge/piloting.py — guide loader with the fallback chain
+  <format>/<slug> → generic/<strategy> → generic/midrange, plus
+  identify_own_archetype (deterministic signature-card match, no LLM).
+  - app/knowledge/piloting/generic/*.json — six hand-authored fallback guides
+  (aggro, tempo, midrange, control, combo, ramp).
+  - Curated archetypes/*.json gained an optional strategy_type field.
+
+  Offline extraction
+  - scripts/build_piloting_guides.py + app/knowledge/builder_llm.py — generate
+  schema-valid guides from MTGGoldfish decklists/signature cards via a
+  configurable LLM (BUILDER_* env vars, defaulting to the local model). Mirrors
+  the existing scrape_metagame.py pattern.
+
+  Runtime — merged single node
+  - Per your feedback, deck recognition and piloting advice share one 
+  game_advisor node and one LLM call (renamed from deck_recognition). The AI's
+  own archetype is identified once per game and cached, like _resolved_format.
+  - app/schema.py — added optional hand/board/graveyard/life_totals request
+  fields and a piloting response block; SCHEMA_VERSION bumped to 2.
+  - GET /piloting debug endpoint added.
+
+  Forge Java adapter — RecognitionRequest/RecognitionResult records carry the
+  new fields (with a back-compat convenience constructor). Live board-state
+  capture in DeckRecognitionObserver is the documented follow-up, as agreed.
+
+  Tests & docs — test_piloting.py + updated test_graph.py (25 passing); new
+  docs/PILOTING.md and updates across
+  README/API/ARCHITECTURE/ADAPTERS/EXTENDING/DECK_IDENTIFICATION.
+
+  Verification
+
+  ruff, black --check, and pytest all pass. Live test against a running sidecar:
+  - /recognize returns both an opponent guess and piloting advice in one
+  response — own_archetype correctly resolved to "Boros Energy" from deck_cards.
+  - Requests omitting the new fields still work (back-compat).
+  - /piloting serves resolved guides offline.
+
+  One observed nuance: Boros Energy currently resolves to generic/midrange
+  because it has no specific guide and no strategy_type in the metagame data —
+  running build_piloting_guides.py modern would generate
+  modern/boros-energy.json (tagged aggro) and fix that. This is the intended
+  fallback behavior.
+
+  I saved a memory noting your preference to minimize per-action LLM calls and
+  cache static per-game facts.
+
+✻ Worked for 22m 26s

@@ -4,6 +4,7 @@
   "archetypes": [
     {
       "name": "Mono-Red Aggro",
+      "strategy_type": "aggro",
       "colors": ["R"],
       "strategy": "Apply pressure with one-drop creatures and finish with burn.",
       "signature_cards": ["Monastery Swiftspear", "Lightning Bolt", "Kumano Faces Kakkazan", "Play with Fire"],
@@ -11,6 +12,7 @@
     },
     {
       "name": "Izzet Prowess",
+      "strategy_type": "tempo",
       "colors": ["U", "R"],
       "strategy": "Aggro-tempo: cheap spells trigger prowess creatures while interacting.",
       "signature_cards": ["Monastery Swiftspear", "Slickshot Show-Off", "Lightning Bolt", "Spell Pierce"],
@@ -18,6 +20,7 @@
     },
     {
       "name": "Azorius Control",
+      "strategy_type": "control",
       "colors": ["W", "U"],
       "strategy": "Counter and sweep threats, then win with a planeswalker or a single finisher.",
       "signature_cards": ["Wrath of God", "Counterspell", "Supreme Verdict", "The Wandering Emperor"],
@@ -25,6 +28,7 @@
     },
     {
       "name": "Golgari Midrange",
+      "strategy_type": "midrange",
       "colors": ["B", "G"],
       "strategy": "Grind with efficient removal and resilient, value-laden creatures.",
       "signature_cards": ["Llanowar Elves", "Sheoldred, the Apocalypse", "Cut Down", "Glissa Sunslayer"],
@@ -32,6 +36,7 @@
     },
     {
       "name": "Mono-Green Devotion",
+      "strategy_type": "ramp",
       "colors": ["G"],
       "strategy": "Ramp with mana creatures into powerful midrange and combo payoffs.",
       "signature_cards": ["Llanowar Elves", "Cavalier of Thorns", "Nykthos, Shrine to Nyx", "Storm the Festival"],
@@ -39,6 +44,7 @@
     },
     {
       "name": "Selesnya Tokens",
+      "strategy_type": "aggro",
       "colors": ["G", "W"],
       "strategy": "Flood the board with tokens and pump them with anthems.",
       "signature_cards": ["Wedding Announcement", "Intrepid Adversary", "Scute Swarm"],

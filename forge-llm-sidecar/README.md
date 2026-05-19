@@ -1,23 +1,29 @@
 # Forge LLM Sidecar
 
 A standalone Python service that runs the LangGraph agent powering Forge's
-LLM-assisted AI. The first (and currently only) node is **deck recognition**:
-given the game format and the opponent's observed plays, it guesses which
-deck/archetype the opponent is playing.
+LLM-assisted AI. The single node — **`game_advisor`** — does two things in one
+LLM call:
 
-Forge's Java AI calls this service over local HTTP. The guess is shown in the
-game log only — it does not change how the heuristic AI plays.
+- **Deck recognition** — given the game format and the opponent's observed
+  plays, it guesses which deck/archetype the opponent is playing.
+- **Piloting advice** — using a per-archetype piloting guide for the AI's own
+  deck, it recommends what the AI should play next (see
+  [docs/PILOTING.md](docs/PILOTING.md)).
+
+Forge's Java AI calls this service over local HTTP. The recognition guess is
+shown in the game log only — it does not change how the heuristic AI plays.
 
 ## Architecture
 
 ```
 client + adapter --HTTP--> this sidecar (FastAPI + LangGraph) --HTTP--> llama.cpp (local LLM)
                                   |                          \--HTTP--> Scryfall (format detect)
-                                  \-- metagame_data/*.json (refreshed weekly by a GitHub Action)
+                                  ├─ metagame_data/*.json (refreshed weekly by a GitHub Action)
+                                  \─ piloting/*.json      (deck-piloting guides)
 ```
 
-The LangGraph graph is `START -> deck_recognition -> END`. New nodes can be
-added later without changing the HTTP contract. The sidecar is client-agnostic;
+The LangGraph graph is `START -> game_advisor -> END`. New nodes can be added
+later without changing the HTTP contract. The sidecar is client-agnostic;
 Forge is the reference *adapter* — see [docs/ADAPTERS.md](docs/ADAPTERS.md).
 
 ## Requirements
@@ -66,6 +72,12 @@ The image is also published to GHCR by CI on every push to `master`:
 | `FORMAT_DETECT_ENABLE` | `true`                        | Detect the precise format via Scryfall when ambiguous |
 | `DEFAULT_META_FORMAT`  | `standard`                    | Fallback format when detection fails                  |
 
+The offline piloting-guide builder (`scripts/build_piloting_guides.py`) has its
+own optional LLM config — `BUILDER_LLM_BASE_URL`, `BUILDER_LLM_API_KEY`,
+`BUILDER_MODEL_NAME`, `BUILDER_LLM_TIMEOUT` — each defaulting to the matching
+`LLM_*` value. See [docs/PILOTING.md](docs/PILOTING.md). The runtime sidecar
+never uses these.
+
 ### Metagame knowledge (offline at runtime)
 
 The sidecar does **not** scrape the internet on the request path. The metagame
@@ -85,6 +97,15 @@ The scraper/parser lives in `app/knowledge/scraper.py` and targets MTGGoldfish;
 if the site's markup changes, only that module needs adjusting. Curated detail
 files in `app/knowledge/archetypes/` still supply `strategy`/`tells` enrichment.
 
+### Piloting guides (offline at runtime)
+
+Per-archetype JSON **piloting guides** (`app/knowledge/piloting/`) tell the LLM
+how to play the AI's own deck — mulligan rules, game plan, win conditions, key
+cards, matchup notes. Specific guides fall back to hand-authored generic guides
+(`piloting/generic/<strategy>.json`). They are generated offline by
+`scripts/build_piloting_guides.py` and validated against a Pydantic schema. See
+[docs/PILOTING.md](docs/PILOTING.md).
+
 ### Format detection
 
 Forge reports a generic `Constructed` game type without naming the format. The
@@ -98,8 +119,11 @@ game. Fully fail-soft: on failure it falls back to `DEFAULT_META_FORMAT`.
 
 - `GET /health` — `{"status":"ok","model":"...","metagame_enabled":...}`. Used
   by Forge for a fail-soft availability check.
-- `POST /recognize` — see `app/schema.py` for the request/response models.
+- `POST /recognize` — opponent recognition + own-deck piloting advice. See
+  `app/schema.py` for the request/response models.
 - `GET /metagame?format=modern` — debug: shows the loaded metagame breakdown.
+- `GET /piloting?format=modern&archetype=...` — debug: shows the resolved
+  piloting guide (omit `archetype` to list available guides).
 
 ### Quick manual test
 
@@ -140,22 +164,27 @@ running, Forge logs one debug line and plays normally.
 ```
 forge-llm-sidecar/
 ├─ app/
-│  ├─ main.py                 FastAPI app: /health, /recognize, /metagame
+│  ├─ main.py                 FastAPI app: /health, /recognize, /metagame, /piloting
 │  ├─ config.py               Environment-driven configuration
 │  ├─ schema.py               Request/response models + GraphState
 │  ├─ graph.py                LangGraph graph definition
 │  ├─ llm_client.py           OpenAI-compatible LLM client (llama.cpp)
 │  ├─ nodes/
-│  │  └─ deck_recognition.py  The deck-recognition graph node
+│  │  └─ game_advisor.py      The graph node: recognition + piloting advice
 │  └─ knowledge/
 │     ├─ metagame.py          Runtime loader for scraped metagame data
-│     ├─ scraper.py           MTGGoldfish scraper (CI only)
+│     ├─ scraper.py           MTGGoldfish scraper (CI/builder only)
 │     ├─ format_detect.py     Scryfall-based format detection
 │     ├─ loader.py            Curated archetype knowledge base
+│     ├─ piloting.py          Piloting-guide loader + own-archetype id
+│     ├─ piloting_schema.py   Pydantic models for piloting guides
+│     ├─ builder_llm.py       Offline LLM client for the guide builder
 │     ├─ archetypes/          Hand-curated archetype detail (strategy/tells)
-│     └─ metagame_data/       Scraped metagame JSON (refreshed weekly by CI)
+│     ├─ metagame_data/       Scraped metagame JSON (refreshed weekly by CI)
+│     └─ piloting/            Piloting guides (generic/ + per-format/)
 ├─ scripts/
-│  └─ scrape_metagame.py      CLI run by the update-metagame GitHub Action
+│  ├─ scrape_metagame.py      CLI run by the update-metagame GitHub Action
+│  └─ build_piloting_guides.py  Offline CLI that generates piloting guides
 ├─ tests/
 └─ docs/
 ```
@@ -164,6 +193,8 @@ forge-llm-sidecar/
 
 - [docs/DECK_IDENTIFICATION.md](docs/DECK_IDENTIFICATION.md) — a guided
   walkthrough of how the AI identifies a deck, including the LLM prompt.
+- [docs/PILOTING.md](docs/PILOTING.md) — the piloting-guidance layer: the
+  guide schema, the fallback chain, and the offline builder script.
 - [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — components, request flow, the
   graph, the metagame pipeline, failure behavior.
 - [docs/API.md](docs/API.md) — full HTTP contract for every endpoint.
@@ -201,4 +232,5 @@ Two GitHub Actions workflows cover the sidecar:
 | `/health` shows `"llm_reachable": false` | The LLM server is not running, or `LLM_BASE_URL` is wrong. |
 | Guesses are always `"Unknown"` | The model call is failing — check the sidecar log and that the LLM server has a model loaded. |
 | `/metagame` returns `count: 0` | Metagame data missing — run `python scripts/scrape_metagame.py`. |
+| `/piloting` always returns a `generic/*` guide | No specific guide for that archetype yet — run `python scripts/build_piloting_guides.py <format>`. |
 | Wrong format detected | Scryfall lookup failed or the deck is off-meta — falls back to `DEFAULT_META_FORMAT`. |

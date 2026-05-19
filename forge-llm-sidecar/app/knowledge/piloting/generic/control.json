@@ -1,0 +1,84 @@
+{
+  "archetype": "Generic Control",
+  "format": "",
+  "strategy_type": "control",
+  "overview": "Survive the early game by answering every threat, win the resource war with card advantage, and close with a small number of hard-to-kill finishers. Time is your ally — trade efficiently, do not panic, and only commit a threat once the board is safe.",
+  "win_conditions": [
+    "A resilient finisher deployed after the opponent is out of pressure",
+    "Decking or grinding the opponent out once you control the game"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Three or four lands with a mix of cheap removal and counterspells",
+      "Early interaction to survive to your powerful late game",
+      "Card draw or card selection to find missing pieces"
+    ],
+    "mulligan_criteria": [
+      "No early interaction against an unknown, likely-aggressive field",
+      "All finishers and no way to survive to cast them",
+      "Land-light hands that cannot answer threats on curve"
+    ],
+    "examples": [
+      {
+        "hand": [],
+        "decision": "keep",
+        "reason": "Lands, two cheap answers, and a card-draw spell can survive and stabilize."
+      },
+      {
+        "hand": [],
+        "decision": "mulligan",
+        "reason": "Two finishers and no interaction dies long before turn six."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Answer only real threats; let irrelevant permanents resolve",
+      "Hold up interaction every turn — do not tap out without a reason",
+      "Develop lands and survive; you do not need to do anything proactive"
+    ],
+    "mid_game": [
+      "Use sweepers when the opponent has overcommitted for maximum value",
+      "Refill with card draw once the board is stable",
+      "Counter the spells that matter; let harmless ones through"
+    ],
+    "late_game": [
+      "Deploy a finisher only when you can protect it or the board is clear",
+      "Close the game promptly — every extra turn gives the opponent draws"
+    ]
+  },
+  "key_cards": [
+    {"name": "Cheap removal", "role": "interaction", "notes": "Trade up on mana against early threats to survive to the late game."},
+    {"name": "Board wipes", "role": "reset", "notes": "Wait for the opponent to overcommit; one good sweep can win the game."},
+    {"name": "Card draw", "role": "engine", "notes": "Convert a stable board into an overwhelming card-advantage lead."},
+    {"name": "Finisher", "role": "win condition", "notes": "Few copies; deploy only when safe so it actually ends the game."}
+  ],
+  "sequencing_tips": [
+    "Leave interaction mana open; pass with counterspell mana up when unsure",
+    "Hold sweepers until the opponent commits enough to make them worth it",
+    "Sequence card draw on the opponent's end step to keep mana for answers"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Prioritize cheap removal and sweepers; stabilize life total, then take over.",
+      "watch_for": ["going wide", "reach / burn", "haste threats"]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "Shift to counterspells and disruption; identify and answer their key piece.",
+      "watch_for": ["fast combo turns", "uncounterable spells"]
+    }
+  ],
+  "common_threats": [
+    "Fast aggro that empties your life total before you stabilize",
+    "Combo decks that win without attacking",
+    "Resilient threats and planeswalkers your removal cannot cleanly answer"
+  ],
+  "metadata": {
+    "source": "hand-authored",
+    "generated_at": "",
+    "model": "",
+    "schema_version": 1
+  }
+}

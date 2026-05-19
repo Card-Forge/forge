@@ -2,8 +2,8 @@
 
 The sidecar is **client-agnostic**. It knows nothing about Forge specifically —
 it accepts a normalized `RecognitionRequest` describing an opponent's plays and
-returns an archetype guess. Anything that can produce that request is an
-**adapter**.
+the AI's own game state, and returns an archetype guess plus piloting advice.
+Anything that can produce that request is an **adapter**.
 
 ```
 ┌──────────────┐   RecognitionRequest    ┌─────────────────────────┐
@@ -46,10 +46,23 @@ When adding an adapter:
 
 - Set the `client` field to a stable identifier for your client.
 - Populate `deck_cards` if you know the controlled player's decklist — it makes
-  format detection reliable from turn one. Omit it otherwise; the sidecar will
+  format detection reliable from turn one and lets the sidecar identify the
+  AI's own archetype for piloting advice. Omit it otherwise; the sidecar will
   fall back to detecting the format from observed cards.
+- Populate the live-state fields (`hand`, `own_board`, `opponent_board`,
+  `your_graveyard`, `opponent_graveyard`, `life_totals`) if you can — they make
+  the piloting advice concrete. They are optional: with them omitted the
+  sidecar still returns archetype-level advice from the guide.
 - Treat the sidecar as optional. Calls should be asynchronous and fail-soft so
   a missing or slow sidecar never disrupts the game.
+
+### Forge: live-state capture is a follow-up
+
+The Forge adapter's `RecognitionRequest`/`RecognitionResult` records already
+carry the piloting fields, but `DeckRecognitionObserver` does not yet *capture*
+the AI's hand/board/graveyard — it sends only `deck_cards`. Wiring that capture
+(and surfacing piloting advice in the game log) is a separate, larger change.
+Until then Forge gets archetype-level piloting advice from the guide.
 
 The sidecar itself needs **no changes** to support a new adapter — that is the
 point of the normalized contract.

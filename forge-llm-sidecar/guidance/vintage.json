@@ -1,0 +1,805 @@
+[
+  {
+    "archetype": "Esper Lurrus Control",
+    "format": "Unknown",
+    "colors": [
+      "W",
+      "U",
+      "B"
+    ],
+    "philosophy": "Out-value and out-grind opponents using efficient removal, card selection, and recurring threats powered by Lurrus, winning against control, combo, and midrange by stabilizing early and closing out with recurring value.",
+    "opening_strategy": {
+      "mulligan_criteria": "Keep hands with 2-3 lands (including fetch/shock if applicable), early interaction (Thoughtseize, Inquisition, Fatal Push, Spell Pierce), and Lurrus or Psychic Frog. Mulligan pure land hands, hands with only 3+ mana spells, or hands with no early interaction against aggro.",
+      "early_game_plays": "Turn 1: Play land, cast Thoughtseize/Inquisition if possible, or hold for Lurrus/interaction. Turn 2: Lurrus, Psychic Frog, or interaction. Sequence lands carefully (fetch/shock to duals, then basics). Prioritize finding duals for Esper colors.",
+      "sideboard_plan": "Against Aggro/Graveyard: Bring in Teferi's Protection, Lightning Helix, Abrade, Surgical Extraction, Rest in Peace; remove excess counterspells and draw spells. Against Control/Combo: Bring in Counterspell, Spell Pierce, Teferi's Protection, Surgical Extraction; remove aggro hate. Against Mirror: Bring in Teferi's Protection, Surgical Extraction, Rest in Peace, and additional removal; remove redundant interaction."
+    },
+    "midgame_priorities": {
+      "resource_management": "Use Lurrus to cast 2-drops multiple times per turn. Manage your graveyard carefully; avoid overloading it if facing graveyard hate, but leverage it for the Lurrus engine. Preserve card advantage by trading efficiently and using cheap interaction.",
+      "board_control": "Commit threats when you have removal for their threats or when they lack sweepers. Hold back if they have board wipes or heavy interaction. Use Teferi's Protection to protect key spells or threats when necessary.",
+      "threat_tracking": "Watch for sweepers (Wrath, Anger, etc.), counterspells, and graveyard strategies. Note when opponents tap out for sweepers or hold up interaction. Track graveyard contents if facing Dredge or reanimation."
+    },
+    "endgame_tactics": {
+      "finishers": "Lurrus engine, Psychic Frog, Orcish Bowmasters, and Teferi's Protection-protected threats. Close out by recurring 2-drops, trading efficiently, and applying pressure when the opponent lacks answers.",
+      "when_to_commit": "Go all-in when the opponent has no sweepers, low life total, or you have decisive card advantage. Commit when you can safely cast Lurrus or Psychic Frog and follow up with recurring threats.",
+      "when_to_concede": "Fold when facing graveyard hate with no answers, against fast combos you cannot interact with, or when you have a dead hand with no win condition and the opponent is stabilizing or ahead."
+    },
+    "threat_responses": {
+      "against_countermagic": "Use cheap spells, split casts, or threats that are hard to counter (Lurrus, Psychic Frog). Use Teferi's Protection to protect key spells. Apply pressure to force them to use counters on non-critical spells.",
+      "against_ramp": "Early interaction, Thoughtseize to hit mana dorks, removal for key threats, and Teferi's Protection to protect your game plan. Stabilize quickly and out-value them in the late game.",
+      "against_aggro": "Early interaction, removal, and Teferi's Protection to stabilize. Don't overextend; trade efficiently and go long. Use Psychic Frog or Bowmasters to close out once stabilized.",
+      "against_control": "Pressure with recurring threats, use card advantage, and out-value them. Use Teferi's Protection to protect key spells. Force them to use removal on low-impact threats to set up Lurrus turns.",
+      "vs_mirror": "Focus on card advantage, better sequencing, and sideboard hate. Use Teferi's Protection to protect key spells, Surgical Extraction to disrupt their graveyard, and out-value them in extended turns."
+    },
+    "sideboard_advice": "Post-sideboard, adjust based on metagame trends. Against control/combo, increase counterspells and protection. Against aggro/graveyard, increase removal and hate. In mirror, focus on card advantage and graveyard disruption. Always track opponent's sideboarded cards and adjust your play accordingly.",
+    "notes": "Lurrus is fragile; protect it with removal or Teferi's Protection. Don't overcommit to the graveyard if facing hate. Psychic Frog is a win condition but vulnerable to sweepers. Teferi's Protection is versatile but limited; use it on key spells or threats. Watch for format-specific sweepers and adjust your threat commitment accordingly."
+  },
+  {
+    "archetype": "Jewel Shops",
+    "format": "Modern",
+    "colors": [
+      "Blue"
+    ],
+    "philosophy": "Jewel Shops is a control-combo hybrid that leverages mana acceleration and protection spells to out-value opponents through superior card quality. It aims to lock down the board with key threats like The One Ring and Displacer Kitten while grinding out long games or closing quickly with game-winning pieces.",
+    "opening_strategy": {
+      "mulligan_criteria": "Keep hands with 1-2 lands, 2+ mana rocks (Sol Ring, Arcane Signet, Mind Stone), and at least one key piece (Coveted Jewel, Displacer Kitten, or The One Ring). Mulligan hands with 3+ lands, no rocks, or only fragile threats without protection. Prioritize hands that can cast Coveted Jewel or Displacer Kitten on turn 1 or 2.",
+      "early_game_plays": "Turn 1: Play Sol Ring, cast Coveted Jewel or Displacer Kitten. Turn 2: Play a land, cast another rock or The One Ring if safe. Sequence mana to protect key pieces with Counterspell/Spell Pierce. If facing aggro, prioritize early interaction; against control, focus on assembling card advantage engines.",
+      "sideboard_plan": "Vs. Control: Bring in additional counterspells, discard (Thoughtseize), and hatebears. Vs. Aggro: Add spot removal, more counterspells, and protection spells. Vs. Combo: Include graveyard hate, specific hatebears, and additional disruption. Vs. Mirror: Prioritize counterspells, discard, and extra protection to out-value the mirror."
+    },
+    "midgame_priorities": {
+      "resource_management": "Conserve mana to protect The One Ring and Displacer Kitten. Use Coveted Jewel to dig for answers or win conditions. Avoid overextending without protection; prioritize card advantage and board control over aggressive plays.",
+      "board_control": "Commit threats when you have protection or can answer opponent's interaction. Hold back key pieces if the opponent has unanswerable removal or counterspells. Use Displacer Kitten to bounce threats or replay protected spells to maintain board presence.",
+      "threat_tracking": "Watch for removal targeting The One Ring or Displacer Kitten. Track opponent's hand for counterspells and discard. Note graveyard strategies (Dredge) or combo pieces (Oath, Initiative) to prepare sideboard cards. Pay attention to mana development to anticipate their next play."
+    },
+    "endgame_tactics": {
+      "finishers": "Win with The One Ring + Displacer Kitten recursion loop, Coveted Jewel card advantage, or Emrakul, the Promised End. Secure protection for key pieces, then commit to drawing into game-winners or locking the board.",
+      "when_to_commit": "Go all-in when you have protection for The One Ring/Displacer Kitten, enough mana to answer interaction, and a clear path to closing. Commit when the opponent has no removal or counterspells left, or when you can safely cast a finisher like Emrakul.",
+      "when_to_concede": "Fold if you're locked out of key pieces, facing unanswerable threats with no interaction, or in a dead matchup with no comeback potential. Concede if the opponent has established an unbreakable board state and you lack the resources to disrupt it."
+    },
+    "threat_responses": {
+      "against_countermagic": "Use cantrips and discard to thin your deck and remove counterspells. Cast around counters with The One Ring's protection or Displacer Kitten's bounce. Prioritize threats that are hard to counter or can be cast in response.",
+      "against_ramp": "Out-value them with superior card quality. Use removal to neutralize early threats, protect key pieces, and close the game before they stabilize. Leverage The One Ring to out-draw their ramp spells.",
+      "against_aggro": "Stabilize with early counterspells and spot removal. Use Displacer Kitten to bounce threats or replay protection spells. Transition to card advantage once stabilized, then close with The One Ring or Emrakul.",
+      "against_control": "Pressure with resilient threats and protect them with counterspells. Out-grind with card advantage engines. Force them to use interaction on multiple threats, then close with a protected finisher or recursion loop.",
+      "vs_mirror": "Win through superior sequencing and card advantage. Prioritize counterspells and discard to disrupt their key pieces. Protect The One Ring and Displacer Kitten, and use Coveted Jewel to dig deeper. Out-value them in resource management and close when they run out of interaction."
+    },
+    "sideboard_advice": "Post-sideboard, tailor your interaction to the metagame. Bring in hate cards against combo, more counterspells against control, and removal against aggro. In the mirror, prioritize disruption and protection. Adjust your mana base if needed, and ensure you have enough answers to handle the updated threat profile.",
+    "notes": "The One Ring's tap ability can be used to draw cards or protect itself; time it carefully. Displacer Kitten can bounce itself to replay protected spells or bounce threats. Coveted Jewel is fragile—protect it or have a backup plan. Avoid overcommitting without protection, and always track opponent's hand for interaction. Practice sequencing mana rocks to cast key spells out of turn or early."
+  },
+  {
+    "archetype": "Dredge",
+    "format": "Unknown",
+    "colors": [
+      "U",
+      "B",
+      "G"
+    ],
+    "philosophy": "Dredge aims to rapidly convert library cards into graveyard resources using dredge creatures, generating mana, card advantage, and a flood of cheap threats to overwhelm opponents before they can stabilize. It excels against combo and control decks that rely on specific pieces or slow game plans, while struggling against dedicated graveyard hate.",
+    "opening_strategy": {
+      "mulligan_criteria": "Keep hands with at least two dredge creatures (Gravecrawler, Nighthowl Scavenger, etc.) or one dredge creature plus a discard outlet (Grief, Thoughtseize) and two lands. Mulligan hands with three or more lands, no dredgers, or only one land with no early plays. Bazaar of Baghdad can mitigate land issues, so a hand with Bazaar + 1 land + 2 dredgers is keepable.",
+      "early_game_plays": "Turn 1: Play a basic land, cast a dredge creature or discard outlet. If opening Bazaar, play it on turn 1 or 2 to fetch a swamp and draw a card. Turn 2: Activate dredge to put cards into the graveyard, cast additional creatures or discard outlets, and attack with available threats. Prioritize establishing graveyard presence over hoarding cards.",
+      "sideboard_plan": "Against control/combo: Bring in Rest in Peace, Leyline of the Void, Surgical Extraction, Disruptor Efreet, and Grafdigger's Cage. Against aggro: Keep dredgers and discard, bring in Leyline of the Void or Rest in Peace if needed, plus discard outlets. Against mirror: Bring in additional discard (Grief, Thoughtseize), hate cards (Rest in Peace), and card draw."
+    },
+    "midgame_priorities": {
+      "resource_management": "Treat your graveyard as your primary resource. Dredge selectively to avoid feeding opponent hate cards. Use discard outlets to remove key opponent spells or cards. Preserve Force of Negation for critical threats or to protect your own dredge/discard plays. Bazaar of Baghdad should be used to fix mana or dig for answers, not just to flood the graveyard.",
+      "board_control": "Commit to the board when you have sufficient card advantage and the opponent lacks sweepers or targeted removal. Hold back if you suspect a board wipe or if your graveyard is vulnerable to Rest in Peace/Leyline. Prioritize attacking with cheap creatures to pressure life total while setting up future turns.",
+      "threat_tracking": "Watch for graveyard hate (Rest in Peace, Leyline, Surgical Extraction, Grafdigger's Cage) and sweepers (Wrath of God, Damnation, etc.). Note when opponents play discard or counterspells, as these disrupt your early game. Track if they are playing a combo that requires specific pieces, as Grief/Force of Negation can shut them down."
+    },
+    "endgame_tactics": {
+      "finishers": "Win by overwhelming the board with a flood of dredge creatures, or by using graveyard-generated mana to cast a high-impact threat or combo finisher. Once you have established a board presence and the opponent has no removal, commit all remaining resources to attack.",
+      "when_to_commit": "Go all-in when you have drawn into multiple dredge creatures, the opponent has no sweepers or hate in play, and your life total is safe enough to trade. If you have Force of Negation and discard outlets ready to protect your final plays, commit aggressively.",
+      "when_to_concede": "Fold if the opponent has Rest in Peace or Leyline of the Void in play and you have no hate cards or ways to bypass it. Also concede if you are dead to a specific board state (e.g., a massive sweeper or combo finisher) and have no resources to disrupt or race."
+    },
+    "threat_responses": {
+      "against_countermagic": "Use Force of Negation to counter their counters or protect your own plays. Grief can discard their counterspells before they cast them. Dredge creatures are cheap and numerous, making them hard to counter all. Bazaar can dig for answers or additional threats.",
+      "against_ramp": "Outpace them by establishing an early board presence. Use Grief to discard their ramp spells or key mana rocks. Dredge to generate card advantage and pressure, forcing them to answer quickly or lose.",
+      "against_aggro": "Use discard outlets to disrupt their early game. Dredge to race and stabilize. If they are too fast, bring in hate cards like Leyline of the Void or Rest in Peace to slow them down, though this is less common in the main deck.",
+      "against_control": "Pressure early to force them to use resources on removal rather than their game plan. Use Grief to discard their answers. Force of Negation protects your key plays. Dredge to generate card advantage and overwhelm their limited interaction.",
+      "vs_mirror": "Win by out-valuing in the graveyard and having better discard/hate resolution. Prioritize resolving Grief and Force of Negation to disrupt their dredge sequence. Sideboard in additional hate cards and discard outlets. Track their graveyard state to avoid feeding their win conditions."
+    },
+    "sideboard_advice": "Post-sideboard, tailor your deck to the metagame. Against control/combo-heavy environments, increase graveyard hate and discard outlets. Against aggro/mirror, keep dredgers and mana sources, but add more disruption. Always ensure you have at least one way to handle Rest in Peace/Leyline if they are prevalent. Adjust your sideboard based on opponent tendencies, bringing in specific hate cards rather than generic answers.",
+    "notes": "Common mistakes include over-dredging into hate cards, hoarding cards instead of committing to the board, and mismanaging Force of Negation timing. Remember that Bazaar of Baghdad can be used to fetch a swamp for black mana or a forest for green, but sequencing matters. Always track opponent's graveyard and hand size. Dredge is a combo-adjacent deck that wins by resource conversion, so prioritize graveyard efficiency over traditional card advantage."
+  },
+  {
+    "archetype": "Oath of Druids",
+    "format": "Unknown",
+    "colors": [
+      "W",
+      "U",
+      "B",
+      "G"
+    ],
+    "philosophy": "A four-color combo-control hybrid that disrupts the opponent's early game while assembling Oath of Druids or Show and Tell to summon game-ending threats like Atraxa or Emrakul. It wins by out-resolving control and combo decks with superior card advantage and late-game power, while using targeted disruption to stabilize against aggro.",
+    "opening_strategy": {
+      "mulligan_criteria": "Keep hands with 2-3 lands (including fetch/shock potential), one of Oath of Druids or Show and Tell, and at least one disruption or mana source. Keep hands with Atraxa/Emrakul + 2+ mana sources. Mulligan pure land hands, hands with multiple Oath/Show and Tell but no mana, or hands with only disruption and no way to cast it.",
+      "early_game_plays": "Turn 1: Play a land, cast Thoughtseize/Force of Will/Spell Pierce, or play a shock land. Turn 2: Play a land, cast disruption, or begin assembling mana for Oath/Show and Tell. Prioritize fetching dual lands and maintaining open mana for counterspells until you commit to your combo.",
+      "sideboard_plan": "Against aggro: Bring in Rest in Peace, Leyline of the Void, Surgical Extraction, and additional counterspells. Against control/combo: Bring in Rest in Peace, Leyline, Surgical Extraction, and extra Atraxa/Emrakul/Grand Unifier. Against mirror: Bring in Rest in Peace, Leyline, Surgical Extraction, and Thoughtseize/Spell Pierce for hand disruption."
+    },
+    "midgame_priorities": {
+      "resource_management": "Conserve mana for counterspells and disruption until you can safely resolve Oath or Show and Tell. Use Lilian, the Last Hope to refill your hand and generate value. Avoid overcommitting to Oath if you lack protection or a follow-up threat.",
+      "board_control": "Commit threats like Atraxa or Emrakul when you have protection (counterspells, discard, or board wipe) or when the opponent has no removal. Hold back Oath of Druids if the opponent has sweepers or targeted hate, as it requires tapping your creatures.",
+      "threat_tracking": "Watch for Rest in Peace, Leyline of the Void, and graveyard hate. Track opponent’s hand for sweepers (Wrath of God, Anger of the Gods) and targeted removal (Path to Exile, Swords to Plowshares). Note when they run out of counterspells to safely resolve your finishers."
+    },
+    "endgame_tactics": {
+      "finishers": "Atraxa, Grand Unifier, or Emrakul, World Aflame resolved via Oath of Druids or Show and Tell. Atraxa wins through +1/+1 counters and token generation; Emrakul wins by drawing cards and removing threats; Grand Unifier wins by answering multiple problems and enabling attacks.",
+      "when_to_commit": "Go all-in when you have protection for your finisher, the opponent has no sweepers or targeted hate in hand, and you can follow up with additional value (Lilian, Emrakul’s draw step, or Atraxa’s tokens). Commit to Oath/Show and Tell when you can safely resolve it and have a clear path to victory.",
+      "when_to_concede": "Fold if you are dead to Rest in Peace/Leyline with no graveyard recursion, have no answers to a locked board, or are facing a fast aggro deck with no stabilization tools. Also concede if you have a dead hand (multiple Oath/Show and Tell with no mana or protection) and the opponent is ahead on board."
+    },
+    "threat_responses": {
+      "against_countermagic": "Use Force of Will, Spell Pierce, or split your combo pieces to resolve threats. Oath and Show and Tell are sorceries, so resolve them when the opponent has no counterspells, or use Atraxa/Emrakul which are harder to counter. Consider playing around counters with discard or timing.",
+      "against_ramp": "Out-value them with Atraxa/Emrakul and Lilian. Use Thoughtseize to hit key ramp pieces (Mana Crypt, Arcane Signet, etc.). Atraxa’s +1/+1 counters and token generation will outscale their mana advantage.",
+      "against_aggro": "Stabilize with Thoughtseize, Force of Will, and Spell Pierce to disrupt early plays. Resolve Atraxa or Emrakul to stabilize and close the game. Oath of Druids is risky against fast aggro; prefer Show and Tell or direct threats if possible.",
+      "against_control": "Out-resolve them with multiple threats and Lilian’s card advantage. Use Atraxa/Emrakul to go over the top of their removal. Force them to use multiple answers, then resolve your finisher when they are out of resources.",
+      "vs_mirror": "Win by tracking key cards, sideboarding in Rest in Peace/Leyline, and out-sequence your opponent. Use Thoughtseize to hit their Oath/Show and Tell or protection. Resolve Atraxa/Emrakul first, as it often wins the race. Be cautious of their Lilian and counterspells."
+    },
+    "sideboard_advice": "Post-sideboard, shift from a pure combo focus to a more disruptive, hate-heavy strategy. Prioritize Rest in Peace, Leyline of the Void, and Surgical Extraction against combo and graveyard decks. Against aggro, lean on counterspells and discard to stabilize. In the mirror, hand disruption and graveyard hate become paramount. Adjust your win conditions based on what the opponent is running.",
+    "notes": "Oath of Druids and Show and Tell are sorceries, making them vulnerable to counterspells; always time them carefully. Atraxa, Grand Unifier, and Emrakul are your primary win conditions, so protect them at all costs. Lilian, the Last Hope is a critical engine for card advantage and mana fixing. Avoid tapping your creatures for Oath if you have no follow-up or protection. Watch for Leyline of the Void in the sideboard, as it can completely shut down your game plan."
+  },
+  {
+    "archetype": "Mono-White Initiative",
+    "format": "Unknown",
+    "colors": [
+      "W"
+    ],
+    "philosophy": "Mono-White Initiative is a fast, aggressive strategy that leverages Chrome Mox for early mana acceleration and haste creatures like White Plume Adventurer and Seasoned Dungeoneer to apply immediate pressure. It wins by combining combat damage with death-trigger card advantage to out-value opponents before they can stabilize or execute their game plan.",
+    "opening_strategy": {
+      "mulligan_criteria": "Keep any hand with Chrome Mox plus at least one land and one haste creature. Also keep hands with two lands and two haste creatures if they include a removal spell or combat trick. Mulligan hands with three or more lands, no Chrome Mox, and no early threats, or hands with only one land and no acceleration. Prioritize hands that can play a turn-1 Chrome Mox or a turn-1/2 haste creature.",
+      "early_game_plays": "Turn 1: Play Chrome Mox, tap it for one white mana, and play a basic land. If you have a haste creature, play it on turn 1 if you can afford it (1W), otherwise hold for turn 2. Turn 2: Attack with haste creatures, trigger death/draw effects, and use the card advantage to play more threats or answers. Prioritize playing lands to ensure you can cast your spells on curve. Sequence Chrome Mox early to unlock turn-2 plays, but remember it won't untap until your next turn.",
+      "sideboard_plan": "Against control: Bring in additional one-mana removal, artifact hate, and more late-game threats. Against aggro: Bring in board wipes, life gain spells, and additional removal. Against combo: Bring in graveyard hate, artifact hate, and more pressure to race. Against mirror: Bring in extra card advantage, targeted removal, and sideboard tricks to out-value."
+    },
+    "midgame_priorities": {
+      "resource_management": "Use Chrome Mox to maintain mana advantage, but be mindful of the one-turn delay for untapping. Prioritize keeping cards in hand to leverage death triggers and maintain pressure. Manage your graveyard carefully if the opponent has graveyard hate, and avoid overcommitting to the board without card advantage.",
+      "board_control": "Commit threats when you have card advantage or when the opponent has no removal. Hold back if you suspect a sweep or if you need to preserve resources for a specific interaction. Use removal to protect your board or remove key threats, and prioritize trading creatures when it generates favorable card advantage.",
+      "threat_tracking": "Watch for counterspells, removal, and sweepers in the opponent's hand. Pay attention to their mana base and graveyard to anticipate their strategy. Track their life total and board state to know when to pressure or stabilize. Note when they tap out for a key spell, as this is often your window to attack or cast a combat trick."
+    },
+    "endgame_tactics": {
+      "finishers": "Unblocked haste creatures, combat tricks, and direct damage spells. Use card advantage to generate multiple threats that are difficult to block or remove. Leverage the +1/+1 counters from White Plume Adventurer to close the game in one or two turns.",
+      "when_to_commit": "Go all-in when you have card advantage, the opponent has no removal or sweepers, or when you can close the game in one or two turns. Commit when you've forced the opponent to use their removal on less important spells, leaving your key threats unanswerable.",
+      "when_to_concede": "Fold if you're out of resources, the opponent has a locked board, or you're facing a dead hand with no comeback potential. Also concede if you're significantly behind in life total and the opponent has a clear path to victory, or if you're in a heavily unfavorable matchup with no sideboard plan."
+    },
+    "threat_responses": {
+      "against_countermagic": "Use cheap threats, artifact spells, and multiple threats to overwhelm counterspells. Sequence plays to force counters on less important spells, and use Chrome Mox to cast spells at instant speed when possible. Consider bringing in artifact hate and additional pressure if counterspells are prevalent.",
+      "against_ramp": "Apply early pressure to race their ramp. Use fast mana to stay ahead and use removal to disrupt their mana sources. Attack around their ramp spells and use combat tricks to close the game before they can cast their late-game threats.",
+      "against_aggro": "Stabilize with removal and life gain. Use board wipes to clear the board and regain life. Transition to a control-oriented game plan if necessary, and prioritize surviving the early turns to leverage your card advantage.",
+      "against_control": "Pressure early to force mistakes. Use card advantage to out-value their removal. Attack around their sweepers and use combat tricks to close the game. Force them to use removal on less important spells, then commit with your key threats.",
+      "vs_mirror": "Win by leveraging card advantage, tracking removal, and out-sequence your opponent. Use sideboard tricks and removal to gain an edge. Prioritize trading creatures when it generates favorable card advantage, and be mindful of the opponent's hand to avoid walking into targeted removal."
+    },
+    "sideboard_advice": "Post-sideboard, adjust your curve to match the metagame. Against control, reduce fast mana and increase removal/threats. Against aggro, increase life gain and board wipes. Against combo, increase hate cards. Always keep Chrome Mox and core haste creatures. Track the metagame share and adjust your sideboard based on the most common strategies you face.",
+    "notes": "Avoid overcommitting to the board without card advantage. Be mindful of the one-turn delay on Chrome Mox and plan your mana accordingly. Track the opponent's graveyard and hand to anticipate threats. Practice sequencing to maximize death triggers and card advantage. Remember that Mono-White Initiative thrives on tempo and card advantage, so prioritize plays that maintain pressure while drawing into more resources."
+  },
+  {
+    "archetype": "Raker Shops",
+    "format": "Modern",
+    "colors": [
+      "Blue",
+      "Black",
+      "Red",
+      "Green"
+    ],
+    "philosophy": "A midrange-combo hybrid that uses early disruption to stabilize, then assembles The One Ring + Sensei's Divining Top + Tezzeret/Cruel Captain to generate infinite mana and untap lands, out-resourcing opponents to win through value or combo finishes.",
+    "opening_strategy": {
+      "mulligan_criteria": "Keep hands with 2-3 lands, The One Ring, Sensei's Divining Top, Tezzeret, or Cruel Captain, plus early disruption (Thoughtseize/Lightning Bolt). Prioritize hands that can cast The One Ring on turn 1 or 2. Mulligan hands with 4+ lands, only removal, or no early game plan.",
+      "early_game_plays": "Turn 1: Play land, cast Thoughtseize or The One Ring. Turn 2: Play land, cast Sensei's Divining Top or Tezzeret/Cruel Captain. Sequence lands to ensure blue/black/red/green mana for key spells. Use Divining Top to dig for The One Ring or engine pieces.",
+      "sideboard_plan": "vs Aggro: +Lightning Bolt, +Abrade, +Spell Pierce, +Surgical Extraction / -The One Ring, -Sensei's Divining Top. vs Control: +The One Ring, +Sensei's Divining Top, +Tezzeret, +Cruel Captain, +Thoughtseize / -Abrade, -Spell Pierce. vs Combo: +Thoughtseize, +Lightning Bolt, +Abrade, +Surgical Extraction / -The One Ring, -Sensei's Divining Top. vs Mirror: +Thoughtseize, +Lightning Bolt, +Abrade, +extra removal / -land draw."
+    },
+    "midgame_priorities": {
+      "resource_management": "Preserve mana for protection and engine assembly. Use Sensei's Divining Top to dig for key pieces without clogging your hand. Avoid overcommitting to the board if you can stabilize with disruption. Manage your graveyard carefully to avoid giving Dredge free targets while enabling Tezzeret/Cruel Captain recursion.",
+      "board_control": "Commit threats only when you have protection or can answer their interaction. Hold back if facing heavy sweepers or counters. Prioritize keeping The One Ring + Top + Tezzeret/Cruel Captain engine intact over trading creatures.",
+      "threat_tracking": "Watch for counterspells, sweepers, graveyard hate, and specific combo pieces. Note when opponents tap out for threats vs. holding up interaction. Track when they use removal on your engine pieces vs. threats."
+    },
+    "endgame_tactics": {
+      "finishers": "Assemble The One Ring + Sensei's Divining Top + Tezzeret/Cruel Captain to untap lands for infinite mana, then cast multiple threats or use Tezzeret's ability to mill/win. Alternatively, win with a high-impact creature or combo finisher once the engine is online.",
+      "when_to_commit": "Go all-in when you have the engine online and can protect it, or when the opponent is out of interaction. Commit to casting multiple threats or using the engine to win before they can stabilize.",
+      "when_to_concede": "Fold when facing a hard lock (e.g., graveyard hate + sweepers), you're out of resources, or the matchup is mathematically lost (e.g., vs Oath with no disruption). Don't bluff through known interaction."
+    },
+    "threat_responses": {
+      "against_countermagic": "Use The One Ring + Top + Tezzeret to cast spells in response, or use cheap spells to probe. Sequence around counters by playing around their main phase interaction and casting key spells when they're tapped out.",
+      "against_ramp": "Use early disruption to dig for their ramp pieces, Lightning Bolt/Abrade to remove threats, and race or stabilize with your own board presence. Don't let them get ahead with mana rocks.",
+      "against_aggro": "Use Thoughtseize to dig for removal, Lightning Bolt/Abrade to clear early threats, and stabilize with your own board presence. Don't overextend into combat; trade efficiently and stabilize before going wide.",
+      "against_control": "Pressure with early threats, use The One Ring + Top + Tezzeret to out-value them, and win before they can stabilize. Don't let them draw you into a long game; force them to interact early.",
+      "vs_mirror": "Win the resource war by using Thoughtseize to disrupt their engine, prioritize keeping your own engine intact, and out-value them with better sequencing. Trade efficiently and don't overcommit to the board."
+    },
+    "sideboard_advice": "Post-sideboard, adjust based on metagame trends. Bring in more disruption and protection vs control/combo, more removal vs aggro, and adjust land counts if needed. Generally, sideboard in more interaction and protection for your engine, and consider bringing in graveyard hate if Dredge is prevalent.",
+    "notes": "Common mistakes include overcommitting to the board too early, forgetting to sequence The One Ring + Top + Tezzeret correctly, not managing mana for protection, and failing to track opponent interaction. Unique interactions: The One Ring + Sensei's Divining Top + Tezzeret/Cruel Captain can untap lands for infinite mana. Watch out for graveyard hate vs Dredge, and always prioritize keeping your engine intact over trading creatures."
+  },
+  {
+    "archetype": "Lurrus PO",
+    "format": "Unknown",
+    "colors": [
+      "W",
+      "U",
+      "R"
+    ],
+    "philosophy": "This deck leverages Lurrus of the Dream-Den to repeatedly cast cheap spells from the graveyard, generating overwhelming card advantage and board presence. It aims to out-value control and combo decks through recursion while stabilizing against aggro with efficient interaction and card draw.",
+    "opening_strategy": {
+      "mulligan_criteria": "Keep hands with 2-3 lands (prioritizing WUR fixing), Lurrus, and at least two 1-3 mana spells. Stock Up is keepable if paired with lands and a cheap spell. Mulligan hands with three or more lands, only high-cost spells, or no early interaction/recursion pieces.",
+      "early_game_plays": "Turn 1: Play a land, cast a 1-mana spell or drop Thundertrap Trainer if mana allows. Turn 2: Play Lurrus or another cheap spell to establish the engine. Sequence lands to ensure WUR availability. Prioritize getting Lurrus to the battlefield and filling the graveyard with castable spells rather than dead weight.",
+      "sideboard_plan": "Vs. Aggro (Initiative, Jewel Shops): +2 removal, +1 board wipe, -1 draw spell. Vs. Control/Combo (Esper Lurrus, Oath): +2 card advantage, +1 graveyard hate, -1 early removal. Vs. Mirror: +1 specific hate for Lurrus/recursion, +1 hand disruption, -1 generic interaction."
+    },
+    "midgame_priorities": {
+      "resource_management": "Balance mana between casting threats and paying recursion costs. Use Stock Up to refill your hand when resources dip. Avoid clogging the graveyard with uncastable spells; prioritize cheap, synergistic spells that can be cast repeatedly.",
+      "board_control": "Commit threats when you have graveyard backup and opponent interaction is on cooldown. Hold back if facing sweepers or heavy removal. Lurrus allows calculated aggression, but don't overextend if you lack recursion answers.",
+      "threat_tracking": "Watch for sweepers (e.g., Wrath of God, Supreme Verdict), graveyard hate (Rest in Peace, Leyline of the Void), and combo win conditions. Note when opponents tap out for key spells to identify windows for recursion or attacks."
+    },
+    "endgame_tactics": {
+      "finishers": "Lurrus + cheap spells generating infinite value or a specific win condition dug for with Stock Up. Once the engine is online, chain cheap spells to overwhelm opponents or assemble a combo finisher.",
+      "when_to_commit": "Go all-in when you have Lurrus on the battlefield, a full graveyard of castable spells, and opponent interaction is depleted or on cooldown. Also commit when you can safely attack through blockers or cast a win condition.",
+      "when_to_concede": "Fold if permanent graveyard hate is active and you lack bypass options, or if you're locked out of resources with no draw spells and opponent has a clear win condition. Also concede if you're out of interaction against a locked-in combo."
+    },
+    "threat_responses": {
+      "against_countermagic": "Use cheap spells to force counters, then recast via Lurrus. Split your casts across turns or use discard to remove counterspells. Prioritize uncounterable threats or spells that provide value even if countered.",
+      "against_ramp": "Answer early threats and ramp pieces with efficient removal. Don't let them get ahead; use Lurrus to stabilize and out-grind their acceleration. Stock Up to find answers before they snowball.",
+      "against_aggro": "Prioritize early removal and counterspells to stabilize. Use Stock Up to dig for answers. Once stabilized, transition to recursion to out-value their board. Thundertrap Trainer can help trigger on their spells.",
+      "against_control": "Pressure with cheap threats and use recursion to out-value their removal. Lurrus allows you to cast multiple spells per turn, overwhelming their interaction. Use Stock Up to dig past their control elements.",
+      "vs_mirror": "Card advantage is paramount. Use Stock Up to out-draw them. Prioritize graveyard hate to disrupt their recursion. Win the resource war by sequencing cheaper spells and forcing them to overcommit."
+    },
+    "sideboard_advice": "Post-sideboard, increase interaction and card advantage against control/combo, while adding early removal and sweepers against aggro. In the mirror, prioritize graveyard hate and hand disruption. Always tailor your sideboard to the specific metagame threats, but keep Lurrus and Stock Up as core anchors.",
+    "notes": "Lurrus is a legendary companion, so you can only have one in command, but you can cast it from the graveyard repeatedly. Stock Up's effect should be optimized for card advantage rather than discarding key pieces. Thundertrap Trainer synergizes with high spell counts; ensure your deck runs enough cheap spells to maximize triggers. Common mistake: filling the graveyard with uncastable spells or overcommitting to the board without recursion backup. Always track opponent's graveyard and interaction availability."
+  },
+  {
+    "archetype": "Dimir Lurrus Control",
+    "format": "Unknown",
+    "colors": [
+      "U",
+      "B"
+    ],
+    "philosophy": "Dimir Lurrus Control aims to stabilize early with cheap threats and efficient removal, then out-value opponents by repeatedly replaying 2-mana-or-less spells via Lurrus of the Dream-Den. It excels against combo and control decks by disrupting their game plans while leveraging card advantage to grind out long games, though it must manage its vulnerability to aggressive, high-velocity strategies.",
+    "opening_strategy": {
+      "mulligan_criteria": "Keep hands with 2-3 lands, Lurrus of the Dream-Den, and 1-2 1-drops (Orcish Bowmasters/Psychic Frog) or early interaction (Thoughtseize/Dismember). Mulligan hands with 3+ lands, no Lurrus/1-drops, or only expensive spells that can't impact turns 1-2.",
+      "early_game_plays": "Turn 1: Play a land, cast Thoughtseize/Dismember to disrupt, or drop a 1-drop if the board is clear. Turn 2: Develop mana, cast Lurrus or another 1-drop, or play a removal spell. Sequence lands to ensure consistent blue/black mana availability for interaction and Lurrus casting.",
+      "sideboard_plan": "vs Aggro (Mono-White Initiative, Jewel Shops): Bring in more removal (Dismember, Fatal Push) and board wipes (Anger of the Gods/Blasphemous Act). vs Control/Mirror (Esper Lurrus Control): Bring in card advantage (The Wandering Emperor, Teferi, Hero of Dominaria) and counters (Cryptic Command). vs Combo (Oath of Druids, Dredge): Bring in graveyard hate (Leyline of the Void, Rest in Peace, Surgical Extraction) and counters."
+    },
+    "midgame_priorities": {
+      "resource_management": "Preserve Lurrus as your primary engine; avoid overcommitting to the board if you can recur threats next turn. Manage your graveyard carefully—don't fill it with non-Lurrus targets, but actively dump 1-drops and removal to fuel flashback. Use cantrips (Ponder/Brainstorm) to dig for Lurrus or interaction when resources thin.",
+      "board_control": "Commit threats when you have removal or counterspells to protect them, or when you can safely recur them next turn. Hold back if facing sweepers or if your graveyard is empty. Prioritize trading 1-drops for opponent's threats to preserve Lurrus for late-game value.",
+      "threat_tracking": "Watch for sweepers (Supreme Verdict, Anger), graveyard strategies (Dredge, Oath), and combo win conditions. Note when opponents tap out for big spells or hold up interaction. Track graveyard contents to anticipate Lurrus targets and avoid giving them free recursion."
+    },
+    "endgame_tactics": {
+      "finishers": "Lurrus of the Dream-Den replaying Orcish Bowmasters/Psychic Frog for incremental damage and targeted removal, combined with Teferi, Hero of Dominaria or The Wandering Emperor for card advantage and a reliable clock.",
+      "when_to_commit": "Go all-in when you have Lurrus on board, a full graveyard of 1-drops/removal, and enough interaction to protect your board or answer their sweepers. Also commit when the opponent is at low life and you can recur threats for lethal before they stabilize.",
+      "when_to_concede": "Fold against decks with unanswerable combo wins, massive sweepers with no Lurrus/recur threats, or when you're completely out of resources and the opponent has a locked board. Don't bluff through known hate cards or graveyard disruption."
+    },
+    "threat_responses": {
+      "against_countermagic": "Use cantrips to dig around counters, cast threats at the end of the opponent's turn, use flashback/removal to bypass counters, or sideboard in more uncounterable threats/sweepers.",
+      "against_ramp": "Apply early pressure to race them, use efficient removal (Dismember, Fatal Push) on key ramp creatures, and sideboard in artifact/enchantment hate or additional removal to slow their acceleration.",
+      "against_aggro": "Stabilize with early removal and 1-drops, use Psychic Frog to neutralize big threats, and sideboard in board wipes or more efficient removal. Don't overextend into sweepers or leave your Lurrus unprotected.",
+      "against_control": "Out-value them with the Lurrus engine and card draw, apply incremental pressure with 1-drops, and sideboard in more threats or graveyard hate if they rely on it. Force them to spend resources on your recurring threats.",
+      "vs_mirror": "Win the resource war by optimizing Lurrus targets, winning the graveyard race, and sideboarding in more card advantage (Teferi, Wandering Emperor) and counterspells. Prioritize keeping Lurrus safe and trading efficiently to outlast them."
+    },
+    "sideboard_advice": "Post-sideboard, shift from a generic control shell to a matchup-specific plan. Against fast decks, increase removal and early interaction. Against grindy/control, add card advantage and sweepers. Against combo/graveyard, prioritize hate cards and counters. Always ensure your sideboard doesn't dilute your Lurrus engine or disrupt your mana base.",
+    "notes": "Common mistakes include overfilling the graveyard with non-Lurrus targets, forgetting that Lurrus only returns 2-mana-or-less spells, and mismanaging the flashback mechanic. Remember that Psychic Frog and Orcish Bowmasters are both 1-mana, making them ideal Lurrus targets. Track the opponent's graveyard to avoid giving them free Lurrus targets if they run similar strategies, and always prioritize protecting Lurrus as your primary win condition engine."
+  },
+  {
+    "archetype": "Sphere Shops",
+    "format": "Modern",
+    "colors": [
+      "Blue"
+    ],
+    "philosophy": "Sphere Shops is a disruptive artifact-based control deck that aims to lock opponents out of their game plan using Null Rod and Sphere of Resistance while steadily applying pressure with Patchwork Automaton. It excels against combo and control decks that rely heavily on non-artifact spells, but struggles against fast aggro and artifact-synergistic strategies.",
+    "opening_strategy": {
+      "mulligan_criteria": "Keep hands with 2-3 lands (primarily Island and Arcane Lighthouse), plus at least one of: Null Rod, Sphere of Resistance, Patchwork Automaton, or Spell Pierce/Force of Will. Keep hands with 2+ disruption if you have a land drop. Mulligan pure land hands, hands with only one disruption piece and no lands, or hands with multiple copies of low-impact cards like extra Arcane Lighthouse without answers.",
+      "early_game_plays": "Turn 1: Play Island, cast Spell Pierce or discard (if running hand disruption). Turn 2: Play Arcane Lighthouse or second Island, then cast Sphere of Resistance or Null Rod. If opening with Lighthouse, play it to enable Wasteland or protect your hand from discard. Sequence lands to ensure you can cast disruption on curve; prioritize getting Null Rod and Sphere online by turn 3 for maximum lock potential.",
+      "sideboard_plan": "vs Aggro (Mono-Red, Rakdos Midrange): Bring in Surgical Extraction, Rest in Peace, or Leyline of Punishment, plus additional removal like Lightning Axe or extra Spell Pierce/Force. vs Control (Esper, Jeskai): Bring in more hand disruption (Thoughtseize/Inquisition if running), additional Thalia's Lieutenant, and artifact hate. vs Combo (Dredge, Oath, Storm): Bring in Leyline of Punishment, Surgical Extraction, Rest in Peace, and extra Null Rods. vs Mirror: Bring in additional Spell Pierce/Force of Will, Leyline of Punishment, and Null Rod/Sphere to win the disruption war."
+    },
+    "midgame_priorities": {
+      "resource_management": "Mana is tight; always keep 1 blue open for counterspells until it's safe to commit. Your hand is your primary resource—don't dump disruption early unless necessary. Graveyard is generally irrelevant for you, but monitor opponents using it (Dredge, Reanimator). Use Arcane Lighthouse to enable fetches/Wasteland and protect your spells from discard.",
+      "board_control": "Commit Patchwork Automaton only when Null Rod and Sphere are active or when you can protect it. Don't overcommit to the board if you have no disruption left. Hold back if the opponent has unanswered interaction (e.g., Counterspell, Lightning Axe) or if you're facing a sweeper.",
+      "threat_tracking": "Watch for graveyard activity (Dredge, Reanimator), mana dorks/ramp (Oath, Tron), and artifact synergies (Jewel Shops, Affinity). Key tell: Opponent playing multiple non-basic lands or shuffling graveyard means combo/control. Opponent holding up 2+ mana on their turn usually means they have a counter or removal. Track how many interaction spells they've already used to gauge when you can safely attack."
+    },
+    "endgame_tactics": {
+      "finishers": "Patchwork Automaton with Null Rod and Sphere active is the primary win condition. Thalia's Lieutenant can close out games against artifact-heavy decks. Force of Will or Spell Pierce can protect the final Automaton or Null Rod from removal.",
+      "when_to_commit": "Go all-in when you have Null Rod and Sphere on the battlefield, the opponent has no interaction, and you can attack with Automaton safely. Also commit when you've out-resourced them in disruption and they're out of answers, or when you can swing for lethal before they can stabilize.",
+      "when_to_concede": "Fold if you're facing a fast aggro deck with no disruption in hand, if you're locked out of lands, or if the opponent has established a board you can't clear (e.g., multiple threats with removal in hand). Also concede if you're in a bad mirror with no counterspells and they have a Null Rod lock."
+    },
+    "threat_responses": {
+      "against_countermagic": "Use Arcane Lighthouse to protect your hand, but counters are harder to resolve. Rely on Force of Will to protect your key pieces. Don't overcommit to the stack; wait for them to use interaction on your Pierce. Null Rod can still disrupt their non-artifact spells even if countered.",
+      "against_ramp": "Null Rod shuts down mana dorks and ramp spells. Sphere of Resistance punishes their extra mana. Use Wasteland to disrupt their mana base. Attack with Automaton to race their slow game plan. Don't let them stabilize; pressure is key.",
+      "against_aggro": "Early Spell Pierce/Force of Will to stop key spells. Arcane Lighthouse to protect your hand. Null Rod to stop non-artifact spells. Patchwork Automaton chases them down. If they go wide, consider Leyline of Punishment or surgical extraction to clear the board.",
+      "against_control": "Out-grind them with disruption. Null Rod/Sphere lock them out of their spells. Patchwork Automaton applies pressure. Use Force of Will to protect your key pieces. Don't overextend; control decks have sweepers. Win by out-resolving them and having better disruption.",
+      "vs_mirror": "It's a counterspell and disruption war. Prioritize keeping Spell Pierce and Force of Will. Null Rod is king. Attack with Automaton when safe. Use Arcane Lighthouse to protect your hand. Win by out-resolving them and having better disruption. Track their hand size and interaction to know when to swing."
+    },
+    "sideboard_advice": "Post-sideboard, adjust your disruption count based on the metagame. Against combo-heavy fields, increase Leyline of Punishment and graveyard hate. Against control, add more hand disruption and counters. In mirrors, prioritize counterspells and Null Rod. Always ensure your land count is optimized for the post-sideboard card pool, and consider adding artifact hate if Jewel Shops or Affinity rise in popularity.",
+    "notes": "Common mistake: Playing Sphere of Resistance without Null Rod (it's weak alone). Always try to have both up by turn 3. Another mistake: Overcommitting to the board without protection. Unique interaction: Arcane Lighthouse can be used to fetch Wasteland to destroy opponent's non-basic lands, but be careful not to destroy your own. Null Rod interacts with mana abilities that produce colored mana (shuts down ramp). Patchwork Automaton's trigger is a triggered ability, not a spell, so it can't be countered. Always track how many interaction spells the opponent has used to gauge when you can safely attack."
+  },
+  {
+    "archetype": "Doomsday",
+    "format": "Unknown",
+    "colors": [
+      "U",
+      "B"
+    ],
+    "philosophy": "A fast combo deck that assembles Doomsday, Psychic Frog, a cantrip, and a win condition in the graveyard to mill out or trigger enter-the-battlefield effects for a game-winning turn. It excels at dismantling control and combo decks through hand disruption and graveyard recursion, but struggles against aggressive strategies and dedicated graveyard hate.",
+    "opening_strategy": {
+      "mulligan_criteria": "Keep hands with Doomsday, Psychic Frog, Lurrus, or at least two of these plus a cantrip/discard. Require at least two lands plus one acceleration source (e.g., Mana Crypt, Chrome Mox, or a ritual) or a cantrip to find them. Mulligan pure land hands, hands with only one combo piece and no support, or hands lacking acceleration/cantrips if you hold multiple pieces.",
+      "early_game_plays": "Turn 1: Play a land, cast Thoughtseize/Duress to find combo pieces or remove key threats. Turn 2: Accelerate with mana rocks/rituals, cast another cantrip or discard, and begin assembling the graveyard. Prioritize playing lands to support the combo's mana requirements (typically 3-4 mana for Doomsday + Frog). If you draw Lurrus early, cast it to enable recursion of Doomsday or the Frog.",
+      "sideboard_plan": "Against Control/Combo: Bring in Rest in Peace, Leyline of the Void, Surgical Extraction, and Null Rod. Against Aggro/Initiative: Bring in additional discard (Thoughtseize, Duress), graveyard hate, and spot removal. Against Jewel Shops: Bring in Null Rod, Rest in Peace, and artifact hate. Against Dredge: Bring in Rest in Peace, Leyline of the Void, and graveyard hate. Against Mirror: Bring in additional discard, graveyard hate, and win condition redundancy."
+    },
+    "midgame_priorities": {
+      "resource_management": "Treat your graveyard as a resource, not a liability. Use Lurrus to recur Doomsday or Psychic Frog if you run out of pieces. Manage mana carefully to ensure you can cast Doomsday (3UB) and activate the Frog (1U) on the same turn. Avoid milling yourself accidentally; track your graveyard contents when using the Frog.",
+      "board_control": "Commit threats only when you have a clear path to the combo or can protect it with discard. Hold back if the opponent has unanswered removal or hate cards. Use discard to clear the opponent's hand of threats or counterspells before going off.",
+      "threat_tracking": "Watch for graveyard hate (Rest in Peace, Leyline, Surgical Extraction), counterspells, and hand disruption. Track when the opponent plays removal or hate, as this may force you to assemble the combo earlier or concede. Note if they are playing Oath or Initiative, as these can win quickly if left unchecked."
+    },
+    "endgame_tactics": {
+      "finishers": "Cast Doomsday to exile your hand and graveyard, then draw seven cards. Activate Psychic Frog to mill two and draw one, repeating until you assemble the win condition (typically a creature with enter-the-battlefield effects or a mill-out win con). Lurrus can recur Doomsday or the Frog if needed.",
+      "when_to_commit": "Go all-in when you have Doomsday, Psychic Frog, a cantrip, and a win condition in hand/graveyard, and you can either protect the combo with discard or go off uncountered. Commit when the opponent has no remaining answers or when you can win before they can respond.",
+      "when_to_concede": "Fold if you are dead to graveyard hate (Rest in Peace, Leyline) with no way to bypass it, or if you have a dead hand with no acceleration/cantrips to find pieces. Concede against fast aggro or combo if you cannot stabilize or assemble in time."
+    },
+    "threat_responses": {
+      "against_countermagic": "Use discard to remove counterspells from the opponent's hand. Cast cantrips to find protection or assemble the combo in multiple steps. Use Lurrus to recur Doomsday if it gets countered, or go off with redundant pieces.",
+      "against_ramp": "Discard their mana rocks and ritual spells. Use your own acceleration to race. Go off on turn 3 or 4 before they can deploy their win conditions.",
+      "against_aggro": "Prioritize discard to remove early threats. Use Lurrus to recur Doomsday and go off quickly. If you cannot assemble, use discard to stall and out-grind them. Avoid playing too many lands; prioritize cantrips and discard.",
+      "against_control": "Grind with discard to clear their hand of answers. Use Lurrus to recur pieces and out-resource them. Go off when they are out of counterspells or when you can protect the combo with hand disruption. Track their graveyard to avoid falling for graveyard hate.",
+      "vs_mirror": "Race to assemble the combo first. Use discard to clear the opponent's hand of combo pieces. Track their graveyard to avoid falling for their Doomsday. Win the graveyard war by using Lurrus to recur pieces and mill out the opponent. Prioritize win condition redundancy."
+    },
+    "sideboard_advice": "Post-sideboard, prioritize hate cards against the metagame's top decks. Against control and combo, bring in Rest in Peace, Leyline of the Void, and Null Rod to disrupt their game plans. Against aggro and fast combo, bring in additional discard and spot removal to stabilize. In the mirror, bring in extra discard and graveyard hate to win the resource war. Always ensure you have at least one way to bypass graveyard hate if you face it.",
+    "notes": "Lurrus of the Dream-Den is a critical enabler; it allows you to recur Doomsday or Psychic Frog, making the combo more resilient. Be extremely careful when activating Psychic Frog, as milling yourself can accidentally lose the game or disrupt your own combo. Doomsday is a sorcery, so you must time it carefully to avoid being interrupted. In the Unknown format, adapt your sideboard based on the specific metagame, but always prioritize graveyard protection and hand disruption."
+  },
+  {
+    "archetype": "Lurrus Breach",
+    "format": "Unknown",
+    "colors": [
+      "U",
+      "B",
+      "R"
+    ],
+    "philosophy": "A recursive combo-control hybrid that leverages Lurrus of the Dream-Den to repeatedly cast cheap disruption and cantrips while digging for a Flow State + Psychic Frog finish. It wins by out-resourcing control mirrors, racing midrange, and executing a burst combo before opponents can stabilize or answer.",
+    "opening_strategy": {
+      "mulligan_criteria": "Keep hands with 2-3 lands (preferably fetch/shock or duals), at least one Lurrus, and a Flow State or Psychic Frog. Keep hands with Thoughtseize, Fatal Push, or Lightning Strike for early disruption. Mulligan pure land hands, hands with only high-CMC spells, or hands missing Lurrus/Flow State/Psychic Frog without disruption or mana fixing.",
+      "early_game_plays": "Turn 1: Play a land, cast Thoughtseize targeting key interaction or combo pieces. Turn 2: Play a shockland/dual, cast a cheap cantrip or disruption, or drop Lurrus if you have the mana. Prioritize fetching/finding Flow State and Psychic Frog while cycling through the deck with Lurrus-recursable cantrips. Sequence lands to ensure you can cast Flow State on turn 3-4.",
+      "sideboard_plan": "Vs Aggro (Initiative, Jewel Shops): +1 Blood Moon, +1 Red Elemental Blast/Flusterstorm, +1 Surgical Extraction, -2 lands, -1 Lurrus. Vs Control (Esper Lurrus): +1 Negate/Force of Will, +1 Thoughtseize, +1 Surgical Extraction, -2 lands, -1 Flow State. Vs Combo (Dredge, Oath): +1 Grafdigger's Cage/Rest in Peace, +1 Surgical Extraction, +1 Blood Moon, -2 lands, -1 Psychic Frog. Vs Mirror: +1 Negate, +1 Thoughtseize, +1 Surgical Extraction, -2 lands, -1 Flow State."
+    },
+    "midgame_priorities": {
+      "resource_management": "Balance graveyard resources for Lurrus recursion against keeping cards in hand for immediate disruption. Avoid over-committing to casting cheap spells if you need to hold mana for counters or removal. Use cantrips to dig for Flow State/Psychic Frog while maintaining tempo and hand size.",
+      "board_control": "Commit threats only when you have protection or can answer their interaction. Hold back on casting Flow State if you lack sufficient targets or if the opponent has sweepers. Use Lurrus to recur removal/cantrips to maintain board presence without depleting your hand.",
+      "threat_tracking": "Watch for sweepers (Wrath of God, Anger of the Gods), counterspells, graveyard hate, and combo pieces. Note when opponents tap out for interaction versus when they're holding priority. Track graveyard contents for Lurrus recursion targets and monitor opponent's hand size to gauge combo readiness."
+    },
+    "endgame_tactics": {
+      "finishers": "Flow State + Psychic Frog (often with a Frog token or other cheap spells to hit the mana value threshold). Lurrus recursion of Psychic Frog or other win-cons to close out the game.",
+      "when_to_commit": "Go all-in when you have Flow State, Psychic Frog, and enough cheap spells to hit lethal. Commit when the opponent has no interaction left or when you can race their combo before they stabilize.",
+      "when_to_concede": "Fold if you're down to a dead hand with no Lurrus/Flow State/Psychic Frog, if the opponent has established a hard-lock (sweepers + counters + graveyard hate), or if you're consistently losing the mirror/combo race with no recovery path."
+    },
+    "threat_responses": {
+      "against_countermagic": "Use cheap, uncounterable threats (Psychic Frog can be cast for free if you control a Frog, or use Flow State to bypass counters). Sequence cantrips to find protection. Use Lurrus to recur spells after counters resolve, and pressure with discard to remove counters from hand.",
+      "against_ramp": "Apply early pressure with discard and removal. Don't let them stabilize. Use Blood Moon or discard to disrupt mana bases. Combo off quickly before they cast their big spells or establish board dominance.",
+      "against_aggro": "Early discard and removal are key. Use Lurrus to recur removal to stabilize. Dig for Flow State/Psychic Frog to close out the game quickly. Don't over-invest in board stalls; prioritize going under their curve.",
+      "against_control": "Pressure with cheap threats and cantrips. Use Lurrus to out-value them in the late game. Force them to use interaction on low-impact spells. Combo off when they're tapped out or out of counters, and use discard to remove key answers.",
+      "vs_mirror": "Win the disruption race. Prioritize Thoughtseize and discard to remove their Lurrus/Flow State/Psychic Frog. Use Lurrus to recur removal/cantrips. Track graveyard for recursion targets. Win by going first or having better sequencing and hand management."
+    },
+    "sideboard_advice": "Post-sideboard, shift from a pure combo-control hybrid to a focused game plan based on the metagame. Against control/mirrors, increase disruption and protection. Against aggro/combo, add hate cards and early pressure. Adjust land counts to match the expected mana requirements of your revised game plan. Always prioritize keeping Lurrus and your primary win-con in the main deck, and track opponent's sideboard trends to adapt mid-tournament.",
+    "notes": "Common mistake: Over-casting cheap spells early and running out of resources for the combo. Always keep a hand of disruption and a win-con. Unique interaction: Psychic Frog can be cast for {1}{U}{R} and creates a Frog token, which can then be used to cast another Psychic Frog for free, or combined with Flow State for massive value. Lurrus recursion timing: Don't cast spells you can't afford to lose to the graveyard unless you have a way to recur them. Format note: Since format is Unknown, assume standard rules but adapt land counts and hate cards based on actual format legality and local metagame shifts."
+  },
+  {
+    "archetype": "Paradoxical Outcome",
+    "format": "Modern",
+    "colors": [
+      "U",
+      "B",
+      "R"
+    ],
+    "philosophy": "A blue/black/red control/combo hybrid that uses Paradoxical Outcome to cycle cards, find answers, and win with Thundertrap Trainer or incremental advantage. It aims to out-value opponents, disrupt their game plan, and close out games with resilient threats or late-game card advantage.",
+    "opening_strategy": {
+      "mulligan_criteria": "Keep hands with 2-3 lands, Paradoxical Outcome, and early interaction (Thoughtseize, Duress, Lightning Axe, or Izzet Charm). Keep hands with Thundertrap Trainer if supported by a land and a cantrip/answer. Mulligan pure land draws, hands with only Paradoxical Outcome and no lands, or hands with no early interaction and no threats.",
+      "early_game_plays": "Turn 1: Play a land, cast Thoughtseize/Duress if possible, or hold Paradoxical Outcome for later. Turn 2: Play a shockland, cast Lightning Axe or Izzet Charm for tempo, or cast Thundertrap Trainer if ahead. Sequence lands to ensure blue/red/black access for Paradoxical Outcome and interaction.",
+      "sideboard_plan": "vs Aggro (Dredge, Initiative): Bring in Go Blank, Lightning Axe, Izzet Charm, Lightning Strike, discard. vs Control (Esper Lurrus): Bring in Abrupt Decay, Fatal Push, Go Blank, additional Paradoxical Outcome, discard. vs Combo (Oath, Jewel): Bring in Thoughtseize, Duress, Go Blank, Lightning Axe, discard. vs Mirror: Bring in discard, extra interaction, maybe more Paradoxical Outcome."
+    },
+    "midgame_priorities": {
+      "resource_management": "Paradoxical Outcome is your lifeline; use it to find answers when low on resources, not just to cycle. Stock Up is for late-game card advantage when you have a board or need to stabilize. Manage mana to keep open for interaction and Paradoxical Outcome's cycling.",
+      "board_control": "Commit Thundertrap Trainer when you can protect it or when you have enough interaction to survive the turn. Hold back if you're low on answers or facing a heavy removal suite. Use Izzet Charm/Lightning Axe for tempo and to clear blockers.",
+      "threat_tracking": "Watch for Lurrus of the Dream-Den triggers, Jewel Shops mana rocks, Dredge engines, Oath targets, Initiative triggers. Track graveyard hate availability, countermagic, and removal suites."
+    },
+    "endgame_tactics": {
+      "finishers": "Thundertrap Trainer in combat, often supported by Izzet Charm/Lightning Axe to clear blockers or protect. Paradoxical Outcome to cycle into a win condition or extra turns. Stock Up to out-value control/combo.",
+      "when_to_commit": "Go all-in when you have a clear path to combat, enough interaction to survive, or when the opponent is out of answers. Commit when you can safely attack with Thundertrap Trainer and have a backup plan.",
+      "when_to_concede": "Fold against locked-out Jewel Shops or Oath with no disruption, dead hands with no lands, or when facing a control deck with no answers and you're out of resources."
+    },
+    "threat_responses": {
+      "against_countermagic": "Use Paradoxical Outcome to cycle into cheaper threats or answers. Use Lightning Axe/Izzet Charm for instant-speed interaction. Don't overcommit to expensive spells; use cantrips and cheap interaction.",
+      "against_ramp": "Use discard to hit key pieces, Lightning Axe to remove ramp targets, and Paradoxical Outcome to find answers. Stabilize quickly with interaction and threats.",
+      "against_aggro": "Use discard to hit threats, Lightning Axe/Izzet Charm to remove early threats, Paradoxical Outcome to find answers. Stabilize with interaction and commit Thundertrap Trainer when safe.",
+      "against_control": "Out-value with Paradoxical Outcome and Stock Up. Use discard to hit key spells. Pressure with Thundertrap Trainer and force them to use resources.",
+      "vs_mirror": "Win the discard war. Use Paradoxical Outcome to find answers and threats. Track graveyard and hand size. Win by out-resourcing and better sequencing."
+    },
+    "sideboard_advice": "Post-sideboard, adjust based on matchup. Against control, bring in more discard and removal. Against aggro/combo, bring in more interaction and discard. Against mirror, bring in more hand disruption and card advantage. Always keep Paradoxical Outcome and Thundertrap Trainer as core pieces.",
+    "notes": "Paradoxical Outcome can be used to cycle into itself for extra draws. Stock Up is a late-game win condition in control mirrors. Watch for graveyard hate against Dredge. Don't overuse Paradoxical Outcome early; save it for critical moments. Thundertrap Trainer benefits from combat tricks and protection."
+  },
+  {
+    "archetype": "Blue Tinker",
+    "format": "Unknown",
+    "colors": [
+      "W",
+      "U",
+      "B"
+    ],
+    "philosophy": "Blue Tinker is a control-combo hybrid that disrupts the board while assembling a mana base and draw engine to resolve Tinker for a game-winning artifact or combo piece. It excels against combo and control archetypes by out-resourcing them, but must race or stabilize quickly against aggressive strategies.",
+    "opening_strategy": {
+      "mulligan_criteria": "Keep hands with 2+ lands (including duals/fixers) and at least one draw engine (Flow State, Stock Up) or tutor. Keep any hand with Tinker paired with a mana source or artifact ramp. Mulligan on 3+ lands with no spells, or hands consisting solely of cheap artifacts with no draw/tutors or interaction.",
+      "early_game_plays": "Turn 1: Play a land, cast a cantrip/dig spell or cheap mana rock (Sol Ring, Mind Stone, Arcane Signet). Turn 2: Develop mana, cast disruption (Duress, Thoughtseize) or continue digging for Tinker. Land sequencing: Prioritize fetches/shocks for consistency, then mana rocks. Avoid overextending into potential hate; maintain a hand for interaction.",
+      "sideboard_plan": "vs Aggro: +1 Shatterstorm, +1 Pyroclasm, +1 Duress, -2 Flow State, -1 Tinker. vs Control/Combo: +1 Mindslaver, +1 Mycosynth Wellspring, +1 Bolas's Citadel, -2 removal, -1 hatebears. vs Mirror: +1 Counterspell, +1 Negate, +1 Tinker, -1 draw spells."
+    },
+    "midgame_priorities": {
+      "resource_management": "Hold mana for Tinker or key interaction; avoid tapping out for non-essential artifacts. Use Stock Up/Flow State to dig through the deck, but stop drawing once you have a win-con or protection. Graveyard is secondary; prioritize hand and library resources for consistency.",
+      "board_control": "Hold back on committing all artifacts until you have a win-con or protection. Use removal/hate to clear key threats. If opponent is combo, prioritize disruption over development. If control, pressure with artifacts and draw while preserving interaction.",
+      "threat_tracking": "Watch for counterspells (hold Tinker for when they have no mana or use protection). Watch for artifact hate (Shatterstorm, Rest in Peace, Null Rod). Watch for combo pieces (Oath, Lurrus, etc.). Key tell: Opponent tapping for a big spell or holding up mana on their turn end."
+    },
+    "endgame_tactics": {
+      "finishers": "Tinker for Mindslaver (extra turns), Mycosynth Wellspring + mana rocks (infinite mana), or Bolas's Citadel (mill/steal). Assemble 3+ mana, cast Tinker, target win-con.",
+      "when_to_commit": "When you have 3+ mana sources, a draw spell to dig for protection, and opponent has no immediate removal/hate. Or when you can protect the win-con (with counters or protection).",
+      "when_to_concede": "If you're down to 1 life, have no mana/draw, opponent has a board wipe or artifact hate, and you have no Tinker or win-con in hand/draw. Or if you're facing a locked-out control deck with no way to break through."
+    },
+    "threat_responses": {
+      "against_countermagic": "Use protection (Counterspell, Negate, or artifact protection), cast Tinker at end of opponent's turn, or use a combo that doesn't rely on Tinker (if applicable). Dig for protection.",
+      "against_ramp": "Early disruption (Duress, Thoughtseize), artifact hate (Shatterstorm), or race with fast Tinker win-con. Don't let them get to 5+ mana.",
+      "against_aggro": "Early removal, board wipes (Pyroclasm, Shatterstorm), life gain (if available), or fast Tinker for Mindslaver to take extra turns and stabilize.",
+      "against_control": "Out-value with draw spells, pressure with artifacts, use Tinker for a win-con they can't answer, or lock them out with counters/protection.",
+      "vs_mirror": "Win with better resource management, more protection, or faster Tinker assembly. Use counterspells to protect your Tinker, disrupt theirs, and race for the win-con."
+    },
+    "sideboard_advice": "Post-sideboard, shift from pure combo to a more interactive/control shell. Bring in hate for the metagame (artifact hate vs Jewel Shops, graveyard hate vs Dredge, counters vs Control). Adjust mana base if needed. Prioritize protection for Tinker and win-con.",
+    "notes": "Tinker is an instant, so it can be cast in response to threats, but be careful of targeted removal. Flow State and Stock Up are key to consistency. Don't overcommit to artifacts without a win-con. Watch for 'Oath of Druids' and 'Esper Lurrus Control' in the metagame—these decks can out-value you, so prioritize disruption and fast Tinker. Common mistake: Tinking for a non-essential artifact when you could have waited for a win-con."
+  },
+  {
+    "archetype": "Lurrus DRS",
+    "format": "Unknown",
+    "colors": [
+      "U",
+      "B",
+      "G"
+    ],
+    "philosophy": "Out-value opponents through relentless graveyard recursion and card advantage, leveraging Lurrus to repeatedly cast cheap dredgers while disrupting the opponent's resources. Wins by out-graveyarding control, out-speeding aggro with early pressure, and out-valuing mirrors.",
+    "opening_strategy": {
+      "mulligan_criteria": "Keep hands with 2-3 lands (preferably fetch/shock/mana dork), at least one dredger (Dreadhorde Arcanist, Griselbrand, or a cheap dredger), and discard/spell support. Mulligan on pure lands, multiple Lurrus without support, or hands missing early interaction.",
+      "early_game_plays": "Turn 1: Play a land, cast a mana dork (Llanowar Elves/Birds) or discard (Thoughtseize/Duress) to protect the plan. Turn 2: Cast Arcanist or another dredger, or cast Lurrus if ahead. Sequence mana dorks into Arcanist to start filling the graveyard. Use fetches to shock for early damage if needed.",
+      "sideboard_plan": "vs Aggro: Bring in Graveyard hate (Rest in Peace, Null Rod, Surgical Extraction), discard, removal. vs Control: Bring in more threats, discard, artifact hate if needed. vs Combo/Jewel/Initiative: Bring in Collector Ouphe, Null Rod, Rest in Peace, artifact hate. vs Mirror: Bring in graveyard hate, discard, extra recursion protection."
+    },
+    "midgame_priorities": {
+      "resource_management": "Prioritize graveyard over hand. Use Lurrus to cycle dredgers. Don't overcommit mana if opponent has sweepers. Manage fetch lands carefully to avoid flooding.",
+      "board_control": "Commit threats when opponent has no sweepers or counters. Hold back if they have spot removal or board wipes. Psychic Frog can bounce key threats to buy time.",
+      "threat_tracking": "Watch for graveyard hate (Rest in Peace, Leyline), sweepers (Supreme Verdict, Wrath of God), counters (Force of Will, Counterspell), and combo wincons. Note when they tap out for interaction."
+    },
+    "endgame_tactics": {
+      "finishers": "Griselbrand, repeated Arcanist activations, Psychic Frog bouncing, or overwhelming board state from graveyard recursion.",
+      "when_to_commit": "When opponent has no graveyard hate, no sweepers, and you have Lurrus + 2+ dredgers in hand/graveyard.",
+      "when_to_concede": "When they have Rest in Peace/Leyline active and you can't remove it, or when you're out of resources and they have a guaranteed win condition."
+    },
+    "threat_responses": {
+      "against_countermagic": "Use discard to remove counterspells. Cast threats in response to their spells. Use fetches to shock for damage to bypass counters if needed. Consider cheap threats or multiple threats.",
+      "against_ramp": "Apply early pressure. Use discard to hit mana dorks. Graveyard hate if they rely on it. Out-value them with Lurrus recursion.",
+      "against_aggro": "Early discard, spot removal, Psychic Frog bounce, graveyard hate if they use it. Stabilize with Lurrus engine.",
+      "against_control": "Out-value them. Use discard to strip key answers. Pressure with multiple threats. Don't let them stabilize with sweepers.",
+      "vs_mirror": "Win the graveyard war. Use discard to remove their Lurrus/dredgers. Graveyard hate (Rest in Peace, Surgical). Out-value with better sequencing."
+    },
+    "sideboard_advice": "Post-sideboard, shift from raw value to targeted hate. Bring in artifact hate vs Jewel/Initiative, graveyard hate vs control/mirrors, and discard/removal vs aggro. Adjust land count if needed. Prioritize cards that disrupt opponent's win conditions while preserving your recursion engine.",
+    "notes": "Common mistakes: Overcommitting to Lurrus without backup threats, ignoring graveyard hate, mismanaging fetch lands, forgetting Psychic Frog's bounce timing. Unique interactions: Lurrus can return dredgers from graveyard to hand. Collector Ouphe shuts down artifact combos but is vulnerable to discard. Ensure you have enough interaction to protect your engine."
+  },
+  {
+    "archetype": "Counter Vine",
+    "format": "Unknown",
+    "colors": [
+      "U",
+      "B",
+      "R",
+      "G"
+    ],
+    "philosophy": "A four-color control-combo hybrid that uses Force of Negation to protect key pieces and Squee, Goblin Nabob as a recurring win condition, leveraging Noxious Revival to reset threats while generating card advantage through Goblin Nabob's enter-the-battlefield triggers. It wins by out-resourcing control decks, out-recursing combo, and stabilizing against aggro before closing with repeated Squee attacks.",
+    "opening_strategy": {
+      "mulligan_criteria": "Keep hands with 2-3 lands (including fetches/shocks), a Force of Negation or Noxious Revival, and a Squee or Goblin Nabob. Mulligan if you have 0-1 lands, only single-colored lands with no fetches, or hands with multiple copies of one spell but no threats/answers. Prioritize hands with interaction + a threat or recursion target.",
+      "early_game_plays": "Turn 1: Play a land, potentially cast Goblin Nabob if you have mana and can afford the risk, or hold for Force of Negation. Turn 2: Develop mana, cast a land, and look to play a Squee or cast Force of Negation on opponent's key spell. If facing aggro, hold counters for early threats; if control, hold for Lurrus or Jace.",
+      "sideboard_plan": "vs Aggro (Initiative, Dredge): +1 Red Elemental Blast/Flusterstorm, +1 Abrupt Decay, -2 Noxious Revival, -1 Squee. vs Control (Esper Lurrus): +1 Negate/Force of Will, +1 Thoughtseize, -2 Goblin Nabob, -1 Squee. vs Combo (Oath, Jewel): +1 Engineered Plague (Goblins), +1 Surgical Extraction, -2 Force of Negation, -1 Goblin Nabob. vs Mirror: +1 Negate, +1 Thoughtseize, -2 lands, -1 recursion."
+    },
+    "midgame_priorities": {
+      "resource_management": "Counters are your lifeline; only spend them on game-ending threats or critical combo pieces. Use Goblin Nabob to dig for answers when low on cards. Manage graveyard with Surgical Extraction or discard to prevent Noxious Revival recursion abuse.",
+      "board_control": "Commit Squee only when you have at least one counter or removal ready for the combat step. Hold back if the board is empty and you're facing a control deck that can clear it next turn. Prioritize board presence over rushing.",
+      "threat_tracking": "Watch for Lurrus of the Dream-Den (Esper), Treasure tokens (Jewel), and graveyard strategies (Dredge). Opponents playing multiple spells in a row often signal combo or control; hold counters for the finisher. Note if they're playing discard or graveyard hate."
+    },
+    "endgame_tactics": {
+      "finishers": "Squee, Goblin Nabob attacking with recursion via Noxious Revival. Once you have a Squee on board and a counter in hand, commit to attacking. Use Goblin Nabob to dig for the second Squee or a counter to protect the attack.",
+      "when_to_commit": "Go all-in when you have a Squee on board, at least one counter or removal in hand, and the opponent has no clear answer. Also commit if you're ahead in life and can close in 2-3 turns.",
+      "when_to_concede": "Fold if you're down to 1-2 cards, have no interaction or threats, and the opponent has an established board (e.g., Lurrus + Jace, or 3+ Treasure tokens). Also concede against Oath if you can't disrupt the combo and they have a turn to assemble it."
+    },
+    "threat_responses": {
+      "against_countermagic": "Use Goblin Nabob to dig past counters. Cast Squee in response to their counterspell if you have a backup. Use Noxious Revival to recur threats after their counters are spent. Consider sideboarded discard to remove counterspells.",
+      "against_ramp": "Use Force of Negation to stop key ramp spells (e.g., Arcane Signet, Sol Ring, or ramp creatures). Use discard to hit their mana rocks. Stabilize quickly with counters and clear their board.",
+      "against_aggro": "Hold counters for early threats (e.g., Monastery Swiftspear, Goblin Guide). Use Goblin Nabob to stabilize and draw into answers. Once stabilized, transition to control and close with Squee.",
+      "against_control": "Apply pressure with Squee and Goblin Nabob. Force them to use counters on non-critical spells. Use recursion to out-value their removal. Sideboard in more discard and graveyard hate.",
+      "vs_mirror": "Win the spell war by holding counters for their Squee or Noxious Revival. Use Thoughtseize to remove their key pieces. Prioritize graveyard denial to stop recursion. Win by out-drawing and out-recursing."
+    },
+    "sideboard_advice": "Post-sideboard, shift from pure control to matchup-specific hybrid. Against control, bring in more direct interaction and discard to break through. Against aggro, prioritize early interaction and board wipes. Against combo, bring in hate cards and reduce recursion to avoid fueling their strategies. Always track what they're playing and adjust your counter budget accordingly.",
+    "notes": "Squee's ETB triggers are a double-edged sword; be mindful of opponent's removal. Noxious Revival can be a liability against graveyard hate, so consider mulliganing it if you expect Surgical Extraction. Force of Negation is your most valuable card; never spend it on a non-critical spell. Remember that 4-color mana can be clunky; prioritize lands that enter untapped or use fetches to smooth draws. Avoid overcommitting to Squee without a counter or removal backup."
+  },
+  {
+    "archetype": "Azorius Initiative",
+    "format": "Unknown",
+    "colors": [
+      "W",
+      "U"
+    ],
+    "philosophy": "Azorius Initiative is a control-arcane deck that leverages the Initiative mechanic to cast spells from the top of your library, turning card draw into immediate board impact. It aims to stabilize early, out-value opponents through recursive spell-casting, and close out games with resilient threats or unexpected finishers.",
+    "opening_strategy": {
+      "mulligan_criteria": "Keep any hand with a land and a turn-1 or turn-2 play (e.g., Quantum Riddler, White Plume Adventurer, or a Lorien Revealed enabler). Prioritize hands with 2-3 lands and at least one way to find or protect Lorien Revealed. Mulligan hands with 0-1 lands, multiple high-cost spells with no early plays, or hands lacking land acceleration/fixing.",
+      "early_game_plays": "Turn 1: Play a land, cast Quantum Riddler or White Plume Adventurer if possible. Turn 2: Play a second land, cast Lorien Revealed or another Initiative creature. If you have Lorien Revealed and an Initiative creature, you can start casting spells from the top of your library. Sequence lands carefully to ensure you can hit your mana requirements for Lorien (4 mana) and your threats.",
+      "sideboard_plan": "Against aggro (Mono-White Initiative, Jewel Shops): Bring in board wipes (e.g., Swords to Plowshares, Path to Exile), more removal, and potentially graveyard hate if needed. Against control (Esper Lurrus): Bring in more card advantage, counterspells, or threat upgrades. Against combo (Oath of Druids, Dredge): Bring in graveyard hate (Leyline of the Void, Rest in Peace), additional removal, and potentially more early interaction. Against mirror: Bring in additional counterspells, targeted removal, and sideboard cards that disrupt Initiative recursion."
+    },
+    "midgame_priorities": {
+      "resource_management": "Treat your library as a secondary hand. Prioritize casting high-impact spells from the top when you have Initiative. Manage mana to keep Lorien Revealed alive and maintain a board presence. Don't overcommit to casting low-value spells from the top if you need mana for protection or interaction.",
+      "board_control": "Commit threats when you have protection or a board wipe ready. Hold back if the opponent has significant interaction or if you're behind on board. Use your Initiative to answer threats or stabilize rather than just going wide.",
+      "threat_tracking": "Watch for the opponent's graveyard (especially against Dredge/Oath), their mana base (to predict if they can hit 4+ mana for Lorien or key spells), and their interaction count. Key tells include holding up blue mana (counterspell/spot removal) or black mana (Lurrus/Graveyard hate)."
+    },
+    "endgame_tactics": {
+      "finishers": "Large threats cast from the top of your library, or combo pieces that win immediately. Lorien Revealed itself can be a win condition if you can cast it multiple times or protect it while casting game-ending spells.",
+      "when_to_commit": "Go all-in when you have a clear board advantage, the opponent has no interaction, or you've established a reliable Initiative engine. Also commit when you can cast a high-impact spell from the top that swings the board.",
+      "when_to_concede": "Fold if you're consistently losing early games to aggro, have no way to find Lorien Revealed, or if the opponent has established an unbreakable board (e.g., Oath of Druids with multiple creatures, or Dredge with infinite life). Also concede if you're dead to the deck's primary win conditions and have no answers."
+    },
+    "threat_responses": {
+      "against_countermagic": "Use multiple low-cost threats to force counters, then cast higher-value spells from the top. Utilize instant-speed interaction or protection spells. Don't overcommit to a single spell if you can split your threats.",
+      "against_ramp": "Apply early pressure to disrupt their mana development. Use removal to kill their ramp creatures. If they get ahead, stabilize with board wipes and out-value them with Initiative recursion.",
+      "against_aggro": "Prioritize early interaction and spot removal. Use your Initiative to cast removal or counterspells from the top. Don't overextend into board wipes; stabilize first, then close out.",
+      "against_control": "Pressure with resilient threats that are hard to remove. Use your Initiative to out-value their card draw. Force them to use interaction on your threats, then swing with the top of your library.",
+      "vs_mirror": "Win the resource war. Prioritize protecting your Lorien Revealed and Initiative creatures. Use targeted removal to kill their key pieces. Sideboard in additional counterspells and graveyard hate if needed. Out-value them by casting more spells from the top."
+    },
+    "sideboard_advice": "Post-sideboard, adjust your curve to match the matchup. Against slower decks, bring in more late-game threats and card advantage. Against faster decks, prioritize early interaction and protection. Always ensure you have enough lands and fixing to consistently hit your mana requirements. Review your sideboard plan before each game and adapt based on the opponent's first-game performance.",
+    "notes": "Initiative recursion is powerful but vulnerable to board wipes and targeted removal. Always protect Lorien Revealed. Be mindful of your library size; running out of cards can limit your Initiative value. Practice sequencing your turns to maximize spell-casting from the top. Common mistake: overcommitting to casting low-value spells from the top instead of saving mana for protection or interaction."
+  },
+  {
+    "archetype": "Beseech Storm",
+    "format": "Unknown",
+    "colors": [
+      "U",
+      "B"
+    ],
+    "philosophy": "Assemble a high-mana artifact engine or win condition in a single turn by leveraging cheap cantrips, mana acceleration, and Beseech the Mirror to sacrifice creatures for free artifacts. Wins against combo and control decks by out-resolving or out-valueing them, while struggling against fast aggro and graveyard strategies.",
+    "opening_strategy": {
+      "mulligan_criteria": "Keep hands with 2-3 lands, at least one Dark Ritual or Flow State, Beseech the Mirror, and a creature to sacrifice (or a way to generate one). Mulligan on all lands, all spells without acceleration, or hands missing Beseech with no way to cast it.",
+      "early_game_plays": "Turn 1: Play a land, cast a cantrip (e.g., Delve spell, Brainstorm, or similar) to dig for acceleration/Beseech. Turn 2: Cast Dark Ritual/Flow State, play a land, cast Beseech the Mirror, sacrifice a creature to search for an artifact, cast it for free. Sequence lands to ensure you can cast acceleration on time without flooding.",
+      "sideboard_plan": "vs Esper Lurrus Control: +1 disruption (Thoughtseize, Duress), +1 hatebear (Thousand-Year Elixir), -2 draw spells. vs Jewel Shops: +1 artifact hate (Rest in Peace, Surgical Extraction), +1 early interaction, -2 acceleration. vs Dredge: +1 graveyard hate (Rest in Peace, Surgical Extraction), +1 early interaction, -2 Beseech/late game. vs Oath of Druids: +1 disruption, +1 hatebear, -2 draw spells. vs Mono-White Initiative: +1 spot removal, +1 early interaction, -2 acceleration."
+    },
+    "midgame_priorities": {
+      "resource_management": "Prioritize keeping hand size high with cantrips; don't overcommit to casting Beseech if you lack a creature to sacrifice or a clear win condition. Manage graveyard carefully if facing Dredge. Use Dark Ritual/Flow State only when you can cast Beseech and have a target.",
+      "board_control": "Hold back on casting Beseech if the opponent has sweepers or counterspells. Commit when you have a clear path to lethal or a lock piece. Don't overextend with creatures if you can win via artifacts.",
+      "threat_tracking": "Watch for counterspells (hold up mana), graveyard strategies (track dredge/putrefy), and control win conditions (Lurrus, planeswalkers). Note when opponents tap out for sweepers or hatebears."
+    },
+    "endgame_tactics": {
+      "finishers": "Beseech the Mirror into free artifacts (e.g., Thopter Foundry + Sword, or a combo like Phyrexian Revoker + Thousand-Year Elixir, or just artifact value leading to lethal). Sometimes finding a direct win con like a free-to-cast threat or combo piece.",
+      "when_to_commit": "When you have a complete mana base, a sacrifice outlet, Beseech, and a clear win condition in your library/hand. Go all-in if the opponent has no interaction left or if you're ahead in the race.",
+      "when_to_concede": "If you're facing a fast combo/aggro and have no early interaction or win condition, or if you're locked out by graveyard hate/sweepers with no way to recover. Also concede if you're down to a dead hand with no acceleration or Beseech."
+    },
+    "threat_responses": {
+      "against_countermagic": "Use cantrips to dig around counters, cast Beseech in response to counterspells if possible, or use cheap acceleration to cast Beseech when they're tapped out. Sideboard in protection or alternative win cons.",
+      "against_ramp": "Race them with your combo, or use disruption (Thoughtseize, Duress) to hit their key ramp spells. Don't let them stabilize; pressure early.",
+      "against_aggro": "Prioritize early interaction (discard, spot removal, or early Beseech if you can find a blocker). Don't overcommit to the combo if you're losing the board. Sideboard in hate and early threats.",
+      "against_control": "Out-value them with artifact synergy, use cantrips to dig past their removal, and pressure with early artifacts. If they have sweepers, wait for a turn they can't respond, or use protection.",
+      "vs_mirror": "Win the resource war by drawing more cards, using disruption to hit their Beseech/acceleration, and prioritizing artifact value. Sideboard in extra disruption and value engines."
+    },
+    "sideboard_advice": "Post-sideboard, shift from pure combo to a more resilient game plan. Against control/combo, bring in disruption and hatebears to protect your engine. Against aggro/graveyard, prioritize early interaction and hate. Adjust land counts if needed, and ensure you have a mix of acceleration, cantrips, and win conditions for the post-board meta.",
+    "notes": "Common mistakes: Casting Beseech without a creature to sacrifice, overcommitting to the combo against sweepers, ignoring graveyard strategies, and not tracking opponent's mana. Unique interactions: Flow State can be cast for {0} if you control an artifact, enabling extra turns or massive value. Beseech's sacrifice target can be any creature you control, including tokens or artifacts with the creature type (if applicable). Always have a backup plan if your primary win con is countered or removed."
+  },
+  {
+    "archetype": "Lurrus Vault Key",
+    "format": "Unknown",
+    "colors": [
+      "W",
+      "U",
+      "R"
+    ],
+    "philosophy": "A control-combo hybrid that stabilizes early with efficient removal and card draw, then leverages Lurrus of the Dream-Den to repeatedly cast Goblin Welder and Goblin Engineer, assembling an infinite draw engine to find win conditions or overwhelm opponents. It excels against control and combo by out-grinding them, while relying on speed and protection to close out games against aggro.",
+    "opening_strategy": {
+      "mulligan_criteria": "Keep hands with 2-3 lands (prioritize duals/shocklands or basics that hit WUR), a Lurrus or early threat (Goblin Guide/Monastery Swiftspear), and at least one interaction (Inventor's Inspiration, Lightning Strike, or Spell Pierce). Mulligan on 3+ lands with no early plays, or 2+ lands with only removal and no Lurrus/threats. Keep hands that can cast Lurrus on turn 2 or 3.",
+      "early_game_plays": "Turn 1: Play a land, cast a 1-drop (Goblin Guide, Monastery Swiftspear, or Spell Pierce/Inventor's Inspiration). Turn 2: Cast Lurrus if possible, or play a second land and hold for interaction. Against aggro, prioritize early threats and spot removal. Against control/combo, protect Lurrus and look for early interaction to enable turn 3-4 combo.",
+      "sideboard_plan": "vs Aggro: Bring in Lightning Strike, Spell Pierce, Surgical Extraction, and additional spot removal. vs Control/Combo: Bring in Inventor's Inspiration, Lightning Strike, Surgical Extraction, and counterspells (Negate/Spell Pierce). vs Mirror: Bring in counterspells, extra removal, and protection (Lightning Greaves, Swiftfoot Boots)."
+    },
+    "midgame_priorities": {
+      "resource_management": "Preserve Lurrus as your primary engine; avoid casting Welder/Engineer unless you can safely assemble the combo or have a clear win path. Manage the graveyard with Surgical Extraction or discard to prevent opponent recursion. Use Inventor's Inspiration to cheat on mana for combo pieces or Lurrus.",
+      "board_control": "Commit threats only when you have interaction or a clear win condition. Hold back Lurrus/Welder/Engineer if the board is unstable or lacks protection. Use removal efficiently to clear key threats (Oath of Druids, Initiative commander, Dredge creatures).",
+      "threat_tracking": "Watch for graveyard hate (Leyline of the Void, Rest in Peace), counterspells (Spell Pierce, Negate), and board wipes (Supreme Verdict, Anger of the Gods). Track opponent's hand size and graveyard contents. Note if they're playing Oath of Druids (early mana dorks) or Dredge (Bitter Ordeal, Golgari Grave-Troll)."
+    },
+    "endgame_tactics": {
+      "finishers": "The Goblin Engineer + Goblin Welder + Lightning Greaves infinite draw combo, followed by casting Vault of the Archangel for life gain and card advantage, or using infinite resources to cast a game-winning spell. Alternatively, win with Monastery Swiftspear or Goblin Guide if the combo is disrupted.",
+      "when_to_commit": "Go all-in when you have protection (Greaves/Boots), a clear path to assemble the combo, and no immediate board wipes or graveyard hate in play. Commit to the combo if you can resolve the first Engineer and have a way to protect it.",
+      "when_to_concede": "Fold if facing a hard lock (Rest in Peace + Leyline, or Oath of Druids with no removal), if down to one card with no interaction, or if the opponent has stabilized with a board wipe and you lack a win condition."
+    },
+    "threat_responses": {
+      "against_countermagic": "Use Inventor's Inspiration to cast combo pieces for free, or split the combo across multiple turns. Use Lightning Greaves to protect key creatures from targeted counterspells. Cast Goblin Engineer in response to counterspells when possible.",
+      "against_ramp": "Prioritize early interaction (Spell Pierce, Lightning Strike) to disrupt mana dorks. Use Surgical Extraction to remove key ramp pieces from the graveyard. If they outpace you, commit to the combo early or win with early threats.",
+      "against_aggro": "Keep early threats and spot removal. Use Lightning Strike to kill 1-2 damage creatures. Hold back Lurrus until stabilized. Use Vault of the Archangel for life gain if needed.",
+      "against_control": "Out-grind with card draw and Lurrus recursion. Use Inventor's Inspiration to cheat on mana for combo pieces. Pressure with early threats to force interaction. If locked down, use Surgical Extraction to remove graveyard hate or key permanents.",
+      "vs_mirror": "Win the resource war. Prioritize counterspells and removal. Use Lightning Greaves to protect combo pieces. Track Lurrus on the stack. Win by assembling the combo first or out-resolving their Lurrus plays."
+    },
+    "sideboard_advice": "Post-sideboard, tailor interaction to the metagame. Against control/combo, increase counterspells and graveyard hate. Against aggro, add spot removal and early threats. Ensure your mana base supports the combo (duals, shocklands, fetches if legal). Maintain a balance between control elements and combo pieces.",
+    "notes": "The infinite combo requires precise sequencing: cast Goblin Engineer, attach Lightning Greaves, tap Engineer to sacrifice a 1/1 token (or any creature), draw 2, Engineer dies, Goblin Welder finds another Engineer, repeat. Use Inventor's Inspiration to cast Engineer for free. Be aware of graveyard hate and counterspells. Lurrus is your win condition enabler, so protect it at all costs. Avoid overcommitting to the combo without protection."
+  },
+  {
+    "archetype": "Fastbond Lands",
+    "format": "Unknown",
+    "colors": [
+      "G"
+    ],
+    "philosophy": "Fastbond Lands is a high-variance ramp and combo archetype that uses Fastbond to draw cards by tapping lands, supported by Crucible of Worlds to exile and replay those lands, and Kaheera to protect your engine. It aims to out-value control and combo decks by establishing an unbreakable land base, then closing out games with overwhelming mana or combo finishers.",
+    "opening_strategy": {
+      "mulligan_criteria": "Keep any hand with Fastbond, Crucible of Worlds, or Kaheera, the Orphanguard. Otherwise, keep 3+ lands plus at least one land-fetching spell (e.g., Rampant Growth, Farseek, Kodama’s Reach) or a protection spell. Mulligan hands with 0-1 lands, or multiple lands with no ramp/protection if you lack a signature card.",
+      "early_game_plays": "Turn 1: Play a land, then cast a land-fetching spell or Kaheera if mana allows. Turn 2: Play a second land, cast Fastbond, tap it with a fetch land to draw 2 cards, then use Crucible of Worlds to exile the fetched land and replay it. Prioritize establishing 3-4 untapped lands by turn 3 to safely tap Fastbond repeatedly.",
+      "sideboard_plan": "vs Control/Initiative: Bring in protection (e.g., Swords to Plowshares, Wrath of God, or land-specific protection), counters, or combo finishers. vs Jewel Shops/Dredge: Bring in graveyard hate (Rest in Peace, Leyline of the Void) and artifact/enchantment removal. vs Oath of Druids: Bring in targeted removal, counters, or faster combo pieces to race. vs Mirror: Bring in additional protection, card draw, and land destruction."
+    },
+    "midgame_priorities": {
+      "resource_management": "Use Crucible to exile lands from the graveyard to prevent opponent graveyard strategies and maintain your land count. Never tap Fastbond if you’re below 3 untapped lands unless you can safely replay the tapped land. Prioritize land-fetching over non-land ramp to keep your Fastbond engine fueled.",
+      "board_control": "Commit Kaheera early to protect Fastbond and fetch lands. Hold back on overcommitting to the board if you haven’t secured protection or a win condition. Use landfall triggers and card draw to maintain hand size and mana advantage.",
+      "threat_tracking": "Watch for targeted removal on Fastbond, land destruction (e.g., Blightsteel Colossus, Carrion Feeder), and graveyard hate. Note if opponents are playing discard or hand disruption, as your combo relies on card selection and consistent land drops."
+    },
+    "endgame_tactics": {
+      "finishers": "Win with Emrakul, the Aeons Torn (to clear board and draw cards), Utopia Sprawl + massive mana, or infinite mana combos (e.g., Fastbond + fetch lands + landfall triggers). Alternatively, cast high-impact spells like Genesis Ultimatum or Dominate.",
+      "when_to_commit": "Go all-in when you have Fastbond protected, 5+ untapped lands, and a clear path to a win condition. Commit to a combo if you have the necessary pieces and protection against removal.",
+      "when_to_concede": "Fold if Fastbond is permanently removed, you lack protection or recursion, and the opponent has a resilient board or hand disruption. Also concede if you’re on the draw with a dead hand and no way to stabilize against control or combo."
+    },
+    "threat_responses": {
+      "against_countermagic": "Use protection spells, cast Fastbond/Kaheera in response to counters, or go off with multiple spells in a single turn. Utilize landfall triggers and instant-speed ramp to bypass counters.",
+      "against_ramp": "Out-ramp them with land-fetching spells and Fastbond card draw. Protect your lands and combo off before they can stabilize.",
+      "against_aggro": "Prioritize early protection and board wipes. Use Kaheera to protect key lands, then stabilize with removal or a quick win condition. Don’t overextend into combat.",
+      "against_control": "Apply pressure with landfall triggers and card draw. Force them to use resources on your lands, then combo off or win with a high-impact spell. Use protection to bypass counterspells.",
+      "vs_mirror": "Win by protecting your Fastbond better, drawing more cards, and going off first. Use land destruction to disrupt their engine, and prioritize card advantage to out-resource them."
+    },
+    "sideboard_advice": "Post-sideboard, tailor your 10-card slot to the local meta. Against control-heavy formats, prioritize protection, counters, and combo finishers. Against graveyard or artifact-heavy decks, bring in hate cards and removal. In mirror matches, add more land destruction, protection, and card draw. Always keep 1-2 flexible answers to handle unexpected threats.",
+    "notes": "Fastbond Lands is highly vulnerable to land destruction and targeted removal—never assume your engine is safe. Crucible of Worlds is your insurance policy; always exile lands you don’t need to keep your library from running out. Kaheera’s protection is single-target, so prioritize protecting Fastbond over other lands. Avoid tapping Fastbond with non-fetch lands if you can help it, as it doesn’t help your Crucible recursion. Watch for opponent’s graveyard strategies, as they can disrupt your engine."
+  },
+  {
+    "archetype": "Blue Tempo",
+    "format": "Unknown",
+    "colors": [
+      "U",
+      "B",
+      "G"
+    ],
+    "philosophy": "This deck aims to disrupt the opponent’s early game with cheap, efficient interaction (Flusterstorm, Psychic Frog, Collector Ouphe), stall until you can stabilize, and out-value them into the late game with efficient threats and card advantage. It excels against combo and control decks by neutralizing their win conditions, while relying on resource efficiency and sequencing to grind out midrange and mirror matches.",
+    "opening_strategy": {
+      "mulligan_criteria": "Keep hands with 2-3 lands (prioritizing fetch/shock or duals for U/B/G), at least one 1-mana interaction (Flusterstorm, Psychic Frog, or Collector Ouphe), and a curve of 1-2-3 spells. Mulligan hands with 3+ lands, zero interaction, or multiple 3+ mana spells without early support or land acceleration.",
+      "early_game_plays": "Turn 1: Play a land, cast Psychic Frog or Collector Ouphe if mana allows. Turn 2: Curve into a 2-drop (e.g., Thoughtseize, Go Blank, or a 2-drop threat). Sequence lands to ensure you can produce U for counters, B for discard, and G for ramp/threats. Hold up interaction for turn 1/2 threats or key combo pieces, and use Psychic Frog’s tap ability to dig for answers when your hand is light.",
+      "sideboard_plan": "vs Aggro (Initiative, Jewel Shops): Bring in artifact hate, additional discard, and early removal. vs Control (Esper Lurrus): Bring in card draw, late-game threats, and counters to protect your own spells. vs Combo (Dredge, Oath): Bring in graveyard hate, artifact hate, and specific disruption. vs Mirror: Bring in more interaction and card advantage to win the resource war."
+    },
+    "midgame_priorities": {
+      "resource_management": "Preserve interaction for high-impact threats; avoid blowing counters on non-critical spells. Use Psychic Frog’s draw effect to dig for answers when your hand is empty. Manage your graveyard carefully against Dredge/Oath, and avoid unnecessary triggers that could fuel opponent strategies or reveal your hand to discard.",
+      "board_control": "Commit threats only when you have interaction to protect them or clear the way. Hold back if the opponent has a known sweep or heavy removal. Trade efficiently, prioritizing trades that leave you with card advantage or board presence, and avoid overextending into known sweepers.",
+      "threat_tracking": "Watch for sweepers (Supreme Verdict, Anger of the Gods), graveyard strategies (Dredge, Oath), and artifact engines (Jewel Shops, Initiative). Note when they tap out for big spells or when they start drawing multiple cards. Track their remaining interaction to time your own plays and identify when they are vulnerable to pressure."
+    },
+    "endgame_tactics": {
+      "finishers": "Late-game threats like Tarmogoyf, Scavenging Ooze, or midrange creatures backed by card draw. Win by out-resourcing and applying pressure when interaction is exhausted, forcing the opponent to use remaining resources inefficiently.",
+      "when_to_commit": "When the opponent has no interaction left, or when you have card advantage and can trade up. Go all-in if you can close the game before they can stabilize or find a sweep, especially if you have a proven win condition in hand.",
+      "when_to_concede": "If you’re down to one life, have no interaction, and the opponent has a proven win condition (like a resolved sweep + finisher or graveyard combo) with no way to disrupt it. Also concede if your hand is completely dead against a known lock or if you’re out of resources in a control mirror."
+    },
+    "threat_responses": {
+      "against_countermagic": "Use Psychic Frog’s draw to dig through, cast spells in response to their counters, or use uncounterable threats. Sequence around known counters and save interaction for their key spells. Force them to use counters on low-impact spells to open up your hand.",
+      "against_ramp": "Early interaction to stop mana dorks/land drops. Collector Ouphe shuts down non-artifact ramp. Discard their ramp spells and pressure them before they can cast big threats. Don’t let them stabilize; trade efficiently and punish missed blocks.",
+      "against_aggro": "Early interaction to stall, discard key threats, and stabilize with efficient removal. Don’t overcommit to board stalls; transition to threats once stabilized. Use discard to disrupt their curve and force them to play around your interaction, slowing their aggression.",
+      "against_control": "Apply pressure with efficient threats, force them to use resources, and out-value them with card draw. Don’t let them stabilize with Lurrus or sweepers. Trade efficiently and punish missed blocks. Force them to make the first mistake by applying consistent pressure.",
+      "vs_mirror": "Win the interaction war. Out-value them with better sequencing, card draw, and sideboard cards. Prioritize keeping interaction for their key threats and force them to make the first mistake. Track their hand and graveyard to anticipate their plays."
+    },
+    "sideboard_advice": "Post-sideboard, adjust based on metagame prevalence. Bring in hate cards for specific archetypes, and prioritize cards that synergize with your interaction shell. In control mirrors, prioritize card advantage and late-game threats. Against aggro, bring in more early interaction and removal. Always track what the opponent has left in their deck and adjust your play pattern accordingly, favoring conservative plays against unknown decks.",
+    "notes": "Collector Ouphe is technically a white card, so ensure your mana base supports W if it’s in the deck, or note that the archetype may actually be U/B/W (Esper) but the prompt specifies U/B/G. Psychic Frog and Flusterstorm are blue, so U is primary. B provides discard/graveyard hate. G provides ramp/efficient threats. Avoid overcommitting to the board without interaction, as tempo decks die to sweepers. Always prioritize card advantage in the late game, and use Psychic Frog’s draw effect strategically to dig for answers rather than wasting it on non-critical spells."
+  },
+  {
+    "archetype": "Prison Shops",
+    "format": "Unknown",
+    "colors": [
+      "U"
+    ],
+    "philosophy": "Prison Shops aims to deploy a dense web of mana-restricting and spell-locking artifacts early, neutralizing combo and control strategies before they can execute their game plans. By leveraging cheap mana acceleration to cast high-cost lock pieces, it transitions into a dominant midgame where Golos, Tireless Pilgrim, and other shop creatures generate enough mana to cast a decisive win condition or attack unblocked.",
+    "opening_strategy": {
+      "mulligan_criteria": "Keep hands with 1-2 lands, Golos or Tireless Pilgrim, and at least one lock piece (Lodestone Golem, Sphere of Resistance). Keep hands with acceleration + a lock piece, or Golos + Pilgrim + 2 lands. Mulligan hands with only lock pieces and no mana sources, multiple lands with no early plays, or hands lacking a way to cast turn-1/2 threats.",
+      "early_game_plays": "Turn 1: Play a land, cast a mana artifact or Golos/Pilgrim if mana allows. If you have acceleration, cast Lodestone Golem or Sphere of Resistance. Turn 2: Use Golos/Pilgrim to generate mana, cast additional lock pieces, or start setting up the win condition. Land sequencing: Prioritize fetching/playing lands that tap for blue or colorless, ensuring you can cast blue spells and artifacts.",
+      "sideboard_plan": "Against Aggro: Bring in discard, counters, and additional early lock pieces. Against Control (Esper Lurrus): Bring in graveyard hate, additional lock pieces, and counterspells. Against Combo (Dredge, Oath, Initiative): Bring in specific hate (Rest in Peace, Leyline of Punishment, or additional lock pieces). Against Mirror: Bring in counterspells, additional lock pieces, and discard."
+    },
+    "midgame_priorities": {
+      "resource_management": "Mana is king. Always prioritize casting lock pieces over drawing cards. Use Golos/Pilgrim to generate mana for win conditions, not just more locks. Manage hand by keeping answers for key threats. Graveyard is usually not a primary focus unless facing Dredge.",
+      "board_control": "Commit threats only when the board is locked down. Hold back Golos/Pilgrim if you need them for mana to cast a win condition or counter a disruption. Prioritize locking the opponent's ability to cast spells or play lands over attacking.",
+      "threat_tracking": "Watch for graveyard recursion (Dredge), mana acceleration (Oath), or artifact destruction (Initiative/Control). Key tells: Opponent playing multiple lands, casting cheap creatures, or targeting your artifacts."
+    },
+    "endgame_tactics": {
+      "finishers": "Golos + Tireless Pilgrim generating massive mana to cast Emrakul, Aeons Torn, Ugin, or a combo finisher. Alternatively, attacking with a massive threat or using a combo like Urza's Saga.",
+      "when_to_commit": "When you have locked the opponent out of relevant interactions and have enough mana to cast a win condition or attack for lethal. Also commit when the opponent has no removal for your lock pieces.",
+      "when_to_concede": "When you have no lock pieces, no mana acceleration, and the opponent has established a board or graveyard strategy you can't interact with. Also when you're out of resources and facing a combo that can win in one turn."
+    },
+    "threat_responses": {
+      "against_countermagic": "Use cheap lock pieces that don't need to be countered, or cast them in response to counterspells. Use counterspells yourself if in the deck. Rely on the fact that lock pieces are often cheap or free with acceleration.",
+      "against_ramp": "Lock down their mana sources with Sphere of Resistance, Lodestone Golem, and additional hatebears. Use discard or counters to stop their key ramp pieces.",
+      "against_aggro": "Prioritize early lock pieces to stop their creatures. Use counterspells or discard to remove threats. Golos/Pilgrim can generate mana for removal or a big blocker.",
+      "against_control": "Pressure with lock pieces to force them to use resources on interaction. Use Golos/Pilgrim to cast a win condition they can't answer. Outlast them by locking their graveyard and hand.",
+      "vs_mirror": "Win the resource war. Prioritize locking their mana and hand. Use counterspells and discard to disrupt their setup. Golos/Pilgrim sequencing is key to out-generating their mana."
+    },
+    "sideboard_advice": "Post-sideboard, tailor your lock pieces to the specific metagame. Against combo, bring in graveyard hate and additional lock pieces. Against control, bring in counterspells and discard. Against aggro, bring in removal and early interaction. Always ensure your sideboard doesn't dilute your mana base or lock consistency.",
+    "notes": "Common mistakes: Overcommitting Golos/Pilgrim too early without a win condition, failing to lock the opponent's mana, or ignoring graveyard strategies. Unique interactions: Golos + Pilgrim can generate massive mana if you have enough artifacts. Sphere of Resistance + Lodestone Golem can make spells uncastable. Watch out for artifact destruction and graveyard recursion."
+  },
+  {
+    "archetype": "Blue Control",
+    "format": "Unknown",
+    "colors": [
+      "W",
+      "U"
+    ],
+    "philosophy": "A WU control deck that stabilizes early with efficient removal and counterspells, then transitions to a late-game grind using Thing in the Ice as a resilient threat and card advantage engine, supported by Lurrus of the Dream-Den to recur cheap permanents and maintain resource parity. It aims to outvalue midrange and combo decks while trading efficiently against control mirrors.",
+    "opening_strategy": {
+      "mulligan_criteria": "Keep hands with 2-3 lands, at least one Swords to Plowshares or Dovin's Veto, and a turn-2 play. Mulligan hands with 0-1 lands, 3+ lands with no plays, or hands lacking early interaction against aggro/combo. Prioritize hands that can stabilize by turn 3.",
+      "early_game_plays": "Turn 1: Play a land, pass. Turn 2: Play second land, cast a 2-mana interaction (Dovin's Veto, Path to Exile, or Fog) or develop mana. If facing aggro, prioritize Swords to Plowshares or Fog on turn 2 if possible. Sequence lands to ensure colored mana availability for WU spells.",
+      "sideboard_plan": "Vs Aggro (Dredge, Oath, MWI): +2 Fog, +2 Swords to Plowshares, -2 Dovin's Veto, -1 Thing in the Ice. Vs Control/Combo (Esper Lurrus, Jewel Shops): +2 Dovin's Veto, +2 Swords to Plowshares, -2 Fog. Adjust based on specific opponent tendencies."
+    },
+    "midgame_priorities": {
+      "resource_management": "Preserve mana for interaction until turn 4-5. Don't overcommit to board presence early. Use Lurrus to replay cheap permanents from the graveyard to maintain hand size and board control. Track graveyard contents to avoid dead draws.",
+      "board_control": "Hold back on casting Thing in the Ice until you have at least one removal spell or counter in hand, or until you can protect it. Prioritize trading cheap permanents for opponent's threats. Don't overextend into Jewel Shops or Oath.",
+      "threat_tracking": "Watch for graveyard accumulation (Dredge), artifact acceleration (Jewel Shops), and Oath targets. Note when opponents tap out for big threats or combo pieces. Track if they've answered your Lurrus or Thing."
+    },
+    "endgame_tactics": {
+      "finishers": "Thing in the Ice is the primary win condition. Use Lurrus to recur Swords/Path to clear blockers or replay Fog to reset the board. Card advantage from Thing's death trigger or Lurrus recursion closes games.",
+      "when_to_commit": "Go all-in when you have card advantage locked, opponent has no removal/counter backup, or you can safely cast Thing and follow up with protection/recursion.",
+      "when_to_concede": "Fold if you're down to 1-2 cards, opponent has established an unanswerable win condition (e.g., Oath on board, Jewel Shops with infinite mana), or you're out of interaction against a resilient threat."
+    },
+    "threat_responses": {
+      "against_countermagic": "Use Swords to Plowshares or Path to Exile on their counterspells if they're creatures, or play around them by holding up interaction. Use Lurrus to recur cheap spells to pressure through. Consider Thing in the Ice as a threat that forces them to use multiple answers.",
+      "against_ramp": "Prioritize early removal (Swords, Path) on ramp targets. Use Fog or Dovin's Veto to stall. Don't let them get ahead; trade efficiently.",
+      "against_aggro": "Stabilize with Swords to Plowshares, Path to Exile, and Fog. Mulligan aggressively for early interaction. Use Lurrus to replay removal to handle multiple threats.",
+      "against_control": "Win the card advantage war. Use Thing in the Ice to force trades and draw cards. Use Lurrus to recur cheap permanents to maintain pressure. Don't overcommit; wait for them to blink or exhaust answers.",
+      "vs_mirror": "Value Lurrus recursion and Thing in the Ice triggers. Prioritize keeping interaction in hand. Win by out-grinding with graveyard recursion and forcing them to overextend."
+    },
+    "sideboard_advice": "Post-sideboard, adjust your interaction curve based on the metagame. Against faster decks, increase removal and Fog while reducing counterspells. Against control/combo, add more targeted removal and counterspells. Always ensure your mana base can support the new card distribution.",
+    "notes": "Thing in the Ice dies to Swords to Plowshares, so don't cast it into your own removal. Lurrus only recurs 2-mana or less permanents, so plan your graveyard accordingly. Watch out for Jewel Shops artifact hate or Oath of Druids combo turns. Avoid overcommitting to the board before turn 4."
+  },
+  {
+    "archetype": "Oops! All Spells",
+    "format": "Unknown",
+    "colors": [
+      "W",
+      "U",
+      "B"
+    ],
+    "philosophy": "Oops! All Spells is a recursive spell-slinging archetype that aims to cast an overwhelming number of spells in a single turn to generate massive card advantage, mana acceleration, and board presence, ultimately closing out games with combo finishers. It excels against slower, resource-heavy decks that cannot handle explosive, multi-step turns, but struggles against fast, disruptive aggro and hard-counterspells.",
+    "opening_strategy": {
+      "mulligan_criteria": "Keep hands with 2+ lands (preferably fetch/shock/mana rocks) and at least one of Chrome Mox, Pact of Negation, or a spell-casting engine (e.g., Karn, Tamiyo, Raff). Mulligan on 3+ lands with no early spells or mana acceleration, or hands with only one land and no acceleration. Keep any hand with Chrome Mox + a land, as it provides immediate tempo and card selection.",
+      "early_game_plays": "Turn 1: Play a land, cast Chrome Mox or a cantrip (Brainstorm/Ponder) to dig for key pieces. Turn 2: Cast a mana rock or cheap spell, then follow up with a value engine or interaction. Prioritize fetching basic lands for shock lands and ensuring you have at least 3 colors of mana available by turn 3. Never tap out for a single spell if you can stabilize or dig for your combo.",
+      "sideboard_plan": "vs Aggro: +1 Spell Pierce, +1 Force of Will, -2 Beseech the Mirror, -1 Smothering Tithe. vs Control: +2 Thassa's Oracle, +1 Kethis, +1 Narset, -2 Pact of Negation, -1 Force of Will. vs Combo: +1 Narset, +1 Force of Will, -2 Beseech, -1 Smothering. vs Mirror: +2 Thassa's Oracle, +1 Kethis, -2 Pact, -1 Force."
+    },
+    "midgame_priorities": {
+      "resource_management": "Treat your graveyard as a secondary library. Use Karn/Tamiyo to recur cheap spells or protect key permanents. Never overextend into a known sweep unless you have a guaranteed win condition. Prioritize keeping 1-2 counterspells for protection, not just offense.",
+      "board_control": "Commit threats only when you have answered or bypassed their interaction. Hold back if they have unanswered removal or a hard counter. Use spells to trade efficiently (e.g., 1-for-1s) before going for the win.",
+      "threat_tracking": "Watch for hand disruption (Thoughtseize, Liliana), sweepers (Supreme Verdict, Anger), and counterspells (Force, Negate). If they tap out for a single spell, they likely have a sweep or counter. If they keep mana open past turn 3, they're likely holding interaction."
+    },
+    "endgame_tactics": {
+      "finishers": "Beseech the Mirror for Thassa's Oracle or Kethis, the Hidden Hand. Griselbrand for card advantage to fuel the combo. Uro, Titan of Nature's Wrath for mana and card draw.",
+      "when_to_commit": "When you have 5+ mana available, a guaranteed Oracle/Kethis in hand or library, and no known hard interaction in their hand. Also commit if you can resolve a Griselbrand and draw into your win condition.",
+      "when_to_concede": "If you're down to 1 life with no spells in hand/library, or if they have a guaranteed hard counter/sweep in hand and you lack alternative win conditions. Also concede if you're facing a locked-out board with no recursion or interaction."
+    },
+    "threat_responses": {
+      "against_countermagic": "Use cantrips to dig past counters, cast spells in response to their counters, or use Pact of Negation/Force of Will to protect your combo. Bolas's Citadel can bypass counters by drawing cards.",
+      "against_ramp": "Apply early pressure with cheap spells, use discard to disrupt their mana base, and prioritize fast combo turns before they can stabilize.",
+      "against_aggro": "Play defensively with counterspells and discard, stabilize with Griselbrand or Karn, and close out quickly once you have board control.",
+      "against_control": "Out-value them with spell recursion, use Narset to disrupt their draw steps, and go off with a massive spell count to overwhelm their interaction.",
+      "vs_mirror": "Prioritize hand disruption, protect your combo pieces with counterspells, and win by resolving your Oracle/Kethis first. Use Narset to steal their key spells or disrupt their draw."
+    },
+    "sideboard_advice": "Post-sideboard, shift from a pure combo deck to a more interactive, midrange-control hybrid. Bring in more counterspells and discard against control/aggressive decks, and lean into your combo finishers against slower decks. Always ensure your mana base can support 3 colors consistently.",
+    "notes": "Common mistake: overcommitting to a single win condition without backup. Unique interaction: Beseech the Mirror can target itself to tutor for multiple copies of the same spell, enabling infinite recursion with certain engines. Always track opponent's hand size; if they have 0 cards, they're likely holding interaction."
+  },
+  {
+    "archetype": "Stiflenought",
+    "format": "Unknown",
+    "colors": [
+      "W",
+      "U"
+    ],
+    "philosophy": "Stiflenought is a control-combo hybrid that stabilizes early with efficient interaction and card advantage, then closes out games by recurring Phyrexian Dreadnought via Lurrus of the Dream-Den while using Stifle to protect key permanents and disrupt opponent interaction. It wins by out-grinding opponents through graveyard recursion and out-resolving their removal.",
+    "opening_strategy": {
+      "mulligan_criteria": "Keep hands with 2-3 playable lands, Lurrus, Stock Up, or early interaction (Stifle, removal). Drop hands with 3+ lands and no early plays, or hands consisting solely of removal without card draw or a finisher. Prioritize hands that can play a land and a spell on turn 1 or 2.",
+      "early_game_plays": "Turn 1: Play a land, optionally cast a cantrip or hold up interaction depending on matchup. Turn 2: Cast Lurrus or play a second land. Sequence lands to ensure blue/white mana for Stifle and Lurrus. If facing aggro, hold interaction for early threats; against control, establish card advantage with Stock Up or Lurrus.",
+      "sideboard_plan": "Vs Aggro (Dredge, Oath, Initiative): Bring in additional removal, discard, and early interaction. Vs Control (Esper Lurrus, Jewel Shops): Bring in more counterspells, card advantage, and protection. Vs Combo: Bring in graveyard hate and specific disruption. Vs Mirror: Bring in extra recursion protection and interaction."
+    },
+    "midgame_priorities": {
+      "resource_management": "Treat your graveyard as a secondary hand; only cast Dreadnought when you have a plan to recur it or it applies immediate pressure. Use Stock Up to dig for answers or recursion pieces. Avoid overcommitting to the board without Lurrus or interaction ready.",
+      "board_control": "Commit threats only when you have interaction or recursion locked in. Dreadnought is a liability if unprotected or unrecurable. Use Stifle to protect Lurrus or Dreadnought from removal, and to disrupt opponent interaction when you are about to win.",
+      "threat_tracking": "Watch for graveyard hate (Rest in Peace, Scavenging Ooze, etc.), counterspells, and sweepers. Note when opponents hold up mana for removal versus interaction. Track how many cards they have in hand to gauge if they can answer your next threat."
+    },
+    "endgame_tactics": {
+      "finishers": "Phyrexian Dreadnought cast from the graveyard and recurring via Lurrus, or a board presence of Lurrus plus Dreadnought. Sometimes a Stifle-protected Dreadnought that cannot be removed wins the game outright.",
+      "when_to_commit": "Go all-in when you have graveyard recursion secured, enough mana to cast Dreadnought, and interaction to protect it. Also commit when the opponent has no removal or graveyard hate in play.",
+      "when_to_concede": "Fold if graveyard hate is in play and you cannot remove it, if you are out of resources and the opponent has a sweeper, or if you are facing a degenerate combo you cannot disrupt. Also concede if you are dead to the board and have no way to rebuild."
+    },
+    "threat_responses": {
+      "against_countermagic": "Use Stifle to protect your own spells or Dreadnought. Cast threats in response to counterspells when possible. Use cantrips to dig around interaction and force them to spend mana on multiple threats.",
+      "against_ramp": "Prioritize early interaction to disrupt their mana development. Use Stifle to counter key ramp spells or mana dorks. Dreadnought can stabilize by applying pressure while they are still ramping.",
+      "against_aggro": "Hold interaction for key threats and use Lurrus to recur removal. Dreadnought can be a clock if you survive the early turns. Use Stifle to protect your board or disrupt their combat tricks.",
+      "against_control": "Out-value them with Stock Up and Lurrus recursion. Pressure with Dreadnought to force interaction and break their lock. Use Stifle to protect your win conditions from their removal or counterspells.",
+      "vs_mirror": "Treat it as a resource war. Prioritize graveyard protection, out-value with card draw, and use Stifle to protect your Lurrus and Dreadnought from their recursion. Win by having more interaction and better graveyard management."
+    },
+    "sideboard_advice": "Post-sideboard, shift from pure control to matchup-specific hate. Bring in more graveyard hate vs. combo and aggro, more counterspells and protection vs. control, and extra recursion protection in the mirror. Adjust land counts if the format requires more or fewer basics, and ensure you have enough colored sources for Stifle and Lurrus.",
+    "notes": "Common mistake: casting Dreadnought without a plan to recur it or protect it. Stifle timing is crucial—save it for opponent's removal or key spells, not just for fun. Lurrus is fragile; protect it or have a backup plan. In an Unknown format, adapt to the local meta but keep the core recursion engine intact. Always track opponent's graveyard and hand size to avoid walking into sweepers or hate cards."
+  }
+]

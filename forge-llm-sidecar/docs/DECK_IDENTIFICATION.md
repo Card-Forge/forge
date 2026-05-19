@@ -10,9 +10,14 @@ Forge AI (Java)                    Sidecar (Python)
 DeckRecognitionObserver  ──POST──▶ FastAPI
 (subscribes to game events)        │
                                  LangGraph graph
-                                 └─ deck_recognition node
+                                 └─ game_advisor node
                                       └─ LLM call -> JSON response
 ```
+
+The `game_advisor` node does two things in **one** LLM call: it identifies the
+opponent's archetype (covered below) and advises the AI on piloting its own
+deck. This document focuses on the recognition half; see
+[PILOTING.md](PILOTING.md) for the piloting half.
 
 ### Triggering (Java side: `DeckRecognitionObserver.java`)
 
@@ -76,4 +81,5 @@ The metagame percentages act as a **prior** — the prompt instructs the model t
 
 - **Read-only / fail-soft**: The sidecar never affects gameplay. If the LLM server is down, Scryfall is down, or the sidecar itself is offline, the AI just plays normally.
 - **No runtime scraping**: Metagame data is scraped weekly by CI and committed as JSON. The sidecar has no network dependencies at request time.
-- **Extensible graph**: The LangGraph currently has one node, but the `GraphState` TypedDict is designed to let future nodes be added (play advisor, threat assessment, etc.) without changing the HTTP contract.
+- **Extensible graph**: The LangGraph has one node (`game_advisor`), but the `GraphState` TypedDict is designed to let future nodes be added (threat assessment, etc.) without changing the HTTP contract.
+- **One call, two jobs**: Recognition and piloting advice share a single LLM call because the AI re-runs the graph on every action — a second call would add per-action lag.

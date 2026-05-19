@@ -4,17 +4,19 @@ import pytest
 
 from app.graph import get_graph
 from app.knowledge import format_detect, loader, metagame
-from app.nodes import deck_recognition
+from app.nodes import game_advisor
 
 
 @pytest.fixture(autouse=True)
 def _offline():
     """Keep graph tests offline: pre-seed the per-game format cache for the
     sample game so the node never makes a network call to detect the format."""
-    deck_recognition._resolved_format.clear()
-    deck_recognition._resolved_format["t"] = "modern"
+    game_advisor._resolved_format.clear()
+    game_advisor._own_archetype.clear()
+    game_advisor._resolved_format["t"] = "modern"
     yield
-    deck_recognition._resolved_format.clear()
+    game_advisor._resolved_format.clear()
+    game_advisor._own_archetype.clear()
 
 
 @pytest.fixture
@@ -42,25 +44,45 @@ def sample_state():
             },
         ],
         "deck_cards": ["Lightning Bolt", "Ragavan, Nimble Pilferer"],
+        "hand": ["Mountain", "Lightning Bolt"],
+        "own_board": ["Mountain"],
         "alternatives": [],
     }
 
 
 @pytest.mark.asyncio
-async def test_graph_returns_archetype(monkeypatch, sample_state):
+async def test_graph_returns_archetype_and_piloting(monkeypatch, sample_state):
     async def fake_generate_json(prompt, system=None):
         return {
             "archetype": "Boros Energy",
             "confidence": 0.8,
             "reasoning": "Aggressive red cards.",
             "alternatives": [],
+            "recommended_play": "Cast Lightning Bolt at their creature.",
+            "play_reasoning": "Removing their threat keeps the race in our favor.",
+            "play_alternatives": ["Play a land and pass"],
         }
 
-    monkeypatch.setattr(deck_recognition, "generate_json", fake_generate_json)
+    monkeypatch.setattr(game_advisor, "generate_json", fake_generate_json)
     result = await get_graph().ainvoke(sample_state)
     assert result["archetype"] == "Boros Energy"
     assert result["resolved_format"] == "modern"
     assert 0.0 <= result["confidence"] <= 1.0
+    # piloting outputs are present alongside recognition outputs
+    assert result["recommended_play"].startswith("Cast Lightning Bolt")
+    assert result["own_archetype"]  # identified deterministically from deck_cards
+
+
+@pytest.mark.asyncio
+async def test_own_archetype_identified_and_cached(monkeypatch, sample_state):
+    async def fake_generate_json(prompt, system=None):
+        return {"archetype": "Boros Energy", "confidence": 0.7, "reasoning": "", "alternatives": []}
+
+    monkeypatch.setattr(game_advisor, "generate_json", fake_generate_json)
+    await get_graph().ainvoke(sample_state)
+    # Ragavan is a Boros Energy signature card -> deterministic match, cached.
+    assert "t" in game_advisor._own_archetype
+    assert game_advisor._own_archetype["t"][0] == "Boros Energy"
 
 
 @pytest.mark.asyncio
@@ -68,7 +90,7 @@ async def test_confidence_is_clamped(monkeypatch, sample_state):
     async def fake_generate_json(prompt, system=None):
         return {"archetype": "Boros Energy", "confidence": 5, "reasoning": "", "alternatives": []}
 
-    monkeypatch.setattr(deck_recognition, "generate_json", fake_generate_json)
+    monkeypatch.setattr(game_advisor, "generate_json", fake_generate_json)
     result = await get_graph().ainvoke(sample_state)
     assert result["confidence"] == 1.0
 
@@ -83,9 +105,21 @@ async def test_unknown_archetype_confidence_capped(monkeypatch, sample_state):
             "alternatives": [],
         }
 
-    monkeypatch.setattr(deck_recognition, "generate_json", fake_generate_json)
+    monkeypatch.setattr(game_advisor, "generate_json", fake_generate_json)
     result = await get_graph().ainvoke(sample_state)
     assert result["confidence"] <= 0.4
+
+
+@pytest.mark.asyncio
+async def test_llm_failure_is_fail_soft(monkeypatch, sample_state):
+    async def boom(prompt, system=None):
+        raise game_advisor.LLMError("server down")
+
+    monkeypatch.setattr(game_advisor, "generate_json", boom)
+    result = await get_graph().ainvoke(sample_state)
+    assert result["archetype"] == "Unknown"
+    assert result["confidence"] == 0.0
+    assert result["recommended_play"] == ""
 
 
 @pytest.mark.asyncio
@@ -97,10 +131,12 @@ async def test_metagame_reaches_the_prompt(monkeypatch, sample_state):
         captured["prompt"] = prompt
         return {"archetype": "Boros Energy", "confidence": 0.7, "reasoning": "", "alternatives": []}
 
-    monkeypatch.setattr(deck_recognition, "generate_json", fake_generate_json)
+    monkeypatch.setattr(game_advisor, "generate_json", fake_generate_json)
     await get_graph().ainvoke(sample_state)
     assert "%" in captured["prompt"]
     assert "metagame" in captured["prompt"].lower()
+    # the AI's own piloting guide is included in the prompt too
+    assert "deck guidance" in captured["prompt"].lower()
 
 
 def test_metagame_data_files_load():

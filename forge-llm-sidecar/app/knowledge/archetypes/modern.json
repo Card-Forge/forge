@@ -4,6 +4,7 @@
   "archetypes": [
     {
       "name": "Izzet Murktide",
+      "strategy_type": "tempo",
       "colors": ["U", "R"],
       "strategy": "Tempo: cheap interaction and cantrips fuel a huge Murktide Regent.",
       "signature_cards": ["Murktide Regent", "Dragon's Rage Channeler", "Expressive Iteration", "Counterspell"],
@@ -11,6 +12,7 @@
     },
     {
       "name": "Amulet Titan",
+      "strategy_type": "combo",
       "colors": ["G", "U"],
       "strategy": "Combo-ramp: Amulet of Vigor and bounce lands power out Primeval Titan.",
       "signature_cards": ["Amulet of Vigor", "Primeval Titan", "Azusa, Lost but Seeking", "Urza's Saga"],
@@ -18,6 +20,7 @@
     },
     {
       "name": "Living End",
+      "strategy_type": "combo",
       "colors": ["B", "R", "G"],
       "strategy": "Cycle creatures into the graveyard, then cascade into Living End.",
       "signature_cards": ["Living End", "Street Wraith", "Violent Outburst", "Grief"],
@@ -25,6 +28,7 @@
     },
     {
       "name": "Rakdos Scam",
+      "strategy_type": "midrange",
       "colors": ["B", "R"],
       "strategy": "Midrange tempo using evoke elementals reanimated for free, plus removal.",
       "signature_cards": ["Grief", "Fury", "Orcish Bowmasters", "Bloodtithe Harvester"],
@@ -32,6 +36,7 @@
     },
     {
       "name": "Hammer Time",
+      "strategy_type": "aggro",
       "colors": ["W"],
       "strategy": "Aggro: cheaply equip Colossus Hammer onto an evasive creature.",
       "signature_cards": ["Colossus Hammer", "Sigarda's Aid", "Puresteel Paladin", "Ornithopter"],

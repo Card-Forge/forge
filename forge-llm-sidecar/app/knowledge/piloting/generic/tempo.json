@@ -1,0 +1,83 @@
+{
+  "archetype": "Generic Tempo",
+  "format": "",
+  "strategy_type": "tempo",
+  "overview": "Land an efficient threat early, then use cheap interaction to defend it and deny the opponent the time to stabilize. You are not pure aggro: you trade mana efficiently, protect your clock, and win the race on resources as well as life.",
+  "win_conditions": [
+    "A protected evasive threat that ends the game over several turns",
+    "Out-tempoing the opponent until they cannot deploy meaningful blockers"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Two or three lands, a proactive threat, and at least one piece of interaction",
+      "A hand that does something on turn 1 or 2 and can react afterwards",
+      "Cantrips or card selection that smooth toward the right mix"
+    ],
+    "mulligan_criteria": [
+      "All interaction and no threat — nothing to protect",
+      "All threats and no interaction — you become fragile aggro",
+      "Land-light hands that cannot operate on curve"
+    ],
+    "examples": [
+      {
+        "hand": [],
+        "decision": "keep",
+        "reason": "A threat, a counterspell or bounce, and lands is the textbook tempo hand."
+      },
+      {
+        "hand": [],
+        "decision": "mulligan",
+        "reason": "Five reactive spells and no threat has no clock; tempo needs something to protect."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Resolve your first threat and start the clock",
+      "Hold up cheap interaction to protect it or break the opponent's curve",
+      "Use cantrips at instant speed when you would otherwise pass"
+    ],
+    "mid_game": [
+      "Trade interaction for the opponent's removal and key spells, not for filler",
+      "Keep attacking while leaving mana for a counter or bounce",
+      "Count whether you can afford to tap out, or must represent interaction"
+    ],
+    "late_game": [
+      "Avoid the long game — if resources run low, commit and force the issue",
+      "Protect the threat on the lethal turns rather than developing more"
+    ]
+  },
+  "key_cards": [
+    {"name": "Efficient threat", "role": "clock", "notes": "Usually evasive or hard to block; the rest of the deck protects it."},
+    {"name": "Cheap interaction", "role": "protection", "notes": "Counters, bounce and removal that cost little, so you can act and develop in one turn."},
+    {"name": "Cantrips", "role": "consistency", "notes": "Smooth draws and find lands or the missing half of your hand."}
+  ],
+  "sequencing_tips": [
+    "Deploy threats into open mana only when you can also protect them",
+    "Cast cantrips end-of-turn when you have no better use of mana",
+    "Sequence lands so you always have the colors for your interaction"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Bait removal with lesser threats, then resolve and protect the real one.",
+      "watch_for": ["board wipes", "card-advantage engines"]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "Pivot interaction toward their board; your threat can also block. Stabilize, then race.",
+      "watch_for": ["going wide", "reach / burn"]
+    }
+  ],
+  "common_threats": [
+    "Board wipes that undo your single protected threat",
+    "Cheap removal that out-tempos your protection",
+    "Go-wide boards that one threat cannot race"
+  ],
+  "metadata": {
+    "source": "hand-authored",
+    "generated_at": "",
+    "model": "",
+    "schema_version": 1
+  }
+}

@@ -13,7 +13,6 @@ import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
-import forge.gui.error.BugReporter;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.FModel;
@@ -108,7 +107,11 @@ public class GauntletIO {
         } catch (final IOException e) {
             e.printStackTrace();
         } catch (final ConversionException e) {
-            BugReporter.reportException(e);
+            // Skip gauntlet files that fail to deserialize (format/version
+            // mismatch, or a missing JVM "--add-opens java.base/java.util")
+            // instead of crashing the UI with a modal bug report.
+            System.err.println("Skipping gauntlet file (could not load): "
+                    + xmlSaveFile.getName() + " - " + e.getMessage());
         } catch (final Exception e) { //if there's a non-IO exception, delete the corrupt file
             e.printStackTrace();
             isCorrupt = true;

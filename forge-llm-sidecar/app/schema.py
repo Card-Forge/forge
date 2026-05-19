@@ -6,7 +6,8 @@ from typing import TypedDict
 
 from pydantic import BaseModel, Field
 
-SCHEMA_VERSION = 1
+# v2 adds the piloting advice block to the response (see PilotingAdvice).
+SCHEMA_VERSION = 2
 
 
 class Observation(BaseModel):
@@ -30,8 +31,48 @@ class RecognitionRequest(BaseModel):
     turn: int = 0
     observations: list[Observation] = Field(default_factory=list)
     # The AI's own deck (card names). Forge knows this exactly; used to detect
-    # the precise Constructed format when ``format`` is generic.
+    # the precise Constructed format and to identify the AI's own archetype.
     deck_cards: list[str] = Field(default_factory=list)
+    # Live game state for piloting advice. All optional: clients that do not
+    # send them still get archetype-level advice from the guide.
+    hand: list[str] = Field(default_factory=list)
+    own_board: list[str] = Field(default_factory=list)
+    opponent_board: list[str] = Field(default_factory=list)
+    your_graveyard: list[str] = Field(default_factory=list)
+    opponent_graveyard: list[str] = Field(default_factory=list)
+    life_totals: dict[str, int] = Field(default_factory=dict)
+
+
+class PilotingAdvice(BaseModel):
+    """Advice on how the AI should play its own deck this turn."""
+
+    own_archetype: str = "Unknown"
+    guide_source: str = ""  # which guide answered: "<format>/<slug>" or "generic/<strategy>"
+    recommended_play: str = ""
+    reasoning: str = ""
+    alternatives: list[str] = Field(default_factory=list)
+    mulligan_advice: str = ""  # populated on turn 0 instead of recommended_play
+
+
+class TrainingExample(BaseModel):
+    """A single training data point from a log analysis checkpoint."""
+
+    game_id: str = ""
+    turn: int = 0
+    format: str = ""
+    observations: list[dict] = Field(default_factory=list)
+    deck_cards: list[str] = Field(default_factory=list)
+    hand: list[str] = Field(default_factory=list)
+    own_board: list[str] = Field(default_factory=list)
+    opponent_board: list[str] = Field(default_factory=list)
+    your_graveyard: list[str] = Field(default_factory=list)
+    opponent_graveyard: list[str] = Field(default_factory=list)
+    life_totals: dict[str, int] = Field(default_factory=dict)
+    # LLM response at this checkpoint
+    archetype: str = ""
+    confidence: float = 0.0
+    reasoning: str = ""
+    alternatives: list[str] = Field(default_factory=list)
 
 
 class RecognitionResponse(BaseModel):
@@ -39,13 +80,13 @@ class RecognitionResponse(BaseModel):
     confidence: float
     reasoning: str
     alternatives: list[str] = Field(default_factory=list)
+    piloting: PilotingAdvice | None = None
     schema_version: int = SCHEMA_VERSION
 
 
 # ---------------------------------------------------------------------------
-# LangGraph state. Kept as a superset TypedDict: extra keys are reserved for
-# future nodes (play advisor, threat assessment, ...) so the HTTP contract and
-# the graph state can evolve independently.
+# LangGraph state. Kept as a superset TypedDict so the HTTP contract and the
+# graph state can evolve independently.
 # ---------------------------------------------------------------------------
 class GraphState(TypedDict, total=False):
     # inputs
@@ -54,11 +95,25 @@ class GraphState(TypedDict, total=False):
     turn: int
     observations: list[dict]
     deck_cards: list[str]
-    # resolved by the deck_recognition node
+    hand: list[str]
+    own_board: list[str]
+    opponent_board: list[str]
+    your_graveyard: list[str]
+    opponent_graveyard: list[str]
+    life_totals: dict[str, int]
+    # resolved by the game_advisor node
     resolved_format: str | None
     candidate_archetypes: list[dict]
-    # outputs of the deck_recognition node
+    own_archetype: str | None
+    piloting_guide: dict | None
+    # opponent-recognition outputs of the game_advisor node
     archetype: str | None
     confidence: float | None
     reasoning: str | None
     alternatives: list[str]
+    # piloting outputs of the game_advisor node
+    recommended_play: str | None
+    play_reasoning: str | None
+    play_alternatives: list[str]
+    mulligan_advice: str | None
+    guide_source: str | None

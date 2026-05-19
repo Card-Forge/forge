@@ -103,3 +103,75 @@ def _parse_colors(tile) -> list[str]:
 
 def _parse_signature_cards(tile) -> list[str]:
     return [li.get_text(strip=True) for li in tile.select("ul li") if li.get_text(strip=True)]
+
+
+# ---------------------------------------------------------------------------
+# Decklist enrichment for the piloting-guide builder (scripts/build_piloting_guides.py).
+# Best-effort and fully fail-soft: any failure returns an empty result so the
+# builder degrades to signature-card context rather than aborting.
+# ---------------------------------------------------------------------------
+_SITE = "https://www.mtggoldfish.com"
+
+
+def archetype_links(slug: str, *, timeout: float = 20.0) -> dict[str, str]:
+    """Map archetype name -> MTGGoldfish archetype page URL for a format."""
+    from bs4 import BeautifulSoup
+
+    url = _URL_TEMPLATE.format(slug=slug)
+    try:
+        with httpx.Client(
+            timeout=timeout, headers={"User-Agent": _USER_AGENT}, follow_redirects=True
+        ) as client:
+            resp = client.get(url)
+            resp.raise_for_status()
+    except httpx.HTTPError as exc:
+        log.warning("scraper: archetype_links(%s) failed: %s", slug, exc)
+        return {}
+
+    links: dict[str, str] = {}
+    soup = BeautifulSoup(resp.text, "html.parser")
+    for tile in soup.select(".archetype-tile"):
+        a = tile.select_one(".archetype-tile-title a")
+        href = a.get("href") if a else None
+        if a and href:
+            links[a.get_text(strip=True)] = href if href.startswith("http") else _SITE + href
+    return links
+
+
+def fetch_archetype_decklist(page_url: str, *, timeout: float = 20.0) -> list[str]:
+    """Fetch a representative decklist (card names) from an archetype page.
+
+    Returns ``[]`` on any failure — the builder then relies on signature cards.
+    """
+    from bs4 import BeautifulSoup
+
+    try:
+        with httpx.Client(
+            timeout=timeout, headers={"User-Agent": _USER_AGENT}, follow_redirects=True
+        ) as client:
+            resp = client.get(page_url)
+            resp.raise_for_status()
+    except httpx.HTTPError as exc:
+        log.warning("scraper: fetch_archetype_decklist(%s) failed: %s", page_url, exc)
+        return []
+
+    soup = BeautifulSoup(resp.text, "html.parser")
+    cards: list[str] = []
+    seen: set[str] = set()
+    for el in soup.select(".deck-col-card a, table.deck-view-deck-table a"):
+        name = el.get_text(strip=True)
+        if name and name.lower() not in seen:
+            seen.add(name.lower())
+            cards.append(name)
+    return cards
+
+
+def fetch_primer_text(page_url: str) -> str:
+    """Placeholder hook for primer prose.
+
+    MTGGoldfish archetype pages do not carry structured primers and free-text
+    primer articles have patchy, unreliable coverage, so this returns an empty
+    string today. The builder treats primer text as optional enrichment; wire a
+    real source in here later without changing the builder.
+    """
+    return ""

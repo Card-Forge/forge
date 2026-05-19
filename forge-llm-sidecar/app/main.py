@@ -40,9 +40,9 @@ app = FastAPI(title="Forge LLM Sidecar", version="0.1.0", lifespan=_lifespan)
 app.mount("/static", StaticFiles(directory=str(_static_dir)), name="static")
 
 
-@app.get("/")
+@app.get("/dashboard")
 async def dashboard_root() -> FileResponse:
-    """Serve the dashboard HTML at the root path."""
+    """Serve the dashboard HTML."""
     return FileResponse(str(_static_dir / "dashboard.html"))
 
 

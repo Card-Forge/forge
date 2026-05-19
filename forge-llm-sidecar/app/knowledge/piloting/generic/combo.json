@@ -1,0 +1,83 @@
+{
+  "archetype": "Generic Combo",
+  "format": "",
+  "strategy_type": "combo",
+  "overview": "Assemble a specific set of cards that wins the game on the spot or generates an insurmountable advantage. The deck is built to find and protect those pieces. Race linear opponents, and play around interaction against decks that can disrupt you.",
+  "win_conditions": [
+    "Execute the combo to win immediately or near-immediately",
+    "Generate an unbeatable engine the opponent cannot interact with in time"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "A hand that finds or advances the combo within a reasonable number of turns",
+      "Enough lands and mana to actually execute the combo",
+      "Card selection or tutors that dig toward the missing pieces"
+    ],
+    "mulligan_criteria": [
+      "No combo pieces and no way to dig for them",
+      "Combo pieces but not enough mana to ever cast them",
+      "A hand that is far too slow against an open, aggressive field"
+    ],
+    "examples": [
+      {
+        "hand": [],
+        "decision": "keep",
+        "reason": "One combo piece plus a tutor and lands reliably assembles the kill."
+      },
+      {
+        "hand": [],
+        "decision": "mulligan",
+        "reason": "All lands and no combo pieces or card selection does nothing."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Develop mana and dig toward your combo pieces with card selection",
+      "Deploy cheap disruption against decks that can interact with you",
+      "Do not telegraph the combo — hold pieces until you can win"
+    ],
+    "mid_game": [
+      "Assemble the combo on a turn you can also protect it, if possible",
+      "Bait or strip the opponent's interaction before going off",
+      "Track whether you are racing — go off as soon as it is safe"
+    ],
+    "late_game": [
+      "If forced long, win through remaining disruption on the cleanest turn",
+      "Do not wait for perfection against a faster clock — execute and win"
+    ]
+  },
+  "key_cards": [
+    {"name": "Combo pieces", "role": "win condition", "notes": "The cards that win the game; protect them and do not expose them early."},
+    {"name": "Tutors / card selection", "role": "consistency", "notes": "Dig toward the missing half of the combo as fast as possible."},
+    {"name": "Disruption", "role": "protection", "notes": "Discard or counters that clear the opponent's interaction before you go off."}
+  ],
+  "sequencing_tips": [
+    "Cast card selection early to find pieces, but keep the actual combo hidden",
+    "Strip interaction with discard before committing to the combo turn",
+    "Count mana precisely — know exactly which turn you can win"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Bait counterspells with lesser spells, or use discard, then combo into open mana.",
+      "watch_for": ["counterspells", "discard", "instant-speed interaction"]
+    },
+    {
+      "opponent_archetype": "Aggro",
+      "advice": "You are racing — mulligan for speed and combo as fast as possible.",
+      "watch_for": ["fast clocks", "reach / burn that beats you to the kill"]
+    }
+  ],
+  "common_threats": [
+    "Counterspells and discard that break up the combo",
+    "Fast aggro that kills before you assemble the pieces",
+    "Hate cards that shut off your specific combo"
+  ],
+  "metadata": {
+    "source": "hand-authored",
+    "generated_at": "",
+    "model": "",
+    "schema_version": 1
+  }
+}

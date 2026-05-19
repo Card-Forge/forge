@@ -30,7 +30,7 @@ class Config:
             llm_base_url=os.environ.get("LLM_BASE_URL", "http://localhost:8080/v1"),
             llm_api_key=os.environ.get("LLM_API_KEY", "not-needed"),
             model_name=os.environ.get("MODEL_NAME", "local-model"),
-            port=int(os.environ.get("PORT", "8000")),
+            port=int(os.environ.get("PORT", "18970")),
             request_timeout=float(os.environ.get("LLM_TIMEOUT", "60")),
             metagame_enable=_env_bool("METAGAME_ENABLE", True),
             default_meta_format=os.environ.get("DEFAULT_META_FORMAT", "standard"),

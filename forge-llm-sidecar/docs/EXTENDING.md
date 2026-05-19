@@ -11,7 +11,7 @@ ramp / other) as the worked example.
 some nodes use. Today:
 
 ```
-START ──▶ deck_recognition ──▶ END
+START ──▶ game_advisor ──▶ END
 ```
 
 Adding a node is three steps: extend the state, write the node, wire it in.
@@ -44,7 +44,7 @@ from app.schema import GraphState
 _SYSTEM = "You are an MTG strategist. Answer with a single JSON object."
 
 async def strategy_classification_node(state: GraphState) -> GraphState:
-    # The deck_recognition node has already run, so its output is available:
+    # The game_advisor node has already run, so its output is available:
     archetype = state.get("archetype", "Unknown")
     observations = state.get("observations", [])
 
@@ -77,16 +77,16 @@ _STRATEGY = "strategy_classification"
 @functools.lru_cache(maxsize=1)
 def get_graph():
     builder = StateGraph(GraphState)
-    builder.add_node(_DECK_RECOGNITION, deck_recognition_node)
+    builder.add_node(_GAME_ADVISOR, game_advisor_node)
     builder.add_node(_STRATEGY, strategy_classification_node)
-    builder.add_edge(START, _DECK_RECOGNITION)
-    builder.add_edge(_DECK_RECOGNITION, _STRATEGY)   # runs after recognition
+    builder.add_edge(START, _GAME_ADVISOR)
+    builder.add_edge(_GAME_ADVISOR, _STRATEGY)   # runs after the advisor
     builder.add_edge(_STRATEGY, END)
     return builder.compile()
 ```
 
 Because nodes run in sequence and share `GraphState`, `strategy_classification`
-sees everything `deck_recognition` produced (`archetype`, `candidate_archetypes`,
+sees everything `game_advisor` produced (`archetype`, `candidate_archetypes`,
 `resolved_format`, …).
 
 ## 4. Surface the result
@@ -105,9 +105,13 @@ keys. Keep network-touching helpers (`format_detect`, `scraper`) stubbed.
 
 - **Fail-soft.** A node must always return a valid `GraphState`; never raise
   into the graph. Degrade to a neutral value on any error.
-- **One LLM concern per node.** Keep prompts focused — separate nodes beat one
-  mega-prompt.
+- **One LLM concern per node — unless latency says otherwise.** Focused prompts
+  in separate nodes are the default. The `game_advisor` node deliberately
+  breaks this rule: it does opponent recognition *and* piloting advice in one
+  call, because the AI re-runs the graph on every action and a second LLM call
+  would add noticeable lag. Merge concerns only when per-action latency
+  justifies it.
 - **Keep the HTTP contract stable.** Add response fields additively and bump
   `SCHEMA_VERSION`; the Java client tolerates unknown fields.
-- **Cache expensive lookups.** See the per-game format cache (`_resolved_format`
-  in `deck_recognition.py`) for the pattern.
+- **Cache expensive lookups.** See the per-game caches (`_resolved_format`,
+  `_own_archetype` in `game_advisor.py`) for the pattern.

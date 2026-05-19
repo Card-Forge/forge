@@ -4,6 +4,7 @@
   "archetypes": [
     {
       "name": "Aggro",
+      "strategy_type": "aggro",
       "colors": ["any"],
       "strategy": "Win fast with cheap, efficient creatures and burn before the opponent stabilizes.",
       "signature_cards": [],
@@ -11,6 +12,7 @@
     },
     {
       "name": "Midrange",
+      "strategy_type": "midrange",
       "colors": ["any"],
       "strategy": "Trade resources efficiently, then win with individually powerful threats.",
       "signature_cards": [],
@@ -18,6 +20,7 @@
     },
     {
       "name": "Control",
+      "strategy_type": "control",
       "colors": ["any"],
       "strategy": "Neutralize the opponent's threats, then win late with a small number of finishers.",
       "signature_cards": [],
@@ -25,6 +28,7 @@
     },
     {
       "name": "Combo",
+      "strategy_type": "combo",
       "colors": ["any"],
       "strategy": "Assemble a specific set of cards that wins the game immediately.",
       "signature_cards": [],
@@ -32,6 +36,7 @@
     },
     {
       "name": "Ramp",
+      "strategy_type": "ramp",
       "colors": ["any"],
       "strategy": "Accelerate mana to deploy expensive, game-ending threats ahead of schedule.",
       "signature_cards": [],

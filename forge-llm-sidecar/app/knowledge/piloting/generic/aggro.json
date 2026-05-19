@@ -1,0 +1,82 @@
+{
+  "archetype": "Generic Aggro",
+  "format": "",
+  "strategy_type": "aggro",
+  "overview": "Win quickly by deploying cheap threats and attacking every turn. The clock is the plan: race the opponent's life total down before their more powerful cards take over. Time works against you, so trade resources for tempo and damage.",
+  "win_conditions": [
+    "Reduce the opponent to 0 life with repeated combat damage",
+    "Finish a stalled board with reach: burn spells or evasive attackers"
+  ],
+  "mulligan": {
+    "keep_criteria": [
+      "Two or three lands plus multiple one- and two-drop threats",
+      "A curve that lets you play a creature every turn from turn 1",
+      "At least one way to push damage through a blocker"
+    ],
+    "mulligan_criteria": [
+      "Zero or one lands, or five-plus lands with no early plays",
+      "Only expensive cards — nothing to do before turn 3",
+      "A hand of all situational answers and no proactive threats"
+    ],
+    "examples": [
+      {
+        "hand": [],
+        "decision": "keep",
+        "reason": "Two lands and three one-or-two-mana creatures is a fast, functional aggro hand."
+      },
+      {
+        "hand": [],
+        "decision": "mulligan",
+        "reason": "One land with no one-drop stalls the clock; aggro cannot afford a slow start."
+      }
+    ]
+  },
+  "game_plan": {
+    "early_game": [
+      "Deploy a threat on turn 1 and keep adding to the board every turn",
+      "Attack into open mana unless the trade clearly favors the opponent",
+      "Spend removal only on blockers that stop your clock"
+    ],
+    "mid_game": [
+      "Keep attacking; count exact damage and plan the turn you can kill",
+      "Play around sweepers by not overcommitting once you have lethal in reach",
+      "Use evasion and combat tricks to break through stabilizing blockers"
+    ],
+    "late_game": [
+      "Convert remaining cards directly into damage — burn the opponent out",
+      "Avoid long games; if the board stalls, find reach rather than trading down"
+    ]
+  },
+  "key_cards": [
+    {"name": "Cheap threats", "role": "clock", "notes": "Your one- and two-drops are the game plan; protect them and keep attacking."},
+    {"name": "Reach / burn", "role": "finisher", "notes": "Save direct damage for the opponent's face when the board stalls."}
+  ],
+  "sequencing_tips": [
+    "Play your lowest-impact creature into untapped lands so removal trades down",
+    "Hold combat tricks until a profitable block or a lethal swing",
+    "Do not walk every threat into an obvious sweeper — leave a follow-up in hand"
+  ],
+  "matchups": [
+    {
+      "opponent_archetype": "Control",
+      "advice": "Apply pressure but do not overextend into a board wipe; keep a threat in reserve.",
+      "watch_for": ["board wipes", "lifegain", "cheap spot removal"]
+    },
+    {
+      "opponent_archetype": "Combo",
+      "advice": "You are the clock — race. Mulligan aggressively for the fastest possible draw.",
+      "watch_for": ["fast combo turns", "life payment that you can punish"]
+    }
+  ],
+  "common_threats": [
+    "Board wipes that erase your developed board",
+    "Lifegain that resets the race",
+    "Cheap efficient blockers that brick your attackers"
+  ],
+  "metadata": {
+    "source": "hand-authored",
+    "generated_at": "",
+    "model": "",
+    "schema_version": 1
+  }
+}
