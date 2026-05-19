@@ -239,7 +239,9 @@ On desktop, use the macro buttons in the match dock or the configurable keyboard
 
 Recorded macros can include common match choices such as selecting cards or players, activating abilities, passing priority, paying mana from the pool, choosing colors or mana combinations, choosing modes, confirming prompts, ordering simultaneous abilities, and resolving scry choices.
 
-Macro replay is prompt-aware: Forge attempts each recorded action only when the current game prompt can accept it. If the game state diverges from the recording, playback stops instead of blindly clicking through unrelated prompts. This makes macros safer than the older click-ID sequence behavior, but they are still best suited for predictable loops. If a card changes zones, a target becomes illegal, or an opponent interrupts the loop, you may need to stop and record a new sequence.
+Macro replay is prompt-aware: Forge attempts each recorded action only when the current game prompt can accept it. If the game state diverges from the recording, playback stops instead of blindly clicking through unrelated prompts. Macros are best suited for predictable loops. If a card changes zones, a target becomes illegal, or an opponent interrupts the loop, you may need to stop and record a new sequence.
+
+For troubleshooting, macro replay logging can be enabled from the command line with `-Dforge.macro.debug=true`.
 
 # Desktop User Interface
 
