@@ -14,11 +14,11 @@ import forge.gui.interfaces.IProgressBar;
 public class FProgressBar extends JProgressBar implements IProgressBar {
     private long startMillis = 0;
     private int tempVal = 0, etaSecs = 0;
-    private String desc = "";
-    private boolean showETA = true;
-    private boolean showCount = true;
+    private volatile String desc = "";
+    private volatile boolean showETA = true;
+    private volatile boolean showCount = true;
 
-    private boolean percentMode = false;
+    private volatile boolean percentMode = false;
 
     public FProgressBar() {
         super();
@@ -26,10 +26,26 @@ public class FProgressBar extends JProgressBar implements IProgressBar {
         setStringPainted(true);
     }
 
+    /**
+     * Runs {@code r} on the Swing event dispatch thread. Download services
+     * drive this progress bar from background threads; mutating a
+     * {@link JProgressBar} off-EDT races with painting and can NPE deep in
+     * {@code BasicProgressBarUI}, so every mutator funnels through here.
+     */
+    private static void runOnEdt(final Runnable r) {
+        if (SwingUtilities.isEventDispatchThread()) {
+            r.run();
+        } else {
+            SwingUtilities.invokeLater(r);
+        }
+    }
+
     @Override
     public void setDescription(final String s0) {
-        desc = s0;
-        setString(s0);
+        runOnEdt(() -> {
+            desc = s0;
+            setString(s0);
+        });
     }
 
     /** Increments bar, thread safe. Calculations executed on separate thread. */
@@ -45,6 +61,10 @@ public class FProgressBar extends JProgressBar implements IProgressBar {
 
     @Override
     public void setValue(final int progress) {
+        if (!SwingUtilities.isEventDispatchThread()) {
+            runOnEdt(() -> setValue(progress));
+            return;
+        }
         super.setValue(progress);
 
         // String.format leads to StringBuilder anyway. Direct calls will be faster
@@ -70,6 +90,10 @@ public class FProgressBar extends JProgressBar implements IProgressBar {
     /** Resets the various values required for this class. */
     @Override
     public void reset() {
+        if (!SwingUtilities.isEventDispatchThread()) {
+            runOnEdt(this::reset);
+            return;
+        }
         setIndeterminate(true);
         setValue(0);
         tempVal = 0;
@@ -77,6 +101,15 @@ public class FProgressBar extends JProgressBar implements IProgressBar {
         setIndeterminate(false);
         setShowETA(true);
         setShowCount(true);
+    }
+
+    @Override
+    public void setMaximum(final int n) {
+        if (!SwingUtilities.isEventDispatchThread()) {
+            runOnEdt(() -> setMaximum(n));
+            return;
+        }
+        super.setMaximum(n);
     }
 
     @Override
