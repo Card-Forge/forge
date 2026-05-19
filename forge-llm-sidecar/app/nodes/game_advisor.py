@@ -1,14 +1,14 @@
 """The game_advisor LangGraph node.
 
-A single node, a single LLM call, two concerns:
+One graph node, one LLM call per trigger:
 
-1. **Deck recognition** — guess which archetype the *opponent* is playing.
-2. **Piloting advice** — recommend what the *AI* should play next, using a
-   piloting guide for the AI's own deck.
+1. **Deck recognition** — guess which archetype the *human opponent* is
+   playing from observed human plays only.
+2. **Piloting guidance** — resolve the AI's own guide deterministically and
+   return lightweight guide-derived advice without another model call.
 
-These are deliberately merged into one prompt/call: the AI re-runs the graph on
-every action, and a second LLM call would add noticeable lag. See
-``docs/EXTENDING.md`` — latency wins over the "one concern per node" rule here.
+Recognition deliberately does not receive the AI deck, guide, hand, board, or
+graveyard, so it cannot flip-flop into identifying the AI's own archetype.
 """
 
 from __future__ import annotations
@@ -28,10 +28,10 @@ log = logging.getLogger(__name__)
 _resolved_format: dict[str, str] = {}
 _own_archetype: dict[str, tuple[str | None, StrategyType]] = {}
 
-_SYSTEM_PROMPT = (
-    "You are an expert Magic: The Gathering analyst and AI piloting coach. "
-    "For opponent deck recognition, analyze only the observed human player plays. "
-    "Use the AI deck guidance only to choose the AI's own plays. "
+_RECOGNITION_SYSTEM_PROMPT = (
+    "You are an expert Magic: The Gathering deck-recognition analyst. "
+    "Identify only the human opponent's deck from observed human plays. "
+    "You will not receive the AI player's deck or guidance. "
     "Always answer with a single JSON object and nothing else."
 )
 
@@ -105,7 +105,8 @@ def _format_zone(name: str, cards: list[str]) -> str:
     return f"{name}: {', '.join(cards)}" if cards else f"{name}: (empty/unknown)"
 
 
-def _build_prompt(state: GraphState) -> str:
+def _build_recognition_prompt(state: GraphState) -> str:
+    """Build a recognition-only prompt with no AI deck or piloting context."""
     archetypes = state.get("candidate_archetypes", [])
     names = [a.get("name", "?") for a in archetypes]
     has_shares = any(a.get("meta_share") for a in archetypes)
@@ -116,49 +117,73 @@ def _build_prompt(state: GraphState) -> str:
         else ""
     )
     fmt = state.get("resolved_format") or state.get("format", "Unknown")
-    turn = state.get("turn", 0)
-
-    play_block = (
-        '  "mulligan_advice": string — keep or mulligan the opening hand, and why,\n'
-        if turn <= 0
-        else (
-            '  "recommended_play": string — the single best play for the AI now,\n'
-            '  "play_reasoning": string — one or two sentences,\n'
-            '  "play_alternatives": array of up to 3 other reasonable plays,\n'
-        )
-    )
 
     return (
         f"Game format: {fmt}\n"
-        f"Current turn: {turn}\n\n"
+        f"Current turn: {state.get('turn', 0)}\n\n"
         f"Archetypes in the current metagame:\n{_format_archetypes(archetypes)}\n\n"
         f"{meta_note}"
-        f"Opponent's observed plays so far (chronological):\n"
+        f"Human opponent's observed plays so far (chronological):\n"
         f"{_format_observations(state.get('observations', []))}\n\n"
-        f"--- The AI's own deck guidance ---\n{_format_guide(state.get('piloting_guide'))}\n\n"
-        f"--- Current board state ---\n"
-        f"{_format_zone('Your hand', state.get('hand', []))}\n"
-        f"{_format_zone('Your battlefield', state.get('own_board', []))}\n"
-        f"{_format_zone('Opponent battlefield', state.get('opponent_board', []))}\n"
-        f"{_format_zone('Your graveyard', state.get('your_graveyard', []))}\n"
-        f"{_format_zone('Opponent graveyard', state.get('opponent_graveyard', []))}\n"
-        f"Life totals: {state.get('life_totals', {}) or '(unknown)'}\n\n"
-        "Do two things and respond with a single JSON object with exactly these keys:\n"
-        "1. Identify the human opponent's most likely archetype. Use only the "
-        "Opponent's observed plays section as evidence for this recognition; "
-        "do not classify the AI's deck, guidance, hand, battlefield, or graveyard:\n"
-        '  "archetype": string (the deck name),\n'
+        "Identify the human opponent's most likely archetype. Use only the "
+        "observed plays above as evidence. Do not infer from turn player, AI "
+        "deck identity, AI guidance, AI hand, AI battlefield, or AI graveyard.\n"
+        "Respond with exactly these keys:\n"
+        '  "archetype": string (the human opponent deck name),\n'
         '  "confidence": number between 0 and 1,\n'
-        '  "reasoning": string (one or two sentences),\n'
-        '  "alternatives": array of up to 3 other plausible archetype names,\n'
-        "2. Advise the AI on piloting its own deck:\n"
-        f"{play_block}"
+        '  "reasoning": string (one or two sentences based only on observed plays),\n'
+        '  "alternatives": array of up to 3 other plausible human opponent archetype names.\n'
         "Prefer an opponent archetype name from the list above; only invent a name "
-        "if none fit, and lower confidence if you do. Keep opponent recognition "
-        "separate from AI piloting. Base the piloting advice on the AI's own deck "
-        "guidance and the current board state.\n"
-        f"Valid opponent archetype names: {json.dumps(names)}"
+        "if none fit, and lower confidence if you do.\n"
+        f"Valid human opponent archetype names: {json.dumps(names)}"
     )
+
+
+def _guide_list(items: list[str], fallback: str) -> str:
+    return "; ".join(items[:2]) if items else fallback
+
+
+def _local_piloting_advice(state: GraphState) -> dict:
+    """Return guide-derived piloting advice without an extra LLM call."""
+    guide = state.get("piloting_guide") or {}
+    if not guide:
+        return {
+            "recommended_play": "Follow the deck's normal heuristic game plan.",
+            "play_reasoning": "No piloting guide was available for this archetype.",
+            "play_alternatives": [],
+            "mulligan_advice": "",
+        }
+
+    turn = state.get("turn", 0)
+    mulligan = guide.get("mulligan", {})
+    game_plan = guide.get("game_plan", {})
+    key_cards = guide.get("key_cards", [])
+
+    if turn <= 0:
+        keep = _guide_list(mulligan.get("keep_criteria", []), "hands that execute the deck plan")
+        ship = _guide_list(mulligan.get("mulligan_criteria", []), "hands lacking early action")
+        return {
+            "recommended_play": "",
+            "play_reasoning": "",
+            "play_alternatives": [],
+            "mulligan_advice": f"Keep {keep}. Mulligan {ship}.",
+        }
+
+    phase = "early_game" if turn <= 3 else "mid_game" if turn <= 7 else "late_game"
+    plan = _guide_list(game_plan.get(phase, []), guide.get("overview") or "advance the deck plan")
+    alternatives = game_plan.get("mid_game" if phase == "early_game" else "late_game", [])[:2]
+    key = ""
+    if key_cards:
+        names = [str(c.get("name", "")).strip() for c in key_cards if c.get("name")]
+        if names:
+            key = " Prioritize " + ", ".join(names[:2]) + " when the board state supports it."
+
+    return {
+        "recommended_play": plan + key,
+        "play_reasoning": "Derived from the resolved AI piloting guide; no extra LLM call.",
+        "play_alternatives": [str(x) for x in alternatives],
+        "mulligan_advice": "",
+    }
 
 
 async def _resolve_meta_slug(state: GraphState) -> str:
@@ -207,11 +232,11 @@ def _fail_soft(state: GraphState, exc: Exception) -> GraphState:
 
 
 async def game_advisor_node(state: GraphState) -> GraphState:
-    """LangGraph node: opponent recognition + own-deck piloting advice.
+    """LangGraph node: opponent recognition plus local own-deck guidance.
 
-    One LLM call returns both. Candidate (opponent) archetypes come from the
-    current metagame; the AI's own archetype is identified deterministically and
-    drives which piloting guide is loaded.
+    One LLM call recognizes the human opponent from observed human plays only.
+    The AI's own archetype and piloting guide are resolved deterministically and
+    converted into lightweight local advice without another model call.
     """
     slug = await _resolve_meta_slug(state)
     state["resolved_format"] = slug
@@ -237,9 +262,12 @@ async def game_advisor_node(state: GraphState) -> GraphState:
     state["guide_source"] = guide_source
 
     try:
-        result = await generate_json(_build_prompt(state), system=_SYSTEM_PROMPT)
+        result = await generate_json(
+            _build_recognition_prompt(state),
+            system=_RECOGNITION_SYSTEM_PROMPT,
+        )
     except LLMError as exc:
-        log.warning("game_advisor: model call failed: %s", exc)
+        log.warning("game_advisor: recognition model call failed: %s", exc)
         return _fail_soft(state, exc)
 
     archetype = str(result.get("archetype", "Unknown")).strip() or "Unknown"
@@ -259,7 +287,11 @@ async def game_advisor_node(state: GraphState) -> GraphState:
         alternatives = []
     alternatives = [str(x) for x in alternatives][:3]
 
-    play_alternatives = result.get("play_alternatives", [])
+    reasoning = str(result.get("reasoning", "")).strip()
+
+    piloting_result = _local_piloting_advice(state)
+
+    play_alternatives = piloting_result.get("play_alternatives", [])
     if not isinstance(play_alternatives, list):
         play_alternatives = []
     play_alternatives = [str(x) for x in play_alternatives][:3]
@@ -268,10 +300,10 @@ async def game_advisor_node(state: GraphState) -> GraphState:
         **state,
         "archetype": archetype,
         "confidence": confidence,
-        "reasoning": str(result.get("reasoning", "")).strip(),
+        "reasoning": reasoning,
         "alternatives": alternatives,
-        "recommended_play": str(result.get("recommended_play", "")).strip(),
-        "play_reasoning": str(result.get("play_reasoning", "")).strip(),
+        "recommended_play": str(piloting_result.get("recommended_play", "")).strip(),
+        "play_reasoning": str(piloting_result.get("play_reasoning", "")).strip(),
         "play_alternatives": play_alternatives,
-        "mulligan_advice": str(result.get("mulligan_advice", "")).strip(),
+        "mulligan_advice": str(piloting_result.get("mulligan_advice", "")).strip(),
     }

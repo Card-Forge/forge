@@ -52,15 +52,15 @@ def sample_state():
 
 @pytest.mark.asyncio
 async def test_graph_returns_archetype_and_piloting(monkeypatch, sample_state):
+    calls = []
+
     async def fake_generate_json(prompt, system=None):
+        calls.append((prompt, system))
         return {
             "archetype": "Boros Energy",
             "confidence": 0.8,
             "reasoning": "Aggressive red cards.",
             "alternatives": [],
-            "recommended_play": "Cast Lightning Bolt at their creature.",
-            "play_reasoning": "Removing their threat keeps the race in our favor.",
-            "play_alternatives": ["Play a land and pass"],
         }
 
     monkeypatch.setattr(game_advisor, "generate_json", fake_generate_json)
@@ -68,8 +68,9 @@ async def test_graph_returns_archetype_and_piloting(monkeypatch, sample_state):
     assert result["archetype"] == "Boros Energy"
     assert result["resolved_format"] == "modern"
     assert 0.0 <= result["confidence"] <= 1.0
-    # piloting outputs are present alongside recognition outputs
-    assert result["recommended_play"].startswith("Cast Lightning Bolt")
+    assert len(calls) == 1
+    # piloting outputs are present alongside recognition outputs, but local/guide-derived.
+    assert result["recommended_play"]
     assert result["own_archetype"]  # identified deterministically from deck_cards
 
 
@@ -124,36 +125,102 @@ async def test_llm_failure_is_fail_soft(monkeypatch, sample_state):
 
 @pytest.mark.asyncio
 async def test_metagame_reaches_the_prompt(monkeypatch, sample_state):
-    """Scraped metagame archetypes + shares should be in the LLM prompt."""
-    captured = {}
+    """Scraped metagame archetypes + shares should be in the recognition prompt."""
+    captured = {"recognition": "", "calls": 0}
 
     async def fake_generate_json(prompt, system=None):
-        captured["prompt"] = prompt
+        captured["calls"] += 1
+        captured["recognition"] = prompt
         return {"archetype": "Boros Energy", "confidence": 0.7, "reasoning": "", "alternatives": []}
 
     monkeypatch.setattr(game_advisor, "generate_json", fake_generate_json)
     await get_graph().ainvoke(sample_state)
-    assert "%" in captured["prompt"]
-    assert "metagame" in captured["prompt"].lower()
-    # the AI's own piloting guide is included in the prompt too
-    assert "deck guidance" in captured["prompt"].lower()
+    assert "%" in captured["recognition"]
+    assert "metagame" in captured["recognition"].lower()
+    assert "deck guidance" not in captured["recognition"].lower()
+    assert captured["calls"] == 1
 
 
 @pytest.mark.asyncio
 async def test_prompt_keeps_recognition_and_piloting_separate(monkeypatch, sample_state):
-    captured = {}
+    captured = {"recognition": "", "recognition_system": "", "calls": 0}
 
     async def fake_generate_json(prompt, system=None):
-        captured["prompt"] = prompt
-        captured["system"] = system
+        captured["calls"] += 1
+        captured["recognition"] = prompt
+        captured["recognition_system"] = system
         return {"archetype": "Boros Energy", "confidence": 0.7, "reasoning": "", "alternatives": []}
 
     monkeypatch.setattr(game_advisor, "generate_json", fake_generate_json)
     await get_graph().ainvoke(sample_state)
 
-    assert "analyze only the observed human player plays" in captured["system"].lower()
-    assert "use only the opponent's observed plays section" in captured["prompt"].lower()
-    assert "do not classify the AI's deck" in captured["prompt"]
+    assert "identify only the human opponent" in captured["recognition_system"].lower()
+    assert "use only the observed plays above" in captured["recognition"].lower()
+    assert "deck guidance" not in captured["recognition"].lower()
+    assert "your deck:" not in captured["recognition"].lower()
+    assert "ai hand:" not in captured["recognition"].lower()
+    assert "ai battlefield:" not in captured["recognition"].lower()
+    assert captured["calls"] == 1
+
+
+@pytest.mark.asyncio
+async def test_recognition_prompt_excludes_ai_state_when_ai_is_dimir(monkeypatch):
+    state = {
+        "game_id": "standard-flip",
+        "format": "Standard",
+        "turn": 4,
+        "observations": [
+            {
+                "turn": 1,
+                "event": "land",
+                "card": "Spirebluff Canal",
+                "cmc": 0,
+                "colors": ["U", "R"],
+                "types": ["Land"],
+            },
+            {
+                "turn": 2,
+                "event": "spell",
+                "card": "Artist's Talent",
+                "cmc": 2,
+                "colors": ["R"],
+                "types": ["Enchantment"],
+            },
+            {
+                "turn": 3,
+                "event": "spell",
+                "card": "Firebending Lesson",
+                "cmc": 2,
+                "colors": ["R"],
+                "types": ["Sorcery"],
+            },
+        ],
+        "deck_cards": ["Doomsday Excruciator", "Bitter Triumph", "Watery Grave"],
+        "hand": ["Private AI Card"],
+        "own_board": ["Private AI Permanent"],
+        "opponent_board": ["Artist's Talent"],
+        "alternatives": [],
+    }
+    captured = {"recognition": "", "calls": 0}
+
+    async def fake_generate_json(prompt, system=None):
+        captured["calls"] += 1
+        captured["recognition"] = prompt
+        return {
+            "archetype": "Izzet Lessons",
+            "confidence": 0.8,
+            "reasoning": "Observed Izzet Lessons cards.",
+            "alternatives": [],
+        }
+
+    monkeypatch.setattr(game_advisor, "generate_json", fake_generate_json)
+    result = await get_graph().ainvoke(state)
+
+    assert result["archetype"] == "Izzet Lessons"
+    assert "private ai card" not in captured["recognition"].lower()
+    assert "private ai permanent" not in captured["recognition"].lower()
+    assert "firebending lesson" in captured["recognition"].lower()
+    assert captured["calls"] == 1
 
 
 def test_metagame_data_files_load():

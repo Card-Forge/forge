@@ -1,11 +1,11 @@
 """The LangGraph agent graph.
 
 A single node: START -> game_advisor -> END. The ``game_advisor`` node does
-opponent deck recognition *and* own-deck piloting advice in one LLM call —
-these are merged (rather than split into two nodes) to keep per-action latency
-low; see ``docs/EXTENDING.md``. Further nodes can still be added with
-``add_node`` / ``add_edge`` without changing the HTTP contract, because
-:class:`GraphState` is a superset TypedDict.
+opponent deck recognition with one LLM call per trigger. AI piloting advice is
+derived locally from the resolved guide, so recognition does not receive AI deck
+guidance or AI game state and stays grounded only in observed human plays.
+Further nodes can still be added with ``add_node`` / ``add_edge`` without
+changing the HTTP contract, because :class:`GraphState` is a superset TypedDict.
 """
 
 from __future__ import annotations
