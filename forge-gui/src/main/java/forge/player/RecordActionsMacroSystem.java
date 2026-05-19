@@ -858,12 +858,8 @@ public class RecordActionsMacroSystem implements IMacroSystem {
         return false;
     }
 
-    private Card exactRecordedCard(final CardView recordedCard) {
-        return recordedCard == null ? null : playerControllerHuman.getCard(recordedCard);
-    }
-
     private Card exactRecordedLandManaSource(final CardView recordedCard) {
-        final Card card = exactRecordedCard(recordedCard);
+        final Card card = playerControllerHuman.getCard(recordedCard);
         return isControlledByPlayer(card) && !card.isTapped() && card.isLand() ? card : null;
     }
 
@@ -1037,7 +1033,7 @@ public class RecordActionsMacroSystem implements IMacroSystem {
     }
 
     private Card findListChoice(final CardView recordedChoice, final InputSelectEntitiesFromList<?> selectInput) {
-        final Card exactChoice = exactRecordedCard(recordedChoice);
+        final Card exactChoice = playerControllerHuman.getCard(recordedChoice);
         if (exactChoice != null && selectInput.getValidChoices().contains(exactChoice)) {
             return exactChoice;
         }
@@ -1073,17 +1069,13 @@ public class RecordActionsMacroSystem implements IMacroSystem {
 
     private boolean isEquivalentToken(final CardView original, final Card candidate) {
         return isTokenLike(original)
-                && isTokenLike(candidate)
+                && isTokenLike(candidate.getView())
                 && hasSameController(original, candidate)
                 && normalizeTokenName(original.getName()).equals(normalizeTokenName(candidate.getView().getName()));
     }
 
     private boolean isTokenLike(final CardView card) {
         return card.isToken() || card.getName().endsWith(" Token");
-    }
-
-    private boolean isTokenLike(final Card card) {
-        return card.isToken() || card.getView().getName().endsWith(" Token");
     }
 
     private String normalizeTokenName(final String name) {
