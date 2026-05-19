@@ -1,4 +1,5 @@
 Name:Spider-Man India
+Variant:UniversesWithin:FlavorName:Alessos and Pras, Acrobats
 ManaCost:3 G W
 Types:Legendary Creature Spider Human Hero
 PT:4/4

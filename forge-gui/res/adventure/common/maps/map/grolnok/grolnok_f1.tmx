@@ -83,14 +83,14 @@
   <object id="168" template="../../obj/gate.tx" gid="3221229597" x="287.943" y="843.397" width="14.0077" height="18.6486" rotation="90.4687" visible="1">
    <properties>
     <property name="dialog">[{
-    &quot;text&quot;:&quot;This door is locked&quot;,
+    &quot;text&quot;:&quot;This door is locked.&quot;,
     &quot;options&quot;:[
-    { &quot;name&quot;:&quot;go away&quot; },
+    { &quot;name&quot;:&quot;Leave&quot; },
     {      
-        &quot;name&quot;:&quot;unlock with Grolnok's Key&quot;,     
+        &quot;name&quot;:&quot;Unlock with Grolnok's Key&quot;,     
         &quot;condition&quot;:[{&quot;item&quot;:&quot;Grolnok's Key&quot;}],    
-        &quot;text&quot;:&quot;The gate is unlocked&quot;,
-        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Grolnok's Key&quot;}]} ]
+        &quot;text&quot;:&quot;The gate is unlocked.&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;Continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Grolnok's Key&quot;}]} ]
     }
     ]
 }]</property>
@@ -153,14 +153,14 @@
   <object id="183" template="../../obj/gate.tx" gid="3221229597" x="226.355" y="821.63" width="15.7579" height="22.3749" rotation="0">
    <properties>
     <property name="dialog">[{
-    &quot;text&quot;:&quot;This door is locked&quot;,
+    &quot;text&quot;:&quot;This door is locked.&quot;,
     &quot;options&quot;:[
-    { &quot;name&quot;:&quot;go away&quot; },
+    { &quot;name&quot;:&quot;Leave&quot; },
     {      
-        &quot;name&quot;:&quot;unlock with Rusty Old Key&quot;,     
+        &quot;name&quot;:&quot;Unlock with Rusty Old Key&quot;,     
         &quot;condition&quot;:[{&quot;item&quot;:&quot;Rusty Old Key&quot;}],    
-        &quot;text&quot;:&quot;The gate is unlocked&quot;,
-        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Rusty Old Key&quot;}]} ]
+        &quot;text&quot;:&quot;The gate is unlocked.&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;Continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Rusty Old Key&quot;}]} ]
     }
     ]
 }]</property>

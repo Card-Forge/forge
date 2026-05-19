@@ -1,4 +1,5 @@
 Name:Passenger Ferry
+Variant:UniversesWithin:FlavorName:Carriage of Dreams
 ManaCost:3
 Types:Artifact Vehicle
 PT:4/3

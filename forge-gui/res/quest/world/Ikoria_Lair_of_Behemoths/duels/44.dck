@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Nibbler
+Title=Nibbler
+Icon=Nibbler.jpg
+Difficulty=Easy
+Description=./Standard/Ikoria_Lair_of_Behemoths/Aaron_Girdler_-_Temur_Elementals_(Standard,_#950658).dck
+Deck Type=constructed
+
+[Main]
+2 Parcelbeast
+2 Thassa, Deep-Dwelling
+3 Arboreal Grazer
+4 Uro, Titan of Nature's Wrath
+4 Leafkin Druid
+4 Cavalier of Thorns
+4 Omnath, Locus of the Roil
+4 Risen Reef
+4 Agent of Treachery
+4 Growth Spiral
+2 Quasiduplicate
+4 Genesis Ultimatum
+1 Mountain
+3 Island
+3 Forest
+4 Temple of Mystery
+4 Breeding Pool
+4 Fabled Passage
+4 Temple of Epiphany
+4 Temple of Abandon
+4 Stomping Ground
+4 Steam Vents
+4 Ketria Triome
+[Sideboard]
+1 Yorion, Sky Nomad
+1 Negate
+1 Blast Zone
+2 Mass Manipulation
+3 Mystical Dispute
+3 Scorching Dragonfire
+4 Aether Gust

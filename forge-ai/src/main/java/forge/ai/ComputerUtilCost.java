@@ -30,11 +30,28 @@ import forge.util.IterableUtil;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 
-
 public class ComputerUtilCost {
-    private static boolean suppressRecursiveSacCostCheck = false;
-    public static void setSuppressRecursiveSacCostCheck(boolean shouldSuppress) {
-        suppressRecursiveSacCostCheck = shouldSuppress;
+
+    public static boolean checkExileFromGraveCost(final Cost cost, final Player payer, final SpellAbility sa) {
+        CardCollection payingCards = new CardCollection();
+        int needed = 0;
+        for (final CostPart part : cost.getCostParts()) {
+            if (part instanceof CostExile) {
+                if (part.payCostFromSource()) {
+                    continue;
+                }
+                int amt = part.getAbilityAmount(sa);
+                needed += amt;
+                CardCollection toAdd = ComputerUtil.chooseExileFrom(payer, (CostExile) part, sa.getHostCard(), amt, sa, true);
+                if (toAdd != null) {
+                    payingCards.addAll(toAdd);
+                }
+            }
+        }
+        if (payingCards.size() < needed) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -94,7 +111,7 @@ public class ComputerUtilCost {
                 // ignore Loyality abilities with Zero as Cost
                 if (!type.is(CounterEnumType.LOYALTY)) {
                     PaymentDecision pay = decision.visit(remCounter);
-                    if (pay == null || pay.c <= 0) {
+                    if (pay == null || pay.counterTable.totalValues() <= 0) {
                         return false;
                     }
                 }
@@ -335,15 +352,7 @@ public class ComputerUtilCost {
         }
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostSacrifice sac) {
-                if (suppressRecursiveSacCostCheck) {
-                    return false;
-                }
-
-                final int amount = AbilityUtils.calculateAmount(source, sac.getAmount(), sourceAbility);
-
-                String type = sac.getType();
-
-                if (type.equals("CARDNAME")) {
+                if (sac.payCostFromSource()) {
                     if (!important) {
                         return false;
                     }
@@ -367,6 +376,7 @@ public class ComputerUtilCost {
                     continue;
                 }
 
+                String type = sac.getType();
                 boolean differentNames = false;
                 if (type.contains("+WithDifferentNames")) {
                     type = type.replace("+WithDifferentNames", "");
@@ -386,6 +396,7 @@ public class ComputerUtilCost {
                     typeList.addAll(uniqueNameCards);
                 }
 
+                final int amount = AbilityUtils.calculateAmount(source, sac.getAmount(), sourceAbility);
                 // don't sacrifice the card we're pumping
                 typeList = paymentChoicesWithoutTargets(typeList, sourceAbility, ai);
 
@@ -509,16 +520,16 @@ public class ComputerUtilCost {
      *
      * @param sa
      *            a {@link forge.game.spellability.SpellAbility} object.
-     * @param player
+     * @param payer
      *            a {@link forge.game.player.Player} object.
      * @return a boolean.
      */
-    public static boolean canPayCost(final SpellAbility sa, final Player player, final boolean effect) {
-        return canPayCost(sa.getPayCosts(), sa, player, effect);
+    public static boolean canPayCost(final SpellAbility sa, final Player payer, final boolean effect) {
+        return canPayCost(sa.getPayCosts(), sa, payer, effect);
     }
-    public static boolean canPayCost(final Cost cost, final SpellAbility sa, final Player player, final boolean effect) {
+    public static boolean canPayCost(final Cost cost, final SpellAbility sa, final Player payer, final boolean effect) {
         if (sa.getActivatingPlayer() == null) {
-            sa.setActivatingPlayer(player); // complaints on NPE had came before this line was added.
+            sa.setActivatingPlayer(payer); // complaints on NPE had came before this line was added.
         }
 
         // Check for stuff like Nether Void
@@ -527,14 +538,14 @@ public class ComputerUtilCost {
             boolean cannotBeCountered = !sa.isCounterableBy(null);
 
             if (sa instanceof Spell) {
-                for (Card c : player.getGame().getCardsIn(ZoneType.Battlefield)) {
+                for (Card c : payer.getGame().getCardsIn(ZoneType.Battlefield)) {
                     final String snem = c.getSVar("AI_SpellsNeedExtraMana");
                     if (!StringUtils.isBlank(snem)) {
                         if (cannotBeCountered && c.getName().equals("Nether Void")) {
                             continue;
                         }
                         String[] parts = TextUtil.split(snem, ' ');
-                        boolean meetsRestriction = parts.length == 1 || player.isValid(parts[1], c.getController(), c, sa);
+                        boolean meetsRestriction = parts.length == 1 || payer.isValid(parts[1], c.getController(), c, sa);
                         if(!meetsRestriction)
                             continue;
 
@@ -545,7 +556,7 @@ public class ComputerUtilCost {
                         }
                     }
                 }
-                for (Card c : player.getCardsIn(ZoneType.Command)) {
+                for (Card c : payer.getCardsIn(ZoneType.Command)) {
                     if (cannotBeCountered) {
                         continue;
                     }
@@ -567,7 +578,7 @@ public class ComputerUtilCost {
                         if (part.convertAmount() != null && part.convertAmount() == sa.getHostCard().getCurrentLoyalty()) {
                             // refuse to pay if opponent has no creature threats or
                             // 50% chance otherwise
-                            if (player.getOpponents().getCreaturesInPlay().isEmpty()
+                            if (payer.getOpponents().getCreaturesInPlay().isEmpty()
                                     || MyRandom.getRandom().nextFloat() < .5f) {
                                 return false;
                             }
@@ -591,7 +602,7 @@ public class ComputerUtilCost {
                             Cost wardCost = ComputerUtilCard.getTotalWardCost(tgt);
                             // don't use API converter since it might have special part logic not meant for Ward cost
                             SpellAbilityAi topAI = new SpellAbilityAi() {};
-                            if (!topAI.willPayCosts(player, sa, wardCost, sa.getHostCard())) {
+                            if (!topAI.willPayCosts(payer, sa, wardCost, sa.getHostCard())) {
                                 return false;
                             }
                             if (wardCost.hasManaCost()) {
@@ -606,7 +617,7 @@ public class ComputerUtilCost {
             if (sa.getHostCard().hasKeyword(Keyword.CASUALTY)) {
                 for (final CostPart part : cost.getCostParts()) {
                     if (part instanceof CostSacrifice) {
-                        CardCollection valid = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), part.getType().split(";"),
+                        CardCollection valid = CardLists.getValidCards(payer.getCardsIn(ZoneType.Battlefield), part.getType().split(";"),
                                 sa.getActivatingPlayer(), sa.getHostCard(), sa);
                         valid = CardLists.filter(valid, CardPredicates.hasSVar("AIDontSacToCasualty").negate());
                         if (valid.isEmpty()) {
@@ -618,8 +629,8 @@ public class ComputerUtilCost {
         }
 
         // TODO both of these call CostAdjustment.adjust, try to reuse instead
-        return ComputerUtilMana.canPayManaCost(cost, sa, player, extraManaNeeded, effect)
-                && CostPayment.canPayAdditionalCosts(cost, sa, effect, player);
+        return ComputerUtilMana.canPayManaCost(cost, sa, payer, extraManaNeeded, effect)
+                && CostPayment.canPayAdditionalCosts(cost, sa, effect, payer);
     }
 
     public static Set<String> getAvailableManaColors(Player ai, Card additionalLand) {
@@ -655,12 +666,13 @@ public class ComputerUtilCost {
         return false;
     }
 
-    public static int getMaxXValue(SpellAbility sa, Player ai, final boolean effect) {
+    public static int setMaxXValue(SpellAbility sa, Player ai, final boolean effect) {
         final Card source = sa.getHostCard();
         SpellAbility root = sa.getRootAbility();
         final Cost abCost = root.getPayCosts();
 
-        if (abCost == null || !abCost.hasXInAnyCostPart()) {
+        // check that X is really free choice
+        if (abCost == null || !abCost.hasXInAnyCostPart() || !sa.getSVar("X").equals("Count$xPaid")) {
             return 0;
         }
 
@@ -668,6 +680,12 @@ public class ComputerUtilCost {
 
         if (root.costHasManaX()) {
             val = ComputerUtilMana.determineLeftoverMana(root, ai, effect);
+            // TODO find a way to consider lower value due to Ward
+            if (sa.hasParam("AIXMax")) {
+                sa.setXManaCostPaid(val);
+                int calculated = AbilityUtils.calculateAmount(source, sa.getParam("AIXMax"), sa);
+                val = Math.min(val, calculated);
+            }
         }
 
         if (sa.usesTargeting()) {
@@ -711,7 +729,10 @@ public class ComputerUtilCost {
                 }
             }
         }
-        return ObjectUtils.defaultIfNull(val, 0);
+
+        int x = ObjectUtils.defaultIfNull(val, 0);
+        sa.setXManaCostPaid(x);
+        return x;
     }
 
     public static CardCollection paymentChoicesWithoutTargets(Iterable<Card> choices, SpellAbility source, Player ai) {

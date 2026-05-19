@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Shrek
+Title=Shrek
+Icon=Shrek.jpg
+Difficulty=Medium
+Description=./Standard/Adventures_in_the_Forgotten_Realms/Couleom_-_Temur_Adventures_(Standard,_#1187463).dck
+Deck Type=constructed
+
+[Main]
+2 Koma, Cosmos Serpent
+4 Bonecrusher Giant
+4 Edgewall Innkeeper
+4 Lovestruck Beast
+4 Llanowar Visionary
+4 Brazen Borrower
+1 Esika's Chariot
+2 Fire Prophecy
+2 Disdainful Stroke
+1 Shatterskull Smashing
+2 The Akroan War
+4 Lukka, Coppercoat Outcast
+2 Island
+2 Forest
+2 Mountain
+4 Ketria Triome
+4 Fabled Passage
+4 Cragcrown Pathway
+4 Riverglide Pathway
+4 Barkchannel Pathway
+[Sideboard]
+1 Soul Sear
+2 Mystical Dispute
+2 Negate
+2 Klothys, God of Destiny
+2 Ox of Agonas
+3 Redcap Melee
+3 Burning Hands

@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Teysa
+Title=Teysa
+Icon=Teysa.jpg
+Difficulty=Easy
+Description=./Standard/Ravnica_Allegiance/Andrew_Wheeler_-_Mono-Red_Aggro_(Standard,_#779076).dck
+Deck Type=constructed
+
+[Main]
+4 Fanatical Firebrand
+4 Ghitu Lavarunner
+4 Runaway Steam-Kin
+4 Viashino Pyromancer
+4 Lightning Strike
+4 Risk Factor
+4 Shock
+4 Wizard's Lightning
+4 Light Up the Stage
+4 Skewer the Critics
+4 Blood Crypt
+4 Dragonskull Summit
+12 Mountain
+[Sideboard]
+3 Carnival // Carnage
+2 Collision // Colossus
+3 Duress
+3 Goblin Chainwhirler
+4 Lava Coil

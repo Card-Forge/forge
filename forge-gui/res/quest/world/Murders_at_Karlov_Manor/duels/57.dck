@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Carnage
+Title=Carnage
+Icon=Carnage.jpg
+Difficulty=Hard
+Description=./Modern/Murders_at_Karlov_Manor/Fujigaki_Takuya_-_Mono_Green_Aggro_(Modern,_#1984784).dck
+Deck Type=constructed
+
+[Main]
+1 Rhonas the Indomitable
+4 Steel Leaf Champion
+4 Noble Hierarch
+4 Strangleroot Geist
+3 Scavenging Ooze
+1 Questing Beast
+1 Elder Gargaroth
+4 Old-Growth Troll
+1 Endurance
+4 Ignoble Hierarch
+1 The Great Henge
+4 Vines of Vastwood
+2 Dismember
+3 Archdruid's Charm
+2 Tribute to the World Tree
+7 Forest
+1 Breeding Pool
+3 Windswept Heath
+3 Verdant Catacombs
+1 Overgrown Tomb
+1 Nykthos, Shrine to Nyx
+2 Lair of the Hydra
+1 Boseiju, Who Endures
+1 Hedge Maze
+1 Underground Mortuary
+[Sideboard]
+2 Damping Sphere
+2 Stubborn Denial
+1 Hydroid Krasis
+2 Force of Vigor
+1 Questing Beast
+2 Culling Ritual
+2 Endurance
+3 Pick Your Poison

@@ -1,7 +1,7 @@
 Name:Candela, Aegis of Adagia
 ManaCost:W
 Types:Legendary Artifact Spacecraft
-PT:2/3
+PT:3/3
 K:Flash
 K:Station:8
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When NICKNAME enters, return up to one target creature you control to its owner's hand. It perpetually gets +1/+1.

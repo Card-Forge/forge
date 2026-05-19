@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Cave Troll
+Title=Cave Troll
+Icon=Cave Troll.jpg
+Difficulty=Easy
+Description=Born_of_the_Gods/SCG_Super_IQ_-_Indian_Trail,_NC/Wes_Hazzard_-_Mono_Black_(Standard,_#71241).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Desecration Demon
+4 Gray Merchant of Asphodel
+4 Lifebane Zombie
+3 Obzedat, Ghost Council
+3 Pack Rat
+2 Bile Blight
+2 Devour Flesh
+2 Doom Blade
+4 Hero's Downfall
+4 Thoughtseize
+3 Underworld Connections
+2 Elspeth, Sun's Champion
+4 Godless Shrine
+4 Mutavault
+2 Orzhov Guildgate
+11 Swamp
+4 Temple of Silence
+[Sideboard]
+3 Blood Baron of Vizkopa
+3 Dark Betrayal
+3 Duress
+2 Erebos, God of the Dead
+3 Sin Collector

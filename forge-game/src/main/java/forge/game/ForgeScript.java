@@ -26,6 +26,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class ForgeScript {
@@ -113,8 +114,6 @@ public class ForgeScript {
             return !type.hasStringType(source.getChosenType());
         } else if (property.equals("ChosenType2")) {
             return type.hasStringType(source.getChosenType2());
-        } else if (property.equals("IsNotChosenType2")) {
-            return !type.hasStringType(source.getChosenType2());
         } else if (property.equals("NotedType")) {
             boolean found = false;
             for (String s : source.getNotedTypes()) {
@@ -243,6 +242,8 @@ public class ForgeScript {
             return sa.isMutate();
         } else if (property.equals("Ninjutsu")) {
             return sa.isNinjutsu();
+        } else if (property.equals("Sneak")) {
+            return sa.isSneak();
         } else if (property.equals("Foretelling")) {
             return sa.isForetelling();
         } else if (property.equals("Foretold")) {
@@ -265,6 +266,11 @@ public class ForgeScript {
             return sa.isKeyword(Keyword.WARD);
         } else if (property.equals("CumulativeUpkeep")) {
             return sa.isCumulativeUpkeep();
+        } else if (property.equals("SameKeyword")) {
+            if (sa.getKeyword() == null || spellAbility == null) {
+                return false;
+            }
+            return Objects.equals(sa.getKeyword(), spellAbility.getKeyword());
         } else if (property.equals("ChapterNotLore")) {
             if (!sa.isChapter()) {
                 return false;
@@ -412,7 +418,7 @@ public class ForgeScript {
                 return !sa.isPwAbility() && !sa.getRestrictions().isSorcerySpeed();
             }
             return true;
-        } else if(property.startsWith("NamedAbility")) {
+        } else if (property.startsWith("NamedAbility")) {
             return sa.getName().equals(property.substring(12));
         } else if (sa.getHostCard() != null) {
             return sa.getHostCard().hasProperty(property, sourceController, source, spellAbility);

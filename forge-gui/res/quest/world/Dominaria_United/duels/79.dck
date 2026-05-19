@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Owlman
+Title=Owlman
+Icon=Owlman.jpg
+Difficulty=Very Hard
+Description=./Modern/Dominaria_United/Eric_Steuer_-_Yorhinos_(Modern,_#1473187).dck
+Deck Type=constructed
+
+[Main]
+1 Brazen Borrower
+2 Endurance
+4 Fury
+4 Solitude
+4 Shardless Agent
+4 Omnath, Locus of Creation
+4 Violent Outburst
+4 Fire // Ice
+4 Force of Negation
+4 Crashing Footfalls
+4 Ardent Plea
+4 Leyline Binding
+4 Teferi, Time Raveler
+1 Otawara, Soaring City
+1 Temple Garden
+1 Stomping Ground
+1 Steam Vents
+1 Sacred Foundry
+1 Raugrin Triome
+1 Plains
+1 Mountain
+1 Island
+1 Indatha Triome
+1 Hallowed Fountain
+1 Forest
+1 Breeding Pool
+2 Scalding Tarn
+2 Boseiju, Who Endures
+4 Arid Mesa
+4 Wooded Foothills
+4 Flooded Strand
+4 Misty Rainforest
+[Sideboard]
+1 Yorion, Sky Nomad
+2 Mystical Dispute
+2 Knight of Autumn
+2 Endurance
+4 Leyline of the Void
+4 Force of Vigor

@@ -314,26 +314,24 @@ public final class CardUtil {
             final List<SpellAbility> reflectAbilities = Lists.newArrayList();
 
             for (final SpellAbility ab : abilities) {
-                if (ab.isSpell()) {
+                if (ab.isSpell() || ab.isLandAbility()) {
                     continue;
                 }
                 if (maxChoices == colors.size()) {
                     break;
                 }
 
-                // Recursion! Set Activator to controller for appropriate valid comparison
-                ab.setActivatingPlayer(ab.getHostCard().getController());
-                if (ab.getApi() == ApiType.ManaReflected && !"Produced".equals(ab.getParam("ReflectProperty"))) {
-                    if (!parents.contains(ab.getHostCard())) {
-                        reflectAbilities.add(ab);
-                        parents.add(ab.getHostCard());
-                    }
-                    continue;
-                }
-                colors = canProduce(maxChoices, ab, colors);
                 if (!parents.contains(ab.getHostCard())) {
                     parents.add(ab.getHostCard());
                 }
+
+                // Recursion! Set Activator to controller for appropriate valid comparison
+                ab.setActivatingPlayer(ab.getHostCard().getController());
+                if (ab.getApi() == ApiType.ManaReflected && !"Produced".equals(ab.getParam("ReflectProperty"))) {
+                    reflectAbilities.add(ab);
+                    continue;
+                }
+                colors = canProduce(maxChoices, ab, colors);
             }
 
             for (final SpellAbility ab : reflectAbilities) {
@@ -369,13 +367,13 @@ public final class CardUtil {
     // parameters for target selection.
     // however, due to the changes necessary for SA_Requirements this is much
     // different than the original
-    public static List<Card> getValidCardsToTarget(final SpellAbility ability) {
+    public static CardCollection getValidCardsToTarget(final SpellAbility ability) {
         final TargetRestrictions tgt = ability.getTargetRestrictions();
         final Card activatingCard = ability.getHostCard();
         final Game game = ability.getActivatingPlayer().getGame();
         final List<ZoneType> zone = tgt.getZone();
 
-        List<Card> choices = CardLists.getTargetableCards(game.getCardsIn(zone), ability);
+        CardCollection choices = CardLists.getTargetableCards(game.getCardsIn(zone), ability);
         final boolean canTgtStack = zone.contains(ZoneType.Stack);
         if (canTgtStack) {
             // Since getTargetableCards doesn't have additional checks if one of the Zones is stack

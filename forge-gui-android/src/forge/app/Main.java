@@ -33,6 +33,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 import android.text.SpannableString;
 import android.text.TextUtils;
@@ -70,13 +71,19 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.json.JSONObject;
 import org.jupnp.DefaultUpnpServiceConfiguration;
 import org.jupnp.android.AndroidUpnpServiceConfiguration;
+import org.tinylog.Logger;
+import org.tinylog.TaggedLogger;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Set;
 
 public class Main extends AndroidApplication {
+    private static final TaggedLogger netLog = Logger.tag("NETWORK");
+    private static final long HEAP_HEARTBEAT_MS = 30_000L;
+
     private AndroidAdapter Gadapter;
     private ArrayList<String> gamepads;
     private AndroidClipboard androidClipboard;
@@ -88,6 +95,18 @@ public class Main extends AndroidApplication {
     private ProgressBar progressBar;
     private TextView progressText;
     private String versionString;
+    private Handler heapHeartbeatHandler;
+    private final Runnable heapHeartbeat = new Runnable() {
+        @Override public void run() {
+            Runtime r = Runtime.getRuntime();
+            long total = r.totalMemory(), free = r.freeMemory(), max = r.maxMemory();
+            netLog.info("[heap] used={}MB free={}MB total={}MB max={}MB",
+                    (total - free) >> 20, free >> 20, total >> 20, max >> 20);
+            if (heapHeartbeatHandler != null) {
+                heapHeartbeatHandler.postDelayed(this, HEAP_HEARTBEAT_MS);
+            }
+        }
+    };
 
     // The package name the resources are compiled under (stable across dev/prod).
     // If you ever change the base app package, update this constant once.
@@ -147,6 +166,7 @@ public class Main extends AndroidApplication {
 
     @Override
     protected void onResume() {
+        netLog.info("[lifecycle] onResume");
         try {
             super.onResume();
         } catch (Exception ignore) {}
@@ -160,6 +180,19 @@ public class Main extends AndroidApplication {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Capture uncaught exceptions before the JVM dies — without this, the stack trace would only reach Android logcat, not the network log users share
+        final Thread.UncaughtExceptionHandler prior = Thread.getDefaultUncaughtExceptionHandler();
+        Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
+            try {
+                netLog.error(e, "[uncaught] thread={}", t.getName());
+            } catch (Throwable ignore) {}
+            if (prior != null) prior.uncaughtException(t, e);
+        });
+
+        netLog.info("[lifecycle] onCreate");
+        heapHeartbeatHandler = new Handler(Looper.getMainLooper());
+        heapHeartbeatHandler.postDelayed(heapHeartbeat, HEAP_HEARTBEAT_MS);
+
         super.onCreate(savedInstanceState);
         try {
             PackageInfo pInfo = getContext().getPackageManager().getPackageInfo(getContext().getPackageName(), 0);
@@ -186,7 +219,6 @@ public class Main extends AndroidApplication {
         ActivityManager actManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
         ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
         actManager.getMemoryInfo(memInfo);
-        int totalMemory = Math.round(memInfo.totalMem / 1024f / 1024f);
 
         boolean permissiongranted = checkPermission();
         Gadapter = new AndroidAdapter(getContext());
@@ -227,7 +259,7 @@ public class Main extends AndroidApplication {
         os.setBuild(Build.DISPLAY);
         os.setRawDescription(getAndroidOSName());
 
-        initForge(Gadapter, new HWInfo(device, os, getChipset), permissiongranted, totalMemory, isTabletDevice(getContext()));
+        initForge(Gadapter, new HWInfo(device, os, getChipset), permissiongranted, isTabletDevice(getContext()));
     }
 
     private void crossfade(View contentView, View previousView) {
@@ -347,13 +379,13 @@ public class Main extends AndroidApplication {
         crossfade(TL, previousView);
     }
 
-    private void loadGame(final HWInfo hwInfo, final String title, final String steps, boolean isLandscape, AndroidAdapter adapter, boolean permissiongranted, int totalRAM, boolean isTabletDevice, AndroidApplicationConfiguration config, boolean exception, String msg) {
+    private void loadGame(final HWInfo hwInfo, final String title, final String steps, boolean isLandscape, AndroidAdapter adapter, boolean permissiongranted, boolean isTabletDevice, AndroidApplicationConfiguration config, boolean exception, String msg) {
         try {
             final Handler handler = new Handler();
             forgeLogo = findViewById(resId("id", "logo_id"));
             activeView = findViewById(resId("id", "mainview"));
             activeView.setBackgroundColor(Color.WHITE);
-            forgeView = initializeForView(Forge.getApp(hwInfo, getAndroidClipboard(), adapter, ASSETS_DIR, false, !isLandscape, totalRAM, isTabletDevice, Build.VERSION.SDK_INT), config);
+            forgeView = initializeForView(Forge.getApp(hwInfo, getAndroidClipboard(), adapter, ASSETS_DIR, !isLandscape, isTabletDevice, Build.VERSION.SDK_INT), config);
 
             getAnimator(ObjectAnimator.ofFloat(forgeLogo, "alpha", 1f, 1f).setDuration(800), ObjectAnimator.ofObject(activeView, "backgroundColor", new ArgbEvaluator(), Color.WHITE, Color.BLACK).setDuration(1600), new AnimatorListenerAdapter() {
                 @Override
@@ -487,7 +519,9 @@ public class Main extends AndroidApplication {
         }
     }
 
-    private void initForge(AndroidAdapter adapter, HWInfo hwInfo, boolean permissiongranted, int totalRAM, boolean isTabletDevice) {
+    private void initForge(AndroidAdapter adapter, HWInfo hwInfo, boolean permissiongranted, boolean isTabletDevice) {
+        int totalRAM = hwInfo.getTotalRam();
+
         AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
         config.useAccelerometer = false;
         config.useCompass = false;
@@ -499,14 +533,14 @@ public class Main extends AndroidApplication {
         if (!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
             String message = getDeviceName() + "\n" + "Android " + Build.VERSION.RELEASE + "\n" + "RAM " + totalRAM + "MB" + "\n" + "LibGDX " + Version.VERSION + "\n" + "Can't access external storage";
             Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
-            loadGame(hwInfo, "", "", false, adapter, permissiongranted, totalRAM, isTabletDevice, config, true, message);
+            loadGame(hwInfo, "", "", false, adapter, permissiongranted, isTabletDevice, config, true, message);
             return;
         }
         ASSETS_DIR = Build.VERSION.SDK_INT > Build.VERSION_CODES.Q ? getContext().getObbDir() + "/Forge/" : Environment.getExternalStorageDirectory() + "/Forge/";
         if (!FileUtil.ensureDirectoryExists(ASSETS_DIR)) {
             String message = getDeviceName() + "\n" + "Android " + Build.VERSION.RELEASE + "\n" + "RAM " + totalRAM + "MB" + "\n" + "LibGDX " + Version.VERSION + "\n" + "Can't access external storage\nPath: " + ASSETS_DIR;
             Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
-            loadGame(hwInfo, "", "", false, adapter, permissiongranted, totalRAM, isTabletDevice, config, true, message);
+            loadGame(hwInfo, "", "", false, adapter, permissiongranted, isTabletDevice, config, true, message);
             return;
         }
         //ensure .nomedia file exists in Forge directory so its images
@@ -518,7 +552,7 @@ public class Main extends AndroidApplication {
             } catch (Exception e) {
                 String message = getDeviceName() + "\n" + "Android " + Build.VERSION.RELEASE + "\n" + "RAM " + totalRAM + "MB" + "\n" + "LibGDX " + Version.VERSION + "\n" + "Can't read/write to storage";
                 Main.this.setRequestedOrientation(Main.this.getResources().getConfiguration().orientation);
-                loadGame(hwInfo, "", "", false, adapter, permissiongranted, totalRAM, isTabletDevice, config, true, message);
+                loadGame(hwInfo, "", "", false, adapter, permissiongranted, isTabletDevice, config, true, message);
                 return;
             }
         }
@@ -535,11 +569,16 @@ public class Main extends AndroidApplication {
         if (landscapeMode && Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) { //Android 11 onwards
             Main.this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
         }
-        loadGame(hwInfo, info, lowV + lowM, landscapeMode, adapter, permissiongranted, totalRAM, isTabletDevice, config, false, "");
+        loadGame(hwInfo, info, lowV + lowM, landscapeMode, adapter, permissiongranted, isTabletDevice, config, false, "");
     }
 
     @Override
     protected void onDestroy() {
+        netLog.info("[lifecycle] onDestroy");
+        if (heapHeartbeatHandler != null) {
+            heapHeartbeatHandler.removeCallbacks(heapHeartbeat);
+            heapHeartbeatHandler = null;
+        }
         super.onDestroy();
         //ensure app doesn't stick around
         //ActivityManager am = (ActivityManager)getSystemService(Activity.ACTIVITY_SERVICE);
@@ -547,7 +586,26 @@ public class Main extends AndroidApplication {
     }
 
     @Override
+    protected void onStop() {
+        netLog.info("[lifecycle] onStop");
+        super.onStop();
+    }
+
+    @Override
+    public void onLowMemory() {
+        netLog.warn("[lifecycle] onLowMemory");
+        super.onLowMemory();
+    }
+
+    @Override
+    public void onTrimMemory(int level) {
+        netLog.warn("[lifecycle] onTrimMemory level={}", level);
+        super.onTrimMemory(level);
+    }
+
+    @Override
     protected void onPause() {
+        netLog.info("[lifecycle] onPause");
         super.onPause();
 
         /*ForgePreferences prefs = FModel.getPreferences();
@@ -804,6 +862,12 @@ public class Main extends AndroidApplication {
         }
 
         @Override
+        public void convertToPNG(InputStream input, OutputStream output) {
+            Bitmap bmp = BitmapFactory.decodeStream(input);
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, output);
+        }
+
+        @Override
         public Pair<Integer, Integer> getRealScreenSize(boolean real) {
             //app size
             WindowManager windowManager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
@@ -835,6 +899,18 @@ public class Main extends AndroidApplication {
         @Override
         public ArrayList<String> getGamepads() {
             return gamepads;
+        }
+
+        //Commonly supported Android audio formats, taken from https://developer.android.com/media/platform/supported-formats#audio-formats
+        Set<String> ANDROID_SUPPORTED_AUDIO_TYPES = Set.of(".wav", ".mp3", ".ogg", ".mp4", ".m4a", ".aac", ".mkv");
+        @Override
+        public boolean isSupportedAudioFormat(File file) {
+            //At some point it's worth considering switching this out for a more elaborate method
+            //that checks the mime type against the MediaCodecList. Might also throw in some logic
+            //that distinguishes between sound effects and music and disallows any SFX that are over
+            //1 MB in size, since the Android SFX implementation fully loads SFX files into RAM.
+            String path = file.getPath().toLowerCase();
+            return ANDROID_SUPPORTED_AUDIO_TYPES.stream().anyMatch(path::endsWith);
         }
     }
 

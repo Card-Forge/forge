@@ -3,6 +3,6 @@ ManaCost:3 R
 Types:Creature Cyclops
 PT:3/3
 K:Trample
-K:Monstrosity:3:5 R
+A:AB$ PutCounter | Cost$ 5 R | Monstrosity$ 3
 DeckHas:Ability$Counters
 Oracle:Trample\n{5}{R}: Monstrosity 3. (If this creature isn't monstrous, put three +1/+1 counters on it and it becomes monstrous.)

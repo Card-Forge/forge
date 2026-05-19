@@ -1,9 +1,9 @@
 package forge.game.event;
 
-import forge.game.card.Card;
-import forge.game.player.Player;
+import forge.game.card.CardView;
+import forge.game.player.PlayerView;
 
-public record GameEventPlayerDamaged(Player target, Card source, int amount, boolean combat, boolean infect) implements GameEvent {
+public record GameEventPlayerDamaged(PlayerView target, CardView source, int amount, boolean combat, boolean infect) implements GameEvent {
 
     /* (non-Javadoc)
      * @see forge.game.event.GameEvent#visit(forge.game.event.IGameEventVisitor)

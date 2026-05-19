@@ -5,7 +5,7 @@ Difficulty=hard
 Description=BUG Evolve deck with Corpsejack Menace and Master Biomancer
 Icon=The Very Hungry Caterpillar.jpg
 Deck Type=constructed
-[main]
+[Main]
 4 Bayou
 2 Bramblewood Paragon
 2 Bred for the Hunt
@@ -29,4 +29,4 @@ Deck Type=constructed
 1 Varolz, the Scar-Striped
 1 Vigean Hydropon
 4 Woodland Cemetery
-[sideboard]
+[Sideboard]

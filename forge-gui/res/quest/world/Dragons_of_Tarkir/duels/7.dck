@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Ala
+Title=Ala
+Icon=Ala.jpg
+Difficulty=Easy
+Description=Dragons_of_Tarkir/Standard_Champs_#8396753/fabirules_-_Abzan_Midrange_(Standard,_#264941).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Courser of Kruphix
+3 Den Protector
+3 Fleecemane Lion
+2 Hidden Dragonslayer
+4 Siege Rhino
+4 Abzan Charm
+2 Bile Blight
+3 Hero's Downfall
+2 Murderous Cut
+1 Ultimate Price
+2 Crux of Fate
+3 Thoughtseize
+3 Elspeth, Sun's Champion
+1 Caves of Koilos
+3 Forest
+3 Llanowar Wastes
+2 Plains
+4 Sandsteppe Citadel
+1 Swamp
+2 Temple of Malady
+4 Temple of Silence
+1 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+2 Dromoka's Command
+3 Foul-Tongue Invocation
+2 Hornet Nest
+3 Mind Rot
+2 Surge of Righteousness
+1 Ugin, the Spirit Dragon

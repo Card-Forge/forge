@@ -81,10 +81,9 @@ public class EffectEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("RememberObjects")) {
-            rememberList = new FCollection<>();
-            for (final String rem : sa.getParam("RememberObjects").split(",")) {
-                rememberList.addAll(AbilityUtils.getDefinedEntities(hostCard, rem, sa));
-            }
+            rememberList = new FCollection<>(
+                    AbilityUtils.getDefinedEntities(hostCard, sa.getParam("RememberObjects").split(" & "), sa)
+            );
 
             if (sa.hasParam("ForgetCounter")) {
                 CounterType cType = CounterType.getType(sa.getParam("ForgetCounter"));
@@ -122,7 +121,11 @@ public class EffectEffect extends SpellAbilityEffect {
 
         String name = sa.getParam("Name");
         if (name == null) {
-            name = hostCard + (sa.hasParam("Boon") ? "'s Boon" : "'s Effect");
+            if (sa.hasParam("Adventure")) {
+                name = hostCard + "'s Adventure";
+            } else {
+                name = hostCard + (sa.hasParam("Boon") ? "'s Boon" : "'s Effect");
+            }
         }
 
         PlayerCollection effectOwner = sa.hasParam("EffectOwner") ?
@@ -157,6 +160,8 @@ public class EffectEffect extends SpellAbilityEffect {
             }
         } else if (sa.hasParam("Image")) {
             image = ImageKeys.getTokenKey(sa.getParam("Image"));
+        } else if (sa.hasParam("Adventure")) {
+            image = StaticData.instance().getOtherImageKey(ImageKeys.ADVENTURE_IMAGE, hostCard.getSetCode());
         } else { // use host image
             image = hostCard.getImageKey();
         }
@@ -257,7 +262,6 @@ public class EffectEffect extends SpellAbilityEffect {
                 addExileCounterTrigger(eff, sa.getParam("ExileOnCounter"));
             }
 
-            // Set Imprinted
             if (effectImprinted != null) {
                 eff.addImprintedCards(AbilityUtils.getDefinedCards(hostCard, effectImprinted, sa));
             }
@@ -312,7 +316,7 @@ public class EffectEffect extends SpellAbilityEffect {
             }
 
             if (duration == null || !duration.equals("Permanent")) {
-                addUntilCommand(sa, exileEffectCommand(game, eff), controller);
+                addUntilCommand(sa, () -> game.getAction().exileEffect(eff), controller);
             }
 
             if (sa.hasParam("ImprintOnHost")) {

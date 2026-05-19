@@ -14,6 +14,8 @@ import com.github.tommyettinger.textra.TextraLabel;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
 import forge.adventure.character.ShopActor;
+import forge.haptic.HapticEngine;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.adventure.data.RewardData;
 import forge.adventure.data.ShopData;
 import forge.adventure.player.AdventurePlayer;
@@ -270,7 +272,7 @@ public class RewardScene extends UIScene {
 
         Current.player().takeShards(price);
 
-        Gdx.input.vibrate(5);
+        HapticEngine.vibrate(FPref.UI_VIBRATE_ON_SHOP_ACTION, 5);
         SoundSystem.instance.play(SoundEffectType.Shuffle, false);
 
         updateBuyButtons();
@@ -318,6 +320,34 @@ public class RewardScene extends UIScene {
     }
 
     public void loadRewards(Array<Reward> newRewards, Type type, ShopActor shopActor) {
+        // Merge Gold and Shards rewards into single entries
+        int totalGold = 0;
+        int totalShards = 0;
+        Array<Reward> others = new Array<>();
+        for (Reward r : new Array.ArrayIterator<>(newRewards)) {
+            switch (r.getType()) {
+                case Gold:
+                    totalGold += r.getCount();
+                    break;
+                case Shards:
+                    totalShards += r.getCount();
+                    break;
+                default:
+                    others.add(r);
+                    break;
+            }
+        }
+        newRewards.clear();
+        if (totalGold > 0) {
+            newRewards.add(new Reward(Reward.Type.Gold, totalGold));
+        }
+        if (totalShards > 0) {
+            newRewards.add(new Reward(Reward.Type.Shards, totalShards));
+        }
+        for (Reward r : others) {
+            newRewards.add(r);
+        }
+
         headerLabel.clearListeners();
         // Sort the rewards based on the rarity of the card inside the reward/ lets give items rarity
         newRewards.sort(Comparator.comparing(reward -> {
@@ -353,7 +383,7 @@ public class RewardScene extends UIScene {
         headerLabel.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (type == Type.Loot) {
+                if (type == Type.Loot || type == Type.QuestReward) {
                     autoSell = !autoSell;
                     String cb = autoSell ? "\u2611 " : "\u2610 ";
                     headerLabel.setText("[%?SHINY][;]" + cb + Forge.getLocalizer().getMessage("lblAll"));
@@ -416,10 +446,6 @@ public class RewardScene extends UIScene {
                 }
                 break;
             case QuestReward:
-                headerLabel.setVisible(false);
-                headerLabel.setText("");
-                restockButton.setVisible(false);
-                break;
             case Loot:
                 headerLabel.setPosition(restockButton.getX(), restockButton.getY());
                 headerLabel.setVisible(true);
@@ -610,7 +636,7 @@ public class RewardScene extends UIScene {
                         Current.player().takeGold(price);
                         Current.player().addReward(rewardActor.getReward());
 
-                        Gdx.input.vibrate(5);
+                        HapticEngine.vibrate(FPref.UI_VIBRATE_ON_SHOP_ACTION, 5);
                         SoundSystem.instance.play(SoundEffectType.FlipCoin, false);
 
                         if (changes == null)
@@ -675,7 +701,7 @@ public class RewardScene extends UIScene {
                         headerLabel.setText("Select " + remainingSelections + " rewards");
                         doneButton.setDisabled(remainingSelections > 0);
 
-                        Gdx.input.vibrate(5);
+                        HapticEngine.vibrate(FPref.UI_VIBRATE_ON_ADVENTURE_REWARD, 5);
                         //SoundSystem.instance.play(SoundEffectType.FlipCoin, false);
 
                         isSold = true;

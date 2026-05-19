@@ -2,6 +2,8 @@ package forge;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Objects;
+
 /** 
  * This means a player's part unchanged for all games.
  * 
@@ -35,6 +37,9 @@ public abstract class LobbyPlayer {
         return result;
     }
 
+    /*
+     * Two LobbyPlayers are equal if they have the same name.
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -47,14 +52,7 @@ public abstract class LobbyPlayer {
             return false;
         }
         LobbyPlayer other = (LobbyPlayer) obj;
-        if (name == null) {
-            if (other.name != null) {
-                return false;
-            }
-        } else if (!name.equals(other.name)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(name, other.name);
     }
 
     public int getAvatarIndex() {

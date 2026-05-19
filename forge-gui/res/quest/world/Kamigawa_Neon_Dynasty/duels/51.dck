@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Impundulu
+Title=Impundulu
+Icon=Impundulu.jpg
+Difficulty=Hard
+Description=./Modern/Kamigawa_Neon_Dynasty/Benjamin_Norbie_-_Hardened_Scales_(Modern,_#1462654)_[!].dck
+Deck Type=constructed
+
+[Main]
+2 Zabaz, the Glimmerwasp
+3 Hangarback Walker
+4 Arcbound Ravager
+4 Walking Ballista
+4 Patchwork Automaton
+4 Esper Sentinel
+1 Shadowspear
+1 Springleaf Drum
+3 The Ozolith
+4 Power Conduit
+2 Ancient Stirrings
+4 Urza's Saga
+4 Hardened Scales
+2 Stomping Ground
+2 Forest
+2 Boseiju, Who Endures
+2 Roadside Reliquary
+2 Sacred Foundry
+2 Temple Garden
+4 Windswept Heath
+4 Inkmoth Nexus
+[Sideboard]
+1 Chalice of the Void
+1 Void Mirror
+1 Zabaz, the Glimmerwasp
+1 Shadowspear
+1 Pithing Needle
+1 Welding Jar
+3 Nature's Claim
+3 Path to Exile
+3 Prismatic Ending

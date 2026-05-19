@@ -1,0 +1,9 @@
+Name:The Ooze
+ManaCost:2
+Types:Legendary Artifact
+T:Mode$ ChangesZone | ValidCard$ Creature.YouCtrl+counters_GE1_P1P1 | Origin$ Battlefield | Destination$ Any | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature you control with a +1/+1 counter on it leaves the battlefield, create a Mutagen token for each +1/+1 counter on it. (A Mutagen token is an artifact with "{1}, {T}, Sacrifice this token: Put a +1/+1 counter on target creature. Activate only as a sorcery.")
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ c_a_mutagen_sac | TokenOwner$ You
+A:AB$ ChangeZone | Cost$ T | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target card in a graveyard | ValidTgts$ Card | SubAbility$ DBToken | SpellDescription$ Exile target card from a graveyard. Create a Mutagen token.
+SVar:DBToken:DB$ Token | TokenScript$ c_a_mutagen_sac | TokenOwner$ You
+SVar:X:TriggeredCard$CardCounters.P1P1
+Oracle:Whenever a creature you control with a +1/+1 counter on it leaves the battlefield, create a Mutagen token for each +1/+1 counter on it. (A Mutagen token is an artifact with "{1}, {T}, Sacrifice this token: Put a +1/+1 counter on target creature. Activate only as a sorcery.")\n{T}: Exile target card from a graveyard. Create a Mutagen token.

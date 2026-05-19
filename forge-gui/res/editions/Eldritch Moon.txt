@@ -28,7 +28,7 @@ TokenFallbackCode=SOI
 12 C Wretched Gryff @Darek Zabrocki
 13 U Blessed Alliance @Johann Bodin
 14 C Borrowed Grace @Volkan Baǵa
-15a R Bruna, the Fading Light @Clint Cearley
+15 R Bruna, the Fading Light @Clint Cearley
 16 C Choking Restraints @John Stanko
 17 R Collective Effort @Eric Deschamps
 18 U Courageous Outrider @Ryan Alexander Lee
@@ -109,7 +109,7 @@ TokenFallbackCode=SOI
 93 M Liliana, the Last Hope @Anna Steinbauer
 94 U Liliana's Elite @Deruchenko Alexander
 95 U Markov Crusader @Johannes Voss
-96a C Midnight Scavengers @Jason Felix
+96 C Midnight Scavengers @Jason Felix
 97 U Murder @Tyler Jacobson
 98 R Noosegraf Mob @Seb McKinnon
 99 R Oath of Liliana @Wesley Burt
@@ -143,7 +143,7 @@ TokenFallbackCode=SOI
 127 C Falkenrath Reaver @Daarken
 128 U Furyblade Vampire @Lius Lasahido
 129 C Galvanic Bombardment @Terese Nielsen
-130a R Hanweir Garrison @Vincent Proce
+130 R Hanweir Garrison @Vincent Proce
 131 R Harmless Offering @Howard Lyon
 132 R Impetuous Devils @Filip Burburan
 133 U Incendiary Flow @Raymond Swanland

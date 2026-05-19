@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling Gold
+Title=Dungeon Crawling Gold
+Icon=Dungeon Crawling Gold.jpg
+Difficulty=Easy
+Description=Rise_of_the_Eldrazi/National_Qualifier_2010_-__Baguio_City_-_Philippines/Tenni_Damoco_-_Vampires_(Standard,_#1517).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodghast
+4 Gatekeeper of Malakir
+4 Vampire Hexmage
+4 Vampire Nighthawk
+4 Vampire Nocturnus
+3 Smother
+4 Tendrils of Corruption
+1 Grim Discovery
+4 Inquisition of Kozilek
+2 Mind Sludge
+3 Sign in Blood
+3 Marsh Flats
+14 Swamp
+3 Terramorphic Expanse
+3 Verdant Catacombs
+[Sideboard]
+4 Deathmark
+4 Duress
+2 Malakir Bloodwitch
+2 Marsh Casualties
+2 Suffer the Past

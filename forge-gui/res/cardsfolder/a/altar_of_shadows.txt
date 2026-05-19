@@ -3,7 +3,7 @@ ManaCost:7
 Types:Artifact
 T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGetMana | TriggerDescription$ At the beginning of your first main phase, add {B} for each charge counter on CARDNAME.
 SVar:TrigGetMana:DB$ Mana | Produced$ B | Amount$ X | SpellDescription$ Add {B} for each charge counter on CARDNAME.
-A:AB$ Destroy | Cost$ 7 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBPutCounter | SpellDescription$ Destroy target creature. Then put a charge counter on CARDNAME.
+A:AB$ Destroy | Cost$ 7 T | ValidTgts$ Creature | SubAbility$ DBPutCounter | SpellDescription$ Destroy target creature. Then put a charge counter on CARDNAME.
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ CHARGE | CounterNum$ 1
 SVar:X:Count$CardCounters.CHARGE
 Oracle:At the beginning of your first main phase, add {B} for each charge counter on Altar of Shadows.\n{7}, {T}: Destroy target creature. Then put a charge counter on Altar of Shadows.

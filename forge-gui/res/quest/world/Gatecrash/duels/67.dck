@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Sisters of Stone Death
+Title=Sisters of Stone Death
+Icon=Sisters of Stone Death.jpg
+Difficulty=Very Hard
+Description=../Modern/Gatecrash/2n_open_modern_top_deck_store/Aleix_Arboix_-_Goblins_(Modern,_#77487).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Foundry Street Denizen
+4 Goblin Bushwhacker
+4 Goblin Chieftain
+4 Goblin Guide
+1 Krenko, Mob Boss
+4 Legion Loyalist
+2 Mogg War Marshal
+4 Lightning Bolt
+3 Bump in the Night
+4 Goblin Grenade
+2 Krenko's Command
+3 Shared Animosity
+4 Auntie's Hovel
+4 Blackcleave Cliffs
+2 Cavern of Souls
+6 Mountain
+3 Mutavault
+[Sideboard]
+2 Grafdigger's Cage
+2 Pithing Needle
+1 Rain of Gore
+3 Rakdos Charm
+2 Relic of Progenitus
+2 Terminate
+3 Thoughtseize

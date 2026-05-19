@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Rakdos
+Title=Rakdos
+Icon=Rakdos.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Crimson_Vow/AzureDragon_-_Mono-Black_Zombies❄_(Standard,_#1258501).dck
+Deck Type=constructed
+
+[Main]
+3 Headless Rider
+3 Bloodvial Purveyor
+4 Graveyard Trespasser
+4 Tainted Adversary
+4 Fell Stinger
+4 Champion of the Perished
+4 Shambling Ghast
+2 Infernal Grasp
+1 Bloodchief's Thirst
+2 Blood on the Snow
+2 Eaten Alive
+3 The Meathook Massacre
+2 Hive of the Eye Tyrant
+4 Faceless Haven
+18 Snow-Covered Swamp
+[Sideboard]
+2 Mindleech Ghoul
+2 Rotten Reunion
+2 Duress
+3 Wight
+3 Power Word Kill
+3 Go Blank

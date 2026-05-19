@@ -1,0 +1,10 @@
+Name:Hexing Squelcher
+ManaCost:1 R
+Types:Creature Goblin Sorcerer
+PT:2/2
+R:Event$ Counter | ValidCard$ Card.Self | ValidSA$ Spell | Layer$ CantHappen | Description$ This spell can't be countered.
+K:Ward:PayLife<2>
+R:Event$ Counter | ValidSA$ Spell.YouCtrl | Layer$ CantHappen | ActiveZones$ Battlefield | Description$ Spells you control can't be countered.
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Ward:PayLife<2> | Description$ Other creatures you control have "Ward—Pay 2 life."
+SVar:PlayMain1:TRUE
+Oracle:This spell can't be countered.\nWard—Pay 2 life.\nSpells you control can't be countered.\nOther creatures you control have "Ward—Pay 2 life."

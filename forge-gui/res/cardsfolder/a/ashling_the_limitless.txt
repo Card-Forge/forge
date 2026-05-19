@@ -1,0 +1,12 @@
+Name:Ashling, the Limitless
+ManaCost:2 R
+Types:Legendary Creature Elemental Sorcerer
+PT:2/3
+S:Mode$ Continuous | Affected$ Permanent.Elemental+YouOwn | AffectedZone$ Hand | AddKeyword$ Evoke:4 | Description$ Elemental permanent spells you cast from your hand have evoke {4}. (If you cast a spell for its evoke cost, it's sacrificed when it enters.)
+T:Mode$ Sacrificed | ValidCard$ Elemental.!token | ValidPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a nontoken Elemental, create a token that's a copy of it. The token gains haste until end of turn. At the beginning of your next end step, sacrifice it unless you pay {W}{U}{B}{R}{G}.
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ TriggeredCardLKICopy | PumpKeywords$ Haste | PumpDuration$ EOT | RememberTokens$ True | SubAbility$ DelTrig
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigSac | RememberObjects$ Remembered | TriggerDescription$ At the beginning of your next end step, sacrifice that token unless you pay {W}{U}{B}{R}{G}. | SubAbility$ DBCleanup
+SVar:TrigSac:DB$ SacrificeAll | Defined$ DelayTriggerRememberedLKI | UnlessCost$ W U B R G | UnlessPayer$ You
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHints:Type$Elemental
+Oracle:Elemental permanent spells you cast from your hand have evoke {4}. (If you cast a spell for its evoke cost, it's sacrificed when it enters.)\nWhenever you sacrifice a nontoken Elemental, create a token that's a copy of it. The token gains haste until end of turn. At the beginning of your next end step, sacrifice it unless you pay {W}{U}{B}{R}{G}.

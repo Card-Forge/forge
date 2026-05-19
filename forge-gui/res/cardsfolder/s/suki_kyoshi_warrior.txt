@@ -4,7 +4,7 @@ Types:Legendary Creature Human Warrior Ally
 PT:*/4
 S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | Description$ NICKNAME's power is equal to the number of creatures you control.
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever NICKNAME attacks, create a 1/1 white Ally creature token that's tapped and attacking.
-SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ w_1_1_ally | TokenTapped$ True | TokenAttacking$ True
+SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenScript$ w_1_1_ally | TokenTapped$ True | TokenAttacking$ True
 SVar:X:Count$Valid Creature.YouCtrl
 DeckHas:Ability$Token
 Oracle:Suki's power is equal to the number of creatures you control.\nWhenever Suki attacks, create a 1/1 white Ally creature token that's tapped and attacking.

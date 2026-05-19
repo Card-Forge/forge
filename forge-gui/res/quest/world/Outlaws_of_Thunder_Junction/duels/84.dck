@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Ra
+Title=Ra
+Icon=Ra.jpg
+Difficulty=Very Hard
+Description=./Modern/Outlaws_of_Thunder_Junction/GMan88_-_Dimir_Faeries_(Modern,_#2083142).dck
+Deck Type=constructed
+
+[Main]
+4 Spellstutter Sprite
+3 Scion of Oona
+2 Brazen Borrower
+2 Mistbind Clique
+2 Snapcaster Mage
+1 Sheoldred, the Apocalypse
+2 The One Ring
+1 Hero's Downfall
+4 Counterspell
+2 Three Steps Ahead
+2 Drown in the Loch
+3 Fatal Push
+4 Preordain
+3 Thoughtseize
+3 Bitterblossom
+4 Watery Grave
+2 Field of Ruin
+2 Creeping Tar Pit
+2 Drowned Catacomb
+1 Sunken Hollow
+3 Swamp
+4 Island
+1 Scalding Tarn
+1 Polluted Delta
+2 Flooded Strand
+[Sideboard]
+2 Aether Gust
+2 Surgical Extraction
+1 Eliminate
+2 Collective Brutality
+1 Dress Down
+2 Negate
+1 Damnation
+1 Ashiok, Dream Render
+2 Narset, Parter of Veils
+1 Bloodchief's Thirst

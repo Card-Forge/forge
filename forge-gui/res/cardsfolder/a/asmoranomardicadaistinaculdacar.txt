@@ -7,7 +7,7 @@ S:Mode$ AlternativeCost | ValidSA$ Spell.Self | EffectZone$ All | Cost$ BR | Che
 SVar:X:PlayerCountPropertyYou$CardsDiscardedThisTurn
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters, you may search your library for a card named The Underworld Cookbook, reveal it, put it into your hand, then shuffle.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.namedThe Underworld Cookbook | ShuffleNonMandatory$ True
-A:AB$ DealDamage | Cost$ Sac<2/Food> | ValidTgts$ Creature | TgtPrompt$ Select target creature | DamageSource$ Targeted | NumDmg$ 6 | SpellDescription$ Target creature deals 6 damage to itself.
+A:AB$ DealDamage | Cost$ Sac<2/Food> | ValidTgts$ Creature | DamageSource$ Targeted | NumDmg$ 6 | SpellDescription$ Target creature deals 6 damage to itself.
 DeckHas:Ability$Sacrifice
 DeckHints:Type$Discard
 DeckNeeds:Name$The Underworld Cookbook

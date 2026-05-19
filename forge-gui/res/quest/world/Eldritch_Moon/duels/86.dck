@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Robin
+Title=Robin
+Icon=Robin.jpg
+Difficulty=Hard
+Description=../Modern/Eldritch_Moon/SCG_Invitational_Qualifier_-_Roanoke,_VA/Richard_Gr..._-_Mono-Red_Thermo-Alchemist_(Modern,_#635576).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Bedlam Reveler
+2 Hanweir Garrison
+4 Thermo-Alchemist
+4 Weaver of Lightning
+4 Fiery Temper
+4 Galvanic Bombardment
+4 Lightning Bolt
+3 Savage Alliance
+1 Collective Defiance
+4 Exquisite Firecraft
+4 Incendiary Flow
+2 Tormenting Voice
+1 Geier Reach Sanitarium
+2 Hanweir Battlements
+18 Mountain
+[Sideboard]
+2 Burn from Within
+2 Chandra, Fire of Kaladesh
+2 Nahiri's Wrath
+4 Rending Volley

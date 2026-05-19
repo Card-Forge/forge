@@ -1,0 +1,7 @@
+Name:Summoned Dromedary
+ManaCost:3 W
+Types:Creature Spirit Camel
+PT:4/3
+K:Vigilance
+A:AB$ ChangeZone | Cost$ 1 W | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SorcerySpeed$ True | SpellDescription$ Return this card from your graveyard to your hand. Activate only as a sorcery.
+Oracle:Vigilance\n{1}{W}: Return this card from your graveyard to your hand. Activate only as a sorcery.

@@ -19,8 +19,6 @@ package forge.game.trigger;
 
 import java.util.*;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.*;
 
 import forge.game.CardTraitBase;
@@ -39,7 +37,6 @@ import forge.game.staticability.StaticAbilityPanharmonicon;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.FileSection;
-import forge.util.Visitor;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 
@@ -137,18 +134,18 @@ public class TriggerHandler {
     }
 
     public static Trigger parseTrigger(final Map<String, String> mapParams, final Card host, final boolean intrinsic, final IHasSVars sVarHolder) {
-        Trigger ret = null;
+        Trigger result;
 
         try {
             final TriggerType type = TriggerType.smartValueOf(mapParams.get("Mode"));
-            ret = type.createTrigger(mapParams, host, intrinsic);
+            result = type.createTrigger(mapParams, host, intrinsic);
             if (sVarHolder != null) {
-                ret.ensureAbility(sVarHolder);
+                result.ensureAbility(sVarHolder);
 
                 if (sVarHolder instanceof CardState) {
-                    ret.setCardState((CardState)sVarHolder);
+                    result.setCardState((CardState)sVarHolder);
                 } else if (sVarHolder instanceof CardTraitBase) {
-                    ret.setCardState(((CardTraitBase)sVarHolder).getCardState());
+                    result.setCardState(((CardTraitBase)sVarHolder).getCardState());
                 }
             }
         } catch (Exception e) {
@@ -163,7 +160,7 @@ public class TriggerHandler {
             throw new RuntimeException("Error in Trigger for Card: " + host.getName(), e);
         }
 
-        return ret;
+        return result;
     }
 
     private static Map<String, String> parseParams(final String trigParse) {
@@ -185,29 +182,25 @@ public class TriggerHandler {
         }
     }
 
-    private void buildActiveTrigger() {
-        activeTriggers.clear();
-        game.forEachCardInGame(new Visitor<Card>() {
-            @Override
-            public boolean visit(Card c) {
-                for (final Trigger t : c.getTriggers()) {
-                    if (isTriggerActive(t)) {
-                        activeTriggers.add(t);
-                    }
-                }
-                return true;
-            }
-        });
-    }
-
     public final void resetActiveTriggers() {
-        resetActiveTriggers(true);
+        resetActiveTriggers(true, null);
     }
-    public final void resetActiveTriggers(boolean collect) {
+    public final void resetActiveTriggers(boolean collect, CardCollectionView lastStateBattlefield) {
         if (collect) {
             collectTriggerForWaiting();
         }
-        buildActiveTrigger();
+        activeTriggers.clear();
+        game.forEachCardInGame(c -> {
+            for (final Trigger t : c.getTriggers()) {
+                if (c.isInPlay() && lastStateBattlefield != null && !lastStateBattlefield.contains(c) && t.looksBackInTime()) {
+                    continue;
+                }
+                if (isTriggerActive(t)) {
+                    activeTriggers.add(t);
+                }
+            }
+            return true;
+        });
     }
 
     public final void clearActiveTriggers(final Card c, Zone zoneFrom) {
@@ -215,9 +208,8 @@ public class TriggerHandler {
 
         for (Trigger t : activeTriggers) {
             // Clear if no ZoneFrom, or not coming from the TriggerZone
-            if (c.getId() == t.getHostCard().getId()) {
-                if (!c.getTriggers().contains(t) || !t.zonesCheck(zoneFrom))
-                    toBeRemoved.add(t);
+            if (c.getId() == t.getHostCard().getId() && (!c.getTriggers().contains(t) || !t.zonesCheck(zoneFrom))) {
+                toBeRemoved.add(t);
             }
         }
 
@@ -234,12 +226,7 @@ public class TriggerHandler {
 
     public final void registerActiveLTBTrigger(final Card c) {
         for (final Trigger t : c.getTriggers()) {
-            if (
-                    TriggerType.Exploited.equals(t.getMode()) ||
-                    TriggerType.Destroyed.equals(t.getMode()) ||
-                    TriggerType.Sacrificed.equals(t.getMode()) || TriggerType.SacrificedOnce.equals(t.getMode()) ||
-                    ((TriggerType.ChangesZone.equals(t.getMode()) || TriggerType.ChangesZoneAll.equals(t.getMode()))
-                            && StringUtils.contains(t.getParam("Origin"), "Battlefield"))) {
+            if (t.looksBackInTime()) {
                 registerOneTrigger(t);
             }
         }
@@ -503,7 +490,6 @@ public class TriggerHandler {
 
         sa.setTrigger(regtrig);
         regtrig.setTriggeringObjects(sa, runParams);
-        sa.setTriggerRemembered(regtrig.getTriggerRemembered());
 
         if (regtrig.hasParam("TriggerController")) {
             Player p = AbilityUtils.getDefinedPlayers(host, regtrig.getParam("TriggerController"), sa).get(0);

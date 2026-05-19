@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Instant
 T:Mode$ Phase | Phase$ Untap | Execute$ DBForget | Static$ True
 SVar:DBForget:DB$ Cleanup | ClearRemembered$ True
-T:Mode$ DamageDone | ValidSource$ Sorcery.IsNotRemembered | Execute$ TrigRememberPlayer | Static$ True
+T:Mode$ DamageDone | ValidSource$ Sorcery.!IsRemembered | Execute$ TrigRememberPlayer | Static$ True
 SVar:TrigRememberPlayer:DB$ Pump | Defined$ TriggeredSourceController | RememberObjects$ TriggeredSourceController | SubAbility$ DBRememberSorcery
 SVar:DBRememberSorcery:DB$ Pump | Defined$ TriggeredSourceLKICopy | RememberObjects$ TriggeredSourceLKICopy
 A:SP$ ChoosePlayer | Defined$ You | Choices$ Player.IsRemembered | SubAbility$ DBChooseSpell | SpellDescription$ Choose a player who cast one or more sorcery spells this turn. CARDNAME deals damage to that player equal to half the damage dealt by one of those sorcery spells this turn, rounded down.

@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=En Sabah Nur
+Title=En Sabah Nur
+Icon=En Sabah Nur.jpg
+Difficulty=Very Hard
+Description=../Modern/Battle_for_Zendikar/StarCityGames.com_Modern_Open_-_Milwaukee,_WI/Trevor_Pentico_-_Turbo_Time_(Modern,_#616133).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Thassa, God of the Sea
+1 Elixir of Immortality
+2 Cryptic Command
+3 Gigadrowse
+3 Remand
+4 Ancestral Vision
+3 Exhaustion
+3 Part the Waterveil
+4 Serum Visions
+4 Temporal Mastery
+4 Time Warp
+4 Dictate of Kruphix
+1 Jace Beleren
+22 Island
+1 Mikokoro, Center of the Sea
+[Sideboard]
+2 Hibernation
+3 Hurkyl's Recall
+3 Spell Snare
+3 Swan Song
+3 Vapor Snag

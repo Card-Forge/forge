@@ -1,186 +1,92 @@
-Cost is a class that attempts to streamline costs throughout all cards. It requires that each cost is separated by a space. I will use examples that could be found in Ability, although certain Keyworded abilities do use Cost too.
+Cost is a class to streamline costs throughout all cards. It requires that each part is separated by a space. They can generally be found on every ability, although certain keyworded abilities do use costs too.
 
-# Common
+The base syntax for more complex parts looks like this:  
+`{Part}[<{Integer}[/{Type}[/{TypeDescription}]]>]`
 
-## Description
+Type is often a `Valid` property or `CARDNAME / NICKNAME` for costs that do something to themselves (e.g. Sacrifice Self).
 
-Description is an optional last parameter in the cost. This is to allow
-for complex Type definitions to have a nice Description that is readable.
+The last parameter in the cost is to allow for complex type definitions to have a better readable text.  
+For the more common cost variants the Forge engine should then be able to provide a reasonable ingame display of the printed cost text.  
+If that's still not good enough just hardcode the whole cost text with `CostDesc$ {String}`.
+Add `PrecostDesc$ {String}` if the card has additional flavor text that should be included.
 
-## CostDesc / PrecostDesc
+If a cost contains an X that's free to announce the script needs this definition:  
+`SVar:X:Count$xPaid`
 
-## UnlessCost
+This can be refined further with
+- `XMin/XMax$ {Count}` - for the few cards with rules text limiting X
+- `AIXMax$ {Count}` - useful for abilities where higher X doesn't result in a greater effect. Can reference X for a relative value, e.g. on *Green Sun's Zenith* AI will not default to spending all available mana:  
+`Count$ValidLibrary Creature.YouOwn+Green+cmcLEX$GreatestCardManaCost`
 
-UnlessCost allows the player specified with UnlessPayer (same as
-Defined, defaults to TargetedController) to pay mana to prevent the
-resolving of the ability. If the script has the param "UnlessSwitched",
-then the player pays mana to resolve the ability (usually used to handle
-"any player may pay ..." ).
+The more interesting cost parts are detailed below.
 
-## XChoice
+# Discard
+`Discard<Num/Type/Description>`
 
-XChoice is the variable that basically means "You can choose whatever
-you want for this variable. But you need to decide what X is before you
-start paying." This would commonly appear as an SVar definition of X.
+- The first is how many cards are being discarded
+- The second is what card types can be discarded
+  - "Hand" for the whole hand
+  - "Random" for chosen randomly
 
-## xPaid
+Examples:
+- `Discard<0/Hand>` (The number is ignored here)
+- `Discard<1/Creature.Black/black Creature>`
 
-xPaid is the amount of Mana Paid for an X Cost. There are a few cards
-that will use the X Payment to determine other costs (like Abandon Hope)
-This would commonly appear as an SVar definition of X.
+# Draw
 
-## CARDNAME
+# Exile
+`Exile<Num/Type/Description>`
 
-For Costs that do something to themselves (ex. Discard Self, Sacrifice
-Self)
+There are also a few sister abilities that all fit under the Exile umbrella:
+- Exile (for cards on the Battlefield)
+- ExileFromGraveyard
+- ExileFromHand
+- ExileFromTop
 
-# Types of Cost
+Examples:
+- `Exile<1/CARDNAME>`
+- `ExileFromGrave<1/Treefolk>`
+- `ExileFromTop<10/Card>`
 
-## Discard
+# FlipCoin
+Only used by *Karplusan Minotaur*.
 
-Discard has two required parameters and one optional in the form
-Discard<Num/Type/Description>
+# Mana
+For normal mana costs you can just write the shards directly like printed.
 
--   The first is how many cards are being discarded.
--   The second is what card types can be discarded. (Hand for the whole
-    hand, Random for chosen randomly)
+Examples:
+- `C` - 1 colorless mana
+- `B R` - 1 black and 1 red mana
+- `WG` - Hybrid White/Green mana
+- `S` - Snow mana
+- `Mana<2\Creature>` - 2 generic mana produced by a source with type 'Creature'. Note the backslash, it was chosen because hybrid costs can already use slash
 
-## Draw
+# Mill
 
-## Exert
+# PayEnergy
 
-## Exile
+# PayLife
+`PayLife<Num>`
 
-Exile has two required parameters and one option in the form of
-Exile<Num/Type/Description>
+# Return
+`Return<Num/Type/Description>`
 
-There are also a few sister abilities that all fit under the Exile
-umbrella.
+# Reveal
 
--   Exile (for cards on the Battlefield)
--   ExileFromGraveyard
--   ExileFromHand
--   ExileFromTop (for cards on top of your library, this doesn't default
-    Type to Card, so make sure you add it)
+# Sacrifice
 
-Some Examples
+# Sub(tract) Counter
+`SubCounter<Num/CounterName>`
 
--   Exile&lt;1/Creature&gt;
--   Exile&lt;1/CARDNAME&gt;
--   ExileFromHand&lt;1/CARDNAME&gt;
--   ExileFromHand&lt;2/Creature&gt;
--   ExileFromGrave&lt;1/CARDNAME&gt;
--   ExileFromGrave&lt;1/Treefolk&gt;
--   ExileFromTop&lt;10/Card&gt;
+- `SubCounter<1/CHARGE>`
 
-## FlipCoin
+Remember the countertype should appear all in caps.
 
-Only used by "Karplusan Minotaur".
+# Tap / Untap
+`Cost$ T`
 
-## Mana
+`Cost$ Q`
 
--   Cost$ 2
-    -   2 colorless mana
--   Cost$ B R
-    -   1 black and 1 red mana
--   Cost$ WG
-    -   Hybrid White/Green mana
--   Cost$ S
-    -   Snow Mana
--   Cost$ Mana&lt;2\\Creature&gt;
-    -   2 colorless produced by a source with type 'creature'. Note the
-        backslash - it was chosen because hybrid costs already use slash
+# TapXType
 
-Here's some examples:
-
--   Discard&lt;1/Card&gt;
-    -   "Discard 1 Card"
--   Discard&lt;0/Hand&gt; (The number is ignored when Hand is used as a
-    type.)
-    -   Discard your hand
--   Discard&lt;2/Random&gt;
-    -   Discard 2 Cards at Random
--   Discard&lt;1/CARDNAME&gt;
-    -   Discard Self (CARDNAME)
--   Discard&lt;1/Creature.Black/Black Creature&gt;
-    -   Discard 1 Black Creature
-
-## Mill
-
-## Subtract(Remove) Counter
-
-SubCounter has two required parameters in the form of
-SubCounter<Num/CounterName>
-
--   SubCounter&lt;2/P1P1&gt;
--   SubCounter&lt;1/CHARGE&gt;
-
-Remember the token name should appear all in caps.
-
-As third parameter you can use a ValidCard.
-
-## Sacrifice
-
-Sacrifice has two required parameters and one optional parameter in the
-form of Sac<Num/Type/Description>
-
--   Sac&lt;1/Artifact&gt;
--   Sac&lt;1/CARDNAME&gt;
-
-## Tap
-
--   Cost$ T
-
-## Untap
-
--   Cost$ Untap
-
-\- or -
-
--   Cost$ Q
-
-## Unattach
-
-## PayEnergy
-
-## PayLife
-
-PayLife has one required parameter in the form of PayLife<Num>
-
--   PayLife&lt;2&gt;
-
-## GainLife
-
-## TapXType
-
-TapXType has two required parameters and one option in the form of
-tapXType<Num/Type/Description>
-
--   tapXType&lt;3/Creature.White&gt;
-
-## Return
-
-Return has two required parameters and one optional in the form of
-Return<Num/Type/Description>
-
--   Return&lt;1/Land&gt;
--   Return&lt;1/CARDNAME&gt;
-
-## Reveal
-
-# Putting it Together
-
-Putting it together is pretty simple. If a card needs to pay mana and tap, it would look like this:
-
--   Cost$1 W T
-
-For a spell that has an additional cost of sacrificing a land, put the
-mana cost and the additional cost in the cost:
-
--   Cost$2 G Sac&lt;1/Land&gt;
-
-One of the features of Cost is you can have more than one of the same Cost type:
-
--   Cost$ Sac&lt;1/Swamp&gt; Sac&lt;1/Creature&gt;
-
-There are many examples, but they mostly fall into those categories.
+# Unattach

@@ -699,7 +699,7 @@ public class FSkin {
             return this.image.getHeight(null);
         }
 
-        protected ImageIcon getIcon() {
+        public ImageIcon getIcon() {
             if (this.imageIcon == null) {
                 /*float screenScale = GuiBase.getInterface().getScreenScale();
                 int iconWidth = Math.round(image.getWidth(null) / screenScale);
@@ -872,7 +872,7 @@ public class FSkin {
         }
 
         @Override
-        protected ImageIcon getIcon() { //can skip null check since imageIcon will always be set
+        public ImageIcon getIcon() { //can skip null check since imageIcon will always be set
             return this.imageIcon;
         }
     }
@@ -1101,8 +1101,14 @@ public class FSkin {
         if (FModel.getPreferences().getPrefBoolean(FPref.UI_SR_OPTIMIZE)) {
             return str;
         }
-        //format mana symbols to display as icons
-        pattern = "\\{([A-Z0-9]+)\\}|\\{([A-Z0-9]+)/([A-Z0-9]+)\\}|(A-)|\\{([A-Z0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)\\}"; //fancy pattern needed so "/" can be omitted from replacement
+        // format mana symbols to display as icons
+        // fancy pattern needed so "/" can be omitted from replacement
+        pattern = 
+          "\\{([A-Z0-9]+)\\}" +                  // {SINGLE}
+          "|\\{([A-Z0-9]+)/([A-Z0-9]+)\\}" +    // {DOUBLE}
+          "|(?:(?<=\\s)|(?<=^))(A-)" +      // A- after ' ' or start of string
+          "|\\{([A-Z0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)\\}"; // {TRIPLE}
+
         try {
             replacement = "<img src=\"" + new File(ForgeConstants.CACHE_SYMBOLS_DIR + "/$1$2$3$4$5$6$7.png").toURI().toURL().toString() + "\" width=" + SYMBOL_WIDTH + " height=" + SYMBOL_HEIGHT + ">";
             str = str.replaceAll(pattern, replacement);
@@ -1500,7 +1506,7 @@ public class FSkin {
         return mySkins;
     }
 
-    public static Iterable<String> getAllSkins() {
+    public static List<String> getAllSkins() {
         return allSkins;
     }
 
@@ -1553,32 +1559,24 @@ public class FSkin {
 
         // Test if various points of requested sub-image are transparent.
         // If any return true, image exists.
-        int x, y;
         Color c;
 
         if (bimPreferredSprite != null) {
-            // Center
-            x = (x0 + w0 / 2);
-            y = (y0 + h0 / 2);
-            c = getColorFromPixel(bimPreferredSprite.getRGB(x, y));
-            if (c.getAlpha() != 0) { return bimPreferredSprite; }
-
-            x += 2;
-            y += 2;
-            c = getColorFromPixel(bimPreferredSprite.getRGB(x, y));
-            if (c.getAlpha() != 0) { return bimPreferredSprite; }
-
-            x -= 4;
-            c = getColorFromPixel(bimPreferredSprite.getRGB(x, y));
-            if (c.getAlpha() != 0) { return bimPreferredSprite; }
-
-            y -= 4;
-            c = getColorFromPixel(bimPreferredSprite.getRGB(x, y));
-            if (c.getAlpha() != 0) { return bimPreferredSprite; }
-
-            x += 4;
-            c = getColorFromPixel(bimPreferredSprite.getRGB(x, y));
-            if (c.getAlpha() != 0) { return bimPreferredSprite; }
+            // Probe wider than the centre to catch icons with a transparent middle.
+            final int cx = x0 + w0 / 2;
+            final int cy = y0 + h0 / 2;
+            final int r  = Math.min(8, Math.min(w0, h0) / 2);
+            final int[][] probes = {
+                { cx,     cy     },
+                { cx + r, cy + r },
+                { cx - r, cy + r },
+                { cx - r, cy - r },
+                { cx + r, cy - r },
+            };
+            for (int[] p : probes) {
+                c = getColorFromPixel(bimPreferredSprite.getRGB(p[0], p[1]));
+                if (c.getAlpha() != 0) { return bimPreferredSprite; }
+            }
         }
 
         return bimDefaultSprite;

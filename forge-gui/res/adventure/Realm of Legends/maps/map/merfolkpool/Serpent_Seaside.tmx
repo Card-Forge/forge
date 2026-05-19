@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="34" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="88">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Ominous seas&quot;, &quot;Quest for Ula's Temple&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/dungeon/dungeon_bis.tsx"/>
+ <layer id="6" name="Collision" width="30" height="34">
+  <data encoding="base64" compression="zlib">
+   eJztlc0NwjAMhSNx4tDSFtoNYAs4oIpbuw1rMABCggMwBaNwYRNkhajBtYOTghA/T3qHNMSf7ZhWqb++WYs+b0rLQbhD8wGNkrD6pnHYOaNf457jtjeR3ltH9L6xRNxsDJO250VzDta7nLZEXD9d3LLQ6y7zLL1HigvCdWaJ9rO4UkmYXblQ43bWGNY+3ENO2xbey5i5knLtu7HPwx2a+6QYOD7Ua37rw8XGXMzuyuVEce1cufiv4J562q743PNDpdSxCuNK4sPznNgb10pNaiIfYp5d3NTRT59e74n/DhfHxfTlQm2bmbYrziPmM7llwTNhD38XJLkZpv2N8xH33pLqHdzdbXYvll2yeyvtKcf1yRe4IT19pBLVfEG9SJPXcFf9+3hd5saX+9dn6Qqex4Gp
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="34">
+  <data encoding="base64" compression="zlib">
+   eJztlc1OwkAQgPdCildv2PoAis/AloMJHOBZfBLvgiRET4Ax8CgmxudhlmZ0drq/rVtjQpMv7aab+ZgZOtu/FKJ/5swfcyWb0db7PPKzGok1Qr0PWTpvIXUvJaXX5kzhzaXfGeoN6WNMrim9Jj+u1b0Lr2md2qt4nQrxMoH75NvdiddQgyDvZibEFtgx3mZ6vI3nvco7xnszF+KWMQTu5npcvo+/p7T5fnkPYnr0H7xfvYouveg0eQeywhQLPeqM4IR49xDzCfYugKXUfzv1UuieJl6Vo/IOSjg/gbzUY+YGL69rrBdre8oXfAtgWdbjUq+pnzFe2lNXndHrmlHFuI7tP8u9tjpjrZ3zcVzHlmMtX0OdC3i+Lv1e7IGvrpyP+2oODgmnmOBcWbz0cn2vLu8hq3JG3jN/ndGnrtDZYPLS9ePFTy48N3rZ5lioV0FzUd6QszZ2FlI+e2GO3/Y2dbbxtnGGeo+Uqe+r
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="34">
+  <data encoding="base64" compression="zlib">
+   eJztlU0KwjAQhYMgIp6g6kLwB6uCN2i3ouA5PIlLL6CCuhIUTyOexwQdOq2TSVMTutAHj0Y78XuTSCLEX38lGs3L4TbjtJVacWJunktuIL2PxAHeqzH+7IobxJ/GrOzYJxfYodz7NuofMij77Jfz1NH/MUD54bezGXB9Ee6QmBMQ6wbfAXMXfcc9a7gmY9lwuzMhetJ96cHMLivmHuXck+V8W13mNPf4JVet1zYy11H7n0fhshwup1/j5hHFnTg6s3ZM3xSXq6dqwWVzuSy688oH94r2DXi4hstpw6Xyc30WkS4zHrvkUdzp4vU03T2+pDg2e1VE63raWEXZnYodV90J4/d9MdLcG4+qmblq8DW3Wpqty6TLoGNy3Lsht60wU8eFPn0xTetMaVNPnEeqhyxT+Qm6po1G
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="34">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztlsFOhDAQhnvQoEcPXtS7gkRM9CzXDQQey6MP4K7JnncR4hvKCBOHYVraArf9kz8saZmPmZbpKnXSSWM9ZsPf1Lp5c/TE4tykslG3qVpEwKXxv946g9rrns9fisvz6rl75OM7gHbpelzwXW9gRJm57lOKsvF+AdO80HXePdPk8/Pi+4drR+qJ3Jpwo7J9z9KPe7/x5z5shlcXrknAnbKPprjbibicm1j2j0M77yg4zv65Sa4f9+XaSIqVzOSGFntxDa6NTlw9F/Ts0M+kfgmC/si5YXtfGbguOUvfMcTcMi5lUi7tI0tzeZ60X63Bbfq6S3mGQs+pZnJBvE/yPCG3Q9H52LsqluHyWlIBF85CPA/BscO5SPt0LKwhZYaeNZ1Sotk7dBxra6rpy7kbtyE5gyJh32BtTcw6cOPimsH/CvDf2hVDf54pVV4o9SrkhMxrC+7H5dDwDHK/s+6eG+Y1LDZlmrh1MGYil8YHv7M5V+1YFeiZJq7EtLENU+L+aPL0YWLdpLX4BSUsxwU=
+  </data>
+ </layer>
+ <layer id="8" name="Clutter2" width="30" height="34">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztljlOAzEUhi1RUESpQXSQTNYhSGFJBVQok2VSIJAgV+AASJyFJmzZg0LNJUAgAQdIwyV4T46ZN2YWexKo+KVfGY+X7/nZsYexf0XR0w5j9vbfc5H5vPO7jHyVsXaN/6KFYnFu8Z62M6v+46moMO2frjvvVvbdXCwLYzv83ZgTt113mEFuz8B9g7V7B39sc27CZiwJNuxgZhrqM3Z07gnsl1NwE9yD/n3J61U+dtajTngwY567EH9PMuZgVONz6tuORT0+D2y18QskvpblPGcbjOUkUy6W8w2nvSib5F2YMpa7fGV5t0Nuoe5ewyTEYYBTNXWeUKIcXH8Dcdz6xIK6q/x814Z8dxRzriqRj4wULy2nId8ZjZwLjckcsh57FOs7wOmCR+B+mZdV1fXJhfw/7IXkLGwtZGV9ciFzcxFyFkWznrM6OjzgxjvWi/u4wC3fvzca+Q3iooK4spKwxy73+PO95l1Y1DxnaT0yqXVFz0m/M8uPeW3p72mhVRhvDe8/j7mKbxvKFLEhN1Hh+TY8zi5Z9L5FtWDMK/C1NHaxMp87Tojet9+cinsufyEVVtQ1VNFYYY2omrsQC5yjdzZ/VuYsBter5MGAczTVUOe+wNq+gmvQfslkbNnk++iBzLkYsJ/o94XOXI9KjB2XOHcTmFvgs5j7vCpIXGQNQ3KEOo8H1yOzPo0VmaguYQ095kv7RJHoP5kyBddLFxC/pcH0u7LleYZx5T5h8X361GN/ygvjqs5zQp6/AMthsFY=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="173.667" y="543" width="101" height="16">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="52" template="../../../../common/maps/obj/gold.tx" x="338.371" y="263.481"/>
+  <object id="54" template="../../../../common/maps/obj/enemy.tx" x="297.138" y="69.7568">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;komas_coil&quot;, &quot;komas_coil&quot;,  &quot;komas_coil&quot; ]
+}</property>
+    <property name="enemy" value="Koma"/>
+    <property name="hidden" type="bool" value="true"/>
+    <property name="spawn.Easy" type="bool" value="false"/>
+    <property name="spawn.Normal" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="60"/>
+    <property name="threatRange" type="int" value="80"/>
+   </properties>
+  </object>
+  <object id="57" template="../../../../common/maps/obj/manashards.tx" x="166" y="178"/>
+  <object id="63" template="../../../../common/maps/obj/enemy.tx" x="221.121" y="212.335">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Charix"/>
+    <property name="speedModifier" type="float" value="20"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="65" template="../../../../common/maps/obj/enemy.tx" x="174.762" y="310.579">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Arixmethes"/>
+    <property name="hidden" type="bool" value="true"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="40"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="66" template="../../../../common/maps/obj/enemy.tx" x="310.19" y="311.674">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Xolatoyac"/>
+    <property name="hidden" type="bool" value="true"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="40"/>
+   </properties>
+  </object>
+  <object id="68" template="../../../../common/maps/obj/collision.tx" x="-1" y="543.5" width="482" height="16"/>
+  <object id="69" template="../../../../common/maps/obj/collision.tx" x="481" y="-11.7082" width="16" height="572.75"/>
+  <object id="70" template="../../../../common/maps/obj/collision.tx" x="-15.5" y="-11.5415" width="16" height="566.083"/>
+  <object id="71" template="../../../../common/maps/obj/manashards.tx" x="164.46" y="205.498"/>
+  <object id="72" template="../../../../common/maps/obj/gold.tx" x="272.402" y="99"/>
+  <object id="75" template="../../../../common/maps/obj/collision.tx" x="-15.6667" y="-16" width="517.333" height="16"/>
+  <object id="76" template="../../../../common/maps/obj/enemy.tx" x="260.5" y="360">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="enemy" value="Aesi"/>
+    <property name="hidden" type="bool" value="true"/>
+    <property name="speedModifier" type="float" value="40"/>
+    <property name="threatRange" type="int" value="60"/>
+   </properties>
+  </object>
+  <object id="77" template="../../../../common/maps/obj/gold.tx" x="339" y="310"/>
+  <object id="78" template="../../../../common/maps/obj/gold.tx" x="338.5" y="283"/>
+  <object id="79" template="../../../../common/maps/obj/gold.tx" x="330.5" y="99"/>
+  <object id="80" template="../../obj/treasure.tx" x="290.909" y="99">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;green&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="81" template="../../obj/treasure.tx" x="309.046" y="99">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 3,
+  &quot;rarity&quot;: [ &quot;rare&quot;, &quot;mythic rare&quot; ],
+  &quot;colors&quot;: [ &quot;blue&quot; ]
+}]</property>
+   </properties>
+  </object>
+  <object id="82" template="../../../../common/maps/obj/dialog.tx" x="187.545" y="471.25" width="81.9091" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;A ruined temple, nearly worn away by the waves clings to the coastline. As you head up the steps, it seems abandoned aside from a titanic and rather angry-looking crab.
+
+Your manasight stone glows, sensing the power of the legends here.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="83" template="../../../../common/maps/obj/dialog.tx" x="256.545" y="153.75" width="81.9091" height="15.5" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;The temple's back room gleams with treasure and provides a beautiful view of the sea. Your eyes stay trained on the surface of the water, and are unsettled as vast shadows shift below.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="85" template="../../../../common/maps/obj/enemy.tx" x="122" y="534">
+   <properties>
+    <property name="dialog">[
+	{
+		&quot;name&quot;: &quot;&quot;,
+		&quot;text&quot;: &quot;'Hello, landwalker. I have need of you.'&quot;,
+		&quot;options&quot;:
+			[
+				{
+					&quot;name&quot;: &quot;Serpents have been slain, Ms. Empress&quot;,
+					&quot;text&quot;: &quot;'Well, your work left quite the mess, but you got the job done quite efficiently for a landwalker.''&quot;,
+					&quot;action&quot;: [ { &quot;deleteMapObject&quot;: -1 },
+                    {&quot;grantRewards&quot;: [
+                        { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Llawan, Cephalid Empress&quot;, &quot;count&quot;: 1 },
+                        { &quot;type&quot;: &quot;randomCard&quot;, &quot;colors&quot;: [ &quot;Blue&quot;], &quot;rarity&quot;: [&quot;Rare&quot;, &quot;Mythic Rare&quot;], &quot;count&quot;: 4 },
+                        {&quot;type&quot;: &quot;gold&quot;, &quot;count&quot;: 5000}                
+                      ]
+                    } ],
+					&quot;condition&quot;: [
+						{
+							&quot;getMapFlag&quot;: {
+								&quot;key&quot;: &quot;enemiesDefeated&quot;,
+								&quot;op&quot;: &quot;&gt;=&quot;,
+								&quot;val&quot;: 5
+							}
+						}
+					],
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+				{
+					&quot;name&quot;: &quot;What do you need?&quot;,
+					&quot;text&quot;: &quot;'I am Empress Llawan of the cephalid empire. But as you can see, here I am... on land like some sort of dog. Absolutely inelegant. The temple ahead is meant to be mine, but massive serpents swirl around it, making it uninhabitable. It may seem empty... but they're there. Five creatures in total terrorize what is rightfully mine. Slay them all, and you shall have a reward only an empress could offer.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				},
+                {
+					&quot;name&quot;: &quot;I don't have time for this.&quot;,
+					&quot;text&quot;: &quot;'Hmph. Landwalkers have no respect for their betters.'&quot;,
+					&quot;options&quot;: [ { &quot;name&quot;: &quot;(Continue)&quot; } ]
+				}
+			]
+	}
+]</property>
+    <property name="enemy" value="Llawan"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="86" template="../../../../common/maps/obj/enemy.tx" x="297.078" y="69.1036">
+   <properties>
+    <property name="defeatDialog">[
+   {
+   &quot;action&quot;: [
+      {&quot;advanceMapFlag&quot;:&quot;enemiesDefeated&quot;},
+      {&quot;deleteMapObject&quot;: -1}
+    ]
+   }
+]</property>
+    <property name="effect">{ &quot;startBattleWithCard&quot;: [ &quot;komas_coil&quot;, &quot;komas_coil&quot; ]
+}</property>
+    <property name="enemy" value="Koma"/>
+    <property name="hidden" type="bool" value="true"/>
+    <property name="spawn.Hard" type="bool" value="false"/>
+    <property name="spawn.Insane" type="bool" value="false"/>
+    <property name="speedModifier" type="float" value="60"/>
+    <property name="threatRange" type="int" value="80"/>
+   </properties>
+  </object>
+  <object id="87" template="../../../../common/maps/obj/shop.tx" x="144.333" y="484.667">
+   <properties>
+    <property name="commonShopList" value="LargeSeaCreatures"/>
+    <property name="mythicShopList" value=""/>
+    <property name="rareShopList" value=""/>
+    <property name="uncommonShopList" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

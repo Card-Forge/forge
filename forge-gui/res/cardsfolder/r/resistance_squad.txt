@@ -3,6 +3,6 @@ ManaCost:2 W
 Types:Creature Human Soldier
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Human.Other+YouCtrl | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters, if you control another Human, draw a card.
-SVar:TrigDraw:DB$ Draw | NumCards$ 1
+SVar:TrigDraw:DB$ Draw
 DeckNeeds:Type$Human
 Oracle:When Resistance Squad enters, if you control another Human, draw a card.

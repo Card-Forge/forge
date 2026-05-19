@@ -422,7 +422,6 @@ A-69 R A-Patrician Geist @Marta Nael
 A-70 U A-Phantom Carriage @Igor Kieryluk
 A-74 C A-Shipwreck Sifters @Svetlin Velinov
 A-106 C A-Hobbling Zombie @Josh Hass
-A-112 M A-The Meathook Massacre @Chris Seaman
 A-218 U A-Devoted Grafkeeper @Raoul Vitale
 
 [tokens]

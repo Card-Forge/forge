@@ -1,4 +1,5 @@
 Name:Spider Manifestation
+Variant:UniversesWithin:FlavorName:Leyline Weaver
 ManaCost:1 RG
 Types:Creature Spider Avatar
 PT:2/2

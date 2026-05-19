@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Niv-Mizzet
+Title=Niv-Mizzet
+Icon=Niv-Mizzet.jpg
+Difficulty=Medium
+Description=New_Phyrexia/StarCityGames.com_Invitational_Qualifier_Tampa/Frank_Dunn_-_G-W_Birthing_Pod_(Standard,_#18711).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Acidic Slime
+4 Archon of Justice
+4 Birds of Paradise
+2 Blade Splicer
+1 Elesh Norn, Grand Cenobite
+1 Linvala, Keeper of Silence
+4 Llanowar Elves
+1 Obstinate Baloth
+4 Overgrown Battlement
+4 Solemn Simulacrum
+1 Spellskite
+1 Sylvan Ranger
+1 Sylvok Replica
+2 Wall of Omens
+2 Wurmcoil Engine
+4 Birthing Pod
+6 Forest
+2 Plains
+4 Razorverge Thicket
+4 Stirring Wildwood
+4 Sunpetal Grove
+3 Tectonic Edge
+[Sideboard]
+3 Beast Within
+4 Nature's Claim
+4 Vengevine
+1 Viridian Corrupter

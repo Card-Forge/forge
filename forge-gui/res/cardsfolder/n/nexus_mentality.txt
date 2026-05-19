@@ -1,0 +1,11 @@
+Name:Nexus Mentality
+ManaCost:3 U
+Types:Instant
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ Count$Compare X GE1.2.1 | Choices$ DBMove,DBRemove | AdditionalDescription$ If you control a commander as you cast this spell, you may choose both.
+SVar:DBMove:DB$ MoveCounter | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Permanent.nonLand+YouCtrl | ValidTgtDesc$ nonland permanent you control (move counters) | CounterType$ All | CounterNum$ All | SpellDescription$ Move all counters from target nonland permanent you control onto another target nonland permanent you control.
+SVar:DBRemove:DB$ RemoveCounter | ValidTgts$ Permanent.nonLand+YouCtrl | ValidTgtDesc$ nonland permanent you control (remove counters) | CounterType$ All | CounterNum$ All | RememberRemoved$ True | SubAbility$ DBDraw | SpellDescription$ Remove all counters from target nonland permanent you control. Draw a card for each counter removed this way.
+SVar:DBDraw:DB$ Draw | NumCards$ Y | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Card.IsCommander+YouCtrl
+SVar:Y:Count$RememberedSize
+Oracle:Choose one. If you control a commander as you cast this spell, you may choose both instead.\n• Move all counters from target nonland permanent you control onto another target nonland permanent you control.\n• Remove all counters from target nonland permanent you control. Draw a card for each counter removed this way.

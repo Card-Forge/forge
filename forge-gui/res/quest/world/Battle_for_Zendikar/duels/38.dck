@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=R2-D2
+Title=R2-D2
+Icon=R2-D2.jpg
+Difficulty=Medium
+Description=Battle_for_Zendikar/SCG_Standard_Open_Atlanta/Andrew_Auburn_-_G-W_Megamorph_(Standard,_#330415).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Deathmist Raptor
+4 Den Protector
+4 Hangarback Walker
+2 Hidden Dragonslayer
+3 Nissa, Vastwood Seer
+4 Warden of the First Tree
+4 Wingmate Roc
+4 Dromoka's Command
+2 Valorous Stance
+4 Gideon, Ally of Zendikar
+1 Blighted Steppe
+4 Canopy Vista
+2 Flooded Strand
+6 Forest
+4 Plains
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+2 Arashin Cleric
+3 Evolutionary Leap
+3 Silkwrap
+4 Surge of Righteousness
+1 Tragic Arrogance
+2 Whisperwood Elemental

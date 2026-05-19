@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import forge.Forge;
 import io.sentry.Hint;
 import io.sentry.Sentry;
+import org.tinylog.Logger;
 
 import java.io.*;
 import java.util.HashMap;
@@ -340,8 +341,7 @@ public class SaveFileData extends HashMap<String, byte[]> {
             try {
                 localClass = Class.forName(resultClassDescriptor.getName());
             } catch (ClassNotFoundException e) {
-                //logger.error("No local class for " + resultClassDescriptor.getName(), e);
-                System.err.println("[Class Not Found Exception]\nNo local class for " + resultClassDescriptor.getName());
+                Logger.error(e, "No local class for " + resultClassDescriptor.getName());
                 return resultClassDescriptor;
             }
             ObjectStreamClass localClassDescriptor = ObjectStreamClass.lookup(localClass);

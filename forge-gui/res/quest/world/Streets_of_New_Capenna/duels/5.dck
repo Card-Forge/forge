@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Professor X
+Title=Professor X
+Icon=Professor X.jpg
+Difficulty=Medium
+Description=./Standard/Streets_of_New_Capenna/Ishikawa_Kenji_-_WUB_Junk_(Standard,_#1395656).dck
+Deck Type=constructed
+
+[Main]
+1 Liesa, Forgotten Archangel
+3 Spectral Adversary
+3 Luminarch Aspirant
+4 Raffine, Scheming Seer
+1 Spell Pierce
+1 Valorous Stance
+1 Ray of Enfeeblement
+1 Jwari Disruption
+3 Make Disappear
+3 Exotic Pets
+3 Infernal Grasp
+3 Vanishing Verse
+1 Emeria's Call
+1 Duress
+2 Wedding Announcement
+2 Kaito Shizuki
+3 The Wandering Emperor
+1 Eiganjo, Seat of the Empire
+1 Island
+1 Plains
+2 Shipwreck Marsh
+2 Hive of the Eye Tyrant
+2 Shattered Sanctum
+2 Brightclimb Pathway
+3 Clearwater Pathway
+3 Deserted Beach
+3 Hengegate Pathway
+4 Raffine's Tower
+[Sideboard]
+1 Farewell
+1 Duress
+1 Disdainful Stroke
+2 Archon of Emeria
+2 Ray of Enfeeblement
+2 Reckoner Bankbuster
+2 Unlicensed Hearse
+2 The Meathook Massacre
+2 Reservoir Kraken

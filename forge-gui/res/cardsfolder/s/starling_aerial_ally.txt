@@ -1,4 +1,5 @@
 Name:Starling, Aerial Ally
+Variant:UniversesWithin:FlavorName:Eztli of the Thousand Moons
 ManaCost:4 W
 Types:Legendary Creature Human Hero
 PT:3/4

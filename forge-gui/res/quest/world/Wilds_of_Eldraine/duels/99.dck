@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Houngan
+Title=Houngan
+Icon=Houngan.jpg
+Difficulty=Very Hard
+Description=./Modern/Wilds_of_Eldraine/Koshimo_Masaru_-_Ilysian_Valakut_(Modern,_#1749877).dck
+Deck Type=constructed
+
+[Main]
+4 Tarmogoyf
+2 Primeval Titan
+4 Tireless Tracker
+2 Dryad of the Ilysian Grove
+4 Orcish Bowmasters
+4 Questing Druid
+3 Fatal Push
+2 Terminate
+2 Lightning Bolt
+2 Sheoldred's Edict
+2 Flame Slash
+4 Wrenn and Six
+1 Swamp
+1 Mountain
+1 Forest
+3 Blood Crypt
+4 Stomping Ground
+1 Bloodstained Mire
+4 Wooded Foothills
+3 Valakut, the Molten Pinnacle
+4 Verdant Catacombs
+1 Dwarven Mine
+1 Boseiju, Who Endures
+1 Ziatora's Proving Ground
+[Sideboard]
+2 Blood Moon
+2 Engineered Explosives
+2 Chalice of the Void
+2 Veil of Summer
+1 Obsidian Charmaw
+1 Boseiju, Who Endures
+2 Unlicensed Hearse
+2 Tear Asunder
+1 Brotherhood's End

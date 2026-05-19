@@ -123,7 +123,7 @@ public abstract class GameState {
             sb.append("URL:https://www.cardforge.org\n");
             sb.append("Goal:Win\n");
             sb.append("Turns:1\n");
-            sb.append("Difficulty:Easy\n");
+            sb.append("Difficulty:Common\n");
             sb.append("Description:Win this turn.\n");
             sb.append("[state]\n");
         }
@@ -962,6 +962,8 @@ public abstract class GameState {
             tgtID = parseTargetInScript(tgtDef);
             spellDef = spellDef.substring(0, spellDef.indexOf("->")).trim();
         }
+
+        spellDef = spellDef.replace("^", ":"); // alternate marker for when : is the name of the card
 
         Card c = null;
 

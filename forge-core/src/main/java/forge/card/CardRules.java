@@ -20,9 +20,7 @@ package forge.card;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import forge.card.mana.IParserManaCost;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostShard;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
@@ -52,10 +50,11 @@ public final class CardRules implements ICardCharacteristics {
     private ColorSet deckbuildingColors;
     private String meldWith;
     private String partnerWith;
-    private boolean addsWildCardColor;
+    private String partnerType;
     private int setColorID;
     private boolean custom;
     private boolean unsupported;
+    private Map<Integer, String> placeholderFaces;
     private String path;
 
     public CardRules(ICardFace[] faces, CardSplitType altMode, CardAiHints cah) {
@@ -77,17 +76,10 @@ public final class CardRules implements ICardCharacteristics {
         aiHints = cah;
         meldWith = "";
         partnerWith = "";
-        addsWildCardColor = false;
+        partnerType = "";
         setColorID = 0;
 
-
-        //calculate color identity
-        byte colMask = calculateColorIdentity(mainPart);
-
-        if (otherPart != null) {
-            colMask |= calculateColorIdentity(otherPart);
-        }
-        colorIdentity = ColorSet.fromMask(colMask);
+        colorIdentity = calculateColorIdentity(this);
     }
 
     void reinitializeFromRules(CardRules newRules) {
@@ -103,12 +95,22 @@ public final class CardRules implements ICardCharacteristics {
         colorIdentity = newRules.colorIdentity;
         meldWith = newRules.meldWith;
         partnerWith = newRules.partnerWith;
-        addsWildCardColor = newRules.addsWildCardColor;
         setColorID = newRules.setColorID;
         tokens = newRules.tokens;
     }
 
+    private static ColorSet calculateColorIdentity(CardRules rules) {
+        byte colMask = calculateColorIdentity(rules.mainPart);
+
+        if (rules.otherPart != null) {
+            colMask |= calculateColorIdentity(rules.otherPart);
+        }
+        return ColorSet.fromMask(colMask);
+    }
+
     private static byte calculateColorIdentity(final ICardFace face) {
+        if (face == null)
+            return 0; //Still initializing; filled in during supplyPlaceholderFaces
         byte res = face.getColor().getColor();
         boolean isReminder = false;
         boolean isSymbol = false;
@@ -148,6 +150,8 @@ public final class CardRules implements ICardCharacteristics {
     }
 
     public boolean isVariant() {
+        if (placeholderFaces != null && (mainPart == null || splitType.getAggregationMethod() == CardSplitType.FaceSelectionMethod.COMBINE))
+            return false; //Type line isn't fully generated, and we need it to determine if this is a variant type
         CardType t = getType();
         return t.isVanguard() || t.isScheme() || t.isPlane() || t.isPhenomenon()
                 || t.isConspiracy() || t.isDungeon() || t.isAttraction() || t.isContraption();
@@ -202,8 +206,23 @@ public final class CardRules implements ICardCharacteristics {
         }
     }
 
+    /**
+     * Similar to `getName`, but goes through some extra steps to figure out the card's name in the event that
+     * one or more of the card faces isn't fully initialized yet. This should never be necessary outside of
+     * CardDB initialization.
+     */
+    public String getPreInitName() { //Would make this package private but StaticData needs it.
+        if (this.placeholderFaces == null)
+            return getName();
+        String mainName =  mainPart == null ? placeholderFaces.get(0) : mainPart.getName();
+        if (splitType.getAggregationMethod() == CardSplitType.FaceSelectionMethod.COMBINE) {
+            String otherName =  otherPart == null ? placeholderFaces.get(1) : otherPart.getName();
+            return mainName + " // " + otherName;
+        }
+        return mainName;
+    }
+
     public String getNormalizedName() { return normalizedName; }
-    public void setNormalizedName(String filename) { normalizedName = filename; }
 
     public String getPath() { return path; }
     public void setPath(String path) { this.path = path; }
@@ -219,8 +238,14 @@ public final class CardRules implements ICardCharacteristics {
 
     @Override
     public CardType getType() {
+        if (mainPart == null) {
+            return new CardType(false); // Still initializing; filled in during supplyPlaceholderFaces
+        }
         switch (splitType.getAggregationMethod()) {
             case COMBINE: // no cards currently have different types
+                if (otherPart == null) {
+                    return mainPart.getType();
+                }
                 return CardType.combine(mainPart.getType(), otherPart.getType());
             default:
                 return mainPart.getType();
@@ -294,14 +319,7 @@ public final class CardRules implements ICardCharacteristics {
         return getType().isDungeon();
     }
 
-    public boolean hasPrintedPT() {
-        return getPower() != null || getToughness() != null;
-    }
-
     public boolean canBeCommander() {
-        if (mainPart.getOracleText().contains(" is your commander, choose a color before the game begins.")) {
-            addsWildCardColor = true;
-        }
         if (mainPart.getOracleText().contains("can be your commander") || canBeBackground()) {
             return true;
         }
@@ -321,44 +339,37 @@ public final class CardRules implements ICardCharacteristics {
         if (!(canBePartnerCommander() && b.canBePartnerCommander())) {
             return false;
         }
-        boolean legal = false;
         if (hasKeyword("Partner") && b.hasKeyword("Partner")) {
-            legal = true; // normal partner commander
+            return true; // normal partner commander
         }
         if (getName().equals(b.getPartnerWith()) && b.getName().equals(getPartnerWith())) {
-            legal = true; // paired partner commander
+            return true; // paired partner commander
         }
-        if (hasKeyword("Friends forever") && b.hasKeyword("Friends forever")) {
-            legal = true; // Stranger Things Secret Lair gimmick partner commander
-        }  
-        if (hasKeyword("Partner - Survivors") && b.hasKeyword("Partner - Survivors")) {
-            legal = true; // The Last of Us Secret Lair gimmick partner commander
+
+        if (!this.partnerType.isEmpty() && this.partnerType.equals(b.partnerType)) {
+            return true;
         }
-        if (hasKeyword("Partner - Father & Son") && b.hasKeyword("Partner - Father & Son")) {
-            legal = true; // God of War Secret Lair gimmick partner commander
-        }
-        if (hasKeyword("Partner - Character select") && b.hasKeyword("Partner - Character select")) {
-            legal = true; // TMNT Commander deck gimmick partner commander
-        }
+
         if (hasKeyword("Choose a Background") && b.canBeBackground()
                 || b.hasKeyword("Choose a Background") && canBeBackground()) {
-            legal = true; // commander with background
+            return true; // commander with background
         }
         if (isDoctor() && b.hasKeyword("Doctor's companion")
                 || hasKeyword("Doctor's companion") && b.isDoctor()) {
-            legal = true; // Doctor Who partner commander
+            return true; // Doctor Who partner commander
         }
-        return legal;
+        return false;
     }
 
     public boolean canBePartnerCommander() {
         if (canBeBackground()) {
             return true;
         }
-        return canBeCommander() && (hasKeyword("Partner") || !this.partnerWith.isEmpty() ||
-                hasKeyword("Friends forever") || hasKeyword("Choose a Background") ||
-                hasKeyword("Partner - Father & Son") || hasKeyword("Partner - Survivors") || hasKeyword("Partner - Character select") ||
-                hasKeyword("Doctor's companion") || isDoctor());
+        if (!canBeCommander()) {
+            return false;
+        }
+        return hasKeyword("Partner") || !this.partnerWith.isEmpty() || !this.partnerType.isEmpty() ||
+                hasKeyword("Choose a Background") || hasKeyword("Doctor's companion") || isDoctor();
     }
 
     public boolean canBeBackground() {
@@ -433,7 +444,7 @@ public final class CardRules implements ICardCharacteristics {
     }
 
     public boolean getAddsWildCardColor() {
-        return addsWildCardColor;
+        return mainPart.getOracleText().contains(" is your commander, choose a color before the game begins.");
     }
 
     public int getSetColorID() {
@@ -486,7 +497,7 @@ public final class CardRules implements ICardCharacteristics {
             return mainPartName;
     }
 
-    /* package */ String findOrCreateVariantForFlavorName(String flavorName, String suggestedVariantName) {
+    String findOrCreateVariantForFlavorName(String flavorName, String suggestedVariantName) {
         Objects.requireNonNull(flavorName);
         String[] nameParts = flavorName.trim().split("\\s*//\\s*");
         flavorName = String.join(" // ", nameParts); //Normalize this just in case.
@@ -504,22 +515,48 @@ public final class CardRules implements ICardCharacteristics {
 
         CardFace variantMain = ((CardFace) mainPart).getOrCreateFunctionalVariant(variantName);
         variantMain.setFlavorName(nameParts[0]);
-        //Rudimentary name replacement. Can't do nicknames, pronouns, ability words, or flavored keywords. Need to define variants manually for that.
-        if(mainPart.getOracleText().contains(mainPart.getName()))
-            variantMain.setOracleText(mainPart.getOracleText().replace(mainPart.getName(), nameParts[0]));
         ((CardFace) mainPart).assignMissingFieldsToVariant(variantMain);
 
         if(otherPart != null) {
             CardFace variantOther = ((CardFace) otherPart).getOrCreateFunctionalVariant(variantName);
             variantOther.setFlavorName(nameParts[1]);
-            if(otherPart.getOracleText().contains(otherPart.getName()))
-                variantMain.setOracleText(otherPart.getOracleText().replace(otherPart.getName(), nameParts[1]));
             ((CardFace) otherPart).assignMissingFieldsToVariant(variantOther);
         }
 
         supportedFunctionalVariants.add(variantName);
 
         return variantName;
+    }
+
+    /**
+     * A card has placeholder faces if its script uses `CopyFaceFrom` to reference another card.
+     * These will be filled in via `supplyPlaceholderFaces` after all scripts have been processed.
+     */
+    boolean hasPlaceholderFaces() {
+        return this.placeholderFaces != null;
+    }
+
+    void supplyPlaceholderFaces(Map<String, ICardFace> facesByName) {
+        if(this.placeholderFaces == null)
+            return;
+        List<ICardFace> newFaceList = new ArrayList<>(this.allFaces);
+        for(Map.Entry<Integer, String> neededFace : this.placeholderFaces.entrySet()) {
+            int index = neededFace.getKey();
+            ICardFace face = facesByName.get(neededFace.getValue());
+            if(face == null)
+                throw new NoSuchElementException("Missing placeholder face for '" + this.normalizedName + "'; Cannot find '" + neededFace.getValue() + "'!");
+            newFaceList.add(index, face);
+            if(index == 0)
+                this.mainPart = face;
+            else if(index == 1)
+                this.otherPart = face;
+        }
+        this.allFaces = Collections.unmodifiableList(newFaceList);
+
+        //Recalculate color identity now that we have all the faces.
+        this.colorIdentity = calculateColorIdentity(this);
+
+        this.placeholderFaces = null;
     }
 
     public ColorSet getColorIdentity() {
@@ -543,11 +580,12 @@ public final class CardRules implements ICardCharacteristics {
         private CardSplitType altMode = CardSplitType.None;
         private String meldWith = "";
         private String partnerWith = "";
-        private boolean addsWildCardColor = false;
+        private String partnerType = "";
         private int setColorID = 0;
         private String handLife = null;
         private String normalizedName = "";
         private Set<String> supportedFunctionalVariants = null;
+        private Map<Integer, String> placeholderFaces = null;
 
         private List<String> tokens = Lists.newArrayList();
 
@@ -584,9 +622,10 @@ public final class CardRules implements ICardCharacteristics {
             this.has = null;
             this.meldWith = "";
             this.partnerWith = "";
-            this.addsWildCardColor = false;
+            this.partnerType = "";
             this.normalizedName = "";
             this.supportedFunctionalVariants = null;
+            this.placeholderFaces = null;
             this.tokens = Lists.newArrayList();
         }
 
@@ -597,7 +636,8 @@ public final class CardRules implements ICardCharacteristics {
          */
         public final CardRules getCard() {
             CardAiHints cah = new CardAiHints(removedFromAIDecks, removedFromRandomDecks, removedFromNonCommanderDecks, hints, needs, has);
-            faces[0].assignMissingFields();
+            if (null != faces[0]) faces[0].assignMissingFields();
+            else assert(placeholderFaces != null);
             if (null != faces[1]) faces[1].assignMissingFields();
             if (null != faces[2]) faces[2].assignMissingFields();
             if (null != faces[3]) faces[3].assignMissingFields();
@@ -606,10 +646,10 @@ public final class CardRules implements ICardCharacteristics {
             if (null != faces[6]) faces[6].assignMissingFields();
             final CardRules result = new CardRules(faces, altMode, cah);
 
-            result.setNormalizedName(this.normalizedName);
+            result.normalizedName = this.normalizedName;
             result.meldWith = this.meldWith;
             result.partnerWith = this.partnerWith;
-            result.addsWildCardColor = this.addsWildCardColor;
+            result.partnerType = this.partnerType;
             result.setColorID = this.setColorID;
             if (!tokens.isEmpty()) {
                 result.tokens = tokens;
@@ -617,6 +657,7 @@ public final class CardRules implements ICardCharacteristics {
             if (StringUtils.isNotBlank(handLife))
                 result.setVanguardProperties(handLife);
             result.supportedFunctionalVariants = this.supportedFunctionalVariants;
+            result.placeholderFaces = this.placeholderFaces;
             return result;
         }
 
@@ -687,6 +728,11 @@ public final class CardRules implements ICardCharacteristics {
                     if ("Colors".equals(key)) {
                         ColorSet newCol = ColorSet.fromNames(value.split(","));
                         face.setColor(newCol);
+                    } else if ("CopyFaceFrom".equals(key)) {
+                        if (placeholderFaces == null)
+                            placeholderFaces = new HashMap<>(2);
+                        assert(this.faces[this.curFace] == null);
+                        placeholderFaces.put(this.curFace, value);
                     }
                     break;
 
@@ -718,8 +764,11 @@ public final class CardRules implements ICardCharacteristics {
                 case 'K':
                     if ("K".equals(key)) {
                         face.addKeyword(value);
-                        if (value.startsWith("Partner:")) {
+                        if (value.startsWith("Partner with:")) {
                             this.partnerWith = value.split(":")[1];
+                        }
+                        if (value.startsWith("Partner:")) {
+                            this.partnerType = value.split(":")[1];
                         }
                     }
                     break;
@@ -735,8 +784,7 @@ public final class CardRules implements ICardCharacteristics {
 
                 case 'M':
                     if ("ManaCost".equals(key)) {
-                        face.setManaCost("no cost".equals(value) ? ManaCost.NO_COST
-                                : new ManaCost(new ManaCostParser(value)));
+                        face.setManaCost("no cost".equals(value) ? ManaCost.NO_COST : new ManaCost(value));
                     } else if ("MeldPair".equals(key)) {
                         this.meldWith = value;
                     }
@@ -744,6 +792,7 @@ public final class CardRules implements ICardCharacteristics {
 
                 case 'N':
                     if ("Name".equals(key)) {
+                        assert(this.placeholderFaces == null || !this.placeholderFaces.containsKey(this.curFace));
                         this.faces[this.curFace] = new CardFace(value);
                     }
                     break;
@@ -799,7 +848,7 @@ public final class CardRules implements ICardCharacteristics {
                         face.addTrigger(value);
                     } else if ("Types".equals(key)) {
                         face.setType(CardType.parse(value, false));
-                    } else if ("Text".equals(key) && !"no text".equals(value) && StringUtils.isNotBlank(value)) {
+                    } else if ("Text".equals(key) && StringUtils.isNotBlank(value)) {
                         face.setNonAbilityText(value);
                     }
                     break;
@@ -819,62 +868,6 @@ public final class CardRules implements ICardCharacteristics {
                     }
                     break;
             }
-        }
-
-        /**
-         * The Class ParserCardnameTxtManaCost.
-         */
-        private static class ManaCostParser implements IParserManaCost {
-            private final StringTokenizer st;
-            private int genericCost;
-
-            public ManaCostParser(final String cost) {
-                st = new StringTokenizer(cost, " ");
-                this.genericCost = 0;
-            }
-
-            @Override
-            public final int getTotalGenericCost() {
-                if (this.hasNext()) {
-                    throw new RuntimeException("Generic cost should be obtained after iteration is complete");
-                }
-                return this.genericCost;
-            }
-
-            /*
-             * (non-Javadoc)
-             *
-             * @see java.util.Iterator#hasNext()
-             */
-            @Override
-            public final boolean hasNext() {
-                return st.hasMoreTokens();
-            }
-
-            /*
-             * (non-Javadoc)
-             *
-             * @see java.util.Iterator#next()
-             */
-            @Override
-            public final ManaCostShard next() {
-                final String unparsed = st.nextToken();
-                if (StringUtils.isNumeric(unparsed)) {
-                    this.genericCost += Integer.parseInt(unparsed);
-                    return null;
-                }
-
-                return ManaCostShard.parseNonGeneric(unparsed);
-            }
-
-            /*
-             * (non-Javadoc)
-             *
-             * @see java.util.Iterator#remove()
-             */
-            @Override
-            public void remove() {
-            } // unsupported
         }
     }
 
@@ -902,8 +895,7 @@ public final class CardRules implements ICardCharacteristics {
     }
     public boolean hasStartOfKeyword(final String k, ICardFace cf) {
         for (final String inst : cf.getKeywords()) {
-            final String[] parts = inst.split(":");
-            if ((parts[0]).equalsIgnoreCase(k)) {
+            if (inst.startsWith(k)) {
                 return true;
             }
         }

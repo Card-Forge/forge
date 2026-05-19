@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import com.google.common.collect.Lists;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityKey;
@@ -108,7 +109,10 @@ public class AssembleContraptionEffect extends SpellAbilityEffect {
                     game.getAction().controllerChangeZoneCorrection(card);
 
                 //Assign a sprocket. If reassembling, it needs to be a different sprocket than the current one.
-                int sprocket = card.getController().getController().chooseSprocket(card, sa.hasParam("Reassemble"));
+                List<Integer> sprockets = Lists.newArrayList(1, 2, 3);
+                if(sa.hasParam("Reassemble"))
+                    sprockets.remove(Integer.valueOf(card.getSprocket()));
+                int sprocket = card.getController().getController().chooseSprocket(card, sprockets);
                 card.setSprocket(sprocket);
             }
             triggerList.triggerChangesZoneAll(sa.getHostCard().getGame(), sa);

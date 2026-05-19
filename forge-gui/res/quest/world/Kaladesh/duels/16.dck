@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Aragorn
+Title=Aragorn
+Icon=Aragorn.jpg
+Difficulty=Easy
+Description=Kaladesh/Grand_Prix_Providence_2016_-_9_to_64_Decklists/Pat_Cox_-_W-R_Vehicles_(Standard,_#643604).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Archangel Avacyn
+4 Inventor's Apprentice
+2 Pia Nalaar
+4 Scrapheap Scrounger
+4 Selfless Spirit
+4 Thraben Inspector
+4 Toolcraft Exemplar
+2 Cultivator's Caravan
+4 Smuggler's Copter
+4 Unlicensed Disintegration
+3 Incendiary Flow
+4 Concealed Courtyard
+4 Inspiring Vantage
+4 Mountain
+2 Needle Spires
+5 Plains
+4 Smoldering Marsh
+[Sideboard]
+3 Fragmentize
+3 Galvanic Bombardment
+3 Gideon, Ally of Zendikar
+1 Savage Alliance
+2 Stasis Snare
+3 Transgress the Mind

@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=The Shade
+Title=The Shade
+Icon=The Shade.jpg
+Difficulty=Hard
+Description=./Modern/Innistrad_Midnight_Hunt/Maccaciock_-_Counter_Burn_(Modern,_#1220513).dck
+Deck Type=constructed
+
+[Main]
+1 Brazen Borrower
+3 Murktide Regent
+4 Snapcaster Mage
+1 Spell Snare
+1 Force of Negation
+1 Electrolyze
+2 Cryptic Command
+2 Fire // Ice
+3 Consider
+4 Archmage's Charm
+4 Thought Scour
+4 Counterspell
+4 Lightning Bolt
+2 Blood Moon
+2 Jace, the Mind Sculptor
+1 Polluted Delta
+1 Flooded Strand
+1 Raugrin Triome
+2 Steam Vents
+2 Sulfur Falls
+2 Misty Rainforest
+4 Scalding Tarn
+9 Snow-Covered Island
+[Sideboard]
+1 Vendilion Clique
+1 Blood Moon
+1 Surgical Extraction
+1 Mystical Dispute
+1 Test of Talents
+2 Engineered Explosives
+2 Relic of Progenitus
+2 Abrade
+2 Flusterstorm
+2 Aether Gust

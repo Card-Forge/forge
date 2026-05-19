@@ -222,6 +222,11 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
     protected int removeAnyType(GameEntity entity, int cntToRemove, SpellAbility sa) {
         boolean rememberRemoved = sa.hasParam("RememberRemoved");
         int removed = 0;
+        boolean upTo = sa.hasParam("UpTo");
+        if ("Any".equals(sa.getParam("CounterNum"))) {
+            cntToRemove = Integer.MAX_VALUE;
+            upTo = true;
+        }
 
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
@@ -246,7 +251,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
             tgtCounters.remove(chosenType);
             int remaining = Aggregates.sum(tgtCounters.values());
             // player must choose enough so he can still reach the amount with other types
-            int min = sa.hasParam("UpTo") ? 0 : Math.max(1, max - remaining);
+            int min = upTo ? 0 : Math.max(1, max - remaining);
             prompt = Localizer.getInstance().getMessage("lblSelectRemoveCountersNumberOfTarget", chosenType.getName());
             params = Maps.newHashMap();
             params.put("Target", entity);
@@ -266,7 +271,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
                     }
                 }
                 cntToRemove -= chosenAmount;
-            } else if (sa.hasParam("UpTo")) {
+            } else if (upTo) {
                 break;
             }
         }

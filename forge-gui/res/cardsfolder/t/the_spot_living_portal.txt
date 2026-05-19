@@ -1,4 +1,5 @@
 Name:The Spot, Living Portal
+Variant:UniversesWithin:FlavorName:Qoneus, Horizon Splicer
 ManaCost:3 W B
 Types:Legendary Creature Human Scientist Villain
 PT:4/4

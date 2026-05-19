@@ -1,7 +1,7 @@
 package forge.game.staticability;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.EnumSet;
+import java.util.Set;
 
 public enum StaticAbilityMode {
     Continuous,
@@ -162,6 +162,7 @@ public enum StaticAbilityMode {
 
     // StaticAbilityFlipCoinMod
     FlipCoinMod,
+    FlipCoinDoubler,
 
     // StaticAbilityPlotZone
     PlotZone,
@@ -187,10 +188,18 @@ public enum StaticAbilityMode {
     // StaticAbilityManaConvert
     ManaConvert,
 
+    // StaticAbilityUntapOtherPlayer
+    UntapOtherPlayer,
+
     // StaticAbilityTurnPhaseReversed
     TurnReversed,
     PhaseReversed,
 
+    // StaticAbilityAttackRequirement
+    AttackRequirement,
+
+    // StaticAbilityCountersRemain
+    CountersRemain,
     ;
 
     public static StaticAbilityMode smartValueOf(final String value) {
@@ -206,8 +215,8 @@ public enum StaticAbilityMode {
         throw new IllegalArgumentException("No element named " + value + " in enum StaticAbilityMode");
     }
 
-    public static List<StaticAbilityMode> listValueOf(final String values) {
-        final List<StaticAbilityMode> result = new ArrayList<>();
+    public static Set<StaticAbilityMode> setValueOf(final String values) {
+        final Set<StaticAbilityMode> result = EnumSet.noneOf(StaticAbilityMode.class);
         for (final String s : values.split("[, ]+")) {
             StaticAbilityMode zt = StaticAbilityMode.smartValueOf(s);
             if (zt != null) {

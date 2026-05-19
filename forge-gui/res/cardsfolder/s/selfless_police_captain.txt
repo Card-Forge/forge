@@ -1,4 +1,5 @@
 Name:Selfless Police Captain
+Variant:UniversesWithin:FlavorName:Crime-Scene Instructor
 ManaCost:1 W
 Types:Creature Human Detective
 PT:1/1

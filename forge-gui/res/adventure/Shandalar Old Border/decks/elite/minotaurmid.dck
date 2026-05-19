@@ -1,0 +1,23 @@
+[metadata]
+Name=minotaurmid
+[Main]
+1 Forest|TMP|3
+1 Llanowar Wastes|APC
+2 Karplusan Forest|ICE
+4 Choke|TMP
+4 Goblin Cadets|USG
+4 Mogg Conscripts|TMP
+4 Mogg Fanatic|ATH
+4 Mogg Raider|TMP
+4 Phyrexian Negator|UDS
+4 Pyrostatic Pillar|SCG
+4 Rathi Assassin|NMS
+4 Sulfur Vent|INV
+4 Sulfurous Springs|ICE
+4 Swamp|TMP|3
+7 Mountain|TMP|3
+
+[StartInBattle_Reference]
+2 Mountain|ICE
+1 Didgeridoo|HML
+1 Anaba Spirit Crafter|HML

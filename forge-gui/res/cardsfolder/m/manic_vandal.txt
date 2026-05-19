@@ -3,5 +3,5 @@ ManaCost:2 R
 Types:Creature Human Warrior
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters, destroy target artifact.
-SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact
 Oracle:When Manic Vandal enters, destroy target artifact.

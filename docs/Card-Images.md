@@ -1,5 +1,4 @@
 # About
-
 Card images are assets used to represent the real cards in game. You DO NOT need images to play forge, however representing real cards is a nice ability forge provides. These images can be any image set you like, or custom images too.
 
 Primarily there are two types of images you'll care about; cards, and tokens.
@@ -8,26 +7,28 @@ Primarily there are two types of images you'll care about; cards, and tokens.
 
 **Tokens** - are the images for the cards replacing a generic "1/1 zombie" for example. These are less frequently updated, and are typically the bulk of what is missing when doing an audit. However, these are probably where the more true "custom" replacements are available, with either custom artwork, or modified of other existing.
 
-# Downloading
+A deck may explicitly define the edition and art variant of each card it includes. If a deck specifies those for no card, Forge uses a special algorithm to determine which card printings were the latest by the moment all of deck's had been printed. These very editions of cards are used when loading deck into memory to reflect the flavour of the season when the deck was built.
 
+Card images are cleared from memory cache when switching screens and between games.
+
+# Downloading
 Due to charges in Forges hosting and scryfall terms you can no longer predownload card images. Turn on auto download in forge to download card images when first viewed.
 
 ## In Forge Auto Download:
-
 **Download Missing Images - Setting**
 - This will download the images from the sources as the game requests the image in situ. 
 - This can be useful if you don't want to have copies of every card... You can do small pre-caching by loading your decks in the deck editor prior to playing to download just those images.
 
 ## Bulk Download Sites: (Not in game)
-
 - [http://download.austeregrim.net](http://download.austeregrim.net) 
   - Note from user AustereGrim;
 > I provide my site for free for bulk downloading the entire image catalog. So you don't need to give those spam sites more advertising spots. If the server is loaded bandwidth is shared, right now it's not heavily used so please feel free to download the 4+gb zips, or the individual zips if you need sets. They are the images Kev has uploaded to my site, and the Zips are updated nightly automatically.
 
 **(I'm not gatekeeping, please if you have a private location for bulk downloads or for alternate or custom arts, you can update this wiki too or let us know in the discord. I'll be happy to update the wiki page with additional sources.)**
 
-# Storage
+If you have an older Android device for increased performance or to save bandwidth it might be a good idea to use lower resolution images instead: https://www.slightlymagic.net/forum/viewtopic.php?f=15&t=29104
 
+# Storage
 Card images are stored in `pics/cards`, and tokens in `pics/tokens`, in the Cache folder for forge: 
 
 - **Windows** - `C:\Users\<username>\appdata\local\forge\Cache\`
@@ -39,9 +40,7 @@ Card images are stored in `pics/cards`, and tokens in `pics/tokens`, in the Cach
 - **MacOS** - `/Users/<username>/Library/caches/forge/`
   - Use `Command + Shift + .` to show hidden files.
 
-
 # Subfolders
-
 If you don't care about the edition's version of cards, images can be stored in the root directory of the cards folder.
 
 `/cache/pics/cards/`
@@ -51,7 +50,6 @@ If you want the edition's versions of the cards, they need to go under the editi
 `/cache/pics/cards/AFR` for example for Adventures in the Forgotten Realms.
 
 # File Naming
-
 **File Names:**
 - Cards file names follow a simple principle: `Card Name#.border.ext`
   - `Card Name` - Card Name with spaces.
@@ -106,4 +104,3 @@ burning hands1.fullborder.jpg
 burning hands2.fullborder.jpg
 ```
 Forge will not see either of those, and will probably download the missing `burning hands.fullborder.jpg` for you. Similarly adding a 3rd black dragon `black dragon3.fullborder.jpg` will **not** work either.
-

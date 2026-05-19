@@ -503,7 +503,7 @@ BBD-225 U Kiss of the Amesha @Todd Lockwood
 BBD-228 C Riptide Crab @David Martin
 BBD-237 C Hexplate Golem @Matt Cavotta
 BBD-238 U Juggernaut @Kev Walker
-BBD-241 M Mycosynth Lattice @Anthony S. Waters
+BBD-241 M Mycosynth Lattice @Anthony S. Waters & Cara Mitten
 BBD-243 C Peace Strider @Igor Kieryluk
 BBD-249 C Yotian Soldier @Luca Zontini
 BBD-251 L Island @Titus Lunter
@@ -1203,6 +1203,7 @@ CSP-146 U Frost Marsh @Jim Pavelec
 CSP-148 U Mouth of Ronom @Daren Bader
 CSP-149 R Scrying Sheets @Thomas M. Baxa
 DBL-121 C Siege Zombie @Johann Bodin
+DD1-4 U Elvish Harbinger @Larry MacDougall
 DD1-5 C Elvish Warrior @Christopher Moeller
 DD1-19 U Wren's Run Vanquisher @Paolo Parente
 DD1-26 U Wirewood Lodge @Anthony S. Waters
@@ -1872,7 +1873,6 @@ EVE-156 R Murkfiend Liege @Carl Critchlow
 EVE-160 C Slippery Bogle @Dave Allsop
 EVE-172 R Scarecrone @Jesper Ejsing
 EVG-1 R Ambush Commander @Lucio Parrillo
-EVG-4 U Elvish Harbinger @Larry MacDougall
 EXO-11 R Oath of Lieges @Mark Zug
 EXO-14 U Pegasus Stampede @Mark Zug
 EXO-17 U Reconnaissance @Val Mayerik
@@ -3349,7 +3349,7 @@ MMQ-205 U Mercadia's Downfall @Pete Venters
 MMQ-208 R Puppet's Verdict @Edward P. Beard, Jr.
 MMQ-218 R Thieves' Auction @Kevin Murphy
 MMQ-219 C Thunderclap @Tom Wänerstrand
-MMQ-229 C Ancestral Mask @Massimilano Frezzato
+MMQ-229 C Ancestral Mask @Massimiliano Frezzato
 MMQ-232 U Briar Patch @Rebecca Guay
 MMQ-246 R Food Chain @Val Mayerik
 MMQ-253 U Hunted Wumpus @Brian Snõddy
@@ -3462,7 +3462,7 @@ NEC-21 R Komainu Battle Armor @Néstor Ossandón Leal
 NEC-95 U Reality Shift @Howard Lyon
 NEC-111 R Taurean Mauler @Dominick Domingo
 NEM-1 U Angelic Favor @Paolo Parente
-NEM-8 C Fanatical Devotion @Massimilano Frezzato
+NEM-8 C Fanatical Devotion @Massimiliano Frezzato
 NEM-17 R Parallax Wave @Greg Staples
 NEM-41 R Seahunter @Heather Hudson
 NEM-42 C Seal of Removal @Christopher Moeller
@@ -5050,4 +5050,12 @@ TZNR-8 g_0_2_plant_defender @Jakub Kasper
 [other]
 LCI-1 copy @Henry Peters
 TCMR-14 monarch @Volkan Baǵa
+TKHM-21 emblem_tibalt_cosmic_impostor @Yongjae Choi
+TLCC-17 C blessing @Alfven Ato
+TORI-12 emblem_jace_telepath_unbound @Jaime Jones
+TORI-13 emblem_liliana_defiant_necromancer @Karla Ortiz
+TORI-14 emblem_chandra_roaring_flame @Eric Deschamps
+TOTJ-1 copy @Henry Peters
 TRIX-6 blessing @Yeong-Hao Han
+TSOI-18 emblem_arlinn_embraced_by_the_moon @Winona Nelson
+TSTX-8 emblem_lukka_wayward_bonder @Kieran Yanner

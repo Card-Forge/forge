@@ -1,0 +1,6 @@
+Name:Adept Watershaper
+ManaCost:2 W
+Types:Creature Merfolk Cleric
+PT:3/4
+S:Mode$ Continuous | Affected$ Creature.Other+tapped+YouCtrl | AddKeyword$ Indestructible | Description$ Other tapped creatures you control have indestructible.
+Oracle:Other tapped creatures you control have indestructible.

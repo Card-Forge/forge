@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Dr Doom
+Title=Dr Doom
+Icon=Dr Doom.jpg
+Difficulty=Medium
+Description=Rise_of_the_Eldrazi/National_Qualifier_2010_-_Washington_-_USA/Dwayne_St._Arnauld_-_Blightning_(Standard,_#1773).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Goblin Guide
+4 Hell's Thunder
+1 Kargan Dragonlord
+4 Kiln Fiend
+4 Plated Geopede
+4 Burst Lightning
+4 Lightning Bolt
+4 Searing Blaze
+3 Staggershock
+4 Blightning
+4 Arid Mesa
+4 Dragonskull Summit
+4 Lavaclaw Reaches
+7 Mountain
+4 Scalding Tarn
+1 Swamp
+[Sideboard]
+2 Consuming Vapors
+4 Deathmark
+2 Doom Blade
+3 Manabarbs
+1 Quenchable Fire
+2 Thought Hemorrhage
+1 Unstable Footing

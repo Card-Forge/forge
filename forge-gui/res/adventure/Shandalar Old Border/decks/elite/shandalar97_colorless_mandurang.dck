@@ -1,0 +1,24 @@
+[metadata]
+Name=Mandurang of Shandalar
+[Main]
+2 Dancing Scimitar|ARN
+4 Flying Men|ARN
+4 Ornithopter|ATQ
+3 Phantom Monster|LEA
+4 Will-o'-the-Wisp|LEA
+4 Zephyr Falcon|LEG
+4 Blood Lust|LEG
+4 Giant Strength|LEG
+1 Mox Jet|LEA
+1 Mox Ruby|LEA
+1 Mox Sapphire|LEA
+4 Immolation|LEG
+4 Unholy Strength|LEA
+4 Unstable Mutation|ARN
+4 Badlands|LEA
+4 City of Brass|ARN
+4 Underground Sea|LEA
+4 Volcanic Island|LEB
+
+[StartInBattle_Reference]
+1 City of Brass|ARN

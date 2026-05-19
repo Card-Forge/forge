@@ -1,6 +1,6 @@
 Name:Sighted-Caste Sorcerer
 ManaCost:1 W
-Types:Creature Human Wizard
+Types:Creature Human Wizard Sorcerer
 PT:1/1
 K:Exalted
 A:AB$ Pump | Cost$ U | Defined$ Self | KW$ Shroud | SpellDescription$ CARDNAME gains shroud until end of turn.

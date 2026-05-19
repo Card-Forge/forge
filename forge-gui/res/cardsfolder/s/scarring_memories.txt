@@ -1,0 +1,8 @@
+Name:Scarring Memories
+ManaCost:3 B
+Types:Sorcery Lesson
+S:Mode$ CastWithFlash | ValidCard$ Card.Self | ValidSA$ Spell | IsPresent$ Creature.YouCtrl+attacking+Legendary | EffectZone$ All | Caster$ You | Description$ You may cast this spell as though it had flash if you control an attacking legendary creature.
+A:SP$ Sacrifice | ValidTgts$ Opponent | SacValid$ Creature | SubAbility$ DBDiscard | SpellDescription$ Target opponent sacrifices a creature of their choice, discards a card, and loses 3 life.
+SVar:DBDiscard:DB$ Discard | Defined$ Targeted | NumCards$ 1 | Mode$ TgtChoose | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Targeted | LifeAmount$ 3
+Oracle:You may cast this spell as though it had flash if you control an attacking legendary creature.\nTarget opponent sacrifices a creature of their choice, discards a card, and loses 3 life.

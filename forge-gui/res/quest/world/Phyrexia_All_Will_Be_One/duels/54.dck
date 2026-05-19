@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=R2-D2
+Title=R2-D2
+Icon=R2-D2.jpg
+Difficulty=Hard
+Description=./Modern/Phyrexia_All_Will_Be_One/BitterBloom_-_Mill_(Modern,_#1617674).dck
+Deck Type=constructed
+
+[Main]
+4 Hedron Crab
+4 Ruin Crab
+4 Archive Trap
+3 Surgical Extraction
+2 Visions of Beyond
+1 Crypt Incursion
+1 Murderous Cut
+4 Fatal Push
+4 Drown in the Loch
+1 Baleful Mastery
+4 Fractured Sanity
+4 Tasha's Hideous Laughter
+2 Jace, the Perfected Mind
+1 Oboro, Palace in the Clouds
+1 Mikokoro, Center of the Sea
+1 Shelldock Isle
+1 Scalding Tarn
+1 Darkslick Shores
+2 Watery Grave
+4 Polluted Delta
+3 Snow-Covered Island
+1 Snow-Covered Swamp
+4 Field of Ruin
+1 Island
+1 Swamp
+1 Otawara, Soaring City
+[Sideboard]
+2 Ensnaring Bridge
+3 Extirpate
+2 Ghost Quarter
+1 Echoing Truth
+2 Soul-Guide Lantern
+1 Eliminate
+1 Damnation
+1 Emrakul, the Aeons Torn
+1 Go for the Throat
+1 The Stone Brain

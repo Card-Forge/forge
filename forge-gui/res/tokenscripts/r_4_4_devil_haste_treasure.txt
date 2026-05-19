@@ -5,5 +5,5 @@ Types:Creature Devil
 PT:4/4
 K:Haste
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature dies, create a Treasure token.
-SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ You | TokenAmount$ 1
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ You
 Oracle:When this creature dies, create a Treasure token.

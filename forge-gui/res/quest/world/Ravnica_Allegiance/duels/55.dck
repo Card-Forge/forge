@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Kane
+Title=Kane
+Icon=Kane.jpg
+Difficulty=Very Hard
+Description=./Modern/Ravnica_Allegiance/Gabriel_Nicholas_-_Humans_(Modern,_#801866).dck
+Deck Type=constructed
+
+[Main]
+4 Champion of the Parish
+1 Deputy of Detention
+3 Kitesail Freebooter
+4 Mantis Rider
+4 Meddling Mage
+4 Noble Hierarch
+4 Phantasmal Image
+4 Reflector Mage
+4 Thalia's Lieutenant
+4 Thalia, Guardian of Thraben
+1 Thalia, Heretic Cathar
+4 Aether Vial
+1 Island
+1 Plains
+4 Ancient Ziggurat
+4 Cavern of Souls
+4 Horizon Canopy
+1 Seachrome Coast
+4 Unclaimed Territory
+[Sideboard]
+2 Damping Sphere
+3 Auriok Champion
+2 Deputy of Detention
+2 Militia Bugler
+2 Dismember
+2 Ravenous Trap
+1 Anafenza, the Foremost
+1 Thalia, Heretic Cathar

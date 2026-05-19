@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Momir
+Title=Momir
+Icon=Momir.jpg
+Difficulty=Medium
+Description=./Standard/Phyrexia_All_Will_Be_One/A14Torres_-_Rakdos_Midrange_(Standard,_#1581119).dck
+Deck Type=constructed
+
+[Main]
+4 Archfiend of the Dross
+4 Fable of the Mirror-Breaker
+4 Bloodtithe Harvester
+2 Tenacious Underdog
+3 Sheoldred, the Apocalypse
+1 Knight of Dusk's Shadow
+4 Phyrexian Fleshgorger
+1 Reckoner Bankbuster
+2 Sheoldred's Edict
+2 Go for the Throat
+1 Cut Down
+1 Bloodline Culling
+1 Abrade
+2 Duress
+1 Extract the Truth
+1 Phyrexian Arena
+1 Ob Nixilis, the Adversary
+1 Takenuma, Abandoned Mire
+1 Sokenzan, Crucible of Defiance
+4 Blackcleave Cliffs
+4 Sulfurous Springs
+4 Haunted Ridge
+2 Mishra's Foundry
+6 Swamp
+3 Mountain
+[Sideboard]
+2 Cut Down
+2 Bloodline Culling
+2 Unlicensed Hearse
+1 Sheoldred's Edict
+2 Duress
+2 Brotherhood's End
+2 Ob Nixilis, the Adversary
+1 Phyrexian Arena
+1 Reckoner Bankbuster

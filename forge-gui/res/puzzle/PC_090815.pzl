@@ -3,7 +3,7 @@ Name:Perplexing Chimera (GatheringMagic.com) 090815 - Blood Will Run
 URL:http://www.gatheringmagic.com/seanuy-090815-blood-will-run/
 Goal:Win
 Turns:1
-Difficulty:Hard
+Difficulty:Rare
 Description: Win this turn.
 [state]
 ActivePlayer=human

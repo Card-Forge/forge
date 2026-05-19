@@ -32,7 +32,7 @@ Join the **Forge community** on [Discord](https://discord.gg/HcPJNyD66a)!
 4. **Java Requirement:** Ensure you have **Java 17 or later** installed.
 
 ### 📱 Android Installation
-- _(Note: **Android 11** is the minimum requirements with at least **6GB RAM** to run smoothly. You need to enable **"Install unknown apps"** for Forge to initialize and update itself)_
+- _(Note: **Android 11** is the minimum requirement with at least **6GB RAM** to run smoothly. You need to enable **"Install unknown apps"** for Forge to initialize and update itself)_
 - Download the **APK** from the [Snapshot Build](https://github.com/Card-Forge/forge/releases/tag/daily-snapshots). On the first launch, Forge will automatically download all necessary assets.
 
 ---
@@ -61,7 +61,7 @@ Test your skills against AI in multiple formats:
 - **Commander**
 - **Cube**
 
-For comprehensive gameplay instructions, visit our [Gameplay Guide](https://github.com/Card-Forge/forge/wiki/Gameplay-Guide).
+For comprehensive gameplay instructions, visit our [User Guide](https://github.com/Card-Forge/forge/wiki/User-Guide).
 
 <img width="1282" height="752" alt="Sealed" src="https://github.com/user-attachments/assets/ae603dbd-4421-4753-a333-87cb0a28d772" />
 

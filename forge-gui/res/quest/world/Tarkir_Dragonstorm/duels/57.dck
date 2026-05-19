@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Hermione Granger
+Title=Hermione Granger
+Icon=Hermione Granger.jpg
+Difficulty=Hard
+Description=./Modern/Tarkir_Dragonstorm/Edoz13_-_Domain_Aggro_(Modern,_#2454874).dck
+Deck Type=constructed
+
+[Main]
+3 Orcish Bowmasters
+4 Phlage, Titan of Fire's Fury
+4 Territorial Kavu
+4 Scion of Draco
+4 Ragavan, Nimble Pilferer
+4 Spectral Denial
+4 Lightning Bolt
+4 Tribal Flames
+4 Leyline Binding
+4 Leyline of the Guildpact
+1 Thundering Falls
+1 Lush Portico
+1 Arena of Glory
+4 Flooded Strand
+4 Wooded Foothills
+1 Plains
+1 Forest
+1 Blood Crypt
+1 Sacred Foundry
+1 Steam Vents
+1 Temple Garden
+4 Arid Mesa
+1 Xander's Lounge
+[Sideboard]
+2 Wrath of the Skies
+3 Pyroclasm
+1 Rest in Peace
+2 Wear // Tear
+2 Stubborn Denial
+1 Stony Silence
+4 Obsidian Charmaw

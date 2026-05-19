@@ -26,6 +26,8 @@ Mostly old-style interface with new age loading screen. Initial card scripting i
 
 Supports over 10,000 cards. We start using a reconstructed UI that allows for better theming. And makes things feel less like an "Application" and more like a "Game"
 
+## 2013-10 - ver 1.5.1 is the first with Commander
+
 ## 2014-05 - Android app is published via Maven
 
 ## 2015-04 - Network play is rudimentary but available
@@ -35,8 +37,6 @@ Supports over 10,000 cards. We start using a reconstructed UI that allows for be
 ## 2021-12 - Adventure mode functional
 
 ## 2024-07 - _All non-Un set cards have been added to Forge_
-
-## 2024-08 - Bloomburrow release
 
 ## 2024-09 - Duskmouth Release 1.6.65 (**Last release that supports Java 1.8**)
 
@@ -68,8 +68,6 @@ For any of you curious about what the first attempt at making a Shandalar-like A
 Interestingly, the above-mentioned thread refers to the proposed game mode as "Adventure Mode" a few times (closer to the end of the thread), something that we actually currently have and actively develop 👍
 The interesting aspect of that development was the day/night cycle, I don't know why but I remember I thought that it looked quite atmospheric back in the day
 
-
-
 ## Abe Sergeant writes about Forge
 
 2009-09-11 - Here is the article on star city. 
@@ -80,15 +78,12 @@ And here is it in archive.org in case that gets taken down
 
 https://web.archive.org/web/20210707215155/https://articles.starcitygames.com/articles/the-kitchen-table-302-an-mtg-forge-quest/
 
-MTG Forge comes with a Quest Mode. In Quest Mode, you begin with a random selection of cards, and have to build a 60-card deck. Then you play against decks by various computer opponents, and as you win, you get more cards, and the difficulty of your opponents increases.
-
-Quest is the most fun I’ve had playing Magic in a year.
-
-What I am going to do is show you a quick 10-game win in quest. You can play to 10, 20, 30, or 40 wins, but I’m just going to show you a 10 win in quest. I will show you where the game has bugs too, so you can see what I am talking about when I say WIP. I’m not holding anything back.
+> MTG Forge comes with a Quest Mode. In Quest Mode, you begin with a random selection of cards, and have to build a 60-card deck. Then you play against decks by various computer opponents, and as you win, you get more cards, and the difficulty of your opponents increases.<br />
+> Quest is the most fun I’ve had playing Magic in a year.
 
 # Major disruptions
 
-One interesting thing about Forge is the way it grew. Much of the first few years was solely on the back of an Amateur software engineer called "MTG Rares" soon enough "Dennis Bergkamp" came along and was doing a bunch more development. New Software Engineers joined the ranks off and on. From there on people would jump in, help for a handful of years and get too busy with life, or stop really playing magic or whatever. A handful of us have been around the longhaul, but not too many. 
+One interesting thing about Forge is the way it grew. Much of the first few years was solely on the back of an Amateur software engineer called "MTG Rares". Soon enough "Dennis Bergkamp" came along and was doing a bunch more development. New Software Engineers joined the ranks off and on. From there on people would jump in, help for a handful of years and get too busy with life, or stop really playing magic or whatever. A handful of us have been around the longhaul, but not too many. 
 
 ## Sourceforge SVN (2007-2008)
  Original location. Moved when the name changed.
@@ -103,13 +98,11 @@ One interesting thing about Forge is the way it grew. Much of the first few year
 ## Github (2021-Present)
  Conversion from Git to Git was a lot easier.
 
-
 ## Jendave's modularization (2011)
 The initial modularization attempt pulled everything from living under forge-gui/ module and built out some of the Maven structure. 
 
 ## Maxmtg's modularization (2013?)
 Took this the next step further massively reorganizing the codebase. It caused major issues and took a few months to get resolved.
 
-## Hanmac's modularization (2017?
-This was a smaller modularization mostly within certains areas that ultimately was positive, but led to some headaches during the process. 
-
+## Hanmac's modularization (2017?)
+This was a smaller modularization mostly within certains areas that ultimately was positive, but led to some headaches during the process.

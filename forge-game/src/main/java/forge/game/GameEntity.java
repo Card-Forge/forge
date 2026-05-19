@@ -144,7 +144,7 @@ public abstract class GameEntity implements GameObject, IIdentifiable {
 
     public final CardCollectionView getEnchantedBy() {
         // enchanted means attached by Aura
-        return CardLists.filter(getAttachedCards(), CardPredicates.AURA);
+        return CardLists.filter(getAttachedCards(), Card::isAura);
     }
 
     // doesn't include phased out cards
@@ -176,7 +176,7 @@ public abstract class GameEntity implements GameObject, IIdentifiable {
 
     public final boolean isEnchanted() {
         // enchanted means attached by Aura
-        return getAttachedCards().anyMatch(CardPredicates.AURA);
+        return getAttachedCards().anyMatch(Card::isAura);
     }
 
     public final boolean hasCardAttachment(Card c) {

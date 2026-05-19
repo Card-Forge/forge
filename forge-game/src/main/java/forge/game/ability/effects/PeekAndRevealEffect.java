@@ -16,10 +16,6 @@ import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.Localizer;
 
-/**
- * PeekAndReveal is a simplified way of handling something that could be done with Dig and NoMove$.
- * Kinship cards use this, and many other cards could have simpler scripts by just using PeekAndReveal.
- */
 public class PeekAndRevealEffect extends SpellAbilityEffect {
 
     @Override

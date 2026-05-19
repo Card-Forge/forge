@@ -76,6 +76,7 @@ public class DialogData implements Serializable {
         public QuestFlag setMapFlag;      //Set map flag.
 
         public RewardData[] grantRewards = new RewardData[0];   //launch a RewardScene with the provided data.
+        public RewardData[] grantRewardsChoice = new RewardData[0];   //launch a RewardScene choice with the provided data.
         public String issueQuest; //Add quest with this ID to the player's questlog.
 
         public int addMapReputation = 0;  //Gives the player X reputation points in this POI. Negative to take.
@@ -108,6 +109,7 @@ public class DialogData implements Serializable {
                 setMapFlag.val = other.setMapFlag.val;
             }
             grantRewards = other.grantRewards.clone();
+            grantRewardsChoice = other.grantRewardsChoice.clone();
             issueQuest = other.issueQuest;
             addMapReputation = other.addMapReputation;
             POIReference = other.POIReference;

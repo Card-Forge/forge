@@ -1,7 +1,7 @@
 Name:I Know All, I See All
 ManaCost:no cost
 Types:Ongoing Scheme
-S:Mode$ Continuous | EffectZone$ Command | Affected$ Permanent.YouCtrl | AddHiddenKeyword$ CARDNAME untaps during each other player's untap step. | Description$ Untap all permanents you control during each other player's untap step.
+S:Mode$ UntapOtherPlayer | ValidCard$ Permanent.YouCtrl | EffectZone$ Command | Description$ Untap all permanents you control during each other player's untap step.
 T:Mode$ Phase | Phase$ End of Turn | Execute$ Abandon | TriggerZones$ Command | CheckSVar$ X | SVarCompare$ GE3 | TriggerDescription$ At the beginning of each end step, if three or more cards were put into your graveyard this turn from anywhere, abandon this scheme.
 SVar:Abandon:DB$ Abandon
 SVar:X:Count$ThisTurnEntered_Graveyard_Card.YouOwn

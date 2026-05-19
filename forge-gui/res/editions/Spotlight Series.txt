@@ -13,3 +13,7 @@ ScryfallCode=PSPL
 5 R Get Lost @Dominik Mayer
 6 R Spectacular Spider-Man @Julian Totino Tedesco
 7 R Day of Black Sun @Dom Lay
+8 R Vendilion Clique @Jason A. Engle
+9 M Super Shredder @Chris Seaman
+10 M Liliana Vess @Justyna Dura
+11 R Riddles in the Dark @Tomas Duchek

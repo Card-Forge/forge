@@ -1,6 +1,6 @@
 [metadata]
 Name=Iron Man 2
-[main]
+[Main]
 12 Mountain
 4 Great Furnace
 4 Darksteel Citadel
@@ -40,4 +40,4 @@ Name=Iron Man 2
 1 Concussive Bolt
 1 Kuldotha Phoenix
 1 Feedback Bolt
-[sideboard]
+[Sideboard]

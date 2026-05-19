@@ -141,7 +141,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         }
 
         if (hasParam("ChangeColorWordsTo") || hasParam("GainTextOf") || hasParam("AddNames") ||
-                hasParam("SetName")) {
+                hasParam("SetName") || hasParam("Incorporate") || hasParam("ManaCost")) {
             layers.add(StaticAbilityLayer.TEXT);
         }
 
@@ -158,7 +158,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             layers.add(StaticAbilityLayer.COLOR);
         }
 
-        if (hasParam("RemoveAllAbilities") || hasParam("GainsAbilitiesOf")
+        if (hasParam("RemoveAllAbilities") || hasParam("RemoveNonManaAbilities") || hasParam("GainsAbilitiesOf")
                 || hasParam("GainsAbilitiesOfDefined") || hasParam("GainsTriggerAbsOf")
                 || hasParam("AddKeyword") || hasParam("AddAbility")
                 || hasParam("AddTrigger") || hasParam("AddReplacementEffect")
@@ -253,7 +253,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             setActiveZone(EnumSet.copyOf(ZoneType.listValueOf(getParam("EffectZone"))));
         }
         if (hasParam("Mode")) {
-            setMode(EnumSet.copyOf(StaticAbilityMode.listValueOf(getParam("Mode"))));
+            setMode(StaticAbilityMode.setValueOf(getParam("Mode")));
         }
         this.layers = this.generateLayer();
     }
@@ -297,7 +297,9 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
      *         conditions are fulfilled.
      */
     private boolean shouldApplyContinuousAbility(final StaticAbilityLayer layer, final boolean previousRun) {
-        return layers.contains(layer) && checkConditions(StaticAbilityMode.Continuous) && (previousRun || getHostCard().getStaticAbilities().contains(this));
+        return layers.contains(layer) && checkConditions(StaticAbilityMode.Continuous) && ( previousRun ||
+                getHostCard().getStaticAbilities().contains(this) ||
+                getHostCard().getHiddenStaticAbilities().contains(this));
     }
 
     public final Cost getAttackCost(final Card attacker, final GameEntity target, final List<Card> attackersWithOptionalCost) {
@@ -448,20 +450,6 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             return isRelevantStage;
         }
 
-        if (hasParam("Presence")) {
-            if (hostCard.getCastFrom() == null || hostCard.getCastSA() == null)
-                return false;
-
-            final String type = getParam("Presence");
-
-            int revealed = AbilityUtils.calculateAmount(hostCard, "Revealed$Valid " + type, hostCard.getCastSA());
-            int ctrl = AbilityUtils.calculateAmount(hostCard, "Count$LastStateBattlefield " + type + ".YouCtrl", hostCard.getCastSA());
-
-            if (revealed + ctrl == 0) {
-                return false;
-            }
-        }
-
         if (hasParam("ClassLevel")) {
             final int level = this.hostCard.getClassLevel();
             final int levelMin = Integer.parseInt(getParam("ClassLevel"));
@@ -583,6 +571,13 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         .result();
     }
 
+    public long getTimestamp() {
+        if (hasParam("Timestamp")) {
+            return Long.valueOf(getParam("Timestamp"));
+        }
+        return getHostCard().getLayerTimestamp();
+    }
+
     @Override
     public void setHostCard(Card host) {
         super.setHostCard(host);
@@ -622,8 +617,4 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
         return clone;
     }
 
-    @Override
-    public List<Object> getTriggerRemembered() {
-        return ImmutableList.of();
-    }
 }

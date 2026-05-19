@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Zeus
+Title=Zeus
+Icon=Zeus.jpg
+Difficulty=Easy
+Description=./Standard/Aetherdrift/Junki_Yamada_-_Selesnya_Beanstalk_(Standard,_#2367512).dck
+Deck Type=constructed
+
+[Main]
+4 Overlord of the Hauntwoods
+3 Overlord of the Mistmoors
+3 Beza, the Bounding Spring
+4 Carrot Cake
+2 Ride's End
+2 Elspeth's Smite
+3 Get Lost
+2 Split Up
+1 Season of the Burrow
+4 Sunfall
+4 Up the Beanstalk
+3 Caretaker's Talent
+6 Plains
+4 Hushwood Verge
+4 Fountainport
+2 Lush Portico
+1 Forest
+4 Brushland
+3 Razorverge Thicket
+1 Sunken Citadel
+[Sideboard]
+2 Authority of the Consuls
+2 Tear Asunder
+1 Nissa, Ascended Animist
+2 Elspeth's Smite
+2 Tranquil Frillback
+1 Doppelgang
+2 Rest in Peace
+1 Split Up
+2 Obstinate Baloth

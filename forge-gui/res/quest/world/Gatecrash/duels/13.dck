@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Han Solo
+Title=Han Solo
+Icon=Han Solo.jpg
+Difficulty=Medium
+Description=Gatecrash/SCG_Invitational_Qualifier_Decatur/Steven_Roberts_-_Prime_Speaker_Bant_(Standard,_#49362).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Angel of Serenity
+4 Loxodon Smiter
+2 Prime Speaker Zegana
+4 Restoration Angel
+1 Sigarda, Host of Herons
+4 Thragtusk
+4 Azorius Charm
+3 Selesnya Charm
+3 Sphinx's Revelation
+4 Farseek
+2 Supreme Verdict
+2 Detention Sphere
+4 Breeding Pool
+2 Cavern of Souls
+1 Forest
+1 Gavony Township
+4 Glacial Fortress
+3 Hallowed Fountain
+3 Hinterland Harbor
+3 Sunpetal Grove
+4 Temple Garden
+[Sideboard]
+2 Dissipate
+3 Feeling of Dread
+2 Garruk, Primal Hunter
+2 Jace, Memory Adept
+2 Memory's Journey
+1 Negate
+1 Psychic Spiral

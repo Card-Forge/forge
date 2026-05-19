@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Cave Troll
+Title=Cave Troll
+Icon=Cave Troll.jpg
+Difficulty=Hard
+Description=./Modern/Edge_of_Eternities/MARIO_VIEIRA_-_Mono_Blue_Tron_(Modern,_#2679157).dck
+Deck Type=constructed
+
+[Main]
+4 Sowing Mycospawn
+4 Devourer of Destiny
+2 Sire of Seven Deaths
+1 Ulamog, the Ceaseless Hunger
+2 Vexing Bauble
+4 Expedition Map
+4 Talisman of Resilience
+1 Palantír of Orthanc
+4 Kozilek's Command
+3 Dismember
+1 Return of the Wildspeaker
+1 All Is Dust
+4 Karn, the Great Creator
+4 Ugin, Eye of the Storms
+1 Abstergo Entertainment
+2 Wastes
+2 Forest
+4 Ugin's Labyrinth
+4 Urza's Mine
+4 Urza's Tower
+4 Urza's Power Plant
+[Sideboard]
+1 Walking Ballista
+1 Tormod's Crypt
+1 Engineered Explosives
+3 Haywire Mite
+2 Disruptor Flute
+1 The Stone Brain
+2 Torpor Orb
+1 Liquimetal Coating
+1 Oblivion Stone
+1 Ensnaring Bridge
+1 Extinguisher Battleship

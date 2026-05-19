@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Dogbert
+Title=Dogbert
+Icon=Dogbert.jpg
+Difficulty=Easy
+Description=./Standard/Edge_of_Eternities/Jonah_Huey_-_Simic_Aggro_(Standard,_#2597932).dck
+Deck Type=constructed
+
+[Main]
+4 Frenzied Baloth
+4 Hemosymbic Mite
+4 Keen-Eyed Curator
+4 Pawpatch Recruit
+2 Spyglass Siren
+3 Surrak, Elusive Hunter
+2 Giant Growth
+4 Into the Flood Maw
+1 Overprotect
+2 Royal Treatment
+2 Tifa's Limit Break
+2 Hunter's Talent
+4 Innkeeper's Talent
+4 Botanical Sanctum
+4 Breeding Pool
+8 Forest
+2 Restless Vinestalk
+1 Soulstone Sanctuary
+3 Willowrush Verge
+[Sideboard]
+3 Annul
+2 Bounce Off
+2 Enduring Curiosity
+1 Hard-Hitting Question
+2 Pick Your Poison
+2 Repulsive Mutation
+2 Sentinel of the Nameless City
+1 Snakeskin Veil

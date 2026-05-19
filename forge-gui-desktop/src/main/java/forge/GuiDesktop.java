@@ -16,8 +16,8 @@ import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
+import javax.sound.sampled.AudioSystem;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.SwingUtilities;
@@ -54,6 +54,7 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
 import forge.util.BuildInfo;
+import forge.util.FSerializableFunction;
 import forge.util.FileUtil;
 import forge.util.ImageFetcher;
 import forge.util.OperatingSystem;
@@ -137,11 +138,6 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public ISkinImage getCardArt(final PaperCard card) {
-        return null; //TODO
-    }
-
-    @Override
     public ISkinImage getCardArt(final PaperCard card, final boolean backFace) {
         return null; //TODO
     }
@@ -182,7 +178,7 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
-    public <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices, final Collection<T> selected, final Function<T, String> display) {
+    public <T> List<T> getChoices(final String message, final int min, final int max, final Collection<T> choices, final Collection<T> selected, final FSerializableFunction<T, String> display) {
         /*if ((choices != null && !choices.isEmpty() && choices.iterator().next() instanceof GameObject) || selected instanceof GameObject) {
             System.err.println("Warning: GameObject passed to GUI! Printing stack trace.");
             Thread.dumpStack();
@@ -285,6 +281,17 @@ public class GuiDesktop implements IGuiBase {
     }
 
     @Override
+    public boolean isSupportedAudioFormat(File file) {
+        try {
+            return AudioSystem.getAudioFileFormat(file) != null;
+        }
+        catch (Exception e) {
+            System.err.printf("Unable to open audio resource '%s': %s\n", file.getPath(), e.getMessage());
+            return false;
+        }
+    }
+
+    @Override
     public IAudioClip createAudioClip(final String filename) {
         return AudioClip.fileExists(filename) ? new AudioClip(filename) : null;
     }
@@ -355,6 +362,14 @@ public class GuiDesktop implements IGuiBase {
         return (float) Math.min(scaleX, scaleY);
     }
     static float screenScale = initializeScreenScale();
+
+    @Override
+    public boolean hasNetGame() {
+        if (Singletons.getView() == null || Singletons.getView().getNavigationBar() == null) {
+            return false;
+        }
+        return Singletons.getView().getNavigationBar().hasNetGame();
+    }
 
     @Override
     public float getScreenScale() {

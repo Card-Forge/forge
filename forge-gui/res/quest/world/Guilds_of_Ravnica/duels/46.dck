@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=WereHyena
+Title=WereHyena
+Icon=WereHyena.jpg
+Difficulty=Medium
+Description=./Standard/Guilds_of_Ravnica/Adam_Kerman_-_Selesnya_Tokens_(Standard,_#778193).dck
+Deck Type=constructed
+
+[Main]
+2 District Guide
+4 Emmara, Soul of the Accord
+2 Shalai, Voice of Plenty
+4 Thorn Lieutenant
+2 Trostani Discordant
+3 Venerated Loxodon
+4 March of the Multitudes
+4 Flower // Flourish
+3 Saproling Migration
+4 Conclave Tribunal
+1 Dawn of Hope
+3 History of Benalia
+3 Legion's Landing
+1 Arch of Orazca
+1 Field of Ruin
+4 Forest
+6 Plains
+1 Selesnya Guildgate
+4 Sunpetal Grove
+4 Temple Garden
+[Sideboard]
+2 Dawn of Hope
+1 Huatli, Radiant Champion
+3 Knight of Autumn
+2 Lyra Dawnbringer
+2 Make a Stand
+2 Settle the Wreckage
+2 Tendershoot Dryad
+1 Vivien Reid

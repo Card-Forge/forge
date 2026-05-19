@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Boba Fett
+Title=Boba Fett
+Icon=Boba Fett.jpg
+Difficulty=Hard
+Description=./Modern/Zendikar_Rising/Andrew_Fiedler_-_Mono-White_Death_and_Taxes_(Modern,_#1042858).dck
+Deck Type=constructed
+
+[Main]
+2 Restoration Angel
+4 Thalia, Guardian of Thraben
+4 Stoneforge Mystic
+4 Skyclave Apparition
+4 Flickerwisp
+4 Giver of Runes
+4 Leonin Arbiter
+1 Maul of the Skyclaves
+1 Batterskull
+1 Sword of Fire and Ice
+4 Aether Vial
+4 Path to Exile
+2 Horizon Canopy
+2 Silent Clearing
+2 Sunbaked Canyon
+4 Field of Ruin
+4 Ghost Quarter
+9 Snow-Covered Plains
+[Sideboard]
+1 Celestial Purge
+2 Archon of Emeria
+2 Auriok Champion
+2 Grafdigger's Cage
+2 Rest in Peace
+2 Phyrexian Revoker
+2 Burrenton Forge-Tender
+2 Winds of Abandon

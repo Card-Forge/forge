@@ -98,7 +98,7 @@ public class InnScene extends UIScene {
     public void enter() {
         super.enter();
         refreshStatus();
-        GameHUD.getInstance().switchAudio();
+        GameHUD.getInstance().updateBGM();
     }
 
     private void refreshStatus(){

@@ -3,7 +3,9 @@ ManaCost:2 W W
 Types:Legendary Planeswalker Bahamut
 Loyalty:3
 S:Mode$ Continuous | Affected$ Card.Self | IsPresent$ Card.Self+counters_GE7_LOYALTY | AddKeyword$ Flying & Indestructible | AddType$ Creature & Dragon & God | SetPower$ 7 | SetToughness$ 7 | RemoveCardTypes$ True | CharacteristicDefining$ True | Description$ As long as CARDNAME has seven or more loyalty counters on him, he's a 7/7 Dragon God creature with flying and indestructible.
-A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature.withoutFirst Strike+withoutDouble Strike+withoutVigilance | TgtPrompt$ Target creature without first strike, double strike, or vigilance | KW$ HIDDEN CARDNAME can't attack or block. | IsCurse$ True | Duration$ UntilYourNextTurn | AILogic$ DetainNonLand | SpellDescription$ Target creature without first strike, double strike, or vigilance can't attack or block until your next turn.
+A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature.withoutFirst Strike+withoutDouble Strike+withoutVigilance | TgtPrompt$ Target creature without first strike, double strike, or vigilance | RememberObjects$ Targeted | StaticAbilities$ DBCantAttack,DBCantBlockBy | ForgetOnMoved$ Battlefield | IsCurse$ True | Duration$ UntilYourNextTurn | SpellDescription$ Target creature without first strike, double strike, or vigilance can't attack or block until your next turn.
+SVar:DBCantAttack:Mode$ CantAttack | ValidCard$ Card.IsRemembered | Description$ Remembered can't attack or block.
+SVar:DBCantBlockBy:Mode$ CantBlockBy | ValidBlocker$ Card.IsRemembered | Secondary$ True | Description$ Remembered can't attack or block.
 A:AB$ ChangeZone | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Origin$ Library | OriginAlternative$ Graveyard | Destination$ Hand | ChangeType$ Card.YouOwn+namedMonk of the Open Hand | ChangeNum$ 1 | Optional$ True | ShuffleNonMandatory$ True | SpellDescription$ Search your library and/or graveyard for a card named Monk of the Open Hand, reveal it, and put it into your hand. If you search your library this way, shuffle.
 DeckHas:Type$Dragon|God
 DeckHints:Name$Monk of the Open Hand

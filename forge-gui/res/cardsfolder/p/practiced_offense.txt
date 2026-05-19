@@ -1,0 +1,7 @@
+Name:Practiced Offense
+ManaCost:2 W
+Types:Sorcery
+A:SP$ PutCounterAll | ValidTgts$ Player | ValidCards$ Creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on each creature target player controls. Target creature gains your choice of double strike or lifelink until end of turn.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | KWChoice$ Double Strike,Lifelink
+K:Flashback:1 W
+Oracle:Put a +1/+1 counter on each creature target player controls. Target creature gains your choice of double strike or lifelink until end of turn.\nFlashback {1}{W} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

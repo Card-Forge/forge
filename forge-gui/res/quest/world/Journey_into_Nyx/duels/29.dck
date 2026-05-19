@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Trostani
+Title=Trostani
+Icon=Trostani.jpg
+Difficulty=Easy
+Description=Journey_into_Nyx/SCG_Arvada/Paul_Gallagher_-_Selesnya_Aggro_(Standard,_#79834).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Boon Satyr
+4 Elvish Mystic
+4 Experiment One
+3 Fleecemane Lion
+3 Loxodon Smiter
+2 Polukranos, World Eater
+4 Voice of Resurgence
+4 Advent of the Wurm
+2 Gods Willing
+3 Selesnya Charm
+1 Call of the Conclave
+3 Banishing Light
+2 Ajani, Caller of the Pride
+6 Forest
+4 Mana Confluence
+4 Plains
+4 Temple Garden
+4 Temple of Plenty
+[Sideboard]
+2 Aegis of the Gods
+2 Celestial Flare
+1 Pithing Needle
+3 Setessan Tactics
+2 Sundering Growth
+3 Unflinching Courage

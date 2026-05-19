@@ -1,4 +1,5 @@
 Name:Flying Octobot
+Variant:UniversesWithin:FlavorName:Vexed Bots
 ManaCost:1 U
 Types:Artifact Creature Robot Villain
 PT:1/1

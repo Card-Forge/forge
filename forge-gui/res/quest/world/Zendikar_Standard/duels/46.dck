@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Aigamuxa
+Title=Aigamuxa
+Icon=Aigamuxa.jpg
+Difficulty=Easy
+Description=Zendikar/StarCityGames.com_$5,000_Standard_Open_11-10/Ted_Renner_-_Vampires_(Standard,_#3805).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Bloodghast
+4 Gatekeeper of Malakir
+3 Malakir Bloodwitch
+3 Vampire Hexmage
+4 Vampire Nighthawk
+4 Vampire Nocturnus
+1 Eldrazi Monument
+3 Disfigure
+4 Tendrils of Corruption
+2 Mind Sludge
+4 Sign in Blood
+4 Marsh Flats
+16 Swamp
+4 Verdant Catacombs
+[Sideboard]
+3 Deathmark
+4 Duress
+3 Marsh Casualties

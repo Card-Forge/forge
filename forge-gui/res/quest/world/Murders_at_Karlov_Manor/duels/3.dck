@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=WereHyena
+Title=WereHyena
+Icon=WereHyena.jpg
+Difficulty=Medium
+Description=./Standard/Murders_at_Karlov_Manor/AKane__-_Domain_Ramp_(Standard,_#1988237).dck
+Deck Type=constructed
+
+[Main]
+4 Archangel of Wrath
+3 Atraxa, Grand Unifier
+1 Imodane's Recruiter
+4 Topiary Stomper
+4 Herd Migration
+2 Ill-Timed Explosion
+4 Sunfall
+4 Leyline Binding
+2 Spelunking
+4 Up the Beanstalk
+2 Invasion of Zendikar
+1 Boseiju, Who Endures
+1 Mountain
+1 Island
+4 Jetmir's Garden
+3 Forest
+1 Raffine's Tower
+3 Spara's Headquarters
+4 Cavern of Souls
+4 Ziatora's Proving Ground
+3 Plains
+1 Swamp
+[Sideboard]
+3 Negate
+3 Kutzil's Flanker
+3 Long Goodbye
+2 Elesh Norn, Mother of Machines
+1 Ill-Timed Explosion
+2 Temporary Lockdown
+1 Turn the Earth

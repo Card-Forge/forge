@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Pointy Haired Boss
+Title=Pointy Haired Boss
+Icon=Pointy Haired Boss.jpg
+Difficulty=Hard
+Description=./Modern/Phyrexia_All_Will_Be_One/Thomas_Edwards_-_Temur_Midrange_(Modern,_#1578585).dck
+Deck Type=constructed
+
+[Main]
+3 Archon of Cruelty
+4 Fable of the Mirror-Breaker
+1 Atraxa, Grand Unifier
+4 Lightning Bolt
+2 Prismari Command
+3 Spell Pierce
+3 Hard Evidence
+4 Indomitable Creativity
+3 Persist
+2 Thoughtseize
+1 Transmogrify
+3 Bitter Reunion
+4 Wrenn and Six
+3 Arid Mesa
+1 Blood Crypt
+1 Boseiju, Who Endures
+4 Dwarven Mine
+1 Ketria Triome
+1 Mountain
+4 Scalding Tarn
+2 Steam Vents
+1 Stomping Ground
+4 Wooded Foothills
+1 Xander's Lounge
+[Sideboard]
+2 Anger of the Gods
+1 Boseiju, Who Endures
+2 Flusterstorm
+2 Force of Vigor
+2 Mystical Dispute
+1 Serra's Emissary
+3 Veil of Summer
+1 Dress Down
+1 Aether Gust

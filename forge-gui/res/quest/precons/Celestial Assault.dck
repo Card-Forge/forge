@@ -1,0 +1,44 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Celestial Assault
+Description=Celestial Assault brings soldiers and angels to war. Blue-white tribal aggression.
+Deck Type=constructed
+Set=ONS
+Image=celestial_assault.jpg
+[main]
+5 Plains|ONS|1
+4 Plains|ONS|2
+4 Plains|ONS|3
+4 Island|ONS|1
+3 Island|ONS|2
+3 Island|ONS|3
+1 Seaside Haven|ONS
+2 Ascending Aven|ONS
+2 Daru Cavalier|ONS
+2 Dive Bomber|ONS
+1 Gustcloak Harrier|ONS
+2 Gustcloak Runner|ONS
+1 Gustcloak Savior|ONS
+1 Gustcloak Sentinel|ONS
+1 Gustcloak Skirmisher|ONS
+2 Ironfist Crusher|ONS
+1 Pearlspear Courier|ONS
+2 Screaming Seahawk|ONS
+1 Akroma's Blessing|ONS
+1 Defensive Maneuvers|ONS
+2 Inspirit|ONS
+2 Mage's Guile|ONS
+1 Meddle|ONS
+1 Oblation|ONS
+2 Piety Charm|ONS
+1 Sunfire Balm|ONS
+2 Unified Strike|ONS
+2 Airborne Aid|ONS
+1 Essence Fracture|ONS
+1 Dispersing Orb|ONS
+2 Sandskin|ONS
+[sideboard]

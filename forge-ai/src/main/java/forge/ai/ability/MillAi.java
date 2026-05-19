@@ -157,7 +157,7 @@ public class MillAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(Player aiPlayer, SpellAbility sa) {
         return targetAI(aiPlayer, sa, true) ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
@@ -208,6 +208,6 @@ public class MillAi extends SpellAbilityAi {
             cardsToDiscard = Math.min(ai.getCardsIn(ZoneType.Library).size() - 5, cardsToDiscard);
         }
 
-        return Math.min(ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger()), cardsToDiscard);
+        return Math.min(ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger()), cardsToDiscard);
     }
 }

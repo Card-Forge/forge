@@ -4,6 +4,6 @@ Types:Enchantment Aura
 K:Enchant:Land
 SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ RFPump | Description$ Enchanted land has "{T}: Target creature gains haste until end of turn."
-SVar:RFPump:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Haste | SpellDescription$ Target creature gains haste until end of turn.
+SVar:RFPump:AB$ Pump | Cost$ T | ValidTgts$ Creature | KW$ Haste | SpellDescription$ Target creature gains haste until end of turn.
 SVar:NonStackingEffect:True
 Oracle:Enchant land\nEnchanted land has "{T}: Target creature gains haste until end of turn."

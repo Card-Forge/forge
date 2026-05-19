@@ -1,0 +1,13 @@
+Name:Dimension X Pizzasaur
+ManaCost:3 B
+Types:Artifact Creature Food Alien Mutant
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPut | TriggerDescription$ When this creature enters, put two +1/+1 counters on target creature. When you do, destroy up to one target creature with mana value less than or equal to the number of counters among permanents you control.
+SVar:TrigPut:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 2 | RememberAmount$ True | SubAbility$ TrigImmediateTrig
+SVar:TrigImmediateTrig:DB$ ImmediateTrigger | Execute$ TrigDestroy | TriggerAmount$ Count$RememberedNumber/DivideEvenlyDown.2 | SubAbility$ DBCleanup | TriggerDescription$ When you do, destroy up to one target creature with mana value less than or equal to the number of counters among permanents you control.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.cmcLEX | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select target creature with mana value less than or equal to the number of counters among permanents you control
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Permanent.YouCtrl$CardCounters.ALL
+A:AB$ GainLife | Cost$ 2 T Sac<1/CARDNAME/this creature> | LifeAmount$ 3 | SubAbility$ DBLoseLife | SpellDescription$ You gain 3 life and each opponent loses 3 life.
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 3
+Oracle:When this creature enters, put two +1/+1 counters on target creature. When you do, destroy up to one target creature with mana value less than or equal to the number of counters among permanents you control.\n{2}, {T}, Sacrifice this creature: You gain 3 life and each opponent loses 3 life.

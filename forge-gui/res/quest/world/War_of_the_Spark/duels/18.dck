@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Wonder Twins
+Title=Wonder Twins
+Icon=Wonder Twins.jpg
+Difficulty=Easy
+Description=./Standard/War_of_the_Spark/Brian_Kobel_-_Gruul_(Standard,_#799951).dck
+Deck Type=constructed
+
+[Main]
+2 Dire Fleet Daredevil
+4 Growth-Chamber Guardian
+4 Gruul Spellbreaker
+2 Legion Warboss
+3 Llanowar Elves
+4 Rekindling Phoenix
+2 Thorn Lieutenant
+3 Lightning Strike
+2 Shock
+1 Lava Coil
+2 Chandra, Fire Artisan
+3 Domri, Anarch of Bolas
+1 Nissa, Who Shakes the World
+2 Sarkhan the Masterless
+1 Ugin, the Ineffable
+5 Forest
+2 Mobilized District
+7 Mountain
+4 Rootbound Crag
+4 Stomping Ground
+2 Timber Gorge
+[Sideboard]
+1 Banefire
+1 Blast Zone
+2 Collision // Colossus
+1 Kraul Harpooner
+3 Lava Coil
+1 Samut, Tyrant Smasher
+2 Siege-Gang Commander
+2 Thrashing Brontodon
+1 Tibalt, Rakish Instigator
+1 Vivien Reid

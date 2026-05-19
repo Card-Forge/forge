@@ -1,0 +1,45 @@
+[duel]
+[metadata]
+Name=Da Vinci
+Title=Da Vinci
+Icon=Da Vinci.jpg
+Difficulty=Very Hard
+Description=./Modern/War_of_the_Spark/Andrea_Hertwig_-_Uw_Control_(Modern,_#796675).dck
+Deck Type=constructed
+
+[Main]
+1 Vendilion Clique
+3 Snapcaster Mage
+3 Cryptic Command
+2 Dovin's Veto
+2 Logic Knot
+1 Mana Leak
+3 Opt
+4 Path to Exile
+1 Spell Snare
+2 Serum Visions
+4 Terminus
+1 Oust
+1 Detention Sphere
+1 Narset, Parter of Veils
+1 Teferi, Time Raveler
+2 Teferi, Hero of Dominaria
+3 Jace, the Mind Sculptor
+4 Celestial Colonnade
+4 Field of Ruin
+4 Flooded Strand
+2 Glacial Fortress
+2 Hallowed Fountain
+3 Plains
+6 Island
+[Sideboard]
+1 Vendilion Clique
+1 Damping Sphere
+1 Lyra Dawnbringer
+1 Baneslayer Angel
+2 Circle of Protection: Red
+3 Rest in Peace
+2 Stony Silence
+2 Dispel
+1 Celestial Purge
+1 Timely Reinforcements

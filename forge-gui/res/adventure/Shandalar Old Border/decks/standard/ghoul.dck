@@ -1,17 +1,15 @@
 [metadata]
 Name=ghoul
 [Main]
-17 Swamp|MMQ|3
-2 Urborg Volcano|INV|1
-3 Mountain|MMQ|3
-4 Carrion Feeder|SCG|1
-4 Graveborn Muse|LGN|1
-4 Mesmeric Fiend|TOR|1
-4 Mindslicer|ODY|1
-4 Noxious Ghoul|LGN|1
-4 Psychotic Haze|TOR|1
-4 Putrid Imp|TOR|1
-4 Rotlung Reanimator|ONS|1
-4 Shepherd of Rot|ONS|1
-4 Sulfuric Vortex|SCG|1
-4 Sulfurous Springs|ICE|1
+20 Swamp|PO2
+4 Carnophage|EXO
+4 Sarcomancy|TMP
+4 Undead Warchief|SCG
+4 Zombie Master|4ED
+4 Lord of the Undead|PLS
+4 Noxious Ghoul|LGN
+4 Vengeful Dead|SCG
+4 Shepherd of Rot|ONS
+2 Cover of Darkness|ONS
+4 Call to the Grave|SCG
+2 Severed Legion|ONS

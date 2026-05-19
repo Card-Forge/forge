@@ -1,4 +1,5 @@
 Name:Sandman's Quicksand
+Variant:UniversesWithin:FlavorName:Miasmic Mist
 ManaCost:1 B B
 Types:Sorcery
 K:Mayhem:3 B

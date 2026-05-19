@@ -1,0 +1,6 @@
+Name:New Generation's Technique
+ManaCost:3 G
+Types:Sorcery
+K:Sneak:2 G
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeTypeDesc$ basic land | ChangeNum$ 2 | SpellDescription$ Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.
+Oracle:Sneak {2}{G}\nSearch your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle.

@@ -1,0 +1,7 @@
+Name:Curious Colossus
+ManaCost:5 W W
+Types:Creature Giant Warrior
+PT:7/7
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAnimateAll | TriggerDescription$ When this creature enters, each creature target opponent controls loses all abilities, becomes a Coward in addition to its other types, and has base power and toughness 1/1.
+SVar:TrigAnimateAll:DB$ AnimateAll | ValidTgts$ Opponent | ValidCards$ Creature | Power$ 1 | Toughness$ 1 | RemoveAllAbilities$ True | Types$ Coward | Duration$ Permanent
+Oracle:When this creature enters, each creature target opponent controls loses all abilities, becomes a Coward in addition to its other types, and has base power and toughness 1/1.

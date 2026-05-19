@@ -108,7 +108,7 @@ public class FightAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(final SpellAbility sa, final Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(final Player aiPlayer, final SpellAbility sa) {
         if ("Always".equals(sa.getParam("AILogic"))) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay); // e.g. Hunt the Weak, the AI logic was already checked through canFightAi
         }
@@ -126,9 +126,8 @@ public class FightAi extends SpellAbilityAi {
 
             if (SpecialCardAi.GrothamaAllDevouring.consider(ai, sa)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         AiAbilityDecision decision = checkApiLogic(ai, sa);
@@ -149,7 +148,11 @@ public class FightAi extends SpellAbilityAi {
         }
         //assumes the triggered card belongs to the ai
         if (sa.hasParam("Defined")) {
-            Card aiCreature = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa).get(0);
+            CardCollection definedCards = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
+            if (definedCards.isEmpty()) {
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+            }
+            Card aiCreature = definedCards.get(0);
             for (Card humanCreature : humCreatures) {
                 if (canKill(aiCreature, humanCreature, 0)
                         && ComputerUtilCard.evaluateCreature(humanCreature) > ComputerUtilCard.evaluateCreature(aiCreature)) {

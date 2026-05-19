@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Seth
+Title=Seth
+Icon=Seth.jpg
+Difficulty=Easy
+Description=./Standard/Zendikar_Rising/Absynteh_-_Dimir_Tempo_(Standard,_#1050447).dck
+Deck Type=constructed
+
+[Main]
+4 Soaring Thought-Thief
+4 Ruin Crab
+4 Thieves' Guild Enforcer
+4 Merfolk Windrobber
+1 Cling to Dust
+2 Heartless Act
+4 Into the Story
+4 Drown in the Loch
+2 Call of the Death-Dweller
+2 Lullmage's Domination
+3 Agadeem's Awakening
+4 Bloodchief's Thirst
+1 Castle Locthwain
+1 Evolving Wilds
+3 Swamp
+4 Temple of Deceit
+4 Fabled Passage
+4 Clearwater Pathway
+5 Island
+[Sideboard]
+1 Lurrus of the Dream-Den
+2 Negate
+2 Lullmage's Domination
+2 Cling to Dust
+2 Soul-Guide Lantern
+3 Mystical Dispute
+3 Agonizing Remorse

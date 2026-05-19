@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Aquaman
+Title=Aquaman
+Icon=Aquaman.jpg
+Difficulty=Very Hard
+Description=../Modern/Khans_of_Tarkir/SCG_Invitational_Qualifier_West_Hartford/Jeremy_Smith_-_Treasure_Burn_(Modern,_#155162).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+4 Monastery Swiftspear
+4 Boros Charm
+4 Lightning Bolt
+3 Mutagenic Growth
+2 Searing Blaze
+4 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+3 Treasure Cruise
+4 Arid Mesa
+3 Bloodstained Mire
+5 Mountain
+2 Sacred Foundry
+4 Scalding Tarn
+2 Steam Vents
+[Sideboard]
+1 Combust
+2 Dragon's Claw
+2 Molten Rain
+2 Searing Blood
+2 Smash to Smithereens
+3 Torpor Orb
+1 Volcanic Fallout
+2 Wear // Tear

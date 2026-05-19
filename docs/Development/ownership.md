@@ -1,13 +1,13 @@
-Everyone is free to work on whatever part they're interested in. This is just meant to be a rough overview for new contributors which areas are currently "understaffed" and could use some love.
-The "Ancestors" column is basically there to list currently inactive developers that might still be around to provide implementation details on Discord. In that case please use the Search function and make a decent effort to understand the code first, unnecessary pinging for simple things might give you a bad reputation :P
+Everyone is free to work on whatever part they're interested in. This is just meant to be a rough overview for new contributors which areas are currently "understaffed" and could use some love.  
+The "Ancestors" column is basically there to list currently inactive developers that might still be around to provide implementation details on Discord. In that case please use the Search function and make a decent effort to understand the code first, unnecessary pinging for simple things might give you a bad reputation :P  
+Please also try to check back a bit after your PR gets merged in case it causes any bugs on snapshots.
 
 ## DevOps
-
 | Concept | Owners | Ancestors | Example tasks |
 | - | - | - | - |
-| PC Releases | friarsol | Agetian | - update Maven dependencies |
+| PC Releases | friarsol | Agetian | - update Maven dependencies<br>- maintain CI files |
 | Android Releases | | kevlahnota | |
-| Sentry | JaminCollins | | - watch for rare/unusual crashes |
+| Sentry | JaminCollins | | - watch trends for rare/unusual crashes |
 
 ## Ingame Engine
 | Concept | Owners | Ancestors | Example tasks |
@@ -26,7 +26,7 @@ The "Ancestors" column is basically there to list currently inactive developers 
 ## User Interface
 | Concept | Owners | Ancestors | Example tasks |
 | - | - | - | - |
-| Desktop | | | |
+| Desktop | | | - performance profiling |
 | Android | | DrDev, kevlahnota | - test new libGDX versions |
 | Localization | | Alumi | - update card translation files<br>- update engine text (native speaker not required) |
 | Sound effects | | | |
@@ -34,14 +34,14 @@ The "Ancestors" column is basically there to list currently inactive developers 
 ## Forge Script DSL
 | Concept | Owners | Ancestors | Example tasks |
 | - | - | - | - |
-| [Card Scripting](cardscripting) | TRT, Northmoc, Simisays, Fulgur14, Dracontes | a lot | - implement new Sets<br>- clean up outdated elements<br>- apply Oracle updates |
+| [Card Scripting](../Card-scripting-API/Card-scripting-API.md) | TRT, Northmoc, Simisays, Fulgur14, Dracontes | a lot | - implement new Sets<br>- review script PR<br>- clean up outdated elements<br>- apply Oracle updates |
 | ForgeScribe | | Austinino | |
 
 ## Modes
 | Concept | Owners | Ancestors | Example tasks |
 | - | - | - | - |
 | Quest | friarsol | | |
-| [Network Play](network-play) | | JaminCollins | |
+| [Network Play](../network-play.md) | MostCromulent | JaminCollins | |
 | Gauntlet | | | |
 | Draft | | | |
 | Planar Conquest | | DrDev | |
@@ -61,4 +61,4 @@ The "Ancestors" column is basically there to list currently inactive developers 
 ## Miscellaneous
 | Concept | Owners | Ancestors | Example tasks |
 | - | - | - | - |
-| Documentation | | | - update Wiki |
+| Documentation | TRT | | - update Wiki |

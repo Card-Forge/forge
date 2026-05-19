@@ -4,7 +4,7 @@ Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When this enchantment enters, destroy up to one target creature.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature.
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | CheckSVar$ DiedThisTurn | TriggerDescription$ At the beginning of your end step, if a creature died under an opponent's control this turn, create a Treasure token. Then if you control three or more Treasures, transform this enchantment.
-SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenAmount$ 1 | SubAbility$ DBTransform
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac | SubAbility$ DBTransform
 SVar:DBTransform:DB$ SetState | Defined$ Self | ConditionCheckSVar$ NumTreasure | ConditionSVarCompare$ GE3 | Mode$ Transform
 SVar:DiedThisTurn:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.OppCtrl
 SVar:NumTreasure:Count$Valid Treasure.YouCtrl

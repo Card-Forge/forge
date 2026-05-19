@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import forge.ai.*;
 import forge.game.GameEntity;
 import forge.game.card.*;
+import forge.game.player.GameLossReason;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -15,13 +16,23 @@ import java.util.Map;
 
 public class CountersProliferateAi extends SpellAbilityAi {
 
+    // Values assigned to each proliferate target to calculate total benefit.
+    // The AI will only activate proliferate if the total value meets or exceeds the mana cost.
+    // Example: Karn's Bastion costs 4 mana, so AI needs value >= 4 to activate.
+    // One planeswalker (3) + one creature with +1/+1 counter (1) = 4, which meets the cost.
+    private static final int VALUE_AI_PLANESWALKER = 3;
+    private static final int VALUE_AI_POSITIVE_COUNTERS = 1;
+    private static final int VALUE_AI_EXPERIENCE_OR_ENERGY = 1;
+    private static final int VALUE_OPP_POISON = 2;
+    private static final int VALUE_OPP_NEGATIVE_COUNTERS = 1;
+
     @Override
     protected AiAbilityDecision checkApiLogic(Player ai, SpellAbility sa) {
         final List<Card> cperms = Lists.newArrayList();
         boolean allyExpOrEnergy = false;
 
         for (final Player p : ai.getYourTeam()) {
-        	// player has experience or energy counter
+            // player has experience or energy counter
             if (p.getCounters(CounterEnumType.EXPERIENCE) + p.getCounters(CounterEnumType.ENERGY) >= 1) {
                 allyExpOrEnergy = true;
             }
@@ -48,6 +59,11 @@ public class CountersProliferateAi extends SpellAbilityAi {
         boolean opponentPoison = false;
 
         for (final Player o : ai.getOpponents()) {
+            // Lethal poison - proliferating would win the game
+            if (o.getPoisonCounters() >= 9 && o.canReceiveCounters(CounterEnumType.POISON)
+                    && !o.cantLoseCheck(GameLossReason.Poisoned)) {
+                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+            }
             opponentPoison |= o.getPoisonCounters() > 0 && o.canReceiveCounters(CounterEnumType.POISON);
             hperms.addAll(CardLists.filter(o.getCardsIn(ZoneType.Battlefield), crd -> {
                 if (!crd.hasCounters()) {
@@ -68,13 +84,21 @@ public class CountersProliferateAi extends SpellAbilityAi {
             }));
         }
 
-        if (!cperms.isEmpty() || !hperms.isEmpty() || opponentPoison || allyExpOrEnergy) {
-            // AI will play it if there are any counters to proliferate
-            // or if there are no counters, but AI has experience or energy counters
-            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        }
+        int value = CardLists.count(cperms, Card::isPlaneswalker) * VALUE_AI_PLANESWALKER
+                + CardLists.count(cperms, c -> !c.isPlaneswalker()) * VALUE_AI_POSITIVE_COUNTERS
+                + hperms.size() * VALUE_OPP_NEGATIVE_COUNTERS
+                + (opponentPoison ? VALUE_OPP_POISON : 0)
+                + (allyExpOrEnergy ? VALUE_AI_EXPERIENCE_OR_ENERGY : 0);
 
-        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
+        int manaCost = sa.getPayCosts().getTotalMana().getCMC();
+        // calculate a rating from 0 to 100 based on value vs mana cost
+        // if value >= mana cost, rating is 100
+        // if value is half mana cost, rating is 50, etc.
+        int rating = manaCost == 0 ? value : Math.min(100, value / manaCost * 100);
+        if (value > 0) {
+            return new AiAbilityDecision(rating, AiPlayDecision.WillPlay);
+        }
+        return new AiAbilityDecision(rating, AiPlayDecision.CantPlayAi);
     }
 
     @Override
@@ -84,8 +108,8 @@ public class CountersProliferateAi extends SpellAbilityAi {
         // TODO Make sure Human has poison counters or there are some counters
         // we want to proliferate
         return new AiAbilityDecision(
-            chance ? 100 : 0,
-            chance ? AiPlayDecision.WillPlay : AiPlayDecision.CantPlayAi
+                chance ? 100 : 0,
+                chance ? AiPlayDecision.WillPlay : AiPlayDecision.CantPlayAi
         );
     }
 
@@ -93,7 +117,7 @@ public class CountersProliferateAi extends SpellAbilityAi {
      * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)
      */
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
         if ("Always".equals(sa.getParam("AILogic"))) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
@@ -109,7 +133,6 @@ public class CountersProliferateAi extends SpellAbilityAi {
     @Override
     public <T extends GameEntity> T chooseSingleEntity(Player ai, SpellAbility sa, Collection<T> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         // Proliferate is always optional for all, no need to select best
-
         final CounterType poison = CounterEnumType.POISON;
 
         boolean aggroAI = AiProfileUtil.getBoolProperty(ai, AiProps.PLAY_AGGRO);
@@ -117,13 +140,11 @@ public class CountersProliferateAi extends SpellAbilityAi {
         for (final Player p : IterableUtil.filter(options, Player.class)) {
             if (p.isOpponentOf(ai)) {
                 if (p.getCounters(poison) > 0 && p.canReceiveCounters(poison)) {
-                    return (T)p;
+                    return (T) p;
                 }
-            } else {
+            } else if ((((p.getCounters(poison) <= 5 && aggroAI) || (p.getCounters(poison) == 0)) && p.getCounters(CounterEnumType.EXPERIENCE) + p.getCounters(CounterEnumType.ENERGY) >= 1) || !p.canReceiveCounters(poison)) {
                 // poison is risky, should not proliferate them in most cases
-                if ((((p.getCounters(poison) <= 5 && aggroAI) || (p.getCounters(poison) == 0)) && p.getCounters(CounterEnumType.EXPERIENCE) + p.getCounters(CounterEnumType.ENERGY) >= 1) || !p.canReceiveCounters(poison)) {
-                    return (T)p;
-                }
+                return (T) p;
             }
         }
 
@@ -133,7 +154,7 @@ public class CountersProliferateAi extends SpellAbilityAi {
                 if (c.getController().isOpponentOf(ai)) {
                     continue;
                 }
-                return (T)c;
+                return (T) c;
             }
 
             if (c.isBattle()) {
@@ -141,7 +162,7 @@ public class CountersProliferateAi extends SpellAbilityAi {
                     // TODO in multiplayer we might sometimes want to do it anyway?
                     continue;
                 }
-                return (T)c;
+                return (T) c;
             }
 
             final Card lki = CardCopyService.getLKICopy(c);
@@ -158,11 +179,11 @@ public class CountersProliferateAi extends SpellAbilityAi {
                 if (c.getController().isOpponentOf(ai) ==
                         (ComputerUtilCard.evaluateCreature(lki, true, false)
                                 < ComputerUtilCard.evaluateCreature(c, true, false))) {
-                    return (T)c;
+                    return (T) c;
                 }
             } else {
                 if (!c.getController().isOpponentOf(ai) && !hasNegative) {
-                    return (T)c;
+                    return (T) c;
                 }
             }
         }

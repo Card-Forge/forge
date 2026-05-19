@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Master Splinter
+Title=Master Splinter
+Icon=Master Splinter.jpg
+Difficulty=Medium
+Description=./Standard/Bloomburrow/Dmytro_Frolov_-_Dimir_Midrange_(Standard,_#2179686).dck
+Deck Type=constructed
+
+[Main]
+1 Aclazotz, Deepest Betrayal
+4 Deep-Cavern Bat
+2 Ertai Resurrected
+4 Faerie Mastermind
+3 Gix, Yawgmoth Praetor
+1 Malcolm, Alluring Scoundrel
+1 Plumecreed Escort
+2 Sheoldred, the Apocalypse
+4 Spyglass Siren
+2 Tishana's Tidebinder
+2 Cut Down
+4 Go for the Throat
+2 Phantom Interference
+1 Shoot the Sheriff
+1 Gix's Command
+1 Liliana of the Veil
+4 Darkslick Shores
+2 Fabled Passage
+4 Island
+3 Mirrex
+4 Restless Reef
+4 Swamp
+4 Underground River
+[Sideboard]
+2 Cruelclaw's Heist
+2 Cut Down
+2 Disdainful Stroke
+2 Duress
+1 Gix's Command
+1 Glistening Deluge
+2 Harvester of Misery
+2 Negate
+1 Sheoldred's Edict

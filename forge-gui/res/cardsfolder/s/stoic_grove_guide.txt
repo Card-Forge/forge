@@ -1,0 +1,7 @@
+Name:Stoic Grove-Guide
+ManaCost:4 BG
+Types:Creature Elf Druid
+PT:5/4
+A:AB$ Token | Cost$ 1 BG ExileFromGrave<1/CARDNAME/this card> | ActivationZone$ Graveyard | SorcerySpeed$ True | TokenScript$ bg_2_2_elf | SpellDescription$ Create a 2/2 black and green Elf creature token. Activate only as a sorcery.
+DeckHas:Ability$Token
+Oracle:{1}{B/G}, Exile this card from your graveyard: Create a 2/2 black and green Elf creature token. Activate only as a sorcery.

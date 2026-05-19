@@ -1,0 +1,8 @@
+Name:Abundant Countryside
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ Any | RestrictValid$ Spell.Creature | SpellDescription$ Add one mana of any color. Spend this mana only to cast a creature spell.
+A:AB$ Token | Cost$ 6 T | TokenScript$ c_1_1_shapeshifter_changeling | TokenOwner$ You | SpellDescription$ Create a 1/1 colorless Shapeshifter creature token with changeling. (It's every creature type.)
+DeckHas:Ability$Mana.Colorless|Token
+Oracle:{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a creature spell.\n{6}, {T}: Create a 1/1 colorless Shapeshifter creature token with changeling. (It's every creature type.)

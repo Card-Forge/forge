@@ -30,6 +30,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
+import forge.game.ability.effects.ManaEffect;
 import forge.game.card.Card;
 import forge.game.card.CardUtil;
 import forge.game.cost.Cost;
@@ -180,7 +181,7 @@ public class AbilityManaPart implements java.io.Serializable {
         for (final String c : afterReplace.split(" ")) {
             if (StringUtils.isNumeric(c)) {
                 for (int i = Integer.parseInt(c); i > 0; i--) {
-                    this.lastManaProduced.add(new Mana((byte) ManaAtom.COLORLESS, source, this));
+                    this.lastManaProduced.add(new Mana((byte) ManaAtom.COLORLESS, source, this, player));
                 }
             } else {
                 byte attemptedMana = MagicColor.fromName(c);
@@ -188,7 +189,7 @@ public class AbilityManaPart implements java.io.Serializable {
                     attemptedMana = (byte)ManaAtom.COLORLESS;
                 }
 
-                this.lastManaProduced.add(new Mana(attemptedMana, source, this));
+                this.lastManaProduced.add(new Mana(attemptedMana, source, this, player));
             }
         }
 
@@ -408,14 +409,6 @@ public class AbilityManaPart implements java.io.Serializable {
                 continue;
             }
 
-            if (restriction.equals("MorphOrManifest")) {
-                if ((sa.isSpell() && sa.getHostCard().isCreature() && sa.isCastFaceDown())
-                        || sa.isManifestUp() || sa.isMorphUp()) {
-                    return true;
-                }
-                continue;
-            }
-
             //handled in meetsManaShardRestrictions
             if (restriction.equals("CantPayGenericCosts")) {
                 return true;
@@ -515,7 +508,11 @@ public class AbilityManaPart implements java.io.Serializable {
         }
         String produced = this.getOrigProduced();
         if (produced.contains("Chosen")) {
-            produced = produced.replace("Chosen", getChosenColor(sa, sa.getHostCard().getChosenColors()));
+            produced = produced.replace("Chosen", getChosenColor(sa));
+        }
+        if (isSpecialMana()) {
+            ManaEffect.handleSpecialMana(sa.getActivatingPlayer(), this, sa, false);
+            produced = getExpressChoice();
         }
         return produced;
     }
@@ -651,7 +648,7 @@ public class AbilityManaPart implements java.io.Serializable {
         }
         // replace Chosen for Combo colors
         if (origProduced.contains("Chosen")) {
-            origProduced = origProduced.replace("Chosen", getChosenColor(sa, sa.getHostCard().getChosenColors()));
+            origProduced = origProduced.replace("Chosen", getChosenColor(sa));
         }
         // replace Chosen for Spire colors
         if (origProduced.contains("ColorID")) {
@@ -701,14 +698,14 @@ public class AbilityManaPart implements java.io.Serializable {
         return sb.length() == 0 ? "" : sb.substring(0, sb.length() - 1);
     }
 
-    public String getChosenColor(SpellAbility sa, Iterable<String> colors) {
+    public String getChosenColor(SpellAbility sa) {
         if (sa == null) {
             return "";
         }
         Card card = sa.getHostCard();
         if (card != null) {
             StringBuilder values = new StringBuilder();
-            for (String c : colors) {
+            for (String c : card.getChosenColors()) {
                 values.append(MagicColor.toShortString(c)).append(" ");
             }
             return values.toString().trim();

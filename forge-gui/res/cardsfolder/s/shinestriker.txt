@@ -1,0 +1,9 @@
+Name:Shinestriker
+ManaCost:4 U U
+Types:Creature Elemental
+PT:3/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Vivid — When this creature enters, draw cards equal to the number of colors among permanents you control.
+SVar:TrigDraw:DB$ Draw | NumCards$ X
+SVar:X:Count$Valid Permanent.YouCtrl$Colors
+Oracle:Flying\nVivid — When this creature enters, draw cards equal to the number of colors among permanents you control.

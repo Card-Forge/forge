@@ -1,31 +1,71 @@
 package forge.game.card;
 
 import java.io.Serializable;
+import java.util.List;
 
-public interface CounterType extends Serializable {
+import com.google.common.collect.Lists;
 
-    public static CounterType getType(String name) {
+import forge.util.ITranslatable;
+
+public interface CounterType extends Serializable, ITranslatable {
+
+    static CounterType getType(String name) {
         if ("Any".equalsIgnoreCase(name)) {
             return null;
+        }
+        if (CounterKeywordType.isKeywordCounter(name)) {
+            return CounterKeywordType.get(name);
         }
         try {
             return CounterEnumType.getType(name);
         } catch (final IllegalArgumentException ex) {
-            return CounterKeywordType.get(name);
+            return CounterCustomType.get(name);
         }
     }
+    static List<CounterType> getValues() {
+        List<CounterType> result = Lists.newArrayList();
+        result.addAll(List.of(CounterEnumType.values()));
+        result.addAll(CounterKeywordType.getValues());
+        result.addAll(CounterCustomType.getValues());
+        return result;
+    }
 
-    public String getName();
+    String getName();
 
-    public String getCounterOnCardDisplayName();
+    default String getCounterOnCardDisplayName() {
+        return getName();
+    }
 
-    public boolean is(CounterEnumType eType);
+    default boolean is(CounterEnumType eType) {
+        return false;
+    }
 
-    public boolean isKeywordCounter();
+    default boolean isKeywordCounter() {
+        return false;
+    }
 
-    public int getRed();
+    default int getRed() {
+        return 255;
+    }
 
-    public int getGreen();
+    default int getGreen() {
+        return 255;
+    }
 
-    public int getBlue();
+    default int getBlue() {
+        return 255;
+    }
+
+    default CounterAiCategory getAiCategory() {
+        return CounterAiCategory.Positive;
+    }
+
+    @Override
+    default String getTranslationKey() {
+        return toString();
+    }
+    @Override
+    default String getUntranslatedName() {
+        return toString();
+    }
 }

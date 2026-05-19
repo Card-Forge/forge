@@ -1,0 +1,10 @@
+Name:Curious Farm Animals
+ManaCost:W
+Types:Creature Boar Elk Bird Ox
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When this creature dies, you gain 3 life.
+SVar:TrigSac:DB$ GainLife | Defined$ TriggeredCardController | LifeAmount$ 3
+A:AB$ Destroy | Cost$ 2 Sac<1/CARDNAME> | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select up to one target artifact or enchantment | TargetMin$ 0 | TargetMax$ 1 | SpellDescription$ Destroy up to one target artifact or enchantment.
+SVar:SacMe:3
+DeckHas:Ability$LifeGain
+Oracle:When this creature dies, you gain 3 life.\n{2}, Sacrifice this creature: Destroy up to one target artifact or enchantment.

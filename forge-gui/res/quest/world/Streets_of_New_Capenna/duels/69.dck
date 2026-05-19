@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Savra
+Title=Savra
+Icon=Savra.jpg
+Difficulty=Very Hard
+Description=./Modern/Streets_of_New_Capenna/Andrew_Plaza_-_Azorius_Hammer_(Modern,_#1539457)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Ledger Shredder
+1 The Reality Chip
+1 Gingerbrute
+3 Ornithopter
+3 Memnite
+3 Giver of Runes
+4 Stoneforge Mystic
+4 Esper Sentinel
+4 Puresteel Paladin
+1 Kaldra Compleat
+1 Shadowspear
+1 Paradise Mantle
+3 Springleaf Drum
+4 Colossus Hammer
+4 Urza's Saga
+4 Sigarda's Aid
+1 Marsh Flats
+1 Seachrome Coast
+3 Hallowed Fountain
+3 Inkmoth Nexus
+3 Flooded Strand
+3 Arid Mesa
+4 Plains
+[Sideboard]
+1 Pithing Needle
+1 Hushbringer
+1 Relic of Progenitus
+2 March of Otherworldly Light
+3 Spell Pierce
+3 Lavinia, Azorius Renegade
+4 Blacksmith's Skill

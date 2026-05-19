@@ -1,4 +1,5 @@
 Name:Spider-Slayer, Hatred Honed
+Variant:UniversesWithin:FlavorName:Goro Rel, Scourge to Spiders
 ManaCost:2
 Types:Legendary Artifact Creature Human Villain
 PT:2/1

@@ -269,6 +269,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) The Keeper of Dark Pacts - Done via Intesify. Unclear if this should affect other copies of the same card.
 1. (Uk) The Rebellious Intelligence - Random card in sideboard. May need special attention if we ever rework Wish.
 1. (Uk) Sojourner's Enforcermite - Affinitycycling's reminder text comes out a bit weird, but the function is there.
+1. Blacker Lotus
 
 #### Functional Variants
 1. Sly Spy F
@@ -365,7 +366,6 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 
 ### Tier 0.5: Done*
 
-1. Blacker Lotus - Only removes from match. Should delete from deck and/or collection in limited and adventure-like modes.
 1. Ass Whuppin - Implemented as "Destroy target silver bordered permanent," leaving off the Acorn errata and the ability to target other games.
 1. Spatula of the Ages - Implemented to look for silver border, but has since been errata'd to include acorn cards. (See also: "Un-Cards", Tier 2.)
 1. Border Guardian - Borders are only tracked on an edition level. Silver-bordered SLD cards and borderless prints won't behave correctly. (See also: "Border Color Matters", Tier 3)
@@ -508,7 +508,6 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) Where We're Going...
 1. (Uk) Peel Out
 1. (Uk) Davvol's Birthdaymobile
-1. (Uk) Fast // Furious
 1. (Uk) Tarkir Omenpath
 1. (Uk) Dialogue Tree
 1. (Uk) Save Point
@@ -521,7 +520,16 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) Stormscale Wurm
 1. (Uk) Tragda, the Burner
 1. (Uk) Color Pie
-1. (Uk) Brutal COmmand
+1. (Uk) Brutal Command
+1. (Uk) Efteekay, Flame of the Kav
+1. (Uk) Literal Delver of Secrets
+1. (Uk) Lander Rizzi
+1. (P) Spaghetti Junction
+1. (Uk) Joraga Peach
+1. (Uk) Falko, Showoff Pilot
+1. (Uk) Brave Falconhawk
+1. (Uk) Fear of Fear Itself
+1. (Uk) 17-Year Cicadas
 1. Jester's Sombrero - May be able to do this with RemoveFromMatch?
 1. Gallery of Legends - (Attraction) Similar to Killer Cosplay?
 1. (P) Gunk Slug - Similar to Time Sidewalk and Bone Rattler?
@@ -536,10 +544,9 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) Azorius Traffic Enforcement - DisableTriggersEffect looks like it could focus on Backup abilities? Detain as a keyword action probably doesn't need special treatment.
 1. (Uk) That's No Moonmist - Can use the existing "FrontFace" property.
 1. (Uk) Praetorhoof Behemoth - Adds number of revealed cards to number of matching cards in zones. Should be doable.
-1. (Uk) Unknown Event Shores - Complicated, but the same support is needed for Cryptic Spires.
 1. (Uk) Syr Konrad's Squire - Would probably work fine as separate abilities. 
 1. (Uk) Life at Stake - Similar to Wheel of Misfortune
-1. (Uk) Investi-Gate - Just choose and create two of the ten guildgates?
+1. (Uk) Investi-Gate - Just choose one of the ten guildgates?
 1. (Uk) The Inspector Inspector - Should be possible with ETBReplacements...
 1. (Uk) The Zassacre Zirl - Removing a card's commander status is now totally do-able; (See "You're In Command", Tier 0)
 1. (Uk) The Keeper of Kaldra - Companion effect can be written out manually, should work fine.
@@ -548,6 +555,8 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) Year-End Review - Might be tricky to choose a card in different ways across three specific zones, but commander promotion is supported.
 1. (Uk) Higher Level Zone Monster - Three ETB replacements in one, but should all be possible?
 1. (Uk) Rideable Mantis - Unsure if you can use SaddledThisTurn in an xCount.
+1. (Uk) May the Mana Be with You - Just choose the shockland?
+1. (Uk) Frie, Displaced in Time - Might be able to just trigger on exile and check if the card is now warped.
 1. (Uk) The Bean - (Plane) Altered for second printing. May be worth a variant print?
 1. (Uk) Black Lotus Lounge - (Plane)
 1. (Uk) City Hall - (Plane)
@@ -636,11 +645,9 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (P) Swarm of Locus - Creature with Land Type
 1. (P) Witty Demon - Starting deck size compared to minimum, similar to Yorion.
 1. (P) Lazier Goblin - Motivate keyword. Can't attack or block until one-time cost is paid.
-1. (P) Red Herring - Swaps itself from the hand with a permanent in play, swapping targets on the original to itself. Also name collision.
 1. (P) Trial and Error - Triggers when countered or fizzled. Elemental Card Type.
 1. (P) Geometric Weird - "Greatest number of spells and abilities from different sources that were on the stack simultaneously this turn"
 1. (P) Kaya, Ghost Haunter - Haunt target creature, target haunted creature.
-1. (P) Pick Your Poison - Nearly identical to point value modal choices seen in Bloomburrow, but no icon and points must add up to exact value. Also name collision.
 1. (P) Seek Bolas's Counsel - Planeswalk in a non-planechase game.
 1. (P) Rift - Can start in your opening hand.
 1. Snow Mercy - Cost of Tap, Untap, Tap, Untap, Tap. 
@@ -701,6 +708,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) You and Ooze Army? - Count creature types across all non-changelings. Similar to Embiggen?
 1. (Uk) New Magic Game Plus - Needs a way to leave itself in exile after restarting the game. (Currently can only ignore cards in one zone at a time.)
 1. (Uk) Out of Town - Unsure if there's an easy way to refer to the owner of an exiled card in a later trigger.
+1. (Uk) Pirk, Heroic Captain - "fully station a Spacecraft"
 
 
 #### Unique but Simple Keywords
@@ -758,6 +766,8 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) The Companion of the Wilds - Old Companion (Also Set Matters and Playtest Cards matter, Tier 2).
 1. (Uk) The Multifaceted Phyrexian - Fixed commander ninjutsu.
 1. (Uk) Reverse Ninja - "Ustujnin", like Ninjutsu but for blockers.
+1. (Uk) Saga of Krark Losing His Thumb - "Flip Ahead", Similar to "Turn Ahead" but with a coin flip. Needs ability to repeat current chapter on loss.
+1. (Uk) Monet, Sensei of the Sewers - Fixed commander ninjutsu. Also, "If Monet was Ninjutsu'd"
 
 #### Three-color Devotion.
 (Currently only supports two. These are also written as "Devotion to Abzan" instead of "Devotion to White, Black, and Green")
@@ -804,6 +814,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. Mother of Goons
 1. Chivalrous Chevalier
 1. An Incident Has Occurred
+1. Cheer - "Giving a gift" may or may not refer to something in-game.
 
 #### Trackers, Markers, and Unique Designations
 1. The Fallen Apart - Arms and Legs
@@ -815,11 +826,19 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (P) Duelists' Convocation International - Check off digits of random 10-digit number.
 1. (P) Map to Lorthos's Temple - Checklist of objectives
 
+#### Name Collision
+(Functional Variants already give us support for "same name, different rules". The hurdle and distinction here is "same name, different legality".)
+1. (Uk) Fast // Furious
+1. (P) Red Herring - Also: Swaps itself from the hand with a permanent in play, swapping targets on the original to itself.
+1. (P) Pick Your Poison - Nearly identical to point value modal choices seen in Bloomburrow, but no icon and points must add up to exact value. Also name collision.
+
 #### Maintaining lists
 (Similar to noting things, but not just card IDs)
 1. (P) Champion of the Hareish - "Buddy List", noting creature types.
 1. (Uk) The Keeper of Favorite Cards - "Favorites List", noting card names.
 1. (Uk) Retto, Family Racer - "Family" - noting card names secretly. Also dialog as payment.
+1. (Uk) The Fifth Alias - List not necessarily independent from card, but it'd take an extreme edge case to need more than one.
+1. (Uk) Syx, Robot Overlord - Ditto. Might be missing a clause that strikes the name from the list, or prevents guessing revealed invaders?
 
 #### Panglacial Worm-likes
 1. Infernal Spawn of Infernal Spawn of Evil - (Also dialog as payment)
@@ -869,6 +888,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) The Unknown Wizard
 1. (Uk) Fear of the Unknown
 1. (Uk) Rinta, Cousin of Sitka
+1. (Uk) Lord of Atlanta
 1. (Uk) The Mystery Raceway - Also event outcome matters.
 1. (See Also: The Companion of the Wilds, Tier 3)
 
@@ -983,7 +1003,7 @@ Cards prefixed with (P) are playtest cards. Cards prefixed with (Uk) were exclus
 1. (Uk) Fear of Going 0-2 Drop
 
 #### Enters with Booster
-These both enter with a sealed booster "under" them, and open it upon dealing combat damage. Could do something like Mountain Mover - get a booster's cards, put all the cards from it face down in exile, then reveal them later.
+(These both enter with a sealed booster "under" them, and open it upon dealing combat damage. Could do something like Mountain Mover - get a booster's cards, put all the cards from it face down in exile, then reveal them later.)
 1. Stocking Tiger
 1. (Uk) The Chaos Keeper
 
@@ -1058,6 +1078,7 @@ These both enter with a sealed booster "under" them, and open it upon dealing co
 1. (Uk) Blu, Mansion Prince - Create a token that's a copy of half of a randomly chosen room card.
 1. (Uk) Fear of Forgetting Names - Remove name from a permanent. 
 1. (Uk) Surprise, Nerd - Replace pump effects.
+1. (Uk) The Charitable Drafter - Draft a booster pack.
 
 
 
@@ -1081,6 +1102,7 @@ These both enter with a sealed booster "under" them, and open it upon dealing co
 1. Pheobe, Head of S.N.E.A.K. - (Also Flavor Text Matters)
 1. Grusilda, Monster Masher - Merges two dead creatures into one living one.
 1. It Came from Planet Glurg - Becomes a copy of X different creatures.
+1. (Uk) Monster Mash-Up - Grusilda as a sorcery.
 
 #### Multi-Split Cards
 (Most split card logic currently assumes only two parts)
@@ -1125,8 +1147,8 @@ These both enter with a sealed booster "under" them, and open it upon dealing co
 1. (Uk) Common Curve Filler - Choose and write a number; chosen number sets power, toughness, and cost.
 1. (Uk) Awoken Nephilim - Choose a Nephilim, acts as a legendary copy of it.
 1. (Uk) Your Mana Rock - Cryptic Spires but an Artifact.
+1. (Uk) Unknown Event Shores - Cryptic Spires but one color + filter to any.
 1. (P) Convention Maro - Choose a trigger requirement and an X-math function. Also watermark matters, landscape matters, and artist matters.
-1. (Uk) The Fifth Alias - List of five other cards in your deck. Unclear what to do if you have multiple copies.
 1. (Uk) The Faction Dragon - "Choose a faction" meaning clan, guild, etc. Mana cost is the faction's mana colors. Also the chosen faction's watermark matters.
 1. (Uk) Your Favorite Missing Character - Any two colors, up to three creature types, an arbitrary name, and one of four listed abilities.
 1. (See Also: "Cryptic Spires", Black Border)
@@ -1155,6 +1177,7 @@ These both enter with a sealed booster "under" them, and open it upon dealing co
 1. (Uk) The Paradise Bird
 1. (Uk) The Covert Blue Mage
 1. (Uk) Mister Cheddar, Cheese Sliver - Exempts Slivers from singleton rules. Also "Ratmanship" keyword.
+1. (See also: The Waffle Restaurant, tier 4)
 
 #### Adjust validity for sacrifices
 1. (Uk) Slobad, Actually Just Fine - Make sacrifice creatures and artifacts interchangable.
@@ -1359,6 +1382,9 @@ These both enter with a sealed booster "under" them, and open it upon dealing co
 1. (P) Terry Pin, Turboturtle - Unclear if this includes keywords like Equip, or just when those exact words are printed in the ability text.
 1. (Uk) The Zonian Brawler - "Bite" effects matter. (Also Rulebreaker, Tier 3)
 1. (Uk) The Game-Changing Host - "Anything that could have changed The Game-Changing Host on the turn it enters applies retroactively." Also game-changer matters.
+1. (Uk) The Vast Scrier - Triggers "whenever this creature attacks" triggers. Unclear if this requires literal wording match or if keywords and looser attack triggers qualify.
+1. (Uk) The Snapstone Wielder - Each turn, lets you spend an amount of any-colored mana equal to the amount of counters you have. Also affects starting hand size, and casts spells with random targets (and it's unclear what to do with spells which have variable numbers of targets)
+1. (Uk) The Octopus Official - Unclear what zone the tournament piles are in, or if casting a spell 4 times means to cast once and copy 3 times.
 
 
 #### Rerolling Dice (using the stack)
@@ -1395,6 +1421,8 @@ These both enter with a sealed booster "under" them, and open it upon dealing co
 1. Mishra's Toy Workshop - Generates mana for token-creating abilities.
 1. (Uk) The Countering Runner - Discounts spells that would counter things. (Also "Psychic Damage") (Also "Ready to Run", Tier 2)
 1. (Uk) The Brewing Chef - "card that creates a token".
+1. (Uk) The Waffle Restaurant - "cards that can create Food tokens". Also this has to be recognized before the game because the check is for deck legality. See "Rulebreaker", Tier 3
+1. (Uk) The Traveling Postman - Chooses a random Magic card that creates a token that isn't a copy token,
 
 #### Memory
 (The AI for "accidentally" forgetting certain bits of info is a bit weird conceptually but not impossible)
@@ -1440,6 +1468,7 @@ These both enter with a sealed booster "under" them, and open it upon dealing co
 1. Super-Duper Death Ray - Trample on an instant. Very similar to Flame Spill but nuances of it being a keyword need to be investigated. Option to assign more damage to target?
 1. (P) Glade of the Pump Spells - Land with mana cost. Do-able on its own, but may have a knock-on effect for other cards.
 1. (P) Madlands - Land with Madness. Played as a land drop when madness cost is paid.
+1. (Uk) Blustering Barnyard - "Storm (Pretend it works on a land)". Also pawprint charm on an ability. May work fine?
 
 #### Share attachment effects
 (Could possibly get 90% there with a static ability meddling with EquippedBy or AttachedBy, but plenty of edge cases out there.)
@@ -1566,6 +1595,7 @@ These both enter with a sealed booster "under" them, and open it upon dealing co
 1. Scavenger Hunt - (Attraction)
 1. Trivia Contest - (Attraction)
 1. (Uk) Blue Screen of Death
+1. (Uk) Noyd, Keeper of the Void
 
 #### Unknown Event Scoring
 (At the Philadelphia 2023 Unknown Event, players were split into two teams. These cards, when played, scored points for your team. The whole event would have to be recreated for these to be relevant.) (They did more of this in 2025, too.)
@@ -1614,6 +1644,7 @@ These both enter with a sealed booster "under" them, and open it upon dealing co
 1. (Uk) At Least It's a Dry Heat - Even without the geolocation needed to determine "sources on the east coast", tracking the causality of damage events through numbers would be Tier 4 at best.
 1. (Uk) Drive to Work - Sharing fun facts about cards.
 1. (Uk) Sorin's Remastered Manor - (Plane) Would need some combination of tags and types to form a criteria for "could be a horror movie monster".
+1. (Uk) The Commander Recommender - Revealing 15 cards of a commander deck from outside the game is do-able but very messy. "Guesses wrong" just expands on The Celestial Toymaker. The requirement that the commander deck be a legitimate one is unenforcable.
 
 #### Dexterity; tossing cards at other cards
 1. Landfill
@@ -1651,14 +1682,19 @@ These both enter with a sealed booster "under" them, and open it upon dealing co
 1. Rarity
 1. Grimlock, Dinobot Leader // Grimlock, Ferocious King - Also looks for Transformers creatures.
 
+#### External APIs
+(Could theoretically be determined digitally by accessing an outside source of information, but doing so would be a terrible idea for reasons which could fill several paragraphs.)
+1. Photo Op - Scrape Twitter?
+1. (Uk) A-Town - Acquire local IP and test it against a Geolocation database?
+
 
 ### Tier 7
 **Impossible in a rules engine, no good way to approximate it.**
 
 1. Blufferfish
 1. D00-DL, Caricaturist
-1. Photo Op - Due to restrictions on Twitter's API, this sadly can't go in Tier 5.
 1. (Uk) Sharp Eraser
+1. (Uk) The Convention Enthusiast
 
 #### Surrounding Room
 1. Sex Appeal
@@ -1742,7 +1778,7 @@ These both enter with a sealed booster "under" them, and open it upon dealing co
 1. Moniker Mage
 1. Granny's Payback
 1. Blurry Beeble
-1. (Uk) New Player's Journey - (Plane) (Also core set matters)
+1. (Uk) New Player's Journey - (Plane) Also core set matters
 
 #### Physical Hands Matter
 1. Deadhead
@@ -1784,6 +1820,7 @@ These both enter with a sealed booster "under" them, and open it upon dealing co
 1. The Superlatorium - (Attraction)
 1. (Uk) The Knight of Commentary
 1. (Uk) Fifth Stage of Magic Design
+1. (Uk) The Policy Maker
 
 #### Commemorative Celebration Cards
 (The rules engine is not licensed to officiate marriages.)

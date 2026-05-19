@@ -1,4 +1,5 @@
 Name:Lady Octopus, Inspired Inventor
+Variant:UniversesWithin:FlavorName:Merata, Neuron Hacker
 ManaCost:U
 Types:Legendary Creature Human Scientist Villain
 PT:0/2

@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Black Abott
+Title=Black Abott
+Icon=Black Abott.jpg
+Difficulty=Hard
+Description=./Modern/Ravnica_Allegiance/AndreasP_-_Burn_(Modern,_#779173).dck
+Deck Type=constructed
+
+[Main]
+4 Goblin Guide
+2 Grim Lavamancer
+4 Monastery Swiftspear
+4 Lightning Bolt
+4 Searing Blaze
+4 Shard Volley
+4 Bump in the Night
+4 Lava Spike
+4 Light Up the Stage
+4 Rift Bolt
+4 Skewer the Critics
+3 Arid Mesa
+3 Blackcleave Cliffs
+2 Blood Crypt
+3 Bloodstained Mire
+3 Mountain
+4 Scalding Tarn
+[Sideboard]
+4 Eidolon of the Great Revel
+4 Searing Blood
+4 Smash to Smithereens
+3 Surgical Extraction

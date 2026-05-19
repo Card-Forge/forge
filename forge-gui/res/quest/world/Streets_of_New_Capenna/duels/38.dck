@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Kane
+Title=Kane
+Icon=Kane.jpg
+Difficulty=Easy
+Description=./Standard/Streets_of_New_Capenna/Bubuchi_Naila_-_Jund_Aggro_(Standard,_#1378514).dck
+Deck Type=constructed
+
+[Main]
+1 Jadar, Ghoulcaller of Nephalia
+3 Jinnie Fay, Jetmir's Second
+3 Forsworn Paladin
+3 Ognis, the Dragon's Lash
+4 Reckless Stormseeker
+4 Crew Captain
+4 Gala Greeters
+4 Brushfire Elemental
+4 Kumano Faces Kakkazan
+4 Esika's Chariot
+4 Voltage Surge
+2 Ziatora's Proving Ground
+2 Swamp
+3 Mountain
+3 Forest
+4 Darkbore Pathway
+4 Blightstep Pathway
+4 Cragcrown Pathway
+[Sideboard]

@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Scarecrow
+Title=Scarecrow
+Icon=Scarecrow.jpg
+Difficulty=Medium
+Description=./Standard/Zendikar_Rising/Adam_Bruski_-_Mono-Green_Aggro_(Standard,_#1045473).dck
+Deck Type=constructed
+
+[Main]
+2 Yorvo, Lord of Garenbrig
+3 Wildborn Preserver
+3 Scavenging Ooze
+4 Gemrazer
+4 Kazandu Mammoth
+4 Lovestruck Beast
+4 Stonecoil Serpent
+4 Swarm Shambler
+3 The Great Henge
+4 Primal Might
+4 Turntimber Symbiosis
+1 Garruk, Unleashed
+1 Vivien, Monsters' Advocate
+3 Castle Garenbrig
+16 Forest
+[Sideboard]
+1 Scavenging Ooze
+1 Run Afoul
+1 Chainweb Aracnir
+2 Mazemind Tome
+3 Garruk's Harbinger
+3 Ram Through
+4 Oakhame Adversary

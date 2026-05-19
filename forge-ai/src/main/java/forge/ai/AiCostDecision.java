@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 
 import forge.ai.AiCardMemory.MemorySet;
 import forge.card.CardType;
-import forge.card.MagicColor;
+import forge.card.ColorSet;
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityUtils;
@@ -18,11 +18,11 @@ import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
-import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.*;
 
 import static forge.ai.ComputerUtilCard.getBestCreatureAI;
+import static forge.ai.ComputerUtilCard.getWorstCreatureAI;
 
 public class AiCostDecision extends CostDecisionMakerBase {
     private final CardCollection discarded;
@@ -58,11 +58,17 @@ public class AiCostDecision extends CostDecisionMakerBase {
     }
 
     @Override
+    public PaymentDecision visit(CostBeholdExile cost) {
+        final String type = cost.getType();
+        CardCollectionView hand = player.getCardsIn(cost.getRevealFrom());
+        hand = CardLists.getValidCards(hand, type.split(";"), player, source, ability);
+        return hand.isEmpty() ? null : PaymentDecision.card(getWorstCreatureAI(hand));
+    }
+
+    @Override
     public PaymentDecision visit(CostChooseColor cost) {
         int c = cost.getAbilityAmount(ability);
-        List<String> choices = player.getController().chooseColors("Color", ability, c, c,
-                new ArrayList<>(MagicColor.Constant.ONLY_COLORS));
-        return PaymentDecision.colors(choices);
+        return PaymentDecision.colors(player.getController().chooseColors("Color", ability, c, c, ColorSet.WUBRG));
     }
 
     @Override
@@ -193,8 +199,7 @@ public class AiCostDecision extends CostDecisionMakerBase {
             CardCollection valid = CardLists.getValidCards(player.getGame().getCardsIn(cost.getFrom().get(0)), typeCleaned, player, source, ability);
             CardCollection chosen = new CardCollection();
 
-            CardLists.sortByCmcDesc(valid);
-            Collections.reverse(valid);
+            valid.sort(CardLists.CmcComparator);
 
             int totalCMC = 0;
             for (Card card : valid) {
@@ -426,8 +431,9 @@ public class AiCostDecision extends CostDecisionMakerBase {
             return PaymentDecision.card(source);
         }
 
-        final CardCollection typeList = CardLists.getValidCards(player.getGame().getCardsIn(ZoneType.Battlefield),
+        CardCollection typeList = CardLists.getValidCards(player.getGame().getCardsIn(ZoneType.Battlefield),
                 cost.getType().split(";"), player, source, ability);
+        typeList = CardLists.filter(typeList, CardPredicates.canReceiveCounters(cost.getCounter()));
 
         Card card;
         if (cost.getType().equals("Creature.YouCtrl")) {
@@ -576,13 +582,18 @@ public class AiCostDecision extends CostDecisionMakerBase {
     @Override
     public PaymentDecision visit(CostRemoveAnyCounter cost) {
         final int c = cost.getAbilityAmount(ability);
-        final Card originalHost = ObjectUtils.getIfNull(ability.getOriginalHost(), source);
+        final Card originalHost = Objects.requireNonNullElse(ability.getOriginalHost(), source);
 
         if (c <= 0) {
             return null;
         }
 
-        CardCollectionView typeList = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), player, source, ability);
+        CardCollectionView typeList;
+        if (cost.payCostFromSource()) {
+            typeList = new CardCollection(ability.getHostCard());
+        } else {
+            typeList = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), player, source, ability);
+        }
         // only cards with counters are of interest
         typeList = CardLists.filter(typeList, CardPredicates.hasCounters());
 
@@ -852,6 +863,12 @@ public class AiCostDecision extends CostDecisionMakerBase {
             return null;
         }
         return PaymentDecision.card(cardToUnattach.getFirst());
+    }
+
+    @Override
+    public PaymentDecision visit(CostBlight cost) {
+        // This tells the AI: "Treat this like placing counters"
+        return this.visit((CostPutCounter) cost);
     }
 
     @Override

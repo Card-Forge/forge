@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Shaitan
+Title=Shaitan
+Icon=Shaitan.jpg
+Difficulty=Medium
+Description=./Standard/Duskmourn_House_of_Horror/Arne_Huschenbeth_-_Dimir_Midrange_(Standard,_#2249940).dck
+Deck Type=constructed
+
+[Main]
+4 Deep-Cavern Bat
+4 Enduring Curiosity
+4 Spyglass Siren
+4 Faerie Mastermind
+1 Ertai Resurrected
+3 Unstoppable Slasher
+1 Tishana's Tidebinder
+3 Cut Down
+3 Phantom Interference
+4 Go for the Throat
+1 Three Steps Ahead
+1 Anoint with Affliction
+2 Kaito, Bane of Nightmares
+4 Darkslick Shores
+4 Restless Reef
+3 Underground River
+4 Gloomlake Verge
+2 Fountainport
+5 Swamp
+3 Island
+[Sideboard]
+2 Tishana's Tidebinder
+1 Cut Down
+2 Negate
+2 Duress
+2 Sheoldred, the Apocalypse
+1 Anoint with Affliction
+1 Disdainful Stroke
+1 Gix's Command
+2 Ghost Vacuum
+1 Blot Out

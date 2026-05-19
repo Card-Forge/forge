@@ -2,7 +2,7 @@ Name:Grindclock
 ManaCost:2
 Types:Artifact
 A:AB$ PutCounter | Cost$ T | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on CARDNAME.
-A:AB$ Mill | Cost$ T | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills X cards, where X is the number of charge counters on CARDNAME.
+A:AB$ Mill | Cost$ T | NumCards$ X | ValidTgts$ Player | SpellDescription$ Target player mills X cards, where X is the number of charge counters on CARDNAME.
 SVar:X:Count$CardCounters.CHARGE
 SVar:UntapMe:True
 DeckHas:Ability$Counters

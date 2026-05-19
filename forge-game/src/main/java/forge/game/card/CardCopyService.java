@@ -130,7 +130,6 @@ public class CardCopyService {
         }
 
         c.setState(in.getCurrentStateName(), false);
-        c.setRules(in.getRules());
         c.setBackSide(in.isBackSide());
 
         return c;
@@ -236,8 +235,6 @@ public class CardCopyService {
         newCopy.setCommander(copyFrom.isCommander());
         newCopy.setCollectible(copyFrom.isCollectible());
 
-        newCopy.setRules(copyFrom.getRules());
-
         // needed to ensure that the LKI object has correct CMC info no matter what state the original card was in
         // (e.g. Scrap Trawler + transformed Harvest Hand)
         newCopy.setLKICMC(copyFrom.getCMC());
@@ -258,6 +255,10 @@ public class CardCopyService {
             newCopy.getState(CardStateName.Original).copyFrom(copyFrom.getState(CardStateName.Original), true);
             newCopy.addAlternateState(CardStateName.Secondary, false);
             newCopy.getState(CardStateName.Secondary).copyFrom(copyFrom.getState(CardStateName.Secondary), true);
+        } else if (copyFrom.hasState(CardStateName.PreparedSpell)) {
+            newCopy.getState(CardStateName.Original).copyFrom(copyFrom.getState(CardStateName.Original), true);
+            newCopy.addAlternateState(CardStateName.PreparedSpell, false);
+            newCopy.getState(CardStateName.PreparedSpell).copyFrom(copyFrom.getState(CardStateName.PreparedSpell), true);
         } else if (copyFrom.isSplitCard()) {
             newCopy.getState(CardStateName.Original).copyFrom(copyFrom.getState(CardStateName.Original), true);
             newCopy.addAlternateState(CardStateName.LeftSplit, false);
@@ -301,6 +302,7 @@ public class CardCopyService {
         // extra copy PT boost
         newCopy.setPTBoost(copyFrom.getPTBoostTable());
 
+        newCopy.copyFrom(copyFrom);
         newCopy.setCounters(Maps.newHashMap(copyFrom.getCounters()));
 
         newCopy.setColor(copyFrom.getColor());
@@ -315,7 +317,7 @@ public class CardCopyService {
         newCopy.setSaddled(copyFrom.isSaddled());
         if (newCopy.isSaddled()) newCopy.setSaddledByThisTurn(copyFrom.getSaddledByThisTurn());
         if (copyFrom.isSuspected()) {
-            newCopy.setSuspectedEffect(getLKICopy(copyFrom.getSuspectedEffect(), cachedMap));
+            newCopy.setSuspectedStatic(copyFrom.getSuspectedStatic().copy(newCopy, true));
         }
 
         newCopy.setDamageHistory(copyFrom.getDamageHistory());
@@ -337,7 +339,10 @@ public class CardCopyService {
         }
 
         newCopy.setIntensity(copyFrom.getIntensity(false));
-        newCopy.setPerpetual(copyFrom);
+        // Don't re-apply perpetual effects - they're already copied via copyFrom().
+        // Re-applying would create duplicate ReplacementEffect objects that cause
+        // infinite recursion in getReplacementList for "enters tapped" effects.
+        newCopy.setPerpetual(copyFrom, false);
 
         newCopy.addRemembered(copyFrom.getRemembered());
         newCopy.addImprintedCards(copyFrom.getImprintedCards());
@@ -352,14 +357,11 @@ public class CardCopyService {
         }
         newCopy.setChosenEvenOdd(copyFrom.getChosenEvenOdd());
 
-        newCopy.copyFrom(copyFrom);
-
         // for getReplacementList (run after setChangedCardKeywords for caching)
         newCopy.setStoredKeywords(copyFrom.getStoredKeywords(), true);
         newCopy.setStoredReplacements(copyFrom.getStoredReplacements());
 
         newCopy.copyChangedTextFrom(copyFrom);
-        newCopy.changedTypeByText = copyFrom.changedTypeByText;
         newCopy.changedCardKeywordsByWord = copyFrom.changedCardKeywordsByWord.copy(newCopy, true);
 
         newCopy.setGameTimestamp(copyFrom.getGameTimestamp());
@@ -374,11 +376,13 @@ public class CardCopyService {
 
         newCopy.setPlotted(copyFrom.isPlotted());
 
+        newCopy.setPrepared(copyFrom.getPrepared());
+
         newCopy.setMeldedWith(getLKICopy(copyFrom.getMeldedWith(), cachedMap));
 
         // update keyword cache on all states
         for (CardStateName s : newCopy.getStates()) {
-            newCopy.updateKeywordsCache(newCopy.getState(s));
+            newCopy.getState(s).updateKeywordsCache();
         }
 
         if (copyFrom.getCastSA() != null) {

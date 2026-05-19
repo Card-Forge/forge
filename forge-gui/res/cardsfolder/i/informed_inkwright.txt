@@ -1,0 +1,8 @@
+Name:Informed Inkwright
+ManaCost:1 W
+Types:Creature Human Wizard
+PT:2/2
+K:Vigilance
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | Execute$ TrigToken | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | TargetsValid$ Creature.inZoneBattlefield | TriggerDescription$ Repartee — Whenever you cast an instant or sorcery spell that targets a creature, create a 1/1 white and black Inkling creature token with flying.
+SVar:TrigToken:DB$ Token | TokenScript$ wb_1_1_inkling_flying | TokenOwner$ You
+Oracle:Vigilance\nRepartee — Whenever you cast an instant or sorcery spell that targets a creature, create a 1/1 white and black Inkling creature token with flying.

@@ -5,7 +5,6 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -121,6 +120,14 @@ public class ConquestAEtherScreen extends FScreen {
                 if (selectedRarity == card.getRarity()) {
                     strictPool.add(card);
                 }
+            } else if (card.getRarity() == CardRarity.BasicLand
+                    && !card.isVeryBasicLand()
+                    && !card.getName().equals("Wastes")
+                    && !MagicColor.Constant.SNOW_LANDS.contains(card.getName())
+                    && selectedRarity == CardRarity.Common
+                    && btnCMCFilter.selectedOption == ConquestUtil.CMCFilter.CMC_LOW
+                    && card.getRules().getColorIdentity().hasNoColorsExcept(commander.getCard().getRules().getColorIdentity())) {
+                filteredPool.add(card);
             }
         }
         updateShardCost();
@@ -154,7 +161,8 @@ public class ConquestAEtherScreen extends FScreen {
         while (true) {
             final CardRarity allowedRarity = rarity;
             rewardPool = IterableUtil.filter(filteredPool, card -> allowedRarity == card.getRarity()
-                    || allowedRarity == CardRarity.Rare && card.getRarity() == CardRarity.Special);
+                    || allowedRarity == CardRarity.Rare && card.getRarity() == CardRarity.Special
+                    || allowedRarity == CardRarity.Common && card.getRarity() == CardRarity.BasicLand); // allow L rarity for Common (except very basic lands)
             if (Iterables.isEmpty(rewardPool)) { //if pool is empty, must reduce rarity and try again
                 if (rarity == minRarity) {
                     return;
@@ -355,7 +363,7 @@ public class ConquestAEtherScreen extends FScreen {
         private final List<T> options;
         protected T selectedOption;
 
-        private AbstractFilterButton(String caption0, T[] options0, final Function<T, String> display) {
+        private AbstractFilterButton(String caption0, T[] options0, final FSerializableFunction<T, String> display) {
             super(new FLabel.Builder().iconInBackground().pressedColor(FILTER_BUTTON_PRESSED_COLOR)
                     .textColor(FILTER_BUTTON_TEXT_COLOR).alphaComposite(1f).align(Align.center));
             caption = caption0;

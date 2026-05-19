@@ -3,6 +3,6 @@ ManaCost:3 B
 Types:Enchantment Creature Zombie
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Enchantment.YouCtrl | Execute$ TrigExile | TriggerDescription$ Constellation — Whenever CARDNAME or another enchantment you control enters, exile target player's graveyard.
-SVar:TrigExile:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Card
+SVar:TrigExile:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | ChangeType$ Card
 AI:RemoveDeck:Random
 Oracle:Constellation — Whenever Agent of Erebos or another enchantment you control enters, exile target player's graveyard.

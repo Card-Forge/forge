@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: fix md links for Gollum
-        run: find ${{ github.workspace }}/docs/ -type f -name "*.md" -exec sed -i -E 's|(\[[^]]+]\()([^)]+\/)*([^).]+).md\)|\1\3)|g' '{}' \;
+        run: find ${{ github.workspace }}/docs/ -type f -name "*.md" -exec sed -i -E 's|(\[[^]]+]\()([^)]+\/)*([^).]+).md(#)*([[:alnum:]]*)\)|\1\3\4\5)|g' '{}' \;
       - name: fix image links for Gollum
         run: find ${{ github.workspace }}/docs/ -type f -name "*.png" -exec mv '{}' ${{ github.workspace }}/docs/ \;
       - uses: Andrew-Chen-Wang/github-wiki-action@v5

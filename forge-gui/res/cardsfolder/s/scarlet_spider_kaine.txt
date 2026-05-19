@@ -1,4 +1,5 @@
 Name:Scarlet Spider, Kaine
+Variant:UniversesWithin:FlavorName:Kivni, Orb Weaver
 ManaCost:B R
 Types:Legendary Creature Spider Human Hero
 PT:2/1

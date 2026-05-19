@@ -13,7 +13,7 @@ import forge.assets.FSkinFont;
 import forge.assets.TextRenderer;
 import forge.game.GameLog;
 import forge.game.GameLogEntry;
-import forge.game.GameLogEntryType;
+import forge.game.GameLogVerbosity;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.menu.FDropDown;
 import forge.menu.FMenuTab;
@@ -77,8 +77,14 @@ public class VLog extends FDropDown {
     protected ScrollBounds updateAndGetPaneSize(float maxWidth, float maxVisibleHeight) {
         clear();
 
-        GameLogEntryType logVerbosityFilter = GameLogEntryType.valueOf(FModel.getPreferences().getPref(FPref.DEV_LOG_ENTRY_TYPE));
-        List<GameLogEntry> logEntrys = logSupplier.get().getLogEntries(logVerbosityFilter);
+        GameLogVerbosity verbosity = GameLogVerbosity.fromString(FModel.getPreferences().getPref(FPref.DEV_LOG_ENTRY_TYPE));
+        List<GameLogEntry> logEntrys;
+        if (verbosity == GameLogVerbosity.CUSTOM) {
+            logEntrys = logSupplier.get().getLogEntriesForTypes(
+                    FModel.getPreferences().getCustomLogTypes());
+        } else {
+            logEntrys = logSupplier.get().getLogEntriesForVerbosity(verbosity);
+        }
 
         LogEntryDisplay logEntryDisplay;
         float width = maxWidth - getDropDownOwner().screenPos.x; //stretch from tab to edge of screen
@@ -98,7 +104,7 @@ public class VLog extends FDropDown {
         else {
             boolean isAltRow = false;
             for (int i = logEntrys.size() - 1; i >= 0; i--) { //show latest entry on bottom
-                logEntryDisplay = add(new LogEntryDisplay(logEntrys.get(i).message, isAltRow));
+                logEntryDisplay = add(new LogEntryDisplay(logEntrys.get(i).message(), isAltRow));
                 height = logEntryDisplay.getMinHeight(width);
                 logEntryDisplay.setBounds(0, y, width, height);
                 isAltRow = !isAltRow;

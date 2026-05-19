@@ -1,4 +1,5 @@
 Name:Spider-Man No More
+Variant:UniversesWithin:FlavorName:Hide in Mundanity
 ManaCost:1 U
 Types:Enchantment Aura
 K:Enchant:Creature

@@ -1,4 +1,5 @@
 Name:Taxi Driver
+Variant:UniversesWithin:FlavorName:Full-Throttle Fanatic
 ManaCost:1 R
 Types:Creature Human Pilot
 PT:3/1

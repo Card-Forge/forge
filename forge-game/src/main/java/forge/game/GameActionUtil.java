@@ -20,6 +20,7 @@ package forge.game;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
+import forge.card.CardStateName;
 import forge.card.ColorSet;
 import forge.card.GamePieceType;
 import forge.card.mana.ManaCost;
@@ -56,7 +57,6 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
-
 
 /**
  * <p>
@@ -406,7 +406,7 @@ public final class GameActionUtil {
         final Game game = source.getGame();
         boolean lkicheck = false;
 
-        Card newHost = ((Spell)sa).getAlternateHost(source);
+        Card newHost = sa.getAlternateHost(source);
         if (newHost != null) {
             source = newHost;
             lkicheck = true;
@@ -764,9 +764,8 @@ public final class GameActionUtil {
             }
         }
 
-        // reset active Trigger
         if (reset) {
-            host.getGame().getTriggerHandler().resetActiveTriggers(false);
+            host.getGame().getTriggerHandler().resetActiveTriggers(false, null);
         }
 
         if (result != null) {
@@ -818,8 +817,6 @@ public final class GameActionUtil {
 
         SpellAbilityEffect.addForgetOnMovedTrigger(eff, "Stack");
 
-        eff.updateStateForView();
-
         game.getAction().moveToCommand(eff, sa);
 
         return eff;
@@ -858,8 +855,6 @@ public final class GameActionUtil {
                 baseMana = "Any";
             }
         } else if (sa.getApi() == ApiType.ManaReflected) {
-            baseMana = abMana.getExpressChoice();
-        } else if (abMana.isSpecialMana()) {
             baseMana = abMana.getExpressChoice();
         } else {
             baseMana = abMana.mana(sa);
@@ -936,14 +931,6 @@ public final class GameActionUtil {
         return completeList;
     }
 
-    public static void checkStaticAfterPaying(Card c) {
-        c.getGame().getAction().checkStaticAbilities(false);
-
-        c.updateKeywords();
-
-        c.getGame().getTriggerHandler().resetActiveTriggers();
-    }
-
     public static void rollbackAbility(SpellAbility ability, final Zone fromZone, final int zonePosition, CostPayment payment, Card oldCard) {
         // cancel ability during target choosing
         final Game game = ability.getActivatingPlayer().getGame();
@@ -961,7 +948,9 @@ public final class GameActionUtil {
             oldCard.getZone().remove(oldCard);
 
             // might have been an alternative lki host
-            oldCard = ability.getCardState().getCard();
+            if (oldCard.getCurrentStateName() != CardStateName.PreparedSpell) {
+                oldCard = ability.getCardState().getCard();
+            }
 
             oldCard.setCastSA(null);
             oldCard.setCastFrom(null);

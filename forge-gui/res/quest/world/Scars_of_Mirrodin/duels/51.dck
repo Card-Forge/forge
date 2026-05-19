@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Saruman
+Title=Saruman
+Icon=Saruman.jpg
+Difficulty=Very Hard
+Description=../Modern/Scars_of_Mirrodin/Magic-League_Modern_Trial_12-11-2012/Pankill_-_Zoo_(Modern,_#41223).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Birds of Paradise
+4 Bloodbraid Elf
+3 Fulminator Mage
+4 Knight of the Reliquary
+4 Noble Hierarch
+4 Tarmogoyf
+4 Lightning Bolt
+4 Lightning Helix
+4 Boom // Bust
+3 Ajani Vengeant
+4 Arid Mesa
+2 Copperline Gorge
+2 Forest
+1 Ghost Quarter
+2 Horizon Canopy
+1 Marsh Flats
+1 Mountain
+2 Plains
+1 Sacred Foundry
+1 Stomping Ground
+1 Temple Garden
+4 Verdant Catacombs
+[Sideboard]
+3 Ancient Grudge
+1 Bojuka Bog
+2 Cunning Sparkmage
+2 Path to Exile
+1 Raging Ravine
+2 Sulfur Elemental
+3 Tormod's Crypt

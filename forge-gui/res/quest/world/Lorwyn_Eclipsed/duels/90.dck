@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Hulk
+Title=Hulk
+Icon=Hulk.jpg
+Difficulty=Hard
+Description=./Modern/Lorwyn_Eclipsed/GoleadoR9_-_Living_End_(Modern,_#2786547).dck
+Deck Type=constructed
+
+[Main]
+4 Wistfulness
+2 Deceit
+4 Overlord of the Balemurk
+1 Disciple of Freyalise
+2 Troll of Khazad-dûm
+2 Generous Ent
+1 Halo Forager
+4 Street Wraith
+3 Endurance
+1 Terror of the Peaks
+4 Shardless Agent
+4 Subtlety
+3 Formidable Speaker
+1 Flare of Denial
+1 Sink into Stupor
+4 Force of Negation
+3 Living End
+1 Mistrise Village
+1 Hedge Maze
+1 Undercity Sewers
+1 Underground Mortuary
+1 Boseiju, Who Endures
+1 Swamp
+1 Island
+1 Forest
+1 Polluted Delta
+4 Misty Rainforest
+1 Breeding Pool
+1 Watery Grave
+1 Overgrown Tomb
+[Sideboard]
+1 Deceit
+2 Force of Vigor
+3 Mystical Dispute
+2 Collector Ouphe
+2 Dismember
+1 Faerie Macabre
+2 Fulminator Mage
+2 Inevitable Betrayal

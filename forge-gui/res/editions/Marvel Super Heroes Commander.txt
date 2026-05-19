@@ -1,0 +1,29 @@
+[metadata]
+Code=MSC
+Date=2026-06-26
+Name=Marvel Super Heroes Commander
+Type=Commander
+ScryfallCode=MSC
+
+[cards]
+1 M Invisible Woman @Erikas Perl
+2 M Mister Fantastic @Gintas Galvanauskas
+3 M Human Torch @Vilhelmas Banys
+4 M The Thing @Darius Zablockis
+5 M Captain America, Team Leader @Mark Spears
+6 M Doctor Doom, King of Latveria @Nathaniel Himawan
+7 M T'Challa, the Black Panther @Eli Minaya
+119 R Vision, Synthezoid Avenger @Mark Spears
+726 R Lucky the Pizza Dog @Rudy Siswanto
+N.A. R Abomination, Irradiated Brute @
+N.A. R Absorbing Man and Titania @
+N.A. R Black Widow, Intel Expert @
+N.A. R Captain America, Unbowed @
+N.A. R Hawkeye, Trick Shot @
+N.A. R Hulk, Always Angry @
+N.A. R Iron Man, Futurist Paragon @
+N.A. R Loki, God of Lies @
+N.A. R M.O.D.O.K., Evil Intellect @
+N.A. R Thanos, Death's Consort @
+N.A. R Thor, Guardian of Midgard @
+N.A. R Ultron, Machine Overlord @

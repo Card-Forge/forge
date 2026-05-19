@@ -41,6 +41,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.function.Function;
 
+import forge.deck.CommanderBracketCalculator;
+
 public enum ColumnDef {
     /**
      * The column containing the inventory item name.
@@ -312,6 +314,15 @@ public enum ColumnDef {
     DECK_AI("lblAI", "lblAIStatus", 38, true, SortState.DESC,
             from -> toDeck(from.getKey()).getAI().inMainDeck,
             from -> toDeck(from.getKey()).getAI()),
+    DECK_BRACKET("lblBracket", "ttCommanderBracket", 55, true, SortState.ASC,
+            from -> {
+                DeckProxy deck = toDeck(from.getKey());
+                return deck == null ? 1 : CommanderBracketCalculator.getBracket(deck.getDeck());
+            },
+            from -> {
+                DeckProxy deck = toDeck(from.getKey());
+                return deck == null ? "" : CommanderBracketCalculator.getDisplayBracket(deck.getDeck());
+            }),
     /**
      * The main library size column.
      */
@@ -323,7 +334,25 @@ public enum ColumnDef {
      */
     DECK_SIDE("lblSide", "lblSideboard", 30, true, SortState.ASC,
             from -> toDeck(from.getKey()).getSideSize(),
-            from -> toDeck(from.getKey()).getSideSize());
+            from -> toDeck(from.getKey()).getSideSize()),
+    /**
+     * The key card indicator column for cards in the current deck.
+     */
+    DECK_KEY_CARD("lblKey", "ttKeyCard", 20, true, SortState.DESC,
+            from -> {
+                InventoryItem item = from.getKey();
+                if (item instanceof PaperCard) {
+                    return 0; // no special sorting for key cards
+                }
+                return -1;
+            },
+            from -> {
+                InventoryItem item = from.getKey();
+                if (item instanceof PaperCard) {
+                    return item; // pass the card through to the renderer
+                }
+                return null;
+            });
 
     ColumnDef(String shortName0, String longName0, int preferredWidth0, boolean isWidthFixed0, SortState sortState0,
               Function<Entry<InventoryItem, Integer>, Comparable<?>> fnSort0,

@@ -7,5 +7,5 @@ SVar:NeedsToPlayVar:CountOpps LTCountMe
 SVar:CountOpps:Count$Valid Creature.OppCtrl+Green
 SVar:CountMe:Count$Valid Creature.YouCtrl+Green
 AI:RemoveDeck:Random
-DeckHas:Keyword$Forestwalk
+DeckHas:Keyword$Landwalk:Forest
 Oracle:Green creatures have forestwalk. (They can't be blocked as long as defending player controls a Forest.)

@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Bep
+Title=Bep
+Icon=Bep.jpg
+Difficulty=Hard
+Description=./Modern/Theros_Beyond_Death/BReal2_-_Hollow_one_(Modern,_#940515).dck
+Deck Type=constructed
+
+[Main]
+3 Ox of Agonas
+3 Lightning Skelemental
+4 Street Wraith
+4 Seasoned Pyromancer
+4 Hollow One
+4 Flameblade Adept
+4 Bloodghast
+4 Lightning Bolt
+2 Unearth
+2 Collective Brutality
+4 Goblin Lore
+4 Burning Inquiry
+1 Swamp
+2 Blood Crypt
+3 Mountain
+4 Bloodstained Mire
+4 Blackcleave Cliffs
+4 Arid Mesa
+[Sideboard]
+2 Shenanigans
+3 Leyline of the Void
+3 Rotting Regisaur
+3 Blood Moon
+4 Fatal Push

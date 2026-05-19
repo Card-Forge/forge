@@ -1,0 +1,8 @@
+Name:Thornfist Striker
+ManaCost:2 G
+Types:Creature Elf Druid
+PT:3/3
+K:Ward:1
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | AddKeyword$ Trample | CheckSVar$ X | Description$ Infusion — Creatures you control get +1/+0 and have trample as long as you gained life this turn.
+SVar:X:Count$LifeYouGainedThisTurn
+Oracle:Ward {1} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {1}.)\nInfusion — Creatures you control get +1/+0 and have trample as long as you gained life this turn.

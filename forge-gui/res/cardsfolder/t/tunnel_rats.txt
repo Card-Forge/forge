@@ -1,0 +1,6 @@
+Name:Tunnel Rats
+ManaCost:1 B
+Types:Creature Rat
+PT:2/2
+A:AB$ ChangeZone | Cost$ 4 B | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | Tapped$ True | SpellDescription$ Return this card from your graveyard to the battlefield tapped.
+Oracle:{4}{B}: Return this card from your graveyard to the battlefield tapped.

@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Wilhelm Grimm
+Title=Wilhelm Grimm
+Icon=Wilhelm Grimm.jpg
+Difficulty=Hard
+Description=./Modern/Kamigawa_Neon_Dynasty/Draxxonator_-_Boros_Kiki_(Modern,_#1426372).dck
+Deck Type=constructed
+
+[Main]
+1 Ragavan, Nimble Pilferer
+1 Walking Ballista
+2 Fable of the Mirror-Breaker
+2 Thraben Inspector
+3 Ranger-Captain of Eos
+4 Esper Sentinel
+4 Solitude
+4 Fury
+1 Mana Tithe
+4 Ephemerate
+4 Brought Back
+4 Cleansing Wildfire
+4 Showdown of the Skalds
+1 Savai Triome
+1 Rustvale Bridge
+1 Mountain
+2 Ghost Quarter
+2 Marsh Flats
+3 Plains
+4 Flagstones of Trokair
+4 Arid Mesa
+4 Sacred Foundry
+[Sideboard]
+1 Hidetsugu Consumes All
+1 Chandra, Awakened Inferno
+2 Soul-Guide Lantern
+2 Sanctifier en-Vec
+2 Fulminator Mage
+2 Drannith Magistrate
+2 Burrenton Forge-Tender
+3 Prismatic Ending

@@ -3,6 +3,6 @@ ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ G | SubAbility$ DBPain | SpellDescription$ Add {G}. CARDNAME deals 1 damage to you.
 SVar:DBPain:DB$ DealDamage | NumDmg$ 1 | Defined$ You
-A:AB$ Pump | Cost$ G T Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +3 | NumDef$ +3 | Activation$ Threshold | PrecostDesc$ Threshold — | SpellDescription$ Target creature gets +3/+3 until end of turn. Activate only if there are seven or more cards in your graveyard.
+A:AB$ Pump | Cost$ G T Sac<1/CARDNAME> | ValidTgts$ Creature | NumAtt$ +3 | NumDef$ +3 | Activation$ Threshold | PrecostDesc$ Threshold — | SpellDescription$ Target creature gets +3/+3 until end of turn. Activate only if there are seven or more cards in your graveyard.
 AI:RemoveDeck:Random
 Oracle:{T}: Add {G}. Centaur Garden deals 1 damage to you.\nThreshold — {G}, {T}, Sacrifice Centaur Garden: Target creature gets +3/+3 until end of turn. Activate only if there are seven or more cards in your graveyard.

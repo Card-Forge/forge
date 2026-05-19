@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Eshu
+Title=Eshu
+Icon=Eshu.jpg
+Difficulty=Hard
+Description=./Modern/Guilds_of_Ravnica/Alberto_Tallon_-_Bant_Spirit_(Modern,_#770206).dck
+Deck Type=constructed
+
+[Main]
+4 Drogskol Captain
+2 Geist of Saint Traft
+4 Mausoleum Wanderer
+4 Noble Hierarch
+4 Rattlechains
+4 Selfless Spirit
+4 Spell Queller
+4 Supreme Phantom
+2 Thalia, Guardian of Thraben
+4 Collected Company
+3 Path to Exile
+2 Botanical Sanctum
+1 Breeding Pool
+2 Cavern of Souls
+4 Flooded Strand
+1 Forest
+1 Hallowed Fountain
+2 Horizon Canopy
+1 Island
+2 Misty Rainforest
+1 Moorland Haunt
+1 Plains
+1 Temple Garden
+3 Windswept Heath
+[Sideboard]
+3 Damping Sphere
+1 Detention Sphere
+2 Dromoka's Command
+1 Engineered Explosives
+1 Knight of Autumn
+1 Ravenous Trap
+3 Rest in Peace
+1 Settle the Wreckage
+2 Stony Silence

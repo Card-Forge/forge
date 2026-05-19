@@ -32,6 +32,8 @@ public interface IDevModeCheats {
 
     void addCardToBattlefield();
 
+    void addTokenToBattlefield();
+
     void addCardToLibrary();
 
     void addCardToGraveyard();
@@ -124,6 +126,9 @@ public interface IDevModeCheats {
         }
         @Override
         public void addCardToBattlefield() {
+        }
+        @Override
+        public void addTokenToBattlefield() {
         }
         @Override
         public void addCardToLibrary() {

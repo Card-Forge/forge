@@ -1,0 +1,9 @@
+Name:Stadium Tidalmage
+ManaCost:2 U R
+Types:Creature Djinn Sorcerer
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ Whenever this creature enters or attacks, you may draw a card. If you do, discard a card.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDiscard | Secondary$ True | TriggerDescription$ Whenever this creature enters or attacks, you may draw a card. If you do, discard a card.
+SVar:TrigDiscard:AB$ Discard | Defined$ You | Mode$ TgtChoose | Cost$ Draw<1/You>
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever this creature enters or attacks, you may draw a card. If you do, discard a card.

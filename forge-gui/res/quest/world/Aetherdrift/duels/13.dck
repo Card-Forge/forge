@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Zegana
+Title=Zegana
+Icon=Zegana.jpg
+Difficulty=Medium
+Description=./Standard/Aetherdrift/Sato_Kohei_-_Set_Mountain,_Play_Goblin!!_(Standard,_#2382085).dck
+Deck Type=constructed
+
+[Main]
+4 Fanatical Firebrand
+4 Krenko, Mob Boss
+4 Rundvelt Hordemaster
+4 Searslicer Goblin
+4 Burnout Bashtronaut
+4 Draconautics Engineer
+4 Greasewrench Goblin
+4 Howlsquad Heavy
+2 Agatha's Soul Cauldron
+3 Torch the Tower
+7 Mountain
+4 Karplusan Forest
+4 Copperline Gorge
+4 Thornspire Verge
+4 Amonkhet Raceway
+[Sideboard]
+1 Pyroclasm
+2 Brotherhood's End
+1 Sword of Forge and Frontier
+2 Lithomantic Barrage
+2 Witchstalker Frenzy
+1 Agatha's Soul Cauldron
+1 Case of the Crimson Pulse
+4 Pawpatch Formation
+1 Chandra, Spark Hunter

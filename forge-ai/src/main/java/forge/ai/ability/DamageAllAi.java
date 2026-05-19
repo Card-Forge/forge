@@ -32,7 +32,7 @@ public class  DamageAllAi extends SpellAbilityAi {
         	dmg = ComputerUtilMana.getConvergeCount(sa, ai);
         }
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
-            x = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
+            x = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
         }
         if (x == -1) {
             if (determineOppToKill(ai, sa, source, dmg) != null) {
@@ -43,9 +43,8 @@ public class  DamageAllAi extends SpellAbilityAi {
             // creatures + player, e.g. Pestilence, etc.)
              if (evaluateDamageAll(ai, sa, source, dmg) > 0) {
                  return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-             } else {
-                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
              }
+             return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         } else {
             int best = -1, best_x = -1;
             Player bestOpp = determineOppToKill(ai, sa, source, x);
@@ -112,7 +111,7 @@ public class  DamageAllAi extends SpellAbilityAi {
         }
 
         final String validP = sa.getParamOrDefault("ValidPlayers", "");
-        // TODO: if damage is dependant on mana paid, maybe have X be human's max life
+        // TODO: if damage is dependent on mana paid, maybe have X be human's max life
         // Don't kill yourself
         if (validP.equals("Player") && (ai.getLife() <= ComputerUtilCombat.predictDamageTo(ai, dmg, source, false))) {
             return -1;
@@ -175,16 +174,14 @@ public class  DamageAllAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
         final Card source = sa.getHostCard();
         final String validP = sa.getParamOrDefault("ValidPlayers", "");
 
         final String damage = sa.getParam("NumDmg");
         int dmg;
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
-            // Set PayX here to maximum value.
-            dmg = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
-            sa.setXManaCostPaid(dmg);
+            dmg = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
         } else {
             dmg = AbilityUtils.calculateAmount(source, damage, sa);
         }
@@ -258,7 +255,7 @@ public class  DamageAllAi extends SpellAbilityAi {
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")
                 && sa.getPayCosts() != null && sa.getPayCosts().hasXInAnyCostPart()) {
             // Set PayX here to maximum value.
-            dmg = ComputerUtilCost.getMaxXValue(sa, ai, true);
+            dmg = ComputerUtilCost.setMaxXValue(sa, ai, true);
             sa.setXManaCostPaid(dmg);
         } else {
             dmg = AbilityUtils.calculateAmount(source, damage, sa);

@@ -1,0 +1,42 @@
+[metadata]
+Name=UBG Aggro
+Deck Type=constructed
+Title=UBG Aggro
+Description=UBG Aggro
+Difficulty=Easy
+Icon=James Bond
+[Main]
+4 Aether Hub
+4 Blooming Marsh
+3 Blossoming Defense
+4 Botanical Sanctum
+3 Bristling Hydra
+1 Drowned Catacomb
+2 Evolving Wilds
+4 Fatal Push
+2 Fetid Pools
+2 Forest
+1 Forest
+1 Forest
+4 Glint-Sleeve Siphoner
+2 Hadana's Climb
+1 Island
+4 Jadelight Ranger
+1 Swamp
+1 Swamp
+2 The Scarab God
+2 Thrashing Brontodon
+1 Verdurous Gearhulk
+3 Vraska's Contempt
+4 Walking Ballista
+4 Winding Constrictor
+[Sideboard]
+1 Arguel's Blood Fast
+2 Carnage Tyrant
+1 Cartouche of Ambition
+2 Deathgorge Scavenger
+2 Duress
+1 Lost Legacy
+4 Negate
+1 River's Rebuke
+1 Vraska, Relic Seeker

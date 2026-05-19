@@ -61,4 +61,9 @@ public class Archetype implements Serializable {
         }
         return output.toString();
     }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

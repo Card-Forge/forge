@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Nibbler
+Title=Nibbler
+Icon=Nibbler.jpg
+Difficulty=Medium
+Description=Magic_Origins/SCG_Invitational_Qualifier_Springfield/Andrew_King_-_Abzan_Control_(Standard,_#305221).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Courser of Kruphix
+4 Den Protector
+2 Nissa, Vastwood Seer
+4 Siege Rhino
+1 Tasigur, the Golden Fang
+4 Abzan Charm
+1 Bile Blight
+1 Dromoka's Command
+3 Hero's Downfall
+1 Ultimate Price
+2 Languish
+4 Thoughtseize
+3 Elspeth, Sun's Champion
+1 Caves of Koilos
+3 Forest
+3 Llanowar Wastes
+2 Plains
+4 Sandsteppe Citadel
+4 Temple of Malady
+4 Temple of Silence
+1 Urborg, Tomb of Yawgmoth
+4 Windswept Heath
+[Sideboard]
+2 Arashin Cleric
+1 Crux of Fate
+2 Drown in Sorrow
+1 Duress
+1 Glare of Heresy
+1 Nissa, Worldwaker
+1 Read the Bones
+1 Silence the Believers
+1 Sorin, Solemn Visitor

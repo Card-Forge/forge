@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Bart Simpson
+Title=Bart Simpson
+Icon=Bart Simpson.jpg
+Difficulty=Hard
+Description=./Modern/Foundations/Lohaller_-_Other_(Modern,_#2286799).dck
+Deck Type=constructed
+
+[Main]
+1 Griselbrand
+4 Fallaji Archaeologist
+4 Oracle of Tragedy
+4 Kiora, the Rising Tide
+4 Spell Snare
+4 Flare of Denial
+4 Traverse the Ulvenwald
+4 Lórien Revealed
+4 Malevolent Rumble
+4 Omniscience
+4 Karn, the Great Creator
+1 Forest
+1 Island
+4 Misty Rainforest
+4 Breeding Pool
+2 Wooded Foothills
+1 Boseiju, Who Endures
+2 Hedge Maze
+4 Shifting Woodland
+[Sideboard]
+1 Pithing Needle
+1 Clock of Omens
+1 Tormod's Crypt
+1 Ancestral Statue
+1 Aetherflux Reservoir
+3 Haywire Mite
+1 Cityscape Leveler
+1 The One Ring
+1 Essence Reliquary
+4 Consign to Memory

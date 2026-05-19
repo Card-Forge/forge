@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling Black
+Title=Dungeon Crawling Black
+Icon=Dungeon Crawling Black.jpg
+Difficulty=Easy
+Description=./Standard/Aetherdrift/Drew_Martin_-_Selesnya_Cage_(Standard,_#2381219).dck
+Deck Type=constructed
+
+[Main]
+4 Brightglass Gearhulk
+1 Insidious Fungus
+4 Llanowar Elves
+1 Novice Inspector
+1 Nurturing Pixie
+4 Overlord of the Mistmoors
+4 Pawpatch Recruit
+4 Sandstorm Salvager
+1 Seraphic Steed
+2 Tender Wildguide
+1 Trostani, Three Whispers
+4 Collector's Cage
+2 Dusk Rose Reliquary
+1 Parting Gust
+1 Virtue of Loyalty
+1 Sheltered by Ghosts
+1 Valgavoth's Lair
+4 Brushland
+4 Forest
+4 Hushwood Verge
+4 Plains
+4 Razorverge Thicket
+3 Restless Prairie
+[Sideboard]
+2 Destroy Evil
+1 Ghost Vacuum
+1 Haywire Mite
+2 Nissa, Ascended Animist
+2 Obstinate Baloth
+2 Rest in Peace
+2 Sheltered by Ghosts
+1 Split Up
+1 Thunderous Velocipede
+1 Insidious Fungus

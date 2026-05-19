@@ -28,10 +28,11 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Scaling;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
+import com.github.tommyettinger.textra.TypingLabel;
+
 import forge.Forge;
 import forge.Graphics;
 import forge.ImageKeys;
-import forge.StaticData;
 import forge.adventure.data.ItemData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.scene.RewardScene;
@@ -43,6 +44,7 @@ import forge.assets.ImageCache;
 import forge.card.CardImageRenderer;
 import forge.card.CardRenderer;
 import forge.card.CardSplitType;
+import forge.deck.DeckFormat;
 import forge.deck.DeckSection;
 import forge.game.card.CardView;
 import forge.gui.GuiBase;
@@ -50,13 +52,15 @@ import forge.item.PaperCard;
 import forge.item.SealedProduct;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
-import forge.util.Aggregates;
+import forge.util.MyRandom;
 import forge.util.CardTranslation;
 import forge.util.ImageFetcher;
 import forge.util.ImageUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static forge.localinstance.properties.ForgeConstants.IMAGE_LIST_QUEST_BOOSTERS_FILE;
@@ -69,6 +73,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     HoldTooltip holdTooltip;
     Reward reward;
     public TextraButton autoSell;
+    public TypingLabel ownedLabel;
     ShaderProgram shaderGrayscale = Forge.getGraphics().getShaderGrayscale();
     ShaderProgram shaderRoundRect = Forge.getGraphics().getShaderRoundedRect();
 
@@ -87,7 +92,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     private boolean hover, hasbackface;
     boolean loaded = true;
     boolean alternate = false, shown = false;
-    boolean isRewardShop, showOverlay, isLoot;
+    boolean isRewardShop, showOverlay, canAutoSell;
+    private String priceTag = "";
     TextraLabel overlayLabel;
     int artIndex = 1;
     String imageKey = "";
@@ -98,6 +104,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     String description = "";
     private boolean shouldDisplayText = false;
     private boolean isDragging = false;
+    private boolean isNew = false;
 
     @Override
     public void dispose() {
@@ -112,6 +119,15 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             T.dispose();
         if (Talt != null)
             Talt.dispose();
+    }
+
+    @Override
+    public boolean remove() {
+        if (ownedLabel != null) {
+            ownedLabel.remove();
+        }
+
+        return super.remove();
     }
 
     public boolean toolTipIsVisible() {
@@ -192,17 +208,19 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         if(reward.type.equals(Reward.Type.CardPack))
         {
             Texture t = ImageCache.getInstance().getImage(imageKey, false, true);
+            if (t == null)
+                return;
             Sprite backSprite = Config.instance().getItemSprite("CardBack");
             Sprite item = new Sprite(new TextureRegion(t));
             setItemTooltips(item, backSprite, true);
-            //processSprite(backSprite, item, Controls.newTextraLabel("[%200]" + reward.getDeck().getComment() + " " +
-            //        "Booster"), 0, -10, true);
+            processSprite(backSprite, item, Controls.newTextraLabel("[%200]" + reward.getDeck().getComment() + " " +
+                    "Booster"), 0, -10, true);
         }
         Gdx.graphics.requestRendering();
     }
 
     public void setAutoSell(boolean sell) {
-        if (!isLoot)
+        if (!canAutoSell)
             return;
         if (autoSell == null)
             return;
@@ -221,7 +239,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
     private void updateAutoSell() {
         reward.setAutoSell(!reward.isAutoSell());
-        autoSell.setText(reward.isAutoSell() ? "[%85][+Sell]" : "[%85][GRAY] ");
+        autoSell.setText(reward.isAutoSell() ? "[%85][+Sell]" + priceTag : "[%85][GRAY] " + priceTag);
         autoSell.getColor().a = reward.isAutoSell() ? 1f : 0.7f;
     }
 
@@ -229,7 +247,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         this.flipOnClick = flippable;
         this.reward = reward;
         this.isRewardShop = RewardScene.Type.Shop.equals(type);
-        this.isLoot = RewardScene.Type.Loot.equals(type);
+        this.canAutoSell = (RewardScene.Type.Loot.equals(type) || RewardScene.Type.QuestReward.equals(type));
         this.showOverlay = showOverlay;
 
         if (backTexture == null) {
@@ -238,7 +256,9 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         switch (reward.type) {
             case Card: {
                 if (!reward.isNoSell) {
-                    autoSell = Controls.newTextButton("[%85][GRAY] ");
+                    int sellPrice = AdventurePlayer.current().cardSellPrice(reward.getCard());
+                    priceTag = sellPrice > 0 ? " " + sellPrice : "";
+                    autoSell = Controls.newTextButton("[%85][GRAY] " + priceTag);
                     autoSell.getColor().a = 0.7f; // semi-transparent by default
                     autoSell.addListener(new InputListener() {
                         @Override
@@ -250,14 +270,22 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                             if (!reward.isAutoSell()) autoSell.getColor().a = 0.7f;
                         }
                     });
-                    float scale = autoSell.getWidth();
-                    autoSell.setSize(scale, scale * 1.2f);
+                    float btnHeight = autoSell.getTextraLabel().layout.getHeight() * 1.8f;
+                    autoSell.setSize(autoSell.getWidth(), btnHeight);
                     autoSell.addListener(new ClickListener() {
                         public void clicked(InputEvent event, float x, float y) {
                             updateAutoSell();
                         }
                     });
                 }
+                
+                int ownedCount = AdventurePlayer.current().getCollectionCards(true).count(reward.card);
+                this.isNew = ownedCount == 0;
+                String textContent = this.isNew
+                    ? "{WAVE}{STYLE=SHADOW}{COLOR=LIME}[%85]" + Forge.getLocalizer().getMessage("lblNew")
+                    : "{COLOR=WHITE}{STYLE=BLACKEN}[%65]" + Forge.getLocalizer().getMessage("lblOwned")  + ": " + ownedCount;
+                ownedLabel = Controls.newTypingLabel(textContent);
+
                 hasbackface = reward.getCard().hasBackFace();
 
                 if (ImageCache.getInstance().imageKeyFileExists(reward.getCard().getImageKey(false)) && !Forge.enableUIMask.equals("Art")) {
@@ -388,39 +416,34 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                         artIndex = 0;
 
                     } else {
-                        int maxIdx = StaticData.instance().getEditions().get(editionCode).getCntBoosterPictures();
-                        artIndex = Aggregates.randomInt(1, 2);//MyRandom.getRandom().nextInt(maxIdx) + 1;
-                        imageKey = ImageKeys.BOOSTER_PREFIX + editionCode + ((1 >= maxIdx) ? "" : ("_" + artIndex));
+                        // Collect all available booster image URLs for this edition
+                        List<String> available = new ArrayList<>();
+                        try {
+                            Scanner scanner = new Scanner(new File(IMAGE_LIST_QUEST_BOOSTERS_FILE));
+                            while (scanner.hasNextLine()) {
+                                String line = scanner.nextLine();
+                                String filename = line.substring(line.lastIndexOf('/') + 1);
+                                if (filename.startsWith(editionCode + "_") || filename.startsWith(editionCode + ".")) {
+                                    available.add(line);
+                                }
+                            }
+                        } catch (Exception ignored) {}
 
+                        if (!available.isEmpty()) {
+                            String chosen = available.get(MyRandom.getRandom().nextInt(available.size()));
+                            String chosenFile = chosen.substring(chosen.lastIndexOf('/') + 1);
+                            String name = chosenFile.substring(0, chosenFile.lastIndexOf('.'));
+                            imageKey = ImageKeys.BOOSTER_PREFIX + name + chosenFile.substring(chosenFile.lastIndexOf('.'));
+                        } else {
+                            imageKey = ImageKeys.BOOSTER_PREFIX + editionCode;
+                        }
                     }
                 } catch (Exception e) {
                     //Comment did not contain the edition code, this is not a basic booster pack
                 }
 
                 Sprite item = null;
-                boolean found = false;
-                if (imageKey != "") {
-                    isBooster = true;
-                    File file = new File(IMAGE_LIST_QUEST_BOOSTERS_FILE);
-                    try {
-                        Scanner scanner = new Scanner(file);
-                        String boosterPath = "";
-                        while(scanner.hasNextLine())
-                        {
-                            boosterPath = scanner.nextLine();
-                            if(boosterPath.contains(imageKey.substring(2))) {
-                                imageKey = imageKey + boosterPath.substring(boosterPath.length() - 4);
-                                found = true;
-                                break;
-                            }
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        System.out.println(e.getMessage());
-                        break;
-                    }
-                }
+                boolean found = !imageKey.isEmpty();
                 if(found) {
                     Texture t = ImageCache.getInstance().getImage(imageKey, false, true);
                     isBooster = true;
@@ -903,6 +926,9 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         }
         if (autoSell != null)
             autoSell.remove();
+
+        if (ownedLabel != null)
+            ownedLabel.remove();
     }
 
     public void flip() {
@@ -911,10 +937,27 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         clicked = true;
         flipProcess = 0;
         SoundSystem.instance.play(SoundEffectType.FlipCard, false);
-        if (isLoot && autoSell != null) {
+        if (canAutoSell && autoSell != null) {
             autoSell.setPosition(this.getX(), this.getY());
             getStage().addActor(autoSell);
             autoSell.setVisible(false);
+        }
+
+        if (reward.type.equals(Reward.Type.Card) && ownedLabel != null) {
+            if (isNew) {
+                if (canAutoSell && autoSell != null) {
+                    ownedLabel.setPosition(
+                        autoSell.getX() + autoSell.getWidth() / 2 - ownedLabel.layout.getWidth() / 2,
+                        autoSell.getY() + autoSell.getHeight());
+                } else {
+                    ownedLabel.setPosition(this.getX(), this.getY() + 5);
+                }
+            } else {
+                ownedLabel.setPosition(this.getX(), this.getY() - ownedLabel.layout.getHeight() / 2);
+            }
+            
+            ownedLabel.setVisible(false);
+            getStage().addActor(ownedLabel);
         }
     }
 
@@ -954,18 +997,32 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     addListener(tooltip);
                 }
             }
+
             if (autoSell != null && !autoSell.isVisible() && flipProcess == 1) {
                 autoSell.setVisible(true);
-                if (AdventurePlayer.current().getAdventureMode() == AdventureModes.Commander) {
-                    PaperCard pc = reward.getCard();
-                    if (pc != null) {
-                        setAutoSell(inCollectionLike(pc));
+
+                PaperCard pc = reward.getCard();
+
+                if (pc != null) {
+                    DeckFormat deckFormat = AdventurePlayer.current().isCommanderMode() 
+                        ? DeckFormat.Commander
+                        : DeckFormat.Adventure;
+                    int maxCopies = deckFormat.getMaxCardCopies(pc);
+
+                    if (AdventurePlayer.current().isCommanderMode()) {
+                        setAutoSell(maxCopies == 1 && inCollectionLike(pc));
+                    } else {
+                        int ownedCount = AdventurePlayer.current().getCollectionCards(true).count(pc);
+
+                        setAutoSell(ownedCount >= maxCopies);
                     }
                 }
             }
-            // flipProcess=(float)Gdx.input.getX()/ (float)Gdx.graphics.getWidth();
-        }
 
+            if (ownedLabel != null && !ownedLabel.isVisible() && flipProcess == 1) {
+                ownedLabel.setVisible(true);
+            }
+        }
     }
 
     @Override

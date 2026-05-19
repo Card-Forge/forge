@@ -91,7 +91,7 @@ Replace=0.05F BasicLand:fromSheet("SPM cards"):!fromSheet("SPM allied lands")
 21 C Web Up @David Palumbo
 22 U Web-Shooters @Javier Charro
 23 C Wild Pack Squad @John Tyler Christopher
-24 R With Great Power... @E. M. Gist
+24 R With Great Power . . . @E. M. Gist
 25 C Amazing Acrobatics @Justyna Dura
 26 C Beetle, Legacy Criminal @Carlos Dattoli
 27 U Chameleon, Master of Disguise @Javier Charro
@@ -323,7 +323,7 @@ Replace=0.05F BasicLand:fromSheet("SPM cards"):!fromSheet("SPM allied lands")
 245 R Arachne, Psionic Weaver @Steve Argyle
 246 R Friendly Neighborhood @Pablo Mendoza
 247 R Rent Is Due @Gal Or
-248 R With Great Power... @E. M. Gist
+248 R With Great Power . . . @E. M. Gist
 249 R Hide on the Ceiling @Fariba Khamseh
 250 R Hydro-Man, Fluid Felon @Borja Pindado
 251 M Impostor Syndrome @Javier Charro

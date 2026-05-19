@@ -1,11 +1,17 @@
 package forge.game.card;
 
 import java.util.Map;
+import java.util.Set;
+import java.util.LinkedHashSet;
+import java.util.stream.Collectors;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 
-public record CounterKeywordType(String keyword) implements CounterType {
+import forge.game.keyword.Keyword;
+import forge.game.keyword.KeywordView;
+
+public record CounterKeywordType(KeywordView keyword) implements CounterType {
 
     // Rule 122.1b
     static ImmutableList<String> keywordCounter = ImmutableList.of(
@@ -13,43 +19,41 @@ public record CounterKeywordType(String keyword) implements CounterType {
             "Indestructible", "Lifelink", "Menace", "Reach", "Shadow", "Trample", "Vigilance");
     private static Map<String, CounterKeywordType> sMap = Maps.newHashMap();
 
-
     public static CounterKeywordType get(String s) {
         if (!sMap.containsKey(s)) {
-            sMap.put(s, new CounterKeywordType(s));
+            sMap.put(s, new CounterKeywordType(Keyword.getInstance(s).getView()));
         }
         return sMap.get(s);
+    }
+
+    public static Set<CounterType> getValues() {
+        // add fixed first
+        Set<CounterType> result = keywordCounter.stream().map(CounterKeywordType::get).collect(Collectors.toCollection(LinkedHashSet::new));
+        // add variable ones later
+        result.addAll(sMap.values());
+        return result;
     }
     
     @Override
     public String toString() {
-        return keyword;
+        return keyword.original();
     }
 
     public String getName() {
-        return getKeywordDescription();
+        return keyword.title();
     }
 
+    @Override
     public String getCounterOnCardDisplayName() {
-        return getKeywordDescription();
+        return keyword.title();
     }
 
-    private String getKeywordDescription() {
-        if (keyword.startsWith("Hexproof:")) {
-            final String[] k = keyword.split(":");
-            return "Hexproof from " + k[2];
-        }
-        if (keyword.startsWith("Trample:")) {
-            return "Trample over Planeswalkers";
-        }
-        return keyword;
-    }
-
-    public boolean is(CounterEnumType eType) {
-        return false;
-    }
-
+    @Override
     public boolean isKeywordCounter() {
+        return true;
+    }
+
+    public static boolean isKeywordCounter(String keyword) {
         if (keyword.startsWith("Hexproof:")) {
             return true;
         }
@@ -58,17 +62,12 @@ public record CounterKeywordType(String keyword) implements CounterType {
         }
         return keywordCounter.contains(keyword);
     }
-    
 
-    public int getRed() {
-        return 255;
-    }
-
-    public int getGreen() {
-        return 255;
-    }
-
-    public int getBlue() {
-        return 255;
+    @Override
+    public CounterAiCategory getAiCategory() {
+        if (Keyword.DECAYED.equals(keyword.keyword())) {
+            return CounterAiCategory.Negative;
+        }
+        return CounterAiCategory.Positive;
     }
 }

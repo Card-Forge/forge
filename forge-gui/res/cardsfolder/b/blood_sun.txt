@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBDraw | TriggerDescription$ When CARDNAME enters, draw a card.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
-S:Mode$ Continuous | Affected$ Land | RemoveAllAbilities$ True | ExceptManaAbilities$ True | Description$ All lands lose all abilities except mana abilities.
+S:Mode$ Continuous | Affected$ Land | RemoveNonManaAbilities$ True | Description$ All lands lose all abilities except mana abilities.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
 Oracle:When Blood Sun enters, draw a card.\nAll lands lose all abilities except mana abilities.

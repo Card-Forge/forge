@@ -1,0 +1,9 @@
+Name:Mikey & Mona, Mutant Sitters
+ManaCost:2 G
+Types:Legendary Creature Mutant Ninja Turtle Lizard
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When NICKNAME enter, ABILITY
+SVar:TrigCharm:DB$ Charm | MinCharmNum$ 1 | CharmNum$ 2 | Choices$ DBPutCounter,DBReturn | AdditionalDescription$ . Each mode must target a different player.
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Player | TgtPrompt$ Select target player to put counters | Choices$ Creature.ControlledBy ThisTargetedPlayer | Chooser$ ThisTargetedPlayer | Placer$ ThisTargetedPlayer | ChoiceTitle$ Choose a creature you control | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Target player chooses a creature they control and puts two +1/+1 counters on it.
+SVar:DBReturn:DB$ ChangeZone | ValidTgts$ Player | TgtPrompt$ Select target player to return cards | TargetUnique$ True | Hidden$ True | Mandatory$ True | ChangeType$ Creature.OwnedBy ThisTargetedPlayer,Land.OwnedBy ThisTargetedPlayer | ChangeTypeDesc$ creature or land | ChangeNum$ 1 | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Target player returns a creature or land card from their graveyard to their hand.
+Oracle:When Mikey & Mona enter, choose one or both. Each mode must target a different player.\n• Target player chooses a creature they control and puts two +1/+1 counters on it.\n• Target player returns a creature or land card from their graveyard to their hand.

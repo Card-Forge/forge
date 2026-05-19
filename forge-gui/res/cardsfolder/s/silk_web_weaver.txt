@@ -1,4 +1,5 @@
 Name:Silk, Web Weaver
+Variant:UniversesWithin:FlavorName:Alenni, Brood Recruiter
 ManaCost:2 G W
 Types:Legendary Creature Spider Human Hero
 PT:3/5

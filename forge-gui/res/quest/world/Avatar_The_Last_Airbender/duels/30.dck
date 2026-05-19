@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Sideshow Bob
+Title=Sideshow Bob
+Icon=Sideshow Bob.jpg
+Difficulty=Easy
+Description=./Standard/Avatar_The_Last_Airbender/AeroRanger_-_Boros_Aggro_(Standard,_#2769377).dck
+Deck Type=constructed
+
+[Main]
+4 Arabella, Abandoned Doll
+4 Hired Claw
+4 Shocking Sharpshooter
+4 Stadium Headliner
+4 Voice of Victory
+3 Suki, Courageous Rescuer
+2 Delney, Streetwise Lookout
+2 Sanguine Evangelist
+4 Torch the Tower
+3 Boros Charm
+4 Firebender Ascension
+5 Mountain
+4 Inspiring Vantage
+4 Sacred Foundry
+4 Sunbillow Verge
+2 Dalkovan Encampment
+2 Starting Town
+1 Plains
+[Sideboard]
+4 Magebane Lizard
+3 Get Lost
+3 Untimely Malfunction
+2 Ghost Vacuum
+2 Kutzil's Flanker
+1 Delney, Streetwise Lookout

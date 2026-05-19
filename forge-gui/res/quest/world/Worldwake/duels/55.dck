@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Lilith
+Title=Lilith
+Icon=Lilith.jpg
+Difficulty=Hard
+Description=../Modern/Worldwake/MTGO_Modern_Daily_#2739342/subzero9700_-_Zoo_(3-1)_(Modern,_#18988).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Dark Confidant
+2 Figure of Destiny
+3 Kird Ape
+1 Loam Lion
+1 Ranger of Eos
+4 Tarmogoyf
+4 Wild Nacatl
+4 Lightning Bolt
+4 Lightning Helix
+4 Path to Exile
+3 Molten Rain
+4 Tribal Flames
+3 Arid Mesa
+1 Blood Crypt
+1 Godless Shrine
+2 Marsh Flats
+1 Mountain
+1 Plains
+1 Sacred Foundry
+4 Scalding Tarn
+1 Steam Vents
+3 Stomping Ground
+1 Temple Garden
+3 Verdant Catacombs
+[Sideboard]
+2 Ancient Grudge
+2 Gaddock Teeg
+2 Kitchen Finks
+3 Meddling Mage
+3 Proclamation of Rebirth
+1 Sowing Salt

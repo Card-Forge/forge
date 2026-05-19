@@ -5,7 +5,6 @@ import java.util.Map;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 
-import forge.GameCommand;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -26,7 +25,8 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         if (sa.hasParam("TriggerDescription")) {
             return sa.getParam("TriggerDescription");
-        } else if (sa.hasParam("SpellDescription")) {
+        }
+        if (sa.hasParam("SpellDescription")) {
             return sa.getParam("SpellDescription");
         }
 
@@ -50,11 +50,9 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
         delTrig.setActiveZone(null);
 
         if (sa.hasParam("RememberObjects")) {
-            for (final String rem : sa.getParam("RememberObjects").split(",")) {
-                for (final Object o : AbilityUtils.getDefinedEntities(host, rem, sa)) {
-                    delTrig.addRemembered(o);
-                }
-            }
+            delTrig.addRemembered(
+                    AbilityUtils.getDefinedEntities(host, sa.getParam("RememberObjects").split(" & "), sa)
+            );
         }
 
         if (sa.hasParam("RememberNumber")) {
@@ -89,26 +87,9 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
         } else if (mapParams.containsKey("ThisTurn")) {
             trigHandler.registerThisTurnDelayedTrigger(delTrig);
         } else if (mapParams.containsKey("NextTurn")) {
-            final GameCommand nextTurnTrig = new GameCommand() {
-                private static final long serialVersionUID = -5861518814760561373L;
-
-                @Override
-                public void run() {
-                    trigHandler.registerThisTurnDelayedTrigger(delTrig);
-                }
-            };
-            game.getCleanup().addUntil(nextTurnTrig);
+            game.getCleanup().addUntil(() -> trigHandler.registerThisTurnDelayedTrigger(delTrig));
         }  else if (mapParams.containsKey("UpcomingTurn")) {
-            final GameCommand upcomingTurnTrig = new GameCommand() {
-                private static final long serialVersionUID = -5860518814760461373L;
-
-                @Override
-                public void run() {
-                    trigHandler.registerDelayedTrigger(delTrig);
-
-                }
-            };
-            game.getCleanup().addUntil(upcomingTurnTrig);
+            game.getCleanup().addUntil(() -> trigHandler.registerDelayedTrigger(delTrig));
         } else {
             trigHandler.registerDelayedTrigger(delTrig);
         }

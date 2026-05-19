@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Crocodile Dundee
+Title=Crocodile Dundee
+Icon=Crocodile Dundee.jpg
+Difficulty=Easy
+Description=./Standard/March_of_the_Machine/1337Waffles_-_Rakdos_Midrange_(Standard,_#1632412).dck
+Deck Type=constructed
+
+[Main]
+4 Graveyard Trespasser
+4 Bloodtithe Harvester
+4 Fable of the Mirror-Breaker
+4 Sheoldred, the Apocalypse
+1 Archfiend of the Dross
+3 Reckoner Bankbuster
+4 Go for the Throat
+3 Cut Down
+4 Invoke Despair
+1 Gix's Command
+2 Chandra, Hope's Beacon
+4 Sulfurous Springs
+4 Swamp
+5 Swamp
+2 Mountain
+4 Haunted Ridge
+1 Sokenzan, Crucible of Defiance
+1 Takenuma, Abandoned Mire
+4 Blackcleave Cliffs
+1 Mirrex
+[Sideboard]
+4 Duress
+1 Soul Transfer
+1 Reckoner Bankbuster
+1 Cut Down
+1 Brotherhood's End
+2 Razorlash Transmogrant
+2 Glistening Deluge
+3 Lithomantic Barrage

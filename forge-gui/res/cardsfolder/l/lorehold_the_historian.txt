@@ -1,0 +1,10 @@
+Name:Lorehold, the Historian
+ManaCost:3 R W
+Types:Legendary Creature Elder Dragon
+PT:5/5
+K:Flying
+K:Haste
+S:Mode$ Continuous | Affected$ Card.Instant+YouOwn,Card.Sorcery+YouOwn | AffectedZone$ Hand | AddKeyword$ Miracle:2 | Description$ Each instant and sorcery card in your hand has miracle {2}. (You may cast a card for its miracle cost when you draw it if it's the first card you drew this turn.)
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each opponent's upkeep, you may discard a card. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ Discard<1/Card>
+Oracle:Flying, haste\nEach instant and sorcery card in your hand has miracle {2}. (You may cast a card for its miracle cost when you draw it if it's the first card you drew this turn.)\nAt the beginning of each opponent's upkeep, you may discard a card. If you do, draw a card.

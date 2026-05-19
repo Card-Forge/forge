@@ -1,4 +1,5 @@
 Name:Venom's Hunger
+Variant:UniversesWithin:FlavorName:Damning Caress
 ManaCost:4 B
 Types:Sorcery
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | IsPresent$ Villain.YouCtrl | Description$ This spell costs {2} less to cast if you control a Villain.

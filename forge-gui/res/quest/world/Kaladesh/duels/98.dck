@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Reactor Meltdown
+Title=Reactor Meltdown
+Icon=Reactor Meltdown.jpg
+Difficulty=Very Hard
+Description=../Modern/Kaladesh/jfury_-_Red_Deck_Wins_(Modern,_#662519).dck
+Deck Type=constructed
+
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+1 Grim Lavamancer
+4 Monastery Swiftspear
+4 Boros Charm
+4 Lightning Bolt
+4 Lightning Helix
+4 Searing Blaze
+4 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+4 Bloodstained Mire
+4 Inspiring Vantage
+2 Mountain
+4 Sacred Foundry
+1 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+1 Deflecting Palm
+4 Destructive Revelry
+2 Kor Firewalker
+1 Molten Rain
+3 Path to Exile
+2 Ravenous Trap
+2 Sudden Shock

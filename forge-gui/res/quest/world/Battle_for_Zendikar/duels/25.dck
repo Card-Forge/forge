@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Newton
+Title=Newton
+Icon=Newton.jpg
+Difficulty=Medium
+Description=Battle_for_Zendikar/Standard_Champs_#8987700/4-answer_-_Abzan_Aggro_(Standard,_#337574).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Anafenza, the Foremost
+4 Den Protector
+3 Hangarback Walker
+4 Siege Rhino
+4 Warden of the First Tree
+2 Wingmate Roc
+4 Abzan Charm
+4 Dromoka's Command
+2 Murderous Cut
+2 Gideon, Ally of Zendikar
+1 Sorin, Solemn Visitor
+2 Canopy Vista
+4 Flooded Strand
+2 Forest
+2 Llanowar Wastes
+2 Plains
+4 Shambling Vent
+1 Smoldering Marsh
+1 Sunken Hollow
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+3 Arashin Cleric
+3 Duress
+1 Silkwrap
+1 Surge of Righteousness
+3 Transgress the Mind
+1 Ultimate Price
+1 Valorous Stance
+2 Woodland Wanderer

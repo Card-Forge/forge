@@ -1,0 +1,6 @@
+Name:Water Tribe Rallier
+ManaCost:1 W
+Types:Creature Human Soldier Ally
+PT:2/2
+A:AB$ Dig | Cost$ Waterbend<5> | DigNum$ 4 | Optional$ True | ForceRevealToController$ True | ChangeNum$ 1 | ChangeValid$ Creature.powerLE3 | DestinationZone$ Hand | DestinationZone2$ Library | LibraryPosition$ -1 | RestRandomOrder$ True | SpellDescription$ Look at the top four cards of your library. You may reveal a creature card with power 3 or less from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+Oracle:Waterbend {5}: Look at the top four cards of your library. You may reveal a creature card with power 3 or less from among them and put it into your hand. Put the rest on the bottom of your library in a random order. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}.)

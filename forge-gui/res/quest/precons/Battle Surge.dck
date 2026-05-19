@@ -17,12 +17,16 @@ Image=battle_surge.jpg
 2 Goblin Berserker|UDS
 1 Goblin Marshal|UDS
 2 Goblin War Buggy|USG
-9 Island|6ED
+3 Island|6ED|1
+3 Island|6ED|2
+3 Island|6ED|3
 1 Jagged Lightning|USG
 2 Keldon Champion|UDS
 3 Kingfisher|UDS
 1 Mark of Fury|UDS
-14 Mountain|6ED
+5 Mountain|6ED|1
+5 Mountain|6ED|2
+4 Mountain|6ED|3
 1 Parch|ULG
 1 Raven Familiar|ULG
 2 Thieving Magpie|UDS
@@ -32,5 +36,5 @@ Image=battle_surge.jpg
 2 Viashino Cutthroat|ULG
 3 Viashino Sandscout|ULG
 4 Wild Colos|UDS
-1 AEther Sting|UDS
+1 Aether Sting|UDS
 [sideboard]

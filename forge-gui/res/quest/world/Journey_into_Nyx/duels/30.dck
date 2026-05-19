@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Comic Book Guy
+Title=Comic Book Guy
+Icon=Comic Book Guy.jpg
+Difficulty=Medium
+Description=Journey_into_Nyx/WMCQ_#2_-_Sofia,_Bulgaria/Kaloyan_Gadzhev_-_Orzhov_Midrange_(Standard,_#87021).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Blood Baron of Vizkopa
+3 Desecration Demon
+3 Nightveil Specter
+1 Obzedat, Ghost Council
+4 Pack Rat
+3 Bile Blight
+3 Devour Flesh
+4 Hero's Downfall
+4 Thoughtseize
+2 Banishing Light
+3 Underworld Connections
+2 Elspeth, Sun's Champion
+4 Caves of Koilos
+4 Godless Shrine
+2 Mutavault
+1 Plains
+9 Swamp
+4 Temple of Silence
+1 Urborg, Tomb of Yawgmoth
+[Sideboard]
+1 Archangel of Thune
+2 Drown in Sorrow
+3 Duress
+1 Erebos, God of the Dead
+2 Last Breath
+2 Lifebane Zombie
+3 Nyx-Fleece Ram

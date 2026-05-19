@@ -1,0 +1,29 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Spellweaver
+Description=Spellweaver controls the battlefield. Blue magic and card advantage.
+Deck Type=constructed
+Set=PO2
+Image=spellweaver.jpg
+[main]
+5 Island|PO2
+5 Island|PO2
+5 Island|PO2
+2 Air Elemental|PO2
+2 Apprentice Sorcerer|PO2
+2 Talas Air Ship|PO2
+2 Talas Explorer|PO2
+3 Talas Merchant|PO2
+1 Talas Researcher|PO2
+3 Talas Scout|PO2
+1 Talas Warrior|PO2
+1 Exhaustion|PO2
+2 False Summoning|PO2
+2 Mystic Denial|PO2
+2 Time Ebb|PO2
+2 Touch of Brilliance|PO2
+[sideboard]

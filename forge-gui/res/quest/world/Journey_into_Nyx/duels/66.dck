@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Buffy
+Title=Buffy
+Icon=Buffy.jpg
+Difficulty=Hard
+Description=../Modern/Journey_into_Nyx/GPT_Madrid_-_Evolution_Madrid_Norte/Javier_Fernandez_Delgado_-_Red_Deck_Wins_(Modern,_#92375).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+4 Grim Lavamancer
+4 Vexing Devil
+4 Boros Charm
+4 Lightning Bolt
+4 Searing Blaze
+2 Shard Volley
+3 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+4 Arid Mesa
+4 Bloodstained Mire
+4 Mountain
+4 Sacred Foundry
+3 Wooded Foothills
+[Sideboard]
+3 Combust
+4 Dragon's Claw
+2 Searing Blood
+2 Shattering Spree
+4 Wear // Tear

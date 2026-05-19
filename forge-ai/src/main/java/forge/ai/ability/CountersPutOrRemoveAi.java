@@ -163,7 +163,7 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
                             sa.getTargets().add(best);
                             return true;
                         } else if (!ComputerUtil.isUselessCounter(aType, best)) {
-                            // whould remove positive counter
+                            // would remove positive counter
                             if (best.getCounters(aType) <= amount) {
                                 sa.getTargets().add(best);
                                 return true;
@@ -286,22 +286,22 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
                 }
 
                 return ComputerUtil.isNegativeCounter(type, tgt);
-            } else {
-                if (type.is(CounterEnumType.ICE) && "Dark Depths".equals(tgt.getName())) {
-                    CardCollectionView marit = ai.getCardsIn(ZoneType.Battlefield, "Marit Lage");
-                    boolean maritEmpty = marit.isEmpty() || Iterables.contains(marit, (Predicate<Card>) Card::ignoreLegendRule);
+            }
 
-                    if (maritEmpty) {
-                        return false;
-                    }
-                } else if (type.is(CounterEnumType.M1M1) && tgt.hasKeyword(Keyword.PERSIST)) {
-                    return false;
-                } else if (type.is(CounterEnumType.P1P1) && tgt.hasKeyword(Keyword.UNDYING)) {
+            if (type.is(CounterEnumType.ICE) && "Dark Depths".equals(tgt.getName())) {
+                CardCollectionView marit = ai.getCardsIn(ZoneType.Battlefield, "Marit Lage");
+                boolean maritEmpty = marit.isEmpty() || Iterables.contains(marit, (Predicate<Card>) Card::ignoreLegendRule);
+
+                if (maritEmpty) {
                     return false;
                 }
-
-                return !ComputerUtil.isNegativeCounter(type, tgt);
+            } else if (type.is(CounterEnumType.M1M1) && tgt.hasKeyword(Keyword.PERSIST)) {
+                return false;
+            } else if (type.is(CounterEnumType.P1P1) && tgt.hasKeyword(Keyword.UNDYING)) {
+                return false;
             }
+
+            return !ComputerUtil.isNegativeCounter(type, tgt);
         }
         return super.chooseBinary(kindOfChoice, sa, params);
     }

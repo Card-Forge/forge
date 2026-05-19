@@ -11,6 +11,7 @@ import forge.card.CardRenderer.CardStackPosition;
 import forge.card.CardStateName;
 import forge.game.card.CardView;
 import forge.game.zone.ZoneType;
+import forge.gui.control.PlaybackSpeed;
 import forge.screens.match.MatchController;
 import forge.util.Utils;
 
@@ -120,7 +121,7 @@ public class FCardPanel extends FDisplayObject {
             return;
         }
 
-        if (!animate || MatchController.instance.isGameFast() || (MatchController.instance.getGameView() != null && MatchController.instance.getGameView().isMatchOver())) {
+        if (!animate || MatchController.instance.getGameSpeed() == PlaybackSpeed.FAST || (MatchController.instance.getGameView() != null && MatchController.instance.getGameView().isMatchOver())) {
             //don't animate if game is fast or match is over
             rotateTransform(g, x, y, w, h, edgeOffset, false);
             card.updateNeedsTapAnimation(false);

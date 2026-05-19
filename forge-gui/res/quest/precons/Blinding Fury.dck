@@ -1,0 +1,29 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Blinding Fury
+Description=Blinding Fury harnesses white creature abilities. Expanded gameplay with this white theme deck.
+Deck Type=constructed
+Set=S99
+Image=blinding_fury.jpg
+[main]
+6 Plains|S99|1
+6 Plains|S99|2
+5 Plains|S99|3
+1 Archangel|S99
+1 Angel of Light|S99
+2 Charging Paladin|S99
+3 Foot Soldiers|S99
+3 Knight Errant|S99
+3 Venerable Monk|S99
+2 Wild Griffin|S99
+1 Armageddon|S99
+2 Angelic Blessing|S99
+1 Breath of Life|S99
+1 False Peace|S99
+2 Path of Peace|S99
+1 Vengeance|S99
+[sideboard]

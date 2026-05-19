@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=Professor X
+Title=Professor X
+Icon=Professor X.jpg
+Difficulty=Easy
+Description=Innistrad/2011_Provincials_New_Brunswick/Brad_Dorcas_-_Red_Deck_Wins_(Standard,_#21308).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Chandra's Phoenix
+2 Goblin Arsonist
+3 Grim Lavamancer
+2 Hero of Oxid Ridge
+2 Spikeshot Elder
+4 Stormblood Berserker
+4 Stromkirk Noble
+4 Shrine of Burning Rage
+4 Brimstone Volley
+3 Incinerate
+3 Arc Trail
+3 Koth of the Hammer
+23 Mountain
+[Sideboard]

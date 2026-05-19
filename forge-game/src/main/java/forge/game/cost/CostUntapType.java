@@ -73,7 +73,6 @@ public class CostUntapType extends CostPartWithList {
         for (final Card c : getCardList()) {
             c.setTapped(true);
         }
-        resetLists();
     }
 
     @Override
@@ -86,10 +85,11 @@ public class CostUntapType extends CostPartWithList {
         if (!canUntapSource) {
             typeList.remove(source);
         }
-        typeList = CardLists.filter(typeList, CardPredicates.TAPPED, c -> c.getCounters(CounterEnumType.STUN) == 0 || c.canRemoveCounters(CounterEnumType.STUN));
+        typeList = CardLists.filter(typeList, c -> c.canUntap(null, false) &&
+                (c.getCounters(CounterEnumType.STUN) == 0 || c.canRemoveCounters(CounterEnumType.STUN)));
 
         final int amount = this.getAbilityAmount(ability);
-        return (typeList.size() != 0) && (typeList.size() >= amount);
+        return typeList.size() != 0 && typeList.size() >= amount;
     }
 
     @Override

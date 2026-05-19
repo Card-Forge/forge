@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Mortivore
+Title=Mortivore
+Icon=Mortivore.jpg
+Difficulty=Medium
+Description=./Standard/Guilds_of_Ravnica/Alessio_Boem_-_Grixis_(Standard,_#766590).dck
+Deck Type=constructed
+
+[Main]
+1 Bone Dragon
+1 Doom Whisperer
+2 Dream Eater
+3 Nicol Bolas, the Ravager
+3 Essence Scatter
+1 Fungal Infection
+4 Moment of Craving
+2 Syncopate
+4 Vraska's Contempt
+3 Notion Rain
+2 Ritual of Soot
+4 Thought Erasure
+2 Search for Azcanta
+2 The Eldest Reborn
+4 Dragonskull Summit
+4 Drowned Catacomb
+2 Island
+4 Steam Vents
+3 Sulfur Falls
+5 Swamp
+4 Watery Grave
+[Sideboard]
+1 Arguel's Blood Fast
+2 Disdainful Stroke
+2 Duress
+1 Fungal Infection
+2 Golden Demise
+3 Negate
+1 Sorcerous Spyglass
+3 Thief of Sanity

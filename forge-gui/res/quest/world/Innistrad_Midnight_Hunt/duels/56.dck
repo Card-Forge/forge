@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=WitchDoctor
+Title=WitchDoctor
+Icon=WitchDoctor.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Midnight_Hunt/Ushinohama_Takashi_-_Human_Aggro_(Modern,_#1216538).dck
+Deck Type=constructed
+
+[Main]
+2 Grim Lavamancer
+2 Tajic, Legion's Edge
+4 Robber of the Rich
+4 Magus of the Moon
+4 Reckless Stormseeker
+4 Archpriest of Iona
+4 Champion of the Parish
+4 Thalia, Guardian of Thraben
+4 Thalia's Lieutenant
+4 Honored Crop-Captain
+4 Aether Vial
+2 Ajani Vengeant
+2 Mountain
+4 Arid Mesa
+4 Inspiring Vantage
+4 Sacred Foundry
+4 Plains
+[Sideboard]
+1 Damping Sphere
+1 Dire Fleet Daredevil
+1 Auriok Champion
+1 Drannith Magistrate
+1 Grand Abolisher
+1 Haktos the Unscarred
+1 Remorseful Cleric
+1 Selfless Spirit
+1 Skyclave Apparition
+1 Lurrus of the Dream-Den
+1 Duergar Hedge-Mage
+1 Roiling Vortex
+1 Deafening Silence
+1 Stony Silence
+1 Cursed Totem

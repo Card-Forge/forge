@@ -5,7 +5,7 @@ Difficulty=hard
 Description=UB Infect deck
 Icon=Jabba the Hutt.jpg
 Deck Type=constructed
-[main]
+[Main]
 2 Bonesplitter
 3 Hand of the Praetors
 3 Ichorclaw Myr
@@ -23,4 +23,4 @@ Deck Type=constructed
 4 Darkslick Shores
 4 Drowned Catacomb
 4 Inkmoth Nexus
-[sideboard]
+[Sideboard]

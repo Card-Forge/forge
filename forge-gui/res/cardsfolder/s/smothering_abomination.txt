@@ -5,7 +5,7 @@ PT:4/3
 K:Devoid
 K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice a creature.
-SVar:TrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Creature | SacMessage$ Creature
+SVar:TrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Creature
 T:Mode$ Sacrificed | ValidCard$ Creature.YouCtrl | Execute$ TrigDrawCard | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a creature, draw a card.
 SVar:TrigDrawCard:DB$ Draw | Defined$ You | NumCards$ 1
 AI:RemoveDeck:Random

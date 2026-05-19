@@ -1,0 +1,9 @@
+Name:Tributary Vaulter
+ManaCost:2 W
+Types:Creature Merfolk Warrior
+PT:1/3
+K:Flying
+T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever this creature becomes tapped, another target Merfolk you control gets +2/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Merfolk.Other+YouCtrl | TgtPrompt$ Select another target Merfolk you control | NumAtt$ +2
+DeckHints:Type$Merfolk
+Oracle:Flying\nWhenever this creature becomes tapped, another target Merfolk you control gets +2/+0 until end of turn.

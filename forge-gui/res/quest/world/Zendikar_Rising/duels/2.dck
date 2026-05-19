@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Doran
+Title=Doran
+Icon=Doran.jpg
+Difficulty=Easy
+Description=./Standard/Zendikar_Rising/Acedaniel_-_Gruul_Adventures_(Standard,_#1060911).dck
+Deck Type=constructed
+
+[Main]
+1 Kogla, the Titan Ape
+2 Scavenging Ooze
+3 Tangled Florahedron
+3 Beanstalk Giant
+3 Elder Gargaroth
+4 Bonecrusher Giant
+4 Edgewall Innkeeper
+4 Kazandu Mammoth
+4 Lovestruck Beast
+3 The Great Henge
+2 Fire Prophecy
+4 Shatterskull Smashing
+2 Ugin, the Spirit Dragon
+2 Vivien, Monsters' Advocate
+3 Mountain
+4 Fabled Passage
+4 Cragcrown Pathway
+8 Forest
+[Sideboard]
+1 Questing Beast
+1 Scavenging Ooze
+1 Kogla, the Titan Ape
+2 Klothys, God of Destiny
+2 Cragplate Baloth
+2 Wilt
+3 Ox of Agonas
+3 Scorching Dragonfire

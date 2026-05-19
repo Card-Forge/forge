@@ -10,6 +10,6 @@ SVar:ETBTapped:DB$ Tap | ETB$ True | Defined$ ReplacedCard | SubAbility$ RemoveS
 SVar:RemoveSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Tools — Whenever NICKNAME attacks, it gets +X/+0 until end of turn, where X is the greatest mana value among artifacts you control.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X
-SVar:X:Count$Valid Artifact.YouCtrl$GreatestCMC
+SVar:X:Count$Valid Artifact.YouCtrl$GreatestCardManaCost
 DeckHints:Type$Artifact
 Oracle:Once during each of your turns, you may cast an artifact spell from your graveyard. If you cast a spell this way, that artifact enters tapped.\nTools — Whenever Edgar attacks, it gets +X/+0 until end of turn, where X is the greatest mana value among artifacts you control.

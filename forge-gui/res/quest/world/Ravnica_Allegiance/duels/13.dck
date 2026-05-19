@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Asanbosam
+Title=Asanbosam
+Icon=Asanbosam.jpg
+Difficulty=Medium
+Description=./Standard/Ravnica_Allegiance/Andrea_Mengucci_-_Esper_Control_(Standard,_#788632).dck
+Deck Type=constructed
+
+[Main]
+4 Absorb
+2 Cast Down
+3 Chemister's Insight
+1 Moment of Craving
+3 Mortify
+1 Negate
+3 Vraska's Contempt
+2 Cry of the Carnarium
+3 Kaya's Wrath
+1 Mastermind's Acquisition
+4 Thought Erasure
+2 Search for Azcanta
+1 Kaya, Orzhov Usurper
+4 Teferi, Hero of Dominaria
+1 Island
+1 Swamp
+4 Drowned Catacomb
+4 Glacial Fortress
+4 Godless Shrine
+4 Hallowed Fountain
+4 Isolated Chapel
+4 Watery Grave
+[Sideboard]
+1 Sorcerous Spyglass
+1 Ethereal Absolution
+1 Ixalan's Binding
+1 The Mirari Conjecture
+1 Demystify
+1 Devious Cover-Up
+1 Healing Grace
+1 Sanguine Sacrament
+1 Lyra Dawnbringer
+1 Nezahal, Primal Tide
+1 Cleansing Nova
+1 Clear the Mind
+1 Duress
+1 Mass Manipulation
+1 Unmoored Ego

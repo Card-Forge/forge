@@ -1,0 +1,10 @@
+Name:Wartime Protestors
+ManaCost:3 R
+Types:Creature Human Rebel Ally
+PT:4/4
+K:Haste
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Ally.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another Ally you control enters, put a +1/+1 counter on that creature and it gains haste until end of turn.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ TriggeredCardLKICopy | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ TriggeredCardLKICopy | KW$ Haste
+DeckHas:Ability$Counters
+Oracle:Haste\nWhenever another Ally you control enters, put a +1/+1 counter on that creature and it gains haste until end of turn.

@@ -85,6 +85,20 @@ public class SFilterUtil {
                 continue;
             }
 
+            if (ch == '|') {
+                if (current.length() > 0) {
+                    tokens.add(current.toString());
+                    current = new StringBuilder();
+                }
+                tokens.add("or");
+                continue;
+            }
+
+            if (ch == '-' && current.length() == 0) {
+                tokens.add("not");
+                continue;
+            }
+
             if (!inQuotes && (ch == '(' || ch == ')' || ch == ' ')) {
                 if (current.length() > 0) {
                     tokens.add(current.toString());
@@ -120,11 +134,11 @@ public class SFilterUtil {
 
             if (!prev.equals("(") &&
                 !prev.equalsIgnoreCase("or") &&
-                !prev.equalsIgnoreCase("and") && 
+                !prev.equalsIgnoreCase("and") &&
+                !prev.equalsIgnoreCase("not") &&
                 !current.equals(")") &&
                 !current.equalsIgnoreCase("or") &&
-                !current.equalsIgnoreCase("and") &&
-                !current.equalsIgnoreCase("not")) {
+                !current.equalsIgnoreCase("and")) {
                 result.add("and");
             }
             result.add(current);
@@ -155,21 +169,6 @@ public class SFilterUtil {
             }
         }
 
-        if (advancedCardRulesPredicates.isEmpty() && BooleanExpression.isExpression(segment)) {
-            BooleanExpression expression = new BooleanExpression(segment, inName, inType, inText, inCost);
-            try {
-                Predicate<CardRules> filter = expression.evaluate();
-                if (filter != null) {
-                    if(advancedPaperCardPredicates.isEmpty())
-                        return PaperCardPredicates.fromRules(filter);
-                    return IterableUtil.and(advancedPaperCardPredicates).and(PaperCardPredicates.fromRules(filter));
-                }
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
         Predicate<PaperCard> cardFilter = buildRegularTextPredicate(regularTokens, inName, inType, inText, inCost);
         if(!advancedPaperCardPredicates.isEmpty())
             cardFilter = cardFilter.and(IterableUtil.and(advancedPaperCardPredicates));
@@ -186,30 +185,33 @@ public class SFilterUtil {
         for (int i = 0; i < text.length(); i++) {
             char ch = text.charAt(i);
             switch (ch) {
-            case ' ':
-                if (!inQuotes) { // If not in quotes, end current entry
-                    if (entry.length() > 0) {
-                        splitText.add(entry.toString());
-                        entry = new StringBuilder();
+                case ' ':
+                    if (!inQuotes) { // If not in quotes, end the current entry
+                        if (entry.length() > 0) {
+                            splitText.add(entry.toString());
+                            entry = new StringBuilder();
+                        }
+                        continue;
                     }
-                    continue;
+                    break;
+
+                case '"':
+                    inQuotes = !inQuotes;
+                    continue; // Don't append the quotation character itself
+
+                case '\\':
+                    if (i < text.length() - 1 && text.charAt(i + 1) == '"') {
+                        ch = '"'; // Allow appending escaped quotation character
+                        i++; // Prevent changing inQuotes for that character
+                    }
+                    break;
+
+                case ',':
+                    if (!inQuotes) { // Ignore commas outside quotes
+                        continue;
+                    }
+                    break;
                 }
-                break;
-            case '"':
-                inQuotes = !inQuotes;
-                continue; // Don't append quotation character itself
-            case '\\':
-                if (i < text.length() - 1 && text.charAt(i + 1) == '"') {
-                    ch = '"'; // Allow appending escaped quotation character
-                    i++; // Prevent changing inQuotes for that character
-                }
-                break;
-            case ',':
-                if (!inQuotes) { // Ignore commas outside quotes
-                    continue;
-                }
-                break;
-            }
             entry.append(ch);
         }
         // Android API StringBuilder isEmpty() is unavailable. https://developer.android.com/reference/java/lang/StringBuilder
@@ -228,15 +230,23 @@ public class SFilterUtil {
         for (String s : tokens) {
             List<Predicate<CardRules>> subands = new ArrayList<>();
 
-            if (inType) { subands.add(CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, s)); }
-            if (inText) { subands.add(CardRulesPredicates.rules(StringOp.CONTAINS_IC, s));      }
-            if (inCost) { subands.add(CardRulesPredicates.cost(StringOp.CONTAINS_IC, s));       }
+            StringOp stringOp = StringOp.CONTAINS_IC;
+
+            // Support for exact match
+            if (s.startsWith("!")) {
+                s = s.substring(1);
+                stringOp = StringOp.EQUALS_IC;
+            }
+
+            if (inType) { subands.add(CardRulesPredicates.joinedType(stringOp, s)); }
+            if (inText) { subands.add(CardRulesPredicates.rules(stringOp, s));      }
+            if (inCost) { subands.add(CardRulesPredicates.cost(stringOp, s));       }
 
             Predicate<PaperCard> term;
             if (inName && subands.isEmpty())
-                term = PaperCardPredicates.searchableName(StringOp.CONTAINS_IC, s);
+                term = PaperCardPredicates.searchableName(stringOp, s);
             else if (inName)
-                term = PaperCardPredicates.searchableName(StringOp.CONTAINS_IC, s).or(PaperCardPredicates.fromRules(IterableUtil.or(subands)));
+                term = PaperCardPredicates.searchableName(stringOp, s).or(PaperCardPredicates.fromRules(IterableUtil.or(subands)));
             else
                 term = PaperCardPredicates.fromRules(IterableUtil.or(subands));
 

@@ -2,19 +2,10 @@ Developer Mode is a Mode that allows Developers to try out different
 things and gain different shortcuts during play. In a Normal program,
 this Mode would be available in a Debug build, but removed from the code
 during the Retail build. Since Forge is in constant Beta, this Mode is
-available during our Beta releases. On the NewGame Screen, just make
-sure it's checked and you'll be able to edit the options at any point
-during the game.
+available during our Beta releases. You can turn on or off this mode at the
+Home View -> Game Settings -> Preferences -> Gameplay Options section.
 
-## Lose By Decking
-
-This one is a simple Checkbox. If your Library is Empty and you try to
-try a card, you normally lose the game. This checkbox should be on by
-Default (meaning you lose) but if you are running a deck without many
-cards, uncheck this box so you don't lose when failing to draw a card
-when you need to.
-
-\[THIS OPTION NOT READILY VISIBLE IN VERSIONS 1.6.23\]
+It's important to note you won't get achievements in a game once you started cheating.
 
 ## View Zone
 
@@ -26,8 +17,7 @@ that Zone are revealed to you.
 ## Generate Mana
 
 Useful for not needing Land in your Deck while you are just trying to
-test something out, by selecting Generate Mana, 7 of each color and 7
-colorless is generated and put into your Mana Pool.
+test something out, by selecting Generate Mana, 7 of each type is generated and put into your Mana Pool.
 
 ## Setup Game State
 
@@ -179,5 +169,3 @@ AI hands and leaves them intact, and adds Force of Nature, Raging
 Goblin, and Amulet of Kroog to the computer's graveyard. Does not
 replace either library. Sets the current player to Human and the current
 phase to Main 1.
-
-It's important to note you won't get achievements in a game once you started cheating.

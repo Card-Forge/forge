@@ -9,6 +9,6 @@ SVar:DBChooseOpponent:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent
 SVar:DBChooseCreature:DB$ ChooseCard | Defined$ Player.Chosen | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature you want to control | ConditionDefined$ Remembered | ConditionPresent$ Swamp | ConditionCompare$ LE1 | SubAbility$ DBOpponentGainControl
 SVar:DBOpponentGainControl:DB$ GainControl | Defined$ ChosenCard | NewController$ Player.Chosen | LoseControl$ LeavesPlay | ConditionDefined$ Remembered | ConditionPresent$ Swamp | ConditionCompare$ LE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenPlayer$ True | ClearChosenCard$ True
-A:AB$ GainControl | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature. | LoseControl$ LeavesPlay | SpellDescription$ Gain control of target creature for as long as CARDNAME remains on the battlefield.
+A:AB$ GainControl | Cost$ T | ValidTgts$ Creature | LoseControl$ LeavesPlay | SpellDescription$ Gain control of target creature for as long as CARDNAME remains on the battlefield.
 AI:RemoveDeck:Random
 Oracle:At the beginning of your upkeep, sacrifice two Swamps. If you can't, tap Infernal Denizen, and an opponent may gain control of a creature you control of their choice for as long as Infernal Denizen remains on the battlefield.\n{T}: Gain control of target creature for as long as Infernal Denizen remains on the battlefield.

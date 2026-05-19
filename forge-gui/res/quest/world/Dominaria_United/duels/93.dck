@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=James Bond
+Title=James Bond
+Icon=James Bond.jpg
+Difficulty=Hard
+Description=./Modern/Dominaria_United/Capriccioso_-_Elementals_(Modern,_#1545195).dck
+Deck Type=constructed
+
+[Main]
+1 Endurance
+1 Foundation Breaker
+4 Risen Reef
+4 Voice of Resurgence
+4 Omnath, Locus of Creation
+4 Solitude
+4 Flamekin Harbinger
+4 Fury
+4 Ephemerate
+4 Leyline Binding
+1 Steam Vents
+1 Mountain
+1 Stomping Ground
+1 Boseiju, Who Endures
+1 Temple Garden
+1 Plains
+1 Raugrin Triome
+1 Indatha Triome
+1 Tangled Florahedron
+1 Sacred Foundry
+1 Wooded Foothills
+1 Flooded Strand
+1 Forest
+1 Breeding Pool
+4 Arid Mesa
+4 Cavern of Souls
+4 Windswept Heath
+[Sideboard]
+1 Titania, Protector of Argoth
+1 Engineered Explosives
+1 Orvar, the All-Form
+1 Boseiju, Who Endures
+1 Kaheera, the Orphanguard
+1 Engineered Explosives
+2 Force of Vigor
+2 Chalice of the Void
+2 Fable of the Mirror-Breaker
+3 Endurance

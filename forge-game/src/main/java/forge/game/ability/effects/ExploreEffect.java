@@ -87,7 +87,7 @@ public class ExploreEffect extends SpellAbilityEffect {
                 }
                 if (!revealedLand) {
                     // need to get newest game state to check if it is still on the battlefield
-                    // and the timestamp didnt change
+                    // and the timestamp didn't change
                     Card gamec = game.getCardState(c);
                     if (gamec.isInPlay() && gamec.equalsWithGameTimestamp(c)) {
                         c.addCounter(CounterEnumType.P1P1, 1, pl, table);
@@ -99,7 +99,7 @@ public class ExploreEffect extends SpellAbilityEffect {
                 final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
                 if (!top.isEmpty()) runParams.put(AbilityKey.Explored, top.getFirst());
                 game.getTriggerHandler().runTrigger(TriggerType.Explores, runParams, false);
-                table.replaceCounterEffect(game, sa, true);
+                table.replaceCounterEffect(game, sa);
                 triggerList.triggerChangesZoneAll(game, sa);
             }
         }

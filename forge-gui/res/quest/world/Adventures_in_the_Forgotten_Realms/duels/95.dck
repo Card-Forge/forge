@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Mawu
+Title=Mawu
+Icon=Mawu.jpg
+Difficulty=Very Hard
+Description=./Modern/Adventures_in_the_Forgotten_Realms/Diego_dos_Reis_-_Jund_Reanimator_(Modern,_#1209405).dck
+Deck Type=constructed
+
+[Main]
+2 Ox of Agonas
+2 Feasting Troll King
+3 Ovalchase Daredevil
+4 Hollow One
+4 Insolent Neonate
+4 Blazing Rootwalla
+4 Vengevine
+4 Street Wraith
+4 Asmoranomardicadaistinaculdacar
+4 The Underworld Cookbook
+3 Goblin Lore
+4 Burning Inquiry
+1 Den of the Bugbear
+1 Blood Crypt
+1 Rootbound Crag
+2 Mountain
+2 Bloodstained Mire
+3 Stomping Ground
+4 Wooded Foothills
+4 Copperline Gorge
+[Sideboard]
+1 Shenanigans
+1 Ravenous Trap
+1 Gnaw to the Bone
+1 Flame Blitz
+2 Grim Lavamancer
+2 Nihil Spellbomb
+2 Ancient Grudge
+2 Foundation Breaker
+3 Blood Moon

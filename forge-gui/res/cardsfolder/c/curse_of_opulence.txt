@@ -3,7 +3,7 @@ ManaCost:R
 Types:Enchantment Aura Curse
 K:Enchant:Player
 SVar:AttachAILogic:Curse
-T:Mode$ AttackersDeclared | ValidCard$ Creature | AttackedTarget$ Player.EnchantedBy | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted player is attacked, create a Gold token. Each opponent attacking that player does the same. (A Gold token is an artifact with "Sacrifice this artifact: Add one mana of any color.")
+T:Mode$ AttackersDeclared | AttackedTarget$ Player.EnchantedBy | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted player is attacked, create a Gold token. Each opponent attacking that player does the same. (A Gold token is an artifact with "Sacrifice this artifact: Add one mana of any color.")
 SVar:TrigToken:DB$ Token | TokenScript$ c_a_gold_sac | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenOwner$ TriggeredAttackingPlayer.Opponent+controlsCreature.attacking Player.EnchantedBy | TokenScript$ c_a_gold_sac
 Oracle:Enchant player\nWhenever enchanted player is attacked, create a Gold token. Each opponent attacking that player does the same. (A Gold token is an artifact with "Sacrifice this artifact: Add one mana of any color.")

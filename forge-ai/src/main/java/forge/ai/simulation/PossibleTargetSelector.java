@@ -87,7 +87,7 @@ public class PossibleTargetSelector {
                 if (score != null) {
                     return score;
                 }
-            } else  {
+            } else {
                 creatureScores = new HashMap<>();
             }
 
@@ -108,16 +108,15 @@ public class PossibleTargetSelector {
 
         public boolean shouldSkipTarget(GameObject o) {
             // TODO: Support non-card targets, such as spells on the stack.
-            if (!(o instanceof Card)) {
+            if (!(o instanceof Card c)) {
                 return false;
             }
 
-            Card c = (Card) o;
             Combat combat = c.getGame().getCombat();
             for (Card existingTarget : validTargetsMap.get(c.getName())) {
                 // Note: Checks are ordered from cheapest to more expensive ones. For example, type equals()
                 // ends up calling toString() on the type object and is more expensive than the checks above it.
-                if (c.getController() != c.getController() || c.getOwner() != existingTarget.getOwner()) {
+                if (c.getController() != existingTarget.getController() || c.getOwner() != existingTarget.getOwner()) {
                     continue;
                 }
                 if (c.getSpellAbilities().size() != existingTarget.getSpellAbilities().size()) {
@@ -148,7 +147,6 @@ public class PossibleTargetSelector {
                             continue;
                         }
                     }
-                    continue;
                 }
                 return true;
             }

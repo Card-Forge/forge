@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Black Abott
+Title=Black Abott
+Icon=Black Abott.jpg
+Difficulty=Easy
+Description=./Standard/Wilds_of_Eldraine/JafferTTV_-_Jund_Midrange_(Standard,_#1743740).dck
+Deck Type=constructed
+
+[Main]
+4 Questing Druid
+4 Mosswood Dreadknight
+4 Bloodtithe Harvester
+3 Graveyard Trespasser
+3 Glissa Sunslayer
+2 Archfiend of the Dross
+3 Sheoldred, the Apocalypse
+2 Cut Down
+3 Go for the Throat
+1 Tear Asunder
+2 Sheoldred's Edict
+2 Duress
+2 Ob Nixilis, the Adversary
+1 Swamp
+1 Sulfurous Springs
+1 Karplusan Forest
+4 Llanowar Wastes
+4 Blackcleave Cliffs
+3 Copperline Gorge
+4 Haunted Ridge
+4 Ziatora's Proving Ground
+1 Takenuma, Abandoned Mire
+1 Sokenzan, Crucible of Defiance
+1 Boseiju, Who Endures
+[Sideboard]
+1 Ob Nixilis, the Adversary
+2 Cut Down
+1 Tear Asunder
+1 Sheoldred's Edict
+2 The End
+2 Duress
+2 Lithomantic Barrage
+2 Gix's Command
+2 Unlicensed Hearse

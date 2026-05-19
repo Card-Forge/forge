@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Boba Fett
+Title=Boba Fett
+Icon=Boba Fett.jpg
+Difficulty=Medium
+Description=Worldwake/Superstars_Standard_$2K_March-2010/Charlie_Chun_-_Rb_Burn_(Standard,_#2180).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ball Lightning
+4 Goblin Guide
+4 Hell's Thunder
+4 Hellspark Elemental
+3 Burst Lightning
+4 Lightning Bolt
+4 Searing Blaze
+4 Blightning
+3 Earthquake
+2 Quenchable Fire
+4 Arid Mesa
+4 Dragonskull Summit
+4 Lavaclaw Reaches
+8 Mountain
+4 Scalding Tarn
+[Sideboard]
+4 Deathmark
+2 Doom Blade
+4 Goblin Ruinblaster
+3 Manabarbs

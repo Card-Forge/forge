@@ -67,7 +67,7 @@ public abstract class PaperCardPredicates {
     public static Predicate<PaperCard> printedInAnyEditions(final String[] editionCodes) {
         Set<String> editions = new HashSet<>(Arrays.asList(editionCodes));
 
-        return card -> StaticData.instance().getCommonCards().getAllCards(card.getName()).stream()
+        return card -> StaticData.instance().getCommonCards().getAllCards(card).stream()
             .map(PaperCard::getEdition).anyMatch(editionCode ->
                 editions.contains(editionCode) &&
                     StaticData.instance().getCardEdition(editionCode).isCardObtainable(card.getName())
@@ -75,12 +75,12 @@ public abstract class PaperCardPredicates {
     }
 
     /**
-     * Filters cards that only printed in any of the specified editions.
+     * Filters cards that were only printed in any of the specified editions.
      */
     public static Predicate<PaperCard> onlyPrintedInEditions(final String[] editionCodes) {
         Set<String> editions = new HashSet<>(Arrays.asList(editionCodes));
 
-        return card -> StaticData.instance().getCommonCards().getAllCards(card.getName()).stream()
+        return card -> StaticData.instance().getCommonCards().getAllCards(card).stream()
             .map(PaperCard::getEdition).allMatch(editionCode ->
                 editions.contains(editionCode) &&
                     StaticData.instance().getCardEdition(editionCode).isCardObtainable(card.getName())
@@ -91,10 +91,28 @@ public abstract class PaperCardPredicates {
      * Filters cards that are obtainable in any edition.
      */
     public static Predicate<PaperCard> isObtainableAnyEdition() {
-        return card -> StaticData.instance().getCommonCards().getAllCards(card.getName()).stream()
+        return card -> StaticData.instance().getCommonCards().getAllCards(card).stream()
             .map(PaperCard::getEdition).anyMatch(editionCode ->
                 StaticData.instance().getCardEdition(editionCode).isCardObtainable(card.getName())
             );
+    }
+
+    /**
+     * Returns a predicate that checks whether a card has at least one printing
+     * in a non-restricted edition and that printing is obtainable.
+     * @param restrictedEditionCodes Array of edition codes that are restricted.
+     * @return Predicate
+     */
+    public static Predicate<PaperCard> isObtainableNotRestricted(final String[] restrictedEditionCodes) {
+        Set<String> restrictedEditions = new HashSet<>(Arrays.asList(restrictedEditionCodes));
+
+        return card -> StaticData.instance().getCommonCards()
+            .getAllCards(card).stream()
+            .map(PaperCard::getEdition)
+            .anyMatch(editionCode ->
+                !restrictedEditions.contains(editionCode) &&
+                    StaticData.instance().getCardEdition(editionCode).isCardObtainable(card.getName())
+        );
     }
 
     private static final class PredicatePrintedWithRarity implements Predicate<PaperCard> {

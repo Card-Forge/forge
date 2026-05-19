@@ -5,6 +5,7 @@ import java.util.Map;
 import forge.game.GameAction;
 import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityKey;
+import forge.game.event.GameEventAddLog;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -145,6 +146,6 @@ public class ClashEffect extends SpellAbilityEffect {
         } else {
             action.moveToBottomOfLibrary(c, sa);
         }
-        p.getGame().getGameLog().add(GameLogEntryType.STACK_RESOLVE, clashOutcome);
+        p.getGame().fireEvent(new GameEventAddLog(GameLogEntryType.STACK_RESOLVE, clashOutcome));
     }
 }

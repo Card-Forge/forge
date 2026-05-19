@@ -1,4 +1,5 @@
 Name:Inner Demons Gangsters
+Variant:UniversesWithin:FlavorName:Caldaia Brawlers
 ManaCost:3 B
 Types:Creature Human Rogue Villain
 PT:3/4

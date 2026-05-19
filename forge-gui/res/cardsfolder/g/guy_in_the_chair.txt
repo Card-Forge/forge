@@ -1,4 +1,5 @@
 Name:Guy in the Chair
+Variant:UniversesWithin:FlavorName:Eccentric Arachnologist
 ManaCost:2 G
 Types:Creature Human Advisor
 PT:2/3

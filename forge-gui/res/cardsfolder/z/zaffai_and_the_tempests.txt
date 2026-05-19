@@ -1,0 +1,6 @@
+Name:Zaffai and the Tempests
+ManaCost:5 U R
+Types:Legendary Creature Human Bard Sorcerer
+PT:5/7
+S:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | MayPlayLimit$ 1 | Affected$ Card.Instant+YouOwn,Card.Sorcery+YouOwn | AffectedZone$ Hand | Condition$ PlayerTurn | Description$ Once during each of your turns, you may cast an instant or sorcery spell from your hand without paying its mana cost.
+Oracle:Once during each of your turns, you may cast an instant or sorcery spell from your hand without paying its mana cost.

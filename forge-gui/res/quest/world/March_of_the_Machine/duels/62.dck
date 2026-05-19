@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Borborygmos
+Title=Borborygmos
+Icon=Borborygmos.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine/MTG_Lukas_-_Death_and_Taxes_(Modern,_#1624794).dck
+Deck Type=constructed
+
+[Main]
+4 Leonin Arbiter
+3 Thalia, Guardian of Thraben
+4 Stoneforge Mystic
+4 Giver of Runes
+3 Archon of Emeria
+4 Solitude
+1 Skrelv, Defector Mite
+3 Melira, the Living Cure
+2 Deeproot Wayfinder
+2 Deeproot Wayfinder
+1 Sword of Fire and Ice
+1 Shadowspear
+1 Kaldra Compleat
+4 Aether Vial
+1 Plains
+1 Plains
+2 Horizon Canopy
+4 Razorverge Thicket
+4 Ghost Quarter
+2 Horizon Canopy
+3 Branchloft Pathway
+1 Boseiju, Who Endures
+1 Boseiju, Who Endures
+2 Eiganjo, Seat of the Empire
+2 Boseiju, Who Endures
+[Sideboard]
+2 Gaddock Teeg
+3 Drannith Magistrate
+3 Strict Proctor
+3 Sanctifier en-Vec
+2 Outland Liberator
+2 Surge of Salvation

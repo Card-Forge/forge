@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Doctor John Zoidberg
+Title=Doctor John Zoidberg
+Icon=Doctor John Zoidberg.jpg
+Difficulty=Medium
+Description=Aether_Revolt/THARMARATNAM,_SAMUEL_-_BR_Aggro_(Standard,_#667514).dck
+Deck Type=constructed
+
+[Main]
+4 Bomat Courier
+3 Forerunner of Slaughter
+4 Inventor's Apprentice
+3 Pia Nalaar
+4 Scrapheap Scrounger
+4 Weldfast Engineer
+4 Heart of Kiran
+2 Shock
+3 Unlicensed Disintegration
+4 Incendiary Flow
+2 Chandra, Torch of Defiance
+4 Foreboding Ruins
+10 Mountain
+4 Smoldering Marsh
+5 Swamp
+[Sideboard]
+2 Chandra, Torch of Defiance
+2 Collective Brutality
+3 Fatal Push
+2 Kalitas, Traitor of Ghet
+2 Key to the City
+4 Transgress the Mind

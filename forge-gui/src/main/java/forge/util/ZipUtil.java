@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
@@ -22,6 +23,29 @@ public class ZipUtil {
         FileOutputStream fos = new FileOutputStream(dest.getAbsolutePath() + File.separator + name);
         ZipOutputStream zipOut = new ZipOutputStream(fos)) {
             zipFile(source, source.getName(), zipOut);
+        }
+    }
+
+    /**
+     * Write the given files to a flat zip archive at {@code zipFile}. Each entry uses the
+     * source file's basename; no directory structure is preserved. Files that don't exist
+     * are skipped silently so callers don't have to pre-filter.
+     */
+    public static void zipFiles(List<File> files, File zipFile) throws IOException {
+        try (FileOutputStream fos = new FileOutputStream(zipFile);
+             ZipOutputStream zipOut = new ZipOutputStream(fos)) {
+            byte[] buffer = new byte[1024];
+            for (File file : files) {
+                if (file == null || !file.isFile()) continue;
+                try (FileInputStream fis = new FileInputStream(file)) {
+                    zipOut.putNextEntry(new ZipEntry(file.getName()));
+                    int length;
+                    while ((length = fis.read(buffer)) >= 0) {
+                        zipOut.write(buffer, 0, length);
+                    }
+                    zipOut.closeEntry();
+                }
+            }
         }
     }
 

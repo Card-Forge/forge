@@ -8,6 +8,6 @@ SVar:TrigCharm:DB$ Charm | Choices$ DBLoot,DBTreasure,DBToken
 SVar:DBLoot:DB$ Discard | Mode$ TgtChoose | SubAbility$ DBDraw | SpellDescription$ Discard a card, then draw a card.
 SVar:DBDraw:DB$ Draw
 SVar:DBTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | SpellDescription$ Create a Treasure token.
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ role_wicked | TokenOwner$ You | AttachedTo$ Targeted | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Create a Wicked Role token attached to target creature you control.
+SVar:DBToken:DB$ Token | TokenScript$ role_wicked | TokenOwner$ You | AttachedTo$ Targeted | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SpellDescription$ Create a Wicked Role token attached to target creature you control.
 DeckHas:Ability$Token|Discard & Type$Aura|Enchantment|Role|Treasure
 Oracle:Haste\nWhen Charming Scoundrel enters, choose one —\n• Discard a card, then draw a card.\n• Create a Treasure token.\n• Create a Wicked Role token attached to target creature you control.

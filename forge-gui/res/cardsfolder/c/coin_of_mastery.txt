@@ -1,0 +1,9 @@
+Name:Coin of Mastery
+ManaCost:4
+Types:Artifact
+K:ETBReplacement:Other:AddExtraCounter:Mandatory:Battlefield:Creature.YouCtrl
+SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ X | SpellDescription$ Each creature you control enters with an additional +1/+1 counter on it for each mana from an artifact source spent to cast it.
+SVar:X:ReplacedCard$CastTotalManaSpent Artifact
+A:AB$ Token | Cost$ T | TokenScript$ c_a_treasure_sac | SpellDescription$ Create a Treasure token.
+DeckHas:Ability$Counters
+Oracle:Each creature you control enters with an additional +1/+1 counter on it for each mana from an artifact source spent to cast it.\n{T}: Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")

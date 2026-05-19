@@ -5,7 +5,7 @@ Difficulty=hard
 Description=Mono G Elvish Piper deck with Quicksilver Amulet and huge creatures
 Icon=Boromir.jpg
 Deck Type=constructed
-[main]
+[Main]
 19 Snow-Covered Forest
 4 Bayou
 4 Elvish Piper
@@ -31,4 +31,4 @@ Deck Type=constructed
 1 Verdant Force
 1 Vorinclex, Voice of Hunger
 1 Woodfall Primus
-[sideboard]
+[Sideboard]

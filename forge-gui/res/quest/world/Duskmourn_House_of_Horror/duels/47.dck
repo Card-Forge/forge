@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Hercules
+Title=Hercules
+Icon=Hercules.jpg
+Difficulty=Medium
+Description=./Standard/Duskmourn_House_of_Horror/ComboMAN_-_Temur_Prowess_(Standard,_#2273987).dck
+Deck Type=constructed
+
+[Main]
+4 Thundertrap Trainer
+3 Valley Floodcaller
+2 Questing Druid
+4 Enduring Vitality
+1 Pawpatch Formation
+4 This Town Ain't Big Enough
+4 Torch the Tower
+2 Song of Totentanz
+4 Analyze the Pollen
+3 Bushwhack
+2 Roaring Furnace // Steaming Sauna
+4 Stormchaser's Talent
+2 Up the Beanstalk
+2 Bitter Reunion
+4 Botanical Sanctum
+2 Yavimaya Coast
+1 Tarnation Vista
+1 Karplusan Forest
+1 Mountain
+2 Forest
+4 Copperline Gorge
+2 Island
+2 Fabled Passage
+[Sideboard]
+2 Negate
+1 Pyroclasm
+1 Blue Sun's Twilight
+1 Up the Beanstalk
+1 Into the Flood Maw
+2 Pawpatch Formation
+2 Dissection Tools
+2 Ghost Vacuum
+1 Screaming Nemesis
+2 Scorching Dragonfire

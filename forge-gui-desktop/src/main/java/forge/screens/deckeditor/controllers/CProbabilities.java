@@ -1,6 +1,7 @@
 package forge.screens.deckeditor.controllers;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import forge.deck.DeckBase;
 import forge.gui.UiCommand;
@@ -61,11 +62,7 @@ public enum CProbabilities implements ICDoc {
         Collections.shuffle(shuffled, MyRandom.getRandom());
 
         // Log totals of each card for decrementing
-        final Map<PaperCard, Integer> cardTotals = new HashMap<>();
-        for (final PaperCard c : shuffled) {
-            if (cardTotals.containsKey(c)) { cardTotals.put(c, cardTotals.get(c) + 1); }
-            else { cardTotals.put(c, 1); }
-        }
+        final Map<PaperCard, Long> cardTotals = shuffled.stream().collect(Collectors.groupingBy(pc -> pc, Collectors.counting()));
 
         // Run through shuffled deck and calculate probabilities.
         // Formulas is (remaining instances of this card / total cards remaining)
@@ -77,7 +74,7 @@ public enum CProbabilities implements ICDoc {
             // int prob = SEditorUtil.calculatePercentage(
             //       cardTotals.get(tmp), shuffled.size());
 
-            cardTotals.put(tmp, cardTotals.get(tmp) - 1);
+            cardTotals.merge(tmp, -1l, Long::sum);
             cardProbabilities.add(tmp.getName()); // + " (" + prob + "%)");
             itr.remove();
         }

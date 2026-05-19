@@ -2,16 +2,11 @@ package forge.game;
 
 import java.io.Serializable;
 
-public class GameLogEntry implements Serializable {
-    private static final long serialVersionUID = -5322859985172769630L;
+import forge.game.card.CardView;
 
-    public final String message;
-    public final GameLogEntryType type;
-    // might add here date and some other fields
-
-    GameLogEntry(final GameLogEntryType type0, final String messageIn) {
-        type = type0;
-        message = messageIn;
+public record GameLogEntry(GameLogEntryType type, String message, CardView sourceCard) implements Serializable {
+    GameLogEntry(final GameLogEntryType type, final String message) {
+        this(type, message, null);
     }
 
     @Override

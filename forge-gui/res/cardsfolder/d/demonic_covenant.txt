@@ -5,7 +5,7 @@ T:Mode$ AttackersDeclaredOneTarget | AttackedTarget$ Player | ValidAttackers$ Cr
 SVar:TrigDrawAndDamage:DB$ Draw | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCreateAndMill | TriggerDescription$ At the beginning of your end step, create a 5/5 black Demon creature token with flying, then mill two cards. If two cards that share all their card types were milled this way, sacrifice CARDNAME.
-SVar:TrigCreateAndMill:DB$ Token | TokenAmount$ 1 | TokenScript$ b_5_5_demon_flying | TokenOwner$ You | SubAbility$ DBMill
+SVar:TrigCreateAndMill:DB$ Token | TokenScript$ b_5_5_demon_flying | TokenOwner$ You | SubAbility$ DBMill
 SVar:DBMill:DB$ Mill | NumCards$ 2 | RememberMilled$ True | ShowMilledCards$ True | SubAbility$ DBSacrifice
 SVar:DBSacrifice:DB$ Sacrifice | SacValid$ Self | ShowSacrificedCards$ True | ConditionCheckSVar$ MilledSharesAllTypes | ConditionSVarCompare$ GE2 | SubAbility$ DBCleanup
 SVar:MilledSharesAllTypes:Remembered$Valid Card.sharesAllCardTypesWithOther Remembered

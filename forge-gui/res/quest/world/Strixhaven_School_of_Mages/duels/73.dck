@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Nibbler
+Title=Nibbler
+Icon=Nibbler.jpg
+Difficulty=Hard
+Description=./Modern/Strixhaven_School_of_Mages/Aurelie_Orset_-_Boros_(Modern,_#1205778)_[!].dck
+Deck Type=constructed
+
+[Main]
+3 Harmonic Prodigy
+4 Monastery Swiftspear
+4 Clever Lumimancer
+4 Soul-Scar Mage
+1 Infuriate
+3 Mutagenic Growth
+3 Manamorphose
+4 Boros Charm
+4 Lightning Bolt
+4 Lava Dart
+4 Crash Through
+4 Light Up the Stage
+1 Plains
+3 Sacred Foundry
+3 Mountain
+3 Sunbaked Canyon
+4 Inspiring Vantage
+4 Arid Mesa
+[Sideboard]
+1 Shattering Spree
+1 Wear // Tear
+1 Rip Apart
+1 Dismember
+1 Lurrus of the Dream-Den
+2 Path to Exile
+2 Pithing Needle
+2 Harsh Mentor
+2 Blood Moon
+2 Kor Firewalker

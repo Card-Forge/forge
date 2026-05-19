@@ -2,7 +2,7 @@ Name:Starfall Invocation
 ManaCost:3 W W
 Types:Sorcery
 K:Gift
-SVar:GiftAbility:DB$ Draw | NumCards$ 1 | Defined$ Promised | GiftDescription$ a card
+SVar:GiftAbility:DB$ Draw | Defined$ Promised | GiftDescription$ a card
 A:SP$ DestroyAll | ValidCards$ Creature | RememberDestroyed$ True | SubAbility$ DBReturn | SpellDescription$ Destroy all creatures. If the gift was promised, return a creature card put into your graveyard this way to the battlefield under your control.
 SVar:DBReturn:DB$ ChangeZone | ConditionZone$ Stack | ConditionPresent$ Card.Self+PromisedGift | ConditionCompare$ EQ1 | ChangeType$ Creature.!token+IsRemembered+YouOwn | ChangeNum$ 1 | Hidden$ True | Mandatory$ True | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

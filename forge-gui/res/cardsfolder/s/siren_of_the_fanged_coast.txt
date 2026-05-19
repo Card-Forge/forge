@@ -4,7 +4,7 @@ Types:Creature Siren
 PT:1/1
 K:Flying
 K:Tribute:3
-SVar:TrigNotTribute:DB$ GainControl | TgtPrompt$ Choose target creature | ValidTgts$ Creature | SpellDescription$ When CARDNAME enters, if tribute wasn't paid, gain control of target creature.
+SVar:TrigNotTribute:DB$ GainControl | ValidTgts$ Creature | SpellDescription$ When CARDNAME enters, if tribute wasn't paid, gain control of target creature.
 SVar:PlayMain1:TRUE
 SVar:TributeAILogic:DontControlCreatures
 DeckHas:Ability$Counters

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Green Arrow
+Title=Green Arrow
+Icon=Green Arrow.jpg
+Difficulty=Very Hard
+Description=./Modern/March_of_the_Machine_The_Aftermath/Kalendae_MTG_-_Humans_(Modern,_#1652492).dck
+Deck Type=constructed
+
+[Main]
+4 Champion of the Parish
+3 Reflector Mage
+4 Thalia's Lieutenant
+3 Ranger-Captain of Eos
+3 Unsettled Mariner
+4 Esper Sentinel
+4 Adeline, Resplendent Cathar
+4 Coppercoat Vanguard
+4 Thalia, Guardian of Thraben
+4 Aether Vial
+1 Shadowspear
+4 Urza's Saga
+4 Cavern of Souls
+2 Eiganjo, Seat of the Empire
+4 Fortified Beachhead
+4 Seachrome Coast
+2 Plains
+1 Plains
+1 Island
+[Sideboard]
+1 Pithing Needle
+1 Engineered Explosives
+1 Relic of Progenitus
+3 Lavinia, Azorius Renegade
+3 Meddling Mage
+3 Sanctifier en-Vec
+3 March of Otherworldly Light

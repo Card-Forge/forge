@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=The Zombie
+Title=The Zombie
+Icon=The Zombie.jpg
+Difficulty=Easy
+Description=./Standard/Marvels_Spider_Man/Luke_Viner_-_Dimir_Reanimator_(Standard,_#2675378).dck
+Deck Type=constructed
+
+[Main]
+1 Marang River Regent
+4 Malcolm, Alluring Scoundrel
+4 Dreadwing Scavenger
+4 Steamcore Scholar
+4 Superior Spider-Man
+4 Overlord of the Balemurk
+4 Harvester of Misery
+4 Vein Ripper
+4 Bringer of the Last Gift
+3 Bitter Triumph
+6 Island
+4 Swamp
+2 Restless Reef
+1 Cavern of Souls
+4 Gloomlake Verge
+4 Watery Grave
+3 Undercity Sewers
+[Sideboard]
+2 Tishana's Tidebinder
+4 Proft's Eidetic Memory
+2 Spider-Sense
+2 Three Steps Ahead
+2 Into the Flood Maw
+3 Duress

@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Teysa
+Title=Teysa
+Icon=Teysa.jpg
+Difficulty=Hard
+Description=../Modern/Gatecrash/PTQ_San_Diego_&mdash;_Moscow,_&quot;Edinorog&quot;/Dmitrij_Tolkachev_-_Infect_(Modern,_#46863).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blighted Agent
+4 Glistener Elf
+4 Ichorclaw Myr
+2 Noble Hierarch
+3 Apostle's Blessing
+4 Groundswell
+4 Might of Old Krosa
+4 Mutagenic Growth
+2 Simic Charm
+2 Vines of Vastwood
+1 Distortion Strike
+4 Rancor
+2 Breeding Pool
+5 Forest
+4 Inkmoth Nexus
+1 Island
+4 Misty Rainforest
+2 Overgrown Tomb
+2 Pendelhaven
+[Sideboard]
+2 Abrupt Decay
+1 Dismember
+2 Dispel
+2 Grafdigger's Cage
+2 Melira, Sylvok Outcast
+3 Nature's Claim
+3 Spellskite

@@ -8,6 +8,6 @@ SVar:DBChooseCard:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Creat
 SVar:DBSac:DB$ SacrificeAll | ValidCards$ Card.IsImprinted | RememberSacrificed$ True | SubAbility$ DBLifeGain
 SVar:DBLifeGain:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True | ClearChosenCard$ True
-SVar:X:RememberedLKI$GreatestPower
+SVar:X:RememberedLKI$GreatestCardPower
 K:Madness:2 B PayLife<8>
 Oracle:When Shadowgrange Archfiend enters, each opponent sacrifices a creature with the greatest power among creatures they control. You gain life equal to the greatest power among creatures sacrificed this way.\nMadness—{2}{B}, Pay 8 life. (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)

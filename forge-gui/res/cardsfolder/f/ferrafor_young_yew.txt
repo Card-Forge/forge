@@ -1,0 +1,9 @@
+Name:Ferrafor, Young Yew
+ManaCost:6 G
+Types:Legendary Creature Treefolk Druid
+PT:4/7
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When NICKNAME enters, create a number of 1/1 green Saproling creature tokens equal to the number of counters among creatures target player controls.
+SVar:TrigToken:DB$ Token | TokenAmount$ Count$Valid Creature.ControlledBy TargetedPlayer$CardCounters.ALL | TokenScript$ g_1_1_saproling | ValidTgts$ Player | TokenOwner$ You
+A:AB$ MultiplyCounter | Cost$ T | ValidTgts$ Creature | StackDescription$ SpellDescription | SpellDescription$ Double the number of each kind of counter on target creature.
+DeckHas:Ability$Token
+Oracle:When Ferrafor enters, create a number of 1/1 green Saproling creature tokens equal to the number of counters among creatures target player controls.\n{T}: Double the number of each kind of counter on target creature.

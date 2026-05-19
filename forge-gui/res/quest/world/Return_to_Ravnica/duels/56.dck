@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Dogbert
+Title=Dogbert
+Icon=Dogbert.jpg
+Difficulty=Very Hard
+Description=../Modern/Return_to_Ravnica/Ingenio_-_Modern_Masters/Sergio_Seoane_-_GW_Aggro_(Modern,_#53577).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Dryad Arbor
+4 Gladecover Scout
+4 Kor Spiritdancer
+4 Noble Hierarch
+4 Slippery Bogle
+3 Path to Exile
+4 Daybreak Coronet
+4 Ethereal Armor
+4 Hyena Umbra
+4 Rancor
+3 Spider Umbra
+4 Spirit Mantle
+1 Forest
+3 Horizon Canopy
+3 Misty Rainforest
+4 Razorverge Thicket
+3 Temple Garden
+3 Verdant Catacombs
+[Sideboard]
+3 Leyline of Sanctity
+3 Rest in Peace
+2 Spirit Link
+3 Stony Silence
+4 Suppression Field

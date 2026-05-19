@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Silver Samurai
+Title=Silver Samurai
+Icon=Silver Samurai.jpg
+Difficulty=Very Hard
+Description=./Modern/March_of_the_Machine/Colin_Lugo_-_Dimir_Mill_(Modern,_#1620881).dck
+Deck Type=constructed
+
+[Main]
+4 Hedron Crab
+4 Ruin Crab
+4 Archive Trap
+4 Drown in the Loch
+3 Surgical Extraction
+2 Fatal Push
+1 Murderous Cut
+1 Baleful Mastery
+4 Visions of Beyond
+4 Fractured Sanity
+4 Tasha's Hideous Laughter
+3 Jace, the Perfected Mind
+1 Oboro, Palace in the Clouds
+4 Polluted Delta
+3 Misty Rainforest
+4 Field of Ruin
+2 Darkslick Shores
+2 Watery Grave
+4 Island
+1 Swamp
+1 Shelldock Isle
+[Sideboard]
+4 Soul-Guide Lantern
+2 Fatal Push
+1 Baleful Mastery
+1 Realmbreaker, the Invasion Tree
+2 Extirpate
+1 Ensnaring Bridge
+1 Necromentia
+1 Engineered Explosives
+2 Crypt Incursion

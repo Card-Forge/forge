@@ -1,0 +1,10 @@
+Name:Ambitious Augmenter
+ManaCost:G
+Types:Creature Turtle Wizard
+PT:1/1
+K:Increment
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self+HasCounters | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ When this creature dies, if it had one or more counters on it, create a 0/0 green and blue Fractal creature token, then put this creature's counters on that token.
+SVar:TrigToken:DB$ Token | TokenScript$ gu_0_0_fractal | TokenOwner$ You | SubAbility$ DBPutCounter | RememberTokens$ True
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ EachFromSource | EachFromSource$ TriggeredCardLKICopy | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Increment (Whenever you cast a spell, if the amount of mana you spent is greater than this creature's power or toughness, put a +1/+1 counter on this creature.)\nWhen this creature dies, if it had one or more counters on it, create a 0/0 green and blue Fractal creature token, then put this creature's counters on that token.

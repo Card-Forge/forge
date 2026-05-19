@@ -18,11 +18,7 @@ import forge.game.ability.effects.CharmEffect;
 import forge.game.ability.effects.RollDiceEffect;
 import forge.game.card.*;
 import forge.game.combat.Combat;
-import forge.game.cost.Cost;
-import forge.game.cost.CostEnlist;
-import forge.game.cost.CostPart;
-import forge.game.cost.CostPartMana;
-import forge.game.cost.CostPayment;
+import forge.game.cost.*;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
@@ -49,6 +45,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 
 /**
@@ -72,11 +69,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     public void setupAutoProfile(Deck deck) {
-        pilotsNonAggroDeck = deck.getName().contains("Control") || Deck.getAverageCMC(deck) > 3;
-    }
-
-    public void allowCheatShuffle(boolean value) {
-        brains.allowCheatShuffle(value);
+        pilotsNonAggroDeck = deck.getName().contains("Control") || deck.getAverageCMC() > 3;
     }
 
     public void setUseSimulation(boolean value) {
@@ -102,8 +95,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public List<PaperCard> sideboard(Deck deck, GameType gameType, String message) {
-        if (!brains.getGame().getRules().getAISideboardingEnabled()
-            || !deck.has(DeckSection.Sideboard)) {
+        if (!brains.getGame().getRules().getAISideboardingEnabled() || !deck.has(DeckSection.Sideboard)) {
             return null;
         }
 
@@ -242,11 +234,7 @@ public class PlayerControllerAi extends PlayerController {
         Map<Byte, Integer> result = new HashMap<>();
         for (int i = 0; i < manaAmount; ++i) {
             Byte chosen = chooseColor("", sa, colorSet);
-            if (result.containsKey(chosen)) {
-                result.put(chosen, result.get(chosen) + 1);
-            } else {
-                result.put(chosen, 1);
-            }
+            result.merge(chosen, 1, Integer::sum);
             if (different) {
                 colorSet = ColorSet.fromMask(colorSet.getColor() - chosen);
             }
@@ -255,7 +243,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public Integer announceRequirements(SpellAbility ability, String announce) {
+    public Integer announceRequirements(SpellAbility ability, int min, int max, String announce) {
         // For now, these "announcements" are made within the AI classes of the appropriate SA effects
         if (ability.getApi() != null) {
             switch (ability.getApi()) {
@@ -340,7 +328,7 @@ public class PlayerControllerAi extends PlayerController {
         // Ideally, it would do something like
         // Verify we actually want to play this. Including: "Would play with assistance" and "would play without assistance"
         // Find an ally/player that might be helpful to pay for an effect
-        // If noone seems likely, just return null
+        // If no one seems likely, just return null
         // If player fails to assist, don't try to request assistance until next turn
         // If player fails to assist, maybe still cast it anyway?
 
@@ -350,9 +338,9 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public <T extends GameEntity> T chooseSingleEntityForEffect(FCollectionView<T> optionList, DelayedReveal delayedReveal, SpellAbility sa, String title, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         if (delayedReveal != null) {
-            reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
+            reveal(delayedReveal);
         }
-        return SpellApiToAi.Converter.get(sa).chooseSingleEntity(player, sa, (FCollection<T>)optionList, isOptional, targetedPlayer, params);
+        return SpellApiToAi.Converter.get(sa).chooseSingleEntity(player, sa, optionList, isOptional, targetedPlayer, params);
     }
 
     @Override
@@ -360,7 +348,7 @@ public class PlayerControllerAi extends PlayerController {
             FCollectionView<T> optionList, int min, int max, DelayedReveal delayedReveal, SpellAbility sa, String title,
             Player targetedPlayer, Map<String, Object> params) {
         if (delayedReveal != null) {
-            reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
+            reveal(delayedReveal);
         }
         FCollection<T> remaining = new FCollection<>(optionList);
         List<T> selecteds = new ArrayList<>();
@@ -671,7 +659,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public CardCollection chooseCardsToDiscardFrom(Player p, SpellAbility sa, CardCollection validCards, int min, int max) {
+    public CardCollection chooseCardsToDiscardFrom(Player p, SpellAbility sa, CardCollection validCards, int min, int max, CardCollectionView visibleToChooser) {
         if (p == player) {
             return brains.getCardsToDiscard(min, max, validCards, sa);
         }
@@ -696,8 +684,8 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public CardCollectionView chooseCardsToDiscardUnlessType(int num, CardCollectionView hand, String uType, SpellAbility sa) {
-        Iterable<Card> cardsOfType = IterableUtil.filter(hand, CardPredicates.restriction(uType.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa));
+    public CardCollectionView chooseCardsToDiscardUnlessType(int num, CardCollectionView hand, String[] uTypes, SpellAbility sa) {
+        Iterable<Card> cardsOfType = IterableUtil.filter(hand, CardPredicates.restriction(uTypes, sa.getActivatingPlayer(), sa.getHostCard(), sa));
         if (!Iterables.isEmpty(cardsOfType)) {
             Card toDiscard = Aggregates.itemWithMin(cardsOfType, Card::getCMC);
             return new CardCollection(toDiscard);
@@ -731,11 +719,13 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public int chooseSprocket(Card assignee, boolean forceDifferent) {
+    public int chooseSprocket(Card assignee, List<Integer> sprockets) {
         int nextSprocket = (player.getCrankCounter() % 3) + 1;
-        if(forceDifferent && nextSprocket == assignee.getSprocket())
+        if(sprockets.contains(nextSprocket))
+            return nextSprocket;
+        else if(sprockets.contains((nextSprocket % 3) + 1))
             return (nextSprocket % 3) + 1;
-        return nextSprocket;
+        return sprockets.stream().findAny().orElse(0);
     }
 
     @Override
@@ -780,11 +770,10 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public CardCollectionView londonMulliganReturnCards(final Player mulliganingPlayer, int cardsToReturn) {
+    public CardCollectionView tuckCardsViaMulligan(CardCollectionView hand, int cardsToReturn) {
         // TODO This is better than it was before, but still suboptimal (but fast).
         // Maybe score a bunch of hands based on projected hand size and return the "duds"
-        CardCollection hand = new CardCollection(player.getCardsIn(ZoneType.Hand));
-        int numLandsDesired = (mulliganingPlayer.getStartingHandSize() - cardsToReturn) / 2;
+        int numLandsDesired = (player.getStartingHandSize() - cardsToReturn) / 2;
 
         CardCollection toReturn = new CardCollection();
         for (int i = 0; i < cardsToReturn; i++) {
@@ -817,8 +806,7 @@ public class PlayerControllerAi extends PlayerController {
                 continue;
             }
 
-            // If we don't want to scry anything to the bottom, remove the worst card that we have in order to satisfy
-            // the requirement
+            // If we don't want to scry anything to the bottom, remove the worst card that we have in order to satisfy the requirement
             toReturn.add(ComputerUtilCard.getWorstAI(hand));
         }
 
@@ -847,9 +835,40 @@ public class PlayerControllerAi extends PlayerController {
                 sa.resolve();
             }
         } else {
-            ComputerUtil.handlePlayingSpellAbility(player, sa, getGame());
+            ComputerUtil.handlePlayingSpellAbility(player, sa, getDeferredTargetingPlayerRunnable(sa));
         }
         return true;
+    }
+
+    /**
+     * If any ability in the SA chain has a TargetingPlayer,
+     * defers the human choice from canPlayAI (worker thread with possibly low timeout)
+     * to handlePlayingSpellAbility (game thread, no timeout).
+     */
+    private Runnable getDeferredTargetingPlayerRunnable(SpellAbility sa) {
+        SpellAbility root = sa;
+        while (sa != null) {
+            if (sa.hasParam("TargetingPlayer") && sa.getTargetingPlayer() != null) {
+                return () -> {
+                    SpellAbility cur = root;
+                    while (cur != null) {
+                        if (cur.hasParam("TargetingPlayer") && cur.getTargetingPlayer() != null) {
+                            cur.clearTargets();
+                            cur.getTargetingPlayer().getController().chooseTargetsFor(cur);
+                            // there's a chance a target gets selected that makes the cost unaffordable
+                            if (!ComputerUtilCost.canPayCost(root, root.getActivatingPlayer(), false)) {
+                                cur.resetTargets();
+                                root.setSkip(true);
+                                return;
+                            }
+                        }
+                        cur = cur.getSubAbility();
+                    }
+                };
+            }
+            sa = sa.getSubAbility();
+        }
+        return null;
     }
 
     @Override
@@ -858,13 +877,13 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public CardCollection chooseCardsToRevealFromHand(int min, int max, CardCollectionView valid) {
+    public CardCollectionView chooseCardsToRevealFromHand(int min, int max, CardCollectionView valid) {
         int numCardsToReveal = Math.min(max, valid.size());
-        return numCardsToReveal == 0 ? new CardCollection() : (CardCollection)valid.subList(0, numCardsToReveal);
+        return numCardsToReveal == 0 ? CardCollection.EMPTY : (CardCollection)valid.subList(0, numCardsToReveal);
     }
 
     @Override
-    public Player chooseStartingPlayer(boolean isFirstgame) {
+    public Player chooseStartingPlayer(boolean isFirstGame) {
         return this.player; // AI is brave :)
     }
 
@@ -908,22 +927,13 @@ public class PlayerControllerAi extends PlayerController {
      * @see forge.game.player.PlayerController#chooseFlipResult(forge.Card, forge.game.player.Player, java.lang.String[], boolean)
      */
     @Override
-    public boolean chooseFlipResult(SpellAbility sa, Player flipper, boolean[] results, boolean call) {
+    public boolean chooseFlipResult(SpellAbility sa, Player flipper, boolean call) {
         if (call) {
             // Win if possible
-            boolean result = false;
-            for (boolean s : results) {
-                if (s) {
-                    result = s;
-                    break;
-                }
-            }
-            return result;
-        } else {
-            // heads or tails, AI doesn't know which is better now
-            int i = MyRandom.getRandom().nextInt(results.length);
-            return results[i];
+            return true;
         }
+        // heads or tails, AI doesn't know which is better now
+        return MyRandom.getRandom().nextBoolean();
     }
 
     @Override
@@ -982,7 +992,10 @@ public class PlayerControllerAi extends PlayerController {
                 }
                 return defaultVal != null && defaultVal;
             case LeftOrRight: return brains.chooseDirection(sa);
-            case OddsOrEvens: return brains.chooseEvenOdd(sa); // false is Odd, true is Even
+            case OddsOrEvens: return brains.chooseEvenOdd(sa);
+            case HeadsOrTails:
+                // this is the result if AI gets to choose after
+                return true;
             default:
                 return MyRandom.getRandom().nextBoolean();
         }
@@ -1051,8 +1064,8 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public List<String> chooseColors(String message, SpellAbility sa, int min, int max, List<String> options) {
-        return ComputerUtilCard.chooseColor(sa, min, max, options);
+    public ColorSet chooseColors(String message, SpellAbility sa, int min, int max, ColorSet options) {
+        return ColorSet.fromNames(ComputerUtilCard.chooseColor(sa, min, max, options.stream().map(MagicColor.Color::getName).collect(Collectors.toList())));
     }
 
     /*
@@ -1142,13 +1155,13 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public StaticAbility chooseSingleStaticAbility(String prompt, List<StaticAbility> possibleStatics) {
+    public StaticAbility chooseSingleStaticAbility(List<StaticAbility> possibleStatics) {
         // only matters in corner cases
         return Iterables.getFirst(possibleStatics, null);
     }
 
     @Override
-    public String chooseProtectionType(String string, SpellAbility sa, List<String> choices) {
+    public String chooseProtectionType(SpellAbility sa, List<String> choices) {
         String choice = choices.get(0);
         SpellAbility hostsa = null;     //for Protect sub-ability
         if (getGame().stack.size() > 1) {
@@ -1224,8 +1237,27 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
+    public CardCollectionView chooseCardsForCost(CardCollectionView optionList, SpellAbility sa, CostPartWithList cpl, int amount, boolean isOptional, String prompt) {
+        assert(false);
+        //Untested placeholder. The AI does not currently pay like this.
+        return cpl.accept(new AiCostDecision(player, sa, true)).cards;
+    }
+
+    @Override
+    public boolean applyManaToCost(ManaCostBeingPaid toPay, SpellAbility ability, String prompt, ManaConversionMatrix matrix, boolean effect) {
+        assert(false);
+        //Untested placeholder. The AI does not currently pay like this.
+        return ComputerUtilMana.payManaCost(toPay, ability, player, effect);
+    }
+
+    @Override
+    public CostDecisionMakerBase getCostDecisionMaker(Player player, SpellAbility ability, boolean effect, String prompt) {
+        return new AiCostDecision(player, ability, effect);
+    }
+
+    @Override
     public boolean payCostToPreventEffect(Cost cost, SpellAbility sa, boolean alreadyPaid, FCollectionView<Player> allPayers) {
-        if (SpellApiToAi.Converter.get(sa).willPayUnlessCost(sa, player, cost, alreadyPaid, allPayers)) {
+        if (SpellApiToAi.Converter.get(sa).willPayUnlessCost(player, sa, cost, alreadyPaid, allPayers)) {
             if (!ComputerUtilCost.canPayCost(cost, sa, player, true)) {
                 return false;
             }
@@ -1236,14 +1268,19 @@ public class PlayerControllerAi extends PlayerController {
         return false;
     }
 
-    public boolean payCostDuringRoll(final Cost cost, final SpellAbility sa, final FCollectionView<Player> allPayers) {
+    public boolean payCostDuringRoll(final Cost cost, final SpellAbility sa) {
         // TODO logic for AI to pay rerolls and modification costs
         return false;
     }
 
     @Override
+    public List<SpellAbility> orderSimultaneousSa(List<SpellAbility> activePlayerSAs) {
+        return getAi().orderPlaySa(activePlayerSAs);
+    }
+
+    @Override
     public void orderAndPlaySimultaneousSa(List<SpellAbility> activePlayerSAs) {
-        for (final SpellAbility sa : getAi().orderPlaySa(activePlayerSAs)) {
+        for (final SpellAbility sa : orderSimultaneousSa(activePlayerSAs)) {
             if (sa.isTrigger() && !sa.isCopied()) {
                 if (prepareSingleSa(sa.getHostCard(), sa, true)) {
                     ComputerUtil.playStack(sa, player, getGame());
@@ -1288,9 +1325,8 @@ public class PlayerControllerAi extends PlayerController {
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(host, sa.getParam("TargetingPlayer"), sa).get(0);
             sa.setTargetingPlayer(targetingPlayer);
             return targetingPlayer.getController().chooseTargetsFor(sa);
-        } else {
-            return brains.doTrigger(sa, isMandatory);
         }
+        return brains.doTrigger(sa, isMandatory);
     }
 
     @Override
@@ -1372,7 +1408,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public CardCollectionView cheatShuffle(CardCollectionView list) {
-        return brains.getBoolProperty(AiProps.CHEAT_WITH_MANA_ON_SHUFFLE) ? brains.cheatShuffle(list) : list;
+        return brains.cheatShuffle(list);
     }
 
     @Override
@@ -1382,37 +1418,41 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public Map<Card, ManaCostShard> chooseCardsForConvokeOrImprovise(SpellAbility sa, ManaCost manaCost, CardCollectionView untappedCards, boolean improvise) {
+    public Map<Card, ManaCostShard> chooseCardsForConvokeOrImprovise(SpellAbility sa, ManaCost manaCost, CardCollectionView untappedCards, boolean artifacts, boolean creatures, Integer maxReduction) {
         final Player ai = sa.getActivatingPlayer();
         final PhaseHandler ph = ai.getGame().getPhaseHandler();
-        //Filter out mana sources that will interfere with payManaCost()
+        // Filter out mana sources that will interfere with payManaCost()
         CardCollection untapped = CardLists.filter(untappedCards, c -> c.getManaAbilities().isEmpty());
 
         // Filter out creatures if AI hasn't attacked yet
         if (ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
-            if (improvise) {
+            if (!creatures) {
                 untapped = CardLists.filter(untapped, c -> !c.isCreature());
             } else {
+                // TODO AI needs to learn how to use Convoke or Waterbend
                 return new HashMap<>();
             }
         }
 
-        //Do not convoke potential blockers until after opponent's attack
-        final CardCollectionView blockers = ComputerUtilCard.getLikelyBlockers(ai, null);
         if ((ph.isPlayerTurn(ai) && ph.getPhase().isAfter(PhaseType.COMBAT_BEGIN)) ||
                 (!ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS))) {
-            untapped.removeAll((List<?>)blockers);
-            //Add threatened creatures
-            if (!ai.getGame().getStack().isEmpty()) {
-                final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(sa.getActivatingPlayer(), null);
+            // Do not convoke potential blockers until after opponent's attack
+            final CardCollectionView blockers = ComputerUtil.protectRecursion(sa, () -> ComputerUtilCard.getLikelyBlockers(ai, null), CardCollection.EMPTY);
+            untapped.removeAll(blockers);
+            // Add threatened creatures
+            if (!ai.getGame().getStack().isEmpty() && !blockers.isEmpty()) {
+                final List<GameObject> objects = ComputerUtil.predictThreatenedObjects(ai, null);
                 for (Card c : blockers) {
-                    if (objects.contains(c) && (!improvise || c.isArtifact())) {
+                    if (objects.contains(c) && (creatures || c.isArtifact())) {
                         untapped.add(c);
+                    }
+                    if (maxReduction != null && untapped.size() >= maxReduction) {
+                        break;
                     }
                 }
             }
         }
-        return ComputerUtilMana.getConvokeOrImproviseFromList(manaCost, untapped, improvise);
+        return ComputerUtilMana.getConvokeOrImproviseFromList(manaCost, untapped, artifacts, creatures);
     }
 
     @Override
@@ -1465,7 +1505,7 @@ public class PlayerControllerAi extends PlayerController {
                 name = ComputerUtilCard.getMostProminentCardName(cards);
             } else if (logic.equals("CursedScroll")) {
                 name = SpecialCardAi.CursedScroll.chooseCard(player, sa);
-            } else if (logic.equals("PithingNeedle")) {
+            } else if (logic.equals("PithingNeedle") || logic.equals("PhyrexianRevoker") || logic.equals("SorcerousSpyglass")) {
                 name = SpecialCardAi.PithingNeedle.chooseCard(player, sa);
             }
 
@@ -1487,7 +1527,7 @@ public class PlayerControllerAi extends PlayerController {
             List<ZoneType> origin, SpellAbility sa, CardCollection fetchList, DelayedReveal delayedReveal,
             String selectPrompt, boolean isOptional, Player decider) {
         if (delayedReveal != null) {
-            reveal(delayedReveal.getCards(), delayedReveal.getZone(), delayedReveal.getOwner(), delayedReveal.getMessagePrefix());
+            reveal(delayedReveal);
         }
         return brains.chooseCardToHiddenOriginChangeZone(destination, origin, sa, fetchList, player, decider);
     }
@@ -1536,30 +1576,6 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public Card chooseDungeon(Player ai, List<PaperCard> dungeonCards, String message) {
-        // TODO: improve the conditions that define which dungeon is a viable option to choose
-        List<String> dungeonNames = Lists.newArrayList();
-        for (PaperCard pc : dungeonCards) {
-            dungeonNames.add(pc.getName());
-        }
-
-        // Don't choose Tomb of Annihilation when life in danger unless we can win right away or can't lose for 0 life
-        int lifeInDanger = AiProfileUtil.getIntProperty(player, AiProps.AI_IN_DANGER_THRESHOLD);
-        if ((ai.getLife() <= lifeInDanger && !ai.cantLoseForZeroOrLessLife())
-                && !(ai.getLife() > 1 && ai.getWeakestOpponent().getLife() == 1)) {
-            dungeonNames.remove("Tomb of Annihilation");
-        }
-
-        try {
-            // if this fail somehow add fallback to get any from dungeonCards
-            int i = MyRandom.getRandom().nextInt(dungeonNames.size());
-            return Card.fromPaperCard(dungeonCards.get(i), ai);
-        } catch (Exception e) {
-            return Card.fromPaperCard(Aggregates.random(dungeonCards), ai);
-        }
-    }
-
-    @Override
     public List<Card> chooseCardsForSplice(SpellAbility sa, List<Card> cards) {
         // sort from best to worst
         CardLists.sortByCmcDesc(cards);
@@ -1582,13 +1598,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public List<OptionalCostValue> chooseOptionalCosts(SpellAbility chosen, List<OptionalCostValue> optionalCostValues) {
-        return SpellApiToAi.Converter.get(chosen).chooseOptionalCosts(chosen, player, optionalCostValues);
-    }
-
-    @Override
-    public boolean confirmMulliganScry(Player p) {
-        // Always true?
-        return true;
+        return SpellApiToAi.Converter.get(chosen).chooseOptionalCosts(player, chosen, optionalCostValues);
     }
 
     @Override

@@ -3,10 +3,13 @@ package forge.util;
 import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.CardDb;
+import forge.card.CardEdition;
 import forge.card.CardRules;
 import forge.card.CardSplitType;
+import forge.card.MagicColor;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
+import java.util.regex.Pattern;
 import forge.item.PaperToken;
 import forge.token.TokenDb;
 import org.apache.commons.lang3.StringUtils;
@@ -95,7 +98,7 @@ public class ImageUtil {
         return key;
     }
 
-    public static String getImageRelativePath(PaperCard cp, String face, boolean includeSet, boolean isDownloadUrl) {
+    public static String getImageRelativePath(IPaperCard cp, String face, boolean includeSet, boolean isDownloadUrl) {
         final String nameToUse = cp == null ? null : getNameToUse(cp, face);
         if (nameToUse == null) {
             return null;
@@ -103,7 +106,9 @@ public class ImageUtil {
         StringBuilder s = new StringBuilder();
 
         CardRules card = cp.getRules();
-        String edition = cp.getEdition();
+        String edition = cp.getEdition().equals(CardEdition.UNKNOWN_CODE)
+                ? CardEdition.UNKNOWN_SET_NAME
+                : cp.getEdition();
         s.append(toMWSFilename(nameToUse));
 
         final int cntPictures;
@@ -149,7 +154,7 @@ public class ImageUtil {
         }
     }
 
-    public static String getNameToUse(PaperCard cp, String face) {
+    public static String getNameToUse(IPaperCard cp, String face) {
         final CardRules card = cp.getRules();
         if (face.equals("back")) {
             if (cp.hasBackFace())
@@ -157,7 +162,7 @@ public class ImageUtil {
                     return card.getOtherPart().getName();
                 } else if (!card.getMeldWith().isEmpty()) {
                     final CardDb db = StaticData.instance().getCommonCards();
-                    return db.getRules(card.getMeldWith()).getOtherPart().getName();
+                    return db.getRulesOrElseUnsupported(card.getMeldWith()).getOtherPart().getName();
                 } else {
                     return null;
                 }
@@ -193,7 +198,7 @@ public class ImageUtil {
         return cp.getName();
     }
 
-    public static String getImageKey(PaperCard cp, String face, boolean includeSet) {
+    public static String getImageKey(IPaperCard cp, String face, boolean includeSet) {
         return getImageRelativePath(cp, face, includeSet, false);
     }
 
@@ -201,8 +206,8 @@ public class ImageUtil {
         return getImageRelativePath(cp, face, true, true);
     }
 
-
     public static String getScryfallDownloadUrl(PaperCard cp, String face, String setCode, String langCode, boolean useArtCrop){
+        final Pattern funnyCardCollectorNumberPattern = Pattern.compile("^F\\d+");
         String editionCode;
         if (setCode != null && !setCode.isEmpty())
             editionCode = setCode;
@@ -220,29 +225,17 @@ public class ImageUtil {
             editionCode = "opc2";
             cardCollectorNumber = cardCollectorNumber.substring("OPC2".length());
         }
+        
+        if (funnyCardCollectorNumberPattern.matcher(cardCollectorNumber).matches()) {
+            cardCollectorNumber = cardCollectorNumber.substring(1);
+        }
+
         String versionParam = useArtCrop ? "art_crop" : "normal";
         String faceParam = "";
 
         if (cp.getRules().getSplitType() == CardSplitType.Meld) {
             if (face.equals("back")) {
-                PaperCard meldBasePc = cp.getMeldBaseCard();
-                cardCollectorNumber = meldBasePc.getCollectorNumber();
-                String collectorNumberSuffix = "";
-
-                if (cardCollectorNumber.endsWith("a")) {
-                    cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 1);
-                } else if (cardCollectorNumber.endsWith("as")) {
-                    cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 2);
-                    collectorNumberSuffix = "s";
-                } else if (cardCollectorNumber.endsWith("ap")) {
-                    cardCollectorNumber = cardCollectorNumber.substring(0, cardCollectorNumber.length() - 2);
-                    collectorNumberSuffix = "p";
-                } else if (cp.getCollectorNumber().endsWith("a")) {
-                    // SIR
-                    cardCollectorNumber = cp.getCollectorNumber().substring(0, cp.getCollectorNumber().length() - 1);
-                }
-
-                cardCollectorNumber += "b" + collectorNumberSuffix;
+                cardCollectorNumber = cp.getMeldBaseCard().getCollectorNumber().replaceAll("(\\d+)([sp]?)", "$1b$2");
             }
 
             faceParam = "&face=front";
@@ -250,6 +243,13 @@ public class ImageUtil {
             faceParam = (face.equals("back") && cp.getRules().getSplitType() != CardSplitType.Flip
                     ? "&face=back"
                     : "&face=front");
+        } else if (cp.getRules().getSplitType() == CardSplitType.Specialize) {
+            // Specialize faces have their own Scryfall entries with collector
+            // number = base number + color letter (e.g. "2w", "2u", "2b", "2r", "2g")
+            String colorSuffix = specFaceToCollectorSuffix(face);
+            if (colorSuffix != null) {
+                cardCollectorNumber += colorSuffix;
+            }
         }
 
         if (cardCollectorNumber.endsWith("☇")) {
@@ -272,6 +272,12 @@ public class ImageUtil {
         }
         return String.format("%s/%s/%s?format=image&version=%s%s", setCode, encodeUtf8(collectorNumber),
                 langCode, versionParam, faceParam);
+    }
+
+    private static String specFaceToCollectorSuffix(String face) {
+        MagicColor.Color color = MagicColor.Color.fromName(face);
+        if (color == null) return null;
+        return color.getShortName().toLowerCase();
     }
 
     private static String encodeUtf8(String s) {

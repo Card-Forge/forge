@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Walle
+Title=Walle
+Icon=Walle.jpg
+Difficulty=Medium
+Description=Battle_for_Zendikar/Standard_Champs_#8986318/JXClaytor_-_Green_Ramp_(Standard,_#336965).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Dragonlord Atarka
+2 Hangarback Walker
+4 Rattleclaw Mystic
+4 Ulamog, the Ceaseless Hunger
+1 Void Winnower
+4 Explosive Vegetation
+3 Map the Wastes
+3 Nissa's Pilgrimage
+2 Nissa's Renewal
+4 Sylvan Scrying
+2 From Beyond
+4 Ugin, the Spirit Dragon
+1 Blighted Woodland
+14 Forest
+1 Haven of the Spirit Dragon
+1 Mountain
+4 Sanctum of Ugin
+4 Shrine of the Forsaken Gods
+[Sideboard]
+3 Bane of Bala Ged
+1 Conduit of Ruin
+4 Jaddi Offshoot
+1 Ruin Processor
+2 Seismic Rupture
+3 Winds of Qal Sisma

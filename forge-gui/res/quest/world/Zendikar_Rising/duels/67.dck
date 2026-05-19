@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Mines of Kazum Durl
+Title=Mines of Kazum Durl
+Icon=Mines of Kazum Durl.jpg
+Difficulty=Very Hard
+Description=./Modern/Zendikar_Rising/Capriccioso_-_4_Color_Control_(Modern,_#1065791).dck
+Deck Type=constructed
+
+[Main]
+3 Uro, Titan of Nature's Wrath
+4 Omnath, Locus of Creation
+1 Lightning Bolt
+2 Cryptic Command
+3 Mana Leak
+4 Growth Spiral
+4 Path to Exile
+3 Time Warp
+1 Jace, the Mind Sculptor
+1 Teferi, Hero of Dominaria
+2 Teferi, Time Raveler
+4 Wrenn and Six
+1 Snow-Covered Plains
+1 Snow-Covered Mountain
+1 Snow-Covered Island
+1 Hallowed Fountain
+1 Island
+1 Ketria Triome
+1 Lonely Sandbar
+1 Snow-Covered Forest
+1 Steam Vents
+1 Temple Garden
+1 Raugrin Triome
+2 Breeding Pool
+3 Mystic Sanctuary
+4 Flooded Strand
+4 Scalding Tarn
+4 Misty Rainforest
+[Sideboard]
+1 Supreme Verdict
+1 Firespout
+2 Celestial Purge
+2 Ashiok, Dream Render
+2 Soul-Guide Lantern
+2 Aether Gust
+2 Veil of Summer
+3 Mystical Dispute

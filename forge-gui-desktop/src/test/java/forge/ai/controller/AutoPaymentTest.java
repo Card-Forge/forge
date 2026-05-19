@@ -1,11 +1,14 @@
 package forge.ai.controller;
 
 import forge.ai.simulation.GameSimulator;
+import forge.ai.simulation.Plan;
 import forge.ai.simulation.SimulationTest;
+import forge.ai.simulation.SpellAbilityPicker;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
@@ -81,5 +84,63 @@ public class AutoPaymentTest extends SimulationTest {
 
         Card treasureCopy = findCardWithName(simGame, "Treasure Token");
         AssertJUnit.assertNull(treasureCopy);
+    }
+
+    @Test
+    public void payWithCreaturesOverSacrificeLands() {
+        // Do not sacrifice debris. It can be tapped for Blue or Plains tapped for white. Tap elf instead.
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        Card elf = addCard("Llanowar Elves",  p);
+        addCard("Seafloor Debris", p);
+        addCard("Plains", p);
+        addCard("Fervor", p);
+
+        String griz = "Grizzly Bears";
+        Card bears = addCardToZone(griz, p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        GameSimulator sim = createSimulator(game, p);
+        int score = sim.simulateSpellAbility(bears.getFirstSpellAbility()).value;
+
+        AssertJUnit.assertTrue(score > 0);
+        Game simGame = sim.getSimulatedGameState();
+
+        // Grizzly cast, Seafloor not sacrificed, Elf tapped
+        Card grizBF = findCardWithName(simGame, griz);
+        AssertJUnit.assertNotNull(grizBF);
+        AssertJUnit.assertEquals(ZoneType.Battlefield, grizBF.getZone().getZoneType());
+
+        Card debrisCopy = findCardWithName(simGame, "Seafloor Debris");
+        AssertJUnit.assertNotNull(debrisCopy);
+
+        Card elfCopy = findCardWithName(simGame, "Llanowar Elves");
+        AssertJUnit.assertNotNull(elfCopy);
+        AssertJUnit.assertTrue(elfCopy.isTapped());
+    }
+
+    @Test
+    public void testKeepColorsOpen() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCards("Forest", 2, p);
+        addCards("Swamp", 2, p);
+        addCardToZone("Bear Cub", p, ZoneType.Hand);
+        addCardToZone("Bear Cub", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        AssertJUnit.assertTrue(sa.getHostCard().isCreature());
+
+        // AI able to cast both creatures
+        Plan plan = picker.getPlan();
+        AssertJUnit.assertEquals(2, plan.getDecisions().size());
     }
 }

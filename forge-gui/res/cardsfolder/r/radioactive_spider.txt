@@ -1,4 +1,5 @@
 Name:Radioactive Spider
+Variant:UniversesWithin:FlavorName:Fateweaver
 ManaCost:G
 Types:Creature Spider
 PT:1/1

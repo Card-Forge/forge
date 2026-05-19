@@ -1,7 +1,5 @@
 package forge.adventure.stage;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
@@ -36,6 +34,8 @@ import forge.adventure.util.pathfinding.NavigationVertex;
 import forge.adventure.util.pathfinding.ProgressableGraphPath;
 import forge.adventure.world.WorldSave;
 import forge.gui.FThreads;
+import forge.haptic.HapticEngine;
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.screens.TransitionScreen;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
@@ -63,7 +63,7 @@ public class MapStage extends GameStage {
     private boolean isLoadingMatch = false;
     private boolean isPlayerLeavingDungeon = false;
     //private HashMap<String, Byte> mapFlags = new HashMap<>(); //Stores local map flags. These aren't available outside this map.
-
+    private boolean mustClearOnExit = false;
 
     //Map properties.
     //These maps are defined as embedded properties within the Tiled maps.
@@ -81,8 +81,6 @@ public class MapStage extends GameStage {
     float collisionWidthMod = 0.4f;
     float defaultSpriteSize = 16f;
     float navMapSize =  defaultSpriteSize * collisionWidthMod;
-
-
 
     public boolean canEscape() {
         return !preventEscape;
@@ -359,10 +357,11 @@ public class MapStage extends GameStage {
         boolean spawnEasy = prop.get("spawn.Easy", Boolean.class);
         boolean spawnNorm = prop.get("spawn.Normal", Boolean.class);
         boolean spawnHard = prop.get("spawn.Hard", Boolean.class);
+        boolean spawnInsane = prop.get("spawn.Insane", Boolean.class);
+        if (difficultyData.spawnRank == 3 && !spawnInsane) return false;
         if (difficultyData.spawnRank == 2 && !spawnHard) return false;
         if (difficultyData.spawnRank == 1 && !spawnNorm) return false;
         if (difficultyData.spawnRank == 0 && !spawnEasy) return false;
-
         if (prop.containsKey("spawnCondition") && !prop.get("spawnCondition").toString().isEmpty()){
 
         }
@@ -761,6 +760,11 @@ public class MapStage extends GameStage {
     }
 
     public boolean exitDungeon(boolean defeated, boolean defeatedByBoss) {
+        if (mustClearOnExit) {
+            mustClearOnExit = false;
+            changes.clearDeletedObjects();
+        }
+
         AdventureQuestController.instance().updateQuestsLeave();
         clearIsInMap();
         AdventureQuestController.instance().showQuestDialogs(this);
@@ -912,6 +916,16 @@ public class MapStage extends GameStage {
         return null;
     }
 
+    public int getRemainingEnemyCount() {
+        int count = 0;
+        for (EnemySprite enemy : enemies) {
+            if (enemy.getStage() != null && enemy.defeatDialog == null) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     public Actor getByID(int id) { //Search actor by ID.
         for (MapActor A : new Array.ArrayIterator<>(actors)) {
             if (A.getId() == id)
@@ -1042,9 +1056,7 @@ public class MapStage extends GameStage {
                     break;
                 } else if (actor instanceof RewardSprite) {
                     freezeAllEnemyBehaviors = true;
-                    Gdx.input.vibrate(50);
-                    if (Controllers.getCurrent() != null && Controllers.getCurrent().canVibrate())
-                        Controllers.getCurrent().startVibration(100, 1);
+                    HapticEngine.vibrate(FPref.UI_VIBRATE_ON_ADVENTURE_REWARD, 100);
                     RewardSprite RS = (RewardSprite) actor;
                     Array<Reward> rewards = RS.getRewards();
 
@@ -1082,6 +1094,7 @@ public class MapStage extends GameStage {
     }
 
     boolean started = false;
+    
     public void beginDuel(EnemySprite mob) {
         if (mob == null) return;
         mob.clearCollisionHeight();
@@ -1090,10 +1103,7 @@ public class MapStage extends GameStage {
         player.playEffect(Paths.EFFECT_SPARKS, 0.5f);
         mob.setAnimation(CharacterSprite.AnimationTypes.Attack);
         SoundSystem.instance.play(SoundEffectType.Block, false);
-        Gdx.input.vibrate(50);
-        int duration = mob.getData().boss ? 400 : 200;
-        if (Controllers.getCurrent() != null && Controllers.getCurrent().canVibrate())
-            Controllers.getCurrent().startVibration(duration, 1);
+        HapticEngine.vibrate(FPref.UI_VIBRATE_ON_ENEMY_ENCOUNTER, mob.getData().boss ? 400 : 200);
         Forge.advFreezePlayerControls = true;
         player.clearCollisionHeight();
         startPause(0.8f, () -> {
@@ -1167,12 +1177,7 @@ public class MapStage extends GameStage {
     }
 
     public void advanceQuestFlag(String key) {
-        Map<String, Byte> C = changes.getMapFlags();
-        if (C.get(key) != null) {
-            C.put(key, (byte) (C.get(key) + 1));
-        } else {
-            C.put(key, (byte) 1);
-        }
+        changes.getMapFlags().merge(key, (byte)1, (a, b) -> (byte)(a + b));
 
         AdventureQuestController.instance().updateQuestsMapFlag(key,changes.getMapFlags().get(key));
         AdventureQuestController.instance().showQuestDialogs(this);
@@ -1250,5 +1255,9 @@ public class MapStage extends GameStage {
                 return;
             }
         }
+    }
+
+    public void clearOnExit() {
+        mustClearOnExit = true;
     }
 }

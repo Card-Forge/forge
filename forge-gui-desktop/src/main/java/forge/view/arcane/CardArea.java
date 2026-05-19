@@ -57,6 +57,8 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
 
     private float maxCoverage = 0.5f;
     private int maxRows = 0;
+    private int maxCardsPerRow = 0; // 0 = unlimited
+    private boolean noOverlap = false;
 
     // Computed in layout.
     private float cardSpacingX;
@@ -102,14 +104,25 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
         rect.width -= insets.right;
         rect.height -= insets.bottom;
 
+        // Account for vertical scrollbar width to avoid unnecessary horizontal scrollbar
+        final javax.swing.JScrollBar vsb = this.getScrollPane().getVerticalScrollBar();
+        if (vsb != null && vsb.isVisible()) {
+            rect.width -= vsb.getWidth();
+        }
+
         final int cardAreaWidth = rect.width;
         final int cardAreaHeight = rect.height;
         int cardWidth = this.getCardWidthMax();
         int cardHeight;
         int cardSpacingY;
 
+        int bannerSpace = 0;
+        for (final CardPanel panel : this.getCardPanels()) {
+            if (panel.getZoneBannerText() != null) { bannerSpace = CardPanel.ZONE_BANNER_HEIGHT; break; }
+        }
+
         int maxWidth = 0, maxHeight = 0;
-        if (this.isVertical) {
+        if (this.isVertical && this.maxCardsPerRow <= 0) {
             while (true) {
                 cardHeight = Math.round(cardWidth * CardPanel.ASPECT_RATIO);
                 this.cardSpacingX = Math.round(cardWidth * CardArea.VERT_CARD_SPACING_X);
@@ -119,7 +132,7 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
                 if (this.maxRows > 0) {
                     maxRows = Math.min(this.maxRows, maxRows);
                 }
-                final int availableRowHeight = cardAreaHeight - (CardArea.GUTTER_Y * 2);
+                final int availableRowHeight = cardAreaHeight - (CardArea.GUTTER_Y * 2) - bannerSpace;
                 final int availableCardsPerRow = (int) Math.floor((availableRowHeight - (cardHeight - cardSpacingY))
                         / (double) cardSpacingY);
                 this.actualCardsPerRow = Math.max(availableCardsPerRow,
@@ -127,9 +140,11 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
                 int actualRowHeight = (int) Math.floor(((this.actualCardsPerRow - 1) * cardSpacingY) + cardHeight);
                 final float overflow = actualRowHeight - availableRowHeight;
                 if (overflow > 0) {
-                    float offsetY = overflow / (this.actualCardsPerRow - 1);
-                    offsetY = Math.min(offsetY, cardHeight * this.maxCoverage);
-                    cardSpacingY -= offsetY;
+                    if (!this.noOverlap) {
+                        float offsetY = overflow / (this.actualCardsPerRow - 1);
+                        offsetY = Math.min(offsetY, cardHeight * this.maxCoverage);
+                        cardSpacingY -= offsetY;
+                    }
                 }
                 actualRowHeight = (int) Math.floor(((this.actualCardsPerRow - 1) * cardSpacingY) + cardHeight);
                 if ((actualRowHeight >= 0) && (actualRowHeight <= availableRowHeight)) {
@@ -154,7 +169,7 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
                 }
                 y += cardSpacingY;
                 maxWidth = Math.round(x) + cardWidth + CardArea.GUTTER_X;
-                maxHeight = Math.max(maxHeight, (y + (cardHeight - cardSpacingY) + CardArea.GUTTER_Y));
+                maxHeight = Math.max(maxHeight, (y + (cardHeight - cardSpacingY) + CardArea.GUTTER_Y + bannerSpace));
                 this.setComponentZOrder(panel, zOrder);
                 if (zOrder > 0) {
                     zOrder--;
@@ -181,14 +196,20 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
                 final int availableRowWidth = cardAreaWidth - (CardArea.GUTTER_X * 2);
                 final int availableCardsPerRow = (int) Math.floor((availableRowWidth - (cardWidth - this.cardSpacingX))
                         / this.cardSpacingX);
-                this.actualCardsPerRow = Math.max(availableCardsPerRow,
-                        (int) Math.ceil(this.getCardPanels().size() / (float) maxRows));
+                if (this.maxCardsPerRow > 0) {
+                    this.actualCardsPerRow = Math.min(this.maxCardsPerRow, this.getCardPanels().size());
+                } else {
+                    this.actualCardsPerRow = Math.max(availableCardsPerRow,
+                            (int) Math.ceil(this.getCardPanels().size() / (float) maxRows));
+                }
                 int actualRowWidth = (int) Math.floor(((this.actualCardsPerRow - 1) * this.cardSpacingX) + cardWidth);
                 final float overflow = actualRowWidth - availableRowWidth;
                 if (overflow > 0) {
-                    float offsetX = overflow / (this.actualCardsPerRow - 1);
-                    offsetX = Math.min(offsetX, cardWidth * this.maxCoverage);
-                    this.cardSpacingX -= offsetX;
+                    if (this.maxCardsPerRow <= 0) {
+                        float offsetX = overflow / (this.actualCardsPerRow - 1);
+                        offsetX = Math.min(offsetX, cardWidth * this.maxCoverage);
+                        this.cardSpacingX -= offsetX;
+                    }
                 }
                 actualRowWidth = (int) Math.floor(((this.actualCardsPerRow - 1) * this.cardSpacingX) + cardWidth);
                 if (actualRowWidth <= availableRowWidth) {
@@ -209,7 +230,7 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
                 }
                 x += this.cardSpacingX;
                 maxWidth = Math.max(maxWidth, Math.round(x + (cardWidth - this.cardSpacingX) + CardArea.GUTTER_X) - 1);
-                maxHeight = Math.max(maxHeight, y + (cardHeight - cardSpacingY) + CardArea.GUTTER_Y);
+                maxHeight = Math.max(maxHeight, y + (cardHeight - cardSpacingY) + CardArea.GUTTER_Y + bannerSpace);
                 this.setComponentZOrder(panel, zOrder);
                 zOrder++;
                 rowCount++;
@@ -313,6 +334,13 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
         this.maxCoverage = maxCoverage;
     }
 
+    public final int getMaxCardsPerRow() {
+        return this.maxCardsPerRow;
+    }
+    public final void setMaxCardsPerRow(final int maxCardsPerRow) {
+        this.maxCardsPerRow = maxCardsPerRow;
+    }
+
     public final int getMaxRows() {
         return this.maxRows;
     }
@@ -325,5 +353,12 @@ public class CardArea extends CardPanelContainer implements CardPanelMouseListen
     }
     public final void setVertical(final boolean isVertical) {
         this.isVertical = isVertical;
+    }
+
+    public final boolean isNoOverlap() {
+        return this.noOverlap;
+    }
+    public final void setNoOverlap(final boolean noOverlap) {
+        this.noOverlap = noOverlap;
     }
 }

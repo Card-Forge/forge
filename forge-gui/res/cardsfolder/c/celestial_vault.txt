@@ -1,7 +1,8 @@
 Name:Celestial Vault
 ManaCost:1 W
 Types:Artifact
-A:AB$ Draft | Cost$ W T | Spellbook$ Angel of Destiny,Resplendent Angel,Angel of Vitality,Righteous Valkyrie,Angel of Invention,Angel of Sanctions,Valkyrie Harbinger,Emancipation Angel,Youthful Valkyrie,Resplendent Marshal,Enduring Angel,Sigardian Savior,Serra Angel,Stalwart Valkyrie,Segovian Angel | Zone$ Exile | ExileFaceDown$ True | RememberDrafted$ True | SpellDescription$ Draft a card from CARDNAME's spellbook and exile it face down.
+A:AB$ Draft | Cost$ W T | Spellbook$ Angel of Destiny,Resplendent Angel,Angel of Vitality,Righteous Valkyrie,Angel of Invention,Angel of Sanctions,Valkyrie Harbinger,Emancipation Angel,Youthful Valkyrie,Resplendent Marshal,Enduring Angel,Sigardian Savior,Serra Angel,Stalwart Valkyrie,Segovian Angel | RememberDrafted$ True | SubAbility$ DBExile | StackDescription$ REP Draft_{p:You} drafts & exile_they exile | SpellDescription$ Draft a card from CARDNAME's spellbook and exile it face down.
+SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ExileFaceDown$ True | Defined$ Remembered | StackDescription$ None
 A:AB$ ChangeZoneAll | Cost$ 1 Sac<1/CARDNAME> | Origin$ Exile | Destination$ Hand | ChangeType$ Card.IsRemembered+ExiledWithSource | SpellDescription$ Put each card exiled with CARDNAME into your hand.
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
 SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
