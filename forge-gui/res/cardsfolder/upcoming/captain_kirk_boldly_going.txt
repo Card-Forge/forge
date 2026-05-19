@@ -1,0 +1,13 @@
+Name:Captain Kirk, Boldly Going
+ManaCost:1 G W U
+Types:Legendary Creature Human Officer
+PT:3/4
+K:Vigilance
+S:Mode$ Continuous | Affected$ Creature.Spacecraft+YouCtrl | AddPower$ 3 | AddToughness$ 3 | Description$ Spacecraft creatures you control get +3/+3.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ Whenever NICKNAME enters or attacks, search your library and/or graveyard for a basic land card or a card named Starship Enterprise, reveal it, and put it into your hand. If you search your library this way, shuffle.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever NICKNAME enters or attacks, search your library and/or graveyard for a basic land card or a card named Starship Enterprise, reveal it, and put it into your hand. If you search your library this way, shuffle.
+SVar:TrigChangeZone: ChangeZone | Origin$ Library | OriginAlternative$ Graveyard | Destination$ Hand | ChangeType$ Land.Basic,Card.YouOwn+namedStarship Enterprise | Optional$ True
+DeckHints:Name$Starship Enterprise & Type$Spacecraft
+SVar:HasAttackEffect:TRUE
+SVar:PlayMain1:TRUE
+Oracle:Vigilance\nSpacecraft creatures you control get +3/+3.\nWhenever Captain Kirk enters or attacks, search your library and/or graveyard for a basic land card or a card named Starship Enterprise, reveal it, and put it into your hand. If you search your library this way, shuffle.
