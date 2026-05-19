@@ -98,7 +98,7 @@ class ForgeLogAdapter:
         and yields (request, response) tuples.  Otherwise yields raw requests.
 
         Use as:
-            async for item in adapter.tail("/path/to/log.txt", "http://localhost:8000"):
+            async for item in adapter.tail("/path/to/log.txt", "http://localhost:18970"):
                 if isinstance(item, tuple):
                     req, resp = item
                 else:

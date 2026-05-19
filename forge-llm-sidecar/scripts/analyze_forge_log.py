@@ -12,14 +12,14 @@ Usage:
   python scripts/analyze_forge_log.py game.txt
 
   # Analyze with a running sidecar:
-  python scripts/analyze_forge_log.py game.txt --sidecar http://localhost:8000
+  python scripts/analyze_forge_log.py game.txt --sidecar http://localhost:18970
 
   # Generate training data:
   python scripts/analyze_forge_log.py game.txt \
-      --sidecar http://localhost:8000 --training training.jsonl
+      --sidecar http://localhost:18970 --training training.jsonl
 
   # Tail a live log file:
-  python scripts/analyze_forge_log.py game.txt --tail --sidecar http://localhost:8000
+  python scripts/analyze_forge_log.py game.txt --tail --sidecar http://localhost:18970
 
   # Specify opponent/AI player names explicitly:
   python scripts/analyze_forge_log.py game.txt --opponent Atlin --ai-player Rogist
@@ -225,7 +225,7 @@ def main():
     )
     parser.add_argument("log", help="Path to the Forge game log file")
     parser.add_argument(
-        "--sidecar", help="Sidecar URL for analysis mode (e.g. http://localhost:8000)"
+        "--sidecar", help="Sidecar URL for analysis mode (e.g. http://localhost:18970)"
     )
     parser.add_argument("--game-id", default="log-session", help="Game ID for the session")
     parser.add_argument("--format", default="Constructed", help="Game format")
