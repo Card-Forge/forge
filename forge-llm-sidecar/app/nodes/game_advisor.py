@@ -29,8 +29,9 @@ _resolved_format: dict[str, str] = {}
 _own_archetype: dict[str, tuple[str | None, StrategyType]] = {}
 
 _SYSTEM_PROMPT = (
-    "You are an expert Magic: The Gathering analyst and coach. You identify the "
-    "opponent's deck archetype and advise the AI on how to pilot its own deck. "
+    "You are an expert Magic: The Gathering analyst and AI piloting coach. "
+    "For opponent deck recognition, analyze only the observed human player plays. "
+    "Use the AI deck guidance only to choose the AI's own plays. "
     "Always answer with a single JSON object and nothing else."
 )
 
@@ -143,7 +144,9 @@ def _build_prompt(state: GraphState) -> str:
         f"{_format_zone('Opponent graveyard', state.get('opponent_graveyard', []))}\n"
         f"Life totals: {state.get('life_totals', {}) or '(unknown)'}\n\n"
         "Do two things and respond with a single JSON object with exactly these keys:\n"
-        "1. Identify the opponent's most likely archetype:\n"
+        "1. Identify the human opponent's most likely archetype. Use only the "
+        "Opponent's observed plays section as evidence for this recognition; "
+        "do not classify the AI's deck, guidance, hand, battlefield, or graveyard:\n"
         '  "archetype": string (the deck name),\n'
         '  "confidence": number between 0 and 1,\n'
         '  "reasoning": string (one or two sentences),\n'
@@ -151,8 +154,9 @@ def _build_prompt(state: GraphState) -> str:
         "2. Advise the AI on piloting its own deck:\n"
         f"{play_block}"
         "Prefer an opponent archetype name from the list above; only invent a name "
-        "if none fit, and lower confidence if you do. Base the piloting advice on "
-        "the AI's own deck guidance and the current board state.\n"
+        "if none fit, and lower confidence if you do. Keep opponent recognition "
+        "separate from AI piloting. Base the piloting advice on the AI's own deck "
+        "guidance and the current board state.\n"
         f"Valid opponent archetype names: {json.dumps(names)}"
     )
 

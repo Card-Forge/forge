@@ -58,7 +58,7 @@ class GameSessionState:
     phase: str = ""
     active_player: str = ""
     players: dict[str, PlayerState] = field(default_factory=dict)
-    opponent_name: str = ""  # set when known
+    opponent_name: str = ""  # human player to analyze; set explicitly or inferred
     ai_name: str = ""
     finished: bool = False
 
@@ -114,8 +114,9 @@ class GameSessionState:
         self.active_player = event.player
         self._ensure_player(event.player)
 
-        # Identify opponent vs AI on first turn
-        if not self.opponent_name:
+        # If the AI player is known, infer the analyzed human player from the
+        # first non-AI turn instead of blindly taking whoever started the game.
+        if not self.opponent_name and event.player != self.ai_name:
             self.opponent_name = event.player
 
         # Turn boundary is a checkpoint
@@ -129,6 +130,9 @@ class GameSessionState:
     def _on_spell(self, event: SpellCast) -> list[RecognitionRequest]:
         ps = self._ensure_player(event.player)
         ps.played_cards.append(event.card)
+
+        if not self.opponent_name and event.player != self.ai_name:
+            self.opponent_name = event.player
 
         # If this is the opponent, record as observation
         if event.player == self.opponent_name:
@@ -149,6 +153,9 @@ class GameSessionState:
         ps = self._ensure_player(event.player)
         ps.played_cards.append(event.card)
         ps.board.append(event.card)
+
+        if not self.opponent_name and event.player != self.ai_name:
+            self.opponent_name = event.player
 
         if event.player == self.opponent_name:
             ps.observations.append(

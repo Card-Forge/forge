@@ -123,6 +123,8 @@ class ForgeLogAdapter:
                     self._state = GameSessionState(
                         game_id=self.game_id,
                         format=self.format,
+                        opponent_name=self._state.opponent_name,
+                        ai_name=self._state.ai_name,
                     )
 
                 if current_size > pos:

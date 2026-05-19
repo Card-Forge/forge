@@ -139,6 +139,23 @@ async def test_metagame_reaches_the_prompt(monkeypatch, sample_state):
     assert "deck guidance" in captured["prompt"].lower()
 
 
+@pytest.mark.asyncio
+async def test_prompt_keeps_recognition_and_piloting_separate(monkeypatch, sample_state):
+    captured = {}
+
+    async def fake_generate_json(prompt, system=None):
+        captured["prompt"] = prompt
+        captured["system"] = system
+        return {"archetype": "Boros Energy", "confidence": 0.7, "reasoning": "", "alternatives": []}
+
+    monkeypatch.setattr(game_advisor, "generate_json", fake_generate_json)
+    await get_graph().ainvoke(sample_state)
+
+    assert "analyze only the observed human player plays" in captured["system"].lower()
+    assert "use only the opponent's observed plays section" in captured["prompt"].lower()
+    assert "do not classify the AI's deck" in captured["prompt"]
+
+
 def test_metagame_data_files_load():
     for slug in ("modern", "standard", "legacy", "commander"):
         archetypes = metagame.get_metagame(slug)

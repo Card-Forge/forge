@@ -246,6 +246,36 @@ class TestStateTracker:
         cps = state.process(events[0])
         assert len(cps) == 0
 
+    def test_ai_first_turn_does_not_become_opponent(self):
+        state = GameSessionState(game_id="test", ai_name="Rogist")
+        events = parse_lines([
+            "Turn: Turn 1 (Rogist)",
+            "Land: Rogist played Island (110)",
+            "Turn: Turn 2 (Atlin)",
+            "Land: Atlin played Mountain (54)",
+        ])
+        cps = []
+        for event in events:
+            cps.extend(state.process(event))
+
+        assert state.opponent_name == "Atlin"
+        assert all(o.card != "Island" for cp in cps for o in cp.observations)
+        assert any(o.card == "Mountain" for cp in cps for o in cp.observations)
+
+    def test_ai_first_spell_does_not_become_opponent(self):
+        state = GameSessionState(game_id="test", ai_name="Rogist", turn=1)
+        events = parse_lines([
+            "Add To Stack: Rogist cast Tormod's Crypt",
+            "Add To Stack: Atlin cast Lightning Bolt",
+        ])
+        cps = []
+        for event in events:
+            cps.extend(state.process(event))
+
+        assert state.opponent_name == "Atlin"
+        assert len(cps) == 1
+        assert cps[0].observations[0].card == "Lightning Bolt"
+
     def test_life_change_updates(self):
         state = GameSessionState(
             game_id="test",
