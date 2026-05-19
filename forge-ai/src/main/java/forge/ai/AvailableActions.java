@@ -12,7 +12,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.function.BiPredicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -22,14 +21,14 @@ public final class AvailableActions {
 
     private AvailableActions() {}
 
-    /** Hand spells and lands; activated abilities on the battlefield; flashback spells. */
-    private record ZoneScan(ZoneType zone, boolean sortByCmc, BiPredicate<Card, Player> hasActionable) {}
+    /** sortByCmc: cheap-cost-first so early-exit hits faster.
+     *  Battlefield isn't sorted: activation costs are per-ability, not the permanent's CMC. */
+    private record ZoneScan(ZoneType zone, boolean sortByCmc) {}
 
     private static final List<ZoneScan> SCANS = List.of(
-            new ZoneScan(ZoneType.Hand,        true,  AvailableActions::cardHasActionableSpell),
-            // Battlefield isn't sorted: activation costs are per-ability, not the permanent's CMC.
-            new ZoneScan(ZoneType.Battlefield, false, AvailableActions::cardHasActionableActivated),
-            new ZoneScan(ZoneType.Flashback,   true,  AvailableActions::cardHasActionableActivated));
+            new ZoneScan(ZoneType.Hand,        true),
+            new ZoneScan(ZoneType.Battlefield, false),
+            new ZoneScan(ZoneType.Flashback,   true));
 
     /** Boolean form: early-exits on the first actionable card. */
     public static boolean compute(Player player, long timeoutMs) {
@@ -67,7 +66,7 @@ public final class AvailableActions {
                 }
                 CardView cv = card.getView();
                 visited.add(cv);
-                if (scan.hasActionable().test(card, player)) {
+                if (cardHasActionable(card, player)) {
                     actionable.add(cv);
                     if (earlyExit) return actionable;
                 }
@@ -76,20 +75,9 @@ public final class AvailableActions {
         return actionable;
     }
 
-    private static boolean cardHasActionableSpell(Card card, Player player) {
-        for (SpellAbility sa : card.getAllPossibleAbilities(player, true)) {
-            if (sa.isSpell()) {
-                if (canAfford(sa, player) && ComputerUtilAbility.isFullyTargetable(sa)) {
-                    return true;
-                }
-            } else if (sa.isLandAbility()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static boolean cardHasActionableActivated(Card card, Player player) {
+    // Land plays come through with no cost, no targets; spells and activated abilities (incl.
+    // hand-activations like Channel) all hit the same shape: not a mana ability, affordable, targetable.
+    private static boolean cardHasActionable(Card card, Player player) {
         for (SpellAbility sa : card.getAllPossibleAbilities(player, true)) {
             if (!sa.isManaAbility() && canAfford(sa, player)
                     && ComputerUtilAbility.isFullyTargetable(sa)) {

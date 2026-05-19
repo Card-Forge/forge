@@ -386,17 +386,14 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
         }
     }
 
-    private static final Color DEFAULT_ACTIONABLE_HIGHLIGHT_COLOR = new Color(0x66, 0xCC, 0xFF);
-
-    /** Pref is normalized to 6 hex chars on the write side; this just parses. */
+    /** Pref is normalized to 6 hex chars on the write side; this just parses,
+     *  falling back to the FPref default if the stored value is malformed. */
     private static Color parseActionableHighlightColor() {
         String s = forge.model.FModel.getPreferences().getPref(FPref.UI_ACTIONABLE_HIGHLIGHT_COLOR);
-        if (s == null || s.length() != 6) return DEFAULT_ACTIONABLE_HIGHLIGHT_COLOR;
         try {
-            return new Color(Integer.parseInt(s, 16));
-        } catch (NumberFormatException e) {
-            return DEFAULT_ACTIONABLE_HIGHLIGHT_COLOR;
-        }
+            if (s != null && s.length() == 6) return new Color(Integer.parseInt(s, 16));
+        } catch (NumberFormatException ignored) {}
+        return new Color(Integer.parseInt(FPref.UI_ACTIONABLE_HIGHLIGHT_COLOR.getDefault(), 16));
     }
 
     private void drawManaCost(final Graphics g, final ManaCost cost, final int deltaY) {

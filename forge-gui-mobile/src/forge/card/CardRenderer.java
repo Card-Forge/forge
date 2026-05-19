@@ -68,20 +68,21 @@ public class CardRenderer {
         BehindVert
     }
 
-    private static final Color DEFAULT_ACTIONABLE_HIGHLIGHT_COLOR = FSkinColor.fromRGB(0x66, 0xCC, 0xFF);
-
-    /** Pref is normalized to 6 hex chars on the write side; this just parses. */
+    /** Pref is normalized to 6 hex chars on the write side; this just parses,
+     *  falling back to the FPref default if the stored value is malformed. */
     private static Color parseActionableHighlightColor() {
         String s = FModel.getPreferences().getPref(FPref.UI_ACTIONABLE_HIGHLIGHT_COLOR);
-        if (s == null || s.length() != 6) return DEFAULT_ACTIONABLE_HIGHLIGHT_COLOR;
         try {
-            int r = Integer.parseInt(s.substring(0, 2), 16);
-            int gr = Integer.parseInt(s.substring(2, 4), 16);
-            int b = Integer.parseInt(s.substring(4, 6), 16);
-            return FSkinColor.fromRGB(r, gr, b);
-        } catch (NumberFormatException e) {
-            return DEFAULT_ACTIONABLE_HIGHLIGHT_COLOR;
-        }
+            if (s != null && s.length() == 6) return rgbFromHex(s);
+        } catch (NumberFormatException ignored) {}
+        return rgbFromHex(FPref.UI_ACTIONABLE_HIGHLIGHT_COLOR.getDefault());
+    }
+
+    private static Color rgbFromHex(String s) {
+        int r = Integer.parseInt(s.substring(0, 2), 16);
+        int g = Integer.parseInt(s.substring(2, 4), 16);
+        int b = Integer.parseInt(s.substring(4, 6), 16);
+        return FSkinColor.fromRGB(r, g, b);
     }
 
     // class that simplifies the callback logic of CachedCardImage
