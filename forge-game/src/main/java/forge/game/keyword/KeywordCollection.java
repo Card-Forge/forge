@@ -29,9 +29,10 @@ public class KeywordCollection implements ICardTraitChanges, Iterable<KeywordInt
     // the flag is NOT invalidated — rebuild the collection via Card.updateKeywordsCache
     // in that case.
     private transient boolean traitFlagsDirty = true;
-    private transient boolean hasReplacementKw;
-    private transient boolean hasTriggerKw;
-    private transient boolean hasStaticKw;
+    private transient List<SpellAbility> cachedSpellAbilities;
+    private transient List<Trigger> cachedTriggers;
+    private transient List<ReplacementEffect> cachedReplacements;
+    private transient List<StaticAbility> cachedStaticAbilities;
 
     public KeywordCollection() {
         super();
@@ -41,32 +42,36 @@ public class KeywordCollection implements ICardTraitChanges, Iterable<KeywordInt
 
     private void computeTraitFlagsIfDirty() {
         if (!traitFlagsDirty) return;
-        boolean hRE = false, hTr = false, hSA = false;
+        List<SpellAbility> sa = Lists.newArrayList();
+        List<Trigger> tr = Lists.newArrayList();
+        List<ReplacementEffect> re = Lists.newArrayList();
+        List<StaticAbility> st = Lists.newArrayList();
         for (KeywordInterface kw : map.values()) {
-            if (!hRE && !kw.getReplacements().isEmpty()) hRE = true;
-            if (!hTr && !kw.getTriggers().isEmpty()) hTr = true;
-            if (!hSA && !kw.getStaticAbilities().isEmpty()) hSA = true;
-            if (hRE && hTr && hSA) break;
+            kw.applySpellAbility(sa);
+            kw.applyTrigger(tr);
+            kw.applyReplacementEffect(re);
+            kw.applyStaticAbility(st);
         }
-        hasReplacementKw = hRE;
-        hasTriggerKw = hTr;
-        hasStaticKw = hSA;
+        cachedSpellAbilities = sa;
+        cachedTriggers = tr;
+        cachedReplacements = re;
+        cachedStaticAbilities = st;
         traitFlagsDirty = false;
     }
 
     public boolean hasReplacementEffectKeyword() {
         computeTraitFlagsIfDirty();
-        return hasReplacementKw;
+        return !cachedReplacements.isEmpty();
     }
 
     public boolean hasTriggerKeyword() {
         computeTraitFlagsIfDirty();
-        return hasTriggerKw;
+        return !cachedTriggers.isEmpty();
     }
 
     public boolean hasStaticAbilityKeyword() {
         computeTraitFlagsIfDirty();
-        return hasStaticKw;
+        return !cachedStaticAbilities.isEmpty();
     }
 
     public boolean contains(Keyword keyword) {
@@ -235,30 +240,26 @@ public class KeywordCollection implements ICardTraitChanges, Iterable<KeywordInt
 
     @Override
     public List<SpellAbility> applySpellAbility(List<SpellAbility> list) {
-        for (KeywordInterface k : getValues()) {
-            k.applySpellAbility(list);
-        }
+        computeTraitFlagsIfDirty();
+        list.addAll(cachedSpellAbilities);
         return list;
     }
     @Override
     public List<Trigger> applyTrigger(List<Trigger> list) {
-        for (KeywordInterface k : getValues()) {
-            k.applyTrigger(list);
-        }
+        computeTraitFlagsIfDirty();
+        list.addAll(cachedTriggers);
         return list;
     }
     @Override
     public List<ReplacementEffect> applyReplacementEffect(List<ReplacementEffect> list) {
-        for (KeywordInterface k : getValues()) {
-            k.applyReplacementEffect(list);
-        }
+        computeTraitFlagsIfDirty();
+        list.addAll(cachedReplacements);
         return list;
     }
     @Override
     public List<StaticAbility> applyStaticAbility(List<StaticAbility> list) {
-        for (KeywordInterface k : getValues()) {
-            k.applyStaticAbility(list);
-        }
+        computeTraitFlagsIfDirty();
+        list.addAll(cachedStaticAbilities);
         return list;
     }
     @Override
