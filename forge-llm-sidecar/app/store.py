@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-import time
 import threading
+import time
 from typing import Any
 
 _MAX_HISTORY = 20
@@ -26,10 +26,12 @@ class RequestStore:
         """Record a recognition request result. Keeps last ``_MAX_HISTORY`` entries."""
         with self._lock:
             self._total_requests += 1
-            self._history.append({
-                "timestamp": time.time(),
-                **entry,
-            })
+            self._history.append(
+                {
+                    "timestamp": time.time(),
+                    **entry,
+                }
+            )
             if len(self._history) > _MAX_HISTORY:
                 self._history.pop(0)
 

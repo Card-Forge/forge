@@ -64,17 +64,19 @@ class TestRequestStore:
         assert store.last_entry["game_id"] == "g2"
 
 
+@pytest.fixture
+def _dashboard_app():
+    from app.main import app
+
+    return app
+
+
 class TestStatsEndpoint:
     """Integration tests for /api/stats via FastAPI test client."""
 
-    @pytest.fixture
-    def app(self):
-        from app.main import app
-        return app
-
     @pytest.mark.asyncio
-    async def test_stats_returns_uptime_and_counts(self, app):
-        transport = ASGITransport(app=app)
+    async def test_stats_returns_uptime_and_counts(self, _dashboard_app):
+        transport = ASGITransport(app=_dashboard_app)
         async with AsyncClient(transport=transport, base_url="http://test") as client:
             resp = await client.get("/api/stats")
             assert resp.status_code == 200
@@ -86,7 +88,7 @@ class TestStatsEndpoint:
             assert data["history"] == []
 
     @pytest.mark.asyncio
-    async def test_stats_counts_increments_after_recognize(self, app, monkeypatch):
+    async def test_stats_counts_increments_after_recognize(self, _dashboard_app, monkeypatch):
         """After a /recognize call, stats should reflect the new request."""
         from app.nodes import game_advisor
 
@@ -106,18 +108,28 @@ class TestStatsEndpoint:
         game_advisor._own_archetype.clear()
         game_advisor._resolved_format["test-game"] = "modern"
 
-        transport = ASGITransport(app=app)
+        transport = ASGITransport(app=_dashboard_app)
         async with AsyncClient(transport=transport, base_url="http://test") as client:
-            await client.post("/recognize", json={
-                "client": "test",
-                "game_id": "test-game",
-                "format": "Constructed",
-                "turn": 3,
-                "observations": [
-                    {"turn": 1, "event": "land", "card": "Mountain", "cmc": 0, "colors": ["R"], "types": ["Land"]}
-                ],
-                "deck_cards": ["Ragavan, Nimble Pilferer", "Lightning Bolt"],
-            })
+            await client.post(
+                "/recognize",
+                json={
+                    "client": "test",
+                    "game_id": "test-game",
+                    "format": "Constructed",
+                    "turn": 3,
+                    "observations": [
+                        {
+                            "turn": 1,
+                            "event": "land",
+                            "card": "Mountain",
+                            "cmc": 0,
+                            "colors": ["R"],
+                            "types": ["Land"],
+                        }
+                    ],
+                    "deck_cards": ["Ragavan, Nimble Pilferer", "Lightning Bolt"],
+                },
+            )
 
             resp = await client.get("/api/stats")
             data = resp.json()
@@ -126,8 +138,8 @@ class TestStatsEndpoint:
             assert data["history"][-1]["archetype"] == "Boros Energy"
 
     @pytest.mark.asyncio
-    async def test_health_still_works(self, app):
-        transport = ASGITransport(app=app)
+    async def test_health_still_works(self, _dashboard_app):
+        transport = ASGITransport(app=_dashboard_app)
         async with AsyncClient(transport=transport, base_url="http://test") as client:
             resp = await client.get("/health")
             assert resp.status_code == 200
@@ -139,8 +151,8 @@ class TestDashboardRoot:
     """Tests for the dashboard root route."""
 
     @pytest.mark.asyncio
-    async def test_root_returns_html(self, app):
-        transport = ASGITransport(app=app)
+    async def test_root_returns_html(self, _dashboard_app):
+        transport = ASGITransport(app=_dashboard_app)
         async with AsyncClient(transport=transport, base_url="http://test") as client:
             resp = await client.get("/")
             assert resp.status_code == 200
@@ -148,8 +160,8 @@ class TestDashboardRoot:
             assert "Forge LLM Sidecar" in resp.text
 
     @pytest.mark.asyncio
-    async def test_static_files_accessible(self, app):
-        transport = ASGITransport(app=app)
+    async def test_static_files_accessible(self, _dashboard_app):
+        transport = ASGITransport(app=_dashboard_app)
         async with AsyncClient(transport=transport, base_url="http://test") as client:
             resp = await client.get("/static/dashboard.html")
             assert resp.status_code == 200

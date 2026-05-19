@@ -135,16 +135,18 @@ async def recognize(req: RecognitionRequest) -> RecognitionResponse:
     )
 
     _store = get_store()
-    _store.record({
-        "game_id": req.game_id,
-        "format": req.format,
-        "turn": req.turn,
-        "archetype": final.get("archetype") or "Unknown",
-        "confidence": final.get("confidence") or 0.0,
-        "reasoning": (final.get("reasoning") or "")[:300],
-        "alternatives": final.get("alternatives") or [],
-        "piloting": piloting_advice.model_dump(),
-    })
+    _store.record(
+        {
+            "game_id": req.game_id,
+            "format": req.format,
+            "turn": req.turn,
+            "archetype": final.get("archetype") or "Unknown",
+            "confidence": final.get("confidence") or 0.0,
+            "reasoning": (final.get("reasoning") or "")[:300],
+            "alternatives": final.get("alternatives") or [],
+            "piloting": piloting_advice.model_dump(),
+        }
+    )
 
     return RecognitionResponse(
         archetype=final.get("archetype") or "Unknown",
@@ -157,6 +159,7 @@ async def recognize(req: RecognitionRequest) -> RecognitionResponse:
 
 class ForgeLogAnalyzeRequest(BaseModel):
     """Request body for forge-log analysis endpoint."""
+
     log: str
     game_id: str = "log-session"
     format: str = "Constructed"
@@ -167,6 +170,7 @@ class ForgeLogAnalyzeRequest(BaseModel):
 
 class ForgeLogAnalyzeResponse(BaseModel):
     """Response from forge-log analysis: list of checkpoints with LLM results."""
+
     checkpoints: list[dict]
     training_data: list[TrainingExample]
 
@@ -197,7 +201,9 @@ async def forge_log_analyze(req: ForgeLogAnalyzeRequest) -> ForgeLogAnalyzeRespo
         cp.deck_cards = req.deck_cards
         log.info(
             "forge-log checkpoint %d: turn=%s obs=%d",
-            i, cp.turn, len(cp.observations),
+            i,
+            cp.turn,
+            len(cp.observations),
         )
 
         initial = {
@@ -232,30 +238,34 @@ async def forge_log_analyze(req: ForgeLogAnalyzeRequest) -> ForgeLogAnalyzeRespo
             piloting=piloting_advice,
         )
 
-        results.append({
-            "index": i,
-            "turn": cp.turn,
-            "request": cp.model_dump(),
-            "response": resp.model_dump(),
-        })
+        results.append(
+            {
+                "index": i,
+                "turn": cp.turn,
+                "request": cp.model_dump(),
+                "response": resp.model_dump(),
+            }
+        )
 
-        training_data.append(TrainingExample(
-            game_id=cp.game_id,
-            turn=cp.turn,
-            format=cp.format,
-            observations=[o.model_dump() for o in cp.observations],
-            deck_cards=cp.deck_cards,
-            hand=cp.hand,
-            own_board=cp.own_board,
-            opponent_board=cp.opponent_board,
-            your_graveyard=cp.your_graveyard,
-            opponent_graveyard=cp.opponent_graveyard,
-            life_totals=cp.life_totals,
-            archetype=resp.archetype,
-            confidence=resp.confidence,
-            reasoning=resp.reasoning,
-            alternatives=resp.alternatives,
-        ))
+        training_data.append(
+            TrainingExample(
+                game_id=cp.game_id,
+                turn=cp.turn,
+                format=cp.format,
+                observations=[o.model_dump() for o in cp.observations],
+                deck_cards=cp.deck_cards,
+                hand=cp.hand,
+                own_board=cp.own_board,
+                opponent_board=cp.opponent_board,
+                your_graveyard=cp.your_graveyard,
+                opponent_graveyard=cp.opponent_graveyard,
+                life_totals=cp.life_totals,
+                archetype=resp.archetype,
+                confidence=resp.confidence,
+                reasoning=resp.reasoning,
+                alternatives=resp.alternatives,
+            )
+        )
 
     return ForgeLogAnalyzeResponse(
         checkpoints=results,
