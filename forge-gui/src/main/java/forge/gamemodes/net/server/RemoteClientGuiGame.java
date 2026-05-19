@@ -41,17 +41,14 @@ import java.util.stream.Collectors;
  * constructed at lobby time and reused across the match (and across reconnects, via
  * {@link #resetForReconnect}).
  *
- * <p>Most IGuiGame overrides forward as {@code send(ProtocolMethod.X, args)} alone.
- * State-dependent sends are preceded by {@link #updateGameView()} so the remote's tracker
- * sees a consistent snapshot before consuming the message. A small number of overrides
- * additionally call {@code super.X(args)} when host-side bookkeeping needs to mirror the
- * state — e.g. {@code setHighlighted} feeds {@code countPickedSelectables} on the host.
- * Return-typed methods use {@code sendAndWait(...)} and block the game thread until the
- * remote replies.
+ * <p>IGuiGame overrides forward through one of four helpers named for their behavior:
+ * {@link #send} (fire), {@link #syncAndSend} (walk the trackable graph, then fire),
+ * {@link #sendAndWait} (block for reply), {@link #syncAndSendAndWait} (walk, then block).
+ * {@code sync*} ensures the client has the entities referenced in the payload; the bare
+ * forms are for payloads that are pure IDs, strings, or flags.
  *
- * <p>Method bodies run on the game thread. Encoding happens synchronously inside
- * {@link RemoteClient#send}; the Netty write is async; {@code sendAndWait} blocks on
- * the reply pool.
+ * <p>{@code sync*} requires the game thread because the trackable graph is single-mutator;
+ * the bare variants skip the walk and are safe from any thread.
  */
 public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog {
 
@@ -139,9 +136,9 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     }
 
     /**
-     * Send the protocol command directly, without flushing pending state.
-     * Safe from any thread. Use when the message carries only IDs and flags
-     * and doesn't depend on the client having fresh state first.
+     * Dispatches a self-contained payload (IDs, strings, flags) — no graph walk,
+     * safe from any thread. Used when the client doesn't need fresh state to
+     * consume the message.
      */
     private void send(final ProtocolMethod method, final Object... args) {
         if (paused) { return; }
@@ -149,25 +146,32 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     }
 
     /**
-     * Send the protocol command, ordered after any pending events. Flushes
-     * the forwarder's event queue first (events ship their own bundled
-     * deltas), then sends. Game-thread-only. Use when this command depends
-     * on events the caller just fired arriving first.
+     * Walks the trackable graph via {@link #updateGameView} before dispatching, so
+     * the client has the entities referenced in the payload. Game-thread-only.
      */
-    private void flushAndSend(final ProtocolMethod method, final Object... args) {
+    private void syncAndSend(final ProtocolMethod method, final Object... args) {
         if (paused) { return; }
-        flushPendingEvents();
+        updateGameView();
         sender.send(method, args);
     }
 
     /**
-     * Flush pending state events, send the protocol command, and block
-     * until the client replies. Game-thread-only — both the flush and the
-     * blocking wait require it.
+     * Dispatches and blocks for the client's reply, with no graph walk. Used for
+     * dialogs whose args carry the full question (e.g. plain-text confirms).
      */
-    private <T> T flushAndSendAndWait(final ProtocolMethod method, final Object... args) {
+    private <T> T sendAndWait(final ProtocolMethod method, final Object... args) {
         if (paused) { return null; }
-        flushPendingEvents();
+        return sender.sendAndWait(method, args);
+    }
+
+    /**
+     * Walks the trackable graph, dispatches, and blocks for the client's reply.
+     * Used for dialogs that reference entities, cards, or zones the client must
+     * have to render the prompt. Game-thread-only.
+     */
+    private <T> T syncAndSendAndWait(final ProtocolMethod method, final Object... args) {
+        if (paused) { return null; }
+        updateGameView();
         return sender.sendAndWait(method, args);
     }
 
@@ -178,15 +182,13 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
     private boolean logBandwidth = FModel.getNetPreferences().getPrefBoolean(forge.localinstance.properties.ForgeNetPreferences.FNetPref.NET_BANDWIDTH_LOGGING);
 
     /**
-     * Push pending state to the client. Flushes the event queue if any
-     * events are queued; otherwise walks the trackable graph for state
-     * changes that didn't fire an event and sends an applyDelta. Falls
-     * back to a full setGameView before delta sync is established.
-     * Game-thread-only.
+     * Push pending state to the client. Flushes the event queue if any events
+     * are queued; otherwise walks the trackable graph for state changes that
+     * didn't fire an event and sends an applyDelta. Falls back to a full
+     * setGameView before delta sync is established. Game-thread-only.
      *
-     * <p>Use before sending a command that depends on the client having
-     * fresh state. {@link #flushAndSend} only drains the event queue —
-     * it doesn't catch state changes that didn't fire events.
+     * <p>Called internally by {@link #syncAndSend} and {@link #syncAndSendAndWait};
+     * also invoked directly from the reconnect handshake.
      */
     public void updateGameView() {
         updateGameView(true);
@@ -209,7 +211,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
                 return;
             }
             if (flush) {
-                flushAndSend(ProtocolMethod.setGameView, gameView, -1L);
+                send(ProtocolMethod.setGameView, gameView, -1L);
             } else {
                 sender.write(ProtocolMethod.setGameView, gameView, -1L);
             }
@@ -277,7 +279,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
         }
 
         long seq = syncManager.getCurrentSequence();
-        flushAndSend(ProtocolMethod.setGameView, gameView, seq);
+        send(ProtocolMethod.setGameView, gameView, seq);
         initialSyncSent = true;
 
         // Consumer registration is deferred — it happens on the first collectDeltas()
@@ -304,7 +306,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
 
     @Override
     public void openView(final TrackableCollection<PlayerView> myPlayers) {
-        flushAndSend(ProtocolMethod.openView, myPlayers);
+        send(ProtocolMethod.openView, myPlayers);
         updateGameView();
         // Initialize delta sync by sending the initial full state
         sendFullState();
@@ -312,13 +314,12 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
 
     @Override
     public void afterGameEnd() {
-        flushAndSend(ProtocolMethod.afterGameEnd);
+        syncAndSend(ProtocolMethod.afterGameEnd);
     }
 
     @Override
     public void showCombat() {
-        updateGameView();
-        flushAndSend(ProtocolMethod.showCombat);
+        syncAndSend(ProtocolMethod.showCombat);
     }
 
     @Override
@@ -328,13 +329,12 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
 
     @Override
     public void applyYieldUpdate(final YieldUpdate update) {
-        flushAndSend(ProtocolMethod.applyYieldUpdate, update);
+        send(ProtocolMethod.applyYieldUpdate, update);
     }
 
     @Override
     public void showCardPromptMessage(final PlayerView playerView, final String message, final CardView card) {
-        updateGameView();
-        flushAndSend(ProtocolMethod.showCardPromptMessage, playerView, message, card);
+        syncAndSend(ProtocolMethod.showCardPromptMessage, playerView, message, card);
     }
 
     @Override
@@ -344,47 +344,45 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
 
     @Override
     public void flashIncorrectAction() {
-        flushAndSend(ProtocolMethod.flashIncorrectAction);
+        send(ProtocolMethod.flashIncorrectAction);
     }
 
     @Override
-    public void alertUser() { flushAndSend(ProtocolMethod.alertUser); }
+    public void alertUser() { send(ProtocolMethod.alertUser); }
 
     @Override
     public void enableOverlay() {
-        flushAndSend(ProtocolMethod.enableOverlay);
+        send(ProtocolMethod.enableOverlay);
     }
 
     @Override
     public void disableOverlay() {
-        flushAndSend(ProtocolMethod.disableOverlay);
+        send(ProtocolMethod.disableOverlay);
     }
 
     @Override
     public void finishGame() {
-        flushAndSend(ProtocolMethod.finishGame);
+        syncAndSend(ProtocolMethod.finishGame);
     }
 
     @Override
     public void showManaPool(final PlayerView player) {
-        flushAndSend(ProtocolMethod.showManaPool, player);
+        send(ProtocolMethod.showManaPool, player);
     }
 
     @Override
     public void hideManaPool(final PlayerView player) {
-        flushAndSend(ProtocolMethod.hideManaPool, player);
+        send(ProtocolMethod.hideManaPool, player);
     }
 
     @Override
     public Iterable<PlayerZoneUpdate> tempShowZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
-        updateGameView();
-        return flushAndSendAndWait(ProtocolMethod.tempShowZones, controller, zonesToUpdate);
+        return syncAndSendAndWait(ProtocolMethod.tempShowZones, controller, zonesToUpdate);
     }
 
     @Override
     public void hideZones(final PlayerView controller, final Iterable<PlayerZoneUpdate> zonesToUpdate) {
-        updateGameView();
-        flushAndSend(ProtocolMethod.hideZones, controller, zonesToUpdate);
+        syncAndSend(ProtocolMethod.hideZones, controller, zonesToUpdate);
     }
 
     @Override
@@ -394,8 +392,7 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
 
     @Override
     public void setPanelSelection(final CardView hostCard) {
-        updateGameView();
-        flushAndSend(ProtocolMethod.setPanelSelection, hostCard);
+        syncAndSend(ProtocolMethod.setPanelSelection, hostCard);
     }
 
     @Override
@@ -405,111 +402,100 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
 
     @Override
     public SpellAbilityView getAbilityToPlay(final CardView hostCard, final List<SpellAbilityView> abilities, final ITriggerEvent triggerEvent) {
-        return flushAndSendAndWait(ProtocolMethod.getAbilityToPlay, hostCard, abilities, null/*triggerEvent*/); //someplatform don't have mousetriggerevent class or it will not allow them to click/tap
+        return syncAndSendAndWait(ProtocolMethod.getAbilityToPlay, hostCard, abilities, null/*triggerEvent*/); //someplatform don't have mousetriggerevent class or it will not allow them to click/tap
     }
 
     @Override
     public Map<CardView, Integer> assignCombatDamage(final CardView attacker, final List<CardView> blockers, final int damage, final GameEntityView defender, final boolean overrideOrder, final boolean maySkip) {
-        return flushAndSendAndWait(ProtocolMethod.assignCombatDamage, attacker, blockers, damage, defender, overrideOrder, maySkip);
+        return syncAndSendAndWait(ProtocolMethod.assignCombatDamage, attacker, blockers, damage, defender, overrideOrder, maySkip);
     }
 
     @Override
     public Map<Object, Integer> assignGenericAmount(final CardView effectSource, final Map<Object, Integer> targets, final int amount, final boolean atLeastOne, final String amountLabel) {
-        return flushAndSendAndWait(ProtocolMethod.assignGenericAmount, effectSource, targets, amount, atLeastOne, amountLabel);
+        return syncAndSendAndWait(ProtocolMethod.assignGenericAmount, effectSource, targets, amount, atLeastOne, amountLabel);
     }
 
     @Override
     public void message(final String message, final String title) {
-        flushAndSend(ProtocolMethod.message, message, title);
+        send(ProtocolMethod.message, message, title);
     }
 
     @Override
     public void showErrorDialog(final String message, final String title) {
-        flushAndSend(ProtocolMethod.showErrorDialog, message, title);
+        send(ProtocolMethod.showErrorDialog, message, title);
     }
 
     @Override
     public boolean showConfirmDialog(final String message, final String title, final String yesButtonText, final String noButtonText, final boolean defaultYes) {
-        final Boolean result = flushAndSendAndWait(ProtocolMethod.showConfirmDialog, message, title, yesButtonText, noButtonText, defaultYes);
+        final Boolean result = sendAndWait(ProtocolMethod.showConfirmDialog, message, title, yesButtonText, noButtonText, defaultYes);
         return result != null ? result : defaultYes;
     }
 
     @Override
     public int showOptionDialog(final String message, final String title, final FSkinProp icon, final List<String> options, final int defaultOption) {
-        updateGameView(); // Ensure game state is synced before asking for input
-        final Integer result = flushAndSendAndWait(ProtocolMethod.showOptionDialog, message, title, icon, options, defaultOption);
+        final Integer result = syncAndSendAndWait(ProtocolMethod.showOptionDialog, message, title, icon, options, defaultOption);
         return result != null ? result : defaultOption;
     }
 
     @Override
     public String showInputDialog(final String message, final String title, final FSkinProp icon, final String initialInput, final List<String> inputOptions, final boolean isNumeric) {
-        updateGameView(); // Ensure game state is synced before asking for input
-        return flushAndSendAndWait(ProtocolMethod.showInputDialog, message, title, icon, initialInput, inputOptions, isNumeric);
+        return syncAndSendAndWait(ProtocolMethod.showInputDialog, message, title, icon, initialInput, inputOptions, isNumeric);
     }
 
     @Override
     public boolean confirm(final CardView c, final String question, final boolean defaultIsYes, final List<String> options) {
-        updateGameView(); // Ensure game state is synced before asking for input
-        final Boolean result = flushAndSendAndWait(ProtocolMethod.confirm, c, question, defaultIsYes, options);
+        final Boolean result = syncAndSendAndWait(ProtocolMethod.confirm, c, question, defaultIsYes, options);
         return result != null ? result : defaultIsYes;
     }
 
     @Override
     public <T> List<T> getChoices(final String message, final int min, final int max, final List<T> choices, final List<T> selected, final FSerializableFunction<T, String> display) {
-        updateGameView(); // Ensure game state is synced before asking for input
-        return flushAndSendAndWait(ProtocolMethod.getChoices, message, min, max, choices, selected, display);
+        return syncAndSendAndWait(ProtocolMethod.getChoices, message, min, max, choices, selected, display);
     }
 
     @Override
     public <T> IGuiGame.OrderResult<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax, final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode, final boolean showRememberCheckbox) {
-        updateGameView(); // Ensure game state is synced before asking for input
-        return flushAndSendAndWait(ProtocolMethod.order, title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode, showRememberCheckbox);
+        return syncAndSendAndWait(ProtocolMethod.order, title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode, showRememberCheckbox);
     }
 
     @Override
     public List<PaperCard> sideboard(final CardPool sideboard, final CardPool main, final String message) {
-        updateGameView(); // Ensure game state is synced before asking for input
-        return flushAndSendAndWait(ProtocolMethod.sideboard, sideboard, main, message);
+        return syncAndSendAndWait(ProtocolMethod.sideboard, sideboard, main, message);
     }
 
     @Override
     public GameEntityView chooseSingleEntityForEffect(final String title, final List<? extends GameEntityView> optionList, final DelayedReveal delayedReveal, final boolean isOptional) {
-        updateGameView(); // Ensure game state is synced before asking for input
-        return flushAndSendAndWait(ProtocolMethod.chooseSingleEntityForEffect, title, optionList, delayedReveal, isOptional);
+        return syncAndSendAndWait(ProtocolMethod.chooseSingleEntityForEffect, title, optionList, delayedReveal, isOptional);
     }
 
     @Override
     public List<GameEntityView> chooseEntitiesForEffect(final String title, final List<? extends GameEntityView> optionList, final int min, final int max, final DelayedReveal delayedReveal) {
-        updateGameView(); // Ensure game state is synced before asking for input
-        return flushAndSendAndWait(ProtocolMethod.chooseEntitiesForEffect, title, optionList, min, max, delayedReveal);
+        return syncAndSendAndWait(ProtocolMethod.chooseEntitiesForEffect, title, optionList, min, max, delayedReveal);
     }
 
     @Override
     public List<CardView> manipulateCardList(final String title, final Iterable<CardView> cards, final Iterable<CardView> manipulable, final boolean toTop, final boolean toBottom, final boolean toAnywhere) {
-        return flushAndSendAndWait(ProtocolMethod.manipulateCardList, title, cards, manipulable, toTop, toBottom, toAnywhere);
+        return syncAndSendAndWait(ProtocolMethod.manipulateCardList, title, cards, manipulable, toTop, toBottom, toAnywhere);
     }
 
     public void setHighlighted(final Iterable<GameEntityView> entities, final boolean value) {
         super.setHighlighted(entities, value);
-        flushAndSend(ProtocolMethod.setHighlighted, entities, value);
+        syncAndSend(ProtocolMethod.setHighlighted, entities, value);
     }
 
     @Override
     public void setCard(final CardView card) {
-        updateGameView();
-        flushAndSend(ProtocolMethod.setCard, card);
+        syncAndSend(ProtocolMethod.setCard, card);
     }
 
     @Override
     public void setSelectables(final Iterable<CardView> cards, final int min, final int max) {
-        updateGameView();
-        flushAndSend(ProtocolMethod.setSelectables, cards, min, max);
+        syncAndSend(ProtocolMethod.setSelectables, cards, min, max);
     }
 
     @Override
     public void clearSelectables() {
-        updateGameView();
-        flushAndSend(ProtocolMethod.clearSelectables);
+        syncAndSend(ProtocolMethod.clearSelectables);
     }
 
     @Override
@@ -519,13 +505,12 @@ public class RemoteClientGuiGame extends NetworkGuiGame implements IHasForgeLog 
 
     @Override
     public PlayerZoneUpdates openZones(PlayerView controller, final Collection<ZoneType> zones, final Map<PlayerView, Object> players, boolean backupLastZones) {
-        updateGameView();
-        return flushAndSendAndWait(ProtocolMethod.openZones, controller, zones, players, backupLastZones);
+        return syncAndSendAndWait(ProtocolMethod.openZones, controller, zones, players, backupLastZones);
     }
 
     @Override
     public void restoreOldZones(PlayerView playerView, PlayerZoneUpdates playerZoneUpdates) {
-        flushAndSend(ProtocolMethod.restoreOldZones, playerView, playerZoneUpdates);
+        syncAndSend(ProtocolMethod.restoreOldZones, playerView, playerZoneUpdates);
     }
 
     @Override

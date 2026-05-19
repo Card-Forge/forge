@@ -364,9 +364,9 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasForgeLog {
             }
             for (forge.game.event.GameEventCardTapped tapEvent : lastTapPerCard.values()) {
                 forge.game.card.CardView card = tapEvent.card();
-                if (card != null && card.isTapped() != tapEvent.tapped()) {
+                if (card != null && card.getZone() == forge.game.zone.ZoneType.Battlefield && card.isTapped() != tapEvent.tapped()) {
                     client.eventStateMismatches.incrementAndGet();
-                    netLog.warn("[EventDeltaCheck] MISMATCH: GameEventCardTapped says tapped={} but CardView.isTapped()={} for {} (may be zone-transition artifact)",
+                    netLog.warn("[EventDeltaCheck] MISMATCH: GameEventCardTapped says tapped={} but CardView.isTapped()={} for {}",
                             tapEvent.tapped(), card.isTapped(), card);
                 }
             }
