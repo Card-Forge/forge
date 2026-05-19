@@ -42,6 +42,10 @@ _CARD_NO_ID = r"(.+?)"
 _PLAYER = r"(.+?)"
 # Integer
 _INT = r"(\d+)"
+# Card name that stops at '[', 'targeting', or end-of-line (for SpellCast)
+_CARD_STOP_BRACKET = r"([^(\[\n]+?)"
+# Card name for lines with 'targeting' keyword: stops at 'targeting'
+_CARD_STOP_TARGETING = r"(.+?)(?=\s+targeting)"
 
 
 def _strip_id(text: str) -> tuple[str, int]:
@@ -225,15 +229,28 @@ def _build_parser() -> _Parser:
 
     # Add To Stack: Player cast CardName (ID) targeting [text]
     p.add(
-        r"Add To Stack: " + _PLAYER + r"\s+cast\s+" + _CARD + r"\s+targeting\s+\[([^\]]*)\]",
+        r"Add To Stack: " + _PLAYER + r"\s+cast\s+" + _CARD_STOP_BRACKET + r"\s*\((\d+)\)\s+targeting\s+(.+)$",
         lambda m, ln, raw: SpellCast(
             kind="spell",
             line=ln,
             raw=raw,
             player=m.group(1),
-            card=m.group(2),
+            card=m.group(2).strip(),
             card_id=int(m.group(3)),
             target_info=m.group(4).strip(),
+        ),
+    )
+
+    # Add To Stack: Player cast CardName targeting [text] (no ID on card)
+    p.add(
+        r"Add To Stack: " + _PLAYER + r"\s+cast\s+" + _CARD_STOP_TARGETING + r"\s+targeting\s+(.+)$",
+        lambda m, ln, raw: SpellCast(
+            kind="spell",
+            line=ln,
+            raw=raw,
+            player=m.group(1),
+            card=m.group(2).strip(),
+            target_info=m.group(3).strip(),
         ),
     )
 
@@ -247,19 +264,6 @@ def _build_parser() -> _Parser:
             player=m.group(1),
             card=m.group(2),
             card_id=int(m.group(3)),
-        ),
-    )
-
-    # Add To Stack: Player cast CardName targeting [text] (no ID)
-    p.add(
-        r"Add To Stack: " + _PLAYER + r"\s+cast\s+(.+?)\s+targeting\s+\[([^\]]*)\]",
-        lambda m, ln, raw: SpellCast(
-            kind="spell",
-            line=ln,
-            raw=raw,
-            player=m.group(1),
-            card=m.group(2).strip(),
-            target_info=m.group(3).strip(),
         ),
     )
 
@@ -352,21 +356,21 @@ def _build_parser() -> _Parser:
         ),
     )
 
-    # Player surveiled N card(s) to the graveyard
+    # Player surveiled N card(s) to the graveyard/top of library
     p.add(
         (
             r"Resolve Stack: "
             + _PLAYER
             + r"\s+surveiled\s+"
             + _INT
-            + r"\s+card\(s?\)\s+to the graveyard"
+            + r"\s+card\(s?\)\s+to\s+(.*)"
         ),
         lambda m, ln, raw: StackResolve(
             kind="resolve",
             line=ln,
             raw=raw,
             card=m.group(1),
-            text=f"{m.group(1)} surveiled {m.group(2)} card(s) to the graveyard",
+            text=f"{m.group(1)} surveiled {m.group(2)} card(s) to {m.group(3)}",
         ),
     )
 
