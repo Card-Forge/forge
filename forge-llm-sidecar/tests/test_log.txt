@@ -1,0 +1,741 @@
+Match Result: Atlin: 1 Buthomar: 2 
+Game Outcome: Buthomar has won because all opponents have lost
+Game Outcome: Atlin has lost because life total reached 0
+Game Outcome: Turn 13
+Player Control: Buthomar has restored control over themself
+Player Control: Atlin has restored control over themself
+Life: Life: Atlin 6 > -2
+Damage: Restless Anchorage (81) deals 2 combat damage to Atlin.
+Damage: Marang River Regent (97) deals 6 combat damage to Atlin.
+Phase: Buthomar's Combat Damage Step
+Phase: Buthomar's First Strike Damage Step
+Combat: Atlin didn't block Marang River Regent (97).
+Atlin didn't block Restless Anchorage (81).
+Phase: Buthomar's Declare Blockers Step
+Resolve Stack: Whenever Restless Anchorage attacks, create a Map token. [Attacker: Restless Anchorage (81)]
+Add To Stack: Buthomar triggered Restless Anchorage
+Combat: Buthomar assigned Marang River Regent (97) and Restless Anchorage (81) to attack Atlin.
+Phase: Buthomar's Declare Attackers Step
+Resolve Stack: Restless Anchorage (81) - Restless Anchorage (81) has base power and toughness 2/3  and becomes white and blue a creature Bird and  gains flying until end of turn.
+Add To Stack: Buthomar activated Restless Anchorage
+Mana: Island (117) - {T}: Add {U}.
+Mana: Plains (87) - {T}: Add {W}.
+Mana: Island (120) - {T}: Add {U}.
+Phase: Buthomar's Beginning of Combat Step
+Land: Buthomar played Fountainport (100)
+Resolve Stack: Map Token (170) - Marang River Regent (97) explores. 
+Add To Stack: Buthomar activated Map Token targeting [Marang River Regent (97)]
+Zone Change: Map Token (170) was put into Graveyard from Battlefield.
+Mana: Island (119) - {T}: Add {U}.
+Phase: Buthomar's Main phase, precombat
+Phase: Buthomar's Draw step
+Phase: Buthomar's Upkeep step
+Phase: Buthomar's Untap step
+Turn: Turn 25 (Buthomar)
+Phase: Atlin's Cleanup step
+Phase: Atlin's End step
+Phase: Atlin's Main phase, postcombat
+Phase: Atlin's End of Combat Step
+Phase: Atlin's Combat Damage Step
+Phase: Atlin's First Strike Damage Step
+Phase: Atlin's Declare Blockers Step
+Phase: Atlin's Declare Attackers Step
+Resolve Stack: At the beginning of combat on your turn, if you've drawn more than one card this turn, put X +1/+1 counters on target creature you control, where X is the number of cards you've drawn this turn minus one. (Targeting: [[Fear of Missing Out (8)]]) [Phase: Atlin]
+Add To Stack: Atlin triggered Proft's Eidetic Memory targeting [Fear of Missing Out (8)]
+Phase: Atlin's Beginning of Combat Step
+Resolve Stack: When a creature card is exiled this way, put a +1/+1 counter on target creature you control. (Targeting: [[Fear of Missing Out (8)]])
+Add To Stack: Atlin triggered Agatha's Soul Cauldron targeting [Fear of Missing Out (8)]
+Resolve Stack: Agatha's Soul Cauldron (22) - Exile Steamcore Scholar (5) from the graveyard. When a creature card is exiled this way, put a +1/+1 counter on target creature you control. 
+Add To Stack: Atlin activated Agatha's Soul Cauldron targeting [Steamcore Scholar (5)]
+Resolve Stack: Agatha's Soul Cauldron
+Add To Stack: Atlin cast Agatha's Soul Cauldron
+Mana: Riverpyre Verge (42) - {T}: Add {R}.
+Mana: Spirebluff Canal (1) - {T}: Add {U} or {R}.
+Resolve Stack: When Proft's Eidetic Memory enters, draw a card. [Zone Changer: Proft's Eidetic Memory (57)]
+Add To Stack: Atlin triggered Proft's Eidetic Memory
+Zone Change: Proft's Eidetic Memory (56) was put into Graveyard from Battlefield.
+Resolve Stack: Proft's Eidetic Memory
+Add To Stack: Atlin cast Proft's Eidetic Memory
+Mana: Mountain (39) - {T}: Add {R}.
+Mana: Island (48) - {T}: Add {U}.
+Resolve Stack: When Fear of Missing Out enters, discard a card, then draw a card. [Zone Changer: Fear of Missing Out (8)]
+Discard: Atlin discards Spirebluff Canal (3).
+Add To Stack: Atlin triggered Fear of Missing Out
+Resolve Stack: Fear of Missing Out - Creature 2 / 3
+Add To Stack: Atlin cast Fear of Missing Out
+Mana: Mountain (37) - {T}: Add {R}.
+Mana: Island (45) - {T}: Add {U}.
+Resolve Stack: When Proft's Eidetic Memory enters, draw a card. [Zone Changer: Proft's Eidetic Memory (56)]
+Add To Stack: Atlin triggered Proft's Eidetic Memory
+Resolve Stack: Proft's Eidetic Memory
+Add To Stack: Atlin cast Proft's Eidetic Memory
+Mana: Mountain (40) - {T}: Add {R}.
+Mana: Island (46) - {T}: Add {U}.
+Land: Atlin played Riverpyre Verge (42)
+Phase: Atlin's Main phase, precombat
+Phase: Atlin's Draw step
+Phase: Atlin's Upkeep step
+Phase: Atlin's Untap step
+Turn: Turn 24 (Atlin)
+Phase: Buthomar's Cleanup step
+Phase: Buthomar's End step
+Resolve Stack: When this creature enters, return up to two other target nonland permanents to their owners' hands. (Targeting: [[Agatha's Soul Cauldron (22), Proft's Eidetic Memory (57)]]) [Zone Changer: Marang River Regent (97)]
+Replacement Effect: Omen
+Resolve Stack: Coil and Catch (31) - Atlin draws three cards. Atlin discards a card.
+Discard: Atlin discards Starting Town (17).
+Add To Stack: Atlin cast Coil and Catch
+Mana: Riverpyre Verge (44) - {T}: Add {U}. Activate only if you control an Island or a Mountain.
+Mana: Mountain (37) - {T}: Add {R}.
+Mana: Mountain (39) - {T}: Add {R}.
+Mana: Spirebluff Canal (1) - {T}: Add {U} or {R}.
+Add To Stack: Buthomar triggered Marang River Regent targeting [Agatha's Soul Cauldron (22), Proft's Eidetic Memory (57)]
+Resolve Stack: Marang River Regent - Creature 6 / 7
+Add To Stack: Buthomar cast Marang River Regent
+Mana: Meticulous Archive (132) - {T}: Add {U}.
+Mana: Floodfarm Verge (112) - {T}: Add {U}. Activate only if you control a Plains or an Island.
+Mana: Floodfarm Verge (111) - {T}: Add {U}. Activate only if you control a Plains or an Island.
+Mana: Plains (88) - {T}: Add {W}.
+Mana: Island (117) - {T}: Add {U}.
+Mana: Island (120) - {T}: Add {U}.
+Land: Buthomar played Restless Anchorage (81)
+Replacement Effect: Restless Anchorage enters tapped.
+Phase: Buthomar's Main phase, postcombat
+Phase: Buthomar's End of Combat Step
+Phase: Buthomar's Combat Damage Step
+Phase: Buthomar's First Strike Damage Step
+Phase: Buthomar's Declare Blockers Step
+Resolve Stack: Into the Flood Maw (52) - Return Restless Anchorage (81) to its owner's hand. Return  to its owner's hand.
+Add To Stack: Atlin cast Into the Flood Maw targeting [Restless Anchorage (81)] []
+Mana: Island (48) - {T}: Add {U}.
+Resolve Stack: Whenever Restless Anchorage attacks, create a Map token. [Attacker: Restless Anchorage (81)]
+Add To Stack: Buthomar triggered Restless Anchorage
+Combat: Buthomar assigned Restless Anchorage (81) to attack Atlin.
+Phase: Buthomar's Declare Attackers Step
+Resolve Stack: Restless Anchorage (81) - Restless Anchorage (81) has base power and toughness 2/3  and becomes white and blue a creature Bird and  gains flying until end of turn.
+Add To Stack: Buthomar activated Restless Anchorage
+Mana: Plains (86) - {T}: Add {W}.
+Mana: Plains (87) - {T}: Add {W}.
+Mana: Island (119) - {T}: Add {U}.
+Phase: Buthomar's Beginning of Combat Step
+Phase: Buthomar's Main phase, precombat
+Phase: Buthomar's Draw step
+Phase: Buthomar's Upkeep step
+Phase: Buthomar's Untap step
+Turn: Turn 23 (Buthomar)
+Phase: Atlin's Cleanup step
+Phase: Atlin's End step
+Phase: Atlin's Main phase, postcombat
+Phase: Atlin's End of Combat Step
+Phase: Atlin's Combat Damage Step
+Phase: Atlin's First Strike Damage Step
+Phase: Atlin's Declare Blockers Step
+Phase: Atlin's Declare Attackers Step
+Phase: Atlin's Beginning of Combat Step
+Resolve Stack: Winternight Stories (24) - Atlin draws three cards. Then discard two cards unless you discard a creature card.
+Discard: Atlin discards Spirebluff Canal (2).
+Discard: Atlin discards Mountain (38).
+Add To Stack: Atlin cast Winternight Stories
+Mana: Mountain (40) - {T}: Add {R}.
+Mana: Island (45) - {T}: Add {U}.
+Mana: Island (46) - {T}: Add {U}.
+Phase: Atlin's Main phase, precombat
+Phase: Atlin's Draw step
+Phase: Atlin's Upkeep step
+Phase: Atlin's Untap step
+Turn: Turn 22 (Atlin)
+Phase: Buthomar's Cleanup step
+Phase: Buthomar's End step
+Resolve Stack: Map Token (167) - Restless Anchorage (81) explores. 
+Add To Stack: Buthomar activated Map Token targeting [Restless Anchorage (81)]
+Zone Change: Map Token (167) was put into Graveyard from Battlefield.
+Mana: Island (117) - {T}: Add {U}.
+Resolve Stack: When this enchantment enters, exile target nonland permanent an opponent controls with mana value 2 or less until this enchantment leaves the battlefield. (Targeting: [[Marauding Mako (13)]]) [Zone Changer: Seam Rip (89)]
+Zone Change: Marauding Mako (13) was put into Exile from Battlefield.
+Add To Stack: Buthomar triggered Seam Rip targeting [Marauding Mako (13)]
+Resolve Stack: Seam Rip
+Add To Stack: Buthomar cast Seam Rip
+Mana: Plains (86) - {T}: Add {W}.
+Phase: Buthomar's Main phase, postcombat
+Phase: Buthomar's End of Combat Step
+Life: Life: Atlin 11 > 6
+Damage: Restless Anchorage (81) deals 5 combat damage to Atlin.
+Phase: Buthomar's Combat Damage Step
+Phase: Buthomar's First Strike Damage Step
+Combat: Atlin didn't block Restless Anchorage (81).
+Phase: Buthomar's Declare Blockers Step
+Resolve Stack: Whenever Restless Anchorage attacks, create a Map token. [Attacker: Restless Anchorage (81)]
+Add To Stack: Buthomar triggered Restless Anchorage
+Combat: Buthomar assigned Restless Anchorage (81) to attack Atlin.
+Phase: Buthomar's Declare Attackers Step
+Resolve Stack: Restless Anchorage (81) - Restless Anchorage (81) has base power and toughness 2/3  and becomes white and blue a creature Bird and  gains flying until end of turn.
+Add To Stack: Buthomar activated Restless Anchorage
+Mana: Island (120) - {T}: Add {U}.
+Mana: Plains (87) - {T}: Add {W}.
+Mana: Island (119) - {T}: Add {U}.
+Phase: Buthomar's Beginning of Combat Step
+Phase: Buthomar's Main phase, precombat
+Phase: Buthomar's Draw step
+Phase: Buthomar's Upkeep step
+Phase: Buthomar's Untap step
+Turn: Turn 21 (Buthomar)
+Phase: Atlin's Cleanup step
+Phase: Atlin's End step
+Phase: Atlin's Main phase, postcombat
+Phase: Atlin's End of Combat Step
+Life: Life: Buthomar 14 > 12
+Damage: Marauding Mako (13) deals 2 combat damage to Buthomar.
+Phase: Atlin's Combat Damage Step
+Phase: Atlin's First Strike Damage Step
+Combat: Buthomar didn't block Marauding Mako (13).
+Phase: Atlin's Declare Blockers Step
+Combat: Atlin assigned Marauding Mako (13) to attack Buthomar.
+Phase: Atlin's Declare Attackers Step
+Phase: Atlin's Beginning of Combat Step
+Resolve Stack: Demolition Field (122) - Destroy Soulstone Sanctuary (53). That land's controller may search their library for a basic land card, put it onto the battlefield, then shuffle. You may search your library for a basic land card, put it onto the battlefield, then shuffle. Buthomar searches their library for a basic land card, puts it onto the battlefield, then shuffles.
+Zone Change: Soulstone Sanctuary (53) was put into Graveyard from Battlefield.
+Add To Stack: Buthomar activated Demolition Field targeting [Soulstone Sanctuary (53)]
+Zone Change: Demolition Field (122) was put into Graveyard from Battlefield.
+Mana: Floodfarm Verge (111) - {T}: Add {U}. Activate only if you control a Plains or an Island.
+Mana: Plains (88) - {T}: Add {W}.
+Resolve Stack: When a creature card is exiled this way, put a +1/+1 counter on target creature you control. (Targeting: [[Soulstone Sanctuary (53)]])
+Add To Stack: Atlin triggered Agatha's Soul Cauldron targeting [Soulstone Sanctuary (53)]
+Resolve Stack: Agatha's Soul Cauldron (22) - Exile Steamcore Scholar (6) from the graveyard. When a creature card is exiled this way, put a +1/+1 counter on target creature you control. 
+Add To Stack: Atlin activated Agatha's Soul Cauldron targeting [Steamcore Scholar (6)]
+Land: Atlin played Riverpyre Verge (44)
+Phase: Atlin's Main phase, precombat
+Phase: Atlin's Draw step
+Phase: Atlin's Upkeep step
+Phase: Atlin's Untap step
+Turn: Turn 20 (Atlin)
+Phase: Buthomar's Cleanup step
+Phase: Buthomar's End step
+Land: Buthomar played Demolition Field (122)
+Resolve Stack: Map Token (164) - Restless Anchorage (81) explores. 
+Add To Stack: Buthomar activated Map Token targeting [Restless Anchorage (81)]
+Zone Change: Map Token (164) was put into Graveyard from Battlefield.
+Mana: Plains (86) - {T}: Add {W}.
+Phase: Buthomar's Main phase, postcombat
+Phase: Buthomar's End of Combat Step
+Life: Life: Atlin 16 > 11
+Damage: Restless Anchorage (81) deals 5 combat damage to Atlin.
+Phase: Buthomar's Combat Damage Step
+Phase: Buthomar's First Strike Damage Step
+Combat: Atlin didn't block Restless Anchorage (81).
+Phase: Buthomar's Declare Blockers Step
+Resolve Stack: Whenever Restless Anchorage attacks, create a Map token. [Attacker: Restless Anchorage (81)]
+Add To Stack: Buthomar triggered Restless Anchorage
+Combat: Buthomar assigned Restless Anchorage (81) to attack Atlin.
+Phase: Buthomar's Declare Attackers Step
+Resolve Stack: Restless Anchorage (81) - Restless Anchorage (81) has base power and toughness 2/3  and becomes white and blue a creature Bird and  gains flying until end of turn.
+Add To Stack: Buthomar activated Restless Anchorage
+Mana: Island (120) - {T}: Add {U}.
+Mana: Plains (87) - {T}: Add {W}.
+Mana: Island (119) - {T}: Add {U}.
+Phase: Buthomar's Beginning of Combat Step
+Phase: Buthomar's Main phase, precombat
+Phase: Buthomar's Draw step
+Phase: Buthomar's Upkeep step
+Phase: Buthomar's Untap step
+Turn: Turn 19 (Buthomar)
+Phase: Atlin's Cleanup step
+Phase: Atlin's End step
+Phase: Atlin's Main phase, postcombat
+Phase: Atlin's End of Combat Step
+Zone Change: Elspeth, Storm Slayer (125) was put into Graveyard from Battlefield.
+Phase: Atlin's Combat Damage Step
+Phase: Atlin's First Strike Damage Step
+Combat: Buthomar didn't block Soulstone Sanctuary (53).
+Phase: Atlin's Declare Blockers Step
+Combat: Atlin assigned Soulstone Sanctuary (53) to attack Elspeth, Storm Slayer (125).
+Phase: Atlin's Declare Attackers Step
+Phase: Atlin's Beginning of Combat Step
+Mana: Marauding Mako (13) - {0}: Add X mana in any combination of {U} and/or {R}, where X is Marauding Mako's power. Activate only during your turn and only once each turn.
+Resolve Stack: Soulstone Sanctuary (53) - Soulstone Sanctuary (53) has base power and toughness 3/3  and becomes a creature and  gains vigilance .
+Add To Stack: Atlin activated Soulstone Sanctuary
+Mana: Island (45) - {T}: Add {U}.
+Mana: Island (48) - {T}: Add {U}.
+Mana: Mountain (37) - {T}: Add {R}.
+Mana: Mountain (39) - {T}: Add {R}.
+Resolve Stack: When a creature card is exiled this way, put a +1/+1 counter on target creature you control. (Targeting: [[Marauding Mako (13)]])
+Add To Stack: Atlin triggered Agatha's Soul Cauldron targeting [Marauding Mako (13)]
+Resolve Stack: Agatha's Soul Cauldron (22) - Exile Tersa Lightshatter (59) from the graveyard. When a creature card is exiled this way, put a +1/+1 counter on target creature you control. 
+Add To Stack: Atlin activated Agatha's Soul Cauldron targeting [Tersa Lightshatter (59)]
+Resolve Stack: Marauding Mako - Creature 1 / 1
+Add To Stack: Atlin cast Marauding Mako
+Mana: Mountain (40) - {T}: Add {R}.
+Phase: Atlin's Main phase, precombat
+Phase: Atlin's Draw step
+Phase: Atlin's Upkeep step
+Phase: Atlin's Untap step
+Turn: Turn 18 (Atlin)
+Phase: Buthomar's Cleanup step
+Phase: Buthomar's End step
+Resolve Stack: Map Token (161) - Restless Anchorage (81) explores. 
+Add To Stack: Buthomar activated Map Token targeting [Restless Anchorage (81)]
+Zone Change: Map Token (161) was put into Graveyard from Battlefield.
+Mana: Floodfarm Verge (112) - {T}: Add {U}. Activate only if you control a Plains or an Island.
+Resolve Stack: Map Token (160) - Restless Anchorage (81) explores. 
+Add To Stack: Buthomar activated Map Token targeting [Restless Anchorage (81)]
+Zone Change: Map Token (160) was put into Graveyard from Battlefield.
+Mana: Plains (88) - {T}: Add {W}.
+Resolve Stack: Elspeth, Storm Slayer (125) - Put a +1/+1 counter on each valid permanent. 
+Add To Stack: Buthomar activated Elspeth, Storm Slayer
+Resolve Stack: When Meticulous Archive enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.) [Zone Changer: Meticulous Archive (132)]
+Resolve Stack: Buthomar surveiled 1 card(s) to the top of the library
+Add To Stack: Buthomar triggered Meticulous Archive
+Land: Buthomar played Meticulous Archive (132)
+Replacement Effect: Meticulous Archive enters tapped.
+Phase: Buthomar's Main phase, postcombat
+Phase: Buthomar's End of Combat Step
+Life: Life: Atlin 18 > 16
+Damage: Restless Anchorage (81) deals 2 combat damage to Atlin.
+Phase: Buthomar's Combat Damage Step
+Phase: Buthomar's First Strike Damage Step
+Combat: Atlin didn't block Restless Anchorage (81).
+Phase: Buthomar's Declare Blockers Step
+Resolve Stack: Whenever Restless Anchorage attacks, create a Map token. [Attacker: Restless Anchorage (81)]
+Replacement Effect: If one or more tokens would be created under your control, twice that many of those tokens are created instead.
+Add To Stack: Buthomar triggered Restless Anchorage
+Combat: Buthomar assigned Restless Anchorage (81) to attack Atlin.
+Phase: Buthomar's Declare Attackers Step
+Resolve Stack: Restless Anchorage (81) - Restless Anchorage (81) has base power and toughness 2/3  and becomes white and blue a creature Bird and  gains flying until end of turn.
+Add To Stack: Buthomar activated Restless Anchorage
+Mana: Plains (86) - {T}: Add {W}.
+Mana: Plains (87) - {T}: Add {W}.
+Mana: Floodfarm Verge (111) - {T}: Add {U}. Activate only if you control a Plains or an Island.
+Phase: Buthomar's Beginning of Combat Step
+Phase: Buthomar's Main phase, precombat
+Phase: Buthomar's Draw step
+Resolve Stack: Demolition Field (123) - Destroy Soulstone Sanctuary (54). That land's controller may search their library for a basic land card, put it onto the battlefield, then shuffle. You may search your library for a basic land card, put it onto the battlefield, then shuffle. Buthomar searches their library for a basic land card, puts it onto the battlefield, then shuffles.
+Zone Change: Soulstone Sanctuary (54) was put into Graveyard from Battlefield.
+Add To Stack: Buthomar activated Demolition Field targeting [Soulstone Sanctuary (54)]
+Zone Change: Demolition Field (123) was put into Graveyard from Battlefield.
+Mana: Island (120) - {T}: Add {U}.
+Mana: Island (119) - {T}: Add {U}.
+Phase: Buthomar's Upkeep step
+Phase: Buthomar's Untap step
+Turn: Turn 17 (Buthomar)
+Phase: Atlin's Cleanup step
+Phase: Atlin's End step
+Phase: Atlin's Main phase, postcombat
+Phase: Atlin's End of Combat Step
+Phase: Atlin's Combat Damage Step
+Phase: Atlin's First Strike Damage Step
+Combat: Buthomar didn't block Soulstone Sanctuary (54).
+Phase: Atlin's Declare Blockers Step
+Combat: Atlin assigned Soulstone Sanctuary (54) to attack Elspeth, Storm Slayer (125).
+Phase: Atlin's Declare Attackers Step
+Phase: Atlin's Beginning of Combat Step
+Zone Change: Fish Token (155) was put into Graveyard from Battlefield.
+Resolve Stack: Abrade (27) -  Abrade deals 3 damage to target creature. (Targeting: Fish Token (155))
+Damage: Abrade (27) deals 3 damage to Fish Token (155).
+Add To Stack: Atlin cast Abrade
+Zone Change: Fish Token (156) was put into Graveyard from Battlefield.
+Resolve Stack: Abrade (28) -  Abrade deals 3 damage to target creature. (Targeting: Fish Token (156))
+Damage: Abrade (28) deals 3 damage to Fish Token (156).
+Add To Stack: Atlin cast Abrade
+Mana: Soulstone Sanctuary (54) - {0}: Add X mana in any combination of {U} and/or {R}, where X is Soulstone Sanctuary's power. Activate only during your turn and only once each turn.
+Resolve Stack: When a creature card is exiled this way, put a +1/+1 counter on target creature you control. (Targeting: [[Soulstone Sanctuary (54)]])
+Add To Stack: Atlin triggered Agatha's Soul Cauldron targeting [Soulstone Sanctuary (54)]
+Resolve Stack: Agatha's Soul Cauldron (22) - Exile Fear of Missing Out (11) from the graveyard. When a creature card is exiled this way, put a +1/+1 counter on target creature you control. 
+Add To Stack: Atlin activated Agatha's Soul Cauldron targeting [Fear of Missing Out (11)]
+Resolve Stack: Soulstone Sanctuary (54) - Soulstone Sanctuary (54) has base power and toughness 3/3  and becomes a creature and  gains vigilance .
+Add To Stack: Atlin activated Soulstone Sanctuary
+Mana: Mountain (37) - {T}: Add {R}.
+Mana: Island (48) - {T}: Add {U}.
+Mana: Island (45) - {T}: Add {U}.
+Mana: Soulstone Sanctuary (53) - {T}: Add {C}.
+Phase: Atlin's Main phase, precombat
+Phase: Atlin's Draw step
+Phase: Atlin's Upkeep step
+Phase: Atlin's Untap step
+Turn: Turn 16 (Atlin)
+Phase: Buthomar's Cleanup step
+Phase: Buthomar's End step
+Resolve Stack: Elspeth, Storm Slayer (125) - Put a +1/+1 counter on each valid permanent. 
+Add To Stack: Buthomar activated Elspeth, Storm Slayer
+Resolve Stack: Elspeth, Storm Slayer
+Replacement Effect: Elspeth, Storm Slayer enters with five loyalty counters on it.
+Add To Stack: Buthomar cast Elspeth, Storm Slayer
+Mana: Floodfarm Verge (112) - {T}: Add {U}. Activate only if you control a Plains or an Island.
+Mana: Island (120) - {T}: Add {U}.
+Mana: Island (119) - {T}: Add {U}.
+Mana: Floodfarm Verge (111) - {T}: Add {W}.
+Mana: Plains (86) - {T}: Add {W}.
+Land: Buthomar played Restless Anchorage (81)
+Replacement Effect: Restless Anchorage enters tapped.
+Phase: Buthomar's Main phase, postcombat
+Phase: Buthomar's End of Combat Step
+Life: Life: Atlin 20 > 18
+Damage: Fish Token (156) deals 1 combat damage to Atlin.
+Damage: Fish Token (155) deals 1 combat damage to Atlin.
+Phase: Buthomar's Combat Damage Step
+Phase: Buthomar's First Strike Damage Step
+Combat: Atlin didn't block Fish Token (155).
+Atlin didn't block Fish Token (156).
+Phase: Buthomar's Declare Blockers Step
+Combat: Buthomar assigned Fish Token (155) and Fish Token (156) to attack Atlin.
+Phase: Buthomar's Declare Attackers Step
+Phase: Buthomar's Beginning of Combat Step
+Resolve Stack: When this enchantment enters, exile target nonland permanent an opponent controls with mana value 2 or less until this enchantment leaves the battlefield. (Targeting: [[Marauding Mako (12)]]) [Zone Changer: Seam Rip (92)]
+Zone Change: Marauding Mako (12) was put into Exile from Battlefield.
+Add To Stack: Buthomar triggered Seam Rip targeting [Marauding Mako (12)]
+Resolve Stack: Seam Rip
+Add To Stack: Buthomar cast Seam Rip
+Mana: Plains (87) - {T}: Add {W}.
+Phase: Buthomar's Main phase, precombat
+Phase: Buthomar's Draw step
+Phase: Buthomar's Upkeep step
+Phase: Buthomar's Untap step
+Turn: Turn 15 (Buthomar)
+Phase: Atlin's Cleanup step
+Phase: Atlin's End step
+Phase: Atlin's Main phase, postcombat
+Phase: Atlin's End of Combat Step
+Zone Change: Elspeth, Storm Slayer (126) was put into Graveyard from Battlefield.
+Phase: Atlin's Combat Damage Step
+Phase: Atlin's First Strike Damage Step
+Combat: Buthomar didn't block Marauding Mako (12).
+Phase: Atlin's Declare Blockers Step
+Combat: Atlin assigned Marauding Mako (12) to attack Elspeth, Storm Slayer (126).
+Phase: Atlin's Declare Attackers Step
+Resolve Stack: At the beginning of combat on your turn, if you've drawn more than one card this turn, put X +1/+1 counters on target creature you control, where X is the number of cards you've drawn this turn minus one. (Targeting: [[Marauding Mako (12)]]) [Phase: Atlin]
+Add To Stack: Atlin triggered Proft's Eidetic Memory targeting [Marauding Mako (12)]
+Phase: Atlin's Beginning of Combat Step
+Resolve Stack: When Proft's Eidetic Memory enters, draw a card. [Zone Changer: Proft's Eidetic Memory (57)]
+Add To Stack: Atlin triggered Proft's Eidetic Memory
+Resolve Stack: Proft's Eidetic Memory
+Add To Stack: Atlin cast Proft's Eidetic Memory
+Mana: Marauding Mako (12) - {0}: Add X mana in any combination of {U} and/or {R}, where X is Marauding Mako's power. Activate only during your turn and only once each turn.
+Resolve Stack: When a creature card is exiled this way, put a +1/+1 counter on target creature you control. (Targeting: [[Marauding Mako (12)]])
+Add To Stack: Atlin triggered Agatha's Soul Cauldron targeting [Marauding Mako (12)]
+Resolve Stack: Agatha's Soul Cauldron (22) - Exile Vivi Ornitier (34) from the graveyard. When a creature card is exiled this way, put a +1/+1 counter on target creature you control. 
+Add To Stack: Atlin activated Agatha's Soul Cauldron targeting [Vivi Ornitier (34)]
+Resolve Stack: Agatha's Soul Cauldron
+Add To Stack: Atlin cast Agatha's Soul Cauldron
+Mana: Spirebluff Canal (1) - {T}: Add {U} or {R}.
+Mana: Mountain (39) - {T}: Add {R}.
+Resolve Stack: Whenever you discard one or more cards, put that many +1/+1 counters on this creature. [Player: Atlin, Amount: 2]
+Add To Stack: Atlin triggered Marauding Mako
+Replacement Effect: Harmonize {4}{U} (You may cast this card from your graveyard for its harmonize cost. You may tap a creature you control to reduce that cost by {X}, where X is its power. Then exile this spell.)
+Resolve Stack: Winternight Stories (23) - Atlin draws three cards. Then discard two cards unless you discard a creature card.
+Discard: Atlin discards Island (47).
+Discard: Atlin discards Agatha's Soul Cauldron (21).
+Add To Stack: Atlin cast Winternight Stories
+Mana: Mountain (37) - {T}: Add {R}.
+Mana: Island (48) - {T}: Add {U}.
+Mana: Island (45) - {T}: Add {U}.
+Mana: Soulstone Sanctuary (53) - {T}: Add {C}.
+Mana: Soulstone Sanctuary (54) - {T}: Add {C}.
+Land: Atlin played Mountain (37)
+Phase: Atlin's Main phase, precombat
+Phase: Atlin's Draw step
+Phase: Atlin's Upkeep step
+Phase: Atlin's Untap step
+Turn: Turn 14 (Atlin)
+Phase: Buthomar's Cleanup step
+Resolve Stack: Into the Flood Maw (50) - Gift a tapped Fish to Buthomar.  Return  to its owner's hand. Return Seam Rip (92) to its owner's hand.
+Replacement Effect: If one or more tokens would be created under your control, twice that many of those tokens are created instead.
+Add To Stack: Atlin cast Into the Flood Maw targeting [] [Seam Rip (92)]
+Mana: Spirebluff Canal (1) - {T}: Add {U} or {R}.
+Phase: Buthomar's End step
+Resolve Stack: Elspeth, Storm Slayer (126) - Destroy Steamcore Scholar (5).
+Zone Change: Steamcore Scholar (5) was put into Graveyard from Battlefield.
+Add To Stack: Buthomar activated Elspeth, Storm Slayer targeting [Steamcore Scholar (5)]
+Resolve Stack: Elspeth, Storm Slayer
+Replacement Effect: Elspeth, Storm Slayer enters with five loyalty counters on it.
+Add To Stack: Buthomar cast Elspeth, Storm Slayer
+Mana: Floodfarm Verge (111) - {T}: Add {U}. Activate only if you control a Plains or an Island.
+Mana: Island (120) - {T}: Add {U}.
+Mana: Island (119) - {T}: Add {U}.
+Mana: Plains (86) - {T}: Add {W}.
+Mana: Plains (87) - {T}: Add {W}.
+Phase: Buthomar's Main phase, postcombat
+Phase: Buthomar's End of Combat Step
+Phase: Buthomar's Combat Damage Step
+Phase: Buthomar's First Strike Damage Step
+Phase: Buthomar's Declare Blockers Step
+Phase: Buthomar's Declare Attackers Step
+Phase: Buthomar's Beginning of Combat Step
+Land: Buthomar played Plains (86)
+Phase: Buthomar's Main phase, precombat
+Phase: Buthomar's Draw step
+Phase: Buthomar's Upkeep step
+Phase: Buthomar's Untap step
+Turn: Turn 13 (Buthomar)
+Phase: Atlin's Cleanup step
+Phase: Atlin's End step
+Phase: Atlin's Main phase, postcombat
+Phase: Atlin's End of Combat Step
+Phase: Atlin's Combat Damage Step
+Phase: Atlin's First Strike Damage Step
+Phase: Atlin's Declare Blockers Step
+Phase: Atlin's Declare Attackers Step
+Phase: Atlin's Beginning of Combat Step
+Resolve Stack: Negate (124) - Counter Proft's Eidetic Memory (58).
+Zone Change: Send countered spell to Graveyard
+Add To Stack: Buthomar cast Negate targeting [Proft's Eidetic Memory]
+Mana: Demolition Field (123) - {T}: Add {C}.
+Mana: Floodfarm Verge (112) - {T}: Add {U}. Activate only if you control a Plains or an Island.
+Add To Stack: Atlin cast Proft's Eidetic Memory
+Mana: Mountain (39) - {T}: Add {R}.
+Mana: Island (48) - {T}: Add {U}.
+Resolve Stack: When Steamcore Scholar enters, draw two cards. Then discard two cards unless you discard an instant or sorcery card or a creature card with flying. [Zone Changer: Steamcore Scholar (5)]
+Discard: Atlin discards Into the Flood Maw (49).
+Add To Stack: Atlin triggered Steamcore Scholar
+Resolve Stack: Steamcore Scholar - Creature 2 / 2
+Add To Stack: Atlin cast Steamcore Scholar
+Mana: Soulstone Sanctuary (53) - {T}: Add {C}.
+Mana: Soulstone Sanctuary (54) - {T}: Add {C}.
+Mana: Island (45) - {T}: Add {U}.
+Land: Atlin played Island (45)
+Phase: Atlin's Main phase, precombat
+Phase: Atlin's Draw step
+Phase: Atlin's Upkeep step
+Phase: Atlin's Untap step
+Turn: Turn 12 (Atlin)
+Phase: Buthomar's Cleanup step
+Phase: Buthomar's End step
+Phase: Buthomar's Main phase, postcombat
+Phase: Buthomar's End of Combat Step
+Phase: Buthomar's Combat Damage Step
+Phase: Buthomar's First Strike Damage Step
+Phase: Buthomar's Declare Blockers Step
+Phase: Buthomar's Declare Attackers Step
+Phase: Buthomar's Beginning of Combat Step
+Resolve Stack: Day of Judgment (115) - Destroy all creatures.
+Zone Change: Vivi Ornitier (34) was put into Graveyard from Battlefield.
+Zone Change: Steamcore Scholar (6) was put into Graveyard from Battlefield.
+Add To Stack: Buthomar cast Day of Judgment
+Mana: Island (120) - {T}: Add {U}.
+Mana: Island (119) - {T}: Add {U}.
+Mana: Floodfarm Verge (111) - {T}: Add {W}.
+Mana: Plains (87) - {T}: Add {W}.
+Land: Buthomar played Plains (87)
+Phase: Buthomar's Main phase, precombat
+Phase: Buthomar's Draw step
+Phase: Buthomar's Upkeep step
+Phase: Buthomar's Untap step
+Turn: Turn 11 (Buthomar)
+Phase: Atlin's Cleanup step
+Phase: Atlin's End step
+Phase: Atlin's Main phase, postcombat
+Phase: Atlin's End of Combat Step
+Life: Life: Buthomar 17 > 14
+Damage: Steamcore Scholar (6) deals 3 combat damage to Buthomar.
+Phase: Atlin's Combat Damage Step
+Phase: Atlin's First Strike Damage Step
+Combat: Buthomar didn't block Steamcore Scholar (6).
+Phase: Atlin's Declare Blockers Step
+Combat: Atlin assigned Steamcore Scholar (6) to attack Buthomar.
+Phase: Atlin's Declare Attackers Step
+Phase: Atlin's Beginning of Combat Step
+Resolve Stack: Vivi Ornitier - Creature 0 / 3
+Add To Stack: Atlin cast Vivi Ornitier
+Mana: Soulstone Sanctuary (53) - {T}: Add {C}.
+Mana: Mountain (39) - {T}: Add {R}.
+Mana: Island (48) - {T}: Add {U}.
+Land: Atlin played Spirebluff Canal (1)
+Replacement Effect: Spirebluff Canal enters tapped unless you control two or fewer other lands.
+Resolve Stack: Map Token (152) - Steamcore Scholar (6) explores. 
+Add To Stack: Atlin activated Map Token targeting [Steamcore Scholar (6)]
+Zone Change: Map Token (152) was put into Graveyard from Battlefield.
+Mana: Soulstone Sanctuary (54) - {T}: Add {C}.
+Phase: Atlin's Main phase, precombat
+Phase: Atlin's Draw step
+Phase: Atlin's Upkeep step
+Phase: Atlin's Untap step
+Turn: Turn 10 (Atlin)
+Phase: Buthomar's Cleanup step
+Phase: Buthomar's End step
+Land: Buthomar played Floodfarm Verge (112)
+Replacement Effect: Omen
+Resolve Stack: Coil and Catch (96) - Buthomar draws three cards. Buthomar discards a card.
+Discard: Buthomar discards Seam Rip (91).
+Add To Stack: Buthomar cast Coil and Catch
+Mana: Demolition Field (123) - {T}: Add {C}.
+Mana: Floodfarm Verge (111) - {T}: Add {U}. Activate only if you control a Plains or an Island.
+Mana: Island (120) - {T}: Add {U}.
+Mana: Island (119) - {T}: Add {U}.
+Phase: Buthomar's Main phase, postcombat
+Phase: Buthomar's End of Combat Step
+Phase: Buthomar's Combat Damage Step
+Phase: Buthomar's First Strike Damage Step
+Phase: Buthomar's Declare Blockers Step
+Phase: Buthomar's Declare Attackers Step
+Phase: Buthomar's Beginning of Combat Step
+Phase: Buthomar's Main phase, precombat
+Phase: Buthomar's Draw step
+Phase: Buthomar's Upkeep step
+Phase: Buthomar's Untap step
+Turn: Turn 9 (Buthomar)
+Phase: Atlin's Cleanup step
+Resolve Stack: Consult the Star Charts (107) - [Buthomar] Look at the top X cards of your library, where X is the number of lands you control. Put one of those cards into your hand. If this spell was kicked, put two of those cards into your hand instead. Put the rest on the bottom of your library in a random order.
+Add To Stack: Buthomar cast Consult the Star Charts
+Mana: Demolition Field (123) - {T}: Add {C}.
+Mana: Island (120) - {T}: Add {U}.
+Phase: Atlin's End step
+Phase: Atlin's Main phase, postcombat
+Phase: Atlin's End of Combat Step
+Phase: Atlin's Combat Damage Step
+Phase: Atlin's First Strike Damage Step
+Phase: Atlin's Declare Blockers Step
+Phase: Atlin's Declare Attackers Step
+Phase: Atlin's Beginning of Combat Step
+Resolve Stack: Map Token (153) - Steamcore Scholar (6) explores. 
+Add To Stack: Atlin activated Map Token targeting [Steamcore Scholar (6)]
+Zone Change: Map Token (153) was put into Graveyard from Battlefield.
+Mana: Soulstone Sanctuary (54) - {T}: Add {C}.
+Land: Atlin played Soulstone Sanctuary (54)
+Resolve Stack: When Steamcore Scholar enters, draw two cards. Then discard two cards unless you discard an instant or sorcery card or a creature card with flying. [Zone Changer: Steamcore Scholar (6)]
+Discard: Atlin discards Twinmaw Stormbrood (36).
+Add To Stack: Atlin triggered Steamcore Scholar
+Resolve Stack: Steamcore Scholar - Creature 2 / 2
+Add To Stack: Atlin cast Steamcore Scholar
+Mana: Soulstone Sanctuary (53) - {T}: Add {C}.
+Mana: Mountain (39) - {T}: Add {R}.
+Mana: Island (48) - {T}: Add {U}.
+Phase: Atlin's Main phase, precombat
+Phase: Atlin's Draw step
+Phase: Atlin's Upkeep step
+Phase: Atlin's Untap step
+Turn: Turn 8 (Atlin)
+Phase: Buthomar's Cleanup step
+Phase: Buthomar's End step
+Phase: Buthomar's Main phase, postcombat
+Phase: Buthomar's End of Combat Step
+Phase: Buthomar's Combat Damage Step
+Phase: Buthomar's First Strike Damage Step
+Phase: Buthomar's Declare Blockers Step
+Phase: Buthomar's Declare Attackers Step
+Phase: Buthomar's Beginning of Combat Step
+Land: Buthomar played Island (120)
+Phase: Buthomar's Main phase, precombat
+Phase: Buthomar's Draw step
+Resolve Stack: Get Lost (127) - Destroy Tersa Lightshatter (59). 
+Zone Change: Tersa Lightshatter (59) was put into Graveyard from Battlefield.
+Add To Stack: Buthomar cast Get Lost targeting [Tersa Lightshatter (59)]
+Mana: Island (119) - {T}: Add {U}.
+Mana: Floodfarm Verge (111) - {T}: Add {W}.
+Phase: Buthomar's Upkeep step
+Phase: Buthomar's Untap step
+Turn: Turn 7 (Buthomar)
+Phase: Atlin's Cleanup step
+Resolve Stack: Consult the Star Charts (109) - [Buthomar] Look at the top X cards of your library, where X is the number of lands you control. Put one of those cards into your hand. If this spell was kicked, put two of those cards into your hand instead. Put the rest on the bottom of your library in a random order.
+Add To Stack: Buthomar cast Consult the Star Charts
+Mana: Floodfarm Verge (111) - {T}: Add {U}. Activate only if you control a Plains or an Island.
+Mana: Island (119) - {T}: Add {U}.
+Phase: Atlin's End step
+Phase: Atlin's Main phase, postcombat
+Phase: Atlin's End of Combat Step
+Life: Life: Buthomar 20 > 17
+Damage: Tersa Lightshatter (59) deals 3 combat damage to Buthomar.
+Phase: Atlin's Combat Damage Step
+Phase: Atlin's First Strike Damage Step
+Combat: Buthomar didn't block Tersa Lightshatter (59).
+Phase: Atlin's Declare Blockers Step
+Combat: Atlin assigned Tersa Lightshatter (59) to attack Buthomar.
+Phase: Atlin's Declare Attackers Step
+Phase: Atlin's Beginning of Combat Step
+Resolve Stack: When Tersa Lightshatter enters, discard up to two cards, then draw that many cards. [Zone Changer: Tersa Lightshatter (59)]
+Discard: Atlin discards Winternight Stories (23).
+Discard: Atlin discards Tersa Lightshatter (60).
+Add To Stack: Atlin triggered Tersa Lightshatter
+Resolve Stack: Tersa Lightshatter - Creature 3 / 3
+Add To Stack: Atlin cast Tersa Lightshatter
+Mana: Soulstone Sanctuary (53) - {T}: Add {C}.
+Mana: Island (48) - {T}: Add {U}.
+Mana: Mountain (39) - {T}: Add {R}.
+Land: Atlin played Soulstone Sanctuary (53)
+Phase: Atlin's Main phase, precombat
+Phase: Atlin's Draw step
+Phase: Atlin's Upkeep step
+Phase: Atlin's Untap step
+Turn: Turn 6 (Atlin)
+Phase: Buthomar's Cleanup step
+Phase: Buthomar's End step
+Phase: Buthomar's Main phase, postcombat
+Phase: Buthomar's End of Combat Step
+Phase: Buthomar's Combat Damage Step
+Phase: Buthomar's First Strike Damage Step
+Phase: Buthomar's Declare Blockers Step
+Phase: Buthomar's Declare Attackers Step
+Phase: Buthomar's Beginning of Combat Step
+Land: Buthomar played Demolition Field (123)
+Phase: Buthomar's Main phase, precombat
+Phase: Buthomar's Draw step
+Phase: Buthomar's Upkeep step
+Phase: Buthomar's Untap step
+Turn: Turn 5 (Buthomar)
+Phase: Atlin's Cleanup step
+Phase: Atlin's End step
+Phase: Atlin's Main phase, postcombat
+Phase: Atlin's End of Combat Step
+Phase: Atlin's Combat Damage Step
+Phase: Atlin's First Strike Damage Step
+Phase: Atlin's Declare Blockers Step
+Phase: Atlin's Declare Attackers Step
+Phase: Atlin's Beginning of Combat Step
+Land: Atlin played Island (48)
+Phase: Atlin's Main phase, precombat
+Phase: Atlin's Draw step
+Phase: Atlin's Upkeep step
+Phase: Atlin's Untap step
+Turn: Turn 4 (Atlin)
+Phase: Buthomar's Cleanup step
+Phase: Buthomar's End step
+Resolve Stack: When this enchantment enters, exile target nonland permanent an opponent controls with mana value 2 or less until this enchantment leaves the battlefield. (Targeting: [[Marauding Mako (12)]]) [Zone Changer: Seam Rip (92)]
+Zone Change: Marauding Mako (12) was put into Exile from Battlefield.
+Add To Stack: Buthomar triggered Seam Rip targeting [Marauding Mako (12)]
+Resolve Stack: Seam Rip
+Add To Stack: Buthomar cast Seam Rip
+Mana: Floodfarm Verge (111) - {T}: Add {W}.
+Phase: Buthomar's Main phase, postcombat
+Phase: Buthomar's End of Combat Step
+Phase: Buthomar's Combat Damage Step
+Phase: Buthomar's First Strike Damage Step
+Phase: Buthomar's Declare Blockers Step
+Phase: Buthomar's Declare Attackers Step
+Phase: Buthomar's Beginning of Combat Step
+Land: Buthomar played Island (119)
+Phase: Buthomar's Main phase, precombat
+Phase: Buthomar's Draw step
+Phase: Buthomar's Upkeep step
+Phase: Buthomar's Untap step
+Turn: Turn 3 (Buthomar)
+Phase: Atlin's Cleanup step
+Phase: Atlin's End step
+Phase: Atlin's Main phase, postcombat
+Phase: Atlin's End of Combat Step
+Phase: Atlin's Combat Damage Step
+Phase: Atlin's First Strike Damage Step
+Phase: Atlin's Declare Blockers Step
+Phase: Atlin's Declare Attackers Step
+Phase: Atlin's Beginning of Combat Step
+Resolve Stack: Marauglding Mako - Creature 1 / 1
+Add To Stack: Atlin cast Marauding Mako
+Mana: Mountain (39) - {T}: Add {R}.
+Land: Atlin played Mountain (39)
+Phase: Atlin's Main phase, precombat
+Phase: Atlin's Draw step
+Phase: Atlin's Upkeep step
+Phase: Atlin's Untap step
+Turn: Turn 2 (Atlin)
+Phase: Buthomar's Cleanup step
+Phase: Buthomar's End step
+Phase: Buthomar's Main phase, postcombat
+Phase: Buthomar's End of Combat Step
+Phase: Buthomar's Combat Damage Step
+Phase: Buthomar's First Strike Damage Step
+Phase: Buthomar's Declare Blockers Step
+Phase: Buthomar's Declare Attackers Step
+Phase: Buthomar's Beginning of Combat Step
+Land: Buthomar played Floodfarm Verge (111)
+Phase: Buthomar's Main phase, precombat
+Phase: Buthomar's Draw step
+Phase: Buthomar's Upkeep step
+Phase: Buthomar's Untap step
+Turn: Turn 1 (Buthomar)
+Mulligan: Atlin has kept a hand of 7 cards
+Mulligan: Buthomar has kept a hand of 6 cards
+Mulligan: Buthomar has mulliganed down to 6 cards.
