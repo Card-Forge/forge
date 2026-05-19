@@ -5,4 +5,4 @@ PT:4/4
 K:Affinity:Artifact
 K:Prototype:3 R:2:2
 DeckHints:Type$Artifact
-Oracle:Prototype {3}{R} – 2/2\nAffinity for artifacts (This spell costs {1} less to cast for each artifact you control.)
+Oracle:Prototype {3}{R} — 2/2\nAffinity for artifacts (This spell costs {1} less to cast for each artifact you control.)

@@ -5,4 +5,4 @@ Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Goad$ True | Description$ Enchanted creature gets +2/+2 and is goaded.
-Oracle:Enchant Creature\nEnchanted creature gets +2/+2 and is goaded.
+Oracle:Enchant creature\nEnchanted creature gets +2/+2 and is goaded.
