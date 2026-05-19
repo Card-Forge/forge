@@ -216,8 +216,9 @@ public class DualCardBox extends FDialog {
         hotkeyHintBase.setVisible(false);
         hotkeyHintMin.setVisible(false);
         // hidemode 3 — when invisible, the hint takes no space so the row collapses.
-        add(hotkeyHintBase, "hidemode 3, growx, wrap");
-        add(hotkeyHintMin, "hidemode 3, growx, wrap");
+        // span 3 centres the hint across both panes plus the button strip.
+        add(hotkeyHintBase, "span 3, hidemode 3, growx, wrap");
+        add(hotkeyHintMin, "span 3, hidemode 3, growx, wrap");
 
         okButton = new FButton(Localizer.getInstance().getMessage("lblOK"));
         okButton.addActionListener(e -> accept());
@@ -301,9 +302,19 @@ public class DualCardBox extends FDialog {
     }
 
     private boolean activateHotkey(final int digit) {
+        if (digit < 1) return false;
+        final int destSize = destList.size();
+        if (digit <= destSize) {
+            final CardView card = destList.remove(digit - 1);
+            poolList.add(card);
+            renderPanes();
+            refreshState();
+            return true;
+        }
         final List<CardView> visible = filteredPool();
-        if (digit < 1 || digit > visible.size()) return false;
-        final CardView card = visible.get(digit - 1);
+        final int poolIndex = digit - destSize - 1;
+        if (poolIndex >= visible.size()) return false;
+        final CardView card = visible.get(poolIndex);
         if (!poolList.remove(card)) return false;
         destList.add(card);
         renderPanes();
@@ -363,8 +374,9 @@ public class DualCardBox extends FDialog {
         assignHotkeyAffordance(!ctrlHeld);
     }
 
+    /** Pool digits continue after dest's order digits so 1..9 picks a unique card across both panes. */
     private void assignHotkeyAffordance(final boolean clear) {
-        int next = 1;
+        int next = destList.size() + 1;
         for (final CardPanel panel : poolPane.getCardPanels()) {
             if (!clear && next <= 9) {
                 panel.setHotkeyDigit(next++);
