@@ -82,6 +82,14 @@ class TestFullLogParse:
         assert len(atlin_spells) > 5, f"Atlin only cast {len(atlin_spells)} unique spells"
         assert len(buthomar_spells) > 5, f"Buthomar only cast {len(buthomar_spells)} unique spells"
 
+    def test_spell_names_clean(self):
+        """Spell card names should not contain brackets or targeting text."""
+        from app.forge_log.events import SpellCast
+        spells = [ev for ev in self.events if isinstance(ev, SpellCast)]
+        for s in spells:
+            assert "[" not in s.card, f"Card name contains bracket: {s.card!r}"
+            assert "targeting" not in s.card.lower(), f"Card name contains targeting: {s.card!r}"
+
     def test_damage_events(self):
         """Expect multiple damage events."""
         from app.forge_log.events import DamageEvent
