@@ -49,7 +49,7 @@ public final class DeckRecognitionManager {
                 client.shutdown();
                 return;
             }
-            final DeckRecognitionObserver observer = new DeckRecognitionObserver(player, game, client);
+            final DeckRecognitionObserver observer = new DeckRecognitionObserver(player, game, client, ai);
             game.subscribeToEvents(observer);
             Logger.info("DeckRecognition: enabled for AI player '" + player + "' via " + url);
         } catch (final RuntimeException | LinkageError ex) {

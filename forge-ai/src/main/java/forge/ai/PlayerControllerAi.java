@@ -766,6 +766,19 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean mulliganKeepHand(Player firstPlayer, int cardsToReturn)  {
+        // Sidecar influence: check MULLIGAN action
+        if (brains.getBoolProperty(AiProps.SIDECAR_INFLUENCE_ENABLE)
+                && brains.getSidecarInfluence().hasData()) {
+            var mullAction = brains.getSidecarInfluence().bestAction("MULLIGAN");
+            if (mullAction.isPresent()) {
+                final String target = mullAction.get().target();
+                if ("keep".equalsIgnoreCase(target)) {
+                    return true; // sidecar says keep
+                } else if ("mulligan".equalsIgnoreCase(target)) {
+                    return false; // sidecar says mulligan
+                }
+            }
+        }
         return !ComputerUtil.wantMulligan(player, cardsToReturn);
     }
 

@@ -10,6 +10,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.google.common.eventbus.Subscribe;
 
+import forge.ai.AiController;
+import forge.ai.AiProps;
 import forge.game.Game;
 import forge.game.GameLogEntryType;
 import forge.game.card.Card;
@@ -48,6 +50,7 @@ public final class DeckRecognitionObserver {
     private final Player aiPlayer;
     private final Game game;
     private final DeckRecognitionClient client;
+    private final AiController aiController;
 
     private final List<Observation> observations = new CopyOnWriteArrayList<>();
     private final AtomicBoolean inFlight = new AtomicBoolean(false);
@@ -60,10 +63,12 @@ public final class DeckRecognitionObserver {
     private volatile String lastPostedMessage = null;
 
     public DeckRecognitionObserver(final Player aiPlayer, final Game game,
-                                   final DeckRecognitionClient client) {
+                                   final DeckRecognitionClient client,
+                                   final AiController aiController) {
         this.aiPlayer = aiPlayer;
         this.game = game;
         this.client = client;
+        this.aiController = aiController;
         this.deckCards = extractDeckCards(aiPlayer);
     }
 
@@ -149,6 +154,17 @@ public final class DeckRecognitionObserver {
         }
     }
 
+    /** Build the personality map from AI profile properties, or empty map. */
+    private Map<String, Object> buildPersonality() {
+        try {
+            final Map<String, Object> p = new java.util.LinkedHashMap<>();
+            p.put("play_aggro", aiController.getBoolProperty(AiProps.PLAY_AGGRO));
+            return p;
+        } catch (final Exception ex) {
+            return Map.of();
+        }
+    }
+
     /** Send one request; on completion, post the guess and honor any rerun. */
     private void fireCall() {
         final RecognitionRequest request = new RecognitionRequest(
@@ -158,11 +174,15 @@ public final class DeckRecognitionObserver {
                 aiPlayer.getId(),
                 game.getPhaseHandler().getTurn(),
                 new ArrayList<>(observations),
-                deckCards);
+                deckCards,
+                buildPersonality());
 
         client.recognizeAsync(request).whenComplete((result, err) -> {
             if (err == null && result != null && result.isPresent()) {
-                postGuess(result.get());
+                final RecognitionResult recResult = result.get();
+                postGuess(recResult);
+                // Store sidecar influence data for AI decision-making
+                aiController.onSidecarResult(recResult);
             }
             inFlight.set(false);
             if (rerunRequested.compareAndSet(true, false)) {
@@ -179,6 +199,11 @@ public final class DeckRecognitionObserver {
             }
             lastPostedMessage = message;
             game.getGameLog().add(GameLogEntryType.INFORMATION, message);
+            // Also log piloting advice with action scores
+            final String pilotingMsg = result.toPilotingLogMessage();
+            if (pilotingMsg != null && !pilotingMsg.isEmpty()) {
+                game.getGameLog().add(GameLogEntryType.INFORMATION, pilotingMsg);
+            }
         } catch (final RuntimeException ex) {
             Logger.debug("DeckRecognition: failed to write guess to log: " + ex.getMessage());
         }

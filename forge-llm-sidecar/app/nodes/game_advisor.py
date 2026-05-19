@@ -105,6 +105,16 @@ def _format_zone(name: str, cards: list[str]) -> str:
     return f"{name}: {', '.join(cards)}" if cards else f"{name}: (empty/unknown)"
 
 
+def _format_personality(personality: dict | None) -> str:
+    """Render the AI's personality profile as compact prompt text."""
+    if not personality:
+        return "(no personality profile provided)"
+    parts = []
+    for k, v in personality.items():
+        parts.append(f"{k}={v}")
+    return "AI personality: " + ", ".join(parts) if parts else "(no traits)"
+
+
 def _build_recognition_prompt(state: GraphState) -> str:
     """Build a recognition-only prompt with no AI deck or piloting context."""
     archetypes = state.get("candidate_archetypes", [])
@@ -144,29 +154,39 @@ def _guide_list(items: list[str], fallback: str) -> str:
 
 
 def _local_piloting_advice(state: GraphState) -> dict:
-    """Return guide-derived piloting advice without an extra LLM call."""
+    """Return guide-derived piloting advice with structured action scores."""
     guide = state.get("piloting_guide") or {}
-    if not guide:
-        return {
-            "recommended_play": "Follow the deck's normal heuristic game plan.",
-            "play_reasoning": "No piloting guide was available for this archetype.",
-            "play_alternatives": [],
-            "mulligan_advice": "",
-        }
-
+    personality = state.get("personality") or {}
     turn = state.get("turn", 0)
     mulligan = guide.get("mulligan", {})
     game_plan = guide.get("game_plan", {})
     key_cards = guide.get("key_cards", [])
+    strategy = guide.get("strategy_type", "").lower()
+
+    # Determine if the AI is aggressive based on personality or strategy.
+    is_aggro = personality.get("play_aggro") in (True, "true", "True") or strategy == "aggro"
+    # Base action percentages derived from guide strategy & personality.
+    base_actions: list[dict] = []
 
     if turn <= 0:
         keep = _guide_list(mulligan.get("keep_criteria", []), "hands that execute the deck plan")
         ship = _guide_list(mulligan.get("mulligan_criteria", []), "hands lacking early action")
+        mulligan_text = f"Keep {keep}. Mulligan {ship}."
+        base_actions = [
+            {
+                "action_type": "MULLIGAN",
+                "target": "keep",
+                "targets": None,
+                "percentage": 70.0 if "Keep" in mulligan_text else 30.0,
+                "reasoning": "Derived from piloting guide mulligan criteria.",
+            }
+        ]
         return {
             "recommended_play": "",
             "play_reasoning": "",
             "play_alternatives": [],
-            "mulligan_advice": f"Keep {keep}. Mulligan {ship}.",
+            "mulligan_advice": mulligan_text,
+            "actions": base_actions,
         }
 
     phase = "early_game" if turn <= 3 else "mid_game" if turn <= 7 else "late_game"
@@ -178,11 +198,84 @@ def _local_piloting_advice(state: GraphState) -> dict:
         if names:
             key = " Prioritize " + ", ".join(names[:2]) + " when the board state supports it."
 
+    # Build structured actions.
+    # PLAY_SPELL: always a primary action, boosted by aggro.
+    spell_pct = 65.0 if is_aggro else 50.0
+    base_actions.append(
+        {
+            "action_type": "PLAY_SPELL",
+            "target": plan.split(";")[0].strip() if ";" in plan else plan.strip(),
+            "targets": None,
+            "percentage": spell_pct,
+            "reasoning": f"{phase} priority from piloting guide.",
+        }
+    )
+
+    # ATTACK: higher priority for aggro/tempo strategies.
+    attack_pct = 50.0 if is_aggro else 25.0
+    base_actions.append(
+        {
+            "action_type": "ATTACK",
+            "target": "all_available",
+            "targets": None,
+            "percentage": attack_pct,
+            "reasoning": "Based on deck strategy and board state.",
+        }
+    )
+
+    # PLAY_LAND: present but medium priority.
+    base_actions.append(
+        {
+            "action_type": "PLAY_LAND",
+            "target": "",
+            "targets": None,
+            "percentage": 40.0,
+            "reasoning": "Advance mana development.",
+        }
+    )
+
+    # ACTIVATE_ABILITY: lower unless key cards mention activated abilities.
+    activate_pct = 25.0
+    base_actions.append(
+        {
+            "action_type": "ACTIVATE_ABILITY",
+            "target": "",
+            "targets": None,
+            "percentage": activate_pct,
+            "reasoning": "Use utility abilities when beneficial.",
+        }
+    )
+
+    # BLOCK: lower for aggro, moderate otherwise.
+    block_pct = 15.0 if is_aggro else 35.0
+    base_actions.append(
+        {
+            "action_type": "BLOCK",
+            "target": "",
+            "targets": None,
+            "percentage": block_pct,
+            "reasoning": "Defensive consideration.",
+        }
+    )
+
+    # PASS: lowest for aggro, moderate for control.
+    pass_pct = 10.0 if is_aggro else 30.0
+    base_actions.append(
+        {
+            "action_type": "PASS",
+            "target": "",
+            "targets": None,
+            "percentage": pass_pct,
+            "reasoning": "Hold up mana or pass when no good play exists.",
+        }
+    )
+
     return {
         "recommended_play": plan + key,
         "play_reasoning": "Derived from the resolved AI piloting guide; no extra LLM call.",
         "play_alternatives": [str(x) for x in alternatives],
         "mulligan_advice": "",
+        "actions": base_actions,
     }
 
 
@@ -228,6 +321,7 @@ def _fail_soft(state: GraphState, exc: Exception) -> GraphState:
         "play_reasoning": "",
         "play_alternatives": [],
         "mulligan_advice": "",
+        "actions": [],
     }
 
 
@@ -296,6 +390,10 @@ async def game_advisor_node(state: GraphState) -> GraphState:
         play_alternatives = []
     play_alternatives = [str(x) for x in play_alternatives][:3]
 
+    raw_actions = piloting_result.get("actions", [])
+    if not isinstance(raw_actions, list):
+        raw_actions = []
+
     return {
         **state,
         "archetype": archetype,
@@ -306,4 +404,5 @@ async def game_advisor_node(state: GraphState) -> GraphState:
         "play_reasoning": str(piloting_result.get("play_reasoning", "")).strip(),
         "play_alternatives": play_alternatives,
         "mulligan_advice": str(piloting_result.get("mulligan_advice", "")).strip(),
+        "actions": raw_actions,
     }

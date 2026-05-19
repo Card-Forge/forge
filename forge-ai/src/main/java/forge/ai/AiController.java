@@ -24,6 +24,8 @@ import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.ChangeZoneAi;
 import forge.ai.ability.LearnAi;
 import forge.ai.llm.DeckRecognitionManager;
+import forge.ai.llm.RecognitionResult;
+import forge.ai.llm.SidecarInfluence;
 import forge.ai.simulation.GameStateEvaluator;
 import forge.ai.simulation.SpellAbilityPicker;
 import forge.card.CardStateName;
@@ -67,6 +69,7 @@ import forge.util.*;
 
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
+import org.tinylog.Logger;
 
 import java.util.*;
 import java.util.concurrent.FutureTask;
@@ -100,12 +103,14 @@ public class AiController {
     private boolean useLivingEnd;
     private List<SpellAbility> skipped;
     private boolean timeoutReached;
+    private final SidecarInfluence sidecarInfluence;
 
     public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
         game = game0;
         memory = new AiCardMemory();
         simPicker = new SpellAbilityPicker(game, player);
+        sidecarInfluence = new SidecarInfluence(this);
         // Optional LLM deck-recognition feature; off by default and fail-soft.
         DeckRecognitionManager.attach(this, player, game);
     }
@@ -116,6 +121,19 @@ public class AiController {
 
     public void setUseSimulation(boolean value) {
         this.useSimulation = value;
+    }
+
+    /**
+     * Called by the sidecar observer when a new recognition result arrives.
+     * Updates the sidecar influence data so decision points can use it.
+     */
+    public void onSidecarResult(final RecognitionResult result) {
+        sidecarInfluence.updateFromResult(result);
+    }
+
+    /** @return the sidecar influence handler with latest action recommendations. */
+    public SidecarInfluence getSidecarInfluence() {
+        return sidecarInfluence;
     }
 
     public int getAttackAggression() {
@@ -647,6 +665,10 @@ public class AiController {
 
         // pick the land with the best score.
         // use the evaluation plus a modifier for each new color pip and basic type
+        final String sidecarRecommendedLand = getBoolProperty(AiProps.SIDECAR_INFLUENCE_ENABLE)
+                && sidecarInfluence.hasData()
+                ? sidecarInfluence.bestAction("PLAY_LAND").map(a -> a.target()).orElse("")
+                : "";
         Card toReturn = Aggregates.itemWithMax(IterableUtil.filter(landList, Card::hasPlayableLandFace),
                 (card -> {
                     // base score is for the evaluation score
@@ -679,6 +701,14 @@ public class AiController {
                     for (int i = 0; i < card_counts.length; i++) {
                         int diff = (card_counts[i] * 50) / (counts[i] + 1);
                         score += diff;
+                    }
+
+                    // Sidecar influence: boost land matching recommendation
+                    if (!sidecarRecommendedLand.isEmpty()
+                            && (card.getName().equalsIgnoreCase(sidecarRecommendedLand)
+                                    || card.getName().contains(sidecarRecommendedLand))) {
+                        int landBias = getIntProperty(AiProps.SIDECAR_BIAS_LAND);
+                        score += landBias;
                     }
 
                     // TODO utility lands only if we have enough to pay their costs
@@ -1290,6 +1320,18 @@ public class AiController {
 
     // declares blockers for given defender in a given combat
     public void declareBlockersFor(Player defender, Combat combat) {
+        // Sidecar influence: check if blocking is recommended
+        if (getBoolProperty(AiProps.SIDECAR_INFLUENCE_ENABLE) && sidecarInfluence.hasData()) {
+            var blockAction = sidecarInfluence.bestAction("BLOCK");
+            if (blockAction.isPresent()) {
+                double biasPct = getIntProperty(AiProps.SIDECAR_BIAS_BLOCK) / 100.0;
+                double effectivePct = blockAction.get().percentage() * biasPct;
+                if (effectivePct < 20.0 && defender == player) {
+                    // Sidecar strongly discourages blocking — don't block
+                    return;
+                }
+            }
+        }
         AiBlockController block = new AiBlockController(defender, defender != player);
         // When player != defender, AI should declare blockers for its benefit.
         block.assignBlockersForCombat(combat);
@@ -1299,6 +1341,21 @@ public class AiController {
         // 12/2/10(sol) the decision making here has moved to getAttackers()
         AiAttackController aiAtk = new AiAttackController(attacker);
         lastAttackAggression = aiAtk.declareAttackers(combat);
+
+        // Sidecar influence: adjust attack commitment
+        if (getBoolProperty(AiProps.SIDECAR_INFLUENCE_ENABLE) && sidecarInfluence.hasData()) {
+            var attackAction = sidecarInfluence.bestAction("ATTACK");
+            if (attackAction.isPresent()) {
+                double biasPct = getIntProperty(AiProps.SIDECAR_BIAS_ATTACK) / 100.0;
+                double effectivePct = attackAction.get().percentage() * biasPct;
+                if (effectivePct < 25.0 && !combat.getAttackers().isEmpty()) {
+                    // Sidecar discourages attacking — clear attackers
+                    combat.clearAttackers();
+                    lastAttackAggression = 0;
+                    Logger.debug("AiController: sidecar discouraged attack (eff %.0f%%)", effectivePct);
+                }
+            }
+        }
 
         aiAtk.reinforceWithBanding(combat);
 
@@ -1578,6 +1635,66 @@ public class AiController {
         return chosenSa;
     }
 
+    /**
+     * If sidecar influence is enabled, check if it recommends a specific
+     * PLAY_SPELL or ACTIVATE_ABILITY action for a card we can play.
+     */
+    private SpellAbility trySidecarRecommendedPlay(final List<SpellAbility> all, boolean skipCounter) {
+        if (!getBoolProperty(AiProps.SIDECAR_INFLUENCE_ENABLE) || !sidecarInfluence.hasData()) {
+            return null;
+        }
+        // Check PLAY_SPELL recommendations
+        var spellAction = sidecarInfluence.bestAction("PLAY_SPELL");
+        if (spellAction.isPresent()) {
+            final String targetCard = spellAction.get().target();
+            if (targetCard != null && !targetCard.isEmpty()) {
+                for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
+                    if (skipCounter && sa.getApi() == ApiType.Counter) continue;
+                    sa.setActivatingPlayer(player);
+                    final String cardName = sa.getHostCard() != null ? sa.getHostCard().getName() : "";
+                    if (cardName.equalsIgnoreCase(targetCard) || cardName.contains(targetCard)) {
+                        if (canPlayAndPayFor(sa) == AiPlayDecision.WillPlay) {
+                            return sa;
+                        }
+                    }
+                }
+            }
+        }
+        // Check ACTIVATE_ABILITY recommendations
+        var abilityAction = sidecarInfluence.bestAction("ACTIVATE_ABILITY");
+        if (abilityAction.isPresent()) {
+            final String targetCard = abilityAction.get().target();
+            if (targetCard != null && !targetCard.isEmpty()) {
+                for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {
+                    sa.setActivatingPlayer(player);
+                    final String cardName = sa.getHostCard() != null ? sa.getHostCard().getName() : "";
+                    if (cardName.equalsIgnoreCase(targetCard) || cardName.contains(targetCard)) {
+                        if (canPlayAndPayFor(sa) == AiPlayDecision.WillPlay) {
+                            return sa;
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Check if the sidecar recommends PASS (do nothing) with high enough
+     * confidence to skip looking for plays.
+     */
+    private boolean sidecarRecommendsPass() {
+        if (!getBoolProperty(AiProps.SIDECAR_INFLUENCE_ENABLE) || !sidecarInfluence.hasData()) {
+            return false;
+        }
+        var passAction = sidecarInfluence.bestAction("PASS");
+        if (passAction.isPresent()) {
+            double biasPct = getIntProperty(AiProps.SIDECAR_BIAS_PASS) / 100.0;
+            return passAction.get().percentage() * biasPct > 50.0;
+        }
+        return false;
+    }
+
     private SpellAbility chooseSpellAbilityToPlayFromList(final List<SpellAbility> all, boolean skipCounter) {
         if (all == null || all.isEmpty())
             return null;
@@ -1595,6 +1712,19 @@ public class AiController {
         timeoutReached = false;
 
         FutureTask<SpellAbility> future = new FutureTask<>(() -> {
+            // Phase 1: Sidecar-recommended plays (if enabled and has data)
+            if (getBoolProperty(AiProps.SIDECAR_INFLUENCE_ENABLE) && sidecarInfluence.hasData()) {
+                SpellAbility sidecarPick = trySidecarRecommendedPlay(all, skipCounter);
+                if (sidecarPick != null) {
+                    Logger.debug("AiController: sidecar recommended play %s", sidecarPick);
+                    return sidecarPick;
+                }
+                // If sidecar strongly recommends PASS, skip looking for plays
+                if (sidecarRecommendsPass()) {
+                    Logger.debug("AiController: sidecar recommends PASS");
+                    return null;
+                }
+            }
             //avoid ComputerUtil.aiLifeInDanger in loops as it slows down a lot.. call this outside loops will generally be fast...
             boolean isLifeInDanger = useLivingEnd && ComputerUtil.aiLifeInDanger(player, true, 0);
             for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player)) {

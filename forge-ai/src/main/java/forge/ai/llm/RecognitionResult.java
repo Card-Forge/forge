@@ -1,6 +1,7 @@
 package forge.ai.llm;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -28,7 +29,14 @@ public record RecognitionResult(
             @SerializedName("recommended_play") String recommendedPlay,
             String reasoning,
             List<String> alternatives,
-            @SerializedName("mulligan_advice") String mulliganAdvice) {
+            @SerializedName("mulligan_advice") String mulliganAdvice,
+            List<ActionScore> actions) {
+
+        public PilotingAdvice {
+            if (actions == null) {
+                actions = List.of();
+            }
+        }
     }
 
     /** Human-readable one-liner suitable for the game log. */
@@ -48,9 +56,21 @@ public record RecognitionResult(
         final boolean hasMulligan = piloting.mulliganAdvice() != null
                 && !piloting.mulliganAdvice().isEmpty();
         final String advice = hasMulligan ? piloting.mulliganAdvice() : piloting.recommendedPlay();
-        if (advice == null || advice.isEmpty()) {
-            return null;
+        final StringBuilder sb = new StringBuilder();
+        if (advice != null && !advice.isEmpty()) {
+            sb.append(String.format("LLM piloting advice (%s): %s", piloting.ownArchetype(), advice));
         }
-        return String.format("LLM piloting advice (%s): %s", piloting.ownArchetype(), advice);
+        // Append structured action scores
+        if (piloting.actions() != null && !piloting.actions().isEmpty()) {
+            final String actionLine = piloting.actions().stream()
+                    .limit(3)
+                    .map(ActionScore::toLogMessage)
+                    .collect(Collectors.joining(" | "));
+            if (sb.length() > 0) {
+                sb.append(" | ");
+            }
+            sb.append("Actions: ").append(actionLine);
+        }
+        return sb.length() > 0 ? sb.toString() : null;
     }
 }

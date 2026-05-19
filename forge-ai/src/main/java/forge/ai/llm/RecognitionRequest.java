@@ -40,7 +40,9 @@ public record RecognitionRequest(
         /** Card names in the opponent's graveyard. */
         @SerializedName("opponent_graveyard") List<String> opponentGraveyard,
         /** Player name/seat -> life total. */
-        @SerializedName("life_totals") Map<String, Integer> lifeTotals) {
+        @SerializedName("life_totals") Map<String, Integer> lifeTotals,
+        /** AI personality traits from the AI profile. */
+        Map<String, Object> personality) {
 
     /** Identifier this (Forge) adapter sends as the {@code client} field. */
     public static final String CLIENT = "forge";
@@ -53,6 +55,17 @@ public record RecognitionRequest(
                               final int opponentSeat, final int turn,
                               final List<Observation> observations, final List<String> deckCards) {
         this(client, gameId, format, opponentSeat, turn, observations, deckCards,
-                List.of(), List.of(), List.of(), List.of(), List.of(), Map.of());
+                List.of(), List.of(), List.of(), List.of(), List.of(), Map.of(), Map.of());
+    }
+
+    /**
+     * Full constructor including personality.
+     */
+    public RecognitionRequest(final String client, final String gameId, final String format,
+                              final int opponentSeat, final int turn,
+                              final List<Observation> observations, final List<String> deckCards,
+                              final Map<String, Object> personality) {
+        this(client, gameId, format, opponentSeat, turn, observations, deckCards,
+                List.of(), List.of(), List.of(), List.of(), List.of(), Map.of(), personality);
     }
 }

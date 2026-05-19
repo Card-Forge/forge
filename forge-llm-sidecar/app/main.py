@@ -15,6 +15,7 @@ from app.graph import get_graph
 from app.knowledge import metagame, piloting
 from app.llm_client import is_reachable
 from app.schema import (
+    ActionScore,
     PilotingAdvice,
     RecognitionRequest,
     RecognitionResponse,
@@ -122,9 +123,12 @@ async def recognize(req: RecognitionRequest) -> RecognitionResponse:
         "your_graveyard": req.your_graveyard,
         "opponent_graveyard": req.opponent_graveyard,
         "life_totals": req.life_totals,
+        "personality": req.personality,
         "alternatives": [],
     }
     final = await graph.ainvoke(initial)
+    raw_actions = final.get("actions") or []
+    actions = [ActionScore(**a) for a in raw_actions if isinstance(a, dict)]
     piloting_advice = PilotingAdvice(
         own_archetype=final.get("own_archetype") or "Unknown",
         guide_source=final.get("guide_source") or "",
@@ -132,6 +136,7 @@ async def recognize(req: RecognitionRequest) -> RecognitionResponse:
         reasoning=final.get("play_reasoning") or "",
         alternatives=final.get("play_alternatives") or [],
         mulligan_advice=final.get("mulligan_advice") or "",
+        actions=actions,
     )
 
     _store = get_store()
@@ -145,6 +150,7 @@ async def recognize(req: RecognitionRequest) -> RecognitionResponse:
             "reasoning": (final.get("reasoning") or "")[:300],
             "alternatives": final.get("alternatives") or [],
             "piloting": piloting_advice.model_dump(),
+            "actions": [a.model_dump() for a in actions],
         }
     )
 
@@ -218,10 +224,13 @@ async def forge_log_analyze(req: ForgeLogAnalyzeRequest) -> ForgeLogAnalyzeRespo
             "your_graveyard": cp.your_graveyard,
             "opponent_graveyard": cp.opponent_graveyard,
             "life_totals": cp.life_totals,
+            "personality": {},
             "alternatives": [],
         }
         final = await graph.ainvoke(initial)
 
+        raw_actions = final.get("actions") or []
+        actions = [ActionScore(**a) for a in raw_actions if isinstance(a, dict)]
         piloting_advice = PilotingAdvice(
             own_archetype=final.get("own_archetype") or "Unknown",
             guide_source=final.get("guide_source") or "",
@@ -229,6 +238,7 @@ async def forge_log_analyze(req: ForgeLogAnalyzeRequest) -> ForgeLogAnalyzeRespo
             reasoning=final.get("play_reasoning") or "",
             alternatives=final.get("play_alternatives") or [],
             mulligan_advice=final.get("mulligan_advice") or "",
+            actions=actions,
         )
         resp = RecognitionResponse(
             archetype=final.get("archetype") or "Unknown",

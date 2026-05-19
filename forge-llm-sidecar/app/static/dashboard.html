@@ -522,12 +522,31 @@
       let pilotingHtml = '';
       if (entry.piloting) {
         const p = entry.piloting;
+        let actionsHtml = '';
+        if (p.actions && p.actions.length > 0) {
+          const sorted = [...p.actions].sort((a, b) => b.percentage - a.percentage);
+          actionsHtml = '<div class="piloting-label" style="margin-top:6px">Action Scores</div>';
+          sorted.slice(0, 6).forEach(a => {
+            const pct = Math.round(a.percentage);
+            const barColor = pct >= 60 ? 'var(--green)' : pct >= 30 ? 'var(--yellow)' : 'var(--red)';
+            actionsHtml += `
+              <div style="display:flex;align-items:center;gap:6px;padding:2px 0;font-size:12px">
+                <span style="min-width:100px;font-family:var(--mono);font-weight:500">${escapeHtml(a.action_type)}</span>
+                <div style="flex:1;height:4px;background:var(--bg);border-radius:2px;overflow:hidden">
+                  <div style="height:100%;width:${pct}%;background:${barColor};border-radius:2px;transition:width 0.3s"></div>
+                </div>
+                <span style="min-width:32px;text-align:right;font-family:var(--mono);color:var(--text-dim)">${pct}%</span>
+              </div>
+            `;
+          });
+        }
         pilotingHtml = `
           <div class="piloting-section">
             <div class="piloting-label">Piloting Advice</div>
             <div class="piloting-value">${escapeHtml(p.recommended_play || p.mulligan_advice || 'No advice')}</div>
             ${p.reasoning ? `<div class="reasoning">${escapeHtml(p.reasoning)}</div>` : ''}
             <div class="piloting-label" style="margin-top:6px">Own Archetype: ${escapeHtml(p.own_archetype)}</div>
+            ${actionsHtml}
           </div>
         `;
       }

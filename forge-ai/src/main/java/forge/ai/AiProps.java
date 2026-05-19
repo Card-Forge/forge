@@ -147,7 +147,16 @@ public enum AiProps { /** */
     SIDEBOARDING_SHARED_TYPE_ONLY("false"),
     SIDEBOARDING_PLANESWALKER_EQ_CREATURE("false"),
     DECK_RECOGNITION_ENABLE("false"),
-    DECK_RECOGNITION_SIDECAR_URL("http://localhost:8000");
+    DECK_RECOGNITION_SIDECAR_URL("http://localhost:18970"),
+    // Sidecar action influence feature flags (all off by default)
+    SIDECAR_INFLUENCE_ENABLE("false"),              // master switch for sidecar -> AI influence
+    SIDECAR_BIAS_SPELL_PLAY("50"),                  // max % boost when sidecar recommends a spell
+    SIDECAR_BIAS_LAND("30"),                        // max % boost when sidecar recommends a land
+    SIDECAR_BIAS_ATTACK("50"),                      // max % boost when sidecar recommends attack
+    SIDECAR_BIAS_BLOCK("50"),                       // max % boost when sidecar recommends blocking
+    SIDECAR_BIAS_ABILITY("30"),                     // max % boost when sidecar recommends an ability
+    SIDECAR_BIAS_PASS("40"),                        // how much sidecar PASS recommendation affects do-nothing
+    SIDECAR_PERSONALITY_WEIGHT("100");              // 0=no personality effect, 100=full effect
     // Experimental features, must be promoted or removed after extensive testing and, ideally, defaulting
     // <-- There are no experimental options here -->
 

@@ -1,10 +1,12 @@
 """Graph + knowledge tests. Network calls (LLM, Scryfall) are stubbed out."""
 
 import pytest
+from pydantic import ValidationError
 
 from app.graph import get_graph
 from app.knowledge import format_detect, loader, metagame
 from app.nodes import game_advisor
+from app.schema import ActionScore, RecognitionRequest
 
 
 @pytest.fixture(autouse=True)
@@ -280,3 +282,220 @@ def test_merge_keeps_unmatched_curated():
     names = {a["name"] for a in merged}
     assert "Boros Energy" in names
     assert len(merged) >= len(curated)
+
+
+# ── ActionScore & personality tests ─────────────────────────────────────────
+
+
+class TestActionScore:
+    """Unit tests for the ActionScore model."""
+
+    def test_schema_accepts_valid_action(self):
+        action = ActionScore(
+            action_type="PLAY_SPELL",
+            target="Lightning Bolt",
+            percentage=85.0,
+            reasoning="Best removal available.",
+        )
+        assert action.action_type == "PLAY_SPELL"
+        assert action.target == "Lightning Bolt"
+        assert action.percentage == 85.0
+
+    def test_schema_defaults(self):
+        action = ActionScore()
+        assert action.action_type == ""
+        assert action.target is None
+        assert action.targets is None
+        assert action.percentage == 0.0
+        assert action.reasoning == ""
+
+    def test_schema_allows_list_targets(self):
+        action = ActionScore(
+            action_type="ATTACK",
+            target="all_available",
+            targets=["Goblin Guide", "Monastery Swiftspear"],
+            percentage=90.0,
+        )
+        assert action.targets == ["Goblin Guide", "Monastery Swiftspear"]
+
+    def test_schema_rejects_bad_percentage_type(self):
+        with pytest.raises(ValidationError):
+            ActionScore(action_type="PLAY_SPELL", percentage="not-a-number")
+
+
+class TestPersonalityInRequest:
+    """Tests for personality field in RecognitionRequest."""
+
+    def test_personality_defaults_empty(self):
+        req = RecognitionRequest(game_id="g1", format="Modern")
+        assert req.personality == {}
+
+    def test_personality_accepts_traits(self):
+        req = RecognitionRequest(
+            game_id="g1",
+            format="Modern",
+            personality={"play_aggro": True, "mulligan_threshold": 5},
+        )
+        assert req.personality["play_aggro"] is True
+        assert req.personality["mulligan_threshold"] == 5
+
+
+class TestActionsInGraphOutput:
+    """Tests that the graph returns structured actions in its output."""
+
+    @pytest.mark.asyncio
+    async def test_graph_returns_actions(self, monkeypatch, sample_state):
+        async def fake_generate_json(prompt, system=None):
+            return {
+                "archetype": "Boros Energy",
+                "confidence": 0.8,
+                "reasoning": "Red cards.",
+                "alternatives": [],
+            }
+
+        monkeypatch.setattr(game_advisor, "generate_json", fake_generate_json)
+        result = await get_graph().ainvoke(sample_state)
+        assert "actions" in result
+        assert isinstance(result["actions"], list)
+        assert len(result["actions"]) > 0
+        # Validate action structure
+        for action in result["actions"]:
+            assert "action_type" in action
+            assert "percentage" in action
+            assert 0.0 <= action["percentage"] <= 100.0
+
+    @pytest.mark.asyncio
+    async def test_graph_returns_mulligan_action_turn_0(self, monkeypatch):
+        state = {
+            "game_id": "mull-test",
+            "format": "Constructed",
+            "turn": 0,
+            "observations": [],
+            "deck_cards": ["Lightning Bolt", "Mountain"],
+            "hand": ["Mountain", "Lightning Bolt", "Mountain", "Fireball"],
+            "own_board": [],
+            "alternatives": [],
+        }
+        game_advisor._resolved_format["mull-test"] = "modern"
+
+        async def fake_generate_json(prompt, system=None):
+            return {
+                "archetype": "Unknown",
+                "confidence": 0.0,
+                "reasoning": "No plays observed yet.",
+                "alternatives": [],
+            }
+
+        monkeypatch.setattr(game_advisor, "generate_json", fake_generate_json)
+        result = await get_graph().ainvoke(state)
+        assert "actions" in result
+        actions = result["actions"]
+        types = {a.get("action_type") for a in actions}
+        assert "MULLIGAN" in types
+        # MULLIGAN should be the only action on turn 0
+        assert len(actions) == 1
+        assert actions[0]["action_type"] == "MULLIGAN"
+
+    @pytest.mark.asyncio
+    async def test_personality_influences_aggro_action_percentages(self, monkeypatch):
+        """Aggro personality should boost ATTACK and PLAY_SPELL percentages."""
+        aggro_state = {
+            "game_id": "aggro-test",
+            "format": "Constructed",
+            "turn": 5,
+            "observations": [
+                {
+                    "turn": 1,
+                    "event": "land",
+                    "card": "Mountain",
+                    "cmc": 0,
+                    "colors": ["R"],
+                    "types": ["Land"],
+                }
+            ],
+            "deck_cards": ["Ragavan, Nimble Pilferer", "Lightning Bolt", "Mountain"],
+            "hand": ["Lightning Bolt"],
+            "own_board": ["Mountain", "Mountain"],
+            "alternatives": [],
+            "personality": {"play_aggro": True},
+        }
+        non_aggro_state = {
+            "game_id": "control-test",
+            "format": "Constructed",
+            "turn": 5,
+            "observations": [
+                {
+                    "turn": 1,
+                    "event": "land",
+                    "card": "Island",
+                    "cmc": 0,
+                    "colors": ["U"],
+                    "types": ["Land"],
+                }
+            ],
+            "deck_cards": ["Counterspell", "Dig Through Time", "Island"],
+            "hand": ["Counterspell"],
+            "own_board": ["Island", "Island"],
+            "alternatives": [],
+            "personality": {},
+        }
+        game_advisor._resolved_format["aggro-test"] = "modern"
+        game_advisor._resolved_format["control-test"] = "modern"
+
+        async def fake_generate_json(prompt, system=None):
+            return {
+                "archetype": "Unknown",
+                "confidence": 0.5,
+                "reasoning": "Generic test.",
+                "alternatives": [],
+            }
+
+        monkeypatch.setattr(game_advisor, "generate_json", fake_generate_json)
+        aggro_result = await get_graph().ainvoke(aggro_state)
+        non_aggro_result = await get_graph().ainvoke(non_aggro_state)
+
+        aggro_actions = {a["action_type"]: a for a in aggro_result["actions"]}
+        non_aggro_actions = {a["action_type"]: a for a in non_aggro_result["actions"]}
+
+        # Aggro should have higher ATTACK percentage than non-aggro
+        assert aggro_actions["ATTACK"]["percentage"] > non_aggro_actions["ATTACK"]["percentage"]
+        # Aggro should have higher PLAY_SPELL percentage than non-aggro
+        assert (
+            aggro_actions["PLAY_SPELL"]["percentage"]
+            > non_aggro_actions["PLAY_SPELL"]["percentage"]
+        )
+        # Aggro should have much lower PASS percentage than non-aggro
+        assert aggro_actions["PASS"]["percentage"] < non_aggro_actions["PASS"]["percentage"]
+
+    def test_actions_visible_in_dashboard_via_store(self):
+        """Verify actions are included in the store recording format."""
+        from app.store import RequestStore
+
+        store = RequestStore()
+        store.record(
+            {
+                "game_id": "g1",
+                "actions": [
+                    {
+                        "action_type": "PLAY_SPELL",
+                        "percentage": 85.0,
+                        "reasoning": "Test",
+                        "target": None,
+                        "targets": None,
+                    },
+                    {
+                        "action_type": "ATTACK",
+                        "percentage": 60.0,
+                        "reasoning": "Test",
+                        "target": "all_available",
+                        "targets": None,
+                    },
+                ],
+            }
+        )
+        entry = store.last_entry
+        assert entry is not None
+        assert "actions" in entry
+        assert len(entry["actions"]) == 2
+        assert entry["actions"][0]["action_type"] == "PLAY_SPELL"
+        assert entry["actions"][0]["percentage"] == 85.0

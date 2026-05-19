@@ -7,7 +7,8 @@ from typing import TypedDict
 from pydantic import BaseModel, Field
 
 # v2 adds the piloting advice block to the response (see PilotingAdvice).
-SCHEMA_VERSION = 2
+# v3 adds structured ActionScore with personality weighting.
+SCHEMA_VERSION = 3
 
 
 class Observation(BaseModel):
@@ -19,6 +20,18 @@ class Observation(BaseModel):
     cmc: int = 0
     colors: list[str] = Field(default_factory=list)
     types: list[str] = Field(default_factory=list)
+
+
+class ActionScore(BaseModel):
+    """A scored action recommendation from the LLM piloting advice."""
+
+    action_type: str = (
+        ""  # PLAY_SPELL | PLAY_LAND | ATTACK | BLOCK | ACTIVATE_ABILITY | MULLIGAN | PASS
+    )
+    target: str | None = None  # primary target (card name, "all_attackers", etc.)
+    targets: list[str] | None = None  # secondary / multiple targets
+    percentage: float = 0.0  # 0.0–100.0 — how good this action is
+    reasoning: str = ""
 
 
 class RecognitionRequest(BaseModel):
@@ -41,6 +54,8 @@ class RecognitionRequest(BaseModel):
     your_graveyard: list[str] = Field(default_factory=list)
     opponent_graveyard: list[str] = Field(default_factory=list)
     life_totals: dict[str, int] = Field(default_factory=dict)
+    # AI personality profile. Sent so the LLM can factor it into action scoring.
+    personality: dict[str, str | int | float | bool] = Field(default_factory=dict)
 
 
 class PilotingAdvice(BaseModel):
@@ -52,6 +67,9 @@ class PilotingAdvice(BaseModel):
     reasoning: str = ""
     alternatives: list[str] = Field(default_factory=list)
     mulligan_advice: str = ""  # populated on turn 0 instead of recommended_play
+    actions: list[ActionScore] = Field(
+        default_factory=list
+    )  # structured action recommendations with percentages
 
 
 class TrainingExample(BaseModel):
@@ -101,6 +119,7 @@ class GraphState(TypedDict, total=False):
     your_graveyard: list[str]
     opponent_graveyard: list[str]
     life_totals: dict[str, int]
+    personality: dict[str, str | int | float | bool]
     # resolved by the game_advisor node
     resolved_format: str | None
     candidate_archetypes: list[dict]
@@ -117,3 +136,4 @@ class GraphState(TypedDict, total=False):
     play_alternatives: list[str]
     mulligan_advice: str | None
     guide_source: str | None
+    actions: list[dict]
