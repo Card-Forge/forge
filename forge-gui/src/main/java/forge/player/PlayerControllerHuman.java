@@ -2398,11 +2398,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return lobbyPlayer == GamePlayerUtil.getGuiPlayer();
     }
 
-    @Override
-    public boolean isHuman() {
-        return true;
-    }
-
     public void updateAchievements() {
         AchievementCollection.updateAll(this);
     }

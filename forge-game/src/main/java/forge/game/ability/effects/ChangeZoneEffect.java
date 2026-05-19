@@ -1561,7 +1561,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
     }
 
     private static boolean allowMultiSelect(Player decider, SpellAbility sa) {
-        return decider.getController().isHuman()
+        return !decider.getController().isAI()
                 && !sa.hasParam("ShareLandType")
                 && !sa.hasParam("DifferentNames")
                 && !sa.hasParam("DifferentPower")

@@ -86,10 +86,6 @@ public abstract class PlayerController {
         return false;
     }
 
-    public boolean isHuman() {
-        return false;
-    }
-
     public Game getGame() { return gameView.getGame(); }
     public Match getMatch() { return gameView.getMatch(); }
     public Player getPlayer() { return player; }
