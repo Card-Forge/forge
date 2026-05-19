@@ -69,6 +69,7 @@ import forge.util.IHasForgeLog;
 import forge.gamemodes.match.YieldMarker;
 import forge.gamemodes.net.NetworkGuiGame;
 import forge.interfaces.IGameController;
+import forge.gui.DualCardBox;
 import forge.gui.FNetOverlay;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
@@ -1271,7 +1272,36 @@ public final class CMatchUI
     @Override
     public <T> OrderResult<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
             final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode, final boolean showRememberCheckbox) {
+        if (canUseDualCardBox(sourceChoices, destChoices, sideboardingMode)) {
+            @SuppressWarnings("unchecked")
+            List<CardView> source = (List<CardView>) sourceChoices;
+            @SuppressWarnings("unchecked")
+            List<CardView> dest = (List<CardView>) destChoices;
+            @SuppressWarnings("unchecked")
+            List<T> result = (List<T>) DualCardBox.show(this, title, top,
+                    remainingObjectsMin, remainingObjectsMax, source, dest, referenceCard);
+            return new OrderResult<>(result, false);
+        }
         return GuiChoose.order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode, showRememberCheckbox, this);
+    }
+
+    private static final int DUAL_CARD_BOX_MAX_TOTAL = 9;
+
+    private boolean canUseDualCardBox(final List<?> sourceChoices, final List<?> destChoices, final boolean sideboardingMode) {
+        if (sideboardingMode) return false;
+        if (!FModel.getPreferences().getPrefBoolean(FPref.UI_SELECT_FROM_CARD_DISPLAYS)) return false;
+        final int total = (sourceChoices != null ? sourceChoices.size() : 0)
+                + (destChoices != null ? destChoices.size() : 0);
+        if (total > DUAL_CARD_BOX_MAX_TOTAL) return false;
+        return allCardViews(sourceChoices) && allCardViews(destChoices);
+    }
+
+    private static boolean allCardViews(final List<?> list) {
+        if (list == null) return true;
+        for (Object o : list) {
+            if (!(o instanceof CardView)) return false;
+        }
+        return true;
     }
 
     @Override
