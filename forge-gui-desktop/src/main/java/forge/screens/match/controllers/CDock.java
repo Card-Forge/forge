@@ -108,7 +108,12 @@ public class CDock implements ICDoc {
         view.getButton(DockButtonId.AUTO_PASS).setActive(FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS));
         final VDock.DockButton targeting = view.getButton(DockButtonId.TARGETING);
         targeting.setActive(arcs != ArcState.OFF);
-        targeting.setImage(FSkin.getIcon(arcs == ArcState.ON ? FSkinProp.ICO_ARCSON : FSkinProp.ICO_ARCSOFF));
+        final FSkinProp arcIcon = switch (arcs) {
+            case ON -> FSkinProp.ICO_ARCSON;
+            case MOUSEOVER -> FSkinProp.ICO_ARCSHOVER;
+            case OFF -> FSkinProp.ICO_ARCSOFF;
+        };
+        targeting.setImage(FSkin.getIcon(arcIcon));
         final Localizer loc = Localizer.getInstance();
         final String stateKey = switch (arcs) {
             case OFF -> "lblOff";
