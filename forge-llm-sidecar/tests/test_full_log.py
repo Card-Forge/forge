@@ -130,3 +130,76 @@ class TestAdapterFullLog:
         cps = adapter.parse(LOG_CONTENT)
         turns = {cp.turn for cp in cps}
         assert len(turns) >= 20, f"Only {len(turns)} unique turns in checkpoints"
+
+    def test_adapter_final_life(self):
+        """Final checkpoint should reflect game-ending life total."""
+        adapter = ForgeLogAdapter(game_id="test", format="Standard")
+        adapter.set_opponent("Atlin")
+        adapter.set_ai_player("Buthomar")
+        cps = adapter.parse(LOG_CONTENT)
+        final = cps[-1]
+        # Life reaching 0 or below triggers a checkpoint
+        assert final.life_totals.get("Atlin") == -2
+        assert final.life_totals.get("Buthomar") == 12
+
+    def test_adapter_state_final_life_after_all_events(self):
+        """State should reflect final life after processing all events."""
+        adapter = ForgeLogAdapter(game_id="test", format="Standard")
+        adapter.set_opponent("Atlin")
+        adapter.set_ai_player("Buthomar")
+        adapter.parse(LOG_CONTENT)
+        # After all events processed, Atlin should be at -2
+        assert adapter.state.players["Atlin"].life == -2
+        assert adapter.state.players["Buthomar"].life == 12
+
+    def test_adapter_opponent_board(self):
+        """Opponent board should contain lands and permanents."""
+        adapter = ForgeLogAdapter(game_id="test", format="Standard")
+        adapter.set_opponent("Atlin")
+        adapter.set_ai_player("Buthomar")
+        cps = adapter.parse(LOG_CONTENT)
+        final = cps[-1]
+        # Atlin played multiple lands
+        assert len(final.opponent_board) > 3
+
+    def test_adapter_own_board(self):
+        """AI board should track Buthomar's permanents."""
+        adapter = ForgeLogAdapter(game_id="test", format="Standard")
+        adapter.set_opponent("Atlin")
+        adapter.set_ai_player("Buthomar")
+        cps = adapter.parse(LOG_CONTENT)
+        final = cps[-1]
+        # Buthomar played multiple lands
+        assert len(final.own_board) > 3
+
+    def test_adapter_graveyard(self):
+        """Graveyards should be tracked."""
+        adapter = ForgeLogAdapter(game_id="test", format="Standard")
+        adapter.set_opponent("Atlin")
+        adapter.set_ai_player("Buthomar")
+        cps = adapter.parse(LOG_CONTENT)
+        final = cps[-1]
+        # Both players should have graveyard contents
+        assert len(final.opponent_graveyard) > 3
+        assert len(final.your_graveyard) > 0
+
+    def test_adapter_observations(self):
+        """Observations should track opponent plays."""
+        adapter = ForgeLogAdapter(game_id="test", format="Standard")
+        adapter.set_opponent("Atlin")
+        adapter.set_ai_player("Buthomar")
+        cps = adapter.parse(LOG_CONTENT)
+        final = cps[-1]
+        # Should have observations of Atlin's spells and lands
+        assert len(final.observations) > 5
+
+    def test_adapter_opponent_land_count(self):
+        """Adapter should count opponent land plays correctly."""
+        adapter = ForgeLogAdapter(game_id="test", format="Standard")
+        adapter.set_opponent("Atlin")
+        adapter.set_ai_player("Buthomar")
+        cps = adapter.parse(LOG_CONTENT)
+        land_obs = [o for o in cps[-1].observations if o.event == "land"]
+        spell_obs = [o for o in cps[-1].observations if o.event == "spell"]
+        assert len(land_obs) > 3, f"Only {len(land_obs)} land observations"
+        assert len(spell_obs) > 3, f"Only {len(spell_obs)} spell observations"

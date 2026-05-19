@@ -81,7 +81,7 @@ class GameSessionState:
             case "land":
                 return self._on_land(event)
             case "life":
-                self._on_life(event)
+                return self._on_life(event)
             case "damage":
                 self._on_damage(event)
             case "zone_change":
@@ -97,7 +97,7 @@ class GameSessionState:
             case "resolve":
                 self._on_resolve(event)
             case "outcome":
-                self._on_outcome(event)
+                return self._on_outcome(event)
         return []
 
     # ── Event handlers ─────────────────────────────────────────────────────
@@ -164,9 +164,13 @@ class GameSessionState:
             return [self._build_checkpoint()]
         return []
 
-    def _on_life(self, event: LifeChange) -> None:
+    def _on_life(self, event: LifeChange) -> list[RecognitionRequest]:
         ps = self._ensure_player(event.player)
         ps.life = event.new_value
+        # Life reaching 0 or below is a game-ending event worth checkpointing
+        if event.new_value <= 0:
+            return [self._build_checkpoint()]
+        return []
 
     def _on_damage(self, event: DamageEvent) -> None:
         # Damage to a player
@@ -210,9 +214,11 @@ class GameSessionState:
         # Already tracked via zone_change events
         pass
 
-    def _on_outcome(self, event: GameOutcome) -> None:
+    def _on_outcome(self, event: GameOutcome) -> list[RecognitionRequest]:
         if event.player:
             self.finished = True
+            return [self._build_checkpoint()]
+        return []
 
     # ── Checkpoint generation ───────────────────────────────────────────────
 
