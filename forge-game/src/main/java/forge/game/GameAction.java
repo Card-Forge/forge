@@ -18,6 +18,7 @@
 package forge.game;
 
 import com.google.common.collect.*;
+
 import forge.GameCommand;
 import forge.StaticData;
 import forge.card.CardStateName;
@@ -56,6 +57,7 @@ import forge.item.PaperCard;
 import forge.util.*;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -238,11 +240,11 @@ public class GameAction {
                         // that ability will continue to apply to the new object that card became after it moved to the stack as a result of being cast this way.
                         if (!cause.isIntrinsic()) {
                             kw.setHostCard(copied);
-                            copied.addChangedCardKeywordsInternal(ImmutableList.of(kw), null, false, copied.getGameTimestamp(), kw.getStatic(), false);
+                            copied.addChangedCardKeywordsInternal(List.of(kw), null, false, copied.getGameTimestamp(), kw.getStatic(), false);
                         }
                     }
                 }
-            } else {
+            } else if (copied.getCurrentStateName() != CardStateName.PreparedSpell) {
                 // when a card leaves the battlefield, ensure it's in its original state
                 copied.setState(CardStateName.Original, false);
                 copied.setBackSide(false);
@@ -1399,12 +1401,8 @@ public class GameAction {
         return checkStateEffects(runEvents, Sets.newHashSet());
     }
     public boolean checkStateEffects(final boolean runEvents, final Set<Card> affectedCards) {
-        // sol(10/29) added for Phase updates, state effects shouldn't be
-        // checked during Spell Resolution (except when persist-returning
-        if (game.getStack().isResolving()) {
-            return false;
-        }
-
+        // check game over early for win conditions such as Platinum Angel + Hurricane lethal for both players
+        checkGameOverCondition();
         if (game.isGameOver()) {
             return false;
         }
@@ -1412,9 +1410,6 @@ public class GameAction {
         final boolean refreeze = game.getStack().isFrozen();
         game.getStack().setFrozen(true);
         game.getTracker().freeze(); //prevent views flickering during while updating for state-based effects
-
-        // check the game over condition early for win conditions such as Platinum Angel + Hurricane lethal for both players
-        checkGameOverCondition();
 
         // do this multiple times, sometimes creatures/permanents will survive when they shouldn't
         boolean performedSBA = false;

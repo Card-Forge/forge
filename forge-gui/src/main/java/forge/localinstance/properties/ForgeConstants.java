@@ -31,6 +31,7 @@ public final class ForgeConstants {
     public static final String GITHUB_RELEASES_ATOM             = GITHUB_FORGE_URL + "releases.atom";
     public static final String GITHUB_COMMITS_ATOM              = GITHUB_FORGE_URL + "commits/master.atom";
     public static final String GITHUB_SNAPSHOT_URL              = GITHUB_FORGE_URL + "releases/download/daily-snapshots/";
+    public static final String NETWORK_PLAY_WIKI_URL            = GITHUB_FORGE_URL + "wiki/network-play";
     public static final String RELEASE_URL                      = "https://releases.cardforge.org/";
     public static final String PATH_SEPARATOR                   = File.separator;
     public static final String ASSETS_DIR                       = GuiBase.getInterface().getAssetsDir();
@@ -73,6 +74,11 @@ public final class ForgeConstants {
     public static final String NET_ARCHIVE_LEGACY_DECKS_LIST_FILE    = LISTS_DIR + "net-decks-archive-legacy.txt";
     public static final String NET_ARCHIVE_VINTAGE_DECKS_LIST_FILE   = LISTS_DIR + "net-decks-archive-vintage.txt";
     public static final String NET_ARCHIVE_BLOCK_DECKS_LIST_FILE     = LISTS_DIR + "net-decks-archive-block.txt";
+    public static final String COMMANDER_BRACKET_COMBOS_FILE         = LISTS_DIR + "commander-bracket-combos.txt";
+    public static final String COMMANDER_BRACKET_GAMECHANGERS_FILE   = LISTS_DIR + "gamechangers.txt";
+    public static final String COMMANDER_BRACKET_MASS_LAND_DENIAL_FILE = LISTS_DIR + "mass-land-denial.txt";
+    public static final String COMMANDER_BRACKET_EXTRA_TURNS_FILE    = LISTS_DIR + "extra-turns.txt";
+    public static final String COMMANDER_BRACKET_CHAINED_EXTRA_TURNS_FILE = LISTS_DIR + "chained-extra-turns.txt";
     public static final String ADVENTURE_BOOSTER_PRICE_FILE 		 = ADVENTURE_COMMON_LIST_DIR + "adventure-booster-price.txt";
 
     public static final String CHANGES_FILE                 = ASSETS_DIR + "README.txt";
@@ -330,7 +336,7 @@ public final class ForgeConstants {
 
     // URLs
     public static final String URL_CARDFORGE = "https://downloads.cardforge.org";
-    private static final String GITHUB_ASSETS_BASE = "https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/";
+    public static final String GITHUB_ASSETS_BASE = "https://raw.githubusercontent.com/Card-Forge/forge-extras/refs/heads/main/";
 
     public static final String URL_PIC_DOWNLOAD = URL_CARDFORGE + "/images/cards/";
     public static final String URL_TOKEN_DOWNLOAD = URL_CARDFORGE + "/images/tokens/";
@@ -345,11 +351,11 @@ public final class ForgeConstants {
     public static final String DISP_CURRENT_COLORS_MULTI_OR_CHANGED = "Multi+Changed";
     public static final String DISP_CURRENT_COLORS_NEVER = "Never";
 
-    // Constants for Auto-Yield Mode
-    public static final String AUTO_YIELD_PER_CARD = "Per Card (Each Game)";
-    public static final String AUTO_YIELD_PER_ABILITY = "Per Ability (Each Match)";
-    public static final String AUTO_YIELD_PER_ABILITY_SESSION = "Per Ability (Each Session)";
-    public static final String AUTO_YIELD_PER_ABILITY_INSTALL = "Per Ability (Each Install)";
+    // Constants for Auto-Decision Mode (auto-yield + auto-trigger persistence scope)
+    public static final String AUTO_DECISION_PER_CARD = "Per Card (Each Game)";
+    public static final String AUTO_DECISION_PER_ABILITY = "Per Ability (Each Match)";
+    public static final String AUTO_DECISION_PER_ABILITY_SESSION = "Per Ability (Each Session)";
+    public static final String AUTO_DECISION_PER_ABILITY_INSTALL = "Per Ability (Each Install)";
 
     // Constants for Graveyard Ordering
     public static final String GRAVEYARD_ORDERING_NEVER = "Never";

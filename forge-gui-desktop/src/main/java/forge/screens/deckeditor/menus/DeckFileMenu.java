@@ -1,13 +1,19 @@
 package forge.screens.deckeditor.menus;
 
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JSeparator;
+import javax.swing.KeyStroke;
 
+import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.menus.MenuUtil;
+import forge.model.FModel;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.views.VCurrentDeck;
 import forge.toolbox.FSkin.SkinnedMenuItem;
@@ -36,6 +42,9 @@ public final class DeckFileMenu {
         menu.add(getMenuItem_SaveAs());
         menu.add(new JSeparator());
         menu.add(getMenuItem_Print());
+        menu.add(getMenuItem_CopyToClipboard());
+        menu.add(new JSeparator());
+        menu.add(getMenuItem_EnforceConformity());
         updateSaveEnabled();
         return menu;
     }
@@ -128,5 +137,26 @@ public final class DeckFileMenu {
 
     private static ActionListener getPrintAction() {
         return e -> VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().getCommand().run();
+    }
+
+    private static SkinnedMenuItem getMenuItem_CopyToClipboard() {
+        final Localizer localizer = Localizer.getInstance();
+        SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("btnCopyToClipboard"));
+        menuItem.setIcon(showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_CLIPBOARD) : null);
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,
+                Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx() | InputEvent.SHIFT_DOWN_MASK));
+        menuItem.addActionListener(e -> VCurrentDeck.SINGLETON_INSTANCE.getBtnCopyToClipboard().getCommand().run());
+        return menuItem;
+    }
+
+    private static JCheckBoxMenuItem getMenuItem_EnforceConformity() {
+        final Localizer localizer = Localizer.getInstance();
+        JCheckBoxMenuItem checkItem = new JCheckBoxMenuItem(localizer.getMessage("cbEnforceDeckLegality"));
+        checkItem.setSelected(FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY));
+        checkItem.addActionListener(e -> {
+            FModel.getPreferences().setPref(FPref.ENFORCE_DECK_LEGALITY, checkItem.isSelected());
+            FModel.getPreferences().save();
+        });
+        return checkItem;
     }
 }

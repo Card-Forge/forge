@@ -9,11 +9,13 @@ import forge.game.player.PlayerView;
 import forge.gui.FThreads;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
+import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
 import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
+import forge.util.collect.FCollectionView;
 
 public class VField extends FContainer {
     private final PlayerView player;
@@ -62,10 +64,12 @@ public class VField extends FContainer {
         public void run() {
             clear();
 
-            Iterable<CardView> model = player.getBattlefield();
-            if (model == null) {
+            FCollectionView<CardView> battlefield = player.getBattlefield();
+            if (battlefield == null) {
                 return;
             }
+            Iterable<CardView> model = MatchController.instance.isNetGame()
+                    ? battlefield.threadSafeIterable() : battlefield;
 
             for (CardView card : model) {
                 CardAreaPanel cardPanel = CardAreaPanel.get(card);
@@ -136,7 +140,7 @@ public class VField extends FContainer {
                         cardName.equals(cState.getOracleName()) &&
                         card.hasSameCounters(c) &&
                         card.hasSamePT(c) && //don't stack token with different PT
-                        cardState.getKeywordKey().equals(cState.getKeywordKey()) &&
+                        cardState.getKeywords().equals(cState.getKeywords()) &&
                         card.isTapped() == c.isTapped() && // don't stack tapped tokens on untapped tokens
                         card.isSick() == c.isSick() && //don't stack sick tokens on non sick
                         card.isToken() == c.isToken()) { //don't stack tokens on top of non-tokens
@@ -147,7 +151,7 @@ public class VField extends FContainer {
                 if (!c.hasCardAttachments() &&
                         cardName.equals(cState.getOracleName()) &&
                         card.hasSameCounters(c) &&
-                        cardState.getKeywordKey().equals(cState.getKeywordKey()) &&
+                        cardState.getKeywords().equals(cState.getKeywords()) &&
                         cardState.getColors() == cState.getColors() &&
                         card.isSick() == c.isSick() && //don't stack sick tokens on non sick
                         card.isToken() == c.isToken()) { //don't stack tokens on top of non-tokens

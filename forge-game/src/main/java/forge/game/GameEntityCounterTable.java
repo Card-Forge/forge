@@ -91,7 +91,7 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
         return columnMap().entrySet().stream().filter(gm -> gm.getKey().isValid(valid, host.getController(), host, sa))
             .collect(Collectors.groupingBy(gm -> gm.getKey(),
                     Collectors.flatMapping(gm -> gm.getValue().values().stream(),
-                            Collectors.filtering(m -> m.containsKey(type), Collectors.summingInt(m -> m.getOrDefault(type, 0))))));
+                            Collectors.summingInt(m -> m.getOrDefault(type, 0)))));
     }
 
     public void triggerCountersPutAll(final Game game) {

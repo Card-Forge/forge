@@ -17,16 +17,23 @@
  */
 package forge.localinstance.skin;
 
+import java.util.Collection;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
 import forge.card.CardType;
+import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
 import forge.deck.DeckSection;
+import forge.game.card.CardView.CardStateView;
 import forge.game.keyword.Keyword;
+import forge.game.keyword.KeywordView;
 import forge.game.zone.ZoneType;
 import forge.localinstance.properties.ForgeConstants;
 
@@ -254,7 +261,7 @@ public enum FSkinProp {
     FOIL_19     (new int[] {0, 2280, 400, 570}, PropType.OLD_FOIL),
     FOIL_20     (new int[] {400, 2280, 400, 570}, PropType.OLD_FOIL),
 
-    //dock icons
+    //menu icons
     ICO_SHORTCUTS    (new int[] {160, 640, 80, 80}, PropType.ICON),
     ICO_SETTINGS     (new int[] {80, 640, 80, 80}, PropType.ICON),
     ICO_ENDTURN      (new int[] {320, 640, 80, 80}, PropType.ICON),
@@ -267,6 +274,18 @@ public enum FSkinProp {
     ICO_ARCSOFF      (new int[] {240, 800, 80, 80}, PropType.ICON),
     ICO_ARCSON       (new int[] {320, 800, 80, 80}, PropType.ICON),
     ICO_ARCSHOVER    (new int[] {400, 800, 80, 80}, PropType.ICON),
+    ICO_AUTOYIELDS   (new int[] {480, 1600, 80, 80}, PropType.ICON),
+    ICO_AUTOPASS     (new int[] {400, 1600, 80, 80}, PropType.ICON),
+
+    // Dock-button glyph variants — kept separate so the dock's white-on-transparent
+    // aesthetic doesn't leak into non-dock callers (mobile menus, deck editor, etc.)
+    ICO_DOCK_CONCEDE     (new int[] {560, 1600, 80, 80}, PropType.ICON),
+    ICO_DOCK_ENDTURN     (new int[] {400, 1680, 80, 80}, PropType.ICON),
+    ICO_DOCK_DECKLIST    (new int[] {480, 1680, 80, 80}, PropType.ICON),
+    ICO_DOCK_ALPHASTRIKE (new int[] {560, 1680, 80, 80}, PropType.ICON),
+    ICO_DOCK_MACRO_RECORD (new int[] {400, 1760, 80, 80}, PropType.ICON),
+    ICO_DOCK_MACRO_PLAY   (new int[] {480, 1760, 80, 80}, PropType.ICON),
+    ICO_DOCK_SETTINGS    (new int[] {560, 1760, 80, 80}, PropType.ICON),
 
     //choice-search-misc
     ICO_HDCHOICE     (new int[] {2, 1792, 128, 128}, PropType.BUTTONS),
@@ -367,6 +386,7 @@ public enum FSkinProp {
 
     ICO_CLOSE           (new int[] {640, 640, 20, 20}, PropType.ICON),
     ICO_LIST            (new int[] {640, 660, 20, 20}, PropType.ICON),
+    ICO_CLIPBOARD       (new int[] {640, 700, 20, 20}, PropType.ICON),
     ICO_CARD_IMAGE      (new int[] {660, 660, 20, 20}, PropType.ICON),
 
     ICO_FOLDER          (new int[] {640, 680, 20, 20}, PropType.ICON),
@@ -780,8 +800,153 @@ public enum FSkinProp {
         };
     }
 
-    public static FSkinProp iconFromKeyword(Keyword keyword, String original) {
-        if (keyword == Keyword.HEXPROOF) {
+    public static Collection<FSkinProp> iconsFromCardState(CardStateView state) {
+        Set<FSkinProp> result = Sets.newLinkedHashSet();
+        if (ZoneType.Battlefield.equals(state.getCard().getZone())) {
+            //if (state.getCard().isToken()) {
+            //    result.add(IMG_ABILITY_TOKEN);
+            //}
+            if (state.getCard().isCommander()) {
+                result.add(IMG_ABILITY_COMMANDER);
+            }
+            if (state.getCard().isRingBearer()) {
+                result.add(IMG_ABILITY_RINGBEARER);
+            }
+            // deeper check for Idris
+            if (state.hasAnnihilator()) {
+                result.add(IMG_ABILITY_ANNIHILATOR);
+            }
+            if (state.hasWard()) {
+                result.add(IMG_ABILITY_WARD);
+            }
+            boolean hexproofGeneric = false;
+            Set<FSkinProp> hexproofTypes = Sets.newLinkedHashSet();
+            boolean protectionEverything = false;
+            Set<MagicColor.Color> protectionColors = Sets.newHashSet();
+            Set<FSkinProp> protectionTypes = Sets.newLinkedHashSet();
+            for (KeywordView keyword : state.getKeywords()) {
+                // no effect on the battlefield
+                if (Keyword.FLASH == keyword.keyword()) {
+                    continue;
+                }
+                if (Keyword.HEXPROOF == keyword.keyword()) {
+                    if (hexproofGeneric) {
+                        continue;
+                    }
+                    String kw = keyword.original();
+                    if (!kw.contains(":")) {
+                        hexproofGeneric = true;
+                        continue;
+                    }
+                    String[] k = kw.split(":");
+                    // it doesn't like double switch, so do not call MagicColor.Color.fromName
+                    FSkinProp hexproofColor = switch (k[1].toLowerCase(Locale.ROOT)) {
+                        case MagicColor.Constant.WHITE -> IMG_ABILITY_HEXPROOF_W;
+                        case MagicColor.Constant.BLUE -> IMG_ABILITY_HEXPROOF_U;
+                        case MagicColor.Constant.BLACK -> IMG_ABILITY_HEXPROOF_B;
+                        case MagicColor.Constant.RED -> IMG_ABILITY_HEXPROOF_R;
+                        case MagicColor.Constant.GREEN -> IMG_ABILITY_HEXPROOF_G;
+                        //case COLORLESS -> IMG_ABILITY_HEXPROOF_C; hexproof_c is for "monocolored"
+                        default -> null;
+                    };
+                    if (hexproofColor != null) {
+                        hexproofTypes.add(hexproofColor);
+                    } else if (k.length > 2 && k[2].equals("monocolored")) {
+                        hexproofTypes.add(IMG_ABILITY_HEXPROOF_C); // might need better icon
+                    } else if (k.length > 2 && k[2].equals("multicolored")) {
+                        hexproofGeneric = true; // no multicolored icon yet
+                    } else if (k.length > 2 && k[2].equals("each color")) {
+                        hexproofTypes.add(IMG_ABILITY_HEXPROOF_W);
+                        hexproofTypes.add(IMG_ABILITY_HEXPROOF_U);
+                        hexproofTypes.add(IMG_ABILITY_HEXPROOF_B);
+                        hexproofTypes.add(IMG_ABILITY_HEXPROOF_R);
+                        hexproofTypes.add(IMG_ABILITY_HEXPROOF_G);
+                    } else {
+                        // no extra icon
+                        hexproofGeneric = true;
+                    }
+                } else if (Keyword.PROTECTION == keyword.keyword()) {
+                    if (protectionEverything) {
+                        continue;
+                    }
+
+                    String kw = keyword.original();
+                    if (kw.equals("Protection from everything")) {
+                        protectionEverything = true;
+                        continue;
+                    } else if (kw.equals("Protection from red") || kw.contains(":red")) {
+                        protectionColors.add(MagicColor.Color.RED);
+                    } else if (kw.equals("Protection from green") || kw.contains(":green")) {
+                        protectionColors.add(MagicColor.Color.GREEN);
+                    } else if (kw.equals("Protection from black") || kw.contains(":black")) {
+                        protectionColors.add(MagicColor.Color.BLACK);
+                    } else if (kw.equals("Protection from blue") || kw.contains(":blue")) {
+                        protectionColors.add(MagicColor.Color.BLUE);
+                    } else if (kw.equals("Protection from white") || kw.contains(":white")) {
+                        protectionColors.add(MagicColor.Color.WHITE);
+                    } else if (kw.contains("each color")) {
+                        protectionColors.addAll(ColorSet.WUBRG.toEnumSet());
+                    } else if (kw.contains("colored spells")) {
+                        protectionTypes.add(IMG_ABILITY_PROTECT_COLOREDSPELLS);
+                    } else {
+                        protectionTypes.add(IMG_ABILITY_PROTECT_GENERIC);
+                    }
+                    continue;
+                } else {
+                    FSkinProp prop = iconFromKeyword(keyword);
+                    if (prop != null) {
+                        result.add(prop);
+                    }
+                }
+            }
+            // Double Strike overshadows First Strike
+            if (result.contains(IMG_ABILITY_DOUBLE_STRIKE)) {
+                result.remove(IMG_ABILITY_FIRST_STRIKE);
+            }
+            if (hexproofGeneric) {
+                result.add(IMG_ABILITY_HEXPROOF);
+            } else {
+                result.addAll(hexproofTypes);
+            }
+            if (protectionEverything) {
+                result.add(IMG_ABILITY_PROTECT_ALL);
+            } else {
+                if (!protectionColors.isEmpty()) {
+                    result.add(switch (ColorSet.fromEnums(protectionColors)) {
+                        case W -> IMG_ABILITY_PROTECT_W;
+                        case U -> IMG_ABILITY_PROTECT_U;
+                        case B -> IMG_ABILITY_PROTECT_B;
+                        case R -> IMG_ABILITY_PROTECT_R;
+                        case G -> IMG_ABILITY_PROTECT_G;
+
+                        case WU -> IMG_ABILITY_PROTECT_UW;
+                        case WB -> IMG_ABILITY_PROTECT_BW;
+                        case UB -> IMG_ABILITY_PROTECT_BU;
+                        case RW -> IMG_ABILITY_PROTECT_RW;
+                        case UR -> IMG_ABILITY_PROTECT_RU;
+                        case BR -> IMG_ABILITY_PROTECT_RB;
+                        case GW -> IMG_ABILITY_PROTECT_GW;
+                        case GU -> IMG_ABILITY_PROTECT_GU;
+                        case BG -> IMG_ABILITY_PROTECT_GB;
+                        case RG -> IMG_ABILITY_PROTECT_RG;
+                        case WUBRG -> IMG_ABILITY_PROTECT_ALL;
+                        default -> IMG_ABILITY_PROTECT_GENERIC;
+                    });
+                }
+                result.addAll(protectionTypes);
+            }
+        } else if (state.hasKeyword(Keyword.FLASH) || (state.getAbilityText().contains("May be played by")
+                && state.getAbilityText().contains("and as though it has flash"))) {
+            result.add(IMG_ABILITY_FLASH);
+        }
+
+        return result;
+    }
+
+    public static FSkinProp iconFromKeyword(KeywordView keyword) {
+        Keyword type = keyword.keyword();
+        String original = keyword.original();
+        if (type == Keyword.HEXPROOF) {
             if (!original.contains(":")) {
                 return IMG_ABILITY_HEXPROOF;
             }
@@ -799,21 +964,32 @@ public enum FSkinProp {
                 default -> IMG_ABILITY_HEXPROOF;
             };
         }
-        return switch (keyword) {
+        return switch (type) {
+            case ANNIHILATOR -> IMG_ABILITY_ANNIHILATOR;
             case FLYING -> IMG_ABILITY_FLYING;
             case FIRST_STRIKE -> IMG_ABILITY_FIRST_STRIKE;
             case DOUBLE_STRIKE -> IMG_ABILITY_DOUBLE_STRIKE;
             case DEATHTOUCH -> IMG_ABILITY_DEATHTOUCH;
             case DECAYED -> null;
+            case DEFENDER -> IMG_ABILITY_DEFENDER;
             case EXALTED -> IMG_ABILITY_EXALTED;
+            case FEAR -> IMG_ABILITY_FEAR;
+            case FLASH -> IMG_ABILITY_FLASH;
             case HASTE -> IMG_ABILITY_HASTE;
+            case HORSEMANSHIP -> IMG_ABILITY_HORSEMANSHIP;
             case INDESTRUCTIBLE -> IMG_ABILITY_INDESTRUCTIBLE;
+            case INTIMIDATE -> IMG_ABILITY_INTIMIDATE;
+            case LANDWALK -> IMG_ABILITY_LANDWALK; // TODO add more different versions
             case LIFELINK -> IMG_ABILITY_LIFELINK;
             case MENACE -> IMG_ABILITY_MENACE;
             case REACH -> IMG_ABILITY_REACH;
             case SHADOW -> IMG_ABILITY_SHADOW;
+            case SHROUD -> IMG_ABILITY_SHROUD;
+            case TOXIC -> IMG_ABILITY_TOXIC;
             case TRAMPLE -> IMG_ABILITY_TRAMPLE;
             case VIGILANCE -> IMG_ABILITY_VIGILANCE;
+            case WARD -> IMG_ABILITY_WARD; // TODO add more different versions
+            case WITHER -> IMG_ABILITY_WITHER;
             default -> null;
         };
     }

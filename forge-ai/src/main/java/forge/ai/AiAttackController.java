@@ -202,33 +202,44 @@ public class AiAttackController {
         return choosePreferredDefenderPlayer(ai, false);
     }
     public static Player choosePreferredDefenderPlayer(Player ai, boolean forCombatDmg) {
-        Player defender = ai.getWeakestOpponent(); //Concentrate on opponent within easy kill range
+        PlayerCollection opponents = ai.getOpponents();
+        if (opponents.size() == 1) {
+            return opponents.get(0);
+        }
 
-        // TODO for multiplayer combat avoid players with cantLose or (if not playing infect) cantLoseForZeroOrLessLife and !canLoseLife
-
-        if (defender.getLife() > 8) {
-            // TODO connect with evaluateBoardPosition and only fall back to random when no player is the biggest threat by a fair margin
-
-            List<Player> opps = Lists.newArrayList(ai.getOpponents());
+        Player bestDefender = ai.getWeakestOpponent();
+        int bestScore = Integer.MIN_VALUE;
+        for (Player opp : opponents) {
+            final int life = opp.getLife();
+            int score = ComputerUtil.evaluateBoardPosition(ai, opp);
+            // round away slightly so a single land drop doesn't mean players with earlier turn order are predictably attacked
+            score = (int) Math.ceil(score / 10) * 10;
+            int lowLifeThreshold = Math.min(20, opp.getStartingLife());
+            if (life > 0 && life < lowLifeThreshold) {
+                // TODO commander damage
+                int lifeDeficit = lowLifeThreshold - life;
+                score += lifeDeficit * lifeDeficit;
+            }
             if (forCombatDmg) {
-                for (Player p : ai.getOpponents()) {
-                    if (p.isMonarch() && ai.canBecomeMonarch()) {
-                        // just increase the odds for now instead of being fully predictable
-                        // as it could lead to other too complex factors giving this reasoning negative impact
-                        opps.add(p);
-                    }
-                    if (p.hasInitiative()) {
-                        opps.add(p);
-                    }
+                if (opp.isMonarch() && ai.canBecomeMonarch()) {
+                    score += 80;
+                }
+                if (opp.hasInitiative()) {
+                    score += 80;
+                }
+                if (!opp.canLoseLife()) {
+                    score -= 100;
+                }
+                if (opp.cantLoseForZeroOrLessLife()) {
+                    score -= 50;
                 }
             }
-
-            // TODO should we cache the random for each turn? some functions like shouldPumpCard base their decisions on the assumption who will be attacked
-
-            //Otherwise choose a random opponent to ensure no ganging up on players
-            return Aggregates.random(opps);
+            if (score > bestScore || (score == bestScore && MyRandom.percentTrue(50))) {
+                bestScore = score;
+                bestDefender = opp;
+            }
         }
-        return defender;
+        return bestDefender;
     }
 
     /**

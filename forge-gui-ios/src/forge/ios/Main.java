@@ -30,7 +30,7 @@ public class Main extends IOSApplication.Delegate {
         final IOSApplicationConfiguration config = new IOSApplicationConfiguration();
         config.useAccelerometer = false;
         config.useCompass = false;
-        final ApplicationListener app = Forge.getApp(null, new IOSClipboard(), new IOSAdapter(), assetsDir, false, false, false, 0);
+        final ApplicationListener app = Forge.getApp(null, new IOSClipboard(), new IOSAdapter(), assetsDir, false, false, 0);
         final IOSApplication iosApp = new IOSApplication(app, config);
         return iosApp;
     }
@@ -127,6 +127,11 @@ public class Main extends IOSApplication.Delegate {
 
         @Override
         public void convertToJPEG(InputStream input, OutputStream output) throws IOException {
+
+        }
+
+        @Override
+        public void convertToPNG(InputStream input, OutputStream output) throws IOException {
 
         }
 

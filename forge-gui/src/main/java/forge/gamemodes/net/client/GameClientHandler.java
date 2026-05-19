@@ -3,7 +3,8 @@ package forge.gamemodes.net.client;
 import forge.game.*;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
-import forge.gamemodes.net.GameEventProxy;
+import forge.gamemodes.net.CompatibleObjectDecoder;
+import forge.gamemodes.net.CompatibleObjectEncoder;
 import forge.gamemodes.net.GameProtocolHandler;
 import forge.gui.GuiBase;
 import forge.util.IHasForgeLog;
@@ -74,6 +75,17 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
                 if (args.length > 0 && args[0] instanceof GameView gameView) {
                     if (this.tracker == null) {
                         this.tracker = new Tracker();
+                        // Encoder uses the tracker to emit IdRef for client→server CardView args
+                        // (presence check only — stale detection is server-only).
+                        // Ephemerals absent from the tracker serialize as full objects in both directions.
+                        CompatibleObjectEncoder encoder = ctx.pipeline().get(CompatibleObjectEncoder.class);
+                        if (encoder != null) {
+                            encoder.setTracker(this.tracker);
+                        }
+                        CompatibleObjectDecoder decoder = ctx.pipeline().get(CompatibleObjectDecoder.class);
+                        if (decoder != null) {
+                            decoder.setTracker(this.tracker);
+                        }
                         if (gameView.getGameLog() == null) {
                             gameView.initGameLog();
                         }
@@ -117,6 +129,10 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
     /**
      * This method is used to recursively update the <b>tracker</b>
      * references on all objects and their props.
+     *
+     * <p>Inline-serialized CardViews are intentionally NOT registered in the
+     * tracker's id lookup: a tracker miss is the symmetric signal that a
+     * CardView is ephemeral, mirroring the host's encoder check.
      *
      * @param objs
      */
@@ -179,7 +195,7 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
      * {@code updateObjLookup()} skips objects already in the tracker, so CardViews
      * registered on the first {@code setGameView} become stale — their zone, state,
      * and other properties no longer reflect the server's current game state.
-     * When {@link GameEventProxy} resolves IdRefs from the tracker, it gets these
+     * When the decoder resolves IdRefs from the tracker, it gets these
      * stale CardViews, causing issues like card-back images in the game log
      * (the stale zone is Library, so {@code canBeShownTo} returns false).
      */
@@ -211,7 +227,8 @@ final class GameClientHandler extends GameProtocolHandler<IGuiGame> implements I
                 loginName,
                 Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_AVATARS).split(",")[0]),
                 Integer.parseInt(FModel.getPreferences().getPref(FPref.UI_SLEEVES).split(",")[0]),
-                BuildInfo.getVersionString()
+                BuildInfo.getVersionString(),
+                GuiBase.getInterface().isLibgdxPort()
         ));
     }
 

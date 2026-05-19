@@ -387,12 +387,12 @@ public class HostedMatch {
                 ngg.shutdownForwarder();
             }
             humanController.getGui().setGameSpeed(PlaybackSpeed.NORMAL);
-            humanController.clearAutoYields();
+            humanController.getYieldController().clearAutoYields();
 
-            if (humanCount > 0) //conceded
+            //conceded
+            if (humanCount > 0 || !GuiBase.getInterface().isLibgdxPort() || !isMatchOver) {
                 humanController.getGui().afterGameEnd();
-            else if (!GuiBase.getInterface().isLibgdxPort()||!isMatchOver)
-                humanController.getGui().afterGameEnd();
+            }
             humanController.getGui().updateDayTime(null);
         }
         humanControllers.clear();
@@ -425,10 +425,6 @@ public class HostedMatch {
         public Void visit(final UiEventBlockerAssigned event) {
             for (final PlayerControllerHuman humanController : humanControllers) {
                 humanController.getGui().updateSingleCard(event.blocker());
-                final PlayerView p = humanController.getPlayer().getView();
-                if (event.attackerBeingBlocked() != null && event.attackerBeingBlocked().getController().equals(p)) {
-                    humanController.getGui().autoPassCancel(p);
-                }
             }
             return null;
         }

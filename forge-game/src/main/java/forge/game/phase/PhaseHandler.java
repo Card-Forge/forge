@@ -125,7 +125,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
         if (playerTurn == playerTurn0) { return; }
         playerTurn = playerTurn0;
         game.updatePlayerTurnForView();
-        setPriority(playerTurn);
+        resetPriority();
     }
 
     public final Player getPreviousPlayerTurn() {
@@ -361,9 +361,7 @@ public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
                 case END_OF_TURN:
                     nEndOfTurnsThisTurn++;
                     game.getEndOfTurn().executeUntil(playerTurn);
-                    if (playerTurn.getController().isAI()) {
-                        playerTurn.getController().resetAtEndOfTurn();
-                    }
+                    playerTurn.getController().resetAtEndOfTurn();
 
                     game.getEndOfTurn().executeAt();
                     break;

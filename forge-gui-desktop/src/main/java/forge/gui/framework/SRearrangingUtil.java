@@ -313,6 +313,26 @@ public final class SRearrangingUtil {
     /** The gap created by displaced panels must be filled.
      * from any side which shares corners with the gap.  */
     private static void fillGap() {
+        // First pass prefers a strategy that grows a player FIELD cell.
+        // Falls back to original priority order if none qualify.
+        if (tryFillGap(true)) { return; }
+        if (tryFillGap(false)) { return; }
+        throw new UnsupportedOperationException("Gap was not filled.");
+    }
+
+    private static boolean containsField(final List<DragCell> cells) {
+        for (final DragCell c : cells) {
+            for (final IVDoc<? extends ICDoc> doc : c.getDocs()) {
+                final EDocID id = doc.getDocumentID();
+                for (final EDocID fieldId : EDocID.Fields) {
+                    if (id == fieldId) { return true; }
+                }
+            }
+        }
+        return false;
+    }
+
+    private static boolean tryFillGap(final boolean preferField) {
         // Variables to help with matching the borders
         final List<DragCell> cellsToResize = new ArrayList<>();
         final int srcX = cellSrc.getAbsX();
@@ -347,12 +367,12 @@ public final class SRearrangingUtil {
             if (cell.getAbsY() > srcY && cell.getAbsY2() < srcY2) { cellsToResize.add(cell); }
         }
 
-        if (foundT && foundB) {
+        if (foundT && foundB && (!preferField || containsField(cellsToResize))) {
             for (final DragCell cell : cellsToResize) {
                 cell.setBounds(cell.getX(), cell.getY(), cell.getW() + srcW, cell.getH());
                 cell.updateRoughBounds();
             }
-            return;
+            return true;
         }
 
         cellsToResize.clear();
@@ -373,12 +393,12 @@ public final class SRearrangingUtil {
             if (cell.getAbsY() > srcY && cell.getAbsY2() < srcY2) { cellsToResize.add(cell); }
         }
 
-        if (foundT && foundB) {
+        if (foundT && foundB && (!preferField || containsField(cellsToResize))) {
             for (final DragCell cell : cellsToResize) {
                 cell.setBounds(cellSrc.getX(), cell.getY(), cell.getW() + srcW, cell.getH());
                 cell.updateRoughBounds();
             }
-            return;
+            return true;
         }
 
         cellsToResize.clear();
@@ -399,13 +419,13 @@ public final class SRearrangingUtil {
             if (cell.getAbsX() > srcX && cell.getAbsX2() < srcX2) { cellsToResize.add(cell); }
         }
 
-        if (foundL && foundR) {
+        if (foundL && foundR && (!preferField || containsField(cellsToResize))) {
             for (final DragCell cell : cellsToResize) {
                 cell.setBounds(cell.getX(), cellSrc.getY(), cell.getW(), cell.getH() + srcH);
 
                 cell.updateRoughBounds();
             }
-            return;
+            return true;
         }
 
         cellsToResize.clear();
@@ -426,16 +446,16 @@ public final class SRearrangingUtil {
             if (cell.getAbsX() > srcX && cell.getAbsX2() < srcX2) { cellsToResize.add(cell); }
         }
 
-        if (foundL && foundR) {
+        if (foundL && foundR && (!preferField || containsField(cellsToResize))) {
             for (final DragCell cell : cellsToResize) {
                 cell.setBounds(cell.getX(), cell.getY(), cell.getW(), cell.getH() + srcH);
 
                 cell.updateRoughBounds();
             }
-            return;
+            return true;
         }
 
-        throw new UnsupportedOperationException("Gap was not filled.");
+        return false;
     }
 
     /**

@@ -5,7 +5,6 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
 import forge.gamemodes.match.LobbySlotType;
-import forge.gamemodes.net.server.RemoteClient;
 
 import java.util.Collections;
 import java.util.Set;
@@ -32,8 +31,8 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
     private String aiProfile = null;
 
 
-    public static UpdateLobbyPlayerEvent create(final LobbySlotType type, final String name, final int avatarIndex, final int sleeveIndex, final int team, final boolean isArchenemy, final boolean isReady, final boolean isDevMode, final Set<AIOption> aiOptions, final String aiProfile) {
-        return new UpdateLobbyPlayerEvent(type, name, avatarIndex, sleeveIndex, team, isArchenemy, isReady, isDevMode, aiOptions, aiProfile);
+    public static UpdateLobbyPlayerEvent create(final LobbySlotType type, final String name, final int avatarIndex, final int sleeveIndex, final int team, final boolean isArchenemy, final boolean isDevMode, final Set<AIOption> aiOptions, final String aiProfile) {
+        return new UpdateLobbyPlayerEvent(type, name, avatarIndex, sleeveIndex, team, isArchenemy, isDevMode, aiOptions, aiProfile);
     }
     public static UpdateLobbyPlayerEvent deckUpdate(final Deck deck) {
         return new UpdateLobbyPlayerEvent(deck);
@@ -66,6 +65,11 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
     }
     public static UpdateLobbyPlayerEvent isReadyUpdate(final boolean isReady) {
         return new UpdateLobbyPlayerEvent(isReady);
+    }
+    public static UpdateLobbyPlayerEvent devModeUpdate(final boolean isDevMode) {
+        final UpdateLobbyPlayerEvent event = new UpdateLobbyPlayerEvent();
+        event.isDevMode = isDevMode;
+        return event;
     }
     public static UpdateLobbyPlayerEvent teamUpdate(int team) {
         return new UpdateLobbyPlayerEvent(team);
@@ -109,7 +113,6 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
             final int sleeveIndex,
             final int team,
             final boolean isArchenemy,
-            final boolean isReady,
             final boolean isDevMode,
             final Set<AIOption> aiOptions,
             final String aiProfile) {
@@ -119,14 +122,9 @@ public final class UpdateLobbyPlayerEvent implements NetEvent {
         this.sleeveIndex = sleeveIndex;
         this.team = team;
         this.isArchenemy = isArchenemy;
-        this.isReady = isReady;
         this.isDevMode = isDevMode;
         this.aiOptions = aiOptions;
         this.aiProfile = aiProfile;
-    }
-
-    @Override
-    public void updateForClient(final RemoteClient client) {
     }
 
     public LobbySlotType getType() {

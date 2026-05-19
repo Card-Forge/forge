@@ -72,11 +72,11 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         BRAWL_P6_DECK_STATE(""),
         BRAWL_P7_DECK_STATE(""),
         BRAWL_P8_DECK_STATE(""),
+
         UI_LANDSCAPE_MODE ("false"),
         UI_MATCHES_PER_GAME("3"),
         UI_APPLIED_VARIANTS(""),
         UI_COMPACT_MAIN_MENU ("false"),
-        UI_USE_OLD ("false"),
         UI_RANDOM_FOIL ("false"),
         UI_ENABLE_AI_CHEATS ("false"),
         UI_AVATARS ("0,1"),
@@ -103,8 +103,10 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_SR_OPTIMIZE ("false"),
         UI_OPEN_PACKS_INDIV ("false"),
         UI_STACK_CREATURES ("false"),
+        UI_SEPARATE_COMBAT_STACKS("false"),
+        UI_GROUP_PERMANENTS ("default"),
+        UI_MAX_STACK_DEPTH ("4"),
         UI_TOKENS_IN_SEPARATE_ROW("false"),
-        UI_UPLOAD_DRAFT ("false"),
         UI_SCALE_LARGER ("true"),
         UI_RENDER_BLACK_BORDERS ("true"),
         UI_LARGE_CARD_VIEWERS ("false"),
@@ -115,7 +117,6 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_SMALL_DECK_VIEWER ("false"),
         UI_DETAILED_SPELLDESC_IN_PROMPT ("true"),
         UI_GRAY_INACTIVE_TEXT ("true"),
-        UI_CARD_SIZE ("small"),
         UI_SINGLE_CARD_ZOOM("false"),
         UI_LIBGDX_TEXTURE_FILTERING("true"),
         UI_ANTE ("false"),
@@ -123,26 +124,18 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_ANTE_INCLUDE_BASIC_LANDS ("false"),
         UI_SKIN ("Default"),
         UI_CJK_FONT (""),
-        UI_PREFERRED_AVATARS_ONLY ("false"),
         UI_TARGETING_OVERLAY ("2"),
         UI_TIMED_TARGETING_OVERLAY_UPDATES ("true"),
-        UI_ENABLE_SOUNDS ("true"),
-        UI_ENABLE_MUSIC ("true"),
-        UI_VOL_SOUNDS ("100"),
-        UI_VOL_MUSIC ("100"),
-        UI_ALT_SOUND_SYSTEM ("false"),
-        UI_CURRENT_SOUND_SET("Default"),
-        UI_CURRENT_MUSIC_SET("Default"),
+        UI_DOCK_LAYOUT (""),
         UI_CURRENT_AI_PROFILE ("Default"),
         UI_CLONE_MODE_SOURCE ("false"),
         UI_MATCH_IMAGE_VISIBLE ("true"),
-        UI_THEMED_COMBOBOX ("true"), // Now applies to all theme settings, not just Combo.
         UI_LOCK_TITLE_BAR ("false"),
-        UI_HIDE_GAME_TABS ("false"), // Visibility of tabs in match screen.
+        UI_HIDE_GAME_TABS ("false"),
         UI_MULTIPLAYER_FIELD_LAYOUT ("OFF"),
         UI_MULTIPLAYER_FIELD_PANELS ("SPLIT"),
         UI_CLOSE_ACTION ("NONE"),
-        UI_MANA_LOST_PROMPT ("false"), // Prompt on losing mana when passing priority
+        UI_MANA_LOST_PROMPT ("false"),
         UI_STACK_EFFECT_NOTIFICATION_POLICY ("Never"),
         UI_LAND_PLAYED_NOTIFICATION_POLICY ("Never"),
         UI_PAUSE_WHILE_MINIMIZED("false"),
@@ -151,8 +144,22 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_ALLOW_ESC_TO_END_TURN ("false"),
         UI_ALT_PLAYERINFOLAYOUT ("false"),
         UI_ALT_PLAYERZONETABS ("false"),
-        UI_PRESELECT_PREVIOUS_ABILITY_ORDER ("false"),
-        UI_AUTO_YIELD_MODE (ForgeConstants.AUTO_YIELD_PER_ABILITY),
+        YIELD_INTERRUPT_ON_ATTACKERS ("true"),
+        YIELD_INTERRUPT_ON_OPPONENT_SPELL ("true"),
+        YIELD_INTERRUPT_ON_TARGETING ("false"),
+        YIELD_INTERRUPT_ON_TRIGGERS ("false"),
+        YIELD_INTERRUPT_ON_REVEAL ("false"),
+        YIELD_INTERRUPT_ON_MASS_REMOVAL ("false"),
+        YIELD_AUTO_PASS_NO_ACTIONS ("false"),
+        YIELD_AUTO_PASS_RESPECTS_INTERRUPTS ("false"),
+        YIELD_AVAILABLE_ACTIONS_BUDGET_MS ("0"),
+        YIELD_SKIP_PHASE_DELAY ("false"),
+        YIELD_SKIP_RESOLVE_DELAY ("false"),
+        YIELD_SUPPRESS_ON_OWN_TURN ("true"),
+        YIELD_SUPPRESS_AFTER_END ("true"),
+        YIELD_DECLINE_SCOPE_STACK_YIELD ("NEVER"),
+        YIELD_DECLINE_SCOPE_NO_ACTIONS ("NEVER"),
+        UI_AUTO_DECISION_MODE (ForgeConstants.AUTO_DECISION_PER_ABILITY),
         UI_SHOW_STORM_COUNT_IN_PROMPT ("false"),
         UI_REMIND_ON_PRIORITY ("false"),
         UI_CARD_COUNTER_DISPLAY_TYPE(ForgeConstants.CounterDisplayType.TEXT.getName()),
@@ -170,7 +177,6 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_ENABLE_MATCH_SCROLL_INDICATOR("false"),
         UI_ENABLE_MAGNIFIER("true"),
         UI_SHOW_FPS("false"),
-        UI_NETPLAY_COMPAT("false"),
         UI_ENABLE_DISPOSE_TEXTURES("false"),
         UI_LOAD_UNKNOWN_CARDS("true"),
         UI_LOAD_NONLEGAL_CARDS("true"),
@@ -186,8 +192,16 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_ORDER_HAND("false"),
         UI_HAND_MAX_CARDS_PER_ROW("0"),
         UI_HAND_NO_OVERLAP("false"),
-        UI_ZONE_TAB_NEW_COUNT("false"),
+        UI_ZONE_TAB_NEW_COUNT("true"),
         UI_ENABLE_AI_PICKER("false"),
+
+        UI_ENABLE_SOUNDS ("true"),
+        UI_ENABLE_MUSIC ("true"),
+        UI_VOL_SOUNDS ("100"),
+        UI_VOL_MUSIC ("100"),
+        UI_ALT_SOUND_SYSTEM ("false"),
+        UI_CURRENT_SOUND_SET("Default"),
+        UI_CURRENT_MUSIC_SET("Default"),
 
         UI_VIBRATE_INTENSITY("100"),
         UI_VIBRATE_ON_LIFE_LOSS("true"),
@@ -201,6 +215,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         AUTO_UPDATE("none"),
         USE_SENTRY("false"), // this controls whether automated bug reporting is done or not
         CHECK_SNAPSHOT_AT_STARTUP("true"),
+        MAX_LOG_FILES("10"), // applied per category: up to N forge.*.log backups AND N network log entries
 
         MATCH_HOT_SEAT_MODE("false"), //this only applies to mobile game
 
@@ -305,6 +320,8 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         SHORTCUT_SHOWTARGETING ("84"),
         SHORTCUT_AUTOYIELD_ALWAYS_YES ("89"),
         SHORTCUT_AUTOYIELD_ALWAYS_NO ("78"),
+        SHORTCUT_YIELD_OPTIONS ("17 89"),
+        SHORTCUT_YIELD_AUTO_PASS ("80"),
         SHORTCUT_MACRO_RECORD ("16 82"),
         SHORTCUT_MACRO_NEXT_ACTION ("16 50"),
         SHORTCUT_CARD_ZOOM("90"),
@@ -431,12 +448,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         return key.getDefault();
     }
 
-    // was not used anywhere else
-    public static boolean NET_CONN = false;
-
-    /** The Constant DevMode. */
     // one for normal mode, one for quest mode
     public static boolean DEV_MODE;
-    /** The Constant UpldDrft. */
     public static boolean UPLOAD_DRAFT;
 }

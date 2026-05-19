@@ -28,4 +28,5 @@ public class SettingData {
     public boolean generateLDADecks;
     public boolean bindEquipmentLoadoutsToDecks;
     public boolean drawChevronsToHiddenEnemiesInClearQuest;
+    public boolean preferEraMatchedTokenArt;
 }

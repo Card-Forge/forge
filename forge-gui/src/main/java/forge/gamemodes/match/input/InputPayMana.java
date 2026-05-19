@@ -19,7 +19,6 @@ import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityView;
 import forge.gui.FThreads;
-import forge.gui.GuiBase;
 import forge.player.PlayerControllerHuman;
 import forge.util.Evaluator;
 import forge.util.ITriggerEvent;
@@ -76,7 +75,7 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
     @Override
     protected boolean onCardSelected(final Card card, final List<Card> otherCardsToSelect, final ITriggerEvent triggerEvent) {
-        if (GuiBase.getInterface().isLibgdxPort()) {
+        if (getController().getGui().isLibgdxPort()) {
             // Mobile Forge allows to tap cards underneath the current card even if the current one is tapped
             if (otherCardsToSelect != null) {
                 for (Card c : otherCardsToSelect) {

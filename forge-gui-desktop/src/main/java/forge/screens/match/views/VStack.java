@@ -18,6 +18,7 @@
 package forge.screens.match.views;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -27,6 +28,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
@@ -35,13 +37,17 @@ import javax.swing.border.EmptyBorder;
 import forge.CachedCardImage;
 import forge.game.GameView;
 import forge.game.card.CardView.CardStateView;
+import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
+import forge.gamemodes.match.YieldUpdate;
 import forge.gui.card.CardDetailUtil;
 import forge.gui.card.CardDetailUtil.DetailColors;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
+import forge.interfaces.IGameController;
+import forge.player.AutoYieldStore.TriggerDecision;
 import forge.screens.match.controllers.CDock.ArcState;
 import forge.screens.match.controllers.CStack;
 import forge.toolbox.FMouseAdapter;
@@ -128,8 +134,10 @@ public class VStack implements IVDoc<CStack> {
         hoveredItem = null;
         scroller.removeAll();
 
+        final Iterable<StackItemView> safeItems = controller.getMatchUI().isNetGame()
+                ? items.threadSafeIterable() : items;
         boolean isFirst = true;
-        for (final StackItemView item : items) {
+        for (final StackItemView item : safeItems) {
             final StackInstanceTextArea tar = new StackInstanceTextArea(item);
 
             scroller.add(tar, "pushx, growx" + (isFirst ? "" : ", gaptop 2px"));
@@ -231,22 +239,30 @@ public class VStack implements IVDoc<CStack> {
                 }
             });
 
-            if (item.isAbility()) {
-                addMouseListener(new FMouseAdapter() {
-                    @Override
-                    public void onLeftClick(final MouseEvent e) {
-                        onClick(e);
+            addMouseListener(new FMouseAdapter() {
+                @Override
+                public void onLeftClick(final MouseEvent e) {
+                    onClick(e);
+                }
+                @Override
+                public void onRightClick(final MouseEvent e) {
+                    onClick(e);
+                }
+                private void onClick(final MouseEvent e) {
+                    abilityMenu.setStackInstance(item);
+                    boolean hasVisibleItem = false;
+                    for (Component c : abilityMenu.getComponents()) {
+                        if (c.isVisible()) {
+                            hasVisibleItem = true;
+                            break;
+                        }
                     }
-                    @Override
-                    public void onRightClick(final MouseEvent e) {
-                        onClick(e);
+                    if (!hasVisibleItem) {
+                        return;
                     }
-                    private void onClick(final MouseEvent e) {
-                        abilityMenu.setStackInstance(item);
-                        abilityMenu.show(e.getComponent(), e.getX(), e.getY());
-                    }
-                });
-            }
+                    abilityMenu.show(e.getComponent(), e.getX(), e.getY());
+                }
+            });
 
             // TODO: A hacky workaround is currently used to make the game not leak the color information for Morph cards.
             final CardStateView curState = item.getSourceCard().getCurrentState();
@@ -284,18 +300,18 @@ public class VStack implements IVDoc<CStack> {
         private final JCheckBoxMenuItem jmiAutoYield;
         private final JCheckBoxMenuItem jmiAlwaysYes;
         private final JCheckBoxMenuItem jmiAlwaysNo;
+        private final JMenuItem jmiYieldToStack;
+        private final JMenuItem jmiYieldToEntireStack;
         private StackItemView item;
 
-        private Integer triggerID = 0;
+        private String yieldKey = "";
+        private boolean abilityScope;
 
         public AbilityMenu(){
             jmiAutoYield = new JCheckBoxMenuItem(Localizer.getInstance().getMessage("cbpAutoYieldMode"));
             jmiAutoYield.addActionListener(arg0 -> {
-                final String key = item.getKey();
-                final boolean autoYield = controller.getMatchUI().getGameController().shouldAutoYield(key);
-                boolean abilityScope = !forge.localinstance.properties.ForgeConstants.AUTO_YIELD_PER_CARD.equals(
-                        forge.model.FModel.getPreferences().getPref(forge.localinstance.properties.ForgePreferences.FPref.UI_AUTO_YIELD_MODE));
-                controller.getMatchUI().getGameController().setShouldAutoYield(key, !autoYield, abilityScope);
+                final boolean autoYield = controller.getMatchUI().getGameController().shouldAutoYield(yieldKey);
+                controller.getMatchUI().getGameController().setShouldAutoYield(yieldKey, !autoYield, abilityScope);
                 if (!autoYield && controller.getMatchUI().getGameView().peekStack() == item) {
                     //auto-pass priority if ability is on top of stack
                     controller.getMatchUI().getGameController().passPriority();
@@ -305,36 +321,54 @@ public class VStack implements IVDoc<CStack> {
 
             jmiAlwaysYes = new JCheckBoxMenuItem(Localizer.getInstance().getMessage("lblAlwaysYes"));
             jmiAlwaysYes.addActionListener(arg0 -> {
-                if (controller.getMatchUI().getGameController().shouldAlwaysAcceptTrigger(triggerID)) {
-                    controller.getMatchUI().getGameController().setShouldAlwaysAskTrigger(triggerID);
-                }
-                else {
-                    controller.getMatchUI().getGameController().setShouldAlwaysAcceptTrigger(triggerID);
-                }
+                if (yieldKey.isEmpty()) return;
+                IGameController gc = controller.getMatchUI().getGameController();
+                TriggerDecision next = gc.getTriggerDecision(yieldKey) == TriggerDecision.ACCEPT ? TriggerDecision.ASK : TriggerDecision.ACCEPT;
+                gc.setTriggerDecision(yieldKey, next, abilityScope);
             });
             add(jmiAlwaysYes);
 
             jmiAlwaysNo = new JCheckBoxMenuItem(Localizer.getInstance().getMessage("lblAlwaysNo"));
             jmiAlwaysNo.addActionListener(arg0 -> {
-                if (controller.getMatchUI().getGameController().shouldAlwaysDeclineTrigger(triggerID)) {
-                    controller.getMatchUI().getGameController().setShouldAlwaysAskTrigger(triggerID);
-                }
-                else {
-                    controller.getMatchUI().getGameController().setShouldAlwaysDeclineTrigger(triggerID);
-                }
+                if (yieldKey.isEmpty()) return;
+                IGameController gc = controller.getMatchUI().getGameController();
+                TriggerDecision next = gc.getTriggerDecision(yieldKey) == TriggerDecision.DECLINE ? TriggerDecision.ASK : TriggerDecision.DECLINE;
+                gc.setTriggerDecision(yieldKey, next, abilityScope);
             });
             add(jmiAlwaysNo);
+
+            jmiYieldToStack = new JMenuItem(Localizer.getInstance().getMessage("lblYieldToStack"));
+            jmiYieldToStack.addActionListener(arg0 -> {
+                final PlayerView local = controller.getMatchUI().getCurrentPlayer();
+                if (local == null) return;
+                controller.getMatchUI().getGameController().sendYieldUpdate(new YieldUpdate.StackYield(local, true, true));
+                controller.getMatchUI().getGameController().passPriority();
+            });
+            add(jmiYieldToStack);
+
+            jmiYieldToEntireStack = new JMenuItem(Localizer.getInstance().getMessage("lblYieldToEntireStack"));
+            jmiYieldToEntireStack.addActionListener(arg0 -> {
+                final PlayerView local = controller.getMatchUI().getCurrentPlayer();
+                if (local == null) return;
+                controller.getMatchUI().getGameController().sendYieldUpdate(new YieldUpdate.StackYield(local, true, false));
+                controller.getMatchUI().getGameController().passPriority();
+            });
+            add(jmiYieldToEntireStack);
         }
 
         public void setStackInstance(final StackItemView item0) {
             item = item0;
-            triggerID = item.getSourceTrigger();
+            yieldKey = item.getKey();
+            abilityScope = controller.getMatchUI().getGameController().getYieldController().isAbilityScope();
 
-            jmiAutoYield.setSelected(controller.getMatchUI().getGameController().shouldAutoYield(item.getKey()));
+            jmiAutoYield.setVisible(item.isAbility());
+            jmiAutoYield.setSelected(item.isAbility()
+                    && controller.getMatchUI().getGameController().shouldAutoYield(yieldKey));
 
-            if (item.isOptionalTrigger() && controller.getMatchUI().isLocalPlayer(item.getActivatingPlayer())) {
-                jmiAlwaysYes.setSelected(controller.getMatchUI().getGameController().shouldAlwaysAcceptTrigger(triggerID));
-                jmiAlwaysNo.setSelected(controller.getMatchUI().getGameController().shouldAlwaysDeclineTrigger(triggerID));
+            if (item.isOptionalTrigger() && controller.getMatchUI().isLocalPlayer(item.getActivatingPlayer()) && !yieldKey.isEmpty()) {
+                TriggerDecision decision = controller.getMatchUI().getGameController().getTriggerDecision(yieldKey);
+                jmiAlwaysYes.setSelected(decision == TriggerDecision.ACCEPT);
+                jmiAlwaysNo.setSelected(decision == TriggerDecision.DECLINE);
                 jmiAlwaysYes.setVisible(true);
                 jmiAlwaysNo.setVisible(true);
             } else {

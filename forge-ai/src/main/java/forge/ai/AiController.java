@@ -435,6 +435,8 @@ public class AiController {
             }
         }
 
+        landList = ComputerUtilCard.dedupeCards(landList);
+
         landList = CardLists.filter(landList, c -> {
             String name = c.getName();
             CardCollectionView battlefield = player.getCardsIn(ZoneType.Battlefield);
@@ -472,8 +474,6 @@ public class AiController {
         if (landList.isEmpty()) {
             return null;
         }
-
-        landList = ComputerUtilCard.dedupeCards(landList);
 
         CardCollection nonLandsInHand = CardLists.filter(player.getCardsIn(ZoneType.Hand), CardPredicates.NON_LANDS);
 
@@ -695,25 +695,17 @@ public class AiController {
         int bestRestriction = Integer.MIN_VALUE;
 
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(possibleCounters, player)) {
-            SpellAbility currentSA = sa;
             sa.setActivatingPlayer(player);
             // check everything necessary
 
-            AiPlayDecision opinion = canPlayAndPayFor(currentSA);
+            AiPlayDecision opinion = canPlayAndPayFor(sa);
             //PhaseHandler ph = game.getPhaseHandler();
             // System.out.printf("Ai thinks '%s' of %s @ %s %s >>> \n", opinion, sa, Lang.getPossesive(ph.getPlayerTurn().getName()), ph.getPhase());
             if (opinion == AiPlayDecision.WillPlay) {
-                if (bestSA == null) {
-                    bestSA = currentSA;
-                    bestRestriction = ComputerUtil.counterSpellRestriction(player, currentSA);
-                } else {
-                    // Compare bestSA with this SA
-                    final int restrictionLevel = ComputerUtil.counterSpellRestriction(player, currentSA);
-
-                    if (restrictionLevel > bestRestriction) {
-                        bestRestriction = restrictionLevel;
-                        bestSA = currentSA;
-                    }
+                final int restrictionLevel = ComputerUtil.counterSpellRestriction(player, sa);
+                if (bestSA == null || restrictionLevel > bestRestriction) {
+                    bestRestriction = restrictionLevel;
+                    bestSA = sa;
                 }
             }
         }
@@ -2167,9 +2159,9 @@ public class AiController {
         String aiLogic = sa.getParamOrDefault("AILogic", "");
 
         if (aiLogic.equals("AlwaysEven")) {
-            return false; // false is Even
+            return false;
         } else if (aiLogic.equals("AlwaysOdd")) {
-            return true; // true is Odd
+            return true;
         } else if (aiLogic.equals("Random")) {
             return MyRandom.getRandom().nextBoolean();
         } else if (aiLogic.equals("CMCInHand")) {

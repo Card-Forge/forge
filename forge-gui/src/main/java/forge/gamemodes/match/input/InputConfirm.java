@@ -21,7 +21,6 @@ import com.google.common.collect.ImmutableList;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.game.spellability.SpellAbility;
-import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.player.PlayerControllerHuman;
@@ -55,7 +54,7 @@ public class InputConfirm extends InputSyncronizedBase {
         return InputConfirm.confirm(controller, card, message, true, defaultOptions);
     }
     public static boolean confirm(final PlayerControllerHuman controller, final CardView card, final String message, final boolean defaultIsYes, final List<String> options) {
-         if (GuiBase.getInterface().isLibgdxPort()) {
+         if (controller.getGui().isLibgdxPort()) {
              return controller.getGui().confirm(card, message, defaultIsYes, options);
          }
         return confirm(controller, card, null, message, defaultIsYes, options);
@@ -64,7 +63,7 @@ public class InputConfirm extends InputSyncronizedBase {
         return InputConfirm.confirm(controller, sa, message, true, defaultOptions);
     }
     public static boolean confirm(final PlayerControllerHuman controller, final SpellAbility sa, final String message, final boolean defaultIsYes, final List<String> options) {
-         if (GuiBase.getInterface().isLibgdxPort()) {
+         if (controller.getGui().isLibgdxPort()) {
              if (sa == null)
                  return controller.getGui().confirm(null, message, defaultIsYes, options);
              if (sa.getTargets() != null && sa.getTargets().isTargetingAnyCard() && sa.getTargets().size() == 1)
@@ -77,7 +76,7 @@ public class InputConfirm extends InputSyncronizedBase {
          return InputConfirm.confirm(controller, card, sa, message, true, defaultOptions);
      }
      public static boolean confirm(final PlayerControllerHuman controller, final CardView card, final SpellAbility sa, final String message, final boolean defaultIsYes, final List<String> options) {
-         if (GuiBase.getInterface().isLibgdxPort()) {
+         if (controller.getGui().isLibgdxPort()) {
              return controller.getGui().confirm(card, message, defaultIsYes, options);
          }
          InputConfirm inp;

@@ -15,7 +15,7 @@ import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.card.CounterType;
 import forge.game.combat.CombatView;
-import forge.game.keyword.KeywordCollection.KeywordCollectionView;
+import forge.game.keyword.KeywordCollectionView;
 import forge.game.player.PlayerView;
 import forge.game.spellability.StackItemView;
 import forge.item.IPaperCard;
@@ -241,6 +241,12 @@ public class TrackableTypes {
             return new TrackableCollection<>();
         }
     };
+    public static final TrackableObjectType<CombatView> CombatViewType = new TrackableObjectType<CombatView>() {
+        @Override
+        protected CombatView getDefaultValue() {
+            return null;
+        }
+    };
     public static final TrackableType<ManaCost> ManaCostType = new TrackableType<ManaCost>() {
         @Override
         public ManaCost getDefaultValue() {
@@ -296,22 +302,16 @@ public class TrackableTypes {
             return null;
         }
     };
-    public static final TrackableType<KeywordCollectionView> KeywordCollectionViewType = new TrackableType<KeywordCollectionView>() {
-        @Override
-        protected KeywordCollectionView getDefaultValue() {
-            return null;
-        }
-    };
     public static final TrackableType<Map<Object, Object>> GenericMapType = new TrackableType<Map<Object, Object>>() {
         @Override
         public Map<Object, Object> getDefaultValue() {
             return null;
         }
     };
-    public static final TrackableObjectType<CombatView> CombatViewType = new TrackableObjectType<CombatView>() {
+    public static final TrackableType<KeywordCollectionView> KeywordCollectionViewType = new TrackableType<KeywordCollectionView>() {
         @Override
-        protected CombatView getDefaultValue() {
-            return null;
+        public KeywordCollectionView getDefaultValue() {
+            return KeywordCollectionView.EMPTY;
         }
     };
 }

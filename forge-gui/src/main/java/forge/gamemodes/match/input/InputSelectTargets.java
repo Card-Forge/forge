@@ -63,17 +63,19 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             lastTarget = card;
         }
 
-        controller.getGui().setSelectables(CardView.getCollection(choices));
+        final int initialMin = numTargets != null ? numTargets : sa.getMinTargets();
+        final int initialMax = numTargets != null ? numTargets : sa.getMaxTargets();
+        controller.getGui().setSelectables(CardView.getCollection(choices), initialMin, initialMax);
         final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
         for (final Card c : choices) {
             zonesToUpdate.add(new PlayerZoneUpdate(c.getZone().getPlayer().getView(), c.getZone().getZoneType()));
         }
         FThreads.invokeInEdtNowOrLater(() -> {
+            final List<GameEntityView> views = new ArrayList<>();
             for (final GameEntity c : targets) {
-                if (c instanceof Card) {
-                    controller.getGui().setHighlighted(GameEntityView.get(c), true);
-                }
+                if (c instanceof Card) views.add(GameEntityView.get(c));
             }
+            controller.getGui().setHighlighted(views, true);
             controller.getGui().updateZones(zonesToUpdate);
         });
     }
@@ -308,6 +310,12 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             }
         }
         addTarget(card);
+        if (otherCardsToSelect != null) {
+            for (final Card other : otherCardsToSelect) {
+                if (isFinished() || hasAllTargets()) break;
+                onCardSelected(other, null, triggerEvent);
+            }
+        }
         return true;
     }
 
@@ -386,7 +394,7 @@ public final class InputSelectTargets extends InputSyncronizedBase {
         if (ge instanceof Card c) {
             lastTarget = c;
         }
-        getController().getGui().setHighlighted(GameEntityView.get(ge), true);
+        getController().getGui().setHighlighted(List.of(GameEntityView.get(ge)), true);
 
         if (hasAllTargets()) {
             bOk = true;
@@ -411,16 +419,15 @@ public final class InputSelectTargets extends InputSyncronizedBase {
             // try to get last selected card
             lastTarget = Iterables.getLast(IterableUtil.filter(targets, Card.class), null);
         }
-        getController().getGui().setHighlighted(GameEntityView.get(ge), false);
+        getController().getGui().setHighlighted(List.of(GameEntityView.get(ge)), false);
 
         this.showMessage();
     }
 
     private void done() {
-        for (final GameEntity ge : targets) {
-            //getController().macros().addRememberedAction(new TargetEntityAction(c.getView()));
-            getController().getGui().setHighlighted(GameEntityView.get(ge), false);
-        }
+        final List<GameEntityView> views = new ArrayList<>(targets.size());
+        for (final GameEntity ge : targets) views.add(GameEntityView.get(ge));
+        getController().getGui().setHighlighted(views, false);
 
         this.stop();
     }

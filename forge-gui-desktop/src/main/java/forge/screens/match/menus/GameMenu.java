@@ -1,43 +1,35 @@
 package forge.screens.match.menus;
 
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JMenu;
-import javax.swing.JPopupMenu;
+import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
-
-import com.google.common.primitives.Ints;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 
 import forge.control.KeyboardShortcuts;
+import forge.gamemodes.match.YieldController;
+import forge.gamemodes.match.YieldUpdate;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
-import forge.localinstance.skin.FSkinProp;
-import forge.menus.MenuUtil;
 import forge.model.FModel;
 import forge.screens.match.CMatchUI;
-import forge.screens.match.VAutoYields;
-import forge.screens.match.controllers.CDock.ArcState;
-import forge.toolbox.FSkin.SkinIcon;
-import forge.toolbox.FSkin.SkinnedMenu;
+import forge.screens.match.VAutoYieldsAndTriggers;
+import forge.screens.match.VYieldSettings;
+import forge.toolbox.FSkin.SkinnedCheckBoxMenuItem;
 import forge.toolbox.FSkin.SkinnedMenuItem;
-import forge.toolbox.FSkin.SkinnedRadioButtonMenuItem;
 import forge.util.Localizer;
 
 /**
- * Returns a JMenu containing options associated with current game.
- * <p>
- * Replicates options available in Dock tab.
+ * Returns a JMenu containing core in-game actions for the current match.
  */
 public final class GameMenu {
+    private static final ForgePreferences prefs = FModel.getPreferences();
     private final CMatchUI matchUI;
     public GameMenu(final CMatchUI matchUI) {
         this.matchUI = matchUI;
     }
-
-    private static ForgePreferences prefs = FModel.getPreferences();
-    private static boolean showIcons;
 
     public JMenu getMenu() {
         final Localizer localizer = Localizer.getInstance();
@@ -48,151 +40,101 @@ public final class GameMenu {
         menu.add(getMenuItem_EndTurn());
         menu.add(getMenuItem_AlphaStrike());
         menu.addSeparator();
-        menu.add(getMenuItem_TargetingArcs());
-        menu.add(new CardOverlaysMenu(matchUI).getMenu());
-        menu.add(getMenuItem_AutoYields());
-        menu.addSeparator();
         menu.add(getMenuItem_ViewDeckList());
+        menu.addSeparator();
+        menu.add(getMenuItem_AutoYieldsAndTriggers());
+        menu.add(getMenuItem_YieldSettings());
+        final SkinnedCheckBoxMenuItem autoPassItem = getMenuItem_AutoPass();
+        menu.add(autoPassItem);
+        menu.add(getMenuItem_ClearRememberedAbilityOrders());
+        menu.addSeparator();
+        menu.addMenuListener(new MenuListener() {
+            @Override public void menuSelected(final MenuEvent e) {
+                autoPassItem.setState(prefs.getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS));
+            }
+            @Override public void menuDeselected(final MenuEvent e) {}
+            @Override public void menuCanceled(final MenuEvent e) {}
+        });
         return menu;
+    }
+
+    private SkinnedMenuItem getMenuItem_ClearRememberedAbilityOrders() {
+        final Localizer localizer = Localizer.getInstance();
+        final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblResetSavedAbilityOrders"));
+        menuItem.addActionListener(e -> matchUI.getGameController().sendYieldUpdate(new YieldUpdate.ClearAbilityOrders()));
+        return menuItem;
     }
 
     private SkinnedMenuItem getMenuItem_Undo() {
         final Localizer localizer = Localizer.getInstance();
         final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblUndo"));
         setAcceleratorFromPref(menuItem, FPref.SHORTCUT_UNDO);
-        menuItem.addActionListener(getUndoAction());
+        menuItem.addActionListener(e -> matchUI.getGameController().undoLastAction());
         return menuItem;
-    }
-
-    private ActionListener getUndoAction() {
-        return e -> matchUI.getGameController().undoLastAction();
     }
 
     private SkinnedMenuItem getMenuItem_Concede() {
-        SkinnedMenuItem menuItem = new SkinnedMenuItem(matchUI.getConcedeCaption());
-        menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_CONCEDE) : null));
+        final SkinnedMenuItem menuItem = new SkinnedMenuItem(matchUI.getConcedeCaption());
         setAcceleratorFromPref(menuItem, FPref.SHORTCUT_CONCEDE);
-        menuItem.addActionListener(getConcedeAction());
+        menuItem.addActionListener(e -> matchUI.concede());
         return menuItem;
-    }
-
-    private ActionListener getConcedeAction() {
-        return e -> matchUI.concede();
-    }
-
-    private SkinnedMenuItem getMenuItem_AlphaStrike() {
-        final Localizer localizer = Localizer.getInstance();
-        final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblAlphaStrike"));
-        menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_ALPHASTRIKE) : null));
-        setAcceleratorFromPref(menuItem, FPref.SHORTCUT_ALPHASTRIKE);
-        menuItem.addActionListener(getAlphaStrikeAction());
-        return menuItem;
-    }
-
-    private ActionListener getAlphaStrikeAction() {
-        return e -> matchUI.getGameController().alphaStrike();
     }
 
     private SkinnedMenuItem getMenuItem_EndTurn() {
         final Localizer localizer = Localizer.getInstance();
         final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblEndTurn"));
-        menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_ENDTURN) : null));
         setAcceleratorFromPref(menuItem, FPref.SHORTCUT_ENDTURN);
-        menuItem.addActionListener(getEndTurnAction());
+        menuItem.addActionListener(e -> YieldController.endTurn(matchUI.getGameController(), matchUI.getCurrentPlayer()));
         return menuItem;
     }
 
-    private ActionListener getEndTurnAction() {
-        return e -> matchUI.getGameController().passPriorityUntilEndOfTurn();
-    }
-
-    /** Sets a menu item's accelerator display from a shortcut preference. */
-    private static void setAcceleratorFromPref(final SkinnedMenuItem menuItem, final FPref pref) {
-        final KeyStroke ks = KeyboardShortcuts.getKeyStrokeForPref(pref);
-        if (ks != null) {
-            menuItem.setAccelerator(ks);
-        }
-    }
-
-    private SkinnedMenu getMenuItem_TargetingArcs() {
+    private SkinnedMenuItem getMenuItem_AlphaStrike() {
         final Localizer localizer = Localizer.getInstance();
-        final SkinnedMenu menu = new SkinnedMenu(localizer.getMessage("lblTargetingArcs"));
-        final ButtonGroup group = new ButtonGroup();
-
-        SkinIcon menuIcon = MenuUtil.getMenuIcon(FSkinProp.ICO_ARCSOFF);
-
-        if (matchUI.getCDock().getArcState() == null) {
-            final String arcStateStr = FModel.getPreferences().getPref(FPref.UI_TARGETING_OVERLAY);
-            final Integer arcState = Ints.tryParse(arcStateStr);
-            matchUI.getCDock().setArcState(ArcState.values()[arcState == null ? 0 : arcState]);
-        }
-
-        SkinnedRadioButtonMenuItem menuItem;
-        menuItem = getTargetingArcRadioButton(localizer.getMessage("lblOff"), FSkinProp.ICO_ARCSOFF, ArcState.OFF);
-        if (menuItem.isSelected()) { menuIcon = MenuUtil.getMenuIcon(FSkinProp.ICO_ARCSOFF); }
-        group.add(menuItem);
-        menu.add(menuItem);
-        menuItem = getTargetingArcRadioButton(localizer.getMessage("lblCardMouseOver"), FSkinProp.ICO_ARCSHOVER, ArcState.MOUSEOVER);
-        if (menuItem.isSelected()) { menuIcon = MenuUtil.getMenuIcon(FSkinProp.ICO_ARCSHOVER); }
-        group.add(menuItem);
-        menu.add(menuItem);
-        menuItem = getTargetingArcRadioButton(localizer.getMessage("lblAlwaysOn"), FSkinProp.ICO_ARCSON, ArcState.ON);
-        if (menuItem.isSelected()) { menuIcon = MenuUtil.getMenuIcon(FSkinProp.ICO_ARCSON); }
-        group.add(menuItem);
-
-        menu.setIcon((showIcons ? menuIcon : null));
-        menu.add(menuItem);
-
-        return menu;
-    }
-
-    private SkinnedRadioButtonMenuItem getTargetingArcRadioButton(final String caption, final FSkinProp icon, final ArcState arcState) {
-        final SkinnedRadioButtonMenuItem menuItem = new SkinnedRadioButtonMenuItem(caption);
-        menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(icon) : null));
-        menuItem.setSelected(arcState == matchUI.getCDock().getArcState());
-        menuItem.addActionListener(getTargetingRadioButtonAction(arcState));
+        final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblAlphaStrike"));
+        setAcceleratorFromPref(menuItem, FPref.SHORTCUT_ALPHASTRIKE);
+        menuItem.addActionListener(e -> matchUI.getGameController().alphaStrike());
         return menuItem;
-    }
-
-    private ActionListener getTargetingRadioButtonAction(final ArcState arcState) {
-        return e -> {
-            prefs.setPref(FPref.UI_TARGETING_OVERLAY, String.valueOf(arcState.ordinal()));
-            prefs.save();
-            matchUI.getCDock().setArcState(arcState);
-            setTargetingArcMenuIcon((SkinnedRadioButtonMenuItem)e.getSource());
-        };
-    }
-
-    private static void setTargetingArcMenuIcon(SkinnedRadioButtonMenuItem item) {
-        final JPopupMenu pop = (JPopupMenu)item.getParent();
-        final JMenu menu = (JMenu)pop.getInvoker();
-        menu.setIcon(item.getIcon());
-    }
-
-    private SkinnedMenuItem getMenuItem_AutoYields() {
-        final Localizer localizer = Localizer.getInstance();
-        final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblAutoYields"));
-        menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_WARNING) : null));
-        menuItem.addActionListener(getAutoYieldsAction());
-        return menuItem;
-    }
-
-    private ActionListener getAutoYieldsAction() {
-        return e -> {
-            final VAutoYields autoYields = new VAutoYields(matchUI);
-            autoYields.showAutoYields();
-        };
     }
 
     private SkinnedMenuItem getMenuItem_ViewDeckList() {
         final Localizer localizer = Localizer.getInstance();
         final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblDeckList"));
-        menuItem.setIcon((showIcons ? MenuUtil.getMenuIcon(FSkinProp.ICO_DECKLIST) : null));
-        menuItem.addActionListener(getViewDeckListAction());
+        menuItem.addActionListener(e -> matchUI.viewDeckList());
         return menuItem;
     }
 
-    private ActionListener getViewDeckListAction() {
-        return e -> matchUI.viewDeckList();
+    private SkinnedMenuItem getMenuItem_AutoYieldsAndTriggers() {
+        final Localizer localizer = Localizer.getInstance();
+        final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblAutoYieldsAndTriggers"));
+        menuItem.addActionListener(e -> new VAutoYieldsAndTriggers(matchUI).showDialog());
+        return menuItem;
+    }
+
+    private SkinnedMenuItem getMenuItem_YieldSettings() {
+        final Localizer localizer = Localizer.getInstance();
+        final SkinnedMenuItem menuItem = new SkinnedMenuItem(localizer.getMessage("lblYieldSettings"));
+        menuItem.addActionListener(e -> new VYieldSettings(matchUI).showDialog());
+        return menuItem;
+    }
+
+    private SkinnedCheckBoxMenuItem getMenuItem_AutoPass() {
+        final Localizer localizer = Localizer.getInstance();
+        final SkinnedCheckBoxMenuItem menuItem = new SkinnedCheckBoxMenuItem(localizer.getMessage("lblEnableAutoPass"));
+        setAcceleratorFromPref(menuItem, FPref.SHORTCUT_YIELD_AUTO_PASS);
+        menuItem.setState(prefs.getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS));
+        menuItem.addActionListener(e -> {
+            YieldController.toggleAutoPassNoActions(matchUI.getGameController());
+            matchUI.getCDock().update();
+            menuItem.setState(prefs.getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS));
+        });
+        return menuItem;
+    }
+
+    /** Sets a menu item's accelerator display from a shortcut preference. */
+    private static void setAcceleratorFromPref(final JMenuItem menuItem, final FPref pref) {
+        final KeyStroke ks = KeyboardShortcuts.getKeyStrokeForPref(pref);
+        if (ks != null) {
+            menuItem.setAccelerator(ks);
+        }
     }
 }

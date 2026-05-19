@@ -17,21 +17,22 @@
  */
 package forge.screens.match.controllers;
 
-import java.util.Iterator;
+import java.util.Map;
 
-import com.google.common.collect.Iterators;
 import com.google.common.primitives.Ints;
 
 import forge.Singletons;
-import forge.gui.SOverlayUtils;
+import forge.gamemodes.match.YieldController;
 import forge.gui.UiCommand;
 import forge.gui.framework.ICDoc;
-import forge.gui.framework.SLayoutIO;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.screens.match.CMatchUI;
+import forge.screens.match.VAutoYieldsAndTriggers;
+import forge.screens.match.VYieldSettings;
 import forge.screens.match.views.VDock;
+import forge.screens.match.views.VDock.DockButtonId;
 import forge.toolbox.FSkin;
 import forge.util.Localizer;
 
@@ -42,9 +43,6 @@ import forge.util.Localizer;
  */
 public class CDock implements ICDoc {
 
-    private ArcState arcState;
-    private final Iterator<ArcState> arcStateIterator = Iterators.cycle(ArcState.values());
-
     private final CMatchUI matchUI;
     private final VDock view;
     public CDock(final CMatchUI matchUI) {
@@ -52,98 +50,77 @@ public class CDock implements ICDoc {
         this.view = new VDock(this);
     }
 
-    public enum ArcState { OFF, MOUSEOVER, ON}
+    public enum ArcState {
+        OFF, MOUSEOVER, ON;
+        public ArcState next() {
+            final ArcState[] vs = values();
+            return vs[(ordinal() + 1) % vs.length];
+        }
+    }
 
     public VDock getView() {
         return view;
     }
 
-    /**
-     * End turn.
-     */
-    public void endTurn() {
-        matchUI.getGameController().passPriorityUntilEndOfTurn();
-    }
-
-    /**
-     * @return int State of targeting arc preference:<br>
-     * 0 = don't draw<br>
-     * 1 = draw on card mouseover<br>
-     * 2 = always draw
-     */
+    /** Reads UI_TARGETING_OVERLAY on demand. Falls back to OFF for an
+     *  unparseable / unset pref. */
     public ArcState getArcState() {
-        return arcState;
+        final Integer ord = Ints.tryParse(FModel.getPreferences().getPref(FPref.UI_TARGETING_OVERLAY));
+        return ArcState.values()[ord == null ? 0 : ord];
     }
 
-    /** @param state0 int */
-    private void refreshArcStateDisplay() {
-        switch (arcState) {
-        case OFF:
-            view.getBtnTargeting().setToolTipText(Localizer.getInstance().getMessage("lblTargetingArcsOff"));
-            view.getBtnTargeting().setIcon(FSkin.getIcon(FSkinProp.ICO_ARCSOFF));
-            view.getBtnTargeting().repaintSelf();
-            break;
-        case MOUSEOVER:
-            view.getBtnTargeting().setToolTipText(Localizer.getInstance().getMessage("lblTargetingArcsCardMouseover"));
-            view.getBtnTargeting().setIcon(FSkin.getIcon(FSkinProp.ICO_ARCSHOVER));
-            view.getBtnTargeting().repaintSelf();
-            break;
-        case ON:
-            view.getBtnTargeting().setToolTipText(Localizer.getInstance().getMessage("lblTargetingArcsAlwaysOn"));
-            view.getBtnTargeting().setIcon(FSkin.getIcon(FSkinProp.ICO_ARCSON));
-            view.getBtnTargeting().repaintSelf();
-            break;
-        }
-
-        FModel.getPreferences().setPref(FPref.UI_TARGETING_OVERLAY, String.valueOf(arcState.ordinal()));
-        FModel.getPreferences().save();
-    }
-
-    /** Toggle targeting overlay painting. */
     public void toggleTargeting() {
-        arcState = arcStateIterator.next();
-
-        refreshArcStateDisplay();
-        Singletons.getView().getFrame().repaint(); // repaint the match UI
-    }
-
-    public void setArcState(final ArcState state) {
-        arcState = state;
-        while (arcStateIterator.next() != arcState) { /* Put the iterator to the correct value */ }
+        final ArcState next = getArcState().next();
+        FModel.getPreferences().setPref(FPref.UI_TARGETING_OVERLAY, String.valueOf(next.ordinal()));
+        FModel.getPreferences().save();
+        update();
+        Singletons.getView().getFrame().repaint();
     }
 
     @Override
     public void register() {
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#initialize()
-     */
-    @SuppressWarnings("serial")
     @Override
     public void initialize() {
-        final String temp = FModel.getPreferences()
-                .getPref(FPref.UI_TARGETING_OVERLAY);
-        final Integer arcState = Ints.tryParse(temp);
-        setArcState(ArcState.values()[arcState == null ? 0 : arcState]);
-        refreshArcStateDisplay();
+        final Map<DockButtonId, UiCommand> commands = Map.of(
+                DockButtonId.CONCEDE,        matchUI::concede,
+                DockButtonId.YIELD_SETTINGS, () -> new VYieldSettings(matchUI).showDialog(),
+                DockButtonId.END_TURN,       () -> YieldController.endTurn(matchUI.getGameController(), matchUI.getCurrentPlayer()),
+                DockButtonId.AUTO_PASS,      this::toggleAutoPass,
+                DockButtonId.VIEW_DECK_LIST, matchUI::viewDeckList,
+                DockButtonId.ALPHA_STRIKE,   () -> matchUI.getGameController().alphaStrike(),
+                DockButtonId.TARGETING,      this::toggleTargeting,
+                DockButtonId.AUTO_YIELDS,    () -> new VAutoYieldsAndTriggers(matchUI).showDialog());
+        commands.forEach((id, cmd) -> view.getButton(id).setCommand(cmd));
 
-        view.getBtnConcede().setCommand((UiCommand) matchUI::concede);
-        view.getBtnSettings().setCommand((UiCommand) SOverlayUtils::showOverlay);
-        view.getBtnEndTurn().setCommand((UiCommand) this::endTurn);
-        view.getBtnViewDeckList().setCommand((UiCommand) matchUI::viewDeckList);
-        view.getBtnRevertLayout().setCommand((UiCommand) SLayoutIO::revertLayout);
-        view.getBtnOpenLayout().setCommand((UiCommand) SLayoutIO::openLayout);
-        view.getBtnSaveLayout().setCommand((UiCommand) SLayoutIO::saveLayout);
-        view.getBtnAlphaStrike().setCommand((UiCommand) () -> matchUI.getGameController().alphaStrike());
-        view.getBtnTargeting().setCommand((UiCommand) this::toggleTargeting);
+        update();
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.ICDoc#update()
-     */
+    private void toggleAutoPass() {
+        YieldController.toggleAutoPassNoActions(matchUI.getGameController());
+        update();
+    }
+
     @Override
     public void update() {
+        final ArcState arcs = getArcState();
+        view.getButton(DockButtonId.AUTO_PASS).setActive(FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS));
+        final VDock.DockButton targeting = view.getButton(DockButtonId.TARGETING);
+        targeting.setActive(arcs != ArcState.OFF);
+        final FSkinProp arcIcon = switch (arcs) {
+            case ON -> FSkinProp.ICO_ARCSON;
+            case MOUSEOVER -> FSkinProp.ICO_ARCSHOVER;
+            case OFF -> FSkinProp.ICO_ARCSOFF;
+        };
+        targeting.setImage(FSkin.getIcon(arcIcon));
+        final Localizer loc = Localizer.getInstance();
+        final String stateKey = switch (arcs) {
+            case OFF -> "lblOff";
+            case MOUSEOVER -> "lblCardMouseOver";
+            case ON -> "lblAlwaysOn";
+        };
+        targeting.setToolTipText(loc.getMessage("lblTargetingArcs") + ": " + loc.getMessage(stateKey));
     }
 
 }

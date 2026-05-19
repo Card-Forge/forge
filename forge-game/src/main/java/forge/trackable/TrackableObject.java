@@ -9,7 +9,21 @@ import java.util.Map.Entry;
 
 import forge.game.IIdentifiable;
 
-//base class for objects that can be tracked and synced between game server and GUI
+/**
+ * Base for objects that mirror engine state into a serialized view consumed by GUI(s).
+ * Each subclass exposes its mutable state as {@link TrackableProperty} entries; the engine
+ * writes via {@link #set} and consumers (GUIs) read via {@link #get}.
+ *
+ * <p><b>Consumer dirty bits.</b> Each GUI client that uses delta-sync registers as a
+ * consumer; the object keeps a per-consumer set of properties dirty since the consumer's
+ * last drain. {@link forge.gamemodes.net.server.DeltaSyncManager#collectDeltas} reads and
+ * clears them. Offline games never register consumers, so {@code set} does no tracking work.
+ *
+ * <p><b>Freeze interaction.</b> When the owning {@link Tracker} is frozen, {@code set}
+ * queues the change rather than applying it; the queued change replays at unfreeze. Do not
+ * read a property during a frozen window expecting a freshly-set value — {@code get}
+ * returns the pre-freeze value, not the queued one.
+ */
 public abstract class TrackableObject implements IIdentifiable, Serializable {
     private static final long serialVersionUID = 7386836745378571056L;
 
@@ -18,7 +32,6 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
     private final Map<TrackableProperty, Object> props;
     private int version;
     // Per-consumer dirty tracking. Lazy-init: null until first registerConsumer.
-    // In offline games (no consumers), set() does no tracking work at all.
     private transient Map<Integer, EnumSet<TrackableProperty>> consumers;
     private boolean copyingProps;
 
@@ -142,6 +155,20 @@ public abstract class TrackableObject implements IIdentifiable, Serializable {
      */
     public int getVersion() {
         return version;
+    }
+
+    /**
+     * Check whether a consumer is currently registered on this object.
+     * <p>
+     * Used by network serialization to gate IdRef substitution: the server
+     * registers a consumer on every TrackableObject it has included in a
+     * delta packet for a given client. An object without that consumer is
+     * one the client hasn't been told about (typically an ephemeral such as
+     * a {@code Card.fromPaperCard} choice copy that never enters a tracked
+     * zone), and protocol-method args holding it must serialize inline.
+     */
+    public boolean hasConsumer(int consumerId) {
+        return consumers != null && consumers.containsKey(consumerId);
     }
 
     /**

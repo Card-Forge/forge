@@ -25,7 +25,6 @@ import java.util.*;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicReference;
-
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JOptionPane;
@@ -67,12 +66,15 @@ import forge.game.spellability.SpellAbilityView;
 import forge.game.spellability.StackItemView;
 import forge.game.zone.ZoneType;
 import forge.util.IHasForgeLog;
+import forge.gamemodes.match.YieldMarker;
 import forge.gamemodes.net.NetworkGuiGame;
+import forge.interfaces.IGameController;
 import forge.gui.FNetOverlay;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.GuiChoose;
 import forge.gui.GuiDialog;
+import forge.gui.interfaces.IGuiGame.OrderResult;
 import forge.gui.GuiUtils;
 import forge.gui.MenuScroller;
 import forge.gui.SOverlayUtils;
@@ -129,6 +131,7 @@ import forge.util.collect.FCollectionView;
 import forge.view.FView;
 import forge.view.arcane.CardPanel;
 import forge.view.arcane.FloatingZone;
+
 import net.miginfocom.layout.LinkHandler;
 import net.miginfocom.swing.MigLayout;
 
@@ -172,6 +175,7 @@ public final class CMatchUI
     private final CPrompt cPrompt = new CPrompt(this);
     private final CStack cStack = new CStack(this);
     private int nextNotifiableStackIndex = 0;
+    private String lastPromptMessage = "";
 
     public CMatchUI() {
         this.view = new VMatchUI(this);
@@ -180,7 +184,7 @@ public final class CMatchUI
         this.myDocs.put(EDocID.CARD_PICTURE, cDetailPicture.getCPicture().getView());
         this.myDocs.put(EDocID.CARD_DETAIL, cDetailPicture.getCDetail().getView());
         // only create an ante doc if playing for ante
-        if (isPreferenceEnabled(FPref.UI_ANTE)) {
+        if (FModel.getPreferences().getPrefBoolean(FPref.UI_ANTE)) {
             this.myDocs.put(EDocID.CARD_ANTES, cAntes.getView());
         } else {
             this.myDocs.put(EDocID.CARD_ANTES, null);
@@ -198,10 +202,6 @@ public final class CMatchUI
         for (final Entry<EDocID, IVDoc<? extends ICDoc>> doc : myDocs.entrySet()) {
             doc.getKey().setDoc(doc.getValue());
         }
-    }
-
-    private static boolean isPreferenceEnabled(final ForgePreferences.FPref preferenceName) {
-        return FModel.getPreferences().getPrefBoolean(preferenceName);
     }
 
     FScreen getScreen() {
@@ -235,6 +235,35 @@ public final class CMatchUI
         refreshAllViews();
     }
 
+    @Override
+    public void refreshYieldUi(final PlayerView player) {
+        FThreads.invokeInEdtNowOrLater(() -> {
+            // Marker is rendered only on the local player's view of the targeted phase indicator.
+            PlayerView local = getCurrentPlayer();
+            if (!player.equals(local)) {
+                return;
+            }
+            for (final VField f : getFieldViews()) {
+                for (PhaseLabel l : f.getPhaseIndicator().allLabels()) {
+                    l.setYieldMarked(false);
+                }
+            }
+            IGameController controller = getGameController(local);
+            YieldMarker marker = controller != null ? controller.getYieldController().getAutoPassUntilMarker() : null;
+            if (marker == null) {
+                return;
+            }
+            VField markedField = getFieldViewFor(marker.getPhaseOwner());
+            if (markedField == null) {
+                return;
+            }
+            PhaseLabel target = markedField.getPhaseIndicator().getLabelFor(marker.getPhase());
+            if (target != null) {
+                target.setYieldMarked(true);
+            }
+        });
+    }
+
     private void refreshAllViews() {
         if (sortedPlayers != null) {
             FThreads.invokeInEdtNowOrLater(() -> {
@@ -243,6 +272,7 @@ public final class CMatchUI
                     f.updateZones();
                     f.updateManaPool();
                     f.getTabletop().update();
+                    f.updateTabLabel();
                 }
                 for (final VHand h : getHandViews()) {
                     h.getLayoutControl().updateHand();
@@ -380,9 +410,12 @@ public final class CMatchUI
         return view.getHands();
     }
     public VHand getHandFor(final PlayerView p) {
-        final int idx = getPlayerIndex(p);
-        final List<VHand> allHands = getHandViews();
-        return idx < 0 || idx >= allHands.size() ? null : allHands.get(idx);
+        for (final VHand hand : getHandViews()) {
+            if (p.equals(hand.getPlayer())) {
+                return hand;
+            }
+        }
+        return null;
     }
 
     @Override
@@ -424,7 +457,17 @@ public final class CMatchUI
         }
         cCombat.setModel(combat);
         cCombat.update();
-    } // showCombat(CombatView)
+
+        // Combat pairings changed — rebuild layout so grouping reflects them
+        if (!"default".equals(FModel.getPreferences().getPref(FPref.UI_GROUP_PERMANENTS))
+                || FModel.getPreferences().getPrefBoolean(FPref.UI_SEPARATE_COMBAT_STACKS)) {
+            FThreads.invokeInEdtNowOrLater(() -> {
+                for (final VField f : getFieldViews()) {
+                    f.getTabletop().doLayout();
+                }
+            });
+        }
+    }
 
     @Override
     public void updateDependencies() {
@@ -486,6 +529,7 @@ public final class CMatchUI
             }
             if (setupPlayZone) {
                 vField.getTabletop().update();
+                vField.updateTabLabel();
             }
             if (updateHand) {
                 final VHand vHand = getHandFor(owner);
@@ -542,8 +586,9 @@ public final class CMatchUI
             for (final PlayerZoneUpdate update : zonesToUpdate) {
                 final PlayerView player = update.getPlayer();
                 for (final ZoneType zone : update.getZones()) {
-                    if(FLOATING_ZONE_TYPES.contains(zone))
-                        FloatingZone.hide(this,player,zone);
+                    if (FLOATING_ZONE_TYPES.contains(zone) || (zone == ZoneType.Hand && controller != player)) {
+                        FloatingZone.hide(this, player, zone);
+                    }
                 }
             }
         }
@@ -573,8 +618,10 @@ public final class CMatchUI
     @Override
     public void updateCards(final Iterable<CardView> cards) {
         for (final CardView c : cards) {
+            // Null can flow in from a remote-side event whose IdRef failed to resolve in the tracker.
+            if (c == null) { continue; }
             final ZoneType zone = c.getZone();
-            if (zone == null) { return; }
+            if (zone == null) { continue; }
 
             switch (zone) {
             case Battlefield:
@@ -592,6 +639,8 @@ public final class CMatchUI
                         cp.repaintOverlays();
                     }
                 }
+                // VHand only covers the local hand; opponent hands shown in a FloatingZone need an explicit refresh.
+                FloatingZone.refresh(c.getController(), zone);
                 break;
             default:
                 FloatingZone.refresh(c.getController(),zone); // in case the card is visible in the zone
@@ -601,8 +650,8 @@ public final class CMatchUI
     }
 
     @Override
-    public void setSelectables(final Iterable<CardView> cards) {
-        super.setSelectables(cards);
+    public void setSelectables(final Iterable<CardView> cards, final int min, final int max) {
+        super.setSelectables(cards, min, max);
         // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
         FThreads.invokeInEdtNowOrLater(() -> {
             for (final PlayerView p : getGameView().getPlayers()) {
@@ -631,7 +680,16 @@ public final class CMatchUI
                 }
             }
             FloatingZone.refreshAll();
+            FloatingZone.clearAllHotkeyAffordance();
         });
+    }
+
+    @Override
+    public void setHighlighted(final Iterable<GameEntityView> entities, final boolean b) {
+        super.setHighlighted(entities, b);
+        if (isSelecting()) {
+            FThreads.invokeInEdtNowOrLater(FloatingZone::refreshSelectionPrompts);
+        }
     }
 
     @Override
@@ -1001,21 +1059,39 @@ public final class CMatchUI
     public void showPromptMessage(final PlayerView playerView, final String message) {
         cancelWaitingTimer();
         cPrompt.setMessage(message);
+        notePromptMessage(message);
     }
     public void showPromptMessageNoCancel(final PlayerView playerView, final String message) {
         cPrompt.setMessage(message);
+        notePromptMessage(message);
     }
 
     @Override
     public void showCardPromptMessage(PlayerView playerView, String message, CardView card) {
         cancelWaitingTimer();
         cPrompt.setMessage(message, card);
+        notePromptMessage(message);
     }
 
-    //  no override for now
-    public void showPromptMessage(final PlayerView playerView, final String message, final CardView card ) {
-        cancelWaitingTimer();
-        cPrompt.setMessage(message,card);
+    private void notePromptMessage(String message) {
+        if (message != null) {
+            int lastBreak = message.lastIndexOf("\n");
+            if (lastBreak != -1) {
+                // try to only use the specific message of the input
+                // not fully accurate but ok for now
+                message = message.substring(lastBreak + 1);
+            }
+        } else {
+            message = "";
+        }
+        lastPromptMessage = message;
+        if (isSelecting()) {
+            FloatingZone.refreshSelectionPrompts();
+        }
+    }
+
+    public String getPromptMessage() {
+        return lastPromptMessage;
     }
 
     @Override
@@ -1193,14 +1269,9 @@ public final class CMatchUI
     }
 
     @Override
-    public <T> List<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
-            final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode) {
-        /*if ((sourceChoices != null && !sourceChoices.isEmpty() && sourceChoices.iterator().next() instanceof GameObject)
-                || (destChoices != null && !destChoices.isEmpty() && destChoices.iterator().next() instanceof GameObject)) {
-            System.err.println("Warning: GameObject passed to GUI! Printing stack trace.");
-            Thread.dumpStack();
-        }*/
-        return GuiChoose.order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode, this);
+    public <T> OrderResult<T> order(final String title, final String top, final int remainingObjectsMin, final int remainingObjectsMax,
+            final List<T> sourceChoices, final List<T> destChoices, final CardView referenceCard, final boolean sideboardingMode, final boolean showRememberCheckbox) {
+        return GuiChoose.order(title, top, remainingObjectsMin, remainingObjectsMax, sourceChoices, destChoices, referenceCard, sideboardingMode, showRememberCheckbox, this);
     }
 
     @Override
@@ -1299,13 +1370,23 @@ public final class CMatchUI
         final PhaseType[] phases = PhaseType.values();
 
         for (int i = 0; i < fieldViews.size(); i++) {
-            final FPref[] keys = isLocalPlayer(sortedPlayers.get(i))
+            final PlayerView player = sortedPlayers.get(i);
+            final FPref[] keys = isLocalPlayer(player)
                     ? FPref.PHASES_HUMAN : FPref.PHASES_AI;
             final PhaseIndicator pi = fieldViews.get(i).getPhaseIndicator();
             for (int p = 1; p < phases.length; p++) {
-                pi.getLabelFor(phases[p]).setEnabled(prefs.getPrefBoolean(keys[p - 1]));
+                final PhaseType phase = phases[p];
+                final PhaseLabel label = pi.getLabelFor(phase);
+                label.setEnabled(prefs.getPrefBoolean(keys[p - 1]));
+                label.setOnToggled(() -> pushSkipPhaseToControllers(player, phase));
+                label.setOnRightClick(() -> handleYieldMarkerToggle(player, phase, () -> {
+                    label.setEnabled(true);
+                    label.repaintOnlyThisLabel();
+                }));
             }
         }
+
+        seedYieldStateOnHost();
     }
 
     @Override

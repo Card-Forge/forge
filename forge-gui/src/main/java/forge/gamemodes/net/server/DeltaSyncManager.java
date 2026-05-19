@@ -70,6 +70,11 @@ public class DeltaSyncManager implements IHasForgeLog {
     private static final AtomicInteger NEXT_CONSUMER_ID = new AtomicInteger(0);
     private final int consumerId = NEXT_CONSUMER_ID.getAndIncrement();
 
+    /** Per-client ID used to gate IdRef substitution on the outer codec. */
+    public int getConsumerId() {
+        return consumerId;
+    }
+
     private long sequenceNumber = 0;
 
     // Objects registered with this consumer (for cleanup on disconnect/reset)
@@ -556,6 +561,11 @@ public class DeltaSyncManager implements IHasForgeLog {
         if (lastChecksumDetail != null) {
             netLog.error("[DeltaSync] Server checksum detail: {}", lastChecksumDetail);
         }
+        // Clear so a later resync only logs if a fresh checksum has been
+        // computed since — otherwise we'd log a breakdown that postdates the
+        // mismatch the client is reporting.
+        lastChecksumBreakdown = null;
+        lastChecksumDetail = null;
     }
 
     /**

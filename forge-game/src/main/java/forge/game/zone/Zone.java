@@ -20,7 +20,6 @@ package forge.game.zone;
 import java.util.*;
 import java.util.function.Predicate;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -240,7 +239,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         }
 
         if (cardsAdded.isEmpty()) {
-            return ImmutableList.of();
+            return List.of();
         }
 
         // all cards if key == null

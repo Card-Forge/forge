@@ -18,6 +18,8 @@
 package forge.view.arcane;
 
 import java.awt.Color;
+import java.awt.KeyboardFocusManager;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -26,13 +28,17 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import javax.swing.border.Border;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
@@ -52,12 +58,18 @@ import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.views.VHand;
 import forge.screens.match.views.VZone;
+import forge.toolbox.FHtmlViewer;
+import forge.toolbox.FLabel;
 import forge.toolbox.FMouseAdapter;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
+import forge.toolbox.FTextField;
+import forge.toolbox.MouseTriggerEvent;
 import forge.toolbox.special.PlayerDetailsPanel;
 import forge.util.Localizer;
+import forge.util.StreamUtil;
 import forge.util.collect.FCollection;
+import forge.util.collect.FCollectionView;
 import forge.view.FView;
 
 public class FloatingZone extends FloatingCardArea {
@@ -306,6 +318,13 @@ public class FloatingZone extends FloatingCardArea {
         }
     }
 
+    /** Lightweight refresh path for mid-selection prompt changes — avoids rebuilding card panels. */
+    public static void refreshSelectionPrompts() {
+        for (final FloatingZone fz : floatingAreas.values()) {
+            if (fz.isVisible()) fz.updatePromptVisibility();
+        }
+    }
+
     /** Returns the docked VZone for a player/zone, or null. */
     public static VZone getDockedZone(final PlayerView player, final ZoneType zone) {
         return dockedZones.get(getKey(player, zone));
@@ -517,6 +536,22 @@ public class FloatingZone extends FloatingCardArea {
     protected boolean sortedByName = false;
     protected FCollection<CardView> cardList;
 
+    private final FTextField searchField = new FTextField.Builder()
+            .ghostText(Localizer.getInstance().getMessage("lblFilterByName"))
+            .build();
+    private final FHtmlViewer promptLabel = new FHtmlViewer();
+    private final FLabel hotkeyHintBase = new FLabel.Builder()
+            .text(Localizer.getInstance().getMessage("lblHotkeySelectHint"))
+            .fontSize(10)
+            .fontAlign(SwingConstants.CENTER)
+            .build();
+    private final FLabel hotkeyHintMin = new FLabel.Builder()
+            .text(Localizer.getInstance().getMessage("lblHotkeySelectHintMin"))
+            .fontSize(10)
+            .fontAlign(SwingConstants.CENTER)
+            .build();
+    private String filter = "";
+
     private final Comparator<CardView> comp = (lhs, rhs) -> {
         if (!getMatchUI().mayView(lhs)) {
             return (getMatchUI().mayView(rhs)) ? 1 : 0;
@@ -528,13 +563,19 @@ public class FloatingZone extends FloatingCardArea {
     };
 
     protected Iterable<CardView> getCards() {
-        Iterable<CardView> zoneCards = player.getCards(zone);
+        FCollectionView<CardView> zoneCards = player.getCards(zone);
         if (zoneCards != null) {
-            cardList = new FCollection<>(zoneCards);
+            Iterable<CardView> safe = getMatchUI().isNetGame() ? zoneCards.threadSafeIterable() : zoneCards;
+            cardList = new FCollection<>(safe);
             if (sortedByName) {
                 cardList.sort(comp);
             } else if (zone == ZoneType.Flashback) {
                 cardList.sort(ZONE_ORDER_COMPARATOR);
+            }
+            if (!filter.isEmpty()) {
+                final String needle = filter.toLowerCase(Locale.ROOT);
+                cardList.removeIf(card -> !getMatchUI().mayView(card)
+                        || !card.getName().toLowerCase(Locale.ROOT).contains(needle));
             }
             return cardList;
         } else {
@@ -544,7 +585,20 @@ public class FloatingZone extends FloatingCardArea {
 
     private FloatingZone(final CMatchUI matchUI, final PlayerView player0, final ZoneType zone0) {
         super(matchUI, new FScrollPane(false, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER));
-        window.add(getScrollPane(), "grow, push");
+        searchField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override public void insertUpdate(final DocumentEvent e) { onFilterChanged(); }
+            @Override public void removeUpdate(final DocumentEvent e) { onFilterChanged(); }
+            @Override public void changedUpdate(final DocumentEvent e) { onFilterChanged(); }
+        });
+        promptLabel.setBorder(BorderFactory.createEmptyBorder(3, 6, 3, 6));
+        promptLabel.setVisible(false);
+        window.add(promptLabel, "growx, wmin 10, gapbottom 4, wrap, hidemode 3");
+        window.add(searchField, "growx, wrap");
+        window.add(getScrollPane(), "grow, push, wrap");
+        hotkeyHintBase.setVisible(false);
+        hotkeyHintMin.setVisible(false);
+        window.add(hotkeyHintBase, "growx, wrap, hidemode 3");
+        window.add(hotkeyHintMin, "growx, hidemode 3");
         window.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE); //pfps so that old content does not reappear?
         getScrollPane().setViewportView(this);
         setOpaque(false);
@@ -552,6 +606,33 @@ public class FloatingZone extends FloatingCardArea {
         zone = zone0;
         setPlayer(player0);
         setVertical(true);
+    }
+
+    private void onFilterChanged() {
+        filter = searchField.getText();
+        refresh();
+    }
+
+    @Override
+    protected void showWindow() {
+        // Install before setVisible so our dispatcher precedes FDialog's per-show Esc handler.
+        ensureHotkeyDispatcherInstalled();
+        onShow();
+        // Override the base class's focusableWindowState=false so the search field can take keystrokes.
+        getWindow().setFocusableWindowState(true);
+        if (getMatchUI().isSelecting()) {
+            getWindow().setDefaultFocus(searchField);
+        }
+        getWindow().setVisible(true);
+    }
+
+    @Override
+    protected void hideWindow() {
+        super.hideWindow();
+        // Clear filter so it doesn't persist into the next time this zone is opened.
+        if (!searchField.getText().isEmpty()) {
+            searchField.setText("");
+        }
     }
 
     @Override
@@ -577,7 +658,34 @@ public class FloatingZone extends FloatingCardArea {
             }
         }
         setCardPanels(cardPanels);
-        getWindow().setTitle(String.format(title, cardPanels.size()));
+        final int shown = cardPanels.size();
+        final FCollectionView<CardView> zoneCards = player.getCards(zone);
+        final int total = zoneCards != null ? zoneCards.size() : shown;
+        if (!filter.isEmpty() && shown < total) {
+            final String sortDetail = sortedByName
+                    ? Localizer.getInstance().getMessage("lblRightClickToUnSort")
+                    : Localizer.getInstance().getMessage("lblRightClickToSort");
+            getWindow().setTitle(Localizer.getInstance().getMessage("lblPlayerZoneNOfMCardSortStatus",
+                    player.getName(), zone.getTranslatedName(), shown, total, sortDetail));
+        } else {
+            getWindow().setTitle(String.format(title, shown));
+        }
+        updatePromptVisibility();
+    }
+
+    private void updatePromptVisibility() {
+        final boolean show = getCards() != null && StreamUtil.stream(getCards()).anyMatch(c -> getMatchUI().isSelectable(c));
+        final String prompt = show ? getMatchUI().getPromptMessage() : null;
+        if (prompt != null && !prompt.isEmpty()) {
+            promptLabel.setText(FSkin.encodeSymbols(prompt, false));
+            promptLabel.setVisible(true);
+        } else {
+            promptLabel.setText("");
+            promptLabel.setVisible(false);
+        }
+        hotkeyHintBase.setVisible(show);
+        hotkeyHintMin.setVisible(show && getMatchUI().getSelectionMin() > 1);
+        window.revalidate();
     }
 
     private void toggleSorted() {
@@ -643,6 +751,106 @@ public class FloatingZone extends FloatingCardArea {
             default:
                 locPref = null;
                 break;
+        }
+    }
+
+    private static boolean hotkeyDispatcherInstalled;
+
+    private static void ensureHotkeyDispatcherInstalled() {
+        if (hotkeyDispatcherInstalled) return;
+        hotkeyDispatcherInstalled = true;
+        KeyboardFocusManager.getCurrentKeyboardFocusManager()
+                .addKeyEventDispatcher(FloatingZone::dispatchHotkey);
+    }
+
+    private static boolean dispatchHotkey(final KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_CONTROL) {
+            for (final FloatingZone fz : floatingAreas.values()) {
+                if (!fz.isVisible()) continue;
+                if (e.getID() == KeyEvent.KEY_RELEASED) {
+                    fz.assignOwnHotkeyDigits(true);
+                } else if (e.getID() == KeyEvent.KEY_PRESSED) {
+                    fz.assignOwnHotkeyDigits(false);
+                }
+            }
+        }
+        if (e.getID() != KeyEvent.KEY_PRESSED) return false;
+        // Esc with focused, non-empty search field clears the filter instead of closing the window.
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE && !e.isControlDown() && !e.isAltDown() && !e.isMetaDown()) {
+            for (final FloatingZone fz : floatingAreas.values()) {
+                if (!fz.isVisible()) continue;
+                if (fz.searchField.isFocusOwner() && !fz.searchField.getText().isEmpty()) {
+                    fz.searchField.setText("");
+                    return true;
+                }
+            }
+            return false;
+        }
+        if (!e.isControlDown() || e.isAltDown() || e.isMetaDown()) return false;
+        final int digit = e.getKeyCode() - KeyEvent.VK_0;
+        if (digit < 0 || digit > 9) return false;
+        if (digit == 0) {
+            // Ctrl+0: auto-pick the first N selectables that haven't been picked yet.
+            // Selection progress is tracked client-side via the highlighted set — both
+            // InputSelectTargets and InputSelectManyBase call setHighlighted(true/false)
+            // on add/remove, so highlighted ∩ selectable == cards picked so far.
+            // Batched into one selectCard so the server processes atomically — separate
+            // messages race (a thread spawned per message).
+            for (final FloatingZone fz : new ArrayList<>(floatingAreas.values())) {
+                if (!fz.isVisible()) continue;
+                final int min = fz.getMatchUI().getSelectionMin();
+                if (min < 1) continue;
+                final int need = Math.max(0, min - fz.getMatchUI().countPickedSelectables());
+                if (need < 1) continue;
+                final List<CardView> picks = new ArrayList<>(need);
+                for (final CardPanel panel : new ArrayList<>(fz.getCardPanels())) {
+                    if (picks.size() >= need) break;
+                    final CardView cv = panel.getCard();
+                    if (!fz.getMatchUI().isSelectable(cv)) continue;
+                    if (fz.getMatchUI().isHighlighted(cv)) continue;
+                    picks.add(cv);
+                }
+                if (picks.isEmpty()) continue;
+                // Wire-serializable: ArrayList.subList() returns a SubList view that's not Serializable.
+                final List<CardView> others = picks.size() > 1 ? new ArrayList<>(picks.subList(1, picks.size())) : null;
+                fz.getMatchUI().getGameController().selectCard(picks.get(0), others,
+                        new MouseTriggerEvent(MouseEvent.BUTTON1, 0, 0));
+                return true;
+            }
+            return false;
+        }
+        for (final FloatingZone fz : floatingAreas.values()) {
+            if (!fz.isVisible()) continue;
+            final CardPanel target = fz.findPanelByHotkeyDigit(digit);
+            if (target == null) continue;
+            fz.getMatchUI().getGameController().selectCard(target.getCard(), null,
+                    new MouseTriggerEvent(MouseEvent.BUTTON1, 0, 0));
+            return true;
+        }
+        return false;
+    }
+
+    private CardPanel findPanelByHotkeyDigit(final int digit) {
+        for (final CardPanel panel : getCardPanels()) {
+            if (panel.getHotkeyDigit() == digit) return panel;
+        }
+        return null;
+    }
+
+    private void assignOwnHotkeyDigits(boolean clear) {
+        int next = 1;
+        for (final CardPanel panel : getCardPanels()) {
+            if (!clear && next <= 9 && getMatchUI().isSelectable(panel.getCard())) {
+                panel.setHotkeyDigit(next++);
+            } else {
+                panel.setHotkeyDigit(0);
+            }
+        }
+    }
+
+    public static void clearAllHotkeyAffordance() {
+        for (final FloatingZone fz : new ArrayList<>(floatingAreas.values())) {
+            if (fz.isVisible()) fz.assignOwnHotkeyDigits(true);
         }
     }
 

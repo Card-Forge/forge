@@ -3,7 +3,6 @@ package forge.deck;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
-import com.google.common.collect.ImmutableList;
 import forge.Forge;
 import forge.Forge.KeyInputAdapter;
 import forge.Graphics;
@@ -67,7 +66,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         }
 
         public ItemPool<PaperCard> getCardPool() {
-            return FModel.getAllCardsNoAlt();
+            return FModel.getAllCards();
         }
         protected Predicate<PaperCard> getCardFilter() { return null; }
 
@@ -982,7 +981,7 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
         save(null);
     }
 
-    private final static ImmutableList<String> onCloseOptions = ImmutableList.of(
+    private final static List<String> onCloseOptions = List.of(
         Localizer.getInstance().getMessage("lblSave"),
         Localizer.getInstance().getMessage("lblDontSave"),
         Localizer.getInstance().getMessage("lblCancel")

@@ -703,7 +703,7 @@ public class DeckgenUtil {
 
                 if (signatureSpells.size() > 0) { //pass signature spell as partner for simplicity
                     selectedPartner = signatureSpells.get(MyRandom.getRandom().nextInt(signatureSpells.size()));
-                    preSelectedCards.removeAll(StaticData.instance().getCommonCards().getAllCards(selectedPartner.getName()));
+                    preSelectedCards.removeAll(StaticData.instance().getCommonCards().getAllCards(selectedPartner));
                 }
             }
             else if (commander.getRules().canBePartnerCommander()) {
@@ -717,7 +717,7 @@ public class DeckgenUtil {
 
                 if (partners.size() > 0) {
                     selectedPartner = partners.get(MyRandom.getRandom().nextInt(partners.size()));
-                    preSelectedCards.removeAll(StaticData.instance().getCommonCards().getAllCards(selectedPartner.getName()));
+                    preSelectedCards.removeAll(StaticData.instance().getCommonCards().getAllCards(selectedPartner));
                 }
             }
             //randomly remove cards
@@ -740,7 +740,7 @@ public class DeckgenUtil {
                 ++i;
             }
             preSelectedCards.removeAll(toRemove);
-            preSelectedCards.removeAll(StaticData.instance().getCommonCards().getAllCards(commander.getName()));
+            preSelectedCards.removeAll(StaticData.instance().getCommonCards().getAllCards(commander));
             gen = new CardThemedCommanderDeckBuilder(commander, selectedPartner, preSelectedCards, forAi, format);
         }else{
             cardDb = FModel.getMagicDb().getCommonCards();
@@ -790,10 +790,10 @@ public class DeckgenUtil {
             }
             List<PaperCard> shortList = cardList.subList(0, shortlistlength);
             shortList.remove(commander);
-            shortList.removeAll(StaticData.instance().getCommonCards().getAllCards(commander.getName()));
+            shortList.removeAll(StaticData.instance().getCommonCards().getAllCards(commander));
             if (selectedPartner != null) {
                 shortList.remove(selectedPartner);
-                shortList.removeAll(StaticData.instance().getCommonCards().getAllCards(selectedPartner.getName()));
+                shortList.removeAll(StaticData.instance().getCommonCards().getAllCards(selectedPartner));
             }
             gen = new CardThemedCommanderDeckBuilder(commander, selectedPartner, shortList, forAi, format);
         }

@@ -64,7 +64,7 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasForgeLog {
 
         try {
             guiGame = new DeltaLoggingGuiGame(this);
-            client = new FGameClient(username, "0", guiGame, hostname, port);
+            client = new FGameClient(username, guiGame, hostname, port);
             lobby = new ClientGameLobby();
             client.addLobbyListener(new ClientLobbyListener());
             client.connect();
@@ -364,9 +364,9 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasForgeLog {
             }
             for (forge.game.event.GameEventCardTapped tapEvent : lastTapPerCard.values()) {
                 forge.game.card.CardView card = tapEvent.card();
-                if (card != null && card.isTapped() != tapEvent.tapped()) {
+                if (card != null && card.getZone() == forge.game.zone.ZoneType.Battlefield && card.isTapped() != tapEvent.tapped()) {
                     client.eventStateMismatches.incrementAndGet();
-                    netLog.warn("[EventDeltaCheck] MISMATCH: GameEventCardTapped says tapped={} but CardView.isTapped()={} for {} (may be zone-transition artifact)",
+                    netLog.warn("[EventDeltaCheck] MISMATCH: GameEventCardTapped says tapped={} but CardView.isTapped()={} for {}",
                             tapEvent.tapped(), card.isTapped(), card);
                 }
             }
@@ -465,8 +465,8 @@ public class HeadlessNetworkClient implements AutoCloseable, IHasForgeLog {
         }
 
         @Override
-        public void setSelectables(Iterable<forge.game.card.CardView> cards) {
-            super.setSelectables(cards);
+        public void setSelectables(Iterable<forge.game.card.CardView> cards, int min, int max) {
+            super.setSelectables(cards, min, max);
             synchronized (pendingSelectables) {
                 // Track selectable cards for multi-selection prompts
                 pendingSelectables.clear();

@@ -239,6 +239,15 @@ public class SettingsScene extends UIScene {
                 Config.instance().saveSettings();
             }
         });
+        addSettingField(Forge.getLocalizer().getMessage("lblPreferEraMatchedTokenArt"), Config.instance().getSettingData().preferEraMatchedTokenArt, new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                boolean enabled = ((CheckBox) actor).isChecked();
+                Config.instance().getSettingData().preferEraMatchedTokenArt = enabled;
+                forge.model.FModel.getMagicDb().getAllTokens().setPreferEraMatchedArt(enabled);
+                Config.instance().saveSettings();
+            }
+        });
         addSettingField(Forge.getLocalizer().getMessage("lblExcludeAlchemyVariants"), Config.instance().getSettingData().excludeAlchemyVariants, new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {

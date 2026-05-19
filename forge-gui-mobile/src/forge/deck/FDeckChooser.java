@@ -15,7 +15,6 @@ import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.utils.Align;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
 import forge.Forge;
@@ -109,7 +108,7 @@ public class FDeckChooser extends FScreen {
         container.add(deckChooser.lstDecks);
         container.setHeight(FOptionPane.getMaxDisplayObjHeight());
 
-        deckChooser.optionPane = new FOptionPane(null, null, title, null, container, ImmutableList.of(Forge.getLocalizer().getInstance().getMessage("lblOK"), Forge.getLocalizer().getInstance().getMessage("lblCancel")), 0, result -> {
+        deckChooser.optionPane = new FOptionPane(null, null, title, null, container, List.of(Forge.getLocalizer().getInstance().getMessage("lblOK"), Forge.getLocalizer().getInstance().getMessage("lblCancel")), 0, result -> {
             if (result == 0) {
                 if (callback != null) {
                     callback.accept(deckChooser.getDeck());

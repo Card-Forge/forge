@@ -1269,6 +1269,7 @@
       "equipmentSlot": "Boots",
       "iconName": "Witch-MawAnklet",
       "effect": {
+        "changeStartCards": -1,
         "lifeModifier": -8,
         "startBattleWithCard": [
           "Witch-Maw Nephilim|GPT"
@@ -1629,7 +1630,7 @@
   },
     {
     "name": "Gingerboots",
-    "description": "1/1 artifact with hate, pay 1 to give semi-unblockable, pay 2 to eat food for 3 life",
+    "description": "1/1 artifact with haste, pay 1 to give semi-unblockable, pay 2 to eat food for 3 life",
     "equipmentSlot": "Boots",
     "iconName": "Gingerboots",
     "effect": {
@@ -5075,7 +5076,7 @@
   {
     "name": "Winter Boots",
     "description": "0/4, T, sac: -0/-X where X is snow lands",
-    "equipmentSlot": "Body",
+    "equipmentSlot": "Boots",
     "iconName": "WinterBoots",
     "effect": {
       "startBattleWithCard": [

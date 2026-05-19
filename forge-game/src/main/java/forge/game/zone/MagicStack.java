@@ -17,7 +17,6 @@
  */
 package forge.game.zone;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
@@ -186,6 +185,10 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         return c.equals(curResolvingCard);
     }
 
+    public int getUndoStackSize() {
+        return undoStack.size();
+    }
+
     public final boolean canUndo(Player player) {
         return undoStackOwner == player;
     }
@@ -319,14 +322,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             System.err.println(str + sp.getAllTargetChoices());
             game.fireEvent(new GameEventAddLog(GameLogEntryType.STACK_ADD, str));
             return;
-        }
-
-        //cancel auto-pass for all opponents of activating player
-        //when a new non-triggered ability is put on the stack
-        if (!sp.isTrigger()) {
-            for (final Player p : activator.getOpponents()) {
-                p.getController().autoPassCancel();
-            }
         }
 
         if (sp instanceof AbilityStatic || (sp.isTrigger() && sp.getTrigger().getOverridingAbility() instanceof AbilityStatic)) {
@@ -1006,7 +1001,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     }
 
     static protected boolean commitCrimeCheck(Player p, Iterable<TargetChoices> chosenTargets) {
-        List<ZoneType> zoneList = ImmutableList.of(ZoneType.Battlefield, ZoneType.Graveyard, ZoneType.Stack);
+        List<ZoneType> zoneList = List.of(ZoneType.Battlefield, ZoneType.Graveyard, ZoneType.Stack);
 
         for (TargetChoices tc : chosenTargets) {
             if (IterableUtil.any(tc.getTargetPlayers(), PlayerPredicates.isOpponentOf(p))) {

@@ -3,7 +3,6 @@ package forge.game.ability.effects;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
 import forge.GameCommand;
@@ -111,7 +110,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
         final String players = sa.getParamOrDefault("ValidPlayers", "");
         if (!players.isEmpty()) {
             for (final Player player : AbilityUtils.getDefinedPlayers(host, players, sa)) {
-                player.addChangedKeywords(gainsKWList, ImmutableList.of(), timestamp, 0);
+                player.addChangedKeywords(gainsKWList, List.of(), timestamp, 0);
 
                 if (!"Permanent".equals(sa.getParam("Duration"))) {
                     // If not Permanent, remove protection at EOT
