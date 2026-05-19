@@ -67,8 +67,8 @@ import forge.util.Localizer;
  */
 public class VDock implements IVDoc<CDock> {
     private static final Color TRANSPARENT = new Color(0, 0, 0, 0);
-    private static final Color DISABLED_OVERLAY = new Color(0, 0, 0, 120);
     private static final Color FLAT_BORDER = new Color(0, 0, 0, 45);
+    private static final Color DISABLED_BORDER = new Color(120, 120, 120, 160);
     private static final Color PRESSED_BG = new Color(24, 24, 24);
     private static final Color EDGE_LIGHT = new Color(255, 255, 255, 150);
     private static final Color EDGE_DARK = new Color(0, 0, 0, 170);
@@ -101,10 +101,7 @@ public class VDock implements IVDoc<CDock> {
     }
 
     private DockButton createButton(final DockButtonId id) {
-        return switch (id) {
-            case MACRO_RECORD, MACRO_PLAY -> new MacroDockButton(FSkin.getIcon(id.icon), localizer.getMessage(id.labelKey));
-            default -> new DockButton(FSkin.getIcon(id.icon), localizer.getMessage(id.labelKey));
-        };
+        return new DockButton(FSkin.getIcon(id.icon), localizer.getMessage(id.labelKey));
     }
 
     private void installInteractionHandlers(final JPanel pnl) {
@@ -298,10 +295,6 @@ public class VDock implements IVDoc<CDock> {
         return buttons.get(id);
     }
 
-    public MacroDockButton getMacroButton(final DockButtonId id) {
-        return (MacroDockButton) buttons.get(id);
-    }
-
     /**
      * Declarative table of dock buttons. Enum order is the default presentation
      * order; {@code defaultVisible} is the per-button visibility seed. New
@@ -427,34 +420,41 @@ public class VDock implements IVDoc<CDock> {
      */
     @SuppressWarnings("serial")
     public class DockButton extends SkinnedLabel implements ILocalRepaint {
-        /** Shared highlight tile colour for active dock buttons. Slightly darker
-         *  than goldenrod so it reads as an accent rather than a UI element. */
-        private static final Color HIGHLIGHT_BG = new Color(0xB8860B);
-        private static final int TILE_CORNER_RADIUS = 6;
         protected SkinImage img;
-        private final SkinColor hoverBG = FSkin.getColor(FSkin.Colors.CLR_HOVER);
         private final SkinColor dragBorderColor = FSkin.getColor(FSkin.Colors.CLR_BORDERS);
         private UiCommand command;
         private Consumer<MouseEvent> dropAction;
         private Consumer<MouseEvent> dragOverAction;
         private boolean dragging;
-        private boolean active;
+        private boolean armedPress;
+        private DisplayState displayState = DisplayState.RAISED;
         // Translucent overlay on the root layered pane that follows the cursor
         // while dragging; the slot itself renders empty (dotted outline).
         private JComponent dragGhost;
         private int dragOffsetX, dragOffsetY;
 
+        public enum DisplayState {
+            FLAT, RAISED, PRESSED
+        }
+
         public DockButton(final SkinImage i0, final String s0) {
             super();
             this.setToolTipText(s0);
             this.setOpaque(false);
-            this.setBackground(TRANSPARENT);
             this.img = i0;
 
             setButtonSize(this);
 
             // FMouseAdapter(true): drag past 3px suppresses the click action
             final FMouseAdapter adapter = new FMouseAdapter(true) {
+                @Override
+                public void onLeftMouseDown(final MouseEvent e) {
+                    if (DockButton.this.isEnabled()) {
+                        DockButton.this.armedPress = true;
+                        DockButton.this.repaintSelf();
+                    }
+                }
+
                 @Override
                 public void onLeftClick(final MouseEvent e) {
                     if (DockButton.this.isEnabled() && DockButton.this.command != null) {
@@ -466,6 +466,7 @@ public class VDock implements IVDoc<CDock> {
                 public void onLeftMouseDragging(final MouseEvent e) {
                     if (!DockButton.this.dragging) {
                         DockButton.this.dragging = true;
+                        DockButton.this.armedPress = false;
                         DockButton.this.startDragGhost(e);
                         DockButton.this.repaintSelf();
                     } else {
@@ -479,6 +480,10 @@ public class VDock implements IVDoc<CDock> {
                 // onLeftMouseDragDrop needs >3px; mouseUp always fires - clear here so sub-3px twitches don't stick
                 @Override
                 public void onLeftMouseUp(final MouseEvent e) {
+                    if (DockButton.this.armedPress) {
+                        DockButton.this.armedPress = false;
+                        DockButton.this.repaintSelf();
+                    }
                     if (DockButton.this.dragging) {
                         DockButton.this.dragging = false;
                         DockButton.this.endDragGhost();
@@ -494,15 +499,11 @@ public class VDock implements IVDoc<CDock> {
                 }
 
                 @Override
-                public void onMouseEnter(final MouseEvent e) {
-                    if (DockButton.this.isEnabled()) {
-                        DockButton.this.setBackground(DockButton.this.hoverBG);
-                    }
-                }
-
-                @Override
                 public void onMouseExit(final MouseEvent e) {
-                    DockButton.this.setBackground(TRANSPARENT);
+                    if (DockButton.this.armedPress) {
+                        DockButton.this.armedPress = false;
+                        DockButton.this.repaintSelf();
+                    }
                 }
             };
             this.addMouseListener(adapter);
@@ -522,12 +523,16 @@ public class VDock implements IVDoc<CDock> {
             this.dragOverAction = dragOverAction0;
         }
 
-        /** Paint the highlight tile when active, transparent otherwise. */
         public void setActive(final boolean a) {
-            if (this.active != a) {
-                this.active = a;
-                repaintSelf();
+            setDisplayState(a ? DisplayState.PRESSED : DisplayState.RAISED);
+        }
+
+        public void setDisplayState(final DisplayState displayState0) {
+            if (this.displayState == displayState0) {
+                return;
             }
+            this.displayState = displayState0;
+            repaintSelf();
         }
 
         /** Swap the glyph image. Used for buttons whose shape changes with state. */
@@ -585,7 +590,7 @@ public class VDock implements IVDoc<CDock> {
         public void setEnabled(final boolean enabled) {
             super.setEnabled(enabled);
             if (!enabled) {
-                setBackground(TRANSPARENT);
+                this.armedPress = false;
             }
             repaintSelf();
         }
@@ -600,8 +605,6 @@ public class VDock implements IVDoc<CDock> {
         public void paintComponent(final Graphics g) {
             final int w = getWidth();
             final int h = getHeight();
-            g.setColor(this.getBackground());
-            g.fillRect(0, 0, w, h);
 
             if (this.dragging) {
                 // Icon flies as a ghost on the layered pane - outline the empty slot to show the drop target
@@ -609,94 +612,56 @@ public class VDock implements IVDoc<CDock> {
                 g.drawRect(0, 0, w - 1, h - 1);
                 g.drawRect(1, 1, w - 3, h - 3);
             } else {
-                if (!this.active && this.getSkin().getBackground() == this.hoverBG) {
-                    FSkin.setGraphicsColor(g, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
-                    g.drawRect(0, 0, w - 1, h - 1);
-                }
                 paintTileAndGlyph(g, w, h);
-            }
-            if (!isEnabled()) {
-                paintDisabledOverlay(g, w, h);
             }
             super.paintComponent(g);
         }
 
         /**
-         * Draws the rounded-rect tile (when active) and the glyph on top. Shared
+         * Draws the button edge and glyph. Shared
          * between the live button paint path and the drag-ghost overlay so both
          * stay visually consistent.
          */
         private void paintTileAndGlyph(final Graphics g, final int width, final int height) {
-            // Bilinear keeps the 80->30 sprite downscale smooth; antialiasing softens the tile edges
-            if (g instanceof Graphics2D g2) {
-                if (this.active) {
-                    g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                            RenderingHints.VALUE_ANTIALIAS_ON);
-                }
-                g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
-                        RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-            }
-            if (this.active) {
-                g.setColor(HIGHLIGHT_BG);
-                g.fillRoundRect(0, 0, width, height, TILE_CORNER_RADIUS, TILE_CORNER_RADIUS);
-            }
-            FSkin.drawImage(g, this.img, 0, 0, width, height);
-        }
-    }
-
-    @SuppressWarnings("serial")
-    public class MacroDockButton extends DockButton {
-        private DisplayState displayState = DisplayState.RAISED;
-
-        public enum DisplayState {
-            FLAT, RAISED, PRESSED
-        }
-
-        public MacroDockButton(final SkinImage image, final String tooltip) {
-            super(image, tooltip);
-        }
-
-        public void setDisplayState(final DisplayState displayState0) {
-            if (this.displayState == displayState0) {
-                return;
-            }
-            this.displayState = displayState0;
-            repaintSelf();
-        }
-
-        @Override
-        public void paintComponent(final Graphics g) {
-            final int w = getWidth();
-            final int h = getHeight();
-            final boolean pressed = displayState == DisplayState.PRESSED;
-            final boolean raised = displayState == DisplayState.RAISED && isEnabled();
+            final boolean enabled = isEnabled();
+            final boolean pressed = enabled && (this.armedPress || this.displayState == DisplayState.PRESSED);
+            final boolean raised = enabled && !pressed && this.displayState == DisplayState.RAISED;
 
             if (pressed) {
                 g.setColor(PRESSED_BG);
-            } else if (getSkin().getBackground() == FSkin.getColor(FSkin.Colors.CLR_HOVER)) {
-                FSkin.setGraphicsColor(g, FSkin.getColor(FSkin.Colors.CLR_HOVER));
             } else {
                 g.setColor(TRANSPARENT);
             }
-            g.fillRect(0, 0, w, h);
+            g.fillRect(0, 0, width, height);
 
             if (raised || pressed) {
                 g.setColor(pressed ? EDGE_DARK : EDGE_LIGHT);
-                g.drawLine(0, 0, w - 1, 0);
-                g.drawLine(0, 0, 0, h - 1);
+                g.drawLine(0, 0, width - 1, 0);
+                g.drawLine(0, 0, 0, height - 1);
                 g.setColor(pressed ? EDGE_LIGHT : EDGE_DARK);
-                g.drawLine(0, h - 1, w - 1, h - 1);
-                g.drawLine(w - 1, 0, w - 1, h - 1);
+                g.drawLine(0, height - 1, width - 1, height - 1);
+                g.drawLine(width - 1, 0, width - 1, height - 1);
             } else {
-                g.setColor(FLAT_BORDER);
-                g.drawRect(0, 0, w - 1, h - 1);
+                g.setColor(enabled ? FLAT_BORDER : DISABLED_BORDER);
+                g.drawRect(0, 0, width - 1, height - 1);
+            }
+
+            // Bilinear keeps the 80->30 sprite downscale smooth.
+            if (g instanceof Graphics2D g2) {
+                g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
+                        RenderingHints.VALUE_INTERPOLATION_BILINEAR);
             }
 
             final int offset = pressed ? 1 : 0;
-            FSkin.drawImage(g, img, offset, offset, w, h);
-
-            if (!isEnabled()) {
-                paintDisabledOverlay(g, w, h);
+            if (enabled) {
+                FSkin.drawImage(g, this.img, offset, offset, width, height);
+            } else if (g instanceof Graphics2D g2) {
+                final Graphics2D copy = (Graphics2D) g2.create();
+                copy.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.38f));
+                FSkin.drawImage(copy, this.img, 0, 0, width, height);
+                copy.dispose();
+            } else {
+                FSkin.drawImage(g, this.img, 0, 0, width, height);
             }
         }
     }
@@ -705,11 +670,6 @@ public class VDock implements IVDoc<CDock> {
         component.setPreferredSize(BUTTON_SIZE);
         component.setMinimumSize(BUTTON_SIZE);
         component.setMaximumSize(BUTTON_SIZE);
-    }
-
-    private static void paintDisabledOverlay(final Graphics g, final int w, final int h) {
-        g.setColor(DISABLED_OVERLAY);
-        g.fillRect(0, 0, w, h);
     }
 
 }

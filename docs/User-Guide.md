@@ -229,9 +229,17 @@ This feature lets you skip different helpers that streamline gameplay by avoidin
 e.g. the opposite cost order is needed if activating an animated "Halo Fountain" that's also tapped.
 
 ## Repeatable Sequences (Macros)
-A feature for advanced users: during a match, you can use the default shortcut shift-R to specify a sequence of actions (mouse clicks, essentially, in the desktop paradigm). Type the IDs of cards/players you'd like to interact with, in order. Then the default shortcut @ (shift-2) will execute your sequence, one "click" at a time, repeating when it reaches the end. This is useful for executing repeated combos, such as sacrificing a recurring creature to Goblin Bombardment. You can see the IDs of cards by turning them on under "Card Overlays" in the "Game" menu.
+Macros let advanced users record and replay a short sequence of match actions. They are mainly useful for deterministic combo loops where the same prompts, priority passes, targets, mana choices, and stack-order decisions repeat several times.
 
-The macro will dutifully execute your click sequence without regard to changes in game state (so if an opponent kills your specified creature mid-macro, and you continue to execute it, you will be essentially clicking on the creature in the graveyard, which may or may not be what you want).
+On desktop, use the macro buttons in the match dock or the configurable keyboard shortcuts:
+
+- **Record Macro** defaults to Shift+R. Press it once to start recording, then take the actions you want to repeat. Press it again to stop recording and choose how many times to repeat the recorded sequence.
+- **Play Macro Once** defaults to Shift+2. This replays the next recorded sequence once.
+- **Repeat Macro** defaults to Shift+3. This asks for a repeat count and replays the recorded sequence that many times.
+
+Recorded macros can include common match choices such as selecting cards or players, activating abilities, passing priority, paying mana from the pool, choosing colors or mana combinations, choosing modes, confirming prompts, ordering simultaneous abilities, and resolving scry choices.
+
+Macro replay is prompt-aware: Forge attempts each recorded action only when the current game prompt can accept it. If the game state diverges from the recording, playback stops instead of blindly clicking through unrelated prompts. This makes macros safer than the older click-ID sequence behavior, but they are still best suited for predictable loops. If a card changes zones, a target becomes illegal, or an opponent interrupts the loop, you may need to stop and record a new sequence.
 
 # Desktop User Interface
 

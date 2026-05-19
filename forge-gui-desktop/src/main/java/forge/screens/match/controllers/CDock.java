@@ -17,6 +17,10 @@
  */
 package forge.screens.match.controllers;
 
+import static forge.screens.match.views.VDock.DockButton.DisplayState.FLAT;
+import static forge.screens.match.views.VDock.DockButton.DisplayState.PRESSED;
+import static forge.screens.match.views.VDock.DockButton.DisplayState.RAISED;
+
 import java.util.Map;
 
 import com.google.common.primitives.Ints;
@@ -36,6 +40,7 @@ import forge.screens.match.CMatchUI;
 import forge.screens.match.VAutoYieldsAndTriggers;
 import forge.screens.match.VYieldSettings;
 import forge.screens.match.views.VDock;
+import forge.screens.match.views.VDock.DockButton.DisplayState;
 import forge.screens.match.views.VDock.DockButtonId;
 import forge.toolbox.FSkin;
 import forge.util.Localizer;
@@ -123,8 +128,8 @@ public class CDock implements ICDoc {
     }
 
     public void refreshMacroButtons() {
-        final VDock.MacroDockButton recordButton = view.getMacroButton(DockButtonId.MACRO_RECORD);
-        final VDock.MacroDockButton playButton = view.getMacroButton(DockButtonId.MACRO_PLAY);
+        final VDock.DockButton recordButton = view.getButton(DockButtonId.MACRO_RECORD);
+        final VDock.DockButton playButton = view.getButton(DockButtonId.MACRO_PLAY);
         if (matchUI.getGameController() == null) {
             recordButton.setEnabled(false);
             playButton.setEnabled(false);
@@ -137,18 +142,17 @@ public class CDock implements ICDoc {
         final boolean hasMacro = macros.hasRememberedActions();
 
         configureMacroButton(recordButton, !replaying, recording
-                ? VDock.MacroDockButton.DisplayState.PRESSED : VDock.MacroDockButton.DisplayState.RAISED,
+                ? PRESSED : RAISED,
                 recording ? "lblMacroRecordStopTooltip" : "lblMacroRecordStartTooltip", FPref.SHORTCUT_MACRO_RECORD);
         configureMacroButton(playButton, hasMacro && !recording && !replaying,
-                replaying ? VDock.MacroDockButton.DisplayState.PRESSED
-                        : hasMacro && !recording ? VDock.MacroDockButton.DisplayState.RAISED : VDock.MacroDockButton.DisplayState.FLAT,
+                replaying ? PRESSED : hasMacro && !recording ? RAISED : FLAT,
                 replaying ? "lblMacroPlaybackActiveTooltip"
                         : hasMacro ? "lblMacroPlayTooltip" : "lblMacroPlayUnavailableTooltip",
                 FPref.SHORTCUT_MACRO_REPEAT_ACTIONS);
     }
 
-    private void configureMacroButton(final VDock.MacroDockButton button, final boolean enabled,
-                                      final VDock.MacroDockButton.DisplayState displayState, final String tooltipKey,
+    private void configureMacroButton(final VDock.DockButton button, final boolean enabled,
+                                      final DisplayState displayState, final String tooltipKey,
                                       final FPref shortcutPref) {
         button.setEnabled(enabled);
         button.setDisplayState(displayState);
@@ -170,7 +174,7 @@ public class CDock implements ICDoc {
         final ArcState arcs = getArcState();
         view.getButton(DockButtonId.AUTO_PASS).setActive(FModel.getPreferences().getPrefBoolean(FPref.YIELD_AUTO_PASS_NO_ACTIONS));
         final VDock.DockButton targeting = view.getButton(DockButtonId.TARGETING);
-        targeting.setActive(arcs != ArcState.OFF);
+        targeting.setDisplayState(arcs == ArcState.OFF ? RAISED : PRESSED);
         final FSkinProp arcIcon = switch (arcs) {
             case ON -> FSkinProp.ICO_ARCSON;
             case MOUSEOVER -> FSkinProp.ICO_ARCSHOVER;
