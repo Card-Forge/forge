@@ -13,7 +13,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import com.esotericsoftware.minlog.Log;
+import org.tinylog.Logger;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -60,7 +60,7 @@ public final class DeckRecognitionClient {
             conn = open("/health", "GET", HEALTH_TIMEOUT_MS);
             return conn.getResponseCode() == 200;
         } catch (final Exception ex) {
-            Log.debug("DeckRecognition: sidecar health check failed: " + ex.getMessage());
+            Logger.debug("DeckRecognition: sidecar health check failed: " + ex.getMessage());
             return false;
         } finally {
             disconnect(conn);
@@ -87,7 +87,7 @@ public final class DeckRecognitionClient {
             }
             final int status = conn.getResponseCode();
             if (status != 200) {
-                Log.debug("DeckRecognition: sidecar returned HTTP " + status);
+                Logger.debug("DeckRecognition: sidecar returned HTTP " + status);
                 return Optional.empty();
             }
             try (InputStream is = conn.getInputStream();
@@ -96,7 +96,7 @@ public final class DeckRecognitionClient {
                 return Optional.ofNullable(gson.fromJson(reader, RecognitionResult.class));
             }
         } catch (final IOException | RuntimeException ex) {
-            Log.debug("DeckRecognition: request failed: " + ex.getMessage());
+            Logger.debug("DeckRecognition: request failed: " + ex.getMessage());
             return Optional.empty();
         } finally {
             disconnect(conn);

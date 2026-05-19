@@ -1,6 +1,6 @@
 package forge.ai.llm;
 
-import com.esotericsoftware.minlog.Log;
+import org.tinylog.Logger;
 
 import forge.ai.AiController;
 import forge.game.Game;
@@ -34,17 +34,17 @@ public final class DeckRecognitionManager {
             final String url = DeckRecognitionFeature.sidecarUrl(ai);
             final DeckRecognitionClient client = new DeckRecognitionClient(url);
             if (!client.isSidecarHealthy()) {
-                Log.debug("DeckRecognition: sidecar at " + url
+                Logger.debug("DeckRecognition: sidecar at " + url
                         + " is unavailable; feature disabled for this game.");
                 client.shutdown();
                 return;
             }
             final DeckRecognitionObserver observer = new DeckRecognitionObserver(player, game, client);
             game.subscribeToEvents(observer);
-            Log.info("DeckRecognition: enabled for AI player '" + player + "' via " + url);
+            Logger.info("DeckRecognition: enabled for AI player '" + player + "' via " + url);
         } catch (final RuntimeException | LinkageError ex) {
             // Any failure here must not break AI construction.
-            Log.debug("DeckRecognition: failed to attach: " + ex.getMessage());
+            Logger.debug("DeckRecognition: failed to attach: " + ex.getMessage());
         }
     }
 }

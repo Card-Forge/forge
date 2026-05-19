@@ -8,19 +8,21 @@ import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import com.esotericsoftware.minlog.Log;
 import com.google.common.eventbus.Subscribe;
 
 import forge.game.Game;
 import forge.game.GameLogEntryType;
 import forge.game.card.Card;
+import forge.game.card.CardView;
 import forge.game.event.GameEvent;
 import forge.game.event.GameEventLandPlayed;
 import forge.game.event.GameEventSpellAbilityCast;
 import forge.game.event.GameEventTurnBegan;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.game.player.RegisteredPlayer;
 import forge.item.PaperCard;
+import org.tinylog.Logger;
 
 /**
  * Subscribes to the game's event bus and records the opponent's public plays
@@ -78,7 +80,7 @@ public final class DeckRecognitionObserver {
                 }
             }
         } catch (final RuntimeException ex) {
-            Log.debug("DeckRecognition: could not read AI deck: " + ex.getMessage());
+            Logger.debug("DeckRecognition: could not read AI deck: " + ex.getMessage());
         }
         return new ArrayList<>(names);
     }
@@ -98,7 +100,7 @@ public final class DeckRecognitionObserver {
             }
         } catch (final RuntimeException ex) {
             // Never let observation bookkeeping disrupt the game.
-            Log.debug("DeckRecognition: error handling event: " + ex.getMessage());
+            Logger.debug("DeckRecognition: error handling event: " + ex.getMessage());
         }
     }
 
@@ -106,11 +108,11 @@ public final class DeckRecognitionObserver {
         if (cast.sa() == null || !cast.sa().isSpell()) {
             return;
         }
-        final Player caster = cast.sa().getActivatingPlayer();
-        if (caster == null || caster.equals(aiPlayer)) {
+        final PlayerView caster = cast.si() == null ? null : cast.si().getActivatingPlayer();
+        if (caster == null || caster.equals(aiPlayer.getView())) {
             return; // ignore the AI's own plays
         }
-        final Card host = cast.sa().getHostCard();
+        final Card host = resolveCard(cast.sa().getHostCard());
         if (host != null) {
             observations.add(toObservation(host, "spell"));
             requestRecognition();
@@ -118,13 +120,19 @@ public final class DeckRecognitionObserver {
     }
 
     private void handleLandPlayed(final GameEventLandPlayed land) {
-        if (land.player() == null || land.player().equals(aiPlayer)) {
+        if (land.player() == null || land.player().equals(aiPlayer.getView())) {
             return;
         }
-        if (land.land() != null) {
-            observations.add(toObservation(land.land(), "land"));
+        final Card landCard = resolveCard(land.land());
+        if (landCard != null) {
+            observations.add(toObservation(landCard, "land"));
             requestRecognition();
         }
+    }
+
+    /** Resolve a {@link CardView} carried by a game event back to its model card. */
+    private Card resolveCard(final CardView view) {
+        return view == null ? null : game.findByView(view);
     }
 
     /**
@@ -172,7 +180,7 @@ public final class DeckRecognitionObserver {
             lastPostedMessage = message;
             game.getGameLog().add(GameLogEntryType.INFORMATION, message);
         } catch (final RuntimeException ex) {
-            Log.debug("DeckRecognition: failed to write guess to log: " + ex.getMessage());
+            Logger.debug("DeckRecognition: failed to write guess to log: " + ex.getMessage());
         }
     }
 
