@@ -13,7 +13,8 @@ set -e
 REPO_DIR=$(cd "$(dirname "$0")" && pwd)
 RES_DIR="$REPO_DIR/forge-gui"
 
-JAR=$(ls "$REPO_DIR"/forge-gui-desktop/target/forge-gui-desktop-*-jar-with-dependencies.jar 2>/dev/null | head -n 1)
+# -t: newest first, so a stale jar from an older version is never picked
+JAR=$(ls -t "$REPO_DIR"/forge-gui-desktop/target/forge-gui-desktop-*-jar-with-dependencies.jar 2>/dev/null | head -n 1)
 if [ -z "$JAR" ]; then
     echo "ERROR: built jar not found. Build first with: mvn -DskipTests install" >&2
     exit 1
