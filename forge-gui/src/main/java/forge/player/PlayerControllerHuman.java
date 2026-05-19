@@ -2075,16 +2075,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         boolean needPrompt = !activePlayerSAs.get(0).isTrigger();
 
         final String firstStr = activePlayerSAs.get(0).toString();
-        final int firstBracket = firstStr.indexOf(" [");
-        final String firstLookup = firstBracket > 0 ? firstStr.substring(0, firstBracket) : firstStr;
+        final String firstLookup = trimStackContext(firstStr);
         final StringBuilder saLookupKey = new StringBuilder(firstLookup);
 
         final char delim = (char) 5;
         for (int i = 1; i < activePlayerSAs.size(); i++) {
             final SpellAbility currentSa = activePlayerSAs.get(i);
             final String saStr = currentSa.toString();
-            final int bracket = saStr.indexOf(" [");
-            final String saLookup = bracket > 0 ? saStr.substring(0, bracket) : saStr;
+            final String saLookup = trimStackContext(saStr);
 
             if (currentSa.isTrigger()) {
                 needPrompt |= currentSa.getTrigger().hasParam("OrderDuplicates");
@@ -2168,18 +2166,17 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         return orderedSAs;
     }
 
+    private String trimStackContext(final String description) {
+        final int idxAdditionalInfo = description.indexOf(" [");
+        return idxAdditionalInfo > 0 ? description.substring(0, idxAdditionalInfo) : description;
+    }
+
     private List<String> describeAbilityOrder(final List<SpellAbility> abilities) {
         final List<String> descriptions = Lists.newArrayListWithCapacity(abilities.size());
         for (final SpellAbility ability : abilities) {
-            descriptions.add(describeOrderedAbility(ability));
+            descriptions.add(trimStackContext(ability.toString()));
         }
         return descriptions;
-    }
-
-    private String describeOrderedAbility(final SpellAbility ability) {
-        final String description = ability.toString();
-        final int idxAdditionalInfo = description.indexOf(" [");
-        return idxAdditionalInfo > 0 ? description.substring(0, idxAdditionalInfo) : description;
     }
 
     private List<SpellAbility> orderSpellAbilitiesByDescription(final List<SpellAbility> abilities,
@@ -2188,7 +2185,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         final List<SpellAbility> ordered = Lists.newArrayListWithCapacity(abilities.size());
         for (final String description : orderedDescriptions) {
             for (final SpellAbility ability : available) {
-                if (describeOrderedAbility(ability).equals(description)) {
+                if (trimStackContext(ability.toString()).equals(description)) {
                     ordered.add(ability);
                     available.remove(ability);
                     break;
