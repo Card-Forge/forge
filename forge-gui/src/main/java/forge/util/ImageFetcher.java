@@ -13,6 +13,7 @@ import forge.model.FModel;
 import java.io.File;
 import java.util.*;
 import java.util.concurrent.RejectedExecutionException;
+import java.util.regex.Pattern;
 
 public abstract class ImageFetcher {
     // see https://scryfall.com/docs/api/languages and
@@ -107,17 +108,27 @@ public abstract class ImageFetcher {
             final ArrayList<String> downloadUrls = new ArrayList<>();
             final String filename = imageKey.substring(ImageKeys.BOOSTER_PREFIX.length());
             // Look up the download URL from booster-images.txt
-            for (String line : FileUtil.readFile(ForgeConstants.IMAGE_LIST_QUEST_BOOSTERS_FILE)) {
-                if (line.endsWith("/" + filename)) {
-                    downloadUrls.add(line);
+            final List<String> boosterFileContent = FileUtil.readFile(ForgeConstants.IMAGE_LIST_QUEST_BOOSTERS_FILE);
+
+            for (String line : boosterFileContent) {
+                boolean exactMatch = line.endsWith(filename);
+                boolean filenameHasNoExtension = filename.lastIndexOf('.') == -1;
+                boolean matchesWithExtension = line.matches(".*" + Pattern.quote(filename) + "\\.[^.]+$");
+
+                if (exactMatch || (filenameHasNoExtension && matchesWithExtension)) {
+                    if (line.startsWith("http")) {
+                        downloadUrls.add(line);
+                    } else {
+                        downloadUrls.add(ForgeConstants.GITHUB_ASSETS_BASE + "images/boosters/" + line);
+                    }
                     break;
                 }
             }
+
             if (downloadUrls.isEmpty()) {
                 System.err.println("No booster image URL found for: " + filename);
                 return;
             }
-
 
             FileUtil.ensureDirectoryExists(ForgeConstants.CACHE_BOOSTER_PICS_DIR);
             File destFile = new File(ForgeConstants.CACHE_BOOSTER_PICS_DIR, filename);
