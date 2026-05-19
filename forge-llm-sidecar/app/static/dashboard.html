@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forge LLM Sidecar — Dashboard</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --bg-card: #1a1d27;
+      --bg-hover: #242836;
+      --border: #2d3143;
+      --text: #e4e6f0;
+      --text-dim: #8b8fa3;
+      --accent: #6c72ff;
+      --accent-glow: rgba(108, 114, 255, 0.15);
+      --green: #34d399;
+      --green-bg: rgba(52, 211, 153, 0.1);
+      --red: #f87171;
+      --red-bg: rgba(248, 113, 113, 0.1);
+      --yellow: #fbbf24;
+      --yellow-bg: rgba(251, 191, 36, 0.1);
+      --blue: #60a5fa;
+      --radius: 8px;
+      --mono: 'SF Mono', 'Cascadia Code', 'Fira Code', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 20px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header h1 {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+    }
+
+    .header h1 span {
+      color: var(--text-dim);
+      font-weight: 400;
+      font-size: 14px;
+      margin-left: 10px;
+    }
+
+    .header-badges {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .badge-green { background: var(--green-bg); color: var(--green); }
+    .badge-green .badge-dot { background: var(--green); }
+
+    .badge-red { background: var(--red-bg); color: var(--red); }
+    .badge-red .badge-dot { background: var(--red); }
+
+    .badge-yellow { background: var(--yellow-bg); color: var(--yellow); }
+
+    .badge-neutral { background: var(--bg-hover); color: var(--text-dim); }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+
+    .card-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .full-width {
+      grid-column: 1 / -1;
+    }
+
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+
+    .status-row:last-child { border-bottom: none; }
+
+    .status-label { color: var(--text-dim); }
+    .status-value { font-weight: 500; font-family: var(--mono); font-size: 12px; }
+
+    .confidence-bar {
+      height: 6px;
+      background: var(--bg);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-top: 4px;
+    }
+
+    .confidence-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 0.4s ease;
+    }
+
+    .archetype-main {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .archetype-name {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .archetype-conf {
+      font-size: 13px;
+      font-family: var(--mono);
+      color: var(--text-dim);
+    }
+
+    .reasoning {
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-top: 6px;
+      line-height: 1.6;
+    }
+
+    .piloting-section {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .piloting-label {
+      font-size: 11px;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .piloting-value {
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .alternatives {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 6px;
+    }
+
+    .alt-chip {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 11px;
+      color: var(--text-dim);
+      font-family: var(--mono);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    th {
+      text-align: left;
+      padding: 8px;
+      color: var(--text-dim);
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    td {
+      padding: 6px 8px;
+      border-bottom: 1px solid var(--border);
+      font-family: var(--mono);
+      font-size: 11px;
+    }
+
+    tr:hover td { background: var(--bg-hover); }
+
+    .meta-format-select {
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+
+    .meta-row {
+      display: flex;
+      align-items: center;
+      padding: 6px 0;
+      gap: 10px;
+    }
+
+    .meta-name {
+      flex: 1;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .meta-bar-wrap {
+      flex: 2;
+      height: 6px;
+      background: var(--bg);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .meta-bar {
+      height: 100%;
+      border-radius: 3px;
+      background: var(--accent);
+    }
+
+    .meta-share {
+      font-size: 11px;
+      font-family: var(--mono);
+      color: var(--text-dim);
+      min-width: 40px;
+      text-align: right;
+    }
+
+    .color-pips {
+      display: flex;
+      gap: 3px;
+    }
+
+    .pip {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.15);
+      font-size: 0;
+    }
+
+    .pip.W { background: #f5f5f5; }
+    .pip.U { background: #4a90d9; }
+    .pip.B { background: #2d2d2d; }
+    .pip.R { background: #d94a4a; }
+    .pip.G { background: #4ad94a; }
+
+    .guide-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .guide-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 8px;
+      background: var(--bg);
+      border-radius: 4px;
+      font-size: 12px;
+      font-family: var(--mono);
+    }
+
+    .guide-format {
+      color: var(--accent);
+      min-width: 80px;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 30px 0;
+      color: var(--text-dim);
+      font-size: 13px;
+    }
+
+    .uptime-value {
+      font-size: 24px;
+      font-weight: 700;
+      font-family: var(--mono);
+      color: var(--accent);
+    }
+
+    .last-update {
+      font-size: 11px;
+      color: var(--text-dim);
+      text-align: right;
+      margin-top: 10px;
+    }
+
+    .conf-high { color: var(--green); }
+    .conf-med { color: var(--yellow); }
+    .conf-low { color: var(--red); }
+
+    .conf-bar-high { background: var(--green); }
+    .conf-bar-med { background: var(--yellow); }
+    .conf-bar-low { background: var(--red); }
+
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Forge LLM Sidecar<span>Dashboard</span></h1>
+    <div class="header-badges">
+      <div id="llmBadge" class="badge badge-neutral">
+        <span class="badge-dot"></span>
+        <span id="llmBadgeText">LLM checking...</span>
+      </div>
+      <div class="badge badge-neutral">
+        <span id="uptimeBadge">uptime --</span>
+      </div>
+      <div class="badge badge-neutral">
+        <span id="requestsBadge">0 requests</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <!-- System Status -->
+    <div class="card">
+      <div class="card-title">System Status</div>
+      <div id="statusRows">
+        <div class="status-row"><span class="status-label">Model</span><span class="status-value" id="sModel">--</span></div>
+        <div class="status-row"><span class="status-label">LLM Base URL</span><span class="status-value" id="sLlmUrl">--</span></div>
+        <div class="status-row"><span class="status-label">Port</span><span class="status-value" id="sPort">--</span></div>
+        <div class="status-row"><span class="status-label">Metagame</span><span class="status-value" id="sMetagame">--</span></div>
+        <div class="status-row"><span class="status-label">Format Detect</span><span class="status-value" id="sFormatDetect">--</span></div>
+        <div class="status-row"><span class="status-label">Default Format</span><span class="status-value" id="sDefaultFmt">--</span></div>
+        <div class="status-row"><span class="status-label">LLM Timeout</span><span class="status-value" id="sTimeout">--</span></div>
+      </div>
+    </div>
+
+    <!-- Last Recognition -->
+    <div class="card">
+      <div class="card-title">Last Recognition</div>
+      <div id="lastRecognition">
+        <div class="empty-state">No recognition requests yet</div>
+      </div>
+    </div>
+
+    <!-- Metagame Breakdown -->
+    <div class="card">
+      <div class="card-title">Metagame Breakdown</div>
+      <select id="metaFormat" class="meta-format-select"></select>
+      <div id="metaList">
+        <div class="empty-state">Loading...</div>
+      </div>
+    </div>
+
+    <!-- Piloting Guides -->
+    <div class="card">
+      <div class="card-title">Piloting Guides</div>
+      <div id="guideList">
+        <div class="empty-state">Loading...</div>
+      </div>
+    </div>
+
+    <!-- Request History -->
+    <div class="card full-width">
+      <div class="card-title">Request History <span id="historyCount" style="color: var(--accent)"> (0)</span></div>
+      <div id="historyTable">
+        <div class="empty-state">No requests yet</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="last-update">Auto-refreshes every 5s &middot; last update: <span id="lastUpdate">--</span></div>
+
+  <script>
+    const API = '';
+
+    // Format options
+    const FORMATS = ['standard', 'pioneer', 'modern', 'legacy', 'vintage', 'commander', 'pauper'];
+
+    // State
+    let healthData = null;
+    let statsData = null;
+    let metagameData = null;
+    let pilotingData = null;
+
+    // --- Helpers ---
+    function fmtUptime(seconds) {
+      const d = Math.floor(seconds / 86400);
+      const h = Math.floor((seconds % 86400) / 3600);
+      const m = Math.floor((seconds % 3600) / 60);
+      const s = Math.floor(seconds % 60);
+      if (d > 0) return `${d}d ${h}h ${m}m`;
+      if (h > 0) return `${h}h ${m}m ${s}s`;
+      if (m > 0) return `${m}m ${s}s`;
+      return `${s}s`;
+    }
+
+    function timeAgo(ts) {
+      const diff = (Date.now() / 1000) - ts;
+      if (diff < 2) return 'just now';
+      if (diff < 60) return `${Math.floor(diff)}s ago`;
+      if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+      return `${Math.floor(diff / 3600)}h ago`;
+    }
+
+    function confClass(c) {
+      if (c >= 0.6) return 'conf-high';
+      if (c >= 0.3) return 'conf-med';
+      return 'conf-low';
+    }
+
+    function confBarClass(c) {
+      if (c >= 0.6) return 'conf-bar-high';
+      if (c >= 0.3) return 'conf-bar-med';
+      return 'conf-bar-low';
+    }
+
+    function colorPips(colors) {
+      return `<div class="color-pips">${colors.map(c => `<span class="pip ${c}"></span>`).join('')}</div>`;
+    }
+
+    function escapeHtml(s) {
+      const d = document.createElement('div');
+      d.textContent = s;
+      return d.innerHTML;
+    }
+
+    // --- Render ---
+    function renderHeader() {
+      if (!statsData || !healthData) return;
+      document.getElementById('uptimeBadge').textContent = fmtUptime(statsData.uptime_seconds);
+      document.getElementById('requestsBadge').textContent = `${statsData.total_requests} requests`;
+
+      const badge = document.getElementById('llmBadge');
+      badge.className = `badge ${healthData.llm_reachable ? 'badge-green' : 'badge-red'}`;
+      document.getElementById('llmBadgeText').textContent = healthData.llm_reachable ? 'LLM Connected' : 'LLM Offline';
+    }
+
+    function renderStatus() {
+      if (!healthData) return;
+      document.getElementById('sModel').textContent = healthData.model;
+      document.getElementById('sMetagame').textContent = healthData.metagame_enabled ? 'Enabled' : 'Disabled';
+
+      // Config values from health + inferred
+      fetch(`${API}/health`)
+        .then(r => r.json())
+        .then(d => {
+          document.getElementById('sLlmUrl').textContent = d.llm_base_url || '--';
+          document.getElementById('sPort').textContent = d.port || '--';
+          document.getElementById('sFormatDetect').textContent = d.format_detect_enabled ? 'Enabled' : 'Disabled';
+          document.getElementById('sDefaultFmt').textContent = d.default_format || '--';
+          document.getElementById('sTimeout').textContent = d.timeout ? `${d.timeout}s` : '--';
+        })
+        .catch(() => {});
+    }
+
+    function renderLastRecognition() {
+      const el = document.getElementById('lastRecognition');
+      const entries = statsData ? statsData.history : [];
+      const entry = entries.length > 0 ? entries[entries.length - 1] : null;
+
+      if (!entry) {
+        el.innerHTML = '<div class="empty-state">No recognition requests yet</div>';
+        return;
+      }
+
+      const cClass = confClass(entry.confidence);
+      const cBarClass = confBarClass(entry.confidence);
+      const confPct = Math.round(entry.confidence * 100);
+
+      let pilotingHtml = '';
+      if (entry.piloting) {
+        const p = entry.piloting;
+        pilotingHtml = `
+          <div class="piloting-section">
+            <div class="piloting-label">Piloting Advice</div>
+            <div class="piloting-value">${escapeHtml(p.recommended_play || p.mulligan_advice || 'No advice')}</div>
+            ${p.reasoning ? `<div class="reasoning">${escapeHtml(p.reasoning)}</div>` : ''}
+            <div class="piloting-label" style="margin-top:6px">Own Archetype: ${escapeHtml(p.own_archetype)}</div>
+          </div>
+        `;
+      }
+
+      let altHtml = '';
+      if (entry.alternatives && entry.alternatives.length > 0) {
+        altHtml = `<div class="alternatives">${entry.alternatives.slice(0, 5).map(a => `<span class="alt-chip">${escapeHtml(a)}</span>`).join('')}</div>`;
+      }
+
+      el.innerHTML = `
+        <div class="archetype-main">
+          <span class="archetype-name">${escapeHtml(entry.archetype)}</span>
+          <span class="archetype-conf ${cClass}">${confPct}%</span>
+        </div>
+        <div class="confidence-bar">
+          <div class="confidence-fill ${cBarClass}" style="width:${confPct}%"></div>
+        </div>
+        ${entry.reasoning ? `<div class="reasoning">${escapeHtml(entry.reasoning)}</div>` : ''}
+        ${altHtml}
+        ${pilotingHtml}
+        <div class="last-update">Turn ${entry.turn} &middot; Game ${escapeHtml(entry.game_id)} &middot; ${timeAgo(entry.timestamp)}</div>
+      `;
+    }
+
+    function renderMetagame() {
+      const select = document.getElementById('metaFormat');
+      const list = document.getElementById('metaList');
+
+      if (select.options.length === 0) {
+        FORMATS.forEach(f => {
+          const opt = document.createElement('option');
+          opt.value = f;
+          opt.textContent = f.charAt(0).toUpperCase() + f.slice(1);
+          select.appendChild(opt);
+        });
+        select.addEventListener('change', () => fetchMetagame(select.value));
+      }
+
+      if (!metagameData || !metagameData.archetypes) {
+        list.innerHTML = '<div class="empty-state">No metagame data</div>';
+        return;
+      }
+
+      const archetypes = metagameData.archetypes.slice(0, 12);
+      const maxShare = archetypes.length > 0 ? archetypes[0].meta_share : 1;
+
+      list.innerHTML = archetypes.map(a => `
+        <div class="meta-row">
+          ${colorPips(a.colors)}
+          <span class="meta-name">${escapeHtml(a.name)}</span>
+          <div class="meta-bar-wrap">
+            <div class="meta-bar" style="width:${(a.meta_share / maxShare) * 100}%"></div>
+          </div>
+          <span class="meta-share">${a.meta_share}%</span>
+        </div>
+      `).join('');
+    }
+
+    function renderGuides() {
+      const el = document.getElementById('guideList');
+
+      if (!pilotingData || !pilotingData.guides) {
+        el.innerHTML = '<div class="empty-state">No guides loaded</div>';
+        return;
+      }
+
+      const guides = pilotingData.guides;
+      if (guides.length === 0) {
+        el.innerHTML = '<div class="empty-state">No guides available</div>';
+        return;
+      }
+
+      el.innerHTML = `<div class="guide-list">${guides.map(g => {
+        const parts = g.split('/');
+        const fmt = parts[0];
+        const name = parts[1] || g;
+        return `<div class="guide-item"><span class="guide-format">${escapeHtml(fmt)}</span>${escapeHtml(name)}</div>`;
+      }).join('')}</div>`;
+    }
+
+    function renderHistory() {
+      const el = document.getElementById('historyTable');
+      const entries = statsData ? statsData.history : [];
+
+      document.getElementById('historyCount').textContent = ` (${entries.length})`;
+
+      if (entries.length === 0) {
+        el.innerHTML = '<div class="empty-state">No requests yet</div>';
+        return;
+      }
+
+      const reversed = [...entries].reverse();
+      el.innerHTML = `
+        <table>
+          <thead>
+            <tr><th>Time</th><th>Turn</th><th>Archetype</th><th>Conf</th><th>Format</th><th>Game ID</th></tr>
+          </thead>
+          <tbody>
+            ${reversed.map(e => `
+              <tr>
+                <td>${timeAgo(e.timestamp)}</td>
+                <td>${e.turn}</td>
+                <td>${escapeHtml(e.archetype)}</td>
+                <td class="${confClass(e.confidence)}">${Math.round(e.confidence * 100)}%</td>
+                <td>${escapeHtml(e.format)}</td>
+                <td>${escapeHtml(e.game_id)}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
+    }
+
+    // --- Fetch ---
+    async function fetchHealth() {
+      try {
+        healthData = await fetch(`${API}/health`).then(r => r.json());
+      } catch (e) {
+        console.error('Health fetch failed', e);
+      }
+    }
+
+    async function fetchStats() {
+      try {
+        statsData = await fetch(`${API}/api/stats`).then(r => r.json());
+      } catch (e) {
+        console.error('Stats fetch failed', e);
+      }
+    }
+
+    async function fetchMetagame(format) {
+      try {
+        metagameData = await fetch(`${API}/metagame?format=${format}`).then(r => r.json());
+      } catch (e) {
+        console.error('Metagame fetch failed', e);
+      }
+    }
+
+    async function fetchPiloting(format) {
+      try {
+        pilotingData = await fetch(`${API}/piloting?format=${format}`).then(r => r.json());
+      } catch (e) {
+        console.error('Piloting fetch failed', e);
+      }
+    }
+
+    // --- Refresh ---
+    function refresh() {
+      fetchHealth();
+      fetchStats();
+      const fmt = document.getElementById('metaFormat').value || 'modern';
+      fetchMetagame(fmt);
+      fetchPiloting(fmt);
+    }
+
+    function renderAll() {
+      renderHeader();
+      renderStatus();
+      renderLastRecognition();
+      renderMetagame();
+      renderGuides();
+      renderHistory();
+      document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString();
+    }
+
+    // Initial load
+    refresh();
+    renderAll();
+
+    // Auto-refresh every 5s
+    setInterval(() => {
+      refresh().then(() => { renderAll(); }).catch(() => renderAll());
+    }, 5000);
+
+    // Populate health-driven status from a secondary fetch
+    // Use metagame/piloting for available format hints
+  </script>
+</body>
+</html>
