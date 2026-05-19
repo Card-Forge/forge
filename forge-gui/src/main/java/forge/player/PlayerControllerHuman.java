@@ -33,8 +33,16 @@ import forge.game.mana.ManaConversionMatrix;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseType;
 import forge.game.player.*;
+import forge.game.player.actions.ActivateAbilityAction;
+import forge.game.player.actions.ColorChoiceAction;
+import forge.game.player.actions.ConfirmAction;
+import forge.game.player.actions.ManaComboAction;
+import forge.game.player.actions.ModeChoiceAction;
+import forge.game.player.actions.PayCostAction;
 import forge.game.player.actions.SelectCardAction;
 import forge.game.player.actions.SelectPlayerAction;
+import forge.game.player.actions.ScryAction;
+import forge.game.player.actions.StackOrderAction;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementEffectView;
 import forge.game.replacement.ReplacementLayer;
@@ -348,10 +356,15 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public Map<Byte, Integer> specifyManaCombo(SpellAbility sa, ColorSet colorSet, int manaAmount, boolean different) {
+        final List<MagicColor.Color> choices = Lists.newArrayList(colorSet.getOrderedColors());
+        final Map<Byte, Integer> remembered = macros().consumeRememberedManaCombo(choices, manaAmount, different);
+        if (remembered != null) {
+            return remembered;
+        }
         final CardView vSource = CardView.get(sa.getHostCard());
         final Map<Object, Integer> vAffected = new LinkedHashMap<>(manaAmount);
         Integer maxAmount = different ? 1 : manaAmount;
-        for (MagicColor.Color color : colorSet) {
+        for (MagicColor.Color color : choices) {
             if (color == MagicColor.Color.COLORLESS) {
                 continue;
             }
@@ -367,6 +380,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 }
             }
         }
+        macros().addRememberedAction(new ManaComboAction(result));
         return result;
     }
 
@@ -755,23 +769,38 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             boolean result = options.isEmpty() ? InputConfirm.confirm(this, cardToShow.getView(), sa, message)
                     : InputConfirm.confirm(this, cardToShow.getView(), message, true, options);
             endTempShowCards();
+            recordConfirm(cardToShow.getView(), result);
             return result;
         }
 
         // The general case: display the source of the SA in the prompt on mouse over
-        return options.isEmpty() ? InputConfirm.confirm(this, sa, message) :
+        final boolean result = options.isEmpty() ? InputConfirm.confirm(this, sa, message) :
                 InputConfirm.confirm(this, sa.getHostCard().getView(), sa, message, true, options);
+        recordConfirm(sa, result);
+        return result;
     }
 
     @Override
     public boolean confirmBidAction(final SpellAbility sa, final PlayerActionConfirmMode bidlife, final String string,
                                     final int bid, final Player winner) {
-        return InputConfirm.confirm(this, sa, string + " " + localizer.getMessage("lblHighestBidder") + " " + winner);
+        final boolean result = InputConfirm.confirm(this, sa, string + " " + localizer.getMessage("lblHighestBidder") + " " + winner);
+        recordConfirm(sa, result);
+        return result;
     }
 
     @Override
     public boolean confirmStaticApplication(final Card hostCard, PlayerActionConfirmMode mode, final String message, final String logic) {
-        return InputConfirm.confirm(this, CardView.get(hostCard), message);
+        final boolean result = InputConfirm.confirm(this, CardView.get(hostCard), message);
+        recordConfirm(CardView.get(hostCard), result);
+        return result;
+    }
+
+    private void recordConfirm(final SpellAbility sa, final boolean result) {
+        recordConfirm(sa == null ? null : sa.getCardView(), result);
+    }
+
+    private void recordConfirm(final CardView cardView, final boolean result) {
+        macros().addRememberedAction(new ConfirmAction(cardView, result));
     }
 
     @Override
@@ -988,6 +1017,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public ImmutablePair<CardCollection, CardCollection> arrangeForScry(final CardCollection topN) {
+        final ImmutablePair<CardCollection, CardCollection> remembered = macros().consumeRememberedScry(topN);
+        if (remembered != null) {
+            return remembered;
+        }
+
         CardCollection toBottom = null;
         CardCollection toTop = null;
 
@@ -1028,6 +1062,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
         }
         endTempShowCards();
+        macros().addRememberedAction(new ScryAction(toTop, toBottom));
         return ImmutablePair.of(toTop, toBottom);
     }
 
@@ -1725,7 +1760,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 labels = ImmutableList.copyOf(kindOfChoice.toString().split("Or"));
         }
 
-        return InputConfirm.confirm(this, sa, question, defaultVal == null || defaultVal, labels);
+        final boolean result = InputConfirm.confirm(this, sa, question, defaultVal == null || defaultVal, labels);
+        recordConfirm(sa, result);
+        return result;
     }
 
     @Override
@@ -1790,6 +1827,21 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             getGame().getTracker().freeze(); // refreeze if the tracker was frozen prior to this update
         }
         final String modeTitle = localizer.getMessage("lblPlayerActivatedCardChooseMode", sa.getActivatingPlayer().toString(), sa.getHostCard().getTranslatedName());
+        final List<String> choiceDescriptions = Lists.newArrayList();
+        final Map<String, AbilitySub> modesByDescription = Maps.newLinkedHashMap();
+        for (final AbilitySub sub : spellViewCache.values()) {
+            final String description = describeModeChoice(sub);
+            choiceDescriptions.add(description);
+            modesByDescription.put(description, sub);
+        }
+        final List<String> remembered = macros().consumeRememberedModeChoice(choiceDescriptions, min, num, allowRepeat);
+        if (remembered != null) {
+            final List<AbilitySub> chosen = Lists.newArrayListWithCapacity(remembered.size());
+            for (final String description : remembered) {
+                chosen.add(modesByDescription.get(description));
+            }
+            return chosen;
+        }
         final List<AbilitySub> chosen = Lists.newArrayListWithCapacity(num);
         int chosenPawprint = 0;
         for (int i = 0; i < num; i++) {
@@ -1818,7 +1870,16 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
             chosen.add(sp);
         }
+        final List<String> chosenDescriptions = Lists.newArrayListWithCapacity(chosen.size());
+        for (final AbilitySub sub : chosen) {
+            chosenDescriptions.add(describeModeChoice(sub));
+        }
+        macros().addRememberedAction(new ModeChoiceAction(chosenDescriptions));
         return chosen;
+    }
+
+    private String describeModeChoice(final AbilitySub sub) {
+        return sub.toUnsuppressedString();
     }
 
     @Override
@@ -1856,13 +1917,21 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (withColorless && !colors.isColorless()) {
             choices.add(MagicColor.Color.COLORLESS);
         }
+        final Byte remembered = macros().consumeRememberedColorChoice(choices);
+        if (remembered != null) {
+            return remembered;
+        }
+        final byte result;
         if (choices.size() > 2) {
-            return getGui().one(message, choices).getColorMask();
+            result = getGui().one(message, choices).getColorMask();
+        } else {
+            final int idxChosen = InputConfirm.confirm(this, CardView.get(c), message, true, choices.stream().map(MagicColor.Color::getTranslatedName).collect(Collectors.toList()))
+                    ? 0 : 1;
+            result = choices.get(idxChosen).getColorMask();
         }
 
-        final int idxChosen = InputConfirm.confirm(this, CardView.get(c), message, true, choices.stream().map(MagicColor.Color::getTranslatedName).collect(Collectors.toList()))
-                ? 0 : 1;
-        return choices.get(idxChosen).getColorMask();
+        macros().addRememberedAction(new ColorChoiceAction(result));
+        return result;
     }
 
     @Override
@@ -1926,7 +1995,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
             return this.getGui().confirm(cardView, question.replaceAll("\n", " "));
         } else {
-            return InputConfirm.confirm(this, sa, question);
+            final boolean result = InputConfirm.confirm(this, sa, question);
+            if (result) {
+                macros().addRememberedAction(new PayCostAction(sa.getCardView()));
+            }
+            return result;
         }
     }
 
@@ -2002,16 +2075,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         boolean needPrompt = !activePlayerSAs.get(0).isTrigger();
 
         final String firstStr = activePlayerSAs.get(0).toString();
-        final int firstBracket = firstStr.indexOf(" [");
-        final String firstLookup = firstBracket > 0 ? firstStr.substring(0, firstBracket) : firstStr;
+        final String firstLookup = trimStackContext(firstStr);
         final StringBuilder saLookupKey = new StringBuilder(firstLookup);
 
         final char delim = (char) 5;
         for (int i = 1; i < activePlayerSAs.size(); i++) {
             final SpellAbility currentSa = activePlayerSAs.get(i);
             final String saStr = currentSa.toString();
-            final int bracket = saStr.indexOf(" [");
-            final String saLookup = bracket > 0 ? saStr.substring(0, bracket) : saStr;
+            final String saLookup = trimStackContext(saStr);
 
             if (currentSa.isTrigger()) {
                 needPrompt |= currentSa.getTrigger().hasParam("OrderDuplicates");
@@ -2035,6 +2106,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             rememberedKeys.remove(saLookupKeyString);
             savedOrder = null;
         }
+
+        final List<String> availableOrderDescriptions = describeAbilityOrder(activePlayerSAs);
+        final List<String> rememberedOrder = macros().consumeRememberedAbilityOrder(availableOrderDescriptions);
+        if (rememberedOrder != null) {
+            return orderSpellAbilitiesByDescription(activePlayerSAs, rememberedOrder);
+        }
+
         if (savedOrder != null && rememberedKeys.contains(saLookupKeyString)) {
             final List<SpellAbility> orderedSAs = Lists.newArrayListWithCapacity(savedOrder.size());
             for (final int index : savedOrder) {
@@ -2084,7 +2162,37 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         } else {
             rememberedKeys.remove(saLookupKeyString);
         }
+        macros().addRememberedAction(new StackOrderAction(describeAbilityOrder(orderedSAs)));
         return orderedSAs;
+    }
+
+    private String trimStackContext(final String description) {
+        final int idxAdditionalInfo = description.indexOf(" [");
+        return idxAdditionalInfo > 0 ? description.substring(0, idxAdditionalInfo) : description;
+    }
+
+    private List<String> describeAbilityOrder(final List<SpellAbility> abilities) {
+        final List<String> descriptions = Lists.newArrayListWithCapacity(abilities.size());
+        for (final SpellAbility ability : abilities) {
+            descriptions.add(trimStackContext(ability.toString()));
+        }
+        return descriptions;
+    }
+
+    private List<SpellAbility> orderSpellAbilitiesByDescription(final List<SpellAbility> abilities,
+                                                               final List<String> orderedDescriptions) {
+        final List<SpellAbility> available = Lists.newArrayList(abilities);
+        final List<SpellAbility> ordered = Lists.newArrayListWithCapacity(abilities.size());
+        for (final String description : orderedDescriptions) {
+            for (final SpellAbility ability : available) {
+                if (trimStackContext(ability.toString()).equals(description)) {
+                    ordered.add(ability);
+                    available.remove(ability);
+                    break;
+                }
+            }
+        }
+        return ordered;
     }
 
     @Override
@@ -2444,6 +2552,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void selectButtonCancel() {
+        if (macros().isReplaying()) {
+            macros().cancelPlayback();
+            return;
+        }
+        final Input input = inputQueue.getInput();
+        if (input instanceof InputConfirm || input instanceof InputPayMana) {
+            recordConfirm((CardView) null, false);
+        }
         inputProxy.selectButtonCancel();
     }
 
@@ -2473,9 +2589,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public boolean selectCard(final CardView cardView, final List<CardView> otherCardViewsToSelect,
                               final ITriggerEvent triggerEvent) {
-        macros().addRememberedAction(new SelectCardAction(cardView));
-
-        return inputProxy.selectCard(cardView, otherCardViewsToSelect, triggerEvent);
+        final boolean selected = inputProxy.selectCard(cardView, otherCardViewsToSelect, triggerEvent);
+        if (selected) {
+            macros().addRememberedAction(new SelectCardAction(cardView));
+        }
+        return selected;
     }
 
     @Override
@@ -2483,7 +2601,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         if (spellViewCache == null || spellViewCache.isEmpty()) {
             return;
         }
-        inputProxy.selectAbility(spellViewCache.get(sa));
+        if (inputProxy.selectAbility(spellViewCache.get(sa))) {
+            macros().addRememberedAction(new ActivateAbilityAction(sa.getHostCard(), sa.getDescription()));
+        }
     }
 
     @Override

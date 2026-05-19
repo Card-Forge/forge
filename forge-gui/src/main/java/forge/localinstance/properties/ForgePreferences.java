@@ -324,6 +324,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         SHORTCUT_YIELD_AUTO_PASS ("80"),
         SHORTCUT_MACRO_RECORD ("16 82"),
         SHORTCUT_MACRO_NEXT_ACTION ("16 50"),
+        SHORTCUT_MACRO_REPEAT_ACTIONS ("16 51"),
         SHORTCUT_CARD_ZOOM("90"),
         SHORTCUT_SHOWHOTKEYS("72"),
         SHORTCUT_PANELTABS("17 84"),
