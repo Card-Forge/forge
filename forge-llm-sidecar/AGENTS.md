@@ -69,6 +69,8 @@ These use separate LLM env vars (`BUILDER_LLM_BASE_URL`, etc.) defaulting to the
 |---|---|---|
 | `LLM_BASE_URL` | `http://localhost:8080/v1` | OpenAI-compatible endpoint |
 | `MODEL_NAME` | `local-model` | Model name in LLM requests |
+| `LLM_DISABLE_THINKING` | `true` | Send `enable_thinking:false` — skip the `<think>` block (~20x faster) |
+| `HOST` | `127.0.0.1` | uvicorn bind interface; `0.0.0.0` for remote access |
 | `PORT` | `18970` | uvicorn listen port |
 | `METAGAME_ENABLE` | `true` | Score guesses against metagame data |
 | `FORMAT_DETECT_ENABLE` | `true` | Scryfall-based format detection |

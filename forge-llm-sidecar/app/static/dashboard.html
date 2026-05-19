@@ -594,18 +594,19 @@
         return;
       }
 
-      const guides = pilotingData.guides;
-      if (guides.length === 0) {
+      // /piloting returns guides as { subdir: [slug, ...] } — flatten it.
+      const flat = [];
+      for (const [sub, slugs] of Object.entries(pilotingData.guides || {})) {
+        for (const slug of slugs) { flat.push([sub, slug]); }
+      }
+      if (flat.length === 0) {
         el.innerHTML = '<div class="empty-state">No guides available</div>';
         return;
       }
 
-      el.innerHTML = `<div class="guide-list">${guides.map(g => {
-        const parts = g.split('/');
-        const fmt = parts[0];
-        const name = parts[1] || g;
-        return `<div class="guide-item"><span class="guide-format">${escapeHtml(fmt)}</span>${escapeHtml(name)}</div>`;
-      }).join('')}</div>`;
+      el.innerHTML = `<div class="guide-list">${flat.map(([fmt, name]) =>
+        `<div class="guide-item"><span class="guide-format">${escapeHtml(fmt)}</span>${escapeHtml(name)}</div>`
+      ).join('')}</div>`;
     }
 
     function renderHistory() {
@@ -675,12 +676,14 @@
     }
 
     // --- Refresh ---
-    function refresh() {
-      fetchHealth();
-      fetchStats();
+    async function refresh() {
       const fmt = document.getElementById('metaFormat').value || 'modern';
-      fetchMetagame(fmt);
-      fetchPiloting(fmt);
+      await Promise.all([
+        fetchHealth(),
+        fetchStats(),
+        fetchMetagame(fmt),
+        fetchPiloting(fmt),
+      ]);
     }
 
     function renderAll() {
@@ -694,8 +697,7 @@
     }
 
     // Initial load
-    refresh();
-    renderAll();
+    refresh().then(renderAll).catch(renderAll);
 
     // Auto-refresh every 5s
     setInterval(() => {

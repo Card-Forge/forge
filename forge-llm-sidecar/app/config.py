@@ -16,8 +16,12 @@ class Config:
     llm_base_url: str
     llm_api_key: str
     model_name: str
+    host: str
     port: int
     request_timeout: float
+    # Skip the model's <think> block for the structured-output call. Reasoning
+    # adds large latency (often >20x) for no quality gain on JSON classification.
+    llm_disable_thinking: bool
     # Metagame knowledge (pre-scraped JSON, refreshed by a GitHub Action)
     metagame_enable: bool
     default_meta_format: str
@@ -30,8 +34,10 @@ class Config:
             llm_base_url=os.environ.get("LLM_BASE_URL", "http://localhost:8080/v1"),
             llm_api_key=os.environ.get("LLM_API_KEY", "not-needed"),
             model_name=os.environ.get("MODEL_NAME", "local-model"),
+            host=os.environ.get("HOST", "127.0.0.1"),
             port=int(os.environ.get("PORT", "18970")),
             request_timeout=float(os.environ.get("LLM_TIMEOUT", "60")),
+            llm_disable_thinking=_env_bool("LLM_DISABLE_THINKING", True),
             metagame_enable=_env_bool("METAGAME_ENABLE", True),
             default_meta_format=os.environ.get("DEFAULT_META_FORMAT", "standard"),
             format_detect_enable=_env_bool("FORMAT_DETECT_ENABLE", True),

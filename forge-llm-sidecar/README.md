@@ -67,6 +67,8 @@ The image is also published to GHCR by CI on every push to `master`:
 | `LLM_API_KEY`          | `not-needed`                  | Bearer token; llama.cpp ignores it                    |
 | `MODEL_NAME`           | `local-model`                 | Model name sent in the request                        |
 | `LLM_TIMEOUT`          | `60`                          | LLM request timeout (seconds)                         |
+| `LLM_DISABLE_THINKING` | `true`                        | Skip the model's `<think>` block (`enable_thinking:false`) — ~20x faster |
+| `HOST`                 | `127.0.0.1`                   | Interface the sidecar binds to; set `0.0.0.0` for remote access |
 | `PORT`                 | `18970`                       | Port the sidecar listens on                           |
 | `METAGAME_ENABLE`      | `true`                        | Score guesses against the scraped metagame data       |
 | `FORMAT_DETECT_ENABLE` | `true`                        | Detect the precise format via Scryfall when ambiguous |
@@ -158,6 +160,50 @@ or launch Forge with `-Dforge.ai.deckRecognition=true`.
 
 The feature is **off by default** and **fail-soft**: if the sidecar is not
 running, Forge logs one debug line and plays normally.
+
+## Remote access over Tailscale
+
+To run Forge from anywhere — laptop, another machine — while keeping the sidecar
+and the LLM on a home server, expose the sidecar over a
+[Tailscale](https://tailscale.com) tailnet. Tailscale provides the encryption
+and access control (WireGuard), so the sidecar itself stays auth-free.
+
+```
+[ Forge, any device ]                  [ home server ]
+  Forge desktop  --Tailscale-->  sidecar :18970  --localhost-->  llama.cpp :8080
+  browser /dashboard --Tailscale--^
+```
+
+**On the home server:**
+
+1. Install Tailscale and `tailscale up`. Enable **MagicDNS** in the admin
+   console so the server has a stable name (`home-server.tailnet-name.ts.net`).
+2. Run the sidecar with `HOST=0.0.0.0` so it binds the Tailscale interface.
+   The provided systemd unit does this and keeps it running:
+
+   ```sh
+   mkdir -p ~/.config/systemd/user
+   cp scripts/forge-sidecar.service ~/.config/systemd/user/
+   # edit WorkingDirectory / ExecStart to match your install path
+   systemctl --user daemon-reload
+   systemctl --user enable --now forge-sidecar
+   loginctl enable-linger "$USER"
+   ```
+
+3. Do **not** port-forward `18970` on your router — Tailscale is the only
+   ingress path. Optionally restrict `:18970` to specific devices with a
+   Tailscale ACL.
+
+**On each device running Forge:** install Tailscale, join the same tailnet,
+then launch Forge pointing at the home server:
+
+```sh
+FORGE_SIDECAR_URL=http://home-server.tailnet-name.ts.net:18970 ./run-forge.sh
+```
+
+The `/dashboard` view (live recognition history) is then reachable from any
+tailnet device's browser at
+`http://home-server.tailnet-name.ts.net:18970/dashboard`.
 
 ## Project layout
 

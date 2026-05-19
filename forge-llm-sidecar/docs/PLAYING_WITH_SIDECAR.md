@@ -140,6 +140,20 @@ python scripts/analyze_forge_log.py /path/to/game.log \
 Creates a JSONL file with `{observations → archetype, confidence, reasoning}`
 pairs suitable for fine-tuning.
 
+## Running the sidecar remotely
+
+To play Forge from anywhere while the sidecar and LLM stay on a home server,
+expose the sidecar over a [Tailscale](https://tailscale.com) tailnet:
+
+1. On the home server, run the sidecar with `HOST=0.0.0.0` (the
+   `scripts/forge-sidecar.service` systemd unit does this) and join a tailnet.
+2. On the device running Forge, join the same tailnet and launch with
+   `FORGE_SIDECAR_URL=http://home-server.tailnet-name.ts.net:18970 ./run-forge.sh`.
+
+The live `/dashboard` view is then reachable from any tailnet device's browser.
+See the "Remote access over Tailscale" section in the sidecar `README.md` for
+full setup steps.
+
 ## Understanding the output
 
 Each checkpoint JSON contains:

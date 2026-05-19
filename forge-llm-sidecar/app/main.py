@@ -276,4 +276,4 @@ async def forge_log_analyze(req: ForgeLogAnalyzeRequest) -> ForgeLogAnalyzeRespo
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run(app, host="127.0.0.1", port=CONFIG.port)
+    uvicorn.run(app, host=CONFIG.host, port=CONFIG.port)

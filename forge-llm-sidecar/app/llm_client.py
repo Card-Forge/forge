@@ -41,13 +41,19 @@ async def generate_json(prompt: str, *, system: str | None = None) -> dict:
         messages.append({"role": "system", "content": system})
     messages.append({"role": "user", "content": prompt})
 
-    payload = {
+    payload: dict = {
         "model": CONFIG.model_name,
         "messages": messages,
         "response_format": {"type": "json_object"},
         "temperature": 0.2,
         "stream": False,
     }
+    if CONFIG.llm_disable_thinking:
+        # Reasoning models (e.g. Qwen3) emit a long <think> block before the
+        # answer — ~20x slower for no quality gain on JSON classification.
+        # `enable_thinking` is the chat-template kwarg llama.cpp honors with
+        # `--jinja`; backends without it simply ignore the extra kwarg.
+        payload["chat_template_kwargs"] = {"enable_thinking": False}
     headers = {"Authorization": f"Bearer {CONFIG.llm_api_key}"}
 
     try:
