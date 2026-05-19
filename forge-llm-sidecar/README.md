@@ -44,14 +44,14 @@ Forge is the reference *adapter* — see [docs/ADAPTERS.md](docs/ADAPTERS.md).
 cd forge-llm-sidecar
 python -m venv .venv && source .venv/bin/activate
 pip install -e .
-uvicorn app.main:app --host 127.0.0.1 --port 8000
+uvicorn app.main:app --port 18970
 ```
 
 ### Run with Docker
 
 ```sh
 docker build -t forge-llm-sidecar .
-docker run -p 8000:8000 \
+docker run -p 18970:18970 \
   -e LLM_BASE_URL=http://host.docker.internal:8080/v1 \
   forge-llm-sidecar
 ```
@@ -67,7 +67,7 @@ The image is also published to GHCR by CI on every push to `master`:
 | `LLM_API_KEY`          | `not-needed`                  | Bearer token; llama.cpp ignores it                    |
 | `MODEL_NAME`           | `local-model`                 | Model name sent in the request                        |
 | `LLM_TIMEOUT`          | `60`                          | LLM request timeout (seconds)                         |
-| `PORT`                 | `8000`                        | Port the sidecar listens on                           |
+| `PORT`                 | `18970`                       | Port the sidecar listens on                           |
 | `METAGAME_ENABLE`      | `true`                        | Score guesses against the scraped metagame data       |
 | `FORMAT_DETECT_ENABLE` | `true`                        | Detect the precise format via Scryfall when ambiguous |
 | `DEFAULT_META_FORMAT`  | `standard`                    | Fallback format when detection fails                  |
@@ -128,9 +128,9 @@ game. Fully fail-soft: on failure it falls back to `DEFAULT_META_FORMAT`.
 ### Quick manual test
 
 ```sh
-curl http://localhost:8000/health
+curl http://localhost:18970/health
 
-curl -X POST http://localhost:8000/recognize \
+curl -X POST http://localhost:18970/recognize \
   -H 'Content-Type: application/json' \
   -d '{
     "client": "forge",
@@ -152,7 +152,7 @@ curl -X POST http://localhost:8000/recognize \
 In an AI profile (`.ai` file) or via system property, enable the feature:
 
 - `DECK_RECOGNITION_ENABLE=true`
-- `DECK_RECOGNITION_SIDECAR_URL=http://localhost:8000`
+- `DECK_RECOGNITION_SIDECAR_URL=http://localhost:18970`
 
 or launch Forge with `-Dforge.ai.deckRecognition=true`.
 

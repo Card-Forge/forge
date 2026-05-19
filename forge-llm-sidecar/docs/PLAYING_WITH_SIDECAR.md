@@ -28,10 +28,10 @@ pip install -e .
 python -m app.main
 ```
 
-The sidecar listens on `http://localhost:8000` by default. Verify it's running:
+The sidecar listens on `http://localhost:18970` by default. Verify it's running:
 
 ```bash
-curl http://localhost:8000/health
+curl http://localhost:18970/health
 # {"status": "ok", "model": "local-model", ...}
 ```
 
@@ -73,7 +73,7 @@ After the game ends, run:
 
 ```bash
 python scripts/analyze_forge_log.py /path/to/game.log \
-    --sidecar http://localhost:8000 \
+    --sidecar http://localhost:18970 \
     --opponent "YourName" \
     --ai-player "AI Player Name" \
     --output jsonl > analysis.jsonl
@@ -89,7 +89,7 @@ While the game is running, watch the log file:
 ```bash
 python scripts/analyze_forge_log.py /path/to/game.log \
     --tail \
-    --sidecar http://localhost:8000 \
+    --sidecar http://localhost:18970 \
     --opponent "YourName" \
     --ai-player "AI Player Name"
 ```
@@ -115,7 +115,7 @@ This prints all parsed events and checkpoints to stdout/stderr.
 Send a log to the running sidecar directly:
 
 ```bash
-curl -X POST http://localhost:8000/forge-log/analyze \
+curl -X POST http://localhost:18970/forge-log/analyze \
     -H "Content-Type: application/json" \
     -d '{
         "log": "$(cat /path/to/game.log)",
@@ -131,7 +131,7 @@ Returns every checkpoint with full LLM responses and training data.
 
 ```bash
 python scripts/analyze_forge_log.py /path/to/game.log \
-    --sidecar http://localhost:8000 \
+    --sidecar http://localhost:18970 \
     --opponent "YourName" \
     --ai-player "AI Player Name" \
     --training training_data.jsonl
@@ -169,7 +169,7 @@ To follow along during a game, use live tailing and pipe output to a viewer:
 
 # Terminal 2: Watch real-time analysis
 python scripts/analyze_forge_log.py ~/.forge/logs/game.log \
-    --tail --sidecar http://localhost:8000 \
+    --tail --sidecar http://localhost:18970 \
     --opponent "You" --ai-player "Computer" | jq -r
     '.archetype + " (conf: " + (.confidence|tostring) + "): " + .reasoning'
 ```
@@ -193,7 +193,7 @@ piloting advice:
 
 ```bash
 python scripts/analyze_forge_log.py /path/to/game.log \
-    --sidecar http://localhost:8000 \
+    --sidecar http://localhost:18970 \
     --deck-cards "Lightning Bolt" "Counterspell" "Island" "Mountain" ...
 ```
 

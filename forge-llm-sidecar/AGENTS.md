@@ -5,7 +5,7 @@
 ```bash
 # This repo lives inside the larger Forge monorepo at ../forge-llm-sidecar/
 pip install -e ".[dev]"      # install package + dev deps
-uvicorn app.main:app          # dev server on :8000
+uvicorn app.main:app --port 18970   # dev server
 pytest                       # fully offline tests (LLM + Scryfall stubbed)
 ```
 
@@ -69,7 +69,7 @@ These use separate LLM env vars (`BUILDER_LLM_BASE_URL`, etc.) defaulting to the
 |---|---|---|
 | `LLM_BASE_URL` | `http://localhost:8080/v1` | OpenAI-compatible endpoint |
 | `MODEL_NAME` | `local-model` | Model name in LLM requests |
-| `PORT` | `8000` | uvicorn listen port |
+| `PORT` | `18970` | uvicorn listen port |
 | `METAGAME_ENABLE` | `true` | Score guesses against metagame data |
 | `FORMAT_DETECT_ENABLE` | `true` | Scryfall-based format detection |
 | `DEFAULT_META_FORMAT` | `standard` | Fallback when detection fails |
@@ -77,7 +77,7 @@ These use separate LLM env vars (`BUILDER_LLM_BASE_URL`, etc.) defaulting to the
 ## Docker
 
 Build: `docker build -t forge-llm-sidecar .`
-Run: `docker run -p 8000:8000 -e LLM_BASE_URL=http://host.docker.internal:8080/v1 forge-llm-sidecar`
+Run: `docker run -p 18970:18970 -e LLM_BASE_URL=http://host.docker.internal:8080/v1 forge-llm-sidecar`
 
 CI publishes to GHCR on `master` pushes only.
 

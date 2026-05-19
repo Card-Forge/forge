@@ -36,13 +36,13 @@ If you skip this step, you can still parse logs offline (Mode 1 below).
 ### Start the sidecar
 
 ```bash
-uvicorn app.main:app --host 127.0.0.1 --port 8000
+uvicorn app.main:app --host 127.0.0.1 --port 18970
 ```
 
 Verify it's running:
 
 ```bash
-curl http://localhost:8000/health
+curl http://localhost:18970/health
 ```
 
 ---
@@ -52,7 +52,7 @@ curl http://localhost:8000/health
 Test the `/recognize` endpoint with a sample request:
 
 ```bash
-curl -X POST http://localhost:8000/recognize \
+curl -X POST http://localhost:18970/recognize \
   -H 'Content-Type: application/json' \
   -d '{
     "client": "forge",
@@ -103,7 +103,7 @@ Parse the log and send every checkpoint to the running sidecar for LLM analysis:
 
 ```bash
 python scripts/analyze_forge_log.py /path/to/game.log \
-    --sidecar http://localhost:8000 \
+    --sidecar http://localhost:18970 \
     --opponent "OpponentName" \
     --ai-player "AIPlayerName"
 ```
@@ -113,7 +113,7 @@ This prints the LLM's archetype guess and piloting advice for each checkpoint. U
 **Filtered output with jq:**
 ```bash
 python scripts/analyze_forge_log.py game.log \
-    --sidecar http://localhost:8000 \
+    --sidecar http://localhost:18970 \
     --opponent "You" --ai-player "AI" | \
     jq -r '"Turn \(.turn): \(.archetype) (conf: \(.confidence))"'
 ```
@@ -127,7 +127,7 @@ Watch a live game log and get real-time analysis as events are appended:
 ```bash
 python scripts/analyze_forge_log.py /path/to/game.log \
     --tail \
-    --sidecar http://localhost:8000 \
+    --sidecar http://localhost:18970 \
     --opponent "YourName" \
     --ai-player "AIPlayerName"
 ```
@@ -141,7 +141,7 @@ Play a game in Forge in another terminal. The script will stream JSON analysis a
 Send a full log to the sidecar's `/forge-log/analyze` endpoint:
 
 ```bash
-curl -X POST http://localhost:8000/forge-log/analyze \
+curl -X POST http://localhost:18970/forge-log/analyze \
     -H "Content-Type: application/json" \
     -d '{
         "log": "$(cat /path/to/game.log)",
@@ -161,7 +161,7 @@ Create a JSONL file of `{observations → archetype, confidence, reasoning}` pai
 
 ```bash
 python scripts/analyze_forge_log.py /path/to/game.log \
-    --sidecar http://localhost:8000 \
+    --sidecar http://localhost:18970 \
     --opponent "OpponentName" \
     --ai-player "AIPlayerName" \
     --training training_data.jsonl
@@ -182,7 +182,7 @@ adapter.set_ai_player("Rogist")
 checkpoints = adapter.parse(open("/path/to/game.log").read())
 
 # Or tail live (async)
-# async for req in adapter.tail("/path/to/game.log", "http://localhost:8000"):
+# async for req in adapter.tail("/path/to/game.log", "http://localhost:18970"):
 #     ...
 ```
 

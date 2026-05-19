@@ -1,6 +1,6 @@
 # HTTP API reference
 
-The sidecar listens on `http://127.0.0.1:8000` by default (configurable via
+The sidecar listens on `http://127.0.0.1:18970` by default (configurable via
 `PORT`). All payloads are JSON. The authoritative models live in
 `app/schema.py`.
 
