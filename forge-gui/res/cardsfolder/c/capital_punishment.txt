@@ -2,6 +2,6 @@ Name:Capital Punishment
 ManaCost:4 B B
 Types:Sorcery
 A:SP$ Vote | Defined$ Player | Choices$ DBVoteDeath,DBVoteTaxes | StoreVoteNum$ True | AILogic$ DeathOrTaxes | StackDescription$ SpellDescription | SpellDescription$ Council's dilemma — Starting with you, each player votes for death or taxes. Each opponent sacrifices a creature for each death vote and discards a card for each taxes vote.
-SVar:DBVoteDeath:DB$ Sacrifice | Defined$ Opponent | SacValid$ Creature | SacMessage$ Creature | Amount$ VoteNum | SpellDescription$ Death
+SVar:DBVoteDeath:DB$ Sacrifice | Defined$ Opponent | SacValid$ Creature | Amount$ VoteNum | SpellDescription$ Death
 SVar:DBVoteTaxes:DB$ Discard | Defined$ Opponent | NumCards$ VoteNum | Mode$ TgtChoose | SpellDescription$ Taxes
 Oracle:Council's dilemma — Starting with you, each player votes for death or taxes. Each opponent sacrifices a creature for each death vote and discards a card for each taxes vote.

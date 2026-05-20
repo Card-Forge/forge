@@ -1,14 +1,15 @@
 [metadata]
-Name=dinosaurelite
+Name=Dinosaur Elite
 [Main]
-25 Forest|ODY|1
-4 Anurid Swarmsnapper|JUD|1
-4 Centaur Chieftain|TOR|1
-4 Elephant Ambush|ODY|1
-4 Explosive Vegetation|ONS|1
-4 Fertile Ground|INV|1
-4 Krosan Avenger|ODY|1
-4 Krosan Warchief|SCG|1
-4 Nantuko Mentor|ODY|1
-4 Rancor|ULG|1
-4 Wild Mongrel|ODY|1
+20 Forest|ONS
+4 Wild Growth|ICE
+4 Overgrowth|STH
+4 Wirewood Savage|ONS
+4 Krosan Warchief|SCG
+4 Ravenous Baloth|ONS
+2 Krosan Groundshaker|ONS
+2 Brontotherium|LGN
+4 Blastoderm|NMS
+4 Feral Throwback|LGN
+4 Overrun|ODY
+4 Naturalize|ONS

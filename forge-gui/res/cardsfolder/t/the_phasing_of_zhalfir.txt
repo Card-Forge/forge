@@ -8,7 +8,7 @@ SVar:DBEffect:DB$ Effect | StaticAbilities$ CantPhaseIn | RememberObjects$ Targe
 SVar:CantPhaseIn:Mode$ CantPhaseIn | ValidCard$ Card.phasedOutIsRemembered | Description$ It can't phase in for as long as you control EFFECTSOURCE.
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature | RememberDestroyed$ True | SubAbility$ DBRepeat | SpellDescription$ Destroy all creatures. For each creature destroyed this way, its controller creates a 2/2 black Phyrexian creature token.
 SVar:DBRepeat:DB$ RepeatEach | UseImprinted$ True | DefinedCards$ DirectRemembered | RepeatSubAbility$ DBToken | SubAbility$ DBCleanup | ChangeZoneTable$ True
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ ImprintedController | TokenScript$ b_2_2_phyrexian
+SVar:DBToken:DB$ Token | TokenOwner$ ImprintedController | TokenScript$ b_2_2_phyrexian
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ true
 DeckHas:Ability$Token & Type$Phyrexian & Color$Black
 Oracle:Read ahead (Choose a chapter and start with that many lore counters. Add one after your draw step. Skipped chapters don't trigger. Sacrifice after III.)\nI, II — Another target nonland permanent phases out. It can't phase in for as long as you control The Phasing of Zhalfir.\nIII — Destroy all creatures. For each creature destroyed this way, its controller creates a 2/2 black Phyrexian creature token.

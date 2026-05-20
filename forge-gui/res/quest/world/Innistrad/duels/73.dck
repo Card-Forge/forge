@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=InuYasha
+Title=InuYasha
+Icon=InuYasha.jpg
+Difficulty=Very Hard
+Description=../Modern/Innistrad/GPT_Turin_-_Efantasy_Venue/Aris_Goudas_-_B-R_Aggro_(Modern,_#26263).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Dark Confidant
+3 Goblin Guide
+4 Grim Lavamancer
+3 Hellspark Elemental
+1 Keldon Marauders
+2 Flames of the Blood Hand
+4 Lightning Bolt
+4 Searing Blaze
+3 Blightning
+4 Bump in the Night
+4 Lava Spike
+4 Rift Bolt
+1 Arid Mesa
+4 Blackcleave Cliffs
+2 Blood Crypt
+9 Mountain
+4 Sulfurous Springs
+[Sideboard]
+3 Ensnaring Bridge
+1 Extirpate
+3 Inquisition of Kozilek
+2 Smash to Smithereens
+1 Sudden Death
+1 Surgical Extraction
+2 Torpor Orb
+2 Volcanic Fallout

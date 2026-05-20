@@ -14,11 +14,8 @@ import forge.assets.FSkinImageInterface;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.game.player.PlayerView;
-import forge.gamemodes.match.input.Input;
-import forge.gamemodes.match.input.InputPayMana;
+import forge.interfaces.IGameController;
 import forge.localinstance.skin.FSkinProp;
-import forge.player.GamePlayerUtil;
-import forge.player.PlayerControllerHuman;
 import forge.screens.match.MatchController;
 import forge.toolbox.FDisplayObject;
 
@@ -28,6 +25,7 @@ public class VManaPool extends VDisplayArea {
             return FSkinColor.get(Colors.ADV_CLR_TEXT);
         return FSkinColor.get(Colors.CLR_TEXT);
     }
+
     private static final FSkinFont FONT = FSkinFont.get(16);
 
     private final PlayerView player;
@@ -37,7 +35,7 @@ public class VManaPool extends VDisplayArea {
     public VManaPool(PlayerView player0) {
         player = player0;
 
-        addManaLabel(FSkinProp.IMG_MANA_COLORLESS, (byte)ManaAtom.COLORLESS);
+        addManaLabel(FSkinProp.IMG_MANA_COLORLESS, (byte) ManaAtom.COLORLESS);
         addManaLabel(FSkinProp.IMG_MANA_W, MagicColor.WHITE);
         addManaLabel(FSkinProp.IMG_MANA_U, MagicColor.BLUE);
         addManaLabel(FSkinProp.IMG_MANA_B, MagicColor.BLACK);
@@ -69,7 +67,7 @@ public class VManaPool extends VDisplayArea {
         float x = 0;
         float y = 0;
 
-        if (Forge.isLandscapeMode()) {
+        if (Forge.isLandscapeMode() && (!Forge.altZoneTabs || !"Horizontal".equalsIgnoreCase(Forge.altZoneTabMode))) {
             float labelWidth = visibleWidth / 2;
             float labelHeight = visibleHeight / 3;
 
@@ -79,13 +77,11 @@ public class VManaPool extends VDisplayArea {
                 if (++count % 2 == 0) {
                     x = 0;
                     y += labelHeight;
-                }
-                else {
+                } else {
                     x += labelWidth;
                 }
             }
-        }
-        else {
+        } else {
             float labelWidth = visibleWidth / manaLabels.size();
             float labelHeight = visibleHeight;
 
@@ -113,26 +109,30 @@ public class VManaPool extends VDisplayArea {
             activate();
             return true;
         }
+
         public void activate() {
-            if(!(MatchController.instance.getGameController() instanceof PlayerControllerHuman))
+            IGameController controller = MatchController.instance.getGameController(player);
+            // not a local human
+            if (controller == null) {
                 return;
-            PlayerControllerHuman controller = (PlayerControllerHuman) MatchController.instance.getGameController();
-            final Input ipm = controller.getInputQueue().getInput();
-            if(ipm instanceof InputPayMana && ipm.getOwner().equals(player))
-                controller.useMana(colorCode);
+            }
+            controller.useMana(colorCode);
         }
+
         @Override
         public boolean flick(float x, float y) {
-            if (player.isLobbyPlayer(GamePlayerUtil.getGuiPlayer())) {
-                //on two finger tap, keep using mana until it runs out or no longer can be put towards the cost
-                int oldMana, newMana = player.getMana(colorCode);
-                do {
-                    oldMana = newMana;
-                    MatchController.instance.getGameController().useMana(colorCode);
-                    newMana = player.getMana(colorCode);
-                }
-                while (oldMana != newMana);
+            IGameController controller = MatchController.instance.getGameController(player);
+            if (controller == null) {
+                return false;
             }
+            //on two finger tap, keep using mana until it runs out or no longer can be put towards the cost
+            int oldMana, newMana = player.getMana(colorCode);
+            do {
+                oldMana = newMana;
+                controller.useMana(colorCode);
+                newMana = player.getMana(colorCode);
+            }
+            while (oldMana != newMana);
             return true;
         }
 
@@ -146,17 +146,18 @@ public class VManaPool extends VDisplayArea {
             if (h > maxImageHeight) {
                 h /= 2;
             }
-            float w = image.getWidth() * h / image.getHeight();
+            float modifier = Forge.isHorizontalTabLayout() ? 0.7f : 1f;
+            float w = image.getWidth() * h * modifier / image.getHeight();
             while (w > getWidth()) {
                 h /= 2;
-                w = image.getWidth() * h / image.getHeight();
+                w = image.getWidth() * h * modifier / image.getHeight();
             }
             float x = (getWidth() - w) / 2;
             float y = gapY + (maxImageHeight - h) / 2;
 
             if (isHovered())
                 g.fillRect(FSkinColor.getStandardColor(50, 200, 150).alphaColor(0.3f), 0, 0, getWidth(), getHeight());
-            g.drawImage(image, x, y, w, h);
+            g.drawImage(image, x, y, w, Forge.isHorizontalTabLayout() ? w : h);
 
             x = 0;
             y += h + gapY;

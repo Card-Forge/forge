@@ -152,7 +152,7 @@ public class LimitedPlayer {
             removedFromPool = true;
             removedFromCardPool.add(bestPick);
             if (choice.equals("Animus of Predation")) {
-                addLog(name() + " removed " + bestPick.getName() + " from the draft with " + choice + ".");
+                addLog(name() + " removed " + bestPick.getDisplayName() + " from the draft with " + choice + ".");
             } else if (choice.equals("Cogwork Grinder")) {
                 addLog(name() + " removed a card face down from the draft with " + choice + ".");
             }
@@ -169,14 +169,14 @@ public class LimitedPlayer {
                 // But just log that a reveal "happened"
                 addLog(this.name() + " revealed a card to " + fromPlayer.name() + " via Cogwork Spy.");
             } else {
-                addLog(this.name() + " revealed " + bestPick.getName() + " to you with Cogwork Spy.");
+                addLog(this.name() + " revealed " + bestPick.getDisplayName() + " to you with Cogwork Spy.");
             }
 
             fromPlayer.playerFlags &= ~SpyNextCardDrafted;
         }
 
         if ((playerFlags & SearcherNoteNext) == SearcherNoteNext) {
-            addLog(name() + " revealed " + bestPick.getName() + " for Aether Searcher.");
+            addLog(name() + " revealed " + bestPick.getDisplayName() + " for Aether Searcher.");
             playerFlags &= ~SearcherNoteNext;
             List<String> note = noted.computeIfAbsent("Aether Searcher", k -> Lists.newArrayList());
             note.add(String.valueOf(bestPick.getName()));
@@ -184,7 +184,7 @@ public class LimitedPlayer {
 
         if ((playerFlags & SmugglerCaptainActive) == SmugglerCaptainActive) {
             if (revealWithSmuggler(bestPick)) {
-                addLog(name() + " revealed " + bestPick.getName() + " for Smuggler Captain.");
+                addLog(name() + " revealed " + bestPick.getDisplayName() + " for Smuggler Captain.");
                 playerFlags &= ~SmugglerCaptainActive;
                 List<String> note = noted.computeIfAbsent("Smuggler Captain", k -> Lists.newArrayList());
                 note.add(String.valueOf(bestPick.getName()));
@@ -297,7 +297,7 @@ public class LimitedPlayer {
                 List<String> note = noted.computeIfAbsent(bestPick.getName(), k -> Lists.newArrayList());
                 note.add(String.valueOf(draftedThisRound));
 
-                addLog(name() + " revealed " + bestPick.getName() + " and noted " + draftedThisRound + " cards drafted this round.");
+                addLog(name() + " revealed " + bestPick.getDisplayName() + " and noted " + draftedThisRound + " cards drafted this round.");
             } else if (Iterables.contains(draftActions, "As you draft CARDNAME, the player to your right chooses a color, you choose another color, then the player to your left chooses a third color.")) {
                 List<String> chosenColors = new ArrayList<>();
 
@@ -320,7 +320,7 @@ public class LimitedPlayer {
                 List<String> note = noted.computeIfAbsent(bestPick.getName(), k -> Lists.newArrayList());
                 note.add(String.join(",", chosenColors));
 
-                addLog(name() + " revealed " + bestPick.getName() + " and noted " + String.join(",", chosenColors) + " chosen colors.");
+                addLog(name() + " revealed " + bestPick.getDisplayName() + " and noted " + String.join(",", chosenColors) + " chosen colors.");
             }
             else {
                 if (Iterables.contains(draftActions, "You may look at the next card drafted from this booster pack.")) {
@@ -328,7 +328,7 @@ public class LimitedPlayer {
                 } else if (fromPlayer != null && Iterables.contains(draftActions, "Note the player who passed CARDNAME to you.")) {
                     List<String> note = noted.computeIfAbsent(bestPick.getName(), k -> Lists.newArrayList());
                     note.add(String.valueOf(fromPlayer.order));
-                    addLog(name() + " revealed " + bestPick.getName() + " and noted " + fromPlayer.name() + " passed it.");
+                    addLog(name() + " revealed " + bestPick.getDisplayName() + " and noted " + fromPlayer.name() + " passed it.");
                 } else if (Iterables.contains(draftActions, "Reveal the next card you draft and note its name.")) {
                     playerFlags |= SearcherNoteNext;
                 } else if (Iterables.contains(draftActions, "The next time a player drafts a card from this booster pack, guess that card's name. Then that player reveals the drafted card.")) {
@@ -337,12 +337,12 @@ public class LimitedPlayer {
                     addSingleBoosterPack();
                 }
 
-                addLog(name() + " revealed " + bestPick.getName() + " as " + name() + " drafted it.");
+                addLog(name() + " revealed " + bestPick.getDisplayName() + " as " + name() + " drafted it.");
             }
         }
         if (Iterables.contains(draftActions, "Draft CARDNAME face up.")) {
             faceUp.add(bestPick);
-            addLog(name() + " drafted " + bestPick.getName() + " face up.");
+            addLog(name() + " drafted " + bestPick.getDisplayName() + " face up.");
             if (!alreadyRevealed) {
                 showRevealedCard(bestPick);
             }
@@ -564,7 +564,7 @@ public class LimitedPlayer {
         List<String> note = noted.computeIfAbsent(found.getName(), k -> Lists.newArrayList());
         revealed.add(bestPick);
         note.add(bestPick.getName());
-        addLog(name() + " revealed " + bestPick.getName() + " and noted its name for Noble Banneret.");
+        addLog(name() + " revealed " + bestPick.getDisplayName() + " and noted its name for Noble Banneret.");
         addLog(name() + " has flipped Noble Banneret face down.");
         alreadyRevealed = true;
 
@@ -613,7 +613,7 @@ public class LimitedPlayer {
         List<String> note = noted.computeIfAbsent(found.getName(), k -> Lists.newArrayList());
         revealed.add(bestPick);
         note.addAll(bestPick.getRules().getType().getCreatureTypes());
-        addLog(name() + " revealed " + bestPick.getName() + " and noted - " + TextUtil.join(bestPick.getRules().getType().getCreatureTypes(), ",") + " for Paliano Vanguard.");
+        addLog(name() + " revealed " + bestPick.getDisplayName() + " and noted - " + TextUtil.join(bestPick.getRules().getType().getCreatureTypes(), ",") + " for Paliano Vanguard.");
         addLog(name() + " has flipped Paliano Vanguard face down.");
         alreadyRevealed = true;
 
@@ -702,12 +702,12 @@ public class LimitedPlayer {
         LimitedPlayer guesser = pack.getAwaitingGuess().getKey();
         PaperCard guess = pack.getAwaitingGuess().getValue();
 
-        addLog(name() + " reveals " + drafted.getName() + " from " + guesser.name() + "'s guess of " + guess.getName() + " with Spire Phantasm.");
+        addLog(name() + " reveals " + drafted.getDisplayName() + " from " + guesser.name() + "'s guess of " + guess.getDisplayName() + " with Spire Phantasm.");
         if (guess.equals(drafted)) {
-            addLog(guesser.name() + " correctly guessed " + guess.getName() + " with Spire Phantasm.");
+            addLog(guesser.name() + " correctly guessed " + guess.getDisplayName() + " with Spire Phantasm.");
             guesser.getDraftNotes().computeIfAbsent("Spire Phantasm", k -> Lists.newArrayList()).add(guess.getName());
         } else {
-            addLog(guesser.name() + " incorrectly guessed " + guess.getName() + " with Spire Phantasm.");
+            addLog(guesser.name() + " incorrectly guessed " + guess.getDisplayName() + " with Spire Phantasm.");
         }
 
         pack.resetAwaitingGuess();
@@ -774,7 +774,7 @@ public class LimitedPlayer {
                     continue;
                 }
 
-                addLog(player.name() + " offered " + offer.getName() + " to " + name() + " for " + exchangeCard.getName());
+                addLog(player.name() + " offered " + offer.getDisplayName() + " to " + name() + " for " + exchangeCard.getName());
                 offers.put(offer, player);
             }
 
@@ -795,11 +795,11 @@ public class LimitedPlayer {
             return SGuiChoose.oneOrNone("Choose a card to offer for trade: ", deckCards);
         }
 
-        return SGuiChoose.oneOrNone("Choose a card to trade for " + offer.getName() + ": ", deckCards);
+        return SGuiChoose.oneOrNone("Choose a card to trade for " + offer.getDisplayName() + ": ", deckCards);
     }
 
     protected PaperCard chooseCardToExchange(PaperCard exchangeCard, Map<PaperCard, LimitedPlayer> offers) {
-        return SGuiChoose.oneOrNone("Choose a card to accept trade of " + exchangeCard + ": ", offers.keySet(), null, (card) -> card.getName() + " (" + offers.get(card).getName() + ")");
+        return SGuiChoose.oneOrNone("Choose a card to accept trade of " + exchangeCard + ": ", offers.keySet(), null, (card) -> card.getDisplayName() + " (" + offers.get(card).getName() + ")");
     }
 
     protected void exchangeAcceptedOffer(PaperCard exchangeCard, LimitedPlayer player, PaperCard offer) {

@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Ratbert
+Title=Ratbert
+Icon=Ratbert.jpg
+Difficulty=Very Hard
+Description=./Modern/Dominaria_United/ArchaeusDota_-_Domain_Aggro_(Modern,_#1459393).dck
+Deck Type=constructed
+
+[Main]
+2 Fury
+4 Wild Nacatl
+4 Territorial Kavu
+4 Scion of Draco
+4 Ragavan, Nimble Pilferer
+4 Nishoba Brawler
+3 Stubborn Denial
+4 Lightning Bolt
+4 Tribal Flames
+3 Leyline Binding
+3 Teferi, Time Raveler
+1 Xander's Lounge
+1 Temple Garden
+1 Stomping Ground
+1 Steam Vents
+1 Sacred Foundry
+1 Breeding Pool
+1 Forest
+1 Indatha Triome
+1 Plains
+4 Arid Mesa
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+1 Teferi, Time Raveler
+1 Stubborn Denial
+1 Leyline Binding
+2 Shadow Prophecy
+2 Rest in Peace
+2 Molten Rain
+2 Fury
+4 Force of Vigor

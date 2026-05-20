@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Vanellope von Schweetz
+Title=Vanellope von Schweetz
+Icon=Vanellope von Schweetz.jpg
+Difficulty=Hard
+Description=./Modern/Theros_Beyond_Death/LakadMatataaag_-_Naya_Zoo_(Modern,_#949469).dck
+Deck Type=constructed
+
+[Main]
+1 Klothys, God of Destiny
+2 Tarmogoyf
+3 Gallia of the Endless Dance
+3 Ghor-Clan Rampager
+4 Reckless Bushwhacker
+4 Burning-Tree Emissary
+4 Goblin Guide
+4 Wild Nacatl
+4 Hidden Herbalists
+4 Narnam Renegade
+4 Atarka's Command
+4 Lightning Bolt
+1 Sacred Foundry
+1 Temple Garden
+1 Forest
+1 Dryad Arbor
+1 Mountain
+1 Stomping Ground
+2 Arid Mesa
+3 Verdant Catacombs
+4 Wooded Foothills
+4 Windswept Heath
+[Sideboard]
+1 Klothys, God of Destiny
+1 Dismember
+2 Collector Ouphe
+2 Path to Exile
+2 Thalia, Guardian of Thraben
+3 Magus of the Moon
+4 Tormod's Crypt

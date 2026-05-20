@@ -1099,9 +1099,9 @@ ScryfallCode=CMM
 22 r_0_2_dragon_egg_defender_hatches_dragon @Jehan Choo
 23 r_2_1_dwarf_berserker @Olivier Bernard
 24 r_1_1_elemental_haste @Cyril Van Der Haegen
-26 r_3_1_elemental_haste @Victor Adame Minguez
+25 r_3_1_elemental_haste @John Matson
+26 r_3_1_elemental_trample_haste @Victor Adame Minguez
 27 r_1_1_goblin @Karl Kopinski
-28 r_3_1_elemental_trample_haste @Victor Adame Minguez
 28 r_3_3_ogre @Paul Bonner
 29 r_1_1_satyr_noblock @Eric Deschamps
 30 g_2_2_cat @Raoul Vitale

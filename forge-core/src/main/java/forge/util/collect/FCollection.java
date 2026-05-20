@@ -1,5 +1,7 @@
 package forge.util.collect;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.*;
 import java.util.function.Predicate;
@@ -34,12 +36,20 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     /**
      * The {@link Set} representation of this collection.
      */
-    private final Set<T> set = new HashSet<>();
+    private transient Set<T> set = new HashSet<>();
 
     /**
      * The {@link List} representation of this collection.
      */
     private final List<T> list = new ArrayList<>();
+
+    /**
+     * Rebuild the transient set from the list after deserialization.
+     */
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        set = new HashSet<>(list);
+    }
 
     /**
      * Create an empty {@link FCollection}.
@@ -407,6 +417,20 @@ public class FCollection<T> implements List<T>, /*Set<T>,*/ FCollectionView<T>, 
     @Override
     public T set(final int index, final T element) { //assume this isn't called except when changing list order, so don't worry about updating set
         return list.set(index, element);
+    }
+
+    /**
+     * Replace the element at the specified position, updating both the
+     * internal list and set. Unlike {@link #set}, this keeps set membership
+     * in sync with the list.
+     */
+    public T replace(final int index, final T element) {
+        final T old = list.set(index, element);
+        if (old != element) {
+            set.remove(old);
+            set.add(element);
+        }
+        return old;
     }
 
     /**

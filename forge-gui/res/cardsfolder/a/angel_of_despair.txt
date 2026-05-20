@@ -4,5 +4,5 @@ Types:Creature Angel
 PT:5/5
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters, destroy target permanent.
-SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent | TgtPrompt$ Select target permanent.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent
 Oracle:Flying\nWhen Angel of Despair enters, destroy target permanent.

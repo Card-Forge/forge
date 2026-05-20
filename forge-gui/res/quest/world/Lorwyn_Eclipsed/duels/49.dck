@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Severus Snape
+Title=Severus Snape
+Icon=Severus Snape.jpg
+Difficulty=Medium
+Description=./Standard/Lorwyn_Eclipsed/Ben_Whitmer_-_Simic_Rhythm_(Standard,_#2823424).dck
+Deck Type=constructed
+
+[Main]
+4 Badgermole Cub
+4 Gene Pollinator
+4 Llanowar Elves
+4 Quantum Riddler
+4 Spider Manifestation
+2 Keen-Eyed Curator
+2 Mockingbird
+2 Ouroboroid
+2 Wistfulness
+1 Craterhoof Behemoth
+2 Archdruid's Charm
+2 Spider-Sense
+4 Nature's Rhythm
+1 Oko, Lorwyn Liege
+6 Forest
+4 Botanical Sanctum
+4 Breeding Pool
+3 Multiversal Passage
+3 Willowrush Verge
+2 Starting Town
+[Sideboard]
+2 Oko, Lorwyn Liege
+2 Shimmerwilds Growth
+2 Soul-Guide Lantern
+2 Spider-Sense
+2 Unable to Scream
+1 Champion of the Weird
+1 Disdainful Stroke
+1 Enduring Curiosity
+1 Surrak, Elusive Hunter
+1 Ygra, Eater of All

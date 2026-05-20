@@ -11,8 +11,6 @@ import forge.item.PaperCardPredicates;
 import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.collect.ImmutableList;
-
 import forge.StaticData;
 import forge.card.CardRulesPredicates;
 import forge.game.Game;
@@ -104,7 +102,7 @@ public class PlayEffect extends SpellAbilityEffect {
         CardCollectionView showCards = new CardCollection();
 
         if (sa.hasParam("Valid")) {
-            List<ZoneType> zones = sa.hasParam("ValidZone") ? ZoneType.listValueOf(sa.getParam("ValidZone")) : ImmutableList.of(ZoneType.Hand);
+            List<ZoneType> zones = sa.hasParam("ValidZone") ? ZoneType.listValueOf(sa.getParam("ValidZone")) : List.of(ZoneType.Hand);
             tgtCards = new CardCollection(AbilityUtils.filterListByType(game.getCardsIn(zones), sa.getParam("Valid"), sa));
             if (sa.hasParam("ShowCards")) {
                 showCards = AbilityUtils.filterListByType(game.getCardsIn(zones), sa.getParam("ShowCards"), sa);
@@ -247,7 +245,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 game.getAction().revealTo(tgtCard, controller);
             }
             String prompt = sa.hasParam("CastTransformed") ? "lblDoYouWantPlayCardTransformed" : "lblDoYouWantPlayCard";
-            if (singleOption && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage(prompt, CardTranslation.getTranslatedName(tgtCard.getName())), tgtCard, null)) {
+            if (singleOption && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage(prompt, tgtCard.getTranslatedName()), tgtCard, null)) {
                 if (wasFaceDown) {
                     tgtCard.turnFaceDownNoUpdate();
                     tgtCard.updateStateForView();
@@ -428,6 +426,10 @@ public class PlayEffect extends SpellAbilityEffect {
                 tgtSA.getTargetRestrictions().setMandatory(true);
             }
 
+            if (sa.hasParam("Named")) {
+                tgtSA.setName(sa.getName());
+            }
+
             // can't be done later
             if (sa.hasParam("ReplaceGraveyard")) {
                 if (!sa.hasParam("ReplaceGraveyardValid")
@@ -486,7 +488,7 @@ public class PlayEffect extends SpellAbilityEffect {
     public static void addReplaceGraveyardEffect(Card c, Card hostCard, SpellAbility sa, SpellAbility tgtSA, String zone) {
         final Game game = hostCard.getGame();
         final Player controller = sa.getActivatingPlayer();
-        final String name = hostCard.getName() + "'s Effect";
+        final String name = hostCard.getDisplayName() + "'s Effect";
         final String image = hostCard.getImageKey();
         final Card eff = createEffect(sa, controller, name, image);
 
@@ -510,7 +512,7 @@ public class PlayEffect extends SpellAbilityEffect {
             eff.copyChangedTextFrom(hostCard);
         }
 
-        game.getEndOfTurn().addUntil(exileEffectCommand(game, eff));
+        game.getEndOfTurn().addUntil(() -> game.getAction().exileEffect(eff));
 
         tgtSA.addRollbackEffect(eff);
 

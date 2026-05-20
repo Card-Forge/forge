@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Magneto
+Title=Magneto
+Icon=Magneto.jpg
+Difficulty=Easy
+Description=Gatecrash/SCG_Invitational_Qualifier_-_Littleton,_Colorado/Kyle_Creager_-_Red_Deck_Wins_(Standard,_#50112).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Ash Zealot
+4 Boros Reckoner
+4 Gore-House Chainwalker
+4 Hellrider
+4 Rakdos Cackler
+2 Stonewright
+4 Stromkirk Noble
+2 Thundermaw Hellkite
+4 Brimstone Volley
+4 Searing Spear
+4 Pillar of Flame
+1 Hellion Crucible
+19 Mountain
+[Sideboard]
+3 Flames of the Firebrand
+2 Mizzium Mortars
+4 Skullcrack
+3 Tormod's Crypt
+3 Volcanic Strength

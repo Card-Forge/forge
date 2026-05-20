@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Doctor John Zoidberg
+Title=Doctor John Zoidberg
+Icon=Doctor John Zoidberg.jpg
+Difficulty=Medium
+Description=Shadows_over_Innistrad/Grand_Prix_Pittsburgh_2016_-_Last_Chance_Trial/BRIAN_LYNN_-_GW_Aggro_(Standard,_#628899).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Archangel Avacyn
+2 Den Protector
+4 Hangarback Walker
+4 Sylvan Advocate
+4 Dromoka's Command
+3 Declaration in Stone
+4 Oath of Nissa
+2 Chandra, Flamecaller
+4 Gideon, Ally of Zendikar
+4 Nissa, Voice of Zendikar
+4 Canopy Vista
+15 Forest
+4 Fortified Village
+2 Westvale Abbey
+[Sideboard]
+1 Dragonlord Dromoka
+1 Evolutionary Leap
+1 Hallowed Moonlight
+4 Lambholt Pacifist
+2 Planar Outburst
+2 Secure the Wastes
+1 Tragic Arrogance

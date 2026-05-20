@@ -4,7 +4,7 @@ Date=2014-07-17
 Name=Magic 2015 Promos
 Type=Promo
 ScryfallCode=PM15
-TokensCode=TM15
+TokenFallbackCode=M15
 
 [cards]
 28 R Resolute Archangel @Winona Nelson
@@ -21,7 +21,3 @@ TokensCode=TM15
 191 R Phytotitan @Marco Nelor
 194 U Reclamation Sage @Clint Cearley
 231p M Soul of New Phyrexia @Daarken
-
-[tokens]
-4 u_1_1_squid_islandwalk @Jack Wang
-8 r_1_1_goblin_haste @Karl Kopinski

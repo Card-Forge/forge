@@ -2,7 +2,7 @@ Name:Shabraz, the Skyshark
 ManaCost:3 W U
 Types:Legendary Creature Shark Bird
 PT:3/3
-K:Partner:Brallin, Skyshark Rider:Brallin
+K:Partner with:Brallin, Skyshark Rider:Brallin
 K:Flying
 T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you draw a card, put a +1/+1 counter on CARDNAME and you gain 1 life.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBGainLife

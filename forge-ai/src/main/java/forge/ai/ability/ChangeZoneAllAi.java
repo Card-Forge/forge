@@ -1,7 +1,5 @@
 package forge.ai.ability;
 
-import forge.ai.AiAbilityDecision;
-import forge.ai.AiPlayDecision;
 import forge.ai.*;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -140,17 +138,15 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                 }
                 computerType = new CardCollection();
             }
-            int creatureEvalThreshold = 200; // value difference (in evaluateCreatureList units)
-            int nonCreatureEvalThreshold = 3; // CMC difference
-            if (ai.getController().isAI()) {
-                AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-                if (destination == ZoneType.Hand) {
-                    creatureEvalThreshold = aic.getIntProperty(AiProps.BOUNCE_ALL_TO_HAND_CREAT_EVAL_DIFF);
-                    nonCreatureEvalThreshold = aic.getIntProperty(AiProps.BOUNCE_ALL_TO_HAND_NONCREAT_EVAL_DIFF);
-                } else {
-                    creatureEvalThreshold = aic.getIntProperty(AiProps.BOUNCE_ALL_ELSEWHERE_CREAT_EVAL_DIFF);
-                    nonCreatureEvalThreshold = aic.getIntProperty(AiProps.BOUNCE_ALL_ELSEWHERE_NONCREAT_EVAL_DIFF);
-                }
+
+            int creatureEvalThreshold; // value difference (in evaluateCreatureList units)
+            int nonCreatureEvalThreshold; // CMC difference
+            if (destination == ZoneType.Hand) {
+                creatureEvalThreshold = AiProfileUtil.getIntProperty(ai, AiProps.BOUNCE_ALL_TO_HAND_CREAT_EVAL_DIFF);
+                nonCreatureEvalThreshold = AiProfileUtil.getIntProperty(ai, AiProps.BOUNCE_ALL_TO_HAND_NONCREAT_EVAL_DIFF);
+            } else {
+                creatureEvalThreshold = AiProfileUtil.getIntProperty(ai, AiProps.BOUNCE_ALL_ELSEWHERE_CREAT_EVAL_DIFF);
+                nonCreatureEvalThreshold = AiProfileUtil.getIntProperty(ai, AiProps.BOUNCE_ALL_ELSEWHERE_NONCREAT_EVAL_DIFF);
             }
 
             // mass zone change for creatures: if in dire danger, do it; otherwise, only do it if the opponent's
@@ -181,8 +177,11 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
                 if (oppList.isEmpty()) {
                     return new AiAbilityDecision(0, AiPlayDecision.CantPlaySa);
                 }
-                Player oppTarget = Collections.max(oppList, AiPlayerPredicates.compareByZoneValue(sa.getParam("ChangeType"), origin, sa));
-                if (!oppTarget.getCardsIn(ZoneType.Graveyard).isEmpty()) {
+                String changeType = sa.getParam("ChangeType");
+                Player oppTarget = Collections.max(oppList, AiPlayerPredicates.compareByZoneValue(changeType, origin, sa));
+                int countChangeType = AbilityUtils.filterListByType(oppTarget.getCardsIn(ZoneType.Graveyard), changeType, sa).size();
+                // Assumes the SpellAbility is only useful when 1 or more ChangeType will change zones
+                if (countChangeType > 0) {
                     sa.resetTargets();
                     sa.getTargets().add(oppTarget);
                 } else {
@@ -241,15 +240,13 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
      * <p>
      * changeZoneAllPlayDrawbackAI.
      * </p>
-     * @param sa
-     *            a {@link forge.game.spellability.SpellAbility} object.
-     * @param aiPlayer
-     *            a {@link forge.game.player.Player} object.
-     * 
+     *
+     * @param aiPlayer a {@link Player} object.
+     * @param sa       a {@link SpellAbility} object.
      * @return a boolean.
      */
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(Player aiPlayer, SpellAbility sa) {
         // if putting cards from hand to library and parent is drawing cards
         // make sure this will actually do something:
 

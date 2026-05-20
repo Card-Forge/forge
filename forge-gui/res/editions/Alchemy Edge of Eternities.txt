@@ -8,7 +8,7 @@ ScryfallCode=YEOE
 [cards]
 1 R Candela, Aegis of Adagia @Sergey Glushakov
 2 U Squadron Carrier @Sergey Glushakov
-3 M Stoic Star-Captain @Eelis Kyttanen
+3 R Stoic Star-Captain @Eelis Kyttanen
 4 U Thought Partition @Michele Giorgi
 5 R Cloudsculpt Armorer @Michele Giorgi
 6 U Hydroponics Architect @Joshua Cairos
@@ -36,3 +36,13 @@ ScryfallCode=YEOE
 28 M Vv'viza, Orbital Overseer @Cristi Balanescu
 29 R Drix Interlacer @Volkan Baǵa
 30 R Spirited Simulacrum @Michal Ivan
+31 R Clifftop Retreat @Christine Choi
+32 R Dragonskull Summit @Alayna Danner
+33 R Drowned Catacomb @Jung Park
+34 R Glacial Fortress @James Paick
+35 R Hinterland Harbor @Daniel Ljunggren
+36 R Isolated Chapel @Richard Wright
+37 R Rootbound Crag @Grzegorz Rutkowski
+38 R Sulfur Falls @Cliff Childs
+39 R Sunpetal Grove @Dimitar Marinski
+40 R Woodland Cemetery @Christine Choi

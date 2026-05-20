@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Nekusar the Mindrazer
+Title=Nekusar the Mindrazer
+Icon=Nekusar the Mindrazer.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Midnight_Hunt/Andrea_Beatrice_-_Mono-White_Aggro_❄️_(Standard,_#1218503).dck
+Deck Type=constructed
+
+[Main]
+1 Adeline, Resplendent Cathar
+3 Reidane, God of the Worthy
+3 Brutal Cathar
+4 Intrepid Adversary
+4 Usher of the Fallen
+4 Elite Spellbinder
+4 Stonebinder's Familiar
+4 Sungold Sentinel
+4 Luminarch Aspirant
+1 Maul of the Skyclaves
+3 Portable Hole
+2 Fateful Absence
+1 Cave of the Frost Dragon
+4 Faceless Haven
+18 Snow-Covered Plains
+[Sideboard]
+1 Adeline, Resplendent Cathar
+1 Portable Hole
+1 Cathar Commando
+1 Reidane, God of the Worthy
+1 Sigrid, God-Favored
+1 Brutal Cathar
+2 Fateful Absence
+3 Guardian of Faith
+4 Skyclave Apparition

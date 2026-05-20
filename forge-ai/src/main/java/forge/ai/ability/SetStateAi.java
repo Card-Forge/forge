@@ -33,8 +33,7 @@ public class SetStateAi extends SpellAbilityAi {
         }
 
         if (sa.getSVar("X").equals("Count$xPaid")) {
-            final int xPay = ComputerUtilCost.getMaxXValue(sa, aiPlayer, sa.isTrigger());
-            sa.setXManaCostPaid(xPay);
+            ComputerUtilCost.setMaxXValue(sa, aiPlayer, sa.isTrigger());
         }
 
         if ("Transform".equals(mode) || "Flip".equals(mode)) {
@@ -44,7 +43,7 @@ public class SetStateAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(Player aiPlayer, SpellAbility sa) {
         // Gross generalization, but this always considers alternate states more powerful
         return sa.getHostCard().isInAlternateState() ? new AiAbilityDecision(0, AiPlayDecision.CantPlayAi) : new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }

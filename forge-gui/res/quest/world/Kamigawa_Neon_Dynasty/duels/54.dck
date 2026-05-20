@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Jarad
+Title=Jarad
+Icon=Jarad.jpg
+Difficulty=Very Hard
+Description=./Modern/Kamigawa_Neon_Dynasty/Brinson_Kenton_-_10-Rack_(Modern,_#1429285).dck
+Deck Type=constructed
+
+[Main]
+2 Brazen Borrower
+2 Snapcaster Mage
+3 Fury
+3 Fable of the Mirror-Breaker
+4 Ragavan, Nimble Pilferer
+2 Memory Deluge
+3 Lightning Bolt
+3 Archmage's Charm
+4 Fire // Ice
+4 Counterspell
+3 Expressive Iteration
+3 Blood Moon
+2 Jace, the Mind Sculptor
+1 Polluted Delta
+1 Otawara, Soaring City
+2 Flooded Strand
+2 Hall of Storm Giants
+2 Steam Vents
+4 Scalding Tarn
+4 Spirebluff Canal
+6 Island
+[Sideboard]
+1 Flusterstorm
+1 Test of Talents
+1 Emrakul, the Promised End
+2 Narset, Parter of Veils
+2 Mystical Dispute
+2 Engineered Explosives
+2 Relic of Progenitus
+2 Dress Down
+2 Subtlety

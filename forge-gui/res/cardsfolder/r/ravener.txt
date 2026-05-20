@@ -6,7 +6,7 @@ K:Flash
 K:Ravenous
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTarget | TriggerDescription$ When CARDNAME enters, target creature attacks target opponent this turn if able.
 SVar:TrigTarget:DB$ Pump | ValidTgts$ Creature | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | ValidTgts$ Opponent | RememberObjects$ ParentTarget,Targeted | StaticAbilities$ MustAttack | ExileOnMoved$ Battlefield
+SVar:DBEffect:DB$ Effect | ValidTgts$ Opponent | RememberObjects$ ParentTarget & Targeted | StaticAbilities$ MustAttack | ExileOnMoved$ Battlefield
 SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Creature.IsRemembered | MustAttack$ Player.IsRemembered | Description$ This creature attacks this player this turn if able.
 SVar:X:Count$xPaid
 DeckHas:Ability$Counters

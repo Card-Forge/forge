@@ -1,0 +1,8 @@
+Name:Zhao, Ruthless Admiral
+ManaCost:2 BR BR
+Types:Legendary Creature Human Soldier
+PT:3/4
+K:Firebending:2
+T:Mode$ Sacrificed | ValidCard$ Permanent.Other | Execute$ TrigPumpAll | TriggerZones$ Battlefield | ValidPlayer$ You | TriggerDescription$ Whenever you sacrifice another permanent, creatures you control get +1/+0 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1
+Oracle:Firebending 2 (Whenever this creature attacks, add {R}{R}. This mana lasts until end of combat.)\nWhenever you sacrifice another permanent, creatures you control get +1/+0 until end of turn.

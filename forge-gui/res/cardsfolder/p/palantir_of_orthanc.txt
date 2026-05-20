@@ -10,6 +10,6 @@ SVar:CombustDamage:DB$ Mill | Defined$ You | NumCards$ X | RememberMilled$ True 
 SVar:DamageOpponent:DB$ LoseLife | Defined$ ParentTarget | LifeAmount$ Y | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$CardCounters.INFLUENCE
-SVar:Y:Remembered$SumCMC
+SVar:Y:Remembered$CardManaCost
 DeckHas:Ability$Counters|Mill
 Oracle:At the beginning of your end step, put an influence counter on Palantír of Orthanc and scry 2. Then target opponent may have you draw a card. If that player doesn't, you mill X cards, where X is the number of influence counters on Palantír of Orthanc, and that player loses life equal to the total mana value of those cards.

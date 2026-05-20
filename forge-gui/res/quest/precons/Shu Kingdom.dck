@@ -1,0 +1,29 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Shu Kingdom
+Description=A white deck from Portal Three Kingdoms featuring the noble Liu Bei and his legendary oath-brothers. Horsemanship creatures evade blockers.
+Deck Type=constructed
+Set=PTK
+Image=shu_kingdom.jpg
+[main]
+5 Plains|PTK|1
+5 Plains|PTK|2
+5 Plains|PTK|3
+2 Flanking Troops|PTK
+1 Guan Yu, Sainted Warrior|PTK
+1 Kongming, "Sleeping Dragon"|PTK
+1 Liu Bei, Lord of Shu|PTK
+3 Shu Cavalry|PTK
+2 Shu Farmer|PTK
+3 Shu Foot Soldiers|PTK
+2 Shu General|PTK
+2 Shu Grain Caravan|PTK
+2 Volunteer Militia|PTK
+2 Misfortune's Gain|PTK
+2 Vengeance|PTK
+2 Virtuous Charge|PTK
+[sideboard]

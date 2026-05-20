@@ -49,14 +49,14 @@ public class RollDiceEffect extends SpellAbilityEffect {
             this.naturalValue = naturalValue;
             this.modifiedValue = modifiedValue;
         }
-        // Getters
+
         public int getNaturalValue() {
             return naturalValue;
         }
         public int getModifiedValue() {
             return modifiedValue;
         }
-        // Setters
+
         public void setNaturalValue(int naturalValue) {
             this.naturalValue = naturalValue;
         }
@@ -160,7 +160,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
             int activationsThisTurn = Integer.parseInt(parts[1]);
             SpellAbility modifierSA = c.getFirstSpellAbility();
             Cost cost = new Cost(c.getSVar("RollRerollCost"), false);
-            boolean paid = player.getController().payCostDuringRoll(cost, modifierSA, null);
+            boolean paid = player.getController().payCostDuringRoll(cost, modifierSA);
             if (paid) {
                 for (Integer roll : diceToReroll) {
                     naturalRolls.remove(roll);
@@ -201,7 +201,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
                     SpellAbility modifierSA = c.getFirstSpellAbility();
                     String costString = c.getSVar("RollModifyCost");
                     Cost cost = new Cost(costString, false);
-                    boolean paid = player.getController().payCostDuringRoll(cost, modifierSA,  null);
+                    boolean paid = player.getController().payCostDuringRoll(cost, modifierSA);
                     if (paid) {
                         message = Localizer.getInstance().getMessage("lblChooseRollIncrement", rollToModify);
                         boolean isPositive = player.getController().chooseBinary(sa, message, PlayerController.BinaryChoiceType.IncreaseOrDecrease);
@@ -369,8 +369,8 @@ public class RollDiceEffect extends SpellAbilityEffect {
         List<Card> canIncrementDice = new ArrayList<>();
         for (Card c : xenosquirrels) {
             // Xenosquirrels must have a P1P1 counter on it to remove in order to modify
-            Integer P1P1Counters = c.getCounters().get(CounterType.get(CounterEnumType.P1P1));
-            if (P1P1Counters != null && P1P1Counters > 0 && c.canRemoveCounters(CounterType.get(CounterEnumType.P1P1))) {
+            Integer P1P1Counters = c.getCounters().get(CounterEnumType.P1P1);
+            if (P1P1Counters != null && P1P1Counters > 0 && c.canRemoveCounters(CounterEnumType.P1P1)) {
                 canIncrementDice.add(c);
             }
         }
@@ -399,8 +399,8 @@ public class RollDiceEffect extends SpellAbilityEffect {
      * @param repParams       replacement effect parameters
      * @return list of final roll results after applying ignores and replacements, sorted in ascending order
      */
+    @SuppressWarnings("unchecked")
     private static List<Integer> rollAction(int amount, int sides, int ignore, List<Integer> rollsResult, List<Integer> ignored, Map<Player, Integer> ignoreChosenMap, Set<Card> dicePTExchanges, Player player, Map<AbilityKey, Object> repParams) {
-
         repParams.put(AbilityKey.Sides, sides);
         repParams.put(AbilityKey.Number, amount);
         repParams.put(AbilityKey.Ignore, ignore);
@@ -416,6 +416,8 @@ public class RollDiceEffect extends SpellAbilityEffect {
                 ignoreChosenMap = (Map<Player, Integer>) repParams.get(AbilityKey.IgnoreChosen);
                 break;
             }
+            default:
+                break;
         }
 
         List<Integer> naturalRolls = (rollsResult == null ? new ArrayList<>() : rollsResult);

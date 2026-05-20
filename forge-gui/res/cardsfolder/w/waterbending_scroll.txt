@@ -1,0 +1,6 @@
+Name:Waterbending Scroll
+ManaCost:1 U
+Types:Artifact
+A:AB$ Draw | Cost$ 6 T | ReduceCost$ X | SpellDescription$ Draw a card. This ability costs {1} less to activate for each Island you control.
+SVar:X:Count$Valid Island.YouCtrl
+Oracle:{6}, {T}: Draw a card. This ability costs {1} less to activate for each Island you control.

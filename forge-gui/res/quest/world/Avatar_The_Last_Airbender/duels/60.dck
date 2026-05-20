@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Riptide
+Title=Riptide
+Icon=Riptide.jpg
+Difficulty=Very Hard
+Description=./Modern/Avatar_The_Last_Airbender/DiamondAtog_-_Azorius_Blink_(Modern,_#2794633).dck
+Deck Type=constructed
+
+[Main]
+4 White Orchid Phantom
+4 Witch Enchanter
+4 Starfield Shepherd
+4 Phelia, Exuberant Shepherd
+4 Solitude
+4 Quantum Riddler
+4 Guide of Souls
+4 Ocelot Pride
+3 Wan Shi Tong, Librarian
+4 Ephemerate
+2 March of Otherworldly Light
+1 Orim's Chant
+2 Marsh Flats
+3 Plains
+2 Meticulous Archive
+4 Flooded Strand
+3 Flagstones of Trokair
+1 Floodfarm Verge
+3 Hallowed Fountain
+[Sideboard]
+3 Clarion Conqueror
+4 Consign to Memory
+2 Rest in Peace
+2 Teferi, Time Raveler
+2 Wrath of the Skies
+2 Sanctifier en-Vec

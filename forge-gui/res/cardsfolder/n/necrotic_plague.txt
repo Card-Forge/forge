@@ -10,6 +10,6 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigChoose:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Choose a creature your opponents control | TargetsWithDefinedController$ TriggeredCardOpponent | IsCurse$ True | TargetingPlayer$ TriggeredCardController | SubAbility$ DBChange
 SVar:DBChange:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | AttachedTo$ ParentTarget
 SVar:NeedsToPlayVar:Z GE3
-SVar:Z:Count$Valid Creature.OppCtrl+inZoneBattlefield
+SVar:Z:Count$Valid Creature.OppCtrl
 AI:RemoveDeck:Random
 Oracle:Enchant creature\nEnchanted creature has "At the beginning of your upkeep, sacrifice this creature."\nWhen enchanted creature dies, its controller chooses target creature one of their opponents controls. Return Necrotic Plague from its owner's graveyard to the battlefield attached to that creature.

@@ -1,0 +1,9 @@
+Name:Mistmeadow Council
+ManaCost:4 G
+Types:Creature Kithkin Advisor
+PT:4/3
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | IsPresent$ Kithkin.YouCtrl | Description$ This spell costs {1} less to cast if you control a Kithkin.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this creature enters, draw a card.
+SVar:TrigDraw:DB$ Draw
+DeckHints:Type$Kithkin
+Oracle:This spell costs {1} less to cast if you control a Kithkin.\nWhen this creature enters, draw a card.

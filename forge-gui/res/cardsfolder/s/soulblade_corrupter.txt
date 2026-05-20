@@ -2,7 +2,7 @@ Name:Soulblade Corrupter
 ManaCost:4 B
 Types:Creature Human Warrior
 PT:3/3
-K:Partner:Soulblade Renewer
+K:Partner with:Soulblade Renewer
 K:Deathtouch
 T:Mode$ Attacks | ValidCard$ Creature.counters_GE1_P1P1 | Attacked$ Player.Opponent | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature with a +1/+1 counter on it attacks one of your opponents, that creature gains deathtouch until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | KW$ Deathtouch

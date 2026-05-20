@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Leela
+Title=Leela
+Icon=Leela.jpg
+Difficulty=Easy
+Description=Rise_of_the_Eldrazi/National_Qualifier_2010_-_Tennessee_-_USA/Chi_Hoi_Yim_-_Cruel_Control_(Standard,_#1764).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Gatekeeper of Malakir
+4 Goblin Ruinblaster
+4 Sedraxis Specter
+2 Siege-Gang Commander
+4 Lightning Bolt
+2 Negate
+3 Terminate
+3 Blightning
+2 Cruel Ultimatum
+4 Spreading Seas
+3 Jace, the Mind Sculptor
+1 Liliana Vess
+3 Creeping Tar Pit
+4 Crumbling Necropolis
+3 Dragonskull Summit
+3 Drowned Catacomb
+2 Island
+2 Lavaclaw Reaches
+2 Mountain
+4 Scalding Tarn
+3 Swamp
+[Sideboard]
+2 Consuming Vapors
+3 Duress
+2 Magma Spray
+3 Malakir Bloodwitch
+1 Thought Hemorrhage
+2 Vampire Hexmage

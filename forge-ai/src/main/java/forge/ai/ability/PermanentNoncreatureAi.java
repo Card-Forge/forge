@@ -35,14 +35,14 @@ public class PermanentNoncreatureAi extends PermanentAi {
 
         // Check for valid targets before casting
         if (host.hasSVar("OblivionRing")) {
+            // TODO: only the "may" case wouldn't fail checkETBEffects - replace with NeedsToPlay SVar?
             SpellAbility effectExile = AbilityFactory.getAbility(host.getSVar("TrigExile"), host);
             final ZoneType origin = ZoneType.listValueOf(effectExile.getParamOrDefault("Origin", "Battlefield")).get(0);
             effectExile.setActivatingPlayer(ai);
             CardCollection targets = CardLists.getTargetableCards(game.getCardsIn(origin), effectExile);
-            if (sourceName.equals("Suspension Field") 
+            if (sourceName.equals("Suspension Field")
                     || sourceName.equals("Detention Sphere")) {
                 // existing "exile until leaves" enchantments only target opponent's permanents
-                // TODO: consider replacing the condition with host.hasSVar("OblivionRing")
                 targets = CardLists.filterControlledBy(targets, ai.getOpponents());
             }
             if (targets.isEmpty()) {

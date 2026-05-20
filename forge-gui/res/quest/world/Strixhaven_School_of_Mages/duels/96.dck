@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Zegana
+Title=Zegana
+Icon=Zegana.jpg
+Difficulty=Hard
+Description=./Modern/Strixhaven_School_of_Mages/TSPJendrek_-_Esper_Control_(Modern,_#1150907)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Snapcaster Mage
+1 Spell Snare
+1 Logic Knot
+1 Esper Charm
+1 Drown in the Loch
+2 Force of Negation
+3 Archmage's Charm
+3 Cryptic Command
+3 Kaya's Guile
+3 Mana Leak
+4 Fatal Push
+4 Opt
+2 Jace, the Mind Sculptor
+3 Teferi, Hero of Dominaria
+1 Plains
+1 Swamp
+1 Drowned Catacomb
+1 Hallowed Fountain
+1 River of Tears
+1 Mystic Gate
+1 Sunken Ruins
+2 Glacial Fortress
+2 Castle Vantress
+3 Island
+3 Watery Grave
+4 Flooded Strand
+4 Polluted Delta
+[Sideboard]
+1 Force of Negation
+1 Kaya's Guile
+1 Damnation
+1 Eliminate
+1 Mystical Dispute
+1 Rest in Peace
+1 Vanishing Verse
+2 Aether Gust
+2 Dovin's Veto
+2 Go for the Throat
+2 Vendilion Clique

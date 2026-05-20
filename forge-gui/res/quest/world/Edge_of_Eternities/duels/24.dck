@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling White
+Title=Dungeon Crawling White
+Icon=Dungeon Crawling White.jpg
+Difficulty=Medium
+Description=./Standard/Edge_of_Eternities/Adne_-_Dimir_Midrange_(Standard,_#2579602).dck
+Deck Type=constructed
+
+[Main]
+4 Enduring Curiosity
+4 Floodpits Drowner
+4 Spyglass Siren
+3 Deep-Cavern Bat
+3 Preacher of the Schism
+1 Azure Beastbinder
+1 Cecil, Dark Knight
+1 Elegy Acolyte
+1 Tishana's Tidebinder
+3 Shoot the Sheriff
+2 Phantom Interference
+1 Bitter Triumph
+1 Faebloom Trick
+2 Tragic Trajectory
+1 Nowhere to Run
+3 Kaito, Bane of Nightmares
+4 Gloomlake Verge
+4 Starting Town
+4 Swamp
+4 Watery Grave
+3 Island
+3 Soulstone Sanctuary
+2 Restless Reef
+1 Undercity Sewers
+[Sideboard]
+2 Duress
+2 Ghost Vacuum
+2 Strategic Betrayal
+1 Annul
+1 Disdainful Stroke
+1 Faebloom Trick
+1 Intimidation Tactics
+1 Long Goodbye
+1 Negate
+1 The End
+1 Tishana's Tidebinder
+1 Zero Point Ballad

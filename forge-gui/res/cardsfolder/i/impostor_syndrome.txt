@@ -1,0 +1,6 @@
+Name:Impostor Syndrome
+ManaCost:4 U U
+Types:Enchantment
+T:Mode$ DamageDone | ValidSource$ Creature.!token+YouCtrl | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever a nontoken creature you control deals combat damage to a player, create a token that's a copy of it, except it isn't legendary.
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ TriggeredSourceLKICopy | NonLegendary$ True
+Oracle:Whenever a nontoken creature you control deals combat damage to a player, create a token that's a copy of it, except it isn't legendary.

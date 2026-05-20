@@ -1,0 +1,8 @@
+Name:Warren Torchmaster
+ManaCost:1 R
+Types:Creature Goblin Warrior
+PT:2/2
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigImmediate | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, you may blight 1. When you do, target creature gains haste until end of turn. (To blight 1, put a -1/-1 counter on a creature you control.)
+SVar:TrigImmediate:AB$ ImmediateTrigger | Cost$ Blight<1> | Execute$ TrigPump | TriggerDescription$ When you do, target creature gains haste until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | KW$ Haste
+Oracle:At the beginning of combat on your turn, you may blight 1. When you do, target creature gains haste until end of turn. (To blight 1, put a -1/-1 counter on a creature you control.)

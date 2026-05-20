@@ -141,7 +141,7 @@ public final class CardRulesPredicates {
      * @return the predicate
      */
     public static Predicate<CardRules> hasKeyword(final String keyword) {
-        return card -> IterableUtil.any(card.getAllFaces(), cf -> cf != null && card.hasStartOfKeyword(keyword, cf));
+        return card -> IterableUtil.any(card.getAllFaces(), cf -> card.hasStartOfKeyword(keyword, cf));
     }
 
     /**
@@ -187,6 +187,38 @@ public final class CardRulesPredicates {
      */
     public static Predicate<CardRules> superType(final CardType.Supertype type) {
         return card -> card.getType().hasSupertype(type);
+    }
+
+    /**
+     * @return a Predicate that matches cards that are of the split type.
+     */
+    public static Predicate<CardRules> isSplitType(final CardSplitType type) {
+        return card -> card.getSplitType().equals(type);
+    }
+
+    /**
+     * @return a Predicate that matches cards that are vanilla.
+     */
+    public static Predicate<CardRules> isVanilla() {
+        return card -> {
+            if (!(card.getType().isCreature() || card.getType().isLand()) ||
+                card.getSplitType() != CardSplitType.None ||
+                card.hasFunctionalVariants()) {
+                return false;
+            }
+
+            ICardFace mainPart = card.getMainPart();
+
+            boolean hasAny =
+                mainPart.getKeywords().iterator().hasNext() ||
+                mainPart.getAbilities().iterator().hasNext() ||
+                mainPart.getStaticAbilities().iterator().hasNext() ||
+                mainPart.getTriggers().iterator().hasNext() ||
+                (mainPart.getDraftActions() != null && mainPart.getDraftActions().iterator().hasNext()) ||
+                mainPart.getReplacements().iterator().hasNext();
+
+            return !hasAny;
+        };
     }
 
     /**
@@ -293,12 +325,19 @@ public final class CardRulesPredicates {
                 return false;
             }
             if (face.hasFunctionalVariants()) {
+                //Couple quirks here - an ICardFace doesn't have a specific variant, so they all need to be checked.
+                //This means text matching the rules of one variant will match prints with any variant. In the case of
+                //flavor names though, we exclude their oracle modified text from matching, so that searching a flavor
+                //name will return only the card matching that name.
+                //TODO: Fix all that someday by doing rules searches by the PaperCard rather than the CardRules.
                 for (Map.Entry<String, ? extends ICardFace> v : face.getFunctionalVariants().entrySet()) {
-                    //Not a very pretty implementation, but an ICardFace doesn't have a specific variant, so they all need to be checked.
-                    String origOracle = v.getValue().getOracleText();
+                    ICardFace vFace = v.getValue();
+                    if(vFace.getFlavorName() != null)
+                        continue;
+                    String origOracle = vFace.getOracleText();
                     if(op(origOracle, operand))
                         return true;
-                    String name = v.getValue().getName() + " $" + v.getKey();
+                    String name = vFace.getFlavorName() != null ? vFace.getFlavorName() : vFace.getName() + " $" + v.getKey();
                     if(op(CardTranslation.getTranslatedOracle(name), operand))
                         return true;
                 }
@@ -314,10 +353,11 @@ public final class CardRulesPredicates {
             }
             if (face.hasFunctionalVariants()) {
                 for (Map.Entry<String, ? extends ICardFace> v : face.getFunctionalVariants().entrySet()) {
-                    String origType = v.getValue().getType().toString();
+                    ICardFace vFace = v.getValue();
+                    String origType = vFace.getType().toString();
                     if(op(origType, operand))
                         return true;
-                    String name = v.getValue().getName() + " $" + v.getKey();
+                    String name = vFace.getFlavorName() != null ? vFace.getFlavorName() : vFace.getName() + " $" + v.getKey();
                     if(op(CardTranslation.getTranslatedType(name, origType), operand))
                         return true;
                 }
@@ -331,7 +371,7 @@ public final class CardRulesPredicates {
             switch (this.field) {
             case NAME:
                 for (ICardFace face : card.getAllFaces()) {
-                    if (face != null && checkName(face.getName())) {
+                    if (checkName(face.getName())) {
                         return true;
                     }
                 }

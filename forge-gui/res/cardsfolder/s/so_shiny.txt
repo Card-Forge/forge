@@ -2,7 +2,7 @@ Name:So Shiny
 ManaCost:2 U
 Types:Enchantment Aura
 K:Enchant:Creature
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | IsPresent$ Card.YouCtrl+token | PresentCompare$ GE1 | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters, if you control a token, tap enchanted creature, then scry 2.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | IsPresent$ Card.YouCtrl+token | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters, if you control a token, tap enchanted creature, then scry 2.
 SVar:TrigTap:DB$ Tap | Defined$ Enchanted | SubAbility$ DBScry
 SVar:DBScry:DB$ Scry | ScryNum$ 2
 R:Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Creature.AttachedBy | ValidStepTurnToController$ You | Layer$ CantHappen | Description$ Enchanted creature doesn't untap during its controller's untap step.

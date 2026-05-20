@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Aquaman
+Title=Aquaman
+Icon=Aquaman.jpg
+Difficulty=Medium
+Description=./Standard/Aetherdrift/Jennifer_Wang_-_Gruul_Aggro_(Standard,_#2366527).dck
+Deck Type=constructed
+
+[Main]
+4 Emberheart Challenger
+1 Hazoret, Godseeker
+4 Heartfire Hero
+4 Manifold Mouse
+4 Pawpatch Recruit
+4 Questing Druid
+1 Screaming Nemesis
+4 Burst Lightning
+2 Defend the Rider
+4 Monstrous Rage
+2 Torch the Tower
+1 Obliterating Bolt
+2 Innkeeper's Talent
+4 Copperline Gorge
+4 Karplusan Forest
+6 Mountain
+2 Rockface Village
+3 Soulstone Sanctuary
+4 Thornspire Verge
+[Sideboard]
+1 Ghost Vacuum
+2 Lithomantic Barrage
+1 Obliterating Bolt
+1 Obstinate Baloth
+2 Pawpatch Formation
+1 Pyroclasm
+3 Screaming Nemesis
+2 Sentinel of the Nameless City
+2 Torch the Tower

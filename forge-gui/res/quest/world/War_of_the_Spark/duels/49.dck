@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Bela Lugosi
+Title=Bela Lugosi
+Icon=Bela Lugosi.jpg
+Difficulty=Medium
+Description=./Standard/War_of_the_Spark/Adrian_Barnello_-_Gruul_(Standard,_#795855).dck
+Deck Type=constructed
+
+[Main]
+4 Rekindling Phoenix
+4 Gruul Spellbreaker
+4 Goblin Chainwhirler
+3 Zhur-Taa Goblin
+4 Growth-Chamber Guardian
+3 Dire Fleet Daredevil
+2 Collision // Colossus
+4 Lightning Strike
+2 Lava Coil
+4 Sarkhan the Masterless
+2 Domri, Anarch of Bolas
+2 Gruul Guildgate
+9 Mountain
+1 Forest
+4 Unclaimed Territory
+4 Rootbound Crag
+4 Stomping Ground
+[Sideboard]
+4 Cindervines
+1 Vivien's Arkbow
+1 Status // Statue
+1 Chandra, Fire Artisan
+2 Tibalt, Rakish Instigator
+1 Domri, Chaos Bringer
+2 Fiery Cannonade
+1 Banefire
+2 Lava Coil

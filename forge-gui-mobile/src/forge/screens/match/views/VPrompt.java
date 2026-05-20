@@ -40,10 +40,10 @@ public class VPrompt extends FContainer {
     private final FButton btnOk, btnCancel;
     private final MessageLabel lblMessage;
     private String message;
-    private CardView card = null ; 
+    private CardView card = null;
 
     public void setCardView(final CardView card) {
-        this.card = card ;
+        this.card = card;
     }
 
     public VPrompt(String okText, String cancelText, FEventHandler okCommand, FEventHandler cancelCommand) {
@@ -121,7 +121,7 @@ public class VPrompt extends FContainer {
 
         @Override
         public boolean fling(float x, float y) {
-            if ( card != null ) { 
+            if (card != null) {
                 CardZoom.show(card);
             }
             return true;
@@ -129,7 +129,7 @@ public class VPrompt extends FContainer {
 
         @Override
         public boolean longPress(float x, float y) {
-            if ( card != null ) { 
+            if (card != null) {
                 CardZoom.show(card);
             }
             return true;

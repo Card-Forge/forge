@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Deadpool
+Title=Deadpool
+Icon=Deadpool.jpg
+Difficulty=Hard
+Description=../Modern/Innistrad/Lecco_-_Win_Your_Own_Collection/Luigi_Bonacina_-_Red_Deck_Wins_(Modern,_#24900).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Dark Confidant
+4 Goblin Guide
+3 Grim Lavamancer
+3 Flames of the Blood Hand
+4 Incinerate
+4 Lightning Bolt
+2 Searing Blaze
+4 Shard Volley
+4 Bump in the Night
+1 Lava Spike
+4 Rift Bolt
+3 Volcanic Hammer
+3 Arid Mesa
+2 Blood Crypt
+2 Lavaclaw Reaches
+9 Mountain
+4 Scalding Tarn
+[Sideboard]
+3 Rain of Gore
+3 Smash to Smithereens
+3 Torpor Orb
+3 Volcanic Fallout

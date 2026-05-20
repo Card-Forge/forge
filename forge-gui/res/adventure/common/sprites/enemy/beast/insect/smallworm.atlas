@@ -1,0 +1,68 @@
+smallworm.png
+size: 648,16
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar
+  xy: 632, 0
+  size: 16, 16      
+Idle 
+  xy: 0, 0
+  size: 24, 16      
+Idle 
+  xy: 24, 0
+  size: 24, 16      
+Idle 
+  xy: 48, 0
+  size: 24, 16      
+Idle 
+  xy: 72, 0
+  size: 24, 16      
+Walk
+  xy: 96, 0 
+  size: 24, 16      
+Walk 
+  xy: 120, 0 
+  size: 24, 16      
+Walk 
+  xy: 144, 0 
+  size: 24, 16      
+Walk 
+  xy: 168, 0 
+  size: 24, 16      
+Attack 
+  xy: 336, 0 
+  size: 24, 16      
+Attack 
+  xy: 360, 0 
+  size: 24, 16      
+Attack 
+  xy: 384, 0 
+  size: 24, 16      
+Attack 
+  xy: 408, 0 
+  size: 24, 16      
+Hit 
+  xy: 432, 0 
+  size: 24, 16      
+Hit 
+  xy: 456, 0 
+  size: 24, 16      
+Hit 
+  xy: 480, 0 
+  size: 24, 16      
+Hit 
+  xy: 504, 0 
+  size: 24, 16      
+Death 
+  xy: 528, 0 
+  size: 24, 16      
+Death 
+  xy: 552, 0 
+  size: 24, 16      
+Death 
+  xy: 576, 0 
+  size: 24, 16      
+Death 
+  xy: 600, 0 
+  size: 24, 16      

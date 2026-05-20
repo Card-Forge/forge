@@ -13,15 +13,25 @@ import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
+import forge.util.ItemPool;
 import forge.util.Localizer;
+import forge.util.StreamUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.text.DateFormatSymbols;
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class DeckImportController {
-    private boolean createNewDeck;
+    public enum ImportBehavior {
+        MERGE,
+        CREATE_NEW,
+        REPLACE_CURRENT
+    }
+
+    private ImportBehavior importBehavior;
     // Date filter
     private final ICheckBox dateTimeCheck;
     private final IComboBox<String> monthDropdown;
@@ -30,7 +40,7 @@ public class DeckImportController {
     private CardDb.CardArtPreference artPreference;
     private boolean smartCardArt;
     // Block Preference Filter
-    private boolean inlcludeBnRInDeck = false;
+    private boolean includeBnRInDeck = false;
 
     private final List<Token> tokens = new ArrayList<>();
     private final Map<PaperCard, Token> cardsInTokens = new HashMap<>();
@@ -38,7 +48,14 @@ public class DeckImportController {
     private Deck currentDeckInEditor = null;
     private DeckFormat currentDeckFormat;
     private GameFormat currentGameFormat;
+    private GameType currentGameType;
     private final List<DeckSection> allowedSections = new ArrayList<>();
+    private ItemPool<PaperCard> playerInventory;
+    /**
+     * If a free card is missing from a player's inventory (e.g. a basic land), it gets run through this function, which
+     * can handle creation of a usable print.
+     */
+    private Function<PaperCard, PaperCard> freePrintSupplier;
 
     public DeckImportController(ICheckBox dateTimeCheck0,
                                 IComboBox<String> monthDropdown0, IComboBox<Integer> yearDropdown0,
@@ -54,13 +71,14 @@ public class DeckImportController {
          */
         this.currentDeckNotEmpty = currentDeckNotEmpty;
         // this option will control the "new deck" action controlled by UI widget
-        createNewDeck = false;
+        this.importBehavior = ImportBehavior.MERGE;
 
         // Init default parameters
         this.artPreference = StaticData.instance().getCardArtPreference();  // default
         this.smartCardArt = StaticData.instance().isEnabledCardArtSmartSelection();
         this.currentDeckFormat = null;
         this.currentGameFormat = null;
+        this.currentGameType = null;
         fillDateDropdowns();
     }
 
@@ -68,11 +86,21 @@ public class DeckImportController {
         if (gameType == null){
             this.currentGameFormat = null;
             this.currentDeckFormat = null;
+            this.currentGameType = null;
         } else {
             // get the game format with the same name of current game type (if any)
             this.currentDeckFormat = gameType.getDeckFormat();
             this.currentGameFormat = FModel.getFormats().get(gameType.name());
+            this.currentGameType = gameType;
         }
+    }
+
+    public void setPlayerInventory(ItemPool<PaperCard> inventory) {
+        this.playerInventory = inventory;
+    }
+
+    public void setFreePrintConverter(Function<PaperCard, PaperCard> freePrintSupplier) {
+        this.freePrintSupplier = freePrintSupplier;
     }
 
     public void setCurrentDeckInEditor(Deck deckInEditor){
@@ -105,11 +133,13 @@ public class DeckImportController {
         return this.smartCardArt;
     }
 
-    public void setCreateNewDeck(boolean createNewDeck){
-        this.createNewDeck = createNewDeck;
+    public void setImportBehavior(ImportBehavior importBehavior) {
+        this.importBehavior = importBehavior;
     }
 
-    public boolean getCreateNewDeck() { return this.createNewDeck; }
+    public ImportBehavior getImportBehavior() {
+        return importBehavior;
+    }
 
     private void fillDateDropdowns() {
         DateFormatSymbols dfs = new DateFormatSymbols();
@@ -159,10 +189,10 @@ public class DeckImportController {
     }
 
     public void importBannedAndRestrictedCards(boolean includeBannedAndRestricted){
-        this.inlcludeBnRInDeck = includeBannedAndRestricted;
+        this.includeBnRInDeck = includeBannedAndRestricted;
     }
 
-    public boolean importBannedAndRestrictedCards(){ return this.inlcludeBnRInDeck; }
+    public boolean importBannedAndRestrictedCards(){ return this.includeBnRInDeck; }
 
     public List<Token> parseInput(String input) {
         tokens.clear();
@@ -186,7 +216,7 @@ public class DeckImportController {
         if (!this.allowedSections.isEmpty())
             recognizer.setAllowedDeckSections(this.allowedSections);
         // Banned and Restricted Card Policy
-        if (this.inlcludeBnRInDeck)
+        if (this.includeBnRInDeck)
             recognizer.forceImportBannedAndRestrictedCards();
 
         String[] lines = input.split("\n");
@@ -196,8 +226,13 @@ public class DeckImportController {
 
         if (this.currentGameFormatAllowsCommander()) {
             List<Pair<Integer, Token>> commanderTokens = getTokensInSection(DeckSection.Commander);
-            if (commanderTokens.isEmpty())  // Check commanders in Sideboard only if the commander section is empty
-                checkAndFixCommanderIn(DeckSection.Sideboard);
+            if (commanderTokens.isEmpty()) {
+                // Check commanders in Sideboard only if the commander section is empty
+                if(!getTokensInSection(DeckSection.Sideboard).isEmpty())
+                    checkAndFixCommanderIn(DeckSection.Sideboard);
+                else
+                    checkAndFixCommanderIn(DeckSection.Main);
+            }
             checkAndFixCommanderIn(DeckSection.Commander);
         }
 
@@ -309,7 +344,7 @@ public class DeckImportController {
     }
 
     public boolean currentGameFormatAllowsCommander(){
-        return this.allowedSections.contains(DeckSection.Commander);
+        return this.allowedSections.contains(DeckSection.Commander) || this.currentGameType == GameType.PlanarConquest;
     }
 
     public List<Token> optimiseCardArtInTokens(){
@@ -332,13 +367,8 @@ public class DeckImportController {
             else
                 refTokenMap = tokensPerSectionWithSet;
 
-            List<Token> tokensInSection = refTokenMap.getOrDefault(tokenSection, null);
-            if (tokensInSection == null) {
-                tokensInSection = new ArrayList<>();
-                tokensInSection.add(token);
-                refTokenMap.put(tokenSection, tokensInSection);
-            } else
-                tokensInSection.add(token);
+            List<Token> tokensInSection = refTokenMap.computeIfAbsent(tokenSection, e -> new ArrayList<>());
+            tokensInSection.add(token);
         }
 
         if (tokensPerSectionWithNoSet.isEmpty())
@@ -356,7 +386,7 @@ public class DeckImportController {
 
         Map<DeckSection, CardPool> referencePoolPerSection = new HashMap<>();
 
-        if (this.currentDeckNotEmpty && !this.createNewDeck && this.currentDeckInEditor != null){
+        if (this.currentDeckNotEmpty && this.importBehavior == ImportBehavior.MERGE && this.currentDeckInEditor != null){
             // We will always consider ONLY sections for cards needing art optimisation
             for (DeckSection section : tokensPerSectionWithNoSet.keySet()){
                 CardPool cardsInDeck = this.currentDeckInEditor.get(section);
@@ -436,6 +466,102 @@ public class DeckImportController {
         return tokens;
     }
 
+    public List<Token> constrainTokensToInventory() {
+        if(this.playerInventory == null)
+            return tokens;
+        CardPool availableInventory = new CardPool(this.playerInventory);
+        //Map of tokens to the things we're gonna replace them with.
+        Map<Token, List<Token>> tokenReplacers = new LinkedHashMap<>();
+        //If we're adding to our existing deck, ensure we aren't counting the cards already in it.
+        if(this.importBehavior == ImportBehavior.MERGE && this.currentDeckInEditor != null)
+            availableInventory.removeAll(this.currentDeckInEditor.getAllCardsInASinglePool(true, true));
+        if(this.currentGameType == GameType.PlanarConquest && currentDeckInEditor != null)
+            availableInventory.removeAllFlat(this.currentDeckInEditor.getCommanders());
+        //Step 1: For each token, if it's asking for more copies of a print than we can supply, split the difference out
+        //into a token that's indifferent to the edition. Reduce available inventory accordingly.
+        for (Token token : this.tokens) {
+            if (!token.isCardToken())
+                continue;
+            PaperCard card = token.getCard();
+            int requestedAmount = token.getQuantity();
+            if (card == null)
+                continue;
+            if (token.cardRequestHasNoCode()) {
+                List<Token> list = new ArrayList<>();
+                tokenReplacers.put(token, list);
+                continue;
+            }
+            int available = availableInventory.count(card);
+            if (available <= 0) {
+                List<Token> list = new ArrayList<>();
+                tokenReplacers.put(token, list);
+                continue;
+            }
+            int numTaken = Math.min(requestedAmount, available);
+            availableInventory.remove(card, numTaken);
+            if (available >= requestedAmount)
+                continue;
+
+            List<Token> list = new ArrayList<>();
+            list.add(Token.LegalCard(card, numTaken, token.getTokenSection(), true));
+            tokenReplacers.put(token, list);
+        }
+        if(tokenReplacers.isEmpty())
+            return tokens; //We have every card that was requested.
+        //Step 2: Try to find alternative prints for the ones that do not request an edition.
+        int capacity = tokens.size();
+        for(Map.Entry<Token, List<Token>> tokenReplacer : tokenReplacers.entrySet()) {
+            Token token = tokenReplacer.getKey();
+            DeckSection tokenSection = token.getTokenSection();
+            List<Token> replacementList = tokenReplacer.getValue();
+            PaperCard card = token.getCard();
+            String cardName = card.getName();
+            CardPool substitutes = availableInventory.getFilteredPool(c -> c.getName().equals(cardName));
+            // stream().toList() causes crash on Android 8-13, use Collectors.toList()
+            // ref: https://developer.android.com/reference/java/util/stream/Stream#toList()
+            List<Map.Entry<PaperCard, Integer>> sortedSubstitutes = StreamUtil.stream(substitutes).sorted(Comparator.comparingInt(Map.Entry::getValue)).collect(Collectors.toList());
+            int neededQuantity = token.getQuantity();
+            for(Token found : replacementList) {
+                //If there's an item in the replacement list already it means we've already found some of the needed copies.
+                neededQuantity -= found.getQuantity();
+            }
+            for(int i = 0; i < sortedSubstitutes.size() && neededQuantity > 0; i++) {
+                Map.Entry<PaperCard, Integer> item = sortedSubstitutes.get(i);
+                PaperCard replacement = item.getKey();
+                int toMove = Math.min(neededQuantity, item.getValue());
+                replacementList.add(Token.LegalCard(replacement, toMove, tokenSection, true));
+                availableInventory.remove(replacement, toMove);
+                neededQuantity -= toMove;
+                capacity++;
+            }
+            if(neededQuantity > 0) {
+                PaperCard freePrint = getInfiniteSupplyPrinting(card);
+                if(freePrint != null)
+                    replacementList.add(Token.NotInInventoryFree(freePrint, neededQuantity, tokenSection));
+                else
+                    replacementList.add(Token.NotInInventory(card, neededQuantity, tokenSection));
+                capacity++;
+            }
+        }
+        //Step 3: Apply the replacement list.
+        List<Token> newList = new ArrayList<>(capacity);
+        for(Token t : this.tokens) {
+            if(tokenReplacers.containsKey(t))
+                newList.addAll(tokenReplacers.get(t));
+            else
+                newList.add(t);
+        }
+        this.tokens.clear();
+        this.tokens.addAll(newList);
+        return tokens;
+    }
+
+    private PaperCard getInfiniteSupplyPrinting(PaperCard card) {
+        if(this.freePrintSupplier == null)
+            return null;
+        return freePrintSupplier.apply(card);
+    }
+
     private int countTokens(List<Token> tokensInSection){
         if (tokensInSection == null || tokensInSection.isEmpty())
             return 0;
@@ -487,27 +613,31 @@ public class DeckImportController {
         if (tokens.isEmpty()) { return null; }
 
         String deckName = "";
-        if (currentDeckName != null && currentDeckName.trim().length() > 0)
+        if (currentDeckName != null && !currentDeckName.trim().isEmpty())
             deckName = String.format("\"%s\"", currentDeckName.trim());
 
         String tokenDeckName = getTokenDeckNameIfAny();
-        if (tokenDeckName.length() > 0)
+        if (!tokenDeckName.isEmpty())
             tokenDeckName = String.format("\"%s\"", tokenDeckName);
 
-        if (createNewDeck){
-            String extraWarning = currentDeckNotEmpty ? localizer.getMessage("lblNewDeckWarning", deckName) : "";
-            final String warning = localizer.getMessage("lblConfirmCreateNewDeck", tokenDeckName, extraWarning);
-            if (!SOptionPane.showConfirmDialog(warning, localizer.getMessage("lblNewDeckDialogTitle"),
-                    localizer.getMessage("lblYes"), localizer.getMessage("lblNo"))) {
-                return null;
+        if(this.currentDeckNotEmpty) {
+            final String warning;
+            final String title;
+            if (this.importBehavior == ImportBehavior.CREATE_NEW) {
+                String extraWarning = localizer.getMessage("lblNewDeckWarning", deckName);
+                warning = localizer.getMessage("lblConfirmCreateNewDeck", tokenDeckName, extraWarning);
+                title = localizer.getMessage("lblNewDeckDialogTitle");
+            } else if (this.importBehavior == ImportBehavior.MERGE){
+                String extraWarning = (!tokenDeckName.isEmpty() && !tokenDeckName.equals(deckName)) ?
+                        localizer.getMessage("lblCardImportWarning", deckName, tokenDeckName) : "";
+                warning = localizer.getMessage("lblConfirmCardImport", deckName, extraWarning);
+                title = localizer.getMessage("lblImportCardsDialogTitle");
             }
-        }
-        else if (this.currentDeckNotEmpty){
-            String extraWarning = (tokenDeckName.length() > 0 && !tokenDeckName.equals(deckName)) ?
-                    localizer.getMessage("lblCardImportWarning", deckName, tokenDeckName) : "";
-            final String warning = localizer.getMessage("lblConfirmCardImport", deckName, extraWarning);
-            if (!SOptionPane.showConfirmDialog(warning,
-                    localizer.getMessage("lblImportCardsDialogTitle"),
+            else {
+                warning = localizer.getMessage("lblConfirmReplaceDeck", deckName);
+                title = localizer.getMessage("lblNewDeckDialogTitle");
+            }
+            if (!SOptionPane.showConfirmDialog(warning, title,
                     localizer.getMessage("lblYes"), localizer.getMessage("lblNo")))
                 return null;
         }
@@ -516,7 +646,7 @@ public class DeckImportController {
             final TokenType type = t.getType();
             // only Deck Name, legal card and limited card tokens will be analysed!
             if (!t.isTokenForDeck() ||
-                    (type == TokenType.LIMITED_CARD && !this.inlcludeBnRInDeck))
+                    (type == TokenType.LIMITED_CARD && !this.includeBnRInDeck))
                 continue;  // SKIP token
 
             if (type == TokenType.DECK_NAME) {
@@ -546,5 +676,67 @@ public class DeckImportController {
             }
         }
         return "";  // no deck name
+    }
+
+    public String getTokenMessage(DeckRecognizer.Token token) {
+        return switch (token.getType()) {
+            case LEGAL_CARD, LIMITED_CARD, CARD_FROM_NOT_ALLOWED_SET, CARD_FROM_INVALID_SET,
+                 CARD_NOT_IN_INVENTORY, FREE_CARD_NOT_IN_INVENTORY ->
+                    String.format("%s x %s %s", token.getQuantity(), token.getText(), getTokenFoilLabel(token));
+            // Card Warning Msgs
+            case UNKNOWN_CARD, UNSUPPORTED_CARD ->
+                    token.getQuantity() > 0 ? String.format("%s x %s", token.getQuantity(), token.getText())
+                            : token.getText();
+            case UNSUPPORTED_DECK_SECTION ->
+                    String.format("%s: %s", Localizer.getInstance().getMessage("lblWarningMsgPrefix"),
+                            Localizer.getInstance()
+                                    .getMessage("lblWarnDeckSectionNotAllowedInEditor", token.getText(),
+                                            this.currentGameType.name()));
+
+            // Special Case of Card moved into another section (e.g. Commander from Sideboard)
+            case WARNING_MESSAGE -> String.format("%s: %s", Localizer.getInstance()
+                    .getMessage("lblWarningMsgPrefix"), token.getText());
+
+            // Placeholders
+            case DECK_SECTION_NAME -> String.format("%s: %s", Localizer.getInstance().getMessage("lblDeckSection"),
+                    token.getText());
+            case CARD_RARITY -> String.format("%s: %s", Localizer.getInstance().getMessage("lblRarity"),
+                    token.getText());
+            case CARD_TYPE, CARD_CMC, MANA_COLOUR, COMMENT, UNKNOWN_TEXT -> token.getText();
+            case DECK_NAME -> String.format("%s: %s", Localizer.getInstance().getMessage("lblDeckName"),
+                    token.getText());
+        };
+    }
+
+    public String getTokenStatusMessage(DeckRecognizer.Token token) {
+        if (token == null)
+            return "";
+
+        final Localizer localizer = Localizer.getInstance();
+        return switch (token.getType()) {
+            case LIMITED_CARD -> String.format("%s: %s", localizer.getMessage("lblWarningMsgPrefix"),
+                    localizer.getMessage("lblWarnLimitedCard",
+                            StringUtils.capitalize(token.getLimitedCardType().name()), getGameFormatLabel()));
+            case CARD_FROM_NOT_ALLOWED_SET ->
+                    localizer.getMessage("lblErrNotAllowedCard", getGameFormatLabel());
+            case CARD_FROM_INVALID_SET -> localizer.getMessage("lblErrCardEditionDate");
+            case UNSUPPORTED_CARD -> localizer.getMessage("lblErrUnsupportedCard", this.currentGameType);
+            case UNKNOWN_CARD -> String.format("%s: %s", localizer.getMessage("lblWarningMsgPrefix"),
+                    localizer.getMessage("lblWarnUnknownCardMsg"));
+            case CARD_NOT_IN_INVENTORY -> localizer.getMessage("lblWarnNotInInventory");
+            default -> "";
+        };
+    }
+
+
+    private String getTokenFoilLabel(DeckRecognizer.Token token) {
+        if (!token.isCardToken())
+            return "";
+        final String foilMarker = "- (Foil)";
+        return token.getCard().isFoil() ? foilMarker : "";
+    }
+
+    private String getGameFormatLabel() {
+        return String.format("\"%s\"", this.getCurrentGameFormatName());
     }
 }

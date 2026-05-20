@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Darth Vader
+Title=Darth Vader
+Icon=Darth Vader.jpg
+Difficulty=Very Hard
+Description=./Modern/Bloomburrow/Philip_S._-_Izzet_Wizards_(Modern,_#2203925).dck
+Deck Type=constructed
+
+[Main]
+3 Tamiyo, Inquisitive Student
+3 Snapcaster Mage
+4 Thundertrap Trainer
+3 Subtlety
+3 Galvanic Discharge
+4 Lightning Bolt
+3 Spell Snare
+4 Counterspell
+4 Flame of Anor
+2 Flare of Denial
+1 Sink into Stupor
+2 Force of Negation
+4 Preordain
+4 Island
+1 Hall of Storm Giants
+1 Mountain
+1 Otawara, Soaring City
+4 Scalding Tarn
+4 Misty Rainforest
+3 Steam Vents
+2 Thundering Falls
+[Sideboard]
+3 Consign to Memory
+2 Stern Scolding
+2 Dispel
+2 Anger of the Gods
+4 Cleansing Wildfire
+2 Surgical Extraction

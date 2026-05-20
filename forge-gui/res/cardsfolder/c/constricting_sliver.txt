@@ -2,8 +2,8 @@ Name:Constricting Sliver
 ManaCost:5 W
 Types:Creature Sliver
 PT:3/3
-S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddTrigger$ ConstrictingTrig | AddSVar$ ConstrictingSliverExile | Description$ Sliver creatures you control have "When this creature enters, you may exile target creature an opponent controls until this creature leaves the battlefield."
-SVar:ConstrictingTrig:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | OptionalDecider$ You | ValidCard$ Card.Self | Execute$ ConstrictingSliverExile | TriggerDescription$ When CARDNAME enters, you may exile target creature an opponent controls until CARDNAME leaves the battlefield.
-SVar:ConstrictingSliverExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | ConditionPresent$ Card.Self | Duration$ UntilHostLeavesPlay
+S:Mode$ Continuous | Affected$ Creature.Sliver+YouCtrl | AddTrigger$ ConstrictingTrig | Description$ Sliver creatures you control have "When this creature enters, you may exile target creature an opponent controls until this creature leaves the battlefield."
+SVar:ConstrictingTrig:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | OptionalDecider$ You | ValidCard$ Card.Self | Execute$ ConstrictingExile | TriggerDescription$ When CARDNAME enters, you may exile target creature an opponent controls until CARDNAME leaves the battlefield.
+SVar:ConstrictingExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | ConditionPresent$ Card.Self | Duration$ UntilHostLeavesPlay
 SVar:PlayMain1:TRUE
 Oracle:Sliver creatures you control have "When this creature enters, you may exile target creature an opponent controls until this creature leaves the battlefield."

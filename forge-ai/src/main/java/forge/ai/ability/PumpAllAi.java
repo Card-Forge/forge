@@ -131,10 +131,10 @@ public class PumpAllAi extends PumpAiBase {
         boolean result = ai.getCreaturesInPlay().anyMatch(c -> c.isValid(valid, source.getController(), source, sa)
                 && ComputerUtilCard.shouldPumpCard(ai, sa, c, defense, power, keywords));
         return result ? new AiAbilityDecision(100, AiPlayDecision.WillPlay) : new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-    } // pumpAllCanPlayAI()
+    }
 
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) {
+    public AiAbilityDecision chkDrawback(Player aiPlayer, SpellAbility sa) {
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
 

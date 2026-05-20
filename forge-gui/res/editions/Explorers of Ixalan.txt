@@ -2,9 +2,9 @@
 Code=E02
 Date=2017-11-24
 Name=Explorers of Ixalan
-Code2=E02
 Type=Boxed_Set
 ScryfallCode=E02
+TokensCode=E02
 
 [cards]
 1 R Beacon of Immortality @Rob Alexander
@@ -56,4 +56,4 @@ ScryfallCode=E02
 47 U Tainted Field @Don Hazeltine
 
 [tokens]
-g_1_1_saproling
+T1 g_1_1_saproling @Joseph Meehan

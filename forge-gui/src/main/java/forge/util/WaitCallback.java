@@ -2,7 +2,9 @@ package forge.util;
 
 import forge.gui.FThreads;
 
-public abstract class WaitCallback<T> extends Callback<T> implements Runnable {
+import java.util.function.Consumer;
+
+public abstract class WaitCallback<T> implements Consumer<T>, Runnable {
     public class Lock {
     }
 
@@ -11,7 +13,7 @@ public abstract class WaitCallback<T> extends Callback<T> implements Runnable {
     private T result;
 
     @Override
-    public final void run(T result0) {
+    public final void accept(T result0) {
         result = result0;
         synchronized (lock) {
             lock.notify();

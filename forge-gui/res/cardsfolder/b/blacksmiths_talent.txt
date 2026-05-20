@@ -2,7 +2,7 @@ Name:Blacksmith's Talent
 ManaCost:R
 Types:Enchantment Class
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, create a colorless Equipment artifact token named Sword with "Equipped creature gets +1/+1" and equip {2}.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ sword | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenScript$ sword | TokenOwner$ You
 K:Class:2:2 R:AddTrigger$ TriggerCombat
 SVar:TriggerCombat:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, attach target Equipment you control to up to one target creature you control.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Equipment.YouCtrl | TgtPrompt$ Select target equipment you control | SubAbility$ DBAttach

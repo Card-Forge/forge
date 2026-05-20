@@ -3,7 +3,7 @@ ManaCost:3 B
 Types:Creature Zombie Rogue
 PT:4/3
 T:Mode$ ChangesZone | Origin$ Any | CheckSVar$ Morbid | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters, if a creature died this turn, create a 2/2 blue and black Zombie Rogue creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ ub_2_2_zombie_rogue | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenScript$ ub_2_2_zombie_rogue | TokenOwner$ You
 SVar:Morbid:Count$Morbid.1.0
 DeckHas:Ability$Token & Type$Zombie|Rogue & Color$Blue
 K:Plot:2 B

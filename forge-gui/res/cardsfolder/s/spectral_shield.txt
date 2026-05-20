@@ -4,5 +4,5 @@ Types:Enchantment Aura
 K:Enchant:Creature
 SVar:AttachAILogic:Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ 2 | Description$ Enchanted creature gets +0/+2 and can't be the target of spells.
-S:Mode$ CantTarget | ValidCard$ Creature.EnchantedBy | ValidSA$ Spell | Secondary$ True | Description$ Enchanted creature gets +0/+2 and can't be the target of spells.
+S:Mode$ CantTarget | ValidTarget$ Creature.EnchantedBy | ValidSA$ Spell | Secondary$ True | Description$ Enchanted creature gets +0/+2 and can't be the target of spells.
 Oracle:Enchant creature\nEnchanted creature gets +0/+2 and can't be the target of spells.

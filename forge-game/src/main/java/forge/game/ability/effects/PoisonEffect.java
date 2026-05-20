@@ -41,7 +41,7 @@ public class PoisonEffect extends SpellAbilityEffect {
                 p.removePoisonCounters(-amount, sa.getActivatingPlayer());
             }
         }
-        table.replaceCounterEffect(game, sa, true);
+        table.replaceCounterEffect(game, sa);
     }
 
     /* (non-Javadoc)

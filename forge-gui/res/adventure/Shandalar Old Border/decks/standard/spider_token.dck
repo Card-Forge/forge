@@ -1,15 +1,20 @@
 [metadata]
-Name=spider_token
+Name=Giant Spider - GB Spiders
 [Main]
-17 Forest|6ED|1
-2 Island|6ED|1
-4 Canopy Spider|TMP|1
-4 Elvish Farmer|FEM|1
-4 Elvish Pioneer|ONS|1
-4 Emerald Charm|VIS|1
-4 Giant Spider|6ED|1
-4 Llanowar Elves|6ED|1
-4 Natural Selection|2ED|1
-4 Web of Inertia|JUD|1
-4 Wild Might|PCY|1
-4 Yavimaya Coast|APC|1
+4 Llanowar Wastes|APC
+10 Forest|ONS
+10 Swamp|ONS
+4 Hidden Spider|USG
+3 Woolly Spider|ICE
+1 Giant Spider|LEA
+3 Silklash Spider|ONS
+1 Plated Spider|UDS
+4 Giant Growth|ICE
+2 Venom|DRK
+2 Tangle|INV
+2 Dauthi Slayer|TMP
+2 Dauthi Warlord|EXO
+4 Dauthi Horror|TMP
+2 Dauthi Ghoul|TMP
+2 Dauthi Mindripper|TMP
+4 Terror|4ED

@@ -656,7 +656,7 @@ public class FLabel extends SkinnedLabel implements ILocalRepaint, IButton {
 
     protected void resetIcon() {
         // Non-background icon
-        if (img != null && iconScaleAuto  && !iconInBackground) {
+        if (img != null && iconScaleAuto && !iconInBackground) {
             final int h = (int) (getHeight() * iconScaleFactor);
             final int w = (int) (h * iar);
             if (w == 0 || h == 0) { return; }

@@ -270,7 +270,6 @@ ScryfallCode=MM3
 6 b_2_2_zombie @Lucas Graciano
 7 r_4_4_dragon_flying @Vance Kovacs
 8 r_1_1_goblin @Brandon Kitkouski
-9 r_1_1_goblin_haste @Brandon Kitkouski
 9 g_3_3_beast @John Donahue
 10 g_4_4_beast @Steve Prescott
 11 g_3_3_centaur @Slawomir Maniak
@@ -281,8 +280,8 @@ ScryfallCode=MM3
 16 gw_x_x_elemental_total_creatures @Mark Winters
 17 rg_4_4_giant_warrior_haste @Trevor Hairsine
 18 rg_1_1_goblin_warrior @Dave Allsop
-19 rw_1_1_soldier_haste @David Palumbo
-20 c_3_3_a_phyrexian_golem @Volkan Baǵa
+19 rw_1_1_soldier @David Palumbo
+20 c_3_3_a_golem @Volkan Baǵa
 
 [other]
 21 emblem_domri_rade @Tyler Jacobson

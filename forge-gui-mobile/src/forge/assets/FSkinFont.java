@@ -24,6 +24,7 @@ import forge.Forge;
 import forge.gui.FThreads;
 import forge.localinstance.properties.ForgeConstants;
 import forge.util.FileUtil;
+import forge.util.Lang;
 import forge.util.LineReader;
 import forge.util.TextBounds;
 import forge.util.Utils;
@@ -67,7 +68,7 @@ public class FSkinFont {
     //pre-load all supported font sizes
     public static void preloadAll(String language) {
         //todo:really check the language glyph is a lot
-        MAX_FONT_SIZE = (language.equals("zh-CN") || language.equals("ja-JP")) ? MAX_FONT_SIZE_MANY_GLYPHS : MAX_FONT_SIZE_LESS_GLYPHS;
+        MAX_FONT_SIZE = (Lang.initInstance(language).getFontFile() != null) ? MAX_FONT_SIZE_MANY_GLYPHS : MAX_FONT_SIZE_LESS_GLYPHS;
         for (int size = MIN_FONT_SIZE; size <= MAX_FONT_SIZE; size++) {
             _get(size);
         }
@@ -402,7 +403,8 @@ public class FSkinFont {
         } else {
             fontName += fontSize;
         }
-        if (Forge.locale.equals("zh-CN") || Forge.locale.equals("ja-JP") && !Forge.forcedEnglishonCJKMissing) {
+        boolean useCjkFont = Lang.initInstance(Forge.locale).getFontFile() != null;
+        if (useCjkFont && !Forge.forcedEnglishonCJKMissing) {
             fontName += Forge.locale;
         }
         FileHandle fontFile = Gdx.files.absolute(ForgeConstants.FONTS_DIR + fontName + ".fnt");
@@ -427,7 +429,7 @@ public class FSkinFont {
         if (found[0])
             return;
         //not found generate
-        if (Forge.locale.equals("zh-CN") || Forge.locale.equals("ja-JP") && !Forge.forcedEnglishonCJKMissing) {
+        if (useCjkFont && !Forge.forcedEnglishonCJKMissing) {
             String ttfName = Forge.CJK_Font;
             FileHandle ttfFile = Gdx.files.absolute(ForgeConstants.FONTS_DIR + ttfName + ".ttf");
             if (ttfFile != null && ttfFile.exists()) {
@@ -452,7 +454,7 @@ public class FSkinFont {
         } else {
             pageSize = 256;
         }
-        if (Forge.locale.equals("zh-CN") || Forge.locale.equals("ja-JP") && !Forge.forcedEnglishonCJKMissing) {
+        if (Lang.initInstance(Forge.locale).getFontFile() != null && !Forge.forcedEnglishonCJKMissing) {
             pageSize = 1024;
         }
 

@@ -2,7 +2,7 @@ Name:Ember Swallower
 ManaCost:2 R R
 Types:Creature Elemental
 PT:4/5
-K:Monstrosity:3:5 R R
+A:AB$ PutCounter | Cost$ 5 R R | Monstrosity$ 3
 T:Mode$ BecomeMonstrous | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When CARDNAME becomes monstrous, each player sacrifices three lands.
 SVar:TrigSac:DB$ Sacrifice | Defined$ Player | SacValid$ Land | Amount$ 3
 DeckHas:Ability$Counters

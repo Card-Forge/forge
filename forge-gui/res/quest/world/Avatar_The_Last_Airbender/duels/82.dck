@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Black Flame
+Title=Black Flame
+Icon=Black Flame.jpg
+Difficulty=Very Hard
+Description=./Modern/Avatar_The_Last_Airbender/Kajimoto_Atsushi_-_Mono_White_(Modern,_#2809160).dck
+Deck Type=constructed
+
+[Main]
+4 Stoneforge Mystic
+4 Thought-Knot Seer
+1 Eldrazi Displacer
+4 Solitude
+3 Combat Thresher
+4 Phelia, Exuberant Shepherd
+4 Witch Enchanter
+4 Anticausal Vestige
+1 Kaldra Compleat
+4 Meteor Sword
+4 Ephemerate
+4 Kozilek's Command
+3 Plains
+4 Shefet Dunes
+3 Battlefield Forge
+1 Caves of Koilos
+4 Eldrazi Temple
+4 Ugin's Labyrinth
+[Sideboard]
+3 Aven Mindcensor
+1 Emrakul, the Promised End
+2 High Noon
+3 White Orchid Phantom
+3 Wrath of the Skies
+3 Vexing Bauble

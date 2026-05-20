@@ -305,6 +305,3 @@ ScryfallCode=LEA
 293 L Mountain @Douglas Shuler
 294 L Forest @Christopher Rush
 295 L Forest @Christopher Rush
-
-[tokens]
-wasp

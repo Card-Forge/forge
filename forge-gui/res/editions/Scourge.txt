@@ -156,10 +156,3 @@ ScryfallCode=SCG
 141 U Proteus Machine @Greg Staples
 142 R Stabilizer @David Martin
 143 U Temple of the False God @Brian Snõddy
-
-[tokens]
-w_4_4_angel_flying
-w_1_1_soldier
-r_5_5_dragon_flying
-r_1_1_goblin
-g_4_4_beast

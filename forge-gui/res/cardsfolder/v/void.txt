@@ -3,7 +3,7 @@ ManaCost:3 B R
 Types:Sorcery
 A:SP$ ChooseNumber | SubAbility$ DBVoidDestroyAll | SpellDescription$ Choose a number. Destroy all artifacts and creatures with mana value equal to that number. Then target player reveals their hand and discards all nonland cards with mana value equal to the number.
 SVar:DBVoidDestroyAll:DB$ DestroyAll | ValidCards$ Artifact.cmcEQX,Creature.cmcEQX | SubAbility$ DBVoidRevealDiscard
-SVar:DBVoidRevealDiscard:DB$ Discard | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ RevealDiscardAll | DiscardValid$ Card.nonLand+cmcEQX
+SVar:DBVoidRevealDiscard:DB$ Discard | ValidTgts$ Player | Mode$ RevealDiscardAll | DiscardValid$ Card.nonLand+cmcEQX
 SVar:X:Count$ChosenNumber
 AI:RemoveDeck:All
 Oracle:Choose a number. Destroy all artifacts and creatures with mana value equal to that number. Then target player reveals their hand and discards all nonland cards with mana value equal to the number.

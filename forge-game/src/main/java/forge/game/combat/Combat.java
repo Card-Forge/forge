@@ -27,6 +27,7 @@ import com.google.common.collect.Multimaps;
 import com.google.common.collect.Table;
 import forge.game.*;
 import forge.game.ability.AbilityKey;
+import forge.game.event.GameEventAddLog;
 import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.keyword.Keyword;
@@ -38,7 +39,6 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-import forge.util.CardTranslation;
 import forge.util.IterableUtil;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
@@ -289,13 +289,12 @@ public class Combat {
     public final Player getDefenderPlayerByAttacker(final Card c) {
         GameEntity defender = getDefenderByAttacker(c);
 
-        if (defender instanceof Player) {
-            return (Player) defender;
+        if (defender instanceof Player def) {
+            return def;
         }
 
         // maybe attack on a controlled planeswalker?
-        if (defender instanceof Card) {
-            Card def = (Card)defender;
+        if (defender instanceof Card def) {
             if (def.isBattle()) {
                 return def.getProtectingPlayer();
             } else {
@@ -514,7 +513,7 @@ public class Combat {
                 sb.append(", ");
             }
         }
-        playerWhoAttacks.getGame().getGameLog().add(GameLogEntryType.COMBAT, sb.toString());
+        playerWhoAttacks.getGame().fireEvent(new GameEventAddLog(GameLogEntryType.COMBAT, sb.toString()));
     }
 
     /**
@@ -733,7 +732,7 @@ public class Combat {
                         "defending player and/or any number of creatures they control.")
                         && blocker.getController().getController().confirmStaticApplication(blocker, PlayerActionConfirmMode.AlternativeDamageAssignment,
                         Localizer.getInstance().getMessage("lblAssignCombatDamageAsChoose",
-                                CardTranslation.getTranslatedName(blocker.getName())), null);
+                                blocker.getTranslatedName()), null);
                 // choose defending player
                 if (divideCombatDamageAsChoose) {
                     defender = blocker.getController().getController().chooseSingleEntityForEffect(attackingPlayer.getOpponents(), null, Localizer.getInstance().getMessage("lblChoosePlayer"), null);
@@ -744,7 +743,7 @@ public class Combat {
                     assigningPlayer = attackingPlayer;
 
                 assignedDamage = true;
-                Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(blocker, attackers, null, damage, defender, divideCombatDamageAsChoose || assigningPlayer != blocker.getController());
+                Map<Card, Integer> map = assigningPlayer.getController().assignCombatDamage(blocker, attackers, null, damage, defender, divideCombatDamageAsChoose || assigningPlayer != blocker.getController() || !this.legacyOrderCombatants);
                 for (Entry<Card, Integer> dt : map.entrySet()) {
                     // Butcher Orgg
                     if (dt.getKey() == null && dt.getValue() > 0) {
@@ -811,7 +810,7 @@ public class Combat {
                     && StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(attacker)) {
                 assignToPlayer = assigningPlayer.getController().confirmStaticApplication(attacker, PlayerActionConfirmMode.AlternativeDamageAssignment,
                         Localizer.getInstance().getMessage("lblAssignCombatDamageWerentBlocked",
-                                CardTranslation.getTranslatedName(attacker.getName())), null);
+                                attacker.getTranslatedName()), null);
             }
 
             boolean divideCombatDamageAsChoose = false;
@@ -823,7 +822,7 @@ public class Combat {
                                 "defending player and/or any number of creatures they control.")
                         && assigningPlayer.getController().confirmStaticApplication(attacker, PlayerActionConfirmMode.AlternativeDamageAssignment,
                         Localizer.getInstance().getMessage("lblAssignCombatDamageAsChoose",
-                                CardTranslation.getTranslatedName(attacker.getName())), null);
+                                attacker.getTranslatedName()), null);
                 if (defender instanceof Card && divideCombatDamageAsChoose) {
                     defender = getDefenderPlayerByAttacker(attacker);
                 }
@@ -831,7 +830,7 @@ public class Combat {
                 assignCombatDamageToCreature = !attacker.getGame().getCombat().isBlocked(attacker) && getDefendersCreatures().size() > 0 &&
                         attacker.hasKeyword("If CARDNAME is unblocked, you may have it assign its combat damage to a creature defending player controls.") &&
                         assigningPlayer.getController().confirmStaticApplication(attacker, PlayerActionConfirmMode.AlternativeDamageAssignment,
-                                Localizer.getInstance().getMessage("lblAssignCombatDamageToCreature", CardTranslation.getTranslatedName(attacker.getName())), null);
+                                Localizer.getInstance().getMessage("lblAssignCombatDamageToCreature", attacker.getTranslatedName()), null);
                 if (divideCombatDamageAsChoose) {
                     if (orderedBlockers == null || orderedBlockers.isEmpty()) {
                         orderedBlockers = getDefendersCreatures();

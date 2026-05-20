@@ -18,6 +18,7 @@
 package forge.game.cost;
 
 import forge.game.GameLogEntryType;
+import forge.game.event.GameEventAddLog;
 import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -37,7 +38,7 @@ public class CostReveal extends CostPartWithList {
      */
     private static final long serialVersionUID = 1L;
 
-    private List<ZoneType> revealFrom = Arrays.asList(ZoneType.Hand);
+    protected List<ZoneType> revealFrom = Arrays.asList(ZoneType.Hand);
 
     public CostReveal(final String amount, final String type, final String description) {
         super(amount, type, description);
@@ -73,7 +74,7 @@ public class CostReveal extends CostPartWithList {
     }
 
     @Override
-    public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
+    public boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
         final Card source = ability.getHostCard();
 
         CardCollectionView handList = payer.getCardsIn(revealFrom);
@@ -81,18 +82,19 @@ public class CostReveal extends CostPartWithList {
 
         if (this.payCostFromSource()) {
             return revealFrom.contains(source.getLastKnownZone().getZoneType());
-        } else if (this.getType().equals("Hand")) {
+        }
+        if (this.getType().equals("Hand")) {
             return true;
-        } else if (this.getType().equals("SameColor")) {
+        }
+        if (this.getType().equals("SameColor")) {
             for (final Card card : handList) {
                 if (CardLists.count(handList, CardPredicates.sharesColorWith(card)) >= amount) {
                     return true;
                 }
             }
             return false;
-        } else {
-            return amount <= getMaxAmountX(ability, payer, effect);
         }
+        return amount <= getMaxAmountX(ability, payer, effect);
     }
 
     @Override
@@ -147,7 +149,7 @@ public class CostReveal extends CostPartWithList {
         }
         sb.append(targetCard).append(" to pay a cost for ");
         sb.append(ability);
-        targetCard.getGame().getGameLog().add(GameLogEntryType.INFORMATION, sb.toString());
+        targetCard.getGame().fireEvent(new GameEventAddLog(GameLogEntryType.INFORMATION, sb.toString()));
         return targetCard;
     }
 

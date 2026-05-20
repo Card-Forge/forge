@@ -183,7 +183,7 @@ public abstract class FloatingCardArea extends CardArea {
 
     protected void refresh() {
         if (!getWindow().isVisible()) { return; } //don't refresh while window hidden
-	doRefresh();
+        doRefresh();
     }
 
     protected void doRefresh() {

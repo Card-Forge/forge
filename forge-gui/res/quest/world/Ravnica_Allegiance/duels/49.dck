@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Barroom Brawl
+Title=Barroom Brawl
+Icon=Barroom Brawl.jpg
+Difficulty=Medium
+Description=./Standard/Ravnica_Allegiance/Adachi_Kenta_-_Red_Deck_Wins_(Standard,_#790562).dck
+Deck Type=constructed
+
+[Main]
+4 Ghitu Lavarunner
+4 Fanatical Firebrand
+4 Runaway Steam-Kin
+4 Viashino Pyromancer
+4 Goblin Chainwhirler
+4 Shock
+4 Lightning Strike
+4 Risk Factor
+4 Wizard's Lightning
+4 Light Up the Stage
+20 Mountain
+[Sideboard]
+4 Lava Coil
+3 Banefire
+2 Dire Fleet Daredevil
+4 Lightning Mare
+2 Rekindling Phoenix

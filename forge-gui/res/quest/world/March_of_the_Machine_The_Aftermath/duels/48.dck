@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Silver Samurai
+Title=Silver Samurai
+Icon=Silver Samurai.jpg
+Difficulty=Medium
+Description=./Standard/March_of_the_Machine_The_Aftermath/Brett_S_-_Selesnya_Enchantments_(Standard,_#1651921).dck
+Deck Type=constructed
+
+[Main]
+2 Katilda, Dawnhart Martyr
+4 Michiko's Reign of Truth
+3 Spirited Companion
+4 Generous Visitor
+4 Kami of Transience
+4 Weaver of Harmony
+4 Jukai Naturalist
+3 Calix, Guided by Fate
+2 Tocasia's Welcome
+4 Audacity
+4 Ossification
+4 Plains
+4 Forest
+4 Brushland
+4 Razorverge Thicket
+4 Overgrown Farmland
+1 Boseiju, Who Endures
+1 Eiganjo, Seat of the Empire
+[Sideboard]
+2 Wedding Announcement
+1 Hallowed Haunting
+1 Shigeki, Jukai Visionary
+2 Knockout Blow
+2 Destroy Evil
+2 Skrelv's Hive
+3 Tyvar's Stand
+2 Cosmic Rebirth

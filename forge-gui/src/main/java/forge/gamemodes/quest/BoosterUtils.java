@@ -99,7 +99,10 @@ public final class BoosterUtils {
 
         if (userPrefs != null && userPrefs.getPoolType() == StartingPoolPreferences.PoolType.BOOSTERS) {
 
-            for (InventoryItem inventoryItem : generateRandomBoosterPacks(userPrefs.getNumberOfBoosters(), formatStartingPool.editionLegalPredicate)) {
+            Predicate<CardEdition> editionLegalPredicate = formatStartingPool == null
+                    ? cardEdition -> true
+                    : formatStartingPool.editionLegalPredicate;
+            for (InventoryItem inventoryItem : generateRandomBoosterPacks(userPrefs.getNumberOfBoosters(), editionLegalPredicate)) {
                 cards.addAll(((BoosterPack) inventoryItem).getCards());
             }
 
@@ -557,7 +560,7 @@ public final class BoosterUtils {
     public static void sort(List<PaperCard> cards) {
         //sort cards alphabetically so colors appear together and rares appear on top
         cards.sort(Comparator.comparing(PaperCard::getName));
-        cards.sort(Comparator.comparing(c -> c.getRules().getColor()));
+        cards.sort(Comparator.comparing(c -> c.getRules().getColor().getOrderWeight()));
         cards.sort(Comparator.comparing(PaperCard::getRarity).reversed());
     }
 }

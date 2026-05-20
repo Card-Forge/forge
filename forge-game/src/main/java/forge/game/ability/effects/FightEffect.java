@@ -17,7 +17,6 @@ import forge.game.player.Player;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
-import forge.util.CardTranslation;
 import forge.util.Lang;
 import forge.util.Localizer;
 
@@ -65,7 +64,7 @@ public class FightEffect extends DamageBaseEffect {
         Player controller = host.getController();
         boolean isOptional = sa.hasParam("Optional");
 
-        if (isOptional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblWouldYouLikeFight", CardTranslation.getTranslatedName(fighters.get(0).getName()), CardTranslation.getTranslatedName(fighters.get(1).getName())), null)) {
+        if (isOptional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblWouldYouLikeFight", fighters.get(0).getTranslatedName(), fighters.get(1).getTranslatedName()), null)) {
             return;
         }
 

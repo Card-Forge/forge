@@ -1,0 +1,42 @@
+[duel]
+[metadata]
+Name=Doc Holiday
+Title=Doc Holiday
+Icon=Doc Holiday.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Crimson_Vow/Matthew_Heins_-_8-Rack_(Modern,_#1253816).dck
+Deck Type=constructed
+
+[Main]
+1 Tourach, Dread Cantor
+4 Dauthi Voidwalker
+1 Nihil Spellbomb
+1 Shadowspear
+4 The Rack
+1 Funeral Charm
+1 Surgical Extraction
+2 Fatal Push
+2 Defile
+2 Mind Rake
+3 Thoughtseize
+3 Inquisition of Kozilek
+4 Raven's Crime
+2 Shrieking Affliction
+4 Urza's Saga
+1 Sorin the Mirthless
+4 Liliana of the Veil
+1 Bojuka Bog
+2 Mishra's Factory
+3 Verdant Catacombs
+4 Urborg, Tomb of Yawgmoth
+10 Swamp
+[Sideboard]
+1 Grafdigger's Cage
+1 Hex Parasite
+1 Pithing Needle
+1 Nihil Spellbomb
+2 Go Blank
+2 Engineered Explosives
+2 Damping Sphere
+2 Torpor Orb
+3 Surgical Extraction

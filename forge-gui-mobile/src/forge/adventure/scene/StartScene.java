@@ -12,6 +12,8 @@ import forge.adventure.stage.MapStage;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.adventure.world.WorldSave;
+import forge.assets.FSkinTexture;
+import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeProfileProperties;
 import forge.screens.TransitionScreen;
 import forge.sound.SoundSystem;
@@ -126,6 +128,10 @@ public class StartScene extends UIScene {
     }
 
     public boolean backup() {
+        if (Forge.getDeviceAdapter().needFileAccess()) {
+            Forge.getDeviceAdapter().requestFileAcces();
+            return true;
+        }
         if (backupDialog == null) {
             backupDialog = createGenericDialog(Forge.getLocalizer().getMessage("lblData"),
                     null, Forge.getLocalizer().getMessage("lblBackup"),
@@ -219,7 +225,7 @@ public class StartScene extends UIScene {
     }
 
     public void switchToClassic() {
-        GameHUD.getInstance().stopAudio();
+        SoundSystem.instance.stopBackgroundMusic();
         Forge.switchToClassic();
     }
 
@@ -249,6 +255,9 @@ public class StartScene extends UIScene {
         saveButton.setVisible(hasSaveButton);
         saveButton.setDisabled(TileMapScene.instance().currentMap().isInMap());
         updateResumeContinue();
+
+        FSkinTexture.invalidateAdventureTextures();
+        GuiBase.setAdventureDirectory(Config.instance().getPrefix());
 
         if (Forge.createNewAdventureMap) {
             this.NewGame();

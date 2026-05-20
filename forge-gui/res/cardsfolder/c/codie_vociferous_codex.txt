@@ -1,6 +1,6 @@
 Name:Codie, Vociferous Codex
 ManaCost:3
-Types:Legendary Artifact Creature Construct
+Types:Legendary Artifact Creature Book Construct
 PT:1/4
 S:Mode$ CantBeCast | ValidCard$ Permanent | Caster$ You | Description$ You can't cast permanent spells.
 A:AB$ Mana | Cost$ 4 T | Produced$ W U B R G | SubAbility$ DBTrigger | SpellDescription$ Add {W}{U}{B}{R}{G}. When you cast your next spell this turn, exile cards from the top of your library until you exile an instant or sorcery card with lesser mana value. Until end of turn, you may cast that card without paying its mana cost. Put each other card exiled this way on the bottom of your library in a random order.

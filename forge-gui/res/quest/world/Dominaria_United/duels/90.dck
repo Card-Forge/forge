@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Joe Kidd
+Title=Joe Kidd
+Icon=Joe Kidd.jpg
+Difficulty=Very Hard
+Description=./Modern/Dominaria_United/BSF75_-_Elementals_(Modern,_#1547320).dck
+Deck Type=constructed
+
+[Main]
+1 Endurance
+1 Omnath, Locus of the Roil
+2 Thunderkin Awakener
+3 Fury
+4 Solitude
+4 Omnath, Locus of Creation
+4 Voice of Resurgence
+4 Risen Reef
+4 Flamekin Harbinger
+4 Ephemerate
+4 Leyline Binding
+1 Snow-Covered Forest
+1 Snow-Covered Plains
+1 Tangled Florahedron
+1 Raugrin Triome
+1 Ketria Triome
+1 Temple Garden
+1 Sacred Foundry
+1 Steam Vents
+1 Snow-Covered Island
+1 Stomping Ground
+1 Hallowed Fountain
+3 Misty Rainforest
+3 Cavern of Souls
+4 Windswept Heath
+4 Flooded Strand
+[Sideboard]
+1 Foundation Breaker
+1 Endurance
+1 Kaheera, the Orphanguard
+2 Force of Vigor
+2 Fulminator Mage
+2 Rest in Peace
+2 Surgical Extraction
+2 Engineered Explosives
+2 Chalice of the Void

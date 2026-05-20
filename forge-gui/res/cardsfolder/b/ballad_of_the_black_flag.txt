@@ -5,6 +5,6 @@ K:Chapter:4:DBMill,DBMill,DBMill,DBCostReduction
 SVar:DBMill:DB$ Mill | NumCards$ 3 | Defined$ You | Imprint$ True | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard,Exile | Destination$ Hand | ChangeType$ Card.Historic+YouOwn+IsImprinted | Hidden$ True | Optional$ True | SubAbility$ DBCleanup | SpellDescription$ Mill three cards. You may put a historic card from among them into your hand. (Artifacts, legendaries, and Sagas are historic.)
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
-SVar:DBCostReduction:DB$ Effect | StaticAbilities$ ReduceSPcost
-SVar:ReduceSPcost:Mode$ ReduceCost | ValidCard$ Card.Historic | Type$ Spell | Activator$ You | Amount$ 2 | Description$ Historic spells you cast this turn cost {2} less to cast.
+SVar:DBCostReduction:DB$ Effect | StaticAbilities$ ReduceSPCost
+SVar:ReduceSPCost:Mode$ ReduceCost | ValidCard$ Card.Historic | Type$ Spell | Activator$ You | Amount$ 2 | Description$ Historic spells you cast this turn cost {2} less to cast.
 Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)\nI, II, III — Mill three cards. You may put a historic card from among them into your hand. (Artifacts, legendaries, and Sagas are historic.)\nIV — Historic spells you cast this turn cost {2} less to cast.

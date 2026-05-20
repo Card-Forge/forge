@@ -1,0 +1,9 @@
+Name:Raphael, Ninja Destroyer
+ManaCost:2 R R
+Types:Legendary Creature Mutant Ninja Turtle
+PT:4/4
+K:CARDNAME must be blocked if able.
+T:Mode$ DamageDoneOnce | Execute$ TrigMana | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Enrage — Whenever NICKNAME is dealt damage, add that much {R}. Until end of turn, you don't lose this mana as steps and phases end.
+SVar:TrigMana:DB$ Mana | Produced$ R | Amount$ X | PersistentMana$ True
+SVar:X:TriggerCount$DamageAmount
+Oracle:Raphael must be blocked if able.\nEnrage — Whenever Raphael is dealt damage, add that much {R}. Until end of turn, you don't lose this mana as steps and phases end.

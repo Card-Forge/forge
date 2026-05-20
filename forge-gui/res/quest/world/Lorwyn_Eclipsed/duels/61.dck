@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Sus Antigoon
+Title=Sus Antigoon
+Icon=Sus Antigoon.jpg
+Difficulty=Very Hard
+Description=./Modern/Lorwyn_Eclipsed/LasVegasChaos_-_Merfolk_(Modern,_#2820751).dck
+Deck Type=constructed
+
+[Main]
+4 Lord of Atlantis
+1 Glasspool Mimic
+3 Harbinger of the Seas
+4 Master of the Pearl Trident
+2 Merfolk Trickster
+4 Mindspring Merfolk
+4 Silvergill Mentor
+3 Svyelun of Sea and Sky
+3 Tide Shaper
+2 Vodalian Hexcatcher
+4 Aether Vial
+4 Flare of Denial
+4 Sink into Stupor
+2 Spreading Seas
+3 Cavern of Souls
+2 Mutavault
+2 Otawara, Soaring City
+9 Island
+[Sideboard]
+4 Consign to Memory
+2 Force of Negation
+1 Harbinger of the Seas
+2 Stern Scolding
+2 Subtlety
+2 Unlicensed Hearse
+2 Tishana's Tidebinder

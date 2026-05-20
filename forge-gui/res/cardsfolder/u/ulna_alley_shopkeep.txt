@@ -1,0 +1,8 @@
+Name:Ulna Alley Shopkeep
+ManaCost:2 B
+Types:Creature Goblin Warlock
+PT:2/3
+K:Menace
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | CheckSVar$ X | Description$ Infusion — This creature gets +2/+0 as long as you gained life this turn.
+SVar:X:Count$LifeYouGainedThisTurn
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nInfusion — This creature gets +2/+0 as long as you gained life this turn.

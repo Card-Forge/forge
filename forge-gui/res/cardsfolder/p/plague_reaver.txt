@@ -4,7 +4,7 @@ Types:Creature Beast
 PT:6/5
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ SacAllOthers | TriggerDescription$ At the beginning of your end step, sacrifice each other creature you control.
 SVar:SacAllOthers:DB$ SacrificeAll | ValidCards$ Creature.Other+YouCtrl
-A:AB$ DelayedTrigger | Cost$ Discard<2/Card> Sac<1/CARDNAME> | ValidTgts$ Opponent | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.IsTriggerRemembered | RememberObjects$ Targeted,SacrificedCards | Execute$ DBChange | TriggerDescription$ Return CARDNAME to the battlefield under that player's control at the beginning of their next upkeep. | StackDescription$ Return CARDNAME to the battlefield under {p:Targeted}'s control at the beginning of their next upkeep. | SpellDescription$ Choose target opponent. Return CARDNAME to the battlefield under that player's control at the beginning of their next upkeep.
+A:AB$ DelayedTrigger | Cost$ Discard<2/Card> Sac<1/CARDNAME> | ValidTgts$ Opponent | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.IsTriggerRemembered | RememberObjects$ Targeted & SacrificedCards | Execute$ DBChange | TriggerDescription$ Return CARDNAME to the battlefield under that player's control at the beginning of their next upkeep. | StackDescription$ Return CARDNAME to the battlefield under {p:Targeted}'s control at the beginning of their next upkeep. | SpellDescription$ Choose target opponent. Return CARDNAME to the battlefield under that player's control at the beginning of their next upkeep.
 SVar:DBChange:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Graveyard | Destination$ Battlefield | GainControl$ DelayTriggerRemembered
 SVar:DonateMe:3
 AI:RemoveDeck:All

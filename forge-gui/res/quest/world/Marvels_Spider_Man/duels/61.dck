@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Ogun
+Title=Ogun
+Icon=Ogun.jpg
+Difficulty=Hard
+Description=./Modern/Marvels_Spider_Man/James_Baggett_-_Izzet_Control_(Modern,_#2665378).dck
+Deck Type=constructed
+
+[Main]
+4 Brazen Borrower
+4 Snapcaster Mage
+4 Subtlety
+2 Tishana's Tidebinder
+4 Counterspell
+4 Flame of Anor
+4 Lightning Bolt
+3 Force of Negation
+2 Consult the Star Charts
+2 Spell Snare
+2 Stern Scolding
+1 Spider-Sense
+7 Island
+4 Polluted Delta
+4 Scalding Tarn
+3 Steam Vents
+2 Hall of Storm Giants
+2 Thundering Falls
+1 Mountain
+1 Otawara, Soaring City
+[Sideboard]
+4 Consign to Memory
+3 Fire Magic
+3 Ragavan, Nimble Pilferer
+2 Dress Down
+1 Hurkyl's Recall
+1 Spell Snare
+1 Stern Scolding

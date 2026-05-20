@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Robin
+Title=Robin
+Icon=Robin.jpg
+Difficulty=Very Hard
+Description=../Modern/Born_of_the_Gods/Modern_Daily_#8188788/Xarfaii_-_Mono_Green_(Modern,_#228354).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Dryad Militant
+4 Dungrove Elder
+4 Experiment One
+4 Kalonian Tusker
+4 Leatherback Baloth
+1 Scavenging Ooze
+4 Strangleroot Geist
+4 Aspect of Hydra
+2 Dismember
+4 Vines of Vastwood
+4 Rancor
+21 Forest
+[Sideboard]
+2 Beast Within
+1 Creeping Corrosion
+3 Naturalize
+2 Obstinate Baloth
+2 Oxidize
+1 Pithing Needle
+3 Skylasher

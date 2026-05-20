@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import com.badlogic.gdx.utils.Align;
 
@@ -36,7 +37,6 @@ import forge.card.CardZoom;
 import forge.card.MagicColor;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
-import forge.localinstance.skin.FSkinProp;
 import forge.screens.match.MatchController;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FContainer;
@@ -45,7 +45,6 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
-import forge.util.Callback;
 import forge.util.CardTranslation;
 import forge.util.TextUtil;
 import forge.util.Utils;
@@ -55,7 +54,7 @@ public class VAssignGenericAmount extends FDialog {
     private static final float CARD_GAP_X = Utils.scale(10);
     private static final float ADD_BTN_HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.75f;
 
-    private final Callback<Map<Object, Integer>> callback;
+    private final Consumer<Map<Object, Integer>> callback;
     private final int totalAmountToAssign;
 
     private final String lblAmount;
@@ -165,25 +164,10 @@ public class VAssignGenericAmount extends FDialog {
             max = max0;
             if (entity instanceof CardView) {
                 obj = add(new EffectSourcePanel((CardView)entity));
-            } else if (entity instanceof PlayerView) {
-                PlayerView player = (PlayerView)entity;
+            } else if (entity instanceof PlayerView player) {
                 obj = add(new MiscTargetPanel(player.getName(), MatchController.getPlayerAvatar(player), null));
-            } else if (entity instanceof Byte) {
-                FSkinImageInterface manaSymbol;
-                byte color = (Byte) entity;
-                if (color == MagicColor.WHITE) {
-                    manaSymbol = Forge.getAssets().images().get(FSkinProp.IMG_MANA_W);
-                } else if (color == MagicColor.BLUE) {
-                    manaSymbol = Forge.getAssets().images().get(FSkinProp.IMG_MANA_U);
-                } else if (color == MagicColor.BLACK) {
-                    manaSymbol = Forge.getAssets().images().get(FSkinProp.IMG_MANA_B);
-                } else if (color == MagicColor.RED) {
-                    manaSymbol = Forge.getAssets().images().get(FSkinProp.IMG_MANA_R);
-                } else if (color == MagicColor.GREEN) {
-                    manaSymbol = Forge.getAssets().images().get(FSkinProp.IMG_MANA_G);
-                } else { // Should never come here, but add this to avoid compile error
-                    manaSymbol = Forge.getAssets().images().get(FSkinProp.IMG_MANA_COLORLESS);
-                }
+            } else if (entity instanceof MagicColor.Color color) {
+                FSkinImageInterface manaSymbol = Forge.getAssets().manaImages().get(color.getShortName());
                 obj = add(new MiscTargetPanel("", manaSymbol, entity));
             } else {
                 obj = add(new MiscTargetPanel(entity.toString(), FSkinImage.UNKNOWN, null));
@@ -360,7 +344,7 @@ public class VAssignGenericAmount extends FDialog {
             return;
         }
         hide();
-        callback.run(getAssignedMap());
+        callback.accept(getAssignedMap());
     }
 
     public Map<Object, Integer> getAssignedMap() {

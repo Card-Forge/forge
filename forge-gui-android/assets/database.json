@@ -1,0 +1,770 @@
+{
+  "a32x":{
+    "CPU":"2x Cortex-A76 @ 2GHz 6x Cortex-A55 @ 2GHz",
+    "SoC":"MediaTek Dimensity 720 (MT6853)"
+  },
+  "angler":{
+    "CPU":"4x Cortex-A57 @ 1.95GHz 4x Cortex-A53 @ 1.55GHz",
+    "SoC":"Snapdragon 810 MSM8994"
+  },
+  "ane":{
+    "CPU":"4x Cortex-A54 @ 2.3GHz 4x Cortex-A54 @ 1.7GHz",
+    "SoC":"HiSilicon Kirin 659"
+  },
+  "amar_row_wifi":{
+    "CPU":"8x Cortex-A53 @ 1.8GHz",
+    "SoC":"Mediatek MT8768"
+  }, 
+  "atlas":{
+    "CPU":"-",
+    "SoC":"Intel(R) Core(TM) i5-8200Y @ 1.3GHz"
+  },
+  "apq8084":{
+    "CPU":"4x Krait 450 @ 2.65GHz",
+    "SoC":"Snapdragon 805 APQ8084"
+  },
+  "atoll":{
+    "CPU":"2x Kryo 465 Gold @ 2.3GHz 6x Kryo 465 Silver @ 1.8GHz",
+    "SoC":"Snapdragon 720G (SM7125)"
+  },
+  "art-l29":{
+    "CPU":"4x Cortex-A73 @ 2.2GHz 4x Cortex-A53 @ 1.7GHz",
+    "SoC":"HiSilicon Kirin 710F"
+  },
+  "baylake":{
+    "CPU":"Atom Z3745 @ 1.3GHz",
+    "SoC":"Intel Atom Z3745"
+  },
+  "begonia":{
+    "CPU":"2x Cortex-176 @ 2GHz 6x Cortex-A55 @ 2GHz",
+    "SoC":"MediaTek Helios G90T MT6785T"
+  },
+  "blueline":{
+    "CPU":"4x Kryo 385 Gold @ 2.8GHz 4x Kryo 385 Silver @ 1.75GHz",
+    "SoC":"Snapdragon 845"
+  },
+  "bullhead":{
+    "CPU":"4x Cortex-A57 @ 1.8GHz 4x Cortex-A53 @ 1.44GHz",
+    "SoC":"Snapdragon 808"
+  },
+  "capri":{
+    "CPU":"2x Cortex-A9 @ 1.2GHz",
+    "SoC":"Broadcom BCM28155"
+  },
+  "cepheus":{
+    "CPU":"1x Kryo 485 Gold @ 2.8GHz 3x Kryo 485 Gold @ 2.4GHz 4x Kryo 485 Silver @ 1.7GHz",
+    "SoC":"Snapdragon 855 SM8150"
+  },
+  "cheryl":{
+    "CPU":"4x Kryo 280 HP @ 2.45GHz 4x Kryo 280 LP @ 1.9GHz",
+    "SoC":"Snapdragon 835 MSM8998"
+  },
+  "cheryl2":{
+    "CPU":"4x Kryo 385 Gold @ 2.8GHz 4x Kryo 385 Silver @ 1.8GHz",
+    "SoC":"Snapdragon 845 SDM845"
+  },
+  "cheetah":{
+    "CPU":"2x Cortex-X1 @ 2.8GHz 2x Cortex-A78 @ 2.3GHz 4x Cortex-A55 @ 1.8GHz",
+    "SoC":"Google Tensor G2 (GS201)"
+  },
+  "comet":{
+    "CPU":"1x Cortex-X4 @ 31.GHz 3x Cortex-A720 @ 2.6GHz 4x Cortex-A520 @ 1.95GHz",
+    "SoC":"Google Tensor G4 (GS401)"
+  },
+  "eureka":{
+    "CPU":"6x Cortex-A78C @ 2.3 GHz",
+    "SoC":"Snapdragon XR2 Gen 2 (SM8550)"
+  },
+  "felix":{
+    "CPU":"2x Cortex-X1 @ 2.8GHz 2x Cortex-A78 @ 2.3GHz 4x Cortex-A55 @ 1.8GHz",
+    "SoC":"Google Tensor G2 (GS201)"
+  },
+  "tangorpro":{
+    "CPU":"2x Cortex-X1 @ 2.8GHz 2x Cortex-A78 @ 2.3GHz 4x Cortex-A55 @ 1.8GHz",
+    "SoC":"Google Tensor G2 (GS201)"
+  },
+  "codina":{
+    "CPU":"2x Cortex-A9 @ 1.0GHz",
+    "SoC":"NovaThor U8500"
+  },
+  "clovertrail":{
+    "CPU":"2x Atom Z2560 @ 1.6GHz",
+    "SoC":"Intel Atom Z2560"
+  },
+  "clt":{
+    "CPU":"4x Cortex-A73 @ 2.36GHz 4x Cortex-A53 @ 1.8GHz",
+    "SoC":"HiSilicon Kirin 970"
+  },
+    "els":{
+    "CPU":"4x Cortex-A76 @ 2.8GHz 4x Cortex-A55 @ 1.9GHz",
+    "SoC":"HiSilicon Kirin 990 5G"
+  },
+    "dandelion":{
+    "CPU":"8x Cortex-A54 @ 1.5GHz",
+    "SoC":"MediaTek Helio G25 (MT6762G)"
+  },
+  "darcy":{
+    "CPU":"4x ARM Cortex-A53 4x ARM Cortex-A57",
+    "SoC":"nVIDIA Tegra X1 T210"
+  },
+  "db8520h":{
+    "CPU":"2x Cortex-A9 @ 1.0GHz",
+    "SoC":"NovaThor U8500"
+  },
+  "dragon":{
+    "CPU":"4x Cortex-A57 @ 1.9GHz 4x Cortex-A53 @ 1.3GHz",
+    "SoC":"nVIDIA Tegra X1 T210"
+  },
+  "douglas":{
+    "CPU":"4x Cortex-A53 @ 1.3GHz",
+    "SoC":"MediaTek MT8163"
+  },
+  "eeepad":{
+    "CPU":"4x Atom Z2520 @ 1.2GHz",
+    "SoC":"Intel Atom Z2520"
+  },
+  "endeavoru":{
+    "CPU":"4x Cortex-A9 @ 1.5GHz 1x Cortex-A9 @ 0.5GHz",
+    "SoC":"nVIDIA Tegra 3 AP33"
+  },
+  "eml":{
+    "CPU":"4x Cortex-A73 @ 2.36GHz 4x Cortex-A53 @ 1.8GHz",
+    "SoC":"HiSilicon Kirin 970"
+  },
+  "eve":{
+    "CPU":"i5-7Y56 @ 1.2GHz",
+    "SoC":"Ambel Lake-Y / Kaby Lake-U/Y"
+  },
+  "eva-l19":{
+    "CPU":"4x Cortex-A72 @ 2.5GHz 4x Cortex-A53 @ 1.8GHz",
+    "SoC":"HiSilicon Kirin 955"
+  },
+  "exynos990":{
+    "CPU":"4x Cortex-A55 @ 2GHz 2x Cortex-A76 @ 2.5GHz 2x Exynos M5 @ 2.7GHz",
+    "SoC":"Exynos 990"
+  },
+  "exynos9611":{
+    "CPU":"4x Cortex-A73 @ 2.3GHz 4x Cortex-A53 @ 1.7GHz",
+    "SoC":"Exynos 7 Octa (9611)"
+  },
+  "exynos2100":{
+    "CPU":"1x Cortex-X1 @ 2.9GHz 3x Cortex-A78 @ 2.8GHz 4x Cortex-A55 @ 2.2GHz",
+    "SoC":"Exynos 2100"
+  },
+  "exynos9810":{
+    "CPU":"4x Exynos M3 @ 2.7GHz 4x Cortex-A55 @ 1.8GHz",
+    "SoC":"Exynos 9 (9810)"
+  },
+    "exynos9820":{
+    "CPU":"2 Exynos M4 @ 2.7GHz 2x Cortex-A75 @ 2.3GHz 4x Cortex-A55 @ 1.9GHz",
+    "SoC":"Exynos 9 (9820)"
+  },
+  "ford":{
+    "CPU":"4x Cortex-A7 @ 1.3GHz",
+    "SoC":"MediaTek MT8127"
+  },
+  "flo":{
+    "CPU":"4x Krait 300 @ 1.5GHz",
+    "SoC":"Snapdragon 600 APQ8064-FLO"
+  },
+  "flame":{
+    "CPU":"1x Kryo 485 Gold @ 2.8GHz 3x Kryo 485 Gold @ 2.4GHz 4x Kryo 485 Silver @ 1.7GHz",
+    "SoC":"Snapdragon 855 SM8150"
+  },
+  "fleur":{
+    "CPU":"2x Cortex-A76 @ 2GHz 6x Cortex-A55 @ 2GHz",
+    "SoC":"MediaTek Helio G96 (MT6781)"
+  },
+  "flounder":{
+    "CPU":"2x nVidia Denver @ 2.5GHz",
+    "SoC":"nVIDIA Tegra K1 T132"
+  },
+  "g3u":{
+    "CPU":"2x Cortex-A5 @ 1.0GHz",
+    "SoC":"Snapdragon S4 Play MSM8225"
+  },
+  "gee":{
+    "CPU":"4x Krait 300 @ 1.5GHz",
+    "SoC":"Snapdragon S4 Pro APQ8064"
+  },
+  "grouper":{
+    "CPU":"4x Cortex-A9 @ 1.3GHz 1x Cortex-A9 @ 0.5GHz",
+    "SoC":"nVIDIA Tegra 3 T30L"
+  },
+  "hammerhead":{
+    "CPU":"4x Krait 400 @ 2.26GHz",
+    "SoC":"Snapdragon 800 MSM8974"
+  },
+  "hawaii_ss_kylepro":{
+    "CPU":"2x Cortex-A9 @ 1.2GHz",
+    "SoC":"Broadcom BCM21664T"
+  },
+  "herring":{
+    "CPU":"1x Cortex-A8 @ 1.0GHz",
+    "SoC":"Exynos 3 Single 3110"
+  },
+  "hollywood":{
+    "CPU":"4x Kryo 280 HP @ 2.4GHz 4x Kryo 280 LP @ 1.9GHz",
+    "SoC":"Snapdragon XR2"
+  },
+  "k6853v1_64_titan":{
+    "CPU":"2x Cortex-A76 @ 2Ghz 6x Cortex-A55 @ 2GHz",
+    "SoC":"MediaTek Dimensity 720 (MT6853)"
+  },
+  "kalama":{
+    "CPU":"1x Cortex-X3 @ 3.3GHz 2x Cortex-A710 @ 2.8GHz 2x Cortex-A715 @ 2.8GHz 3x Cortex-A510 @ 2.0GHz",
+    "SoC":"Snapdragon 8 Gen 2 (SM8550)"
+  },
+  "kona":{
+    "CPU":"1x Cortex-A77 @ 3.1GHz 3x Cortex-A77 @ 2.4GHz 4x Kryo 585 Silver @ 1.8GHz",
+    "SoC":"Snapdragon 865 SM8250"
+  },
+  "kohaku":{
+    "CPU":"i5-10210U @ 1.6GHz",
+    "SoC":"Comet Lake-U"
+  },
+   "lahaina":{
+    "CPU":"1x Cortex-X1 @ 2.8GHz 3x Cortex-A78 @ 2.4GHz 4x Cortex-A55 @ 1.8GHz",
+    "SoC":"Snapdragon 888"
+  },
+  "liara":{
+    "CPU":"5 Compute cores 2C+3G",
+    "SoC":"AMD A4-9120C Radeon R4"
+  },
+  "lito":{
+    "CPU":"2x Cortex-A77 @ 2.1GHz 6x Kryo 560 Silver @ 1.7GHz",
+    "SoC":"Snapdragon 690 SM6350"
+  },
+  "lya":{
+    "CPU":"2x Cortex-A76 @ 2.6GHz 2x Cortex-A76 @ 1.9GHz 4x Cortex-A55 @ 1.8GHz",
+    "SoC":"HiSilicon Kirin 980"
+  },
+  "lyo-l01":{
+    "CPU":"4x Cortex-153 @ 1.3GHz",
+    "SoC":"MediaTek MT6735"
+  },
+  "mako":{
+    "CPU":"4x Krait @ 1.5GHz",
+    "SoC":"Snapdragon S4 Pro APQ8064"
+  },
+  "marlin":{
+    "CPU":"2x Kryo HP @ 2.15GHz 2x Kryo @ 1.6GHz",
+    "SoC":"Snapdragon 821 MSM8996 Pro"
+  },
+  "med":{
+    "CPU":"8x Cortex-A54 @ 1.5GHz",
+    "SoC":"MediaTek MT6762R"
+  },
+  "mocha":{
+    "CPU":"4x Cortex-A15 @2.2GHz",
+    "SoC":"nVIDIA Tegra K1 T124"
+  },
+  "msm8225":{
+    "CPU":"2x Cortex-A5 @ 1.2GHz",
+    "SoC":"Snapdragon S4 MSM8225"
+  },
+  "msm8226":{
+    "CPU":"4x Cortex-A7 @ 1.19GHz",
+    "SoC":"Snapdragon 400 MSM8226"
+  },
+  "msm8625":{
+    "CPU":"2x Cortex-A5 @ 1.2GHz",
+    "SoC":"Snapdragon S4 MSM8625"
+  },
+  "MSM8227":{
+    "CPU":"2x Krait @ 1GHz",
+    "SoC":"Snapdragon S4 Plus MSM8227"
+  },
+  "msm8627":{
+    "CPU":"2x Krait @ 1GHz",
+    "SoC":"Snapdragon S4 Plus MSM8627"
+  },
+  "apq8030":{
+    "CPU":"2x Krait @ 1.2GHz",
+    "SoC":"Snapdragon S4 Plus APQ8030"
+  },
+  "msm8230":{
+    "CPU":"2x Krait @ 1.2GHz",
+    "SoC":"Snapdragon S4 Plus MSM8230"
+  },
+  "msm8660_surf":{
+    "CPU":"2x Scorpion @ 1.5GHz",
+    "SoC":"Snapdragon S3 MSM8260"
+  },
+  "msm8630":{
+    "CPU":"2x Krait @ 1.2GHz",
+    "SoC":"Snapdragon S4 Plus MSM8630"
+  },
+  "msm8930":{
+    "CPU":"2x Krait @ 1.2GHz",
+    "SoC":"Snapdragon S4 Plus MSM8930"
+  },
+  "msm8937":{
+    "CPU":"4x Cortex-A53 @ 1.4GHz",
+    "SoC":"Snapdragon 425 MSM8917"
+  },
+  "apq8060a":{
+    "CPU":"2x Krait @ 1.5GHz",
+    "SoC":"Snapdragon S4 Plus APQ8060A"
+  },
+  "msm8260a":{
+    "CPU":"2x Krait @ 1.5GHz",
+    "SoC":"Snapdragon S4 Plus MSM8260A"
+  },
+  "msm8660a":{
+    "CPU":"2x Krait @ 1.5GHz",
+    "SoC":"Snapdragon S4 Plus MSM8660A"
+  },
+  "msm8960":{
+    "CPU":"2x Krait @ 1.5GHz",
+    "SoC":"Snapdragon S4 Plus MSM8960"
+  },
+  "msm8260a-pro":{
+    "CPU":"2x Krait 300 @ 1.7GHz",
+    "SoC":"Snapdragon S4 Pro MSM8260A Pro"
+  },
+  "msm8960t":{
+    "CPU":"2x Krait 300 @ 1.7GHz",
+    "SoC":"Snapdragon S4 Pro MSM8960T"
+  },
+  "msm8960t-pro":{
+    "CPU":"2x Krait 300 @ 1.7GHz",
+    "SoC":"Snapdragon S4 Pro MSM8960T Pro"
+  },
+  "msm8960ab":{
+    "CPU":"2x Krait 300 @ 1.7GHz",
+    "SoC":"Snapdragon S4 Pro MSM8960AB"
+  },
+  "msm8960dt":{
+    "CPU":"2x Krait 300 @ 1.7GHz",
+    "SoC":"Snapdragon S4 Pro MSM8960DT"
+  },
+  "apq8064":{
+    "CPU":"4x Krait 300 @ 1.5GHz",
+    "SoC":"Snapdragon 600 APQ8064"
+  },
+  "msm8916":{
+    "CPU":"4x Cortex-A53 @ 1.2GHz",
+    "SoC":"Snapdragon 410 MSM8916"
+  },
+  "msm8953":{
+    "CPU":"8x Cortex-A53 @ 2.0GHz",
+    "SoC":"Snapdragon 625 MSM8953"
+  },
+  "msm8952":{
+    "CPU":"8x Cortex-A53 @ 1.2GHz",
+    "SoC":"Snapdragon 617 MSM8952"
+  },
+  "msm8956":{
+    "CPU":"2x Cortex-A72 @ 1.8GHz 4x Cortex-A53 @ 1.4GHz",
+    "SoC":"Snapdragon 650 MSM8956"
+  },
+  "msm8974":{
+    "CPU":"4x Krait 400 @ 2.15GHz",
+    "SoC":"Snapdragon 800 MSM8974"
+  },
+  "msm8974pro-ab":{
+    "CPU":"4x Krait 400 @ 2.26GHz",
+    "SoC":"Snapdragon 801 MSM8974PRO-AB"
+  },
+  "msm8974pro-ac":{
+    "CPU":"4x Krait 400 @ 2.45GHz",
+    "SoC":"Snapdragon 801 MSM8974AC"
+  },
+  "msm8976":{
+    "CPU":"4x Cortex-A53 @ 1.4GHz 4x Cortex-A72 @ 1.8GHz",
+    "SoC":"Snapdragon 652 MSM8976"
+  },
+  "msm8976pro":{
+    "CPU":"4x Cortex-A53 @ 1.4GHz 4x Cortex-A72 @ 1.9GHz",
+    "SoC":"Snapdragon 653 MSM8976 Pro"
+  },
+  "msm8992":{
+    "CPU":"4x Cortex-A57 @ 1.8GHz 4x Cortex-A53 @ 1.4GHz",
+    "SoC":"Snapdragon 808 MSM8992"
+  },
+  "msm8994":{
+    "CPU":"4x Cortex-A57 @ 1.95GHz 4x Cortex-A53 @ 1.5GHz",
+    "SoC":"Snapdragon 810 MSM8994"
+  },
+  "msm8996":{
+    "CPU":"2x Kryo HP @ 1.8GHz 2x Kryo LP @ 1.36GHz",
+    "SoC":"Snapdragon 820 MSM8996"
+  },
+  "msm8996pro":{
+    "CPU":"2x Kryo HP @ 2.34GHz 2x Kryo LP @ 2.18GHz",
+    "SoC":"Snapdragon 821 MSM8996 Pro"
+  },
+  "msm8998":{
+    "CPU":"4x Kryo 280 HP @ 2.4GHz 4x Kryo 280 LP @ 1.9GHz",
+    "SoC":"Snapdragon 835 MSM8998"
+  },
+  "msmnile":{
+    "CPU":"1x Kryo 485 Gold @ 2.8GHz 3x Kryo 485 Gold @ 2.4GHz 4x Kryo 485 Silver @ 1.8GHz",
+    "SoC":"Snapdragon 855 SM8150"
+  },
+  "mt6795t":{
+    "CPU":"8x Cortex-A53 @ 2.1GHz",
+    "SoC":"MediaTek Helio X10 MT6795T"
+  },
+  "mt6797m":{
+    "CPU":"2x Cortex-A72 @ 2.1GHz 4x Cortex-A53 @ 1.85GHz 4x Cortex-A53 @ 1.4GHz",
+    "SoC":"MediaTek Helio X20 MT6797M"
+  },
+  "mt6750t":{
+    "CPU":"8x Cortex-A53 @ 1.5GHz",
+    "SoC":"MediaTek MT6750T"
+  },  
+  "mx5":{
+    "CPU":"8x Cortex-A53 @ 2.1GHz",
+    "SoC":"MediaTek Helio X10 MT6795T"
+  },
+  "mtk6575":{
+    "CPU":"1x Cortex-A9 @ 1.0GHz",
+    "SoC":"MediaTek MT6575"
+  },
+  "noh":{
+    "CPU":"4x Cortex-A77 @ 3.1GHz 4x Cortex-A55 @ 2.0GHz",
+    "SoC":"HiSilicon Kirin 9000"
+  },
+  "sdm710":{
+    "CPU":"2x Kryo 385 Gold @ 2.2GHz 6x Kryo 385 Silver @ 1.7GHz",
+    "SoC":"Snapdragon 710 SDM710"
+  },
+  "sdm845":{
+    "CPU":"4x Kryo 385 Gold @ 2.8GHz 4x Kryo 385 Silver @ 1.7GHz",
+    "SoC":"Snapdragon 845 SDM845"
+  },
+  "monterey":{
+    "CPU":"4x Kryo 280 HP @ 2.45GHz 4x Kryo 280 LP @ 1.9GHz",
+    "SoC":"Snapdragon 835 MSM8998"
+  },
+  "oriole":{
+    "CPU":"2x Cortex-X1 @ 2.8GHz 2x Cortex-A76 @ 2.2GHz 4x Cortex-A55 @ 1.8GHz",
+    "SoC":"Google Tensor (Whitechapel)"
+  },
+  "oppo6779_18073":{
+    "CPU":"2x Cortex-A75 @ 2.2GHz 6x Cortex-A55 @ 2GHz",
+    "SoC":"Mediatek MT6779 Helio P90"
+  },
+  "gt-p7510":{
+    "CPU":"2x Cortex-A9 @ 1.0GHz",
+    "SoC":"nVIDIA Tegra 2 T20"
+  },
+  "pacific":{
+    "CPU":"2x @ 2.1GHz 2x @ 1.6GHz",
+    "SoC":"Snapdragon 820E Embedded"
+  },
+  "piranha":{
+    "CPU":"2x Cortex-A9 @ 1.0GHz",
+    "SoC":"Texas Instruments OMAP4430"
+  },
+  "pro5":{
+    "CPU":"4xCortex-56 @ 2.1GHz 4x Cortex-53 @ 1.5GHz",
+    "SoC":"Exynos 7 Octa 7420"
+  },
+  "pro7plus":{
+    "CPU":"2x Cortex-A73 @ 2.6GHz 4x Cortex-A53 @ 2.2GHz 4x Cortex-A35 @ 1.9GHz",
+    "SoC":"MediaTek Helio X30 MT6799"
+  },
+  "pxa986":{
+    "CPU":"2x Cortex-A9 @ 1.2GHz",
+    "SoC":"Marvell PXA988"
+  },
+  "pxa19xx":{
+    "CPU":"4x Cortex-A53 @ 1.25GHz",
+    "SoC":"Maxvell Armada PXA1908"
+  },
+  "rhea_ss_corsicass":{
+    "CPU":"1x Cortex-A9 @ 0.9GHz",
+    "SoC":"Broadcom BCM21654"
+  },
+  "panther":{
+    "CPU":"1x Cortex-X1 @ 2.8GHz 2x Cortex-A78 @ 2.3GHz 4x Cortex-A55 @ 1.8GHz",
+    "SoC":"Google Tensor G2"
+  },
+  "prada":{
+    "CPU":"4x Cortex-A53 @ 1.4 GHz 4x Cortex-A53 @ 1.1GHz",
+    "SoC":"Snapdragon 430 MSM8937"
+  },
+  "pro6plus":{
+    "CPU":"4x Exynos M1 @ 1.97GHz 4x Cortex-A53 @ 1.48GHz",
+    "SoC":"Exynos 8 Octa 8890"
+  },
+  "universal3110":{
+    "CPU":"1x Cortex-A8 @ 1.2GHz",
+    "SoC":"Exynos 3 Single 3110"
+  },
+  "universal9820":{
+    "CPU":"2x Exynos M4 @ 2.7GHz 2x Cortex-A75 @ 2.3GHz 4x Cortex-A55 @ 1.95GHz",
+    "SoC":"Exynos 9 9820"
+  },
+  "redfin":{
+    "CPU":"2x Kryo 475 Gold @ 2.4GHz 2x Kryo 475 Gold 2.2GHz 6x Kryo 475 Silver @ 1.8GHz ",
+    "SoC":"Snapdragon 765/765G"
+  },
+  "s5e9925":{
+    "CPU":"1x Cortex-X2 @ 2.8GHZ 3x Cortex-A710 @ 2.5GHz 4x Cortex-A510 @ 1.8GHz",
+    "SoC":"Exynos 2200"
+  },
+  "saturn":{
+    "CPU":"4x Krait 450 @ 2.45GHz",
+    "SoC":"Snapdragon 805 APQ8084"
+  },
+  "sailfish":{
+    "CPU":"2x Kryo HP @ 2.15GHz 2x Kryo @ 1.6GHz",
+    "SoC":"Snapdragon 821 MSM8996 Pro"
+  },
+  "sdm660":{
+    "CPU":"4x Kryo 260 HP @ 2.2GHz 4x Kryo 260 LP @ 1.8GHz",
+    "SoC":"Snapdragon 660"
+  },
+  "sc-02b":{
+    "CPU":"1x Cortex-A8 @ 1.2GHz",
+    "SoC":"Exynos 3 Single 3110"
+  },
+  "sch-i905":{
+    "CPU":"2x Cortex-A9 @ 1.0GHz",
+    "SoC":"nVIDIA Tegra 2 T20"
+  },
+  "sc7730s":{
+    "CPU":"4x Cortex-A7 @ 1.3GHz",
+    "SoC":"Spreadtrum SC7730S"
+  },
+  "shamu":{
+    "CPU":"4x Krai 450 @ 2.65GHz",
+    "SoC":"Snapdragon 805 APQ8084AB"
+  },
+  "shiba":{
+    "CPU":"1x Cortex-X3 @ 2.9GHz 4x Cortex-A715 @ 2.3GHz 4x Cortex-A510 @ 1.7GHz",
+    "SoC":"Google Tensor G3 (GS301)"
+  },
+  "sm6150":{
+    "CPU":"2x Kryo 460 Gold @ 2GHz 6x 460 Kryo Silver @ 1.7GHz",
+    "SoC":"Snapdragon 675 SM6150"
+  },
+  "smdkc110":{
+    "CPU":"1x Cortex-A8 @ 1.2GHz",
+    "SoC":"Exynos 3 Single 3110"
+  },
+  "sun":{
+    "CPU":"2x Oryon @ 4.5GHz 6x Oryon @ 3.5GHz",
+    "SoC":"Snapdragon 9 Elite (SM8750)"
+  },
+  "ums512_25c10": {
+    "CPU":"2 Cortex-A75 @2GHz 6x Cortex-A55 @ 2 GHz",
+    "SoC":"Unisoc Tiger T618"
+  },
+  "universal3250":{
+    "CPU":"2x Cortex-A7 @ 1.0GHz",
+    "SoC":"Exynos 2 Dual 3250"
+  },
+  "universal3470":{
+    "CPU":"4x Cortex-A7 @ 1.4GHz",
+    "SoC":"Exynos 3 Quad 3470"
+  },
+  "universal3475":{
+    "CPU":"4x Cortex-A7 @ 1.3GHz",
+    "SoC":"Exynos 3 Quad 3475"
+  },
+  "universal4210":{
+    "CPU":"2x Cortex-A9 @ 1.4GHz",
+    "SoC":"Exynos 4 Dual 4210"
+  },
+  "universal4212":{
+    "CPU":"2x Cortex-A9 @ 1.5GHz",
+    "SoC":"Exynos 4 Dual 4212"
+  },
+  "universal4412":{
+    "CPU":"4x Cortex-A9 @ 1.4GHz",
+    "SoC":"Exynos 4 Quad 4412"
+  },
+  "smdk4x12":{
+    "CPU":"4x Cortex-A9 @ 1.4GHz",
+    "SoC":"Exynos 4 Quad 4412"
+  },
+  "universal4415":{
+    "CPU":"4x Cortex-A9 @ 1.5GHz",
+    "SoC":"Exynos 4 Quad 4415"
+  },
+  "universal5250":{
+    "CPU":"2x Cortex-A15 @ 1.7GHz",
+    "SoC":"Exynos 5 Dual 5250"
+  },
+  "universal5260":{
+    "CPU":"2x Cortex-A15 @ 1.7GHz 4x Cortex-A7 @ 1.3GHz",
+    "SoC":"Exynos 5 Hexa 5260"
+  },
+  "universal5410":{
+    "CPU":"4x Cortex-A15 @ 1.6GHz 4x Cortex-A7 @ 1.2GHz",
+    "SoC":"Exynos 5 Octa 5410"
+  },
+  "universal5420":{
+    "CPU":"4x Cortex-A15 @ 1.9GHz 4x Cortex-A7 @ 1.3GHz",
+    "SoC":"Exynos 5 Octa 5420"
+  },
+  "universal5422":{
+    "CPU":"4x Cortex-A15 @ 2.1GHz 4x Cortex-A7 @ 1.5GHz",
+    "SoC":"Exynos 5 Octa 5422"
+  },
+  "universal5430":{
+    "CPU":"4x Cortex-A15 @ 1.8GHz 4x Cortex-A7 @ 1.3GHz",
+    "SoC":"Exynos 5 Octa 5430"
+  },
+  "universal5800":{
+    "CPU":"4x Cortex-A15 @ 2.0GHz 4x Cortex-A7 @ 1.3GHz",
+    "SoC":"Exynos 5 Octa 5800"
+  },
+  "universal5433":{
+    "CPU":"4x Cortex-A57 @ 1.9GHz 4x Cortex-A53 @ 1.3GHz",
+    "SoC":"Exynos 7 Octa 5433"
+  },
+  "universal7420":{
+    "CPU":"4x Cortex-A57 @ 2.1GHz 4x Cortex-A53 @ 1.5GHz",
+    "SoC":"Exynos 7 Octa 7420"
+  },
+  "universal7570":{
+    "CPU":"8x Cortex-A53 @ 1.4GHz",
+    "SoC":"Exynos 7 Quad 7570"
+  },
+  "universal7580":{
+    "CPU":"8x Cortex-A53 @ 1.6GHz",
+    "SoC":"Exynos 7 Octa 7580"
+  },
+  "universal7870":{
+    "CPU":"8x Cortex-A53 @ 1.6GHz",
+    "SoC":"Exynos 7 Octa 7870"
+  },
+  "universal7880":{
+    "CPU":"8x Cortex-A53 @ 1.9GHz",
+    "SoC":"Exynos 7 Octa 7880"
+  },
+  "universal7872":{
+    "CPU":"2x Cortex-A73 @ 2.0GHz 4x Cortex-A53 @ 1.6GHz",
+    "SoC":"Exynos 7 Hexa 7872"
+  },
+  "universal7885":{
+    "CPU":"2x Cortex-A73 @ 2.2GHz 6x Cortex-A53 @ 1.6GHz",
+    "SoC":"Exynos 7 Octa 7885"
+  },
+  "universal8890":{
+    "CPU":"4x Cortex-A53 @ 1.6GHz 4x Samsung Exynos M1 @ 2.6GHz",
+    "SoC":"Exynos 8 Octa 8890"
+  },
+  "universal8895":{
+    "CPU":"4x Samsung Exynos M1 @ 2.3GHz 4x Cortex-A53 @ 1.6GHz",
+    "SoC":"Exynos 9 Octa 8895"
+  },
+  "universal9810":{
+    "CPU":"4x Samsung Exynos M3 @ 2.8GHz 4x Cortex-A55 @ 1.7GHz",
+    "SoC":"Exynos 9 Series 9810"
+  },
+  "universal9825":{
+    "CPU":"2x Samsung Exynos M4 @ 2.7GHz 2x Cortex-A75 @ 2.4GHz 4x Cortex-A55 @ 1.9GHz",
+    "SoC":"Exynos 9 Series 9825"
+  },
+  "ville":{
+    "CPU":"2x Krait @ 1.5GHz",
+    "SoC":"Snapdragon S4 MSM8290"
+  },
+  "vog":{
+    "CPU":"2x Cortex-A76 @ 2.6GHz 2x Cortex-A76 @ 1.9GHz 4x Cortex-A55 @ 1.8GHz",
+    "SoC":"HiSilicon Kirin 980"
+  },
+  "venus":{
+    "CPU":"1x Cortex-X1 @ 2.8GHz 3x Cortex-A78 @ 2.4GHz 4x Cortex-A55 @ 1.8GHz",
+    "SoC":"Snapdragon 888 SM8350"
+  },
+  "vtr":{
+    "CPU":"4x Cortex-A73 @ 2.4GHz 4x Cortex-A53 @ 1.8GHz",
+    "SoC":"HiSilicon Kirin 960"
+  },
+  "taimen":{
+    "CPU":"4x Kryo 280 HP @ 2.45GHz 4x Kryo 280 LP @ 1.9GHz",
+    "SoC":"Snapdragon 835 MSM8998"
+  },
+  "tn8":{
+    "CPU":"4x Cortex-A15 @2.2GHz",
+    "SoC":"nVIDIA Tegra K1 T124"
+  },  
+  "taro":{
+    "CPU":"1x Cortex-X2 @ 3GHz 3x Cortex-A710 @ 2.5GHz 4x Cortex-A510 @ 1.8GHz",
+    "SoC":"Snapdragon 8 Gen 1 (SM8450)"
+  },
+  "thebes":{
+    "CPU":"2x Cortex-A15 @ 1.5GHz 2x Cortex-A7 @ 1.2GHz",
+    "SoC":"MediaTek MT8135"
+  },
+  "trinket":{
+    "CPU":"4x Kryo 260 HP @ 2GHz 4x Kryo 260 LP @ 1.8GHz",
+    "SoC":"Snapdragon 665 SM6125"
+  },
+  "tuna":{
+    "CPU":"2x Cortex-A9 @ 1.2GHz",
+    "SoC":"TI OMAP 4460"
+  },
+  "vu2kt":{
+    "CPU":"2x Krait @ 1.5GHz",
+    "SoC":"Snapdragon S4 Plus MSM8960"
+  },
+  "walleye":{
+    "CPU":"4x Kryo 280 HP @ 2.45GHz 4x Kryo 280 LP @ 1.9GHz",
+    "SoC":"Snapdragon 835 MSM8998"
+  },
+  "wikipad":{
+    "CPU":"4x Cortex-A9 @ 1.3GHz 1x Cortex-A9 @ 0.5GHz",
+    "SoC":"nVIDIA Tegra 3 T30L"
+  },
+  "qc_reference_phone":{
+    "CPU":"2x Kryo HP @ 2.15GHz 2x Kryo LP @ 1.36GHz",
+    "SoC":"Snapdragon 820 MSM8996"
+  },
+  "z4u":{
+    "CPU":"4x Cortex-A5 @ 1.2GHz",
+    "SoC":"Snapdragon 200 MSM8225Q"
+  },
+  "zs600kl":{
+    "CPU":"4x Kryo 385 Gold @ 3GHz 4x Kryo 385 Silver @ 1.8GHz",
+    "SoC":"Snapdragon 845"
+  },
+   "mt6765v":{
+    "CPU":"4x Cortex-A53 @ 2.3GHz 4x Cortex-A53 @ 1.8GHz",
+    "SoC":"Mediatek MT6765G Helio G35 (12 nm)"
+  },
+  "k65v1_64_bsp_titan_rat":{
+    "CPU":"4x Cortex-A53 @ 2.3GHz 4x Cortex-A53 @ 1.8GHz",
+    "SoC":"Mediatek MT6765 Helio P35 (12nm)"
+  },
+  "careena":{
+    "CPU":"AMD 670F00h",
+    "SoC":"AMD A4-9120C RADEON R4, 5 COMPUTE CORES 2C+3G"
+  },
+  "sion":{
+    "CPU":"i3-8130U CPU 2.2GHz SoC",
+    "SoC":"i3-8130U CPU 2,2 GHz soc"
+  },
+  "biloba":{
+    "CPU":"2x Cortex-A75 @ 2.0GHz 6x Cortex-A55 @ 1.8GHz",
+    "SoC":"Mediatek MT6769Z Helio G85 (12nm)"
+  },
+  "ele":{
+    "CPU":"2x Cortex-A76 @ 2.6GHz 2x Cortex-A76 @ 1.9GHz 4x Cortex-A55 @ 1.8GHz",
+    "SoC":"Kirin 980 (7 nm)"
+  },
+  "krane":{
+    "CPU":"4x Cortex-A73 @ 2.0GHz + 4x Cortex-A53 @ 2.0GHz",
+    "SoC":"MediaTekHelio P60T (12nm)"
+  },
+  "pineapple":{
+    "CPU":"1x Cortex-X4 @ 3.3GHz 3x Cortex-A720 @ 3.2GHz 2x Cortex-A720 @ 2.6GHz 4x Cortex-A520 @ 2.3GHz", 
+    "SoC":"Qualcomm SM8650-AB Snapdragon 8 Gen 3"
+  },
+  "s5e9945":{
+    "CPU":"1x Cortex-X4 @ 3.2GHz 2x Cortex-A720 @ 2.9GHz 3x Cortex-A720 @ 2.6GHz 4x Cortex-A520 @ 2.0GHz", 
+    "SoC":"Exynos 2400"
+  },
+  "a12":{
+    "CPU":"4x Cortex-A53 @ 2.35GHz 4x Cortex-A53 @ 1.8GHz",
+    "SoC":"MediaTek Helio P35 (MT6765)"
+  }
+}

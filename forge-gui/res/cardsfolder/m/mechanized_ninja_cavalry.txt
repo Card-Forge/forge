@@ -1,0 +1,7 @@
+Name:Mechanized Ninja Cavalry
+ManaCost:1 RW
+Types:Artifact Creature Robot Ninja
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters, create a 1/1 colorless Robot artifact creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_a_robot | TokenOwner$ You
+Oracle:When this creature enters, create a 1/1 colorless Robot artifact creature token.

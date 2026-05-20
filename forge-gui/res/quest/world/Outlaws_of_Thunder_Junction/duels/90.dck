@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Galadriel
+Title=Galadriel
+Icon=Galadriel.jpg
+Difficulty=Very Hard
+Description=./Modern/Outlaws_of_Thunder_Junction/Ishii_Hiroyuki_-_Prowess_Aggro_(Modern,_#2089254).dck
+Deck Type=constructed
+
+[Main]
+4 Soul-Scar Mage
+4 Monastery Swiftspear
+4 Dragon's Rage Channeler
+4 Slickshot Show-Off
+4 Mishra's Bauble
+4 Lightning Bolt
+4 Lava Dart
+3 Mutagenic Growth
+2 Unholy Heat
+3 Preordain
+4 Expressive Iteration
+2 Underworld Breach
+2 Mountain
+3 Spirebluff Canal
+1 Stomping Ground
+3 Steam Vents
+3 Wooded Foothills
+4 Scalding Tarn
+1 Fiery Islet
+1 Thundering Falls
+[Sideboard]
+2 Spell Pierce
+3 Tormod's Crypt
+1 Cursed Totem
+2 Alpine Moon
+1 Jegantha, the Wellspring
+1 Unholy Heat
+1 Stern Scolding
+2 Flame of Anor
+2 Pick Your Poison

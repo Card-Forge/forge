@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Minerva McGonagall
+Title=Minerva McGonagall
+Icon=Minerva McGonagall.jpg
+Difficulty=Very Hard
+Description=./Modern/Murders_at_Karlov_Manor/Jack_Heck_-_Uw_Hammer_(Modern,_#1978052)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Esper Sentinel
+1 Gingerbrute
+4 Ornithopter
+4 Puresteel Paladin
+4 Stoneforge Mystic
+4 Colossus Hammer
+1 Cryptic Coat
+1 Kaldra Compleat
+1 Shadowspear
+3 Springleaf Drum
+3 Surge of Salvation
+2 Steelshaper's Gift
+4 Urza's Saga
+2 Forge Anew
+4 Sigarda's Aid
+3 Flooded Strand
+2 Hallowed Fountain
+3 Inkmoth Nexus
+2 Marsh Flats
+4 Plains
+2 Seachrome Coast
+2 Windswept Heath
+[Sideboard]
+3 Cursed Totem
+3 Failure // Comply
+1 Pithing Needle
+2 Prismatic Ending
+1 Reprieve
+1 Soul-Guide Lantern
+3 Spell Pierce
+1 Surge of Salvation

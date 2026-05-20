@@ -1,0 +1,7 @@
+Name:Gallant Citizen
+ManaCost:GW GW
+Types:Creature Human Citizen
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this creature enters, draw a card.
+SVar:TrigDraw:DB$ Draw
+Oracle:When this creature enters, draw a card.

@@ -43,7 +43,7 @@ public class SpellSmithScene extends UIScene {
 
     private List<PaperCard> cardPool = new ArrayList<>();
     private TextraLabel playerGold, playerShards, poolSize;
-    private final TextraButton pullUsingGold, pullUsingShards, acceptReward, declineReward, exitSmith;
+    private final TextraButton pullUsingGold, pullUsingShards, acceptReward, declineReward, exitSmith, reset;
     private final ScrollPane rewardDummy;
     private RewardActor rewardActor;
     SelectBox<CardEdition> editionList;
@@ -73,6 +73,7 @@ public class SpellSmithScene extends UIScene {
         super(Forge.isLandscapeMode() ? "ui/spellsmith.json" : "ui/spellsmith_portrait.json");
 
         editionList = ui.findActor("BSelectPlane");
+        reset = ui.findActor("BReset");
         rewardDummy = ui.findActor("RewardDummy");
         rewardDummy.setVisible(false);
 
@@ -98,6 +99,7 @@ public class SpellSmithScene extends UIScene {
                 button.addListener(new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
+                        if (button.isDisabled()) { return; }
                         selectColor(i);
                         filterResults();
                     }
@@ -111,6 +113,8 @@ public class SpellSmithScene extends UIScene {
                 button.addListener(new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
+                        if (button.isDisabled()) { return; }
+
                         if (selectRarity(i)) button.setColor(Color.RED);
                         filterResults();
                     }
@@ -124,6 +128,8 @@ public class SpellSmithScene extends UIScene {
                 button.addListener(new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
+                        if (button.isDisabled()) { return; }
+
                         if (selectCost(i)) button.setColor(Color.RED);
                         filterResults();
                     }
@@ -137,6 +143,7 @@ public class SpellSmithScene extends UIScene {
         ui.onButtonPress("pullUsingGold", () -> SpellSmithScene.this.pullCard(false));
         ui.onButtonPress("pullUsingShards", () -> SpellSmithScene.this.pullCard(true));
         ui.onButtonPress("BReset", () -> {
+            if (reset.isDisabled()) { return; }
             reset();
             filterResults();
         });
@@ -320,6 +327,10 @@ public class SpellSmithScene extends UIScene {
         editionList.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                if (editionList.isDisabled()) {
+                    return;
+                }
+
                 editionList.showScrollPane();
             }
         });
@@ -401,7 +412,7 @@ public class SpellSmithScene extends UIScene {
         if (cost_low > -1) totalCost *= 2.5f; //And CMC cost multiplier.
 
         cardPool = StreamUtil.stream(P).collect(Collectors.toList());
-        poolSize.setText(((cardPool.size() > 0 ? "[/][FOREST]" : "[/][RED]")) + cardPool.size() + " possible card" + (cardPool.size() != 1 ? "s" : ""));
+        poolSize.setText(((cardPool.size() > 0 ? "[/][FOREST]" : "[/][RED]")) + cardPool.size() + " possible card" + (cardPool.size() > 1 ? "s" : ""));
         currentPrice = (int) totalCost;
         currentShardPrice = (int) (totalCost * 0.2f); //Intentionally rounding up via the cast to int
         pullUsingGold.setText("[+Pull][+goldcoin] "+ currentPrice);
@@ -428,14 +439,14 @@ public class SpellSmithScene extends UIScene {
         }
         if (rewardActor != null) rewardActor.remove();
         rewardActor = new RewardActor(currentReward, true, null, true);
-        rewardActor.flip(); //Make it flip so it draws visual attention, why not.
-        rewardActor.setBounds(rewardDummy.getX(), rewardDummy.getY(), rewardDummy.getWidth(), rewardDummy.getHeight());
         stage.addActor(rewardActor);
+        rewardActor.setBounds(rewardDummy.getX(), rewardDummy.getY(), rewardDummy.getWidth(), rewardDummy.getHeight());
+        rewardActor.flip(); //Make it flip so it draws visual attention, why not.
 
         acceptReward.setVisible(true);
         declineReward.setVisible(true);
-        exitSmith.setDisabled(true);
-        disablePullButtons();
+
+        disableFilterAndPullButtons();
     }
 
     private void acceptSmithing() {
@@ -448,7 +459,7 @@ public class SpellSmithScene extends UIScene {
         Current.player().addReward(currentReward);
 
         clearReward();
-        updatePullButtons();
+        updateFilterAndPullButtons();
     }
 
     private void declineSmithing() {
@@ -461,7 +472,7 @@ public class SpellSmithScene extends UIScene {
         }
 
         clearReward();
-        updatePullButtons();
+        updateFilterAndPullButtons();
     }
 
     private void clearReward() {
@@ -470,7 +481,7 @@ public class SpellSmithScene extends UIScene {
     }
 
 
-    private void updatePullButtons() {
+    private void updateFilterAndPullButtons() {
         pullUsingGold.setDisabled(Current.player().getGold() < currentPrice);
         pullUsingShards.setDisabled(Current.player().getShards() < currentShardPrice);
 
@@ -478,10 +489,40 @@ public class SpellSmithScene extends UIScene {
         declineReward.setVisible(false);
 
         exitSmith.setDisabled(false);
+        reset.setDisabled(false);
+        editionList.setDisabled(false);
+
+        for(TextraButton button : rarityButtons.values()) {
+            button.setDisabled(false);
+        }
+
+        for(TextraButton button : colorButtons.values()) {
+            button.setDisabled(false);
+        }
+
+        for(TextraButton button : costButtons.values()) {
+            button.setDisabled(false);
+        }
     }
 
-    private void disablePullButtons() {
+    private void disableFilterAndPullButtons() {
         pullUsingGold.setDisabled(true);
         pullUsingShards.setDisabled(true);
+
+        exitSmith.setDisabled(true);
+        reset.setDisabled(true);
+        editionList.setDisabled(true);
+
+        for(TextraButton button : rarityButtons.values()) {
+            button.setDisabled(true);
+        }
+
+        for(TextraButton button : colorButtons.values()) {
+            button.setDisabled(true);
+        }
+
+        for(TextraButton button : costButtons.values()) {
+            button.setDisabled(true);
+        }
     }
 }

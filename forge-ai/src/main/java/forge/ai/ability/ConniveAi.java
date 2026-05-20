@@ -119,7 +119,7 @@ public class ConniveAi extends SpellAbilityAi {
             }
         }
         return new AiAbilityDecision(
-                sa.isTargetNumberValid() && !sa.getTargets().isEmpty() ? 100 : 0,
+                sa.isTargetNumberValid() ? 100 : 0,
                 sa.isTargetNumberValid() ? AiPlayDecision.WillPlay : AiPlayDecision.TargetingFailed
         );
     }

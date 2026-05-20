@@ -1,0 +1,9 @@
+Name:Aurora Awakener
+ManaCost:6 G
+Types:Creature Giant Druid
+PT:7/7
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDigUntil | TriggerDescription$ Vivid — When this creature enters, reveal cards from the top of your library until you reveal X permanent cards, where X is the number of colors among permanents you control. Put any number of those permanents onto the battlefield, then put the rest of the revealed cards on the bottom of your libray in a random order.
+SVar:TrigDigUntil:DB$ DigUntil | Amount$ X | Valid$ Permanent | ValidDescription$ permanent | RevealedDestination$ Library | OptionalFoundMove$ True | RevealedLibraryPosition$ -1 | FoundDestination$ Battlefield | RevealRandomOrder$ True
+SVar:X:Count$Valid Permanent.YouCtrl$Colors
+Oracle:Trample\nVivid — When this creature enters, reveal cards from the top of your library until you reveal X permanent cards, where X is the number of colors among permanents you control. Put any number of those permanents onto the battlefield, then put the rest of the revealed cards on the bottom of your libray in a random order.

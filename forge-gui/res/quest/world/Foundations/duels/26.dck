@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Yemaya
+Title=Yemaya
+Icon=Yemaya.jpg
+Difficulty=Easy
+Description=./Standard/Foundations/PNascimento_-_Red_Deck_Wins_(Standard,_#2278664).dck
+Deck Type=constructed
+
+[Main]
+4 Emberheart Challenger
+4 Heartfire Hero
+3 Hired Claw
+4 Manifold Mouse
+4 Screaming Nemesis
+4 Monastery Swiftspear
+1 Kellan, Planar Trailblazer
+4 Burst Lightning
+4 Lightning Strike
+4 Monstrous Rage
+3 Witchstalker Frenzy
+17 Mountain
+4 Rockface Village
+[Sideboard]
+2 Lithomantic Barrage
+3 Urabrask's Forge
+4 Torch the Tower
+3 Twisted Fealty
+3 Sunspine Lynx

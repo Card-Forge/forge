@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Napoleon
+Title=Napoleon
+Icon=Napoleon.jpg
+Difficulty=Very Hard
+Description=../Modern/Gatecrash/PTQ_Dragon┬┤s_Maze_-_Dublin/Wesley_Bergen_-_Boros_(Modern,_#47493).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Figure of Destiny
+4 Goblin Guide
+3 Grim Lavamancer
+2 Kiln Fiend
+4 Plated Geopede
+4 Steppe Lynx
+4 Boros Charm
+4 Lightning Bolt
+3 Lightning Helix
+4 Searing Blaze
+3 Shard Volley
+4 Arid Mesa
+4 Flagstones of Trokair
+3 Ghost Quarter
+3 Mountain
+4 Sacred Foundry
+4 Scalding Tarn
+[Sideboard]
+2 Auriok Champion
+3 Blood Moon
+2 Combust
+1 Plains
+3 Smash to Smithereens
+2 Thalia, Guardian of Thraben
+2 Torpor Orb

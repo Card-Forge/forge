@@ -1,0 +1,8 @@
+Name:Splinter, Hamato Yoshi
+ManaCost:1 B
+Types:Legendary Creature Mutant Ninja Rat
+PT:1/3
+K:Sneak:B
+K:Menace
+S:Mode$ Continuous | Affected$ Ninja.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Ninjas you control get +1/+1.
+Oracle:Sneak {B} (You may cast this spell for {B} if you also return an unblocked attacker you control to hand during the declare blockers step. It enters tapped and attacking.)\nMenace (This creature can't be blocked except by two or more creatures.)\nOther Ninjas you control get +1/+1.

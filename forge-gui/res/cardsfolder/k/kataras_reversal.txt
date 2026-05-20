@@ -1,0 +1,6 @@
+Name:Katara's Reversal
+ManaCost:2 U U
+Types:Instant
+A:SP$ Counter | TargetType$ Spell,Activated,Triggered | TgtPrompt$ Select up to four target spells and/or abilities | ValidTgts$ Card,Emblem | TargetMin$ 0 | TargetMax$ 4 | SubAbility$ DBUntap | SpellDescription$ Counter up to four target spells and/or abilities. Untap up to four target artifacts and/or creatures.
+SVar:DBUntap:DB$ Untap | ValidTgts$ Artifact,Creature | TargetMin$ 0 | TargetMax$ 4 | TgtPrompt$ Select up to four target artifacts and/or creatures
+Oracle:Counter up to four target spells and/or abilities.\nUntap up to four target artifacts and/or creatures.

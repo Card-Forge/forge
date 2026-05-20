@@ -6,7 +6,7 @@ R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ 
 SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True | SubAbility$ DBAddCounter
 SVar:DBAddCounter:DB$ PutCounter | Defined$ Self | ETB$ True | CounterType$ STUN | CounterNum$ 9
 T:Mode$ Drawn | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | OpponentTurn$ True | Execute$ TrigToken | TriggerDescription$ Whenever you draw a card during an opponent's turn, create a 1/1 blue Tentacle creature token.
-SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ u_1_1_tentacle
+SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenScript$ u_1_1_tentacle
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Tentacle.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever a Tentacle you control dies, untap up to one target Kraken and put a stun counter on up to one target nonland permanent.
 SVar:TrigUntap:DB$ Untap | ValidTgts$ Kraken | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose up to one target Kraken | SubAbility$ DBStunCounter
 SVar:DBStunCounter:DB$ PutCounter | ValidTgts$ Permanent.nonLand | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose up to one target nonland permanent | CounterType$ Stun | CounterNum$ 1

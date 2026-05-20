@@ -2,24 +2,14 @@ package forge.game.event;
 
 import forge.game.GameType;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.util.Lang;
 import forge.util.TextUtil;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
-public class GameEventGameStarted extends GameEvent {
+public record GameEventGameStarted(GameType gameType, PlayerView firstTurn, Iterable<PlayerView> players) implements GameEvent {
 
-    public final Player firstTurn;
-    public final Iterable<Player> players;
-    public final GameType gameType;
-
-    public GameEventGameStarted(GameType type, Player firstTurn, Iterable<Player> players) {
-        super();
-        this.gameType = type;
-        this.firstTurn = firstTurn;
-        this.players = players;
+    public GameEventGameStarted(GameType gameType, Player firstTurn, Iterable<Player> players) {
+        this(gameType, PlayerView.get(firstTurn), PlayerView.getCollection(players));
     }
 
     @Override

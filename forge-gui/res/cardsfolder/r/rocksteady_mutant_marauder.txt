@@ -1,0 +1,9 @@
+Name:Rocksteady, Mutant Marauder
+ManaCost:2 G
+Types:Legendary Creature Rhino Mutant
+PT:3/3
+K:Partner with:Bebop, Skull & Crossbones:Bebop
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+!token+Other | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another nontoken creature you control enters, put a +1/+1 counter on target creature.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1
+Oracle:Partner with Bebop, Skull & Crossbones (When this creature enters, target player may put Bebop into their hand from their library, then shuffle.)\nTrample\nWhenever another nontoken creature you control enters, put a +1/+1 counter on target creature.

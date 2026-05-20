@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=SerendibGenie
+Title=SerendibGenie
+Icon=SerendibGenie.jpg
+Difficulty=Medium
+Description=./Standard/Streets_of_New_Capenna/Alexander_Andersson_-_Abzan_Aggro_(Standard,_#1380582).dck
+Deck Type=constructed
+
+[Main]
+1 Legion Angel
+2 Valki, God of Lies
+3 Tenacious Underdog
+4 Fable of the Mirror-Breaker
+4 Luminarch Aspirant
+2 Infernal Grasp
+3 Vanishing Verse
+1 Emeria's Call
+2 Duress
+3 The Meathook Massacre
+3 Showdown of the Skalds
+4 Wedding Announcement
+1 Elspeth Resplendent
+2 The Wandering Emperor
+1 Den of the Bugbear
+1 Eiganjo, Seat of the Empire
+1 Plains
+2 Sundown Pass
+2 Hive of the Eye Tyrant
+3 Swamp
+3 Needleverge Pathway
+4 Shattered Sanctum
+4 Haunted Ridge
+4 Brightclimb Pathway
+[Sideboard]
+1 Angelfire Ignition
+1 The Meathook Massacre
+1 Burn Down the House
+1 Go Blank
+1 Farewell
+2 Infernal Grasp
+2 Duress
+3 Legion Angel
+3 Archon of Emeria

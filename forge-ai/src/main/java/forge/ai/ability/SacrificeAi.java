@@ -32,7 +32,7 @@ public class SacrificeAi extends SpellAbilityAi {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
         // AI should only activate this during Human's turn
 
         return sacrificeTgtAI(ai, sa, false);
@@ -98,8 +98,7 @@ public class SacrificeAi extends SpellAbilityAi {
             }
 
             if (num.equals("X") && sa.getSVar(num).equals("Count$xPaid")) {
-                // Set PayX here to maximum value.
-                sa.setXManaCostPaid(Math.min(ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger()), amount));
+                sa.setXManaCostPaid(Math.min(ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger()), amount));
             }
 
             final int half = (amount / 2) + (amount % 2); // Half of amount rounded up
@@ -127,8 +126,7 @@ public class SacrificeAi extends SpellAbilityAi {
             int amount = AbilityUtils.calculateAmount(source, num, sa);
 
             if (num.equals("X") && sa.getSVar(num).equals("Count$xPaid")) {
-                // Set PayX here to maximum value.
-                amount = Math.min(ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger()), amount);
+                amount = Math.min(ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger()), amount);
             }
 
             List<Card> humanList = CardLists.getValidCards(ai.getStrongestOpponent().getCardsIn(ZoneType.Battlefield), valid, sa.getActivatingPlayer(), source, sa);
@@ -156,9 +154,8 @@ public class SacrificeAi extends SpellAbilityAi {
 
                     if (c.hasSVar("SacMe") || isLethal) {
                         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                    } else {
-                        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                     }
+                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
                 if (c.hasSVar("SacMe") || ComputerUtilCard.evaluateCreature(c) <= 135) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
@@ -211,7 +208,7 @@ public class SacrificeAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+    public boolean willPayUnlessCost(Player payer, SpellAbility sa, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         // Icy Prison
         if (payers.size() > 1) {
             final Player p = sa.getActivatingPlayer();
@@ -221,6 +218,6 @@ public class SacrificeAi extends SpellAbilityAi {
             }
         }
 
-        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
+        return super.willPayUnlessCost(payer, sa, cost, alreadyPaid, payers);
     }
 }

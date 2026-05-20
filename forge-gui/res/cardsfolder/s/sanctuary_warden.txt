@@ -6,7 +6,7 @@ K:Flying
 K:etbCounter:SHIELD:2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME enters or attacks, you may remove a counter from a creature or planeswalker you control. If you do, draw a card and create a 1/1 green and white Citizen creature token.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChange | TriggerZones$ Battlefield | OptionalDecider$ You | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters or attacks, you may remove a counter from a creature or planeswalker you control. If you do, draw a card and create a 1/1 green and white Citizen creature token.
-SVar:TrigChange:AB$ Draw | Cost$ RemoveAnyCounter<1/Any/Card.Creature;Card.Planeswalker/a creature or planeswalker you control> | SubAbility$ DBToken
+SVar:TrigChange:AB$ Draw | Cost$ RemoveAnyCounter<1/Any/Creature;Planeswalker> | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenScript$ gw_1_1_citizen
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Token|Counters & Type$Citizen

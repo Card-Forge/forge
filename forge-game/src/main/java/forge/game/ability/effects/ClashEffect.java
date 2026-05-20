@@ -5,6 +5,7 @@ import java.util.Map;
 import forge.game.GameAction;
 import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityKey;
+import forge.game.event.GameEventAddLog;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -23,7 +24,7 @@ public class ClashEffect extends SpellAbilityEffect {
      */
     @Override
     protected String getStackDescription(final SpellAbility sa) {
-        return sa.getHostCard().getName() + " - Clash with an opponent.";
+        return sa.getHostCard().getDisplayName() + " - Clash with an opponent.";
     }
 
     /* (non-Javadoc)
@@ -101,7 +102,7 @@ public class ClashEffect extends SpellAbilityEffect {
             pCMC = pCard.getCMC();
             toReveal.add(pCard);
 
-            reveal.append(player).append(" " + Localizer.getInstance().getMessage("lblReveals") + ": ").append(pCard.getName()).append(". " + Localizer.getInstance().getMessage("lblCMC") + "= ").append(pCMC);
+            reveal.append(player).append(" " + Localizer.getInstance().getMessage("lblReveals") + ": ").append(pCard.getDisplayName()).append(". " + Localizer.getInstance().getMessage("lblCMC") + "= ").append(pCMC);
             reveal.append("\n");
         }
         if (!oLib.isEmpty()) {
@@ -109,7 +110,7 @@ public class ClashEffect extends SpellAbilityEffect {
             oCMC = oCard.getCMC();
             toReveal.add(oCard);
 
-            reveal.append(opponent).append(" " + Localizer.getInstance().getMessage("lblReveals") + ": ").append(oCard.getName()).append(". " + Localizer.getInstance().getMessage("lblCMC") + "= ").append(oCMC);
+            reveal.append(opponent).append(" " + Localizer.getInstance().getMessage("lblReveals") + ": ").append(oCard.getDisplayName()).append(". " + Localizer.getInstance().getMessage("lblCMC") + "= ").append(oCMC);
             reveal.append("\n");
         }
 
@@ -138,13 +139,13 @@ public class ClashEffect extends SpellAbilityEffect {
         final GameAction action = p.getGame().getAction();
         final boolean putOnTop = p.getController().willPutCardOnTop(c);
         final String location = putOnTop ? "top" : "bottom";
-        final String clashOutcome = p.getName() + " clashed and put " + c.getName() + " to the " + location + " of library.";
+        final String clashOutcome = p.getName() + " clashed and put " + c.getDisplayName() + " to the " + location + " of library.";
 
         if (putOnTop) {
             action.moveToLibrary(c, sa);
         } else {
             action.moveToBottomOfLibrary(c, sa);
         }
-        p.getGame().getGameLog().add(GameLogEntryType.STACK_RESOLVE, clashOutcome);
+        p.getGame().fireEvent(new GameEventAddLog(GameLogEntryType.STACK_RESOLVE, clashOutcome));
     }
 }

@@ -1,0 +1,8 @@
+Name:Auntie's Sentence
+ManaCost:1 B
+Types:Sorcery
+A:SP$ Charm | Choices$ DBDiscard,DBPump
+SVar:DBDiscard:DB$ Discard | ValidTgts$ Opponent | Mode$ RevealYouChoose | DiscardValid$ Card.Permanent+nonLand | NumCards$ 1 | SpellDescription$ Target opponent reveals their hand. You choose a nonland permanent card from it. That player discards that card.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | IsCurse$ True | NumAtt$ -2 | NumDef$ -2 | SpellDescription$ Target creature gets -2/-2 until end of turn.
+DeckHas:Ability$Discard
+Oracle:Choose one —\n• Target opponent reveals their hand. You choose a nonland permanent card from it. That player discards that card.\n• Target creature gets -2/-2 until end of turn.

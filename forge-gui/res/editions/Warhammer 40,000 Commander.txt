@@ -331,24 +331,26 @@ ScryfallCode=40K
 [tokens]
 1 w_2_2_astartes_warrior_vigilance @Dmitriy Mironov
 2 w_1_1_soldier @Lixin Yin
-2★ w_1_1_soldier @Lixin Yin
 3 w_1_1_soldier @Lixin Yin
-3★ w_1_1_soldier @Lixin Yin
 4 w_1_1_soldier @Lixin Yin
-4★ w_1_1_soldier @Lixin Yin
 9 u_1_1_tyranid_gargoyle_flying @David Astruga
 12 b_2_2_astartes_warrior_menace @Helge C. Balzer
 13 cherubael @Irina Nordsol
 14 b_2_2_a_necron_warrior @Games Workshop
 15 plaguebearer_of_nurgle @Games Workshop
-15★ plaguebearer_of_nurgle @Games Workshop
 16 r_3_3_spawn @Oleg Bulakh
-16★ r_3_3_spawn @Oleg Bulakh
 17 g_1_1_tyranid @Slawomir Maniak
-17★ g_1_1_tyranid @Slawomir Maniak
 18 g_5_5_tyranid @Antonio José Manzanedo
 19 g_3_3_tyranid_warrior_trample @Sergio Cosmai
 20 blue_horror @Andrey Nyarl
 21 c_a_clue_draw @Mirko Failoni
 22 c_1_1_a_insect_flying @Bartek Fedyczak
 23 c_4_4_a_robot_noblock @Philip Helliwell
+
+[other]
+5 squad_space_marine_devastator @Dmitriy Mironov
+6 squad_ultramarines_honour_guard @Jake Murray
+7 squad_zephyrim @Jon Neimeister
+8 squad_sicarian_infiltrator @Xavier Ribeiro
+10 squad_vanguard_suppressor @Fajareka Setiawan
+11 squad_arco-flagellant @Xavier Ribeiro

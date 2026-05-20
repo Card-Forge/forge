@@ -1,0 +1,6 @@
+Name:How to Start a Riot
+ManaCost:2 R
+Types:Instant Lesson
+A:SP$ Pump | ValidTgts$ Creature | KW$ Menace | SubAbility$ DBPumpAll | SpellDescription$ Target creature gains menace until end of turn. (It can't be blocked except by two or more creatures.) Creatures target player controls get +2/+0 until end of turn.
+SVar:DBPumpAll:DB$ PumpAll | ValidTgts$ Player | ValidCards$ Creature | NumAtt$ +2
+Oracle:Target creature gains menace until end of turn. (It can't be blocked except by two or more creatures.)\nCreatures target player controls get +2/+0 until end of turn.

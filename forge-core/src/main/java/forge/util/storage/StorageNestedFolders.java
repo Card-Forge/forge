@@ -23,7 +23,7 @@ public class StorageNestedFolders<T> extends StorageBase<IStorage<T>> {
         File subdir = new File(thisFolder, item.getName());
         subdir.mkdir();
 
-        // TODO: save recursivelly the passed IStorage
+        // TODO: save recursively the passed IStorage
         throw new UnsupportedOperationException("method is not implemented");
     }
 

@@ -30,6 +30,7 @@ public class ChangeTargetsEffect extends SpellAbilityEffect {
 
     @Override
     public void buildSpellAbility(SpellAbility sa) {
+        super.buildSpellAbility(sa);
         if (sa.usesTargeting()) {
             sa.getTargetRestrictions().setZone(ZoneType.Stack);
         }

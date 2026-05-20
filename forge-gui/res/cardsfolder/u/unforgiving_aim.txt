@@ -1,0 +1,8 @@
+Name:Unforgiving Aim
+ManaCost:2 G
+Types:Instant
+A:SP$ Charm | Choices$ DBDestroy1,DBDestroy2,DBToken
+SVar:DBDestroy1:DB$ Destroy | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | SpellDescription$ Destroy target creature with flying.
+SVar:DBDestroy2:DB$ Destroy | ValidTgts$ Enchantment | SpellDescription$ Destroy target enchantment.
+SVar:DBToken:DB$ Token | TokenScript$ bg_2_2_elf | SpellDescription$ Create a 2/2 black and green Elf creature token.
+Oracle:Choose one —\n• Destroy target creature with flying.\n• Destroy target enchantment.\n• Create a 2/2 black and green Elf creature token.

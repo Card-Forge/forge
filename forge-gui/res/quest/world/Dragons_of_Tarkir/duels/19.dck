@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Piper
+Title=Piper
+Icon=Piper.jpg
+Difficulty=Medium
+Description=Dragons_of_Tarkir/SCG_Invitational_Qualifier_Littleton/Zane_Houston_-_B-G_Aggro-Midrange_(Standard,_#272457).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Courser of Kruphix
+2 Hornet Queen
+4 Rakshasa Deathdealer
+4 Reaper of the Wilds
+4 Warden of the First Tree
+2 Bile Blight
+4 Hero's Downfall
+2 Murderous Cut
+4 Thoughtseize
+5 Forest
+4 Jungle Hollow
+4 Llanowar Wastes
+3 Polluted Delta
+6 Swamp
+4 Temple of Malady
+1 Urborg, Tomb of Yawgmoth
+3 Windswept Heath
+[Sideboard]
+4 Den Protector
+4 Duress
+2 Read the Bones
+2 Tasigur, the Golden Fang
+3 Ultimate Price

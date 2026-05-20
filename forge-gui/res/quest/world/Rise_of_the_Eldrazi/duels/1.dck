@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Batman
+Title=Batman
+Icon=Batman.jpg
+Difficulty=Easy
+Description=Rise_of_the_Eldrazi/National_Qualifier_2010_-_Kanto_-_Japan/Taiki_Suzuki_-_Eldrazi_Green_(Standard,_#1438).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Borderland Ranger
+4 Elvish Visionary
+4 Joraga Treespeaker
+4 Leatherback Baloth
+4 Llanowar Elves
+1 Master of the Wild Hunt
+4 Nest Invader
+4 Noble Hierarch
+4 Vengevine
+3 Eldrazi Monument
+3 Overrun
+4 Garruk Wildspeaker
+15 Forest
+3 Khalni Garden
+[Sideboard]
+4 Acidic Slime
+2 Basilisk Collar
+3 Mold Shambler
+2 Pithing Needle

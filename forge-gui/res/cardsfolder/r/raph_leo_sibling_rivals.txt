@@ -1,0 +1,9 @@
+Name:Raph & Leo, Sibling Rivals
+ManaCost:1 RW RW
+Types:Legendary Creature Mutant Ninja Turtle
+PT:2/4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerZones$ Battlefield | FirstCombat$ True | TriggerDescription$ Whenever NICKNAME attack, if it's the first combat phase of the turn, untap one or two target attacking creatures. After this phase, there is an additional combat phase.
+SVar:TrigUntap:DB$ Untap | ValidTgts$ Creature.attacking | TargetMin$ 1 | TargetMax$ 2 | TgtPrompt$ Choose one or two target attacking creatures | SubAbility$ DBAddPhase
+SVar:DBAddPhase:DB$ AddPhase | ExtraPhase$ Combat | AfterPhase$ EndCombat
+SVar:HasAttackEffect:TRUE
+Oracle:Whenever Raph & Leo attack, if it's the first combat phase of the turn, untap one or two target attacking creatures. After this phase, there is an additional combat phase.

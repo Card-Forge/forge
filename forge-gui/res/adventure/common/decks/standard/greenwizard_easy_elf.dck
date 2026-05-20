@@ -5,7 +5,7 @@ Difficulty=easy
 Description=Mono G Dominaria Standard-legal Elves deck with Verdant Force.
 Icon=Princess Zelda.jpg
 Deck Type=constructed
-[main]
+[Main]
 2 Blackblade Reforged
 2 Elfhame Druid
 21 Forest|DOM
@@ -20,4 +20,4 @@ Deck Type=constructed
 3 Untamed Kavu
 4 Verdant Force
 4 Wild Onslaught
-[sideboard]
+[Sideboard]

@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Data
+Title=Data
+Icon=Data.jpg
+Difficulty=Easy
+Description=./Standard/Kamigawa_Neon_Dynasty/Bayley_Madden_-_Orzhov_Control_(Standard,_#1335547).dck
+Deck Type=constructed
+
+[Main]
+1 Legion Angel
+2 Shambling Ghast
+3 Spirited Companion
+4 Eyetwitch
+2 Reckoner Bankbuster
+1 March of Wretched Sorrow
+2 Vanishing Verse
+4 Deadly Dispute
+3 Rite of Oblivion
+3 Invoke Despair
+3 The Meathook Massacre
+4 Wedding Announcement
+1 The Wandering Emperor
+1 Sorin the Mirthless
+2 Lolth, Spider Queen
+1 Takenuma, Abandoned Mire
+3 Plains
+3 Hive of the Eye Tyrant
+4 Scoured Barrens
+4 Shattered Sanctum
+4 Brightclimb Pathway
+5 Snow-Covered Swamp
+[Sideboard]
+1 Necrotic Fumes
+1 Environmental Sciences
+1 Mascot Exhibition
+1 Path of Peril
+1 Pest Summoning
+1 Duress
+1 Shadows' Verdict
+2 Legion Angel
+2 Ray of Enfeeblement
+2 Go Blank
+2 Check for Traps

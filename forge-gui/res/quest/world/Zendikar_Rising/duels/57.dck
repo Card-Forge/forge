@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=The Great Gazoo
+Title=The Great Gazoo
+Icon=The Great Gazoo.jpg
+Difficulty=Hard
+Description=./Modern/Zendikar_Rising/ADSkinner_-_Mill_(Modern,_#1053984).dck
+Deck Type=constructed
+
+[Main]
+4 Hedron Crab
+4 Ruin Crab
+2 Ensnaring Bridge
+4 Mesmeric Orb
+2 Fatal Push
+2 Ravenous Trap
+3 Crypt Incursion
+3 Surgical Extraction
+4 Archive Trap
+4 Visions of Beyond
+4 Glimpse the Unthinkable
+2 Ashiok, Dream Render
+1 Island
+1 Snow-Covered Swamp
+1 Swamp
+2 Flooded Strand
+3 Watery Grave
+3 Snow-Covered Island
+3 Shelldock Isle
+4 Field of Ruin
+4 Polluted Delta
+[Sideboard]
+1 Thoughtseize
+1 Damnation
+2 Fatal Push
+2 Collective Brutality
+2 Set Adrift
+2 Tormod's Crypt
+2 Unmoored Ego
+3 Darkness

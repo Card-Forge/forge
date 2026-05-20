@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Jesse James
+Title=Jesse James
+Icon=Jesse James.jpg
+Difficulty=Very Hard
+Description=../Modern/Dark_Ascension/GP_Lyon_-_LCQ_Winners/Giacomo_Landi_-_Infect_Aggro_(Modern,_#40177).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blighted Agent
+4 Glistener Elf
+4 Noble Hierarch
+4 Plague Stinger
+2 Apostle's Blessing
+2 Giant Growth
+4 Groundswell
+4 Might of Old Krosa
+4 Mutagenic Growth
+4 Vines of Vastwood
+4 Rancor
+2 Breeding Pool
+2 Forest
+4 Inkmoth Nexus
+4 Misty Rainforest
+2 Overgrown Tomb
+2 Pendelhaven
+4 Verdant Catacombs
+[Sideboard]
+3 Dismember
+2 Grafdigger's Cage
+4 Nature's Claim
+2 Spellskite
+4 Thoughtseize

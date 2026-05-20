@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=The Very Hungry Caterpillar
+Title=The Very Hungry Caterpillar
+Icon=The Very Hungry Caterpillar.jpg
+Difficulty=Easy
+Description=./Standard/Wilds_of_Eldraine/J0SE_-_Domain_Ramp_(Standard,_#1746794).dck
+Deck Type=constructed
+
+[Main]
+4 Topiary Stomper
+4 Archangel of Wrath
+3 Atraxa, Grand Unifier
+2 Etali, Primal Conqueror
+2 Chrome Host Seedshark
+4 Bramble Familiar
+3 Courier's Briefcase
+2 Drag to the Bottom
+2 Herd Migration
+2 Sunfall
+4 Leyline Binding
+3 Invasion of Zendikar
+2 Plains
+1 Island
+3 Swamp
+1 Mountain
+4 Forest
+1 Boseiju, Who Endures
+1 Takenuma, Abandoned Mire
+4 Jetmir's Garden
+4 Spara's Headquarters
+4 Ziatora's Proving Ground
+[Sideboard]
+4 Disdainful Stroke
+2 Sunset Revelry
+1 Drag to the Bottom
+2 Thrun, Breaker of Silence
+2 Tyrranax Rex
+3 Ossification
+1 Sunfall

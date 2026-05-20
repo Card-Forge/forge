@@ -36,7 +36,7 @@ import forge.util.ITranslatable;
  * Base class for Triggers,ReplacementEffects and StaticAbilities.
  *
  */
-public abstract class CardTraitBase extends GameObject implements IHasCardView, IHasSVars {
+public abstract class CardTraitBase implements GameObject, IHasCardView, IHasSVars {
 
     /** The host card. */
     protected Card hostCard;
@@ -62,13 +62,15 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
 
     /** Keys of descriptive (text) parameters. */
     private static final ImmutableList<String> descriptiveKeys = ImmutableList.<String>builder()
-            .add("Description", "SpellDescription", "StackDescription", "TriggerDescription").build();
+            .add("Description", "SpellDescription", "StackDescription", "TriggerDescription")
+            .add("ChangeTypeDesc", "ValidTgtsDesc")
+            .build();
 
     /**
      * Keys that should not changed
      */
     private static final ImmutableList<String> noChangeKeys = ImmutableList.<String>builder()
-            .add("TokenScript", "TokenImage", "NewName" , "DefinedName", "ChooseFromList")
+            .add("TokenScript", "NewName" , "DefinedName", "ChooseFromList")
             .add("AddAbility").build();
 
     /**
@@ -188,6 +190,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         }
         return level == Integer.parseInt(classLevel);
     }
+    public boolean isManaAbility() { return false; }
 
     /**
      * <p>
@@ -208,18 +211,17 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         }
 
         Player controller = srcCard.getController();
-        if (this instanceof Trigger) {
+        if (this instanceof Trigger t) {
             // check for delayed trigger
-            if (((Trigger) this).getSpawningAbility() != null) {
-                controller = ((Trigger) this).getSpawningAbility().getActivatingPlayer();
+            if (t.getSpawningAbility() != null) {
+                controller = t.getSpawningAbility().getActivatingPlayer();
             }
         }
         return matchesValid(o, valids, srcCard, controller);
     }
 
     public boolean matchesValid(final Object o, final String[] valids, final Card srcCard, final Player srcPlayer) {
-        if (o instanceof GameObject) {
-            final GameObject c = (GameObject) o;
+        if (o instanceof GameObject c) {
             return c.isValid(valids, srcPlayer, srcCard, this);
         } else if (o instanceof Iterable<?>) {
             for (Object o2 : (Iterable<?>)o) {
@@ -231,17 +233,17 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
             if (ArrayUtils.contains(valids, o)) {
                 return true;
             }
-        } else if (o instanceof PlanarDice) {
+        } else if (o instanceof PlanarDice pd) {
             for (String s : valids) {
                 PlanarDice valid = PlanarDice.smartValueOf(s);
-                if (((PlanarDice) o).name().equals(valid.name())) {
+                if (pd.name().equals(valid.name())) {
                     return true;
                 }
             }
-        } else if (o instanceof GameLossReason) {
+        } else if (o instanceof GameLossReason glr) {
             for (String s : valids) {
                 GameLossReason valid = GameLossReason.smartValueOf(s);
-                if (((GameLossReason) o).name().equals(valid.name())) {
+                if (glr.name().equals(valid.name())) {
                     return true;
                 }
             }
@@ -374,20 +376,6 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
                     return false;
                 }
             } else if (StringUtils.countMatches(payingMana, MagicColor.toShortString(color)) < 3) {
-                return false;
-            }
-        }
-
-        if (params.containsKey("Presence")) {
-            if (hostCard.getCastFrom() == null || hostCard.getCastSA() == null)
-                return false;
-
-            final String type = params.get("Presence");
-
-            int revealed = AbilityUtils.calculateAmount(hostCard, "Revealed$Valid " + type, hostCard.getCastSA());
-            int ctrl = AbilityUtils.calculateAmount(hostCard, "Count$LastStateBattlefield " + type + ".YouCtrl", hostCard.getCastSA());
-
-            if (revealed + ctrl == 0) {
                 return false;
             }
         }
@@ -757,6 +745,14 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         copy.keyword = this.keyword;
     }
 
-    abstract public List<Object> getTriggerRemembered();
+    public List<Object> getTriggerRemembered() {
+        if (this instanceof SpellAbility sa && sa.isTrigger()) {
+            return sa.getTrigger().getTriggerRemembered();
+        }
+        if (this instanceof Trigger trig) {
+            return trig.getTriggerRemembered();
+        }
+        return List.of();
+    }
 
 }

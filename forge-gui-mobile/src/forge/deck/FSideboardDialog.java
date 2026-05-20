@@ -1,6 +1,7 @@
 package forge.deck;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 import forge.Forge;
 import org.apache.commons.lang3.StringUtils;
@@ -16,13 +17,12 @@ import forge.screens.FScreen;
 import forge.screens.TabPageScreen;
 import forge.toolbox.FDialog;
 import forge.toolbox.GuiChoose;
-import forge.util.Callback;
 
 public class FSideboardDialog extends FDialog {
     private final SideboardTabs tabs;
-    private final Callback<List<PaperCard>> callback;
+    private final Consumer<List<PaperCard>> callback;
 
-    public FSideboardDialog(CardPool sideboard, CardPool main, final Callback<List<PaperCard>> callback0, String message) {
+    public FSideboardDialog(CardPool sideboard, CardPool main, final Consumer<List<PaperCard>> callback0, String message) {
         super(String.format(Forge.getLocalizer().getMessage("lblUpdateMainFromSideboard"), message), 1);
 
         callback = callback0;
@@ -37,7 +37,7 @@ public class FSideboardDialog extends FDialog {
     public void setVisible(boolean visible0) {
         super.setVisible(visible0);
         if (!visible0) { //do callback when hidden to ensure you don't get stuck if Back pressed
-            callback.run(tabs.getMainDeckPage().cardManager.getPool().toFlatList());
+            callback.accept(tabs.getMainDeckPage().cardManager.getPool().toFlatList());
         }
     }
 
@@ -104,7 +104,7 @@ public class FSideboardDialog extends FDialog {
                 updateCaption();
             }
 
-            protected void addItem(FDropDownMenu menu, final String verb, String dest, FImage icon, final Callback<Integer> callback) {
+            protected void addItem(FDropDownMenu menu, final String verb, String dest, FImage icon, final Consumer<Integer> callback) {
                 String label = verb;
                 if (!StringUtils.isEmpty(dest)) {
                     label += " " + dest;
@@ -113,7 +113,7 @@ public class FSideboardDialog extends FDialog {
                     PaperCard card = cardManager.getSelectedItem();
                     int max = cardManager.getItemCount(card);
                     if (max == 1) {
-                        callback.run(max);
+                        callback.accept(max);
                     }
                     else {
                         GuiChoose.getInteger(card + " - " + verb + " " + Forge.getLocalizer().getMessage("lblHowMany"), 1, max, 20, callback);
@@ -150,14 +150,11 @@ public class FSideboardDialog extends FDialog {
 
             @Override
             protected void buildMenu(FDropDownMenu menu, final PaperCard card) {
-                addItem(menu, Forge.getLocalizer().getMessage("lblMove"), Forge.getLocalizer().getMessage("lblToMainDeck"), FDeckEditor.MAIN_DECK_ICON, new Callback<Integer>() {
-                    @Override
-                    public void run(Integer result) {
-                        if (result == null || result <= 0) { return; }
+                addItem(menu, Forge.getLocalizer().getMessage("lblMove"), Forge.getLocalizer().getMessage("lblToMainDeck"), FDeckEditor.MAIN_DECK_ICON, result -> {
+                    if (result == null || result <= 0) { return; }
 
-                        removeCard(card, result);
-                        parent.getMainDeckPage().addCard(card, result);
-                    }
+                    removeCard(card, result);
+                    parent.getMainDeckPage().addCard(card, result);
                 });
             }
         }
@@ -181,14 +178,11 @@ public class FSideboardDialog extends FDialog {
 
             @Override
             protected void buildMenu(FDropDownMenu menu, final PaperCard card) {
-                addItem(menu, Forge.getLocalizer().getMessage("lblMove"), Forge.getLocalizer().getMessage("lbltosideboard"), FDeckEditor.SIDEBOARD_ICON, new Callback<Integer>() {
-                    @Override
-                    public void run(Integer result) {
-                        if (result == null || result <= 0) { return; }
+                addItem(menu, Forge.getLocalizer().getMessage("lblMove"), Forge.getLocalizer().getMessage("lbltosideboard"), FDeckEditor.SIDEBOARD_ICON, result -> {
+                    if (result == null || result <= 0) { return; }
 
-                        removeCard(card, result);
-                        parent.getSideboardPage().addCard(card, result);
-                    }
+                    removeCard(card, result);
+                    parent.getSideboardPage().addCard(card, result);
                 });
             }
         }

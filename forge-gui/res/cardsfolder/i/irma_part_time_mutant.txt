@@ -1,0 +1,9 @@
+Name:Irma, Part-Time Mutant
+ManaCost:2 U
+Types:Legendary Creature Human Mutant Shapeshifter
+PT:1/1
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ IrmaCopy | TriggerDescription$ At the beginning of combat on your turn, NICKNAME becomes a copy of up to one other target creature you control, except her name is Irma, Part-Time Mutant and she has this ability. Then put a +1/+1 counter on her.
+SVar:IrmaCopy:DB$ Clone | ValidTgts$ Creature.Other+YouCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one other target creature you control | NewName$ Irma, Part-Time Mutant | GainThisAbility$ True | AddSVars$ IrmaCopy,IrmaPutCounter | SubAbility$ IrmaPutCounter | AILogic$ CloneBestCreature
+SVar:IrmaPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:PlayMain1:TRUE
+Oracle:At the beginning of combat on your turn, Irma becomes a copy of up to one other target creature you control, except her name is Irma, Part-Time Mutant and she has this ability. Then put a +1/+1 counter on her.

@@ -190,7 +190,7 @@
       {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
       {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town&quot;,
+   &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town.&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]}]
    },
@@ -237,7 +237,7 @@
       {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
       {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the alleyways&quot;,
+   &quot;text&quot;: &quot;The mayor does not appear to be in the alleyways.&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]}]
    },
@@ -302,7 +302,7 @@
       {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
       {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be at the docks&quot;,
+   &quot;text&quot;: &quot;The mayor does not appear to be at the docks.&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]}]
    },
@@ -360,7 +360,7 @@
       {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
       {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the warehouse&quot;,
+   &quot;text&quot;: &quot;The mayor does not appear to be in the warehouse.&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]}]
    },
@@ -415,7 +415,7 @@
       {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
       {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the temple&quot;,
+   &quot;text&quot;: &quot;The mayor does not appear to be in the temple.&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]}]
    },
@@ -460,7 +460,7 @@
       {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
       {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town&quot;,
+   &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town.&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]}]
    },
@@ -640,7 +640,7 @@
       {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
       {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the temple&quot;,
+   &quot;text&quot;: &quot;The mayor does not appear to be in the temple.&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]}]
    },
@@ -694,7 +694,7 @@
       {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
       {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the temple&quot;,
+   &quot;text&quot;: &quot;The mayor does not appear to be in the temple.&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]}]
    },
@@ -739,7 +739,7 @@
       {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
       {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the warehouse&quot;,
+   &quot;text&quot;: &quot;The mayor does not appear to be in the warehouse.&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]}]
    },
@@ -795,7 +795,7 @@
       {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
       {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town&quot;,
+   &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town.&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]}]
    },
@@ -851,7 +851,7 @@
       {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
       {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the witch's hut&quot;,
+   &quot;text&quot;: &quot;The mayor does not appear to be in the witch's hut.&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]}]
    },
@@ -906,7 +906,7 @@
       {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
       {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the witch's hut&quot;,
+   &quot;text&quot;: &quot;The mayor does not appear to be in the witch's hut.&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]}]
    },
@@ -960,7 +960,7 @@
       {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
       {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the alleyways&quot;,
+   &quot;text&quot;: &quot;The mayor does not appear to be in the alleyways.&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]}]
    },
@@ -1014,7 +1014,7 @@
       {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
       {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town&quot;,
+   &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town.&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]}]
    },
@@ -1070,7 +1070,7 @@
       {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
       {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the temple&quot;,
+   &quot;text&quot;: &quot;The mayor does not appear to be in the temple.&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]}]
    },
@@ -1124,7 +1124,7 @@
       {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
       {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the alleyways&quot;,
+   &quot;text&quot;: &quot;The mayor does not appear to be in the alleyways.&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]}]
    },
@@ -1179,7 +1179,7 @@
       {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
       {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town&quot;,
+   &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town.&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]}]
    },
@@ -1236,7 +1236,7 @@
       {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
       {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the tavern&quot;,
+   &quot;text&quot;: &quot;The mayor does not appear to be in the tavern.&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]}]
    },
@@ -1290,7 +1290,7 @@
       {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
       {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town&quot;,
+   &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town.&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]}]
    },
@@ -1349,7 +1349,7 @@
       {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
       {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the tavern&quot;,
+   &quot;text&quot;: &quot;The mayor does not appear to be in the tavern.&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]}]
    },
@@ -1404,7 +1404,7 @@
       {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
       {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town&quot;,
+   &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town.&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]}]
    },
@@ -1443,7 +1443,7 @@
    <properties>
     <property name="defeatDialog">[
 {
-   &quot;text&quot;:&quot;You pry the key away from the mayor's cold dead (and dead again) hands. Having that, there's not much between you and Liliana now.&quot;,
+   &quot;text&quot;:&quot;You pry the key away from the mayor's cold, dead (and dead again) hands. Now that you have it, there's not much between you and Liliana.&quot;,
    &quot;options&quot;:[
 	{&quot;name&quot;:&quot;(continue)&quot;
 	}
@@ -1552,7 +1552,7 @@
       {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
       {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the archives&quot;,
+   &quot;text&quot;: &quot;The mayor does not appear to be in the archives.&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]}]
    },
@@ -1607,7 +1607,7 @@
       {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
       {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town&quot;,
+   &quot;text&quot;: &quot;The mayor does not appear to be out on the main road through town.&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]}]
    },
@@ -1655,7 +1655,7 @@
       &quot;options&quot;: [
       {
          &quot;name&quot;: &quot;(Continue)&quot;,
-         &quot;text&quot;: &quot;The mayor disappears in a cloud of black smoke, but you feel fairly certain that he's still somewhere in the area. It's just a matter of finding him&quot;,
+         &quot;text&quot;: &quot;The mayor disappears in a cloud of black smoke, but you feel fairly certain that he's still somewhere in the area. It's just a matter of finding him.&quot;,
       &quot;options&quot;: [
       {
          &quot;name&quot;: &quot;(Continue)&quot;,
@@ -1733,7 +1733,7 @@
       {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
       {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be at the docks&quot;,
+   &quot;text&quot;: &quot;The mayor does not appear to be at the docks.&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]}]
    },
@@ -1815,7 +1815,7 @@
       {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
       {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the graveyard&quot;,
+   &quot;text&quot;: &quot;The mayor does not appear to be in the graveyard.&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]}]
    },
@@ -1874,7 +1874,7 @@
       {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
       {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the graveyard&quot;,
+   &quot;text&quot;: &quot;The mayor does not appear to be in the graveyard.&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]}]
    },
@@ -1932,7 +1932,7 @@
       {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
       {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the graveyard&quot;,
+   &quot;text&quot;: &quot;The mayor does not appear to be in the graveyard.&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]}]
    },
@@ -1990,7 +1990,7 @@
       {&quot;checkMapFlag&quot;:&quot;mayorSpawned&quot;, &quot;not&quot;:true}, 
       {&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;placesAlreadyChecked&quot;,&quot;op&quot;:&quot;&lt;&quot;,&quot;val&quot;:6}}
       ],
-   &quot;text&quot;: &quot;The mayor does not appear to be in the graveyard&quot;,
+   &quot;text&quot;: &quot;The mayor does not appear to be in the graveyard.&quot;,
    &quot;options&quot;:[{&quot;name&quot;:&quot;(Continue your search)&quot;,&quot;action&quot;: [
       {&quot;deleteMapObject&quot;: -1}]}]
    },

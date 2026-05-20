@@ -6,6 +6,5 @@ K:Flying
 T:Mode$ BecomesCrewed | ValidCard$ Card.Self | Execute$ TrigAnimate | TriggerDescription$ Whenever CARDNAME becomes crewed, up to one other target Vehicle you control becomes an artifact creature until end of turn.
 SVar:TrigAnimate:DB$ Animate | ValidTgts$ Vehicle.YouCtrl+Other | TgtPrompt$ Select up to one other target Vehicle you control | TargetMin$ 0 | TargetMax$ 1 | Types$ Creature,Artifact
 K:Crew:3
-Oracle:Flying
 DeckHints:Type$Vehicle
 Oracle:Whenever Mobilizer Mech becomes crewed, up to one other target Vehicle you control becomes an artifact creature until end of turn.\nCrew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)

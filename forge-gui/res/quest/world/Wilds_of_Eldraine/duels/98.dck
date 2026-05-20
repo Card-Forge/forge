@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Bilbo Baggins
+Title=Bilbo Baggins
+Icon=Bilbo Baggins.jpg
+Difficulty=Hard
+Description=./Modern/Wilds_of_Eldraine/Hara_Norifumi_-_URウィザード_(Modern,_#1753121).dck
+Deck Type=constructed
+
+[Main]
+3 Snapcaster Mage
+2 Murktide Regent
+4 Subtlety
+2 Fury
+4 Sleep-Cursed Faerie
+2 Spell Pierce
+4 Counterspell
+4 Lightning Bolt
+2 Unholy Heat
+4 Flame of Anor
+4 Expressive Iteration
+3 Lorien Revealed
+3 Dress Down
+4 Island
+3 Spirebluff Canal
+3 Steam Vents
+4 Misty Rainforest
+4 Scalding Tarn
+1 Otawara, Soaring City
+[Sideboard]
+1 Commandeer
+2 Engineered Explosives
+2 Magus of the Moon
+1 Chalice of the Void
+2 Flusterstorm
+1 Mystical Dispute
+1 Obsidian Charmaw
+2 Stern Scolding
+1 Cast into the Fire
+2 Stone of Erech

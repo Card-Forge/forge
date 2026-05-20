@@ -3,6 +3,7 @@ package forge.game.ability.effects;
 import java.util.Map;
 
 import forge.game.card.*;
+import forge.game.replacement.ReplacementType;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.ImmutableList;
@@ -102,24 +103,28 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
 
         int totalRemoved = 0;
         CardCollectionView srcCards;
-
         if (sa.hasParam("Choices")) {
             ZoneType choiceZone = sa.hasParam("ChoiceZone") ? ZoneType.smartValueOf(sa.getParam("ChoiceZone"))
                     : ZoneType.Battlefield;
+            srcCards = CardLists.getValidCards(game.getCardsIn(choiceZone), sa.getParam("Choices"), activator, source, sa);
+        } else {
+            srcCards = getTargetCards(sa);
+        }
+        if (sa.isReplacementAbility() && sa.getReplacementEffect().getMode() == ReplacementType.Moved) {
+            srcCards = new CardCollection(srcCards).filter(c -> !c.isInPlay() || sa.getLastStateBattlefield().contains(c));
+        }
 
-            CardCollection choices = CardLists.getValidCards(game.getCardsIn(choiceZone), sa.getParam("Choices"),
-                    activator, source, sa);
-
+        if (sa.hasParam("Choices")) {
             int min = 1;
             int max = 1;
             if (sa.hasParam("ChoiceOptional")) {
                 min = 0;
-                max = choices.size();
+                max = srcCards.size();
             }
             if (sa.hasParam("ChoiceNum")) {
                 min = max = AbilityUtils.calculateAmount(source, sa.getParam("ChoiceNum"), sa);
             }
-            if (choices.size() < min) {
+            if (srcCards.size() < min) {
                 return;
             }
 
@@ -128,13 +133,12 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
             title = title.replace("  ", " ");
             Map<String, Object> params = Maps.newHashMap();
             params.put("CounterType", counterType);
-            srcCards = pc.chooseCardsForEffect(choices, sa, title, min, max, min == 0, params);
+            srcCards = pc.chooseCardsForEffect(srcCards, sa, title, min, max, min == 0, params);
         } else {
             for (final Player tgtPlayer : getTargetPlayers(sa)) {
                 if (!tgtPlayer.isInGame()) {
                     continue;
                 }
-                // Removing energy
                 if (type.equals("All")) {
                     for (Map.Entry<CounterType, Integer> e : Lists.newArrayList(tgtPlayer.getCounters().entrySet())) {
                         totalRemoved += tgtPlayer.subtractCounter(e.getKey(), e.getValue(), activator);
@@ -150,8 +154,6 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
                     }
                 }
             }
-
-            srcCards = getTargetCards(sa);
         }
 
         for (final Card tgtCard : srcCards) {
@@ -220,6 +222,11 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
     protected int removeAnyType(GameEntity entity, int cntToRemove, SpellAbility sa) {
         boolean rememberRemoved = sa.hasParam("RememberRemoved");
         int removed = 0;
+        boolean upTo = sa.hasParam("UpTo");
+        if ("Any".equals(sa.getParam("CounterNum"))) {
+            cntToRemove = Integer.MAX_VALUE;
+            upTo = true;
+        }
 
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
@@ -244,7 +251,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
             tgtCounters.remove(chosenType);
             int remaining = Aggregates.sum(tgtCounters.values());
             // player must choose enough so he can still reach the amount with other types
-            int min = sa.hasParam("UpTo") ? 0 : Math.max(1, max - remaining);
+            int min = upTo ? 0 : Math.max(1, max - remaining);
             prompt = Localizer.getInstance().getMessage("lblSelectRemoveCountersNumberOfTarget", chosenType.getName());
             params = Maps.newHashMap();
             params.put("Target", entity);
@@ -264,7 +271,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
                     }
                 }
                 cntToRemove -= chosenAmount;
-            } else if (sa.hasParam("UpTo")) {
+            } else if (upTo) {
                 break;
             }
         }

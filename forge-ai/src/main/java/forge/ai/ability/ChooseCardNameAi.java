@@ -33,9 +33,8 @@ public class ChooseCardNameAi extends SpellAbilityAi {
             if (logic.equals("CursedScroll")) {
                 if (SpecialCardAi.CursedScroll.consider(ai, sa)) {
                     return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-                } else {
-                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
                 }
+                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             final TargetRestrictions tgt = sa.getTargetRestrictions();
@@ -56,7 +55,7 @@ public class ChooseCardNameAi extends SpellAbilityAi {
     protected AiAbilityDecision doTriggerNoCost(Player ai, SpellAbility sa, boolean mandatory) {
         String aiLogic = sa.getParamOrDefault("AILogic", "");
         if ("PithingNeedle".equals(aiLogic)) {
-            // Make sure theres something in play worth Needlings.
+            // Make sure there's something in play worth Needlings.
             // Planeswalker or equipment or something
 
             CardCollection oppPerms = CardLists.getValidCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), "Card.OppCtrl+hasNonManaActivatedAbility", ai, sa.getHostCard(), sa);
@@ -72,16 +71,14 @@ public class ChooseCardNameAi extends SpellAbilityAi {
             // 5 percent chance to cast per opposing card with a non mana ability
             if (MyRandom.getRandom().nextFloat() <= .05 * oppPerms.size()) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if (mandatory) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
     /* (non-Javadoc)
      * @see forge.card.ability.SpellAbilityAi#chooseSingleCard(forge.card.spellability.SpellAbility, java.util.List, boolean)
@@ -105,7 +102,7 @@ public class ChooseCardNameAi extends SpellAbilityAi {
         final CardDb cardDb = StaticData.instance().getCommonCards();
 
         for (ICardFace face : faces) {
-            final CardRules rules = cardDb.getRules(face.getName());
+            final CardRules rules = cardDb.getRulesOrElseUnsupported(face.getName());
             boolean isOther = rules.getOtherPart() == face;
             final PaperCard paper = cardDb.getCard(rules.getName());
             final Card card = Card.fromPaperCard(paper, ai);

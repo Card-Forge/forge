@@ -1,0 +1,11 @@
+Name:Oscorp Industries
+Variant:UniversesWithin:FlavorName:Exclusive Nightclub
+ManaCost:no cost
+Types:Land
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplacementResult$ Updated | ReplaceWith$ ETBTapped | Description$ This land enters tapped.
+SVar:ETBTapped:DB$ Tap | Defined$ Self | ETB$ True
+T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When this land enters from a graveyard, you lose 2 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 2
+A:AB$ Mana | Cost$ T | Produced$ Combo U B R | SpellDescription$ Add {U}, {B}, or {R}.
+K:Mayhem
+Oracle:This land enters tapped.\nWhen this land enters from a graveyard, you lose 2 life.\n{T}: Add {U}, {B}, or {R}.\nMayhem (You may play this card from your graveyard if you discarded it this turn. Timing rules still apply.)

@@ -3,6 +3,6 @@ ManaCost:3 U
 Types:Creature Squid Beast
 PT:2/2
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTapAll | TriggerDescription$ When CARDNAME enters, tap all lands target player controls.
-SVar:TrigTapAll:DB$ TapAll | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Land
+SVar:TrigTapAll:DB$ TapAll | ValidTgts$ Player | ValidCards$ Land
 SVar:PlayMain1:TRUE
 Oracle:When Gulf Squid enters, tap all lands target player controls.

@@ -20,4 +20,4 @@ humanprecast=Garruk, Cursed Huntsman:1
 ailibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
 aibattlefield=Cubwarden;Eradicator Valkyrie;Chrome Replicator;Glorious Anthem
 removesummoningsickness=true
-aiprecast=Cubwarden:CustomScript:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_cat_lifelink | TokenOwner$ You;Chrome Replicator:CustomScript:DB$ Token | TokenAmount$ 1 | TokenScript$ c_4_4_a_construct | TokenOwner$ You
+aiprecast=Cubwarden:CustomScript:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_cat_lifelink | TokenOwner$ You;Chrome Replicator:CustomScript:DB$ Token | TokenScript$ c_4_4_a_construct | TokenOwner$ You

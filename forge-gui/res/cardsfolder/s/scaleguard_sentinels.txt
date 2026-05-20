@@ -3,6 +3,6 @@ ManaCost:G G
 Types:Creature Human Soldier
 PT:2/3
 S:Mode$ OptionalCost | EffectZone$ All | ValidCard$ Card.Self | ValidSA$ Spell | Cost$ Reveal<1/Dragon> | Description$ As an additional cost to cast this spell, you may reveal a Dragon card from your hand.
-K:etbCounter:P1P1:1:Presence$ Dragon:CARDNAME enters with a +1/+1 counter on it if you revealed a Dragon card or controlled a Dragon as you cast CARDNAME.
+K:etbCounter:P1P1:1:CheckSVar$ Count$Presence_Dragon.1.0:CARDNAME enters with a +1/+1 counter on it if you revealed a Dragon card or controlled a Dragon as you cast CARDNAME.
 DeckHints:Type$Dragon
 Oracle:As an additional cost to cast this spell, you may reveal a Dragon card from your hand.\nScaleguard Sentinels enters with a +1/+1 counter on it if you revealed a Dragon card or controlled a Dragon as you cast this spell.

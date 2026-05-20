@@ -1,6 +1,6 @@
 [metadata]
 Name=R2-D2 3
-[main]
+[Main]
 20 Island|M11
 1 The Tabernacle at Pendrell Vale
 1 Mox Sapphire
@@ -18,4 +18,4 @@ Name=R2-D2 3
 3 Howling Mine
 1 Remand
 1 Frozen Aether
-[sideboard]
+[Sideboard]

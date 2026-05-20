@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Shrek
+Title=Shrek
+Icon=Shrek.jpg
+Difficulty=Hard
+Description=./Modern/Adventures_in_the_Forgotten_Realms/Player44_-_Affinity_(Modern,_#1219511)_[!].dck
+Deck Type=constructed
+
+[Main]
+1 Myr Enforcer
+2 Bomat Courier
+4 Memnite
+4 Frogmite
+4 Ornithopter
+4 Signal Pest
+4 Sojourner's Companion
+4 Thought Monitor
+1 Shadowspear
+3 Welding Jar
+4 Cranial Plating
+4 Springleaf Drum
+3 Galvanic Blast
+4 Urza's Saga
+1 Snow-Covered Island
+2 Spire of Industry
+3 Silverbluff Bridge
+4 Treasure Vault
+4 Darksteel Citadel
+[Sideboard]
+1 Tormod's Crypt
+1 Pithing Needle
+1 Jegantha, the Wellspring
+1 Welding Jar
+3 Relic of Progenitus
+4 Etched Champion
+4 Stubborn Denial

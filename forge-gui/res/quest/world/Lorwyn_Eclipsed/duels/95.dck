@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Waterlord
+Title=Waterlord
+Icon=Waterlord.jpg
+Difficulty=Hard
+Description=./Modern/Lorwyn_Eclipsed/Kajimoto_Atsushi_-_Azorius_Blink_(Modern,_#2807843).dck
+Deck Type=constructed
+
+[Main]
+2 Skyclave Apparition
+3 Subtlety
+4 Guide of Souls
+4 Ocelot Pride
+4 White Orchid Phantom
+2 Witch Enchanter
+1 Mockingbird
+4 Starfield Shepherd
+4 Wan Shi Tong, Librarian
+4 Aang, Swift Savior
+4 Loch Mare
+4 Ephemerate
+2 Plains
+1 Island
+4 Hallowed Fountain
+4 Flooded Strand
+3 Arid Mesa
+4 Flagstones of Trokair
+2 Meticulous Archive
+[Sideboard]
+2 Teferi, Time Raveler
+2 Mystical Dispute
+1 Skyclave Apparition
+3 Sanctifier en-Vec
+1 Subtlety
+2 High Noon
+4 Consign to Memory

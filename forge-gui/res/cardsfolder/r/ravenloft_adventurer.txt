@@ -10,7 +10,7 @@ SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ HIT | SubA
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigLoseLife | CheckSVar$ X | TriggerDescription$ Whenever CARDNAME attacks, if you've completed a dungeon, defending player loses 1 life for each card they own in exile with a hit counter on it.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredDefendingPlayer | LifeAmount$ Y
-SVar:X:PlayerCountPropertyYou$DungeonsCompleted
+SVar:X:DungeonsCompleted$Amount
 SVar:Y:TriggeredDefendingPlayer$ValidExile Card.YouOwn+counters_GE1_HIT
 SVar:HasAttackEffect:TRUE
 DeckHints:Name$Etrata, the Silencer|Mari, the Killing Quill

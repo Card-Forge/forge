@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Preacher
+Title=Preacher
+Icon=Preacher.jpg
+Difficulty=Easy
+Description=Dark_Ascension/StarCityGames_Open_Phoenix/Joseph_Loster_-_Naya_Pod_(Standard,_#29284).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Acidic Slime
+4 Avacyn's Pilgrim
+4 Birds of Paradise
+4 Blade Splicer
+1 Daybreak Ranger
+1 Fiend Hunter
+2 Huntmaster of the Fells
+1 Inferno Titan
+2 Phyrexian Metamorph
+4 Strangleroot Geist
+2 Thalia, Guardian of Thraben
+1 Vorapede
+2 Birthing Pod
+1 Green Sun's Zenith
+2 Oblivion Ring
+2 Garruk Relentless
+4 Copperline Gorge
+8 Forest
+3 Gavony Township
+1 Mountain
+1 Plains
+4 Razorverge Thicket
+2 Rootbound Crag
+3 Sunpetal Grove
+[Sideboard]
+2 Ancient Grudge
+2 Celestial Purge
+3 Hero of Bladehold
+2 Incinerate
+2 Ray of Revelation

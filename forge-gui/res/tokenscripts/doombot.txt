@@ -1,0 +1,5 @@
+Name:Doombot
+ManaCost:no cost
+Types:Artifact Creature Robot Villain
+PT:3/3
+Oracle:

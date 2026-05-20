@@ -2,7 +2,7 @@ Name:Cephalid Snitch
 ManaCost:1 U
 Types:Creature Octopus Wizard
 PT:1/1
-A:AB$ Debuff | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Keywords$ Protection from black | SpellDescription$ Target creature loses protection from black until end of turn.
+A:AB$ Debuff | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | Keywords$ Protection from black | SpellDescription$ Target creature loses protection from black until end of turn.
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
 Oracle:Sacrifice Cephalid Snitch: Target creature loses protection from black until end of turn.

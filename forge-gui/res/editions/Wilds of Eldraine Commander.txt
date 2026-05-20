@@ -4,6 +4,7 @@ Date=2023-09-08
 Name=Wilds of Eldraine Commander
 Type=Commander
 ScryfallCode=WOC
+TokensFallbackCode=WOE
 
 [cards]
 1 M Tegwyll, Duke of Splendor @Ekaterina Burmak
@@ -124,7 +125,7 @@ ScryfallCode=WOC
 116 R Rankle, Master of Pranks @Dmitry Burmak
 117 U Reckless Spite @Karl Kopinski
 118 R Thrilling Encore @Alex Konstad
-119 C Ancestral Mask @Massimilano Frezzato
+119 C Ancestral Mask @Massimiliano Frezzato
 120 C Aura Gnarlid @Lars Grant-West
 121 R Bear Umbra @Howard Lyon
 122 C Careful Cultivation @A. M. Sartor
@@ -181,12 +182,12 @@ ScryfallCode=WOC
 173 U Vitu-Ghazi, the City-Tree @Martina Pilcerova
 
 [tokens]
-0 role_monster @Unknown
-0 role_royal @Unknown
-0 role_sorcerer @Unknown
-0 role_virtuous @Unknown
-0 role_virtuous @Unknown
-0 role_virtuous @Unknown
+1 role_monster @Rovina Cai
+# Need to flip it
+1 role_virtuous @Rovina Cai
+2 role_royal @Rovina Cai
+# Need to flip it
+2 role_virtuous @Rovina Cai
 7 w_1_1_human_soldier @Kimonas Theodossiou
 9 w_2_2_pegasus_flying @Lars Grant-West
 10 u_1_1_faerie_flying @Irina Nordsol
@@ -194,3 +195,6 @@ ScryfallCode=WOC
 12 r_4_2_pirate_noblock @Igor Krstic
 15 g_1_1_saproling @Joseph Meehan
 16 ub_1_1_faerie_rogue_flying @E. M. Gist
+
+[other]
+4 copy @David Palumbo

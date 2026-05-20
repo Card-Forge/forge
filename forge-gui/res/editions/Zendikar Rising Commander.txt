@@ -153,7 +153,7 @@ ScryfallCode=ZNC
 1 w_1_1_bird_flying @Howard Lyon
 2 w_1_1_kor_ally @Jeremy Wilson
 3 b_1_1_faerie_rogue_flying @Dave Allsop
-4 b_0_0_phyrexian_germ @Igor Kieryluk
+4 b_0_0_germ @Igor Kieryluk
 5 b_1_1_goblin_rogue @Dave Kendall
 6 b_1_1_rat @Mike Bierek
 7 g_4_4_beast @Steve Prescott

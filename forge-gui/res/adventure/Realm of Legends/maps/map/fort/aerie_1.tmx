@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="108">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Murmuration&quot;, &quot;Soulcatcher&quot; ]}"/>
+ </properties>
+ <tileset firstgid="1" source="../../../../common/maps/tileset/main.tsx"/>
+ <tileset firstgid="10113" source="../../../../common/maps/tileset/buildings.tsx"/>
+ <tileset firstgid="11905" source="../../../../common/maps/tileset/FarmFood.tsx"/>
+ <tileset firstgid="16001" source="../../../../common/maps/tileset/dungeon.tsx"/>
+ <tileset firstgid="20481" source="../../../../common/maps/tileset/main-nocollide.tsx"/>
+ <layer id="9" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFowAC3DgH2gWDD1AaJoMxTOntJpB9gzEcRsEoGKkAADb2Ads=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxr4mZgaBqkuEYeOx4IO2lpLz47aWUvPvueyzEwvJCjn50w+1qB7DYa+BeXvTD7aBXO+PyKL363SyAwpfaihy297MVmH63sJRaHSKJiUXYEpqW96Jie9rZ6AuMBiN9n0tevR4F2HkOyl57hC8J9nCPDTnIxACezIf8=
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJzbwcPAsIMELEOiemR9yJgYPdG8DAy7eHDjKF7q2QuTB9m5G0jjAzuJsJsU/xJjJ7F2E2svKXYSYzcx9pJjJyG7ibFXlkw7YUCaTP+Sa+9lpoGxd7sEAg8le0HhBcKlwRDzSoIRYshYnwsVwwC54byXSP+KsqNiGNhDpr0yULvruQnbi8yu5YbYic1cUspJQnaj24vLTlLLSUJ2I4fxC07iynti6yOY3XVQu2FuAIUpsXaSYy+6HlgekybD/cgYAEhL2Bw=
+  </data>
+ </layer>
+ <layer id="7" name="Ornamental Walls" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBi8wIKJgeEyHmzJRBs7rxAw9xKV7Ua204pOdiPbSYyfqWE3OXZSw27kNEOKnZQCMyLsMsGi5jITbjla2kuMHC3s3S4BwZTYezmIsL2gcC1lhvBLmMmzCx3MYCRsLzYwDajvOgVp8RoTYbtBQJSdgSGDmzp2kmI3yF4QppadhOxGDmdq24ls93RGCIa5wQRJjBZ2ogMzCssGGAAAS9AtWQ==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="17">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJxjYBhawIQJQvO50t6u52IQeqIiwl56A5i94ZK0MR/kNxjQV8KuZmUqA4O/EW3sRwfI4Uwte82wxF2nPm57kYFaBmVx70OG+0HuvQzFtAC43IQtnEgF6OEKAoeNGRiOGOPWA7J3uwTldqMDR0NUGh1cgfqX3Pi9RoK+Ti4Ghi4g7gbipeRZRxKA+Umdm4FBA4g1uelgKZK9R4H2HQPi43Syl15gOiMEo4sNNQAA650agQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../../../common/maps/obj/entry_up.tx" x="192" y="270.665" width="48" height="16">
+   <properties>
+    <property name="direction" value="up"/>
+    <property name="teleport" value="../Realm of Legends/maps/map/fort/aerie_0.tmx"/>
+    <property name="teleportObjectId" value="90"/>
+   </properties>
+  </object>
+  <object id="50" template="../../../../common/maps/obj/enemy.tx" x="231" y="78.6753">
+   <properties>
+    <property name="enemy" value="Kykar"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="83" template="../../../../common/maps/obj/door_up.tx" x="309.411" y="157.773" width="37.0004" height="36.4089">
+   <properties>
+    <property name="direction" value="down"/>
+    <property name="teleport" value="../Realm of Legends/maps/map/fort/aerie_2.tmx"/>
+    <property name="teleportObjectId" value="90"/>
+   </properties>
+  </object>
+  <object id="97" template="../../../../common/maps/obj/enemy.tx" x="128.347" y="170.481">
+   <properties>
+    <property name="enemy" value="Commander Eesha"/>
+    <property name="speedModifier" type="float" value="0"/>
+    <property name="threatRange" type="int" value="0"/>
+    <property name="waypoints" value=""/>
+   </properties>
+  </object>
+  <object id="98" template="../../../../common/maps/obj/enemy.tx" x="270.513" y="172.999">
+   <properties>
+    <property name="enemy" value="Balmor"/>
+    <property name="threatRange" type="int" value="30"/>
+   </properties>
+  </object>
+  <object id="101" template="../../../../common/maps/obj/manashards.tx" x="272.306" y="209.14"/>
+  <object id="104" template="../../../../common/maps/obj/manashards.tx" x="111" y="93"/>
+  <object id="105" template="../../../../common/maps/obj/manashards.tx" x="302" y="108.333"/>
+  <object id="106" template="../../../../common/maps/obj/dialog.tx" x="174.083" y="183.083" width="19.1667" height="19.1667" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;GRAND AERIE. FLIERS ONLY. GROUND POUNDERS GO FALL IN A DITCH.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;}]
+}
+]</property>
+   </properties>
+  </object>
+  <object id="107" template="../../../../common/maps/obj/dialog.tx" x="206.75" y="183.417" width="19.1667" height="19.1667" visible="1">
+   <properties>
+    <property name="dialog">[
+{
+   &quot;text&quot;: &quot;NOTICE: WE ARE RUNNING LOW ON BIRDSEED. THINK BEFORE YOU PECK.&quot;,
+   &quot;options&quot;: [{
+      &quot;name&quot;: &quot;(Continue)&quot;}]
+}
+]</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

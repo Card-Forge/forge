@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Agrus
+Title=Agrus
+Icon=Agrus.jpg
+Difficulty=Hard
+Description=../Modern/Avacyn_Restored/Magic-League_Modern_Trial_18-04-2014/Allista_-_Infect_(Modern,_#72227).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Blighted Agent
+1 Dryad Arbor
+4 Glistener Elf
+4 Ichorclaw Myr
+4 Noble Hierarch
+3 Apostle's Blessing
+1 Giant Growth
+4 Groundswell
+4 Might of Old Krosa
+4 Mutagenic Growth
+4 Vines of Vastwood
+2 Distortion Strike
+2 Wild Defiance
+2 Breeding Pool
+3 Forest
+4 Inkmoth Nexus
+4 Misty Rainforest
+2 Pendelhaven
+4 Verdant Catacombs
+[Sideboard]
+3 Dismember
+2 Hurkyl's Recall
+2 Nature's Claim
+3 Spell Pierce
+3 Spellskite
+2 Twisted Image

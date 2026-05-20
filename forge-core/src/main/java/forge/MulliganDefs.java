@@ -12,8 +12,10 @@ public class MulliganDefs {
         Original,
         Paris,
         Vancouver,
-        London
+        London,
+        Houston
     }
+
     private static MulliganRule defaultRule = MulliganRule.London;
 
     public static MulliganRule getDefaultRule() {

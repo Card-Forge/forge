@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Dr Watson
+Title=Dr Watson
+Icon=Dr Watson.jpg
+Difficulty=Very Hard
+Description=./Modern/Duskmourn_House_of_Horror/ArbustRe_-_Dimir_Midrange_(Modern,_#2286577).dck
+Deck Type=constructed
+
+[Main]
+2 Snapcaster Mage
+4 Fallaji Archaeologist
+2 Harbinger of the Seas
+4 Psychic Frog
+3 Tamiyo, Inquisitive Student
+2 Boggart Trawler
+4 Abhorrent Oculus
+2 Spell Pierce
+4 Fatal Push
+4 Force of Negation
+4 Flare of Denial
+4 Unearth
+2 Bone Shards
+1 Island
+1 Swamp
+2 Watery Grave
+3 Undercity Sewers
+4 Flooded Strand
+4 Polluted Delta
+4 Bloodstained Mire
+[Sideboard]
+2 Extirpate
+3 Mystical Dispute
+4 Glistening Deluge
+4 Consign to Memory
+2 Harbinger of the Seas

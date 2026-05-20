@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Alice in Wonderland
+Title=Alice in Wonderland
+Icon=Alice in Wonderland.jpg
+Difficulty=Very Hard
+Description=./Modern/The_Lost_Caverns_of_Ixalan/JamesTam_-_Hammer_Time_(Modern,_#1973951)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Puresteel Paladin
+2 Giver of Runes
+4 Stoneforge Mystic
+4 Esper Sentinel
+4 Solitude
+1 Springleaf Drum
+4 Colossus Hammer
+1 Shadowspear
+1 Sword of Fire and Ice
+1 Kaldra Compleat
+4 Surge of Salvation
+2 Ephemerate
+4 Emeria's Call
+2 Forge Anew
+4 Sigarda's Aid
+4 Urza's Saga
+11 Plains
+3 Inkmoth Nexus
+[Sideboard]
+1 Helping Hand
+2 Mana Tithe
+2 Pithing Needle
+1 Emrakul, the Aeons Torn
+1 Relic of Progenitus
+3 Damping Sphere
+3 Cursed Totem
+2 March of Otherworldly Light

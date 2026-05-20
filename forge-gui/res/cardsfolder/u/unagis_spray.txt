@@ -1,0 +1,7 @@
+Name:Unagi's Spray
+ManaCost:U
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ -4 | IsCurse$ True | SubAbility$ DBDraw | SpellDescription$ Target creature gets -4/-0 until end of turn. If you control a Fish, Octopus, Otter, Seal, Serpent, or Whale, draw a card.
+SVar:DBDraw:DB$ Draw | ConditionPresent$ Fish.YouCtrl,Octopus.YouCtrl,Otter.YouCtrl,Seal.YouCtrl,Serpent.YouCtrl,Whale.YouCtrl | ConditionCompare$ GE1 | ConditionDescription$ If you control a Fish, Octopus, Otter, Seal, Serpent, or Whale,
+DeckHints:Type$Fish|Octopus|Otter|Seal|Serpent|Whale
+Oracle:Target creature gets -4/-0 until end of turn. If you control a Fish, Octopus, Otter, Seal, Serpent, or Whale, draw a card.

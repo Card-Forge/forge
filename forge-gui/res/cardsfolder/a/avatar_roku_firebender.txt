@@ -1,0 +1,8 @@
+Name:Avatar Roku, Firebender
+ManaCost:3 R R R
+Types:Legendary Creature Human Avatar
+PT:6/6
+T:Mode$ AttackersDeclared | TriggerZones$ Battlefield | Execute$ TrigMana | TriggerDescription$ Whenever a player attacks, add six {R}. Until end of combat, you don't lose this mana as steps end.
+SVar:TrigMana:DB$ Mana | Produced$ R | Amount$ 6 | CombatMana$ True
+A:AB$ Pump | Cost$ R R R | ValidTgts$ Creature | NumAtt$ +3 | SpellDescription$ Target creature gets +3/+0 until end of turn.
+Oracle:Whenever a player attacks, add six {R}. Until end of combat, you don't lose this mana as steps end.\n{R}{R}{R}: Target creature gets +3/+0 until end of turn.

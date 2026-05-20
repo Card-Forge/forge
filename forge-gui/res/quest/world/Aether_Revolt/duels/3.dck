@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Baal
+Title=Baal
+Icon=Baal.jpg
+Difficulty=Easy
+Description=Aether_Revolt/Yamashita_Kouhei_-_WUR_Saheeli_(Standard,_#665156).dck
+Deck Type=constructed
+
+[Main]
+2 Combustible Gearhulk
+4 Felidar Guardian
+4 Veteran Motorist
+4 Whirler Virtuoso
+3 Aethersphere Harvester
+2 Heart of Kiran
+1 Skysovereign, Consul Flagship
+4 Harnessed Lightning
+2 Stasis Snare
+3 Gideon, Ally of Zendikar
+2 Nahiri, the Harbinger
+4 Saheeli Rai
+4 Aether Hub
+4 Inspiring Vantage
+3 Island
+2 Needle Spires
+5 Plains
+4 Spirebluff Canal
+2 Wandering Fumarole
+1 Westvale Abbey
+[Sideboard]
+2 Confiscation Coup
+1 Fevered Visions
+2 Fragmentize
+2 Fumigate
+1 Release the Gremlins
+2 Shock
+3 Spell Queller
+2 Spell Shrivel

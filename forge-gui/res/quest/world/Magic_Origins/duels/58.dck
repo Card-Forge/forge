@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Morpheus
+Title=Morpheus
+Icon=Morpheus.jpg
+Difficulty=Very Hard
+Description=../Modern/Magic_Origins/SCG_Super_IQ_Elkhart/Alex_Allen_-_G-W_Hexproof_(Modern,_#385231).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Dryad Arbor
+4 Gladecover Scout
+4 Kor Spiritdancer
+1 Silhana Ledgewalker
+4 Slippery Bogle
+1 Helm of the Gods
+2 Path to Exile
+4 Daybreak Coronet
+4 Ethereal Armor
+1 Glaring Aegis
+4 Hyena Umbra
+3 Keen Sense
+4 Rancor
+4 Spirit Mantle
+2 Unflinching Courage
+2 Forest
+3 Horizon Canopy
+2 Plains
+3 Razorverge Thicket
+3 Temple Garden
+4 Windswept Heath
+[Sideboard]
+2 Celestial Purge
+2 Disenchant
+3 Leyline of Sanctity
+2 Spellskite
+3 Stony Silence
+2 Torpor Orb

@@ -1,0 +1,9 @@
+Name:Traumatic Critique
+ManaCost:X U R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Any | NumDmg$ X | SubAbility$ DBDraw | SpellDescription$ CARDNAME deals X damage to any target. Draw two cards, then discard a card.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+SVar:X:Count$xPaid
+DeckHas:Ability$Discard
+Oracle:Traumatic Critique deals X damage to any target. Draw two cards, then discard a card.

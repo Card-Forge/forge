@@ -5,5 +5,5 @@ A:SP$ DestroyAll | ValidCards$ Creature | RememberDestroyed$ True | SubAbility$ 
 SVar:DBTreasure:DB$ Token | TokenAmount$ X | TokenTapped$ True | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SubAbility$ DBCleanup | SpellDescription$ For each nontoken creature destroyed this way, create a tapped Treasure token.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Card.!token
-DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure
+DeckHas:Ability$Token|Sacrifice
 Oracle:Destroy all creatures. For each nontoken creature destroyed this way, create a tapped Treasure token.

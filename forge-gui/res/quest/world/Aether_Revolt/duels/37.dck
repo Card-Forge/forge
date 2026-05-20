@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Carnage
+Title=Carnage
+Icon=Carnage.jpg
+Difficulty=Easy
+Description=Aether_Revolt/Kawano_Yasuhiro_-_WG_Aggro_(Standard,_#664860).dck
+Deck Type=constructed
+
+[Main]
+3 Lambholt Pacifist
+2 Rishkar, Peema Renegade
+4 Thraben Inspector
+2 Tireless Tracker
+3 Verdurous Gearhulk
+3 Heart of Kiran
+2 Declaration in Stone
+1 Authority of the Consuls
+4 Oath of Nissa
+3 Stasis Snare
+4 Gideon, Ally of Zendikar
+4 Nissa, Voice of Zendikar
+4 Canopy Vista
+8 Forest
+4 Fortified Village
+8 Plains
+1 Westvale Abbey
+[Sideboard]
+1 Authority of the Consuls
+2 Blessed Alliance
+2 Fumigate
+1 Heroic Intervention
+1 Lambholt Pacifist
+2 Natural State
+2 Selfless Spirit
+1 Stasis Snare
+1 Thalia, Heretic Cathar
+1 Tireless Tracker
+1 Verdurous Gearhulk

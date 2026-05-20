@@ -1,0 +1,7 @@
+Name:Animal Attendant
+ManaCost:1 G
+Types:Creature Human Citizen
+PT:2/2
+A:AB$ Mana | Cost$ T | Produced$ Any | AddsCounters$ Creature.nonHuman_P1P1_1 | SpellDescription$ Add one mana of any color. If that mana is spent to cast a non-Human creature spell, that creature enters with an additional +1/+1 counter on it.
+DeckHas:Ability$Counters
+Oracle:{T}: Add one mana of any color. If that mana is spent to cast a non-Human creature spell, that creature enters with an additional +1/+1 counter on it.

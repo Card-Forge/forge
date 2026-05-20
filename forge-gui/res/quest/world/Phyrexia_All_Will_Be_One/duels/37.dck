@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Azorius-precon
+Title=Azorius-precon
+Icon=Azorius-precon.jpg
+Difficulty=Medium
+Description=./Standard/Phyrexia_All_Will_Be_One/Dylan_Wlodar_-_Mardu_Midrange_(Standard,_#1615129).dck
+Deck Type=constructed
+
+[Main]
+4 Bloodtithe Harvester
+3 Archangel of Wrath
+4 Fable of the Mirror-Breaker
+3 Sanctuary Warden
+3 Loran of the Third Path
+3 Reckoner Bankbuster
+4 Go for the Throat
+3 Wedding Announcement
+3 The Wandering Emperor
+1 The Eternal Wanderer
+2 Kaya, Intangible Slayer
+3 Haunted Ridge
+3 Caves of Koilos
+4 Blackcleave Cliffs
+4 Shattered Sanctum
+4 Sundown Pass
+3 Battlefield Forge
+1 Sulfurous Springs
+1 Mountain
+1 Swamp
+1 Plains
+1 Takenuma, Abandoned Mire
+1 Eiganjo, Seat of the Empire
+[Sideboard]
+3 Duress
+4 Cut Down
+2 Depopulate
+2 Razorlash Transmogrant
+2 Temporary Lockdown
+2 Farewell

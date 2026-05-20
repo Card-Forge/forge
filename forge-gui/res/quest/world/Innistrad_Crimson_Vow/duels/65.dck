@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Odin
+Title=Odin
+Icon=Odin.jpg
+Difficulty=Hard
+Description=./Modern/Innistrad_Crimson_Vow/dannecallh19840401_-_Mono-Red_Prison_(Modern,_#1430419).dck
+Deck Type=constructed
+
+[Main]
+3 Magus of the Moon
+4 Fury
+4 Seasoned Pyromancer
+4 Eidolon of the Great Revel
+4 Ragavan, Nimble Pilferer
+2 Ensnaring Bridge
+4 Boros Charm
+2 Roiling Vortex
+3 Blood Moon
+2 Chandra, Dressed to Kill
+4 Karn, the Great Creator
+4 Chandra, Torch of Defiance
+1 Bloodstained Mire
+1 Scalding Tarn
+1 Wooded Foothills
+1 Fiery Islet
+2 Plains
+2 Sacred Foundry
+4 Mountain
+4 Arid Mesa
+4 Sunbaked Canyon
+[Sideboard]
+1 Blood Moon
+1 Magus of the Moon
+2 Ensnaring Bridge
+2 Surgical Extraction
+2 Rest in Peace
+3 Pithing Needle
+4 Chalice of the Void

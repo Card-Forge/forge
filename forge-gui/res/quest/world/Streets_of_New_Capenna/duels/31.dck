@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Mr Smith
+Title=Mr Smith
+Icon=Mr Smith.jpg
+Difficulty=Medium
+Description=./Standard/Streets_of_New_Capenna/Isobe_Takahiro_-_WUG_Aggro_(Standard,_#1366818).dck
+Deck Type=constructed
+
+[Main]
+1 Falco Spara, Pactweaver
+3 Skyclave Apparition
+4 Prosperous Innkeeper
+4 Welcoming Vampire
+4 Gala Greeters
+4 Esika's Chariot
+2 Storm the Festival
+2 Emeria's Call
+3 Wedding Announcement
+4 Brokers Ascendancy
+2 The Wandering Emperor
+3 Elspeth Resplendent
+1 Plains
+1 Eiganjo, Seat of the Empire
+2 Barkchannel Pathway
+2 Hengegate Pathway
+2 Tangled Florahedron
+4 Branchloft Pathway
+4 Forest
+4 Deserted Beach
+4 Overgrown Farmland
+[Sideboard]
+1 Vorinclex, Monstrous Raider
+1 Sigarda's Summons
+1 Wedding Announcement
+1 Skyclave Apparition
+2 Fateful Absence
+2 Reidane, God of the Worthy
+2 Disdainful Stroke
+2 Test of Talents
+3 Spell Pierce

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Yemaya
+Title=Yemaya
+Icon=Yemaya.jpg
+Difficulty=Easy
+Description=./Standard/Final_Fantasy/Hamuda_-_Rakdos_Aggro_(Standard,_#2522022).dck
+Deck Type=constructed
+
+[Main]
+4 Monastery Swiftspear
+3 Callous Sell-Sword
+4 Heartfire Hero
+3 Slickshot Show-Off
+2 Cecil, Dark Knight
+3 Emberheart Challenger
+4 Cori-Steel Cutter
+4 Opera Love Song
+4 Monstrous Rage
+2 Turn Inside Out
+4 Flowstone Infusion
+2 Demonic Ruckus
+4 Blackcleave Cliffs
+10 Mountain
+4 Sulfurous Springs
+1 Rockface Village
+1 Restless Vents
+1 Blazemire Verge
+[Sideboard]
+3 Duress
+2 Torch the Tower
+2 Obliterating Bolt
+2 Ghost Vacuum
+2 Lithomantic Barrage
+2 Magebane Lizard
+2 Dreadmaw's Ire

@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Captain America
+Title=Captain America
+Icon=Captain America.jpg
+Difficulty=Very Hard
+Description=./Modern/Dominaria_United/Hamahata_Naoya_-_UR_Prowess_(Modern,_#1491364)_[!].dck
+Deck Type=constructed
+
+[Main]
+2 Balmor, Battlemage Captain
+3 Stormwing Entity
+4 Soul-Scar Mage
+4 Sprite Dragon
+4 Monastery Swiftspear
+2 Gut Shot
+4 Opt
+4 Manamorphose
+4 Mutagenic Growth
+4 Lava Dart
+4 Lightning Bolt
+3 Serum Visions
+1 Island
+2 Fiery Islet
+2 Arid Mesa
+2 Steam Vents
+3 Mountain
+4 Spirebluff Canal
+4 Scalding Tarn
+[Sideboard]
+1 Brazen Borrower
+1 Relic of Progenitus
+1 Echoing Truth
+2 Blood Moon
+2 Spell Pierce
+2 Vapor Snag
+2 Surgical Extraction
+2 Anger of the Gods
+2 Seasoned Pyromancer

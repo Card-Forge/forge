@@ -1,0 +1,9 @@
+Name:Stirring Hopesinger
+ManaCost:2 W
+Types:Creature Bird Bard
+PT:1/3
+K:Flying
+K:Lifelink
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | Execute$ TrigPutCounterAll | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | TargetsValid$ Creature.inZoneBattlefield | TriggerDescription$ Repartee — Whenever you cast an instant or sorcery spell that targets a creature, put a +1/+1 counter on each creature you control.
+SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+Oracle:Flying, lifelink\nRepartee — Whenever you cast an instant or sorcery spell that targets a creature, put a +1/+1 counter on each creature you control.

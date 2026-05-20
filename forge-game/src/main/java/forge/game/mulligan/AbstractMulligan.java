@@ -1,12 +1,12 @@
 package forge.game.mulligan;
 
 import forge.game.GameLogEntryType;
+import forge.game.event.GameEventAddLog;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
-
 
 public abstract class AbstractMulligan {
     Player player;
@@ -21,9 +21,11 @@ public abstract class AbstractMulligan {
 
     public Player getPlayer() { return player; }
 
+    public void beforeFirstMulligan() {}
     public abstract boolean canMulligan();
     public abstract int handSizeAfterNextMulligan();
-    public int tuckCardsAfterKeepHand() {
+
+    public int tuckCardsDuringMulligan() {
         return 0;
     }
 
@@ -35,7 +37,7 @@ public abstract class AbstractMulligan {
             player.getGame().getAction().moveToLibrary(c, null);
         }
         try {
-            Thread.sleep(100); //delay for a tiny bit to give UI a chance catch up
+            Thread.sleep(100);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -60,6 +62,6 @@ public abstract class AbstractMulligan {
     }
 
     public void afterMulligan() {
-        player.getGame().getGameLog().add(GameLogEntryType.MULLIGAN, Localizer.getInstance().getMessage("lblPlayerKeepNCardsHand", player.getName(), String.valueOf(player.getZone(ZoneType.Hand).size())));
+        player.getGame().fireEvent(new GameEventAddLog(GameLogEntryType.MULLIGAN, Localizer.getInstance().getMessage("lblPlayerKeepNCardsHand", player.getName(), String.valueOf(player.getZone(ZoneType.Hand).size()))));
     }
 }

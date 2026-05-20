@@ -1,0 +1,22 @@
+[metadata]
+Name=Twister of Time
+[Main]
+12 Island|LEA|2
+8 Swamp|LEA|2
+4 Mox Sapphire|LEA
+4 Mox Jet|LEA
+4 Memory Jar|ULG
+4 Timetwister|LEA
+4 Time Spiral|USG
+4 Megrim|STH
+2 Windfall|USG
+2 Underworld Dreams|LEG
+2 Portcullis|STH
+2 Meekstone|LEA
+2 Evacuation|STH
+2 Sunken Hope|PLS
+2 Overburden|PCY
+2 Pendrell Mists|WTH
+
+[StartInBattle_Reference]
+1 Underworld Dreams|LEG

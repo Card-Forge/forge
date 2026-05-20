@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Dungeon Crawling Colorless
+Title=Dungeon Crawling Colorless
+Icon=Dungeon Crawling Colorless.jpg
+Difficulty=Very Hard
+Description=../Modern/Innistrad/WPN_Qualifier_Modern_Turniers_vom_26.06.2012/Graber_Thomas_-_Red_Deck_Wins_(Modern,_#33843).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Dark Confidant
+4 Goblin Arsonist
+4 Goblin Guide
+2 Grim Lavamancer
+4 Spark Elemental
+2 Spikeshot Elder
+4 Lightning Bolt
+3 Magma Jet
+4 Bump in the Night
+4 Goblin Grenade
+4 Lava Spike
+2 Night's Whisper
+2 Arid Mesa
+4 Auntie's Hovel
+4 Blackcleave Cliffs
+1 Blood Crypt
+5 Mountain
+2 Scalding Tarn
+1 Swamp
+[Sideboard]
+1 Dragon's Claw
+4 Duress
+4 Rain of Gore
+3 Shattering Spree
+2 Surgical Extraction
+2 Vulshok Refugee

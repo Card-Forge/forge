@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=A Wolf in Sheeps Clothing
+Title=A Wolf in Sheeps Clothing
+Icon=A Wolf in Sheeps Clothing.jpg
+Difficulty=Very Hard
+Description=../Modern/Return_to_Ravnica/WMCQ_2_-_Malaysia/Koh_Kai_Che_-_Aura_Hexproof_(Modern,_#322143).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Dryad Arbor
+4 Gladecover Scout
+4 Kor Spiritdancer
+4 Slippery Bogle
+1 Dismember
+2 Path to Exile
+4 Daybreak Coronet
+4 Ethereal Armor
+4 Hyena Umbra
+2 Keen Sense
+4 Rancor
+4 Spider Umbra
+2 Spirit Mantle
+1 Forest
+4 Horizon Canopy
+1 Plains
+4 Razorverge Thicket
+4 Temple Garden
+4 Windswept Heath
+2 Wooded Foothills
+[Sideboard]
+4 Leyline of Sanctity
+4 Nature's Claim
+2 Rest in Peace
+2 Stony Silence
+2 Suppression Field

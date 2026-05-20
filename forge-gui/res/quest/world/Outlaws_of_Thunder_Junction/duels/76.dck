@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Atomic Robo
+Title=Atomic Robo
+Icon=Atomic Robo.jpg
+Difficulty=Very Hard
+Description=./Modern/Outlaws_of_Thunder_Junction/AndreaMengucci_-_UW_Hammer_Modern_(Modern,_#2007778).dck
+Deck Type=constructed
+
+[Main]
+1 Memnite
+4 Puresteel Paladin
+4 Stoneforge Mystic
+4 Esper Sentinel
+4 Ornithopter
+4 Colossus Hammer
+1 Lavaspur Boots
+1 Shadowspear
+3 Springleaf Drum
+1 Cryptic Coat
+2 Surge of Salvation
+2 Steelshaper's Gift
+2 Forge Anew
+4 Sigarda's Aid
+4 Urza's Saga
+3 Hallowed Fountain
+3 Inkmoth Nexus
+4 Plains
+4 Windswept Heath
+4 Flooded Strand
+1 Fomori Vault
+[Sideboard]
+1 Pithing Needle
+2 Prismatic Ending
+3 Cursed Totem
+1 Soul-Guide Lantern
+3 Failure // Comply
+3 Spell Pierce
+2 Surge of Salvation

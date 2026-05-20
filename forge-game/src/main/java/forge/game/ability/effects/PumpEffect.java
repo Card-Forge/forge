@@ -7,17 +7,14 @@ import java.util.stream.Collectors;
 import forge.util.*;
 import org.apache.commons.lang3.StringUtils;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
 import forge.GameCommand;
-import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
 import forge.game.card.CardFactoryUtil;
 import forge.game.card.CardUtil;
 import forge.game.card.perpetual.PerpetualKeywords;
@@ -37,7 +34,7 @@ public class PumpEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
         final String duration = sa.getParam("Duration");
-        final boolean perpetual = ("Perpetual").equals(duration);
+        final boolean perpetual = "Perpetual".equals(duration);
 
         // do Game Check there in case of LKI
         final Card gameCard = game.getCardState(applyTo, null);
@@ -132,7 +129,7 @@ public class PumpEffect extends SpellAbilityEffect {
         final String duration = sa.getParam("Duration");
 
         if (!keywords.isEmpty()) {
-            p.addChangedKeywords(keywords, ImmutableList.of(), timestamp, 0);
+            p.addChangedKeywords(keywords, List.of(), timestamp, 0);
         }
 
         if (!"Permanent".equals(duration)) {
@@ -282,6 +279,17 @@ public class PumpEffect extends SpellAbilityEffect {
         List<Card> tgtCards = getCardsfromTargets(sa);
         List<Player> tgtPlayers = getTargetPlayers(sa);
 
+        if (sa.hasParam("Optional")) {
+            final String targets = Lang.joinHomogenous(tgtCards);
+            final String message = sa.hasParam("OptionQuestion")
+                    ? TextUtil.fastReplace(sa.getParam("OptionQuestion"), "TARGETS", targets)
+                    : Localizer.getInstance().getMessage("lblApplyPumpToTarget", targets);
+
+            if (!activator.getController().confirmAction(sa, null, message, null)) {
+                return;
+            }
+        }
+
         List<String> keywords = Lists.newArrayList();
         if (sa.hasParam("KW")) {
             keywords.addAll(Arrays.asList(sa.getParam("KW").split(" & ")));
@@ -306,8 +314,6 @@ public class PumpEffect extends SpellAbilityEffect {
             String[] restrictions = sa.hasParam("SharedRestrictions") ? sa.getParam("SharedRestrictions").split(",") : new String[]{"Card"};
             keywords = CardFactoryUtil.sharedKeywords(keywords, restrictions, zones, host, sa);
         }
-
-        final CardCollection untargetedCards = CardUtil.getRadiance(sa);
 
         if (sa.hasParam("DefinedKW")) {
             String defined = sa.getParam("DefinedKW");
@@ -366,10 +372,8 @@ public class PumpEffect extends SpellAbilityEffect {
         if (sa.hasParam("DefinedLandwalk")) {
             final String landtype = sa.getParam("DefinedLandwalk");
             for (final Card c : AbilityUtils.getDefinedCards(host, landtype, sa)) {
-                for (String type : c.getType()) {
-                    if (CardType.isALandType(type)) {
-                        keywords.add("Landwalk:" +type);
-                    }
+                for (String type : c.getType().getLandTypes()) {
+                    keywords.add("Landwalk:" +type);
                 }
             }
         }
@@ -392,17 +396,6 @@ public class PumpEffect extends SpellAbilityEffect {
                 total.remove(random);
             }
             keywords = choice;
-        }
-
-        if (sa.hasParam("Optional")) {
-            final String targets = Lang.joinHomogenous(tgtCards);
-            final String message = sa.hasParam("OptionQuestion")
-                    ? TextUtil.fastReplace(sa.getParam("OptionQuestion"), "TARGETS", targets)
-                    : Localizer.getInstance().getMessage("lblApplyPumpToTarget", targets);
-
-            if (!activator.getController().confirmAction(sa, null, message, null)) {
-                return;
-            }
         }
 
         if (sa.hasParam("RememberObjects")) {
@@ -480,12 +473,11 @@ public class PumpEffect extends SpellAbilityEffect {
             }
 
             if (sa.hasParam("NumAtt") && sa.getParam("NumAtt").equals("Triple")) {
-                a = tgtC.getNetPower()*2;
+                a = tgtC.getNetPower() *2;
             }
             if (sa.hasParam("NumDef") && sa.getParam("NumDef").equals("Triple")) {
-                d = tgtC.getNetToughness()*2;
+                d = tgtC.getNetToughness() *2;
             }
-
 
             applyPump(sa, tgtC, a, d, affectedKeywords, timestamp);
         }
@@ -494,7 +486,7 @@ public class PumpEffect extends SpellAbilityEffect {
             registerDelayedTrigger(sa, sa.getParam("AtEOT"), tgtCards);
         }
 
-        for (final Card tgtC : untargetedCards) {
+        for (final Card tgtC : CardUtil.getRadiance(sa)) {
             // only pump things in PumpZone
             if (!tgtC.isInZones(pumpZones)) {
                 continue;

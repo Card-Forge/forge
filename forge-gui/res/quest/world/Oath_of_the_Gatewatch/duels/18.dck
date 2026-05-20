@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Hobbes
+Title=Hobbes
+Icon=Hobbes.jpg
+Difficulty=Medium
+Description=Oath_of_the_Gatewatch/RPTQ_Shadows_Over_Innistrad_-_Osaka,_Japan/Nobuyuki_Yamaoka_-_Bant_(Standard,_#605259).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Bounding Krasis
+4 Deathmist Raptor
+3 Den Protector
+4 Eldrazi Skyspawner
+3 Jace, Vryn's Prodigy
+4 Reflector Mage
+2 Stratus Dancer
+4 Sylvan Advocate
+2 Wingmate Roc
+4 Collected Company
+3 Dromoka's Command
+2 Canopy Vista
+4 Flooded Strand
+2 Forest
+2 Island
+4 Lumbering Falls
+3 Plains
+1 Prairie Stream
+4 Windswept Heath
+1 Wooded Foothills
+2 Yavimaya Coast
+[Sideboard]
+2 Arashin Cleric
+3 Disdainful Stroke
+3 Dispel
+1 Harbinger of the Tides
+1 Hidden Dragonslayer
+1 Silkwrap
+1 Surge of Righteousness
+2 Valorous Stance

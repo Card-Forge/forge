@@ -102,11 +102,11 @@ public class StarRenderer extends ItemCellRenderer {
             return;
         }
         if (favorite == 0) {
-            this.setToolTipText(localizer.getMessage("lblClickToAddTargetToFavorites", CardTranslation.getTranslatedName(card.getName())));
+            this.setToolTipText(localizer.getMessage("lblClickToAddTargetToFavorites", CardTranslation.getTranslatedName(card.getDisplayName())));
             skinImage = FSkin.getImage(FSkinProp.IMG_STAR_OUTLINE);
         }
         else { //TODO: consider supporting more than 1 star
-            this.setToolTipText(localizer.getMessage("lblClickToRemoveTargetToFavorites", CardTranslation.getTranslatedName(card.getName())));
+            this.setToolTipText(localizer.getMessage("lblClickToRemoveTargetToFavorites", CardTranslation.getTranslatedName(card.getDisplayName())));
             skinImage = FSkin.getImage(FSkinProp.IMG_STAR_FILLED);
         }
     }

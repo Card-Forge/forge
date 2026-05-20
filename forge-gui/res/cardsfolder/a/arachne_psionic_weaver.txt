@@ -1,0 +1,13 @@
+Name:Arachne, Psionic Weaver
+Variant:UniversesWithin:FlavorName:Yera and Oski, Weaver and Guide
+ManaCost:2 W
+Types:Legendary Creature Spider Human Hero
+PT:3/3
+K:Web-slinging:W
+K:ETBReplacement:Other:ChoosePlayer
+SVar:ChoosePlayer:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent to look at their hand | SubAbility$ DBLook | SpellDescription$ As NICKNAME enters, look at an opponent's hand, then choose a card type other than creature.
+SVar:DBLook:DB$ RevealHand | Defined$ ChosenPlayer | Look$ True | SubAbility$ DBChooseCardType
+SVar:DBChooseCardType:DB$ ChooseType | Defined$ You | Type$ Card | InvalidTypes$ Creature | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenPlayer$ True
+S:Mode$ RaiseCost | EffectZone$ Battlefield | ValidCard$ Card.ChosenType | Type$ Spell | Amount$ 1 | Activator$ Player | Description$ Spells of the chosen type cost {1} more to cast.
+Oracle:Web-slinging {W} (You may cast this spell for {W} if you also return a tapped creature you control to its owner's hand.)\nAs Arachne enters, look at an opponent's hand, then choose a card type other than creature.\nSpells of the chosen type cost {1} more to cast.

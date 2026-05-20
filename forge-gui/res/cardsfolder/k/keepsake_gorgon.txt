@@ -3,7 +3,7 @@ ManaCost:3 B B
 Types:Creature Gorgon
 PT:2/5
 K:Deathtouch
-K:Monstrosity:1:5 B B
+A:AB$ PutCounter | Cost$ 5 B B | Monstrosity$ 1
 T:Mode$ BecomeMonstrous | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME becomes monstrous, destroy target non-Gorgon creature an opponent controls.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.nonGorgon+OppCtrl | TgtPrompt$ Select target non-Gorgon creature an opponent controls
 DeckHas:Ability$Counters

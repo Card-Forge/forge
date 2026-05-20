@@ -21,6 +21,8 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.MultimapBuilder;
+
 import forge.game.*;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.effects.AddTurnEffect;
@@ -32,6 +34,7 @@ import forge.game.cost.CostEnlist;
 import forge.game.cost.CostExert;
 import forge.game.event.*;
 import forge.game.player.Player;
+import forge.game.player.PlayerView;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
 
@@ -41,11 +44,9 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.util.IHasForgeLog;
 import forge.util.TextUtil;
-import forge.util.maps.HashMapOfLists;
-import forge.util.maps.MapOfLists;
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.time.StopWatch;
 
 import java.util.*;
@@ -59,8 +60,11 @@ import java.util.*;
  * @author Forge
  * @version $Id: PhaseHandler.java 13001 2012-01-08 12:25:25Z Sloth $
  */
-public class PhaseHandler implements java.io.Serializable {
+public class PhaseHandler implements java.io.Serializable, IHasForgeLog {
     private static final long serialVersionUID = 5207222278370963197L;
+
+    // used for debugging phase timing
+    private final StopWatch sw = new StopWatch();
 
     // Start turn at 0, since we start even before first untap
     private PhaseType phase = null;
@@ -92,6 +96,7 @@ public class PhaseHandler implements java.io.Serializable {
 
     private final transient Game game;
 
+
     public PhaseHandler(final Game game0) {
         game = game0;
     }
@@ -120,7 +125,7 @@ public class PhaseHandler implements java.io.Serializable {
         if (playerTurn == playerTurn0) { return; }
         playerTurn = playerTurn0;
         game.updatePlayerTurnForView();
-        setPriority(playerTurn);
+        resetPriority();
     }
 
     public final Player getPreviousPlayerTurn() {
@@ -172,7 +177,7 @@ public class PhaseHandler implements java.io.Serializable {
                 turn++;
                 extraPhases.clear();
                 game.updateTurnForView();
-                game.fireEvent(new GameEventTurnBegan(playerTurn, turn));
+                game.fireEvent(new GameEventTurnBegan(PlayerView.get(playerTurn), turn));
 
                 // Tokens starting game in play should suffer from Sum. Sickness
                 for (final Card c : playerTurn.getCardsIn(ZoneType.Battlefield, false)) {
@@ -254,7 +259,7 @@ public class PhaseHandler implements java.io.Serializable {
                     game.getUpkeep().executeUntil(playerTurn);
                     game.getUpkeep().executeAt();
 
-                    if (playerTurn.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.CONTRAPTIONS)) {
+                    if (playerTurn.getCardsIn(ZoneType.Battlefield).anyMatch(Card::isContraption)) {
                         playerTurn.advanceCrankCounter();
                     }
 
@@ -281,10 +286,10 @@ public class PhaseHandler implements java.io.Serializable {
                             c.addCounter(CounterEnumType.LORE, 1, playerTurn, table);
                         }
                     }
-                    table.replaceCounterEffect(game, null, false);
+                    table.replaceCounterEffect(game, null);
 
                     // roll for attractions if we have any
-                    if (playerTurn.getCardsIn(ZoneType.Battlefield).anyMatch(CardPredicates.ATTRACTIONS)) {
+                    if (playerTurn.getCardsIn(ZoneType.Battlefield).anyMatch(Card::isAttraction)) {
                         playerTurn.rollToVisitAttractions();
                     }
 
@@ -293,6 +298,7 @@ public class PhaseHandler implements java.io.Serializable {
                 case COMBAT_BEGIN:
                     nCombatsThisTurn++;
                     combat = new Combat(playerTurn);
+                    game.getBeginOfCombat().executeUntil(playerTurn);
                     //PhaseUtil.verifyCombat();
                     break;
 
@@ -355,9 +361,7 @@ public class PhaseHandler implements java.io.Serializable {
                 case END_OF_TURN:
                     nEndOfTurnsThisTurn++;
                     game.getEndOfTurn().executeUntil(playerTurn);
-                    if (playerTurn.getController().isAI()) {
-                        playerTurn.getController().resetAtEndOfTurn();
-                    }
+                    playerTurn.getController().resetAtEndOfTurn();
 
                     game.getEndOfTurn().executeAt();
                     break;
@@ -486,13 +490,14 @@ public class PhaseHandler implements java.io.Serializable {
 
             case UNTAP:
                 game.getUntap().executeUntilEndOfPhase(playerTurn);
+                break;
 
             case COMBAT_END:
                 GameEventCombatEnded eventEndCombat = null;
                 if (inCombat()) {
                     List<Card> attackers = combat.getAttackers();
                     List<Card> blockers = combat.getAllBlockers();
-                    eventEndCombat = new GameEventCombatEnded(attackers, blockers);
+                    eventEndCombat = GameEventCombatEnded.fromCards(attackers, blockers);
                 }
                 endCombat();
 
@@ -529,7 +534,7 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     private void declareAttackersTurnBasedAction() {
-        final Player whoDeclares = ObjectUtils.firstNonNull(playerTurn.getDeclaresAttackers(), playerTurn);
+        final Player whoDeclares = Objects.requireNonNullElse(playerTurn.getDeclaresAttackers(), playerTurn);
 
         if (CombatUtil.canAttack(playerTurn)) {
             boolean success = false;
@@ -591,7 +596,6 @@ public class PhaseHandler implements java.io.Serializable {
                         }
                     }
                 }
-
             } while (!success);
 
             CardCollection tapped = new CardCollection();
@@ -657,7 +661,7 @@ public class PhaseHandler implements java.io.Serializable {
         do {
             p = game.getNextPlayerAfter(p);
             // Apply Odric's effect here
-            Player whoDeclaresBlockers = ObjectUtils.firstNonNull(p.getDeclaresBlockers(), p);
+            Player whoDeclaresBlockers = Objects.requireNonNullElse(p.getDeclaresBlockers(), p);
             if (combat.isPlayerAttacked(p)) {
                 if (CombatUtil.canBlock(p, combat)) {
                     // Replacement effects (for Camouflage)
@@ -723,11 +727,11 @@ public class PhaseHandler implements java.io.Serializable {
             // Player is done declaring blockers - redraw UI at this point
 
             // map: defender => (many) attacker => (many) blocker
-            Map<GameEntity, MapOfLists<Card, Card>> blockers = Maps.newHashMap();
+            Map<GameEntity, Multimap<Card, Card>> blockers = Maps.newHashMap();
             for (GameEntity ge : combat.getDefendersControlledBy(p)) {
-                MapOfLists<Card, Card> protectThisDefender = new HashMapOfLists<>(ArrayList::new);
+                Multimap<Card, Card> protectThisDefender = MultimapBuilder.hashKeys().arrayListValues().build();
                 for (Card att : combat.getAttackersOf(ge)) {
-                    protectThisDefender.addAll(att, combat.getBlockers(att));
+                    protectThisDefender.putAll(att, combat.getBlockers(att).isEmpty() ? List.of(att) : combat.getBlockers(att));
                 }
                 blockers.put(ge, protectThisDefender);
             }
@@ -751,7 +755,6 @@ public class PhaseHandler implements java.io.Serializable {
                     }
                 }
             }
-            // fire blockers declared trigger
             final Map<AbilityKey, Object> bdRunParams = AbilityKey.newMap();
             bdRunParams.put(AbilityKey.Blockers, declaredBlockers);
             bdRunParams.put(AbilityKey.Attackers, blockedAttackers);
@@ -763,7 +766,6 @@ public class PhaseHandler implements java.io.Serializable {
                 continue;
             }
 
-            // Run triggers
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Blocker, c1);
             runParams.put(AbilityKey.Attackers, combat.getAttackersBlockedBy(c1));
@@ -966,6 +968,11 @@ public class PhaseHandler implements java.io.Serializable {
         return extraPhases.get(afterPhase).push(new ExtraPhase(extraPhaseList.get(0)));
     }
 
+    public final boolean hasExtraPhaseAfter(final PhaseType afterPhase, final PhaseType extraPhase) {
+        final Stack<ExtraPhase> phases = extraPhases.get(afterPhase);
+        return phases != null && !phases.isEmpty() && phases.peek().getPhase() == extraPhase;
+    }
+
     public final boolean isFirstCombat() {
         return nCombatsThisTurn == 1;
     }
@@ -1003,12 +1010,7 @@ public class PhaseHandler implements java.io.Serializable {
 
     private final static boolean DEBUG_PHASES = false;
 
-    public void startFirstTurn(Player goesFirst) {
-        startFirstTurn(goesFirst, null);
-    }
-    public void startFirstTurn(Player goesFirst, Runnable startGameHook) {
-        StopWatch sw = new StopWatch();
-
+    public void setupFirstTurn(Player goesFirst, Runnable startGameHook) {
         if (phase != null) {
             throw new IllegalStateException("Turns already started, call this only once per game");
         }
@@ -1024,132 +1026,146 @@ public class PhaseHandler implements java.io.Serializable {
             startGameHook.run();
             givePriorityToPlayer = true;
         }
+    }
 
+    public void startFirstTurn(Player goesFirst) {
+        startFirstTurn(goesFirst, null);
+    }
+    public void startFirstTurn(Player goesFirst, Runnable startGameHook) {
+        setupFirstTurn(goesFirst, startGameHook);
+        mainGameLoop();
+    }
+
+    public void mainGameLoop() {
         // MAIN GAME LOOP
-        while (!game.isGameOver()) {
-            if (givePriorityToPlayer) {
-                if (DEBUG_PHASES) {
-                    sw.start();
-                }
+        while (!game.isGameOver() && !(game.getAge() == GameStage.RestartedByKarn)) {
+            mainLoopStep();
+        }
+    }
 
-                game.fireEvent(new GameEventPlayerPriority(playerTurn, phase, getPriorityPlayer()));
-                List<SpellAbility> chosenSa = null;
-
-                int loopCount = 0;
-                do {
-                    if (checkStateBasedEffects()) {
-                        // state-based effects check could lead to game over
-                        return;
-                    }
-                    game.stashGameState();
-
-                    chosenSa = pPlayerPriority.getController().chooseSpellAbilityToPlay();
-
-                    // this needs to come after chosenSa so it sees you conceding on own turn
-                    if (playerTurn.hasLost() && pPlayerPriority.equals(playerTurn) && pFirstPriority.equals(playerTurn)) {
-                        // If the active player has lost, and they have priority, set the next player to have priority
-                        System.out.println("Active player is no longer in the game...");
-                        pPlayerPriority = game.getNextPlayerAfter(getPriorityPlayer());
-                        pFirstPriority = pPlayerPriority;
-                    }
-
-                    if (chosenSa == null) {
-                        break; // that means 'I pass'
-                    }
-                    if (DEBUG_PHASES) {
-                        System.out.print("... " + pPlayerPriority + " plays " + chosenSa);
-                    }
-
-                    boolean rollback = false;
-                    for (SpellAbility sa : chosenSa) {
-                        Card saHost = sa.getHostCard();
-                        final Zone originZone = saHost.getZone();
-                        final CardZoneTable triggerList = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
-
-                        if (pPlayerPriority.getController().playChosenSpellAbility(sa)) {
-                            // 117.3c If a player has priority when they cast a spell, activate an ability, [play a land]
-                            // that player receives priority afterward.
-                            pFirstPriority = pPlayerPriority; // all opponents have to pass before stack is allowed to resolve
-                        } else if (game.EXPERIMENTAL_RESTORE_SNAPSHOT) {
-                            rollback = true;
-                        }
-
-                        saHost = game.getCardState(saHost);
-                        final Zone currentZone = saHost.getZone();
-
-                        // Need to check if Zone did change
-                        if (currentZone != null && originZone != null && !currentZone.equals(originZone) && (sa.isSpell() || sa.isLandAbility())) {
-                            // currently there can be only one Spell put on the Stack at once, or Land Abilities be played
-                            triggerList.put(originZone.getZoneType(), currentZone.getZoneType(), saHost);
-                            triggerList.triggerChangesZoneAll(game, sa);
-                        }
-                    }
-                    // Don't copy last state if we're in the middle of rolling back a spell...
-                    if (!rollback) {
-                        game.copyLastState();
-                    }
-                    loopCount++;
-                } while (loopCount < 999 || !pPlayerPriority.getController().isAI());
-
-                if (loopCount >= 999 && pPlayerPriority.getController().isAI()) {
-                    System.out.print("AI looped too much with: " + chosenSa);
-                }
-
-                if (DEBUG_PHASES) {
-                    sw.stop();
-                    System.out.print("... passed in " + sw.getTime()/1000f + " s\n");
-                    System.out.println("\t\tStack: " + game.getStack());
-                    sw.reset();
-                }
-            }
-            else if (DEBUG_PHASES) {
-                System.out.print(" >> (no priority given to " + getPriorityPlayer() + ")\n");
+    public void mainLoopStep() {
+        if (givePriorityToPlayer) {
+            if (DEBUG_PHASES) {
+                sw.start();
             }
 
-            // actingPlayer is the player who may act
-            // the firstAction is the player who gained Priority First in this segment
-            // of Priority
-            Player nextPlayer = game.getNextPlayerAfter(getPriorityPlayer());
+            game.fireEvent(new GameEventPlayerPriority(PlayerView.get(playerTurn), phase, PlayerView.get(getPriorityPlayer())));
+            List<SpellAbility> chosenSa = null;
 
-            if (game.isGameOver() || nextPlayer == null) { return; } // conceded?
+            int loopCount = 0;
+            do {
+                if (checkStateBasedEffects()) {
+                    // state-based effects check could lead to game over
+                    return;
+                }
+                game.stashGameState();
+
+                chosenSa = pPlayerPriority.getController().chooseSpellAbilityToPlay();
+
+                // this needs to come after chosenSa so it sees you conceding on own turn
+                if (playerTurn.hasLost() && pPlayerPriority.equals(playerTurn) && pFirstPriority.equals(playerTurn)) {
+                    // If the active player has lost, and they have priority, set the next player to have priority
+                    System.out.println("Active player is no longer in the game...");
+                    pPlayerPriority = game.getNextPlayerAfter(getPriorityPlayer());
+                    pFirstPriority = pPlayerPriority;
+                }
+
+                if (chosenSa == null) {
+                    break; // that means 'I pass'
+                }
+                if (DEBUG_PHASES) {
+                    System.out.print("... " + pPlayerPriority + " plays " + chosenSa);
+                }
+
+                boolean rollback = false;
+                for (SpellAbility sa : chosenSa) {
+                    Card saHost = sa.getHostCard();
+                    final Zone originZone = saHost.getZone();
+                    final CardZoneTable triggerList = new CardZoneTable(game.getLastStateBattlefield(), game.getLastStateGraveyard());
+
+                    if (pPlayerPriority.getController().playChosenSpellAbility(sa)) {
+                        // 117.3c If a player has priority when they cast a spell, activate an ability, [play a land]
+                        // that player receives priority afterward.
+                        pFirstPriority = pPlayerPriority; // all opponents have to pass before stack is allowed to resolve
+                    } else if (game.EXPERIMENTAL_RESTORE_SNAPSHOT) {
+                        rollback = true;
+                    }
+
+                    saHost = game.getCardState(saHost);
+                    final Zone currentZone = saHost.getZone();
+
+                    // Need to check if Zone did change
+                    if (currentZone != null && originZone != null && !currentZone.equals(originZone) && (sa.isSpell() || sa.isLandAbility())) {
+                        // currently there can be only one Spell put on the Stack at once, or Land Abilities be played
+                        triggerList.put(originZone.getZoneType(), currentZone.getZoneType(), saHost);
+                        triggerList.triggerChangesZoneAll(game, sa);
+                    }
+                }
+                // Don't copy last state if we're in the middle of rolling back a spell...
+                if (!rollback) {
+                    game.copyLastState();
+                }
+                loopCount++;
+            } while (loopCount < 999 || !pPlayerPriority.getController().isAI());
+
+            if (loopCount >= 999 && pPlayerPriority.getController().isAI()) {
+                aiLog.warn("AI looped too much with: " + chosenSa);
+            }
 
             if (DEBUG_PHASES) {
-                System.out.println(TextUtil.concatWithSpace(playerTurn.toString(),TextUtil.addSuffix(phase.toString(),":"), pPlayerPriority.toString(),"is active, previous was", nextPlayer.toString()));
+                sw.stop();
+                System.out.print("... passed in " + sw.getTime()/1000f + " s\n");
+                System.out.println("\t\tStack: " + game.getStack());
+                sw.reset();
             }
-            if (pFirstPriority == nextPlayer) {
-                if (game.getStack().isEmpty()) {
-                    if (playerTurn.hasLost()) {
-                        setPriority(game.getNextPlayerAfter(playerTurn));
-                    } else {
-                        setPriority(playerTurn);
-                    }
+        }
+        else if (DEBUG_PHASES) {
+            System.out.print(" >> (no priority given to " + getPriorityPlayer() + ")\n");
+        }
 
-                    // end phase
-                    givePriorityToPlayer = true;
-                    onPhaseEnd();
-                    advanceToNextPhase();
-                    onPhaseBegin();
+        // actingPlayer is the player who may act
+        // the firstAction is the player who gained Priority First in this segment
+        // of Priority
+        Player nextPlayer = game.getNextPlayerAfter(getPriorityPlayer());
+
+        if (game.isGameOver() || nextPlayer == null) { return; } // conceded?
+
+        if (DEBUG_PHASES) {
+            System.out.println(TextUtil.concatWithSpace(playerTurn.toString(),TextUtil.addSuffix(phase.toString(),":"), pPlayerPriority.toString(),"is active, previous was", nextPlayer.toString()));
+        }
+        if (pFirstPriority == nextPlayer) {
+            if (game.getStack().isEmpty()) {
+                if (playerTurn.hasLost()) {
+                    setPriority(game.getNextPlayerAfter(playerTurn));
+                } else {
+                    setPriority(playerTurn);
                 }
-                else if (!game.getStack().hasSimultaneousStackEntries()) {
-                    game.getStack().resolveStack();
-                }
-            } else {
-                // pass the priority to other player
-                pPlayerPriority = nextPlayer;
-            }
 
-            // If ever the karn's ultimate resolved
-            if (game.getAge() == GameStage.RestartedByKarn) {
-                setPhase(null);
-                game.updatePhaseForView();
-                game.fireEvent(new GameEventGameRestarted(playerTurn));
-                return;
+                // end phase
+                givePriorityToPlayer = true;
+                onPhaseEnd();
+                advanceToNextPhase();
+                onPhaseBegin();
             }
+            else if (!game.getStack().hasSimultaneousStackEntries()) {
+                game.getStack().resolveStack();
+            }
+        } else {
+            // pass the priority to other player
+            pPlayerPriority = nextPlayer;
+        }
 
-            // update Priority for all players
-            for (final Player p : game.getPlayers()) {
-                p.setHasPriority(getPriorityPlayer() == p);
-            }
+        // If ever the karn's ultimate resolved
+        if (game.getAge() == GameStage.RestartedByKarn) {
+            setPhase(null);
+            game.updatePhaseForView();
+            game.fireEvent(new GameEventGameRestarted(PlayerView.get(playerTurn)));
+            return;
+        }
+
+        // update Priority for all players
+        for (final Player p : game.getPlayers()) {
+            p.setHasPriority(getPriorityPlayer() == p);
         }
     }
 
@@ -1166,6 +1182,9 @@ public class PhaseHandler implements java.io.Serializable {
         if (!allAffectedCards.isEmpty()) {
             game.fireEvent(new GameEventCardStatsChanged(allAffectedCards));
             allAffectedCards.clear();
+            // Update flashback views after static abilities have been recalculated,
+            // so play-from-zone abilities (e.g. Bolas's Citadel) are reflected
+            game.getPlayers().forEach(Player::updateFlashbackForView);
         }
         return false;
     }

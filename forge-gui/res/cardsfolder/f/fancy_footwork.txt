@@ -1,0 +1,6 @@
+Name:Fancy Footwork
+ManaCost:2 W
+Types:Instant Lesson
+A:SP$ Untap | ValidTgts$ Creature | TargetMin$ 1 | TargetMax$ 2 | TgtPrompt$ Choose one or two target creatures | SubAbility$ DBPump | SpellDescription$ Untap one or two target creatures. They each get +2/+2 until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ +2 | NumDef$ +2
+Oracle:Untap one or two target creatures. They each get +2/+2 until end of turn.

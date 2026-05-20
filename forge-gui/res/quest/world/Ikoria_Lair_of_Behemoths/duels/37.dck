@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Eshu
+Title=Eshu
+Icon=Eshu.jpg
+Difficulty=Medium
+Description=./Standard/Ikoria_Lair_of_Behemoths/Adam_McCall_-_Mono-U_Flash_(Standard,_#962258).dck
+Deck Type=constructed
+
+[Main]
+3 Brazen Borrower
+3 Voracious Greatshark
+4 Cunning Nightbonder
+4 Sea-Dasher Octopus
+4 Brineborn Cutthroat
+4 Spectral Sailor
+1 Negate
+2 Essence Capture
+2 Mystical Dispute
+2 Sinister Sabotage
+2 Unsummon
+3 Quench
+4 Opt
+2 Castle Vantress
+20 Island
+[Sideboard]
+1 Disdainful Stroke
+1 Brazen Borrower
+1 Negate
+2 Unsummon
+2 Mystical Dispute
+2 Shark Typhoon
+2 Sorcerous Spyglass
+4 Aether Gust

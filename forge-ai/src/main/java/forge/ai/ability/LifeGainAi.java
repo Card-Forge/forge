@@ -26,27 +26,27 @@ public class LifeGainAi extends SpellAbilityAi {
      * forge.game.card.Card)
      */
     @Override
-    protected boolean willPayCosts(Player ai, SpellAbility sa, Cost cost, Card source) {
+    protected boolean willPayCosts(Player payer, SpellAbility sa, Cost cost, Card source) {
         final Game game = source.getGame();
         final PhaseHandler ph = game.getPhaseHandler();
-        final int life = ai.getLife();
+        final int life = payer.getLife();
 
         boolean lifeCritical = life <= 5 || (ph.getPhase().isBefore(PhaseType.COMBAT_DAMAGE)
-                && ComputerUtilCombat.lifeInDanger(ai, game.getCombat()));
+                && ComputerUtilCombat.lifeInDanger(payer, game.getCombat()));
 
         if (!lifeCritical) {
             // return super.willPayCosts(ai, sa, cost, source);
             if ("CriticalOnly".equals(sa.getParam("AILogic"))) {
                 return false;
             }
-            if (!ComputerUtilCost.checkSacrificeCost(ai, cost, source, sa, false)) {
+            if (!ComputerUtilCost.checkSacrificeCost(payer, cost, source, sa, false)) {
                 return false;
             }
-            if (!ComputerUtilCost.checkLifeCost(ai, cost, source, 4, sa)) {
+            if (!ComputerUtilCost.checkLifeCost(payer, cost, source, 4, sa)) {
                 return false;
             }
 
-            if (!ComputerUtilCost.checkDiscardCost(ai, cost, source, sa)) {
+            if (!ComputerUtilCost.checkDiscardCost(payer, cost, source, sa)) {
                 return false;
             }
 
@@ -56,7 +56,7 @@ public class LifeGainAi extends SpellAbilityAi {
         } else {
             // don't sac possible blockers
             if (!ph.getPhase().equals(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                    || !game.getCombat().getDefenders().contains(ai)) {
+                    || !game.getCombat().getDefenders().contains(payer)) {
                 boolean skipCheck = false;
                 // if it's a sac self cost and the effect source is not a
                 // creature, skip this check
@@ -64,7 +64,7 @@ public class LifeGainAi extends SpellAbilityAi {
                 skipCheck |= ComputerUtilCost.isSacrificeSelfCost(cost) && !source.isCreature();
 
                 if (!skipCheck) {
-                    if (!ComputerUtilCost.checkSacrificeCost(ai, cost, source, sa,false)) {
+                    if (!ComputerUtilCost.checkSacrificeCost(payer, cost, source, sa,false)) {
                         return false;
                     }
                 }
@@ -135,10 +135,7 @@ public class LifeGainAi extends SpellAbilityAi {
         boolean activateForCost = ComputerUtil.activateForCost(sa, ai);
         if (sourceName.equals("Dawnglow Infusion")
                 || (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid"))) {
-            // Set PayX here to maximum value.
-            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
-            sa.setXManaCostPaid(xPay);
-            lifeAmount = xPay;
+            lifeAmount = ComputerUtilCost.setMaxXValue(sa, ai, sa.isTrigger());
         } else {
             lifeAmount = AbilityUtils.calculateAmount(source, amountStr, sa);
         }
@@ -179,9 +176,8 @@ public class LifeGainAi extends SpellAbilityAi {
         }
         if (MyRandom.getRandom().nextFloat() < value) {
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
+        return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     /**
@@ -207,17 +203,15 @@ public class LifeGainAi extends SpellAbilityAi {
         }
 
         final String amountStr = sa.getParam("LifeAmount");
-        if (amountStr.equals("X") && sa.getSVar(amountStr).equals("Count$xPaid")) {
-            // Set PayX here to maximum value.
-            final int xPay = ComputerUtilCost.getMaxXValue(sa, ai, true);
-            sa.setXManaCostPaid(xPay);
+        if (amountStr.equals("X")) {
+            ComputerUtilCost.setMaxXValue(sa, ai, true);
         }
 
         return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
     }
     
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
     	return doTriggerNoCost(ai, sa, true);
     }
 

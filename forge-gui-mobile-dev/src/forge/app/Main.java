@@ -139,6 +139,12 @@ public class Main {
         }
 
         @Override
+        public void convertToPNG(InputStream input, OutputStream output) throws IOException {
+            BufferedImage image = ImageIO.read(input);
+            ImageIO.write(image, "png", output);
+        }
+
+        @Override
         public Pair<Integer, Integer> getRealScreenSize(boolean real) {
             return Pair.of(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         }
@@ -152,6 +158,16 @@ public class Main {
         public UpnpServiceConfiguration getUpnpPlatformService() {
             // shouldn't be reached
             return null;
+        }
+
+        @Override
+        public boolean needFileAccess() {
+            return false;
+        }
+
+        @Override
+        public void requestFileAcces() {
+
         }
     }
 }

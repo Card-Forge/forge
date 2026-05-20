@@ -1,0 +1,8 @@
+Name:Guy in the Chair
+Variant:UniversesWithin:FlavorName:Eccentric Arachnologist
+ManaCost:2 G
+Types:Creature Human Advisor
+PT:2/3
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ PutCounter | PrecostDesc$ Web Support — | Cost$ 2 G T | ValidTgts$ Spider | CounterType$ P1P1 | CounterNum$ 1 | SorcerySpeed$ True | SpellDescription$ Put a +1/+1 counter on target Spider. Activate only as a sorcery.
+Oracle:{T}: Add one mana of any color.\nWeb Support — {2}{G}, {T}: Put a +1/+1 counter on target Spider. Activate only as a sorcery.

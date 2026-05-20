@@ -1,0 +1,50 @@
+[duel]
+[metadata]
+Name=Teysa
+Title=Teysa
+Icon=Teysa.jpg
+Difficulty=Easy
+Description=./Standard/Aetherdrift/NaoyaWaki_-_Sultai_Reanimator_(Standard,_#2367890).dck
+Deck Type=constructed
+
+[Main]
+4 Picklock Prankster
+1 Kiora, the Rising Tide
+2 Harvester of Misery
+1 Lumra, Bellow of the Woods
+3 Atraxa, Grand Unifier
+2 Valgavoth, Terror Eater
+2 Bitter Triumph
+1 Ephara's Dispersal
+2 Duress
+3 Wail of the Forgotten
+1 Quag Feast
+4 Squirming Emergence
+2 Terror Tide
+2 Zombify
+4 Founding the Third Path
+1 Jace, the Perfected Mind
+1 Bleachbone Verge
+1 Blooming Marsh
+1 Botanical Sanctum
+4 Fabled Passage
+1 Forest
+4 Gloomlake Verge
+2 Hedge Maze
+2 Island
+1 Llanowar Wastes
+1 Plains
+2 Swamp
+2 Undercity Sewers
+1 Underground Mortuary
+1 Wastewood Verge
+1 Willowrush Verge
+[Sideboard]
+2 Duress
+2 Ghost Vacuum
+1 Anoint with Affliction
+4 Tear Asunder
+2 Abhorrent Oculus
+1 Ephara's Dispersal
+2 Malicious Eclipse
+1 Jace, the Perfected Mind

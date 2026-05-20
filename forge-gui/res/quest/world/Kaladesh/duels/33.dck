@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=King Kong
+Title=King Kong
+Icon=King Kong.jpg
+Difficulty=Easy
+Description=Kaladesh/SCG_Invitational_Qualifier_-_Cayce,_SC/Cory_Parker_-_G-R_Energy_(Standard,_#644121).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Bristling Hydra
+2 Lathnu Hellion
+4 Longtusk Cub
+4 Servant of the Conduit
+4 Tireless Tracker
+2 Verdurous Gearhulk
+4 Voltaic Brawler
+2 Smuggler's Copter
+1 Blossoming Defense
+4 Harnessed Lightning
+4 Attune with Aether
+2 Incendiary Flow
+3 Chandra, Torch of Defiance
+4 Aether Hub
+2 Cinder Glade
+7 Forest
+4 Game Trail
+4 Mountain
+[Sideboard]
+1 Arlinn Kord
+1 Blossoming Defense
+1 Fleetwheel Cruiser
+4 Galvanic Bombardment
+1 Lathnu Hellion
+1 Natural State
+2 Nissa, Vital Force
+2 Root Out
+2 Weaver of Lightning

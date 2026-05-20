@@ -1,0 +1,41 @@
+[duel]
+[metadata]
+Name=Zegana
+Title=Zegana
+Icon=Zegana.jpg
+Difficulty=Easy
+Description=Battle_for_Zendikar/SCG_Invitational_Qualifier_Austin/Daniel_Sieja_-_Esper_Control_(Standard,_#339048).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Hangarback Walker
+4 Knight of the White Orchid
+3 Wingmate Roc
+2 Murderous Cut
+3 Secure the Wastes
+1 Ultimate Price
+2 Utter End
+2 Painful Truths
+1 Quarantine Field
+4 Silkwrap
+1 Stasis Snare
+4 Gideon, Ally of Zendikar
+1 Ob Nixilis Reignited
+2 Sorin, Solemn Visitor
+3 Caves of Koilos
+4 Flooded Strand
+4 Plains
+4 Polluted Delta
+2 Prairie Stream
+4 Shambling Vent
+2 Sunken Hollow
+3 Swamp
+[Sideboard]
+2 Disdainful Stroke
+1 Dispel
+1 Dragonlord Silumgar
+4 Duress
+1 Languish
+2 Negate
+3 Surge of Righteousness

@@ -67,10 +67,10 @@
 				&quot;options&quot;: [
 					{
 						&quot;name&quot;: &quot;Am I allowed to enter the aerie?&quot;,
-						&quot;text&quot;: &quot;I'm afraid to say to you that you are not allowed to do that. Our guild is very protective of its breeding practices, which have been developed over a span of more than thousands of years. Because of that, we don't want our competitors peeking into our business. If anyone without permission enters the aerie, that person will be reprimanded by the various guards and even the birds, who have been trained to attack unwanted intruders.'&quot;,
+						&quot;text&quot;: &quot;I'm afraid to say to you that you are not allowed to do that. Our guild is very protective of its breeding practices, which have been developed over a span of more than thousands of years. Because of that, we don't want our competitors peeking into our business. If anyone without permission enters the aerie, that person will be reprimanded by the various guards and even the birds, who have been trained to attack unwanted intruders.&quot;,
 						&quot;options&quot;: [
 							{
-								&quot;name&quot;: &quot;Thanks for the information, goodbye&quot;,
+								&quot;name&quot;: &quot;Thanks for the information. Goodbye.&quot;,
 								&quot;text&quot;: &quot;Leave&quot;
 							}
 						]

@@ -1,0 +1,23 @@
+[metadata]
+Name=minotaurblackredmadness
+[Main]
+1 Forest|ICE
+1 Llanowar Wastes|APC
+13 Mountain|ICE
+2 Karplusan Forest|ICE
+4 Fiery Temper|TOR
+4 Frenzied Tilling|INV
+4 Minotaur Explorer|ODY
+4 Minotaur Warrior|POR
+4 Raging Minotaur|POR
+4 Reckless Charge|ODY
+4 Shock|ONS
+4 Strength of Lunacy|TOR
+4 Sulfurous Springs|ICE
+4 Swamp|ICE
+4 Swat|ONS
+
+[StartInBattle_Reference]
+2 Mountain|ICE
+1 Didgeridoo|HML
+1 Anaba Spirit Crafter|HML

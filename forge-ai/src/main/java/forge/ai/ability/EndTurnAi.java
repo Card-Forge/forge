@@ -23,7 +23,7 @@ public class EndTurnAi extends SpellAbilityAi  {
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player aiPlayer) { return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi); }
+    public AiAbilityDecision chkDrawback(Player aiPlayer, SpellAbility sa) { return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi); }
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)

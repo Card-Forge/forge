@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Lilith
+Title=Lilith
+Icon=Lilith.jpg
+Difficulty=Medium
+Description=Journey_into_Nyx/TCGplayer_Open_5K_Boxborough,_MA/Spencer_Williams_-_Azorius_Control_(Standard,_#73407).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 AEtherling
+4 Azorius Charm
+2 Celestial Flare
+4 Dissolve
+4 Sphinx's Revelation
+3 Syncopate
+4 Supreme Verdict
+4 Detention Sphere
+3 Elspeth, Sun's Champion
+4 Jace, Architect of Thought
+1 Azorius Guildgate
+4 Hallowed Fountain
+7 Island
+4 Mutavault
+5 Plains
+1 Temple of Deceit
+4 Temple of Enlightenment
+1 Temple of Silence
+[Sideboard]
+2 Blind Obedience
+2 Deicide
+2 Dispel
+1 Fated Retribution
+1 Glare of Heresy
+2 Negate
+2 Nyx-Fleece Ram
+1 Pithing Needle
+1 Reprisal

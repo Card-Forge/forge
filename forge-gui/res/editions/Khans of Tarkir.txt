@@ -2,7 +2,6 @@
 Code=KTK
 Date=2014-09-26
 Name=Khans of Tarkir
-Code2=KTK
 Type=Expansion
 BoosterCovers=5
 Booster=10 Common:fromsheet("KTK cards"), 3 Uncommon:fromsheet("KTK cards"), 1 RareMythic:fromsheet("KTK cards"), 1 BasicLand KTK
@@ -312,12 +311,17 @@ ScryfallCode=KTK
 1 w_3_4_bird_flying @Mark Zug
 2 w_1_1_spirit_flying @Mike Sass
 3 w_1_1_warrior @Ryan Barger
-3 w_1_1_warrior @Ryan Barger
-3 w_1_1_warrior @Ryan Barger
+4 w_1_1_warrior @Yefim Kligerman
 5 b_2_2_vampire_flying @Cynthia Sheppard
 6 b_2_2_zombie @Wayne Reynolds
 7 r_1_1_goblin @Kev Walker
-8 r_1_1_goblin_haste @Kev Walker
+# Duplicated as there is no r_1_1_goblin_haste token yet
+7 r_1_1_goblin_haste @Kev Walker
 8 g_4_4_bear @Kev Walker
 9 g_1_1_snake @Lars Grant-West
 10 bg_x_x_spirit_warrior @Ryan Alexander Lee
+
+[other]
+11 morph @Raymond Swanland
+12 emblem_sarkhan_the_dragonspeaker @Daarken
+13 emblem_sorin_solemn_visitor @Cynthia Sheppard

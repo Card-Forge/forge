@@ -2,7 +2,7 @@ Name:Total War
 ManaCost:3 R
 Types:Enchantment
 T:Mode$ AttackersDeclared | Execute$ TrigDestroy | TriggerZones$ Battlefield | AttackingPlayer$ Player | TriggerDescription$ Whenever a player attacks with one or more creatures, destroy all untapped non-Wall creatures that player controls that didn't attack, except for creatures the player hasn't controlled continuously since the beginning of the turn.
-SVar:TrigDestroy:DB$ DestroyAll | ValidCards$ Creature.nonWall+!firstTurnControlled+untapped+ActivePlayerCtrl+notattacking
+SVar:TrigDestroy:DB$ DestroyAll | ValidCards$ Creature.nonWall+!firstTurnControlled+untapped+ActivePlayerCtrl+!attacking
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 Oracle:Whenever a player attacks with one or more creatures, destroy all untapped non-Wall creatures that player controls that didn't attack, except for creatures the player hasn't controlled continuously since the beginning of the turn.

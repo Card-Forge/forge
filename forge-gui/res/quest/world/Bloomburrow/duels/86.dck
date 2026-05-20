@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=NanaBuruku
+Title=NanaBuruku
+Icon=NanaBuruku.jpg
+Difficulty=Very Hard
+Description=./Modern/Bloomburrow/Andrew_Thomas_-_Orzhov_Zombies_(Modern,_#2190307).dck
+Deck Type=constructed
+
+[Main]
+2 Bone Picker
+2 Carrion Feeder
+4 Champion of the Perished
+3 Cryptbreaker
+4 Demon of Death's Gate
+4 Gravecrawler
+1 Lazotep Reaver
+4 Orcish Bowmasters
+2 Rottenmouth Viper
+3 Serrated Scorpion
+4 Shambling Ghast
+1 Lavaspur Boots
+3 Beckon Apparition
+4 Rotten Reunion
+1 Scavenger's Talent
+2 Brightclimb Pathway
+4 Concealed Courtyard
+1 Hive of the Eye Tyrant
+1 Spymaster's Vault
+10 Swamp
+[Sideboard]
+4 Damping Sphere
+3 Darkness
+4 Leyline of Sanctity
+4 Long Goodbye

@@ -1,20 +1,19 @@
 [metadata]
 Name=parrot
 [Main]
-1 Brushland|ICE|1
-1 Forest|LEA|1
-13 Island|LEA|1
-2 Thieving Magpie|7ED|1
-2 Unsummon|LEB|1
-2 Yavimaya Coast|APC|1
-3 Plains|LEA|1
-3 Rainbow Efreet|VIS|1
-3 Tolarian Winds|7ED|1
-4 Adarkar Wastes|ICE|1
-4 Aven Fisher|ODY|1
-4 Cloud Spirit|STH|1
-4 Hunting Moa|UDS|1
-4 Mahamoti Djinn|LEA|1
-4 Phantom Monster|LEA|1
-4 Serra Angel|PWOS|1
-4 Siren's Call|2ED|1
+4 Coastal Tower|INV
+4 Elfhame Palace|INV
+8 Forest|INV
+4 Island|INV
+4 Plains|INV
+4 Birds of Paradise|7ED
+4 Fertile Ground|USG
+4 Coastal Piracy|MMQ
+4 Talas Warrior|PO2
+2 Dream Thrush|INV
+2 Kangee, Aerie Keeper|INV
+4 Treva's Charm|PLS
+4 Soulcatchers' Aerie|JUD
+4 Battle Screech|JUD
+2 Giant Albatross|HML
+2 Airborne Aid|ONS

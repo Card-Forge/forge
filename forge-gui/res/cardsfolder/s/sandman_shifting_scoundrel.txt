@@ -1,0 +1,11 @@
+Name:Sandman, Shifting Scoundrel
+Variant:UniversesWithin:FlavorName:The Scouring Stormsoul
+ManaCost:1 G G
+Types:Legendary Creature Sand Elemental Villain
+PT:*/*
+S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ NICKNAME's power and toughness are each equal to the number of lands you control.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE2 | Description$ CARDNAME can't be blocked by creatures with power 2 or less.
+A:AB$ ChangeZone | Cost$ 3 G G | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | ValidTgts$ Land.YouOwn | TgtPrompt$ Select target land card in your graveyard | ThisDefinedAndTgts$ Self | Tapped$ True | SpellDescription$ Return this card and target land card from your graveyard to the battlefield tapped.
+SVar:X:Count$Valid Land.YouCtrl
+SVar:BuffedBy:Land
+Oracle:Sandman's power and toughness are each equal to the number of lands you control.\nSandman can't be blocked by creatures with power 2 or less.\n{3}{G}{G}: Return this card and target land card from your graveyard to the battlefield tapped.

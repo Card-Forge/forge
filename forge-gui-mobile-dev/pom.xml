@@ -145,9 +145,9 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
                     <attach>false</attach>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
+                    <descriptors>
+                        <descriptor>src/main/assembly/jar-with-dependencies.xml</descriptor>
+                    </descriptors>
                     <archive>
                         <manifestEntries>
                             <Implementation-Title>${project.name}</Implementation-Title>
@@ -238,6 +238,11 @@
             <artifactId>gdx-box2d-platform</artifactId>
             <version>1.13.5</version>
             <classifier>natives-desktop</classifier>
+        </dependency>
+        <dependency>
+            <groupId>com.github.oshi</groupId>
+            <artifactId>oshi-core</artifactId>
+            <version>6.9.0</version>
         </dependency>
     </dependencies>
 </project>

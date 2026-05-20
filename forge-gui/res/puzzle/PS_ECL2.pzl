@@ -1,0 +1,16 @@
+[metadata]
+Name:Possibility Storm - Lorwyn Eclipsed #02
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2026/01/latest-4-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Remember that your solution must satisfy all possible blocking decisions. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Impolite Entrance;Take the Fall;Jet's Brainwashing;Secret Identity;Raph & Leo, Sibling Rivals
+p0battlefield=Battle-Rattle Shaman;Feisty Spikeling;Island;Island;Mountain;Mountain;Mountain;Mountain
+p1life=18
+p1battlefield=Doran, Besieged by Time|Id:1;Bark of Doran|AttachedTo:1;Adelbert Steiner

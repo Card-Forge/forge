@@ -4,7 +4,7 @@ Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature | AddTrigger$ TrigEndlessDies | AddSVar$ EndlessReturn | Description$ Each creature has "When this creature dies, choose target opponent. That player puts this card from its owner's graveyard onto the battlefield under their control at the beginning of the next end step."
 SVar:TrigEndlessDies:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | TriggerController$ TriggeredCardController | Execute$ TrigTgtOpp | TriggerDescription$ When this creature dies, choose target opponent. That player puts this card from its owner's graveyard onto the battlefield under their control at the beginning of the next end step.
 SVar:TrigTgtOpp:DB$ Pump | ValidTgts$ Opponent | IsCurse$ True | SubAbility$ DBDelayTrig
-SVar:DBDelayTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ EndlessReturn | RememberObjects$ TargetedPlayer,Self | TriggerDescription$ That player puts this card from its owner's graveyard onto the battlefield under their control at the beginning of the next end step.
+SVar:DBDelayTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ EndlessReturn | RememberObjects$ TargetedPlayer & Self | TriggerDescription$ That player puts this card from its owner's graveyard onto the battlefield under their control at the beginning of the next end step.
 SVar:EndlessReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ DelayTriggerRemembered | GainControl$ DelayTriggerRemembered
 AI:RemoveDeck:All
 AI:RemoveDeck:Random

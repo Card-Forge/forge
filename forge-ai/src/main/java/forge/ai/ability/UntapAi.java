@@ -1,6 +1,17 @@
 package forge.ai.ability;
 
-import forge.ai.*;
+import java.util.List;
+import java.util.Map;
+
+import forge.ai.AiAbilityDecision;
+import forge.ai.AiPlayDecision;
+import forge.ai.ComputerUtil;
+import forge.ai.ComputerUtilAbility;
+import forge.ai.ComputerUtilCard;
+import forge.ai.ComputerUtilCombat;
+import forge.ai.ComputerUtilCost;
+import forge.ai.ComputerUtilMana;
+import forge.ai.SpellAbilityAi;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -23,9 +34,6 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollectionView;
 
-import java.util.List;
-import java.util.Map;
-
 public class UntapAi extends SpellAbilityAi {
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
@@ -42,12 +50,12 @@ public class UntapAi extends SpellAbilityAi {
     }
 
     @Override
-    protected boolean willPayCosts(final Player ai, final SpellAbility sa, final Cost cost, final Card source) {
+    protected boolean willPayCosts(final Player payer, final SpellAbility sa, final Cost cost, final Card source) {
         if (!ComputerUtilCost.checkAddM1M1CounterCost(cost, source)) {
             return false;
         }
 
-        return ComputerUtilCost.checkDiscardCost(ai, cost, source, sa);
+        return ComputerUtilCost.checkDiscardCost(payer, cost, source, sa);
     }
 
     @Override
@@ -57,19 +65,16 @@ public class UntapAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             if (untapPrefTargeting(ai, sa, false)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.TargetingFailed);
         }
 
         final List<Card> pDefined = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
         if (pDefined.isEmpty() || (pDefined.get(0).isTapped() && pDefined.get(0).getController() == ai)) {
             // If the defined card is tapped, or if there are no defined cards, we can play this ability
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-        } else {
-            // Otherwise, we can't play this ability
-            return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
         }
+        return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
     }
 
     @Override
@@ -77,34 +82,31 @@ public class UntapAi extends SpellAbilityAi {
         if (!sa.usesTargeting()) {
             if (mandatory) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else if ("Never".equals(sa.getParam("AILogic"))) {
+            }
+            if ("Never".equals(sa.getParam("AILogic"))) {
                 return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
 
             final List<Card> pDefined = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
             if (pDefined.isEmpty() || (pDefined.get(0).isTapped() && pDefined.get(0).getController() == ai)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
             }
-        } else {
-            if (untapPrefTargeting(ai, sa, mandatory)) {
-                return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else if (mandatory) {
-                // not enough preferred targets, but mandatory so keep going:
-                if (untapUnpreferredTargeting(sa, mandatory)) {
-                    return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
-                } else {
-                    return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
-                }
+            return new AiAbilityDecision(0, AiPlayDecision.MissingNeededCards);
+        } else if (untapPrefTargeting(ai, sa, mandatory)) {
+            return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
+        } else if (mandatory) {
+            // not enough preferred targets, but mandatory so keep going:
+            if (untapUnpreferredTargeting(sa, mandatory)) {
+                return new AiAbilityDecision(50, AiPlayDecision.MandatoryPlay);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
     }
 
     @Override
-    public AiAbilityDecision chkDrawback(SpellAbility sa, Player ai) {
+    public AiAbilityDecision chkDrawback(Player ai, SpellAbility sa) {
         if (!sa.usesTargeting()) {
             // who cares if its already untapped, it's only a subability?
         } else {
@@ -161,6 +163,14 @@ public class UntapAi extends SpellAbilityAi {
             SpellAbility subSa = sa.getSubAbility();
             if (subSa.getApi() == ApiType.RemoveFromCombat && "RemoveBestAttacker".equals(subSa.getParam("AILogic"))) {
                 targetUntapped = true;
+                Combat combat = ai.getGame().getCombat();
+                if (combat == null) {
+                    return false;
+                }
+                list = CardLists.filter(list, c -> combat.isAttacking(c, ai));
+                if (list.isEmpty()) {
+                    return false;
+                }
             }
         }
 
@@ -264,24 +274,24 @@ public class UntapAi extends SpellAbilityAi {
         final String[] tappablePermanents = { "Enchantment", "Planeswalker" };
         CardCollection tapList = CardLists.getValidCards(list, tappablePermanents, source.getController(), source, sa);
 
-        if (untapTargetList(source, tgt, sa, mandatory, tapList)) {
+        if (untapTargetList(source, sa, mandatory, tapList)) {
             return true;
         }
 
         // try to just tap already tapped things
         tapList = CardLists.filter(list, CardPredicates.UNTAPPED);
 
-        if (untapTargetList(source, tgt, sa, mandatory, tapList)) {
+        if (untapTargetList(source, sa, mandatory, tapList)) {
             return true;
         }
 
         // just tap whatever we can
         tapList = list;
 
-        return untapTargetList(source, tgt, sa, mandatory, tapList);
+        return untapTargetList(source, sa, mandatory, tapList);
     }
 
-    private boolean untapTargetList(final Card source, final TargetRestrictions tgt, final SpellAbility sa, final boolean mandatory, 
+    private boolean untapTargetList(final Card source, final SpellAbility sa, final boolean mandatory,
             final CardCollection tapList) {
         tapList.removeAll(sa.getTargets().getTargetCards());
 
@@ -293,7 +303,7 @@ public class UntapAi extends SpellAbilityAi {
             Card choice = null;
 
             if (tapList.isEmpty()) {
-                if (sa.getTargets().size() < tgt.getMinTargets(source, sa) || sa.getTargets().size() == 0) {
+                if (sa.getTargets().size() < sa.getMinTargets() || sa.getTargets().size() == 0) {
                     if (!mandatory) {
                         sa.resetTargets();
                     }
@@ -307,7 +317,7 @@ public class UntapAi extends SpellAbilityAi {
             choice = ComputerUtilCard.getBestAI(tapList);
 
             if (choice == null) { // can't find anything left
-                if (sa.getTargets().size() < tgt.getMinTargets(source, sa) || sa.getTargets().size() == 0) {
+                if (sa.getTargets().size() < sa.getMinTargets() || sa.getTargets().size() == 0) {
                     if (!mandatory) {
                         sa.resetTargets();
                     }
@@ -363,27 +373,26 @@ public class UntapAi extends SpellAbilityAi {
             return false;
         }
 
-        // If damage can't be prevented. Just return false.
-
-         Combat activeCombat = game.getCombat();
+        Combat activeCombat = game.getCombat();
         if (activeCombat == null) {
             return false;
         }
 
         CardCollection list = CardLists.getTargetableCards(activeCombat.getAttackers(), sa);
+        list = CardLists.filter(list, c -> activeCombat.isAttacking(c, ai));
 
         if (list.isEmpty()) {
             return false;
         }
 
-         if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+        if (game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             // Blockers already set. Are there any dangerous unblocked creatures? Sort by creature that will deal the most damage?
             Card card = ComputerUtilCombat.mostDangerousAttacker(list, ai, activeCombat, true);
 
             if (card == null) { return false; }
 
-             sa.getTargets().add(card);
-             return true;
+            sa.getTargets().add(card);
+            return true;
         }
 
         return false;
@@ -468,12 +477,10 @@ public class UntapAi extends SpellAbilityAi {
         // maybe we'll serendipitously untap into something like a removal spell or burn spell that'll help
         return ph.getNextTurn() == ai
                 && (ph.is(PhaseType.COMBAT_DECLARE_BLOCKERS) || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS));
-
-        // haven't found any immediate playable options
     }
 
     @Override
-    public boolean willPayUnlessCost(SpellAbility sa, Player payer, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
+    public boolean willPayUnlessCost(Player payer, SpellAbility sa, Cost cost, boolean alreadyPaid, FCollectionView<Player> payers) {
         // Paralyze effects
         if (sa.hasParam("UnlessSwitched")) {
             final Card host = sa.getHostCard();
@@ -495,6 +502,6 @@ public class UntapAi extends SpellAbilityAi {
             }
         }
 
-        return super.willPayUnlessCost(sa, payer, cost, alreadyPaid, payers);
+        return super.willPayUnlessCost(payer, sa, cost, alreadyPaid, payers);
     }
 }

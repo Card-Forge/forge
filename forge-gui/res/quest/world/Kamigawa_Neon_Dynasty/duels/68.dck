@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Jengu
+Title=Jengu
+Icon=Jengu.jpg
+Difficulty=Hard
+Description=./Modern/Kamigawa_Neon_Dynasty/Alex_Dulawan_-_Mono_Green_Stompy_(Modern,_#1367625).dck
+Deck Type=constructed
+
+[Main]
+1 Rhonas the Indomitable
+1 Avatar of the Resolute
+2 Questing Beast
+2 Yorvo, Lord of Garenbrig
+3 Strangleroot Geist
+3 Werewolf Pack Leader
+4 Experiment One
+4 Steel Leaf Champion
+4 Ignoble Hierarch
+4 Old-Growth Troll
+1 The Great Henge
+2 Thrash // Threat
+3 Aspect of Hydra
+4 Vines of Vastwood
+2 Rancor
+1 Boseiju, Who Endures
+3 Lair of the Hydra
+16 Forest
+[Sideboard]
+1 Thrun, the Last Troll
+1 Shadowspear
+1 Shifting Ceratops
+2 Endurance
+2 Dismember
+2 Obstinate Baloth
+2 Damping Sphere
+2 Collector Ouphe
+2 Return to Nature

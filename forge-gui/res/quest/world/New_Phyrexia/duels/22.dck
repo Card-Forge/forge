@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Storm
+Title=Storm
+Icon=Storm.jpg
+Difficulty=Easy
+Description=New_Phyrexia/Catania/Gesualdo_Giudice_in_PTQ_Philadelphia_-_GW_Infect_(Standard,_#17537).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Glistener Elf
+4 Ichorclaw Myr
+4 Lost Leonin
+4 Necropede
+2 Apostle's Blessing
+4 Dismember
+2 Emerge Unscathed
+4 Giant Growth
+4 Groundswell
+4 Mutagenic Growth
+4 Vines of Vastwood
+7 Forest
+4 Inkmoth Nexus
+1 Plains
+4 Razorverge Thicket
+4 Sunpetal Grove
+[Sideboard]
+3 Mental Misstep
+3 Nature's Claim
+3 Priests of Norn
+3 Spellskite
+3 Viridian Corrupter

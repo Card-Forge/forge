@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Tanit
+Title=Tanit
+Icon=Tanit.jpg
+Difficulty=Easy
+Description=Aether_Revolt/Andrew_Gould_-_Delirium_(Standard,_#667056).dck
+Deck Type=constructed
+
+[Main]
+3 Rishkar, Peema Renegade
+4 Sylvan Advocate
+4 Tireless Tracker
+3 Verdurous Gearhulk
+4 Walking Ballista
+4 Winding Constrictor
+2 Blossoming Defense
+2 Fatal Push
+3 Grasp of Darkness
+1 Murder
+3 Oath of Nissa
+3 Nissa, Voice of Zendikar
+4 Blooming Marsh
+3 Evolving Wilds
+7 Forest
+4 Hissing Quagmire
+6 Swamp
+[Sideboard]
+1 Aethersphere Harvester
+1 Appetite for the Unnatural
+2 Fatal Push
+2 Kalitas, Traitor of Ghet
+1 Lifecrafter's Bestiary
+1 Lost Legacy
+2 Natural State
+1 Nissa, Vital Force
+1 Ob Nixilis Reignited
+3 Transgress the Mind

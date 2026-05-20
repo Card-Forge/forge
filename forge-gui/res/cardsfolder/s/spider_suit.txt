@@ -1,0 +1,8 @@
+Name:Spider-Suit
+Variant:UniversesWithin:FlavorName:Cactarantula Saddle
+ManaCost:1
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddType$ Spider & Hero | Description$ Equipped creature gets +2/+2 and is a Spider Hero in addition to its other types.
+K:Equip:3
+DeckHas:Type$Spider|Hero
+Oracle:Equipped creature gets +2/+2 and is a Spider Hero in addition to its other types.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)

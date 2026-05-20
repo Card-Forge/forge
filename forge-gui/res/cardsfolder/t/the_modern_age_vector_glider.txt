@@ -2,7 +2,7 @@ Name:The Modern Age
 ManaCost:1 U
 Types:Enchantment Saga
 K:Chapter:3:DBDraw,DBDraw,DBTransform
-SVar:DBDraw:DB$ Draw | NumCards$ 1 | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card.
+SVar:DBDraw:DB$ Draw | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card.
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 SVar:DBTransform:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn | SpellDescription$ Exile this Saga, then return it to the battlefield transformed under your control.
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | GainControl$ True | SubAbility$ DBCleanup

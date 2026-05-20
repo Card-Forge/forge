@@ -4,7 +4,7 @@ Types:Snow Creature Bird
 PT:*/*
 K:Flying
 S:Mode$ Continuous | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of snow permanents on the battlefield.
-A:AB$ PutCounter | Cost$ 1 S | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | CounterType$ ICE | CounterNum$ 1 | SpellDescription$ Put an ice counter on target permanent.
+A:AB$ PutCounter | Cost$ 1 S | ValidTgts$ Permanent | CounterType$ ICE | CounterNum$ 1 | SpellDescription$ Put an ice counter on target permanent.
 S:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Permanent.counters_GE1_ICE | AddType$ Snow | Description$ Permanents with ice counters on them are snow.
 SVar:X:Count$Valid Permanent.Snow
 SVar:BuffedBy:Permanent.Snow

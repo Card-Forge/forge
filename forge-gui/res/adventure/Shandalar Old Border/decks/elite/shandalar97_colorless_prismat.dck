@@ -1,0 +1,31 @@
+[metadata]
+Name=Prismat of Shandalar
+[Main]
+4 Atog|ATQ
+2 Dwarven Warriors|LEA
+4 Ornithopter|ATQ
+2 Tetravus|ATQ
+2 Disenchant|LEA
+2 Giant Growth|LEA
+2 Swords to Plowshares|LEA
+1 Berserk|LEA
+4 Fireball|LEA
+1 Wheel of Fortune|LEA
+1 Black Lotus|LEA
+1 Black Vise|LEA
+1 Gauntlet of Might|LEA
+3 Howling Mine|LEA
+3 Mana Crypt|PHPR
+1 Mox Emerald|LEA
+1 Mox Pearl|LEA
+1 Mox Ruby|LEA
+2 Instill Energy|LEA
+2 Orcish Oriflamme|LEA
+7 Mountain|LEA
+1 City of Brass|ARN
+4 Plateau|LEA
+4 Savannah|LEA
+4 Taiga|LEA
+
+[StartInBattle_Reference]
+1 City of Brass|ARN

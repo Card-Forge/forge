@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=Ratbert
+Title=Ratbert
+Icon=Ratbert.jpg
+Difficulty=Hard
+Description=./Modern/Strixhaven_School_of_Mages/Hayashi_Kanta_-_Eldrazi_Taxes_(Modern,_#1147410).dck
+Deck Type=constructed
+
+[Main]
+1 Dark Confidant
+2 Flickerwisp
+2 Wasteland Strangler
+3 Elite Spellbinder
+3 Archon of Emeria
+4 Tidehollow Sculler
+4 Giver of Runes
+4 Stoneforge Mystic
+4 Skyclave Apparition
+4 Thalia, Guardian of Thraben
+1 Sword of Fire and Ice
+1 Maul of the Skyclaves
+1 Batterskull
+4 Aether Vial
+4 Path to Exile
+1 Swamp
+1 Sunbaked Canyon
+3 Silent Clearing
+3 Caves of Koilos
+3 Godless Shrine
+4 Concealed Courtyard
+6 Plains
+[Sideboard]
+1 Plague Engineer
+2 Damping Sphere
+2 Leonin Relic-Warder
+2 Gideon, Ally of Zendikar
+2 Auriok Champion
+3 Phyrexian Revoker
+3 Rest in Peace

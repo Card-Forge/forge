@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Shrek
+Title=Shrek
+Icon=Shrek.jpg
+Difficulty=Hard
+Description=../Modern/Dragons_of_Tarkir/Dylan_Teegarden_-_Burn_(Modern,_#668499).dck
+Deck Type=constructed
+
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+1 Grim Lavamancer
+4 Monastery Swiftspear
+4 Wild Nacatl
+4 Atarka's Command
+4 Boros Charm
+4 Lightning Bolt
+4 Searing Blaze
+4 Lava Spike
+3 Rift Bolt
+4 Arid Mesa
+2 Mountain
+3 Sacred Foundry
+4 Scalding Tarn
+3 Stomping Ground
+4 Wooded Foothills
+[Sideboard]
+2 Deflecting Palm
+4 Destructive Revelry
+2 Kor Firewalker
+2 Lightning Helix
+3 Path to Exile
+2 Stony Silence

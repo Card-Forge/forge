@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Ned Flanders
+Title=Ned Flanders
+Icon=Ned Flanders.jpg
+Difficulty=Medium
+Description=./Standard/Dominaria_United/John_Cronin_-_Rakdos_Aggro_(Standard,_#1498187).dck
+Deck Type=constructed
+
+[Main]
+2 Sheoldred, the Apocalypse
+4 Fable of the Mirror-Breaker
+4 Evolved Sleeper
+4 Reckless Stormseeker
+4 Bloodtithe Harvester
+4 Radha's Firebrand
+4 Graveyard Trespasser
+4 Tenacious Underdog
+4 Infernal Grasp
+3 Ob Nixilis, the Adversary
+1 Sokenzan, Crucible of Defiance
+1 Takenuma, Abandoned Mire
+3 Mountain
+4 Haunted Ridge
+4 Sulfurous Springs
+4 Xander's Lounge
+6 Swamp
+[Sideboard]
+1 Mask of Griselbrand
+2 Soul Transfer
+2 Reckoner Bankbuster
+2 Sorin the Mirthless
+2 Cut Down
+3 Duress
+3 Liliana of the Veil

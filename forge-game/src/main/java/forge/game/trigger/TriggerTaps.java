@@ -69,6 +69,12 @@ public class TriggerTaps extends Trigger {
             }
         }
 
+        if (hasParam("FirstTime")) {
+            if (!(boolean) runParams.get(AbilityKey.FirstTime)) {
+                return false;
+            }
+        }
+
         return true;
     }
 

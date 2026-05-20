@@ -1,0 +1,45 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Pressure Cooker
+Description=Pressure Cooker builds up to an explosive finish. Red-black aggression with sacrifice themes.
+Deck Type=constructed
+Set=ODY
+Image=pressure_cooker.jpg
+[main]
+4 Swamp|ODY|1
+4 Swamp|ODY|2
+3 Swamp|ODY|3
+3 Mountain|ODY|1
+3 Mountain|ODY|2
+3 Mountain|ODY|3
+1 Bog Wreckage|ODY
+2 Cabal Pit|ODY
+1 Ravaged Highlands|ODY
+2 Barbarian Lunatic|ODY
+1 Braids, Cabal Minion|ODY
+2 Chainflinger|ODY
+2 Childhood Horror|ODY
+1 Crypt Creeper|ODY
+1 Dwarven Strike Force|ODY
+1 Face of Fear|ODY
+2 Famished Ghoul|ODY
+1 Frightcrawler|ODY
+1 Halberdier|ODY
+3 Pardic Firecat|ODY
+1 Repentant Vampire|ODY
+2 Engulfing Flames|ODY
+1 Firebolt|ODY
+3 Flame Burst|ODY
+2 Ghastly Demise|ODY
+1 Innocent Blood|ODY
+1 Liquid Fire|ODY
+2 Morbid Hunger|ODY
+1 Morgue Theft|ODY
+1 Reckless Charge|ODY
+2 Shadowblood Egg|ODY
+1 Thermal Blast|ODY
+[sideboard]

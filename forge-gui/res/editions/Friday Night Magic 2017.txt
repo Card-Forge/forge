@@ -4,6 +4,7 @@ Date=2017-01-01
 Name=Friday Night Magic 2017
 Type=Promo
 ScryfallCode=F17
+TokensCode=F17
 
 [cards]
 1 R Noose Constrictor @Kev Walker
@@ -15,3 +16,11 @@ ScryfallCode=F17
 7 R Reverse Engineer @Jason Kang
 8 R Fatal Push @Alex Konstad
 9 R Renegade Rallier @David Palumbo
+
+[tokens]
+10 w_1_1_vampire_lifelink @John Severin Brassell
+10☇ c_a_treasure_sac @Zoltan Boros
+11 g_3_3_dinosaur_trample @Filip Burburan
+11☇ c_a_treasure_sac @Florian de Gesincourt
+12 b_2_2_pirate_menace @Matt Stewart
+12☇ c_a_treasure_sac @Milivoj Ćeran

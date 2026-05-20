@@ -18,6 +18,10 @@ public class DamageResolveEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         CardDamageMap damageMap = sa.getDamageMap();
+        if (damageMap == null) {
+            // this can happen if damagesource was missing
+            return;
+        }
         CardDamageMap preventMap = sa.getPreventMap();
         GameEntityCounterTable counterTable = sa.getCounterTable();
 

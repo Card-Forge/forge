@@ -1,0 +1,7 @@
+Name:Prehistoric Turtlesaurus
+ManaCost:4 G
+Types:Creature Mutant Ninja Turtle Dinosaur
+PT:4/5
+K:Vigilance
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | IsPresent$ Creature.YouCtrl+counters_GE1_P1P1 | Description$ This spell costs {1} less to cast if you control a creature with a +1/+1 counter on it.
+Oracle:This spell costs {1} less to cast if you control a creature with a +1/+1 counter on it.\nVigilance (Attacking doesn't cause this creature to tap.)

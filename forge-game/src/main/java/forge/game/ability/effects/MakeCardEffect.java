@@ -109,7 +109,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
                         chosen = Aggregates.random(faces).getName();
                     } else {
                         final String sbName = sa.hasParam("SpellbookName") ? sa.getParam("SpellbookName") :
-                                CardTranslation.getTranslatedName(source.getName());
+                                source.getTranslatedName();
                         final String message = sa.hasParam("Choices") ? 
                             Localizer.getInstance().getMessage("lblChooseaCard") :
                             Localizer.getInstance().getMessage("lblChooseFromSpellbook", sbName);
@@ -210,7 +210,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
                 }
             }
             triggerList.triggerChangesZoneAll(game, sa);
-            counterTable.replaceCounterEffect(game, sa, true);
+            counterTable.replaceCounterEffect(game, sa);
 
             if (sa.hasParam("Reveal")) {
                 game.getAction().reveal(cards, player, true);

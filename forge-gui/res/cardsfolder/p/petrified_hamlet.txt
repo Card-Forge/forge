@@ -1,0 +1,10 @@
+Name:Petrified Hamlet
+ManaCost:no cost
+Types:Land
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigNameCard | TriggerDescription$ When this land enters, choose a land card name.
+SVar:TrigNameCard:DB$ NameCard | Defined$ You | ValidCards$ Land | ValidDescription$ land card
+S:Mode$ CantBeActivated | ValidCard$ Card.NamedCard | ValidSA$ Activated.!ManaAbility | Description$ Activated abilities of sources with the chosen name can't be activated unless they're mana abilities.
+S:Mode$ Continuous | Affected$ Land.NamedCard | AddAbility$ ColorlessMana | Description$ Lands with the chosen name have "{T}: Add {C}."
+SVar:ColorlessMana:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+Oracle:When this land enters, choose a land card name.\nActivated abilities of sources with the chosen name can't be activated unless they're mana abilities.\nLands with the chosen name have "{T}: Add {C}."\n{T}: Add {C}.

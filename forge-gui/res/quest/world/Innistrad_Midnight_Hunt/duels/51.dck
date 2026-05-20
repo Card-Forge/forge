@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=KingKong
+Title=KingKong
+Icon=KingKong.jpg
+Difficulty=Very Hard
+Description=./Modern/Innistrad_Midnight_Hunt/Martin_Bautista_-_Boros_Burn_(Modern,_#1220683).dck
+Deck Type=constructed
+
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+4 Monastery Swiftspear
+2 Skullcrack
+2 Lightning Helix
+3 Play with Fire
+4 Boros Charm
+4 Lightning Bolt
+4 Searing Blaze
+4 Lava Spike
+4 Skewer the Critics
+2 Roiling Vortex
+1 Bloodstained Mire
+1 Fiery Islet
+2 Sacred Foundry
+3 Mountain
+4 Inspiring Vantage
+4 Sunbaked Canyon
+4 Arid Mesa
+[Sideboard]
+1 Lurrus of the Dream-Den
+1 Roiling Vortex
+1 Deflecting Palm
+2 Kor Firewalker
+2 Sanctifier en-Vec
+2 Tormod's Crypt
+3 Path to Exile
+3 Wear // Tear

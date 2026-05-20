@@ -1,0 +1,56 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Scout
+Description=Scout explores all angles of attack. Three-color aggression with versatile threats.
+Deck Type=constructed
+Set=PLS
+Image=scout.jpg
+[main]
+1 Plains|INV|1
+1 Plains|INV|2
+1 Plains|INV|3
+1 Mountain|INV|1
+1 Mountain|INV|2
+4 Forest|INV|1
+4 Forest|INV|2
+3 Forest|INV|3
+1 Elfhame Palace|INV
+1 Geothermal Crevice|INV
+1 Irrigation Ditch|INV
+2 Rith's Grove|PLS
+1 Shivan Oasis|INV
+1 Amphibious Kavu|PLS
+1 Ancient Kavu|INV
+1 Aurora Griffin|PLS
+1 Fleetfoot Panther|PLS
+1 Horned Kavu|PLS
+1 Mirrorwood Treefolk|PLS
+1 Nomadic Elf|INV
+1 Quirion Elves|MIR
+2 Quirion Explorer|PLS
+1 Radiant Kavu|PLS
+1 Rampant Elephant|INV
+1 Slingshot Goblin|PLS
+1 Steel Leaf Paladin|PLS
+3 Stone Kavu|PLS
+2 Sunscape Battlemage|PLS
+2 Thunderscape Battlemage|PLS
+1 Thornscape Apprentice|INV
+2 Thornscape Battlemage|PLS
+1 Thornscape Familiar|PLS
+1 Viashino Grappler|INV
+1 Armadillo Cloak|INV
+2 Fertile Ground|USG
+1 Eladamri's Call|PLS
+2 Gerrard's Command|PLS
+1 Harrow|TMP
+1 Magma Burst|PLS
+1 Pollen Remedy|PLS
+1 Rith's Charm|PLS
+1 Singe|PLS
+1 Zap|INV
+[sideboard]

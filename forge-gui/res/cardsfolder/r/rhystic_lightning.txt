@@ -1,10 +1,8 @@
 Name:Rhystic Lightning
 ManaCost:2 R
 Types:Instant
-A:SP$ StoreSVar | SVar$ RhysticPaid | Type$ Number | Expression$ 0 | UnlessPayer$ Targeted | UnlessCost$ 2 | ValidTgts$ Any | ConditionDefined$ Targeted | ConditionPresent$ Permanent | ConditionCompare$ EQ0 | SubAbility$ DBStore2 | SpellDescription$ CARDNAME deals 4 damage to any target unless that permanent's controller or that player pays {2}. If they do, CARDNAME deals 2 damage to the permanent or player.
-SVar:DBStore2:DB$ StoreSVar | SVar$ RhysticPaid | Type$ Number | Expression$ 0 | UnlessPayer$ TargetedController | UnlessCost$ 2 | ConditionDefined$ Targeted | ConditionPresent$ Permanent | ConditionCompare$ GE1 | SubAbility$ DBDmg
-SVar:DBDmg:DB$ DealDamage | Defined$ Targeted | NumDmg$ X | SubAbility$ DBReset
-SVar:DBReset:DB$ StoreSVar | SVar$ RhysticPaid | Type$ Number | Expression$ 1
+A:SP$ StoreSVar | SVar$ RhysticPaid | Type$ Number | Expression$ 0 | UnlessPayer$ TargetedOrController | UnlessCost$ 2 | ValidTgts$ Any | SubAbility$ DBDmg | SpellDescription$ CARDNAME deals 4 damage to any target unless that permanent's controller or that player pays {2}. If they do, CARDNAME deals 2 damage to the permanent or player.
+SVar:DBDmg:DB$ DealDamage | Defined$ Targeted | NumDmg$ X
 SVar:RhysticPaid:Number$1
 SVar:X:Count$Compare RhysticPaid EQ1.2.4
 AI:RemoveDeck:All

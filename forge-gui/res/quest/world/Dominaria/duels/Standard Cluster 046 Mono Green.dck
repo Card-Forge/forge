@@ -1,0 +1,35 @@
+[metadata]
+Name=Mono Green
+Deck Type=constructed
+Title=Mono Green
+Description=Mono Green
+Difficulty=Hard
+Icon=Tutankhamon
+[Main]
+2 Aethersphere Harvester
+4 Blossoming Defense
+3 Forest
+1 Forest
+9 Forest
+6 Forest
+3 Ghalta, Primal Hunger
+4 Greenbelt Rampager
+4 Hashep Oasis
+3 Heart of Kiran
+4 Jadelight Ranger
+4 Merfolk Branchwalker
+4 Resilient Khenra
+2 Rhonas the Indomitable
+1 Scavenger Grounds
+1 Skysovereign, Consul Flagship
+2 Verdurous Gearhulk
+3 Walking Ballista
+[Sideboard]
+1 Aethersphere Harvester
+1 Carnage Tyrant
+2 Deathgorge Scavenger
+2 Hapatra's Mark
+1 Nissa, Vital Force
+3 Prey Upon
+2 Shapers' Sanctuary
+3 Thrashing Brontodon

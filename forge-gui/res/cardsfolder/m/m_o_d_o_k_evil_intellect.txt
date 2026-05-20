@@ -1,0 +1,8 @@
+Name:M.O.D.O.K., Evil Intellect
+ManaCost:3 B B
+Types:Legendary Artifact Creature Villain
+PT:3/3
+K:Flying
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ Whenever you draw your second card each turn, target opponent sacrifices a nontoken creature of their choice.
+SVar:TrigSac:DB$ Sacrifice | ValidTgts$ Opponent | SacValid$ Creature.!token
+Oracle:Flying\nWhenever you draw your second card each turn, target opponent sacrifices a nontoken creature of their choice.

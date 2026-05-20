@@ -1,141 +1,71 @@
 package forge.game.card;
 
-import com.google.common.collect.ComparisonChain;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Ordering;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-
 import java.io.Serializable;
-import java.util.Map;
-import java.util.Objects;
+import java.util.List;
 
-public class CounterType implements Comparable<CounterType>, Serializable {
-    private static final long serialVersionUID = -7575835723159144478L;
+import com.google.common.collect.Lists;
 
-    private CounterEnumType eVal = null;
-    private String sVal = null;
+import forge.util.ITranslatable;
 
-    // Rule 122.1b
-    static ImmutableList<String> keywordCounter = ImmutableList.of(
-            "Flying", "First Strike", "Double Strike", "Deathtouch", "Decayed", "Exalted", "Haste", "Hexproof",
-            "Indestructible", "Lifelink", "Menace", "Reach", "Shadow", "Trample", "Vigilance");
+public interface CounterType extends Serializable, ITranslatable {
 
-    private static Map<CounterEnumType, CounterType> eMap = Maps.newEnumMap(CounterEnumType.class);
-    private static Map<String, CounterType> sMap = Maps.newHashMap();
-
-    private CounterType(CounterEnumType e, String s) {
-        this.eVal = e;
-        this.sVal = s;
-    }
-
-    public static CounterType get(CounterEnumType e) {
-        if (!eMap.containsKey(e)) {
-            eMap.put(e, new CounterType(e, null));
-        }
-        return eMap.get(e);
-    }
-
-    public static CounterType get(String s) {
-        if (!sMap.containsKey(s)) {
-            sMap.put(s, new CounterType(null, s));
-        }
-        return sMap.get(s);
-    }
-
-    public static CounterType getType(String name) {
+    static CounterType getType(String name) {
         if ("Any".equalsIgnoreCase(name)) {
             return null;
         }
+        if (CounterKeywordType.isKeywordCounter(name)) {
+            return CounterKeywordType.get(name);
+        }
         try {
-            return get(CounterEnumType.getType(name));
+            return CounterEnumType.getType(name);
         } catch (final IllegalArgumentException ex) {
-            return get(name);
+            return CounterCustomType.get(name);
         }
     }
-
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(eVal, sVal);
+    static List<CounterType> getValues() {
+        List<CounterType> result = Lists.newArrayList();
+        result.addAll(List.of(CounterEnumType.values()));
+        result.addAll(CounterKeywordType.getValues());
+        result.addAll(CounterCustomType.getValues());
+        return result;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (this == obj) {
-            return true;
-        }
-        if (obj.getClass() != getClass()) {
-            return false;
-        }
-        CounterType rhs = (CounterType) obj;
-        return new EqualsBuilder()
-                .append(eVal, rhs.eVal)
-                .append(sVal, rhs.sVal)
-                .isEquals();
+    String getName();
+
+    default String getCounterOnCardDisplayName() {
+        return getName();
     }
 
-    @Override
-    public String toString() {
-        return eVal != null ? eVal.toString() : sVal;
+    default boolean is(CounterEnumType eType) {
+        return false;
     }
 
-    public String getName() {
-        return eVal != null ? eVal.getName() : getKeywordDescription();
+    default boolean isKeywordCounter() {
+        return false;
     }
 
-    public String getCounterOnCardDisplayName() {
-        return eVal != null ? eVal.getCounterOnCardDisplayName() : getKeywordDescription();
+    default int getRed() {
+        return 255;
     }
 
-    private String getKeywordDescription() {
-        if (sVal.startsWith("Hexproof:")) {
-            final String[] k = sVal.split(":");
-            return "Hexproof from " + k[2];
-        }
-        if (sVal.startsWith("Trample:")) {
-            return "Trample over Planeswalkers";
-        }
-        return sVal;
+    default int getGreen() {
+        return 255;
+    }
+
+    default int getBlue() {
+        return 255;
+    }
+
+    default CounterAiCategory getAiCategory() {
+        return CounterAiCategory.Positive;
     }
 
     @Override
-    public int compareTo(CounterType o) {
-        return ComparisonChain.start()
-                .compare(eVal, o.eVal, Ordering.natural().nullsLast())
-                .compare(sVal, o.sVal, Ordering.natural().nullsLast())
-                .result();
+    default String getTranslationKey() {
+        return toString();
     }
-
-    public boolean is(CounterEnumType eType) {
-        return eVal == eType;
-    }
-
-    public boolean isKeywordCounter() {
-        if (eVal != null) {
-            return false;
-        }
-        if (sVal.startsWith("Hexproof:")) {
-            return true;
-        }
-        if (sVal.startsWith("Trample:")) {
-            return true;
-        }
-        return keywordCounter.contains(sVal);
-    }
-
-    public int getRed() {
-        return eVal != null ? eVal.getRed() : 255;
-    }
-
-    public int getGreen() {
-        return eVal != null ? eVal.getGreen() : 255;
-    }
-
-    public int getBlue() {
-        return eVal != null ? eVal.getBlue() : 255;
+    @Override
+    default String getUntranslatedName() {
+        return toString();
     }
 }

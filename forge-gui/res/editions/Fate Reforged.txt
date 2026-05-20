@@ -223,6 +223,8 @@ ScryfallCode=FRF
 
 [tokens]
 1 w_1_1_monk_prowess @Steven Belledin
-2 w_1_1_monk_prowess @Steven Belledin
-3 w_1_1_spirit_flying @Aaron Miller
+2 w_1_1_spirit_flying @Aaron Miller
 3 b_2_1_warrior @Zoltan Boros
+
+[other]
+4 manifest @Raymond Swanland

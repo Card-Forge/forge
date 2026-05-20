@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Luke Skywalker
+Title=Luke Skywalker
+Icon=Luke Skywalker.jpg
+Difficulty=Easy
+Description=Oath_of_the_Gatewatch/RPTQ_Shadows_Over_Innistrad_-_Montreal,_QB/Andre_Berube_-_Rakdos_(Standard,_#606648).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Flamewake Phoenix
+4 Hangarback Walker
+4 Kolaghan, the Storm's Fury
+2 Pia and Kiran Nalaar
+4 Thopter Engineer
+4 Thunderbreak Regent
+4 Draconic Roar
+2 Fiery Impulse
+3 Grasp of Darkness
+2 Murderous Cut
+2 Duress
+4 Bloodstained Mire
+3 Haven of the Spirit Dragon
+4 Mountain
+4 Polluted Delta
+3 Smoldering Marsh
+4 Swamp
+4 Wooded Foothills
+[Sideboard]
+1 Crux of Fate
+1 Infinite Obliteration
+1 Kalitas, Traitor of Ghet
+2 Kolaghan's Command
+2 Kozilek's Return
+1 Ob Nixilis Reignited
+4 Self-Inflicted Wound
+3 Transgress the Mind

@@ -28,17 +28,15 @@ public class ChooseColorAi extends SpellAbilityAi {
         if ("Nykthos, Shrine to Nyx".equals(sourceName)) {
             if (SpecialCardAi.NykthosShrineToNyx.consider(ai, sa)) {
                 return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
-            } else {
-                return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
             }
+            return new AiAbilityDecision(0, AiPlayDecision.CantPlayAi);
         }
 
         if ("Oona, Queen of the Fae".equals(sourceName)) {
             if (ph.isPlayerTurn(ai) || ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 return new AiAbilityDecision(0, AiPlayDecision.AnotherTime);
             }
-            // Set PayX here to maximum value.
-            sa.setXManaCostPaid(ComputerUtilCost.getMaxXValue(sa, ai, false));
+            ComputerUtilCost.setMaxXValue(sa, ai, false);
             return new AiAbilityDecision(100, AiPlayDecision.WillPlay);
         }
 

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Ras Al Ghul
+Title=Ras Al Ghul
+Icon=Ras Al Ghul.jpg
+Difficulty=Medium
+Description=./Standard/Final_Fantasy/ChampagneFox_-_Boros_Equipments_(Standard,_#2535936).dck
+Deck Type=constructed
+
+[Main]
+4 Cloud, Midgar Mercenary
+4 Gloryheath Lynx
+2 Adelbert Steiner
+2 Aerith Gainsborough
+2 Cat Collector
+2 Enduring Innocence
+2 Raubahn, Bull of Ala Mhigo
+2 Seifer Almasy
+3 Excalibur II
+2 Buster Sword
+2 Dragoon's Lance
+2 Samurai's Katana
+2 Swiftfoot Boots
+1 White Mage's Staff
+4 Case of the Uneaten Feast
+4 Sheltered by Ghosts
+8 Plains
+4 Battlefield Forge
+4 Inspiring Vantage
+4 Sunbillow Verge
+[Sideboard]
+4 High Noon
+3 Get Lost
+3 Lightning Helix
+2 Destroy Evil
+2 Exorcise
+1 Self-Destruct

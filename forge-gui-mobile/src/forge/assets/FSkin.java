@@ -367,6 +367,19 @@ public class FSkin {
             }
 
             //load images
+            for (FSkinProp prop : FSkinProp.values()) {
+                if (FSkinProp.PropType.ABILITY == prop.getType()
+                        || FSkinProp.PropType.WATERMARKS == prop.getType()
+                        || FSkinProp.PropType.MANAICONS == prop.getType()
+                        || FSkinProp.PropType.PHYREXIAN == prop.getType()
+                        || FSkinProp.PropType.COLORLESS_HYBRID == prop.getType()
+                        || FSkinProp.PropType.ATTRACTION_LIGHTS == prop.getType()
+                        ) {
+                    FSkinImageImpl image = new FSkinImageImpl(prop);
+                    image.load(preferredIcons);
+                    FSkin.getImages().put(prop, image);
+                }
+            }
             for (FSkinImage image : FSkinImage.values()) {
                 if (GuiBase.isAndroid()) {
                     if (Forge.allowCardBG)
@@ -378,11 +391,6 @@ public class FSkin {
                 } else {
                     image.load(preferredIcons);
                 }
-            }
-            for (FSkinProp prop : FSkinProp.MANA_IMG.values()) {
-                FSkinImageImpl image = new FSkinImageImpl(prop);
-                image.load(preferredIcons);
-                FSkin.getImages().put(prop, image);
             }
 
             //assemble avatar textures

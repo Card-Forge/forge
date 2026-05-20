@@ -208,7 +208,7 @@
     <property name="dialog">[
 {
    &quot;condition&quot;: [{&quot;checkMapFlag&quot;: {&quot;key&quot;:&quot;demonsActive&quot;}, &quot;not&quot;: true}],
-   &quot;text&quot;: &quot;The inn is locked up tightly. The town hall in contrast is missing its' front door, but you find nothing out of the ordinary inside, just well organized crumbling papers coveered in illegibly smeared ink.&quot;,
+   &quot;text&quot;: &quot;The inn is locked up tightly. The town hall in contrast is missing its front door, but you find nothing out of the ordinary inside, just well organized crumbling papers coveered in illegibly smeared ink.&quot;,
    &quot;options&quot;: [{
       &quot;name&quot;: &quot;(Continue)&quot;, &quot;action&quot;: [{&quot;deleteMapObject&quot;:-1}]}]
 }

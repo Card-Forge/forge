@@ -1,0 +1,5 @@
+Name:Enter the Avatar State
+ManaCost:W
+Types:Instant Lesson
+A:SP$ Animate | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Keywords$ Flying & First Strike & Lifelink & Hexproof | Types$ Avatar | SpellDescription$ Until end of turn, target creature you control becomes an Avatar in addition to its other types and gains flying, first strike, lifelink, and hexproof. (A creature with hexproof can't be the target of spells or abilities your opponents control.)
+Oracle:Until end of turn, target creature you control becomes an Avatar in addition to its other types and gains flying, first strike, lifelink, and hexproof. (A creature with hexproof can't be the target of spells or abilities your opponents control.)

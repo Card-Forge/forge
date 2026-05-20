@@ -1,0 +1,38 @@
+[duel]
+[metadata]
+Name=Hercules
+Title=Hercules
+Icon=Hercules.jpg
+Difficulty=Hard
+Description=../Modern/Avacyn_Restored/GP_Yokohama_-_Grinders_Winners/Y.M._-_Boros_(Modern,_#32889).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Figure of Destiny
+1 Goblin Bushwhacker
+3 Grim Lavamancer
+4 Plated Geopede
+2 Ranger of Eos
+4 Steppe Lynx
+4 Stormblood Berserker
+1 Thalia, Guardian of Thraben
+1 Hidetsugu's Second Rite
+4 Lightning Bolt
+4 Lightning Helix
+4 Molten Rain
+4 Arid Mesa
+1 Evolving Wilds
+4 Marsh Flats
+4 Mountain
+4 Plains
+2 Sacred Foundry
+4 Scalding Tarn
+1 Slayers' Stronghold
+[Sideboard]
+2 Disenchant
+2 Elspeth, Knight-Errant
+1 Isochron Scepter
+3 Kor Firewalker
+2 Path to Exile
+3 Volcanic Fallout

@@ -1,0 +1,40 @@
+[duel]
+[metadata]
+Name=George of the Jungle
+Title=George of the Jungle
+Icon=George of the Jungle.jpg
+Difficulty=Hard
+Description=../Modern/Gatecrash/GP_San_Diego_-_Last_Chance_Trials_Winners/Scott_Gerhardt_-_Zoo_(Modern,_#48069).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Burning-Tree Emissary
+4 Deathrite Shaman
+4 Experiment One
+4 Flinthoof Boar
+3 Ghor-Clan Rampager
+2 Grim Lavamancer
+4 Kird Ape
+1 Vexing Devil
+3 Boros Charm
+4 Lightning Bolt
+4 Lightning Helix
+2 Searing Blaze
+3 Arid Mesa
+2 Blood Crypt
+1 Forest
+2 Mountain
+3 Sacred Foundry
+3 Scalding Tarn
+4 Stomping Ground
+3 Verdant Catacombs
+[Sideboard]
+2 Burning-Tree Shaman
+2 Centaur Healer
+2 Deglamer
+1 Kitchen Finks
+3 Rakdos Charm
+1 Shatterstorm
+2 Skullcrack
+2 Spark Trooper

@@ -4,7 +4,7 @@ Types:Creature Vampire Warrior
 PT:2/2
 K:Kicker:B
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters, if it was kicked, target player sacrifices a creature.
-SVar:TrigKicker:DB$ Sacrifice | ValidTgts$ Player | SacValid$ Creature | SacMessage$ Creature
+SVar:TrigKicker:DB$ Sacrifice | ValidTgts$ Player | SacValid$ Creature
 SVar:NeedsToPlayKicked:Creature.YouDontCtrl
 SVar:PlayMain1:TRUE
 Oracle:Kicker {B} (You may pay an additional {B} as you cast this spell.)\nWhen Gatekeeper of Malakir enters, if it was kicked, target player sacrifices a creature.

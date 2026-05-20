@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Conan the Barbarian
+Title=Conan the Barbarian
+Icon=Conan the Barbarian.jpg
+Difficulty=Medium
+Description=./Standard/The_Brothers_War/Promidnightz_-_Izzet_Ramp_(Standard,_#1536838).dck
+Deck Type=constructed
+
+[Main]
+3 Cityscape Leveler
+4 Skitterbeam Battalion
+4 Fable of the Mirror-Breaker
+4 Reckoner Bankbuster
+4 The Mightstone and Weakstone
+1 Abrade
+1 Essence Scatter
+1 Negate
+2 Abrade
+2 Make Disappear
+4 Stern Lesson
+3 Brotherhood's End
+1 Mountain
+1 Sokenzan, Crucible of Defiance
+1 Otawara, Soaring City
+1 Mountain
+1 Mountain
+2 Mountain
+2 Field of Ruin
+2 Island
+2 Island
+2 Field of Ruin
+4 Stormcarved Coast
+4 Xander's Lounge
+4 Shivan Reef
+[Sideboard]
+1 Voltage Surge
+1 Brotherhood's End
+1 Spell Pierce
+2 Strangle
+2 Unlicensed Hearse
+2 Disdainful Stroke
+2 Saheeli, Filigree Master
+4 Thran Spider

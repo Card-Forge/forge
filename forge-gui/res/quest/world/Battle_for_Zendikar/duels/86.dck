@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Hercules
+Title=Hercules
+Icon=Hercules.jpg
+Difficulty=Hard
+Description=../Modern/Battle_for_Zendikar/MaxPoint_Platinum_-_Krazy_Nicks/Tae_Jung_Oh_-_Zoo_(Modern,_#400730).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Kitchen Finks
+4 Knight of the Reliquary
+4 Loxodon Smiter
+4 Noble Hierarch
+3 Scavenging Ooze
+4 Tarmogoyf
+3 Voice of Resurgence
+4 Wild Nacatl
+3 Collected Company
+4 Lightning Bolt
+4 Path to Exile
+4 Arid Mesa
+1 Forest
+1 Horizon Canopy
+1 Plains
+1 Sacred Foundry
+1 Skarrg, the Rage Pits
+2 Stomping Ground
+3 Temple Garden
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+2 Ancient Grudge
+2 Aven Mindcensor
+1 Bonfire of the Damned
+1 Crumble to Dust
+2 Dromoka's Command
+1 Feed the Clan
+2 Fracturing Gust
+1 Grim Lavamancer
+1 Sigarda, Host of Herons
+2 Thalia, Guardian of Thraben

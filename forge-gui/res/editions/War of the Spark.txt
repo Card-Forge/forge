@@ -2,7 +2,6 @@
 Code=WAR
 Date=2019-05-03
 Name=War of the Spark
-Code2=WAR
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common:fromSheet("WAR cards"), 3 Uncommon:fromSheet("WAR cards"), 1 RareMythic:fromSheet("WAR cards"), 1 BasicLand
@@ -332,7 +331,7 @@ ScryfallCode=WAR
 275 M Tezzeret, Master of the Bridge @Chase Stone
 
 [rebalanced]
-A221 R A-Teferi, Time Raveler @Chris Rallis
+A-221 R A-Teferi, Time Raveler @Chris Rallis
 
 [tokens]
 1 c_2_2_spirit @Johann Bodin

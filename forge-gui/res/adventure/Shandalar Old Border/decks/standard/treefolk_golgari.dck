@@ -1,16 +1,16 @@
 [metadata]
 Name=treefolk_golgari
 [Main]
-16 Forest|2ED|3
-4 Carnivorous Plant|DRK|1
-4 Elvish Archers|2ED|1
-4 Giant Spider|4ED|1
-4 Llanowar Elves|2ED|1
-4 Llanowar Wastes|APC|1
-4 Plaguebearer|EXO|1
-4 Serrated Arrows|ATH|1
-4 Treefolk Healer|INV|1
-4 Treefolk Seedlings|USG|1
-4 Vampiric Embrace|USG|1
-4 Verdant Force|TMP|1
-5 Swamp|2ED|3
+10 Forest|USG|2
+10 Swamp|ONS|3
+4 Llanowar Wastes|APC
+4 Rampant Growth|TMP
+4 Plaguebearer|EXO
+4 Vampiric Embrace|USG
+4 Wormwood Treefolk|DRK
+4 Gaea's Embrace|USG
+4 Ebony Treefolk|APC
+4 Argothian Treefolk|ATQ
+4 Blight|5ED
+2 Magnigoth Treefolk|PLS
+2 Weatherseed Treefolk|ULG

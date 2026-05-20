@@ -4,6 +4,7 @@ Date=2018-06-22
 Name=Global Series Jiang Yanggu & Mu Yanling
 Type=Duel_Deck
 ScryfallCode=GS1
+TokensCode=GS1
 
 [cards]
 1 M Mu Yanling @林玄泰
@@ -48,5 +49,5 @@ ScryfallCode=GS1
 40 L Forest @Xin-Yu Liu
 
 [tokens]
-mowu
-mowu
+T1 mowu @XiaoDi Jin
+T1☇ mowu @XiaoDi Jin

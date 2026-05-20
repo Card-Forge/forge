@@ -1,0 +1,21 @@
+[metadata]
+Name=squirrel
+[Main]
+20 Forest|TMP
+4 Nature's Lore|S99
+4 Squirrel Nest|ODY
+4 Squirrel Mob|ODY
+4 Chatter of the Squirrel|ODY
+4 Acorn Harvest|TOR
+4 Deranged Hermit|ULG
+4 Nut Collector|ODY
+2 Squirrel Wrangler|PCY
+2 Liege of the Hollows|WTH
+2 Seeds of Innocence|MIR
+2 Tranquility|LEB
+2 Overrun|TMP
+2 Might of Oaks|7ED
+
+[StartInBattle_Reference]
+2 Forest|TMP
+1 Nut Collector|ODY

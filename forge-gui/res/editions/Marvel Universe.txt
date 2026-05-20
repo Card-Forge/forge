@@ -1,0 +1,48 @@
+[metadata]
+Code=MAR
+Date=2025-09-26
+Name=Marvel Universe
+Type=Collector_Edition
+ScryfallCode=MAR
+
+[cards]
+1 M Comeuppance @Paulo Siqueira & Amilton Santos
+2 M Leyline Binding @Ron Frenz & Joe Rubinstein
+3 M Nine Lives @C.F. Villa & Brian Reber
+4 M Path to Exile @John Romita Sr.
+5 M Reprieve @Alex Ross & Frank Giacoia
+6 M Rest in Peace @Mark Buckingham & D'Israeli
+7 M Wedding Ring @John Romita Sr.
+8 M Clever Impersonator @Mark Bagley & Andrew Hennessy
+9 M Counterspell @Steve Ditko
+10 M Lorthos, the Tidemaker @John Romita Sr. ${"flavorName": "Doc Ock, Armed and Dangerous"}
+11 M Mindbreak Trap @Todd McFarlane
+12 M Mystic Confluence @Mike Zeck
+13 M Ponder @Moebius
+14 M Rite of Replication @Mark Bagley & Randy Emberlin
+15 M Traumatize @John Romita Sr. & Gil Kane
+16 M Feed the Swarm @Ed Hannigan & Pablo Marcos
+17 M Hex @Erik Larsen & Walter Simonson
+18 M Infernal Grasp @Erik Larsen & Randy Emberlin
+19 M Opposition Agent @Tyler Kirkham
+20 M Reanimate @Mike Zeck & Bob McLeod
+21 M Saw in Half @John Romita Jr. & John Romita Sr.
+22 M Skithiryx, the Blight Dragon @Ryan Stegman & JP Mayer ${"flavorName": "Venom, King in Black"}
+23 M Goblin Bombardment @John Romita Sr.
+24 M Najeela, the Blade-Blossom @Cliff Chiang ${"flavorName": "Spider-Gwen, Web-Warrior"}
+25 M Relentless Assault @Federico Vicentini & Alejandro Sánchez
+26 M Savage Beating @Todd McFarlane
+27 M Shock @John Romita Sr.
+28 M Thrill of Possibility @Dave Rapoza
+29 M Unexpected Windfall @John Romita Sr.
+30 M Winds of Change @Ron Frenz & Klaus Janson
+31 M Arachnogenesis @Todd McFarlane
+32 M Arasta of the Endless Web @David Baldeon & Walden Wong ${"flavorName": "Master Weaver, Web Protector"}
+33 M Beast Within @Todd McFarlane
+34 M Heroic Intervention @Jack Kirby & Steve Ditko
+35 M Hunter's Insight @Sergio Davila & Sean Parsons
+36 M Parallel Lives @Jim Cheung & Justin Ponsor
+37 M Silkguard @Dave Johnson
+38 M Tangle @Humberto Ramos & Edgar Delgado
+39 M Alibou, Ancient Witness @Michael Turner & Mark Roslan ${"flavorName": "Iron Spider, Civil Warrior"}
+40 M Terminate @Mark Bagley & Randy Emberlin

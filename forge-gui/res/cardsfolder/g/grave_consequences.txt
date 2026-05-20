@@ -8,7 +8,7 @@ SVar:DBChooseCard:DB$ ChooseCard | Defined$ Player.IsRemembered | Amount$ Y | Ch
 SVar:DBExile:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBRepeat
 SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBLoseLife | SubAbility$ DBDraw
 SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ X
-SVar:DBDraw:DB$ Draw | NumCards$ 1
+SVar:DBDraw:DB$ Draw
 SVar:X:Count$ValidGraveyard Card.RememberedPlayerCtrl
 SVar:Y:Count$ChosenNumber
 AI:RemoveDeck:All

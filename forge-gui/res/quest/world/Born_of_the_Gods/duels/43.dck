@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Flandre Scarlet
+Title=Flandre Scarlet
+Icon=Flandre Scarlet.jpg
+Difficulty=Medium
+Description=Born_of_the_Gods/PTQ_Journey_Into_Nyx_-_Corvallis,_Oregon/Kevin_Du_-_Azorius_Control_(Standard,_#68142).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+1 Elixir of Immortality
+3 Azorius Charm
+3 Dissolve
+1 Far // Away
+3 Last Breath
+4 Sphinx's Revelation
+3 Syncopate
+2 Divination
+1 Revoke Existence
+4 Supreme Verdict
+4 Detention Sphere
+2 Elspeth, Sun's Champion
+3 Jace, Architect of Thought
+4 Hallowed Fountain
+6 Island
+2 Mutavault
+4 Plains
+3 Temple of Deceit
+4 Temple of Enlightenment
+3 Temple of Silence
+[Sideboard]
+2 Archangel of Thune
+3 Brimaz, King of Oreskos
+3 Dark Betrayal
+2 Doom Blade
+2 Gainsay
+2 Glare of Heresy
+1 Negate

@@ -1,0 +1,12 @@
+Name:Passenger Ferry
+Variant:UniversesWithin:FlavorName:Carriage of Dreams
+ManaCost:3
+Types:Artifact Vehicle
+PT:4/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerZones$ Battlefield | TriggerDescription$ When this Vehicle attacks, you may pay {U}. When you do, another target attacking creature can't be blocked this turn.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ U | Execute$ TrigUnblockable | TriggerDescription$ When you do, another target attacking creature can't be blocked this turn.
+SVar:TrigUnblockable:DB$ Effect | ValidTgts$ Creature.Other+attacking | TgtPrompt$ Select another target attacking creature | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+K:Crew:2
+SVar:HasAttackEffect:TRUE
+Oracle:When this Vehicle attacks, you may pay {U}. When you do, another target attacking creature can't be blocked this turn.\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)

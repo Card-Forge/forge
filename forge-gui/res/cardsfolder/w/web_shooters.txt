@@ -1,0 +1,10 @@
+Name:Web-Shooters
+Variant:UniversesWithin:FlavorName:Archangler's Skyrod
+ManaCost:1 W
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Reach | AddTrigger$ AttackTrig | AddSVar$ AE | Description$ Equipped creature gets +1/+1 and has reach and "Whenever this creature attacks, tap target creature an opponent controls."
+SVar:AttackTrig:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ Whenever this creature attacks, tap target creature an opponent controls.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls
+K:Equip:2
+SVar:AE:SVar:HasAttackEffect:TRUE
+Oracle:Equipped creature gets +1/+1 and has reach and "Whenever this creature attacks, tap target creature an opponent controls."\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

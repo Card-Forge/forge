@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Lupin the Third
+Title=Lupin the Third
+Icon=Lupin the Third.jpg
+Difficulty=Medium
+Description=./Standard/Innistrad_Midnight_Hunt/Adrian_Hunter_-_Dimir_Control_(Standard,_#1228781).dck
+Deck Type=constructed
+
+[Main]
+3 Lier, Disciple of the Drowned
+4 Sedgemoor Witch
+1 Power Word Kill
+1 Bloodline Culling
+2 Flunk
+3 Fading Hope
+3 Jwari Disruption
+4 Behold the Multiverse
+4 Consider
+4 Divide by Zero
+1 Shadows' Verdict
+2 Bloodchief's Thirst
+4 Duress
+2 Port of Karfell
+2 Hive of the Eye Tyrant
+3 Field of Ruin
+4 Island
+4 Clearwater Pathway
+4 Shipwreck Marsh
+5 Swamp
+[Sideboard]
+1 Teachings of the Archaics
+1 Mascot Exhibition
+1 Environmental Sciences
+2 Shadows' Verdict
+2 Ray of Enfeeblement
+2 Soul Shatter
+3 Go Blank
+3 Malevolent Hermit

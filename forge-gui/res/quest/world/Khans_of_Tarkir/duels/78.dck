@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Leela
+Title=Leela
+Icon=Leela.jpg
+Difficulty=Very Hard
+Description=../Modern/Khans_of_Tarkir/SCG_Invitational_Qualifier_Dundas/Michael_Pine_-_Burn_(Modern,_#126758).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+4 Eidolon of the Great Revel
+4 Goblin Guide
+4 Monastery Swiftspear
+1 Vexing Devil
+4 Boros Charm
+4 Lightning Bolt
+4 Shard Volley
+4 Skullcrack
+4 Lava Spike
+4 Rift Bolt
+4 Treasure Cruise
+2 Arid Mesa
+4 Bloodstained Mire
+4 Mountain
+2 Sacred Foundry
+3 Steam Vents
+4 Wooded Foothills
+[Sideboard]
+4 Dragon's Claw
+2 Molten Rain
+2 Searing Blaze
+4 Searing Blood
+3 Wear // Tear

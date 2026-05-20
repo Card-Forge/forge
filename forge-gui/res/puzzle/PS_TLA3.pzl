@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Avatar: The Last Airbender #03
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2025/11/latest-2-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Ensure your solution satisfies possible opponent decisions. Rumble Arena is a 0/0 earthbended land with two +1/+1 counters. Good luck!
+[state]
+turn=1
+activeplayer=p0
+activephase=MAIN1
+p0life=20
+p0hand=Hidetsugu's Second Rite;Pillar Launch;Fire Magic;Twin Bolt;Toph, Hardheaded Teacher
+p0battlefield=Deadeye Duelist;Short Bow;Ojer Axonil, Deepest Might|Transformed;Rumble Arena|Id:1;Arid Archway;Forest;Forest;Mountain;Mountain
+p1life=14
+p1battlefield=Gingerbrute;Tough Cookie;Forest;Forest;T:c_a_food_sac
+p0precast=Opt:CustomScript:DB$ Earthbend | Num$ 2->1

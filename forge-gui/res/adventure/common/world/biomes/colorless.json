@@ -41,7 +41,6 @@
 	"Apprentice Red Wizard",
 	"Apprentice White Wizard",
 	"Bandit",
-	"Boar",
 	"Caracal",
 	"Challenger 20",
 	"Challenger 21",
@@ -68,7 +67,15 @@
 	"Raven",
 	"Sliver",
 	"Wandering Giant",
-	"Wild Rat"
+	"Wild Rat",
+	"Worm",
+	"Weak Demon",
+	"Wandering Treefolk",
+	"Bloodied Skeleton",
+	"Snail",
+	"Goblin Rager",
+	"Elf Vagabond"
+	
 ],
 	"pointsOfInterest": [
 		"Spawn",

@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Frodo
+Title=Frodo
+Icon=Frodo.jpg
+Difficulty=Hard
+Description=./Modern/Phyrexia_All_Will_Be_One/Igor_Couto_-_Hardened_Scales_(Modern,_#1598568)_[!].dck
+Deck Type=constructed
+
+[Main]
+4 Walking Ballista
+4 Hangarback Walker
+1 Haywire Mite
+4 Esper Sentinel
+2 Skrelv, Defector Mite
+4 Zabaz, the Glimmerwasp
+3 Patchwork Automaton
+4 Arcbound Ravager
+2 Welding Jar
+1 Shadowspear
+2 The Ozolith
+1 Springleaf Drum
+3 Ancient Stirrings
+4 Urza's Saga
+4 Hardened Scales
+2 Boseiju, Who Endures
+3 Razorverge Thicket
+1 Grove of the Burnwillows
+2 Forest
+1 Phyrexia's Core
+4 Inkmoth Nexus
+1 Pendelhaven
+3 Spire of Industry
+[Sideboard]
+1 Haywire Mite
+1 Pithing Needle
+2 Tamiyo's Safekeeping
+3 Prismatic Ending
+1 Grafdigger's Cage
+1 Animation Module
+2 Blacksmith's Skill
+2 Nature's Claim
+1 Relic of Progenitus
+1 Void Mirror

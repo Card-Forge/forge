@@ -1,0 +1,18 @@
+Name:Inspired Skypainter
+ManaCost:U R
+Types:Creature Lizard Wizard
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPrepare | TriggerDescription$ When this creature enters and whenever one or more creature tokens you control deal combat damage to a player, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.token+YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | Execute$ TrigPrepare | Secondary$ True | TriggerDescription$ When this creature enters and whenever one or more creature tokens you control deal combat damage to a player, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+SVar:TrigPrepare:DB$ AlterAttribute | Attributes$ Prepared
+AlternateMode:Prepare
+Oracle:Flying\nWhen this creature enters and whenever one or more creature tokens you control deal combat damage to a player, this creature becomes prepared. (While it's prepared, you may cast a copy of its spell. Doing so unprepares it.)
+
+ALTERNATE
+
+Name:Maestro's Gift
+ManaCost:3 U R
+Types:Sorcery
+A:SP$ CopyPermanent | ValidTgts$ Creature.YouCtrl | ValidTgtDesc$ creature you control | PumpKeywords$ Haste | PumpDuration$ EOT | SpellDescription$ Create a token that's a copy of target creature you control. That token gains haste until end of turn.
+Oracle:Create a token that's a copy of target creature you control. That token gains haste until end of turn.

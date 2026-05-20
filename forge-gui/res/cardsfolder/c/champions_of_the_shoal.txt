@@ -1,0 +1,13 @@
+Name:Champions of the Shoal
+ManaCost:3 U
+Types:Creature Merfolk Soldier
+PT:4/6
+S:Mode$ RaiseCost | ValidCard$ Card.Self | Activator$ You | Type$ Spell | Cost$ BeholdExile<1/Merfolk> | EffectZone$ All | Description$ As an additional cost to cast this spell, behold a Merfolk and exile it. (Exile a Merfolk you control or a Merfolk card from your hand.)
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ Whenever this creature enters or becomes tapped, tap up to one target creature and put a stun counter on it.
+T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigTap | Secondary$ True | TriggerDescription$ Whenever this creature enters or becomes tapped, tap up to one target creature and put a stun counter on it.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ Stun | CounterNum$ 1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When this creature leaves the battlefield, return the exiled card to its owner's hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Defined$ ExiledWith | Origin$ Exile | Destination$ Hand
+DeckHints:Type$Merfolk
+Oracle:As an additional cost to cast this spell, behold a Merfolk and exile it. (Exile a Merfolk you control or a Merfolk card from your hand.)\nWhenever this creature enters or becomes tapped, tap up to one target creature and put a stun counter on it.\nWhen this creature leaves the battlefield, return the exiled card to its owner's hand.

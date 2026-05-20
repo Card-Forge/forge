@@ -403,10 +403,10 @@ public enum DeckFormat {
         // basic lands, Shadowborn Apostle, Relentless Rats and Rat Colony.
         // Seven Dwarves can have 7 in the deck. More than 7 in deck + sb is ok in Limited
 
-        final CardPool allCards = deck.getAllCardsInASinglePool(hasCommander());
+        final CardPool allCards = deck.getAllCardsInASinglePool(hasCommander(), false);
 
         // Should group all cards by name, so that different editions of same card are really counted as the same card
-        for (final Entry<String, Integer> cp : Aggregates.groupSumBy(allCards, pc -> StaticData.instance().getCommonCards().getName(pc.getName(), true))) {
+        for (final Entry<String, Integer> cp : Aggregates.groupSumBy(allCards, pc -> StaticData.instance().getCommonCards().getNormalizedName(pc.getName()))) {
             IPaperCard simpleCard = StaticData.instance().getCommonCards().getCard(cp.getKey());
             if (simpleCard != null && simpleCard.getRules().isCustom() && !allowCustomCards())
                 return TextUtil.concatWithSpace("contains a Custom Card:", cp.getKey(), "\nPlease Enable Custom Cards in Forge Preferences to use this deck.");

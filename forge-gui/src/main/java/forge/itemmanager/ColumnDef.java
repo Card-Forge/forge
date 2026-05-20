@@ -41,6 +41,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.function.Function;
 
+import forge.deck.CommanderBracketCalculator;
+
 public enum ColumnDef {
     /**
      * The column containing the inventory item name.
@@ -56,14 +58,14 @@ public enum ColumnDef {
                 if (from.getKey() instanceof PaperCard) {
                     String spire = ((PaperCard) from.getKey()).getMarkedColors() == null ? "" : ((PaperCard) from.getKey()).getMarkedColors().toString();
                     String sortableName = ((PaperCard)from.getKey()).getSortableName();
-                    return sortableName == null ? TextUtil.toSortableName(from.getKey().getName() + spire) : sortableName + spire;
+                    return sortableName == null ? TextUtil.toSortableName(from.getKey().getDisplayName() + spire) : sortableName + spire;
                 }
-                return TextUtil.toSortableName(from.getKey().getName());
+                return TextUtil.toSortableName(from.getKey().getDisplayName());
             },
             from -> {
                 if (from.getKey() instanceof PaperCard)
-                    return from.getKey().toString();
-                return from.getKey().getName();
+                    return CardTranslation.getTranslatedName(from.getKey().getDisplayName());
+                return from.getKey().getDisplayName();
             }),
 
     /**
@@ -91,7 +93,7 @@ public enum ColumnDef {
      * The color column.
      */
     COLOR("lblColor", "ttColor", 46, true, SortState.ASC,
-            from -> toColor(from.getKey()),
+            from -> toColor(from.getKey()).getOrderWeight(),
             from -> toColor(from.getKey())),
     /**
      * The power column.
@@ -271,7 +273,7 @@ public enum ColumnDef {
      * The deck color column.
      */
     DECK_COLOR("lblColor", "ttColor", 70, true, SortState.ASC,
-            from -> toDeckColor(from.getKey()),
+            from -> toDeckColor(from.getKey()).getOrderWeight(),
             from -> toDeckColor(from.getKey())),
     /**
      * The deck format column.
@@ -312,6 +314,15 @@ public enum ColumnDef {
     DECK_AI("lblAI", "lblAIStatus", 38, true, SortState.DESC,
             from -> toDeck(from.getKey()).getAI().inMainDeck,
             from -> toDeck(from.getKey()).getAI()),
+    DECK_BRACKET("lblBracket", "ttCommanderBracket", 55, true, SortState.ASC,
+            from -> {
+                DeckProxy deck = toDeck(from.getKey());
+                return deck == null ? 1 : CommanderBracketCalculator.getBracket(deck.getDeck());
+            },
+            from -> {
+                DeckProxy deck = toDeck(from.getKey());
+                return deck == null ? "" : CommanderBracketCalculator.getDisplayBracket(deck.getDeck());
+            }),
     /**
      * The main library size column.
      */
@@ -323,7 +334,25 @@ public enum ColumnDef {
      */
     DECK_SIDE("lblSide", "lblSideboard", 30, true, SortState.ASC,
             from -> toDeck(from.getKey()).getSideSize(),
-            from -> toDeck(from.getKey()).getSideSize());
+            from -> toDeck(from.getKey()).getSideSize()),
+    /**
+     * The key card indicator column for cards in the current deck.
+     */
+    DECK_KEY_CARD("lblKey", "ttKeyCard", 20, true, SortState.DESC,
+            from -> {
+                InventoryItem item = from.getKey();
+                if (item instanceof PaperCard) {
+                    return 0; // no special sorting for key cards
+                }
+                return -1;
+            },
+            from -> {
+                InventoryItem item = from.getKey();
+                if (item instanceof PaperCard) {
+                    return item; // pass the card through to the renderer
+                }
+                return null;
+            });
 
     ColumnDef(String shortName0, String longName0, int preferredWidth0, boolean isWidthFixed0, SortState sortState0,
               Function<Entry<InventoryItem, Integer>, Comparable<?>> fnSort0,
@@ -377,7 +406,7 @@ public enum ColumnDef {
     }
 
     private static ColorSet toColor(final InventoryItem i) {
-        return i instanceof IPaperCard ? ((IPaperCard) i).getRules().getColor() : ColorSet.getNullColor();
+        return i instanceof IPaperCard ? ((IPaperCard) i).getRules().getColor() : ColorSet.C;
     }
 
     private static Integer toPower(final InventoryItem i) {

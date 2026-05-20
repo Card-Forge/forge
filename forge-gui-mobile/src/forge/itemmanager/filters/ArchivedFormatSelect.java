@@ -3,6 +3,7 @@ package forge.itemmanager.filters;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Consumer;
 
 import com.badlogic.gdx.utils.Align;
 
@@ -16,7 +17,6 @@ import forge.screens.FScreen;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FGroupList;
 import forge.toolbox.FList;
-import forge.util.Callback;
 import forge.util.Utils;
 
 /**
@@ -95,7 +95,7 @@ public class ArchivedFormatSelect extends FScreen {
     }
 
     @Override
-    public void onClose(Callback<Boolean> canCloseCallback) {
+    public void onClose(Consumer<Boolean> canCloseCallback) {
         if (selectedFormat != null) {
             if (onCloseCallBack != null) {
                 onCloseCallBack.run();

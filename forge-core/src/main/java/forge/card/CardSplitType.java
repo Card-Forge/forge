@@ -1,7 +1,5 @@
 package forge.card;
 
-import forge.card.CardFace.FaceSelectionMethod;
-
 import java.util.EnumSet;
 
 public enum CardSplitType
@@ -14,6 +12,7 @@ public enum CardSplitType
     Adventure(FaceSelectionMethod.USE_PRIMARY_FACE, CardStateName.Secondary),
     Omen(FaceSelectionMethod.USE_PRIMARY_FACE, CardStateName.Secondary),
     Modal(FaceSelectionMethod.USE_ACTIVE_FACE, CardStateName.Backside),
+    Prepare(FaceSelectionMethod.USE_ACTIVE_FACE, CardStateName.PreparedSpell),
     Specialize(FaceSelectionMethod.USE_ACTIVE_FACE, null);
 
     public static final EnumSet<CardSplitType> DUAL_FACED_CARDS = EnumSet.of(
@@ -40,5 +39,11 @@ public enum CardSplitType
 
     public CardStateName getChangedStateName() {
         return changedStateName;
+    }
+
+    public enum FaceSelectionMethod {
+        USE_ACTIVE_FACE,
+        USE_PRIMARY_FACE,
+        COMBINE
     }
 }

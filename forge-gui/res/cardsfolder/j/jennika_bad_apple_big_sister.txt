@@ -1,0 +1,8 @@
+Name:Jennika, Bad Apple Big Sister
+ManaCost:4 W
+Types:Legendary Creature Mutant Ninja Turtle
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When NICKNAME enters, create a 2/2 red Mutant creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ r_2_2_mutant | TokenOwner$ You
+K:TypeCycling:Plains:2
+Oracle:When Jennika enters, create a 2/2 red Mutant creature token.\nPlainscycling {2} ({2}, Discard this card: Search your library for a Plains card, reveal it, put it into your hand, then shuffle.)

@@ -25,6 +25,7 @@ import forge.card.CardRules;
 import forge.card.CardType;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
+import forge.util.StreamUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -32,6 +33,7 @@ import java.io.ObjectStreamException;
 import java.io.Serial;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -49,6 +51,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     // Supports deferring loading a deck until we actually need its contents. This works in conjunction with
     // the lazy card load feature to ensure we don't need to load all cards on start up.
     private final Set<String> aiHints = new TreeSet<>();
+    private final List<String> keyCards = new ArrayList<>();
     private final Map<String, String> draftNotes = new HashMap<>();
     private Map<String, List<String>> deferredSections = null;
     private Map<String, List<String>> loadedSections = null;
@@ -113,6 +116,20 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     public CardPool getMain() {
         loadDeferredSections();
         return parts.get(DeckSection.Main);
+    }
+
+    public Pair<Deck, List<PaperCard>> getValid() {
+        List<PaperCard> unsupported = new ArrayList<>();
+        for (Entry<DeckSection, CardPool> kv : parts.entrySet()) {
+            CardPool pool = kv.getValue();
+            for (Entry<PaperCard, Integer> pc : pool) {
+                if (pc.getKey().getRules() != null && pc.getKey().getRules().isUnsupported()) {
+                    unsupported.add(pc.getKey());
+                    pool.remove(pc.getKey());
+                }
+            }
+        }
+        return Pair.of(this, unsupported);
     }
 
     public List<PaperCard> getCommanders() {
@@ -184,6 +201,22 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         return null;
     }
 
+    /**
+     * Removes a card from any section it's found in, prioritizing the sideboard over other sections.
+     */
+    public void removeAnteCard(PaperCard card) {
+        if (has(DeckSection.Sideboard) && get(DeckSection.Sideboard).contains(card)) {
+            get(DeckSection.Sideboard).remove(card);
+            return;
+        }
+        for (CardPool pool : parts.values()) {
+            if(pool.contains(card)) {
+                pool.remove(card);
+                return;
+            }
+        }
+    }
+
     // will return new if it was absent
     public CardPool getOrCreate(DeckSection deckSection) {
         CardPool p = get(deckSection);
@@ -223,6 +256,8 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         //noinspection ConstantValue
         if(tags != null) //Can happen deserializing old Decks.
             result.tags.addAll(this.tags);
+        if(keyCards != null)
+            result.keyCards.addAll(this.keyCards);
     }
 
     /*
@@ -492,13 +527,8 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     }
 
     public CardPool getAllCardsInASinglePool() {
-        return getAllCardsInASinglePool(true);
+        return getAllCardsInASinglePool(true, false);
     }
-
-    public CardPool getAllCardsInASinglePool(final boolean includeCommander) {
-        return getAllCardsInASinglePool(includeCommander, false);
-    }
-
     public CardPool getAllCardsInASinglePool(final boolean includeCommander, boolean includeExtras) {
         final CardPool allCards = new CardPool(); // will count cards in this pool to enforce restricted
         allCards.addAll(this.getMain());
@@ -539,6 +569,50 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         return sum;
     }
 
+    public List<String> getKeyCards() {
+        return new ArrayList<>(keyCards);
+    }
+
+    public void addKeyCard(String cardName) {
+        if (cardName != null && !cardName.trim().isEmpty()) {
+            String trimmed = cardName.trim();
+            if (!keyCards.contains(trimmed)) {
+                keyCards.add(trimmed);
+            }
+        }
+    }
+
+    public void removeKeyCard(String cardName) {
+        if (cardName != null) {
+            keyCards.remove(cardName.trim());
+        }
+    }
+
+    public boolean isKeyCard(String cardName) {
+        if (cardName == null) {
+            return false;
+        }
+        return keyCards.contains(cardName.trim());
+    }
+
+    public void setDraftNotes(Map<String, String> draftNotes) {
+        if (draftNotes == null) {
+            return;
+        }
+
+        for(String key : draftNotes.keySet()) {
+            String notes = draftNotes.get(key);
+            if (notes == null || notes.isEmpty()) {
+                continue;
+            }
+            this.draftNotes.put(key, notes.trim());
+        }
+    }
+
+    public Map<String, String> getDraftNotes() {
+        return draftNotes;
+    }
+
     public void setAiHints(String aiHintsInfo) {
         if (aiHintsInfo == null || aiHintsInfo.trim().isEmpty()) {
             return;
@@ -562,22 +636,16 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         return "";
     }
 
-    public void setDraftNotes(Map<String, String> draftNotes) {
-        if (draftNotes == null) {
+    public void setAiHint(String hintType, String hintValue) {
+        if (hintValue == null || hintValue.trim().isEmpty()) {
             return;
         }
 
-        for(String key : draftNotes.keySet()) {
-            String notes = draftNotes.get(key);
-            if (notes == null || notes.isEmpty()) {
-                continue;
-            }
-            this.draftNotes.put(key, notes.trim());
-        }
-    }
+        // Remove existing hint of the same type, if any
+        aiHints.removeIf(hint -> hint.toLowerCase().startsWith(hintType.toLowerCase() + "$"));
 
-    public Map<String, String> getDraftNotes() {
-        return draftNotes;
+        // Add new hint if it's not empty
+        aiHints.add(hintType + "$" + hintValue.trim());
     }
 
     public UnplayableAICards getUnplayableAICards() {
@@ -667,10 +735,10 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         return false;
     }
 
-    public static int getAverageCMC(Deck deck) {
+    public int getAverageCMC() {
         int totalCMC = 0;
         int totalCount = 0;
-        for (final Entry<DeckSection, CardPool> deckEntry : deck) {
+        for (final Entry<DeckSection, CardPool> deckEntry : this) {
             switch (deckEntry.getKey()) {
             case Main:
             case Commander:
@@ -688,5 +756,30 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             }
         }
         return totalCount == 0 ? 0 : Math.round(totalCMC / totalCount);
+    }
+
+    public String generateTextExport() {
+        final String nl = System.lineSeparator();
+        final StringBuilder deckList = new StringBuilder();
+        String dName = getName();
+        //fix copying a commander netdeck then importing it again...
+        if (dName.startsWith("[Commander")||dName.contains("Commander"))
+            dName = "";
+        deckList.append(dName == null ? "" : "Deck: "+dName + nl + nl);
+
+        for (DeckSection s : DeckSection.values()) {
+            CardPool cp = get(s);
+            if (cp == null || cp.isEmpty()) {
+                continue;
+            }
+            deckList.append(s.toString()).append(": ");
+            deckList.append(nl);
+
+            for (final Entry<String, Integer> ev: StreamUtil.stream(cp).collect(Collectors.groupingBy(ev -> ev.getKey().getCardName(), TreeMap::new, Collectors.summingInt(ev -> ev.getValue()))).entrySet()) {
+                deckList.append(ev.getValue()).append(" ").append(ev.getKey()).append(nl);
+            }
+            deckList.append(nl);
+        }
+        return deckList.toString();
     }
 }

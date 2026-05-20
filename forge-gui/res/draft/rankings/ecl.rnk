@@ -1,0 +1,294 @@
+//Rank|Name|Rarity|Set
+#1|Ajani, Outland Chaperone|M|ECL
+#2|Curious Colossus|M|ECL
+#3|Eirdu, Carrier of Dawn|M|ECL
+#4|Kinbinding|R|ECL
+#5|Spinerock Tyrant|M|ECL
+#6|Maralen, Fae Ascendant|R|ECL
+#7|Slumbering Walker|R|ECL
+#8|Loch Mare|M|ECL
+#9|Oko, Lorwyn Liege|M|ECL
+#10|Sunderflock|R|ECL
+#11|Champions of the Perfect|R|ECL
+#12|Abigale, Eloquent First-Year|R|ECL
+#13|Bre of Clan Stoutarm|R|ECL
+#14|Emptiness|M|ECL
+#15|High Perfect Morcant|R|ECL
+#16|Sanar, Innovative First-Year|R|ECL
+#17|Chronicle of Victory|M|ECL
+#18|Disruptor of Currents|R|ECL
+#19|Harmonized Crescendo|R|ECL
+#20|Vibrance|M|ECL
+#21|Brigid, Clachan's Heart|R|ECL
+#22|Champion of the Clachan|R|ECL
+#23|Flitterwing Nuisance|R|ECL
+#24|Gloom Ripper|R|ECL
+#25|Goliath Daydreamer|R|ECL
+#26|Aurora Awakener|M|ECL
+#27|Sapling Nursery|R|ECL
+#28|Selfless Safewright|R|ECL
+#29|Ashling's Command|R|ECL
+#30|Brigid's Command|R|ECL
+#31|Catharsis|M|ECL
+#32|Deepway Navigator|R|ECL
+#33|Doran, Besieged by Time|R|ECL
+#34|Grub's Command|R|ECL
+#35|Lluwen, Imperfect Naturalist|R|ECL
+#36|Trystan's Command|R|ECL
+#37|Kinsbaile Cavalier|M|SPG
+#38|Leaf-Crowned Visionary|M|SPG
+#39|Regal Force|M|SPG
+#40|Adept Watershaper|R|ECL
+#41|Sygg, Wanderwine Wisdom|R|ECL
+#42|Scuzzback Scrounger|R|ECL
+#43|Formidable Speaker|R|ECL
+#44|Kinscaer Sentry|R|ECL
+#45|Rhys, the Evermore|R|ECL
+#46|Winnowing|R|ECL
+#47|Champions of the Shoal|R|ECL
+#48|Bitterbloom Bearer|M|ECL
+#49|Bloodline Bidding|R|ECL
+#50|Boggart Mischief|U|ECL
+#51|Champion of the Weird|R|ECL
+#52|Grub, Storied Matriarch|R|ECL
+#53|Moonshadow|M|ECL
+#54|Taster of Wares|R|ECL
+#55|Ashling, Rekindled|R|ECL
+#56|Champion of the Path|R|ECL
+#57|Collective Inferno|R|ECL
+#58|End-Blaze Epiphany|R|ECL
+#59|Soul Immolation|M|ECL
+#60|Bristlebane Battler|R|ECL
+#61|Mutable Explorer|R|ECL
+#62|Spry and Mighty|R|ECL
+#63|Trystan, Callous Cultivator|R|ECL
+#64|Deceit|M|ECL
+#65|Figure of Fable|R|ECL
+#66|Kirol, Attentive First-Year|R|ECL
+#67|Sygg's Command|R|ECL
+#68|Tam, Mindful First-Year|R|ECL
+#69|Wistfulness|M|ECL
+#70|Mistbind Clique|M|SPG
+#71|Wanderwine Prophets|M|SPG
+#72|Bitterblossom|M|SPG
+#73|Goblin Chieftain|M|SPG
+#74|Risen Reef|M|SPG
+#75|Dolmen Gate|M|SPG
+#76|Door of Destinies|M|SPG
+#77|Lofty Dreams|U|ECL
+#78|Tanufel Rimespeaker|U|ECL
+#79|Dawnhand Dissident|R|ECL
+#80|Deepchannel Duelist|U|ECL
+#81|Shadow Urchin|R|ECL
+#82|Burdened Stoneback|U|ECL
+#83|Glen Elendra Guardian|R|ECL
+#84|Pestered Wellguard|U|ECL
+#85|Wanderwine Farewell|U|ECL
+#86|Nameless Inversion|U|ECL
+#87|Nightmare Sower|U|ECL
+#88|Twilight Diviner|R|ECL
+#89|Boulder Dash|U|ECL
+#90|Explosive Prodigy|U|ECL
+#91|Hexing Squelcher|R|ECL
+#92|Sear|U|ECL
+#93|Blossoming Defense|U|ECL
+#94|Dundoolin Weaver|U|ECL
+#95|Pummeler for Hire|U|ECL
+#96|Boggart Cursecrafter|U|ECL
+#97|Dream Harvest|R|ECL
+#98|Reaping Willow|U|ECL
+#99|Thoughtweft Lieutenant|U|ECL
+#100|Evolving Wilds|C|ECL
+#101|Clachan Festival|U|ECL
+#102|Meanders Guide|U|ECL
+#103|Glamer Gifter|U|ECL
+#104|Glen Elendra's Answer|M|ECL
+#105|Rimekin Recluse|U|ECL
+#106|Shinestriker|U|ECL
+#107|Silvergill Mentor|U|ECL
+#108|Swat Away|U|ECL
+#109|Temporal Cleansing|C|ECL
+#110|Unexpected Assistance|C|ECL
+#111|Unwelcome Sprite|U|ECL
+#112|Darkness Descends|U|ECL
+#113|Graveshifter|U|ECL
+#114|Shimmercreep|U|ECL
+#115|Lasting Tarfire|U|ECL
+#116|Sourbread Auntie|U|ECL
+#117|Tweeze|C|ECL
+#118|Assert Perfection|C|ECL
+#119|Eclipsed Boggart|U|ECL
+#120|Eclipsed Elf|U|ECL
+#121|Eclipsed Flamekin|U|ECL
+#122|Eclipsed Kithkin|U|ECL
+#123|Eclipsed Merrow|U|ECL
+#124|Morcant's Loyalist|U|ECL
+#125|Voracious Tome-Skimmer|U|ECL
+#126|Gathering Stone|U|ECL
+#127|Blood Crypt|R|ECL
+#128|Hallowed Fountain|R|ECL
+#129|Overgrown Tomb|R|ECL
+#130|Steam Vents|R|ECL
+#131|Temple Garden|R|ECL
+#132|Changeling Wayfinder|C|ECL
+#133|Gallant Fowlknight|C|ECL
+#134|Goldmeadow Nomad|C|ECL
+#135|Kithkeeper|U|ECL
+#136|Liminal Hold|C|ECL
+#137|Moonlit Lamenter|U|ECL
+#138|Blossombind|C|ECL
+#139|Illusion Spinners|U|ECL
+#140|Blight Rot|C|ECL
+#141|Boggart Prankster|C|ECL
+#142|Bogslither's Embrace|C|ECL
+#143|Gnarlbark Elm|U|ECL
+#144|Iron-Shield Elf|U|ECL
+#145|Mudbutton Cursetosser|U|ECL
+#146|Requiting Hex|U|ECL
+#147|Cinder Strike|C|ECL
+#148|Elder Auntie|C|ECL
+#149|Flamebraider|U|ECL
+#150|Giantfall|U|ECL
+#151|Warren Torchmaster|U|ECL
+#152|Bloom Tender|M|ECL
+#153|Bristlebane Outrider|U|ECL
+#154|Celestial Reunion|M|ECL
+#155|Chomping Changeling|U|ECL
+#156|Midnight Tilling|C|ECL
+#157|Mistmeadow Council|C|ECL
+#158|Wildvine Pummeler|C|ECL
+#159|Glister Bairn|U|ECL
+#160|Hovel Hurler|U|ECL
+#161|Noggle Robber|U|ECL
+#162|Goblin Sharpshooter|M|SPG
+#163|Devoted Druid|M|SPG
+#164|Encumbered Reejerey|U|ECL
+#165|Kinsbaile Aspirant|U|ECL
+#166|Personify|U|ECL
+#167|Pyrrhic Strike|U|ECL
+#168|Rime Chill|U|ECL
+#169|Wanderwine Distracter|C|ECL
+#170|Barbed Bloodletter|C|ECL
+#171|Creakwood Safewright|U|ECL
+#172|Dawnhand Eulogist|C|ECL
+#173|Gutsplitter Gang|U|ECL
+#174|Boldwyr Aggressor|U|ECL
+#175|Boneclub Berserker|C|ECL
+#176|Feed the Flames|C|ECL
+#177|Sizzling Changeling|U|ECL
+#178|Crossroads Watcher|C|ECL
+#179|Gilt-Leaf's Embrace|C|ECL
+#180|Luminollusk|U|ECL
+#181|Moon-Vigil Adherents|U|ECL
+#182|Pitiless Fists|U|ECL
+#183|Prismabasher|U|ECL
+#184|Safewright Cavalry|C|ECL
+#185|Vinebred Brawler|U|ECL
+#186|Virulent Emissary|U|ECL
+#187|Merrow Skyswimmer|C|ECL
+#188|Stoic Grove-Guide|C|ECL
+#189|Twinflame Travelers|U|ECL
+#190|Flock Impostor|U|ECL
+#191|Keep Out|C|ECL
+#192|Protective Response|U|ECL
+#193|Riverguard's Reflexes|C|ECL
+#194|Shore Lurker|C|ECL
+#195|Spiral into Solitude|C|ECL
+#196|Sun-Dappled Celebrant|C|ECL
+#197|Thoughtweft Imbuer|U|ECL
+#198|Timid Shieldbearer|C|ECL
+#199|Tributary Vaulter|C|ECL
+#200|Wanderbrine Preacher|C|ECL
+#201|Aquitect's Defenses|C|ECL
+#202|Gravelgill Scoundrel|C|ECL
+#203|Kulrath Mystic|C|ECL
+#204|Noggle the Mind|U|ECL
+#205|Omni-Changeling|U|ECL
+#206|Run Away Together|C|ECL
+#207|Silvergill Peddler|C|ECL
+#208|Stratosoarer|C|ECL
+#209|Summit Sentinel|C|ECL
+#210|Auntie's Sentence|C|ECL
+#211|Bile-Vial Boggart|C|ECL
+#212|Dream Seizer|C|ECL
+#213|Moonglove Extractor|C|ECL
+#214|Retched Wretch|U|ECL
+#215|Scarblade Scout|C|ECL
+#216|Scarblade's Malice|C|ECL
+#217|Brambleback Brute|C|ECL
+#218|Burning Curiosity|C|ECL
+#219|Flame-Chain Mauler|C|ECL
+#220|Goatnap|U|ECL
+#221|Impolite Entrance|U|ECL
+#222|Kulrath Zealot|C|ECL
+#223|Reckless Ransacking|C|ECL
+#224|Squawkroaster|U|ECL
+#225|Great Forest Druid|C|ECL
+#226|Lys Alana Dignitary|U|ECL
+#227|Lys Alana Informant|C|ECL
+#228|Shimmerwilds Growth|U|ECL
+#229|Surly Farrier|C|ECL
+#230|Thoughtweft Charge|U|ECL
+#231|Unforgiving Aim|C|ECL
+#232|Chaos Spewer|C|ECL
+#233|Feisty Spikeling|C|ECL
+#234|Flaring Cinder|C|ECL
+#235|Gangly Stompling|C|ECL
+#236|Mischievous Sneakling|C|ECL
+#237|Prideful Feastling|C|ECL
+#238|Wary Farmer|C|ECL
+#239|Firdoch Core|C|ECL
+#240|Foraging Wickermaw|C|ECL
+#241|Stalactite Dagger|C|ECL
+#242|Rooftop Percher|C|ECL
+#243|Appeal to Eirdu|C|ECL
+#244|Bark of Doran|U|ECL
+#245|Evershrike's Gift|U|ECL
+#246|Reluctant Dounguard|C|ECL
+#247|Wanderbrine Trapper|U|ECL
+#248|Glamermite|C|ECL
+#249|Thirst for Identity|U|ECL
+#250|Wild Unraveling|C|ECL
+#251|Blighted Blackthorn|C|ECL
+#252|Dose of Dawnglow|U|ECL
+#253|Heirloom Auntie|C|ECL
+#254|Perfect Intimidation|U|ECL
+#255|Unbury|U|ECL
+#256|Enraged Flamecaster|C|ECL
+#257|Flamekin Gildweaver|C|ECL
+#258|Gristle Glutton|C|ECL
+#259|Soulbright Seeker|U|ECL
+#260|Sting-Slinger|U|ECL
+#261|Dawn's Light Archer|C|ECL
+#262|Prismatic Undercurrents|U|ECL
+#263|Tend the Sprigs|C|ECL
+#264|Chitinous Graspling|C|ECL
+#265|Dawn-Blessed Pennant|U|ECL
+#266|Puca's Eye|U|ECL
+#267|Eclipsed Realms|U|ECL
+#268|Crib Swap|U|ECL
+#269|Mirrorform|M|ECL
+#270|Kindle the Inner Flame|U|ECL
+#271|Lavaleaper|R|ECL
+#272|Morcant's Eyes|U|ECL
+#273|Raiding Schemes|R|ECL
+#274|Springleaf Drum|U|ECL
+#275|Faerie Macabre|M|SPG
+#276|Manamorphose|M|SPG
+#277|Slippery Bogle|M|SPG
+#278|Heat Shimmer|M|SPG
+#279|Morningtide's Light|M|ECL
+#280|Rimefire Torque|R|ECL
+#281|Spell Snare|U|ECL
+#282|Mornsong Aria|R|ECL
+#283|Meek Attack|M|ECL
+#284|Mirrormind Crown|R|ECL
+#285|Idyllic Tutor|M|SPG
+#286|Helix Pinnacle|M|SPG
+#287|Painter's Servant|M|SPG
+#288|Thousand-Year Elixir|M|SPG
+#289|Plains|C|ECL
+#290|Island|C|ECL
+#291|Swamp|C|ECL
+#292|Mountain|C|ECL
+#293|Forest|C|ECL

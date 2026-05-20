@@ -1,18 +1,14 @@
 [metadata]
-Name=human_archer
+Name=Human Archer
 [Main]
-1 Karplusan Forest|ICE|1
-2 Battlefield Forge|APC|1
-2 Giant Growth|4ED|1
-2 Mountain|LEB|3
-2 Squirrel Nest|ODY|1
-4 Brushland|ICE|1
-4 Elvish Scout|FEM|1
-4 Longbow Archer|VIS|1
-4 Ranger en-Vec|TMP|1
-4 Serrated Arrows|ATH|1
-4 True Believer|ONS|1
-4 Wildfire|USG|1
-4 Wooden Sphere|6ED|1
-5 Forest|LEB|3
-7 Plains|LEB|3
+24 Plains|POR|3
+4 Crossbow Infantry|MMQ
+4 D'Avenant Archer|LEG
+4 Elite Archers|USG
+4 Keen-Eyed Archers|POR
+4 Longbow Archer|VIS
+4 Mounted Archers|TMP
+2 Rashka the Slayer|HML
+4 Serrated Arrows|HML
+2 Serra's Blessing|WTH
+4 Disenchant|ICE

@@ -1,0 +1,10 @@
+Name:Solstice Revelations
+ManaCost:2 R
+Types:Instant Lesson
+A:SP$ DigUntil | Valid$ Card.nonLand | ValidDescription$ nonland | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | SubAbility$ DBCast | NoPutDesc$ True | SpellDescription$ Exile cards from the top of your library until you exile a nonland card. You may cast that card without paying its mana cost if the spell's mana value is less than the number of Mountains you control. If you don't cast that card this way, put it into your hand.
+SVar:DBCast:DB$ Play | Defined$ Remembered | ValidSA$ Spell.cmcLEX | WithoutManaCost$ True | Optional$ True | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Hand | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+K:Flashback:6 R
+SVar:X:Count$Valid Mountain.YouCtrl
+Oracle:Exile cards from the top of your library until you exile a nonland card. You may cast that card without paying its mana cost if the spell's mana value is less than the number of Mountains you control. If you don't cast that card this way, put it into your hand.\nFlashback {6}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)

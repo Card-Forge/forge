@@ -1,0 +1,5 @@
+Name:Blight Rot
+ManaCost:2 B
+Types:Instant
+A:SP$ PutCounter | ValidTgts$ Creature | CounterType$ M1M1 | CounterNum$ 4 | IsCurse$ True | SpellDescription$ Put four -1/-1 counters on target creature.
+Oracle:Put four -1/-1 counters on target creature.

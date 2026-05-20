@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Yewa
+Title=Yewa
+Icon=Yewa.jpg
+Difficulty=Medium
+Description=./Standard/Ravnica_Allegiance/Alrawn_-_Gruul_Aggro_(Standard,_#779929).dck
+Deck Type=constructed
+
+[Main]
+3 Carnage Tyrant
+2 Ghalta, Primal Hunger
+4 Growth-Chamber Guardian
+4 Gruul Spellbreaker
+4 Incubation Druid
+4 Llanowar Elves
+2 Ravager Wurm
+3 Rekindling Phoenix
+2 Skarrgan Hellkite
+2 Sunder Shaman
+2 Thrashing Brontodon
+4 Rhythm of the Wild
+1 Domri, Chaos Bringer
+10 Forest
+5 Mountain
+4 Rootbound Crag
+4 Stomping Ground
+[Sideboard]
+1 Carnage Tyrant
+2 Cindervines
+3 Deathgorge Scavenger
+1 Domri, Chaos Bringer
+3 Fiery Cannonade
+2 Kraul Harpooner
+2 Thrashing Brontodon
+1 Vivien Reid

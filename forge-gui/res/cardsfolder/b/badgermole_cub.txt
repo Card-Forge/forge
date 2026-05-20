@@ -1,0 +1,9 @@
+Name:Badgermole Cub
+ManaCost:1 G
+Types:Creature Badger Mole
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEarthbend | TriggerDescription$ When this creature enters, earthbend 1. (Target land you control becomes a 0/0 creature with haste that's still a land. Put a +1/+1 counter on it. When it dies or is exiled, return it to the battlefield tapped.)
+SVar:TrigEarthbend:DB$ Earthbend | Num$ 1
+T:Mode$ TapsForMana | ValidCard$ Creature | Activator$ You | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever you tap a creature for mana, add an additional {G}.
+SVar:TrigMana:DB$ Mana | Produced$ G | Amount$ 1
+Oracle:When this creature enters, earthbend 1. (Target land you control becomes a 0/0 creature with haste that's still a land. Put a +1/+1 counter on it. When it dies or is exiled, return it to the battlefield tapped.)\nWhenever you tap a creature for mana, add an additional {G}.

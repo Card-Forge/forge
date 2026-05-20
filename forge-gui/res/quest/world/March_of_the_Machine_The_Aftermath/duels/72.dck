@@ -1,0 +1,46 @@
+[duel]
+[metadata]
+Name=Seabiscuit
+Title=Seabiscuit
+Icon=Seabiscuit.jpg
+Difficulty=Hard
+Description=./Modern/March_of_the_Machine_The_Aftermath/Enzo_Sgrignolli_-_Naya_Aggro_(Modern,_#1696290).dck
+Deck Type=constructed
+
+[Main]
+1 Ghor-Clan Rampager
+1 Ignoble Hierarch
+4 Kinjalli's Caller
+4 Marauding Raptor
+2 Rampaging Raptor
+3 Ranging Raptors
+1 Realmwalker
+3 Regisaur Alpha
+4 Ripjaw Raptor
+2 Tranquil Frillback
+2 Ephemerate
+2 Lightning Bolt
+3 Reckless Rage
+4 Commune with Dinosaurs
+3 Prismatic Ending
+1 Boseiju, Who Endures
+1 Cavern of Souls
+2 Copperline Gorge
+2 Forest
+1 Horizon Canopy
+1 Jetmir's Garden
+1 Sacred Foundry
+1 Snow-Covered Mountain
+1 Snow-Covered Plains
+1 Stomping Ground
+1 Temple Garden
+4 Windswept Heath
+4 Wooded Foothills
+[Sideboard]
+2 Blood Moon
+2 Brotherhood's End
+2 Carnage Tyrant
+2 Heroic Intervention
+3 Leyline of Sanctity
+2 Relic of Progenitus
+2 Void Mirror

@@ -22,6 +22,8 @@ public class VPhaseIndicator extends FContainer {
     public static final float PADDING_X = Utils.scale(1);
     public static final float PADDING_Y = Utils.scale(2);
 
+    private static final Color YIELD_MARKER_COLOR = new Color(0xFFA528FF);
+
     private final Map<PhaseType, PhaseLabel> phaseLabels = new HashMap<>();
     private FSkinFont font;
 
@@ -46,6 +48,10 @@ public class VPhaseIndicator extends FContainer {
 
     public PhaseLabel getLabel(PhaseType phaseType) {
         return phaseLabels.get(phaseType);
+    }
+
+    public Iterable<PhaseLabel> allLabels() {
+        return phaseLabels.values();
     }
 
     public void resetPhaseButtons() {
@@ -86,7 +92,7 @@ public class VPhaseIndicator extends FContainer {
             float x = 0;
             float w = width / phaseLabels.size();
             float h = height;
-    
+
             for (FDisplayObject lbl : getChildren()) {
                 lbl.setBounds(x, 0, w, h);
                 x += w;
@@ -110,6 +116,9 @@ public class VPhaseIndicator extends FContainer {
         private final PhaseType phaseType;
         private boolean stopAtPhase = false;
         private boolean active = false;
+        private boolean yieldMarked = false;
+        private Runnable onToggled;
+        private Runnable onLongPress;
 
         public PhaseLabel(String caption0, PhaseType phaseType0) {
             caption = caption0;
@@ -134,9 +143,36 @@ public class VPhaseIndicator extends FContainer {
             stopAtPhase = stopAtPhase0;
         }
 
+        public boolean isYieldMarked() {
+            return yieldMarked;
+        }
+        public void setYieldMarked(boolean v) {
+            this.yieldMarked = v;
+        }
+
+        /** Fires after the user toggles this label by tapping. */
+        public void setOnToggled(Runnable r) {
+            onToggled = r;
+        }
+
+        /** Fires when the user long-presses this label. */
+        public void setOnLongPress(Runnable r) {
+            onLongPress = r;
+        }
+
         @Override
         public boolean tap(float x, float y, int count) {
             stopAtPhase = !stopAtPhase;
+            if (onToggled != null) onToggled.run();
+            return true;
+        }
+
+        @Override
+        public boolean longPress(float x, float y) {
+            if (onLongPress == null) {
+                return false;
+            }
+            onLongPress.run();
             return true;
         }
 
@@ -147,21 +183,36 @@ public class VPhaseIndicator extends FContainer {
             float h = getHeight();
 
             //determine back color according to skip or active state of label
-            FSkinColor backColor;
-            if (active && stopAtPhase) {
-                backColor = Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_PHASE_ACTIVE_ENABLED) : FSkinColor.get(Colors.CLR_PHASE_ACTIVE_ENABLED);
+            if (yieldMarked) {
+                g.fillRect(YIELD_MARKER_COLOR, x, 0, w, h);
+                drawChevron(g, x, w, h);
+                // Skip the caption when marked — chevron replaces the phase abbreviation.
+            } else {
+                FSkinColor backColor;
+                if (active && stopAtPhase) {
+                    backColor = Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_PHASE_ACTIVE_ENABLED) : FSkinColor.get(Colors.CLR_PHASE_ACTIVE_ENABLED);
+                }
+                else if (!active && stopAtPhase) {
+                    backColor = Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_PHASE_INACTIVE_ENABLED) : FSkinColor.get(Colors.CLR_PHASE_INACTIVE_ENABLED);
+                }
+                else if (active && !stopAtPhase) {
+                    backColor = Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_PHASE_ACTIVE_DISABLED) : FSkinColor.get(Colors.CLR_PHASE_ACTIVE_DISABLED);
+                }
+                else {
+                    backColor = Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_PHASE_INACTIVE_DISABLED) : FSkinColor.get(Colors.CLR_PHASE_INACTIVE_DISABLED);
+                }
+                g.fillRect(isHovered() ? backColor.brighter() : backColor, x, 0, w, h);
+                g.drawText(caption, isHovered() && font.canIncrease() ? font.increase() : font, Color.BLACK, x, 0, w, h, false, Align.center, true);
             }
-            else if (!active && stopAtPhase) {
-                backColor = Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_PHASE_INACTIVE_ENABLED) : FSkinColor.get(Colors.CLR_PHASE_INACTIVE_ENABLED);
-            }
-            else if (active && !stopAtPhase) {
-                backColor = Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_PHASE_ACTIVE_DISABLED) : FSkinColor.get(Colors.CLR_PHASE_ACTIVE_DISABLED);
-            }
-            else {
-                backColor = Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_PHASE_INACTIVE_DISABLED) : FSkinColor.get(Colors.CLR_PHASE_INACTIVE_DISABLED);
-            }
-            g.fillRect(isHovered() ? backColor.brighter() : backColor, x, 0, w, h);
-            g.drawText(caption, isHovered() && font.canIncrease() ? font.increase() : font, Color.BLACK, x, 0, w, h, false, Align.center, true);
+        }
+
+        private void drawChevron(final Graphics g, float x, float w, float h) {
+            // Two back-to-back triangles centered in the cell
+            float size = Math.max(Utils.scale(6f), h * 0.55f);
+            float cx = x + (w - size) / 2f;
+            float cy = (h - size) / 2f;
+            g.fillTriangle(Color.BLACK, cx,            cy,            cx + size / 2f, cy + size / 2f, cx,            cy + size);
+            g.fillTriangle(Color.BLACK, cx + size / 2f, cy,            cx + size,      cy + size / 2f, cx + size / 2f, cy + size);
         }
     }
 }

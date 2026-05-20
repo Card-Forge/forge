@@ -20,7 +20,6 @@ package forge.game.ability;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import forge.card.CardStateName;
-import forge.card.CardType;
 import forge.game.CardTraitBase;
 import forge.game.IHasSVars;
 import forge.game.ability.effects.CharmEffect;
@@ -34,7 +33,6 @@ import forge.util.FileSection;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -150,11 +148,11 @@ public final class AbilityFactory {
             return getAbility(mapParams, type, state, sVarHolder);
         } catch (Error | Exception ex) {
             String msg = "AbilityFactory:getAbility: crash when trying to create ability ";
-            
+
             Breadcrumb bread = new Breadcrumb(msg);
             bread.setData("Card", state.getName());
             bread.setData("Ability", abString);
-            
+
             Sentry.addBreadcrumb(bread);
             throw new RuntimeException(msg + " of card: " + state.getName(), ex);
         }
@@ -223,22 +221,6 @@ public final class AbilityFactory {
             spellAbility.setCardState(state);
         }
 
-        if (mapParams.containsKey("Forecast")) {
-            spellAbility.putParam("ActivationZone", "Hand");
-            spellAbility.putParam("ActivationLimit", "1");
-            spellAbility.putParam("ActivationPhases", "Upkeep");
-            spellAbility.putParam("PlayerTurn", "True");
-            spellAbility.putParam("PrecostDesc", "Forecast — ");
-        }
-        if (spellAbility.isBoast()) {
-            spellAbility.putParam("PresentDefined", "Self");
-            spellAbility.putParam("IsPresent", "Card.attackedThisTurn");
-            spellAbility.putParam("PrecostDesc", "Boast — ");
-        }
-        if (spellAbility.isExhaust()) {
-            spellAbility.putParam("PrecostDesc", "Exhaust — ");
-        }
-
         // *********************************************
         // set universal properties of the SpellAbility
 
@@ -291,7 +273,7 @@ public final class AbilityFactory {
         if (spellAbility instanceof SpellApiBased && hostCard.isPermanent()) {
             String desc = mapParams.getOrDefault("SpellDescription", spellAbility.getHostCard().getName());
             spellAbility.setDescription(desc);
-        } else if (mapParams.containsKey("SpellDescription")) {
+        } else if (spellAbility.hasParam("SpellDescription")) {
             spellAbility.rebuiltDescription();
         } else if (api == ApiType.Charm) {
             spellAbility.setDescription(CharmEffect.makeFormatedDescription(spellAbility));
@@ -313,89 +295,8 @@ public final class AbilityFactory {
     }
 
     private static TargetRestrictions readTarget(Map<String, String> mapParams) {
-        final String min = mapParams.getOrDefault("TargetMin", "1");
-        final String max = mapParams.getOrDefault("TargetMax", "1");
-
         // TgtPrompt should only be needed for more complicated ValidTgts
-        String tgtWhat = mapParams.get("ValidTgts");
-        final String prompt;
-        if (mapParams.containsKey("TgtPrompt")) {
-            prompt = mapParams.get("TgtPrompt");
-        } else if (tgtWhat.equals("Any")) {
-            prompt = "Select any target";
-        } else {
-            final String[] commonStuff = new String[] {
-                    //list of common one word non-core type ValidTgts that should be lowercase in the target prompt
-                    "Player", "Opponent", "Card", "Spell", "Permanent"
-            };
-            if (Arrays.asList(commonStuff).contains(tgtWhat) || CardType.CoreType.isValidEnum(tgtWhat)) {
-                tgtWhat = tgtWhat.toLowerCase();
-            }
-            prompt = "Select target " + tgtWhat;
-        }
-
-        TargetRestrictions abTgt = new TargetRestrictions(prompt, mapParams.get("ValidTgts").split(","), min, max);
-
-        if (mapParams.containsKey("TgtZone")) {
-            // if Targeting something not in play, this Key should be set
-            abTgt.setZone(ZoneType.listValueOf(mapParams.get("TgtZone")));
-        }
-
-        if (mapParams.containsKey("MaxTotalTargetCMC")) {
-            // only target cards up to a certain total max CMC
-            abTgt.setMaxTotalCMC(mapParams.get("MaxTotalTargetCMC"));
-        }
-
-        if (mapParams.containsKey("MaxTotalTargetPower")) {
-            // only target cards up to a certain total max power
-            abTgt.setMaxTotalPower(mapParams.get("MaxTotalTargetPower"));
-        }
-
-        // TargetValidTargeting most for Counter: e.g. target spell that targets X.
-        if (mapParams.containsKey("TargetValidTargeting")) {
-            abTgt.setSAValidTargeting(mapParams.get("TargetValidTargeting"));
-        }
-
-        if (mapParams.containsKey("TargetUnique")) {
-            abTgt.setUniqueTargets(true);
-        }
-        if (mapParams.containsKey("TargetsFromSingleZone")) {
-            abTgt.setSingleZone(true);
-        }
-        if (mapParams.containsKey("TargetsWithoutSameCreatureType")) {
-            abTgt.setWithoutSameCreatureType(true);
-        }
-        if (mapParams.containsKey("TargetsWithSameCreatureType")) {
-            abTgt.setWithSameCreatureType(true);
-        }
-        if (mapParams.containsKey("TargetsWithSameCardType")) {
-            abTgt.setWithSameCardType(true);
-        }
-        if (mapParams.containsKey("TargetsWithSameController")) {
-            abTgt.setSameController(true);
-        }
-        if (mapParams.containsKey("TargetsWithDifferentControllers")) {
-            abTgt.setDifferentControllers(true);
-        }
-        if (mapParams.containsKey("TargetsForEachPlayer")) {
-            abTgt.setForEachPlayer(true);
-        }
-        if (mapParams.containsKey("TargetsWithDifferentCMC")) {
-            abTgt.setDifferentCMC(true);
-        }
-        if (mapParams.containsKey("TargetsWithEqualToughness")) {
-            abTgt.setEqualToughness(true);
-        }
-        if (mapParams.containsKey("TargetsAtRandom")) {
-            abTgt.setRandomTarget(true);
-        }
-        if (mapParams.containsKey("RandomNumTargets")) {
-            abTgt.setRandomNumTargets(true);
-        }
-        if (mapParams.containsKey("TargetingPlayer")) {
-            abTgt.setMandatory(true);
-        }
-        return abTgt;
+        return new TargetRestrictions(mapParams);
     }
 
     /**

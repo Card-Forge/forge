@@ -124,8 +124,8 @@ public class VAvatar extends FDisplayObject {
         float w = isHovered() ? getWidth()/16f+getWidth() : getWidth();
         float h = isHovered() ? getWidth()/16f+getHeight() : getHeight();
 
-        if (avatarAnimation != null && !MatchController.instance.getGameView().isMatchOver()) {
-            if (player.wasAvatarLifeChanged()) {
+        if (avatarAnimation != null && MatchController.instance.getGameView() != null && !MatchController.instance.getGameView().isMatchOver()) {
+            if (player.getAvatarLifeDifference() != 0) {
                 avatarAnimation.start();
                 avatarAnimation.drawAvatar(g, image, 0, 0, w, h);
             } else {

@@ -59,9 +59,17 @@ public class TileMapScene extends HudScene {
         if (map == null)
             return;
         if (nextMap != null) {
-            load(nextMap, nextSpawnPoint);
+            String target = nextMap;
+            int spawn = nextSpawnPoint;
             nextMap = null;
             nextSpawnPoint = 0;
+            try {
+                load(target, spawn);
+            } catch (Exception e) {
+                System.err.println("Error loading map " + target + "...");
+                e.printStackTrace();
+                MapStage.getInstance().exitDungeon(false, false);
+            }
         }
         stage.act(Gdx.graphics.getDeltaTime());
         hud.act(Gdx.graphics.getDeltaTime());
@@ -101,17 +109,17 @@ public class TileMapScene extends HudScene {
         if (WorldSave.getCurrentSave().getPlayer().hasAnnounceFantasy()) {
             WorldSave.getCurrentSave().getPlayer().clearAnnounceFantasy();
             MapStage.getInstance().showDeckAwardDialog("{BLINK=WHITE;RED}" +
-                    Forge.getLocalizer().getMessage("lblMode") + " " +
-                    Forge.getLocalizer().getMessage("lblChaos") + "{ENDBLINK}\n" +
-                    Forge.getLocalizer().getMessage("lblChaosModeDescription"),
-                    WorldSave.getCurrentSave().getPlayer().getSelectedDeck(), this::initializeDialogs);
+                Forge.getLocalizer().getMessage("lblMode") + " " +
+                Forge.getLocalizer().getMessage("lblChaos") + "{ENDBLINK}\n" +
+                Forge.getLocalizer().getMessage("lblChaosModeDescription"),
+                WorldSave.getCurrentSave().getPlayer().getSelectedDeck(), this::initializeDialogs);
         } else if (WorldSave.getCurrentSave().getPlayer().hasAnnounceCustom()) {
             WorldSave.getCurrentSave().getPlayer().clearAnnounceCustom();
             MapStage.getInstance().showDeckAwardDialog("{GRADIENT}" +
-                    Forge.getLocalizer().getMessage("lblMode") + " " +
-                    Forge.getLocalizer().getMessage("lblCustom") + "{ENDGRADIENT}\n" +
-                    Forge.getLocalizer().getMessage("lblCustomModeDescription"),
-                    WorldSave.getCurrentSave().getPlayer().getSelectedDeck(), this::initializeDialogs);
+                Forge.getLocalizer().getMessage("lblMode") + " " +
+                Forge.getLocalizer().getMessage("lblCustom") + "{ENDGRADIENT}\n" +
+                Forge.getLocalizer().getMessage("lblCustomModeDescription"),
+                WorldSave.getCurrentSave().getPlayer().getSelectedDeck(), this::initializeDialogs);
         } else {
             initializeDialogs();
         }
@@ -132,6 +140,10 @@ public class TileMapScene extends HudScene {
 
     public void load(PointOfInterest point) {
         AdventureQuestController.instance().mostRecentPOI = point;
+        if (rootPoint != point) {
+            // If we go from one town to another, don't resume the previous track.
+            SoundSystem.instance.clearShelvedPlaylist();
+        }
         rootPoint = point;
         oldMap = point.getData().map;
         map = new TemplateTmxMapLoader().load(Config.instance().getCommonFilePath(point.getData().map));

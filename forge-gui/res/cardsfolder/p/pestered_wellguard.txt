@@ -1,0 +1,8 @@
+Name:Pestered Wellguard
+ManaCost:3 U
+Types:Creature Merfolk Soldier
+PT:3/2
+T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever this creature becomes tapped, create a 1/1 blue and black Faerie creature token with flying.
+SVar:TrigToken:DB$ Token | TokenScript$ ub_1_1_faerie_flying
+DeckHas:Ability$Token
+Oracle:Whenever this creature becomes tapped, create a 1/1 blue and black Faerie creature token with flying.

@@ -1,7 +1,7 @@
 Name:Victory Chimes
 ManaCost:3
 Types:Artifact
-K:CARDNAME untaps during each other player's untap step.
+S:Mode$ UntapOtherPlayer | ValidCard$ Card.Self | Description$ Untap CARDNAME during each other player's untap step.
 A:AB$ ChoosePlayer | Cost$ T | Defined$ You | Choices$ Player | ChoiceTitle$ Choose a player | SubAbility$ DBMana | SpellDescription$ A player of your choice adds {C}.
 SVar:DBMana:DB$ Mana | Produced$ C | Defined$ ChosenPlayer
 Oracle:Untap Victory Chimes during each other player's untap step.\n{T}: A player of your choice adds {C}.

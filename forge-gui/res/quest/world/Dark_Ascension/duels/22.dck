@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Storm
+Title=Storm
+Icon=Storm.jpg
+Difficulty=Medium
+Description=Dark_Ascension/Pro_Tour_Dark_Ascension_Top_Standard_Decks/Koichi_Tanaka_-_Birthing_Pod_(Standard,_#26010).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Acidic Slime
+3 Avacyn's Pilgrim
+4 Birds of Paradise
+4 Blade Splicer
+1 Dungeon Geists
+1 Elesh Norn, Grand Cenobite
+1 Fiend Hunter
+2 Geist-Honored Monk
+3 Phantasmal Image
+1 Phyrexian Metamorph
+1 Solemn Simulacrum
+2 Sun Titan
+3 Viridian Emissary
+2 Wing Splicer
+1 Wurmcoil Engine
+4 Birthing Pod
+2 Oblivion Ring
+7 Forest
+2 Gavony Township
+2 Hinterland Harbor
+2 Island
+2 Plains
+4 Razorverge Thicket
+3 Seachrome Coast
+1 Sunpetal Grove
+[Sideboard]
+1 Stingerfling Spider
+2 Stonehorn Dignitary
+2 Sword of Feast and Famine
+1 Sylvok Replica
+2 Thrun, the Last Troll
+2 Venser, the Sojourner
+2 Vorapede

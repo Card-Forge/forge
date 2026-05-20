@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Magneto
+Title=Magneto
+Icon=Magneto.jpg
+Difficulty=Medium
+Description=Innistrad/Starcitygames_Open_Series__Indianapolis/Scott_Tompkins_-_Red_Deck_Wins_(Standard,_#20179).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Chandra's Phoenix
+3 Furnace Scamp
+3 Grim Lavamancer
+2 Hero of Oxid Ridge
+4 Stormblood Berserker
+4 Stromkirk Noble
+4 Shrine of Burning Rage
+4 Brimstone Volley
+4 Gut Shot
+3 Incinerate
+3 Shock
+2 Arc Trail
+17 Mountain
+4 Rootbound Crag
+[Sideboard]
+4 Ancient Grudge
+2 Dismember
+3 Nihil Spellbomb
+4 Vulshok Refugee

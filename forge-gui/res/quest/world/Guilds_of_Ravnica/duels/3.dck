@@ -1,0 +1,44 @@
+[duel]
+[metadata]
+Name=Dogbert
+Title=Dogbert
+Icon=Dogbert.jpg
+Difficulty=Medium
+Description=./Standard/Guilds_of_Ravnica/Adam_Boyd_-_Izzet_Control_(Standard,_#766619).dck
+Deck Type=constructed
+
+[Main]
+4 Crackling Drake
+1 Niv-Mizzet, Parun
+1 Azor's Gateway
+2 Treasure Map
+2 Chemister's Insight
+2 Disdainful Stroke
+1 Essence Scatter
+4 Expansion // Explosion
+3 Fiery Cannonade
+2 Lightning Strike
+1 Radical Idea
+2 Shivan Fire
+4 Sinister Sabotage
+2 Spell Swindle
+1 Syncopate
+2 Lava Coil
+1 Star of Extinction
+10 Island
+7 Mountain
+4 Steam Vents
+4 Sulfur Falls
+[Sideboard]
+1 Disdainful Stroke
+1 Fiery Cannonade
+3 Fountain of Renewal
+1 Lava Coil
+1 Negate
+2 Niv-Mizzet, Parun
+1 Shivan Fire
+1 Silent Gravestone
+1 Spell Pierce
+1 Spell Swindle
+1 Star of Extinction
+1 The Immortal Sun

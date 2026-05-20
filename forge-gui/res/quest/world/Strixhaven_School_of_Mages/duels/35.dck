@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Tombstone
+Title=Tombstone
+Icon=Tombstone.jpg
+Difficulty=Medium
+Description=./Standard/Strixhaven_School_of_Mages/Chase_Masters_-_Mardu_Fury_(Standard,_#1184814).dck
+Deck Type=constructed
+
+[Main]
+2 Drannith Magistrate
+2 Elite Spellbinder
+3 Goldspan Dragon
+3 Skyclave Shade
+4 Bonecrusher Giant
+4 Woe Strider
+2 Sejiri Shelter
+3 Unleash Fury
+3 Kazuul's Fury
+4 Village Rites
+4 Claim the Firstborn
+3 Showdown of the Skalds
+3 The Akroan War
+2 Mountain
+2 Swamp
+4 Needleverge Pathway
+4 Savai Triome
+4 Brightclimb Pathway
+4 Blightstep Pathway
+[Sideboard]
+1 The Akroan War
+1 Drannith Magistrate
+1 Cinderclasm
+2 Kroxa, Titan of Death's Hunger
+2 Heartless Act
+2 Flamescroll Celebrant
+2 Elspeth's Nightmare
+2 Kaervek, the Spiteful
+2 Arni Brokenbrow

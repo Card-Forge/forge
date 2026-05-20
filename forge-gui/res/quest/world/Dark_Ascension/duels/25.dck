@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Elrond
+Title=Elrond
+Icon=Elrond.jpg
+Difficulty=Easy
+Description=Dark_Ascension/Magic-League_Standard_Trial_02-03-2012/mophead2_-_Red_Deck_Wins_(Standard,_#27438).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Chandra's Phoenix
+4 Goblin Fireslinger
+4 Hellrider
+4 Stormblood Berserker
+4 Stromkirk Noble
+3 Torch Fiend
+4 Shrine of Burning Rage
+4 Gut Shot
+4 Incinerate
+4 Arc Trail
+22 Mountain
+[Sideboard]
+3 Dismember
+4 Manic Vandal
+4 Perilous Myr
+2 Traitorous Blood

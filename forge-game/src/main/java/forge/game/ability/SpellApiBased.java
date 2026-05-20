@@ -15,7 +15,6 @@ public class SpellApiBased extends Spell {
         super(sourceCard, abCost);
         this.setTargetRestrictions(tgt);
 
-        originalMapParams.putAll(params0);
         mapParams.putAll(params0);
         api = api0;
         effect = api.getSpellEffect();
@@ -24,11 +23,12 @@ public class SpellApiBased extends Spell {
         this.setIntrinsic(true);
 
         effect.buildSpellAbility(this);
+        originalMapParams.putAll(mapParams);
     }
 
     @Override
     public String getStackDescription() {
-        // prefer setted stack Description if able 
+        // prefer set stack Description if able 
         final String result = super.getStackDescription();
         if (result.isEmpty()) {
             return effect.getStackDescriptionWithSubs(mapParams, this);

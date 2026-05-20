@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Catwoman
+Title=Catwoman
+Icon=Catwoman.jpg
+Difficulty=Medium
+Description=./Standard/Foundations/Amagai_Masahiro_-_Mono_White_control_(Standard,_#2282928).dck
+Deck Type=constructed
+
+[Main]
+2 Beza, the Bounding Spring
+3 Enduring Innocence
+2 Overlord of the Mistmoors
+4 Carrot Cake
+3 Virtue of Loyalty
+4 Get Lost
+4 Lay Down Arms
+4 Sunfall
+4 Caretaker's Talent
+2 Invasion of New Phyrexia
+2 Archangel Elspeth
+15 Plains
+1 Island
+2 Fabled Passage
+4 Meticulous Archive
+4 Fountainport
+[Sideboard]
+2 Negate
+3 Authority of the Consuls
+1 The Eternal Wanderer
+1 Boon-Bringer Valkyrie
+3 Elspeth's Smite
+1 Exorcise
+2 Split Up
+2 Crystal Barricade

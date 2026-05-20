@@ -1,0 +1,49 @@
+[duel]
+[metadata]
+Name=Piper
+Title=Piper
+Icon=Piper.jpg
+Difficulty=Easy
+Description=Avacyn_Restored/SCG_Invitational_Qualifier_-_Glen_Burnie,_Maryland/Max_Margolis_-_Jund_(Standard,_#31238).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+2 Acidic Slime
+4 Birds of Paradise
+1 Geralf's Messenger
+2 Glissa, the Traitor
+1 Griselbrand
+3 Huntmaster of the Fells
+1 Inferno Titan
+2 Llanowar Elves
+2 Phyrexian Metamorph
+1 Rune-Scarred Demon
+1 Sheoldred, Whispering One
+1 Somberwald Sage
+4 Strangleroot Geist
+1 Viridian Emissary
+1 Wolfir Silverheart
+1 Wurmcoil Engine
+1 Zealous Conscripts
+4 Birthing Pod
+3 Tragic Slip
+2 Blackcleave Cliffs
+4 Copperline Gorge
+6 Forest
+1 Mountain
+2 Rootbound Crag
+5 Swamp
+4 Woodland Cemetery
+[Sideboard]
+1 Arc Trail
+1 Archwing Dragon
+1 Batterskull
+1 Bonfire of the Damned
+1 Daybreak Ranger
+1 Naturalize
+1 Olivia Voldaren
+2 Pillar of Flame
+2 Ratchet Bomb
+2 Surgical Extraction
+1 Thrun, the Last Troll

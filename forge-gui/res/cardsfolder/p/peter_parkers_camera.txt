@@ -1,0 +1,7 @@
+Name:Peter Parker's Camera
+Variant:UniversesWithin:FlavorName:Phenomena Recorder
+ManaCost:1
+Types:Artifact
+K:etbCounter:FILM:3
+A:AB$ CopySpellAbility | Cost$ 2 T SubCounter<1/FILM> | TargetType$ Activated.YouCtrl,Triggered.YouCtrl | ValidTgts$ Card,Emblem | TgtPrompt$ Choose target activated or triggered ability you control | MayChooseTarget$ True | SpellDescription$ Copy target activated or triggered ability you control. You may choose new targets for the copy.
+Oracle:This artifact enters with three film counters on it.\n{2}, {T}, Remove a film counter from this artifact: Copy target activated or triggered ability you control. You may choose new targets for the copy.

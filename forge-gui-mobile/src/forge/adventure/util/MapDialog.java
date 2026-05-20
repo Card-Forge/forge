@@ -333,8 +333,8 @@ public class MapDialog {
                 else Current.player().takeGold(-E.addGold);
             }
             if (E.addShards != 0) { //Gives (positive or negative) mana shards to the player.
-                if (E.addShards > 0) Current.player().giveGold(E.addShards);
-                else Current.player().takeGold(-E.addShards);
+                if (E.addShards > 0) Current.player().addShards(E.addShards);
+                else Current.player().takeShards(-E.addShards);
             }
             if (E.addMapReputation != 0) {
                 if (E.POIReference != null && !E.POIReference.isEmpty()) {
@@ -405,15 +405,14 @@ public class MapDialog {
                 RewardScene.instance().loadRewards(ret, RewardScene.Type.QuestReward, null);
                 Forge.switchScene(RewardScene.instance());
             }
-            //Test code for selectable rewards:
-//            if (E.grantRewards != null && E.grantRewards.length > 0) {
-//                Array<Reward> ret = new Array<Reward>();
-//                for(RewardData rdata:E.grantRewards) {
-//                    ret.addAll(rdata.generate(false, true));
-//                }
-//                RewardScene.instance().loadSelectableRewards(ret, RewardScene.Type.RewardChoice, ret.size > 1? 2: 1);
-//                Forge.switchScene(RewardScene.instance());
-//            }
+               if (E.grantRewardsChoice != null && E.grantRewardsChoice.length > 0) {
+               Array<Reward> ret = new Array<Reward>();
+               for(RewardData rdata:E.grantRewardsChoice) {
+                   ret.addAll(rdata.generate(false, true));
+               }
+               RewardScene.instance().loadSelectableRewards(ret, RewardScene.Type.RewardChoice, 1);
+               Forge.switchScene(RewardScene.instance());
+            }
             if (E.issueQuest != null && (!E.issueQuest.isEmpty())) {
                 questAccepted = E.issueQuest;
                 emitQuestAccepted();

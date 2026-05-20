@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Da Vinci
+Title=Da Vinci
+Icon=Da Vinci.jpg
+Difficulty=Very Hard
+Description=./Modern/Strixhaven_School_of_Mages/Tulio_Jaudy_-_Merfolk_(Modern,_#1202490).dck
+Deck Type=constructed
+
+[Main]
+3 Merfolk Trickster
+3 Harbinger of the Tides
+4 Tide Shaper
+4 Svyelun of Sea and Sky
+4 Silvergill Adept
+4 Master of the Pearl Trident
+4 Lord of Atlantis
+4 Aether Vial
+4 Spell Pierce
+4 Archmage's Charm
+1 Minamo, School at Water's Edge
+1 Oboro, Palace in the Clouds
+4 Waterlogged Grove
+4 Glasspool Mimic
+12 Island
+[Sideboard]
+2 Gut Shot
+2 Hurkyl's Recall
+3 Tempted by the Oriq
+4 Relic of Progenitus
+4 Counterspell

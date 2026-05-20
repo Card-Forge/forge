@@ -1,0 +1,43 @@
+[duel]
+[metadata]
+Name=Radioactive Man
+Title=Radioactive Man
+Icon=Radioactive Man.jpg
+Difficulty=Hard
+Description=./Modern/Phyrexia_All_Will_Be_One/Jesse_Edington_-_Boros_Stoneblade_(Modern,_#1555631).dck
+Deck Type=constructed
+
+[Main]
+4 Fervent Champion
+3 Fury
+2 Giver of Runes
+4 Ragavan, Nimble Pilferer
+4 Ranger-Captain of Eos
+4 Solitude
+4 Stoneforge Mystic
+1 Batterskull
+1 Kaldra Compleat
+3 Sword of Fire and Ice
+4 Ephemerate
+1 Blood Moon
+3 Nahiri, the Unforgiving
+4 Arid Mesa
+1 Eiganjo, Seat of the Empire
+4 Flooded Strand
+4 Inspiring Vantage
+1 Mountain
+3 Plains
+3 Sacred Foundry
+1 Sokenzan, Crucible of Defiance
+1 Sunbaked Canyon
+[Sideboard]
+2 Blood Moon
+2 Burrenton Forge-Tender
+2 Duergar Hedge-Mage
+1 Giant Killer
+1 Hallowed Moonlight
+1 Rest in Peace
+2 Sanctifier en-Vec
+1 Sword of Feast and Famine
+1 Wear // Tear
+2 Orvar, the All-Form

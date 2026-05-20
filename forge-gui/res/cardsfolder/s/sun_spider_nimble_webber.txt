@@ -1,0 +1,10 @@
+Name:Sun-Spider, Nimble Webber
+Variant:UniversesWithin:FlavorName:Cirina Bargainspinner
+ManaCost:3 WU
+Types:Legendary Creature Spider Human Hero
+PT:3/2
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | Condition$ PlayerTurn | Description$ During your turn, NICKNAME has flying.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | TriggerDescription$ When NICKNAME enters, search your library for an Aura or Equipment card, reveal it, put it into your hand, then shuffle.
+SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Aura,Equipment | ChangeNum$ 1
+DeckHints:Type$Aura|Equipment
+Oracle:During your turn, Sun-Spider has flying.\nWhen Sun-Spider enters, search your library for an Aura or Equipment card, reveal it, put it into your hand, then shuffle.

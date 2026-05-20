@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Elrond
+Title=Elrond
+Icon=Elrond.jpg
+Difficulty=Medium
+Description=Innistrad/2011_States_South_Dakota/JoshuaJohnston_-_Red_Deck_Wins_(Standard,_#20792).dck
+Deck Type=constructed
+
+Constructed
+[Main]
+3 Chandra's Phoenix
+3 Goblin Arsonist
+2 Hero of Oxid Ridge
+3 Spikeshot Elder
+4 Stormblood Berserker
+4 Stromkirk Noble
+4 Shrine of Burning Rage
+3 Geistflame
+4 Incinerate
+4 Volt Charge
+2 Koth of the Hammer
+1 Ghost Quarter
+23 Mountain
+[Sideboard]
+4 Ancient Grudge
+2 Batterskull
+2 Blasphemous Act
+1 Slagstorm
+3 Sword of Feast and Famine
+3 Thrun, the Last Troll

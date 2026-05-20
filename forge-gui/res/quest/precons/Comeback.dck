@@ -1,0 +1,52 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Comeback
+Description=Comeback recovers from any situation. Card advantage and resilient threats grind out victories.
+Deck Type=constructed
+Set=PLS
+Image=comeback.jpg
+[main]
+2 Plains|INV|1
+1 Plains|INV|2
+1 Plains|INV|3
+3 Island|INV|1
+2 Island|INV|2
+2 Island|INV|3
+2 Swamp|INV|1
+2 Swamp|INV|2
+2 Swamp|INV|3
+1 Ancient Spring|INV
+1 Coastal Tower|INV
+2 Dromar's Cavern|PLS
+1 Salt Marsh|INV
+1 Terminal Moraine|PLS
+1 Arctic Merfolk|PLS
+3 Cavern Harpy|PLS
+1 Faerie Squadron|INV
+1 Galina's Knight|INV
+1 Guard Dogs|PLS
+1 Honorable Scout|PLS
+2 Hunting Drake|PLS
+2 Marsh Crocodile|PLS
+1 Nightscape Familiar|PLS
+2 Phyrexian Bloodstock|PLS
+2 Ravenous Rats|PO2
+1 Sawtooth Loon|PLS
+2 Silver Drake|PLS
+1 Stormscape Apprentice|INV
+1 Stormscape Battlemage|PLS
+3 Stormscape Familiar|PLS
+3 Tidal Visionary|INV
+1 Vodalian Merchant|INV
+1 Waterspout Elemental|PLS
+1 Planeswalker's Scorn|PLS
+2 Sisay's Ingenuity|PLS
+1 Confound|PLS
+1 Dromar's Charm|PLS
+1 Slay|PLS
+1 Mana Cylix|PLS
+[sideboard]

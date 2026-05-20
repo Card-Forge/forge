@@ -1,0 +1,12 @@
+Name:Sygg's Command
+ManaCost:1 W U
+Types:Kindred Sorcery Merfolk
+A:SP$ Charm | Choices$ DBCopy,DBPumpAll,DBDraw,DBTap | CharmNum$ 2
+SVar:DBCopy:DB$ CopyPermanent | ValidTgts$ Merfolk.YouCtrl | TgtPrompt$ Select target Merfolk you control | SpellDescription$ Create a token that's a copy of target Merfolk you control.
+SVar:DBPumpAll:DB$ PumpAll | ValidTgts$ Player | TgtPrompt$ Select target player to have each creature they control gain lifelink | ValidCards$ Creature | KW$ Lifelink | SpellDescription$ Creatures target player controls gain lifelink until end of turn.
+SVar:DBDraw:DB$ Draw | ValidTgts$ Player | TgtPrompt$ Select target player to draw a card | SpellDescription$ Target player draws a card.
+SVar:DBTap:DB$ Tap | ValidTgts$ Creature | SubAbility$ DBPutCounter | SpellDescription$ Tap target creature. Put a stun counter on it.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ ParentTarget | CounterType$ STUN | CounterNum$ 1
+DeckHas:Ability$Token
+DeckHints:Type$Merfolk
+Oracle:Choose two —\n• Create a token that's a copy of target Merfolk you control.\n• Creatures target player controls gain lifelink until end of turn.\n• Target player draws a card.\n• Tap target creature. Put a stun counter on it.

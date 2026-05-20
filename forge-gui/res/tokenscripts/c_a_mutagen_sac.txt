@@ -1,0 +1,5 @@
+Name:Mutagen Token
+ManaCost:no cost
+Types:Artifact Mutagen
+A:AB$ PutCounter | Cost$ 1 T Sac<1/CARDNAME/this token> | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1 | SorcerySpeed$ True | SpellDescription$ Put a +1/+1 counter on target creature. Activate only as a sorcery.
+Oracle:{1}, {T}, Sacrifice this token: Put a +1/+1 counter on target creature. Activate only as a sorcery.
